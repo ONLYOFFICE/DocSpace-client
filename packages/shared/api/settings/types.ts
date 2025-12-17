@@ -119,7 +119,7 @@ export type TSettings = {
   };
   formGallery: TFormGallery;
   wizardToken?: string;
-  defaultPage?: string;
+  defaultFolderType?: string;
   tagManagerId?: string;
   limitedAccessSpace: boolean;
   enabledJoin?: boolean;

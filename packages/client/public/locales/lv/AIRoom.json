@@ -12,7 +12,6 @@
   "EmptyResultsViewerDescription": "Jūs redzēsiet MI čat aktivitātes rezultātus no citiem lietotājiem šeit, kad tie būs pieejami.",
   "InstructionsDescriptionAgent": "Aprakstiet, kā mākslīgā intelekta aģents vajadzētu uzvesties un reaģēt. Definējiet tā lomu, toni un galvenos uzdevumus.",
   "InstructionsDescriptionAgentExample": "Piemērs: \"Jūs esat MI PR asistents, kas palīdz rakstīt un rediģēt preses paziņojumus. Saglabājiet profesionālu, pārliecinātu un plašsaziņas līdzekļiem draudzīgu toni. Skaidri izcelt galvenos ziņojumus, izvairieties no žargona un saglabājiet tekstu saīsinātu un saistošu.\"",
-  "Knowledge": "Zināšanas",
   "KnowledgeDescription": "Augšupielādējiet failus no sava datora vai {{productName}}, lai nodrošinātu labāku kontekstu sarunai. Piezīme: sarunas laikā var tikt atklāti daži vai visi augšupielādētie faili.",
   "KnowledgeSelectIn": "Izvēlēties {{productName}}",
   "KnowledgeUnavailable": "Zinu bāze nav pieejama",

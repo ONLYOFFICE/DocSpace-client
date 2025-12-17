@@ -59,14 +59,12 @@ import { GreetingUserContainer } from "@/components/GreetingContainer";
 
 type ActivateUserFormPorps = {
   passwordHash: TPasswordHash;
-  defaultPage?: string;
   passwordSettings?: TPasswordSettings;
 };
 
 const ActivateUserForm = ({
   passwordSettings,
   passwordHash,
-  defaultPage = "/",
 }: ActivateUserFormPorps) => {
   const { t } = useTranslation(["Confirm", "Common"]);
   const { confirmLinkResult, linkData } = useContext(ConfirmRouteContext);
@@ -162,7 +160,7 @@ const ActivateUserForm = ({
 
       setIsLoading(false);
 
-      window.location.replace(defaultPage);
+      window.location.replace("/");
     } catch (error) {
       const knownError = error as TError;
       let errorMessage: string;

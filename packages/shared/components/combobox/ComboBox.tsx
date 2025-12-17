@@ -33,6 +33,7 @@ import EmptyIcon from "PUBLIC_DIR/images/empty.svg?url";
 
 import { DropDown } from "../drop-down";
 import { DropDownItem } from "../drop-down-item";
+import { TooltipContainer } from "../tooltip";
 
 import { ComboButton } from "./sub-components/ComboButton";
 import { ComboBoxSize, ComboBoxDisplayType } from "./ComboBox.enums";
@@ -480,7 +481,8 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
     : {};
 
   return (
-    <div
+    <TooltipContainer
+      as="div"
       className={comboboxClasses}
       ref={ref}
       onClick={comboBoxClick}
@@ -514,7 +516,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
       />
 
       {displayType !== "toggle" ? dropDownElement : null}
-    </div>
+    </TooltipContainer>
   );
 };
 

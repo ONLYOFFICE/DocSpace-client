@@ -344,10 +344,14 @@ describe("<Badges />", () => {
 
       const lockButton = screen.getByTitle("Common:UnblockFile");
       expect(lockButton).toBeInTheDocument();
-      expect(lockButton).toHaveAttribute(
+
+      // data-tooltip-id is on the parent div, not on the button itself
+      const tooltipContainer = lockButton.parentElement;
+      expect(tooltipContainer).toHaveAttribute(
         "data-tooltip-id",
-        `lockTooltip${defaultItem.id}`,
+        "info-tooltip",
       );
+      expect(tooltipContainer).toHaveAttribute("data-tooltip-content");
     });
   });
 });

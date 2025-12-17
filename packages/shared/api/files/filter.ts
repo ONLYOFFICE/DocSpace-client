@@ -215,6 +215,9 @@ class FilesFilter {
       case CategoryType.SharedWithMe:
         filter.folder = "@share";
         break;
+      case CategoryType.Favorite:
+        filter.folder = "@favorites";
+        break;
       default:
     }
 

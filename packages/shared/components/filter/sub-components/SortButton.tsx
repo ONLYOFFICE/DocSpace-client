@@ -36,6 +36,7 @@ import { DropDownItem } from "../../drop-down-item";
 import { IconButton } from "../../icon-button";
 import { ViewSelector } from "../../view-selector";
 import { Text } from "../../text";
+import { TooltipContainer } from "../../tooltip";
 
 import { SortButtonProps, TSortDataItem } from "../Filter.types";
 import styles from "../Filter.module.scss";
@@ -190,7 +191,8 @@ const SortButton = ({
   }
 
   return (
-    <div
+    <TooltipContainer
+      as="div"
       onClick={toggleCombobox}
       id={id}
       title={title}
@@ -223,7 +225,7 @@ const SortButton = ({
       >
         <IconButton iconNode={<SortReactSvg />} size={16} />
       </ComboBox>
-    </div>
+    </TooltipContainer>
   );
 };
 

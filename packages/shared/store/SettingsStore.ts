@@ -52,13 +52,14 @@ import type {
 } from "../api/settings/types";
 import { toastr } from "../components/toast";
 import type { TData } from "../components/toast/Toast.type";
-import { COOKIE_EXPIRATION_YEAR, LANGUAGE, MEDIA_VIEW_URL } from "../constants";
+import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "../constants";
 import {
   DeepLinkType,
   type RecaptchaType,
   TenantStatus,
   ThemeKeys,
   type UrlActionType,
+  FolderType,
 } from "../enums";
 import { version } from "../package.json";
 import type { ILogo } from "../pages/Branding/WhiteLabel/WhiteLabel.types";
@@ -140,7 +141,7 @@ class SettingsStore {
 
   utcHoursOffset = 0;
 
-  defaultPage = "/";
+  defaultFolderType = FolderType.Rooms;
 
   homepage = "";
 
@@ -896,8 +897,8 @@ class SettingsStore {
     this.snackbarExist = snackbar;
   };
 
-  setDefaultPage = (defaultPage: string) => {
-    this.defaultPage = defaultPage;
+  setDefaultFolderType = (folderType: FolderType) => {
+    this.defaultFolderType = folderType;
   };
 
   setPortalDomain = (domain: string) => {
@@ -915,11 +916,6 @@ class SettingsStore {
   getSettings = async () => {
     const settings: Nullable<TSettings> = await api.settings.getSettings(true);
 
-    if (window.AscDesktopEditor !== undefined) {
-      const dp = combineUrl(window.ClientConfig?.proxy?.url, MEDIA_VIEW_URL);
-      this.setDefaultPage(dp);
-    }
-
     if (!settings) return;
 
     Object.keys(settings).forEach((forEachKey) => {
@@ -931,12 +927,7 @@ class SettingsStore {
           return;
         }
 
-        this.setValue(
-          key as keyof SettingsStore,
-          key === "defaultPage"
-            ? combineUrl(window.ClientConfig?.proxy?.url, settings[key])
-            : settings[key],
-        );
+        this.setValue(key as keyof SettingsStore, settings[key]);
 
         if (key === "culture") {
           if (settings?.wizardToken) return;
@@ -1742,6 +1733,15 @@ class SettingsStore {
 
   setDisplayBanners = (displayBanners: boolean) => {
     this.displayBanners = displayBanners;
+  };
+
+  updateDefaultFolderType = async (folderType: FolderType) => {
+    try {
+      const res = await api.settings.setDefaultFolderType(folderType);
+      this.setDefaultFolderType(res);
+    } catch (e) {
+      toastr.error(e as TData);
+    }
   };
 }
 

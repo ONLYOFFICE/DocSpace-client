@@ -3,7 +3,7 @@
   "content": "ONLYOFFICE",
   "content_en_sha1_hash": "c1cd17a947d45060963b486bba7fd3346227bbee",
   "created_at": "2025-05-19T21:30:47.141Z",
-  "updated_at": "2025-12-11T16:07:35.907Z",
+  "updated_at": "2025-12-17T07:49:07.681Z",
   "comment": {
     "text": "This translation key is used to display the organization's name, such as \"ONLYOFFICE\", when a user needs help or wants to learn more about the product. It appears in various UI elements like dialog boxes and about pages, ensuring accessibility for users who need assistance with the application.",
     "is_auto": true,
@@ -48,7 +48,7 @@
     },
     {
       "file_path": "/packages/client/src/Shell.jsx",
-      "line_number": 113,
+      "line_number": 114,
       "context": "});\n \n const { t, ready } = useTranslation([\"Common\", \"SmartBanner\"]);\n \n useEffect(() => {\n if (!logoText) setLogoText(t(\"Common:OrganizationName\"));\n }, [logoText, setLogoText]);\n \n useEffect(() => {\n try {\n loadBaseInfo();",
       "module": "/packages/client"
     },
@@ -72,13 +72,13 @@
     },
     {
       "file_path": "/packages/management/src/app/settings/encrypt-data/page.client.tsx",
-      "line_number": 90,
-      "context": "</div>\n ) : null}\n </div>\n <Text>\n {t(\"EncryptDataDescription\", {\n organizationName: t(\"Common:OrganizationName\"),\n })}\n </Text>\n <div className=\"wrapper-block\">\n <Text fontSize=\"16px\" fontWeight={700}>\n {t(\"Common:Warning\")}!",
+      "line_number": 91,
+      "context": "</div>\n ) : null}\n </div>\n <Text>\n {t(\"EncryptDataDescription\", {\n organizationName: t(\"Common:OrganizationName\"),\n })}\n </Text>\n <div className={styles.wrapperBlock}>\n <Text fontSize=\"16px\" fontWeight={700}>\n {t(\"Common:Warning\")}!",
       "module": "/packages/management"
     },
     {
       "file_path": "/packages/shared/components/chat/components/chat-input/ToolsSettings.tsx",
-      "line_number": 297,
+      "line_number": 298,
       "context": ".filter(Boolean),\n ];\n \n const name =\n server.serverType === ServerType.Portal\n ? `${t(\"Common:OrganizationName\")} ${t(\"Common:ProductName\")}`\n : server.name;\n \n return {\n key: mcpId,\n label: name,",
       "module": "/packages/shared"
     },

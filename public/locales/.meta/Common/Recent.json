@@ -3,13 +3,19 @@
   "content": "Recent",
   "content_en_sha1_hash": "76eec760c9b6e63eda7e9834fa40bc26d6f58eef",
   "created_at": "2025-08-27T10:14:14.891Z",
-  "updated_at": "2025-10-27T16:14:33.678Z",
+  "updated_at": "2025-12-17T14:56:20.775Z",
   "comment": {
     "text": "This key displays the label for the \"Recent\" folder in the file explorer. It's used to name a folder that contains recently accessed files, providing users with quick access to their recent work. Translators should ensure the translation accurately conveys the meaning of \"recently accessed.\"",
     "is_auto": true,
     "updated_at": "2025-08-27T10:15:16.121Z"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/sub-components/DefaultPageSetting.tsx",
+      "line_number": 86,
+      "context": "{\n label: t(\"Common:Favorites\"),\n key: FolderType.Favorites,\n },\n {\n label: t(\"Common:Recent\"),\n key: FolderType.Recent,\n },\n ];\n \n return options.filter((option) => !unavailableOptions.includes(option.key));",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/store/TreeFoldersStore.js",
       "line_number": 88,

@@ -3,7 +3,7 @@
   "content": "Knowledge base",
   "content_en_sha1_hash": "70cd2e748fd8d867b9e8c7a55f97c1f3930136f7",
   "created_at": "2025-12-17T07:49:06.312Z",
-  "updated_at": "2025-12-17T07:52:12.796Z",
+  "updated_at": "2025-12-17T14:56:19.646Z",
   "comment": {
     "text": "This key refers to the \"Knowledge\" section within the AI Room settings, likely related to managing or accessing a knowledge base. It appears in the Portal Settings and is used to set the current tab to the knowledge section. Translators should ensure the term conveys a collection of information or resources.",
     "is_auto": true,
@@ -25,13 +25,13 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
       "line_number": 118,
-      "context": "currentTabId === \"providers\"\n ? \"AISettings:AIProvider\"\n : currentTabId === \"search\"\n ? \"AISettings:Search\"\n : currentTabId === \"knowledge\"\n ? \"AIRoom:Knowledge\"\n : \"AISettings:MCPSettingTitle\";\n setDocumentTitle(t(titleKey));\n }, [t, currentTabId]);\n \n const serversData = [",
+      "context": "currentTabId === \"providers\"\n ? \"Common:AIProvider\"\n : currentTabId === \"search\"\n ? \"Common:WebSearchAI\"\n : currentTabId === \"knowledge\"\n ? \"AIRoom:Knowledge\"\n : \"Common:MCPSettingTitle\";\n setDocumentTitle(t(titleKey));\n }, [t, currentTabId]);\n \n const serversData = [",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/knowledge/index.tsx",
       "line_number": 251,
-      "context": "className={generalStyles.search}\n data-tooltip-id={tooltipId}\n data-tooltip-content={\n !hasAIProviders\n ? t(\"AISettings:ToUseAddProvider\", {\n value: t(\"AIRoom:Knowledge\"),\n })\n : undefined\n }\n >\n <Text className={generalStyles.description}>",
+      "context": "className={generalStyles.search}\n data-tooltip-id={tooltipId}\n data-tooltip-content={\n !hasAIProviders\n ? t(\"AISettings:ToUseAddProvider\", {\n value: t(\"AIRoom:Knowledge\"),\n aiProvider: t(\"Common:AIProvider\"),\n })\n : undefined\n }\n >",
       "module": "/packages/client"
     },
     {

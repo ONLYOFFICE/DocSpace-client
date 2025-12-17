@@ -1,9 +1,9 @@
 {
-  "key_path": "SearchEngine",
-  "content": "{{webSearch}} Engine",
-  "content_en_sha1_hash": "1b47c8d9c93df7bf7e9e358c9c708e5853dcea3f",
-  "created_at": "2025-12-17T14:56:14.766Z",
-  "updated_at": "2025-12-17T14:56:20.360Z",
+  "key_path": "Model",
+  "content": "{{aiProvider}} and model",
+  "content_en_sha1_hash": "6a44780066cc332afd907d89896ef553e0d621c2",
+  "created_at": "2025-12-17T14:56:15.156Z",
+  "updated_at": "2025-12-17T14:56:19.648Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/index.tsx",
-      "line_number": 234,
-      "context": ") : null}\n <div className={styles.searchForm}>\n <FieldContainer\n labelVisible\n isVertical\n labelText={t(\"AISettings:SearchEngine\", {\n webSearch: t(\"Common:WebSearchAI\"),\n })}\n removeMargin\n >\n <ComboBox",
+      "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/Model.tsx",
+      "line_number": 31,
+      "context": "import React from \"react\";\n import { Trans, useTranslation } from \"react-i18next\";\n \n import { Text } from \"@docspace/shared/components/text\";\n import type { TAiProvider, TModel } from \"@docspace/shared/api/ai/types\";\n import { ComboBox, type TOption } from \"@docspace/shared/components/combobox\";\n import { getModels, getProviders } from \"@docspace/shared/api/ai\";\n import { toastr } from \"@docspace/shared/components/toast\";\n import { RectangleSkeleton } from \"@docspace/shared/skeletons\";\n import type { TAgentParams } from \"@docspace/shared/utils/aiAgents\";",
       "module": "/packages/client"
     }
   ],

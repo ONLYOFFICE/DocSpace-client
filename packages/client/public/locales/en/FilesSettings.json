@@ -3,5 +3,6 @@
   "DisplayFileExtension": "Display file extension next to file name",
   "OpenSameTab": "Open {{organizationName}} editor in same tab",
   "OriginalCopy": "Save the file copy in the original format as well",
+  "StartPageSettingTitle": "The start section at the entrance",
   "TrashMoveConfirmation": "Display notification when moving items to {{sectionName}}"
 }

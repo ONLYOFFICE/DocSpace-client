@@ -1,0 +1,28 @@
+{
+  "key_path": "RoomInfo",
+  "content": "Room info",
+  "content_en_sha1_hash": "2a6cc5757e034713f73b7ed2b5d0ae68ba0b8ee4",
+  "created_at": "2025-12-15T14:02:08.646Z",
+  "updated_at": "2025-12-17T07:50:09.285Z",
+  "comment": {
+    "text": "This key displays the label for a button or link that opens a panel showing room information. It appears within a list of options, likely related to a room's details or status, and may be displayed as \"Agent Info\" if the room is managed by an AI agent. Translators should ensure the text accurately conveys the function of accessing room-specific information.",
+    "is_auto": true,
+    "updated_at": "2025-12-17T07:50:09.285Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 2169,
+      "context": "Boolean(item.external && item.isLinkExpired),\n },\n {\n id: \"option_room-info\",\n key: \"room-info\",\n label: item.isAIAgent ? t(\"Common:AgentInfo\") : t(\"Common:RoomInfo\"),\n icon: InfoOutlineReactSvgUrl,\n onClick: () => this.onShowInfoPanel(item),\n disabled: isPublicRoom || Boolean(item.external && item.isLinkExpired),\n },\n {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -84,7 +84,6 @@ export type CreateUserFormProps = {
   passwordHash: TPasswordHash;
   licenseUrl: string;
   legalTerms: string;
-  defaultPage?: string;
   passwordSettings?: TPasswordSettings;
   capabilities?: TCapabilities;
   thirdPartyProviders?: TThirdPartyProvider[];
@@ -98,7 +97,6 @@ const CreateUserForm = (props: CreateUserFormProps) => {
   const {
     userNameRegex,
     passwordHash,
-    defaultPage = "/",
     passwordSettings,
     capabilities,
     thirdPartyProviders,
@@ -200,7 +198,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 
         const finalUrl = roomData.roomId
           ? `/${path}?folder=${roomData.roomId}`
-          : defaultPage;
+          : "/";
 
         if (response.confirmUrl) {
           sessionStorage.setItem("referenceUrl", finalUrl);
@@ -227,7 +225,6 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     },
     [
       currentCultureName,
-      defaultPage,
       confirmLinkResult.email,
       linkData.emplType,
       linkData.key,
@@ -270,7 +267,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 
       const finalUrl = roomData.roomId
         ? `/${path}?folder=${roomData.roomId}`
-        : defaultPage;
+        : "/";
 
       if (roomId) {
         sessionStorage.setItem("referenceUrl", finalUrl);
@@ -338,7 +335,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 
     const finalUrl = roomData.roomId
       ? `/${path}?folder=${roomData.roomId}`
-      : defaultPage;
+      : "/";
 
     const isConfirm = typeof res === "string" && res.includes("confirm");
     if (isConfirm) {

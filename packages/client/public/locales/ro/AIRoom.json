@@ -12,7 +12,6 @@
   "EmptyResultsViewerDescription": "Veți vedea rezultatele activității de chat AI de la alți utilizatori aici odată ce devin disponibile.",
   "InstructionsDescriptionAgent": "Descrieți modul în care agentul de IA ar trebui să se comporte și să răspundă. Definiți rolul, tonul și sarcinile sale principale.",
   "InstructionsDescriptionAgentExample": "Exemplu: “Sunteți un asistent IA pentru relații publice care ajută la redactarea și editarea comunicatelor de presă. Mențineți un ton profesionist, convingător și prietenos care este acceptabil pentru media. Evidențiați clar mesajele cheie, evitați jargonul și păstrați-vă limbajul concis și captivant.",
-  "Knowledge": "Cunoștințe",
   "KnowledgeDescription": "Încărcați fișierele de pe calculatorul sau {{productName}} pentru a oferi contextul suplimentar chat-ului. Mențiune: o parte sau întregul conținut încărcat poate fi partajat în timpul conversației.",
   "KnowledgeSelectIn": "Selectare din {{productName}}",
   "KnowledgeUnavailable": "Baza de cunoștințe nu este disponibilă",

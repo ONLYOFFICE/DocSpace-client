@@ -12,7 +12,6 @@
   "EmptyResultsViewerDescription": "Qui vedrai i risultati dell'attività di chat AI di altri utenti non appena saranno disponibili.",
   "InstructionsDescriptionAgent": "Descrivi come l’agente AI dovrebbe comportarsi e rispondere. Definisci ruolo, tono e compiti principali.",
   "InstructionsDescriptionAgentExample": "Esempio: “Sei un assistente PR AI che aiuta a scrivere e modificare comunicati stampa. Mantieni un tono professionale, sicuro e adatto ai media. Evidenzia chiaramente i messaggi chiave, evita il gergo e rendi il testo conciso e coinvolgente.”",
-  "Knowledge": "Conoscenza",
   "KnowledgeDescription": "Carica file dal tuo computer o da {{productName}} per fornire un contesto migliore alla chat. Nota: parte o tutto il contenuto caricato potrebbe essere visibile durante la conversazione.",
   "KnowledgeSelectIn": "Seleziona in {{productName}}",
   "KnowledgeUnavailable": "Knowledge Base non disponibile",

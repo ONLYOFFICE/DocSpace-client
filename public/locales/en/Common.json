@@ -137,6 +137,7 @@
   "CancelCurrentProcess": "Do you want to cancel the current process?",
   "CancelDownload": "Cancel download",
   "CancelUpload": "The upload has been interrupted. Some files have not been uploaded.",
+  "OperationCanceled": "The operation has been canceled",
   "CancelUploadingProcess": "Do you want to cancel uploading?",
   "CannotGuaranteeSecurity": "We cannot guarantee the security or privacy practices of third-party integrations.",
   "ChangeButton": "Change",

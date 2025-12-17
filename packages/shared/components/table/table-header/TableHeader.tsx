@@ -32,6 +32,7 @@ import { TableHeaderProps, TTableColumn } from "../Table.types";
 import styles from "./TableHeader.module.scss";
 import { TableHeaderCell } from "../sub-components/table-header-cell";
 import { TableSettings } from "../sub-components/table-settings";
+import { TooltipContainer } from "../../tooltip";
 import type { Nullable } from "../../../types";
 import {
   DEFAULT_MIN_COLUMN_SIZE,
@@ -1269,7 +1270,8 @@ export const TableHeader = (props: TableHeaderProps) => {
           })}
 
           {showSettings ? (
-            <div
+            <TooltipContainer
+              as="div"
               data-testid="settings-block"
               className={styles.tableHeaderSettings}
               title={settingsTitle}
@@ -1281,7 +1283,7 @@ export const TableHeader = (props: TableHeaderProps) => {
                   false
                 }
               />
-            </div>
+            </TooltipContainer>
           ) : null}
         </div>
       </div>

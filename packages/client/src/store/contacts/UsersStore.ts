@@ -35,6 +35,7 @@ import {
   EmployeeStatus,
   EmployeeType,
   Events,
+  FolderType,
   RoomSearchArea,
 } from "@docspace/shared/enums";
 import { getUserType } from "@docspace/shared/utils/common";
@@ -70,17 +71,17 @@ import { getPersonalFolderTree } from "@docspace/shared/api/files";
 import DefaultUserPhotoSize32PngUrl from "PUBLIC_DIR/images/default_user_photo_size_32-32.png";
 
 import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
-import {
-  getContactsView,
-  getUserChecked,
-  setContactsUsersFilterUrl,
-  TChangeUserTypeDialogData,
-} from "SRC_DIR/helpers/contacts";
 import type {
   TChangeUserStatusDialogData,
   TContactsSelected,
   TContactsTab,
   TPeopleListItem,
+} from "SRC_DIR/helpers/contacts";
+import {
+  getContactsView,
+  getUserChecked,
+  setContactsUsersFilterUrl,
+  TChangeUserTypeDialogData,
 } from "SRC_DIR/helpers/contacts";
 
 import { getInfoPanelOpen } from "SRC_DIR/helpers/info-panel";
@@ -228,6 +229,7 @@ class UsersStore {
       const { setReducedRightsData } = this.dialogsStore;
       const { setSecurity, getSelectedFolder } = this.selectedFolderStore;
       const { fetchFiles, filter } = this.filesStore;
+      const { defaultFolderType, setDefaultFolderType } = this.settingsStore;
 
       const { data, id, admin, hasPersonalFolder } = value;
       const { isAdmin, isRoomAdmin, isVisitor, isCollaborator } = data;
@@ -241,6 +243,10 @@ class UsersStore {
 
       if (isVisitor) {
         setReducedRightsData(true, admin);
+
+        if (defaultFolderType === FolderType.USER) {
+          setDefaultFolderType(FolderType.Rooms);
+        }
       }
 
       if (pathname.includes("rooms/personal")) {

@@ -119,7 +119,7 @@ export type TSettings = {
   };
   formGallery: TFormGallery;
   wizardToken?: string;
-  defaultPage?: string;
+  defaultFolderType?: string;
   tagManagerId?: string;
   limitedAccessSpace: boolean;
   enabledJoin?: boolean;
@@ -230,6 +230,10 @@ export type THelpCenterEntries = {
   dataImport: string;
   apikeys: string;
   aisettings: string;
+  aiprovidersettings: string;
+  mcpserverssettings: string;
+  websearchsettings: string;
+  knowledgesettings: string;
   documentService: string;
 };
 

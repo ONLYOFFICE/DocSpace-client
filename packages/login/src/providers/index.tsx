@@ -31,6 +31,7 @@ import { I18nextProvider } from "react-i18next";
 import { usePathname, useSearchParams } from "next/navigation";
 
 import { ThemeProvider } from "@docspace/shared/components/theme-provider";
+import { RootTooltip } from "@docspace/shared/components/tooltip/rootTooltip";
 import { TFirebaseSettings } from "@docspace/shared/api/settings/types";
 import FirebaseHelper from "@docspace/shared/utils/firebase";
 import { TUser } from "@docspace/shared/api/people/types";
@@ -117,6 +118,7 @@ export const Providers = ({
           version={pkgFile.version}
           firebaseHelper={firebaseHelper}
         >
+          <RootTooltip />
           {shouldRedirect && redirectURL && pathName !== redirectURL
             ? null
             : children}

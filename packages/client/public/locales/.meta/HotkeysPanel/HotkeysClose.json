@@ -3,7 +3,7 @@
   "content": "Close/Undo action",
   "content_en_sha1_hash": "f35d7016328d50eb3048f8ac879c03bc5d042b61",
   "created_at": "2025-05-19T21:30:55.031Z",
-  "updated_at": "2025-05-24T10:46:11.947Z",
+  "updated_at": "2025-12-15T14:04:23.619Z",
   "comment": {
     "text": "This translation key is used to display the label \"Close/Undo action\" and its purpose is to indicate that pressing a hotkey or button will undo an action, likely in a file editing application. The text appears in a hotkeys panel on the preview actions block.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/HotkeysPanel/PreviewActionsBlock.js",
-      "line_number": 36,
-      "context": "const PreviewActionsBlock = ({ t, textStyles, keyTextStyles }) => {\n return (\n <>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysClose\")}</Text>\n <Text {...keyTextStyles}>Esc</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>",
+      "line_number": 42,
+      "context": "<Text {...keyTextStyles}>Shift + c</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysClose\")}</Text>\n <Text {...keyTextStyles}>Esc</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>",
       "module": "/packages/client"
     }
   ],

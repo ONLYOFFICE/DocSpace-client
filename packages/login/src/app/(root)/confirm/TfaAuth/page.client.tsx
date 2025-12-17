@@ -48,11 +48,7 @@ import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 import { useSearchParams } from "next/navigation";
 import { PUBLIC_STORAGE_KEY } from "@docspace/shared/constants";
 
-type TfaAuthFormProps = {
-  defaultPage?: string;
-};
-
-const TfaAuthForm = ({ defaultPage = "/" }: TfaAuthFormProps) => {
+const TfaAuthForm = () => {
   const { linkData } = useContext(ConfirmRouteContext);
   const { t } = useTranslation(["Confirm", "Common"]);
 
@@ -97,7 +93,7 @@ const TfaAuthForm = ({ defaultPage = "/" }: TfaAuthFormProps) => {
         window.close();
       }
 
-      window.location.replace(referenceUrl || defaultPage);
+      window.location.replace(referenceUrl || "/");
     } catch (e) {
       const knownError = e as TError;
       let errorMessage: string;

@@ -372,6 +372,11 @@
   width: 32px;
   height: 36px;
 
+  svg {
+    width: 16px !important;
+    height: 16px !important;
+  }
+
   &:hover:not(.disabled) {
     background-color: var(--tabs-hover-background-color-secondary);
     svg path {

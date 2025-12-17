@@ -30,8 +30,8 @@ import { useTranslation } from "react-i18next";
 import { useTheme } from "@docspace/shared/hooks/useTheme";
 
 import {
-  getMCPServerById,
-  getServersListForRoom,
+	getMCPServerById,
+	getServersListForRoom,
 } from "@docspace/shared/api/ai";
 import { getServerIcon } from "@docspace/shared/utils";
 import type { TAgentParams } from "@docspace/shared/utils/aiAgents";
@@ -39,139 +39,139 @@ import type { TSelectorItem } from "@docspace/shared/components/selector";
 import { ServerType } from "@docspace/shared/api/ai/enums";
 
 export const useMCP = ({
-  agentParams,
-  setAgentParams,
-  portalMcpServerId,
+	agentParams,
+	setAgentParams,
+	portalMcpServerId,
 }: {
-  agentParams: TAgentParams;
-  setAgentParams: (value: Partial<TAgentParams>) => void;
-  portalMcpServerId?: string;
+	agentParams: TAgentParams;
+	setAgentParams: (value: Partial<TAgentParams>) => void;
+	portalMcpServerId?: string;
 }) => {
-  const { isBase } = useTheme();
-  const { t } = useTranslation(["Common"]);
+	const { isBase } = useTheme();
+	const { t } = useTranslation(["Common"]);
 
-  const [isMCPSelectorVisible, setIsMCPSelectorVisible] = React.useState(false);
+	const [isMCPSelectorVisible, setIsMCPSelectorVisible] = React.useState(false);
 
-  const [selectedServers, setSelectedServers] = React.useState<TSelectorItem[]>(
-    [],
-  );
-  const [initialServers, setInitialServers] = React.useState<TSelectorItem[]>(
-    [],
-  );
+	const [selectedServers, setSelectedServers] = React.useState<TSelectorItem[]>(
+		[],
+	);
+	const [initialServers, setInitialServers] = React.useState<TSelectorItem[]>(
+		[],
+	);
 
-  const onClickAction = () => {
-    setIsMCPSelectorVisible(true);
-  };
+	const onClickAction = () => {
+		setIsMCPSelectorVisible(true);
+	};
 
-  const onClose = () => setIsMCPSelectorVisible(false);
+	const onClose = () => setIsMCPSelectorVisible(false);
 
-  const onSubmit = (servers: TSelectorItem[]) => {
-    if (servers.find((s) => s.id === portalMcpServerId)) {
-      setAgentParams({ attachDefaultTools: true });
-    }
+	const onSubmit = (servers: TSelectorItem[]) => {
+		if (servers.find((s) => s.id === portalMcpServerId)) {
+			setAgentParams({ attachDefaultTools: true });
+		}
 
-    setSelectedServers(servers);
-  };
+		setSelectedServers(servers);
+	};
 
-  const agentId = agentParams.agentId;
+	const agentId = agentParams.agentId;
 
-  React.useEffect(() => {
-    if (agentId) {
-      getServersListForRoom(agentId).then((res) => {
-        if (res) {
-          const items = res.map((item) => {
-            const name =
-              item.serverType === ServerType.Portal
-                ? `${t("Common:OrganizationName")} ${t("Common:ProductName")}`
-                : item.name;
+	React.useEffect(() => {
+		if (agentId) {
+			getServersListForRoom(agentId).then((res) => {
+				if (res) {
+					const items = res.map((item) => {
+						const name =
+							item.serverType === ServerType.Portal
+								? `${t("Common:OrganizationName")} ${t("Common:ProductName")}`
+								: item.name;
 
-            return {
-              key: item.id,
-              id: item.id,
-              label: name,
-              icon:
-                (item.icon?.icon24 || getServerIcon(item.serverType, isBase)) ??
-                "",
-              isInputItem: false,
-              onAcceptInput: () => {},
-              onCancelInput: () => {},
-              defaultInputValue: "",
-              placeholder: "",
-            };
-          });
+						return {
+							key: item.id,
+							id: item.id,
+							label: name,
+							icon:
+								(item.icon?.icon24 || getServerIcon(item.serverType, isBase)) ??
+								"",
+							isInputItem: false,
+							onAcceptInput: () => {},
+							onCancelInput: () => {},
+							defaultInputValue: "",
+							placeholder: "",
+						};
+					});
 
-          setSelectedServers(items);
-          setInitialServers(items);
-        }
-      });
-    }
-  }, [agentId, isBase, t]);
+					setSelectedServers(items);
+					setInitialServers(items);
+				}
+			});
+		}
+	}, [agentId, isBase, t]);
 
-  React.useEffect(() => {
-    setAgentParams({
-      mcpServers: selectedServers
-        .map((server) => server.id?.toString() || "")
-        .filter((id) =>
-          portalMcpServerId ? id !== portalMcpServerId && id !== "" : id !== "",
-        ),
-      mcpServersInitial: initialServers
-        .map((server) => server.id?.toString() || "")
-        .filter((id) =>
-          portalMcpServerId ? id !== portalMcpServerId && id !== "" : id !== "",
-        ),
-    });
-  }, [selectedServers, initialServers, portalMcpServerId, setAgentParams]);
+	React.useEffect(() => {
+		setAgentParams({
+			mcpServers: selectedServers
+				.map((server) => server.id?.toString() || "")
+				.filter((id) =>
+					portalMcpServerId ? id !== portalMcpServerId && id !== "" : id !== "",
+				),
+			mcpServersInitial: initialServers
+				.map((server) => server.id?.toString() || "")
+				.filter((id) =>
+					portalMcpServerId ? id !== portalMcpServerId && id !== "" : id !== "",
+				),
+		});
+	}, [selectedServers, initialServers, portalMcpServerId, setAgentParams]);
 
-  React.useEffect(() => {
-    const initBaseMcpServers = async () => {
-      if (!portalMcpServerId) return;
+	React.useEffect(() => {
+		const initBaseMcpServers = async () => {
+			if (!portalMcpServerId) return;
 
-      const portalMcpServer = await getMCPServerById(portalMcpServerId);
+			const portalMcpServer = await getMCPServerById(portalMcpServerId);
 
-      if (!portalMcpServer.enabled) return;
+			if (!portalMcpServer?.enabled) return;
 
-      const name =
-        portalMcpServer.serverType === ServerType.Portal
-          ? `${t("Common:OrganizationName")} ${t("Common:ProductName")}`
-          : portalMcpServer.name;
+			const name =
+				portalMcpServer.serverType === ServerType.Portal
+					? `${t("Common:OrganizationName")} ${t("Common:ProductName")}`
+					: portalMcpServer.name;
 
-      setSelectedServers([
-        {
-          key: portalMcpServer.id,
-          id: portalMcpServer.id,
-          label: name,
-          icon:
-            (portalMcpServer.icon?.icon24 ||
-              getServerIcon(portalMcpServer.serverType, isBase)) ??
-            "",
-          isInputItem: false,
-          onAcceptInput: () => {},
-          onCancelInput: () => {},
-          defaultInputValue: "",
-          placeholder: "",
-        },
-      ]);
-    };
+			setSelectedServers([
+				{
+					key: portalMcpServer.id,
+					id: portalMcpServer.id,
+					label: name,
+					icon:
+						(portalMcpServer.icon?.icon24 ||
+							getServerIcon(portalMcpServer.serverType, isBase)) ??
+						"",
+					isInputItem: false,
+					onAcceptInput: () => {},
+					onCancelInput: () => {},
+					defaultInputValue: "",
+					placeholder: "",
+				},
+			]);
+		};
 
-    if (portalMcpServerId) {
-      initBaseMcpServers();
-    }
-  }, [portalMcpServerId, isBase, t]);
+		if (portalMcpServerId) {
+			initBaseMcpServers();
+		}
+	}, [portalMcpServerId, isBase, t]);
 
-  const initSelectedServers = React.useMemo(() => {
-    return selectedServers.map((i) => i.id?.toString() || "");
-  }, [selectedServers]);
+	const initSelectedServers = React.useMemo(() => {
+		return selectedServers.map((i) => i.id?.toString() || "");
+	}, [selectedServers]);
 
-  return {
-    isMCPSelectorVisible,
-    setIsMCPSelectorVisible,
-    selectedServers,
-    setSelectedServers,
-    initialServers,
-    setInitialServers,
-    onClickAction,
-    onClose,
-    onSubmit,
-    initSelectedServers,
-  };
+	return {
+		isMCPSelectorVisible,
+		setIsMCPSelectorVisible,
+		selectedServers,
+		setSelectedServers,
+		initialServers,
+		setInitialServers,
+		onClickAction,
+		onClose,
+		onSubmit,
+		initSelectedServers,
+	};
 };

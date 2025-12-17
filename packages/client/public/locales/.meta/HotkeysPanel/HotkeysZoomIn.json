@@ -3,7 +3,7 @@
   "content": "Zoom in",
   "content_en_sha1_hash": "4fc05f2763ba31e2d3be5f08e7d0bab5d5dcbf78",
   "created_at": "2025-05-19T21:30:55.104Z",
-  "updated_at": "2025-05-24T10:29:31.062Z",
+  "updated_at": "2025-12-15T14:04:23.619Z",
   "comment": {
     "text": "The \"HotkeysZoomIn\" translation key is used to display the text \"Zoom in\" in a HotkeysPanel component. It is likely found on a UI element such as an action button or menu option, where users can zoom in on content with a specific hotkey combination.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/HotkeysPanel/PreviewActionsBlock.js",
-      "line_number": 48,
+      "line_number": 54,
       "context": "<Text {...keyTextStyles}>Space</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysZoomIn\")}</Text>\n <Text {...keyTextStyles}>+ {t(\"Common:Or\")} =</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>",
       "module": "/packages/client"
     }

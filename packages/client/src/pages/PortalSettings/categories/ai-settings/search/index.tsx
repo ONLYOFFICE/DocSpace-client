@@ -55,7 +55,7 @@ type TSearchProps = {
   restoreWebSearch?: AISettingsStore["restoreWebSearch"];
   updateWebSearch?: AISettingsStore["updateWebSearch"];
   hasAIProviders?: AISettingsStore["hasAIProviders"];
-  aiSettingsUrl?: string;
+  webSearchSettingsUrl?: SettingsStore["webSearchSettingsUrl"];
   getAIConfig?: SettingsStore["getAIConfig"];
 };
 
@@ -66,7 +66,7 @@ const SearchComponent = ({
   webSearchConfig,
   updateWebSearch,
   hasAIProviders,
-  aiSettingsUrl,
+  webSearchSettingsUrl,
   getAIConfig,
 }: TSearchProps) => {
   const { t } = useTranslation(["Common", "AISettings", "Settings"]);
@@ -208,14 +208,14 @@ const SearchComponent = ({
             productName: t("Common:ProductName"),
           })}
         </Text>
-        {aiSettingsUrl ? (
+        {webSearchSettingsUrl ? (
           <Link
             className={generalStyles.learnMoreLink}
             target={LinkTarget.blank}
             type={LinkType.page}
             fontWeight={600}
             isHovered
-            href={aiSettingsUrl}
+            href={webSearchSettingsUrl}
             color="accent"
           >
             {t("Common:LearnMore")}
@@ -317,7 +317,7 @@ export const Search = inject(({ aiSettingsStore, settingsStore }: TStore) => {
     webSearchConfig: aiSettingsStore.webSearchConfig,
     updateWebSearch: aiSettingsStore.updateWebSearch,
     hasAIProviders: aiSettingsStore.hasAIProviders,
-    aiSettingsUrl: settingsStore.aiSettingsUrl,
+    webSearchSettingsUrl: settingsStore.webSearchSettingsUrl,
     getAIConfig: settingsStore.getAIConfig,
   };
 })(observer(SearchComponent));

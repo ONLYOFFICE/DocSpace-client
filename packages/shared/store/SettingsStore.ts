@@ -569,6 +569,30 @@ class SettingsStore {
       : null;
   }
 
+  get aiProviderSettingsUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.aiprovidersettings
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.aiprovidersettings}`
+      : null;
+  }
+
+  get mcpServersSettingsUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.mcpserverssettings
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.mcpserverssettings}`
+      : null;
+  }
+
+  get webSearchSettingsUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.websearchsettings
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.websearchsettings}`
+      : null;
+  }
+
+  get knowledgeSettingsUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.knowledgesettings
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.knowledgesettings}`
+      : null;
+  }
+
   get configureDeepLinkUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.configureDeepLink
       ? `${this.helpCenterDomain}${this.helpCenterEntries.configureDeepLink}`

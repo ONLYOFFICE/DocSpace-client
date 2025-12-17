@@ -40,7 +40,14 @@ import {
   SELF_PATH_UPDATE_USER,
   SELF_PATH_USER_BY_EMAIL,
   PATH_ADD_GUEST,
+  PATH_PEOPLE_LIST,
   selfHandler,
+  peopleListHandler,
+  peopleListAccessDeniedHandler,
+  adminOnlySuccess,
+  roomAdminSuccess,
+  visitorSuccess,
+  regularUserSuccess,
 } from "./people";
 import {
   colorThemeHandler,
@@ -352,6 +359,22 @@ export const endpoints = {
     url: `${BASE_URL}${PATH_DELETE_USER}`,
     dataHandler: selfHandler.bind(null, null, null, true, true),
   },
+  selfAdminOnly: {
+    url: `${BASE_URL}${PATH_DELETE_USER}`,
+    dataHandler: () => new Response(JSON.stringify(adminOnlySuccess)),
+  },
+  selfRoomAdminOnly: {
+    url: `${BASE_URL}${PATH_DELETE_USER}`,
+    dataHandler: () => new Response(JSON.stringify(roomAdminSuccess)),
+  },
+  selfVisitorOnly: {
+    url: `${BASE_URL}${PATH_DELETE_USER}`,
+    dataHandler: () => new Response(JSON.stringify(visitorSuccess)),
+  },
+  selfRegularUserOnly: {
+    url: `${BASE_URL}${PATH_DELETE_USER}`,
+    dataHandler: () => new Response(JSON.stringify(regularUserSuccess)),
+  },
   build: {
     url: `${BASE_URL}${PATH_BUILD}`,
     dataHandler: buildHandler,
@@ -523,6 +546,14 @@ export const endpoints = {
   shareToUser: {
     url: PATH_SHARE_TO_USERS_FILE,
     dataHandler: shareToUserHandle,
+  },
+  peopleList: {
+    url: `${BASE_URL}${PATH_PEOPLE_LIST}*`,
+    dataHandler: peopleListHandler,
+  },
+  peopleListAccessDenied: {
+    url: `${BASE_URL}${PATH_PEOPLE_LIST}*`,
+    dataHandler: peopleListAccessDeniedHandler,
   },
   emptyTags: {
     url: `${BASE_URL}${PATH_TAGS}`,

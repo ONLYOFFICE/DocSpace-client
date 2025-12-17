@@ -13,7 +13,7 @@
   "EmptyResultsViewerDescription": "You’ll see the results of AI chat activity from other users here once they become available.",
   "InstructionsDescriptionAgent": "Describe how the AI agent should behave and respond. Define its role, tone, and main tasks.",
   "InstructionsDescriptionAgentExample": "Example: “You are an AI PR assistant that helps write and edit press releases. Maintain a professional, confident, and media-friendly tone. Highlight key messages clearly, avoid jargon, and keep the text concise and engaging.”",
-  "Knowledge": "Knowledge",
+  "Knowledge": "Knowledge base",
   "KnowledgeDescription": "Upload files from your computer or {{productName}} to provide better context for the chat. Note: some or all of the uploaded content may be exposed during the conversation.",
   "KnowledgeSelectIn": "Select in {{productName}}",
   "KnowledgeUnavailable": "Knowledge Base unavailable",

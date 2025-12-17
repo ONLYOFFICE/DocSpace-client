@@ -3,7 +3,7 @@
   "content": "Domain settings",
   "content_en_sha1_hash": "af4c66f0fd56174dbc835c4ad3c24fa3e2f84c7e",
   "created_at": "2025-05-19T21:30:57.440Z",
-  "updated_at": "2025-08-12T19:46:26.412Z",
+  "updated_at": "2025-12-15T14:04:24.285Z",
   "comment": {
     "text": "The \"DomainSettings\" translation key is used to display a title and label on a domain settings interface, typically in a modal dialog or sub-component. It appears as \"Domain settings\" in English and is translated accordingly for user interfaces.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/management/src/app/spaces/multiple/domain-settings.tsx",
-      "line_number": 42,
-      "context": "import { Button, ButtonSize } from \"@docspace/shared/components/button\";\n \n import useDeviceType from \"@/hooks/useDeviceType\";\n import { useStores } from \"@/hooks/useStores\";\n \n import { StyledDomainSettings } from \"./multiple.styled\";\n \n interface IProps {\n baseDomain: string;\n }",
+      "line_number": 48,
+      "context": "interface IProps {\n baseDomain: string;\n }\n \n export const DomainSettings = observer(({ baseDomain }: IProps) => {\n const { t } = useTranslation([\"Management\", \"Common\"]);\n const { currentDeviceType } = useDeviceType();\n const { spacesStore } = useStores();\n const { setChangeDomainDialogVisible } = spacesStore;",
       "module": "/packages/management"
     },
     {
       "file_path": "/packages/management/src/dialogs/change-domain/index.tsx",
-      "line_number": 112,
-      "context": "visible={visible}\n isLarge\n onClose={onClose}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>{t(\"DomainSettings\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\">{t(\"ChangeDomainDescription\")}</Text>\n <div className=\"create-portal-input-block\">\n <Text\n fontSize=\"13px\"",
+      "line_number": 99,
+      "context": "visible={visible}\n isLarge\n onClose={onClose}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>{t(\"DomainSettings\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\">{t(\"ChangeDomainDescription\")}</Text>\n <div className={styles.createPortalInputBlock}>\n <Text\n fontSize=\"13px\"",
       "module": "/packages/management"
     }
   ],

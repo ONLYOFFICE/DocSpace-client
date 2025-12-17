@@ -27,8 +27,9 @@
 import styled from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
+import { TooltipContainer } from "@docspace/shared/components/tooltip";
 
-const StyledHistoryText = styled.span`
+const StyledHistoryText = styled(TooltipContainer)`
   overflow: hidden;
 
   .history-text {
@@ -37,7 +38,7 @@ const StyledHistoryText = styled.span`
 `;
 
 const HistoryText = ({ title }: { title: string }) => (
-  <StyledHistoryText title={title} className="history-text_wrapper">
+  <StyledHistoryText as="span" title={title} className="history-text_wrapper">
     <Text fontWeight={600} as="span" fontSize="14px" className="history-text">
       "
     </Text>

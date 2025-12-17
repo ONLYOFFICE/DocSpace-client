@@ -27,6 +27,11 @@
 import React from "react";
 import classNames from "classnames";
 import Linkify from "linkify-react";
+import { ReactSVG } from "react-svg";
+import { useTranslation } from "react-i18next";
+import copy from "copy-to-clipboard";
+
+import CopyIconUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 
 import { ContentType, RoleType } from "../../../../../../api/ai/enums";
 
@@ -73,6 +78,8 @@ const Message = ({
   getResultStorageId,
   folderFormValidation,
 }: MessageProps) => {
+  const { t } = useTranslation(["Common"]);
+
   const { currentChat } = useChatStore();
 
   const isUser = message.role === RoleType.UserMessage;
@@ -82,50 +89,71 @@ const Message = ({
     const files = message.contents.filter((c) => c.type === ContentType.Files);
 
     return (
-      <div
-        key={`${currentChat?.id}-${message.createdOn}-${idx * 2}`}
-        className={classNames(styles.userMessage)}
-      >
-        <Avatar
-          size={AvatarSize.min}
-          source={currentChat?.createdBy.avatarOriginal ?? userAvatar}
-          role={AvatarRole.user}
-          noClick
-          isNotIcon
-        />
+      <div className={styles.userMessageContainer}>
+        <div
+          key={`${currentChat?.id}-${message.createdOn}-${idx * 2}`}
+          className={classNames(styles.userMessage)}
+        >
+          <Avatar
+            size={AvatarSize.min}
+            source={currentChat?.createdBy.avatarOriginal ?? userAvatar}
+            role={AvatarRole.user}
+            noClick
+            isNotIcon
+          />
 
-        <div className={classNames(styles.chatMessageContent)}>
-          {files ? <Files files={files} getIcon={getIcon} /> : null}
+          <div className={classNames(styles.chatMessageContent)}>
+            {files ? <Files files={files} getIcon={getIcon} /> : null}
 
-          {message.contents.map((c) => {
-            if (c.type === ContentType.Text)
-              return (
-                <div
-                  key={`${currentChat?.id}-${c.text}-${idx * 2}`}
-                  className={classNames(styles.chatMessageUser)}
-                >
-                  <Text
-                    fontSize="15px"
-                    lineHeight="22px"
-                    fontWeight={400}
-                    className={classNames(styles.paragraph)}
+            {message.contents.map((c) => {
+              if (c.type === ContentType.Text)
+                return (
+                  <div
+                    key={`${currentChat?.id}-${c.text}-${idx * 2}`}
+                    className={classNames(styles.chatMessageUser)}
                   >
-                    <Linkify
-                      options={{
-                        validate: {
-                          url: (value) => /^https?:\/\//.test(value),
-                        },
-                        render: renderLink,
-                      }}
+                    <Text
+                      fontSize="15px"
+                      lineHeight="22px"
+                      fontWeight={400}
+                      className={classNames(styles.paragraph)}
                     >
-                      {c.text}
-                    </Linkify>
-                  </Text>
-                </div>
-              );
+                      <Linkify
+                        options={{
+                          validate: {
+                            url: (value) => /^https?:\/\//.test(value),
+                          },
+                          render: renderLink,
+                        }}
+                      >
+                        {c.text}
+                      </Linkify>
+                    </Text>
+                  </div>
+                );
 
-            return null;
-          })}
+              return null;
+            })}
+          </div>
+        </div>
+        <div className={styles.userMessageBtns}>
+          <div
+            className={styles.buttonsBlockItem}
+            onClick={() => {
+              const fullText = message.contents
+                .map((c) => {
+                  if (c.type === ContentType.Text) return c.text;
+
+                  return "";
+                })
+                .join("");
+
+              copy(fullText);
+            }}
+            title={t("CopyMessage")}
+          >
+            <ReactSVG src={CopyIconUrl} />
+          </div>
         </div>
       </div>
     );

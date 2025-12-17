@@ -3,7 +3,7 @@
   "content": "X",
   "content_en_sha1_hash": "c032adc1ff629c9b66f22749ad667e6beadf144b",
   "created_at": "2025-11-18T14:41:31.343Z",
-  "updated_at": "2025-11-25T17:25:56.645Z",
+  "updated_at": "2025-12-16T07:24:44.176Z",
   "comment": {
     "text": "This key represents the display name for the \"Twitter\" (now \"X\") login provider. It's used to label the provider option, likely on a login or signup button or selection list. Translators should ensure this accurately reflects the platform's current branding.",
     "is_auto": true,
@@ -11,8 +11,8 @@
   },
   "usage": [
     {
-      "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 416,
+      "file_path": "/packages/shared/utils/common.tsx",
+      "line_number": 417,
       "context": "case \"google\":\n return t(\"Common:ProviderGoogle\");\n case \"facebook\":\n return t(\"Common:ProviderFacebook\");\n case \"twitter\":\n return t(\"Common:ProviderTwitter\");\n case \"linkedin\":\n return t(\"Common:ProviderLinkedIn\");\n case \"microsoft\":\n return t(\"Common:ProviderMicrosoft\");\n case \"sso\":",
       "module": "/packages/shared"
     }

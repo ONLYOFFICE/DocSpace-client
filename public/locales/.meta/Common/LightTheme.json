@@ -3,7 +3,7 @@
   "content": "Light theme",
   "content_en_sha1_hash": "9e5ba0f0f6b52d08b363bdcde46caac8862e4c70",
   "created_at": "2025-05-26T07:15:44.567Z",
-  "updated_at": "2025-08-13T18:28:17.679Z",
+  "updated_at": "2025-12-15T14:04:23.753Z",
   "comment": {
     "text": "The \"LightTheme\" translation key is used to display the English label \"Light theme\" in a UI context, likely found in settings or appearance options. It appears as part of a list of themes and is used when selecting the Light theme from a color scheme preview.",
     "is_auto": true,
@@ -19,13 +19,13 @@
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/interface-theme/index.tsx",
       "line_number": 131,
-      "context": "{systemThemeDescriptionLabel}\n </Text>\n </div>\n <div className=\"themes-container\">\n <ThemePreview\n label={t(\"LightTheme\")}\n theme=\"Light\"\n accentColor={currentColorScheme!.main?.accent}\n themeId={selectedThemeId!}\n value={ThemeKeys.BaseStr}\n isChecked={",
+      "context": "{systemThemeDescriptionLabel}\n </Text>\n </div>\n <div className={styles.themesContainer}>\n <ThemePreview\n label={t(\"LightTheme\")}\n theme=\"Light\"\n accentColor={currentColorScheme!.main?.accent}\n themeId={selectedThemeId!}\n value={ThemeKeys.BaseStr}\n isChecked={",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/interface-theme/index.tsx",
       "line_number": 131,
-      "context": "{systemThemeDescriptionLabel}\n </Text>\n </div>\n <div className=\"themes-container\">\n <ThemePreview\n label={t(\"LightTheme\")}\n theme=\"Light\"\n accentColor={currentColorScheme!.main?.accent}\n themeId={selectedThemeId!}\n value={ThemeKeys.BaseStr}\n isChecked={",
+      "context": "{systemThemeDescriptionLabel}\n </Text>\n </div>\n <div className={styles.themesContainer}>\n <ThemePreview\n label={t(\"LightTheme\")}\n theme=\"Light\"\n accentColor={currentColorScheme!.main?.accent}\n themeId={selectedThemeId!}\n value={ThemeKeys.BaseStr}\n isChecked={",
       "module": "/packages/client"
     },
     {

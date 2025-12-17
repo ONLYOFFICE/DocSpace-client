@@ -29,7 +29,18 @@ export {
   successThirdpartyProviders,
 } from "./thirdPartyProviders";
 
-export { self as selfHandler, successSelf } from "./self";
+export {
+  self as selfHandler,
+  successSelf,
+  adminOnlyUser,
+  adminOnlySuccess,
+  roomAdminUser,
+  roomAdminSuccess,
+  visitorUser,
+  visitorSuccess,
+  regularUser,
+  regularUserSuccess,
+} from "./self";
 
 export {
   PATH as SELF_PATH,
@@ -40,3 +51,12 @@ export {
   PATH_USER_BY_EMAIL as SELF_PATH_USER_BY_EMAIL,
   PATH_ADD_GUEST,
 } from "./self";
+
+export {
+  peopleListHandler,
+  peopleListAccessDeniedHandler,
+  PATH_PEOPLE_LIST,
+  mockUsers,
+  peopleListSuccess,
+} from "./list";
+

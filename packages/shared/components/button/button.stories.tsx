@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { ComponentProps } from "react";
 
 import { Meta, StoryObj } from "@storybook/react";
 
@@ -59,7 +59,7 @@ These attributes help users of assistive technologies better understand the butt
   },
 } satisfies Meta<typeof Button>;
 
-type Story = StoryObj<typeof Button>;
+type Story = StoryObj<ComponentProps<typeof Button>>;
 
 export default meta;
 

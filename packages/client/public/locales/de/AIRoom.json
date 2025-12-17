@@ -12,7 +12,6 @@
   "EmptyResultsViewerDescription": "Die Ergebnisse der KI-Chataktivitäten anderer Nutzer werden Ihnen hier angezeigt, sobald sie verfügbar sind.",
   "InstructionsDescriptionAgent": " Beschreiben Sie, wie sich der KI-Agent verhalten und reagieren soll. Definieren Sie seine Rolle, seinen Tonfall und seine Hauptaufgaben.",
   "InstructionsDescriptionAgentExample": "Beispiel: „Sie sind ein KI-PR-Assistent, der beim Verfassen und Bearbeiten von Pressemitteilungen hilft. Achten Sie auf einen professionellen, selbstbewussten und medienfreundlichen Ton. Heben Sie Kernbotschaften deutlich hervor, vermeiden Sie Fachjargon und gestalten Sie den Text prägnant und ansprechend.“",
-  "Knowledge": "Wissensdatenbank",
   "KnowledgeDescription": "Laden Sie Dateien von Ihrem Computer oder {{productName}} hoch, um den Chat mit mehr Kontext zu versehen. Hinweis: Einige oder alle hochgeladenen Inhalte können während des Gesprächs sichtbar sein.",
   "KnowledgeSelectIn": "In {{productName}} wählen",
   "KnowledgeUnavailable": "Wissensdatenbank nicht verfügbar",

@@ -3,7 +3,7 @@
   "content": "Play/Pause",
   "content_en_sha1_hash": "ebb1e1e891810d856a734c1b4498ff9b6f11d59c",
   "created_at": "2025-05-19T21:30:55.074Z",
-  "updated_at": "2025-05-24T10:37:07.112Z",
+  "updated_at": "2025-12-15T14:04:23.619Z",
   "comment": {
     "text": "This translation key is used to display the text \"Play/Pause\" in various hotkeys contexts within the application, likely on a panel or settings screen where users can customize shortcut keys. It appears alongside other hotkey inputs and controls.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/HotkeysPanel/PreviewActionsBlock.js",
-      "line_number": 42,
+      "line_number": 48,
       "context": "<Text {...keyTextStyles}>Esc</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysPlayPause\")}</Text>\n <Text {...keyTextStyles}>Space</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>",
       "module": "/packages/client"
     }

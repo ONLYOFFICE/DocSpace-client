@@ -3,7 +3,7 @@
   "content": "Select all visible folders and files",
   "content_en_sha1_hash": "c4590f28ac086a3a4600fb3c26cba40da425c029",
   "created_at": "2025-05-19T21:30:55.083Z",
-  "updated_at": "2025-05-24T10:35:08.829Z",
+  "updated_at": "2025-12-15T14:04:23.620Z",
   "comment": {
     "text": "The translation key \"HotkeysSelectAll\" is used to display a tooltip or label indicating that pressing the Ctrl + A hotkey will select all visible folders and files in a UI element, such as a HotkeysPanel component. This message appears on a button within a panel.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/panels/HotkeysPanel/SelectionBlock.js",
       "line_number": 90,
-      "context": "<Text {...keyTextStyles}>Shift + →</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysSelectAll\")}</Text>\n <Text {...keyTextStyles}>\n {CtrlKey} + a {t(\"Common:Or\")} Shift + a\n </Text>\n </>\n </Row>",
+      "context": "<Text {...keyTextStyles}>Shift + →</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysSelectAll\")}</Text>\n <Text {...keyTextStyles}>{CtrlKey} + a</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>",
       "module": "/packages/client"
     }
   ],

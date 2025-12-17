@@ -29,7 +29,7 @@ import find from "lodash/find";
 import moment from "moment-timezone";
 import { findWindows } from "windows-iana";
 import { isMobile } from "react-device-detect";
-import { I18nextProviderProps } from "react-i18next";
+import { I18nextProviderProps, Trans } from "react-i18next";
 import sjcl from "sjcl";
 import resizeImage from "resize-image";
 
@@ -102,6 +102,7 @@ import { checkIsSSR } from "./device";
 import { hasOwnProperty } from "./object";
 import { TFrameConfig } from "../types/Frame";
 import { isFile, isFolder } from "./typeGuards";
+import { TFunction } from "i18next";
 
 export const desktopConstants = Object.freeze({
   domain: !checkIsSSR() && window.location.origin,
@@ -1326,17 +1327,52 @@ export const getUserTypeDescription = (
   t: TTranslation,
 ) => {
   if (isPortalAdmin)
-    return t("Common:RolePortalAdminDescription", {
-      productName: t("Common:ProductName"),
-      sectionName: t("Common:MyDocuments"),
-    });
+    return (
+      <Trans
+        t={t as TFunction}
+        ns="Common"
+        i18nKey="RolePortalAdminDescription"
+        components={{
+          1: <strong></strong>,
+        }}
+        values={{
+          productName: t("Common:ProductName"),
+          sectionName: t("Common:Documents"),
+          agentSection: t("Common:AIAgents"),
+        }}
+      />
+    );
 
   if (isRoomAdmin)
-    return t("Common:RoleRoomAdminDescription", {
-      sectionName: t("Common:MyDocuments"),
-    });
+    return (
+      <Trans
+        t={t as TFunction}
+        ns="Common"
+        i18nKey="RoleRoomAdminDescription"
+        components={{
+          1: <strong></strong>,
+        }}
+        values={{
+          sectionName: t("Common:Documents"),
+          agentSection: t("Common:AIAgents"),
+        }}
+      />
+    );
 
-  if (isCollaborator) return t("Common:RoleNewUserDescription");
+  if (isCollaborator)
+    return (
+      <Trans
+        t={t as TFunction}
+        ns="Common"
+        i18nKey="RoleNewUserDescription"
+        components={{
+          1: <strong></strong>,
+        }}
+        values={{
+          agentSection: t("Common:AIAgents"),
+        }}
+      />
+    );
 
   return t("Translations:RoleGuestDescriprion");
 };

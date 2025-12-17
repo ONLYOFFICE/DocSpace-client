@@ -3,7 +3,7 @@
   "content": "These settings will be available once the second space is created and applied to all your spaces.",
   "content_en_sha1_hash": "93d0ce1e0dfe952ddaf44aa4379a8272d7cf4da9",
   "created_at": "2025-05-19T21:30:57.470Z",
-  "updated_at": "2025-05-26T07:57:33.007Z",
+  "updated_at": "2025-12-15T14:04:24.291Z",
   "comment": {
     "text": "This translation key is used for a message that will be displayed when certain settings are not enabled, typically appearing in a UI component such as a button or a dialog. The message indicates that these settings have not been applied to all spaces yet and will become available once the second space is created.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/management/src/components/section/index.tsx",
-      "line_number": 62,
+      "line_number": 58,
       "context": "const router = useRouter();\n const { t } = useTranslation([\"Management\", \"Common\"]);\n const { tenants } = portals;\n const showBar = pathname.includes(\"settings\");\n const barTitle =\n tenants?.length > 1 ? t(\"SettingsForAll\") : t(\"SettingsDisabled\");\n \n const onBack = () => {\n router.back();\n };",
       "module": "/packages/management"
     }

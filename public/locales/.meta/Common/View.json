@@ -3,7 +3,7 @@
   "content": "View",
   "content_en_sha1_hash": "69bd4ef9fbd0894a22759c3766b859defbdedbc8",
   "created_at": "2025-05-19T21:30:49.521Z",
-  "updated_at": "2025-12-08T14:10:15.201Z",
+  "updated_at": "2025-12-17T07:49:07.728Z",
   "comment": {
     "text": "This translation key is used to display the text \"View\" as a label for a button or similar UI element. It appears in various contexts, including a Smart Banner component and a filter section on the Home page, where it serves as a placeholder for an action that allows users to view content or settings.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1913,
+      "line_number": 1957,
       "context": "key: \"view\",\n label:\n this.treeFoldersStore.isRecentFolder ||\n this.treeFoldersStore.isFavoritesFolder\n ? t(\"Open\")\n : t(\"Common:View\"),\n icon: EyeReactSvgUrl,\n onClick: (fileId) => this.onMediaFileClick(fileId, item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },

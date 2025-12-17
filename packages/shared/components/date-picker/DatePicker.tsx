@@ -54,6 +54,7 @@ const DatePicker = (props: DatePickerProps) => {
     hideCross,
     autoPosition,
     testId,
+    useMaxTime,
   } = props;
 
   const calendarRef = useRef<HTMLDivElement | null>(null);
@@ -213,6 +214,7 @@ const DatePicker = (props: DatePickerProps) => {
           maxDate={maxDate}
           locale={locale}
           initialDate={openDate}
+          useMaxTime={!date ? useMaxTime : false}
           aria-label="Date picker calendar"
         />
       ) : null}

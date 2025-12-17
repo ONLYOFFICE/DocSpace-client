@@ -50,4 +50,5 @@ export type DateTimePickerProps = {
   /** Allows to set data-testid */
   dataTestId?: string;
   hideCross?: boolean;
+  useMaxTime?: boolean;
 };

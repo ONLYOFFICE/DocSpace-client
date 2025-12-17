@@ -52,6 +52,7 @@ export interface CalendarProps {
   isScroll?: boolean;
   /** Data test id for testing */
   dataTestId?: string;
+  useMaxTime?: boolean;
 }
 
 export interface DaysProps {

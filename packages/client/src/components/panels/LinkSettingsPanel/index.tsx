@@ -93,7 +93,7 @@ const LinkSettingsPanel = ({
     ? Number(maxNumber) <= usersNumber
     : false;
 
-  const [showExpiredError, setShowExpiredError] = useState(false);
+  const showExpiredError = moment(new Date()).isAfter(limitDate);
 
   const currentAccess = filteredAccesses.find(
     (a) =>
@@ -120,20 +120,13 @@ const LinkSettingsPanel = ({
   };
 
   const onSubmitChanges = () => {
-    const expirationDate = limitDate ? moment(limitDate).toISOString() : null;
-
-    if (expirationDate && moment().isAfter(expirationDate)) {
-      setShowExpiredError(true);
-      return;
-    }
-
     const defaultLink = filteredAccesses.find(
       (a) => a.access === currentAccess?.access,
     );
     if (defaultLink) {
       const linkToSubmit = {
         ...defaultLink,
-        expirationDate,
+        expirationDate: limitDate ? moment(limitDate).toISOString() : null,
         maxUseCount: userLimitIsChecked ? Number(maxNumber) : null,
         currentUseCount: usersNumber,
       } as TOption & {
@@ -144,13 +137,6 @@ const LinkSettingsPanel = ({
 
       onSubmit(linkToSubmit);
     }
-  };
-
-  const onChangeLimitDate = (date: moment.Moment | null) => {
-    const isExpired = moment().isAfter(date);
-    if (!isExpired) setShowExpiredError(false);
-
-    setLimitDate(date);
   };
 
   return (
@@ -308,13 +294,14 @@ const LinkSettingsPanel = ({
             id="link-settings_date-time-picker"
             locale={locale}
             hasError={false}
-            onChange={onChangeLimitDate}
+            onChange={() => setLimitDate(date)}
             openDate={new Date()}
             className={styles.linkSettingsDatePicker}
             selectDateText={t("Common:SelectDate")}
             initialDate={limitDate}
             minDate={moment().subtract(1, "days")}
             maxDate={maxDate}
+            useMaxTime={!activeLink.expirationDate}
           />
         </div>
       </ModalDialog.Body>

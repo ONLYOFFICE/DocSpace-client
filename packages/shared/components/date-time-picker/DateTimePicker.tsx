@@ -54,6 +54,7 @@ const DateTimePicker = (props: DateTimePickerProps) => {
     openDate,
     dataTestId,
     hideCross,
+    useMaxTime,
   } = props;
 
   const { t } = useTranslation("Common");
@@ -166,6 +167,7 @@ const DateTimePicker = (props: DateTimePickerProps) => {
         openDate={openDate}
         outerDate={date}
         hideCross={hideCross}
+        useMaxTime={useMaxTime}
       />
       <span
         className={styles.timeSelector}

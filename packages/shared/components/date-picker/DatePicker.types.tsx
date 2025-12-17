@@ -55,4 +55,5 @@ export type DatePickerProps = {
   /** Automatically positions the calendar based on available space */
   autoPosition?: boolean;
   testId?: string;
+  useMaxTime?: boolean;
 };

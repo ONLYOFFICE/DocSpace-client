@@ -49,6 +49,7 @@ const Calendar = ({
   forwardedRef,
   isScroll = false,
   dataTestId,
+  useMaxTime,
 }: CalendarProps) => {
   moment.locale(locale);
 
@@ -57,6 +58,11 @@ const Calendar = ({
       date.format("YYYY-MM-DD") +
         (selectedDate ? ` ${selectedDate.format("HH:mm")}` : ""),
     );
+
+    if (useMaxTime) {
+      formattedDate.endOf("day");
+    }
+
     setSelectedDate?.(formattedDate);
     onChange?.(formattedDate);
   };

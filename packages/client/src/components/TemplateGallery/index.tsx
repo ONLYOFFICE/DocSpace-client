@@ -39,7 +39,8 @@ import { TTranslation } from "@docspace/shared/types";
 import TilesContainer from "./TilesContainer";
 import ErrorView from "./ErrorView";
 import { useMobileDetection } from "./hooks/useMobileDetection";
-import { TAB_CONFIG, TAB_IDS, FileExtension, TabId } from "./constants";
+import { FILE_EXTENSIONS, TAB_IDS, TabId } from "./constants";
+
 import { getExtensionFromTabId } from "./utils/tabUtils";
 import styles from "./TemplateGallery.module.scss";
 
@@ -77,10 +78,6 @@ const TemplateGallery = (props: {
   const [isInitLoading, setIsInitLoading] = useState(true);
   const [isShowInitSkeleton, setShowInitSkeleton] = useState(true);
 
-  const handleTabClick = async (extension: FileExtension) => {
-    await resetFilters(extension);
-  };
-
   useEffect(() => {
     initTemplateGallery().then(() => setIsInitLoading(false));
   }, []);
@@ -100,21 +97,55 @@ const TemplateGallery = (props: {
     languageFilterLoaded,
   ]);
 
-  const tabs = useMemo(() => {
-    return Object.values(TAB_CONFIG).map((config) => ({
-      id: config.id,
-      name: t(config.translationKey),
-      content: (
-        <TilesContainer
-          ext={config.extension}
-          isShowInitSkeleton={
-            config.id === TAB_IDS.DOCUMENTS ? isShowInitSkeleton : false
-          }
-        />
-      ),
-      onClick: async () => await handleTabClick(config.extension),
-    }));
-  }, [t, isShowInitSkeleton, handleTabClick]);
+  const tabs = useMemo(
+    () => [
+      {
+        id: "documents",
+        name: t("Common:Documents"),
+        content: (
+          <TilesContainer
+            ext={FILE_EXTENSIONS.DOCX}
+            isShowInitSkeleton={isShowInitSkeleton}
+          />
+        ),
+        onClick: async () => await resetFilters(FILE_EXTENSIONS.DOCX),
+      },
+      {
+        id: "spreadsheet",
+        name: t("Common:Spreadsheets"),
+        content: (
+          <TilesContainer
+            ext={FILE_EXTENSIONS.XLSX}
+            isShowInitSkeleton={false}
+          />
+        ),
+        onClick: async () => await resetFilters(FILE_EXTENSIONS.XLSX),
+      },
+      {
+        id: "presentation",
+        name: t("Common:Presentations"),
+        content: (
+          <TilesContainer
+            ext={FILE_EXTENSIONS.PPTX}
+            isShowInitSkeleton={false}
+          />
+        ),
+        onClick: async () => await resetFilters(FILE_EXTENSIONS.PPTX),
+      },
+      {
+        id: "forms",
+        name: t("Common:PDFs"),
+        content: (
+          <TilesContainer
+            ext={FILE_EXTENSIONS.PDF}
+            isShowInitSkeleton={false}
+          />
+        ),
+        onClick: async () => await resetFilters(FILE_EXTENSIONS.PDF),
+      },
+    ],
+    [t, isShowInitSkeleton],
+  );
 
   const onSelect = (element: TTabItem) => {
     const tabId = element.id as TabId;

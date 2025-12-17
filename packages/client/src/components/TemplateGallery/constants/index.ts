@@ -53,13 +53,13 @@ export const TAB_CONFIG = {
   [TAB_IDS.SPREADSHEET]: {
     id: TAB_IDS.SPREADSHEET,
     extension: FILE_EXTENSIONS.XLSX,
-    translationKey: "Common:Spreadsheet",
+    translationKey: "Common:Spreadsheets",
     smallPreview: true,
   },
   [TAB_IDS.PRESENTATION]: {
     id: TAB_IDS.PRESENTATION,
     extension: FILE_EXTENSIONS.PPTX,
-    translationKey: "Common:Presentation",
+    translationKey: "Common:Presentations",
     smallPreview: true,
   },
   [TAB_IDS.FORMS]: {

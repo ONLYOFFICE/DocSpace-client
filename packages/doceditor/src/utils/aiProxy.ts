@@ -27,76 +27,75 @@
 import type { TEditorConnector, TEditorAIEvent } from "@/types";
 import { getCookie } from "@docspace/shared/utils";
 
-const requests: Record<string, AbortController> = {};
+const requests: Record<string, { controller: AbortController }> = {};
 
 const sendEvent = (
   connector: TEditorConnector,
   data: Record<string, unknown>,
 ) => connector.sendEvent("ai_onExternalFetch", data);
 
-const streamResponse = async (
-  connector: TEditorConnector,
-  id: string,
-  body: ReadableStream<Uint8Array>,
-) => {
-  const reader = body.getReader();
-  const decoder = new TextDecoder();
-
-  for (;;) {
-    const { value, done } = await reader.read();
-
-    if (done) break;
-
-    if (value)
-      sendEvent(connector, { type: "chunk", id, chunk: decoder.decode(value) });
-  }
-
-  sendEvent(connector, { type: "end", id });
-};
-
 const externalAIFetch = async (
   connector: TEditorConnector,
   e: TEditorAIEvent,
   providerId: number,
 ) => {
-  const { id, type, url, options, streaming } = e;
+  const { id, type } = e;
 
   if (type === "abort") {
-    requests[id]?.abort();
+    requests[id]?.controller.abort();
     delete requests[id];
     return;
   }
 
-  const controller = new AbortController();
-  requests[id] = controller;
+  const abortController = new AbortController();
+  requests[id] = { controller: abortController };
 
   try {
-    const authToken = getCookie("asc_auth_key");
-    const result = await fetch(
-      url.replace("[external]", `/api/2.0/ai/openai/${providerId}/v1`),
-      {
-        ...options,
-        signal: controller.signal,
-        headers: {
-          ...options.headers,
-          ...(authToken && { Authorization: authToken }),
-        },
-      },
+    const url = e.url.replace(
+      "[external]",
+      `/api/2.0/ai/openai/${providerId}/v1`,
     );
+    const authToken = getCookie("asc_auth_key");
 
+    const options = {
+      ...e.options,
+      signal: abortController.signal,
+      headers: {
+        ...e.options.headers,
+        ...(authToken && { Authorization: authToken }),
+      },
+    };
+
+    const result = await fetch(url, options);
     const headers = Object.fromEntries(result.headers.entries());
 
-    sendEvent(connector, {
-      type: "response",
-      id,
-      status: result.status,
-      headers,
-    });
+    if (e.streaming) {
+      sendEvent(connector, {
+        type: "response",
+        id,
+        status: result.status,
+        headers,
+      });
 
-    if (streaming) {
       if (!result.body) throw new Error("Response body is null");
 
-      await streamResponse(connector, id, result.body);
+      const reader = result.body.getReader();
+      const decoder = new TextDecoder();
+
+      let done = false;
+      while (!done) {
+        const { value, done: readDone } = await reader.read();
+        done = readDone;
+        if (value) {
+          sendEvent(connector, {
+            type: "chunk",
+            id,
+            chunk: decoder.decode(value),
+          });
+        }
+      }
+
+      sendEvent(connector, { type: "end", id });
     } else {
       sendEvent(connector, {
         type: "response",

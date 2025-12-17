@@ -24,39 +24,43 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export {
-  thirdPartyProvider as thirdPartyProviderHandler,
-  successThirdpartyProviders,
-} from "./thirdPartyProviders";
+import { BASE_URL } from "../../utils";
+import { successSelf, adminOnlyUser, roomAdminUser } from "./self";
 
-export {
-  self as selfHandler,
-  successSelf,
-  adminOnlyUser,
-  adminOnlySuccess,
-  roomAdminUser,
-  roomAdminSuccess,
-  visitorUser,
-  visitorSuccess,
-  regularUser,
-  regularUserSuccess,
-} from "./self";
+export const PATH_PEOPLE_LIST = "people/filter";
 
-export {
-  PATH as SELF_PATH,
-  PATH_CHANGE_AUTH_DATA as SELF_PATH_CHANGE_AUTH_DATA,
-  PATH_ACTIVATION_STATUS as SELF_PATH_ACTIVATION_STATUS,
-  PATH_UPDATE_USER as SELF_PATH_UPDATE_USER,
-  PATH_DELETE_USER as SELF_PATH_DELETE_USER,
-  PATH_USER_BY_EMAIL as SELF_PATH_USER_BY_EMAIL,
-  PATH_ADD_GUEST,
-} from "./self";
+export const mockUsers = [successSelf];
 
-export {
-  peopleListHandler,
-  peopleListAccessDeniedHandler,
-  PATH_PEOPLE_LIST,
-  mockUsers,
-  peopleListSuccess,
-} from "./list";
+export const peopleListEmpty = {
+  response: {
+    items: [],
+    total: 0,
+  },
+};
 
+export const peopleListSuccess = {
+  response: {
+    items: mockUsers,
+    total: mockUsers.length,
+  },
+};
+
+export const peopleListHandler = (headers?: Headers) => {
+  if (headers?.get("x-mock-response") === "empty") {
+    return new Response(JSON.stringify(peopleListEmpty));
+  }
+
+  return new Response(JSON.stringify(peopleListSuccess));
+};
+
+export const peopleListAccessDeniedHandler = () => {
+  return new Response(
+    JSON.stringify({
+      error: {
+        message: "Access denied",
+      },
+      status: 1,
+      statusCode: 403,
+    }),
+  );
+};

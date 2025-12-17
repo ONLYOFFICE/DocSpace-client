@@ -236,6 +236,8 @@ class FilesStore {
 
   isErrorAIAgentNotAvailable = false;
 
+  isErrorAccountNotAvailable = false;
+
   roomsController = null;
 
   filesController = null;
@@ -966,6 +968,10 @@ class FilesStore {
 
   setIsErrorAIAgentNotAvailable = (state) => {
     this.isErrorAIAgentNotAvailable = state;
+  };
+
+  setIsErrorAccountNotAvailable = (state) => {
+    this.isErrorAccountNotAvailable = state;
   };
 
   setTempActionFilesIds = (tempActionFilesIds) => {

@@ -34,6 +34,7 @@ import { type TTabItem, type TabsProps } from "./Tabs.types";
 import { Scrollbar as ScrollbarType } from "../scrollbar/custom-scrollbar";
 import { Scrollbar } from "../scrollbar";
 import { Text } from "../text";
+import { IconButton } from "../icon-button";
 import {
   MAX_TAB_WIDTH,
   TAB_PADDING,
@@ -318,12 +319,13 @@ const SecondaryTabs = (props: TabsProps) => {
         style={{ top: stickyTop }}
       >
         {withArrows ? (
-          <ReactSVG
+          <IconButton
             className={classNames(styles.arrowIcon, styles.arrowLeft, {
               [styles.disabled]: selectedItemIndex === 0,
             })}
-            src={ArrowReactUrl}
+            isFill
             onClick={onSelectPrev}
+            iconName={ArrowReactUrl}
           />
         ) : null}
 
@@ -355,12 +357,13 @@ const SecondaryTabs = (props: TabsProps) => {
         ) : null}
 
         {withArrows ? (
-          <ReactSVG
+          <IconButton
             className={classNames(styles.arrowIcon, styles.arrowRight, {
               [styles.disabled]: selectedItemIndex === items.length - 1,
             })}
-            src={ArrowReactUrl}
+            isFill
             onClick={onSelectNext}
+            iconName={ArrowReactUrl}
           />
         ) : null}
       </div>

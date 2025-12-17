@@ -30,6 +30,7 @@ import { useRef, useState, useMemo, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import equal from "fast-deep-equal/react";
+import classNames from "classnames";
 
 import {
   ModalDialog,
@@ -130,7 +131,7 @@ const AddUpdateDialogComponent = ({
       ),
   );
   const [isKeyInputHidden, setIsKeyInputHidden] = useState(
-    variant === "update",
+    variant === "update" && !providerData?.needReset,
   );
   const [isRequestRunning, setIsRequestRunning] = useState(false);
 
@@ -204,7 +205,6 @@ const AddUpdateDialogComponent = ({
         };
 
         await addAIProvider?.(data);
-        await getAIConfig?.();
         toastr.success(
           t("AISettings:ProviderAddedSuccess", {
             aiProvider: t("Common:AIProvider"),
@@ -234,6 +234,8 @@ const AddUpdateDialogComponent = ({
           }),
         );
       }
+
+      getAIConfig?.();
 
       onClose();
     } catch (e) {
@@ -368,8 +370,13 @@ const AddUpdateDialogComponent = ({
                   isDisabled={isRequestRunning}
                   isSimulateType
                   autoComplete="off"
+                  hasError={providerData?.needReset}
                 />
-                <Text className={styles.fieldHint}>
+                <Text
+                  className={classNames(styles.fieldHint, {
+                    [styles.fieldHintError]: providerData?.needReset,
+                  })}
+                >
                   {t("AISettings:ProviderKeyInputHint")}
                 </Text>
               </>

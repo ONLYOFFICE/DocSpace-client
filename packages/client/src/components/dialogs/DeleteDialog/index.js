@@ -280,7 +280,12 @@ const DeleteDialogComponent = (props) => {
     isRoomDelete || isTemplate || isAIAgent ? !isChecked : !selection.length;
 
   return (
-    <StyledModalWrapper isLoading={!tReady} visible={visible} onClose={onClose}>
+    <StyledModalWrapper
+      isLoading={!tReady}
+      visible={visible}
+      onClose={onClose}
+      dataTestId="delete-dialog"
+    >
       <ModalDialog.Header>{title}</ModalDialog.Header>
       <ModalDialog.Body>
         <Text>{noteText}</Text>

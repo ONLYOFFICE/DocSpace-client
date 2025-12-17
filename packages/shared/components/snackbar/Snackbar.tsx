@@ -107,16 +107,11 @@ class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
     completed: boolean;
   }) => {
     if (completed) return null;
-    const { textColor, fontSize, fontWeight } = this.props;
+    const { fontSize, fontWeight } = this.props;
 
     // Render a countdown
     return (
-      <Text
-        as="p"
-        color={textColor}
-        fontSize={fontSize}
-        fontWeight={fontWeight}
-      >
+      <Text as="p" fontSize={fontSize} fontWeight={fontWeight}>
         {zeroPad(minutes)}:{zeroPad(seconds)}
       </Text>
     );
@@ -127,7 +122,6 @@ class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
       text,
       headerText,
       btnText,
-      textColor = globalColors.darkBlack,
       showIcon,
       fontSize,
       fontWeight,
@@ -137,7 +131,6 @@ class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
       countDownTime,
       isCampaigns,
       sectionWidth,
-      backgroundColor = globalColors.lightToastAlert,
       opacity,
       backgroundImg,
       onAction: _onAction, // Excluded from rest to prevent DOM warning
@@ -149,7 +142,6 @@ class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
 
     const snackbarStyle = {
       "--opacity": opacity,
-      "--background-color": backgroundColor,
       "--background-image": backgroundImg,
       ...style,
     } as React.CSSProperties;
@@ -203,10 +195,9 @@ class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
           >
             <div className={styles.headerBody} style={{ textAlign }}>
               {showIcon ? (
-                <div className="logo">
+                <div className={styles.logo}>
                   <InfoReactSvg
                     className={styles.infoIcon}
-                    style={{ "--color": textColor } as React.CSSProperties}
                     data-testid="snackbar-icon"
                   />
                 </div>
@@ -217,7 +208,6 @@ class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
                 isInline
                 className={styles.textHeader}
                 style={headerStyles}
-                color={textColor}
                 data-testid="snackbar-header"
               >
                 {headerText}
@@ -227,7 +217,6 @@ class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
               <Text
                 as="p"
                 className={styles.text}
-                color={textColor}
                 fontSize={fontSize}
                 fontWeight={fontWeight}
                 data-testid="snackbar-message"
@@ -236,11 +225,7 @@ class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
               </Text>
 
               {btnText ? (
-                <Text
-                  color={textColor}
-                  className={styles.button}
-                  onClick={this.onActionClick}
-                >
+                <Text className={styles.button} onClick={this.onActionClick}>
                   {btnText}
                 </Text>
               ) : null}

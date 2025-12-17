@@ -44,6 +44,7 @@ import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { EmployeeStatus } from "@docspace/shared/enums";
 import { Nullable } from "@docspace/shared/types";
+import { UserStore } from "@docspace/shared/store/UserStore";
 
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
@@ -75,6 +76,8 @@ type UsersProps = {
   userSelection?: TPeopleListItem[] | Nullable<TPeopleListItem>;
 
   isGuests?: boolean;
+
+  isMe?: UserStore["isMe"];
 };
 
 const Users = ({
@@ -90,6 +93,7 @@ const Users = ({
   standalone,
   userSelection,
   isGuests,
+  isMe,
 }: UsersProps) => {
   const { t, ready } = useTranslation([
     "People",
@@ -158,7 +162,13 @@ const Users = ({
     const selectedOption = typesOptions.find((option) => option.key === role);
 
     const text = (
-      <Text title={typeLabel} fontSize="13px" fontWeight={600} truncate>
+      <Text
+        tooltipFitToContent
+        title={typeLabel}
+        fontSize="13px"
+        fontWeight={600}
+        truncate
+      >
         {typeLabel}
       </Text>
     );
@@ -221,10 +231,12 @@ const Users = ({
       <ItemTitle
         userSelection={userSelection}
         getUserContextOptions={getUserContextOptions!}
+        isMe={isMe!}
       />
       <div className={styles.userContent}>
         <div className={styles.header}>
           <Text
+            tooltipFitToContent
             title={t("Data")}
             fontSize="14px"
             fontWeight={600}
@@ -235,12 +247,14 @@ const Users = ({
         </div>
         <div className={styles.body}>
           <Text
+            tooltipFitToContent
             className={classNames(styles.infoField, styles.firstRow)}
             title={t("Data")}
           >
             {t("Common:Account")}
           </Text>
           <Text
+            tooltipFitToContent
             className={classNames(styles.infoData, styles.firstRow)}
             fontSize="13px"
             fontWeight={600}
@@ -249,17 +263,30 @@ const Users = ({
             {statusLabel}
           </Text>
 
-          <Text className={styles.infoField} title={t("Common:Type")}>
+          <Text
+            tooltipFitToContent
+            className={styles.infoField}
+            title={t("Common:Type")}
+          >
             {t("Common:Type")}
           </Text>
           {typeData}
 
           {isGuests && userSelection.createdBy?.displayName ? (
             <>
-              <Text className={styles.infoField} title={t("Common:Inviter")}>
+              <Text
+                tooltipFitToContent
+                className={styles.infoField}
+                title={t("Common:Inviter")}
+              >
                 {t("Common:Inviter")}
               </Text>
-              <Text fontSize="13px" fontWeight={600} title={statusLabel}>
+              <Text
+                tooltipFitToContent
+                fontSize="13px"
+                fontWeight={600}
+                title={statusLabel}
+              >
                 {userSelection.createdBy.displayName}
               </Text>
             </>
@@ -268,12 +295,14 @@ const Users = ({
           {userSelection.status === EmployeeStatus.Active ? (
             <>
               <Text
+                tooltipFitToContent
                 className={styles.infoField}
                 title={t("PeopleTranslations:RegistrationDate")}
               >
                 {t("PeopleTranslations:RegistrationDate")}
               </Text>
               <Text
+                tooltipFitToContent
                 fontSize="13px"
                 fontWeight={600}
                 title={userSelection.registrationDate}
@@ -284,17 +313,30 @@ const Users = ({
           ) : null}
           {!standalone ? (
             <>
-              <Text className={styles.infoField} title={t("UserStatus")}>
+              <Text
+                tooltipFitToContent
+                className={styles.infoField}
+                title={t("UserStatus")}
+              >
                 {t("UserStatus")}
               </Text>
-              <Text fontSize="13px" fontWeight={600} title={statusLabel}>
+              <Text
+                tooltipFitToContent
+                fontSize="13px"
+                fontWeight={600}
+                title={statusLabel}
+              >
                 {statusText}
               </Text>
             </>
           ) : null}
           {showStorageInfo && !isGuests ? (
             <>
-              <Text className={styles.infoField} title={t("Common:Storage")}>
+              <Text
+                tooltipFitToContent
+                className={styles.infoField}
+                title={t("Common:Storage")}
+              >
                 {t("Common:Storage")}
               </Text>
               <SpaceQuota
@@ -310,6 +352,7 @@ const Users = ({
           {userSelection?.groups?.length && !isGuests ? (
             <>
               <Text
+                tooltipFitToContent
                 className={styles.infoFieldGroups}
                 title={t("Common:Group")}
               >
@@ -319,6 +362,7 @@ const Users = ({
               <div className={styles.groups}>
                 {userSelection.groups.map((group, index) => (
                   <Link
+                    tooltipFitToContent
                     key={group.id}
                     isHovered
                     fontSize="13px"
@@ -347,6 +391,7 @@ export default inject(
     accessRightsStore,
     currentQuotaStore,
     settingsStore,
+    userStore,
   }: TStore) => {
     const { usersStore, contextOptionsStore } = peopleStore;
 
@@ -385,6 +430,7 @@ export default inject(
       standalone,
 
       userSelection,
+      isMe: userStore!.isMe,
     };
   },
 )(observer(Users));

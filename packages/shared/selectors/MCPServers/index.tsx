@@ -86,6 +86,7 @@ const MCPServersSelector = ({
           "",
         isMCP: true,
         isSelected: initedSelectedServers?.includes(server.id),
+        isDisabled: server.needReset,
       };
     },
     [isBase, initedSelectedServers, t],

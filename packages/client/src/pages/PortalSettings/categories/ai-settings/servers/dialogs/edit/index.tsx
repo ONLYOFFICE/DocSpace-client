@@ -71,7 +71,7 @@ const EditMCPDialogComponent = ({
       description: server?.description,
     });
   const { headersComponent, getAPIHeaders, advancedSettingsChanged } =
-    useAdvancedSettings(server?.headers);
+    useAdvancedSettings(server?.headers, server?.needReset);
   const { iconComponent, getIcon, iconChanged } = useIcon(server?.icon?.icon32);
 
   const hasChanges =

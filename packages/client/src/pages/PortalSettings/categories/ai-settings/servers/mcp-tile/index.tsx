@@ -111,13 +111,21 @@ export const MCPTile = ({
           : undefined
       }
     >
-      <AiTile.Header title={name}>
+      <AiTile.Header
+        title={name}
+        hasError={item.needReset}
+        getErrorTooltipContent={() => (
+          <Text fontSize="12px" lineHeight="16px">
+            {t("AISettings:MCPUnavailableError")}
+          </Text>
+        )}
+      >
         <div className={styles.buttonsContainer}>
           <ToggleButton
             className={styles.toggleButton}
             isChecked={item.enabled}
             onChange={() => onToggle(item.id, !item.enabled)}
-            isDisabled={disableActions}
+            isDisabled={disableActions || item.needReset}
           />
           {item.serverType === ServerType.Custom ? (
             <ContextMenuButton

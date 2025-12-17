@@ -23,6 +23,7 @@
   "KnowledgeSettingsDescription": "Səyahət agentləri üçün məlumat bazasını aktiv edin. Sistem, {{modelName}} modeli ilə sizə məxsus sənədləri indeks edərək, məlumatlarınız üzrə suallar əsasında axtarışa dəstək olacaq. Bu funksiya, müvafiq məlumatları tapmağa yönəlibsə də, xülasələr yaratmaq və ya qlobal analiz etmək üçün nəzərdə tutulmayıb.",
   "MCPServerAdvancedSettingsHint": "Bu hissəni əlavə HTTP başliqlarını, məsələn, səlahiyyət lövhələrini ötürmək üçün istifadə edin.",
   "MCPServerDescriptionHint": "İnteqrasiyanın məqsədini qısaca izah edin.",
+  "MCPUnavailableError": "MCP serveri mövcud deyil.",
   "Provider": "Təminatçı",
   "ProviderKey": "Kunci",
   "ProviderKeyInputHint": "Sizim AI provayderinizin panelindən yaradılmış API açarını daxil edin.",

@@ -51,6 +51,7 @@ import { useChatStore } from "../../../store/chatStore";
 import { useMessageStore } from "../../../store/messageStore";
 import { openFile } from "../../../utils";
 import { SelectChatProps } from "../../../Chat.types";
+import { TooltipContainer } from "../../../../tooltip";
 
 import ExportSelector from "../../export-selector";
 
@@ -192,29 +193,33 @@ const SelectChat = ({
 
         const title = chats.find((chat) => chat.id === hoveredItem)?.title;
 
-        if (isChecked) {
-          openFile(resultFile.id.toString());
+        if (resultFile) {
+          if (isChecked) {
+            openFile(resultFile.id.toString());
+          }
+
+          const toastMsg = (
+            <Trans
+              ns="Common"
+              i18nKey="ChatExported"
+              t={t}
+              values={{ fileName, title }}
+              components={{
+                1: <b />,
+                2: (
+                  <Link
+                    type={LinkType.action}
+                    onClick={() => openFile(resultFile.id.toString())}
+                  />
+                ),
+              }}
+            />
+          );
+
+          toastr.success(toastMsg);
+        } else {
+          toastr.error(data.error);
         }
-
-        const toastMsg = (
-          <Trans
-            ns="Common"
-            i18nKey="ChatExported"
-            t={t}
-            values={{ fileName, title }}
-            components={{
-              1: <b />,
-              2: (
-                <Link
-                  type={LinkType.action}
-                  onClick={() => openFile(resultFile.id.toString())}
-                />
-              ),
-            }}
-          />
-        );
-
-        toastr.success(toastMsg);
 
         socket?.off(SocketEvents.ExportChat);
         socket?.emit(SocketCommands.Unsubscribe, {
@@ -292,14 +297,15 @@ const SelectChat = ({
 
   return (
     <>
-      <div
+      <TooltipContainer
+        as="div"
         title={t("Common:ChatHistory")}
         className={classNames(styles.selectChat, { [styles.open]: isOpen })}
         onClick={toggleOpen}
         ref={parentRef}
       >
         <SelectSessionReactSvg />
-      </div>
+      </TooltipContainer>
       {isOpen ? (
         <DropDown
           open={isOpen}

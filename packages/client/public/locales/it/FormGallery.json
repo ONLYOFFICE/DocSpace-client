@@ -2,6 +2,7 @@
   "Categories": "Categorie",
   "EmptyFormGalleryScreenDescription": "Non è stato possibile trovare alcun risultato corrispondente alla tua ricerca",
   "ErrorViewDescription": "Ti preghiamo di riprovare più tardi",
+  "ErrorViewDescriptionNetworkError": "Sembra che non ci sia connessione a Internet",
   "ErrorViewHeader": "La galleria dei moduli è temporaneamente non disponibile",
   "SelectForm": "Seleziona modulo",
   "SubmitToGalleryDialogGuideInfo": "Scopri come creare moduli perfetti e aumentare le tue possibilità di ottenere l'approvazione nella nostra <1>guida</1>.",

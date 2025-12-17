@@ -2,6 +2,7 @@
   "Categories": "카테고리",
   "EmptyFormGalleryScreenDescription": "검색어와 일치하는 결과를 찾을 수 없습니다",
   "ErrorViewDescription": "나중에 다시 시도해 주세요",
+  "ErrorViewDescriptionNetworkError": "인터넷 연결이 없는 것 같습니다.",
   "ErrorViewHeader": "양식 갤러리가 일시적으로 사용 불가합니다",
   "SelectForm": "양식 선택",
   "SubmitToGalleryDialogGuideInfo": "저희의 <1>guide</1>에서 완벽한 양식 작성 방법 및 승인 가능성을 높이는 방법에 대해 알아보세요.",

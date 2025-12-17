@@ -29,6 +29,7 @@
   "MCPServerDescriptionHint": "Write a brief explanation of the integration's purpose",
   "MCPServerIntegrationURLHint": "Enter the {{mcpServer}} address provided by your service",
   "MCPSettingsDescription": "This section lets you manage {{mcpServers}} for AI chats within rooms. You can enable system {{mcpServers}} or add custom ones to meet your company's needs. Once enabled, these servers will be accessible to other users for their tasks.",
+  "MCPUnavailableError": "The MCP server is unavailable",
   "Provider": "Provider",
   "ProviderAddedSuccess": "{{aiProvider}} added successfully",
   "ProviderKey": "Key",

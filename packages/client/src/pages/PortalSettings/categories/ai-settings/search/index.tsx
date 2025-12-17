@@ -74,12 +74,10 @@ const SearchComponent = ({
   const [resetDialogVisible, setResetDialogVisible] =
     React.useState<boolean>(false);
 
-  const [isKeyHidden, setIsKeyHidden] = React.useState(
-    webSearchConfig?.enabled,
-  );
-  const [value, setValue] = React.useState(
-    webSearchConfig?.enabled ? FAKE_KEY_VALUE : "",
-  );
+  const initEnabled = webSearchConfig?.enabled && !webSearchConfig?.needReset;
+
+  const [isKeyHidden, setIsKeyHidden] = React.useState(initEnabled);
+  const [value, setValue] = React.useState(initEnabled ? FAKE_KEY_VALUE : "");
   const [selectedOption, setSelectedOption] = React.useState<WebSearchType>(
     () => {
       if (webSearchConfig?.type === WebSearchType.Exa) return WebSearchType.Exa;
@@ -141,7 +139,7 @@ const SearchComponent = ({
   }, [selectedOption, items]);
 
   React.useEffect(() => {
-    if (webSearchConfig?.enabled) {
+    if (webSearchConfig?.enabled && !webSearchConfig?.needReset) {
       setIsKeyHidden(true);
       setValue(FAKE_KEY_VALUE);
     }
@@ -307,7 +305,8 @@ const SearchComponent = ({
             isDisabled={
               !webSearchConfig ||
               webSearchConfig?.type === WebSearchType.None ||
-              saveRequestRunning
+              saveRequestRunning ||
+              webSearchConfig.needReset
             }
           />
         </div>

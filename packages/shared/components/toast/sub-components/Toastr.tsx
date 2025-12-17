@@ -126,7 +126,11 @@ const createToastContent = (
   data: string | React.ReactNode,
   title: string,
 ) => (
-  <div className={styles.toastContent} data-type={type}>
+  <div
+    data-testId="toast-content"
+    className={styles.toastContent}
+    data-type={type}
+  >
     <div className="icon-wrapper">
       <Icon size={IconSizeType.medium} type={type} />
     </div>

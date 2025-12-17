@@ -23,6 +23,7 @@
   "KnowledgeSettingsDescription": "Activați o bază de cunoștințe pentru agenți de IA. Sistemul v-a indexa documentele folosind modelul {{modelName}} pentru a sprijini căutarea datelor bazată pe întrebări. Această caracteristică presupune căutarea informaţiilor relevante, dar nu și generarea rezumatelor sau efectuarea analizei globale.",
   "MCPServerAdvancedSettingsHint": "Utilizați această secțiune pentru a transmite antete HTTP suplimentare, cum ar fi token-uri de autorizare.",
   "MCPServerDescriptionHint": "Scrieți o scurtă explicație despre scopul integrării.",
+  "MCPUnavailableError": "Serverul MCP este indisponibil.",
   "Provider": "Furnizor",
   "ProviderKey": "Cheie",
   "ProviderKeyInputHint": "Introduceți cheia API generată din tabloul de bord al furnizorului dvs de IA.",

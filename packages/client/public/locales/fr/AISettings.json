@@ -23,6 +23,7 @@
   "KnowledgeSettingsDescription": "Activez une base de connaissances pour les agents IA. Le système indexera vos documents à l'aide du modèle {{modelName}} pour prendre en charge la recherche par questions dans vos données. Cette fonctionnalité se concentre sur la recherche d'informations pertinentes mais ne génère pas de résumés ni n'effectue d'analyse globale.",
   "MCPServerAdvancedSettingsHint": "Utilisez cette section pour transmettre des en-têtes HTTP supplémentaires, comme les jetons d'autorisation.",
   "MCPServerDescriptionHint": "Rédigez une brève explication de l'objectif de l'intégration",
+  "MCPUnavailableError": "Le serveur MCP est indisponible.",
   "Provider": "Fournisseur",
   "ProviderKey": "Clé",
   "ProviderKeyInputHint": "Saisissez la clé API générée depuis le tableau de bord de votre fournisseur IA",

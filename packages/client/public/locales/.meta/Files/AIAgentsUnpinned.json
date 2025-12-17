@@ -3,7 +3,7 @@
   "content": "AI agents unpinned",
   "content_en_sha1_hash": "90eda8ab59cf4232de0e63a919fab129c90636da",
   "created_at": "2025-11-03T12:10:32.751Z",
-  "updated_at": "2025-11-25T06:36:56.971Z",
+  "updated_at": "2025-12-15T14:04:24.069Z",
   "comment": {
     "text": "This key displays a message indicating that AI agents have been unpinned. It's used to provide feedback to the user when AI agents are removed from the pinned state, likely appearing as part of a UI element related to agent management.",
     "is_auto": true,

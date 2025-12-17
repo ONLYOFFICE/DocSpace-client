@@ -23,6 +23,7 @@
   "KnowledgeSettingsDescription": "AI ajanları için bir bilgi tabanı etkinleştirin. Sistem, verilerinizde soru tabanlı arama desteği sağlamak için belgelerinizi {{modelName}} modeliyle dizine ekleyecektir. Bu özellik, ilgili bilgileri bulmaya odaklanmıştır ancak özetler oluşturmaz veya genel analiz yapmaz.",
   "MCPServerAdvancedSettingsHint": "Bu bölümü, yetkilendirme belirteçleri gibi ek HTTP başlıkları iletmek için kullanın.",
   "MCPServerDescriptionHint": "Entegrasyonun amacını kısaca açıklayın",
+  "MCPUnavailableError": "MCP sunucusu kullanılamıyor",
   "Provider": "Sağlayıcı",
   "ProviderKey": "Anahtar",
   "ProviderKeyInputHint": "AI sağlayıcınızın kontrol panelinden oluşturulan API anahtarını girin.",

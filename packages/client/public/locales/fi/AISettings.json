@@ -23,6 +23,7 @@
   "KnowledgeSettingsDescription": "Ota käyttöön tietokanta tekoälyagenttien käyttöön. Järjestelmä indeksoi dokumenttisi {{modelName}}-mallilla, jotta voit tehdä kysymyksiin perustuvaa hakua tietojesi avulla. Tämä ominaisuus keskittyy olennaisen tiedon löytämiseen, mutta ei tuota tiivistelmiä tai suorita kokonaisvaltaista analyysiä.",
   "MCPServerAdvancedSettingsHint": "Käytä tätä osiota lisä-HTTP-otsakkeiden, kuten tunnistetietojen, välittämiseen.",
   "MCPServerDescriptionHint": "Kirjoita lyhyt selitys integraation tarkoituksesta.",
+  "MCPUnavailableError": "MCP-palvelin ei ole käytettävissä",
   "Provider": "Palveluntarjoaja",
   "ProviderKey": "Avain",
   "ProviderKeyInputHint": "Syötä API-avain, joka on luotu tekoälypalveluntarjoajasi kojelaudasta.",

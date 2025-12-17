@@ -219,11 +219,11 @@ type TOptQuota =
  * @extends TOptQuota
  */
 export type TOptSocket = {
-  featureId: string;
-  value: number;
+  featureId?: string;
+  value?: number;
   data?: string;
   type?: "folder" | "file";
-  id?: string;
+  id?: string | number;
   cmd?: "create" | "update" | "delete";
 } & TOptQuota;
 
@@ -304,7 +304,16 @@ export type TListenEventCallbackMap = {
     id: number;
     data: string;
   }) => void;
-  [SocketEvents.ExportChat]: (data: { resultFile: TFile }) => void;
+  [SocketEvents.ExportChat]: (
+    data:
+      | {
+          resultFile: TFile;
+        }
+      | {
+          resultFile: null;
+          error: string;
+        },
+  ) => void;
 };
 
 /**

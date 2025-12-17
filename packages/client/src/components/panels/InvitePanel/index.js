@@ -483,17 +483,24 @@ const InvitePanel = ({
 
     const date = getDate(expirationDate);
 
-    toastr.success(
+    const toastTranslation = date ? (
       <Trans
         t={t}
         ns="Common"
         values={{ date }}
         i18nKey="LinkExpireAfter"
         components={{ 1: <strong key="strong-expire-after" /> }}
-      />,
-      t("Common:LinkCopiedToClipboard"),
+      />
+    ) : (
+      <Trans
+        t={t}
+        ns="Common"
+        i18nKey="LinkNoExpiration"
+        components={{ 1: <strong key="strong-link-valid" /> }}
+      />
     );
 
+    toastr.success(toastTranslation, t("Common:LinkCopiedToClipboard"));
     copyShareLink(link.shareLink ?? link.url);
   };
 

@@ -102,7 +102,7 @@ export type ExpiredComboBoxProps = {
     expirationDate: moment.Moment | null,
   ) => Promise<void>;
   isDisabled?: boolean;
-  removedExpiredLink: (link: TFileLink) => void;
+  removedExpiredLink: (link: TFileLink, isReactivate: boolean) => void;
 };
 
 export type ShareProps = {

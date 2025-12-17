@@ -272,16 +272,20 @@ export const useShare = ({
     updateAccessLink();
   };
 
-  const removeLink = async (link: TFileLink) => {
+  const removeLink = async (link: TFileLink, isReactivate: boolean = false) => {
     try {
       setLoadingLinks((val) => [...val, link.sharedTo.id]);
 
       const newLink = await ShareLinkService.editLink(infoPanelSelection, {
         ...link,
-        access: ShareAccessRights.None,
+        access: isReactivate ? link.access : ShareAccessRights.None,
+        sharedTo: {
+          ...link.sharedTo,
+          expirationDate: moment().add(7, "days").toISOString(),
+        },
       });
 
-      if (link.canRevoke) {
+      if (link.canRevoke || isReactivate) {
         setLoadingLinks((prev) => prev.filter((l) => l !== link.sharedTo.id));
 
         if (newLink)
@@ -292,7 +296,8 @@ export const useShare = ({
                 : l,
             ),
           );
-        toastr.success(t("Common:GeneralLinkRevokedAndCreatedSuccessfully"));
+        if (!isReactivate)
+          toastr.success(t("Common:GeneralLinkRevokedAndCreatedSuccessfully"));
       } else {
         deleteLink(link.sharedTo.id);
         toastr.success(t("Common:LinkRemoved"));

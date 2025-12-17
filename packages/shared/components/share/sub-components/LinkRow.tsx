@@ -184,7 +184,7 @@ const LinkRow = ({
               onClick={onOpenContextMenu}
               onClose={onCloseContextMenu}
               title={t("Files:ShowLinkActions")}
-              isDisabled={isExpiredLink || isLoaded}
+              isDisabled={isLoaded}
             />
           ) : null}
         </div>

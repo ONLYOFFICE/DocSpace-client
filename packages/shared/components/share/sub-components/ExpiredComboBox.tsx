@@ -94,8 +94,8 @@ const ExpiredComboBox = ({
     changeExpirationOption(link, currentDate);
   };
 
-  const onRemoveLink = () => {
-    removedExpiredLink(link);
+  const onReactivate = () => {
+    removedExpiredLink(link, true);
   };
 
   useEffect(() => {
@@ -174,10 +174,10 @@ const ExpiredComboBox = ({
             fontWeight={400}
             fontSize="12px"
             color={globalColors.lightBlueMain}
-            onClick={onRemoveLink}
+            onClick={onReactivate}
             dataTestId="expired_combo_box_remove_link"
           >
-            {t("Common:RemoveLink")}
+            {t("Common:ReactivateLink")}
           </Link>
         </Text>
       ) : (

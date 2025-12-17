@@ -539,7 +539,6 @@
   "LinkExpireAfter": "The link will expire after <1>{{date}}</1>",
   "LinkExpired": "The link has expired.",
   "LinkHasExpired": "The link you followed has expired.",
-  "LinkHasExpiredAndHasBeenDisabled": "The link has expired and has been disabled",
   "LinkIsValid": "The link is valid for <1>{{date}}</1>",
   "LinkName": "Link name",
   "LinkNoExpiration": "The link has <1>no expiration date</1>",
@@ -776,7 +775,7 @@
   "Remove": "Remove",
   "RemovedFromList": "Removed from list",
   "RemoveFromList": "Remove from list",
-  "RemoveLink": "Remove link",
+  "ReactivateLink": "Reactivate link",
   "Rename": "Rename",
   "RenewSubscription": "Renew subscription?",
   "RepeatInvitation": "Repeat invitation",
@@ -1088,5 +1087,6 @@
   "AM": "AM",
   "PM": "PM",
   "LinkSettingsExpired": "Registration via this link is no longer available since its lifetime has expired.",
-  "LinkNoLongerAvailable": "Link no longer available"
+  "LinkNoLongerAvailable": "Link no longer available",
+  "LinkLifetimeExpired": "Access via this link is no longer available since its lifetime has expired."
 }

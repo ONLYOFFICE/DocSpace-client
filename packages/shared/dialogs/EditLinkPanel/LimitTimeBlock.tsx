@@ -48,16 +48,9 @@ const LimitTimeBlock: FC<LimitTimeBlockProps> = (props) => {
     bodyText,
   } = props;
 
-  const [hasError, setHasError] = useState(isExpired);
-
   const { t } = useTranslation(["Common"]);
 
   const onChange = (date: Nullable<moment.Moment>) => {
-    setHasError(false);
-
-    const isExpired = moment(new Date()).isAfter(moment(date));
-    if (isExpired) setHasError(true);
-
     const expired = date
       ? moment(date).toDate().getTime() <= new Date().getTime()
       : false;
@@ -72,13 +65,11 @@ const LimitTimeBlock: FC<LimitTimeBlockProps> = (props) => {
         withToggle={false}
         bodyText={bodyText}
         headerText={headerText}
+        isExpired={isExpired}
       />
     );
   }
 
-  // const minDate = new Date(new Date().getTime());
-  // minDate.setDate(new Date().getDate() - 1);
-  // minDate.setTime(minDate.getTime() + 60 * 60 * 1000);
   const minDate = moment().subtract(1, "days");
 
   return (
@@ -87,13 +78,14 @@ const LimitTimeBlock: FC<LimitTimeBlockProps> = (props) => {
         id={id}
         locale={language}
         minDate={minDate}
-        hasError={hasError}
+        hasError={false}
         onChange={onChange}
         openDate={new Date()}
         initialDate={expirationDate}
         className="public-room_date-picker"
         selectDateText={t("Common:SelectDate")}
         dataTestId="edit_link_panel_date_time_picker"
+        useMaxTime
       />
     </ToggleBlock>
   );

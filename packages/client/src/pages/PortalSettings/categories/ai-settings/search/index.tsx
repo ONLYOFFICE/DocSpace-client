@@ -241,6 +241,7 @@ const SearchComponent = ({
               displaySelectedOption
               isDisabled={!hasAIProviders || isKeyHidden}
               dataTestId="web-search-engine-combobox"
+              dropDownTestId="web-search-engine-dropdown"
             />
           </FieldContainer>
           <FieldContainer

@@ -47,6 +47,12 @@ export {
 export { aiServerHandler, PATH_AI_SERVER, aiServerPutHandler } from "./server";
 
 export {
+  PATH_AI_CONFIG_WEB_SEARCH,
+  aiWebSearchGetHandler,
+  aiWebSearchPutHandler,
+} from "./webSearch";
+
+export {
   aiServersAvailableHandler,
   PATH_AI_SERVERS_AVAILABLE,
   aiServersGetHandler,

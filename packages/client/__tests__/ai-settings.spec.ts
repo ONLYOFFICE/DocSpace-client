@@ -29,6 +29,7 @@
 import { expect, test } from "./fixtures/base";
 import { endpoints } from "@docspace/shared/__mocks__/e2e";
 import {
+  PATH_AI_CONFIG_WEB_SEARCH,
   PATH_AI_PROVIDERS,
   PATH_AI_SERVERS,
 } from "@docspace/shared/__mocks__/e2e/handlers/ai";
@@ -579,6 +580,160 @@ test.describe("AI settings", () => {
         },
         updateIcon: true,
       });
+    });
+  });
+
+  test.describe("Web Search", () => {
+    test("should render web search with disabled elements if there are no ai providers", async ({
+      page,
+      mockRequest,
+    }) => {
+      await mockRequest.router([
+        endpoints.aiProvidersEmptyList,
+        endpoints.aiWebSearchListDisabled,
+      ]);
+      await page.goto("/portal-settings/ai-settings/search");
+
+      const engineCombobox = page.getByTestId("web-search-engine-combobox");
+      await expect(engineCombobox.getByRole("button")).toBeDisabled();
+
+      const keyInput = page.getByTestId("web-search-key-input");
+      await expect(keyInput.getByTestId("text-input")).toBeDisabled();
+
+      const saveButton = page.getByTestId("web-search-save-button");
+      await expect(saveButton).toBeDisabled();
+
+      const resetButton = page.getByTestId("web-search-reset-button");
+      await expect(resetButton).toBeDisabled();
+    });
+
+    test("should render web search with enabled engine combobox if there are ai providers", async ({
+      page,
+      mockRequest,
+    }) => {
+      await mockRequest.router([
+        endpoints.aiProvidersList,
+        endpoints.aiWebSearchListDisabled,
+      ]);
+      await page.goto("/portal-settings/ai-settings/search");
+
+      const engineCombobox = page.getByTestId("web-search-engine-combobox");
+      await expect(engineCombobox.getByRole("button")).toBeEnabled();
+    });
+
+    test("should set web search settings", async ({ page, mockRequest }) => {
+      await mockRequest.router([
+        endpoints.aiProvidersList,
+        endpoints.aiWebSearchListDisabled,
+        endpoints.setWebSearchSettings,
+      ]);
+      await page.goto("/portal-settings/ai-settings/search");
+
+      const keyInput = page
+        .getByTestId("web-search-key-input")
+        .getByTestId("text-input");
+      await expect(keyInput).toBeDisabled();
+
+      const saveButton = page.getByTestId("web-search-save-button");
+      await expect(saveButton).toBeDisabled();
+
+      const resetButton = page.getByTestId("web-search-reset-button");
+      await expect(resetButton).toBeDisabled();
+
+      const engineCombobox = page.getByTestId("web-search-engine-combobox");
+      await engineCombobox.click();
+
+      const engineDropdown = page.getByTestId("web-search-engine-dropdown");
+      await expect(engineDropdown).toBeVisible();
+
+      const exaOption = page.getByTestId("drop_down_item_1");
+      await exaOption.click();
+
+      await expect(keyInput).toBeEnabled();
+
+      await keyInput.fill("123");
+
+      await expect(saveButton).toBeEnabled();
+
+      const reqPromise = page.waitForRequest(
+        (r) =>
+          r.url().endsWith(PATH_AI_CONFIG_WEB_SEARCH) && r.method() === "PUT",
+      );
+
+      await saveButton.click();
+
+      const req = await reqPromise;
+      const payload = req.postDataJSON();
+
+      expect(payload).toEqual({
+        enabled: true,
+        type: 1,
+        key: "123",
+      });
+
+      const keyHiddenBanner = page.getByTestId("web-search-key-hidden-banner");
+      await expect(keyHiddenBanner).toBeVisible();
+
+      await expect(saveButton).toBeDisabled();
+
+      await expect(engineCombobox.getByRole("button")).toBeDisabled();
+
+      await expect(keyInput).toHaveCount(0);
+
+      await expect(resetButton).toBeEnabled();
+    });
+
+    test("should reset web search settings", async ({ page, mockRequest }) => {
+      await mockRequest.router([
+        endpoints.aiProvidersList,
+        endpoints.aiWebSearchListEnabled,
+        endpoints.setWebSearchSettings,
+      ]);
+      await page.goto("/portal-settings/ai-settings/search");
+
+      const keyHiddenBanner = page.getByTestId("web-search-key-hidden-banner");
+      await expect(keyHiddenBanner).toBeVisible();
+
+      const keyInput = page
+        .getByTestId("web-search-key-input")
+        .getByTestId("text-input");
+      await expect(keyInput).toHaveCount(0);
+
+      const engineCombobox = page.getByTestId("web-search-engine-combobox");
+      await expect(engineCombobox.getByRole("button")).toBeDisabled();
+
+      const resetButton = page.getByTestId("web-search-reset-button");
+      await expect(resetButton).toBeEnabled();
+
+      await resetButton.click();
+
+      const resetDialog = page.getByRole("dialog");
+      await expect(resetDialog).toBeVisible();
+
+      const reqPromise = page.waitForRequest(
+        (r) =>
+          r.url().endsWith(PATH_AI_CONFIG_WEB_SEARCH) && r.method() === "PUT",
+      );
+
+      const resetDialogConfirmButton = resetDialog.getByTestId("reset-button");
+      await resetDialogConfirmButton.click();
+
+      const req = await reqPromise;
+      const payload = req.postDataJSON();
+
+      expect(payload).toEqual({
+        enabled: false,
+        type: 0,
+        key: "",
+      });
+
+      await expect(keyHiddenBanner).toHaveCount(0);
+
+      await expect(keyInput).toBeVisible();
+
+      await expect(engineCombobox.getByRole("button")).toBeEnabled();
+
+      await expect(resetButton).toBeDisabled();
     });
   });
 });

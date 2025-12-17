@@ -165,6 +165,9 @@ import {
   PATH_AI_SERVERS,
   aiServersDeleteHandler,
   aiServerPutHandler,
+  PATH_AI_CONFIG_WEB_SEARCH,
+  aiWebSearchGetHandler,
+  aiWebSearchPutHandler,
 } from "./ai";
 import { PATH_TAGS, roomTagsHandler } from "./rooms";
 import {
@@ -480,6 +483,19 @@ export const endpoints = {
   updateAiServer: {
     url: `${BASE_URL}${PATH_AI_SERVER}`,
     dataHandler: aiServerPutHandler,
+    method: "PUT",
+  },
+  aiWebSearchListEnabled: {
+    url: `${BASE_URL}${PATH_AI_CONFIG_WEB_SEARCH}`,
+    dataHandler: () => aiWebSearchGetHandler("enabled"),
+  },
+  aiWebSearchListDisabled: {
+    url: `${BASE_URL}${PATH_AI_CONFIG_WEB_SEARCH}`,
+    dataHandler: () => aiWebSearchGetHandler("disabled"),
+  },
+  setWebSearchSettings: {
+    url: `${BASE_URL}${PATH_AI_CONFIG_WEB_SEARCH}`,
+    dataHandler: aiWebSearchPutHandler,
     method: "PUT",
   },
   additionalSettings: {

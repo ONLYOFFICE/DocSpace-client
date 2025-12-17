@@ -444,10 +444,10 @@ export type TDocEditor = {
   startFilling?: VoidFunction;
   requestRoles?: VoidFunction;
   setFavorite?: (favorite: boolean) => void;
-  createConnector?: () => TDocEditorConnector;
+  createConnector?: () => TEditorConnector;
 };
 
-export type TDocEditorConnector = {
+export type TEditorConnector = {
   attachEvent: (id: string, action: (...args: unknown[]) => void) => void;
   sendEvent: (name: string, data?: string | object | unknown[]) => void;
   executeMethod: (
@@ -521,4 +521,12 @@ export type ConflictStateType = {
 export type TFormRole = {
   name: string;
   color: string;
+};
+
+export type TEditorAIEvent = {
+  id: string;
+  type: string;
+  url: string;
+  streaming: boolean;
+  options: RequestInit & { headers: Record<string, string> };
 };

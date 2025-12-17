@@ -47,6 +47,9 @@ import {
   TGetReferenceData,
   TSharedUsers,
 } from "@docspace/shared/api/files/types";
+import { getProviders } from "@docspace/shared/api/ai";
+import { ProviderType } from "@docspace/shared/api/ai/enums";
+import { TAiProvider } from "@docspace/shared/api/ai/types";
 import { EDITOR_ID, FILLING_STATUS_ID } from "@docspace/shared/constants";
 import {
   assign,
@@ -75,9 +78,10 @@ import {
   TEvent,
   THistoryData,
   UseEventsProps,
+  TEditorAIEvent,
 } from "@/types";
 import { onSDKInfo } from "@/utils/events";
-import initProxy from "@/utils/aiProxy";
+import externalAIFetch from "@/utils/aiProxy";
 
 let docEditor: TDocEditor | null = null;
 
@@ -235,7 +239,7 @@ const useEditorEvents = ({
     }
   }, [config?.Error, errorMessage, isSkipError, searchParams, t, fixSize]);
 
-  const onDocumentReady = React.useCallback(() => {
+  const onDocumentReady = React.useCallback(async () => {
     // console.log("onDocumentReady", { docEditor });
     setDocumentReady(true);
 
@@ -253,9 +257,31 @@ const useEditorEvents = ({
     //   loadUsersRightsList(docEditor);
     // }
 
-    const product = t("Common:ProductName");
+    const connector = docEditor?.createConnector?.();
 
-    initProxy(docEditor, product);
+    if (connector) {
+      const providers = await getProviders();
+      const openAIProvider = providers.find(
+        (provider: TAiProvider) =>
+          provider.type === ProviderType.OpenAi && !provider.needReset,
+      );
+
+      if (openAIProvider) {
+        const providerName = t("Common:ProductName");
+        const sendProviders = () =>
+          connector.sendEvent("ai_onCustomProviders", [{ name: providerName }]);
+
+        connector.executeMethod("AI", [{ type: "Actions" }], (data) => {
+          if (data && typeof data === "object" && "error" in data && data.error)
+            connector.attachEvent("ai_onInit", sendProviders);
+          else sendProviders();
+        });
+
+        connector.attachEvent("ai_onExternalFetch", (e: unknown) =>
+          externalAIFetch(connector, e as TEditorAIEvent, openAIProvider.id),
+        );
+      }
+    }
 
     if (docEditor) {
       // console.log("call assign for asc files editor doceditor");

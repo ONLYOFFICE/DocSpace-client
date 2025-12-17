@@ -24,104 +24,93 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TDocEditor } from "@/types";
-import { getProviders, getModels } from "@docspace/shared/api/ai";
-import { ProviderType } from "@docspace/shared/api/ai/enums";
-import type { TAiProvider } from "@docspace/shared/api/ai/types";
+import type { TEditorConnector, TEditorAIEvent } from "@/types";
+import { getCookie } from "@docspace/shared/utils";
 
-const getProviderTypeString = (type: ProviderType): string => {
-  switch (type) {
-    case ProviderType.OpenAi:
-      return "openai";
-    case ProviderType.TogetherAi:
-      return "togetherai";
-    case ProviderType.OpenAiCompatible:
-      return "openaicompatible";
-    case ProviderType.Anthropic:
-      return "anthropic";
-    case ProviderType.OpenRouter:
-      return "openrouter";
-    default:
-      return "openai";
+const requests: Record<string, AbortController> = {};
+
+const sendEvent = (
+  connector: TEditorConnector,
+  data: Record<string, unknown>,
+) => connector.sendEvent("ai_onExternalFetch", data);
+
+const streamResponse = async (
+  connector: TEditorConnector,
+  id: string,
+  body: ReadableStream<Uint8Array>,
+) => {
+  const reader = body.getReader();
+  const decoder = new TextDecoder();
+
+  for (;;) {
+    const { value, done } = await reader.read();
+
+    if (done) break;
+
+    if (value)
+      sendEvent(connector, { type: "chunk", id, chunk: decoder.decode(value) });
+  }
+
+  sendEvent(connector, { type: "end", id });
+};
+
+const externalAIFetch = async (
+  connector: TEditorConnector,
+  e: TEditorAIEvent,
+  providerId: number,
+) => {
+  const { id, type, url, options, streaming } = e;
+
+  if (type === "abort") {
+    requests[id]?.abort();
+    delete requests[id];
+    return;
+  }
+
+  const controller = new AbortController();
+  requests[id] = controller;
+
+  try {
+    const authToken = getCookie("asc_auth_key");
+    const result = await fetch(
+      url.replace("[external]", `/api/2.0/ai/openai/${providerId}/v1`),
+      {
+        ...options,
+        signal: controller.signal,
+        headers: {
+          ...options.headers,
+          ...(authToken && { Authorization: authToken }),
+        },
+      },
+    );
+
+    const headers = Object.fromEntries(result.headers.entries());
+
+    sendEvent(connector, {
+      type: "response",
+      id,
+      status: result.status,
+      headers,
+    });
+
+    if (streaming) {
+      if (!result.body) throw new Error("Response body is null");
+
+      await streamResponse(connector, id, result.body);
+    } else {
+      sendEvent(connector, {
+        type: "response",
+        id,
+        status: result.status,
+        headers,
+        body: await result.text(),
+      });
+    }
+  } catch (err) {
+    sendEvent(connector, { type: "error", id, error: String(err) });
+  } finally {
+    delete requests[id];
   }
 };
 
-const initProxy = async (docEditor: TDocEditor | null, product: string) => {
-  if (!docEditor) return;
-
-  const portalProviders = await getProviders();
-
-  if (!portalProviders) return;
-
-  if (!window.ClientConfig?.api) return;
-
-  const { origin, prefix } = window.ClientConfig.api;
-
-  const providers = await Promise.all(
-    portalProviders.map(async ({ id, title, type }: TAiProvider) => {
-      const models = await getModels(id);
-      const providerType = getProviderTypeString(type);
-      const baseProxyUrlTemplate = `${origin}${prefix}/ai/${providerType}/${id}`;
-      const modelsList = models?.map((model) => model.modelId) || [];
-      const providerName = product !== "" ? `${product} [${title}]` : title;
-
-      return {
-        name: providerName,
-        url: baseProxyUrlTemplate,
-        key: "",
-        addon: "v1",
-        models: modelsList,
-      };
-    }),
-  );
-
-  const connector = docEditor.createConnector?.();
-
-  const modelName = `${providers[0].name} [${providers[0].models[0]}]`;
-
-  const pluginSettings = {
-    settingsLock: undefined,
-    actionsOverride: true,
-    actions: {
-      Chat: {
-        model: modelName,
-        capabilities: 1,
-      },
-      Summarization: {
-        model: modelName,
-        capabilities: 1,
-      },
-      Translation: {
-        model: modelName,
-        capabilities: 1,
-      },
-      TextAnalyze: {
-        model: modelName,
-        capabilities: 1,
-      },
-    },
-    providers,
-    models: [
-      {
-        capabilities: 1,
-        provider: providers[0].name,
-        name: modelName,
-        id: providers[0].models[0],
-      },
-    ],
-  };
-
-  connector?.executeMethod("AI", [{ type: "Actions" }], (data) => {
-    if (data && typeof data === "object" && "error" in data && data.error) {
-      connector?.attachEvent("ai_onInit", () => {
-        setTimeout(() => {
-          connector?.sendEvent("ai_onCustomInit", pluginSettings);
-        }, 200);
-      });
-    } else {
-      connector?.sendEvent("ai_onCustomInit", pluginSettings);
-    }
-  });
-};
-
-export default initProxy;
+export default externalAIFetch;

@@ -34,6 +34,7 @@ export const PATH = "people";
 export const PATH_CHANGE_AUTH_DATA = "people/**/password";
 export const PATH_ACTIVATION_STATUS = "people/activationstatus/*";
 export const PATH_UPDATE_USER = "people/*";
+export const PATH_UPDATE_USER_CULTURE = "people/*/culture";
 export const PATH_DELETE_USER = "people/@self";
 export const PATH_USER_BY_EMAIL = "people/email?email=**";
 export const PATH_ADD_GUEST = "people/guests/share/approve";
@@ -80,7 +81,7 @@ export const usersSuccess = {
 };
 
 export const usersSuccessForClient = {
-  response: {...successSelf, activationStatus:1 },
+  response: { ...successSelf, activationStatus: 1 },
 };
 
 export const selfError404 = {
@@ -120,8 +121,19 @@ export const self = (
     return new Response(JSON.stringify(selfError400));
 
   if (isEmailActivated) {
-    return new Response(JSON.stringify(isClient ? usersSuccessForClient : usersSuccess));
+    return new Response(
+      JSON.stringify(isClient ? usersSuccessForClient : usersSuccess),
+    );
   }
 
   return new Response(JSON.stringify({ response: successSelf }));
+};
+
+export const updateUserCultureHandler = (cultureName: string) => {
+  const data = {
+    ...successSelf,
+    cultureName,
+  };
+
+  return new Response(JSON.stringify({ response: data }));
 };

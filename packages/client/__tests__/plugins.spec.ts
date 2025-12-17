@@ -218,4 +218,215 @@ test.describe("Plugins", () => {
     await expect(versionBadge).toBeVisible();
     await expect(versionBadge).toContainText("1.1.0");
   });
+
+  test("should display and change plugin localization on az locale", async ({
+    page,
+    mockRequest,
+  }) => {
+    // Load plugin with locale support
+    await mockRequest.router([endpoints.webPluginsWithLocale]);
+
+    await page.goto("/portal-settings/integration/plugins");
+
+    // Check initial plugin display (English by default)
+    const plugin = page.getByTestId("plugin_archives.zip");
+    await expect(plugin).toBeVisible();
+
+    // Verify English name and description
+    await expect(
+      plugin.getByRole("heading", { name: "archives.zip" }),
+    ).toBeVisible();
+    await expect(
+      plugin.getByText("Plugin for working with archives"),
+    ).toBeVisible();
+
+    // Open plugin settings to check settings localization
+    const settingsButton = plugin.getByTestId("open_settings_icon_button");
+    await expect(settingsButton).toBeVisible();
+    await settingsButton.click();
+
+    // Verify settings dialog shows English text
+    const settingsDescription = page.getByTestId("settings_plugin_description");
+    await expect(settingsDescription).toBeVisible();
+    await expect(
+      settingsDescription.getByText("Plugin for working with archives"),
+    ).toBeVisible();
+
+    // Navigate to profile to change language
+    await mockRequest.router([endpoints.updateUserCultureAz]);
+    await page.goto("/portal-settings/profile/login");
+
+    // Find and click language selector
+    const languageSelector = page.getByTestId("language_combo_box").first();
+    await expect(languageSelector).toBeVisible();
+    await languageSelector.click();
+
+    await page.getByTestId("drop_down_item_az").first().click();
+    await page.locator("#portal-settings_catalog-integration").click();
+
+    await mockRequest.router([endpoints.webPluginsWithLocale]);
+    await page.getByTestId("plugins_tab").click();
+
+    const pluginAz = page.getByTestId("plugin_archives.zip");
+    await expect(pluginAz).toBeVisible();
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "plugins",
+      "plugins-locale-az.png",
+    ]);
+
+    await settingsButton.click();
+    await expect(settingsDescription).toBeVisible();
+
+    await page.evaluate(() => {
+      const dateText = document.querySelector(
+        "[data-testid='plugin_upload_date_text']",
+      ) as HTMLDivElement;
+
+      dateText.style.display = "none";
+    });
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "plugins",
+      "plugins-locale-az-settings.png",
+    ]);
+  });
+
+  test("should display and change plugin localization on de locale", async ({
+    page,
+    mockRequest,
+  }) => {
+    await mockRequest.router([endpoints.webPluginsWithLocale]);
+
+    await page.goto("/portal-settings/integration/plugins");
+
+    const plugin = page.getByTestId("plugin_archives.zip");
+    await expect(plugin).toBeVisible();
+
+    await expect(
+      plugin.getByRole("heading", { name: "archives.zip" }),
+    ).toBeVisible();
+    await expect(
+      plugin.getByText("Plugin for working with archives"),
+    ).toBeVisible();
+
+    const settingsButton = plugin.getByTestId("open_settings_icon_button");
+    await expect(settingsButton).toBeVisible();
+    await settingsButton.click();
+
+    const settingsDescription = page.getByTestId("settings_plugin_description");
+    await expect(settingsDescription).toBeVisible();
+    await expect(
+      settingsDescription.getByText("Plugin for working with archives"),
+    ).toBeVisible();
+
+    await mockRequest.router([endpoints.updateUserCultureDe]);
+    await page.goto("/portal-settings/profile/login");
+
+    const languageSelector = page.getByTestId("language_combo_box").first();
+    await expect(languageSelector).toBeVisible();
+    await languageSelector.click();
+
+    await page.getByTestId("drop_down_item_de").first().click();
+    await page.locator("#portal-settings_catalog-integration").click();
+
+    await mockRequest.router([endpoints.webPluginsWithLocale]);
+    await page.getByTestId("plugins_tab").click();
+
+    const pluginDe = page.getByTestId("plugin_archives.zip");
+    await expect(pluginDe).toBeVisible();
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "plugins",
+      "plugins-locale-de.png",
+    ]);
+
+    await settingsButton.click();
+    await expect(settingsDescription).toBeVisible();
+
+    await page.evaluate(() => {
+      const dateText = document.querySelector(
+        "[data-testid='plugin_upload_date_text']",
+      ) as HTMLDivElement;
+
+      dateText.style.display = "none";
+    });
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "plugins",
+      "plugins-locale-de-settings.png",
+    ]);
+  });
+
+  test("should display en as fallback locale", async ({
+    page,
+    mockRequest,
+  }) => {
+    await mockRequest.router([endpoints.webPluginsWithLocale]);
+
+    await page.goto("/portal-settings/integration/plugins");
+
+    const plugin = page.getByTestId("plugin_archives.zip");
+    await expect(plugin).toBeVisible();
+
+    await expect(
+      plugin.getByRole("heading", { name: "archives.zip" }),
+    ).toBeVisible();
+    await expect(
+      plugin.getByText("Plugin for working with archives"),
+    ).toBeVisible();
+
+    const settingsButton = plugin.getByTestId("open_settings_icon_button");
+    await expect(settingsButton).toBeVisible();
+    await settingsButton.click();
+
+    const settingsDescription = page.getByTestId("settings_plugin_description");
+    await expect(settingsDescription).toBeVisible();
+    await expect(
+      settingsDescription.getByText("Plugin for working with archives"),
+    ).toBeVisible();
+
+    await mockRequest.router([endpoints.updateUserCultureLv]);
+    await page.goto("/portal-settings/profile/login");
+
+    const languageSelector = page.getByTestId("language_combo_box").first();
+    await expect(languageSelector).toBeVisible();
+    await languageSelector.click();
+
+    await page.getByTestId("drop_down_item_lv").first().click();
+    await page.locator("#portal-settings_catalog-integration").click();
+
+    await mockRequest.router([endpoints.webPluginsWithLocale]);
+    await page.getByTestId("plugins_tab").click();
+
+    const pluginEn = page.getByTestId("plugin_archives.zip");
+    await expect(pluginEn).toBeVisible();
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "plugins",
+      "plugins-fallback-locale-en.png",
+    ]);
+
+    await settingsButton.click();
+    await expect(settingsDescription).toBeVisible();
+
+    await page.evaluate(() => {
+      const dateText = document.querySelector(
+        "[data-testid='plugin_upload_date_text']",
+      ) as HTMLDivElement;
+
+      dateText.style.display = "none";
+    });
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "plugins",
+      "plugins-fallback-locale-en-settings.png",
+    ]);
+  });
 });

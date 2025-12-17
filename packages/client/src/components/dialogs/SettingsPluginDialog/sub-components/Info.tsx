@@ -104,7 +104,12 @@ const Info = ({ t, plugin, withDelete, withSeparator }: InfoProps) => {
             <Text fontSize="13px" fontWeight={400} lineHeight="20px" truncate>
               {t("Common:Uploader")}
             </Text>
-            <Text fontSize="13px" fontWeight={600} lineHeight="20px">
+            <Text
+              dataTestId="plugin_create_by"
+              fontSize="13px"
+              fontWeight={600}
+              lineHeight="20px"
+            >
               {plugin.createBy.displayName}
             </Text>
           </>
@@ -121,7 +126,12 @@ const Info = ({ t, plugin, withDelete, withSeparator }: InfoProps) => {
             >
               {t("Common:UploadDate")}
             </Text>
-            <Text fontSize="13px" fontWeight={600} lineHeight="20px">
+            <Text
+              dataTestId="plugin_upload_date_text"
+              fontSize="13px"
+              fontWeight={600}
+              lineHeight="20px"
+            >
               {uploadDate}
             </Text>
           </>
@@ -158,7 +168,12 @@ const Info = ({ t, plugin, withDelete, withSeparator }: InfoProps) => {
             <Text fontSize="13px" fontWeight={400} lineHeight="20px" truncate>
               {t("Common:Description")}
             </Text>
-            <Text fontSize="13px" fontWeight={600} lineHeight="20px">
+            <Text
+              dataTestId="settings_plugin_description"
+              fontSize="13px"
+              fontWeight={600}
+              lineHeight="20px"
+            >
               {plugin.descriptionLocale}
             </Text>
           </>

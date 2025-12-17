@@ -131,7 +131,11 @@ import {
   HEADER_PLUGINS_SETTINGS,
   HEADER_ROOMS_LIST,
 } from "../utils";
-import { PATH_DELETE_USER } from "./people/self";
+import {
+  PATH_DELETE_USER,
+  PATH_UPDATE_USER_CULTURE,
+  updateUserCultureHandler,
+} from "./people/self";
 import { aiConfigHandler, PATH_AI_CONFIG } from "./ai/config";
 import {
   LINK_FILE_PATH,
@@ -173,6 +177,18 @@ export const endpoints = {
   updateUser: {
     url: `${BASE_URL}${SELF_PATH_UPDATE_USER}`,
     dataHandler: selfHandler,
+  },
+  updateUserCultureAz: {
+    url: `${BASE_URL}${PATH_UPDATE_USER_CULTURE}`,
+    dataHandler: () => updateUserCultureHandler("az"),
+  },
+  updateUserCultureDe: {
+    url: `${BASE_URL}${PATH_UPDATE_USER_CULTURE}`,
+    dataHandler: () => updateUserCultureHandler("de"),
+  },
+  updateUserCultureLv: {
+    url: `${BASE_URL}${PATH_UPDATE_USER_CULTURE}`,
+    dataHandler: () => updateUserCultureHandler("lv"),
   },
   removeUser: {
     url: `${BASE_URL}${SELF_PATH_DELETE_USER}`,
@@ -381,12 +397,17 @@ export const endpoints = {
   },
   webPlugins: {
     url: `${BASE_URL}${PATH_WEB_PLUGINS}`,
-    dataHandler: webPluginsHandler,
+    dataHandler: () => webPluginsHandler("empty"),
     method: "GET",
   },
   webPluginsWithData: {
     url: `${BASE_URL}${PATH_WEB_PLUGINS}`,
-    dataHandler: webPluginsHandler.bind(null, "withData"),
+    dataHandler: () => webPluginsHandler("withData"),
+    method: "GET",
+  },
+  webPluginsWithLocale: {
+    url: `${BASE_URL}${PATH_WEB_PLUGINS}`,
+    dataHandler: () => webPluginsHandler("withLocale"),
     method: "GET",
   },
   webPluginsAdd: {

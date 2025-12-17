@@ -35,6 +35,7 @@ import AvatarDarkReactSvgUrl from "PUBLIC_DIR/images/avatar.dark.react.svg?url";
 
 import RoleHistories from "../role-histories/RoleHistories";
 import { useTheme } from "../../../../hooks/useTheme";
+import { TooltipContainer } from "../../../../components/tooltip";
 
 import styles from "./RoleStep.module.scss";
 import type { RoleStepProps } from "./RoleStep.types";
@@ -87,9 +88,9 @@ const RoleStep = ({
             alt={user.userName}
           />
         </picture>
-        <h5 title={roleName} className={styles.roleTitle}>
+        <TooltipContainer as="h5" title={roleName} className={styles.roleTitle}>
           {roleName}
-        </h5>
+        </TooltipContainer>
         <p className={styles.userName}>
           {userName}{" "}
           {currentUserId === user.id ? `(${t("Common:MeLabel")})` : null}

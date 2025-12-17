@@ -12,7 +12,6 @@
   "EmptyResultsViewerDescription": "一旦可用，您将在此处看到来自其他用户的 AI 聊天活动结果。",
   "InstructionsDescriptionAgent": "描述 AI 智能体的行为和回复方式。定义其角色、语气和主要任务。",
   "InstructionsDescriptionAgentExample": "示例：“您是一位 AI 公关助理，负责撰写和编辑新闻稿。请保持专业、自信且媒体友好的语气。清晰突出关键信息，避免使用术语，并保持文本简洁明了且引人入胜。”",
-  "Knowledge": "知识库",
   "KnowledgeDescription": "从您的计算机或{{productName}}上传文件，为对话提供上下文。注意：部分或全部上传内容可能会在对话期间显示。",
   "KnowledgeSelectIn": "在{{productName}}中选择",
   "KnowledgeUnavailable": "知识库不可用",

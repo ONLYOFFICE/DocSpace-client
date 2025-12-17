@@ -29,7 +29,7 @@ import { ButtonSize } from "./Button.enums";
 
 type BaseButtonProps = {
   /** Ref to access the DOM element or React component instance */
-  ref?: React.Ref<HTMLButtonElement>;
+  ref?: React.Ref<HTMLElement>;
   /** Button text */
   label: string;
   /** Optional title attribute */
@@ -64,7 +64,7 @@ type BaseButtonProps = {
   /** Sets the minimal button width */
   minWidth?: string;
   /** Sets the action initiated upon clicking the button */
-  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onClick?: (e: React.MouseEvent<HTMLElement>) => void;
   /** HTML button type attribute */
   type?: HTMLButtonElement["type"];
   /** HTML data-testid attribute */

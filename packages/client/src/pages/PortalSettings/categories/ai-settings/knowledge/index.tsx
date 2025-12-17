@@ -54,7 +54,7 @@ type TKnowledgeProps = {
   hasAIProviders?: AISettingsStore["hasAIProviders"];
   getAIConfig?: SettingsStore["getAIConfig"];
   aiConfig?: SettingsStore["aiConfig"];
-  aiSettingsUrl?: string;
+  knowledgeSettingsUrl?: SettingsStore["knowledgeSettingsUrl"];
 };
 
 const FAKE_KEY_VALUE = "0000000000000000";
@@ -66,7 +66,7 @@ const KnowledgeComponent = ({
   hasAIProviders,
   getAIConfig,
   aiConfig,
-  aiSettingsUrl,
+  knowledgeSettingsUrl,
 }: TKnowledgeProps) => {
   const { t } = useTranslation(["Common", "AISettings", "AIRoom", "Settings"]);
 
@@ -258,14 +258,14 @@ const KnowledgeComponent = ({
             modelName: aiConfig?.embeddingModel || "text-embedding-3-small",
           })}
         </Text>
-        {aiSettingsUrl ? (
+        {knowledgeSettingsUrl ? (
           <Link
             className={generalStyles.learnMoreLink}
             target={LinkTarget.blank}
             type={LinkType.page}
             fontWeight={600}
             isHovered
-            href={aiSettingsUrl}
+            href={knowledgeSettingsUrl}
             color="accent"
           >
             {t("Common:LearnMore")}
@@ -370,7 +370,7 @@ export const Knowledge = inject(
       hasAIProviders: aiSettingsStore.hasAIProviders,
       getAIConfig: settingsStore.getAIConfig,
       aiConfig: settingsStore.aiConfig,
-      aiSettingsUrl: settingsStore.aiSettingsUrl,
+      knowledgeSettingsUrl: settingsStore.knowledgeSettingsUrl,
     };
   },
 )(observer(KnowledgeComponent));

@@ -62,6 +62,8 @@ class SecondaryProgressDataStore {
   }
 
   showToast = async (currentOperation, operation, isSuccess = true) => {
+    if (currentOperation?.canceled) return;
+
     if (
       operation !== OPERATIONS_NAME.copy &&
       operation !== OPERATIONS_NAME.duplicate &&
@@ -271,6 +273,35 @@ class SecondaryProgressDataStore {
       : toastr.error(toastTranslation, null, 0, true);
   };
 
+  cancelOperation = (operation) => {
+    if (!operation) return;
+
+    const operationIndex = this.secondaryOperationsArray.findIndex(
+      (object) => object.operation === operation,
+    );
+
+    if (operationIndex === -1) return;
+
+    const operationObject = this.secondaryOperationsArray[operationIndex];
+
+    const updatedItems = operationObject.items.map((item) => ({
+      ...item,
+      completed: true,
+      alert: false,
+      canceled: true,
+    }));
+
+    this.secondaryOperationsArray[operationIndex] = {
+      ...operationObject,
+      alert: false,
+      completed: true,
+      percent: 100,
+      items: updatedItems,
+    };
+
+    toastr.success(i18n.t("Common:OperationCanceled", { ns: "Common" }));
+  };
+
   setSecondaryProgressBarData = (secondaryProgressData) => {
     const { operation, ...progressInfo } = secondaryProgressData;
 
@@ -301,13 +332,42 @@ class SecondaryProgressDataStore {
 
       const isCompleted = updatedItems.every((item) => item.completed);
 
-      const cuttentOperation = updatedItems[itemIndex];
+      const existingItem =
+        itemIndex !== -1 ? operationObject.items[itemIndex] : null;
 
-      if (progressInfo.completed && !progressInfo.alert) {
-        this.showToast(cuttentOperation, operation);
+      if (existingItem?.canceled) {
+        this.secondaryOperationsArray[operationIndex] = {
+          ...operationObject,
+          alert: false,
+          items: updatedItems.map((it) => ({ ...it, alert: false })),
+          completed: true,
+          percent: 100,
+        };
+        return;
       }
-      if (progressInfo.completed && progressInfo.alert) {
-        this.showToast(cuttentOperation, operation, false);
+
+      const currentOperation = updatedItems[itemIndex];
+
+      if (progressInfo.completed && progressInfo.canceled) {
+        this.secondaryOperationsArray[operationIndex] = {
+          ...operationObject,
+          alert: false,
+          items: updatedItems.map((it) => ({
+            ...it,
+            alert: false,
+            canceled: true,
+          })),
+          completed: true,
+          percent: 100,
+        };
+        return;
+      } else {
+        if (progressInfo.completed && !progressInfo.alert) {
+          this.showToast(currentOperation, operation);
+        }
+        if (progressInfo.completed && progressInfo.alert) {
+          this.showToast(currentOperation, operation, false);
+        }
       }
       this.secondaryOperationsArray[operationIndex] = {
         ...operationObject,

@@ -192,6 +192,8 @@ class UploadDataStore {
       }
       this.copyOperationId = null;
     }
+
+    this.secondaryProgressDataStore.cancelOperation(OPERATIONS_NAME.copy);
   };
 
   abortMove = async () => {
@@ -203,6 +205,8 @@ class UploadDataStore {
       }
       this.moveOperationId = null;
     }
+
+    this.secondaryProgressDataStore.cancelOperation(OPERATIONS_NAME.move);
   };
 
   removeFiles = (fileIds) => {

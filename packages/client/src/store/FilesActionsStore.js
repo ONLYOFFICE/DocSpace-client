@@ -911,6 +911,10 @@ class FilesActionStore {
       }
       this.downloadFilesOperationId = null;
     }
+
+    this.uploadDataStore.secondaryProgressDataStore.cancelOperation(
+      OPERATIONS_NAME.download,
+    );
   };
 
   abortDuplicate = async () => {
@@ -922,6 +926,10 @@ class FilesActionStore {
       }
       this.duplicateFilesOperationId = null;
     }
+
+    this.uploadDataStore.secondaryProgressDataStore.cancelOperation(
+      OPERATIONS_NAME.duplicate,
+    );
   };
 
   downloadAction = (label, item) => {

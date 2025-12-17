@@ -48,6 +48,7 @@ import { DeleteMCPDialog } from "./dialogs/delete";
 import { DisableMCPDialog } from "./dialogs/disable";
 import { EditMCPDialog } from "./dialogs/edit";
 import { MCPTile } from "./mcp-tile";
+import { ServersLoader } from "./ServersLoader";
 
 type MCPListProps = {
   showHeading: boolean;
@@ -218,26 +219,7 @@ const MCPServersComponent = ({
     });
   };
 
-  if (!mcpServersInitied)
-    return (
-      <div className={styles.mcpServers}>
-        <RectangleSkeleton
-          className={styles.description}
-          width="700px"
-          height="54px"
-        />
-        <RectangleSkeleton
-          className={styles.learnMoreLink}
-          width="100px"
-          height="19px"
-        />
-        <RectangleSkeleton
-          className={styles.addProviderButton}
-          width="158px"
-          height="32px"
-        />
-      </div>
-    );
+  if (!mcpServersInitied) return <ServersLoader />;
 
   return (
     <div className={styles.mcpServers}>
@@ -340,3 +322,5 @@ export const MCPServers = inject(
     };
   },
 )(observer(MCPServersComponent));
+
+export { ServersLoader };

@@ -102,6 +102,7 @@ import { checkIsSSR } from "./device";
 import { hasOwnProperty } from "./object";
 import { TFrameConfig } from "../types/Frame";
 import { isFile, isFolder } from "./typeGuards";
+import { getUserTypeDescriptionClient } from "./getUserTypeDescription";
 
 export const desktopConstants = Object.freeze({
   domain: !checkIsSSR() && window.location.origin,
@@ -1325,20 +1326,12 @@ export const getUserTypeDescription = (
   isCollaborator: boolean,
   t: TTranslation,
 ) => {
-  if (isPortalAdmin)
-    return t("Common:RolePortalAdminDescription", {
-      productName: t("Common:ProductName"),
-      sectionName: t("Common:MyDocuments"),
-    });
-
-  if (isRoomAdmin)
-    return t("Common:RoleRoomAdminDescription", {
-      sectionName: t("Common:MyDocuments"),
-    });
-
-  if (isCollaborator) return t("Common:RoleNewUserDescription");
-
-  return t("Translations:RoleGuestDescriprion");
+  return getUserTypeDescriptionClient(
+    isPortalAdmin,
+    isRoomAdmin,
+    isCollaborator,
+    t,
+  );
 };
 
 export function setLanguageForUnauthorized(

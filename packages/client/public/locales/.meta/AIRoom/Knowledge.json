@@ -1,13 +1,13 @@
 {
   "key_path": "Knowledge",
-  "content": "Knowledge",
-  "content_en_sha1_hash": "dec1fccaba73443d77f5cfc48dacf9d496399f53",
-  "created_at": "2025-10-27T16:14:31.668Z",
-  "updated_at": "2025-12-11T16:07:35.951Z",
+  "content": "Knowledge base",
+  "content_en_sha1_hash": "70cd2e748fd8d867b9e8c7a55f97c1f3930136f7",
+  "created_at": "2025-12-17T07:49:06.312Z",
+  "updated_at": "2025-12-17T07:52:12.796Z",
   "comment": {
-    "text": "This key refers to the label \"Knowledge,\" likely representing a setting or section related to knowledge management or AI room settings within dialogs and tabs. It appears in UI components like dialogs and tabs, probably used to identify a relevant configuration area. Consider it a general term for knowledge-related functionality.",
+    "text": "This key refers to the \"Knowledge\" section within the AI Room settings, likely related to managing or accessing a knowledge base. It appears in the Portal Settings and is used to set the current tab to the knowledge section. Translators should ensure the term conveys a collection of information or resources.",
     "is_auto": true,
-    "updated_at": "2025-10-27T17:04:00.229Z"
+    "updated_at": "2025-12-17T07:52:12.796Z"
   },
   "usage": [
     {

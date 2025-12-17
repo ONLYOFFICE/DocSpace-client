@@ -3,7 +3,7 @@
   "content": "Shared with me",
   "content_en_sha1_hash": "f40ca84f04474455cba711b1643a006b59aa1210",
   "created_at": "2025-05-19T21:30:48.661Z",
-  "updated_at": "2025-11-13T07:58:08.133Z",
+  "updated_at": "2025-12-15T14:04:23.764Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Shared with me\" in various contexts within a workspace settings page. It likely appears as a label on buttons or sections related to shared files and folders, guiding users through the export process.",
     "is_auto": true,
@@ -30,8 +30,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/RoomsActionsContainer.tsx",
-      "line_number": 87,
-      "context": "/>\n </div>\n <Text {...textDescriptionsProps}>\n {t(\"ActionsWithFilesDescription\", {\n rooms: t(\"Common:Rooms\"),\n shared: t(\"Common:SharedWithMe\"),\n documents: t(\"Common:MyDocuments\"),\n })}\n </Text>\n </div>\n );",
+      "line_number": 88,
+      "context": "/>\n </div>\n <Text {...textDescriptionsProps}>\n {t(\"ActionsWithFilesDescription\", {\n rooms: t(\"Common:Rooms\"),\n shared: t(\"Common:SharedWithMe\"),\n documents: t(\"Common:MyDocuments\"),\n aiAgents: t(\"Common:AIAgents\"),\n })}\n </Text>\n </div>",
       "module": "/packages/client"
     },
     {

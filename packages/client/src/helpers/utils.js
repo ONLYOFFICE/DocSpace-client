@@ -197,3 +197,8 @@ export const removeEmojiCharacters = (value) => {
 
   return replaceEmojiCharacters.replace(/\u200D/g, "");
 };
+
+export const getUrlByDefaultFolderType = (folderType) => {
+  const categoryType = getCategoryTypeByFolderType(folderType);
+  return getCategoryUrl(categoryType);
+};

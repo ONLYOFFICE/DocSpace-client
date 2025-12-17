@@ -76,7 +76,7 @@ export default async function Layout({
 
     const finalUrl = confirmLinkResult?.roomId
       ? `${proto}://${hostName}/${path}?folder=${confirmLinkResult?.roomId}`
-      : objectSettings?.defaultPage;
+      : "/";
 
     logger.info("Confirm layout UserExisted");
 
@@ -86,7 +86,7 @@ export default async function Layout({
   if (isUserExcluded) {
     logger.info("Confirm layout UserExcluded");
 
-    redirect(objectSettings?.defaultPage ?? "/");
+    redirect("/");
   }
 
   return (

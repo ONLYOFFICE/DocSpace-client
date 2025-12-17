@@ -3,11 +3,11 @@
   "content": "Incorrect IP address",
   "content_en_sha1_hash": "ab2c90c8a731847e84d27c4be0230e40151c2628",
   "created_at": "2025-12-15T14:02:39.329Z",
-  "updated_at": "2025-12-15T14:04:23.962Z",
+  "updated_at": "2025-12-17T07:51:14.789Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key displays an error message when the user enters an invalid IP address in the IP security settings. It appears within a form or input field validation to inform the user about the incorrect format of their IP address. Translators should ensure the message clearly conveys the need for a properly formatted IP.",
+    "is_auto": true,
+    "updated_at": "2025-12-17T07:51:14.789Z"
   },
   "usage": [
     {

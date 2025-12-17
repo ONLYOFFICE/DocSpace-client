@@ -3,7 +3,7 @@
   "content": "DocSpace",
   "content_en_sha1_hash": "ce0b96eab5006b875f6c4a6c31ad73c3c86edcf5",
   "created_at": "2025-05-19T21:30:47.504Z",
-  "updated_at": "2025-12-16T07:24:43.724Z",
+  "updated_at": "2025-12-17T07:49:07.685Z",
   "comment": {
     "text": "This translation key is used for the \"From Portal\" button label, which indicates that a document can be uploaded from DocSpace. It appears in a dropdown menu on a main button in a shell interface. Translators should provide a translated version of \"From Portal\" with the product name inserted.",
     "is_auto": true,
@@ -294,8 +294,8 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/SettingsPluginDialog/sub-components/Info.tsx",
-      "line_number": 92,
-      "context": "<Tooltip\n anchorSelect=\"#plugin_version\"\n place=\"bottom\"\n getContent={() =>\n t(\"WebPlugins:PluginIsNotCompatible\", {\n productName: t(\"Common:ProductName\"),\n })\n }\n />\n </>\n ) : null}",
+      "line_number": 48,
+      "context": "plugin.status === PluginStatus.active\n ? t(\"NotNeedSettings\")\n : t(\"NeedSettings\");\n \n const incompatibleTooltip = t(\"WebPlugins:PluginIsNotCompatible\", {\n productName: t(\"Common:ProductName\"),\n });\n \n return (\n <div\n className={classNames(styles.container, {",
       "module": "/packages/client"
     },
     {
@@ -1038,8 +1038,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/Integration.tsx",
-      "line_number": 76,
-      "context": ">\n <CategoryHeader className=\"integration-header\">\n {t(\"IntegrationExamples\")}\n </CategoryHeader>\n <Text lineHeight=\"20px\" color={theme.sdkPresets.secondaryColor}>\n {t(\"IntegrationDescription\", { productName: t(\"Common:ProductName\") })}\n </Text>\n <div className=\"icons\">\n <div\n data-testid=\"integration_zoom_container\"\n className=\"icon\"",
+      "line_number": 77,
+      "context": ">\n <CategoryHeader className=\"integration-header\">\n {t(\"IntegrationExamples\")}\n </CategoryHeader>\n <Text lineHeight=\"20px\" color={theme.sdkPresets.secondaryColor}>\n {t(\"IntegrationDescription\", { productName: t(\"Common:ProductName\") })}\n </Text>\n <div className=\"icons\">\n <TooltipContainer\n as=\"div\"\n data-testid=\"integration_zoom_container\"",
       "module": "/packages/client"
     },
     {
@@ -1122,8 +1122,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/Plugins/sub-components/PluginItem.tsx",
-      "line_number": 125,
-      "context": "<Tooltip\n anchorSelect={`#${badgeId.replace(/\\./g, \"\\\\.\")}`}\n place=\"bottom\"\n getContent={() =>\n t(\"WebPlugins:PluginIsNotCompatible\", {\n productName: t(\"ProductName\"),\n })\n }\n />\n ) : null}",
+      "line_number": 75,
+      "context": "const onOpenSettingsDialog = () => {\n openSettingsDialog?.(name);\n };\n \n const incompatibleTooltip = t(\"WebPlugins:PluginIsNotCompatible\", {\n productName: t(\"ProductName\"),\n });\n \n const badgeId = `plugin_version_${name}_badge`;\n \n const badge = (",
       "module": "/packages/client"
     },
     {
@@ -1578,7 +1578,7 @@
     },
     {
       "file_path": "/packages/client/src/Shell.jsx",
-      "line_number": 339,
+      "line_number": 340,
       "context": "const barConfig = {\n parentElementId: \"main-bar\",\n headerText: t(\"Attention\"),\n text: `${t(\"BarMaintenanceDescription\", {\n targetDate,\n productName: `${logoText} ${t(\"Common:ProductName\")}`,\n })} ${t(\"BarMaintenanceDisclaimer\")}`,\n isMaintenance: true,\n onAction: () => {\n setMaintenanceExist(false);\n setSnackbarExist(false);",
       "module": "/packages/client"
     },
@@ -1590,19 +1590,19 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2213,
+      "line_number": 2215,
       "context": "},\n {\n id: \"option_link-for-portal-users\",\n key: \"link-for-portal-users\",\n label: t(\"LinkForPortalUsers\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: InvitationLinkReactSvgUrl,\n onClick: () => this.onClickLinkForPortal(item, t),\n disabled: false,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2213,
+      "line_number": 2215,
       "context": "},\n {\n id: \"option_link-for-portal-users\",\n key: \"link-for-portal-users\",\n label: t(\"LinkForPortalUsers\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: InvitationLinkReactSvgUrl,\n onClick: () => this.onClickLinkForPortal(item, t),\n disabled: false,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2213,
+      "line_number": 2215,
       "context": "},\n {\n id: \"option_link-for-portal-users\",\n key: \"link-for-portal-users\",\n label: t(\"LinkForPortalUsers\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: InvitationLinkReactSvgUrl,\n onClick: () => this.onClickLinkForPortal(item, t),\n disabled: false,\n },",
       "module": "/packages/client"
     },
@@ -1824,13 +1824,13 @@
     },
     {
       "file_path": "/packages/shared/components/chat/components/chat-input/ToolsSettings.tsx",
-      "line_number": 297,
+      "line_number": 298,
       "context": ".filter(Boolean),\n ];\n \n const name =\n server.serverType === ServerType.Portal\n ? `${t(\"Common:OrganizationName\")} ${t(\"Common:ProductName\")}`\n : server.name;\n \n return {\n key: mcpId,\n label: name,",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/chat/components/chat-input/ToolsSettings.tsx",
-      "line_number": 297,
+      "line_number": 298,
       "context": ".filter(Boolean),\n ];\n \n const name =\n server.serverType === ServerType.Portal\n ? `${t(\"Common:OrganizationName\")} ${t(\"Common:ProductName\")}`\n : server.name;\n \n return {\n key: mcpId,\n label: name,",
       "module": "/packages/shared"
     },
@@ -1890,13 +1890,13 @@
     },
     {
       "file_path": "/packages/shared/components/share/sub-components/User.tsx",
-      "line_number": 127,
+      "line_number": 128,
       "context": "const uniqueTooltipId = `userTooltip_${id}`;\n \n const tooltipContent = `${\n \"isOwner\" in user && user.isOwner\n ? t(\"Common:PortalOwner\", { productName: t(\"Common:ProductName\") })\n : t(\"Common:PortalAdmin\", { productName: t(\"Common:ProductName\") })\n }. ${t(\"Common:HasFullAccess\")}`;\n \n const itemAvatar = isSystem\n ? EveryoneIconUrl",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/sub-components/User.tsx",
-      "line_number": 127,
+      "line_number": 128,
       "context": "const uniqueTooltipId = `userTooltip_${id}`;\n \n const tooltipContent = `${\n \"isOwner\" in user && user.isOwner\n ? t(\"Common:PortalOwner\", { productName: t(\"Common:ProductName\") })\n : t(\"Common:PortalAdmin\", { productName: t(\"Common:ProductName\") })\n }. ${t(\"Common:HasFullAccess\")}`;\n \n const itemAvatar = isSystem\n ? EveryoneIconUrl",
       "module": "/packages/shared"
     },
@@ -2053,25 +2053,25 @@
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
       "line_number": 135,
-      "context": "i18nKey=\"RolePortalAdminDescription\"\n components={{\n 1: <strong></strong>,\n }}\n values={{\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:Documents\"),\n agentSection: t(\"Common:AIAgents\"),\n }}\n />\n ),",
+      "context": "i18nKey=\"RolePortalAdminDescription\"\n components={{\n 1: <strong></strong>,\n }}\n values={{\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:Documents\"),\n agentSection: t(\"Common:AIAgents\"),\n }}\n />\n ) as unknown as string,",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
       "line_number": 135,
-      "context": "i18nKey=\"RolePortalAdminDescription\"\n components={{\n 1: <strong></strong>,\n }}\n values={{\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:Documents\"),\n agentSection: t(\"Common:AIAgents\"),\n }}\n />\n ),",
+      "context": "i18nKey=\"RolePortalAdminDescription\"\n components={{\n 1: <strong></strong>,\n }}\n values={{\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:Documents\"),\n agentSection: t(\"Common:AIAgents\"),\n }}\n />\n ) as unknown as string,",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
       "line_number": 135,
-      "context": "i18nKey=\"RolePortalAdminDescription\"\n components={{\n 1: <strong></strong>,\n }}\n values={{\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:Documents\"),\n agentSection: t(\"Common:AIAgents\"),\n }}\n />\n ),",
+      "context": "i18nKey=\"RolePortalAdminDescription\"\n components={{\n 1: <strong></strong>,\n }}\n values={{\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:Documents\"),\n agentSection: t(\"Common:AIAgents\"),\n }}\n />\n ) as unknown as string,",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
       "line_number": 135,
-      "context": "i18nKey=\"RolePortalAdminDescription\"\n components={{\n 1: <strong></strong>,\n }}\n values={{\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:Documents\"),\n agentSection: t(\"Common:AIAgents\"),\n }}\n />\n ),",
+      "context": "i18nKey=\"RolePortalAdminDescription\"\n components={{\n 1: <strong></strong>,\n }}\n values={{\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:Documents\"),\n agentSection: t(\"Common:AIAgents\"),\n }}\n />\n ) as unknown as string,",
       "module": "/packages/shared"
     }
   ],

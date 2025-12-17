@@ -3,11 +3,11 @@
   "content": "This IP address has already been added",
   "content_en_sha1_hash": "57357e309ce932380014ab712053d6685d4163ab",
   "created_at": "2025-12-15T14:02:39.305Z",
-  "updated_at": "2025-12-15T14:04:23.962Z",
+  "updated_at": "2025-12-17T07:51:04.210Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key displays an error message indicating that an IP address has already been entered in the IP security settings. It appears within a form or dialog when a user attempts to add a duplicate IP address. Translators should ensure the message clearly conveys the duplication issue.",
+    "is_auto": true,
+    "updated_at": "2025-12-17T07:51:04.210Z"
   },
   "usage": [
     {

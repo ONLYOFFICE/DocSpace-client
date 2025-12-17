@@ -3,7 +3,7 @@
   "content": "SSO",
   "content_en_sha1_hash": "5fa55a6001cc9852171849c95c4031c7b8464066",
   "created_at": "2025-05-19T21:30:49.017Z",
-  "updated_at": "2025-12-16T07:24:43.909Z",
+  "updated_at": "2025-12-17T07:49:07.866Z",
   "comment": {
     "text": "This translation key is used to display the label \"SSO\" in various places within the application, such as badges and filters, indicating that the account login type is Single Sign-On. It appears on the contacts page, specifically in a filter component, and is also used in an info panel. Translators should provide a translation for this key that describes SSO in their native language.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/ItemTitle.tsx",
-      "line_number": 180,
-      "context": "{isSSO ? (\n <>\n <Badge\n id=\"sso-badge-info-panel\"\n className={styles.ssoBadge}\n label={t(\"Common:SSO\")}\n color={globalColors.white}\n backgroundColor={\n theme.isBase\n ? globalColors.secondGreen\n : globalColors.secondGreenDark",
+      "line_number": 184,
+      "context": "data-tooltip-content={t(\"PeopleTranslations:SSOAccountTooltip\")}\n data-tooltip-place=\"bottom\"\n >\n <Badge\n className={styles.ssoBadge}\n label={t(\"Common:SSO\")}\n color={globalColors.white}\n backgroundColor={\n theme.isBase\n ? globalColors.secondGreen\n : globalColors.secondGreenDark",
       "module": "/packages/client"
     },
     {

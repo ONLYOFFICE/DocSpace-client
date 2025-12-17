@@ -3,7 +3,7 @@
   "content": "Groups",
   "content_en_sha1_hash": "ae9629f4ebb82c6331c0809fa9a0e54b00e578e6",
   "created_at": "2025-05-19T21:30:45.668Z",
-  "updated_at": "2025-12-15T14:04:23.451Z",
+  "updated_at": "2025-12-17T07:49:07.687Z",
   "comment": {
     "text": "The translation key \"Groups\" refers to the label used on a data import component to indicate that groups are being imported. It is used in a settings page and appears as a section name in a dialog box, allowing users to toggle the inclusion of group data in their imports.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/Body/AccountsItems.tsx",
-      "line_number": 76,
+      "line_number": 74,
       "context": "folderId=\"accounts_catalog-members\"\n withAnimation\n />\n <ArticleItem\n key=\"accounts-groups\"\n text={t(\"Common:Groups\")}\n linkData={getLinkData(\"groups\")}\n title={t(\"Common:Groups\")}\n icon={getCatalogIconUrlByType(PageType.groups)}\n showText={showText}\n onClick={onClickAction}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/Article/Body/AccountsItems.tsx",
-      "line_number": 76,
+      "line_number": 74,
       "context": "folderId=\"accounts_catalog-members\"\n withAnimation\n />\n <ArticleItem\n key=\"accounts-groups\"\n text={t(\"Common:Groups\")}\n linkData={getLinkData(\"groups\")}\n title={t(\"Common:Groups\")}\n icon={getCatalogIconUrlByType(PageType.groups)}\n showText={showText}\n onClick={onClickAction}",
       "module": "/packages/client"
     },
@@ -30,7 +30,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 706,
+      "line_number": 708,
       "context": "if (isContactsPage) {\n switch (contactsTab) {\n case \"people\":\n return t(\"Common:Members\");\n case \"groups\":\n return t(\"Common:Groups\");\n case \"inside_group\": {\n return isLoading && insideGroupTempTitle\n ? insideGroupTempTitle\n : currentGroupName;\n }",
       "module": "/packages/client"
     },

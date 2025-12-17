@@ -3,16 +3,16 @@
   "content": "Agent info",
   "content_en_sha1_hash": "68edc91c6578cfa4e1873d6ef5ebb00bda62e5cc",
   "created_at": "2025-12-15T14:02:08.665Z",
-  "updated_at": "2025-12-15T14:04:24.054Z",
+  "updated_at": "2025-12-17T07:51:54.769Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key displays a label, likely on a button or panel, indicating information related to an agent. It appears within a list of options, and the label will show \"Agent info\" if the item is an AI agent; otherwise, it displays \"Room info.\" Translators should consider this key as part of a UI element presenting information about either an agent or a room.",
+    "is_auto": true,
+    "updated_at": "2025-12-17T07:51:54.769Z"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2167,
+      "line_number": 2169,
       "context": "Boolean(item.external && item.isLinkExpired),\n },\n {\n id: \"option_room-info\",\n key: \"room-info\",\n label: item.isAIAgent ? t(\"Common:AgentInfo\") : t(\"Common:RoomInfo\"),\n icon: InfoOutlineReactSvgUrl,\n onClick: () => this.onShowInfoPanel(item),\n disabled: isPublicRoom || Boolean(item.external && item.isLinkExpired),\n },\n {",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Data",
   "content_en_sha1_hash": "e5e429bcc9c2e4a41a3c7a4d96203be6cb273b11",
   "created_at": "2025-05-19T21:30:54.768Z",
-  "updated_at": "2025-12-15T14:04:23.703Z",
+  "updated_at": "2025-12-17T07:49:07.867Z",
   "comment": {
     "text": "This translation key is used to display the label \"Data\" in various contexts within the InfoPanel page, primarily on a header and in a list of fields. The translation will vary depending on the selected role or user selection, providing a contextualized experience for users.",
     "is_auto": true,
@@ -24,8 +24,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
-      "line_number": 238,
-      "context": "title={t(\"Data\")}\n fontSize=\"14px\"\n fontWeight={600}\n lineHeight=\"16px\"\n >\n {t(\"InfoPanel:Data\")}\n </Text>\n </div>\n <div className={styles.body}>\n <Text\n className={classNames(styles.infoField, styles.firstRow)}",
+      "line_number": 245,
+      "context": "title={t(\"Data\")}\n fontSize=\"14px\"\n fontWeight={600}\n lineHeight=\"16px\"\n >\n {t(\"InfoPanel:Data\")}\n </Text>\n </div>\n <div className={styles.body}>\n <Text\n tooltipFitToContent",
       "module": "/packages/client"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "{{productName}} admin",
   "content_en_sha1_hash": "c2ab2049e1e222685c5af15f68e5f6c5b11e8747",
   "created_at": "2025-05-19T21:30:47.411Z",
-  "updated_at": "2025-12-16T07:24:43.959Z",
+  "updated_at": "2025-12-17T07:49:07.922Z",
   "comment": {
     "text": "This translation key is used to display \"PortalAdmin\" as a label for users who have full access, appearing in tooltips and UI elements related to user management. It is likely to be displayed on buttons, dropdowns, or other interactive elements where user permissions are being managed. The key is used consistently with other labels, such as \"Common:PortalOwner\", suggesting it may appear in multiple places throughout the application.",
     "is_auto": true,
@@ -30,7 +30,7 @@
     },
     {
       "file_path": "/packages/shared/components/share/sub-components/User.tsx",
-      "line_number": 128,
+      "line_number": 129,
       "context": "const uniqueTooltipId = `userTooltip_${id}`;\n \n const tooltipContent = `${\n \"isOwner\" in user && user.isOwner\n ? t(\"Common:PortalOwner\", { productName: t(\"Common:ProductName\") })\n : t(\"Common:PortalAdmin\", { productName: t(\"Common:ProductName\") })\n }. ${t(\"Common:HasFullAccess\")}`;\n \n const itemAvatar = isSystem\n ? EveryoneIconUrl\n : isExpect",
       "module": "/packages/shared"
     },

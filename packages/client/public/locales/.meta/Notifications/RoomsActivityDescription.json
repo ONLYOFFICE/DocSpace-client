@@ -3,11 +3,11 @@
   "content": "Get instant email notifications about new shared files/folders and activity inside your {{rooms}} and {{aiAgents}}.",
   "content_en_sha1_hash": "0cdb4a22170c3752b1d8f39b5aebd28811a08b9e",
   "created_at": "2025-11-27T11:56:59.215Z",
-  "updated_at": "2025-12-15T14:04:24.016Z",
+  "updated_at": "2025-12-17T07:53:39.873Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This text describes the benefit of enabling room activity notifications. It appears as a description accompanying a toggle button that allows users to receive email notifications about new files, folders, and activity within their rooms and AI agent workspaces. The text should convey the value of staying informed about room and AI agent activity.",
+    "is_auto": true,
+    "updated_at": "2025-12-17T07:53:39.873Z"
   },
   "usage": [
     {

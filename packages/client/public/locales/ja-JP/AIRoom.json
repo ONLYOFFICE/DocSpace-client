@@ -12,7 +12,6 @@
   "EmptyResultsViewerDescription": "他のユーザーのAIチャットの活動結果は、利用可能になり次第こちらに表示されます。",
   "InstructionsDescriptionAgent": "AIエージェントがどのように振る舞い、回答すべきかを記述し、役割・トーン・主なタスクを定義します。",
   "InstructionsDescriptionAgentExample": "例：あなたはプレスリリースの作成・編集を支援するAIのPRアシスタントです。プロフェッショナルで自信に満ちた、メディアに適したトーンを保ってください。主要メッセージを明確に伝え、専門用語を避け、簡潔で魅力的な文面にしてください。",
-  "Knowledge": "知識",
   "KnowledgeDescription": "お使いのコンピューターまたは{{productName}}からファイルをアップロードすると、チャットの文脈がより明確になります。ご注意：アップロードされたコンテンツの一部または全部が会話中に出てくる可能性があります。",
   "KnowledgeSelectIn": "{{productName}}で選択",
   "KnowledgeUnavailable": "知識ベースをご利用いただけません",

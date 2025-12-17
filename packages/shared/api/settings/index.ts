@@ -31,7 +31,7 @@ import axios, { AxiosRequestConfig } from "axios";
 import { Nullable } from "../../types";
 import { ILogo } from "../../pages/Branding/WhiteLabel/WhiteLabel.types";
 import { request } from "../client";
-import { RecaptchaType } from "../../enums";
+import { FolderType, RecaptchaType } from "../../enums";
 import {
   TCustomSchema,
   TGetCSPSettings,
@@ -1481,4 +1481,14 @@ export async function getNotificationsSettings() {
   });
 
   return res.channels as TNotificationChannel[];
+}
+
+export async function setDefaultFolderType(folderType: FolderType) {
+  const res = await request({
+    method: "PUT",
+    url: "/settings/defaultFolder",
+    data: { DefaultFolderType: folderType },
+  });
+
+  return res.defaultFolderType as FolderType;
 }

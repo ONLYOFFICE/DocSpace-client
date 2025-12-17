@@ -3,7 +3,7 @@
   "content": "This plugin will no longer be available to {{productName}} users. Are you sure you want to continue?",
   "content_en_sha1_hash": "f9dd38d9a79d72110282ab407149bc43bb96edf0",
   "created_at": "2025-05-19T21:30:49.904Z",
-  "updated_at": "2025-05-24T02:00:06.682Z",
+  "updated_at": "2025-12-15T14:04:23.562Z",
   "comment": {
     "text": "This translation key is used for a confirmation message that appears when deleting a plugin in an application, prompting users to confirm their action. The message includes placeholders for product name and title. It is displayed within a delete dialog modal.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/DeletePluginDialog/index.js",
-      "line_number": 63,
-      "context": "onClose={onClose}\n displayType=\"modal\"\n >\n <ModalDialog.Header>{t(\"DeletePluginTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n {t(\"DeletePluginDescription\", { productName: t(\"Common:ProductName\") })}\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"delete-button\"\n key=\"DeletePortalBtn\"",
+      "file_path": "/packages/client/src/components/dialogs/DeletePluginDialog/index.tsx",
+      "line_number": 65,
+      "context": "return (\n <ModalDialog isLoading={!ready} visible={isVisible} onClose={onClose}>\n <ModalDialog.Header>{t(\"DeletePluginTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n {t(\"DeletePluginDescription\", { productName: t(\"Common:ProductName\") })}\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"delete-button\"\n key=\"DeletePortalBtn\"",
       "module": "/packages/client"
     }
   ],

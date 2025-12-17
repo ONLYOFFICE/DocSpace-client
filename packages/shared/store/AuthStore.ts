@@ -422,7 +422,7 @@ class AuthStore {
 
       this.init();
 
-      return await Promise.resolve({ url: this.settingsStore?.defaultPage });
+      return await Promise.resolve({ url: "/" });
     } catch (e) {
       return Promise.reject(e);
     }
@@ -440,7 +440,7 @@ class AuthStore {
 
     this.init();
 
-    return Promise.resolve(this.settingsStore?.defaultPage);
+    return Promise.resolve("/");
   };
 
   thirdPartyLogin = async (SerializedProfile: string) => {
@@ -457,7 +457,7 @@ class AuthStore {
 
       this.init();
 
-      return await Promise.resolve(this.settingsStore?.defaultPage);
+      return await Promise.resolve("/");
     } catch (e) {
       return Promise.reject(e);
     }

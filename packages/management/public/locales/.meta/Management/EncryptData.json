@@ -3,7 +3,7 @@
   "content": "Encrypt data at rest",
   "content_en_sha1_hash": "55866187e3f73d7f89a5bbe25fe1344c85a640cd",
   "created_at": "2025-05-19T21:30:57.442Z",
-  "updated_at": "2025-05-26T07:57:33.001Z",
+  "updated_at": "2025-12-15T14:04:24.277Z",
   "comment": {
     "text": "This translation key is used for the phrase \"Encrypt data at rest\" which appears on a button or similar action element in the encrypt data management page. It informs users about the encryption process's purpose and impact on stored files.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/management/src/app/settings/encrypt-data/page.client.tsx",
-      "line_number": 42,
-      "context": "import { EncryptionStatus } from \"@docspace/shared/enums\";\n import type { TPortals } from \"@docspace/shared/api/management/types\";\n \n import { EncryptWarningDialog } from \"./EncryptWarningDialog\";\n import { StyledWrapper } from \"./EncryptData.styles\";\n \n type EncryptDataPageProps = {\n portals: TPortals[];\n encryptionBlockHelpUrl: string;\n isNotify: boolean;",
+      "line_number": 45,
+      "context": "import type { TPortals } from \"@docspace/shared/api/management/types\";\n \n import { EncryptWarningDialog } from \"./EncryptWarningDialog\";\n import styles from \"./encrypt-data.module.scss\";\n \n type EncryptDataPageProps = {\n portals: TPortals[];\n encryptionBlockHelpUrl: string;\n isNotify: boolean;\n status: number;\n };",
       "module": "/packages/management"
     }
   ],

@@ -38,6 +38,8 @@ import type {
   TProviderTypeWithUrl,
 } from "@docspace/shared/api/ai/types";
 import { getAvailableProviderUrls } from "@docspace/shared/api/ai";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 
@@ -47,7 +49,6 @@ import { AddUpdateProviderDialog } from "./dialogs/add-update";
 import { DeleteAIProviderDialog } from "./dialogs/delete";
 
 import { AiProviderTile } from "./Tile";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 type TDeleteDialogData =
   | {
@@ -75,7 +76,7 @@ type AIProviderProps = {
   checkUnavailableProviders?: AISettingsStore["checkUnavailableProviders"];
   isProviderAvailable?: AISettingsStore["isProviderAvailable"];
   cancelAvailabilityCheck?: AISettingsStore["cancelAvailabilityCheck"];
-  aiSettingsUrl?: string;
+  aiProviderSettingsUrl?: SettingsStore["aiProviderSettingsUrl"];
 };
 
 const AIProviderComponent = ({
@@ -84,7 +85,7 @@ const AIProviderComponent = ({
   checkUnavailableProviders,
   isProviderAvailable,
   cancelAvailabilityCheck,
-  aiSettingsUrl,
+  aiProviderSettingsUrl,
 }: AIProviderProps) => {
   const { t } = useTranslation(["Common", "AISettings"]);
   const [addDialogVisible, setaddDialogVisible] = useState(false);
@@ -167,14 +168,14 @@ const AIProviderComponent = ({
           productName: t("Common:ProductName"),
         })}
       </Text>
-      {aiSettingsUrl ? (
+      {aiProviderSettingsUrl ? (
         <Link
           className={styles.learnMoreLink}
           target={LinkTarget.blank}
           type={LinkType.page}
           fontWeight={600}
           isHovered
-          href={aiSettingsUrl}
+          href={aiProviderSettingsUrl}
           color="accent"
         >
           {t("Common:LearnMore")}
@@ -238,7 +239,7 @@ export const AIProvider = inject(
       checkUnavailableProviders: aiSettingsStore.checkUnavailableProviders,
       isProviderAvailable: aiSettingsStore.isProviderAvailable,
       cancelAvailabilityCheck: aiSettingsStore.cancelAvailabilityCheck,
-      aiSettingsUrl: settingsStore.aiSettingsUrl,
+      aiProviderSettingsUrl: settingsStore.aiProviderSettingsUrl,
     };
   },
 )(observer(AIProviderComponent));

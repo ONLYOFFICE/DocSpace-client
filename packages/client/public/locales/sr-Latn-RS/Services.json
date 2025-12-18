@@ -31,6 +31,5 @@
   "TextTranslation": "Prevod teksta",
   "TextTranslationDescription": "Odmah prevedite tekst na željeni jezik, zadržavajući značenje i kontekst.",
   "ThirdPartyResourceDescription": "Poveži i sačuvaj bekape na cloud naloge kao što su Dropbox, Box, OneDrive ili Google Drive.",
-  "ThirdPartyStorageDescription": "Koristi servise trećih strana za skladištenje svojih bekapa. Idealno za povezivanje eksternih cloud platformi.",
-  "WebSearchEnabled": "Usluga AI veb pretrage je uspešno omogućena."
+  "ThirdPartyStorageDescription": "Koristi servise trećih strana za skladištenje svojih bekapa. Idealno za povezivanje eksternih cloud platformi."
 }

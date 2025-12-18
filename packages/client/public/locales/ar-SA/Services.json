@@ -31,6 +31,5 @@
   "TextTranslation": "ترجمة النصوص",
   "TextTranslationDescription": "ترجموا النصوص إلى اللغة التي تريدونها على الفور، مع الحفاظ على المعنى والسياق.",
   "ThirdPartyResourceDescription": "قوموا بتوصيل وحفظ النسخ الاحتياطية في حسابات سحابية مثل Dropbox، Box، OneDrive، أو Google Drive.",
-  "ThirdPartyStorageDescription": "استخدموا خدمات الطرف الثالث لتخزين نسخكم الاحتياطية. مثالي لربط منصات التخزين السحابي الخارجية.",
-  "WebSearchEnabled": "تم تمكين خدمة بحث الويب بالذكاء الاصطناعي بنجاح."
+  "ThirdPartyStorageDescription": "استخدموا خدمات الطرف الثالث لتخزين نسخكم الاحتياطية. مثالي لربط منصات التخزين السحابي الخارجية."
 }

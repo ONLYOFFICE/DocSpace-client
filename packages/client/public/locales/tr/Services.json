@@ -31,6 +31,5 @@
   "TextTranslation": "Metin çevirisi",
   "TextTranslationDescription": "Metni, anlam ve bağlamı koruyarak anında istediğiniz dile çevirin.",
   "ThirdPartyResourceDescription": "Dropbox, Box, OneDrive veya Google Drive gibi bulut hesaplarına bağlanın ve yedeklemeleri kaydedin.",
-  "ThirdPartyStorageDescription": "Yedeklemelerinizi üçüncü taraf hizmetlerde saklayın. Harici bulut depolama platformlarını bağlamak için idealdir.",
-  "WebSearchEnabled": "AI Web arama hizmeti başarıyla etkinleştirildi."
+  "ThirdPartyStorageDescription": "Yedeklemelerinizi üçüncü taraf hizmetlerde saklayın. Harici bulut depolama platformlarını bağlamak için idealdir."
 }

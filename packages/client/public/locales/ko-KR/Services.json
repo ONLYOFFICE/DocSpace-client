@@ -31,6 +31,5 @@
   "TextTranslation": "텍스트 번역",
   "TextTranslationDescription": "텍스트를 원하는 언어로 즉시 번역하여 의미와 맥락을 유지하세요.",
   "ThirdPartyResourceDescription": "Dropbox, Box, OneDrive 또는 Google Drive와 같은 클라우드 계정에 연결하고 백업을 저장하세요.",
-  "ThirdPartyStorageDescription": "세 번째 서비스(third-party services)를 사용하여 백업을 저장하세요. 외부 클라우드 스토리지 플랫폼을 연결하는 데 적합합니다.",
-  "WebSearchEnabled": "AI 웹 검색 서비스 활성화 성공."
+  "ThirdPartyStorageDescription": "세 번째 서비스(third-party services)를 사용하여 백업을 저장하세요. 외부 클라우드 스토리지 플랫폼을 연결하는 데 적합합니다."
 }

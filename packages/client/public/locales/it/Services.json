@@ -31,6 +31,5 @@
   "TextTranslation": "Traduzione di testo",
   "TextTranslationDescription": "Traduci il testo nella lingua desiderata all’istante, mantenendo significato e contesto.",
   "ThirdPartyResourceDescription": "Connetti e salva i backup su account cloud come Dropbox, Box, OneDrive o Google Drive.",
-  "ThirdPartyStorageDescription": "Usa servizi di terze parti per archiviare i tuoi backup. Ideale per collegare piattaforme cloud esterne.",
-  "WebSearchEnabled": "Servizio di ricerca web AI abilitato con successo."
+  "ThirdPartyStorageDescription": "Usa servizi di terze parti per archiviare i tuoi backup. Ideale per collegare piattaforme cloud esterne."
 }

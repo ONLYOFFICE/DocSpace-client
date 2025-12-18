@@ -31,6 +31,5 @@
   "TextTranslation": "Tekst tłumaczenia",
   "TextTranslationDescription": "Tłumacz tekst na żądany język natychmiast, zachowując przy tym znaczenie i kontekst.",
   "ThirdPartyResourceDescription": "Połącz i zapisuj kopie zapasowe w chmurze, takich jak Dropbox, Box, OneDrive lub Google Drive.",
-  "ThirdPartyStorageDescription": "Korzystaj z zewnętrznych usług do przechowywania kopii zapasowych. Idealne do łączenia platform zewnętrznych magazynów w chmurze.",
-  "WebSearchEnabled": "Usługa wyszukiwania w sieci AI pomyślnie włączona."
+  "ThirdPartyStorageDescription": "Korzystaj z zewnętrznych usług do przechowywania kopii zapasowych. Idealne do łączenia platform zewnętrznych magazynów w chmurze."
 }

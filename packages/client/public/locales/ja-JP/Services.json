@@ -31,6 +31,5 @@
   "TextTranslation": "テキスト翻訳",
   "TextTranslationDescription": "テキストを意味と文脈を維持したまま、瞬時にご希望の言語へ翻訳します。",
   "ThirdPartyResourceDescription": "Dropbox、Box、OneDrive、またはGoogle Driveなどのクラウドアカウントに接続してバックアップを保存します。",
-  "ThirdPartyStorageDescription": "バックアップを保存するためにサードパーティのサービスを使用します。外部クラウドストレージプラットフォームに接続するのに最適です。",
-  "WebSearchEnabled": "AIウェブ検索サービスが正常に有効化されました。"
+  "ThirdPartyStorageDescription": "バックアップを保存するためにサードパーティのサービスを使用します。外部クラウドストレージプラットフォームに接続するのに最適です。"
 }

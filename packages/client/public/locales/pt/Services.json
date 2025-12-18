@@ -31,6 +31,5 @@
   "TextTranslation": "Texto a traduzir",
   "TextTranslationDescription": "Traduza texto para o seu idioma desejado instantaneamente, mantendo o significado e o contexto.",
   "ThirdPartyResourceDescription": "Conecte e salve backups para contas na nuvem como Dropbox, Box, OneDrive ou Google Drive.",
-  "ThirdPartyStorageDescription": "Use serviços de terceiros para armazenar seus backups. Ideal para conectar plataformas de armazenamento em nuvem externas.",
-  "WebSearchEnabled": "Serviço de busca na web por IA habilitado com sucesso."
+  "ThirdPartyStorageDescription": "Use serviços de terceiros para armazenar seus backups. Ideal para conectar plataformas de armazenamento em nuvem externas."
 }

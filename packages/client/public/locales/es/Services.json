@@ -31,6 +31,5 @@
   "TextTranslation": "Traducción de texto",
   "TextTranslationDescription": "Traduzca texto al idioma que desee al instante, manteniendo el significado y el contexto.",
   "ThirdPartyResourceDescription": "Conecte y guarde copias de seguridad en cuentas en la nube como Dropbox, Box, OneDrive o Google Drive.",
-  "ThirdPartyStorageDescription": "Utilice servicios de terceros para almacenar sus copias de seguridad. Ideal para conectar plataformas externas de almacenamiento en la nube.",
-  "WebSearchEnabled": "Servicio de búsqueda web con IA habilitado correctamente."
+  "ThirdPartyStorageDescription": "Utilice servicios de terceros para almacenar sus copias de seguridad. Ideal para conectar plataformas externas de almacenamiento en la nube."
 }

@@ -33,5 +33,5 @@
   "TextTranslationDescription": "Translate text into your desired language instantly, while maintaining meaning and context.",
   "ThirdPartyResourceDescription": "Connect and save backups to cloud accounts like Dropbox, Box, OneDrive, or Google Drive.",
   "ThirdPartyStorageDescription": "Use third-party services to store your backups. Ideal for connecting external cloud storage platforms.",
-  "WebSearchEnabled": "AI Web search service successfully enabled."
+  "WebSearchEnabled": "AI {{webSearch}} service successfully enabled."
 }

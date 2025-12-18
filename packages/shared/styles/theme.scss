@@ -2371,6 +2371,7 @@
   --login-invite-text-color: #{$gray};
   --login-invite-border-color: #{$gray-light-mid};
   --login-logo-color: #{$black};
+  --login-back-title-color: #{$gray};
 }
 
 .dark {
@@ -2390,6 +2391,7 @@
   --login-invite-text-color: #{$gray-dark};
   --login-invite-border-color: #{$gray-dark-strong};
   --login-logo-color: #{$white};
+  --login-back-title-color: #{$gray};
 }
 
 .light {

@@ -216,6 +216,10 @@ export const useShare = ({
   };
 
   const changeShareOption = async (item: TOption, link: TFileLink) => {
+    if (link.sharedTo.isExpired) {
+      link.sharedTo.expirationDate = moment().add(7, "days").toISOString();
+    }
+
     try {
       setLoadingLinks((val) => [...val, link.sharedTo.id]);
 
@@ -237,6 +241,10 @@ export const useShare = ({
   const changeAccessOption = async (item: AccessItem, link: TFileLink) => {
     const updateAccessLink = async () => {
       setLoadingLinks([...loadingLinks, link.sharedTo.id]);
+
+      if (link.sharedTo.isExpired) {
+        link.sharedTo.expirationDate = moment().add(7, "days").toISOString();
+      }
 
       try {
         const res = await ShareLinkService.editLink(infoPanelSelection, {

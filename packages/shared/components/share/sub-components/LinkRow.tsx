@@ -158,7 +158,6 @@ const LinkRow = ({
           <LinkTypeSelector
             isLoaded={isLoaded}
             canEditInternal={canEditInternal}
-            isExpiredLink={isExpiredLink}
             onSelect={(item) => changeShareOption(item, link)}
             selectedOption={shareOption}
             options={shareOptions}

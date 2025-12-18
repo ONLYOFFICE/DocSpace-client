@@ -34,7 +34,6 @@ import styles from "../Share.module.scss";
 export interface AccessOptionProps {
   isLoaded: boolean;
   canEditInternal: boolean;
-  isExpiredLink: boolean;
 
   options: TOption[];
   selectedOption: TOption;
@@ -45,7 +44,6 @@ export const LinkTypeSelector: FC<AccessOptionProps> = ({
   options,
   isLoaded,
   onSelect,
-  isExpiredLink,
   selectedOption,
   canEditInternal,
 }) => {
@@ -69,7 +67,7 @@ export const LinkTypeSelector: FC<AccessOptionProps> = ({
       selectedOption={selectedOption}
       onSelect={onSelect}
       showDisabledItems
-      isDisabled={isLoaded || isExpiredLink}
+      isDisabled={isLoaded}
       useImageIcon
     />
   );

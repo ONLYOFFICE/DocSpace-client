@@ -46,7 +46,6 @@
   "AgentName": "Име агената",
   "AgentOwner": "Власинк агената",
   "AIAgents": "AI агенти",
-  "AIAgentSpaceQuotaExceeded": "AI агент простор за складиштење је прекорачен ({{size}}).",
   "AICanMakeMistakes": "AI може да греши. Молимо вас да додатно проверите одговоре.",
   "AIChatInput": "Разговарајте са ВИ",
   "AIChatOfferHelp": "Како могу да помогнем?",

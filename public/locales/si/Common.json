@@ -46,7 +46,6 @@
   "AgentName": "නියෝජිතයාගේ නම",
   "AgentOwner": "නියෝජිත හිමිකරු",
   "AIAgents": "AI නියෝජිතයන්",
-  "AIAgentSpaceQuotaExceeded": "AI නියෝජිත ඉඩ කෝටාව ({{size}}) ඉක්මවා ඇත.",
   "AICanMakeMistakes": "AI වැරදි සිදු කළ හැකිය. කරුණාකර ප්‍රතිචාර දෙවරක් පරීක්ෂා කරන්න.",
   "AIChatInput": "AI සමඟ කතාබස් කරන්න",
   "AIChatOfferHelp": "මට උදව් කළ හැක්කේ කෙසේද?",

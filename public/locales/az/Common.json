@@ -46,7 +46,6 @@
   "AgentName": "Agentin adı",
   "AgentOwner": "Agent sahibi",
   "AIAgents": "Süni intellekt agentləri",
-  "AIAgentSpaceQuotaExceeded": "AI Agentinə ayrılmış yer limiti keçildi ({{size}}).",
   "AICanMakeMistakes": "Süni intellekt səhvlər edə bilər. Cavabları iki dəfə yoxlayın.",
   "AIChatInput": "Süni intellektlə söhbət",
   "AIChatOfferHelp": "Səni nə bacarıram?",

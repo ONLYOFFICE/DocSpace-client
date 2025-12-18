@@ -46,7 +46,6 @@
   "AgentName": "Agentin nimi",
   "AgentOwner": "Agentin omistaja",
   "AIAgents": "AI-agentit",
-  "AIAgentSpaceQuotaExceeded": "AI Agentin tilavuusraja ylitetty ({{size}}).",
   "AICanMakeMistakes": "AI voi tehdä virheitä. Tarkista vastaukset vielä kerran.",
   "AIChatInput": "Keskustele tekoälyn kanssa",
   "AIChatOfferHelp": "Miten voin auttaa?",

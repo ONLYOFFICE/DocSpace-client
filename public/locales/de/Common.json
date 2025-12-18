@@ -46,7 +46,6 @@
   "AgentName": "Name des Agenten",
   "AgentOwner": "Besitzer des Agenten",
   "AIAgents": "KI-Agenten",
-  "AIAgentSpaceQuotaExceeded": "Das Speicherplatzlimit des KI-Agenten wurde überschritten ({{size}}).",
   "AICanMakeMistakes": "Die KI kann Fehler machen. Bitte überprüfen Sie die Antworten.",
   "AIChatInput": "Mit KI chatten",
   "AIChatOfferHelp": "Wie kann ich helfen?",

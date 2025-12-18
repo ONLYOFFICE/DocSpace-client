@@ -46,7 +46,6 @@
   "AgentName": "エージェント名",
   "AgentOwner": "エージェント所有者",
   "AIAgents": "AIエージェント",
-  "AIAgentSpaceQuotaExceeded": "AIエージェントのスペースクォータが上限に達しました（{{size}}）。",
   "AICanMakeMistakes": "AIは誤りを犯す可能性があります。回答内容を必ずご確認ください。",
   "AIChatInput": "AIとチャットする",
   "AIChatOfferHelp": "何かお手伝いできることがありますか？",

@@ -46,7 +46,6 @@
   "AgentName": "에이전트 이름",
   "AgentOwner": "에이전트 소유자",
   "AIAgents": "AI 에이전트",
-  "AIAgentSpaceQuotaExceeded": "AI 에이전트 할당량 초과 ({{size}}).",
   "AICanMakeMistakes": "AI는 실수를 할 수 있습니다. 응답을 다시 확인해 주십시오.",
   "AIChatInput": "AI와 대화하기",
   "AIChatOfferHelp": "어떻게 도와드릴까요?",

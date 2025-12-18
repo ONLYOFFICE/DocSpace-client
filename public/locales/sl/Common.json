@@ -46,7 +46,6 @@
   "AgentName": "Ime agenta",
   "AgentOwner": "Agent lastnik",
   "AIAgents": "AI agenti",
-  "AIAgentSpaceQuotaExceeded": "Presežena je kvota prostora za agente umetne inteligence ({{size}}).",
   "AICanMakeMistakes": "Umetna inteligenca lahko dela napake. Prosimo, dvakrat preverite odgovore.",
   "AIChatInput": "Pogovor z umetno inteligenco",
   "AIChatOfferHelp": "Kako vam lahko pomagam?",

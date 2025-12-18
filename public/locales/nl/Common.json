@@ -46,7 +46,6 @@
   "AgentName": "Agent naam",
   "AgentOwner": "Agent eigenaar",
   "AIAgents": "AI-agenten",
-  "AIAgentSpaceQuotaExceeded": "AI Agent ruimtequota overschreden ({{size}}).",
   "AICanMakeMistakes": "AI kan fouten maken. Controleer antwoorden alsjeblieft nogmaals.",
   "AIChatInput": "Chat met AI",
   "AIChatOfferHelp": "Hoe kan ik helpen?",

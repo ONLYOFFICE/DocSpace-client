@@ -46,7 +46,6 @@
   "AgentName": "Aģenta vārds",
   "AgentOwner": "Aģenta īpašnieks",
   "AIAgents": "MI aģenti",
-  "AIAgentSpaceQuotaExceeded": "MI aģenta vietas kvota pārsniegta ({{size}}).",
   "AICanMakeMistakes": "MI var pieļaut kļūdas. Lūdzu, dubultpārbaudiet atbildes.",
   "AIChatInput": "Tērzējiet ar mākslīgo intelektu",
   "AIChatOfferHelp": "Kā es varu palīdzēt?",

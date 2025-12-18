@@ -46,7 +46,6 @@
   "AgentName": "Temsilci adı",
   "AgentOwner": "Acente sahibi",
   "AIAgents": "Yapay zeka ajanları",
-  "AIAgentSpaceQuotaExceeded": "AI Aracısı depolama kotası aşıldı ({{size}}).",
   "AICanMakeMistakes": "Yapay zeka hatalar yapabilir. Lütfen yanıtları iki kez kontrol edin.",
   "AIChatInput": "AI ile sohbet edin",
   "AIChatOfferHelp": "Size nasıl yardımcı olabilirim?",

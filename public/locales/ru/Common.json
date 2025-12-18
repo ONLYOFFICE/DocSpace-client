@@ -46,7 +46,6 @@
   "AgentName": "Имя агента",
   "AgentOwner": "Владелец агента",
   "AIAgents": "ИИ-агенты",
-  "AIAgentSpaceQuotaExceeded": "Превышена квота пространства для ИИ-агента ({{size}}).",
   "AICanMakeMistakes": "ИИ может ошибаться. Пожалуйста, перепроверяйте ответы.",
   "AIChatInput": "Чат с ИИ",
   "AIChatOfferHelp": "Чем я могу помочь?",

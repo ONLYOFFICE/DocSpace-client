@@ -46,7 +46,6 @@
   "AgentName": "Zámeno agenta",
   "AgentOwner": "Zástupca majiteľa",
   "AIAgents": "AI agenti",
-  "AIAgentSpaceQuotaExceeded": "Kvóta priestoru pre agentov AI bola prekročená ({{size}}).",
   "AICanMakeMistakes": "AI môže robiť chyby. Prosím, overte odpovede.",
   "AIChatInput": "Chat s umelou inteligenciou",
   "AIChatOfferHelp": "Ako môžem pomôcť?",

@@ -46,7 +46,6 @@
   "AgentName": "智能体名称",
   "AgentOwner": "智能体所有者",
   "AIAgents": "AI 智能体",
-  "AIAgentSpaceQuotaExceeded": "AI 智能体空间配额已超出限制（{{size}}）。",
   "AICanMakeMistakes": "AI 可能会出错。请仔细检查回复。",
   "AIChatInput": "与 AI 对话",
   "AIChatOfferHelp": "我能帮您什么？",

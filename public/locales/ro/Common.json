@@ -46,7 +46,6 @@
   "AgentName": "Nume de agent",
   "AgentOwner": "Proprietar agent",
   "AIAgents": "Agenți de inteligență artificială",
-  "AIAgentSpaceQuotaExceeded": "Spațiu de stocare pentru agentul IA a fost depășit ({{size}}).",
   "AICanMakeMistakes": "IA poate face greșeli. Verificați cu atenție răspunsurile.",
   "AIChatInput": "Chat cu IA",
   "AIChatOfferHelp": "Cu ce vă pot ajuta?",

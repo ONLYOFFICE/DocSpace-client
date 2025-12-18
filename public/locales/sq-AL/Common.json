@@ -46,7 +46,6 @@
   "AgentName": "Emri i agjentit",
   "AgentOwner": "Pronari i agjentit",
   "AIAgents": "Agjentë AI",
-  "AIAgentSpaceQuotaExceeded": "Kuota e hapësirës së agjentit AI tejkalohet ({{size}}).",
   "AICanMakeMistakes": "AI mund të bëjë gabime. Ju lutemi kontrolloni përgjigjet.",
   "AIChatInput": "Bisedo me IA-në",
   "AIChatOfferHelp": "Si mund të ju ndihmoj?",

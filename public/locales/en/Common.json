@@ -48,7 +48,7 @@
   "AgentOwner": "Agent owner",
   "AIAgents": "AI agents",
   "AIAgent": "AI agent",
-  "AIAgentSpaceQuotaExceeded": "AI Agent space quota exceeded ({{size}}).",
+  "AIAgentSpaceQuotaExceeded": "{{aiAgent}} space quota exceeded ({{size}}).",
   "AICanMakeMistakes": "AI can make mistakes. Please double-check responses.",
   "AIChatInput": "Chat with AI",
   "AIChatOfferHelp": "How can I help?",

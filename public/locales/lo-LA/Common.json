@@ -46,7 +46,6 @@
   "AgentName": "ຊື່ຕົວແທນ",
   "AgentOwner": "ເຈົ້າຂອງຕົວແທນ",
   "AIAgents": "ຕົວແທນ AI",
-  "AIAgentSpaceQuotaExceeded": "ໂຄຕ້າພື້ນທີ່ຂອງຕົວແທນ AI ເກີນແລ້ວ ({{size}}).",
   "AICanMakeMistakes": "AI ສາມາດເຮັດຜິດພາດໄດ້. ກະລຸນາກວດສອບຄຳຕອບຄືນໃໝ່.",
   "AIChatInput": "ສົນທະນາກັບ AI",
   "AIChatOfferHelp": "ຂ້ອຍສາມາດຊ່ວຍໄດ້ແນວໃດ?",

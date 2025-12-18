@@ -46,7 +46,6 @@
   "AgentName": "Tên đại lý",
   "AgentOwner": "Chủ đại lý",
   "AIAgents": "Các tác nhân AI",
-  "AIAgentSpaceQuotaExceeded": "Đã vượt quá hạn mức không gian của tác nhân AI ({{size}}).",
   "AICanMakeMistakes": "AI có thể mắc lỗi. Vui lòng kiểm tra lại các phản hồi.",
   "AIChatInput": "Trò chuyện với AI",
   "AIChatOfferHelp": "Tôi có thể giúp gì cho bạn?",

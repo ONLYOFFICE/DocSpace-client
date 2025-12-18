@@ -46,7 +46,6 @@
   "AgentName": "Nombre del agente",
   "AgentOwner": "Propietario del agente",
   "AIAgents": "Agentes de IA",
-  "AIAgentSpaceQuotaExceeded": "Se ha superado la cuota de espacio del agente de IA ({{size}}).",
   "AICanMakeMistakes": "La IA puede cometer errores. Por favor, compruebe las respuestas debidamente. ",
   "AIChatInput": "Chatear con la IA",
   "AIChatOfferHelp": "¿En qué puedo ayudarle? ",

@@ -396,6 +396,7 @@ class FilesActionStore {
 
         const error = isAIAgentsFolderRoot
           ? t("Common:AIAgentSpaceQuotaExceeded", {
+              aiAgent: t("Common:AIAgent"),
               size,
             })
           : t("Common:RoomSpaceQuotaExceeded", {

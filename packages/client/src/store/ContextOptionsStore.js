@@ -1666,8 +1666,6 @@ class ContextOptionsStore {
         ? ["select"]
         : [];
 
-    console.log(item.contextOptions);
-
     if (!item.contextOptions) {
       const contextOptions = this.filesStore.getFilesContextOptions(
         item,

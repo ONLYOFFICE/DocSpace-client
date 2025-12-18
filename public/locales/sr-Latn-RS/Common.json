@@ -144,7 +144,6 @@
   "ChatExported": "Razgovor <1>{{title}}</1> eksportovan u fajl: <2>{{fileName}}</2>",
   "ChatHistory": "Istorija chata",
   "ChatSuccessDeleted": "Čat uspešno obrisan",
-  "ChooseAIAgent": "Izaberite AI agenta",
   "ChooseAIAgentDescription": "Izaberite agenta sa kojim želite da razgovarate sa AI o odabranom fajlu. Možete izabrati postojećeг agenta.",
   "ChooseAnother": "Izaberite drugi",
   "ChooseExpirationDate": "Ograniči period dostupnosti za ovaj link postavljanjem roka upotrebe.",

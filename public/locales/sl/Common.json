@@ -144,7 +144,6 @@
   "ChatExported": "Klepetal <1>{{title}}</1> izvožen v datoteko: <2>{{fileName}}</2>",
   "ChatHistory": "Zgodovina klepeta",
   "ChatSuccessDeleted": "Spletni klepetal je bil uspešno izbrisan.",
-  "ChooseAIAgent": "Izberite AI agenta",
   "ChooseAIAgentDescription": "Izberite agenta, kjer želite klepetati z umetno inteligenco o izbranem datoteko. Lahko izberete obstoječega agenta.",
   "ChooseAnother": "Izberi drugo",
   "ChooseExpirationDate": "Omejite obdobje razpoložljivosti te povezave tako, da nastavite datum poteka.",

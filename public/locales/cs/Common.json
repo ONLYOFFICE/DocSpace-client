@@ -144,7 +144,6 @@
   "ChatExported": "Chat <1>{{title}}</1> exportován do souboru: <2>{{fileName}}</2>",
   "ChatHistory": "Historie chatu",
   "ChatSuccessDeleted": "Chat úspěšně smazán",
-  "ChooseAIAgent": "Vyberte si AI agenta",
   "ChooseAIAgentDescription": "Vyberte agenta, se kterým chcete chatovat s AI o vybraném souboru. Můžete si vybrat existujícího agenta.",
   "ChooseAnother": "Vyberte si jiný",
   "ChooseExpirationDate": "Omezte dobu dostupnosti tohoto odkazu nastavením data vypršení platnosti.",

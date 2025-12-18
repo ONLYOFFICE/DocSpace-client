@@ -144,7 +144,6 @@
   "ChatExported": "Chat-ul <1>{{title}}</1> exportat în fișierul: <2>{{fileName}}</2>",
   "ChatHistory": "Istoric chat",
   "ChatSuccessDeleted": "Conversația a fost ștearsă cu succes.",
-  "ChooseAIAgent": "Alegeți un agent de IA",
   "ChooseAIAgentDescription": "Selectează agentul cu care dorești să discuți cu AI despre fișierul selectat. Poți alege un agent existent.",
   "ChooseAnother": "Alegeți altceva",
   "ChooseExpirationDate": "Indicați data expirării pentru a limita perioada de disponibilitate a acestui link.",

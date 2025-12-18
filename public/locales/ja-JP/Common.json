@@ -144,7 +144,6 @@
   "ChatExported": "チャット「<1>{{title}}</1>」を次のファイルにエクスポート:「<2>{{fileName}}</2>」",
   "ChatHistory": "チャット履歴",
   "ChatSuccessDeleted": "チャットを正常に削除しました。",
-  "ChooseAIAgent": "AIエージェントを選択してください",
   "ChooseAIAgentDescription": "選択したファイルについてAIとチャットしたいエージェントを選択してください。既存のエージェントを選択するか、新しいエージェントを作成できます。",
   "ChooseAnother": "他のを選択してください",
   "ChooseExpirationDate": "有効期限を設定して、このリンクの利用可能期間を制限します。",

@@ -144,7 +144,6 @@
   "ChatExported": "Tērzēšana <1>{{title}}</1> eksportēts uz failu: <2>{{fileName}}</2>",
   "ChatHistory": "Čata vēsture",
   "ChatSuccessDeleted": "Čats veiksmīgi dzēsts",
-  "ChooseAIAgent": "Izvēlieties MI aģentu",
   "ChooseAIAgentDescription": "Izvēlieties aģentu, kurā vēlaties saņemt MI sarunu par atlasīto failu. Jūs varat izvēlēties esošu aģentu.",
   "ChooseAnother": "Izvēlēties citu",
   "ChooseExpirationDate": "Ierobežojiet šīs saites pieejamības periodu, iestatot derīguma termiņu.",

@@ -144,7 +144,6 @@
   "ChatExported": "Sohbet <1>{{title}}</1> şu dosyaya aktarıldı: <2>{{fileName}}</2>",
   "ChatHistory": "Sohbet geçmişi",
   "ChatSuccessDeleted": "Sohbet başarıyla silindi",
-  "ChooseAIAgent": "Bir yapay zeka aracısı seçin",
   "ChooseAIAgentDescription": "Seçtiğiniz dosya hakkında yapay zeka ile sohbet etmek istediğiniz aracı seçin. Mevcut bir aracı seçebilirsiniz.",
   "ChooseAnother": "Başka bir tane seçin",
   "ChooseExpirationDate": "Bir son kullanma tarihi belirleyerek bu bağlantının kullanılabilirlik süresini sınırlandırın.",

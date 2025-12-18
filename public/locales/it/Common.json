@@ -144,7 +144,6 @@
   "ChatExported": "Chat <1>{{title}}</1> esportata in file: <2>{{fileName}}</2>",
   "ChatHistory": "Cronologia chat",
   "ChatSuccessDeleted": "Chat eliminato con successo",
-  "ChooseAIAgent": "Scegli un agente AI",
   "ChooseAIAgentDescription": "Seleziona l'agente con cui desideri chattare con l'AI riguardo al file selezionato. Puoi scegliere un agente esistente o crearne uno nuovo.",
   "ChooseAnother": "Scegli un altro",
   "ChooseExpirationDate": "Limita il periodo di disponibilità per questo link impostando una data di scadenza.",

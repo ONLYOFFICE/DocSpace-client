@@ -144,7 +144,6 @@
   "ChatExported": "Biseda <1>{{title}}</1> u eksportua në skedarin: <2>{{fileName}}</2>",
   "ChatHistory": "Historia e bisedave",
   "ChatSuccessDeleted": "Biseda është shfaqur me sukses.",
-  "ChooseAIAgent": "Zgjidhni një agjent të inteligjencës artificiale",
   "ChooseAIAgentDescription": "Zgjidhni agentin me të cilin doni të bisedoni me AI për skedarin e zgjedhur. Mund të zgjidhni një agent ekzistues.",
   "ChooseAnother": "Zgjidhni një tjetër",
   "ChooseExpirationDate": "Kufizoni periudhën e disponueshmërisë për këtë lidhje duke vendosur një datë skadimi.",

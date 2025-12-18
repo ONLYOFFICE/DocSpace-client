@@ -144,7 +144,6 @@
   "ChatExported": "对话<1>{{title}}</1>已导出到文件：<2>{{fileName}}</2>",
   "ChatHistory": "历史对话",
   "ChatSuccessDeleted": "聊天已成功删除",
-  "ChooseAIAgent": "选择 AI 智能体",
   "ChooseAIAgentDescription": "选择您希望与 AI 讨论所选文件的代理。您可以选择一个已存在的代理。",
   "ChooseAnother": "选择另一个",
   "ChooseExpirationDate": "通过设置失效日期，限制此链接的有效期。",

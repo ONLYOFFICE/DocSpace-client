@@ -276,7 +276,9 @@ const AIAgentSelectorComponent = ({
       onClose={onClose}
       withInfoBar={withInfo}
       infoBarData={{
-        title: t("Common:ChooseAIAgent"),
+        title: t("Common:ChooseAIAgent", {
+          aiAgent: t("Common:AIAgent"),
+        }),
         icon: InfoIconSvgUrl,
         onClose: () => setWithInfo(!withInfo),
         description: t("Common:ChooseAIAgentDescription"),

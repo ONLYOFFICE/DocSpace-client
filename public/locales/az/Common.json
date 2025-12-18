@@ -144,7 +144,6 @@
   "ChatExported": "<1>{{title}}</1> söhbəti bu fayla ixrac edildi: <2>{{fileName}}</2>",
   "ChatHistory": "Söhbət tarixində",
   "ChatSuccessDeleted": "Söhbət uğurla silindi",
-  "ChooseAIAgent": "Səyahət agenti seç",
   "ChooseAIAgentDescription": "Seçilmiş fayl haqqında süni intellektlə söhbət etmək istədiyiniz agenti seçin. Mövcud agentlərdən birini seçə bilərsiniz.",
   "ChooseAnother": "Başqasını seçin",
   "ChooseExpirationDate": "İstifadə müddəti təyin etməklə bu keçidin mövcudluğunu məhdudlaşdırın.",

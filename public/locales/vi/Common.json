@@ -144,7 +144,6 @@
   "ChatExported": "Trò chuyện <1>{{title}}</1> được xuất ra tệp: <2>{{fileName}}</2>",
   "ChatHistory": "Lịch trò chuyện",
   "ChatSuccessDeleted": "Đã xóa cuộc trò chuyện thành công",
-  "ChooseAIAgent": "Chọn một tác nhân AI",
   "ChooseAIAgentDescription": "Chọn agent mà bạn muốn trò chuyện với AI về tệp đã chọn. Bạn có thể chọn một agent hiện có.",
   "ChooseAnother": "Chọn khác",
   "ChooseExpirationDate": "Giới hạn thời gian còn hiệu lực cho liên kết này bằng cách đặt ngày hết hạn.",

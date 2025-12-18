@@ -493,7 +493,7 @@ export async function getCardLinked(backUrl, signal?: AbortSignal) {
 
   const res = (await request({
     method: "get",
-    url: "/portal/payment/chechoutsetupurl",
+    url: "/portal/payment/checkoutsetupurl",
     params,
     signal,
   })) as string;

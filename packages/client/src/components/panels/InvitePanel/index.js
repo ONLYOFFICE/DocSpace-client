@@ -472,14 +472,21 @@ const InvitePanel = ({
     setLinkSettingsPanelVisible(false);
   };
 
-  const copyLink = (link) => {
+  const copyLink = (link, showToast = true) => {
     if (!link.shareLink && !link.url) return;
 
     const expirationDate = link?.expirationDate ?? link.expiration;
     const isExpired = moment(new Date()).isAfter(moment(expirationDate));
     const isLimit = link?.currentUseCount >= link?.maxUseCount;
-    if (isExpired) return toastr.error(t("Common:LinkExpired"));
-    if (isLimit) return toastr.error(t("Common:LinkNoLongerAvailable"));
+
+    if (isExpired) {
+      if (!showToast) return;
+      return toastr.error(t("Common:LinkExpired"));
+    }
+    if (isLimit) {
+      if (!showToast) return;
+      return toastr.error(t("Common:LinkNoLongerAvailable"));
+    }
 
     const date = getDate(expirationDate);
 
@@ -507,6 +514,10 @@ const InvitePanel = ({
   const editLink = async (linkAccess = null, defaultLink) => {
     const type = getDefaultAccessUser(roomType);
 
+    const expiration = defaultLink
+      ? defaultLink?.linkExpirationDate
+      : moment().add(7, "days");
+
     let link = null;
 
     try {
@@ -516,7 +527,7 @@ const InvitePanel = ({
         "Invite",
         type,
         undefined,
-        defaultLink?.linkExpirationDate,
+        expiration,
         defaultLink?.maxUseCount,
       );
       onChangeExternalLinksVisible(true);
@@ -567,7 +578,7 @@ const InvitePanel = ({
         };
 
         setActiveLink(linkDataObj);
-        copyLink(linkDataObj);
+        copyLink(linkDataObj, false);
         setExternalLinksVisible(true);
         return;
       } catch (error) {
@@ -626,7 +637,7 @@ const InvitePanel = ({
         setActiveLink(newActiveLink);
 
         setLinkSelectedAccess(access);
-        copyLink(link);
+        copyLink(link, false);
       } catch (error) {
         toastr.error(error);
       }

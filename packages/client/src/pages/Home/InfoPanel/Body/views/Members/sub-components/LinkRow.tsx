@@ -172,6 +172,10 @@ const LinkRow = (props: LinkRowProps) => {
   };
 
   const editExternalLinkAction = async (newLink: TFileLink) => {
+    if (link.sharedTo.isExpired) {
+      newLink.sharedTo.expirationDate = moment().add(7, "days").toISOString();
+    }
+
     setLoadingLinks([newLink.sharedTo.id]);
 
     const startLoaderTime = new Date();

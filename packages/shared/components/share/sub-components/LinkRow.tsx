@@ -168,7 +168,6 @@ const LinkRow = ({
             isFolder={isFolder}
             isLoaded={isLoaded}
             isRoomsLink={isRoomsLink}
-            isExpiredLink={isExpiredLink}
             accessOptions={accessOptions}
             selectedAccessOption={selectedAccessOption}
             isArchiveFolder={isArchiveFolder}

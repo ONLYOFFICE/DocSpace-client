@@ -139,6 +139,7 @@ const TilesContainer: FC<TilesContainerProps> = (props) => {
       style={{ height, width: "calc(100% + 16px)" }}
       id="scroll-template-gallery"
       ref={scrollRef}
+      paddingInlineEnd="16px"
     >
       <Tiles
         isShowOneTile={showOneTile}

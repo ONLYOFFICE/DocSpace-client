@@ -27,7 +27,7 @@
 @use "@docspace/shared/styles/mixins";
 
 .loginContent {
-  min-height: calc(100vh - 112px);
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;

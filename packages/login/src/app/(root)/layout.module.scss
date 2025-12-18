@@ -36,7 +36,7 @@
     height: calc(100% - 48px);
   }
 
-  body.dark :global(.logo-wrapper--dark) {
+  :global(body.dark) & :global(.logo-wrapper--dark) {
     display: block;
 
     @include mixins.mobile {
@@ -44,7 +44,7 @@
     }
   }
 
-  body.dark :global(.logo-wrapper--light) {
+  :global(body.dark) & :global(.logo-wrapper--light) {
     display: none;
 
     @include mixins.mobile {
@@ -52,7 +52,7 @@
     }
   }
 
-  body.light :global(.logo-wrapper--dark) {
+  :global(body.light) & :global(.logo-wrapper--dark) {
     display: none;
 
     @include mixins.mobile {
@@ -60,7 +60,7 @@
     }
   }
 
-  body.light :global(.logo-wrapper--light) {
+  :global(body.light) & :global(.logo-wrapper--light) {
     display: block;
 
     @include mixins.mobile {

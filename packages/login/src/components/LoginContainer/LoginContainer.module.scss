@@ -266,7 +266,7 @@
       }
     }
 
-    .logo-wrapper {
+    :global(.logo-wrapper) {
       display: flex;
       align-items: center;
       justify-content: center;

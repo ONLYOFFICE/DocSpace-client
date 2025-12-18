@@ -37,19 +37,19 @@
     height: 24px;
   }
 
-  body.dark :global(.logo-wrapper--dark) {
+  :global(body.dark) & :global(.logo-wrapper--dark) {
     display: block;
   }
 
-  body.dark :global(.logo-wrapper--light) {
+  :global(body.dark) & :global(.logo-wrapper--light) {
     display: none;
   }
 
-  body.light :global(.logo-wrapper--dark) {
+  :global(body.light) & :global(.logo-wrapper--dark) {
     display: none;
   }
 
-  body.light :global(.logo-wrapper--light) {
+  :global(body.light) & :global(.logo-wrapper--light) {
     display: block;
   }
 

@@ -188,7 +188,7 @@ const ActivateUserForm = ({
 
   return (
     <div className={styles.registerContainer}>
-      <form className={styles.authFormContainer}>
+      <form className="auth-form-container">
         <GreetingUserContainer
           emailFromLink={emailFromLink}
           email={emailFromLink}

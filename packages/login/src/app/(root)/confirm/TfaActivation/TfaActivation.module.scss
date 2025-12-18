@@ -1,36 +1,32 @@
 // (c) Copyright Ascensio System SIA 2009-2025
-//
+// 
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
 // of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
 // Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
 // to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
 // any third-party rights.
-//
+// 
 // This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
 // of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
 // the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
+// 
 // You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
+// 
 // The  interactive user interfaces in modified source and object code versions of the Program must
 // display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
+// 
 // Pursuant to Section 7(b) of the License you must retain the original Product logo when
 // distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
 // trademark law for use of our trademarks.
-//
+// 
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+@use "@docspace/shared/styles/mixins";
 
-import styled from "styled-components";
-
-import { mobile, tablet } from "@docspace/shared/utils";
-
-export const StyledForm = styled.div`
+.tfaActivationForm {
   box-sizing: border-box;
   display: flex;
   flex: 1fr 1fr;
@@ -39,14 +35,14 @@ export const StyledForm = styled.div`
   justify-content: center;
   margin-top: 24px;
 
-  @media ${tablet} {
+  @include mixins.tablet {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0;
   }
 
-  @media ${mobile} {
+  @include mixins.mobile {
     margin: 0 auto;
     flex-direction: column;
     gap: 0px;
@@ -54,59 +50,60 @@ export const StyledForm = styled.div`
     padding-inline-end: 8px;
   }
 
-  .app-code-wrapper {
+  :global(.app-code-wrapper) {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     width: 100%;
 
-    @media ${tablet} {
+    @include mixins.tablet-and-below {
       flex-direction: column;
     }
   }
 
-  .logo-wrapper {
+  :global(.logo-wrapper) {
     max-width: 386px;
     height: 44px;
     width: auto;
 
-    @media ${tablet} {
+    @include mixins.tablet {
       width: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
-    @media ${mobile} {
+    @include mixins.mobile {
       display: none;
     }
   }
 
-  .set-app-description {
+  :global(.set-app-description) {
     box-sizing: border-box;
     margin: 0 0 32px 0;
     width: 100%;
     max-width: 480px;
 
-    .portal-logo {
+    :global(.portal-logo) {
       margin: 0 auto;
       max-width: 386px;
       height: 44px;
     }
   }
 
-  .set-app-title {
+  :global(.set-app-title) {
     margin-bottom: 4px;
   }
 
-  .set-app-subtitle {
+  :global(.set-app-subtitle) {
     margin-bottom: 20px;
   }
-  .set-app-text {
+
+  :global(.set-app-text) {
     margin-top: 8px;
   }
 
-  .qrcode-wrapper {
+  :global(.qrcode-wrapper) {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -114,28 +111,28 @@ export const StyledForm = styled.div`
     border-radius: 6px;
     margin-bottom: 32px;
 
-    @media ${mobile} {
+    @include mixins.mobile {
       display: none;
     }
   }
 
-  .app-code-input,
-  .app-code-continue-btn {
+  :global(.app-code-input),
+  :global(.app-code-continue-btn) {
     box-sizing: border-box;
   }
 
-  .description {
+  :global(.description) {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 20px;
 
-    .description-item {
+    :global(.description-item) {
       display: flex;
       gap: 12px;
     }
 
-    .icon-container {
+    :global(.icon-container) {
       position: relative;
       height: 32px;
       padding: 0 8px;
@@ -145,7 +142,7 @@ export const StyledForm = styled.div`
       border-radius: 6px;
     }
 
-    .icon-container::before {
+    :global(.icon-container::before) {
       content: "";
       position: absolute;
       top: 0;
@@ -159,7 +156,7 @@ export const StyledForm = styled.div`
     }
   }
 
-  strong {
+  :global(strong) {
     user-select: text;
   }
-`;
+}

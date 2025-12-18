@@ -29,6 +29,7 @@
 import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 import { ChangeEvent, MouseEvent, useRef, useState, useMemo } from "react";
+import classNames from "classnames";
 
 import {
   createPasswordHash,
@@ -84,12 +85,7 @@ import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg";
 
 import { TError, TTimeZoneOption } from "@/types";
 import { toastr } from "@docspace/shared/components/toast";
-import {
-  StyledAcceptTerms,
-  StyledInfo,
-  StyledLink,
-  WizardContainer,
-} from "./page.styled";
+import styles from "./wizard.module.scss";
 
 type WizardFormProps = {
   passwordSettings?: TPasswordSettings;
@@ -328,12 +324,12 @@ function WizardForm(props: WizardFormProps) {
   };
 
   return (
-    <WizardContainer>
-      <Text fontWeight={600} fontSize="16px" className="form-header">
+    <div className={styles.wizardContainer}>
+      <Text fontWeight={600} fontSize="16px" className={styles.formHeader}>
         {t("Wizard:Desc", { productName: t("Common:ProductName") })}
       </Text>
       <FieldContainer
-        className="wizard-field"
+        className={styles.wizardField}
         isVertical
         labelVisible={false}
         hasError={hasErrorEmail}
@@ -357,7 +353,7 @@ function WizardForm(props: WizardFormProps) {
       </FieldContainer>
 
       <FieldContainer
-        className="wizard-field password-field"
+        className={classNames(styles.wizardField, styles.passwordField)}
         isVertical
         labelVisible={false}
         hasError={hasErrorPass}
@@ -382,7 +378,7 @@ function WizardForm(props: WizardFormProps) {
         />
       </FieldContainer>
 
-      <StyledLink>
+      <div className={styles.linkWrapper}>
         <IconButton
           size={12}
           iconNode={<RefreshReactSvgUrl />}
@@ -390,7 +386,7 @@ function WizardForm(props: WizardFormProps) {
           dataTestId="generate_password_icon_button"
         />
         <Link
-          className="generate-password-link"
+          className={styles.generatePasswordLink}
           type={LinkType.action}
           fontWeight={600}
           isHovered
@@ -399,7 +395,7 @@ function WizardForm(props: WizardFormProps) {
         >
           {t("Common:GeneratePassword")}
         </Link>
-      </StyledLink>
+      </div>
 
       {isAmi ? (
         <FieldContainer
@@ -429,7 +425,7 @@ function WizardForm(props: WizardFormProps) {
 
       {isRequiredLicense ? (
         <FieldContainer
-          className="license-filed"
+          className={styles.licenseField}
           isVertical
           labelVisible={false}
           hasError={hasErrorLicense}
@@ -451,20 +447,20 @@ function WizardForm(props: WizardFormProps) {
         </FieldContainer>
       ) : null}
 
-      <StyledInfo>
-        <Text className="text" fontWeight={400}>
+      <div className={styles.infoWrapper}>
+        <Text className={styles.text} fontWeight={400}>
           {t("Common:Domain")}
         </Text>
-        <Text fontWeight={600} className="machine-name">
+        <Text fontWeight={600} className={styles.machineName}>
           {machineName}
         </Text>
-      </StyledInfo>
+      </div>
 
-      <StyledInfo>
-        <Text className="text" fontWeight={400}>
+      <div className={styles.infoWrapper}>
+        <Text className={styles.text} fontWeight={400}>
           {t("Common:Language")}
         </Text>
-        <div className="wrapper__language-selector">
+        <div className={styles.wrapperLanguageSelector}>
           <ComboBox
             withoutPadding
             directionY="both"
@@ -497,10 +493,10 @@ function WizardForm(props: WizardFormProps) {
             />
           ) : null}
         </div>
-      </StyledInfo>
+      </div>
 
-      <StyledInfo>
-        <Text className="text" fontWeight={400}>
+      <div className={styles.infoWrapper}>
+        <Text className={styles.text} fontWeight={400}>
           {t("Timezone")}
         </Text>
         <ComboBox
@@ -524,11 +520,11 @@ function WizardForm(props: WizardFormProps) {
           dataTestId="timezone_combobox"
           dropDownTestId="timezone_dropdown"
         />
-      </StyledInfo>
+      </div>
 
-      <StyledAcceptTerms>
+      <div className={styles.acceptTerms}>
         <Checkbox
-          className="wizard-checkbox"
+          className={styles.wizardCheckbox}
           id="license"
           name="confirm"
           label={t("License")}
@@ -553,7 +549,7 @@ function WizardForm(props: WizardFormProps) {
         >
           {t("LicenseLink")}
         </Link>
-      </StyledAcceptTerms>
+      </div>
 
       <Button
         size={ButtonSize.medium}
@@ -564,7 +560,7 @@ function WizardForm(props: WizardFormProps) {
         onClick={onContinueClick}
         testId="wizard_continue_button"
       />
-    </WizardContainer>
+    </div>
   );
 }
 

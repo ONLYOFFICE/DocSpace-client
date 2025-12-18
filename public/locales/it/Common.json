@@ -530,7 +530,6 @@
   "LinkCopySuccessWithCustomFilter": "Il collegamento al file con il <strong>Filtro personalizzato</strong> abilitato è stato copiato correttamente negli appunti.",
   "LinkDoesNotExist": "Il link che stai cercando di aprire non esiste.",
   "LinkExpirationDate": "Il file condiviso tramite link scadrà il <1>{{date}}</1>",
-  "LinkExpireAfter": "Il link scadrà dopo il <1>{{date}}</1>",
   "LinkExpired": "Il link è scaduto.",
   "LinkHasExpired": "Il link che hai seguito è scaduto.",
   "LinkIsValid": "Il link è valido per <1>{{date}}</1>",

@@ -530,7 +530,6 @@
   "LinkCopySuccessWithCustomFilter": "<strong>Özel Filtre</strong> etkin dosyanın bağlantısı panoya kopyalandı.",
   "LinkDoesNotExist": "Açmaya çalıştığınız bağlantı mevcut değil.",
   "LinkExpirationDate": "Bağlantıyla paylaşılan dosya <1>{{date}}</1> tarihinde sona erecektir.",
-  "LinkExpireAfter": "Bağlantı <1>{{date}}</1> tarihinden sonra sona erecektir",
   "LinkExpired": "Bağlantının süresi doldu.",
   "LinkHasExpired": "Takip ettiğiniz bağlantının süresi doldu.",
   "LinkIsValid": "Bağlantı <1>{{date}}</1> tarihi için geçerlidir",

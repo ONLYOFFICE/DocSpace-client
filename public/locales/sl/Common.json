@@ -530,7 +530,6 @@
   "LinkCopySuccessWithCustomFilter": "Povezava do datoteke z omogočenim <strong>prilagojenim filtrom</strong> je uspešno kopirana v odložišče.",
   "LinkDoesNotExist": "Povezava, ki jo poskušate odpreti, ne obstaja.",
   "LinkExpirationDate": "Datoteka, deljena po povezavi, bo potekla <1>{{date}}</1>",
-  "LinkExpireAfter": "Povezava bo potekla z dnem <1>{{date}}</1>",
   "LinkExpired": "Povezava je potekla.",
   "LinkHasExpired": "Povezava, ki ste ji sledili, je potekla.",
   "LinkIsValid": "Povezava je veljavna do<1>{{date}}</1>",

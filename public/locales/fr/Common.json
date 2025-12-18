@@ -530,7 +530,6 @@
   "LinkCopySuccessWithCustomFilter": "Le lien vers le fichier avec le <strong>Filtre personnalisé</strong> activé est copié avec succès dans le presse-papiers.",
   "LinkDoesNotExist": "Le lien que vous essayez d'ouvrir n'existe pas.",
   "LinkExpirationDate": "Le fichier partagé par lien expirera dans <1>{{date}}</1>",
-  "LinkExpireAfter": "Le lien expire après <1>{{date}}</1>",
   "LinkExpired": "Le lien a expiré.",
   "LinkHasExpired": "Le lien que vous avez suivi a expiré.",
   "LinkIsValid": "Le lien est valable pour <1>{{date}}</1>",

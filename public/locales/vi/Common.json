@@ -530,7 +530,6 @@
   "LinkCopySuccessWithCustomFilter": "Đã sao chép liên kết đến tệp có <strong>Bộ lọc tùy chỉnh</strong> được bật vào bảng tạm.",
   "LinkDoesNotExist": "Liên kết bạn đang cố gắng mở không tồn tại.",
   "LinkExpirationDate": "Tệp tin được chia sẻ qua liên kết sẽ hết hạn vào <1>{{date}}</1>",
-  "LinkExpireAfter": "Liên kết sẽ hết hạn sau <1>{{date}} </1>",
   "LinkExpired": "Liên kết đã hết hạn.",
   "LinkHasExpired": "Liên kết bạn theo dõi đã hết hạn.",
   "LinkIsValid": "Liên kết hợp lệ trong <1>{{date}} </1>",

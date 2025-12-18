@@ -530,7 +530,6 @@
   "LinkCopySuccessWithCustomFilter": "Saite uz failu ar ieslēgtu <strong>pielāgoto filtru</strong> veiksmīgi nokopēta starpliktuvē.",
   "LinkDoesNotExist": "Saite, kuru mēģināt atvērt, neeksistē.",
   "LinkExpirationDate": "Faila, kas kopīmots saites, derīguma termiņš beigsies <1>{{date}}</1>",
-  "LinkExpireAfter": "Saites derīguma termiņš beigsies pēc <1>{{date}}</1>",
   "LinkExpired": "Saitei ir beidzies derīguma termiņš.",
   "LinkHasExpired": "Saitei, kurai sekojāt, ir beidzies derīguma termiņš.",
   "LinkIsValid": "Saite ir derīga <1>{{date}}</1>",

@@ -530,7 +530,6 @@
   "LinkCopySuccessWithCustomFilter": "Der Link zur Datei mit dem aktivierten <strong>Benutzerdefinierten Filter</strong> wurde erfolgreich in die Zwischenablage kopiert.",
   "LinkDoesNotExist": "Der Link, den Sie öffnen möchten, existiert nicht.",
   "LinkExpirationDate": "Die über den Link geteilte Datei läuft am <1>{{date}}</1> ab.",
-  "LinkExpireAfter": "Der Link läuft nach dem <1>{{date}}</1> ab",
   "LinkExpired": "Der Link ist abgelaufen.",
   "LinkHasExpired": "Der von Ihnen verwendete Link ist abgelaufen.",
   "LinkIsValid": "Der Link ist <1>{{date}}</1> gültig.",

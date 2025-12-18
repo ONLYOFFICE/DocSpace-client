@@ -530,7 +530,6 @@
   "LinkCopySuccessWithCustomFilter": "El enlace al archivo con el <strong>Filtro personalizado</strong> habilitado se ha copiado correctamente al portapapeles.",
   "LinkDoesNotExist": "El enlace que usted intenta abrir no existe.",
   "LinkExpirationDate": "El archivo compartido por enlace expirará en <1>{{date}}</1>",
-  "LinkExpireAfter": "El enlace caducará después del <1>{{date}}</1>",
   "LinkExpired": "El enlace ha caducado.",
   "LinkHasExpired": "El enlace que usted ha seguido ha expirado.",
   "LinkIsValid": "El enlace es válido durante <1>{{date}}</1>",

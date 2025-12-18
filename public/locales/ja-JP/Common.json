@@ -530,7 +530,6 @@
   "LinkCopySuccessWithCustomFilter": "<strong>カスタムフィルター</strong> が有効なファイルのリンクがクリップボードに正常にコピーされました。",
   "LinkDoesNotExist": "開こうとしているリンクは存在しません。",
   "LinkExpirationDate": "リンクで共有されたファイルは、<1>{{date}}</1>に期限切れになります。",
-  "LinkExpireAfter": "リンクの有効期限は<1>{{date}}</1>です",
   "LinkExpired": "リンクの有効期限が切れています。",
   "LinkHasExpired": "リンクの有効期限が切れています。",
   "LinkIsValid": "リンクは<1>{{date}}</1>の間有効です。",

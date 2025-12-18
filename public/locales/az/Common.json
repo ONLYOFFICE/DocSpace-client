@@ -530,7 +530,6 @@
   "LinkCopySuccessWithCustomFilter": "<strong>Xüsusi filtr</strong> aktivləşdirilmiş faylın linki müvəffəqiyyətlə mübadilə buferinə köçürüldü.",
   "LinkDoesNotExist": "Açmağa çalışdığınız keçid mövcud deyil.",
   "LinkExpirationDate": "Linklə paylaşılan fayl <1>{{date}}</1> tarixində bitəcək.",
-  "LinkExpireAfter": "Link <1>{{date}}</1> sonra başa çatacaq",
   "LinkExpired": "Linkin müddəti bitib.",
   "LinkHasExpired": "İzlədiyiniz keçidin vaxtı keçib.",
   "LinkIsValid": "Link <1>{{date}}</1> üçün etibarlıdır",

@@ -530,7 +530,6 @@
   "LinkCopySuccessWithCustomFilter": "Linkki tiedostoon, jossa <strong>mukautettu suodatin</strong> on käytössä, kopioitiin leikepöydälle.",
   "LinkDoesNotExist": "Linkki, jota yrität avata ei ole olemassa.",
   "LinkExpirationDate": "Tiedosto, joka on jaettu linkin kautta, vanhenee <1>{{date}}</1>",
-  "LinkExpireAfter": "Linkki vanhenee <1>{{date}}</1> jälkeen",
   "LinkExpired": "Linkki on vanhentunut.",
   "LinkHasExpired": "Linkki, jota seurasit on vanhentunut.",
   "LinkIsValid": "Linkki on voimassa <1>{{date}}</1> saakka",

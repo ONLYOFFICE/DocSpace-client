@@ -530,7 +530,6 @@
   "LinkCopySuccessWithCustomFilter": "Lidhja me skedarin me <strong>Filtër të personalizuar</strong> u kopjua me sukses në të kujtesën e përkohshme.",
   "LinkDoesNotExist": "Lidhja që ju po mundoheni të hapni nuk ekziston.",
   "LinkExpirationDate": "Skedari i ndarë përmes lidhjes do të skadojë më <1>{{date}}</1>",
-  "LinkExpireAfter": "Lidhja do të skadojë pas <1>{{date}}</1>",
   "LinkExpired": "Lidhja ka skaduar.",
   "LinkHasExpired": "Lidhja që keni ndjekur ka skaduar.",
   "LinkIsValid": "Lidhja është e vlefshme për <1>{{date}}</1>",

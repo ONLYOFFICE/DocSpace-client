@@ -530,7 +530,6 @@
   "LinkCopySuccessWithCustomFilter": "Odkaz na soubor s povoleným <strong>Vlastním filtrem</strong> byl úspěšně zkopírován do schránky.",
   "LinkDoesNotExist": "Odkaz, který se snažíte otevřít, neexistuje.",
   "LinkExpirationDate": "Soubor sdílený odkazem vyprší <1>{{date}}</1>",
-  "LinkExpireAfter": "Platnost odkazu vyprší po <1>{{date}}</1>",
   "LinkExpired": "Platnost odkazu vypršela.",
   "LinkHasExpired": "Platnost odkazu, který jste použili, vypršela.",
   "LinkIsValid": "Odkaz je platný pro <1>{{date}}</1>",

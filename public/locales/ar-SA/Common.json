@@ -530,7 +530,6 @@
   "LinkCopySuccessWithCustomFilter": "تم نسخ رابط الملف مع تفعيل <strong>الفِلتر المخصص</strong> بنجاح إلى الحافظة.",
   "LinkDoesNotExist": "الرابط الذي تحاول فتحه غير موجود",
   "LinkExpirationDate": "ستنتهي صلاحية الملف المشترك عبر الرابط في <1>{{date}}</1>",
-  "LinkExpireAfter": "ستنتهي صلاحية الرابط  بعد <1>{{date}}</1>",
   "LinkExpired": "انتهت صلاحية الرابط.",
   "LinkHasExpired": "انتهت صلاحية الرابط الذي تحاول فتحه",
   "LinkIsValid": "الرابط صالح لمدة <1>{{date}}</1>",

@@ -536,7 +536,7 @@
   "LinkCopySuccessWithCustomFilter": "The link to the file with the enabled <strong>Custom filter</strong> is successfully copied to the clipboard.",
   "LinkDoesNotExist": "The link you are trying to open does not exist.",
   "LinkExpirationDate": "The file shared by link will expire in <1>{{date}}</1>",
-  "LinkExpireAfter": "The link will expire after <1>{{date}}</1>",
+  "LinkExpireAfter": "The link will expire <1>{{date}}</1>",
   "LinkExpired": "The link has expired.",
   "LinkHasExpired": "The link you followed has expired.",
   "LinkIsValid": "The link is valid for <1>{{date}}</1>",

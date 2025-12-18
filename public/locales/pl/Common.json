@@ -530,7 +530,6 @@
   "LinkCopySuccessWithCustomFilter": "Link do pliku z włączonym <strong>niestandardowym filtrem</strong> został pomyślnie skopiowany do schowka.",
   "LinkDoesNotExist": "Link, który próbujesz otworzyć, nie istnieje.",
   "LinkExpirationDate": "Plik udostępniony pod linkiem wygaśnie <1>{{date}}</1>",
-  "LinkExpireAfter": "Link wygaśnie po <1>{{date}}</1>",
   "LinkExpired": "Link wygasł",
   "LinkHasExpired": "Dany link wygasł.",
   "LinkIsValid": "Link jest ważny do <1>{{date}}</1>",

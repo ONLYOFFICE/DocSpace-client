@@ -530,7 +530,6 @@
   "LinkCopySuccessWithCustomFilter": "O link para o arquivo com o <strong>Filtro Personalizado</strong> ativado foi copiado para a área de transferência com sucesso.",
   "LinkDoesNotExist": "O link que você está tentando abrir não existe.",
   "LinkExpirationDate": "O arquivo compartilhado pelo link expirará em <1>{{date}}</1>",
-  "LinkExpireAfter": "O link expirará após <1>{{date}}</1>",
   "LinkExpired": "O link expirou.",
   "LinkHasExpired": "O link que você seguiu expirou.",
   "LinkIsValid": "O link é válido por <1>{{date}}</1>",

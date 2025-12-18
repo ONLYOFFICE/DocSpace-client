@@ -530,7 +530,6 @@
   "LinkCopySuccessWithCustomFilter": "Link-ul către fișierul cu <strong>Filtru particularizat</strong> activ a fost copiat cu succes în clipboard.",
   "LinkDoesNotExist": "Lunk-ul pe care încercați să-l deschideți nu există.",
   "LinkExpirationDate": "Fișierul partajat printr-un link va expira după <1>{{date}}</1>",
-  "LinkExpireAfter": "Link-ul expiră după data <1>{{date}} </1>",
   "LinkExpired": "Link-ul a expirat.",
   "LinkHasExpired": "Linkul pe care l-ați urmat a expirat.",
   "LinkIsValid": "Linkul este valabil pentru <1>{{date}}</1>.",

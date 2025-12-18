@@ -530,7 +530,6 @@
   "LinkCopySuccessWithCustomFilter": "启用<strong>自定义过滤器</strong>的文件链接已成功复制到剪贴板。",
   "LinkDoesNotExist": "链接不存在。",
   "LinkExpirationDate": "通过链接共享的文件将于<1>{{date}}</1>到期。",
-  "LinkExpireAfter": "链接将在 <1>{{date}}</1>后过期",
   "LinkExpired": "链接已过期",
   "LinkHasExpired": "您关注的链接已过期。",
   "LinkIsValid": "链接在 <1>{{date}}</1>前有效",

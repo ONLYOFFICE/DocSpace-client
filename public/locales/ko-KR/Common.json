@@ -530,7 +530,6 @@
   "LinkCopySuccessWithCustomFilter": "<strong>사용자 지정 필터</strong>가 활성화된 파일 링크가 클립보드에 성공적으로 복사되었습니다.",
   "LinkDoesNotExist": "열려고 하는 링크가 존재하지 않습니다.",
   "LinkExpirationDate": "링크로 공유된 파일은 <1>{{date}}</1>에 만료됩니다.",
-  "LinkExpireAfter": "링크가 <1>{{date}}</1> 후에 만료됩니다",
   "LinkExpired": "링크가 만료되었습니다.",
   "LinkHasExpired": "팔로우한 링크가 만료되었습니다.",
   "LinkIsValid": "링크는 <1>{{date}}</1> 동안 유효합니다",

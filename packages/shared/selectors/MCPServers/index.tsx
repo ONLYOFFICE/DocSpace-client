@@ -194,7 +194,9 @@ const MCPServersSelector = ({
       onSelect={onSelect}
       withHeader
       headerProps={{
-        headerLabel: t("Common:AvailableMCPServers"),
+        headerLabel: t("Common:AvailableMCPServers", {
+          mcpServers: t("Common:MCPSettingTitle"),
+        }),
         withoutBackButton: false,
         onBackClick: onBackClick,
         onCloseClick: onClose,

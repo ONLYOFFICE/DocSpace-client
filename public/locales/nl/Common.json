@@ -96,7 +96,6 @@
   "AutoBackupDescription": "De optie Automatische back-up wordt gebruikt om het back-upproces van {{productName}} gegevens te automatiseren, zodat u deze later op een lokale server kunt terugzetten.",
   "AutoSavePeriod": "Autosave periode",
   "AutoSavePeriodHelp": "De hieronder aangegeven tijd komt overeen met de in de  {{productName}} ingestelde tijdzone.",
-  "AvailableMCPServers": "Beschikbare MCP servers",
   "Back": "Terug",
   "Backup": "Back-up",
   "BackupCreatedSuccess": "De back-up kopie is succesvol aangemaakt.",

@@ -96,7 +96,6 @@
   "AutoBackupDescription": "Automātiskās dublēšanas opcija tiek izmantota, lai automatizētu {{productName}} datu dublēšanas procesu, lai vēlāk to varētu atjaunot lokālajā serverī.",
   "AutoSavePeriod": "Automātiskās saglabāšanas periods",
   "AutoSavePeriodHelp": "Zemāk redzamais laiks atbilst {{productName}} iestatītajai laika joslai.",
-  "AvailableMCPServers": "Pieejami MCP serveri",
   "Back": "Atpakaļ",
   "Backup": "Dublēšana",
   "BackupCreatedSuccess": "Rezerves kopija veiksmīgi izveidota.",

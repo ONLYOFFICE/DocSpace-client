@@ -96,7 +96,6 @@
   "AutoBackupDescription": "La opción Copia de seguridad automática se utiliza para automatizar el proceso de creación de copias de seguridad de los datos de {{productName}} y poder restaurarlos posteriormente en un servidor local. ",
   "AutoSavePeriod": "Periodo de autoguardado",
   "AutoSavePeriodHelp": "La hora que se muestra abajo corresponde a la zona horaria establecida en {{productName}}.",
-  "AvailableMCPServers": "Servidores MCP disponibles ",
   "Back": "Volver",
   "Backup": "Copia de seguridad de datos",
   "BackupCreatedSuccess": "La copia de seguridad se ha creado con éxito.",

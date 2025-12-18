@@ -96,7 +96,6 @@
   "AutoBackupDescription": "يتم استخدام خيار النسخ الاحتياطي التلقائي لأتمتة عملية النسخ الاحتياطي لبيانات {{productName}} لتتمكن من استعادتها لاحقًا إلى خادم محلي.",
   "AutoSavePeriod": "فترة الحفظ التلقائي",
   "AutoSavePeriodHelp": "الوقت الموضح أدناه يتوافق مع المنطقة الزمنية المحددة في {{productName}}.",
-  "AvailableMCPServers": "خوادم MCP المتاحة",
   "Back": "خلف",
   "Backup": "النسخ احتياطي",
   "BackupCreatedSuccess": "تم إنشاء النسخة الاحتياطية بنجاح.",

@@ -96,7 +96,6 @@
   "AutoBackupDescription": "Tùy chọn Sao lưu tự động được sử dụng để tự động hóa quá trình sao lưu dữ liệu {{productName}} để có thể khôi phục dữ liệu sau này về máy chủ cục bộ.",
   "AutoSavePeriod": "Thời gian lưu tự động",
   "AutoSavePeriodHelp": "Thời gian hiển thị bên dưới tương ứng với múi giờ được đặt trong {{productName}}.",
-  "AvailableMCPServers": "Các máy chủ MCP khả dụng",
   "Back": "Quay lại",
   "Backup": "Sao lưu",
   "BackupCreatedSuccess": "Bản sao lưu đã được tạo thành công.",

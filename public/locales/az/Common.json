@@ -96,7 +96,6 @@
   "AutoBackupDescription": "Avtomatik ehtiyat nüsxəsi seçimi {{productName}} məlumatların ehtiyat nüsxələmə prosesini avtomatlaşdırmaq üçün istifadə olunur ki, sonra yerli serverə bərpa olunsun.",
   "AutoSavePeriod": "Avtomatik yadda saxlama müddəti",
   "AutoSavePeriodHelp": "Aşağıda göstərilən vaxt {{productName}} təyin olunmuş saat qurşağına uyğun gəlir.",
-  "AvailableMCPServers": "Mövcud MCP serverləri",
   "Back": "Geri",
   "Backup": "Yedəkləmə",
   "BackupCreatedSuccess": "Ehtiyat nüsxə uğurla yaradıldı.",

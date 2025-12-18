@@ -96,7 +96,6 @@
   "AutoBackupDescription": "Automaattista varmuuskopiointia käytetään automatisoimaan {{productName}} tietojen varmuuskopiointiprosessi, jotta se palauttaa myöhemmin paikalliselle palvelimelle. ",
   "AutoSavePeriod": "Automaattisen tallennuksen aika",
   "AutoSavePeriodHelp": "Alla näkyvä aika vastaa {{productName}}-ssa asetettua aikavyöhykettä.",
-  "AvailableMCPServers": "Käytettävissä olevat MCP-palvelimet",
   "Back": "Takaisin",
   "Backup": "Varmuuskopio",
   "BackupCreatedSuccess": "Turvatallenteen kopio on luotu onnistuneesti.",

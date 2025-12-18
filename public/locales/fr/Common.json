@@ -96,7 +96,6 @@
   "AutoBackupDescription": "L'option Sauvegarde automatique est utilisée pour automatiser le processus de sauvegarde des données de {{productName}} afin de pouvoir les restaurer ultérieurement sur un serveur local.",
   "AutoSavePeriod": "Période de sauvegarde automatique",
   "AutoSavePeriodHelp": "L'heure indiquée ci-dessous correspond au fuseau horaire défini dans {{productName}}.",
-  "AvailableMCPServers": "Serveurs MCP disponibles",
   "Back": "Retour",
   "Backup": "Sauvegarde",
   "BackupCreatedSuccess": "La copie de sauvegarde a été créée avec succès.",

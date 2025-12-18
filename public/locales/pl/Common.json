@@ -96,7 +96,6 @@
   "AutoBackupDescription": "Opcja automatycznego tworzenia kopii zapasowych umożliwia automatyzację procesu generowania kopii zapasowych danych {{productName}}, aby móc je później przywrócić na serwerze lokalnym.",
   "AutoSavePeriod": "Częstotliwość autozapisywania",
   "AutoSavePeriodHelp": "Widoczny poniżej czas odpowiada strefie czasowej ustawionej w {{productName}}.",
-  "AvailableMCPServers": "Dostępne serwery MCP",
   "Back": "Wróć",
   "Backup": "Kopia zapasowa",
   "BackupCreatedSuccess": "Kopia zapasowa została pomyślnie utworzona.",

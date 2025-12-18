@@ -96,7 +96,6 @@
   "AutoBackupDescription": "自動バックアップオプションは、{{productName}}データのバックアッププロセスを自動化し、後でローカルサーバーに復元できるようにするためのオプションです。",
   "AutoSavePeriod": "自動保存期間",
   "AutoSavePeriodHelp": "下記の時間は{{productName}}で設定したタイムゾーンに対応しています。",
-  "AvailableMCPServers": "利用可能なMCPサーバー",
   "Back": "前に",
   "Backup": "バックアップ",
   "BackupCreatedSuccess": "バックアップ・コピーは正常に作成されました。",

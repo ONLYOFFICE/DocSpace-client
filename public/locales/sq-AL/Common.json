@@ -96,7 +96,6 @@
   "AutoBackupDescription": "Opsioni i rezervës automatike përdoret për të automatizuar procesin e rezervimit të të dhënave të {{productName}} për t'i rikthyer ato më vonë në një server lokal.",
   "AutoSavePeriod": "Periudha e ruajtjes automatike",
   "AutoSavePeriodHelp": "Koha e treguar më poshtë korrespondon me zonën kohore të vendosur në {{productName}}.",
-  "AvailableMCPServers": "Serverat MCP të disponueshëm",
   "Back": "Mbrapa",
   "Backup": "Rezervë",
   "BackupCreatedSuccess": "Kopja rezervë është krijuar me sukses.",

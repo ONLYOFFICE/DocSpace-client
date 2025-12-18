@@ -96,7 +96,6 @@
   "AutoBackupDescription": "Opțiunea Copiere de rezervă automată permite automatizarea procesului de copiere automată a datelor de pe spațiu {{productName}} pentru a fi restaurate ulterior pe un server local.",
   "AutoSavePeriod": "Interval de timp pentru salvarea automată",
   "AutoSavePeriodHelp": "Ora afișată mai jos va corespunde fusului orar în {{productName}}.",
-  "AvailableMCPServers": "Servere MCP disponibile",
   "Back": "Înapoi",
   "Backup": "Copie de siguranță",
   "BackupCreatedSuccess": "O copie de rezervă a fost creată cu succes.",

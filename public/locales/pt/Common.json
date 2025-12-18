@@ -96,7 +96,6 @@
   "AutoBackupDescription": "A opção Backup automático é usada para automatizar o processo de backup de dados do {{productName}} para poder restaurá-los posteriormente em um servidor local.",
   "AutoSavePeriod": "Período para Guardar Automaticamente",
   "AutoSavePeriodHelp": "O tempo mostrado abaixo corresponde ao fuso horário que definiu para o {{productName}}.",
-  "AvailableMCPServers": "Servidores MCP disponíveis",
   "Back": "Voltar",
   "Backup": "Backup",
   "BackupCreatedSuccess": "A cópia de segurança foi criada com sucesso.",

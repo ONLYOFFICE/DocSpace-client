@@ -96,7 +96,6 @@
   "AutoBackupDescription": "Možnosť automatického zálohovania sa používa na automatizáciu procesu zálohovania údajov v priestore {{productName}}, aby ste ich mohli neskôr obnoviť na lokálnom serveri.",
   "AutoSavePeriod": "Časový interval automatického ukladania",
   "AutoSavePeriodHelp": "Čas zobrazený nižšie je uvedený podľa časového pásma nastaveného na {{productName}}.",
-  "AvailableMCPServers": "Dostupné servery MCP",
   "Back": "Späť",
   "Backup": "Záloha",
   "BackupCreatedSuccess": "Kópia zálohy bola úspešne vytvorená.",

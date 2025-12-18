@@ -46,7 +46,7 @@ import Captcha from "@docspace/shared/components/captcha";
 
 import { ForgotPasswordModalDialogProps, TError } from "@/types";
 
-import ModalDialogContainer from "../../ModalDialogContainer";
+import styles from "../../modal.module.scss";
 
 const ForgotPasswordModalDialog = ({
   isVisible,
@@ -195,7 +195,7 @@ const ForgotPasswordModalDialog = ({
     >
       <ModalDialog.Header>{t("PasswordRecoveryTitle")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <ModalDialogContainer>
+        <div className={styles.modalContainer}>
           <Text
             key="text-body"
             className="text-body"
@@ -206,7 +206,7 @@ const ForgotPasswordModalDialog = ({
           </Text>
 
           <FieldContainer
-            className="email-reg-field"
+            className={styles.emailRegField}
             key="e-mail"
             isVertical
             hasError={isShowError ? emailError : undefined}
@@ -246,7 +246,7 @@ const ForgotPasswordModalDialog = ({
               resetSignal={captcha.resetSignal}
             />
           ) : null}
-        </ModalDialogContainer>
+        </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

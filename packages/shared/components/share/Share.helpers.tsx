@@ -272,7 +272,7 @@ export const getDate = (expirationDate: string) => {
       .humanize(true);
   }
 
-  return moment.duration(calculatedDate + 1, "days").humanize(true);
+  return moment.duration(calculatedDate + 1, "days").humanize();
 };
 
 export const isExpired = (expirationDate: string | Date) => {

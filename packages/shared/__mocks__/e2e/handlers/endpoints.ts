@@ -204,10 +204,6 @@ export const endpoints = {
     url: `${BASE_URL}${PATH_UPDATE_USER_CULTURE}`,
     dataHandler: () => updateUserCultureHandler("az"),
   },
-  updateUserCultureDe: {
-    url: `${BASE_URL}${PATH_UPDATE_USER_CULTURE}`,
-    dataHandler: () => updateUserCultureHandler("de"),
-  },
   updateUserCultureLv: {
     url: `${BASE_URL}${PATH_UPDATE_USER_CULTURE}`,
     dataHandler: () => updateUserCultureHandler("lv"),

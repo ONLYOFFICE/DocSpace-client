@@ -28,7 +28,6 @@
   "ProviderKey": "Sleutel",
   "ProviderKeyInputHint": "Voer de API-sleutel in die is gegenereerd vanuit het dashboard van uw AI-provider.",
   "ProviderNameInputHint": "Gebruik een willekeurige naam die voor jou handig is om deze verbinding te identificeren",
-  "ProviderUnavailableError": "De AI-provider is niet beschikbaar.",
   "ProviderURL": "URL",
   "ProviderURLInputHint": "Voer de API-eindpunt URL in die door uw AI-dienst wordt verstrekt",
   "ResetKnowledgeDescription": "Deze actie verwijdert de geconfigureerde API-sleutel en schakelt documentindexering voor de kennisbank uit. Het toevoegen van nieuwe documenten aan de kennisbank en het werken met deze documenten is niet beschikbaar totdat een nieuwe sleutel wordt verstrekt.",

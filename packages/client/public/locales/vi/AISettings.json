@@ -28,7 +28,6 @@
   "ProviderKey": "Chìa khóa",
   "ProviderKeyInputHint": "Nhập khóa API được tạo từ bảng điều khiển của nhà cung cấp AI của bạn.",
   "ProviderNameInputHint": "Sử dụng bất kỳ tên nào tiện lợi để bạn xác định kết nối này.",
-  "ProviderUnavailableError": "Nhà cung cấp AI hiện đang không khả dụng.",
   "ProviderURL": "URL",
   "ProviderURLInputHint": "Nhập URL điểm cuối API do dịch vụ AI của bạn cung cấp",
   "ResetKnowledgeDescription": "Hành động này sẽ xóa khóa API đã cấu hình và tắt lập chỉ mục tài liệu cho cơ sở kiến thức. Việc thêm tài liệu mới vào cơ sở kiến thức và làm việc với chúng sẽ không khả dụng cho đến khi có khóa mới được cung cấp.",

@@ -28,7 +28,6 @@
   "ProviderKey": "Klucz",
   "ProviderKeyInputHint": "Wprowadź klucz API wygenerowany z panelu zarządzania dostawcy AI.",
   "ProviderNameInputHint": "Użyj dowolnej nazwy, która będzie dla Ciebie wygodna, aby zidentyfikować to połączenie.",
-  "ProviderUnavailableError": "Dostawca AI jest niedostępny.",
   "ProviderURL": "URL",
   "ProviderURLInputHint": "Wprowadź adres URL punktu końcowego API udostępniony przez Twoją usługę AI.",
   "ResetKnowledgeDescription": "Ta akcja usunie skonfigurowany klucz API i wyłączy indeksowanie dokumentów dla bazy wiedzy. Dodawanie nowych dokumentów do bazy wiedzy i praca z nimi będzie niedostępna do momentu podania nowego klucza.",

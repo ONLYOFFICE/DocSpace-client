@@ -28,7 +28,6 @@
   "ProviderKey": "키",
   "ProviderKeyInputHint": "귀하의 AI 제공업체 대시보드에서 생성된 API 키를 입력하세요.",
   "ProviderNameInputHint": "이 연결을 식별하기 편리한 이름을 사용하세요.",
-  "ProviderUnavailableError": "AI 제공업체가 사용할 수 없습니다.",
   "ProviderURL": "URL",
   "ProviderURLInputHint": "AI 서비스에서 제공하는 API 엔드포인트 URL을 입력하세요.",
   "ResetKnowledgeDescription": "이 작업은 구성된 API 키를 제거하고 지식 베이스의 문서 인덱싱을 비활성화합니다. 새로운 키가 제공될 때까지 지식 베이스에 새 문서를 추가하고 작업하는 기능은 사용할 수 없습니다.",

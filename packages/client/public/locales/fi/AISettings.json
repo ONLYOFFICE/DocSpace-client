@@ -28,7 +28,6 @@
   "ProviderKey": "Avain",
   "ProviderKeyInputHint": "Syötä API-avain, joka on luotu tekoälypalveluntarjoajasi kojelaudasta.",
   "ProviderNameInputHint": "Käytä mitä tahansa nimeä, joka on sinulle sopiva tämän yhteyden tunnistamiseen.",
-  "ProviderUnavailableError": "AI-palveluntarjoaja ei ole tällä hetkellä käytettävissä",
   "ProviderURL": "URL",
   "ProviderURLInputHint": "Syötä AI-palvelusi tarjoaman API-päätepisteen URL-osoite",
   "ResetKnowledgeDescription": "Tämä toiminto poistaa määritetyn API-avaimen ja poistaa käytöstä dokumenttien indeksoinnin tietopohjassa. Uusien dokumenttien lisääminen tietopohjaan ja niiden kanssa työskentely ei ole mahdollista ennen kuin uusi avain on annettu.",

@@ -28,7 +28,6 @@
   "ProviderKey": "Kluč",
   "ProviderKeyInputHint": "Vnesite ključ API, ki ste ga ustvarili na nadzorni plošči ponudnika umetne inteligence.",
   "ProviderNameInputHint": "Uporabite poljubno ime, ki je za vas priročno za prepoznavo te povezave.",
-  "ProviderUnavailableError": "Ponudnik umetne inteligence je nedostopen.",
   "ProviderURL": "URL",
   "ProviderURLInputHint": "Vnesite URL končne točke API-ja, ki jo zagotavlja vaša storitev umetne inteligence.",
   "ResetKnowledgeDescription": "To delovanje bo odstranilo konfiguriran ključ API-ja in onemogočilo indeksiranje dokumentov za bazo znanja. Dodajanje novih dokumentov v bazo znanja in delo z njimi ne bo na voljo, dokler ne bo zagotovljen nov ključ.",

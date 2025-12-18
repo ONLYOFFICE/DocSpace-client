@@ -28,7 +28,6 @@
   "ProviderKey": "Anahtar",
   "ProviderKeyInputHint": "AI sağlayıcınızın kontrol panelinden oluşturulan API anahtarını girin.",
   "ProviderNameInputHint": "Bu bağlantıyı tanımlamak için size uygun herhangi bir isim kullanın",
-  "ProviderUnavailableError": "AI sağlayıcısı şu anda kullanılamıyor",
   "ProviderURL": "URL",
   "ProviderURLInputHint": "AI hizmetiniz tarafından sağlanan API uç nokta URL'sini girin.",
   "ResetKnowledgeDescription": "Bu işlem, yapılandırılmış API anahtarını kaldıracak ve bilgi tabanı için belge dizinlemesini devre dışı bırakacaktır. Yeni belgelerin bilgi tabanına eklenmesi ve bunlarla çalışılması, yeni bir anahtar sağlanana kadar kullanılamaz hale gelecektir.",

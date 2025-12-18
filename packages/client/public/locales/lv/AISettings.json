@@ -28,7 +28,6 @@
   "ProviderKey": "Atslēga",
   "ProviderKeyInputHint": "Ievadiet API atslēgu, kas ģenerēta no jūsu MI pakalpojumu sniedzēja vadības panelī.",
   "ProviderNameInputHint": "Izmantojiet jebkuru vārdu, kas jums ir ērti, lai identificētu šo savienojumu",
-  "ProviderUnavailableError": "MI pakalpojumu sniedzējs nav pieejams",
   "ProviderURL": "URL",
   "ProviderURLInputHint": "Ievadiet MI pakalpojuma sniegto API galapunkta URL",
   "ResetKnowledgeDescription": "Šis rīcības veids izdzēsīs konfigurēto API atslēgu un atslēgs dokumentu indeksēšanu zināšanu bāzei. Pievienojot jaunus dokumentus zināšanu bāzei un strādājot ar tiem, nebūs iespējams, līdz netiks sniegta jauna atslēga.",

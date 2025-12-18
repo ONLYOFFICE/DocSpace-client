@@ -28,7 +28,6 @@
   "ProviderKey": "Cheie",
   "ProviderKeyInputHint": "Introduceți cheia API generată din tabloul de bord al furnizorului dvs de IA.",
   "ProviderNameInputHint": "Folosiți orice nume care vă este convenabil pentru identificarea acestei conexiuni",
-  "ProviderUnavailableError": "Furnizorul de IA nu este disponibil",
   "ProviderURL": "Adresa URL",
   "ProviderURLInputHint": "Introduceți URL-ul punctului final API furnizat de serviciul de IA",
   "ResetKnowledgeDescription": "Această acțiune elimină cheia API configurată și dezactivează indexarea documentelor pentru baza de cunoștințe. Nu puteți adăuga documente noi în baza de cunoștințe și nici lucra cu aceste documente până când nu furnizați o cheie nouă.",

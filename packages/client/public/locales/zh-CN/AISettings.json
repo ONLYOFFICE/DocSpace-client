@@ -28,7 +28,6 @@
   "ProviderKey": "密钥",
   "ProviderKeyInputHint": "输入从您的 AI 提供商控制面板生成的 API 密钥",
   "ProviderNameInputHint": "使用任何方便您标识此连接的名称",
-  "ProviderUnavailableError": "AI 提供商不可用",
   "ProviderURL": "URL",
   "ProviderURLInputHint": "输入您的 AI 服务提供的 API 端点 URL",
   "ResetKnowledgeDescription": "此操作将删除已配置的 API 密钥并禁用知识库的文档索引。在提供新密钥之前，将无法向知识库添加新文档并对其进行操作。",

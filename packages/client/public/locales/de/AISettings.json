@@ -28,7 +28,6 @@
   "ProviderKey": "Schlüssel",
   "ProviderKeyInputHint": "Geben Sie den API-Schlüssel ein, der vom Dashboard Ihres KI-Anbieters generiert wurde.",
   "ProviderNameInputHint": "Verwenden Sie einen beliebigen Namen, der Ihnen zur Kennzeichnung dieser Verbindung geeignet ist.",
-  "ProviderUnavailableError": "Der KI-Anbieter ist nicht verfügbar",
   "ProviderURL": "URL",
   "ProviderURLInputHint": "Geben Sie die von Ihrem KI-Dienst bereitgestellte API-Endpunkt-URL ein",
   "ResetKnowledgeDescription": "Diese Aktion entfernt den konfigurierten API-Schlüssel und deaktiviert die Dokumentenindizierung für die Wissensdatenbank. Das Hinzufügen neuer Dokumente zur Wissensdatenbank und die Bearbeitung dieser Dokumente sind erst wieder möglich, nachdem ein neuer Schlüssel bereitgestellt wurde.",

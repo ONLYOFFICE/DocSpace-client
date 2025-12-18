@@ -36,7 +36,7 @@
   "ProviderKeyInputHint": "Enter the API key generated from your AI provider's dashboard",
   "ProviderNameInputHint": "Use any name that is convenient for you to identify this connection",
   "ProviderRemovedSuccess": "{{aiProvider}} removed successfully",
-  "ProviderUnavailableError": "The AI provider is unavailable",
+  "ProviderUnavailableError": "The {{aiProvider}} is unavailable",
   "ProviderUpdatedSuccess": "{{aiProvider}} updated successfully",
   "ProviderURL": "URL",
   "ProviderURLInputHint": "Enter the API endpoint URL provided by your AI service",

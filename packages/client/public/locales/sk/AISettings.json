@@ -28,7 +28,6 @@
   "ProviderKey": "Kľúč",
   "ProviderKeyInputHint": "Zadajte API kľúč vygenerovaný z dashboardu vášho poskytovateľa AI.",
   "ProviderNameInputHint": "Použite akékoľvek meno, ktoré je pre vás vhodné na identifikáciu tohto pripojenia.",
-  "ProviderUnavailableError": "Dodávateľ AI je nedostupný.",
   "ProviderURL": "URL",
   "ProviderURLInputHint": "Zadajte URL koncového bodu API poskytovaného vašou službou AI.",
   "ResetKnowledgeDescription": "Táto akcia odstráni nakonfigurovaný API kľúč a vypne indexovanie dokumentov pre znalostnú bázu. Pridávanie nových dokumentov do znalostnej bázy a práca s nimi nebude dostupná, kým nebude poskytnutý nový kľúč.",

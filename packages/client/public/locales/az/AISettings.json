@@ -28,7 +28,6 @@
   "ProviderKey": "Kunci",
   "ProviderKeyInputHint": "Sizim AI provayderinizin panelindən yaradılmış API açarını daxil edin.",
   "ProviderNameInputHint": "Bu əlaqəni tanımağınız üçün rahat olacaq hər hansı bir ad istifadə edin.",
-  "ProviderUnavailableError": "Süni intellekt təminatçısı mövcud deyil.",
   "ProviderURL": "URL",
   "ProviderURLInputHint": "Sizə AI xidmətiniz tərəfindən verilən API endpoint URL-ini daxil edin.",
   "ResetKnowledgeDescription": "Bu hərəkət konfiqurasiya edilmiş API açarını siləcək və məlumat bazası üçün sənəd indeksləşdirməsini deaktiv edəcəkdir. Məlumat bazasına yeni sənədlər əlavə etmək və onlarla işləmək yeni açar təmin edilənədək mümkün olmayacaq.",

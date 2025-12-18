@@ -28,7 +28,6 @@
   "ProviderKey": "Chave",
   "ProviderKeyInputHint": "Insira a chave da API gerada do painel do seu provedor de IA.",
   "ProviderNameInputHint": "Use qualquer nome que seja conveniente para você identificar esta conexão",
-  "ProviderUnavailableError": "O provedor de IA está indisponível.",
   "ProviderURL": "URL",
   "ProviderURLInputHint": "Insira a URL do endpoint da API fornecida pelo seu serviço de IA.",
   "ResetKnowledgeDescription": "Esta ação removerá a chave de API configurada e desativará a indexação de documentos para a base de conhecimento. Adicionar novos documentos à base de conhecimento e trabalhar com eles ficará indisponível até que uma nova chave seja fornecida.",

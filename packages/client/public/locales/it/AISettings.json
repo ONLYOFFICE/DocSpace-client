@@ -28,7 +28,6 @@
   "ProviderKey": "Chiave",
   "ProviderKeyInputHint": "Inserisci la chiave API generata dal pannello del tuo provider AI",
   "ProviderNameInputHint": "Usa qualsiasi nome che ti sia comodo per identificare questa connessione",
-  "ProviderUnavailableError": "Il provider AI non è disponibile",
   "ProviderURL": "URL",
   "ProviderURLInputHint": "Inserisci l’URL dell’endpoint API fornito dal tuo servizio AI",
   "ResetKnowledgeDescription": "Questa azione rimuoverà la chiave API configurata e disabiliterà l’indicizzazione dei documenti per la knowledge base. L’aggiunta di nuovi documenti e il loro utilizzo non sarà disponibile finché non verrà fornita una nuova chiave.",

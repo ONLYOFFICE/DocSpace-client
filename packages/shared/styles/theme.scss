@@ -2368,6 +2368,8 @@
   --login-register-text-color: var(--accent-main);
   --login-wizard-generate-password-color: #{$light-gray-dark};
   --login-error-color: #{$light-error-status};
+  --login-invite-text-color: #{$gray};
+  --login-invite-border-color: #{$gray-light-mid};
 }
 
 .dark {
@@ -2384,6 +2386,8 @@
   --login-register-text-color: var(--accent-main);
   --login-wizard-generate-password-color: #{$dark-gray-dark};
   --login-error-color: #{$dark-error-status};
+  --login-invite-text-color: #{$gray-dark};
+  --login-invite-border-color: #{$gray-dark-strong};
 }
 
 .light {

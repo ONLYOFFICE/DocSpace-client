@@ -27,12 +27,13 @@
 "use client";
 
 import { Trans, useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import { Text } from "@docspace/shared/components/text";
 
 import { DEFAULT_GUEST_TEXT } from "@/utils/constants";
-import { GreetingContainer } from "./GreetingCreateUserContainer/GreetingCreateUserContainer.styled";
 import { Logo } from "../Logo";
+import styles from "./GreetingCreateUserContainer/GreetingCreateUserContainer.module.scss";
 
 type GreetingGuestContainerProps = {
   displayName?: string;
@@ -46,9 +47,9 @@ export const GreetingGuestContainer = ({
   const { t } = useTranslation(["Common"]);
 
   return (
-    <GreetingContainer>
+    <div className={styles.greetingContainer}>
       <Logo culture={culture} className="guest" />
-      <div className="tooltip guest">
+      <div className={classNames(styles.tooltip, "guest")}>
         <Text fontSize="16px">
           <Trans
             t={t}
@@ -71,6 +72,6 @@ export const GreetingGuestContainer = ({
           />
         </Text>
       </div>
-    </GreetingContainer>
+    </div>
   );
 };

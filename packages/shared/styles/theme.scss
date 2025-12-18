@@ -3063,3 +3063,11 @@
   --snackbar-color: #{$white};
   --snackbar-icon-color: #{$light-status-warning};
 }
+
+.light {
+  --oauth-info-separator-color: #{$black};
+}
+
+.dark {
+  --oauth-info-separator-color: #{$gray-dark-strong};
+}

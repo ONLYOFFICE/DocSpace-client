@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ReactSVG } from "react-svg";
 import classNames from "classnames";
 import { isMobile } from "react-device-detect";
@@ -82,6 +82,9 @@ export const ArticleItemPure = (props: ArticleItemProps) => {
     triggerAnimation,
   } = useAnimation(isActive);
 
+  const textRef = useRef<HTMLParagraphElement>(null);
+  const [isTextTruncated, setIsTextTruncated] = useState(false);
+
   const onClickAction = (e: React.MouseEvent) => {
     onClick?.(e, id);
 
@@ -121,7 +124,14 @@ export const ArticleItemPure = (props: ArticleItemProps) => {
     );
   };
 
-  const tooltipTitle = !showText ? title : undefined;
+  const tooltipTitle = !showText || isTextTruncated ? title : undefined;
+
+  useEffect(() => {
+    const textElement = textRef.current;
+    if (!showText || !textElement) return;
+
+    setIsTextTruncated(textElement.scrollWidth > textElement.clientWidth);
+  }, [showText, title]);
 
   const renderItem = () => {
     return (
@@ -188,6 +198,7 @@ export const ArticleItemPure = (props: ArticleItemProps) => {
         </div>
         {showText ? (
           <Text
+            ref={textRef}
             className={classNames(styles.articleItemText, "articleItemText", {
               [styles.active]: isActive,
             })}

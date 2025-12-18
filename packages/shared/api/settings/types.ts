@@ -230,6 +230,10 @@ export type THelpCenterEntries = {
   dataImport: string;
   apikeys: string;
   aisettings: string;
+  aiprovidersettings: string;
+  mcpserverssettings: string;
+  websearchsettings: string;
+  knowledgesettings: string;
   documentService: string;
 };
 

@@ -120,7 +120,9 @@ export const useAdvancedSettings = (
             type={LinkType.action}
             isHovered
           >
-            {t(showAdvancedSettings ? "Common:Hide" : "SingleSignOn:Show")}
+            {t(
+              showAdvancedSettings ? "SingleSignOn:Hide" : "SingleSignOn:Show",
+            )}
           </Link>
         </div>
         {showAdvancedSettings ? (

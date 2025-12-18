@@ -46,6 +46,7 @@ import generalStyles from "../AISettings.module.scss";
 
 import styles from "./Knowledge.module.scss";
 import { ResetKnowledgeDialog } from "./dialogs/reset";
+import { KnowledgeLoader } from "./KnowledgeLoader";
 
 type TKnowledgeProps = {
   knowledgeInitied?: AISettingsStore["knowledgeInitied"];
@@ -197,43 +198,7 @@ const KnowledgeComponent = ({
     });
   }, [knowledgeConfig]);
 
-  if (!knowledgeInitied)
-    return (
-      <div className={generalStyles.search}>
-        <RectangleSkeleton
-          className={generalStyles.description}
-          width="700px"
-          height="36px"
-        />
-        <RectangleSkeleton
-          className={generalStyles.learnMoreLink}
-          width="100px"
-          height="19px"
-        />
-        <div className={styles.knowledgeForm}>
-          <div className={generalStyles.fieldContainer}>
-            <RectangleSkeleton width="119px" height="20px" />
-            <RectangleSkeleton width="340px" height="32px" />
-          </div>
-          <div className={generalStyles.fieldContainer}>
-            <RectangleSkeleton width="48px" height="32px" />
-            <RectangleSkeleton width="340px" height="32px" />
-          </div>
-        </div>
-        <div className={styles.buttonContainer}>
-          <RectangleSkeleton
-            className={styles.addProviderButton}
-            width="128px"
-            height="32px"
-          />
-          <RectangleSkeleton
-            className={styles.learnMoreLink}
-            width="322px"
-            height="32px"
-          />
-        </div>
-      </div>
-    );
+  if (!knowledgeInitied) return <KnowledgeLoader />;
 
   const isSaveDisabled =
     !currentValue || selectedOption === KnowledgeType.None || isKeyHidden;
@@ -374,3 +339,5 @@ export const Knowledge = inject(
     };
   },
 )(observer(KnowledgeComponent));
+
+export { KnowledgeLoader };

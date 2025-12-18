@@ -36,7 +36,6 @@ import { Text } from "@docspace/shared/components/text";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { ComboBox, type TOption } from "@docspace/shared/components/combobox";
 import { WebSearchType } from "@docspace/shared/api/ai/enums";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import { PasswordInput } from "@docspace/shared/components/password-input";
 import { Tooltip } from "@docspace/shared/components/tooltip";
 import { toastr } from "@docspace/shared/components/toast";
@@ -48,6 +47,7 @@ import generalStyles from "../AISettings.module.scss";
 
 import styles from "./Search.module.scss";
 import { ResetWebSearchDialog } from "./dialogs/reset";
+import { SearchLoader } from "./SearchLoader";
 
 type TSearchProps = {
   webSearchInitied?: AISettingsStore["webSearchInitied"];
@@ -147,43 +147,7 @@ const SearchComponent = ({
     });
   }, [webSearchConfig]);
 
-  if (!webSearchInitied)
-    return (
-      <div className={generalStyles.search}>
-        <RectangleSkeleton
-          className={generalStyles.description}
-          width="700px"
-          height="36px"
-        />
-        <RectangleSkeleton
-          className={generalStyles.learnMoreLink}
-          width="100px"
-          height="19px"
-        />
-        <div className={styles.searchForm}>
-          <div className={generalStyles.fieldContainer}>
-            <RectangleSkeleton width="119px" height="20px" />
-            <RectangleSkeleton width="340px" height="32px" />
-          </div>
-          <div className={generalStyles.fieldContainer}>
-            <RectangleSkeleton width="48px" height="32px" />
-            <RectangleSkeleton width="340px" height="32px" />
-          </div>
-        </div>
-        <div className={styles.buttonContainer}>
-          <RectangleSkeleton
-            className={styles.addProviderButton}
-            width="128px"
-            height="32px"
-          />
-          <RectangleSkeleton
-            className={styles.learnMoreLink}
-            width="322px"
-            height="32px"
-          />
-        </div>
-      </div>
-    );
+  if (!webSearchInitied) return <SearchLoader />;
 
   const isSaveDisabled =
     !value || selectedOption === WebSearchType.None || isKeyHidden;
@@ -321,3 +285,5 @@ export const Search = inject(({ aiSettingsStore, settingsStore }: TStore) => {
     getAIConfig: settingsStore.getAIConfig,
   };
 })(observer(SearchComponent));
+
+export { SearchLoader };

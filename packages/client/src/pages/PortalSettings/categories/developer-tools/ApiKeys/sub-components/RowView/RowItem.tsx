@@ -115,6 +115,7 @@ const RowItem = (props: RowItemType) => {
               t={t}
               item={item}
               expiresAtDate={expiresAtDate}
+              expiresAt={item.expiresAt}
             />
           </div>
           {!isMobile() ? (

@@ -150,13 +150,13 @@ const Info = ({ t, plugin, withDelete, withSeparator }: InfoProps) => {
             </Link>
           </>
         ) : null}
-        {plugin.description ? (
+        {plugin.descriptionLocale ? (
           <>
             <Text fontSize="13px" fontWeight={400} lineHeight="20px" truncate>
               {t("Common:Description")}
             </Text>
             <Text fontSize="13px" fontWeight={600} lineHeight="20px">
-              {plugin.description}
+              {plugin.descriptionLocale}
             </Text>
           </>
         ) : null}

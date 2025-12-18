@@ -2986,8 +2986,8 @@ packages:
     os: [win32]
 
   '@onlyoffice/docspace-plugin-sdk@file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz':
-    resolution: {integrity: sha512-FfMunA254AkwKuijotb73b/zIEdW5sGsf0D63lAVX1NVt75dPMT6YS5qxFaHM1NJahdyi5X8xOcnzPR+6r7Vcw==, tarball: file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz}
-    version: 2.1.0
+    resolution: {integrity: sha512-JeXth+vedv9MuS24J0aEHcb44cKdjtkLfjLO4EGKt5kilPVUYKssbjj5yjOS4iSaJHhG3gYTL0Xfk6zmOYnGHQ==, tarball: file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz}
+    version: 2.0.0
     hasBin: true
 
   '@onlyoffice/docspace-sdk-js@2.1.0':

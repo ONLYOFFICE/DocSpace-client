@@ -181,7 +181,9 @@ const AIAgentSelectorComponent = ({
     withCreate: true,
     isInit: isInitRef.current,
     setIsInit,
-    createDefineLabel: t("Common:CreateAIAgent"),
+    createDefineLabel: t("Common:CreateAIAgent", {
+      aiAgent: t("Common:AIAgent"),
+    }),
     excludeItems,
     searchValue,
     setHasNextPage,

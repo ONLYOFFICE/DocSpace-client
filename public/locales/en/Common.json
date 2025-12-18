@@ -211,7 +211,7 @@
   "CountPerPage": "{{count}} per page",
   "Create": "Create",
   "CreateAgent": "Create agent",
-  "CreateAIAgent": "Create AI agent",
+  "CreateAIAgent": "Create {{aiAgent}}",
   "CreateAndCopy": "Create and copy",
   "CreateCopy": "Create copy",
   "CreatedBy": "Created by",

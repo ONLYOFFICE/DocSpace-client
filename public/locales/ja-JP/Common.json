@@ -204,7 +204,6 @@
   "CountPerPage": "ページあたりの{{count}}",
   "Create": "作成",
   "CreateAgent": "エージェントを作成",
-  "CreateAIAgent": "AIエージェントを作成",
   "CreateAndCopy": "作成してコピーする",
   "CreateCopy": "コピーの作成",
   "CreatedBy": "作成者",

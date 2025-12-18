@@ -105,10 +105,13 @@ const LinkSettingsPanel = ({
   maxDate.setFullYear(maxDate.getFullYear() + 1);
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.value || !/^\d+$/.test(e.target.value)) {
+      return;
+    }
+
     setHasError(false);
 
     if (
-      !e.target.value ||
       Number(e.target.value) <= 0 ||
       +e.target.value < +usersNumber ||
       Number(e.target.value) >= MAX_USERS_COUNT

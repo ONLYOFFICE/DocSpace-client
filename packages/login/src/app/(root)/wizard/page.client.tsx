@@ -397,7 +397,7 @@ function WizardForm(props: WizardFormProps) {
 
       {isAmi ? (
         <FieldContainer
-          className="wizard-field instance-id-field"
+          className={classNames(styles.wizardField, "instance-id-field")}
           isVertical
           labelVisible={false}
           hasError={hasErrorInstanceId}

@@ -566,12 +566,12 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     : {};
 
   return (
-    <div
-      className={classNames(styles.registerContainer, {
-        [styles.registrationForm]: registrationForm,
-      })}
-    >
-      <div className={styles.authFormFields}>
+    <div className={styles.registerContainer}>
+      <div
+        className={classNames(styles.authFormFields, {
+          [styles.registrationForm]: registrationForm,
+        })}
+      >
         <EmailInputForm
           ref={inputRef}
           isLoading={isLoading}

@@ -64,15 +64,15 @@
     :global(.password-field) {
       margin-bottom: 24px;
     }
-
-    :global(.email-container) {
-      &.registrationForm {
-        display: none;
+      
+    &.registrationForm {
+      :global(.email-container) {
+        display: none !important;
       }
+    }
 
-      :global(.login-button) {
-        margin-top: 8px;
-      }
+    :global(.login-continue-button) {
+      margin-top: 8px;
     }
 
     :global(.terms-conditions) {

@@ -56,7 +56,7 @@
     }
   }
 
-  .item {
+  :global(.item) {
     height: 59px;
     background-color: var(--background-color);
 

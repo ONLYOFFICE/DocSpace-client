@@ -76,7 +76,7 @@ const GuestShareLinkForm = ({
           {email}
         </Text>
       </div>
-      <div className={classNames(styles.buttonsWrapper, "buttons-guest")}>
+      <div className={classNames(styles.buttonsWrapper, styles.buttonsGuest)}>
         <Button
           primary
           scale

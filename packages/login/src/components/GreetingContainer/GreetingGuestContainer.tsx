@@ -48,8 +48,8 @@ export const GreetingGuestContainer = ({
 
   return (
     <div className={styles.greetingContainer}>
-      <Logo culture={culture} className="guest" />
-      <div className={classNames(styles.tooltip, "guest")}>
+      <Logo culture={culture} className={styles.guest} />
+      <div className={classNames(styles.tooltip, styles.guest)}>
         <Text fontSize="16px">
           <Trans
             t={t}

@@ -42,7 +42,7 @@
     max-width: 100%;
   }
 
-  :global(.portal-logo) {
+  :global(.logo-wrapper) {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -120,18 +120,18 @@
   }
 
   :global(.combo-button) {
-    padding-inline-start: 8px;
+    padding-inline-start: 8px !important;
   }
 
   :global(.combo-button-label) {
-    max-width: 220px;
+    max-width: 220px !important;
 
     @include mixins.tablet {
-      max-width: 300px;
+      max-width: 300px !important;
     }
 
     @include mixins.mobile {
-      max-width: 220px;
+      max-width: 220px !important;
     }
   }
 }
@@ -144,7 +144,7 @@
   padding-top: 20px;
   padding-bottom: 24px;
 
-  .wizardCheckbox svg {
+  .wizardCheckbox > svg {
     margin-inline-end: 8px;
   }
 
@@ -154,5 +154,9 @@
     &.hasErrorAgree {
       color: var(--login-error-color);
     }
+  }
+
+  :global(.wrapper) {
+    height: auto !important;
   }
 }

@@ -2367,6 +2367,7 @@
   --login-simple-nav-background-color: #{$gray-light};
   --login-register-text-color: var(--accent-main);
   --login-wizard-generate-password-color: #{$light-gray-dark};
+  --login-error-color: #{$light-error-status};
 }
 
 .dark {
@@ -2382,6 +2383,7 @@
   --login-simple-nav-background-color: #{$dark-gray-light};
   --login-register-text-color: var(--accent-main);
   --login-wizard-generate-password-color: #{$dark-gray-dark};
+  --login-error-color: #{$dark-error-status};
 }
 
 .light {

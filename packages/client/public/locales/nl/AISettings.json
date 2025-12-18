@@ -23,7 +23,6 @@
   "KnowledgeSettingsDescription": "Schakel een kennisbank in voor AI-agenten. Het systeem indexeert uw documenten met behulp van het {{modelName}} model om vraaggebaseerd zoeken door uw gegevens mogelijk te maken. Deze functie richt zich op het vinden van relevante informatie, maar genereert geen samenvattingen of voert geen globale analyse uit.",
   "MCPServerAdvancedSettingsHint": "Gebruik dit gedeelte om aanvullende HTTP-headers door te geven, zoals autorisatietokens.",
   "MCPServerDescriptionHint": "Schrijf een korte uitleg over het doel van de integratie",
-  "MCPUnavailableError": "De MCP-server is niet beschikbaar.",
   "Provider": "Provider",
   "ProviderKey": "Sleutel",
   "ProviderKeyInputHint": "Voer de API-sleutel in die is gegenereerd vanuit het dashboard van uw AI-provider.",

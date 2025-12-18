@@ -23,7 +23,6 @@
   "KnowledgeSettingsDescription": "Omogućite bazu znanja za AI agente. Sistem će indeksirati vaše dokumente pomoću modela {{modelName}} kako bi podržao pretraživanje zasnovano na pitanjima kroz vaše podatke. Ova funkcija je fokusirana na pronalaženje relevantnih informacija, ali ne generiše rezimee niti globalnu analizu.",
   "MCPServerAdvancedSettingsHint": "Ovaj odeljak vam omogućava da prosledite dodatne HTTP zaglavlja, kao što su autorizacioni tokeni.",
   "MCPServerDescriptionHint": "Napišite kratko objašnjenje svrhe integracije",
-  "MCPUnavailableError": "MCP server nije dostupan.",
   "Provider": "Provajder",
   "ProviderKey": "Ključ",
   "ProviderKeyInputHint": "Unesite API ključ generisan na kontrolnoj tabli vašeg AI provajdera",

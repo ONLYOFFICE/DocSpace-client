@@ -23,7 +23,6 @@
   "KnowledgeSettingsDescription": "Bật khả năng cơ sở kiến thức cho các tác nhân AI. Hệ thống sẽ lập chỉ mục cho tài liệu của bạn bằng mô hình {{modelName}} để hỗ trợ tìm kiếm dựa trên câu hỏi trong dữ liệu của bạn. Tính năng này tập trung vào việc tìm kiếm thông tin liên quan nhưng không tạo ra bản tóm tắt hoặc thực hiện phân tích toàn cục.",
   "MCPServerAdvancedSettingsHint": "Sử dụng phần này để truyền các tiêu đề HTTP bổ sung, như các mã thông báo xác thực.",
   "MCPServerDescriptionHint": "Viết một giải thích ngắn gọn về mục đích của tích hợp này.",
-  "MCPUnavailableError": "Máy chủ MCP không khả dụng.",
   "Provider": "Nhà cung cấp",
   "ProviderKey": "Chìa khóa",
   "ProviderKeyInputHint": "Nhập khóa API được tạo từ bảng điều khiển của nhà cung cấp AI của bạn.",

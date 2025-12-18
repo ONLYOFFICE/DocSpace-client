@@ -23,7 +23,6 @@
   "KnowledgeSettingsDescription": "Aktivizoni një bazë njohurish për agjentët AI. Sistemi do të indeksojë dokumentet tuaja duke përdorur modelin {{modelName}} për të mbështetur kërkimin bazuar në pyetje përmes të dhënave tuaja. Ky funksion fokusohet në gjetjen e informacionit të rëndësishëm, por nuk gjeneron përmbledhje ose nuk kryen analizë globale.",
   "MCPServerAdvancedSettingsHint": "Përdorni këtë seksion për të kaluar headers shtesë HTTP, si tokena autorizimi.",
   "MCPServerDescriptionHint": "Shkruani një shpjegim të shkurtër për qëllimin e integrimit.",
-  "MCPUnavailableError": "Serveri MCP nuk është i disponueshëm",
   "Provider": "Ofruesi",
   "ProviderKey": "Çelësi",
   "ProviderKeyInputHint": "Futni çelësin API të gjeneruar nga paneli i ofruesit të AI.",

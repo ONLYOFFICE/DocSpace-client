@@ -23,7 +23,6 @@
   "KnowledgeSettingsDescription": "Habilite uma base de conhecimento para agentes de IA. O sistema irá indexar seus documentos usando o modelo {{modelName}} para suportar a busca baseada em perguntas através de seus dados. Este recurso se concentra em encontrar informações relevantes, mas não gera resumos nem realiza análises globais.",
   "MCPServerAdvancedSettingsHint": "Use esta seção para passar cabeçalhos HTTP adicionais, como tokens de autorização.",
   "MCPServerDescriptionHint": "Escreva uma breve explicação do propósito da integração.",
-  "MCPUnavailableError": "O servidor MCP está indisponível.",
   "Provider": "Provedor",
   "ProviderKey": "Chave",
   "ProviderKeyInputHint": "Insira a chave da API gerada no painel do seu provedor de IA",

@@ -23,7 +23,6 @@
   "KnowledgeSettingsDescription": "Povolte znalostní bázi pro AI agenty. Systém bude indexovat vaše dokumenty pomocí modelu {{modelName}} pro podporu vyhledávání založeného na dotazech ve vašich datech. Tato funkce se zaměřuje na vyhledávání relevantních informací, ale negeneruje souhrny ani neprovádí globální analýzu.",
   "MCPServerAdvancedSettingsHint": "Použijte tuto sekci pro předání dalších HTTP hlaviček, například autorizačních tokenů.",
   "MCPServerDescriptionHint": "Napište stručné vysvětlení účelu integrace.",
-  "MCPUnavailableError": "Server MCP je nedostupný.",
   "Provider": "Poskytovatel",
   "ProviderKey": "Klíč",
   "ProviderKeyInputHint": "Zadejte API klíč vygenerovaný z ovládacího panelu vašeho poskytovatele AI.",

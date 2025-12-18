@@ -23,7 +23,6 @@
   "KnowledgeSettingsDescription": "Iespējojiet zināšanu bāzi MI aģentiem. Sistēma indeksēs jūsu dokumentus, izmantojot {{modelName}} modeli, lai atbalstītu jautājumu balstītu meklēšanu caur jūsu datiem. Šī funkcija koncentrējas uz atbilstošas informācijas atrašanu, bet neģenerē kopsavilkumus vai neveic globālu analīzi.",
   "MCPServerAdvancedSettingsHint": "Izmantojiet šo sadaļu, lai nodotu papildu HTTP galvenes, piemēram, autorizācijas žetonus.",
   "MCPServerDescriptionHint": "Rakstiet īsu skaidrojumu par integrācijas mērķi.",
-  "MCPUnavailableError": "MCP server nav pieejams",
   "Provider": "Pārskatītājs",
   "ProviderKey": "Atslēga",
   "ProviderKeyInputHint": "Ievadiet API atslēgu, kas ģenerēta no jūsu MI pakalpojumu sniedzēja vadības panelī.",

@@ -23,7 +23,6 @@
   "KnowledgeSettingsDescription": "Abilita una knowledge base per gli agenti AI. Il sistema indicizzerà i tuoi documenti usando il modello {{modelName}} per supportare la ricerca basata su domande sui tuoi dati. Questa funzione si concentra sul trovare informazioni rilevanti ma non genera riepiloghi né esegue analisi globali.",
   "MCPServerAdvancedSettingsHint": "Usa questa sezione per inviare intestazioni HTTP aggiuntive, come token di autorizzazione.",
   "MCPServerDescriptionHint": "Scrivi una breve spiegazione dello scopo dell’integrazione",
-  "MCPUnavailableError": "Il server MCP non è disponibile.",
   "Provider": "Fornitore",
   "ProviderKey": "Chiave",
   "ProviderKeyInputHint": "Inserisci la chiave API generata dal pannello del tuo provider AI",

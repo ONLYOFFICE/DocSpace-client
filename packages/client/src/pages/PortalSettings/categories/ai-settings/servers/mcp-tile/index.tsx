@@ -116,7 +116,9 @@ export const MCPTile = ({
         hasError={item.needReset}
         getErrorTooltipContent={() => (
           <Text fontSize="12px" lineHeight="16px">
-            {t("AISettings:MCPUnavailableError")}
+            {t("AISettings:MCPUnavailableError", {
+              mcpServer: t("Common:MCPServer"),
+            })}
           </Text>
         )}
       >

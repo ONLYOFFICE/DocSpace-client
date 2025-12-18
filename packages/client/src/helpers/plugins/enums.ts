@@ -24,18 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export {
-  Actions as PluginActions,
-  FilesType as PluginFileType,
-  Events as PluginEvents,
+import {
+  Actions,
+  FilesType,
+  Events,
   PluginStatus,
-  ToastType as PluginToastType,
-  Components as PluginComponents,
-  UsersType as PluginUsersType,
-  Devices as PluginDevices,
+  ToastType,
+  Components,
+  UsersType,
+  Devices,
 } from "@onlyoffice/docspace-plugin-sdk";
 
-export enum PluginScopes {
+enum PluginScopes {
   API = "API",
   Settings = "Settings",
   ContextMenu = "ContextMenu",
@@ -45,3 +45,15 @@ export enum PluginScopes {
   EventListener = "EventListener",
   File = "File",
 }
+
+export {
+  PluginScopes,
+  Actions as PluginActions,
+  FilesType as PluginFileType,
+  Events as PluginEvents,
+  PluginStatus,
+  ToastType as PluginToastType,
+  Components as PluginComponents,
+  UsersType as PluginUsersType,
+  Devices as PluginDevices,
+};

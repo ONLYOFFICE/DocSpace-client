@@ -104,7 +104,7 @@ const SettingsPluginDialog = ({
       withBodyScroll
     >
       <ModalDialog.Header>
-        <Header t={t} name={plugin.name} />
+        <Header t={t} name={plugin.nameLocale} />
       </ModalDialog.Header>
       <ModalDialog.Body>
         <div style={{ marginTop: "16px" }}>

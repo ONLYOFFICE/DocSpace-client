@@ -53,7 +53,6 @@ const PluginPage = ({
   pluginList,
 
   openSettingsDialog,
-
   updatePlugin,
   addPlugin,
 

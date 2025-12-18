@@ -249,7 +249,9 @@ const AIAgentSelectorComponent = ({
           ? EmptyScreenAIAgentsSelectorSvgUrl
           : EmptyScreenAIAgentsSelectorSvgUrlDark
       }
-      emptyScreenHeader={t("Common:NoAIAgents")}
+      emptyScreenHeader={t("Common:NoAIAgents", {
+        aiAgents: t("Common:AIAgents"),
+      })}
       emptyScreenDescription={t("Common:NoAIAgentsDescription")}
       searchEmptyScreenImage={
         isBase

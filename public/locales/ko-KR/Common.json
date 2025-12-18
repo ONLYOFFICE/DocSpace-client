@@ -606,7 +606,6 @@
   "NewVersionAvailable": "웹사이트의 새로운 버전을 이용할 수 있습니다",
   "Next": "다음",
   "No": "아니오",
-  "NoAIAgents": "AI 에이전트가 사용 가능하지 않습니다.",
   "NoAIAgentsDescription": "에이전트가 이 채팅을 이어갈 준비가 되어 있지 않은 것 같습니다. 대화를 중단된 지점 그대로 이어받을 새로운 에이전트를 생성하세요.",
   "NoAIAgentsSearch": "AI 에이전트가 발견되지 않았습니다.",
   "NoAIAgentsSearchDescription": "현재 필터에 일치하는 에이전트가 없습니다. 사용 가능한 모든 에이전트를 보려면 필터를 조정하거나 지우세요.",

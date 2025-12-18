@@ -606,7 +606,6 @@
   "NewVersionAvailable": "K dispozici je nová verze webové stránky",
   "Next": "Další",
   "No": "Ne",
-  "NoAIAgents": "Žádní AI agenti nejsou k dispozici.",
   "NoAIAgentsDescription": "Vypadá to, že nejsou k dispozici žádní agenti, kteří by mohli pokračovat v této konverzaci. Vytvořte nového agenta, který převezme konverzaci přesně tam, kde skončila.",
   "NoAIAgentsSearch": "Nenalezli se žádní AI agenti.",
   "NoAIAgentsSearchDescription": "Žádní agenti neodpovídají vašemu aktuálnímu filtru. Upravte filtr nebo jej vymažte, abyste viděli všechny dostupné agenty.",

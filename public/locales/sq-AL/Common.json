@@ -606,7 +606,6 @@
   "NewVersionAvailable": "Ekziston një version i ri i faqes në internet",
   "Next": "Tjetri/a",
   "No": "Jo",
-  "NoAIAgents": "Nuk ka agjentë të inteligjencës artificiale në dispozicion",
   "NoAIAgentsDescription": "Me sa duket nuk ka agjentë të gatshëm për të vazhduar këtë bisedë. Krijo një agjent të ri për ta vazhduar bisedën pikërisht aty ku e la.",
   "NoAIAgentsSearch": "Nuk u gjetën agjentë të inteligjencës artificiale",
   "NoAIAgentsSearchDescription": "Ju lutemi lidhni serverat MCP në cilësimet e {{productName}} për t'i përdorur ato në agjentin e IA-së.",

@@ -606,7 +606,6 @@
   "NewVersionAvailable": "Ir pieejama jauna tīmekļa vietnes versija",
   "Next": "Tālāk",
   "No": "Nē",
-  "NoAIAgents": "Nav pieejami MI aģenti",
   "NoAIAgentsDescription": "Izskatās, ka nav aģentu, kas gatavi turpināt šo sarunu. Izveido jaunu aģentu, lai turpinātu sarunu tieši tur, kur tā beidzās.",
   "NoAIAgentsSearch": "Nav atrasts neviens MI aģents",
   "NoAIAgentsSearchDescription": "Nav atbilstošu aģentu, pamatojoties uz jūsu pašreizējā filtra iestatījumiem. Precizējiet filtru vai notīriet to, lai redzētu visus pieejamos aģentus.",

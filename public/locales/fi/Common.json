@@ -606,7 +606,6 @@
   "NewVersionAvailable": "Uusi versio verkkosivustosta on saatavilla",
   "Next": "Seuraava",
   "No": "Ei",
-  "NoAIAgents": "Ei saatavilla tekoälyagentteja",
   "NoAIAgentsDescription": "Näyttää siltä, ettei ole valmiita agentteja tämän keskustelun jatkamiseen. Luo uusi agentti jatkamaan keskustelua siitä kohdasta, missä se jäi.",
   "NoAIAgentsSearch": "Ei löydetty tekoälyagentteja",
   "NoAIAgentsSearchDescription": "Ei löytynyt vastaavia välittäjiä nykyisten suodattimiesi perusteella. Säädä suodatinta tai tyhjennä se nähdäksesi kaikki saatavilla olevat välittäjät.",

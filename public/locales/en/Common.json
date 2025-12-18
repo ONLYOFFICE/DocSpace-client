@@ -622,7 +622,7 @@
   "NewVersionAvailable": "A new version of the website available",
   "Next": "Next",
   "No": "No",
-  "NoAIAgents": "No AI agents available",
+  "NoAIAgents": "No {{aiAgents}} available",
   "NoAIAgentsDescription": "It looks like there are no agents ready to continue this chat. Create a new agent to pick up the conversation right where it left off.",
   "NoAIAgentsSearch": "No AI agents found",
   "NoAIAgentsSearchDescription": "No agents match your current filter. Adjust the filter or clear it to see all available agents.",

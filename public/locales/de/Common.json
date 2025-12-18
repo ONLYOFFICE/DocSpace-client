@@ -606,7 +606,6 @@
   "NewVersionAvailable": "Eine neue Version der Website ist verfügbar",
   "Next": "Weiter",
   "No": "Nein",
-  "NoAIAgents": "Keine KI-Agenten verfügbar",
   "NoAIAgentsDescription": "Es scheinen keine Agenten bereit zu sein, diesen Chat fortzusetzen. Erstellen Sie einen neuen Agenten, um die Unterhaltung genau dort fortzusetzen, wo sie unterbrochen wurde.",
   "NoAIAgentsSearch": "Keine KI-Agenten gefunden",
   "NoAIAgentsSearchDescription": "Es wurden keine Agenten gefunden, die Ihren aktuellen Filterkriterien entsprechen. Passen Sie die Filter an oder löschen Sie sie, um alle verfügbaren Agenten anzuzeigen.",

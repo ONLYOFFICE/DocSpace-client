@@ -237,6 +237,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 16px;
+    height: 16px;
+
+    @include mixins.tablet-and-below {
+      width: 20px;
+      height: 20px;
+    }
   }
 
   .nodeIcon {

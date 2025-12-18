@@ -173,6 +173,7 @@ const MCPServersSelector = ({
       emptyScreenDescription={t("Common:NoMCPServersDescription", {
         mcpServers: t("Common:MCPSettingTitle"),
         productName: t("Common:ProductName"),
+        aiAgent: t("Common:AIAgent"),
       })}
       searchEmptyScreenImage={
         isBase ? EmptyScreenRoomSvgUrl : EmptyScreenRoomDarkSvgUrl

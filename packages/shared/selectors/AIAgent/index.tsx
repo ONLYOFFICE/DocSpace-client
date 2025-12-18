@@ -258,7 +258,9 @@ const AIAgentSelectorComponent = ({
           ? EmptyScreenAIAgentsSelectorSvgUrl
           : EmptyScreenAIAgentsSelectorSvgUrlDark
       }
-      searchEmptyScreenHeader={t("Common:NoAIAgentsSearch")}
+      searchEmptyScreenHeader={t("Common:NoAIAgentsSearch", {
+        aiAgents: t("Common:AIAgents"),
+      })}
       searchEmptyScreenDescription={t("Common:NoAIAgentsSearchDescription")}
       totalItems={total}
       hasNextPage={hasNextPage}

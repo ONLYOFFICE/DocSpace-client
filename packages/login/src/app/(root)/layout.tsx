@@ -32,10 +32,10 @@ import { getBgPattern } from "@docspace/shared/utils/common";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 
 import SimpleNav from "@/components/SimpleNav";
-import { ContentWrapper, StyledPage } from "@/components/Layout.styled";
 import LanguageComboboxWrapper from "@/components/LanguageCombobox";
 import { TYPE_LINK_WITHOUT_LNG_COMBOBOX } from "@/utils/constants";
 import { getColorTheme, getPortalCultures, getSettings } from "@/utils/actions";
+import styles from "./layout.module.scss";
 
 export default async function Layout({
   children,
@@ -70,6 +70,10 @@ export default async function Layout({
     cultures = await getPortalCultures();
   }
 
+  const bgBlockStyle = {
+    "--bg-pattern": bgPattern,
+  } as React.CSSProperties;
+
   return (
     <div style={{ width: "100%", height: "100%" }}>
       <SimpleNav
@@ -77,16 +81,22 @@ export default async function Layout({
         initialCultures={cultures}
         isLanguageComboboxVisible={isComboboxVisible}
       />
-      <ContentWrapper id="content-wrapper" bgPattern={bgPattern}>
+      <div
+        className={styles.contentWrapper}
+        style={bgBlockStyle}
+        id="content-wrapper"
+      >
         <div className="bg-cover" />
         <Scrollbar id="customScrollBar">
           {isComboboxVisible ? (
             <LanguageComboboxWrapper initialCultures={cultures} />
           ) : null}
 
-          <StyledPage id="styled-page">{children}</StyledPage>
+          <div id="styled-page" className={styles.pageWrapper}>
+            {children}
+          </div>
         </Scrollbar>
-      </ContentWrapper>
+      </div>
     </div>
   );
 }

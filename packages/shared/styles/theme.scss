@@ -2370,6 +2370,7 @@
   --login-error-color: #{$light-error-status};
   --login-invite-text-color: #{$gray};
   --login-invite-border-color: #{$gray-light-mid};
+  --login-logo-color: #{$black};
 }
 
 .dark {
@@ -2388,6 +2389,7 @@
   --login-error-color: #{$dark-error-status};
   --login-invite-text-color: #{$gray-dark};
   --login-invite-border-color: #{$gray-dark-strong};
+  --login-logo-color: #{$white};
 }
 
 .light {

@@ -36,33 +36,35 @@
     height: calc(100% - 48px);
   }
 
-  :global(.logo-wrapper) {
-    body.dark & {
-      &--dark {
-        display: block;
-      }
+  body.dark :global(.logo-wrapper--dark) {
+    display: block;
 
-      &--light {
-        display: none;
-      }
-
-      @include mixins.mobile {
-        display: none;
-      }
+    @include mixins.mobile {
+      display: none;
     }
+  }
 
-    body.light & {
-      &--dark {
-        display: none;
-      }
+  body.dark :global(.logo-wrapper--light) {
+    display: none;
 
-      &--light {
-        display: block;
-      }
+    @include mixins.mobile {
+      display: none;
+    }
+  }
 
-      @include mixins.mobile {
-        display: none;
-      }
+  body.light :global(.logo-wrapper--dark) {
+    display: none;
+
+    @include mixins.mobile {
+      display: none;
+    }
+  }
+
+  body.light :global(.logo-wrapper--light) {
+    display: block;
+
+    @include mixins.mobile {
+      display: none;
     }
   }
 

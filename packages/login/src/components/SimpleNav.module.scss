@@ -35,26 +35,22 @@
 
   :global(.logo-wrapper) {
     height: 24px;
+  }
 
-    body.dark & {
-      &--dark {
-        display: block;
-      }
+  body.dark :global(.logo-wrapper--dark) {
+    display: block;
+  }
 
-      &--light {
-        display: none;
-      }
-    }
+  body.dark :global(.logo-wrapper--light) {
+    display: none;
+  }
 
-    body.light & {
-      &--dark {
-        display: none;
-      }
+  body.light :global(.logo-wrapper--dark) {
+    display: none;
+  }
 
-      &--light {
-        display: block;
-      }
-    }
+  body.light :global(.logo-wrapper--light) {
+    display: block;
   }
 
   .mobileComboBox {

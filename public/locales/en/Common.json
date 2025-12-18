@@ -503,7 +503,7 @@
   "InsufficientFundsWithContact": "Your wallet has insufficient funds. Please reach out to the payer (<1>email@example.com</1>) to top it up and try the purchase again.",
   "InsufficientFundsWithTopUp": "Your wallet has insufficient funds. Please <1>top up your wallet</1> and try purchasing again.",
   "InvalidLink": "Invalid link",
-  "InvitationToAgent": "<1>{{displayName}}</1> invites you to join the AI agent <1>{{agentName}}</1>.",
+  "InvitationToAgent": "<1>{{displayName}}</1> invites you to join the {{aiAgent}} <1>{{agentName}}</1>.",
   "InvitationToPortal": "<1>{{displayName}}</1> invites you to join the {{productName}} <1>{{spaceAddress}}</1> for secure document collaboration.",
   "InvitationToRoom": "<1>{{displayName}}</1> invites you to join the room <1>{{roomName}}</1> for secure document collaboration.",
   "Invite": "Invite",

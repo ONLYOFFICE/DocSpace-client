@@ -490,7 +490,6 @@
   "InsufficientFundsWithContact": "您的钱包余额不足。请联系付款人 (<1>email@example.com</1>) 充值，然后重新尝试购买。",
   "InsufficientFundsWithTopUp": "您的钱包余额不足。请<1>充值</1>，然后重新尝试购买。",
   "InvalidLink": "无效链接",
-  "InvitationToAgent": "<1>{{displayName}}</1> 邀请您加入 AI 智能体 <1>{{agentName}}</1>。",
   "InvitationToPortal": "<1>{{displayName}}</1>邀请您加入{{productName}}<1>{{spaceAddress}}</1>进行安全的文档协作。",
   "InvitationToRoom": "<1>{{displayName}}</1> 邀请您加入房间 <1>{{roomName}}</1> 安全地共同编辑处理文档。",
   "Invite": "邀请",

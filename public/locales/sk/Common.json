@@ -490,7 +490,6 @@
   "InsufficientFundsWithContact": "Vaša peňaženka nemá dostatočný zostatok. Prosím, kontaktujte platiteľa (<1>email@example.com</1>), aby ju doplnil a skúste nákup znova.",
   "InsufficientFundsWithTopUp": "Vaša peňaženka má nedostatočný zostatok. Prosím, doplňte peňaženku <1>a skúste nakupovať znova</1>.",
   "InvalidLink": "Neplatný odkaz",
-  "InvitationToAgent": "<1>{{displayName}}</1> vás pozýva pridať sa k AI agentovi <1>{{agentName}}</1>.",
   "InvitationToPortal": "<1>{{displayName}}</1> vás pozýva, aby ste sa pripojili k priestoru {{productName}} <1>{{{spaceAddress}}</1> na bezpečnú spoluprácu na dokumentoch.",
   "InvitationToRoom": "<1>{{displayName}}</1> vás pozýva, aby ste sa pripojili k miestnosti <1>{{roomName}}</1> na bezpečnú spoluprácu na dokumentoch.",
   "Invite": "Pozvať",

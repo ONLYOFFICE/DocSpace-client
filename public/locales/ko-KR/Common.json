@@ -490,7 +490,6 @@
   "InsufficientFundsWithContact": "지갑에 잔액이 부족합니다. 결제를 다시 시도하려면 지불자 (<1>email@example.com</1>)에게 연락하여 충전해 주시기 바랍니다.",
   "InsufficientFundsWithTopUp": "지갑 잔액이 부족합니다. <1>지갑을 충전</1>하여 다시 구매해 주십시오.",
   "InvalidLink": "유효하지 않은 링크입니다",
-  "InvitationToAgent": "<1>{{displayName}}</1>님은 AI 에이전트 <1>{{agentName}}</1>에 참여하시도록 초대합니다.",
   "InvitationToPortal": "<1>{{displayName}}</1>님이 안전한 문서 공동작업을 위해 귀하를 {{productName}} <1>{{spaceAddress}}</1>에 초대했습니다.",
   "InvitationToRoom": "<1>{{displayName}}</1>님이 안전한 문서 공동작업을 위해 귀하를 <1>{{roomName}}</1> 방에 초대했습니다.",
   "Invite": "초대",

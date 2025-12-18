@@ -490,7 +490,6 @@
   "InsufficientFundsWithContact": "Твој новчаник нема довољно средстава. Контактирај платиоца (<1>email@example.com</1>) да допуни новчаник и покушај поново да извршиш куповину.",
   "InsufficientFundsWithTopUp": "Твој новчаник нема довољно средстава. Молимо те <1>доплати новчаник</1> и покушај поново да извршиш куповину.",
   "InvalidLink": "Неважећи линк",
-  "InvitationToAgent": "<1>{{displayName}}</1> вас позива да се придружите AI агенту <1>{{agentName}}</1>.",
   "InvitationToPortal": "<1>{{displayName}}</1> вас позива да приступите {{productName}}-у <1>{{spaceAddress}}</1> за сигурну документ сарадњу.",
   "InvitationToRoom": "<1>{{displayName}}</1> вас позива да приступите соби <1>{{roomName}}</1> за сигурну документ сарадњу.",
   "Invite": "Позови",

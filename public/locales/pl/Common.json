@@ -490,7 +490,6 @@
   "InsufficientFundsWithContact": "Twój portfel nie ma wystarczających środków. Prosimy skontaktuj się z płatnikiem (<1>email@example.com</1>), aby doładować go i spróbuj ponownie dokonać zakupu.",
   "InsufficientFundsWithTopUp": "Na Twoim portfelu brakuje środków. Proszę <1>doładuj swój portfel</1> i spróbuj ponownie dokonać zakupu.",
   "InvalidLink": "Nieprawidłowy link",
-  "InvitationToAgent": "<1>{{displayName}}</1> zaprasza do dołączenia do agenta AI <1>{{agentName}}</1>.",
   "InvitationToPortal": "<1>{{displayName}}</1> zaprasza Cię do {{productName}} <1>{{spaceAddress}}</1> w celu bezpiecznej współpracy nad dokumentami.",
   "InvitationToRoom": "<1>{{displayName}}</1> zaprasza Cię do pokoju <1>{{roomName}}</1> w celu bezpiecznej współpracy nad dokumentami.",
   "Invite": "Zaprosić",

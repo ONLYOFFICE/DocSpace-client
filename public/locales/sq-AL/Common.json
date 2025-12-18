@@ -490,7 +490,6 @@
   "InsufficientFundsWithContact": "Portofoli juaj nuk ka fonde të mjaftueshme. Ju lutem kontaktoni paguesin (<1>email@example.com</1>) për ta rimbushur dhe provoni sërish blerjen.",
   "InsufficientFundsWithTopUp": "Portofoli juaj nuk ka fonde të mjaftueshme. Ju lutem <1>top up your wallet</1> dhe provoni sërish blerjen.",
   "InvalidLink": "Lidhje e pavlefshme",
-  "InvitationToAgent": "<1>{{displayName}}</1> ju fton të bashkoheni me agjentin AI <1>{{agentName}}</1>.",
   "InvitationToPortal": "<1>{{displayName}}</1> ju fton të bashkoheni në {{productName}} <1>{{spaceAddress}}</1> për bashkëpunim të sigurt të dokumentit.",
   "InvitationToRoom": "<1>{{displayName}}</1> ju fton të bashkoheni në dhomën <1>{{roomName}}</1> për një bashkëpunim të sigurt të dokumenteve.",
   "Invite": "Ftoni",

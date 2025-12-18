@@ -490,7 +490,6 @@
   "InsufficientFundsWithContact": "Cüzdanınızda yetersiz bakiye bulunmaktadır. Lütfen bakiyesini artırmak için ödeyen kişiye (<1>email@example.com</1>) ulaşın ve satın almayı tekrar deneyin.",
   "InsufficientFundsWithTopUp": "Cüzdanınızda yetersiz bakiye bulunmaktadır. Lütfen <1>cüzdanınızı şarj edin</1> ve tekrar satın almayı deneyin.",
   "InvalidLink": "Geçersiz bağlantı",
-  "InvitationToAgent": "<1>{{displayName}}</1> sizi yapay zeka aracısı <1>{{agentName}}</1>'na katılmaya davet ediyor.",
   "InvitationToPortal": "<1>{{displayName}}</1> sizi güvenli belge iş birliği için {{productName}} <1>{{spaceAddress}}</1> alanına katılmaya davet ediyor.",
   "InvitationToRoom": "<1>{{displayName}}</1> sizi güvenli belge iş birliği için <1>{{roomName}}</1> odasına katılmaya davet ediyor.",
   "Invite": "Davet et",

@@ -490,7 +490,6 @@
   "InsufficientFundsWithContact": "Il tuo portafoglio non ha fondi sufficienti. Contatta il pagatore (<1>email@example.com</1>) per ricaricarlo e riprovare l’acquisto.",
   "InsufficientFundsWithTopUp": "Il tuo portafoglio non ha fondi sufficienti. Per favore <1>ricarica il portafoglio</1> e riprova ad acquistare.",
   "InvalidLink": "Link non valido",
-  "InvitationToAgent": "<1>{{displayName}}</1> ti invita a unirti all’agente AI <1>{{agentName}}</1>.",
   "InvitationToPortal": "<1>{{displayName}}</1> ti invita a unirti a {{productName}} <1>{{spaceAddress}}</1> per una collaborazione sicura sui documenti.",
   "InvitationToRoom": "<1>{{displayName}}</1> ti invita a unirti alla stanza <1>{{roomName}}</1> per una collaborazione sicura sui documenti.",
   "Invite": "Invita",

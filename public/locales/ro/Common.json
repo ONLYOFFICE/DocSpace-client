@@ -490,7 +490,6 @@
   "InsufficientFundsWithContact": "Fondurile din portofelul dvs sunt insuficiente. Vă rugăm să contactați plătitorul (<1>email@example.com</1>) pentru a-l alimenta și să încercați din nou.",
   "InsufficientFundsWithTopUp": "Fondurile din portofelul dvs sunt insuficiente. Vă rugăm să <1>vă alimentați portofelul</1> și să încercați din nou.",
   "InvalidLink": "Link-ul invalid",
-  "InvitationToAgent": "<1>{{displayName}}</1> te invită să te alături agentului AI <1>{{agentName}}</1>.",
   "InvitationToPortal": "<1>{{displayName}}</1> vă invită să asociați la {{productName}} <1>{{spaceAddress}}</1> pentru colaborarea securizată asupra documentelor.",
   "InvitationToRoom": "<1>{{displayName}}</1> vă invită să participați la sala <1>{{roomName}}</1> pentru colaborarea securizată asupra documentelor.",
   "Invite": "Invitaţie",

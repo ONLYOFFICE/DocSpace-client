@@ -490,7 +490,6 @@
   "InsufficientFundsWithContact": "Uw portemonnee heeft onvoldoende saldo. Neem contact op met de betaler (<1>email@example.com</1>) om deze bij te vullen en probeer de aankoop opnieuw.",
   "InsufficientFundsWithTopUp": "Uw portemonnee heeft onvoldoende saldo. Vul alstublieft <1>uw portemonnee aan</1> en probeer de aankoop opnieuw.",
   "InvalidLink": "Ongeldige link",
-  "InvitationToAgent": "<1>{{displayName}}</1> nodigt je uit om lid te worden van de AI agent <1>{{agentName}}</1>.",
   "InvitationToPortal": "<1>{{displayName}}</1> nodigt u uit om lid te worden van {{productName}} <1>{{spaceAddress}}</1> om veilig samen te werken aan documenten.",
   "InvitationToRoom": "<1>{{displayName}}</1> nodigt u uit om lid te worden van de kamer <1>{{roomName}}</1> om veilig samen te werken aan documenten.",
   "Invite": "Uitnodigen",

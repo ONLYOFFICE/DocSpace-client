@@ -490,7 +490,6 @@
   "InsufficientFundsWithContact": "ກະເປົ໋າເງິນຂອງເຈົ້າມີເງິນບໍ່ພຽງພໍ. ກະລຸນາຕິດຕໍ່ຜູ້ຈ່າຍເງິນ (<1>email@example.com</1>) ເພື່ອເຕີມເງິນ ແລະລອງຊື້ອີກຄັ້ງ.",
   "InsufficientFundsWithTopUp": "ກະເປົ໋າເງິນຂອງເຈົ້າມີເງິນບໍ່ພຽງພໍ. ກະລຸນາ <1>ຕື່ມເງິນໃສ່ກະເປົາເງິນຂອງທ່ານ</1> ແລະລອງຊື້ອີກຄັ້ງ.",
   "InvalidLink": "ລິ້ງບໍ່ຖືກຕ້ອງ",
-  "InvitationToAgent": "<1>{{displayName}}</1> ເຊີນທ່ານເຂົ້າຮ່ວມຕົວແທນ AI <1>{{agentName}}</1>.",
   "InvitationToPortal": "<1>{{displayName}}</1> ຂໍເຊີນທ່ານເຂົ້າຮ່ວມ {{productName}} <1>{{spaceAddress}}</1> ເພື່ອການຮ່ວມມືເອກະສານຢ່າງປອດໄພ.",
   "InvitationToRoom": "<1>{{displayName}}</1> ເຊີນທ່ານເຂົ້າຮ່ວມຫ້ອງ <1>{{roomName}}</1> ເພື່ອການຮ່ວມມືເອກະສານຢ່າງປອດໄພ.",
   "Invite": "ເຊີນ",

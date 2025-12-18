@@ -490,7 +490,6 @@
   "InsufficientFundsWithContact": "Cüzdanınızda kifayət qədər vəsait yoxdur. Xahiş edirik, ödəyicidən (<1>email@example.com</1>) əlaqə saxlayın və balansını doldurub yenidən cəhd edin.",
   "InsufficientFundsWithTopUp": "Cüzdanınızda kifayət qədər vəsait yoxdur. Xahiş edirik <1>cüzdanınızı doldurun</1> və yenidən satın almağa cəhd edin.",
   "InvalidLink": "Etibarsız keçid",
-  "InvitationToAgent": "<1>{{displayName}}</1> sizə Sİ agenti <1>{{agentName}}</1> ilə qoşulmağı dəvət edir.",
   "InvitationToPortal": "<1>{{displayName}}</1> təhlükəsiz sənəd əməkdaşlığı üçün sizi {{productName}} <1>{{spaceAddress}}</1>-ə qoşulmağa dəvət edir.",
   "InvitationToRoom": "<1>{{displayName}}</1> təhlükəsiz sənəd əməkdaşlığı üçün sizi <1>{{roomName}}</1> otağına qoşulmağa dəvət edir.",
   "Invite": "Dəvət edin",

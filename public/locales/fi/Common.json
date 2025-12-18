@@ -490,7 +490,6 @@
   "InsufficientFundsWithContact": "Lompakossasi ei ole riittävästi varoja. Ole hyvä ja ota yhteyttä maksajaan (<1>email@example.com</1>) tilin lisäämiseksi ja yritä ostosta uudelleen.",
   "InsufficientFundsWithTopUp": "Lompakossasi ei ole tarpeeksi varoja. Ole hyvä ja <1>lataa lompakkoosi lisää rahaa</1> ja yritä ostaa uudelleen.",
   "InvalidLink": "Virheellinen linkki",
-  "InvitationToAgent": "<1>{{displayName}}</1> kutsuu sinut liittymään AI-agentin <1>{{agentName}}</1>.",
   "InvitationToPortal": "<1>{{displayName}}</1> kutsuu sinut liittymään {{productName}} <1>{{spaceAddress}}</1> turvallista asiakirjayhteistyötä varten.",
   "InvitationToRoom": "<1>{{displayName}}</1> kutsuu sinut liittymään huoneeseen  <1>{{roomName}}</1> turvallista asiakirjayhteistyötä varten.",
   "Invite": "Kutsu",

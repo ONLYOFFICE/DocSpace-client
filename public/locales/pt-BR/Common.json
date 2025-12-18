@@ -490,7 +490,6 @@
   "InsufficientFundsWithContact": "Sua carteira não tem fundos suficientes. Entre em contato com o pagador (<1>email@example.com</1>) para recarregar e tente comprar novamente.",
   "InsufficientFundsWithTopUp": "Sua carteira não tem fundos suficientes. Por favor, <1>carregue sua carteira</1> e tente comprar novamente.",
   "InvalidLink": "Link inválido",
-  "InvitationToAgent": "<1>{{displayName}}</1> convida você para se juntar ao agente de IA <1>{{agentName}}</1>.",
   "InvitationToPortal": "<1>{{displayName}}</1> convida você para participar do {{productName}} <1>{{spaceAddress}}</1> para colaboração segura de documentos.",
   "InvitationToRoom": "<1>{{displayName}}</1> convida você para participar da sala <1>{{roomName}}</1> para colaboração segura de documentos.",
   "Invite": "Convidar",

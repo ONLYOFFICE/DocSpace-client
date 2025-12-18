@@ -490,7 +490,6 @@
   "InsufficientFundsWithContact": "Ví của bạn không đủ tiền. Vui lòng liên hệ với người thanh toán (<1>email@example.com</1>) để nạp thêm tiền và thử lại giao dịch.",
   "InsufficientFundsWithTopUp": "Ví của bạn không đủ tiền. Vui lòng <1>nạp tiền vào ví</1> và thử mua lại.",
   "InvalidLink": "Liên kết không hợp lệ",
-  "InvitationToAgent": "<1>{{displayName}}</1> mời bạn tham gia vào tác nhân AI <1>{{agentName}}</1>.",
   "InvitationToPortal": "<1>{{displayName}}</1> mời bạn tham gia {{productName}} <1>{{spaceAddress}} </1> để cùng làm việc trên tài liệu một cách an toàn.",
   "InvitationToRoom": "<1>{{displayName}}</1> mời bạn tham gia phòng <1>{{roomName}} </1> để cùng làm việc trên tài liệu một cách an toàn.",
   "Invite": "Mời",

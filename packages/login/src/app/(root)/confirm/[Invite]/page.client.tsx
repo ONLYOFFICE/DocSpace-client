@@ -38,6 +38,7 @@ import {
 } from "react";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/navigation";
+import classNames from "classnames";
 
 import {
   TCapabilities,
@@ -74,10 +75,11 @@ import {
 import SsoReactSvg from "PUBLIC_DIR/images/sso.react.svg";
 
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
-import { RegisterContainer } from "@/components/RegisterContainer.styled";
 import { globalColors } from "@docspace/shared/themes";
 import EmailInputForm from "./_sub-components/EmailInputForm";
 import RegistrationForm from "./_sub-components/RegistrationForm";
+
+import styles from "@/components/RegisterContainer.module.scss";
 
 export type CreateUserFormProps = {
   userNameRegex: string;
@@ -564,8 +566,12 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     : {};
 
   return (
-    <RegisterContainer registrationForm={registrationForm}>
-      <div className="auth-form-fields">
+    <div
+      className={classNames(styles.registerContainer, {
+        [styles.registrationForm]: registrationForm,
+      })}
+    >
+      <div className={styles.authFormFields}>
         <EmailInputForm
           ref={inputRef}
           isLoading={isLoading}
@@ -614,8 +620,8 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 
       {!emailFromLink && (oauthDataExists() || ssoExists()) ? (
         <>
-          <div className="line">
-            <Text color={globalColors.gray} className="or-label">
+          <div className={styles.line}>
+            <Text color={globalColors.gray} className={styles.orLabel}>
               {t("Common:orContinueWith")}
             </Text>
           </div>
@@ -628,7 +634,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
           />
         </>
       ) : null}
-    </RegisterContainer>
+    </div>
   );
 };
 

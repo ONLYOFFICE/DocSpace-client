@@ -147,4 +147,12 @@
   .wizardCheckbox svg {
     margin-inline-end: 8px;
   }
+
+  .licenseLink {
+    color: var(--accent-main);
+
+    &.hasErrorAgree {
+      color: var(--login-error-color);
+    }
+  }
 }

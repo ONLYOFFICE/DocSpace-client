@@ -26,7 +26,6 @@
 
 "use client";
 
-import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 import { ChangeEvent, MouseEvent, useRef, useState, useMemo } from "react";
 import classNames from "classnames";
@@ -144,7 +143,6 @@ function WizardForm(props: WizardFormProps) {
 
   const { t, i18n } = useTranslation(["Wizard", "Common"]);
 
-  const theme = useTheme();
   const { currentDeviceType } = useDeviceType();
 
   const refPassInput = useRef<Nullable<PasswordInputHandle>>(null);
@@ -536,12 +534,10 @@ function WizardForm(props: WizardFormProps) {
           dataTestId="agree_terms_checkbox"
         />
         <Link
+          className={classNames(styles.licenseLink, {
+            [styles.hasErrorAgree]: hasErrorAgree,
+          })}
           type={LinkType.page}
-          color={
-            hasErrorAgree
-              ? theme.checkbox.errorColor
-              : theme.currentColorScheme?.main.accent
-          }
           fontSize="13px"
           target={LinkTarget.blank}
           href={licenseUrl}

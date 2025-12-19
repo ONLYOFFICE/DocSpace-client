@@ -195,7 +195,6 @@
   "PreviewTooltipDescription": "Visualizar a interface com a cor selecionada aplicada",
   "ProjectsDescription": "Cada projeto é importado como uma sala, que conterá todos os documentos e usuários deste projeto. O gerente do projeto se tornará o proprietário da sala",
   "ProvideChoice": "Forneça uma escolha (web ou aplicativo)",
-  "QuotaPerAIAgent": "Cota por agente de IA",
   "QuotaPerRoom": "Cota por sala",
   "QuotaPerUser": "Cota por usuário",
   "Quotas": "Cotas",

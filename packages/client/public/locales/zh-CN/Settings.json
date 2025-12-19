@@ -258,7 +258,6 @@
   "TimeLanguageSettingsDescription": "更改语言和时区设置以调整常见的{{productName}}语言和时间。",
   "TimeLanguageSettingsSave": "点击底部的<strong>保存</strong>，使其生效。",
   "TimeZone": "时区",
-  "Top5AIAgents": "存储使用量排名前 5 的 AI 智能体：",
   "Top5rooms": "存储空间用量排名前 5 位的房间：",
   "Top5Users": "存储空间用量排名前 5 位的用户：",
   "TotalStorage": "总存储空间：{{size}}",

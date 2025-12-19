@@ -258,7 +258,6 @@
   "TimeLanguageSettingsDescription": "{{productName}} 공통 언어 및 시간대를 조정하려면 언어 및 시간대 설정을 변경하세요.",
   "TimeLanguageSettingsSave": "적용하려면 하단의 <strong>저장</strong>을 클릭하세요.",
   "TimeZone": "시간대",
-  "Top5AIAgents": "저장 용량 사용량 기준 상위 5 AI 에이전트:",
   "Top5rooms": "스토리지 사용량 기준 상위 5개의 방:",
   "Top5Users": "스토리지 사용량 기준 상위 5명의 사용자:",
   "TotalStorage": "총 스토리지: {{size}}",

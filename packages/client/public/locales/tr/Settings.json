@@ -258,7 +258,6 @@
   "TimeLanguageSettingsDescription": "Ortak {{productName}} dilini ve saatini ayarlamak için Dil ve Saat Dilimi Ayarlarını değiştirin.",
   "TimeLanguageSettingsSave": "Uygulamak için alttaki <strong>Kaydet</strong>'e tıklayın.",
   "TimeZone": "Zaman Dilimi",
-  "Top5AIAgents": "Depolama kullanımıyla en iyi 5 yapay zeka ajanı:",
   "Top5rooms": "Depolama kullanımına göre ilk 5 oda:",
   "Top5Users": "Depolama kullanımına göre ilk 5 kullanıcı:",
   "TotalStorage": "Toplam depolama alanı: {{size}}",

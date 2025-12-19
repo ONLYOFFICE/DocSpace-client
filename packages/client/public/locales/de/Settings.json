@@ -258,7 +258,6 @@
   "TimeLanguageSettingsDescription": "Ändern Sie die Einstellungen für Sprache und Zeitzone, um die Sprache und die Uhrzeit von {{productName}} anzupassen.",
   "TimeLanguageSettingsSave": "Klicken Sie unten auf <strong>Speichern</strong>, um die Einstellungen zu übernehmen.",
   "TimeZone": "Zeitzone",
-  "Top5AIAgents": "Die 5 speicherintensivsten KI-Agenten:",
   "Top5rooms": "Top 5 Räume nach Speichernutzung:",
   "Top5Users": "Top 5 Benutzer nach Speichernutzung:",
   "TotalStorage": "Gesamter Speicherplatz: {{size}}",

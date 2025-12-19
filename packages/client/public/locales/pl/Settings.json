@@ -258,7 +258,6 @@
   "TimeLanguageSettingsDescription": "Zmień ustawienia języka oraz strefy czasowej, aby dostosować wspólny język i czas {{productName}}.",
   "TimeLanguageSettingsSave": "Aby zastosować wprowadzone zmiany, kliknij <strong>Zapisz</strong> u dołu sekcji.",
   "TimeZone": "Strefa czasowa",
-  "Top5AIAgents": "Top 5 agentów AI pod względem zużycia pamięci:",
   "Top5rooms": "5 pokoi wykorzystujących najwięcej pamięci:",
   "Top5Users": "5 użytkowników wykorzystujących najwięcej pamięci:",
   "TotalStorage": "Łączna pamięć: {{size}}",

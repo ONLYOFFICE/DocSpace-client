@@ -258,7 +258,6 @@
   "TimeLanguageSettingsDescription": "Vaihda Kieli- ja aikavyöhykeasetuksia muokataksesi yleistä  {{productName}}-n kieltä ja aikaa.",
   "TimeLanguageSettingsSave": "Klikkaa alla olevaa <strong>Tallenna</strong>-painiketta suorittaaksesi.",
   "TimeZone": "Aikavyöhyke",
-  "Top5AIAgents": "Top 5 AI-agentit tallennustilan käytön mukaan:",
   "Top5rooms": "Top 5 huoneet tallennustilan käytön mukaan:",
   "Top5Users": "Top 5 käyttäjät tallennustilan käytön mukaan:",
   "TotalStorage": "Kokonaistila: {{size}}",

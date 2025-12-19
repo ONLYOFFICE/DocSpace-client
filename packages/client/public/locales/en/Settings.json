@@ -262,7 +262,7 @@
   "TimeLanguageSettingsDescription": "Change Language and Time Zone Settings to adjust common {{productName}} language and time.",
   "TimeLanguageSettingsSave": "Click <strong>Save</strong> at the bottom to apply.",
   "TimeZone": "Time zone",
-  "Top5AIAgents": "Top 5 AI agents by storage usage:",
+  "Top5AIAgents": "Top 5 {{aiAgents}} by storage usage:",
   "Top5rooms": "Top 5 rooms by storage usage:",
   "Top5Users": "Top 5 users by storage usage:",
   "TotalStorage": "Total storage: {{size}}",

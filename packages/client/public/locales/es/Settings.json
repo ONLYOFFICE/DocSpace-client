@@ -258,7 +258,6 @@
   "TimeLanguageSettingsDescription": "Cambie la configuración de idioma y zona horaria para ajustar el idioma y la hora comunes de {{productName}}.",
   "TimeLanguageSettingsSave": "Haga clic en el botón <strong>Guardar</strong> de la parte inferior para aplicar.",
   "TimeZone": "Zona horaria",
-  "Top5AIAgents": "5 principales agentes de IA por uso de almacenamiento:",
   "Top5rooms": "Las 5 principales salas por uso de almacenamiento:",
   "Top5Users": "Los 5 usuarios principales por uso de almacenamiento:",
   "TotalStorage": "Almacenamiento total: {{size}}",

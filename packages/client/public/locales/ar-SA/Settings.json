@@ -258,7 +258,6 @@
   "TimeLanguageSettingsDescription": "قم بتغيير إعدادت اللغة والمنطقة الزمنية لتعديل اللغة والتوقيت {{productName}} الشائع",
   "TimeLanguageSettingsSave": "اضغط على <strong>حفظ</strong> في الأسفل لتطبيق الإجراء.",
   "TimeZone": "وحدة زمنية",
-  "Top5AIAgents": "أعلى 5 وكلاء حسب استخدام المساحة:",
   "Top5rooms": "أفضل 5 غرف حسب استخدام التخزين:",
   "Top5Users": "أعلى 5 مستخدمين حسب استخدام التخزين:",
   "TotalStorage": "إجمالي مساحة التخزين: {{size}}",

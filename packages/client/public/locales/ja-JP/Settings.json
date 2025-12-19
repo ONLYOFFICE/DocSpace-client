@@ -258,7 +258,6 @@
   "TimeLanguageSettingsDescription": "言語とタイムゾーンの設定を変更して、{{productName}}の共通言語と時間を調整します。",
   "TimeLanguageSettingsSave": "一番下の「<strong>保存</strong>」ボタンをクリックしてください。",
   "TimeZone": "タイムゾーン",
-  "Top5AIAgents": "ストレージ使用量トップ5のAIエージェント：",
   "Top5rooms": "ストレージ使用量上位5ルーム：",
   "Top5Users": "ストレージ使用量上位5人のユーザー：",
   "TotalStorage": "合計ストレージ：{{size}}",

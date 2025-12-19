@@ -258,7 +258,6 @@
   "TimeLanguageSettingsDescription": "Spremenite nastavitve jezika in časovnega pasu, da prilagodite običajni jezik in čas {{productName}}.",
   "TimeLanguageSettingsSave": "Klikni <strong>Shrani</strong> na dnu za prijavo.",
   "TimeZone": "Časovni pas",
-  "Top5AIAgents": "Najboljši 5 AI agentov po uporabi prostora za shranjevanje:",
   "Top5rooms": "Top 5 sob glede na porabljen prostor za shranjevanje:",
   "Top5Users": "Top 5 uporabnikov glede na porabljen prostor za shranjevanje:",
   "TotalStorage": "Skupni prostor za shranjevanje: {{size}}",

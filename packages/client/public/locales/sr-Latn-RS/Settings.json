@@ -258,7 +258,6 @@
   "TimeLanguageSettingsDescription": "Promenite Podešavanja jezika i vremenske zone da podesite uobičajen {{productName}} jezik i vreme.",
   "TimeLanguageSettingsSave": "Kliknite <strong>Sačuvaj</strong> na dnu da primenite.",
   "TimeZone": "Vremenska zona",
-  "Top5AIAgents": "Top 5 AI agenata prema korišćenju skladišnog prostora:",
   "Top5rooms": "Top 5 soba po upotrebi skladišta:",
   "Top5Users": "Top 5 korisnika po upotrebi skladišta:",
   "TotalStorage": "Ukupno skladište: {{size}}",

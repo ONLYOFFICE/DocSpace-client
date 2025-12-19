@@ -258,7 +258,6 @@
   "TimeLanguageSettingsDescription": "Změna nastavení jazyka a časového pásma pro nastavení běžného jazyka a času v {{productName}}.",
   "TimeLanguageSettingsSave": "Kliknutím na <strong>Uložit</strong> v dolní části přihlášky.",
   "TimeZone": "Časové pásmo",
-  "Top5AIAgents": "Top 5 AI agentů podle využití úložiště:",
   "Top5rooms": "5 nejpoužívanějších místností podle využití úložného prostoru:",
   "Top5Users": "5 nejčastějších uživatelů podle využití úložiště:",
   "TotalStorage": "Celkové skladování: {{size}}",

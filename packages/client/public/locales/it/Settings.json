@@ -258,7 +258,6 @@
   "TimeLanguageSettingsDescription": "Modifica le impostazioni di lingua e fuso orario per regolare la lingua e l'ora comuni di {{productName}}.",
   "TimeLanguageSettingsSave": "Fai clic su <strong>Salva</strong> in basso per applicare.",
   "TimeZone": "Fuso orario",
-  "Top5AIAgents": "Top 5 agenti AI per utilizzo dello spazio:",
   "Top5rooms": "Prime 5 stanze in base all'utilizzo dello spazio di archiviazione:",
   "Top5Users": "Primi 5 utenti in base all'utilizzo dello spazio di archiviazione:",
   "TotalStorage": "Spazio di archiviazione totale: {{size}}",

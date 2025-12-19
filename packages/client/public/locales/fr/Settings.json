@@ -258,7 +258,6 @@
   "TimeLanguageSettingsDescription": "Modifiez les paramètres de langue et de fuseau horaire pour ajuster la langue et l'heure du {{productName}}.",
   "TimeLanguageSettingsSave": "Cliquez <strong>Enregistrer</strong> en bas pour appliquer.",
   "TimeZone": "Fuseau horaire",
-  "Top5AIAgents": "Top 5 des agents IA par utilisation du stockage :",
   "Top5rooms": "Cinq salles qui utilisent le plus d'espace de stockage:",
   "Top5Users": "Cinq utilisateurs qui utilisent le plus d'espace de stockage:",
   "TotalStorage": "Espace de stockage total: {{size}}",

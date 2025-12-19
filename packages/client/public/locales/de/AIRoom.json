@@ -13,8 +13,6 @@
   "KnowledgeDescription": "Laden Sie Dateien von Ihrem Computer oder {{productName}} hoch, um den Chat mit mehr Kontext zu versehen. Hinweis: Einige oder alle hochgeladenen Inhalte können während des Gesprächs sichtbar sein.",
   "KnowledgeSelectIn": "In {{productName}} wählen",
   "KnowledgeUnavailable": "Wissensdatenbank nicht verfügbar",
-  "KnowledgeUnavailableDescription": "Die Wissensdatenbank ist derzeit deaktiviert. Um die semantische Suche und die Dokumentenverarbeitung für Ihre KI-Agenten zu aktivieren, konfigurieren Sie bitte den Einbettungsanbieter in den {{productName}}-Einstellungen.",
-  "KnowledgeUnavailableDescriptionUser": "Die Wissensdatenbank ist derzeit deaktiviert. Um die semantische Suche und die Dokumentenverarbeitung für KI-Agenten zu aktivieren, wenden Sie sich bitte an Ihren {{productName}}-Administrator, um den Einbettungsanbieter zu konfigurieren.",
   "MCP": "MCP-Tools für diesen Raum",
   "NoAccessAIAgentTitle": "Leider haben Sie keinen Zugriff auf diesen KI-Agenten",
   "ResponseQualityNode": "<1>Hinweis:</1> Die Antwortqualität kann je nach Modell variieren; für beste Ergebnisse werden neuere Modelle empfohlen.",

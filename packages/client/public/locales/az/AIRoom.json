@@ -13,8 +13,6 @@
   "KnowledgeDescription": "Komputerinizdən və ya {{productName}} proqramından faylları yükləyin ki, söhbət üçün daha yaxşı kontekst yarana bilsin. Qeyd: söhbət zamanı yüklənən məzmunun bir hissəsi və ya hamısı göstərilə bilər.",
   "KnowledgeSelectIn": "{{productName}} seçim edin",
   "KnowledgeUnavailable": "Bilgi Bazası mövcud deyil",
-  "KnowledgeUnavailableDescription": "Bilik bazası hazırda deaktivdir. Süni intellekt agentləriniz üçün semantik axtarışı və sənəd emalını aktivləşdirmək üçün {{productName}} parametrlərində yerləşdirmə provayderini konfiqurasiya edin.",
-  "KnowledgeUnavailableDescriptionUser": "Bilik bazası hazırda deaktivdir. Süni intellekt agentləri üçün semantik axtarışı və sənəd emalını aktivləşdirmək üçün, yerləşdirmə provayderini konfiqurasiya etmək üçün {{productName}} admininiz ilə əlaqə saxlayın.",
   "MCP": "Bu otaq üçün MCP alətləri",
   "NoAccessAIAgentTitle": "Bağışlayın, bu süni intellekt agentinə girişiniz yoxdur",
   "ResponseQualityNode": "<1>Qeyd:</1> Müxbirə görə cavabın keyfiyyəti dəyişə bilər; daha yaxşı nəticələr üçün daha yeni modellər tövsiyə edilir.",

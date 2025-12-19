@@ -13,8 +13,6 @@
   "KnowledgeDescription": "Otpremite datoteke sa svog računara ili sa {{productName}} da biste obezbedili bolji kontekst za ćaskanje. Napomena: deo ili ceo otpremljeni sadržaj može biti otkriven tokom razgovora.",
   "KnowledgeSelectIn": "Izaberite u {{productName}}",
   "KnowledgeUnavailable": "Baza znanja je nedostupna",
-  "KnowledgeUnavailableDescription": "Baza znanja je trenutno onemogućena. Da biste aktivirali semantičko pretraživanje i obradu dokumenata za vaše AI agente, podesite provajdera vektorskih ugrađivanja u podešavanjima {{productName}}.",
-  "KnowledgeUnavailableDescriptionUser": "Baza znanja je trenutno onemogućena. Da biste aktivirali semantičko pretraživanje i obradu dokumenata za AI agente, kontaktirajte vašeg {{productName}} administratora da podesi provajdera vektorskih ugrađivanja.",
   "MCP": "MCP alati za ovu sobu",
   "NoAccessAIAgentTitle": "Izvinite, nemate pristup ovom AI agentu",
   "ResponseQualityNode": "<1>Napomena:</1> Kvalitet odgovora može varirati u zavisnosti od modela; noviji modeli se preporučuju za najbolje rezultate.",

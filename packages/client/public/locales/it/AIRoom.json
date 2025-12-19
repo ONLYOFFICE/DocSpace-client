@@ -13,8 +13,6 @@
   "KnowledgeDescription": "Carica file dal tuo computer o da {{productName}} per fornire un contesto migliore alla chat. Nota: parte o tutto il contenuto caricato potrebbe essere visibile durante la conversazione.",
   "KnowledgeSelectIn": "Seleziona in {{productName}}",
   "KnowledgeUnavailable": "Knowledge Base non disponibile",
-  "KnowledgeUnavailableDescription": "La Knowledge Base è attualmente disattivata. Per attivare la ricerca semantica e l’elaborazione dei documenti per i tuoi agenti AI, configura il provider di embeddings nelle impostazioni di {{productName}}.",
-  "KnowledgeUnavailableDescriptionUser": "La Knowledge Base è attualmente disattivata. Per attivare la ricerca semantica e l’elaborazione dei documenti per gli agenti AI, contatta il tuo admin di {{productName}} per configurare il provider di embeddings.",
   "MCP": "Strumenti MCP per questa stanza",
   "NoAccessAIAgentTitle": "Spiacenti, non hai accesso a questo agente AI.",
   "ResponseQualityNode": "<1>Nota:</1> La qualità delle risposte può variare a seconda del modello; per i migliori risultati si consigliano modelli più recenti.",

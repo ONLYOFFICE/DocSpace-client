@@ -13,8 +13,6 @@
   "KnowledgeDescription": "Încărcați fișierele de pe calculatorul sau {{productName}} pentru a oferi contextul suplimentar chat-ului. Mențiune: o parte sau întregul conținut încărcat poate fi partajat în timpul conversației.",
   "KnowledgeSelectIn": "Selectare din {{productName}}",
   "KnowledgeUnavailable": "Baza de cunoștințe nu este disponibilă",
-  "KnowledgeUnavailableDescription": "Baza de cunoștințe este actualmente dezactivată. Pentru a activa căutarea semantică și procesarea documentelor pentru agenții de IA, configurați furnizorul de integrări în secțiunea Setările {{productName}}.",
-  "KnowledgeUnavailableDescriptionUser": "Baza de cunoștințe este în prezent dezactivată. Pentru a activa căutarea semantică și procesarea documentelor pentru agenții de IA, contactați administratorul de {{productName}} pentru a configura furnizorul de integrări.",
   "MCP": "Instrumente MCP în această sală",
   "NoAccessAIAgentTitle": "Îmi pare rău, nu aveți acces la acest agent AI.",
   "ResponseQualityNode": "<1>Notă:</1> Calitatea răspunsurilor depinde de model; recomandăm să folosiţi modele cele mai noi pentru rezultate mai performante.",

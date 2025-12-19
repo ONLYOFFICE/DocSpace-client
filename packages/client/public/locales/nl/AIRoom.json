@@ -13,8 +13,6 @@
   "KnowledgeDescription": "Upload bestanden van uw computer of {{productName}} om de chat meer context te geven. Let op: een deel of alle geüploade inhoud kan tijdens het gesprek worden getoond.",
   "KnowledgeSelectIn": "Selecteer in {{productName}}",
   "KnowledgeUnavailable": "Kennisbank niet beschikbaar",
-  "KnowledgeUnavailableDescription": "De kennisbank is momenteel uitgeschakeld. Om semantisch zoeken en documentverwerking voor uw AI-agenten te activeren, configureert u de embeddings provider in de {{productName}} instellingen.",
-  "KnowledgeUnavailableDescriptionUser": "De kennisbank is momenteel uitgeschakeld. Om semantisch zoeken en documentverwerking voor AI-agenten te activeren, neem dan contact op met uw {{productName}} beheerder om de embeddings provider te configureren.",
   "MCP": "MCP tools voor deze kamer",
   "NoAccessAIAgentTitle": "Het spijt ons, u heeft geen toegang tot deze AI-agent.",
   "ResponseQualityNode": "<1>Let op:</1> De kwaliteit van de antwoorden kan variëren per model; nieuwere modellen worden aanbevolen voor de beste resultaten.",

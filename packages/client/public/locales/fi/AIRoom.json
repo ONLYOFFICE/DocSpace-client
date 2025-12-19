@@ -13,8 +13,6 @@
   "KnowledgeDescription": "Lataa tiedostoja tietokoneeltasi tai {{productName}}-palvelusta, jotta chatissa on parempi konteksti. Huomio: osa tai kaikki ladatut tiedot voivat näkyä keskustelun aikana.",
   "KnowledgeSelectIn": "Valitse {{productName}}",
   "KnowledgeUnavailable": "Tietokanta ei ole käytettävissä",
-  "KnowledgeUnavailableDescription": "Tietokanta on tällä hetkellä poissa käytöstä. Jotta voit ottaa semanttisen haun ja dokumenttien käsittelyn käyttöön AI-agenttiesi osalta, määritä upotusten tarjoaja {{productName}} -asetuksissa.",
-  "KnowledgeUnavailableDescriptionUser": "Tietokanta on tällä hetkellä poissa käytöstä. Jotta voit ottaa semanttisen haun ja dokumenttien käsittelyn käyttöön AI-agentteja varten, ota yhteyttä {{productName}}-järjestelmän ylläpitäjään upotusten tarjoajan määrittämiseksi.",
   "MCP": "MCP työkalut tähän huoneeseen",
   "NoAccessAIAgentTitle": "Olen pahoillani, sinulla ei ole käyttöoikeutta tähän tekoälyavustajaan.",
   "ResponseQualityNode": "<1>Huomautus:</1> Vastausten laatu voi vaihdella mallista riippuen; parempien tulosten saavuttamiseksi suositellaan uusia malleja.",

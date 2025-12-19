@@ -13,8 +13,6 @@
   "KnowledgeDescription": "Bilgisayarınızdan veya {{productName}}'den dosya yükleyerek sohbet için daha iyi bir bağlam sağlayın. Not: Yüklenen içeriğin bir kısmı veya tamamı konuşma sırasında görünür olabilir.",
   "KnowledgeSelectIn": "{{productName}}'de Seçin",
   "KnowledgeUnavailable": "Bilgi Tabanı kullanılamıyor",
-  "KnowledgeUnavailableDescription": "Bilgi tabanı şu anda devre dışı. Yapay zeka ajanlarınız için anlamsal arama ve belge işleme'yi etkinleştirmek için, {{productName}} ayarlarında gömme sağlayıcısını yapılandırın.",
-  "KnowledgeUnavailableDescriptionUser": "Bilgi tabanı şu anda devre dışı. Yapay zeka ajanları için anlamsal arama ve belge işleme'yi etkinleştirmek için lütfen {{productName}} yöneticinizle iletişime geçerek gömme sağlayıcısını yapılandırın.",
   "MCP": "Bu oda için MCP araçları",
   "NoAccessAIAgentTitle": "Üzgünüm, bu yapay zeka aracına erişiminiz yok.",
   "ResponseQualityNode": "<1>Not:</1> Yanıt kalitesi modele göre değişiklik gösterebilir; en iyi sonuçlar için daha yeni modeller önerilir.",

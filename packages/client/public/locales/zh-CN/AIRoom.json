@@ -13,8 +13,6 @@
   "KnowledgeDescription": "从您的计算机或{{productName}}上传文件，为对话提供上下文。注意：部分或全部上传内容可能会在对话期间显示。",
   "KnowledgeSelectIn": "在{{productName}}中选择",
   "KnowledgeUnavailable": "知识库不可用",
-  "KnowledgeUnavailableDescription": "知识库目前已禁用。要为您的 AI 智能体启用语义搜索和文档处理功能，请在 {{productName}} 设置中配置嵌入提供商。",
-  "KnowledgeUnavailableDescriptionUser": "知识库目前已禁用。要为您的 AI 智能体启用语义搜索和文档处理功能，请联系您的 {{productName}} 管理员配置嵌入提供商。",
   "MCP": "此房间的 MCP 工具",
   "NoAccessAIAgentTitle": "抱歉，您无权访问此 AI 智能体",
   "ResponseQualityNode": "<1>注意：</1> 响应质量可能因模型而异；建议使用较新的模型以获得最佳效果。",

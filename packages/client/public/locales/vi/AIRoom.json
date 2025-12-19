@@ -13,8 +13,6 @@
   "KnowledgeDescription": "Tải lên các tệp từ máy tính của bạn hoặc {{productName}} để cung cấp ngữ cảnh tốt hơn cho cuộc trò chuyện. Lưu ý: một phần hoặc toàn bộ nội dung đã tải lên có thể bị lộ trong quá trình trò chuyện.",
   "KnowledgeSelectIn": "Chọn trong {{productName}}",
   "KnowledgeUnavailable": "Cơ sở kiến thức không khả dụng",
-  "KnowledgeUnavailableDescription": "Cơ sở kiến ​​thức hiện đang bị vô hiệu hóa. Để kích hoạt tìm kiếm ngữ nghĩa và xử lý tài liệu cho các tác nhân AI của bạn, vui lòng cấu hình nhà cung cấp nhúng trong cài đặt {{productName}}.",
-  "KnowledgeUnavailableDescriptionUser": "Cơ sở kiến ​​thức hiện đang bị vô hiệu hóa. Để kích hoạt tìm kiếm ngữ nghĩa và xử lý tài liệu cho các tác nhân AI, vui lòng liên hệ với quản trị viên {{productName}} của bạn để cấu hình nhà cung cấp nhúng.",
   "MCP": "Công cụ MCP cho phòng này",
   "NoAccessAIAgentTitle": "Xin lỗi, bạn không có quyền truy cập vào trợ lý AI này.",
   "ResponseQualityNode": "<1>Lưu ý:</1> Chất lượng phản hồi có thể khác nhau tùy theo mô hình; nên sử dụng các mô hình mới hơn để có kết quả tốt nhất.",

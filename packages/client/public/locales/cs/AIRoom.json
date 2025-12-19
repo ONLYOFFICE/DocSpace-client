@@ -13,8 +13,6 @@
   "KnowledgeDescription": "Nahrajte soubory z vašeho počítače nebo z {{productName}}, abyste poskytli lepší kontext pro chat. Upozornění: během konverzace mohou být některé nebo všechny nahrané soubory zobrazeny.",
   "KnowledgeSelectIn": "Vybrat v {{productName}}",
   "KnowledgeUnavailable": "Znalostní báze nedostupná",
-  "KnowledgeUnavailableDescription": "Znalostní báze je momentálně vypnuta. Pro aktivaci sémantického vyhledávání a zpracování dokumentů pro vaše AI agenty, prosím, nakonfigurujte poskytovatele embeddingů v nastavení {{productName}}.",
-  "KnowledgeUnavailableDescriptionUser": "Znalostní báze je momentálně deaktivovaná. Pro aktivaci sémantického vyhledávání a zpracování dokumentů pro AI agenty, kontaktujte prosím administrátora vašeho {{productName}}, aby nakonfiguroval poskytovatele embeddingů.",
   "MCP": "MCP nástroje pro tuto místnost",
   "NoAccessAIAgentTitle": "Omlouvám se, nemáte přístup k tomuto AI agentovi.",
   "ResponseQualityNode": "<1>Poznámka:</1> Kvalita odpovědí se může lišit v závislosti na modelu; pro nejlepší výsledky se doporučují novější modely.",

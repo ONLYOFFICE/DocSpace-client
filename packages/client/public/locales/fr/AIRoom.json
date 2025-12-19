@@ -13,8 +13,6 @@
   "KnowledgeDescription": "Téléchargez des fichiers depuis votre ordinateur ou {{productName}} pour fournir un meilleur contexte à la discussion. Remarque : une partie ou la totalité du contenu téléchargé peut être exposée pendant la conversation.",
   "KnowledgeSelectIn": "Sélectionner dans {{productName}}",
   "KnowledgeUnavailable": "Base de connaissances indisponible",
-  "KnowledgeUnavailableDescription": "La base de connaissances est actuellement désactivée. Pour activer la recherche sémantique et le traitement des documents pour vos agents IA, veuillez configurer le fournisseur d'embeddings dans les paramètres {{productName}}.",
-  "KnowledgeUnavailableDescriptionUser": "La base de connaissances est actuellement désactivée. Pour activer la recherche sémantique et le traitement des documents pour les agents IA, veuillez contacter votre administrateur {{productName}} pour configurer le fournisseur d'embeddings.",
   "MCP": "Outils MCP pour cette salle",
   "NoAccessAIAgentTitle": "Malheureusement, vous n'avez pas accès à cet agent IA.",
   "ResponseQualityNode": "<1>Remarque :</1> La qualité des réponses peut varier selon le modèle ; les modèles plus récents sont recommandés pour de meilleurs résultats.",

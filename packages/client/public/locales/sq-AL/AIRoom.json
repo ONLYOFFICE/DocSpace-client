@@ -13,8 +13,6 @@
   "KnowledgeDescription": "Ngarko skedarë nga kompjuteri yt ose {{productName}} për të ofruar kontekst më të mirë për bisedën. Shënim: një pjesë ose e gjithë përmbajtja e ngarkuar mund të ekspozohet gjatë bisedës.",
   "KnowledgeSelectIn": "Zgjidh në {{productName}}",
   "KnowledgeUnavailable": "Baza e njohurive e paaktive",
-  "KnowledgeUnavailableDescription": "Baza e njohurive është aktualisht e çaktivizuar. Për të aktivizuar kërkimin semantik dhe përpunimin e dokumenteve për agjentët tuaj të inteligjencës artificiale, ju lutemi konfiguroni ofruesin e integrimeve në cilësimet e {{productName}}.",
-  "KnowledgeUnavailableDescriptionUser": "Baza e njohurive është momentalisht e çaktivizuar. Për të aktivizuar kërkimin semantik dhe përpunimin e dokumenteve për agjentët AI, ju lutemi kontaktoni administratorin e {{productName}} për të konfiguruar ofruesin e embeddings.",
   "MCP": "Mjetet MCP për këtë dhomë",
   "NoAccessAIAgentTitle": "Më vjen keq, ju nuk keni qasje në këtë agent AI.",
   "ResponseQualityNode": "<1>Shënim:</1> Cilësia e përgjigjeve mund të ndryshojë sipas modelit; modelet më të reja rekomandohen për rezultate më të mira.",

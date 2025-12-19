@@ -13,8 +13,6 @@
   "KnowledgeDescription": "Naložite datoteke z računalnika ali {{productName}}, da zagotovite boljši kontekst za klepet. Opomba: med pogovorom je morda vidna vsa ali del vsebine, ki ste jo naložili.",
   "KnowledgeSelectIn": "Izberi v {{productName}}",
   "KnowledgeUnavailable": "Baza znanja ni na voljo",
-  "KnowledgeUnavailableDescription": "Baza znanja je trenutno onemogočena. Za omogočitev semantičnega iskanja in obdelave dokumentov za vaše AI agente, prosim konfigurirajte ponudnika vgrajenih podatkov v nastavitvah {{productName}}.",
-  "KnowledgeUnavailableDescriptionUser": "Baza znanja je trenutno onemogočena. Za omogočitev semantičnega iskanja in obdelave dokumentov za AI agente, se obrnite na administratorja {{productName}}, da konfigurira ponudnika vgrajenih podatkov.",
   "MCP": "MCP orodja za to sobo",
   "NoAccessAIAgentTitle": "Žal nimáte dostopa do tega AI agenta.",
   "ResponseQualityNode": "<1>Opomba:</1> Kakovost odgovorov se lahko razlikuje glede na model; za najboljše rezultate priporočamo novejše modele.",

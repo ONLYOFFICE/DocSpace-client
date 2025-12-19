@@ -13,8 +13,6 @@
   "KnowledgeDescription": "Suba archivos de su ordenador o {{productName}} para proporcionar un mejor contexto a la conversación. Nota: parte o la totalidad del contenido subido puede quedar expuesto durante la conversación.",
   "KnowledgeSelectIn": "Seleccionar en {{productName}}",
   "KnowledgeUnavailable": "Base de conocimientos no disponible ",
-  "KnowledgeUnavailableDescription": "La base de conocimientos está actualmente desactivada. Para activar la búsqueda semántica y el procesamiento de documentos para sus agentes de IA, configure el proveedor de incrustaciones en los ajustes de {{productName}}.",
-  "KnowledgeUnavailableDescriptionUser": "La base de conocimientos está actualmente desactivada. Para activar la búsqueda semántica y el procesamiento de documentos para agentes de IA, por favor, póngase en contacto con el administrador de su {{productName}} para configurar el proveedor de incrustaciones.",
   "MCP": "Herramientas MCP para esta sala",
   "NoAccessAIAgentTitle": "Lo sentimos, no tiene acceso a este agente de IA.",
   "ResponseQualityNode": "<1>Nota:</1> La calidad de la respuesta puede variar según el modelo; se recomiendan los modelos más nuevos para obtener mejores resultados.",

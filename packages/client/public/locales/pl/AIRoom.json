@@ -13,8 +13,6 @@
   "KnowledgeDescription": "Prześlij pliki z komputera lub {{productName}}, aby zapewnić lepszy kontekst dla rozmowy. Zwróć uwagę: część lub całość przesłanych treści może zostać ujawniona podczas rozmowy.",
   "KnowledgeSelectIn": "Wybierz w {{productName}}",
   "KnowledgeUnavailable": "Baza wiedzy niedostępna",
-  "KnowledgeUnavailableDescription": "Baza wiedzy jest obecnie wyłączona. Aby aktywować wyszukiwanie semantyczne i przetwarzanie dokumentów dla Twoich agentów AI, skonfiguruj dostawcę osadzeń w ustawieniach {{productName}}.",
-  "KnowledgeUnavailableDescriptionUser": "Baza wiedzy jest obecnie wyłączona. Aby aktywować wyszukiwanie semantyczne i przetwarzanie dokumentów dla agentów AI, skontaktuj się z administratorem {{productName}}, aby skonfigurować dostawcę osadzeń.",
   "MCP": "Narzędzia MCP do tego pomieszczenia",
   "NoAccessAIAgentTitle": "Przepraszamy, nie masz dostępu do tego agenta AI.",
   "ResponseQualityNode": "<1>Uwaga:</1> Jakość odpowiedzi może się różnić w zależności od modelu; zaleca się używanie nowszych modeli, aby uzyskać najlepsze wyniki.",

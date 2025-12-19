@@ -1332,10 +1332,10 @@ class FilesActionStore {
       if (isAIAgent) {
         translationForOneItem = isPin
           ? t("AIAgentPinned", { aiAgent: t("Common:AIAgent") })
-          : t("AIAgentUnpinned");
+          : t("AIAgentUnpinned", { aiAgent: t("Common:AIAgent") });
         translationForSeverals = isPin
-          ? t("AIAgentsPinned")
-          : t("AIAgentsUnpinned");
+          ? t("AIAgentsPinned", { aiAgents: t("Common:AIAgents") })
+          : t("AIAgentsUnpinned", { aiAgents: t("Common:AIAgents") });
       } else {
         translationForOneItem = isPin ? t("RoomPinned") : t("RoomUnpinned");
         translationForSeverals = isPin

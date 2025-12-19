@@ -80,6 +80,7 @@ const TemplateGallery = (props: {
 
   useEffect(() => {
     initTemplateGallery().then(() => setIsInitLoading(false));
+    setCurrentExtensionGallery(FILE_EXTENSIONS.DOCX);
   }, []);
 
   useEffect(() => {

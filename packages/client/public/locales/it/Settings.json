@@ -195,7 +195,6 @@
   "PreviewTooltipDescription": "Anteprima dell’interfaccia con il colore selezionato applicato",
   "ProjectsDescription": "Ogni progetto viene importato come una stanza, che conterrà tutti i documenti e gli utenti di questo progetto. Il project manager diventerà il proprietario della stanza",
   "ProvideChoice": "Fornisci una scelta (web o app)",
-  "QuotaPerAIAgent": "Quota per agente AI",
   "QuotaPerRoom": "Quota per stanza",
   "QuotaPerUser": "Quota per utente",
   "Quotas": "Quote",

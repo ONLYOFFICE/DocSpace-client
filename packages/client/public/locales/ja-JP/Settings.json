@@ -195,7 +195,6 @@
   "PreviewTooltipDescription": "選択した色が適用されたインターフェースをプレビューする",
   "ProjectsDescription": "各プロジェクトは、ルームとしてインポートされ、そのルームには、このプロジェクトのすべての文書とユーザーが含まれます。プロジェクトマネージャーはルームの所有者になります。",
   "ProvideChoice": "選択肢を提供（ウェブまたはアプリ）",
-  "QuotaPerAIAgent": "AIエージェントごとのクォータ",
   "QuotaPerRoom": "ルームあたりの容量制限",
   "QuotaPerUser": "ユーザーあたりの容量制限",
   "Quotas": "容量制限",

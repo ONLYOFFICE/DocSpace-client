@@ -195,7 +195,6 @@
   "PreviewTooltipDescription": "선택한 색상이 적용된 인터페이스 미리 보기 ",
   "ProjectsDescription": "각 프로젝트가 이 프로젝트의 모든 문서 및 사용자를 포함하는 방으로 가져오기되었습니다. 프로젝트 관리자가 방의 소유자가 됩니다",
   "ProvideChoice": "선택권 제공(웹 또는 앱)",
-  "QuotaPerAIAgent": "AI 에이전트당 할당량",
   "QuotaPerRoom": "방당 할당량",
   "QuotaPerUser": "사용자당 할당량",
   "Quotas": "할당량",

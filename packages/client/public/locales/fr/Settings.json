@@ -195,7 +195,6 @@
   "PreviewTooltipDescription": "Prévisualisation de l'interface avec la couleur sélectionnée",
   "ProjectsDescription": "Chaque projet est importé en tant qu'une salle comportant tous les documents et les utilisateurs du projet. Le chef du projet devient le propriétaire de la salle.",
   "ProvideChoice": "Donner le choix (web ou application)",
-  "QuotaPerAIAgent": "Quota par agent IA",
   "QuotaPerRoom": "Quota pour la salle",
   "QuotaPerUser": "Quota pour l'utilisateur",
   "Quotas": "Quotas",

@@ -195,7 +195,6 @@
   "PreviewTooltipDescription": "Vorschau der Benutzeroberfläche mit der ausgewählten Farbe",
   "ProjectsDescription": "Jedes Projekt wird als Raum importiert, der alle Dokumente und Benutzer dieses Projekts enthält. Der Projektleiter wird Besitzer des Raumes",
   "ProvideChoice": "Auswahlmöglichkeit (Web oder App)",
-  "QuotaPerAIAgent": "Quote pro KI-Agent",
   "QuotaPerRoom": "Quote pro Zimmer",
   "QuotaPerUser": "Quote pro Benutzer",
   "Quotas": "Quoten",

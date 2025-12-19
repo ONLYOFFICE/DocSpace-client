@@ -195,7 +195,6 @@
   "PreviewTooltipDescription": "Podgląd interfejsu z zastosowanym wybranym kolorem",
   "ProjectsDescription": "Każdy projekt jest importowany jako pokój, który będzie zawierał wszystkie dokumenty oraz użytkowników tego projektu. Menedżer projektu zostanie właścicielem pokoju",
   "ProvideChoice": "Zaoferuj wybór (przeglądarka lub aplikacja)",
-  "QuotaPerAIAgent": "Przydział na agenta AI",
   "QuotaPerRoom": "Limit na pokój",
   "QuotaPerUser": "Limit na użytkownika",
   "Quotas": "Limity",

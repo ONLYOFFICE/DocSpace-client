@@ -195,7 +195,6 @@
   "PreviewTooltipDescription": "Náhled rozhraní s vybranou barvou",
   "ProjectsDescription": "Každý projekt je importován jako místnost, která bude obsahovat všechny dokumenty a uživatele tohoto projektu. Správce projektu se stane vlastníkem místnosti.",
   "ProvideChoice": "Poskytnout možnost volby (web nebo aplikace)",
-  "QuotaPerAIAgent": "Kvóta na AI agenta",
   "QuotaPerRoom": "Kvóta na místnost",
   "QuotaPerUser": "Kvóta na uživatele",
   "Quotas": "Kvóty",

@@ -195,7 +195,6 @@
   "PreviewTooltipDescription": "预览所选配色的界面",
   "ProjectsDescription": "每个项目会被导入为一个房间，包含项目中所有的文档和用户。项目经理会成为房间的所有者",
   "ProvideChoice": "提供选项（网页端/应用程序端）",
-  "QuotaPerAIAgent": "每个 AI 智能体的配额",
   "QuotaPerRoom": "每个房间的配额",
   "QuotaPerUser": "每位用户的配额",
   "Quotas": "分配额度",

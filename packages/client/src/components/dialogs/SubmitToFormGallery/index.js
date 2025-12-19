@@ -93,6 +93,7 @@ const SubmitToFormGallery = ({
     setIsSubmitting(true);
 
     const origin = combineUrl(window.ClientConfig?.proxy?.url);
+
     const fileSrc = `${origin}/filehandler.ashx?action=download&fileid=${formItem.id}`;
 
     const file = await fetch(fileSrc)
@@ -115,9 +116,13 @@ const SubmitToFormGallery = ({
     )
       .then((res) => {
         if (!res.data) throw new Error(res.statusText);
+        toastr.success(t("Common:Done"));
         window.location.replace(res.data);
       })
-      .catch((err) => onError(err))
+      .catch(() => {
+        toastr.error(t("Common:SomethingWentWrong"));
+        onClose();
+      })
       .finally(() => onClose());
   };
 
@@ -134,8 +139,7 @@ const SubmitToFormGallery = ({
     return (
       <FilesSelector
         key="select-file-dialog"
-        filterParam="PDFTypes"
-        descriptionText={t("Common:SelectPDFFormat")}
+        filterParam="TemplateGalleryTypes"
         isPanelVisible
         onSelectFile={onSelectForm}
         onClose={onCloseFormSelector}
@@ -143,6 +147,8 @@ const SubmitToFormGallery = ({
         withFavoritesTreeFolder
         withAIAgentsTreeFolder
         isSelect
+        isPortalView
+        withoutDescriptionText
       />
     );
 
@@ -153,7 +159,9 @@ const SubmitToFormGallery = ({
       isLarge={formItem}
       autoMaxHeight
     >
-      <ModalDialog.Header>{t("Common:SubmitToFormGallery")}</ModalDialog.Header>
+      <ModalDialog.Header>
+        {t("Common:SubmitToTemplateGallery")}
+      </ModalDialog.Header>
       <ModalDialog.Body>
         <div className="info">
           {t("FormGallery:SubmitToGalleryDialogMainInfo")}
@@ -206,7 +214,7 @@ const SubmitToFormGallery = ({
           <Button
             primary
             size="normal"
-            label={t("FormGallery:SelectForm")}
+            label={t("FormGallery:SelectTemplate")}
             onClick={onOpenFormSelector}
             scale
             testId="submit_to_gallery_select_form_button"

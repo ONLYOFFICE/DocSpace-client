@@ -102,6 +102,7 @@ const DropDownItem = ({
   withToggle,
   checked,
   onClick,
+  onMouseDown,
   onClickSelectedItem,
   label = "",
   tabIndex = -1,
@@ -162,6 +163,7 @@ const DropDownItem = ({
         className,
       )}
       onClick={handleClick}
+      onMouseDown={onMouseDown}
       tabIndex={tabIndex}
       data-testid={testId ?? "drop-down-item"}
       data-focused={isActiveDescendant}

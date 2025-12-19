@@ -212,6 +212,11 @@
 
   @include mixins.desktop {
     width: 360px;
+
+    &.aside {
+      width: 440px;
+      padding: 24px 20px;
+    }
   }
 
   @include mixins.tablet-and-below {

@@ -1370,7 +1370,9 @@ class FilesActionStore {
 
       if (isError) {
         isAIAgent
-          ? toastr.error(t("AIAgentPinLimitMessage"))
+          ? toastr.error(
+              t("AIAgentPinLimitMessage", { aiAgents: t("Common:AIAgents") }),
+            )
           : toastr.error(t("RoomsPinLimitMessage"));
       }
 

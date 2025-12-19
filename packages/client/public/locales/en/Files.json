@@ -16,7 +16,7 @@
   "AgentsRemoved": "Agents removed",
   "AIAgentNotificationsDisabled": "{{aiAgent}} notifications disabled",
   "AIAgentNotificationsEnabled": "{{aiAgent}} notifications enabled",
-  "AIAgentPinLimitMessage": "You can't pin more than 10 AI agents to the top. Unpin some that are currently pinned.",
+  "AIAgentPinLimitMessage": "You can't pin more than 10 {{aiAgents}} to the top. Unpin some that are currently pinned.",
   "AIAgentPinned": "AI agent pinned",
   "AIAgentsPinned": "AI agents pinned",
   "AIAgentsUnpinned": "AI agents unpinned",

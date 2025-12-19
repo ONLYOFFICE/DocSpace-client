@@ -14,7 +14,6 @@
   "AfterFilesWillBeDeletedPermanently": "ファイルは削除されます。",
   "AgentRemoved": "エージェントが削除されました",
   "AgentsRemoved": "エージェントが削除されました",
-  "AIAgentPinLimitMessage": "10個以上のAIエージェントをピン留めすることができません。現在ピン留めされているエージェントをいくつか解除してください。",
   "AIAgentPinned": "AIエージェントがピン留めされました",
   "AIAgentsPinned": "AIエージェントがピン留めされました",
   "AIAgentsUnpinned": "AIエージェントのピン留めが解除されました",

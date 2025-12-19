@@ -14,7 +14,6 @@
   "AfterFilesWillBeDeletedPermanently": "{{date}} será eliminado permanentemente.",
   "AgentRemoved": "Agente removido",
   "AgentsRemoved": "Agentes removidos",
-  "AIAgentPinLimitMessage": "Não é possível fixar mais de 10 agentes de IA no topo. Desfixe alguns que estão atualmente fixados.",
   "AIAgentPinned": "Agente de IA preso",
   "AIAgentsPinned": "Agentes de IA presos",
   "AIAgentsUnpinned": "Agentes de IA desvinculados",

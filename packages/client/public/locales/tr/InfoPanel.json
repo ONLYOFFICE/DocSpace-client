@@ -2,7 +2,6 @@
   "AddedRoomTags": "Etiketler eklendi.",
   "Administration": "Yönetim",
   "AgentRenamed": "Temsilci <1>«{{oldRoomTitle}}»</1> adını <2>«{{roomTitle}}»</2> olarak değiştirdi",
-  "AIAgentsEmptyScreenTent": "İşte yapay zeka ajanlarının detayları burada",
   "AndMoreLabel": "ve <1>{{count}} daha</1>",
   "CreationDate": "Oluşturulma tarihi",
   "Data": "Veri",

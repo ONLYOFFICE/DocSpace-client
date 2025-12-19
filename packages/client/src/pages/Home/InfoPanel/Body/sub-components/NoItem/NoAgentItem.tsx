@@ -37,7 +37,7 @@ import styles from "./NoItem.module.scss";
 
 const NoAgentItem = () => {
   const { isBase } = useTheme();
-  const { t } = useTranslation(["InfoPanel"]);
+  const { t } = useTranslation(["InfoPanel", "Common"]);
 
   const imageSrc = isBase
     ? InfoPanelRoomEmptyScreenSvgUrl
@@ -54,7 +54,7 @@ const NoAgentItem = () => {
         <img src={imageSrc} alt="No AI agent" />
       </div>
       <Text className="no-item-text" textAlign="center">
-        {t("AIAgentsEmptyScreenTent")}
+        {t("AIAgentsEmptyScreenTent", { aiAgents: t("Common:AIAgents") })}
       </Text>
     </div>
   );

@@ -2,7 +2,7 @@
   "AddedRoomTags": "Tags added.",
   "Administration": "Administration",
   "AgentRenamed": "Agent <1>«{{oldRoomTitle}}»</1> renamed to <2>«{{roomTitle}}»</2>",
-  "AIAgentsEmptyScreenTent": "See AI agents details here",
+  "AIAgentsEmptyScreenTent": "See {{aiAgents}} details here",
   "AndMoreLabel": "and <1>{{count}} more</1>",
   "CreationDate": "Creation date",
   "Data": "Data",

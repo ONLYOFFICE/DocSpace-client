@@ -2,7 +2,6 @@
   "AddedRoomTags": "Tags toegevoegd.",
   "Administration": "Beheer",
   "AgentRenamed": "Agent <1>«{{oldRoomTitle}}»</1> heeft de naam veranderd naar <2>«{{roomTitle}}»</2>",
-  "AIAgentsEmptyScreenTent": "Bekijk de details van AI-agenten hier",
   "AndMoreLabel": "en <1>{{count}} meer</1>",
   "CreationDate": "Aanmaakdatum",
   "Data": "Data",

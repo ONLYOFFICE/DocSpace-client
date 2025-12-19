@@ -2,7 +2,6 @@
   "AddedRoomTags": "已添加标签。",
   "Administration": "管理",
   "AgentRenamed": "智能体<1>«{{oldRoomTitle}}»</1>已重命名为<2>«{{roomTitle}}»</2>",
-  "AIAgentsEmptyScreenTent": "在此处查看 AI 智能体详情",
   "AndMoreLabel": "以及<1>另外 {{count}} 个</1>",
   "CreationDate": "创建日期",
   "Data": "数据",

@@ -3,13 +3,19 @@
   "content": "MCP servers",
   "content_en_sha1_hash": "8d9a304fd985232ade488e1913e41a3d9a502b09",
   "created_at": "2025-11-21T08:21:51.274Z",
-  "updated_at": "2025-12-17T14:56:20.325Z",
+  "updated_at": "2025-12-19T10:17:07.687Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/MCP.tsx",
+      "line_number": 76,
+      "context": "fontWeight={400}\n className=\"set_room_params-info-description\"\n noSelect\n >\n {t(\"MCPDescriptionServers\", {\n mcpServers: t(\"Common:MCPSettingTitle\"),\n })}\n </Text>\n </div>\n <div className=\"ai-mcp-group\">\n <SelectorAddButton onClick={onClickAction} />",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
       "line_number": 119,
@@ -37,13 +43,19 @@
     {
       "file_path": "/packages/shared/selectors/MCPServers/index.tsx",
       "line_number": 171,
-      "context": "items={servers}\n emptyScreenImage={\n isBase ? EmptyScreenRoomSvgUrl : EmptyScreenRoomDarkSvgUrl\n }\n emptyScreenHeader={t(\"Common:NoMCPServers\", {\n mcpServers: t(\"Common:MCPSettingTitle\"),\n })}\n emptyScreenDescription={t(\"Common:NoMCPServersDescription\", {\n mcpServers: t(\"Common:MCPSettingTitle\"),\n productName: t(\"Common:ProductName\"),\n })}",
+      "context": "items={servers}\n emptyScreenImage={\n isBase ? EmptyScreenRoomSvgUrl : EmptyScreenRoomDarkSvgUrl\n }\n emptyScreenHeader={t(\"Common:NoMCPServers\", {\n mcpServers: t(\"Common:MCPSettingTitle\"),\n })}\n emptyScreenDescription={t(\"Common:NoMCPServersDescription\", {\n mcpServers: t(\"Common:MCPSettingTitle\"),\n productName: t(\"Common:ProductName\"),\n aiAgent: t(\"Common:AIAgent\"),",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/selectors/MCPServers/index.tsx",
       "line_number": 171,
-      "context": "items={servers}\n emptyScreenImage={\n isBase ? EmptyScreenRoomSvgUrl : EmptyScreenRoomDarkSvgUrl\n }\n emptyScreenHeader={t(\"Common:NoMCPServers\", {\n mcpServers: t(\"Common:MCPSettingTitle\"),\n })}\n emptyScreenDescription={t(\"Common:NoMCPServersDescription\", {\n mcpServers: t(\"Common:MCPSettingTitle\"),\n productName: t(\"Common:ProductName\"),\n })}",
+      "context": "items={servers}\n emptyScreenImage={\n isBase ? EmptyScreenRoomSvgUrl : EmptyScreenRoomDarkSvgUrl\n }\n emptyScreenHeader={t(\"Common:NoMCPServers\", {\n mcpServers: t(\"Common:MCPSettingTitle\"),\n })}\n emptyScreenDescription={t(\"Common:NoMCPServersDescription\", {\n mcpServers: t(\"Common:MCPSettingTitle\"),\n productName: t(\"Common:ProductName\"),\n aiAgent: t(\"Common:AIAgent\"),",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/selectors/MCPServers/index.tsx",
+      "line_number": 171,
+      "context": "items={servers}\n emptyScreenImage={\n isBase ? EmptyScreenRoomSvgUrl : EmptyScreenRoomDarkSvgUrl\n }\n emptyScreenHeader={t(\"Common:NoMCPServers\", {\n mcpServers: t(\"Common:MCPSettingTitle\"),\n })}\n emptyScreenDescription={t(\"Common:NoMCPServersDescription\", {\n mcpServers: t(\"Common:MCPSettingTitle\"),\n productName: t(\"Common:ProductName\"),\n aiAgent: t(\"Common:AIAgent\"),",
       "module": "/packages/shared"
     }
   ],

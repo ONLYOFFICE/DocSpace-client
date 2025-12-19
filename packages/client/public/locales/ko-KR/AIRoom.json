@@ -1,5 +1,4 @@
 {
-  "AgentInViewModeWarning": "이 AI 에이전트는 <strong>보기 전용</strong> 모드입니다. 다른 사용자의 AI 채팅 활동 결과를 볼 수 있습니다.",
   "AIAgentAccessRedirectNote": "5초 후에 {{sectionName}} 섹션으로 자동 리디렉션됩니다.",
   "AIChat": "AI-채팅",
   "AIInstructions": "AI 지침",

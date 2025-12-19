@@ -1,5 +1,4 @@
 {
-  "AgentInViewModeWarning": "Jesteś w trybie <strong>tylko do odczytu</strong> dla tego agenta AI. Możesz zobaczyć wyniki aktywności czatu AI od innych użytkowników.",
   "AIAgentAccessRedirectNote": "Zostaniesz automatycznie przekierowany do sekcji {{sectionName}} za 5 sekund.",
   "AIChat": "AI-Chat",
   "AIInstructions": "Instrukcje AI",

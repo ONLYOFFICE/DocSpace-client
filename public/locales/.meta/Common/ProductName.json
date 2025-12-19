@@ -3,7 +3,7 @@
   "content": "DocSpace",
   "content_en_sha1_hash": "ce0b96eab5006b875f6c4a6c31ad73c3c86edcf5",
   "created_at": "2025-05-19T21:30:47.504Z",
-  "updated_at": "2025-12-17T14:56:19.497Z",
+  "updated_at": "2025-12-19T10:17:07.598Z",
   "comment": {
     "text": "This translation key is used for the \"From Portal\" button label, which indicates that a document can be uploaded from DocSpace. It appears in a dropdown menu on a main button in a shell interface. Translators should provide a translated version of \"From Portal\" with the product name inserted.",
     "is_auto": true,
@@ -1698,7 +1698,7 @@
     },
     {
       "file_path": "/packages/login/src/components/GreetingContainer/GreetingCreateUserContainer/index.tsx",
-      "line_number": 108,
+      "line_number": 109,
       "context": "{...commonProps}\n i18nKey=\"InvitationToPortal\"\n defaults={DEFAULT_PORTAL_TEXT}\n values={{\n displayName,\n productName: t(\"Common:ProductName\"),\n ...(roomData.title\n ? { roomName: roomData.title }\n : { spaceAddress: hostName }),\n }}\n />",
       "module": "/packages/login"
     },
@@ -2046,25 +2046,25 @@
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 135,
+      "line_number": 138,
       "context": "i18nKey=\"RolePortalAdminDescription\"\n components={{\n 1: <strong></strong>,\n }}\n values={{\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:Documents\"),\n agentSection: t(\"Common:AIAgents\"),\n }}\n />\n ) as unknown as string,",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 135,
+      "line_number": 138,
       "context": "i18nKey=\"RolePortalAdminDescription\"\n components={{\n 1: <strong></strong>,\n }}\n values={{\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:Documents\"),\n agentSection: t(\"Common:AIAgents\"),\n }}\n />\n ) as unknown as string,",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 135,
+      "line_number": 138,
       "context": "i18nKey=\"RolePortalAdminDescription\"\n components={{\n 1: <strong></strong>,\n }}\n values={{\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:Documents\"),\n agentSection: t(\"Common:AIAgents\"),\n }}\n />\n ) as unknown as string,",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 135,
+      "line_number": 138,
       "context": "i18nKey=\"RolePortalAdminDescription\"\n components={{\n 1: <strong></strong>,\n }}\n values={{\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:Documents\"),\n agentSection: t(\"Common:AIAgents\"),\n }}\n />\n ) as unknown as string,",
       "module": "/packages/shared"
     },

@@ -538,6 +538,7 @@ const View = ({
           components={{
             strong: <strong />,
           }}
+          values={{ aiAgent: t("Common:AIAgent") }}
         />,
       );
     }

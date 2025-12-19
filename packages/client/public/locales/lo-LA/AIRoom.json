@@ -1,5 +1,4 @@
 {
-  "AgentInViewModeWarning": "ທ່ານຢູ່ໃນໂໝດ <strong>ເບິ່ງຢ່າງດຽວ</strong> ສຳລັບຕົວແທນ AI ນີ້. ທ່ານສາມາດເຫັນຜົນຂອງກິດຈະກຳການສົນທະນາ AI ຈາກຜູ້ໃຊ້ອື່ນໆ.",
   "AIAgentAccessRedirectNote": "ທ່ານຈະຖືກປ່ຽນເສັ້ນທາງໄປຫາພາກສ່ວນ {{sectionName}} ໂດຍອັດຕະໂນມັດພາຍໃນ 5 ວິນາທີ.",
   "AIChat": "AI-Chat",
   "AIInstructions": "ຄຳແນະນຳກ່ຽວກັບ AI",

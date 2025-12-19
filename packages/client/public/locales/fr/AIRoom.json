@@ -1,5 +1,4 @@
 {
-  "AgentInViewModeWarning": "Vous êtes en mode <strong>lecture seule</strong> pour cet agent IA. Vous pouvez voir les résultats de l'activité de chat IA des autres utilisateurs.",
   "AIAgentAccessRedirectNote": "Vous serez automatiquement redirigé vers la section {{sectionName}} dans 5 secondes.",
   "AIChat": "Chat IA",
   "AIInstructions": "Instructions IA",

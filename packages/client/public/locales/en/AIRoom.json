@@ -1,5 +1,5 @@
 {
-  "AgentInViewModeWarning": "You’re in <strong>view-only</strong> mode for this AI agent. You can see the results of AI chat activity from other users.",
+  "AgentInViewModeWarning": "You’re in <strong>view-only</strong> mode for this {{aiAgent}}. You can see the results of AI chat activity from other users.",
   "AIAgentAccessRedirectNote": "You will be automatically redirected to the {{sectionName}} section in 5 seconds.",
   "AIChat": "AI Chat",
   "AIInstructions": "AI Instructions",

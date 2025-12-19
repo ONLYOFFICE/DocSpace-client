@@ -3,7 +3,7 @@
   "content": "Guests and Users cannot be assigned as Room managers. Only Room and {{productName}} admins are suitable for the specified role.",
   "content_en_sha1_hash": "c301475a90b7e7caea7bcb0e1ce1edfacec602b6",
   "created_at": "2025-05-19T21:30:54.739Z",
-  "updated_at": "2025-12-16T07:24:43.862Z",
+  "updated_at": "2025-12-19T10:17:07.938Z",
   "comment": {
     "text": "This translation key is used to display a warning message when users or guests are assigned as room managers. It informs the user that only certain admins (room and {{productName}}) are suitable for this role. This message appears in an invite panel and alerts users about accessibility restrictions.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 163,
+      "line_number": 166,
       "context": "},\n roomManager: {\n key: \"roomManager\",\n label: t(\"Common:RoomManager\"),\n description: getRoomAdminDescription(roomType, t),\n tooltip: t(\"UserMaxAvailableRoleWarning\", {\n productName: t(\"Common:ProductName\"),\n }),\n ...(!standalone && { quota: t(\"Common:Paid\") }),\n color: globalColors.favoritesStatus,\n access:",
       "module": "/packages/shared"
     }

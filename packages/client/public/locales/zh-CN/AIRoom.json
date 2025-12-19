@@ -1,5 +1,4 @@
 {
-  "AgentInViewModeWarning": "您当前处于<strong>只读</strong>模式，用于此 AI 代理。您可以查看来自其他用户的 AI 聊天活动结果。",
   "AIAgentAccessRedirectNote": "系统将在5秒后自动跳转至{{sectionName}}模块。",
   "AIChat": "AI 对话",
   "AIInstructions": "AI 指令",

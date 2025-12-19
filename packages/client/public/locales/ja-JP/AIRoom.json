@@ -1,5 +1,4 @@
 {
-  "AgentInViewModeWarning": "このAIエージェントは<strong>閲覧専用</strong>モードで表示されています。他のユーザーのAIチャットアクティビティの結果を見ることができます。",
   "AIAgentAccessRedirectNote": "5秒後に自動的に{{sectionName}}セクションにリダイレクトされます。",
   "AIChat": "AIチャット",
   "AIInstructions": "AIの使い方",

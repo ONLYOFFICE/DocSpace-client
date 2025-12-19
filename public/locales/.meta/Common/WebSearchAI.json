@@ -3,7 +3,7 @@
   "content": "Web search",
   "content_en_sha1_hash": "381ceddd75a893f19764c7e4cf9cd12c0f6e88c3",
   "created_at": "2025-11-21T08:21:51.294Z",
-  "updated_at": "2025-12-17T14:56:20.326Z",
+  "updated_at": "2025-12-19T10:17:08.092Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -56,6 +56,12 @@
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/index.tsx",
       "line_number": 117,
       "context": "try {\n await updateWebSearch?.(true, selectedOption, value);\n \n toastr.success(\n t(\"AISettings:WebSearchEnabledSuccess\", {\n webSearch: t(\"Common:WebSearchAI\"),\n }),\n );\n } catch (e) {\n console.error(e);\n toastr.error(e as string);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/index.tsx",
+      "line_number": 285,
+      "context": "if (confirmActionType === AI_TOOLS) {\n return t(\"Services:AIToolsEnabled\");\n }\n if (confirmActionType === WEB_SEARCH) {\n return t(\"Services:WebSearchEnabled\", {\n webSearch: t(\"Common:WebSearchAI\"),\n });\n }\n };\n \n try {",
       "module": "/packages/client"
     },
     {

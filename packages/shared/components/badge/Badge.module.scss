@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: var(--badge-border);
+  border: none;
   width: fit-content;
   padding: var(--badge-padding);
   overflow: var(--badge-overflow);
@@ -17,12 +17,12 @@
 
   &:hover:not([data-no-hover="true"]):not(:global(.ai-agents)) {
     cursor: pointer;
-    border-color: var(--badge-background-color);
+    border-color: transparent;
   }
 
   &[data-is-hovered="true"]:not([data-no-hover="true"]) {
     cursor: pointer;
-    border-color: var(--badge-background-color);
+    border-color: transparent;
   }
 
   &[data-type="high"] {
@@ -88,12 +88,16 @@
       background-color: var(--badge-background-color);
 
       &:hover:not([data-no-hover="true"]):not(:global(.ai-agents)) {
-        background-color: var(--badge-background-color);
+        background-color: color-mix(in srgb, var(--badge-background-color) 85%, transparent);
+      }
+
+      &:active:not([data-no-hover="true"]):not(:global(.ai-agents)) {
+        background-color: color-mix(in srgb, var(--badge-background-color) 90%, black);
       }
     }
 
     &:hover:not([data-no-hover="true"]):not(:global(.ai-agents)) {
-      border-color: var(--badge-background-color);
+      border-color: transparent;
     }
 
     &[data-muted="true"] {
@@ -101,12 +105,16 @@
         background-color: var(--badge-disable-background-color);
 
         &:hover:not([data-no-hover="true"]) {
-          background-color: var(--badge-disable-background-color);
+          background-color: color-mix(in srgb, var(--badge-disable-background-color) 85%, transparent);
+        }
+
+        &:active:not([data-no-hover="true"]) {
+          background-color: color-mix(in srgb, var(--badge-disable-background-color) 90%, black);
         }
       }
 
       &:hover:not([data-no-hover="true"]) {
-        border-color: var(--badge-disable-background-color);
+        border-color: transparent;
       }
     }
   }

@@ -38,6 +38,17 @@ const FileTile: FC<FileTileProps> = ({
   onClick,
 }) => {
   const previewSrc = item?.attributes.card_prewiew.data?.attributes.url;
+  let nonStandardHorizontalTile = false;
+
+  if (!smallPreview) {
+    const thumbnail =
+      item?.attributes.template_image.data.attributes.formats.thumbnail;
+
+    const width = thumbnail.width;
+    const height = thumbnail.height;
+
+    nonStandardHorizontalTile = width > height;
+  }
 
   const handleInfoClick = (e: React.MouseEvent): void => {
     e.stopPropagation();
@@ -50,6 +61,7 @@ const FileTile: FC<FileTileProps> = ({
 
   const thumbnailImageClass = classNames(styles.thumbnailImage, {
     [styles.smallPreview]: smallPreview,
+    [styles.nonStandardHorizontalTile]: nonStandardHorizontalTile,
   });
 
   return (

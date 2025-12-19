@@ -58,7 +58,18 @@ import {
 } from "@docspace/shared/utils/common";
 import { TError } from "@docspace/shared/utils/axiosClient";
 
+import {
+  selfHandler,
+  settingsHandler,
+  colorThemeHandler,
+  buildHandler,
+  tariffHandler,
+  getPortalHandler,
+} from "@docspace/shared/__mocks__/e2e";
+
 import { logger } from "@/../logger.mjs";
+
+const IS_TEST = process.env.E2E_TEST;
 
 export async function getUser() {
   logger.debug(`Start GET /people/@self`);
@@ -73,7 +84,9 @@ export async function getUser() {
     );
 
     if (!cookie?.includes("asc_auth_key")) return undefined;
-    const userRes = await fetch(getUsersRes);
+    const userRes = IS_TEST
+      ? selfHandler(null, hdrs)
+      : await fetch(getUsersRes);
 
     if (userRes.status === 401) {
       logger.error(`GET /people/@self failed: ${userRes.status}`);
@@ -110,7 +123,9 @@ export async function getSettings(share?: string) {
       "GET",
     );
 
-    const settingsRes = await fetch(getSettingsRes);
+    const settingsRes = IS_TEST
+      ? settingsHandler(hdrs)
+      : await fetch(getSettingsRes);
 
     if (settingsRes.status === 403) {
       logger.error(
@@ -127,6 +142,10 @@ export async function getSettings(share?: string) {
     }
 
     const settings = await settingsRes.json();
+
+    if (IS_TEST && settings?.response?.tenantAlias === "localhost") {
+      settings.response.tenantAlias = "test";
+    }
 
     return settings.response as TSettings;
   } catch (error) {
@@ -146,7 +165,7 @@ export async function getVersionBuild() {
       "GET",
     );
 
-    const res = await fetch(getSettingssRes);
+    const res = IS_TEST ? buildHandler() : await fetch(getSettingssRes);
 
     if (!res.ok) {
       logger.error(`GET /settings/version/build failed: ${res.statusText}`);
@@ -207,6 +226,8 @@ export async function getAllPortals() {
   logger.debug("Start GET /portal/get?statistics=true");
 
   try {
+    const hdrs = await headers();
+
     const [getAllPortalssRes] = await createRequest(
       [`/portal/get?statistics=true`],
       [["", ""]],
@@ -215,7 +236,9 @@ export async function getAllPortals() {
       true,
     );
 
-    const portalsRes = await fetch(getAllPortalssRes);
+    const portalsRes = IS_TEST
+      ? getPortalHandler(hdrs)
+      : await fetch(getAllPortalssRes);
 
     if (!portalsRes.ok) {
       logger.error(
@@ -252,7 +275,9 @@ export async function getPortalTariff() {
       logger.debug(`GET /portal/tariff failed: missing asc_auth_key`);
       return undefined;
     }
-    const portalTariffRes = await fetch(getPortalTariffsRes);
+    const portalTariffRes = IS_TEST
+      ? tariffHandler()
+      : await fetch(getPortalTariffsRes);
 
     if (portalTariffRes.status === 401) {
       logger.error(`GET /portal/tariff failed: ${portalTariffRes.statusText}`);
@@ -285,7 +310,7 @@ export async function getColorTheme() {
       "GET",
     );
 
-    const res = await fetch(getSettingssRes);
+    const res = IS_TEST ? colorThemeHandler() : await fetch(getSettingssRes);
 
     if (!res.ok) {
       logger.error(`GET /settings/colortheme failed: ${res.status}`);

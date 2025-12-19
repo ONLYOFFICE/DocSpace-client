@@ -3,7 +3,7 @@
   "content": "Room pinned",
   "content_en_sha1_hash": "81ef48bb3373a4abb09c637f8c7aeda4ee051e63",
   "created_at": "2025-05-19T21:30:56.115Z",
-  "updated_at": "2025-12-19T10:17:08.510Z",
+  "updated_at": "2025-12-19T13:04:06.093Z",
   "comment": {
     "text": "This translation key represents a descriptive label used when a room is pinned, appearing as a notification or confirmation message in the UI, likely triggered by an action on the FilesActionsStore.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
       "line_number": 1340,
-      "context": ": t(\"AIAgentUnpinned\");\n translationForSeverals = isPin\n ? t(\"AIAgentsPinned\")\n : t(\"AIAgentsUnpinned\");\n } else {\n translationForOneItem = isPin ? t(\"RoomPinned\") : t(\"RoomUnpinned\");\n translationForSeverals = isPin\n ? t(\"RoomsPinned\", { count: elems.length })\n : t(\"RoomsUnpinned\", { count: elems.length });\n }",
+      "context": ": t(\"AIAgentUnpinned\", { aiAgent: t(\"Common:AIAgent\") });\n translationForSeverals = isPin\n ? t(\"AIAgentsPinned\", { aiAgents: t(\"Common:AIAgents\") })\n : t(\"AIAgentsUnpinned\", { aiAgents: t(\"Common:AIAgents\") });\n } else {\n translationForOneItem = isPin ? t(\"RoomPinned\") : t(\"RoomUnpinned\");\n translationForSeverals = isPin\n ? t(\"RoomsPinned\", { count: elems.length })\n : t(\"RoomsUnpinned\", { count: elems.length });\n }",
       "module": "/packages/client"
     }
   ],

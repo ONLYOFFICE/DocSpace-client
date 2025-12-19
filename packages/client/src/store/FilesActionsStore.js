@@ -1414,7 +1414,9 @@ class FilesActionStore {
     let notificationsEnabled = t("RoomNotificationsEnabled");
 
     if (isAIAgent) {
-      notificationsDisabled = t("AIAgentNotificationsDisabled");
+      notificationsDisabled = t("AIAgentNotificationsDisabled", {
+        aiAgent: t("Common:AIAgent"),
+      });
       notificationsEnabled = t("AIAgentNotificationsEnabled");
     }
 

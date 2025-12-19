@@ -14,7 +14,6 @@
   "AfterFilesWillBeDeletedPermanently": "Os arquivos posteriores serão excluídos permanentemente.",
   "AgentRemoved": "Agente removido",
   "AgentsRemoved": "Agentes removidos",
-  "AIAgentNotificationsDisabled": "Notificações do agente de IA desativadas",
   "AIAgentNotificationsEnabled": "Notificações do agente de IA ativadas",
   "AIAgentPinLimitMessage": "Não é possível fixar mais de 10 agentes de IA na parte superior. Desfixe alguns dos que estão fixados atualmente.",
   "AIAgentPinned": "Agente de IA fixado",

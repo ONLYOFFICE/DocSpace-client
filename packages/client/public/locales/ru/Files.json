@@ -14,7 +14,6 @@
   "AfterFilesWillBeDeletedPermanently": "Затем файлы будут удалены навсегда.",
   "AgentRemoved": "Агент удален",
   "AgentsRemoved": "Агенты удалены",
-  "AIAgentNotificationsDisabled": "Уведомления ИИ-агента отключены",
   "AIAgentNotificationsEnabled": "Уведомления ИИ-агента подключены",
   "AIAgentPinLimitMessage": "Вы не можете закрепить более 10 ИИ-агентов. Открепите некоторых агентов из закрепленных.",
   "AIAgentPinned": "ИИ-агент закреплен",

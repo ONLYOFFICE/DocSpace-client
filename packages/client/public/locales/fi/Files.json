@@ -14,7 +14,6 @@
   "AfterFilesWillBeDeletedPermanently": " Sen jälkeen, kun tiedostot poistetaan lopullisesti.",
   "AgentRemoved": "Agentti poistettu",
   "AgentsRemoved": "Agentit poistettu",
-  "AIAgentNotificationsDisabled": "AI-agentin ilmoitukset poissa käytöstä",
   "AIAgentNotificationsEnabled": "AI-agentin ilmoitukset käytössä",
   "AIAgentPinLimitMessage": "Et voi kiinnittää enempää kuin 10 tekoälyagenttia yläosaan. Poista joidenkin nykyisten kiinnitettyjen agenttien kiinnitys.",
   "AIAgentPinned": "AI-agentti jumissa",

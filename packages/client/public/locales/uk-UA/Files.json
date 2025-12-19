@@ -14,7 +14,6 @@
   "AfterFilesWillBeDeletedPermanently": "Після файли буде видалено назавжди.",
   "AgentRemoved": "Агент видалено",
   "AgentsRemoved": "Агентів вилучено",
-  "AIAgentNotificationsDisabled": "Сповіщення агента ШІ вимкнено",
   "AIAgentNotificationsEnabled": "Сповіщення агента ШІ увімкнено",
   "AIAgentPinLimitMessage": "Ви не можете закріпити більше 10 агентів ШІ зверху. Відкріпіть деяких, які зараз закріплені.",
   "AIAgentPinned": "Агент ШІ заблоковано",

@@ -14,7 +14,6 @@
   "AfterFilesWillBeDeletedPermanently": "之后文件将被永久删除。",
   "AgentRemoved": "智能体已移除",
   "AgentsRemoved": "智能体已移除",
-  "AIAgentNotificationsDisabled": "AI 智能体通知已禁用",
   "AIAgentNotificationsEnabled": "AI 智能体通知已启用",
   "AIAgentPinLimitMessage": "您最多只能置顶10个 AI 智能体。请取消置顶当前已置顶的部分智能体。",
   "AIAgentPinned": "AI 智能体已置顶",

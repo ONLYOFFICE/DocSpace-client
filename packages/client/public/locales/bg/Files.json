@@ -14,7 +14,6 @@
   "AfterFilesWillBeDeletedPermanently": "Крайните файлове ще бъдат окончателно изтрити.",
   "AgentRemoved": "Агент премахнат",
   "AgentsRemoved": "Агенти премахнати",
-  "AIAgentNotificationsDisabled": "Уведомленията от AI агент са деактивирани",
   "AIAgentNotificationsEnabled": "Уведоменията за AI агент са активирани",
   "AIAgentPinLimitMessage": "Не можете да фиксирате повече от 10 AI агента в горната част. Откачете някои от тези, които са фиксирани.",
   "AIAgentPinned": "AI агент блокиран",

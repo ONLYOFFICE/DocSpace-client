@@ -14,7 +14,6 @@
   "AfterFilesWillBeDeletedPermanently": " بعد ذلك سيتم حذف الملفات نهائيًا.",
   "AgentRemoved": "تمت إزالة الوكيل",
   "AgentsRemoved": "تمت إزالة الوكلاء",
-  "AIAgentNotificationsDisabled": "تم تعطيل إشعارات وكيل الذكاء الاصطناعي",
   "AIAgentNotificationsEnabled": "تم تمكين إشعارات وكيل الذكاء الاصطناعي",
   "AIAgentPinLimitMessage": "لا يمكنكم تثبيت أكثر من 10 وكلاء ذكاء اصطناعي في الأعلى. قوموا بإلغاء تثبيت بعض الوكلاء المثبتين حاليًا.",
   "AIAgentPinned": "تم تثبيت وكيل الذكاء الاصطناعي",

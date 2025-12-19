@@ -122,6 +122,8 @@ export const getAccessOptions = (
   standalone = false,
 ) => {
   let options: Array<AccessOptionType | SeparatorOptionType> = [];
+
+  const isNone = roomType === None;
   const accesses = {
     portalAdmin: {
       key: EmployeeType.Admin,
@@ -141,10 +143,9 @@ export const getAccessOptions = (
           }}
         />
       ) as unknown as string,
-      ...(!standalone && { quota: t("Common:Paid") }),
+      ...(!standalone && isNone && { quota: t("Common:Paid") }),
       color: globalColors.favoritesStatus,
-      access:
-        roomType === None ? EmployeeType.Admin : ShareAccessRights.FullAccess,
+      access: isNone ? EmployeeType.Admin : ShareAccessRights.FullAccess,
       type: EmployeeType.Admin,
     },
     roomAdmin: {
@@ -153,10 +154,7 @@ export const getAccessOptions = (
       description: getRoomAdminDescription(roomType, t),
       ...(!standalone && { quota: t("Common:Paid") }),
       color: globalColors.favoritesStatus,
-      access:
-        roomType === None
-          ? EmployeeType.RoomAdmin
-          : ShareAccessRights.RoomManager,
+      access: isNone ? EmployeeType.RoomAdmin : ShareAccessRights.RoomManager,
       type: EmployeeType.RoomAdmin,
     },
     roomManager: {
@@ -166,12 +164,9 @@ export const getAccessOptions = (
       tooltip: t("UserMaxAvailableRoleWarning", {
         productName: t("Common:ProductName"),
       }),
-      ...(!standalone && { quota: t("Common:Paid") }),
+      ...(!standalone && isNone && { quota: t("Common:Paid") }),
       color: globalColors.favoritesStatus,
-      access:
-        roomType === None
-          ? EmployeeType.RoomAdmin
-          : ShareAccessRights.RoomManager,
+      access: isNone ? EmployeeType.RoomAdmin : ShareAccessRights.RoomManager,
       type: EmployeeType.RoomAdmin,
     },
     agentManager: {
@@ -181,20 +176,16 @@ export const getAccessOptions = (
       tooltip: t("UserAgentMaxAvailableRoleWarning", {
         productName: t("Common:ProductName"),
       }),
-      ...(!standalone && { quota: t("Common:Paid") }),
+      ...(!standalone && isNone && { quota: t("Common:Paid") }),
       color: globalColors.favoritesStatus,
-      access:
-        roomType === None
-          ? EmployeeType.RoomAdmin
-          : ShareAccessRights.RoomManager,
+      access: isNone ? EmployeeType.RoomAdmin : ShareAccessRights.RoomManager,
       type: EmployeeType.RoomAdmin,
     },
     user: {
       key: "newUser",
       label: getUserTypeTranslation(EmployeeType.User, t),
       description: getUserDescription(roomType, t),
-      access:
-        roomType === None ? EmployeeType.User : ShareAccessRights.Collaborator,
+      access: isNone ? EmployeeType.User : ShareAccessRights.Collaborator,
       type: EmployeeType.User,
     },
     contentCreator: {
@@ -207,8 +198,7 @@ export const getAccessOptions = (
               productName: t("Common:ProductName"),
             })
           : undefined,
-      access:
-        roomType === None ? EmployeeType.User : ShareAccessRights.Collaborator,
+      access: isNone ? EmployeeType.User : ShareAccessRights.Collaborator,
       type: EmployeeType.User,
     },
     editor: {

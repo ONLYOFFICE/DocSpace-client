@@ -2366,6 +2366,12 @@
   --login-register-background-color: #{$gray-light};
   --login-simple-nav-background-color: #{$gray-light};
   --login-register-text-color: var(--accent-main);
+  --login-wizard-generate-password-color: #{$light-gray-dark};
+  --login-error-color: #{$light-error-status};
+  --login-invite-text-color: #{$gray};
+  --login-invite-border-color: #{$gray-light-mid};
+  --login-logo-color: #{$black};
+  --login-back-title-color: #{$gray};
 }
 
 .dark {
@@ -2380,6 +2386,12 @@
   --login-register-background-color: #{$dark-gray-light};
   --login-simple-nav-background-color: #{$dark-gray-light};
   --login-register-text-color: var(--accent-main);
+  --login-wizard-generate-password-color: #{$dark-gray-dark};
+  --login-error-color: #{$dark-error-status};
+  --login-invite-text-color: #{$gray-dark};
+  --login-invite-border-color: #{$gray-dark-strong};
+  --login-logo-color: #{$white};
+  --login-back-title-color: #{$gray};
 }
 
 .light {
@@ -3058,4 +3070,12 @@
   --snackbar-border-color: #{$light-status-warning};
   --snackbar-color: #{$white};
   --snackbar-icon-color: #{$light-status-warning};
+}
+
+.light {
+  --oauth-info-separator-color: #{$black};
+}
+
+.dark {
+  --oauth-info-separator-color: #{$gray-dark-strong};
 }

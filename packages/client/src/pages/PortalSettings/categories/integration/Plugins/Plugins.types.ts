@@ -47,13 +47,7 @@ export interface PluginsEmptyScreen {
   onDrop: <T extends File>(acceptedFiles: T[]) => void;
 }
 
-export interface PluginItemProps {
-  name: string;
-  version: string;
-  compatible: boolean;
-  description?: string;
-
-  enabled: boolean;
+export interface PluginItemProps extends TPlugin {
   updatePlugin: (
     name: string,
     status: boolean,
@@ -62,9 +56,6 @@ export interface PluginItemProps {
   ) => Promise<unknown>;
 
   openSettingsDialog: (name: string) => void;
-
-  image: string;
-  url: string;
 
   theme: TTheme;
   dataTestId?: string;

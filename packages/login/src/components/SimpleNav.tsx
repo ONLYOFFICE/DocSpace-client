@@ -27,67 +27,12 @@
 "use client";
 
 import React from "react";
-import styled from "styled-components";
 
 import { TPortalCultures } from "@docspace/shared/api/settings/types";
-import { mobile } from "@docspace/shared/utils/device";
-import { injectDefaultTheme } from "@docspace/shared/utils";
 
 import LanguageComboboxWrapper from "./LanguageCombobox";
 import { Logo } from "./Logo";
-
-const StyledSimpleNav = styled.div.attrs(injectDefaultTheme)`
-  display: none;
-  height: 48px;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--login-simple-nav-background-color);
-
-  .logo-wrapper {
-    height: 24px;
-
-    body.dark & {
-      &--dark {
-        display: block;
-      }
-
-      &--light {
-        display: none;
-      }
-    }
-
-    body.light & {
-      &--dark {
-        display: none;
-      }
-
-      &--light {
-        display: block;
-      }
-    }
-  }
-
-  .modile-combobox {
-    .combo-button {
-      border-width: 0;
-      background: transparent;
-    }
-  }
-
-  @media ${mobile} {
-    display: flex;
-
-    .language-combo-box {
-      position: absolute;
-      top: 7px;
-      inset-inline-end: 20px;
-
-      .combo-button {
-        gap: 8px;
-      }
-    }
-  }
-`;
+import styles from "./SimpleNav.module.scss";
 
 interface SimpleNavProps {
   culture?: string;
@@ -101,15 +46,15 @@ const SimpleNav = ({
   isLanguageComboboxVisible = true,
 }: SimpleNavProps) => {
   return (
-    <StyledSimpleNav id="login-header">
+    <div id="login-header" className={styles.simpleNav}>
       <Logo culture={culture} isMobile />
       {isLanguageComboboxVisible ? (
         <LanguageComboboxWrapper
-          className="modile-combobox"
+          className={styles.mobileComboBox}
           initialCultures={initialCultures}
         />
       ) : null}
-    </StyledSimpleNav>
+    </div>
   );
 };
 

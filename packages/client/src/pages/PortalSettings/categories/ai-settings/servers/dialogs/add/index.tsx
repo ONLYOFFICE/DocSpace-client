@@ -36,6 +36,7 @@ import {
 import { type TData, toastr } from "@docspace/shared/components/toast";
 import { Text } from "@docspace/shared/components/text";
 import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 
@@ -48,13 +49,13 @@ import { useIcon } from "../../hooks/useIcon";
 type AddMCPDialogProps = {
   onClose: VoidFunction;
   addNewMCP?: AISettingsStore["addNewMCP"];
-  aiSettingsUrl?: string;
+  mcpServersSettingsUrl?: SettingsStore["mcpServersSettingsUrl"];
 };
 
 const AddMCPDialogComponent = ({
   onClose,
   addNewMCP,
-  aiSettingsUrl,
+  mcpServersSettingsUrl,
 }: AddMCPDialogProps) => {
   const { t } = useTranslation(["Common", "AISettings"]);
   const submitButtonRef = useRef<HTMLButtonElement>(null);
@@ -127,14 +128,14 @@ const AddMCPDialogComponent = ({
                 productName: t("Common:ProductName"),
               })}
             </Text>
-            {aiSettingsUrl ? (
+            {mcpServersSettingsUrl ? (
               <Link
                 className={styles.learnMoreLink}
                 target={LinkTarget.blank}
                 type={LinkType.page}
                 fontWeight={600}
                 isHovered
-                href={aiSettingsUrl}
+                href={mcpServersSettingsUrl}
                 color="accent"
               >
                 {t("Common:LearnMore")}
@@ -178,7 +179,7 @@ export const AddMCPDialog = inject(
   ({ aiSettingsStore, settingsStore }: TStore) => {
     return {
       addNewMCP: aiSettingsStore.addNewMCP,
-      aiSettingsUrl: settingsStore.aiSettingsUrl,
+      mcpServersSettingsUrl: settingsStore.mcpServersSettingsUrl,
     };
   },
 )(observer(AddMCPDialogComponent));

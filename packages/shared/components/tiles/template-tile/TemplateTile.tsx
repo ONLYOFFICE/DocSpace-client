@@ -86,16 +86,18 @@ export const TemplateTile = ({
       </div>
       <div className={styles.field}>
         {item.createdBy ? (
-          <Link
-            isHovered
-            truncate
-            fontSize="13px"
-            fontWeight={600}
-            className={styles.text}
-            onClick={openUser}
-          >
-            {item.createdBy.displayName}
-          </Link>
+          <div>
+            <Link
+              isHovered
+              truncate
+              fontSize="13px"
+              fontWeight={600}
+              className={styles.text}
+              onClick={openUser}
+            >
+              {item.createdBy.displayName}
+            </Link>
+          </div>
         ) : null}
         {showStorageInfo && SpaceQuotaComponent ? (
           <SpaceQuotaComponent

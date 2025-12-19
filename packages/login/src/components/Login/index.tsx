@@ -32,12 +32,12 @@ import {
   LoginDispatchContext,
 } from "./Login.context";
 
-import { LoginContent } from "./Login.styled";
+import styles from "./login.module.scss";
 
-export { LoginContent, LoginValueContext, LoginDispatchContext };
+export { LoginValueContext, LoginDispatchContext };
 
 const Login = ({ children }: { children: React.ReactNode }) => {
-  return <LoginContext>{children}</LoginContext>;
+  return <div className={styles.loginContent}>{children}</div>;
 };
 
 export default Login;

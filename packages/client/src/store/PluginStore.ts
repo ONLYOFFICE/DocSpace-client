@@ -41,6 +41,9 @@ import type {
 import type { TAPIPlugin } from "@docspace/shared/api/plugins/types";
 import type { ModalDialogProps } from "@docspace/shared/components/modal-dialog/ModalDialog.types";
 import type { TTranslation } from "@docspace/shared/types";
+import { LANGUAGE } from "@docspace/shared/constants";
+import { getCookie } from "@docspace/shared/utils";
+import { PluginLocale } from "@onlyoffice/docspace-plugin-sdk";
 
 import defaultConfig from "PUBLIC_DIR/scripts/config.json";
 
@@ -360,6 +363,21 @@ class PluginStore {
     }
   };
 
+  initLocalePlugin = (plugin: TPlugin) => {
+    const culture = this.settingsStore.culture;
+    const currentLanguage = (getCookie(LANGUAGE) || culture) as PluginLocale;
+    plugin.setLanguage?.(currentLanguage);
+
+    const language = plugin.getLanguage?.();
+
+    plugin.nameLocale =
+      (language && plugin.nameLocaleMap?.[language]) || plugin.name;
+
+    plugin.descriptionLocale =
+      (language && plugin.descriptionLocaleMap?.[language]) ||
+      plugin.description;
+  };
+
   initPlugin = (
     plugin: TAPIPlugin,
     callback?: (plugin: TPlugin) => void,
@@ -374,6 +392,8 @@ class PluginStore {
 
           const newPlugin = cloneDeep({
             ...plugin,
+            nameLocaleMap: plugin.nameLocale,
+            descriptionLocaleMap: plugin.descriptionLocale,
             ...iWindow?.Plugins?.[plugin.pluginName],
           });
 
@@ -387,6 +407,8 @@ class PluginStore {
           newPlugin.compatible = this.checkPluginCompatibility(
             plugin.minDocSpaceVersion,
           );
+
+          this.initLocalePlugin(newPlugin);
 
           this.installPlugin(newPlugin);
 

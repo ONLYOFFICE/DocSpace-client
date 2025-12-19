@@ -28,7 +28,6 @@
 
 import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
-import styled from "styled-components";
 
 import { SocialButtonsGroup } from "@docspace/shared/components/social-buttons-group";
 import { Text } from "@docspace/shared/components/text";
@@ -41,11 +40,6 @@ import {
 import SSOIcon from "PUBLIC_DIR/images/sso.react.svg";
 
 import { LoginDispatchContext, LoginValueContext } from "./Login";
-
-const StyledThirdParty = styled.div<{ isVisible: boolean }>`
-  width: 100%;
-  height: auto;
-`;
 
 type ThirdPartyProps = {
   thirdParty?: TThirdPartyProvider[];
@@ -126,7 +120,7 @@ const ThirdParty = ({
 
   return (
     isVisible && (
-      <StyledThirdParty isVisible={isVisible}>
+      <div style={{ width: "100%", height: "auto" }}>
         <div className="line">
           <Text className="or-label">{t("Common:orContinueWith")}</Text>
         </div>
@@ -138,7 +132,7 @@ const ThirdParty = ({
           isDisabled={isLoading}
           {...ssoProps}
         />
-      </StyledThirdParty>
+      </div>
     )
   );
 };

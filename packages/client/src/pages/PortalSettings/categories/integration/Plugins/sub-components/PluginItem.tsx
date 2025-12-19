@@ -43,9 +43,11 @@ import { PluginItemProps } from "../Plugins.types";
 
 const PluginItem = ({
   name,
+  nameLocale,
   version,
   compatible,
   description,
+  descriptionLocale,
 
   enabled,
   updatePlugin,
@@ -104,7 +106,7 @@ const PluginItem = ({
       />
       <div className="plugin-info">
         <StyledPluginHeader>
-          <Heading className="plugin-name">{name}</Heading>
+          <Heading className="plugin-name">{nameLocale}</Heading>
           <div className="plugin-controls">
             <IconButton
               iconName={PluginSettingsIconUrl}
@@ -133,14 +135,14 @@ const PluginItem = ({
           badge
         )}
 
-        {imgSrc && description ? (
+        {descriptionLocale ? (
           <Text
             className="plugin-description"
             fontWeight={400}
             lineHeight="20px"
-            title={description}
+            title={descriptionLocale}
           >
-            {description}
+            {descriptionLocale}
           </Text>
         ) : null}
       </div>

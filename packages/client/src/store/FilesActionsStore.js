@@ -1331,7 +1331,7 @@ class FilesActionStore {
 
       if (isAIAgent) {
         translationForOneItem = isPin
-          ? t("AIAgentPinned")
+          ? t("AIAgentPinned", { aiAgent: t("Common:AIAgent") })
           : t("AIAgentUnpinned");
         translationForSeverals = isPin
           ? t("AIAgentsPinned")

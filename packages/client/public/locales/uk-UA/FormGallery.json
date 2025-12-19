@@ -2,6 +2,7 @@
   "Categories": "Категорії",
   "EmptyFormGalleryScreenDescription": "Результатів, що відповідають вашому запиту, не знайдено",
   "ErrorViewDescription": "Повторіть спробу пізніше",
+  "ErrorViewDescriptionNetworkError": "Здається, немає підключення до Інтернету",
   "ErrorViewHeader": "Галерея форм тимчасово недоступна",
   "SelectForm": "Виберіть форму",
   "SubmitToGalleryDialogGuideInfo": "Дізнайтеся, як створювати ідеальні форми та підвищити свій шанс отримати схвалення, в нашому <1>guide</1>.",

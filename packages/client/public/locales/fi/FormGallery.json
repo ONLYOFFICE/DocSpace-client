@@ -2,6 +2,7 @@
   "Categories": "Luokat",
   "EmptyFormGalleryScreenDescription": "Hakuasi vastaavia tuloksia ei löytynyt",
   "ErrorViewDescription": "Ole hyvä ja yritä myöhemmin uudelleen",
+  "ErrorViewDescriptionNetworkError": "Näyttää siltä, ettei Internet-yhteyttä ole",
   "ErrorViewHeader": "Lomakegalleria on väliaikaisesti poissa käytöstä",
   "SelectForm": "Valitse Lomake",
   "SubmitToGalleryDialogGuideInfo": "Opi luomaan täydellisiä lomakkeita ja kasvattamaan mahdollisuuksiasi saadaksesi  <1>guide</1> hyväksynnän.",

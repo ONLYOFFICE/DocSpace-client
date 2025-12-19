@@ -85,7 +85,7 @@ const useInitMessages = (roomId: string | number) => {
       const reversedItems = items.reverse();
 
       setMessages(reversedItems);
-      setTotal(total > 100 ? 100 : total);
+      setTotal(total);
       setChatId(currChatId);
     } catch (error) {
       console.error(error);

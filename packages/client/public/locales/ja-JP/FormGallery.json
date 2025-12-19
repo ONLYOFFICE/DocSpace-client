@@ -2,6 +2,7 @@
   "Categories": "カテゴリー",
   "EmptyFormGalleryScreenDescription": "検索条件に一致する結果は見つかりませんでした",
   "ErrorViewDescription": "後で再試行してください",
+  "ErrorViewDescriptionNetworkError": "インターネット接続が見当たらないようです。",
   "ErrorViewHeader": "フォームギャラリーは一時的に利用できません",
   "SelectForm": "フォームの選択",
   "SubmitToGalleryDialogGuideInfo": "<1>ガイド</1>で、完璧なフォームを作成し、承認を得るチャンスを増やす方法を学びましょう。",

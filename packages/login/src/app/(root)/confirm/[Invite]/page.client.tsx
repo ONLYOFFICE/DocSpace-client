@@ -38,6 +38,7 @@ import {
 } from "react";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/navigation";
+import classNames from "classnames";
 
 import {
   TCapabilities,
@@ -74,17 +75,17 @@ import {
 import SsoReactSvg from "PUBLIC_DIR/images/sso.react.svg";
 
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
-import { RegisterContainer } from "@/components/RegisterContainer.styled";
 import { globalColors } from "@docspace/shared/themes";
 import EmailInputForm from "./_sub-components/EmailInputForm";
 import RegistrationForm from "./_sub-components/RegistrationForm";
+
+import styles from "@/components/RegisterContainer.module.scss";
 
 export type CreateUserFormProps = {
   userNameRegex: string;
   passwordHash: TPasswordHash;
   licenseUrl: string;
   legalTerms: string;
-  defaultPage?: string;
   passwordSettings?: TPasswordSettings;
   capabilities?: TCapabilities;
   thirdPartyProviders?: TThirdPartyProvider[];
@@ -98,7 +99,6 @@ const CreateUserForm = (props: CreateUserFormProps) => {
   const {
     userNameRegex,
     passwordHash,
-    defaultPage = "/",
     passwordSettings,
     capabilities,
     thirdPartyProviders,
@@ -200,7 +200,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 
         const finalUrl = roomData.roomId
           ? `/${path}?folder=${roomData.roomId}`
-          : defaultPage;
+          : "/";
 
         if (response.confirmUrl) {
           sessionStorage.setItem("referenceUrl", finalUrl);
@@ -227,7 +227,6 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     },
     [
       currentCultureName,
-      defaultPage,
       confirmLinkResult.email,
       linkData.emplType,
       linkData.key,
@@ -270,7 +269,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 
       const finalUrl = roomData.roomId
         ? `/${path}?folder=${roomData.roomId}`
-        : defaultPage;
+        : "/";
 
       if (roomId) {
         sessionStorage.setItem("referenceUrl", finalUrl);
@@ -338,7 +337,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 
     const finalUrl = roomData.roomId
       ? `/${path}?folder=${roomData.roomId}`
-      : defaultPage;
+      : "/";
 
     const isConfirm = typeof res === "string" && res.includes("confirm");
     if (isConfirm) {
@@ -567,8 +566,12 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     : {};
 
   return (
-    <RegisterContainer registrationForm={registrationForm}>
-      <div className="auth-form-fields">
+    <div className={styles.registerContainer}>
+      <div
+        className={classNames(styles.authFormFields, {
+          [styles.registrationForm]: registrationForm,
+        })}
+      >
         <EmailInputForm
           ref={inputRef}
           isLoading={isLoading}
@@ -617,8 +620,8 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 
       {!emailFromLink && (oauthDataExists() || ssoExists()) ? (
         <>
-          <div className="line">
-            <Text color={globalColors.gray} className="or-label">
+          <div className={styles.line}>
+            <Text color={globalColors.gray} className={styles.orLabel}>
               {t("Common:orContinueWith")}
             </Text>
           </div>
@@ -631,7 +634,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
           />
         </>
       ) : null}
-    </RegisterContainer>
+    </div>
   );
 };
 

@@ -1,0 +1,34 @@
+{
+  "key_path": "MoreOptions",
+  "content": "More options",
+  "content_en_sha1_hash": "86c0a35ec8834c720d47b19935543c81b4d7c9c0",
+  "created_at": "2025-12-15T14:02:13.980Z",
+  "updated_at": "2025-12-17T07:50:54.629Z",
+  "comment": {
+    "text": "This key displays the label \"More options\" within a context menu group. It's used to group related actions, such as \"Save as template\" and \"Duplicate room,\" providing a way to access less frequently used functionalities. Translators should consider a phrase that conveys the meaning of additional, less prominent options.",
+    "is_auto": true,
+    "updated_at": "2025-12-17T07:50:54.629Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 2520,
+      "context": "}\n \n const menuGroupsConfig = [\n {\n groupKey: \"more-options\",\n groupLabel: t(\"Common:MoreOptions\"),\n groupIcon: DotsHorizontalUrl,\n itemKeys: [\n [\n { key: \"save-as-template\" },\n { key: \"duplicate-room\" },",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 2520,
+      "context": "}\n \n const menuGroupsConfig = [\n {\n groupKey: \"more-options\",\n groupLabel: t(\"Common:MoreOptions\"),\n groupIcon: DotsHorizontalUrl,\n itemKeys: [\n [\n { key: \"save-as-template\" },\n { key: \"duplicate-room\" },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

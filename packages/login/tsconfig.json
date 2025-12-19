@@ -48,7 +48,9 @@
     "next.config.js",
     "./.next/types/**/*.ts",
     "__tests__/.spec.ts",
-    ".next/dev/types/**/*.ts"
+    ".next/dev/types/**/*.ts",
+    ".next\\dev/types/**/*.ts",
+    ".next\\dev/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

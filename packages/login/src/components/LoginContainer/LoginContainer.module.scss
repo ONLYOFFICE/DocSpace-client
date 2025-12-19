@@ -266,7 +266,7 @@
       }
     }
 
-    .logo-wrapper {
+    :global(.logo-wrapper) {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -299,7 +299,7 @@
       color: var(--login-text-colors);
     }
 
-    .wrapper {
+    :global(.wrapper) {
       height: 20px;
     }
   }

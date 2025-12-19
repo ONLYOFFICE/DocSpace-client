@@ -54,6 +54,7 @@ import { Aside } from "../../../aside";
 import { Button, ButtonSize } from "../../../button";
 import { Backdrop } from "../../../backdrop";
 import { Portal } from "../../../portal";
+import { TooltipContainer } from "../../../tooltip";
 
 import { useChatStore } from "../../store/chatStore";
 import { useMessageStore } from "../../store/messageStore";
@@ -384,7 +385,8 @@ const ToolsSettings = ({
 
   return (
     <>
-      <div
+      <TooltipContainer
+        as="div"
         title={t("AIToolsHint")}
         className={classNames(
           styles.chatInputButton,
@@ -411,7 +413,7 @@ const ToolsSettings = ({
           headerOnlyMobile
           withoutBackHeaderButton
         />
-      </div>
+      </TooltipContainer>
       {showManageConnections ? (
         <Portal
           visible

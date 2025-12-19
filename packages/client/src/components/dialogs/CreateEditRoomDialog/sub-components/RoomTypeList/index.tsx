@@ -29,8 +29,6 @@ import { useTranslation } from "react-i18next";
 import RoomType from "@docspace/shared/components/room-type";
 import { RoomsTypeValues } from "@docspace/shared/utils/common";
 import { RoomsType } from "@docspace/shared/enums";
-import { Tooltip } from "@docspace/shared/components/tooltip";
-import { Text } from "@docspace/shared/components/text";
 
 import styles from "./RoomTypeList.module.scss";
 
@@ -42,7 +40,7 @@ type RoomTypeListProps = {
 };
 
 const RoomTypeList = ({
-  disabledFormRoom,
+  disabledFormRoom = true,
 
   setRoomType,
   setTemplateDialogIsVisible,
@@ -61,37 +59,42 @@ const RoomTypeList = ({
     setRoomType(roomType);
   };
 
-  const getTooltipContent = () => {
-    return (
-      <Text fontSize="12px" noSelect>
-        {t("Files:FormRoomCreationLimit", {
-          sectionName: t("Common:Rooms"),
-        })}
-      </Text>
-    );
-  };
+  const tooltipContent = t("Files:FormRoomCreationLimit", {
+    sectionName: t("Common:Rooms"),
+  });
 
   return (
     <div className={styles.roomTypeList}>
-      <Tooltip
-        place="bottom"
-        id="create-room-tooltip"
-        openOnClick={false}
-        getContent={getTooltipContent}
-      />
+      {RoomsTypeValues.map((roomType) => {
+        const isFormRoom = roomType === RoomsType.FormRoom;
+        const showTooltip = isFormRoom && disabledFormRoom;
 
-      {RoomsTypeValues.map((roomType) => (
-        <RoomType
-          id={roomType.toString()}
-          key={roomType}
-          roomType={roomType}
-          type="listItem"
-          onClick={() => handleClick(roomType)}
-          disabledFormRoom={disabledFormRoom}
-          isOpen={false}
-          selectedId={roomType.toString()}
-        />
-      ))}
+        const roomTypeElement = (
+          <RoomType
+            id={roomType.toString()}
+            key={roomType}
+            roomType={roomType}
+            type="listItem"
+            onClick={() => handleClick(roomType)}
+            disabledFormRoom={disabledFormRoom}
+            isOpen={false}
+            selectedId={roomType.toString()}
+          />
+        );
+
+        return showTooltip ? (
+          <div
+            key={roomType}
+            data-tooltip-id="system-tooltip"
+            data-tooltip-content={tooltipContent}
+            data-tooltip-place="bottom"
+          >
+            {roomTypeElement}
+          </div>
+        ) : (
+          roomTypeElement
+        );
+      })}
       <RoomType
         id="Template"
         isTemplate

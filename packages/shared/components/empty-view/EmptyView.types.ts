@@ -9,7 +9,7 @@ export type EmptyViewButtonType = {
   /** Title text to display */
   title: string;
   /** Optional click handler for the button */
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  onClick?: React.MouseEventHandler<HTMLElement>;
   /** Optional CSS class name for styling */
   className?: string;
   /** type of option */

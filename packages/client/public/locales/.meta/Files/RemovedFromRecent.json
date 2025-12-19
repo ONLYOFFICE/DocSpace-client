@@ -1,0 +1,28 @@
+{
+  "key_path": "RemovedFromRecent",
+  "content": "Removed from recent",
+  "content_en_sha1_hash": "4963bc23e9608b68c7688aca87b2740cc9bf8a46",
+  "created_at": "2025-12-15T14:04:19.700Z",
+  "updated_at": "2025-12-17T07:52:41.846Z",
+  "comment": {
+    "text": "This text appears in a toast notification to confirm that files have been successfully removed from the \"recent\" list. It's used to provide user feedback after a file removal action. Translators should ensure the wording maintains a clear and positive confirmation.",
+    "is_auto": true,
+    "updated_at": "2025-12-17T07:52:41.846Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/FilesActionsStore.js",
+      "line_number": 3192,
+      "context": "removeFilesFromRecent = async (fileIds, t) => {\n const { refreshFiles } = this.filesStore;\n \n await deleteFilesFromRecent(fileIds);\n await refreshFiles();\n toastr.success(t(\"Files:RemovedFromRecent\"));\n };\n \n onCreateRoomFromTemplate = (item, addSelection) => {\n const event = new Event(Events.ROOM_CREATE);\n event.item = item;",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

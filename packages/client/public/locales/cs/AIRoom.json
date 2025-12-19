@@ -12,7 +12,6 @@
   "EmptyResultsViewerDescription": "Zde uvidíte výsledky aktivity AI chatu od ostatních uživatelů, jakmile budou dostupné.",
   "InstructionsDescriptionAgent": "Popište, jak by měl AI agent reagovat a chovat se. Definujte jeho roli, tón a hlavní úkoly.",
   "InstructionsDescriptionAgentExample": "Příklad: „Jste AI PR asistent, který pomáhá s psaním a úpravou tiskových zpráv. Udržujte profesionální, sebevědomý a mediálně vstřícný tón. Jasně zdůrazněte klíčové poselství, vyhýbejte se žargonu a udržujte text stručný a poutavý.“",
-  "Knowledge": "Znalosti",
   "KnowledgeDescription": "Nahrajte soubory z vašeho počítače nebo z {{productName}}, abyste poskytli lepší kontext pro chat. Upozornění: během konverzace mohou být některé nebo všechny nahrané soubory zobrazeny.",
   "KnowledgeSelectIn": "Vybrat v {{productName}}",
   "KnowledgeUnavailable": "Znalostní báze nedostupná",

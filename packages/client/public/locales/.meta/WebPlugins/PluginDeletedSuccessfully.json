@@ -1,0 +1,28 @@
+{
+  "key_path": "PluginDeletedSuccessfully",
+  "content": "Plugin deleted successfully",
+  "content_en_sha1_hash": "62d30feb4d89909c211f9e94b25b2c08401b0932",
+  "created_at": "2025-12-15T14:02:39.885Z",
+  "updated_at": "2025-12-17T07:54:23.982Z",
+  "comment": {
+    "text": "This key displays a success message in a toast notification confirming that a plugin has been successfully deleted. It appears after a plugin is removed from the system, reassuring the user of the action's completion. Translators should maintain a positive and informative tone.",
+    "is_auto": true,
+    "updated_at": "2025-12-17T07:54:23.982Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/PluginStore.ts",
+      "line_number": 356,
+      "context": "this.plugins.splice(pluginIdx, 1);\n \n if (this.plugins.length === 0) this.setIsEmptyList(true);\n });\n }\n toastr.success(t(\"PluginDeletedSuccessfully\"));\n } catch (e) {\n toastr.error(e as TData);\n console.log(e);\n }\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

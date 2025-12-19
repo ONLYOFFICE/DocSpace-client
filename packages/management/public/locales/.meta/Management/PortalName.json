@@ -3,7 +3,7 @@
   "content": "{{productName}} name",
   "content_en_sha1_hash": "0f1403b43faa94c0dc6b13a5e45c10558ce66b12",
   "created_at": "2025-05-19T21:30:57.465Z",
-  "updated_at": "2025-05-26T07:57:33.004Z",
+  "updated_at": "2025-12-15T14:04:24.283Z",
   "comment": {
     "text": "The translation key \"PortalName\" is used to display a portal name in a user interface. It typically appears as a label on a configuration input field in the \"Create Portal Dialog\". Its purpose is to provide a human-readable representation of the portal's identifier for validation and accessibility.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/management/src/dialogs/create-portal/index.tsx",
-      "line_number": 48,
+      "line_number": 47,
       "context": "TextInput,\n InputType,\n InputSize,\n } from \"@docspace/shared/components/text-input\";\n import { Checkbox } from \"@docspace/shared/components/checkbox\";\n import { validatePortalName } from \"@docspace/shared/utils/common\";\n \n import type { TDomainValidator } from \"@docspace/shared/api/settings/types\";\n import type { TUser } from \"@docspace/shared/api/people/types\";\n \n import { useStores } from \"@/hooks/useStores\";",
       "module": "/packages/management"
     }

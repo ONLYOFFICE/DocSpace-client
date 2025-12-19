@@ -40,7 +40,14 @@ import {
   SELF_PATH_UPDATE_USER,
   SELF_PATH_USER_BY_EMAIL,
   PATH_ADD_GUEST,
+  PATH_PEOPLE_LIST,
   selfHandler,
+  peopleListHandler,
+  peopleListAccessDeniedHandler,
+  adminOnlySuccess,
+  roomAdminSuccess,
+  visitorSuccess,
+  regularUserSuccess,
 } from "./people";
 import {
   colorThemeHandler,
@@ -128,18 +135,37 @@ import {
   HEADER_FILTERED_FOLDER,
   HEADER_FILTERED_ROOMS_LIST,
   HEADER_LIST_CAPABILITIES,
-  HEADER_PLUGINS_SETTINGS,
   HEADER_ROOMS_LIST,
+  HEADER_AI_DISABLED,
+  HEADER_PLUGINS_SETTINGS,
 } from "../utils";
-import { PATH_DELETE_USER } from "./people/self";
-import { aiConfigHandler, PATH_AI_CONFIG } from "./ai/config";
+import {
+  PATH_DELETE_USER,
+  PATH_UPDATE_USER_CULTURE,
+  updateUserCultureHandler,
+} from "./people/self";
+import {
+  aiConfigHandler,
+  PATH_AI_CONFIG,
+  PATH_AI_AGENTS,
+  aiAgentsHandler,
+  PATH_AI_PROVIDERS,
+  aiProvidersHandler,
+  PATH_AI_MODELS,
+  aiModelsHandler,
+  PATH_AI_SERVER,
+  aiServerHandler,
+  PATH_AI_SERVERS,
+  aiServersHandler,
+} from "./ai";
+import { PATH_TAGS, roomTagsHandler } from "./rooms";
 import {
   LINK_FILE_PATH,
   LinkHandler,
   PATH_SHARE_TO_USERS_FILE,
   shareToUserHandle,
 } from "./share";
-import { MethodType } from "../types";
+import type { MethodType } from "../types";
 
 export type TEndpoint = {
   url: string | RegExp;
@@ -173,6 +199,14 @@ export const endpoints = {
   updateUser: {
     url: `${BASE_URL}${SELF_PATH_UPDATE_USER}`,
     dataHandler: selfHandler,
+  },
+  updateUserCultureAz: {
+    url: `${BASE_URL}${PATH_UPDATE_USER_CULTURE}`,
+    dataHandler: () => updateUserCultureHandler("az"),
+  },
+  updateUserCultureLv: {
+    url: `${BASE_URL}${PATH_UPDATE_USER_CULTURE}`,
+    dataHandler: () => updateUserCultureHandler("lv"),
   },
   removeUser: {
     url: `${BASE_URL}${SELF_PATH_DELETE_USER}`,
@@ -313,16 +347,6 @@ export const endpoints = {
         }),
       ),
   },
-  settingsWithPlugins: {
-    url: `${BASE_URL}${PATH_SETTINGS_WITH_QUERY}`,
-    dataHandler: () =>
-      settingsHandler(
-        new Headers({
-          [HEADER_AUTHENTICATED_SETTINGS]: "true",
-          [HEADER_PLUGINS_SETTINGS]: "true",
-        }),
-      ),
-  },
   self: {
     url: `${BASE_URL}${PATH_DELETE_USER}`,
     dataHandler: selfHandler,
@@ -334,6 +358,22 @@ export const endpoints = {
   selfEmailActivatedClient: {
     url: `${BASE_URL}${PATH_DELETE_USER}`,
     dataHandler: selfHandler.bind(null, null, null, true, true),
+  },
+  selfAdminOnly: {
+    url: `${BASE_URL}${PATH_DELETE_USER}`,
+    dataHandler: () => new Response(JSON.stringify(adminOnlySuccess)),
+  },
+  selfRoomAdminOnly: {
+    url: `${BASE_URL}${PATH_DELETE_USER}`,
+    dataHandler: () => new Response(JSON.stringify(roomAdminSuccess)),
+  },
+  selfVisitorOnly: {
+    url: `${BASE_URL}${PATH_DELETE_USER}`,
+    dataHandler: () => new Response(JSON.stringify(visitorSuccess)),
+  },
+  selfRegularUserOnly: {
+    url: `${BASE_URL}${PATH_DELETE_USER}`,
+    dataHandler: () => new Response(JSON.stringify(regularUserSuccess)),
   },
   build: {
     url: `${BASE_URL}${PATH_BUILD}`,
@@ -349,7 +389,56 @@ export const endpoints = {
   },
   aiConfig: {
     url: `${BASE_URL}${PATH_AI_CONFIG}`,
-    dataHandler: aiConfigHandler,
+    dataHandler: () => aiConfigHandler(new Headers()),
+  },
+  aiConfigDisabled: {
+    url: `${BASE_URL}${PATH_AI_CONFIG}`,
+    dataHandler: () =>
+      aiConfigHandler(
+        new Headers({
+          [HEADER_AI_DISABLED]: "true",
+        }),
+      ),
+  },
+  aiAgentsEmpty: {
+    url: `${BASE_URL}${PATH_AI_AGENTS}`,
+    dataHandler: () => aiAgentsHandler({}),
+  },
+  aiAgentsEmptyCreate: {
+    url: `${BASE_URL}${PATH_AI_AGENTS}`,
+    dataHandler: () => aiAgentsHandler({ withCreate: true }),
+  },
+  aiAgentsListCreate: {
+    url: `${BASE_URL}${PATH_AI_AGENTS}`,
+    dataHandler: () => aiAgentsHandler({ withListCreate: true }),
+  },
+  aiProvidersList: {
+    url: `${BASE_URL}${PATH_AI_PROVIDERS}`,
+    dataHandler: aiProvidersHandler,
+  },
+  aiModelsClaude: {
+    url: `${BASE_URL}${PATH_AI_MODELS}`,
+    dataHandler: () => aiModelsHandler({ isClaude: true }),
+  },
+  aiModelsOpenAI: {
+    url: `${BASE_URL}${PATH_AI_MODELS}`,
+    dataHandler: () => aiModelsHandler({ isOpenAI: true }),
+  },
+  aiModelsTogether: {
+    url: `${BASE_URL}${PATH_AI_MODELS}`,
+    dataHandler: () => aiModelsHandler({ isTogetherAI: true }),
+  },
+  aiModelsOpenRouter: {
+    url: `${BASE_URL}${PATH_AI_MODELS}`,
+    dataHandler: () => aiModelsHandler({ isOpenRouter: true }),
+  },
+  aiServer: {
+    url: `${BASE_URL}${PATH_AI_SERVER}`,
+    dataHandler: aiServerHandler,
+  },
+  aiServers: {
+    url: `${BASE_URL}${PATH_AI_SERVERS}`,
+    dataHandler: aiServersHandler,
   },
   additionalSettings: {
     url: `${BASE_URL}${PATH_SETTINGS_ADDITIONAL}`,
@@ -381,12 +470,17 @@ export const endpoints = {
   },
   webPlugins: {
     url: `${BASE_URL}${PATH_WEB_PLUGINS}`,
-    dataHandler: webPluginsHandler,
+    dataHandler: () => webPluginsHandler("empty"),
     method: "GET",
   },
   webPluginsWithData: {
     url: `${BASE_URL}${PATH_WEB_PLUGINS}`,
-    dataHandler: webPluginsHandler.bind(null, "withData"),
+    dataHandler: () => webPluginsHandler("withData"),
+    method: "GET",
+  },
+  webPluginsWithLocale: {
+    url: `${BASE_URL}${PATH_WEB_PLUGINS}`,
+    dataHandler: () => webPluginsHandler("withLocale"),
     method: "GET",
   },
   webPluginsAdd: {
@@ -437,6 +531,29 @@ export const endpoints = {
     url: PATH_SHARE_TO_USERS_FILE,
     dataHandler: shareToUserHandle,
   },
+  peopleList: {
+    url: `${BASE_URL}${PATH_PEOPLE_LIST}*`,
+    dataHandler: peopleListHandler,
+  },
+  peopleListAccessDenied: {
+    url: `${BASE_URL}${PATH_PEOPLE_LIST}*`,
+    dataHandler: peopleListAccessDeniedHandler,
+  },
+  emptyTags: {
+    url: `${BASE_URL}${PATH_TAGS}`,
+    dataHandler: roomTagsHandler,
+  },
+  settingsWithPlugins: {
+    url: `${BASE_URL}${PATH_SETTINGS_WITH_QUERY}`,
+    dataHandler: () =>
+      settingsHandler(
+        new Headers({
+          [HEADER_AUTHENTICATED_SETTINGS]: "true",
+          [HEADER_PLUGINS_SETTINGS]: "true",
+        }),
+      ),
+  },
+
   recentEmpty: {
     url: PATH_RECENT,
     dataHandler: recentEmptyHandler,

@@ -3,7 +3,7 @@
   "content": "Rooms",
   "content_en_sha1_hash": "3a28d6f078fd35a505195a0f8ec6f59e9801d7c2",
   "created_at": "2025-05-19T21:30:48.236Z",
-  "updated_at": "2025-11-25T06:36:56.337Z",
+  "updated_at": "2025-12-17T07:49:07.702Z",
   "comment": {
     "text": "The \"Rooms\" translation key is used to display the content \"Rooms\" in various parts of the user interface. This includes a file selector and a dialog box where it appears as a section title, providing context for users navigating room templates or reassigning data. It appears in UI elements such as buttons, text labels, and progress indicators.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/RoomTypeList/index.tsx",
-      "line_number": 68,
-      "context": "const getTooltipContent = () => {\n return (\n <Text fontSize=\"12px\" noSelect>\n {t(\"Files:FormRoomCreationLimit\", {\n sectionName: t(\"Common:Rooms\"),\n })}\n </Text>\n );\n };",
+      "line_number": 63,
+      "context": "setRoomType(roomType);\n };\n \n const tooltipContent = t(\"Files:FormRoomCreationLimit\", {\n sectionName: t(\"Common:Rooms\"),\n });\n \n return (\n <div className={styles.roomTypeList}>\n {RoomsTypeValues.map((roomType) => {",
       "module": "/packages/client"
     },
     {
@@ -24,8 +24,8 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/NoAccessContainer.tsx",
-      "line_number": 110,
-      "context": "switch (type) {\n case NoAccessContainerType.Room:\n emptyViewProps = {\n title: t(\"NoAccessRoomTitle\"),\n description: t(\"RoomAccessRedirectNote\", {\n sectionName: t(\"Common:Rooms\"),\n }),\n icon: theme.isBase ? (\n <ManageAccessRightsLightIcon />\n ) : (\n <ManageAccessRightsDarkIcon />",
+      "line_number": 116,
+      "context": "title:\n type === NoAccessContainerType.Account\n ? t(\"NoAccessSectionTitle\")\n : t(\"NoAccessRoomTitle\"),\n description: t(\"RoomAccessRedirectNote\", {\n sectionName: t(\"Common:Rooms\"),\n }),\n icon: theme.isBase ? (\n <ManageAccessRightsLightIcon />\n ) : (\n <ManageAccessRightsDarkIcon />",
       "module": "/packages/client"
     },
     {
@@ -84,20 +84,20 @@
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/RoomsActionsContainer.tsx",
-      "line_number": 86,
-      "context": "dataTestId=\"actions_rooms_toggle_button\"\n />\n </div>\n <Text {...textDescriptionsProps}>\n {t(\"ActionsWithFilesDescription\", {\n rooms: t(\"Common:Rooms\"),\n shared: t(\"Common:SharedWithMe\"),\n documents: t(\"Common:MyDocuments\"),\n })}\n </Text>\n </div>",
+      "line_number": 87,
+      "context": "dataTestId=\"actions_rooms_toggle_button\"\n />\n </div>\n <Text {...textDescriptionsProps}>\n {t(\"ActionsWithFilesDescription\", {\n rooms: t(\"Common:Rooms\"),\n shared: t(\"Common:SharedWithMe\"),\n documents: t(\"Common:MyDocuments\"),\n aiAgents: t(\"Common:AIAgents\"),\n })}\n </Text>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/RoomsActivityContainer.tsx",
-      "line_number": 68,
-      "context": "return (\n <div className=\"notification-container\">\n <div className=\"row\">\n <Text {...textProps} className=\"subscription-title\">\n {t(\"RoomUpdateNotify\", {\n sectionName: t(\"Common:Rooms\"),\n })}\n </Text>\n <ToggleButton\n className=\"rooms-activity toggle-btn\"\n onChange={onChangeEmailSubscription}",
+      "line_number": 69,
+      "context": "return (\n <div className={styles.notificationContainer}>\n <div className={styles.row}>\n <Text {...textProps} className=\"subscription-title\">\n {t(\"RoomUpdateNotify\", {\n rooms: t(\"Common:Rooms\"),\n aiAgents: t(\"Common:AIAgents\"),\n })}\n </Text>\n <ToggleButton\n className=\"rooms-activity toggle-btn\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/RoomsActivityContainer.tsx",
-      "line_number": 68,
-      "context": "return (\n <div className=\"notification-container\">\n <div className=\"row\">\n <Text {...textProps} className=\"subscription-title\">\n {t(\"RoomUpdateNotify\", {\n sectionName: t(\"Common:Rooms\"),\n })}\n </Text>\n <ToggleButton\n className=\"rooms-activity toggle-btn\"\n onChange={onChangeEmailSubscription}",
+      "line_number": 69,
+      "context": "return (\n <div className={styles.notificationContainer}>\n <div className={styles.row}>\n <Text {...textProps} className=\"subscription-title\">\n {t(\"RoomUpdateNotify\", {\n rooms: t(\"Common:Rooms\"),\n aiAgents: t(\"Common:AIAgents\"),\n })}\n </Text>\n <ToggleButton\n className=\"rooms-activity toggle-btn\"",
       "module": "/packages/client"
     },
     {

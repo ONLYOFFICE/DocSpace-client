@@ -3,7 +3,7 @@
   "content": "Zoom out",
   "content_en_sha1_hash": "a4ae4b24a1f5369c2bff61abdbc221170e4b27d8",
   "created_at": "2025-05-19T21:30:55.105Z",
-  "updated_at": "2025-05-24T10:29:06.413Z",
+  "updated_at": "2025-12-15T14:04:23.620Z",
   "comment": {
     "text": "This translation key is used for the \"Zoom out\" button in a user interface. It appears in an action block within a preview panel and provides visual feedback to users when the zoom level is reduced.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/HotkeysPanel/PreviewActionsBlock.js",
-      "line_number": 54,
+      "line_number": 60,
       "context": "<Text {...keyTextStyles}>+ {t(\"Common:Or\")} =</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysZoomOut\")}</Text>\n <Text {...keyTextStyles}>-</Text>\n </>\n </Row>\n </>\n );",
       "module": "/packages/client"
     }

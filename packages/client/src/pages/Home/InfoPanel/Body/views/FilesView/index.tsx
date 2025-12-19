@@ -121,7 +121,7 @@ const FilesView = ({
   });
 
   const { isPlugin, infoPanelItem, isPluginHeaderVisible } = usePlugin(
-    currentView,
+    value,
     infoPanelItemsList,
   );
 

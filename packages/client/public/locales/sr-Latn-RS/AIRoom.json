@@ -12,7 +12,6 @@
   "EmptyResultsViewerDescription": "Videćete rezultate aktivnosti AI ćaskanja od drugih korisnika ovde čim budu dostupni.",
   "InstructionsDescriptionAgent": "Opišite kako AI agent treba da se ponaša i odgovara. Definišite njegovu ulogu, ton i glavne zadatke.",
   "InstructionsDescriptionAgentExample": "Primer: „Vi ste AI PR asistent koji pomaže u pisanju i uređivanju saopštenja za medije. Održavajte profesionalan, samouveren i medijski prihvatljiv ton. Jasno istaknite ključne poruke, izbegavajte žargon i držite tekst konciznim i privlačnim.”",
-  "Knowledge": "Znanje",
   "KnowledgeDescription": "Otpremite datoteke sa svog računara ili sa {{productName}} da biste obezbedili bolji kontekst za ćaskanje. Napomena: deo ili ceo otpremljeni sadržaj može biti otkriven tokom razgovora.",
   "KnowledgeSelectIn": "Izaberite u {{productName}}",
   "KnowledgeUnavailable": "Baza znanja je nedostupna",

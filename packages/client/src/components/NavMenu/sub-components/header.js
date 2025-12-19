@@ -35,9 +35,10 @@ import {
   getLogoUrl,
   injectDefaultTheme,
 } from "@docspace/shared/utils";
-import { WhiteLabelLogoType } from "@docspace/shared/enums";
+import { FolderType, WhiteLabelLogoType } from "@docspace/shared/enums";
 import { globalColors } from "@docspace/shared/themes";
 import HeaderCatalogBurger from "./header-catalog-burger";
+import { getUrlByDefaultFolderType } from "SRC_DIR/helpers/utils";
 
 const Header = styled.header.attrs(injectDefaultTheme)`
   display: flex;
@@ -84,7 +85,6 @@ const Header = styled.header.attrs(injectDefaultTheme)`
 
 const HeaderComponent = ({
   currentProductName,
-  defaultPage,
   currentProductId,
   isLoaded,
   isAuthenticated,
@@ -92,11 +92,19 @@ const HeaderComponent = ({
   theme,
   toggleArticleOpen,
   customHeader,
+  defaultFolderType,
 }) => {
+  const defaultUrl = getUrlByDefaultFolderType(
+    defaultFolderType || FolderType.Rooms,
+  );
+  const location = useLocation();
+
+  const isFormGallery = location.pathname.includes("/form-gallery");
+
   // const isNavAvailable = mainModules.length > 0;
 
   // const onLogoClick = () => {
-  //   history.push(defaultPage);
+  //   history.push(defaultUrl);
   //   backdropClick();
   // };
 
@@ -181,7 +189,7 @@ const HeaderComponent = ({
           <HeaderCatalogBurger onClick={toggleArticleOpen} />
         ) : null}
         {customHeader || (
-          <LinkWithoutRedirect className="header-logo-wrapper" to={defaultPage}>
+          <LinkWithoutRedirect className="header-logo-wrapper" to={defaultUrl}>
             <img alt="logo" src={logo} className="header-logo-icon" />
           </LinkWithoutRedirect>
         )}
@@ -260,7 +268,6 @@ const HeaderComponent = ({
 HeaderComponent.displayName = "Header";
 
 HeaderComponent.propTypes = {
-  defaultPage: PropTypes.string,
   isLoaded: PropTypes.bool,
   isAuthenticated: PropTypes.bool,
 };
@@ -273,13 +280,17 @@ export default inject(({ settingsStore, authStore }) => {
 
     version,
   } = authStore;
-  const { logoUrl, defaultPage, currentProductId, theme, toggleArticleOpen } =
-    settingsStore;
+  const {
+    logoUrl,
+    currentProductId,
+    theme,
+    toggleArticleOpen,
+    defaultFolderType,
+  } = settingsStore;
 
   return {
     theme,
     isAdmin,
-    defaultPage,
     logoUrl,
 
     // totalNotifications,
@@ -288,6 +299,7 @@ export default inject(({ settingsStore, authStore }) => {
     isAuthenticated,
     currentProductId,
     toggleArticleOpen,
+    defaultFolderType,
     // currentProductName: (product && product.title) || "",
   };
 })(observer(HeaderComponent));

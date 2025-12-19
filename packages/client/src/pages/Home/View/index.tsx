@@ -37,6 +37,7 @@ import { getCategoryType } from "@docspace/shared/utils/common";
 import { CategoryType } from "@docspace/shared/constants";
 import { Consumer } from "@docspace/shared/utils";
 import type { Nullable } from "@docspace/shared/types";
+import type { TError } from "@docspace/shared/utils/axiosClient";
 
 import { AnimationEvents } from "@docspace/shared/hooks/useAnimation";
 import { clearTextSelection } from "@docspace/shared/utils/copy";
@@ -97,6 +98,7 @@ type ViewProps = UseContactsProps &
     isResultTab: AiRoomStore["isResultTab"];
     resultId: AiRoomStore["resultId"];
     setHotkeyCaret: FilesStore["setHotkeyCaret"];
+    setIsErrorAccountNotAvailable: FilesStore["setIsErrorAccountNotAvailable"];
     currentExtensionGallery: OformsStore["currentExtensionGallery"];
   };
 
@@ -167,6 +169,8 @@ const View = ({
 
   aiAgentSelectorDialogProps,
   setAiAgentSelectorDialogProps,
+
+  setIsErrorAccountNotAvailable,
 
   canUseChat,
   aiConfig,
@@ -498,6 +502,16 @@ const View = ({
           return;
         }
 
+        const typedError = error as TError;
+
+        if (
+          typedError?.response?.data?.error?.message === "Access denied" &&
+          isContactsPage
+        ) {
+          setIsErrorAccountNotAvailable(true);
+          setIsSectionHeaderLoading(false, false);
+        }
+
         setIsChangePageRequestRunning(false);
         setIsLoading(false);
       }
@@ -667,6 +681,7 @@ export const ViewComponent = inject(
       aiAgentsController,
 
       clearFiles,
+      setIsErrorAccountNotAvailable,
     } = filesStore;
 
     const {
@@ -772,6 +787,8 @@ export const ViewComponent = inject(
 
       aiAgentSelectorDialogProps,
       setAiAgentSelectorDialogProps,
+
+      setIsErrorAccountNotAvailable,
 
       canUseChat,
       aiConfig,

@@ -45,7 +45,7 @@ export interface SelectedItemProps {
     propKey: string | number,
     label: TLabel,
     group?: string | FilterGroups,
-    e?: React.MouseEvent<HTMLDivElement>,
+    e?: React.MouseEvent<HTMLElement>,
   ) => void;
   /** Sets the button to present a disabled state */
   isDisabled?: boolean;

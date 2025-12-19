@@ -3,7 +3,7 @@
   "content": "LDAP settings",
   "content_en_sha1_hash": "47aabd81090aebfdaf6d1d37da2399019820296f",
   "created_at": "2025-05-19T21:30:54.273Z",
-  "updated_at": "2025-10-17T14:43:53.476Z",
+  "updated_at": "2025-10-27T16:14:33.453Z",
   "comment": {
     "text": "The translation key \"Ldap:LdapSettings\" is used to display the title of LDAP settings in the portal settings page. It appears as the title of a category and is also set as the document title when loading the LDAP integration.",
     "is_auto": true,
@@ -30,7 +30,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 225,
+      "line_number": 229,
       "context": "case \"Common:PaymentsTitle\":\n return t(\"Common:PaymentsTitle\");\n case \"ManagementCategoryDataManagement\":\n return t(\"ManagementCategoryDataManagement\");\n case \"LdapSettings\":\n return t(\"Ldap:LdapSettings\");\n case \"LdapSyncTitle\":\n return t(\"Ldap:LdapSyncTitle\");\n case \"Common:RestoreBackup\":\n return t(\"Common:RestoreBackup\");\n case \"PortalDeletion\":",
       "module": "/packages/client"
     },

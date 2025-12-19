@@ -3,7 +3,7 @@
   "content": "During the grace period, admins cannot create new rooms and add new users. After the due date of the grace period, {{productName}} will become unavailable until the payment is made.",
   "content_en_sha1_hash": "b7a0c210f73172985d0560ba94236b522d1ece70",
   "created_at": "2025-05-19T21:30:53.688Z",
-  "updated_at": "2025-10-17T14:43:53.405Z",
+  "updated_at": "2025-10-27T16:14:33.281Z",
   "comment": {
     "text": "This translation key is used to display a message explaining that during a grace period, admins can't create new rooms or add users, and that access will be unavailable until payment is made. It appears in a modal dialog and an invite quota warning dialog, prompting admins to make timely payments.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/index.js",
-      "line_number": 127,
+      "line_number": 125,
       "context": "(days remaining: {{ delayDaysCount }})\n </Trans>\n </Text>\n <br />\n <Text>\n {t(\"GracePeriodActivatedDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n </>\n );",
       "module": "/packages/client"
     },

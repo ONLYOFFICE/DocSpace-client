@@ -193,39 +193,28 @@ class ConsumerModalDialog extends React.Component {
     const {
       selectedConsumer,
       portalSettingsUrl,
-      docuSignUrl,
       dropboxUrl,
       boxUrl,
-      mailRuUrl,
       oneDriveUrl,
       microsoftUrl,
       googleUrl,
       facebookUrl,
       linkedinUrl,
-      clickatellUrl,
-      smsclUrl,
       firebaseUrl,
       appleIDUrl,
-      weixinUrl,
       telegramUrl,
-      wordpressUrl,
       awsUrl,
       googleCloudUrl,
       rackspaceUrl,
-      selectelUrl,
-      yandexUrl,
-      vkUrl,
+      twitterHelpUrl,
+      wechatHelpUrl,
+      zoomHelpUrl,
     } = this.props;
     switch (selectedConsumer.name) {
-      case "docusign":
-      case "docuSign":
-        return docuSignUrl;
       case "dropbox":
         return dropboxUrl;
       case "box":
         return boxUrl;
-      case "mailru":
-        return mailRuUrl;
       case "skydrive":
         return oneDriveUrl;
       case "microsoft":
@@ -236,32 +225,24 @@ class ConsumerModalDialog extends React.Component {
         return facebookUrl;
       case "linkedin":
         return linkedinUrl;
-      case "clickatell":
-        return clickatellUrl;
-      case "smsc":
-        return smsclUrl;
       case "firebase":
         return firebaseUrl;
       case "appleID":
         return appleIDUrl;
-      case "weixin":
-        return weixinUrl;
       case "telegram":
         return telegramUrl;
-      case "wordpress":
-        return wordpressUrl;
+      case "twitter":
+        return twitterHelpUrl;
+      case "weixin":
+        return wechatHelpUrl;
+      case "zoom":
+        return zoomHelpUrl;
       case "s3":
         return awsUrl;
       case "googlecloud":
         return googleCloudUrl;
       case "rackspace":
         return rackspaceUrl;
-      case "selectel":
-        return selectelUrl;
-      case "yandex":
-        return yandexUrl;
-      case "vk":
-        return vkUrl;
       default:
         return portalSettingsUrl;
     }
@@ -374,28 +355,22 @@ export default inject(({ setup, settingsStore }) => {
     theme,
     feedbackAndSupportUrl,
     portalSettingsUrl,
-    docuSignUrl,
     dropboxUrl,
     boxUrl,
-    mailRuUrl,
     oneDriveUrl,
     microsoftUrl,
     googleUrl,
     facebookUrl,
     linkedinUrl,
-    clickatellUrl,
-    smsclUrl,
     firebaseUrl,
     appleIDUrl,
-    weixinUrl,
     telegramUrl,
-    wordpressUrl,
     awsUrl,
     googleCloudUrl,
     rackspaceUrl,
-    selectelUrl,
-    yandexUrl,
-    vkUrl,
+    twitterHelpUrl,
+    wechatHelpUrl,
+    zoomHelpUrl,
   } = settingsStore;
   const { integration } = setup;
   const { selectedConsumer } = integration;
@@ -405,27 +380,21 @@ export default inject(({ setup, settingsStore }) => {
     selectedConsumer,
     feedbackAndSupportUrl,
     portalSettingsUrl,
-    docuSignUrl,
     dropboxUrl,
     boxUrl,
-    mailRuUrl,
     oneDriveUrl,
     microsoftUrl,
     googleUrl,
     facebookUrl,
     linkedinUrl,
-    clickatellUrl,
-    smsclUrl,
     firebaseUrl,
     appleIDUrl,
-    weixinUrl,
     telegramUrl,
-    wordpressUrl,
     awsUrl,
     googleCloudUrl,
     rackspaceUrl,
-    selectelUrl,
-    yandexUrl,
-    vkUrl,
+    twitterHelpUrl,
+    wechatHelpUrl,
+    zoomHelpUrl,
   };
 })(observer(ConsumerModalDialog));

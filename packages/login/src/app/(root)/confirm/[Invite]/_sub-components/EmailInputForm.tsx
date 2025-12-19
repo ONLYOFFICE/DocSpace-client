@@ -101,11 +101,12 @@ const EmailInputForm = ({
           onValidateInput={onValidate}
           forwardedRef={ref}
           onKeyDown={onKeyPress}
+          dataTestId="email-input-invite"
         />
       </FieldContainer>
       <Button
         id="email-continue"
-        className="login-button"
+        className="login-continue-button"
         primary
         size={ButtonSize.medium}
         scale

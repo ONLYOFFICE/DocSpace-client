@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import type { TFunction } from "i18next";
 
 import { validatePublicRoomPassword } from "../../../api/rooms";
@@ -36,23 +36,26 @@ import type { TValidateShareRoom } from "../../../api/rooms/types";
 
 import PublicRoomPassword from ".";
 
-jest.mock("../../../api/rooms", () => ({
-  validatePublicRoomPassword: jest.fn(),
+vi.mock("../../../api/rooms", () => ({
+  validatePublicRoomPassword: vi.fn(),
 }));
 
-jest.mock("../../../components/toast", () => ({
+vi.mock("../../../components/toast", () => ({
   toastr: {
-    error: jest.fn(),
+    error: vi.fn(),
   },
 }));
 
-jest.mock("../../../utils/common", () => ({
-  ...jest.requireActual("../../../utils/common"),
-  frameCallCommand: jest.fn(),
-}));
+vi.mock("../../../utils/common", async () => {
+  const actual = await vi.importActual("../../../utils/common");
+  return {
+    ...actual,
+    frameCallCommand: vi.fn(),
+  };
+});
 
 // Mock TFunction from i18next
-const mockT = jest.fn((key: string) => key) as unknown as TFunction;
+const mockT = vi.fn((key: string) => key) as unknown as TFunction;
 
 const mockValidationData: TValidateShareRoom = {
   id: "test-id",
@@ -73,12 +76,12 @@ const defaultProps = {
   t: mockT,
   roomKey: "test-room-key",
   validationData: mockValidationData,
-  onSuccessValidationCallback: jest.fn(),
+  onSuccessValidationCallback: vi.fn(),
 };
 
 describe("PublicRoomPassword", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders correctly", () => {
@@ -109,7 +112,8 @@ describe("PublicRoomPassword", () => {
   });
 
   it("calls validatePublicRoomPassword with correct parameters", async () => {
-    (validatePublicRoomPassword as jest.Mock).mockResolvedValueOnce({
+    vi.mocked(validatePublicRoomPassword).mockResolvedValueOnce({
+      ...mockValidationData,
       status: ValidationStatus.Ok,
     });
 
@@ -133,10 +137,10 @@ describe("PublicRoomPassword", () => {
 
   it("calls onSuccessValidationCallback when validation is successful", async () => {
     const successResponse = {
+      ...mockValidationData,
       status: ValidationStatus.Ok,
-      data: { token: "test-token" },
     };
-    (validatePublicRoomPassword as jest.Mock).mockResolvedValueOnce(
+    vi.mocked(validatePublicRoomPassword).mockResolvedValueOnce(
       successResponse,
     );
 
@@ -158,7 +162,8 @@ describe("PublicRoomPassword", () => {
   });
 
   it("shows error message when password is incorrect", async () => {
-    (validatePublicRoomPassword as jest.Mock).mockResolvedValueOnce({
+    vi.mocked(validatePublicRoomPassword).mockResolvedValueOnce({
+      ...mockValidationData,
       status: ValidationStatus.InvalidPassword,
     });
 
@@ -179,9 +184,7 @@ describe("PublicRoomPassword", () => {
 
   it("shows toastr error when API call fails", async () => {
     const errorMessage = "Network error";
-    (validatePublicRoomPassword as jest.Mock).mockRejectedValueOnce(
-      errorMessage,
-    );
+    vi.mocked(validatePublicRoomPassword).mockRejectedValueOnce(errorMessage);
 
     render(<PublicRoomPassword {...defaultProps} />);
 
@@ -199,7 +202,8 @@ describe("PublicRoomPassword", () => {
   });
 
   it("submits form when Enter key is pressed", async () => {
-    (validatePublicRoomPassword as jest.Mock).mockResolvedValueOnce({
+    vi.mocked(validatePublicRoomPassword).mockResolvedValueOnce({
+      ...mockValidationData,
       status: ValidationStatus.Ok,
     });
 
@@ -219,10 +223,14 @@ describe("PublicRoomPassword", () => {
 
   it("disables input and button during loading state", async () => {
     // Mock a delayed response to test loading state
-    (validatePublicRoomPassword as jest.Mock).mockImplementationOnce(
+    vi.mocked(validatePublicRoomPassword).mockImplementationOnce(
       () =>
         new Promise((resolve) => {
-          setTimeout(() => resolve({ status: ValidationStatus.Ok }), 100);
+          setTimeout(
+            () =>
+              resolve({ ...mockValidationData, status: ValidationStatus.Ok }),
+            100,
+          );
         }),
     );
 

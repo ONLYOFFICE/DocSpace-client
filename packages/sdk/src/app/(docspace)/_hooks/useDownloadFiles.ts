@@ -54,10 +54,10 @@ export default function useDownloadFiles() {
       let finished = data.finished;
 
       while (!finished) {
-        const item = await getOperationProgress(
+        const item = (await getOperationProgress(
           data.id,
           t("Common:UnexpectedError"),
-        );
+        )) as TOperation;
         operationItem = item;
 
         finished = item ? item.finished : true;

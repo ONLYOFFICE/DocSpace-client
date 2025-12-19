@@ -27,7 +27,6 @@
 "use client";
 
 import React from "react";
-import styled from "styled-components";
 import { useTranslation, Trans } from "react-i18next";
 import { useRouter } from "next/navigation";
 
@@ -56,44 +55,7 @@ import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
 import { getRedirectURL } from "@/utils";
 import OAuthClientInfo from "../../../components/ConsentInfo";
-
-const StyledButtonContainer = styled.div`
-  margin-top: 32px;
-  margin-bottom: 16px;
-
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  gap: 8px;
-`;
-
-const StyledDescriptionContainer = styled.div`
-  width: 100%;
-
-  margin-bottom: 16px;
-
-  p {
-    width: 100%;
-  }
-`;
-
-const StyledUserContainer = styled.div`
-  width: 100%;
-
-  padding-top: 16px;
-
-  border-top: 1px solid
-    ${(props) => props.theme.oauth.infoDialog.separatorColor};
-
-  .block {
-    height: 40px;
-
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-`;
-
+import styles from "./consent.module.scss";
 interface IConsentProps {
   client: IClientProps;
   scopes: TScope[];
@@ -252,7 +214,7 @@ const Consent = ({
 
       <ScopeList t={t} selectedScopes={currentScopes} scopes={scopes || []} />
 
-      <StyledButtonContainer>
+      <div className={styles.buttonContainer}>
         <Button
           onClick={onAllowClick}
           label={t("AllowButton")}
@@ -272,8 +234,8 @@ const Consent = ({
           isLoading={isDenyRunning}
           testId="consent_deny_button"
         />
-      </StyledButtonContainer>
-      <StyledDescriptionContainer>
+      </div>
+      <div className={styles.descriptionContainer}>
         <Text fontWeight={400} fontSize="13px" lineHeight="20px">
           <Trans t={t} i18nKey="ConsentDescription" ns="Consent">
             Data shared with {{ displayName: user.displayName }} will be
@@ -305,9 +267,9 @@ const Consent = ({
             {{ productName: t("Common:ProductName") }} account settings.
           </Trans>
         </Text>
-      </StyledDescriptionContainer>
-      <StyledUserContainer>
-        <div className="block">
+      </div>
+      <div className={styles.userContainer}>
+        <div className={styles.block}>
           <Avatar
             size={AvatarSize.min}
             role={AvatarRole.user}
@@ -330,7 +292,7 @@ const Consent = ({
             </Link>
           </div>
         </div>
-      </StyledUserContainer>
+      </div>
     </FormWrapper>
   );
 };

@@ -25,10 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import { EmptyScreenContainer } from ".";
+import styles from "./EmptyScreenContainer.module.scss";
 
 const baseProps = {
   imageSrc: "empty_screen_filter.png",
@@ -73,7 +74,7 @@ describe("<EmptyScreenContainer />", () => {
 
     expect(screen.getByText(subheadingText)).toBeInTheDocument();
     expect(screen.getByTestId("empty-screen-container")).toHaveClass(
-      "withSubheading",
+      styles.withSubheading,
     );
   });
 
@@ -81,7 +82,7 @@ describe("<EmptyScreenContainer />", () => {
     render(<EmptyScreenContainer {...baseProps} withoutFilter />);
 
     expect(screen.getByTestId("empty-screen-container")).toHaveClass(
-      "withoutFilter",
+      styles.withoutFilter,
     );
   });
 

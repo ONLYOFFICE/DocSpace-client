@@ -28,10 +28,10 @@
 
 import { useMemo } from "react";
 import { observer } from "mobx-react";
-import { useTheme } from "styled-components";
 
 import { useUnmount } from "@docspace/shared/hooks/useUnmount";
 import { useDidMount } from "@docspace/shared/hooks/useDidMount";
+import { useTheme } from "@docspace/shared/hooks/useTheme";
 
 import ManualBackup from "@docspace/shared/pages/backup/manual-backup";
 import { TariffState } from "@docspace/shared/enums";
@@ -123,6 +123,8 @@ const DataBackup = ({
     backupProgressError,
     setBackupProgressError,
     setIsBackupProgressVisible,
+    backupProgressWarning,
+    setBackupProgressWarning,
   } = useBackup({
     account,
     backupScheduleResponse,
@@ -158,7 +160,6 @@ const DataBackup = ({
       isManagement
       isInitialLoading={false}
       isEmptyContentBeforeLoader={false}
-      //
       settingsFileSelector={{
         filesSettings,
       }}
@@ -214,6 +215,8 @@ const DataBackup = ({
       backupProgressError={backupProgressError}
       setBackupProgressError={setBackupProgressError}
       setIsBackupProgressVisible={setIsBackupProgressVisible}
+      backupProgressWarning={backupProgressWarning}
+      setBackupProgressWarning={setBackupProgressWarning}
     />
   );
 };

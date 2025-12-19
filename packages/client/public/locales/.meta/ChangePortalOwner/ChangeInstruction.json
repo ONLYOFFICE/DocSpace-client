@@ -3,7 +3,7 @@
   "content": "To change the {{productName}} owner, please choose the name of the new owner below.",
   "content_en_sha1_hash": "bd9c11115488261945b3053d9085f2005e0ece2d",
   "created_at": "2025-05-19T21:30:56.984Z",
-  "updated_at": "2025-08-21T11:22:39.798Z",
+  "updated_at": "2025-11-18T14:41:49.723Z",
   "comment": {
     "text": "This translation key is used for a dialog instruction that guides users to select a new owner name when changing the ownership of a product named {{productName}}. It appears in a change portal owner dialog and provides a clear prompt to the user.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
-      "line_number": 185,
-      "context": "<StyledPeopleSelectorInfo>\n <Text className=\"new-owner\" title={t(\"NewPortalOwner\")}>\n {t(\"NewPortalOwner\", { productName: t(\"Common:ProductName\") })}\n </Text>\n <Text className=\"description\" title={t(\"ChangeInstruction\")}>\n {t(\"ChangeInstruction\", { productName: t(\"Common:ProductName\") })}\n </Text>\n </StyledPeopleSelectorInfo>\n \n {selectedUser ? (",
+      "line_number": 192,
+      "context": ">\n {t(\"NewPortalOwner\", { productName: t(\"Common:ProductName\") })}\n </Text>\n <Text\n className=\"description\"\n title={t(\"ChangeInstruction\", {\n productName: t(\"Common:ProductName\"),\n })}\n >\n {t(\"ChangeInstruction\", { productName: t(\"Common:ProductName\") })}\n </Text>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
-      "line_number": 185,
-      "context": "<StyledPeopleSelectorInfo>\n <Text className=\"new-owner\" title={t(\"NewPortalOwner\")}>\n {t(\"NewPortalOwner\", { productName: t(\"Common:ProductName\") })}\n </Text>\n <Text className=\"description\" title={t(\"ChangeInstruction\")}>\n {t(\"ChangeInstruction\", { productName: t(\"Common:ProductName\") })}\n </Text>\n </StyledPeopleSelectorInfo>\n \n {selectedUser ? (",
+      "line_number": 192,
+      "context": ">\n {t(\"NewPortalOwner\", { productName: t(\"Common:ProductName\") })}\n </Text>\n <Text\n className=\"description\"\n title={t(\"ChangeInstruction\", {\n productName: t(\"Common:ProductName\"),\n })}\n >\n {t(\"ChangeInstruction\", { productName: t(\"Common:ProductName\") })}\n </Text>",
       "module": "/packages/client"
     }
   ],

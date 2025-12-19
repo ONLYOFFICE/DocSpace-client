@@ -3,7 +3,7 @@
   "content": "Sorry, you don't have access to this room.",
   "content_en_sha1_hash": "231a1798cb7e11ce36fa013454ceb04d6deeb54d",
   "created_at": "2025-05-19T21:30:55.903Z",
-  "updated_at": "2025-06-02T10:20:51.015Z",
+  "updated_at": "2025-12-17T07:49:07.702Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that a user does not have access to a specific room. It appears in a container element on a page and is likely displayed as a notification or alert when a user attempts to enter a restricted area.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/EmptyContainer/RoomNoAccessContainer.js",
-      "line_number": 49,
-      "context": "const { t, setIsLoading, theme, isFrame, userId } = props;\n \n const descriptionRoomNoAccess = t(\"RoomAccessRedirectNote\", {\n sectionName: t(\"Common:Rooms\"),\n });\n const titleRoomNoAccess = t(\"NoAccessRoomTitle\");\n \n const navigate = useNavigate();\n \n /**\n * @param {React.MouseEvent<HTMLAnchorElement, MouseEvent> | undefined} event",
+      "file_path": "/packages/client/src/components/EmptyContainer/NoAccessContainer.tsx",
+      "line_number": 114,
+      "context": "case NoAccessContainerType.Account:\n emptyViewProps = {\n title:\n type === NoAccessContainerType.Account\n ? t(\"NoAccessSectionTitle\")\n : t(\"NoAccessRoomTitle\"),\n description: t(\"RoomAccessRedirectNote\", {\n sectionName: t(\"Common:Rooms\"),\n }),\n icon: theme.isBase ? (\n <ManageAccessRightsLightIcon />",
       "module": "/packages/client"
     }
   ],

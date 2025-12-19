@@ -1,6 +1,6 @@
 import React from "react";
+import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import CreateEditRoomDilogHeaderLoader from "./DilogHeader";
 import RoomTypeListLoader from "./RoomTypeList";

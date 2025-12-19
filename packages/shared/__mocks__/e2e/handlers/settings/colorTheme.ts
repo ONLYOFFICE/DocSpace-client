@@ -1,6 +1,6 @@
 import { API_PREFIX, BASE_URL } from "../../utils";
 
-const PATH = "settings/colortheme";
+export const PATH = "settings/colortheme";
 
 const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
 

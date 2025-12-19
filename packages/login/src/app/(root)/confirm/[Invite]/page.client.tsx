@@ -38,6 +38,7 @@ import {
 } from "react";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/navigation";
+import classNames from "classnames";
 
 import {
   TCapabilities,
@@ -74,17 +75,17 @@ import {
 import SsoReactSvg from "PUBLIC_DIR/images/sso.react.svg";
 
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
-import { RegisterContainer } from "@/components/RegisterContainer.styled";
 import { globalColors } from "@docspace/shared/themes";
 import EmailInputForm from "./_sub-components/EmailInputForm";
 import RegistrationForm from "./_sub-components/RegistrationForm";
+
+import styles from "@/components/RegisterContainer.module.scss";
 
 export type CreateUserFormProps = {
   userNameRegex: string;
   passwordHash: TPasswordHash;
   licenseUrl: string;
   legalTerms: string;
-  defaultPage?: string;
   passwordSettings?: TPasswordSettings;
   capabilities?: TCapabilities;
   thirdPartyProviders?: TThirdPartyProvider[];
@@ -98,7 +99,6 @@ const CreateUserForm = (props: CreateUserFormProps) => {
   const {
     userNameRegex,
     passwordHash,
-    defaultPage = "/",
     passwordSettings,
     capabilities,
     thirdPartyProviders,
@@ -125,6 +125,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
   const emailFromLink = confirmLinkResult?.email ? confirmLinkResult.email : "";
   const roomName = roomData?.title;
   const roomId = roomData?.roomId;
+  const isAgent = roomData?.isAgent;
 
   const [email, setEmail] = useState(emailFromLink);
   const [emailValid, setEmailValid] = useState(true);
@@ -193,9 +194,13 @@ const CreateUserForm = (props: CreateUserFormProps) => {
           throw new Error("Empty API response");
         }
 
+        const path = isAgent
+          ? `ai-agents/${roomData?.roomId}/chat`
+          : `rooms/shared/${roomData?.roomId}/filter`;
+
         const finalUrl = roomData.roomId
-          ? `/rooms/shared/${roomData.roomId}/filter?folder=${roomData.roomId}`
-          : defaultPage;
+          ? `/${path}?folder=${roomData.roomId}`
+          : "/";
 
         if (response.confirmUrl) {
           sessionStorage.setItem("referenceUrl", finalUrl);
@@ -222,11 +227,11 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     },
     [
       currentCultureName,
-      defaultPage,
       confirmLinkResult.email,
       linkData.emplType,
       linkData.key,
       roomData.roomId,
+      roomData.isAgent,
       linkData.confirmHeader,
     ],
   );
@@ -258,9 +263,13 @@ const CreateUserForm = (props: CreateUserFormProps) => {
         "max-age": COOKIE_EXPIRATION_YEAR,
       });
 
-      const finalUrl = roomId
-        ? `/rooms/shared/${roomId}/filter?folder=${roomId}`
-        : defaultPage;
+      const path = isAgent
+        ? `ai-agents/${roomData?.roomId}/chat`
+        : `rooms/shared/${roomData?.roomId}/filter`;
+
+      const finalUrl = roomData.roomId
+        ? `/${path}?folder=${roomData.roomId}`
+        : "/";
 
       if (roomId) {
         sessionStorage.setItem("referenceUrl", finalUrl);
@@ -322,9 +331,13 @@ const CreateUserForm = (props: CreateUserFormProps) => {
       return window.location.replace(res.confirmUrl);
     }
 
+    const path = isAgent
+      ? `ai-agents/${roomData?.roomId}/chat`
+      : `rooms/shared/${roomData?.roomId}/filter`;
+
     const finalUrl = roomData.roomId
-      ? `/rooms/shared/${roomData.roomId}/filter?folder=${roomData.roomId}`
-      : defaultPage;
+      ? `/${path}?folder=${roomData.roomId}`
+      : "/";
 
     const isConfirm = typeof res === "string" && res.includes("confirm");
     if (isConfirm) {
@@ -514,6 +527,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     if (!capabilities?.oauthEnabled) return false;
 
     let existProviders = 0;
+    // biome-ignore-start lint/suspicious/noPrototypeBuiltins: TODO fix
     thirdPartyProviders?.forEach((item) => {
       const key = item.provider as keyof typeof PROVIDERS_DATA;
       if (
@@ -523,6 +537,8 @@ const CreateUserForm = (props: CreateUserFormProps) => {
         return;
       existProviders++;
     });
+
+    // biome-ignore-end lint/suspicious/noPrototypeBuiltins: TODO fix
 
     return !!existProviders;
   };
@@ -550,8 +566,12 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     : {};
 
   return (
-    <RegisterContainer registrationForm={registrationForm}>
-      <div className="auth-form-fields">
+    <div className={styles.registerContainer}>
+      <div
+        className={classNames(styles.authFormFields, {
+          [styles.registrationForm]: registrationForm,
+        })}
+      >
         <EmailInputForm
           ref={inputRef}
           isLoading={isLoading}
@@ -600,8 +620,8 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 
       {!emailFromLink && (oauthDataExists() || ssoExists()) ? (
         <>
-          <div className="line">
-            <Text color={globalColors.gray} className="or-label">
+          <div className={styles.line}>
+            <Text color={globalColors.gray} className={styles.orLabel}>
               {t("Common:orContinueWith")}
             </Text>
           </div>
@@ -614,7 +634,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
           />
         </>
       ) : null}
-    </RegisterContainer>
+    </div>
   );
 };
 

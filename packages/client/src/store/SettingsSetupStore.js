@@ -239,7 +239,7 @@ class SettingsSetupStore {
     this.integration.smtpSettings.initialSettings = { ...storeSettings };
   };
 
-  setInitSMTPSettings = async () => {
+  setInitSMTPSettings = async (password) => {
     const abortController = new AbortController();
     this.settingsStore.addAbortControllers(abortController);
 
@@ -247,6 +247,10 @@ class SettingsSetupStore {
       const result = await getSMTPSettings(abortController.signal);
 
       if (!result) return;
+
+      if (password) {
+        result.credentialsUserPassword = password;
+      }
 
       this.setSMTPFields(result);
     } catch (error) {
@@ -284,9 +288,15 @@ class SettingsSetupStore {
   };
 
   updateSMTPSettings = async () => {
-    await setSMTPSettings(this.integration.smtpSettings.settings);
+    const password =
+      this.integration.smtpSettings.settings.credentialsUserPassword;
 
-    this.setInitSMTPSettings();
+    return setSMTPSettings(this.integration.smtpSettings.settings).then(
+      (result) => {
+        this.setInitSMTPSettings(password);
+        return result;
+      },
+    );
   };
 
   setSMTPSettings = (settings) => {
@@ -571,13 +581,21 @@ class SettingsSetupStore {
     }
   };
 
-  fetchAndSetConsumers = async (consumerName) => {
+  fetchAndSetConsumers = async (consumerName, isThirdPartyAvailable) => {
     const abortController = new AbortController();
     this.settingsStore.addAbortControllers(abortController);
 
     try {
       const res = await api.settings.getConsumersList(abortController.signal);
-      const consumer = res.find((c) => c.name === consumerName);
+      let consumer = res.find((c) => c.name === consumerName);
+
+      const saveAvailable =
+        (consumer && !consumer.paid && consumer.canSet) ||
+        this.settingsStore?.standalone ||
+        isThirdPartyAvailable;
+
+      if (!saveAvailable) consumer = undefined;
+
       this.integration.selectedConsumer = consumer || {};
       this.setConsumers(res);
 

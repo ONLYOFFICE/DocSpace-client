@@ -88,9 +88,7 @@ const SelectionBlock = ({ t, textStyles, keyTextStyles, CtrlKey, AltKey }) => {
       <Row className="hotkeys_row">
         <>
           <Text {...textStyles}>{t("HotkeysSelectAll")}</Text>
-          <Text {...keyTextStyles}>
-            {CtrlKey} + a {t("Common:Or")} Shift + a
-          </Text>
+          <Text {...keyTextStyles}>{CtrlKey} + a</Text>
         </>
       </Row>
       <Row className="hotkeys_row">

@@ -57,7 +57,7 @@ export const getRoomBadgeUrl = (
   item?: Nullable<ItemType>,
   size: SizeIcon = 12,
 ) => {
-  if (!item) return null;
+  if (!item || !item.roomType) return null;
 
   const { link, planet } = icons[size];
 

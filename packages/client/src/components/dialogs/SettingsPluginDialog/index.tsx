@@ -102,9 +102,10 @@ const SettingsPluginDialog = ({
       displayType={ModalDialogType.aside}
       onClose={onCloseAction}
       withBodyScroll
+      dataTestId="settings-plugin-dialog"
     >
       <ModalDialog.Header>
-        <Header t={t} name={plugin.name} />
+        <Header t={t} name={plugin.nameLocale} />
       </ModalDialog.Header>
       <ModalDialog.Body>
         <div style={{ marginTop: "16px" }}>
@@ -163,7 +164,7 @@ export default inject(({ settingsStore, pluginStore }: TStore) => {
     updatePlugin,
   } = pluginStore;
 
-  const { pluginOptions } = settingsStore;
+  const { pluginOptions, standalone } = settingsStore;
 
   const currentSettingsDialog = currentSettingsDialogPlugin
     ? { ...currentSettingsDialogPlugin }
@@ -173,7 +174,9 @@ export default inject(({ settingsStore, pluginStore }: TStore) => {
 
   const plugin = pluginList.find((p) => p.name === pluginName);
 
-  const withDelete = pluginOptions.delete && !plugin?.system;
+  const withDelete = standalone
+    ? pluginOptions.delete
+    : pluginOptions.delete && !plugin?.system;
 
   const pluginSettings = plugin?.getAdminPluginSettings?.();
 

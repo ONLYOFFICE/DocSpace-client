@@ -3,7 +3,7 @@
   "content": "Sort by",
   "content_en_sha1_hash": "a2a5bdeca9391be1e0cdff1c19895bae7fadc2c2",
   "created_at": "2025-05-19T21:30:48.943Z",
-  "updated_at": "2025-10-14T04:54:10.535Z",
+  "updated_at": "2025-11-13T07:58:07.965Z",
   "comment": {
     "text": "The translation key \"SortBy\" is used to display the text \"Sort by\", which serves as a button title in a combobox or dropdown menu, allowing users to sort gallery items or filtered results. This text appears on buttons and labels within various UI components, including filters and sorting options. Its primary purpose is to provide clear instructions for user interaction.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1532,
+      "line_number": 1770,
       "context": "isPersonalRoom={isPersonalRoom}\n isRooms={isRooms}\n removeSelectedItem={removeSelectedItem}\n clearAll={clearAll}\n filterTitle={t(\"Filter\")}\n sortByTitle={t(\"Common:SortBy\")}\n clearSearch={clearSearch}\n setClearSearch={setClearSearch}\n onSortButtonClick={onSortButtonClick}\n currentDeviceType={currentDeviceType}\n userId={userId}",
       "module": "/packages/client"
     },

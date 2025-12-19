@@ -30,7 +30,6 @@ import { useTheme } from "styled-components";
 import { decode } from "he";
 
 import { Text } from "@docspace/shared/components/text";
-import { Tooltip } from "@docspace/shared/components/tooltip";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
@@ -44,6 +43,7 @@ import { Avatar, AvatarSize } from "@docspace/shared/components/avatar";
 import { Badge } from "@docspace/shared/components/badge";
 import { getUserAvatarRoleByType } from "@docspace/shared/utils/common";
 import { globalColors } from "@docspace/shared/themes";
+import { UserStore } from "@docspace/shared/store/UserStore";
 
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 
@@ -56,11 +56,13 @@ import styles from "./Users.module.scss";
 type ItemTitleProps = {
   userSelection: TPeopleListItem;
   getUserContextOptions: ContactsConextOptionsStore["getUserContextOptions"];
+  isMe: UserStore["isMe"];
 };
 
 const ItemTitle = ({
   userSelection,
   getUserContextOptions,
+  isMe,
 }: ItemTitleProps) => {
   const { t } = useTranslation([
     "People",
@@ -135,6 +137,7 @@ const ItemTitle = ({
       <div className={styles.infoText}>
         <div className={styles.infoWrapper}>
           <Text
+            tooltipFitToContent
             className={styles.infoTextName}
             title={displayName}
             truncate
@@ -144,12 +147,23 @@ const ItemTitle = ({
           >
             {isPending || !displayName ? userSelection.email : displayName}
           </Text>
+          {isMe?.(userSelection.id) ? (
+            <Text
+              className={styles.isMeLabel}
+              fontWeight={700}
+              fontSize="16px"
+              lineHeight="22px"
+            >
+              ({t("Common:MeLabel")})
+            </Text>
+          ) : null}
           {isPending ? (
             <Badges withoutPaid statusType={userSelection.statusType} />
           ) : null}
         </div>
         {!isPending && !!displayName ? (
           <Text
+            tooltipFitToContent
             className={styles.infoTextEmail}
             title={userSelection.email}
             fontSize="13px"
@@ -160,9 +174,12 @@ const ItemTitle = ({
           </Text>
         ) : null}
         {isSSO ? (
-          <>
+          <div
+            data-tooltip-id="system-tooltip"
+            data-tooltip-content={t("PeopleTranslations:SSOAccountTooltip")}
+            data-tooltip-place="bottom"
+          >
             <Badge
-              id="sso-badge-info-panel"
               className={styles.ssoBadge}
               label={t("Common:SSO")}
               color={globalColors.white}
@@ -175,16 +192,16 @@ const ItemTitle = ({
               fontWeight={800}
               noHover
             />
-            <Tooltip anchorSelect={`div[id='sso-badge-info-panel'] div`}>
-              {t("PeopleTranslations:SSOAccountTooltip")}
-            </Tooltip>
-          </>
+          </div>
         ) : null}
 
         {isLDAP ? (
-          <>
+          <div
+            data-tooltip-id="system-tooltip"
+            data-tooltip-content={t("PeopleTranslations:LDAPAccountTooltip")}
+            data-tooltip-place="bottom"
+          >
             <Badge
-              id="ldap-badge-info-panel"
               className={styles.ldapBadge}
               label={t("Common:LDAP")}
               color={globalColors.white}
@@ -197,10 +214,7 @@ const ItemTitle = ({
               fontWeight={800}
               noHover
             />
-            <Tooltip anchorSelect={`div[id='ldap-badge-info-panel'] div`}>
-              {t("PeopleTranslations:LDAPAccountTooltip")}
-            </Tooltip>
-          </>
+          </div>
         ) : null}
       </div>
 

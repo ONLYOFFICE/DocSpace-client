@@ -32,36 +32,39 @@ import CheckboxCheckedIcon from "PUBLIC_DIR/images/checkbox.checked.react.svg";
 import CheckboxIcon from "PUBLIC_DIR/images/checkbox.react.svg";
 
 import { Text } from "../text";
+import { TooltipContainer } from "../tooltip";
 
 import { CheckboxProps } from "./Checkbox.types";
 import styles from "./Checkbox.module.scss";
 
-const RenderCheckboxIcon = ({
-  isChecked,
-  isIndeterminate,
-  tabIndex,
-}: {
-  isChecked: boolean;
-  isIndeterminate: boolean;
-  tabIndex: number;
-}) => {
-  return isIndeterminate ? (
-    <CheckboxIndeterminateIcon
-      tabIndex={tabIndex}
-      className={classNames(styles.checkbox, "not-selectable")}
-    />
-  ) : isChecked ? (
-    <CheckboxCheckedIcon
-      tabIndex={tabIndex}
-      className={classNames(styles.checkbox, "not-selectable")}
-    />
-  ) : (
-    <CheckboxIcon
-      tabIndex={tabIndex}
-      className={classNames(styles.checkbox, "not-selectable")}
-    />
-  );
-};
+const RenderCheckboxIcon = React.memo(
+  ({
+    isChecked,
+    isIndeterminate,
+    tabIndex,
+  }: {
+    isChecked: boolean;
+    isIndeterminate: boolean;
+    tabIndex: number;
+  }) => {
+    return isIndeterminate ? (
+      <CheckboxIndeterminateIcon
+        tabIndex={tabIndex}
+        className={classNames(styles.checkbox, "not-selectable")}
+      />
+    ) : isChecked ? (
+      <CheckboxCheckedIcon
+        tabIndex={tabIndex}
+        className={classNames(styles.checkbox, "not-selectable")}
+      />
+    ) : (
+      <CheckboxIcon
+        tabIndex={tabIndex}
+        className={classNames(styles.checkbox, "not-selectable")}
+      />
+    );
+  },
+);
 
 const CheckboxPure = ({
   id,
@@ -114,7 +117,8 @@ const CheckboxPure = ({
   };
 
   return (
-    <label
+    <TooltipContainer
+      as="label"
       id={id}
       style={style}
       className={classNames(styles.label, className, {
@@ -164,7 +168,7 @@ const CheckboxPure = ({
           </span>
         ) : null}
       </div>
-    </label>
+    </TooltipContainer>
   );
 };
 

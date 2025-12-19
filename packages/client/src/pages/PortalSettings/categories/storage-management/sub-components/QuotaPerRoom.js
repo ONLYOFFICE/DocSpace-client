@@ -47,6 +47,9 @@ const QuotaPerRoomComponent = (props) => {
       isQuotaSet={isDefaultRoomsQuotaSet}
       tabIndex={1}
       dataTestId="quota_room"
+      toggleDescription={t("SetDefaultRoomQuota", {
+        productName: t("Common:ProductName"),
+      })}
     />
   );
 };

@@ -31,6 +31,7 @@ import { TRoom } from "@docspace/shared/api/rooms/types";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
 import { toastr } from "@docspace/shared/components/toast";
 import { Text } from "@docspace/shared/components/text";
+import { TRoomParams } from "@docspace/shared/utils/rooms";
 
 import CreateRoomTemplate from "../dialogs/CreateRoomTemplate/CreateRoomTemplate";
 
@@ -164,7 +165,7 @@ const SaveAsTemplateEvent = (props: SaveAsTemplateEventProps) => {
       item={item}
       onClose={onCloseEvent}
       fetchedTags={fetchedTags}
-      fetchedRoomParams={fetchedRoomParams as unknown as TRoom}
+      fetchedRoomParams={fetchedRoomParams as unknown as TRoomParams}
       onSave={onSave}
       isLoading={isLoading}
     />

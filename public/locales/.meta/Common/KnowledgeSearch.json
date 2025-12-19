@@ -1,0 +1,28 @@
+{
+  "key_path": "KnowledgeSearch",
+  "content": "Knowledge search",
+  "content_en_sha1_hash": "30c8bc7af59d4f92c383f90eeb2ec4c907ca8c85",
+  "created_at": "2025-10-27T16:14:24.683Z",
+  "updated_at": "2025-10-27T16:37:04.486Z",
+  "comment": {
+    "text": "This key displays the label \"Knowledge search\" next to a search tool call within a chat message. It appears as part of the header for a tool call and provides context about the search performed. Translators should ensure this accurately reflects the action being performed.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T16:37:04.486Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/chat/components/chat-message-body/sub-components/message/ToolCallMessage/ToolCallHeader/SearchToolContent.tsx",
+      "line_number": 96,
+      "context": "return (\n <>\n <ReactSVG className={styles.searchToolIcon} src={DocumentsIcon} />\n <Text fontSize=\"13px\" lineHeight=\"20px\" fontWeight={600} truncate>\n {t(\"Common:KnowledgeSearch\")} | <span title={toolInfo}>{toolInfo}</span>\n </Text>\n </>\n );\n };",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

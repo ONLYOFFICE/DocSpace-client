@@ -1,6 +1,7 @@
 export {
   colorTheme as colorThemeHandler,
   getSuccessColorTheme,
+  PATH as PATH_COLOR_THEME,
 } from "./colorTheme";
 export { sso as ssoHandler, emptySSO } from "./sso";
 export {
@@ -29,6 +30,8 @@ export {
   settingsWizzard,
   settingsAuth,
   settingsNoAuth,
+  PATH as PATH_SETTINGS,
+  PATH_WITH_QUERY as PATH_SETTINGS_WITH_QUERY,
 } from "./settings";
 
 export {
@@ -66,3 +69,31 @@ export {
   invitationSettingsSuccess,
   PATH as INVITATION_SETTINGS_PATH,
 } from "./invitationSettings";
+
+export {
+  buildHandler,
+  PATH_BUILD,
+} from "./build";
+
+export {
+  settingsAdditionalHandler,
+  PATH_SETTINGS_ADDITIONAL,
+} from "./additional";
+
+export {
+  PATH_CULTURES,
+  culturesHandler,
+} from "./cultures";
+
+export {
+  PATH_WEB_PLUGINS,
+  webPluginsHandler,
+  webPluginsAddHandler,
+  webPluginsUpdateHandler,
+  webPluginsDeleteHandler,
+  mockPlugin1,
+  mockPlugin2,
+  mockPlugin3,
+  webPluginsEmpty,
+  webPluginsWithData,
+} from "./webplugins";

@@ -79,6 +79,12 @@ const RoomSelector = (props) => {
       // dataTestId: "room_type_all_option",
     },
     {
+      key: "room-type-public",
+      label: t("Common:PublicRoom"),
+      roomType: RoomsType.PublicRoom,
+      // dataTestId: "room_type_public_option",
+    },
+    {
       key: "room-filling-form-collaboration",
       label: t("Common:FormFilingRoomTitle"),
       roomType: RoomsType.FormRoom,
@@ -91,10 +97,9 @@ const RoomSelector = (props) => {
       // dataTestId: "room_type_editing_option",
     },
     {
-      key: "room-type-public",
-      label: t("Common:PublicRoom"),
-      roomType: RoomsType.PublicRoom,
-      // dataTestId: "room_type_public_option",
+      key: "room-type-vdr",
+      label: t("Common:VirtualDataRoom"),
+      roomType: RoomsType.VirtualDataRoom,
     },
     {
       key: "room-type-custom",

@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
 import { AxiosRequestConfig } from "axios";
@@ -583,6 +582,7 @@ export async function getLinkToShareGuest(userId: string) {
 export async function addGuest(
   email: string,
   confirmKey: Nullable<string> = null,
+  skipLogout = false,
 ) {
   const options = {
     method: "post",
@@ -592,7 +592,7 @@ export async function addGuest(
 
   if (confirmKey) options.headers = { confirm: confirmKey };
 
-  const res = await request(options);
+  const res = await request({ ...options, skipLogout });
 
   return res;
 }

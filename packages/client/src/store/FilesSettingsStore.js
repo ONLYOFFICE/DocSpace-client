@@ -46,6 +46,7 @@ import {
   insertEditorPreloadFrame,
 } from "@docspace/shared/utils/common";
 import { toastr } from "@docspace/shared/components/toast";
+import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
 
 class FilesSettingsStore {
   thirdPartyStore;
@@ -152,6 +153,8 @@ class FilesSettingsStore {
   hideConfirmRoomLifetime = false;
 
   hideConfirmCancelOperation = false;
+
+  extsFilesVectorized = [];
 
   documentServiceLocation = null;
 
@@ -437,7 +440,7 @@ class FilesSettingsStore {
   getIcon = (
     size = 32,
     fileExst = null,
-    providerKey = null, // eslint-disable-line @typescript-eslint/no-unused-vars
+    providerKey = null,
     contentLength = null,
     roomType = null,
     isArchive = null,
@@ -503,7 +506,9 @@ class FilesSettingsStore {
         case RoomsType.CustomRoom:
           path = "customRoom.svg";
           break;
-
+        case RoomsType.AIRoom:
+          path = "aiRoom.svg";
+          break;
         case RoomsType.EditingRoom:
           path = "editingRoom.svg";
           break;
@@ -529,12 +534,15 @@ class FilesSettingsStore {
   };
 
   getIconUrl = (extension, size) => {
+    const path = `${extension.replace(/^\./, "")}.svg`;
+    return this.getIconBySize(path, size);
+  };
+
+  getPluginFileIconUrl = (extension) => {
     const { enablePlugins } = this.settingsStore;
     const { fileItemsList } = this.pluginStore;
 
-    const path = `${extension.replace(/^\./, "")}.svg`;
-
-    if (enablePlugins && fileItemsList) {
+    if (!isAIAgents() && enablePlugins && fileItemsList) {
       const fileItem = fileItemsList.find(
         ({ value }) => value.extension === extension && value.fileIcon,
       );
@@ -542,8 +550,6 @@ class FilesSettingsStore {
         return fileItem.value.fileIcon;
       }
     }
-
-    return this.getIconBySize(path, size);
   };
 
   getFileIcon = (
@@ -556,6 +562,10 @@ class FilesSettingsStore {
     ebook = false,
   ) => {
     let path = "";
+
+    const pluginIconUrl = this.getPluginFileIconUrl(extension);
+
+    if (pluginIconUrl) return pluginIconUrl;
 
     if (archive) path = "archive.svg";
 

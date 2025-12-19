@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useCallback } from "react";
 import { useLocation, Outlet } from "react-router";
 import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
@@ -64,6 +64,7 @@ import {
 import MediaViewer from "./MediaViewer";
 
 import { useSDK, useOperations } from "./Hooks";
+import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 
 const PureHome = (props) => {
   const {
@@ -104,6 +105,7 @@ const PureHome = (props) => {
     isPrivacyFolder,
     isRecycleBinFolder,
     isErrorRoomNotAvailable,
+    isErrorAIAgentNotAvailable,
     isIndexEditingMode,
 
     isSecondaryProgressVisbile,
@@ -118,6 +120,7 @@ const PureHome = (props) => {
     onClickBack,
 
     showFilterLoader,
+    showHeaderLoader,
 
     getSettings,
     logout,
@@ -149,6 +152,7 @@ const PureHome = (props) => {
     hideConfirmCancelOperation,
     welcomeFormFillingTipsVisible,
     formFillingTipsVisible,
+    chatFiles,
 
     allowInvitingGuests,
     checkGuests,
@@ -159,11 +163,23 @@ const PureHome = (props) => {
     clearDropPreviewLocation,
     canCreateSecurity,
     startDropPreview,
+
+    aiConfig,
+    currentTab,
+    setIsAboutDialogVisible,
   } = props;
 
   const [shouldShowFilter, setShouldShowFilter] = React.useState(false);
 
   const location = useLocation();
+
+  React.useEffect(() => {
+    if (location.state?.openAboutDialog && setIsAboutDialogVisible) {
+      setIsAboutDialogVisible(true);
+      // clear state
+      window.history.replaceState({}, document.title);
+    }
+  }, [location.state, setIsAboutDialogVisible]);
 
   // console.log(t("Common:ComingSoon"))
 
@@ -179,8 +195,9 @@ const PureHome = (props) => {
   const isProfile = currentClientView === "profile";
   const isContactsEmptyView =
     currentClientView === "groups" ? isEmptyGroups : isUsersEmptyView;
+  const isChat = currentClientView === "chat";
 
-  const onDrop = (f, uploadToFolder) => {
+  const onDrop = useEventCallback((f, uploadToFolder) => {
     if (isContactsPage || isProfile) return;
 
     if (
@@ -202,7 +219,7 @@ const PureHome = (props) => {
       .catch((err) => {
         toastr.error(err, null, 0, true);
       });
-  };
+  });
 
   useOperations({
     clearUploadData,
@@ -237,21 +254,21 @@ const PureHome = (props) => {
     isLoading,
   });
 
-  const getContextModel = () => {
+  const getContextModel = useCallback(() => {
     if (isFrame || isProfile) return null;
 
     if (isContactsPage) return getContactsModel(t, true);
     return getFolderModel(t, true);
-  };
+  }, [isFrame, isProfile, isContactsPage, getContactsModel, getFolderModel]);
 
-  const onCancelUpload = () => {
+  const onCancelUpload = useCallback(() => {
     if (hideConfirmCancelOperation) {
       cancelUpload(t);
       return;
     }
 
     setOperationCancelVisible(true);
-  };
+  }, [hideConfirmCancelOperation, cancelUpload, setOperationCancelVisible]);
 
   React.useEffect(() => {
     window.addEventListener("popstate", onClickBack);
@@ -275,11 +292,12 @@ const PureHome = (props) => {
       isLoaded: !firstLoad,
       viewAs: contactsViewAs,
       isAccounts: isContactsPage,
+      chatFiles,
     };
 
     if (!isContactsPage) {
       sectionProps.dragging = dragging;
-      sectionProps.uploadFiles = true;
+      sectionProps.uploadFiles = !isChat;
       sectionProps.onDrop =
         isRecycleBinFolder || isPrivacyFolder ? null : onDrop;
 
@@ -289,6 +307,7 @@ const PureHome = (props) => {
 
       sectionProps.isEmptyPage = isEmptyPage;
       sectionProps.isTrashFolder = isRecycleBinFolder;
+      sectionProps.fullHeightBody = isChat;
     } else {
       sectionProps.isAccounts = isContactsPage;
     }
@@ -332,7 +351,7 @@ const PureHome = (props) => {
 
   // sectionProps.onOpenUploadPanel = showUploadPanel;
 
-  sectionProps.getContextModel = getContextModel;
+  sectionProps.getContextModel = isChat ? null : getContextModel;
   sectionProps.isIndexEditingMode = isIndexEditingMode;
 
   sectionProps.secondaryActiveOperations = secondaryActiveOperations;
@@ -372,6 +391,12 @@ const PureHome = (props) => {
     setShouldShowFilter(shouldRenderSectionFilter);
   }, [shouldRenderSectionFilter, isChangePageRequestRunning]);
 
+  const isDisabledKnowledge =
+    !aiConfig?.vectorizationEnabled && currentTab === "knowledge";
+
+  const isErrorAvailable =
+    isErrorRoomNotAvailable || isErrorAIAgentNotAvailable;
+
   return (
     <>
       {isSettingsPage ? null : isContactsPage || isProfile ? (
@@ -386,11 +411,12 @@ const PureHome = (props) => {
         </>
       )}
       <MediaViewer />
-      <SectionWrapper {...sectionProps}>
-        {!isErrorRoomNotAvailable ||
+      <SectionWrapper {...sectionProps} withoutFooter={isChat}>
+        {!isErrorAvailable ||
         isContactsPage ||
         isProfile ||
-        isSettingsPage ? (
+        isSettingsPage ||
+        showHeaderLoader ? (
           <Section.SectionHeader>
             <SectionHeaderContent />
           </Section.SectionHeader>
@@ -404,13 +430,14 @@ const PureHome = (props) => {
           <SectionWarningContent />
         </Section.SectionWarning>
 
-        {shouldShowFilter && !isProfile ? (
+        {!isChat &&
+        !isErrorAvailable &&
+        !isDisabledKnowledge &&
+        shouldShowFilter &&
+        !isProfile &&
+        (!isFrame || showFilter) ? (
           <Section.SectionFilter>
-            {isFrame ? (
-              showFilter && <SectionFilterContent />
-            ) : (
-              <SectionFilterContent />
-            )}
+            <SectionFilterContent />
           </Section.SectionFilter>
         ) : null}
 
@@ -450,6 +477,8 @@ export const Component = inject(
     indexingStore,
     dialogsStore,
     filesSettingsStore,
+    aiRoomStore,
+    profileActionsStore,
   }) => {
     const {
       setSelectedFolder,
@@ -474,6 +503,7 @@ export const Component = inject(
       setIsSectionBodyLoading,
       setIsSectionFilterLoading,
       isLoading,
+      showHeaderLoader,
       showFilterLoader,
       isChangePageRequestRunning,
       currentClientView,
@@ -508,11 +538,14 @@ export const Component = inject(
 
       disableDrag,
       isErrorRoomNotAvailable,
+      isErrorAIAgentNotAvailable,
       setIsPreview,
       getRooms,
       scrollToTop,
       wsCreatedPDFForm,
       mainButtonVisible,
+
+      removeActiveItem,
     } = filesStore;
 
     const { gallerySelected } = oformsStore;
@@ -671,6 +704,7 @@ export const Component = inject(
       onClickBack,
 
       showFilterLoader,
+      showHeaderLoader,
 
       getSettings,
       logout: authStore.logout,
@@ -712,6 +746,7 @@ export const Component = inject(
       setOperationCancelVisible,
       hideConfirmCancelOperation,
 
+      removeActiveItem,
       allowInvitingGuests,
       checkGuests,
       hasGuests,
@@ -722,6 +757,12 @@ export const Component = inject(
       clearDropPreviewLocation,
       canCreateSecurity,
       startDropPreview,
+
+      isErrorAIAgentNotAvailable,
+      currentTab: aiRoomStore.currentTab,
+      aiConfig: settingsStore.aiConfig,
+
+      setIsAboutDialogVisible: profileActionsStore.setIsAboutDialogVisible,
     };
   },
 )(observer(Home));

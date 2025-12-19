@@ -3,7 +3,7 @@
   "content": "Marking is read",
   "content_en_sha1_hash": "a5692fb23182bbd0a5e2d94e7cd4e7637b871ce8",
   "created_at": "2025-05-19T21:30:55.823Z",
-  "updated_at": "2025-05-26T07:57:32.395Z",
+  "updated_at": "2025-10-27T16:14:33.361Z",
   "comment": {
     "text": "This translation key is used to display a confirmation message when a file is marked as read. It appears in a UI component related to file management or listing, and its purpose is to confirm that the action was successful, indicating the file has been marked for reading.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",
-      "line_number": 276,
+      "line_number": 279,
       "context": "case duplicate:\n return i18n.t(\"Files:Duplicating\");\n case exportIndex:\n return i18n.t(\"Files:ExportingIndex\");\n case markAsRead:\n return i18n.t(\"Files:MarkingRead\");\n case deletePermanently:\n return i18n.t(\"Files:DeletingPermanently\");\n case upload:\n if (progress > 0 && progress < 100)\n return i18n.t(\"Files:UploadingProgress\", { progress });",
       "module": "/packages/client"
     }

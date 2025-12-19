@@ -1,6 +1,6 @@
 import React from "react";
+import { describe, it, expect, beforeEach } from "vitest";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import { Portal } from "./index";
 
 describe("Portal Component", () => {

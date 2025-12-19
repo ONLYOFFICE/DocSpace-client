@@ -81,7 +81,7 @@
   }
 
   .selectorInfoBar {
-    margin: 0px 20px 16px;
+    margin: 0px 20px 16px !important;
   }
 }
 
@@ -132,10 +132,15 @@
     .newNameHeader {
       margin-bottom: 4px;
     }
+  }
 
-    .newFileInput {
-      margin-bottom: 16px;
-    }
+  .newFileInputContainer {
+    margin-bottom: 16px;
+  }
+
+  .errorText {
+    margin-top: 4px;
+    color: var(--input-error-color);
   }
 
   .buttonContainer {
@@ -438,6 +443,12 @@
 
   box-sizing: border-box;
 
+  &.withIcon :global {
+    .input-component {
+      margin-inline-start: 8px;
+    }
+  }
+
   .roomLogoContainer {
     margin: 0;
   }
@@ -467,12 +478,6 @@
     cursor: pointer;
   }
 
-  :global {
-    .input-component {
-      margin-inline-start: 8px;
-    }
-  }
-
   .checkbox {
     svg {
       margin-inline-end: 0px;
@@ -496,6 +501,12 @@
         color: var(--files-section-table-view-exst-color);
       }
     }
+  }
+
+  .selectorItemNameMultiSelect {
+    width: calc(100% - 56px);
+
+    margin-inline-end: 8px;
   }
 
   .titleIcon {

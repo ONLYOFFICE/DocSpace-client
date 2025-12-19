@@ -34,33 +34,21 @@ export const PATH = "people";
 export const PATH_CHANGE_AUTH_DATA = "people/**/password";
 export const PATH_ACTIVATION_STATUS = "people/activationstatus/*";
 export const PATH_UPDATE_USER = "people/*";
+export const PATH_UPDATE_USER_CULTURE = "people/*/culture";
 export const PATH_DELETE_USER = "people/@self";
 export const PATH_USER_BY_EMAIL = "people/email?email=**";
 export const PATH_ADD_GUEST = "people/guests/share/approve";
 
-export const successSelf = {
-  firstName: "Administrator",
-  lastName: "",
-  userName: "administrator",
-  email: "test@gmail.com",
+const baseUserFields = {
   status: 1,
-  activationStatus: 0,
+  activationStatus: 1,
   department: "",
   workFrom: "2021-03-09T17:52:55.0000000+08:00",
-  isAdmin: true,
-  isRoomAdmin: false,
   isLDAP: false,
-  isOwner: true,
-  isVisitor: false,
-  isCollaborator: false,
   cultureName: "en-GB",
   mobilePhoneActivationStatus: 0,
   isSSO: false,
   theme: "System",
-  usedSpace: 3489170,
-  loginEventId: 45,
-  id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
-  displayName: "Administrator ",
   avatar: "/static/images/default_user_photo_size_82-82.png?hash=1780467874",
   avatarOriginal:
     "/static/images/default_user_photo_size_200-200.png?hash=1780467874",
@@ -70,12 +58,127 @@ export const successSelf = {
     "/static/images/default_user_photo_size_48-48.png?hash=1780467874",
   avatarSmall:
     "/static/images/default_user_photo_size_32-32.png?hash=1780467874",
-  profileUrl: `${BASE_URL}/accounts/people/filter?search=test%40gmail.com`,
   hasAvatar: false,
   isAnonim: false,
 };
 
-export const usersSuccess = { response: [successSelf] };
+export const successSelf = {
+  ...baseUserFields,
+  firstName: "Administrator",
+  lastName: "",
+  userName: "administrator",
+  email: "test@gmail.com",
+  activationStatus: 0,
+  isAdmin: true,
+  isRoomAdmin: false,
+  isOwner: true,
+  isVisitor: false,
+  isCollaborator: false,
+  usedSpace: 3489170,
+  loginEventId: 45,
+  id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
+  displayName: "Administrator ",
+  profileUrl: `${BASE_URL}/accounts/people/filter?search=test%40gmail.com`,
+};
+
+export const usersSuccess = {
+  response: [successSelf],
+};
+
+export const usersSuccessForClient = {
+  response: { ...successSelf, activationStatus: 1 },
+};
+
+export const adminOnlyUser = {
+  ...baseUserFields,
+  firstName: "Admin",
+  lastName: "User",
+  userName: "admin",
+  email: "admin@test.com",
+  isAdmin: true,
+  isRoomAdmin: false,
+  isOwner: false,
+  isVisitor: false,
+  isCollaborator: false,
+  usedSpace: 1489170,
+  loginEventId: 46,
+  id: "admin-user-id",
+  displayName: "Admin User",
+  profileUrl: `${BASE_URL}/accounts/people/filter?search=admin%40test.com`,
+};
+
+export const adminOnlySuccess = {
+  response: adminOnlyUser,
+};
+
+export const roomAdminUser = {
+  ...baseUserFields,
+  firstName: "RoomAdmin",
+  lastName: "User",
+  userName: "roomadmin",
+  email: "roomadmin@test.com",
+  department: "Operations",
+  workFrom: "2021-05-15T09:00:00.0000000+08:00",
+  isAdmin: false,
+  isRoomAdmin: true,
+  isOwner: false,
+  isVisitor: false,
+  isCollaborator: false,
+  usedSpace: 2145678,
+  loginEventId: 47,
+  id: "roomadmin-user-id",
+  displayName: "RoomAdmin User",
+  profileUrl: `${BASE_URL}/accounts/people/filter?search=roomadmin%40test.com`,
+};
+
+export const roomAdminSuccess = {
+  response: roomAdminUser,
+};
+
+export const visitorUser = {
+  ...baseUserFields,
+  firstName: "Visitor",
+  lastName: "User",
+  userName: "visitor",
+  email: "visitor@test.com",
+  isAdmin: false,
+  isRoomAdmin: false,
+  isOwner: false,
+  isVisitor: true,
+  isCollaborator: false,
+  usedSpace: 0,
+  loginEventId: 48,
+  id: "visitor-user-id",
+  displayName: "Visitor User",
+  profileUrl: `${BASE_URL}/accounts/people/filter?search=visitor%40test.com`,
+};
+
+export const visitorSuccess = {
+  response: visitorUser,
+};
+
+export const regularUser = {
+  ...baseUserFields,
+  firstName: "Regular",
+  lastName: "User",
+  userName: "regularuser",
+  email: "user@test.com",
+  department: "Development",
+  isAdmin: false,
+  isRoomAdmin: false,
+  isOwner: false,
+  isVisitor: false,
+  isCollaborator: true,
+  usedSpace: 512000,
+  loginEventId: 49,
+  id: "regular-user-id",
+  displayName: "Regular User",
+  profileUrl: `${BASE_URL}/accounts/people/filter?search=user%40test.com`,
+};
+
+export const regularUserSuccess = {
+  response: regularUser,
+};
 
 export const selfError404 = {
   response: {
@@ -105,6 +208,7 @@ export const self = (
   errorStatus: 400 | 404 | null = null,
   headers?: Headers | null,
   isEmailActivated?: boolean,
+  isClient = false,
 ) => {
   if (errorStatus === 404 || headers?.get(HEADER_SELF_ERROR_404))
     return new Response(JSON.stringify(selfError404));
@@ -113,8 +217,19 @@ export const self = (
     return new Response(JSON.stringify(selfError400));
 
   if (isEmailActivated) {
-    return new Response(JSON.stringify(usersSuccess));
+    return new Response(
+      JSON.stringify(isClient ? usersSuccessForClient : usersSuccess),
+    );
   }
 
   return new Response(JSON.stringify({ response: successSelf }));
+};
+
+export const updateUserCultureHandler = (cultureName: string) => {
+  const data = {
+    ...successSelf,
+    cultureName,
+  };
+
+  return new Response(JSON.stringify({ response: data }));
 };

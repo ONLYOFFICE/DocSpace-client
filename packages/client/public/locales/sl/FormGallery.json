@@ -2,6 +2,7 @@
   "Categories": "Kategorije",
   "EmptyFormGalleryScreenDescription": "Ni bilo mogoče najti rezultatov, ki bi ustrezali vaši poizvedbi",
   "ErrorViewDescription": "Prosimo, poskusite kasneje",
+  "ErrorViewDescriptionNetworkError": "Zdi se, da interneta ni na voljo",
   "ErrorViewHeader": "Galerija obrazcev začasno ni na voljo",
   "SelectForm": "Izberi obrazec",
   "SubmitToGalleryDialogGuideInfo": "Naučite se ustvariti popolne oblike in povečajte svojo možnost, da dobite odobritev v naših <1>guide</1>.",

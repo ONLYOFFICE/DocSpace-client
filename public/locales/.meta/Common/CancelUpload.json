@@ -3,7 +3,7 @@
   "content": "The upload has been interrupted. Some files have not been uploaded.",
   "content_en_sha1_hash": "bdd44a182da7fa647ddf3d79689ffad7919ab44e",
   "created_at": "2025-05-26T07:15:41.114Z",
-  "updated_at": "2025-06-18T17:11:42.538Z",
+  "updated_at": "2025-10-27T16:14:33.679Z",
   "comment": {
     "text": "The translation key \"CancelUpload\" is used to display a message indicating that an upload operation has been interrupted and some files have not been uploaded. This message appears when a cancel button is clicked in the Upload Data Store's action queue, typically prompting the user to review the remaining uploaded files or initiate another upload.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/UploadDataStore.js",
-      "line_number": 295,
+      "line_number": 299,
       "context": ");\n \n this.setUploadData(newUploadData);\n this.uploadedFilesHistory = newHistory;\n \n toastr.info(t(\"Common:CancelUpload\"));\n };\n \n cancelConversion = () => {\n const newFiles = [];",
       "module": "/packages/client"
     }

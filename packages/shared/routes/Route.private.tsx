@@ -57,7 +57,6 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     identityServerEnabled,
     baseDomain,
     limitedAccessSpace,
-    displayAbout,
 
     limitedAccessDevToolsForUsers,
     standalone,
@@ -91,6 +90,8 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       sessionStorage.removeItem("referenceUrl");
       sessionStorage.removeItem("loggedOutUserId");
     }
+
+    const isAccountsPage = location.pathname.includes("/accounts");
 
     const isPortalUrl =
       location.pathname === "/preparation-portal" ||
@@ -135,7 +136,6 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     const isBonusPageUnavailable =
       location.pathname.includes("bonus") && !isCommunity;
 
-    const isAboutPage = location.pathname.includes("about");
     const isDeveloperToolsPage = location.pathname.includes("/developer-tools");
 
     if (location.pathname === "/shared/invalid-link") {
@@ -262,10 +262,6 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       );
     }
 
-    if (isAboutPage && !displayAbout) {
-      return <Navigate replace to="/error/404" />;
-    }
-
     if (isManagement && !isPortalManagement && !isFileManagement) {
       if (isLoaded && !isAuthenticated) return <Navigate replace to="/" />;
       if ((user && !user?.isAdmin) || limitedAccessSpace)
@@ -306,6 +302,10 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     if (isDeveloperToolsPage) {
       if (user?.isVisitor || (limitedAccessDevToolsForUsers && !user?.isAdmin))
         return <Navigate replace to="/error/403" />;
+    }
+
+    if (isAccountsPage) {
+      return children;
     }
 
     if (

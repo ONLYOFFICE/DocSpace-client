@@ -25,44 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled from "styled-components";
+import Image from "next/image";
 import { Trans, useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
 import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 
-const StyledOAuthContainer = styled.div`
-  width: 100%;
-  height: auto;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  gap: 12px;
-
-  margin-bottom: 32px;
-
-  .client-logo {
-    width: 32px;
-    height: 32px;
-    max-width: 32px;
-    max-height: 32px;
-
-    border-radius: 3px;
-
-    object-fit: cover;
-  }
-
-  .row {
-    width: 100%;
-    text-align: center;
-  }
-
-  .login-link {
-    cursor: normal;
-  }
-`;
+import styles from "./ConsentInfo.module.scss";
 
 interface IOAuthClientInfo {
   name: string;
@@ -82,10 +51,10 @@ const OAuthClientInfo = ({
   const { t } = useTranslation(["Consent", "Common"]);
 
   return (
-    <StyledOAuthContainer>
+    <div className={styles.oauthContainer}>
       {!isConsentScreen ? (
         <Text
-          className="row"
+          className={styles.row}
           fontWeight={600}
           fontSize="16px"
           lineHeight="22px"
@@ -93,9 +62,15 @@ const OAuthClientInfo = ({
           {t("Common:LoginButton")}
         </Text>
       ) : null}
-      <img src={logo} className="client-logo" alt="client-logo" />
+      <Image
+        src={logo}
+        className={styles.clientLogo}
+        alt="client-logo"
+        width={32}
+        height={32}
+      />
       <Text
-        className="row"
+        className={styles.row}
         fontWeight={isConsentScreen ? 400 : 600}
         fontSize="16px"
         lineHeight="22px"
@@ -110,7 +85,7 @@ const OAuthClientInfo = ({
               1: (
                 <Link
                   key="component_key"
-                  className="login-link"
+                  className={styles.loginLink}
                   type={LinkType.page}
                   isHovered={false}
                   href={websiteUrl}
@@ -127,7 +102,7 @@ const OAuthClientInfo = ({
           <>
             {t("Consent:ToContinue")}{" "}
             <Link
-              className="login-link"
+              className={styles.loginLink}
               type={LinkType.page}
               isHovered={false}
               href={websiteUrl}
@@ -142,7 +117,7 @@ const OAuthClientInfo = ({
           </>
         )}
       </Text>
-    </StyledOAuthContainer>
+    </div>
   );
 };
 

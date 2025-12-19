@@ -3,7 +3,7 @@
   "content": "Customizing the display",
   "content_en_sha1_hash": "d89fd68cf6cfcf0d4d0b02cee820b4e13b8d1a88",
   "created_at": "2025-05-19T21:30:54.439Z",
-  "updated_at": "2025-08-26T11:15:14.168Z",
+  "updated_at": "2025-10-27T16:14:33.516Z",
   "comment": {
     "text": "This translation key is used to display the text \"Customizing the display\" in various UI contexts, such as buttons and section headers. It appears in sections related to portal settings, allowing users to customize their display preferences.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Editor.js",
-      "line_number": 217,
+      "line_number": 218,
       "context": "</FilesSelectorInputWrapper>\n </ControlsGroup>\n </ControlsSection>\n \n <ControlsSection>\n <CategorySubHeader>{t(\"CustomizingDisplay\")}</CategorySubHeader>\n <WidthSetter\n t={t}\n setConfig={setConfig}\n dataDimensions={dimensionsModel}\n defaultDimension={defaultDimension}",
       "module": "/packages/client"
     },
@@ -36,7 +36,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/RoomSelector.js",
-      "line_number": 240,
+      "line_number": 245,
       "context": "setConfig={setConfig}\n isButtonMode={config.isButtonMode}\n />\n \n <ControlsSection>\n <CategorySubHeader>{t(\"CustomizingDisplay\")}</CategorySubHeader>\n <WidthSetter\n t={t}\n setConfig={setConfig}\n dataDimensions={dimensionsModel}\n defaultDimension={defaultDimension}",
       "module": "/packages/client"
     },
@@ -48,7 +48,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Viewer.js",
-      "line_number": 218,
+      "line_number": 219,
       "context": "</FilesSelectorInputWrapper>\n </ControlsGroup>\n </ControlsSection>\n \n <ControlsSection>\n <CategorySubHeader>{t(\"CustomizingDisplay\")}</CategorySubHeader>\n <WidthSetter\n t={t}\n setConfig={setConfig}\n dataDimensions={dimensionsModel}\n defaultDimension={defaultDimension}",
       "module": "/packages/client"
     }

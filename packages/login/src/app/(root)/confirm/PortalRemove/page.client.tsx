@@ -37,7 +37,7 @@ import { toastr } from "@docspace/shared/components/toast";
 
 import { TError } from "@/types";
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
-import { ButtonsWrapper } from "@/components/Confirm.styled";
+import styles from "../confirm.module.scss";
 
 type RemovePortalFormProps = {
   siteUrl?: string;
@@ -104,7 +104,7 @@ const RemovePortalForm = ({
           productName: t("Common:ProductName"),
         })}
       </Text>
-      <ButtonsWrapper>
+      <div className={styles.buttonsWrapper}>
         <Button
           primary
           scale
@@ -122,7 +122,7 @@ const RemovePortalForm = ({
           onClick={onCancelClick}
           testId="cancel_button"
         />
-      </ButtonsWrapper>
+      </div>
     </>
   );
 };

@@ -39,7 +39,7 @@ import type { ShareDialogHeaderProps } from "./ShareDialog.types";
 
 const ShareDialogHeader: FC<ShareDialogHeaderProps> = ({
   file,
-  disabledIcon,
+  disabledIcon = true,
   filesSettings,
   onClickAddUser,
 }) => {

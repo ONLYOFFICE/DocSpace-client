@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
@@ -716,6 +715,7 @@ export async function startUploadSession(
     method: "post",
     url: `/files/${folderId}/upload/create_session`,
     data,
+    skipForbidden: true,
   })) as TUploadOperation;
 
   return res;
@@ -882,6 +882,15 @@ export async function getNewFiles(folderId: number | string) {
   const res = (await request({
     method: "get",
     url: `/files/${folderId}/news`,
+  })) as TNewFiles[];
+
+  return res;
+}
+
+export async function getNewFilesAgents() {
+  const res = (await request({
+    method: "get",
+    url: `/ai/agents/news`,
   })) as TNewFiles[];
 
   return res;
@@ -1391,7 +1400,7 @@ export async function restoreDocumentsVersion(
   doc: null | number | string,
 ) {
   const options: AxiosRequestConfig = {
-    method: "get",
+    method: "post",
     url: `files/file/${fileId}/restoreversion?version=${version}&doc=${doc}`,
   };
 
@@ -1715,10 +1724,14 @@ export async function getFilesUsedSpace(signal?: AbortSignal) {
   return res;
 }
 
-export async function getConnectingStorages() {
+export async function getConnectingStorages(paramsString?: string) {
+  const url = paramsString
+    ? `files/thirdparty/providers?${paramsString}`
+    : "files/thirdparty/providers";
+
   const res = (await request({
     method: "get",
-    url: "files/thirdparty/providers",
+    url,
   })) as TConnectingStorages;
 
   return res;

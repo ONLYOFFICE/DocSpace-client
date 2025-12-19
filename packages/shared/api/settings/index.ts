@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
 import axios, { AxiosRequestConfig } from "axios";
@@ -32,7 +31,7 @@ import axios, { AxiosRequestConfig } from "axios";
 import { Nullable } from "../../types";
 import { ILogo } from "../../pages/Branding/WhiteLabel/WhiteLabel.types";
 import { request } from "../client";
-import { RecaptchaType } from "../../enums";
+import { FolderType, RecaptchaType } from "../../enums";
 import {
   TCustomSchema,
   TGetCSPSettings,
@@ -1017,6 +1016,20 @@ export function setDefaultRoomQuota(enableQuota, defaultQuota) {
   return request(options);
 }
 
+export function setDefaultAIAgentQuota(enableQuota, defaultQuota) {
+  const data = {
+    enableQuota,
+    defaultQuota,
+  };
+  const options = {
+    method: "post",
+    url: "/settings/aiagentquotasettings",
+    data,
+  };
+
+  return request(options);
+}
+
 export function getQuotaSettings(signal?: AbortSignal) {
   return request({
     method: "get",
@@ -1468,4 +1481,14 @@ export async function getNotificationsSettings() {
   });
 
   return res.channels as TNotificationChannel[];
+}
+
+export async function setDefaultFolderType(folderType: FolderType) {
+  const res = await request({
+    method: "PUT",
+    url: "/settings/defaultFolder",
+    data: { DefaultFolderType: folderType },
+  });
+
+  return res.defaultFolderType as FolderType;
 }

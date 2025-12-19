@@ -64,6 +64,7 @@ const SELECT_ALL_HEIGHT = 61;
 const FOOTER_HEIGHT = 73;
 const FOOTER_WITH_NEW_NAME_HEIGHT = 145;
 const FOOTER_WITH_CHECKBOX_HEIGHT = 181;
+const ERROR_FOOTER_HEIGHT = 20;
 
 const Body = ({
   footerVisible,
@@ -94,6 +95,10 @@ const Body = ({
   injectedElement,
 
   isSSR,
+
+  hideBackButton,
+  withErrorFooter,
+  isLimitReached,
 }: BodyProps) => {
   const infoBarRef = useRef<HTMLDivElement>(null);
   const injectedElementRef = useRef<HTMLElement>(null);
@@ -215,8 +220,11 @@ const Body = ({
       if (infoEl) {
         const { height } = infoEl.getBoundingClientRect();
         setInfoBarHeight(height + CONTAINER_PADDING);
+        return;
       }
     }
+
+    setInfoBarHeight(0);
   }, [withInfoBar, itemsCount, visibleInfoBar]);
   useLayoutEffect(() => {
     if (injectedElement) {
@@ -257,6 +265,8 @@ const Body = ({
   if (descriptionText) listHeight -= BODY_DESCRIPTION_TEXT_HEIGHT;
 
   const getFooterHeight = () => {
+    if (withErrorFooter && withFooterCheckbox && withFooterInput)
+      return FOOTER_WITH_CHECKBOX_HEIGHT + ERROR_FOOTER_HEIGHT;
     if (withFooterCheckbox) return FOOTER_WITH_CHECKBOX_HEIGHT;
     if (withFooterInput) return FOOTER_WITH_NEW_NAME_HEIGHT;
     return FOOTER_HEIGHT;
@@ -332,6 +342,7 @@ const Body = ({
           withSearch={isSearch}
           items={items}
           inputItemVisible={inputItemVisible}
+          hideBackButton={hideBackButton}
         />
       ) : (
         <>
@@ -382,6 +393,7 @@ const Body = ({
                       savedInputValue,
                       setSavedInputValue,
                       listHeight,
+                      isLimitReached,
                     }}
                   />
                 </div>
@@ -426,6 +438,7 @@ const Body = ({
                     savedInputValue,
                     setSavedInputValue,
                     listHeight,
+                    isLimitReached,
                   }}
                   itemSize={getItemSize}
                   onItemsRendered={onItemsRendered}

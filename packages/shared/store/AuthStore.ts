@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import isNil from "lodash/isNil";
 import { makeAutoObservable, runInAction } from "mobx";
 
 import SocketHelper, { SocketEvents, TOptSocket } from "../utils/socket";
@@ -41,6 +42,7 @@ import {
   isPublicRoom,
   isPublicPreview,
 } from "../utils/common";
+import { isRequestAborted } from "../utils/axios/isRequestAborted";
 import { getCookie, setCookie } from "../utils/cookie";
 import { TenantStatus } from "../enums";
 import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "../constants";
@@ -98,12 +100,12 @@ class AuthStore {
 
     SocketHelper?.on(
       SocketEvents.ChangedQuotaUsedValue,
-      (res: { featureId: string; value: number }) => {
+      (res: Pick<TOptSocket, "featureId" | "value">) => {
         console.log(
           `[WS] change-quota-used-value ${res?.featureId}:${res?.value}`,
         );
 
-        if (!res || !res?.featureId) return;
+        if (!res || !res?.featureId || isNil(res.value)) return;
         const { featureId, value } = res;
 
         runInAction(() => {
@@ -114,12 +116,12 @@ class AuthStore {
 
     SocketHelper?.on(
       SocketEvents.ChangedQuotaFeatureValue,
-      (res: { featureId: string; value: number }) => {
+      (res: Pick<TOptSocket, "featureId" | "value">) => {
         console.log(
           `[WS] change-quota-feature-value ${res?.featureId}:${res?.value}`,
         );
 
-        if (!res || !res?.featureId) return;
+        if (!res || !res?.featureId || isNil(res.value)) return;
         const { featureId, value } = res;
 
         runInAction(() => {
@@ -147,7 +149,7 @@ class AuthStore {
             return;
           }
 
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          // biome-ignore lint/correctness/noUnusedVariables: TODO fix
           const { customQuotaFeature, ...updatableObject } = options;
 
           this.currentQuotaStore?.updateTenantCustomQuota(updatableObject);
@@ -206,46 +208,61 @@ class AuthStore {
       !isPublicPreview()
     ) {
       requests.push(
-        this.userStore?.init(i18n, this.settingsStore.culture).then(() => {
-          if (!isPortalRestore) {
-            this.getPaymentInfo();
-          } else {
-            this.isPortalInfoLoaded = true;
-          }
-        }),
+        this.userStore
+          ?.init(i18n, this.settingsStore.culture)
+          .then(async () => {
+            if (!isPortalRestore) {
+              await this.getPaymentInfo();
+
+              if (
+                !this.currentTariffStatusStore?.isNotPaidPeriod &&
+                !isPortalDeactivated &&
+                this.isAuthenticated &&
+                !skipRequest
+              ) {
+                this.settingsStore?.getAIConfig();
+                this.settingsStore?.getAdditionalResources();
+              }
+            } else {
+              this.isPortalInfoLoaded = true;
+            }
+          }),
       );
     } else {
       this.userStore?.setIsLoaded(true);
     }
 
-    return Promise.all(requests).then(() => {
-      const user = this.userStore?.user;
+    return Promise.all(requests)
+      .then(() => {
+        const user = this.userStore?.user;
 
-      if (user?.id) {
-        insertDataLayer(user.id);
-      }
+        if (user?.id) {
+          insertDataLayer(user.id);
+        }
 
-      if (this.isAuthenticated && !skipRequest) {
-        if (!isPortalRestore && !isPortalDeactivated)
-          requests.push(this.settingsStore?.getAdditionalResources());
-
-        if (!this.settingsStore?.passwordSettings) {
-          if (!isPortalRestore && !isPortalDeactivated) {
-            requests.push(this.settingsStore?.getCompanyInfoSettings());
+        if (this.isAuthenticated && !skipRequest) {
+          if (!this.settingsStore?.passwordSettings) {
+            if (!isPortalRestore && !isPortalDeactivated) {
+              requests.push(this.settingsStore?.getCompanyInfoSettings());
+            }
           }
         }
-      }
 
-      if (
-        user &&
-        this.settingsStore?.standalone &&
-        !this.settingsStore?.wizardToken &&
-        this.isAuthenticated &&
-        user.isAdmin
-      ) {
-        requests.push(this.settingsStore.getPortals());
-      }
-    });
+        if (
+          user &&
+          this.settingsStore?.standalone &&
+          !this.settingsStore?.wizardToken &&
+          this.isAuthenticated &&
+          user.isAdmin
+        ) {
+          requests.push(this.settingsStore.getPortals());
+        }
+      })
+      .catch((error) => {
+        if (isRequestAborted(error)) return;
+
+        return Promise.reject(error);
+      });
   };
 
   getPaymentInfo = async () => {
@@ -405,7 +422,7 @@ class AuthStore {
 
       this.init();
 
-      return await Promise.resolve({ url: this.settingsStore?.defaultPage });
+      return await Promise.resolve({ url: "/" });
     } catch (e) {
       return Promise.reject(e);
     }
@@ -423,7 +440,7 @@ class AuthStore {
 
     this.init();
 
-    return Promise.resolve(this.settingsStore?.defaultPage);
+    return Promise.resolve("/");
   };
 
   thirdPartyLogin = async (SerializedProfile: string) => {
@@ -440,7 +457,7 @@ class AuthStore {
 
       this.init();
 
-      return await Promise.resolve(this.settingsStore?.defaultPage);
+      return await Promise.resolve("/");
     } catch (e) {
       return Promise.reject(e);
     }
@@ -457,7 +474,16 @@ class AuthStore {
   };
 
   logout = async (reset = true) => {
-    const ssoLogoutUrl = await api.user.logout();
+    if (typeof window !== "undefined") {
+      const w = window as unknown as { __redirectToLogin?: boolean };
+      w.__redirectToLogin = true;
+    }
+    let ssoLogoutUrl;
+    try {
+      ssoLogoutUrl = await api.user.logout();
+    } catch {
+      ssoLogoutUrl = undefined;
+    }
 
     this.isLogout = true;
 

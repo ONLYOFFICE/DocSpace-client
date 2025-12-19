@@ -24,10 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-use-before-define */
-
-/* eslint-disable no-control-regex */
 import emailAddresses, { ParsedGroup, ParsedMailbox } from "email-addresses";
 
 import { ErrorKeys, ParseErrorTypes } from "../../enums";
@@ -98,7 +94,7 @@ export class Email {
   isValid = () => {
     return this.parseErrors?.length === 0;
   };
-
+  // biome-ignore lint/suspicious/noExplicitAny: TODO fix
   equals(this: any, addr: { [key: string]: string } | string | Email) {
     if (typeof addr === "object" && addr instanceof Email) {
       return (
@@ -255,6 +251,7 @@ const checkErrors = (
     });
   }
 
+  // biome-ignore-start lint/suspicious/noControlCharactersInRegex: TODO fix
   if (
     options.allowStrictLocalPart &&
     "local" in parsedAddress &&
@@ -270,6 +267,7 @@ const checkErrors = (
       errorKey: ErrorKeys.IncorrectLocalPart,
     });
   }
+  // biome-ignore-end lint/suspicious/noControlCharactersInRegex: TODO fix
 
   if (
     !options.allowSpaces &&
@@ -355,16 +353,15 @@ export const parseAddresses = (
  * @param {String} domain
  * @return {Bool} result
  */
-export const isValidDomainName = (domain: string) => {
-  const parsed = emailAddresses.parseOneAddress(`test@${domain}`);
+export const isValidDomainName = (
+  domain: string,
+  options: EmailSettings = new EmailSettings(),
+) => {
+  const parsed = parseOneAddress(`test@${domain}`, options);
+
   if (!parsed) return false;
 
-  return (
-    parsed &&
-    "domain" in parsed &&
-    parsed.domain === domain &&
-    domain.indexOf(".") !== -1
-  );
+  return parsed?.isValid() && parsed?.parseErrors?.length === 0;
 };
 
 /**

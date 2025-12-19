@@ -3,7 +3,7 @@
   "content": "Collaboration",
   "content_en_sha1_hash": "0a4d7a1ab7027fe1ecc947122932b427b1c9e59b",
   "created_at": "2025-05-19T21:30:43.503Z",
-  "updated_at": "2025-10-13T13:22:35.682Z",
+  "updated_at": "2025-11-13T07:58:07.947Z",
   "comment": {
     "text": "This translation key is used to display the label for a room filter type in the UI. It appears in a filter dropdown menu on the Home page, specifically under the \"Editing Room\" and \"Custom Room\" filters, and provides a clear indication of what rooms are being filtered by collaboration capabilities.",
     "is_auto": true,
@@ -12,20 +12,20 @@
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",
-      "line_number": 51,
+      "line_number": 54,
       "context": "case RoomsType.FillingFormsRoom:\n return t(\"Common:FillingFormRooms\");\n \n case RoomsType.EditingRoom:\n return t(\"Common:CollaborationRooms\");\n \n case RoomsType.ReviewRoom:\n return t(\"Common:Review\");\n \n case RoomsType.ReadOnlyRoom:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 898,
+      "line_number": 1052,
       "context": "case RoomsType.EditingRoom:\n return {\n id: \"filter_type-collaboration\",\n key: RoomsType.EditingRoom,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:CollaborationRooms\"),\n };\n case RoomsType.ReviewRoom:\n return {\n id: \"filter_type-review\",\n key: RoomsType.ReviewRoom,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 371,
-      "context": "return t(\"Common:Diagrams\");\n \n case `room-${RoomsType.CustomRoom}`:\n return t(\"Common:CustomRooms\");\n case `room-${RoomsType.EditingRoom}`:\n return t(\"Common:CollaborationRooms\");\n \n case `room-${RoomsType.FormRoom}`:\n return t(\"Common:FormRoom\");\n \n case `room-${RoomsType.PublicRoom}`:",
+      "line_number": 378,
+      "context": "return t(\"Common:Diagrams\");\n \n case `room-${RoomsType.CustomRoom}`:\n return t(\"Common:CustomRooms\");\n case `room-${RoomsType.EditingRoom}`:\n return t(\"Common:CollaborationRooms\");\n \n case `room-${RoomsType.FormRoom}`:\n return t(\"Common:FormRoom\");\n \n case `room-${RoomsType.AIRoom}`:",
       "module": "/packages/shared"
     }
   ],

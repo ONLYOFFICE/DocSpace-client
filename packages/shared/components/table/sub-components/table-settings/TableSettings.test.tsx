@@ -25,9 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import "@testing-library/jest-dom";
 
 import { SortByFieldName } from "../../../../enums";
 import { TableSettings } from "./TableSettings";
@@ -38,11 +38,11 @@ const mockColumns = [
     title: "Name",
     enable: true,
     sortBy: SortByFieldName.Name,
-    onChange: jest.fn(),
+    onChange: vi.fn(),
   },
 ];
 
-jest.mock("../../../drop-down", () => ({
+vi.mock("../../../drop-down", () => ({
   __esModule: true,
   DropDown: ({ open }: { open?: boolean }) => (
     <div data-testid="drop-down" data-open={open}>
@@ -53,7 +53,7 @@ jest.mock("../../../drop-down", () => ({
 
 describe("<TableSettings />", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders without errors", () => {

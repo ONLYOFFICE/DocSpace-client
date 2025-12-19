@@ -25,9 +25,11 @@
  * content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
+import { memo } from "react";
 import isNil from "lodash/isNil";
 import { Trans } from "react-i18next";
 import { isTablet as isTabletDevice } from "react-device-detect";
+import equal from "fast-deep-equal";
 
 import FileActionsDownloadReactSvg from "PUBLIC_DIR/images/icons/16/download.react.svg";
 import LinkReactSvgUrl from "PUBLIC_DIR/images/link.react.svg?url";
@@ -41,7 +43,12 @@ import FavoriteReactSvgUrl from "PUBLIC_DIR/images/favorite.react.svg?url";
 import FavoriteFillReactSvgUrl from "PUBLIC_DIR/images/favorite.fill.react.svg?url";
 
 import { classNames, IconSizeType, isTablet, isDesktop } from "../../utils";
-import { FolderType, RoomsType, ShareAccessRights } from "../../enums";
+import {
+  FolderType,
+  RoomsType,
+  ShareAccessRights,
+  VectorizationStatus,
+} from "../../enums";
 import { Tooltip } from "../tooltip";
 import { Text } from "../text";
 import { getDate, isExpired } from "../share/Share.helpers";
@@ -50,8 +57,9 @@ import { isRoom } from "../../utils/typeGuards";
 import { globalColors } from "../../themes/globalColors";
 
 import type { QuickButtonsProps } from "./QuickButtons.types";
+import { FailedVectorizationBadge } from "../failed-vectorization-badge";
 
-export const QuickButtons = (props: QuickButtonsProps) => {
+export const QuickButtons = memo((props: QuickButtonsProps) => {
   const {
     t,
     item,
@@ -70,6 +78,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
     isTemplatesFolder,
     onClickLock,
     onClickFavorite,
+    onRetryVectorization,
     isTrashFolder,
     openShareTab,
   } = props;
@@ -119,19 +128,29 @@ export const QuickButtons = (props: QuickButtonsProps) => {
     !isArchiveFolder &&
     !isTile;
 
+  const showFailedVectorizationBadge =
+    isTile &&
+    "vectorizationStatus" in item &&
+    item.vectorizationStatus === VectorizationStatus.Failed;
+
+  const hasRetryVectorizationAccess =
+    security && "Vectorization" in security && security.Vectorization;
   const expirationLinkDate =
     item && "expirationDate" in item ? item.expirationDate : "";
 
-  const getTooltipContent = () => (
-    <Text fontSize="12px" fontWeight={400} noSelect>
-      {roomLifetime?.deletePermanently
-        ? t("Common:FileWillBeDeletedPermanently", { date: expiredDate || "" })
-        : t("Common:SectionMoveNotification", {
-            sectionName: t("Common:TrashSection"),
-            date: expiredDate || "",
-          })}
-    </Text>
-  );
+  const getTooltipContent = () => {
+    const text = roomLifetime?.deletePermanently
+      ? t("Common:FileWillBeDeletedPermanently", { date: expiredDate || "" })
+      : t("Common:SectionMoveNotification", {
+          sectionName: t("Common:TrashSection"),
+          date: expiredDate || "",
+        });
+    return text;
+  };
+
+  const getLockTooltip = () => {
+    return t("Common:LockedBy", { userName: lockedBy || "" });
+  };
 
   const getExpirationLinkDateTooltipContent = () => {
     if (
@@ -162,11 +181,24 @@ export const QuickButtons = (props: QuickButtonsProps) => {
     );
   };
 
-  const getLockTooltip = () => (
-    <Text fontSize="12px" fontWeight={400} noSelect>
-      {t("Common:LockedBy", { userName: lockedBy || "" })}
-    </Text>
-  );
+  const getExpirationLinkDateText = () => {
+    if (
+      item.external &&
+      (item.isLinkExpired ||
+        (expirationLinkDate && isExpired(expirationLinkDate)))
+    ) {
+      return t("Common:LinkExpired");
+    }
+
+    if (!expirationLinkDate) return null;
+
+    // For complex content with Trans, we'll use custom Tooltip
+    return null;
+  };
+
+  const expirationLinkDateText = getExpirationLinkDateText();
+  const hasComplexExpirationContent =
+    expirationLinkDate && !expirationLinkDateText;
 
   const onIconLockClick = () => {
     if (!canLock) {
@@ -184,23 +216,19 @@ export const QuickButtons = (props: QuickButtonsProps) => {
       {!isIndexEditingMode ? (
         <>
           {showLifetimeIcon ? (
-            <>
+            <div
+              data-tooltip-id="info-tooltip"
+              data-tooltip-content={getTooltipContent()}
+              data-tooltip-place="bottom"
+            >
               <IconButton
                 iconName={LifetimeReactSvgUrl}
                 className="badge file-lifetime icons-group"
                 size={sizeQuickButton}
                 isClickable
                 isDisabled={isDisabled}
-                data-tooltip-id="lifetimeTooltip"
               />
-
-              <Tooltip
-                id="lifetimeTooltip"
-                place="bottom"
-                getContent={getTooltipContent}
-                maxWidth="300px"
-              />
-            </>
+            </div>
           ) : null}
 
           {isAvailableDownloadFile ? (
@@ -266,7 +294,15 @@ export const QuickButtons = (props: QuickButtonsProps) => {
             />
           ) : null}
           {locked && isTile ? (
-            <>
+            <div
+              data-tooltip-id={
+                lockedBy && !canLock ? "info-tooltip" : undefined
+              }
+              data-tooltip-content={
+                lockedBy && !canLock ? getLockTooltip() : undefined
+              }
+              data-tooltip-place="bottom"
+            >
               <IconButton
                 iconName={iconLock}
                 className={classNames("badge lock-file icons-group", {
@@ -278,38 +314,46 @@ export const QuickButtons = (props: QuickButtonsProps) => {
                 onClick={onIconLockClick}
                 color="accent"
                 title={t("Common:UnblockFile")}
-                data-tooltip-id={`lockTooltip${item.id}`}
               />
-              {lockedBy && !canLock ? (
-                <Tooltip
-                  id={`lockTooltip${item.id}`}
-                  place="bottom"
-                  getContent={getLockTooltip}
-                  maxWidth="300px"
-                  openOnClick
-                />
-              ) : null}
-            </>
+            </div>
           ) : null}
 
           {expirationLinkDate ? (
             <>
-              <IconButton
-                iconName={ExpirationLinkDateReactSvgUrl}
-                className="badge expiration-link-date icons-group"
-                isClickable
-                size={sizeQuickButton}
-                isDisabled={isDisabled}
-                data-tooltip-id={`expirationLinkDateTooltip${item.id}`}
-                color={globalColors.lightErrorStatus}
-              />
-              <Tooltip
-                id={`expirationLinkDateTooltip${item.id}`}
-                place="bottom"
-                getContent={getExpirationLinkDateTooltipContent}
-                maxWidth="300px"
-                openOnClick
-              />
+              <div
+                data-tooltip-id={
+                  hasComplexExpirationContent ? undefined : "info-tooltip"
+                }
+                data-tooltip-content={
+                  !hasComplexExpirationContent
+                    ? expirationLinkDateText
+                    : undefined
+                }
+                data-tooltip-place="bottom"
+              >
+                <IconButton
+                  iconName={ExpirationLinkDateReactSvgUrl}
+                  className="badge expiration-link-date icons-group"
+                  isClickable
+                  size={sizeQuickButton}
+                  isDisabled={isDisabled}
+                  data-tooltip-id={
+                    hasComplexExpirationContent
+                      ? `expirationLinkDateTooltip${item.id}`
+                      : undefined
+                  }
+                  color={globalColors.lightErrorStatus}
+                />
+              </div>
+              {hasComplexExpirationContent ? (
+                <Tooltip
+                  id={`expirationLinkDateTooltip${item.id}`}
+                  place="bottom"
+                  getContent={getExpirationLinkDateTooltipContent}
+                  maxWidth="300px"
+                  openOnClick
+                />
+              ) : null}
             </>
           ) : null}
 
@@ -326,8 +370,17 @@ export const QuickButtons = (props: QuickButtonsProps) => {
               title={t("Common:Favorites")}
             />
           ) : null}
+
+          {showFailedVectorizationBadge ? (
+            <FailedVectorizationBadge
+              className={classNames("badge icons-group")}
+              size="medium"
+              onRetryVectorization={onRetryVectorization}
+              withRetryVectorization={hasRetryVectorizationAccess}
+            />
+          ) : null}
         </>
       ) : null}
     </div>
   );
-};
+}, equal);

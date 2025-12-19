@@ -66,8 +66,10 @@ import {
 } from "@docspace/shared/api/portal/types";
 import { formatCurrencyValue } from "@docspace/shared/utils/common";
 import {
+  AI_TOOLS,
   BACKUP_SERVICE,
   STORAGE_TARIFF_DEACTIVATED,
+  WEB_SEARCH,
 } from "@docspace/shared/constants";
 
 // Constants for feature identifiers
@@ -424,6 +426,20 @@ class PaymentStore {
           BACKUP_SERVICE,
         ) as TServiceFeatureWithPrice
       )?.price?.value || 0
+    );
+  }
+
+  get aiToolsPrice() {
+    return (
+      (this.servicesQuotasFeatures.get(AI_TOOLS) as TServiceFeatureWithPrice)
+        ?.price?.value || 0
+    );
+  }
+
+  get webSearchPrice() {
+    return (
+      (this.servicesQuotasFeatures.get(WEB_SEARCH) as TServiceFeatureWithPrice)
+        ?.price?.value || 0
     );
   }
 

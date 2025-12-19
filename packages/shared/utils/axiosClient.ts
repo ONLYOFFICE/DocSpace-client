@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import axios, {
+  type InternalAxiosRequestConfig,
   type AxiosInstance,
   type AxiosRequestConfig,
   type AxiosResponse,
@@ -68,6 +69,7 @@ export type TReqOption = {
   skipUnauthorized?: boolean;
   skipLogout?: boolean;
   withRedirect?: boolean;
+  skipForbidden?: boolean;
 };
 
 class AxiosClient {
@@ -94,12 +96,6 @@ class AxiosClient {
       headers = {
         "Access-Control-Allow-Credentials": "true",
       };
-    }
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const publicRoomKey = urlParams.get("key") || urlParams.get("share");
-    if (publicRoomKey) {
-      headers = { ...headers, "Request-Token": publicRoomKey };
     }
 
     const apiBaseURL = combineUrl(origin, proxy, prefix);
@@ -129,6 +125,22 @@ class AxiosClient {
     });
 
     this.client = axios.create(apxiosConfig);
+
+    this.client.interceptors.request.use(
+      (config: InternalAxiosRequestConfig) => {
+        if (typeof window === "undefined") return config;
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const publicRoomKey = urlParams.get("key") || urlParams.get("share");
+
+        if (publicRoomKey) {
+          config.headers = config.headers || {};
+          config.headers["Request-Token"] = publicRoomKey;
+        }
+
+        return config;
+      },
+    );
   };
 
   initSSR = (headersParam: Record<string, string>) => {
@@ -251,6 +263,9 @@ class AxiosClient {
       const loginURL = combineUrl(proxyURL, "/login");
 
       if (!this.isSSR) {
+        const w = window as unknown as { __redirectToLogin?: boolean };
+        if (w.__redirectToLogin) return Promise.resolve();
+
         switch (error.response?.status) {
           case 401: {
             if (options.skipUnauthorized) return Promise.resolve();
@@ -268,11 +283,12 @@ class AxiosClient {
               url: "/authentication/logout",
             };
 
+            w.__redirectToLogin = true;
             this.request(opt)?.then(() => {
               this.setWithCredentialsStatus(false);
               window.location.href = `${loginURL}?authError=true`;
             });
-            break;
+            return Promise.resolve();
           }
           case 402:
             if (!window.location.pathname.includes("payments")) {
@@ -280,6 +296,7 @@ class AxiosClient {
             }
             break;
           case 403: {
+            if (options.skipForbidden) break;
             const { pathname } = window.location;
 
             const isArchived = pathname.indexOf("/rooms/archived") !== -1;

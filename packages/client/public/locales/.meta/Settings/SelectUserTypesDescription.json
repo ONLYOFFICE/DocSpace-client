@@ -3,7 +3,7 @@
   "content": "Select {{productName}} roles for the imported users: <1>{{productName}} admin</1>, <1>Room admin</1> or <1>User</1>. By default, User role is selected for each user. You can manage the roles after the import.",
   "content_en_sha1_hash": "e90aa9f2a0e200f361dff9163df3131462ddc07f",
   "created_at": "2025-05-19T21:30:52.598Z",
-  "updated_at": "2025-10-03T10:07:11.707Z",
+  "updated_at": "2025-11-18T14:41:49.922Z",
   "comment": {
     "text": "\"This translation key describes a message that appears in the data import process for Google Workspace, Nextcloud Workspace, and Onlyoffice Workspace. It instructs users to select roles (admin, Room admin, or User) for imported users, explaining that User role is selected by default.\"",
     "is_auto": true,
@@ -30,13 +30,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/getStepDescription.js",
-      "line_number": 54,
+      "line_number": 58,
       "context": ") : (\n <>\n <Trans\n t={t}\n ns=\"Settings\"\n i18nKey=\"SelectUserTypesDescription\"\n values={{\n productName: t(\"Common:ProductName\"),\n }}\n components={{\n 1: <b />,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/getStepDescription.js",
-      "line_number": 54,
+      "line_number": 58,
       "context": ") : (\n <>\n <Trans\n t={t}\n ns=\"Settings\"\n i18nKey=\"SelectUserTypesDescription\"\n values={{\n productName: t(\"Common:ProductName\"),\n }}\n components={{\n 1: <b />,",
       "module": "/packages/client"
     }

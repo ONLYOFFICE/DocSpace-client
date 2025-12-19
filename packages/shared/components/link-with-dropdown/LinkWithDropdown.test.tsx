@@ -24,20 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import "@testing-library/jest-dom";
+import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { LinkWithDropdown } from "./LinkWithDropdown";
+import styles from "./LinkWithDropdown.module.scss";
 
 const mockData = [
   {
     key: "key1",
     label: "Button 1",
-    onClick: jest.fn(),
+    onClick: vi.fn(),
   },
   {
     key: "key2",
     label: "Button 2",
-    onClick: jest.fn(),
+    onClick: vi.fn(),
   },
   {
     key: "key3",
@@ -46,7 +47,7 @@ const mockData = [
   {
     key: "key4",
     label: "Button 3",
-    onClick: jest.fn(),
+    onClick: vi.fn(),
   },
 ];
 
@@ -96,7 +97,7 @@ describe("LinkWithDropdown", () => {
 
     // Verify menu item structure
     items.forEach((item) => {
-      expect(item).toHaveClass("drop-down-item");
+      expect(item).toHaveClass(styles.dropDownItem);
     });
 
     // Verify separator - check that the separator is present in the DOM
@@ -163,7 +164,7 @@ describe("LinkWithDropdown", () => {
     );
 
     const textElement = screen.getByText("Link with dropdown");
-    expect(textElement).toHaveClass("textOverflow");
+    expect(textElement).toHaveClass(styles.textOverflow);
     expect(textElement).toHaveAttribute("title", title);
   });
 });

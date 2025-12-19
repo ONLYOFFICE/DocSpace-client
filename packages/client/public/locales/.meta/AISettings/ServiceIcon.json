@@ -1,0 +1,28 @@
+{
+  "key_path": "ServiceIcon",
+  "content": "Service icon",
+  "content_en_sha1_hash": "526f71c83fa3a61bc0402835ab6cfcbb7f83a24f",
+  "created_at": "2025-10-27T16:14:31.643Z",
+  "updated_at": "2025-10-27T17:14:30.358Z",
+  "comment": {
+    "text": "This key provides the label for a field displaying an icon associated with a service. It appears within a container (likely a settings panel) allowing users to manage and potentially remove the service icon. Translators should consider the context of service settings when localizing this text.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T17:14:30.358Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/hooks/useIcon.tsx",
+      "line_number": 105,
+      "context": "const onDeleteIcon = () => setIcon(\"\");\n \n const iconComponent = (\n <FieldContainer\n className={styles.iconContainer}\n labelText={t(\"AISettings:ServiceIcon\")}\n isVertical\n labelVisible\n removeMargin\n >\n <div className={styles.iconBlock}>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

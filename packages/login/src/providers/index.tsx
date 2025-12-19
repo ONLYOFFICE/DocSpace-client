@@ -31,6 +31,7 @@ import { I18nextProvider } from "react-i18next";
 import { usePathname, useSearchParams } from "next/navigation";
 
 import { ThemeProvider } from "@docspace/shared/components/theme-provider";
+import { RootTooltip } from "@docspace/shared/components/tooltip/rootTooltip";
 import { TFirebaseSettings } from "@docspace/shared/api/settings/types";
 import FirebaseHelper from "@docspace/shared/utils/firebase";
 import { TUser } from "@docspace/shared/api/people/types";
@@ -63,12 +64,11 @@ export const Providers = ({
   const confirmType = searchParams?.get("type");
 
   let shouldRedirect = true;
-  if (redirectURL === "unavailable" && confirmType === "PortalContinue") {
+  if (redirectURL === "/unavailable" && confirmType === "PortalContinue") {
     shouldRedirect = false;
   }
 
   const pathName = usePathname();
-  const expectedPathName = `/${redirectURL}`;
 
   React.useEffect(() => {
     if (
@@ -94,9 +94,9 @@ export const Providers = ({
   }, [searchParams, confirmType]);
 
   React.useEffect(() => {
-    if (shouldRedirect && redirectURL && pathName !== expectedPathName)
-      window.location.replace(expectedPathName);
-  }, [redirectURL, pathName, expectedPathName, shouldRedirect]);
+    if (shouldRedirect && redirectURL && pathName !== redirectURL)
+      window.location.replace(redirectURL);
+  }, [redirectURL, pathName, shouldRedirect]);
 
   const { i18n } = useI18N({
     settings: value.settings,
@@ -118,7 +118,8 @@ export const Providers = ({
           version={pkgFile.version}
           firebaseHelper={firebaseHelper}
         >
-          {shouldRedirect && redirectURL && expectedPathName !== pathName
+          <RootTooltip />
+          {shouldRedirect && redirectURL && pathName !== redirectURL
             ? null
             : children}
         </ErrorBoundaryWrapper>

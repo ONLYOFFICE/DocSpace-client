@@ -88,10 +88,10 @@ const PeopleTableRow = ({
   inProgress,
   itemIndex,
   withContentSelection,
+  isMe,
 }: TableRowProps) => {
   const theme = useTheme();
   const { t } = useTranslation(["People", "Common", "Settings"]);
-  const [isLoading, setIsLoading] = React.useState(false);
 
   const {
     displayName,
@@ -105,6 +105,8 @@ const PeopleTableRow = ({
     isCollaborator,
     isSSO,
     isLDAP,
+
+    id,
   } = item;
 
   const isGuests = contactsTab === "guests";
@@ -122,29 +124,11 @@ const PeopleTableRow = ({
     return options;
   }, [getUsersChangeTypeOptions, item, t]);
 
-  const onAbort = () => {
-    setIsLoading(false);
-  };
-
-  const onSuccess = () => {
-    setIsLoading(false);
-  };
-
   const onTypeChange = React.useCallback(
     (option: TOption) => {
       if (!option.action || option.key === role) return;
 
-      setIsLoading(true);
-      if (
-        !changeUserType(
-          option.action as EmployeeType,
-          [item],
-          onSuccess,
-          onAbort,
-        )
-      ) {
-        setIsLoading(false);
-      }
+      changeUserType(option.action as EmployeeType, [item]);
     },
     [item, changeUserType],
   );
@@ -229,7 +213,6 @@ const PeopleTableRow = ({
         displaySelectedOption
         modernView
         manualWidth="auto"
-        isLoading={isLoading}
       />
     );
 
@@ -275,6 +258,7 @@ const PeopleTableRow = ({
 
   return (
     <StyledWrapper
+      id={item.id}
       className={`user-item ${
         isChecked || isActive ? "table-row-selected" : ""
       } ${item.id}`}
@@ -327,6 +311,7 @@ const PeopleTableRow = ({
           </TableCell>
 
           <Text
+            as="div"
             title={displayName}
             fontWeight="600"
             fontSize="13px"
@@ -341,6 +326,11 @@ const PeopleTableRow = ({
               : displayName?.trim()
                 ? displayName
                 : email}
+            {isMe?.(id) ? (
+              <Text className="me-label" fontWeight="600" fontSize="13px">
+                ({t("Common:MeLabel")})
+              </Text>
+            ) : null}
           </Text>
           <Badges
             statusType={statusType}
@@ -473,6 +463,7 @@ export default inject(
 
       isRoomAdmin: userStore.user?.isRoomAdmin,
       withContentSelection,
+      isMe: userStore.isMe,
     };
   },
 )(withContent(observer(PeopleTableRow)));

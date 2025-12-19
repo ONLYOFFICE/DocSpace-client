@@ -28,7 +28,7 @@ import React, { useMemo } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { FolderType } from "@docspace/shared/enums";
+import { FilterType, FolderType } from "@docspace/shared/enums";
 import FilesSelector from "@docspace/shared/selectors/Files";
 import { toastr } from "@docspace/shared/components/toast";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
@@ -38,7 +38,10 @@ import {
   TFolder,
   TFolderSecurity,
 } from "@docspace/shared/api/files/types";
-import { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
+import {
+  TBreadCrumb,
+  TSelectorItem,
+} from "@docspace/shared/components/selector/Selector.types";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
 import { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
 import { TRoom, TRoomSecurity } from "@docspace/shared/api/rooms/types";
@@ -90,6 +93,7 @@ const FilesSelectorWrapper = ({
   treeFolders,
   withRecentTreeFolder,
   withFavoritesTreeFolder,
+  withAIAgentsTreeFolder,
 
   selection,
   // disabledItems,
@@ -144,6 +148,8 @@ const FilesSelectorWrapper = ({
   withCreate,
   folderIsShared,
   checkCreating,
+  isMultiSelect,
+  disableBySecurity,
 }: FilesSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation([
     "Files",
@@ -153,6 +159,18 @@ const FilesSelectorWrapper = ({
 
   const [isRequestRunning, setIsRequestRunning] =
     React.useState<boolean>(false);
+
+  const [selectedFiles, setSelectedFiles] = React.useState<TSelectorItem[]>([]);
+
+  const onSelectAction = (file: TSelectorItem) => {
+    if (file.isFolder) return;
+
+    if (selectedFiles.find((f) => f.id === file.id)) {
+      setSelectedFiles(selectedFiles.filter((f) => f.id !== file.id));
+    } else {
+      setSelectedFiles((prev) => [...prev, file]);
+    }
+  };
 
   const onCloseAction = () => {
     setInfoPanelIsMobileHidden(false);
@@ -283,11 +301,14 @@ const FilesSelectorWrapper = ({
 
         setSelectedItems();
         try {
-          const conflicts = (await checkFileConflicts(
-            selectedItemId,
-            folderIds,
-            fileIds,
-          )) as [];
+          const conflicts =
+            selectedTreeNode.type === FolderType.Knowledge
+              ? []
+              : ((await checkFileConflicts(
+                  selectedItemId,
+                  folderIds,
+                  fileIds,
+                )) as []);
 
           if (conflicts.length) {
             setConflictDialogData(conflicts, operationData);
@@ -327,6 +348,13 @@ const FilesSelectorWrapper = ({
       if (onSave && selectedItemId)
         onSave(null, selectedItemId, fileName, isChecked);
       if (onSelectTreeNode) onSelectTreeNode(selectedTreeNode);
+      if (onSelectFile && selectedFiles.length && isMultiSelect) {
+        onSelectFile(selectedFiles);
+
+        if (!embedded) onCloseAndDeselectAction();
+
+        return;
+      }
       if (onSelectFile && selectedFileInfo)
         onSelectFile(selectedFileInfo, breadCrumbs);
       if (!embedded) onCloseAndDeselectAction();
@@ -364,7 +392,7 @@ const FilesSelectorWrapper = ({
     isFirstLoad: boolean,
     isSelectedParentFolder: boolean,
     selectedItemId: string | number | undefined,
-    selectedItemType: "rooms" | "files" | undefined,
+    selectedItemType: "rooms" | "files" | "agents" | undefined,
     isRoot: boolean,
     selectedItemSecurity:
       | TFileSecurity
@@ -373,6 +401,8 @@ const FilesSelectorWrapper = ({
       | undefined,
     selectedFileInfo: TSelectedFileInfo,
     isDisabledFolder?: boolean,
+    isInsideKnowledge?: boolean,
+    isInsideResultStorage?: boolean,
   ) => {
     return getIsDisabled(
       isFirstLoad,
@@ -390,6 +420,9 @@ const FilesSelectorWrapper = ({
       includeFolder,
       isRestore,
       isDisabledFolder,
+      isInsideKnowledge,
+      isInsideResultStorage,
+      selectedItemType === "agents",
     );
   };
 
@@ -399,12 +432,18 @@ const FilesSelectorWrapper = ({
     <FilesSelector
       openRoot={openRootVar}
       disabledItems={disabledItems}
+      disabledFolderType={
+        isMove || isCopy || isRestore || isRestoreAll
+          ? FolderType.ResultStorage
+          : undefined
+      }
       filterParam={filterParam}
       getIcon={getIcon}
       setIsDataReady={setIsDataReady}
       treeFolders={treeFolders}
       withRecentTreeFolder={withRecentTreeFolder}
       withFavoritesTreeFolder={withFavoritesTreeFolder}
+      withAIAgentsTreeFolder={withAIAgentsTreeFolder}
       onSetBaseFolderPath={onSetBaseFolderPath}
       isUserOnly={isUserOnly}
       isRoomsOnly={isRoomsOnly}
@@ -419,6 +458,7 @@ const FilesSelectorWrapper = ({
       onCancel={onCloseAction}
       onSubmit={onAccept}
       getIsDisabled={getIsDisabledAction}
+      onSelectItem={onSelectAction}
       withHeader={withHeader}
       submitButtonLabel={acceptButtonLabel || defaultAcceptButtonLabel}
       withCancelButton={withCancelButton}
@@ -435,7 +475,11 @@ const FilesSelectorWrapper = ({
       withSearch={withSearch}
       withPadding={withPadding}
       descriptionText={
-        !withSubtitle || !filterParam || filterParam === "ALL"
+        !withSubtitle ||
+        !filterParam ||
+        filterParam === "ALL" ||
+        (filterParam as unknown as FilterType) !== FilterType.DocumentsOnly ||
+        !descriptionText
           ? ""
           : (descriptionText ?? t("Common:SelectDOCXFormat"))
       }
@@ -453,6 +497,8 @@ const FilesSelectorWrapper = ({
       headerProps={headerProps}
       formProps={formProps}
       checkCreating={checkCreating}
+      isMultiSelect={isMultiSelect}
+      disableBySecurity={disableBySecurity}
     />
   );
 };

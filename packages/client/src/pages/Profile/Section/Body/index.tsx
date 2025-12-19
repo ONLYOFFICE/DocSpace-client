@@ -23,17 +23,16 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import styled from "styled-components";
+
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 import { TFunction } from "i18next";
 import { useEffect } from "react";
 
 import { ProfileViewLoader } from "@docspace/shared/skeletons/profile";
 import { Tabs, TTabItem } from "@docspace/shared/components/tabs";
 import { DeviceType } from "@docspace/shared/enums";
-import { tablet } from "@docspace/shared/utils";
 import { toastr } from "@docspace/shared/components/toast";
 
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
@@ -56,26 +55,7 @@ import FileManagement from "./sub-components/file-management";
 import InterfaceTheme from "./sub-components/interface-theme";
 import AuthorizedApps from "./sub-components/authorized-apps";
 import useProfileBody from "./useProfileBody";
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-
-  margin-top: -19px;
-
-  @media ${tablet} {
-    margin-top: 0;
-    width: 100%;
-    max-width: 100%;
-  }
-`;
-
-const StyledTabs = styled(Tabs)`
-  > .sticky {
-    z-index: 201;
-  }
-`;
+import styles from "./body.module.scss";
 
 type SectionBodyContentProps = {
   showProfileLoader?: boolean;
@@ -128,6 +108,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     checkTg,
   } = props;
   const navigate = useNavigate();
+  const location = useLocation();
 
   const checkEmailChangeParam = () => {
     const search = window.location.search;
@@ -228,22 +209,24 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     const arrayPaths = window.location.pathname.split("/");
     arrayPaths.splice(arrayPaths.length - 1);
     const path = arrayPaths.join("/");
-    navigate(`${path}/${e.id}`, { state: { disableScrollToTop: true } });
+    navigate(`${path}/${e.id}`, {
+      state: { disableScrollToTop: true, fromUrl: location?.state?.fromUrl },
+    });
   };
 
   if (showProfileLoader) return <ProfileViewLoader />;
 
   return (
-    <Wrapper>
+    <div className={styles.wrapper}>
       <MainProfile />
-      <StyledTabs
+      <Tabs
         items={data}
         selectedItemId={currentTabId}
         onSelect={onSelect}
         stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType as DeviceType]}
         withAnimation
       />
-    </Wrapper>
+    </div>
   );
 };
 

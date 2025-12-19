@@ -24,18 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { makeAutoObservable, runInAction } from "mobx";
 import axios from "axios";
-
-import Filter from "../api/people/filter";
-import { TFrameConfig } from "../types/Frame";
+import { makeAutoObservable, runInAction } from "mobx";
 import api from "../api";
-import { TFolder } from "../api/files/types";
-import {
+import type { TAIConfig } from "../api/ai/types";
+import type { TApiKey } from "../api/api-keys/types";
+import type { TFolder } from "../api/files/types";
+import type { TPortals } from "../api/management/types";
+import Filter from "../api/people/filter";
+import type { TUser } from "../api/people/types";
+import type {
   TAdditionalResources,
   TCompanyInfo,
   TCustomSchema,
   TDomainValidator,
+  TExternalResources,
   TFirebaseSettings,
   TFormGallery,
   TGetColorTheme,
@@ -46,44 +49,42 @@ import {
   TSettings,
   TTimeZone,
   TVersionBuild,
-  TExternalResources,
 } from "../api/settings/types";
-import { TUser } from "../api/people/types";
-import { TPortals } from "../api/management/types";
+import { toastr } from "../components/toast";
+import type { TData } from "../components/toast/Toast.type";
+import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "../constants";
+import {
+  DeepLinkType,
+  type RecaptchaType,
+  TenantStatus,
+  ThemeKeys,
+  type UrlActionType,
+  FolderType,
+} from "../enums";
+import { version } from "../package.json";
+import type { ILogo } from "../pages/Branding/WhiteLabel/WhiteLabel.types";
+import { Base, Dark, type TColorScheme } from "../themes";
+import type { Nullable } from "../types";
+import type { TFrameConfig } from "../types/Frame";
 import {
   size as deviceSize,
-  isTablet,
-  getSystemTheme,
   getDeviceTypeByWidth,
+  getSystemTheme,
+  isTablet,
 } from "../utils";
+import { isRequestAborted } from "../utils/axios/isRequestAborted";
+import { combineUrl } from "../utils/combineUrl";
 import {
   frameCallEvent,
   getShowText,
-  isPublicRoom,
   insertTagManager,
   isManagement,
+  isPublicRoom,
   openUrl,
 } from "../utils/common";
-import { setCookie, getCookie } from "../utils/cookie";
-import { combineUrl } from "../utils/combineUrl";
+import { getCookie, setCookie } from "../utils/cookie";
 import FirebaseHelper from "../utils/firebase";
 import SocketHelper from "../utils/socket";
-import { ILogo } from "../pages/Branding/WhiteLabel/WhiteLabel.types";
-
-import {
-  ThemeKeys,
-  TenantStatus,
-  UrlActionType,
-  RecaptchaType,
-  DeepLinkType,
-} from "../enums";
-import { LANGUAGE, COOKIE_EXPIRATION_YEAR, MEDIA_VIEW_URL } from "../constants";
-import { Dark, Base, TColorScheme } from "../themes";
-import { toastr } from "../components/toast";
-import { TData } from "../components/toast/Toast.type";
-import { version } from "../package.json";
-import { Nullable } from "../types";
-import { TApiKey } from "../api/api-keys/types";
 
 const themes = {
   Dark,
@@ -140,7 +141,7 @@ class SettingsStore {
 
   utcHoursOffset = 0;
 
-  defaultPage = "/";
+  defaultFolderType = FolderType.Rooms;
 
   homepage = "";
 
@@ -244,7 +245,7 @@ class SettingsStore {
 
   socketUrl = "";
 
-  folderFormValidation = new RegExp('[*+:"<>?|\\\\/]', "gim");
+  folderFormValidation = /[*+:"<>?|\\/]/gim;
 
   tenantStatus: TenantStatus | null = null;
 
@@ -341,6 +342,8 @@ class SettingsStore {
   errorKeys: Error | null = null;
 
   abortControllerArr: Nullable<AbortController>[] = [];
+
+  aiConfig: Nullable<TAIConfig> = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -439,9 +442,9 @@ class SettingsStore {
       : this.helpCenterDomain;
   }
 
-  get docuSignUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.connectdocusign
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectdocusign}`
+  get documentServiceSettingsUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.documentService
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.documentService}`
       : this.helpCenterDomain;
   }
 
@@ -454,12 +457,6 @@ class SettingsStore {
   get boxUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.connectbox
       ? `${this.helpCenterDomain}${this.helpCenterEntries.connectbox}`
-      : this.helpCenterDomain;
-  }
-
-  get mailRuUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.connectmailru
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectmailru}`
       : this.helpCenterDomain;
   }
 
@@ -493,18 +490,6 @@ class SettingsStore {
       : this.helpCenterDomain;
   }
 
-  get clickatellUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.connectclickatell
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectclickatell}`
-      : this.helpCenterDomain;
-  }
-
-  get smsclUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.connectsmsc
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectsmsc}`
-      : this.helpCenterDomain;
-  }
-
   get firebaseUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.connectfirebase
       ? `${this.helpCenterDomain}${this.helpCenterEntries.connectfirebase}`
@@ -517,21 +502,27 @@ class SettingsStore {
       : this.helpCenterDomain;
   }
 
-  get weixinUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.connectweixin
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectweixin}`
-      : this.helpCenterDomain;
-  }
-
   get telegramUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.connecttelegram
       ? `${this.helpCenterDomain}${this.helpCenterEntries.connecttelegram}`
       : this.helpCenterDomain;
   }
 
-  get wordpressUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.connectwordpress
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectwordpress}`
+  get twitterHelpUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.connecttwitter
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.connecttwitter}`
+      : this.helpCenterDomain;
+  }
+
+  get wechatHelpUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.connectwechat
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectwechat}`
+      : this.helpCenterDomain;
+  }
+
+  get zoomHelpUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.connectzoom
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectzoom}`
       : this.helpCenterDomain;
   }
 
@@ -554,24 +545,6 @@ class SettingsStore {
       : this.helpCenterDomain;
   }
 
-  get selectelUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.connectselectel
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectselectel}`
-      : this.helpCenterDomain;
-  }
-
-  get yandexUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.connectyandex
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectyandex}`
-      : this.helpCenterDomain;
-  }
-
-  get vkUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.connectvk
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectvk}`
-      : this.helpCenterDomain;
-  }
-
   get languageAndTimeZoneSettingsUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.language
       ? `${this.helpCenterDomain}${this.helpCenterEntries.language}`
@@ -588,6 +561,36 @@ class SettingsStore {
     return this.helpCenterDomain && this.helpCenterEntries?.alternativeurl
       ? `${this.helpCenterDomain}${this.helpCenterEntries.alternativeurl}`
       : this.helpCenterDomain;
+  }
+
+  get aiSettingsUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.aisettings
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.aisettings}`
+      : null;
+  }
+
+  get aiProviderSettingsUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.aiprovidersettings
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.aiprovidersettings}`
+      : null;
+  }
+
+  get mcpServersSettingsUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.mcpserverssettings
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.mcpserverssettings}`
+      : null;
+  }
+
+  get webSearchSettingsUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.websearchsettings
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.websearchsettings}`
+      : null;
+  }
+
+  get knowledgeSettingsUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.knowledgesettings
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.knowledgesettings}`
+      : null;
   }
 
   get configureDeepLinkUrl() {
@@ -918,8 +921,8 @@ class SettingsStore {
     this.snackbarExist = snackbar;
   };
 
-  setDefaultPage = (defaultPage: string) => {
-    this.defaultPage = defaultPage;
+  setDefaultFolderType = (folderType: FolderType) => {
+    this.defaultFolderType = folderType;
   };
 
   setPortalDomain = (domain: string) => {
@@ -937,11 +940,6 @@ class SettingsStore {
   getSettings = async () => {
     const settings: Nullable<TSettings> = await api.settings.getSettings(true);
 
-    if (window.AscDesktopEditor !== undefined) {
-      const dp = combineUrl(window.ClientConfig?.proxy?.url, MEDIA_VIEW_URL);
-      this.setDefaultPage(dp);
-    }
-
     if (!settings) return;
 
     Object.keys(settings).forEach((forEachKey) => {
@@ -953,12 +951,7 @@ class SettingsStore {
           return;
         }
 
-        this.setValue(
-          key as keyof SettingsStore,
-          key === "defaultPage"
-            ? combineUrl(window.ClientConfig?.proxy?.url, settings[key])
-            : settings[key],
-        );
+        this.setValue(key as keyof SettingsStore, settings[key]);
 
         if (key === "culture") {
           if (settings?.wizardToken) return;
@@ -1063,19 +1056,22 @@ class SettingsStore {
 
   init = async () => {
     this.setIsLoading(true);
-    const requests = [];
 
-    requests.push(this.getPortalSettings(), this.getAppearanceTheme());
+    try {
+      await Promise.all([this.getPortalSettings(), this.getAppearanceTheme()]);
 
-    await Promise.all(requests);
+      if (!this.isPortalDeactivate) {
+        await this.getBuildVersionInfo();
+      }
+    } catch (error) {
+      if (isRequestAborted(error)) return;
 
-    if (!this.isPortalDeactivate) {
-      await this.getBuildVersionInfo();
+      console.error(error);
+    } finally {
+      this.setIsLoading(false);
+      this.setIsLoaded(true);
+      this.setIsFirstLoaded(true);
     }
-
-    this.setIsLoading(false);
-    this.setIsLoaded(true);
-    this.setIsFirstLoaded(true);
   };
 
   setRoomsMode = (mode: boolean) => {
@@ -1628,6 +1624,18 @@ class SettingsStore {
     if (currentColorScheme) this.setCurrentColorScheme(currentColorScheme);
   };
 
+  getAIConfig = async () => {
+    const res = await api.ai.getAIConfig();
+
+    if (!res) return;
+
+    this.setAIConfig(res);
+  };
+
+  setAIConfig = (config: TAIConfig) => {
+    this.aiConfig = config;
+  };
+
   setInterfaceDirection = (direction: string) => {
     this.interfaceDirection = direction;
     localStorage.setItem("interfaceDirection", direction);
@@ -1749,6 +1757,15 @@ class SettingsStore {
 
   setDisplayBanners = (displayBanners: boolean) => {
     this.displayBanners = displayBanners;
+  };
+
+  updateDefaultFolderType = async (folderType: FolderType) => {
+    try {
+      const res = await api.settings.setDefaultFolderType(folderType);
+      this.setDefaultFolderType(res);
+    } catch (e) {
+      toastr.error(e as TData);
+    }
   };
 }
 

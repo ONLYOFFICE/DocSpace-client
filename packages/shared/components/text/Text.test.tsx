@@ -25,73 +25,74 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, vi } from "vitest";
 import { screen, fireEvent, render } from "@testing-library/react";
-import "@testing-library/jest-dom";
-
-import styles from "./Text.module.scss";
 
 import { Text } from ".";
 
-// Mock CSS modulesy
-jest.mock("./Text.module.scss", () => ({
-  text: "text",
-  inline: "inline",
-  italic: "italic",
-  bold: "bold",
-  noSelect: "noSelect",
-  truncate: "truncate",
-  autoDirSpan: "autoDirSpan",
-  tile: "tile",
+// Mock CSS modules - return default export for CSS Modules
+vi.mock("./Text.module.scss", () => ({
+  default: {
+    text: "text",
+    inline: "inline",
+    italic: "italic",
+    bold: "bold",
+    noSelect: "noSelect",
+    truncate: "truncate",
+    autoDirSpan: "autoDirSpan",
+    tile: "tile",
+  },
 }));
 
 describe("Text Component", () => {
   describe("Basic Rendering", () => {
-    test("renders text content", () => {
+    it("renders text content", () => {
       render(<Text>Hello World</Text>);
       expect(screen.getByText("Hello World")).toBeInTheDocument();
     });
 
-    test("renders with default props", () => {
+    it("renders with default props", () => {
       render(<Text>Default Text</Text>);
       const text = screen.getByTestId("text");
       expect(text).toBeInTheDocument();
-      expect(text).toHaveClass(styles.text);
+      expect(text.className).toContain("text");
     });
 
-    test("accepts custom className", () => {
+    it("accepts custom className", () => {
       render(<Text className="custom-text">Text with class</Text>);
       const text = screen.getByTestId("text");
-      expect(text).toHaveClass(styles.text, "custom-text");
+      expect(text.className).toContain("text");
+      expect(text.className).toContain("custom-text");
     });
 
-    test("accepts custom id", () => {
+    it("accepts custom id", () => {
       render(<Text id="custom-id">Text with ID</Text>);
       expect(screen.getByTestId("text")).toHaveAttribute("id", "custom-id");
     });
   });
 
   describe("Styling Props", () => {
-    test("applies custom fontSize", () => {
+    it("applies custom fontSize", () => {
       render(<Text fontSize="16px">Large Text</Text>);
       expect(screen.getByTestId("text")).toHaveStyle({ fontSize: "16px" });
     });
 
-    test("applies custom color", () => {
+    it("applies custom color", () => {
       render(<Text color="#FF0000">Red Text</Text>);
       expect(screen.getByTestId("text")).toHaveStyle({ color: "#FF0000" });
     });
 
-    test("applies custom fontWeight", () => {
+    it("applies custom fontWeight", () => {
       render(<Text fontWeight={700}>Bold Text</Text>);
       expect(screen.getByTestId("text")).toHaveStyle({ fontWeight: 700 });
     });
 
-    test("applies custom textAlign", () => {
+    it("applies custom textAlign", () => {
       render(<Text textAlign="center">Centered Text</Text>);
       expect(screen.getByTestId("text")).toHaveStyle({ textAlign: "center" });
     });
 
-    test("applies custom backgroundColor", () => {
+    it("applies custom backgroundColor", () => {
       render(<Text backgroundColor="#F0F0F0">Text with background</Text>);
       expect(screen.getByTestId("text")).toHaveStyle({
         backgroundColor: "#F0F0F0",
@@ -100,17 +101,17 @@ describe("Text Component", () => {
   });
 
   describe("Element Type and Tag", () => {
-    test("renders as different HTML elements using 'as' prop", () => {
+    it("renders as different HTML elements using 'as' prop", () => {
       render(<Text as="h1">Heading Text</Text>);
       expect(screen.getByTestId("text").tagName).toBe("H1");
     });
 
-    test("renders with custom tag", () => {
+    it("renders with custom tag", () => {
       render(<Text tag="span">Span Text</Text>);
       expect(screen.getByTestId("text").tagName).toBe("SPAN");
     });
 
-    test("prefers 'as' prop over 'tag' prop", () => {
+    it("prefers 'as' prop over 'tag' prop", () => {
       render(
         <Text as="h2" tag="span">
           Mixed Props Text
@@ -121,15 +122,15 @@ describe("Text Component", () => {
   });
 
   describe("Interactive Features", () => {
-    test("handles click events", () => {
-      const handleClick = jest.fn();
+    it("handles click events", () => {
+      const handleClick = vi.fn();
       render(<Text onClick={handleClick}>Clickable Text</Text>);
 
       fireEvent.click(screen.getByText("Clickable Text"));
       expect(handleClick).toHaveBeenCalledTimes(1);
     });
 
-    test("renders with title attribute", () => {
+    it("renders with title attribute", () => {
       const title = "Text Title";
       render(<Text title={title}>Hover Text</Text>);
       expect(screen.getByTestId("text")).toHaveAttribute("title", title);
@@ -137,78 +138,75 @@ describe("Text Component", () => {
   });
 
   describe("CSS Module Classes", () => {
-    test("applies inline display class", () => {
+    it("applies inline display class", () => {
       render(<Text isInline>Inline Text</Text>);
-      expect(screen.getByTestId("text")).toHaveClass(styles.inline);
+      expect(screen.getByTestId("text").className).toContain("inline");
     });
 
-    test("applies bold class", () => {
+    it("applies bold class", () => {
       render(<Text isBold>Bold Text</Text>);
-      expect(screen.getByTestId("text")).toHaveClass(styles.bold);
+      expect(screen.getByTestId("text").className).toContain("bold");
     });
 
-    test("applies italic class", () => {
+    it("applies italic class", () => {
       render(<Text isItalic>Italic Text</Text>);
-      expect(screen.getByTestId("text")).toHaveClass(styles.italic);
+      expect(screen.getByTestId("text").className).toContain("italic");
     });
 
-    test("applies noSelect class", () => {
+    it("applies noSelect class", () => {
       render(<Text noSelect>Non-selectable Text</Text>);
-      expect(screen.getByTestId("text")).toHaveClass(styles.noSelect);
+      expect(screen.getByTestId("text").className).toContain("noSelect");
     });
 
-    test("applies truncate class", () => {
+    it("applies truncate class", () => {
       render(<Text truncate>Truncated Text</Text>);
-      expect(screen.getByTestId("text")).toHaveClass(styles.truncate);
+      expect(screen.getByTestId("text").className).toContain("truncate");
     });
 
-    test("applies autoDirSpan class for auto direction", () => {
+    it("applies autoDirSpan class for auto direction", () => {
       render(<Text dir="auto">Auto Direction Text</Text>);
       const span = screen.getByText("Auto Direction Text");
-      expect(span).toHaveClass(styles.autoDirSpan);
+      expect(span.className).toContain("autoDirSpan");
     });
 
-    test("applies tile class for tile view", () => {
+    it("applies tile class for tile view", () => {
       render(
         <Text dir="auto" view="tile">
           Tile View Text
         </Text>,
       );
       const span = screen.getByText("Tile View Text");
-      expect(span).toHaveClass(styles.autoDirSpan, styles.tile);
+      expect(span.className).toContain("autoDirSpan");
+      expect(span.className).toContain("tile");
     });
   });
 
   describe("Style Combinations", () => {
-    test("combines multiple CSS module classes", () => {
+    it("combines multiple CSS module classes", () => {
       render(
         <Text isInline isBold isItalic noSelect>
           Multi-styled Text
         </Text>,
       );
       const text = screen.getByTestId("text");
-      expect(text).toHaveClass(
-        styles.text,
-        styles.inline,
-        styles.bold,
-        styles.italic,
-        styles.noSelect,
-      );
+      expect(text.className).toContain("text");
+      expect(text.className).toContain("inline");
+      expect(text.className).toContain("bold");
+      expect(text.className).toContain("italic");
+      expect(text.className).toContain("noSelect");
     });
 
-    test("combines CSS module classes with custom className", () => {
+    it("combines CSS module classes with custom className", () => {
       render(
         <Text isInline isBold className="custom-class">
           Combined Classes Text
         </Text>,
       );
       const text = screen.getByTestId("text");
-      expect(text).toHaveClass(
-        styles.text,
-        styles.inline,
-        styles.bold,
-        "custom-class",
-      );
+      expect(text.className).toContain("text");
+      expect(text.className).toContain("inline");
+      expect(text.className).toContain("bold");
+      expect(text.className).toContain("custom-class");
     });
   });
 });

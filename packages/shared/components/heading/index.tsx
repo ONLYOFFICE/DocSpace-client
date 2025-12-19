@@ -30,6 +30,7 @@ import { classNames } from "../../utils";
 import styles from "./Heading.module.scss";
 import { HeadingProps } from "./Heading.types";
 import { HeadingLevel, HeadingSize } from "./Heading.enums";
+import { withTooltip } from "../tooltip";
 
 export const HeadingPure = ({
   id,
@@ -46,6 +47,7 @@ export const HeadingPure = ({
   as,
   fontSize,
   fontWeight,
+  lineHeight,
   ...rest
 }: HeadingProps) => {
   const Element = (as || `h${level}`) as React.ElementType;
@@ -74,6 +76,7 @@ export const HeadingPure = ({
         color: color || undefined,
         fontSize: fontSize || undefined,
         fontWeight: fontWeight || undefined,
+        lineHeight: lineHeight || undefined,
       }}
       data-testid="heading"
       {...rest}
@@ -85,4 +88,6 @@ export const HeadingPure = ({
 
 const Heading = React.memo(HeadingPure);
 
-export { Heading, HeadingSize, HeadingLevel };
+const HeadingWithTooltip = withTooltip(Heading);
+
+export { Heading, HeadingSize, HeadingLevel, HeadingWithTooltip };

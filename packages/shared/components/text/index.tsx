@@ -26,8 +26,11 @@
 
 import React from "react";
 import classNames from "classnames";
+import equal from "fast-deep-equal/react";
+
 import styles from "./Text.module.scss";
 import type { TextProps } from "./Text.types";
+import { withTooltip } from "../tooltip";
 
 const TextPure = ({
   ref,
@@ -111,6 +114,8 @@ const TextPure = ({
 
 TextPure.displayName = "TextPure";
 
-const Text = React.memo(TextPure);
+const TextBase = React.memo(TextPure, equal);
+
+const Text = withTooltip(TextBase);
 
 export { Text };

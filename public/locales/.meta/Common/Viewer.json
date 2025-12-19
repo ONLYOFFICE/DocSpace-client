@@ -3,7 +3,7 @@
   "content": "Viewer",
   "content_en_sha1_hash": "dbad9f126b33570e09839a2d60720898de1a512d",
   "created_at": "2025-08-26T11:15:03.444Z",
-  "updated_at": "2025-10-13T20:15:04.824Z",
+  "updated_at": "2025-11-06T18:29:15.814Z",
   "comment": {
     "text": "This key refers to a user role with viewing permissions. It's used as a label for a share access right, likely displayed in a sharing dialog or settings panel. Translators should consider the meaning of \"viewer\" in the context of accessing and seeing content.",
     "is_auto": true,
@@ -18,8 +18,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 516,
-      "context": "{\n id: \"portal-settings_catalog-javascript-sdk_viewer\",\n key: \"7-1-5\",\n icon: \"\",\n link: \"viewer\",\n tKey: \"Common:Viewer\",\n },\n {\n id: \"portal-settings_catalog-javascript-sdk_portal\",\n key: \"7-1-6\",\n icon: \"\",",
+      "line_number": 562,
+      "context": "{\n id: \"portal-settings_catalog-javascript-sdk_viewer\",\n key: \"8-1-5\",\n icon: \"\",\n link: \"viewer\",\n tKey: \"Common:Viewer\",\n },\n {\n id: \"portal-settings_catalog-javascript-sdk_portal\",\n key: \"8-1-6\",\n icon: \"\",",
       "module": "/packages/client"
     },
     {

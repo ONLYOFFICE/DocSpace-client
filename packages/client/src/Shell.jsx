@@ -40,6 +40,7 @@ import SocketHelper, {
 import { Portal } from "@docspace/shared/components/portal";
 import { SnackBar } from "@docspace/shared/components/snackbar";
 import { Toast, toastr } from "@docspace/shared/components/toast";
+import { RootTooltip } from "@docspace/shared/components/tooltip/rootTooltip";
 import { ToastType } from "@docspace/shared/components/toast/Toast.enums";
 import { updateTempContent } from "@docspace/shared/utils/common";
 import { DeviceType, IndexedDBStores } from "@docspace/shared/enums";
@@ -48,6 +49,8 @@ import { useThemeDetector } from "@docspace/shared/hooks/useThemeDetector";
 import { sendToastReport } from "@docspace/shared/utils/crashReport";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { getCookie, deleteCookie } from "@docspace/shared/utils/cookie";
+import { handleCopy } from "@docspace/shared/utils/copy";
+
 import "@docspace/shared/styles/theme.scss";
 
 import config from "PACKAGE_FILE";
@@ -64,7 +67,6 @@ import useCreateFileError from "./Hooks/useCreateFileError";
 
 import ReactSmartBanner from "./components/SmartBanner";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Shell = ({ page = "home", ...rest }) => {
   const {
     isLoaded,
@@ -492,6 +494,14 @@ const Shell = ({ page = "home", ...rest }) => {
     });
   }, [isLoaded]);
 
+  useEffect(() => {
+    document.addEventListener("copy", handleCopy);
+
+    return () => {
+      document.removeEventListener("copy", handleCopy);
+    };
+  }, []);
+
   const rootElement = document.getElementById("root");
 
   const toast =
@@ -512,6 +522,7 @@ const Shell = ({ page = "home", ...rest }) => {
   return (
     <Layout>
       {toast}
+      <RootTooltip />
       {isMobileOnly && !isFrame ? (
         <ReactSmartBanner t={t} ready={ready} />
       ) : null}

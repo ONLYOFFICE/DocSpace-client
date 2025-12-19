@@ -249,6 +249,7 @@ export default function withFileActions(WrappedFileItem) {
         // !!e.target.closest(".additional-badges") ||
         e.target.closest(".tag") ||
         e.target.closest(".mainIcons") ||
+        e.target.closest(".react-tooltip") ||
         isNewBadgePanelVisible ||
         isTrashFolder
       )
@@ -431,6 +432,7 @@ export default function withFileActions(WrappedFileItem) {
         isArchiveFolder,
         isTemplatesFolder,
         isRecentFolder,
+        isAIAgentsFolder,
       } = treeFoldersStore;
       const {
         dragging,
@@ -452,7 +454,7 @@ export default function withFileActions(WrappedFileItem) {
         withCtrlSelect,
         withShiftSelect,
       } = filesStore;
-      const { id } = selectedFolderStore;
+      const { id, isInsideResultStorage } = selectedFolderStore;
       const { startUpload, secondaryProgressDataStore } = uploadDataStore;
       const { withContentSelection } = hotkeyStore;
       const { findOperationById } = secondaryProgressDataStore;
@@ -465,7 +467,8 @@ export default function withFileActions(WrappedFileItem) {
         (x) => x.id === item.id && x.fileExst === item?.fileExst,
       );
 
-      const isDisabledDropItem = item.security?.Create === false;
+      const isDisabledDropItem =
+        item.security?.Create === false || isInsideResultStorage;
 
       const draggable =
         !isRecycleBinFolder && selectedItem && !isDisabledDropItem;
@@ -515,8 +518,9 @@ export default function withFileActions(WrappedFileItem) {
         isArchiveFolder ||
         isTemplatesFolder ||
         isRecentFolder ||
-        settingsStore.currentDeviceType !== DeviceType.desktop ||
-        inProgress;
+        inProgress ||
+        isAIAgentsFolder ||
+        isMobile;
 
       let isActive = false;
 

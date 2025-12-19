@@ -54,19 +54,17 @@ import {
 
 import { TActivateConfirmUser, TError } from "@/types";
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
-import { RegisterContainer } from "@/components/RegisterContainer.styled";
 import { GreetingUserContainer } from "@/components/GreetingContainer";
+import styles from "@/components/RegisterContainer.module.scss";
 
 type ActivateUserFormPorps = {
   passwordHash: TPasswordHash;
-  defaultPage?: string;
   passwordSettings?: TPasswordSettings;
 };
 
 const ActivateUserForm = ({
   passwordSettings,
   passwordHash,
-  defaultPage = "/",
 }: ActivateUserFormPorps) => {
   const { t } = useTranslation(["Confirm", "Common"]);
   const { confirmLinkResult, linkData } = useContext(ConfirmRouteContext);
@@ -162,7 +160,7 @@ const ActivateUserForm = ({
 
       setIsLoading(false);
 
-      window.location.replace(defaultPage);
+      window.location.replace("/");
     } catch (error) {
       const knownError = error as TError;
       let errorMessage: string;
@@ -189,7 +187,7 @@ const ActivateUserForm = ({
   };
 
   return (
-    <RegisterContainer>
+    <div className={styles.registerContainer}>
       <form className="auth-form-container">
         <GreetingUserContainer
           emailFromLink={emailFromLink}
@@ -298,7 +296,7 @@ const ActivateUserForm = ({
           testId="signup_button"
         />
       </form>
-    </RegisterContainer>
+    </div>
   );
 };
 

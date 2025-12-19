@@ -40,11 +40,7 @@ import type { TGetAllPortals } from "@docspace/shared/api/management/types";
 
 import { getHeaderByPathname } from "@/lib";
 import { Bar } from "@/components/bar";
-import {
-  StyledSection,
-  StyledSectionHeader,
-  StyledHeading,
-} from "./section.styled";
+import styles from "./section.module.scss";
 
 export const Section = ({
   children,
@@ -70,9 +66,9 @@ export const Section = ({
   useDocumentTitle(t("Common:SpaceManagement"));
 
   return (
-    <StyledSection>
-      <StyledSectionHeader>
-        <StyledHeading>
+    <section className={styles.section}>
+      <div className={styles.sectionHeader}>
+        <div className={styles.heading}>
           {isSubPage ? (
             <IconButton
               iconName={ArrowPathReactSvgUrl}
@@ -82,15 +78,15 @@ export const Section = ({
               className="arrow-button"
             />
           ) : null}
-          <Heading className="headline" type="content" truncate>
+          <Heading className={styles.headline} type="content" truncate>
             {key}
           </Heading>
-        </StyledHeading>
+        </div>
         {showBar ? <Bar title={barTitle} /> : null}
-      </StyledSectionHeader>
+      </div>
       <Scrollbar id="sectionScroll" scrollClass="section-scroll" fixedSize>
         {children}
       </Scrollbar>
-    </StyledSection>
+    </section>
   );
 };

@@ -3,7 +3,7 @@
   "content": "Share your form via a Virtual Data Room. Assign recipient roles to the room participants so they can fill out the form accordingly. Select an existing room or create a new one.",
   "content_en_sha1_hash": "b92f861d3ca32b57c91d73b768f3aed5580a6695",
   "created_at": "2025-10-13T13:22:12.853Z",
-  "updated_at": "2025-10-13T14:22:47.561Z",
+  "updated_at": "2025-10-27T16:14:33.163Z",
   "comment": {
     "text": "This text explains how to share a form using a Virtual Data Room (VDR). It guides users to assign roles to participants and either select an existing room or create a new one, appearing in an informational bar within the form sharing process.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/ShareCollectSelector/ShareCollectSelector.tsx",
-      "line_number": 256,
+      "line_number": 260,
       "context": "const infoBarData: TInfoBarData = {\n title: t(\"Common:SelectorInfoBarTitle\"),\n description:\n createDefineRoomType === RoomsType.FormRoom\n ? t(\"Common:SelectorInfoBarDescription\")\n : t(\"Common:SelectorInfoBarOfVDRDescription\"),\n icon: InfoIcon,\n onClose: onCloseInfoBar,\n };\n \n const createDefineRoomLabels: Partial<Record<RoomsType, string>> = {",
       "module": "/packages/client"
     },

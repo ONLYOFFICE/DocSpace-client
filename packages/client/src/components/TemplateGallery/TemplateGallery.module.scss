@@ -42,8 +42,10 @@
   background-color: var(--background-color);
   border-radius: 6px;
 
-  margin-right: 60px;
-  margin-left: 60px;
+  max-width: 1810px;
+  margin: 0 auto;
+
+  width: calc(100% - 120px);
 
   height: 100%;
 }

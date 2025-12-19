@@ -16,7 +16,6 @@
   "CreateSpreadsheetDescription": "Обављајте прецизне калкулације уз минималан труд.",
   "CustomRoomEmptyTitle": "Добродошли на Прилагођену просторију",
   "DefaultFolderDescription": "Повуците фајлове овде или креирајте нове.",
-  "EmptyAIAgentsAIDisabledSaasAdminDescription": "Да бисте креирали и користили ВИ агенте, повежите новчаник и омогућите услугу ВИ функција у подешавањима {{productName}}. Када се то заврши, моћи ћете да радите са ВИ агентима и сарађујете са својим тимом.",
   "EmptyAIAgentsAIDisabledSaasAdminTitle": "Повежите свој новчаник и омогућите ВИ функције",
   "EmptyAIAgentsAIDisabledUserTitle": "Још нема доступних ВИ агената",
   "EmptyAIAgentsAIEnabledUserDescription": "Када вас ваш тим позове на сарадњу, овде ће се појавити ВИ агенти, спремни да помогну око докумената, управљања знањем и свакодневних задатака.",

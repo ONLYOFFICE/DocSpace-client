@@ -16,7 +16,6 @@
   "CreateSpreadsheetDescription": "Правете точни изчисления с минимални усилия.",
   "CustomRoomEmptyTitle": "Добре дошли в Персонализираната стая",
   "DefaultFolderDescription": "Пуснете файловете тук или създайте нови.",
-  "EmptyAIAgentsAIDisabledSaasAdminDescription": "За да създадете и използвате AI агенти, свържете портфейла си и активирайте услугата за AI функции в настройките на {{productName}}. След като това приключи, ще можете да работите с AI агенти и да си сътрудничите с вашия екип.",
   "EmptyAIAgentsAIDisabledSaasAdminTitle": "Свържете портфейла си и активирайте AI функциите",
   "EmptyAIAgentsAIDisabledUserTitle": "AI агентите все още не са достъпни.",
   "EmptyAIAgentsAIEnabledUserDescription": "След като вашият екип ви покани да си сътрудничите, тук ще се появят AI агенти, готови да помогнат с документи, управление на знания и ежедневни задачи.",

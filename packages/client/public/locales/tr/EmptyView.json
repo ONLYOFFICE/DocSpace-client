@@ -16,7 +16,6 @@
   "CreateSpreadsheetDescription": "Minimum çaba ile hassas hesaplamalar yapın.",
   "CustomRoomEmptyTitle": "Özel odaya hoş geldiniz",
   "DefaultFolderDescription": "Dosyaları buraya bırakın veya yenilerini oluşturun.",
-  "EmptyAIAgentsAIDisabledSaasAdminDescription": "AI ajanları oluşturmak ve kullanmak için, {{productName}} ayarlarında cüzdanınızı bağlayın ve AI özellikler hizmetini etkinleştirin. Bu işlem tamamlandıktan sonra, AI ajanlarıyla çalışabilir ve ekibinizle işbirliği yapabilirsiniz.",
   "EmptyAIAgentsAIDisabledSaasAdminTitle": "Cüzdanınızı bağlayın ve yapay zeka özelliklerini etkinleştirin",
   "EmptyAIAgentsAIDisabledUserTitle": "AI ajanları henüz mevcut değil",
   "EmptyAIAgentsAIEnabledUserDescription": "Ekibiniz sizi işbirliği yapmaya davet ettikten sonra, AI ajanları burada belgelere, bilgi yönetimine ve günlük görevlere yardımcı olmaya hazır olarak görünecektir.",

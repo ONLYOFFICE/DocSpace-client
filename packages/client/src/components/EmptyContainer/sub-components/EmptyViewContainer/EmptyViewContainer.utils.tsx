@@ -216,6 +216,7 @@ const getAIAgentsAIDisabledDescription = (
     .with([false, true], () =>
       t("EmptyView:EmptyAIAgentsAIDisabledSaasAdminDescription", {
         productName: t("Common:ProductName"),
+        aiAgents: t("Common:AIAgents"),
       }),
     )
     .otherwise(() =>

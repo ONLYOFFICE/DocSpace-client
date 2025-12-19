@@ -16,7 +16,6 @@
   "CreateSpreadsheetDescription": "最小限の労力で正確な計算を実行する",
   "CustomRoomEmptyTitle": "カスタムルームへようこそ",
   "DefaultFolderDescription": "ここにファイルをドロップするか、新しいファイルを作成してください。",
-  "EmptyAIAgentsAIDisabledSaasAdminDescription": "AIエージェントを作成して利用するには、{{productName}}の設定でウォレットを接続し、AI機能サービスを有効にしてください。設定が完了すると、AIエージェントを操作し、チームと共同作業できるようになります。",
   "EmptyAIAgentsAIDisabledSaasAdminTitle": "AI機能を有効にするには、ウォレットを接続してください",
   "EmptyAIAgentsAIDisabledUserTitle": "AIエージェントはまだご利用いただけません",
   "EmptyAIAgentsAIEnabledUserDescription": "チームから共同作業への招待が届くと、ここにAIエージェントが表示され、文書作成、知識管理、日常業務のサポートを開始します。",

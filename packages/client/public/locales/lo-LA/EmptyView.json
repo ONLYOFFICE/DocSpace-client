@@ -16,7 +16,6 @@
   "CreateSpreadsheetDescription": "ດໍາເນີນການຄຳນວນທີ່ຖືກຕ້ອງດ້ວຍຄວາມພະຍາຍາດໜ້ອຍສຸດ.",
   "CustomRoomEmptyTitle": "ຍິນດີຕ້ອນຮັບສູ່ຫ້ອງຄຸສຕຳ້!",
   "DefaultFolderDescription": "ວາງເອກະສານໄວ້ທີ່ນີ້ຫຼືສ້າງເອກະສານໃໝ່",
-  "EmptyAIAgentsAIDisabledSaasAdminDescription": "ເພື່ອສ້າງ ແລະ ນຳໃຊ້ຕົວແທນ AI, ໃຫ້ເຊື່ອມຕໍ່ກະເປົາເງິນຂອງທ່ານ ແລະ ເປີດໃຊ້ບໍລິການຄຸນສົມບັດ AI ໃນການຕັ້ງຄ່າ {{productName}}. ເມື່ອມັນສຳເລັດແລ້ວ, ທ່ານຈະສາມາດເຮັດວຽກກັບຕົວແທນ AI ແລະ ຮ່ວມມືກັບທີມງານຂອງທ່ານໄດ້.",
   "EmptyAIAgentsAIDisabledSaasAdminTitle": "ເຊື່ອມຕໍ່ກະເປົາເງິນຂອງທ່ານ ແລະ ເປີດໃຊ້ຄຸນສົມບັດ AI",
   "EmptyAIAgentsAIDisabledUserTitle": "ຕົວແທນ AI ຍັງບໍ່ມີໃຫ້ບໍລິການເທື່ອ",
   "EmptyAIAgentsAIEnabledUserDescription": "ເມື່ອທີມງານຂອງທ່ານເຊີນທ່ານມາຮ່ວມມື, ຕົວແທນ AI ຈະປາກົດຢູ່ທີ່ນີ້, ພ້ອມທີ່ຈະຊ່ວຍເຫຼືອໃນດ້ານເອກະສານ, ການຄຸ້ມຄອງຄວາມຮູ້, ແລະ ວຽກງານປະຈໍາວັນ.",

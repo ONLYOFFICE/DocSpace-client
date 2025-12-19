@@ -59,7 +59,24 @@ type GalleryProps = {
           description_card: string;
           updatedAt: string;
           template_image: {
-            data: { attributes: { formats: { small: { url: string } } } };
+            data: {
+              id: number;
+              attributes: {
+                formats: {
+                  thumbnail: {
+                    ext: string;
+                    url: string;
+                    hash: string;
+                    mime: string;
+                    name: string;
+                    path: string | null;
+                    size: number;
+                    width: number;
+                    height: number;
+                  };
+                };
+              };
+            };
           };
           file_oform: {
             data: {

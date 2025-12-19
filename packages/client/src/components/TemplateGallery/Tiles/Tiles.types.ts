@@ -31,6 +31,26 @@ import type { IndexRange } from "react-virtualized";
 export interface TFile {
   id: Key | null | undefined;
   attributes: {
+    template_image: {
+      data: {
+        id: number;
+        attributes: {
+          formats: {
+            thumbnail: {
+              ext: string;
+              url: string;
+              hash: string;
+              mime: string;
+              name: string;
+              path: string | null;
+              size: number;
+              width: number;
+              height: number;
+            };
+          };
+        };
+      };
+    };
     name_form: string;
     card_prewiew: {
       data?: {

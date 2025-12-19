@@ -97,9 +97,6 @@ const HeaderComponent = ({
   const defaultUrl = getUrlByDefaultFolderType(
     defaultFolderType || FolderType.Rooms,
   );
-  const location = useLocation();
-
-  const isFormGallery = location.pathname.includes("/form-gallery");
 
   // const isNavAvailable = mainModules.length > 0;
 

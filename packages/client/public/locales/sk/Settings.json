@@ -228,7 +228,6 @@
   "SessionLifetime": "Doba trvania relácie",
   "SessionLifetimeMobileDescription": "Čas trvania relácie umožňuje nastaviť čas (v minútach), za ktorý budú musieť používatelia {{productName}} znovu zadať prihlasovacie údaje do priestoru, aby získali prístup do priestoru.",
   "SessionLifetimeSettingDescription": "Nastavte Čas trvania relácie, aby ste definovali časový úsek pred automatickým odhlásením. Po uložení všetci používatelia budú odhlásení.",
-  "SetDefaultAIAgentQuota": "Nastavte predvolenú kvótu úložiska pre AI agentov v tomto {{productName}}. Je možné ju neskôr upraviť v nastaveniach alebo prispôsobiť individuálne pri vytváraní každého AI agenta.",
   "SetDefaultRoomQuota": "Nastavte predvolenú kvótu úložiska pre miestnosti v tomto priestore {{productName}}. Neskôr ju môže pre každú miestnosť individuálne upraviť administrátor miestnosti.",
   "SettingPasswordDescription": "Nastavte silu hesla, aby používatelia boli nútení zadávať bezpečnejšie hesla odolne voči útokom.",
   "SettingPasswordStrengthMobileDescription": "Nastavenie sily hesla slúži na stanovenie odolnosti hesla voči útokom hádaním a útokom hrubou silou.",

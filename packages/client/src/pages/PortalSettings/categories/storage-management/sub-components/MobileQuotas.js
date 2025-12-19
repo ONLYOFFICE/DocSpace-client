@@ -70,6 +70,7 @@ const MobileQuotasComponent = ({ isDisabled }) => {
         url="/portal-settings/management/disk-space/quota-per-ai-agent"
         subtitle={t("SetDefaultAIAgentQuota", {
           productName: t("Common:ProductName"),
+          aiAgents: t("Common:AIAgents"),
         })}
         isDisabled={isDisabled}
       />

@@ -228,7 +228,6 @@
   "SessionLifetime": "Oturum Ömrü",
   "SessionLifetimeMobileDescription": "Oturum Ömrü, {{productName}} kullanıcılarının alana erişmek için alan kimlik bilgilerini tekrar girmeleri gerekmeden önce süreyi (dakika bazında) ayarlamanıza olanak sağlar.",
   "SessionLifetimeSettingDescription": "Otomatik oturum kapatmadan önceki süreyi tanımlamak için Oturum Ömrü ayarlayın. Kaydettikten sonra tüm kullanıcılar için oturum kapatma işlemi gerçekleştirilecektir.",
-  "SetDefaultAIAgentQuota": "Bu {{productName}}'deki yapay zeka ajanları için varsayılan depolama kotasını ayarlayın. Bu, daha sonra ayarlar bölümünde ayarlanabilir veya her yapay zeka ajanı oluşturulurken ayrı ayrı özelleştirilebilir.",
   "SetDefaultRoomQuota": "Bu {{productName}}’teki odalar için varsayılan depolama kotasını ayarlayın. Bu, daha sonra oda yöneticisi tarafından her oda için ayrı ayrı ayarlanabilir.",
   "SettingPasswordDescription": "Daha güvenli ve dayanıklı şifreleri zorunlu kılmak için Şifre Gücü Ayarlarını yapılandırın.",
   "SettingPasswordStrengthMobileDescription": "Parola Gücü Ayarları, bir parolanın tahmin etme ve brute force saldırılarına karşı direncini belirlemenin bir yoludur.",

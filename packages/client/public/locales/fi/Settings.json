@@ -228,7 +228,6 @@
   "SessionLifetime": "Istunnon kesto",
   "SessionLifetimeMobileDescription": "Istunnon kesto mahdollistaa ajan asetuksen (minuuteissa) ennen kuin {{productName}}-n käyttäjien tulee syöttää tilan kirjautumistiedot jälkeen päästäkseen tilaan.",
   "SessionLifetimeSettingDescription": "Säädä istunnon kestoa määrittääksesi ajan ennen automaattista uloskirjautumista. Tallentamisen jälkeen uloskirjautuminen suoritetaan kaikille käyttäjille. ",
-  "SetDefaultAIAgentQuota": "Aseta oletuslevytilan raja AI-agentteille tässä {{productName}}. Sitä voidaan säätää myöhemmin asetuksissa tai mukauttaa yksilöllisesti luotaessa jokaista AI-agenttia.",
   "SetDefaultRoomQuota": "Aseta oletustallennuskiintiö tämän {{productName}}-n huoneille. Huoneen pääkäyttäjä voi myöhemmin muokata sitä jokaisen huoneen osalta erikseen.",
   "SettingPasswordDescription": "Määritä salasanan vahvuus-asetukset varmistaaksesi turvallisempia, laskennan kestäviä salasanoja. ",
   "SettingPasswordStrengthMobileDescription": "Salasanan vahvuus-asetukset on tapa määritellä salasanan tehokkuus arvailuja ja väsytyshyökkäyksiä vastaan.",

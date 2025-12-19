@@ -228,7 +228,6 @@
   "SessionLifetime": "Długość sesji",
   "SessionLifetimeMobileDescription": "Długość sesji pozwala wybrać czas (w minutach), zanim użytkownicy {{productName}} będą musieli ponownie wpisać swoje dane logowania do obszaru, aby uzyskać do niego dostęp.",
   "SessionLifetimeSettingDescription": "Dostosuj czas trwania sesji, aby zdefiniować czas przed automatycznym wylogowaniem. Po zapisaniu wszyscy użytkownicy zostaną wylogowania z obszaru.",
-  "SetDefaultAIAgentQuota": "Ustaw domyślny limit przestrzeni dyskowej dla agentów AI w tym {{productName}}. Można go później dostosować w ustawieniach lub skonfigurować indywidualnie podczas tworzenia każdego agenta AI.",
   "SetDefaultRoomQuota": "Skonfiguruj domyślny limit pamięci dla pokoi w tym {{productName}}. Limit dla poszczególnych pokoi może zostać zmieniony później przez ich administratorów.",
   "SettingPasswordDescription": "Skonfiguruj ustawienia siły hasła, aby wyegzekwować bezpieczniejsze, odporne na złamanie hasła.",
   "SettingPasswordStrengthMobileDescription": "Ustawienia siły hasła to sposób, by określić skuteczność hasła w zakresie odporności na zgadywanie i ataki brute force.",

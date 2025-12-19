@@ -228,7 +228,6 @@
   "SessionLifetime": "Lebensdauer der Sitzung",
   "SessionLifetimeMobileDescription": "Sitzungsdauer erlaubt es, die Zeit (in Minuten) festzulegen, bevor die {{productName}}-Benutzer die Zugangsdaten erneut eingeben müssen, um auf den Bereich zugreifen zu können.",
   "SessionLifetimeSettingDescription": "Stellen Sie die Sitzungsdauer ein, um die Zeitspanne bis zur automatischen Abmeldung festzulegen. Nach dem Speichern wird die Abmeldung für alle Benutzer durchgeführt.",
-  "SetDefaultAIAgentQuota": "Legen Sie in diesem {{productName}} das Standard-Speicherkontingent für KI-Agenten fest. Dieses kann später in den Einstellungen angepasst oder beim Erstellen jedes KI-Agenten individuell konfiguriert werden.",
   "SetDefaultRoomQuota": "Legen Sie die Standardspeicherquote für Räume in diesem {{productName}} fest. Es kann später für jeden Raum individuell vom Raumadministrator angepasst werden.",
   "SettingPasswordDescription": "Konfigurieren Sie die Einstellungen für die Passwortstärke, um sicherere, zuverlässige Passwörter zu stellen.",
   "SettingPasswordStrengthMobileDescription": "Mit den Einstellungen für die Kennwortstärke können Sie bestimmen, wie gut ein Kennwort gegen Erraten und Brute-Force-Angriffe geschützt ist.",

@@ -228,7 +228,6 @@
   "SessionLifetime": "Jetëgjatësia e sesionit",
   "SessionLifetimeMobileDescription": "Kohëzgjatja e sesionit lejon caktimin e kohës (në minuta) përpara se përdoruesit e {{productName}} të duhet të fusin përsëri kredencialet e hapësirës për të hyrë në hapësirë.",
   "SessionLifetimeSettingDescription": "Rregulloni jetëgjatësinë e sesionit për të përcaktuar periudhën kohore përpara daljes automatike. Pas ruajtjes, do të kryhet logoff për të gjithë përdoruesit.",
-  "SetDefaultAIAgentQuota": "Vendosni kuotën e parazgjedhur të hapësirës për agjentët AI në këtë {{productName}}. Mund të rregullohet më vonë në cilësime ose të personalizohet individualisht kur krijoni çdo agjent AI.",
   "SetDefaultRoomQuota": "Caktoni kuotën e paracaktuar të ruajtjes për dhomat në këtë {{productName}}. Më vonë mund të rregullohet për secilën dhomë veç e veç nga administratori i dhomës.",
   "SettingPasswordDescription": "Konfiguroni cilësimet e fuqisë së fjalëkalimit për të zbatuar fjalëkalime më të sigurta dhe rezistente ndaj llogaritjes.",
   "SettingPasswordStrengthMobileDescription": "Cilësimet e fuqisë së fjalëkalimit janë një mënyrë për të përcaktuar efektivitetin e një fjalëkalimi për t'i rezistuar hamendjeve dhe sulmeve me forcë brutale.",

@@ -228,7 +228,6 @@
   "SessionLifetime": "Durata de expirare a sesiunii ",
   "SessionLifetimeMobileDescription": "Durata de expirare a sesiunii permite stabilirea perioadei de timp (exprimată în minute) înainte ca utilizatorii spațiului {{productName}} vor fi nevoiți să introducă din nou datele de autentificare pentru a accesa spaţiul.",
   "SessionLifetimeSettingDescription": "Configurați durata de expirare a sesiunii pentru a stabili o perioadă de timp până la deconectarea automată. După salvare, toți utilizatorii vor fi deconectați.",
-  "SetDefaultAIAgentQuota": "Stabilește cota de stocare implicită pentru agenții AI în {{productName}}. Aceasta poate fi ajustată ulterior în setări sau personalizată individual la crearea fiecărui agent AI.",
   "SetDefaultRoomQuota": "Stabilire cotă de stocare implicită pentru sălile în acest {{productName}}. Administrator de sală poate configura cote de stocare mai târziu individual pentru fiecare sală.",
   "SettingPasswordDescription": "Configurați setări nivelului de complexitate a parolei pentru a crea parole puternice și le securiza.",
   "SettingPasswordStrengthMobileDescription": "Setarea nivelului de complexitate a parolei este o măsură de a determina eficacitatea parolei împotriva ghicirii sau atacuri cu forță brută.",

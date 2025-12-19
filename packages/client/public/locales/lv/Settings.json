@@ -228,7 +228,6 @@
   "SessionLifetime": "Sesijas ilgums",
   "SessionLifetimeMobileDescription": "Sesijas ilgums ļauj iestatīt laiku (minūtēs), pirms {{productName}} lietotājiem būs atkārtoti jāievada telpas akreditācijas dati, lai piekļūtu vietai.",
   "SessionLifetimeSettingDescription": "Pielāgojiet sesijas ilgumu, lai noteiktu laika periodu pirms automātiskās atteikšanās. Pēc saglabāšanas visi lietotāji tiks izlogoti.",
-  "SetDefaultAIAgentQuota": "Iestatiet noklusējuma uzglabāšanas kvotu MI aģentiem šajā {{productName}}. To var pielāgot vēlāk iestatējumos vai individualizēt, izveidojot katru MI aģentu.",
   "SetDefaultRoomQuota": "Iestatiet noklusējuma krātuves kvotu telpām šajā {{productName}}. Vēlāk telpas administrators to var pielāgot katrai telpai atsevišķi.",
   "SettingPasswordDescription": "Konfigurējiet paroles stipruma iestatījumus, lai ieviestu drošākas, skaitļošanas izturīgas paroles.",
   "SettingPasswordStrengthMobileDescription": "Paroles stipruma iestatījumi ir veids, kā noteikt paroles efektivitāti pretojoties minējumiem un brutāla spēka uzbrukumiem.",

@@ -228,7 +228,6 @@
   "SessionLifetime": "Tempo da sessão",
   "SessionLifetimeMobileDescription": "Življenjska doba seje omogoča nastavitev časa (v minutah), preden bodo morali uporabniki {{productName}} znova vnesti poverilnice prostora za dostop do prostora.",
   "SessionLifetimeSettingDescription": "Prilagodite življenjsko dobo seje, da določite časovno obdobje pred samodejno odjavo. Po shranjevanju bo izvedena odjava za vse uporabnike.",
-  "SetDefaultAIAgentQuota": "Nastavite privzeto mero shranjevanja za umetne inteligence v tem {{productName}}. Jo je mogoče kasneje prilagoditi v nastavitvah ali pa jo individualno prilagoditi ob ustvarjanju vsake umetne inteligence.",
   "SetDefaultRoomQuota": "Nastavite privzeto kvoto prostora za shranjevanje v tem prostoru {{productName}}. Kasneje se lahko prilagodi za vsako sobo posebej s strani skrbnika. sobe.",
   "SettingPasswordDescription": "Konfigurirajte nastavitve moči gesla za uveljavljanje varnejših gesel, odpornih na vdore.",
   "SettingPasswordStrengthMobileDescription": "Nastavitve moči gesla so način za ugotavljanje učinkovitosti gesla pred ugibanjem in vdorom.",

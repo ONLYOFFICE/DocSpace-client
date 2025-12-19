@@ -228,7 +228,6 @@
   "SessionLifetime": "Trajanje sesije",
   "SessionLifetimeMobileDescription": "Trajanje sesije omogućava postavljanje vremena (u minutima) pre nego što će korisnicima {{productName}}-a ponovo biti potrebno da unesu pristupne podatke kako bi pristupili prostoru.",
   "SessionLifetimeSettingDescription": "Podesite Trajanje sesije kako biste definisali vremenski period pre automatskog odjavljivanja. Nakon čuvanja, odjavljivanje će biti izvršeno za sve korisnike.",
-  "SetDefaultAIAgentQuota": "Podesite podrazumevanu kvotu skladišta za AI agente u ovom {{productName}}. Može se kasnije prilagoditi u podešavanjima ili individualno pri kreiranju svakog AI agenta.",
   "SetDefaultRoomQuota": "Postavite podrazumevanu skladišnu kvotu za sobe u ovom {{productName}}-u. Kasnije može biti podešeno za svaku sobu individualno od strane admina sobe.",
   "SettingPasswordDescription": "Konfigurišite Podešavanja Jačine lozinke kako biste primenili sigurnije, otpornije lozinke na računarske napade.",
   "SettingPasswordStrengthMobileDescription": "Podešavanja Jačine lozinke su način da se odredi efektivnost lozinke u otpornosti na pogađanja i napade brute-force.",

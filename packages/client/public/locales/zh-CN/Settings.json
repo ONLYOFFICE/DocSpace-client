@@ -228,7 +228,6 @@
   "SessionLifetime": "会话有效期",
   "SessionLifetimeMobileDescription": "会话生命周期允许设置{{productName}}用户需要再次输入空间凭据才能访问空间的时间（以分钟为单位）。",
   "SessionLifetimeSettingDescription": "调整会话有效期，可定义自动注销的时间段。保存设置后，系统将为所有用户自动注销到期会话。",
-  "SetDefaultAIAgentQuota": "设置此 {{productName}} 中 AI 智能体的默认存储配额。稍后可以在设置中进行调整，也可以在创建每个 AI 智能体时单独自定义。",
   "SetDefaultRoomQuota": "设置此{{productName}}中房间的默认存储配额。房间管理员稍后可以为每个房间单独调整。",
   "SettingPasswordDescription": "配置密码强度设置，强制使用更安全的强密码。",
   "SettingPasswordStrengthMobileDescription": "通过“密码强度设置”，确定密码阻止猜测和暴力攻击的有效性。",

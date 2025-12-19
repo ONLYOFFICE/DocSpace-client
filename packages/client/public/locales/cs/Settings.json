@@ -228,7 +228,6 @@
   "SessionLifetime": "Doba trvání relace",
   "SessionLifetimeMobileDescription": "Doba trvání relace umožňuje nastavit dobu (v minutách), po kterou budou muset uživatelé {{productName}} znovu zadávat přihlašovací údaje k prostoru, aby do něj mohli přistupovat.",
   "SessionLifetimeSettingDescription": "Nastavte dobu trvání relace, abyste určili dobu před automatickým odhlášením. Po uložení se odhlášení provede pro všechny uživatele.",
-  "SetDefaultAIAgentQuota": "Nastavte výchozí limit úložiště pro AI agenty v tomto {{productName}}. Lze jej později upravit v nastavení nebo jej upravit individuálně při vytváření každého AI agenta.",
   "SetDefaultRoomQuota": "Nastavení výchozí kvóty úložiště pro místnosti v tomto prostoru {{productName}}. Později ji může správce místnosti upravit pro každou místnost zvlášť.",
   "SettingPasswordDescription": "Konfigurace nastavení síly hesla pro vynucení bezpečnějších hesel odolných vůči výpočtům.",
   "SettingPasswordStrengthMobileDescription": "Nastavení síly hesla je způsob, jak určit účinnost hesla při odolávání útokům hádáním a hrubou silou.",

@@ -228,7 +228,6 @@
   "SessionLifetime": "Tempo da sessão",
   "SessionLifetimeMobileDescription": "O Session Lifetime permite definir o tempo (em minutos) antes que os usuários do {{productName}} precisem inserir as credenciais do espaço novamente para acessar o espaço.",
   "SessionLifetimeSettingDescription": "Ajuste o tempo de vida da sessão para definir o período antes do logoff automático. Após salvar, o logoff será realizado para todos os usuários.",
-  "SetDefaultAIAgentQuota": "Defina a cota de armazenamento padrão para agentes de IA neste {{productName}}. Ela pode ser ajustada posteriormente nas configurações ou personalizada individualmente ao criar cada agente de IA.",
   "SetDefaultRoomQuota": "Defina a cota de armazenamento padrão para salas neste {{productName}}. Posteriormente, pode ser ajustado para cada sala individualmente pelo administrador da sala.",
   "SettingPasswordDescription": "Defina as configurações de força da senha para impor senhas mais seguras e resistentes à computação.",
   "SettingPasswordStrengthMobileDescription": "As configurações de força da senha são uma forma de determinar a eficácia de uma senha na resistência a adivinhações e ataques de força bruta.",

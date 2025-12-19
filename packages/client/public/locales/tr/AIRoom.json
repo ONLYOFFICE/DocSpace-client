@@ -9,7 +9,6 @@
   "EmptyResultsDescription": "AI Sohbeti'nde oluşturulan dosyalar burada otomatik olarak görünür. İçerik oluşturduğunuzda, bir sohbet başlattığınızda veya çıktı içeren bir mesaj gönderdiğinizde, sonuç bu bölümde kaydedilecektir.",
   "EmptyResultsTitle": "Henüz sonuç yok",
   "EmptyResultsViewerDescription": "Diğer kullanıcıların yapay zeka sohbeti etkinliğinin sonuçlarını burada, kullanılabilir hale geldiklerinde göreceksiniz.",
-  "InstructionsDescriptionAgent": "Yapay zeka aracısının nasıl davranması ve yanıt vermesi gerektiğini açıklayın. Rolünü, tonunu ve ana görevlerini tanımlayın.",
   "InstructionsDescriptionAgentExample": "Örnek: \"Basın bültenleri yazıp düzenlemeye yardımcı olan bir yapay zeka PR asistanısınız. Profesyonel, kendinden emin ve medyaya uygun bir ton koruyun. Ana mesajları açıkça vurgulayın, jargon kullanmaktan kaçının ve metni öz ve ilgi çekici tutun.\"",
   "KnowledgeDescription": "Bilgisayarınızdan veya {{productName}}'den dosya yükleyerek sohbet için daha iyi bir bağlam sağlayın. Not: Yüklenen içeriğin bir kısmı veya tamamı konuşma sırasında görünür olabilir.",
   "KnowledgeSelectIn": "{{productName}}'de Seçin",

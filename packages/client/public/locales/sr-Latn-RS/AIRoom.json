@@ -9,7 +9,6 @@
   "EmptyResultsDescription": "Datoteke generisane u AI razgovoru pojaviće se ovde automatski. Kad god generišete sadržaj, započnete razgovor ili pošaljete poruku sa izlaznim rezultatom, on će biti sačuvan u ovom odeljku.",
   "EmptyResultsTitle": "Još nema rezultata",
   "EmptyResultsViewerDescription": "Videćete rezultate aktivnosti AI ćaskanja od drugih korisnika ovde čim budu dostupni.",
-  "InstructionsDescriptionAgent": "Opišite kako AI agent treba da se ponaša i odgovara. Definišite njegovu ulogu, ton i glavne zadatke.",
   "InstructionsDescriptionAgentExample": "Primer: „Vi ste AI PR asistent koji pomaže u pisanju i uređivanju saopštenja za medije. Održavajte profesionalan, samouveren i medijski prihvatljiv ton. Jasno istaknite ključne poruke, izbegavajte žargon i držite tekst konciznim i privlačnim.”",
   "KnowledgeDescription": "Otpremite datoteke sa svog računara ili sa {{productName}} da biste obezbedili bolji kontekst za ćaskanje. Napomena: deo ili ceo otpremljeni sadržaj može biti otkriven tokom razgovora.",
   "KnowledgeSelectIn": "Izaberite u {{productName}}",

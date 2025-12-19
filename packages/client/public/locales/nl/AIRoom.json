@@ -9,7 +9,6 @@
   "EmptyResultsDescription": "Bestanden die in AI-Chat worden gegenereerd, verschijnen hier automatisch. Telkens wanneer u inhoud genereert, een chat start of een bericht met output verzendt, wordt het resultaat in dit gedeelte opgeslagen.",
   "EmptyResultsTitle": "Nog geen resultaten.",
   "EmptyResultsViewerDescription": "U ziet hier de resultaten van AI-chatactiviteit van andere gebruikers zodra deze beschikbaar zijn.",
-  "InstructionsDescriptionAgent": "Beschrijf hoe de AI-agent zich moet gedragen en reageren. Definieer zijn rol, toon en belangrijkste taken.",
   "InstructionsDescriptionAgentExample": "Voorbeeld: \"Je bent een AI-PR-assistent die helpt bij het schrijven en bewerken van persberichten. Handhaaf een professionele, zelfverzekerde en mediavriendelijke toon. Benadruk belangrijke boodschappen duidelijk, vermijd jargon en houd de tekst beknopt en boeiend.\"",
   "KnowledgeDescription": "Upload bestanden van uw computer of {{productName}} om de chat meer context te geven. Let op: een deel of alle geüploade inhoud kan tijdens het gesprek worden getoond.",
   "KnowledgeSelectIn": "Selecteer in {{productName}}",

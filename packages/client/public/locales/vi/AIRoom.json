@@ -9,7 +9,6 @@
   "EmptyResultsDescription": "Các tệp được tạo trong AI-Chat sẽ tự động xuất hiện ở đây. Bất cứ khi nào bạn tạo nội dung, bắt đầu một cuộc trò chuyện hoặc gửi một tin nhắn có đầu ra, kết quả sẽ được lưu trong phần này.",
   "EmptyResultsTitle": "Chưa có kết quả nào.",
   "EmptyResultsViewerDescription": "Bạn sẽ thấy kết quả hoạt động trò chuyện AI từ những người dùng khác ở đây khi chúng có sẵn.",
-  "InstructionsDescriptionAgent": "Mô tả cách thức hành vi và phản hồi của tác nhân AI. Xác định vai trò, giọng điệu và các nhiệm vụ chính của nó.",
   "InstructionsDescriptionAgentExample": "Ví dụ: “Bạn là một trợ lý PR AI giúp viết và chỉnh sửa các thông cáo báo chí. Hãy duy trì giọng văn chuyên nghiệp, tự tin và thân thiện với giới truyền thông. Làm nổi bật các thông điệp chính một cách rõ ràng, tránh biệt ngữ, và giữ cho văn bản ngắn gọn và hấp dẫn.”",
   "KnowledgeDescription": "Tải lên các tệp từ máy tính của bạn hoặc {{productName}} để cung cấp ngữ cảnh tốt hơn cho cuộc trò chuyện. Lưu ý: một phần hoặc toàn bộ nội dung đã tải lên có thể bị lộ trong quá trình trò chuyện.",
   "KnowledgeSelectIn": "Chọn trong {{productName}}",

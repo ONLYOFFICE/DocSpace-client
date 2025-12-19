@@ -9,7 +9,6 @@
   "EmptyResultsDescription": "Skedarët e gjeneruar në Bisedë - IA do të shfaqen këtu automatikisht. Sa herë që gjeneroni përmbajtje, filloni një bisedë ose dërgoni një mesazh me rezultat, rezultati do të ruhet në këtë seksion.",
   "EmptyResultsTitle": "Nuk ka ende rezultate",
   "EmptyResultsViewerDescription": "Do të shihni rezultatet e aktivitetit të bisedës AI nga përdorues të tjerë këtu kur bëhen të disponueshme.",
-  "InstructionsDescriptionAgent": "Përshkruani se si duhet të sillet dhe të përgjigjet agjenti AI. Përcaktoni rolin, tonin dhe detyrat kryesore.",
   "InstructionsDescriptionAgentExample": "Shembull: “Ju jeni një asistent AI PR që ndihmon në shkrimin dhe redaktimin e komunikatave për media. Mbani një ton profesional, të sigurt dhe miqësor për mediat. Nxirrni qartë mesazhet kryesore, shmangni zhargonin dhe mbani tekstin të qartë dhe tërheqës.”",
   "KnowledgeDescription": "Ngarko skedarë nga kompjuteri yt ose {{productName}} për të ofruar kontekst më të mirë për bisedën. Shënim: një pjesë ose e gjithë përmbajtja e ngarkuar mund të ekspozohet gjatë bisedës.",
   "KnowledgeSelectIn": "Zgjidh në {{productName}}",

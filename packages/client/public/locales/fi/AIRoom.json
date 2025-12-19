@@ -9,7 +9,6 @@
   "EmptyResultsDescription": "Tekoälykeskusteluissa luoduista tiedostoista ilmestyy tiedot tähän automaattisesti. Aina kun luot sisältöä, aloitat keskustelun tai lähetät viestin, jossa on tuloste, tulos tallennetaan tähän osioon.",
   "EmptyResultsTitle": "Ei tuloksia vielä",
   "EmptyResultsViewerDescription": "Täällä näet muiden käyttäjien tekoälykeskustelujen tulokset, kun ne ovat saatavilla.",
-  "InstructionsDescriptionAgent": "Kuvaile, miten tekoälyagentin tulisi käyttäytyä ja reagoida. Määrittele sen rooli, sävy ja päätehtävät.",
   "InstructionsDescriptionAgentExample": "Esimerkki: \"Olet tekoälyviestintäavustaja, joka auttaa kirjoittamaan ja muokkaamaan lehdistötiedotteita. Säilytä ammattimainen, itsevarma ja mediaystävällinen sävy. Korosta keskeisiä viestejä selkeästi, vältä ammattikieltä ja pidä teksti ytimekkäänä ja kiinnostavana.\"",
   "KnowledgeDescription": "Lataa tiedostoja tietokoneeltasi tai {{productName}}-palvelusta, jotta chatissa on parempi konteksti. Huomio: osa tai kaikki ladatut tiedot voivat näkyä keskustelun aikana.",
   "KnowledgeSelectIn": "Valitse {{productName}}",

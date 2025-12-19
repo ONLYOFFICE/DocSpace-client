@@ -73,8 +73,14 @@ export default inject(
   }: TStore) => {
     const { infoPanelItemsList } = pluginStore;
 
-    const { roomsView, fileView, setView, setIsVisible, getIsTrash } =
-      infoPanelStore;
+    const {
+      roomsView,
+      fileView,
+      setView,
+
+      setIsVisible,
+      getIsTrash,
+    } = infoPanelStore;
 
     const { enablePlugins } = settingsStore;
 

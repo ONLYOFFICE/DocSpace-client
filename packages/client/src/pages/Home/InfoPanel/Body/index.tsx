@@ -97,18 +97,35 @@ export default inject(
     dialogsStore,
     peopleStore,
     filesActionsStore,
+    pluginStore,
   }: TStore) => {
     const { contactsTab } = peopleStore.usersStore;
-    const { roomsView, fileView, getIsFiles, getIsRooms, setView } =
-      infoPanelStore;
+
+    const { infoPanelItemsList } = pluginStore;
+
+    const {
+      roomsView,
+      fileView,
+
+      getIsFiles,
+      getIsRooms,
+      getIsAIAgent,
+      setView,
+      getIsTrash,
+    } = infoPanelStore;
 
     const { isExpiredLinkAsync } = filesActionsStore;
-    const { editRoomDialogProps, createRoomDialogProps, templateEventVisible } =
-      dialogsStore;
+    const {
+      editRoomDialogProps,
+      editAgentDialogProps,
+      createRoomDialogProps,
+      templateEventVisible,
+    } = dialogsStore;
 
     const {
       avatarEditorDialogVisible,
       image,
+
       setAvatarEditorDialogVisible,
       onSaveRoomLogo,
       onChangeFile,
@@ -120,17 +137,27 @@ export default inject(
     return {
       contactsTab,
       selection,
+
       roomsView,
       fileView,
       getIsFiles,
       getIsRooms,
+      getIsAIAgent,
+      getIsTrash,
       setView,
+
+      infoPanelItemsList,
+
       maxImageUploadSize: settingsStore.maxImageUploadSize,
+
       editRoomDialogProps,
+      editAgentDialogProps,
       createRoomDialogProps,
       templateEventVisible,
+
       avatarEditorDialogVisible,
       image,
+
       setAvatarEditorDialogVisible,
       onSaveRoomLogo,
       onChangeFile,

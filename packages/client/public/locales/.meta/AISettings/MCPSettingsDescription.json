@@ -3,7 +3,7 @@
   "content": "This section lets you manage {{mcpServers}} for AI chats within rooms. You can enable system {{mcpServers}} or add custom ones to meet your company's needs. Once enabled, these servers will be accessible to other users for their tasks.",
   "content_en_sha1_hash": "30f225c5b4635d196a9e70200adef5ca2aee7ebb",
   "created_at": "2025-11-21T09:16:05.193Z",
-  "updated_at": "2025-11-21T09:16:12.527Z",
+  "updated_at": "2025-12-19T13:32:33.352Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/index.tsx",
-      "line_number": 244,
-      "context": ");\n \n return (\n <div className={styles.mcpServers}>\n <Text className={styles.description}>\n {t(\"AISettings:MCPSettingsDescription\", {\n mcpServers: t(\"Common:MCPSettingTitle\"),\n })}\n </Text>\n {aiSettingsUrl ? (\n <Link",
+      "line_number": 227,
+      "context": "if (!mcpServersInitied) return <ServersLoader />;\n \n return (\n <div className={styles.mcpServers}>\n <Text className={styles.description}>\n {t(\"AISettings:MCPSettingsDescription\", {\n mcpServers: t(\"Common:MCPSettingTitle\"),\n })}\n </Text>\n {mcpServersSettingsUrl ? (\n <Link",
       "module": "/packages/client"
     }
   ],

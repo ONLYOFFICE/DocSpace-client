@@ -65,6 +65,7 @@ const QuotaPerAIAgentComponent = (props: QuotaPerAIAgentComponentProps) => {
       toggleDescription={t("SetDefaultAIAgentQuota", {
         productName: t("Common:ProductName"),
         aiAgents: t("Common:AIAgents"),
+        aiAgent: t("Common:AIAgent"),
       })}
     />
   );

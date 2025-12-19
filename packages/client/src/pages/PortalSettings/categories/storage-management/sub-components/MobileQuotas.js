@@ -71,6 +71,7 @@ const MobileQuotasComponent = ({ isDisabled }) => {
         subtitle={t("SetDefaultAIAgentQuota", {
           productName: t("Common:ProductName"),
           aiAgents: t("Common:AIAgents"),
+          aiAgent: t("Common:AIAgent"),
         })}
         isDisabled={isDisabled}
       />

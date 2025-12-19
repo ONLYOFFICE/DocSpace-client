@@ -236,7 +236,7 @@ const KnowledgeComponent = ({
             {t("Common:LearnMore")}
           </Link>
         ) : null}
-        <div className={styles.knowledgeForm}>
+        <div className={styles.knowledgeForm} data-testid="knowledge-form">
           <FieldContainer
             labelVisible
             isVertical
@@ -255,6 +255,8 @@ const KnowledgeComponent = ({
               }
               displaySelectedOption
               isDisabled={!hasAIProviders || isKeyHidden}
+              dataTestId="knowledge-provider-combobox"
+              dropDownTestId="knowledge-provider-dropdown"
             />
           </FieldContainer>
           <FieldContainer
@@ -264,7 +266,10 @@ const KnowledgeComponent = ({
             removeMargin
           >
             {isKeyHidden ? (
-              <div className={styles.aiBanner}>
+              <div
+                className={styles.aiBanner}
+                data-testid="knowledge-key-hidden-banner"
+              >
                 <Text fontSize="12px" fontWeight={400} lineHeight="16px">
                   {t("AISettings:WebSearchKeyHiddenDescription")}
                 </Text>
@@ -284,6 +289,7 @@ const KnowledgeComponent = ({
                     isKeyHidden || selectedOption === KnowledgeType.None
                   }
                   autoComplete="off"
+                  testId="knowledge-key-input"
                 />
                 <Text className={styles.hiddenKeyDescription}>
                   {t("AISettings:KnowledgeKeyDescription")}
@@ -301,6 +307,7 @@ const KnowledgeComponent = ({
             onClick={onSave}
             isLoading={saveRequestRunning}
             isDisabled={isSaveDisabled}
+            testId="knowledge-save-button"
           />
           <Button
             size={ButtonSize.small}
@@ -313,6 +320,7 @@ const KnowledgeComponent = ({
               saveRequestRunning ||
               knowledgeConfig.needReset
             }
+            testId="knowledge-reset-button"
           />
         </div>
       </div>

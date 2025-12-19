@@ -29,6 +29,7 @@
 import { expect, test } from "./fixtures/base";
 import { endpoints } from "@docspace/shared/__mocks__/e2e";
 import {
+  PATH_AI_CONFIG_VECTORIZATION,
   PATH_AI_CONFIG_WEB_SEARCH,
   PATH_AI_PROVIDERS,
   PATH_AI_SERVERS,
@@ -732,6 +733,176 @@ test.describe("AI settings", () => {
       await expect(keyInput).toBeVisible();
 
       await expect(engineCombobox.getByRole("button")).toBeEnabled();
+
+      await expect(resetButton).toBeDisabled();
+    });
+  });
+
+  test.describe("Knowledge base", () => {
+    test("should render knowledge settings page with disabled elements if there are no ai providers", async ({
+      page,
+      mockRequest,
+    }) => {
+      await mockRequest.router([
+        endpoints.aiProvidersEmptyList,
+        endpoints.aiVectorizationSettingsDisabled,
+      ]);
+      await page.goto("/portal-settings/ai-settings/knowledge");
+
+      const knowledgeForm = page.getByTestId("knowledge-form");
+      await expect(knowledgeForm).toBeVisible();
+
+      const knowledgeProviderCombobox = page.getByTestId(
+        "knowledge-provider-combobox",
+      );
+      await expect(
+        knowledgeProviderCombobox.getByRole("button"),
+      ).toBeDisabled();
+
+      const keyInput = page.getByTestId("knowledge-key-input");
+      await expect(keyInput.getByTestId("text-input")).toBeDisabled();
+
+      const saveButton = page.getByTestId("knowledge-save-button");
+      await expect(saveButton).toBeDisabled();
+
+      const resetButton = page.getByTestId("knowledge-reset-button");
+      await expect(resetButton).toBeDisabled();
+    });
+
+    test("should render knowledge settings page with enabled engine combobox if there are ai providers", async ({
+      page,
+      mockRequest,
+    }) => {
+      await mockRequest.router([
+        endpoints.aiProvidersList,
+        endpoints.aiVectorizationSettingsDisabled,
+      ]);
+      await page.goto("/portal-settings/ai-settings/knowledge");
+
+      const knowledgeForm = page.getByTestId("knowledge-form");
+      await expect(knowledgeForm).toBeVisible();
+
+      const providerCombobox = page.getByTestId("knowledge-provider-combobox");
+      await expect(providerCombobox.getByRole("button")).toBeEnabled();
+    });
+
+    test("should set knowledge settings", async ({ page, mockRequest }) => {
+      await mockRequest.router([
+        endpoints.aiProvidersList,
+        endpoints.aiVectorizationSettingsDisabled,
+        endpoints.setVectorizationSettings,
+      ]);
+      await page.goto("/portal-settings/ai-settings/knowledge");
+
+      const knowledgeForm = page.getByTestId("knowledge-form");
+      await expect(knowledgeForm).toBeVisible();
+
+      const keyInput = page
+        .getByTestId("knowledge-key-input")
+        .getByTestId("text-input");
+      await expect(keyInput).toBeDisabled();
+
+      const saveButton = page.getByTestId("knowledge-save-button");
+      await expect(saveButton).toBeDisabled();
+
+      const resetButton = page.getByTestId("knowledge-reset-button");
+      await expect(resetButton).toBeDisabled();
+
+      const providerCombobox = page.getByTestId("knowledge-provider-combobox");
+      await providerCombobox.click();
+
+      const providerDropdown = page.getByTestId("knowledge-provider-dropdown");
+      await expect(providerDropdown).toBeVisible();
+
+      const exaOption = page.getByTestId("drop_down_item_1");
+      await exaOption.click();
+
+      await expect(keyInput).toBeEnabled();
+
+      await keyInput.fill("123");
+
+      await expect(saveButton).toBeEnabled();
+
+      const reqPromise = page.waitForRequest(
+        (r) =>
+          r.url().endsWith(PATH_AI_CONFIG_VECTORIZATION) &&
+          r.method() === "PUT",
+      );
+
+      await saveButton.click();
+
+      const req = await reqPromise;
+      const payload = req.postDataJSON();
+
+      expect(payload).toEqual({
+        type: 1,
+        key: "123",
+      });
+
+      const keyHiddenBanner = page.getByTestId("knowledge-key-hidden-banner");
+      await expect(keyHiddenBanner).toBeVisible();
+
+      await expect(saveButton).toBeDisabled();
+
+      await expect(providerCombobox.getByRole("button")).toBeDisabled();
+
+      await expect(keyInput).toHaveCount(0);
+
+      await expect(resetButton).toBeEnabled();
+    });
+
+    test("should reset knowledge settings", async ({ page, mockRequest }) => {
+      await mockRequest.router([
+        endpoints.aiProvidersList,
+        endpoints.aiVectorizationSettingsEnabled,
+        endpoints.setVectorizationSettings,
+      ]);
+      await page.goto("/portal-settings/ai-settings/knowledge");
+
+      const knowledgeForm = page.getByTestId("knowledge-form");
+      await expect(knowledgeForm).toBeVisible();
+
+      const keyHiddenBanner = page.getByTestId("knowledge-key-hidden-banner");
+      await expect(keyHiddenBanner).toBeVisible();
+
+      const keyInput = page
+        .getByTestId("knowledge-key-input")
+        .getByTestId("text-input");
+      await expect(keyInput).toHaveCount(0);
+
+      const providerCombobox = page.getByTestId("knowledge-provider-combobox");
+      await expect(providerCombobox.getByRole("button")).toBeDisabled();
+
+      const resetButton = page.getByTestId("knowledge-reset-button");
+      await expect(resetButton).toBeEnabled();
+
+      await resetButton.click();
+
+      const resetDialog = page.getByRole("dialog");
+      await expect(resetDialog).toBeVisible();
+
+      const reqPromise = page.waitForRequest(
+        (r) =>
+          r.url().endsWith(PATH_AI_CONFIG_VECTORIZATION) &&
+          r.method() === "PUT",
+      );
+
+      const resetDialogConfirmButton = resetDialog.getByTestId("reset-button");
+      await resetDialogConfirmButton.click();
+
+      const req = await reqPromise;
+      const payload = req.postDataJSON();
+
+      expect(payload).toEqual({
+        type: 0,
+        key: "",
+      });
+
+      await expect(keyHiddenBanner).toHaveCount(0);
+
+      await expect(keyInput).toBeVisible();
+
+      await expect(providerCombobox.getByRole("button")).toBeEnabled();
 
       await expect(resetButton).toBeDisabled();
     });

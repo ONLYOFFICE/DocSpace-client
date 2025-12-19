@@ -61,3 +61,9 @@ export {
   aiServersPostHandler,
   aiServersDeleteHandler,
 } from "./servers";
+
+export {
+  aiVectorizationGetHandler,
+  aiVectorizationPutHandler,
+  PATH_AI_CONFIG_VECTORIZATION,
+} from "./vectorization";

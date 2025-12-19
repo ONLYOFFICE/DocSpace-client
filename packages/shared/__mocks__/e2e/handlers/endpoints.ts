@@ -172,6 +172,9 @@ import {
   PATH_AI_CONFIG_WEB_SEARCH,
   aiWebSearchGetHandler,
   aiWebSearchPutHandler,
+  PATH_AI_CONFIG_VECTORIZATION,
+  aiVectorizationGetHandler,
+  aiVectorizationPutHandler,
 } from "./ai";
 import { PATH_TAGS, roomTagsHandler } from "./rooms";
 import {
@@ -508,6 +511,19 @@ export const endpoints = {
   setWebSearchSettings: {
     url: `${BASE_URL}${PATH_AI_CONFIG_WEB_SEARCH}`,
     dataHandler: aiWebSearchPutHandler,
+    method: "PUT",
+  },
+  aiVectorizationSettingsEnabled: {
+    url: `${BASE_URL}${PATH_AI_CONFIG_VECTORIZATION}`,
+    dataHandler: () => aiVectorizationGetHandler("enabled"),
+  },
+  aiVectorizationSettingsDisabled: {
+    url: `${BASE_URL}${PATH_AI_CONFIG_VECTORIZATION}`,
+    dataHandler: () => aiVectorizationGetHandler("disabled"),
+  },
+  setVectorizationSettings: {
+    url: `${BASE_URL}${PATH_AI_CONFIG_VECTORIZATION}`,
+    dataHandler: aiVectorizationPutHandler,
     method: "PUT",
   },
   additionalSettings: {

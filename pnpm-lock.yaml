@@ -1163,9 +1163,6 @@ importers:
       '@biomejs/biome':
         specifier: 2.3.4
         version: 2.3.4
-      '@eslint/js':
-        specifier: ^9.34.0
-        version: 9.39.2
       '@playwright/test':
         specifier: 1.56.1
         version: 1.56.1
@@ -2339,10 +2336,6 @@ packages:
     engines: {node: '>=18'}
     cpu: [x64]
     os: [win32]
-
-  '@eslint/js@9.39.2':
-    resolution: {integrity: sha512-q1mjIoW1VX4IvSocvM/vbTiveKC4k9eLrajNEuSsmjymSDEbpGddtpfOoN7YGAqBK3NG+uqo8ia4PDTt8buCYA==}
-    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@figspec/components@1.0.3':
     resolution: {integrity: sha512-fBwHzJ4ouuOUJEi+yBZIrOy+0/fAjB3AeTcIHTT1PRxLz8P63xwC7R0EsIJXhScIcc+PljGmqbbVJCjLsnaGYA==}
@@ -11391,8 +11384,6 @@ snapshots:
 
   '@esbuild/win32-x64@0.25.9':
     optional: true
-
-  '@eslint/js@9.39.2': {}
 
   '@figspec/components@1.0.3':
     dependencies:

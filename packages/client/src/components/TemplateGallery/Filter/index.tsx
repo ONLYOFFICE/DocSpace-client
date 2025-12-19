@@ -24,9 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { FC, useCallback } from "react";
+import { FC, useCallback, useState } from "react";
 import { ReactSVG } from "react-svg";
-
+import classNames from "classnames";
 import ViewTilesReactSvg from "PUBLIC_DIR/images/view-tiles.react.svg?url";
 import ViewChangeReactUrl from "PUBLIC_DIR/images/view-change.react.svg?url";
 
@@ -65,6 +65,7 @@ const FilterContent: FC<FilterContentProps> = (props) => {
   } = props;
 
   const isMobileView = useMobileDetection();
+  const [isLanguageFilterChange, setIsLanguageFilterChange] = useState(false);
 
   const handleViewToggle = useCallback(() => {
     setShowOneTile(!isShowOneTile);
@@ -82,6 +83,7 @@ const FilterContent: FC<FilterContentProps> = (props) => {
     languageFilterLoaded,
     isShowInitSkeleton,
     viewMobile: isMobileView,
+    isLanguageFilterChange,
   };
 
   const languageFilterProps = {
@@ -94,6 +96,8 @@ const FilterContent: FC<FilterContentProps> = (props) => {
     languageFilterLoaded,
     oformsLocal,
     viewMobile: isMobileView,
+    isLanguageFilterChange,
+    setIsLanguageFilterChange,
   };
 
   const searchFilterProps = {
@@ -103,6 +107,7 @@ const FilterContent: FC<FilterContentProps> = (props) => {
     isShowInitSkeleton,
     oformsFilter,
     filterOformsBySearch,
+    isLanguageFilterChange,
   };
 
   const sortFilterProps = {
@@ -112,20 +117,27 @@ const FilterContent: FC<FilterContentProps> = (props) => {
     isShowInitSkeleton,
     oformsFilter,
     sortOforms,
+    isLanguageFilterChange,
   };
 
   const renderViewToggleButton = () => {
     if (!isMobileView) return null;
 
     if (
-      isShowInitSkeleton ||
-      filterOformsByLocaleIsLoading ||
-      !(categoryFilterLoaded && languageFilterLoaded)
+      (isShowInitSkeleton ||
+        filterOformsByLocaleIsLoading ||
+        !(categoryFilterLoaded && languageFilterLoaded)) &&
+      !isLanguageFilterChange
     )
       return <RectangleSkeleton height="32px" width="32px" />;
 
     return (
-      <div className={styles.viewButton} onClick={handleViewToggle}>
+      <div
+        className={classNames(styles.viewButton, {
+          [styles.isDisabled]: isLanguageFilterChange,
+        })}
+        onClick={handleViewToggle}
+      >
         <ReactSVG
           src={isShowOneTile ? ViewTilesReactSvg : ViewChangeReactUrl}
           className={styles.iconView}

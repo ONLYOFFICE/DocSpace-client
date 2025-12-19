@@ -43,6 +43,7 @@ const CategoryFilterDesktop: React.FC<CategoryFilterDesktopProps> = ({
   currentCategory,
   getCategoryTitle,
   filterOformsByCategory,
+  isLanguageFilterChange,
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [hoveredSub, setHoveredSub] = useState<string | null>(null);
@@ -74,7 +75,7 @@ const CategoryFilterDesktop: React.FC<CategoryFilterDesktopProps> = ({
         onToggle={onOpenDropdown}
         onBackdropClick={onBackdropClick}
         onSelect={onCloseDropdown}
-        isDisabled={false}
+        isDisabled={isLanguageFilterChange}
         showDisabledItems
         options={[]}
         scaledOptions
@@ -84,8 +85,8 @@ const CategoryFilterDesktop: React.FC<CategoryFilterDesktopProps> = ({
         size="content"
         withoutBackground
         withBackdrop
-        disableIconClick={false}
-        disableItemClick={false}
+        disableIconClick={isLanguageFilterChange}
+        disableItemClick={isLanguageFilterChange}
         isDefaultMode={false}
         fixedDirection
         disableItemClickFirstLevel

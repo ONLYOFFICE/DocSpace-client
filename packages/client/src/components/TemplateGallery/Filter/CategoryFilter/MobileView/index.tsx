@@ -48,6 +48,7 @@ const CategoryFilterMobile: React.FC<CategoryFilterMobileProps> = ({
   getCategoryTitle,
   filterOformsByCategory,
   setOformsCurrentCategory,
+  isLanguageFilterChange,
 }) => {
   const scrollRef = useRef<CustomScrollbar>(null);
 
@@ -103,6 +104,7 @@ const CategoryFilterMobile: React.FC<CategoryFilterMobileProps> = ({
         scaled
         onClick={onToggleDropdown}
         tabIndex={1}
+        isDisabled={isLanguageFilterChange}
       />
 
       <DropDown

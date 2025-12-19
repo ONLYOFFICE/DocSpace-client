@@ -55,4 +55,5 @@ export type ComboboxProps = {
   usePortalBackdrop?: boolean;
   withBackdrop?: boolean;
   shouldShowBackdrop?: boolean;
+  isDisabled?: boolean;
 };

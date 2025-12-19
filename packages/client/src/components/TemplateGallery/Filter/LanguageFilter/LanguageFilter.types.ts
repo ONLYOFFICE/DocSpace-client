@@ -36,5 +36,7 @@ export interface LanguageFilterProps {
   oformsLocal: string;
   viewMobile: boolean;
   isShowInitSkeleton?: boolean;
+  isLanguageFilterChange: boolean;
+  setIsLanguageFilterChange: (isChange: boolean) => void;
   t: TFunction;
 }

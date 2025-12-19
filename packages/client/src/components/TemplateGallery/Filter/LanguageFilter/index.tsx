@@ -53,9 +53,12 @@ const LanguageFilter: FC<LanguageFilterProps> = ({
   oformsLocal,
   isShowInitSkeleton,
   viewMobile,
+  isLanguageFilterChange,
+  setIsLanguageFilterChange,
 }) => {
   const onFilterByLocale = async (newLocale: TCulture) => {
     if (typeof newLocale.index !== "number" || !oformLocales) return;
+    setIsLanguageFilterChange(true);
     const key = getOformLocaleByIndex(newLocale.index, oformLocales);
 
     await filterOformsByLocale(key);
@@ -72,10 +75,26 @@ const LanguageFilter: FC<LanguageFilterProps> = ({
     );
   }, [oformLocales, oformLocales?.length, setLanguageFilterLoaded]);
 
+  useEffect(() => {
+    if (!isLanguageFilterChange) return;
+    if (
+      categoryFilterLoaded &&
+      languageFilterLoaded &&
+      !filterOformsByLocaleIsLoading
+    )
+      setIsLanguageFilterChange(false);
+  }, [
+    filterOformsByLocaleIsLoading,
+    categoryFilterLoaded,
+    languageFilterLoaded,
+    isLanguageFilterChange,
+  ]);
+
   if (
-    isShowInitSkeleton ||
-    filterOformsByLocaleIsLoading ||
-    !(categoryFilterLoaded && languageFilterLoaded)
+    (isShowInitSkeleton ||
+      filterOformsByLocaleIsLoading ||
+      !(categoryFilterLoaded && languageFilterLoaded)) &&
+    !isLanguageFilterChange
   ) {
     return <RectangleSkeleton width="41px" height="32px" />;
   }
@@ -93,6 +112,7 @@ const LanguageFilter: FC<LanguageFilterProps> = ({
       withBackdrop={viewMobile}
       usePortalBackdrop={viewMobile}
       shouldShowBackdrop={viewMobile}
+      isDisabled={isLanguageFilterChange}
     />
   );
 };

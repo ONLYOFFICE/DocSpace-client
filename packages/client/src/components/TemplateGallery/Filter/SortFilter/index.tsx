@@ -46,6 +46,7 @@ const SortFilter: FC<SortFilterProps> = ({
   categoryFilterLoaded,
   languageFilterLoaded,
   isShowInitSkeleton,
+  isLanguageFilterChange,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const onToggleCombobox = () => setIsOpen(!isOpen);
@@ -76,9 +77,10 @@ const SortFilter: FC<SortFilterProps> = ({
   };
 
   if (
-    isShowInitSkeleton ||
-    filterOformsByLocaleIsLoading ||
-    !(categoryFilterLoaded && languageFilterLoaded)
+    (isShowInitSkeleton ||
+      filterOformsByLocaleIsLoading ||
+      !(categoryFilterLoaded && languageFilterLoaded)) &&
+    !isLanguageFilterChange
   )
     return <RectangleSkeleton height="32px" width="32px" />;
 
@@ -103,8 +105,9 @@ const SortFilter: FC<SortFilterProps> = ({
           onToggle={onToggleCombobox}
           className="sort-combo-box"
           scaled
-          disableIconClick={false}
-          disableItemClick
+          isDisabled={isLanguageFilterChange}
+          disableIconClick={isLanguageFilterChange}
+          disableItemClick={isLanguageFilterChange}
           isDefaultMode={false}
           manualY="102%"
           directionX="left"

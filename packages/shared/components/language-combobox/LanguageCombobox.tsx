@@ -48,6 +48,7 @@ const LanguageCombobox = (props: ComboboxProps) => {
     usePortalBackdrop = false,
     withBackdrop = false,
     shouldShowBackdrop = false,
+    isDisabled = false,
   } = props;
 
   const { i18n } = useTranslation(["Common"]);
@@ -87,7 +88,7 @@ const LanguageCombobox = (props: ComboboxProps) => {
       options={cultureNames}
       selectedOption={currentCulture}
       onSelect={onSelect}
-      isDisabled={false}
+      isDisabled={isDisabled}
       scaled={false}
       scaledOptions={false}
       size={ComboBoxSize.content}

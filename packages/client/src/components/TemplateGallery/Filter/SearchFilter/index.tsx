@@ -40,6 +40,7 @@ const SearchFilter: FC<SearchFilterProps> = ({
   categoryFilterLoaded,
   languageFilterLoaded,
   isShowInitSkeleton,
+  isLanguageFilterChange,
 }) => {
   const [value, setValue] = useState(oformsFilter.search);
   const onChangeValue = (val: string) => {
@@ -65,9 +66,10 @@ const SearchFilter: FC<SearchFilterProps> = ({
   }, [ref]);
 
   if (
-    isShowInitSkeleton ||
-    filterOformsByLocaleIsLoading ||
-    !(categoryFilterLoaded && languageFilterLoaded)
+    (isShowInitSkeleton ||
+      filterOformsByLocaleIsLoading ||
+      !(categoryFilterLoaded && languageFilterLoaded)) &&
+    !isLanguageFilterChange
   )
     return <RectangleSkeleton height="32px" />;
 
@@ -81,6 +83,7 @@ const SearchFilter: FC<SearchFilterProps> = ({
       onChange={onChangeValue}
       onClick={onInputClick}
       onClearSearch={onClear}
+      isDisabled={isLanguageFilterChange}
     />
   );
 };

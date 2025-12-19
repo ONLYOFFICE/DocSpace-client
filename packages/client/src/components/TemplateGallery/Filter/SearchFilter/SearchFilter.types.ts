@@ -35,4 +35,5 @@ export interface SearchFilterProps {
   categoryFilterLoaded: boolean;
   languageFilterLoaded: boolean;
   isShowInitSkeleton: boolean;
+  isLanguageFilterChange: boolean;
 }

@@ -50,6 +50,7 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
   languageFilterLoaded,
   isShowInitSkeleton,
   viewMobile,
+  isLanguageFilterChange,
 }) => {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
 
@@ -109,9 +110,10 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
   }, [menuItems.length, setCategoryFilterLoaded]);
 
   if (
-    isShowInitSkeleton ||
-    filterOformsByLocaleIsLoading ||
-    !(categoryFilterLoaded && languageFilterLoaded)
+    (isShowInitSkeleton ||
+      filterOformsByLocaleIsLoading ||
+      !(categoryFilterLoaded && languageFilterLoaded)) &&
+    !isLanguageFilterChange
   )
     return (
       <RectangleSkeleton
@@ -128,9 +130,15 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
       })}
     >
       {viewMobile ? (
-        <CategoryFilterMobile menuItems={menuItems} />
+        <CategoryFilterMobile
+          menuItems={menuItems}
+          isLanguageFilterChange={isLanguageFilterChange}
+        />
       ) : (
-        <CategoryFilterDesktop menuItems={menuItems} />
+        <CategoryFilterDesktop
+          menuItems={menuItems}
+          isLanguageFilterChange={isLanguageFilterChange}
+        />
       )}
     </div>
   );

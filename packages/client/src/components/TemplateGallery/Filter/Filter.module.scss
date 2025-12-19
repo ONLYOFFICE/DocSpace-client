@@ -63,6 +63,15 @@
       width: 16px;
       height: 16px;
     }
+
+    &.isDisabled {
+      border-color: var(--combobox-button-hover-disabled-border-color);
+      background: var(--combobox-button-disabled-bg);
+      cursor: default;
+      .iconView rect {
+        stroke: var(--combobox-children-button-disabled-color);
+      }
+    }
   }
 
   @include mixins.mobile {

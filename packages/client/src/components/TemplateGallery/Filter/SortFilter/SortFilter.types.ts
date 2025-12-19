@@ -35,6 +35,7 @@ export interface SortFilterProps {
   categoryFilterLoaded: boolean;
   languageFilterLoaded: boolean;
   isShowInitSkeleton: boolean;
+  isLanguageFilterChange: boolean;
 }
 
 export interface SortData {

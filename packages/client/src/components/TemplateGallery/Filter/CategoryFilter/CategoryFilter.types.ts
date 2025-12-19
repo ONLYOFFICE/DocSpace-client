@@ -57,6 +57,7 @@ export interface CategoryFilterProps {
   languageFilterLoaded: boolean;
   isShowInitSkeleton: boolean;
   viewMobile: boolean;
+  isLanguageFilterChange: boolean;
 }
 
 export interface CategoryFilterDesktopProps {
@@ -65,6 +66,7 @@ export interface CategoryFilterDesktopProps {
   currentCategory: Category | null;
   getCategoryTitle: (category: Category | null) => string;
   filterOformsByCategory: (categoryType: string, categoryId: string) => void;
+  isLanguageFilterChange: boolean;
 }
 
 export interface SubListProps {
@@ -87,6 +89,7 @@ export interface CategoryFilterMobileProps {
   getCategoryTitle: (category: Category | null) => string;
   filterOformsByCategory: (categoryType: string, categoryId: string) => void;
   setOformsCurrentCategory: (category: Category) => void;
+  isLanguageFilterChange: boolean;
 }
 
 export interface InjectedProps {

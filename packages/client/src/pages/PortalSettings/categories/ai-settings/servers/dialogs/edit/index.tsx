@@ -36,6 +36,7 @@ import { TServer, type TUpdateServer } from "@docspace/shared/api/ai/types";
 import { type TData, toastr } from "@docspace/shared/components/toast";
 import { Text } from "@docspace/shared/components/text";
 import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 
@@ -50,14 +51,14 @@ type EditDialogProps = {
   onClose: VoidFunction;
 
   updateMCP?: AISettingsStore["updateMCP"];
-  aiSettingsUrl?: string;
+  mcpServersSettingsUrl?: SettingsStore["mcpServersSettingsUrl"];
 };
 
 const EditMCPDialogComponent = ({
   server,
   onClose,
   updateMCP,
-  aiSettingsUrl,
+  mcpServersSettingsUrl,
 }: EditDialogProps) => {
   const { t } = useTranslation(["AISettings", "Common", "OAuth"]);
   const submitButtonRef = useRef<HTMLButtonElement>(null);
@@ -157,14 +158,14 @@ const EditMCPDialogComponent = ({
                 productName: t("Common:ProductName"),
               })}
             </Text>
-            {aiSettingsUrl ? (
+            {mcpServersSettingsUrl ? (
               <Link
                 className={styles.learnMoreLink}
                 target={LinkTarget.blank}
                 type={LinkType.page}
                 fontWeight={600}
                 isHovered
-                href={aiSettingsUrl}
+                href={mcpServersSettingsUrl}
                 color="accent"
               >
                 {t("Common:LearnMore")}
@@ -209,7 +210,7 @@ export const EditMCPDialog = inject(
   ({ aiSettingsStore, settingsStore }: TStore) => {
     return {
       updateMCP: aiSettingsStore.updateMCP,
-      aiSettingsUrl: settingsStore.aiSettingsUrl,
+      mcpServersSettingsUrl: settingsStore.mcpServersSettingsUrl,
     };
   },
 )(observer(EditMCPDialogComponent));

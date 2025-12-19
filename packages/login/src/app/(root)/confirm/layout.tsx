@@ -27,12 +27,12 @@
 import { headers } from "next/headers";
 
 import ConfirmRoute from "@/components/ConfirmRoute";
-import { StyledBody } from "@/components/Confirm.styled";
 import type { TConfirmLinkParams } from "@/types";
 import { checkConfirmLink, getSettings, getUser } from "@/utils/actions";
 import { ValidationResult } from "@/utils/enums";
 import { redirect } from "next/navigation";
 import { logger } from "logger.mjs";
+import styles from "./confirm.module.scss";
 
 export default async function Layout({
   children,
@@ -90,7 +90,7 @@ export default async function Layout({
   }
 
   return (
-    <StyledBody id="confirm-body">
+    <div id="confirm-body" className={styles.confirmBody}>
       <ConfirmRoute
         socketUrl={objectSettings?.socketUrl}
         confirmLinkResult={confirmLinkResult}
@@ -99,6 +99,6 @@ export default async function Layout({
       >
         {children}
       </ConfirmRoute>
-    </StyledBody>
+    </div>
   );
 }

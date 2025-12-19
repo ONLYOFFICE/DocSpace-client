@@ -139,7 +139,11 @@ import {
   HEADER_AI_DISABLED,
   HEADER_PLUGINS_SETTINGS,
 } from "../utils";
-import { PATH_DELETE_USER } from "./people/self";
+import {
+  PATH_DELETE_USER,
+  PATH_UPDATE_USER_CULTURE,
+  updateUserCultureHandler,
+} from "./people/self";
 import {
   aiConfigHandler,
   PATH_AI_CONFIG,
@@ -210,6 +214,14 @@ export const endpoints = {
   updateUser: {
     url: `${BASE_URL}${SELF_PATH_UPDATE_USER}`,
     dataHandler: selfHandler,
+  },
+  updateUserCultureAz: {
+    url: `${BASE_URL}${PATH_UPDATE_USER_CULTURE}`,
+    dataHandler: () => updateUserCultureHandler("az"),
+  },
+  updateUserCultureLv: {
+    url: `${BASE_URL}${PATH_UPDATE_USER_CULTURE}`,
+    dataHandler: () => updateUserCultureHandler("lv"),
   },
   removeUser: {
     url: `${BASE_URL}${SELF_PATH_DELETE_USER}`,
@@ -529,6 +541,32 @@ export const endpoints = {
   webPlugins: {
     url: `${BASE_URL}${PATH_WEB_PLUGINS}`,
     dataHandler: () => webPluginsHandler("empty"),
+    method: "GET",
+  },
+  webPluginsWithData: {
+    url: `${BASE_URL}${PATH_WEB_PLUGINS}`,
+    dataHandler: () => webPluginsHandler("withData"),
+    method: "GET",
+  },
+  webPluginsWithLocale: {
+    url: `${BASE_URL}${PATH_WEB_PLUGINS}`,
+    dataHandler: () => webPluginsHandler("withLocale"),
+    method: "GET",
+  },
+  webPluginsAdd: {
+    url: `${BASE_URL}${PATH_WEB_PLUGINS}`,
+    dataHandler: webPluginsAddHandler,
+    method: "POST",
+  },
+  webPluginsUpdate: {
+    url: `${BASE_URL}${PATH_WEB_PLUGINS}/*`,
+    dataHandler: webPluginsUpdateHandler,
+    method: "PUT",
+  },
+  webPluginsDelete: {
+    url: `${BASE_URL}${PATH_WEB_PLUGINS}/*`,
+    dataHandler: webPluginsDeleteHandler,
+    method: "DELETE",
   },
   thirdPartyCapabilities: {
     url: `${BASE_URL}${PATH_THIRD_PARTY_CAPABILITIES}`,
@@ -586,26 +624,6 @@ export const endpoints = {
       ),
   },
 
-  webPluginsWithData: {
-    url: `${BASE_URL}${PATH_WEB_PLUGINS}`,
-    dataHandler: webPluginsHandler.bind(null, "withData"),
-    method: "GET",
-  },
-  webPluginsAdd: {
-    url: `${BASE_URL}${PATH_WEB_PLUGINS}`,
-    dataHandler: webPluginsAddHandler,
-    method: "POST",
-  },
-  webPluginsUpdate: {
-    url: `${BASE_URL}${PATH_WEB_PLUGINS}/*`,
-    dataHandler: webPluginsUpdateHandler,
-    method: "PUT",
-  },
-  webPluginsDelete: {
-    url: `${BASE_URL}${PATH_WEB_PLUGINS}/*`,
-    dataHandler: webPluginsDeleteHandler,
-    method: "DELETE",
-  },
   recentEmpty: {
     url: PATH_RECENT,
     dataHandler: recentEmptyHandler,

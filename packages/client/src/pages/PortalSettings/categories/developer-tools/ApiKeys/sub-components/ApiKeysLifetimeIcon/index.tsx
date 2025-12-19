@@ -57,14 +57,16 @@ const StyledApiKeysLifetimeIcon = styled.div<{ isExpired: boolean }>`
 export const ApiKeysLifetimeIcon = ({
   t,
   item,
+  expiresAt,
   expiresAtDate,
 }: {
   t: TTranslation;
   item: TApiKey;
+  expiresAt: string;
   expiresAtDate: string;
 }) => {
-  const showLifetimeIcon = expiresAtDate;
-  const isExpired = moment().isAfter(moment(expiresAtDate));
+  const showLifetimeIcon = expiresAt;
+  const isExpired = moment().isAfter(moment(expiresAt));
 
   const getTooltipContent = () => (
     <Text fontSize="12px" fontWeight={400} noSelect>

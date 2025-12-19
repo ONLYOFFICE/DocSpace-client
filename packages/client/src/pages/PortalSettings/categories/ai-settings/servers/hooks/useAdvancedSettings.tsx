@@ -121,7 +121,9 @@ export const useAdvancedSettings = (
             isHovered
             data-testid="mcp-headers-block-toggle"
           >
-            {t(showAdvancedSettings ? "Common:Hide" : "SingleSignOn:Show")}
+            {t(
+              showAdvancedSettings ? "SingleSignOn:Hide" : "SingleSignOn:Show",
+            )}
           </Link>
         </div>
         {showAdvancedSettings ? (

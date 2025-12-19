@@ -94,6 +94,7 @@ export const AiProviderTile = ({
       >
         <ContextMenuButton
           directionX="right"
+          directionY="both"
           getData={getContextOptions}
           dropDownClassName={styles.aiContextMenuDropDown}
         />

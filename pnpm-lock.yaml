@@ -580,9 +580,6 @@ importers:
       sass:
         specifier: 1.79.5
         version: 1.79.5
-      styled-components:
-        specifier: 5.3.11
-        version: 5.3.11(@babel/core@7.25.8)(react-dom@19.2.0(react@19.2.0))(react-is@18.3.1)(react@19.2.0)
       ts-pattern:
         specifier: 5.5.0
         version: 5.5.0
@@ -623,12 +620,6 @@ importers:
       '@types/react-dom':
         specifier: 19.2.2
         version: 19.2.2(@types/react@19.2.2)
-      '@types/styled-components':
-        specifier: 5.1.34
-        version: 5.1.34
-      babel-plugin-styled-components:
-        specifier: 2.1.4
-        version: 2.1.4(@babel/core@7.25.8)(styled-components@5.3.11(@babel/core@7.25.8)(react-dom@19.2.0(react@19.2.0))(react-is@18.3.1)(react@19.2.0))(supports-color@5.5.0)
       cross-env:
         specifier: ^7.0.3
         version: 7.0.3

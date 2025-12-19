@@ -28,19 +28,19 @@
 
 import React, { useCallback, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
 import { sendRegisterRequest } from "@docspace/shared/api/settings";
+import { useTheme } from "@docspace/shared/hooks/useTheme";
 
 import { RegisterProps } from "@/types";
 
 import { LoginDispatchContext } from "../Login";
 
 import RegisterModalDialog from "./sub-components/RegisterModalDialog";
-import { StyledRegister } from "./Register.styled";
+import styles from "./register.module.scss";
 
 const Register = (props: RegisterProps) => {
   const {
@@ -62,7 +62,7 @@ const Register = (props: RegisterProps) => {
   const [errorText, setErrorText] = useState("");
   const [isShowError, setIsShowError] = useState(false);
 
-  const theme = useTheme();
+  const { currentColorScheme } = useTheme();
 
   const { t } = useTranslation("Login");
 
@@ -127,15 +127,19 @@ const Register = (props: RegisterProps) => {
 
   return enabledJoin && !isAuthenticated ? (
     <>
-      <StyledRegister id={id} onClick={onRegisterClick}>
+      <div
+        id={id}
+        className={styles.registerContainer}
+        onClick={onRegisterClick}
+      >
         <Text
           as="span"
-          color={theme.currentColorScheme?.main?.accent}
+          color={currentColorScheme?.main?.accent}
           lineHeight="20px"
         >
           {t("Register")}
         </Text>
-      </StyledRegister>
+      </div>
 
       {visible ? (
         <RegisterModalDialog

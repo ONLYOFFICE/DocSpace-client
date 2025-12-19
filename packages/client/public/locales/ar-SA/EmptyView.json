@@ -16,7 +16,6 @@
   "CreateSpreadsheetDescription": "إجراء حسابات دقيقة بأقل جهد.",
   "CustomRoomEmptyTitle": "مرحبًا بك في الغرفة المخصصة",
   "DefaultFolderDescription": "قم بإسقاط الملفات هنا أو إنشاء ملفات جديدة.",
-  "EmptyAIAgentsAIDisabledDescription": "يسمح هذا القسم للمستخدمين بالعمل مع وكلاء الذكاء الاصطناعي - المساعدين الأذكياء للتعامل مع المستندات والمهام الأخرى. \nلبدء استخدامهم، يجب تمكين خدمة ميزات الذكاء الاصطناعي من قبل مسؤول {{productName}} الخاص بكم.",
   "EmptyAIAgentsAIDisabledSaasAdminDescription": "لإنشاء واستخدام وكلاء الذكاء الاصطناعي، قوموا بتوصيل محفظتكم وتمكين خدمة ميزات الذكاء الاصطناعي في إعدادات {{productName}}. بمجرد الانتهاء من ذلك، ستتمكنون من العمل مع وكلاء الذكاء الاصطناعي والتعاون مع فريقكم.",
   "EmptyAIAgentsAIDisabledSaasAdminTitle": "قوموا بتوصيل محفظتكم وتمكين ميزات الذكاء الاصطناعي",
   "EmptyAIAgentsAIDisabledUserTitle": "وكلاء الذكاء الاصطناعي غير متاحين بعد",

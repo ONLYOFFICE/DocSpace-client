@@ -16,7 +16,6 @@
   "CreateSpreadsheetDescription": "Minimum səylə dəqiq hesablamalar aparın.",
   "CustomRoomEmptyTitle": "Şəxsi otağa xoş gəlmisiniz",
   "DefaultFolderDescription": "Faylları bura atın və ya yenilərini yaradın.",
-  "EmptyAIAgentsAIDisabledDescription": "Bu bölmə istifadəçilərə sənədləri və digər tapşırıqları idarə etmək üçün ağıllı köməkçilər olan süni intellekt agentləri ilə işləməyə imkan verir. Onlardan istifadə etməyə başlamaq üçün süni intellekt xüsusiyyətləri xidməti {{productName}} admininiz tərəfindən aktivləşdirilməlidir.",
   "EmptyAIAgentsAIDisabledSaasAdminDescription": "Süni intellekt agentləri yaratmaq və istifadə etmək üçün cüzdanınızı qoşun və {{productName}} parametrlərində süni intellekt xüsusiyyətləri xidmətini aktivləşdirin. Bu iş bitdikdən sonra süni intellekt agentləri ilə işləyə və komandanızla əməkdaşlıq edə biləcəksiniz.",
   "EmptyAIAgentsAIDisabledSaasAdminTitle": "Cüzdanınızı qoşun və süni intellekt xüsusiyyətlərini aktivləşdirin",
   "EmptyAIAgentsAIDisabledUserTitle": "Süni intellekt agentləri hələ mövcud deyil.",

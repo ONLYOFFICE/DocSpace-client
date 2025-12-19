@@ -16,7 +16,6 @@
   "CreateSpreadsheetDescription": "Realize cálculos precisos com o mínimo de esforço.",
   "CustomRoomEmptyTitle": "Bem-vindo à sala personalizada",
   "DefaultFolderDescription": "Solte arquivos aqui ou crie novos.",
-  "EmptyAIAgentsAIDisabledDescription": "Esta seção permite que os usuários trabalhem com agentes de IA — assistentes inteligentes para lidar com documentos e outras tarefas.\nPara começar a usá-los, o serviço de recursos de IA deve ser ativado pelo administrador do seu {{productName}}.",
   "EmptyAIAgentsAIDisabledSaasAdminDescription": "Para criar e usar agentes de IA, conecte sua carteira e ative o serviço de recursos de IA nas configurações do {{productName}}. Uma vez que isso for feito, você poderá trabalhar com agentes de IA e colaborar com sua equipe.",
   "EmptyAIAgentsAIDisabledSaasAdminTitle": "Conecte sua carteira e ative os recursos de IA",
   "EmptyAIAgentsAIDisabledUserTitle": "Agentes de IA ainda não estão disponíveis.",

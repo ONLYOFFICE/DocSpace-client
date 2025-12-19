@@ -16,7 +16,6 @@
   "CreateSpreadsheetDescription": "Suorita tarkat laskelmat vähällä vaivalla.",
   "CustomRoomEmptyTitle": "Tervetuloa Custom-huoneeseen",
   "DefaultFolderDescription": "Raahaa tiedostot tähän tai luo uusia.",
-  "EmptyAIAgentsAIDisabledDescription": "Tämä osio mahdollistaa käyttäjien työn AI-agenttien kanssa – älykkäiden avustajien, jotka auttavat dokumenttien ja muiden tehtävien käsittelyssä.\nAloittaaksesi niiden käytön, AI-ominaisuuksien palvelu on otettava käyttöön {{productName}}-järjestelmänvalvojan toimesta.",
   "EmptyAIAgentsAIDisabledSaasAdminDescription": "Luodaksesi ja käyttääksesi AI-agentteja, yhdistä lompakkosi ja ota AI-ominaisuuksien palvelu käyttöön {{productName}}-asetuksissa. Kun se on tehty, voit aloittaa AI-agenttien kanssa työskentelyn ja tehdä yhteistyötä tiimisi kanssa.",
   "EmptyAIAgentsAIDisabledSaasAdminTitle": "Yhdistä lompakkosi ja ota käyttöön tekoälyominaisuudet",
   "EmptyAIAgentsAIDisabledUserTitle": "AI-agentteja ei ole vielä saatavilla",

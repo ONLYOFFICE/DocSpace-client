@@ -16,7 +16,6 @@
   "CreateSpreadsheetDescription": "Effectuez des calculs précis avec un minimum d'effort.",
   "CustomRoomEmptyTitle": "Bienvenue dans la salle personnalisée",
   "DefaultFolderDescription": "Déposez des fichiers ici ou créez-en de nouveaux.",
-  "EmptyAIAgentsAIDisabledDescription": "Cette section permet aux utilisateurs de travailler avec des agents IA, des assistants intelligents destinés à la gestion de documents et à d'autres tâches. Pour commencer à les utiliser, le service de fonctionnalités IA doit être activé par votre administrateur {{productName}}.",
   "EmptyAIAgentsAIDisabledSaasAdminDescription": "Pour créer et utiliser des agents IA, connectez votre wallet et activez le service de fonctionnalités IA dans les paramètres {{productName}}. Une fois cette opération effectuée, vous pourrez travailler avec des agents IA et collaborer avec votre équipe.",
   "EmptyAIAgentsAIDisabledSaasAdminTitle": "Connectez votre wallet et activez les fonctionnalités IA",
   "EmptyAIAgentsAIDisabledUserTitle": "Les agents IA ne sont pas encore disponibles",

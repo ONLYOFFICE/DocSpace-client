@@ -16,7 +16,6 @@
   "CreateSpreadsheetDescription": "Kryni llogaritjet e sakta me përpjekje minimale.",
   "CustomRoomEmptyTitle": "Mirë se vini në dhomën e personalizimit",
   "DefaultFolderDescription": "Hidhni skedarët këtu ose krijoni të rinj.",
-  "EmptyAIAgentsAIDisabledDescription": "Ky seksion u lejon përdoruesve të punojnë me agjentë të IA-së — asistentë inteligjentë për trajtimin e dokumenteve dhe detyrave të tjera.\n\nPër të filluar përdorimin e tyre, shërbimi i veçorive të IA-së duhet të aktivizohet nga administratori juaj i {{productName}}.",
   "EmptyAIAgentsAIDisabledSaasAdminDescription": "Për të krijuar dhe përdorur agjentë të IA-së, lidhni portofolin tuaj dhe aktivizoni shërbimin e veçorive të IA-së në cilësimet e {{productName}}. Pasi të keni mbaruar, do të jeni në gjendje të punoni me agjentë të IA-së dhe të bashkëpunoni me ekipin tuaj.",
   "EmptyAIAgentsAIDisabledSaasAdminTitle": "Lidh portofolin tënd dhe aktivizo veçoritë e inteligjencës artificiale",
   "EmptyAIAgentsAIDisabledUserTitle": "Agjentët e inteligjencës artificiale nuk janë ende të disponueshëm",

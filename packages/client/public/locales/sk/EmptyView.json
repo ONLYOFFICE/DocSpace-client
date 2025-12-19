@@ -16,7 +16,6 @@
   "CreateSpreadsheetDescription": "Vykonávajte presné výpočty s minimálnym úsilím.",
   "CustomRoomEmptyTitle": "Vitajte vo Vlastnej miestnosti",
   "DefaultFolderDescription": "Vložte sem súbory alebo vytvorte nové.",
-  "EmptyAIAgentsAIDisabledDescription": "Táto sekcia umožňuje používateľom pracovať s AI agentmi – inteligentnými asistentmi na spracovanie dokumentov a iných úloh.\nNa začatie používania je potrebné, aby služba AI funkcií aktivovala administrátor {{productName}}.",
   "EmptyAIAgentsAIDisabledSaasAdminDescription": "Na vytvorenie a používanie AI agentov pripojte svoju peňaženku a povoľte službu AI funkcií v nastaveniach {{productName}}. Po dokončení budete môcť pracovať s AI agentmi a spolupracovať so svojím tímom.",
   "EmptyAIAgentsAIDisabledSaasAdminTitle": "Pripojte peňaženku a povoľte funkcie AI",
   "EmptyAIAgentsAIDisabledUserTitle": "AI agenti ešte nie sú k dispozícii.",

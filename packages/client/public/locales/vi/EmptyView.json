@@ -16,7 +16,6 @@
   "CreateSpreadsheetDescription": "Thực hiện các phép tính chính xác với nỗ lực tối thiểu.",
   "CustomRoomEmptyTitle": "Chào mừng bạn đến với Phòng Tùy chỉnh",
   "DefaultFolderDescription": "Thả tập tin vào đây hoặc tạo tập tin mới.",
-  "EmptyAIAgentsAIDisabledDescription": "Phần này cho phép người dùng làm việc với các tác nhân AI — các trợ lý thông minh để xử lý tài liệu và các tác vụ khác.\nĐể bắt đầu sử dụng chúng, dịch vụ tính năng AI phải được bật bởi quản trị viên {{productName}} của bạn.",
   "EmptyAIAgentsAIDisabledSaasAdminDescription": "Để tạo và sử dụng các tác nhân AI, hãy kết nối ví của bạn và bật dịch vụ tính năng AI trong cài đặt {{productName}}. Khi hoàn tất, bạn sẽ có thể làm việc với các tác nhân AI và cộng tác với nhóm của mình.",
   "EmptyAIAgentsAIDisabledSaasAdminTitle": "Kết nối ví của bạn và bật các tính năng AI",
   "EmptyAIAgentsAIDisabledUserTitle": "Các tác nhân AI hiện chưa khả dụng.",

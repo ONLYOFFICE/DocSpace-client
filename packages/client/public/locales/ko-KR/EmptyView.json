@@ -16,7 +16,6 @@
   "CreateSpreadsheetDescription": "최소한의 노력으로 정확한 계산을 수행하세요.",
   "CustomRoomEmptyTitle": "커스텀 룸에 오신 것을 환영합니다",
   "DefaultFolderDescription": "여기에 파일을 드롭하거나 새 파일을 만드세요.",
-  "EmptyAIAgentsAIDisabledDescription": "이 섹션에서는 사용자가 AI 에이전트와 함께 작업할 수 있습니다 — 문서 및 기타 작업을 처리하는 스마트 어시스턴트입니다.\nAI 기능 서비스를 사용하려면 {{productName}} 관리자가 활성화해야 합니다.",
   "EmptyAIAgentsAIDisabledSaasAdminDescription": "AI 에이전트 생성 및 사용을 위해서는 {{productName}} 설정에서 지갑을 연결하고 AI 기능 서비스 활성화를 해주세요. 완료되면 AI 에이전트와 함께 작업하고 팀과 협업할 수 있습니다.",
   "EmptyAIAgentsAIDisabledSaasAdminTitle": "지갑을 연결하고 AI 기능을 활성화하세요.",
   "EmptyAIAgentsAIDisabledUserTitle": "AI 에이전트는 아직 사용 가능하지 않습니다.",

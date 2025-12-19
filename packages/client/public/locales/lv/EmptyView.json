@@ -16,7 +16,6 @@
   "CreateSpreadsheetDescription": "Veiciet precīzus aprēķinus ar minimālu piepūli.",
   "CustomRoomEmptyTitle": "Laipni lūdzam pielāgotajā telpā",
   "DefaultFolderDescription": "Nometiet failus šeit vai izveidojiet jaunus.",
-  "EmptyAIAgentsAIDisabledDescription": "Šis attāls nodrošina lietotājiem iespēju strādāt ar MI aģentiem — viediem palīgiem dokumentu un citu uzdevumu veikšanai.\nLai sāktu tos lietot, MI funkciju pakalpojums jāaktivizē jūsu {{productName}} administrators.",
   "EmptyAIAgentsAIDisabledSaasAdminDescription": "Lai izveidotu un izmantotu MI aģentus, pievienojiet savu maku un iespējojiet MI funkciju pakalpojumu {{productName}} iestatējumos. Kad tas būs izdarīts, jūs varēsit strādāt ar MI aģentiem un sadarboties ar savu komandu.",
   "EmptyAIAgentsAIDisabledSaasAdminTitle": "Pievienojiet savu maku un iespējojiet MI funkcijas",
   "EmptyAIAgentsAIDisabledUserTitle": "MI aģenti vēl nav pieejami",

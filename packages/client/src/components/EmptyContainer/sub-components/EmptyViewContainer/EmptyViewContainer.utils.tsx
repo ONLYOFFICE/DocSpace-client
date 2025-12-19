@@ -221,6 +221,7 @@ const getAIAgentsAIDisabledDescription = (
     .otherwise(() =>
       t("EmptyView:EmptyAIAgentsAIDisabledDescription", {
         productName: t("Common:ProductName"),
+        aiAgents: t("Common:AIAgents"),
       }),
     );
 };

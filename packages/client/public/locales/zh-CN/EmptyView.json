@@ -16,7 +16,6 @@
   "CreateSpreadsheetDescription": "精确计算，易如反掌。",
   "CustomRoomEmptyTitle": "欢迎来到自定义房间",
   "DefaultFolderDescription": "将文件拖放到此处或创建新文件。",
-  "EmptyAIAgentsAIDisabledDescription": "本部分允许用户使用 AI 智能体——处理文档和其他任务的智能助手。\n要开始使用，必须由您的{{productName}}管理员启用 AI 功能服务。",
   "EmptyAIAgentsAIDisabledSaasAdminDescription": "要创建和使用 AI 智能体，请连接您的钱包并在{{productName}}设置中启用 AI 功能服务。完成后，您将能够使用 AI 智能体并与团队协作。",
   "EmptyAIAgentsAIDisabledSaasAdminTitle": "连接钱包并启用 AI 功能",
   "EmptyAIAgentsAIDisabledUserTitle": "AI 智能体尚不可用",

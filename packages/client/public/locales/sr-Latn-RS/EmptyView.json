@@ -16,7 +16,6 @@
   "CreateSpreadsheetDescription": "Obavljajte precizne kalkulacije uz minimalan trud.",
   "CustomRoomEmptyTitle": "Dobrodošli na Prilagođenu prostoriju",
   "DefaultFolderDescription": "Povucite fajlove ovde ili kreirajte nove.",
-  "EmptyAIAgentsAIDisabledDescription": "Ovaj odeljak omogućava korisnicima da rade sa AI agentima — pametnim pomoćnicima za rukovanje dokumentima i drugim zadacima. \nDa biste počeli da ih koristite, vaš {{productName}} administrator mora da omogući uslugu AI funkcija.",
   "EmptyAIAgentsAIDisabledSaasAdminDescription": "Da biste kreirali i koristili AI agente, povežite novčanik i omogućite uslugu AI funkcija u podešavanjima {{productName}}. Kada se to završi, moći ćete da radite sa AI agentima i sarađujete sa svojim timom.",
   "EmptyAIAgentsAIDisabledSaasAdminTitle": "Povežite svoj novčanik i omogućite AI funkcije",
   "EmptyAIAgentsAIDisabledUserTitle": "Još nema dostupnih AI agenata",

@@ -33,7 +33,7 @@ import { MobileCategoryWrapper } from "@docspace/shared/components/mobile-catego
 import { StyledBaseQuotaComponent } from "../StyledComponent";
 
 const MobileQuotasComponent = ({ isDisabled }) => {
-  const { t } = useTranslation("Settings");
+  const { t } = useTranslation(["Settings", "Common"]);
   const navigate = useNavigate();
 
   const onClickLink = (e) => {
@@ -63,7 +63,9 @@ const MobileQuotasComponent = ({ isDisabled }) => {
         isDisabled={isDisabled}
       />
       <MobileCategoryWrapper
-        title={t("QuotaPerAIAgent")}
+        title={t("QuotaPerAIAgent", {
+          aiAgent: t("Common:AIAgent"),
+        })}
         onClickLink={onClickLink}
         url="/portal-settings/management/disk-space/quota-per-ai-agent"
         subtitle={t("SetDefaultAIAgentQuota", {

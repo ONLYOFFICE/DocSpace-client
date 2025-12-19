@@ -50,9 +50,11 @@ const QuotaPerAIAgentComponent = (props: QuotaPerAIAgentComponentProps) => {
   return (
     <QuotaPerItemComponent
       type="agent"
-      formLabel={t("QuotaPerAIAgent")}
+      formLabel={t("QuotaPerAIAgent", {
+        aiAgent: t("Common:AIAgent"),
+      })}
       toggleLabel={t("DefineQuotaPerAIAgent", {
-        aiAgent: t("Common:AI_Agent"),
+        aiAgent: t("Common:AIAgent"),
       })}
       disableQuota={disableQuota}
       saveQuota={saveQuota}

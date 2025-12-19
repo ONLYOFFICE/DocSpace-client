@@ -198,7 +198,7 @@
   "PreviewTooltipDescription": "Preview the interface with the selected color applied",
   "ProjectsDescription": "Each project is imported as a room, which will contain all the documents and users of this project. The project manager will become the owner of the room",
   "ProvideChoice": "Provide a choice (web or app)",
-  "QuotaPerAIAgent": "Quota per AI agent",
+  "QuotaPerAIAgent": "Quota per {{aiAgent}}",
   "QuotaPerRoom": "Quota per room",
   "QuotaPerUser": "Quota per user",
   "Quotas": "Quotas",

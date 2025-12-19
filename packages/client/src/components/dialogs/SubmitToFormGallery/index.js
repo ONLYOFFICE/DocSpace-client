@@ -116,9 +116,13 @@ const SubmitToFormGallery = ({
     )
       .then((res) => {
         if (!res.data) throw new Error(res.statusText);
+        toastr.success(t("Common:Done"));
         window.location.replace(res.data);
       })
-      .catch((err) => onError(err))
+      .catch(() => {
+        toastr.error(t("Common:SomethingWentWrong"));
+        onClose();
+      })
       .finally(() => onClose());
   };
 

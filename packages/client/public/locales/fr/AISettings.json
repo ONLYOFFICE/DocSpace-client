@@ -20,7 +20,6 @@
   "KnowledgeDisabledSuccess": "Base de connaissances désactivée avec succès",
   "KnowledgeEnabledSuccess": "Base de connaissances activée avec succès",
   "KnowledgeKeyDescription": "Saisissez la clé API obtenue auprès de votre fournisseur de base de connaissances",
-  "KnowledgeSettingsDescription": "Activez une base de connaissances pour les agents IA. Le système indexera vos documents à l'aide du modèle {{modelName}} pour prendre en charge la recherche par questions dans vos données. Cette fonctionnalité se concentre sur la recherche d'informations pertinentes mais ne génère pas de résumés ni n'effectue d'analyse globale.",
   "MCPServerAdvancedSettingsHint": "Utilisez cette section pour transmettre des en-têtes HTTP supplémentaires, comme les jetons d'autorisation.",
   "MCPServerDescriptionHint": "Rédigez une brève explication de l'objectif de l'intégration",
   "Provider": "Fournisseur",

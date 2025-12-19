@@ -20,7 +20,6 @@
   "KnowledgeDisabledSuccess": "Znanje je bilo uspešno onemogočeno.",
   "KnowledgeEnabledSuccess": "Znanje je bilo uspešno omogočeno",
   "KnowledgeKeyDescription": "Vnesite ključ API, pridobljen od ponudnika vaše baze znanja.",
-  "KnowledgeSettingsDescription": "Omogočite bazo znanja za umetne agente. Sistem bo indeksiral vaše dokumente z uporabo modela {{modelName}} za podporo iskanju na podlagi vprašanj v vaših podatkih. Ta funkcija se osredotoča na iskanje relevantnih informacij, vendar ne ustvarja povzetkov ali izvaja globalno analizo.",
   "MCPServerAdvancedSettingsHint": "Uporabite ta razdelek za pošiljanje dodatnih HTTP glavic, kot so avtorizacijski žetoni.",
   "MCPServerDescriptionHint": "Napišite kratek opis namena integracije.",
   "Provider": "Ponudnik",

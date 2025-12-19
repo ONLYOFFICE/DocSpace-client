@@ -20,7 +20,6 @@
   "KnowledgeDisabledSuccess": "Knowledge Base disattivata con successo",
   "KnowledgeEnabledSuccess": "Knowledge Base disattivata con successo",
   "KnowledgeKeyDescription": "Inserisci la chiave API ottenuta dal tuo provider di knowledge base",
-  "KnowledgeSettingsDescription": "Abilita una knowledge base per gli agenti AI. Il sistema indicizzerà i tuoi documenti usando il modello {{modelName}} per supportare la ricerca basata su domande sui tuoi dati. Questa funzione si concentra sul trovare informazioni rilevanti ma non genera riepiloghi né esegue analisi globali.",
   "MCPServerAdvancedSettingsHint": "Usa questa sezione per inviare intestazioni HTTP aggiuntive, come token di autorizzazione.",
   "MCPServerDescriptionHint": "Scrivi una breve spiegazione dello scopo dell’integrazione",
   "Provider": "Fornitore",

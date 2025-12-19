@@ -20,7 +20,6 @@
   "KnowledgeDisabledSuccess": "Pamatņu bāze veiksmīgi atspējota",
   "KnowledgeEnabledSuccess": "Zināšanu bāze veiksmīgi aktivizēta",
   "KnowledgeKeyDescription": "Ievadiet API atslēgu, kas iegūta no jūsu zināšanu bāzes pakalpojuma sniedzēja.",
-  "KnowledgeSettingsDescription": "Iespējojiet zināšanu bāzi MI aģentiem. Sistēma indeksēs jūsu dokumentus, izmantojot {{modelName}} modeli, lai atbalstītu jautājumu balstītu meklēšanu caur jūsu datiem. Šī funkcija koncentrējas uz atbilstošas informācijas atrašanu, bet neģenerē kopsavilkumus vai neveic globālu analīzi.",
   "MCPServerAdvancedSettingsHint": "Izmantojiet šo sadaļu, lai nodotu papildu HTTP galvenes, piemēram, autorizācijas žetonus.",
   "MCPServerDescriptionHint": "Rakstiet īsu skaidrojumu par integrācijas mērķi.",
   "Provider": "Pārskatītājs",

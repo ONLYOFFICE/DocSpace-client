@@ -257,6 +257,7 @@ const KnowledgeComponent = ({
         <Text className={generalStyles.description}>
           {t("AISettings:KnowledgeSettingsDescription", {
             modelName: aiConfig?.embeddingModel || "text-embedding-3-small",
+            aiAgents: t("Common:AIAgents"),
           })}
         </Text>
         {aiSettingsUrl ? (

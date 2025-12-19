@@ -14,7 +14,6 @@
   "KnowledgeSelectIn": "在{{productName}}中选择",
   "KnowledgeUnavailable": "知识库不可用",
   "MCP": "此房间的 MCP 工具",
-  "NoAccessAIAgentTitle": "抱歉，您无权访问此 AI 智能体",
   "ResponseQualityNode": "<1>注意：</1> 响应质量可能因模型而异；建议使用较新的模型以获得最佳效果。",
   "ResultStorage": "结果存储",
   "UploadFilesDevice": "从个人设备上传文件",

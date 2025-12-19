@@ -14,7 +14,6 @@
   "KnowledgeSelectIn": "Valitse {{productName}}",
   "KnowledgeUnavailable": "Tietokanta ei ole käytettävissä",
   "MCP": "MCP työkalut tähän huoneeseen",
-  "NoAccessAIAgentTitle": "Olen pahoillani, sinulla ei ole käyttöoikeutta tähän tekoälyavustajaan.",
   "ResponseQualityNode": "<1>Huomautus:</1> Vastausten laatu voi vaihdella mallista riippuen; parempien tulosten saavuttamiseksi suositellaan uusia malleja.",
   "ResultStorage": "Tulosten tallennus",
   "UploadFilesDevice": "Lataa tiedostoja henkilökohtaiselta laitteeltasi",

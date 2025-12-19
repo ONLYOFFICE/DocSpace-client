@@ -14,7 +14,6 @@
   "KnowledgeSelectIn": "{{productName}}で選択",
   "KnowledgeUnavailable": "知識ベースをご利用いただけません",
   "MCP": "このルーム用のMCPツール",
-  "NoAccessAIAgentTitle": "申し訳ありませんが、このAIエージェントにはアクセスできません",
   "ResponseQualityNode": "<1>注:</1> モデルによって応答品質は異なります。最新のモデルを使用すると最良の結果が得られます。",
   "ResultStorage": "結果ストレージ",
   "UploadFilesDevice": "個人用デバイスからファイルをアップロードする",

@@ -14,7 +14,6 @@
   "KnowledgeSelectIn": "Vybrat v {{productName}}",
   "KnowledgeUnavailable": "Znalostní báze nedostupná",
   "MCP": "MCP nástroje pro tuto místnost",
-  "NoAccessAIAgentTitle": "Omlouvám se, nemáte přístup k tomuto AI agentovi.",
   "ResponseQualityNode": "<1>Poznámka:</1> Kvalita odpovědí se může lišit v závislosti na modelu; pro nejlepší výsledky se doporučují novější modely.",
   "ResultStorage": "Úložiště výsledků",
   "UploadFilesDevice": "Nahrajte soubory z vašeho osobního zařízení.",

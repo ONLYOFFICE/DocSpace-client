@@ -23,7 +23,7 @@
   "MCPDescriptionServers": "Use {{mcpServers}} connected by the administrator to enhance chat experience with AI. {{mcpServers}} can assist with data extraction, summaries, smart suggestions, etc.",
   "Model": "{{aiProvider}} and model",
   "ModelDescription": "Select the {{aiProvider}} and model to be used in this room’s chats. This setting is mandatory and applies to all participants.",
-  "NoAccessAIAgentTitle": "Sorry, you don't have access to this AI agent",
+  "NoAccessAIAgentTitle": "Sorry, you don't have access to this {{aiAgent}}",
   "ResponseQualityNode": "<1>Note:</1> Response quality may vary by model; newer models are recommended for best results.",
   "ResultStorage": "Result Storage",
   "UploadFilesDevice": "Upload files from your personal device",

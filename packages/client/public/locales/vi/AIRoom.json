@@ -14,7 +14,6 @@
   "KnowledgeSelectIn": "Chọn trong {{productName}}",
   "KnowledgeUnavailable": "Cơ sở kiến thức không khả dụng",
   "MCP": "Công cụ MCP cho phòng này",
-  "NoAccessAIAgentTitle": "Xin lỗi, bạn không có quyền truy cập vào trợ lý AI này.",
   "ResponseQualityNode": "<1>Lưu ý:</1> Chất lượng phản hồi có thể khác nhau tùy theo mô hình; nên sử dụng các mô hình mới hơn để có kết quả tốt nhất.",
   "ResultStorage": "Lưu trữ kết quả",
   "UploadFilesDevice": "Tải lên tệp từ thiết bị cá nhân của bạn.",

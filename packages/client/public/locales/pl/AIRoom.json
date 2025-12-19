@@ -14,7 +14,6 @@
   "KnowledgeSelectIn": "Wybierz w {{productName}}",
   "KnowledgeUnavailable": "Baza wiedzy niedostępna",
   "MCP": "Narzędzia MCP do tego pomieszczenia",
-  "NoAccessAIAgentTitle": "Przepraszamy, nie masz dostępu do tego agenta AI.",
   "ResponseQualityNode": "<1>Uwaga:</1> Jakość odpowiedzi może się różnić w zależności od modelu; zaleca się używanie nowszych modeli, aby uzyskać najlepsze wyniki.",
   "ResultStorage": "Przechowywanie wyników",
   "UploadFilesDevice": "Wgraj pliki z urządzenia osobistego.",

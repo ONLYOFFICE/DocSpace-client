@@ -182,7 +182,9 @@ export const getRoomDescription = (
 const getAIAgentsAIEnabledTitle = (t: TTranslation, access: AccessType) => {
   return isUser(access)
     ? t("EmptyView:EmptyAIAgentsUserTitle")
-    : t("EmptyView:EmptyAIAgentsTitle");
+    : t("EmptyView:EmptyAIAgentsTitle", {
+        aiAgent: t("Common:AIAgent"),
+      });
 };
 
 const getAIAgentsAIDisabledTitle = (

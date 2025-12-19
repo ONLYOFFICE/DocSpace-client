@@ -23,7 +23,7 @@
   "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}} are not available yet",
   "EmptyAIAgentsAIEnabledUserDescription": "Once your team invites you to collaborate, {{aiAgents}} will appear here, ready to assist with documents, knowledge management, and everyday tasks.",
   "EmptyAIAgentsDescription": "Set up a personalized assistant for your team by adding a knowledge base, selecting the ideal model, and connecting an {{mcpServer}}. Invite your colleagues to collaborate and make the most of the agent’s chat capabilities.",
-  "EmptyAIAgentsTitle": "Create your AI agent",
+  "EmptyAIAgentsTitle": "Create your {{aiAgent}}",
   "EmptyAIAgentsUserTitle": "No AI agents available yet",
   "EmptyDescription": "Get started with quick actions:",
   "EmptyFavoritesDescription": "Star files and folders to keep them easily accessible and within reach.",

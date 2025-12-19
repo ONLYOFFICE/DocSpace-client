@@ -56,6 +56,9 @@
 
     :global(.scroll-body) > div {
       justify-content: center;
+      padding: 0 20px;
+      width: fit-content;
+      min-width: 100%;
     }
   }
 }

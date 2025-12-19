@@ -236,7 +236,9 @@ const getAIAgentsAIEnabledDescription = (
   access: AccessType,
 ) => {
   return isUser(access)
-    ? t("EmptyView:EmptyAIAgentsAIEnabledUserDescription")
+    ? t("EmptyView:EmptyAIAgentsAIEnabledUserDescription", {
+        aiAgents: t("Common:AIAgents"),
+      })
     : t("EmptyView:EmptyAIAgentsDescription", {
         mcpServer: t("Common:MCPServer"),
       });

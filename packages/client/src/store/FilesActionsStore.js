@@ -1417,7 +1417,9 @@ class FilesActionStore {
       notificationsDisabled = t("AIAgentNotificationsDisabled", {
         aiAgent: t("Common:AIAgent"),
       });
-      notificationsEnabled = t("AIAgentNotificationsEnabled");
+      notificationsEnabled = t("AIAgentNotificationsEnabled", {
+        aiAgent: t("Common:AIAgent"),
+      });
     }
 
     muteRoomNotification(id, muteStatus)

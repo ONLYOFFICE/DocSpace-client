@@ -14,7 +14,6 @@
   "AfterFilesWillBeDeletedPermanently": "뒤의 파일은 영구적으로 삭제됩니다.",
   "AgentRemoved": "에이전트 제거됨",
   "AgentsRemoved": "에이전트 제거 완료",
-  "AIAgentNotificationsEnabled": "AI 에이전트 알림 활성화됨",
   "AIAgentPinLimitMessage": "최상단에 AI 에이전트 10개 이상을 고정할 수 없습니다. 현재 고정되어 있는 에이전트 중 일부를 해제하세요.",
   "AIAgentPinned": "AI 에이전트 고정",
   "AIAgentsPinned": "AI 에이전트 고정",

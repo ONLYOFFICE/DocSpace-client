@@ -72,7 +72,6 @@
   "DataImportProcessing": "Επεξεργασία της εισαγωγής δεδομένων",
   "DeactivateOrDeletePortal": "Απενεργοποίηση ή διαγραφή χώρου.",
   "DefaultSettings": "Προκαθορισμένες Ρυθμίσεις",
-  "DefineQuotaPerAIAgent": "Ορισμός ποσοστού ανά πράκτορα AI",
   "DefineQuotaPerRoom": "Καθορισμός ποσόστωσης ανά δωμάτιο",
   "DefineQuotaPerUser": "Καθορισμός ποσόστωσης ανά χρήστη",
   "DeletePortal": "Διαγραφή {{productName}}",

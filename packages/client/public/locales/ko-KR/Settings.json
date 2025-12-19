@@ -72,7 +72,6 @@
   "DataImportProcessing": "데이터 가져오기 처리 중",
   "DeactivateOrDeletePortal": "스페이스 비활성화 또는 삭제.",
   "DefaultSettings": "기본 설정",
-  "DefineQuotaPerAIAgent": "AI 에이전트별 할당량 정의",
   "DefineQuotaPerRoom": "방당 할당량 정의",
   "DefineQuotaPerUser": "사용자당 할당량 정의",
   "DeletePortal": "{{productName}} 삭제",

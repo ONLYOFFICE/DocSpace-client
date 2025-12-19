@@ -72,7 +72,6 @@
   "DataImportProcessing": "数据导入处理",
   "DeactivateOrDeletePortal": "停用或删除空间。",
   "DefaultSettings": "默认设置",
-  "DefineQuotaPerAIAgent": "为每个 AI 智能体定义配额",
   "DefineQuotaPerRoom": "设置每个房间的额度",
   "DefineQuotaPerUser": "设置每个用户的额度",
   "DeletePortal": "删除{{productName}}",

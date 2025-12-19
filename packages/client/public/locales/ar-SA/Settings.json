@@ -72,7 +72,6 @@
   "DataImportProcessing": "معالجة استيراد البيانات",
   "DeactivateOrDeletePortal": "إلغاء تنشيط أو حذف الفضاء.",
   "DefaultSettings": "الإعدادات الافتراضية",
-  "DefineQuotaPerAIAgent": "تحديد الحصة لكل وكيل ذكاء اصطناعي",
   "DefineQuotaPerRoom": "تحديد الحصة لكل غرفة",
   "DefineQuotaPerUser": "تحديد الحصة لكل مستخدم",
   "DeletePortal": "احذف {{productName}}",

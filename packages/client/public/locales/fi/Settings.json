@@ -72,7 +72,6 @@
   "DataImportProcessing": "Tietojen tuonnin prosessointi",
   "DeactivateOrDeletePortal": "Ota tila pois käytöstä tai poista se.",
   "DefaultSettings": "Oletusasetukset",
-  "DefineQuotaPerAIAgent": "Määritä kiintiö per AI-agentti",
   "DefineQuotaPerRoom": "Määritä kiintiö per huone",
   "DefineQuotaPerUser": "Määritä kiintiö per käyttäjä",
   "DeletePortal": "Poista {{productName}}",

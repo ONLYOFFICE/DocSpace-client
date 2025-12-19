@@ -72,7 +72,6 @@
   "DataImportProcessing": "Đang xử lý nhập dữ liệu",
   "DeactivateOrDeletePortal": "Vô hiệu hóa hoặc xóa không gian.",
   "DefaultSettings": "Cài đặt mặc định",
-  "DefineQuotaPerAIAgent": "Xác định hạn ngạch cho mỗi tác nhân AI",
   "DefineQuotaPerRoom": "Xác định hạn mức cho mỗi phòng",
   "DefineQuotaPerUser": "Xác định hạn mức cho mỗi người dùng",
   "DeletePortal": "Xóa {{productName}}",

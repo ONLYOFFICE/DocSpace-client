@@ -72,7 +72,6 @@
   "DataImportProcessing": "Обработване входирането на данни",
   "DeactivateOrDeletePortal": "Деактивирай или изтрий портал.",
   "DefaultSettings": "Настройките по подразбиране",
-  "DefineQuotaPerAIAgent": "Определете квота за всеки AI агент",
   "DefineQuotaPerRoom": "Определете квота на стая",
   "DefineQuotaPerUser": "Определете квота на потребител",
   "DeletePortal": "Изтриване на {{productName}}",

@@ -72,7 +72,6 @@
   "DataImportProcessing": "ການປະມວນຜົນການນໍາເຂົ້າຂໍ້ມູນ",
   "DeactivateOrDeletePortal": "ປິດການນຳໃຊ້ ຫຼື ລືບສາຍ.",
   "DefaultSettings": "ການຕັ້ງຄ່າເລີ່ມຕົ້ນ",
-  "DefineQuotaPerAIAgent": "ກຳນົດໂຄຕ້າສຳລັບຕົວແທນ AI",
   "DefineQuotaPerRoom": "ກຳນົດໂຄຕ້າຕໍ່ຫ້ອງ",
   "DefineQuotaPerUser": "ກໍານົດໂຄຕ້າຕໍ່ຜູ້ໃຊ້",
   "DeletePortal": "ລຶບ {{productName}}",

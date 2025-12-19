@@ -72,7 +72,6 @@
   "DataImportProcessing": "Elaborazione dell'importazione dei dati",
   "DeactivateOrDeletePortal": "Disattiva o cancella lo spazio.",
   "DefaultSettings": "Impostazioni predefinite",
-  "DefineQuotaPerAIAgent": "Definisci la quota per ogni agente AI",
   "DefineQuotaPerRoom": "Definisci la quota per stanza",
   "DefineQuotaPerUser": "Definisci la quota per utente",
   "DeletePortal": "Elimina {{productName}}",

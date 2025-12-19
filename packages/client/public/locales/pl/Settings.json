@@ -72,7 +72,6 @@
   "DataImportProcessing": "Przetwarzanie importu danych",
   "DeactivateOrDeletePortal": "Dezaktywuj lub usuń portal.",
   "DefaultSettings": "Ustawienia domyślne",
-  "DefineQuotaPerAIAgent": "Zdefiniuj limit dla każdego agenta AI.",
   "DefineQuotaPerRoom": "Zdefiniuj limit na pokój",
   "DefineQuotaPerUser": "Zdefiniuj limit na użytkownika",
   "DeletePortal": "Usuń {{productName}}",

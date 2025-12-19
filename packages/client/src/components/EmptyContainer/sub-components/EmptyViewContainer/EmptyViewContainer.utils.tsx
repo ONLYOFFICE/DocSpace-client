@@ -199,7 +199,11 @@ const getAIAgentsAIDisabledTitle = (
     .with([false, true], () =>
       t("EmptyView:EmptyAIAgentsAIDisabledSaasAdminTitle"),
     )
-    .otherwise(() => t("EmptyView:EmptyAIAgentsAIDisabledUserTitle"));
+    .otherwise(() =>
+      t("EmptyView:EmptyAIAgentsAIDisabledUserTitle", {
+        aiAgents: t("Common:AIAgents"),
+      }),
+    );
 };
 
 const getAIAgentsAIDisabledDescription = (

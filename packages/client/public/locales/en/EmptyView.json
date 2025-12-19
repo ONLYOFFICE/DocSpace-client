@@ -18,7 +18,7 @@
   "CustomRoomEmptyTitle": "Welcome to the Custom room",
   "DefaultFolderDescription": "Drop files here or create new ones.",
   "EmptyAIAgentsAIDisabledDescription": "This section allows users to work with {{aiAgents}} — smart assistants for handling documents and other tasks. \nTo start using them, the AI features service must be enabled by your {{productName}} admin.",
-  "EmptyAIAgentsAIDisabledSaasAdminDescription": "To create and use {{aiAgents}}, connect your wallet and enable the AI features service in the {{productName}} settings. Once it’s done, you’ll be able to work with AI agents and collaborate with your team.",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "To create and use {{aiAgents}}, connect your wallet and enable the AI features service in the {{productName}} settings. Once it’s done, you’ll be able to work with {{aiAgents}} and collaborate with your team.",
   "EmptyAIAgentsAIDisabledSaasAdminTitle": "Connect your wallet and enable AI features",
   "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}} are not available yet",
   "EmptyAIAgentsAIEnabledUserDescription": "Once your team invites you to collaborate, {{aiAgents}} will appear here, ready to assist with documents, knowledge management, and everyday tasks.",

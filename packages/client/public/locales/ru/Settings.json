@@ -17,8 +17,6 @@
   "AdminsMessage": "Настройки сообщений администратору",
   "AdminsMessageMobileDescription": "Настройки сообщений администратору позволяют связаться с администратором портала.",
   "AdminsMessageSettingDescription": "Подключите эту опцию, чтобы отобразить форму для связи с администратором {{productName}} на странице входа.",
-  "AIAgentQuotaDisabled": "Квота ИИ-агента успешно отключена.",
-  "AIAgentQuotaEnabled": "Квота ИИ-агента успешно включена.",
   "AISettings": "Настройки ИИ",
   "AllDomains": "Любые домены",
   "Api": "API",

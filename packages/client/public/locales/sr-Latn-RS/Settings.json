@@ -17,8 +17,6 @@
   "AdminsMessage": "Podešavanja poruka administratora",
   "AdminsMessageMobileDescription": "Podešavanja poruka administratora je način da kontaktirate administratora portala.",
   "AdminsMessageSettingDescription": "Omogući ovu opciju da prikažeš {{productName}} administrator kontakt obrazac u stranici za Prijavu.",
-  "AIAgentQuotaDisabled": "Kvota prostora za AI agenta je uspešno onemogućena.",
-  "AIAgentQuotaEnabled": "Kvota prostora za AI agenta je uspešno omogućena.",
   "AISettings": "AI podešavanja",
   "AllDomains": "Bilo koji domeni",
   "Api": "API",

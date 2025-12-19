@@ -17,8 +17,6 @@
   "AdminsMessage": "Cài đặt Tin nhắn Quản trị viên",
   "AdminsMessageMobileDescription": "Cài đặt Tin nhắn Quản trị viên là một cách để liên hệ với quản trị viên cổng thông tin.",
   "AdminsMessageSettingDescription": "Bật tùy chọn này để hiển thị biểu mẫu liên hệ của quản trị viên {{productName}} trên trang Đăng nhập.",
-  "AIAgentQuotaDisabled": "Đã vô hiệu hóa thành công hạn ngạch tác nhân AI.",
-  "AIAgentQuotaEnabled": "Đã kích hoạt thành công hạn ngạch cho AI agent.",
   "AISettings": "Cài đặt AI",
   "AllDomains": "Tên miền bất kỳ",
   "Api": "API",

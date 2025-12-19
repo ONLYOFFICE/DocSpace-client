@@ -17,8 +17,6 @@
   "AdminsMessage": "Ustawienia wiadomości administratora",
   "AdminsMessageMobileDescription": "Ustawienia wiadomości administratora to sposób na skontaktowanie się z administratorem portalu.",
   "AdminsMessageSettingDescription": "Włącz tę opcję, aby wyświetlać formularz kontaktowy administratora {{productName}} na stronie logowania.",
-  "AIAgentQuotaDisabled": "Limit użycia agenta AI został pomyślnie wyłączony.",
-  "AIAgentQuotaEnabled": "Udzielono limitu agentów AI.",
   "AISettings": "Ustawienia AI",
   "AllDomains": "Wszystkie domeny",
   "Api": "API",

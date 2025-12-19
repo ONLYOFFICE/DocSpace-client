@@ -17,8 +17,6 @@
   "AdminsMessage": "ການຕັ້ງຄ່າຂໍ້ຄວາມຂອງຜູ້ເບິ່ງແຍງລະບົບ",
   "AdminsMessageMobileDescription": "ການຕັ້ງຄ່າຂໍ້ຄວາມຂອງຜູ້ເບິ່ງແຍງລະບົບເປັນວິທີຕິດຕໍ່ກັບຜູ້ເບິ່ງແຍງລະບົບປະຕູ.",
   "AdminsMessageSettingDescription": "ເປີດໃຊ້ຕົວເລືອກນີ້ເພື່ອສະແດງແບບຟອມຕິດຕໍ່ຜູ້ເບິ່ງແຍງລະບົບ {{productName}} ໃນໜ້າເຂົ້າສູ່ລະບົບ.",
-  "AIAgentQuotaDisabled": "ໂຄຕ້າຕົວແທນ AI ໄດ້ຖືກປິດໃຊ້ງານສຳເລັດແລ້ວ.",
-  "AIAgentQuotaEnabled": "ໂຄຕ້າຕົວແທນ AI ໄດ້ຖືກເປີດໃຊ້ງານສຳເລັດແລ້ວ.",
   "AISettings": "ການຕັ້ງຄ່າ AI",
   "AllDomains": "ອັນໃດ ໂດເມນ",
   "Api": "ອະພິ",

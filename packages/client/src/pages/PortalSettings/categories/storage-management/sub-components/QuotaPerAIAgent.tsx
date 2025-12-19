@@ -38,7 +38,7 @@ type QuotaPerAIAgentComponentProps = {
 const QuotaPerAIAgentComponent = (props: QuotaPerAIAgentComponentProps) => {
   const { setAIAgentQuota, defaultAIAgentsQuota, isDefaultAIAgentsQuotaSet } =
     props;
-  const { t } = useTranslation("Settings");
+  const { t } = useTranslation(["Settings", "Common"]);
 
   const initialSizeProp = isDefaultAIAgentsQuotaSet
     ? { initialSize: defaultAIAgentsQuota }

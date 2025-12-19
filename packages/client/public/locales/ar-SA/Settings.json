@@ -17,8 +17,6 @@
   "AdminsMessage": "إعدادات رسالة المسؤول",
   "AdminsMessageMobileDescription": "إعدادات رسالة المسئول هي طريقة للتواصل مع مسئول البوابة.",
   "AdminsMessageSettingDescription": "قم بتفعيل هذا الخيار لعرض نموذج التواصل الخاص بمسئول {{productName}} في صفحة تسجيل الدخول.",
-  "AIAgentQuotaDisabled": "تم تعطيل حصة وكيل الذكاء الاصطناعي بنجاح.",
-  "AIAgentQuotaEnabled": "تم تمكين حصة وكيل الذكاء الاصطناعي بنجاح.",
   "AISettings": "إعدادات الذكاء الاصطناعي",
   "AllDomains": "أي مجالات",
   "Api": "واجهة برمجة التطبيقات",

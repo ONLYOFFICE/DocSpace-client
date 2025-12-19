@@ -17,8 +17,6 @@
   "AdminsMessage": "Cilësimet e mesazheve të administratorit",
   "AdminsMessageMobileDescription": "Cilësimet e mesazheve të administratorit janë një mënyrë për të kontaktuar administratorin e portalit.",
   "AdminsMessageSettingDescription": "Aktivizoni këtë opsion për të shfaqur formularin e kontaktit të administratorit {{productName}} në faqen e Identifikimit.",
-  "AIAgentQuotaDisabled": "Kuota e agjentit AI është çaktivizuar me sukses.",
-  "AIAgentQuotaEnabled": "Kuota e agjentit AI është aktivizuar me sukses.",
   "AISettings": "Cilësimet e inteligjencës artificiale",
   "AllDomains": "Çdo domen",
   "Api": "API",

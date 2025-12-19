@@ -17,8 +17,6 @@
   "AdminsMessage": "Paramètres des messages de l’administrateur",
   "AdminsMessageMobileDescription": "Les paramètres du message de l'administrateur permettent de contacter l'administrateur du portail.",
   "AdminsMessageSettingDescription": "Activez cette option pour afficher le formulaire de contact de l'administrateur de {{productName}} sur la page d'ouverture de session.",
-  "AIAgentQuotaDisabled": "Le quota de l'agent IA a été désactivé avec succès.",
-  "AIAgentQuotaEnabled": "Le quota de l'agent IA a été activé avec succès.",
   "AISettings": "Paramètres IA",
   "AllDomains": "Tous les domaines",
   "Api": "API",

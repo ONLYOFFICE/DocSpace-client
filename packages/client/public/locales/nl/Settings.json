@@ -17,8 +17,6 @@
   "AdminsMessage": "Beheerder Bericht Instellingen",
   "AdminsMessageMobileDescription": "Beheerder Bericht Instellingen is een manier om contact op te nemen met de portaal beheerder.",
   "AdminsMessageSettingDescription": "Schakel deze optie in om het contactformulier van de {{productName}} beheerder weer te geven op de Aanmelden pagina.",
-  "AIAgentQuotaDisabled": "De AI agent quota is succesvol uitgeschakeld.",
-  "AIAgentQuotaEnabled": "De AI agent quota is succesvol ingeschakeld.",
   "AISettings": "AI-instellingen",
   "AllDomains": "Alle domeinen",
   "Api": "API",

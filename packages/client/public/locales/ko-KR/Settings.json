@@ -17,8 +17,6 @@
   "AdminsMessage": "관리자 메시지 설정",
   "AdminsMessageMobileDescription": "관리자 메시지를 설정하여 포털 관리자에게 연락할 수 있습니다.",
   "AdminsMessageSettingDescription": "로그인 페이지에 {{productName}} 관리자 문의 양식을 표시하려면 이 옵션을 활성화하세요.",
-  "AIAgentQuotaDisabled": "AI 에이전트 할당량 비활성화가 성공적으로 완료되었습니다.",
-  "AIAgentQuotaEnabled": "AI 에이전트 할당량이 성공적으로 활성화되었습니다.",
   "AISettings": "AI 설정",
   "AllDomains": "모든 도메인",
   "Api": "API",

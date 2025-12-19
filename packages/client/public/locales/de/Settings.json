@@ -17,8 +17,6 @@
   "AdminsMessage": "Einstellungen von Nachrichten für Administrator",
   "AdminsMessageMobileDescription": "Über die Einstellungen für Administratormeldungen können Sie den Portaladministrator kontaktieren.",
   "AdminsMessageSettingDescription": "Aktivieren Sie diese Option, um das Formular für die Kontaktaufnahme mit dem {{productName}}-Administrator auf der Anmeldeseite anzuzeigen.",
-  "AIAgentQuotaDisabled": "Das KI-Agentenkontingent wurde erfolgreich deaktiviert.",
-  "AIAgentQuotaEnabled": "Das KI-Agentenkontingent wurde erfolgreich aktiviert",
   "AISettings": "KI-Einstellungen",
   "AllDomains": "Alle Domains",
   "Api": "API",

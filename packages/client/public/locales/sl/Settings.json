@@ -17,8 +17,6 @@
   "AdminsMessage": "Nastavitve sporočil skrbnika",
   "AdminsMessageMobileDescription": "Nastavitve skrbniškega sporočila so način za stik s skrbnikom portala.",
   "AdminsMessageSettingDescription": "Omogočite to možnost, če želite prikazati kontaktni obrazec skrbnika {{productName}} na strani za prijavo.",
-  "AIAgentQuotaDisabled": "Kvote za AI agenta ste uspešno onemogočili.",
-  "AIAgentQuotaEnabled": "Kvote za AI agenta je bila uspešno omogočena.",
   "AISettings": "AI nastavitve",
   "AllDomains": "Kakršna koli domena",
   "Api": "API",

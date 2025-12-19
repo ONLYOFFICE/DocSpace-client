@@ -17,8 +17,6 @@
   "AdminsMessage": "Nastavenia správ administrátora",
   "AdminsMessageMobileDescription": "Nastavenia sprav administrátorovi je spôsob ako kontaktovať administrátora portálu.",
   "AdminsMessageSettingDescription": "Aktivujte túto možnosť, aby sa na stránke Prihlásenie zobrazil kontaktný formulár administrátora {{productName}}.",
-  "AIAgentQuotaDisabled": "Kvote pre AI agenta boli úspešne vypnuté.",
-  "AIAgentQuotaEnabled": "Kvote pre AI agenta boli úspešne povolené.",
   "AISettings": "Nastavenia AI",
   "AllDomains": "Všetky domény",
   "Api": "API",

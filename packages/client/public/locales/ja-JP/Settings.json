@@ -17,8 +17,6 @@
   "AdminsMessage": "管理者メッセージの設定",
   "AdminsMessageMobileDescription": "管理者メッセージ設定は、ポータル管理者に連絡する方法です。",
   "AdminsMessageSettingDescription": "このオプションを有効にすると、サインインページに{{productName}}管理者連絡フォームが表示されます。",
-  "AIAgentQuotaDisabled": "AIエージェントのクォータが正常に無効化されました。",
-  "AIAgentQuotaEnabled": "AIエージェントのクォータが正常に有効化されました。",
   "AISettings": "AI設定",
   "AllDomains": "任意のドメイン",
   "Api": "API",

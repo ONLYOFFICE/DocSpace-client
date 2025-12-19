@@ -17,8 +17,6 @@
   "AdminsMessage": "Järjestelmänvalvojan viestiasetukset",
   "AdminsMessageMobileDescription": "Järjestelmänvalvojan Viestiasetukset on helppo tapa ottaa yhteyttä järjestelmänvalvojaan.",
   "AdminsMessageSettingDescription": "Ota tämä vaihtoehto käyttöön näyttääksesi {{productName}}-n järjestelmälvalvojan yhteydenottolomake Kirjaudu sisään-sivulla.",
-  "AIAgentQuotaDisabled": "AI-agentin kiintiö on poistettu onnistuneesti.",
-  "AIAgentQuotaEnabled": "AI-agentin kiintiö on otettu käyttöön onnistuneesti.",
   "AISettings": "AI-asetukset",
   "AllDomains": "Kaikki verkkotunnukset",
   "Api": "API",

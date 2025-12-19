@@ -17,8 +17,6 @@
   "AdminsMessage": "Подешавања порука администратора",
   "AdminsMessageMobileDescription": "Подешавања порука администратора је начин да контактирате администратора портала.",
   "AdminsMessageSettingDescription": "Омогући ову опцију да прикажеш {{productName}} администратор контакт образац у страници за Пријаву.",
-  "AIAgentQuotaDisabled": "Квота простора за AI агента је успешно онемогућена.",
-  "AIAgentQuotaEnabled": "Квота простора за AI агента је успешно омогућена.",
   "AISettings": "ВИ подешавања",
   "AllDomains": "Било који домени",
   "Api": "API",

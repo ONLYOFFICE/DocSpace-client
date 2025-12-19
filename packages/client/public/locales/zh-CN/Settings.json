@@ -17,8 +17,6 @@
   "AdminsMessage": "管理员消息设置",
   "AdminsMessageMobileDescription": "您可通过“管理员留言设置”联系门户管理员",
   "AdminsMessageSettingDescription": "启用此选项可在登录页面上显示{{productName}}管理员联系表。",
-  "AIAgentQuotaDisabled": "AI 智能体配额已禁用。",
-  "AIAgentQuotaEnabled": "AI 智能体配额已启用。",
   "AISettings": "AI 设置",
   "AllDomains": "任意域",
   "Api": "API",

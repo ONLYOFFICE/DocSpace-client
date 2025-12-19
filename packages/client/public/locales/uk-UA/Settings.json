@@ -17,8 +17,6 @@
   "AdminsMessage": "Параметри повідомлень адміністратору",
   "AdminsMessageMobileDescription": "Параметри повідомлень адміністратору — це спосіб зв’язатися з адміністратором порталу.",
   "AdminsMessageSettingDescription": "Увімкніть цей параметр, щоб відобразити контактну форму адміністратора {{productName}} на сторінці входу.",
-  "AIAgentQuotaDisabled": "Квота агента AI успішно деактивована.",
-  "AIAgentQuotaEnabled": "Квота для ШI агента успішно активована.",
   "AISettings": "Налаштування ШІ",
   "AllDomains": "Будь-які домени",
   "Api": "API",

@@ -17,8 +17,6 @@
   "AdminsMessage": "පරිපාලක පණිවිඩ සැකසුම්",
   "AdminsMessageMobileDescription": "පරිපාලක පණිවුඩ සැකසුම් යනු पोर्टल පරිපාලකයෙකු සම්බන්ධ කර ගැනීමට ඇති ක්‍රමයක් වේ.",
   "AdminsMessageSettingDescription": "පිවිසෙන පිටුවේ {{productName}} පරිපාලක සබඳතා ආකෘතිපත්‍රය පෙන්වීමට මෙම විකල්පය සබල කරන්න.",
-  "AIAgentQuotaDisabled": "AI නියෝජිත කෝටාව සාර්ථකව අබල කර ඇත.",
-  "AIAgentQuotaEnabled": "AI නියෝජිත කෝටාව සාර්ථකව සක්‍රීය කර ඇත.",
   "AISettings": "AI සැකසුම්",
   "AllDomains": "ඕනෑම වසමක්",
   "Api": "යෙ.ක්‍ර.මු.",

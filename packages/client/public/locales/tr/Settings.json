@@ -17,8 +17,6 @@
   "AdminsMessage": "Yönetici Mesajı Ayarları",
   "AdminsMessageMobileDescription": "Yönetici Mesajı Ayarları, portal yöneticisiyle iletişim kurmanın bir yoludur.",
   "AdminsMessageSettingDescription": "Oturum Açma sayfasında {{productName}} yöneticisi iletişim formunu görüntülemek için bu seçeneği etkinleştirin.",
-  "AIAgentQuotaDisabled": "AI aracı kotaı başarıyla devre dışı bırakıldı.",
-  "AIAgentQuotaEnabled": "AI aracı kota limiti başarıyla etkinleştirildi.",
   "AISettings": "Yapay zeka ayarları",
   "AllDomains": "Herhangi bir alan adı",
   "Api": "API",

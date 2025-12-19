@@ -17,8 +17,6 @@
   "AdminsMessage": "Nastavení zpráv administrátora",
   "AdminsMessageMobileDescription": "Nastavení zpráv správce je způsob, jak kontaktovat správce portálu.",
   "AdminsMessageSettingDescription": "Povolením této možnosti zobrazíte kontaktní formulář správce {{productName}} na stránce Přihlášení.",
-  "AIAgentQuotaDisabled": "Konta AI agenta byla úspěšně deaktivována.",
-  "AIAgentQuotaEnabled": "Kvote agenta AI byla úspěšně povolena.",
   "AISettings": "Nastavení AI",
   "AllDomains": "Libovolné domény",
   "Api": "API",

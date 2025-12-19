@@ -17,8 +17,6 @@
   "AdminsMessage": "Setări mesagerie de administrator",
   "AdminsMessageMobileDescription": "Setări mesagerie de administrator este o modalitate de a contacta administratorul de portal.",
   "AdminsMessageSettingDescription": "Activați această opțiune pentru a afișa formularul de contact al administratorului {{productName}} pe pagina de conectare.",
-  "AIAgentQuotaDisabled": "Cotă de stocare pentru agentul de IA a fost dezactivată cu succes.",
-  "AIAgentQuotaEnabled": "Cotă de stocare pentru agentul de IA a fost activată cu succes.",
   "AISettings": "Setări IA",
   "AllDomains": "Orice domeniu",
   "Api": "API",

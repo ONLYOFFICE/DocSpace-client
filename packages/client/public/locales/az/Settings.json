@@ -17,8 +17,6 @@
   "AdminsMessage": "Administrator Mesaj Parametrləri",
   "AdminsMessageMobileDescription": "Admin Mesaj Parametrləri portal administratoru ilə əlaqə qurmağın bir yoludur.",
   "AdminsMessageSettingDescription": "Giriş səhifəsində {{productName}} administratoru ilə əlaqə formasını göstərmək üçün bu seçimi aktivləşdirin.",
-  "AIAgentQuotaDisabled": "Süni intellekt agent kvotası uğurla deaktiv edildi.",
-  "AIAgentQuotaEnabled": "Süni intellekt agent kvotası uğurla aktivləşdirilib.",
   "AISettings": "Süni İntellekt parametrləri",
   "AllDomains": "Hər hansı bir domen adı",
   "Api": "API",

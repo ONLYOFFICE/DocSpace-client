@@ -2,7 +2,7 @@
   "CollaborationRoomEmptyTitle": "Welcome to the Collaboration room",
   "CollaboratorEmptyTitle": "The room is empty.",
   "CreateAIAgent": "Create a new agent",
-  "CreateAIAgentDescription": "Start building your first AI agent",
+  "CreateAIAgentDescription": "Start building your first {{aiAgent}}",
   "CreateDocument": "Create a new document",
   "CreateDocumentDescription": "Take advantage of vast word processing functionality.",
   "CreateForm": "Create a new PDF form",

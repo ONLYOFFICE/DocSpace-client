@@ -374,7 +374,9 @@ export const getOptions = (
 
   const createAIAgent = {
     title: t("EmptyView:CreateAIAgent"),
-    description: t("EmptyView:CreateAIAgentDescription"),
+    description: t("EmptyView:CreateAIAgentDescription", {
+      aiAgent: t("Common:AIAgents"),
+    }),
     icon: <CreateAIAgentIcon />,
     key: "create-ai-agent",
     onClick: actions.onCreateAIAgent,

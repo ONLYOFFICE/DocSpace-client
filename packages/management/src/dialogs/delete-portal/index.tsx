@@ -141,6 +141,7 @@ export const DeletePortalDialog = observer(() => {
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
+          testId="delete-space-button"
           isLoading={isLoading}
           key="CreateButton"
           label={t("Common:Delete")}

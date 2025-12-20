@@ -165,6 +165,12 @@ import {
   PATH_SHARE_TO_USERS_FILE,
   shareToUserHandle,
 } from "./share";
+import {
+  registerHandler,
+  PATH_PORTAL_REGISTER,
+  removePortalHandler,
+  PATH_PORTAL_REMOVE,
+} from "./apisystem";
 import type { MethodType } from "../types";
 
 export type TEndpoint = {
@@ -178,6 +184,7 @@ export type TEndpoints = {
 };
 
 const BASE_URL = "*/**/api/2.0/";
+const API_SYSTEM_URL = "*/**/apisystem/";
 
 export const endpoints = {
   wizardComplete: {
@@ -595,5 +602,15 @@ export const endpoints = {
   getFileInfo: {
     url: PATH_GET_FILE_INFO,
     dataHandler: getFileInfoHandler,
+  },
+  registerPortal: {
+    url: `${API_SYSTEM_URL}${PATH_PORTAL_REGISTER}`,
+    dataHandler: registerHandler,
+    method: "POST",
+  },
+  removePortal: {
+    url: PATH_PORTAL_REMOVE,
+    dataHandler: removePortalHandler,
+    method: "DELETE",
   },
 } satisfies TEndpoints;

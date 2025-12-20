@@ -24,42 +24,27 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Page } from "@playwright/test";
+export const PATH_PORTAL_REGISTER = "portal/register";
 
-import { TEndpoint } from "./handlers";
+const registerSuccess = {
+  reference:
+    "http://second.test.com/confirm/Auth?type=Auth&key=503958242023.BKX7GKFTTKCVJAX6XSCXJU4APGPWTAOXW4FXKA979I&encemail=hBNiHvzTAMyvHx3mvxq_9sFYVJEBQRZFDWFKM1cc6i4&first=true",
+  tenant: {
+    created: "2025-12-20T20:24:01.0494051Z",
+    domain: "second.test.com",
+    industry: 0,
+    language: "en-US",
+    name: "Cloud space for your office docs",
+    ownerId: "d03bdcdd-6ac0-4f5a-b46c-de296b6ee154",
+    portalName: "second",
+    status: "Active",
+    tenantId: 2,
+    timeZoneId: "Europe/London",
+    timeZoneName: "(UTC+00:00) United Kingdom Time",
+    customQuota: -1,
+  },
+};
 
-export class MockRequest {
-  constructor(public readonly page: Page) {}
-
-  async router(endpoints: TEndpoint[]) {
-    await Promise.all(
-      endpoints.map(async (endpoint) => {
-        return this.page.route(endpoint.url, async (route) => {
-          const method = route.request().method();
-
-          if (endpoint.method && endpoint.method !== method) {
-            await route.continue();
-            return;
-          }
-
-          const json = await endpoint.dataHandler().json();
-
-          await route.fulfill({ json, status: json.statusCode ?? 200 });
-        });
-      }),
-    );
-  }
-
-  async setHeaders(url: string | RegExp, headers: string[]) {
-    await this.page.route(url, async (route, request) => {
-      const objHeaders: { [key: string]: "true" } = {};
-      headers.forEach((item) => (objHeaders[item] = "true"));
-
-      const newHeaders = {
-        ...request.headers(),
-        ...objHeaders,
-      };
-      await route.fallback({ headers: newHeaders });
-    });
-  }
-}
+export const registerHandler = () => {
+  return new Response(JSON.stringify(registerSuccess));
+};

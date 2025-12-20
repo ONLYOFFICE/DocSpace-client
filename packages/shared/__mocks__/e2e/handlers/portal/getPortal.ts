@@ -24,29 +24,25 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import {
-  BASE_URL,
-  HEADER_EMPTY_PORTAL,
-  HEADER_UNCOMPLETED_TENANT,
-} from "../../utils";
+import { HEADER_EMPTY_PORTAL, HEADER_UNCOMPLETED_TENANT } from "../../utils";
 
 export const PATH_PORTAL_GET = "apisystem/portal/get?statistics=true";
 
 const uncompletedTenant = {
   created: "2021-03-09T17:46:59",
-  domain: BASE_URL,
+  domain: "second.docspace.site",
   industry: 0,
   language: "en-US",
   name: "Web Office",
   ownerId: "00000000-0000-0000-0000-000000000000",
-  portalName: BASE_URL,
+  portalName: "second",
   status: "Active",
   tenantId: 2,
   timeZoneName: "UTC",
   quotaUsage: {
     tenantId: 2,
-    tenantAlias: BASE_URL,
-    tenantDomain: BASE_URL,
+    tenantAlias: "docspace.site",
+    tenantDomain: "docspace.site",
     storageSize: 9223372036854776000,
     usedSize: 4690191,
     maxRoomAdminsCount: 2147483647,
@@ -72,19 +68,19 @@ const uncompletedTenant = {
 
 const completedTenant = {
   created: "2021-03-09T17:46:59",
-  domain: BASE_URL,
+  domain: "test.docspace.site",
   industry: 0,
   language: "en-US",
   name: "Web Office",
   ownerId: "00000000-0000-0000-0000-000000000000",
-  portalName: BASE_URL,
+  portalName: "test",
   status: "Active",
   tenantId: 1,
   timeZoneName: "UTC",
   quotaUsage: {
     tenantId: 1,
-    tenantAlias: BASE_URL,
-    tenantDomain: BASE_URL,
+    tenantAlias: "docspace.site",
+    tenantDomain: "docspace.site",
     storageSize: 9223372036854776000,
     usedSize: 4690191,
     maxRoomAdminsCount: 2147483647,

@@ -78,6 +78,12 @@ import {
   webPluginsAddHandler,
   webPluginsUpdateHandler,
   webPluginsDeleteHandler,
+  whiteLabelLogosHandler,
+  whiteLabelLogoTextHandler,
+  whiteLabelLogosIsDefaultHandler,
+  PATH_WHITELABEL_LOGOS,
+  PATH_WHITELABEL_LOGOTEXT,
+  PATH_WHITELABEL_LOGOS_IS_DEFAULT,
 } from "./settings";
 import {
   CONTINUE_PATH,
@@ -612,5 +618,17 @@ export const endpoints = {
     url: PATH_PORTAL_REMOVE,
     dataHandler: removePortalHandler,
     method: "DELETE",
+  },
+  whiteLabelLogos: {
+    url: `${BASE_URL}/${PATH_WHITELABEL_LOGOS}`,
+    dataHandler: whiteLabelLogosHandler,
+  },
+  whiteLabelLogoText: {
+    url: `${BASE_URL}/${PATH_WHITELABEL_LOGOTEXT}`,
+    dataHandler: whiteLabelLogoTextHandler,
+  },
+  whiteLabelLogosIsDefault: {
+    url: `${BASE_URL}/${PATH_WHITELABEL_LOGOS_IS_DEFAULT}`,
+    dataHandler: whiteLabelLogosIsDefaultHandler,
   },
 } satisfies TEndpoints;

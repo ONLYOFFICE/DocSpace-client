@@ -32,7 +32,7 @@ export const tariffSuccess = {
   response: {
     openSource: false,
     enterprise: false,
-    developer: false,
+    developer: true,
     id: 1,
     state: 1,
     dueDate: "2026-06-05T13:03:34.0000000+04:00",

@@ -97,3 +97,5 @@ export {
   webPluginsEmpty,
   webPluginsWithData,
 } from "./webplugins";
+
+export * from "./whitelabel";

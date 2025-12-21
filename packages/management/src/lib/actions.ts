@@ -72,6 +72,8 @@ import {
   companyInfoHandler,
   settingsAdditionalHandler,
   paymentSettingsHandler,
+  filesSettingsHandler,
+  licenseQuotaHandler
 } from "@docspace/shared/__mocks__/e2e";
 
 import { logger } from "@/../logger.mjs";
@@ -657,7 +659,7 @@ export async function getSettingsFiles(): Promise<TFilesSettings> {
       "GET",
     );
 
-    const settingsFilesRes = await fetch(getSettingsFilessRes);
+    const settingsFilesRes = IS_TEST ? filesSettingsHandler() : await fetch(getSettingsFilessRes);
 
     if (!settingsFilesRes.ok) {
       logger.error(
@@ -824,7 +826,7 @@ export async function getLicenseQuota() {
       true,
     );
 
-    const licenseQuotaRes = await fetch(getLicenseQuotaRequest);
+    const licenseQuotaRes = IS_TEST ? licenseQuotaHandler() : await fetch(getLicenseQuotaRequest);
 
     if (!licenseQuotaRes.ok) {
       logger.error(`GET ${pathReq} failed: ${licenseQuotaRes.status}`);

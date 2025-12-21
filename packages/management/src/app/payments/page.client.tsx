@@ -74,6 +74,8 @@ const PaymentsPage = ({
   const [isLicenseCorrect, setIsLicenseCorrect] = useState(false);
 
   const shouldOpenEditorInNewTab = () => {
+    if (typeof window === "undefined") return !filesSettings.openEditorInSameTab;
+
     if (
       window.navigator.userAgent.includes("ZoomWebKit") ||
       window.navigator.userAgent.includes("ZoomApps")
@@ -117,8 +119,9 @@ const PaymentsPage = ({
   };
 
   useEffect(() => {
-    setIsLicenseDateExpired(getIsLicenseDateExpired(dueDate, window.timezone));
-    setPaymentDate(getPaymentDate(dueDate, window.timezone));
+    const timezone = typeof window !== "undefined" ? window.timezone : "UTC";
+    setIsLicenseDateExpired(getIsLicenseDateExpired(dueDate, timezone));
+    setPaymentDate(getPaymentDate(dueDate, timezone));
     setTrialDaysLeft(getDaysLeft(dueDate));
   }, [dueDate]);
 

@@ -65,6 +65,12 @@ import {
   buildHandler,
   tariffHandler,
   getPortalHandler,
+  quotaHandler,
+  whiteLabelLogosHandler,
+  whiteLabelLogoTextHandler,
+  whiteLabelLogosIsDefaultHandler,
+  companyInfoHandler,
+  settingsAdditionalHandler,
 } from "@docspace/shared/__mocks__/e2e";
 
 import { logger } from "@/../logger.mjs";
@@ -199,7 +205,7 @@ export async function getQuota() {
       logger.debug(`GET /portal/payment/quota failed: missing asc_auth_key`);
       return undefined;
     }
-    const quotaRes = await fetch(getQuotasRes);
+    const quotaRes = IS_TEST ? quotaHandler() : await fetch(getQuotasRes);
 
     if (quotaRes.status === 401) {
       logger.error(`GET /portal/payment/quota failed: ${quotaRes.statusText}`);
@@ -338,7 +344,7 @@ export async function getWhiteLabelLogos() {
       "GET",
     );
 
-    const logosRes = await fetch(getWhiteLabelLogossRes);
+    const logosRes = IS_TEST ? whiteLabelLogosHandler() : await fetch(getWhiteLabelLogossRes);
 
     if (!logosRes.ok) {
       logger.error(
@@ -367,7 +373,7 @@ export async function getWhiteLabelText() {
       "GET",
     );
 
-    const textRes = await fetch(getWhiteLabelTextsRes);
+    const textRes = IS_TEST ? whiteLabelLogoTextHandler() : await fetch(getWhiteLabelTextsRes);
 
     if (!textRes.ok) {
       logger.error(
@@ -396,7 +402,7 @@ export async function getWhiteLabelIsDefault() {
       "GET",
     );
 
-    const isDefaultRes = await fetch(getWhiteLabelIsDefaultsRes);
+    const isDefaultRes = IS_TEST ? whiteLabelLogosIsDefaultHandler() : await fetch(getWhiteLabelIsDefaultsRes);
 
     if (!isDefaultRes.ok) {
       logger.error(
@@ -426,7 +432,7 @@ export async function getAdditionalResources() {
       "GET",
     );
 
-    const additionalResourcesRes = await fetch(getAdditionalResourcessRes);
+    const additionalResourcesRes = IS_TEST ? settingsAdditionalHandler() : await fetch(getAdditionalResourcessRes);
 
     if (!additionalResourcesRes.ok) {
       logger.error(
@@ -456,7 +462,7 @@ export async function getCompanyInfo() {
       "GET",
     );
 
-    const companyInfoRes = await fetch(getCompanyInfosRes);
+    const companyInfoRes = IS_TEST ? companyInfoHandler() : await fetch(getCompanyInfosRes);
 
     if (!companyInfoRes.ok) {
       logger.error(

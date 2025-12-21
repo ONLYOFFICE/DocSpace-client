@@ -83,3 +83,6 @@ export const HEADER_EMPTY_PORTAL = "x-empty-portal";
 export const HEADER_UNCOMPLETED_TENANT = "x-uncompleted-tenant";
 
 export const HEADER_OPEN_SOURCE = "x-open-source";
+
+export const HEADER_ENCRYPTION_SETTINGS_ENCRYPTED =
+  "x-encryption-settings-encrypted";

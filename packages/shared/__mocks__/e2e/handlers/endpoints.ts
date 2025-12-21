@@ -92,6 +92,8 @@ import {
   PATH_BACKUP_STORAGE,
   storageRegionsHandler,
   PATH_STORAGE_REGIONS,
+  encryptionSettingsHandler,
+  PATH_ENCRYPTION_SETTINGS,
 } from "./settings";
 import {
   CONTINUE_PATH,
@@ -672,5 +674,9 @@ export const endpoints = {
   backupProgress: {
     url: `${BASE_URL}/${PATH_BACKUP_PROGRESS}`,
     dataHandler: backupProgressHandler,
+  },
+  encryptionSettings: {
+    url: `${BASE_URL}/${PATH_ENCRYPTION_SETTINGS}`,
+    dataHandler: () => encryptionSettingsHandler(new Headers()),
   },
 } satisfies TEndpoints;

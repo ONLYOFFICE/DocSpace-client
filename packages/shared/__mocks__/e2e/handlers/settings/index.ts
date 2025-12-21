@@ -107,3 +107,5 @@ export * from "./thirdPartyBackup";
 export * from "./backupStorage";
 
 export * from "./storageRegions";
+
+export * from "./encryption";

@@ -102,7 +102,7 @@ export * from "./whitelabel";
 
 export * from "./paymentSettings";
 
-export * from "./thirdPartyBackup";
+export * from "./thirdpartyBackup";
 
 export * from "./backupStorage";
 

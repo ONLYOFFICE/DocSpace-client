@@ -34,7 +34,7 @@ import { expect, test } from "./fixtures/base";
 test.describe("Settings", () => {
   test.beforeEach(async ({ mockRequest }) => {
     await mockRequest.router([endpoints.colorTheme]);
-    await mockRequest.setHeaders("/management/settings", [
+    await mockRequest.setHeaders("**/management/settings/**", [
       HEADER_UNCOMPLETED_TENANT,
     ]);
   });
@@ -50,6 +50,48 @@ test.describe("Settings", () => {
       "desktop",
       "settings",
       "settings-branding-render.png",
+    ]);
+  });
+
+  test("should data backup settings render", async ({ page }) => {
+    await page.goto("/management/settings/data-backup");
+
+    await expect(
+      page.getByTestId("manual-backup-wrapper"),
+    ).toBeVisible();
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "settings",
+      "settings-data-backup-render.png",
+    ]);
+  });
+
+  test("should auto backup settings render", async ({ page }) => {
+    await page.goto("/management/settings/auto-backup");
+
+    await expect(
+      page.getByTestId("auto-backup"),
+    ).toBeVisible();
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "settings",
+      "settings-auto-backup-render.png",
+    ]);
+  });
+
+  test("should restore settings render", async ({ page }) => {
+    await page.goto("/management/settings/restore");
+
+    await expect(
+      page.getByTestId("restore-backup"),
+    ).toBeVisible();
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "settings",
+      "settings-restore-render.png",
     ]);
   });
 });

@@ -73,7 +73,13 @@ import {
   settingsAdditionalHandler,
   paymentSettingsHandler,
   filesSettingsHandler,
-  licenseQuotaHandler
+  licenseQuotaHandler,
+  thirdPartyBackupHandler,
+  backupScheduleHandler,
+  backupStorageHandler,
+  storageRegionsHandler,
+  backupProgressHandler,
+  foldersTreeHandler,
 } from "@docspace/shared/__mocks__/e2e";
 
 import { logger } from "@/../logger.mjs";
@@ -527,7 +533,7 @@ export async function getSettingsThirdParty() {
       "GET",
     );
 
-    const settingsThirdParty = await fetch(getSettingsThirdPartysRes, {
+    const settingsThirdParty = IS_TEST ? thirdPartyBackupHandler() :await fetch(getSettingsThirdPartysRes, {
       next: { tags: ["backup"] },
     });
 
@@ -563,7 +569,7 @@ export async function getBackupSchedule(dump: boolean = true) {
       "GET",
     );
 
-    const backupScheduleRes = await fetch(getBackupSchedulesRes, {
+    const backupScheduleRes = IS_TEST ? backupScheduleHandler() : await fetch(getBackupSchedulesRes, {
       next: { tags: ["backup"] },
     });
 
@@ -598,7 +604,7 @@ export async function getBackupStorage(dump: boolean = false) {
       [["", ""]],
       "GET",
     );
-    const backupStorageRes = await fetch(getBackupStoragesRes, {
+    const backupStorageRes = IS_TEST ? backupStorageHandler() : await fetch(getBackupStoragesRes, {
       next: { tags: ["backup"] },
     });
 
@@ -630,7 +636,7 @@ export async function getStorageRegions() {
       "GET",
     );
 
-    const storageRegionsRes = await fetch(getStorageRegionssRes);
+    const storageRegionsRes = IS_TEST ? storageRegionsHandler() : await fetch(getStorageRegionssRes);
 
     if (!storageRegionsRes.ok) {
       logger.error(
@@ -694,7 +700,7 @@ export async function getBackupProgress(dump = true) {
       "GET",
     );
 
-    const backupProgressRes = await fetch(getBackupProgresssRes, {
+    const backupProgressRes = IS_TEST ? backupProgressHandler() : await fetch(getBackupProgresssRes, {
       next: { tags: ["backup"] },
     });
 
@@ -727,7 +733,7 @@ export async function getFoldersTree() {
       "GET",
     );
 
-    const foldersTreeRes = await fetch(getFoldersTreeRes);
+    const foldersTreeRes = IS_TEST ? foldersTreeHandler() : await fetch(getFoldersTreeRes);
 
     if (!foldersTreeRes.ok) {
       logger.error(

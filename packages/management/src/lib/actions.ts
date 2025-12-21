@@ -80,6 +80,7 @@ import {
   storageRegionsHandler,
   backupProgressHandler,
   foldersTreeHandler,
+  encryptionSettingsHandler
 } from "@docspace/shared/__mocks__/e2e";
 
 import { logger } from "@/../logger.mjs";
@@ -793,13 +794,15 @@ export async function getEncryptionSettings() {
   logger.debug("Start GET /settings/encryption/settings");
 
   try {
+    const hdrs = await headers();
+
     const [getEncryptionSettingsRes] = await createRequest(
       [`/settings/encryption/settings`],
       [["", ""]],
       "GET",
     );
 
-    const encryptionSettingsRes = await fetch(getEncryptionSettingsRes);
+    const encryptionSettingsRes = IS_TEST ? encryptionSettingsHandler(hdrs) : await fetch(getEncryptionSettingsRes);
 
     if (!encryptionSettingsRes.ok) {
       logger.error(

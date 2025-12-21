@@ -26,7 +26,8 @@
 
 import {
   endpoints,
-  HEADER_UNCOMPLETED_TENANT
+  HEADER_UNCOMPLETED_TENANT,
+  HEADER_ENCRYPTION_SETTINGS_ENCRYPTED
 } from "@docspace/shared/__mocks__/e2e";
 
 import { expect, test } from "./fixtures/base";
@@ -92,6 +93,38 @@ test.describe("Settings", () => {
       "desktop",
       "settings",
       "settings-restore-render.png",
+    ]);
+  });
+
+  test("should encrypt settings render", async ({ page }) => {
+    await page.goto("/management/settings/encrypt-data");
+
+    await expect(
+      page.getByTestId("encrypt-data-page"),
+    ).toBeVisible();
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "settings",
+      "settings-encrypt-render.png",
+    ]);
+  });
+
+  test("should encrypt settings with encrypted state render", async ({ page, mockRequest }) => {
+    await mockRequest.setHeaders("**/management/settings/**", [
+      HEADER_ENCRYPTION_SETTINGS_ENCRYPTED,
+    ]);
+
+    await page.goto("/management/settings/encrypt-data");
+
+    await expect(
+      page.getByTestId("encrypt-data-page"),
+    ).toBeVisible();
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "settings",
+      "settings-encrypt-encrypted-render.png",
     ]);
   });
 });

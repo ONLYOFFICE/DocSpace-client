@@ -423,6 +423,7 @@ export const settingsNoAuth = {
         },
       },
     },
+    logoText: "ONLYOFFICE",
   },
   count: 1,
   links: [

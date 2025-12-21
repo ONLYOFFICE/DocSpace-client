@@ -100,6 +100,8 @@ import {
   SUSPEND_PATH,
   suspendHandler,
   tariffHandler,
+  licenseQuotaHandler,
+  PATH_LICENSE_QUOTA,
 } from "./portal";
 import {
   docServiceHandler,
@@ -636,5 +638,9 @@ export const endpoints = {
   paymentSettings: {
     url: `${BASE_URL}/${PATH_PAYMENT_SETTINGS}`,
     dataHandler: paymentSettingsHandler,
+  },
+  licenseQuota: {
+    url: `${API_SYSTEM_URL}/${PATH_LICENSE_QUOTA}`,
+    dataHandler: licenseQuotaHandler,
   },
 } satisfies TEndpoints;

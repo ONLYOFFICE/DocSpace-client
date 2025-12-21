@@ -101,3 +101,9 @@ export {
 export * from "./whitelabel";
 
 export * from "./paymentSettings";
+
+export * from "./thirdPartyBackup";
+
+export * from "./backupStorage";
+
+export * from "./storageRegions";

@@ -86,6 +86,12 @@ import {
   PATH_WHITELABEL_LOGOS_IS_DEFAULT,
   paymentSettingsHandler,
   PATH_PAYMENT_SETTINGS,
+  thirdPartyBackupHandler,
+  PATH_THIRDPARTY_BACKUP,
+  backupStorageHandler,
+  PATH_BACKUP_STORAGE,
+  storageRegionsHandler,
+  PATH_STORAGE_REGIONS,
 } from "./settings";
 import {
   CONTINUE_PATH,
@@ -102,6 +108,10 @@ import {
   tariffHandler,
   licenseQuotaHandler,
   PATH_LICENSE_QUOTA,
+  backupScheduleHandler,
+  PATH_BACKUP_SCHEDULE,
+  backupProgressHandler,
+  PATH_BACKUP_PROGRESS,
 } from "./portal";
 import {
   docServiceHandler,
@@ -642,5 +652,25 @@ export const endpoints = {
   licenseQuota: {
     url: `${API_SYSTEM_URL}/${PATH_LICENSE_QUOTA}`,
     dataHandler: licenseQuotaHandler,
+  },
+  thirdPartyBackup: {
+    url: `${BASE_URL}/${PATH_THIRDPARTY_BACKUP}`,
+    dataHandler: thirdPartyBackupHandler,
+  },
+  backupSchedule: {
+    url: `${BASE_URL}/${PATH_BACKUP_SCHEDULE}`,
+    dataHandler: backupScheduleHandler,
+  },
+  backupStorage: {
+    url: `${BASE_URL}/${PATH_BACKUP_STORAGE}`,
+    dataHandler: backupStorageHandler,
+  },
+  storageRegions: {
+    url: `${BASE_URL}/${PATH_STORAGE_REGIONS}`,
+    dataHandler: storageRegionsHandler,
+  },
+  backupProgress: {
+    url: `${BASE_URL}/${PATH_BACKUP_PROGRESS}`,
+    dataHandler: backupProgressHandler,
   },
 } satisfies TEndpoints;

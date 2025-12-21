@@ -31,3 +31,7 @@ export {
 export { getPortalHandler, PATH_PORTAL_GET } from "./getPortal";
 
 export * from "./licensequota";
+
+export * from "./backupshedule";
+
+export * from "./backupprogress";

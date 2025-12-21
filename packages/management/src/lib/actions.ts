@@ -71,6 +71,7 @@ import {
   whiteLabelLogosIsDefaultHandler,
   companyInfoHandler,
   settingsAdditionalHandler,
+  paymentSettingsHandler,
 } from "@docspace/shared/__mocks__/e2e";
 
 import { logger } from "@/../logger.mjs";
@@ -282,7 +283,7 @@ export async function getPortalTariff() {
       return undefined;
     }
     const portalTariffRes = IS_TEST
-      ? tariffHandler()
+      ? tariffHandler(hdrs)
       : await fetch(getPortalTariffsRes);
 
     if (portalTariffRes.status === 401) {
@@ -492,7 +493,9 @@ export async function getPaymentSettings() {
       "GET",
     );
 
-    const paymentSettingsRes = await fetch(getPaymentSettingssRes);
+    const paymentSettingsRes = IS_TEST
+      ? paymentSettingsHandler()
+      : await fetch(getPaymentSettingssRes);
 
     if (!paymentSettingsRes.ok) {
       logger.error(

@@ -81,3 +81,5 @@ export const HEADER_AI_DISABLED = "x-ai-config-disabled";
 export const HEADER_EMPTY_PORTAL = "x-empty-portal";
 
 export const HEADER_UNCOMPLETED_TENANT = "x-uncompleted-tenant";
+
+export const HEADER_OPEN_SOURCE = "x-open-source";

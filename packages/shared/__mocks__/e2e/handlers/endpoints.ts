@@ -84,6 +84,8 @@ import {
   PATH_WHITELABEL_LOGOS,
   PATH_WHITELABEL_LOGOTEXT,
   PATH_WHITELABEL_LOGOS_IS_DEFAULT,
+  paymentSettingsHandler,
+  PATH_PAYMENT_SETTINGS,
 } from "./settings";
 import {
   CONTINUE_PATH,
@@ -398,7 +400,7 @@ export const endpoints = {
   },
   tariff: {
     url: `${BASE_URL}${PATH_TARIFF}`,
-    dataHandler: tariffHandler,
+    dataHandler: () => tariffHandler(new Headers()),
   },
   aiConfig: {
     url: `${BASE_URL}${PATH_AI_CONFIG}`,
@@ -630,5 +632,9 @@ export const endpoints = {
   whiteLabelLogosIsDefault: {
     url: `${BASE_URL}/${PATH_WHITELABEL_LOGOS_IS_DEFAULT}`,
     dataHandler: whiteLabelLogosIsDefaultHandler,
+  },
+  paymentSettings: {
+    url: `${BASE_URL}/${PATH_PAYMENT_SETTINGS}`,
+    dataHandler: paymentSettingsHandler,
   },
 } satisfies TEndpoints;

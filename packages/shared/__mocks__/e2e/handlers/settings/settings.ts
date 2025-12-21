@@ -304,6 +304,124 @@ export const settingsNoAuth = {
           whatis: "https://youtu.be/T8_hGjQR1Kk",
         },
       },
+      helpcenter: {
+        domain: "https://helpcenter.onlyoffice.com",
+        entries: {
+          accessrights: "/docspace/getting-started.aspx#AccessRights_block",
+          administrationguides:
+            "/docspace/configuration/docspace-developer-tools-settings.aspx#webhooks_block",
+          administratormessage:
+            "/docspace/configuration/docspace-security-settings.aspx#administratormessagesettings_block",
+          aiprovidersettings:
+            "/docspace/configuration/docspace-ai-settings.aspx#aiprovidersettings_block",
+          aisettings: "/docspace/configuration/docspace-ai-settings.aspx",
+          alternativeurl:
+            "/docspace/configuration/docspace-customization-settings.aspx#dnssettings_block",
+          apikeys:
+            "/docspace/configuration/docspace-developer-tools-settings.aspx#apikeys_block",
+          appearance:
+            "/docspace/configuration/docspace-customization-settings.aspx#appearance_block",
+          autobackup:
+            "/docspace/configuration/docspace-backup-restore-settings.aspx#automaticbackup_block",
+          becometranslator: "/docspace/contribution/become-translator.aspx",
+          configureDeepLink:
+            "/docspace/configuration/docspace-customization-settings.aspx#сonfiguredeeplink_block",
+          configuringsettings:
+            "/docspace/configuration/docspace-wallet-settings.aspx",
+          connectamazon: "/docspace/configuration/connect-amazon-docspace.aspx",
+          connectapple: "/docspace/configuration/connect-apple-docspace.aspx",
+          connectbox: "/docspace/configuration/connect-box-docspace.aspx",
+          connectdropbox:
+            "/docspace/configuration/connect-dropbox-docspace.aspx",
+          connectfacebook:
+            "/docspace/configuration/connect-facebook-docspace.aspx",
+          connectfirebase:
+            "/docspace/configuration/connect-firebase-docspace.aspx",
+          connectgoogle: "/docspace/configuration/connect-google-docspace.aspx",
+          connectgooglecloudstorage:
+            "/docspace/configuration/connect-google-cloud-storage-docspace.aspx",
+          connectlinkedin:
+            "/docspace/configuration/connect-linkedin-docspace.aspx",
+          connectmicrosoft:
+            "/docspace/configuration/connect-microsoft-docspace.aspx",
+          connectonedrive:
+            "/docspace/configuration/connect-onedrive-docspace.aspx",
+          connectrackspace:
+            "/docspace/configuration/connect-rackspace-docspace.aspx",
+          connecttelegram:
+            "/docspace/configuration/connect-telegram-docspace.aspx",
+          connecttwitter:
+            "/docspace/configuration/connect-twitter-docspace.aspx",
+          connectwechat: "/docspace/configuration/connect-wechat-docspace.aspx",
+          connectzoom: "/docspace/configuration/connect-zoom-docspace.aspx",
+          creatingbackup:
+            "/docspace/configuration/docspace-backup-restore-settings.aspx#creatingbackup_block",
+          dataImport:
+            "/docspace/configuration/docspace-data-import-settings.aspx",
+          docspacefaq: "/docspace/faq.aspx",
+          docspacemanagingrooms:
+            "/docspace/administration/docspace-managing-rooms.aspx",
+          documentService:
+            "/docspace/configuration/docspace-integration-settings.aspx#documentservicesettings_block",
+          encryption:
+            "/docspace/configuration/docspace-encryption-at-rest.aspx",
+          enterpriseinstall: "/docspace/installation/enterprise",
+          enterpriseinstallscript:
+            "/docspace/installation/docspace-enterprise-install-script.aspx",
+          enterpriseinstallwindows:
+            "/docspace/installation/docspace-enterprise-install-windows.aspx",
+          integrationsettings:
+            "/docspace/configuration/docspace-integration-settings.aspx#thirdpartyserviceintegration_block",
+          invitationSettings:
+            "/docspace/configuration/docspace-security-settings.aspx#invitationsettings_block",
+          ipsecurity:
+            "/docspace/configuration/docspace-security-settings.aspx#ipsecuritysettings_block",
+          knowledgesettings:
+            "/docspace/configuration/docspace-ai-settings.aspx#knowledgesettings_block",
+          language:
+            "/docspace/configuration/docspace-customization-settings.aspx#languageandtimezonesettings_block",
+          ldap: "/docspace/configuration/docspace-integration-settings.aspx#ldapsettings_block",
+          limiteddevtools:
+            "/docspace/configuration/docspace-security-settings.aspx#limiteddevelopertoolsaccess_block",
+          login:
+            "/docspace/configuration/docspace-security-settings.aspx#bruteforceprotectionsettings_block",
+          managingusers:
+            "/docspace/administration/docspace-managing-users.aspx",
+          mcpserverssettings:
+            "/docspace/configuration/docspace-ai-settings.aspx#mcpserverssettings_block",
+          oauth:
+            "/docspace/configuration/docspace-developer-tools-settings.aspx#oauth_block",
+          passwordstrength:
+            "/docspace/configuration/docspace-security-settings.aspx#passwordstrengthsettings_block",
+          pluginsSdk:
+            "/docspace/configuration/docspace-integration-settings.aspx#plugins_block",
+          renaming:
+            "/docspace/configuration/docspace-customization-settings.aspx#docspacerenaming_block",
+          sessionlifetime:
+            "/docspace/configuration/docspace-security-settings.aspx#sessionlifetime_block",
+          settings: "/docspace/configuration",
+          singleSignOn:
+            "/docspace/configuration/docspace-integration-settings.aspx#singlesignonsettings_block",
+          smtp: "/docspace/configuration/docspace-integration-settings.aspx#smtpsettings_block",
+          storagemanagement:
+            "/docspace/configuration/docspace-storage-management-settings.aspx",
+          trusteddomain:
+            "/docspace/configuration/docspace-security-settings.aspx#trustedmaildomainsettings_block",
+          twofactorauthentication:
+            "/docspace/configuration/docspace-two-factor-authentication.aspx",
+          userguides: "/userguides/docspace-index.aspx",
+          websearchsettings:
+            "/docspace/configuration/docspace-ai-settings.aspx#websearchsettings_block",
+          welcomepage:
+            "/docspace/configuration/docspace-customization-settings.aspx#welcomepagesettings_block",
+        },
+      },
+      support: {
+        domain: "https://helpdesk.onlyoffice.com",
+        entries: {
+          request: "/hc/requests/new",
+        },
+      },
     },
   },
   count: 1,

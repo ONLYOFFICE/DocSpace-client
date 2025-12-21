@@ -99,3 +99,5 @@ export {
 } from "./webplugins";
 
 export * from "./whitelabel";
+
+export * from "./paymentSettings";

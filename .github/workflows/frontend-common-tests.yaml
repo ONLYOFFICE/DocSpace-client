@@ -431,6 +431,31 @@ jobs:
             GITHUB_RUN_ID=${{ github.run_id }}
             GITHUB_RUN_NUMBER=${{ github.run_number }}
 
+  # Playwright Management tests
+  playwright-management:
+    name: "Management e2e tests"
+    runs-on: ubuntu-latest
+    needs: [changes, static-analysis-and-tests]
+    if: needs.changes.outputs.playwright == 'true' || needs.changes.outputs.workflow == 'true'
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Cleanup existing containers
+        run: docker ps -a --filter name=management-tests-ci -q | xargs -r docker rm -f
+      - uses: adambirds/docker-compose-action@v1.5.0
+        with:
+          compose-file: packages/management/compose.yaml
+          up-flags: --build --force-recreate --remove-orphans
+          down-flags: --volumes --remove-orphans
+          services: tests-ci
+          test-container: tests-ci
+          test-command: pnpm exec playwright test
+          environment: |
+            CI=true
+            GITHUB_WORKFLOW=${{ github.workflow }}
+            GITHUB_RUN_ID=${{ github.run_id }}
+            GITHUB_RUN_NUMBER=${{ github.run_number }}
+
   # Summary job to report overall status
   test-summary:
     name: "Test Summary"

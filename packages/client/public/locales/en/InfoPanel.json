@@ -65,6 +65,7 @@
   "LifetimeEnds": "Lifetime ends",
   "MembersEmptyScreenText": "See members details here",
   "NoRecordsFound": "No records found",
+  "NoAgent": "No {{aiAgent}}",
   "Properties": "Properties",
   "Resolution": "Resolution",
   "RoomCreateUserCount": "Users added ({{count}}).",

@@ -64,6 +64,23 @@ const successDisabled = {
   statusCode: 200,
 };
 
+const successNeedReset = {
+  response: {
+    enabled: true,
+    type: 1,
+    needReset: true,
+  },
+  count: 1,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_CONFIG_WEB_SEARCH}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
 const successSet = {
   response: {
     enabled: true,
@@ -81,7 +98,13 @@ const successSet = {
   statusCode: 200,
 };
 
-export const aiWebSearchGetHandler = (type: "enabled" | "disabled") => {
+export const aiWebSearchGetHandler = (
+  type: "enabled" | "disabled" | "needReset",
+) => {
+  if (type === "needReset") {
+    return new Response(JSON.stringify(successNeedReset));
+  }
+
   return new Response(
     JSON.stringify(type === "enabled" ? successEnabled : successDisabled),
   );

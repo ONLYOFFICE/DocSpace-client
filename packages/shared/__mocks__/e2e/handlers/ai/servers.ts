@@ -69,6 +69,7 @@ const successList = {
         headerKey: "headerValue",
       },
       enabled: true,
+      needReset: false,
     },
     {
       id: "883da87d-5ae0-49fd-8cb9-2cb82181667e",
@@ -80,6 +81,67 @@ const successList = {
   ],
   count: 2,
   total: 2,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_SERVERS_WITH_FILTER}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+const successListDisabled = {
+  response: [
+    {
+      id: "7a1f3c6d-1c3b-4704-b8ed-8dc90d0f371f",
+      name: "test custom server",
+      description: "asdf",
+      endpoint: "http://custom-mcp.com",
+      serverType: 0,
+      headers: {
+        headerKey: "headerValue",
+      },
+      enabled: false,
+      needReset: false,
+    },
+    {
+      id: "883da87d-5ae0-49fd-8cb9-2cb82181667e",
+      name: "test system server",
+      endpoint: "http://system-mcp.com",
+      serverType: 1,
+      enabled: false,
+    },
+  ],
+  count: 2,
+  total: 2,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_SERVERS_WITH_FILTER}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+const successListNeedReset = {
+  response: [
+    {
+      id: "7a1f3c6d-1c3b-4704-b8ed-8dc90d0f371f",
+      name: "test custom server",
+      description: "asdf",
+      endpoint: "http://custom-mcp.com",
+      serverType: 0,
+      headers: {
+        headerKey: "headerValue",
+      },
+      enabled: false,
+      needReset: true,
+    },
+  ],
+  count: 1,
+  total: 1,
   links: [
     {
       href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_SERVERS_WITH_FILTER}`,
@@ -124,8 +186,16 @@ export const aiServersAvailableHandler = () => {
   return new Response(JSON.stringify(successAvailable));
 };
 
-export const aiServersGetHandler = () => {
-  return new Response(JSON.stringify(successList));
+export const aiServersGetHandler = (
+  type: "enabled" | "disabled" | "needReset" = "enabled",
+) => {
+  if (type === "needReset") {
+    return new Response(JSON.stringify(successListNeedReset));
+  }
+
+  return new Response(
+    JSON.stringify(type === "enabled" ? successList : successListDisabled),
+  );
 };
 
 export const aiServersPostHandler = () => {

@@ -175,6 +175,8 @@ import {
   PATH_AI_CONFIG_VECTORIZATION,
   aiVectorizationGetHandler,
   aiVectorizationPutHandler,
+  PATH_AI_SERVER_STATUS,
+  aiServerStatusPutHandler,
 } from "./ai";
 import { PATH_TAGS, roomTagsHandler } from "./rooms";
 import {
@@ -434,6 +436,10 @@ export const endpoints = {
     url: `${BASE_URL}${PATH_AI_PROVIDERS}`,
     dataHandler: aiProvidersHandler,
   },
+  aiProvidersListNeedReset: {
+    url: `${BASE_URL}${PATH_AI_PROVIDERS}`,
+    dataHandler: () => aiProvidersHandler({ needReset: true }),
+  },
   aiProvidersEmptyList: {
     url: `${BASE_URL}${PATH_AI_PROVIDERS}`,
     dataHandler: () => aiProvidersHandler({ isEmpty: true }),
@@ -473,6 +479,10 @@ export const endpoints = {
     url: `${BASE_URL}${PATH_AI_MODELS}`,
     dataHandler: () => aiModelsHandler({ isOpenRouter: true }),
   },
+  aiModelsError: {
+    url: `${BASE_URL}${PATH_AI_MODELS}`,
+    dataHandler: () => aiModelsHandler({ isError: true }),
+  },
   aiServer: {
     url: `${BASE_URL}${PATH_AI_SERVER}`,
     dataHandler: aiServerHandler,
@@ -484,6 +494,14 @@ export const endpoints = {
   aiServersList: {
     url: `${BASE_URL}${PATH_AI_SERVERS_WITH_FILTER}`,
     dataHandler: aiServersGetHandler,
+  },
+  aiServersListDisabled: {
+    url: `${BASE_URL}${PATH_AI_SERVERS_WITH_FILTER}`,
+    dataHandler: () => aiServersGetHandler("disabled"),
+  },
+  aiServersListNeedReset: {
+    url: `${BASE_URL}${PATH_AI_SERVERS_WITH_FILTER}`,
+    dataHandler: () => aiServersGetHandler("needReset"),
   },
   createAiServer: {
     url: `${BASE_URL}${PATH_AI_SERVERS}`,
@@ -500,13 +518,27 @@ export const endpoints = {
     dataHandler: aiServerPutHandler,
     method: "PUT",
   },
-  aiWebSearchListEnabled: {
+  enableAiServer: {
+    url: `${BASE_URL}${PATH_AI_SERVER_STATUS}`,
+    dataHandler: () => aiServerStatusPutHandler("enable"),
+    method: "PUT",
+  },
+  disableAiServer: {
+    url: `${BASE_URL}${PATH_AI_SERVER_STATUS}`,
+    dataHandler: () => aiServerStatusPutHandler("disable"),
+    method: "PUT",
+  },
+  aiWebSearchEnabled: {
     url: `${BASE_URL}${PATH_AI_CONFIG_WEB_SEARCH}`,
     dataHandler: () => aiWebSearchGetHandler("enabled"),
   },
-  aiWebSearchListDisabled: {
+  aiWebSearchDisabled: {
     url: `${BASE_URL}${PATH_AI_CONFIG_WEB_SEARCH}`,
     dataHandler: () => aiWebSearchGetHandler("disabled"),
+  },
+  aiWebSearchNeedReset: {
+    url: `${BASE_URL}${PATH_AI_CONFIG_WEB_SEARCH}`,
+    dataHandler: () => aiWebSearchGetHandler("needReset"),
   },
   setWebSearchSettings: {
     url: `${BASE_URL}${PATH_AI_CONFIG_WEB_SEARCH}`,
@@ -520,6 +552,10 @@ export const endpoints = {
   aiVectorizationSettingsDisabled: {
     url: `${BASE_URL}${PATH_AI_CONFIG_VECTORIZATION}`,
     dataHandler: () => aiVectorizationGetHandler("disabled"),
+  },
+  aiVectorizationSettingsNeedReset: {
+    url: `${BASE_URL}${PATH_AI_CONFIG_VECTORIZATION}`,
+    dataHandler: () => aiVectorizationGetHandler("needReset"),
   },
   setVectorizationSettings: {
     url: `${BASE_URL}${PATH_AI_CONFIG_VECTORIZATION}`,

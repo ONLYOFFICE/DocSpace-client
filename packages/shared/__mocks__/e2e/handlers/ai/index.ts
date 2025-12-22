@@ -44,7 +44,13 @@ export {
   PATH_AI_PROVIDERS_AVAILABLE,
 } from "./providersAvailable";
 
-export { aiServerHandler, PATH_AI_SERVER, aiServerPutHandler } from "./server";
+export {
+  aiServerHandler,
+  PATH_AI_SERVER,
+  aiServerPutHandler,
+  aiServerStatusPutHandler,
+  PATH_AI_SERVER_STATUS,
+} from "./server";
 
 export {
   PATH_AI_CONFIG_WEB_SEARCH,

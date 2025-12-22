@@ -284,6 +284,77 @@ test.describe("AI settings", () => {
       await expect(firstProviderTile).toBeVisible();
       await expect(firstProviderTile).toContainText(updateRes.response.title);
     });
+
+    test("should render error icon and key input in error state if AI Provider needs reset", async ({
+      page,
+      mockRequest,
+    }) => {
+      await mockRequest.router([
+        endpoints.aiProvidersListNeedReset,
+        endpoints.aiProvidersAvailable,
+        endpoints.updateAiProvider,
+      ]);
+
+      await page.goto("/portal-settings/ai-settings/providers");
+
+      const firstProviderTile = page.getByTestId("ai-provider-tile").first();
+      await expect(firstProviderTile).toBeVisible();
+
+      const errorIcon = firstProviderTile.getByTestId("ai-tile-error-icon");
+      await expect(errorIcon).toBeVisible();
+
+      const contextMenuBtn = firstProviderTile.getByTestId(
+        "context-menu-button",
+      );
+      await contextMenuBtn.click();
+
+      const settingsItem = page.getByTestId("settings_item");
+      await settingsItem.click();
+
+      const updateProviderForm = page.getByTestId("update-provider-form");
+      await expect(updateProviderForm).toBeVisible();
+
+      const providerKeyInput = page.getByTestId("provider-key-input");
+
+      await expect(providerKeyInput).toBeVisible();
+      await expect(providerKeyInput).toHaveAttribute("data-error", "true");
+    });
+
+    test("should render error icon in providers tiles if models are not available", async ({
+      page,
+      mockRequest,
+    }) => {
+      await mockRequest.router([
+        endpoints.aiProvidersList,
+        endpoints.aiProvidersAvailable,
+        endpoints.aiModelsError,
+      ]);
+
+      await page.goto("/portal-settings/ai-settings/providers");
+      const tiles = page.getByTestId("ai-provider-tile");
+      await expect(tiles).toHaveCount(4);
+
+      const tilesWithErrors = page.getByTestId("ai-tile-error-icon");
+      await expect(tilesWithErrors).toHaveCount(4);
+    });
+
+    test("should not render error icon in providers tiles if models are available", async ({
+      page,
+      mockRequest,
+    }) => {
+      await mockRequest.router([
+        endpoints.aiProvidersList,
+        endpoints.aiProvidersAvailable,
+        endpoints.aiModelsClaude,
+      ]);
+
+      await page.goto("/portal-settings/ai-settings/providers");
+      const tiles = page.getByTestId("ai-provider-tile");
+      await expect(tiles).toHaveCount(4);
+
+      const tilesWithErrors = page.getByTestId("ai-tile-error-icon");
+      await expect(tilesWithErrors).toHaveCount(0);
+    });
   });
 
   test.describe("MCP servers", () => {
@@ -582,6 +653,152 @@ test.describe("AI settings", () => {
         updateIcon: true,
       });
     });
+
+    test("should disable mcp server", async ({ page, mockRequest }) => {
+      await mockRequest.router([
+        endpoints.aiServersList,
+        endpoints.aiProvidersList,
+        endpoints.updateAiServer,
+        endpoints.disableAiServer,
+      ]);
+
+      const listRespPromise = page.waitForResponse(
+        (r) =>
+          r.url().includes(PATH_AI_SERVERS) && r.request().method() === "GET",
+      );
+
+      await page.goto("/portal-settings/ai-settings/servers");
+
+      const listResp = await listRespPromise;
+      const body = await listResp.json();
+
+      const customMcpData = body.response.find(
+        (s: TServer) => s.serverType === ServerType.Custom,
+      );
+
+      const customMcpTiles = page
+        .getByTestId("custom-mcp-list")
+        .getByTestId("mcp-tile");
+      const firstCustomMcpTile = customMcpTiles.first();
+      const toggleButton = firstCustomMcpTile.getByTestId("mcp-toggle-button");
+      await toggleButton.click();
+
+      const disableDialog = page.getByRole("dialog");
+      await expect(disableDialog).toBeVisible();
+
+      const dialogConfirmButton =
+        disableDialog.getByTestId("disable-mcp-button");
+
+      const reqPromise = page.waitForRequest(
+        (r) =>
+          r.url().endsWith(`${PATH_AI_SERVERS}/${customMcpData.id}/status`) &&
+          r.method() === "PUT",
+      );
+
+      await dialogConfirmButton.click();
+
+      const req = await reqPromise;
+      const payload = req.postDataJSON();
+
+      expect(payload).toEqual({
+        enabled: false,
+      });
+
+      await expect(toggleButton).toHaveAttribute("aria-checked", "false");
+    });
+
+    test("should enable mcp server", async ({ page, mockRequest }) => {
+      await mockRequest.router([
+        endpoints.aiServersListDisabled,
+        endpoints.aiProvidersList,
+        endpoints.updateAiServer,
+        endpoints.enableAiServer,
+      ]);
+
+      const listRespPromise = page.waitForResponse(
+        (r) =>
+          r.url().includes(PATH_AI_SERVERS) && r.request().method() === "GET",
+      );
+
+      await page.goto("/portal-settings/ai-settings/servers");
+
+      const listResp = await listRespPromise;
+      const body = await listResp.json();
+
+      const customMcpData = body.response.find(
+        (s: TServer) => s.serverType === ServerType.Custom,
+      );
+
+      const customMcpTiles = page
+        .getByTestId("custom-mcp-list")
+        .getByTestId("mcp-tile");
+      const firstCustomMcpTile = customMcpTiles.first();
+      const toggleButton = firstCustomMcpTile.getByTestId("mcp-toggle-button");
+
+      const reqPromise = page.waitForRequest(
+        (r) =>
+          r.url().endsWith(`${PATH_AI_SERVERS}/${customMcpData.id}/status`) &&
+          r.method() === "PUT",
+      );
+
+      await toggleButton.click();
+
+      const req = await reqPromise;
+      const payload = req.postDataJSON();
+
+      expect(payload).toEqual({
+        enabled: true,
+      });
+
+      await expect(toggleButton).toHaveAttribute("aria-checked", "true");
+    });
+
+    test("should render alert icon and headers inputs in error state if mcp needs reset", async ({
+      page,
+      mockRequest,
+    }) => {
+      await mockRequest.router([
+        endpoints.aiServersListNeedReset,
+        endpoints.aiProvidersList,
+        endpoints.updateAiServer,
+        endpoints.enableAiServer,
+      ]);
+
+      await page.goto("/portal-settings/ai-settings/servers");
+
+      const customMcpTiles = page
+        .getByTestId("custom-mcp-list")
+        .getByTestId("mcp-tile");
+      const firstCustomMcpTile = customMcpTiles.first();
+      const errorIcon = firstCustomMcpTile.getByTestId("ai-tile-error-icon");
+      await expect(errorIcon).toBeVisible();
+
+      const toggle = firstCustomMcpTile.getByTestId("toggle-button-input");
+      await expect(toggle).toBeDisabled();
+
+      const contextMenuBtn = firstCustomMcpTile.getByTestId(
+        "mcp-context-menu-button",
+      );
+      await contextMenuBtn.click();
+
+      const settingsItem = page.getByTestId("settings_item");
+      await settingsItem.click();
+
+      const updateMcpForm = page.getByTestId("edit-mcp-form");
+      await expect(updateMcpForm).toBeVisible();
+
+      const mcpHeaderNameInput = updateMcpForm.getByTestId(
+        "mcp-header-name-input",
+      );
+      await expect(mcpHeaderNameInput).toBeVisible();
+      await expect(mcpHeaderNameInput).toHaveAttribute("data-error", "true");
+
+      const mcpHeaderValueInput = updateMcpForm.getByTestId(
+        "mcp-header-value-input",
+      );
+      await expect(mcpHeaderValueInput).toBeVisible();
+      await expect(mcpHeaderValueInput).toHaveAttribute("data-error", "true");
+    });
   });
 
   test.describe("Web Search", () => {
@@ -591,7 +808,7 @@ test.describe("AI settings", () => {
     }) => {
       await mockRequest.router([
         endpoints.aiProvidersEmptyList,
-        endpoints.aiWebSearchListDisabled,
+        endpoints.aiWebSearchDisabled,
       ]);
       await page.goto("/portal-settings/ai-settings/search");
 
@@ -614,7 +831,7 @@ test.describe("AI settings", () => {
     }) => {
       await mockRequest.router([
         endpoints.aiProvidersList,
-        endpoints.aiWebSearchListDisabled,
+        endpoints.aiWebSearchDisabled,
       ]);
       await page.goto("/portal-settings/ai-settings/search");
 
@@ -625,7 +842,7 @@ test.describe("AI settings", () => {
     test("should set web search settings", async ({ page, mockRequest }) => {
       await mockRequest.router([
         endpoints.aiProvidersList,
-        endpoints.aiWebSearchListDisabled,
+        endpoints.aiWebSearchDisabled,
         endpoints.setWebSearchSettings,
       ]);
       await page.goto("/portal-settings/ai-settings/search");
@@ -687,7 +904,7 @@ test.describe("AI settings", () => {
     test("should reset web search settings", async ({ page, mockRequest }) => {
       await mockRequest.router([
         endpoints.aiProvidersList,
-        endpoints.aiWebSearchListEnabled,
+        endpoints.aiWebSearchEnabled,
         endpoints.setWebSearchSettings,
       ]);
       await page.goto("/portal-settings/ai-settings/search");
@@ -735,6 +952,32 @@ test.describe("AI settings", () => {
       await expect(engineCombobox.getByRole("button")).toBeEnabled();
 
       await expect(resetButton).toBeDisabled();
+    });
+
+    test("should render combobox with selected exa and empty key input if web search needs reset", async ({
+      page,
+      mockRequest,
+    }) => {
+      await mockRequest.router([
+        endpoints.aiProvidersList,
+        endpoints.aiWebSearchNeedReset,
+      ]);
+      await page.goto("/portal-settings/ai-settings/search");
+
+      const engineCombobox = page.getByTestId("web-search-engine-combobox");
+      await expect(engineCombobox.getByRole("button")).toBeEnabled();
+      await expect(engineCombobox.getByRole("button")).toContainText("Exa");
+
+      const keyInput = page
+        .getByTestId("web-search-key-input")
+        .getByTestId("text-input");
+      await expect(keyInput).toBeEnabled();
+
+      const resetButton = page.getByTestId("web-search-reset-button");
+      await expect(resetButton).toBeDisabled();
+
+      const saveButton = page.getByTestId("web-search-save-button");
+      await expect(saveButton).toBeDisabled();
     });
   });
 
@@ -905,6 +1148,34 @@ test.describe("AI settings", () => {
       await expect(providerCombobox.getByRole("button")).toBeEnabled();
 
       await expect(resetButton).toBeDisabled();
+    });
+
+    test("should render combobox with selected OpenAI provider and empty key input if knowledge needs reset", async ({
+      page,
+      mockRequest,
+    }) => {
+      await mockRequest.router([
+        endpoints.aiProvidersList,
+        endpoints.aiVectorizationSettingsNeedReset,
+      ]);
+      await page.goto("/portal-settings/ai-settings/knowledge");
+
+      const providerCombobox = page.getByTestId("knowledge-provider-combobox");
+      await expect(providerCombobox.getByRole("button")).toBeEnabled();
+      await expect(providerCombobox.getByRole("button")).toContainText(
+        "OpenAI",
+      );
+
+      const keyInput = page
+        .getByTestId("knowledge-key-input")
+        .getByTestId("text-input");
+      await expect(keyInput).toBeEnabled();
+
+      const resetButton = page.getByTestId("knowledge-reset-button");
+      await expect(resetButton).toBeDisabled();
+
+      const saveButton = page.getByTestId("knowledge-save-button");
+      await expect(saveButton).toBeDisabled();
     });
   });
 });

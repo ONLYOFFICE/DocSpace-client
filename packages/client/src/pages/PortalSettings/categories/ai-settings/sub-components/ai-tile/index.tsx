@@ -111,7 +111,7 @@ const Header = ({
         {hasError ? (
           <>
             <LoadErrorIcon
-              dataTestId="ai-tile-error-icon"
+              data-testid="ai-tile-error-icon"
               className={styles.errorIcon}
               data-tooltip-id={tooltipId}
             />

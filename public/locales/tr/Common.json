@@ -330,7 +330,6 @@
   "EditUserStatistics": "Kullanıcı istatistikleri",
   "Email": "E-posta",
   "Embed": "Göm",
-  "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "{{productName}}'de gelişmiş özellikleri açmak için kendi yapay zeka hizmetinizi bağlayın. Eklendikten sonra, yapay zeka sohbetlerinde tüm kullanıcıların erişimine açık olacaktır.",
   "EmptyBackupList": "Henüz hiçbir yedekleme yapılmadı. Listede yer alması için bir veya daha fazla yedekleme yapın.",
   "EmptyChatAIDisabledSaasAdminDescription": "AI servisi devre dışı bırakıldığı için bu ajan sohbetleri işleyemiyor veya görevleri yerine getiremiyor. Tam işlevselliği geri yüklemek için {{productName}} ayarlarında AI özelliklerini etkinleştirin.",
   "EmptyChatAIDisabledUserDescription": "AI yetenekleri şu anda kapalı durumda, bu da bu aracın sohbetleri veya görevleri işleyemediği anlamına gelir. Tekrar yola getirmek için, {{productName}} yöneticinizden AI özelliklerini etkinleştirmesini isteyin.",

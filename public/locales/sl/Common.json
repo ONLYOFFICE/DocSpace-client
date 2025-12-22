@@ -330,7 +330,6 @@
   "EditUserStatistics": "Statistika uporabnikov",
   "Email": "Email",
   "Embed": "Vdelaj",
-  "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "Povežite svojo AI storitev, da odklenete napredne funkcije v {{productName}}. Ko je dodana, bo na voljo vsem uporabnikom v pogovornih z AI.",
   "EmptyBackupList": "Varnostno kopiranje še ni bilo ustvarjeno. Ustvarite eno ali več varnostnih kopiranj, če želite, da se prikažejo na seznamu.",
   "EmptyChatAIDisabledSaasAdminDescription": "Storitev umetne inteligence je onemogočena, kar preprečuje temu agentu obdelavo klepetalnih oken ali izvajanje nalog. Za ponovno omogočitev polne funkcionalnosti omogočite funkcije umetne inteligence v nastavitvah {{productName}}.",
   "EmptyChatAIDisabledUserDescription": "Zmogljivosti umetne inteligence so trenutno onemogočene, kar pomeni, da ta agent ne more obdelovati klepetalnih pogovorov ali opravil. Da bi se vrnili na pravi tir, prosite skrbnika {{productName}}, da omogoči funkcije umetne inteligence.",

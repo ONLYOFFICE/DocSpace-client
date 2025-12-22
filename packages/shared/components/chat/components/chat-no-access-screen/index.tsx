@@ -68,6 +68,7 @@ export const ChatNoAccessScreen = ({
     .with([true, true], () =>
       t("Common:EmptyAIAgentsAIDisabledStandaloneAdminDescription", {
         productName: t("Common:ProductName"),
+        aiChats: t("Common:AIChats"),
       }),
     )
     // saas admin

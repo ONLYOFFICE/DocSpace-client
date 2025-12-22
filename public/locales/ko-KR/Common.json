@@ -330,7 +330,6 @@
   "EditUserStatistics": "사용자 통계",
   "Email": "이메일",
   "Embed": "임베드",
-  "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "{{productName}}에 자체 AI 서비스를 연결하여 고급 기능을 잠금 해제하세요. 추가되면 AI 채팅에서 모든 사용자가 액세스할 수 있습니다.",
   "EmptyBackupList": "아직 백업이 생성되지 않았습니다. 이 목록에 표시될 하나 이상의 백업을 생성하세요.",
   "EmptyChatAIDisabledSaasAdminDescription": "AI 서비스가 종료되어 이 에이전트가 채팅을 처리하거나 작업을 수행할 수 없습니다. 모든 기능을 복원하려면 {{productName}} 설정에서 AI 기능을 활성화하세요.",
   "EmptyChatAIDisabledUserDescription": "AI 기능은 현재 꺼져 있습니다. 즉, 이 에이전트는 채팅이나 작업을 처리할 수 없습니다. 다시 시작하려면 {{productName}} 관리자에게 AI 기능을 활성화해 달라고 요청하세요.",

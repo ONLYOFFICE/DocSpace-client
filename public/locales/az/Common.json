@@ -330,7 +330,6 @@
   "EditUserStatistics": "İstifadəçi statistikası",
   "Email": "E-poçt",
   "Embed": "Yerləşdirin",
-  "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "{{productName}} ilə öz Sİ xidmətinizi qoşaraq, daha inkişaf etmiş funksiyalara açın. Əlavə edildikdən sonra, bu, Sİ söhbətlərində bütün istifadəçilərə əlçatman olacaq.",
   "EmptyBackupList": "Hələ heç bir ehtiyat nüsxəsi yaradılmayıb. Onların bu siyahıda görünməsi üçün bir və ya bir neçə ehtiyat nüsxəsi yaradın.",
   "EmptyChatAIDisabledSaasAdminDescription": "Süni İntellekt xidməti söndürülüb, bu agentin söhbətləri işləməsinə və tapşırıqları yerinə yetirməsinə mane olur. Tam funksionaliyyəti bərpa etmək üçün {{productName}} parametrlərində Süni İntellekt funksiyalarını aktiv edin.",
   "EmptyChatAIDisabledUserDescription": "S.İ. (Süni İntellekt) funksiyaları hazırda söndürülü, bu da agentin söhbətləri və tapşırıqları işləməyini olar. Yenidən işə başlamak üçün, {{productName}} administratorundan S.İ. funksiyalarını aktiv etməsini xahiş edin.",

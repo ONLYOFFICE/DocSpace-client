@@ -330,7 +330,6 @@
   "EditUserStatistics": "Statistika të përdoruesve",
   "Email": "Email",
   "Embed": "E ngulitur",
-  "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "Lidh shërbimin tënd të IA-së për të zhbllokuar veçori të përparuara në {{productName}}. Pasi të shtohet, do të jetë i arritshëm për të gjithë përdoruesit në bisedat e IA-së.",
   "EmptyBackupList": "Asnjë kopje rezervë nuk është krijuar ende. Krijoni një ose më shumë kopje rezervë që ato të shfaqen në këtë listë.",
   "EmptyChatAIDisabledSaasAdminDescription": "Shërbimi i IA-së është i çaktivizuar, duke e penguar këtë agjent të përpunojë biseda ose të kryejë detyra. Për të rivendosur funksionalitetin e plotë, aktivizoni veçoritë e IA-së në cilësimet e {{productName}}.",
   "EmptyChatAIDisabledUserDescription": "Aftësitë e inteligjencës artificiale janë aktualisht të çaktivizuara, që do të thotë se ky agjent nuk mund të përpunojë biseda ose detyra. Për t'u rikthyer në rrugën e duhur, kërkojini administratorit tuaj të {{productName}} të aktivizojë veçoritë e inteligjencës artificiale.",

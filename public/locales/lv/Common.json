@@ -330,7 +330,6 @@
   "EditUserStatistics": "Lietotāju statistika",
   "Email": "E-pasts",
   "Embed": "Iegult",
-  "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "Pievienojiet savu MI pakalpojumu, lai atbloķētu papildu funkcijas {{productName}}. Kad tas būs pievienots, tas būs pieejams visiem lietotājiem MI tērzēšanā.",
   "EmptyBackupList": "Vēl nav izveidotas rezerves kopijas. Izveidojiet vismaz vienu rezerves kopiju, lai tā parādītos šajā sarakstā.",
   "EmptyChatAIDisabledSaasAdminDescription": "MI pakalpojums ir izslēgts, kas neļauj šim aģentam apstrādāt tērzēšanu vai veikt uzdevumus. Lai atjaunotu pilnu funkcionalitāti, iespējojiet MI funkcijas {{productName}} iestatējumos.",
   "EmptyChatAIDisabledUserDescription": "MI iespējas šobrīd ir izslēgtas, kas nozīmē, ka šis aģents nevar apstrādāt tērzēšanu vai uzdevumus. Lai atgrieztos darba ritē, lūdziet savu {{productName}} administratoru iespējot MI funkcijas.",

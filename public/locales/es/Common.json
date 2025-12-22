@@ -330,7 +330,6 @@
   "EditUserStatistics": "Estadísticas de usuarios",
   "Email": "Email",
   "Embed": "Incrustar",
-  "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "Conecte su propio servicio de IA para desbloquear funciones avanzadas en {{productName}}. Una vez añadido, será accesible para todos los usuarios en los chats de IA.",
   "EmptyBackupList": "No hay ningunas copias de seguridad creadas todavía. Cree por lo menos una copia para que se muestre en esta lista.",
   "EmptyChatAIDisabledSaasAdminDescription": "El servicio de IA está desactivado, lo que impide que este agente procese chats o realice tareas. Para restaurar la funcionalidad completa, active las funciones de IA en los ajustes de {{productName}}.",
   "EmptyChatAIDisabledUserDescription": "Las capacidades de IA están actualmente desactivadas, lo que significa que este agente no puede procesar chats ni tareas. Para volver a activarlo, pídale al administrador de {{productName}} que habilite las funciones de IA.",

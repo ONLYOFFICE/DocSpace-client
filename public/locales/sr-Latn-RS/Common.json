@@ -330,7 +330,6 @@
   "EditUserStatistics": "Statistika korisnika",
   "Email": "Email",
   "Embed": "Ugradi",
-  "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "Povežite sopstvenu AI uslugu da biste otključali napredne funkcije u {{productName}}. Nakon dodavanja, biće dostupan svim korisnicima u AI razgovorima.",
   "EmptyBackupList": "Još uvek nije kreirana nijedna rezervna kopija. Kreirajte jednu ili više rezervnih kopija da bi se pojavile na ovoj listi.",
   "EmptyChatAIDisabledSaasAdminDescription": "AI usluga je isključena, sprečavajući ovog agenta da obrađuje ćaskanje ili obavlja zadatke. Da biste vratili punu funkcionalnost, omogućite AI funkcije u podešavanjima {{productName}}.",
   "EmptyChatAIDisabledUserDescription": "AI mogućnosti su trenutno isključene, što znači da ovaj agent ne može da obrađuje razgovore ili zadatke. Da biste se vratili na pravi put, zamolite svog {{productName}} administratora da omogući AI funkcije.",

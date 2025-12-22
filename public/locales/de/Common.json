@@ -330,7 +330,6 @@
   "EditUserStatistics": "Benutzerstatistiken",
   "Email": "E-Mail",
   "Embed": "Einbetten",
-  "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "Verbinden Sie Ihren eigenen KI-Dienst, um erweiterte Funktionen in {{productName}} freizuschalten. Nach der Hinzufügung steht er allen Nutzern in KI-Chats zur Verfügung.",
   "EmptyBackupList": "Keine Sicherungskopien wurden noch erstellt. Erstellen Sie eine oder mehrere Sicherungskopien, damit sie in dieser Liste erscheint.",
   "EmptyChatAIDisabledSaasAdminDescription": "Der KI-Dienst ist deaktiviert, wodurch dieser Agent keine Chats verarbeiten oder Aufgaben ausführen kann. Um die volle Funktionalität wiederherzustellen, aktivieren Sie die KI-Funktionen in den Einstellungen von {{productName}}.",
   "EmptyChatAIDisabledUserDescription": "Die KI-Funktionen sind derzeit deaktiviert, daher kann dieser Agent weder Chats noch Aufgaben bearbeiten. Um wieder normal arbeiten zu können, bitten Sie Ihren {{productName}}-Administrator, die KI-Funktionen zu aktivieren.",

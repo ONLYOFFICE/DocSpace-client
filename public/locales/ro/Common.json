@@ -330,7 +330,6 @@
   "EditUserStatistics": "Statistici de utilizare",
   "Email": "e-mail",
   "Embed": "Încorporare",
-  "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "Conectați serviciu de IA propriu pentru a activa caracteristicile avansate în {{productName}}. Odată adăugat, serviciu va deveni disponibil pentru toți utilizatorii din chat-urile IA.",
   "EmptyBackupList": "Nu există nicio copie de rezervă salvată. Creați una sau mai multe copii de rezervă pentru ca acestea să apară în lista.",
   "EmptyChatAIDisabledSaasAdminDescription": "Serviciul IA este dezactivat, ceea ce împiedică agentului să proceseze conversații sau să execute sarcini. Pentru a recupera funcționalitatea completă, activați funcțiile de IA în secțiunea cu setările {{productName}}.",
   "EmptyChatAIDisabledUserDescription": "Capacitățile de IA sunt actualmente dezactivate, ceea ce înseamnă că acest agent nu poate procesa conversații sau sarcini. Pentru a remedia această situație, solicitați administratorului {{productName}} să activeze funcțiile de IA.",

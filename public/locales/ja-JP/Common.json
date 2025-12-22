@@ -330,7 +330,6 @@
   "EditUserStatistics": "ユーザー統計",
   "Email": "メール",
   "Embed": "埋め込み",
-  "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "{{productName}}の高度な機能を解放するには、独自のAIサービスを接続してください。追加後、AIチャットで全ユーザーが利用可能になります。",
   "EmptyBackupList": "バックアップはまだ作成されていません。バックアップを作成すると、このリストに表示されるようになります。",
   "EmptyChatAIDisabledSaasAdminDescription": "AI機能は現在無効化されているため、このエージェントはチャットの処理やタスクの実行ができません。完全な機能を復元するには、{{productName}}の設定でAI機能を有効にしてください。",
   "EmptyChatAIDisabledUserDescription": "AI機能は現在無効化されています。これにより、このエージェントはチャットやタスクを処理できません。正常に機能させるには、{{productName}}の管理者までAI機能を有効化するようにご連絡ください。",

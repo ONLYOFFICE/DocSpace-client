@@ -219,6 +219,7 @@ const getAIAgentsAIDisabledDescription = (
     .with([true, true], () =>
       t("Common:EmptyAIAgentsAIDisabledStandaloneAdminDescription", {
         productName: t("Common:ProductName"),
+        aiChats: t("Common:AIChats"),
       }),
     )
     .with([false, true], () =>

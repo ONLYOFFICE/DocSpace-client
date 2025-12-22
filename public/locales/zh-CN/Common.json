@@ -330,7 +330,6 @@
   "EditUserStatistics": "用户统计",
   "Email": "电子邮件",
   "Embed": "嵌入",
-  "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "连接您自己的 AI 服务以解锁{{productName}}中的高级功能。添加后，所有用户都可在 AI 对话中使用它。",
   "EmptyBackupList": "尚未创建任何备份。请创建一个或多个备份，使其显示在此列表中。",
   "EmptyChatAIDisabledSaasAdminDescription": "AI 服务已关闭，阻止此智能体处理对话或执行任务。要恢复完整功能，请在{{productName}}设置中启用 AI 功能。",
   "EmptyChatAIDisabledUserDescription": "AI 当前已关闭，这意味着此智能体无法处理对话或任务。要恢复正常，请让您的{{productName}}管理员启用 AI 功能。",

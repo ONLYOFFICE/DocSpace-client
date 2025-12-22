@@ -330,7 +330,6 @@
   "EditUserStatistics": "Thống kê người dùng",
   "Email": "Email",
   "Embed": "Nhúng",
-  "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "Kết nối dịch vụ AI của riêng bạn để mở khóa các tính năng nâng cao trong {{productName}}. Sau khi thêm, nó sẽ có thể truy cập được cho tất cả người dùng trong các cuộc trò chuyện AI.",
   "EmptyBackupList": "Chưa có bản sao lưu nào được tạo. Tạo một hoặc nhiều bản sao lưu để chúng xuất hiện trong danh sách này.",
   "EmptyChatAIDisabledSaasAdminDescription": "Dịch vụ AI đã bị tắt, ngăn chặn agent này xử lý các cuộc trò chuyện hoặc thực hiện các tác vụ. Để khôi phục đầy đủ chức năng, hãy bật các tính năng AI trong cài đặt {{productName}}.",
   "EmptyChatAIDisabledUserDescription": "Các khả năng AI hiện đang bị tắt, điều này có nghĩa là agent này không thể xử lý các cuộc trò chuyện hoặc tác vụ. Để quay trở lại hoạt động, hãy yêu cầu quản trị viên {{productName}} của bạn bật lại các tính năng AI.",

@@ -330,7 +330,6 @@
   "EditUserStatistics": "Uživatelské statistiky",
   "Email": "E-mail",
   "Embed": "Vložit",
-  "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "Propojte vlastní AI službu a odemkněte pokročilé funkce v {{productName}}. Jakmile bude přidána, bude dostupná všem uživatelům v AI chatech.",
   "EmptyBackupList": "Zatím nebyly vytvořeny žádné zálohy. Vytvořte jednu nebo více záloh, aby byly zobrazeny v seznamu.",
   "EmptyChatAIDisabledSaasAdminDescription": "Služba AI je vypnuta, což znemožňuje tomuto agentovi zpracovávat chaty nebo provádět úkoly. Pro obnovení plné funkčnosti povolte funkce AI v nastavení {{productName}}.",
   "EmptyChatAIDisabledUserDescription": "Aktuálně jsou funkce AI vypnuté, což znamená, že tento agent nemůže zpracovávat chaty ani úkoly. Aby se vrátili na správnou cestu, požádejte administrátora {{productName}}, aby povolil funkce AI.",

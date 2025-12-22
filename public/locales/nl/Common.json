@@ -330,7 +330,6 @@
   "EditUserStatistics": "Gebruikersstatistieken",
   "Email": "E-mail",
   "Embed": "Insluiten",
-  "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "Koppel uw eigen AI-service om geavanceerde functies in {{productName}} te ontgrendelen. Zodra deze is toegevoegd, is deze toegankelijk voor alle gebruikers in AI-chats.",
   "EmptyBackupList": "Er zijn nog geen back-ups gemaakt. Maak een of meer back-ups om ze in de lijst te laten zien.",
   "EmptyChatAIDisabledSaasAdminDescription": "De AI-service is uitgeschakeld, waardoor deze agent geen chats kan verwerken of taken kan uitvoeren. Om de volledige functionaliteit te herstellen, schakel AI-functies in de {{productName}} instellingen in.",
   "EmptyChatAIDisabledUserDescription": "AI-mogelijkheden zijn momenteel uitgeschakeld, wat betekent dat deze agent geen chats of taken kan verwerken. Om weer op de rails te komen, vraag je {{productName}}-beheerder om AI-functies in te schakelen.",

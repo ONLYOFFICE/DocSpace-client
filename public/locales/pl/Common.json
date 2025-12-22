@@ -330,7 +330,6 @@
   "EditUserStatistics": "Statystyki użytkowników",
   "Email": "E-mail",
   "Embed": "Osadź",
-  "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "Podłącz własną usługę AI, aby odblokować zaawansowane funkcje w {{productName}}. Po dodaniu będzie ona dostępna dla wszystkich użytkowników w czatach AI.",
   "EmptyBackupList": "Nie utworzono jeszcze kopii zapasowych. Utwórz jedną lub więcej kopii zapasowych, aby je wyświetlić na tej liście.",
   "EmptyChatAIDisabledSaasAdminDescription": "Usługa AI jest wyłączona, co uniemożliwia temu agentowi przetwarzanie rozmów lub wykonywanie zadań. Aby przywrócić pełną funkcjonalność, włącz funkcje AI w ustawieniach {{productName}}.",
   "EmptyChatAIDisabledUserDescription": "Możliwości AI są obecnie wyłączone, co oznacza, że ten agent nie może przetwarzać czatów ani zadań. Aby wrócić do działania, poproś administratora {{productName}}, aby włączył funkcje AI.",

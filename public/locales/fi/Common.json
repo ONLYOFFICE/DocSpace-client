@@ -330,7 +330,6 @@
   "EditUserStatistics": "Käyttäjästatistiikat",
   "Email": "Sähköposti",
   "Embed": "Upota",
-  "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "Yhdistä oma tekoälypalvelusi avataksesi edistyneitä ominaisuuksia {{productName}}-palvelussa. Kun se on lisätty, se on kaikkien käyttäjien käytettävissä tekoälykeskusteluissa.",
   "EmptyBackupList": "Ei varmuuskopioita. Luo yksi tai useampi varmuuskopio ja ne näkyvät tässä listassa.",
   "EmptyChatAIDisabledSaasAdminDescription": "Tekoälypalvelu on poissa käytöstä, mikä estää tätä agenttia käsittelemästä keskusteluja tai suorittamasta tehtäviä. Palauttaaksesi täyden toiminnallisuuden, ota tekoälyominaisuudet käyttöön {{productName}}-asetuksissa.",
   "EmptyChatAIDisabledUserDescription": "Teknologian tekoälyominaisuudet ovat tällä hetkellä pois käytöstä, mikä tarkoittaa, että tämä agentti ei voi käsitellä keskusteluja tai tehtäviä. Jotta pääset takaisin raiteille, pyydä {{productName}}-järjestelmän ylläpitäjää ottamaan tekoälyominaisuudet käyttöön.",

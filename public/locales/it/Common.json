@@ -330,7 +330,6 @@
   "EditUserStatistics": "Statistiche utenti",
   "Email": "Email",
   "Embed": "Incorpora",
-  "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "Collega il tuo servizio AI per sbloccare funzionalità avanzate in {{productName}}. Una volta aggiunto, sarà accessibile a tutti gli utenti nelle chat AI.",
   "EmptyBackupList": "Nessun backup creato. Crea almeno una copia di backup per visualizzarla in questo elenco.",
   "EmptyChatAIDisabledSaasAdminDescription": "Il servizio AI è disattivato, impedendo a questo agente di elaborare chat o svolgere attività. Per ripristinare la piena funzionalità, abilita le funzionalità AI nelle impostazioni di {{productName}}.",
   "EmptyChatAIDisabledUserDescription": "Le funzionalità AI sono attualmente disattivate, il che significa che questo agente non può elaborare chat o attività. Per tornare operativi, chiedi all’amministratore di {{productName}} di abilitare le funzionalità AI.",

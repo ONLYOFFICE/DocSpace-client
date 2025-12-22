@@ -159,7 +159,8 @@ export type FilesSelectorProps = TSelectorHeader & {
 
   withCreate?: boolean;
   checkCreating?: boolean;
-  logoText: string;
+  isPortalView?: boolean;
+  withoutDescriptionText?: boolean;
 
   isMultiSelect?: boolean;
   maxSelectedItems?: number;

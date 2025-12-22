@@ -161,6 +161,8 @@ test("login with with hcaptcha", async ({ page, mockRequest }) => {
 
   await page.getByTestId("login_button").click();
 
+  await expect(page.getByTestId("captcha-container")).toBeVisible();
+
   await expect(page).toHaveScreenshot([
     "desktop",
     "login",

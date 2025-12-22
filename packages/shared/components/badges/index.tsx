@@ -346,7 +346,6 @@ const Badges = ({
       {hasDraft ? (
         <BadgeWrapper isTile={isTile}>
           <Badge
-            noHover
             isVersionBadge
             className={classNames(
               styles.versionBadge,
@@ -433,7 +432,6 @@ const Badges = ({
               version: countVersions as string,
             })}
             {...onShowVersionHistoryProp}
-            noHover
             isVersionBadge
             title={t("Common:ShowVersionHistory")}
           />

@@ -44,11 +44,20 @@ export const mockPlugin1: TAPIPlugin = {
   scopes: "ContextMenu,InfoPanel,MainButton",
   image: "icon.png",
   createBy: {
-    id: "00000000-0000-0000-0000-000000000000",
-    displayName: "Admin",
-    avatarSmall: "",
+    id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
+    displayName: " Administrator",
+    avatar: "/static/images/default_user_photo_size_82-82.png?hash=1427579268",
+    avatarOriginal:
+      "/static/images/default_user_photo_size_200-200.png?hash=1427579268",
+    avatarMax:
+      "/static/images/default_user_photo_size_200-200.png?hash=1427579268",
+    avatarMedium:
+      "/static/images/default_user_photo_size_48-48.png?hash=1427579268",
+    avatarSmall:
+      "/static/images/default_user_photo_size_32-32.png?hash=1427579268",
     profileUrl: "",
     hasAvatar: false,
+    isAnonim: false,
   },
   createOn: new Date("2024-01-01T00:00:00Z"),
   enabled: true,
@@ -58,53 +67,40 @@ export const mockPlugin1: TAPIPlugin = {
 };
 
 export const mockPlugin2: TAPIPlugin = {
+  ...mockPlugin1,
   name: "test-plugin-two",
   version: "1.2.0",
   minDocSpaceVersion: "3.0.0",
   description: "Test Plugin Two for e2e testing",
-  license: "Apache-2.0",
-  author: "ONLYOFFICE",
-  homePage: "https://github.com/ONLYOFFICE/docspace-plugins",
   pluginName: "Testplugintwo",
-  scopes: "ContextMenu,InfoPanel,MainButton",
-  image: "icon.png",
-  createBy: {
-    id: "00000000-0000-0000-0000-000000000000",
-    displayName: "Admin",
-    avatarSmall: "",
-    profileUrl: "",
-    hasAvatar: false,
-  },
-  createOn: new Date("2024-01-01T00:00:00Z"),
-  enabled: true,
-  system: false,
-  url: "/plugins/test-plugin-two/plugin.js",
-  settings: "",
 };
 
 export const mockPlugin3: TAPIPlugin = {
+  ...mockPlugin1,
   name: "test-plugin-three",
   version: "1.3.0",
   minDocSpaceVersion: "10.0.0",
   description: "Test Plugin Three for e2e testing",
-  license: "Apache-2.0",
-  author: "ONLYOFFICE",
-  homePage: "https://github.com/ONLYOFFICE/docspace-plugins",
   pluginName: "Testpluginthree",
-  scopes: "ContextMenu,InfoPanel,MainButton",
-  image: "icon.png",
-  createBy: {
-    id: "00000000-0000-0000-0000-000000000000",
-    displayName: "Admin",
-    avatarSmall: "",
-    profileUrl: "",
-    hasAvatar: false,
+  enabled: false,
+};
+
+export const mockLocalePlugin: TAPIPlugin = {
+  ...mockPlugin1,
+  version: "1.1.0",
+  minDocSpaceVersion: "3.5.0",
+  name: "archives.zip",
+  nameLocale: {
+    de: "archive.zip",
+    az: "arxivlər.zip",
   },
-  createOn: new Date("2024-01-01T00:00:00Z"),
-  enabled: true,
-  system: false,
-  url: "/plugins/test-plugin-three/plugin.js",
-  settings: "",
+  description: "Plugin for working with archives",
+  descriptionLocale: {
+    de: "Plugin für die Verwendung von Archiven",
+    az: "Arxivlərlə işləmək üçün plagin",
+  },
+  pluginName: "Testlocaleplugin",
+  url: "/plugins/test-locale-plugin/plugin.js",
 };
 
 // Empty plugins list
@@ -135,10 +131,24 @@ export const webPluginsWithData = {
   statusCode: 200,
 };
 
+// Plugins list with locale plugin
+export const webPluginsWithLocale = {
+  response: [mockLocalePlugin],
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
 // Plugin upload response (for add operations)
 export const webPluginsUploadResponse = {
-  response: mockPlugin2,
   count: 1,
+  response: mockPlugin2,
   links: [
     {
       href: url,
@@ -176,8 +186,23 @@ export const webPluginsDeleteResponse = {
 };
 
 // Handlers
-export const webPluginsHandler = (type: "empty" | "withData" = "empty") => {
-  const data = type === "empty" ? webPluginsEmpty : webPluginsWithData;
+export const webPluginsHandler = (
+  type: "empty" | "withData" | "withLocale" = "empty",
+) => {
+  let data;
+
+  switch (type) {
+    case "withLocale":
+      data = webPluginsWithLocale;
+      break;
+    case "withData":
+      data = webPluginsWithData;
+      break;
+    default:
+      data = webPluginsEmpty;
+      break;
+  }
+
   return new Response(JSON.stringify(data));
 };
 

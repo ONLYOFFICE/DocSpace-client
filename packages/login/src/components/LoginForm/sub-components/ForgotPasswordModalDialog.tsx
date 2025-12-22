@@ -26,7 +26,6 @@
 
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "styled-components";
 
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { EmailInput } from "@docspace/shared/components/email-input";
@@ -42,11 +41,12 @@ import { TValidate } from "@docspace/shared/components/email-input/EmailInput.ty
 import { InputSize } from "@docspace/shared/components/text-input";
 import { ButtonKeys } from "@docspace/shared/enums";
 import { useCaptcha } from "@docspace/shared/hooks/useCaptcha";
+import { useTheme } from "@docspace/shared/hooks/useTheme";
 import Captcha from "@docspace/shared/components/captcha";
 
 import { ForgotPasswordModalDialogProps, TError } from "@/types";
 
-import ModalDialogContainer from "../../ModalDialogContainer";
+import styles from "../../modal.module.scss";
 
 const ForgotPasswordModalDialog = ({
   isVisible,
@@ -62,7 +62,7 @@ const ForgotPasswordModalDialog = ({
   const [isShowError, setIsShowError] = useState(false);
 
   const { t } = useTranslation(["Login", "Common"]);
-  const theme = useTheme();
+  const { isBase } = useTheme();
 
   const captcha = useCaptcha({
     publicKey: reCaptchaPublicKey,
@@ -195,7 +195,7 @@ const ForgotPasswordModalDialog = ({
     >
       <ModalDialog.Header>{t("PasswordRecoveryTitle")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <ModalDialogContainer>
+        <div className={styles.modalContainer}>
           <Text
             key="text-body"
             className="text-body"
@@ -206,7 +206,7 @@ const ForgotPasswordModalDialog = ({
           </Text>
 
           <FieldContainer
-            className="email-reg-field"
+            className={styles.emailRegField}
             key="e-mail"
             isVertical
             hasError={isShowError ? emailError : undefined}
@@ -238,7 +238,7 @@ const ForgotPasswordModalDialog = ({
               id="forgot-password-captcha-widget"
               type={captcha.captchaType}
               publicKey={reCaptchaPublicKey}
-              themeMode={theme.isBase ? "light" : "dark"}
+              themeMode={isBase ? "light" : "dark"}
               visible={captcha.isVisible}
               hasError={captcha.isError}
               errorText={t("Errors:LoginWithBruteForceCaptcha")}
@@ -246,7 +246,7 @@ const ForgotPasswordModalDialog = ({
               resetSignal={captcha.resetSignal}
             />
           ) : null}
-        </ModalDialogContainer>
+        </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

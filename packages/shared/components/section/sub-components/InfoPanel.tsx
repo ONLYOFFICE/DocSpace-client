@@ -24,11 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import classNames from "classnames";
 
 import { DeviceType } from "../../../enums";
 import { Portal } from "../../portal";
+
+import { Aside } from "../../aside";
+import { Backdrop } from "../../backdrop";
 
 import { InfoPanelProps } from "../Section.types";
 import styles from "../Section.module.scss";
@@ -42,6 +45,8 @@ const InfoPanel = ({
   anotherDialogOpen,
   viewAs,
   currentDeviceType,
+  topInfoPanel,
+  onClose,
 }: InfoPanelProps) => {
   const infoPanelRef = useRef<null | HTMLDivElement>(null);
 
@@ -59,16 +64,39 @@ const InfoPanel = ({
         setIsVisible?.(false);
     };
 
-    return () => document.removeEventListener("mousedown", onMouseDown);
+    return () => {
+      document.removeEventListener("mousedown", onMouseDown);
+    };
   }, [currentDeviceType, isVisible, setIsVisible, viewAs]);
 
-  const infoPanelComponent = (
+  const infoPanelComponent = topInfoPanel ? (
+    <>
+      <Backdrop visible isAside withBackground zIndex={310} onClick={onClose} />
+      <Aside visible zIndex={310} withoutHeader>
+        <div
+          className={classNames(styles.infoPanel, styles.infoPanelWrapper, {
+            [styles.topInfoPanel]: topInfoPanel,
+          })}
+          id="InfoPanelWrapper"
+          ref={infoPanelRef}
+        >
+          <div
+            className={classNames(styles.infoPanel, {
+              [styles.topInfoPanel]: topInfoPanel,
+            })}
+          >
+            {children}
+          </div>
+        </div>
+      </Aside>
+    </>
+  ) : (
     <div
       className={classNames("info-panel", styles.infoPanelWrapper)}
       id="InfoPanelWrapper"
       ref={infoPanelRef}
     >
-      <div className={styles.infoPanel}>{children}</div>
+      <div className={classNames(styles.infoPanel)}>{children}</div>
     </div>
   );
 
@@ -93,7 +121,7 @@ const InfoPanel = ({
     (anotherDialogOpen && currentDeviceType !== DeviceType.desktop) ||
     (currentDeviceType !== DeviceType.desktop && isMobileHidden)
     ? null
-    : isMobileView
+    : isMobileView || topInfoPanel
       ? renderPortalInfoPanel()
       : infoPanelComponent;
 };

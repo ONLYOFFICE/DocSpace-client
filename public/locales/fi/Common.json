@@ -654,7 +654,6 @@
   "OAuthRoomsName": "Huoneet",
   "OAuthRoomsReadDescription": "Näytä kaikki huoneet",
   "OAuthRoomsWriteDescription": "Näytä ja hallitse kaikkia huoneita",
-  "OFORMsGallery": "Lomake galleria",
   "OKButton": "OK",
   "OnlineEditors": "Verkkoeditorit",
   "OpenSavedDocument": "Avaa tallennettu asiakirja uudessa välilehdessä",
@@ -948,10 +947,8 @@
   "StorageQuotaDisabled": "Muistikiintiö poistettu käytöstä.",
   "StorageQuotaReset": "Muistikiintiö on onnistuneesti asetettu oletukseksi.",
   "StorageQuotaSet": "Muistikiintiö on onnistuneesti asetettu.",
-  "SubmitToFormGallery": "Lähetä Lomakegalleriaan",
   "SubmitToGallery": "Lähetä Galleriaan",
   "SubmitToGalleryBlockBody": "Lähetä pohjat jakaaksesi ne {{organizationName}}-yhteisön kanssa.",
-  "SubmitToGalleryBlockHeader": "{{organizationName}} Lomakegalleria",
   "SubscriptionExpired": "Tuen ja päivitysten tilauksesi on vanhentunut",
   "SubscriptionExpiredTitle": "Tilaus vanhentunut.",
   "SubscriptionIsExpiring": "Tilauksesi vanhenee {{date}}",
@@ -1070,5 +1067,6 @@
   "YouHaveUnsavedChanges": "Sinulla on tallentamattomia muutoksia",
   "YourCurrentDomain": "Nykyinen verkkotunnuksesi",
   "YourLogo": "Logosi",
-  "YourTurn": "Sinun vuorosi"
+  "YourTurn": "Sinun vuorosi",
+  "DeletePortal": "Poista {{productName}}"
 }

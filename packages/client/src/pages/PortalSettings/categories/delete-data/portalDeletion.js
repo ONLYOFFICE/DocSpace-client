@@ -59,7 +59,7 @@ const PortalDeletion = (props) => {
 
   useEffect(() => {
     setDocumentTitle(
-      t("DeletePortal", { productName: t("Common:ProductName") }),
+      t("Common:DeletePortal", { productName: t("Common:ProductName") }),
     );
     onCheckView();
     window.addEventListener("resize", onCheckView);

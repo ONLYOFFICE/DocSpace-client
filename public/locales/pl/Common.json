@@ -654,7 +654,6 @@
   "OAuthRoomsName": "Pokoje",
   "OAuthRoomsReadDescription": "Zobacz wszystkie pokoje",
   "OAuthRoomsWriteDescription": "Wyświetl wszystkie pokoje i zarządzaj nimi",
-  "OFORMsGallery": "Galeria OFORM",
   "OKButton": "OK",
   "OnlineEditors": "Edytory online",
   "OpenSavedDocument": "Otwórz zapisany dokument w nowej zakładce",
@@ -948,10 +947,8 @@
   "StorageQuotaDisabled": "Limit pamięci został wyłączony.",
   "StorageQuotaReset": "Limit pamięci został pomyślnie ustawiony na domyślny.",
   "StorageQuotaSet": "Limit pamięci został pomyślnie ustawiony.",
-  "SubmitToFormGallery": "Prześlij do galerii formularzy",
   "SubmitToGallery": "Prześlij do galerii",
   "SubmitToGalleryBlockBody": "Prześlij swoje szablony, aby udostępnić je społeczności {{organizationName}}.",
-  "SubmitToGalleryBlockHeader": "Galeria formularzy {{organizationName}}",
   "SubscriptionExpired": "Twoja subskrypcja umożliwiająca uzyskanie wsparcia i aktualizacji wygasła",
   "SubscriptionExpiredTitle": "Subskrypcja wygasła",
   "SubscriptionIsExpiring": "Twoja subskrypcja wygaśnie {{date}}",
@@ -1070,5 +1067,6 @@
   "YouHaveUnsavedChanges": "Masz niezapisane zmiany",
   "YourCurrentDomain": "Twoja obecna domena",
   "YourLogo": "Twoje Logo",
-  "YourTurn": "Twoja kolej"
+  "YourTurn": "Twoja kolej",
+  "DeletePortal": "Usuń {{productName}}"
 }

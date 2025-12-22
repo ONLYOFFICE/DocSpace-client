@@ -661,7 +661,6 @@
   "OAuthRoomsName": "Rooms",
   "OAuthRoomsReadDescription": "View all rooms",
   "OAuthRoomsWriteDescription": "View and manage all rooms",
-  "OFORMsGallery": "Form Gallery",
   "OKButton": "OK",
   "OnlineEditors": "Online editors",
   "OpenSavedDocument": "Open saved document in new tab",
@@ -697,6 +696,7 @@
   "Path": "Path",
   "PaymentsTitle": "Payments",
   "PDF": "PDF",
+  "PDFs": "PDFs",
   "People": "People",
   "Permissions": "Permissions",
   "PerUserMonth": "<1>{{price}}</1> per admin/month",
@@ -960,10 +960,9 @@
   "StorageQuotaDisabled": "Storage quota disabled.",
   "StorageQuotaReset": "Storage quota successfully set to default.",
   "StorageQuotaSet": "Storage quota successfully set.",
-  "SubmitToFormGallery": "Submit to Form Gallery",
+  "SubmitToTemplateGallery": "Submit to Template Gallery",
   "SubmitToGallery": "Submit to Gallery",
   "SubmitToGalleryBlockBody": "Submit your templates to share them with the {{organizationName}} community.",
-  "SubmitToGalleryBlockHeader": "{{organizationName}} Form Gallery",
   "SubscriptionExpired": "Your subscription to support and updates has expired",
   "SubscriptionExpiredTitle": "Subscription expired",
   "SubscriptionIsExpiring": "Your subscription is expiring on {{date}}",
@@ -977,6 +976,7 @@
   "SwitchToThumbnails": "Switch to thumbnails view",
   "SwitchViewToCompact": "Switch to compact view",
   "Tags": "Tags",
+  "TemplateGallery": "Template gallery",
   "Templates": "Templates",
   "TemporaryStorage": "Temporary storage",
   "TemporaryStorageDescription": "Backup is stored in the 'Backup' section, you will be able to download it within 24 hours after creating.",
@@ -1082,5 +1082,6 @@
   "YouHaveUnsavedChanges": "You have unsaved changes",
   "YourCurrentDomain": "Your current domain",
   "YourLogo": "Your logo",
-  "YourTurn": "Your turn"
+  "YourTurn": "Your turn",
+  "DeletePortal": "Delete {{productName}}"
 }

@@ -58,7 +58,34 @@ import {
 } from "@docspace/shared/utils/common";
 import { TError } from "@docspace/shared/utils/axiosClient";
 
+import {
+  selfHandler,
+  settingsHandler,
+  colorThemeHandler,
+  buildHandler,
+  tariffHandler,
+  getPortalHandler,
+  quotaHandler,
+  whiteLabelLogosHandler,
+  whiteLabelLogoTextHandler,
+  whiteLabelLogosIsDefaultHandler,
+  companyInfoHandler,
+  settingsAdditionalHandler,
+  paymentSettingsHandler,
+  filesSettingsHandler,
+  licenseQuotaHandler,
+  thirdPartyBackupHandler,
+  backupScheduleHandler,
+  backupStorageHandler,
+  storageRegionsHandler,
+  backupProgressHandler,
+  foldersTreeHandler,
+  encryptionSettingsHandler
+} from "@docspace/shared/__mocks__/e2e";
+
 import { logger } from "@/../logger.mjs";
+
+const IS_TEST = process.env.E2E_TEST;
 
 export async function getUser() {
   logger.debug(`Start GET /people/@self`);
@@ -73,7 +100,9 @@ export async function getUser() {
     );
 
     if (!cookie?.includes("asc_auth_key")) return undefined;
-    const userRes = await fetch(getUsersRes);
+    const userRes = IS_TEST
+      ? selfHandler(null, hdrs)
+      : await fetch(getUsersRes);
 
     if (userRes.status === 401) {
       logger.error(`GET /people/@self failed: ${userRes.status}`);
@@ -110,7 +139,9 @@ export async function getSettings(share?: string) {
       "GET",
     );
 
-    const settingsRes = await fetch(getSettingsRes);
+    const settingsRes = IS_TEST
+      ? settingsHandler(hdrs)
+      : await fetch(getSettingsRes);
 
     if (settingsRes.status === 403) {
       logger.error(
@@ -127,6 +158,10 @@ export async function getSettings(share?: string) {
     }
 
     const settings = await settingsRes.json();
+
+    if (IS_TEST && settings?.response?.tenantAlias === "localhost") {
+      settings.response.tenantAlias = "test";
+    }
 
     return settings.response as TSettings;
   } catch (error) {
@@ -146,7 +181,7 @@ export async function getVersionBuild() {
       "GET",
     );
 
-    const res = await fetch(getSettingssRes);
+    const res = IS_TEST ? buildHandler() : await fetch(getSettingssRes);
 
     if (!res.ok) {
       logger.error(`GET /settings/version/build failed: ${res.statusText}`);
@@ -180,7 +215,7 @@ export async function getQuota() {
       logger.debug(`GET /portal/payment/quota failed: missing asc_auth_key`);
       return undefined;
     }
-    const quotaRes = await fetch(getQuotasRes);
+    const quotaRes = IS_TEST ? quotaHandler() : await fetch(getQuotasRes);
 
     if (quotaRes.status === 401) {
       logger.error(`GET /portal/payment/quota failed: ${quotaRes.statusText}`);
@@ -207,6 +242,8 @@ export async function getAllPortals() {
   logger.debug("Start GET /portal/get?statistics=true");
 
   try {
+    const hdrs = await headers();
+
     const [getAllPortalssRes] = await createRequest(
       [`/portal/get?statistics=true`],
       [["", ""]],
@@ -215,7 +252,9 @@ export async function getAllPortals() {
       true,
     );
 
-    const portalsRes = await fetch(getAllPortalssRes);
+    const portalsRes = IS_TEST
+      ? getPortalHandler(hdrs)
+      : await fetch(getAllPortalssRes);
 
     if (!portalsRes.ok) {
       logger.error(
@@ -252,7 +291,9 @@ export async function getPortalTariff() {
       logger.debug(`GET /portal/tariff failed: missing asc_auth_key`);
       return undefined;
     }
-    const portalTariffRes = await fetch(getPortalTariffsRes);
+    const portalTariffRes = IS_TEST
+      ? tariffHandler(hdrs)
+      : await fetch(getPortalTariffsRes);
 
     if (portalTariffRes.status === 401) {
       logger.error(`GET /portal/tariff failed: ${portalTariffRes.statusText}`);
@@ -285,7 +326,7 @@ export async function getColorTheme() {
       "GET",
     );
 
-    const res = await fetch(getSettingssRes);
+    const res = IS_TEST ? colorThemeHandler() : await fetch(getSettingssRes);
 
     if (!res.ok) {
       logger.error(`GET /settings/colortheme failed: ${res.status}`);
@@ -313,7 +354,7 @@ export async function getWhiteLabelLogos() {
       "GET",
     );
 
-    const logosRes = await fetch(getWhiteLabelLogossRes);
+    const logosRes = IS_TEST ? whiteLabelLogosHandler() : await fetch(getWhiteLabelLogossRes);
 
     if (!logosRes.ok) {
       logger.error(
@@ -342,7 +383,7 @@ export async function getWhiteLabelText() {
       "GET",
     );
 
-    const textRes = await fetch(getWhiteLabelTextsRes);
+    const textRes = IS_TEST ? whiteLabelLogoTextHandler() : await fetch(getWhiteLabelTextsRes);
 
     if (!textRes.ok) {
       logger.error(
@@ -371,7 +412,7 @@ export async function getWhiteLabelIsDefault() {
       "GET",
     );
 
-    const isDefaultRes = await fetch(getWhiteLabelIsDefaultsRes);
+    const isDefaultRes = IS_TEST ? whiteLabelLogosIsDefaultHandler() : await fetch(getWhiteLabelIsDefaultsRes);
 
     if (!isDefaultRes.ok) {
       logger.error(
@@ -401,7 +442,7 @@ export async function getAdditionalResources() {
       "GET",
     );
 
-    const additionalResourcesRes = await fetch(getAdditionalResourcessRes);
+    const additionalResourcesRes = IS_TEST ? settingsAdditionalHandler() : await fetch(getAdditionalResourcessRes);
 
     if (!additionalResourcesRes.ok) {
       logger.error(
@@ -431,7 +472,7 @@ export async function getCompanyInfo() {
       "GET",
     );
 
-    const companyInfoRes = await fetch(getCompanyInfosRes);
+    const companyInfoRes = IS_TEST ? companyInfoHandler() : await fetch(getCompanyInfosRes);
 
     if (!companyInfoRes.ok) {
       logger.error(
@@ -461,7 +502,9 @@ export async function getPaymentSettings() {
       "GET",
     );
 
-    const paymentSettingsRes = await fetch(getPaymentSettingssRes);
+    const paymentSettingsRes = IS_TEST
+      ? paymentSettingsHandler()
+      : await fetch(getPaymentSettingssRes);
 
     if (!paymentSettingsRes.ok) {
       logger.error(
@@ -491,7 +534,7 @@ export async function getSettingsThirdParty() {
       "GET",
     );
 
-    const settingsThirdParty = await fetch(getSettingsThirdPartysRes, {
+    const settingsThirdParty = IS_TEST ? thirdPartyBackupHandler() :await fetch(getSettingsThirdPartysRes, {
       next: { tags: ["backup"] },
     });
 
@@ -527,7 +570,7 @@ export async function getBackupSchedule(dump: boolean = true) {
       "GET",
     );
 
-    const backupScheduleRes = await fetch(getBackupSchedulesRes, {
+    const backupScheduleRes = IS_TEST ? backupScheduleHandler() : await fetch(getBackupSchedulesRes, {
       next: { tags: ["backup"] },
     });
 
@@ -562,7 +605,7 @@ export async function getBackupStorage(dump: boolean = false) {
       [["", ""]],
       "GET",
     );
-    const backupStorageRes = await fetch(getBackupStoragesRes, {
+    const backupStorageRes = IS_TEST ? backupStorageHandler() : await fetch(getBackupStoragesRes, {
       next: { tags: ["backup"] },
     });
 
@@ -594,7 +637,7 @@ export async function getStorageRegions() {
       "GET",
     );
 
-    const storageRegionsRes = await fetch(getStorageRegionssRes);
+    const storageRegionsRes = IS_TEST ? storageRegionsHandler() : await fetch(getStorageRegionssRes);
 
     if (!storageRegionsRes.ok) {
       logger.error(
@@ -623,7 +666,7 @@ export async function getSettingsFiles(): Promise<TFilesSettings> {
       "GET",
     );
 
-    const settingsFilesRes = await fetch(getSettingsFilessRes);
+    const settingsFilesRes = IS_TEST ? filesSettingsHandler() : await fetch(getSettingsFilessRes);
 
     if (!settingsFilesRes.ok) {
       logger.error(
@@ -658,7 +701,7 @@ export async function getBackupProgress(dump = true) {
       "GET",
     );
 
-    const backupProgressRes = await fetch(getBackupProgresssRes, {
+    const backupProgressRes = IS_TEST ? backupProgressHandler() : await fetch(getBackupProgresssRes, {
       next: { tags: ["backup"] },
     });
 
@@ -691,7 +734,7 @@ export async function getFoldersTree() {
       "GET",
     );
 
-    const foldersTreeRes = await fetch(getFoldersTreeRes);
+    const foldersTreeRes = IS_TEST ? foldersTreeHandler() : await fetch(getFoldersTreeRes);
 
     if (!foldersTreeRes.ok) {
       logger.error(
@@ -751,13 +794,15 @@ export async function getEncryptionSettings() {
   logger.debug("Start GET /settings/encryption/settings");
 
   try {
+    const hdrs = await headers();
+
     const [getEncryptionSettingsRes] = await createRequest(
       [`/settings/encryption/settings`],
       [["", ""]],
       "GET",
     );
 
-    const encryptionSettingsRes = await fetch(getEncryptionSettingsRes);
+    const encryptionSettingsRes = IS_TEST ? encryptionSettingsHandler(hdrs) : await fetch(getEncryptionSettingsRes);
 
     if (!encryptionSettingsRes.ok) {
       logger.error(
@@ -790,7 +835,7 @@ export async function getLicenseQuota() {
       true,
     );
 
-    const licenseQuotaRes = await fetch(getLicenseQuotaRequest);
+    const licenseQuotaRes = IS_TEST ? licenseQuotaHandler() : await fetch(getLicenseQuotaRequest);
 
     if (!licenseQuotaRes.ok) {
       logger.error(`GET ${pathReq} failed: ${licenseQuotaRes.status}`);

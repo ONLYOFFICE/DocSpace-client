@@ -77,7 +77,6 @@
   "DefineQuotaPerAIAgent": "Definieer quota per AI-agent",
   "DefineQuotaPerRoom": "Bepaal quota per kamer",
   "DefineQuotaPerUser": "Bepaal quota per gebruiker",
-  "DeletePortal": "{{productName}} verwijderen",
   "DeletePortalInfo": "Voordat u de ruimte verwijdert, moet u ervoor zorgen dat automatische facturatie is uitgeschakeld. U kunt de status van automatische facturatie controleren in <1>uw Stripe klantenportaal</1>.",
   "DeleteSecretKey": "Verwijder secret key",
   "DeleteSecretKeyDescription": "De secret key wordt definitief verwijderd. U kunt deze actie niet ongedaan maken.",

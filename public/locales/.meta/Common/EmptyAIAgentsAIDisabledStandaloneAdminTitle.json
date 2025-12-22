@@ -3,11 +3,11 @@
   "content": "{{aiProvider}} is not available yet",
   "content_en_sha1_hash": "504a112d4df23df7699214be2942748918b9356f",
   "created_at": "2025-12-18T11:15:10.656Z",
-  "updated_at": "2025-12-19T13:04:03.523Z",
+  "updated_at": "2025-12-22T09:44:12.369Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key displays a message indicating that a specific AI provider is currently unavailable. It appears in empty states within the UI, specifically for standalone administrators and portal administrators, informing them that AI features are not yet accessible. Translators should ensure \"AI Provider\" is translated consistently elsewhere in the application.",
+    "is_auto": true,
+    "updated_at": "2025-12-22T09:44:12.369Z"
   },
   "usage": [
     {

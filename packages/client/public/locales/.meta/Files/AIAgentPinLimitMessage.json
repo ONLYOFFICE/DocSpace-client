@@ -3,11 +3,11 @@
   "content": "You can't pin more than 10 {{aiAgents}} to the top. Unpin some that are currently pinned.",
   "content_en_sha1_hash": "3bfbfb06cc90a2f76adc5bba9eba181d12ba0672",
   "created_at": "2025-12-19T13:03:47.538Z",
-  "updated_at": "2025-12-19T13:04:06.101Z",
+  "updated_at": "2025-12-22T10:03:06.110Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This message appears as an error toast notification when a user attempts to pin more than 10 AI Agents. It informs the user of the pin limit and instructs them to unpin existing pinned agents. The message uses the plural form of \"AI Agents\" and needs to be translated accordingly.",
+    "is_auto": true,
+    "updated_at": "2025-12-22T10:03:06.110Z"
   },
   "usage": [
     {

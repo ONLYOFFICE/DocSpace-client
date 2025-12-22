@@ -3,11 +3,11 @@
   "content": "The {{aiProvider}} is unavailable",
   "content_en_sha1_hash": "023199ceb80bc3841ed658e11c4178172bfb4142",
   "created_at": "2025-12-19T10:17:03.113Z",
-  "updated_at": "2025-12-19T10:17:08.105Z",
+  "updated_at": "2025-12-22T09:53:01.242Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key displays an error message indicating that a specific AI provider is currently unavailable. It's used within a tooltip on the AI provider settings page to inform the user about the outage. The `{{aiProvider}}` placeholder will be replaced with the name of the provider.",
+    "is_auto": true,
+    "updated_at": "2025-12-22T09:53:01.242Z"
   },
   "usage": [
     {

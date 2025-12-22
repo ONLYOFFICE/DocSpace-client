@@ -3,11 +3,11 @@
   "content": "{{aiAgents}} pinned",
   "content_en_sha1_hash": "eb082fefead670be95a56c7f27e16e6830f2bcff",
   "created_at": "2025-12-19T13:03:48.272Z",
-  "updated_at": "2025-12-19T13:04:06.091Z",
+  "updated_at": "2025-12-22T10:01:39.828Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key displays a confirmation message when one or more AI agents are pinned. It's used to indicate the status of pinned AI agents, likely appearing near a pin button or similar UI element. The `aiAgents` variable will be replaced with the pluralized \"AI Agents\" label.",
+    "is_auto": true,
+    "updated_at": "2025-12-22T10:01:39.828Z"
   },
   "usage": [
     {

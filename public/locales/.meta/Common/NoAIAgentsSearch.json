@@ -3,11 +3,11 @@
   "content": "No {{aiAgents}} found",
   "content_en_sha1_hash": "fabd6a465d70d13c66a84c3012a0635890adff70",
   "created_at": "2025-12-19T10:16:33.628Z",
-  "updated_at": "2025-12-19T10:17:08.803Z",
+  "updated_at": "2025-12-22T09:42:24.028Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key displays a message on a search results screen indicating that no AI Agents were found. It's used to provide feedback to the user when their search yields no results and appears alongside an empty screen image and description. The `aiAgents` variable is substituted with the translated term for \"AI Agents.\"",
+    "is_auto": true,
+    "updated_at": "2025-12-22T09:42:24.028Z"
   },
   "usage": [
     {

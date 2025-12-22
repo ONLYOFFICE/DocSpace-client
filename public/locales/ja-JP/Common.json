@@ -270,6 +270,7 @@
   "DefaultQuota": "デフォルトな容量制限",
   "Delete": "削除",
   "DeletePermanently": "完全に削除する",
+  "DeletePortal": "{{productName}}を解除する",
   "DeleteRoom": "ルームを削除",
   "Deny": "拒否",
   "DenyAccess": "アクセスの拒否",
@@ -1053,6 +1054,5 @@
   "YouHaveUnsavedChanges": "未保存変更はあります。",
   "YourCurrentDomain": "現在お使いのドメイン",
   "YourLogo": "あなたのロゴ",
-  "YourTurn": "あなたの番です",
-  "DeletePortal": "{{productName}}を解除する"
+  "YourTurn": "あなたの番です"
 }

@@ -270,6 +270,7 @@
   "DefaultQuota": "默认配额",
   "Delete": "删除",
   "DeletePermanently": "永久删除",
+  "DeletePortal": "删除{{productName}}",
   "DeleteRoom": "删除房间",
   "Deny": "拒绝",
   "DenyAccess": "拒绝访问",
@@ -1053,6 +1054,5 @@
   "YouHaveUnsavedChanges": "您有未保存的变更",
   "YourCurrentDomain": "您当前的域",
   "YourLogo": "您的logo",
-  "YourTurn": "轮到您了",
-  "DeletePortal": "删除{{productName}}"
+  "YourTurn": "轮到您了"
 }

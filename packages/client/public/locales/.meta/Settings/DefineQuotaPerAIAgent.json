@@ -3,11 +3,11 @@
   "content": "Define quota per {{aiAgent}}",
   "content_en_sha1_hash": "67bd11cee455fc7d91c09f4826591aa3fd7fa108",
   "created_at": "2025-12-19T13:03:35.396Z",
-  "updated_at": "2025-12-19T13:04:05.903Z",
+  "updated_at": "2025-12-22T10:10:15.552Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key provides the label for a button or toggle used to define a quota specifically for an AI agent. It appears in the Portal Settings, within the storage management section, and refers to the AI agent, which is a common term for an automated assistant. Translators should ensure the phrasing accurately conveys the action of setting a limit for an AI agent's resource usage.",
+    "is_auto": true,
+    "updated_at": "2025-12-22T10:10:15.552Z"
   },
   "usage": [
     {

@@ -270,6 +270,7 @@
   "DefaultQuota": "Oletuskiintiö",
   "Delete": "Poista",
   "DeletePermanently": "Poista pysyvästi",
+  "DeletePortal": "Poista {{productName}}",
   "DeleteRoom": "Poista huone",
   "Deny": "Kiellä",
   "DenyAccess": "Estä pääsy",
@@ -1053,6 +1054,5 @@
   "YouHaveUnsavedChanges": "Sinulla on tallentamattomia muutoksia",
   "YourCurrentDomain": "Nykyinen verkkotunnuksesi",
   "YourLogo": "Logosi",
-  "YourTurn": "Sinun vuorosi",
-  "DeletePortal": "Poista {{productName}}"
+  "YourTurn": "Sinun vuorosi"
 }

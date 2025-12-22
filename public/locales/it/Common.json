@@ -270,6 +270,7 @@
   "DefaultQuota": "Quota predefinita",
   "Delete": "Elimina",
   "DeletePermanently": "Elimina definitivamente",
+  "DeletePortal": "Elimina {{productName}}",
   "DeleteRoom": "Elimina stanza",
   "Deny": "Rifiuta",
   "DenyAccess": "Accesso negato",
@@ -1053,6 +1054,5 @@
   "YouHaveUnsavedChanges": "Hai delle modifiche non salvate",
   "YourCurrentDomain": "Il tuo dominio attuale",
   "YourLogo": "Il tuo logo",
-  "YourTurn": "Il tuo turno",
-  "DeletePortal": "Elimina {{productName}}"
+  "YourTurn": "Il tuo turno"
 }

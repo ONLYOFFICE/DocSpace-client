@@ -270,6 +270,7 @@
   "DefaultQuota": "Cota padrão",
   "Delete": "Excluir",
   "DeletePermanently": "Excluir permanentemente",
+  "DeletePortal": "Excluir {{productName}}",
   "DeleteRoom": "Excluir sala",
   "Deny": "Negar",
   "DenyAccess": "Negar acesso",
@@ -1053,6 +1054,5 @@
   "YouHaveUnsavedChanges": "Você tem mudanças não salvas",
   "YourCurrentDomain": "Seu domínio atual",
   "YourLogo": "Seu logotipo",
-  "YourTurn": "Sua vez",
-  "DeletePortal": "Excluir {{productName}}"
+  "YourTurn": "Sua vez"
 }

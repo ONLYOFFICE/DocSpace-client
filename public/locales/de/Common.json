@@ -270,6 +270,7 @@
   "DefaultQuota": "Standard-Quota",
   "Delete": "Löschen",
   "DeletePermanently": "Dauerhaft löschen",
+  "DeletePortal": "{{productName}} löschen",
   "DeleteRoom": "Raum löschen",
   "Deny": "Ablehnen",
   "DenyAccess": "Zugriff verweigern",
@@ -1053,6 +1054,5 @@
   "YouHaveUnsavedChanges": "Sie haben nicht gespeicherte Änderungen.",
   "YourCurrentDomain": "Ihre aktuelle Domain",
   "YourLogo": "Ihr Logo",
-  "YourTurn": "Jetzt sind Sie dran",
-  "DeletePortal": "{{productName}} löschen"
+  "YourTurn": "Jetzt sind Sie dran"
 }

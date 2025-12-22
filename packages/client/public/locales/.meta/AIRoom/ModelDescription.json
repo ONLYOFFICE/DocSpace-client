@@ -3,11 +3,11 @@
   "content": "Select the {{aiProvider}} and model to be used in this room’s chats. This setting is mandatory and applies to all participants.",
   "content_en_sha1_hash": "e5bb15987ba113eb704a2bf6efe77ffcea5a7295",
   "created_at": "2025-12-17T14:56:15.166Z",
-  "updated_at": "2025-12-17T14:56:19.651Z",
+  "updated_at": "2025-12-22T09:47:48.850Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key provides a mandatory explanation within a dialog (likely for creating or editing an agent) that instructs users to select an AI provider and model for use in the chat room, affecting all participants. The text clarifies this selection is required. It appears as a descriptive text element within a room settings configuration.",
+    "is_auto": true,
+    "updated_at": "2025-12-22T09:47:48.850Z"
   },
   "usage": [
     {

@@ -270,6 +270,7 @@
   "DefaultQuota": "Defolt kvota",
   "Delete": "Silin",
   "DeletePermanently": "Həmişəlik silin",
+  "DeletePortal": "{{productName}}-i silin",
   "DeleteRoom": "Otağı sil",
   "Deny": "Rədd edin",
   "DenyAccess": "Girişə icazə vermə",
@@ -1053,6 +1054,5 @@
   "YouHaveUnsavedChanges": "Yadda saxlanmayan dəyişiklikləriniz var",
   "YourCurrentDomain": "Cari domen adınız",
   "YourLogo": "Loqonuz",
-  "YourTurn": "Sizin növbəniz",
-  "DeletePortal": "{{productName}}-i silin"
+  "YourTurn": "Sizin növbəniz"
 }

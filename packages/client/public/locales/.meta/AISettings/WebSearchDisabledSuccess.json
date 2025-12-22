@@ -3,11 +3,11 @@
   "content": "{{webSearch}} successfully disabled",
   "content_en_sha1_hash": "0c484f67afd695059c31ad95118352880ccd298c",
   "created_at": "2025-12-17T14:56:14.859Z",
-  "updated_at": "2025-12-17T14:56:20.356Z",
+  "updated_at": "2025-12-22T09:50:39.138Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key displays a success message in the UI, confirming that web search functionality has been disabled. It appears within a dialog (likely related to AI settings) to inform the user of a successful action. The message includes a placeholder for the term \"Web Search AI\" for accurate localization.",
+    "is_auto": true,
+    "updated_at": "2025-12-22T09:50:39.138Z"
   },
   "usage": [
     {

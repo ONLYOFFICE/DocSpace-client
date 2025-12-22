@@ -3,7 +3,7 @@
   "content": "Before you delete the space, please make sure that automatic billing is turned off. You may check the status of automatic billing in <1>your Stripe customer portal</1>.",
   "content_en_sha1_hash": "dc639bafcacea9cc342c82a0e94c2353a9bf2d96",
   "created_at": "2025-05-19T21:30:51.120Z",
-  "updated_at": "2025-05-26T07:57:32.298Z",
+  "updated_at": "2025-12-22T09:40:21.751Z",
   "comment": {
     "text": "This translation key is used to display a message reminding users to turn off automatic billing before deleting their portal. The message appears in a dialog box when the user attempts to delete their space.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/DeletePortalDialog/index.js",
       "line_number": 61,
-      "context": ">\n <ModalDialog.Header>\n {t(\"DeletePortal\", { productName: t(\"Common:ProductName\") })}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Trans t={t} i18nKey=\"DeletePortalInfo\" ns=\"Settings\">\n Before you delete the portal, please make sure that automatic billing\n is turned off. You may check the status of automatic billing in\n <Link\n className=\"stripe-url-link\"\n tag=\"a\"",
+      "context": ">\n <ModalDialog.Header>\n {t(\"Common:DeletePortal\", { productName: t(\"Common:ProductName\") })}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Trans t={t} i18nKey=\"DeletePortalInfo\" ns=\"Settings\">\n Before you delete the portal, please make sure that automatic billing\n is turned off. You may check the status of automatic billing in\n <Link\n className=\"stripe-url-link\"\n tag=\"a\"",
       "module": "/packages/client"
     }
   ],

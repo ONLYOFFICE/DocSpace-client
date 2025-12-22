@@ -270,6 +270,7 @@
   "DefaultQuota": "기본 할당량",
   "Delete": "삭제",
   "DeletePermanently": "영구 삭제",
+  "DeletePortal": "{{productName}} 삭제",
   "DeleteRoom": "방 삭제",
   "Deny": "거부",
   "DenyAccess": "액세스 거부",
@@ -1053,6 +1054,5 @@
   "YouHaveUnsavedChanges": "저장하지 않은 변경 사항이 있습니다",
   "YourCurrentDomain": "내 현재 도메인",
   "YourLogo": "로고",
-  "YourTurn": "고객님의 차례입니다",
-  "DeletePortal": "{{productName}} 삭제"
+  "YourTurn": "고객님의 차례입니다"
 }

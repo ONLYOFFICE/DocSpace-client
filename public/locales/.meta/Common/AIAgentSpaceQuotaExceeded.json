@@ -3,11 +3,11 @@
   "content": "{{aiAgent}} space quota exceeded ({{size}}).",
   "content_en_sha1_hash": "b2c3e259f54b8152df2defd05f1a570008f37470",
   "created_at": "2025-12-19T10:16:17.423Z",
-  "updated_at": "2025-12-19T10:17:08.498Z",
+  "updated_at": "2025-12-22T09:46:46.028Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key displays an error message when an AI agent has exceeded its storage quota. It appears in the UI, likely as an alert or notification, indicating the user has reached the limit for AI agent files. The message includes the AI agent type and the size of the quota.",
+    "is_auto": true,
+    "updated_at": "2025-12-22T09:46:46.028Z"
   },
   "usage": [
     {

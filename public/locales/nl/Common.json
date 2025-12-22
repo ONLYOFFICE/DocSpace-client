@@ -270,6 +270,7 @@
   "DefaultQuota": "Standaard quota",
   "Delete": "Verwijder",
   "DeletePermanently": "Blijvend verwijderen",
+  "DeletePortal": "{{productName}} verwijderen",
   "DeleteRoom": "Verwijder kamer",
   "Deny": "Weigeren",
   "DenyAccess": "Toegang weigeren",
@@ -1053,6 +1054,5 @@
   "YouHaveUnsavedChanges": "U hebt niet opgeslagen wijzigingen",
   "YourCurrentDomain": "Uw huidige domein",
   "YourLogo": "Uw logo",
-  "YourTurn": "Uw beurt",
-  "DeletePortal": "{{productName}} verwijderen"
+  "YourTurn": "Uw beurt"
 }

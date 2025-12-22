@@ -3,11 +3,11 @@
   "content": "{{aiProvider}} and model",
   "content_en_sha1_hash": "6a44780066cc332afd907d89896ef553e0d621c2",
   "created_at": "2025-12-17T14:56:15.156Z",
-  "updated_at": "2025-12-17T14:56:19.648Z",
+  "updated_at": "2025-12-22T09:48:07.232Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key displays a string that combines an AI provider's name with the term \"model,\" likely in a context related to selecting or displaying AI models. It appears within a dialog, probably as part of a label or description associated with model selection. Translators should consider the AI provider's branding when localizing this phrase.",
+    "is_auto": true,
+    "updated_at": "2025-12-22T09:48:07.232Z"
   },
   "usage": [
     {

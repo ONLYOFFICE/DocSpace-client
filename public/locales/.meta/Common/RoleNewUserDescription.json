@@ -3,11 +3,11 @@
   "content": "Users can only access the rooms they are invited to by admins. They can't create own rooms, folders or files.<br/><1>In {{agentSection}}</1>: can view the {{aiAgent}} results and shared chats if they were invited, but cannot create chats or modify the knowledge base.",
   "content_en_sha1_hash": "ef129e1554a846afbdb03bc4bbcb2555fbc97db8",
   "created_at": "2025-12-19T10:16:38.171Z",
-  "updated_at": "2025-12-19T10:17:08.833Z",
+  "updated_at": "2025-12-22T09:41:19.134Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key provides a description of the limitations for new users, explaining they can only access invited rooms and cannot create content. It appears within user access option descriptions and user type descriptions, likely in a UI element explaining user roles or permissions. Translators should ensure the description clearly conveys the restricted functionality for new users.",
+    "is_auto": true,
+    "updated_at": "2025-12-22T09:41:19.134Z"
   },
   "usage": [
     {

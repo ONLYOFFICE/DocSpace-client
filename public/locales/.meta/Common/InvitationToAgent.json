@@ -3,11 +3,11 @@
   "content": "<1>{{displayName}}</1> invites you to join the {{aiAgent}} <1>{{agentName}}</1>.",
   "content_en_sha1_hash": "c291e936eeda4cfe61676f56a30dc6bdc0b1815d",
   "created_at": "2025-12-19T10:16:30.756Z",
-  "updated_at": "2025-12-19T10:17:08.620Z",
+  "updated_at": "2025-12-22T09:43:52.505Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key displays an invitation to another user to join an agent-managed space. It appears within the UI to prompt a user to accept an invitation to a specific agent room, displaying the inviting user's name and the agent's name. Translators should ensure the flow of invitation is clear and natural in their language.",
+    "is_auto": true,
+    "updated_at": "2025-12-22T09:43:52.505Z"
   },
   "usage": [
     {

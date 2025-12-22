@@ -3,11 +3,11 @@
   "content": "{{aiAgent}} quota has been successfully enabled.",
   "content_en_sha1_hash": "20c6168f345ce2475276018960151e13d2ae30ee",
   "created_at": "2025-12-19T13:03:34.338Z",
-  "updated_at": "2025-12-19T13:04:07.054Z",
+  "updated_at": "2025-12-22T10:10:31.910Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key displays a success message in a toastr notification, confirming that the AI Agent quota has been enabled. The message includes the AI Agent name, which is retrieved from another translation key (\"Common:AIAgent\"). It appears after attempting to set the default AI Agent quota.",
+    "is_auto": true,
+    "updated_at": "2025-12-22T10:10:31.910Z"
   },
   "usage": [
     {

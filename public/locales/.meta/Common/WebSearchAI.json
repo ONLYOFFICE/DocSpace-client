@@ -3,11 +3,11 @@
   "content": "Web search",
   "content_en_sha1_hash": "381ceddd75a893f19764c7e4cf9cd12c0f6e88c3",
   "created_at": "2025-11-21T08:21:51.294Z",
-  "updated_at": "2025-12-19T13:32:32.747Z",
+  "updated_at": "2025-12-22T09:40:47.157Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key refers to the text \"Web search\" and is used to label or describe web search functionality within the AI settings section of the portal. It appears in both the settings overview and a reset dialog related to web search features. Translators should ensure the text accurately conveys the meaning of accessing or disabling web search capabilities.",
+    "is_auto": true,
+    "updated_at": "2025-12-22T09:40:47.157Z"
   },
   "usage": [
     {

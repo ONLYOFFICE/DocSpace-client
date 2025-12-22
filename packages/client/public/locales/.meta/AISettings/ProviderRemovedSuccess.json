@@ -3,11 +3,11 @@
   "content": "{{aiProvider}} removed successfully",
   "content_en_sha1_hash": "2fb87679d6f9b8437e82dbd2fee722409102e1c9",
   "created_at": "2025-12-17T14:56:14.667Z",
-  "updated_at": "2025-12-17T14:56:20.353Z",
+  "updated_at": "2025-12-22T09:53:22.141Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key displays a success message in a dialog after an AI provider has been successfully deleted. It informs the user that the selected AI provider has been removed, using a generic \"AI Provider\" label. Translators should ensure the message maintains a positive and informative tone.",
+    "is_auto": true,
+    "updated_at": "2025-12-22T09:53:22.141Z"
   },
   "usage": [
     {

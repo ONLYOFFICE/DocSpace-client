@@ -3,11 +3,11 @@
   "content": "Create {{aiAgent}}",
   "content_en_sha1_hash": "74733d2016c5a4d27915866f0ff5ea73be78cd87",
   "created_at": "2025-12-19T10:16:22.265Z",
-  "updated_at": "2025-12-19T10:17:07.908Z",
+  "updated_at": "2025-12-22T09:44:52.543Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key displays the text \"Create [AI Agent]\" on a row in the Hotkeys panel, likely associated with a shortcut. It also appears in the agent list creation definition, indicating the action of creating a new AI Agent. Translators should ensure the text accurately conveys the action of creating an AI Agent.",
+    "is_auto": true,
+    "updated_at": "2025-12-22T09:44:52.543Z"
   },
   "usage": [
     {

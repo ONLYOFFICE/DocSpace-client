@@ -270,6 +270,7 @@
   "DefaultQuota": "Domyślny limit",
   "Delete": "Usuń",
   "DeletePermanently": "Usuń trwale",
+  "DeletePortal": "Usuń {{productName}}",
   "DeleteRoom": "Usuń pokój",
   "Deny": "Odrzuć",
   "DenyAccess": "Odmów dostępu",
@@ -1053,6 +1054,5 @@
   "YouHaveUnsavedChanges": "Masz niezapisane zmiany",
   "YourCurrentDomain": "Twoja obecna domena",
   "YourLogo": "Twoje Logo",
-  "YourTurn": "Twoja kolej",
-  "DeletePortal": "Usuń {{productName}}"
+  "YourTurn": "Twoja kolej"
 }

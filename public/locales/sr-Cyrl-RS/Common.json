@@ -270,6 +270,7 @@
   "DefaultQuota": "Подразумевана квота",
   "Delete": "Обриши",
   "DeletePermanently": "Обриши трајно",
+  "DeletePortal": "Обриши {{productName}}",
   "DeleteRoom": "Обриши собу",
   "Deny": "Одбиј",
   "DenyAccess": "Одбиј приступ",
@@ -1053,6 +1054,5 @@
   "YouHaveUnsavedChanges": "Имате несачуване промене",
   "YourCurrentDomain": "Ваш тренутни домен",
   "YourLogo": "Ваш лого",
-  "YourTurn": "Ваш ред",
-  "DeletePortal": "Обриши {{productName}}"
+  "YourTurn": "Ваш ред"
 }

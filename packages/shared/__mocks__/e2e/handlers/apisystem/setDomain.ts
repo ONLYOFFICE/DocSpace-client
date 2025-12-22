@@ -24,8 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export * from "./register";
+export const PATH_SET_DOMAIN = "apisystem/settings/save";
 
-export * from "./remove";
+const setDomainSuccess = {
+  settings: "test.com",
+};
 
-export * from "./setDomain";
+export const setDomainHandler = () => {
+  return new Response(JSON.stringify(setDomainSuccess));
+};

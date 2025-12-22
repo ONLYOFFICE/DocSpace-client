@@ -3,7 +3,7 @@
   "content": "Transfer your data into {{productName}} from {{organizationName}} Workspace, Google Workspace, or Nextcloud.",
   "content_en_sha1_hash": "d3b422061a0509ff44d85a0d81ae48cae305749e",
   "created_at": "2025-11-25T18:15:42.146Z",
-  "updated_at": "2025-12-19T13:04:03.221Z",
+  "updated_at": "2025-12-22T14:25:01.015Z",
   "comment": {
     "text": "This text explains how to move data into the product from other platforms like Google Workspace or Nextcloud. It appears as a description related to data migration, likely within an empty state or welcome flow. Translators should ensure the phrasing is clear and inviting to users considering data transfer.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 441,
+      "line_number": 445,
       "context": "],\n };\n \n const migrationData = {\n title: t(\"EmptyView:MigrationDataTitle\"),\n description: t(\"EmptyView:MigrationDataDescription\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n icon: <InviteUserFormIcon />,\n key: \"migration-data\",",
       "module": "/packages/client"
     }

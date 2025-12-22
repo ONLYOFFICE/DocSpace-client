@@ -3,7 +3,7 @@
   "content": "Share",
   "content_en_sha1_hash": "09ca55ca52d207f2cc1d9339e0226a88e9e96e2f",
   "created_at": "2025-05-19T21:30:48.615Z",
-  "updated_at": "2025-12-19T13:32:32.202Z",
+  "updated_at": "2025-12-22T14:25:01.188Z",
   "comment": {
     "text": "The translation key \"Share\" is used to display a button label in the user interface. It appears on a shared form panel and is linked to an icon representing sharing. The purpose of this text is to enable users to share content.",
     "is_auto": true,
@@ -29,14 +29,14 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Header/index.tsx",
-      "line_number": 157,
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Header/headerGeneral.tsx",
+      "line_number": 154,
       "context": "selection.canShare &&\n !isRoomUtil(selection)\n ) {\n tabsData.unshift({\n id: \"info_share\",\n name: t(\"Common:Share\"),\n onClick: setShare,\n content: null,\n });\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2540,
+      "line_number": 2537,
       "context": "];\n \n if (!item.isRoom) {\n menuGroupsConfig.push({\n groupKey: \"share\",\n groupLabel: t(\"Common:Share\"),\n groupIcon: ShareReactSvgUrl,\n itemKeys: [\n [{ key: \"copy-shared-link\" }, { key: \"manage-links\" }],\n [{ key: \"create-room\" }],\n ],",
       "module": "/packages/client"
     },

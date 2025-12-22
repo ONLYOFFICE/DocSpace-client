@@ -1,19 +1,19 @@
 {
   "key_path": "EmptyKnowledgeDescription",
-  "content": "Files uploaded here will be indexed and used as context in the AI-Chat tab. Add files (up to 10 MB each) to ask AI questions, generate content, or collaborate on information.",
-  "content_en_sha1_hash": "662788eaf9ec6be59ff4b1e1b613dd2eddbd4222",
-  "created_at": "2025-11-27T13:58:59.527Z",
-  "updated_at": "2025-12-17T07:52:27.405Z",
+  "content": "Files uploaded here will be indexed and used as context in the {{aiChat}} tab. Add files (up to 10 MB each) to ask AI questions, generate content, or collaborate on information.",
+  "content_en_sha1_hash": "5cc5a06750e5349942b4cf64e2ea3bd33a121851",
+  "created_at": "2025-12-22T14:24:56.530Z",
+  "updated_at": "2025-12-22T14:25:00.980Z",
   "comment": {
-    "text": "This key provides a description displayed in the AI-Chat tab within a room, explaining that uploaded files will be used as context for AI interactions like question answering and content generation. It appears as explanatory text under the file upload area. Translators should ensure the description clearly explains the purpose of file uploads for AI assistance.",
-    "is_auto": true,
-    "updated_at": "2025-12-17T07:52:27.405Z"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
       "line_number": 117,
-      "context": "if (isAIRoom) {\n if (isKnowledgeTab)\n return (\n <>\n {t(\"AIRoom:EmptyKnowledgeDescription\")}\n <Text\n as=\"span\"\n fontSize=\"12px\"\n style={{ display: \"block\", marginTop: \"8px\" }}\n >",
+      "context": "if (isAIRoom) {\n if (isKnowledgeTab)\n return (\n <>\n {t(\"AIRoom:EmptyKnowledgeDescription\", {\n aiChat: t(\"AIRoom:AIChat\"),\n })}\n <Text\n as=\"span\"\n fontSize=\"12px\"",
       "module": "/packages/client"
     }
   ],

@@ -1,9 +1,9 @@
 {
   "key_path": "SearchDescription",
-  "content": "Connect a {{webSearch}} engine to enhance AI chats with real-time information from the internet. Once configured, it will be available to all users in {{productName}}.",
-  "content_en_sha1_hash": "4cdd9ed5477c651a63567e7012c75bddc60b5436",
-  "created_at": "2025-12-17T14:56:14.756Z",
-  "updated_at": "2025-12-19T13:32:32.849Z",
+  "content": "Connect a {{webSearch}} engine to enhance {{aiChats}} with real-time information from the internet. Once configured, it will be available to all users in {{productName}}.",
+  "content_en_sha1_hash": "dae649c30babfe6919d26e9a75e3487162dbec48",
+  "created_at": "2025-12-22T14:24:56.381Z",
+  "updated_at": "2025-12-22T14:25:01.403Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/index.tsx",
       "line_number": 176,
-      "context": "})\n : undefined\n }\n >\n <Text className={generalStyles.description}>\n {t(\"AISettings:SearchDescription\", {\n webSearch: t(\"Common:WebSearchAI\"),\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n {webSearchSettingsUrl ? (",
+      "context": "})\n : undefined\n }\n >\n <Text className={generalStyles.description}>\n {t(\"AISettings:SearchDescription\", {\n webSearch: t(\"Common:WebSearchAI\"),\n productName: t(\"Common:ProductName\"),\n aiChats: t(\"Common:AIChats\"),\n })}\n </Text>",
       "module": "/packages/client"
     }
   ],

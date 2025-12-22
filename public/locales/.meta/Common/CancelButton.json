@@ -3,7 +3,7 @@
   "content": "Cancel",
   "content_en_sha1_hash": "77dfd2135f4db726c47299bb55be26f7f4525a46",
   "created_at": "2025-05-19T21:30:43.360Z",
-  "updated_at": "2025-12-19T13:32:31.383Z",
+  "updated_at": "2025-12-22T14:25:00.698Z",
   "comment": {
     "text": "This translation key is used for the \"Cancel\" button in various UI elements such as dialogs and form buttons. It provides the text to be displayed when a user clicks the cancel action, allowing them to terminate an operation or return to their previous state. This key appears in files such as Dialog.js, QuotaForm, and ShareCollectSelector.",
     "is_auto": true,
@@ -354,7 +354,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/SubmitToFormGallery/index.js",
-      "line_number": 226,
+      "line_number": 234,
       "context": "testId=\"submit_to_gallery_apply_button\"\n />\n )}\n <Button\n size=\"normal\"\n label={t(\"Common:CancelButton\")}\n onClick={onClose}\n scale={!formItem}\n testId=\"submit_to_gallery_cancel_button\"\n />\n </ModalDialog.Footer>",
       "module": "/packages/client"
     },
@@ -420,7 +420,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/add-update/index.tsx",
-      "line_number": 406,
+      "line_number": 408,
       "context": "isLoading={isRequestRunning}\n isDisabled={!canSubmit}\n />\n <Button\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n scale\n onClick={onClose}\n isDisabled={isRequestRunning}\n />\n </ModalDialog.Footer>",
       "module": "/packages/client"
     },
@@ -432,7 +432,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/dialogs/reset/index.tsx",
-      "line_number": 99,
+      "line_number": 100,
       "context": "onClick={onSubmitAction}\n isLoading={loading}\n />\n <Button\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n scale\n onClick={onClose}\n isDisabled={loading}\n />\n </ModalDialog.Footer>",
       "module": "/packages/client"
     },
@@ -498,7 +498,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/language-and-time-zone.js",
-      "line_number": 560,
+      "line_number": 559,
       "context": "onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={hasScroll}\n additionalClassSaveButton=\"language-time-zone-save\"\n additionalClassCancelButton=\"language-time-zone-cancel\"\n saveButtonDataTestId=\"language_and_time_zone_save_buttons\"",
       "module": "/packages/client"
     },

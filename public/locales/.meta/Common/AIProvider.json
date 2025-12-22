@@ -3,7 +3,7 @@
   "content": "AI provider",
   "content_en_sha1_hash": "f81714b57309b6c32065a1d1c2804f1c4658bb33",
   "created_at": "2025-11-21T08:21:51.316Z",
-  "updated_at": "2025-12-19T13:32:31.646Z",
+  "updated_at": "2025-12-22T14:25:00.790Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -72,7 +72,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/index.tsx",
-      "line_number": 170,
+      "line_number": 171,
       "context": ") : null}\n <Button\n primary\n size={ButtonSize.small}\n label={t(\"AISettings:AddAIProvider\", {\n aiProvider: t(\"Common:AIProvider\"),\n })}\n scale={false}\n className={styles.addProviderButton}\n onClick={showAddProviderDialog}\n />",
       "module": "/packages/client"
     },
@@ -90,7 +90,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/index.tsx",
-      "line_number": 258,
+      "line_number": 259,
       "context": "isDisabled={isMCPActionsDisabled}\n tooltipText={\n isMCPActionsDisabled\n ? t(\"AISettings:ToUseAddProvider\", {\n value: t(\"Common:MCPServer\"),\n aiProvider: t(\"Common:AIProvider\"),\n })\n : undefined\n }\n />",
       "module": "/packages/client"
     },

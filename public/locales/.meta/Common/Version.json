@@ -3,7 +3,7 @@
   "content": "Version",
   "content_en_sha1_hash": "2da600bf9404843107a9531694f654e5662959e0",
   "created_at": "2025-05-19T21:30:49.494Z",
-  "updated_at": "2025-12-17T14:56:19.981Z",
+  "updated_at": "2025-12-22T14:25:00.939Z",
   "comment": {
     "text": "This translation key is used to display the version number of a software or application. It is typically displayed in a label format, often accompanied by a button or link that provides more information about the version. The translation will be used in various UI contexts, such as a navigation menu header and a plugin settings dialog, where it needs to be rendered with different styles and formatting.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/components/NavMenu/sub-components/header.js",
-      "line_number": 247,
+      "line_number": 244,
       "context": "as=\"a\"\n href={`https://github.com/ONLYOFFICE/Docspace/releases`}\n target=\"_blank\"\n {...versionBadgeProps}\n >\n {t(\"Common:Version\")} {version}\n </Link>\n <Text as=\"span\" {...versionBadgeProps}>\n {\" \"}\n -{\" \"}\n </Text>",
       "module": "/packages/client"
     },

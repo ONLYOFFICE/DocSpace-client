@@ -3,7 +3,7 @@
   "content": "PDF Form",
   "content_en_sha1_hash": "d6182f70d8b22eaa5700e3917f6ccb00e1d25bdb",
   "created_at": "2025-05-19T21:30:49.997Z",
-  "updated_at": "2025-12-19T13:32:31.346Z",
+  "updated_at": "2025-12-22T14:25:00.671Z",
   "comment": {
     "text": "The translation key \"Translations:NewForm\" represents the text \"PDF Form\". It is used to display this text in a button within an empty folder container.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 670,
-      "context": "const formActions = [\n {\n id: \"actions_template\",\n className: \"main-button_drop-down\",\n icon: FormReactSvgUrl,\n label: t(\"Translations:NewForm\"),\n key: \"new-form\",\n items: [createTemplateBlankDocxf, showSelectorDocx, formGallery],\n },\n ];",
+      "line_number": 646,
+      "context": "const formActions = [\n {\n id: \"actions_template\",\n className: \"main-button_drop-down\",\n icon: FormReactSvgUrl,\n label: t(\"Translations:NewForm\"),\n key: \"new-form\",\n items: [createTemplateBlankDocxf, showSelectorDocx],\n },\n ];",
       "module": "/packages/client"
     },
     {
@@ -24,14 +24,14 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 478,
+      "line_number": 482,
       "context": "icon: PresentationReactSvgUrl,\n onClick: () => actions.onCreate(\"pptx\"),\n },\n {\n key: \"create-pdf-form\",\n label: t(\"Translations:NewForm\"),\n icon: FormReactSvgUrl,\n onClick: () => actions.onCreate(\"pdf\"),\n },\n { isSeparator: true, key: \"separator\" },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 3357,
-      "context": "const formActions = [\n {\n id: \"personal_form-template\",\n icon: FormReactSvgUrl,\n label: t(\"Translations:NewForm\"),\n key: \"new-form-base\",\n items: [\n createTemplateForm,\n createTemplateNewFormFile,\n templateOformsGallery,",
+      "line_number": 3344,
+      "context": "const formActions = [\n {\n id: \"personal_form-template\",\n icon: FormReactSvgUrl,\n label: t(\"Translations:NewForm\"),\n key: \"new-form-base\",\n items: [\n createTemplateForm,\n createTemplateNewFormFile\n ],",
       "module": "/packages/client"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "MCP server",
   "content_en_sha1_hash": "94cbffb24efcf41d6f46da3b0290c1a446e05376",
   "created_at": "2025-11-21T08:21:51.253Z",
-  "updated_at": "2025-12-19T13:32:31.981Z",
+  "updated_at": "2025-12-22T14:25:01.035Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 247,
+      "line_number": 248,
       "context": "return isUser(access)\n ? t(\"EmptyView:EmptyAIAgentsAIEnabledUserDescription\", {\n aiAgents: t(\"Common:AIAgents\"),\n })\n : t(\"EmptyView:EmptyAIAgentsDescription\", {\n mcpServer: t(\"Common:MCPServer\"),\n });\n };\n \n export const getRootDescription = (\n t: TTranslation,",
       "module": "/packages/client"
     },
@@ -36,7 +36,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/index.tsx",
-      "line_number": 257,
+      "line_number": 258,
       "context": "onClick={showAddDialog}\n isDisabled={isMCPActionsDisabled}\n tooltipText={\n isMCPActionsDisabled\n ? t(\"AISettings:ToUseAddProvider\", {\n value: t(\"Common:MCPServer\"),\n aiProvider: t(\"Common:AIProvider\"),\n })\n : undefined\n }\n />",
       "module": "/packages/client"
     },

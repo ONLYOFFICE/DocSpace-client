@@ -3,11 +3,11 @@
   "content": "The {{organizationName}} {{productName}} {{mcpServer}} streamlines AI-driven workflows, integrating LLMs with external systems for efficient and secure document management.",
   "content_en_sha1_hash": "c3843f704039b03334f38f47af9c48d17ddc0e0e",
   "created_at": "2025-12-17T14:56:14.539Z",
-  "updated_at": "2025-12-17T14:56:20.376Z",
+  "updated_at": "2025-12-22T09:55:10.032Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key provides a short description of the MCP server, explaining it streamlines AI workflows and integrates LLMs with external systems. It appears as a description for an MCP server tile within the AI settings section of the Portal Settings page. Translators should ensure the description accurately conveys the server's functionality.",
+    "is_auto": true,
+    "updated_at": "2025-12-22T09:55:10.032Z"
   },
   "usage": [
     {

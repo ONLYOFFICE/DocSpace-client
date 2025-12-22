@@ -3,11 +3,11 @@
   "content": "{{webSearch}} Engine",
   "content_en_sha1_hash": "1b47c8d9c93df7bf7e9e358c9c708e5853dcea3f",
   "created_at": "2025-12-17T14:56:14.766Z",
-  "updated_at": "2025-12-19T13:32:32.881Z",
+  "updated_at": "2025-12-22T09:51:33.151Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key displays the label for a search engine selection field within the AI Settings section of the Portal. It's used to label a dropdown or similar component that allows users to choose a specific web search engine to integrate with AI features. The label will include the term \"Web Search AI\" as part of the display.",
+    "is_auto": true,
+    "updated_at": "2025-12-22T09:51:33.151Z"
   },
   "usage": [
     {

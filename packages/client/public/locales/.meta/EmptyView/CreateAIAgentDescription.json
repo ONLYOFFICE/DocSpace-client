@@ -3,11 +3,11 @@
   "content": "Start building your first {{aiAgent}}",
   "content_en_sha1_hash": "bc35c16942607e9987acc8e733fb2225858ed337",
   "created_at": "2025-12-19T13:03:51.854Z",
-  "updated_at": "2025-12-19T13:04:03.206Z",
+  "updated_at": "2025-12-22T10:00:38.951Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This text appears on a button or link to help users begin creating an AI agent. It encourages users to start the process of building their first AI agent, referencing the broader category of \"AI Agents.\" Translators should ensure the wording is action-oriented and welcoming.",
+    "is_auto": true,
+    "updated_at": "2025-12-22T10:00:38.951Z"
   },
   "usage": [
     {

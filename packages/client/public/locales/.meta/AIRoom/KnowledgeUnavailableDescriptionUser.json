@@ -3,11 +3,11 @@
   "content": "The Knowledge base is currently disabled. To activate semantic search and document processing for {{aiAgents}}, please contact your {{productName}} admin to configure the embeddings provider.",
   "content_en_sha1_hash": "80b6715c222aa14782e6f0754a7e9f0334a743dc",
   "created_at": "2025-12-19T13:03:56.246Z",
-  "updated_at": "2025-12-19T13:04:02.783Z",
+  "updated_at": "2025-12-22T09:48:47.405Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This text explains to users that the knowledge base is temporarily unavailable, preventing AI agent features from working. It appears in an empty container when a user lacks admin privileges and needs to contact their administrator to enable the knowledge base and its associated features (semantic search and document processing for AI agents). The placeholders `{{productName}}` and `{{aiAgents}}` need to be translated accurately.",
+    "is_auto": true,
+    "updated_at": "2025-12-22T09:48:47.405Z"
   },
   "usage": [
     {

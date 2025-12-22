@@ -3,11 +3,11 @@
   "content": "To create and use {{aiAgents}}, connect your wallet and enable the AI features service in the {{productName}} settings. Once it’s done, you’ll be able to work with {{aiAgents}} and collaborate with your team.",
   "content_en_sha1_hash": "e9039bbb2d8739a5cf69e11958a08d5532a0dbfb",
   "created_at": "2025-12-19T13:03:52.176Z",
-  "updated_at": "2025-12-19T13:04:03.528Z",
+  "updated_at": "2025-12-22T09:59:49.891Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This text explains how to enable and start using AI Agents within the application. It appears in an empty state view for administrators, guiding them on connecting their wallet and enabling the AI features service. Translators should ensure the language is clear and actionable for users configuring AI Agent access.",
+    "is_auto": true,
+    "updated_at": "2025-12-22T09:59:49.891Z"
   },
   "usage": [
     {

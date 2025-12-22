@@ -3,11 +3,11 @@
   "content": "Sorry, you don't have access to this {{aiAgent}}",
   "content_en_sha1_hash": "3b25211482f01b7f34653c2711b0e90f6e21838b",
   "created_at": "2025-12-19T13:03:56.678Z",
-  "updated_at": "2025-12-19T13:04:02.917Z",
+  "updated_at": "2025-12-22T09:47:29.742Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key displays an error message informing the user that they lack access to a specific AI agent. It appears within an empty container view, likely in a section dedicated to AI agents, and helps guide users to the appropriate access pathways. The `aiAgent` placeholder will be replaced with the generic term for \"AI Agent\".",
+    "is_auto": true,
+    "updated_at": "2025-12-22T09:47:29.742Z"
   },
   "usage": [
     {

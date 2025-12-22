@@ -3,11 +3,11 @@
   "content": "{{aiAgent}} notifications disabled",
   "content_en_sha1_hash": "78a95937b2ffa20c86592487e0e7d29fdc70c905",
   "created_at": "2025-12-19T13:03:47.500Z",
-  "updated_at": "2025-12-19T13:04:06.107Z",
+  "updated_at": "2025-12-22T10:03:58.533Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key displays a message indicating that notifications from the AI Agent are disabled. It's used within the FilesActionsStore.js file, likely in a UI element (like a button or setting) related to AI Agent notifications. Translators should consider the tone and phrasing to align with similar notification messages.",
+    "is_auto": true,
+    "updated_at": "2025-12-22T10:03:58.533Z"
   },
   "usage": [
     {

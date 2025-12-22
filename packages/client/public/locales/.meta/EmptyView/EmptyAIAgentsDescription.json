@@ -3,11 +3,11 @@
   "content": "Set up a personalized assistant for your team by adding a knowledge base, selecting the ideal model, and connecting an {{mcpServer}}. Invite your colleagues to collaborate and make the most of the agent’s chat capabilities.",
   "content_en_sha1_hash": "1a18dd21218c8bc56897a7a0ad913a5ee1181760",
   "created_at": "2025-12-17T14:56:11.216Z",
-  "updated_at": "2025-12-19T13:04:03.531Z",
+  "updated_at": "2025-12-22T09:58:23.908Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This text describes how to enable and use AI agents within a team environment. It appears in the UI to guide users on setting up an AI agent by connecting a knowledge base, selecting a model, and integrating with an MCP server, encouraging collaboration. Translators should ensure the description accurately conveys the setup process and benefits of using AI agents.",
+    "is_auto": true,
+    "updated_at": "2025-12-22T09:58:23.908Z"
   },
   "usage": [
     {

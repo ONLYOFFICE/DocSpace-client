@@ -3,7 +3,7 @@
   "content": "Paid",
   "content_en_sha1_hash": "dc9d4584a55464cd571719ee0066acb16d411f86",
   "created_at": "2025-05-19T21:30:47.223Z",
-  "updated_at": "2025-12-19T13:32:31.916Z",
+  "updated_at": "2025-12-22T09:40:21.782Z",
   "comment": {
     "text": "This translation key is used to display a paid status label. It appears on a badge component in the contacts list, indicating that an account has made payments and should be considered paid. The text changes depending on whether a user is paying or not, using the \"Paid\" label for paid accounts.",
     "is_auto": true,
@@ -150,7 +150,7 @@
     },
     {
       "file_path": "/packages/shared/components/drop-down-item/index.tsx",
-      "line_number": 256,
+      "line_number": 258,
       "context": "backgroundColor={\n isBase\n ? globalColors.favoritesStatus\n : globalColors.favoriteStatusDark\n }\n label={badgeLabel || t(\"Common:Paid\")}\n isPaidBadge\n />\n </div>\n ) : null}",
       "module": "/packages/shared"
     },

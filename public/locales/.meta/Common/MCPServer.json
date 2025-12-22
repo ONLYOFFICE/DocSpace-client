@@ -3,11 +3,11 @@
   "content": "MCP server",
   "content_en_sha1_hash": "94cbffb24efcf41d6f46da3b0290c1a446e05376",
   "created_at": "2025-11-21T08:21:51.253Z",
-  "updated_at": "2025-12-19T13:32:31.981Z",
+  "updated_at": "2025-12-22T09:43:34.040Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key displays the label \"MCP server\" within a modal dialog header, typically used for configuring or editing AI server settings. It likely refers to a Minecraft server used for AI agent functionality. Translators should ensure the term \"MCP server\" is accurately conveyed in the target language, potentially requiring explanation or adaptation depending on the context.",
+    "is_auto": true,
+    "updated_at": "2025-12-22T09:43:34.040Z"
   },
   "usage": [
     {

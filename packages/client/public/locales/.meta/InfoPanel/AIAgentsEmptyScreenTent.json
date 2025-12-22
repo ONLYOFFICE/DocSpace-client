@@ -3,11 +3,11 @@
   "content": "See {{aiAgents}} details here",
   "content_en_sha1_hash": "a07a55c2387018588dc7f74c24bc55c8c19cdf99",
   "created_at": "2025-12-19T13:03:44.751Z",
-  "updated_at": "2025-12-19T13:04:04.728Z",
+  "updated_at": "2025-12-22T10:08:16.121Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This text is displayed on a screen when no AI agents are available. It provides a placeholder message, incorporating the label for \"AI Agents,\" to inform the user where to find agent details when they exist. It appears within a \"No Item\" component in the Home page's InfoPanel.",
+    "is_auto": true,
+    "updated_at": "2025-12-22T10:08:16.121Z"
   },
   "usage": [
     {

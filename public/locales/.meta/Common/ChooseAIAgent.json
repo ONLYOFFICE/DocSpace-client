@@ -3,11 +3,11 @@
   "content": "Choose an {{aiAgent}}",
   "content_en_sha1_hash": "13c16f38542b31392b1e38f68dd875f7e7bff25a",
   "created_at": "2025-12-19T10:16:20.006Z",
-  "updated_at": "2025-12-19T10:17:08.807Z",
+  "updated_at": "2025-12-22T09:45:48.290Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key displays the text \"Choose an {{aiAgent}}\" within a UI element, likely a dialog or selection component, prompting the user to select an AI agent. The `aiAgent` placeholder will be replaced with the name of the specific AI agent being offered. It appears within an aside section used for selecting AI agents.",
+    "is_auto": true,
+    "updated_at": "2025-12-22T09:45:48.290Z"
   },
   "usage": [
     {

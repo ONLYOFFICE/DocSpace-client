@@ -3,11 +3,11 @@
   "content": "Describe how the {{aiAgent}} should behave and respond. Define its role, tone, and main tasks.",
   "content_en_sha1_hash": "8238ab2060f016eb0cb209c6678c7866738414f4",
   "created_at": "2025-12-19T13:03:55.841Z",
-  "updated_at": "2025-12-19T13:04:02.382Z",
+  "updated_at": "2025-12-22T09:49:22.380Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key provides instructions for defining the behavior of an AI agent. It appears in the Create/Edit Agent dialog, allowing users to specify the agent's role, tone, and primary tasks. Translators should focus on crafting clear and concise guidance for configuring the agent’s persona.",
+    "is_auto": true,
+    "updated_at": "2025-12-22T09:49:22.380Z"
   },
   "usage": [
     {

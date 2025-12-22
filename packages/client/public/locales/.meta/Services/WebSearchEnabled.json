@@ -3,11 +3,11 @@
   "content": "AI {{webSearch}} service successfully enabled.",
   "content_en_sha1_hash": "6de860134663bb3e8ab9b87226b7db91a94fffe6",
   "created_at": "2025-12-19T10:16:50.611Z",
-  "updated_at": "2025-12-19T10:17:08.402Z",
+  "updated_at": "2025-12-22T10:08:35.491Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Confirmation message displayed after successfully enabling the web search AI service. This message appears within a UI element, likely a dialog or notification, confirming the activation of the web search functionality. Translators should ensure \"Common:WebSearchAI\" is properly localized for the value displayed within this confirmation.",
+    "is_auto": true,
+    "updated_at": "2025-12-22T10:08:35.491Z"
   },
   "usage": [
     {

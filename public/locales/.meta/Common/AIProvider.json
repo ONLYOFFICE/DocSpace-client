@@ -3,11 +3,11 @@
   "content": "AI provider",
   "content_en_sha1_hash": "f81714b57309b6c32065a1d1c2804f1c4658bb33",
   "created_at": "2025-11-21T08:21:51.316Z",
-  "updated_at": "2025-12-19T13:32:31.646Z",
+  "updated_at": "2025-12-22T09:46:28.878Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key displays the label \"AI provider\" within the Model section of the Create/Edit Agent dialog and in empty agent states. It's used to identify the source of the AI model being configured or displayed. Translators should ensure the term accurately reflects the specific AI provider being referenced.",
+    "is_auto": true,
+    "updated_at": "2025-12-22T09:46:28.878Z"
   },
   "usage": [
     {

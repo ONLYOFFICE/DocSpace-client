@@ -3,16 +3,16 @@
   "content": "You’re in <strong>view-only</strong> mode for this {{aiAgent}}. You can see the results of AI chat activity from other users.",
   "content_en_sha1_hash": "2fd0902c3253de3797189df5d429a133cf9fe3ff",
   "created_at": "2025-12-19T13:03:55.715Z",
-  "updated_at": "2025-12-19T13:04:04.839Z",
+  "updated_at": "2025-12-22T09:49:43.327Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key displays a warning message in the UI to inform users they are in \"view-only\" mode for an AI agent. It appears as a toast notification on the Home page, indicating they can observe AI chat activity from other users but cannot actively participate. Translators should ensure the message clearly conveys the limitations of the view-only access.",
+    "is_auto": true,
+    "updated_at": "2025-12-22T09:49:43.327Z"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/View/index.tsx",
-      "line_number": 537,
+      "line_number": 543,
       "context": "if (isResultTab && !canUseChat && !showBodyLoader) {\n toastr.info(\n <Trans\n t={t}\n ns=\"AIRoom\"\n i18nKey=\"AgentInViewModeWarning\"\n components={{\n strong: <strong />,\n }}\n values={{ aiAgent: t(\"Common:AIAgent\") }}\n />,",
       "module": "/packages/client"
     }

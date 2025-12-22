@@ -3,11 +3,11 @@
   "content": "This action will remove the configured API key and disconnect the {{webSearch}} integration. AI chats will no longer be able to access real-time information from the internet until a new key is added.",
   "content_en_sha1_hash": "518da594115418652f22c48f0e9907e14621b5ea",
   "created_at": "2025-11-21T09:16:05.810Z",
-  "updated_at": "2025-11-26T15:05:37.573Z",
+  "updated_at": "2025-12-22T09:52:22.303Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This text appears in a dialog box to explain the consequences of resetting the web search integration. It informs the user that resetting will remove their API key and prevent AI chats from accessing internet information until a new key is provided. Translators should understand this explains a potentially disruptive action.",
+    "is_auto": true,
+    "updated_at": "2025-12-22T09:52:22.303Z"
   },
   "usage": [
     {

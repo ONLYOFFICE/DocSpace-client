@@ -3,11 +3,11 @@
   "content": "Add {{aiProvider}}",
   "content_en_sha1_hash": "36487c265b6c2552c05388c1b3ff89458041ee11",
   "created_at": "2025-12-17T14:56:14.275Z",
-  "updated_at": "2025-12-19T13:32:32.780Z",
+  "updated_at": "2025-12-22T09:56:59.325Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key is used for the label on a button that allows users to add a new AI provider. The button text will display \"Add [AI Provider Name]\", where \"[AI Provider Name]\" is replaced with a generic label for AI Providers. It appears in the AI Settings section of the Portal.",
+    "is_auto": true,
+    "updated_at": "2025-12-22T09:56:59.325Z"
   },
   "usage": [
     {

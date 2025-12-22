@@ -3,11 +3,11 @@
   "content": "{{aiAgent}} quota has been successfully disabled.",
   "content_en_sha1_hash": "a2dbab9c75930c08562f4e10a66ae9ba252e85dc",
   "created_at": "2025-12-19T13:03:34.327Z",
-  "updated_at": "2025-12-19T13:04:07.056Z",
+  "updated_at": "2025-12-22T10:10:48.074Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key displays a success message in a toastr notification confirming that an AI agent quota has been disabled. The message includes the name of the AI agent, retrieved from a separate translation key \"Common:AIAgent\". Translators should ensure the AI agent name is accurately localized.",
+    "is_auto": true,
+    "updated_at": "2025-12-22T10:10:48.074Z"
   },
   "usage": [
     {

@@ -3,11 +3,11 @@
   "content": "Connect a {{webSearch}} engine to enhance AI chats with real-time information from the internet. Once configured, it will be available to all users in {{productName}}.",
   "content_en_sha1_hash": "4cdd9ed5477c651a63567e7012c75bddc60b5436",
   "created_at": "2025-12-17T14:56:14.756Z",
-  "updated_at": "2025-12-19T13:32:32.849Z",
+  "updated_at": "2025-12-22T09:51:59.775Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This text explains the functionality of connecting a web search engine to enhance AI chat capabilities within the product. It appears as a description within the AI Settings section of the portal, informing users about the feature's availability after configuration. Translators should ensure clarity regarding the connection of an external search engine for real-time information.",
+    "is_auto": true,
+    "updated_at": "2025-12-22T09:51:59.775Z"
   },
   "usage": [
     {

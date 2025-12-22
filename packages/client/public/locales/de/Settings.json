@@ -74,7 +74,6 @@
   "DefaultSettings": "Standardeinstellungen",
   "DefineQuotaPerRoom": "Quote pro Raum definieren",
   "DefineQuotaPerUser": "Quote pro Benutzer definieren",
-  "DeletePortal": "{{productName}} löschen",
   "DeletePortalInfo": "Bevor Sie den Bereich löschen, vergewissern Sie sich bitte, dass die automatische Rechnungsstellung ausgeschaltet ist. Sie können den Status der automatischen Rechnungsstellung in <1>Ihrem Stripe-Kundenportal überprüfen</1>.",
   "DeleteSecretKey": "Geheimen Schlüssel löschen",
   "DeleteSecretKeyDescription": "Der geheime Schlüssel wird dauerhaft gelöscht. Sie können diese Aktion nicht rückgängig machen.",

@@ -74,7 +74,6 @@
   "DefaultSettings": "الإعدادات الافتراضية",
   "DefineQuotaPerRoom": "تحديد الحصة لكل غرفة",
   "DefineQuotaPerUser": "تحديد الحصة لكل مستخدم",
-  "DeletePortal": "احذف {{productName}}",
   "DeletePortalInfo": "قبل حذف المساحة ، يرجى التأكد من إيقاف تشغيل الفوترة التلقائية. يمكنك التحقق من حالة الفوترة التلقائية في<1> بوابة عملاء Stripe الخاصة بك</ 1>.",
   "DeleteSecretKey": "حذف المفتاح السري",
   "DeleteSecretKeyDescription": "سيتم حذف المفتاح السري نهائيًا. لا يمكن التراجع عن هذا الإجراء.",

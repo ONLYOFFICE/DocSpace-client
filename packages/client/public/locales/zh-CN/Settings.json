@@ -74,7 +74,6 @@
   "DefaultSettings": "默认设置",
   "DefineQuotaPerRoom": "设置每个房间的额度",
   "DefineQuotaPerUser": "设置每个用户的额度",
-  "DeletePortal": "删除{{productName}}",
   "DeletePortalInfo": "删除空间前，请确保已关闭自动计费。您可在 <1>Stripe 客户门户</1>中查看自动计费状态。",
   "DeleteSecretKey": "删除密钥",
   "DeleteSecretKeyDescription": "密钥将被永久删除。您将无法撤消此操作。",

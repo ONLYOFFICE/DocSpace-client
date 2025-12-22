@@ -747,6 +747,9 @@ importers:
       '@biomejs/biome':
         specifier: 2.3.4
         version: 2.3.4
+      '@playwright/test':
+        specifier: 1.56.1
+        version: 1.56.1
       '@svgr/webpack':
         specifier: 8.1.0
         version: 8.1.0(typescript@5.9.3)

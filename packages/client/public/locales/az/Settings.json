@@ -74,7 +74,6 @@
   "DefaultSettings": "Defolt parametrlər",
   "DefineQuotaPerRoom": "Otaq üçün kvota müəyyənləşdirin",
   "DefineQuotaPerUser": "İstifadəçi üçün kvota müəyyənləşdirin",
-  "DeletePortal": "{{productName}}-i silin",
   "DeletePortalInfo": "Domeni silməzdən əvvəl, lütfən, avtomatik ödənişin söndürüldüyünə əmin olun. Siz <1>Stripe müştəri portalınızda</1> avtomatik fakturanın statusunu yoxlaya bilərsiniz.",
   "DeleteSecretKey": "Gizli açarı silin",
   "DeleteSecretKeyDescription": "Gizli açar həmişəlik silinəcək. Bu əməliyyatı geri qaytara bilməzsiniz.",

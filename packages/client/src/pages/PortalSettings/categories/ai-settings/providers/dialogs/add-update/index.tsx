@@ -377,7 +377,9 @@ const AddUpdateDialogComponent = ({
                     [styles.fieldHintError]: providerData?.needReset,
                   })}
                 >
-                  {t("AISettings:ProviderKeyInputHint")}
+                  {t("AISettings:ProviderKeyInputHint", {
+                    aiProviders: t("Common:AIProviders"),
+                  })}
                 </Text>
               </>
             )}

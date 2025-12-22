@@ -1087,5 +1087,6 @@
   "MCPServer": "MCP server",
   "MCPSettingTitle": "MCP servers",
   "WebSearchAI": "Web search",
-  "AIProvider": "AI provider"
+  "AIProvider": "AI provider",
+  "AIProviders": "AI provider's"
 }

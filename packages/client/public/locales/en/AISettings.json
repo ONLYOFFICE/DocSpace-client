@@ -33,7 +33,7 @@
   "Provider": "Provider",
   "ProviderAddedSuccess": "{{aiProvider}} added successfully",
   "ProviderKey": "Key",
-  "ProviderKeyInputHint": "Enter the API key generated from your AI provider's dashboard",
+  "ProviderKeyInputHint": "Enter the API key generated from your {{aiProviders}} dashboard",
   "ProviderNameInputHint": "Use any name that is convenient for you to identify this connection",
   "ProviderRemovedSuccess": "{{aiProvider}} removed successfully",
   "ProviderUnavailableError": "The {{aiProvider}} is unavailable",

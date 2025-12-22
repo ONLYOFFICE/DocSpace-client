@@ -200,6 +200,8 @@ const SectionHeaderContent = (props) => {
     isSharedWithMeFolderRoot,
     isAIAgentsFolder,
     filesSelection,
+    isCollaborator,
+    isVisitor,
   } = props;
 
   const location = useLocation();
@@ -937,7 +939,11 @@ const SectionHeaderContent = (props) => {
               showText={showText}
               isRootFolder={isRoot ? !isContactsInsideGroupPage : null}
               canCreate={
-                (currentCanCreate || (isContactsPage && contactsCanCreate)) &&
+                (currentCanCreate ||
+                  (isContactsPage &&
+                    contactsCanCreate &&
+                    !isCollaborator &&
+                    !isVisitor)) &&
                 !isSettingsPage &&
                 !isProfile
                   ? !isPublicRoom
@@ -1085,6 +1091,7 @@ export default inject(
 
     const isRoomAdmin = userStore.user?.isRoomAdmin;
     const isCollaborator = userStore.user?.isCollaborator;
+    const isVisitor = userStore.user?.isVisitor;
 
     const {
       setSelected,
@@ -1178,8 +1185,6 @@ export default inject(
 
     const {
       onClickEditRoom,
-      onClickInviteUsers,
-      onClickArchive,
       onCopyLink,
       onCreateAndCopySharedLink,
       getFolderModel,
@@ -1320,8 +1325,6 @@ export default inject(
       selectedFolder,
 
       onClickEditRoom,
-      onClickInviteUsers,
-      onClickArchive,
       onCopyLink,
 
       isGroupMenuBlocked,
@@ -1345,6 +1348,7 @@ export default inject(
       setUsersSelected,
       isRoomAdmin,
       isCollaborator,
+      isVisitor,
       isEmptyPage,
       categoryType,
       theme,

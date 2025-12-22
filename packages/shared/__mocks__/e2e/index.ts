@@ -29,6 +29,7 @@ export {
   setupAndResetHandlersServer,
 } from "./mswRequestInterceptor";
 export { createNextTestServer } from "./testServer";
+export { PlaywrightWebSocketMock } from "./playwrightWebSocketMock";
 
 export * from "./utils";
 

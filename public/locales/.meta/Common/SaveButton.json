@@ -3,7 +3,7 @@
   "content": "Save",
   "content_en_sha1_hash": "efc007a393f66cdb14d57d385822a3d9e36ef873",
   "created_at": "2025-05-19T21:30:48.300Z",
-  "updated_at": "2025-11-21T11:52:59.674Z",
+  "updated_at": "2025-12-15T14:04:23.483Z",
   "comment": {
     "text": "The translation key \"SaveButton\" is used to display the label for a save button on a UI component. In a file editor and dialog contexts, it appears as a button that triggers saving changes made to a document or form.",
     "is_auto": true,
@@ -102,19 +102,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/knowledge/index.tsx",
-      "line_number": 325,
+      "line_number": 334,
       "context": "</div>\n <div className={styles.buttonContainer}>\n <Button\n primary\n size={ButtonSize.small}\n label={t(\"SaveButton\")}\n scale={false}\n onClick={onSave}\n isLoading={saveRequestRunning}\n isDisabled={isSaveDisabled}\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/add-update/index.tsx",
-      "line_number": 383,
+      "line_number": 390,
       "context": "<ModalDialog.Footer>\n <Button\n primary\n size={ButtonSize.normal}\n label={t(\"Common:SaveButton\")}\n scale\n onClick={handleSubmitClick}\n isLoading={isRequestRunning}\n isDisabled={!canSubmit}\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/index.tsx",
-      "line_number": 286,
+      "line_number": 284,
       "context": "</div>\n <div className={styles.buttonContainer}>\n <Button\n primary\n size={ButtonSize.small}\n label={t(\"SaveButton\")}\n scale={false}\n onClick={onSave}\n isLoading={saveRequestRunning}\n isDisabled={isSaveDisabled}\n />",
       "module": "/packages/client"
     },
@@ -192,7 +192,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
-      "line_number": 415,
+      "line_number": 417,
       "context": "</div>\n \n <SaveCancelButtons\n onSaveClick={onSubmit}\n onCancelClick={onReset}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Settings:DefaultSettings\")}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonDisabled={saveButtonDisabled}\n disableRestoreToDefault={\n isDefaultSettings || isSaveLoading || isResetLoading",
       "module": "/packages/client"
     },
@@ -216,7 +216,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SMTPSettings/sub-components/ButtonContainer.js",
-      "line_number": 216,
+      "line_number": 219,
       "context": "currentDeviceType === DeviceType.desktop ? \"small\" : \"normal\";\n \n return (\n <ButtonStyledComponent>\n <Button\n label={t(\"Common:SaveButton\")}\n size={buttonSize}\n primary\n onClick={onClick}\n isDisabled={isLoading || !isValidForm() || isSMTPInitialSettings}\n isLoading={buttonOperation.save}",
       "module": "/packages/client"
     },
@@ -252,7 +252,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/ipSecurity.js",
-      "line_number": 335,
+      "line_number": 370,
       "context": "className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}\n additionalClassSaveButton=\"ip-security-save\"",
       "module": "/packages/client"
     },
@@ -276,7 +276,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/trustedMail.js",
-      "line_number": 304,
+      "line_number": 352,
       "context": "className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}\n additionalClassSaveButton=\"trusted-mail-save\"",
       "module": "/packages/client"
     },

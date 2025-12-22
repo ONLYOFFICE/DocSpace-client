@@ -32,10 +32,10 @@ import SocketHelper from "@docspace/shared/utils/socket";
 
 import type { TGetAllPortals } from "@docspace/shared/api/management/types";
 import useAppState from "@/hooks/useAppState";
-import { StyledLayout } from "./layout.styled";
 import { Article } from "../article";
 import { Section } from "../section";
 import { Header } from "../header";
+import styles from "./layout.module.scss";
 
 export const LayoutWrapper = ({
   children,
@@ -57,10 +57,10 @@ export const LayoutWrapper = ({
   }, [socketUrl]);
 
   return (
-    <StyledLayout>
+    <div className={styles.layout}>
       <Header />
       <Article isCommunity={isCommunity} />
       <Section portals={portals}>{children}</Section>
-    </StyledLayout>
+    </div>
   );
 };

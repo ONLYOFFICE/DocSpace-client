@@ -86,18 +86,21 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
         setIsProvidersLoading(true);
 
         const p = await getProviders();
-        setProviders(p);
+        const enabledProviders = p.filter((pr) => !pr.needReset);
+        setProviders(enabledProviders);
         modelCache.setProviders(p);
 
         setIsProvidersFetched(true);
 
         if (selectedProvider.id === -2) {
-          setSelectedProvider(p[0]);
+          setSelectedProvider(enabledProviders[0]);
         } else {
-          const provider = p.find((pr) => pr.id === selectedProvider.id);
+          const provider = enabledProviders.find(
+            (pr) => pr.id === selectedProvider.id,
+          );
 
           if (!provider) {
-            setSelectedProvider(p[0]);
+            setSelectedProvider(enabledProviders[0]);
             return;
           }
 

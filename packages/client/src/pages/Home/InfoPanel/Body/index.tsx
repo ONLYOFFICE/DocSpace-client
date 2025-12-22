@@ -23,238 +23,69 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import React, { useMemo } from "react";
+import React from "react";
 import { inject, observer } from "mobx-react";
 
-import { SettingsStore } from "@docspace/shared/store/SettingsStore";
-import { isLockedSharedRoom as isLockedSharedRoomUtil } from "@docspace/shared/utils";
-import { FolderType } from "@docspace/shared/enums";
-import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
-import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
-import {
-  isRoom as isRoomUtil,
-  isFolder as isFolderUtil,
-} from "@docspace/shared/utils/typeGuards";
+import InfoPanelBodyGeneral from "./bodyGeneral";
+import InfoPanelBodyTemplateGallery from "./bodyTemplateGallery";
+import { InfoPanelBodyContentProps } from "./Body.types";
 
-import { AvatarEditorDialog } from "SRC_DIR/components/dialogs";
-import DialogsStore from "SRC_DIR/store/DialogsStore";
-import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
-import InfoPanelStore, { InfoPanelView } from "SRC_DIR/store/InfoPanelStore";
-import UsersStore from "SRC_DIR/store/contacts/UsersStore";
+const InfoPanelBodyContent: React.FC<InfoPanelBodyContentProps> = ({
+  isGallery,
+  ...restProps
+}) => {
+  if (isGallery) return <InfoPanelBodyTemplateGallery />;
 
-import ItemTitle from "./sub-components/ItemTitle";
-import SeveralItems from "./sub-components/SeveralItems";
-import NoItem from "./sub-components/NoItem";
-
-import Users from "./views/Users";
-import Groups from "./views/Groups";
-import Gallery from "./views/Gallery";
-import FilesView from "./views/FilesView";
-
-import commonStyles from "./helpers/Common.module.scss";
-
-type BodyProps = {
-  selection: InfoPanelStore["infoPanelSelection"];
-  roomsView: InfoPanelStore["roomsView"];
-  fileView: InfoPanelStore["fileView"];
-  getIsFiles: InfoPanelStore["getIsFiles"];
-  getIsRooms: InfoPanelStore["getIsRooms"];
-  getIsAIAgent: InfoPanelStore["getIsAIAgent"];
-  setView: InfoPanelStore["setView"];
-
-  maxImageUploadSize: SettingsStore["maxImageUploadSize"];
-
-  editRoomDialogProps: DialogsStore["editRoomDialogProps"];
-  editAgentDialogProps: DialogsStore["editAgentDialogProps"];
-  createRoomDialogProps: DialogsStore["createRoomDialogProps"];
-  templateEventVisible: DialogsStore["templateEventVisible"];
-
-  avatarEditorDialogVisible: AvatarEditorDialogStore["avatarEditorDialogVisible"];
-  image: AvatarEditorDialogStore["image"];
-
-  setAvatarEditorDialogVisible: AvatarEditorDialogStore["setAvatarEditorDialogVisible"];
-  onSaveRoomLogo: AvatarEditorDialogStore["onSaveRoomLogo"];
-  onChangeFile: AvatarEditorDialogStore["onChangeFile"];
-  setImage: AvatarEditorDialogStore["setImage"];
-
-  contactsTab: UsersStore["contactsTab"];
-  checkIsExpiredLinkAsync: TStore["filesActionsStore"]["isExpiredLinkAsync"];
-};
-
-const InfoPanelBodyContent = ({
-  selection,
-  contactsTab,
-
-  roomsView,
-  fileView,
-  getIsFiles,
-  getIsRooms,
-  getIsAIAgent,
-  setView,
-
-  maxImageUploadSize,
-
-  editRoomDialogProps,
-  createRoomDialogProps,
-  templateEventVisible,
-
-  avatarEditorDialogVisible,
-  image,
-
-  setAvatarEditorDialogVisible,
-  onSaveRoomLogo,
-  onChangeFile,
-  setImage,
-  checkIsExpiredLinkAsync,
-  editAgentDialogProps,
-}: BodyProps) => {
-  const isFiles = getIsFiles();
-  const isRooms = getIsRooms();
-  const isAgents = getIsAIAgent();
-  const isGallery = window.location.pathname.includes("form-gallery");
-  const isGroups = contactsTab === "groups";
-  const isGuests = contactsTab === "guests";
-  const isUsers = contactsTab === "inside_group" || contactsTab === "people";
-  const isTemplatesRoom =
-    !Array.isArray(selection) &&
-    selection?.rootFolderType === FolderType.RoomTemplates;
-
-  const isRoom = isRoomUtil(selection);
-  const isAgent =
-    selection &&
-    "rootFolderType" in selection &&
-    // "roomType" in selection &&
-    // selection.roomType &&
-    selection.rootFolderType === FolderType.AIAgents;
-  const isFolder = selection && "isFolder" in selection && !!selection.isFolder;
-
-  const isRoot = isFolder && selection?.id === selection?.rootFolderId;
-  const id = !Array.isArray(selection) ? selection?.id : null;
-
-  const isLockedSharedRoom = isRoom && isLockedSharedRoomUtil(selection);
-
-  const isSeveralItems = Array.isArray(selection) && selection.length > 1;
-  const isNoItem =
-    !selection ||
-    (!Array.isArray(selection) &&
-      selection.isLinkExpired &&
-      selection.external) ||
-    isLockedSharedRoom ||
-    (isRoot && !isGallery);
-
-  const currentView = useMemo(() => {
-    return isRoom || isTemplatesRoom || isAgent ? roomsView : fileView;
-  }, [isRoom, roomsView, fileView, isTemplatesRoom, isAgent]);
-
-  const deferredCurrentView = React.useDeferredValue(currentView);
-
-  React.useEffect(() => {
-    if (
-      fileView === InfoPanelView.infoShare &&
-      selection &&
-      isFolderUtil(selection) &&
-      !selection?.canShare &&
-      !isTemplatesRoom &&
-      !isAgent
-    ) {
-      setView(InfoPanelView.infoDetails);
-    }
-  }, [fileView, selection, isTemplatesRoom, isAgent]);
-
-  const isExpiredLink = useEventCallback(() =>
-    checkIsExpiredLinkAsync(selection),
-  );
-
-  React.useEffect(() => {
-    if (!id) return;
-
-    isExpiredLink();
-  }, [id, isExpiredLink]);
-
-  const getView = () => {
-    if (isUsers || isGuests) return <Users isGuests={isGuests} />;
-
-    if (isGroups) return <Groups />;
-
-    if (isGallery) return <Gallery />;
-
-    if (isSeveralItems || Array.isArray(selection))
-      return <SeveralItems selectedItems={selection} />;
-
-    if (isNoItem || !selection) {
-      const lockedSharedRoomProps = isLockedSharedRoom
-        ? { isLockedSharedRoom }
-        : {};
-      return (
-        <NoItem
-          isRooms={isRooms}
-          isFiles={isFiles}
-          isTemplatesRoom={isTemplatesRoom}
-          isAgents={isAgents}
-          infoPanelSelection={selection}
-          {...lockedSharedRoomProps}
-        />
-      );
-    }
-
-    return (
-      <React.Suspense
-        fallback={
-          <InfoPanelViewLoader
-            view={
-              currentView === InfoPanelView.infoMembers
-                ? "members"
-                : currentView === InfoPanelView.infoHistory
-                  ? "history"
-                  : "details"
-            }
-          />
-        }
-      >
-        <FilesView
-          currentView={deferredCurrentView}
-          selection={selection}
-          isArchive={selection.rootFolderType === FolderType.Archive}
-        />
-      </React.Suspense>
-    );
-  };
+  const {
+    selection,
+    contactsTab,
+    roomsView,
+    fileView,
+    getIsFiles,
+    getIsRooms,
+    setView,
+    maxImageUploadSize,
+    editRoomDialogProps,
+    createRoomDialogProps,
+    templateEventVisible,
+    avatarEditorDialogVisible,
+    image,
+    setAvatarEditorDialogVisible,
+    onSaveRoomLogo,
+    onChangeFile,
+    setImage,
+    checkIsExpiredLinkAsync,
+    getIsAIAgent,
+    getIsTrash,
+    infoPanelItemsList,
+    editAgentDialogProps,
+  } = restProps as Exclude<InfoPanelBodyContentProps, { isGallery: true }>;
 
   return (
-    <div className={commonStyles.infoPanelBody}>
-      {!isNoItem &&
-      !Array.isArray(selection) &&
-      (isUsers || isGuests || isGroups || isGallery) ? (
-        <ItemTitle
-          infoPanelSelection={selection}
-          isContacts={isUsers || isGuests || isGroups}
-          isNoItem={isNoItem ?? false}
-          isGallery={isGallery}
-        />
-      ) : null}
-      {getView()}
-
-      {avatarEditorDialogVisible &&
-      !editRoomDialogProps.visible &&
-      !editAgentDialogProps.visible &&
-      !createRoomDialogProps.visible &&
-      !Array.isArray(selection) ? (
-        <AvatarEditorDialog
-          image={image}
-          onChangeImage={setImage}
-          onClose={() => setAvatarEditorDialogVisible(false)}
-          onSave={(img: unknown) =>
-            !templateEventVisible
-              ? onSaveRoomLogo(selection?.id, img, selection, true)
-              : setAvatarEditorDialogVisible(false)
-          }
-          onChangeFile={onChangeFile}
-          classNameWrapperImageCropper="icon-editor"
-          visible={image.uploadedFile}
-          maxImageSize={maxImageUploadSize}
-        />
-      ) : null}
-    </div>
+    <InfoPanelBodyGeneral
+      selection={selection}
+      contactsTab={contactsTab}
+      roomsView={roomsView}
+      fileView={fileView}
+      getIsFiles={getIsFiles}
+      getIsRooms={getIsRooms}
+      setView={setView}
+      maxImageUploadSize={maxImageUploadSize}
+      editRoomDialogProps={editRoomDialogProps}
+      createRoomDialogProps={createRoomDialogProps}
+      templateEventVisible={templateEventVisible}
+      avatarEditorDialogVisible={avatarEditorDialogVisible}
+      image={image}
+      setAvatarEditorDialogVisible={setAvatarEditorDialogVisible}
+      onSaveRoomLogo={onSaveRoomLogo}
+      onChangeFile={onChangeFile}
+      setImage={setImage}
+      checkIsExpiredLinkAsync={checkIsExpiredLinkAsync}
+      getIsAIAgent={getIsAIAgent}
+      getIsTrash={getIsTrash}
+      infoPanelItemsList={infoPanelItemsList}
+      editAgentDialogProps={editAgentDialogProps}
+    />
   );
 };
 
@@ -266,8 +97,12 @@ export default inject(
     dialogsStore,
     peopleStore,
     filesActionsStore,
+    pluginStore,
   }: TStore) => {
     const { contactsTab } = peopleStore.usersStore;
+
+    const { infoPanelItemsList } = pluginStore;
+
     const {
       roomsView,
       fileView,
@@ -276,6 +111,7 @@ export default inject(
       getIsRooms,
       getIsAIAgent,
       setView,
+      getIsTrash,
     } = infoPanelStore;
 
     const { isExpiredLinkAsync } = filesActionsStore;
@@ -307,7 +143,10 @@ export default inject(
       getIsFiles,
       getIsRooms,
       getIsAIAgent,
+      getIsTrash,
       setView,
+
+      infoPanelItemsList,
 
       maxImageUploadSize: settingsStore.maxImageUploadSize,
 

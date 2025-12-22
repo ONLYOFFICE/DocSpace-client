@@ -332,6 +332,23 @@ export const settingsAuth = {
   response: { ...settingsNoAuth.response, socketUrl: "123" },
 };
 
+export const settingAuthWithSocket = {
+  ...settingsNoAuth,
+  response: { ...settingsNoAuth.response, socketUrl: "/socket.io" },
+};
+
+export const settingsWithPlugins = {
+  ...settingsAuth,
+  response: {
+    ...settingsAuth.response,
+    plugins: {
+      enabled: true,
+      upload: true,
+      delete: true,
+    },
+  },
+};
+
 export const settingsNoAuthNoStandalone = {
   response: {
     trustedDomainsType: 0,

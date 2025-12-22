@@ -44,12 +44,10 @@ export type InfiniteLoaderProps = {
   countTilesInRow?: number;
   showSkeleton?: boolean;
   currentFolderId?: string | number;
+  smallPreview?: boolean;
+  isOneTile?: boolean;
 };
 
 export type ListComponentProps = InfiniteLoaderProps & {
-  scroll: Element | (Window & typeof globalThis);
-};
-
-export type GridComponentProps = InfiniteLoaderProps & {
   scroll: Element | (Window & typeof globalThis);
 };

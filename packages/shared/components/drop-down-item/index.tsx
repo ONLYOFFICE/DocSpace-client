@@ -39,8 +39,6 @@ import { isTouchDevice } from "../../utils/device";
 
 import { ToggleButton } from "../toggle-button";
 import { Badge } from "../badge";
-import { Tooltip } from "../tooltip";
-import { Text } from "../text";
 
 import { DropDownItemProps } from "./DropDownItem.types";
 import styles from "./DropDownItem.module.scss";
@@ -81,10 +79,6 @@ const IconComponent = ({
   );
 };
 
-const TooltipContent = ({ content }: { content: React.ReactNode }) => (
-  <Text fontSize="12px">{content}</Text>
-);
-
 const DropDownItem = ({
   isSeparator = false,
   isHeader = false,
@@ -108,6 +102,7 @@ const DropDownItem = ({
   withToggle,
   checked,
   onClick,
+  onMouseDown,
   onClickSelectedItem,
   label = "",
   tabIndex = -1,
@@ -168,13 +163,17 @@ const DropDownItem = ({
         className,
       )}
       onClick={handleClick}
+      onMouseDown={onMouseDown}
       tabIndex={tabIndex}
       data-testid={testId ?? "drop-down-item"}
       data-focused={isActiveDescendant}
       data-tooltip-id={
-        withDisabledTooltip ? "drop-down-item-tooltip" : undefined
+        withDisabledTooltip && isTouchDevice ? "info-tooltip" : undefined
       }
-      data-tooltip-content={tooltip}
+      data-tooltip-content={
+        withDisabledTooltip && isTouchDevice ? tooltip : undefined
+      }
+      data-tooltip-place="bottom-end"
       role={isSeparator ? "separator" : "option"}
       aria-selected={isSelected}
       aria-disabled={disabled}
@@ -264,16 +263,6 @@ const DropDownItem = ({
 
       {additionalElement ? (
         <div className={styles.elementWrapper}>{additionalElement}</div>
-      ) : null}
-
-      {withDisabledTooltip ? (
-        <Tooltip
-          float
-          openOnClick={isTouchDevice}
-          id="drop-down-item-tooltip"
-          getContent={TooltipContent}
-          place="bottom-end"
-        />
       ) : null}
     </div>
   );

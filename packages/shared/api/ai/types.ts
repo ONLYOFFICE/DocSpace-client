@@ -50,6 +50,7 @@ export type TAiProvider = {
   url: string;
   createdOn: string;
   modifiedOn: string;
+  needReset?: boolean;
 };
 
 export type TUpdateAiProvider = {
@@ -154,6 +155,7 @@ export type TServer = {
   headers: Record<string, string>;
   endpoint: string;
   authorizationEndpoint?: string;
+  needReset?: boolean;
 };
 
 export type TVectorizeOperation = {
@@ -185,20 +187,25 @@ export type WebSearchConfig = {
   enabled: boolean;
   type: WebSearchType;
   key?: string;
+  needReset?: boolean;
 };
 
 export type KnowledgeConfig = {
   type: KnowledgeType;
   key?: string;
+  needReset?: boolean;
 };
 
 export type TAIConfig = {
   vectorizationEnabled: boolean;
+  vectorizationNeedReset?: boolean;
   webSearchEnabled: boolean;
+  webSearchNeedReset?: boolean;
   knowledgeSearchToolName: string;
   webSearchToolName: string;
   webCrawlingToolName: string;
   aiReady: boolean;
+  aiReadyNeedReset?: boolean;
   embeddingModel: string;
   portalMcpServerId: string;
 };

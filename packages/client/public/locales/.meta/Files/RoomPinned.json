@@ -3,7 +3,7 @@
   "content": "Room pinned",
   "content_en_sha1_hash": "81ef48bb3373a4abb09c637f8c7aeda4ee051e63",
   "created_at": "2025-05-19T21:30:56.115Z",
-  "updated_at": "2025-11-25T06:36:56.971Z",
+  "updated_at": "2025-12-15T14:04:24.069Z",
   "comment": {
     "text": "This translation key represents a descriptive label used when a room is pinned, appearing as a notification or confirmation message in the UI, likely triggered by an action on the FilesActionsStore.",
     "is_auto": true,

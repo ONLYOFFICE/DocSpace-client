@@ -1164,7 +1164,7 @@ const getFilesSettings = (): TFilesSettings => {
   };
 };
 
-export const filesSettingsResolver = () => {
+export const filesSettingsHandler = (): Response => {
   return new Response(JSON.stringify({ response: getFilesSettings() }));
 };
 

@@ -3,7 +3,7 @@
   "content": "Room unpinned",
   "content_en_sha1_hash": "3d73c31de316c886a6b5ca4f6d0fe1ba08a9199d",
   "created_at": "2025-05-19T21:30:56.162Z",
-  "updated_at": "2025-11-25T06:36:56.971Z",
+  "updated_at": "2025-12-15T14:04:24.069Z",
   "comment": {
     "text": "This translation key is used to display a message when a room is unpinned, indicating that the file is no longer pinned to a specific room. It appears in file operations, likely on a button or dialog triggered by the \"Unpin\" action, and should be translated to provide a consistent user experience across languages.",
     "is_auto": true,

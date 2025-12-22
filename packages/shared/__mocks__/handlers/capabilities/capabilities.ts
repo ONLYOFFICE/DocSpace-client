@@ -74,6 +74,7 @@ export const successCapabilities = {
   ],
   status: 0,
   statusCode: 200,
+  ok: true,
 };
 
 export const capabilitiesResolver = (isNotEmpty?: boolean): Response => {

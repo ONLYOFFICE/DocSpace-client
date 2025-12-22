@@ -62,17 +62,18 @@ export type UseFilesProps = {
   getFileInfo: FilesStore["getFileInfo"];
   setIsPreview: FilesStore["setIsPreview"];
   setIsUpdatingRowItem: FilesStore["setIsUpdatingRowItem"];
-  scrollToTop: FilesStore["scrollToTop"];
   wsCreatedPDFForm: FilesStore["wsCreatedPDFForm"];
 
   playlist: MediaViewerDataStore["playlist"];
   setToPreviewFile: MediaViewerDataStore["setToPreviewFile"];
 
   gallerySelected: OformsStore["gallerySelected"];
+  isVisibleInfoPanelTemplateGallery: OformsStore["isVisibleInfoPanelTemplateGallery"];
 
   userId: string;
 
   selectedFolderStore: SelectedFolderStore;
+  currentExtensionGallery: OformsStore["currentExtensionGallery"];
 };
 
 const useFiles = ({
@@ -82,13 +83,14 @@ const useFiles = ({
   getFileInfo,
   setIsPreview,
   setIsUpdatingRowItem,
-  scrollToTop,
   wsCreatedPDFForm,
 
   playlist,
   setToPreviewFile,
 
   gallerySelected,
+  isVisibleInfoPanelTemplateGallery,
+  currentExtensionGallery,
   userId,
 
   selectedFolderStore,
@@ -308,7 +310,7 @@ const useFiles = ({
         return Promise.resolve();
       })
       .then(() => {
-        if (gallerySelected) {
+        if (gallerySelected && !isVisibleInfoPanelTemplateGallery) {
           setIsUpdatingRowItem(false);
 
           const isFormRoom =
@@ -316,7 +318,7 @@ const useFiles = ({
             selectedFolderStore.parentRoomType === FolderType.FormRoom;
 
           const payload = {
-            extension: "pdf",
+            extension: currentExtensionGallery.replace(".", ""),
             id: -1,
             fromTemplate: true,
             title: (
@@ -338,9 +340,6 @@ const useFiles = ({
 
           window.dispatchEvent(event);
         }
-      })
-      .finally(() => {
-        scrollToTop();
       });
   }, [
     location.pathname,
@@ -351,13 +350,13 @@ const useFiles = ({
     getFileInfo,
     setIsPreview,
     setIsUpdatingRowItem,
-    scrollToTop,
     wsCreatedPDFForm,
 
     playlist,
     setToPreviewFile,
 
     gallerySelected,
+    isVisibleInfoPanelTemplateGallery,
     userId,
 
     selectedFolderStore,

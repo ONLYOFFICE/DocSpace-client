@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import isNil from "lodash/isNil";
 import { makeAutoObservable, runInAction } from "mobx";
 
 import SocketHelper, { SocketEvents, TOptSocket } from "../utils/socket";
@@ -99,12 +100,12 @@ class AuthStore {
 
     SocketHelper?.on(
       SocketEvents.ChangedQuotaUsedValue,
-      (res: { featureId: string; value: number }) => {
+      (res: Pick<TOptSocket, "featureId" | "value">) => {
         console.log(
           `[WS] change-quota-used-value ${res?.featureId}:${res?.value}`,
         );
 
-        if (!res || !res?.featureId) return;
+        if (!res || !res?.featureId || isNil(res.value)) return;
         const { featureId, value } = res;
 
         runInAction(() => {
@@ -115,12 +116,12 @@ class AuthStore {
 
     SocketHelper?.on(
       SocketEvents.ChangedQuotaFeatureValue,
-      (res: { featureId: string; value: number }) => {
+      (res: Pick<TOptSocket, "featureId" | "value">) => {
         console.log(
           `[WS] change-quota-feature-value ${res?.featureId}:${res?.value}`,
         );
 
-        if (!res || !res?.featureId) return;
+        if (!res || !res?.featureId || isNil(res.value)) return;
         const { featureId, value } = res;
 
         runInAction(() => {
@@ -421,7 +422,7 @@ class AuthStore {
 
       this.init();
 
-      return await Promise.resolve({ url: this.settingsStore?.defaultPage });
+      return await Promise.resolve({ url: "/" });
     } catch (e) {
       return Promise.reject(e);
     }
@@ -439,7 +440,7 @@ class AuthStore {
 
     this.init();
 
-    return Promise.resolve(this.settingsStore?.defaultPage);
+    return Promise.resolve("/");
   };
 
   thirdPartyLogin = async (SerializedProfile: string) => {
@@ -456,7 +457,7 @@ class AuthStore {
 
       this.init();
 
-      return await Promise.resolve(this.settingsStore?.defaultPage);
+      return await Promise.resolve("/");
     } catch (e) {
       return Promise.reject(e);
     }

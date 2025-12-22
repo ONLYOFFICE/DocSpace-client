@@ -2,10 +2,7 @@
   "Categories": "Категории",
   "EmptyFormGalleryScreenDescription": "Не бяха намерени резултати, съвпадащи със заявката Ви",
   "ErrorViewDescription": "Молим да опитате отново по-късно",
-  "ErrorViewHeader": "Галерията за формуляри е временно недостъпна",
-  "SelectForm": "Изберете Формуляр",
-  "SubmitToGalleryDialogGuideInfo": "Научете как да създавате идеални формуляри и увеличете шанса си да получите одобрение в нашето  <1>ръководство</1>.",
-  "SubmitToGalleryDialogMainInfo": "Вие сте собственикът на тази стая. Преди да напуснете стаята, трябва да прехвърлите ролята на собственик на друг потребител.",
+  "ErrorViewDescriptionNetworkError": "Изглежда няма интернет връзка",
   "SuggestChanges": "Предложи промени",
   "TemplateInfo": "Информация за шаблона",
   "ViewAllTemplates": "Прегледай всички шаблони"

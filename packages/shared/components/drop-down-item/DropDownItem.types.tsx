@@ -92,6 +92,8 @@ export type DropDownItemProps = {
   onClick?: (
     e: React.MouseEvent<HTMLElement> | React.ChangeEvent<HTMLInputElement>,
   ) => void;
+  /** Callback function triggered on mouse down */
+  onMouseDown?: (e: React.MouseEvent<HTMLElement>) => void;
   /** Callback function triggered when a selected item is clicked */
   onClickSelectedItem?: () => void;
   /** Callback function to control the open state of a parent dropdown */

@@ -24,11 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { cookies, headers } from "next/headers";
 
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import { LANGUAGE } from "@docspace/shared/constants";
+import { EmployeeType } from "@docspace/shared/enums";
 
 import { GreetingCreateUserContainer } from "@/components/GreetingContainer";
 import { getStringFromSearchParams } from "@/utils";
@@ -62,6 +63,7 @@ async function Page(props: LinkInviteProps) {
 
   const type = searchParams.type ?? "";
   const uid = searchParams.uid;
+  const emplType = searchParams.emplType ?? "";
   const encemail = searchParams.encemail ?? "";
   const confirmKey = getStringFromSearchParams(searchParams);
 
@@ -88,6 +90,13 @@ async function Page(props: LinkInviteProps) {
     getPortalPasswordSettings(confirmKey),
     getInvitationSettings(),
   ]);
+
+  if (
+    !invitationSettings?.allowInvitingGuests &&
+    emplType === String(EmployeeType.Guest)
+  ) {
+    redirect("/");
+  }
 
   const settingsCulture =
     typeof settings === "string" ? undefined : settings?.culture;

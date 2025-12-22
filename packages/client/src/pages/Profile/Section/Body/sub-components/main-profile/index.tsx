@@ -30,7 +30,6 @@ import { ReactSVG } from "react-svg";
 import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { isMobileOnly } from "react-device-detect";
-import { useTheme } from "styled-components";
 
 import {
   Avatar,
@@ -58,6 +57,9 @@ import { TUser } from "@docspace/shared/api/people/types";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { TAvatarModel } from "@docspace/shared/components/avatar/Avatar.types";
 import TopLoadingIndicator from "@docspace/shared/components/top-loading-indicator";
+import { useTheme } from "@docspace/shared/hooks/useTheme";
+import { useInterfaceDirection } from "@docspace/shared/hooks/useInterfaceDirection";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import SendClockReactSvgUrl from "PUBLIC_DIR/images/send.clock.react.svg?url";
 import PencilOutlineReactSvgUrl from "PUBLIC_DIR/images/pencil.outline.react.svg?url";
@@ -72,6 +74,7 @@ import TargetUserStore from "SRC_DIR/store/contacts/TargetUserStore";
 import DialogStore from "SRC_DIR/store/contacts/DialogStore";
 import TreeFoldersStore from "SRC_DIR/store/TreeFoldersStore";
 import CampaignsStore from "SRC_DIR/store/CampaignsStore";
+import PluginStore from "SRC_DIR/store/PluginStore";
 
 import styles from "./Profile.module.scss";
 
@@ -116,6 +119,8 @@ type MainProfileProps = {
   setImage?: AvatarEditorDialogStore["setImage"];
   fetchTreeFolders?: TreeFoldersStore["fetchTreeFolders"];
   getBanner?: CampaignsStore["getBanner"];
+  updatePlugins?: PluginStore["updatePlugins"];
+  enablePlugins?: SettingsStore["enablePlugins"];
 };
 
 const MainProfile = (props: MainProfileProps) => {
@@ -144,6 +149,8 @@ const MainProfile = (props: MainProfileProps) => {
     setImage,
     fetchTreeFolders,
     getBanner,
+    enablePlugins,
+    updatePlugins,
   } = props;
 
   const styleContainerRef = useRef<HTMLDivElement>(null);
@@ -174,32 +181,34 @@ const MainProfile = (props: MainProfileProps) => {
   const [horizontalOrientation, setHorizontalOrientation] = useState(false);
   const [dropDownMaxHeight, setDropDownMaxHeight] = useState(352);
   const [directionY, setDirectionY] = useState("both");
-  const { interfaceDirection, isBase } = useTheme();
-  const dirTooltip = interfaceDirection === "rtl" ? "left" : "right";
+  const { isBase } = useTheme();
+  const { isRTL } = useInterfaceDirection();
+  const dirTooltip = isRTL ? "left" : "right";
 
   const isMobileHorizontalOrientation = isMobile() && horizontalOrientation;
 
   const { isOwner, isAdmin, isRoomAdmin, isCollaborator } = profile!;
 
-  const isProfileMobile = isMobile(profileContainerRef.current?.offsetWidth); 
+  const isProfileMobile = isMobile(profileContainerRef.current?.offsetWidth);
 
   const updateDropDownMaxHeight = () => {
-
-    const comboBox = comboBoxRef.current?.offsetParent !== null 
-    ? comboBoxRef.current 
-    : mobileComboBoxRef.current;
+    const comboBox =
+      comboBoxRef.current?.offsetParent !== null
+        ? comboBoxRef.current
+        : mobileComboBoxRef.current;
 
     const padding = 32;
     if (comboBox && !isProfileMobile) {
       const comboBoxRect = comboBox.getBoundingClientRect();
-      const availableSpaceBottom = window.innerHeight - comboBoxRect.bottom - padding;
+      const availableSpaceBottom =
+        window.innerHeight - comboBoxRect.bottom - padding;
       const availableSpaceTop = comboBoxRect.top - padding;
       const max = Math.max(availableSpaceBottom, availableSpaceTop);
-      
+
       if (max === availableSpaceBottom) setDirectionY("bottom");
       else setDirectionY("top");
 
-      const newDropDownMaxHeight = Math.min(max, 352)
+      const newDropDownMaxHeight = Math.min(max, 352);
       setDropDownMaxHeight(newDropDownMaxHeight);
     } else {
       const max = window.innerHeight * 0.75;
@@ -222,7 +231,9 @@ const MainProfile = (props: MainProfileProps) => {
   useEffect(() => {
     updateDropDownMaxHeight();
 
-    const scroll = !isMobile() ? document.querySelector("#sectionScroll .scroll-wrapper > .scroller") : null;
+    const scroll = !isMobile()
+      ? document.querySelector("#sectionScroll .scroll-wrapper > .scroller")
+      : null;
 
     window.addEventListener("resize", handleResize);
     scroll?.addEventListener("scroll", handleScroll);
@@ -332,6 +343,7 @@ const MainProfile = (props: MainProfileProps) => {
       TopLoadingIndicator.start();
       await updateProfileCulture?.(profile!.id, newLanguage.key as string);
       await i18n.changeLanguage(newLanguage.key?.toString());
+      enablePlugins && (await updatePlugins?.());
       await fetchTreeFolders?.();
       await getBanner?.(true);
     } catch (error: unknown) {
@@ -752,7 +764,10 @@ const MainProfile = (props: MainProfileProps) => {
                   />
                 ) : null}
               </Text>
-              <div className="mobile-language__wrapper-combo-box" ref={mobileComboBoxRef}>
+              <div
+                className="mobile-language__wrapper-combo-box"
+                ref={mobileComboBoxRef}
+              >
                 <ComboBox
                   className="language-combo-box"
                   directionY={isMobileHorizontalOrientation ? "bottom" : "both"}
@@ -803,9 +818,11 @@ export default inject(
     avatarEditorDialogStore,
     treeFoldersStore,
     campaignsStore,
+    pluginStore,
   }: TStore) => {
     const { withActivationBar, sendActivationLink, user: profile } = userStore;
-    const { becometranslatorUrl, culture, documentationEmail } = settingsStore;
+    const { becometranslatorUrl, culture, documentationEmail, enablePlugins } =
+      settingsStore;
 
     const {
       avatarEditorDialogVisible,
@@ -828,6 +845,8 @@ export default inject(
     const { fetchTreeFolders } = treeFoldersStore;
 
     const { getBanner } = campaignsStore;
+
+    const { updatePlugins } = pluginStore;
 
     return {
       profile,
@@ -852,6 +871,8 @@ export default inject(
       setImage,
       fetchTreeFolders,
       getBanner,
+      updatePlugins,
+      enablePlugins,
     };
   },
 )(withCultureNames<MainProfileProps>(observer(MainProfile)));

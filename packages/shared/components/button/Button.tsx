@@ -86,7 +86,7 @@ export const Button = (props: React.PropsWithChildren<ButtonProps>) => {
       <button
         {...rest}
         id={id}
-        ref={ref}
+        ref={ref as React.Ref<HTMLButtonElement>}
         type={type === "submit" ? "submit" : "button"}
         className={buttonClasses}
         disabled={isDisabled || isLoading}

@@ -372,6 +372,7 @@ export type TRenderCustomItem = (
   email?: string,
   isGroup?: boolean,
   status?: EmployeeStatus,
+  id?: string | number,
 ) => React.ReactNode | null;
 
 export type SelectorProps = TSelectorHeader &

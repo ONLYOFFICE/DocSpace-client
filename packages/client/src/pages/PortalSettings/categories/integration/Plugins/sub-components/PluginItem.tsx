@@ -40,13 +40,14 @@ import { getPluginUrl } from "SRC_DIR/helpers/plugins/utils";
 
 import { StyledPluginItem, StyledPluginHeader } from "../Plugins.styled";
 import { PluginItemProps } from "../Plugins.types";
-import { Tooltip } from "@docspace/shared/components/tooltip";
 
 const PluginItem = ({
   name,
+  nameLocale,
   version,
   compatible,
   description,
+  descriptionLocale,
 
   enabled,
   updatePlugin,
@@ -72,7 +73,28 @@ const PluginItem = ({
     openSettingsDialog?.(name);
   };
 
+  const incompatibleTooltip = t("WebPlugins:PluginIsNotCompatible", {
+    productName: t("ProductName"),
+  });
+
   const badgeId = `plugin_version_${name}_badge`;
+
+  const badge = (
+    <Badge
+      label={version}
+      fontSize="12px"
+      fontWeight={700}
+      noHover={compatible}
+      backgroundColor={
+        compatible
+          ? globalColors.mainGreen
+          : theme.isBase
+            ? globalColors.lightErrorStatus
+            : globalColors.darkErrorStatus
+      }
+      dataTestId={badgeId}
+    />
+  );
 
   return (
     <StyledPluginItem description={description} data-testid={dataTestId}>
@@ -84,7 +106,7 @@ const PluginItem = ({
       />
       <div className="plugin-info">
         <StyledPluginHeader>
-          <Heading className="plugin-name">{name}</Heading>
+          <Heading className="plugin-name">{nameLocale}</Heading>
           <div className="plugin-controls">
             <IconButton
               iconName={PluginSettingsIconUrl}
@@ -101,41 +123,26 @@ const PluginItem = ({
           </div>
         </StyledPluginHeader>
 
-        <Badge
-          id={badgeId}
-          label={version}
-          fontSize="12px"
-          fontWeight={700}
-          noHover={compatible}
-          backgroundColor={
-            compatible
-              ? globalColors.mainGreen
-              : theme.isBase
-                ? globalColors.lightErrorStatus
-                : globalColors.darkErrorStatus
-          }
-          dataTestId={badgeId}
-        />
         {!compatible ? (
-          <Tooltip
-            anchorSelect={`#${badgeId.replace(/\./g, "\\.")}`}
-            place="bottom"
-            getContent={() =>
-              t("WebPlugins:PluginIsNotCompatible", {
-                productName: t("ProductName"),
-              })
-            }
-          />
-        ) : null}
+          <div
+            data-tooltip-id="system-tooltip"
+            data-tooltip-content={incompatibleTooltip}
+            data-tooltip-place="bottom"
+          >
+            {badge}
+          </div>
+        ) : (
+          badge
+        )}
 
-        {imgSrc && description ? (
+        {descriptionLocale ? (
           <Text
             className="plugin-description"
             fontWeight={400}
             lineHeight="20px"
-            title={description}
+            title={descriptionLocale}
           >
-            {description}
+            {descriptionLocale}
           </Text>
         ) : null}
       </div>

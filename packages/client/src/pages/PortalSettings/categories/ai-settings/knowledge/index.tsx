@@ -46,6 +46,7 @@ import generalStyles from "../AISettings.module.scss";
 
 import styles from "./Knowledge.module.scss";
 import { ResetKnowledgeDialog } from "./dialogs/reset";
+import { KnowledgeLoader } from "./KnowledgeLoader";
 
 type TKnowledgeProps = {
   knowledgeInitied?: AISettingsStore["knowledgeInitied"];
@@ -54,7 +55,7 @@ type TKnowledgeProps = {
   hasAIProviders?: AISettingsStore["hasAIProviders"];
   getAIConfig?: SettingsStore["getAIConfig"];
   aiConfig?: SettingsStore["aiConfig"];
-  aiSettingsUrl?: string;
+  knowledgeSettingsUrl?: SettingsStore["knowledgeSettingsUrl"];
 };
 
 const FAKE_KEY_VALUE = "0000000000000000";
@@ -66,14 +67,16 @@ const KnowledgeComponent = ({
   hasAIProviders,
   getAIConfig,
   aiConfig,
-  aiSettingsUrl,
+  knowledgeSettingsUrl,
 }: TKnowledgeProps) => {
   const { t } = useTranslation(["Common", "AISettings", "AIRoom", "Settings"]);
 
   const [resetDialogVisible, setResetDialogVisible] =
     React.useState<boolean>(false);
 
-  const [isKeyHidden, setIsKeyHidden] = React.useState(!!knowledgeConfig?.key);
+  const [isKeyHidden, setIsKeyHidden] = React.useState(
+    !!knowledgeConfig?.key && !knowledgeConfig?.needReset,
+  );
   const [valuesByProvider, setValuesByProvider] = React.useState<
     Record<KnowledgeType, string>
   >(() => {
@@ -83,7 +86,11 @@ const KnowledgeComponent = ({
       [KnowledgeType.None]: "",
     };
 
-    if (knowledgeConfig?.type && knowledgeConfig.key) {
+    if (
+      knowledgeConfig?.type &&
+      knowledgeConfig.key &&
+      !knowledgeConfig?.needReset
+    ) {
       initial[knowledgeConfig.type] = FAKE_KEY_VALUE;
     }
 
@@ -93,6 +100,9 @@ const KnowledgeComponent = ({
     () => {
       if (knowledgeConfig?.type === KnowledgeType.OpenAi)
         return KnowledgeType.OpenAi;
+
+      if (knowledgeConfig?.type === KnowledgeType.OpenRouter)
+        return KnowledgeType.OpenRouter;
 
       return KnowledgeType.None;
     },
@@ -167,12 +177,12 @@ const KnowledgeComponent = ({
   }, [valuesByProvider, selectedOption]);
 
   React.useEffect(() => {
-    if (knowledgeConfig?.type) {
+    if (knowledgeConfig?.type && !knowledgeConfig?.needReset) {
       setIsKeyHidden(true);
       if (knowledgeConfig.key) {
         setValuesByProvider((prev) => ({
           ...prev,
-          [knowledgeConfig.type!]: FAKE_KEY_VALUE,
+          [knowledgeConfig.type]: FAKE_KEY_VALUE,
         }));
       }
     }
@@ -188,43 +198,7 @@ const KnowledgeComponent = ({
     });
   }, [knowledgeConfig]);
 
-  if (!knowledgeInitied)
-    return (
-      <div className={generalStyles.search}>
-        <RectangleSkeleton
-          className={generalStyles.description}
-          width="700px"
-          height="36px"
-        />
-        <RectangleSkeleton
-          className={generalStyles.learnMoreLink}
-          width="100px"
-          height="19px"
-        />
-        <div className={styles.knowledgeForm}>
-          <div className={generalStyles.fieldContainer}>
-            <RectangleSkeleton width="119px" height="20px" />
-            <RectangleSkeleton width="340px" height="32px" />
-          </div>
-          <div className={generalStyles.fieldContainer}>
-            <RectangleSkeleton width="48px" height="32px" />
-            <RectangleSkeleton width="340px" height="32px" />
-          </div>
-        </div>
-        <div className={styles.buttonContainer}>
-          <RectangleSkeleton
-            className={styles.addProviderButton}
-            width="128px"
-            height="32px"
-          />
-          <RectangleSkeleton
-            className={styles.learnMoreLink}
-            width="322px"
-            height="32px"
-          />
-        </div>
-      </div>
-    );
+  if (!knowledgeInitied) return <KnowledgeLoader />;
 
   const isSaveDisabled =
     !currentValue || selectedOption === KnowledgeType.None || isKeyHidden;
@@ -249,14 +223,14 @@ const KnowledgeComponent = ({
             modelName: aiConfig?.embeddingModel || "text-embedding-3-small",
           })}
         </Text>
-        {aiSettingsUrl ? (
+        {knowledgeSettingsUrl ? (
           <Link
             className={generalStyles.learnMoreLink}
             target={LinkTarget.blank}
             type={LinkType.page}
             fontWeight={600}
             isHovered
-            href={aiSettingsUrl}
+            href={knowledgeSettingsUrl}
             color="accent"
           >
             {t("Common:LearnMore")}
@@ -336,7 +310,8 @@ const KnowledgeComponent = ({
             isDisabled={
               !knowledgeConfig ||
               knowledgeConfig?.type === KnowledgeType.None ||
-              saveRequestRunning
+              saveRequestRunning ||
+              knowledgeConfig.needReset
             }
           />
         </div>
@@ -360,7 +335,9 @@ export const Knowledge = inject(
       hasAIProviders: aiSettingsStore.hasAIProviders,
       getAIConfig: settingsStore.getAIConfig,
       aiConfig: settingsStore.aiConfig,
-      aiSettingsUrl: settingsStore.aiSettingsUrl,
+      knowledgeSettingsUrl: settingsStore.knowledgeSettingsUrl,
     };
   },
 )(observer(KnowledgeComponent));
+
+export { KnowledgeLoader };

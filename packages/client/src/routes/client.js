@@ -32,6 +32,7 @@ import { SHARED_WITH_ME_PATH } from "@docspace/shared/constants";
 
 import { ViewComponent } from "SRC_DIR/pages/Home/View";
 import { publicPreviewLoader } from "SRC_DIR/pages/PublicPreview/PublicPreview.helpers";
+import { DefaultPageRedirect } from "SRC_DIR/pages/Home/DefaultPageRedirect";
 
 import PrivateRoute from "../components/PrivateRouteWrapper";
 import PublicRoute from "../components/PublicRouteWrapper";
@@ -75,7 +76,7 @@ const ClientRoutes = [
             index: true,
             element: (
               <PrivateRoute>
-                <Navigate to="/rooms/shared" replace />
+                <DefaultPageRedirect />
               </PrivateRoute>
             ),
           },
@@ -347,61 +348,6 @@ const ClientRoutes = [
     path: "/Products/Files/",
     caseSensitive: true,
     element: <Navigate to="/rooms/shared/filter" replace />,
-  },
-  {
-    path: "/form-gallery",
-    async lazy() {
-      const { WrappedComponent } = await componentLoader(
-        () => import("SRC_DIR/pages/FormGallery"),
-      );
-
-      const Component = () => (
-        <PrivateRoute>
-          <ErrorBoundary>
-            <WrappedComponent />
-          </ErrorBoundary>
-        </PrivateRoute>
-      );
-
-      return { Component };
-    },
-  },
-
-  {
-    path: "/form-gallery/:fromFolderId",
-    async lazy() {
-      const { WrappedComponent } = await componentLoader(
-        () => import("SRC_DIR/pages/FormGallery"),
-      );
-
-      const Component = () => (
-        <PrivateRoute>
-          <ErrorBoundary>
-            <WrappedComponent />
-          </ErrorBoundary>
-        </PrivateRoute>
-      );
-
-      return { Component };
-    },
-  },
-  {
-    path: "/form-gallery/:fromFolderId/filter",
-    async lazy() {
-      const { WrappedComponent } = await componentLoader(
-        () => import("SRC_DIR/pages/FormGallery"),
-      );
-
-      const Component = () => (
-        <PrivateRoute>
-          <ErrorBoundary>
-            <WrappedComponent />
-          </ErrorBoundary>
-        </PrivateRoute>
-      );
-
-      return { Component };
-    },
   },
   {
     path: "/share/preview/:id",

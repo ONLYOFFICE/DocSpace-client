@@ -59,6 +59,8 @@ class OformsStore {
 
   oformsLoadError = false;
 
+  oformsNetworkError = false;
+
   oformsFilter = OformsFilter.getDefault();
 
   oformFromFolderId = myDocumentsFolderId;
@@ -77,6 +79,12 @@ class OformsStore {
 
   oformFilesLoaded = false;
 
+  templateGalleryVisible = false;
+
+  isVisibleInfoPanelTemplateGallery = false;
+
+  currentExtensionGallery = ".docx";
+
   submitToGalleryTileIsVisible = !localStorage.getItem(
     "submitToGalleryTileIsHidden",
   );
@@ -88,13 +96,16 @@ class OformsStore {
   }
 
   get defaultOformLocale() {
-    const userLocale =
-      getCookie(LANGUAGE) || this.userStore.user?.cultureName || "en";
+    const userLocale = getCookie(LANGUAGE) || this.userStore.user?.cultureName;
     const convertedLocale = convertToLanguage(userLocale);
 
-    return this.oformLocales?.includes(convertedLocale)
+    const locale = this.oformLocales?.includes(convertedLocale)
       ? convertedLocale
-      : "en";
+      : this.oformLocales?.includes(this.settingsStore.culture)
+        ? this.settingsStore.culture
+        : "en";
+
+    return locale;
   }
 
   setOformFiles = (oformFiles) => (this.oformFiles = oformFiles);
@@ -133,6 +144,12 @@ class OformsStore {
     this.oformFilesLoaded = oformFilesLoaded;
   };
 
+  setIsVisibleInfoPanelTemplateGallery = (
+    isVisibleInfoPanelTemplateGallery,
+  ) => {
+    this.isVisibleInfoPanelTemplateGallery = isVisibleInfoPanelTemplateGallery;
+  };
+
   fetchOformLocales = async () => {
     const { uploadDomain, uploadDashboard } = this.settingsStore.formGallery;
 
@@ -158,8 +175,9 @@ class OformsStore {
     const templateDescription = "&fields[5]=template_desc";
     const cardPrewiew = "&populate[card_prewiew][fields][6]=url";
     const templateImage = "&populate[template_image][fields][7]=formats";
+    const templateSize = "&populate[file_oform][fields][8]=size";
 
-    const fields = `${formName}${updatedAt}${defaultDescription}${templateDescription}${cardPrewiew}${templateImage}`;
+    const fields = `${formName}${updatedAt}${defaultDescription}${templateDescription}${cardPrewiew}${templateImage}${templateSize}`;
     const params = `?${fields}&${filter.toApiUrlParams()}`;
 
     const apiUrl = combineUrl(domain, path, params);
@@ -167,13 +185,17 @@ class OformsStore {
     try {
       const oforms = await getOforms(apiUrl);
       this.oformsLoadError = false;
+      this.oformsNetworkError = false;
       return oforms;
     } catch (err) {
       const status = err?.response?.status;
+      const isNetworkError = err?.code === "ERR_NETWORK";
       const isApiError = status === 404 || status === 500;
-      // console.log({ err, isApiError });
+
       if (isApiError) {
         this.oformsLoadError = true;
+      } else if (isNetworkError) {
+        this.oformsNetworkError = true;
       } else {
         toastr.error(err);
       }
@@ -209,7 +231,7 @@ class OformsStore {
 
     runInAction(() => {
       this.setOformsFilter(newOformsFilter);
-      this.setOformFiles([...this.oformFiles, ...newForms]);
+      this.setOformFiles([...(this.oformFiles || []), ...newForms]);
       this.setOformsIsLoading(false);
     });
   };
@@ -345,6 +367,18 @@ class OformsStore {
     runInAction(() => this.fetchOforms(newOformsFilter));
   };
 
+  initTemplateGallery = async () => {
+    await this.fetchOformLocales();
+
+    const firstLoadFilter = OformsFilter.getDefaultDocx();
+    firstLoadFilter.locale = this.defaultOformLocale;
+
+    await Promise.all([
+      this.fetchOforms(firstLoadFilter),
+      this.fetchCurrentCategory(),
+    ]);
+  };
+
   sortOforms = (sortBy, sortOrder) => {
     if (!sortBy || !sortOrder) return;
 
@@ -356,17 +390,33 @@ class OformsStore {
     runInAction(() => this.fetchOforms(newOformsFilter));
   };
 
-  resetFilters = () => {
+  resetFilters = async (ext) => {
     this.currentCategory = null;
-    const newOformsFilter = OformsFilter.getDefault();
-    newOformsFilter.locale = this.defaultOformLocale;
 
-    runInAction(() => this.fetchOforms(newOformsFilter));
+    const defaultFilter =
+      ext === ".docx"
+        ? OformsFilter.getDefaultDocx()
+        : ext === ".xlsx"
+          ? OformsFilter.getDefaultSpreadsheet()
+          : ext === ".pptx"
+            ? OformsFilter.getDefaultPresentation()
+            : OformsFilter.getDefault();
+
+    defaultFilter.locale = this.defaultOformLocale;
+    await this.fetchOforms(defaultFilter);
   };
 
   hideSubmitToGalleryTile = () => {
     localStorage.setItem("submitToGalleryTileIsHidden", true);
     this.submitToGalleryTileIsVisible = false;
+  };
+
+  setTemplateGalleryVisible = (templateGalleryVisible) => {
+    this.templateGalleryVisible = templateGalleryVisible;
+  };
+
+  setCurrentExtensionGallery = (extension) => {
+    this.currentExtensionGallery = extension;
   };
 
   get hasGalleryFiles() {
@@ -378,7 +428,7 @@ class OformsStore {
   }
 
   get hasMoreForms() {
-    return this.oformFiles.length < this.oformsFilterTotal;
+    return this.oformFiles && this.oformFiles.length < this.oformsFilterTotal;
   }
 }
 

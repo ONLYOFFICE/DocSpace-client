@@ -36,7 +36,6 @@ import { Text } from "@docspace/shared/components/text";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { ComboBox, type TOption } from "@docspace/shared/components/combobox";
 import { WebSearchType } from "@docspace/shared/api/ai/enums";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import { PasswordInput } from "@docspace/shared/components/password-input";
 import { Tooltip } from "@docspace/shared/components/tooltip";
 import { toastr } from "@docspace/shared/components/toast";
@@ -48,6 +47,7 @@ import generalStyles from "../AISettings.module.scss";
 
 import styles from "./Search.module.scss";
 import { ResetWebSearchDialog } from "./dialogs/reset";
+import { SearchLoader } from "./SearchLoader";
 
 type TSearchProps = {
   webSearchInitied?: AISettingsStore["webSearchInitied"];
@@ -55,7 +55,7 @@ type TSearchProps = {
   restoreWebSearch?: AISettingsStore["restoreWebSearch"];
   updateWebSearch?: AISettingsStore["updateWebSearch"];
   hasAIProviders?: AISettingsStore["hasAIProviders"];
-  aiSettingsUrl?: string;
+  webSearchSettingsUrl?: SettingsStore["webSearchSettingsUrl"];
   getAIConfig?: SettingsStore["getAIConfig"];
 };
 
@@ -66,7 +66,7 @@ const SearchComponent = ({
   webSearchConfig,
   updateWebSearch,
   hasAIProviders,
-  aiSettingsUrl,
+  webSearchSettingsUrl,
   getAIConfig,
 }: TSearchProps) => {
   const { t } = useTranslation(["Common", "AISettings", "Settings"]);
@@ -74,12 +74,10 @@ const SearchComponent = ({
   const [resetDialogVisible, setResetDialogVisible] =
     React.useState<boolean>(false);
 
-  const [isKeyHidden, setIsKeyHidden] = React.useState(
-    webSearchConfig?.enabled,
-  );
-  const [value, setValue] = React.useState(
-    webSearchConfig?.enabled ? FAKE_KEY_VALUE : "",
-  );
+  const initEnabled = webSearchConfig?.enabled && !webSearchConfig?.needReset;
+
+  const [isKeyHidden, setIsKeyHidden] = React.useState(initEnabled);
+  const [value, setValue] = React.useState(initEnabled ? FAKE_KEY_VALUE : "");
   const [selectedOption, setSelectedOption] = React.useState<WebSearchType>(
     () => {
       if (webSearchConfig?.type === WebSearchType.Exa) return WebSearchType.Exa;
@@ -137,7 +135,7 @@ const SearchComponent = ({
   }, [selectedOption, items]);
 
   React.useEffect(() => {
-    if (webSearchConfig?.enabled) {
+    if (webSearchConfig?.enabled && !webSearchConfig?.needReset) {
       setIsKeyHidden(true);
       setValue(FAKE_KEY_VALUE);
     }
@@ -149,43 +147,7 @@ const SearchComponent = ({
     });
   }, [webSearchConfig]);
 
-  if (!webSearchInitied)
-    return (
-      <div className={generalStyles.search}>
-        <RectangleSkeleton
-          className={generalStyles.description}
-          width="700px"
-          height="36px"
-        />
-        <RectangleSkeleton
-          className={generalStyles.learnMoreLink}
-          width="100px"
-          height="19px"
-        />
-        <div className={styles.searchForm}>
-          <div className={generalStyles.fieldContainer}>
-            <RectangleSkeleton width="119px" height="20px" />
-            <RectangleSkeleton width="340px" height="32px" />
-          </div>
-          <div className={generalStyles.fieldContainer}>
-            <RectangleSkeleton width="48px" height="32px" />
-            <RectangleSkeleton width="340px" height="32px" />
-          </div>
-        </div>
-        <div className={styles.buttonContainer}>
-          <RectangleSkeleton
-            className={styles.addProviderButton}
-            width="128px"
-            height="32px"
-          />
-          <RectangleSkeleton
-            className={styles.learnMoreLink}
-            width="322px"
-            height="32px"
-          />
-        </div>
-      </div>
-    );
+  if (!webSearchInitied) return <SearchLoader />;
 
   const isSaveDisabled =
     !value || selectedOption === WebSearchType.None || isKeyHidden;
@@ -210,14 +172,14 @@ const SearchComponent = ({
             productName: t("Common:ProductName"),
           })}
         </Text>
-        {aiSettingsUrl ? (
+        {webSearchSettingsUrl ? (
           <Link
             className={generalStyles.learnMoreLink}
             target={LinkTarget.blank}
             type={LinkType.page}
             fontWeight={600}
             isHovered
-            href={aiSettingsUrl}
+            href={webSearchSettingsUrl}
             color="accent"
           >
             {t("Common:LearnMore")}
@@ -297,7 +259,8 @@ const SearchComponent = ({
             isDisabled={
               !webSearchConfig ||
               webSearchConfig?.type === WebSearchType.None ||
-              saveRequestRunning
+              saveRequestRunning ||
+              webSearchConfig.needReset
             }
           />
         </div>
@@ -318,7 +281,9 @@ export const Search = inject(({ aiSettingsStore, settingsStore }: TStore) => {
     webSearchConfig: aiSettingsStore.webSearchConfig,
     updateWebSearch: aiSettingsStore.updateWebSearch,
     hasAIProviders: aiSettingsStore.hasAIProviders,
-    aiSettingsUrl: settingsStore.aiSettingsUrl,
+    webSearchSettingsUrl: settingsStore.webSearchSettingsUrl,
     getAIConfig: settingsStore.getAIConfig,
   };
 })(observer(SearchComponent));
+
+export { SearchLoader };

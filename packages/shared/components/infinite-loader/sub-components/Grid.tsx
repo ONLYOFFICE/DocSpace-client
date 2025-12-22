@@ -31,7 +31,7 @@ import classNames from "classnames";
 import { TileSkeleton } from "../../../skeletons/tiles";
 import { RectangleSkeleton } from "../../../skeletons/rectangle";
 
-import { GridComponentProps } from "../InfiniteLoader.types";
+import { ListComponentProps } from "../InfiniteLoader.types";
 import styles from "../InfiniteLoader.module.scss";
 
 const GridComponent = ({
@@ -46,7 +46,7 @@ const GridComponent = ({
   scroll,
   showSkeleton,
   currentFolderId,
-}: GridComponentProps) => {
+}: ListComponentProps) => {
   const loaderRef = useRef<InfiniteLoader | null>(null);
   const listRef = useRef<List | null>(null);
 

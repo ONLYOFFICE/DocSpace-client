@@ -74,7 +74,6 @@
   "DefaultSettings": "Ajustes predeterminados",
   "DefineQuotaPerRoom": "Definir cuota por sala",
   "DefineQuotaPerUser": "Definir cuota por usuario",
-  "DeletePortal": "Eliminar {{productName}}",
   "DeletePortalInfo": "Antes de eliminar el espacio, por favor, asegúrese de que la facturación automática está desactivada. Puede comprobar el estado de la facturación automática en <1>su portal de cliente de Stripe</1>.",
   "DeleteSecretKey": "Eliminar clave secreta",
   "DeleteSecretKeyDescription": "La clave secreta se eliminará permanentemente. No podrá deshacer esta acción.",

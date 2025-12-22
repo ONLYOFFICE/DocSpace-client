@@ -1090,4 +1090,6 @@
   "WebSearchAI": "Web search",
   "AIProvider": "AI provider",
   "AIProviders": "AI provider's"
+  "YourTurn": "Your turn",
+  "DeletePortal": "Delete {{productName}}"
 }

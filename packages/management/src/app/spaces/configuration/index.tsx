@@ -70,7 +70,10 @@ export const ConfigurationSpaces = ({
 
   return (
     <LoaderWrapper isLoading={isLoading}>
-      <div className={styles.wrapper}>
+      <div
+        className={styles.wrapper}
+        data-testid="configuration-spaces-wrapper"
+      >
         <Header />
         <Body domainValidator={domainValidator} />
       </div>

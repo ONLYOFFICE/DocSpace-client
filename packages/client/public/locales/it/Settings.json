@@ -74,7 +74,6 @@
   "DefaultSettings": "Impostazioni predefinite",
   "DefineQuotaPerRoom": "Definisci la quota per stanza",
   "DefineQuotaPerUser": "Definisci la quota per utente",
-  "DeletePortal": "Elimina {{productName}}",
   "DeletePortalInfo": "Prima di eliminare lo spazio, assicurati che la fatturazione automatica sia disattivata. Puoi controllare lo stato della fatturazione automatica nel <1>tuo portale clienti Stripe</1>.",
   "DeleteSecretKey": "Elimina chiave segreta",
   "DeleteSecretKeyDescription": "La chiave segreta verrà eliminata in modo permanente. Questa azione non può essere annullata.",

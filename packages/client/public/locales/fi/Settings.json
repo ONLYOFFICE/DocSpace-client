@@ -74,7 +74,6 @@
   "DefaultSettings": "Oletusasetukset",
   "DefineQuotaPerRoom": "Määritä kiintiö per huone",
   "DefineQuotaPerUser": "Määritä kiintiö per käyttäjä",
-  "DeletePortal": "Poista {{productName}}",
   "DeletePortalInfo": "Varmista, että automaattinen laskutus on pois päältä, ennen kuin poistat tilan. Voit tarkistaa automaattisen laskutuksen tilan <1>Stripe-asiakasportaalissasi</1>.",
   "DeleteSecretKey": "Poista secret key",
   "DeleteSecretKeyDescription": "Secret key poistetaan lopullisesti. Tätä toimintoa ei voi perua.",

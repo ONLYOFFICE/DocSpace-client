@@ -74,7 +74,6 @@
   "DefaultSettings": "Výchozí nastavení",
   "DefineQuotaPerRoom": "Definice kvóty na pokoj",
   "DefineQuotaPerUser": "Definice kvóty na uživatele",
-  "DeletePortal": "Odstranění prostoru {{productName}}",
   "DeletePortalInfo": "Před odstraněním místa se ujistěte, že je vypnutá automatická fakturace. Stav automatického účtování můžete zkontrolovat na <1>svém zákaznickém portálu Stripe</1>.",
   "DeleteSecretKey": "Odstranění tajného klíče",
   "DeleteSecretKeyDescription": "Tajný klíč bude trvale odstraněn. Tuto akci nebude možné vrátit zpět.",

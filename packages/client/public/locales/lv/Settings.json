@@ -74,7 +74,6 @@
   "DefaultSettings": "Noklusējuma uzstādījumi",
   "DefineQuotaPerRoom": "Definējiet kvotu katrai telpai",
   "DefineQuotaPerUser": "Definējiet kvotu katram lietotājam",
-  "DeletePortal": "Izdzēst {{productName}}",
   "DeletePortalInfo": "Pirms izdzēst telpu, pārliecinieties, vai automātiska norēķināšanās ir izslēgta. Automātisko norēķinu statusu varat pārbaudīt <1> Stripe klientu portālā</1>.",
   "DeleteSecretKey": "Dzēst privāto atslēgu",
   "DeleteSecretKeyDescription": "Privātā atslēga tiks neatgriezeniski dzēsta. Šo darbību nevarēsiet atcelt.",

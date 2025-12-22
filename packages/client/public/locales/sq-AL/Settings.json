@@ -74,7 +74,6 @@
   "DefaultSettings": "Cilësimet e parazgjedhura",
   "DefineQuotaPerRoom": "Përcaktoni kuotën për dhomë",
   "DefineQuotaPerUser": "Përcaktoni kuotën për përdoruesin",
-  "DeletePortal": "Fshini {{productName}}",
   "DeletePortalInfo": "Përpara se të fshini hapësirën, sigurohuni që faturimi automatik është i çaktivizuar. Ju mund të kontrolloni statusin e faturimit automatik në <1>portalin tuaj të klientëve Stripe</1>.",
   "DeleteSecretKey": "Fshini çelësin sekret",
   "DeleteSecretKeyDescription": "Çelësi sekret do të fshihet përgjithmonë. Nuk do të mund ta zhbësh këtë veprim.",

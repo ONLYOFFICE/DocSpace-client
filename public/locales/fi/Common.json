@@ -1053,5 +1053,6 @@
   "YouHaveUnsavedChanges": "Sinulla on tallentamattomia muutoksia",
   "YourCurrentDomain": "Nykyinen verkkotunnuksesi",
   "YourLogo": "Logosi",
-  "YourTurn": "Sinun vuorosi"
+  "YourTurn": "Sinun vuorosi",
+  "DeletePortal": "Poista {{productName}}"
 }

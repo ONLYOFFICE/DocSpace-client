@@ -24,13 +24,44 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { BASE_URL, API_PREFIX } from "../../utils";
+import { BASE_URL, API_PREFIX, HEADER_OPEN_SOURCE } from "../../utils";
 
 export const PATH_TARIFF = "portal/tariff";
 
 export const tariffSuccess = {
   response: {
     openSource: false,
+    enterprise: false,
+    developer: true,
+    id: 1,
+    state: 1,
+    dueDate: "2026-06-05T13:03:34.0000000+04:00",
+    delayDueDate: "0001-01-01T00:00:00.0000000Z",
+    licenseDate: "0001-01-01T00:00:00.0000000Z",
+    customerId: "test@gmail.com",
+    quotas: [
+      {
+        id: 1,
+        quantity: 31,
+        wallet: false,
+      },
+    ],
+  },
+  count: 1,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_TARIFF}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+  ok: true,
+};
+
+export const tariffOpenSourceSuccess = {
+  response: {
+    openSource: true,
     enterprise: false,
     developer: false,
     id: 1,
@@ -59,6 +90,9 @@ export const tariffSuccess = {
   ok: true,
 };
 
-export const tariffHandler = () => {
+export const tariffHandler = (headers: Headers) => {
+  if (headers?.get(HEADER_OPEN_SOURCE)) {
+    return new Response(JSON.stringify(tariffOpenSourceSuccess));
+  }
   return new Response(JSON.stringify(tariffSuccess));
 };

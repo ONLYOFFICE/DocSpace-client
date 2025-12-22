@@ -71,7 +71,7 @@ export const quotaSuccess = {
       },
       {
         id: "branding",
-        value: false,
+        value: true,
         type: "flag",
       },
       {

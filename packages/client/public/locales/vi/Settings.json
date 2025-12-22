@@ -77,7 +77,6 @@
   "DefineQuotaPerAIAgent": "Xác định hạn ngạch cho mỗi tác nhân AI",
   "DefineQuotaPerRoom": "Xác định hạn mức cho mỗi phòng",
   "DefineQuotaPerUser": "Xác định hạn mức cho mỗi người dùng",
-  "DeletePortal": "Xóa {{productName}}",
   "DeletePortalInfo": "Trước khi bạn xóa không gian, xin vui lòng đảm bảo rằng thanh toán tự động đã được tắt. Bạn có thể kiểm tra trạng thái thanh toán tự động trong <1> cổng thông tin khách hàng Stripe của mình</1>.",
   "DeleteSecretKey": "Xóa khóa bí mật",
   "DeleteSecretKeyDescription": "Khóa bí mật sẽ bị xóa vĩnh viễn. Bạn sẽ không thể hoàn tác thao tác này.",

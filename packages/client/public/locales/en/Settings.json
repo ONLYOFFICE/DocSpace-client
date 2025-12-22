@@ -77,7 +77,6 @@
   "DefineQuotaPerAIAgent": "Define quota per AI agent",
   "DefineQuotaPerRoom": "Define quota per room",
   "DefineQuotaPerUser": "Define quota per user",
-  "DeletePortal": "Delete {{productName}}",
   "DeletePortalInfo": "Before you delete the space, please make sure that automatic billing is turned off. You may check the status of automatic billing in <1>your Stripe customer portal</1>.",
   "DeleteSecretKey": "Delete secret key",
   "DeleteSecretKeyDescription": "The secret key will be deleted permanently. You will not be able to undo this action.",

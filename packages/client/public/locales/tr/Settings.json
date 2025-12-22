@@ -77,7 +77,6 @@
   "DefineQuotaPerAIAgent": "AI aracısı başına kota tanımlayın",
   "DefineQuotaPerRoom": "Oda başına kota tanımla",
   "DefineQuotaPerUser": "Kullanıcı başına kota tanımla",
-  "DeletePortal": "{{productName}}'i Sil",
   "DeletePortalInfo": "Alanı silmeden önce lütfen otomatik faturalandırmanın kapalı olduğundan emin olun. Otomatik faturalandırmanın durumunu <1>Stripe müşteri portalınızdan</1> kontrol edebilirsiniz.",
   "DeleteSecretKey": "Gizli anahtarı sil",
   "DeleteSecretKeyDescription": "Gizli anahtar kalıcı olarak silinecek. Bu işlem geri alınamaz.",

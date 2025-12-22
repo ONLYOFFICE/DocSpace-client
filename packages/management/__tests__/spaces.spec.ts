@@ -139,4 +139,30 @@ test.describe("Spaces", () => {
       "spaces-delete-space-render.png",
     ]);
   });
+
+  test("should change domain dialog render", async ({ page, mockRequest }) => {
+    await mockRequest.setHeaders("/management/spaces", [
+      HEADER_UNCOMPLETED_TENANT,
+    ]); 
+    await mockRequest.router([endpoints.setDomain]);
+
+    await page.goto("/management/spaces");
+
+    await expect(page.getByTestId("multiple-spaces-wrapper")).toBeVisible();
+
+    const editDomain = page.getByTestId("edit-domain-button");
+    await expect(editDomain).toBeVisible();
+    await editDomain.click();
+
+    const changeDomainInput = page.getByTestId("change-domain-input");
+    await expect(changeDomainInput).toBeVisible();
+
+    await changeDomainInput.fill("test.com");
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "spaces",
+      "spaces-change-domain-modal.png",
+    ]);
+  });
 });

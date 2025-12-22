@@ -192,6 +192,8 @@ import {
   PATH_PORTAL_REGISTER,
   removePortalHandler,
   PATH_PORTAL_REMOVE,
+  setDomainHandler,
+  PATH_SET_DOMAIN,
 } from "./apisystem";
 import type { MethodType } from "../types";
 
@@ -678,5 +680,10 @@ export const endpoints = {
   encryptionSettings: {
     url: `${BASE_URL}/${PATH_ENCRYPTION_SETTINGS}`,
     dataHandler: () => encryptionSettingsHandler(new Headers()),
+  },
+  setDomain: {
+    url: `${API_SYSTEM_URL}/${PATH_SET_DOMAIN}`,
+    dataHandler: setDomainHandler,
+    method: "POST",
   },
 } satisfies TEndpoints;

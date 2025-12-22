@@ -105,7 +105,7 @@ export const DeletePortalDialog = observer(() => {
       <ModalDialog.Header>
         {isWizardCompleted
           ? t("SubmitDelete")
-          : t("Settings:DeletePortal", {
+          : t("Common:DeletePortal", {
               productName: t("Common:ProductName"),
             })}
       </ModalDialog.Header>

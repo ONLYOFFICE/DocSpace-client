@@ -55,7 +55,7 @@ const DeletePortalDialog = (props) => {
       displayType="modal"
     >
       <ModalDialog.Header>
-        {t("DeletePortal", { productName: t("Common:ProductName") })}
+        {t("Common:DeletePortal", { productName: t("Common:ProductName") })}
       </ModalDialog.Header>
       <ModalDialog.Body>
         <Trans t={t} i18nKey="DeletePortalInfo" ns="Settings">

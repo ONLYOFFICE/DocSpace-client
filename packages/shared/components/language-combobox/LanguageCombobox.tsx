@@ -45,6 +45,10 @@ const LanguageCombobox = (props: ComboboxProps) => {
     fixedDirection = false,
     isDefaultMode = true,
     manualWidth = "42px",
+    usePortalBackdrop = false,
+    withBackdrop = false,
+    shouldShowBackdrop = false,
+    isDisabled = false,
   } = props;
 
   const { i18n } = useTranslation(["Common"]);
@@ -84,7 +88,7 @@ const LanguageCombobox = (props: ComboboxProps) => {
       options={cultureNames}
       selectedOption={currentCulture}
       onSelect={onSelect}
-      isDisabled={false}
+      isDisabled={isDisabled}
       scaled={false}
       scaledOptions={false}
       size={ComboBoxSize.content}
@@ -99,6 +103,9 @@ const LanguageCombobox = (props: ComboboxProps) => {
       isMobileView={isMobileView}
       withBlur={isMobileView}
       withLabel={!!withLabel}
+      usePortalBackdrop={usePortalBackdrop}
+      withBackdrop={withBackdrop}
+      shouldShowBackdrop={shouldShowBackdrop}
       dataTestId={dataTestId ?? "language-combobox"}
       role="combobox"
       aria-label="Select language"

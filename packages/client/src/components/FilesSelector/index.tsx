@@ -150,6 +150,8 @@ const FilesSelectorWrapper = ({
   checkCreating,
   isMultiSelect,
   disableBySecurity,
+  isPortalView = false,
+  withoutDescriptionText = false,
 }: FilesSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation([
     "Files",
@@ -479,7 +481,8 @@ const FilesSelectorWrapper = ({
         !filterParam ||
         filterParam === "ALL" ||
         (filterParam as unknown as FilterType) !== FilterType.DocumentsOnly ||
-        !descriptionText
+        !descriptionText ||
+        withoutDescriptionText
           ? ""
           : (descriptionText ?? t("Common:SelectDOCXFormat"))
       }
@@ -499,6 +502,7 @@ const FilesSelectorWrapper = ({
       checkCreating={checkCreating}
       isMultiSelect={isMultiSelect}
       disableBySecurity={disableBySecurity}
+      isPortalView={isPortalView}
     />
   );
 };

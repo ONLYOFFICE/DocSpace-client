@@ -404,12 +404,11 @@ const LanguageAndTimeZoneComponent = (props) => {
         window.timezone = state.timezone.key;
       })
       .then(() => toastr.success(t("Common:SuccessfullySaveSettingsMessage")))
-      .then(
-        () =>
-          !user.cultureName &&
-          lng !== state.language.key &&
-          window.location.reload(),
-      )
+      .then(() => {
+        if (!user.cultureName && lng !== state.language.key)
+          window.location.reload();
+        else settingsStore.setCulture(state.language.key);
+      })
       .catch((error) => toastr.error(error))
       .finally(() => setState((val) => ({ ...val, isLoading: false })));
 

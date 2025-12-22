@@ -128,7 +128,9 @@ export const getDescription = (
     if (isResultsTab)
       return security && "UseChat" in security && security.UseChat
         ? t("AIRoom:EmptyResultsDescription")
-        : t("AIRoom:EmptyResultsViewerDescription");
+        : t("AIRoom:EmptyResultsViewerDescription", {
+            aiChat: t("AIRoom:AIChat"),
+          });
   }
 
   if (isRootEmptyPage)
@@ -573,7 +575,9 @@ export const getOptions = (
 
             window.DocSpace.navigate(`${path}?${filesFilter.toUrlParams()}`);
           },
-          description: t("AIRoom:CreateChatDescription"),
+          description: t("AIRoom:CreateChatDescription", {
+            aiChat: t("AIRoom:AIChat"),
+          }),
           disabled: !canUseChat,
         },
       ];

@@ -270,6 +270,7 @@
   "DefaultQuota": "Կանխադրված քվոտա",
   "Delete": "Ջնջել",
   "DeletePermanently": "Ընդմիշտ ջնջել",
+  "DeletePortal": "Ջնջել {{productName}}-ը",
   "DeleteRoom": "Ջնջել սենյակը",
   "Deny": "Մերժում",
   "DenyAccess": "Մերժել մատչումը",
@@ -1054,6 +1055,5 @@
   "YouHaveUnsavedChanges": "Դուք չպահված փոփոխություններ ունեք",
   "YourCurrentDomain": "Ձեր ընթացիկ տիրույթը",
   "YourLogo": "Ձեր լոգոն",
-  "YourTurn": "Ձեր հերթն է",
-  "DeletePortal": "Ջնջել {{productName}}-ը"
+  "YourTurn": "Ձեր հերթն է"
 }

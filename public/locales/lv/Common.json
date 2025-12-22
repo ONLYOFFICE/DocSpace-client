@@ -270,6 +270,7 @@
   "DefaultQuota": "Noklusējuma kvota",
   "Delete": "Dzēst",
   "DeletePermanently": "Neatgriezeniski izdzēst",
+  "DeletePortal": "Izdzēst {{productName}}",
   "DeleteRoom": "Dzēst istabu",
   "Deny": "Liegt",
   "DenyAccess": "Liegt piekļuvi",
@@ -1054,6 +1055,5 @@
   "YouHaveUnsavedChanges": "Jums ir nesaglabātas izmaiņas",
   "YourCurrentDomain": "Jūsu pašreizējais domēns",
   "YourLogo": "Jūsu logotips",
-  "YourTurn": "Jūsu kārta",
-  "DeletePortal": "Izdzēst {{productName}}"
+  "YourTurn": "Jūsu kārta"
 }

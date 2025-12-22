@@ -270,6 +270,7 @@
   "DefaultQuota": "පෙරනිමි සලාකය",
   "Delete": "මකන්න",
   "DeletePermanently": "ස්ථිරවම මකන්න",
+  "DeletePortal": "{{productName}} මකන්න",
   "DeleteRoom": "කාමරය මකන්න",
   "Deny": "ඉවතලන්න",
   "DenyAccess": "ප්‍රවේශය ඉවතලන්න",
@@ -1054,6 +1055,5 @@
   "YouHaveUnsavedChanges": "ඔබ සතුව නොසුරැකි වෙනස්කම් ඇත",
   "YourCurrentDomain": "ඔබගේ වත්මන් වසම",
   "YourLogo": "ඔබේ ලාංචනය",
-  "YourTurn": "ඔබේ වාරය.",
-  "DeletePortal": "{{productName}} මකන්න"
+  "YourTurn": "ඔබේ වාරය."
 }

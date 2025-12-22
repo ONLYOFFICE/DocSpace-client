@@ -270,6 +270,7 @@
   "DefaultQuota": "Prednastavená kvóta",
   "Delete": "Odstrániť",
   "DeletePermanently": "Vymazať natrvalo",
+  "DeletePortal": "Vymazať {{productName}}",
   "DeleteRoom": "Zmazať miestnosť",
   "Deny": "Odmietnuť",
   "DenyAccess": "Zamietnuť prístup",
@@ -1054,6 +1055,5 @@
   "YouHaveUnsavedChanges": "Máte neuložené zmeny",
   "YourCurrentDomain": "Vaša aktuálna doména",
   "YourLogo": "Vaše logo",
-  "YourTurn": "Ste na rade",
-  "DeletePortal": "Vymazať {{productName}}"
+  "YourTurn": "Ste na rade"
 }

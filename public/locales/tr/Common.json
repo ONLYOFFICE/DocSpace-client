@@ -270,6 +270,7 @@
   "DefaultQuota": "Varsayılan kota",
   "Delete": "Sil",
   "DeletePermanently": "Kalıcı olarak sil",
+  "DeletePortal": "{{productName}}'i Sil",
   "DeleteRoom": "Odayı sil",
   "Deny": "Reddet",
   "DenyAccess": "Erişimi reddet",
@@ -1054,6 +1055,5 @@
   "YouHaveUnsavedChanges": "Kaydedilmemiş değişiklikleriniz var",
   "YourCurrentDomain": "Mevcut alanınız",
   "YourLogo": "Logonuz",
-  "YourTurn": "Sıra sizde",
-  "DeletePortal": "{{productName}}'i Sil"
+  "YourTurn": "Sıra sizde"
 }

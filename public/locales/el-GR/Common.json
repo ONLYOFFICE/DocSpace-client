@@ -270,6 +270,7 @@
   "DefaultQuota": "Προεπιλεγμένη ποσόστωση",
   "Delete": "Διαγραφή",
   "DeletePermanently": "Διαγραφή μόνιμα",
+  "DeletePortal": "Διαγραφή {{productName}}",
   "DeleteRoom": "Διαγραφή δωματίου",
   "Deny": "Άρνηση",
   "DenyAccess": "Άρνηση πρόσβασης",
@@ -1054,6 +1055,5 @@
   "YouHaveUnsavedChanges": "Έχετε μη αποθηκευμένες αλλαγές",
   "YourCurrentDomain": "Το τρέχον όνομα τομέα σας",
   "YourLogo": "Το λογότυπό σας",
-  "YourTurn": "Η σειρά σας",
-  "DeletePortal": "Διαγραφή {{productName}}"
+  "YourTurn": "Η σειρά σας"
 }

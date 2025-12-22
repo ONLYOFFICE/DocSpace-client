@@ -270,6 +270,7 @@
   "DefaultQuota": "Quota par défaut",
   "Delete": "Supprimer",
   "DeletePermanently": "Supprimer définitivement",
+  "DeletePortal": "Supprimer {{productName}}",
   "DeleteRoom": "Supprimer la salle",
   "Deny": "Refuser",
   "DenyAccess": "Refuser l'accès",
@@ -1054,6 +1055,5 @@
   "YouHaveUnsavedChanges": "Vous avec des modifications non-sauvegardées",
   "YourCurrentDomain": "Votre domaine actuel",
   "YourLogo": "Votre logo",
-  "YourTurn": "Votre tour",
-  "DeletePortal": "Supprimer {{productName}}"
+  "YourTurn": "Votre tour"
 }

@@ -270,6 +270,7 @@
   "DefaultQuota": "الحصة الافتراضية",
   "Delete": "حذف",
   "DeletePermanently": "الحذف الدائم",
+  "DeletePortal": "احذف {{productName}}",
   "DeleteRoom": "حذف الغرفة ",
   "Deny": "رفض",
   "DenyAccess": "يمنع الدخول",
@@ -1054,6 +1055,5 @@
   "YouHaveUnsavedChanges": "لقد قمت بعدم حفظ التغييرات",
   "YourCurrentDomain": "النطاق الحالي الخاص بك",
   "YourLogo": "شعاركم",
-  "YourTurn": "دوركم الآن",
-  "DeletePortal": "احذف {{productName}}"
+  "YourTurn": "دوركم الآن"
 }

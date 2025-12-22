@@ -270,6 +270,7 @@
   "DefaultQuota": "Квота по умолчанию",
   "Delete": "Удалить",
   "DeletePermanently": "Удалить навсегда",
+  "DeletePortal": "Удалить {{productName}}",
   "DeleteRoom": "Удалить комнату",
   "Deny": "Отклонить",
   "DenyAccess": "Доступ запрещён",
@@ -1054,6 +1055,5 @@
   "YouHaveUnsavedChanges": "Имеются несохраненные изменения",
   "YourCurrentDomain": "Ваш текущий домен",
   "YourLogo": "Ваш логотип",
-  "YourTurn": "Ваша очередь",
-  "DeletePortal": "Удалить {{productName}}"
+  "YourTurn": "Ваша очередь"
 }

@@ -270,6 +270,7 @@
   "DefaultQuota": "Kuota e paracaktuar",
   "Delete": "Fshini",
   "DeletePermanently": "Fshini përgjithmonë",
+  "DeletePortal": "Fshini {{productName}}",
   "DeleteRoom": "Fshini dhomën",
   "Deny": "Refuzoni",
   "DenyAccess": "Refuzoni qasjen",
@@ -1054,6 +1055,5 @@
   "YouHaveUnsavedChanges": "Ju keni ndryshime të paruajtura",
   "YourCurrentDomain": "Domeni juaj aktual",
   "YourLogo": "Logos juaj",
-  "YourTurn": "Radha jote",
-  "DeletePortal": "Fshini {{productName}}"
+  "YourTurn": "Radha jote"
 }

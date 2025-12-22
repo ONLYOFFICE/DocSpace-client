@@ -270,6 +270,7 @@
   "DefaultQuota": "Hạn mức mặc định",
   "Delete": "Xóa bỏ",
   "DeletePermanently": "Xóa vĩnh viễn",
+  "DeletePortal": "Xóa {{productName}}",
   "DeleteRoom": "Xóa phòng",
   "Deny": "Từ chối",
   "DenyAccess": "Từ chối quyền truy cập",
@@ -1054,6 +1055,5 @@
   "YouHaveUnsavedChanges": "Bạn có các thay đổi chưa được lưu",
   "YourCurrentDomain": "Tên miền hiện tại của bạn",
   "YourLogo": "Logo của bạn",
-  "YourTurn": "Phiên của bạn",
-  "DeletePortal": "Xóa {{productName}}"
+  "YourTurn": "Phiên của bạn"
 }

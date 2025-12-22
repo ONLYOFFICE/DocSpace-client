@@ -270,6 +270,7 @@
   "DefaultQuota": "Cotă implicită",
   "Delete": "Ștergere",
   "DeletePermanently": "Ștergere definitivă",
+  "DeletePortal": "Ștergere {{productName}}",
   "DeleteRoom": "Ștergere sala",
   "Deny": "Interzicere",
   "DenyAccess": "Acces refuzat",
@@ -1054,6 +1055,5 @@
   "YouHaveUnsavedChanges": "Nu ați salvat modificările efectuate de dvs",
   "YourCurrentDomain": "Domeniul dvs. actual",
   "YourLogo": "Logo-ul dvs",
-  "YourTurn": "Acum e rândul dvs.",
-  "DeletePortal": "Ștergere {{productName}}"
+  "YourTurn": "Acum e rândul dvs."
 }

@@ -270,6 +270,7 @@
   "DefaultQuota": "Квота по подразбиране",
   "Delete": "Изтрий",
   "DeletePermanently": "Изтрий окончателно",
+  "DeletePortal": "Изтриване на {{productName}}",
   "DeleteRoom": "Изтрий стая",
   "Deny": "Отказ",
   "DenyAccess": "Откажи достъп",
@@ -1054,6 +1055,5 @@
   "YouHaveUnsavedChanges": "Имате незапазени промени",
   "YourCurrentDomain": "Вашият текущ домейн",
   "YourLogo": "Вашето лого",
-  "YourTurn": "Ваш ред",
-  "DeletePortal": "Изтриване на {{productName}}"
+  "YourTurn": "Ваш ред"
 }

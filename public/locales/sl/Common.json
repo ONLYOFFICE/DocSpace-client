@@ -270,6 +270,7 @@
   "DefaultQuota": "Privzeta kvota",
   "Delete": "Izbriši",
   "DeletePermanently": "Trajno izbriši",
+  "DeletePortal": "Izbriši {{productName}}",
   "DeleteRoom": "Izbriši sobo",
   "Deny": "Zavrni",
   "DenyAccess": "Zavrni dostop",
@@ -1054,6 +1055,5 @@
   "YouHaveUnsavedChanges": "Imate neshranjene spremembe",
   "YourCurrentDomain": "Vaša trenutna domena",
   "YourLogo": "Vaš logotip",
-  "YourTurn": "Vi ste na vrsti",
-  "DeletePortal": "Izbriši {{productName}}"
+  "YourTurn": "Vi ste na vrsti"
 }

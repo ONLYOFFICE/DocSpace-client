@@ -270,6 +270,7 @@
   "DefaultQuota": "ໂຄຕ້າເລີ່ມຕົ້ນ",
   "Delete": "ລົບ",
   "DeletePermanently": "ລົບລ້າງຖາວອນ",
+  "DeletePortal": "ລຶບ {{productName}}",
   "DeleteRoom": "ລຶບຫ້ອງ",
   "Deny": "ປະຖິ້ມ",
   "DenyAccess": "ປະຕິເສດການເຂົ້າເຖິງ",
@@ -1054,6 +1055,5 @@
   "YouHaveUnsavedChanges": "ທ່ານມີການປ່ຽນແປງທີ່ຍັງບໍ່ໄດ້ບັນທຶກ",
   "YourCurrentDomain": "ໂດເມນປັດຈຸບັນຂອງທ່ານ",
   "YourLogo": "ໂລໂກ້ຂອງທ່ານ",
-  "YourTurn": "ເປັນຂອງເຈົ້າແລ້ວ",
-  "DeletePortal": "ລຶບ {{productName}}"
+  "YourTurn": "ເປັນຂອງເຈົ້າແລ້ວ"
 }

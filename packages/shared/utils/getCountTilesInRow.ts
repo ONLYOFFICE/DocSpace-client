@@ -41,8 +41,23 @@ function getTileWidth(
 export const getCountTilesInRow = (
   isRooms?: boolean,
   isTemplates?: boolean,
-  isFormGallery?: boolean,
+  isTemplateGallery?: boolean,
+  isShowOneTile?: boolean,
 ) => {
+  if (isTemplateGallery) {
+    if (isShowOneTile) return 1;
+
+    if (window.innerWidth > 600 && window.innerWidth <= 839) return 3;
+
+    if (window.innerWidth >= 840 && window.innerWidth <= 1199) return 4;
+
+    if (window.innerWidth >= 1200 && window.innerWidth <= 1439) return 5;
+
+    if (window.innerWidth >= 1440) return 6;
+
+    return 2;
+  }
+
   const isDesktopView = isDesktop();
   const isMobileView = isMobile();
   const tileGap = 16;
@@ -72,7 +87,7 @@ export const getCountTilesInRow = (
   let minTileWidth;
   if (isRooms || isTemplates) {
     minTileWidth = getTileWidth(275, 350) + tileGap;
-  } else if (isFormGallery) {
+  } else if (isTemplateGallery) {
     minTileWidth = 216 + tileGap;
   } else {
     minTileWidth = getTileWidth(216, 360) + tileGap;

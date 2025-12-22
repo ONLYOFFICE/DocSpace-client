@@ -29,7 +29,7 @@ import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router";
-
+import classNames from "classnames";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { Text } from "@docspace/shared/components/text";
 import {
@@ -58,6 +58,7 @@ type ItemTitleProps = {
   getIcon?: FilesSettingsStore["getIcon"];
   currentColorScheme?: SettingsStore["currentColorScheme"];
   getFormGalleryContextOptions?: ContextOptionsStore["getFormGalleryContextOptions"];
+  currentExtensionGallery?: OformsStore["currentExtensionGallery"];
 };
 
 const ItemTitle = ({
@@ -66,6 +67,7 @@ const ItemTitle = ({
   currentColorScheme,
 
   getFormGalleryContextOptions,
+  currentExtensionGallery,
 }: ItemTitleProps) => {
   const { t } = useTranslation(["FormGallery", "Common"]);
 
@@ -88,12 +90,19 @@ const ItemTitle = ({
 
   return (
     <div
-      className={commonStyles.title}
+      className={classNames(commonStyles.title, {
+        [commonStyles.aside]: true,
+      })}
       ref={itemTitleRef}
       data-testid="info_panel_gallery_item_title"
     >
-      <ReactSVG className="icon" src={getIcon?.(32, ".pdf") ?? ""} />
-      <Text className="text">{gallerySelected?.attributes?.name_form}</Text>
+      <ReactSVG
+        className="icon"
+        src={getIcon?.(32, currentExtensionGallery) ?? ""}
+      />
+      <Text className={classNames(styles.select, "text")}>
+        {gallerySelected?.attributes?.name_form}
+      </Text>
 
       <Text color={currentColorScheme?.main?.accent} className="free-label">
         {t("Common:Free")}
@@ -127,10 +136,16 @@ const ItemTitle = ({
 };
 
 export default inject(
-  ({ contextOptionsStore, settingsStore, filesSettingsStore }: TStore) => ({
+  ({
+    contextOptionsStore,
+    settingsStore,
+    filesSettingsStore,
+    oformsStore,
+  }: TStore) => ({
     getFormGalleryContextOptions:
       contextOptionsStore.getFormGalleryContextOptions,
     currentColorScheme: settingsStore.currentColorScheme,
     getIcon: filesSettingsStore.getIcon,
+    currentExtensionGallery: oformsStore.currentExtensionGallery,
   }),
 )(observer(ItemTitle));

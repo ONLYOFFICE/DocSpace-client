@@ -160,6 +160,8 @@ export type TPlugin = {
   url: string;
   settings: string;
   iconUrl: string;
+  setLanguage?: (locale: string) => void;
+  getLanguage?: () => string;
 } & IPlugin &
   Partial<IApiPlugin> &
   Partial<IContextMenuPlugin> &

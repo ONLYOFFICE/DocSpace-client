@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import classNames from "classnames";
+
 import { getStringFromSearchParams, encodeParams } from "@/utils";
 import { getTfaSecretKeyAndQR } from "@/utils/actions";
 
@@ -31,8 +33,8 @@ import { logger } from "logger.mjs";
 
 import { GreetingContainer } from "@/components/GreetingContainer";
 
-import { StyledForm } from "./page.styled";
 import TfaActivationForm from "./page.client";
+import styles from "./TfaActivation.module.scss";
 
 type TfaActivationProps = {
   searchParams: Promise<{ [key: string]: string }>;
@@ -50,12 +52,14 @@ async function Page(props: TfaActivationProps) {
   return (
     <>
       <GreetingContainer />
-      <StyledForm className="set-app-container">
+      <div
+        className={classNames(styles.tfaActivationForm, "set-app-container")}
+      >
         <TfaActivationForm
           secretKey={res.manualEntryKey}
           qrCode={res.qrCodeSetupImageUrl}
         />
-      </StyledForm>
+      </div>
     </>
   );
 }

@@ -43,7 +43,6 @@ import type { ModalDialogProps } from "@docspace/shared/components/modal-dialog/
 import type { TTranslation } from "@docspace/shared/types";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { getCookie } from "@docspace/shared/utils";
-import { PluginLocale } from "@onlyoffice/docspace-plugin-sdk";
 
 import defaultConfig from "PUBLIC_DIR/scripts/config.json";
 
@@ -365,7 +364,7 @@ class PluginStore {
 
   initLocalePlugin = (plugin: TPlugin) => {
     const culture = this.settingsStore.culture;
-    const currentLanguage = (getCookie(LANGUAGE) || culture) as PluginLocale;
+    const currentLanguage = (getCookie(LANGUAGE) || culture) as string;
     plugin.setLanguage?.(currentLanguage);
 
     const language = plugin.getLanguage?.();

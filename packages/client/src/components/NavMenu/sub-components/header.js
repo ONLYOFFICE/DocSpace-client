@@ -28,7 +28,7 @@ import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { Link as LinkWithoutRedirect, useLocation } from "react-router";
+import { Link as LinkWithoutRedirect } from "react-router";
 import {
   isDesktop,
   NoUserSelect,
@@ -97,9 +97,6 @@ const HeaderComponent = ({
   const defaultUrl = getUrlByDefaultFolderType(
     defaultFolderType || FolderType.Rooms,
   );
-  const location = useLocation();
-
-  const isFormGallery = location.pathname.includes("/form-gallery");
 
   // const isNavAvailable = mainModules.length > 0;
 
@@ -185,7 +182,7 @@ const HeaderComponent = ({
         needNavMenu={false}
         isDesktopView={isDesktopView}
       >
-        {currentProductId !== "home" && !isFormGallery ? (
+        {currentProductId !== "home" ? (
           <HeaderCatalogBurger onClick={toggleArticleOpen} />
         ) : null}
         {customHeader || (

@@ -37,7 +37,7 @@ import { suspendPortal } from "@docspace/shared/api/portal";
 
 import { TError } from "@/types";
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
-import { ButtonsWrapper } from "@/components/Confirm.styled";
+import styles from "../confirm.module.scss";
 
 type DeactivatePortalProps = {
   siteUrl?: string;
@@ -100,7 +100,7 @@ const DeactivatePortalForm = ({
           productName: t("Common:ProductName"),
         })}
       </Text>
-      <ButtonsWrapper>
+      <div className={styles.buttonsWrapper}>
         <Button
           scale
           primary
@@ -118,7 +118,7 @@ const DeactivatePortalForm = ({
           onClick={onCancelClick}
           testId="cancel_button"
         />
-      </ButtonsWrapper>
+      </div>
     </>
   );
 };

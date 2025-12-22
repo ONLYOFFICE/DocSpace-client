@@ -130,7 +130,6 @@ const Badges = ({
           }
           fontSize="9px"
           fontWeight={800}
-          noHover
           onClick={onLDAPClick}
         />
       ) : null}
@@ -146,7 +145,6 @@ const Badges = ({
           }
           fontSize="9px"
           fontWeight={800}
-          noHover
           onClick={onSSOClick}
         />
       ) : null}

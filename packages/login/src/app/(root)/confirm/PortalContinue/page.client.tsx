@@ -37,7 +37,7 @@ import { continuePortal } from "@docspace/shared/api/portal";
 
 import { TError } from "@/types";
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
-import { ButtonsWrapper } from "@/components/Confirm.styled";
+import styles from "../confirm.module.scss";
 
 const ContinuePortalForm = () => {
   const { t } = useTranslation(["Confirm", "Common"]);
@@ -90,7 +90,7 @@ const ContinuePortalForm = () => {
           productName: t("Common:ProductName"),
         })}
       </Text>
-      <ButtonsWrapper>
+      <div className={styles.buttonsWrapper}>
         <Button
           primary
           scale
@@ -108,7 +108,7 @@ const ContinuePortalForm = () => {
           onClick={onCancelClick}
           testId="continue_cancel_button"
         />
-      </ButtonsWrapper>
+      </div>
     </>
   );
 };

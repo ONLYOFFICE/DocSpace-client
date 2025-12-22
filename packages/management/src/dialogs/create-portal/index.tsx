@@ -164,6 +164,7 @@ export const CreatePortalDialog = observer(
               })}
             </Text>
             <TextInput
+              testId="create-portal-input"
               type={InputType.text}
               size={InputSize.base}
               onChange={onHandleName}
@@ -205,6 +206,7 @@ export const CreatePortalDialog = observer(
         </ModalDialog.Body>
         <ModalDialog.Footer>
           <Button
+            testId="create-portal-button"
             isLoading={isLoading}
             key="CreateButton"
             label={t("Common:Create")}

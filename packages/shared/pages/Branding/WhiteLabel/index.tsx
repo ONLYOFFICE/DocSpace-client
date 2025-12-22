@@ -196,7 +196,10 @@ export const WhiteLabel = (props: IWhiteLabel) => {
   const isEqualLogo = isEqual(logoUrls, defaultWhiteLabelLogoUrls);
 
   return (
-    <div className={styles.whiteLabelWrapper}>
+    <div
+      className={styles.whiteLabelWrapper}
+      data-testid="whitelabel-settings-wrapper"
+    >
       <WhiteLabelHeader
         showNotAvailable={showNotAvailable}
         isSettingPaid={isSettingPaid}

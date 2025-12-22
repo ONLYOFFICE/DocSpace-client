@@ -78,6 +78,22 @@ import {
   webPluginsAddHandler,
   webPluginsUpdateHandler,
   webPluginsDeleteHandler,
+  whiteLabelLogosHandler,
+  whiteLabelLogoTextHandler,
+  whiteLabelLogosIsDefaultHandler,
+  PATH_WHITELABEL_LOGOS,
+  PATH_WHITELABEL_LOGOTEXT,
+  PATH_WHITELABEL_LOGOS_IS_DEFAULT,
+  paymentSettingsHandler,
+  PATH_PAYMENT_SETTINGS,
+  thirdPartyBackupHandler,
+  PATH_THIRDPARTY_BACKUP,
+  backupStorageHandler,
+  PATH_BACKUP_STORAGE,
+  storageRegionsHandler,
+  PATH_STORAGE_REGIONS,
+  encryptionSettingsHandler,
+  PATH_ENCRYPTION_SETTINGS,
 } from "./settings";
 import {
   CONTINUE_PATH,
@@ -92,6 +108,12 @@ import {
   SUSPEND_PATH,
   suspendHandler,
   tariffHandler,
+  licenseQuotaHandler,
+  PATH_LICENSE_QUOTA,
+  backupScheduleHandler,
+  PATH_BACKUP_SCHEDULE,
+  backupProgressHandler,
+  PATH_BACKUP_PROGRESS,
 } from "./portal";
 import {
   docServiceHandler,
@@ -165,6 +187,12 @@ import {
   PATH_SHARE_TO_USERS_FILE,
   shareToUserHandle,
 } from "./share";
+import {
+  registerHandler,
+  PATH_PORTAL_REGISTER,
+  removePortalHandler,
+  PATH_PORTAL_REMOVE,
+} from "./apisystem";
 import type { MethodType } from "../types";
 
 export type TEndpoint = {
@@ -178,6 +206,7 @@ export type TEndpoints = {
 };
 
 const BASE_URL = "*/**/api/2.0/";
+const API_SYSTEM_URL = "*/**/apisystem/";
 
 export const endpoints = {
   wizardComplete: {
@@ -385,7 +414,7 @@ export const endpoints = {
   },
   tariff: {
     url: `${BASE_URL}${PATH_TARIFF}`,
-    dataHandler: tariffHandler,
+    dataHandler: () => tariffHandler(new Headers()),
   },
   aiConfig: {
     url: `${BASE_URL}${PATH_AI_CONFIG}`,
@@ -595,5 +624,59 @@ export const endpoints = {
   getFileInfo: {
     url: PATH_GET_FILE_INFO,
     dataHandler: getFileInfoHandler,
+  },
+  registerPortal: {
+    url: `${API_SYSTEM_URL}${PATH_PORTAL_REGISTER}`,
+    dataHandler: registerHandler,
+    method: "POST",
+  },
+  removePortal: {
+    url: PATH_PORTAL_REMOVE,
+    dataHandler: removePortalHandler,
+    method: "DELETE",
+  },
+  whiteLabelLogos: {
+    url: `${BASE_URL}/${PATH_WHITELABEL_LOGOS}`,
+    dataHandler: whiteLabelLogosHandler,
+  },
+  whiteLabelLogoText: {
+    url: `${BASE_URL}/${PATH_WHITELABEL_LOGOTEXT}`,
+    dataHandler: whiteLabelLogoTextHandler,
+  },
+  whiteLabelLogosIsDefault: {
+    url: `${BASE_URL}/${PATH_WHITELABEL_LOGOS_IS_DEFAULT}`,
+    dataHandler: whiteLabelLogosIsDefaultHandler,
+  },
+  paymentSettings: {
+    url: `${BASE_URL}/${PATH_PAYMENT_SETTINGS}`,
+    dataHandler: paymentSettingsHandler,
+  },
+  licenseQuota: {
+    url: `${API_SYSTEM_URL}/${PATH_LICENSE_QUOTA}`,
+    dataHandler: licenseQuotaHandler,
+  },
+  thirdPartyBackup: {
+    url: `${BASE_URL}/${PATH_THIRDPARTY_BACKUP}`,
+    dataHandler: thirdPartyBackupHandler,
+  },
+  backupSchedule: {
+    url: `${BASE_URL}/${PATH_BACKUP_SCHEDULE}`,
+    dataHandler: backupScheduleHandler,
+  },
+  backupStorage: {
+    url: `${BASE_URL}/${PATH_BACKUP_STORAGE}`,
+    dataHandler: backupStorageHandler,
+  },
+  storageRegions: {
+    url: `${BASE_URL}/${PATH_STORAGE_REGIONS}`,
+    dataHandler: storageRegionsHandler,
+  },
+  backupProgress: {
+    url: `${BASE_URL}/${PATH_BACKUP_PROGRESS}`,
+    dataHandler: backupProgressHandler,
+  },
+  encryptionSettings: {
+    url: `${BASE_URL}/${PATH_ENCRYPTION_SETTINGS}`,
+    dataHandler: () => encryptionSettingsHandler(new Headers()),
   },
 } satisfies TEndpoints;

@@ -51,7 +51,7 @@ export const MultipleSpaces = ({
 
   return (
     <LoaderWrapper isLoading={isLoading}>
-      <div className={styles.wrapper}>
+      <div className={styles.wrapper} data-testid="multiple-spaces-wrapper">
         <Header />
         <Spaces portals={portals} tenantAlias={tenantAlias} />
         <DomainSettings baseDomain={baseDomain} />

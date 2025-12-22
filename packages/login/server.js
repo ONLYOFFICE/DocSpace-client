@@ -66,7 +66,7 @@ import("./logger.mjs").then(({ logger }) => {
         logger.error(`url: ${req.url}, error: ${err} Error occurred handling`);
         process.exit(1);
       })
-      .listen(port, () => {
+      .listen(port, hostname, () => {
         logger.info(`Server is listening on port ${port}`);
       });
 

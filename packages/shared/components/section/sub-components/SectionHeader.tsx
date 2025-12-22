@@ -31,13 +31,11 @@ import { SectionHeaderProps } from "../Section.types";
 import styles from "../Section.module.scss";
 
 const SectionHeader = (props: SectionHeaderProps) => {
-  const { className, isFormGallery, ...rest } = props;
+  const { className, ...rest } = props;
 
   return (
     <div
-      className={classNames(`section-header`, className, styles.header, {
-        [styles["form-gallery"]]: isFormGallery,
-      })}
+      className={classNames(`section-header`, className, styles.header)}
       {...rest}
     />
   );

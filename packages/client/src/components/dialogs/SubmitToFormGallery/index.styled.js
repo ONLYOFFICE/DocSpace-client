@@ -53,12 +53,7 @@ export const ModalDialogStyled = styled(ModalDialog).attrs(injectDefaultTheme)`
     border-radius: 6px;
     padding: 4px;
     width: max-content;
-
-    &:hover {
-      cursor: pointer;
-      background-color: ${({ theme }) =>
-        theme.oformGallery.submitToGalleryTile.background};
-    }
+    user-select: none;
   }
 
   .icon {

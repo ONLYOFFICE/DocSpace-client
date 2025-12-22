@@ -1067,5 +1067,6 @@
   "YouHaveUnsavedChanges": "Ju keni ndryshime të paruajtura",
   "YourCurrentDomain": "Domeni juaj aktual",
   "YourLogo": "Logos juaj",
-  "YourTurn": "Radha jote"
+  "YourTurn": "Radha jote",
+  "DeletePortal": "Fshini {{productName}}"
 }

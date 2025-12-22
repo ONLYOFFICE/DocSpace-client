@@ -176,6 +176,7 @@ const SearchComponent = ({
           {t("AISettings:SearchDescription", {
             webSearch: t("Common:WebSearchAI"),
             productName: t("Common:ProductName"),
+            aiChats: t("Common:AIChats"),
           })}
         </Text>
         {webSearchSettingsUrl ? (

@@ -82,6 +82,7 @@ const ResetWebSearchDialogComponent = ({
         <Text>
           {t("AISettings:ResetWebSearchDescription", {
             webSearch: t("Common:WebSearchAI"),
+            aiChats: t("Common:AIChats"),
           })}
         </Text>
       </ModalDialog.Body>

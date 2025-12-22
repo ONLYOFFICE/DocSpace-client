@@ -1,6 +1,5 @@
 {
   "AddMoreHeaders": "Додајте још заглавља",
-  "AIProviderSettingDescription": "Повежите сопствени ВИ сервис да бисте откључали напредне функције у {{productName}}. Када га додате, биће доступан свим корисницима у ВИ разговорима.",
   "APIKey": "API кључ",
   "ConnectProductToYourDataAndTools": "Повежите {{productName}} са својим подацима и алаткама.",
   "CustomMCPListTitle": "Прилагођено",

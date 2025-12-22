@@ -1,6 +1,5 @@
 {
   "AddMoreHeaders": "Dodaj więcej nagłówków",
-  "AIProviderSettingDescription": "Podłącz własną usługę AI, aby odblokować zaawansowane funkcje w {{productName}}. Po dodaniu będzie ona dostępna dla wszystkich użytkowników w czatach AI.",
   "APIKey": "Klucz API",
   "ConnectProductToYourDataAndTools": "Połącz {{productName}} z Twoimi danymi i narzędziami.",
   "CustomMCPListTitle": "Niestandardowe",

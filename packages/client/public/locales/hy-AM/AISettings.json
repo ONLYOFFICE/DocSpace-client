@@ -1,6 +1,5 @@
 {
   "AddMoreHeaders": "Ավելացնել ավելի շատ վերնագրեր",
-  "AIProviderSettingDescription": "Միացրեք ձեր սեփական ԱԲ ծառայությունը՝ {{productName}}-ի առաջադեմ ֆունկցիաները բացելու համար: Ավելացվելուց հետո այն հասանելի կլինի ԱԲ չատերի բոլոր օգտատերերի համար:",
   "APIKey": "API բանալի",
   "ConnectProductToYourDataAndTools": "Միացրեք {{productName}}-ը ձեր տվյալների և գործիքների հետ։",
   "CustomMCPListTitle": "Հարմարեցված",

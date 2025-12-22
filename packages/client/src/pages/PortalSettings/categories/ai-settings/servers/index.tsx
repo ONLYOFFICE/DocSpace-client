@@ -226,6 +226,7 @@ const MCPServersComponent = ({
       <Text className={styles.description}>
         {t("AISettings:MCPSettingsDescription", {
           mcpServers: t("Common:MCPSettingTitle"),
+          aiChats: t("Common:AIChats"),
         })}
       </Text>
       {mcpServersSettingsUrl ? (

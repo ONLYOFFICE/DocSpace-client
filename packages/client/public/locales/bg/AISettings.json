@@ -1,6 +1,5 @@
 {
   "AddMoreHeaders": "Добавете още заглавия",
-  "AIProviderSettingDescription": "Свържете собствената си AI услуга, за да отключите разширени функции в {{productName}}. След като бъде добавена, тя ще бъде достъпна за всички потребители в AI чатовете.",
   "APIKey": "API ключ",
   "ConnectProductToYourDataAndTools": "Свържете {{productName}} с вашите данни и инструменти.",
   "CustomMCPListTitle": "Персонализирани",

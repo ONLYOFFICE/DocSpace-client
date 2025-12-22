@@ -148,6 +148,7 @@ const AIProviderComponent = ({
       <Text className={styles.description}>
         {t("AISettings:AIProviderSettingDescription", {
           productName: t("Common:ProductName"),
+          aiChats: t("Common:AIChats"),
         })}
       </Text>
       {aiProviderSettingsUrl ? (

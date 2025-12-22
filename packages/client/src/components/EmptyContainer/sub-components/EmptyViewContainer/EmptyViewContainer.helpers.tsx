@@ -114,7 +114,9 @@ export const getDescription = (
     if (isKnowledgeTab)
       return (
         <>
-          {t("AIRoom:EmptyKnowledgeDescription")}
+          {t("AIRoom:EmptyKnowledgeDescription", {
+            aiChat: t("AIRoom:AIChat"),
+          })}
           <Text
             as="span"
             fontSize="12px"

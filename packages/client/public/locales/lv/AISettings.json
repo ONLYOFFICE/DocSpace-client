@@ -1,6 +1,5 @@
 {
   "AddMoreHeaders": "Pievienot vairāk virsrakstu",
-  "AIProviderSettingDescription": "Pievienojiet savu AI pakalpojumu, lai atbloķētu papildu funkcijas {{productName}}. Kad tas būs pievienots, tas būs pieejams visiem lietotājiem AI tērzēšanā.",
   "APIKey": "API atslēga",
   "ConnectProductToYourDataAndTools": "Pievienojiet {{productName}} pie jūsu datu un instrumentu.",
   "CustomMCPListTitle": "Pielāgoti",

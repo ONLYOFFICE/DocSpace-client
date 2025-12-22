@@ -1,6 +1,5 @@
 {
   "AddMoreHeaders": "Додайте більше заголовків",
-  "AIProviderSettingDescription": "Підключіть власний ШI-сервіс, щоб розблокувати розширені функції в {{productName}}. Після додавання він буде доступний для всіх користувачів у чатах ШI.",
   "APIKey": "Ключ API",
   "ConnectProductToYourDataAndTools": "Підключіть {{productName}} до ваших даних та інструментів.",
   "CustomMCPListTitle": "Користувацькі",

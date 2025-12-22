@@ -1,6 +1,5 @@
 {
   "AddMoreHeaders": "Ajouter d'autres en-têtes",
-  "AIProviderSettingDescription": "Connectez votre propre service IA pour débloquer des fonctionnalités avancées dans {{productName}}. Une fois ajouté, il sera accessible à tous les utilisateurs dans les discussions IA.",
   "APIKey": "Clé API",
   "ConnectProductToYourDataAndTools": "Connectez {{productName}} à vos données et outils.",
   "CustomMCPListTitle": "Personnalisé",

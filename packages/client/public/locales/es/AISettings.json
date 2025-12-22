@@ -1,6 +1,5 @@
 {
   "AddMoreHeaders": "Añadir más encabezados",
-  "AIProviderSettingDescription": "Conecte su propio servicio de IA para desbloquear funciones avanzadas en {{productName}}. Una vez añadido, será accesible para todos los usuarios en los chats de IA.",
   "APIKey": "Clave de la API",
   "ConnectProductToYourDataAndTools": "Conecte {{productName}} a sus datos y herramientas.",
   "CustomMCPListTitle": "Personalizado",

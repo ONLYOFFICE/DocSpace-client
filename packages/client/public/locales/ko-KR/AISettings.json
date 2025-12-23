@@ -23,7 +23,6 @@
   "MCPServerDescriptionHint": "통합의 목적에 대한 간략한 설명을 작성하세요.",
   "Provider": "제공업체",
   "ProviderKey": "키",
-  "ProviderKeyInputHint": "귀하의 AI 제공업체 대시보드에서 생성된 API 키를 입력하세요.",
   "ProviderNameInputHint": "이 연결을 식별하기 편리한 이름을 사용하세요.",
   "ProviderURL": "URL",
   "ProviderURLInputHint": "AI 서비스에서 제공하는 API 엔드포인트 URL을 입력하세요.",

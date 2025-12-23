@@ -23,7 +23,6 @@
   "MCPServerDescriptionHint": "Viết một giải thích ngắn gọn về mục đích của tích hợp này.",
   "Provider": "Nhà cung cấp",
   "ProviderKey": "Chìa khóa",
-  "ProviderKeyInputHint": "Nhập khóa API được tạo từ bảng điều khiển của nhà cung cấp AI của bạn.",
   "ProviderNameInputHint": "Sử dụng bất kỳ tên nào tiện lợi để bạn xác định kết nối này.",
   "ProviderURL": "URL",
   "ProviderURLInputHint": "Nhập URL điểm cuối API do dịch vụ AI của bạn cung cấp",

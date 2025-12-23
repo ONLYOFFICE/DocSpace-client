@@ -23,7 +23,6 @@
   "MCPServerDescriptionHint": "اكتبوا شرحاً موجزاً لغرض التكامل",
   "Provider": "المزود",
   "ProviderKey": "المفتاح",
-  "ProviderKeyInputHint": "أدخلوا مفتاح API الذي تم إنشاؤه من لوحة معلومات مزود الذكاء الاصطناعي الخاص بكم",
   "ProviderNameInputHint": "استخدموا أي اسم مناسب لكم للتعرف على هذا الاتصال",
   "ProviderURL": "عنوان URL",
   "ProviderURLInputHint": "أدخلوا عنوان URL لنقطة نهاية API المقدم من خدمة الذكاء الاصطناعي الخاصة بكم",

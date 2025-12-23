@@ -23,7 +23,6 @@
   "MCPServerDescriptionHint": "Napište stručné vysvětlení účelu integrace.",
   "Provider": "Poskytovatel",
   "ProviderKey": "Klíč",
-  "ProviderKeyInputHint": "Zadejte API klíč vygenerovaný z ovládacího panelu vašeho poskytovatele AI.",
   "ProviderNameInputHint": "Použijte jakékoliv jméno, které je pro vás vhodné k identifikaci tohoto spojení.",
   "ProviderURL": "URL",
   "ProviderURLInputHint": "Zadejte URL koncového bodu API poskytovaného vaší službou umělé inteligence.",

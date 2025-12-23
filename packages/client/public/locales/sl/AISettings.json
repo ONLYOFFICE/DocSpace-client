@@ -23,7 +23,6 @@
   "MCPServerDescriptionHint": "Napišite kratek opis namena integracije.",
   "Provider": "Ponudnik",
   "ProviderKey": "Kluč",
-  "ProviderKeyInputHint": "Vnesite ključ API, ki ste ga ustvarili na nadzorni plošči ponudnika umetne inteligence.",
   "ProviderNameInputHint": "Uporabite poljubno ime, ki je za vas priročno za prepoznavo te povezave.",
   "ProviderURL": "URL",
   "ProviderURLInputHint": "Vnesite URL končne točke API-ja, ki jo zagotavlja vaša storitev umetne inteligence.",

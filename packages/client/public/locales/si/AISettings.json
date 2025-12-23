@@ -23,7 +23,6 @@
   "MCPServerDescriptionHint": "ඒකාබද්ධ කිරීමේ අරමුණ පිළිබඳ කෙටි පැහැදිලි කිරීමක් ලියන්න.",
   "Provider": "සපයන්නා",
   "ProviderKey": "යතුර",
-  "ProviderKeyInputHint": "ඔබගේ AI සැපයුම්කරුගේ උපකරණ පුවරුවෙන් ජනනය කරන ලද API යතුර ඇතුළත් කරන්න",
   "ProviderNameInputHint": "මෙම සම්බන්ධතාවය හඳුනා ගැනීමට ඔබට පහසු ඕනෑම නමක් භාවිතා කරන්න.",
   "ProviderURL": "URL",
   "ProviderURLInputHint": "ඔබගේ AI සේවාව මගින් සපයන ලද API අන්ත ලක්ෂ්‍ය URL එක ඇතුළත් කරන්න",

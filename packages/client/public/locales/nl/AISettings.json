@@ -23,7 +23,6 @@
   "MCPServerDescriptionHint": "Schrijf een korte uitleg over het doel van de integratie",
   "Provider": "Provider",
   "ProviderKey": "Sleutel",
-  "ProviderKeyInputHint": "Voer de API-sleutel in die is gegenereerd vanuit het dashboard van uw AI-provider.",
   "ProviderNameInputHint": "Gebruik een willekeurige naam die voor jou handig is om deze verbinding te identificeren",
   "ProviderURL": "URL",
   "ProviderURLInputHint": "Voer de API-eindpunt URL in die door uw AI-dienst wordt verstrekt",

@@ -23,7 +23,6 @@
   "MCPServerDescriptionHint": "Напишите краткое объяснение цели интеграции",
   "Provider": "Провайдер",
   "ProviderKey": "Ключ",
-  "ProviderKeyInputHint": "Введите ключ API, сгенерированный на панели управления вашего ИИ-провайдера",
   "ProviderNameInputHint": "Используйте любое удобное имя для идентификации этого подключения",
   "ProviderURL": "URL-адрес",
   "ProviderURLInputHint": "Введите URL-адрес конечной точки API, предоставленный вашим ИИ-сервисом",

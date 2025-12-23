@@ -23,7 +23,6 @@
   "MCPServerDescriptionHint": "ຂຽນຄຳອະທິບາຍສັ້ນໆກ່ຽວກັບຈຸດປະສົງຂອງການເຊື່ອມໂຍງ",
   "Provider": "ຜູ້ໃຫ້ບໍລິການ",
   "ProviderKey": "ກະແຈ",
-  "ProviderKeyInputHint": "ໃສ່ລະຫັດ API ທີ່ສ້າງຂຶ້ນຈາກແຜງຄວບຄຸມຂອງຜູ້ໃຫ້ບໍລິການ AI ຂອງທ່ານ",
   "ProviderNameInputHint": "ໃຊ້ຊື່ໃດກໍໄດ້ທີ່ສະດວກສຳລັບທ່ານໃນການລະບຸການເຊື່ອມຕໍ່ນີ້",
   "ProviderURL": "URL",
   "ProviderURLInputHint": "ໃສ່ URL ຈຸດສິ້ນສຸດ API ທີ່ສະໜອງໃຫ້ໂດຍບໍລິການ AI ຂອງທ່ານ",

@@ -23,7 +23,6 @@
   "MCPServerDescriptionHint": "İnteqrasiyanın məqsədini qısaca izah edin.",
   "Provider": "Təminatçı",
   "ProviderKey": "Kunci",
-  "ProviderKeyInputHint": "Sizim AI provayderinizin panelindən yaradılmış API açarını daxil edin.",
   "ProviderNameInputHint": "Bu əlaqəni tanımağınız üçün rahat olacaq hər hansı bir ad istifadə edin.",
   "ProviderURL": "URL",
   "ProviderURLInputHint": "Sizə AI xidmətiniz tərəfindən verilən API endpoint URL-ini daxil edin.",

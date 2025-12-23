@@ -23,7 +23,6 @@
   "MCPServerDescriptionHint": "Rakstiet īsu skaidrojumu par integrācijas mērķi.",
   "Provider": "Pārskatītājs",
   "ProviderKey": "Atslēga",
-  "ProviderKeyInputHint": "Ievadiet API atslēgu, kas ģenerēta no jūsu MI pakalpojumu sniedzēja vadības panelī.",
   "ProviderNameInputHint": "Izmantojiet jebkuru vārdu, kas jums ir ērti, lai identificētu šo savienojumu",
   "ProviderURL": "URL",
   "ProviderURLInputHint": "Ievadiet MI pakalpojuma sniegto API galapunkta URL",

@@ -23,7 +23,6 @@
   "MCPServerDescriptionHint": "統合の目的について簡潔に書いてください",
   "Provider": "プロバイダー",
   "ProviderKey": "キー",
-  "ProviderKeyInputHint": "AIプロバイダーのダッシュボードから生成したAPIキーを入力してください",
   "ProviderNameInputHint": "この接続を識別するために、任意の名前を入力してください",
   "ProviderURL": "URL",
   "ProviderURLInputHint": "AIサービスから提供されたAPIエンドポイントURLを入力してください",

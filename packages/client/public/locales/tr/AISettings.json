@@ -23,7 +23,6 @@
   "MCPServerDescriptionHint": "Entegrasyonun amacını kısaca açıklayın",
   "Provider": "Sağlayıcı",
   "ProviderKey": "Anahtar",
-  "ProviderKeyInputHint": "AI sağlayıcınızın kontrol panelinden oluşturulan API anahtarını girin.",
   "ProviderNameInputHint": "Bu bağlantıyı tanımlamak için size uygun herhangi bir isim kullanın",
   "ProviderURL": "URL",
   "ProviderURLInputHint": "AI hizmetiniz tarafından sağlanan API uç nokta URL'sini girin.",

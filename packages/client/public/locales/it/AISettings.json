@@ -23,7 +23,6 @@
   "MCPServerDescriptionHint": "Scrivi una breve spiegazione dello scopo dell’integrazione",
   "Provider": "Fornitore",
   "ProviderKey": "Chiave",
-  "ProviderKeyInputHint": "Inserisci la chiave API generata dal pannello del tuo provider AI",
   "ProviderNameInputHint": "Usa qualsiasi nome che ti sia comodo per identificare questa connessione",
   "ProviderURL": "URL",
   "ProviderURLInputHint": "Inserisci l’URL dell’endpoint API fornito dal tuo servizio AI",

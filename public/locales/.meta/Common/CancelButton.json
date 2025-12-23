@@ -3,7 +3,7 @@
   "content": "Cancel",
   "content_en_sha1_hash": "77dfd2135f4db726c47299bb55be26f7f4525a46",
   "created_at": "2025-05-19T21:30:43.360Z",
-  "updated_at": "2025-12-22T14:25:00.698Z",
+  "updated_at": "2025-12-23T10:05:43.142Z",
   "comment": {
     "text": "This translation key is used for the \"Cancel\" button in various UI elements such as dialogs and form buttons. It provides the text to be displayed when a user clicks the cancel action, allowing them to terminate an operation or return to their previous state. This key appears in files such as Dialog.js, QuotaForm, and ShareCollectSelector.",
     "is_auto": true,
@@ -816,19 +816,19 @@
     },
     {
       "file_path": "/packages/management/src/dialogs/change-domain/index.tsx",
-      "line_number": 147,
+      "line_number": 149,
       "context": "primary\n scale\n />\n <Button\n key=\"CancelButton\"\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n onClick={onClose}\n scale\n />\n </ModalDialog.Footer>",
       "module": "/packages/management"
     },
     {
       "file_path": "/packages/management/src/dialogs/create-portal/index.tsx",
-      "line_number": 218,
+      "line_number": 220,
       "context": "primary\n onClick={onHandleClick}\n />\n <Button\n key=\"CancelButton\"\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n onClick={onClose}\n scale\n />\n </ModalDialog.Footer>",
       "module": "/packages/management"
     },
     {
       "file_path": "/packages/management/src/dialogs/delete-portal/index.tsx",
-      "line_number": 154,
+      "line_number": 155,
       "context": "primary\n onClick={onDelete}\n />\n <Button\n key=\"CancelButton\"\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n onClick={onClose}\n scale\n />\n </ModalDialog.Footer>",
       "module": "/packages/management"
     },

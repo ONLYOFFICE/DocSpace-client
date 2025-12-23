@@ -23,7 +23,6 @@
   "MCPServerDescriptionHint": "Napisz krótkie wyjaśnienie celu integracji.",
   "Provider": "Dostawca",
   "ProviderKey": "Klucz",
-  "ProviderKeyInputHint": "Wprowadź klucz API wygenerowany z panelu zarządzania dostawcy AI.",
   "ProviderNameInputHint": "Użyj dowolnej nazwy, która będzie dla Ciebie wygodna, aby zidentyfikować to połączenie.",
   "ProviderURL": "URL",
   "ProviderURLInputHint": "Wprowadź adres URL punktu końcowego API udostępniony przez Twoją usługę AI.",

@@ -23,7 +23,6 @@
   "MCPServerDescriptionHint": "Kirjoita lyhyt selitys integraation tarkoituksesta.",
   "Provider": "Palveluntarjoaja",
   "ProviderKey": "Avain",
-  "ProviderKeyInputHint": "Syötä API-avain, joka on luotu tekoälypalveluntarjoajasi kojelaudasta.",
   "ProviderNameInputHint": "Käytä mitä tahansa nimeä, joka on sinulle sopiva tämän yhteyden tunnistamiseen.",
   "ProviderURL": "URL",
   "ProviderURLInputHint": "Syötä AI-palvelusi tarjoaman API-päätepisteen URL-osoite",

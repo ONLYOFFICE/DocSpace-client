@@ -23,7 +23,6 @@
   "MCPServerDescriptionHint": "Գրեք ինտեգրման նպատակի համառոտ բացատրությունը",
   "Provider": "Պրովայդեր",
   "ProviderKey": "Բանալի",
-  "ProviderKeyInputHint": "Մուտքագրեք ձեր ԱԲ մատակարարի վահանակից ստեղծված API բանալին",
   "ProviderNameInputHint": "Օգտագործեք ցանկացած անուն, որը ձեզ համար հարմար է՝ այս կապը նույնականացնելու համար",
   "ProviderURL": "URL",
   "ProviderURLInputHint": "Մուտքագրեք ձեր ԱԲ ծառայության կողմից տրամադրված API վերջնակետի URL-ը",

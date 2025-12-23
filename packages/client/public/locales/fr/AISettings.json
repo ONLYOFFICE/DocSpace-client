@@ -23,7 +23,6 @@
   "MCPServerDescriptionHint": "Rédigez une brève explication de l'objectif de l'intégration",
   "Provider": "Fournisseur",
   "ProviderKey": "Clé",
-  "ProviderKeyInputHint": "Saisissez la clé API générée depuis le tableau de bord de votre fournisseur IA",
   "ProviderNameInputHint": "Utilisez le nom qui vous convient pour identifier cette connexion",
   "ProviderURL": "URL",
   "ProviderURLInputHint": "Saisissez l'URL du point de terminaison API fournie par votre service IA",

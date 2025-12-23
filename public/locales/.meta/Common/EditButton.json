@@ -3,7 +3,7 @@
   "content": "Edit",
   "content_en_sha1_hash": "5301648dcf6b53cefc9ed52999aaa92d4603cae0",
   "created_at": "2025-05-19T21:30:44.738Z",
-  "updated_at": "2025-12-22T14:25:01.194Z",
+  "updated_at": "2025-12-23T10:05:43.411Z",
   "comment": {
     "text": "The translation key \"EditButton\" is used to display the label \"Edit\" in various UI elements such as buttons and toggle switches. It is intended to be used in situations where users need to make changes or edits, typically in contexts related to commenting, theme editing, or API key management.",
     "is_auto": true,
@@ -72,7 +72,7 @@
     },
     {
       "file_path": "/packages/management/src/app/spaces/multiple/domain-settings.tsx",
-      "line_number": 83,
+      "line_number": 84,
       "context": "size={\n currentDeviceType === DeviceType.desktop\n ? ButtonSize.small\n : ButtonSize.normal\n }\n label={t(\"Common:EditButton\")}\n primary\n onClick={onEditButtonClick}\n scale={false}\n />\n </div>",
       "module": "/packages/management"
     },

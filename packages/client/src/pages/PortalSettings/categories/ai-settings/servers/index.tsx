@@ -58,6 +58,7 @@ type MCPListProps = {
   onSettingsClick: (item: TServer) => void;
   onDeleteClick: (id: TServer["id"]) => void;
   isMCPActionsDisabled?: boolean;
+  dataTestId?: string;
 };
 
 const MCPList = ({
@@ -68,11 +69,12 @@ const MCPList = ({
   onSettingsClick,
   onDeleteClick,
   isMCPActionsDisabled,
+  dataTestId = "mcp-list",
 }: MCPListProps) => {
   if (!mcpServers?.length) return;
 
   return (
-    <div className={styles.mcpListContainer}>
+    <div className={styles.mcpListContainer} data-testid={dataTestId}>
       {showHeading ? (
         <Heading
           className={styles.mcpHeading}
@@ -254,6 +256,7 @@ const MCPServersComponent = ({
               })
             : undefined
         }
+        testId="add-mcp-button"
       />
 
       <MCPList
@@ -264,6 +267,7 @@ const MCPServersComponent = ({
         onSettingsClick={onUpdateMCP}
         onDeleteClick={onDeleteMCP}
         isMCPActionsDisabled={isMCPActionsDisabled}
+        dataTestId="custom-mcp-list"
       />
 
       <MCPList
@@ -274,6 +278,7 @@ const MCPServersComponent = ({
         onSettingsClick={onUpdateMCP}
         onDeleteClick={onDeleteMCP}
         isMCPActionsDisabled={isMCPActionsDisabled}
+        dataTestId="system-mcp-list"
       />
 
       {addDialogVisible ? <AddMCPDialog onClose={hideAddDialog} /> : null}

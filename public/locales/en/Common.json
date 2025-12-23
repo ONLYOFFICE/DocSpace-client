@@ -1089,12 +1089,5 @@
   "YouHaveUnsavedChanges": "You have unsaved changes",
   "YourCurrentDomain": "Your current domain",
   "YourLogo": "Your logo",
-  "YourTurn": "Your turn",
-  "MCPServer": "MCP server",
-  "MCPSettingTitle": "MCP servers",
-  "WebSearchAI": "Web search",
-  "AIProvider": "AI provider",
-  "AIProviders": "AI provider's"
-  "YourTurn": "Your turn",
-  "DeletePortal": "Delete {{productName}}"
+  "YourTurn": "Your turn"
 }

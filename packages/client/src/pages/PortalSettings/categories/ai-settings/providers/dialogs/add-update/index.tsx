@@ -378,7 +378,7 @@ const AddUpdateDialogComponent = ({
                   })}
                 >
                   {t("AISettings:ProviderKeyInputHint", {
-                    aiProviders: t("Common:AIProviders"),
+                    aiProvider: t("Common:AIProvider"),
                   })}
                 </Text>
               </>

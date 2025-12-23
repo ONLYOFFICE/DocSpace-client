@@ -564,7 +564,6 @@ const ArticleMainButtonContent = (props) => {
       icon: FormFileReactSvgUrl,
       label: t("Translations:SubNewFormFile"),
       onClick: onShowSelectFileDialog,
-      disabled: isPrivacy,
       key: "form-file",
     };
 
@@ -583,7 +582,6 @@ const ArticleMainButtonContent = (props) => {
       icon: FormGalleryReactSvgUrl,
       label: t("Common:TemplateGallery"),
       onClick: onShowTemplateGallery,
-      disabled: isPrivacy,
       key: "form-gallery",
     };
 

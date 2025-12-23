@@ -80,6 +80,12 @@ test.describe("Knowledge base", () => {
 
     const resetButton = page.getByTestId("knowledge-reset-button");
     await expect(resetButton).toBeDisabled();
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "knowledge-base-settings",
+      "knowledge-base-no-providers.png",
+    ]);
   });
 
   test("should render knowledge settings page with enabled engine combobox if there are ai providers", async ({
@@ -97,6 +103,12 @@ test.describe("Knowledge base", () => {
 
     const providerCombobox = page.getByTestId("knowledge-provider-combobox");
     await expect(providerCombobox.getByRole("button")).toBeEnabled();
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "knowledge-base-settings",
+      "knowledge-base-has-providers.png",
+    ]);
   });
 
   test("should set knowledge settings", async ({ page, mockRequest }) => {
@@ -161,6 +173,12 @@ test.describe("Knowledge base", () => {
     await expect(keyInput).toHaveCount(0);
 
     await expect(resetButton).toBeEnabled();
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "knowledge-base-settings",
+      "knowledge-base-after-setup.png",
+    ]);
   });
 
   test("should reset knowledge settings", async ({ page, mockRequest }) => {
@@ -216,6 +234,12 @@ test.describe("Knowledge base", () => {
     await expect(providerCombobox.getByRole("button")).toBeEnabled();
 
     await expect(resetButton).toBeDisabled();
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "knowledge-base-settings",
+      "knowledge-base-after-reset.png",
+    ]);
   });
 
   test("should render combobox with selected OpenAI provider and empty key input if knowledge needs reset", async ({
@@ -242,5 +266,11 @@ test.describe("Knowledge base", () => {
 
     const saveButton = page.getByTestId("knowledge-save-button");
     await expect(saveButton).toBeDisabled();
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "knowledge-base-settings",
+      "knowledge-base-need-reset.png",
+    ]);
   });
 });

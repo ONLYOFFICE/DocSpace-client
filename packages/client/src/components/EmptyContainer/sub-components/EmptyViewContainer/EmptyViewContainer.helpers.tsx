@@ -129,7 +129,9 @@ export const getDescription = (
 
     if (isResultsTab)
       return security && "UseChat" in security && security.UseChat
-        ? t("AIRoom:EmptyResultsDescription")
+        ? t("AIRoom:EmptyResultsDescription", {
+            aiChat: t("AIRoom:AIChat"),
+          })
         : t("AIRoom:EmptyResultsViewerDescription", {
             aiChat: t("AIRoom:AIChat"),
           });

@@ -94,6 +94,7 @@ const ResetWebSearchDialogComponent = ({
           scale
           onClick={onSubmitAction}
           isLoading={loading}
+          testId="reset-button"
         />
         <Button
           size={ButtonSize.normal}

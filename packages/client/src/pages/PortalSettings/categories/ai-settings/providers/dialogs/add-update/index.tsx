@@ -277,7 +277,13 @@ const AddUpdateDialogComponent = ({
       <ModalDialog.Header>{t("Common:AIProvider")}</ModalDialog.Header>
 
       <ModalDialog.Body>
-        <form className={styles.modalBody} onSubmit={onSubmit}>
+        <form
+          className={styles.modalBody}
+          onSubmit={onSubmit}
+          data-testid={
+            variant === "add" ? "add-provider-form" : "update-provider-form"
+          }
+        >
           <FieldContainer
             labelText={t("AISettings:Provider")}
             labelVisible
@@ -291,6 +297,7 @@ const AddUpdateDialogComponent = ({
               scaled
               scaledOptions
               isDisabled={variant === "update" || isRequestRunning}
+              dataTestId="provider-type-combobox"
             />
           </FieldContainer>
           <FieldContainer
@@ -308,6 +315,7 @@ const AddUpdateDialogComponent = ({
               scale
               placeholder={t("AISettings:EnterLabel")}
               isDisabled={isRequestRunning}
+              testId="provider-title-input"
             />
             <Text className={styles.fieldHint}>
               {t("AISettings:ProviderNameInputHint")}
@@ -332,6 +340,7 @@ const AddUpdateDialogComponent = ({
                 isRequestRunning ||
                 selectedOption.key !== ProviderType.OpenAiCompatible
               }
+              testId="provider-url-input"
             />
             <Text className={styles.fieldHint}>
               {t("AISettings:ProviderURLInputHint")}
@@ -354,6 +363,7 @@ const AddUpdateDialogComponent = ({
                   lineHeight="20px"
                   isHovered
                   onClick={onResetKey}
+                  dataTestId="provider-reset-key-link"
                 >
                   {t("Webhooks:ResetKey")}
                 </Link>
@@ -371,6 +381,7 @@ const AddUpdateDialogComponent = ({
                   isSimulateType
                   autoComplete="off"
                   hasError={providerData?.needReset}
+                  testId="provider-key-input"
                 />
                 <Text
                   className={classNames(styles.fieldHint, {
@@ -402,6 +413,7 @@ const AddUpdateDialogComponent = ({
           onClick={handleSubmitClick}
           isLoading={isRequestRunning}
           isDisabled={!canSubmit}
+          testId="provider-save-button"
         />
         <Button
           size={ButtonSize.normal}
@@ -409,6 +421,7 @@ const AddUpdateDialogComponent = ({
           scale
           onClick={onClose}
           isDisabled={isRequestRunning}
+          testId="provider-cancel-button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

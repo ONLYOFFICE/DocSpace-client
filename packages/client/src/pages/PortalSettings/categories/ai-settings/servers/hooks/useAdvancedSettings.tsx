@@ -119,6 +119,7 @@ export const useAdvancedSettings = (
             onClick={() => setShowAdvancedSettings(!showAdvancedSettings)}
             type={LinkType.action}
             isHovered
+            data-testid="mcp-headers-block-toggle"
           >
             {t(
               showAdvancedSettings ? "SingleSignOn:Hide" : "SingleSignOn:Show",
@@ -150,6 +151,7 @@ export const useAdvancedSettings = (
                     placeholder={t("AISettings:EnterLabel")}
                     scale
                     hasError={needReset && !headerNames[index] && index === 0}
+                    testId="mcp-header-name-input"
                   />
                 </FieldContainer>
                 <FieldContainer
@@ -166,6 +168,7 @@ export const useAdvancedSettings = (
                     placeholder={t("AISettings:EnterValue")}
                     scale
                     hasError={needReset && !headerValues[index] && index === 0}
+                    testId="mcp-header-value-input"
                   />
                 </FieldContainer>
               </React.Fragment>

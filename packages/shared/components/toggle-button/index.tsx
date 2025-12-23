@@ -115,6 +115,7 @@ const ToggleButton = ({
       style={style}
       data-testid={dataTestId ?? "toggle-button"}
       data-tooltip-id={dataTooltipId}
+      aria-checked={isChecked}
     >
       <label
         id={id}

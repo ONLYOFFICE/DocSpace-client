@@ -159,17 +159,35 @@ const providerOpenRouter = {
   statusCode: 200,
 };
 
+const errorRes = {
+  error: {
+    message:
+      "The specified API key is invalid or does not have access rights. Verify that the key is correct and try again",
+    type: "System.ArgumentException",
+    stack: "stack",
+    hresult: -1234567589,
+  },
+  status: 1,
+  statusCode: 400,
+};
+
 export const aiModelsHandler = ({
   isClaude,
   isOpenAI,
   isTogetherAI,
   isOpenRouter,
+  isError,
 }: {
   isClaude?: boolean;
   isOpenAI?: boolean;
   isTogetherAI?: boolean;
   isOpenRouter?: boolean;
+  isError?: boolean;
 }) => {
+  if (isError) {
+    return new Response(JSON.stringify(errorRes));
+  }
+
   if (isClaude) {
     return new Response(JSON.stringify(providerClaude));
   }

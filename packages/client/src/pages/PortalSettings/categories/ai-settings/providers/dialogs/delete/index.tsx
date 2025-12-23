@@ -96,6 +96,7 @@ const DeleteDialogComponent = ({
           scale
           onClick={onSubmit}
           isLoading={loading}
+          testId="delete-provider-button"
         />
         <Button
           size={ButtonSize.normal}

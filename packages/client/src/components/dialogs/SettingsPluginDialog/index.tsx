@@ -102,9 +102,10 @@ const SettingsPluginDialog = ({
       displayType={ModalDialogType.aside}
       onClose={onCloseAction}
       withBodyScroll
+      dataTestId="settings-plugin-dialog"
     >
       <ModalDialog.Header>
-        <Header t={t} name={plugin.name} />
+        <Header t={t} name={plugin.nameLocale} />
       </ModalDialog.Header>
       <ModalDialog.Body>
         <div style={{ marginTop: "16px" }}>

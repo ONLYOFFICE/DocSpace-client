@@ -654,7 +654,6 @@
   "OAuthRoomsName": "මාලා",
   "OAuthRoomsReadDescription": "සියලුම කාමර බලන්න",
   "OAuthRoomsWriteDescription": "පෙනුම් සහ පරිඝණනය සියලුම గదులను",
-  "OFORMsGallery": "OFORM එකතුව",
   "OKButton": "හරි",
   "OnlineEditors": "මාර්ගගත සංස්කරක",
   "OpenSavedDocument": "සුරැකි ගොනුව නව පටිත්තක අරින්න",
@@ -948,10 +947,8 @@
   "StorageQuotaDisabled": "ආචයන සලාකය අබල කෙරිණි.",
   "StorageQuotaReset": "ආචයන සලාකය පෙරනිමියට සැකසිණි.",
   "StorageQuotaSet": "ආචයන සලාකය සැකසිණි.",
-  "SubmitToFormGallery": "ආකෘතිපත්‍ර එකතුවට යොමන්න",
   "SubmitToGallery": "එකතුවට යොමන්න",
   "SubmitToGalleryBlockBody": "ඔබේ සැකිලි {{organizationName}} ප්‍රජාව සමඟ බෙදා ගැනීමට ඉදිරිපත් කරන්න.",
-  "SubmitToGalleryBlockHeader": "{{organizationName}} ආකෘති එකතුව",
   "SubscriptionExpired": "සහාය සහ යාවත්කාල සඳහා වන ඔබගේ දායකත්‍වය කල් ඉකුත් වී ඇත",
   "SubscriptionExpiredTitle": "දායකත්වය ඉකුත් වී ඇත.",
   "SubscriptionIsExpiring": "{{date}} දී ඔබගේ දායකත්‍වය ඉකුත් වේ",
@@ -1070,5 +1067,6 @@
   "YouHaveUnsavedChanges": "ඔබ සතුව නොසුරැකි වෙනස්කම් ඇත",
   "YourCurrentDomain": "ඔබගේ වත්මන් වසම",
   "YourLogo": "ඔබේ ලාංචනය",
-  "YourTurn": "ඔබේ වාරය."
+  "YourTurn": "ඔබේ වාරය.",
+  "DeletePortal": "{{productName}} මකන්න"
 }

@@ -77,7 +77,6 @@
   "DefineQuotaPerAIAgent": "Definează cota per agent AI",
   "DefineQuotaPerRoom": "Stabilire cotă per sală",
   "DefineQuotaPerUser": "Stabilire cotă per utilizator",
-  "DeletePortal": "Ștergere {{productName}}",
   "DeletePortalInfo": "Înainte să ştergeţi spaţiul, asiguraţi-vă că opţiunea de facturare automată este dezactivată. Puteţi verifica starea facturării automate în <1>portalul dvs de client Stripe</1>.",
   "DeleteSecretKey": "Ștergere cheie secretă",
   "DeleteSecretKeyDescription": "Cheia secretă va fi ștearsă definitiv. Această acțiune nu poate fi anulată.",

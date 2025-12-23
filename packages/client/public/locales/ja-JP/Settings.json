@@ -77,7 +77,6 @@
   "DefineQuotaPerAIAgent": "AIエージェントごとのクォータを設定",
   "DefineQuotaPerRoom": "ルームごとの容量制限を定義する ",
   "DefineQuotaPerUser": "ユーザーごとの容量制限を定義する ",
-  "DeletePortal": "{{productName}}を解除する",
   "DeletePortalInfo": "スペースを削除する前に、自動課金がオフになっていることをご確認ください。自動課金の状態は、<1>Stripeカスタマーポータルで確認できます</1>。",
   "DeleteSecretKey": "シークレットキーを削除",
   "DeleteSecretKeyDescription": "シークレットキーは永久に削除されます。この操作を元に戻すことはできません。",

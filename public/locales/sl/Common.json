@@ -654,7 +654,6 @@
   "OAuthRoomsName": "Sobe",
   "OAuthRoomsReadDescription": "Poglej vse sobe",
   "OAuthRoomsWriteDescription": "Poglej in upravljaj vse sobe",
-  "OFORMsGallery": "Galerija OFORM",
   "OKButton": "V redu",
   "OnlineEditors": "Spletni urejevalniki",
   "OpenSavedDocument": "Odpri shranjen dokument v novem zavihku",
@@ -948,10 +947,8 @@
   "StorageQuotaDisabled": "Kvota za shranjevanje je onemogočena.",
   "StorageQuotaReset": "Kvota za shranjevanje je uspešno nastavljena na privzeto.",
   "StorageQuotaSet": "Kvota za shranjevanje je uspešno nastavljena.",
-  "SubmitToFormGallery": "Oddaj v Fgalerijo obrazcev",
   "SubmitToGallery": "Oddaj v galerijo",
   "SubmitToGalleryBlockBody": "Predložite svoje predloge, da jih delite s skupnostjo {{organizationName}}.",
-  "SubmitToGalleryBlockHeader": "{{organizationName}} galerija obrazcev",
   "SubscriptionExpired": "Vaša naročnina za podporo in posodobitve je potekla",
   "SubscriptionExpiredTitle": "Naročnina je potekla",
   "SubscriptionIsExpiring": "Vaša naročnina poteče dne {{date}}",
@@ -1070,5 +1067,6 @@
   "YouHaveUnsavedChanges": "Imate neshranjene spremembe",
   "YourCurrentDomain": "Vaša trenutna domena",
   "YourLogo": "Vaš logotip",
-  "YourTurn": "Vi ste na vrsti"
+  "YourTurn": "Vi ste na vrsti",
+  "DeletePortal": "Izbriši {{productName}}"
 }

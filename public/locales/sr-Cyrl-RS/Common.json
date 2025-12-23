@@ -654,7 +654,6 @@
   "OAuthRoomsName": "Собе",
   "OAuthRoomsReadDescription": "Прикажи све собе",
   "OAuthRoomsWriteDescription": "Прикажи и управљај свим собама",
-  "OFORMsGallery": "Форм Галерија",
   "OKButton": "OK",
   "OnlineEditors": "Онлајн уређивачи",
   "OpenSavedDocument": "Отвори сачуван документ у новој картици",
@@ -948,10 +947,8 @@
   "StorageQuotaDisabled": "Складишна квота онемогућена.",
   "StorageQuotaReset": "Складишна квота успешно постављена на подразумевано.",
   "StorageQuotaSet": "Складишна квота успешно постављена.",
-  "SubmitToFormGallery": "Поднеси у Форм Галерију",
   "SubmitToGallery": "Поднеси у Галерију",
   "SubmitToGalleryBlockBody": "Поднесите своје шаблоне да их делите са {{organizationName}} заједницом.",
-  "SubmitToGalleryBlockHeader": "{{organizationName}} Форм Галерија",
   "SubscriptionExpired": "Ваша претплата на подршку и ажурирања је истекла",
   "SubscriptionExpiredTitle": "Претплата истекла",
   "SubscriptionIsExpiring": "Ваша претплата истиче {{date}}",
@@ -1070,5 +1067,6 @@
   "YouHaveUnsavedChanges": "Имате несачуване промене",
   "YourCurrentDomain": "Ваш тренутни домен",
   "YourLogo": "Ваш лого",
-  "YourTurn": "Ваш ред"
+  "YourTurn": "Ваш ред",
+  "DeletePortal": "Обриши {{productName}}"
 }

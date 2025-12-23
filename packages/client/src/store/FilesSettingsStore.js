@@ -534,10 +534,13 @@ class FilesSettingsStore {
   };
 
   getIconUrl = (extension, size) => {
+    const path = `${extension.replace(/^\./, "")}.svg`;
+    return this.getIconBySize(path, size);
+  };
+
+  getPluginFileIconUrl = (extension) => {
     const { enablePlugins } = this.settingsStore;
     const { fileItemsList } = this.pluginStore;
-
-    const path = `${extension.replace(/^\./, "")}.svg`;
 
     if (!isAIAgents() && enablePlugins && fileItemsList) {
       const fileItem = fileItemsList.find(
@@ -547,8 +550,6 @@ class FilesSettingsStore {
         return fileItem.value.fileIcon;
       }
     }
-
-    return this.getIconBySize(path, size);
   };
 
   getFileIcon = (
@@ -561,6 +562,10 @@ class FilesSettingsStore {
     ebook = false,
   ) => {
     let path = "";
+
+    const pluginIconUrl = this.getPluginFileIconUrl(extension);
+
+    if (pluginIconUrl) return pluginIconUrl;
 
     if (archive) path = "archive.svg";
 

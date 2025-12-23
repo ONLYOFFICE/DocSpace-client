@@ -54,8 +54,8 @@ import {
 
 import { TActivateConfirmUser, TError } from "@/types";
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
-import { RegisterContainer } from "@/components/RegisterContainer.styled";
 import { GreetingUserContainer } from "@/components/GreetingContainer";
+import styles from "@/components/RegisterContainer.module.scss";
 
 type ActivateUserFormPorps = {
   passwordHash: TPasswordHash;
@@ -187,7 +187,7 @@ const ActivateUserForm = ({
   };
 
   return (
-    <RegisterContainer>
+    <div className={styles.registerContainer}>
       <form className="auth-form-container">
         <GreetingUserContainer
           emailFromLink={emailFromLink}
@@ -296,7 +296,7 @@ const ActivateUserForm = ({
           testId="signup_button"
         />
       </form>
-    </RegisterContainer>
+    </div>
   );
 };
 

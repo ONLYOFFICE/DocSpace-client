@@ -654,7 +654,6 @@
   "OAuthRoomsName": "Salas",
   "OAuthRoomsReadDescription": "Ver todas las salas",
   "OAuthRoomsWriteDescription": "Ver y gestionar todas las salas",
-  "OFORMsGallery": "Galería de formularios",
   "OKButton": "OK",
   "OnlineEditors": "Editores en línea",
   "OpenSavedDocument": "Abrir el documento guardado en una nueva pestaña",
@@ -948,10 +947,8 @@
   "StorageQuotaDisabled": "Cuota de almacenamiento deshabilitada.",
   "StorageQuotaReset": "La cuota de almacenamiento se ha establecido correctamente como predeterminada.",
   "StorageQuotaSet": "La cuota de almacenamiento se ha establecido correctamente.",
-  "SubmitToFormGallery": "Enviar a la Galería de formularios",
   "SubmitToGallery": "Enviar a la Galería",
   "SubmitToGalleryBlockBody": "Envíe sus plantillas para compartirlas con la comunidad de {{organizationName}}.",
-  "SubmitToGalleryBlockHeader": "Galería de formularios de {{organizationName}}",
   "SubscriptionExpired": "Su suscripción a soporte y actualizaciones ha expirado",
   "SubscriptionExpiredTitle": "La suscripción ha expirado",
   "SubscriptionIsExpiring": "Su suscripción expira el {{date}}",
@@ -1070,5 +1067,6 @@
   "YouHaveUnsavedChanges": "Tiene cambios no guardados",
   "YourCurrentDomain": "Su dominio actual",
   "YourLogo": "Su logotipo",
-  "YourTurn": "Su turno"
+  "YourTurn": "Su turno",
+  "DeletePortal": "Eliminar {{productName}}"
 }

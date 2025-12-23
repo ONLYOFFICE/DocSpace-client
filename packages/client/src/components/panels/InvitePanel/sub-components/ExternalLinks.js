@@ -231,11 +231,17 @@ const ExternalLinks = ({
     standalone,
   );
 
+  const getAgentAccesses = () => {
+    return filterNotReadOnlyOptions(accesses).filter(
+      (o) => !o.isSeparator && !o.disabled,
+    );
+  };
+
   const filteredAccesses =
     roomType === -1
       ? accesses
       : roomType === RoomsType.AIRoom
-        ? filterNotReadOnlyOptions(accesses)
+        ? getAgentAccesses()
         : filterPaidRoleOptions(accesses);
 
   const description =

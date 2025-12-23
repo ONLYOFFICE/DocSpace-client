@@ -654,7 +654,6 @@
   "OAuthRoomsName": "룸",
   "OAuthRoomsReadDescription": "모든 룸 보기",
   "OAuthRoomsWriteDescription": "모든 룸 보기 및 관리",
-  "OFORMsGallery": "OFORMs 갤러리",
   "OKButton": "확인",
   "OnlineEditors": "온라인 편집기",
   "OpenSavedDocument": "새로운 탭에서 저장 문서 열기",
@@ -948,10 +947,8 @@
   "StorageQuotaDisabled": "스토리지 할당량이 비활성화되었습니다.",
   "StorageQuotaReset": "스토리지 할당량이 기본값으로 설정되었습니다.",
   "StorageQuotaSet": "스토리지 할당량이 설정되었습니다.",
-  "SubmitToFormGallery": "양식 갤러리에 제출",
   "SubmitToGallery": "갤러리에 제출",
   "SubmitToGalleryBlockBody": "{{organizationName}} 커뮤니티와 공유할 템플릿을 제출해 주세요.",
-  "SubmitToGalleryBlockHeader": "{{organizationName}} 양식 갤러리",
   "SubscriptionExpired": "지원 및 업데이트 구독이 만료되었습니다",
   "SubscriptionExpiredTitle": "구독이 만료되었습니다",
   "SubscriptionIsExpiring": "구독이 {{date}}에 만료됩니다",
@@ -1070,5 +1067,6 @@
   "YouHaveUnsavedChanges": "저장하지 않은 변경 사항이 있습니다",
   "YourCurrentDomain": "내 현재 도메인",
   "YourLogo": "로고",
-  "YourTurn": "고객님의 차례입니다"
+  "YourTurn": "고객님의 차례입니다",
+  "DeletePortal": "{{productName}} 삭제"
 }

@@ -569,6 +569,30 @@ class SettingsStore {
       : null;
   }
 
+  get aiProviderSettingsUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.aiprovidersettings
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.aiprovidersettings}`
+      : null;
+  }
+
+  get mcpServersSettingsUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.mcpserverssettings
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.mcpserverssettings}`
+      : null;
+  }
+
+  get webSearchSettingsUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.websearchsettings
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.websearchsettings}`
+      : null;
+  }
+
+  get knowledgeSettingsUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.knowledgesettings
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.knowledgesettings}`
+      : null;
+  }
+
   get configureDeepLinkUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.configureDeepLink
       ? `${this.helpCenterDomain}${this.helpCenterEntries.configureDeepLink}`
@@ -871,6 +895,10 @@ class SettingsStore {
       : this.helpCenterDomain;
   }
 
+  get templateGalleryAvailable() {
+    return !!(this.formGallery && this.formGallery.domain !== "");
+  }
+
   setIsDesktopClientInit = (isDesktopClientInit: boolean) => {
     this.isDesktopClientInit = isDesktopClientInit;
   };
@@ -912,6 +940,8 @@ class SettingsStore {
   setGreetingSettings = (greetingSettings: string) => {
     this.greetingSettings = greetingSettings;
   };
+
+  setCulture = (culture: string) => (this.culture = culture);
 
   getSettings = async () => {
     const settings: Nullable<TSettings> = await api.settings.getSettings(true);

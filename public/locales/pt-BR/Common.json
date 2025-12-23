@@ -654,7 +654,6 @@
   "OAuthRoomsName": "Salas",
   "OAuthRoomsReadDescription": "Ver todas as salas",
   "OAuthRoomsWriteDescription": "Visualizar e gerenciar todas as salas",
-  "OFORMsGallery": "Galeria de formulários",
   "OKButton": "OK",
   "OnlineEditors": "Editores online",
   "OpenSavedDocument": "Abrir o documento salvo numa pasta nova",
@@ -948,10 +947,8 @@
   "StorageQuotaDisabled": "Cota de armazenamento desativada.",
   "StorageQuotaReset": "Cota de armazenamento definida com êxito como padrão.",
   "StorageQuotaSet": "Cota de armazenamento definida com sucesso.",
-  "SubmitToFormGallery": "Enviar para Galeria de Formulários",
   "SubmitToGallery": "Enviar para Galeria",
   "SubmitToGalleryBlockBody": "Envie seus modelos para compartilhá-los com a comunidade {{organizationName}}.",
-  "SubmitToGalleryBlockHeader": "Galeria de formulários do {{organizationName}}",
   "SubscriptionExpired": "Sua assinatura de suporte e atualizações expirou",
   "SubscriptionExpiredTitle": "A assinatura expirou",
   "SubscriptionIsExpiring": "Sua assinatura expira em {{date}}",
@@ -1070,5 +1067,6 @@
   "YouHaveUnsavedChanges": "Você tem mudanças não salvas",
   "YourCurrentDomain": "Seu domínio atual",
   "YourLogo": "Seu logotipo",
-  "YourTurn": "Sua vez"
+  "YourTurn": "Sua vez",
+  "DeletePortal": "Excluir {{productName}}"
 }

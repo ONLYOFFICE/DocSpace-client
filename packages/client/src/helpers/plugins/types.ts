@@ -139,9 +139,13 @@ export interface IframeWindow extends Window {
 
 export type TPlugin = {
   name: string;
+  nameLocaleMap?: { [key: string]: string };
   version: string;
   minDocSpaceVersion?: string;
   description: string;
+  descriptionLocaleMap?: { [key: string]: string };
+  nameLocale: string;
+  descriptionLocale: string;
   compatible: boolean;
   license: string;
   author: string;
@@ -156,6 +160,8 @@ export type TPlugin = {
   url: string;
   settings: string;
   iconUrl: string;
+  setLanguage?: (locale: string) => void;
+  getLanguage?: () => string;
 } & IPlugin &
   Partial<IApiPlugin> &
   Partial<IContextMenuPlugin> &

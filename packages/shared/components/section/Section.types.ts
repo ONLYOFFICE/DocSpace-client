@@ -50,6 +50,9 @@ export type InfoPanelProps = {
   anotherDialogOpen?: boolean;
   viewAs?: TViewAs;
   currentDeviceType?: DeviceType;
+  asideInfoPanel?: boolean;
+  topInfoPanel?: boolean;
+  onClose?: () => void;
 };
 
 export type SectionBodyContentProps = {
@@ -66,7 +69,7 @@ export type SectionBodyProps = {
   children: React.ReactNode;
   viewAs?: TViewAs;
   settingsStudio: boolean;
-  isFormGallery?: boolean;
+
   isDesktop?: boolean;
   currentDeviceType?: DeviceType;
   getContextModel?: () => ContextMenuModel[];
@@ -100,7 +103,6 @@ export type SectionFooterProps = {
 
 export type SectionHeaderProps = {
   className: string;
-  isFormGallery?: boolean;
   children: React.ReactNode;
 };
 
@@ -174,6 +176,7 @@ export type SectionProps = Omit<SubInfoPanelHeaderProps, "children"> &
     dropTargetPreview?: string;
     clearDropPreviewLocation?: () => void;
     startDropPreview?: () => void;
+    asideInfoPanel?: boolean;
   };
 
 export type SectionContextMenuProps = {

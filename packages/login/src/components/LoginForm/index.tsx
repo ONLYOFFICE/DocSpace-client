@@ -36,7 +36,6 @@ import React, {
 } from "react";
 import { useTranslation } from "react-i18next";
 import { isSafari } from "react-device-detect";
-import { useTheme } from "styled-components";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Id } from "react-toastify";
 
@@ -55,6 +54,7 @@ import { TValidate } from "@docspace/shared/components/email-input/EmailInput.ty
 import { ButtonKeys } from "@docspace/shared/enums";
 import { getCookie } from "@docspace/shared/utils";
 import { PUBLIC_STORAGE_KEY } from "@docspace/shared/constants";
+import { useTheme } from "@docspace/shared/hooks/useTheme";
 
 import { LoginFormProps } from "@/types";
 import {
@@ -94,7 +94,7 @@ const LoginForm = ({
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  const theme = useTheme();
+  const { isBase } = useTheme();
 
   const { t, ready, i18n } = useTranslation(["Login", "Common"]);
   const currentCulture = i18n.language;
@@ -621,7 +621,7 @@ const LoginForm = ({
           id="login-captcha-widget"
           type={captcha.captchaType}
           publicKey={reCaptchaPublicKey}
-          themeMode={theme.isBase ? "light" : "dark"}
+          themeMode={isBase ? "light" : "dark"}
           visible={captcha.isVisible}
           hasError={captcha.isError}
           errorText={t("Errors:LoginWithBruteForceCaptcha")}

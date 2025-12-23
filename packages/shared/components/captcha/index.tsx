@@ -104,7 +104,7 @@ const Captcha = ({
       className={classNames(styles.wrapper, {
         [styles.wrapperError]: hasError,
       })}
-      data-test-id="captcha-container"
+      data-testid="captcha-container"
     >
       <div className={styles.container}>
         {isHCaptcha ? (

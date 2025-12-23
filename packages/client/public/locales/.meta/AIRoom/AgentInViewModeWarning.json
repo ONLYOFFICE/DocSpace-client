@@ -3,11 +3,11 @@
   "content": "You’re in <strong>view-only</strong> mode for this {{aiAgent}}. You can see the results of {{aiChat}} activity from other users.",
   "content_en_sha1_hash": "44007c7eff90339c377f5cc1d75060284f1d1103",
   "created_at": "2025-12-22T14:24:56.488Z",
-  "updated_at": "2025-12-22T14:25:01.377Z",
+  "updated_at": "2025-12-23T10:37:02.481Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key displays a warning message to users indicating they are in \"view-only\" mode for an AI agent, meaning they can only observe activity from other users. It appears as a toast notification within the Home/View page of the client application when the user cannot actively use the chat feature. Translators should be aware that the message refers to \"aiAgent\" (a generic AI agent) and \"aiChat\" (an AI chat session).",
+    "is_auto": true,
+    "updated_at": "2025-12-23T10:37:02.481Z"
   },
   "usage": [
     {

@@ -1,0 +1,28 @@
+{
+  "key_path": "ProviderKeyInputHint",
+  "content": "Enter the API key generated from your {{aiProvider}}'s dashboard",
+  "content_en_sha1_hash": "96a254263b33d81c637216dc5f0b707bf68cbd91",
+  "created_at": "2025-12-23T10:30:50.965Z",
+  "updated_at": "2025-12-23T10:39:29.807Z",
+  "comment": {
+    "text": "This translation key provides a hint text for an API key input field. It instructs the user to enter an API key obtained from their AI provider's dashboard, appearing in the AI provider settings dialog. The `{{aiProvider}}` placeholder will be replaced with the name of the AI provider.",
+    "is_auto": true,
+    "updated_at": "2025-12-23T10:39:29.807Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/add-update/index.tsx",
+      "line_number": 380,
+      "context": "<Text\n className={classNames(styles.fieldHint, {\n [styles.fieldHintError]: providerData?.needReset,\n })}\n >\n {t(\"AISettings:ProviderKeyInputHint\", {\n aiProvider: t(\"Common:AIProvider\"),\n })}\n </Text>\n </>\n )}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

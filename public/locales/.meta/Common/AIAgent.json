@@ -3,11 +3,11 @@
   "content": "AI agent",
   "content_en_sha1_hash": "ab15eb3d82fcf6e76a2ede7896d22471a681f18e",
   "created_at": "2025-12-19T10:16:17.398Z",
-  "updated_at": "2025-12-22T14:25:00.784Z",
+  "updated_at": "2025-12-23T10:35:04.839Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key refers to the term \"AI agent\" and is used to label or describe AI agents within the UI. It appears in instructions for creating or editing agents, empty container views (specifically when access is restricted), and in titles related to AI agent availability. Translators should ensure the term is accurately conveyed in the target language, considering its technical context.",
+    "is_auto": true,
+    "updated_at": "2025-12-23T10:35:04.839Z"
   },
   "usage": [
     {

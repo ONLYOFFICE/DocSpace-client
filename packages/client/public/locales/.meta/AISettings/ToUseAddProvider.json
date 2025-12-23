@@ -3,11 +3,11 @@
   "content": "To use {{value}}, make sure to connect at least one {{aiProvider}} first.",
   "content_en_sha1_hash": "7ac37664b2a8a6b4459dada1c0cb3184e8fd4a9b",
   "created_at": "2025-12-17T14:56:14.846Z",
-  "updated_at": "2025-12-22T14:25:01.384Z",
+  "updated_at": "2025-12-23T10:37:57.010Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key displays a tooltip message prompting the user to connect an AI provider before using a specific feature. It appears as a tooltip on buttons or within a div, and the text will vary depending on the feature being used (e.g., Knowledge, Web Search AI, or MCPServer). Translators should understand this message explains a prerequisite for functionality.",
+    "is_auto": true,
+    "updated_at": "2025-12-23T10:37:57.010Z"
   },
   "usage": [
     {

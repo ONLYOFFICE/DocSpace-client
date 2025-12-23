@@ -1,0 +1,28 @@
+{
+  "key_path": "NoAgent",
+  "content": "No {{aiAgent}}",
+  "content_en_sha1_hash": "8624059f8f4da69f99eb4239747d64697b30b3f5",
+  "created_at": "2025-12-23T10:30:40.967Z",
+  "updated_at": "2025-12-23T10:44:40.704Z",
+  "comment": {
+    "text": "This translation key displays a message indicating the absence of an AI agent. It appears within an empty view or information panel, likely in a section meant to explain why no agent is present. Translators should ensure the wording maintains the sense of absence or lack of an AI agent.",
+    "is_auto": true,
+    "updated_at": "2025-12-23T10:44:40.704Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/NoItem/NoAgentItem.tsx",
+      "line_number": 38,
+      "context": "import InfoPanelRoomEmptyScreenSvgUrl from \"PUBLIC_DIR/images/emptyview/empty.rooms.info.light.svg?url\";\n import InfoPanelRoomEmptyScreenDarkSvgUrl from \"PUBLIC_DIR/images/emptyview/empty.rooms.info.dark.svg?url\";\n \n import styles from \"./NoItem.module.scss\";\n \n const NoAgentItem = () => {\n const { isBase } = useTheme();\n const { t } = useTranslation([\"InfoPanel\", \"Common\"]);\n \n const imageSrc = isBase\n ? InfoPanelRoomEmptyScreenSvgUrl",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

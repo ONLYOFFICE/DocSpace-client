@@ -3,11 +3,11 @@
   "content": "{{webSearch}} Engine",
   "content_en_sha1_hash": "1b47c8d9c93df7bf7e9e358c9c708e5853dcea3f",
   "created_at": "2025-12-17T14:56:14.766Z",
-  "updated_at": "2025-12-22T14:25:01.404Z",
+  "updated_at": "2025-12-23T10:38:19.930Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key displays the label for a search engine selection field in the AI Settings section of the Portal. It's used to show the user the type of search engine being configured, incorporating a separate translation for \"Web Search AI\". This label appears within a form field (ComboBox) in the UI.",
+    "is_auto": true,
+    "updated_at": "2025-12-23T10:38:19.930Z"
   },
   "usage": [
     {

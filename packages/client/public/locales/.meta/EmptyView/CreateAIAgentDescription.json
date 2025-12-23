@@ -3,16 +3,16 @@
   "content": "Start building your first {{aiAgent}}",
   "content_en_sha1_hash": "bc35c16942607e9987acc8e733fb2225858ed337",
   "created_at": "2025-12-19T13:03:51.854Z",
-  "updated_at": "2025-12-22T14:25:01.010Z",
+  "updated_at": "2025-12-23T10:43:14.966Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key provides the description text for a button that prompts the user to create a new AI agent. The description will appear alongside the button, encouraging users to begin building their first AI agent. It uses the term \"AI Agents\" which should be translated accordingly.",
+    "is_auto": true,
+    "updated_at": "2025-12-23T10:43:14.966Z"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 381,
+      "line_number": 383,
       "context": "disabled: false,\n };\n \n const createAIAgent = {\n title: t(\"EmptyView:CreateAIAgent\"),\n description: t(\"EmptyView:CreateAIAgentDescription\", {\n aiAgent: t(\"Common:AIAgents\"),\n }),\n icon: <CreateAIAgentIcon />,\n key: \"create-ai-agent\",\n onClick: actions.onCreateAIAgent,",
       "module": "/packages/client"
     }

@@ -1,20 +1,38 @@
 {
-  "key_path": "SubmitToGalleryDialogMainInfo",
-  "content": "Submit your template to the public gallery to let others use it in their work. Once the template passes moderation, you will be notified and rewarded for your contribution.",
-  "content_en_sha1_hash": "645c4561d7076e7c7c166c6add10dd927257e1c2",
-  "created_at": "2025-12-22T14:24:51.385Z",
-  "updated_at": "2025-12-23T10:43:35.291Z",
+  "key_path": "DeletePortal",
+  "content": "Delete {{productName}}",
+  "content_en_sha1_hash": "c9a087cf0ab00ea2fbdf46a5931658150f1b19eb",
+  "created_at": "2025-12-23T10:27:43.700Z",
+  "updated_at": "2025-12-23T10:33:32.976Z",
   "comment": {
-    "text": "This key provides the main informational text within the \"Submit to Gallery\" dialog. It explains to users that submitting a template makes it available to the public, subject to moderation, and rewards contributors. The text appears in the body of the dialog.",
+    "text": "This key displays a confirmation message in a dialog or button related to deleting a portal. The text includes the portal's name (which will be dynamically inserted) and is used in several settings-related files, including the Portal Settings page and Delete Portal dialog. Translators should ensure the wording clearly conveys the action of portal deletion.",
     "is_auto": true,
-    "updated_at": "2025-12-23T10:43:35.291Z"
+    "updated_at": "2025-12-23T10:33:32.976Z"
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/SubmitToFormGallery/index.js",
-      "line_number": 167,
-      "context": "<ModalDialog.Header>\n {t(\"Common:SubmitToTemplateGallery\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <div className=\"info\">\n {t(\"FormGallery:SubmitToGalleryDialogMainInfo\")}\n </div>\n <div className=\"info\">\n <Trans\n t={t}\n i18nKey=\"SubmitToGalleryDialogGuideInfo\"",
+      "file_path": "/packages/client/src/components/dialogs/DeletePortalDialog/index.js",
+      "line_number": 58,
+      "context": "visible={visible}\n onClose={onClose}\n displayType=\"modal\"\n >\n <ModalDialog.Header>\n {t(\"Common:DeletePortal\", { productName: t(\"Common:ProductName\") })}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Trans t={t} i18nKey=\"DeletePortalInfo\" ns=\"Settings\">\n Before you delete the portal, please make sure that automatic billing\n is turned off. You may check the status of automatic billing in",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/delete-data/index.js",
+      "line_number": 62,
+      "context": "});\n \n const data = [\n {\n id: \"deletion\",\n name: t(\"Common:DeletePortal\", { productName: t(\"Common:ProductName\") }),\n content: <PortalDeletionSection stripeUrl={stripeUrl} />,\n onClick: async () => {\n clearAbortControllerArr();\n await fetchPortalDeletionData();\n },",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/delete-data/portalDeletion.js",
+      "line_number": 62,
+      "context": "else setIsDesktopView(false);\n };\n \n useEffect(() => {\n setDocumentTitle(\n t(\"Common:DeletePortal\", { productName: t(\"Common:ProductName\") }),\n );\n onCheckView();\n window.addEventListener(\"resize\", onCheckView);\n return () => window.removeEventListener(\"resize\", onCheckView);\n }, []);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/management/src/dialogs/delete-portal/index.tsx",
+      "line_number": 108,
+      "context": "autoMaxHeight\n >\n <ModalDialog.Header>\n {isWizardCompleted\n ? t(\"SubmitDelete\")\n : t(\"Common:DeletePortal\", {\n productName: t(\"Common:ProductName\"),\n })}\n </ModalDialog.Header>\n <ModalDialog.Body>\n {isWizardCompleted ? (",
+      "module": "/packages/management"
     }
   ],
   "languages": {

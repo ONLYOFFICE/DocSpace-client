@@ -3,11 +3,11 @@
   "content": "Files uploaded here will be indexed and used as context in the {{aiChat}} tab. Add files (up to 10 MB each) to ask AI questions, generate content, or collaborate on information.",
   "content_en_sha1_hash": "5cc5a06750e5349942b4cf64e2ea3bd33a121851",
   "created_at": "2025-12-22T14:24:56.530Z",
-  "updated_at": "2025-12-22T14:25:00.980Z",
+  "updated_at": "2025-12-23T10:36:11.311Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key provides a description displayed in the AI Room's knowledge tab when no files have been uploaded. It explains that uploaded files will be used as context for AI interactions and instructs users how to add files. The text appears within an empty state view.",
+    "is_auto": true,
+    "updated_at": "2025-12-23T10:36:11.311Z"
   },
   "usage": [
     {

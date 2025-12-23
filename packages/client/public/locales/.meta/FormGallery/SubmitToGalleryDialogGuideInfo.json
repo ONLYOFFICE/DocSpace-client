@@ -3,11 +3,11 @@
   "content": "Learn how to create perfect templates and increase your chance to get approval in our <1>guide</1>.",
   "content_en_sha1_hash": "4baa5672d71065fc072764cc97273ebfd9ac4efa",
   "created_at": "2025-12-22T14:24:51.377Z",
-  "updated_at": "2025-12-22T14:25:00.961Z",
+  "updated_at": "2025-12-23T10:43:57.439Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key provides guidance to users on creating templates that are likely to be approved for the form gallery. It appears within a dialog related to submitting forms to the gallery, encouraging users to consult a guide for best practices. Translators should focus on conveying the message of improving form approval chances.",
+    "is_auto": true,
+    "updated_at": "2025-12-23T10:43:57.439Z"
   },
   "usage": [
     {

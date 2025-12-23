@@ -74,6 +74,12 @@ test.describe("AI Provider", () => {
 
     const tiles = page.getByTestId("ai-provider-tile");
     await expect(tiles).toHaveCount(0);
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "ai-provider-settings",
+      "ai-provider-empty.png",
+    ]);
   });
 
   test("should create AI provider", async ({ page, mockRequest }) => {
@@ -132,12 +138,19 @@ test.describe("AI Provider", () => {
 
     const createdProviderTile = page.getByTestId("ai-provider-tile");
     await expect(createdProviderTile).toBeVisible();
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "ai-provider-settings",
+      "ai-provider-after-create.png",
+    ]);
   });
 
   test("should delete AI Provider", async ({ page, mockRequest }) => {
     await mockRequest.router([
       endpoints.aiProvidersList,
       endpoints.deleteAiProvider,
+      endpoints.aiModelsClaude,
     ]);
 
     const listRespPromise = page.waitForResponse(
@@ -185,6 +198,12 @@ test.describe("AI Provider", () => {
 
     await expect(allProviderTiles).toHaveCount(3);
     await expect(firstProviderTile).not.toContainText(firstProviderData.title);
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "ai-provider-settings",
+      "ai-provider-after-delete.png",
+    ]);
   });
 
   test("should update AI Provider", async ({ page, mockRequest }) => {
@@ -192,6 +211,7 @@ test.describe("AI Provider", () => {
       endpoints.aiProvidersList,
       endpoints.aiProvidersAvailable,
       endpoints.updateAiProvider,
+      endpoints.aiModelsClaude,
     ]);
 
     const listRespPromise = page.waitForResponse(
@@ -268,6 +288,12 @@ test.describe("AI Provider", () => {
 
     await expect(firstProviderTile).toBeVisible();
     await expect(firstProviderTile).toContainText(updateRes.response.title);
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "ai-provider-settings",
+      "ai-provider-after-update.png",
+    ]);
   });
 
   test("should render error icon and key input in error state if AI Provider needs reset", async ({
@@ -278,6 +304,7 @@ test.describe("AI Provider", () => {
       endpoints.aiProvidersListNeedReset,
       endpoints.aiProvidersAvailable,
       endpoints.updateAiProvider,
+      endpoints.aiModelsClaude,
     ]);
 
     await page.goto("/portal-settings/ai-settings/providers");
@@ -287,6 +314,12 @@ test.describe("AI Provider", () => {
 
     const errorIcon = firstProviderTile.getByTestId("ai-tile-error-icon");
     await expect(errorIcon).toBeVisible();
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "ai-provider-settings",
+      "ai-provider-tile-need-reset.png",
+    ]);
 
     const contextMenuBtn = firstProviderTile.getByTestId("context-menu-button");
     await contextMenuBtn.click();
@@ -301,6 +334,12 @@ test.describe("AI Provider", () => {
 
     await expect(providerKeyInput).toBeVisible();
     await expect(providerKeyInput).toHaveAttribute("data-error", "true");
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "ai-provider-settings",
+      "ai-provider-update-dialog-need-reset.png",
+    ]);
   });
 
   test("should render error icon in providers tiles if models are not available", async ({
@@ -319,6 +358,12 @@ test.describe("AI Provider", () => {
 
     const tilesWithErrors = page.getByTestId("ai-tile-error-icon");
     await expect(tilesWithErrors).toHaveCount(4);
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "ai-provider-settings",
+      "ai-provider-models-not-available.png",
+    ]);
   });
 
   test("should not render error icon in providers tiles if models are available", async ({
@@ -337,5 +382,11 @@ test.describe("AI Provider", () => {
 
     const tilesWithErrors = page.getByTestId("ai-tile-error-icon");
     await expect(tilesWithErrors).toHaveCount(0);
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "ai-provider-settings",
+      "ai-provider-models-available.png",
+    ]);
   });
 });

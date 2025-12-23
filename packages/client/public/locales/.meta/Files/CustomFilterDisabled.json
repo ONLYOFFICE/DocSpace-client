@@ -3,7 +3,7 @@
   "content": "Custom filter for the selected file disabled",
   "content_en_sha1_hash": "1d11469e70e8a29c47e8c754cb7c4fb1a3e30948",
   "created_at": "2025-05-19T21:30:55.395Z",
-  "updated_at": "2025-11-25T06:36:56.969Z",
+  "updated_at": "2025-12-15T14:04:24.067Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that a custom filter for a selected file has been disabled. It is typically shown as a success notification in a UI dialog or toast when a user disables a custom filter feature.",
     "is_auto": true,

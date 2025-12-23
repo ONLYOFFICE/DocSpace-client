@@ -47,6 +47,7 @@ import { EmptyViewProps } from "@docspace/shared/components/empty-view/EmptyView
 export enum NoAccessContainerType {
   Room,
   Agent,
+  Account,
 }
 
 type Props = {
@@ -74,6 +75,7 @@ const NoAccessContainer = (props: Props) => {
 
     switch (type) {
       case NoAccessContainerType.Room:
+      case NoAccessContainerType.Account:
         {
           const filter = RoomsFilter.getDefault(userId, RoomSearchArea.Active);
           filterParamsStr = filter.toUrlParams();
@@ -104,8 +106,12 @@ const NoAccessContainer = (props: Props) => {
 
   switch (type) {
     case NoAccessContainerType.Room:
+    case NoAccessContainerType.Account:
       emptyViewProps = {
-        title: t("NoAccessRoomTitle"),
+        title:
+          type === NoAccessContainerType.Account
+            ? t("NoAccessSectionTitle")
+            : t("NoAccessRoomTitle"),
         description: t("RoomAccessRedirectNote", {
           sectionName: t("Common:Rooms"),
         }),

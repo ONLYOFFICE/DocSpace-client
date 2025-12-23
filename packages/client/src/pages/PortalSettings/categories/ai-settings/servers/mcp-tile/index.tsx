@@ -108,14 +108,24 @@ export const MCPTile = ({
             })
           : undefined
       }
+      dataTestId="mcp-tile"
     >
-      <AiTile.Header title={name}>
+      <AiTile.Header
+        title={name}
+        hasError={item.needReset}
+        getErrorTooltipContent={() => (
+          <Text fontSize="12px" lineHeight="16px">
+            {t("AISettings:MCPUnavailableError")}
+          </Text>
+        )}
+      >
         <div className={styles.buttonsContainer}>
           <ToggleButton
             className={styles.toggleButton}
             isChecked={item.enabled}
             onChange={() => onToggle(item.id, !item.enabled)}
-            isDisabled={disableActions}
+            isDisabled={disableActions || item.needReset}
+            dataTestId="mcp-toggle-button"
           />
           {item.serverType === ServerType.Custom ? (
             <ContextMenuButton
@@ -123,6 +133,7 @@ export const MCPTile = ({
               getData={getContextOptions}
               isDisabled={disableActions}
               dropDownClassName={styles.aiContextMenuDropDown}
+              testId="mcp-context-menu-button"
             />
           ) : null}
         </div>

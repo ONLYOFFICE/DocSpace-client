@@ -41,10 +41,13 @@ import { Link, LinkType } from "@docspace/shared/components/link";
 import addEditStyles from "../styles/AddEditDialog.module.scss";
 import baseParamsStyles from "./useBaseParams.module.scss";
 
-export const useAdvancedSettings = (initialValues?: Record<string, string>) => {
+export const useAdvancedSettings = (
+  initialValues?: Record<string, string>,
+  needReset?: boolean,
+) => {
   const { t } = useTranslation(["Common", "AISettings", "SingleSignOn"]);
   const [showAdvancedSettings, setShowAdvancedSettings] = useState(
-    !!initialValues,
+    !!initialValues || needReset,
   );
 
   const [headerCounts, setHeaderCounts] = React.useState(
@@ -52,6 +55,8 @@ export const useAdvancedSettings = (initialValues?: Record<string, string>) => {
   );
   const [headerNames, setHeaderNames] = React.useState<Record<string, string>>(
     () => {
+      if (needReset) return { "": "" };
+
       if (!initialValues) return {};
 
       const names: Record<string, string> = {};
@@ -62,6 +67,7 @@ export const useAdvancedSettings = (initialValues?: Record<string, string>) => {
   const [headerValues, setHeaderValues] = React.useState<
     Record<string, string>
   >(() => {
+    if (needReset) return { "": "" };
     if (!initialValues) return {};
 
     const values: Record<string, string> = {};
@@ -95,6 +101,7 @@ export const useAdvancedSettings = (initialValues?: Record<string, string>) => {
     const headers: Record<string, string> = {};
 
     Object.entries(headerNames).forEach(([index, name]) => {
+      if (!name) return;
       headers[name] = headerValues[index];
     });
 
@@ -112,8 +119,11 @@ export const useAdvancedSettings = (initialValues?: Record<string, string>) => {
             onClick={() => setShowAdvancedSettings(!showAdvancedSettings)}
             type={LinkType.action}
             isHovered
+            data-testid="mcp-headers-block-toggle"
           >
-            {t(showAdvancedSettings ? "Common:Hide" : "SingleSignOn:Show")}
+            {t(
+              showAdvancedSettings ? "SingleSignOn:Hide" : "SingleSignOn:Show",
+            )}
           </Link>
         </div>
         {showAdvancedSettings ? (
@@ -140,6 +150,8 @@ export const useAdvancedSettings = (initialValues?: Record<string, string>) => {
                     onChange={(e) => onChangeHeaderName(index, e.target.value)}
                     placeholder={t("AISettings:EnterLabel")}
                     scale
+                    hasError={needReset && !headerNames[index] && index === 0}
+                    testId="mcp-header-name-input"
                   />
                 </FieldContainer>
                 <FieldContainer
@@ -155,6 +167,8 @@ export const useAdvancedSettings = (initialValues?: Record<string, string>) => {
                     onChange={(e) => onChangeHeaderValue(index, e.target.value)}
                     placeholder={t("AISettings:EnterValue")}
                     scale
+                    hasError={needReset && !headerValues[index] && index === 0}
+                    testId="mcp-header-value-input"
                   />
                 </FieldContainer>
               </React.Fragment>

@@ -68,10 +68,12 @@ export type UseFilesProps = {
   setToPreviewFile: MediaViewerDataStore["setToPreviewFile"];
 
   gallerySelected: OformsStore["gallerySelected"];
+  isVisibleInfoPanelTemplateGallery: OformsStore["isVisibleInfoPanelTemplateGallery"];
 
   userId: string;
 
   selectedFolderStore: SelectedFolderStore;
+  currentExtensionGallery: OformsStore["currentExtensionGallery"];
 };
 
 const useFiles = ({
@@ -87,6 +89,8 @@ const useFiles = ({
   setToPreviewFile,
 
   gallerySelected,
+  isVisibleInfoPanelTemplateGallery,
+  currentExtensionGallery,
   userId,
 
   selectedFolderStore,
@@ -306,7 +310,7 @@ const useFiles = ({
         return Promise.resolve();
       })
       .then(() => {
-        if (gallerySelected) {
+        if (gallerySelected && !isVisibleInfoPanelTemplateGallery) {
           setIsUpdatingRowItem(false);
 
           const isFormRoom =
@@ -314,7 +318,7 @@ const useFiles = ({
             selectedFolderStore.parentRoomType === FolderType.FormRoom;
 
           const payload = {
-            extension: "pdf",
+            extension: currentExtensionGallery.replace(".", ""),
             id: -1,
             fromTemplate: true,
             title: (
@@ -352,6 +356,7 @@ const useFiles = ({
     setToPreviewFile,
 
     gallerySelected,
+    isVisibleInfoPanelTemplateGallery,
     userId,
 
     selectedFolderStore,

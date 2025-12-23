@@ -347,6 +347,11 @@ export const feedInfo = [
     targetType: FeedTarget.User,
     actionType: FeedAction.Invite,
   },
+  {
+    key: FeedActionKeys.RoomChangeOwner,
+    targetType: FeedTarget.User,
+    actionType: FeedAction.CHANGE_OWNER,
+  },
   //
   // GROUP
   {

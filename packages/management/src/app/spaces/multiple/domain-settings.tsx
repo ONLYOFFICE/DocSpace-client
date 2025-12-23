@@ -75,6 +75,7 @@ export const DomainSettings = observer(({ baseDomain }: IProps) => {
         />
       </FieldContainer>
       <Button
+        testId="edit-domain-button"
         size={
           currentDeviceType === DeviceType.desktop
             ? ButtonSize.small

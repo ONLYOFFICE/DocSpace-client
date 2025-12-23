@@ -36,6 +36,7 @@ import {
 import { type TData, toastr } from "@docspace/shared/components/toast";
 import { Text } from "@docspace/shared/components/text";
 import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 
@@ -48,13 +49,13 @@ import { useIcon } from "../../hooks/useIcon";
 type AddMCPDialogProps = {
   onClose: VoidFunction;
   addNewMCP?: AISettingsStore["addNewMCP"];
-  aiSettingsUrl?: string;
+  mcpServersSettingsUrl?: SettingsStore["mcpServersSettingsUrl"];
 };
 
 const AddMCPDialogComponent = ({
   onClose,
   addNewMCP,
-  aiSettingsUrl,
+  mcpServersSettingsUrl,
 }: AddMCPDialogProps) => {
   const { t } = useTranslation(["Common", "AISettings"]);
   const submitButtonRef = useRef<HTMLButtonElement>(null);
@@ -120,21 +121,25 @@ const AddMCPDialogComponent = ({
     >
       <ModalDialog.Header>{t("AISettings:MCPServer")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <form onSubmit={onSubmitAction} className={styles.bodyContainer}>
+        <form
+          onSubmit={onSubmitAction}
+          className={styles.bodyContainer}
+          data-testid="add-mcp-form"
+        >
           <div className={styles.connectDocspace}>
             <Text className={styles.connectDocspaceDescription}>
               {t("AISettings:ConnectProductToYourDataAndTools", {
                 productName: t("Common:ProductName"),
               })}
             </Text>
-            {aiSettingsUrl ? (
+            {mcpServersSettingsUrl ? (
               <Link
                 className={styles.learnMoreLink}
                 target={LinkTarget.blank}
                 type={LinkType.page}
                 fontWeight={600}
                 isHovered
-                href={aiSettingsUrl}
+                href={mcpServersSettingsUrl}
                 color="accent"
               >
                 {t("Common:LearnMore")}
@@ -161,6 +166,7 @@ const AddMCPDialogComponent = ({
           onClick={handleSubmitClick}
           isLoading={loading}
           isDisabled={baseParamsError ? true : !hasChanges}
+          testId="mcp-save-button"
         />
         <Button
           size={ButtonSize.normal}
@@ -178,7 +184,7 @@ export const AddMCPDialog = inject(
   ({ aiSettingsStore, settingsStore }: TStore) => {
     return {
       addNewMCP: aiSettingsStore.addNewMCP,
-      aiSettingsUrl: settingsStore.aiSettingsUrl,
+      mcpServersSettingsUrl: settingsStore.mcpServersSettingsUrl,
     };
   },
 )(observer(AddMCPDialogComponent));

@@ -88,7 +88,7 @@ import DotsHorizontalUrl from "PUBLIC_DIR/images/icons/16/dots-horizontal.react.
 
 import CreateTemplateSvgUrl from "PUBLIC_DIR/images/template.react.svg?url";
 import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
-import { getCategoryUrl } from "SRC_DIR/helpers/utils";
+import TemplateGalleryReactSvgUrl from "PUBLIC_DIR/images/template.gallery.react.svg?url";
 
 import { makeAutoObservable, runInAction } from "mobx";
 import copy from "copy-to-clipboard";
@@ -96,7 +96,7 @@ import { isMobile, isTablet } from "react-device-detect";
 import config from "PACKAGE_FILE";
 import { Trans } from "react-i18next";
 import { toastr } from "@docspace/shared/components/toast";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
+
 import {
   isMobile as isMobileUtils,
   isLockedSharedRoom,
@@ -126,7 +126,7 @@ import {
   FileExtensions,
   ShareAccessRights,
 } from "@docspace/shared/enums";
-import FilesFilter from "@docspace/shared/api/files/filter";
+
 import {
   formRoleMapping,
   getFileLink,
@@ -149,7 +149,6 @@ import {
 import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
 import {
   getInfoPanelOpen,
-  hideInfoPanel,
   openMembersTab,
   openShareTab,
   setInfoPanelMobileHidden,
@@ -1222,8 +1221,8 @@ class ContextOptionsStore {
     this.dialogsStore.setWelcomeFormFillingTipsVisible(true);
   };
 
-  onClickRemoveFromRecent = (item) => {
-    this.filesActionsStore.removeFilesFromRecent([item.id]);
+  onClickRemoveFromRecent = (item, t) => {
+    this.filesActionsStore.removeFilesFromRecent([item.id], t);
   };
 
   setLoaderTimer = (isLoading, cb) => {
@@ -1265,26 +1264,24 @@ class ContextOptionsStore {
     cb && cb();
   };
 
-  onCreateOform = async (navigate) => {
-    hideInfoPanel();
+  onCreateTemplate = async () => {
+    this.oformsStore.setTemplateGalleryVisible(false);
+    this.oformsStore.setIsVisibleInfoPanelTemplateGallery(false);
 
-    const filesFilter = FilesFilter.getDefault();
-    filesFilter.folder = this.oformsStore.oformFromFolderId;
+    const event = new Event(Events.CREATE);
 
-    const filterUrlParams = filesFilter.toUrlParams();
+    const payload = {
+      extension: this.oformsStore.currentExtensionGallery.replace(".", ""),
+      id: -1,
+      fromTemplate: true,
+      title: this.oformsStore.gallerySelected.attributes.name_form,
+      openEditor: true,
+      edit: true,
+    };
 
-    const url = getCategoryUrl(
-      this.filesStore.categoryType,
-      filesFilter.folder,
-    );
+    event.payload = payload;
 
-    navigate(
-      combineUrl(
-        window.ClientConfig?.proxy?.url,
-        config.homepage,
-        `${url}?${filterUrlParams}`,
-      ),
-    );
+    window.dispatchEvent(event);
   };
 
   onShowOformTemplateInfo = (item) => {
@@ -1306,7 +1303,7 @@ class ContextOptionsStore {
       {
         key: "create",
         label: t("Common:Create"),
-        onClick: () => this.onCreateOform(navigate),
+        onClick: () => this.onCreateTemplate(navigate),
       },
       {
         key: "template-info",
@@ -2428,7 +2425,7 @@ class ContextOptionsStore {
         key: "remove-from-recent",
         label: t("Common:RemoveFromList"),
         icon: RemoveOutlineSvgUrl,
-        onClick: () => this.onClickRemoveFromRecent(item),
+        onClick: () => this.onClickRemoveFromRecent(item, t),
         disabled: !this.treeFoldersStore.isRecentFolder,
       },
       {
@@ -2651,15 +2648,9 @@ class ContextOptionsStore {
       const copyLinkIndex = resultOptions.findIndex(
         (option) => option.key === "link-for-room-members",
       );
-      const inviteUsersIndex = resultOptions.findIndex(
-        (option) => option.key === "invite-users-to-room",
-      );
 
-      const menuIndex = item.isAIAgent
-        ? inviteUsersIndex
-        : copySharedLinkIndex === -1
-          ? copyLinkIndex
-          : copySharedLinkIndex;
+      const menuIndex =
+        copySharedLinkIndex === -1 ? copyLinkIndex : copySharedLinkIndex;
 
       const insertIndex =
         menuIndex !== -1
@@ -2987,7 +2978,7 @@ class ContextOptionsStore {
         label: t("Common:RemoveFromList"),
         icon: RemoveOutlineSvgUrl,
         onClick: () =>
-          this.filesActionsStore.onClickRemoveFromRecent(selection),
+          this.filesActionsStore.onClickRemoveFromRecent(selection, t),
         disabled: !this.treeFoldersStore.isRecentFolder,
       },
       /* {
@@ -3101,20 +3092,9 @@ class ContextOptionsStore {
     this.dialogsStore.setSelectFileDialogVisible(true);
   };
 
-  onShowGallery = (t) => {
-    if (isMobile) {
-      toastr.info(t("Common:MobileEditPdfNotAvailableInfo"));
-      return;
-    }
-
-    const { oformsFilter, defaultOformLocale } = this.oformsStore;
-    const initOformFilter = oformsFilter || oformsFilter.getDefault();
-
-    if (!initOformFilter.locale) initOformFilter.locale = defaultOformLocale;
-
-    window.DocSpace.navigate(
-      `/form-gallery/${this.selectedFolderStore.id}/filter?${initOformFilter.toUrlParams()}`,
-    );
+  onShowTemplateGallery = () => {
+    this.oformsStore.setTemplateGalleryVisible(true);
+    this.oformsStore.setOformFromFolderId(this.selectedFolderStore.id);
   };
 
   // TODO: add privacy room check for files
@@ -3143,7 +3123,7 @@ class ContextOptionsStore {
       className: "main-button_drop-down_sub",
       icon: FormGalleryReactSvgUrl,
       label: t("Common:ChooseFromTemplates"),
-      onClick: () => this.onShowGallery(t),
+      onClick: () => this.onShowTemplateGallery(),
       key: "form-file",
     };
 
@@ -3215,7 +3195,6 @@ class ContextOptionsStore {
     return [
       uploadReadyPDFFrom,
       showSelectorFormRoomDocx,
-      // templateOformsGallery,
       // templatePDFForm,
       // {
       //   isSeparator: true,
@@ -3256,7 +3235,7 @@ class ContextOptionsStore {
     const { isRoomsFolder, isPrivacyFolder, isFlowsFolder, isAIAgentsFolder } =
       this.treeFoldersStore;
     const { mainButtonItemsList } = this.pluginStore;
-    const { enablePlugins } = this.settingsStore;
+    const { enablePlugins, templateGalleryAvailable } = this.settingsStore;
     const isFormRoomType =
       roomType === RoomsType.FormRoom ||
       (parentRoomType === FolderType.FormRoom && isFolder);
@@ -3311,15 +3290,6 @@ class ContextOptionsStore {
       disabled: isPrivacyFolder,
     };
 
-    const templateOformsGallery = {
-      id: "personal_template_oforms-gallery",
-      key: "oforms-gallery",
-      label: t("Common:OFORMsGallery"),
-      icon: FormGalleryReactSvgUrl,
-      onClick: () => this.onShowGallery(t),
-      disabled: isPrivacyFolder,
-    };
-
     const createNewFolder = {
       id: "personal_new-folder",
       key: "new-folder",
@@ -3342,11 +3312,22 @@ class ContextOptionsStore {
       icon: ActionsUploadReactSvgUrl,
     };
 
+    const templateGallery = templateGalleryAvailable
+      ? [
+          { key: "separator", isSeparator: true },
+          {
+            key: "template-gallery",
+            label: t("Common:TemplateGallery"),
+            onClick: () => this.onShowTemplateGallery(),
+            icon: TemplateGalleryReactSvgUrl,
+          },
+        ]
+      : [];
+
     if (isFormRoomType) {
       return this.getContextOptionsPlusFormRoom(t, {
         createTemplateForm,
         createTemplateSelectFormFile,
-        templateOformsGallery,
         createNewFolder,
         createNewDoc,
         createNewPresentation,
@@ -3364,8 +3345,7 @@ class ContextOptionsStore {
         key: "new-form-base",
         items: [
           createTemplateForm,
-          createTemplateNewFormFile,
-          templateOformsGallery,
+          createTemplateNewFormFile
         ],
       },
     ];
@@ -3421,6 +3401,7 @@ class ContextOptionsStore {
             createNewPresentation,
             ...formActions,
             createNewFolder,
+            ...templateGallery,
             { key: "separator", isSeparator: true },
             uploadFiles,
             showUploadFolder ? uploadFolder : null,

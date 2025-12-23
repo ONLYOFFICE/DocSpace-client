@@ -30,7 +30,7 @@ import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 import PluginStore from "SRC_DIR/store/PluginStore";
 import type TreeFoldersStore from "SRC_DIR/store/TreeFoldersStore";
 
-type InfoPanelHeaderContentProps = {
+export type HeaderProps = {
   selection: InfoPanelStore["infoPanelSelection"];
 
   roomsView: InfoPanelStore["roomsView"];
@@ -47,4 +47,12 @@ type InfoPanelHeaderContentProps = {
   isRecentFolder: TreeFoldersStore["isRecentFolder"];
 };
 
-export default InfoPanelHeaderContentProps;
+export type InfoPanelHeaderContentProps =
+  | {
+      isGallery: true;
+      onClose?: () => void;
+    }
+  | ({
+      isGallery?: false;
+      onClose?: () => void;
+    } & HeaderProps);

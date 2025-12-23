@@ -41,6 +41,7 @@ import { Link, LinkType } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
 import { InputSize } from "@docspace/shared/components/text-input";
 import { InjectedSelectFileStepProps, SelectFileStepProps } from "../types";
+import { TMigrationStatusResult } from "@docspace/shared/api/settings/types";
 
 const Wrapper = styled.div`
   max-width: 700px;
@@ -173,6 +174,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
   const [isNetworkError, setIsNetworkError] = useState(false);
   const [isFileError, setIsFileError] = useState(false);
   const [isBackupEmpty, setIsBackupEmpty] = useState(false);
+  const [error, setError] = useState<string>("");
   const isAbort = useRef(false);
 
   const [uploadFile, setFile] = useState<File | File[]>();
@@ -196,9 +198,18 @@ const SelectFileStep = (props: SelectFileStepProps) => {
   };
 
   const handleError = useCallback(
-    (message?: string) => {
+    (message?: string, result?: TMigrationStatusResult) => {
+      if (result) {
+        if (message && result.failedArchives.length === 0) {
+          setError(message);
+        }
+
+        if (result.failedArchives.length > 0) {
+          setIsFileError(true);
+        }
+      }
+
       toastr.error(message || t("Common:SomethingWentWrong"));
-      setIsFileError(true);
       setLoadingStatus("none");
       clearInterval(uploadInterval.current);
     },
@@ -219,8 +230,8 @@ const SelectFileStep = (props: SelectFileStepProps) => {
         return;
       }
 
-      if (res.parseResult.failedArchives.length > 0 || res.error) {
-        handleError(res.error);
+      if (res.error) {
+        handleError(res.error, res.parseResult);
         return;
       }
 
@@ -298,6 +309,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
 
     setProgress(0);
     setIsFileError(false);
+    setError("");
     setIsBackupEmpty(false);
     setIsSaveDisabled(true);
     setLoadingStatus("upload");
@@ -448,6 +460,17 @@ const SelectFileStep = (props: SelectFileStepProps) => {
               >
                 {t("Settings:CheckUnsupportedFiles")}
               </Link>
+            </div>
+          ) : null}
+
+          {error ? (
+            <div>
+              <ProgressBar
+                percent={100}
+                className="complete-progress-bar"
+                label={t("Common:LoadingIsComplete")}
+              />
+              <Text className="error-text">{error}</Text>
             </div>
           ) : null}
 

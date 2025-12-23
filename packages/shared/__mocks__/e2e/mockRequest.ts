@@ -38,7 +38,7 @@ export class MockRequest {
           const method = route.request().method();
 
           if (endpoint.method && endpoint.method !== method) {
-            await route.continue();
+            await route.fallback();
             return;
           }
 
@@ -50,7 +50,7 @@ export class MockRequest {
     );
   }
 
-  async setHeaders(url: string, headers: string[]) {
+  async setHeaders(url: string | RegExp, headers: string[]) {
     await this.page.route(url, async (route, request) => {
       const objHeaders: { [key: string]: "true" } = {};
       headers.forEach((item) => (objHeaders[item] = "true"));

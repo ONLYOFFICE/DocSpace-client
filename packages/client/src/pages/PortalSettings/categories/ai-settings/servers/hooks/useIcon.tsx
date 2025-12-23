@@ -107,7 +107,7 @@ export const useIcon = (initialValue?: string) => {
       labelVisible
       removeMargin
     >
-      <div className={styles.iconBlock}>
+      <div className={styles.iconBlock} data-testid="set-mcp-icon">
         {icon ? (
           <>
             <img className={styles.icon} alt="img" src={icon} />

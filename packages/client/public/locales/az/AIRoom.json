@@ -12,7 +12,6 @@
   "EmptyResultsViewerDescription": "Digər istifadəçilərin süni intellekt söhbət fəaliyyətinin nəticələrini onlar mövcud olduqdan sonra burada görəcəksiniz.",
   "InstructionsDescriptionAgent": "Süni intellekt agentinin necə davranması və reaksiya verməsi haqqında məlumat verin. Onun rolu, tonu və əsas vəzifələrini müəyyən edin.",
   "InstructionsDescriptionAgentExample": "Misal: “Siz mətbuat açıqlamalarının yazılmasına və redaktə edilməsinə kömək edən süni intellektlə PR köməkçisisiniz. Peşəkar, özünəinamlı və mediaya uyğun bir tonda qalın. Əsas mesajları aydın şəkildə vurğulayın, terminlərdən çəkinin və mətnin qısa və cəlbedici olmasını təmin edin.”",
-  "Knowledge": "Bilik",
   "KnowledgeDescription": "Komputerinizdən və ya {{productName}} proqramından faylları yükləyin ki, söhbət üçün daha yaxşı kontekst yarana bilsin. Qeyd: söhbət zamanı yüklənən məzmunun bir hissəsi və ya hamısı göstərilə bilər.",
   "KnowledgeSelectIn": "{{productName}} seçim edin",
   "KnowledgeUnavailable": "Bilgi Bazası mövcud deyil",

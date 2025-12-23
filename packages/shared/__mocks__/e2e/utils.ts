@@ -67,9 +67,22 @@ export const HEADER_AUTHENTICATED_SETTINGS =
 export const HEADER_AUTHENTICATED_WITH_SOCKET_SETTINGS =
   "x-test-data-authenticated-with-socket-settings";
 
+export const HEADER_PLUGINS_SETTINGS = "x-test-data-plugins-settings";
+
 export const HEADER_ENABLED_JOIN_SETTINGS = "x-test-data-enabled-join-settings";
 
 export const HEADER_ENABLE_ADM_MESS_SETTINGS =
   "x-test-data-enable-adm-mess-settings";
 
 export const HEADER_HCAPTCHA_SETTINGS = "x-test-data-hcaptcha-settings";
+
+export const HEADER_AI_DISABLED = "x-ai-config-disabled";
+
+export const HEADER_EMPTY_PORTAL = "x-empty-portal";
+
+export const HEADER_UNCOMPLETED_TENANT = "x-uncompleted-tenant";
+
+export const HEADER_OPEN_SOURCE = "x-open-source";
+
+export const HEADER_ENCRYPTION_SETTINGS_ENCRYPTED =
+  "x-encryption-settings-encrypted";

@@ -32,7 +32,7 @@ import api from "@docspace/shared/api";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import type { UserStore } from "@docspace/shared/store/UserStore";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
-import { toastr } from "@docspace/shared/components/toast";
+import { TData, toastr } from "@docspace/shared/components/toast";
 import type {
   TFile,
   TFileSecurity,
@@ -41,6 +41,8 @@ import type {
 import type { TAPIPlugin } from "@docspace/shared/api/plugins/types";
 import type { ModalDialogProps } from "@docspace/shared/components/modal-dialog/ModalDialog.types";
 import type { TTranslation } from "@docspace/shared/types";
+import { LANGUAGE } from "@docspace/shared/constants";
+import { getCookie } from "@docspace/shared/utils";
 
 import defaultConfig from "PUBLIC_DIR/scripts/config.json";
 
@@ -334,13 +336,11 @@ class PluginStore {
 
       this.initPlugin(plugin);
     } catch (e) {
-      const err = e as { response: { data: { error: { message: string } } } };
-
-      toastr.error(err.response.data.error.message as string);
+      toastr.error(e as TData);
     }
   };
 
-  uninstallPlugin = async (name: string) => {
+  uninstallPlugin = async (name: string, t: TTranslation) => {
     const pluginIdx = this.plugins.findIndex((p) => p.name === name);
 
     try {
@@ -355,9 +355,26 @@ class PluginStore {
           if (this.plugins.length === 0) this.setIsEmptyList(true);
         });
       }
+      toastr.success(t("PluginDeletedSuccessfully"));
     } catch (e) {
+      toastr.error(e as TData);
       console.log(e);
     }
+  };
+
+  initLocalePlugin = (plugin: TPlugin) => {
+    const culture = this.settingsStore.culture;
+    const currentLanguage = (getCookie(LANGUAGE) || culture) as string;
+    plugin.setLanguage?.(currentLanguage);
+
+    const language = plugin.getLanguage?.();
+
+    plugin.nameLocale =
+      (language && plugin.nameLocaleMap?.[language]) || plugin.name;
+
+    plugin.descriptionLocale =
+      (language && plugin.descriptionLocaleMap?.[language]) ||
+      plugin.description;
   };
 
   initPlugin = (
@@ -374,6 +391,8 @@ class PluginStore {
 
           const newPlugin = cloneDeep({
             ...plugin,
+            nameLocaleMap: plugin.nameLocale,
+            descriptionLocaleMap: plugin.descriptionLocale,
             ...iWindow?.Plugins?.[plugin.pluginName],
           });
 
@@ -387,6 +406,8 @@ class PluginStore {
           newPlugin.compatible = this.checkPluginCompatibility(
             plugin.minDocSpaceVersion,
           );
+
+          this.initLocalePlugin(newPlugin);
 
           this.installPlugin(newPlugin);
 
@@ -550,6 +571,7 @@ class PluginStore {
 
       return plugin;
     } catch (e) {
+      toastr.error(e as TData);
       console.log(e);
     }
   };

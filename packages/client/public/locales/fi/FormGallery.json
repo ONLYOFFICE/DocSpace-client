@@ -2,10 +2,7 @@
   "Categories": "Luokat",
   "EmptyFormGalleryScreenDescription": "Hakuasi vastaavia tuloksia ei löytynyt",
   "ErrorViewDescription": "Ole hyvä ja yritä myöhemmin uudelleen",
-  "ErrorViewHeader": "Lomakegalleria on väliaikaisesti poissa käytöstä",
-  "SelectForm": "Valitse Lomake",
-  "SubmitToGalleryDialogGuideInfo": "Opi luomaan täydellisiä lomakkeita ja kasvattamaan mahdollisuuksiasi saadaksesi  <1>guide</1> hyväksynnän.",
-  "SubmitToGalleryDialogMainInfo": "Olet tämän huoneen omistaja. Sinun täytyy siirtää omistajan rooli toiselle käyttäjälle ennen kuin poistut huoneesta.",
+  "ErrorViewDescriptionNetworkError": "Näyttää siltä, ettei Internet-yhteyttä ole",
   "SuggestChanges": "Ehdota muutoksia",
   "TemplateInfo": "Mallin tiedot",
   "ViewAllTemplates": "Näytä kaikki mallit"

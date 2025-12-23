@@ -3,7 +3,7 @@
   "content": "Delete plugin?",
   "content_en_sha1_hash": "a78a1d27084eed85ce0fe4dd762e6fc445100979",
   "created_at": "2025-05-19T21:30:49.906Z",
-  "updated_at": "2025-05-24T01:59:36.221Z",
+  "updated_at": "2025-12-15T14:04:23.561Z",
   "comment": {
     "text": "This translation key is used for the \"Delete plugin?\" message displayed as the header of a confirmation modal dialog in an application. It prompts the user to confirm deleting a plugin.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/DeletePluginDialog/index.js",
-      "line_number": 61,
-      "context": "isLoading={!ready}\n visible={isVisible}\n onClose={onClose}\n displayType=\"modal\"\n >\n <ModalDialog.Header>{t(\"DeletePluginTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n {t(\"DeletePluginDescription\", { productName: t(\"Common:ProductName\") })}\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
+      "file_path": "/packages/client/src/components/dialogs/DeletePluginDialog/index.tsx",
+      "line_number": 63,
+      "context": "}\n };\n \n return (\n <ModalDialog isLoading={!ready} visible={isVisible} onClose={onClose}>\n <ModalDialog.Header>{t(\"DeletePluginTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n {t(\"DeletePluginDescription\", { productName: t(\"Common:ProductName\") })}\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
       "module": "/packages/client"
     }
   ],

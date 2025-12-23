@@ -8,7 +8,7 @@ RUN apt-get -y update && \
     apt-get install -yq 
     
 # Install PNPM
-RUN npm install -g pnpm@10.20.0
+RUN npm install -g pnpm@10.26.0
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     fonts-noto-cjk \
@@ -38,6 +38,7 @@ COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
 COPY common/tests/package-lock.json ./common/tests/package-lock.json
 COPY common/tests/package.json ./common/tests/package.json
 COPY packages/client/package.json ./packages/client/package.json
+COPY packages/client/onlyoffice-docspace-plugin-sdk-*.tgz ./packages/client/
 COPY packages/shared/package.json ./packages/shared/package.json
 
 # Install dependencies with recursive installation

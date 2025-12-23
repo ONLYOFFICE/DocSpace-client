@@ -59,7 +59,7 @@ const DeleteData = (props) => {
   const data = [
     {
       id: "deletion",
-      name: t("DeletePortal", { productName: t("Common:ProductName") }),
+      name: t("Common:DeletePortal", { productName: t("Common:ProductName") }),
       content: <PortalDeletionSection stripeUrl={stripeUrl} />,
       onClick: async () => {
         clearAbortControllerArr();

@@ -1,5 +1,5 @@
 import React from "react";
-import { Heading as BaseHeading } from "../../heading";
+import { HeadingWithTooltip as BaseHeading } from "../../heading";
 import styles from "../Navigation.module.scss";
 
 type HeadingProps = {

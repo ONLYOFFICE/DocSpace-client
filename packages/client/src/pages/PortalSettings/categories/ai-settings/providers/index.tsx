@@ -26,7 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -38,6 +38,8 @@ import type {
   TProviderTypeWithUrl,
 } from "@docspace/shared/api/ai/types";
 import { getAvailableProviderUrls } from "@docspace/shared/api/ai";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 
@@ -47,7 +49,7 @@ import { AddUpdateProviderDialog } from "./dialogs/add-update";
 import { DeleteAIProviderDialog } from "./dialogs/delete";
 
 import { AiProviderTile } from "./Tile";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import { ProvidersLoader } from "./ProvidersLoader";
 
 type TDeleteDialogData =
   | {
@@ -75,7 +77,7 @@ type AIProviderProps = {
   checkUnavailableProviders?: AISettingsStore["checkUnavailableProviders"];
   isProviderAvailable?: AISettingsStore["isProviderAvailable"];
   cancelAvailabilityCheck?: AISettingsStore["cancelAvailabilityCheck"];
-  aiSettingsUrl?: string;
+  aiProviderSettingsUrl?: SettingsStore["aiProviderSettingsUrl"];
 };
 
 const AIProviderComponent = ({
@@ -84,7 +86,7 @@ const AIProviderComponent = ({
   checkUnavailableProviders,
   isProviderAvailable,
   cancelAvailabilityCheck,
-  aiSettingsUrl,
+  aiProviderSettingsUrl,
 }: AIProviderProps) => {
   const { t } = useTranslation(["Common", "AISettings"]);
   const [addDialogVisible, setaddDialogVisible] = useState(false);
@@ -139,48 +141,33 @@ const AIProviderComponent = ({
     };
   }, [cancelAvailabilityCheck]);
 
-  if (!aiProvidersInitied)
-    return (
-      <div className={styles.aiProvider}>
-        <RectangleSkeleton
-          className={styles.description}
-          width="700px"
-          height="36px"
-        />
-        <RectangleSkeleton
-          className={styles.learnMoreLink}
-          width="100px"
-          height="19px"
-        />
-        <RectangleSkeleton
-          className={styles.addProviderButton}
-          width="155px"
-          height="32px"
-        />
-      </div>
-    );
+  if (!aiProvidersInitied) return <ProvidersLoader />;
 
   return (
     <div className={styles.aiProvider}>
-      <Text className={styles.description}>
+      <Text
+        className={styles.description}
+        dataTestId="provider-section-description"
+      >
         {t("AISettings:AIProviderSettingDescription", {
           productName: t("Common:ProductName"),
         })}
       </Text>
-      {aiSettingsUrl ? (
+      {aiProviderSettingsUrl ? (
         <Link
           className={styles.learnMoreLink}
           target={LinkTarget.blank}
           type={LinkType.page}
           fontWeight={600}
           isHovered
-          href={aiSettingsUrl}
+          href={aiProviderSettingsUrl}
           color="accent"
         >
           {t("Common:LearnMore")}
         </Link>
       ) : null}
       <Button
+        testId="add-provider-button"
         primary
         size={ButtonSize.small}
         label={t("AISettings:AddAIProvider")}
@@ -189,14 +176,16 @@ const AIProviderComponent = ({
         onClick={showAddProviderDialog}
       />
 
-      <div className={styles.providerList}>
+      <div data-testid="ai-provider-list" className={styles.providerList}>
         {aiProviders?.map((provider) => (
           <AiProviderTile
             key={provider.id}
             item={provider}
             onDeleteClick={onDeleteAIProvider}
             onSettingsClick={onUpdateAIProvider}
-            isAvailable={isProviderAvailable?.(provider.id)}
+            isAvailable={
+              isProviderAvailable?.(provider.id) && !provider.needReset
+            }
           />
         ))}
       </div>
@@ -236,7 +225,9 @@ export const AIProvider = inject(
       checkUnavailableProviders: aiSettingsStore.checkUnavailableProviders,
       isProviderAvailable: aiSettingsStore.isProviderAvailable,
       cancelAvailabilityCheck: aiSettingsStore.cancelAvailabilityCheck,
-      aiSettingsUrl: settingsStore.aiSettingsUrl,
+      aiProviderSettingsUrl: settingsStore.aiProviderSettingsUrl,
     };
   },
 )(observer(AIProviderComponent));
+
+export { ProvidersLoader };

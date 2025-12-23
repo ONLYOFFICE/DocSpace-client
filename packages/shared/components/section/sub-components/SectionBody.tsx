@@ -36,7 +36,6 @@ import SectionContextMenu from "./SectionContextMenu";
 
 const SectionBody = React.memo(
   ({
-    isFormGallery,
     autoFocus = false,
     children,
     onDrop,
@@ -106,7 +105,6 @@ const SectionBody = React.memo(
             [styles.isTile]: viewAs === "tile",
             [styles.isSettingsView]: viewAs === "settings",
             [styles.isProfileView]: viewAs === "profile",
-            [styles.isFormGallery]: isFormGallery,
             [styles.isStudio]: settingsStudio,
             [styles.fullHeightBody]: fullHeightBody,
             [styles.common]: true,
@@ -151,7 +149,6 @@ const SectionBody = React.memo(
     //         [styles.isTile]: viewAs === "tile",
     //         [styles.isSettingsView]: viewAs === "settings",
     //         [styles.isProfileView]: viewAs === "profile",
-    //         [styles.isFormGallery]: isFormGallery,
     //         [styles.isStudio]: settingsStudio,
     //         [styles.common]: true,
     //       },

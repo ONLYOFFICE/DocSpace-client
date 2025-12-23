@@ -468,7 +468,6 @@ export const Component = inject(
     mediaViewerDataStore,
     peopleStore,
     filesActionsStore,
-    oformsStore,
     selectedFolderStore,
     clientLoadingStore,
     userStore,
@@ -547,8 +546,6 @@ export const Component = inject(
 
       removeActiveItem,
     } = filesStore;
-
-    const { gallerySelected } = oformsStore;
 
     const {
       isRecycleBinFolder,
@@ -680,7 +677,6 @@ export const Component = inject(
       playlist,
 
       getFileInfo,
-      gallerySelected,
       setIsUpdatingRowItem,
 
       setFrameConfig,

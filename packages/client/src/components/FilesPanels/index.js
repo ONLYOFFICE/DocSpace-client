@@ -100,6 +100,9 @@ import RemoveUserConfirmationDialog from "../dialogs/RemoveUserConfirmationDialo
 import AssignRoles from "../dialogs/AssignRoles";
 import ShareSelector from "../ShareSelector";
 
+import TemplateGallery from "../TemplateGallery";
+import InfoPanelTemplateGallery from "../TemplateGallery/InfoPanel";
+
 const Panels = (props) => {
   const {
     uploadPanelVisible,
@@ -180,6 +183,8 @@ const Panels = (props) => {
     extsFilesVectorized,
     aiAgentSelectorDialogProps,
     setAiAgentSelectorDialogProps,
+    templateGalleryVisible,
+    isVisibleInfoPanelTemplateGallery,
   } = props;
 
   const navigate = useNavigate();
@@ -483,6 +488,10 @@ const Panels = (props) => {
       <SocialAuthWelcomeDialog key="joining-space-dialog" />
     ),
     <ShareSelector key="share-selector" />,
+    templateGalleryVisible && <TemplateGallery key="template-gallery" />,
+    isVisibleInfoPanelTemplateGallery && (
+      <InfoPanelTemplateGallery key="template-gallery-info-panel" />
+    ),
   ];
 };
 
@@ -501,6 +510,7 @@ export default inject(
     userStore,
     guidanceStore,
     filesSettingsStore,
+    oformsStore,
   }) => {
     const {
       copyPanelVisible,
@@ -597,6 +607,9 @@ export default inject(
     } = pluginStore;
 
     const { getRefElement, config } = guidanceStore;
+
+    const { templateGalleryVisible, isVisibleInfoPanelTemplateGallery } =
+      oformsStore;
 
     const isAccounts = window.location.href.indexOf("accounts/people") !== -1;
     const resetQuotaItem = () => {
@@ -695,6 +708,8 @@ export default inject(
 
       aiAgentSelectorDialogProps,
       setAiAgentSelectorDialogProps,
+      templateGalleryVisible,
+      isVisibleInfoPanelTemplateGallery,
     };
   },
 )(observer(Panels));

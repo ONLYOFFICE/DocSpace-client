@@ -51,6 +51,7 @@ export const Header = observer(() => {
       </Text>
 
       <Button
+        testId="create-new-space"
         size={
           currentDeviceType === DeviceType.desktop
             ? ButtonSize.small

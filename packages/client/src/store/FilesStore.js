@@ -236,6 +236,8 @@ class FilesStore {
 
   isErrorAIAgentNotAvailable = false;
 
+  isErrorAccountNotAvailable = false;
+
   roomsController = null;
 
   filesController = null;
@@ -624,6 +626,11 @@ class FilesStore {
 
       console.log("[WS] create new folder", folderInfo.id, folderInfo.title);
 
+      if (!folderInfo || folderInfo.parentId !== this.selectedFolderStore.id) {
+        console.log("Skip UNSUBSCRIBED folder creation");
+        return;
+      }
+
       const newFolders = [folderInfo, ...this.folders];
 
       const newFilter = this.filter;
@@ -961,6 +968,10 @@ class FilesStore {
 
   setIsErrorAIAgentNotAvailable = (state) => {
     this.isErrorAIAgentNotAvailable = state;
+  };
+
+  setIsErrorAccountNotAvailable = (state) => {
+    this.isErrorAccountNotAvailable = state;
   };
 
   setTempActionFilesIds = (tempActionFilesIds) => {
@@ -1976,11 +1987,21 @@ class FilesStore {
             ...aiRoom,
             security: {
               ...currentFolder.security,
+              Create:
+                currentFolder.security.Create &&
+                !this.settingsStore.aiConfig?.aiReadyNeedReset,
               Download: aiRoom.security.Download,
-              ChangeOwner: aiRoom.security.ChangeOwner,
+              EditAccess:
+                currentFolder.security.security?.EditAccess &&
+                !this.settingsStore.aiConfig?.aiReadyNeedReset,
+              EditRoom:
+                currentFolder.security.security?.EditRoom &&
+                !this.settingsStore.aiConfig?.aiReadyNeedReset,
+              ChangeOwner:
+                currentFolder.security.security?.ChangeOwner &&
+                !this.settingsStore.aiConfig?.aiReadyNeedReset,
               Delete: aiRoom.security.Delete,
-              EditRoom: aiRoom.security.EditRoom,
-              EditAccess: aiRoom.security.EditAccess,
+
               Pin: aiRoom.security.Pin,
               UseChat: aiRoom.security.UseChat,
             },
@@ -2460,6 +2481,12 @@ class FilesStore {
               pathParts: data.pathParts,
               navigationPath: EMPTY_ARRAY,
               ...{ new: data.new },
+              security: {
+                ...data.current.security,
+                Create:
+                  data.current.security.Create &&
+                  !this.settingsStore.aiConfig?.aiReadyNeedReset,
+              },
             });
 
             const isEmptyList = data.folders.length === 0;
@@ -3118,17 +3145,23 @@ class FilesStore {
 
       return templateOptions;
     } else if (isAIAgent) {
-      const canInviteUserInAgent = item.security?.EditAccess;
+      const canInviteUserInAgent =
+        item.security?.EditAccess &&
+        !this.settingsStore.aiConfig?.aiReadyNeedReset;
       const canRemoveAgent = item.security?.Delete;
 
       const canPinAgent = item.security?.Pin;
 
-      const canEditAgent = item.security?.EditRoom;
+      const canEditAgent =
+        item.security?.EditRoom &&
+        !this.settingsStore.aiConfig?.aiReadyNeedReset;
 
       const canViewAgentInfo = item.security?.Read;
       const canMuteAgent = item.security?.Mute;
 
-      const canChangeOwner = item.security?.ChangeOwner;
+      const canChangeOwner =
+        item.security?.ChangeOwner &&
+        !this.settingsStore.aiConfig?.aiReadyNeedReset;
 
       let agentOptions = [
         "select",
@@ -3136,6 +3169,7 @@ class FilesStore {
         "separator0",
         "edit-agent",
         "invite-users-to-room",
+        "link-for-room-members",
         "room-info",
         "pin-room",
         "unpin-room",
@@ -4064,6 +4098,23 @@ class FilesStore {
       const contextOptions = this.getFilesContextOptions(item);
       const isThirdPartyFolder = providerKey && id === rootFolderId;
 
+      const isAIAgent =
+        item.rootFolderType === FolderType.AIAgents &&
+        item.roomType === RoomsType.AIRoom;
+
+      const newSecurity = {
+        ...security,
+        EditAccess:
+          item.security?.EditAccess &&
+          !this.settingsStore.aiConfig?.aiReadyNeedReset,
+        EditRoom:
+          item.security?.EditRoom &&
+          !this.settingsStore.aiConfig?.aiReadyNeedReset,
+        ChangeOwner:
+          item.security?.ChangeOwner &&
+          !this.settingsStore.aiConfig?.aiReadyNeedReset,
+      };
+
       let isFolder = item.isFolder ?? false;
       this.folders.forEach((x) => {
         if (x.id === item.id && x.parentId === item.parentId) isFolder = true;
@@ -4099,9 +4150,6 @@ class FilesStore {
       const isRoom = !!roomType;
       const isTemplate =
         item.rootFolderType === FolderType.RoomTemplates && isRoom;
-      const isAIAgent =
-        item.rootFolderType === FolderType.AIAgents &&
-        item.roomType === RoomsType.AIRoom;
 
       const icon =
         isRoom && logo?.medium
@@ -4208,7 +4256,7 @@ class FilesStore {
         pinned,
         thirdPartyIcon,
         providerType,
-        security,
+        security: isAIAgent ? newSecurity : security,
         viewAccessibility,
         ...pluginOptions,
         inRoom,

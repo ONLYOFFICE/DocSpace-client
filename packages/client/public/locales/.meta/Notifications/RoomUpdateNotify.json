@@ -3,17 +3,17 @@
   "content": "Shared content, {{rooms}} and {{aiAgents}} activity",
   "content_en_sha1_hash": "3157d93cd19ed778427fe954ff27035eab6ace13",
   "created_at": "2025-11-27T11:56:59.226Z",
-  "updated_at": "2025-11-27T11:57:20.593Z",
+  "updated_at": "2025-12-17T07:53:53.629Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key displays a notification title summarizing recent activity within rooms and involving AI agents. It appears as a title within a notification container on the user's profile page, providing a quick overview of updates. Translators should ensure the wording accurately reflects shared content related to rooms and AI agent interactions.",
+    "is_auto": true,
+    "updated_at": "2025-12-17T07:53:53.629Z"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/RoomsActivityContainer.tsx",
-      "line_number": 67,
-      "context": "return (\n <div className=\"notification-container\">\n <div className=\"row\">\n <Text {...textProps} className=\"subscription-title\">\n {t(\"RoomUpdateNotify\", {\n rooms: t(\"Common:Rooms\"),\n aiAgents: t(\"Common:AIAgents\"),\n })}\n </Text>\n <ToggleButton",
+      "line_number": 68,
+      "context": "return (\n <div className={styles.notificationContainer}>\n <div className={styles.row}>\n <Text {...textProps} className=\"subscription-title\">\n {t(\"RoomUpdateNotify\", {\n rooms: t(\"Common:Rooms\"),\n aiAgents: t(\"Common:AIAgents\"),\n })}\n </Text>\n <ToggleButton",
       "module": "/packages/client"
     }
   ],

@@ -188,19 +188,21 @@ const DocumentService = ({
         setIsDefaultSettings(result?.isDefault || false);
         setPortalUrl(result?.docServicePortalUrl);
         setAuthHeader(result?.docServiceSignatureHeader);
-        setSecretKey(result?.docServiceSignatureSecret);
+        setSecretKey(result?.docServiceSignatureSecret || "");
         setInternalUrl(result?.docServiceUrlInternal);
         setDocServiceUrl(result?.docServiceUrl);
         setIsDisabledCertificat(!result?.docServiceSslVerification || false);
 
         setInitPortalUrl(result?.docServicePortalUrl);
-        setInitSecretKey(result?.docServiceSignatureSecret);
+        setInitSecretKey(result?.docServiceSignatureSecret || "");
         setInitAuthHeader(result?.docServiceSignatureHeader);
         setInitDocServiceUrl(result?.docServiceUrl);
         setInitInternalUrl(result?.docServiceUrlInternal);
         setInitIsDisabledCertificat(
           !result?.docServiceSslVerification || false,
         );
+
+        setIsShowAdvancedSettings(false);
       })
       .catch((e) => toastr.error(e))
       .finally(() => setResetIsLoading(false));

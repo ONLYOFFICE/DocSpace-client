@@ -77,7 +77,6 @@
   "DefineQuotaPerAIAgent": "Definišite kvotu po AI agentu",
   "DefineQuotaPerRoom": "Definiši kvotu po sobi",
   "DefineQuotaPerUser": "Definiši kvotu po korisniku",
-  "DeletePortal": "Obriši {{productName}}",
   "DeletePortalInfo": "Pre nego što izbrišete prostor, uverite se da je automatski obračun isključen. Status automatskog obračuna možete da proverite na <1>vašem Stripe korisničkom portalu</1>.",
   "DeleteSecretKey": "Obriši tajni ključ",
   "DeleteSecretKeyDescription": "Tajni ključ će biti trajno obrisan. Ova radnja se ne može opozvati.",

@@ -34,6 +34,7 @@ import { ContextMenu } from "../context-menu";
 import { MainButtonProps } from "./MainButton.types";
 import styles from "./MainButton.module.scss";
 import { ContextMenuRefType } from "../context-menu/ContextMenu.types";
+import { TooltipContainer } from "../tooltip";
 
 const MainButton = (props: MainButtonProps) => {
   const {
@@ -104,7 +105,8 @@ const MainButton = (props: MainButtonProps) => {
       ref={containerRef}
       data-testid="main-button"
     >
-      <div
+      <TooltipContainer
+        as="div"
         {...rest}
         id={id}
         ref={buttonRef}
@@ -131,7 +133,7 @@ const MainButton = (props: MainButtonProps) => {
             />
           </>
         ) : null}
-      </div>
+      </TooltipContainer>
     </div>
   );
 };

@@ -27,14 +27,14 @@
 import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 import FormReactSvgUrl from "PUBLIC_DIR/images/access.form.react.svg?url";
 import FormBlankReactSvgUrl from "PUBLIC_DIR/images/form.blank.react.svg?url";
-import FormFileReactSvgUrl from "PUBLIC_DIR/images/form.file.react.svg?url";
 import FormGalleryReactSvgUrl from "PUBLIC_DIR/images/form.gallery.react.svg?url";
+import FormFileReactSvgUrl from "PUBLIC_DIR/images/form.file.react.svg?url";
 import ActionsDocumentsReactSvgUrl from "PUBLIC_DIR/images/actions.documents.react.svg?url";
 import SpreadsheetReactSvgUrl from "PUBLIC_DIR/images/spreadsheet.react.svg?url";
 import ActionsPresentationReactSvgUrl from "PUBLIC_DIR/images/actions.presentation.react.svg?url";
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
 import MoveReactSvgUrl from "PUBLIC_DIR/images/icons/16/move.react.svg?url";
-
+import TemplateGalleryReactSvgUrl from "PUBLIC_DIR/images/template.gallery.react.svg?url";
 // import PersonAdminReactSvgUrl from "PUBLIC_DIR/images/person.admin.react.svg?url";
 // import PersonManagerReactSvgUrl from "PUBLIC_DIR/images/person.manager.react.svg?url";
 // import PersonReactSvgUrl from "PUBLIC_DIR/images/person.react.svg?url";
@@ -47,13 +47,13 @@ import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
 import React, { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { useNavigate, useLocation } from "react-router";
-import styled, { css } from "styled-components";
 
+import styled, { css } from "styled-components";
+import { useLocation } from "react-router";
 import { MainButton } from "@docspace/shared/components/main-button";
 import { toastr } from "@docspace/shared/components/toast";
 import { Button } from "@docspace/shared/components/button";
-
+import { isDesktop } from "@docspace/shared/utils";
 import { ArticleButtonLoader } from "@docspace/shared/skeletons/article";
 import { isMobile, isTablet } from "react-device-detect";
 import { globalColors } from "@docspace/shared/themes";
@@ -159,7 +159,6 @@ const ArticleMainButtonContent = (props) => {
     isArchiveFolder,
 
     setOformFromFolderId,
-    oformsFilter,
 
     enablePlugins,
     mainButtonItemsList,
@@ -190,7 +189,8 @@ const ArticleMainButtonContent = (props) => {
     getContactsModel,
     contactsCanCreate,
     setRefMap,
-    defaultOformLocale,
+    setTemplateGalleryVisible,
+    templateGalleryAvailable,
 
     isChatTab,
     isResultTab,
@@ -198,9 +198,10 @@ const ArticleMainButtonContent = (props) => {
     isAIRoom,
     extsFilesVectorized,
     allowInvitingMembers,
+
+    aiConfig,
   } = props;
 
-  const navigate = useNavigate();
   const location = useLocation();
 
   const isAccountsPage = location.pathname.includes("/accounts");
@@ -324,20 +325,9 @@ const ArticleMainButtonContent = (props) => {
 
   const onInputClick = React.useCallback((e) => (e.target.value = null), []);
 
-  const onShowGallery = () => {
-    if (isMobile) {
-      toastr.info(t("Common:MobileEditPdfNotAvailableInfo"));
-      return;
-    }
-
-    const initOformFilter = oformsFilter || oformsFilter.getDefault();
-    if (!initOformFilter.locale) initOformFilter.locale = defaultOformLocale;
-
+  const onShowTemplateGallery = () => {
+    setTemplateGalleryVisible(true);
     setOformFromFolderId(currentFolderId);
-
-    navigate(
-      `/form-gallery/${currentFolderId}/filter?${initOformFilter.toUrlParams()}`,
-    );
   };
 
   React.useEffect(() => {
@@ -363,16 +353,7 @@ const ArticleMainButtonContent = (props) => {
 
   const createActionsForFormRoom = React.useCallback(
     (actionList) => {
-      const {
-        formGallery,
-        // uploadActions,
-        // createNewFolder,
-        // showSelectorFormRoomDocx,
-        // createNewDocumentDocx,
-        // createTemplateBlankDocxf,
-        // createNewPresentationPptx,
-        // createNewSpreadsheetXlsx,
-      } = actionList;
+      const { formGallery } = actionList;
 
       const createNewFolder = {
         id: "actions_new-folder",
@@ -399,7 +380,7 @@ const ArticleMainButtonContent = (props) => {
       //   icon: FormReactSvgUrl,
       //   label: t("Common:CreatePDFForm"),
       //   key: "new-form",
-      //   items: [createTemplateBlankDocxf, showSelectorFormRoomDocx],
+      //   items: [createTemplateBlankDocxf],
       // };
 
       const uploadFromDocSpace = {
@@ -463,7 +444,6 @@ const ArticleMainButtonContent = (props) => {
       const mobileMoreActions = null;
       const formRoomActions = [
         // templatePDFForm,
-        // formGallery,
         uploadPDFFrom,
         showSelectorFormRoomDocx,
         {
@@ -480,7 +460,6 @@ const ArticleMainButtonContent = (props) => {
 
       const mobileFormRoomActions = [
         // templatePDFForm,
-        // formGallery,
         uploadPDFFrom,
         showSelectorFormRoomDocx,
         createNewFolder,
@@ -559,26 +538,6 @@ const ArticleMainButtonContent = (props) => {
       key: "pdf",
     };
 
-    const showSelectorDocx = {
-      id: "actions_template_from-file",
-      className: "main-button_drop-down_sub",
-      icon: FormFileReactSvgUrl,
-      label: t("Translations:SubNewFormFile"),
-      onClick: onShowSelectFileDialog,
-      disabled: isPrivateRoom,
-      key: "form-file",
-    };
-
-    const formGallery = {
-      id: "actions_template_oforms-gallery",
-      className: "main-button_drop-down_sub",
-      icon: FormGalleryReactSvgUrl,
-      label: t("Common:OFORMsGallery"),
-      onClick: onShowGallery,
-      disabled: isPrivateRoom,
-      key: "form-gallery",
-    };
-
     const createNewDocumentDocx = {
       id: "actions_new-document",
       className: "main-button_drop-down",
@@ -599,6 +558,16 @@ const ArticleMainButtonContent = (props) => {
       key: "xlsx",
     };
 
+    const showSelectorDocx = {
+      id: "actions_template_from-file",
+      className: "main-button_drop-down_sub",
+      icon: FormFileReactSvgUrl,
+      label: t("Translations:SubNewFormFile"),
+      onClick: onShowSelectFileDialog,
+      disabled: isPrivacy,
+      key: "form-file",
+    };
+
     const createNewFolder = {
       id: "actions_new-folder",
       className: "main-button_drop-down",
@@ -606,6 +575,16 @@ const ArticleMainButtonContent = (props) => {
       label: t("Common:Folder"),
       onClick: onCreate,
       key: "new-folder",
+    };
+
+    const formGallery = {
+      id: "actions_template_oforms-gallery",
+      className: "main-button_drop-down_sub",
+      icon: FormGalleryReactSvgUrl,
+      label: t("Common:TemplateGallery"),
+      onClick: onShowTemplateGallery,
+      disabled: isPrivacy,
+      key: "form-gallery",
     };
 
     const createNewPresentationPptx = {
@@ -639,7 +618,6 @@ const ArticleMainButtonContent = (props) => {
           formGallery,
           newUploadActions,
           // createNewFolder,
-          // showSelectorFormRoomDocx,
           // createNewDocumentDocx,
           // createTemplateBlankDocxf,
           // createNewPresentationPptx,
@@ -662,7 +640,7 @@ const ArticleMainButtonContent = (props) => {
         icon: FormReactSvgUrl,
         label: t("Translations:NewForm"),
         key: "new-form",
-        items: [createTemplateBlankDocxf, showSelectorDocx, formGallery],
+        items: [createTemplateBlankDocxf, showSelectorDocx],
       },
     ];
 
@@ -693,6 +671,24 @@ const ArticleMainButtonContent = (props) => {
         disabled: false,
         key: "more-plugins",
         items: pluginItems,
+      });
+    }
+
+    if (templateGalleryAvailable) {
+      if (isDesktop()) {
+        newActions.push({
+          isSeparator: true,
+          key: "separator",
+        });
+      }
+
+      newActions.push({
+        id: "actions_open-template-gallery",
+        className: "main-button_drop-down",
+        icon: TemplateGalleryReactSvgUrl,
+        label: t("Common:TemplateGallery"),
+        onClick: onShowTemplateGallery,
+        key: "template-gallery",
       });
     }
 
@@ -771,6 +767,8 @@ const ArticleMainButtonContent = (props) => {
     if (!isMobileArticle) visibilityValue = false;
 
     if (isAIRoom && (isChatTab || isResultTab)) visibilityValue = false;
+
+    if (isAIAgentsFolder && aiConfig.aiReadyNeedReset) visibilityValue = false;
 
     return visibilityValue;
   };
@@ -854,7 +852,7 @@ const ArticleMainButtonContent = (props) => {
           label={t("Common:NewAgent")}
           onClick={onCreateAgent}
           $currentColorScheme={currentColorScheme}
-          isDisabled={isDisabled}
+          isDisabled={isDisabled || aiConfig.aiReadyNeedReset}
           size="small"
           primary
           scale
@@ -967,6 +965,8 @@ export default inject(
       currentColorScheme,
       currentDeviceType,
       allowInvitingMembers,
+      aiConfig,
+      templateGalleryAvailable,
       isDesktopClient,
       isEncryptionSupport,
       frameConfig,
@@ -988,7 +988,7 @@ export default inject(
 
     const { showWarningDialog, isWarningRoomsDialog } = currentQuotaStore;
 
-    const { setOformFromFolderId, oformsFilter, defaultOformLocale } =
+    const { setOformFromFolderId, oformsFilter, setTemplateGalleryVisible } =
       oformsStore;
     const { mainButtonItemsList } = pluginStore;
 
@@ -1060,7 +1060,8 @@ export default inject(
       getContactsModel: peopleStore.contextOptionsStore.getContactsModel,
       contactsCanCreate: peopleStore.contextOptionsStore.contactsCanCreate,
       setRefMap,
-      defaultOformLocale,
+      setTemplateGalleryVisible,
+      templateGalleryAvailable,
 
       isChatTab,
       isResultTab,
@@ -1068,6 +1069,8 @@ export default inject(
       isAIRoom: selectedFolderStore.isAIRoom,
       extsFilesVectorized: filesSettingsStore.extsFilesVectorized,
       allowInvitingMembers,
+
+      aiConfig,
     };
   },
 )(

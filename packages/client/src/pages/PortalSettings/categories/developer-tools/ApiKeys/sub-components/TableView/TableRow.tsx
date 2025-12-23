@@ -140,6 +140,7 @@ const TableRow = (props: TableRowProps) => {
             <ApiKeysLifetimeIcon
               t={t}
               item={item}
+              expiresAt={item.expiresAt}
               expiresAtDate={expiresAtDate}
             />
           </div>

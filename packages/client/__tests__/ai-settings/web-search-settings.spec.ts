@@ -76,6 +76,12 @@ test.describe("Web Search", () => {
 
     const resetButton = page.getByTestId("web-search-reset-button");
     await expect(resetButton).toBeDisabled();
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "web-search-settings",
+      "web-search-no-providers.png",
+    ]);
   });
 
   test("should render web search with enabled engine combobox if there are ai providers", async ({
@@ -90,6 +96,12 @@ test.describe("Web Search", () => {
 
     const engineCombobox = page.getByTestId("web-search-engine-combobox");
     await expect(engineCombobox.getByRole("button")).toBeEnabled();
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "web-search-settings",
+      "web-search-has-providers.png",
+    ]);
   });
 
   test("should set web search settings", async ({ page, mockRequest }) => {
@@ -152,6 +164,12 @@ test.describe("Web Search", () => {
     await expect(keyInput).toHaveCount(0);
 
     await expect(resetButton).toBeEnabled();
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "web-search-settings",
+      "web-search-after-setup.png",
+    ]);
   });
 
   test("should reset web search settings", async ({ page, mockRequest }) => {
@@ -205,6 +223,12 @@ test.describe("Web Search", () => {
     await expect(engineCombobox.getByRole("button")).toBeEnabled();
 
     await expect(resetButton).toBeDisabled();
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "web-search-settings",
+      "web-search-after-reset.png",
+    ]);
   });
 
   test("should render combobox with selected exa and empty key input if web search needs reset", async ({
@@ -231,5 +255,11 @@ test.describe("Web Search", () => {
 
     const saveButton = page.getByTestId("web-search-save-button");
     await expect(saveButton).toBeDisabled();
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "web-search-settings",
+      "web-search-need-reset.png",
+    ]);
   });
 });

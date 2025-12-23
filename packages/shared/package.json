@@ -169,6 +169,7 @@
     "storybook-dark-mode": "^4.0.2",
     "style-loader": "3.3.4",
     "ts-node": "10.9.2",
+    "ts-loader": "9.5.4",
     "typescript": "5.9.3",
     "vitest": "4.0.5"
   },

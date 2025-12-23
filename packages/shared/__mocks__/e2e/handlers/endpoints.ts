@@ -156,6 +156,7 @@ import {
   HEADER_EMPTY_FOLDER,
   HEADER_FILTERED_FOLDER,
   HEADER_FILTERED_ROOMS_LIST,
+  CONTEXT_MENU_ROOMS_LIST,
   HEADER_LIST_CAPABILITIES,
   HEADER_ROOMS_LIST,
   HEADER_AI_DISABLED,
@@ -216,6 +217,7 @@ import {
   PATH_SET_DOMAIN,
 } from "./apisystem";
 import type { MethodType } from "../types";
+import { ShareAccessRights } from "../../../enums";
 
 export type TEndpoint = {
   url: string | RegExp;
@@ -344,13 +346,31 @@ export const endpoints = {
   filteredRoomList: {
     url: `${BASE_URL}${PATH_ROOMS_LIST}`,
     dataHandler: () =>
-      roomListHandler(new Headers({ [HEADER_FILTERED_ROOMS_LIST]: "true" })),
+      roomListHandler(
+        new Headers({ [HEADER_FILTERED_ROOMS_LIST]: "true" }),
+        ShareAccessRights.RoomManager,
+      ),
   },
   emptyRoomList: {
     url: `${BASE_URL}${PATH_ROOMS_LIST}`,
     dataHandler: roomListHandler,
   },
-
+  cmRoomListDocAdminManager: {
+    url: `${BASE_URL}${PATH_ROOMS_LIST}`,
+    dataHandler: () =>
+      roomListHandler(
+        new Headers({ [CONTEXT_MENU_ROOMS_LIST]: "true" }),
+        ShareAccessRights.RoomManager,
+      ),
+  },
+  cmRoomListDocAdminContentCreator: {
+    url: `${BASE_URL}${PATH_ROOMS_LIST}`,
+    dataHandler: () =>
+      roomListHandler(
+        new Headers({ [CONTEXT_MENU_ROOMS_LIST]: "true" }),
+        ShareAccessRights.Collaborator,
+      ),
+  },
   folder: {
     url: `${BASE_URL}${PATH_FOLDER}`,
     dataHandler: folderHandler,

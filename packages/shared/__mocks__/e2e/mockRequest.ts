@@ -38,7 +38,7 @@ export class MockRequest {
           const method = route.request().method();
 
           if (endpoint.method && endpoint.method !== method) {
-            await route.continue();
+            await route.fallback();
             return;
           }
 

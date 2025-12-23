@@ -147,7 +147,11 @@ const EditMCPDialogComponent = ({
     >
       <ModalDialog.Header>{t("AISettings:MCPServer")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <form onSubmit={onSubmitAction} className={styles.bodyContainer}>
+        <form
+          onSubmit={onSubmitAction}
+          className={styles.bodyContainer}
+          data-testid="edit-mcp-form"
+        >
           <div className={styles.connectDocspace}>
             <Text className={styles.connectDocspaceDescription}>
               {t("AISettings:ConnectProductToYourDataAndTools", {
@@ -188,6 +192,7 @@ const EditMCPDialogComponent = ({
           onClick={handleSubmitClick}
           isLoading={loading}
           isDisabled={!hasChanges}
+          testId="mcp-save-button"
         />
         <Button
           size={ButtonSize.normal}

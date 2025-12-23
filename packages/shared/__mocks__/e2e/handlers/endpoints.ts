@@ -173,12 +173,32 @@ import {
   aiAgentsHandler,
   PATH_AI_PROVIDERS,
   aiProvidersHandler,
+  aiProvidersPostHandler,
+  aiProvidersDeleteHandler,
+  aiProvidersPutHandler,
+  PATH_AI_PROVIDER,
+  PATH_AI_PROVIDERS_AVAILABLE,
+  aiProvidersAvailableHandler,
   PATH_AI_MODELS,
   aiModelsHandler,
   PATH_AI_SERVER,
   aiServerHandler,
+  PATH_AI_SERVERS_AVAILABLE,
+  aiServersAvailableHandler,
+  PATH_AI_SERVERS_WITH_FILTER,
+  aiServersGetHandler,
+  aiServersPostHandler,
   PATH_AI_SERVERS,
-  aiServersHandler,
+  aiServersDeleteHandler,
+  aiServerPutHandler,
+  PATH_AI_CONFIG_WEB_SEARCH,
+  aiWebSearchGetHandler,
+  aiWebSearchPutHandler,
+  PATH_AI_CONFIG_VECTORIZATION,
+  aiVectorizationGetHandler,
+  aiVectorizationPutHandler,
+  PATH_AI_SERVER_STATUS,
+  aiServerStatusPutHandler,
 } from "./ai";
 import { PATH_TAGS, roomTagsHandler } from "./rooms";
 import {
@@ -447,6 +467,33 @@ export const endpoints = {
     url: `${BASE_URL}${PATH_AI_PROVIDERS}`,
     dataHandler: aiProvidersHandler,
   },
+  aiProvidersListNeedReset: {
+    url: `${BASE_URL}${PATH_AI_PROVIDERS}`,
+    dataHandler: () => aiProvidersHandler({ needReset: true }),
+  },
+  aiProvidersEmptyList: {
+    url: `${BASE_URL}${PATH_AI_PROVIDERS}`,
+    dataHandler: () => aiProvidersHandler({ isEmpty: true }),
+  },
+  createAiProvider: {
+    url: `${BASE_URL}${PATH_AI_PROVIDERS}`,
+    dataHandler: aiProvidersPostHandler,
+    method: "POST",
+  },
+  deleteAiProvider: {
+    url: `${BASE_URL}${PATH_AI_PROVIDERS}`,
+    dataHandler: aiProvidersDeleteHandler,
+    method: "DELETE",
+  },
+  updateAiProvider: {
+    url: `${BASE_URL}${PATH_AI_PROVIDER}`,
+    dataHandler: aiProvidersPutHandler,
+    method: "PUT",
+  },
+  aiProvidersAvailable: {
+    url: `${BASE_URL}${PATH_AI_PROVIDERS_AVAILABLE}`,
+    dataHandler: aiProvidersAvailableHandler,
+  },
   aiModelsClaude: {
     url: `${BASE_URL}${PATH_AI_MODELS}`,
     dataHandler: () => aiModelsHandler({ isClaude: true }),
@@ -463,13 +510,88 @@ export const endpoints = {
     url: `${BASE_URL}${PATH_AI_MODELS}`,
     dataHandler: () => aiModelsHandler({ isOpenRouter: true }),
   },
+  aiModelsError: {
+    url: `${BASE_URL}${PATH_AI_MODELS}`,
+    dataHandler: () => aiModelsHandler({ isError: true }),
+  },
   aiServer: {
     url: `${BASE_URL}${PATH_AI_SERVER}`,
     dataHandler: aiServerHandler,
   },
-  aiServers: {
+  aiServersAvailable: {
+    url: `${BASE_URL}${PATH_AI_SERVERS_AVAILABLE}`,
+    dataHandler: aiServersAvailableHandler,
+  },
+  aiServersList: {
+    url: `${BASE_URL}${PATH_AI_SERVERS_WITH_FILTER}`,
+    dataHandler: aiServersGetHandler,
+  },
+  aiServersListDisabled: {
+    url: `${BASE_URL}${PATH_AI_SERVERS_WITH_FILTER}`,
+    dataHandler: () => aiServersGetHandler("disabled"),
+  },
+  aiServersListNeedReset: {
+    url: `${BASE_URL}${PATH_AI_SERVERS_WITH_FILTER}`,
+    dataHandler: () => aiServersGetHandler("needReset"),
+  },
+  createAiServer: {
     url: `${BASE_URL}${PATH_AI_SERVERS}`,
-    dataHandler: aiServersHandler,
+    dataHandler: aiServersPostHandler,
+    method: "POST",
+  },
+  deleteAiServer: {
+    url: `${BASE_URL}${PATH_AI_SERVERS}`,
+    dataHandler: aiServersDeleteHandler,
+    method: "DELETE",
+  },
+  updateAiServer: {
+    url: `${BASE_URL}${PATH_AI_SERVER}`,
+    dataHandler: aiServerPutHandler,
+    method: "PUT",
+  },
+  enableAiServer: {
+    url: `${BASE_URL}${PATH_AI_SERVER_STATUS}`,
+    dataHandler: () => aiServerStatusPutHandler("enable"),
+    method: "PUT",
+  },
+  disableAiServer: {
+    url: `${BASE_URL}${PATH_AI_SERVER_STATUS}`,
+    dataHandler: () => aiServerStatusPutHandler("disable"),
+    method: "PUT",
+  },
+  aiWebSearchEnabled: {
+    url: `${BASE_URL}${PATH_AI_CONFIG_WEB_SEARCH}`,
+    dataHandler: () => aiWebSearchGetHandler("enabled"),
+  },
+  aiWebSearchDisabled: {
+    url: `${BASE_URL}${PATH_AI_CONFIG_WEB_SEARCH}`,
+    dataHandler: () => aiWebSearchGetHandler("disabled"),
+  },
+  aiWebSearchNeedReset: {
+    url: `${BASE_URL}${PATH_AI_CONFIG_WEB_SEARCH}`,
+    dataHandler: () => aiWebSearchGetHandler("needReset"),
+  },
+  setWebSearchSettings: {
+    url: `${BASE_URL}${PATH_AI_CONFIG_WEB_SEARCH}`,
+    dataHandler: aiWebSearchPutHandler,
+    method: "PUT",
+  },
+  aiVectorizationSettingsEnabled: {
+    url: `${BASE_URL}${PATH_AI_CONFIG_VECTORIZATION}`,
+    dataHandler: () => aiVectorizationGetHandler("enabled"),
+  },
+  aiVectorizationSettingsDisabled: {
+    url: `${BASE_URL}${PATH_AI_CONFIG_VECTORIZATION}`,
+    dataHandler: () => aiVectorizationGetHandler("disabled"),
+  },
+  aiVectorizationSettingsNeedReset: {
+    url: `${BASE_URL}${PATH_AI_CONFIG_VECTORIZATION}`,
+    dataHandler: () => aiVectorizationGetHandler("needReset"),
+  },
+  setVectorizationSettings: {
+    url: `${BASE_URL}${PATH_AI_CONFIG_VECTORIZATION}`,
+    dataHandler: aiVectorizationPutHandler,
+    method: "PUT",
   },
   additionalSettings: {
     url: `${BASE_URL}${PATH_SETTINGS_ADDITIONAL}`,

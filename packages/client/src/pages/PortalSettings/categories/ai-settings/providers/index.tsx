@@ -145,7 +145,10 @@ const AIProviderComponent = ({
 
   return (
     <div className={styles.aiProvider}>
-      <Text className={styles.description}>
+      <Text
+        className={styles.description}
+        dataTestId="provider-section-description"
+      >
         {t("AISettings:AIProviderSettingDescription", {
           productName: t("Common:ProductName"),
         })}
@@ -164,6 +167,7 @@ const AIProviderComponent = ({
         </Link>
       ) : null}
       <Button
+        testId="add-provider-button"
         primary
         size={ButtonSize.small}
         label={t("AISettings:AddAIProvider")}
@@ -172,7 +176,7 @@ const AIProviderComponent = ({
         onClick={showAddProviderDialog}
       />
 
-      <div className={styles.providerList}>
+      <div data-testid="ai-provider-list" className={styles.providerList}>
         {aiProviders?.map((provider) => (
           <AiProviderTile
             key={provider.id}

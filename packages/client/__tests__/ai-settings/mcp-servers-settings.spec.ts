@@ -103,6 +103,8 @@ test.describe("MCP servers", () => {
       }
     }
 
+    await addMcpButton.hover();
+
     await expect(page).toHaveScreenshot([
       "desktop",
       "mcp-servers-settings",

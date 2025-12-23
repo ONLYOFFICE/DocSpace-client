@@ -77,6 +77,8 @@ test.describe("Web Search", () => {
     const resetButton = page.getByTestId("web-search-reset-button");
     await expect(resetButton).toBeDisabled();
 
+    await saveButton.hover();
+
     await expect(page).toHaveScreenshot([
       "desktop",
       "web-search-settings",

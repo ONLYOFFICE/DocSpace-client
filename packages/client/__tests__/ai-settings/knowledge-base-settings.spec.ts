@@ -81,6 +81,8 @@ test.describe("Knowledge base", () => {
     const resetButton = page.getByTestId("knowledge-reset-button");
     await expect(resetButton).toBeDisabled();
 
+    await saveButton.hover();
+
     await expect(page).toHaveScreenshot([
       "desktop",
       "knowledge-base-settings",

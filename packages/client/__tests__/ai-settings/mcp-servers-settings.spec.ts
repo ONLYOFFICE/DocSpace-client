@@ -63,12 +63,18 @@ test.describe("MCP servers", () => {
   }) => {
     await mockRequest.router([
       endpoints.aiServersList,
-      endpoints.aiProvidersEmptyList,
+      endpoints.aiProvidersList,
     ]);
     await page.goto("/portal-settings/ai-settings/servers");
 
     await expect(page.getByTestId("custom-mcp-list")).toBeVisible();
     await expect(page.getByTestId("system-mcp-list")).toBeVisible();
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "mcp-servers-settings",
+      "mcp-servers.png",
+    ]);
   });
 
   test("should render disabled elements on mcp servers page if there are no ai providers", async ({
@@ -96,6 +102,12 @@ test.describe("MCP servers", () => {
         await expect(contextMenuBtn).toHaveAttribute("aria-disabled", "true");
       }
     }
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "mcp-servers-settings",
+      "mcp-servers-no-providers.png",
+    ]);
   });
 
   test("should render enabled elements on mcp servers page if there are ai providers", async ({
@@ -123,6 +135,12 @@ test.describe("MCP servers", () => {
         await expect(contextMenuBtn).toHaveAttribute("aria-disabled", "false");
       }
     }
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "mcp-servers-settings",
+      "mcp-servers-has-providers.png",
+    ]);
   });
 
   test("should add mcp server", async ({ page, mockRequest }) => {
@@ -199,6 +217,12 @@ test.describe("MCP servers", () => {
     });
 
     await expect(customMcpTiles).toHaveCount(2);
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "mcp-servers-settings",
+      "mcp-servers-after-add.png",
+    ]);
   });
 
   test("should delete mcp server", async ({ page, mockRequest }) => {
@@ -252,6 +276,12 @@ test.describe("MCP servers", () => {
     expect(payload).toEqual({ servers: [customMcpData.id] });
 
     await expect(customMcpTiles).toHaveCount(0);
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "mcp-servers-settings",
+      "mcp-servers-after-delete.png",
+    ]);
   });
 
   test("should update mcp server", async ({ page, mockRequest }) => {
@@ -346,6 +376,12 @@ test.describe("MCP servers", () => {
       },
       updateIcon: true,
     });
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "mcp-servers-settings",
+      "mcp-servers-after-update.png",
+    ]);
   });
 
   test("should disable mcp server", async ({ page, mockRequest }) => {
@@ -398,6 +434,12 @@ test.describe("MCP servers", () => {
     });
 
     await expect(toggleButton).toHaveAttribute("aria-checked", "false");
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "mcp-servers-settings",
+      "mcp-servers-after-disable-custom-server.png",
+    ]);
   });
 
   test("should enable mcp server", async ({ page, mockRequest }) => {
@@ -444,6 +486,12 @@ test.describe("MCP servers", () => {
     });
 
     await expect(toggleButton).toHaveAttribute("aria-checked", "true");
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "mcp-servers-settings",
+      "mcp-servers-after-enable-custom-server.png",
+    ]);
   });
 
   test("should render alert icon and headers inputs in error state if mcp needs reset", async ({
@@ -469,6 +517,12 @@ test.describe("MCP servers", () => {
     const toggle = firstCustomMcpTile.getByTestId("toggle-button-input");
     await expect(toggle).toBeDisabled();
 
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "mcp-servers-settings",
+      "mcp-servers-tile-need-reset.png",
+    ]);
+
     const contextMenuBtn = firstCustomMcpTile.getByTestId(
       "mcp-context-menu-button",
     );
@@ -491,5 +545,11 @@ test.describe("MCP servers", () => {
     );
     await expect(mcpHeaderValueInput).toBeVisible();
     await expect(mcpHeaderValueInput).toHaveAttribute("data-error", "true");
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "mcp-servers-settings",
+      "mcp-servers-update-dialog-need-reset.png",
+    ]);
   });
 });

@@ -69,6 +69,29 @@ test.describe("Profile", () => {
     ]);
   });
 
+   test("should change language", async ({ page, mockRequest }) => {
+    await mockRequest.router([endpoints.updateUserCultureFr]);
+
+    await page.goto("/profile/login");
+
+    const mainProfile = page.getByTestId("main-profile");
+    await expect(mainProfile).toBeVisible();
+
+    const languageComboBox = page.getByTestId("language_combo_box").first();
+    await expect(languageComboBox).toBeVisible();
+    await languageComboBox.click();
+
+    const language = page.getByTestId("drop_down_item_fr").first();
+    await language.click();
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "profile",
+      "profile-fr.png",
+    ]);
+  });
+
+
    test("should navigate to profile with social networks", async ({ page, mockRequest }) => {
     await mockRequest.setHeaders(endpoints.thirdPartyProvider.url, [
       HEADER_LIST_THIRD_PARTY_PROVIDERS,

@@ -257,4 +257,42 @@ test.describe("Profile", () => {
       "profile-interface-theme.png",
     ]);
   });
+
+   test("should navigate to profile authorized apps tab with empty clients", async ({ page, mockRequest }) => {    
+    await mockRequest.router([
+        endpoints.oauthToken,
+        endpoints.oauthScopes,
+        endpoints.oauthEmptyClients,
+    ]);
+
+    await page.goto("/profile/authorized-apps");
+
+    const authorizedApps = page.getByTestId("profile-authorized-apps");
+    await expect(authorizedApps).toBeVisible();
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "profile",
+      "profile-authorized-apps-empty.png",
+    ]);
+  });
+
+   test("should navigate to profile authorized apps tab", async ({ page, mockRequest }) => {
+    await mockRequest.router([
+        endpoints.oauthToken,
+        endpoints.oauthScopes,
+        endpoints.oauthClients,
+    ]);
+
+    await page.goto("/profile/authorized-apps");
+
+    const authorizedApps = page.getByTestId("profile-authorized-apps");
+    await expect(authorizedApps).toBeVisible();
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "profile",
+      "profile-authorized-apps.png",
+    ]);
+  });
 });

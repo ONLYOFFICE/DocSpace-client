@@ -258,6 +258,31 @@ test.describe("Profile", () => {
     ]);
   });
 
+   test("should change interface theme to dark", async ({ page, mockRequest }) => {
+    await mockRequest.router([endpoints.theme]);
+
+    await page.goto("/profile/interface-theme");
+
+    const interfaceTheme = page.getByTestId("profile-interface-theme");
+    await expect(interfaceTheme).toBeVisible();
+
+    const darkThemeButton = page.getByTestId("theme_Dark_radio_button");
+    await expect(darkThemeButton).toBeVisible();
+    await darkThemeButton.click();
+
+    await page.route("*/**/logo.ashx**", async (route) => {
+      await route.fulfill({
+        path: `../../public/images/logo/dark_loginpage.svg`,
+      });
+    });
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "profile",
+      "profile-interface-theme-dark.png",
+    ]);
+  });
+
    test("should navigate to profile authorized apps tab with empty clients", async ({ page, mockRequest }) => {    
     await mockRequest.router([
         endpoints.oauthToken,

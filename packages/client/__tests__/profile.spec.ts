@@ -138,4 +138,123 @@ test.describe("Profile", () => {
       "profile-reset-app-dialog.png",
     ]);
   });
+
+   test("should navigate to profile notifications tab", async ({ page, mockRequest }) => {
+    await mockRequest.router([
+        endpoints.notifications0, 
+        endpoints.notifications1, 
+        endpoints.notifications2, 
+        endpoints.notifications3,
+        endpoints.notificationChannels,
+        endpoints.notificationTelegramCheck
+    ]);
+
+    await page.goto("/profile/notifications");
+
+    const notifications = page.getByTestId("profile-notifications");
+    await expect(notifications).toBeVisible();
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "profile",
+      "profile-notifications.png",
+    ]);
+  });
+
+   test("should navigate to profile notifications tab with telegram configured", async ({ page, mockRequest }) => {
+    await mockRequest.router([
+        endpoints.notifications0, 
+        endpoints.notifications1, 
+        endpoints.notifications2, 
+        endpoints.notifications3,
+        endpoints.notificationChannelsWithTelegram,
+        endpoints.notificationTelegramCheck
+    ]);
+
+    await page.goto("/profile/notifications");
+
+    const notifications = page.getByTestId("profile-notifications");
+    await expect(notifications).toBeVisible();
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "profile",
+      "profile-notifications-telegram-configured.png",
+    ]);
+  });
+
+   test("should navigate to profile notifications tab with telegram connect dialog", async ({ page, mockRequest }) => {
+    await mockRequest.router([
+        endpoints.notifications0, 
+        endpoints.notifications1, 
+        endpoints.notifications2, 
+        endpoints.notifications3,
+        endpoints.notificationChannelsWithTelegram,
+        endpoints.notificationTelegramCheck,
+        endpoints.notificationTelegramLink
+    ]);
+
+    await page.goto("/profile/notifications");
+
+    const notifications = page.getByTestId("profile-notifications");
+    await expect(notifications).toBeVisible();
+
+    const telegramConnect = page.getByTestId("profile-telegram-connect");
+    await expect(telegramConnect).toBeVisible();
+    await telegramConnect.click();
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "profile",
+      "profile-notifications-telegram-connect-dialog.png",
+    ]);
+  });
+
+   test("should navigate to profile notifications tab with telegram connected", async ({ page, mockRequest }) => {
+    await mockRequest.router([
+        endpoints.notifications0, 
+        endpoints.notifications1, 
+        endpoints.notifications2, 
+        endpoints.notifications3,
+        endpoints.notificationChannelsWithTelegram,
+        endpoints.notificationTelegramCheckLinked,
+    ]);
+
+    await page.goto("/profile/notifications");
+
+    const notifications = page.getByTestId("profile-notifications");
+    await expect(notifications).toBeVisible();
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "profile",
+      "profile-notifications-telegram-connected.png",
+    ]);
+  });
+
+   test("should navigate to profile file management tab", async ({ page }) => {
+    await page.goto("/profile/file-management");
+
+    const fileManagement = page.getByTestId("profile-file-management");
+    await expect(fileManagement).toBeVisible();
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "profile",
+      "profile-file-management.png",
+    ]);
+  });
+
+   test("should navigate to profile interface theme tab", async ({ page }) => {
+    await page.goto("/profile/interface-theme");
+
+    const interfaceTheme = page.getByTestId("profile-interface-theme");
+    await expect(interfaceTheme).toBeVisible();
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "profile",
+      "profile-interface-theme.png",
+    ]);
+  });
 });

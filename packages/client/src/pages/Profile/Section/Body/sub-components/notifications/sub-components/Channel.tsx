@@ -140,6 +140,7 @@ const getChannelContent = (
 
   return (
     <Link
+      dataTestId="profile-telegram-connect"
       fontSize="13px"
       fontWeight={600}
       isHovered

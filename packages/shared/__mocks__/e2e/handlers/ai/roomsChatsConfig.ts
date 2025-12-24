@@ -26,39 +26,25 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { ChatFooterProps } from "../../Chat.types";
-import { ChatInfoBlock } from "../chat-info-block";
-import ChatInput from "../chat-input";
-import styles from "./ChatFooter.module.scss";
+import { API_PREFIX, BASE_URL } from "../../utils";
 
-const ChatFooter = ({
-  isLoading,
-  aiReady,
-  isPortalAdmin,
-  standalone,
-  attachmentFile,
-  clearAttachmentFile,
-  getIcon,
-  selectedModel,
-  toolsSettings,
-}: ChatFooterProps) => {
-  return (
-    <div className={styles.chatFooter} data-testid="chat-footer">
-      {!isLoading && !aiReady ? (
-        <ChatInfoBlock standalone={standalone} isPortalAdmin={isPortalAdmin} />
-      ) : null}
-      <ChatInput
-        attachmentFile={attachmentFile}
-        clearAttachmentFile={clearAttachmentFile}
-        isLoading={isLoading}
-        getIcon={getIcon}
-        selectedModel={selectedModel}
-        toolsSettings={toolsSettings}
-        isPortalAdmin={isPortalAdmin}
-        aiReady={aiReady}
-      />
-    </div>
-  );
+export const PATH_AI_ROOMS_CHATS_CONFIG = "ai/rooms/*/chats/config";
+
+const successAllEnabled = {
+  response: {
+    webSearchEnabled: true,
+  },
+  count: 1,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_ROOMS_CHATS_CONFIG}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
 };
 
-export default ChatFooter;
+export const aiRoomsChatsConfigHandler = () => {
+  return new Response(JSON.stringify(successAllEnabled));
+};

@@ -26,39 +26,47 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { ChatFooterProps } from "../../Chat.types";
-import { ChatInfoBlock } from "../chat-info-block";
-import ChatInput from "../chat-input";
-import styles from "./ChatFooter.module.scss";
+import { API_PREFIX, BASE_URL } from "../../utils";
 
-const ChatFooter = ({
-  isLoading,
-  aiReady,
-  isPortalAdmin,
-  standalone,
-  attachmentFile,
-  clearAttachmentFile,
-  getIcon,
-  selectedModel,
-  toolsSettings,
-}: ChatFooterProps) => {
-  return (
-    <div className={styles.chatFooter} data-testid="chat-footer">
-      {!isLoading && !aiReady ? (
-        <ChatInfoBlock standalone={standalone} isPortalAdmin={isPortalAdmin} />
-      ) : null}
-      <ChatInput
-        attachmentFile={attachmentFile}
-        clearAttachmentFile={clearAttachmentFile}
-        isLoading={isLoading}
-        getIcon={getIcon}
-        selectedModel={selectedModel}
-        toolsSettings={toolsSettings}
-        isPortalAdmin={isPortalAdmin}
-        aiReady={aiReady}
-      />
-    </div>
-  );
+export const PATH_AI_CHAT_MESSAGES = "ai/chats/*/messages?*";
+
+const successEmpty = {
+  response: [
+    {
+      id: 111,
+      role: 1,
+      contents: [
+        {
+          type: 0,
+          text: "## Hi\n\nI’m here and ready to help inside DocSpace.\n\n## What you can do next\n- Ask about **rooms, folders, files, users, and permissions**\n- Describe a collaboration task (e.g., “set up a room for project X with view-only access for guests”), and I’ll guide you step by step",
+        },
+      ],
+      createdOn: "2025-12-24T16:54:36.0000000+01:00",
+    },
+    {
+      id: 110,
+      role: 0,
+      contents: [
+        {
+          type: 0,
+          text: "Test message",
+        },
+      ],
+      createdOn: "2025-12-24T16:54:34.0000000+01:00",
+    },
+  ],
+  count: 2,
+  total: 2,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_CHAT_MESSAGES}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
 };
 
-export default ChatFooter;
+export const aiChatMessagesHandler = () => {
+  return new Response(JSON.stringify(successEmpty));
+};

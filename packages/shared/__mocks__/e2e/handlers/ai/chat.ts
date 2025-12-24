@@ -26,39 +26,45 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { ChatFooterProps } from "../../Chat.types";
-import { ChatInfoBlock } from "../chat-info-block";
-import ChatInput from "../chat-input";
-import styles from "./ChatFooter.module.scss";
+import { API_PREFIX, BASE_URL } from "../../utils";
 
-const ChatFooter = ({
-  isLoading,
-  aiReady,
-  isPortalAdmin,
-  standalone,
-  attachmentFile,
-  clearAttachmentFile,
-  getIcon,
-  selectedModel,
-  toolsSettings,
-}: ChatFooterProps) => {
-  return (
-    <div className={styles.chatFooter} data-testid="chat-footer">
-      {!isLoading && !aiReady ? (
-        <ChatInfoBlock standalone={standalone} isPortalAdmin={isPortalAdmin} />
-      ) : null}
-      <ChatInput
-        attachmentFile={attachmentFile}
-        clearAttachmentFile={clearAttachmentFile}
-        isLoading={isLoading}
-        getIcon={getIcon}
-        selectedModel={selectedModel}
-        toolsSettings={toolsSettings}
-        isPortalAdmin={isPortalAdmin}
-        aiReady={aiReady}
-      />
-    </div>
-  );
+export const PATH_AI_CHAT = "ai/chats/*";
+
+const successEmpty = {
+  response: {
+    id: "test-chat-id",
+    title: "Greeting and Introduction Conversation",
+    createdOn: "2025-12-24T15:49:21.0000000+01:00",
+    modifiedOn: "2025-12-24T15:49:21.0000000+01:00",
+    createdBy: {
+      id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
+      displayName: "Administrator ",
+      avatar:
+        "/static/images/default_user_photo_size_82-82.png?hash=1340933600",
+      avatarOriginal:
+        "/static/images/default_user_photo_size_200-200.png?hash=1340933600",
+      avatarMax:
+        "/static/images/default_user_photo_size_200-200.png?hash=1340933600",
+      avatarMedium:
+        "/static/images/default_user_photo_size_48-48.png?hash=1340933600",
+      avatarSmall:
+        "/static/images/default_user_photo_size_32-32.png?hash=1340933600",
+      profileUrl: "",
+      hasAvatar: false,
+      isAnonim: false,
+    },
+  },
+  count: 1,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_CHAT}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
 };
 
-export default ChatFooter;
+export const aiChatHandler = () => {
+  return new Response(JSON.stringify(successEmpty));
+};

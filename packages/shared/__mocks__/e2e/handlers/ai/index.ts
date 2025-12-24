@@ -73,3 +73,13 @@ export {
   aiVectorizationPutHandler,
   PATH_AI_CONFIG_VECTORIZATION,
 } from "./vectorization";
+
+export * from "./roomsChatsConfig";
+
+export * from "./roomsServers";
+
+export * from "./roomsChats";
+
+export * from "./chat";
+
+export * from "./chatMessages";

@@ -51,3 +51,5 @@ export * from "./recent";
 export * from "./favorites";
 
 export * from "./documents";
+
+export * from "./agentFolder";

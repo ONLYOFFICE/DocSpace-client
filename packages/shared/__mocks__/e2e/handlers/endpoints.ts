@@ -147,6 +147,8 @@ import {
   PATH_MY_DOCUMENTS,
   myDocumentsHandler,
   getFileInfoHandler,
+  PATH_AGENT_FOLDER,
+  agentFolderHandler,
 } from "./files";
 import { capabilitiesHandler, PATH_CAPABILITIES } from "./capabilities";
 
@@ -199,6 +201,15 @@ import {
   aiVectorizationPutHandler,
   PATH_AI_SERVER_STATUS,
   aiServerStatusPutHandler,
+  PATH_AI_ROOMS_CHATS_CONFIG,
+  aiRoomsChatsConfigHandler,
+  PATH_AI_ROOMS_SERVERS,
+  aiRoomsServersHandler,
+  aiRoomsChatsHandler,
+  PATH_AI_CHAT,
+  aiChatHandler,
+  PATH_AI_CHAT_MESSAGES,
+  aiChatMessagesHandler,
 } from "./ai";
 import { PATH_TAGS, roomTagsHandler } from "./rooms";
 import {
@@ -216,6 +227,7 @@ import {
   PATH_SET_DOMAIN,
 } from "./apisystem";
 import type { MethodType } from "../types";
+import { PATH_AI_ROOMS_CHATS } from "./ai/roomsChats";
 
 export type TEndpoint = {
   url: string | RegExp;
@@ -364,6 +376,10 @@ export const endpoints = {
     url: `${BASE_URL}${PATH_FOLDER}`,
     dataHandler: () =>
       folderHandler(new Headers({ [HEADER_EMPTY_FOLDER]: "true" })),
+  },
+  agentFolder: {
+    url: PATH_AGENT_FOLDER,
+    dataHandler: agentFolderHandler,
   },
   addGuest: {
     url: `${BASE_URL}${PATH_ADD_GUEST}`,
@@ -592,6 +608,26 @@ export const endpoints = {
     url: `${BASE_URL}${PATH_AI_CONFIG_VECTORIZATION}`,
     dataHandler: aiVectorizationPutHandler,
     method: "PUT",
+  },
+  aiChat: {
+    url: `${BASE_URL}${PATH_AI_CHAT}`,
+    dataHandler: aiChatHandler,
+  },
+  aiChatMessages: {
+    url: `${BASE_URL}${PATH_AI_CHAT_MESSAGES}`,
+    dataHandler: aiChatMessagesHandler,
+  },
+  aiRoomsChatsConfigAllEnabled: {
+    url: `${BASE_URL}${PATH_AI_ROOMS_CHATS_CONFIG}`,
+    dataHandler: aiRoomsChatsConfigHandler,
+  },
+  aiRoomsServersEmpty: {
+    url: `${BASE_URL}${PATH_AI_ROOMS_SERVERS}`,
+    dataHandler: aiRoomsServersHandler,
+  },
+  aiRoomsChatsEmpty: {
+    url: `${BASE_URL}${PATH_AI_ROOMS_CHATS}`,
+    dataHandler: aiRoomsChatsHandler,
   },
   additionalSettings: {
     url: `${BASE_URL}${PATH_SETTINGS_ADDITIONAL}`,

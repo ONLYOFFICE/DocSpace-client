@@ -24,46 +24,66 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Page } from "@playwright/test";
+import { API_PREFIX, BASE_URL } from "../../utils";
 
-import { TEndpoint } from "./handlers";
+export const PATH_TFA_APP_SETTINGS = "settings/tfaapp";
 
-export class MockRequest {
-  constructor(public readonly page: Page) {}
+const tfaAppSettingsSuccess = {
+  response: [
+    {
+      id: "sms",
+      title: "By SMS",
+      enabled: false,
+      avaliable: false,
+    },
+    {
+      id: "app",
+      title: "By authenticator app",
+      enabled: false,
+      avaliable: true,
+    },
+  ],
+  count: 2,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_TFA_APP_SETTINGS}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
 
-  async router(endpoints: TEndpoint[]) {
-    await Promise.all(
-      endpoints.map(async (endpoint) => {
-        return this.page.route(endpoint.url, async (route) => {
-          const method = route.request().method();
+const tfaAppSettingsEnabledSuccess = {
+  response: [
+    {
+      id: "sms",
+      title: "By SMS",
+      enabled: false,
+      avaliable: false,
+    },
+    {
+      id: "app",
+      title: "By authenticator app",
+      enabled: true,
+      avaliable: true,
+    },
+  ],
+  count: 2,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_TFA_APP_SETTINGS}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
 
-          if (endpoint.method && endpoint.method !== method) {
-            await route.fallback();
-            return;
-          }
+export const tfaAppSettingsHandler = (): Response => {
+  return new Response(JSON.stringify(tfaAppSettingsSuccess));
+};
 
-          const requestHeaders = new Headers(route.request().headers());
-          const response = endpoint.dataHandlerWithHeaders
-            ? endpoint.dataHandlerWithHeaders(requestHeaders)
-            : endpoint.dataHandler();
-          const json = await response.json();
-
-          await route.fulfill({ json, status: json.statusCode ?? 200 });
-        });
-      }),
-    );
-  }
-
-  async setHeaders(url: string | RegExp, headers: string[]) {
-    await this.page.route(url, async (route, request) => {
-      const objHeaders: { [key: string]: "true" } = {};
-      headers.forEach((item) => (objHeaders[item] = "true"));
-
-      const newHeaders = {
-        ...request.headers(),
-        ...objHeaders,
-      };
-      await route.fallback({ headers: newHeaders });
-    });
-  }
-}
+export const tfaAppSettingsEnabledHandler = (): Response => {
+  return new Response(JSON.stringify(tfaAppSettingsEnabledSuccess));
+};

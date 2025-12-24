@@ -27,6 +27,7 @@
 export {
   thirdPartyProvider as thirdPartyProviderHandler,
   successThirdpartyProviders,
+  PATH as THIRD_PARTY_PROVIDER_PATH,
 } from "./thirdPartyProviders";
 
 export {

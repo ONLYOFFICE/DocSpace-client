@@ -24,46 +24,40 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Page } from "@playwright/test";
+import { API_PREFIX, BASE_URL } from "../../utils";
 
-import { TEndpoint } from "./handlers";
+export const PATH_ACTIVE_CONNECTIONS = "security/activeconnections";
 
-export class MockRequest {
-  constructor(public readonly page: Page) {}
+const activeConnectionsSuccess = {
+  response: {
+    loginEvent: 1,
+    items: [
+      {
+        id: 1,
+        tenantId: 1,
+        userId: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
+        mobile: false,
+        ip: "1.1.1.1",
+        country: "",
+        city: "",
+        browser: "Chrome 143",
+        platform: "Mac OS X 10 Apple Mac",
+        date: "2025-12-23T00:29:48.0000000+03:00",
+        page: `${BASE_URL}/wizard`,
+      },
+    ],
+  },
+  count: 1,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_ACTIVE_CONNECTIONS}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
 
-  async router(endpoints: TEndpoint[]) {
-    await Promise.all(
-      endpoints.map(async (endpoint) => {
-        return this.page.route(endpoint.url, async (route) => {
-          const method = route.request().method();
-
-          if (endpoint.method && endpoint.method !== method) {
-            await route.fallback();
-            return;
-          }
-
-          const requestHeaders = new Headers(route.request().headers());
-          const response = endpoint.dataHandlerWithHeaders
-            ? endpoint.dataHandlerWithHeaders(requestHeaders)
-            : endpoint.dataHandler();
-          const json = await response.json();
-
-          await route.fulfill({ json, status: json.statusCode ?? 200 });
-        });
-      }),
-    );
-  }
-
-  async setHeaders(url: string | RegExp, headers: string[]) {
-    await this.page.route(url, async (route, request) => {
-      const objHeaders: { [key: string]: "true" } = {};
-      headers.forEach((item) => (objHeaders[item] = "true"));
-
-      const newHeaders = {
-        ...request.headers(),
-        ...objHeaders,
-      };
-      await route.fallback({ headers: newHeaders });
-    });
-  }
-}
+export const activeConnectionsHandler = (): Response => {
+  return new Response(JSON.stringify(activeConnectionsSuccess));
+};

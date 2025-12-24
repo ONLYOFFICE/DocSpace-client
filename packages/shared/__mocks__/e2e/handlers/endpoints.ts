@@ -48,6 +48,8 @@ import {
   roomAdminSuccess,
   visitorSuccess,
   regularUserSuccess,
+  thirdPartyProviderHandler,
+  THIRD_PARTY_PROVIDER_PATH,
 } from "./people";
 import {
   colorThemeHandler,
@@ -94,6 +96,13 @@ import {
   PATH_STORAGE_REGIONS,
   encryptionSettingsHandler,
   PATH_ENCRYPTION_SETTINGS,
+  tfaAppSettingsHandler,
+  tfaAppSettingsEnabledHandler,
+  PATH_TFA_APP_SETTINGS,
+  activeConnectionsHandler,
+  PATH_ACTIVE_CONNECTIONS,
+  tfaAppCodesHandler,
+  PATH_TFA_APP_CODES,
 } from "./settings";
 import {
   CONTINUE_PATH,
@@ -220,6 +229,7 @@ import type { MethodType } from "../types";
 export type TEndpoint = {
   url: string | RegExp;
   dataHandler: () => Response;
+  dataHandlerWithHeaders?: (headers: Headers) => Response;
   method?: MethodType;
 };
 
@@ -807,5 +817,26 @@ export const endpoints = {
     url: `${API_SYSTEM_URL}/${PATH_SET_DOMAIN}`,
     dataHandler: setDomainHandler,
     method: "POST",
+  },
+  tfaAppSettings: {
+    url: `${BASE_URL}${PATH_TFA_APP_SETTINGS}`,
+    dataHandler: tfaAppSettingsHandler,
+  },
+  tfaAppSettingsEnabled: {
+    url: `${BASE_URL}${PATH_TFA_APP_SETTINGS}`,
+    dataHandler: tfaAppSettingsEnabledHandler,
+  },
+  tfaAppCodes: {
+    url: `${BASE_URL}${PATH_TFA_APP_CODES}`,
+    dataHandler: tfaAppCodesHandler,
+  },
+  activeConnections: {
+    url: `${BASE_URL}${PATH_ACTIVE_CONNECTIONS}`,
+    dataHandler: activeConnectionsHandler,
+  },
+  thirdPartyProvider: {
+    url: `${BASE_URL}${THIRD_PARTY_PROVIDER_PATH}`,
+    dataHandler: () => thirdPartyProviderHandler(),
+    dataHandlerWithHeaders: (headers) => thirdPartyProviderHandler(headers),
   },
 } satisfies TEndpoints;

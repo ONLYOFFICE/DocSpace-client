@@ -130,12 +130,65 @@ const successBaseElements = {
   statusCode: 200,
 };
 
+const successCodeBlock = {
+  response: [
+    {
+      id: 111,
+      role: 1,
+      contents: [
+        {
+          type: 0,
+          text:
+            "```js\n" +
+            "function generateSequence(seed) {\n" +
+            "  let value = seed ?? 1;\n" +
+            "  const out = [];\n" +
+            "  for (let i = 0; i < 10; i++) {\n" +
+            "    value = (value * 1664525 + 1013904223) >>> 0;\n" +
+            "    const normalized = value / 0xffffffff;\n" +
+            "    out.push(Number(normalized.toFixed(6)));\n" +
+            "  }\n" +
+            "  const sum = out.reduce((a, b) => a + b, 0);\n" +
+            "  const avg = sum / out.length;\n" +
+            "  return { out, sum: Number(sum.toFixed(6)), avg: Number(avg.toFixed(6)) };\n" +
+            "}\n" +
+            "```",
+        },
+      ],
+      createdOn: "2025-12-24T16:54:36.0000000+01:00",
+    },
+    {
+      id: 110,
+      role: 0,
+      contents: [
+        {
+          type: 0,
+          text: "Test message",
+        },
+      ],
+      createdOn: "2025-12-24T16:54:34.0000000+01:00",
+    },
+  ],
+  count: 2,
+  total: 2,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_CHAT_MESSAGES}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
 export const aiChatMessagesHandler = (
-  type: "default" | "baseElements" = "default",
+  type: "default" | "baseElements" | "codeBlock" = "default",
 ) => {
   switch (type) {
     case "baseElements":
       return new Response(JSON.stringify(successBaseElements));
+    case "codeBlock":
+      return new Response(JSON.stringify(successCodeBlock));
     default:
       return new Response(JSON.stringify(successDefault));
   }

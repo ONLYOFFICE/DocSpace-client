@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "",
   "scripts": {
-    "build": "webpack --mode production --env lint=false && node ../shared/scripts/postbuild-copy-sw.cjs",
+    "build": "webpack --mode production --env lint=false && shx cp ../../public/sw.js dist",
     "build:translations": "node scripts/buildTranslations.js",
     "clean": "shx rm -rf dist",
     "deploy": "shx --silent mkdir -p ../../../publish/web/client && shx cp -r dist/* ../../../publish/web/client",

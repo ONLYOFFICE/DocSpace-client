@@ -236,6 +236,17 @@ import {
   telegramLinkHandler,
   telegramCheckLinkedHandler,
 } from "./notification";
+import {
+  tokenHandler,
+  PATH_OAUTH_TOKEN,
+  scopesHandler,
+  scopesHandlerWithHeaders,
+  PATH_OAUTH_SCOPES,
+  clientsEmptyHandler,
+  clientsHandler,
+  PATH_OAUTH_CLIENTS,
+} from "./oauth";
+
 import type { MethodType } from "../types";
 
 export type TEndpoint = {
@@ -886,5 +897,21 @@ export const endpoints = {
   notificationTelegramCheckLinked: {
     url: `${BASE_URL}${PATH_TELEGRAM_CHECK}`,
     dataHandler: telegramCheckLinkedHandler,
+  },
+  oauthToken: {
+    url: `${BASE_URL}${PATH_OAUTH_TOKEN}`,
+    dataHandler: tokenHandler,
+  },
+  oauthScopes: {
+    url: `${BASE_URL}${PATH_OAUTH_SCOPES}`,
+    dataHandler: scopesHandler,
+  },
+  oauthEmptyClients: {
+    url: PATH_OAUTH_CLIENTS,
+    dataHandler: clientsEmptyHandler,
+  },
+  oauthClients: {
+    url: PATH_OAUTH_CLIENTS,
+    dataHandler: clientsHandler,
   },
 } satisfies TEndpoints;

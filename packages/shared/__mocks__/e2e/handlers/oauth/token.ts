@@ -24,16 +24,24 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export { getClientHandler, successClient } from "./client";
-export {
-  oauthListSignIn,
-  oauthSignInHelper,
-  oauthSignIn,
-  OAUTH_SIGN_IN_PATH,
-} from "./signIn";
+import { BASE_URL, API_PREFIX } from "../../utils";
 
-export * from "./scopes";
+export const PATH_OAUTH_TOKEN = "security/oauth2/token";
 
-export * from "./token";
+const tokenSuccess = {
+  response:
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlYzgwZmEzYy02M2EwLTRlYTYtYWRmNy1kNTU3ZGIzMWRhNDAiLCJ1c2VyX2lkIjoiZWM4MGZhM2MtNjNhMC00ZWE2LWFkZjctZDU1N2RiMzFkYTQwIiwidXNlcl9uYW1lIjoiVmlrdG9yIEZvbWluIiwidXNlcl9lbWFpbCI6InZpa3Rvci5mb21pbkBvbmx5b2ZmaWNlLmNvbSIsInRlbmFudF9pZCI6IjE4NCIsInRlbmFudF91cmwiOiJodHRwczovL3V6YmVraXN0YW4ub25seW9mZmljZS5pbyIsImlzX2FkbWluIjoidHJ1ZSIsImlzX2d1ZXN0IjoiZmFsc2UiLCJpc19wdWJsaWMiOiJmYWxzZSIsImV4cCI6MTc2NjU3MzM3NCwiaXNzIjoiaHR0cHM6Ly91emJla2lzdGFuLm9ubHlvZmZpY2UuaW8iLCJhdWQiOiJodHRwczovL3V6YmVraXN0YW4ub25seW9mZmljZS5pbyJ9.o8hMouVNMuITkiYkD7XVFzJv7e6cFOl3SqgYinzyM_g",
+  count: 1,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_OAUTH_TOKEN}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
 
-export * from "./clients";
+export const tokenHandler = (): Response => {
+  return new Response(JSON.stringify(tokenSuccess));
+};

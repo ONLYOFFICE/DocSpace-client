@@ -139,4 +139,24 @@ test.describe("AI chat", () => {
       "ai-chat-ai-message-code-block.png",
     ]);
   });
+
+  test("should render ai message with table", async ({ page, mockRequest }) => {
+    await mockRequest.router([
+      endpoints.aiRoomsChatsConfigAllEnabled,
+      endpoints.aiRoomsServersEmpty,
+      endpoints.aiRoomsChatsEmpty,
+      endpoints.agentFolder,
+      endpoints.aiChat,
+      endpoints.aiChatMessagesTable,
+    ]);
+    await page.goto("/ai-agents/2/chat?folder=2&chat=test-chat-id");
+
+    await expect(page.getByTestId("ai-message")).toBeVisible();
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "ai-chat",
+      "ai-chat-ai-message-table.png",
+    ]);
+  });
 });

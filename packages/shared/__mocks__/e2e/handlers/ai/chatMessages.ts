@@ -181,14 +181,59 @@ const successCodeBlock = {
   statusCode: 200,
 };
 
+const successTable = {
+  response: [
+    {
+      id: 111,
+      role: 1,
+      contents: [
+        {
+          type: 0,
+          text:
+            "| Column 1 | Column 2 | Column 3 | Column 4 |\n" +
+            "|---------:|----------|----------|----------|\n" +
+            "| Row 1-1  | Row 1-2  | Row 1-3  | Row 1-4  |\n" +
+            "| Row 2-1  | Row 2-2  | Row 2-3  | Row 2-4  |\n" +
+            "| Row 3-1  | Row 3-2  | Row 3-3  | Row 3-4  |\n" +
+            "| Row 4-1  | Row 4-2  | Row 4-3  | Row 4-4  |",
+        },
+      ],
+      createdOn: "2025-12-24T16:54:36.0000000+01:00",
+    },
+    {
+      id: 110,
+      role: 0,
+      contents: [
+        {
+          type: 0,
+          text: "Test message",
+        },
+      ],
+      createdOn: "2025-12-24T16:54:34.0000000+01:00",
+    },
+  ],
+  count: 2,
+  total: 2,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_CHAT_MESSAGES}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
 export const aiChatMessagesHandler = (
-  type: "default" | "baseElements" | "codeBlock" = "default",
+  type: "default" | "baseElements" | "codeBlock" | "table" = "default",
 ) => {
   switch (type) {
     case "baseElements":
       return new Response(JSON.stringify(successBaseElements));
     case "codeBlock":
       return new Response(JSON.stringify(successCodeBlock));
+    case "table":
+      return new Response(JSON.stringify(successTable));
     default:
       return new Response(JSON.stringify(successDefault));
   }

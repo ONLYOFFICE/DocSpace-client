@@ -224,6 +224,18 @@ import {
   setDomainHandler,
   PATH_SET_DOMAIN,
 } from "./apisystem";
+import {
+  notificationsHandler,
+  PATH_NOTIFICATIONS,
+  PATH_NOTIFICATIONS_CHANNELS,
+  PATH_TELEGRAM_CHECK,
+  channelsHandler,
+  telegramCheckHandler,
+  channelsHandlerWithTelegram,
+  PATH_TELEGRAM_LINK,
+  telegramLinkHandler,
+  telegramCheckLinkedHandler,
+} from "./notification";
 import type { MethodType } from "../types";
 
 export type TEndpoint = {
@@ -838,5 +850,41 @@ export const endpoints = {
     url: `${BASE_URL}${THIRD_PARTY_PROVIDER_PATH}`,
     dataHandler: () => thirdPartyProviderHandler(),
     dataHandlerWithHeaders: (headers) => thirdPartyProviderHandler(headers),
+  },
+  notifications0: {
+    url: `${BASE_URL}${PATH_NOTIFICATIONS}/0`,
+    dataHandler: () => notificationsHandler(0),
+  },
+  notifications1: {
+    url: `${BASE_URL}${PATH_NOTIFICATIONS}/1`,
+    dataHandler: () => notificationsHandler(1),
+  },
+  notifications2: {
+    url: `${BASE_URL}${PATH_NOTIFICATIONS}/2`,
+    dataHandler: () => notificationsHandler(2),
+  },
+  notifications3: {
+    url: `${BASE_URL}${PATH_NOTIFICATIONS}/3`,
+    dataHandler: () => notificationsHandler(3),
+  },
+  notificationChannels: {
+    url: `${BASE_URL}${PATH_NOTIFICATIONS_CHANNELS}`,
+    dataHandler: channelsHandler,
+  },
+  notificationChannelsWithTelegram: {
+    url: `${BASE_URL}${PATH_NOTIFICATIONS_CHANNELS}`,
+    dataHandler: channelsHandlerWithTelegram,
+  },
+  notificationTelegramCheck: {
+    url: `${BASE_URL}${PATH_TELEGRAM_CHECK}`,
+    dataHandler: telegramCheckHandler,
+  },
+  notificationTelegramLink: {
+    url: `${BASE_URL}${PATH_TELEGRAM_LINK}`,
+    dataHandler: telegramLinkHandler,
+  },
+  notificationTelegramCheckLinked: {
+    url: `${BASE_URL}${PATH_TELEGRAM_CHECK}`,
+    dataHandler: telegramCheckLinkedHandler,
   },
 } satisfies TEndpoints;

@@ -50,6 +50,7 @@ import type {
   TTimeZone,
   TVersionBuild,
 } from "../api/settings/types";
+import type { TPrivacyRoomRequest } from "../api/privacy/types";
 import { toastr } from "../components/toast";
 import type { TData } from "../components/toast/Toast.type";
 import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "../constants";
@@ -1147,12 +1148,12 @@ class SettingsStore {
     this.encryptionKeys = keys ?? {};
   };
 
-  setEncryptionKeys = async (keys: { [key: string]: string | boolean }) => {
+  setEncryptionKeys = async (keys: TPrivacyRoomRequest) => {
     await api.privacy.setEncryptionKeys(keys);
     this.updateInStoreEncryptionKeys(keys);
   };
 
-  updateEncryptionKeys = async (keys: { [key: string]: string | boolean }) => {
+  updateEncryptionKeys = async (keys: TPrivacyRoomRequest) => {
     await api.privacy.updateEncryptionKeys(keys);
     this.updateInStoreEncryptionKeys(keys);
   };

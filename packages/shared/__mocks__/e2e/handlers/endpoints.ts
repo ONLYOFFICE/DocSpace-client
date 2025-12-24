@@ -242,7 +242,6 @@ import {
   tokenHandler,
   PATH_OAUTH_TOKEN,
   scopesHandler,
-  scopesHandlerWithHeaders,
   PATH_OAUTH_SCOPES,
   clientsEmptyHandler,
   clientsHandler,
@@ -293,6 +292,10 @@ export const endpoints = {
   updateUserCultureLv: {
     url: `${BASE_URL}${PATH_UPDATE_USER_CULTURE}`,
     dataHandler: () => updateUserCultureHandler("lv"),
+  },
+  updateUserCultureFr: {
+    url: `${BASE_URL}${PATH_UPDATE_USER_CULTURE}`,
+    dataHandler: () => updateUserCultureHandler("fr"),
   },
   removeUser: {
     url: `${BASE_URL}${SELF_PATH_DELETE_USER}`,

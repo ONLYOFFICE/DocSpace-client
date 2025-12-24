@@ -50,6 +50,8 @@ import {
   regularUserSuccess,
   thirdPartyProviderHandler,
   THIRD_PARTY_PROVIDER_PATH,
+  themeProvider,
+  PATH_THEME,
 } from "./people";
 import {
   colorThemeHandler,
@@ -913,5 +915,10 @@ export const endpoints = {
   oauthClients: {
     url: PATH_OAUTH_CLIENTS,
     dataHandler: clientsHandler,
+  },
+  theme: {
+    url: `${BASE_URL}${PATH_THEME}`,
+    dataHandler: themeProvider,
+    method: "PUT",
   },
 } satisfies TEndpoints;

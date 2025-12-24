@@ -1148,19 +1148,17 @@ class SettingsStore {
   };
 
   setEncryptionKeys = async (keys: { [key: string]: string | boolean }) => {
-    await api.files.setEncryptionKeys(keys);
-
+    await api.privacy.setEncryptionKeys(keys);
     this.updateInStoreEncryptionKeys(keys);
   };
 
   updateEncryptionKeys = async (keys: { [key: string]: string | boolean }) => {
-    await api.files.updateEncryptionKeys(keys);
-
+    await api.privacy.updateEncryptionKeys(keys);
     this.updateInStoreEncryptionKeys(keys);
   };
 
   getEncryptionKeys = async () => {
-    const encryptionKeys = await api.files.getEncryptionKeys();
+    const encryptionKeys = await api.privacy.getEncryptionKeys();
 
     this.updateInStoreEncryptionKeys(encryptionKeys);
   };

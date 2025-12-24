@@ -1230,51 +1230,6 @@ export async function getIsEncryptionSupport() {
   return res;
 }
 
-export async function setEncryptionKeys(data: {
-  [key: string]: string | boolean;
-}) {
-  console.log("setEncryptionKeys api: ", data);
-
-  const options: AxiosRequestConfig = {
-    method: "post",
-    url: "privacyroom/keys",
-    data,
-  };
-
-  const res = (await request(options)) as { [key: string]: string | boolean };
-
-  return res;
-}
-
-export async function updateEncryptionKeys(data: {
-  [key: string]: string | boolean;
-}) {
-  console.log("updateEncryptionKeys api: ", data);
-
-  const options: AxiosRequestConfig = {
-    method: "put",
-    url: "privacyroom/keys",
-    data,
-  };
-
-  const res = (await request(options)) as { [key: string]: string | boolean };
-
-  return res;
-}
-
-export async function getEncryptionKeys() {
-  console.log("getEncryptionKeys api");
-
-  const options: AxiosRequestConfig = {
-    method: "get",
-    url: "privacyroom/keys",
-  };
-
-  const res = (await request(options)) as { [key: string]: string | boolean };
-
-  return res;
-}
-
 export async function getEncryptionAccess(fileId: number | string) {
   const res = (await request({
     method: "get",

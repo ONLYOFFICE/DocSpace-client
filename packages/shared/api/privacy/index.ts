@@ -24,50 +24,67 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// @ts-nocheck
+import { request } from "../client";
 
-import Filter from "./people/filter";
-import FilesFilter from "./files/filter";
-import RoomsFilter from "./rooms/filter";
-import OformsFilter from "./oforms/filter";
-import * as people from "./people";
-import * as user from "./user";
-import * as settings from "./settings";
-import * as modules from "./modules";
-import * as portal from "./portal";
-import * as groups from "./groups";
-import * as files from "./files";
-import * as rooms from "./rooms";
-import * as plugins from "./plugins";
-import * as management from "./management";
-import * as oforms from "./oforms";
-import * as oauth from "./oauth";
-import * as debuginfo from "./debuginfo";
-import * as apiKeys from "./api-keys";
-import * as backup from "./backup";
-import * as ai from "./ai";
-import * as privacy from "./privacy";
+export async function getPrivacySettings() {
+  const res = (await request({
+    method: "get",
+    url: "privacyroom",
+  })) as boolean;
 
-export default {
-  Filter,
-  FilesFilter,
-  RoomsFilter,
-  OformsFilter,
-  people,
-  user,
-  settings,
-  modules,
-  portal,
-  backup,
-  groups,
-  files,
-  rooms,
-  plugins,
-  oforms,
-  oauth,
-  management,
-  debuginfo,
-  apiKeys,
-  ai,
-  privacy,
-};
+  return res;
+}
+
+export async function updatePrivacySettings(data: {
+  [key: string]: string | boolean;
+}) {
+  const res = (await request({
+    method: "put",
+    url: "privacyroom",
+    data,
+  })) as boolean;
+
+  return res;
+}
+
+export async function setEncryptionKeys(data: {
+  [key: string]: string | boolean;
+}) {
+  const res = (await request({
+    method: "post",
+    url: "privacyroom/keys",
+    data,
+  })) as { [key: string]: string | boolean };
+
+  return res;
+}
+
+export async function updateEncryptionKeys(data: {
+  [key: string]: string | boolean;
+}) {
+  const res = (await request({
+    method: "put",
+    url: "privacyroom/keys",
+    data,
+  })) as { [key: string]: string | boolean };
+
+  return res;
+}
+
+export async function getEncryptionKeys() {
+  const res = (await request({
+    method: "get",
+    url: "privacyroom/keys",
+  })) as { [key: string]: string | boolean };
+
+  return res;
+}
+
+export async function getPublicKeysWithAccess(fileId: number | string) {
+  const res = (await request({
+    method: "get",
+    url: `privacyroom/access/${fileId}`,
+  })) as { [key: string]: string | boolean };
+
+  return res;
+}

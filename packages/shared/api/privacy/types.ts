@@ -24,65 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { request } from "../client";
-import type {
-  TPrivacyRoomRequest,
-  TPrivacySettingsRequest,
-  TEncryptionKeyPair,
-} from "./types";
+export type TPrivacyRoomRequest = {
+  publickey: string;
+  privateKeyEnc: string;
+  update?: boolean;
+};
 
-export async function getPrivacySettings() {
-  const res = (await request({
-    method: "get",
-    url: "privacyroom",
-  })) as boolean;
+export type TPrivacySettingsRequest = {
+  enabled?: boolean;
+};
 
-  return res;
-}
-
-export async function updatePrivacySettings(data: TPrivacySettingsRequest) {
-  const res = (await request({
-    method: "put",
-    url: "privacyroom",
-    data,
-  })) as boolean;
-
-  return res;
-}
-
-export async function setEncryptionKeys(data: TPrivacyRoomRequest) {
-  const res = (await request({
-    method: "post",
-    url: "privacyroom/keys",
-    data,
-  })) as boolean;
-
-  return res;
-}
-
-export async function updateEncryptionKeys(data: TPrivacyRoomRequest) {
-  const res = (await request({
-    method: "put",
-    url: "privacyroom/keys",
-    data,
-  })) as boolean;
-
-  return res;
-}
-
-export async function getEncryptionKeys() {
-  const res = (await request({
-    method: "get",
-    url: "privacyroom/keys",
-  })) as TEncryptionKeyPair;
-  return res;
-}
-
-export async function getPublicKeysWithAccess(fileId: number | string) {
-  const res = (await request({
-    method: "get",
-    url: `privacyroom/access/${fileId}`,
-  })) as TEncryptionKeyPair[];
-
-  return res;
-}
+export type TEncryptionKeyPair = {
+  privateKeyEnc: string;
+  publickey: string;
+  userId: string;
+};

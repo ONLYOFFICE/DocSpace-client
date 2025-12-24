@@ -248,7 +248,7 @@ const MCPServersComponent = ({
         primary
         size={ButtonSize.small}
         label={t("AISettings:AddMCPServer", {
-          mcpServer: t("Common:MCPSettingTitle"),
+          mcpServer: t("Common:MCPServer"),
         })}
         scale={false}
         className={styles.addProviderButton}

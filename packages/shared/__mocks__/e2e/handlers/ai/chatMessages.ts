@@ -30,7 +30,7 @@ import { API_PREFIX, BASE_URL } from "../../utils";
 
 export const PATH_AI_CHAT_MESSAGES = "ai/chats/*/messages?*";
 
-const successEmpty = {
+const successDefault = {
   response: [
     {
       id: 111,
@@ -67,6 +67,76 @@ const successEmpty = {
   statusCode: 200,
 };
 
-export const aiChatMessagesHandler = () => {
-  return new Response(JSON.stringify(successEmpty));
+const successBaseElements = {
+  response: [
+    {
+      id: 111,
+      role: 1,
+      contents: [
+        {
+          type: 0,
+          text:
+            "\n" +
+            "# Level One Heading\n" +
+            "\n" +
+            "## Level Two Heading\n" +
+            "\n" +
+            "### Level Three Heading\n" +
+            "\n" +
+            "#### Level Four Heading\n" +
+            "\n" +
+            "##### Level Five Heading\n" +
+            "\n" +
+            "###### Level Six Heading\n" +
+            "\n" +
+            "Regular Paragraph\n" +
+            "\n" +
+            "[Link](https://example.com)\n" +
+            "\n" +
+            "> Quote\n" +
+            "\n" +
+            "1. Numbered List  \n" +
+            "2. Numbered List  \n" +
+            "3. Numbered List  \n" +
+            "\n" +
+            "- Bulleted List  \n" +
+            "- Bulleted List  \n" +
+            "- Bulleted List",
+        },
+      ],
+      createdOn: "2025-12-24T16:54:36.0000000+01:00",
+    },
+    {
+      id: 110,
+      role: 0,
+      contents: [
+        {
+          type: 0,
+          text: "Test message",
+        },
+      ],
+      createdOn: "2025-12-24T16:54:34.0000000+01:00",
+    },
+  ],
+  count: 2,
+  total: 2,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_CHAT_MESSAGES}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+export const aiChatMessagesHandler = (
+  type: "default" | "baseElements" = "default",
+) => {
+  switch (type) {
+    case "baseElements":
+      return new Response(JSON.stringify(successBaseElements));
+    default:
+      return new Response(JSON.stringify(successDefault));
+  }
 };

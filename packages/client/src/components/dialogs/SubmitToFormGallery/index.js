@@ -33,6 +33,7 @@ import { Trans, withTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 import FilesSelector from "SRC_DIR/components/FilesSelector";
 import { toastr } from "@docspace/shared/components/toast";
+import { useEventListener } from "@docspace/shared/hooks/useEventListener";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
@@ -55,6 +56,8 @@ const SubmitToFormGallery = ({
   const [guideLink, setGuideLink] = useState(null);
 
   const abortControllerRef = useRef(new AbortController());
+
+  const keydownOptionsRef = useRef({ capture: true, passive: false });
 
   let formItemIsSet = !!formItem;
 
@@ -125,6 +128,48 @@ const SubmitToFormGallery = ({
       })
       .finally(() => onClose());
   };
+
+  useEventListener(
+    "keydown",
+    (e) => {
+      if (!visible) return;
+      if (isSelectingForm) return;
+
+      const target = e.target;
+      const tagName = target?.tagName;
+      const isEditable =
+        tagName === "INPUT" ||
+        tagName === "TEXTAREA" ||
+        Boolean(target?.isContentEditable);
+
+      if (isEditable) return;
+
+      if (e.key === "Escape") {
+        e.preventDefault();
+        e.stopPropagation();
+        onClose();
+        return;
+      }
+
+      if (e.key === "Enter") {
+        if (e.repeat) return;
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        if (!formItem) {
+          onOpenFormSelector();
+          return;
+        }
+
+        if (!isSubmitting) {
+          void onSubmitToGallery();
+        }
+      }
+    },
+    undefined,
+    keydownOptionsRef.current,
+  );
 
   useEffect(() => {
     (async () => {

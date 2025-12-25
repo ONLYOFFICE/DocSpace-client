@@ -140,8 +140,10 @@ const TilesContainer: FC<TilesContainerProps> = (props) => {
       id="scroll-template-gallery"
       ref={scrollRef}
       paddingInlineEnd="16px"
+      tabIndex={null}
     >
       <Tiles
+        hotkeysResetKey={ext}
         isShowOneTile={showOneTile}
         smallPreview={
           ext === FILE_EXTENSIONS.PPTX || ext === FILE_EXTENSIONS.XLSX

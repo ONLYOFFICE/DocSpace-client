@@ -27,6 +27,7 @@
 import { inject, observer } from "mobx-react";
 import { useState, useEffect, useMemo } from "react";
 import { withTranslation } from "react-i18next";
+import type { Key } from "react";
 
 import { Portal } from "@docspace/shared/components/portal";
 import { Backdrop } from "@docspace/shared/components/backdrop";
@@ -35,7 +36,7 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import { Button } from "@docspace/shared/components/button";
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
 import { TTranslation } from "@docspace/shared/types";
-
+import { useEventListener } from "@docspace/shared/hooks/useEventListener";
 import TilesContainer from "./TilesContainer";
 import ErrorView from "./ErrorView";
 import { useMobileDetection } from "./hooks/useMobileDetection";
@@ -57,6 +58,8 @@ const TemplateGallery = (props: {
   filterOformsByLocaleIsLoading: boolean;
   categoryFilterLoaded: boolean;
   languageFilterLoaded: boolean;
+  setIsVisibleInfoPanelTemplateGallery: (visible: boolean) => void;
+  setGallerySelected: (item: { id: Key | null | undefined } | null) => void;
 }) => {
   const {
     templateGalleryVisible,
@@ -71,6 +74,8 @@ const TemplateGallery = (props: {
     filterOformsByLocaleIsLoading,
     categoryFilterLoaded,
     languageFilterLoaded,
+    setIsVisibleInfoPanelTemplateGallery,
+    setGallerySelected,
   } = props;
 
   const isMobileView = useMobileDetection();
@@ -82,6 +87,41 @@ const TemplateGallery = (props: {
     initTemplateGallery().then(() => setIsInitLoading(false));
     setCurrentExtensionGallery(FILE_EXTENSIONS.DOCX);
   }, []);
+
+  useEffect(() => {
+    if (!templateGalleryVisible) return;
+
+    const originalBodyOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    // Disable the main section scroll to prevent scroll chaining (desktop)
+    const sectionScroll = document.querySelector(
+      ".section-scroll",
+    ) as HTMLElement | null;
+    const originalSectionOverflow = sectionScroll?.style.overflow;
+    if (sectionScroll) {
+      sectionScroll.style.overflow = "hidden";
+    }
+
+    // Disable the mobile scroll container
+    const mobileScroll = document.querySelector(
+      "#customScrollBar > .scroll-wrapper > .scroller",
+    ) as HTMLElement | null;
+    const originalMobileOverflow = mobileScroll?.style.overflow;
+    if (mobileScroll) {
+      mobileScroll.style.overflow = "hidden";
+    }
+
+    return () => {
+      document.body.style.overflow = originalBodyOverflow;
+      if (sectionScroll) {
+        sectionScroll.style.overflow = originalSectionOverflow || "";
+      }
+      if (mobileScroll) {
+        mobileScroll.style.overflow = originalMobileOverflow || "";
+      }
+    };
+  }, [templateGalleryVisible]);
 
   useEffect(() => {
     if (
@@ -97,6 +137,16 @@ const TemplateGallery = (props: {
     categoryFilterLoaded,
     languageFilterLoaded,
   ]);
+
+  const onCloseClick = () => {
+    setIsVisibleInfoPanelTemplateGallery(false);
+    setGallerySelected(null);
+    setTemplateGalleryVisible(false);
+  };
+
+  useEventListener("keydown", (e: KeyboardEvent) => {
+    if (e.key === "Escape") onCloseClick();
+  });
 
   const tabs = useMemo(
     () => [
@@ -154,8 +204,6 @@ const TemplateGallery = (props: {
     const fileExtension = getExtensionFromTabId(tabId);
     setCurrentExtensionGallery(fileExtension);
   };
-
-  const onCloseClick = () => setTemplateGalleryVisible(false);
 
   const onOpenSubmitToGalleryDialog = () =>
     setSubmitToGalleryDialogVisible(true);
@@ -278,6 +326,8 @@ export default inject<TStore>(({ oformsStore, dialogsStore }) => {
     categoryFilterLoaded,
     languageFilterLoaded,
     oformsNetworkError,
+    setIsVisibleInfoPanelTemplateGallery,
+    setGallerySelected,
   } = oformsStore;
 
   const { setSubmitToGalleryDialogVisible } = dialogsStore;
@@ -294,5 +344,7 @@ export default inject<TStore>(({ oformsStore, dialogsStore }) => {
     categoryFilterLoaded,
     languageFilterLoaded,
     oformsNetworkError,
+    setIsVisibleInfoPanelTemplateGallery,
+    setGallerySelected,
   };
 })(withTranslation("Common")(observer(TemplateGallery)));

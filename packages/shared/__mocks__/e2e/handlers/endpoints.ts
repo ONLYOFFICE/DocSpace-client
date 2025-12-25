@@ -147,8 +147,12 @@ import {
   PATH_MY_DOCUMENTS,
   myDocumentsHandler,
   getFileInfoHandler,
-  PATH_AGENT_FOLDER,
-  agentFolderHandler,
+  PATH_AGENT_FOLDER_CHAT,
+  agentFolderChatHandler,
+  PATH_AGENT_FOLDER_INFO,
+  agentFolderInfoHandler,
+  agentFolderResultStorageHandler,
+  PATH_AGENT_FOLDER_RESULT_STORAGE,
 } from "./files";
 import { capabilitiesHandler, PATH_CAPABILITIES } from "./capabilities";
 
@@ -377,9 +381,29 @@ export const endpoints = {
     dataHandler: () =>
       folderHandler(new Headers({ [HEADER_EMPTY_FOLDER]: "true" })),
   },
-  agentFolder: {
-    url: PATH_AGENT_FOLDER,
-    dataHandler: agentFolderHandler,
+  agentFolderChat: {
+    url: PATH_AGENT_FOLDER_CHAT,
+    dataHandler: agentFolderChatHandler,
+  },
+  agentFolderChatCanNotUseChat: {
+    url: PATH_AGENT_FOLDER_CHAT,
+    dataHandler: () => agentFolderChatHandler("canNotUseChat"),
+  },
+  agentFolderResultStorage: {
+    url: PATH_AGENT_FOLDER_RESULT_STORAGE,
+    dataHandler: agentFolderResultStorageHandler,
+  },
+  agentFolderResultStorageCanNotUseChat: {
+    url: PATH_AGENT_FOLDER_RESULT_STORAGE,
+    dataHandler: () => agentFolderResultStorageHandler("canNotUseChat"),
+  },
+  agentFolderInfo: {
+    url: PATH_AGENT_FOLDER_INFO,
+    dataHandler: agentFolderInfoHandler,
+  },
+  agentFolderInfoCanNotUseChat: {
+    url: PATH_AGENT_FOLDER_INFO,
+    dataHandler: () => agentFolderInfoHandler("canNotUseChat"),
   },
   addGuest: {
     url: `${BASE_URL}${PATH_ADD_GUEST}`,

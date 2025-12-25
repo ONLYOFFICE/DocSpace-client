@@ -26,6 +26,7 @@
 import { endpoints } from "@docspace/shared/__mocks__/e2e";
 
 import { expect, test } from "./fixtures/base";
+import { SearchArea } from "@docspace/shared/enums";
 
 test.describe("AI chat", () => {
   test.beforeEach(async ({ mockRequest }) => {
@@ -66,9 +67,14 @@ test.describe("AI chat", () => {
         endpoints.aiRoomsChatsConfigAllEnabled,
         endpoints.aiRoomsServersEmpty,
         endpoints.aiRoomsChatsEmpty,
-        endpoints.agentFolder,
+        endpoints.agentFolderChat,
       ]);
       await page.goto("/ai-agents/2/chat?folder=2");
+
+      const containerLoader = page.getByTestId("chat-container-loading");
+
+      await expect(containerLoader).toBeVisible();
+      await containerLoader.waitFor({ state: "hidden" });
 
       await expect(page.getByTestId("chat-container")).toBeVisible();
 
@@ -87,11 +93,16 @@ test.describe("AI chat", () => {
         endpoints.aiRoomsChatsConfigAllEnabled,
         endpoints.aiRoomsServersEmpty,
         endpoints.aiRoomsChatsEmpty,
-        endpoints.agentFolder,
+        endpoints.agentFolderChat,
         endpoints.aiConfigDisabled,
         endpoints.aiProvidersEmptyList,
       ]);
       await page.goto("/ai-agents/2/chat?folder=2");
+
+      const containerLoader = page.getByTestId("chat-container-loading");
+
+      await expect(containerLoader).toBeVisible();
+      await containerLoader.waitFor({ state: "hidden" });
 
       const emptyView = page.getByTestId("empty-view");
       await expect(emptyView).toBeVisible();
@@ -116,11 +127,16 @@ test.describe("AI chat", () => {
         endpoints.aiRoomsChatsConfigAllEnabled,
         endpoints.aiRoomsServersEmpty,
         endpoints.aiRoomsChats,
-        endpoints.agentFolder,
+        endpoints.agentFolderChat,
         endpoints.aiConfigDisabled,
         endpoints.aiProvidersEmptyList,
       ]);
       await page.goto("/ai-agents/2/chat?folder=2");
+
+      const containerLoader = page.getByTestId("chat-container-loading");
+
+      await expect(containerLoader).toBeVisible();
+      await containerLoader.waitFor({ state: "hidden" });
 
       await expect(page.getByTestId("chat-header")).toBeVisible();
 
@@ -147,12 +163,17 @@ test.describe("AI chat", () => {
         endpoints.aiRoomsChatsConfigAllEnabled,
         endpoints.aiRoomsServersEmpty,
         endpoints.aiRoomsChats,
-        endpoints.agentFolder,
+        endpoints.agentFolderChat,
         endpoints.aiChat,
         endpoints.aiChatMessages,
         endpoints.aiConfigDisabled,
       ]);
       await page.goto("/ai-agents/2/chat?folder=2&chat=test-chat-id");
+
+      const containerLoader = page.getByTestId("chat-container-loading");
+
+      await expect(containerLoader).toBeVisible();
+      await containerLoader.waitFor({ state: "hidden" });
 
       await expect(page.getByTestId("chat-info-block")).toBeVisible();
 
@@ -189,11 +210,16 @@ test.describe("AI chat", () => {
         endpoints.aiRoomsChatsConfigAllEnabled,
         endpoints.aiRoomsServersEmpty,
         endpoints.aiRoomsChatsEmpty,
-        endpoints.agentFolder,
+        endpoints.agentFolderChat,
         endpoints.aiChat,
         endpoints.aiChatMessages,
       ]);
       await page.goto("/ai-agents/2/chat?folder=2&chat=test-chat-id");
+
+      const containerLoader = page.getByTestId("chat-container-loading");
+
+      await expect(containerLoader).toBeVisible();
+      await containerLoader.waitFor({ state: "hidden" });
 
       await expect(page.getByTestId("user-message")).toBeVisible();
       await expect(page.getByTestId("ai-message")).toBeVisible();
@@ -213,11 +239,16 @@ test.describe("AI chat", () => {
         endpoints.aiRoomsChatsConfigAllEnabled,
         endpoints.aiRoomsServersEmpty,
         endpoints.aiRoomsChatsEmpty,
-        endpoints.agentFolder,
+        endpoints.agentFolderChat,
         endpoints.aiChat,
         endpoints.aiChatMessagesBaseElements,
       ]);
       await page.goto("/ai-agents/2/chat?folder=2&chat=test-chat-id");
+
+      const containerLoader = page.getByTestId("chat-container-loading");
+
+      await expect(containerLoader).toBeVisible();
+      await containerLoader.waitFor({ state: "hidden" });
 
       await expect(page.getByTestId("ai-message")).toBeVisible();
 
@@ -236,11 +267,16 @@ test.describe("AI chat", () => {
         endpoints.aiRoomsChatsConfigAllEnabled,
         endpoints.aiRoomsServersEmpty,
         endpoints.aiRoomsChatsEmpty,
-        endpoints.agentFolder,
+        endpoints.agentFolderChat,
         endpoints.aiChat,
         endpoints.aiChatMessagesCodeBlock,
       ]);
       await page.goto("/ai-agents/2/chat?folder=2&chat=test-chat-id");
+
+      const containerLoader = page.getByTestId("chat-container-loading");
+
+      await expect(containerLoader).toBeVisible();
+      await containerLoader.waitFor({ state: "hidden" });
 
       await expect(page.getByTestId("ai-message")).toBeVisible();
 
@@ -259,11 +295,16 @@ test.describe("AI chat", () => {
         endpoints.aiRoomsChatsConfigAllEnabled,
         endpoints.aiRoomsServersEmpty,
         endpoints.aiRoomsChatsEmpty,
-        endpoints.agentFolder,
+        endpoints.agentFolderChat,
         endpoints.aiChat,
         endpoints.aiChatMessagesTable,
       ]);
       await page.goto("/ai-agents/2/chat?folder=2&chat=test-chat-id");
+
+      const containerLoader = page.getByTestId("chat-container-loading");
+
+      await expect(containerLoader).toBeVisible();
+      await containerLoader.waitFor({ state: "hidden" });
 
       await expect(page.getByTestId("ai-message")).toBeVisible();
 
@@ -282,11 +323,16 @@ test.describe("AI chat", () => {
         endpoints.aiRoomsChatsConfigAllEnabled,
         endpoints.aiRoomsServersEmpty,
         endpoints.aiRoomsChatsEmpty,
-        endpoints.agentFolder,
+        endpoints.agentFolderChat,
         endpoints.aiChat,
         endpoints.aiChatMessagesMany,
       ]);
       await page.goto("/ai-agents/2/chat?folder=2&chat=test-chat-id");
+
+      const containerLoader = page.getByTestId("chat-container-loading");
+
+      await expect(containerLoader).toBeVisible();
+      await containerLoader.waitFor({ state: "hidden" });
 
       await expect(page.getByTestId("ai-message").last()).toBeInViewport();
 
@@ -294,6 +340,43 @@ test.describe("AI chat", () => {
         "desktop",
         "ai-chat",
         "ai-chat-scroll-bottom.png",
+      ]);
+    });
+
+    test("should redirect to result storage url if user can not use chat", async ({
+      page,
+      mockRequest,
+    }) => {
+      await mockRequest.router([
+        endpoints.aiRoomsChatsConfigAllEnabled,
+        endpoints.aiRoomsServersEmpty,
+        endpoints.aiRoomsChatsEmpty,
+        endpoints.agentFolderChatCanNotUseChat,
+        endpoints.agentFolderResultStorageCanNotUseChat,
+        endpoints.agentFolderInfoCanNotUseChat,
+      ]);
+      await page.goto("/ai-agents/2/chat?folder=2");
+
+      const containerLoader = page.getByTestId("chat-container-loading");
+
+      await expect(containerLoader).toBeVisible();
+      await containerLoader.waitFor({ state: "hidden" });
+
+      await expect(page).toHaveURL(
+        (url) =>
+          url.pathname === "/ai-agents/2/filter" &&
+          url.searchParams.get("folder") === "2" &&
+          url.searchParams.get("searchArea") ===
+            SearchArea.ResultStorage.toString(),
+      );
+
+      const warningToast = page.getByTestId("toast-content");
+      await expect(warningToast).toBeVisible();
+
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "ai-chat",
+        "ai-chat-viewer-redirect-result-storage.png",
       ]);
     });
   });
@@ -313,11 +396,16 @@ test.describe("AI chat", () => {
         endpoints.aiRoomsChatsConfigAllEnabled,
         endpoints.aiRoomsServersEmpty,
         endpoints.aiRoomsChatsEmpty,
-        endpoints.agentFolder,
+        endpoints.agentFolderChat,
         endpoints.aiConfigDisabled,
         endpoints.aiProvidersEmptyList,
       ]);
       await page.goto("/ai-agents/2/chat?folder=2");
+
+      const containerLoader = page.getByTestId("chat-container-loading");
+
+      await expect(containerLoader).toBeVisible();
+      await containerLoader.waitFor({ state: "hidden" });
 
       const emptyView = page.getByTestId("empty-view");
       await expect(emptyView).toBeVisible();
@@ -337,11 +425,16 @@ test.describe("AI chat", () => {
         endpoints.aiRoomsChatsConfigAllEnabled,
         endpoints.aiRoomsServersEmpty,
         endpoints.aiRoomsChats,
-        endpoints.agentFolder,
+        endpoints.agentFolderChat,
         endpoints.aiConfigDisabled,
         endpoints.aiProvidersEmptyList,
       ]);
       await page.goto("/ai-agents/2/chat?folder=2");
+
+      const containerLoader = page.getByTestId("chat-container-loading");
+
+      await expect(containerLoader).toBeVisible();
+      await containerLoader.waitFor({ state: "hidden" });
 
       await expect(page.getByTestId("chat-header")).toBeVisible();
 
@@ -363,12 +456,17 @@ test.describe("AI chat", () => {
         endpoints.aiRoomsChatsConfigAllEnabled,
         endpoints.aiRoomsServersEmpty,
         endpoints.aiRoomsChats,
-        endpoints.agentFolder,
+        endpoints.agentFolderChat,
         endpoints.aiChat,
         endpoints.aiChatMessages,
         endpoints.aiConfigDisabled,
       ]);
       await page.goto("/ai-agents/2/chat?folder=2&chat=test-chat-id");
+
+      const containerLoader = page.getByTestId("chat-container-loading");
+
+      await expect(containerLoader).toBeVisible();
+      await containerLoader.waitFor({ state: "hidden" });
 
       await expect(page.getByTestId("chat-info-block")).toBeVisible();
 

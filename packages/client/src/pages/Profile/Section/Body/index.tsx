@@ -54,6 +54,7 @@ import Notifications from "./sub-components/notifications";
 import FileManagement from "./sub-components/file-management";
 import InterfaceTheme from "./sub-components/interface-theme";
 import AuthorizedApps from "./sub-components/authorized-apps";
+import KeysManagement from "./sub-components/keys-management";
 import useProfileBody from "./useProfileBody";
 import styles from "./body.module.scss";
 
@@ -177,6 +178,12 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
       onClick: async () => {
         await getFileManagementData();
       },
+    },
+    {
+      id: "keys-management",
+      name: t?.("KeysManagement"),
+      content: <KeysManagement />,
+      onClick: () => {},
     },
     {
       id: "interface-theme",

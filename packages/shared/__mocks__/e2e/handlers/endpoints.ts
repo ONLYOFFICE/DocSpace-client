@@ -639,6 +639,10 @@ export const endpoints = {
   },
   aiRoomsChatsEmpty: {
     url: `${BASE_URL}${PATH_AI_ROOMS_CHATS}`,
+    dataHandler: () => aiRoomsChatsHandler("empty"),
+  },
+  aiRoomsChats: {
+    url: `${BASE_URL}${PATH_AI_ROOMS_CHATS}`,
     dataHandler: aiRoomsChatsHandler,
   },
   additionalSettings: {

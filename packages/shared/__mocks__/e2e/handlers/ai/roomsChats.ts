@@ -30,6 +30,23 @@ import { API_PREFIX, BASE_URL } from "../../utils";
 
 export const PATH_AI_ROOMS_CHATS = "ai/rooms/*/chats?*";
 
+const createdBy = {
+  id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
+  displayName: "Administrator ",
+  avatar: "/static/images/default_user_photo_size_82-82.png?hash=1340933600",
+  avatarOriginal:
+    "/static/images/default_user_photo_size_200-200.png?hash=1340933600",
+  avatarMax:
+    "/static/images/default_user_photo_size_200-200.png?hash=1340933600",
+  avatarMedium:
+    "/static/images/default_user_photo_size_48-48.png?hash=1340933600",
+  avatarSmall:
+    "/static/images/default_user_photo_size_32-32.png?hash=1340933600",
+  profileUrl: "",
+  hasAvatar: false,
+  isAnonim: false,
+};
+
 const successEmpty = {
   response: [],
   count: 0,
@@ -44,6 +61,42 @@ const successEmpty = {
   statusCode: 200,
 };
 
-export const aiRoomsChatsHandler = () => {
-  return new Response(JSON.stringify(successEmpty));
+const successWithChats = {
+  response: [
+    {
+      id: "test-chat-id",
+      title: "Test Chat",
+      createdOn: "2025-12-24T17:57:14.0000000+01:00",
+      modifiedOn: "2025-12-24T17:57:14.0000000+01:00",
+      createdBy: createdBy,
+    },
+    {
+      id: "test-chat-id-2",
+      title: "Test Chat 2",
+      createdOn: "2025-12-24T17:57:14.0000000+01:00",
+      modifiedOn: "2025-12-24T17:57:14.0000000+01:00",
+      createdBy: createdBy,
+    },
+  ],
+  count: 0,
+  total: 0,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_ROOMS_CHATS}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+export const aiRoomsChatsHandler = (
+  type: "empty" | "with-chats" = "with-chats",
+) => {
+  switch (type) {
+    case "with-chats":
+      return new Response(JSON.stringify(successWithChats));
+    case "empty":
+      return new Response(JSON.stringify(successEmpty));
+  }
 };

@@ -34,7 +34,6 @@ test.describe("AI chat", () => {
       endpoints.colorTheme,
       endpoints.build,
       endpoints.capabilities,
-      endpoints.selfEmailActivatedClient,
       endpoints.tariff,
       endpoints.quota,
       endpoints.aiConfig,
@@ -52,111 +51,327 @@ test.describe("AI chat", () => {
     ]);
   });
 
-  test("should render default empty ai chat", async ({ page, mockRequest }) => {
-    await mockRequest.router([
-      endpoints.aiRoomsChatsConfigAllEnabled,
-      endpoints.aiRoomsServersEmpty,
-      endpoints.aiRoomsChatsEmpty,
-      endpoints.agentFolder,
-    ]);
-    await page.goto("/ai-agents/2/chat?folder=2");
+  // ================================== Portal admin ==================================
 
-    await expect(page.getByTestId("chat-container")).toBeVisible();
+  test.describe("Portal admin", () => {
+    test.beforeEach(async ({ mockRequest }) => {
+      await mockRequest.router([endpoints.selfEmailActivatedClient]);
+    });
 
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "ai-chat",
-      "ai-chat-default-empty.png",
-    ]);
+    test("should render default empty ai chat", async ({
+      page,
+      mockRequest,
+    }) => {
+      await mockRequest.router([
+        endpoints.aiRoomsChatsConfigAllEnabled,
+        endpoints.aiRoomsServersEmpty,
+        endpoints.aiRoomsChatsEmpty,
+        endpoints.agentFolder,
+      ]);
+      await page.goto("/ai-agents/2/chat?folder=2");
+
+      await expect(page.getByTestId("chat-container")).toBeVisible();
+
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "ai-chat",
+        "ai-chat-default-empty.png",
+      ]);
+    });
+
+    test("should render full size empty screen if ai not ready and there are no chats (admin)", async ({
+      page,
+      mockRequest,
+    }) => {
+      await mockRequest.router([
+        endpoints.aiRoomsChatsConfigAllEnabled,
+        endpoints.aiRoomsServersEmpty,
+        endpoints.aiRoomsChatsEmpty,
+        endpoints.agentFolder,
+        endpoints.aiConfigDisabled,
+        endpoints.aiProvidersEmptyList,
+      ]);
+      await page.goto("/ai-agents/2/chat?folder=2");
+
+      const emptyView = page.getByTestId("empty-view");
+      await expect(emptyView).toBeVisible();
+
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "ai-chat",
+        "ai-chat-ai-not-ready-no-chats-admin.png",
+      ]);
+
+      const goToSettingsBtn = emptyView.getByRole("button");
+      await goToSettingsBtn.click();
+
+      await expect(page).toHaveURL("/portal-settings/ai-settings/providers");
+    });
+
+    test("should render chat header with empty screen if ai not ready and there are chats (admin)", async ({
+      page,
+      mockRequest,
+    }) => {
+      await mockRequest.router([
+        endpoints.aiRoomsChatsConfigAllEnabled,
+        endpoints.aiRoomsServersEmpty,
+        endpoints.aiRoomsChats,
+        endpoints.agentFolder,
+        endpoints.aiConfigDisabled,
+        endpoints.aiProvidersEmptyList,
+      ]);
+      await page.goto("/ai-agents/2/chat?folder=2");
+
+      await expect(page.getByTestId("chat-header")).toBeVisible();
+
+      const emptyView = page.getByTestId("empty-view");
+      await expect(emptyView).toBeVisible();
+
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "ai-chat",
+        "ai-chat-ai-not-ready-with-chats-admin.png",
+      ]);
+
+      const goToSettingsBtn = emptyView.getByRole("button");
+      await goToSettingsBtn.click();
+
+      await expect(page).toHaveURL("/portal-settings/ai-settings/providers");
+    });
+
+    test("should render chat with info block, disabled chat input and new chat button if ai not ready (admin)", async ({
+      page,
+      mockRequest,
+    }) => {
+      await mockRequest.router([
+        endpoints.aiRoomsChatsConfigAllEnabled,
+        endpoints.aiRoomsServersEmpty,
+        endpoints.aiRoomsChats,
+        endpoints.agentFolder,
+        endpoints.aiChat,
+        endpoints.aiChatMessages,
+        endpoints.aiConfigDisabled,
+      ]);
+      await page.goto("/ai-agents/2/chat?folder=2&chat=test-chat-id");
+
+      await expect(page.getByTestId("chat-info-block")).toBeVisible();
+
+      await expect(page.getByTestId("create-chat")).toHaveAttribute(
+        "aria-disabled",
+        "true",
+      );
+
+      await expect(page.getByTestId("chat-input-textarea")).toBeDisabled();
+      await expect(page.getByTestId("chat-input-send-button")).toHaveAttribute(
+        "aria-disabled",
+        "true",
+      );
+      await expect(page.getByTestId("chat-input-tools-button")).toHaveAttribute(
+        "aria-disabled",
+        "true",
+      );
+      await expect(
+        page.getByTestId("chat-input-attachment-button"),
+      ).toHaveAttribute("aria-disabled", "true");
+
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "ai-chat",
+        "ai-chat-with-info-block-ai-not-ready-admin.png",
+      ]);
+    });
+
+    test("should render ai chat with user and ai messages", async ({
+      page,
+      mockRequest,
+    }) => {
+      await mockRequest.router([
+        endpoints.aiRoomsChatsConfigAllEnabled,
+        endpoints.aiRoomsServersEmpty,
+        endpoints.aiRoomsChatsEmpty,
+        endpoints.agentFolder,
+        endpoints.aiChat,
+        endpoints.aiChatMessages,
+      ]);
+      await page.goto("/ai-agents/2/chat?folder=2&chat=test-chat-id");
+
+      await expect(page.getByTestId("user-message")).toBeVisible();
+      await expect(page.getByTestId("ai-message")).toBeVisible();
+
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "ai-chat",
+        "ai-chat-with-user-and-ai-messages.png",
+      ]);
+    });
+
+    test("should render ai message with base elements", async ({
+      page,
+      mockRequest,
+    }) => {
+      await mockRequest.router([
+        endpoints.aiRoomsChatsConfigAllEnabled,
+        endpoints.aiRoomsServersEmpty,
+        endpoints.aiRoomsChatsEmpty,
+        endpoints.agentFolder,
+        endpoints.aiChat,
+        endpoints.aiChatMessagesBaseElements,
+      ]);
+      await page.goto("/ai-agents/2/chat?folder=2&chat=test-chat-id");
+
+      await expect(page.getByTestId("ai-message")).toBeVisible();
+
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "ai-chat",
+        "ai-chat-ai-message-base-elements.png",
+      ]);
+    });
+
+    test("should render ai message with code block", async ({
+      page,
+      mockRequest,
+    }) => {
+      await mockRequest.router([
+        endpoints.aiRoomsChatsConfigAllEnabled,
+        endpoints.aiRoomsServersEmpty,
+        endpoints.aiRoomsChatsEmpty,
+        endpoints.agentFolder,
+        endpoints.aiChat,
+        endpoints.aiChatMessagesCodeBlock,
+      ]);
+      await page.goto("/ai-agents/2/chat?folder=2&chat=test-chat-id");
+
+      await expect(page.getByTestId("ai-message")).toBeVisible();
+
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "ai-chat",
+        "ai-chat-ai-message-code-block.png",
+      ]);
+    });
+
+    test("should render ai message with table", async ({
+      page,
+      mockRequest,
+    }) => {
+      await mockRequest.router([
+        endpoints.aiRoomsChatsConfigAllEnabled,
+        endpoints.aiRoomsServersEmpty,
+        endpoints.aiRoomsChatsEmpty,
+        endpoints.agentFolder,
+        endpoints.aiChat,
+        endpoints.aiChatMessagesTable,
+      ]);
+      await page.goto("/ai-agents/2/chat?folder=2&chat=test-chat-id");
+
+      await expect(page.getByTestId("ai-message")).toBeVisible();
+
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "ai-chat",
+        "ai-chat-ai-message-table.png",
+      ]);
+    });
   });
 
-  test("should render ai chat with user and ai messages", async ({
-    page,
-    mockRequest,
-  }) => {
-    await mockRequest.router([
-      endpoints.aiRoomsChatsConfigAllEnabled,
-      endpoints.aiRoomsServersEmpty,
-      endpoints.aiRoomsChatsEmpty,
-      endpoints.agentFolder,
-      endpoints.aiChat,
-      endpoints.aiChatMessages,
-    ]);
-    await page.goto("/ai-agents/2/chat?folder=2&chat=test-chat-id");
+  // ================================== User ==================================
 
-    await expect(page.getByTestId("user-message")).toBeVisible();
-    await expect(page.getByTestId("ai-message")).toBeVisible();
+  test.describe("User", () => {
+    test.beforeEach(async ({ mockRequest }) => {
+      await mockRequest.router([endpoints.selfRegularUserOnly]);
+    });
 
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "ai-chat",
-      "ai-chat-with-user-and-ai-messages.png",
-    ]);
-  });
+    test("should render full size empty screen without go to settings button if ai not ready and there are no chats (user)", async ({
+      page,
+      mockRequest,
+    }) => {
+      await mockRequest.router([
+        endpoints.aiRoomsChatsConfigAllEnabled,
+        endpoints.aiRoomsServersEmpty,
+        endpoints.aiRoomsChatsEmpty,
+        endpoints.agentFolder,
+        endpoints.aiConfigDisabled,
+        endpoints.aiProvidersEmptyList,
+      ]);
+      await page.goto("/ai-agents/2/chat?folder=2");
 
-  test("should render ai message with base elements", async ({
-    page,
-    mockRequest,
-  }) => {
-    await mockRequest.router([
-      endpoints.aiRoomsChatsConfigAllEnabled,
-      endpoints.aiRoomsServersEmpty,
-      endpoints.aiRoomsChatsEmpty,
-      endpoints.agentFolder,
-      endpoints.aiChat,
-      endpoints.aiChatMessagesBaseElements,
-    ]);
-    await page.goto("/ai-agents/2/chat?folder=2&chat=test-chat-id");
+      const emptyView = page.getByTestId("empty-view");
+      await expect(emptyView).toBeVisible();
 
-    await expect(page.getByTestId("ai-message")).toBeVisible();
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "ai-chat",
+        "ai-chat-ai-not-ready-no-chats-user.png",
+      ]);
+    });
 
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "ai-chat",
-      "ai-chat-ai-message-base-elements.png",
-    ]);
-  });
+    test("should render chat header with empty screen if ai not ready and there are chats (user)", async ({
+      page,
+      mockRequest,
+    }) => {
+      await mockRequest.router([
+        endpoints.aiRoomsChatsConfigAllEnabled,
+        endpoints.aiRoomsServersEmpty,
+        endpoints.aiRoomsChats,
+        endpoints.agentFolder,
+        endpoints.aiConfigDisabled,
+        endpoints.aiProvidersEmptyList,
+      ]);
+      await page.goto("/ai-agents/2/chat?folder=2");
 
-  test("should render ai message with code block", async ({
-    page,
-    mockRequest,
-  }) => {
-    await mockRequest.router([
-      endpoints.aiRoomsChatsConfigAllEnabled,
-      endpoints.aiRoomsServersEmpty,
-      endpoints.aiRoomsChatsEmpty,
-      endpoints.agentFolder,
-      endpoints.aiChat,
-      endpoints.aiChatMessagesCodeBlock,
-    ]);
-    await page.goto("/ai-agents/2/chat?folder=2&chat=test-chat-id");
+      await expect(page.getByTestId("chat-header")).toBeVisible();
 
-    await expect(page.getByTestId("ai-message")).toBeVisible();
+      const emptyView = page.getByTestId("empty-view");
+      await expect(emptyView).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "ai-chat",
-      "ai-chat-ai-message-code-block.png",
-    ]);
-  });
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "ai-chat",
+        "ai-chat-ai-not-ready-with-chats-user.png",
+      ]);
+    });
 
-  test("should render ai message with table", async ({ page, mockRequest }) => {
-    await mockRequest.router([
-      endpoints.aiRoomsChatsConfigAllEnabled,
-      endpoints.aiRoomsServersEmpty,
-      endpoints.aiRoomsChatsEmpty,
-      endpoints.agentFolder,
-      endpoints.aiChat,
-      endpoints.aiChatMessagesTable,
-    ]);
-    await page.goto("/ai-agents/2/chat?folder=2&chat=test-chat-id");
+    test("should render chat with info block, disabled chat input and new chat button if ai not ready (user)", async ({
+      page,
+      mockRequest,
+    }) => {
+      await mockRequest.router([
+        endpoints.aiRoomsChatsConfigAllEnabled,
+        endpoints.aiRoomsServersEmpty,
+        endpoints.aiRoomsChats,
+        endpoints.agentFolder,
+        endpoints.aiChat,
+        endpoints.aiChatMessages,
+        endpoints.aiConfigDisabled,
+      ]);
+      await page.goto("/ai-agents/2/chat?folder=2&chat=test-chat-id");
 
-    await expect(page.getByTestId("ai-message")).toBeVisible();
+      await expect(page.getByTestId("chat-info-block")).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "ai-chat",
-      "ai-chat-ai-message-table.png",
-    ]);
+      await expect(page.getByTestId("create-chat")).toHaveAttribute(
+        "aria-disabled",
+        "true",
+      );
+
+      await expect(page.getByTestId("chat-input-textarea")).toBeDisabled();
+      await expect(page.getByTestId("chat-input-send-button")).toHaveAttribute(
+        "aria-disabled",
+        "true",
+      );
+      await expect(page.getByTestId("chat-input-tools-button")).toHaveAttribute(
+        "aria-disabled",
+        "true",
+      );
+      await expect(
+        page.getByTestId("chat-input-attachment-button"),
+      ).toHaveAttribute("aria-disabled", "true");
+
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "ai-chat",
+        "ai-chat-with-info-block-ai-not-ready-user.png",
+      ]);
+    });
   });
 });

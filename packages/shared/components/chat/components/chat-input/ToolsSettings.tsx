@@ -398,6 +398,7 @@ const ToolsSettings = ({
         )}
         onClick={showMcpTools}
         data-testid="chat-input-tools-button"
+        aria-disabled={!aiReady}
       >
         <IconButton iconName={McpToolReactSvgUrl} size={16} isFill={false} />
         <Text lineHeight="16px" fontSize="13px" fontWeight={600} noSelect>

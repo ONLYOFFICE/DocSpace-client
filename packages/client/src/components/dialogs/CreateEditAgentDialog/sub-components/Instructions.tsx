@@ -42,7 +42,7 @@ const InstructionsSettings = ({
   agentParams,
   setAgentParams,
 }: InstructionsSettingsProps) => {
-  const { t } = useTranslation(["AIRoom"]);
+  const { t } = useTranslation(["AIRoom", "Common"]);
   const [value, setValue] = React.useState(agentParams.prompt || "");
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -71,7 +71,9 @@ const InstructionsSettings = ({
             className="set_room_params-info-description"
             noSelect
           >
-            {t("InstructionsDescriptionAgent")}
+            {t("InstructionsDescriptionAgent", {
+              aiAgent: t("Common:AIAgent"),
+            })}
           </Text>
         </div>
         <Textarea

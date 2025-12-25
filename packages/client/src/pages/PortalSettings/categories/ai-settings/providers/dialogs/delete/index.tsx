@@ -64,7 +64,11 @@ const DeleteDialogComponent = ({
       await deleteAIProvider?.(providerId);
       await getAIConfig?.();
 
-      toastr.success(t("AISettings:ProviderRemovedSuccess"));
+      toastr.success(
+        t("AISettings:ProviderRemovedSuccess", {
+          aiProvider: t("Common:AIProvider"),
+        }),
+      );
     } catch (error) {
       console.error(error);
       toastr.error(error as string);
@@ -76,7 +80,11 @@ const DeleteDialogComponent = ({
 
   return (
     <ModalDialog visible displayType={ModalDialogType.modal} onClose={onClose}>
-      <ModalDialog.Header>{t("AISettings:DeleteProvider")}</ModalDialog.Header>
+      <ModalDialog.Header>
+        {t("AISettings:DeleteProvider", {
+          aiProvider: t("Common:AIProvider"),
+        })}
+      </ModalDialog.Header>
       <ModalDialog.Body>
         <Text>{t("AISettings:DeleteProviderDescription")}</Text>
       </ModalDialog.Body>

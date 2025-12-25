@@ -3,7 +3,7 @@
   "content": "Deleting this provider will revoke access for all users, and its settings will be permanently erased.\n To use the provider again, you will need to set it up from scratch.",
   "content_en_sha1_hash": "684c9cdd8886ac52a88b39cbe244b733bf8bd7e2",
   "created_at": "2025-11-13T07:42:05.674Z",
-  "updated_at": "2025-11-13T10:22:15.983Z",
+  "updated_at": "2025-11-21T09:16:12.486Z",
   "comment": {
     "text": "This text provides a warning message within a dialog confirming the deletion of an AI provider. It explains that deleting the provider will remove access for all users and require a complete re-setup to use it again. This helps users understand the consequences of the deletion action.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/delete/index.tsx",
-      "line_number": 81,
-      "context": "return (\n <ModalDialog visible displayType={ModalDialogType.modal} onClose={onClose}>\n <ModalDialog.Header>{t(\"AISettings:DeleteProvider\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>{t(\"AISettings:DeleteProviderDescription\")}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n primary\n size={ButtonSize.normal}",
+      "line_number": 89,
+      "context": "{t(\"AISettings:DeleteProvider\", {\n aiProvider: t(\"Common:AIProvider\"),\n })}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text>{t(\"AISettings:DeleteProviderDescription\")}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n primary\n size={ButtonSize.normal}",
       "module": "/packages/client"
     }
   ],

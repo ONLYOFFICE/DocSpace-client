@@ -167,7 +167,9 @@ export const useBaseParams = (initialValues?: {
           testId="mcp-url-input"
         />
         <Text className={styles.fieldHint}>
-          {t("AISettings:MCPServerIntegrationURLHint")}
+          {t("AISettings:MCPServerIntegrationURLHint", {
+            mcpServer: t("Common:MCPServer"),
+          })}
         </Text>
       </FieldContainer>
       <FieldContainer

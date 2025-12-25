@@ -3,7 +3,7 @@
   "content": "Sign in",
   "content_en_sha1_hash": "ada2e9e96fa9ce85430225b412068b5b62b79800",
   "created_at": "2025-05-19T21:30:46.309Z",
-  "updated_at": "2025-12-17T07:49:07.881Z",
+  "updated_at": "2025-12-19T13:32:32.740Z",
   "comment": {
     "text": "The \"LoginButton\" translation key is used for the text \"Sign in\", which serves as a label for buttons that trigger user login actions. This text appears in various UI elements, including a header button on the Home page and within a public toast message, inviting users to sign in.",
     "is_auto": true,
@@ -24,8 +24,8 @@
     },
     {
       "file_path": "/packages/login/src/components/ConsentInfo.tsx",
-      "line_number": 94,
-      "context": "className=\"row\"\n fontWeight={600}\n fontSize=\"16px\"\n lineHeight=\"22px\"\n >\n {t(\"Common:LoginButton\")}\n </Text>\n ) : null}\n <Image\n src={logo}\n className=\"client-logo\"",
+      "line_number": 62,
+      "context": "className={styles.row}\n fontWeight={600}\n fontSize=\"16px\"\n lineHeight=\"22px\"\n >\n {t(\"Common:LoginButton\")}\n </Text>\n ) : null}\n <Image\n src={logo}\n className={styles.clientLogo}",
       "module": "/packages/login"
     },
     {

@@ -113,7 +113,9 @@ const AIServiceDialog: React.FC<AIServiceDialogProps> = ({
     {
       id: "ai-tools",
       title: t("Common:AIAgents"),
-      description: t("AIAgentsDescription"),
+      description: t("AIAgentsDescription", {
+        mcpServer: t("Common:MCPServer"),
+      }),
       icon: <ToolsIcon />,
     },
     {

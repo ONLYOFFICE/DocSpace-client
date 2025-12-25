@@ -832,6 +832,10 @@ export const endpoints = {
     url: PATH_MY_DOCUMENTS,
     dataHandler: myDocumentsHandler,
   },
+  myDocumentsList: {
+    url: PATH_MY_DOCUMENTS,
+    dataHandler: myDocumentsHandler.bind(null, true),
+  },
   getFileInfo: {
     url: PATH_GET_FILE_INFO,
     dataHandler: getFileInfoHandler,

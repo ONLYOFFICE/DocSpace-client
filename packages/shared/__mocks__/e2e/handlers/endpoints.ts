@@ -346,10 +346,9 @@ export const endpoints = {
   filteredRoomList: {
     url: `${BASE_URL}${PATH_ROOMS_LIST}`,
     dataHandler: () =>
-      roomListHandler(
-        new Headers({ [HEADER_FILTERED_ROOMS_LIST]: "true" }),
-        ShareAccessRights.RoomManager,
-      ),
+      roomListHandler(new Headers({ [HEADER_FILTERED_ROOMS_LIST]: "true" }), {
+        access: ShareAccessRights.RoomManager,
+      }),
   },
   emptyRoomList: {
     url: `${BASE_URL}${PATH_ROOMS_LIST}`,
@@ -358,18 +357,48 @@ export const endpoints = {
   cmRoomListDocAdminManager: {
     url: `${BASE_URL}${PATH_ROOMS_LIST}`,
     dataHandler: () =>
-      roomListHandler(
-        new Headers({ [CONTEXT_MENU_ROOMS_LIST]: "true" }),
-        ShareAccessRights.RoomManager,
-      ),
+      roomListHandler(new Headers({ [CONTEXT_MENU_ROOMS_LIST]: "true" }), {
+        access: ShareAccessRights.RoomManager,
+      }),
   },
-  cmRoomListDocAdminContentCreator: {
+  cmRoomListContentCreator: {
     url: `${BASE_URL}${PATH_ROOMS_LIST}`,
     dataHandler: () =>
-      roomListHandler(
-        new Headers({ [CONTEXT_MENU_ROOMS_LIST]: "true" }),
-        ShareAccessRights.Collaborator,
-      ),
+      roomListHandler(new Headers({ [CONTEXT_MENU_ROOMS_LIST]: "true" }), {
+        access: ShareAccessRights.Collaborator,
+      }),
+  },
+  cmRoomListNotInRoom: {
+    url: `${BASE_URL}${PATH_ROOMS_LIST}`,
+    dataHandler: () =>
+      roomListHandler(new Headers({ [CONTEXT_MENU_ROOMS_LIST]: "true" }), {
+        access: ShareAccessRights.None,
+        inRoom: false,
+      }),
+  },
+  cmRoomListRoomOwner: {
+    url: `${BASE_URL}${PATH_ROOMS_LIST}`,
+    dataHandler: () =>
+      roomListHandler(new Headers({ [CONTEXT_MENU_ROOMS_LIST]: "true" }), {
+        access: ShareAccessRights.None,
+        isDocAdmin: false,
+      }),
+  },
+  cmRoomListRoomAdminManager: {
+    url: `${BASE_URL}${PATH_ROOMS_LIST}`,
+    dataHandler: () =>
+      roomListHandler(new Headers({ [CONTEXT_MENU_ROOMS_LIST]: "true" }), {
+        access: ShareAccessRights.RoomManager,
+        isDocAdmin: false,
+      }),
+  },
+  cmRoomListRoomAdminCreator: {
+    url: `${BASE_URL}${PATH_ROOMS_LIST}`,
+    dataHandler: () =>
+      roomListHandler(new Headers({ [CONTEXT_MENU_ROOMS_LIST]: "true" }), {
+        access: ShareAccessRights.Collaborator,
+        isDocAdmin: false,
+      }),
   },
   folder: {
     url: `${BASE_URL}${PATH_FOLDER}`,

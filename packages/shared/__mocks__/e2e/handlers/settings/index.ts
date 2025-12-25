@@ -109,3 +109,9 @@ export * from "./backupStorage";
 export * from "./storageRegions";
 
 export * from "./encryption";
+
+export * from "./tfaAppSettings";
+
+export * from "./activeconnections";
+
+export * from "./tfaAppCodes";

@@ -112,7 +112,7 @@ const InterfaceTheme = (props: InterfaceThemeProps) => {
     : t("Profile:SystemThemeDescription");
 
   return (
-    <div className={styles.interfaceTheme}>
+    <div className={styles.interfaceTheme} data-testid="profile-interface-theme">
       <div>
         <Checkbox
           className={styles.systemThemeCheckbox}

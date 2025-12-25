@@ -24,42 +24,23 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export {
-  thirdPartyProvider as thirdPartyProviderHandler,
-  successThirdpartyProviders,
-  PATH as THIRD_PARTY_PROVIDER_PATH,
-} from "./thirdPartyProviders";
+import { BASE_URL, API_PREFIX } from "../../utils";
 
-export {
-  self as selfHandler,
-  successSelf,
-  adminOnlyUser,
-  adminOnlySuccess,
-  roomAdminUser,
-  roomAdminSuccess,
-  visitorUser,
-  visitorSuccess,
-  regularUser,
-  regularUserSuccess,
-} from "./self";
+export const PATH_TELEGRAM_LINK = "settings/telegram/link";
 
-export {
-  PATH as SELF_PATH,
-  PATH_CHANGE_AUTH_DATA as SELF_PATH_CHANGE_AUTH_DATA,
-  PATH_ACTIVATION_STATUS as SELF_PATH_ACTIVATION_STATUS,
-  PATH_UPDATE_USER as SELF_PATH_UPDATE_USER,
-  PATH_DELETE_USER as SELF_PATH_DELETE_USER,
-  PATH_USER_BY_EMAIL as SELF_PATH_USER_BY_EMAIL,
-  PATH_ADD_GUEST,
-  PATH_UPDATE_USER_CULTURE as SELF_PATH_UPDATE_USER_CULTURE,
-} from "./self";
+const telegramLinkSuccess = {
+  response: "t.me/test?start=kWwp5J4nM6bwc5bw3KINLNJnrjlpGvimWCLDrzK9Ob4",
+  count: 1,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_TELEGRAM_LINK}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
 
-export {
-  peopleListHandler,
-  peopleListAccessDeniedHandler,
-  PATH_PEOPLE_LIST,
-  mockUsers,
-  peopleListSuccess,
-} from "./list";
-
-export * from "./theme";
+export const telegramLinkHandler = (): Response => {
+  return new Response(JSON.stringify(telegramLinkSuccess));
+};

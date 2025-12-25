@@ -24,42 +24,40 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export {
-  thirdPartyProvider as thirdPartyProviderHandler,
-  successThirdpartyProviders,
-  PATH as THIRD_PARTY_PROVIDER_PATH,
-} from "./thirdPartyProviders";
+import { API_PREFIX, BASE_URL } from "../../utils";
 
-export {
-  self as selfHandler,
-  successSelf,
-  adminOnlyUser,
-  adminOnlySuccess,
-  roomAdminUser,
-  roomAdminSuccess,
-  visitorUser,
-  visitorSuccess,
-  regularUser,
-  regularUserSuccess,
-} from "./self";
+export const PATH_ACTIVE_CONNECTIONS = "security/activeconnections";
 
-export {
-  PATH as SELF_PATH,
-  PATH_CHANGE_AUTH_DATA as SELF_PATH_CHANGE_AUTH_DATA,
-  PATH_ACTIVATION_STATUS as SELF_PATH_ACTIVATION_STATUS,
-  PATH_UPDATE_USER as SELF_PATH_UPDATE_USER,
-  PATH_DELETE_USER as SELF_PATH_DELETE_USER,
-  PATH_USER_BY_EMAIL as SELF_PATH_USER_BY_EMAIL,
-  PATH_ADD_GUEST,
-  PATH_UPDATE_USER_CULTURE as SELF_PATH_UPDATE_USER_CULTURE,
-} from "./self";
+const activeConnectionsSuccess = {
+  response: {
+    loginEvent: 1,
+    items: [
+      {
+        id: 1,
+        tenantId: 1,
+        userId: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
+        mobile: false,
+        ip: "1.1.1.1",
+        country: "",
+        city: "",
+        browser: "Chrome 143",
+        platform: "Mac OS X 10 Apple Mac",
+        date: "2025-12-23T00:29:48.0000000+03:00",
+        page: `${BASE_URL}/wizard`,
+      },
+    ],
+  },
+  count: 1,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_ACTIVE_CONNECTIONS}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
 
-export {
-  peopleListHandler,
-  peopleListAccessDeniedHandler,
-  PATH_PEOPLE_LIST,
-  mockUsers,
-  peopleListSuccess,
-} from "./list";
-
-export * from "./theme";
+export const activeConnectionsHandler = (): Response => {
+  return new Response(JSON.stringify(activeConnectionsSuccess));
+};

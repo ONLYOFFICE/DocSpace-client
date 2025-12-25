@@ -96,6 +96,8 @@ class OAuthStore {
 
   setJwtTokenRunning: boolean = false;
 
+  private setJwtTokenPromise: Promise<void> | null = null;
+
   errorOAuth: Error | null = null;
 
   constructor(userStore: UserStore, settingsStore: SettingsStore) {
@@ -110,28 +112,27 @@ class OAuthStore {
   };
 
   setJwtToken = async () => {
-    let cookieToken = getOAuthJWTSignature(this.userStore!.user!.id);
+    const userId = this.userStore!.user!.id;
 
+    const cookieToken = getOAuthJWTSignature(userId);
     if (cookieToken) return;
 
-    if (this.setJwtTokenRunning) {
-      await new Promise((resolve) => {
-        setInterval(() => {
-          cookieToken = getOAuthJWTSignature(this.userStore!.user!.id);
-          if (cookieToken) resolve(cookieToken);
-        }, 100);
-      });
-
-      this.setJwtTokenRunning = false;
-
+    if (this.setJwtTokenPromise) {
+      await this.setJwtTokenPromise;
       return;
     }
 
     this.setJwtTokenRunning = true;
+    this.setJwtTokenPromise = (async () => {
+      try {
+        await setOAuthJWTSignature(userId);
+      } finally {
+        this.setJwtTokenRunning = false;
+        this.setJwtTokenPromise = null;
+      }
+    })();
 
-    await setOAuthJWTSignature(this.userStore!.user!.id);
-
-    this.setJwtTokenRunning = false;
+    await this.setJwtTokenPromise;
   };
 
   setRevokeDialogVisible = (value: boolean) => {

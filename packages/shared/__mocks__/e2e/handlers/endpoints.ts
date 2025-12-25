@@ -48,6 +48,10 @@ import {
   roomAdminSuccess,
   visitorSuccess,
   regularUserSuccess,
+  thirdPartyProviderHandler,
+  THIRD_PARTY_PROVIDER_PATH,
+  themeProvider,
+  PATH_THEME,
 } from "./people";
 import {
   colorThemeHandler,
@@ -94,6 +98,13 @@ import {
   PATH_STORAGE_REGIONS,
   encryptionSettingsHandler,
   PATH_ENCRYPTION_SETTINGS,
+  tfaAppSettingsHandler,
+  tfaAppSettingsEnabledHandler,
+  PATH_TFA_APP_SETTINGS,
+  activeConnectionsHandler,
+  PATH_ACTIVE_CONNECTIONS,
+  tfaAppCodesHandler,
+  PATH_TFA_APP_CODES,
 } from "./settings";
 import {
   CONTINUE_PATH,
@@ -216,12 +227,35 @@ import {
   setDomainHandler,
   PATH_SET_DOMAIN,
 } from "./apisystem";
+import {
+  notificationsHandler,
+  PATH_NOTIFICATIONS,
+  PATH_NOTIFICATIONS_CHANNELS,
+  PATH_TELEGRAM_CHECK,
+  channelsHandler,
+  telegramCheckHandler,
+  channelsHandlerWithTelegram,
+  PATH_TELEGRAM_LINK,
+  telegramLinkHandler,
+  telegramCheckLinkedHandler,
+} from "./notification";
+import {
+  tokenHandler,
+  PATH_OAUTH_TOKEN,
+  scopesHandler,
+  PATH_OAUTH_SCOPES,
+  clientsEmptyHandler,
+  clientsHandler,
+  PATH_OAUTH_CLIENTS,
+} from "./oauth";
+
 import type { MethodType } from "../types";
 import { ShareAccessRights } from "../../../enums";
 
 export type TEndpoint = {
   url: string | RegExp;
   dataHandler: () => Response;
+  dataHandlerWithHeaders?: (headers: Headers) => Response;
   method?: MethodType;
 };
 
@@ -260,6 +294,10 @@ export const endpoints = {
   updateUserCultureLv: {
     url: `${BASE_URL}${PATH_UPDATE_USER_CULTURE}`,
     dataHandler: () => updateUserCultureHandler("lv"),
+  },
+  updateUserCultureFr: {
+    url: `${BASE_URL}${PATH_UPDATE_USER_CULTURE}`,
+    dataHandler: () => updateUserCultureHandler("fr"),
   },
   removeUser: {
     url: `${BASE_URL}${SELF_PATH_DELETE_USER}`,
@@ -856,5 +894,83 @@ export const endpoints = {
     url: `${API_SYSTEM_URL}/${PATH_SET_DOMAIN}`,
     dataHandler: setDomainHandler,
     method: "POST",
+  },
+  tfaAppSettings: {
+    url: `${BASE_URL}${PATH_TFA_APP_SETTINGS}`,
+    dataHandler: tfaAppSettingsHandler,
+  },
+  tfaAppSettingsEnabled: {
+    url: `${BASE_URL}${PATH_TFA_APP_SETTINGS}`,
+    dataHandler: tfaAppSettingsEnabledHandler,
+  },
+  tfaAppCodes: {
+    url: `${BASE_URL}${PATH_TFA_APP_CODES}`,
+    dataHandler: tfaAppCodesHandler,
+  },
+  activeConnections: {
+    url: `${BASE_URL}${PATH_ACTIVE_CONNECTIONS}`,
+    dataHandler: activeConnectionsHandler,
+  },
+  thirdPartyProvider: {
+    url: `${BASE_URL}${THIRD_PARTY_PROVIDER_PATH}`,
+    dataHandler: () => thirdPartyProviderHandler(),
+    dataHandlerWithHeaders: (headers) => thirdPartyProviderHandler(headers),
+  },
+  notifications0: {
+    url: `${BASE_URL}${PATH_NOTIFICATIONS}/0`,
+    dataHandler: () => notificationsHandler(0),
+  },
+  notifications1: {
+    url: `${BASE_URL}${PATH_NOTIFICATIONS}/1`,
+    dataHandler: () => notificationsHandler(1),
+  },
+  notifications2: {
+    url: `${BASE_URL}${PATH_NOTIFICATIONS}/2`,
+    dataHandler: () => notificationsHandler(2),
+  },
+  notifications3: {
+    url: `${BASE_URL}${PATH_NOTIFICATIONS}/3`,
+    dataHandler: () => notificationsHandler(3),
+  },
+  notificationChannels: {
+    url: `${BASE_URL}${PATH_NOTIFICATIONS_CHANNELS}`,
+    dataHandler: channelsHandler,
+  },
+  notificationChannelsWithTelegram: {
+    url: `${BASE_URL}${PATH_NOTIFICATIONS_CHANNELS}`,
+    dataHandler: channelsHandlerWithTelegram,
+  },
+  notificationTelegramCheck: {
+    url: `${BASE_URL}${PATH_TELEGRAM_CHECK}`,
+    dataHandler: telegramCheckHandler,
+  },
+  notificationTelegramLink: {
+    url: `${BASE_URL}${PATH_TELEGRAM_LINK}`,
+    dataHandler: telegramLinkHandler,
+  },
+  notificationTelegramCheckLinked: {
+    url: `${BASE_URL}${PATH_TELEGRAM_CHECK}`,
+    dataHandler: telegramCheckLinkedHandler,
+  },
+  oauthToken: {
+    url: `${BASE_URL}${PATH_OAUTH_TOKEN}`,
+    dataHandler: tokenHandler,
+  },
+  oauthScopes: {
+    url: `${BASE_URL}${PATH_OAUTH_SCOPES}`,
+    dataHandler: scopesHandler,
+  },
+  oauthEmptyClients: {
+    url: PATH_OAUTH_CLIENTS,
+    dataHandler: clientsEmptyHandler,
+  },
+  oauthClients: {
+    url: PATH_OAUTH_CLIENTS,
+    dataHandler: clientsHandler,
+  },
+  theme: {
+    url: `${BASE_URL}${PATH_THEME}`,
+    dataHandler: themeProvider,
+    method: "PUT",
   },
 } satisfies TEndpoints;

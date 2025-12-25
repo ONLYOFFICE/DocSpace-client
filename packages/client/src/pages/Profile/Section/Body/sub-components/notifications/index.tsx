@@ -91,7 +91,7 @@ const Notifications = () => {
   );
 
   return (
-    <div className={styles.sectionBody}>
+    <div className={styles.sectionBody} data-testid="profile-notifications">
       <NotificationsChannels />
       {badgesContent}
       {emailContent}

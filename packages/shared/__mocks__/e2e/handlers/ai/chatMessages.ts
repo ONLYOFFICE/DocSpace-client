@@ -30,6 +30,61 @@ import { API_PREFIX, BASE_URL } from "../../utils";
 
 export const PATH_AI_CHAT_MESSAGES = "ai/chats/*/messages?*";
 
+const defaultTextContent =
+  "## Hi\n\nI’m here and ready to help inside DocSpace.\n\n## What you can do next\n- Ask about **rooms, folders, files, users, and permissions**\n- Describe a collaboration task (e.g., “set up a room for project X with view-only access for guests”), and I’ll guide you step by step";
+
+const baseElementsContent =
+  "\n" +
+  "# Level One Heading\n" +
+  "\n" +
+  "## Level Two Heading\n" +
+  "\n" +
+  "### Level Three Heading\n" +
+  "\n" +
+  "#### Level Four Heading\n" +
+  "\n" +
+  "##### Level Five Heading\n" +
+  "\n" +
+  "###### Level Six Heading\n" +
+  "\n" +
+  "Regular Paragraph\n" +
+  "\n" +
+  "[Link](https://example.com)\n" +
+  "\n" +
+  "> Quote\n" +
+  "\n" +
+  "1. Numbered List  \n" +
+  "2. Numbered List  \n" +
+  "3. Numbered List  \n" +
+  "\n" +
+  "- Bulleted List  \n" +
+  "- Bulleted List  \n" +
+  "- Bulleted List";
+
+const codeContent =
+  "```js\n" +
+  "function generateSequence(seed) {\n" +
+  "  let value = seed ?? 1;\n" +
+  "  const out = [];\n" +
+  "  for (let i = 0; i < 10; i++) {\n" +
+  "    value = (value * 1664525 + 1013904223) >>> 0;\n" +
+  "    const normalized = value / 0xffffffff;\n" +
+  "    out.push(Number(normalized.toFixed(6)));\n" +
+  "  }\n" +
+  "  const sum = out.reduce((a, b) => a + b, 0);\n" +
+  "  const avg = sum / out.length;\n" +
+  "  return { out, sum: Number(sum.toFixed(6)), avg: Number(avg.toFixed(6)) };\n" +
+  "}\n" +
+  "```";
+
+const tableContent =
+  "| Column 1 | Column 2 | Column 3 | Column 4 |\n" +
+  "|---------:|----------|----------|----------|\n" +
+  "| Row 1-1  | Row 1-2  | Row 1-3  | Row 1-4  |\n" +
+  "| Row 2-1  | Row 2-2  | Row 2-3  | Row 2-4  |\n" +
+  "| Row 3-1  | Row 3-2  | Row 3-3  | Row 3-4  |\n" +
+  "| Row 4-1  | Row 4-2  | Row 4-3  | Row 4-4  |";
+
 const successDefault = {
   response: [
     {
@@ -38,7 +93,7 @@ const successDefault = {
       contents: [
         {
           type: 0,
-          text: "## Hi\n\nI’m here and ready to help inside DocSpace.\n\n## What you can do next\n- Ask about **rooms, folders, files, users, and permissions**\n- Describe a collaboration task (e.g., “set up a room for project X with view-only access for guests”), and I’ll guide you step by step",
+          text: defaultTextContent,
         },
       ],
       createdOn: "2025-12-24T16:54:36.0000000+01:00",
@@ -75,33 +130,7 @@ const successBaseElements = {
       contents: [
         {
           type: 0,
-          text:
-            "\n" +
-            "# Level One Heading\n" +
-            "\n" +
-            "## Level Two Heading\n" +
-            "\n" +
-            "### Level Three Heading\n" +
-            "\n" +
-            "#### Level Four Heading\n" +
-            "\n" +
-            "##### Level Five Heading\n" +
-            "\n" +
-            "###### Level Six Heading\n" +
-            "\n" +
-            "Regular Paragraph\n" +
-            "\n" +
-            "[Link](https://example.com)\n" +
-            "\n" +
-            "> Quote\n" +
-            "\n" +
-            "1. Numbered List  \n" +
-            "2. Numbered List  \n" +
-            "3. Numbered List  \n" +
-            "\n" +
-            "- Bulleted List  \n" +
-            "- Bulleted List  \n" +
-            "- Bulleted List",
+          text: baseElementsContent,
         },
       ],
       createdOn: "2025-12-24T16:54:36.0000000+01:00",
@@ -138,21 +167,7 @@ const successCodeBlock = {
       contents: [
         {
           type: 0,
-          text:
-            "```js\n" +
-            "function generateSequence(seed) {\n" +
-            "  let value = seed ?? 1;\n" +
-            "  const out = [];\n" +
-            "  for (let i = 0; i < 10; i++) {\n" +
-            "    value = (value * 1664525 + 1013904223) >>> 0;\n" +
-            "    const normalized = value / 0xffffffff;\n" +
-            "    out.push(Number(normalized.toFixed(6)));\n" +
-            "  }\n" +
-            "  const sum = out.reduce((a, b) => a + b, 0);\n" +
-            "  const avg = sum / out.length;\n" +
-            "  return { out, sum: Number(sum.toFixed(6)), avg: Number(avg.toFixed(6)) };\n" +
-            "}\n" +
-            "```",
+          text: codeContent,
         },
       ],
       createdOn: "2025-12-24T16:54:36.0000000+01:00",
@@ -189,13 +204,7 @@ const successTable = {
       contents: [
         {
           type: 0,
-          text:
-            "| Column 1 | Column 2 | Column 3 | Column 4 |\n" +
-            "|---------:|----------|----------|----------|\n" +
-            "| Row 1-1  | Row 1-2  | Row 1-3  | Row 1-4  |\n" +
-            "| Row 2-1  | Row 2-2  | Row 2-3  | Row 2-4  |\n" +
-            "| Row 3-1  | Row 3-2  | Row 3-3  | Row 3-4  |\n" +
-            "| Row 4-1  | Row 4-2  | Row 4-3  | Row 4-4  |",
+          text: tableContent,
         },
       ],
       createdOn: "2025-12-24T16:54:36.0000000+01:00",
@@ -224,8 +233,111 @@ const successTable = {
   statusCode: 200,
 };
 
+const successMany = {
+  response: [
+    {
+      id: 8,
+      role: 1,
+      contents: [
+        {
+          type: 0,
+          text: tableContent,
+        },
+      ],
+      createdOn: "2025-12-24T16:54:36.0000000+01:00",
+    },
+    {
+      id: 7,
+      role: 0,
+      contents: [
+        {
+          type: 0,
+          text: "Generate table",
+        },
+      ],
+      createdOn: "2025-12-24T16:54:34.0000000+01:00",
+    },
+    {
+      id: 6,
+      role: 1,
+      contents: [
+        {
+          type: 0,
+          text: codeContent,
+        },
+      ],
+      createdOn: "2025-12-24T16:54:36.0000000+01:00",
+    },
+    {
+      id: 5,
+      role: 0,
+      contents: [
+        {
+          type: 0,
+          text: "Generate code",
+        },
+      ],
+      createdOn: "2025-12-24T16:54:34.0000000+01:00",
+    },
+    {
+      id: 4,
+      role: 1,
+      contents: [
+        {
+          type: 0,
+          text: baseElementsContent,
+        },
+      ],
+      createdOn: "2025-12-24T16:54:36.0000000+01:00",
+    },
+    {
+      id: 3,
+      role: 0,
+      contents: [
+        {
+          type: 0,
+          text: "Generate base elements",
+        },
+      ],
+      createdOn: "2025-12-24T16:54:34.0000000+01:00",
+    },
+    {
+      id: 2,
+      role: 1,
+      contents: [
+        {
+          type: 0,
+          text: defaultTextContent,
+        },
+      ],
+      createdOn: "2025-12-24T16:54:36.0000000+01:00",
+    },
+    {
+      id: 1,
+      role: 0,
+      contents: [
+        {
+          type: 0,
+          text: "Generate text",
+        },
+      ],
+      createdOn: "2025-12-24T16:54:34.0000000+01:00",
+    },
+  ],
+  count: 2,
+  total: 2,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_CHAT_MESSAGES}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
 export const aiChatMessagesHandler = (
-  type: "default" | "baseElements" | "codeBlock" | "table" = "default",
+  type: "default" | "baseElements" | "codeBlock" | "table" | "many" = "default",
 ) => {
   switch (type) {
     case "baseElements":
@@ -234,6 +346,8 @@ export const aiChatMessagesHandler = (
       return new Response(JSON.stringify(successCodeBlock));
     case "table":
       return new Response(JSON.stringify(successTable));
+    case "many":
+      return new Response(JSON.stringify(successMany));
     default:
       return new Response(JSON.stringify(successDefault));
   }

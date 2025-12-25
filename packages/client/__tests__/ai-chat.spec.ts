@@ -273,6 +273,29 @@ test.describe("AI chat", () => {
         "ai-chat-ai-message-table.png",
       ]);
     });
+
+    test("should scroll to last message after opening chat", async ({
+      page,
+      mockRequest,
+    }) => {
+      await mockRequest.router([
+        endpoints.aiRoomsChatsConfigAllEnabled,
+        endpoints.aiRoomsServersEmpty,
+        endpoints.aiRoomsChatsEmpty,
+        endpoints.agentFolder,
+        endpoints.aiChat,
+        endpoints.aiChatMessagesMany,
+      ]);
+      await page.goto("/ai-agents/2/chat?folder=2&chat=test-chat-id");
+
+      await expect(page.getByTestId("ai-message").last()).toBeInViewport();
+
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "ai-chat",
+        "ai-chat-scroll-bottom.png",
+      ]);
+    });
   });
 
   // ================================== User ==================================

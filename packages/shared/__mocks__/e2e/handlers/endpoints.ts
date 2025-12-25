@@ -629,6 +629,10 @@ export const endpoints = {
     url: `${BASE_URL}${PATH_AI_CHAT_MESSAGES}`,
     dataHandler: () => aiChatMessagesHandler("table"),
   },
+  aiChatMessagesMany: {
+    url: `${BASE_URL}${PATH_AI_CHAT_MESSAGES}`,
+    dataHandler: () => aiChatMessagesHandler("many"),
+  },
   aiRoomsChatsConfigAllEnabled: {
     url: `${BASE_URL}${PATH_AI_ROOMS_CHATS_CONFIG}`,
     dataHandler: aiRoomsChatsConfigHandler,

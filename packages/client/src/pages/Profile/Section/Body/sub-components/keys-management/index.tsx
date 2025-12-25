@@ -29,12 +29,20 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 
-import styles from "../file-management/FileManagement.module.scss";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
+import {
+  TextInput,
+  InputType,
+  InputSize,
+} from "@docspace/shared/components/text-input";
+import { Text } from "@docspace/shared/components/text";
+
+import styles from "./keys-management.module.scss";
 
 type KeysManagementProps = {
   userKeys?: boolean;
   setUserKeys?: () => void;
-  encryptionKeys?: TEncryptionKeyPair | null;
+  encryptionKeys?: TEncryptionKeyPair[] | null;
 };
 
 const KeysManagement = ({
@@ -44,15 +52,59 @@ const KeysManagement = ({
 }: KeysManagementProps) => {
   //const { t } = useTranslation(["Common"]);
 
+  const [keyWord, setKeyWord] = React.useState("");
+
   const keys = encryptionKeys ? (
     encryptionKeys
   ) : (
     <div>No encryption keys available.</div>
   );
 
+  const onChangeKeyWord = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setKeyWord(value);
+  };
+
   return (
-    <div className={styles.styledWrapper}>
-      <div className={styles.settingsSection}>{keys}</div>
+    <div className={styles.sectionBody}>
+      <div className={styles.categoryTitle}>
+        <Text fontSize="14px" fontWeight={600}>
+          Generate or upload your encryption keys
+        </Text>
+      </div>
+      <div className={styles.contentBody}>
+        <div className={styles.inputGroup}>
+          <TextInput
+            type={InputType.text}
+            size={InputSize.middle}
+            id="keyWord"
+            name="keyWord"
+            onChange={onChangeKeyWord}
+            value={keyWord}
+            scale={false}
+            tabIndex={11}
+            testId="keyWord_input"
+          />
+          <Button
+            size={ButtonSize.small}
+            onClick={setUserKeys}
+            label="Generate"
+          />
+          <div className={styles.buttonsSeparator}>or</div>
+          <Button
+            primary={true}
+            size={ButtonSize.small}
+            onClick={setUserKeys}
+            label="Upload"
+          />
+        </div>
+      </div>
+      <div className={styles.categoryTitle}>
+        <Text fontSize="14px" fontWeight={600}>
+          User keys
+        </Text>
+      </div>
+      <div className={styles.contentBody}>{keys}</div>
     </div>
   );
 };

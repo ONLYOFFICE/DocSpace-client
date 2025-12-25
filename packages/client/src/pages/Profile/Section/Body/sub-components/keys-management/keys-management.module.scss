@@ -24,65 +24,38 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { request } from "../client";
-import type {
-  TPrivacyRoomRequest,
-  TPrivacySettingsRequest,
-  TEncryptionKeyPair,
-} from "./types";
+@use "@docspace/shared/styles/mixins" as mixins;
 
-export async function getPrivacySettings() {
-  const res = (await request({
-    method: "get",
-    url: "privacyroom",
-  })) as boolean;
+.sectionBody {
+  width: 100%;
+  max-width: 660px;
 
-  return res;
+  @include mixins.tablet {
+    max-width: 100%;
+  }
 }
 
-export async function updatePrivacySettings(data: TPrivacySettingsRequest) {
-  const res = (await request({
-    method: "put",
-    url: "privacyroom",
-    data,
-  })) as boolean;
+.contentBody {
+  margin-bottom: 24px;
 
-  return res;
+  p {
+    line-height: 20px;
+  }
 }
 
-export async function setEncryptionKeys(data: TPrivacyRoomRequest) {
-  const res = (await request({
-    method: "post",
-    url: "privacyroom/keys",
-    data,
-  })) as boolean;
-
-  return res;
+.inputGroup {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  gap: 16px;
 }
 
-export async function updateEncryptionKeys(data: TPrivacyRoomRequest) {
-  const res = (await request({
-    method: "put",
-    url: "privacyroom/keys",
-    data,
-  })) as boolean;
+.categoryTitle {
+  margin-bottom: 12px;
+  border-bottom: var(--profile-notifications-border);
 
-  return res;
-}
-
-export async function getEncryptionKeys() {
-  const res = (await request({
-    method: "get",
-    url: "privacyroom/keys",
-  })) as TEncryptionKeyPair[];
-  return res;
-}
-
-export async function getPublicKeysWithAccess(fileId: number | string) {
-  const res = (await request({
-    method: "get",
-    url: `privacyroom/access/${fileId}`,
-  })) as TEncryptionKeyPair[];
-
-  return res;
+  p {
+    line-height: 16px;
+    padding-bottom: 8px;
+  }
 }

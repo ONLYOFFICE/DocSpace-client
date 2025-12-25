@@ -36,7 +36,7 @@ import { getUserType, getStringUserType } from "../utils/common";
 class UserStore {
   user: TUser | null = null;
 
-  encryptionKeys: TEncryptionKeyPair | null = null;
+  encryptionKeys: TEncryptionKeyPair[] | null = null;
 
   isLoading = false;
 

@@ -50,14 +50,14 @@ const KeysManagement = ({
   setUserKeys,
   encryptionKeys,
 }: KeysManagementProps) => {
-  //const { t } = useTranslation(["Common"]);
+  const { t } = useTranslation(["Common", "Article", "Webhooks"]);
 
   const [keyWord, setKeyWord] = React.useState("");
 
   const keys = encryptionKeys ? (
-    encryptionKeys
+    encryptionKeys.map((key, index) => <div key={index}>{key.publicKey}</div>)
   ) : (
-    <div>No encryption keys available.</div>
+    <div></div>
   );
 
   const onChangeKeyWord = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -88,14 +88,14 @@ const KeysManagement = ({
           <Button
             size={ButtonSize.small}
             onClick={setUserKeys}
-            label="Generate"
+            label={t("Webhooks:Generate")}
           />
           <div className={styles.buttonsSeparator}>or</div>
           <Button
             primary={true}
             size={ButtonSize.small}
             onClick={setUserKeys}
-            label="Upload"
+            label={t("Article:Upload")}
           />
         </div>
       </div>

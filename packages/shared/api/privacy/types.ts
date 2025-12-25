@@ -36,6 +36,6 @@ export type TPrivacySettingsRequest = {
 
 export type TEncryptionKeyPair = {
   privateKeyEnc: string;
-  publickey: string;
+  publicKey: string;
   userId: string;
 };

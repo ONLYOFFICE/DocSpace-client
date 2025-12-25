@@ -51,6 +51,7 @@ import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { FolderType, SearchArea } from "@docspace/shared/enums";
+import { UserStore } from "@docspace/shared/store/UserStore";
 
 import type ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 import type FilesStore from "SRC_DIR/store/FilesStore";
@@ -73,6 +74,7 @@ import OformsStore from "SRC_DIR/store/OformsStore";
 type ViewProps = UseContactsProps &
   UseFilesProps &
   UseProfileBodyProps & {
+    getEncryptionKeys: UserStore["getEncryptionKeys"];
     setIsChangePageRequestRunning: ClientLoadingStore["setIsChangePageRequestRunning"];
     setCurrentClientView: ClientLoadingStore["setCurrentClientView"];
     setIsSectionHeaderLoading: ClientLoadingStore["setIsSectionHeaderLoading"];
@@ -166,6 +168,7 @@ const View = ({
 
   setNotificationChannels,
   checkTg,
+  getEncryptionKeys,
 
   aiAgentSelectorDialogProps,
   setAiAgentSelectorDialogProps,
@@ -271,6 +274,7 @@ const View = ({
     setIsSectionHeaderLoading: setIsSectionHeaderLoading!,
     getTfaType: getTfaType!,
     checkTg: checkTg!,
+    getEncryptionKeys: getEncryptionKeys!,
   });
 
   const [roomId, setRoomId] = React.useState(() => {
@@ -760,6 +764,7 @@ export const ViewComponent = inject(
       currentExtensionGallery,
 
       userId: userStore?.user?.id,
+      getEncryptionKeys: userStore?.getEncryptionKeys,
 
       selectedFolderStore,
 

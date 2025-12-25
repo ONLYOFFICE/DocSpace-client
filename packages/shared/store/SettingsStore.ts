@@ -185,7 +185,7 @@ class SettingsStore {
   // isDesktopEncryption: desktopEncryption;
   isEncryptionSupport = false;
 
-  encryptionKeys: { [key: string]: string | boolean } = {};
+  encryptionKeys: { [key: string]: string | boolean }[] = [];
 
   roomsMode = false;
 
@@ -1144,18 +1144,20 @@ class SettingsStore {
     this.setIsEncryptionSupport(isEncryptionSupport);
   };
 
-  updateInStoreEncryptionKeys = (keys: { [key: string]: string | boolean }) => {
-    this.encryptionKeys = keys ?? {};
+  updateInStoreEncryptionKeys = (
+    keys: { [key: string]: string | boolean }[],
+  ) => {
+    this.encryptionKeys = keys ?? [];
   };
 
   setEncryptionKeys = async (keys: TPrivacyRoomRequest) => {
     await api.privacy.setEncryptionKeys(keys);
-    this.updateInStoreEncryptionKeys(keys);
+    this.updateInStoreEncryptionKeys([keys]);
   };
 
   updateEncryptionKeys = async (keys: TPrivacyRoomRequest) => {
     await api.privacy.updateEncryptionKeys(keys);
-    this.updateInStoreEncryptionKeys(keys);
+    this.updateInStoreEncryptionKeys([keys]);
   };
 
   getEncryptionKeys = async () => {

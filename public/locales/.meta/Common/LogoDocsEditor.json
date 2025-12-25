@@ -3,7 +3,7 @@
   "content": "Logo for the editors header",
   "content_en_sha1_hash": "139b31fd58237986c24a80fd96c63f2f78bb1fbf",
   "created_at": "2025-08-13T18:28:02.522Z",
-  "updated_at": "2025-08-13T18:29:28.317Z",
+  "updated_at": "2025-12-22T09:40:22.173Z",
   "comment": {
     "text": "Text displayed as a logo label in the editors header, specifically related to documents. It appears within the WhiteLabel branding settings and includes the logo's dimensions. Translators should ensure the description accurately reflects the visual representation of the logo.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 414,
+      "line_number": 417,
       "context": "fontSize=\"15px\"\n fontWeight=\"600\"\n className=\"settings_unavailable\"\n >\n {/* t(\"LogoForEditors\", { editorName: t(\"Common:Documents\") })} */}\n {t(\"LogoDocsEditor\")} ({logoUrls[4].size.width}x\n {logoUrls[4].size.height})\n </Text>\n \n <div className={styles.logosWrapper}>\n <Logo",
       "module": "/packages/shared"
     }

@@ -3,7 +3,7 @@
   "content": "Tool call arguments successfully copied to clipboard",
   "content_en_sha1_hash": "c996f9eb60ffb9439e6cc614f771b12df0f12c2f",
   "created_at": "2025-11-25T11:52:53.747Z",
-  "updated_at": "2025-11-26T11:28:11.212Z",
+  "updated_at": "2025-11-26T15:05:38.098Z",
   "comment": {
     "text": "This key displays a success message confirming that tool call arguments have been copied to the user's clipboard. It appears as a confirmation message within a tool call code view, likely triggered by a copy action. Translators should ensure the message conveys a positive outcome of the copy operation.",
     "is_auto": true,

@@ -181,7 +181,9 @@ const AIAgentSelectorComponent = ({
     withCreate: true,
     isInit: isInitRef.current,
     setIsInit,
-    createDefineLabel: t("Common:CreateAIAgent"),
+    createDefineLabel: t("Common:CreateAIAgent", {
+      aiAgent: t("Common:AIAgent"),
+    }),
     excludeItems,
     searchValue,
     setHasNextPage,
@@ -247,14 +249,18 @@ const AIAgentSelectorComponent = ({
           ? EmptyScreenAIAgentsSelectorSvgUrl
           : EmptyScreenAIAgentsSelectorSvgUrlDark
       }
-      emptyScreenHeader={t("Common:NoAIAgents")}
+      emptyScreenHeader={t("Common:NoAIAgents", {
+        aiAgents: t("Common:AIAgents"),
+      })}
       emptyScreenDescription={t("Common:NoAIAgentsDescription")}
       searchEmptyScreenImage={
         isBase
           ? EmptyScreenAIAgentsSelectorSvgUrl
           : EmptyScreenAIAgentsSelectorSvgUrlDark
       }
-      searchEmptyScreenHeader={t("Common:NoAIAgentsSearch")}
+      searchEmptyScreenHeader={t("Common:NoAIAgentsSearch", {
+        aiAgents: t("Common:AIAgents"),
+      })}
       searchEmptyScreenDescription={t("Common:NoAIAgentsSearchDescription")}
       totalItems={total}
       hasNextPage={hasNextPage}
@@ -276,7 +282,9 @@ const AIAgentSelectorComponent = ({
       onClose={onClose}
       withInfoBar={withInfo}
       infoBarData={{
-        title: t("Common:ChooseAIAgent"),
+        title: t("Common:ChooseAIAgent", {
+          aiAgent: t("Common:AIAgent"),
+        }),
         icon: InfoIconSvgUrl,
         onClose: () => setWithInfo(!withInfo),
         description: t("Common:ChooseAIAgentDescription"),

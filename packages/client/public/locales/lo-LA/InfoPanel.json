@@ -2,7 +2,6 @@
   "AddedRoomTags": "ຄຳ ແນະ ນຳ ໃສ່ ຕິດ ເພີ່ມ.",
   "Administration": "ບໍລິຫານ",
   "AgentRenamed": "ຕົວແທນ <1>«{{oldRoomTitle}}»</1> ໄດ້ປ່ຽນຊື່ເປັນ <2>«{{roomTitle}}»</2>",
-  "AIAgentsEmptyScreenTent": "ເບິ່ງລາຍລະອຽດຕົວແທນ AI ທີ່ນີ້",
   "AndMoreLabel": "ແລະ <1>{{count}} ເພີ່ມເຕີມ</1>",
   "CreationDate": "ວັນທີສ້າງ",
   "Data": "ຂໍ້ມູນ",

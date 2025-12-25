@@ -3,7 +3,7 @@
   "content": "Sharing settings",
   "content_en_sha1_hash": "2f93c151c6be3a93d71aa260b8535374c3c3019c",
   "created_at": "2025-12-15T14:02:14.024Z",
-  "updated_at": "2025-12-17T07:49:58.422Z",
+  "updated_at": "2025-12-22T14:25:01.789Z",
   "comment": {
     "text": "This key displays the label for a button that allows users to manage sharing options. It appears within a list of options, likely in a settings or management interface, and indicates the user's ability to share a specific item. Translators should ensure this text accurately reflects the action of configuring sharing permissions.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2136,
+      "line_number": 2131,
       "context": "disabled: !item.canShare,\n },\n {\n id: \"option_manage-links\",\n key: \"manage-links\",\n label: t(\"Common:SharingSettings\"),\n icon: SettingsReactSvgUrl,\n onClick: () => this.onClickShare(item),\n disabled: !item.canShare,\n },\n {",
       "module": "/packages/client"
     }

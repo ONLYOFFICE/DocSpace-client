@@ -205,7 +205,11 @@ const AddUpdateDialogComponent = ({
         };
 
         await addAIProvider?.(data);
-        toastr.success(t("AISettings:ProviderAddedSuccess"));
+        toastr.success(
+          t("AISettings:ProviderAddedSuccess", {
+            aiProvider: t("Common:AIProvider"),
+          }),
+        );
       }
 
       if (variant === "update" && providerData?.id) {
@@ -224,7 +228,11 @@ const AddUpdateDialogComponent = ({
         }
 
         await updateAIProvider?.(providerData.id, data);
-        toastr.success(t("AISettings:ProviderUpdatedSuccess"));
+        toastr.success(
+          t("AISettings:ProviderUpdatedSuccess", {
+            aiProvider: t("Common:AIProvider"),
+          }),
+        );
       }
 
       getAIConfig?.();
@@ -266,7 +274,7 @@ const AddUpdateDialogComponent = ({
       onClose={onClose}
       withBodyScroll
     >
-      <ModalDialog.Header>{t("AISettings:AIProvider")}</ModalDialog.Header>
+      <ModalDialog.Header>{t("Common:AIProvider")}</ModalDialog.Header>
 
       <ModalDialog.Body>
         <form
@@ -380,7 +388,9 @@ const AddUpdateDialogComponent = ({
                     [styles.fieldHintError]: providerData?.needReset,
                   })}
                 >
-                  {t("AISettings:ProviderKeyInputHint")}
+                  {t("AISettings:ProviderKeyInputHint", {
+                    aiProvider: t("Common:AIProvider"),
+                  })}
                 </Text>
               </>
             )}

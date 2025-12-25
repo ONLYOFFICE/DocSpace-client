@@ -396,6 +396,7 @@ class FilesActionStore {
 
         const error = isAIAgentsFolderRoot
           ? t("Common:AIAgentSpaceQuotaExceeded", {
+              aiAgent: t("Common:AIAgent"),
               size,
             })
           : t("Common:RoomSpaceQuotaExceeded", {
@@ -1330,11 +1331,11 @@ class FilesActionStore {
 
       if (isAIAgent) {
         translationForOneItem = isPin
-          ? t("AIAgentPinned")
-          : t("AIAgentUnpinned");
+          ? t("AIAgentPinned", { aiAgent: t("Common:AIAgent") })
+          : t("AIAgentUnpinned", { aiAgent: t("Common:AIAgent") });
         translationForSeverals = isPin
-          ? t("AIAgentsPinned")
-          : t("AIAgentsUnpinned");
+          ? t("AIAgentsPinned", { aiAgents: t("Common:AIAgents") })
+          : t("AIAgentsUnpinned", { aiAgents: t("Common:AIAgents") });
       } else {
         translationForOneItem = isPin ? t("RoomPinned") : t("RoomUnpinned");
         translationForSeverals = isPin
@@ -1369,7 +1370,9 @@ class FilesActionStore {
 
       if (isError) {
         isAIAgent
-          ? toastr.error(t("AIAgentPinLimitMessage"))
+          ? toastr.error(
+              t("AIAgentPinLimitMessage", { aiAgents: t("Common:AIAgents") }),
+            )
           : toastr.error(t("RoomsPinLimitMessage"));
       }
 
@@ -1413,8 +1416,12 @@ class FilesActionStore {
     let notificationsEnabled = t("RoomNotificationsEnabled");
 
     if (isAIAgent) {
-      notificationsDisabled = t("AIAgentNotificationsDisabled");
-      notificationsEnabled = t("AIAgentNotificationsEnabled");
+      notificationsDisabled = t("AIAgentNotificationsDisabled", {
+        aiAgent: t("Common:AIAgent"),
+      });
+      notificationsEnabled = t("AIAgentNotificationsEnabled", {
+        aiAgent: t("Common:AIAgent"),
+      });
     }
 
     muteRoomNotification(id, muteStatus)

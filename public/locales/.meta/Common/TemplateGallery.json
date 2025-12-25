@@ -1,0 +1,52 @@
+{
+  "key_path": "TemplateGallery",
+  "content": "Template gallery",
+  "content_en_sha1_hash": "6dfaa7588cf9181537129654e857881bc2647de2",
+  "created_at": "2025-12-22T09:40:11.793Z",
+  "updated_at": "2025-12-22T09:40:58.207Z",
+  "comment": {
+    "text": "This text appears as the label for a button or menu item that opens a gallery of templates. It’s used to indicate the availability of pre-built templates, likely for forms or documents. Translators should ensure the description accurately reflects the function of opening this template gallery.",
+    "is_auto": true,
+    "updated_at": "2025-12-22T09:40:58.207Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/Article/MainButton/index.js",
+      "line_number": 589,
+      "context": "const formGallery = {\n id: \"actions_template_oforms-gallery\",\n className: \"main-button_drop-down_sub\",\n icon: FormGalleryReactSvgUrl,\n label: t(\"Common:TemplateGallery\"),\n onClick: onShowTemplateGallery,\n disabled: isPrivacy,\n key: \"form-gallery\",\n };",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/Article/MainButton/index.js",
+      "line_number": 589,
+      "context": "const formGallery = {\n id: \"actions_template_oforms-gallery\",\n className: \"main-button_drop-down_sub\",\n icon: FormGalleryReactSvgUrl,\n label: t(\"Common:TemplateGallery\"),\n onClick: onShowTemplateGallery,\n disabled: isPrivacy,\n key: \"form-gallery\",\n };",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/TemplateGallery/index.tsx",
+      "line_number": 167,
+      "context": "const renderHeader = useMemo(\n () => (\n <div className={styles.header}>\n <div className={styles.headerContent}>\n <div className={styles.headerText}>{t(\"Common:TemplateGallery\")}</div>\n {!oformsLoadError && !oformsNetworkError ? (\n <Button\n className={styles.headerButton}\n onClick={onOpenSubmitToGalleryDialog}\n label={t(\"Common:SubmitToTemplateGallery\")}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/TemplateGallery/index.tsx",
+      "line_number": 167,
+      "context": "const renderHeader = useMemo(\n () => (\n <div className={styles.header}>\n <div className={styles.headerContent}>\n <div className={styles.headerText}>{t(\"Common:TemplateGallery\")}</div>\n {!oformsLoadError && !oformsNetworkError ? (\n <Button\n className={styles.headerButton}\n onClick={onOpenSubmitToGalleryDialog}\n label={t(\"Common:SubmitToTemplateGallery\")}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 3320,
+      "context": "const templateGallery = templateGalleryAvailable\n ? [\n { key: \"separator\", isSeparator: true },\n {\n key: \"template-gallery\",\n label: t(\"Common:TemplateGallery\"),\n onClick: () => this.onShowTemplateGallery(),\n icon: TemplateGalleryReactSvgUrl,\n },\n ]\n : [];",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

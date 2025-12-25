@@ -3,7 +3,7 @@
   "content": "Reset",
   "content_en_sha1_hash": "44c57abd888a66b36d4b7c902134063e4a097223",
   "created_at": "2025-05-19T21:30:53.995Z",
-  "updated_at": "2025-11-25T06:36:56.702Z",
+  "updated_at": "2025-12-22T14:25:01.380Z",
   "comment": {
     "text": "The \"Reset\" translation key is used to display a button or action label that resets the form fields in the Client Block component. It is likely to appear as a button on the ClientBlock component. The translator should consider translating this text in a way that makes sense in the context of resetting form data, such as \"Clear\" or \"Reset Form\".",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/dialogs/reset/index.tsx",
-      "line_number": 86,
+      "line_number": 93,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n primary\n size={ButtonSize.normal}\n label={t(\"OAuth:Reset\")}\n scale\n onClick={onSubmitAction}\n isLoading={loading}\n />\n <Button",
       "module": "/packages/client"
     },

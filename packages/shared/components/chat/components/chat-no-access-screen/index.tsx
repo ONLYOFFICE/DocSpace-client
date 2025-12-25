@@ -58,7 +58,9 @@ export const ChatNoAccessScreen = ({
 
   const title =
     isPortalAdmin && standalone
-      ? t("Common:EmptyAIAgentsAIDisabledStandaloneAdminTitle")
+      ? t("Common:EmptyAIAgentsAIDisabledStandaloneAdminTitle", {
+          aiProvider: t("Common:AIProvider"),
+        })
       : t("Common:AIFeaturesAreCurrentlyDisabled");
 
   const description = match([standalone, isPortalAdmin])
@@ -66,6 +68,7 @@ export const ChatNoAccessScreen = ({
     .with([true, true], () =>
       t("Common:EmptyAIAgentsAIDisabledStandaloneAdminDescription", {
         productName: t("Common:ProductName"),
+        aiChats: t("Common:AIChats"),
       }),
     )
     // saas admin

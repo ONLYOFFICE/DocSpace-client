@@ -108,7 +108,7 @@ const FileManagement = ({
   }, [setOpenEditorInSameTab, openEditorInSameTab]);
 
   return (
-    <div className={styles.styledWrapper}>
+    <div className={styles.styledWrapper} data-testid="profile-file-management">
       <DefaultPageSetting />
       <div className={styles.settingsSection}>
         <div className={styles.toggleBtnWrapper}>

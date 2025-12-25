@@ -163,7 +163,7 @@ const SocialNetworks = (props: SocialNetworksProps) => {
   if (providers?.length === 0) return null;
 
   return (
-    <div className={styles.socialNetworksWrapper}>
+    <div className={styles.socialNetworksWrapper} data-testid="profile-social-networks">
       <Text fontSize="16px" fontWeight={700} lineHeight="22px">
         {t("ConnectSocialNetworks")}
       </Text>

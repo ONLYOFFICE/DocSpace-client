@@ -31,4 +31,9 @@ export {
   oauthSignIn,
   OAUTH_SIGN_IN_PATH,
 } from "./signIn";
+
 export * from "./scopes";
+
+export * from "./token";
+
+export * from "./clients";

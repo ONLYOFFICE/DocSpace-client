@@ -36,7 +36,7 @@ type KeysManagementProps = {
 };
 
 const KeysManagement = ({ userKeys, setUserKeys }: KeysManagementProps) => {
-  const { t } = useTranslation(["Common"]);
+  //const { t } = useTranslation(["Common"]);
 
   return (
     <div className={styles.styledWrapper}>

@@ -181,7 +181,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     },
     {
       id: "keys-management",
-      name: t?.("KeysManagement"),
+      name: "Keys management",
       content: <KeysManagement />,
       onClick: () => {},
     },

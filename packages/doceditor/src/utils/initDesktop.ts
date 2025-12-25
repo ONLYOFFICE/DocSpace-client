@@ -25,11 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { IInitialConfig } from "@/types";
+import { getEncryptionAccess } from "@docspace/shared/api/files";
 import {
   setEncryptionKeys,
-  getEncryptionAccess,
   updateEncryptionKeys,
-} from "@docspace/shared/api/files";
+} from "@docspace/shared/api/privacy";
+import type { TPrivacyRoomRequest } from "@docspace/shared/api/privacy/types";
 import type { TUser } from "@docspace/shared/api/people/types";
 import { toastr } from "@docspace/shared/components/toast";
 import type { Nullable, TTranslation } from "@docspace/shared/types";
@@ -75,10 +76,10 @@ const initDesktop = (
     user,
     isEncryption,
     encryptionKeys,
-    (keys) => {
+    (keys: TPrivacyRoomRequest) => {
       setEncryptionKeys(keys);
     },
-    (keys) => {
+    (keys: TPrivacyRoomRequest) => {
       updateEncryptionKeys(keys);
     },
     true,

@@ -30,6 +30,7 @@ import omit from "lodash/omit";
 import { toastr } from "../components/toast";
 import type { Nullable, TTranslation } from "../types";
 import type { TUser } from "../api/people/types";
+import type { TPrivacyRoomRequest } from "../api/privacy/types";
 import { ThemeKeys } from "../enums";
 
 import { desktopConstants, getEditorTheme } from "./common";
@@ -66,8 +67,8 @@ export function regDesktop(
   user: TUser,
   isEncryption: boolean,
   keys?: { [key: string]: string | boolean },
-  setEncryptionKeys?: (value: { [key: string]: string | boolean }) => void,
-  updateEncryptionKeys?: (value: { [key: string]: string | boolean }) => void,
+  setEncryptionKeys?: (value: TPrivacyRoomRequest) => void,
+  updateEncryptionKeys?: (value: TPrivacyRoomRequest) => void,
   isEditor?: boolean,
   getEncryptionAccess?: (callback?: TGetSharingKeysCallback) => void,
   t?: Nullable<TTranslation>,
@@ -78,10 +79,10 @@ export function regDesktop(
     window.cloudCryptoCommand = (type, params, callback) => {
       switch (type) {
         case "encryptionKeys":
-          setEncryptionKeys?.(params);
+          setEncryptionKeys?.(params as TPrivacyRoomRequest);
           break;
         case "updateEncryptionKeys":
-          updateEncryptionKeys?.(params);
+          updateEncryptionKeys?.(params as TPrivacyRoomRequest);
           break;
         case "relogin":
           toastr.info(t?.("Common:EncryptionKeysReload"));

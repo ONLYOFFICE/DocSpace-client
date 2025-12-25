@@ -1,0 +1,268 @@
+{
+  "key_path": "WebSearchAI",
+  "content": "Web search",
+  "content_en_sha1_hash": "381ceddd75a893f19764c7e4cf9cd12c0f6e88c3",
+  "created_at": "2025-11-21T08:21:51.294Z",
+  "updated_at": "2025-12-22T09:40:47.157Z",
+  "comment": {
+    "text": "This key refers to the text \"Web search\" and is used to label or describe web search functionality within the AI settings section of the portal. It appears in both the settings overview and a reset dialog related to web search features. Translators should ensure the text accurately conveys the meaning of accessing or disabling web search capabilities.",
+    "is_auto": true,
+    "updated_at": "2025-12-22T09:40:47.157Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
+      "line_number": 130,
+      "context": "React.useEffect(() => {\n const titleKey =\n currentTabId === \"providers\"\n ? \"Common:AIProvider\"\n : currentTabId === \"search\"\n ? \"Common:WebSearchAI\"\n : currentTabId === \"knowledge\"\n ? \"AIRoom:Knowledge\"\n : \"Common:MCPSettingTitle\";\n setDocumentTitle(t(titleKey));\n }, [t, currentTabId]);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/dialogs/reset/index.tsx",
+      "line_number": 64,
+      "context": "try {\n await restoreWebSearch?.();\n toastr.success(\n t(\"AISettings:WebSearchDisabledSuccess\", {\n webSearch: t(\"Common:WebSearchAI\"),\n }),\n );\n onSuccess?.();\n getAIConfig?.();\n } catch (error) {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/dialogs/reset/index.tsx",
+      "line_number": 64,
+      "context": "try {\n await restoreWebSearch?.();\n toastr.success(\n t(\"AISettings:WebSearchDisabledSuccess\", {\n webSearch: t(\"Common:WebSearchAI\"),\n }),\n );\n onSuccess?.();\n getAIConfig?.();\n } catch (error) {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/index.tsx",
+      "line_number": 117,
+      "context": "try {\n await updateWebSearch?.(true, selectedOption, value);\n \n toastr.success(\n t(\"AISettings:WebSearchEnabledSuccess\", {\n webSearch: t(\"Common:WebSearchAI\"),\n }),\n );\n } catch (e) {\n console.error(e);\n toastr.error(e as string);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/index.tsx",
+      "line_number": 117,
+      "context": "try {\n await updateWebSearch?.(true, selectedOption, value);\n \n toastr.success(\n t(\"AISettings:WebSearchEnabledSuccess\", {\n webSearch: t(\"Common:WebSearchAI\"),\n }),\n );\n } catch (e) {\n console.error(e);\n toastr.error(e as string);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/index.tsx",
+      "line_number": 117,
+      "context": "try {\n await updateWebSearch?.(true, selectedOption, value);\n \n toastr.success(\n t(\"AISettings:WebSearchEnabledSuccess\", {\n webSearch: t(\"Common:WebSearchAI\"),\n }),\n );\n } catch (e) {\n console.error(e);\n toastr.error(e as string);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/index.tsx",
+      "line_number": 117,
+      "context": "try {\n await updateWebSearch?.(true, selectedOption, value);\n \n toastr.success(\n t(\"AISettings:WebSearchEnabledSuccess\", {\n webSearch: t(\"Common:WebSearchAI\"),\n }),\n );\n } catch (e) {\n console.error(e);\n toastr.error(e as string);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/index.tsx",
+      "line_number": 117,
+      "context": "try {\n await updateWebSearch?.(true, selectedOption, value);\n \n toastr.success(\n t(\"AISettings:WebSearchEnabledSuccess\", {\n webSearch: t(\"Common:WebSearchAI\"),\n }),\n );\n } catch (e) {\n console.error(e);\n toastr.error(e as string);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/index.tsx",
+      "line_number": 285,
+      "context": "if (confirmActionType === AI_TOOLS) {\n return t(\"Services:AIToolsEnabled\");\n }\n if (confirmActionType === WEB_SEARCH) {\n return t(\"Services:WebSearchEnabled\", {\n webSearch: t(\"Common:WebSearchAI\"),\n });\n }\n };\n \n try {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/components/chat/components/chat-input/ToolsSettings.tsx",
+      "line_number": 333,
+      "context": "tooltipTarget: \"toggle\",\n getTooltipContent: () => (\n <>\n <Text>\n {t(\"ConnectWebSearch\", {\n webSearch: t(\"Common:WebSearchAI\"),\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n {isAdmin ? (\n <Link",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

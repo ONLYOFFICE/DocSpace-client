@@ -41,9 +41,11 @@ const KnowledgeDisabledContainer = (props) => {
   const descriptionRoomNoAccess = isAdmin
     ? t("AIRoom:KnowledgeUnavailableDescription", {
         productName: t("Common:ProductName"),
+        aiAgents: t("Common:AIAgents"),
       })
     : t("AIRoom:KnowledgeUnavailableDescriptionUser", {
         productName: t("Common:ProductName"),
+        aiAgents: t("Common:AIAgents"),
       });
 
   const navigate = useNavigate();

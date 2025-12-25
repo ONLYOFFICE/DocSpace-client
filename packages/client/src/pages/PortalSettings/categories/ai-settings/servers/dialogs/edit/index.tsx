@@ -145,7 +145,7 @@ const EditMCPDialogComponent = ({
       onClose={onClose}
       withBodyScroll
     >
-      <ModalDialog.Header>{t("AISettings:MCPServer")}</ModalDialog.Header>
+      <ModalDialog.Header>{t("Common:MCPServer")}</ModalDialog.Header>
       <ModalDialog.Body>
         <form
           onSubmit={onSubmitAction}

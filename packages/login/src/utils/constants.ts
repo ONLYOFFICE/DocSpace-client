@@ -29,7 +29,7 @@ export const DEFAULT_EMAIL_TEXT =
 export const DEFAULT_ROOM_TEXT =
   "<strong>{{displayName}}</strong> invites you to join the room <strong>{{roomName}}</strong> for secure document collaboration.";
 export const DEFAULT_AGENT_TEXT =
-  "<strong>{{displayName}}</strong> invites you to join the AI agent <strong>{{agentName}}</strong>.";
+  "<strong>{{displayName}}</strong> invites you to join the {{aiAgent}} <strong>{{agentName}}</strong>.";
 export const DEFAULT_PORTAL_TEXT =
   "<strong>{{displayName}}</strong> invites you to join the room <strong>{{roomName}}</strong> for secure document collaboration.";
 export const DEFAULT_GUEST_TEXT =

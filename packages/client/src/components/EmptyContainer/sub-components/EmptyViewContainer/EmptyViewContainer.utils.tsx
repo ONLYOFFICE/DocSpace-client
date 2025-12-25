@@ -181,8 +181,12 @@ export const getRoomDescription = (
 
 const getAIAgentsAIEnabledTitle = (t: TTranslation, access: AccessType) => {
   return isUser(access)
-    ? t("EmptyView:EmptyAIAgentsUserTitle")
-    : t("EmptyView:EmptyAIAgentsTitle");
+    ? t("EmptyView:EmptyAIAgentsUserTitle", {
+        aiAgents: t("Common:AIAgents"),
+      })
+    : t("EmptyView:EmptyAIAgentsTitle", {
+        aiAgent: t("Common:AIAgent"),
+      });
 };
 
 const getAIAgentsAIDisabledTitle = (
@@ -192,12 +196,18 @@ const getAIAgentsAIDisabledTitle = (
 ) => {
   return match([standalone, isPortalAdmin])
     .with([true, true], () =>
-      t("Common:EmptyAIAgentsAIDisabledStandaloneAdminTitle"),
+      t("Common:EmptyAIAgentsAIDisabledStandaloneAdminTitle", {
+        aiProvider: t("Common:AIProvider"),
+      }),
     )
     .with([false, true], () =>
       t("EmptyView:EmptyAIAgentsAIDisabledSaasAdminTitle"),
     )
-    .otherwise(() => t("EmptyView:EmptyAIAgentsAIDisabledUserTitle"));
+    .otherwise(() =>
+      t("EmptyView:EmptyAIAgentsAIDisabledUserTitle", {
+        aiAgents: t("Common:AIAgents"),
+      }),
+    );
 };
 
 const getAIAgentsAIDisabledDescription = (
@@ -209,16 +219,19 @@ const getAIAgentsAIDisabledDescription = (
     .with([true, true], () =>
       t("Common:EmptyAIAgentsAIDisabledStandaloneAdminDescription", {
         productName: t("Common:ProductName"),
+        aiChats: t("Common:AIChats"),
       }),
     )
     .with([false, true], () =>
       t("EmptyView:EmptyAIAgentsAIDisabledSaasAdminDescription", {
         productName: t("Common:ProductName"),
+        aiAgents: t("Common:AIAgents"),
       }),
     )
     .otherwise(() =>
       t("EmptyView:EmptyAIAgentsAIDisabledDescription", {
         productName: t("Common:ProductName"),
+        aiAgents: t("Common:AIAgents"),
       }),
     );
 };
@@ -228,8 +241,12 @@ const getAIAgentsAIEnabledDescription = (
   access: AccessType,
 ) => {
   return isUser(access)
-    ? t("EmptyView:EmptyAIAgentsAIEnabledUserDescription")
-    : t("EmptyView:EmptyAIAgentsDescription");
+    ? t("EmptyView:EmptyAIAgentsAIEnabledUserDescription", {
+        aiAgents: t("Common:AIAgents"),
+      })
+    : t("EmptyView:EmptyAIAgentsDescription", {
+        mcpServer: t("Common:MCPServer"),
+      });
 };
 
 export const getRootDescription = (

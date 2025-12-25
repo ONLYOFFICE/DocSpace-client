@@ -2,7 +2,6 @@
   "AddedRoomTags": "タグが追加されました。",
   "Administration": "管理",
   "AgentRenamed": "<1>«{{oldRoomTitle}}»</1>エージェントが<2>«{{roomTitle}}»</2>に名前変更されました",
-  "AIAgentsEmptyScreenTent": "AIエージェントの詳細はこちらをご覧ください",
   "AndMoreLabel": "と、<1>{{count}}もっと</1>",
   "CreationDate": "作成日",
   "Data": "データ",

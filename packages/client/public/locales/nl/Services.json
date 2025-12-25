@@ -1,5 +1,4 @@
 {
-  "AIAgentsDescription": "Stel een persoonlijke assistent in voor uw team door een kennisbank toe te voegen, het ideale model te selecteren en een MCP-server te verbinden.",
   "AITools": "AI-tools",
   "AItoolsConfirm": "Het inschakelen van de AI-tools service geeft alle {{productName}} gebruikers toegang tot AI-gestuurde functies, mits de wallet voldoende saldo heeft. Ben je zeker dat je verder wilt gaan?",
   "AIToolsEnabled": "AI-tools service succesvol ingeschakeld.",
@@ -32,6 +31,5 @@
   "TextTranslation": "Tekstvertaling",
   "TextTranslationDescription": "Vertaal tekst direct naar uw gewenste taal, terwijl de betekenis en context behouden blijven.",
   "ThirdPartyResourceDescription": "Maak verbinding en bewaar back-ups naar cloud accounts zoals Dropbox, Box, OneDrive of Google Drive.",
-  "ThirdPartyStorageDescription": "Gebruik externe services om uw backups op te slaan. Ideaal voor het verbinden van externe cloud storage platforms.",
-  "WebSearchEnabled": "AI Web zoekservice succesvol ingeschakeld."
+  "ThirdPartyStorageDescription": "Gebruik externe services om uw backups op te slaan. Ideaal voor het verbinden van externe cloud storage platforms."
 }

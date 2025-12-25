@@ -226,7 +226,10 @@ const MCPServersComponent = ({
   return (
     <div className={styles.mcpServers}>
       <Text className={styles.description}>
-        {t("AISettings:MCPSettingsDescription")}
+        {t("AISettings:MCPSettingsDescription", {
+          mcpServers: t("Common:MCPSettingTitle"),
+          aiChats: t("Common:AIChats"),
+        })}
       </Text>
       {mcpServersSettingsUrl ? (
         <Link
@@ -244,7 +247,9 @@ const MCPServersComponent = ({
       <Button
         primary
         size={ButtonSize.small}
-        label={t("AISettings:AddMCPServer")}
+        label={t("AISettings:AddMCPServer", {
+          mcpServer: t("Common:MCPServer"),
+        })}
         scale={false}
         className={styles.addProviderButton}
         onClick={showAddDialog}
@@ -252,7 +257,8 @@ const MCPServersComponent = ({
         tooltipText={
           isMCPActionsDisabled
             ? t("AISettings:ToUseAddProvider", {
-                value: t("AISettings:MCPServer"),
+                value: t("Common:MCPServer"),
+                aiProvider: t("Common:AIProvider"),
               })
             : undefined
         }

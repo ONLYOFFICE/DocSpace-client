@@ -1,5 +1,4 @@
 {
-  "AIAgentsDescription": "Iestatiet personalizētu palīdzību savai komandai, pievienojot zināšanu bāzi, atlasot ideālo modeli un pievienojot MCP serveri.",
   "AITools": "MI rīki",
   "AItoolsConfirm": "Iespējot MI rīku pakalpojums piešķirs visiem {{productName}} lietotājiem piekļuvi MI darbināmiem rīkiem, ja vien portfelī ir pietiekami līdzekļi. Vai esat pārliecināts, ka vēlaties turpināt?",
   "AIToolsEnabled": "MI rīku pakalpojums veiksmīgi aktivizēts.",
@@ -32,6 +31,5 @@
   "TextTranslation": "Teksta tulkošana",
   "TextTranslationDescription": "Tulkojiet tekstu uz savu vēlēto valodu momentāni, saglabājot nozīmi un kontekstu.",
   "ThirdPartyResourceDescription": "Pievienojieties un saglabājiet rezerves kopijas mākoņa kontos, piemēram, Dropbox, Box, OneDrive vai Google Drive.",
-  "ThirdPartyStorageDescription": "Izmantojiet trešo pušu pakalpojumus, lai saglabātu savus dubultniekus. Ideāli piemēroti, lai savienotu ārējus mākoņu krātuves platformas.",
-  "WebSearchEnabled": "AI Web meklēšanas pakalpojums veiksmīgi aktivizēts."
+  "ThirdPartyStorageDescription": "Izmantojiet trešo pušu pakalpojumus, lai saglabātu savus dubultniekus. Ideāli piemēroti, lai savienotu ārējus mākoņu krātuves platformas."
 }

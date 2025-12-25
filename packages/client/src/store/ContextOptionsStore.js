@@ -2229,6 +2229,16 @@ class ContextOptionsStore {
         onClick: () => this.onShowInfoPanel(item),
         disabled: false,
       },
+      {
+        id: "option_change-room-owner",
+        key: "change-room-owner",
+        label: isAIAgent
+          ? t("Translations:OwnerChange")
+          : t("Files:ChangeTheRoomOwner"),
+        icon: ReconnectSvgUrl,
+        onClick: this.onChangeRoomOwner,
+        disabled: false,
+      },
       ...versionActions,
       {
         id: "option_custom-filter",
@@ -2354,16 +2364,6 @@ class ContextOptionsStore {
           !isFormRoom ||
           isMobileUtils() ||
           item.id !== this.selectedFolderStore.id,
-      },
-      {
-        id: "option_change-room-owner",
-        key: "change-room-owner",
-        label: isAIAgent
-          ? t("Translations:OwnerChange")
-          : t("Files:ChangeTheRoomOwner"),
-        icon: ReconnectSvgUrl,
-        onClick: this.onChangeRoomOwner,
-        disabled: false,
       },
       {
         id: "option_leave-room",
@@ -3343,10 +3343,7 @@ class ContextOptionsStore {
         icon: FormReactSvgUrl,
         label: t("Translations:NewForm"),
         key: "new-form-base",
-        items: [
-          createTemplateForm,
-          createTemplateNewFormFile
-        ],
+        items: [createTemplateForm, createTemplateNewFormFile],
       },
     ];
 

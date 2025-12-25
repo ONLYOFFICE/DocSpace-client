@@ -24,42 +24,24 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export {
-  thirdPartyProvider as thirdPartyProviderHandler,
-  successThirdpartyProviders,
-  PATH as THIRD_PARTY_PROVIDER_PATH,
-} from "./thirdPartyProviders";
+import { BASE_URL, API_PREFIX } from "../../utils";
 
-export {
-  self as selfHandler,
-  successSelf,
-  adminOnlyUser,
-  adminOnlySuccess,
-  roomAdminUser,
-  roomAdminSuccess,
-  visitorUser,
-  visitorSuccess,
-  regularUser,
-  regularUserSuccess,
-} from "./self";
+export const PATH_OAUTH_TOKEN = "security/oauth2/token";
 
-export {
-  PATH as SELF_PATH,
-  PATH_CHANGE_AUTH_DATA as SELF_PATH_CHANGE_AUTH_DATA,
-  PATH_ACTIVATION_STATUS as SELF_PATH_ACTIVATION_STATUS,
-  PATH_UPDATE_USER as SELF_PATH_UPDATE_USER,
-  PATH_DELETE_USER as SELF_PATH_DELETE_USER,
-  PATH_USER_BY_EMAIL as SELF_PATH_USER_BY_EMAIL,
-  PATH_ADD_GUEST,
-  PATH_UPDATE_USER_CULTURE as SELF_PATH_UPDATE_USER_CULTURE,
-} from "./self";
+const tokenSuccess = {
+  response:
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlYzgwZmEzYy02M2EwLTRlYTYtYWRmNy1kNTU3ZGIzMWRhNDAiLCJ1c2VyX2lkIjoiZWM4MGZhM2MtNjNhMC00ZWE2LWFkZjctZDU1N2RiMzFkYTQwIiwidXNlcl9uYW1lIjoiVmlrdG9yIEZvbWluIiwidXNlcl9lbWFpbCI6InZpa3Rvci5mb21pbkBvbmx5b2ZmaWNlLmNvbSIsInRlbmFudF9pZCI6IjE4NCIsInRlbmFudF91cmwiOiJodHRwczovL3V6YmVraXN0YW4ub25seW9mZmljZS5pbyIsImlzX2FkbWluIjoidHJ1ZSIsImlzX2d1ZXN0IjoiZmFsc2UiLCJpc19wdWJsaWMiOiJmYWxzZSIsImV4cCI6MTc2NjU3MzM3NCwiaXNzIjoiaHR0cHM6Ly91emJla2lzdGFuLm9ubHlvZmZpY2UuaW8iLCJhdWQiOiJodHRwczovL3V6YmVraXN0YW4ub25seW9mZmljZS5pbyJ9.o8hMouVNMuITkiYkD7XVFzJv7e6cFOl3SqgYinzyM_g",
+  count: 1,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_OAUTH_TOKEN}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
 
-export {
-  peopleListHandler,
-  peopleListAccessDeniedHandler,
-  PATH_PEOPLE_LIST,
-  mockUsers,
-  peopleListSuccess,
-} from "./list";
-
-export * from "./theme";
+export const tokenHandler = (): Response => {
+  return new Response(JSON.stringify(tokenSuccess));
+};

@@ -23,77 +23,57 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import {
-  API_PREFIX,
-  BASE_URL,
-  HEADER_LIST_THIRD_PARTY_PROVIDERS,
-} from "../../utils";
 
-export const PATH = "people/thirdparty/providers";
+import { BASE64_LOGO } from "./base64logo";
 
-const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
+export const PATH_OAUTH_CLIENTS = /\/api\/2\.0\/clients\/consents(?:\?.*)?$/;
 
-export const successThirdpartyProviders = {
-  response: [
-    {
-      provider: "google",
-      url: "/login.ashx?auth=google&mode=popup&callback=",
-      linked: false,
-    },
-    {
-      provider: "zoom",
-      url: "/login.ashx?auth=zoom&mode=popup&callback=",
-      linked: false,
-    },
-    {
-      provider: "linkedin",
-      url: "/login.ashx?auth=linkedin&mode=popup&callback=",
-      linked: false,
-    },
-    {
-      provider: "facebook",
-      url: "/login.ashx?auth=facebook&mode=popup&callback=",
-      linked: false,
-    },
-    {
-      provider: "twitter",
-      url: "/login.ashx?auth=twitter&mode=popup&callback=",
-      linked: false,
-    },
-    {
-      provider: "microsoft",
-      url: "/login.ashx?auth=microsoft&mode=popup&callback=",
-      linked: false,
-    },
-  ],
-  count: 6,
-  links: [
-    {
-      href: url,
-      action: "GET",
-    },
-  ],
-  status: 0,
-  statusCode: 200,
+const clientsEmptySuccess = {
+  data: [],
+  limit: 50,
+  last_modified_on: null,
 };
 
-export const emptyThirdPartyProviders = {
-  response: [],
-  count: 0,
-  links: [
+export const clientsSuccess = {
+  data: [
     {
-      href: url,
-      action: "GET",
+      scopes:
+        "accounts:write rooms:read accounts.self:read accounts:read rooms:write",
+      client: {
+        name: "Test",
+        description: "https://test.com",
+        scopes: [
+          "accounts:write",
+          "rooms:read",
+          "accounts.self:read",
+          "accounts:read",
+          "rooms:write",
+        ],
+        public: true,
+        client_id: "d651bfeb-ed50-4a85-a59f-2b91d581f43b",
+        website_url: "https://test.com",
+        terms_url: "https://test.com",
+        policy_url: "https://test.com",
+        logo: BASE64_LOGO,
+        authentication_methods: ["client_secret_post", "none"],
+        is_public: true,
+        created_on: "2025-08-22T08:10:10.243238358Z",
+        created_by: "ad7f6ac8-223d-48af-922a-52df946e41f2",
+        modified_on: "2025-09-24T07:27:58.621348026Z",
+        modified_by: "ad7f6ac8-223d-48af-922a-52df946e41f2",
+      },
+      registered_client_id: "d651bfeb-ed50-4a85-a59f-2b91d581f43b",
+      modified_at: "2025-12-24T11:03:20.309146Z",
     },
   ],
-  status: 0,
-  statusCode: 200,
+  limit: 50,
+  last_modified_on: null,
 };
 
-export const thirdPartyProvider = (headers?: Headers) => {
-  if (headers?.get(HEADER_LIST_THIRD_PARTY_PROVIDERS)) {
-    return new Response(JSON.stringify(successThirdpartyProviders));
-  }
+export const clientsEmptyHandler = (): Response => {
+  return new Response(JSON.stringify(clientsEmptySuccess));
+};
 
-  return new Response(JSON.stringify(emptyThirdPartyProviders));
+export const clientsHandler = (): Response => {
+  return new Response(JSON.stringify(clientsSuccess));
 };

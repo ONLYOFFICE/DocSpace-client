@@ -360,7 +360,7 @@ const MainProfile = (props: MainProfileProps) => {
   const isBetaLanguage = selectedLanguage?.isBeta;
 
   return (
-    <div className={styles.profileContainer} ref={profileContainerRef}>
+    <div className={styles.profileContainer} ref={profileContainerRef} data-testid="main-profile">
       <div className={styles.profileWrapper} ref={styleContainerRef}>
         <div className={styles.avatarWrapper}>
           <Avatar

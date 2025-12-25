@@ -331,29 +331,28 @@ test.describe("Context menu DocAdmin", () => {
       ]);
     });
 
-    // TODO: bugs change room owner
-    // test("Public third-party", async ({ page, mockRequest }) => {
-    //   await mockRequest.router([endpoints.cmRoomListContentCreator]);
+    test("Public third-party", async ({ page, mockRequest }) => {
+      await mockRequest.router([endpoints.cmRoomListContentCreator]);
 
-    //   await page.goto("/rooms/shared/");
+      await page.goto("/rooms/shared/");
 
-    //   const table = page.getByTestId("table-body");
-    //   await expect(table).toBeVisible();
+      const table = page.getByTestId("table-body");
+      await expect(table).toBeVisible();
 
-    //   const customRoomWithoutLink = table.getByTestId("table-row-4");
-    //   const contextMenuButton = customRoomWithoutLink
-    //     .getByTestId("context-menu-button")
-    //     .first();
-    //   await expect(contextMenuButton).toBeVisible();
+      const customRoomWithoutLink = table.getByTestId("table-row-4");
+      const contextMenuButton = customRoomWithoutLink
+        .getByTestId("context-menu-button")
+        .first();
+      await expect(contextMenuButton).toBeVisible();
 
-    //   await contextMenuButton.click();
+      await contextMenuButton.click();
 
-    //   await expect(page).toHaveScreenshot([
-    //     "desktop",
-    //     "context-menu",
-    //     "doc-admin-content-creator_public-third-party-room.png",
-    //   ]);
-    // });
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "context-menu",
+        "doc-admin-content-creator_public-third-party-room.png",
+      ]);
+    });
 
     test("Collaboration", async ({ page, mockRequest }) => {
       await mockRequest.router([endpoints.cmRoomListContentCreator]);
@@ -509,29 +508,28 @@ test.describe("Context menu DocAdmin", () => {
       ]);
     });
 
-    // TODO: bug change room owner
-    // test("Public third-party", async ({ page, mockRequest }) => {
-    //   await mockRequest.router([endpoints.cmRoomListNotInRoom]);
+    test("Public third-party", async ({ page, mockRequest }) => {
+      await mockRequest.router([endpoints.cmRoomListNotInRoom]);
 
-    //   await page.goto("/rooms/shared/");
+      await page.goto("/rooms/shared/");
 
-    //   const table = page.getByTestId("table-body");
-    //   await expect(table).toBeVisible();
+      const table = page.getByTestId("table-body");
+      await expect(table).toBeVisible();
 
-    //   const customRoomWithoutLink = table.getByTestId("table-row-4");
-    //   const contextMenuButton = customRoomWithoutLink
-    //     .getByTestId("context-menu-button")
-    //     .first();
-    //   await expect(contextMenuButton).toBeVisible();
+      const customRoomWithoutLink = table.getByTestId("table-row-4");
+      const contextMenuButton = customRoomWithoutLink
+        .getByTestId("context-menu-button")
+        .first();
+      await expect(contextMenuButton).toBeVisible();
 
-    //   await contextMenuButton.click();
+      await contextMenuButton.click();
 
-    //   await expect(page).toHaveScreenshot([
-    //     "desktop",
-    //     "context-menu",
-    //     "doc-admin-not-in-room_public-third-party-room.png",
-    //   ]);
-    // });
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "context-menu",
+        "doc-admin-not-in-room_public-third-party-room.png",
+      ]);
+    });
 
     test("Collaboration", async ({ page, mockRequest }) => {
       await mockRequest.router([endpoints.cmRoomListNotInRoom]);

@@ -40,6 +40,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { NotificationsType } from "@docspace/shared/enums";
 import { AuthStore } from "@docspace/shared/store/AuthStore";
 import { TfaStore } from "@docspace/shared/store/TfaStore";
+import { UserStore } from "@docspace/shared/store/UserStore";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
@@ -67,6 +68,7 @@ export type UseProfileBodyProps = {
   setIsProfileLoaded: ClientLoadingStore["setIsProfileLoaded"];
   setIsSectionHeaderLoading: ClientLoadingStore["setIsSectionHeaderLoading"];
   checkTg: TelegramStore["checkTg"];
+  getEncryptionKeys: UserStore["getEncryptionKeys"];
   setIsArticleLoading?: ClientLoadingStore["setIsArticleLoading"];
   setIsSectionBodyLoading?: ClientLoadingStore["setIsSectionBodyLoading"];
 };
@@ -89,6 +91,7 @@ const useProfileBody = ({
   setIsSectionBodyLoading,
   getTfaType,
   checkTg,
+  getEncryptionKeys,
 }: UseProfileBodyProps) => {
   const tfaOn = tfaSettings && tfaSettings !== "none";
 
@@ -135,6 +138,14 @@ const useProfileBody = ({
 
     if (prefix) await getFilesSettings?.();
   }, [getFilesSettings]);
+
+  const getEncryptionKeysData = React.useCallback(async () => {
+    try {
+      await getEncryptionKeys?.();
+    } catch (e) {
+      toastr.error(e as string);
+    }
+  }, [getEncryptionKeys]);
 
   const getConsentList = React.useCallback(async () => {
     try {
@@ -206,6 +217,9 @@ const useProfileBody = ({
       if (window.location.pathname.includes("file-management"))
         actions.push(getFileManagementData());
 
+      if (window.location.pathname.includes("keys-management"))
+        actions.push(getEncryptionKeysData());
+
       if (window.location.pathname.includes("authorized-apps"))
         actions.push(getConsentList());
 
@@ -226,6 +240,7 @@ const useProfileBody = ({
       getFileManagementData,
       getConsentList,
       setIsArticleLoading,
+      getEncryptionKeysData,
     ],
   );
 
@@ -242,6 +257,7 @@ const useProfileBody = ({
     getConsentList,
     openLoginTab,
     initialLoad,
+    getEncryptionKeysData,
   };
 };
 

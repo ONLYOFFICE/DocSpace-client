@@ -28,12 +28,15 @@ import { makeAutoObservable, runInAction } from "mobx";
 
 import api from "../api";
 import { TUser } from "../api/people/types";
+import type { TEncryptionKeyPair } from "../api/privacy/types";
 import { EmployeeActivationStatus, ThemeKeys } from "../enums";
 import { TI18n } from "../types";
 import { getUserType, getStringUserType } from "../utils/common";
 
 class UserStore {
   user: TUser | null = null;
+
+  encryptionKeys: TEncryptionKeyPair | null = null;
 
   isLoading = false;
 
@@ -130,6 +133,16 @@ class UserStore {
     this.setIsLoading(false);
 
     return theme;
+  };
+
+  getEncryptionKeys = async () => {
+    const keys = await api.privacy.getEncryptionKeys();
+
+    runInAction(() => {
+      this.encryptionKeys = keys;
+    });
+
+    return keys;
   };
 
   setUserIsUpdate = (isUpdate: boolean) => {

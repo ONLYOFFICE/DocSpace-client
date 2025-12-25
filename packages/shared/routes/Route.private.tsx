@@ -128,6 +128,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       "/portal-settings/management",
     );
     const isFileManagement = location.pathname.includes("file-management");
+    const isKeysManagement = location.pathname.includes("keys-management");
     const isManagement =
       location.pathname.includes("management") &&
       !location.pathname.includes("ad-management");
@@ -262,7 +263,12 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       );
     }
 
-    if (isManagement && !isPortalManagement && !isFileManagement) {
+    if (
+      isManagement &&
+      !isPortalManagement &&
+      !isFileManagement &&
+      !isKeysManagement
+    ) {
       if (isLoaded && !isAuthenticated) return <Navigate replace to="/" />;
       if ((user && !user?.isAdmin) || limitedAccessSpace)
         return <Navigate replace to="/error/403" />;
@@ -271,7 +277,6 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
         return <Navigate replace to="/management/bonus" />;
       if (isBonusPageUnavailable)
         return <Navigate replace to="/management/payments" />;
-      console.log("here");
       return children;
     }
 

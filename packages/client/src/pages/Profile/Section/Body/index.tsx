@@ -38,6 +38,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 import { TfaStore } from "@docspace/shared/store/TfaStore";
 import { AuthStore } from "@docspace/shared/store/AuthStore";
+import { UserStore } from "@docspace/shared/store/UserStore";
 
 import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 import TargetUserStore from "SRC_DIR/store/contacts/TargetUserStore";
@@ -81,6 +82,7 @@ type SectionBodyContentProps = {
   resetSelections?: FilesStore["resetSelections"];
   setNotificationChannels?: TargetUserStore["setNotificationChannels"];
   checkTg?: TelegramStore["checkTg"];
+  getEncryptionKeys?: UserStore["getEncryptionKeys"];
 };
 
 const SectionBodyContent = (props: SectionBodyContentProps) => {
@@ -107,6 +109,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     resetSelections,
     setNotificationChannels,
     checkTg,
+    getEncryptionKeys,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
@@ -132,6 +135,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     tfaOn,
     getNotificationsData,
     getFileManagementData,
+    getEncryptionKeysData,
     getConsentList,
     openLoginTab,
   } = useProfileBody({
@@ -152,6 +156,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     getTfaType: getTfaType!,
     checkTg: checkTg!,
     setIsSectionBodyLoading: setIsSectionBodyLoading!,
+    getEncryptionKeys: getEncryptionKeys!,
   });
 
   const data = [
@@ -181,9 +186,11 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     },
     {
       id: "keys-management",
-      name: "Keys management",
+      name: t?.("Common:KeysManagement"),
       content: <KeysManagement />,
-      onClick: () => {},
+      onClick: async () => {
+        await getEncryptionKeysData();
+      },
     },
     {
       id: "interface-theme",
@@ -249,6 +256,7 @@ export default inject(
     setup,
     filesStore,
     telegramStore,
+    userStore,
   }: TStore) => {
     const {
       showProfileLoader,
@@ -280,6 +288,8 @@ export default inject(
 
     const { checkTg } = telegramStore;
 
+    const { getEncryptionKeys } = userStore;
+
     return {
       currentDeviceType: settingsStore.currentDeviceType,
       showProfileLoader,
@@ -303,6 +313,7 @@ export default inject(
       resetSelections,
       setNotificationChannels,
       checkTg,
+      getEncryptionKeys,
     };
   },
 )(

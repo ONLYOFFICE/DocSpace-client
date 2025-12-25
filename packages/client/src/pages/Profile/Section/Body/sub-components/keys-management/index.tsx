@@ -27,28 +27,40 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 
 import styles from "../file-management/FileManagement.module.scss";
 
 type KeysManagementProps = {
   userKeys?: boolean;
   setUserKeys?: () => void;
+  encryptionKeys?: TEncryptionKeyPair | null;
 };
 
-const KeysManagement = ({ userKeys, setUserKeys }: KeysManagementProps) => {
+const KeysManagement = ({
+  userKeys,
+  setUserKeys,
+  encryptionKeys,
+}: KeysManagementProps) => {
   //const { t } = useTranslation(["Common"]);
+
+  const keys = encryptionKeys ? (
+    encryptionKeys
+  ) : (
+    <div>No encryption keys available.</div>
+  );
 
   return (
     <div className={styles.styledWrapper}>
-      <div className={styles.settingsSection}>Test keys management</div>
+      <div className={styles.settingsSection}>{keys}</div>
     </div>
   );
 };
 
-export default inject(({ settingsStore }: TStore) => {
-  const { logoText } = settingsStore;
+export default inject(({ userStore }: TStore) => {
+  const { encryptionKeys } = userStore;
 
   return {
-    logoText,
+    encryptionKeys,
   };
 })(observer(KeysManagement));

@@ -1086,5 +1086,6 @@
   "DeletePortal": "Delete {{productName}}",
   "PrivateRoomTitle": "Private Room",
   "PrivateRoomDescription": "All files in this room will be encrypted",
-  "EncryptedFileSaving": "Encrypted file saved"
+  "EncryptedFileSaving": "Encrypted file saved",
+  "KeysManagement": "Keys management"
 }

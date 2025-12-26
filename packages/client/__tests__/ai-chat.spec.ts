@@ -433,6 +433,72 @@ test.describe("AI chat", () => {
         "ai-chat-select-chat-dropdown-with-selected-item.png",
       ]);
     });
+
+    test("should delete chat", async ({ page, mockRequest }) => {
+      await mockRequest.router([
+        endpoints.aiRoomsChatsConfigAllEnabled,
+        endpoints.aiRoomsServersEmpty,
+        endpoints.aiRoomsChats,
+        endpoints.agentFolderChat,
+        endpoints.aiChat,
+        endpoints.aiChatMessages,
+      ]);
+      await page.goto("/ai-agents/2/chat?folder=2&chat=test-chat-id");
+
+      const containerLoader = page.getByTestId("chat-container-loading");
+
+      await expect(containerLoader).toBeVisible();
+      await containerLoader.waitFor({ state: "hidden" });
+
+      const selectChat = page.getByTestId("select-chat");
+      await expect(selectChat).toBeVisible();
+      await selectChat.click();
+
+      const selectChatDropdown = page.getByTestId("select-chat-dropdown");
+      await expect(selectChatDropdown).toBeVisible();
+
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "ai-chat",
+        "ai-chat-before-delete-chat.png",
+      ]);
+
+      const firstChat = selectChatDropdown
+        .getByTestId("drop-down-item")
+        .first();
+      await expect(firstChat).toBeVisible();
+      await firstChat.hover();
+
+      const contextMenuButton = selectChatDropdown.getByTestId(
+        "chat-list-item-context-menu-button",
+      );
+      await contextMenuButton.click();
+
+      const contextMenu = page
+        .getByTestId("chat-list-item-context-menu")
+        .locator("> div");
+      await expect(contextMenu).toBeVisible();
+
+      const removeItem = contextMenu.getByTestId("remove");
+      await expect(removeItem).toBeVisible();
+
+      await removeItem.click();
+
+      const dialog = await page.getByRole("dialog");
+      await expect(dialog).toBeVisible();
+
+      const confirmButton = dialog.getByTestId("delete_dialog_modal_submit");
+      await confirmButton.click();
+
+      await selectChat.click();
+      await expect(selectChatDropdown).toBeVisible();
+
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "ai-chat",
+        "ai-chat-after-delete-chat.png",
+      ]);
+    });
   });
 
   // ================================== User ==================================

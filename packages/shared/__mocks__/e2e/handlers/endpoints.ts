@@ -153,6 +153,10 @@ import {
   agentFolderInfoHandler,
   agentFolderResultStorageHandler,
   PATH_AGENT_FOLDER_RESULT_STORAGE,
+  PATH_RESULT_STORAGE_FOLDER,
+  resultStorageFolderHandler,
+  resultStorageFolderInfoHandler,
+  PATH_RESULT_STORAGE_FOLDER_INFO,
 } from "./files";
 import { capabilitiesHandler, PATH_CAPABILITIES } from "./capabilities";
 
@@ -215,6 +219,8 @@ import {
   PATH_AI_CHAT_MESSAGES,
   aiChatMessagesHandler,
   aiChatPutHandler,
+  aiChatMessageExportHandler,
+  PATH_AI_CHAT_MESSAGE_EXPORT,
 } from "./ai";
 import { PATH_TAGS, roomTagsHandler } from "./rooms";
 import {
@@ -406,6 +412,15 @@ export const endpoints = {
     url: PATH_AGENT_FOLDER_INFO,
     dataHandler: () => agentFolderInfoHandler("canNotUseChat"),
   },
+  resultStorageFolder: {
+    url: PATH_RESULT_STORAGE_FOLDER,
+    dataHandler: resultStorageFolderHandler,
+  },
+  resultStorageFolderInfo: {
+    url: PATH_RESULT_STORAGE_FOLDER_INFO,
+    dataHandler: resultStorageFolderInfoHandler,
+  },
+
   addGuest: {
     url: `${BASE_URL}${PATH_ADD_GUEST}`,
     dataHandler: selfHandler,
@@ -662,6 +677,10 @@ export const endpoints = {
   aiChatMessagesMany: {
     url: `${BASE_URL}${PATH_AI_CHAT_MESSAGES}`,
     dataHandler: () => aiChatMessagesHandler("many"),
+  },
+  exportChatMessage: {
+    url: `${BASE_URL}${PATH_AI_CHAT_MESSAGE_EXPORT}`,
+    dataHandler: aiChatMessageExportHandler,
   },
   aiRoomsChatsConfigAllEnabled: {
     url: `${BASE_URL}${PATH_AI_ROOMS_CHATS_CONFIG}`,

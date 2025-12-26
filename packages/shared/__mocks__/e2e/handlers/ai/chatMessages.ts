@@ -29,6 +29,7 @@
 import { API_PREFIX, BASE_URL } from "../../utils";
 
 export const PATH_AI_CHAT_MESSAGES = "ai/chats/*/messages?*";
+export const PATH_AI_CHAT_MESSAGE_EXPORT = "ai/chats/*/messages/export";
 
 const defaultTextContent =
   "## Hi\n\nI’m here and ready to help inside DocSpace.\n\n## What you can do next\n- Ask about **rooms, folders, files, users, and permissions**\n- Describe a collaboration task (e.g., “set up a room for project X with view-only access for guests”), and I’ll guide you step by step";
@@ -336,6 +337,18 @@ const successMany = {
   statusCode: 200,
 };
 
+const successExportMessage = {
+  count: 0,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_CHAT_MESSAGES}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
 export const aiChatMessagesHandler = (
   type: "default" | "baseElements" | "codeBlock" | "table" | "many" = "default",
 ) => {
@@ -351,4 +364,8 @@ export const aiChatMessagesHandler = (
     default:
       return new Response(JSON.stringify(successDefault));
   }
+};
+
+export const aiChatMessageExportHandler = () => {
+  return new Response(JSON.stringify(successExportMessage));
 };

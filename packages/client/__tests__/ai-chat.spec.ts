@@ -27,6 +27,7 @@ import { endpoints } from "@docspace/shared/__mocks__/e2e";
 
 import { expect, test } from "./fixtures/base";
 import { SearchArea } from "@docspace/shared/enums";
+import { TFile } from "@docspace/shared/api/files/types";
 
 test.describe("AI chat", () => {
   test.beforeEach(async ({ mockRequest }) => {
@@ -567,6 +568,81 @@ test.describe("AI chat", () => {
         "ai-chat",
         "ai-chat-select-chat-dropdown-after-rename-chat.png",
       ]);
+    });
+
+    test("should save chat to file", async ({ page, mockRequest, wsMock }) => {
+      await mockRequest.router([
+        endpoints.aiRoomsChatsConfigAllEnabled,
+        endpoints.aiRoomsServersEmpty,
+        endpoints.aiRoomsChats,
+        endpoints.agentFolderChat,
+        endpoints.aiChat,
+        endpoints.exportChatMessage,
+        endpoints.settingsWithSocket,
+      ]);
+
+      await wsMock.setupWebSocketMock();
+
+      await page.goto("/ai-agents/2/chat?folder=2");
+
+      const containerLoader = page.getByTestId("chat-container-loading");
+
+      await expect(containerLoader).toBeVisible();
+      await containerLoader.waitFor({ state: "hidden" });
+
+      await page.unroute(endpoints.agentFolderChat.url);
+
+      await mockRequest.router([
+        endpoints.resultStorageFolder,
+        endpoints.resultStorageFolderInfo,
+      ]);
+
+      const selectChat = page.getByTestId("select-chat");
+      await expect(selectChat).toBeVisible();
+      await selectChat.click();
+
+      const selectChatDropdown = page.getByTestId("select-chat-dropdown");
+      await expect(selectChatDropdown).toBeVisible();
+
+      const firstChat = selectChatDropdown
+        .getByTestId("drop-down-item")
+        .first();
+      await expect(firstChat).toBeVisible();
+      await firstChat.hover();
+
+      const contextMenuButton = selectChatDropdown.getByTestId(
+        "chat-list-item-context-menu-button",
+      );
+      await contextMenuButton.click();
+
+      const contextMenu = page
+        .getByTestId("chat-list-item-context-menu")
+        .locator("> div");
+      await expect(contextMenu).toBeVisible();
+
+      const saveToFileItem = contextMenu.getByTestId("save_to_file");
+      await expect(saveToFileItem).toBeVisible();
+
+      await saveToFileItem.click();
+
+      await page.getByTestId("selector_submit_button").click();
+
+      wsMock.emitExportChat({
+        resultFile: {
+          fileEntryType: 2,
+          folderId: 0,
+          id: 979633,
+          title: "Lorem ipsum",
+          version: 1,
+          versionGroup: 1,
+        } as TFile,
+      });
+
+      await expect(page.getByTestId("toast-content")).toContainText(
+        "Lorem ipsum",
+      );
+
+      wsMock.closeConnection();
     });
   });
 

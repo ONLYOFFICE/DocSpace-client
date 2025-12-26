@@ -65,6 +65,45 @@ const successEmpty = {
   statusCode: 200,
 };
 
+const successUpdate = {
+  response: {
+    id: "test-chat-id",
+    title: "Updated chat name",
+    createdOn: "2025-12-24T15:49:21.0000000+01:00",
+    modifiedOn: "2025-12-24T15:49:21.0000000+01:00",
+    createdBy: {
+      id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
+      displayName: "Administrator ",
+      avatar:
+        "/static/images/default_user_photo_size_82-82.png?hash=1340933600",
+      avatarOriginal:
+        "/static/images/default_user_photo_size_200-200.png?hash=1340933600",
+      avatarMax:
+        "/static/images/default_user_photo_size_200-200.png?hash=1340933600",
+      avatarMedium:
+        "/static/images/default_user_photo_size_48-48.png?hash=1340933600",
+      avatarSmall:
+        "/static/images/default_user_photo_size_32-32.png?hash=1340933600",
+      profileUrl: "",
+      hasAvatar: false,
+      isAnonim: false,
+    },
+  },
+  count: 1,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_CHAT}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
 export const aiChatHandler = () => {
   return new Response(JSON.stringify(successEmpty));
+};
+
+export const aiChatPutHandler = () => {
+  return new Response(JSON.stringify(successUpdate));
 };

@@ -499,6 +499,75 @@ test.describe("AI chat", () => {
         "ai-chat-after-delete-chat.png",
       ]);
     });
+
+    test("should rename chat", async ({ page, mockRequest }) => {
+      await mockRequest.router([
+        endpoints.aiRoomsChatsConfigAllEnabled,
+        endpoints.aiRoomsServersEmpty,
+        endpoints.aiRoomsChats,
+        endpoints.agentFolderChat,
+        endpoints.aiChat,
+        endpoints.updateAiChat,
+      ]);
+      await page.goto("/ai-agents/2/chat?folder=2");
+
+      const containerLoader = page.getByTestId("chat-container-loading");
+
+      await expect(containerLoader).toBeVisible();
+      await containerLoader.waitFor({ state: "hidden" });
+
+      const selectChat = page.getByTestId("select-chat");
+      await expect(selectChat).toBeVisible();
+      await selectChat.click();
+
+      const selectChatDropdown = page.getByTestId("select-chat-dropdown");
+      await expect(selectChatDropdown).toBeVisible();
+
+      await expect(selectChatDropdown).toHaveScreenshot([
+        "desktop",
+        "ai-chat",
+        "ai-chat-select-chat-dropdown-before-rename-chat.png",
+      ]);
+
+      const firstChat = selectChatDropdown
+        .getByTestId("drop-down-item")
+        .first();
+      await expect(firstChat).toBeVisible();
+      await firstChat.hover();
+
+      const contextMenuButton = selectChatDropdown.getByTestId(
+        "chat-list-item-context-menu-button",
+      );
+      await contextMenuButton.click();
+
+      const contextMenu = page
+        .getByTestId("chat-list-item-context-menu")
+        .locator("> div");
+      await expect(contextMenu).toBeVisible();
+
+      const renameItem = contextMenu.getByTestId("rename");
+      await expect(renameItem).toBeVisible();
+
+      await renameItem.click();
+
+      const dialog = await page.getByRole("dialog");
+      await expect(dialog).toBeVisible();
+
+      const input = dialog.getByRole("textbox");
+      await input.fill("Updated chat name");
+
+      const confirmButton = dialog.getByTestId("confirm-button");
+      await confirmButton.click();
+
+      await selectChat.click();
+      await expect(selectChatDropdown).toBeVisible();
+
+      await expect(selectChatDropdown).toHaveScreenshot([
+        "desktop",
+        "ai-chat",
+        "ai-chat-select-chat-dropdown-after-rename-chat.png",
+      ]);
+    });
   });
 
   // ================================== User ==================================

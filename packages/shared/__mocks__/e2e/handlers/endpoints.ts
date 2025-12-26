@@ -214,6 +214,7 @@ import {
   aiChatHandler,
   PATH_AI_CHAT_MESSAGES,
   aiChatMessagesHandler,
+  aiChatPutHandler,
 } from "./ai";
 import { PATH_TAGS, roomTagsHandler } from "./rooms";
 import {
@@ -636,6 +637,11 @@ export const endpoints = {
   aiChat: {
     url: `${BASE_URL}${PATH_AI_CHAT}`,
     dataHandler: aiChatHandler,
+  },
+  updateAiChat: {
+    url: `${BASE_URL}${PATH_AI_CHAT}`,
+    dataHandler: aiChatPutHandler,
+    method: "PUT",
   },
   aiChatMessages: {
     url: `${BASE_URL}${PATH_AI_CHAT_MESSAGES}`,

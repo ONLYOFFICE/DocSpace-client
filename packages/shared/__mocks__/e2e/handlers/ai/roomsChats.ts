@@ -65,21 +65,42 @@ const successWithChats = {
   response: [
     {
       id: "test-chat-id",
-      title: "Test Chat",
+      title: "Lorem ipsum",
       createdOn: "2025-12-24T17:57:14.0000000+01:00",
       modifiedOn: "2025-12-24T17:57:14.0000000+01:00",
       createdBy: createdBy,
     },
     {
       id: "test-chat-id-2",
-      title: "Test Chat 2",
+      title: "Lorem ipsum dolor",
+      createdOn: "2025-12-24T17:57:14.0000000+01:00",
+      modifiedOn: "2025-12-24T17:57:14.0000000+01:00",
+      createdBy: createdBy,
+    },
+    {
+      id: "test-chat-id-3",
+      title: "Lorem ipsum dolor sit",
+      createdOn: "2025-12-24T17:57:14.0000000+01:00",
+      modifiedOn: "2025-12-24T17:57:14.0000000+01:00",
+      createdBy: createdBy,
+    },
+    {
+      id: "test-chat-id-4",
+      title: "Lorem ipsum dolor sit amet",
+      createdOn: "2025-12-24T17:57:14.0000000+01:00",
+      modifiedOn: "2025-12-24T17:57:14.0000000+01:00",
+      createdBy: createdBy,
+    },
+    {
+      id: "test-chat-id-5",
+      title: "Lorem ipsum dolor sit amet consectetur adipiscing elit",
       createdOn: "2025-12-24T17:57:14.0000000+01:00",
       modifiedOn: "2025-12-24T17:57:14.0000000+01:00",
       createdBy: createdBy,
     },
   ],
-  count: 0,
-  total: 0,
+  count: 5,
+  total: 5,
   links: [
     {
       href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_ROOMS_CHATS}`,

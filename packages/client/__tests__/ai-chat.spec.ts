@@ -379,6 +379,60 @@ test.describe("AI chat", () => {
         "ai-chat-viewer-redirect-result-storage.png",
       ]);
     });
+
+    test("should open chat via chat select", async ({ page, mockRequest }) => {
+      await mockRequest.router([
+        endpoints.aiRoomsChatsConfigAllEnabled,
+        endpoints.aiRoomsServersEmpty,
+        endpoints.aiRoomsChats,
+        endpoints.agentFolderChat,
+        endpoints.aiChat,
+        endpoints.aiChatMessages,
+      ]);
+      await page.goto("/ai-agents/2/chat?folder=2");
+
+      const containerLoader = page.getByTestId("chat-container-loading");
+
+      await expect(containerLoader).toBeVisible();
+      await containerLoader.waitFor({ state: "hidden" });
+
+      const selectChat = page.getByTestId("select-chat");
+      await expect(selectChat).toBeVisible();
+      await selectChat.click();
+
+      const selectChatDropdown = page.getByTestId("select-chat-dropdown");
+      await expect(selectChatDropdown).toBeVisible();
+
+      await expect(selectChatDropdown).toHaveScreenshot([
+        "desktop",
+        "ai-chat",
+        "ai-chat-select-chat-dropdown-default.png",
+      ]);
+
+      const firstChat = selectChatDropdown
+        .getByTestId("drop-down-item")
+        .first();
+      await expect(firstChat).toBeVisible();
+      await firstChat.hover();
+      await expect(selectChatDropdown).toHaveScreenshot([
+        "desktop",
+        "ai-chat",
+        "ai-chat-select-chat-dropdown-with-hovered-item.png",
+      ]);
+
+      await firstChat.click();
+
+      await expect(page.getByTestId("ai-message").last()).toBeInViewport();
+
+      await selectChat.click();
+      await expect(selectChatDropdown).toBeVisible();
+
+      await expect(selectChatDropdown).toHaveScreenshot([
+        "desktop",
+        "ai-chat",
+        "ai-chat-select-chat-dropdown-with-selected-item.png",
+      ]);
+    });
   });
 
   // ================================== User ==================================

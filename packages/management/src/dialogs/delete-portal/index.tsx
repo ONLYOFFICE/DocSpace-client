@@ -105,7 +105,7 @@ export const DeletePortalDialog = observer(() => {
       <ModalDialog.Header>
         {isWizardCompleted
           ? t("SubmitDelete")
-          : t("Settings:DeletePortal", {
+          : t("Common:DeletePortal", {
               productName: t("Common:ProductName"),
             })}
       </ModalDialog.Header>
@@ -141,6 +141,7 @@ export const DeletePortalDialog = observer(() => {
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
+          testId="delete-space-button"
           isLoading={isLoading}
           key="CreateButton"
           label={t("Common:Delete")}

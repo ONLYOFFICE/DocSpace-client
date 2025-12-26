@@ -1,19 +1,19 @@
 {
   "key_path": "EmptyResultsViewerDescription",
-  "content": "You’ll see the results of AI chat activity from other users here once they become available.",
-  "content_en_sha1_hash": "ab36ddab7eef638ed6f4ffe086458b194d662e49",
-  "created_at": "2025-11-17T07:52:03.113Z",
-  "updated_at": "2025-11-17T11:52:35.122Z",
+  "content": "You’ll see the results of {{aiChat}} activity from other users here once they become available.",
+  "content_en_sha1_hash": "e9493f60b2320f7b5fed796f9212f543f47e94e1",
+  "created_at": "2025-12-23T10:30:51.156Z",
+  "updated_at": "2025-12-23T10:35:28.811Z",
   "comment": {
-    "text": "This text explains why a user sees an empty view in the AI chat results area. It indicates that results from other users will appear once they are available. This description appears in the AI chat results view.",
+    "text": "This text explains to the user that results from other users' AI chat activities will appear in this view once they are available. It's used as a placeholder message within the Empty Results Viewer, likely on a results tab or page. Translators should ensure the term \"AI chat\" is accurately translated within the context.",
     "is_auto": true,
-    "updated_at": "2025-11-17T07:54:14.576Z"
+    "updated_at": "2025-12-23T10:35:28.811Z"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 131,
-      "context": ");\n \n if (isResultsTab)\n return security && \"UseChat\" in security && security.UseChat\n ? t(\"AIRoom:EmptyResultsDescription\")\n : t(\"AIRoom:EmptyResultsViewerDescription\");\n }\n \n if (isRootEmptyPage)\n return getRootDescription(\n t,",
+      "line_number": 135,
+      "context": "if (isResultsTab)\n return security && \"UseChat\" in security && security.UseChat\n ? t(\"AIRoom:EmptyResultsDescription\", {\n aiChat: t(\"AIRoom:AIChat\"),\n })\n : t(\"AIRoom:EmptyResultsViewerDescription\", {\n aiChat: t(\"AIRoom:AIChat\"),\n });\n }\n \n if (isRootEmptyPage)",
       "module": "/packages/client"
     }
   ],

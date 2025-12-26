@@ -2,7 +2,6 @@
   "AddedRoomTags": "Etichete adăugate.",
   "Administration": "Administrare",
   "AgentRenamed": "Sala <1>«{{oldRoomTitle}}»</1> a agentului a fost redenumită <2>«{{roomTitle}}»</2>",
-  "AIAgentsEmptyScreenTent": "Detaliile agenților de IA aici",
   "AndMoreLabel": "și <1>{{count}} mai multe</1>",
   "CreationDate": "Data creării",
   "Data": "Date",

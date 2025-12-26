@@ -48,6 +48,10 @@ import {
   roomAdminSuccess,
   visitorSuccess,
   regularUserSuccess,
+  thirdPartyProviderHandler,
+  THIRD_PARTY_PROVIDER_PATH,
+  themeProvider,
+  PATH_THEME,
 } from "./people";
 import {
   colorThemeHandler,
@@ -78,6 +82,29 @@ import {
   webPluginsAddHandler,
   webPluginsUpdateHandler,
   webPluginsDeleteHandler,
+  whiteLabelLogosHandler,
+  whiteLabelLogoTextHandler,
+  whiteLabelLogosIsDefaultHandler,
+  PATH_WHITELABEL_LOGOS,
+  PATH_WHITELABEL_LOGOTEXT,
+  PATH_WHITELABEL_LOGOS_IS_DEFAULT,
+  paymentSettingsHandler,
+  PATH_PAYMENT_SETTINGS,
+  thirdPartyBackupHandler,
+  PATH_THIRDPARTY_BACKUP,
+  backupStorageHandler,
+  PATH_BACKUP_STORAGE,
+  storageRegionsHandler,
+  PATH_STORAGE_REGIONS,
+  encryptionSettingsHandler,
+  PATH_ENCRYPTION_SETTINGS,
+  tfaAppSettingsHandler,
+  tfaAppSettingsEnabledHandler,
+  PATH_TFA_APP_SETTINGS,
+  activeConnectionsHandler,
+  PATH_ACTIVE_CONNECTIONS,
+  tfaAppCodesHandler,
+  PATH_TFA_APP_CODES,
 } from "./settings";
 import {
   CONTINUE_PATH,
@@ -92,6 +119,12 @@ import {
   SUSPEND_PATH,
   suspendHandler,
   tariffHandler,
+  licenseQuotaHandler,
+  PATH_LICENSE_QUOTA,
+  backupScheduleHandler,
+  PATH_BACKUP_SCHEDULE,
+  backupProgressHandler,
+  PATH_BACKUP_PROGRESS,
 } from "./portal";
 import {
   docServiceHandler,
@@ -151,12 +184,32 @@ import {
   aiAgentsHandler,
   PATH_AI_PROVIDERS,
   aiProvidersHandler,
+  aiProvidersPostHandler,
+  aiProvidersDeleteHandler,
+  aiProvidersPutHandler,
+  PATH_AI_PROVIDER,
+  PATH_AI_PROVIDERS_AVAILABLE,
+  aiProvidersAvailableHandler,
   PATH_AI_MODELS,
   aiModelsHandler,
   PATH_AI_SERVER,
   aiServerHandler,
+  PATH_AI_SERVERS_AVAILABLE,
+  aiServersAvailableHandler,
+  PATH_AI_SERVERS_WITH_FILTER,
+  aiServersGetHandler,
+  aiServersPostHandler,
   PATH_AI_SERVERS,
-  aiServersHandler,
+  aiServersDeleteHandler,
+  aiServerPutHandler,
+  PATH_AI_CONFIG_WEB_SEARCH,
+  aiWebSearchGetHandler,
+  aiWebSearchPutHandler,
+  PATH_AI_CONFIG_VECTORIZATION,
+  aiVectorizationGetHandler,
+  aiVectorizationPutHandler,
+  PATH_AI_SERVER_STATUS,
+  aiServerStatusPutHandler,
 } from "./ai";
 import { PATH_TAGS, roomTagsHandler } from "./rooms";
 import {
@@ -165,11 +218,42 @@ import {
   PATH_SHARE_TO_USERS_FILE,
   shareToUserHandle,
 } from "./share";
+import {
+  registerHandler,
+  PATH_PORTAL_REGISTER,
+  removePortalHandler,
+  PATH_PORTAL_REMOVE,
+  setDomainHandler,
+  PATH_SET_DOMAIN,
+} from "./apisystem";
+import {
+  notificationsHandler,
+  PATH_NOTIFICATIONS,
+  PATH_NOTIFICATIONS_CHANNELS,
+  PATH_TELEGRAM_CHECK,
+  channelsHandler,
+  telegramCheckHandler,
+  channelsHandlerWithTelegram,
+  PATH_TELEGRAM_LINK,
+  telegramLinkHandler,
+  telegramCheckLinkedHandler,
+} from "./notification";
+import {
+  tokenHandler,
+  PATH_OAUTH_TOKEN,
+  scopesHandler,
+  PATH_OAUTH_SCOPES,
+  clientsEmptyHandler,
+  clientsHandler,
+  PATH_OAUTH_CLIENTS,
+} from "./oauth";
+
 import type { MethodType } from "../types";
 
 export type TEndpoint = {
   url: string | RegExp;
   dataHandler: () => Response;
+  dataHandlerWithHeaders?: (headers: Headers) => Response;
   method?: MethodType;
 };
 
@@ -178,6 +262,7 @@ export type TEndpoints = {
 };
 
 const BASE_URL = "*/**/api/2.0/";
+const API_SYSTEM_URL = "*/**/apisystem/";
 
 export const endpoints = {
   wizardComplete: {
@@ -207,6 +292,10 @@ export const endpoints = {
   updateUserCultureLv: {
     url: `${BASE_URL}${PATH_UPDATE_USER_CULTURE}`,
     dataHandler: () => updateUserCultureHandler("lv"),
+  },
+  updateUserCultureFr: {
+    url: `${BASE_URL}${PATH_UPDATE_USER_CULTURE}`,
+    dataHandler: () => updateUserCultureHandler("fr"),
   },
   removeUser: {
     url: `${BASE_URL}${SELF_PATH_DELETE_USER}`,
@@ -385,7 +474,7 @@ export const endpoints = {
   },
   tariff: {
     url: `${BASE_URL}${PATH_TARIFF}`,
-    dataHandler: tariffHandler,
+    dataHandler: () => tariffHandler(new Headers()),
   },
   aiConfig: {
     url: `${BASE_URL}${PATH_AI_CONFIG}`,
@@ -416,6 +505,33 @@ export const endpoints = {
     url: `${BASE_URL}${PATH_AI_PROVIDERS}`,
     dataHandler: aiProvidersHandler,
   },
+  aiProvidersListNeedReset: {
+    url: `${BASE_URL}${PATH_AI_PROVIDERS}`,
+    dataHandler: () => aiProvidersHandler({ needReset: true }),
+  },
+  aiProvidersEmptyList: {
+    url: `${BASE_URL}${PATH_AI_PROVIDERS}`,
+    dataHandler: () => aiProvidersHandler({ isEmpty: true }),
+  },
+  createAiProvider: {
+    url: `${BASE_URL}${PATH_AI_PROVIDERS}`,
+    dataHandler: aiProvidersPostHandler,
+    method: "POST",
+  },
+  deleteAiProvider: {
+    url: `${BASE_URL}${PATH_AI_PROVIDERS}`,
+    dataHandler: aiProvidersDeleteHandler,
+    method: "DELETE",
+  },
+  updateAiProvider: {
+    url: `${BASE_URL}${PATH_AI_PROVIDER}`,
+    dataHandler: aiProvidersPutHandler,
+    method: "PUT",
+  },
+  aiProvidersAvailable: {
+    url: `${BASE_URL}${PATH_AI_PROVIDERS_AVAILABLE}`,
+    dataHandler: aiProvidersAvailableHandler,
+  },
   aiModelsClaude: {
     url: `${BASE_URL}${PATH_AI_MODELS}`,
     dataHandler: () => aiModelsHandler({ isClaude: true }),
@@ -432,13 +548,88 @@ export const endpoints = {
     url: `${BASE_URL}${PATH_AI_MODELS}`,
     dataHandler: () => aiModelsHandler({ isOpenRouter: true }),
   },
+  aiModelsError: {
+    url: `${BASE_URL}${PATH_AI_MODELS}`,
+    dataHandler: () => aiModelsHandler({ isError: true }),
+  },
   aiServer: {
     url: `${BASE_URL}${PATH_AI_SERVER}`,
     dataHandler: aiServerHandler,
   },
-  aiServers: {
+  aiServersAvailable: {
+    url: `${BASE_URL}${PATH_AI_SERVERS_AVAILABLE}`,
+    dataHandler: aiServersAvailableHandler,
+  },
+  aiServersList: {
+    url: `${BASE_URL}${PATH_AI_SERVERS_WITH_FILTER}`,
+    dataHandler: aiServersGetHandler,
+  },
+  aiServersListDisabled: {
+    url: `${BASE_URL}${PATH_AI_SERVERS_WITH_FILTER}`,
+    dataHandler: () => aiServersGetHandler("disabled"),
+  },
+  aiServersListNeedReset: {
+    url: `${BASE_URL}${PATH_AI_SERVERS_WITH_FILTER}`,
+    dataHandler: () => aiServersGetHandler("needReset"),
+  },
+  createAiServer: {
     url: `${BASE_URL}${PATH_AI_SERVERS}`,
-    dataHandler: aiServersHandler,
+    dataHandler: aiServersPostHandler,
+    method: "POST",
+  },
+  deleteAiServer: {
+    url: `${BASE_URL}${PATH_AI_SERVERS}`,
+    dataHandler: aiServersDeleteHandler,
+    method: "DELETE",
+  },
+  updateAiServer: {
+    url: `${BASE_URL}${PATH_AI_SERVER}`,
+    dataHandler: aiServerPutHandler,
+    method: "PUT",
+  },
+  enableAiServer: {
+    url: `${BASE_URL}${PATH_AI_SERVER_STATUS}`,
+    dataHandler: () => aiServerStatusPutHandler("enable"),
+    method: "PUT",
+  },
+  disableAiServer: {
+    url: `${BASE_URL}${PATH_AI_SERVER_STATUS}`,
+    dataHandler: () => aiServerStatusPutHandler("disable"),
+    method: "PUT",
+  },
+  aiWebSearchEnabled: {
+    url: `${BASE_URL}${PATH_AI_CONFIG_WEB_SEARCH}`,
+    dataHandler: () => aiWebSearchGetHandler("enabled"),
+  },
+  aiWebSearchDisabled: {
+    url: `${BASE_URL}${PATH_AI_CONFIG_WEB_SEARCH}`,
+    dataHandler: () => aiWebSearchGetHandler("disabled"),
+  },
+  aiWebSearchNeedReset: {
+    url: `${BASE_URL}${PATH_AI_CONFIG_WEB_SEARCH}`,
+    dataHandler: () => aiWebSearchGetHandler("needReset"),
+  },
+  setWebSearchSettings: {
+    url: `${BASE_URL}${PATH_AI_CONFIG_WEB_SEARCH}`,
+    dataHandler: aiWebSearchPutHandler,
+    method: "PUT",
+  },
+  aiVectorizationSettingsEnabled: {
+    url: `${BASE_URL}${PATH_AI_CONFIG_VECTORIZATION}`,
+    dataHandler: () => aiVectorizationGetHandler("enabled"),
+  },
+  aiVectorizationSettingsDisabled: {
+    url: `${BASE_URL}${PATH_AI_CONFIG_VECTORIZATION}`,
+    dataHandler: () => aiVectorizationGetHandler("disabled"),
+  },
+  aiVectorizationSettingsNeedReset: {
+    url: `${BASE_URL}${PATH_AI_CONFIG_VECTORIZATION}`,
+    dataHandler: () => aiVectorizationGetHandler("needReset"),
+  },
+  setVectorizationSettings: {
+    url: `${BASE_URL}${PATH_AI_CONFIG_VECTORIZATION}`,
+    dataHandler: aiVectorizationPutHandler,
+    method: "PUT",
   },
   additionalSettings: {
     url: `${BASE_URL}${PATH_SETTINGS_ADDITIONAL}`,
@@ -595,5 +786,142 @@ export const endpoints = {
   getFileInfo: {
     url: PATH_GET_FILE_INFO,
     dataHandler: getFileInfoHandler,
+  },
+  registerPortal: {
+    url: `${API_SYSTEM_URL}${PATH_PORTAL_REGISTER}`,
+    dataHandler: registerHandler,
+    method: "POST",
+  },
+  removePortal: {
+    url: PATH_PORTAL_REMOVE,
+    dataHandler: removePortalHandler,
+    method: "DELETE",
+  },
+  whiteLabelLogos: {
+    url: `${BASE_URL}/${PATH_WHITELABEL_LOGOS}`,
+    dataHandler: whiteLabelLogosHandler,
+  },
+  whiteLabelLogoText: {
+    url: `${BASE_URL}/${PATH_WHITELABEL_LOGOTEXT}`,
+    dataHandler: whiteLabelLogoTextHandler,
+  },
+  whiteLabelLogosIsDefault: {
+    url: `${BASE_URL}/${PATH_WHITELABEL_LOGOS_IS_DEFAULT}`,
+    dataHandler: whiteLabelLogosIsDefaultHandler,
+  },
+  paymentSettings: {
+    url: `${BASE_URL}/${PATH_PAYMENT_SETTINGS}`,
+    dataHandler: paymentSettingsHandler,
+  },
+  licenseQuota: {
+    url: `${API_SYSTEM_URL}/${PATH_LICENSE_QUOTA}`,
+    dataHandler: licenseQuotaHandler,
+  },
+  thirdPartyBackup: {
+    url: `${BASE_URL}/${PATH_THIRDPARTY_BACKUP}`,
+    dataHandler: thirdPartyBackupHandler,
+  },
+  backupSchedule: {
+    url: `${BASE_URL}/${PATH_BACKUP_SCHEDULE}`,
+    dataHandler: backupScheduleHandler,
+  },
+  backupStorage: {
+    url: `${BASE_URL}/${PATH_BACKUP_STORAGE}`,
+    dataHandler: backupStorageHandler,
+  },
+  storageRegions: {
+    url: `${BASE_URL}/${PATH_STORAGE_REGIONS}`,
+    dataHandler: storageRegionsHandler,
+  },
+  backupProgress: {
+    url: `${BASE_URL}/${PATH_BACKUP_PROGRESS}`,
+    dataHandler: backupProgressHandler,
+  },
+  encryptionSettings: {
+    url: `${BASE_URL}/${PATH_ENCRYPTION_SETTINGS}`,
+    dataHandler: () => encryptionSettingsHandler(new Headers()),
+  },
+  setDomain: {
+    url: `${API_SYSTEM_URL}/${PATH_SET_DOMAIN}`,
+    dataHandler: setDomainHandler,
+    method: "POST",
+  },
+  tfaAppSettings: {
+    url: `${BASE_URL}${PATH_TFA_APP_SETTINGS}`,
+    dataHandler: tfaAppSettingsHandler,
+  },
+  tfaAppSettingsEnabled: {
+    url: `${BASE_URL}${PATH_TFA_APP_SETTINGS}`,
+    dataHandler: tfaAppSettingsEnabledHandler,
+  },
+  tfaAppCodes: {
+    url: `${BASE_URL}${PATH_TFA_APP_CODES}`,
+    dataHandler: tfaAppCodesHandler,
+  },
+  activeConnections: {
+    url: `${BASE_URL}${PATH_ACTIVE_CONNECTIONS}`,
+    dataHandler: activeConnectionsHandler,
+  },
+  thirdPartyProvider: {
+    url: `${BASE_URL}${THIRD_PARTY_PROVIDER_PATH}`,
+    dataHandler: () => thirdPartyProviderHandler(),
+    dataHandlerWithHeaders: (headers) => thirdPartyProviderHandler(headers),
+  },
+  notifications0: {
+    url: `${BASE_URL}${PATH_NOTIFICATIONS}/0`,
+    dataHandler: () => notificationsHandler(0),
+  },
+  notifications1: {
+    url: `${BASE_URL}${PATH_NOTIFICATIONS}/1`,
+    dataHandler: () => notificationsHandler(1),
+  },
+  notifications2: {
+    url: `${BASE_URL}${PATH_NOTIFICATIONS}/2`,
+    dataHandler: () => notificationsHandler(2),
+  },
+  notifications3: {
+    url: `${BASE_URL}${PATH_NOTIFICATIONS}/3`,
+    dataHandler: () => notificationsHandler(3),
+  },
+  notificationChannels: {
+    url: `${BASE_URL}${PATH_NOTIFICATIONS_CHANNELS}`,
+    dataHandler: channelsHandler,
+  },
+  notificationChannelsWithTelegram: {
+    url: `${BASE_URL}${PATH_NOTIFICATIONS_CHANNELS}`,
+    dataHandler: channelsHandlerWithTelegram,
+  },
+  notificationTelegramCheck: {
+    url: `${BASE_URL}${PATH_TELEGRAM_CHECK}`,
+    dataHandler: telegramCheckHandler,
+  },
+  notificationTelegramLink: {
+    url: `${BASE_URL}${PATH_TELEGRAM_LINK}`,
+    dataHandler: telegramLinkHandler,
+  },
+  notificationTelegramCheckLinked: {
+    url: `${BASE_URL}${PATH_TELEGRAM_CHECK}`,
+    dataHandler: telegramCheckLinkedHandler,
+  },
+  oauthToken: {
+    url: `${BASE_URL}${PATH_OAUTH_TOKEN}`,
+    dataHandler: tokenHandler,
+  },
+  oauthScopes: {
+    url: `${BASE_URL}${PATH_OAUTH_SCOPES}`,
+    dataHandler: scopesHandler,
+  },
+  oauthEmptyClients: {
+    url: PATH_OAUTH_CLIENTS,
+    dataHandler: clientsEmptyHandler,
+  },
+  oauthClients: {
+    url: PATH_OAUTH_CLIENTS,
+    dataHandler: clientsHandler,
+  },
+  theme: {
+    url: `${BASE_URL}${PATH_THEME}`,
+    dataHandler: themeProvider,
+    method: "PUT",
   },
 } satisfies TEndpoints;

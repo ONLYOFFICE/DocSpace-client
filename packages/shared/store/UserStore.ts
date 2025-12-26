@@ -65,7 +65,7 @@ class UserStore {
       const correctCulture = user.cultureName || portalCultureName;
 
       if (i18n && correctCulture && correctCulture !== i18n.language) {
-        i18n.changeLanguage(correctCulture);
+        await i18n.changeLanguage(correctCulture);
       }
     } catch (e) {
       console.error(e);

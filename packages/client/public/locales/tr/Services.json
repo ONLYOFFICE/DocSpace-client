@@ -1,5 +1,4 @@
 {
-  "AIAgentsDescription": "Ekibiniz için kişiselleştirilmiş bir asistan ayarlamak için bir bilgi tabanı ekleyin, ideal modeli seçin ve bir MCP sunucusunu bağlayın.",
   "AITools": "Yapay zeka araçları",
   "AItoolsConfirm": "Yapay Zeka araçları hizmetinin etkinleştirilmesi, cüzdanda yeterli bakiye olması koşuluyla tüm {{productName}} kullanıcılarına yapay zeka destekli özelliklere erişim hakkı verecektir. Devam etmek istediğinizden emin misiniz?",
   "AIToolsEnabled": "AI araçları hizmeti başarıyla etkinleştirildi.",
@@ -32,6 +31,5 @@
   "TextTranslation": "Metin çevirisi",
   "TextTranslationDescription": "Metni, anlam ve bağlamı koruyarak anında istediğiniz dile çevirin.",
   "ThirdPartyResourceDescription": "Dropbox, Box, OneDrive veya Google Drive gibi bulut hesaplarına bağlanın ve yedeklemeleri kaydedin.",
-  "ThirdPartyStorageDescription": "Yedeklemelerinizi üçüncü taraf hizmetlerde saklayın. Harici bulut depolama platformlarını bağlamak için idealdir.",
-  "WebSearchEnabled": "AI Web arama hizmeti başarıyla etkinleştirildi."
+  "ThirdPartyStorageDescription": "Yedeklemelerinizi üçüncü taraf hizmetlerde saklayın. Harici bulut depolama platformlarını bağlamak için idealdir."
 }

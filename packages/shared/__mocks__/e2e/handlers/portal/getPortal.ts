@@ -24,52 +24,106 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { BASE_URL } from "../../utils";
+import { HEADER_EMPTY_PORTAL, HEADER_UNCOMPLETED_TENANT } from "../../utils";
 
 export const PATH_PORTAL_GET = "apisystem/portal/get?statistics=true";
 
-export const getPortalSuccess = {
-  tenants: [
-    {
-      created: "2021-03-09T17:46:59",
-      domain: BASE_URL,
-      industry: 0,
-      language: "en-US",
-      name: "Web Office",
-      ownerId: "00000000-0000-0000-0000-000000000000",
-      portalName: BASE_URL,
-      status: "Active",
-      tenantId: 1,
-      timeZoneName: "UTC",
-      quotaUsage: {
-        tenantId: 1,
-        tenantAlias: BASE_URL,
-        tenantDomain: BASE_URL,
-        storageSize: 9223372036854776000,
-        usedSize: 4690191,
-        maxRoomAdminsCount: 2147483647,
-        roomAdminCount: 2,
-        maxUsers: -1,
-        usersCount: 0,
-        maxRoomsCount: -1,
-        roomsCount: 4,
-        maxAIAgentsCount: -1,
-        aiAgentsCount: 0,
-      },
-      customQuota: -1,
-      owner: {
-        id: "00000000-0000-0000-0000-000000000000",
-        email: "test@gmail.com",
-        displayName: "Administrator ",
-      },
-      wizardSettings: {
-        completed: true,
-        lastModified: "2021-03-09T17:46:59",
-      },
-    },
-  ],
+const uncompletedTenant = {
+  created: "2021-03-09T17:46:59",
+  domain: "second.docspace.site",
+  industry: 0,
+  language: "en-US",
+  name: "Web Office",
+  ownerId: "00000000-0000-0000-0000-000000000000",
+  portalName: "second",
+  status: "Active",
+  tenantId: 2,
+  timeZoneName: "UTC",
+  quotaUsage: {
+    tenantId: 2,
+    tenantAlias: "docspace.site",
+    tenantDomain: "docspace.site",
+    storageSize: 9223372036854776000,
+    usedSize: 4690191,
+    maxRoomAdminsCount: 2147483647,
+    roomAdminCount: 0,
+    maxUsers: -1,
+    usersCount: 0,
+    maxRoomsCount: -1,
+    roomsCount: 0,
+    maxAIAgentsCount: -1,
+    aiAgentsCount: 0,
+  },
+  customQuota: -1,
+  owner: {
+    id: "00000000-0000-0000-0000-000000000000",
+    email: "test@gmail.com",
+    displayName: "Administrator ",
+  },
+  wizardSettings: {
+    completed: false,
+    lastModified: "2021-03-09T17:46:59",
+  },
 };
 
-export const getPortalHandler = (): Response => {
+const completedTenant = {
+  created: "2021-03-09T17:46:59",
+  domain: "test.docspace.site",
+  industry: 0,
+  language: "en-US",
+  name: "Web Office",
+  ownerId: "00000000-0000-0000-0000-000000000000",
+  portalName: "test",
+  status: "Active",
+  tenantId: 1,
+  timeZoneName: "UTC",
+  quotaUsage: {
+    tenantId: 1,
+    tenantAlias: "docspace.site",
+    tenantDomain: "docspace.site",
+    storageSize: 9223372036854776000,
+    usedSize: 4690191,
+    maxRoomAdminsCount: 2147483647,
+    roomAdminCount: 2,
+    maxUsers: -1,
+    usersCount: 0,
+    maxRoomsCount: -1,
+    roomsCount: 4,
+    maxAIAgentsCount: -1,
+    aiAgentsCount: 0,
+  },
+  customQuota: -1,
+  owner: {
+    id: "00000000-0000-0000-0000-000000000000",
+    email: "test@gmail.com",
+    displayName: "Administrator ",
+  },
+  wizardSettings: {
+    completed: true,
+    lastModified: "2021-03-09T17:46:59",
+  },
+};
+
+export const getPortalSuccess = {
+  tenants: [completedTenant],
+};
+
+const getPortalEmptySuccess = {
+  tenants: [],
+};
+
+export const getPortalWithUncompletedTenantSuccess = {
+  tenants: [completedTenant, uncompletedTenant],
+};
+
+export const getPortalHandler = (headers?: Headers): Response => {
+  if (headers?.get(HEADER_EMPTY_PORTAL)) {
+    return new Response(JSON.stringify(getPortalEmptySuccess));
+  }
+
+  if (headers?.get(HEADER_UNCOMPLETED_TENANT)) {
+    return new Response(JSON.stringify(getPortalWithUncompletedTenantSuccess));
+  }
+
   return new Response(JSON.stringify(getPortalSuccess));
 };

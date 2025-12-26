@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+export const PATH_OAUTH_SCOPES = "scopes";
+
 export const successScopes = [
   {
     name: "accounts.self:read",
@@ -73,5 +75,9 @@ export const successScopes = [
 ];
 
 export const scopesHandler = () => {
+  return new Response(JSON.stringify(successScopes));
+};
+
+export const scopesHandlerWithHeaders = () => {
   return new Response(JSON.stringify(successScopes));
 };

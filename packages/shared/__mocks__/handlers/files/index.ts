@@ -39,6 +39,16 @@ import {
   primaryLinkHandler,
   editExternalLinkHandler,
 } from "./externalLinks";
+import { thirdPartyCapabilitiesHandler } from "./thirdPartyCapabilities";
+import { thirdPartyHandler } from "./thirdParty";
+import { sharedWithMeHandler } from "./sharedWithMe";
+import { shareHandler } from "./share";
+import { rootHandler } from "./root";
+import { recentHandler } from "./recent";
+import { myDocumentsHandler, getFileInfoHandler } from "./documents";
+import { docServiceHandlers } from "./docservice";
+import { favoritesHandler, addFileToFavoritesHandler, getFileHandler } from "./favorites";
+
 
 export { TypeFolder } from "./folder";
 export { TypeRoomList } from "./roomList";
@@ -56,6 +66,18 @@ export {
   primaryLinkHandler,
   editExternalLinkHandler,
   createRoomHandler,
+  thirdPartyCapabilitiesHandler,
+  thirdPartyHandler,
+  sharedWithMeHandler,
+  shareHandler,
+  rootHandler,
+  recentHandler,
+  myDocumentsHandler,
+  getFileInfoHandler,
+  docServiceHandlers,
+  favoritesHandler,
+  addFileToFavoritesHandler,
+  getFileHandler,
 };
 
 export const filesHandlers = (port: string) => [
@@ -65,4 +87,16 @@ export const filesHandlers = (port: string) => [
   roomListHandler(port),
   folderHandler(port),
   validatePublicRoomPasswordHandler(port),
+  thirdPartyCapabilitiesHandler(),
+  thirdPartyHandler(),
+  sharedWithMeHandler(),
+  shareHandler(),
+  rootHandler(),
+  recentHandler(),
+  myDocumentsHandler(),
+  getFileInfoHandler(),
+  docServiceHandlers(),
+  favoritesHandler(),
+  addFileToFavoritesHandler(),
+  getFileHandler(),
 ];

@@ -24,41 +24,31 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { BASE_URL, API_PREFIX } from "../../utils";
+import { http } from "msw";
+import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
-export const PATH_TARIFF = "portal/tariff";
+export const PATH_AI_SERVER = "ai/servers/*";
 
-export const tariffSuccess = {
+const success = {
   response: {
-    openSource: false,
-    enterprise: false,
-    developer: false,
-    id: 1,
-    state: 1,
-    dueDate: "2026-06-05T13:03:34.0000000+04:00",
-    delayDueDate: "0001-01-01T00:00:00.0000000Z",
-    licenseDate: "0001-01-01T00:00:00.0000000Z",
-    customerId: "test@gmail.com",
-    quotas: [
-      {
-        id: 1,
-        quantity: 31,
-        wallet: false,
-      },
-    ],
+    id: "883da87d-5ae0-49fd-8cb9-2cb82181667e",
+    name: "docspace",
+    serverType: 1,
+    enabled: true,
   },
   count: 1,
   links: [
     {
-      href: `${BASE_URL}/${API_PREFIX}/${PATH_TARIFF}`,
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_SERVER}`,
       action: "GET",
     },
   ],
   status: 0,
   statusCode: 200,
-  ok: true,
 };
 
-export const tariffHandler = () => {
-  return new Response(JSON.stringify(tariffSuccess));
+export const aiServerHandler = () => {
+  return http.get(`http://localhost/${API_PREFIX}/${PATH_AI_SERVER}`, () => {
+    return new Response(JSON.stringify(success));
+  });
 };

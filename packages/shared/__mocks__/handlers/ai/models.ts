@@ -24,7 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { API_PREFIX, BASE_URL } from "../../utils";
+import { http } from "msw";
+import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 export const PATH_AI_MODELS = "ai/chats/models?*";
 
@@ -159,17 +160,7 @@ const providerOpenRouter = {
   statusCode: 200,
 };
 
-export const aiModelsHandler = ({
-  isClaude,
-  isOpenAI,
-  isTogetherAI,
-  isOpenRouter,
-}: {
-  isClaude?: boolean;
-  isOpenAI?: boolean;
-  isTogetherAI?: boolean;
-  isOpenRouter?: boolean;
-}) => {
+export const aiModelsResolver = (isClaude?: boolean, isOpenAI?: boolean, isTogetherAI?: boolean, isOpenRouter?: boolean) => {
   if (isClaude) {
     return new Response(JSON.stringify(providerClaude));
   }
@@ -187,4 +178,20 @@ export const aiModelsHandler = ({
   }
 
   return new Response(JSON.stringify(providerOpenAI));
+};
+
+export const aiModelsHandler = ({
+  isClaude,
+  isOpenAI,
+  isTogetherAI,
+  isOpenRouter,
+}: {
+  isClaude?: boolean;
+  isOpenAI?: boolean;
+  isTogetherAI?: boolean;
+  isOpenRouter?: boolean;
+}) => {
+  return http.get(`http://localhost/${API_PREFIX}/${PATH_AI_MODELS}`, () => {
+    return aiModelsResolver(isClaude, isOpenAI, isTogetherAI, isOpenRouter);
+  });
 };

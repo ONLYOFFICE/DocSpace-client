@@ -24,7 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { BASE_URL, API_PREFIX } from "../../utils";
+import { http } from "msw";
+import { BASE_URL, API_PREFIX } from "../../e2e/utils";
 
 export const PATH_THIRD_PARTY_CAPABILITIES = "files/thirdparty/capabilities";
 
@@ -43,6 +44,12 @@ export const CAPABILITIES = {
   statusCode: 200,
 };
 
-export const thirdPartyCapabilitiesHandler = () => {
+export const thirdPartyCapabilitiesResolver = () => {
   return new Response(JSON.stringify(CAPABILITIES));
+};
+
+export const thirdPartyCapabilitiesHandler = () => {
+  return http.get(`${BASE_URL}/${API_PREFIX}/${PATH_THIRD_PARTY_CAPABILITIES}`, () => {
+    return thirdPartyCapabilitiesResolver();
+  });
 };

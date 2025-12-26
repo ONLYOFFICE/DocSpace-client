@@ -124,7 +124,7 @@ export const loginResolver = (
 };
 
 export const loginHandler = (
-  port: string,
+  port: string ="5110",
   errorStatus: 404 | 401 | 403 | null = null,
   withTfa?: boolean,
 ) => {

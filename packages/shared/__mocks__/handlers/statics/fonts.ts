@@ -24,37 +24,25 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { API_PREFIX, BASE_URL } from "../../utils";
+import path from "path";
+import { http, HttpResponse } from "msw";
+import fs from "fs";
 
-export const PATH_AI_SERVERS = "ai/servers/available?*";
 
-const success = {
-  response: [
-    {
-      id: "883da87d-5ae0-49fd-8cb9-2cb82181667e",
-      name: "docspace",
-      serverType: 1,
-      enabled: true,
-    },
-    {
-      id: "883da87d-5ae0-49fd-8cb9-2cb82181667b",
-      name: "custom",
-      serverType: 0,
-      enabled: true,
-    },
-  ],
-  count: 2,
-  total: 2,
-  links: [
-    {
-      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_SERVERS}`,
-      action: "GET",
-    },
-  ],
-  status: 0,
-  statusCode: 200,
+const fontsHandler = () => {
+  return http.get("*/**/static/fonts/**", async ({ request }) => {
+    try {
+    const fontPath = request
+        .url
+        .split("/static/fonts")
+        .at(-1)!
+        .split("?")[0];
+      
+        
+    } catch (error) {
+      console.error("Error processing font request:", error);
+      return new Response("Error loading font", { status: 500 });
+    }
+  });
 };
 
-export const aiServersHandler = () => {
-  return new Response(JSON.stringify(success));
-};

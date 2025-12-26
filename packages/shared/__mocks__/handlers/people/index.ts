@@ -36,6 +36,8 @@ import {
 } from "./self";
 import { thirdPartyProvidersHandler } from "./thirdPartyProviders";
 import { peopleHandler } from "./people";
+import { peopleListHandler, peopleListAccessDeniedHandler } from "./list";
+
 
 export {
   selfHandler,
@@ -48,6 +50,8 @@ export {
   createUserHandler,
   thirdPartyProvidersHandler,
   peopleHandler,
+  peopleListHandler,
+  peopleListAccessDeniedHandler,
 };
 
 export const peopleHandlers = (port: string) => [
@@ -60,4 +64,6 @@ export const peopleHandlers = (port: string) => [
   selfUpdateHandler(port),
   thirdPartyProvidersHandler(port),
   createUserHandler(port),
+  peopleListHandler(),
+  peopleListAccessDeniedHandler(),
 ];

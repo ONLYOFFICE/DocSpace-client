@@ -28,7 +28,12 @@
 
 import { logoHandler } from "./logo";
 import { imagesHandler } from "./images";
+import { imagesHandlerClient } from "./images";
 
-export { logoHandler, imagesHandler };
+export { logoHandler, imagesHandler, imagesHandlerClient };
 
-export const staticsHandlers = () => [logoHandler(), imagesHandler()];
+export const staticsHandlers = () => [
+    logoHandler(), 
+    imagesHandler(), 
+    imagesHandlerClient()
+];

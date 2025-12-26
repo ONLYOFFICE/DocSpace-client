@@ -24,14 +24,50 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export { aiAgentsHandler, PATH_AI_AGENTS } from "./agents";
+import { http } from "msw";
+import { BASE_URL, API_PREFIX } from "../../e2e/utils";
 
-export { aiConfigHandler, PATH_AI_CONFIG } from "./config";
+export const PATH_TARIFF = "portal/tariff";
 
-export { aiModelsHandler, PATH_AI_MODELS } from "./models";
+export const tariffSuccess = {
+  response: {
+    openSource: false,
+    enterprise: false,
+    developer: false,
+    id: 1,
+    state: 1,
+    dueDate: "2026-06-05T13:03:34.0000000+04:00",
+    delayDueDate: "0001-01-01T00:00:00.0000000Z",
+    licenseDate: "0001-01-01T00:00:00.0000000Z",
+    customerId: "test@gmail.com",
+    quotas: [
+      {
+        id: 1,
+        quantity: 31,
+        wallet: false,
+      },
+    ],
+  },
+  count: 1,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_TARIFF}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+  ok: true,
+};
 
-export { aiProvidersHandler, PATH_AI_PROVIDERS } from "./providers";
+export const tariffResolver = () => {
+  return new Response(JSON.stringify(tariffSuccess));
+};
 
-export { aiServerHandler, PATH_AI_SERVER } from "./server";
+export const tariffHandler = () => {
+  return http.get(`http://localhost/${API_PREFIX}/${PATH_TARIFF}`, () => {
+    return tariffResolver();
+  });
+};
 
-export { aiServersHandler, PATH_AI_SERVERS } from "./servers";
+

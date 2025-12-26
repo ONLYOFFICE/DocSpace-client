@@ -24,7 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { API_PREFIX, BASE_URL } from "../../utils";
+
+import { http } from "msw";
+import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 export const PATH_AI_AGENTS = "ai/agents?*";
 
@@ -494,13 +496,7 @@ const successListWithCreate = {
   statusCode: 200,
 };
 
-export const aiAgentsHandler = ({
-  withCreate,
-  withListCreate,
-}: {
-  withCreate?: boolean;
-  withListCreate?: boolean;
-}) => {
+export const aiAgentsResolver = (withCreate?: boolean, withListCreate?: boolean) => {
   if (withCreate) {
     return new Response(JSON.stringify(successEmptyWithCreate));
   }
@@ -508,4 +504,16 @@ export const aiAgentsHandler = ({
     return new Response(JSON.stringify(successListWithCreate));
   }
   return new Response(JSON.stringify(successEmpty));
+};
+
+export const aiAgentsHandler = ({
+  withCreate,
+  withListCreate,
+}: {
+  withCreate?: boolean;
+  withListCreate?: boolean;
+}) => {
+  return http.get(`http://localhost/${API_PREFIX}/${PATH_AI_AGENTS}`, () => {
+    return aiAgentsResolver(withCreate, withListCreate);
+  });
 };

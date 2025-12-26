@@ -24,10 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { ShareAccessRights } from "../../../../enums";
+import { http } from "msw";
+import { ShareAccessRights } from "../../../enums";
 
-import { API_PREFIX, BASE_URL } from "../../utils";
-import type { MethodType } from "../../types";
+import { API_PREFIX, BASE_URL } from "../../e2e/utils";
+import type { MethodType } from "../../e2e/types";
 
 export type LinkTemplateOptions = {
   linkId?: string;
@@ -133,6 +134,10 @@ export const createLinkRoute = (
   };
 };
 
-export const LinkHandler = () => {
+export const linkResolver = () => {
   return new Response(JSON.stringify(linkHandle));
+};
+
+export const linkHandler = () => {
+  return http.post(`${BASE_URL}${API_PREFIX}/${LINK_FILE_PATH}`, linkResolver);
 };

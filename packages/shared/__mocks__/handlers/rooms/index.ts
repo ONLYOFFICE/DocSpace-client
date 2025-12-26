@@ -24,25 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { API_PREFIX, BASE_URL } from "../../utils";
+import { roomTagsHandler } from "./tags";
 
-export const PATH_TAGS = "files/tags";
+export { roomTagsHandler };
 
-const url = `${BASE_URL}/${API_PREFIX}/${PATH_TAGS}`;
-
-const successEmptyTags = {
-	response: [],
-	count: 1,
-	links: [
-		{
-			href: url,
-			action: "GET",
-		},
-	],
-	status: 0,
-	statusCode: 200,
-};
-
-export const roomTagsHandler = () => {
-	return new Response(JSON.stringify(successEmptyTags));
-};
+export const roomsHandlers = [
+  roomTagsHandler(),
+];

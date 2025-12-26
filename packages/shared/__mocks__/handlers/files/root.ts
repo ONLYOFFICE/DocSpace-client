@@ -24,9 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { BASE_URL, API_PREFIX } from "../../utils";
+import { http } from "msw";
+import { BASE_URL, API_PREFIX } from "../../e2e/utils";
 
-export const ROOT_PATH = "files/@root?**";
+export const ROOT_PATH = "files/@root";
 
 const successRoot = {
   response: [
@@ -867,6 +868,12 @@ const successRoot = {
   statusCode: 200,
 };
 
-export const rootHandler = () => {
+export const rootResolve = (): Response => {
   return new Response(JSON.stringify(successRoot));
+};
+
+export const rootHandler = () => {
+  return http.get(`${BASE_URL}/${API_PREFIX}/${ROOT_PATH}`, () => {
+    return rootResolve();
+  });
 };

@@ -24,7 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { API_PREFIX, BASE_URL } from "../../utils";
+import { http } from "msw";
+import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 export const PATH_DOC_SERVICE = "files/docservice";
 
@@ -51,6 +52,12 @@ export const docServiceSuccess = {
   statusCode: 200,
 };
 
-export const docServiceHandler = () => {
+export const docServiceResolver = (): Response => {
   return new Response(JSON.stringify(docServiceSuccess));
+};
+
+export const docServiceHandlers = () => {
+  return http.get(`${BASE_URL}/${API_PREFIX}/${PATH_DOC_SERVICE}`, () => {
+    return docServiceResolver();
+  });
 };

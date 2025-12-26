@@ -24,4 +24,55 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export { PATH_TAGS, roomTagsHandler } from "./tags";
+import { http } from "msw";
+import { BASE_URL, API_PREFIX } from "../../e2e/utils";
+import { successSelf } from "./self";
+
+export const PATH_PEOPLE_LIST = "people/filter";
+
+export const mockUsers = [successSelf];
+
+export const peopleListEmpty = {
+  response: {
+    items: [],
+    total: 0,
+  },
+};
+
+export const peopleListSuccess = {
+  response: {
+    items: mockUsers,
+    total: mockUsers.length,
+  },
+};
+
+export const peopleListAccessDenied = {
+  response: {
+    error: {
+      message: "Access denied",
+    },
+    status: 1,
+    statusCode: 403,
+  },
+};
+
+export const peopleListResolver = (isEmpty: boolean): Response => {
+  return new Response(JSON.stringify(isEmpty ? peopleListEmpty : peopleListSuccess));
+};
+
+export const peopleListAccessDeniedResolver = (): Response => {
+  return new Response(JSON.stringify(peopleListAccessDenied));
+};
+
+
+export const peopleListHandler = (isEmpty: boolean = false) => {
+  return http.get(`${BASE_URL}/${API_PREFIX}/${PATH_PEOPLE_LIST}`, () => {
+    return peopleListResolver(isEmpty);
+  });
+};
+
+export const peopleListAccessDeniedHandler = () => {
+  return http.get(`${BASE_URL}/${API_PREFIX}/${PATH_PEOPLE_LIST}`, () => {
+    return peopleListAccessDeniedResolver();
+  });
+};

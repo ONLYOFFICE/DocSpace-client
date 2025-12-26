@@ -24,5 +24,27 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export * from "./link";
-export * from "./shareToUser";
+import { aiAgentsHandler } from "./agents";
+import { aiConfigHandler } from "./config";
+import { aiModelsHandler } from "./models";
+import { aiProvidersHandler } from "./providers";
+import { aiServerHandler } from "./server";
+import { aiServersHandler } from "./servers";
+
+export {
+  aiAgentsHandler,
+  aiConfigHandler,
+  aiModelsHandler,
+  aiProvidersHandler,
+  aiServerHandler,
+  aiServersHandler,
+};
+
+export const aiHandlers = [
+  aiAgentsHandler,
+  aiConfigHandler,
+  aiModelsHandler,
+  aiProvidersHandler,
+  aiServerHandler,
+  aiServersHandler,
+];

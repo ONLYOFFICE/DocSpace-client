@@ -24,10 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { BASE_URL, API_PREFIX } from "../../utils";
+import { http } from "msw";
+import { BASE_URL, API_PREFIX } from "../../e2e/utils";
 
-export const PATH_MY_DOCUMENTS = /.*\/api\/2\.0\/files\/\d+\?.*/;
-export const PATH_GET_FILE_INFO = /.*\/api\/2\.0\/files\/file\/\d+$/;
+export const PATH_MY_DOCUMENTS = "api/2.0/files/:id";
+export const PATH_GET_FILE_INFO ="api/2.0/files/file/:id";
 
 const myDocumentsFiles = {
   response: {
@@ -354,10 +355,23 @@ const fileInfo = {
   statusCode: 200,
 };
 
-export const myDocumentsHandler = () => {
+export const myDocumentsResolver = (): Response => {
   return new Response(JSON.stringify(myDocumentsFiles));
 };
 
-export const getFileInfoHandler = () => {
+export const myDocumentsHandler = () => {
+  return http.get(`http://localhost/${API_PREFIX}/${PATH_MY_DOCUMENTS}`, () => {
+    return myDocumentsResolver();
+  });
+};
+
+
+export const getFileInfoResolver = (): Response => {
   return new Response(JSON.stringify(fileInfo));
+};
+
+export const getFileInfoHandler = () => {
+  return http.get(`http://localhost/${API_PREFIX}/${PATH_GET_FILE_INFO}`, () => {
+    return getFileInfoResolver();
+  });
 };

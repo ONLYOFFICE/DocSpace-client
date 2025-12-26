@@ -24,9 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { BASE_URL, API_PREFIX } from "../../utils";
+import { http } from "msw";
+import { BASE_URL, API_PREFIX } from "../../e2e/utils";
 
-export const PATH_RECENT = /.*\/api\/2\.0\/files\/\d+\?.*/;
+export const PATH_RECENT = "files/:id";
 
 const recentEmptySuccess = {
   response: {
@@ -1468,10 +1469,14 @@ const recentSuccess = {
   statusCode: 200,
 };
 
-export const recentEmptyHandler = () => {
-  return new Response(JSON.stringify(recentEmptySuccess));
+export const recentResolver = (isEmpty: boolean): Response => {
+  return isEmpty ? 
+    new Response(JSON.stringify(recentEmptySuccess)) :
+    new Response(JSON.stringify(recentSuccess));
 };
 
-export const recentHandler = () => {
-  return new Response(JSON.stringify(recentSuccess));
+export const recentHandler = (isEmpty: boolean = false) => {
+  return http.get(`http://localhost/${API_PREFIX}/${PATH_RECENT}`, () => {
+    return recentResolver(isEmpty);
+  });
 };

@@ -26,37 +26,26 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
+import path from "path";
 import { http } from "msw";
-import { BASE_URL, API_PREFIX } from "../../e2e/utils";
+import fs from "fs";
 
-type ActionType = "Delete";
+export const localesHandler = () => {
+  return http.get("*/**/locales/**", async ({ request }) => {
+    try {
+      const url = request.url;
+      const hasStatic = url.includes("static");
+      const local = url.split("/locales/").at(-1)!.split("?")[0];
 
-export const PATH_SHARE = "files/share";
+      const path = hasStatic
+        ? `../../public/locales/${local}`
+        : `./public/locales/${local}`;
+      
 
-export const deleteShare = {
-  response: true,
-  count: 1,
-  links: [
-    {
-      href: `${BASE_URL}/${API_PREFIX}/${PATH_SHARE}`,
-      action: "DELETE",
-    },
-  ],
-  status: 0,
-  statusCode: 200,
-};
-
-export const shareResolver = (action?: ActionType) => {
-  switch (action) {
-    case "Delete":
-      return new Response(JSON.stringify(deleteShare));
-    default:
-      return new Response(JSON.stringify(deleteShare));
-  }
-};
-
-export const shareHandler = (action?: ActionType) => {
-  return http.delete(`${BASE_URL}/${API_PREFIX}/${PATH_SHARE}`, () => {
-    return shareResolver(action);
+      return new Response(null, { status: 200 });
+    } catch (error) {
+      console.error("Error reading locale file:", error);
+      return new Response("Error loading locale", { status: 500 });
+    }
   });
 };

@@ -24,30 +24,59 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { suspendPortalHandler } from "./suspend";
-import { continuePortalHandler } from "./continue";
-import { deletePortalHandler } from "./delete";
-import { restoreProgressHandler } from "./restoreProgress";
-import { tariffHandler } from "./tariff";
-import { getPortalHandler } from "./getPortal";
-import { quotaHandler } from "./quota";
+import { http } from "msw";
+import { BASE_URL, API_PREFIX } from "../../e2e/utils";
 
-export {
-  suspendPortalHandler,
-  continuePortalHandler,
-  deletePortalHandler,
-  restoreProgressHandler,
-  tariffHandler,
-  getPortalHandler,
-  quotaHandler,
+export const PATH_PORTAL_GET = "apisystem/portal/get";
+
+export const getPortalSuccess = {
+  tenants: [
+    {
+      created: "2021-03-09T17:46:59",
+      domain: BASE_URL,
+      industry: 0,
+      language: "en-US",
+      name: "Web Office",
+      ownerId: "00000000-0000-0000-0000-000000000000",
+      portalName: BASE_URL,
+      status: "Active",
+      tenantId: 1,
+      timeZoneName: "UTC",
+      quotaUsage: {
+        tenantId: 1,
+        tenantAlias: BASE_URL,
+        tenantDomain: BASE_URL,
+        storageSize: 9223372036854776000,
+        usedSize: 4690191,
+        maxRoomAdminsCount: 2147483647,
+        roomAdminCount: 2,
+        maxUsers: -1,
+        usersCount: 0,
+        maxRoomsCount: -1,
+        roomsCount: 4,
+        maxAIAgentsCount: -1,
+        aiAgentsCount: 0,
+      },
+      customQuota: -1,
+      owner: {
+        id: "00000000-0000-0000-0000-000000000000",
+        email: "test@gmail.com",
+        displayName: "Administrator ",
+      },
+      wizardSettings: {
+        completed: true,
+        lastModified: "2021-03-09T17:46:59",
+      },
+    },
+  ],
 };
 
-export const portalHandlers = (port: string) => [
-  suspendPortalHandler(port),
-  continuePortalHandler(port),
-  deletePortalHandler(port),
-  restoreProgressHandler(port),
-  tariffHandler(),
-  getPortalHandler(),
-  quotaHandler(),
-];
+export const getPortalResolver = (): Response => {
+  return new Response(JSON.stringify(getPortalSuccess));
+};
+
+export const getPortalHandler = () => {
+  return http.get(`${BASE_URL}/${API_PREFIX}/${PATH_PORTAL_GET}`, () => {
+    return getPortalResolver();
+  });
+};

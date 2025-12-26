@@ -24,21 +24,26 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { API_PREFIX, BASE_URL } from "../../utils";
+import { http } from "msw";
+import { BASE_URL, API_PREFIX } from "../../e2e/utils";
 
-export const PATH_AI_SERVER = "ai/servers/*";
+export const PATH_AI_CONFIG = "ai/config";
 
 const success = {
   response: {
-    id: "883da87d-5ae0-49fd-8cb9-2cb82181667e",
-    name: "docspace",
-    serverType: 1,
-    enabled: true,
+    webSearchEnabled: true,
+    vectorizationEnabled: true,
+    aiReady: true,
+    portalMcpServerId: "id",
+    embeddingModel: "text-embedding-3-small",
+    knowledgeSearchToolName: "docspace_knowledge_search",
+    webSearchToolName: "docspace_web_search",
+    webCrawlingToolName: "docspace_web_crawling",
   },
   count: 1,
   links: [
     {
-      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_SERVER}`,
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_CONFIG}`,
       action: "GET",
     },
   ],
@@ -46,6 +51,39 @@ const success = {
   statusCode: 200,
 };
 
-export const aiServerHandler = () => {
+const successDisabled = {
+  response: {
+    webSearchEnabled: false,
+    vectorizationEnabled: false,
+    aiReady: false,
+    portalMcpServerId: "id",
+    embeddingModel: "text-embedding-3-small",
+    knowledgeSearchToolName: "docspace_knowledge_search",
+    webSearchToolName: "docspace_web_search",
+    webCrawlingToolName: "docspace_web_crawling",
+  },
+  count: 1,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_CONFIG}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+export const aiConfigResolver = (
+  isDisabled?: boolean,
+): Response => {
+  if (isDisabled) {
+    return new Response(JSON.stringify(successDisabled));
+  }
   return new Response(JSON.stringify(success));
+};
+
+export const aiConfigHandler = (isDisabled?: boolean) => {
+  return http.get(`http://localhost/${API_PREFIX}/${PATH_AI_CONFIG}`, () => {
+    return aiConfigResolver(isDisabled);
+  });
 };

@@ -67,3 +67,40 @@ export const imagesHandler = () => {
     }
   });
 };
+
+export const imagesHandlerClient = () => {
+  return http.get("*/**/static/images/**", async ({ request }) => {
+    try {
+      const requestUrl = request.url;
+      const imagePath = requestUrl
+        .split("/static/images/")
+        .at(-1)!
+        .split("?")[0];
+
+      const imageFilePath = path.join(
+        __dirname,
+        "../../../../../public/images/",
+        imagePath,
+      );
+      const imageContent = fs.readFileSync(imageFilePath);
+
+      // Determine content type based on file extension
+      const ext = path.extname(imagePath).toLowerCase();
+      let contentType: string = "image/jpeg";
+
+      if (ext === ".svg") contentType = "image/svg+xml";
+      else if (ext === ".png") contentType = "image/png";
+      else if (ext === ".gif") contentType = "image/gif";
+
+      return new Response(imageContent, {
+        headers: {
+          "Content-Type": contentType,
+          "Content-Length": imageContent.length.toString(),
+        },
+      });
+    } catch (error) {
+      console.error("Error reading image file:", error);
+      return new Response("Error loading image", { status: 500 });
+    }
+  });
+};

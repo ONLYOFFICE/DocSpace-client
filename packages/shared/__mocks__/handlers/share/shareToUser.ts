@@ -24,7 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { API_PREFIX, BASE_URL } from "../../utils";
+import { http } from "msw";
+import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 const id = "00000000-0000-0000-0000-000000000000";
 export const PATH_SHARE_TO_USERS_FILE =
@@ -120,6 +121,11 @@ export const success = {
   statusCode: 200,
 };
 
-export const shareToUserHandle = () => {
+export const shareToUserResolver = () => {
   return new Response(JSON.stringify(success));
+};
+
+export const shareToUserHandler = () => {
+  return http.get(`${BASE_URL}/${API_PREFIX}/${PATH_SHARE_TO_USERS_FILE}`, 
+    () => shareToUserResolver());
 };

@@ -24,43 +24,60 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { BASE_URL } from "../../utils";
-import { successSelf, adminOnlyUser, roomAdminUser } from "./self";
+import { http } from "msw";
+import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
-export const PATH_PEOPLE_LIST = "people/filter";
+export const PATH_AI_PROVIDERS = "ai/providers";
 
-export const mockUsers = [successSelf];
-
-export const peopleListEmpty = {
-  response: {
-    items: [],
-    total: 0,
-  },
+const successList = {
+  response: [
+    {
+      id: 1,
+      title: "Claude AI",
+      type: 4,
+      url: "https://api.anthropic.com/v1",
+      createdOn: "2025-11-18T11:45:49.0000000+03:00",
+      modifiedOn: "2025-11-18T11:46:00.0000000+03:00",
+    },
+    {
+      id: 2,
+      title: "OpenAI",
+      type: 1,
+      url: "https://api.openai.com/v1",
+      createdOn: "2025-11-18T11:51:05.0000000+03:00",
+      modifiedOn: "2025-11-18T11:51:05.0000000+03:00",
+    },
+    {
+      id: 3,
+      title: "Together AI",
+      type: 2,
+      url: "https://api.together.xyz/v1",
+      createdOn: "2025-11-18T11:53:12.0000000+03:00",
+      modifiedOn: "2025-11-18T11:53:33.0000000+03:00",
+    },
+    {
+      id: 4,
+      title: "OpenRouter",
+      type: 5,
+      url: "https://openrouter.ai/api/v1",
+      createdOn: "2025-11-21T19:02:57.0000000+03:00",
+      modifiedOn: "2025-11-21T19:17:12.0000000+03:00",
+    },
+  ],
+  count: 4,
+  total: 4,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_PROVIDERS}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
 };
 
-export const peopleListSuccess = {
-  response: {
-    items: mockUsers,
-    total: mockUsers.length,
-  },
-};
-
-export const peopleListHandler = (headers?: Headers) => {
-  if (headers?.get("x-mock-response") === "empty") {
-    return new Response(JSON.stringify(peopleListEmpty));
-  }
-
-  return new Response(JSON.stringify(peopleListSuccess));
-};
-
-export const peopleListAccessDeniedHandler = () => {
-  return new Response(
-    JSON.stringify({
-      error: {
-        message: "Access denied",
-      },
-      status: 1,
-      statusCode: 403,
-    }),
-  );
+export const aiProvidersHandler = () => {
+  return http.get(`http://localhost/${API_PREFIX}/${PATH_AI_PROVIDERS}`, () => {
+    return new Response(JSON.stringify(successList));
+  });
 };

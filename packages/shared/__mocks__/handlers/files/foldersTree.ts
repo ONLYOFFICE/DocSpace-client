@@ -28,11 +28,9 @@
 
 import { http } from "msw";
 import type { TGetRootFolder } from "../../../api/files/types";
-import { API_PREFIX } from "../../e2e/utils";
+import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 export const PATH = "files/@root";
-
-import { BASE_URL } from "../../utils";
 
 const getFoldersTree = (): TGetRootFolder[] => {
   return [

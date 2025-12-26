@@ -24,7 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { API_PREFIX, BASE_URL } from "../../utils";
+
+import { http } from "msw";
+import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 export const PATH_QUOTA = "portal/payment/quota";
 
@@ -200,6 +202,12 @@ export const quotaSuccess = {
   ok: true,
 };
 
-export const quotaHandler = () => {
+export const quotaResolver = () => {
   return new Response(JSON.stringify(quotaSuccess));
+};
+
+export const quotaHandler = () => {
+  return http.get(`http://localhost/${API_PREFIX}/${PATH_QUOTA}`, () => {
+    return quotaResolver();
+  });
 };

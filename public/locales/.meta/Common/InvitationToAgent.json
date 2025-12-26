@@ -1,19 +1,19 @@
 {
   "key_path": "InvitationToAgent",
-  "content": "<1>{{displayName}}</1> invites you to join the AI agent <1>{{agentName}}</1>.",
-  "content_en_sha1_hash": "219914f391293ff45a679d1db1a94472c58701ce",
-  "created_at": "2025-11-13T07:41:30.489Z",
-  "updated_at": "2025-11-13T10:21:39.820Z",
+  "content": "<1>{{displayName}}</1> invites you to join the {{aiAgent}} <1>{{agentName}}</1>.",
+  "content_en_sha1_hash": "c291e936eeda4cfe61676f56a30dc6bdc0b1815d",
+  "created_at": "2025-12-19T10:16:30.756Z",
+  "updated_at": "2025-12-22T09:43:52.505Z",
   "comment": {
-    "text": "This key displays an invitation for a user to join an AI agent. It appears within the UI, specifically when a room is designated as an agent, and informs the user who is inviting them and the name of the agent. Translators should ensure the wording accurately conveys an invitation to join a specific AI agent.",
+    "text": "This key displays an invitation to another user to join an agent-managed space. It appears within the UI to prompt a user to accept an invitation to a specific agent room, displaying the inviting user's name and the agent's name. Translators should ensure the flow of invitation is clear and natural in their language.",
     "is_auto": true,
-    "updated_at": "2025-11-13T10:21:39.820Z"
+    "updated_at": "2025-12-22T09:43:52.505Z"
   },
   "usage": [
     {
       "file_path": "/packages/login/src/components/GreetingContainer/GreetingCreateUserContainer/index.tsx",
       "line_number": 75,
-      "context": "if (roomData?.isAgent) {\n return (\n <Trans\n {...commonProps}\n i18nKey=\"InvitationToAgent\"\n defaults={DEFAULT_AGENT_TEXT}\n values={{\n displayName,\n agentName: roomData.title,\n }}",
+      "context": "if (roomData?.isAgent) {\n return (\n <Trans\n {...commonProps}\n i18nKey=\"InvitationToAgent\"\n defaults={DEFAULT_AGENT_TEXT}\n values={{\n displayName,\n agentName: roomData.title,\n aiAgent: t(\"Common:AIAgent\"),",
       "module": "/packages/login"
     }
   ],

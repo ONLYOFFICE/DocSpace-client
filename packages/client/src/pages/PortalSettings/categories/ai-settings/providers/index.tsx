@@ -151,6 +151,7 @@ const AIProviderComponent = ({
       >
         {t("AISettings:AIProviderSettingDescription", {
           productName: t("Common:ProductName"),
+          aiChats: t("Common:AIChats"),
         })}
       </Text>
       {aiProviderSettingsUrl ? (
@@ -170,7 +171,9 @@ const AIProviderComponent = ({
         testId="add-provider-button"
         primary
         size={ButtonSize.small}
-        label={t("AISettings:AddAIProvider")}
+        label={t("AISettings:AddAIProvider", {
+          aiProvider: t("Common:AIProvider"),
+        })}
         scale={false}
         className={styles.addProviderButton}
         onClick={showAddProviderDialog}

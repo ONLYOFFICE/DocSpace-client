@@ -214,6 +214,7 @@ const KnowledgeComponent = ({
           !hasAIProviders
             ? t("AISettings:ToUseAddProvider", {
                 value: t("AIRoom:Knowledge"),
+                aiProvider: t("Common:AIProvider"),
               })
             : undefined
         }
@@ -221,6 +222,7 @@ const KnowledgeComponent = ({
         <Text className={generalStyles.description}>
           {t("AISettings:KnowledgeSettingsDescription", {
             modelName: aiConfig?.embeddingModel || "text-embedding-3-small",
+            aiAgents: t("Common:AIAgents"),
           })}
         </Text>
         {knowledgeSettingsUrl ? (

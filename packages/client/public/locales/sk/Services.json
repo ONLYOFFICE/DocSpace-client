@@ -1,5 +1,4 @@
 {
-  "AIAgentsDescription": "Nastavte si personalizovaného asistenta pre váš tím pridaním databázy znalostí, výberom ideálneho modelu a pripojením MCP servera.",
   "AITools": "AI nástroje",
   "AItoolsConfirm": "Aktivácia služby nástrojov AI umožní všetkým používateľom {{productName}} prístup k funkciám poháňaným AI, za predpokladu, že peňaženka má dostatok prostriedkov. Ste si istý/á, že chcete pokračovať?",
   "AIToolsEnabled": "Služba nástrojov AI bola úspešne povolená.",
@@ -32,6 +31,5 @@
   "TextTranslation": "Textový preklad",
   "TextTranslationDescription": "Preveďte text do požadovaného jazyka okamžite, pričom zachováte význam a kontext.",
   "ThirdPartyResourceDescription": "Pripojte sa a zálohujte dáta do cloudových účtov ako Dropbox, Box, OneDrive alebo Google Drive.",
-  "ThirdPartyStorageDescription": "Používajte služby tretích strán na ukladanie záloh. Ideálne na pripojenie externých cloudových úložiskových platforiem.",
-  "WebSearchEnabled": "Služba vyhľadávania na webe s umelou inteligenciou bola úspešne povolená."
+  "ThirdPartyStorageDescription": "Používajte služby tretích strán na ukladanie záloh. Ideálne na pripojenie externých cloudových úložiskových platforiem."
 }

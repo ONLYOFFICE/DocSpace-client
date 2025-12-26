@@ -3,7 +3,7 @@
   "content": "You have more than one accounts. Please choose one of them",
   "content_en_sha1_hash": "11aafc3d73bfad7acf0d2fa3c2b849d25493fcd5",
   "created_at": "2025-05-19T21:30:57.233Z",
-  "updated_at": "2025-05-24T14:56:22.848Z",
+  "updated_at": "2025-12-19T13:32:34.565Z",
   "comment": {
     "text": "This translation key is used to display a message when a user has multiple accounts, prompting them to choose one of them. The text appears as a button label in the tenant list page.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/tenant-list/page.client.tsx",
-      "line_number": 60,
-      "context": "router.push(`/?type=oauth2&client_id=${clientId}`);\n };\n \n return (\n <StyledTenantList>\n <Text className=\"more-accounts\">{t(\"MorePortals\")}</Text>\n <div className=\"items-list\">\n {data.portals.map((item) => (\n <Item portal={item} key={item.portalName} baseDomain={baseDomain} />\n ))}\n </div>",
+      "line_number": 61,
+      "context": "router.push(`/?type=oauth2&client_id=${clientId}`);\n };\n \n return (\n <div className={styles.tenantList}>\n <Text className={styles.moreAccounts}>{t(\"MorePortals\")}</Text>\n <div className={styles.itemsList}>\n {data.portals.map((item) => (\n <Item portal={item} key={item.portalName} baseDomain={baseDomain} />\n ))}\n </div>",
       "module": "/packages/login"
     }
   ],

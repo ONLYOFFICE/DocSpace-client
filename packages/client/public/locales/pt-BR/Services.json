@@ -1,5 +1,4 @@
 {
-  "AIAgentsDescription": "Configure um assistente personalizado para sua equipe adicionando uma base de conhecimento, selecionando o modelo ideal e conectando um servidor MCP.",
   "AITools": "Ferramentas de IA",
   "AItoolsConfirm": "A ativação do serviço de ferramentas de IA concederá a todos os usuários do {{productName}} acesso a recursos baseados em IA, desde que a carteira tenha fundos suficientes. Tem certeza de que deseja continuar?",
   "AIToolsEnabled": "Serviço de ferramentas de IA ativado com sucesso.",
@@ -32,6 +31,5 @@
   "TextTranslation": "Tradução de textos",
   "TextTranslationDescription": "Traduza textos instantaneamente para o idioma desejado, mantendo o significado e o contexto.",
   "ThirdPartyResourceDescription": "Conecte e salve backups em contas na nuvem como Dropbox, Box, OneDrive ou Google Drive.",
-  "ThirdPartyStorageDescription": "Utilize serviços de terceiros para armazenar seus backups. Ideal para conectar plataformas externas de armazenamento em nuvem.",
-  "WebSearchEnabled": "Serviço de pesquisa na Web com IA ativado com sucesso."
+  "ThirdPartyStorageDescription": "Utilize serviços de terceiros para armazenar seus backups. Ideal para conectar plataformas externas de armazenamento em nuvem."
 }

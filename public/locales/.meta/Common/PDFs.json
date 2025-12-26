@@ -1,0 +1,28 @@
+{
+  "key_path": "PDFs",
+  "content": "PDFs",
+  "content_en_sha1_hash": "8c85c119d1cd8e0acfc82505e49fce77f2339f5f",
+  "created_at": "2025-12-22T09:40:07.684Z",
+  "updated_at": "2025-12-22T09:41:39.179Z",
+  "comment": {
+    "text": "This translation key displays the label \"PDFs\" on a button or option within the Template Gallery, likely allowing users to filter or select templates specifically for PDF files. Translators should ensure the translation accurately reflects the file type being filtered.",
+    "is_auto": true,
+    "updated_at": "2025-12-22T09:41:39.179Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/TemplateGallery/index.tsx",
+      "line_number": 138,
+      "context": "),\n onClick: async () => await resetFilters(FILE_EXTENSIONS.PPTX),\n },\n {\n id: \"forms\",\n name: t(\"Common:PDFs\"),\n content: (\n <TilesContainer\n ext={FILE_EXTENSIONS.PDF}\n isShowInitSkeleton={false}\n />",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

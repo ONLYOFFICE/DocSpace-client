@@ -114,7 +114,9 @@ export const getDescription = (
     if (isKnowledgeTab)
       return (
         <>
-          {t("AIRoom:EmptyKnowledgeDescription")}
+          {t("AIRoom:EmptyKnowledgeDescription", {
+            aiChat: t("AIRoom:AIChat"),
+          })}
           <Text
             as="span"
             fontSize="12px"
@@ -127,8 +129,12 @@ export const getDescription = (
 
     if (isResultsTab)
       return security && "UseChat" in security && security.UseChat
-        ? t("AIRoom:EmptyResultsDescription")
-        : t("AIRoom:EmptyResultsViewerDescription");
+        ? t("AIRoom:EmptyResultsDescription", {
+            aiChat: t("AIRoom:AIChat"),
+          })
+        : t("AIRoom:EmptyResultsViewerDescription", {
+            aiChat: t("AIRoom:AIChat"),
+          });
   }
 
   if (isRootEmptyPage)
@@ -374,7 +380,9 @@ export const getOptions = (
 
   const createAIAgent = {
     title: t("EmptyView:CreateAIAgent"),
-    description: t("EmptyView:CreateAIAgentDescription"),
+    description: t("EmptyView:CreateAIAgentDescription", {
+      aiAgent: t("Common:AIAgent"),
+    }),
     icon: <CreateAIAgentIcon />,
     key: "create-ai-agent",
     onClick: actions.onCreateAIAgent,
@@ -571,7 +579,9 @@ export const getOptions = (
 
             window.DocSpace.navigate(`${path}?${filesFilter.toUrlParams()}`);
           },
-          description: t("AIRoom:CreateChatDescription"),
+          description: t("AIRoom:CreateChatDescription", {
+            aiChat: t("AIRoom:AIChat"),
+          }),
           disabled: !canUseChat,
         },
       ];

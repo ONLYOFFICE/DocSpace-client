@@ -1,5 +1,4 @@
 {
-  "AIAgentsDescription": "知識ベースを追加し、最適なモデルを選択し、MCPサーバーを接続することで、チーム専用のパーソナライズされたアシスタントを設定します。",
   "AITools": "AIツール",
   "AItoolsConfirm": "AIツールサービスを有効にすると、ウォレットに十分な資金がある場合に限り、すべての{{productName}}ユーザーがAI搭載機能を利用できるようになります。続行してもよろしいですか？",
   "AIToolsEnabled": "AIツールサービスが正常に有効化されました。",
@@ -32,6 +31,5 @@
   "TextTranslation": "テキスト翻訳",
   "TextTranslationDescription": "テキストを意味と文脈を維持したまま、瞬時にご希望の言語へ翻訳します。",
   "ThirdPartyResourceDescription": "Dropbox、Box、OneDrive、またはGoogle Driveなどのクラウドアカウントに接続してバックアップを保存します。",
-  "ThirdPartyStorageDescription": "バックアップを保存するためにサードパーティのサービスを使用します。外部クラウドストレージプラットフォームに接続するのに最適です。",
-  "WebSearchEnabled": "AIウェブ検索サービスが正常に有効化されました。"
+  "ThirdPartyStorageDescription": "バックアップを保存するためにサードパーティのサービスを使用します。外部クラウドストレージプラットフォームに接続するのに最適です。"
 }

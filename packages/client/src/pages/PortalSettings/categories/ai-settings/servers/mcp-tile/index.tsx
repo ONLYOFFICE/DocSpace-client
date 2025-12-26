@@ -93,6 +93,7 @@ export const MCPTile = ({
       ? t("AISettings:MCPProductDescription", {
           organizationName: t("Common:OrganizationName"),
           productName: t("Common:ProductName"),
+          mcpServer: t("Common:MCPServer"),
         })
       : item.description;
 
@@ -104,7 +105,8 @@ export const MCPTile = ({
       tooltipText={
         disableActions
           ? t("AISettings:ToUseAddProvider", {
-              value: t("AISettings:MCPServer"),
+              value: t("Common:MCPServer"),
+              aiProvider: t("Common:AIProvider"),
             })
           : undefined
       }
@@ -115,7 +117,9 @@ export const MCPTile = ({
         hasError={item.needReset}
         getErrorTooltipContent={() => (
           <Text fontSize="12px" lineHeight="16px">
-            {t("AISettings:MCPUnavailableError")}
+            {t("AISettings:MCPUnavailableError", {
+              mcpServer: t("Common:MCPServer"),
+            })}
           </Text>
         )}
       >

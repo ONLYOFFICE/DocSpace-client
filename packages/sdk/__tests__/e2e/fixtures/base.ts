@@ -103,7 +103,7 @@ export const test = base.extend<
 
       await worker.start();
       await use(worker);
-      await worker.stop();
+      //await worker.stop();
     },
     {
       auto: true,

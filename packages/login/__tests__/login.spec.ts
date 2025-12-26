@@ -171,7 +171,7 @@ test("login with with access recovery", async ({
   ]);
 });
 
-test("login with with hcaptcha", async ({
+test("login with hcaptcha", async ({
   page,
   port,
   clientRequestInterceptor,

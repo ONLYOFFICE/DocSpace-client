@@ -550,6 +550,45 @@ export const endpoints = {
     url: `${BASE_URL}${PATH_AI_AGENTS}`,
     dataHandler: () => aiAgentsHandler({ withListCreate: true }),
   },
+  aiAgentsDocAdminManager: {
+    url: `${BASE_URL}${PATH_AI_AGENTS}`,
+    dataHandler: () =>
+      aiAgentsHandler({
+        aiAccess: ShareAccessRights.RoomManager,
+        isDocAdmin: true,
+      }),
+  },
+  aiAgentsDocAdminCreator: {
+    url: `${BASE_URL}${PATH_AI_AGENTS}`,
+    dataHandler: () =>
+      aiAgentsHandler({
+        aiAccess: ShareAccessRights.Collaborator,
+        isDocAdmin: true,
+      }),
+  },
+  aiAgentsDocAdminOutOfRoom: {
+    url: `${BASE_URL}${PATH_AI_AGENTS}`,
+    dataHandler: () =>
+      aiAgentsHandler({
+        aiAccess: ShareAccessRights.None,
+        inRoom: false,
+        isDocAdmin: true,
+      }),
+  },
+  aiAgentsOwner: {
+    url: `${BASE_URL}${PATH_AI_AGENTS}`,
+    dataHandler: () => aiAgentsHandler({ aiAccess: ShareAccessRights.None }),
+  },
+  aiAgentsManager: {
+    url: `${BASE_URL}${PATH_AI_AGENTS}`,
+    dataHandler: () =>
+      aiAgentsHandler({ aiAccess: ShareAccessRights.RoomManager }),
+  },
+  aiAgentsCreator: {
+    url: `${BASE_URL}${PATH_AI_AGENTS}`,
+    dataHandler: () =>
+      aiAgentsHandler({ aiAccess: ShareAccessRights.Collaborator }),
+  },
   aiProvidersList: {
     url: `${BASE_URL}${PATH_AI_PROVIDERS}`,
     dataHandler: aiProvidersHandler,

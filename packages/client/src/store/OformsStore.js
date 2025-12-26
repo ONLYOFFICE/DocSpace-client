@@ -49,6 +49,8 @@ const myDocumentsFolderId = 2;
 class OformsStore {
   settingsStore;
 
+  treeFoldersStore;
+
   userStore = null;
 
   oformFiles = null;
@@ -89,9 +91,10 @@ class OformsStore {
     "submitToGalleryTileIsHidden",
   );
 
-  constructor(settingsStore, userStore) {
+  constructor(settingsStore, userStore, treeFoldersStore) {
     this.settingsStore = settingsStore;
     this.userStore = userStore;
+    this.treeFoldersStore = treeFoldersStore;
     makeAutoObservable(this);
   }
 
@@ -370,7 +373,10 @@ class OformsStore {
   initTemplateGallery = async () => {
     await this.fetchOformLocales();
 
-    const firstLoadFilter = OformsFilter.getDefaultDocx();
+    const firstLoadFilter = this.treeFoldersStore.isFormRoomRoot
+      ? OformsFilter.getDefault()
+      : OformsFilter.getDefaultDocx();
+
     firstLoadFilter.locale = this.defaultOformLocale;
 
     await Promise.all([

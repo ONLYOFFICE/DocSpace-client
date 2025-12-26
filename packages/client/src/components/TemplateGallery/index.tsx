@@ -28,7 +28,7 @@ import { inject, observer } from "mobx-react";
 import { useState, useEffect, useMemo } from "react";
 import { withTranslation } from "react-i18next";
 import type { Key } from "react";
-
+import classNames from "classnames";
 import { Portal } from "@docspace/shared/components/portal";
 import { Backdrop } from "@docspace/shared/components/backdrop";
 import { Tabs, TTabItem } from "@docspace/shared/components/tabs";
@@ -45,7 +45,89 @@ import { FILE_EXTENSIONS, TAB_IDS, TabId } from "./constants";
 import { getExtensionFromTabId } from "./utils/tabUtils";
 import styles from "./TemplateGallery.module.scss";
 
-const TemplateGallery = (props: {
+const TemplateGalleryTabsContent = ({
+  t,
+  isShowInitSkeleton,
+  currentTabId,
+  onSelect,
+  resetFilters,
+}: {
+  t: TTranslation;
+  isShowInitSkeleton: boolean;
+  currentTabId: TabId;
+  onSelect: (element: TTabItem) => void;
+  resetFilters: (ext: string) => Promise<void>;
+}) => {
+  const tabs: TTabItem[] = [
+    {
+      id: TAB_IDS.DOCUMENTS,
+      name: t("Common:Documents"),
+      content: (
+        <TilesContainer
+          ext={FILE_EXTENSIONS.DOCX}
+          isShowInitSkeleton={isShowInitSkeleton}
+        />
+      ),
+      onClick: async () => await resetFilters(FILE_EXTENSIONS.DOCX),
+    },
+    {
+      id: TAB_IDS.SPREADSHEET,
+      name: t("Common:Spreadsheets"),
+      content: (
+        <TilesContainer ext={FILE_EXTENSIONS.XLSX} isShowInitSkeleton={false} />
+      ),
+      onClick: async () => await resetFilters(FILE_EXTENSIONS.XLSX),
+    },
+    {
+      id: TAB_IDS.PRESENTATION,
+      name: t("Common:Presentations"),
+      content: (
+        <TilesContainer ext={FILE_EXTENSIONS.PPTX} isShowInitSkeleton={false} />
+      ),
+      onClick: async () => await resetFilters(FILE_EXTENSIONS.PPTX),
+    },
+    {
+      id: TAB_IDS.FORMS,
+      name: t("Common:PDFs"),
+      content: (
+        <TilesContainer ext={FILE_EXTENSIONS.PDF} isShowInitSkeleton={false} />
+      ),
+      onClick: async () => await resetFilters(FILE_EXTENSIONS.PDF),
+    },
+  ];
+
+  return (
+    <div className={styles.templateGalleryWrapper}>
+      <Tabs
+        items={tabs}
+        selectedItemId={currentTabId}
+        onSelect={onSelect}
+        withAnimation
+      />
+    </div>
+  );
+};
+
+const TemplateGalleryFormsOnlyContent = ({
+  isShowInitSkeleton,
+}: {
+  isShowInitSkeleton: boolean;
+}) => {
+  return (
+    <div
+      className={classNames(styles.templateGalleryWrapper, {
+        [styles.withoutTabs]: true,
+      })}
+    >
+      <TilesContainer
+        ext={FILE_EXTENSIONS.PDF}
+        isShowInitSkeleton={isShowInitSkeleton}
+      />
+    </div>
+  );
+};
+
+type TemplateGalleryProps = {
   templateGalleryVisible: boolean;
   setTemplateGalleryVisible: (isVisible: boolean) => void;
   setCurrentExtensionGallery: (extension: string) => void;
@@ -60,41 +142,16 @@ const TemplateGallery = (props: {
   languageFilterLoaded: boolean;
   setIsVisibleInfoPanelTemplateGallery: (visible: boolean) => void;
   setGallerySelected: (item: { id: Key | null | undefined } | null) => void;
-}) => {
-  const {
-    templateGalleryVisible,
-    setTemplateGalleryVisible,
-    setCurrentExtensionGallery,
-    resetFilters,
-    initTemplateGallery,
-    oformsLoadError,
-    oformsNetworkError,
-    setSubmitToGalleryDialogVisible,
-    t,
-    filterOformsByLocaleIsLoading,
-    categoryFilterLoaded,
-    languageFilterLoaded,
-    setIsVisibleInfoPanelTemplateGallery,
-    setGallerySelected,
-  } = props;
+  isFormRoomRoot: boolean;
+};
 
-  const isMobileView = useMobileDetection();
-  const [currentTabId, setCurrentTabId] = useState<TabId>(TAB_IDS.DOCUMENTS);
-  const [isInitLoading, setIsInitLoading] = useState(true);
-  const [isShowInitSkeleton, setShowInitSkeleton] = useState(true);
-
-  useEffect(() => {
-    initTemplateGallery().then(() => setIsInitLoading(false));
-    setCurrentExtensionGallery(FILE_EXTENSIONS.DOCX);
-  }, []);
-
+const useTemplateGalleryScrollLocks = (templateGalleryVisible: boolean) => {
   useEffect(() => {
     if (!templateGalleryVisible) return;
 
     const originalBodyOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
-    // Disable the main section scroll to prevent scroll chaining (desktop)
     const sectionScroll = document.querySelector(
       ".section-scroll",
     ) as HTMLElement | null;
@@ -103,7 +160,6 @@ const TemplateGallery = (props: {
       sectionScroll.style.overflow = "hidden";
     }
 
-    // Disable the mobile scroll container
     const mobileScroll = document.querySelector(
       "#customScrollBar > .scroll-wrapper > .scroller",
     ) as HTMLElement | null;
@@ -122,6 +178,42 @@ const TemplateGallery = (props: {
       }
     };
   }, [templateGalleryVisible]);
+};
+
+const TemplateGallery = (props: TemplateGalleryProps) => {
+  const {
+    templateGalleryVisible,
+    setTemplateGalleryVisible,
+    setCurrentExtensionGallery,
+    resetFilters,
+    initTemplateGallery,
+    oformsLoadError,
+    oformsNetworkError,
+    setSubmitToGalleryDialogVisible,
+    t,
+    filterOformsByLocaleIsLoading,
+    categoryFilterLoaded,
+    languageFilterLoaded,
+    setIsVisibleInfoPanelTemplateGallery,
+    setGallerySelected,
+    isFormRoomRoot,
+  } = props;
+
+  const isMobileView = useMobileDetection();
+  const [currentTabId, setCurrentTabId] = useState<TabId>(() =>
+    isFormRoomRoot ? TAB_IDS.FORMS : TAB_IDS.DOCUMENTS,
+  );
+  const [isInitLoading, setIsInitLoading] = useState(true);
+  const [isShowInitSkeleton, setShowInitSkeleton] = useState(true);
+
+  useEffect(() => {
+    initTemplateGallery().then(() => setIsInitLoading(false));
+    setCurrentExtensionGallery(
+      isFormRoomRoot ? FILE_EXTENSIONS.PDF : FILE_EXTENSIONS.DOCX,
+    );
+  }, [initTemplateGallery, isFormRoomRoot, setCurrentExtensionGallery]);
+
+  useTemplateGalleryScrollLocks(templateGalleryVisible);
 
   useEffect(() => {
     if (
@@ -148,57 +240,8 @@ const TemplateGallery = (props: {
     if (e.key === "Escape") onCloseClick();
   });
 
-  const tabs = useMemo(
-    () => [
-      {
-        id: "documents",
-        name: t("Common:Documents"),
-        content: (
-          <TilesContainer
-            ext={FILE_EXTENSIONS.DOCX}
-            isShowInitSkeleton={isShowInitSkeleton}
-          />
-        ),
-        onClick: async () => await resetFilters(FILE_EXTENSIONS.DOCX),
-      },
-      {
-        id: "spreadsheet",
-        name: t("Common:Spreadsheets"),
-        content: (
-          <TilesContainer
-            ext={FILE_EXTENSIONS.XLSX}
-            isShowInitSkeleton={false}
-          />
-        ),
-        onClick: async () => await resetFilters(FILE_EXTENSIONS.XLSX),
-      },
-      {
-        id: "presentation",
-        name: t("Common:Presentations"),
-        content: (
-          <TilesContainer
-            ext={FILE_EXTENSIONS.PPTX}
-            isShowInitSkeleton={false}
-          />
-        ),
-        onClick: async () => await resetFilters(FILE_EXTENSIONS.PPTX),
-      },
-      {
-        id: "forms",
-        name: t("Common:PDFs"),
-        content: (
-          <TilesContainer
-            ext={FILE_EXTENSIONS.PDF}
-            isShowInitSkeleton={false}
-          />
-        ),
-        onClick: async () => await resetFilters(FILE_EXTENSIONS.PDF),
-      },
-    ],
-    [t, isShowInitSkeleton],
-  );
-
   const onSelect = (element: TTabItem) => {
+    if (isFormRoomRoot) return;
     const tabId = element.id as TabId;
     setCurrentTabId(tabId);
     const fileExtension = getExtensionFromTabId(tabId);
@@ -254,23 +297,31 @@ const TemplateGallery = (props: {
       );
     }
 
-    return (
-      <div className={styles.templateGalleryWrapper}>
-        <Tabs
-          items={tabs}
-          selectedItemId={currentTabId}
-          onSelect={onSelect}
-          withAnimation
+    if (isFormRoomRoot)
+      return (
+        <TemplateGalleryFormsOnlyContent
+          isShowInitSkeleton={isShowInitSkeleton}
         />
-      </div>
+      );
+
+    return (
+      <TemplateGalleryTabsContent
+        t={t}
+        isShowInitSkeleton={isShowInitSkeleton}
+        currentTabId={currentTabId}
+        onSelect={onSelect}
+        resetFilters={resetFilters}
+      />
     );
   }, [
     oformsLoadError,
     oformsNetworkError,
     onCloseClick,
-    tabs,
+    isFormRoomRoot,
     currentTabId,
-    onSelect,
+    isShowInitSkeleton,
+    resetFilters,
+    t,
   ]);
 
   const templateGalleryNode = useMemo(() => {
@@ -314,37 +365,41 @@ const TemplateGallery = (props: {
   );
 };
 
-export default inject<TStore>(({ oformsStore, dialogsStore }) => {
-  const {
-    templateGalleryVisible,
-    setTemplateGalleryVisible,
-    setCurrentExtensionGallery,
-    resetFilters,
-    initTemplateGallery,
-    oformsLoadError,
-    filterOformsByLocaleIsLoading,
-    categoryFilterLoaded,
-    languageFilterLoaded,
-    oformsNetworkError,
-    setIsVisibleInfoPanelTemplateGallery,
-    setGallerySelected,
-  } = oformsStore;
+export default inject<TStore>(
+  ({ oformsStore, dialogsStore, treeFoldersStore }) => {
+    const {
+      templateGalleryVisible,
+      setTemplateGalleryVisible,
+      setCurrentExtensionGallery,
+      resetFilters,
+      initTemplateGallery,
+      oformsLoadError,
+      filterOformsByLocaleIsLoading,
+      categoryFilterLoaded,
+      languageFilterLoaded,
+      oformsNetworkError,
+      setIsVisibleInfoPanelTemplateGallery,
+      setGallerySelected,
+    } = oformsStore;
 
-  const { setSubmitToGalleryDialogVisible } = dialogsStore;
+    const { setSubmitToGalleryDialogVisible } = dialogsStore;
+    const { isFormRoomRoot } = treeFoldersStore;
 
-  return {
-    templateGalleryVisible,
-    setTemplateGalleryVisible,
-    setCurrentExtensionGallery,
-    resetFilters,
-    initTemplateGallery,
-    oformsLoadError,
-    setSubmitToGalleryDialogVisible,
-    filterOformsByLocaleIsLoading,
-    categoryFilterLoaded,
-    languageFilterLoaded,
-    oformsNetworkError,
-    setIsVisibleInfoPanelTemplateGallery,
-    setGallerySelected,
-  };
-})(withTranslation("Common")(observer(TemplateGallery)));
+    return {
+      templateGalleryVisible,
+      setTemplateGalleryVisible,
+      setCurrentExtensionGallery,
+      resetFilters,
+      initTemplateGallery,
+      oformsLoadError,
+      setSubmitToGalleryDialogVisible,
+      filterOformsByLocaleIsLoading,
+      categoryFilterLoaded,
+      languageFilterLoaded,
+      oformsNetworkError,
+      setIsVisibleInfoPanelTemplateGallery,
+      setGallerySelected,
+      isFormRoomRoot,
+    };
+  },
+)(withTranslation("Common")(observer(TemplateGallery)));

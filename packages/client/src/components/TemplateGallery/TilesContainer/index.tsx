@@ -76,6 +76,7 @@ interface TilesContainerInjectedProps extends FilterProps {
   hasGalleryFiles: boolean;
   resetFilters: (ext: string) => Promise<void>;
   t: TTranslation;
+  isFormRoomRoot: boolean;
 }
 
 interface TilesContainerProps
@@ -89,6 +90,7 @@ const TilesContainer: FC<TilesContainerProps> = (props) => {
     hasGalleryFiles,
     resetFilters,
     t,
+    isFormRoomRoot,
     ...filterProps
   } = props;
 
@@ -159,9 +161,16 @@ const TilesContainer: FC<TilesContainerProps> = (props) => {
       return renderEmptyState();
     }
 
-    const scrollHeight = isMobileView
-      ? SCROLL_HEIGHTS.MOBILE
+    const mobileHeight = isFormRoomRoot
+      ? SCROLL_HEIGHTS.MOBILE_FORMS_ONLY
+      : SCROLL_HEIGHTS.MOBILE;
+
+    const desktopHeight = isFormRoomRoot
+      ? SCROLL_HEIGHTS.DESKTOP_FORMS_ONLY
       : SCROLL_HEIGHTS.DESKTOP;
+
+    const scrollHeight = isMobileView ? mobileHeight : desktopHeight;
+
     const showOneTile = isMobileView ? isShowOneTile : false;
 
     return renderTilesWithScrollbar(scrollHeight, showOneTile);
@@ -181,7 +190,7 @@ const TilesContainer: FC<TilesContainerProps> = (props) => {
   );
 };
 
-export default inject<TStore>(({ oformsStore }) => {
+export default inject<TStore>(({ oformsStore, treeFoldersStore }) => {
   const {
     hasGalleryFiles,
     resetFilters,
@@ -199,6 +208,7 @@ export default inject<TStore>(({ oformsStore }) => {
     sortOforms,
   } = oformsStore;
 
+  const { isFormRoomRoot } = treeFoldersStore;
   const oformLocales = oformsStore.oformLocales as string[] | null;
 
   return {
@@ -219,6 +229,7 @@ export default inject<TStore>(({ oformsStore }) => {
     setLanguageFilterLoaded,
     filterOformsBySearch,
     sortOforms,
+    isFormRoomRoot,
   };
 })(
   withTranslation("Common")(observer(TilesContainer)),

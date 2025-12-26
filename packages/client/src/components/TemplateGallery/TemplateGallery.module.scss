@@ -35,7 +35,8 @@
 
   z-index: 309;
 
-  width: 100%;
+  width: calc(100% - 120px);
+  margin: 0 60px;
 }
 
 .templateGallery {
@@ -45,7 +46,7 @@
   max-width: 1810px;
   margin: 0 auto;
 
-  width: calc(100% - 120px);
+  width: 100%;
 
   height: 100%;
 }

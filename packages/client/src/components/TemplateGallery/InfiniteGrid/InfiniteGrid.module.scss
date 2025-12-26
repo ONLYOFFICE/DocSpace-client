@@ -79,15 +79,15 @@
     height: 100%;
   }
 
-  @media (min-width: 601px) and (max-width: 839px) {
+  @media (min-width: 601px) and (max-width: 840px) {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  @media (min-width: 840px) and (max-width: 1199px) {
+  @media (min-width: 840px) and (max-width: 1200px) {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
-  @media (min-width: 1200px) and (max-width: 1439px) {
+  @media (min-width: 1200px) and (max-width: 1440px) {
     grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 

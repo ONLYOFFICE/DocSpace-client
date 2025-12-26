@@ -28,12 +28,15 @@ const path = require("path");
 const TerserPlugin = require("terser-webpack-plugin");
 
 const isProduction = process.env.NODE_ENV === "production";
+const outputDir =
+  process.env.SW_OUTPUT_DIR || path.resolve(__dirname, "../../public");
+const enableSourceMaps = process.env.SW_SOURCE_MAPS !== "false";
 
 module.exports = {
   mode: isProduction ? "production" : "development",
   entry: path.resolve(__dirname, "sw/template.ts"),
   output: {
-    path: path.resolve(__dirname, "../../public"),
+    path: outputDir,
     filename: "sw-template.js",
   },
   resolve: {
@@ -67,6 +70,6 @@ module.exports = {
       }),
     ],
   },
-  devtool: isProduction ? false : "source-map",
+  devtool: enableSourceMaps ? "source-map" : false,
   target: "webworker",
 };

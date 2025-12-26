@@ -74,6 +74,8 @@ const EmptyScreenContainer = (props: EmptyScreenContainerProps) => {
           fontSize="19px"
           fontWeight="700"
           className={classNames(styles.header, "ec-header")}
+          color="white"
+          backgroundColor="red"
         >
           {headerText}
         </Text>

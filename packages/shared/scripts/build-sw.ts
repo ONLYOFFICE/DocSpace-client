@@ -32,14 +32,28 @@ import * as fs from "fs";
 
 const exec = promisify(execCallback);
 
+// Parse command line arguments for output directory
+const args = process.argv.slice(2);
+const outputDirArg = args.find((arg) => arg.startsWith("--output="));
+const customOutputDir = outputDirArg?.split("=")[1];
+
+const baseOutputDir = customOutputDir
+  ? path.resolve(customOutputDir)
+  : path.resolve(__dirname, "../../../public");
+
 const PATHS = {
   packageRoot: path.resolve(__dirname, ".."),
   webpackConfig: path.resolve(__dirname, "../webpack.sw.config.js"),
-  outputDir: path.resolve(__dirname, "../../../public"),
-  swTemplateOutput: path.resolve(__dirname, "../../../public/sw-template.js"),
-  swFinal: path.resolve(__dirname, "../../../public/sw.js"),
+  outputDir: baseOutputDir,
+  swTemplateOutput: path.join(baseOutputDir, "sw-template.js"),
+  swTemplateMap: path.join(baseOutputDir, "sw-template.js.map"),
+  swFinal: path.join(baseOutputDir, "sw.js"),
+  swFinalMap: path.join(baseOutputDir, "sw.js.map"),
   globDirectory: path.resolve(__dirname, "../../../public"),
-} as const;
+};
+
+const isProduction = process.env.NODE_ENV === "production";
+const keepTemplate = process.env.KEEP_SW_TEMPLATE === "true";
 
 function handleBuildError(stage: string, error: unknown): never {
   console.error(`\nBuild failed at: ${stage}`);
@@ -57,7 +71,8 @@ function handleBuildError(stage: string, error: unknown): never {
 async function buildServiceWorker() {
   const buildStartTime = Date.now();
 
-  console.log("\nBuilding Service Worker...\n");
+  console.log("\nBuilding Service Worker...");
+  console.log(`Output directory: ${PATHS.outputDir}\n`);
 
   try {
     // Ensure output directory exists
@@ -69,7 +84,11 @@ async function buildServiceWorker() {
     const webpackCommand = `npx webpack --config ${path.basename(PATHS.webpackConfig)}`;
     const { stderr } = await exec(webpackCommand, {
       cwd: PATHS.packageRoot,
-      env: { ...process.env, NODE_ENV: process.env.NODE_ENV || "production" },
+      env: {
+        ...process.env,
+        NODE_ENV: process.env.NODE_ENV || "production",
+        SW_OUTPUT_DIR: PATHS.outputDir,
+      },
     });
 
     if (
@@ -94,7 +113,7 @@ async function buildServiceWorker() {
       `Webpack output: ${(webpackStats.size / 1024).toFixed(2)} KB\n`,
     );
 
-    // Inject precache manifest
+    // Inject precache manifest (source maps are handled automatically if sw-template.js.map exists)
     const manifestResult = await injectManifest({
       swSrc: PATHS.swTemplateOutput,
       swDest: PATHS.swFinal,
@@ -134,6 +153,18 @@ async function buildServiceWorker() {
       warnings.forEach((warning) => console.warn(`  - ${warning}`));
     }
 
+    // Workbox outputs source map with original name, rename it to match sw.js
+    if (fs.existsSync(PATHS.swTemplateMap)) {
+      fs.renameSync(PATHS.swTemplateMap, PATHS.swFinalMap);
+      // Update sourceMappingURL in sw.js to point to correct map file
+      const swContent = fs.readFileSync(PATHS.swFinal, "utf8");
+      const updatedContent = swContent.replace(
+        "//# sourceMappingURL=sw-template.js.map",
+        "//# sourceMappingURL=sw.js.map",
+      );
+      fs.writeFileSync(PATHS.swFinal, updatedContent);
+    }
+
     if (!fs.existsSync(PATHS.swFinal)) {
       handleBuildError(
         "Manifest Injection",
@@ -148,7 +179,23 @@ async function buildServiceWorker() {
     console.log(
       `Precached: ${count} files (${(size / 1024 / 1024).toFixed(2)} MB)`,
     );
-    console.log(`Duration: ${buildDuration}s\n`);
+    console.log(`Duration: ${buildDuration}s`);
+    console.log(
+      `Mode: ${isProduction ? "production (minified)" : "development (readable)"}\n`,
+    );
+
+    // Clean up intermediate template file (not needed at runtime)
+    // Note: sw-template.js.map is renamed to sw.js.map above, not deleted
+    if (!keepTemplate && fs.existsSync(PATHS.swTemplateOutput)) {
+      fs.unlinkSync(PATHS.swTemplateOutput);
+      console.log("Cleaned up intermediate sw-template.js");
+    }
+
+    // Log source map status
+    if (fs.existsSync(PATHS.swFinalMap)) {
+      const mapStats = fs.statSync(PATHS.swFinalMap);
+      console.log(`Source map: ${(mapStats.size / 1024).toFixed(2)} KB\n`);
+    }
   } catch (error) {
     handleBuildError("Build Process", error);
   }

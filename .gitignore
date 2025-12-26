@@ -16,6 +16,10 @@ Logs/
 
 /public/debuginfo.md
 /public/campaigns/*
+/public/sw-template.js
+/public/sw-template.js.map
+/public/sw.js
+/public/sw.js.map
 
 .yarn/*
 !.yarn/patches

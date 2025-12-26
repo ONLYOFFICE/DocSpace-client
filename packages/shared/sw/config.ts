@@ -105,8 +105,8 @@ export const SW_CONFIG: SWConfig = {
     },
   },
 
-  updateInterval: 60 * 60 * 1000, // 1 hour
-  debug: false,
+  updateInterval: 60 * 1000, // 1 minute // 60 * 60 * 1000, // 1 hour
+  debug: true,
 };
 
 export default SW_CONFIG;

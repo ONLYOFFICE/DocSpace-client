@@ -24,56 +24,44 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// import "@docspace/shared/utils/wdyr";
-import React from "react";
-import { I18nextProvider } from "react-i18next";
-import { RouterProvider } from "react-router";
-import { Provider as MobxProvider } from "mobx-react";
+import { withTranslation } from "react-i18next";
 
-import store from "SRC_DIR/store";
-import { setSwUpdateCallback } from "@docspace/shared/sw/helper";
+import { SnackBar } from "@docspace/shared/components/snackbar";
+import { Link } from "@docspace/shared/components/link";
 
-import "@docspace/shared/polyfills/broadcastchannel";
-
-import "@docspace/shared/styles/custom.scss";
-
-import ThemeProvider from "./components/ThemeProviderWrapper";
-import ErrorBoundary from "./components/ErrorBoundaryWrapper";
-
-import router from "./router";
-
-import i18n from "./i18n";
-
-const App = () => {
-  React.useEffect(() => {
-    const regex = /(\/){2,}/g;
-    const replaceRegex = /(\/)+/g;
-    const pathname = window.location.pathname;
-
-    if (regex.test(pathname))
-      window.location.replace(pathname.replace(replaceRegex, "$1"));
-  }, []);
-
-  // Connect service worker update notifications to MobX store
-  React.useEffect(() => {
-    if (process.env.NODE_ENV === "production") {
-      setSwUpdateCallback((reloadOnly, applyUpdate) => {
-        store.settingsStore.setSwUpdateAvailable(true, reloadOnly, applyUpdate);
-      });
-    }
-  }, []);
-
+const UpdateBar = ({
+  t,
+  tReady,
+  onClick,
+  onClose,
+  onLoad,
+  currentColorScheme,
+}) => {
   return (
-    <MobxProvider {...store}>
-      <I18nextProvider i18n={i18n}>
-        <ThemeProvider>
-          <ErrorBoundary>
-            <RouterProvider router={router} />
-          </ErrorBoundary>
-        </ThemeProvider>
-      </I18nextProvider>
-    </MobxProvider>
+    tReady && (
+      <SnackBar
+        headerText={t("Common:NewVersionAvailable")}
+        text={
+          <>
+            {t("Common:NewVersionDescription")}{" "}
+            <Link
+              fontSize="12px"
+              fontWeight="600"
+              color={currentColorScheme?.main?.accent}
+              onClick={onClick}
+            >
+              {t("Common:Load")}
+            </Link>
+          </>
+        }
+        isCampaigns={false}
+        opacity={1}
+        onLoad={onLoad}
+        onAction={onClose}
+        showIcon
+      />
+    )
   );
 };
 
-export default App;
+export default withTranslation(["Common"])(UpdateBar);

@@ -468,5 +468,24 @@ module.exports = (env, argv) => {
     }),
   );
 
+  // Generate version.json for update detection
+  config.plugins.push({
+    apply: (compiler) => {
+      compiler.hooks.emit.tapAsync("VersionPlugin", (compilation, callback) => {
+        const buildHash = compilation.hash || Date.now().toString();
+        const versionData = JSON.stringify({
+          version,
+          buildHash,
+          buildDate: new Date().toISOString(),
+        });
+        compilation.assets["version.json"] = {
+          source: () => versionData,
+          size: () => versionData.length,
+        };
+        callback();
+      });
+    },
+  });
+
   return config;
 };

@@ -41,6 +41,7 @@ import { QuotaBarTypes } from "SRC_DIR/helpers/constants";
 import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";
 import QuotasBar from "./QuotasBar";
 import ConfirmEmailBar from "./ConfirmEmailBar";
+import UpdateBar from "./UpdateBar";
 
 const Bar = (props) => {
   const {
@@ -82,6 +83,10 @@ const Bar = (props) => {
     isStorageQuotaLimit,
     isRoomsTariffAlmostLimit,
     isRoomsTariffLimit,
+
+    swUpdateAvailable,
+    applySwUpdate,
+    dismissSwUpdate,
   } = props;
 
   const navigate = useNavigate();
@@ -444,7 +449,8 @@ const Bar = (props) => {
     const newValue =
       showQuotasBar ||
       (withActivationBar && barVisible.confirmEmail && tReady) ||
-      (htmlLink && !firstLoad && tReady);
+      (htmlLink && !firstLoad && tReady) ||
+      (swUpdateAvailable && tReady);
 
     setMainBarVisible(newValue);
 
@@ -458,6 +464,7 @@ const Bar = (props) => {
     tReady,
     htmlLink,
     firstLoad,
+    swUpdateAvailable,
   ]);
 
   const onClose = () => {
@@ -482,6 +489,13 @@ const Bar = (props) => {
       onClickTenantCustomQuota={onClickTenantCustomQuota}
       onLoad={onLoad}
       isAdmin={isAdmin}
+    />
+  ) : swUpdateAvailable && tReady ? (
+    <UpdateBar
+      currentColorScheme={currentColorScheme}
+      onLoad={onLoad}
+      onClick={applySwUpdate}
+      onClose={dismissSwUpdate}
     />
   ) : withActivationBar && barVisible.confirmEmail && tReady ? (
     <ConfirmEmailBar
@@ -529,7 +543,13 @@ export default inject(
       isRoomsTariffLimit,
     } = currentQuotaStore;
 
-    const { currentColorScheme, setMainBarVisible } = settingsStore;
+    const {
+      currentColorScheme,
+      setMainBarVisible,
+      swUpdateAvailable,
+      applySwUpdate,
+      dismissSwUpdate,
+    } = settingsStore;
 
     return {
       isAdmin: user?.isAdmin,
@@ -564,6 +584,10 @@ export default inject(
       isStorageQuotaLimit,
       isRoomsTariffAlmostLimit,
       isRoomsTariffLimit,
+
+      swUpdateAvailable,
+      applySwUpdate,
+      dismissSwUpdate,
     };
   },
 )(withTranslation(["Profile", "Common"])(observer(Bar)));

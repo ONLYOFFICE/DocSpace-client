@@ -65,6 +65,7 @@ interface SwUpdateOptions {
   onError?: (error: Error, retryCount?: number) => void;
   onNetworkError?: (error: Error) => void;
   onRetry?: (attempt: number, maxAttempts: number) => void;
+  onUpdateAvailable?: (reloadOnly: boolean, applyUpdate: () => void) => void;
   updateInterval?: number;
   maxRetries?: number;
   retryDelay?: number;
@@ -86,6 +87,12 @@ interface ErrorContext {
   retryCount: number;
 }
 
+interface VersionInfo {
+  version: string;
+  buildHash: string;
+  buildDate: string;
+}
+
 export class ServiceWorker {
   private wb?: Workbox;
   private options: SwUpdateOptions;
@@ -98,11 +105,12 @@ export class ServiceWorker {
   private isOnline: boolean = true;
   private errorHistory: ErrorContext[] = [];
   private registrationAttempts: number = 0;
+  private currentBuildHash?: string;
 
   constructor(swUrl: string = "/sw.js", options: SwUpdateOptions = {}) {
     this.swUrl = swUrl;
     this.options = {
-      updateInterval: 60 * 60 * 1000, // 1 hour
+      updateInterval: 60 * 1000, // 1 minute // 60 * 60 * 1000, // 1 hour
       maxRetries: 3,
       retryDelay: 2000, // 2 seconds
       exponentialBackoff: true,
@@ -263,27 +271,85 @@ export class ServiceWorker {
     });
   }
 
-  private showUpdatePrompt(): void {
+  private showUpdatePrompt(reloadOnly: boolean = false): void {
+    const applyUpdate = () => {
+      if (reloadOnly) {
+        window.location.reload();
+      } else {
+        this.wb?.messageSkipWaiting();
+      }
+    };
+
+    // Use callback if provided (for React/MobX integration)
+    if (this.options.onUpdateAvailable) {
+      this.options.onUpdateAvailable(reloadOnly, applyUpdate);
+      return;
+    }
+
+    // Fallback to DOM-based prompt
     createUpdatePrompt({
       message: i18n.t("Common:NewVersionAvailable"),
       updateButtonText: i18n.t("Common:Load"),
       dismissButtonText: "Later",
-      onUpdate: () => {
-        this.wb?.messageSkipWaiting();
-      },
+      onUpdate: applyUpdate,
       autoHideDelay: 30000,
     });
   }
 
+  private async fetchVersionInfo(): Promise<VersionInfo | null> {
+    try {
+      const response = await fetch("/version.json", {
+        cache: "no-store",
+        headers: { "Cache-Control": "no-cache" },
+      });
+      if (!response.ok) return null;
+      return await response.json();
+    } catch (error) {
+      console.warn("[SW] Failed to fetch version info:", error);
+      return null;
+    }
+  }
+
+  private async checkForVersionUpdate(): Promise<boolean> {
+    const versionInfo = await this.fetchVersionInfo();
+    if (!versionInfo) return false;
+
+    // First time - store the current build hash
+    if (!this.currentBuildHash) {
+      this.currentBuildHash = versionInfo.buildHash;
+      console.log("[SW] Initial build hash:", this.currentBuildHash);
+      return false;
+    }
+
+    // Check if build hash changed
+    if (versionInfo.buildHash !== this.currentBuildHash) {
+      console.log(
+        `[SW] New version detected! Current: ${this.currentBuildHash}, New: ${versionInfo.buildHash}`,
+      );
+      return true;
+    }
+
+    return false;
+  }
+
   private startUpdateTimer(): void {
     if (this.options.updateInterval && this.options.updateInterval > 0) {
-      this.updateTimer = window.setInterval(() => {
+      this.updateTimer = window.setInterval(async () => {
         if (!this.isOnline) {
           console.log("[SW] Skipping update check - device is offline");
           return;
         }
 
-        console.log("[SW] Checking for service worker updates...");
+        console.log("[SW] Checking for updates...");
+
+        // Check for version.json changes (detects any script changes)
+        const hasNewVersion = await this.checkForVersionUpdate();
+        if (hasNewVersion) {
+          this.showUpdatePrompt(true); // reloadOnly=true for version updates
+          return;
+        }
+
+        // Also check for service worker updates
         this.wb?.update().catch((error) => {
           const errorType = this.classifyError(error);
           this.logError(error, errorType, 0);
@@ -369,6 +435,9 @@ export class ServiceWorker {
       console.log(
         `[SW] Registration succeeded on attempt ${this.registrationAttempts}`,
       );
+
+      // Initialize build hash for version checking
+      await this.checkForVersionUpdate();
 
       this.retryCount = 0;
       this.registrationAttempts = 0;
@@ -482,6 +551,12 @@ export class ServiceWorker {
     console.log("[SW] Manual retry triggered");
     this.retryCount = 0;
     return this.register();
+  }
+
+  setUpdateCallback(
+    callback: (reloadOnly: boolean, applyUpdate: () => void) => void,
+  ): void {
+    this.options.onUpdateAvailable = callback;
   }
 }
 

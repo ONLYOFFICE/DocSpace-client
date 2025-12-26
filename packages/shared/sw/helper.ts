@@ -24,13 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import serviceWorker from "./worker";
+import serviceWorker, { ServiceWorker } from "./worker";
 
 declare global {
   interface Window {
     SW: {
       register: () => void;
       unregister: () => void;
+      setUpdateCallback: (
+        callback: (reloadOnly: boolean, applyUpdate: () => void) => void,
+      ) => void;
     };
   }
 }
@@ -38,7 +41,12 @@ declare global {
 window.SW = {
   register: () => serviceWorker.register(),
   unregister: () => serviceWorker.unregister(),
+  setUpdateCallback: (callback) => serviceWorker.setUpdateCallback(callback),
 };
 
 export const registerSW = () => serviceWorker.register();
 export const unregisterSW = () => serviceWorker.unregister();
+export const setSwUpdateCallback = (
+  callback: (reloadOnly: boolean, applyUpdate: () => void) => void,
+) => serviceWorker.setUpdateCallback(callback);
+export { ServiceWorker };

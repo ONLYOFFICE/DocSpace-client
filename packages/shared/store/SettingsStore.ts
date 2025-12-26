@@ -281,6 +281,13 @@ class SettingsStore {
 
   mainBarVisible = false;
 
+  // Service Worker update state
+  swUpdateAvailable = false;
+
+  swUpdateReloadOnly = false;
+
+  swUpdateCallback: (() => void) | null = null;
+
   zendeskKey = null;
 
   legalTerms = null;
@@ -905,6 +912,30 @@ class SettingsStore {
 
   setMainBarVisible = (visible: boolean) => {
     this.mainBarVisible = visible;
+  };
+
+  setSwUpdateAvailable = (
+    available: boolean,
+    reloadOnly: boolean = false,
+    callback: (() => void) | null = null,
+  ) => {
+    this.swUpdateAvailable = available;
+    this.swUpdateReloadOnly = reloadOnly;
+    this.swUpdateCallback = callback;
+  };
+
+  applySwUpdate = () => {
+    if (this.swUpdateReloadOnly) {
+      window.location.reload();
+    } else if (this.swUpdateCallback) {
+      this.swUpdateCallback();
+    }
+    this.swUpdateAvailable = false;
+  };
+
+  dismissSwUpdate = () => {
+    this.swUpdateAvailable = false;
+    this.swUpdateCallback = null;
   };
 
   setValue = <T>(key: keyof SettingsStore, value: T) => {

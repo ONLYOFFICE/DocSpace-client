@@ -51,3 +51,7 @@ export * from "./recent";
 export * from "./favorites";
 
 export * from "./documents";
+
+export * from "./roomsCreate";
+
+export * from "./thirdPartyProviders";

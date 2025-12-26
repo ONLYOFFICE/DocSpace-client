@@ -574,8 +574,8 @@ const successRoot = {
         indexing: false,
         denyDownload: false,
         fileEntryType: 1,
-        id: 11239,
-        rootFolderId: 11239,
+        id: 2,
+        rootFolderId: 2,
         canShare: false,
         security: {
           Read: true,
@@ -649,7 +649,7 @@ const successRoot = {
       },
       pathParts: [
         {
-          id: 11239,
+          id: 2,
           title: "Rooms",
           folderType: 14,
         },

@@ -158,6 +158,26 @@ import {
   PATH_MY_DOCUMENTS,
   myDocumentsHandler,
   getFileInfoHandler,
+  createRoomHandler,
+  PATH_CREATE_ROOM,
+  newRoomHandler,
+  PATH_NEW_ROOM,
+  roomsLinkHandler,
+  PATH_ROOM_LINKS,
+  roomShareFirstHandler,
+  PATH_ROOM_SHARE_1,
+  roomShareSecondHandler,
+  PATH_ROOM_SHARE_2,
+  thirdPartyProvidersHandler,
+  PATH_THIRD_PARTY_PROVIDERS,
+  createPublicRoomHandler,
+  newPublicRoomHandler,
+  publicRoomLinkHandler,
+  publicRoomShareSecondHandler,
+  publicRoomFolderInfoHandler,
+  PATH_PUBLIC_ROOM_FOLDER_INFO,
+  publicRoomFilesHandler,
+  PATH_PUBLIC_ROOM_FILES,
 } from "./files";
 import { capabilitiesHandler, PATH_CAPABILITIES } from "./capabilities";
 
@@ -923,5 +943,55 @@ export const endpoints = {
     url: `${BASE_URL}${PATH_THEME}`,
     dataHandler: themeProvider,
     method: "PUT",
+  },
+  createRoom: {
+    url: `${BASE_URL}${PATH_CREATE_ROOM}`,
+    dataHandler: createRoomHandler,
+    method: "POST",
+  },
+  newRoom: {
+    url: PATH_NEW_ROOM,
+    dataHandler: newRoomHandler,
+  },
+  roomsLink: {
+    url: PATH_ROOM_LINKS,
+    dataHandler: roomsLinkHandler,
+  },
+  roomShareFirst: {
+    url: PATH_ROOM_SHARE_1,
+    dataHandler: roomShareFirstHandler,
+  },
+  roomShareSecond: {
+    url: PATH_ROOM_SHARE_2,
+    dataHandler: roomShareSecondHandler,
+  },
+  thirdPartyProviders: {
+    url: `${BASE_URL}${PATH_THIRD_PARTY_PROVIDERS}`,
+    dataHandler: thirdPartyProvidersHandler,
+  },
+  createPublicRoom: {
+    url: `${BASE_URL}${PATH_CREATE_ROOM}`,
+    dataHandler: createPublicRoomHandler,
+    method: "POST",
+  },
+  newPublicRoom: {
+    url: PATH_NEW_ROOM,
+    dataHandler: newPublicRoomHandler,
+  },
+  publicRoomLink: {
+    url: PATH_ROOM_LINKS,
+    dataHandler: publicRoomLinkHandler,
+  },
+  publicRoomFolderInfo: {
+    url: PATH_PUBLIC_ROOM_FOLDER_INFO,
+    dataHandler: publicRoomFolderInfoHandler,
+  },
+  publicRoomFiles: {
+    url: PATH_PUBLIC_ROOM_FILES,
+    dataHandler: publicRoomFilesHandler,
+  },
+  publicRoomShareSecond: {
+    url: PATH_ROOM_SHARE_2,
+    dataHandler: publicRoomShareSecondHandler,
   },
 } satisfies TEndpoints;

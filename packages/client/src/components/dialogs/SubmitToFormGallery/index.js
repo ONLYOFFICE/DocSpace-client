@@ -46,14 +46,10 @@ const SubmitToFormGallery = ({
   formItem,
   setFormItem,
   getIcon,
-  currentColorScheme,
   canSubmitToFormGallery,
   submitToFormGallery,
-  fetchGuideLink,
 }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const [guideLink, setGuideLink] = useState(null);
 
   const abortControllerRef = useRef(new AbortController());
 
@@ -171,13 +167,6 @@ const SubmitToFormGallery = ({
     keydownOptionsRef.current,
   );
 
-  useEffect(() => {
-    (async () => {
-      const fetchedGuideLink = await fetchGuideLink();
-      setGuideLink(fetchedGuideLink);
-    })();
-  }, []);
-
   if (!canSubmitToFormGallery()) return null;
 
   if (isSelectingForm)
@@ -210,26 +199,6 @@ const SubmitToFormGallery = ({
       <ModalDialog.Body>
         <div className="info">
           {t("FormGallery:SubmitToGalleryDialogMainInfo")}
-        </div>
-        <div className="info">
-          <Trans
-            t={t}
-            i18nKey="SubmitToGalleryDialogGuideInfo"
-            ns="FormGallery"
-          >
-            Learn how to create perfect forms and increase your chance to get
-            approval in our
-            <Link
-              color={currentColorScheme.main?.accent}
-              href={guideLink || "#"}
-              type="page"
-              target="_blank"
-              dataTestId="submit_to_gallery_guide_link"
-            >
-              guide
-            </Link>
-            .
-          </Trans>
         </div>
 
         {formItem ? (
@@ -302,7 +271,6 @@ export default inject(
     currentColorScheme: settingsStore.currentColorScheme,
     canSubmitToFormGallery: accessRightsStore.canSubmitToFormGallery,
     submitToFormGallery: oformsStore.submitToFormGallery,
-    fetchGuideLink: oformsStore.fetchGuideLink,
   }),
 )(
   withTranslation(

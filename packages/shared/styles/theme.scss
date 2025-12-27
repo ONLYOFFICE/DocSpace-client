@@ -3147,3 +3147,11 @@
 
   --template-gallery-view-button-border: #{$gray-dark-strong};
 }
+
+.light { 
+  --deep-link-file-tile-background: #{$light-gray-hover}; 
+} 
+
+.dark { 
+  --deep-link-file-tile-background: #{$light-dark-gray-hover}; 
+}

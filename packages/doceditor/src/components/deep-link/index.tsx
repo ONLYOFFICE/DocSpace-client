@@ -26,7 +26,6 @@
 
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "styled-components";
 import Image from "next/image";
 
 import { Text } from "@docspace/shared/components/text";
@@ -38,21 +37,13 @@ import { getBgPattern } from "@docspace/shared/utils/common";
 import PortalLogo from "@docspace/shared/components/portal-logo/PortalLogo";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { DeepLinkType } from "@docspace/shared/enums";
+import { useTheme } from "@docspace/shared/hooks/useTheme";
 
 import { iconSize32 } from "@docspace/shared/utils/image-helpers";
 import { getDeepLink, redirectToStore } from "./DeepLink.helper";
 
-import {
-  StyledDeepLink,
-  StyledBodyWrapper,
-  StyledFileTile,
-  StyledActionsWrapper,
-  BgBlock,
-  StyledWrapper,
-  LogoWrapper,
-  StyledBody,
-} from "./DeepLink.styled";
 import { DeepLinkProps } from "./DeepLink.types";
+import styles from "./deeplink.module.scss";
 
 const DeepLink = ({
   fileInfo,
@@ -62,7 +53,7 @@ const DeepLink = ({
   deepLinkSettings,
 }: DeepLinkProps) => {
   const { t } = useTranslation(["DeepLink", "Common"]);
-  const theme = useTheme();
+  const { currentColorScheme } = useTheme();
 
   const [isRemember, setIsRemember] = useState(false);
 
@@ -108,21 +99,27 @@ const DeepLink = ({
       : fileInfo?.title || "";
   };
 
-  const bgPattern = getBgPattern(theme.currentColorScheme?.id);
+  const bgPattern = getBgPattern(currentColorScheme?.id);
+
+  const bgBlockStyle = {
+    "--bg-pattern": bgPattern,
+  } as React.CSSProperties;
 
   return (
-    <StyledWrapper>
-      <BgBlock bgPattern={bgPattern} />
+    <div className={styles.wrapper}>
+      <div className={styles.bgBlock} style={bgBlockStyle} />
       <Scrollbar>
-        <StyledBody>
-          <LogoWrapper>
+        <div className={styles.body}>
+          <div className={styles.logoWrapper}>
             <PortalLogo className="portal-logo" isResizable />
-          </LogoWrapper>
+          </div>
           <FormWrapper>
-            <StyledDeepLink>
-              <StyledBodyWrapper>
-                <Text className="title">{t("DeepLink:OpeningDocument")}</Text>
-                <StyledFileTile>
+            <div className={styles.deepLink}>
+              <div className={styles.bodyWrapper}>
+                <Text className={styles.title}>
+                  {t("DeepLink:OpeningDocument")}
+                </Text>
+                <div className={styles.fileTile}>
                   <Image
                     src={getFileIcon() ?? ""}
                     alt="portal-logo"
@@ -132,14 +129,14 @@ const DeepLink = ({
                   <Text fontSize="14px" fontWeight="600" truncate>
                     {getFileTitle()}
                   </Text>
-                </StyledFileTile>
+                </div>
                 <Text>
                   {isOpenInAppOnly
                     ? t("DeepLink:DeepLinkOnlyAppText")
                     : t("DeepLink:DeepLinkText")}
                 </Text>
-              </StyledBodyWrapper>
-              <StyledActionsWrapper>
+              </div>
+              <div className={styles.actionsWrapper}>
                 {!isOpenInAppOnly ? (
                   <Checkbox
                     label={t("DeepLink:RememberChoice")}
@@ -161,23 +158,23 @@ const DeepLink = ({
                 />
                 {isOpenInAppOnly ? null : (
                   <Link
-                    className="stay-link"
+                    className={styles.stayLink}
                     type={LinkType.action}
                     fontSize="13px"
                     fontWeight="600"
                     isHovered
-                    color={theme.currentColorScheme?.main?.accent}
+                    color={currentColorScheme?.main?.accent}
                     onClick={onStayBrowserClick}
                   >
                     {t("DeepLink:StayInBrowser")}
                   </Link>
                 )}
-              </StyledActionsWrapper>
-            </StyledDeepLink>
+              </div>
+            </div>
           </FormWrapper>
-        </StyledBody>
+        </div>
       </Scrollbar>
-    </StyledWrapper>
+    </div>
   );
 };
 

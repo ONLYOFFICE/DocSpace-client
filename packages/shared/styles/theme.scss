@@ -2466,6 +2466,8 @@
   --files-editing-wrapper-fill: #{$gray};
   --files-panels-invite-border: 1px solid #{$gray-strong};
   --input-block-border-color: #{$light-second-main};
+  --input-block-icon-color: #{$gray};
+  --input-block-hover-icon-color: #{$light-gray-dark};
   --settings-common-white-label-border-img: 1px solid #{$gray-strong};
   --settings-common-white-label-green-bg-color: 1px solid #{$gray-strong};
   --settings-common-white-label-not-available-background: #{$gray-light};
@@ -2480,6 +2482,8 @@
   --files-editing-wrapper-fill: #{$gray-dark};
   --files-panels-invite-border: 1px solid #{$gray-dark-strong};
   --input-block-border-color: #{$white};
+  --input-block-icon-color: #{$gray-dark};
+  --input-block-hover-icon-color: #{$white};
   --settings-common-white-label-border-img: 1px solid #{$gray-dark-strong};
   --settings-common-white-label-not-available-background: #{$gray-dark};
   --settings-common-white-label-text-color: #{$white};
@@ -3149,9 +3153,17 @@
 }
 
 .light { 
-  --deep-link-file-tile-background: #{$light-gray-hover}; 
+  --deep-link-file-tile-background: #{$light-gray-hover};
+  --completed-form-link-color: #{$light-blue-main};
+  --completed-form-description-color: #{$gray};
+  --completed-form-box-background-color: #{$gray-light};
+  --completed-form-label-color: #{$gray};
 } 
 
 .dark { 
-  --deep-link-file-tile-background: #{$light-dark-gray-hover}; 
+  --deep-link-file-tile-background: #{$light-dark-gray-hover};
+  --completed-form-link-color: #{$white};
+  --completed-form-description-color: #{$dark-gray-dark};
+  --completed-form-box-background-color: #{$dark-gray-light};
+  --completed-form-label-color: #{$dark-gray-dark};
 }

@@ -29,49 +29,49 @@
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import React, { useEffect } from "react";
-import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 
 import { getLogoUrl } from "@docspace/shared/utils";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { frameCallCommand } from "@docspace/shared/utils/common";
 import PublicRoomPassword from "@docspace/shared/pages/PublicRoom/PublicRoomPasswordForm";
+import { useTheme } from "@docspace/shared/hooks/useTheme";
 
 import type { FilePasswordProps } from "./FilePassword.types";
-import { StyledSimpleNav, Container } from "./FilePassword.styled";
+import styles from "./file-password.module.scss";
 
 const FilePassword = ({ shareKey, validationData }: FilePasswordProps) => {
   const { t } = useTranslation(["Common"]);
 
-  const theme = useTheme();
+  const { isBase } = useTheme();
 
   useEffect(() => frameCallCommand("setIsLoaded"), []);
 
-  const logoUrl = getLogoUrl(WhiteLabelLogoType.LoginPage, !theme.isBase);
+  const logoUrl = getLogoUrl(WhiteLabelLogoType.LoginPage, !isBase);
 
   const onSubmit = () => {
     return window.location.reload();
   };
 
   return (
-    <Container>
-      <StyledSimpleNav id="public-room-password-header">
+    <section className={styles.container}>
+      <div id="public-room-password-header" className={styles.simpleNav}>
         <Image
-          className="logo"
+          className={styles.logo}
           src={logoUrl}
           priority
           alt="mobile-icon"
           width={211}
           height={24}
         />
-      </StyledSimpleNav>
+      </div>
       <PublicRoomPassword
         t={t}
         roomKey={shareKey}
         validationData={validationData}
         onSuccessValidationCallback={onSubmit}
       />
-    </Container>
+    </section>
   );
 };
 

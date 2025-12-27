@@ -34,7 +34,6 @@ import "@docspace/shared/styles/theme.scss";
 
 import Providers from "@/providers";
 import Scripts from "@/components/Scripts";
-import StyledComponentsRegistry from "@/utils/registry";
 import { getColorTheme, getSettings, getUser } from "@/utils/actions";
 import { logger } from "@/../logger.mjs";
 
@@ -101,21 +100,18 @@ export default async function RootLayout({
         <meta name="apple-mobile-web-app-capable" content="yes" />
       </head>
       <body className={themeClass}>
-        <StyledComponentsRegistry>
-          <Providers
-            contextData={{
-              initialTheme: theme,
-              user,
-              settings,
-              systemTheme,
-              colorTheme,
-              locale,
-            }}
-          >
-            {children}
-          </Providers>
-        </StyledComponentsRegistry>
-
+        <Providers
+          contextData={{
+            initialTheme: theme,
+            user,
+            settings,
+            systemTheme,
+            colorTheme,
+            locale,
+          }}
+        >
+          {children}
+        </Providers>
         <Scripts />
       </body>
     </html>

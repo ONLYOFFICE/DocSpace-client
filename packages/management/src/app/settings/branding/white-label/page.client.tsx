@@ -134,7 +134,6 @@ export const WhiteLabelPage = ({
       logoUrls={logoUrls}
       isSettingPaid={isSettingPaid}
       showAbout={showAbout}
-      showNotAvailable={!isCustomizationAvailable}
       standalone={standalone}
       onSave={onSave}
       onRestoreDefault={onRestoreDefault}

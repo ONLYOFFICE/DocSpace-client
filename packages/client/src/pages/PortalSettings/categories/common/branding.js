@@ -28,7 +28,7 @@ import React, { useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { inject, observer } from "mobx-react";
-import styled from "styled-components";
+import classNames from "classnames";
 
 import { isManagement } from "@docspace/shared/utils/common";
 import { DeviceType } from "@docspace/shared/enums";
@@ -43,45 +43,9 @@ import { CompanyInfoSettings } from "./Branding/companyInfoSettings";
 import { AdditionalResources } from "./Branding/additionalResources";
 
 import LoaderBrandingSubtitle from "./sub-components/loaderBrandingSubtitle";
-import { UnavailableStyles } from "../../utils/commonSettingsStyles";
+import styles from "./branding.module.scss";
 
 const baseUrl = "/portal-settings/customization";
-
-const StyledComponent = styled.div`
-  max-width: 700px;
-  width: 100%;
-  font-weight: 400;
-  font-size: 13px;
-
-  .category-description {
-    line-height: 20px;
-    color: ${(props) => props.theme.client.settings.common.descriptionColor};
-    margin-bottom: 20px;
-  }
-
-  .header {
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 22px;
-    padding-bottom: 9px;
-  }
-
-  .description {
-    padding-bottom: 16px;
-  }
-
-  .settings-block {
-    max-width: 433px;
-  }
-
-  hr {
-    margin: 20px 0;
-    border: none;
-    border-top: ${(props) => props.theme.client.settings.separatorBorder};
-  }
-
-  ${(props) => !props.isSettingPaid && UnavailableStyles}
-`;
 
 const Branding = ({
   t,
@@ -124,7 +88,12 @@ const Branding = ({
   }
 
   return (
-    <StyledComponent isSettingPaid={isSettingPaid}>
+    <div
+      className={classNames(styles.branding, {
+        isEnableBranding: isSettingPaid,
+        settings_unavailable: !isSettingPaid,
+      })}
+    >
       {!isWhiteLabelLoaded && !isBrandNameLoaded ? (
         <LoaderBrandingSubtitle />
       ) : (
@@ -143,7 +112,7 @@ const Branding = ({
           <AdditionalResources />
         </>
       ) : null}
-    </StyledComponent>
+    </div>
   );
 };
 

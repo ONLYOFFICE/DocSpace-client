@@ -127,7 +127,7 @@
     "@types/identity-obj-proxy": "3.0.2",
     "@types/lodash": "4.17.10",
     "@types/luxon": "3.4.2",
-    "@types/node": "22.7.5",
+    "@types/node": "24.10.4",
     "@types/react": "19.2.2",
     "@types/react-avatar-editor": "13.0.3",
     "@types/react-dom": "19.2.2",

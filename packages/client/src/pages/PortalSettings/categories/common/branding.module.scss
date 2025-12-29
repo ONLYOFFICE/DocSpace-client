@@ -24,30 +24,41 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@use "@docspace/shared/styles/mixins";
+.branding {
+  max-width: 700px;
+  width: 100%;
+  font-weight: 400;
+  font-size: 13px;
 
-.wrapper {
-  .content {
-    display: none;
+  :global(.category-description) {
+    line-height: 20px;
+    color: var(--settings-description-color);
+    margin-bottom: 20px;
   }
 
-  .tabsBody {
-    margin-bottom: 16px;
+  :global(.header) {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
+    padding-bottom: 9px;
   }
 
-  @include mixins.mobile {
-    width: calc(100% - 16px);
-    
-    &.hideTabs {
-      :global(.sticky),
-      :global(.sticky-indent) {
-        display: none !important;
-      }
-    }
+  :global(.description) {
+    padding-bottom: 16px;
   }
 
-  :global(:not(.isEnableBranding)){
-    :global(.settings_unavailable) {
+  :global(.settings-block) {
+    max-width: 433px;
+  }
+
+  :global(hr) {
+    margin: 20px 0;
+    border: none;
+    border-top: var(--settings-backup-separator-border);
+  }
+
+  &:global(:not(.isEnableBranding)){
+    &:global(.settings_unavailable) {
       color: var(--management-disable-color) !important;
       pointer-events: none;
       cursor: default;

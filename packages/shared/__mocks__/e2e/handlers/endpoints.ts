@@ -170,6 +170,7 @@ import {
   HEADER_ROOMS_LIST,
   HEADER_AI_DISABLED,
   HEADER_PLUGINS_SETTINGS,
+  HEADER_AI_WEB_SEARCH_DISABLED,
 } from "../utils";
 import {
   PATH_DELETE_USER,
@@ -504,6 +505,15 @@ export const endpoints = {
       aiConfigHandler(
         new Headers({
           [HEADER_AI_DISABLED]: "true",
+        }),
+      ),
+  },
+  aiConfigWebSearchDisabled: {
+    url: `${BASE_URL}${PATH_AI_CONFIG}`,
+    dataHandler: () =>
+      aiConfigHandler(
+        new Headers({
+          [HEADER_AI_WEB_SEARCH_DISABLED]: "true",
         }),
       ),
   },

@@ -339,6 +339,7 @@ const ToolsSettings = ({
                 isHovered
                 fontWeight={600}
                 onClick={onGoToWebSearchPage}
+                dataTestId="go-to-settings-link"
               >
                 {t("Common:GoToSettings")}
               </Link>

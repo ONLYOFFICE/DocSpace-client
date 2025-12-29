@@ -644,6 +644,82 @@ test.describe("AI chat", () => {
 
       wsMock.closeConnection();
     });
+
+    test("should toggle web search if web search available", async ({
+      page,
+      mockRequest,
+    }) => {
+      await mockRequest.router([
+        endpoints.aiRoomsChatsConfigAllEnabled,
+        endpoints.aiRoomsServersEmpty,
+        endpoints.aiRoomsChats,
+        endpoints.agentFolderChat,
+        endpoints.aiChat,
+        endpoints.updateAiChat,
+      ]);
+      await page.goto("/ai-agents/2/chat?folder=2");
+
+      const containerLoader = page.getByTestId("chat-container-loading");
+
+      await expect(containerLoader).toBeVisible();
+      await containerLoader.waitFor({ state: "hidden" });
+
+      const toolsButton = page.getByTestId("chat-input-tools-button");
+      await toolsButton.click();
+
+      const webSearchItem = page.getByTestId("web-search");
+      await expect(webSearchItem).toBeVisible();
+      const toggleButton = webSearchItem.getByTestId("toggle-button");
+      await expect(toggleButton).toHaveAttribute("aria-checked", "true");
+      await webSearchItem.click();
+      await expect(toggleButton).toHaveAttribute("aria-checked", "false");
+      await webSearchItem.click();
+      await expect(toggleButton).toHaveAttribute("aria-checked", "true");
+    });
+
+    test("should render disabled web search and go to settings via tooltip if web search unavailable (admin)", async ({
+      page,
+      mockRequest,
+    }) => {
+      await page.unroute(endpoints.aiConfig.url);
+
+      await mockRequest.router([
+        endpoints.aiRoomsChatsConfigAllEnabled,
+        endpoints.aiRoomsServersEmpty,
+        endpoints.aiRoomsChats,
+        endpoints.agentFolderChat,
+        endpoints.aiChat,
+        endpoints.updateAiChat,
+        endpoints.aiConfigWebSearchDisabled,
+      ]);
+      await page.goto("/ai-agents/2/chat?folder=2");
+
+      const containerLoader = page.getByTestId("chat-container-loading");
+
+      await expect(containerLoader).toBeVisible();
+      await containerLoader.waitFor({ state: "hidden" });
+
+      const toolsButton = page.getByTestId("chat-input-tools-button");
+      await toolsButton.click();
+
+      const webSearchItem = page.getByTestId("web-search");
+      await expect(webSearchItem).toBeVisible();
+
+      const toggleButton = webSearchItem.getByTestId("toggle-button");
+      await toggleButton.hover();
+
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "ai-chat",
+        "ai-chat-with-disabled-web-search-tooltip-admin.png",
+      ]);
+
+      const goSettingsLink = page.getByTestId("go-to-settings-link");
+      await expect(goSettingsLink).toBeVisible();
+
+      await goSettingsLink.click();
+      await expect(page).toHaveURL("/portal-settings/ai-settings/search");
+    });
   });
 
   // ================================== User ==================================
@@ -757,6 +833,44 @@ test.describe("AI chat", () => {
         "desktop",
         "ai-chat",
         "ai-chat-with-info-block-ai-not-ready-user.png",
+      ]);
+    });
+
+    test("should render disabled web search with tooltip if web search unavailable (user)", async ({
+      page,
+      mockRequest,
+    }) => {
+      await page.unroute(endpoints.aiConfig.url);
+
+      await mockRequest.router([
+        endpoints.aiRoomsChatsConfigAllEnabled,
+        endpoints.aiRoomsServersEmpty,
+        endpoints.aiRoomsChats,
+        endpoints.agentFolderChat,
+        endpoints.aiChat,
+        endpoints.updateAiChat,
+        endpoints.aiConfigWebSearchDisabled,
+      ]);
+      await page.goto("/ai-agents/2/chat?folder=2");
+
+      const containerLoader = page.getByTestId("chat-container-loading");
+
+      await expect(containerLoader).toBeVisible();
+      await containerLoader.waitFor({ state: "hidden" });
+
+      const toolsButton = page.getByTestId("chat-input-tools-button");
+      await toolsButton.click();
+
+      const webSearchItem = page.getByTestId("web-search");
+      await expect(webSearchItem).toBeVisible();
+
+      const toggleButton = webSearchItem.getByTestId("toggle-button");
+      await toggleButton.hover();
+
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "ai-chat",
+        "ai-chat-with-disabled-web-search-tooltip-user.png",
       ]);
     });
   });

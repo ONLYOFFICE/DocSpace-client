@@ -62,7 +62,7 @@
 }
 
 .buttonsSeparator {
-  color: var(--text-secondary, #a3a9ae);
+  color: var(--text-secondary);
   font-size: 13px;
 }
 
@@ -71,7 +71,7 @@
   flex-direction: column;
   gap: 12px;
   padding: 16px;
-  background: var(--bg-secondary, #f8f9f9);
+  background: var(--bg-secondary);
   border-radius: 8px;
   margin-bottom: 20px;
 }
@@ -84,7 +84,7 @@
 
 .fingerprint {
   font-family: "Roboto Mono", monospace;
-  background: var(--bg-primary, #fff);
+  background: var(--bg-primary);
   padding: 4px 8px;
   border-radius: 4px;
   font-size: 12px;
@@ -100,6 +100,6 @@
 }
 
 .passphraseHint {
-  color: var(--text-secondary, #a3a9ae);
+  color: var(--text-secondary);
   line-height: 1.4;
 }

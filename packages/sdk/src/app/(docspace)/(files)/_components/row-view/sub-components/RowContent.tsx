@@ -31,14 +31,15 @@
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
-import { useTheme } from "styled-components";
 
+import { useTheme } from "@docspace/shared/hooks/useTheme";
 import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 import { FilesRowContent } from "@docspace/shared/components/files-row";
 import { getFileTypeName } from "@docspace/shared/utils/getFileType";
 import getCorrectDate from "@docspace/shared/utils/getCorrectDate";
 import { SortByFieldName } from "@docspace/shared/enums";
+import { globalColors } from "@docspace/shared/themes";
 
 import useFolderActions from "@/app/(docspace)/_hooks/useFolderActions";
 import useFilesActions from "@/app/(docspace)/_hooks/useFilesActions";
@@ -58,7 +59,7 @@ const RowContent = observer(
   }: RowContentProps) => {
     const { title, createdBy, created, updated } = item;
 
-    const theme = useTheme();
+    const { isBase } = useTheme();
     const { t, i18n } = useTranslation(["Common"]);
 
     const { openFolder } = useFolderActions({ t });
@@ -102,7 +103,9 @@ const RowContent = observer(
     const mainInfo = getContentComponent();
 
     return (
-      <FilesRowContent sideColor={theme.filesSection.rowView.sideColor}>
+      <FilesRowContent
+        sideColor={isBase ? globalColors.gray : globalColors.grayDark}
+      >
         <Link
           className="row-content-link"
           type={LinkType.page}

@@ -97,6 +97,7 @@ export type TUser = {
   isAnonim: boolean;
   tfaAppEnabled?: boolean;
   sharedTo?: object;
+  publicKey?: string;
 };
 
 export type TGetUserList = {

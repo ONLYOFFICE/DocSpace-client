@@ -39,7 +39,10 @@ export type TPrivacyRoomKeysResponse = {
 };
 
 export type TEncryptionKeyPair = {
+  id: string;
   privateKeyEnc: string;
   publicKey: string;
   userId: string;
+  date?: string;
+  cryptoEngineId?: string;
 };

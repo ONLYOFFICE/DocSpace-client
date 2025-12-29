@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useCallback, useRef, useEffect } from "react";
+import React, { useState, useCallback, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -36,25 +36,25 @@ import {
   serializeKeyPair,
   exportKeyToFile,
   importKeyFromFile,
-  getKeyStatus,
   getPublicKeyFingerprint,
 } from "@docspace/shared/services/encryption/keyManagement";
 import { SecretStorageService } from "@docspace/shared/services/encryption/secretStorage";
-import type {
-  SerializedKeyPair,
-  KeyStatus,
-} from "@docspace/shared/services/encryption/types";
-import { setEncryptionKeys } from "@docspace/shared/api/privacy";
+import type { SerializedKeyPair } from "@docspace/shared/services/encryption/types";
+import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
+import {
+  setEncryptionKeys,
+  deleteEncryptionKey,
+} from "@docspace/shared/api/privacy";
 
-import { KeyStatusDisplay } from "./KeyStatusDisplay";
+import { KeysList } from "./KeysList";
 import { PassphraseModal } from "./PassphraseModal";
 import { ConfirmationModal } from "./ConfirmationModal";
 
 import styles from "./keys-management.module.scss";
 
 type KeysManagementProps = {
-  encryptionKeys?: SerializedKeyPair | null;
-  setUserEncryptionKeys?: (keys: SerializedKeyPair[]) => void;
+  encryptionKeys?: TEncryptionKeyPair[] | null;
+  setUserEncryptionKeys?: (keys: TEncryptionKeyPair[]) => void;
 };
 
 const KeysManagement = ({
@@ -67,23 +67,21 @@ const KeysManagement = ({
 
   const [isGenerating, setIsGenerating] = useState(false);
   const [isImporting, setIsImporting] = useState(false);
-  const [isExporting, setIsExporting] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [deletingKeyId, setDeletingKeyId] = useState<string | null>(null);
   const [showPassphraseModal, setShowPassphraseModal] = useState(false);
   const [showConfirmReplace, setShowConfirmReplace] = useState(false);
+  const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const [pendingAction, setPendingAction] = useState<
     "generate" | "import" | null
   >(null);
+  const [pendingDeleteKeyId, setPendingDeleteKeyId] = useState<string | null>(
+    null,
+  );
   const [importedKeyData, setImportedKeyData] =
     useState<SerializedKeyPair | null>(null);
-  const [keyStatus, setKeyStatus] = useState<KeyStatus>({ hasKey: false });
 
-  useEffect(() => {
-    const updateStatus = async () => {
-      const status = await getKeyStatus(encryptionKeys || null);
-      setKeyStatus(status);
-    };
-    updateStatus();
-  }, [encryptionKeys]);
+  const hasKeys = encryptionKeys && encryptionKeys.length > 0;
 
   const handleGenerateKey = useCallback(
     async (passphrase: string) => {
@@ -99,7 +97,15 @@ const KeysManagement = ({
 
         await SecretStorageService.cacheDecryptedKey(keyPair.privateKey);
 
-        setUserEncryptionKeys?.([serialized]);
+        const existingKeys = encryptionKeys || [];
+        const newKey: TEncryptionKeyPair = {
+          id: crypto.randomUUID(),
+          publicKey: serialized.publicKey,
+          privateKeyEnc: serialized.privateKeyEnc,
+          userId: "",
+          date: new Date().toISOString(),
+        };
+        setUserEncryptionKeys?.([...existingKeys, newKey]);
         toastr.success(t("Common:EncryptionKeyGenerated"));
       } catch (error) {
         toastr.error(t("Common:EncryptionError"));
@@ -110,36 +116,34 @@ const KeysManagement = ({
         setPendingAction(null);
       }
     },
-    [t, setUserEncryptionKeys],
+    [t, setUserEncryptionKeys, encryptionKeys],
   );
 
-  const handleExportKey = useCallback(async () => {
-    if (!encryptionKeys) return;
+  const handleExportSingleKey = useCallback(
+    async (keyData: TEncryptionKeyPair) => {
+      try {
+        const blob = exportKeyToFile({
+          publicKey: keyData.publicKey,
+          privateKeyEnc: keyData.privateKeyEnc,
+        });
+        const url = URL.createObjectURL(blob);
+        const fingerprint = await getPublicKeyFingerprint(keyData.publicKey);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `docspace-key-${fingerprint.slice(0, 8)}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
 
-    setIsExporting(true);
-
-    try {
-      const blob = exportKeyToFile(encryptionKeys);
-      const url = URL.createObjectURL(blob);
-      const fingerprint = await getPublicKeyFingerprint(
-        encryptionKeys.publicKey,
-      );
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `docspace-key-${fingerprint.slice(0, 8)}.json`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-
-      toastr.success(t("Common:EncryptionKeyExported"));
-    } catch (error) {
-      toastr.error(t("Common:EncryptionError"));
-      console.error("Key export failed:", error);
-    } finally {
-      setIsExporting(false);
-    }
-  }, [encryptionKeys, t]);
+        toastr.success(t("Common:EncryptionKeyExported"));
+      } catch (error) {
+        toastr.error(t("Common:EncryptionError"));
+        console.error("Key export failed:", error);
+      }
+    },
+    [t],
+  );
 
   const handleImportFile = useCallback(
     async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -152,7 +156,7 @@ const KeysManagement = ({
         const keyData = await importKeyFromFile(file);
         setImportedKeyData(keyData);
 
-        if (keyStatus.hasKey) {
+        if (hasKeys) {
           setPendingAction("import");
           setShowConfirmReplace(true);
         } else {
@@ -160,7 +164,14 @@ const KeysManagement = ({
             publicKey: keyData.publicKey,
             privateKeyEnc: keyData.privateKeyEnc,
           });
-          setUserEncryptionKeys?.([keyData]);
+          const newKey: TEncryptionKeyPair = {
+            id: crypto.randomUUID(),
+            publicKey: keyData.publicKey,
+            privateKeyEnc: keyData.privateKeyEnc,
+            userId: "",
+            date: new Date().toISOString(),
+          };
+          setUserEncryptionKeys?.([newKey]);
           toastr.success(t("Common:EncryptionKeyImported"));
         }
       } catch (error) {
@@ -175,7 +186,7 @@ const KeysManagement = ({
         }
       }
     },
-    [keyStatus.hasKey, t, setUserEncryptionKeys],
+    [hasKeys, t, setUserEncryptionKeys],
   );
 
   const handleConfirmReplace = useCallback(async () => {
@@ -186,7 +197,14 @@ const KeysManagement = ({
           privateKeyEnc: importedKeyData.privateKeyEnc,
           update: true,
         });
-        setUserEncryptionKeys?.([importedKeyData]);
+        const newKey: TEncryptionKeyPair = {
+          id: crypto.randomUUID(),
+          publicKey: importedKeyData.publicKey,
+          privateKeyEnc: importedKeyData.privateKeyEnc,
+          userId: "",
+          date: new Date().toISOString(),
+        };
+        setUserEncryptionKeys?.([newKey]);
         toastr.success(t("Common:EncryptionKeyImported"));
       } catch (error) {
         toastr.error(t("Common:EncryptionError"));
@@ -203,18 +221,51 @@ const KeysManagement = ({
   }, [pendingAction, importedKeyData, t, setUserEncryptionKeys]);
 
   const requestGenerateKey = useCallback(() => {
-    if (keyStatus.hasKey) {
+    if (hasKeys) {
       setPendingAction("generate");
       setShowConfirmReplace(true);
     } else {
       setShowPassphraseModal(true);
       setPendingAction("generate");
     }
-  }, [keyStatus.hasKey]);
+  }, [hasKeys]);
+
+  const handleDeleteKeyRequest = useCallback((keyId: string) => {
+    setPendingDeleteKeyId(keyId);
+    setShowConfirmDelete(true);
+  }, []);
+
+  const handleConfirmDelete = useCallback(async () => {
+    if (!pendingDeleteKeyId) return;
+
+    setIsDeleting(true);
+    setDeletingKeyId(pendingDeleteKeyId);
+    setShowConfirmDelete(false);
+
+    try {
+      const remainingKeys = await deleteEncryptionKey(pendingDeleteKeyId);
+      setUserEncryptionKeys?.(remainingKeys);
+      SecretStorageService.clearCache();
+      toastr.success(t("Common:EncryptionKeyDeleted"));
+    } catch (error) {
+      toastr.error(t("Common:EncryptionError"));
+      console.error("Key deletion failed:", error);
+    } finally {
+      setIsDeleting(false);
+      setDeletingKeyId(null);
+      setPendingDeleteKeyId(null);
+    }
+  }, [pendingDeleteKeyId, t, setUserEncryptionKeys]);
 
   return (
     <div className={styles.sectionBody}>
-      <KeyStatusDisplay status={keyStatus} />
+      <KeysList
+        keys={encryptionKeys || []}
+        onDelete={handleDeleteKeyRequest}
+        onExport={handleExportSingleKey}
+        isDeleting={isDeleting}
+        deletingKeyId={deletingKeyId}
+      />
       <div className={styles.contentBody}>
         <div className={styles.inputGroup}>
           <Button
@@ -222,7 +273,7 @@ const KeysManagement = ({
             onClick={requestGenerateKey}
             label={t("Common:GenerateNewKey")}
             isLoading={isGenerating}
-            isDisabled={isGenerating || isImporting}
+            isDisabled={isGenerating || isImporting || isDeleting}
           />
           <div className={styles.buttonsSeparator}>{t("Common:Or")}</div>
           <Button
@@ -231,7 +282,7 @@ const KeysManagement = ({
             onClick={() => fileInputRef.current?.click()}
             label={t("Common:ImportKey")}
             isLoading={isImporting}
-            isDisabled={isGenerating || isImporting}
+            isDisabled={isGenerating || isImporting || isDeleting}
           />
           <input
             ref={fileInputRef}
@@ -240,15 +291,6 @@ const KeysManagement = ({
             style={{ display: "none" }}
             onChange={handleImportFile}
           />
-          {keyStatus.hasKey && (
-            <Button
-              size={ButtonSize.small}
-              onClick={handleExportKey}
-              label={t("Common:ExportKey")}
-              isLoading={isExporting}
-              isDisabled={isGenerating || isImporting || isExporting}
-            />
-          )}
         </div>
       </div>
       <PassphraseModal
@@ -258,7 +300,7 @@ const KeysManagement = ({
           setShowPassphraseModal(false);
           setPendingAction(null);
         }}
-        isNew={!keyStatus.hasKey || pendingAction === "generate"}
+        isNew={!hasKeys || pendingAction === "generate"}
         isLoading={isGenerating}
       />
       <ConfirmationModal
@@ -272,16 +314,24 @@ const KeysManagement = ({
           setImportedKeyData(null);
         }}
       />
+      <ConfirmationModal
+        visible={showConfirmDelete}
+        title={t("Common:DeleteKey")}
+        message={t("Common:DeleteKeyWarning")}
+        onConfirm={handleConfirmDelete}
+        onCancel={() => {
+          setShowConfirmDelete(false);
+          setPendingDeleteKeyId(null);
+        }}
+      />
     </div>
   );
 };
 
 export default inject(({ userStore }: TStore) => {
   const { encryptionKeys, setUserEncryptionKeys } = userStore;
-  const firstKey =
-    encryptionKeys && encryptionKeys.length > 0 ? encryptionKeys[0] : null;
   return {
-    encryptionKeys: firstKey,
+    encryptionKeys,
     setUserEncryptionKeys,
   };
 })(observer(KeysManagement));

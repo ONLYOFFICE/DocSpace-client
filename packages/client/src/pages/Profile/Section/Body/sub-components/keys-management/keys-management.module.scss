@@ -103,3 +103,81 @@
   color: var(--text-secondary);
   line-height: 1.4;
 }
+
+.keysList {
+  margin-bottom: 20px;
+}
+
+.keysListTitle {
+  margin-bottom: 12px;
+}
+
+.keysListItems {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.keyItem {
+  position: relative;
+  padding: 16px;
+  background: var(--row-background-color);
+  border-radius: 8px;
+  border: 1px solid var(--divider-color);
+}
+
+.keyItemHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.keyItemActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.keyItemContent {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.keyItemOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+
+.deleteButton {
+  opacity: 0.6;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.noKeys {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  background: var(--row-background-color);
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.keyIdText {
+  font-family: "Roboto Mono", monospace;
+  font-size: 12px;
+}

@@ -103,3 +103,12 @@ export async function getPublicKeysWithAccess(fileId: number | string) {
 
   return res;
 }
+
+export async function deleteEncryptionKey(keyId: string) {
+  const res = (await request({
+    method: "delete",
+    url: `privacyroom/keys/${keyId}`,
+  })) as TEncryptionKeyPair[];
+
+  return res;
+}

@@ -24,95 +24,259 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useState, useCallback, useRef, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 
 import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { toastr } from "@docspace/shared/components/toast";
+
 import {
-  TextInput,
-  InputType,
-  InputSize,
-} from "@docspace/shared/components/text-input";
-import { Text } from "@docspace/shared/components/text";
+  generateRSAKeyPair,
+  serializeKeyPair,
+  exportKeyToFile,
+  importKeyFromFile,
+  getKeyStatus,
+  getPublicKeyFingerprint,
+} from "@docspace/shared/services/encryption/keyManagement";
+import type {
+  SerializedKeyPair,
+  KeyStatus,
+} from "@docspace/shared/services/encryption/types";
+import { setEncryptionKeys } from "@docspace/shared/api/privacy";
+
+import { KeyStatusDisplay } from "./KeyStatusDisplay";
+import { PassphraseModal } from "./PassphraseModal";
+import { ConfirmationModal } from "./ConfirmationModal";
 
 import styles from "./keys-management.module.scss";
 
 type KeysManagementProps = {
-  userKeys?: boolean;
-  setUserKeys?: () => void;
-  encryptionKeys?: TEncryptionKeyPair[] | null;
+  encryptionKeys?: SerializedKeyPair | null;
+  setUserEncryptionKeys?: (keys: SerializedKeyPair) => void;
 };
 
 const KeysManagement = ({
-  userKeys,
-  setUserKeys,
   encryptionKeys,
+  setUserEncryptionKeys,
 }: KeysManagementProps) => {
-  const { t } = useTranslation(["Common", "Article", "Webhooks"]);
+  const { t } = useTranslation(["Common"]);
 
-  const [keyWord, setKeyWord] = React.useState("");
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const keys = encryptionKeys ? (
-    encryptionKeys.map((key, index) => <div key={index}>{key.publicKey}</div>)
-  ) : (
-    <div></div>
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [isImporting, setIsImporting] = useState(false);
+  const [isExporting, setIsExporting] = useState(false);
+  const [showPassphraseModal, setShowPassphraseModal] = useState(false);
+  const [showConfirmReplace, setShowConfirmReplace] = useState(false);
+  const [pendingAction, setPendingAction] = useState<
+    "generate" | "import" | null
+  >(null);
+  const [importedKeyData, setImportedKeyData] =
+    useState<SerializedKeyPair | null>(null);
+  const [keyStatus, setKeyStatus] = useState<KeyStatus>({ hasKey: false });
+
+  useEffect(() => {
+    const updateStatus = async () => {
+      const status = await getKeyStatus(encryptionKeys || null);
+      setKeyStatus(status);
+    };
+    updateStatus();
+  }, [encryptionKeys]);
+
+  const handleGenerateKey = useCallback(
+    async (passphrase: string) => {
+      setIsGenerating(true);
+      try {
+        const keyPair = await generateRSAKeyPair();
+        const serialized = await serializeKeyPair(keyPair, passphrase);
+
+        await setEncryptionKeys({
+          publicKey: serialized.publicKey,
+          privateKeyEnc: serialized.privateKeyEnc,
+        });
+
+        setUserEncryptionKeys?.(serialized);
+        toastr.success(t("Common:EncryptionKeyGenerated"));
+      } catch (error) {
+        toastr.error(t("Common:EncryptionError"));
+        console.error("Key generation failed:", error);
+      } finally {
+        setIsGenerating(false);
+        setShowPassphraseModal(false);
+        setPendingAction(null);
+      }
+    },
+    [t, setUserEncryptionKeys],
   );
 
-  const onChangeKeyWord = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setKeyWord(value);
-  };
+  const handleExportKey = useCallback(async () => {
+    if (!encryptionKeys) return;
+
+    setIsExporting(true);
+
+    try {
+      const blob = exportKeyToFile(encryptionKeys);
+      const url = URL.createObjectURL(blob);
+      const fingerprint = await getPublicKeyFingerprint(
+        encryptionKeys.publicKey,
+      );
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `docspace-key-${fingerprint.slice(0, 8)}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+
+      toastr.success(t("Common:EncryptionKeyExported"));
+    } catch (error) {
+      toastr.error(t("Common:EncryptionError"));
+      console.error("Key export failed:", error);
+    } finally {
+      setIsExporting(false);
+    }
+  }, [encryptionKeys, t]);
+
+  const handleImportFile = useCallback(
+    async (event: React.ChangeEvent<HTMLInputElement>) => {
+      const file = event.target.files?.[0];
+      if (!file) return;
+
+      setIsImporting(true);
+
+      try {
+        const keyData = await importKeyFromFile(file);
+        setImportedKeyData(keyData);
+
+        if (keyStatus.hasKey) {
+          setPendingAction("import");
+          setShowConfirmReplace(true);
+        } else {
+          await setEncryptionKeys({
+            publicKey: keyData.publicKey,
+            privateKeyEnc: keyData.privateKeyEnc,
+          });
+          setUserEncryptionKeys?.(keyData);
+          toastr.success(t("Common:EncryptionKeyImported"));
+        }
+      } catch (error) {
+        toastr.error(
+          error instanceof Error ? error.message : t("Common:EncryptionError"),
+        );
+        console.error("Key import failed:", error);
+      } finally {
+        setIsImporting(false);
+        if (fileInputRef.current) {
+          fileInputRef.current.value = "";
+        }
+      }
+    },
+    [keyStatus.hasKey, t, setUserEncryptionKeys],
+  );
+
+  const handleConfirmReplace = useCallback(async () => {
+    if (pendingAction === "import" && importedKeyData) {
+      try {
+        await setEncryptionKeys({
+          publicKey: importedKeyData.publicKey,
+          privateKeyEnc: importedKeyData.privateKeyEnc,
+          update: true,
+        });
+        setUserEncryptionKeys?.(importedKeyData);
+        toastr.success(t("Common:EncryptionKeyImported"));
+      } catch (error) {
+        toastr.error(t("Common:EncryptionError"));
+        console.error("Key replacement failed:", error);
+      } finally {
+        setShowConfirmReplace(false);
+        setImportedKeyData(null);
+        setPendingAction(null);
+      }
+    } else if (pendingAction === "generate") {
+      setShowConfirmReplace(false);
+      setShowPassphraseModal(true);
+    }
+  }, [pendingAction, importedKeyData, t, setUserEncryptionKeys]);
+
+  const requestGenerateKey = useCallback(() => {
+    if (keyStatus.hasKey) {
+      setPendingAction("generate");
+      setShowConfirmReplace(true);
+    } else {
+      setShowPassphraseModal(true);
+      setPendingAction("generate");
+    }
+  }, [keyStatus.hasKey]);
 
   return (
     <div className={styles.sectionBody}>
-      <div className={styles.categoryTitle}>
-        <Text fontSize="14px" fontWeight={600}>
-          Generate or upload your encryption keys
-        </Text>
-      </div>
+      <KeyStatusDisplay status={keyStatus} />
       <div className={styles.contentBody}>
         <div className={styles.inputGroup}>
-          <TextInput
-            type={InputType.text}
-            size={InputSize.middle}
-            id="keyWord"
-            name="keyWord"
-            onChange={onChangeKeyWord}
-            value={keyWord}
-            scale={false}
-            tabIndex={11}
-            testId="keyWord_input"
-          />
           <Button
             size={ButtonSize.small}
-            onClick={setUserKeys}
-            label={t("Webhooks:Generate")}
+            onClick={requestGenerateKey}
+            label={t("Common:GenerateNewKey")}
+            isLoading={isGenerating}
+            isDisabled={isGenerating || isImporting}
           />
-          <div className={styles.buttonsSeparator}>or</div>
+          <div className={styles.buttonsSeparator}>{t("Common:Or")}</div>
           <Button
-            primary={true}
+            primary
             size={ButtonSize.small}
-            onClick={setUserKeys}
-            label={t("Article:Upload")}
+            onClick={() => fileInputRef.current?.click()}
+            label={t("Common:ImportKey")}
+            isLoading={isImporting}
+            isDisabled={isGenerating || isImporting}
           />
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept=".json"
+            style={{ display: "none" }}
+            onChange={handleImportFile}
+          />
+          {keyStatus.hasKey && (
+            <Button
+              size={ButtonSize.small}
+              onClick={handleExportKey}
+              label={t("Common:ExportKey")}
+              isLoading={isExporting}
+              isDisabled={isGenerating || isImporting || isExporting}
+            />
+          )}
         </div>
       </div>
-      <div className={styles.categoryTitle}>
-        <Text fontSize="14px" fontWeight={600}>
-          User keys
-        </Text>
-      </div>
-      <div className={styles.contentBody}>{keys}</div>
+      <PassphraseModal
+        visible={showPassphraseModal}
+        onSubmit={handleGenerateKey}
+        onCancel={() => {
+          setShowPassphraseModal(false);
+          setPendingAction(null);
+        }}
+        isNew={!keyStatus.hasKey || pendingAction === "generate"}
+        isLoading={isGenerating}
+      />
+      <ConfirmationModal
+        visible={showConfirmReplace}
+        title={t("Common:ReplaceKey")}
+        message={t("Common:ReplaceKeyWarning")}
+        onConfirm={handleConfirmReplace}
+        onCancel={() => {
+          setShowConfirmReplace(false);
+          setPendingAction(null);
+          setImportedKeyData(null);
+        }}
+      />
     </div>
   );
 };
 
 export default inject(({ userStore }: TStore) => {
-  const { encryptionKeys } = userStore;
-
+  const { encryptionKey, setUserEncryptionKeys } = userStore;
   return {
-    encryptionKeys,
+    encryptionKeys: encryptionKey,
+    setUserEncryptionKeys,
   };
 })(observer(KeysManagement));

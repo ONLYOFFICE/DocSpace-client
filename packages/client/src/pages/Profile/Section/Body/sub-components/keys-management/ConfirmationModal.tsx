@@ -24,82 +24,56 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@use "@docspace/shared/styles/mixins" as mixins;
+import React from "react";
+import { useTranslation } from "react-i18next";
 
-.sectionBody {
-  width: 100%;
-  max-width: 660px;
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/shared/components/modal-dialog";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Text } from "@docspace/shared/components/text";
 
-  @include mixins.tablet {
-    max-width: 100%;
-  }
-}
+type ConfirmationModalProps = {
+  visible: boolean;
+  title: string;
+  message: string;
+  onConfirm: () => void;
+  onCancel: () => void;
+};
 
-.contentBody {
-  margin-bottom: 24px;
+export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
+  visible,
+  title,
+  message,
+  onConfirm,
+  onCancel,
+}) => {
+  const { t } = useTranslation(["Common"]);
 
-  p {
-    line-height: 20px;
-  }
-}
-
-.inputGroup {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  margin-bottom: 16px;
-  gap: 16px;
-}
-
-.categoryTitle {
-  margin-bottom: 12px;
-  border-bottom: var(--profile-notifications-border);
-
-  p {
-    line-height: 16px;
-    padding-bottom: 8px;
-  }
-}
-
-.buttonsSeparator {
-  color: var(--text-secondary, #a3a9ae);
-  font-size: 13px;
-}
-
-.keyStatus {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: 16px;
-  background: var(--bg-secondary, #f8f9f9);
-  border-radius: 8px;
-  margin-bottom: 20px;
-}
-
-.keyInfo {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-.fingerprint {
-  font-family: "Roboto Mono", monospace;
-  background: var(--bg-primary, #fff);
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 12px;
-  letter-spacing: 0.5px;
-  user-select: all;
-}
-
-.passphraseForm {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  min-width: 320px;
-}
-
-.passphraseHint {
-  color: var(--text-secondary, #a3a9ae);
-  line-height: 1.4;
-}
+  return (
+    <ModalDialog
+      visible={visible}
+      onClose={onCancel}
+      displayType={ModalDialogType.modal}
+    >
+      <ModalDialog.Header>{title}</ModalDialog.Header>
+      <ModalDialog.Body>
+        <Text fontSize="13px">{message}</Text>
+      </ModalDialog.Body>
+      <ModalDialog.Footer>
+        <Button
+          primary
+          size={ButtonSize.normal}
+          label={t("Common:Confirm")}
+          onClick={onConfirm}
+        />
+        <Button
+          size={ButtonSize.normal}
+          label={t("Common:CancelButton")}
+          onClick={onCancel}
+        />
+      </ModalDialog.Footer>
+    </ModalDialog>
+  );
+};

@@ -691,6 +691,30 @@ export const endpoints = {
     url: `${BASE_URL}${PATH_AI_CHAT_MESSAGES}`,
     dataHandler: () => aiChatMessagesHandler("many"),
   },
+  aiChatMessagesWebSearch: {
+    url: `${BASE_URL}${PATH_AI_CHAT_MESSAGES}`,
+    dataHandler: () => aiChatMessagesHandler("webSearch"),
+  },
+  aiChatMessagesWebSearchError: {
+    url: `${BASE_URL}${PATH_AI_CHAT_MESSAGES}`,
+    dataHandler: () => aiChatMessagesHandler("webSearchError"),
+  },
+  aiChatMessagesWebCrawling: {
+    url: `${BASE_URL}${PATH_AI_CHAT_MESSAGES}`,
+    dataHandler: () => aiChatMessagesHandler("webCrawling"),
+  },
+  aiChatMessagesWebCrawlingError: {
+    url: `${BASE_URL}${PATH_AI_CHAT_MESSAGES}`,
+    dataHandler: () => aiChatMessagesHandler("webCrawlingError"),
+  },
+  aiChatMessagesKnowledgeSearch: {
+    url: `${BASE_URL}${PATH_AI_CHAT_MESSAGES}`,
+    dataHandler: () => aiChatMessagesHandler("knowledgeSearch"),
+  },
+  aiChatMessagesKnowledgeSearchError: {
+    url: `${BASE_URL}${PATH_AI_CHAT_MESSAGES}`,
+    dataHandler: () => aiChatMessagesHandler("knowledgeSearchError"),
+  },
   exportChatMessage: {
     url: `${BASE_URL}${PATH_AI_CHAT_MESSAGE_EXPORT}`,
     dataHandler: aiChatMessageExportHandler,

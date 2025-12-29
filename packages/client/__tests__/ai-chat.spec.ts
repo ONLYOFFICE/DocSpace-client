@@ -316,6 +316,188 @@ test.describe("AI chat", () => {
       ]);
     });
 
+    test("should render ai message with web search tool", async ({
+      page,
+      mockRequest,
+    }) => {
+      await mockRequest.router([
+        endpoints.aiRoomsChatsConfigAllEnabled,
+        endpoints.aiRoomsServersEmpty,
+        endpoints.aiRoomsChatsEmpty,
+        endpoints.agentFolderChat,
+        endpoints.aiChat,
+        endpoints.aiChatMessagesWebSearch,
+      ]);
+      await page.goto("/ai-agents/2/chat?folder=2&chat=test-chat-id");
+
+      const containerLoader = page.getByTestId("chat-container-loading");
+
+      await expect(containerLoader).toBeVisible();
+      await containerLoader.waitFor({ state: "hidden" });
+
+      const toolCallHeader = page.getByTestId("tool-call-header");
+      await expect(toolCallHeader).toBeVisible();
+
+      await toolCallHeader.click();
+
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "ai-chat",
+        "ai-chat-ai-message-web-search.png",
+      ]);
+    });
+
+    test("should render ai message with failed web search tool", async ({
+      page,
+      mockRequest,
+    }) => {
+      await mockRequest.router([
+        endpoints.aiRoomsChatsConfigAllEnabled,
+        endpoints.aiRoomsServersEmpty,
+        endpoints.aiRoomsChatsEmpty,
+        endpoints.agentFolderChat,
+        endpoints.aiChat,
+        endpoints.aiChatMessagesWebSearchError,
+      ]);
+      await page.goto("/ai-agents/2/chat?folder=2&chat=test-chat-id");
+
+      const containerLoader = page.getByTestId("chat-container-loading");
+
+      await expect(containerLoader).toBeVisible();
+      await containerLoader.waitFor({ state: "hidden" });
+
+      const toolCallHeader = page.getByTestId("tool-call-header");
+      await expect(toolCallHeader).toBeVisible();
+
+      await toolCallHeader.click();
+
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "ai-chat",
+        "ai-chat-ai-message-web-search-error.png",
+      ]);
+    });
+
+    test("should render ai message with web crawling tool", async ({
+      page,
+      mockRequest,
+    }) => {
+      await mockRequest.router([
+        endpoints.aiRoomsChatsConfigAllEnabled,
+        endpoints.aiRoomsServersEmpty,
+        endpoints.aiRoomsChatsEmpty,
+        endpoints.agentFolderChat,
+        endpoints.aiChat,
+        endpoints.aiChatMessagesWebCrawling,
+      ]);
+      await page.goto("/ai-agents/2/chat?folder=2&chat=test-chat-id");
+
+      const containerLoader = page.getByTestId("chat-container-loading");
+
+      await expect(containerLoader).toBeVisible();
+      await containerLoader.waitFor({ state: "hidden" });
+
+      const toolCallHeader = page.getByTestId("tool-call-header");
+      await expect(toolCallHeader).toBeVisible();
+
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "ai-chat",
+        "ai-chat-ai-message-web-crawling.png",
+      ]);
+    });
+
+    test("should render ai message with failed web crawling tool", async ({
+      page,
+      mockRequest,
+    }) => {
+      await mockRequest.router([
+        endpoints.aiRoomsChatsConfigAllEnabled,
+        endpoints.aiRoomsServersEmpty,
+        endpoints.aiRoomsChatsEmpty,
+        endpoints.agentFolderChat,
+        endpoints.aiChat,
+        endpoints.aiChatMessagesWebCrawlingError,
+      ]);
+      await page.goto("/ai-agents/2/chat?folder=2&chat=test-chat-id");
+
+      const containerLoader = page.getByTestId("chat-container-loading");
+
+      await expect(containerLoader).toBeVisible();
+      await containerLoader.waitFor({ state: "hidden" });
+
+      const toolCallHeader = page.getByTestId("tool-call-header");
+      await expect(toolCallHeader).toBeVisible();
+
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "ai-chat",
+        "ai-chat-ai-message-web-crawling-error.png",
+      ]);
+    });
+
+    test("should render ai message with knowledge search tool", async ({
+      page,
+      mockRequest,
+    }) => {
+      await mockRequest.router([
+        endpoints.aiRoomsChatsConfigAllEnabled,
+        endpoints.aiRoomsServersEmpty,
+        endpoints.aiRoomsChatsEmpty,
+        endpoints.agentFolderChat,
+        endpoints.aiChat,
+        endpoints.aiChatMessagesKnowledgeSearch,
+      ]);
+      await page.goto("/ai-agents/2/chat?folder=2&chat=test-chat-id");
+
+      const containerLoader = page.getByTestId("chat-container-loading");
+
+      await expect(containerLoader).toBeVisible();
+      await containerLoader.waitFor({ state: "hidden" });
+
+      const toolCallHeader = page.getByTestId("tool-call-header");
+      await expect(toolCallHeader).toBeVisible();
+
+      await toolCallHeader.click();
+
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "ai-chat",
+        "ai-chat-ai-message-knowledge-search.png",
+      ]);
+    });
+
+    test("should render ai message with failed knowledge search tool", async ({
+      page,
+      mockRequest,
+    }) => {
+      await mockRequest.router([
+        endpoints.aiRoomsChatsConfigAllEnabled,
+        endpoints.aiRoomsServersEmpty,
+        endpoints.aiRoomsChatsEmpty,
+        endpoints.agentFolderChat,
+        endpoints.aiChat,
+        endpoints.aiChatMessagesKnowledgeSearchError,
+      ]);
+      await page.goto("/ai-agents/2/chat?folder=2&chat=test-chat-id");
+
+      const containerLoader = page.getByTestId("chat-container-loading");
+
+      await expect(containerLoader).toBeVisible();
+      await containerLoader.waitFor({ state: "hidden" });
+
+      const toolCallHeader = page.getByTestId("tool-call-header");
+      await expect(toolCallHeader).toBeVisible();
+
+      await toolCallHeader.click();
+
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "ai-chat",
+        "ai-chat-ai-message-knowledge-search-error.png",
+      ]);
+    });
+
     test("should scroll to last message after opening chat", async ({
       page,
       mockRequest,

@@ -97,6 +97,7 @@ export const ToolCallHeader = observer(
           [styles.pointer]: expandable,
         })}
         onClick={onClick}
+        data-testid="tool-call-header"
       >
         <div className={styles.toolStatusIcon}>{statusIcon}</div>
 

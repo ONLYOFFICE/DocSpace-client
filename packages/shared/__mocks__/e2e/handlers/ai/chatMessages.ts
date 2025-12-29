@@ -234,6 +234,352 @@ const successTable = {
   statusCode: 200,
 };
 
+const successWebSearch = {
+  response: [
+    {
+      id: 111,
+      role: 1,
+      contents: [
+        {
+          type: 1,
+          name: "docspace_web_search",
+          arguments: {
+            query: "Lorem ipsum dolor sit amet",
+          },
+          result: {
+            data: [
+              {
+                url: "https://www.example.com",
+                text: "Lorem ipsum dolor sit amet",
+                title: "Lorem ipsum dolor sit amet",
+                faviconUrl: "/favicon.ico",
+              },
+              {
+                url: "https://www.example.com",
+                text: "Lorem ipsum dolor sit amet",
+                title: "Lorem ipsum dolor sit amet",
+                faviconUrl: "/favicon.ico",
+              },
+              {
+                url: "https://www.example.com",
+                text: "Lorem ipsum dolor sit amet",
+                title: "Lorem ipsum dolor sit amet",
+                faviconUrl: "/favicon.ico",
+              },
+              {
+                url: "https://www.example.com",
+                text: "Lorem ipsum dolor sit amet",
+                title: "Lorem ipsum dolor sit amet",
+                faviconUrl: "/favicon.ico",
+              },
+              {
+                url: "https://www.example.com",
+                text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris cursus ante in ipsum maximus porttitor",
+                title:
+                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris cursus ante in ipsum maximus porttitor",
+                faviconUrl: "/favicon.ico",
+              },
+            ],
+          },
+        },
+        {
+          type: 0,
+          text: "Test ai message",
+        },
+      ],
+      createdOn: "2025-12-24T16:54:36.0000000+01:00",
+    },
+    {
+      id: 110,
+      role: 0,
+      contents: [
+        {
+          type: 0,
+          text: "Test message",
+        },
+      ],
+      createdOn: "2025-12-24T16:54:34.0000000+01:00",
+    },
+  ],
+  count: 2,
+  total: 2,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_CHAT_MESSAGES}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+const errorWebSearch = {
+  response: [
+    {
+      id: 111,
+      role: 1,
+      contents: [
+        {
+          type: 1,
+          name: "docspace_web_search",
+          arguments: {
+            query: "Lorem ipsum dolor sit amet",
+          },
+          result: {
+            error: "Error text",
+          },
+        },
+        {
+          type: 0,
+          text: "Test ai message",
+        },
+      ],
+      createdOn: "2025-12-24T16:54:36.0000000+01:00",
+    },
+    {
+      id: 110,
+      role: 0,
+      contents: [
+        {
+          type: 0,
+          text: "Test message",
+        },
+      ],
+      createdOn: "2025-12-24T16:54:34.0000000+01:00",
+    },
+  ],
+  count: 2,
+  total: 2,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_CHAT_MESSAGES}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+const successWebCrawling = {
+  response: [
+    {
+      id: 111,
+      role: 1,
+      contents: [
+        {
+          type: 1,
+          name: "docspace_web_crawling",
+          arguments: {
+            url: "https://example.com/",
+            maxCharacters: 10000,
+          },
+          result: {
+            data: {
+              url: "https://chatgpt.com/",
+              text: "Lorem ipsum dolor sit amet",
+              title: "Lorem ipsum dolor sit amet",
+              faviconUrl: "",
+            },
+          },
+        },
+        {
+          type: 0,
+          text: "Test ai message",
+        },
+      ],
+      createdOn: "2025-12-24T16:54:36.0000000+01:00",
+    },
+    {
+      id: 110,
+      role: 0,
+      contents: [
+        {
+          type: 0,
+          text: "Test message",
+        },
+      ],
+      createdOn: "2025-12-24T16:54:34.0000000+01:00",
+    },
+  ],
+  count: 2,
+  total: 2,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_CHAT_MESSAGES}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+const errorWebCrawling = {
+  response: [
+    {
+      id: 111,
+      role: 1,
+      contents: [
+        {
+          type: 1,
+          name: "docspace_web_crawling",
+          arguments: {
+            url: "https://example.com/",
+            maxCharacters: 10000,
+          },
+          result: {
+            error: "Error text",
+          },
+        },
+        {
+          type: 0,
+          text: "Test ai message",
+        },
+      ],
+      createdOn: "2025-12-24T16:54:36.0000000+01:00",
+    },
+    {
+      id: 110,
+      role: 0,
+      contents: [
+        {
+          type: 0,
+          text: "Test message",
+        },
+      ],
+      createdOn: "2025-12-24T16:54:34.0000000+01:00",
+    },
+  ],
+  count: 2,
+  total: 2,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_CHAT_MESSAGES}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+const successKnowledgeSearch = {
+  response: [
+    {
+      id: 111,
+      role: 1,
+      contents: [
+        {
+          type: 1,
+          name: "docspace_knowledge_search",
+          arguments: {
+            query: "Lorem ipsum dolor sit amet",
+          },
+          result: {
+            data: [
+              {
+                text: "Lorem ipsum dolor sit amet",
+                title: "New document.docx",
+                fileId: 1,
+                relativeUrl: "/doceditor?fileid=5",
+              },
+              {
+                text: "Lorem ipsum dolor sit amet",
+                title: "New spreadsheet.xlsx",
+                fileId: 2,
+                relativeUrl: "/doceditor?fileid=5",
+              },
+              {
+                text: "Lorem ipsum dolor sit amet",
+                title: "New form.pdf",
+                fileId: 3,
+                relativeUrl: "/doceditor?fileid=5",
+              },
+              {
+                text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris cursus ante in ipsum maximus porttitor",
+                title: "New text file.txt",
+                fileId: 4,
+                relativeUrl: "/doceditor?fileid=10",
+              },
+            ],
+          },
+        },
+        {
+          type: 0,
+          text: "Test ai message",
+        },
+      ],
+      createdOn: "2025-12-24T16:54:36.0000000+01:00",
+    },
+    {
+      id: 110,
+      role: 0,
+      contents: [
+        {
+          type: 0,
+          text: "Test message",
+        },
+      ],
+      createdOn: "2025-12-24T16:54:34.0000000+01:00",
+    },
+  ],
+  count: 2,
+  total: 2,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_CHAT_MESSAGES}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+const errorKnowledgeSearch = {
+  response: [
+    {
+      id: 111,
+      role: 1,
+      contents: [
+        {
+          type: 1,
+          name: "docspace_knowledge_search",
+          arguments: {
+            query: "Lorem ipsum dolor sit amet",
+          },
+          result: {
+            error: "Error text",
+          },
+        },
+        {
+          type: 0,
+          text: "Test ai message",
+        },
+      ],
+      createdOn: "2025-12-24T16:54:36.0000000+01:00",
+    },
+    {
+      id: 110,
+      role: 0,
+      contents: [
+        {
+          type: 0,
+          text: "Test message",
+        },
+      ],
+      createdOn: "2025-12-24T16:54:34.0000000+01:00",
+    },
+  ],
+  count: 2,
+  total: 2,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_CHAT_MESSAGES}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
 const successMany = {
   response: [
     {
@@ -350,9 +696,32 @@ const successExportMessage = {
 };
 
 export const aiChatMessagesHandler = (
-  type: "default" | "baseElements" | "codeBlock" | "table" | "many" = "default",
+  type:
+    | "default"
+    | "baseElements"
+    | "codeBlock"
+    | "table"
+    | "many"
+    | "webSearch"
+    | "webSearchError"
+    | "webCrawling"
+    | "webCrawlingError"
+    | "knowledgeSearch"
+    | "knowledgeSearchError" = "default",
 ) => {
   switch (type) {
+    case "knowledgeSearchError":
+      return new Response(JSON.stringify(errorKnowledgeSearch));
+    case "knowledgeSearch":
+      return new Response(JSON.stringify(successKnowledgeSearch));
+    case "webCrawlingError":
+      return new Response(JSON.stringify(errorWebCrawling));
+    case "webCrawling":
+      return new Response(JSON.stringify(successWebCrawling));
+    case "webSearchError":
+      return new Response(JSON.stringify(errorWebSearch));
+    case "webSearch":
+      return new Response(JSON.stringify(successWebSearch));
     case "baseElements":
       return new Response(JSON.stringify(successBaseElements));
     case "codeBlock":

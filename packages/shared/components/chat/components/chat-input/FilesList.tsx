@@ -87,6 +87,7 @@ const FilesList = ({ files, isFixed, getIcon, onRemove }: FilesListProps) => {
                     size={16}
                     isClickable
                     onClick={() => onRemove(file)}
+                    dataTestId="remove-file-button"
                   />
                 ) : null}
               </div>

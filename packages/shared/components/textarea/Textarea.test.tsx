@@ -53,9 +53,9 @@ describe("<Textarea />", () => {
       />,
     );
 
-    const textarea = container.querySelector(".test-class");
+    const textarea = container.querySelector(".test-class") as HTMLElement;
     expect(textarea).toBeInTheDocument();
-    expect(textarea).toHaveStyle({ color: "red" });
+    expect(textarea?.style.color).toBe("red");
   });
 
   it("handles value changes", async () => {

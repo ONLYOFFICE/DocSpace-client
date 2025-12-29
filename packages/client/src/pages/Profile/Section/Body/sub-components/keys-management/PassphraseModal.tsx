@@ -84,10 +84,10 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
     onCancel();
   }, [onCancel]);
 
-  const handleKeyDown = useCallback(
-    (e: React.KeyboardEvent) => {
-      if (e.key === "Enter" && !isLoading) {
-        e.preventDefault();
+  const handleFormSubmit = useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault();
+      if (!isLoading) {
         handleSubmit();
       }
     },
@@ -104,7 +104,7 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
         {isNew ? t("Common:CreatePassphrase") : t("Common:EnterPassphrase")}
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <div className={styles.passphraseForm}>
+        <form onSubmit={handleFormSubmit} className={styles.passphraseForm}>
           <Text fontSize="13px" className={styles.passphraseHint}>
             {isNew
               ? t("Common:CreatePassphraseHint")
@@ -118,7 +118,6 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
               setPassphrase(e.target.value);
               setError("");
             }}
-            onKeyDown={handleKeyDown}
             placeholder={t("Common:Passphrase")}
             hasError={!!error}
             isDisabled={isLoading}
@@ -135,7 +134,6 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                 setConfirmPassphrase(e.target.value);
                 setError("");
               }}
-              onKeyDown={handleKeyDown}
               placeholder={t("Common:ConfirmPassphrase")}
               hasError={!!error && passphrase !== confirmPassphrase}
               isDisabled={isLoading}
@@ -149,7 +147,7 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
               {error}
             </Text>
           )}
-        </div>
+        </form>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

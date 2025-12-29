@@ -39,6 +39,7 @@ import {
   getKeyStatus,
   getPublicKeyFingerprint,
 } from "@docspace/shared/services/encryption/keyManagement";
+import { SecretStorageService } from "@docspace/shared/services/encryption/secretStorage";
 import type {
   SerializedKeyPair,
   KeyStatus,
@@ -53,7 +54,7 @@ import styles from "./keys-management.module.scss";
 
 type KeysManagementProps = {
   encryptionKeys?: SerializedKeyPair | null;
-  setUserEncryptionKeys?: (keys: SerializedKeyPair) => void;
+  setUserEncryptionKeys?: (keys: SerializedKeyPair[]) => void;
 };
 
 const KeysManagement = ({
@@ -96,7 +97,9 @@ const KeysManagement = ({
           privateKeyEnc: serialized.privateKeyEnc,
         });
 
-        setUserEncryptionKeys?.(serialized);
+        await SecretStorageService.cacheDecryptedKey(keyPair.privateKey);
+
+        setUserEncryptionKeys?.([serialized]);
         toastr.success(t("Common:EncryptionKeyGenerated"));
       } catch (error) {
         toastr.error(t("Common:EncryptionError"));
@@ -157,7 +160,7 @@ const KeysManagement = ({
             publicKey: keyData.publicKey,
             privateKeyEnc: keyData.privateKeyEnc,
           });
-          setUserEncryptionKeys?.(keyData);
+          setUserEncryptionKeys?.([keyData]);
           toastr.success(t("Common:EncryptionKeyImported"));
         }
       } catch (error) {
@@ -183,7 +186,7 @@ const KeysManagement = ({
           privateKeyEnc: importedKeyData.privateKeyEnc,
           update: true,
         });
-        setUserEncryptionKeys?.(importedKeyData);
+        setUserEncryptionKeys?.([importedKeyData]);
         toastr.success(t("Common:EncryptionKeyImported"));
       } catch (error) {
         toastr.error(t("Common:EncryptionError"));
@@ -274,9 +277,11 @@ const KeysManagement = ({
 };
 
 export default inject(({ userStore }: TStore) => {
-  const { encryptionKey, setUserEncryptionKeys } = userStore;
+  const { encryptionKeys, setUserEncryptionKeys } = userStore;
+  const firstKey =
+    encryptionKeys && encryptionKeys.length > 0 ? encryptionKeys[0] : null;
   return {
-    encryptionKeys: encryptionKey,
+    encryptionKeys: firstKey,
     setUserEncryptionKeys,
   };
 })(observer(KeysManagement));

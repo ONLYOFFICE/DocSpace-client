@@ -88,3 +88,8 @@ export const HEADER_OPEN_SOURCE = "x-open-source";
 
 export const HEADER_ENCRYPTION_SETTINGS_ENCRYPTED =
   "x-encryption-settings-encrypted";
+
+export const buildSseBody = (events: { event: string; data: unknown }[]) =>
+  events
+    .map((e) => `event: ${e.event}\n` + `data: ${JSON.stringify(e.data)}\n\n`)
+    .join("");

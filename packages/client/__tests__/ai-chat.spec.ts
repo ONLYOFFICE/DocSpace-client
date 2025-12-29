@@ -726,7 +726,6 @@ test.describe("AI chat", () => {
         endpoints.aiRoomsChats,
         endpoints.agentFolderChat,
         endpoints.aiChat,
-        endpoints.updateAiChat,
       ]);
       await page.goto("/ai-agents/2/chat?folder=2");
 
@@ -768,6 +767,64 @@ test.describe("AI chat", () => {
       ]);
 
       await expect(filesListItem).toHaveCount(0);
+    });
+
+    test("should send message with text and file and receive response", async ({
+      page,
+      mockRequest,
+    }) => {
+      await mockRequest.router([
+        endpoints.aiRoomsChatsConfigAllEnabled,
+        endpoints.aiRoomsServersEmpty,
+        endpoints.aiRoomsChats,
+        endpoints.agentFolderChat,
+        endpoints.aiChat,
+        endpoints.aiRoomsChatsStream,
+      ]);
+
+      await page.goto("/ai-agents/2/chat?folder=2");
+
+      const containerLoader = page.getByTestId("chat-container-loading");
+
+      await expect(containerLoader).toBeVisible();
+      await containerLoader.waitFor({ state: "hidden" });
+
+      const sendButton = page.getByTestId("chat-input-send-button");
+      await expect(sendButton).toHaveAttribute("aria-disabled", "true");
+
+      const attachButton = page.getByTestId("chat-input-attachment-button");
+      await attachButton.click();
+
+      const selector = page.getByTestId("aside");
+
+      await expect(selector).toBeVisible();
+
+      await mockRequest.router([endpoints.favorites]);
+
+      const favoritesOption = selector.getByTestId(/selector-item/).filter({
+        hasText: "Favorites",
+      });
+      await favoritesOption.click();
+
+      const firstDocument = selector.getByTestId(/selector-item/).first();
+      await firstDocument.click();
+
+      const addButton = selector.getByTestId("selector_submit_button");
+      await addButton.click();
+
+      const chatTextArea = page.getByTestId("chat-input-textarea");
+      await chatTextArea.fill("Lorem ipsum dolor sit amet");
+
+      await expect(sendButton).toHaveAttribute("aria-disabled", "false");
+      await sendButton.click();
+
+      await expect(page.getByTestId("ai-message")).toBeVisible();
+
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "ai-chat",
+        "ai-chat-send-message-with-file.png",
+      ]);
     });
   });
 

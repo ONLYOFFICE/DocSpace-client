@@ -26,9 +26,10 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { API_PREFIX, BASE_URL } from "../../utils";
+import { API_PREFIX, BASE_URL, buildSseBody } from "../../utils";
 
 export const PATH_AI_ROOMS_CHATS = "ai/rooms/*/chats?*";
+export const PATH_AI_ROOMS_CHATS_STREAM = "ai/rooms/*/chats";
 
 const createdBy = {
   id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
@@ -111,6 +112,19 @@ const successWithChats = {
   statusCode: 200,
 };
 
+const defaultStreamMessage = buildSseBody([
+  {
+    event: "message_start",
+    data: { chatId: "cc7a19f1-512b-443b-b5b3-9bf4a37530cd", error: "" },
+  },
+  {
+    event: "new_token",
+    data: { text: "# Lorem\n\nLorem ipsum dolor sit amet consectetur" },
+  },
+  { event: "new_token", data: { text: " adipiscing elit" } },
+  { event: "message_stop", data: { messageId: 1 } },
+]);
+
 export const aiRoomsChatsHandler = (
   type: "empty" | "with-chats" = "with-chats",
 ) => {
@@ -119,5 +133,12 @@ export const aiRoomsChatsHandler = (
       return new Response(JSON.stringify(successWithChats));
     case "empty":
       return new Response(JSON.stringify(successEmpty));
+  }
+};
+
+export const aiRoomsChatsStreamHandler = (type: "default" = "default") => {
+  switch (type) {
+    case "default":
+      return new Response(defaultStreamMessage);
   }
 };

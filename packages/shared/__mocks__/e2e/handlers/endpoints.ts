@@ -222,6 +222,8 @@ import {
   aiChatPutHandler,
   aiChatMessageExportHandler,
   PATH_AI_CHAT_MESSAGE_EXPORT,
+  PATH_AI_ROOMS_CHATS_STREAM,
+  aiRoomsChatsStreamHandler,
 } from "./ai";
 import { PATH_TAGS, roomTagsHandler } from "./rooms";
 import {
@@ -245,6 +247,7 @@ export type TEndpoint = {
   url: string | RegExp;
   dataHandler: () => Response;
   method?: MethodType;
+  responseType?: "json" | "text";
 };
 
 export type TEndpoints = {
@@ -707,6 +710,12 @@ export const endpoints = {
   aiRoomsChats: {
     url: `${BASE_URL}${PATH_AI_ROOMS_CHATS}`,
     dataHandler: aiRoomsChatsHandler,
+  },
+  aiRoomsChatsStream: {
+    url: `${BASE_URL}${PATH_AI_ROOMS_CHATS_STREAM}`,
+    dataHandler: aiRoomsChatsStreamHandler,
+    method: "POST",
+    responseType: "text",
   },
   additionalSettings: {
     url: `${BASE_URL}${PATH_SETTINGS_ADDITIONAL}`,

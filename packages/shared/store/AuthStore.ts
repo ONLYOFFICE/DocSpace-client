@@ -43,6 +43,7 @@ import {
   isPublicPreview,
 } from "../utils/common";
 import { isRequestAborted } from "../utils/axios/isRequestAborted";
+import { SecretStorageService } from "../services/encryption/secretStorage";
 import { getCookie, setCookie } from "../utils/cookie";
 import { TenantStatus } from "../enums";
 import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "../constants";
@@ -474,6 +475,8 @@ class AuthStore {
   };
 
   logout = async (reset = true) => {
+    SecretStorageService.clearCache();
+
     if (typeof window !== "undefined") {
       const w = window as unknown as { __redirectToLogin?: boolean };
       w.__redirectToLogin = true;

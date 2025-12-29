@@ -145,6 +145,14 @@ class UserStore {
     return keys;
   };
 
+  setUserEncryptionKeys = (keys: TEncryptionKeyPair[]) => {
+    this.encryptionKeys = keys;
+  };
+
+  clearEncryptionKeys = () => {
+    this.encryptionKeys = null;
+  };
+
   setUserIsUpdate = (isUpdate: boolean) => {
     // console.log("setUserIsUpdate");
     this.userIsUpdate = isUpdate;

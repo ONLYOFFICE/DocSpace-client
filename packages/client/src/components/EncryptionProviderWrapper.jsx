@@ -24,49 +24,56 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// import "@docspace/shared/utils/wdyr";
 import React from "react";
-import { I18nextProvider } from "react-i18next";
-import { RouterProvider } from "react-router";
-import { Provider as MobxProvider } from "mobx-react";
+import { inject, observer } from "mobx-react";
 
-import store from "SRC_DIR/store";
+import { EncryptionProvider } from "@docspace/shared/context/EncryptionContext";
+import { PassphraseDialog } from "@docspace/shared/dialogs/passphrase-dialog";
 
-import "@docspace/shared/polyfills/broadcastchannel";
+const EncryptionProviderWrapper = ({ userKeys, children }) => {
+  const PassphraseDialogAdapter = React.useCallback(
+    ({ visible, isLoading, error, onSubmit, onCancel }) => {
+      const handleSubmit = async (passphrase) => {
+        await onSubmit(passphrase);
+      };
 
-import "@docspace/shared/styles/custom.scss";
-
-import ThemeProvider from "./components/ThemeProviderWrapper";
-import ErrorBoundary from "./components/ErrorBoundaryWrapper";
-import EncryptionProviderWrapper from "./components/EncryptionProviderWrapper";
-
-import router from "./router";
-
-import i18n from "./i18n";
-
-const App = () => {
-  React.useEffect(() => {
-    const regex = /(\/){2,}/g;
-    const replaceRegex = /(\/)+/g;
-    const pathname = window.location.pathname;
-
-    if (regex.test(pathname))
-      window.location.replace(pathname.replace(replaceRegex, "$1"));
-  }, []);
+      return (
+        <PassphraseDialog
+          visible={visible}
+          isLoading={isLoading}
+          error={error}
+          onSubmit={handleSubmit}
+          onCancel={onCancel}
+          isNewPassphrase={false}
+        />
+      );
+    },
+    [],
+  );
 
   return (
-    <MobxProvider {...store}>
-      <I18nextProvider i18n={i18n}>
-        <ThemeProvider>
-          <ErrorBoundary>
-            <EncryptionProviderWrapper>
-              <RouterProvider router={router} />
-            </EncryptionProviderWrapper>
-          </ErrorBoundary>
-        </ThemeProvider>
-      </I18nextProvider>
-    </MobxProvider>
+    <EncryptionProvider
+      userKeys={userKeys}
+      PassphraseDialog={PassphraseDialogAdapter}
+    >
+      {children}
+    </EncryptionProvider>
   );
 };
 
-export default App;
+export default inject(({ userStore }) => {
+  const keys = userStore?.encryptionKeys;
+  const firstKey = keys && keys.length > 0 ? keys[0] : null;
+
+  const userKeys = firstKey
+    ? {
+        publicKey: firstKey.publicKey,
+        privateKeyEnc: firstKey.privateKeyEnc,
+        userId: firstKey.userId,
+      }
+    : null;
+
+  return {
+    userKeys,
+  };
+})(observer(EncryptionProviderWrapper));

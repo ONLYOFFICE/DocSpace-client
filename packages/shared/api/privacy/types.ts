@@ -25,13 +25,17 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 export type TPrivacyRoomRequest = {
-  publickey: string;
+  publicKey: string;
   privateKeyEnc: string;
   update?: boolean;
 };
 
 export type TPrivacySettingsRequest = {
-  enabled?: boolean;
+  enable?: boolean;
+};
+
+export type TPrivacyRoomKeysResponse = {
+  isSet: boolean;
 };
 
 export type TEncryptionKeyPair = {

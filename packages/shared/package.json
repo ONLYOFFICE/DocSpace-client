@@ -147,6 +147,7 @@
     "css-loader": "6.11.0",
     "i18next-http-backend": "2.6.2",
     "identity-obj-proxy": "3.0.0",
+    "jsdom": "^27.4.0",
     "msw": "^2.11.1",
     "msw-storybook-addon": "^2.0.4",
     "open-cli": "^8.0.0",

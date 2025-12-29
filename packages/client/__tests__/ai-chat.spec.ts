@@ -1039,6 +1039,131 @@ test.describe("AI chat", () => {
         "ai-chat-send-message-with-file.png",
       ]);
     });
+
+    test("should save chat input state when switch between agent tabs", async ({
+      page,
+      mockRequest,
+    }) => {
+      await mockRequest.router([
+        endpoints.aiRoomsChatsConfigAllEnabled,
+        endpoints.aiRoomsServersEmpty,
+        endpoints.aiRoomsChats,
+        endpoints.agentFolderChat,
+        endpoints.aiChat,
+        endpoints.agentFolderResultStorage,
+        endpoints.agentFolderInfo,
+      ]);
+
+      await page.goto("/ai-agents/2/chat?folder=2");
+
+      const containerLoader = page.getByTestId("chat-container-loading");
+
+      await expect(containerLoader).toBeVisible();
+      await containerLoader.waitFor({ state: "hidden" });
+
+      const sendButton = page.getByTestId("chat-input-send-button");
+      await expect(sendButton).toHaveAttribute("aria-disabled", "true");
+
+      const attachButton = page.getByTestId("chat-input-attachment-button");
+      await attachButton.click();
+
+      const selector = page.getByTestId("aside");
+
+      await expect(selector).toBeVisible();
+
+      await mockRequest.router([endpoints.favorites]);
+
+      const favoritesOption = selector.getByTestId(/selector-item/).filter({
+        hasText: "Favorites",
+      });
+      await favoritesOption.click();
+
+      const firstDocument = selector.getByTestId(/selector-item/).first();
+      await firstDocument.click();
+
+      const addButton = selector.getByTestId("selector_submit_button");
+      await addButton.click();
+
+      const chatTextArea = page.getByTestId("chat-input-textarea");
+      await chatTextArea.fill("Lorem ipsum dolor sit amet");
+
+      await page.unroute(endpoints.favorites.url);
+
+      const resultStorageTab = page.getByTestId("result_tab");
+      await resultStorageTab.click();
+
+      await expect(page.getByTestId("empty-view")).toBeVisible();
+
+      await mockRequest.router([endpoints.agentFolderChat]);
+
+      const chatTab = page.getByTestId("chat_tab");
+      await chatTab.click();
+
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "ai-chat",
+        "ai-chat-switch-tab-save-state.png",
+      ]);
+    });
+
+    test("should save chat input state when when reload page", async ({
+      page,
+      mockRequest,
+    }) => {
+      await mockRequest.router([
+        endpoints.aiRoomsChatsConfigAllEnabled,
+        endpoints.aiRoomsServersEmpty,
+        endpoints.aiRoomsChats,
+        endpoints.agentFolderChat,
+        endpoints.aiChat,
+      ]);
+
+      await page.goto("/ai-agents/2/chat?folder=2");
+
+      const containerLoader = page.getByTestId("chat-container-loading");
+
+      await expect(containerLoader).toBeVisible();
+      await containerLoader.waitFor({ state: "hidden" });
+
+      const sendButton = page.getByTestId("chat-input-send-button");
+      await expect(sendButton).toHaveAttribute("aria-disabled", "true");
+
+      const attachButton = page.getByTestId("chat-input-attachment-button");
+      await attachButton.click();
+
+      const selector = page.getByTestId("aside");
+
+      await expect(selector).toBeVisible();
+
+      await mockRequest.router([endpoints.favorites]);
+
+      const favoritesOption = selector.getByTestId(/selector-item/).filter({
+        hasText: "Favorites",
+      });
+      await favoritesOption.click();
+
+      const firstDocument = selector.getByTestId(/selector-item/).first();
+      await firstDocument.click();
+
+      const addButton = selector.getByTestId("selector_submit_button");
+      await addButton.click();
+
+      const chatTextArea = page.getByTestId("chat-input-textarea");
+      await chatTextArea.fill("Lorem ipsum dolor sit amet");
+
+      await page.unroute(endpoints.favorites.url);
+
+      await page.reload();
+
+      await expect(containerLoader).toBeVisible();
+      await containerLoader.waitFor({ state: "hidden" });
+
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "ai-chat",
+        "ai-chat-reload-page-save-state.png",
+      ]);
+    });
   });
 
   // ================================== User ==================================

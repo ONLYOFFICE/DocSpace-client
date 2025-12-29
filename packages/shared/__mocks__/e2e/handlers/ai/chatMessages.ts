@@ -580,6 +580,66 @@ const errorKnowledgeSearch = {
   statusCode: 200,
 };
 
+const successMcpTool = {
+  response: [
+    {
+      id: 111,
+      role: 1,
+      contents: [
+        {
+          type: 1,
+          name: "mcp_tool_name",
+          arguments: {
+            key: "value",
+          },
+          result: {
+            content: [
+              {
+                text: "{\n" + '  "key": "value"\n' + "}\n",
+                type: "text",
+              },
+            ],
+            structuredContent: {
+              response: { key: "value" },
+            },
+          },
+          mcpServerInfo: {
+            serverId: "883da87d-5ae0-49fd-8cb9-2cb82181667e",
+            serverName: "docspace",
+            serverType: 1,
+          },
+        },
+        {
+          type: 0,
+          text: "Test ai message",
+        },
+      ],
+      createdOn: "2025-12-24T16:54:36.0000000+01:00",
+    },
+    {
+      id: 110,
+      role: 0,
+      contents: [
+        {
+          type: 0,
+          text: "Test message",
+        },
+      ],
+      createdOn: "2025-12-24T16:54:34.0000000+01:00",
+    },
+  ],
+  count: 2,
+  total: 2,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_CHAT_MESSAGES}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
 const successMany = {
   response: [
     {
@@ -707,9 +767,12 @@ export const aiChatMessagesHandler = (
     | "webCrawling"
     | "webCrawlingError"
     | "knowledgeSearch"
-    | "knowledgeSearchError" = "default",
+    | "knowledgeSearchError"
+    | "mcpTool" = "default",
 ) => {
   switch (type) {
+    case "mcpTool":
+      return new Response(JSON.stringify(successMcpTool));
     case "knowledgeSearchError":
       return new Response(JSON.stringify(errorKnowledgeSearch));
     case "knowledgeSearch":

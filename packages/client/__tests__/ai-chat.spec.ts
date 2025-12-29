@@ -498,6 +498,37 @@ test.describe("AI chat", () => {
       ]);
     });
 
+    test("should render ai message with mcp tool", async ({
+      page,
+      mockRequest,
+    }) => {
+      await mockRequest.router([
+        endpoints.aiRoomsChatsConfigAllEnabled,
+        endpoints.aiRoomsServersEmpty,
+        endpoints.aiRoomsChatsEmpty,
+        endpoints.agentFolderChat,
+        endpoints.aiChat,
+        endpoints.aiChatMessagesMcpTool,
+      ]);
+      await page.goto("/ai-agents/2/chat?folder=2&chat=test-chat-id");
+
+      const containerLoader = page.getByTestId("chat-container-loading");
+
+      await expect(containerLoader).toBeVisible();
+      await containerLoader.waitFor({ state: "hidden" });
+
+      const toolCallHeader = page.getByTestId("tool-call-header");
+      await expect(toolCallHeader).toBeVisible();
+
+      await toolCallHeader.click();
+
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "ai-chat",
+        "ai-chat-ai-message-mcp-tool.png",
+      ]);
+    });
+
     test("should scroll to last message after opening chat", async ({
       page,
       mockRequest,

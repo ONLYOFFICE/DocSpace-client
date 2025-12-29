@@ -715,6 +715,10 @@ export const endpoints = {
     url: `${BASE_URL}${PATH_AI_CHAT_MESSAGES}`,
     dataHandler: () => aiChatMessagesHandler("knowledgeSearchError"),
   },
+  aiChatMessagesMcpTool: {
+    url: `${BASE_URL}${PATH_AI_CHAT_MESSAGES}`,
+    dataHandler: () => aiChatMessagesHandler("mcpTool"),
+  },
   exportChatMessage: {
     url: `${BASE_URL}${PATH_AI_CHAT_MESSAGE_EXPORT}`,
     dataHandler: aiChatMessageExportHandler,

@@ -155,7 +155,7 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
         <Button
           primary
           size={ButtonSize.normal}
-          label={t("Common:Continue")}
+          label={t("Common:ContinueButton")}
           onClick={handleSubmit}
           isDisabled={!passphrase || (isNew && !confirmPassphrase) || isLoading}
           isLoading={isLoading}

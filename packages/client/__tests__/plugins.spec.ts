@@ -63,6 +63,8 @@ test.describe("Plugins", () => {
 
     await page.goto("/portal-settings/integration/plugins");
 
+    await expect(page.locator(".settings-section_header")).toBeVisible();
+
     const emptyView = page.getByTestId("empty-screen-container");
     await expect(emptyView).toBeVisible();
 
@@ -83,6 +85,8 @@ test.describe("Plugins", () => {
     await mockRequest.router([endpoints.webPluginsWithData]);
 
     await page.goto("/portal-settings/integration/plugins");
+
+    await expect(page.locator(".settings-section_header")).toBeVisible();
 
     const pluginsList = page.locator('[data-testid^="plugin_test-plugin"]');
     await expect(pluginsList).toHaveCount(2);
@@ -109,6 +113,8 @@ test.describe("Plugins", () => {
     await mockRequest.router([endpoints.webPluginsWithData]);
 
     await page.goto("/portal-settings/integration/plugins");
+
+    await expect(page.locator(".settings-section_header")).toBeVisible();
 
     const pluginsListBefore = page.locator(
       '[data-testid^="plugin_test-plugin"]',
@@ -141,6 +147,8 @@ test.describe("Plugins", () => {
 
     await page.goto("/portal-settings/integration/plugins");
 
+    await expect(page.locator(".settings-section_header")).toBeVisible();
+
     const plugin1 = page.getByTestId("plugin_test-plugin-one");
     await expect(plugin1).toBeVisible();
 
@@ -165,6 +173,8 @@ test.describe("Plugins", () => {
     await mockRequest.router([endpoints.webPluginsWithData]);
 
     await page.goto("/portal-settings/integration/plugins");
+
+    await expect(page.locator(".settings-section_header")).toBeVisible();
 
     const pluginsListBefore = page.locator(
       '[data-testid^="plugin_test-plugin"]',
@@ -204,6 +214,8 @@ test.describe("Plugins", () => {
     await mockRequest.router([endpoints.webPluginsWithData]);
 
     await page.goto("/portal-settings/integration/plugins");
+
+    await expect(page.locator(".settings-section_header")).toBeVisible();
 
     const plugin1 = page.getByTestId("plugin_test-plugin-one");
     await expect(plugin1).toBeVisible();
@@ -266,6 +278,8 @@ test.describe("Plugins", () => {
 
     await mockRequest.router([endpoints.webPluginsWithLocale]);
     await page.getByTestId("plugins_tab").click();
+
+    await expect(page.locator(".settings-section_header")).toBeVisible();
 
     const pluginAz = page.getByTestId("plugin_archives.zip");
     await expect(pluginAz).toBeVisible();
@@ -334,6 +348,8 @@ test.describe("Plugins", () => {
 
     await mockRequest.router([endpoints.webPluginsWithLocale]);
     await page.getByTestId("plugins_tab").click();
+
+    await expect(page.locator(".settings-section_header")).toBeVisible();
 
     const pluginEn = page.getByTestId("plugin_archives.zip");
     await expect(pluginEn).toBeVisible();

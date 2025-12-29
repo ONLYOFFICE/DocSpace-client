@@ -349,7 +349,12 @@ const TemplateGallery = (props: TemplateGalleryProps) => {
 
     return (
       <>
-        <Backdrop visible withBackground zIndex={backdropZIndex} />
+        <Backdrop
+          visible
+          withBackground
+          zIndex={backdropZIndex}
+          onClick={onCloseClick}
+        />
         <div className={containerClass}>
           <div className={galleryClass}>
             {isMobileView ? mobileHeader : renderHeader}

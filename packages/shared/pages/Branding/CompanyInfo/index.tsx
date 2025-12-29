@@ -131,29 +131,24 @@ export const CompanyInfo = ({
       <div
         className={classNames(styles.companyInfo, {
           [styles.isSettingPaid]: isSettingPaid,
+          ["isEnableBranding"]: !isSettingPaid,
+          ["settings_unavailable"]: !isSettingPaid,
         })}
       >
         <div
           className={classNames(
             styles.sectionDescription,
-            "section-description settings_unavailable",
+            "section-description",
           )}
         >
           {t("BrandingSectionDescription", {
             productName: t("ProductName"),
           })}
         </div>
-        <div
-          className={classNames(styles.header, "header settings_unavailable")}
-        >
+        <div className={classNames(styles.header, "header")}>
           {t("CompanyInfoSettings")}
         </div>
-        <div
-          className={classNames(
-            styles.description,
-            "description settings_unavailable",
-          )}
-        >
+        <div className={classNames(styles.description, "description")}>
           {isSettingPaid ? (
             <Trans
               t={t}
@@ -202,7 +197,7 @@ export const CompanyInfo = ({
 
           <FieldContainer
             id="fieldContainerCompanyName"
-            className="field-container-width settings_unavailable"
+            className="field-container-width"
             labelText={t("Common:CompanyName")}
             isVertical
           >
@@ -221,7 +216,7 @@ export const CompanyInfo = ({
           </FieldContainer>
           <FieldContainer
             id="fieldContainerEmail"
-            className="field-container-width settings_unavailable"
+            className="field-container-width"
             labelText={t("Common:Email")}
             isVertical
           >
@@ -240,7 +235,7 @@ export const CompanyInfo = ({
           </FieldContainer>
           <FieldContainer
             id="fieldContainerPhone"
-            className="field-container-width settings_unavailable"
+            className="field-container-width"
             labelText={t("Common:Phone")}
             isVertical
           >
@@ -259,7 +254,7 @@ export const CompanyInfo = ({
           </FieldContainer>
           <FieldContainer
             id="fieldContainerWebsite"
-            className="field-container-width settings_unavailable"
+            className="field-container-width"
             labelText={t("Common:Website")}
             isVertical
           >
@@ -278,7 +273,7 @@ export const CompanyInfo = ({
           </FieldContainer>
           <FieldContainer
             id="fieldContainerAddress"
-            className="field-container-width settings_unavailable"
+            className="field-container-width"
             labelText={t("Common:Address")}
             isVertical
           >

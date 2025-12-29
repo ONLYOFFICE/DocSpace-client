@@ -295,6 +295,21 @@
             "tooltip": "🛠️ Start the \"remove image for running e2e tests\" task"
           },
           {
+            "label": "Test Management E2E build docker",
+            "task": "Test | Test e2e docker build (management)",
+            "tooltip": "🛠️ Start the \"test build in docker\" task"
+          },
+          {
+            "label": "Test Management E2E start docker",
+            "task": "Test | Test e2e docker start (management)",
+            "tooltip": "🛠️ Start the \"local frontend e2e tests in docker\" task"
+          },
+          {
+            "label": "Test Management E2E clear docker",
+            "task": "Test | Test e2e docker clear (management)",
+            "tooltip": "🛠️ Start the \"remove image for running e2e tests\" task"
+          },
+          {
             "label": "Lint",
             "task": "Test | Biome",
             "tooltip": "🛠️ Start the \"biome\" task"

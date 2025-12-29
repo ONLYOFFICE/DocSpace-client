@@ -2229,6 +2229,14 @@ class ContextOptionsStore {
         onClick: () => this.onShowInfoPanel(item),
         disabled: false,
       },
+      {
+        id: "option_change-room-owner",
+        key: "change-room-owner",
+        label: t("Files:ChangeTheRoomOwner"),
+        icon: ReconnectSvgUrl,
+        onClick: this.onChangeRoomOwner,
+        disabled: isAIAgent,
+      },
       ...versionActions,
       {
         id: "option_custom-filter",
@@ -2357,13 +2365,11 @@ class ContextOptionsStore {
       },
       {
         id: "option_change-room-owner",
-        key: "change-room-owner",
-        label: isAIAgent
-          ? t("Translations:OwnerChange")
-          : t("Files:ChangeTheRoomOwner"),
+        key: "change-agent-owner",
+        label: t("Translations:OwnerChange"),
         icon: ReconnectSvgUrl,
         onClick: this.onChangeRoomOwner,
-        disabled: false,
+        disabled: !isAIAgent,
       },
       {
         id: "option_leave-room",
@@ -2504,7 +2510,10 @@ class ContextOptionsStore {
         ) {
           minItemsCount = 1;
         }
-      } else if (item.access === ShareAccessRights.RoomManager) {
+      } else if (
+        item.access === ShareAccessRights.RoomManager ||
+        item.access === ShareAccessRights.None
+      ) {
         minItemsCount = 1;
       }
     }
@@ -2524,7 +2533,7 @@ class ContextOptionsStore {
             { key: "reconnect-storage" },
             { key: "export-room-index" },
           ],
-          [{ key: "change-room-owner" }],
+          [{ key: "change-room-owner" }, { key: "change-agent-owner" }],
         ],
         needsGrouping: true,
         minItemsCount,
@@ -3343,10 +3352,7 @@ class ContextOptionsStore {
         icon: FormReactSvgUrl,
         label: t("Translations:NewForm"),
         key: "new-form-base",
-        items: [
-          createTemplateForm,
-          createTemplateNewFormFile
-        ],
+        items: [createTemplateForm, createTemplateNewFormFile],
       },
     ];
 

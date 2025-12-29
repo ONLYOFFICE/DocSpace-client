@@ -87,3 +87,5 @@ export const HEADER_OPEN_SOURCE = "x-open-source";
 
 export const HEADER_ENCRYPTION_SETTINGS_ENCRYPTED =
   "x-encryption-settings-encrypted";
+
+export const HEADER_WITHOUT_CUSTOMIZATION = "x-without-customization";

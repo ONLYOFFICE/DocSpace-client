@@ -26,10 +26,10 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { useTheme } from "styled-components";
-
 import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 import { getTitleWithoutExtension } from "@docspace/shared/utils";
+import { useTheme } from "@docspace/shared/hooks/useTheme";
+import { globalColors } from "@docspace/shared/themes";
 
 import type { TileContentProps } from "../TileView.types";
 
@@ -38,7 +38,7 @@ const TileContent = ({
   displayFileExtension,
   onTitleClick,
 }: TileContentProps) => {
-  const theme = useTheme();
+  const { isBase } = useTheme();
   const titleWithoutExt = item.isFolder
     ? item.title
     : getTitleWithoutExtension(item, false);
@@ -52,7 +52,7 @@ const TileContent = ({
         fontWeight={600}
         target={LinkTarget.blank}
         onClick={onTitleClick}
-        color={theme.filesSection.tilesView.color}
+        color={isBase ? globalColors.black : globalColors.white}
         isTextOverflow
         dir="auto"
         view="tile"

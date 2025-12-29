@@ -306,7 +306,7 @@ const PassphraseDialog: React.FC<PassphraseDialogProps> = ({
                 fontSize="12px"
                 color={getStrengthColor(strengthResult.strength)}
               >
-                {getStrengthLabelKey(strengthResult.strength)}
+                {getStrengthLabelKey(strengthResult.strength, t)}
               </Text>
             </div>
           )}

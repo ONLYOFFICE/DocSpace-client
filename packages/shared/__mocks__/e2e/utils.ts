@@ -79,7 +79,7 @@ export const HEADER_HCAPTCHA_SETTINGS = "x-test-data-hcaptcha-settings";
 
 export const HEADER_AI_DISABLED = "x-ai-config-disabled";
 
-export const HEADER_AI_WEB_SEARCH_DISABLED = "x-ai-config-disabled";
+export const HEADER_AI_WEB_SEARCH_DISABLED = "x-ai-config-web-search-disabled";
 
 export const HEADER_EMPTY_PORTAL = "x-empty-portal";
 

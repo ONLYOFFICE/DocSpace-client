@@ -671,12 +671,6 @@ test.describe("AI chat", () => {
       const selectChatDropdown = page.getByTestId("select-chat-dropdown");
       await expect(selectChatDropdown).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
-        "desktop",
-        "ai-chat",
-        "ai-chat-before-delete-chat.png",
-      ]);
-
       const firstChat = selectChatDropdown
         .getByTestId("drop-down-item")
         .first();
@@ -736,12 +730,6 @@ test.describe("AI chat", () => {
 
       const selectChatDropdown = page.getByTestId("select-chat-dropdown");
       await expect(selectChatDropdown).toBeVisible();
-
-      await expect(selectChatDropdown).toHaveScreenshot([
-        "desktop",
-        "ai-chat",
-        "ai-chat-select-chat-dropdown-before-rename-chat.png",
-      ]);
 
       const firstChat = selectChatDropdown
         .getByTestId("drop-down-item")

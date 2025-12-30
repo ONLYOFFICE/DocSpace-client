@@ -33,7 +33,7 @@ RUN pnpm install --frozen-lockfile
 RUN npm uninstall -g playwright playwright-core @playwright/test
 
 # Install Playwright browsers directly from the project's dependency
-RUN cd /app/packages/doceditor && pnpm exec playwright install --with-deps chromium webkit
+RUN cd /app/packages/doceditor && pnpm exec playwright install --with-deps chromium
 
 # Run before-build script (packages/runtime.json)
 RUN pnpm run before-build

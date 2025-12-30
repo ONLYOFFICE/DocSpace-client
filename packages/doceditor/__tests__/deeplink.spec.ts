@@ -24,25 +24,23 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { devices } from "@playwright/test";
 import { endpoints } from "@docspace/shared/__mocks__/e2e";
 
 import { expect, test } from "./fixtures/base";
 
-test.use({ ...devices["iPhone 15"] });
-
 test.describe("DeepLink", () => {
-  test("DeepLink mobile", async ({ page, mockRequest }) => {
+  test("DeepLink render", async ({ page, mockRequest }, testInfo) => {
+    test.skip(
+      testInfo.project.name === "desktop",
+      "DeepLink unsupported on desktop",
+    );
+
     await mockRequest.router([endpoints.filesSettings]);
     await page.goto("/doceditor?fileId=1");
 
     const form = page.getByTestId("form-wrapper");
     await expect(form).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
-      "mobile",
-      "deeplink",
-      "deeplink-render.png",
-    ]);
+    await expect(page).toHaveScreenshot(["deeplink", "deeplink-render.png"]);
   });
 });

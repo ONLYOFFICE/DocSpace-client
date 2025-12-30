@@ -29,7 +29,7 @@ import { endpoints } from "@docspace/shared/__mocks__/e2e";
 import { expect, test } from "./fixtures/base";
 
 test.describe("Completed form", () => {
-  test("Completed form", async ({ page, mockRequest }) => {
+  test("Completed form render", async ({ page, mockRequest }) => {
     await mockRequest.router([endpoints.filesSettings]);
     await page.goto("/doceditor/completed-form?fillingSessionId=1");
 
@@ -37,13 +37,12 @@ test.describe("Completed form", () => {
     await expect(form).toBeVisible();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "completed-form",
       "completed-form-render.png",
     ]);
   });
 
-  test("Empty completed form", async ({ page, mockRequest }) => {
+  test("Empty completed form render", async ({ page, mockRequest }) => {
     await mockRequest.router([endpoints.filesSettings]);
     await page.goto("/doceditor/completed-form");
 
@@ -51,13 +50,12 @@ test.describe("Completed form", () => {
     await expect(form).toBeVisible();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "completed-form",
       "completed-form-empty-render.png",
     ]);
   });
 
-  test("VDR completed form", async ({ page, mockRequest }) => {
+  test("VDR completed form render", async ({ page, mockRequest }) => {
     await mockRequest.router([endpoints.filesSettings]);
     await page.goto(
       "/doceditor/completed-form?fileId=1&type=2&formId=1&roomId=1",
@@ -67,7 +65,6 @@ test.describe("Completed form", () => {
     await expect(form).toBeVisible();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "completed-form",
       "completed-form-vdr-render.png",
     ]);

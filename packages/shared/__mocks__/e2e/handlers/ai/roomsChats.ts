@@ -125,6 +125,31 @@ const defaultStreamMessage = buildSseBody([
   { event: "message_stop", data: { messageId: 1 } },
 ]);
 
+const mcpNeedApproveStreamMessage = buildSseBody([
+  {
+    event: "message_start",
+    data: { chatId: "3d3dbe04-3c15-4035-9785-5164e8bd985c", error: "" },
+  },
+  {
+    event: "tool_call",
+    data: {
+      callId: "call_ythOFAESwqWM1S7naGhP225L",
+      name: "mcp_tool_name",
+      arguments: {
+        key: "value",
+      },
+      managed: true,
+      mcpServerInfo: {
+        serverId: "883da87d-5ae0-49fd-8cb9-2cb82181667e",
+        serverName: "docspace",
+        serverType: 1,
+      },
+    },
+  },
+  // { event: "new_token", data: { text: " adipiscing elit" } },
+  // { event: "message_stop", data: { messageId: 1 } },
+]);
+
 export const aiRoomsChatsHandler = (
   type: "empty" | "with-chats" = "with-chats",
 ) => {
@@ -136,8 +161,12 @@ export const aiRoomsChatsHandler = (
   }
 };
 
-export const aiRoomsChatsStreamHandler = (type: "default" = "default") => {
+export const aiRoomsChatsStreamHandler = (
+  type: "default" | "mcpNeedApprove" = "default",
+) => {
   switch (type) {
+    case "mcpNeedApprove":
+      return new Response(mcpNeedApproveStreamMessage);
     case "default":
       return new Response(defaultStreamMessage);
   }

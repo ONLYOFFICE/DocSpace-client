@@ -745,6 +745,12 @@ export const endpoints = {
     method: "POST",
     responseType: "text",
   },
+  aiRoomsChatsStreamMcpNeedApprove: {
+    url: `${BASE_URL}${PATH_AI_ROOMS_CHATS_STREAM}`,
+    dataHandler: () => aiRoomsChatsStreamHandler("mcpNeedApprove"),
+    method: "POST",
+    responseType: "text",
+  },
   additionalSettings: {
     url: `${BASE_URL}${PATH_SETTINGS_ADDITIONAL}`,
     dataHandler: settingsAdditionalHandler,

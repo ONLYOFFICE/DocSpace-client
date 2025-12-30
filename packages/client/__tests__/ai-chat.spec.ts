@@ -1040,6 +1040,49 @@ test.describe("AI chat", () => {
       ]);
     });
 
+    test("should render tool call confirm dialog", async ({
+      page,
+      mockRequest,
+    }) => {
+      await mockRequest.router([
+        endpoints.aiRoomsChatsConfigAllEnabled,
+        endpoints.aiRoomsServersEmpty,
+        endpoints.aiRoomsChats,
+        endpoints.agentFolderChat,
+        endpoints.aiChat,
+        endpoints.aiRoomsChatsStreamMcpNeedApprove,
+      ]);
+
+      await page.goto("/ai-agents/2/chat?folder=2");
+
+      const containerLoader = page.getByTestId("chat-container-loading");
+
+      await expect(containerLoader).toBeVisible();
+      await containerLoader.waitFor({ state: "hidden" });
+
+      const sendButton = page.getByTestId("chat-input-send-button");
+
+      const chatTextArea = page.getByTestId("chat-input-textarea");
+      await chatTextArea.fill("Lorem ipsum dolor sit amet");
+
+      await expect(sendButton).toHaveAttribute("aria-disabled", "false");
+      await sendButton.click();
+
+      const dialog = page.getByRole("dialog");
+      await expect(dialog).toBeVisible();
+
+      const toolCallHeader = dialog.getByTestId("tool-call-header");
+      await expect(toolCallHeader).toBeVisible();
+
+      await toolCallHeader.click();
+
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "ai-chat",
+        "ai-chat-tool-call-confirm-dialog.png",
+      ]);
+    });
+
     test("should save chat input state when switch between agent tabs", async ({
       page,
       mockRequest,

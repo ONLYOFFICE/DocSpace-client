@@ -50,7 +50,6 @@ export const WhiteLabel = (props: IWhiteLabel) => {
     logoUrls,
     isSettingPaid,
     showAbout,
-    showNotAvailable,
     standalone,
     onSave,
     onRestoreDefault,
@@ -197,11 +196,13 @@ export const WhiteLabel = (props: IWhiteLabel) => {
 
   return (
     <div
-      className={styles.whiteLabelWrapper}
+      className={classNames(styles.whiteLabelWrapper, {
+        ["isEnableBranding"]: !isSettingPaid,
+        ["settings_unavailable"]: !isSettingPaid,
+      })}
       data-testid="whitelabel-settings-wrapper"
     >
       <WhiteLabelHeader
-        showNotAvailable={showNotAvailable}
         isSettingPaid={isSettingPaid}
         standalone={standalone}
         onUseTextAsLogo={onUseTextAsLogo}
@@ -213,11 +214,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
 
       <div className={styles.logosContainer}>
         <div className={styles.logoWrapper}>
-          <Text
-            fontSize="15px"
-            fontWeight="600"
-            className="settings_unavailable"
-          >
+          <Text fontSize="15px" fontWeight="600">
             {t("LogoLightSmall")} ({logoUrls[0].size.width}x
             {logoUrls[0].size.height})
           </Text>
@@ -250,11 +247,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
         </div>
 
         <div className={styles.logoWrapper}>
-          <Text
-            fontSize="15px"
-            fontWeight="600"
-            className="settings_unavailable"
-          >
+          <Text fontSize="15px" fontWeight="600">
             {t("LogoCompact")} ({logoUrls[5].size.width}x
             {logoUrls[5].size.height})
           </Text>
@@ -295,11 +288,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
         </div>
 
         <div className={styles.logoWrapper}>
-          <Text
-            fontSize="15px"
-            fontWeight="600"
-            className="settings_unavailable"
-          >
+          <Text fontSize="15px" fontWeight="600">
             {t("LogoLogin")} ({logoUrls[1].size.width}x{logoUrls[1].size.height}
             )
           </Text>
@@ -341,11 +330,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
 
         {showAbout ? (
           <div className={styles.logoWrapper}>
-            <Text
-              fontSize="15px"
-              fontWeight="600"
-              className="settings_unavailable"
-            >
+            <Text fontSize="15px" fontWeight="600">
               {t("LogoAbout")} ({logoUrls[6].size.width}x
               {logoUrls[6].size.height})
             </Text>
@@ -386,11 +371,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
           </div>
         ) : null}
         <div className={styles.logoWrapper}>
-          <Text
-            fontSize="15px"
-            fontWeight="600"
-            className="settings_unavailable"
-          >
+          <Text fontSize="15px" fontWeight="600">
             {t("LogoFavicon")} ({logoUrls[2].size.width}x
             {logoUrls[2].size.height})
           </Text>
@@ -408,11 +389,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
         </div>
 
         <div className={styles.logoWrapper}>
-          <Text
-            fontSize="15px"
-            fontWeight="600"
-            className="settings_unavailable"
-          >
+          <Text fontSize="15px" fontWeight="600">
             {/* t("LogoForEditors", { editorName: t("Common:Documents") })} */}
             {t("LogoDocsEditor")} ({logoUrls[4].size.width}x
             {logoUrls[4].size.height})

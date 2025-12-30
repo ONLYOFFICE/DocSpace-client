@@ -27,6 +27,7 @@
 import { useEffect, useState } from "react";
 import {
   ContextMenuModel,
+  ContextMenuProps,
   ContextMenuRefType,
   ContextMenuType,
   TContextMenuValueTypeOnClick,
@@ -38,6 +39,7 @@ const useContextMenuHotkeys = ({
   model,
   currentEvent,
   hide,
+  showDisabledItems,
 }: {
   visible: boolean;
   withHotkeys: boolean;
@@ -50,6 +52,7 @@ const useContextMenuHotkeys = ({
     | Event
   >;
   hide: ContextMenuRefType["hide"];
+  showDisabledItems: ContextMenuProps["showDisabledItems"];
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [activeLevel, setActiveLevel] = useState(0);
@@ -87,7 +90,8 @@ const useContextMenuHotkeys = ({
     for (const index in menuModel) {
       const item = menuModel[index];
 
-      if (!item.isSeparator && !item.disabled) {
+      const withDisabled = showDisabledItems ? true : !item.disabled;
+      if (!item.isSeparator && withDisabled) {
         clearModel.push({ ...item, index: Number(index) });
       }
     }
@@ -102,20 +106,23 @@ const useContextMenuHotkeys = ({
       case "ArrowDown":
         {
           if (currentIndex + 1 >= menuModel.length) {
-            setCurrentIndex(clearModel[0].index);
+            if (!clearModel[0].disabled) setCurrentIndex(clearModel[0].index);
           } else {
             const nextIndex = clearModel[clearModelIndex + 1].index;
-            setCurrentIndex(nextIndex);
+            if (!clearModel[clearModelIndex + 1].disabled)
+              setCurrentIndex(nextIndex);
           }
         }
         break;
       case "ArrowUp":
         {
           if (currentIndex - 1 < 0) {
-            setCurrentIndex(clearModel.at(-1)?.index ?? menuModel.length - 1);
+            if (!clearModel.at(-1)?.disabled)
+              setCurrentIndex(clearModel.at(-1)?.index ?? menuModel.length - 1);
           } else {
             const prevIndex = clearModel[clearModelIndex - 1].index;
-            setCurrentIndex(prevIndex);
+            if (!clearModel[clearModelIndex - 1].disabled)
+              setCurrentIndex(prevIndex);
           }
         }
         break;

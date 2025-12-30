@@ -167,6 +167,7 @@ import {
   HEADER_EMPTY_FOLDER,
   HEADER_FILTERED_FOLDER,
   HEADER_FILTERED_ROOMS_LIST,
+  CONTEXT_MENU_ROOMS_LIST,
   HEADER_LIST_CAPABILITIES,
   HEADER_ROOMS_LIST,
   HEADER_AI_DISABLED,
@@ -249,6 +250,7 @@ import {
 } from "./oauth";
 
 import type { MethodType } from "../types";
+import { ShareAccessRights } from "../../../enums";
 
 export type TEndpoint = {
   url: string | RegExp;
@@ -382,13 +384,60 @@ export const endpoints = {
   filteredRoomList: {
     url: `${BASE_URL}${PATH_ROOMS_LIST}`,
     dataHandler: () =>
-      roomListHandler(new Headers({ [HEADER_FILTERED_ROOMS_LIST]: "true" })),
+      roomListHandler(new Headers({ [HEADER_FILTERED_ROOMS_LIST]: "true" }), {
+        access: ShareAccessRights.RoomManager,
+      }),
   },
   emptyRoomList: {
     url: `${BASE_URL}${PATH_ROOMS_LIST}`,
     dataHandler: roomListHandler,
   },
-
+  cmRoomListDocAdminManager: {
+    url: `${BASE_URL}${PATH_ROOMS_LIST}`,
+    dataHandler: () =>
+      roomListHandler(new Headers({ [CONTEXT_MENU_ROOMS_LIST]: "true" }), {
+        access: ShareAccessRights.RoomManager,
+      }),
+  },
+  cmRoomListContentCreator: {
+    url: `${BASE_URL}${PATH_ROOMS_LIST}`,
+    dataHandler: () =>
+      roomListHandler(new Headers({ [CONTEXT_MENU_ROOMS_LIST]: "true" }), {
+        access: ShareAccessRights.Collaborator,
+      }),
+  },
+  cmRoomListNotInRoom: {
+    url: `${BASE_URL}${PATH_ROOMS_LIST}`,
+    dataHandler: () =>
+      roomListHandler(new Headers({ [CONTEXT_MENU_ROOMS_LIST]: "true" }), {
+        access: ShareAccessRights.None,
+        inRoom: false,
+      }),
+  },
+  cmRoomListRoomOwner: {
+    url: `${BASE_URL}${PATH_ROOMS_LIST}`,
+    dataHandler: () =>
+      roomListHandler(new Headers({ [CONTEXT_MENU_ROOMS_LIST]: "true" }), {
+        access: ShareAccessRights.None,
+        isDocAdmin: false,
+      }),
+  },
+  cmRoomListRoomAdminManager: {
+    url: `${BASE_URL}${PATH_ROOMS_LIST}`,
+    dataHandler: () =>
+      roomListHandler(new Headers({ [CONTEXT_MENU_ROOMS_LIST]: "true" }), {
+        access: ShareAccessRights.RoomManager,
+        isDocAdmin: false,
+      }),
+  },
+  cmRoomListRoomAdminCreator: {
+    url: `${BASE_URL}${PATH_ROOMS_LIST}`,
+    dataHandler: () =>
+      roomListHandler(new Headers({ [CONTEXT_MENU_ROOMS_LIST]: "true" }), {
+        access: ShareAccessRights.Collaborator,
+        isDocAdmin: false,
+      }),
+  },
   folder: {
     url: `${BASE_URL}${PATH_FOLDER}`,
     dataHandler: folderHandler,
@@ -500,6 +549,45 @@ export const endpoints = {
   aiAgentsListCreate: {
     url: `${BASE_URL}${PATH_AI_AGENTS}`,
     dataHandler: () => aiAgentsHandler({ withListCreate: true }),
+  },
+  aiAgentsDocAdminManager: {
+    url: `${BASE_URL}${PATH_AI_AGENTS}`,
+    dataHandler: () =>
+      aiAgentsHandler({
+        aiAccess: ShareAccessRights.RoomManager,
+        isDocAdmin: true,
+      }),
+  },
+  aiAgentsDocAdminCreator: {
+    url: `${BASE_URL}${PATH_AI_AGENTS}`,
+    dataHandler: () =>
+      aiAgentsHandler({
+        aiAccess: ShareAccessRights.Collaborator,
+        isDocAdmin: true,
+      }),
+  },
+  aiAgentsDocAdminOutOfRoom: {
+    url: `${BASE_URL}${PATH_AI_AGENTS}`,
+    dataHandler: () =>
+      aiAgentsHandler({
+        aiAccess: ShareAccessRights.None,
+        inRoom: false,
+        isDocAdmin: true,
+      }),
+  },
+  aiAgentsOwner: {
+    url: `${BASE_URL}${PATH_AI_AGENTS}`,
+    dataHandler: () => aiAgentsHandler({ aiAccess: ShareAccessRights.None }),
+  },
+  aiAgentsManager: {
+    url: `${BASE_URL}${PATH_AI_AGENTS}`,
+    dataHandler: () =>
+      aiAgentsHandler({ aiAccess: ShareAccessRights.RoomManager }),
+  },
+  aiAgentsCreator: {
+    url: `${BASE_URL}${PATH_AI_AGENTS}`,
+    dataHandler: () =>
+      aiAgentsHandler({ aiAccess: ShareAccessRights.Collaborator }),
   },
   aiProvidersList: {
     url: `${BASE_URL}${PATH_AI_PROVIDERS}`,
@@ -782,6 +870,10 @@ export const endpoints = {
   myDocuments: {
     url: PATH_MY_DOCUMENTS,
     dataHandler: myDocumentsHandler,
+  },
+  myDocumentsList: {
+    url: PATH_MY_DOCUMENTS,
+    dataHandler: myDocumentsHandler.bind(null, true),
   },
   getFileInfo: {
     url: PATH_GET_FILE_INFO,

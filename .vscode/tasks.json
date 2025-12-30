@@ -751,6 +751,51 @@
       }
     },
     {
+      "label": "Test | Test e2e docker build (management)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/management ; pnpm test:e2e:docker:build",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e docker start (management)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/management ; pnpm test:e2e:docker:start ; pnpm exec playwright show-report --port 9324 ${workspaceFolder}/playwright-report/management",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e docker clear (management)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/management ; pnpm test:e2e:docker:clear",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Test | Biome",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm lint",

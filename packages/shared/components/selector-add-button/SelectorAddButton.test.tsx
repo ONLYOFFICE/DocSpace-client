@@ -73,9 +73,7 @@ describe("<SelectorAddButton />", () => {
   it("accepts style", () => {
     render(<SelectorAddButton {...baseProps} style={{ color: "red" }} />);
 
-    expect(screen.getByTestId("selector-add-button")).toHaveStyle({
-      color: "red",
-    });
+    expect(screen.getByTestId("selector-add-button").style.color).toBe("red");
   });
 
   it("handles click when not disabled", () => {

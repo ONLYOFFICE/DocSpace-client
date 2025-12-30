@@ -103,7 +103,7 @@ describe("<IndexIconButtons />", () => {
     render(<IndexIconButtons style={style} />);
 
     const root = screen.getByTestId("index-icon-buttons");
-    expect(root).toHaveStyle("background-color: red");
-    expect(root).toHaveStyle("padding: 10px");
+    expect(root.style.backgroundColor).toBe("red");
+    expect(root.style.padding).toBe("10px");
   });
 });

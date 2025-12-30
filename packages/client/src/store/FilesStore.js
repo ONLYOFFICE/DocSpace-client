@@ -1232,8 +1232,9 @@ class FilesStore {
       );
 
       if (isDesktopClient) {
-        requests.push(getIsEncryptionSupport(), getEncryptionKeys());
+        requests.push(getIsEncryptionSupport());
       }
+      requests.push(getEncryptionKeys());
     }
     requests.push(getFilesSettings());
 
@@ -1361,7 +1362,7 @@ class FilesStore {
     if (index < 0) return;
 
     this.files[index].encrypted = true;
-  }
+  };
 
   updateFileVectorizationStatus = (fileId, status) => {
     const foundIndex = this.files.findIndex((file) => file.id === fileId);

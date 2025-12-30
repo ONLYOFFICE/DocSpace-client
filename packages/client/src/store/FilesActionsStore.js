@@ -46,6 +46,8 @@ import {
   reorderIndex,
   deleteVersionFile,
   enableCustomFilter,
+  getFileEncryptionAccess,
+  getPresignedUri,
 } from "@docspace/shared/api/files";
 import {
   Events,
@@ -77,6 +79,13 @@ import {
   FILTER_ARCHIVE_DOCUMENTS,
   FILTER_ROOM_DOCUMENTS,
 } from "@docspace/shared/utils/filterConstants";
+
+// Encrypted download helpers
+import {
+  downloadAndDecryptFile,
+  triggerFileDownload,
+} from "SRC_DIR/helpers/encryptedDownload";
+
 import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
@@ -893,7 +902,7 @@ class FilesActionStore {
     }
   };
 
-  downloadAction = (label, item) => {
+  downloadAction = async (label, item) => {
     const { bufferSelection } = this.filesStore;
     const { openUrl } = this.settingsStore;
     const { id, isFolder } = this.selectedFolderStore;
@@ -915,7 +924,13 @@ class FilesActionStore {
     const items = [];
 
     if (selection.length === 1 && selection[0].fileExst && !downloadAsArchive) {
-      openUrl(selection[0].viewUrl, UrlActionType.Download);
+      const file = selection[0];
+
+      if (file.encrypted) {
+        return this.downloadEncryptedFile(file);
+      }
+
+      openUrl(file.viewUrl, UrlActionType.Download);
       return Promise.resolve();
     }
 
@@ -933,6 +948,119 @@ class FilesActionStore {
     return this.downloadFiles(fileIds, folderIds, label).finally(() =>
       this.setGroupMenuBlocked(false),
     );
+  };
+
+  downloadEncryptedFile = async (file) => {
+    const { encryptionKeys, user } = this.userStore;
+
+    if (!encryptionKeys || encryptionKeys.length === 0) {
+      toastr.error(
+        "You need to set up encryption keys to download encrypted files.",
+      );
+      return Promise.resolve();
+    }
+
+    const userId = user?.id;
+    if (!userId) {
+      toastr.error("User not authenticated");
+      return Promise.resolve();
+    }
+
+    try {
+      toastr.info("Preparing encrypted file download...", null, 0, true);
+
+      console.log(
+        "[ENCRYPTION DEBUG] Fetching encryption access for file:",
+        file.id,
+      );
+      const encryptionInfo = await getFileEncryptionAccess(file.id);
+      console.log(
+        "[ENCRYPTION DEBUG] Encryption info received:",
+        encryptionInfo,
+      );
+
+      if (!encryptionInfo || !encryptionInfo.fileKeys) {
+        toastr.clear();
+        toastr.error("No encryption keys found for this file");
+        return Promise.resolve();
+      }
+
+      const myFileKey = encryptionInfo.fileKeys.find(
+        (k) => k.userId === userId || k.userId === String(userId),
+      );
+
+      if (!myFileKey) {
+        toastr.clear();
+        toastr.error("You don't have access to decrypt this file");
+        return Promise.resolve();
+      }
+
+      console.log("[ENCRYPTION DEBUG] Found file key for user:", myFileKey);
+
+      console.log(
+        "[ENCRYPTION DEBUG] Getting presigned URI for file:",
+        file.id,
+      );
+      const presignedInfo = await getPresignedUri(file.id);
+      const downloadUrl = presignedInfo?.url || file.viewUrl;
+      console.log("[ENCRYPTION DEBUG] Download URL:", downloadUrl);
+
+      const userKeys = {
+        publicKey: encryptionKeys[0].publicKey,
+        privateKeyEnc: encryptionKeys[0].privateKeyEnc,
+      };
+
+      const metadata = {
+        encrypted: true,
+        version: 1,
+        encryptionAlgorithm: "AES-256-GCM",
+        keyEncryptionAlgorithm: "RSA-OAEP-SHA256",
+        encryptedKeys: [
+          {
+            userId: String(userId),
+            data: myFileKey.privateKeyEnc,
+          },
+        ],
+        iv: "",
+        encryptedAt: myFileKey.createOn || new Date().toISOString(),
+      };
+
+      toastr.clear();
+      toastr.info("Decrypting file...", null, 0, true);
+
+      const result = await downloadAndDecryptFile(
+        downloadUrl,
+        metadata,
+        file.title,
+        file.contentType || "application/octet-stream",
+        userKeys,
+        String(userId),
+        async () => {
+          console.warn(
+            "Passphrase required - ensure EncryptionProvider is set up",
+          );
+          return null;
+        },
+        (progress) => {
+          console.log(`Download progress: ${Math.round(progress * 100)}%`);
+        },
+      );
+
+      if (result.success && result.file) {
+        triggerFileDownload(result.file);
+        toastr.clear();
+        toastr.success("File downloaded successfully");
+      } else {
+        toastr.clear();
+        toastr.error(result.error || "Failed to decrypt file");
+      }
+    } catch (error) {
+      console.error("[ENCRYPTION DEBUG] Download error:", error);
+      toastr.clear();
+      toastr.error(error.message || "Failed to download encrypted file");
+    }
+
+    return Promise.resolve();
   };
 
   completeAction = async (selectedItem, type) => {

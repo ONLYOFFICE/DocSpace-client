@@ -243,7 +243,12 @@ const KeysManagement = ({
     setShowConfirmDelete(false);
 
     try {
-      const remainingKeys = await deleteEncryptionKey(pendingDeleteKeyId);
+      await deleteEncryptionKey(pendingDeleteKeyId);
+      // Filter out the deleted key from local state instead of using API response
+      // (backend may auto-generate new keys which we don't want)
+      const remainingKeys = (encryptionKeys || []).filter(
+        (key) => key.id !== pendingDeleteKeyId,
+      );
       setUserEncryptionKeys?.(remainingKeys);
       SecretStorageService.clearCache();
       toastr.success(t("Common:EncryptionKeyDeleted"));
@@ -255,7 +260,7 @@ const KeysManagement = ({
       setDeletingKeyId(null);
       setPendingDeleteKeyId(null);
     }
-  }, [pendingDeleteKeyId, t, setUserEncryptionKeys]);
+  }, [pendingDeleteKeyId, t, setUserEncryptionKeys, encryptionKeys]);
 
   return (
     <div className={styles.sectionBody}>

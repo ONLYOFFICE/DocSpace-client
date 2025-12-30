@@ -52,6 +52,8 @@ import {
   fillingSessionHandler,
   fillingStatusHandler,
   fileByIdHandler,
+  docServiceHandler,
+  validatePublicRoomKeyPasswordHandler,
 } from "@docspace/shared/__mocks__/e2e";
 
 import { logger } from "@/../logger.mjs";
@@ -441,7 +443,9 @@ export async function validatePublicRoomKey(key: string, fileId?: string) {
       "GET",
     );
 
-    const res = await fetch(validatePublicRoomKeyRes);
+    const res = IS_TEST
+      ? validatePublicRoomKeyPasswordHandler()
+      : await fetch(validatePublicRoomKeyRes);
     if (res.status === 401) return undefined;
     if (!res.ok) {
       const hdrs = await headers();
@@ -474,7 +478,7 @@ export async function getEditorUrl(
     undefined,
   );
 
-  const res = await fetch(request);
+  const res = IS_TEST ? docServiceHandler() : await fetch(request);
 
   if (!res.ok) {
     const hdrs = await headers();
@@ -509,7 +513,7 @@ export async function openEdit(
       undefined,
     );
 
-    const res = IS_TEST ? openEditHandler() : await fetch(getConfig);
+    const res = IS_TEST ? openEditHandler(hdrs) : await fetch(getConfig);
 
     const hostname = hdrs.get("x-forwarded-host");
 

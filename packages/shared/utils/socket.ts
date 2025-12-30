@@ -254,8 +254,18 @@ export type TListenEventCallbackMap = {
     fileId: number | string;
     count: number;
   }) => void;
-  [SocketEvents.StartEditFile]: (id: number | string) => void;
-  [SocketEvents.StopEditFile]: (id: number | string) => void;
+  [SocketEvents.StartEditFile]: (
+    data:
+      | number
+      | string
+      | { fileId: number | string; editingBy: Record<string, string> },
+  ) => void;
+  [SocketEvents.StopEditFile]: (
+    data:
+      | number
+      | string
+      | { fileId: number | string; editingBy?: Record<string, string> },
+  ) => void;
   [SocketEvents.ChangedQuotaUsedValue]: (data: TOptSocket) => void;
   [SocketEvents.ChangedQuotaFeatureValue]: (data: TOptSocket) => void;
   [SocketEvents.ChangedQuotaUserUsedValue]: (data: TOptSocket) => void;

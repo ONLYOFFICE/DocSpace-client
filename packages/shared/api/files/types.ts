@@ -158,6 +158,8 @@ export type TFile = {
   external?: boolean;
   isLinkExpired?: boolean;
   dimensions?: TDimensions;
+  editingBy?: Record<string, string>;
+  activeEditors?: Record<string, string>;
 };
 
 export type TOpenEditRequest = {

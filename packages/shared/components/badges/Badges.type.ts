@@ -97,6 +97,7 @@ export type BadgesProps = {
   onRetryVectorization?: () => void;
   onClickFavorite?: () => void;
   isPublicRoom?: boolean;
+  editingUsersTooltip?: string;
 };
 
 export type BadgeWrapperProps = {

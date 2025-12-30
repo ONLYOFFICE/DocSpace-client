@@ -324,6 +324,7 @@
   "EditAdditionalLink": "Edit additional link",
   "EditAgent": "Edit Agent",
   "EditButton": "Edit",
+  "EditingBy": "It is currently being edited by: {{users}}",
   "EditExternalUserCount": "{{externalCount}} external users",
   "EditIndex": "Edit index",
   "Editing": "Editing",

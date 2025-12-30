@@ -49,7 +49,16 @@ const WebCrawlingToolContent = ({ content }: { content: TToolCallContent }) => {
   const toolInfo = ((content.result?.data as TToolCallResultSourceData)
     ?.title || content.arguments.url) as string;
 
-  return (
+  const hasError = !!content.result?.error;
+
+  return hasError ? (
+    <>
+      <ReactSVG className={styles.searchToolIcon} src={UniverseIcon} />
+      <Text fontSize="13px" lineHeight="20px" fontWeight={600} truncate>
+        {t("Common:WebCrawling")} | <span title={toolInfo}>{toolInfo}</span>
+      </Text>
+    </>
+  ) : (
     <Link
       style={{ display: "contents" }}
       href={content.arguments?.url as string}

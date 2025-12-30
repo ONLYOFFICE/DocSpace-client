@@ -109,6 +109,7 @@ const RenameChat = ({ chatId, prevTitle, onRenameToggle }: RenameChatProps) => {
           primary
           isLoading={isLoading}
           isDisabled={!newName || prevTitle === newName}
+          testId="confirm-button"
         />
         <Button
           size={ButtonSize.normal}
@@ -116,6 +117,7 @@ const RenameChat = ({ chatId, prevTitle, onRenameToggle }: RenameChatProps) => {
           onClick={onRenameToggle}
           scale
           isDisabled={isLoading}
+          testId="cancel-button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

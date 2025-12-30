@@ -54,6 +54,7 @@ const FilesList = ({ files, isFixed, getIcon, onRemove }: FilesListProps) => {
               className={styles.filesListItem}
               key={file.id}
               style={{ maxWidth: "300px" }}
+              data-testid="files-list-item"
             >
               <ReactSVG
                 src={getIcon(24, file.fileExst ?? "")}
@@ -86,6 +87,7 @@ const FilesList = ({ files, isFixed, getIcon, onRemove }: FilesListProps) => {
                     size={16}
                     isClickable
                     onClick={() => onRemove(file)}
+                    dataTestId="remove-file-button"
                   />
                 ) : null}
               </div>

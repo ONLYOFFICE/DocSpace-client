@@ -76,6 +76,8 @@ const CreateChat = ({
         [styles.disabled]: isDisabled,
       })}
       onClick={onClickAction}
+      data-testid="create-chat"
+      aria-disabled={isDisabled}
     >
       <PlusReactSvgUrl />
       <Text fontSize="13px" lineHeight="15px" fontWeight={600}>

@@ -190,6 +190,7 @@ export type ChatFooterProps = ChatInputProps & ChatInfoBlockProps;
 
 export type ChatContainerProps = {
   children: React.ReactNode;
+  isLoadingChat?: boolean;
 };
 
 export type ChatProps = {

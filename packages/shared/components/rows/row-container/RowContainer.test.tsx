@@ -117,7 +117,7 @@ describe("<RowContainer />", () => {
     );
 
     const container = screen.getByTestId("row-container");
-    expect(container).toHaveStyle({ backgroundColor: "red" });
+    expect(container.style.backgroundColor).toBe("red");
   });
 
   it("renders InfiniteLoaderComponent when useReactWindow is true", () => {

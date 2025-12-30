@@ -52,7 +52,7 @@
     "@playwright/test": "1.56.1",
     "@svgr/webpack": "8.1.0",
     "@types/lodash": "4.17.10",
-    "@types/node": "22.7.5",
+    "@types/node": "24.10.4",
     "@types/react": "19.2.2",
     "@types/react-dom": "19.2.2",
     "@types/react-virtualized": "9.21.30",

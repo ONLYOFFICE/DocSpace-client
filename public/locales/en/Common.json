@@ -1119,6 +1119,12 @@
   "EncryptionKeyGenerated": "Encryption key generated successfully",
   "EncryptionKeyImported": "Encryption key imported successfully",
   "EncryptionKeyExported": "Encryption key exported successfully",
+  "EncryptionKeyDeleted": "Encryption key deleted successfully",
+  "EncryptionKeys": "Encryption keys",
+  "DeleteKey": "Delete encryption key",
+  "DeleteKeyWarning": "Warning: Deleting this encryption key will make files encrypted with this key inaccessible. Make sure you have a backup before deleting. Are you sure you want to continue?",
+  "KeyId": "Key ID",
+  "Deleting": "Deleting",
   "EncryptionError": "An error occurred during the encryption operation",
   "Algorithm": "Algorithm",
   "Confirm": "Confirm"

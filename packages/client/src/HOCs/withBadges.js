@@ -89,7 +89,11 @@ export default function withBadges(WrappedComponent) {
 
       const { t, setPinAction } = this.props;
 
-      const { action, id, isaiagent = false } = e.target.closest(".is-pinned").dataset;
+      const {
+        action,
+        id,
+        isaiagent = false,
+      } = e.target.closest(".is-pinned").dataset;
 
       if (!action && !id) return;
 
@@ -192,6 +196,28 @@ export default function withBadges(WrappedComponent) {
         .catch((err) => toastr.error(err));
     };
 
+    getEditingUsersTooltip = () => {
+      const { t, item, currentUserId } = this.props;
+      const { editingBy, activeEditors } = item;
+
+      const currentEditingBy = activeEditors || editingBy;
+
+      if (!currentEditingBy) return undefined;
+
+      const userNames = Object.entries(currentEditingBy)
+        .map(([userId, user]) => {
+          if (currentUserId && userId === currentUserId) {
+            return t("Common:MeLabel");
+          }
+          return user;
+        })
+        .join(", ");
+
+      return userNames
+        ? t("Common:EditingBy", { users: userNames })
+        : undefined;
+    };
+
     render() {
       const {
         t,
@@ -267,6 +293,7 @@ export default function withBadges(WrappedComponent) {
           isRecentFolder={isRecentFolder}
           isPublicRoom={isPublicRoom}
           onClickFavorite={this.onClickFavorite}
+          editingUsersTooltip={this.getEditingUsersTooltip()}
         />
       );
 
@@ -358,6 +385,7 @@ export default function withBadges(WrappedComponent) {
         retryVectorization,
         setFavoriteAction,
         isRecentFolder,
+        currentUserId: userStore?.user?.id,
       };
     },
   )(observer(WithBadges));

@@ -681,12 +681,11 @@ export async function getFileById(fileId: number | string) {
       [["", ""]],
       "GET",
     );
+    const hdrs = await headers();
 
-    const response = IS_TEST ? fileByIdHandler() : await fetch(getFile);
+    const response = IS_TEST ? fileByIdHandler(hdrs) : await fetch(getFile);
 
     if (response.ok) return (await response.json()).response as TFile;
-
-    const hdrs = await headers();
 
     const hostname = hdrs.get("x-forwarded-host");
 

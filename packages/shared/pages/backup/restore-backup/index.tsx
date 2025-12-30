@@ -353,7 +353,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
         className={classNames(
           styles.restoreBackupWarning,
           styles.settingsUnavailable,
-          "restore-backup_warning settings_unavailable",
+          "restore-backup_warning",
         )}
       >
         {t("Common:Warning")}!
@@ -362,7 +362,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
         className={classNames(
           styles.restoreBackupWarningDescription,
           styles.settingsUnavailable,
-          "restore-backup_warning-description settings_unavailable",
+          "restore-backup_warning-description",
         )}
       >
         {t("Common:RestoreBackupWarningText", {
@@ -374,7 +374,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
           className={classNames(
             styles.restoreBackupWarningLink,
             styles.settingsUnavailable,
-            "restore-backup_warning-link settings_unavailable",
+            "restore-backup_warning-link",
           )}
         >
           {t("Common:RestoreBackupResetInfoWarningText", {
@@ -407,7 +407,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
           className={classNames(
             styles.restoreDescription,
             styles.settingsUnavailable,
-            "restore-description settings_unavailable",
+            "restore-description",
           )}
         >
           {t("Common:RestoreBackupDescription")}
@@ -420,7 +420,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
         className={classNames(
           styles.restoreBackupList,
           styles.settingsUnavailable,
-          "restore-backup_list settings_unavailable",
+          "restore-backup_list",
         )}
         {...onClickVersionListProp}
         noSelect

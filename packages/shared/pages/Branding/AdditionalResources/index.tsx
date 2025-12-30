@@ -76,23 +76,18 @@ export const AdditionalResources = ({
   };
 
   return (
-    <div className={styles.additionalResources}>
+    <div
+      className={classNames(styles.additionalResources, {
+        ["isEnableBranding"]: !isSettingPaid,
+        ["settings_unavailable"]: !isSettingPaid,
+      })}
+    >
       <div className={classNames(styles.header, "header")}>
-        <div
-          className={classNames(
-            styles.additionalHeader,
-            "settings_unavailable",
-          )}
-        >
+        <div className={styles.additionalHeader}>
           {t("Common:AdditionalResources")}
         </div>
       </div>
-      <div
-        className={classNames(
-          styles.additionalDescription,
-          "settings_unavailable",
-        )}
-      >
+      <div className={styles.additionalDescription}>
         {t("Common:AdditionalResourcesDescription", {
           productName: t("Common:ProductName"),
         })}

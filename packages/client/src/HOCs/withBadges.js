@@ -253,7 +253,7 @@ export default function withBadges(WrappedComponent) {
       const badgesComponent = (
         <Badges
           t={t}
-          theme={theme}
+          themeIsBase={theme?.isBase}
           item={item}
           isAdmin={isAdmin}
           isVisitor={isVisitor}

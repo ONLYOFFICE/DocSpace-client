@@ -45,4 +45,32 @@
       }
     }
   }
+
+  :global(:not(.isEnableBranding)){
+    :global(.settings_unavailable) {
+      color: var(--management-disable-color) !important;
+      pointer-events: none;
+      cursor: default;
+      
+      p {
+        color: var(--management-disable-color) !important;
+      }
+
+      label {
+        color: var(--management-disable-color) !important;
+      }
+
+      path {
+        fill: var(--management-disable-color) !important;
+      }
+
+      :global(.wl-helper-label){
+        color: var(--management-disable-color) !important;
+      }
+      
+      :global(.section-description){
+        color: var(--management-disable-color) !important;
+      }
+    }
+  }
 }

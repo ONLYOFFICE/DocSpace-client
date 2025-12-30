@@ -69,7 +69,6 @@ type ItemData = {
 
 export type BadgesProps = {
   t: TTranslation;
-  theme: TTheme;
   item: ItemData;
   viewAs: TViewAs;
   showNew: boolean;
@@ -97,6 +96,7 @@ export type BadgesProps = {
   onRetryVectorization?: () => void;
   onClickFavorite?: () => void;
   isPublicRoom?: boolean;
+  themeIsBase?: boolean;
   editingUsersTooltip?: string;
 };
 

@@ -350,6 +350,7 @@ it("UnusedDependenciesTest: Verify that all dependencies in package.json files a
       "@types/node",
       "jest-environment-jsdom",
       "jest-styled-components",
+      "jsdom",
       "ts-jest",
       "ts-node",
       "jest-html-reporter",

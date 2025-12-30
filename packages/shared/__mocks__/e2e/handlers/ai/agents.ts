@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { API_PREFIX, BASE_URL } from "../../utils";
+import { ShareAccessRights } from "../../../../enums";
 
 export const PATH_AI_AGENTS = "ai/agents?*";
 
@@ -494,13 +495,430 @@ const successListWithCreate = {
   statusCode: 200,
 };
 
+const getItemsSecurity = (access?: ShareAccessRights, isDocAdmin?: boolean) => {
+  if (isDocAdmin) {
+    switch (access) {
+      case ShareAccessRights.RoomManager:
+        return {
+          ChangeOwner: true,
+          Copy: false,
+          CopyLink: true,
+          CopySharedLink: true,
+          CopyTo: false,
+          Create: false,
+          CreateRoomFrom: false,
+          Delete: false,
+          Download: true,
+          Duplicate: false,
+          EditAccess: true,
+          EditRoom: true,
+          Embed: false,
+          IndexExport: false,
+          Move: false,
+          MoveTo: false,
+          Mute: true,
+          Pin: true,
+          Read: true,
+          Reconnect: false,
+          Rename: true,
+          UseChat: true,
+        };
+      case ShareAccessRights.Collaborator:
+        return {
+          ChangeOwner: true,
+          Copy: false,
+          CopyLink: true,
+          CopySharedLink: false,
+          CopyTo: false,
+          Create: false,
+          CreateRoomFrom: false,
+          Delete: false,
+          Download: true,
+          Duplicate: false,
+          EditAccess: false,
+          EditRoom: false,
+          Embed: false,
+          IndexExport: false,
+          Move: false,
+          MoveTo: false,
+          Mute: true,
+          Pin: true,
+          Read: true,
+          Reconnect: false,
+          Rename: false,
+          UseChat: true,
+        };
+      case ShareAccessRights.None:
+        return {
+          ChangeOwner: true,
+          Copy: false,
+          CopyLink: true,
+          CopySharedLink: false,
+          CopyTo: false,
+          Create: false,
+          CreateRoomFrom: false,
+          Delete: false,
+          Download: true,
+          Duplicate: false,
+          EditAccess: false,
+          EditRoom: false,
+          Embed: false,
+          IndexExport: false,
+          Move: false,
+          MoveTo: false,
+          Mute: true,
+          Pin: true,
+          Read: true,
+          Reconnect: false,
+          Rename: false,
+          UseChat: false,
+        };
+      default:
+        return {};
+    }
+  } else {
+    switch (access) {
+      case ShareAccessRights.None:
+        return {
+          ChangeOwner: true,
+          Copy: false,
+          CopyLink: true,
+          CopySharedLink: true,
+          CopyTo: false,
+          Create: false,
+          CreateRoomFrom: false,
+          Delete: true,
+          Download: true,
+          Duplicate: false,
+          EditAccess: true,
+          EditRoom: true,
+          Embed: false,
+          IndexExport: false,
+          Move: false,
+          MoveTo: false,
+          Mute: true,
+          Pin: true,
+          Read: true,
+          Reconnect: false,
+          Rename: true,
+          UseChat: true,
+        };
+      case ShareAccessRights.RoomManager:
+        return {
+          ChangeOwner: false,
+          Copy: false,
+          CopyLink: true,
+          CopySharedLink: true,
+          CopyTo: false,
+          Create: false,
+          CreateRoomFrom: false,
+          Delete: false,
+          Download: true,
+          Duplicate: false,
+          EditAccess: true,
+          EditRoom: true,
+          Embed: false,
+          IndexExport: false,
+          Move: false,
+          MoveTo: false,
+          Mute: true,
+          Pin: true,
+          Read: true,
+          Reconnect: false,
+          Rename: true,
+          UseChat: true,
+        };
+      case ShareAccessRights.Collaborator:
+        return {
+          ChangeOwner: false,
+          Copy: false,
+          CopyLink: true,
+          CopySharedLink: false,
+          CopyTo: false,
+          Create: false,
+          CreateRoomFrom: false,
+          Delete: false,
+          Download: true,
+          Duplicate: false,
+          EditAccess: false,
+          EditRoom: false,
+          Embed: false,
+          IndexExport: false,
+          Move: false,
+          MoveTo: false,
+          Mute: true,
+          Pin: true,
+          Read: true,
+          Reconnect: false,
+          Rename: false,
+          UseChat: true,
+        };
+      default:
+        return {};
+    }
+  }
+};
+
+const getListWithCreate = ({
+  access,
+  inRoom,
+  isDocAdmin,
+}: {
+  access?: ShareAccessRights;
+  inRoom?: boolean;
+  isDocAdmin?: boolean;
+}) => {
+  const security = getItemsSecurity(access, isDocAdmin);
+  return {
+    response: {
+      files: [],
+      folders: [
+        {
+          parentId: 224866,
+          filesCount: 1,
+          foldersCount: 0,
+          new: 0,
+          mute: false,
+          tags: [],
+          logo: {
+            original: "",
+            large: "",
+            medium: "",
+            small: "",
+            color: "1FCECB",
+          },
+          pinned: false,
+          roomType: 9,
+          private: false,
+          indexing: false,
+          denyDownload: false,
+          inRoom,
+          usedSpace: 35851,
+          fileEntryType: 1,
+          chatSettings: {
+            providerId: 0,
+            prompt: "",
+          },
+          id: 251365,
+          rootFolderId: 224866,
+          canShare: true,
+          security,
+          availableShareRights: {
+            ExternalLink: ["Editing", "Review", "Comment", "Read", "None"],
+            PrimaryExternalLink: [
+              "Editing",
+              "Review",
+              "Comment",
+              "Read",
+              "None",
+            ],
+          },
+          title: "Plugin SDK",
+          access,
+          sharedBy: {
+            id: "4a515a15-d4d6-4b8e-828e-e0586f18f3a3",
+            displayName: "profile removed",
+            avatar:
+              "/static/images/default_user_photo_size_82-82.png?hash=1906105280",
+            avatarOriginal:
+              "/static/images/default_user_photo_size_200-200.png?hash=1906105280",
+            avatarMax:
+              "/static/images/default_user_photo_size_200-200.png?hash=1906105280",
+            avatarMedium:
+              "/static/images/default_user_photo_size_48-48.png?hash=1906105280",
+            avatarSmall:
+              "/static/images/default_user_photo_size_32-32.png?hash=1906105280",
+            profileUrl: "",
+            hasAvatar: false,
+            isAnonim: false,
+          },
+          ownedBy: {
+            id: "487b33be-9a9c-4270-a61f-d23d2e4f22e4",
+            displayName: "asdasd asdadsads",
+            avatar:
+              "/static/images/default_user_photo_size_82-82.png?hash=1927501797",
+            avatarOriginal:
+              "/static/images/default_user_photo_size_200-200.png?hash=1927501797",
+            avatarMax:
+              "/static/images/default_user_photo_size_200-200.png?hash=1927501797",
+            avatarMedium:
+              "/static/images/default_user_photo_size_48-48.png?hash=1927501797",
+            avatarSmall:
+              "/static/images/default_user_photo_size_32-32.png?hash=1927501797",
+            profileUrl: "",
+            hasAvatar: false,
+            isAnonim: false,
+          },
+          shared: false,
+          sharedForUser: false,
+          parentShared: false,
+          shortWebUrl: "",
+          created: "2025-12-04T14:44:43.0000000+05:00",
+          createdBy: {
+            id: "487b33be-9a9c-4270-a61f-d23d2e4f22e4",
+            displayName: "asdasd asdadsads",
+            avatar:
+              "/static/images/default_user_photo_size_82-82.png?hash=1927501797",
+            avatarOriginal:
+              "/static/images/default_user_photo_size_200-200.png?hash=1927501797",
+            avatarMax:
+              "/static/images/default_user_photo_size_200-200.png?hash=1927501797",
+            avatarMedium:
+              "/static/images/default_user_photo_size_48-48.png?hash=1927501797",
+            avatarSmall:
+              "/static/images/default_user_photo_size_32-32.png?hash=1927501797",
+            profileUrl: "",
+            hasAvatar: false,
+            isAnonim: false,
+          },
+          updated: "2025-12-10T14:13:36.0000000+05:00",
+          rootFolderType: 34,
+          updatedBy: {
+            id: "487b33be-9a9c-4270-a61f-d23d2e4f22e4",
+            displayName: "asdasd asdadsads",
+            avatar:
+              "/static/images/default_user_photo_size_82-82.png?hash=1927501797",
+            avatarOriginal:
+              "/static/images/default_user_photo_size_200-200.png?hash=1927501797",
+            avatarMax:
+              "/static/images/default_user_photo_size_200-200.png?hash=1927501797",
+            avatarMedium:
+              "/static/images/default_user_photo_size_48-48.png?hash=1927501797",
+            avatarSmall:
+              "/static/images/default_user_photo_size_32-32.png?hash=1927501797",
+            profileUrl: "",
+            hasAvatar: false,
+            isAnonim: false,
+          },
+        },
+      ],
+      current: {
+        parentId: 0,
+        filesCount: 0,
+        foldersCount: 0,
+        new: 0,
+        mute: false,
+        pinned: false,
+        private: false,
+        indexing: false,
+        denyDownload: false,
+        fileEntryType: 1,
+        id: 224866,
+        rootFolderId: 224866,
+        canShare: false,
+        security: {
+          Read: true,
+          Create: true,
+          Delete: false,
+          EditRoom: false,
+          Rename: false,
+          CopyTo: false,
+          Copy: false,
+          MoveTo: true,
+          Move: false,
+          Pin: false,
+          Mute: false,
+          EditAccess: false,
+          Duplicate: false,
+          Download: false,
+          CopySharedLink: false,
+          Reconnect: false,
+          CreateRoomFrom: false,
+          CopyLink: false,
+          Embed: false,
+          ChangeOwner: false,
+          IndexExport: false,
+          UseChat: false,
+        },
+        availableShareRights: {},
+        title: "AI agents",
+        access: 0,
+        shared: false,
+        sharedForUser: false,
+        parentShared: false,
+        shortWebUrl: "",
+        created: "2025-12-08T21:08:15.0000000+08:00",
+        createdBy: {
+          id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
+          displayName: "Administrator ",
+          avatar:
+            "/static/images/default_user_photo_size_82-82.png?hash=1731136677",
+          avatarOriginal:
+            "/static/images/default_user_photo_size_200-200.png?hash=1731136677",
+          avatarMax:
+            "/static/images/default_user_photo_size_200-200.png?hash=1731136677",
+          avatarMedium:
+            "/static/images/default_user_photo_size_48-48.png?hash=1731136677",
+          avatarSmall:
+            "/static/images/default_user_photo_size_32-32.png?hash=1731136677",
+          profileUrl: `${BASE_URL}/accounts/people/filter?search=test@gmail.com`,
+          hasAvatar: false,
+          isAnonim: false,
+        },
+        updated: "2025-12-08T21:08:15.0000000+08:00",
+        rootFolderType: 34,
+        updatedBy: {
+          id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
+          displayName: "Administrator ",
+          avatar:
+            "/static/images/default_user_photo_size_82-82.png?hash=1731136677",
+          avatarOriginal:
+            "/static/images/default_user_photo_size_200-200.png?hash=1731136677",
+          avatarMax:
+            "/static/images/default_user_photo_size_200-200.png?hash=1731136677",
+          avatarMedium:
+            "/static/images/default_user_photo_size_48-48.png?hash=1731136677",
+          avatarSmall:
+            "/static/images/default_user_photo_size_32-32.png?hash=1731136677",
+          profileUrl: `${BASE_URL}/accounts/people/filter?search=test@gmail.com`,
+          hasAvatar: false,
+          isAnonim: false,
+        },
+      },
+      pathParts: [
+        {
+          id: 224866,
+          title: "AI agents",
+          folderType: 34,
+        },
+      ],
+      startIndex: 0,
+      count: 1,
+      total: 1,
+      new: 0,
+    },
+    count: 1,
+    links: [
+      {
+        href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_AGENTS}`,
+        action: "GET",
+      },
+    ],
+    status: 0,
+    statusCode: 200,
+  };
+};
+
 export const aiAgentsHandler = ({
   withCreate,
   withListCreate,
+  aiAccess,
+  inRoom = true,
+  isDocAdmin,
 }: {
   withCreate?: boolean;
   withListCreate?: boolean;
+  aiAccess?: ShareAccessRights;
+  inRoom?: boolean;
+  isDocAdmin?: boolean;
 }) => {
+  if (aiAccess !== undefined) {
+    return new Response(
+      JSON.stringify(
+        getListWithCreate({ access: aiAccess, inRoom, isDocAdmin }),
+      ),
+    );
+  }
   if (withCreate) {
     return new Response(JSON.stringify(successEmptyWithCreate));
   }

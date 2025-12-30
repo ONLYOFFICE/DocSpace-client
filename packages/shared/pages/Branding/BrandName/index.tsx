@@ -123,7 +123,12 @@ export const BrandName = ({
   };
 
   return (
-    <div className={styles.brandName}>
+    <div
+      className={classNames(styles.brandName, {
+        ["isEnableBranding"]: !isSettingPaid,
+        ["settings_unavailable"]: !isSettingPaid,
+      })}
+    >
       {showNotAvailable ? <NotAvailable /> : null}
 
       <div className={classNames(styles.headerContainer, "header-container")}>
@@ -147,21 +152,14 @@ export const BrandName = ({
       </div>
 
       <Text
-        className={classNames(
-          styles.wlSubtitle,
-          "wl-subtitle settings_unavailable",
-        )}
+        className={classNames(styles.wlSubtitle, "wl-subtitle")}
         fontSize="13px"
       >
         {t("BrandNameSubtitle", { productName: t("Common:ProductName") })}
       </Text>
 
       <div className="settings-block">
-        <FieldContainer
-          id="fieldContainerBrandName"
-          isVertical
-          className="settings_unavailable"
-        >
+        <FieldContainer id="fieldContainerBrandName" isVertical>
           <TextInput
             testId="brand_name_input"
             className="brand-name input"

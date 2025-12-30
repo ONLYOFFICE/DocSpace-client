@@ -125,7 +125,7 @@ describe("<RowContent />", () => {
       </RowContent>,
     );
 
-    expect(screen.getByTestId("row-content")).toHaveStyle(customStyle);
+    expect(screen.getByTestId("row-content").style.backgroundColor).toBe("red");
   });
 
   it("handles onClick event", () => {

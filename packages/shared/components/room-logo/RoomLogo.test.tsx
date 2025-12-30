@@ -61,7 +61,7 @@ describe("<RoomLogo />", () => {
 
     expect(logo).toHaveAttribute("id", "testId");
     expect(logo).toHaveClass("test-class");
-    expect(logo).toHaveStyle({ color: "red" });
+    expect(logo.style.color).toBe("red");
   });
 
   describe("Checkbox functionality", () => {

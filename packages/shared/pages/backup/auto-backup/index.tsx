@@ -415,7 +415,7 @@ const AutomaticBackup = ({
           className={classNames(
             styles.backupModulesDescription,
             styles.settingsUnavailable,
-            "backup_modules-description settings_unavailable",
+            "backup_modules-description",
           )}
         >
           {t("Common:AutoBackupDescription", {
@@ -468,10 +468,7 @@ const AutomaticBackup = ({
               fontWeight={600}
               lineHeight="20px"
               noSelect
-              className={classNames(
-                styles.settingsUnavailable,
-                "settings_unavailable",
-              )}
+              className={styles.settingsUnavailable}
             >
               {t("Common:EnableAutomaticBackup")}
             </Text>
@@ -479,7 +476,7 @@ const AutomaticBackup = ({
           <Text
             className={classNames(
               styles.settingsUnavailable,
-              "backup_toggle-btn-description settings_unavailable",
+              "backup_toggle-btn-description",
             )}
           >
             {t("Common:EnableAutomaticBackupDescription")}

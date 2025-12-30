@@ -106,7 +106,7 @@ const BadgeWrapper = ({
 
 const Badges = ({
   t,
-  theme,
+  themeIsBase,
   item,
   isTrashFolder,
   showNew,
@@ -206,7 +206,7 @@ const Badges = ({
 
   const versionBadgeProps = {
     borderRadius: "50px",
-    color: theme.filesBadges.color,
+    color: globalColors.white,
     fontSize: "9px",
     fontWeight: 800,
     maxWidth: "60px",
@@ -352,7 +352,9 @@ const Badges = ({
               styles.versionBadge,
               "badge-version badge-version-current tablet-badge icons-group",
             )}
-            backgroundColor={theme.filesBadges.badgeBackgroundColor}
+            backgroundColor={
+              themeIsBase ? globalColors.gray : globalColors.grayDark
+            }
             label={t("Common:BadgeMyDraftTitle")}
             title={t("Common:BadgeMyDraftTitle")}
             {...versionBadgeProps}
@@ -403,7 +405,7 @@ const Badges = ({
             data-id={id}
             data-locked={!!locked}
             onClick={onIconLockClick}
-            color={theme.filesQuickButtons.sharedColor}
+            color={themeIsBase ? globalColors.lightIcons : globalColors.white}
             hoverColor="accent"
             title={t("Common:UnblockFile")}
           />
@@ -434,7 +436,9 @@ const Badges = ({
               styles.versionBadge,
               "badge-version badge-version-current tablet-badge icons-group",
             )}
-            backgroundColor={theme.filesBadges.badgeBackgroundColor}
+            backgroundColor={
+              themeIsBase ? globalColors.gray : globalColors.grayDark
+            }
             label={t("Common:VersionBadge", {
               version: countVersions as string,
             })}
@@ -500,10 +504,12 @@ const Badges = ({
                 styles.versionBadge,
                 "badge-version badge-version-current tablet-badge icons-group",
               )}
-              backgroundColor={theme.filesBadges.badgeBackgroundColor}
+              backgroundColor={
+                themeIsBase ? globalColors.gray : globalColors.grayDark
+              }
               label={t("Common:Preparing")}
               borderRadius="50px"
-              color={theme.filesBadges.color}
+              color={globalColors.white}
               fontSize="9px"
               fontWeight={700}
               data-tooltip-id={preparingForAITooltipId}

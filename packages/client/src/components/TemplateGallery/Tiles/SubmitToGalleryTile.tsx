@@ -48,6 +48,7 @@ const SubmitToGalleryTile: FC<SubmitToGalleryTileProps> = ({
   isSubmitTile,
   submitToGalleryTileIsVisible,
   viewMobile,
+  isKeyboardFocused,
 }) => {
   const { isBase } = useTheme();
 
@@ -112,6 +113,7 @@ const SubmitToGalleryTile: FC<SubmitToGalleryTileProps> = ({
           onClick={onSubmitToGallery}
           size={ButtonSize.small}
           label={t("FormGallery:UploadGallery")}
+          isHovered={isKeyboardFocused}
           scale
         />
       </div>

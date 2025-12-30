@@ -1,4 +1,4 @@
-FROM node:22-alpine
+FROM node:24-bookworm-slim
 
 # Install necessary build dependencies
 RUN apk add --no-cache python3 make g++ sqlite sqlite-dev

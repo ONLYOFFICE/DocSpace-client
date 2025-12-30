@@ -3190,7 +3190,7 @@ class FilesStore {
         "separator1",
         "duplicate-room",
         "download",
-        "change-room-owner",
+        "change-agent-owner",
         "leave-room",
         "delete",
       ];
@@ -3208,7 +3208,7 @@ class FilesStore {
       }
 
       if (!canChangeOwner) {
-        agentOptions = removeOptions(agentOptions, ["change-room-owner"]);
+        agentOptions = removeOptions(agentOptions, ["change-agent-owner"]);
       }
 
       if (!canRemoveAgent) {

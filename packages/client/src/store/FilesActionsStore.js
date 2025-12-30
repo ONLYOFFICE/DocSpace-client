@@ -962,13 +962,10 @@ class FilesActionStore {
 
     const userId = user?.id;
     if (!userId) {
-      toastr.error("User not authenticated");
       return Promise.resolve();
     }
 
     try {
-      toastr.info("Preparing encrypted file download...", null, 0, true);
-
       console.log(
         "[ENCRYPTION DEBUG] Fetching encryption access for file:",
         file.id,
@@ -980,8 +977,6 @@ class FilesActionStore {
       );
 
       if (!encryptionInfo || !encryptionInfo.fileKeys) {
-        toastr.clear();
-        toastr.error("No encryption keys found for this file");
         return Promise.resolve();
       }
 
@@ -990,8 +985,6 @@ class FilesActionStore {
       );
 
       if (!myFileKey) {
-        toastr.clear();
-        toastr.error("You don't have access to decrypt this file");
         return Promise.resolve();
       }
 
@@ -1025,9 +1018,6 @@ class FilesActionStore {
         encryptedAt: myFileKey.createOn || new Date().toISOString(),
       };
 
-      toastr.clear();
-      toastr.info("Decrypting file...", null, 0, true);
-
       const result = await downloadAndDecryptFile(
         downloadUrl,
         metadata,
@@ -1048,16 +1038,12 @@ class FilesActionStore {
 
       if (result.success && result.file) {
         triggerFileDownload(result.file);
-        toastr.clear();
-        toastr.success("File downloaded successfully");
       } else {
-        toastr.clear();
-        toastr.error(result.error || "Failed to decrypt file");
+        toastr.error(result.error);
       }
     } catch (error) {
       console.error("[ENCRYPTION DEBUG] Download error:", error);
-      toastr.clear();
-      toastr.error(error.message || "Failed to download encrypted file");
+      toastr.error(error.message);
     }
 
     return Promise.resolve();

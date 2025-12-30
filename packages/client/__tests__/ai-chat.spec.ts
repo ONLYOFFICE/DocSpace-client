@@ -429,6 +429,8 @@ test.describe("AI chat", () => {
       const toolCallHeader = page.getByTestId("tool-call-header");
       await expect(toolCallHeader).toBeVisible();
 
+      await toolCallHeader.click();
+
       await expect(page).toHaveScreenshot([
         "desktop",
         "ai-chat",

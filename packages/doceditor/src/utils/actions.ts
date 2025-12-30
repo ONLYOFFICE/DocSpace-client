@@ -43,6 +43,14 @@ import type {
   TSettings,
 } from "@docspace/shared/api/settings/types";
 
+import {
+  selfHandler,
+  settingsHandler,
+  colorThemeHandler,
+  deepLinkHandler,
+  openEditHandler,
+} from "@docspace/shared/__mocks__/e2e";
+
 import { logger } from "@/../logger.mjs";
 
 import type {
@@ -54,6 +62,8 @@ import type {
 } from "@/types";
 
 import { availableActions, REPLACED_URL_PATH } from "./constants";
+
+const IS_TEST = process.env.E2E_TEST;
 
 export async function getFillingSession(
   fillingSessionId: string,
@@ -319,7 +329,7 @@ export async function getUser(share?: string) {
     );
 
     if (!cookie?.includes("asc_auth_key")) return undefined;
-    const userRes = await fetch(getUserRes);
+    const userRes = IS_TEST ? selfHandler(null, hdrs) : await fetch(getUserRes);
 
     if (userRes.status === 401) return undefined;
 
@@ -360,7 +370,9 @@ export async function getSettings(share?: string) {
       undefined,
     );
 
-    const settingsRes = await fetch(getSettingsRes);
+    const settingsRes = IS_TEST
+      ? settingsHandler(hdrs)
+      : await fetch(getSettingsRes);
 
     if (settingsRes.status === 403) return `access-restricted`;
 
@@ -494,7 +506,7 @@ export async function openEdit(
       undefined,
     );
 
-    const res = await fetch(getConfig);
+    const res = IS_TEST ? openEditHandler() : await fetch(getConfig);
 
     const hostname = hdrs.get("x-forwarded-host");
 
@@ -569,7 +581,7 @@ export async function getColorTheme() {
       "GET",
     );
 
-    const res = await fetch(getSettingsRes);
+    const res = IS_TEST ? colorThemeHandler() : await fetch(getSettingsRes);
 
     if (!res.ok) {
       const hdrs = await headers();
@@ -600,7 +612,7 @@ export async function getDeepLinkSettings() {
       "GET",
     );
 
-    const res = await fetch(getSettingsRes);
+    const res = IS_TEST ? deepLinkHandler() : await fetch(getSettingsRes);
 
     if (!res.ok) {
       const hdrs = await headers();

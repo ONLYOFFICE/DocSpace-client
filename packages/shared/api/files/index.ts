@@ -75,6 +75,7 @@ import {
   TFormRoleMappingRequest,
   TFileFillingFormStatus,
   TShareToUser,
+  TFileEncryptionInfo,
 } from "./types";
 import type { TFileConvertId } from "../../dialogs/download-dialog/DownloadDialog.types";
 
@@ -1230,14 +1231,34 @@ export async function getIsEncryptionSupport() {
   return res;
 }
 
-export async function getEncryptionAccess(fileId: number | string) {
+export async function getFileEncryptionAccess(fileId: number | string) {
   const res = (await request({
     method: "get",
     url: `files/${fileId}/access`,
-    data: fileId,
-  })) as { [key: string]: string | boolean };
+  })) as TFileEncryptionInfo;
 
   return res;
+}
+
+export async function setFileEncryptionKeys(
+  fileId: number | string,
+  keys: Array<{
+    userId: string;
+    publicKeyId: string;
+    privateKeyEnc: string;
+  }>,
+) {
+  const res = await request({
+    method: "put",
+    url: `files/${fileId}/access`,
+    data: { keys },
+  });
+
+  return res;
+}
+
+export async function getEncryptionAccess(fileId: number | string) {
+  return getFileEncryptionAccess(fileId);
 }
 
 export async function updateFileStream(

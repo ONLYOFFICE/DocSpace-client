@@ -158,6 +158,7 @@ export type TFile = {
   external?: boolean;
   isLinkExpired?: boolean;
   dimensions?: TDimensions;
+  encrypted?: boolean;
 };
 
 export type TOpenEditRequest = {
@@ -578,4 +579,23 @@ export type TFileFillingFormStatus = {
 export type TShareToUser = {
   shareTo: string;
   access: ShareAccessRights;
+};
+
+export type TFileEncryptionInfo = {
+  userKeys: Array<{
+    id: string;
+    userId: string;
+    publicKey: string;
+    privateKeyEnc: string;
+    date: string;
+    cryptoEngineId: string;
+  }>;
+  fileKeys: Array<{
+    userId: string;
+    publicKeyId: string;
+    privateKeyEnc: string;
+    tenantId?: number;
+    fileId?: number;
+    createOn?: string;
+  }>;
 };

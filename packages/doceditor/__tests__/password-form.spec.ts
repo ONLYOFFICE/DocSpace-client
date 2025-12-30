@@ -32,7 +32,7 @@ import {
 import { expect, test } from "./fixtures/base";
 
 test.describe("Password form", () => {
-  test("Password form", async ({ page, mockRequest }) => {
+  test("Password form render", async ({ page, mockRequest }) => {
     await mockRequest.setHeaders("**/doceditor**", [
       HEADER_OPEN_EDIT_WITH_PASSWORD,
     ]);
@@ -43,7 +43,6 @@ test.describe("Password form", () => {
     await expect(form).toBeVisible();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "password-form",
       "password-form-render.png",
     ]);

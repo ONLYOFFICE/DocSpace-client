@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { BASE_URL } from "../../utils";
+import { BASE_URL, HEADER_OPEN_EDIT_WITH_PASSWORD } from "../../utils";
 
 export const PATH_OPEN_EDIT = /\/files\/file\/\d+\/openedit(?:\?.*)?$/;
 
@@ -254,6 +254,23 @@ const openEditSuccess = {
   statusCode: 200,
 };
 
-export const openEditHandler = () => {
+const openEditWithPassword = {
+  error: {
+    message: "Access denied",
+    type: "System.Security.SecurityException",
+    stack: "",
+    hresult: -2146233078,
+  },
+  status: 1,
+  statusCode: 403,
+};
+
+export const openEditHandler = (headers: Headers) => {
+  if (headers?.get(HEADER_OPEN_EDIT_WITH_PASSWORD)) {
+    return new Response(JSON.stringify(openEditWithPassword), {
+      status: 403,
+      headers: { "content-type": "application/json" },
+    });
+  }
   return new Response(JSON.stringify(openEditSuccess));
 };

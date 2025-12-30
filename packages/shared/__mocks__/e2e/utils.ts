@@ -89,3 +89,5 @@ export const HEADER_ENCRYPTION_SETTINGS_ENCRYPTED =
   "x-encryption-settings-encrypted";
 
 export const HEADER_WITHOUT_CUSTOMIZATION = "x-without-customization";
+
+export const HEADER_OPEN_EDIT_WITH_PASSWORD = "x-open-edit-with-password";

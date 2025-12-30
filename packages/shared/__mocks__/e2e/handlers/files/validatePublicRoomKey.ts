@@ -41,6 +41,27 @@ const validateSuccess = {
   statusCode: 200,
 };
 
+const validatePasswordSuccess = {
+  response: {
+    status: 3,
+    id: "24",
+    title: "public room",
+    tenantId: 1,
+    shared: false,
+    linkId: "621124e3-a7d3-4f9b-a123-f5b840a47cab",
+    isAuthenticated: false,
+    isRoom: true,
+    type: 1,
+  },
+  count: 1,
+  status: 0,
+  statusCode: 200,
+};
+
 export const validatePublicRoomKeyHandler = (): Response => {
   return new Response(JSON.stringify(validateSuccess));
+};
+
+export const validatePublicRoomKeyPasswordHandler = (): Response => {
+  return new Response(JSON.stringify(validatePasswordSuccess));
 };

@@ -71,19 +71,17 @@ export const test = base.extend<{
       });
     });
 
-    await page.route(
-      "*/**/doceditor/_next/public/images/**/*",
-      async (route, request) => {
-        const imagePath = request
-          .url()
-          .split("/doceditor/_next/public/images/")
-          .at(-1)!
-          .split("?")[0];
-        await route.fulfill({
-          path: `../../public/images/${imagePath}`,
-        });
-      },
-    );
+    await page.route("**/_next/public/images/**", async (route, request) => {
+      const { pathname } = new URL(request.url());
+      const rel = pathname.split("/public/images/").at(-1);
+      if (!rel) {
+        await route.fallback();
+        return;
+      }
+      await route.fulfill({
+        path: `../../public/images/${rel}`,
+      });
+    });
 
     await use(page);
   },

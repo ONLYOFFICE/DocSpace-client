@@ -30,82 +30,136 @@ import { initReactI18next } from "react-i18next";
 import Backend from "i18next-http-backend";
 import { LANGUAGE } from "../constants";
 import { createUpdatePrompt } from "./client/ui/update-prompt";
-import { SW_CONFIG, SWConfig } from "./config";
+import {
+  SW_CONFIG,
+  SWConfig,
+  ErrorType,
+  ErrorContext,
+  VersionInfo,
+  HealthStatus,
+  MAX_ERROR_HISTORY,
+  MAX_RETRY_DELAY_MS,
+  RETRY_JITTER_MS,
+  NETWORK_RESTORE_DELAY_MS,
+} from "./config";
 
-i18n
-  .use(Backend)
-  .use(initReactI18next)
-  .init({
-    load: "currentOnly",
-    ns: ["Common"],
-    defaultNS: "Common",
-    backend: {
-      backendOptions: [
-        {
-          loadPath: "../../client/public/locales/{{lng}}/{{ns}}.json",
-        },
-        {
-          loadPath: "../../../public/locales/{{lng}}/{{ns}}.json",
-        },
-      ],
-    },
-    lng: localStorage.getItem(LANGUAGE) || "en",
-    fallbackLng: "en",
-    interpolation: {
-      escapeValue: false,
-    },
-    react: {
-      useSuspense: false,
-    },
-  });
+let i18nInitialized = false;
 
-enum ErrorType {
-  NETWORK = "NETWORK",
-  REGISTRATION = "REGISTRATION",
-  UPDATE = "UPDATE",
-  UNKNOWN = "UNKNOWN",
+/**
+ * Initializes i18next for service worker UI translations.
+ * Called lazily to avoid side effects on module import.
+ */
+function initializeI18n(): void {
+  if (i18nInitialized) return;
+  i18nInitialized = true;
+
+  i18n
+    .use(Backend)
+    .use(initReactI18next)
+    .init({
+      load: "currentOnly",
+      ns: ["Common"],
+      defaultNS: "Common",
+      backend: {
+        backendOptions: [
+          {
+            loadPath: "../../client/public/locales/{{lng}}/{{ns}}.json",
+          },
+          {
+            loadPath: "../../../public/locales/{{lng}}/{{ns}}.json",
+          },
+        ],
+      },
+      lng: localStorage.getItem(LANGUAGE) || "en",
+      fallbackLng: "en",
+      interpolation: {
+        escapeValue: false,
+      },
+      react: {
+        useSuspense: false,
+      },
+    });
 }
 
-interface ErrorContext {
-  type: ErrorType;
-  message: string;
-  originalError: Error;
-  timestamp: number;
-  retryCount: number;
-}
-
-interface VersionInfo {
-  version: string;
-  buildHash: string;
-  buildDate: string;
-}
-
+/**
+ * Service Worker Manager for DocSpace applications.
+ *
+ * Provides a robust wrapper around the Workbox library for managing service worker
+ * registration, updates, and error handling. Features include:
+ *
+ * - **Automatic registration** with retry logic and exponential backoff
+ * - **Update detection** via periodic checks and visibility change events
+ * - **Version tracking** using build hashes from version.json
+ * - **Network awareness** with automatic retry on connection restore
+ * - **Error tracking** with classification and history
+ * - **Customizable callbacks** for React/MobX integration
+ *
+ * @example
+ * ```typescript
+ * import serviceWorker from '@docspace/shared/sw/worker';
+ *
+ * // Register with default options
+ * await serviceWorker.register();
+ *
+ * // Or with custom callbacks
+ * const sw = new ServiceWorker('/sw.js', {
+ *   onUpdateAvailable: (reloadOnly, applyUpdate) => {
+ *     if (confirm('Update available. Reload?')) {
+ *       applyUpdate();
+ *     }
+ *   },
+ *   onError: (error) => console.error('SW Error:', error),
+ * });
+ * await sw.register();
+ * ```
+ */
 export class ServiceWorker {
+  /** Workbox instance for service worker management */
   private wb?: Workbox;
-  private options: Partial<SWConfig>;
+
+  /** Merged configuration options */
+  private options: SWConfig;
+
+  /** Timer ID for periodic update checks */
   private updateTimer?: number;
-  private swUrl: string;
+
+  /** URL path to the service worker file */
+  private readonly swUrl: string;
+
+  /** Current retry attempt count */
   private retryCount: number = 0;
-  private maxRetries: number;
-  private retryDelay: number;
-  private exponentialBackoff: boolean;
+
+  /** Whether the device currently has network connectivity */
   private isOnline: boolean = true;
+
+  /** Circular buffer of recent errors for debugging */
   private errorHistory: ErrorContext[] = [];
+
+  /** Total number of registration attempts (including retries) */
   private registrationAttempts: number = 0;
+
+  /** Current build hash for detecting version changes */
   private currentBuildHash?: string;
 
+  /**
+   * Creates a new ServiceWorker manager instance.
+   *
+   * @param swUrl - Path to the service worker file (default: "/sw.js")
+   * @param options - Configuration options to override defaults from SW_CONFIG
+   */
   constructor(swUrl: string = "/sw.js", options: Partial<SWConfig> = {}) {
     this.swUrl = swUrl;
     this.options = {
       ...SW_CONFIG,
       ...options,
     };
-    this.maxRetries = this.options.maxRetries!;
-    this.retryDelay = this.options.retryDelay!;
-    this.exponentialBackoff = this.options.exponentialBackoff!;
     this.setupNetworkListeners();
   }
 
+  /**
+   * Lazily initializes the Workbox instance.
+   * @returns true if Workbox is available and initialized, false otherwise
+   */
   private ensureWorkbox(): boolean {
     if (this.wb) return true;
     if (typeof window === "undefined" || !("serviceWorker" in navigator)) {
@@ -119,31 +173,45 @@ export class ServiceWorker {
     return true;
   }
 
+  /**
+   * Sets up listeners for online/offline network events.
+   * Enables automatic retry when network connectivity is restored.
+   */
   private setupNetworkListeners(): void {
     if (typeof window === "undefined") return;
 
     window.addEventListener("online", () => {
-      console.log("[SW] Network connection restored");
+      this.log("Network connection restored");
       this.isOnline = true;
       this.handleNetworkRestore();
     });
 
     window.addEventListener("offline", () => {
-      console.log("[SW] Network connection lost");
+      this.log("Network connection lost");
       this.isOnline = false;
     });
 
     this.isOnline = navigator.onLine;
   }
 
+  /**
+   * Handles network restoration by retrying failed registration.
+   */
   private async handleNetworkRestore(): Promise<void> {
-    if (this.retryCount > 0 && this.retryCount < this.maxRetries) {
-      console.log("[SW] Network restored, attempting to retry registration");
-      await this.delay(1000);
+    if (this.retryCount > 0 && this.retryCount < this.options.maxRetries) {
+      this.log("Network restored, attempting to retry registration");
+      await this.delay(NETWORK_RESTORE_DELAY_MS);
       await this.register();
     }
   }
 
+  /**
+   * Classifies an error based on its message content.
+   * Used to determine retry behavior and callback invocation.
+   *
+   * @param error - The error to classify
+   * @returns The classified error type
+   */
   private classifyError(error: Error): ErrorType {
     const message = error.message.toLowerCase();
 
@@ -167,6 +235,14 @@ export class ServiceWorker {
     return ErrorType.UNKNOWN;
   }
 
+  /**
+   * Logs an error to the error history and console.
+   * Maintains a circular buffer of the most recent errors.
+   *
+   * @param error - The error that occurred
+   * @param type - The classified error type
+   * @param retryCount - Current retry attempt count
+   */
   private logError(error: Error, type: ErrorType, retryCount: number): void {
     const context: ErrorContext = {
       type,
@@ -178,83 +254,118 @@ export class ServiceWorker {
 
     this.errorHistory.push(context);
 
-    if (this.errorHistory.length > 10) {
+    if (this.errorHistory.length > MAX_ERROR_HISTORY) {
       this.errorHistory.shift();
     }
 
     console.error(
-      `[SW Error] Type: ${type}, Retry: ${retryCount}/${this.maxRetries}`,
+      `[SW Error] Type: ${type}, Retry: ${retryCount}/${this.options.maxRetries}`,
       error,
     );
   }
 
-  private calculateRetryDelay(attempt: number): number {
-    if (!this.exponentialBackoff) {
-      return this.retryDelay;
+  /**
+   * Logs a debug message if debug mode is enabled.
+   * @param message - Message to log
+   * @param args - Additional arguments to log
+   */
+  private log(message: string, ...args: unknown[]): void {
+    if (this.options.debug) {
+      console.log(`[SW] ${message}`, ...args);
     }
-
-    const exponentialDelay = this.retryDelay * Math.pow(2, attempt);
-    const jitter = Math.random() * 1000;
-    return Math.min(exponentialDelay + jitter, 30000);
   }
 
+  /**
+   * Calculates the delay before the next retry attempt.
+   * Uses exponential backoff with jitter if enabled.
+   *
+   * @param attempt - The current attempt number (1-based)
+   * @returns Delay in milliseconds
+   */
+  private calculateRetryDelay(attempt: number): number {
+    if (!this.options.exponentialBackoff) {
+      return this.options.retryDelay;
+    }
+
+    const exponentialDelay = this.options.retryDelay * Math.pow(2, attempt);
+    const jitter = Math.random() * RETRY_JITTER_MS;
+    return Math.min(exponentialDelay + jitter, MAX_RETRY_DELAY_MS);
+  }
+
+  /**
+   * Creates a promise that resolves after the specified delay.
+   * @param ms - Delay in milliseconds
+   */
   private delay(ms: number): Promise<void> {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
+  /**
+   * Determines whether a failed operation should be retried.
+   *
+   * @param error - The error that occurred
+   * @param retryCount - Current retry attempt count
+   * @returns true if the operation should be retried
+   */
   private shouldRetry(error: Error, retryCount: number): boolean {
-    if (retryCount >= this.maxRetries) {
+    if (retryCount >= this.options.maxRetries) {
       return false;
     }
 
     const errorType = this.classifyError(error);
 
     if (errorType === ErrorType.NETWORK && !this.isOnline) {
-      console.log("[SW] Skipping retry - device is offline");
+      this.log("Skipping retry - device is offline");
       return false;
     }
 
-    if (errorType === ErrorType.NETWORK || errorType === ErrorType.UPDATE) {
-      return true;
-    }
-
-    if (errorType === ErrorType.REGISTRATION) {
-      return true;
-    }
-
-    return false;
+    return (
+      errorType === ErrorType.NETWORK ||
+      errorType === ErrorType.UPDATE ||
+      errorType === ErrorType.REGISTRATION
+    );
   }
 
+  /**
+   * Sets up Workbox event listeners for service worker lifecycle events.
+   */
   private setupEventListeners(): void {
     if (!this.wb) return;
+
     this.wb.addEventListener("installed", (event) => {
-      console.log("Service worker installed", event);
+      this.log("Service worker installed", event);
       this.options.onInstalled?.();
     });
 
     this.wb.addEventListener("waiting", (event) => {
-      console.log("Service worker waiting", event);
+      this.log("Service worker waiting", event);
       this.showUpdatePrompt();
       this.options.onWaiting?.();
     });
 
     this.wb.addEventListener("controlling", () => {
-      console.log("Service worker controlling");
+      this.log("Service worker controlling");
       window.location.reload();
     });
 
     this.wb.addEventListener("message", (event) => {
       if (event.data.type === "CACHE_UPDATED") {
-        console.log("Cache updated", event.data);
+        this.log("Cache updated", event.data);
         this.options.onUpdate?.();
       }
     });
 
     this.wb.addEventListener("redundant", (event) => {
-      console.warn("Service worker became redundant", event);
+      console.warn("[SW] Service worker became redundant", event);
     });
   }
 
+  /**
+   * Shows an update prompt to the user.
+   * Uses the onUpdateAvailable callback if provided, otherwise falls back to DOM-based prompt.
+   *
+   * @param reloadOnly - If true, the update only requires a page reload (no SW skip waiting)
+   */
   private showUpdatePrompt(reloadOnly: boolean = false): void {
     const applyUpdate = () => {
       if (reloadOnly) {
@@ -270,6 +381,9 @@ export class ServiceWorker {
       return;
     }
 
+    // Initialize i18n lazily for DOM-based prompt
+    initializeI18n();
+
     // Fallback to DOM-based prompt
     createUpdatePrompt({
       message: i18n.t("Common:NewVersionAvailable"),
@@ -280,6 +394,10 @@ export class ServiceWorker {
     });
   }
 
+  /**
+   * Fetches version information from the server.
+   * @returns Version info object or null if fetch fails
+   */
   private async fetchVersionInfo(): Promise<VersionInfo | null> {
     try {
       const response = await fetch("/version.json", {
@@ -294,6 +412,10 @@ export class ServiceWorker {
     }
   }
 
+  /**
+   * Checks if a new application version is available by comparing build hashes.
+   * @returns true if a new version is detected
+   */
   private async checkForVersionUpdate(): Promise<boolean> {
     const versionInfo = await this.fetchVersionInfo();
     if (!versionInfo) return false;
@@ -301,14 +423,14 @@ export class ServiceWorker {
     // First time - store the current build hash
     if (!this.currentBuildHash) {
       this.currentBuildHash = versionInfo.buildHash;
-      console.log("[SW] Initial build hash:", this.currentBuildHash);
+      this.log("Initial build hash:", this.currentBuildHash);
       return false;
     }
 
     // Check if build hash changed
     if (versionInfo.buildHash !== this.currentBuildHash) {
-      console.log(
-        `[SW] New version detected! Current: ${this.currentBuildHash}, New: ${versionInfo.buildHash}`,
+      this.log(
+        `New version detected! Current: ${this.currentBuildHash}, New: ${versionInfo.buildHash}`,
       );
       return true;
     }
@@ -316,15 +438,19 @@ export class ServiceWorker {
     return false;
   }
 
+  /**
+   * Starts the periodic update check timer.
+   * Checks both version.json and service worker for updates.
+   */
   private startUpdateTimer(): void {
     if (this.options.updateInterval && this.options.updateInterval > 0) {
       this.updateTimer = window.setInterval(async () => {
         if (!this.isOnline) {
-          console.log("[SW] Skipping update check - device is offline");
+          this.log("Skipping update check - device is offline");
           return;
         }
 
-        console.log("[SW] Checking for updates...");
+        this.log("Checking for updates...");
 
         // Check for version.json changes (detects any script changes)
         const hasNewVersion = await this.checkForVersionUpdate();
@@ -338,10 +464,8 @@ export class ServiceWorker {
           const errorType = this.classifyError(error);
           this.logError(error, errorType, 0);
 
-          console.error("[SW] Update check failed:", error);
-
           if (errorType === ErrorType.UPDATE && this.isOnline) {
-            console.log("[SW] Will retry update check on next interval");
+            this.log("Will retry update check on next interval");
           }
 
           this.options.onError?.(error, 0);
@@ -350,6 +474,9 @@ export class ServiceWorker {
     }
   }
 
+  /**
+   * Stops the periodic update check timer.
+   */
   private stopUpdateTimer(): void {
     if (this.updateTimer) {
       clearInterval(this.updateTimer);
@@ -357,6 +484,10 @@ export class ServiceWorker {
     }
   }
 
+  /**
+   * Checks if the service worker file is available on the server.
+   * @returns true if the service worker file exists and is accessible
+   */
   private async swAvailable(): Promise<boolean> {
     try {
       if (typeof window === "undefined") return false;
@@ -369,11 +500,24 @@ export class ServiceWorker {
       }
       return !!res && res.ok;
     } catch (error) {
-      console.warn("SW availability check failed:", error);
+      console.warn("[SW] Availability check failed:", error);
       return false;
     }
   }
 
+  /**
+   * Registers the service worker with automatic retry on failure.
+   *
+   * This method:
+   * - Checks for service worker support
+   * - Skips registration on Next.js SSR pages
+   * - Verifies the service worker file is available
+   * - Sets up periodic update checks
+   * - Handles visibility change events for update checks
+   *
+   * @returns The ServiceWorkerRegistration if successful, undefined otherwise
+   * @throws Error if registration fails after all retry attempts
+   */
   async register(): Promise<ServiceWorkerRegistration | undefined> {
     if (typeof window === "undefined" || !("serviceWorker" in navigator)) {
       console.warn("[SW] Service worker not supported");
@@ -430,11 +574,10 @@ export class ServiceWorker {
 
       document.addEventListener("visibilitychange", () => {
         if (document.visibilityState === "visible") {
-          console.log("[SW] Tab visible, checking for updates...");
+          this.log("Tab visible, checking for updates...");
           this.wb?.update().catch((err) => {
             const errorType = this.classifyError(err);
             this.logError(err, errorType, 0);
-            console.error("[SW] Update check failed:", err);
           });
         }
       });
@@ -464,23 +607,32 @@ export class ServiceWorker {
     }
   }
 
+  /**
+   * Retries service worker registration with exponential backoff.
+   * @returns The registration if successful, undefined otherwise
+   */
   private async retryRegistration(): Promise<
     ServiceWorkerRegistration | undefined
   > {
     this.retryCount++;
-    const delay = this.calculateRetryDelay(this.retryCount);
+    const retryDelay = this.calculateRetryDelay(this.retryCount);
 
-    console.log(
-      `[SW] Retrying registration (${this.retryCount}/${this.maxRetries}) in ${Math.round(delay)}ms...`,
+    this.log(
+      `Retrying registration (${this.retryCount}/${this.options.maxRetries}) in ${Math.round(retryDelay)}ms...`,
     );
 
-    this.options.onRetry?.(this.retryCount, this.maxRetries);
+    this.options.onRetry?.(this.retryCount, this.options.maxRetries);
 
-    await this.delay(delay);
+    await this.delay(retryDelay);
 
     return this.register();
   }
 
+  /**
+   * Unregisters the service worker and stops update checks.
+   *
+   * @returns true if the service worker was successfully unregistered
+   */
   async unregister(): Promise<boolean> {
     this.stopUpdateTimer();
 
@@ -493,50 +645,79 @@ export class ServiceWorker {
     return false;
   }
 
+  /**
+   * Gets the current service worker registration.
+   *
+   * @returns The current registration or undefined if not registered
+   */
   async getRegistration(): Promise<ServiceWorkerRegistration | undefined> {
     if ("serviceWorker" in navigator) {
       return navigator.serviceWorker.getRegistration();
     }
   }
 
+  /**
+   * Forces the waiting service worker to become active immediately.
+   * This will trigger a page reload via the 'controlling' event.
+   */
   forceUpdate(): void {
     this.wb?.messageSkipWaiting();
   }
 
+  /**
+   * Returns a copy of the error history for debugging.
+   *
+   * @returns Array of error context objects
+   */
   getErrorHistory(): ErrorContext[] {
     return [...this.errorHistory];
   }
 
-  getHealthStatus(): {
-    isOnline: boolean;
-    retryCount: number;
-    maxRetries: number;
-    registrationAttempts: number;
-    errorCount: number;
-    lastError?: ErrorContext;
-  } {
+  /**
+   * Returns the current health status of the service worker manager.
+   * Useful for debugging and monitoring.
+   *
+   * @returns Health status object with connectivity and error information
+   */
+  getHealthStatus(): HealthStatus {
     return {
       isOnline: this.isOnline,
       retryCount: this.retryCount,
-      maxRetries: this.maxRetries,
+      maxRetries: this.options.maxRetries,
       registrationAttempts: this.registrationAttempts,
       errorCount: this.errorHistory.length,
       lastError: this.errorHistory[this.errorHistory.length - 1],
     };
   }
 
+  /**
+   * Clears the error history and resets retry counters.
+   * Useful for recovering from a series of failures.
+   */
   clearErrorHistory(): void {
     this.errorHistory = [];
     this.retryCount = 0;
     this.registrationAttempts = 0;
   }
 
+  /**
+   * Manually triggers a registration retry, resetting the retry counter.
+   * Useful for user-initiated recovery attempts.
+   *
+   * @returns The registration if successful, undefined otherwise
+   */
   async manualRetry(): Promise<ServiceWorkerRegistration | undefined> {
-    console.log("[SW] Manual retry triggered");
+    this.log("Manual retry triggered");
     this.retryCount = 0;
     return this.register();
   }
 
+  /**
+   * Sets a callback to be invoked when an update is available.
+   * Allows React/MobX components to handle update prompts.
+   *
+   * @param callback - Function called with (reloadOnly, applyUpdate)
+   */
   setUpdateCallback(
     callback: (reloadOnly: boolean, applyUpdate: () => void) => void,
   ): void {

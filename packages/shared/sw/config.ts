@@ -28,41 +28,168 @@ import packageJson from "../package.json";
 
 const APP_VERSION = packageJson.version;
 
+// ============================================================================
+// Constants
+// ============================================================================
+
+/** Maximum number of errors to keep in history */
+export const MAX_ERROR_HISTORY = 10;
+
+/** Maximum retry delay in milliseconds (30 seconds) */
+export const MAX_RETRY_DELAY_MS = 30000;
+
+/** Random jitter range for retry delays in milliseconds */
+export const RETRY_JITTER_MS = 1000;
+
+/** Delay before retrying after network restore in milliseconds */
+export const NETWORK_RESTORE_DELAY_MS = 1000;
+
+// ============================================================================
+// Enums
+// ============================================================================
+
+/**
+ * Classification of service worker errors for retry logic.
+ */
+export enum ErrorType {
+  /** Network-related errors (fetch failures, offline, connection issues) */
+  NETWORK = "NETWORK",
+  /** Service worker registration errors */
+  REGISTRATION = "REGISTRATION",
+  /** Service worker update errors */
+  UPDATE = "UPDATE",
+  /** Unclassified errors */
+  UNKNOWN = "UNKNOWN",
+}
+
+// ============================================================================
+// Interfaces
+// ============================================================================
+
+/**
+ * Context information for a service worker error.
+ * Used for error tracking and debugging.
+ */
+export interface ErrorContext {
+  /** The type/classification of the error */
+  type: ErrorType;
+  /** Human-readable error message */
+  message: string;
+  /** The original Error object */
+  originalError: Error;
+  /** Unix timestamp when the error occurred */
+  timestamp: number;
+  /** Number of retry attempts when this error occurred */
+  retryCount: number;
+}
+
+/**
+ * Version information from the server's version.json file.
+ * Used to detect application updates.
+ */
+export interface VersionInfo {
+  /** Semantic version string (e.g., "1.2.3") */
+  version: string;
+  /** Unique build hash for cache busting */
+  buildHash: string;
+  /** ISO date string of when the build was created */
+  buildDate: string;
+}
+
+/**
+ * Health status of the service worker manager.
+ * Provides diagnostic information about the current state.
+ */
+export interface HealthStatus {
+  /** Whether the device currently has network connectivity */
+  isOnline: boolean;
+  /** Current retry attempt count */
+  retryCount: number;
+  /** Maximum allowed retry attempts */
+  maxRetries: number;
+  /** Total registration attempts made */
+  registrationAttempts: number;
+  /** Number of errors in the error history */
+  errorCount: number;
+  /** The most recent error, if any */
+  lastError?: ErrorContext;
+}
+
+/**
+ * Configuration for cache storage limits.
+ */
 export interface CacheConfig {
+  /** Maximum number of entries to store in the cache */
   maxEntries: number;
+  /** Maximum age of cached entries in seconds */
   maxAgeSeconds: number;
 }
 
+/**
+ * A route pattern with its description for navigation handling.
+ */
 export interface RoutePattern {
+  /** Regular expression to match against the URL path */
   pattern: RegExp;
+  /** Human-readable description of what this pattern matches */
   description: string;
 }
 
+/**
+ * Configuration for navigation request handling.
+ */
 export interface NavigationConfig {
+  /** Patterns for SSR (Server-Side Rendered) applications that should bypass the service worker */
   ssrApps: RoutePattern[];
+  /** Patterns for URLs that should not be handled by the service worker */
   denylist: RoutePattern[];
 }
 
+/**
+ * Complete configuration for the service worker manager.
+ * Includes caching, navigation, retry logic, and callback options.
+ */
 export interface SWConfig {
+  /** Application version string */
   version: string;
+  /** Prefix for cache names */
   cachePrefix: string;
+  /** Suffix for cache names (typically includes version) */
   cacheSuffix: string;
+  /** Navigation request handling configuration */
   navigation: NavigationConfig;
+  /** Cache storage configuration */
   cache: {
+    /** Configuration for static assets cache */
     static: CacheConfig;
+    /** Configuration for locale/translation files cache */
     locales: CacheConfig;
   };
+  /** Interval in milliseconds between automatic update checks */
   updateInterval: number;
+  /** Maximum number of retry attempts for failed operations */
   maxRetries: number;
+  /** Base delay in milliseconds between retry attempts */
   retryDelay: number;
+  /** Whether to use exponential backoff for retry delays */
   exponentialBackoff: boolean;
+  /** Enable debug logging */
   debug: boolean;
+
+  // Callback options
+  /** Called when the service worker cache is updated */
   onUpdate?: () => void;
+  /** Called when the service worker is first installed */
   onInstalled?: () => void;
+  /** Called when a new service worker is waiting to activate */
   onWaiting?: () => void;
+  /** Called when an error occurs during registration or update */
   onError?: (error: Error, retryCount?: number) => void;
+  /** Called specifically for network-related errors */
   onNetworkError?: (error: Error) => void;
+  /** Called before each retry attempt */
   onRetry?: (attempt: number, maxAttempts: number) => void;
+  /** Called when an update is available; provides a function to apply the update */
   onUpdateAvailable?: (reloadOnly: boolean, applyUpdate: () => void) => void;
 }
 

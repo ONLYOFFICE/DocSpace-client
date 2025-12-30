@@ -24,7 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { FileEncryptionMetadata, AccessRequestKeyDto } from "./types";
+import type {
+  FileEncryptionMetadata,
+  ServerAccessRequestKeyDto,
+} from "./types";
 import { ENCRYPTION_CONSTANTS } from "./types";
 import {
   importPublicKey,
@@ -71,6 +74,12 @@ export class EncryptionService {
     recipientPublicKeyBase64: string,
     recipientUserId: string,
   ): Promise<EncryptFileResult> {
+    console.log("[EncryptionService] Starting file encryption:", {
+      fileName: file.name,
+      fileSize: file.size,
+      recipientUserId,
+    });
+
     const subtle = getCrypto();
     const recipientPublicKey = await importPublicKey(recipientPublicKeyBase64);
     const fileBuffer = await file.arrayBuffer();
@@ -111,12 +120,19 @@ export class EncryptionService {
       encryptedKeys: [
         {
           userId: recipientUserId,
-          data: encryptedAESKey,
+          publicKeyId: "",
+          privateKeyEnc: encryptedAESKey,
         },
       ],
       iv: arrayBufferToBase64(iv.buffer as ArrayBuffer),
       encryptedAt: new Date().toISOString(),
     };
+
+    console.log("[EncryptionService] File encrypted successfully:", {
+      originalSize: file.size,
+      encryptedSize: encryptedBlob.size,
+      hasMetadata: true,
+    });
 
     return { encryptedBlob, metadata };
   }
@@ -151,7 +167,7 @@ export class EncryptionService {
       fileBuffer,
     );
 
-    const encryptedKeys: AccessRequestKeyDto[] = await Promise.all(
+    const encryptedKeys = await Promise.all(
       recipients.map(async (recipient) => {
         const publicKey = await importPublicKey(recipient.publicKeyBase64);
         const encryptedAESKey = await encryptAESKeyWithRSA(
@@ -160,7 +176,8 @@ export class EncryptionService {
         );
         return {
           userId: recipient.userId,
-          data: encryptedAESKey,
+          publicKeyId: "",
+          privateKeyEnc: encryptedAESKey,
         };
       }),
     );
@@ -201,7 +218,7 @@ export class EncryptionService {
 
     let aesKeyRaw: Uint8Array;
     try {
-      aesKeyRaw = await decryptAESKeyWithRSA(userKey.data, privateKey);
+      aesKeyRaw = await decryptAESKeyWithRSA(userKey.privateKeyEnc, privateKey);
     } catch {
       throw new Error(
         "Failed to decrypt file key - you may not have access to this file",
@@ -246,7 +263,7 @@ export class EncryptionService {
     for (const encryptedKey of metadata.encryptedKeys) {
       try {
         const aesKeyRaw = await decryptAESKeyWithRSA(
-          encryptedKey.data,
+          encryptedKey.privateKeyEnc,
           privateKey,
         );
 
@@ -279,7 +296,7 @@ export class EncryptionService {
     currentUserId: string,
     newRecipientPublicKeyBase64: string,
     newRecipientUserId: string,
-  ): Promise<AccessRequestKeyDto> {
+  ): Promise<ServerAccessRequestKeyDto> {
     const currentUserKey = metadata.encryptedKeys.find(
       (k) => k.userId === currentUserId,
     );
@@ -288,7 +305,7 @@ export class EncryptionService {
     }
 
     const aesKeyRaw = await decryptAESKeyWithRSA(
-      currentUserKey.data,
+      currentUserKey.privateKeyEnc,
       privateKey,
     );
 
@@ -303,7 +320,8 @@ export class EncryptionService {
 
     return {
       userId: newRecipientUserId,
-      data: encryptedAESKey,
+      publicKeyId: newRecipientPublicKeyBase64,
+      privateKeyEnc: encryptedAESKey,
     };
   }
 

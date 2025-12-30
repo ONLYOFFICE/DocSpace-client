@@ -45,15 +45,10 @@ export type PrivacyRoomKeysResponse = {
   isSet: boolean;
 };
 
-export type AccessRequestKeyDto = {
-  userId: string;
-  data: string;
-};
-
 export type ServerAccessRequestKeyDto = {
-  userId: string;
-  publicKeyId: string;
-  privateKeyEnc: string;
+  userId: string; // GUID of user who can decrypt
+  publicKeyId: string; // GUID of the public key used to encrypt
+  privateKeyEnc: string; // RSA-encrypted AES symmetric key (base64)
 };
 
 export type FileEncryptionMetadata = {
@@ -61,9 +56,10 @@ export type FileEncryptionMetadata = {
   version: number;
   encryptionAlgorithm: "AES-256-GCM";
   keyEncryptionAlgorithm: "RSA-OAEP-SHA256";
-  encryptedKeys: AccessRequestKeyDto[];
+  encryptedKeys: ServerAccessRequestKeyDto[];
   iv: string;
   encryptedAt: string;
+  publicKeyId?: string;
 };
 
 export type KeyStatus = {
@@ -87,6 +83,17 @@ export type CachedKeyPair = {
   privateKeyPkcs8: string;
   expiresAt: number;
 };
+
+export function convertMetadataToServerFormat(
+  metadata: FileEncryptionMetadata,
+  publicKeyId: string,
+): ServerAccessRequestKeyDto[] {
+  return metadata.encryptedKeys.map((key) => ({
+    userId: key.userId,
+    publicKeyId: publicKeyId,
+    privateKeyEnc: key.privateKeyEnc, // RSA-encrypted AES key
+  }));
+}
 
 export const ENCRYPTION_CONSTANTS = {
   RSA_KEY_SIZE: 2048,

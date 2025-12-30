@@ -790,7 +790,7 @@ test.describe("AI chat", () => {
         endpoints.aiRoomsChats,
         endpoints.agentFolderChat,
         endpoints.aiChat,
-        endpoints.exportChatMessage,
+        endpoints.exportAiChatToFile,
         endpoints.settingsWithSocket,
       ]);
 
@@ -853,6 +853,61 @@ test.describe("AI chat", () => {
 
       await expect(page.getByTestId("toast-content")).toContainText(
         "Lorem ipsum",
+      );
+
+      wsMock.closeConnection();
+    });
+
+    test("should save message to file", async ({
+      page,
+      mockRequest,
+      wsMock,
+    }) => {
+      await mockRequest.router([
+        endpoints.aiRoomsChatsConfigAllEnabled,
+        endpoints.aiRoomsServersEmpty,
+        endpoints.aiRoomsChats,
+        endpoints.agentFolderChat,
+        endpoints.aiChat,
+        endpoints.exportAiMessageToFile,
+        endpoints.settingsWithSocket,
+        endpoints.aiChatMessages,
+      ]);
+
+      await wsMock.setupWebSocketMock();
+
+      await page.goto("/ai-agents/2/chat?folder=2&chat=test-chat-id");
+
+      const containerLoader = page.getByTestId("chat-container-loading");
+
+      await expect(containerLoader).toBeVisible();
+      await containerLoader.waitFor({ state: "hidden" });
+
+      await page.unroute(endpoints.agentFolderChat.url);
+
+      await mockRequest.router([
+        endpoints.resultStorageFolder,
+        endpoints.resultStorageFolderInfo,
+      ]);
+
+      await expect(page.getByTestId("ai-message")).toBeVisible();
+      await page.getByTitle("Save to file").click();
+
+      await page.getByTestId("selector_submit_button").click();
+
+      wsMock.emitExportChat({
+        resultFile: {
+          fileEntryType: 2,
+          folderId: 0,
+          id: 979633,
+          title: "Test message",
+          version: 1,
+          versionGroup: 1,
+        } as TFile,
+      });
+
+      await expect(page.getByTestId("toast-content")).toContainText(
+        "Test message",
       );
 
       wsMock.closeConnection();

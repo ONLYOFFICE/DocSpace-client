@@ -220,10 +220,12 @@ import {
   PATH_AI_CHAT_MESSAGES,
   aiChatMessagesHandler,
   aiChatPutHandler,
-  aiChatMessageExportHandler,
-  PATH_AI_CHAT_MESSAGE_EXPORT,
+  aiChatMessagesExportHandler,
+  PATH_AI_CHAT_MESSAGES_EXPORT,
   PATH_AI_ROOMS_CHATS_STREAM,
   aiRoomsChatsStreamHandler,
+  PATH_AI_MESSAGES_EXPORT,
+  aiMessagesExportHandler,
 } from "./ai";
 import { PATH_TAGS, roomTagsHandler } from "./rooms";
 import {
@@ -719,9 +721,13 @@ export const endpoints = {
     url: `${BASE_URL}${PATH_AI_CHAT_MESSAGES}`,
     dataHandler: () => aiChatMessagesHandler("mcpTool"),
   },
-  exportChatMessage: {
-    url: `${BASE_URL}${PATH_AI_CHAT_MESSAGE_EXPORT}`,
-    dataHandler: aiChatMessageExportHandler,
+  exportAiChatToFile: {
+    url: `${BASE_URL}${PATH_AI_CHAT_MESSAGES_EXPORT}`,
+    dataHandler: aiChatMessagesExportHandler,
+  },
+  exportAiMessageToFile: {
+    url: `${BASE_URL}${PATH_AI_MESSAGES_EXPORT}`,
+    dataHandler: aiMessagesExportHandler,
   },
   aiRoomsChatsConfigAllEnabled: {
     url: `${BASE_URL}${PATH_AI_ROOMS_CHATS_CONFIG}`,

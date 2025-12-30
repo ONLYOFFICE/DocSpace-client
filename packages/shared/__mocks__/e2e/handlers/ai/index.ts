@@ -83,3 +83,5 @@ export * from "./roomsChats";
 export * from "./chat";
 
 export * from "./chatMessages";
+
+export * from "./messages";

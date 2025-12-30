@@ -29,7 +29,7 @@
 import { API_PREFIX, BASE_URL } from "../../utils";
 
 export const PATH_AI_CHAT_MESSAGES = "ai/chats/*/messages?*";
-export const PATH_AI_CHAT_MESSAGE_EXPORT = "ai/chats/*/messages/export";
+export const PATH_AI_CHAT_MESSAGES_EXPORT = "ai/chats/*/messages/export";
 
 const defaultTextContent =
   "## Hi\n\nI’m here and ready to help inside DocSpace.\n\n## What you can do next\n- Ask about **rooms, folders, files, users, and permissions**\n- Describe a collaboration task (e.g., “set up a room for project X with view-only access for guests”), and I’ll guide you step by step";
@@ -798,6 +798,6 @@ export const aiChatMessagesHandler = (
   }
 };
 
-export const aiChatMessageExportHandler = () => {
+export const aiChatMessagesExportHandler = () => {
   return new Response(JSON.stringify(successExportMessage));
 };

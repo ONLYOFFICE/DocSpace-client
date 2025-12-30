@@ -141,7 +141,7 @@ describe("<TableRow />", () => {
 
     const tableRow = screen.getByTestId("table-row");
 
-    expect(tableRow).toHaveStyle("background-color: red");
+    expect(tableRow.style.backgroundColor).toBe("red");
   });
 
   it("passes contextMenuCellStyle as style to TableCell", () => {
@@ -155,7 +155,7 @@ describe("<TableRow />", () => {
 
     const cell = screen.getByTestId("table-cell");
 
-    expect(cell).toHaveStyle("background-color: blue");
+    expect(cell.style.backgroundColor).toBe("blue");
   });
 
   it("spreads selectionProp to TableCell", () => {

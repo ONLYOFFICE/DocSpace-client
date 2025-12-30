@@ -141,7 +141,7 @@ describe("LinkWithDropdown", () => {
     );
 
     const button = screen.getByRole("button", { name: "Link with dropdown" });
-    expect(button).toHaveStyle({ color: "red" });
+    expect(button.style.color).toBe("red");
   });
 
   it("handles disabled state", () => {

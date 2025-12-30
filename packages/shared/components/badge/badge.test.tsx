@@ -87,11 +87,9 @@ describe("<Badge />", () => {
       renderComponent(customProps);
       const badge = screen.getByTestId("badge");
 
-      expect(badge).toHaveStyle({
-        height: "30px",
-        border: "1px solid black",
-        borderRadius: "5px",
-      });
+      expect(badge.style.height).toBe("30px");
+      expect(badge.style.border).toBe("1px solid black");
+      expect(badge.style.borderRadius).toBe("5px");
     });
   });
 

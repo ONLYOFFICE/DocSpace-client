@@ -11,7 +11,7 @@ on:
       [packages/**, common/**, .github/workflows/frontend-common-tests.yaml]
 
 env:
-  NODE_VERSION: 22.x
+  NODE_VERSION: 24.x
   PNPM_VERSION: 10.26.0
 
 jobs:

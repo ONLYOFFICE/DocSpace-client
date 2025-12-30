@@ -604,6 +604,7 @@ const ContextMenu = (props: ContextMenuProps) => {
     model: model ?? getContextModel?.() ?? propsModel,
     currentEvent,
     hide,
+    showDisabledItems,
   });
 
   const renderContextMenu = () => {

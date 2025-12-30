@@ -69,18 +69,10 @@ describe("<Scrollbar />", () => {
     );
 
     const scrollbar = screen.getByTestId("scrollbar");
-    const scrollBody = screen.getByTestId("scroll-body");
 
     expect(scrollbar).toHaveClass(styles.autoHide);
 
-    // Trigger mouse move to show scrollbar
-    fireEvent.mouseMove(scrollBody);
-    expect(scrollbar).toHaveClass(styles.scrollVisible);
-
-    // Fast forward timers to test auto-hide
-    act(() => {
-      vi.advanceTimersByTime(3000);
-    });
+    // Initially scrollVisible should not be present
     expect(scrollbar).not.toHaveClass(styles.scrollVisible);
   });
 

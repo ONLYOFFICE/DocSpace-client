@@ -53,7 +53,17 @@ export interface SWConfig {
     locales: CacheConfig;
   };
   updateInterval: number;
+  maxRetries: number;
+  retryDelay: number;
+  exponentialBackoff: boolean;
   debug: boolean;
+  onUpdate?: () => void;
+  onInstalled?: () => void;
+  onWaiting?: () => void;
+  onError?: (error: Error, retryCount?: number) => void;
+  onNetworkError?: (error: Error) => void;
+  onRetry?: (attempt: number, maxAttempts: number) => void;
+  onUpdateAvailable?: (reloadOnly: boolean, applyUpdate: () => void) => void;
 }
 
 export const SW_CONFIG: SWConfig = {
@@ -106,6 +116,9 @@ export const SW_CONFIG: SWConfig = {
   },
 
   updateInterval: 60 * 1000, // 1 minute // 60 * 60 * 1000, // 1 hour
+  maxRetries: 3,
+  retryDelay: 2000, // 2 seconds
+  exponentialBackoff: true,
   debug: true,
 };
 

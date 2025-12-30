@@ -30,6 +30,7 @@ import { initReactI18next } from "react-i18next";
 import Backend from "i18next-http-backend";
 import { LANGUAGE } from "../constants";
 import { createUpdatePrompt } from "./client/ui/update-prompt";
+import { SW_CONFIG, SWConfig } from "./config";
 
 i18n
   .use(Backend)
@@ -58,20 +59,6 @@ i18n
     },
   });
 
-interface SwUpdateOptions {
-  onUpdate?: () => void;
-  onInstalled?: () => void;
-  onWaiting?: () => void;
-  onError?: (error: Error, retryCount?: number) => void;
-  onNetworkError?: (error: Error) => void;
-  onRetry?: (attempt: number, maxAttempts: number) => void;
-  onUpdateAvailable?: (reloadOnly: boolean, applyUpdate: () => void) => void;
-  updateInterval?: number;
-  maxRetries?: number;
-  retryDelay?: number;
-  exponentialBackoff?: boolean;
-}
-
 enum ErrorType {
   NETWORK = "NETWORK",
   REGISTRATION = "REGISTRATION",
@@ -95,7 +82,7 @@ interface VersionInfo {
 
 export class ServiceWorker {
   private wb?: Workbox;
-  private options: SwUpdateOptions;
+  private options: Partial<SWConfig>;
   private updateTimer?: number;
   private swUrl: string;
   private retryCount: number = 0;
@@ -107,13 +94,10 @@ export class ServiceWorker {
   private registrationAttempts: number = 0;
   private currentBuildHash?: string;
 
-  constructor(swUrl: string = "/sw.js", options: SwUpdateOptions = {}) {
+  constructor(swUrl: string = "/sw.js", options: Partial<SWConfig> = {}) {
     this.swUrl = swUrl;
     this.options = {
-      updateInterval: 60 * 1000, // 1 minute // 60 * 60 * 1000, // 1 hour
-      maxRetries: 3,
-      retryDelay: 2000, // 2 seconds
-      exponentialBackoff: true,
+      ...SW_CONFIG,
       ...options,
     };
     this.maxRetries = this.options.maxRetries!;

@@ -84,6 +84,12 @@
     height: 28px;
     padding: 0;
 
+    &:focus {
+      background: var(--button-background-base-hover);
+      color: var(--button-color-base-hover);
+      border: var(--button-border-base-hover);
+    }
+
     :global(.button-content) {
       font-weight: 600;
       font-size: 12px;

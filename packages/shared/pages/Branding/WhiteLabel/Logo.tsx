@@ -56,11 +56,7 @@ export const Logo = (props: ILogoProps) => {
     <div>
       <div className={styles.logoItem}>
         {title ? (
-          <Text
-            fontSize="13px"
-            fontWeight="600"
-            className="settings_unavailable"
-          >
+          <Text fontSize="13px" fontWeight="600">
             {title}
           </Text>
         ) : null}
@@ -87,7 +83,6 @@ export const Logo = (props: ILogoProps) => {
           fontWeight="600"
           isHovered
           type={LinkType.action}
-          className="settings_unavailable"
           dataTestId={dataTestId}
         >
           {onChangeText}

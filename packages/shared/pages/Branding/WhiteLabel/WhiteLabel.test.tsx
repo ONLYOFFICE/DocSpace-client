@@ -62,7 +62,6 @@ const defaultProps = {
   isSettingPaid: true,
   logoUrls: mockLogos,
   showAbout: true,
-  showNotAvailable: false,
   standalone: false,
   onSave: vi.fn(),
   onRestoreDefault: vi.fn(),

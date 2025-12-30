@@ -79,4 +79,7 @@ export interface TilesProps {
   isShowInitSkeleton: boolean;
   setIsVisibleInfoPanelTemplateGallery: (visible: boolean) => void;
   onCreateTemplate: () => void;
+  hotkeysResetKey?: unknown;
+  hasSubmitTile?: boolean;
+  setSubmitToGalleryDialogVisible: (isVisible: boolean) => void;
 }

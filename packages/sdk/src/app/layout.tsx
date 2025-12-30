@@ -36,7 +36,6 @@ import "@docspace/shared/styles/theme.scss";
 import "@/styles/globals.scss";
 import { getColorTheme, getPortalCultures, getSettings } from "@/api/settings";
 import { LOCALE_HEADER, THEME_HEADER } from "@/utils/constants";
-import StyledComponentsRegistry from "@/utils/registry";
 import Providers from "@/providers";
 import { getSelf } from "@/api/people";
 import Scripts from "@/components/Scripts";
@@ -118,23 +117,20 @@ export default async function RootLayout({
         <meta name="apple-mobile-web-app-capable" content="yes" />
       </head>
       <body style={styles} className={`${dirClass} ${themeClass}`}>
-        <StyledComponentsRegistry>
-          <Providers
-            contextData={{
-              initialTheme: theme,
-              user: self,
-              settings:
-                typeof portalSettings === "string" ? undefined : portalSettings,
-              systemTheme,
-              colorTheme,
-              locale,
-              portalCultures,
-            }}
-          >
-            {children}
-          </Providers>
-        </StyledComponentsRegistry>
-
+        <Providers
+          contextData={{
+            initialTheme: theme,
+            user: self,
+            settings:
+              typeof portalSettings === "string" ? undefined : portalSettings,
+            systemTheme,
+            colorTheme,
+            locale,
+            portalCultures,
+          }}
+        >
+          {children}
+        </Providers>
         <Scripts />
       </body>
     </html>

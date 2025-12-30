@@ -28,7 +28,6 @@ import { makeAutoObservable, runInAction } from "mobx";
 
 import OformsFilter from "@docspace/shared/api/oforms/filter";
 import {
-  getGuideLinkByLocale,
   submitToGallery,
   getOformLocales,
   getOforms,
@@ -48,6 +47,8 @@ const myDocumentsFolderId = 2;
 
 class OformsStore {
   settingsStore;
+
+  treeFoldersStore;
 
   userStore = null;
 
@@ -89,9 +90,10 @@ class OformsStore {
     "submitToGalleryTileIsHidden",
   );
 
-  constructor(settingsStore, userStore) {
+  constructor(settingsStore, userStore, treeFoldersStore) {
     this.settingsStore = settingsStore;
     this.userStore = userStore;
+    this.treeFoldersStore = treeFoldersStore;
     makeAutoObservable(this);
   }
 
@@ -323,13 +325,6 @@ class OformsStore {
     return categories;
   };
 
-  fetchGuideLink = async (locale = this.defaultOformLocale) => {
-    const { uploadDomain, uploadDashboard } = this.settingsStore.formGallery;
-    const url = combineUrl(uploadDomain, uploadDashboard, `/blog-links`);
-    const guideLink = await getGuideLinkByLocale(url, locale);
-    return guideLink;
-  };
-
   filterOformsByCategory = (categorizeBy, categoryId) => {
     if (!categorizeBy || !categoryId) this.currentCategory = null;
 
@@ -370,7 +365,10 @@ class OformsStore {
   initTemplateGallery = async () => {
     await this.fetchOformLocales();
 
-    const firstLoadFilter = OformsFilter.getDefaultDocx();
+    const firstLoadFilter = this.treeFoldersStore.isFormRoomRoot
+      ? OformsFilter.getDefault()
+      : OformsFilter.getDefaultDocx();
+
     firstLoadFilter.locale = this.defaultOformLocale;
 
     await Promise.all([

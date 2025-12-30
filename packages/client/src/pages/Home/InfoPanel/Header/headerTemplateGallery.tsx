@@ -24,21 +24,53 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
 import { AsideHeader } from "@docspace/shared/components/aside-header";
+import { useEventListener } from "@docspace/shared/hooks/useEventListener";
 
 import styles from "./Header.module.scss";
 
 type InfoPanelHeaderTemplateGalleryProps = {
   onClose?: () => void;
+  isVisible?: boolean;
 };
 
 const InfoPanelHeaderTemplateGallery = ({
   onClose,
+  isVisible,
 }: InfoPanelHeaderTemplateGalleryProps) => {
   const { t } = useTranslation(["Common", "InfoPanel"]);
+
+  const keydownOptionsRef = useRef({ capture: true, passive: false });
+
+  useEventListener(
+    "keydown",
+    (e: KeyboardEvent) => {
+      if (!isVisible) return;
+
+      const target = e.target as HTMLElement | null;
+      const tagName = target?.tagName;
+      const isEditable =
+        tagName === "INPUT" ||
+        tagName === "TEXTAREA" ||
+        Boolean(target?.isContentEditable);
+
+      if (isEditable) return;
+
+      if (e.key === "Escape") {
+        e.preventDefault();
+        e.stopPropagation();
+        (e as unknown as { stopImmediatePropagation?: () => void })
+          .stopImmediatePropagation?.();
+        onClose?.();
+      }
+    },
+    undefined,
+    keydownOptionsRef.current,
+  );
 
   return (
     <div className={classNames(styles.infoPanelHeader)}>

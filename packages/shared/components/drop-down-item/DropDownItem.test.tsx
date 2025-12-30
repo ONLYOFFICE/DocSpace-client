@@ -119,7 +119,7 @@ describe("<DropDownItem />", () => {
     const style = { backgroundColor: "red" };
     render(<DropDownItem {...baseProps} style={style} />);
     const item = screen.getByTestId("drop-down-item");
-    expect(item).toHaveStyle(style);
+    expect(item.style.backgroundColor).toBe("red");
   });
 
   it("renders with additional element", () => {

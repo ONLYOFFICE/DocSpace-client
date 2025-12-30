@@ -57,6 +57,7 @@ export const HEADER_NO_STANDALONE_SETTINGS =
 
 export const HEADER_ROOMS_LIST = "x-test-data-rooms-list";
 export const HEADER_FILTERED_ROOMS_LIST = "x-test-data-filtered-rooms-list";
+export const CONTEXT_MENU_ROOMS_LIST = "x-test-data-context-menu-rooms-list";
 
 export const HEADER_EMPTY_FOLDER = "x-test-data-empty-folder";
 export const HEADER_FILTERED_FOLDER = "x-test-data-filtered-folder";
@@ -88,6 +89,8 @@ export const HEADER_OPEN_SOURCE = "x-open-source";
 
 export const HEADER_ENCRYPTION_SETTINGS_ENCRYPTED =
   "x-encryption-settings-encrypted";
+
+export const HEADER_WITHOUT_CUSTOMIZATION = "x-without-customization";
 
 export const buildSseBody = (events: { event: string; data: unknown }[]) =>
   events

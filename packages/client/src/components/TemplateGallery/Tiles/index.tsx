@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Key, useEffect } from "react";
+import { Key, useEffect, useCallback } from "react";
 import { observer, inject } from "mobx-react";
 
 import { withTranslation } from "react-i18next";
@@ -35,6 +35,7 @@ import FileTile from "./FileTile";
 
 import InfiniteGrid from "../InfiniteGrid";
 import SubmitToGalleryTile from "./SubmitToGalleryTile";
+import useTemplateGalleryHotkeys from "../hooks/useTemplateGalleryHotkeys";
 
 const Tiles: FC<TilesProps> = ({
   tReady,
@@ -52,22 +53,66 @@ const Tiles: FC<TilesProps> = ({
   onCreateTemplate,
   setTemplateGalleryVisible,
   isShowInitSkeleton,
+  hotkeysResetKey,
+  setSubmitToGalleryDialogVisible,
 }) => {
   useEffect(() => {
     setOformFilesLoaded(tReady && oformFiles?.length > 0);
   }, [tReady, oformFiles]);
 
-  const onClickInfo = (item: { id: Key | null | undefined }) => {
-    if (!item) return;
-    setIsVisibleInfoPanelTemplateGallery(true);
-    setGallerySelected(item);
-  };
+  const onClickInfo = useCallback(
+    (item: { id: Key | null | undefined }) => {
+      if (!item) return;
+      setIsVisibleInfoPanelTemplateGallery(true);
+      setGallerySelected(item);
+    },
+    [setIsVisibleInfoPanelTemplateGallery, setGallerySelected],
+  );
 
-  const onClick = (item: { id: Key | null | undefined }) => {
-    setGallerySelected(item);
-    onCreateTemplate();
-    setTemplateGalleryVisible(false);
-  };
+  const onClick = useCallback(
+    (item: { id: Key | null | undefined }) => {
+      setGallerySelected(item);
+      onCreateTemplate();
+      setTemplateGalleryVisible(false);
+      setSubmitToGalleryDialogVisible(false);
+    },
+    [setGallerySelected, onCreateTemplate, setTemplateGalleryVisible],
+  );
+
+  const handleSelectByIndex = useCallback(
+    (index: number) => {
+      if (oformFiles && oformFiles[index]) {
+        onClick(oformFiles[index]);
+      }
+    },
+    [oformFiles, onClick],
+  );
+
+  const handleInfoSelectByIndex = useCallback(
+    (index: number) => {
+      if (oformFiles && oformFiles[index]) {
+        onClickInfo(oformFiles[index]);
+      }
+    },
+    [oformFiles, onClickInfo],
+  );
+
+  const hasSubmitTile =
+    !isShowInitSkeleton &&
+    submitToGalleryTileIsVisible &&
+    canSubmitToFormGallery() &&
+    (oformFiles?.length || 0) > 0;
+
+  const { focusedIndex, isSubmitTileFocused } = useTemplateGalleryHotkeys({
+    itemsCount: oformFiles?.length || 0,
+    isShowOneTile,
+    onSelect: handleSelectByIndex,
+    onInfoSelect: handleInfoSelectByIndex,
+    enabled: !isShowInitSkeleton,
+    resetKey: hotkeysResetKey,
+    hasSubmitTile,
+    submitTileSpan: smallPreview || viewMobile ? 2 : 1,
+  });
 
   const submitToGalleryTileNode =
     submitToGalleryTileIsVisible &&
@@ -77,6 +122,7 @@ const Tiles: FC<TilesProps> = ({
         viewMobile={viewMobile}
         smallPreview={smallPreview}
         isSubmitTile
+        isKeyboardFocused={isSubmitTileFocused}
       />
     ) : null;
 
@@ -94,7 +140,7 @@ const Tiles: FC<TilesProps> = ({
         {viewMobile && !isShowInitSkeleton ? null : submitToGalleryTileNode}
         {isShowInitSkeleton
           ? null
-          : oformFiles.map((item: TFile) => {
+          : oformFiles.map((item: TFile, index: number) => {
               return (
                 <FileTile
                   key={item.id}
@@ -102,6 +148,7 @@ const Tiles: FC<TilesProps> = ({
                   smallPreview={smallPreview}
                   onClickInfo={() => onClickInfo(item)}
                   onClick={() => onClick(item)}
+                  isFocused={focusedIndex === index}
                 />
               );
             })}
@@ -111,7 +158,13 @@ const Tiles: FC<TilesProps> = ({
 };
 
 export default inject<TStore>(
-  ({ settingsStore, accessRightsStore, oformsStore, contextOptionsStore }) => ({
+  ({
+    settingsStore,
+    accessRightsStore,
+    oformsStore,
+    contextOptionsStore,
+    dialogsStore,
+  }) => ({
     theme: settingsStore.theme,
     oformFiles: oformsStore.oformFiles,
     hasGalleryFiles: oformsStore.hasGalleryFiles,
@@ -129,5 +182,7 @@ export default inject<TStore>(
     setTemplateGalleryVisible: oformsStore.setTemplateGalleryVisible,
     setIsVisibleInfoPanelTemplateGallery:
       oformsStore.setIsVisibleInfoPanelTemplateGallery,
+    setSubmitToGalleryDialogVisible:
+      dialogsStore.setSubmitToGalleryDialogVisible,
   }),
 )(withTranslation(["Common", "FormGallery"])(observer(Tiles)));

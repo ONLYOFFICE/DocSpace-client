@@ -29,9 +29,9 @@
 import React from "react";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "styled-components";
 import classNames from "classnames";
 
+import { useTheme } from "@docspace/shared/hooks/useTheme";
 import {
   FilesRow,
   FilesRowWrapper,
@@ -65,7 +65,7 @@ const Row = observer(
     const { isItemActive } = useActiveItemsStore();
 
     const { t } = useTranslation(["Common"]);
-    const theme = useTheme();
+    const { isBase } = useTheme();
     const { openFile } = useFilesActions({ t });
 
     const { getContextMenuModel } = useContextMenuModel({ item });
@@ -78,7 +78,7 @@ const Row = observer(
       <Badges
         className={styles.badgesComponent}
         t={t}
-        theme={theme}
+        themeIsBase={isBase}
         item={item}
         viewAs="row"
         showNew={false}

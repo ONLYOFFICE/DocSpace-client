@@ -57,7 +57,7 @@
     }
   }
 
-  .disabled {
+  &.disabled {
     color: var(--management-disable-color);
     pointer-events: none;
     cursor: default;

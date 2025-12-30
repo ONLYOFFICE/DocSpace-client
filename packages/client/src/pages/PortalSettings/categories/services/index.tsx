@@ -281,7 +281,9 @@ const Services = (props: InjectedProps) => {
         return t("Services:AIToolsEnabled");
       }
       if (confirmActionType === WEB_SEARCH) {
-        return t("Services:WebSearchEnabled");
+        return t("Services:WebSearchEnabled", {
+          webSearch: t("Common:WebSearchAI"),
+        });
       }
     };
 

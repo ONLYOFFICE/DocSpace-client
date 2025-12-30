@@ -544,6 +544,7 @@ const View = ({
           components={{
             strong: <strong />,
           }}
+          values={{ aiAgent: t("Common:AIAgent"), aiChat: t("AIRoom:AIChat") }}
         />,
       );
     }

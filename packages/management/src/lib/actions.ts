@@ -80,7 +80,7 @@ import {
   storageRegionsHandler,
   backupProgressHandler,
   foldersTreeHandler,
-  encryptionSettingsHandler
+  encryptionSettingsHandler,
 } from "@docspace/shared/__mocks__/e2e";
 
 import { logger } from "@/../logger.mjs";
@@ -215,7 +215,7 @@ export async function getQuota() {
       logger.debug(`GET /portal/payment/quota failed: missing asc_auth_key`);
       return undefined;
     }
-    const quotaRes = IS_TEST ? quotaHandler() : await fetch(getQuotasRes);
+    const quotaRes = IS_TEST ? quotaHandler(hdrs) : await fetch(getQuotasRes);
 
     if (quotaRes.status === 401) {
       logger.error(`GET /portal/payment/quota failed: ${quotaRes.statusText}`);
@@ -354,7 +354,9 @@ export async function getWhiteLabelLogos() {
       "GET",
     );
 
-    const logosRes = IS_TEST ? whiteLabelLogosHandler() : await fetch(getWhiteLabelLogossRes);
+    const logosRes = IS_TEST
+      ? whiteLabelLogosHandler()
+      : await fetch(getWhiteLabelLogossRes);
 
     if (!logosRes.ok) {
       logger.error(
@@ -383,7 +385,9 @@ export async function getWhiteLabelText() {
       "GET",
     );
 
-    const textRes = IS_TEST ? whiteLabelLogoTextHandler() : await fetch(getWhiteLabelTextsRes);
+    const textRes = IS_TEST
+      ? whiteLabelLogoTextHandler()
+      : await fetch(getWhiteLabelTextsRes);
 
     if (!textRes.ok) {
       logger.error(
@@ -412,7 +416,9 @@ export async function getWhiteLabelIsDefault() {
       "GET",
     );
 
-    const isDefaultRes = IS_TEST ? whiteLabelLogosIsDefaultHandler() : await fetch(getWhiteLabelIsDefaultsRes);
+    const isDefaultRes = IS_TEST
+      ? whiteLabelLogosIsDefaultHandler()
+      : await fetch(getWhiteLabelIsDefaultsRes);
 
     if (!isDefaultRes.ok) {
       logger.error(
@@ -442,7 +448,9 @@ export async function getAdditionalResources() {
       "GET",
     );
 
-    const additionalResourcesRes = IS_TEST ? settingsAdditionalHandler() : await fetch(getAdditionalResourcessRes);
+    const additionalResourcesRes = IS_TEST
+      ? settingsAdditionalHandler()
+      : await fetch(getAdditionalResourcessRes);
 
     if (!additionalResourcesRes.ok) {
       logger.error(
@@ -472,7 +480,9 @@ export async function getCompanyInfo() {
       "GET",
     );
 
-    const companyInfoRes = IS_TEST ? companyInfoHandler() : await fetch(getCompanyInfosRes);
+    const companyInfoRes = IS_TEST
+      ? companyInfoHandler()
+      : await fetch(getCompanyInfosRes);
 
     if (!companyInfoRes.ok) {
       logger.error(
@@ -534,9 +544,11 @@ export async function getSettingsThirdParty() {
       "GET",
     );
 
-    const settingsThirdParty = IS_TEST ? thirdPartyBackupHandler() :await fetch(getSettingsThirdPartysRes, {
-      next: { tags: ["backup"] },
-    });
+    const settingsThirdParty = IS_TEST
+      ? thirdPartyBackupHandler()
+      : await fetch(getSettingsThirdPartysRes, {
+          next: { tags: ["backup"] },
+        });
 
     if (!settingsThirdParty.ok) {
       logger.error(
@@ -570,9 +582,11 @@ export async function getBackupSchedule(dump: boolean = true) {
       "GET",
     );
 
-    const backupScheduleRes = IS_TEST ? backupScheduleHandler() : await fetch(getBackupSchedulesRes, {
-      next: { tags: ["backup"] },
-    });
+    const backupScheduleRes = IS_TEST
+      ? backupScheduleHandler()
+      : await fetch(getBackupSchedulesRes, {
+          next: { tags: ["backup"] },
+        });
 
     if (!backupScheduleRes.ok) {
       logger.error(
@@ -605,9 +619,11 @@ export async function getBackupStorage(dump: boolean = false) {
       [["", ""]],
       "GET",
     );
-    const backupStorageRes = IS_TEST ? backupStorageHandler() : await fetch(getBackupStoragesRes, {
-      next: { tags: ["backup"] },
-    });
+    const backupStorageRes = IS_TEST
+      ? backupStorageHandler()
+      : await fetch(getBackupStoragesRes, {
+          next: { tags: ["backup"] },
+        });
 
     if (!backupStorageRes.ok) {
       logger.error(
@@ -637,7 +653,9 @@ export async function getStorageRegions() {
       "GET",
     );
 
-    const storageRegionsRes = IS_TEST ? storageRegionsHandler() : await fetch(getStorageRegionssRes);
+    const storageRegionsRes = IS_TEST
+      ? storageRegionsHandler()
+      : await fetch(getStorageRegionssRes);
 
     if (!storageRegionsRes.ok) {
       logger.error(
@@ -666,7 +684,9 @@ export async function getSettingsFiles(): Promise<TFilesSettings> {
       "GET",
     );
 
-    const settingsFilesRes = IS_TEST ? filesSettingsHandler() : await fetch(getSettingsFilessRes);
+    const settingsFilesRes = IS_TEST
+      ? filesSettingsHandler()
+      : await fetch(getSettingsFilessRes);
 
     if (!settingsFilesRes.ok) {
       logger.error(
@@ -701,9 +721,11 @@ export async function getBackupProgress(dump = true) {
       "GET",
     );
 
-    const backupProgressRes = IS_TEST ? backupProgressHandler() : await fetch(getBackupProgresssRes, {
-      next: { tags: ["backup"] },
-    });
+    const backupProgressRes = IS_TEST
+      ? backupProgressHandler()
+      : await fetch(getBackupProgresssRes, {
+          next: { tags: ["backup"] },
+        });
 
     if (!backupProgressRes.ok) {
       logger.error(
@@ -734,7 +756,9 @@ export async function getFoldersTree() {
       "GET",
     );
 
-    const foldersTreeRes = IS_TEST ? foldersTreeHandler() : await fetch(getFoldersTreeRes);
+    const foldersTreeRes = IS_TEST
+      ? foldersTreeHandler()
+      : await fetch(getFoldersTreeRes);
 
     if (!foldersTreeRes.ok) {
       logger.error(
@@ -802,7 +826,9 @@ export async function getEncryptionSettings() {
       "GET",
     );
 
-    const encryptionSettingsRes = IS_TEST ? encryptionSettingsHandler(hdrs) : await fetch(getEncryptionSettingsRes);
+    const encryptionSettingsRes = IS_TEST
+      ? encryptionSettingsHandler(hdrs)
+      : await fetch(getEncryptionSettingsRes);
 
     if (!encryptionSettingsRes.ok) {
       logger.error(
@@ -835,7 +861,9 @@ export async function getLicenseQuota() {
       true,
     );
 
-    const licenseQuotaRes = IS_TEST ? licenseQuotaHandler() : await fetch(getLicenseQuotaRequest);
+    const licenseQuotaRes = IS_TEST
+      ? licenseQuotaHandler()
+      : await fetch(getLicenseQuotaRequest);
 
     if (!licenseQuotaRes.ok) {
       logger.error(`GET ${pathReq} failed: ${licenseQuotaRes.status}`);

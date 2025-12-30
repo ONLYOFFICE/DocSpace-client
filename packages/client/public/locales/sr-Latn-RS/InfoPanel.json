@@ -2,7 +2,6 @@
   "AddedRoomTags": "Tagovi dodati.",
   "Administration": "Administracija",
   "AgentRenamed": "Agent <1>«{{oldRoomTitle}}»</1> preimenovan u <2>«{{roomTitle}}»</2>",
-  "AIAgentsEmptyScreenTent": "Pogledajte detalje o AI agentima ovde",
   "AndMoreLabel": "i <1>{{count}} više</1>",
   "CreationDate": "Datum izrade",
   "Data": "Podaci",

@@ -179,7 +179,7 @@ test.describe("AI Provider", () => {
 
     const deleteProviderDialog = page.getByRole("dialog");
     await expect(deleteProviderDialog).toBeVisible();
-    await expect(deleteProviderDialog).toContainText("Delete provider");
+    await expect(deleteProviderDialog).toContainText("Delete AI provider");
 
     const deleteProviderButton = deleteProviderDialog.getByTestId(
       "delete-provider-button",

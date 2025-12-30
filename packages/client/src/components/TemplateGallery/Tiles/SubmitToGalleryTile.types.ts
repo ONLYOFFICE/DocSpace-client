@@ -40,4 +40,5 @@ export type SubmitToGalleryTileProps = {
   isSubmitTile?: boolean;
   submitToGalleryTileIsVisible: boolean;
   viewMobile: boolean;
+  isKeyboardFocused?: boolean;
 };

@@ -82,9 +82,7 @@ describe("<Button />", () => {
 
   it("renders with custom style", () => {
     render(<Button {...baseProps} style={{ backgroundColor: "red" }} />);
-    expect(screen.getByTestId("button")).toHaveStyle({
-      backgroundColor: "red",
-    });
+    expect(screen.getByTestId("button").style.backgroundColor).toBe("red");
   });
 
   it("renders with icon", () => {

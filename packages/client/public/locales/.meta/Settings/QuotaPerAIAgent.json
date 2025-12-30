@@ -1,19 +1,19 @@
 {
   "key_path": "QuotaPerAIAgent",
-  "content": "Quota per AI agent",
-  "content_en_sha1_hash": "215b8bf5a578ced0bc211d0f9fbf5d4ea2b4f1f9",
-  "created_at": "2025-11-06T18:29:08.711Z",
-  "updated_at": "2025-11-17T07:52:04.960Z",
+  "content": "Quota per {{aiAgent}}",
+  "content_en_sha1_hash": "ca43fdb6c37f3b33cc11a6a1d44d3718b6a7f3d4",
+  "created_at": "2025-12-22T09:40:15.250Z",
+  "updated_at": "2025-12-22T10:09:55.892Z",
   "comment": {
-    "text": "This key represents the quota allocated to each AI agent. It's used to display the amount of storage or resources assigned to individual AI agents, likely within a storage management section of the portal settings.",
+    "text": "This key displays the text \"Quota per [AI Agent Name]\" in the Portal Settings, specifically on a button or link leading to the AI Agent quota management page. It's used to indicate the quota allocation for individual AI agents. The AI Agent name will be dynamically inserted into the string.",
     "is_auto": true,
-    "updated_at": "2025-11-06T18:39:25.025Z"
+    "updated_at": "2025-12-22T10:09:55.892Z"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/MobileQuotas.js",
       "line_number": 66,
-      "context": "sectionName: t(\"Common:MyDocuments\"),\n })}\n isDisabled={isDisabled}\n />\n <MobileCategoryWrapper\n title={t(\"QuotaPerAIAgent\")}\n onClickLink={onClickLink}\n url=\"/portal-settings/management/disk-space/quota-per-ai-agent\"\n subtitle={t(\"SetDefaultAIAgentQuota\", {\n productName: t(\"Common:ProductName\"),\n })}",
+      "context": "sectionName: t(\"Common:MyDocuments\"),\n })}\n isDisabled={isDisabled}\n />\n <MobileCategoryWrapper\n title={t(\"QuotaPerAIAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n })}\n onClickLink={onClickLink}\n url=\"/portal-settings/management/disk-space/quota-per-ai-agent\"\n subtitle={t(\"SetDefaultAIAgentQuota\", {",
       "module": "/packages/client"
     },
     {

@@ -63,4 +63,5 @@ export interface FileTileProps {
   smallPreview: boolean;
   onClickInfo: (e: React.MouseEvent) => void;
   onClick: () => void;
+  isFocused?: boolean;
 }

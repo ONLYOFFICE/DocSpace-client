@@ -35,7 +35,10 @@ const InfoPanelHeaderContent = ({
   onClose,
   ...restProps
 }: InfoPanelHeaderContentProps) => {
-  if (isGallery) return <InfoPanelHeaderTemplateGallery onClose={onClose} />;
+  if (isGallery)
+    return (
+      <InfoPanelHeaderTemplateGallery onClose={onClose} isVisible={isGallery} />
+    );
 
   const {
     selection,

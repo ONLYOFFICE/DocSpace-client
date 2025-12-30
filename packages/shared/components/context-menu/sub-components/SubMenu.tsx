@@ -122,9 +122,6 @@ const SubMenu = (props: SubMenuProps) => {
 
   const [model, setModel] = useState(props?.model);
   const [isLoading, setIsLoading] = useState(false);
-  // const [activeItemKey, setActiveItemKey] = useState<string | number | null>(
-  //   null,
-  // );
   const [widthSubMenu, setWidthSubMenu] = useState<null | number>(null);
 
   const prevWidthSubMenu = useRef<number | null>(null);
@@ -383,9 +380,9 @@ const SubMenu = (props: SubMenuProps) => {
     if (showDisabledItems ? false : item.disabled) return;
     // TODO: Not render disabled items
 
-    const activeItemsactiveItems = activeItems?.find((x) => x.key === item.key);
+    const activeItem = activeItems?.find((x) => x.key === item.key);
 
-    const active = !!activeItemsactiveItems;
+    const active = !!activeItem;
 
     const className = classNames(
       "p-menuitem",
@@ -532,7 +529,7 @@ const SubMenu = (props: SubMenuProps) => {
       item.tooltipTarget === "toggle" ? toggleTooltipId : itemTooltipId;
 
     const isActiveDescendant =
-      currentIndex === index && activeLevel == menuLevel;
+      currentIndex === index && activeLevel == menuLevel && !item.disabled;
 
     return (
       <li
@@ -546,6 +543,7 @@ const SubMenu = (props: SubMenuProps) => {
           item.withToggle
             ? classNames(className, styles.subMenuItem, {
                 [styles.activeDescendant]: isActiveDescendant,
+                [styles.noHover]: item.disabled || item.isSeparator,
               })
             : classNames(className, {
                 [styles.activeDescendant]: isActiveDescendant,
@@ -641,7 +639,7 @@ const SubMenu = (props: SubMenuProps) => {
 
       const level = menuLevel + 1;
 
-      const activeItemactiveItem = activeItems?.find((x) => x.key === item.key);
+      const activeItem = activeItems?.find((x) => x.key === item.key);
 
       if (contextMenuTypeItem?.items || contextMenuTypeItem?.onLoad) {
         submenu.push(
@@ -652,7 +650,7 @@ const SubMenu = (props: SubMenuProps) => {
                 ? [loaderItem]
                 : contextMenuTypeItem?.items || []
             }
-            resetMenu={!activeItemactiveItem}
+            resetMenu={!activeItem}
             onLeafClick={onLeafClick}
             onLoad={contextMenuTypeItem?.onLoad}
             mouseMoveHandler={mouseMoveHandler}

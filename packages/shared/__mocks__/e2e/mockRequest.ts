@@ -42,8 +42,12 @@ export class MockRequest {
             return;
           }
 
+          const requestHeaders = new Headers(route.request().headers());
+          const response = endpoint.dataHandlerWithHeaders
+            ? endpoint.dataHandlerWithHeaders(requestHeaders)
+            : endpoint.dataHandler();
+
           if (endpoint.responseType === "text") {
-            const response = endpoint.dataHandler();
             const body = await response.text();
 
             await route.fulfill({
@@ -54,7 +58,7 @@ export class MockRequest {
             return;
           }
 
-          const json = await endpoint.dataHandler().json();
+          const json = await response.json();
 
           await route.fulfill({ json, status: json.statusCode ?? 200 });
         });

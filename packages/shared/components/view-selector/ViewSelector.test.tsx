@@ -119,7 +119,7 @@ describe("<ViewSelector />", () => {
 
     const viewSelector = screen.getByTestId("view-selector");
     expect(viewSelector).toHaveClass("custom-class");
-    expect(viewSelector).toHaveStyle(customStyle);
+    expect(viewSelector.style.backgroundColor).toBe("red");
   });
 
   it("renders only one icon when isFilter is true", () => {

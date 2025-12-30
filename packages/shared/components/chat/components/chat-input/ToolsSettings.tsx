@@ -330,6 +330,7 @@ const ToolsSettings = ({
           <>
             <Text>
               {t("ConnectWebSearch", {
+                webSearch: t("Common:WebSearchAI"),
                 productName: t("Common:ProductName"),
               })}
             </Text>
@@ -364,7 +365,13 @@ const ToolsSettings = ({
               },
               icon: ManageConnectionsReactSvgUrl,
               disabled: !showManageConnectionItem,
-              getTooltipContent: () => <Text>{t("ConnectMCPServers")}</Text>,
+              getTooltipContent: () => (
+                <Text>
+                  {t("ConnectMCPServers", {
+                    mcpServers: t("Common:MCPSettingTitle"),
+                  })}
+                </Text>
+              ),
             },
           ]
         : []),

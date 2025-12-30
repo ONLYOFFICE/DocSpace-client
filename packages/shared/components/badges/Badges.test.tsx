@@ -42,9 +42,6 @@ import styles from "./Badges.module.scss";
 
 describe("<Badges />", () => {
   const mockT = vi.fn((key) => key);
-  // Use the actual Base theme to avoid type errors
-  const mockTheme = Base;
-
   const defaultItem = {
     id: 1,
     isFolder: false,
@@ -83,7 +80,7 @@ describe("<Badges />", () => {
 
   const defaultProps = {
     t: mockT,
-    theme: mockTheme,
+    themeIsBase: true,
     item: defaultItem,
     viewAs: "row" as TViewAs,
     showNew: true,

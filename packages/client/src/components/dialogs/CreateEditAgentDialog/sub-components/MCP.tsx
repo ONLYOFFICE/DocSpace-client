@@ -72,7 +72,9 @@ const MCPSettings = ({
             className="set_room_params-info-description"
             noSelect
           >
-            {t("MCPDescriptionServers")}
+            {t("MCPDescriptionServers", {
+              mcpServers: t("Common:MCPSettingTitle"),
+            })}
           </Text>
         </div>
         <div className="ai-mcp-group">

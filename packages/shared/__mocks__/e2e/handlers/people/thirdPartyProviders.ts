@@ -29,7 +29,7 @@ import {
   HEADER_LIST_THIRD_PARTY_PROVIDERS,
 } from "../../utils";
 
-const PATH = "people/thirdparty/providers";
+export const PATH = "people/thirdparty/providers";
 
 const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
 

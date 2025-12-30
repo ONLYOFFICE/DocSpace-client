@@ -1025,14 +1025,14 @@ test.describe("AI chat", () => {
       const filesListItem = page.getByTestId("files-list-item");
       await expect(filesListItem).toBeVisible();
 
-      const removeFileButton = filesListItem.getByTestId("remove-file-button");
-      await removeFileButton.click();
-
       await expect(page).toHaveScreenshot([
         "desktop",
         "ai-chat",
         "ai-chat-with-attached-files.png",
       ]);
+
+      const removeFileButton = filesListItem.getByTestId("remove-file-button");
+      await removeFileButton.click();
 
       await expect(filesListItem).toHaveCount(0);
     });

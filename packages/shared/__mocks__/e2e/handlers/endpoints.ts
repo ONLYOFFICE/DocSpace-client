@@ -158,6 +158,16 @@ import {
   PATH_MY_DOCUMENTS,
   myDocumentsHandler,
   getFileInfoHandler,
+  PATH_AGENT_FOLDER_CHAT,
+  agentFolderChatHandler,
+  PATH_AGENT_FOLDER_INFO,
+  agentFolderInfoHandler,
+  agentFolderResultStorageHandler,
+  PATH_AGENT_FOLDER_RESULT_STORAGE,
+  PATH_RESULT_STORAGE_FOLDER,
+  resultStorageFolderHandler,
+  resultStorageFolderInfoHandler,
+  PATH_RESULT_STORAGE_FOLDER_INFO,
 } from "./files";
 import { capabilitiesHandler, PATH_CAPABILITIES } from "./capabilities";
 
@@ -172,6 +182,7 @@ import {
   HEADER_ROOMS_LIST,
   HEADER_AI_DISABLED,
   HEADER_PLUGINS_SETTINGS,
+  HEADER_AI_WEB_SEARCH_DISABLED,
 } from "../utils";
 import {
   PATH_DELETE_USER,
@@ -211,6 +222,23 @@ import {
   aiVectorizationPutHandler,
   PATH_AI_SERVER_STATUS,
   aiServerStatusPutHandler,
+  PATH_AI_ROOMS_CHATS_CONFIG,
+  aiRoomsChatsConfigHandler,
+  PATH_AI_ROOMS_SERVERS,
+  aiRoomsServersHandler,
+  aiRoomsChatsHandler,
+  PATH_AI_CHAT,
+  aiChatHandler,
+  PATH_AI_CHAT_MESSAGES,
+  aiChatMessagesHandler,
+  aiChatPutHandler,
+  aiChatMessagesExportHandler,
+  PATH_AI_CHAT_MESSAGES_EXPORT,
+  PATH_AI_ROOMS_CHATS_STREAM,
+  aiRoomsChatsStreamHandler,
+  PATH_AI_MESSAGES_EXPORT,
+  aiMessagesExportHandler,
+  PATH_AI_ROOMS_CHATS,
 } from "./ai";
 import { PATH_TAGS, roomTagsHandler } from "./rooms";
 import {
@@ -257,6 +285,7 @@ export type TEndpoint = {
   dataHandler: () => Response;
   dataHandlerWithHeaders?: (headers: Headers) => Response;
   method?: MethodType;
+  responseType?: "json" | "text";
 };
 
 export type TEndpoints = {
@@ -452,6 +481,39 @@ export const endpoints = {
     dataHandler: () =>
       folderHandler(new Headers({ [HEADER_EMPTY_FOLDER]: "true" })),
   },
+  agentFolderChat: {
+    url: PATH_AGENT_FOLDER_CHAT,
+    dataHandler: agentFolderChatHandler,
+  },
+  agentFolderChatCanNotUseChat: {
+    url: PATH_AGENT_FOLDER_CHAT,
+    dataHandler: () => agentFolderChatHandler("canNotUseChat"),
+  },
+  agentFolderResultStorage: {
+    url: PATH_AGENT_FOLDER_RESULT_STORAGE,
+    dataHandler: agentFolderResultStorageHandler,
+  },
+  agentFolderResultStorageCanNotUseChat: {
+    url: PATH_AGENT_FOLDER_RESULT_STORAGE,
+    dataHandler: () => agentFolderResultStorageHandler("canNotUseChat"),
+  },
+  agentFolderInfo: {
+    url: PATH_AGENT_FOLDER_INFO,
+    dataHandler: agentFolderInfoHandler,
+  },
+  agentFolderInfoCanNotUseChat: {
+    url: PATH_AGENT_FOLDER_INFO,
+    dataHandler: () => agentFolderInfoHandler("canNotUseChat"),
+  },
+  resultStorageFolder: {
+    url: PATH_RESULT_STORAGE_FOLDER,
+    dataHandler: resultStorageFolderHandler,
+  },
+  resultStorageFolderInfo: {
+    url: PATH_RESULT_STORAGE_FOLDER_INFO,
+    dataHandler: resultStorageFolderInfoHandler,
+  },
+
   addGuest: {
     url: `${BASE_URL}${PATH_ADD_GUEST}`,
     dataHandler: selfHandler,
@@ -535,6 +597,15 @@ export const endpoints = {
       aiConfigHandler(
         new Headers({
           [HEADER_AI_DISABLED]: "true",
+        }),
+      ),
+  },
+  aiConfigWebSearchDisabled: {
+    url: `${BASE_URL}${PATH_AI_CONFIG}`,
+    dataHandler: () =>
+      aiConfigHandler(
+        new Headers({
+          [HEADER_AI_WEB_SEARCH_DISABLED]: "true",
         }),
       ),
   },
@@ -718,6 +789,99 @@ export const endpoints = {
     url: `${BASE_URL}${PATH_AI_CONFIG_VECTORIZATION}`,
     dataHandler: aiVectorizationPutHandler,
     method: "PUT",
+  },
+  aiChat: {
+    url: `${BASE_URL}${PATH_AI_CHAT}`,
+    dataHandler: aiChatHandler,
+  },
+  updateAiChat: {
+    url: `${BASE_URL}${PATH_AI_CHAT}`,
+    dataHandler: aiChatPutHandler,
+    method: "PUT",
+  },
+  aiChatMessages: {
+    url: `${BASE_URL}${PATH_AI_CHAT_MESSAGES}`,
+    dataHandler: aiChatMessagesHandler,
+  },
+  aiChatMessagesBaseElements: {
+    url: `${BASE_URL}${PATH_AI_CHAT_MESSAGES}`,
+    dataHandler: () => aiChatMessagesHandler("baseElements"),
+  },
+  aiChatMessagesCodeBlock: {
+    url: `${BASE_URL}${PATH_AI_CHAT_MESSAGES}`,
+    dataHandler: () => aiChatMessagesHandler("codeBlock"),
+  },
+  aiChatMessagesTable: {
+    url: `${BASE_URL}${PATH_AI_CHAT_MESSAGES}`,
+    dataHandler: () => aiChatMessagesHandler("table"),
+  },
+  aiChatMessagesMany: {
+    url: `${BASE_URL}${PATH_AI_CHAT_MESSAGES}`,
+    dataHandler: () => aiChatMessagesHandler("many"),
+  },
+  aiChatMessagesWebSearch: {
+    url: `${BASE_URL}${PATH_AI_CHAT_MESSAGES}`,
+    dataHandler: () => aiChatMessagesHandler("webSearch"),
+  },
+  aiChatMessagesWebSearchError: {
+    url: `${BASE_URL}${PATH_AI_CHAT_MESSAGES}`,
+    dataHandler: () => aiChatMessagesHandler("webSearchError"),
+  },
+  aiChatMessagesWebCrawling: {
+    url: `${BASE_URL}${PATH_AI_CHAT_MESSAGES}`,
+    dataHandler: () => aiChatMessagesHandler("webCrawling"),
+  },
+  aiChatMessagesWebCrawlingError: {
+    url: `${BASE_URL}${PATH_AI_CHAT_MESSAGES}`,
+    dataHandler: () => aiChatMessagesHandler("webCrawlingError"),
+  },
+  aiChatMessagesKnowledgeSearch: {
+    url: `${BASE_URL}${PATH_AI_CHAT_MESSAGES}`,
+    dataHandler: () => aiChatMessagesHandler("knowledgeSearch"),
+  },
+  aiChatMessagesKnowledgeSearchError: {
+    url: `${BASE_URL}${PATH_AI_CHAT_MESSAGES}`,
+    dataHandler: () => aiChatMessagesHandler("knowledgeSearchError"),
+  },
+  aiChatMessagesMcpTool: {
+    url: `${BASE_URL}${PATH_AI_CHAT_MESSAGES}`,
+    dataHandler: () => aiChatMessagesHandler("mcpTool"),
+  },
+  exportAiChatToFile: {
+    url: `${BASE_URL}${PATH_AI_CHAT_MESSAGES_EXPORT}`,
+    dataHandler: aiChatMessagesExportHandler,
+  },
+  exportAiMessageToFile: {
+    url: `${BASE_URL}${PATH_AI_MESSAGES_EXPORT}`,
+    dataHandler: aiMessagesExportHandler,
+  },
+  aiRoomsChatsConfigAllEnabled: {
+    url: `${BASE_URL}${PATH_AI_ROOMS_CHATS_CONFIG}`,
+    dataHandler: aiRoomsChatsConfigHandler,
+  },
+  aiRoomsServersEmpty: {
+    url: `${BASE_URL}${PATH_AI_ROOMS_SERVERS}`,
+    dataHandler: aiRoomsServersHandler,
+  },
+  aiRoomsChatsEmpty: {
+    url: `${BASE_URL}${PATH_AI_ROOMS_CHATS}`,
+    dataHandler: () => aiRoomsChatsHandler("empty"),
+  },
+  aiRoomsChats: {
+    url: `${BASE_URL}${PATH_AI_ROOMS_CHATS}`,
+    dataHandler: aiRoomsChatsHandler,
+  },
+  aiRoomsChatsStream: {
+    url: `${BASE_URL}${PATH_AI_ROOMS_CHATS_STREAM}`,
+    dataHandler: aiRoomsChatsStreamHandler,
+    method: "POST",
+    responseType: "text",
+  },
+  aiRoomsChatsStreamMcpNeedApprove: {
+    url: `${BASE_URL}${PATH_AI_ROOMS_CHATS_STREAM}`,
+    dataHandler: () => aiRoomsChatsStreamHandler("mcpNeedApprove"),
+    method: "POST",
+    responseType: "text",
   },
   additionalSettings: {
     url: `${BASE_URL}${PATH_SETTINGS_ADDITIONAL}`,

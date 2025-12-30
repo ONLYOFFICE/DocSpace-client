@@ -46,6 +46,18 @@ export class MockRequest {
           const response = endpoint.dataHandlerWithHeaders
             ? endpoint.dataHandlerWithHeaders(requestHeaders)
             : endpoint.dataHandler();
+
+          if (endpoint.responseType === "text") {
+            const body = await response.text();
+
+            await route.fulfill({
+              body,
+              status: response.status ?? 200,
+            });
+
+            return;
+          }
+
           const json = await response.json();
 
           await route.fulfill({ json, status: json.statusCode ?? 200 });

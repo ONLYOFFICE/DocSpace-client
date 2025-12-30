@@ -100,8 +100,13 @@ export const ChatListItem = ({
               isClickable
               isFill
               onClick={() => {}}
+              dataTestId="chat-list-item-context-menu-button"
             />
-            <ContextMenu ref={contextMenuRef} model={contextModel} />
+            <ContextMenu
+              ref={contextMenuRef}
+              model={contextModel}
+              dataTestId="chat-list-item-context-menu"
+            />
           </div>
         ) : null}
       </div>

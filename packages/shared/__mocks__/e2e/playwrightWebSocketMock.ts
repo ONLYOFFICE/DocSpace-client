@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { Page, WebSocketRoute } from "@playwright/test";
-import type { TOptSocket } from "../../utils/socket";
+import { ExportChatEventData, TOptSocket } from "../../utils/socket";
 
 type ServerMessage =
   | string
@@ -35,6 +35,7 @@ type ServerMessage =
 
 type SocketEventData =
   | TOptSocket
+  | ExportChatEventData
   | { roomParts: string | string[] }
   | { message: string };
 
@@ -77,6 +78,7 @@ export class PlaywrightWebSocketMock {
   }
 
   private sendToClient(message: ServerMessage, prefix: string = "42"): void {
+    console.log(message, this.wsRoute, this.isConnected);
     if (this.wsRoute && this.isConnected) {
       const messageStr =
         typeof message === "string" ? message : JSON.stringify(message);
@@ -91,6 +93,10 @@ export class PlaywrightWebSocketMock {
 
   emitModifyFolder(data: TOptSocket): void {
     this.emitSocketEvent("s:modify-folder", data);
+  }
+
+  emitExportChat(data: ExportChatEventData): void {
+    this.emitSocketEvent("s:export-chat", data);
   }
 
   isWebSocketConnected(): boolean {

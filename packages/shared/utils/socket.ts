@@ -228,6 +228,18 @@ export type TOptSocket = {
 } & TOptQuota;
 
 /**
+ * Export chat event data type.
+ */
+export type ExportChatEventData =
+  | {
+      resultFile: TFile;
+    }
+  | {
+      resultFile: null;
+      error: string;
+    };
+
+/**
  * A type defining the mapping between socket events and their respective listener callbacks.
  * The keys represent events from the `SocketEvents` enum, and the values define the types of
  * callbacks associated with those events.
@@ -309,16 +321,7 @@ export type TListenEventCallbackMap = {
     id: number;
     data: string;
   }) => void;
-  [SocketEvents.ExportChat]: (
-    data:
-      | {
-          resultFile: TFile;
-        }
-      | {
-          resultFile: null;
-          error: string;
-        },
-  ) => void;
+  [SocketEvents.ExportChat]: (data: ExportChatEventData) => void;
 };
 
 /**

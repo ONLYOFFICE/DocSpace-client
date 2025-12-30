@@ -49,6 +49,9 @@ import {
   colorThemeHandler,
   deepLinkHandler,
   openEditHandler,
+  fillingSessionHandler,
+  fillingStatusHandler,
+  fileByIdHandler,
 } from "@docspace/shared/__mocks__/e2e";
 
 import { logger } from "@/../logger.mjs";
@@ -82,7 +85,7 @@ export async function getFillingSession(
     );
 
     try {
-      const response = await fetch(request);
+      const response = IS_TEST ? fillingSessionHandler() : await fetch(request);
 
       if (response.ok) return await response.json();
 
@@ -643,7 +646,9 @@ export async function getFormFillingStatus(formId: string | number) {
       "GET",
     );
 
-    const response = await fetch(getFormFillingStatusRes);
+    const response = IS_TEST
+      ? fillingStatusHandler()
+      : await fetch(getFormFillingStatusRes);
 
     if (response.ok)
       return (await response.json()).response as TFileFillingFormStatus[];
@@ -673,7 +678,7 @@ export async function getFileById(fileId: number | string) {
       "GET",
     );
 
-    const response = await fetch(getFile);
+    const response = IS_TEST ? fileByIdHandler() : await fetch(getFile);
 
     if (response.ok) return (await response.json()).response as TFile;
 

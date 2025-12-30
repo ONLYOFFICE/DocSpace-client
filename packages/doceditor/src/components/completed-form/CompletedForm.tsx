@@ -135,7 +135,10 @@ export const CompletedForm = ({
   });
 
   return (
-    <ContainerCompletedForm bgPattern={bgPattern}>
+    <ContainerCompletedForm
+      bgPattern={bgPattern}
+      data-testid="completed_form_container"
+    >
       <Scrollbar fixedSize>
         <CompletedFormLayout>
           <picture className="completed-form__logo">

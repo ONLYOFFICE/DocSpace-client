@@ -24,9 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { BASE_URL, API_PREFIX } from "../../utils";
+import {
+  BASE_URL,
+  API_PREFIX,
+  HEADER_FORM_YOUR_TURN_FILLING,
+} from "../../utils";
 
-const fileByIdSuccess = {
+const fileByIdSuccess = (formFillingStatus: number) => ({
   response: {
     folderId: 19,
     version: 3,
@@ -42,7 +46,7 @@ const fileByIdSuccess = {
     comment: "Edited",
     thumbnailStatus: 0,
     hasDraft: false,
-    formFillingStatus: 4,
+    formFillingStatus: formFillingStatus,
     isForm: true,
     startFilling: true,
     viewAccessibility: {
@@ -153,8 +157,11 @@ const fileByIdSuccess = {
   ],
   status: 0,
   statusCode: 200,
-};
+});
 
-export const fileByIdHandler = () => {
-  return new Response(JSON.stringify(fileByIdSuccess));
+export const fileByIdHandler = (headers?: Headers) => {
+  if (headers?.get(HEADER_FORM_YOUR_TURN_FILLING)) {
+    return new Response(JSON.stringify(fileByIdSuccess(2)));
+  }
+  return new Response(JSON.stringify(fileByIdSuccess(4)));
 };

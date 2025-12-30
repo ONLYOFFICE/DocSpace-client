@@ -30,6 +30,7 @@ import { screen, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { ComboButton } from "./ComboButton";
 import { ComboBoxSize } from "../ComboBox.enums";
+import styles from "./ComboButton.module.scss";
 import type { TCombobox, TOption } from "../ComboBox.types";
 
 describe("ComboButton", () => {
@@ -87,7 +88,7 @@ describe("ComboButton", () => {
   it("renders with modern view", () => {
     render(<ComboButton {...baseProps} modernView />);
     const button = screen.getByText("Test Option").closest(".combo-button");
-    expect(button).toHaveStyle({ border: "none" });
+    expect(button).toHaveClass(styles.modernView);
   });
 
   it("renders with open state", () => {
@@ -104,7 +105,7 @@ describe("ComboButton", () => {
   it("renders without border", () => {
     render(<ComboButton {...baseProps} noBorder />);
     const button = screen.getByText("Test Option").closest(".combo-button");
-    expect(button).toHaveStyle({ border: "none" });
+    expect(button).toHaveClass(styles.noBorder);
   });
 
   it("renders with custom tab index", () => {

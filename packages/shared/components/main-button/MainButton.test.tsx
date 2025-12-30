@@ -61,7 +61,7 @@ describe("<MainButton />", () => {
     const customStyle = { backgroundColor: "red" };
     render(<MainButton {...defaultProps} style={customStyle} />);
     const button = screen.getByText("Test Button").parentElement;
-    expect(button).toHaveStyle("background-color: red");
+    expect(button?.style.backgroundColor).toBe("red");
   });
 
   it("renders as disabled", () => {

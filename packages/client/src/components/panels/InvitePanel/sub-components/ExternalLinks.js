@@ -286,7 +286,7 @@ const ExternalLinks = ({
         />
       </StyledSubHeader>
       <StyledDescription>{description}</StyledDescription>
-      {externalLinksVisible ? (
+      {externalLinksVisible && roomId !== -1 ? (
         <>
           <StyledInviteInputContainer key={activeLink.id}>
             <StyledInviteInput isShowCross>

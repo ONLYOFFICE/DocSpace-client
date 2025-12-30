@@ -829,6 +829,8 @@ const InvitePanel = ({
     onChangeExternalLinksVisible(true);
   };
 
+  const currentAccess = accessOptions.find((a) => a.access === defaultAccess);
+
   return (
     <ModalDialog
       visible={isVisible}
@@ -903,11 +905,14 @@ const InvitePanel = ({
             linkSelectedAccess={linkSelectedAccess}
             setLinkSelectedAccess={setLinkSelectedAccess}
             defaultAccess={defaultAccess ?? ShareAccessRights.ReadOnly}
+            isContacts={roomId === -1}
           />
         </ModalDialog.Container>
       ) : null}
 
-      <ModalDialog.Header>{t("Common:Invite")}</ModalDialog.Header>
+      <ModalDialog.Header>
+        {t("Common:Invite")} {roomId === -1 ? currentAccess?.label : ""}
+      </ModalDialog.Header>
       <ModalDialog.Body>{bodyInvitePanel}</ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

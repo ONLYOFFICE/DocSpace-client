@@ -65,6 +65,7 @@ const LinkSettingsPanel = ({
   activeLink,
   defaultAccess,
   showUsersLimitWarning,
+  isContacts,
 }: LinkSettingsPanelProps) => {
   const { t, ready } = useTranslation(["Common", "Files"]);
   const locale = getCookie(LANGUAGE) ?? culture ?? "en";
@@ -160,20 +161,23 @@ const LinkSettingsPanel = ({
       <ModalDialog.Body>
         <div className={styles.linkSettingsBody}>
           <div className={styles.userLimitBlock}>
-            <Text
-              fontSize="16px"
-              fontWeight={700}
-              className={styles.linkSettingsText}
-            >
-              {t("Common:RoleForLink")}
-            </Text>
-
-            <LinkRolesDropdown
-              currentAccess={currentAccess}
-              accesses={filteredAccesses}
-              linkSelectedAccess={linkSelectedAccess}
-              setLinkSelectedAccess={setLinkSelectedAccess}
-            />
+            {!isContacts ? (
+              <>
+                <Text
+                  fontSize="16px"
+                  fontWeight={700}
+                  className={styles.linkSettingsText}
+                >
+                  {t("Common:RoleForLink")}
+                </Text>
+                <LinkRolesDropdown
+                  currentAccess={currentAccess}
+                  accesses={filteredAccesses}
+                  linkSelectedAccess={linkSelectedAccess}
+                  setLinkSelectedAccess={setLinkSelectedAccess}
+                />
+              </>
+            ) : null}
 
             <div className={styles.linkSettingsUserLimit}>
               <Text

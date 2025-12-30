@@ -62,4 +62,5 @@ export type LinkSettingsPanelProps = {
     maxUseCount?: number;
   };
   defaultAccess: ShareAccessRights;
+  isContacts: boolean;
 };

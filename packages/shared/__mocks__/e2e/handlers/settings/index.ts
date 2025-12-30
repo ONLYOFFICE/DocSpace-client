@@ -115,3 +115,5 @@ export * from "./tfaAppSettings";
 export * from "./activeconnections";
 
 export * from "./tfaAppCodes";
+
+export * from "./deepLink";

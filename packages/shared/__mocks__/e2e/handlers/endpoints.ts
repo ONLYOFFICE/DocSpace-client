@@ -105,6 +105,8 @@ import {
   PATH_ACTIVE_CONNECTIONS,
   tfaAppCodesHandler,
   PATH_TFA_APP_CODES,
+  deepLinkHandler,
+  PATH_DEEP_LINK,
 } from "./settings";
 import {
   CONTINUE_PATH,
@@ -248,6 +250,7 @@ import {
   clientsHandler,
   PATH_OAUTH_CLIENTS,
 } from "./oauth";
+import { openEditHandler, PATH_OPEN_EDIT } from "./editor";
 
 import type { MethodType } from "../types";
 import { ShareAccessRights } from "../../../enums";
@@ -1015,5 +1018,13 @@ export const endpoints = {
     url: `${BASE_URL}${PATH_THEME}`,
     dataHandler: themeProvider,
     method: "PUT",
+  },
+  deepLink: {
+    url: `${BASE_URL}${PATH_DEEP_LINK}`,
+    dataHandler: deepLinkHandler,
+  },
+  openEdit: {
+    url: PATH_OPEN_EDIT,
+    dataHandler: openEditHandler,
   },
 } satisfies TEndpoints;

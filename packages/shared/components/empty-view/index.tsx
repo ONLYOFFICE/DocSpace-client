@@ -39,8 +39,6 @@ const EmptyView = ({ description, icon, options, title }: EmptyViewProps) => {
           fontWeight="700"
           lineHeight="22px"
           className={styles.headerTitle}
-          color="white"
-          backgroundColor="red"
         >
           {title}
         </Text>

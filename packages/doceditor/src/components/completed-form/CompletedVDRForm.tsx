@@ -65,6 +65,7 @@ import SocketHelper, {
   SocketEvents,
 } from "@docspace/shared/utils/socket";
 import type { TFile } from "@docspace/shared/api/files/types";
+import type { TEditFileData } from "@docspace/shared/utils/socket";
 import { getFolderUrl } from "./CompletedForm.helper";
 import type { CompletedVDRFormProps } from "./CompletedForm.types";
 import {
@@ -114,8 +115,9 @@ export const CompletedVDRForm = (props: CompletedVDRFormProps) => {
         individual: true,
       });
 
-    const stopEditFileHandler = (id: number | string) => {
-      if (Number(id) === formId) {
+    const stopEditFileHandler = (data: TEditFileData) => {
+      const fileId = typeof data === "object" ? data.fileId : data;
+      if (Number(fileId) === formId) {
         setForm((prev) => ({
           ...prev,
           fileStatus: prev.fileStatus & ~FileStatus.IsEditing,

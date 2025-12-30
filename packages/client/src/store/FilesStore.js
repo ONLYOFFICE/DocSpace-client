@@ -425,6 +425,12 @@ class FilesStore {
       const foundIndex = this.files.findIndex((x) => x.id === fileId);
       if (foundIndex == -1) return;
 
+      console.log(
+        `[WS] s:start-edit-file`,
+        fileId,
+        this.files[foundIndex].title,
+      );
+
       this.updateSelectionStatus(
         fileId,
         this.files[foundIndex].fileStatus | FileStatus.IsEditing,
@@ -467,7 +473,7 @@ class FilesStore {
       if (foundIndex == -1) return;
       const foundFile = this.files[foundIndex];
 
-      console.log(`[WS] s:stop-edit-file`, id, foundFile.title);
+      console.log(`[WS] s:stop-edit-file`, fileId, foundFile.title);
 
       this.updateSelectionStatus(
         fileId,

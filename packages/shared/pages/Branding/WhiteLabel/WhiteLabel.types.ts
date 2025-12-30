@@ -51,7 +51,6 @@ export interface IWhiteLabelData {
 }
 
 export interface IHeaderProps {
-  showNotAvailable: boolean;
   isSettingPaid: boolean;
   standalone: boolean;
   onUseTextAsLogo: () => void;
@@ -62,7 +61,6 @@ export interface IHeaderProps {
 }
 export interface IWhiteLabel {
   isSettingPaid: boolean;
-  showNotAvailable: boolean;
   standalone: boolean;
   logoUrls: ILogo[];
   showAbout: boolean;

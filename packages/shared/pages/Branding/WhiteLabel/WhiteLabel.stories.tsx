@@ -53,7 +53,6 @@ export const Default: Story = {
     isSettingPaid: true,
     logoUrls: mockLogos,
     showAbout: true,
-    showNotAvailable: false,
     standalone: false,
     onSave: (data) => console.log("Save clicked with data:", data),
     onRestoreDefault: () => console.log("Restore default clicked"),
@@ -69,12 +68,5 @@ export const Paid: Story = {
   args: {
     ...Default.args,
     isSettingPaid: false,
-  },
-};
-
-export const NotAvailable: Story = {
-  args: {
-    ...Default.args,
-    showNotAvailable: true,
   },
 };

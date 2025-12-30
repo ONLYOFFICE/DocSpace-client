@@ -167,9 +167,13 @@ const MCPServersSelector = ({
       emptyScreenImage={
         isBase ? EmptyScreenRoomSvgUrl : EmptyScreenRoomDarkSvgUrl
       }
-      emptyScreenHeader={t("Common:NoMCPServers")}
+      emptyScreenHeader={t("Common:NoMCPServers", {
+        mcpServers: t("Common:MCPSettingTitle"),
+      })}
       emptyScreenDescription={t("Common:NoMCPServersDescription", {
+        mcpServers: t("Common:MCPSettingTitle"),
         productName: t("Common:ProductName"),
+        aiAgent: t("Common:AIAgent"),
       })}
       searchEmptyScreenImage={
         isBase ? EmptyScreenRoomSvgUrl : EmptyScreenRoomDarkSvgUrl
@@ -191,7 +195,9 @@ const MCPServersSelector = ({
       onSelect={onSelect}
       withHeader
       headerProps={{
-        headerLabel: t("Common:AvailableMCPServers"),
+        headerLabel: t("Common:AvailableMCPServers", {
+          mcpServers: t("Common:MCPSettingTitle"),
+        }),
         withoutBackButton: false,
         onBackClick: onBackClick,
         onCloseClick: onClose,

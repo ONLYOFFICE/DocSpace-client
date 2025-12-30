@@ -29,7 +29,7 @@ import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import { Base } from "../../themes";
+import styles from "./Backdrop.module.scss";
 import * as utils from "../../utils";
 
 import { Backdrop } from ".";
@@ -86,7 +86,8 @@ describe("<Backdrop />", () => {
     it("applies custom styles", () => {
       const customStyle = { backgroundColor: "red" };
       render(<Backdrop visible style={customStyle} />);
-      expect(screen.getByTestId("backdrop")).toHaveStyle(customStyle);
+      const backdrop = screen.getByTestId("backdrop");
+      expect(backdrop.style.backgroundColor).toBe("red");
     });
 
     it("applies custom id", () => {
@@ -177,23 +178,21 @@ describe("<Backdrop />", () => {
       vi.mocked(utils.isMobile).mockReturnValue(true);
       render(<Backdrop visible />);
       const backdrop = screen.getByTestId("backdrop");
-      expect(backdrop).toHaveStyle({ backgroundColor: expect.any(String) });
+      expect(backdrop).toHaveClass(styles.withBackground);
     });
 
     it("shows background on tablet devices without withoutBlur", () => {
       vi.mocked(utils.isTablet).mockReturnValue(true);
       render(<Backdrop visible />);
       const backdrop = screen.getByTestId("backdrop");
-      expect(backdrop).toHaveStyle({ backgroundColor: expect.any(String) });
+      expect(backdrop).toHaveClass(styles.withBackground);
     });
 
     it("respects withoutBlur on mobile devices", () => {
       vi.mocked(utils.isMobile).mockReturnValue(true);
       render(<Backdrop visible withoutBlur />);
       const backdrop = screen.getByTestId("backdrop");
-      expect(backdrop).toHaveStyle({
-        backgroundColor: Base.backdrop.unsetBackgroundColor,
-      });
+      expect(backdrop).toHaveClass(styles.withoutBlur);
     });
   });
 

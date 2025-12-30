@@ -40,7 +40,7 @@ import { TenantTrustedDomainsType } from "@docspace/shared/enums";
 
 import { RegisterModalDialogProps } from "@/types";
 
-import ModalDialogContainer from "../../ModalDialogContainer";
+import styles from "../../modal.module.scss";
 
 const RegisterModalDialog = ({
   visible,
@@ -97,14 +97,14 @@ const RegisterModalDialog = ({
     >
       <ModalDialog.Header>{t("RegisterTitle")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <ModalDialogContainer>
+        <div className={styles.modalContainer}>
           <Text key="text-body" isBold={false} fontSize="13px">
             {getDomainsBlock()}
             {t("RegisterTextBodyAfterDomainsList")}
           </Text>
 
           <FieldContainer
-            className="email-reg-field"
+            className={styles.emailRegField}
             key="e-mail"
             isVertical
             hasError={isShowError ? emailErr : undefined}
@@ -131,7 +131,7 @@ const RegisterModalDialog = ({
               autoComplete="username"
             />
           </FieldContainer>
-        </ModalDialogContainer>
+        </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

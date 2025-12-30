@@ -209,6 +209,7 @@ const ContextMenuButtonPure = ({
       data-testid={testId ?? "context-menu-button"}
       onClick={callNewMenu}
       ref={ref}
+      aria-disabled={isDisabled}
     >
       <IconButton
         className={iconClassName}

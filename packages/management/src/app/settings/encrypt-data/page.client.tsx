@@ -73,7 +73,7 @@ const EncryptDataPage = ({
           status={status}
         />
       ) : null}
-      <div className={classNames(styles.wrapper, { disabled: isDisabled })}>
+      <div className={classNames(styles.wrapper, { [styles.disabled]: isDisabled })} data-testid="encrypt-data-page">
         <div className={styles.header}>
           <Text fontSize="16px" fontWeight={700}>
             {t("EncryptData")}

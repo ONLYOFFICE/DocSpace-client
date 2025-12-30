@@ -21,6 +21,7 @@
   "devDependencies": {
     "@vitest/ui": "4.0.7",
     "cross-env": "^7.0.3",
+    "jsdom": "^27.4.0",
     "vitest": "4.0.7",
     "open-cli": "^8.0.0"
   }

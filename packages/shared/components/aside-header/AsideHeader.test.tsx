@@ -74,10 +74,10 @@ describe("AsideHeader", () => {
   });
 
   it("renders without border when withoutBorder is true", () => {
-    const { container } = render(<AsideHeader withoutBorder />);
+    render(<AsideHeader withoutBorder />);
 
-    const header = container.firstChild;
-    expect(header).toHaveStyle({ borderBottom: "none" });
+    const header = screen.getByTestId("aside-header");
+    expect(header).toHaveClass(styles.withoutBorder);
   });
 
   it("renders ReactNode as header content", () => {

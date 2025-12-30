@@ -28,10 +28,10 @@
 
 import React, { useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "styled-components";
 import { observer } from "mobx-react";
 import classNames from "classnames";
 
+import { useTheme } from "@docspace/shared/hooks/useTheme";
 import { FileTile, FolderTile } from "@docspace/shared/components/tiles";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
 import Badges from "@docspace/shared/components/badges";
@@ -68,7 +68,7 @@ const getTemporaryIcon = (item: TFileItem | TFolderItem, getIcon: TGetIcon) => {
 const Tile = ({ item, getIcon, index }: TileProps) => {
   const tileRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation("Common");
-  const theme = useTheme();
+  const { isBase } = useTheme();
   const { filesSettings } = useFilesSettingsStore();
 
   const {
@@ -136,7 +136,7 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
   const badgesComponent = (
     <Badges
       t={t}
-      theme={theme}
+      themeIsBase={isBase}
       item={item}
       viewAs="tile"
       showNew={false}

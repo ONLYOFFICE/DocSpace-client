@@ -106,7 +106,7 @@ const EmailInputForm = ({
       </FieldContainer>
       <Button
         id="email-continue"
-        className="login-button"
+        className="login-continue-button"
         primary
         size={ButtonSize.medium}
         scale

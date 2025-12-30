@@ -25,7 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { TGetRooms, TRoom } from "../../../../api/rooms/types";
-import { HEADER_FILTERED_ROOMS_LIST, HEADER_ROOMS_LIST } from "../../utils";
+import { ShareAccessRights } from "../../../../enums";
+import {
+  CONTEXT_MENU_ROOMS_LIST,
+  HEADER_FILTERED_ROOMS_LIST,
+  HEADER_ROOMS_LIST,
+} from "../../utils";
 
 export const PATH_ROOMS_LIST = "files/rooms?*";
 
@@ -2021,13 +2026,593 @@ const getEmptyRoomList = (): TGetRooms => {
   };
 };
 
-export const roomListHandler = (headers?: Headers): Response => {
+const getRoomSecurity = (
+  userAccess: ShareAccessRights,
+  isDocAdmin: boolean,
+) => {
+  if (isDocAdmin) {
+    switch (userAccess) {
+      case ShareAccessRights.RoomManager:
+        return {
+          ChangeOwner: true,
+          Copy: true,
+          CopyLink: true,
+          CopySharedLink: true,
+          CopyTo: true,
+          Create: true,
+          CreateRoomFrom: false,
+          Delete: false,
+          Download: true,
+          Duplicate: true,
+          EditAccess: true,
+          EditRoom: true,
+          Embed: true,
+          IndexExport: true,
+          Move: true,
+          MoveTo: true,
+          Mute: true,
+          Pin: true,
+          Read: true,
+          Reconnect: false,
+          Rename: true,
+          UseChat: false,
+        };
+      case ShareAccessRights.Collaborator:
+        return {
+          ChangeOwner: true,
+          Copy: true,
+          CopyLink: true,
+          CopySharedLink: true,
+          CopyTo: true,
+          Create: true,
+          CreateRoomFrom: false,
+          Delete: false,
+          Download: true,
+          Duplicate: true,
+          EditAccess: false,
+          EditRoom: false,
+          Embed: false,
+          IndexExport: false,
+          Move: true,
+          MoveTo: true,
+          Mute: true,
+          Pin: true,
+          Read: true,
+          Reconnect: false,
+          Rename: false,
+          UseChat: false,
+        };
+      case ShareAccessRights.None:
+        return {
+          ChangeOwner: true,
+          Copy: true,
+          CopyLink: true,
+          CopySharedLink: true,
+          CopyTo: true,
+          Create: true,
+          CreateRoomFrom: false,
+          Delete: false,
+          Download: true,
+          Duplicate: true,
+          EditAccess: false,
+          EditRoom: false,
+          Embed: false,
+          IndexExport: true,
+          Move: true,
+          MoveTo: true,
+          Mute: true,
+          Pin: true,
+          Read: true,
+          Reconnect: false,
+          Rename: false,
+          UseChat: false,
+        };
+      default:
+        return {};
+    }
+  } else {
+    switch (userAccess) {
+      case ShareAccessRights.RoomManager:
+        return {
+          ChangeOwner: false,
+          Copy: true,
+          CopyLink: true,
+          CopySharedLink: true,
+          CopyTo: true,
+          Create: true,
+          CreateRoomFrom: false,
+          Delete: false,
+          Download: true,
+          Duplicate: true,
+          EditAccess: true,
+          EditRoom: true,
+          Embed: true,
+          IndexExport: true,
+          Move: false,
+          MoveTo: true,
+          Mute: true,
+          Pin: true,
+          Read: true,
+          Reconnect: false,
+          Rename: true,
+          UseChat: false,
+        };
+      case ShareAccessRights.Collaborator:
+        return {
+          ChangeOwner: false,
+          Copy: true,
+          CopyLink: true,
+          CopySharedLink: true,
+          CopyTo: true,
+          Create: true,
+          CreateRoomFrom: false,
+          Delete: false,
+          Download: true,
+          Duplicate: false,
+          EditAccess: false,
+          EditRoom: false,
+          Embed: false,
+          IndexExport: false,
+          Move: false,
+          MoveTo: true,
+          Mute: true,
+          Pin: true,
+          Read: true,
+          Reconnect: false,
+          Rename: false,
+          UseChat: false,
+        };
+      case ShareAccessRights.None:
+        return {
+          ChangeOwner: true,
+          Copy: true,
+          CopyLink: true,
+          CopySharedLink: true,
+          CopyTo: true,
+          Create: true,
+          CreateRoomFrom: false,
+          Delete: true,
+          Download: true,
+          Duplicate: true,
+          EditAccess: true,
+          EditRoom: true,
+          Embed: true,
+          IndexExport: true,
+          Move: true,
+          MoveTo: true,
+          Mute: true,
+          Pin: true,
+          Read: true,
+          Reconnect: true,
+          Rename: true,
+          UseChat: false,
+        };
+      default:
+        return {};
+    }
+  }
+};
+
+const getContextMenuRoomList = ({
+  access = ShareAccessRights.None,
+  inRoom = true,
+  isDocAdmin = true,
+}: {
+  access?: ShareAccessRights;
+  inRoom?: boolean;
+  isDocAdmin?: boolean;
+}) => {
+  const security = getRoomSecurity(access, isDocAdmin);
+
+  return {
+    files: [],
+    folders: [
+      {
+        parentId: 2,
+        filesCount: 0,
+        foldersCount: 0,
+        new: 0,
+        mute: false,
+        tags: [],
+        logo: {
+          original: "",
+          large: "",
+          medium: "",
+          small: "",
+          color: "FF7FD4",
+        },
+        pinned: false,
+        roomType: 5,
+        private: false,
+        indexing: false,
+        denyDownload: false,
+        inRoom,
+        fileEntryType: 1,
+        id: 10,
+        rootFolderId: 2,
+        canShare: true,
+        security: { ...security, Embed: false },
+        title: "Custom without share",
+        access,
+        shared: false,
+        sharedForUser: false,
+        parentShared: false,
+        shortWebUrl: "",
+        created: "2025-12-09T11:42:52.0000000+03:00",
+        createdBy: {
+          id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
+          displayName: "Administrator ",
+          avatarSmall:
+            "/static/images/default_user_photo_size_32-32.png?hash=520061207",
+          profileUrl: "",
+          hasAvatar: false,
+        },
+        updated: "2025-12-09T11:42:52.0000000+03:00",
+        rootFolderType: 14,
+        parentRoomType: 14,
+        updatedBy: {
+          id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
+          displayName: "Administrator ",
+          avatarSmall:
+            "/static/images/default_user_photo_size_32-32.png?hash=520061207",
+          profileUrl: "",
+          hasAvatar: false,
+        },
+      },
+      {
+        parentId: 2,
+        filesCount: 0,
+        foldersCount: 0,
+        new: 0,
+        mute: false,
+        tags: [],
+        logo: {
+          original: "",
+          large: "",
+          medium: "",
+          small: "",
+          color: "FF7FD4",
+        },
+        pinned: false,
+        roomType: 6,
+        private: false,
+        indexing: false,
+        denyDownload: false,
+        inRoom,
+        fileEntryType: 1,
+        id: 11,
+        rootFolderId: 2,
+        canShare: true,
+        security,
+        title: "Public",
+        access,
+        shared: true,
+        sharedForUser: false,
+        parentShared: false,
+        shortWebUrl: "",
+        created: "2025-12-09T11:42:52.0000000+03:00",
+        createdBy: {
+          id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
+          displayName: "Administrator ",
+          avatarSmall:
+            "/static/images/default_user_photo_size_32-32.png?hash=520061207",
+          profileUrl: "",
+          hasAvatar: false,
+        },
+        updated: "2025-12-09T11:42:52.0000000+03:00",
+        rootFolderType: 14,
+        parentRoomType: 14,
+        updatedBy: {
+          id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
+          displayName: "Administrator ",
+          avatarSmall:
+            "/static/images/default_user_photo_size_32-32.png?hash=520061207",
+          profileUrl: "",
+          hasAvatar: false,
+        },
+      },
+      {
+        parentId: 2,
+        filesCount: 0,
+        foldersCount: 0,
+        new: 0,
+        mute: false,
+        tags: [],
+        logo: {
+          original: "",
+          large: "",
+          medium: "",
+          small: "",
+          color: "FF7FD4",
+        },
+        pinned: false,
+        roomType: 1,
+        private: false,
+        indexing: false,
+        denyDownload: false,
+        inRoom,
+        fileEntryType: 1,
+        id: 12,
+        rootFolderId: 2,
+        canShare: true,
+        security,
+        title: "Form room",
+        access,
+        shared: true,
+        sharedForUser: false,
+        parentShared: false,
+        shortWebUrl: "",
+        created: "2025-12-09T11:42:52.0000000+03:00",
+        createdBy: {
+          id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
+          displayName: "Administrator ",
+          avatarSmall:
+            "/static/images/default_user_photo_size_32-32.png?hash=520061207",
+          profileUrl: "",
+          hasAvatar: false,
+        },
+        updated: "2025-12-09T11:42:52.0000000+03:00",
+        rootFolderType: 14,
+        parentRoomType: 14,
+        updatedBy: {
+          id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
+          displayName: "Administrator ",
+          avatarSmall:
+            "/static/images/default_user_photo_size_32-32.png?hash=520061207",
+          profileUrl: "",
+          hasAvatar: false,
+        },
+      },
+      {
+        parentId: 2,
+        filesCount: 0,
+        foldersCount: 0,
+        new: 0,
+        mute: false,
+        tags: [],
+        logo: {
+          original: "",
+          large: "",
+          medium: "",
+          small: "",
+          color: "FF7FD4",
+        },
+        pinned: false,
+        roomType: 5,
+        private: false,
+        indexing: false,
+        denyDownload: false,
+        inRoom,
+        fileEntryType: 1,
+        id: 13,
+        rootFolderId: 2,
+        canShare: true,
+        security,
+        title: "Custom",
+        access,
+        shared: true,
+        sharedForUser: false,
+        parentShared: false,
+        shortWebUrl: "",
+        created: "2025-12-09T11:42:52.0000000+03:00",
+        createdBy: {
+          id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
+          displayName: "Administrator ",
+          avatarSmall:
+            "/static/images/default_user_photo_size_32-32.png?hash=520061207",
+          profileUrl: "",
+          hasAvatar: false,
+        },
+        updated: "2025-12-09T11:42:52.0000000+03:00",
+        rootFolderType: 14,
+        parentRoomType: 14,
+        updatedBy: {
+          id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
+          displayName: "Administrator ",
+          avatarSmall:
+            "/static/images/default_user_photo_size_32-32.png?hash=520061207",
+          profileUrl: "",
+          hasAvatar: false,
+        },
+      },
+      {
+        parentId: 2,
+        filesCount: 0,
+        foldersCount: 0,
+        new: 0,
+        mute: false,
+        tags: [],
+        logo: {
+          original: "",
+          large: "",
+          medium: "",
+          small: "",
+          color: "FF7FD4",
+        },
+        pinned: false,
+        roomType: 6,
+        private: false,
+        indexing: false,
+        denyDownload: false,
+        inRoom,
+        fileEntryType: 1,
+        id: "box-821",
+        rootFolderId: 2,
+        canShare: true,
+        security: { ...security, Duplicate: false },
+        title: "Public third-party",
+        access,
+        shared: true,
+        sharedForUser: false,
+        parentShared: false,
+        shortWebUrl: "",
+        created: "2025-09-03T15:22:08.0000000+03:00",
+        createdBy: {
+          id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
+          displayName: "Administrator ",
+          avatarSmall:
+            "/static/images/default_user_photo_size_32-32.png?hash=520061207",
+          profileUrl: "",
+          hasAvatar: false,
+        },
+        updated: "2025-09-03T15:22:26.0000000+03:00",
+        rootFolderType: 14,
+        parentRoomType: 14,
+        updatedBy: {
+          id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
+          displayName: "Administrator ",
+          avatarSmall:
+            "/static/images/default_user_photo_size_32-32.png?hash=520061207",
+          profileUrl: "",
+          hasAvatar: false,
+        },
+        providerItem: true,
+        providerKey: "Box",
+        providerId: 821,
+      },
+      {
+        parentId: 2,
+        filesCount: 0,
+        foldersCount: 0,
+        new: 0,
+        mute: false,
+        tags: [],
+        logo: {
+          original: "",
+          large: "",
+          medium: "",
+          small: "",
+          color: "FF7FD4",
+        },
+        pinned: false,
+        roomType: 2,
+        private: false,
+        indexing: false,
+        denyDownload: false,
+        inRoom,
+        fileEntryType: 1,
+        id: 14,
+        rootFolderId: 2,
+        canShare: false,
+        security: { ...security, Embed: false, CopySharedLink: false },
+        title: "Collaboration",
+        access,
+        shared: false,
+        sharedForUser: false,
+        parentShared: false,
+        shortWebUrl: "",
+        created: "2025-12-09T11:42:52.0000000+03:00",
+        createdBy: {
+          id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
+          displayName: "Administrator ",
+          avatarSmall:
+            "/static/images/default_user_photo_size_32-32.png?hash=520061207",
+          profileUrl: "",
+          hasAvatar: false,
+        },
+        updated: "2025-12-09T11:42:52.0000000+03:00",
+        rootFolderType: 14,
+        parentRoomType: 14,
+        updatedBy: {
+          id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
+          displayName: "Administrator ",
+          avatarSmall:
+            "/static/images/default_user_photo_size_32-32.png?hash=520061207",
+          profileUrl: "",
+          hasAvatar: false,
+        },
+      },
+      {
+        parentId: 2,
+        filesCount: 0,
+        foldersCount: 0,
+        new: 0,
+        mute: false,
+        tags: [],
+        logo: {
+          original: "",
+          large: "",
+          medium: "",
+          small: "",
+          color: "FF7FD4",
+        },
+        pinned: false,
+        roomType: 8,
+        private: false,
+        indexing: true,
+        denyDownload: false,
+        inRoom,
+        fileEntryType: 1,
+        id: 15,
+        rootFolderId: 2,
+        canShare: false,
+        security: {
+          ...security,
+          Embed: false,
+          CopySharedLink: false,
+        },
+        title: "VDR",
+        access,
+        shared: false,
+        sharedForUser: false,
+        parentShared: false,
+        shortWebUrl: "",
+        created: "2025-12-09T11:42:52.0000000+03:00",
+        createdBy: {
+          id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
+          displayName: "Administrator ",
+          avatarSmall:
+            "/static/images/default_user_photo_size_32-32.png?hash=520061207",
+          profileUrl: "",
+          hasAvatar: false,
+        },
+        updated: "2025-12-09T11:42:52.0000000+03:00",
+        rootFolderType: 14,
+        parentRoomType: 14,
+        updatedBy: {
+          id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
+          displayName: "Administrator ",
+          avatarSmall:
+            "/static/images/default_user_photo_size_32-32.png?hash=520061207",
+          profileUrl: "",
+          hasAvatar: false,
+        },
+      },
+    ],
+    current,
+    pathParts: [
+      {
+        id: 2,
+        title: "Rooms",
+      },
+    ],
+    startIndex: 0,
+    total: 7,
+    count: 7,
+    new: 0,
+  };
+};
+
+export const roomListHandler = (
+  headers?: Headers,
+  params?: {
+    access?: ShareAccessRights;
+    inRoom?: boolean;
+    isDocAdmin?: boolean;
+  },
+): Response => {
   if (headers?.get(HEADER_FILTERED_ROOMS_LIST)) {
     return new Response(JSON.stringify({ response: getRoomList(true) }));
   }
 
   if (headers?.get(HEADER_ROOMS_LIST)) {
     return new Response(JSON.stringify({ response: getRoomList() }));
+  }
+
+  if (headers?.get(CONTEXT_MENU_ROOMS_LIST)) {
+    return new Response(
+      JSON.stringify({ response: getContextMenuRoomList(params ?? {}) }),
+    );
   }
 
   return new Response(JSON.stringify({ response: getEmptyRoomList() }));

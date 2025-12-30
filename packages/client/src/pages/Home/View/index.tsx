@@ -68,6 +68,7 @@ import useProfileBody, {
 } from "../../Profile/Section/Body/useProfileBody";
 import useContacts, { type UseContactsProps } from "../Hooks/useContacts";
 import useFiles, { type UseFilesProps } from "../Hooks/useFiles";
+import OformsStore from "SRC_DIR/store/OformsStore";
 
 type ViewProps = UseContactsProps &
   UseFilesProps &
@@ -98,6 +99,7 @@ type ViewProps = UseContactsProps &
     resultId: AiRoomStore["resultId"];
     setHotkeyCaret: FilesStore["setHotkeyCaret"];
     setIsErrorAccountNotAvailable: FilesStore["setIsErrorAccountNotAvailable"];
+    currentExtensionGallery: OformsStore["currentExtensionGallery"];
   };
 
 const View = ({
@@ -134,6 +136,8 @@ const View = ({
   setIsUpdatingRowItem,
 
   gallerySelected,
+  isVisibleInfoPanelTemplateGallery,
+  currentExtensionGallery,
   userId,
 
   selectedFolderStore,
@@ -243,10 +247,12 @@ const View = ({
     setIsUpdatingRowItem,
 
     gallerySelected,
+    isVisibleInfoPanelTemplateGallery,
     userId,
 
     selectedFolderStore,
     wsCreatedPDFForm,
+    currentExtensionGallery,
   });
 
   const { getProfileInitialValue } = useProfileBody({
@@ -538,6 +544,7 @@ const View = ({
           components={{
             strong: <strong />,
           }}
+          values={{ aiAgent: t("Common:AIAgent"), aiChat: t("AIRoom:AIChat") }}
         />,
       );
     }
@@ -689,7 +696,11 @@ export const ViewComponent = inject(
 
     const { playlist, setToPreviewFile } = mediaViewerDataStore;
 
-    const { gallerySelected } = oformsStore;
+    const {
+      gallerySelected,
+      isVisibleInfoPanelTemplateGallery,
+      currentExtensionGallery,
+    } = oformsStore;
 
     const { getFilesSettings } = filesSettingsStore;
 
@@ -745,6 +756,8 @@ export const ViewComponent = inject(
       setToPreviewFile,
 
       gallerySelected,
+      isVisibleInfoPanelTemplateGallery,
+      currentExtensionGallery,
 
       userId: userStore?.user?.id,
 

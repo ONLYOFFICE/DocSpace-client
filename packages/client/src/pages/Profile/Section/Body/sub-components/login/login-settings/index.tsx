@@ -71,7 +71,7 @@ const LoginSettings = (props: LoginSettingsProps) => {
   }, []);
 
   return (
-    <div className={styles.loginSettingsWrapper}>
+    <div className={styles.loginSettingsWrapper} data-testid="profile-tfa">
       <div className={styles.header}>
         <Text fontSize="16px" fontWeight={700} lineHeight="22px">
           {t("Settings:TwoFactorAuth")}

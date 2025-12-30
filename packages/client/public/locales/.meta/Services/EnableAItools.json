@@ -3,7 +3,7 @@
   "content": "Enable AI tools ({{currency}} per token)",
   "content_en_sha1_hash": "2d55728e99caf9450e8675b4d4cbb6c281d03350",
   "created_at": "2025-11-03T12:10:29.438Z",
-  "updated_at": "2025-11-03T12:29:28.611Z",
+  "updated_at": "2025-11-21T09:16:13.225Z",
   "comment": {
     "text": "This key displays the cost of enabling AI tools, formatted with the user's currency, within a service dialog. It's used to show the price per token for enabling AI tools in the Portal Settings. Translators should ensure accuracy in currency formatting.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/AITools/AIServiceDialog.tsx",
-      "line_number": 181,
+      "line_number": 183,
       "context": "<ModalDialog.Header>{t(\"Services:AITools\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <ServiceToggleSection\n isEnabled={isEnabled}\n onToggle={handleToggleChange}\n title={t(\"Services:EnableAItools\", {\n currency: formatWalletCurrency!(aiToolsPrice!, 4),\n })}\n description={t(\"Services:EnableAItoolsDescription\", {\n organizationName: logoText,\n productName: t(\"Common:ProductName\"),",
       "module": "/packages/client"
     },

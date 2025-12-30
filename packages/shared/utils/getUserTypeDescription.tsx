@@ -81,6 +81,7 @@ export const getUserTypeDescriptionClient = (
         }}
         values={{
           agentSection: t("Common:AIAgents"),
+          aiAgent: t("Common:AIAgent"),
         }}
       />
     );

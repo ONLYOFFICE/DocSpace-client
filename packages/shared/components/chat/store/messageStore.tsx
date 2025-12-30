@@ -454,7 +454,13 @@ export default class MessageStore {
 
             const [event, data] = chunk.split("\n");
 
-            const jsonData = data?.split("data:")[1]?.trim();
+            const dataKey = "data:";
+
+            if (!data || !data.startsWith(dataKey)) {
+              return;
+            }
+
+            const jsonData = data.slice(dataKey.length).trim();
 
             if (!jsonData) {
               return;

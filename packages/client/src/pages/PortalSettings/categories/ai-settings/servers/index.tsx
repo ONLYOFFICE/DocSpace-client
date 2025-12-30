@@ -58,6 +58,7 @@ type MCPListProps = {
   onSettingsClick: (item: TServer) => void;
   onDeleteClick: (id: TServer["id"]) => void;
   isMCPActionsDisabled?: boolean;
+  dataTestId?: string;
 };
 
 const MCPList = ({
@@ -68,11 +69,12 @@ const MCPList = ({
   onSettingsClick,
   onDeleteClick,
   isMCPActionsDisabled,
+  dataTestId = "mcp-list",
 }: MCPListProps) => {
   if (!mcpServers?.length) return;
 
   return (
-    <div className={styles.mcpListContainer}>
+    <div className={styles.mcpListContainer} data-testid={dataTestId}>
       {showHeading ? (
         <Heading
           className={styles.mcpHeading}
@@ -224,7 +226,10 @@ const MCPServersComponent = ({
   return (
     <div className={styles.mcpServers}>
       <Text className={styles.description}>
-        {t("AISettings:MCPSettingsDescription")}
+        {t("AISettings:MCPSettingsDescription", {
+          mcpServers: t("Common:MCPSettingTitle"),
+          aiChats: t("Common:AIChats"),
+        })}
       </Text>
       {mcpServersSettingsUrl ? (
         <Link
@@ -242,7 +247,9 @@ const MCPServersComponent = ({
       <Button
         primary
         size={ButtonSize.small}
-        label={t("AISettings:AddMCPServer")}
+        label={t("AISettings:AddMCPServer", {
+          mcpServer: t("Common:MCPServer"),
+        })}
         scale={false}
         className={styles.addProviderButton}
         onClick={showAddDialog}
@@ -250,10 +257,12 @@ const MCPServersComponent = ({
         tooltipText={
           isMCPActionsDisabled
             ? t("AISettings:ToUseAddProvider", {
-                value: t("AISettings:MCPServer"),
+                value: t("Common:MCPServer"),
+                aiProvider: t("Common:AIProvider"),
               })
             : undefined
         }
+        testId="add-mcp-button"
       />
 
       <MCPList
@@ -264,6 +273,7 @@ const MCPServersComponent = ({
         onSettingsClick={onUpdateMCP}
         onDeleteClick={onDeleteMCP}
         isMCPActionsDisabled={isMCPActionsDisabled}
+        dataTestId="custom-mcp-list"
       />
 
       <MCPList
@@ -274,6 +284,7 @@ const MCPServersComponent = ({
         onSettingsClick={onUpdateMCP}
         onDeleteClick={onDeleteMCP}
         isMCPActionsDisabled={isMCPActionsDisabled}
+        dataTestId="system-mcp-list"
       />
 
       {addDialogVisible ? <AddMCPDialog onClose={hideAddDialog} /> : null}

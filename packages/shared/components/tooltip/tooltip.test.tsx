@@ -52,7 +52,7 @@ describe("<Tooltip />", () => {
 
     const tooltip = screen.getByTestId("tooltip");
     expect(tooltip).toHaveClass("custom-tooltip");
-    expect(tooltip).toHaveStyle({ color: "red" });
+    expect(tooltip.style.color).toBe("red");
   });
 
   it("renders with custom placement", () => {

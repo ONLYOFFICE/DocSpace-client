@@ -401,7 +401,7 @@ const ManualBackup = ({
   const isCreateButtonDisabled = mainDisabled && !isDownloadButton;
 
   return (
-    <div className={styles.manualBackup}>
+    <div className={styles.manualBackup} data-testid="manual-backup-wrapper">
       <StatusMessage
         message={errorMessage || errorInformation || backupProgressWarning}
         isWarning={!!backupProgressWarning}

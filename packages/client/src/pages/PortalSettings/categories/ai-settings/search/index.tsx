@@ -112,7 +112,11 @@ const SearchComponent = ({
     try {
       await updateWebSearch?.(true, selectedOption, value);
 
-      toastr.success(t("AISettings:WebSearchEnabledSuccess"));
+      toastr.success(
+        t("AISettings:WebSearchEnabledSuccess", {
+          webSearch: t("Common:WebSearchAI"),
+        }),
+      );
     } catch (e) {
       console.error(e);
       toastr.error(e as string);
@@ -162,14 +166,17 @@ const SearchComponent = ({
         data-tooltip-content={
           !hasAIProviders
             ? t("AISettings:ToUseAddProvider", {
-                value: t("AISettings:Search"),
+                value: t("Common:WebSearchAI"),
+                aiProvider: t("Common:AIProvider"),
               })
             : undefined
         }
       >
         <Text className={generalStyles.description}>
           {t("AISettings:SearchDescription", {
+            webSearch: t("Common:WebSearchAI"),
             productName: t("Common:ProductName"),
+            aiChats: t("Common:AIChats"),
           })}
         </Text>
         {webSearchSettingsUrl ? (
@@ -185,11 +192,13 @@ const SearchComponent = ({
             {t("Common:LearnMore")}
           </Link>
         ) : null}
-        <div className={styles.searchForm}>
+        <div className={styles.searchForm} data-testid="web-search-form">
           <FieldContainer
             labelVisible
             isVertical
-            labelText={t("AISettings:SearchEngine")}
+            labelText={t("AISettings:SearchEngine", {
+              webSearch: t("Common:WebSearchAI"),
+            })}
             removeMargin
           >
             <ComboBox
@@ -204,6 +213,8 @@ const SearchComponent = ({
               }
               displaySelectedOption
               isDisabled={!hasAIProviders || isKeyHidden}
+              dataTestId="web-search-engine-combobox"
+              dropDownTestId="web-search-engine-dropdown"
             />
           </FieldContainer>
           <FieldContainer
@@ -213,7 +224,10 @@ const SearchComponent = ({
             removeMargin
           >
             {isKeyHidden ? (
-              <div className={styles.aiBanner}>
+              <div
+                className={styles.aiBanner}
+                data-testid="web-search-key-hidden-banner"
+              >
                 <Text fontSize="12px" fontWeight={400} lineHeight="16px">
                   {t("AISettings:WebSearchKeyHiddenDescription")}
                 </Text>
@@ -233,9 +247,12 @@ const SearchComponent = ({
                     isKeyHidden || selectedOption === WebSearchType.None
                   }
                   autoComplete="off"
+                  testId="web-search-key-input"
                 />
                 <Text className={styles.hiddenKeyDescription}>
-                  {t("AISettings:WebSearchKeyDescription")}
+                  {t("AISettings:WebSearchKeyDescription", {
+                    webSearch: t("Common:WebSearchAI"),
+                  })}
                 </Text>
               </>
             )}
@@ -250,6 +267,7 @@ const SearchComponent = ({
             onClick={onSave}
             isLoading={saveRequestRunning}
             isDisabled={isSaveDisabled}
+            testId="web-search-save-button"
           />
           <Button
             size={ButtonSize.small}
@@ -262,6 +280,7 @@ const SearchComponent = ({
               saveRequestRunning ||
               webSearchConfig.needReset
             }
+            testId="web-search-reset-button"
           />
         </div>
       </div>

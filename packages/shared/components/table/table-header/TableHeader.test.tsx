@@ -105,6 +105,7 @@ const defaultProps = {
 describe("<TableHeader />", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    localStorage.clear();
   });
 
   it("renders without errors", () => {

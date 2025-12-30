@@ -24,11 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { API_PREFIX, BASE_URL } from "../../utils";
+import {
+  API_PREFIX,
+  BASE_URL,
+  HEADER_WITHOUT_CUSTOMIZATION,
+} from "../../utils";
 
 export const PATH_QUOTA = "portal/payment/quota";
 
-export const quotaSuccess = {
+export const quotaSuccess = (withCustomization: boolean = false) => ({
   response: {
     id: -10,
     title: "Business",
@@ -71,7 +75,7 @@ export const quotaSuccess = {
       },
       {
         id: "branding",
-        value: false,
+        value: true,
         type: "flag",
       },
       {
@@ -111,7 +115,7 @@ export const quotaSuccess = {
       {
         id: "customization",
         title: "Branding & customization",
-        value: true,
+        value: withCustomization,
         type: "flag",
       },
       {
@@ -198,8 +202,12 @@ export const quotaSuccess = {
   status: 0,
   statusCode: 200,
   ok: true,
-};
+});
 
-export const quotaHandler = () => {
-  return new Response(JSON.stringify(quotaSuccess));
+export const quotaHandler = (headers?: Headers) => {
+  if (headers?.get(HEADER_WITHOUT_CUSTOMIZATION)) {
+    return new Response(JSON.stringify(false));
+  }
+
+  return new Response(JSON.stringify(quotaSuccess(true)));
 };

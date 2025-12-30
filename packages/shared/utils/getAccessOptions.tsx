@@ -54,7 +54,9 @@ const getRoomAdminDescription = (roomType: RoomsType, t: TTranslation) => {
     case RoomsType.FormRoom:
       return t("Common:RoleRoomAdminFormRoomDescription");
     case RoomsType.AIRoom:
-      return t("Common:RoleAIAgentManagerDescription");
+      return t("Common:RoleAIAgentManagerDescription", {
+        aiAgent: t("Common:AIAgent"),
+      });
     case None:
       return (
         <Trans
@@ -92,6 +94,7 @@ const getUserDescription = (roomType: RoomsType, t: TTranslation) => {
           }}
           values={{
             agentSection: t("Common:AIAgents"),
+            aiAgent: t("Common:AIAgent"),
           }}
         />
       ) as unknown as string;

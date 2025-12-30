@@ -30,8 +30,46 @@ export { aiConfigHandler, PATH_AI_CONFIG } from "./config";
 
 export { aiModelsHandler, PATH_AI_MODELS } from "./models";
 
-export { aiProvidersHandler, PATH_AI_PROVIDERS } from "./providers";
+export {
+  aiProvidersHandler,
+  aiProvidersPostHandler,
+  aiProvidersDeleteHandler,
+  aiProvidersPutHandler,
+  PATH_AI_PROVIDERS,
+  PATH_AI_PROVIDER,
+} from "./providers";
 
-export { aiServerHandler, PATH_AI_SERVER } from "./server";
+export {
+  aiProvidersAvailableHandler,
+  PATH_AI_PROVIDERS_AVAILABLE,
+} from "./providersAvailable";
 
-export { aiServersHandler, PATH_AI_SERVERS } from "./servers";
+export {
+  aiServerHandler,
+  PATH_AI_SERVER,
+  aiServerPutHandler,
+  aiServerStatusPutHandler,
+  PATH_AI_SERVER_STATUS,
+} from "./server";
+
+export {
+  PATH_AI_CONFIG_WEB_SEARCH,
+  aiWebSearchGetHandler,
+  aiWebSearchPutHandler,
+} from "./webSearch";
+
+export {
+  aiServersAvailableHandler,
+  PATH_AI_SERVERS_AVAILABLE,
+  aiServersGetHandler,
+  PATH_AI_SERVERS,
+  PATH_AI_SERVERS_WITH_FILTER,
+  aiServersPostHandler,
+  aiServersDeleteHandler,
+} from "./servers";
+
+export {
+  aiVectorizationGetHandler,
+  aiVectorizationPutHandler,
+  PATH_AI_CONFIG_VECTORIZATION,
+} from "./vectorization";

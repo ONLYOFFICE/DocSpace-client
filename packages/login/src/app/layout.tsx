@@ -32,7 +32,6 @@ import { LANGUAGE, SYSTEM_THEME_KEY } from "@docspace/shared/constants";
 import { getDirectionByLanguage } from "@docspace/shared/utils/common";
 import { getFontFamilyDependingOnLanguage } from "@docspace/shared/utils/rtlUtils";
 
-import StyledComponentsRegistry from "@/utils/registry";
 import { Providers } from "@/providers";
 import {
   getColorTheme,
@@ -179,21 +178,19 @@ export default async function RootLayout({
         className={`${dirClass} ${themeClass}`}
         suppressHydrationWarning
       >
-        <StyledComponentsRegistry>
-          <Providers
-            value={{
-              settings: typeof settings === "string" ? undefined : settings,
-              colorTheme,
-              systemTheme: systemTheme?.value as ThemeKeys,
-            }}
-            redirectURL={redirectUrl}
-            user={user}
-            locale={locale}
-          >
-            <Toast isSSR />
-            {children}
-          </Providers>
-        </StyledComponentsRegistry>
+        <Providers
+          value={{
+            settings: typeof settings === "string" ? undefined : settings,
+            colorTheme,
+            systemTheme: systemTheme?.value as ThemeKeys,
+          }}
+          redirectURL={redirectUrl}
+          user={user}
+          locale={locale}
+        >
+          <Toast isSSR />
+          {children}
+        </Providers>
         <Scripts />
       </body>
     </html>

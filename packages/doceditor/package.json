@@ -8,6 +8,12 @@
     "build:deploy": "cross-env DEPLOY=true next build --webpack",
     "start": "cross-env NODE_ENV=development PORT=5013 next dev --webpack",
     "start-prod": "cross-env NODE_ENV=production node server.js",
+    "test:build": "cross-env E2E_TEST=true next build --webpack",
+    "test:start": "cross-env NODE_ENV=production E2E_TEST=true PORT=5113 node server.js --app.port=5113",
+    "test:e2e:docker:build": "docker-compose build",
+    "test:e2e:docker:start": "docker-compose run --rm tests-local pnpm exec playwright test",
+    "test:e2e:docker:update-screenshots": "docker-compose run --rm tests-local pnpm exec playwright test --update-snapshots",
+    "test:e2e:docker:clear": "docker rmi doceditor-tests",
     "lint": "biome lint ./src",
     "lint:fix": "biome lint --write ./src",
     "format": "biome check ./src",
@@ -44,6 +50,7 @@
   "devDependencies": {
     "@biomejs/biome": "2.3.4",
     "@babel/core": "7.25.8",
+    "@playwright/test": "1.56.1",
     "@svgr/webpack": "8.1.0",
     "@types/crypto-js": "4.2.2",
     "@types/he": "1.2.3",
@@ -103,6 +110,11 @@
       "deploy": {
         "dependsOn": [
           "build:deploy"
+        ]
+      },
+      "test:build": {
+        "dependsOn": [
+          "build:translations"
         ]
       }
     }

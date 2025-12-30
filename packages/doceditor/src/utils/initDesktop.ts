@@ -57,10 +57,12 @@ const initDesktop = (
   const getAccess = (callback?: TGetSharingKeysCallback) => {
     getEncryptionAccess(fileId)
       .then((data) => {
-        const keys: TSharingKeys =
-          data.keys && typeof data.keys === "string"
-            ? JSON.parse(data.keys)
-            : [];
+        const keys: TSharingKeys = data.userKeys
+          ? data.userKeys.map((k) => ({
+              userId: k.userId,
+              publicKey: k.publicKey,
+            }))
+          : [];
 
         callback?.({ keys });
       })

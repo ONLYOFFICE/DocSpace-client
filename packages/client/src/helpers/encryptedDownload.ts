@@ -238,5 +238,5 @@ export function getUserEncryptedKey(
   userId: string,
 ): string | null {
   const userKey = metadata.encryptedKeys?.find((key) => key.userId === userId);
-  return userKey?.data ?? null;
+  return userKey?.privateKeyEnc ?? null;
 }

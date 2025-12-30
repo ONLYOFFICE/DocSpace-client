@@ -73,7 +73,7 @@ export type UseFileEncryptionResult = {
     metadata: FileEncryptionMetadata,
     newRecipientPublicKey: string,
     newRecipientUserId: string,
-  ) => Promise<{ userId: string; data: string }>;
+  ) => Promise<{ userId: string; publicKeyId: string; privateKeyEnc: string }>;
   requestUnlock: () => Promise<CryptoKey | null>;
   prepareFilesForEncryptedUpload: (
     files: File[],
@@ -215,7 +215,11 @@ export function useFileEncryption(
       metadata: FileEncryptionMetadata,
       newRecipientPublicKey: string,
       newRecipientUserId: string,
-    ): Promise<{ userId: string; data: string }> => {
+    ): Promise<{
+      userId: string;
+      publicKeyId: string;
+      privateKeyEnc: string;
+    }> => {
       const privateKey = await getSecretKey();
 
       if (!privateKey) {

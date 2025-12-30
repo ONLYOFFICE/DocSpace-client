@@ -1482,8 +1482,7 @@ class UploadDataStore {
   };
 
   asyncUpload = async (t, chunkData, resolve, reject, createNewIfExist) => {
-    const { operationId, file, fileSize, indexOfFile, path, length } =
-      chunkData;
+    const { operationId, fileSize, indexOfFile, path, length } = chunkData;
 
     console.log("[ENCRYPTION DEBUG] asyncUpload called:", {
       operationId,

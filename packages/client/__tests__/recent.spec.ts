@@ -27,6 +27,7 @@
 import { endpoints } from "@docspace/shared/__mocks__/e2e";
 
 import { expect, test } from "./fixtures/base";
+import { getListTestIds } from "./utils";
 
 test.describe("Recent", () => {
   test.beforeEach(async ({ mockRequest }) => {
@@ -64,44 +65,52 @@ test.describe("Recent", () => {
 
     const emptyView = page.getByTestId("empty-view");
     await expect(emptyView).toBeVisible();
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "recent",
-      "recent-empty.png",
-    ]);
+    await expect(page).toHaveScreenshot(["recent", "recent-empty.png"]);
   });
 
-  test("should handle recent files list", async ({ page, mockRequest }) => {
+  test("should handle recent files list", async ({
+    page,
+    mockRequest,
+  }, testInfo) => {
     await mockRequest.router([endpoints.recent]);
 
     await page.goto("/recent/filter?folder=28934");
 
-    const table = page.getByTestId("table-body");
-    await expect(table).toBeVisible();
+    const { containerTestId, titleTestId } = getListTestIds(
+      testInfo.project.name,
+    );
 
-    const title = table.locator(".table-list-item a").first();
+    const container = page.getByTestId(containerTestId);
+    await expect(container).toBeVisible();
 
+    const title = container.locator(titleTestId).first();
     await expect(title).toBeVisible();
     await expect(title).toHaveText("Spreadsheet via link");
 
-    await expect(page).toHaveScreenshot(["desktop", "recent", "recent.png"]);
+    await expect(page).toHaveScreenshot(["recent", "recent.png"]);
   });
 
   test("should context menu for recent file via link", async ({
     page,
     mockRequest,
-  }) => {
+  }, testInfo) => {
     await mockRequest.router([endpoints.recent]);
 
     await page.goto("/recent/filter?folder=28934");
 
-    const table = page.getByTestId("table-body");
-    await expect(table).toBeVisible();
+    const { containerTestId, rowTestId } = getListTestIds(
+      testInfo.project.name,
+    );
 
-    const cell = page.locator('[data-testid="recent-cell-name-0"]');
-    await cell.locator('[data-testid="link"]').click({ button: "right" });
+    const container = page.getByTestId(containerTestId);
+    await expect(container).toBeVisible();
+
+    const row = container.getByTestId(rowTestId + "0");
+    const contextMenuButton = row.getByTestId("context-menu-button").first();
+    await expect(contextMenuButton).toBeVisible();
+
+    await contextMenuButton.click();
     await expect(page).toHaveScreenshot([
-      "desktop",
       "recent",
       "recent-file-via-link-context-menu.png",
     ]);
@@ -110,18 +119,24 @@ test.describe("Recent", () => {
   test("should context menu for recent file from room", async ({
     page,
     mockRequest,
-  }) => {
+  }, testInfo) => {
     await mockRequest.router([endpoints.recent]);
 
     await page.goto("/recent/filter?folder=28934");
 
-    const table = page.getByTestId("table-body");
-    await expect(table).toBeVisible();
+    const { containerTestId, rowTestId } = getListTestIds(
+      testInfo.project.name,
+    );
 
-    const cell = page.locator('[data-testid="recent-cell-name-1"]');
-    await cell.locator('[data-testid="link"]').click({ button: "right" });
+    const container = page.getByTestId(containerTestId);
+    await expect(container).toBeVisible();
+
+    const row = container.getByTestId(rowTestId + "1");
+    const contextMenuButton = row.getByTestId("context-menu-button").first();
+    await expect(contextMenuButton).toBeVisible();
+
+    await contextMenuButton.click();
     await expect(page).toHaveScreenshot([
-      "desktop",
       "recent",
       "recent-file-from-room-context-menu.png",
     ]);
@@ -130,18 +145,24 @@ test.describe("Recent", () => {
   test("should context menu for recent file shared with me", async ({
     page,
     mockRequest,
-  }) => {
+  }, testInfo) => {
     await mockRequest.router([endpoints.recent]);
 
     await page.goto("/recent/filter?folder=28934");
 
-    const table = page.getByTestId("table-body");
-    await expect(table).toBeVisible();
+    const { containerTestId, rowTestId } = getListTestIds(
+      testInfo.project.name,
+    );
 
-    const cell = page.locator('[data-testid="recent-cell-name-2"]');
-    await cell.locator('[data-testid="link"]').click({ button: "right" });
+    const container = page.getByTestId(containerTestId);
+    await expect(container).toBeVisible();
+
+    const row = container.getByTestId(rowTestId + "2");
+    const contextMenuButton = row.getByTestId("context-menu-button").first();
+    await expect(contextMenuButton).toBeVisible();
+
+    await contextMenuButton.click();
     await expect(page).toHaveScreenshot([
-      "desktop",
       "recent",
       "recent-file-shared-with-me-context-menu.png",
     ]);
@@ -150,18 +171,24 @@ test.describe("Recent", () => {
   test("should context menu for recent archive", async ({
     page,
     mockRequest,
-  }) => {
+  }, testInfo) => {
     await mockRequest.router([endpoints.recent]);
 
     await page.goto("/recent/filter?folder=28934");
 
-    const table = page.getByTestId("table-body");
-    await expect(table).toBeVisible();
+    const { containerTestId, rowTestId } = getListTestIds(
+      testInfo.project.name,
+    );
 
-    const cell = page.locator('[data-testid="recent-cell-name-3"]');
-    await cell.locator('[data-testid="link"]').click({ button: "right" });
+    const container = page.getByTestId(containerTestId);
+    await expect(container).toBeVisible();
+
+    const row = container.getByTestId(rowTestId + "3");
+    const contextMenuButton = row.getByTestId("context-menu-button").first();
+    await expect(contextMenuButton).toBeVisible();
+
+    await contextMenuButton.click();
     await expect(page).toHaveScreenshot([
-      "desktop",
       "recent",
       "recent-archive-context-menu.png",
     ]);
@@ -170,35 +197,50 @@ test.describe("Recent", () => {
   test("should context menu for recent image", async ({
     page,
     mockRequest,
-  }) => {
+  }, testInfo) => {
     await mockRequest.router([endpoints.recent]);
 
     await page.goto("/recent/filter?folder=28934");
 
-    const table = page.getByTestId("table-body");
-    await expect(table).toBeVisible();
+    const { containerTestId, rowTestId } = getListTestIds(
+      testInfo.project.name,
+    );
 
-    const cell = page.locator('[data-testid="recent-cell-name-4"]');
-    await cell.locator('[data-testid="link"]').click({ button: "right" });
+    const container = page.getByTestId(containerTestId);
+    await expect(container).toBeVisible();
+
+    const row = container.getByTestId(rowTestId + "4");
+    const contextMenuButton = row.getByTestId("context-menu-button").first();
+    await expect(contextMenuButton).toBeVisible();
+
+    await contextMenuButton.click();
     await expect(page).toHaveScreenshot([
-      "desktop",
       "recent",
       "recent-image-context-menu.png",
     ]);
   });
 
-  test("should context menu for recent file", async ({ page, mockRequest }) => {
+  test("should context menu for recent file", async ({
+    page,
+    mockRequest,
+  }, testInfo) => {
     await mockRequest.router([endpoints.recent]);
 
     await page.goto("/recent/filter?folder=28934");
 
-    const table = page.getByTestId("table-body");
-    await expect(table).toBeVisible();
+    const { containerTestId, rowTestId } = getListTestIds(
+      testInfo.project.name,
+    );
 
-    const cell = page.locator('[data-testid="recent-cell-name-5"]');
-    await cell.locator('[data-testid="link"]').click({ button: "right" });
+    const container = page.getByTestId(containerTestId);
+    await expect(container).toBeVisible();
+
+    const row = container.getByTestId(rowTestId + "5");
+    const contextMenuButton = row.getByTestId("context-menu-button").first();
+    await expect(contextMenuButton).toBeVisible();
+
+    await contextMenuButton.click();
     await expect(page).toHaveScreenshot([
-      "desktop",
       "recent",
       "recent-file-context-menu.png",
     ]);
@@ -208,16 +250,23 @@ test.describe("Recent", () => {
     page,
     mockRequest,
     wsMock,
-  }) => {
+  }, testInfo) => {
     await mockRequest.router([endpoints.recent, endpoints.settingsWithSocket]);
     await wsMock.setupWebSocketMock();
     await page.goto("/recent/filter?folder=28934");
 
-    const table = page.getByTestId("table-body");
-    await expect(table).toBeVisible();
+    const { containerTestId, rowTestId } = getListTestIds(
+      testInfo.project.name,
+    );
 
-    const cell = page.locator('[data-testid="recent-cell-name-0"]');
-    await cell.locator('[data-testid="link"]').click({ button: "right" });
+    const container = page.getByTestId(containerTestId);
+    await expect(container).toBeVisible();
+
+    const row = container.getByTestId(rowTestId + "1");
+    const contextMenuButton = row.getByTestId("context-menu-button").first();
+    await expect(contextMenuButton).toBeVisible();
+
+    await contextMenuButton.click();
     const removeFromRecent = page.getByTestId("remove-from-recent");
     await expect(removeFromRecent).toBeVisible();
     await removeFromRecent.click();

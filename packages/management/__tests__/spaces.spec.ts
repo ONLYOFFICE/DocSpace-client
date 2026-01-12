@@ -46,7 +46,6 @@ test.describe("Spaces", () => {
       page.getByTestId("configuration-spaces-wrapper"),
     ).toBeVisible();
     await expect(page).toHaveScreenshot([
-      "desktop",
       "spaces",
       "spaces-configuration-render.png",
     ]);
@@ -61,7 +60,6 @@ test.describe("Spaces", () => {
 
     await expect(page.getByTestId("multiple-spaces-wrapper")).toBeVisible();
     await expect(page).toHaveScreenshot([
-      "desktop",
       "spaces",
       "spaces-multiple-render.png",
     ]);
@@ -87,7 +85,6 @@ test.describe("Spaces", () => {
     await expect(createPortalButton).toBeVisible();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "spaces",
       "spaces-create-space-modal.png",
     ]);
@@ -99,7 +96,6 @@ test.describe("Spaces", () => {
     await createPortalButton.click();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "spaces",
       "spaces-create-space-render.png",
     ]);
@@ -124,7 +120,6 @@ test.describe("Spaces", () => {
     const deleteSpaceButton = page.getByTestId("delete-space-button");
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "spaces",
       "spaces-delete-space-modal.png",
     ]);
@@ -134,7 +129,6 @@ test.describe("Spaces", () => {
     await deleteSpaceButton.click();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "spaces",
       "spaces-delete-space-render.png",
     ]);
@@ -143,7 +137,7 @@ test.describe("Spaces", () => {
   test("should change domain dialog render", async ({ page, mockRequest }) => {
     await mockRequest.setHeaders("/management/spaces", [
       HEADER_UNCOMPLETED_TENANT,
-    ]); 
+    ]);
     await mockRequest.router([endpoints.setDomain]);
 
     await page.goto("/management/spaces");
@@ -160,7 +154,6 @@ test.describe("Spaces", () => {
     await changeDomainInput.fill("test.com");
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "spaces",
       "spaces-change-domain-modal.png",
     ]);

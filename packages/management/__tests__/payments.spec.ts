@@ -24,9 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import {
-  endpoints,
-} from "@docspace/shared/__mocks__/e2e";
+import { endpoints } from "@docspace/shared/__mocks__/e2e";
 
 import { expect, test } from "./fixtures/base";
 
@@ -38,14 +36,8 @@ test.describe("Payments", () => {
   test("should payments render", async ({ page }) => {
     await page.goto("/management/payments");
 
-    await expect(
-      page.getByTestId("standalone-page"),
-    ).toBeVisible();
+    await expect(page.getByTestId("standalone-page")).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "payments",
-      "payments-render.png",
-    ]);
+    await expect(page).toHaveScreenshot(["payments", "payments-render.png"]);
   });
 });

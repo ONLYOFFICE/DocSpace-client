@@ -24,10 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import {
-  endpoints,
-  HEADER_OPEN_SOURCE
-} from "@docspace/shared/__mocks__/e2e";
+import { endpoints, HEADER_OPEN_SOURCE } from "@docspace/shared/__mocks__/e2e";
 
 import { expect, test } from "./fixtures/base";
 
@@ -37,20 +34,12 @@ test.describe("Bonus", () => {
   });
 
   test("should bonus settings render", async ({ page, mockRequest }) => {
-    await mockRequest.setHeaders("/management/bonus", [
-      HEADER_OPEN_SOURCE,
-    ]);
+    await mockRequest.setHeaders("/management/bonus", [HEADER_OPEN_SOURCE]);
 
     await page.goto("/management/bonus");
 
-    await expect(
-      page.getByTestId("bonus"),
-    ).toBeVisible();
+    await expect(page.getByTestId("bonus")).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "bonus",
-      "bonus-render.png",
-    ]);
+    await expect(page).toHaveScreenshot(["bonus", "bonus-render.png"]);
   });
 });

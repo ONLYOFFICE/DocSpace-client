@@ -38,17 +38,24 @@ test.describe("Settings", () => {
     await mockRequest.router([endpoints.colorTheme]);
   });
 
-  test("should branding settings render", async ({ page, mockRequest }) => {
+  test("should branding settings render", async ({
+    page,
+    mockRequest,
+  }, testInfo) => {
     await mockRequest.setHeaders("**/management/settings**", [
       HEADER_UNCOMPLETED_TENANT,
     ]);
 
     await page.goto("/management/settings");
 
-    await expect(page.getByTestId("whitelabel-settings-wrapper")).toBeVisible();
+    const root =
+      testInfo.project.name === "mobile"
+        ? page.getByTestId("mobile-view-wrapper")
+        : page.getByTestId("whitelabel-settings-wrapper");
+
+    await expect(root).toBeVisible();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "settings",
       "settings-branding-render.png",
     ]);
@@ -64,7 +71,6 @@ test.describe("Settings", () => {
     await expect(page.getByTestId("manual-backup-wrapper")).toBeVisible();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "settings",
       "settings-data-backup-render.png",
     ]);
@@ -80,7 +86,6 @@ test.describe("Settings", () => {
     await expect(page.getByTestId("auto-backup")).toBeVisible();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "settings",
       "settings-auto-backup-render.png",
     ]);
@@ -96,7 +101,6 @@ test.describe("Settings", () => {
     await expect(page.getByTestId("restore-backup")).toBeVisible();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "settings",
       "settings-restore-render.png",
     ]);
@@ -112,7 +116,6 @@ test.describe("Settings", () => {
     await expect(page.getByTestId("encrypt-data-page")).toBeVisible();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "settings",
       "settings-encrypt-render.png",
     ]);
@@ -132,19 +135,23 @@ test.describe("Settings", () => {
     await expect(page.getByTestId("encrypt-data-page")).toBeVisible();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "settings",
       "settings-encrypt-encrypted-render.png",
     ]);
   });
 
-  test("should unavailable branding settings render", async ({ page }) => {
+  test("should unavailable branding settings render", async ({
+    page,
+  }, testInfo) => {
+    test.skip(testInfo.project.name === "mobile", "Unused on mobile view");
+
     await page.goto("/management/settings");
 
-    await expect(page.getByTestId("whitelabel-settings-wrapper")).toBeVisible();
+    const root = page.getByTestId("whitelabel-settings-wrapper");
+
+    await expect(root).toBeVisible();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "settings",
       "settings-branding-unavailable-render.png",
     ]);
@@ -156,7 +163,6 @@ test.describe("Settings", () => {
     await expect(page.getByTestId("manual-backup-wrapper")).toBeVisible();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "settings",
       "settings-data-backup-unavailable-render.png",
     ]);
@@ -168,7 +174,6 @@ test.describe("Settings", () => {
     await expect(page.getByTestId("auto-backup")).toBeVisible();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "settings",
       "settings-auto-backup-unavailable-render.png",
     ]);
@@ -180,7 +185,6 @@ test.describe("Settings", () => {
     await expect(page.getByTestId("restore-backup")).toBeVisible();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "settings",
       "settings-restore-unavailable-render.png",
     ]);
@@ -192,7 +196,6 @@ test.describe("Settings", () => {
     await expect(page.getByTestId("encrypt-data-page")).toBeVisible();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "settings",
       "settings-encrypt-unavailable-render.png",
     ]);
@@ -201,7 +204,7 @@ test.describe("Settings", () => {
   test("should not available branding settings render", async ({
     page,
     mockRequest,
-  }) => {
+  }, testInfo) => {
     await mockRequest.setHeaders("**/management/settings**", [
       HEADER_UNCOMPLETED_TENANT,
       HEADER_WITHOUT_CUSTOMIZATION,
@@ -209,10 +212,14 @@ test.describe("Settings", () => {
 
     await page.goto("/management/settings");
 
-    await expect(page.getByTestId("whitelabel-settings-wrapper")).toBeVisible();
+    const root =
+      testInfo.project.name === "mobile"
+        ? page.getByTestId("mobile-view-wrapper")
+        : page.getByTestId("whitelabel-settings-wrapper");
+
+    await expect(root).toBeVisible();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "settings",
       "settings-branding-without-customization-render.png",
     ]);

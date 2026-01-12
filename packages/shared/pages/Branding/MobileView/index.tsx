@@ -47,7 +47,7 @@ export const MobileView = ({
   const { t } = useTranslation("Common");
 
   return (
-    <div className={styles.mobileView}>
+    <div className={styles.mobileView} data-testid="mobile-view-wrapper">
       <MobileCategoryWrapper
         title={t("BrandName")}
         subtitle={t("BrandNameSubtitleMobile")}

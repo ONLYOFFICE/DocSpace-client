@@ -30,6 +30,7 @@ import type {
   TPrivacySettingsRequest,
   TEncryptionKeyPair,
   TPrivacyRoomKeysResponse,
+  TSetFileAccessKeysRequest,
 } from "./types";
 
 export async function getPrivacySettings() {
@@ -110,5 +111,17 @@ export async function deleteEncryptionKey(keyId: string) {
     url: `privacyroom/keys/${keyId}`,
   })) as TEncryptionKeyPair[];
 
+  return res;
+}
+
+export async function setFileAccessKeys(
+  fileId: string | number,
+  keys: TSetFileAccessKeysRequest[],
+) {
+  const res = await request({
+    method: "post",
+    url: `privacyroom/access/${fileId}`,
+    data: { keys },
+  });
   return res;
 }

@@ -51,6 +51,7 @@ import { Link } from "@docspace/shared/components/link";
 import { checkIfAccessPaid } from "@docspace/shared/utils/filterPaidRoleOptions";
 import PeopleSelector from "@docspace/shared/selectors/People";
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
+import { reEncryptRoomKeysForNewMembers } from "SRC_DIR/helpers/roomEncryption";
 import { fixAccess } from "./utils";
 import ExternalLinks from "./sub-components/ExternalLinks";
 import InviteInput from "./sub-components/InviteInput";
@@ -344,6 +345,26 @@ const InvitePanel = ({
       const result = !isRooms
         ? await api.people.inviteUsers(data)
         : await api.rooms.setRoomSecurity(roomId, data);
+
+      if (isRooms && selectedRoom?.private) {
+        const newMemberIds = inviteItems
+          .filter((item) => item.id && !item.isGroup)
+          .map((item) => ({ id: item.id }));
+
+        if (newMemberIds.length > 0) {
+          try {
+            await reEncryptRoomKeysForNewMembers(roomId, newMemberIds, {
+              currentUserId,
+            });
+          } catch (encryptionError) {
+            console.error(
+              "Failed to re-encrypt file keys for new members:",
+              encryptionError,
+            );
+            toastr.warning(t("Common:EncryptedFilesKeyWarning"));
+          }
+        }
+      }
 
       if (!isRooms) {
         setIsNewUserByCurrentUser(true);

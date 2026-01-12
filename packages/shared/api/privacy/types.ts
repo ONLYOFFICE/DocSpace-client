@@ -46,3 +46,9 @@ export type TEncryptionKeyPair = {
   date?: string;
   cryptoEngineId?: string;
 };
+
+export type TSetFileAccessKeysRequest = {
+  userId: string;
+  publicKeyId: string;
+  privateKeyEnc: string;
+};

@@ -89,7 +89,7 @@ const Message = ({
     const files = message.contents.filter((c) => c.type === ContentType.Files);
 
     return (
-      <div className={styles.userMessageContainer}>
+      <div className={styles.userMessageContainer} data-testid="user-message">
         <div
           key={`${currentChat?.id}-${message.createdOn}-${idx * 2}`}
           className={classNames(styles.userMessage)}
@@ -161,7 +161,10 @@ const Message = ({
 
   if (isError)
     return (
-      <div key={`error-${currentChat?.id}-${message.createdOn}-${idx * 2}`}>
+      <div
+        key={`error-${currentChat?.id}-${message.createdOn}-${idx * 2}`}
+        data-testid="error-message"
+      >
         <Error content={message.contents[0]} />
       </div>
     );
@@ -175,7 +178,10 @@ const Message = ({
     .join("");
 
   return (
-    <div key={`${currentChat?.id}-${message.createdOn}-${idx * 2}`}>
+    <div
+      key={`${currentChat?.id}-${message.createdOn}-${idx * 2}`}
+      data-testid="ai-message"
+    >
       {message.contents.map((c, mId) => {
         if (c.type === ContentType.Text)
           return (

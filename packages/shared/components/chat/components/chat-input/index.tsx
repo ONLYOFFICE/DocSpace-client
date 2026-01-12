@@ -286,6 +286,7 @@ const ChatInput = ({
               fontSize={15}
               isDisabled={!aiReady}
               onKeyDown={onKeyEnter}
+              dataTestId="chat-input-textarea"
             />
 
             <FilesList

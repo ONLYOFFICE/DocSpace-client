@@ -43,7 +43,7 @@ const ChatFooter = ({
   toolsSettings,
 }: ChatFooterProps) => {
   return (
-    <div className={styles.chatFooter}>
+    <div className={styles.chatFooter} data-testid="chat-footer">
       {!isLoading && !aiReady ? (
         <ChatInfoBlock standalone={standalone} isPortalAdmin={isPortalAdmin} />
       ) : null}

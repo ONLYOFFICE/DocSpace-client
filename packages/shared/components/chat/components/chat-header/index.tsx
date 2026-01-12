@@ -49,7 +49,11 @@ const ChatHeader = ({
   const headerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div ref={headerRef} className={`${styles.chatHeader} chat-header`}>
+    <div
+      ref={headerRef}
+      className={`${styles.chatHeader} chat-header`}
+      data-testid="chat-header"
+    >
       <SelectChat
         isLoadingProp={isLoading}
         getIcon={getIcon}

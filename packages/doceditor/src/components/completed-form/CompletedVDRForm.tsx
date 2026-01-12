@@ -189,7 +189,10 @@ export const CompletedVDRForm = (props: CompletedVDRFormProps) => {
   const isEditing = form.fileStatus === FileStatus.IsEditing;
 
   return (
-    <ContainerCompletedForm bgPattern={bgPattern}>
+    <ContainerCompletedForm
+      bgPattern={bgPattern}
+      data-testid="completed_form_vdr_container"
+    >
       <Scrollbar fixedSize>
         <CompletedFormLayout className="completed-form__vdr-layout">
           <Header>

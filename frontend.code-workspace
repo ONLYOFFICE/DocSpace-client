@@ -215,6 +215,21 @@
         "label": "Tests",
         "tasks": [
           {
+            "label": "Lint",
+            "task": "Test | Biome",
+            "tooltip": "🛠️ Start the \"biome\" task"
+          },
+          {
+            "label": "Lint:fix",
+            "task": "Test | Biome:fix",
+            "tooltip": "🛠️ Start the \"biome (autofix)\" task"
+          },
+          {
+            "label": "Typescript issues (tsc)",
+            "task": "Test | Tsc",
+            "tooltip": "🛠️ Start the \"tsc\" task"
+          },
+          {
             "label": "Test all common tests",
             "task": "Test | Jest:common",
             "tooltip": "🛠️ Start the \"Test | Jest:common\" task"
@@ -310,19 +325,19 @@
             "tooltip": "🛠️ Start the \"remove image for running e2e tests\" task"
           },
           {
-            "label": "Lint",
-            "task": "Test | Biome",
-            "tooltip": "🛠️ Start the \"biome\" task"
+            "label": "Test Editor E2E build docker",
+            "task": "Test | Test e2e docker build (editor)",
+            "tooltip": "🛠️ Start the \"test build in docker\" task"
           },
           {
-            "label": "Lint:fix",
-            "task": "Test | Biome:fix",
-            "tooltip": "🛠️ Start the \"biome (autofix)\" task"
+            "label": "Test Editor E2E start docker",
+            "task": "Test | Test e2e docker start (editor)",
+            "tooltip": "🛠️ Start the \"local frontend e2e tests in docker\" task"
           },
           {
-            "label": "Typescript issues (tsc)",
-            "task": "Test | Tsc",
-            "tooltip": "🛠️ Start the \"tsc\" task"
+            "label": "Test Editor E2E clear docker",
+            "task": "Test | Test e2e docker clear (editor)",
+            "tooltip": "🛠️ Start the \"remove image for running e2e tests\" task"
           }
         ],
         "tooltip": "🛠️ Client tests tasks"

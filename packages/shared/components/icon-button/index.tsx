@@ -269,6 +269,7 @@ const IconButton = memo(
         data-size={resolveSize(size)}
         data-tooltip-id={tooltipId}
         data-tooltip-content={tooltipContent}
+        aria-disabled={isDisabled}
         {...rest}
       >
         {iconNode ? (

@@ -1,0 +1,14 @@
+services:
+  tests-ci:
+    image: doceditor-tests
+    build:
+      context: ../..
+      dockerfile: packages/doceditor/Dockerfile
+  tests-local:
+    image: doceditor-tests
+    ports:
+      - "5113:5113"
+    volumes:
+      - ./__tests__:/app/packages/doceditor/__tests__
+      - ./playwright.config.ts:/app/packages/doceditor/playwright.config.ts
+      - ../../playwright-report/doceditor:/app/playwright-report/doceditor

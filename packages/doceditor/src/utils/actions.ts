@@ -43,6 +43,19 @@ import type {
   TSettings,
 } from "@docspace/shared/api/settings/types";
 
+import {
+  selfHandler,
+  settingsHandler,
+  colorThemeHandler,
+  deepLinkHandler,
+  openEditHandler,
+  fillingSessionHandler,
+  fillingStatusHandler,
+  fileByIdHandler,
+  docServiceHandler,
+  validatePublicRoomKeyPasswordHandler,
+} from "@docspace/shared/__mocks__/e2e";
+
 import { logger } from "@/../logger.mjs";
 
 import type {
@@ -54,6 +67,8 @@ import type {
 } from "@/types";
 
 import { availableActions, REPLACED_URL_PATH } from "./constants";
+
+const IS_TEST = process.env.E2E_TEST;
 
 export async function getFillingSession(
   fillingSessionId: string,
@@ -72,7 +87,7 @@ export async function getFillingSession(
     );
 
     try {
-      const response = await fetch(request);
+      const response = IS_TEST ? fillingSessionHandler() : await fetch(request);
 
       if (response.ok) return await response.json();
 
@@ -319,7 +334,7 @@ export async function getUser(share?: string) {
     );
 
     if (!cookie?.includes("asc_auth_key")) return undefined;
-    const userRes = await fetch(getUserRes);
+    const userRes = IS_TEST ? selfHandler(null, hdrs) : await fetch(getUserRes);
 
     if (userRes.status === 401) return undefined;
 
@@ -360,7 +375,9 @@ export async function getSettings(share?: string) {
       undefined,
     );
 
-    const settingsRes = await fetch(getSettingsRes);
+    const settingsRes = IS_TEST
+      ? settingsHandler(hdrs)
+      : await fetch(getSettingsRes);
 
     if (settingsRes.status === 403) return `access-restricted`;
 
@@ -426,7 +443,9 @@ export async function validatePublicRoomKey(key: string, fileId?: string) {
       "GET",
     );
 
-    const res = await fetch(validatePublicRoomKeyRes);
+    const res = IS_TEST
+      ? validatePublicRoomKeyPasswordHandler()
+      : await fetch(validatePublicRoomKeyRes);
     if (res.status === 401) return undefined;
     if (!res.ok) {
       const hdrs = await headers();
@@ -459,7 +478,7 @@ export async function getEditorUrl(
     undefined,
   );
 
-  const res = await fetch(request);
+  const res = IS_TEST ? docServiceHandler() : await fetch(request);
 
   if (!res.ok) {
     const hdrs = await headers();
@@ -494,7 +513,7 @@ export async function openEdit(
       undefined,
     );
 
-    const res = await fetch(getConfig);
+    const res = IS_TEST ? openEditHandler(hdrs) : await fetch(getConfig);
 
     const hostname = hdrs.get("x-forwarded-host");
 
@@ -569,7 +588,7 @@ export async function getColorTheme() {
       "GET",
     );
 
-    const res = await fetch(getSettingsRes);
+    const res = IS_TEST ? colorThemeHandler() : await fetch(getSettingsRes);
 
     if (!res.ok) {
       const hdrs = await headers();
@@ -600,7 +619,7 @@ export async function getDeepLinkSettings() {
       "GET",
     );
 
-    const res = await fetch(getSettingsRes);
+    const res = IS_TEST ? deepLinkHandler() : await fetch(getSettingsRes);
 
     if (!res.ok) {
       const hdrs = await headers();
@@ -631,7 +650,9 @@ export async function getFormFillingStatus(formId: string | number) {
       "GET",
     );
 
-    const response = await fetch(getFormFillingStatusRes);
+    const response = IS_TEST
+      ? fillingStatusHandler()
+      : await fetch(getFormFillingStatusRes);
 
     if (response.ok)
       return (await response.json()).response as TFileFillingFormStatus[];
@@ -660,12 +681,11 @@ export async function getFileById(fileId: number | string) {
       [["", ""]],
       "GET",
     );
+    const hdrs = await headers();
 
-    const response = await fetch(getFile);
+    const response = IS_TEST ? fileByIdHandler(hdrs) : await fetch(getFile);
 
     if (response.ok) return (await response.json()).response as TFile;
-
-    const hdrs = await headers();
 
     const hostname = hdrs.get("x-forwarded-host");
 

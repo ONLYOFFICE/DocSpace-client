@@ -59,6 +59,7 @@ export const ChatInfoBlock = ({
       headerText={t("Common:AIFeaturesAreCurrentlyDisabled")}
       bodyText={bodyText}
       iconName={InfoIcon}
+      dataTestId="chat-info-block"
     />
   );
 };

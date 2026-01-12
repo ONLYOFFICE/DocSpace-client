@@ -303,6 +303,7 @@ const SelectChat = ({
         className={classNames(styles.selectChat, { [styles.open]: isOpen })}
         onClick={toggleOpen}
         ref={parentRef}
+        data-testid="select-chat"
       >
         <SelectSessionReactSvg />
       </TooltipContainer>
@@ -318,6 +319,7 @@ const SelectChat = ({
           maxHeight={maxHeight}
           manualWidth={`${CHAT_LIST_WIDTH}px`}
           isNoFixedHeightOptions
+          dataTestId="select-chat-dropdown"
         >
           <ChatList
             chats={chats}

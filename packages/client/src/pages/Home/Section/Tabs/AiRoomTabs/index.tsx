@@ -84,11 +84,12 @@ const AiRoomTabs = ({
         currentSearch.delete("chat");
       }
 
-      window.history.replaceState(
-        null,
-        "",
-        `${window.location.pathname}?${currentSearch.toString()}`,
-      );
+      const searchString = currentSearch.toString();
+      const newUrl = searchString
+        ? `${window.location.pathname}?${searchString}`
+        : window.location.pathname;
+
+      window.history.replaceState(null, "", newUrl);
     };
   }, []);
 

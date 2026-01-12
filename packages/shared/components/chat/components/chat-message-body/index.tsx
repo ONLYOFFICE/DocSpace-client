@@ -99,6 +99,7 @@ const ChatMessageBody = ({
       className={classNames(styles.chatMessageBody, {
         [styles.empty]: isEmpty,
       })}
+      data-testid="chat-message-body"
     >
       {isEmpty ? (
         <EmptyScreen isLoading={isLoading} />

@@ -85,7 +85,7 @@ export const ToolCallHeader = observer(
         : statusIcons[status];
 
     const onClick = () => {
-      if (isWebCrawlingTool) return;
+      if (isWebCrawlingTool && !content.result?.error) return;
 
       setCollapsed(!collapsed);
     };
@@ -97,6 +97,7 @@ export const ToolCallHeader = observer(
           [styles.pointer]: expandable,
         })}
         onClick={onClick}
+        data-testid="tool-call-header"
       >
         <div className={styles.toolStatusIcon}>{statusIcon}</div>
 

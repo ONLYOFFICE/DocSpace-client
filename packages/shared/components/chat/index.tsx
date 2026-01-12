@@ -150,7 +150,7 @@ const ChatWrapper = (props: ChatProps) => {
   return (
     <ChatStoreContextProvider roomId={roomId} {...initChats}>
       <MessageStoreContextProvider roomId={roomId} {...messagesSettings}>
-        <ChatContainer>
+        <ChatContainer isLoadingChat={isLoadingChat}>
           <Chat {...props} isLoadingChat={isLoadingChat} />
         </ChatContainer>
       </MessageStoreContextProvider>

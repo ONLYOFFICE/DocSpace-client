@@ -55,7 +55,6 @@ test("profile remove render", async ({ page }) => {
   await page.goto(URL_WITH_PARAMS);
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "profile-remove",
     "profile-remove-render.png",
   ]);
@@ -71,7 +70,6 @@ test("profile remove success", async ({ page, context, mockRequest }) => {
   await deleteButton.waitFor({ state: "detached" });
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "profile-remove",
     "profile-remove-success.png",
   ]);

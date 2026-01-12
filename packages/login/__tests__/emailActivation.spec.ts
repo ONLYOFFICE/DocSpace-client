@@ -59,7 +59,6 @@ test("email activation success", async ({ page, mockRequest }) => {
   await page.waitForURL("/login", { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "email-activation",
     "email-activation-success.png",
   ]);
@@ -70,7 +69,6 @@ test("email activation error", async ({ page, mockRequest }) => {
   await page.goto(URL_WITH_PARAMS);
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "email-activation",
     "email-activation-error.png",
   ]);

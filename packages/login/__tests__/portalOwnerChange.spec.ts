@@ -55,7 +55,6 @@ test("portal owner change render", async ({ page }) => {
   await page.goto(URL_WITH_PARAMS);
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "portal-owner-change",
     "portal-owner-change-render.png",
   ]);
@@ -71,7 +70,6 @@ test("portal owner change save", async ({ page, mockRequest }) => {
   await changeOwnerButton.waitFor({ state: "detached" });
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "portal-owner-change",
     "portal-owner-change-save.png",
   ]);
@@ -85,7 +83,6 @@ test("portal owner change cancel", async ({ page }) => {
   await page.waitForURL("/", { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "portal-owner-change",
     "portal-owner-change-cancel.png",
   ]);

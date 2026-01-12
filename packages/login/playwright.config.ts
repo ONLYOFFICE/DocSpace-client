@@ -59,21 +59,20 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
-      name: "chromium",
+      name: "desktop",
       use: {
         ...devices["Desktop Chrome"],
         viewport: { width: 1440, height: 1024 },
       },
     },
-    /*     {
-      name: "firefox",
-      use: { ...devices["Desktop Firefox"] },
-    },
-
     {
-      name: "webkit",
-      use: { ...devices["Desktop Safari"] },
-    },  */
+      name: "tablet",
+      use: { ...devices["Galaxy Tab S4"] },
+    },
+    {
+      name: "mobile",
+      use: { ...devices["Pixel 5"] },
+    },
   ],
 
   /* Run your local dev server before starting the tests */

@@ -51,7 +51,6 @@ test("portal continue render", async ({ page }) => {
   await page.goto(URL_WITH_PARAMS);
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "portal-continue",
     "portal-continue-render.png",
   ]);
@@ -67,7 +66,6 @@ test("portal continue reactivate", async ({ page, mockRequest }) => {
   await reactivateButton.waitFor({ state: "detached" });
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "portal-continue",
     "portal-continue-reactivate.png",
   ]);
@@ -77,7 +75,6 @@ test("portal continue reactivate", async ({ page, mockRequest }) => {
   await page.waitForURL("/", { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "portal-continue",
     "portal-continue-reactivate-redirect.png",
   ]);
@@ -91,7 +88,6 @@ test("portal continue cancel", async ({ page }) => {
   await page.waitForURL("/", { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "portal-continue",
     "portal-continue-cancel.png",
   ]);

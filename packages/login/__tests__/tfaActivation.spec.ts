@@ -70,7 +70,6 @@ test("tfa activation render", async ({ page }) => {
   await page.goto(URL_WITH_PARAMS);
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "tfa-activation",
     "tfa-activation-render.png",
   ]);
@@ -86,7 +85,6 @@ test("tfa activation success", async ({ page, mockRequest }) => {
   await page.getByTestId("app_code_input").fill("123456");
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "tfa-activation",
     "tfa-activation-success.png",
   ]);
@@ -96,7 +94,6 @@ test("tfa activation success", async ({ page, mockRequest }) => {
   await page.waitForURL("/profile", { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "tfa-activation",
     "tfa-activation-success-redirect.png",
   ]);
@@ -117,7 +114,6 @@ test("tfa activation success with link data", async ({ page, mockRequest }) => {
   await page.waitForURL("/profile", { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "tfa-activation",
     "tfa-activation-with-link-data-success.png",
   ]);
@@ -135,7 +131,6 @@ test("tfa activation error not validated", async ({ page, mockRequest }) => {
   await page.getByTestId("app_connect_button").click();
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "tfa-activation",
     "tfa-activation-error-not-validated.png",
   ]);

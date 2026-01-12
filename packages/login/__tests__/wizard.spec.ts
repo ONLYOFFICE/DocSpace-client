@@ -43,11 +43,7 @@ test("wizard render", async ({ page, mockRequest }) => {
 
   await page.goto(URL);
 
-  await expect(page).toHaveScreenshot([
-    "desktop",
-    "wizard",
-    "wizard-render.png",
-  ]);
+  await expect(page).toHaveScreenshot(["wizard", "wizard-render.png"]);
 });
 
 test("wizard success", async ({ page, mockRequest }) => {
@@ -63,17 +59,12 @@ test("wizard success", async ({ page, mockRequest }) => {
     .fill("qwerty123");
   await page.getByTestId("agree_terms_checkbox").click();
 
-  await expect(page).toHaveScreenshot([
-    "desktop",
-    "wizard",
-    "wizard-success.png",
-  ]);
+  await expect(page).toHaveScreenshot(["wizard", "wizard-success.png"]);
 
   await page.getByTestId("wizard_continue_button").click();
   await page.waitForURL("/", { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "wizard",
     "wizard-success-redirect.png",
   ]);
@@ -93,11 +84,7 @@ test("wizard error", async ({ page, mockRequest }) => {
 
   await page.getByTestId("wizard_continue_button").click();
 
-  await expect(page).toHaveScreenshot([
-    "desktop",
-    "wizard",
-    "wizard-error.png",
-  ]);
+  await expect(page).toHaveScreenshot(["wizard", "wizard-error.png"]);
 });
 
 test("wizard with license success", async ({ page, mockRequest }) => {
@@ -123,7 +110,6 @@ test("wizard with license success", async ({ page, mockRequest }) => {
   await page.getByTestId("agree_terms_checkbox").click();
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "wizard",
     "wizard-with-license-success.png",
   ]);
@@ -133,7 +119,6 @@ test("wizard with license success", async ({ page, mockRequest }) => {
   await page.waitForURL("/", { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "wizard",
     "wizard-with-license-success-redirect.png",
   ]);
@@ -156,7 +141,6 @@ test("wizard with license error", async ({ page, mockRequest }) => {
   await page.getByTestId("wizard_continue_button").click();
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "wizard",
     "wizard-with-license-error.png",
   ]);
@@ -169,11 +153,7 @@ test("wizard with ami render", async ({ page, mockRequest }) => {
 
   await page.goto(URL);
 
-  await expect(page).toHaveScreenshot([
-    "desktop",
-    "wizard",
-    "wizard-with-ami-render.png",
-  ]);
+  await expect(page).toHaveScreenshot(["wizard", "wizard-with-ami-render.png"]);
 });
 
 test("wizard with ami error", async ({ page, mockRequest }) => {
@@ -185,9 +165,5 @@ test("wizard with ami error", async ({ page, mockRequest }) => {
 
   await page.getByTestId("wizard_continue_button").click();
 
-  await expect(page).toHaveScreenshot([
-    "desktop",
-    "wizard",
-    "wizard-with-ami-error.png",
-  ]);
+  await expect(page).toHaveScreenshot(["wizard", "wizard-with-ami-error.png"]);
 });

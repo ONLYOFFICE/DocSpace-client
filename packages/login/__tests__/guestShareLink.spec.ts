@@ -68,7 +68,6 @@ test("guest share link render", async ({ page, mockRequest }) => {
   await page.goto(URL_WITH_PARAMS);
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "guest-share-link",
     "guest-share-link-render.png",
   ]);
@@ -88,7 +87,6 @@ test("guest share link approve", async ({ page, mockRequest }) => {
   });
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "guest-share-link",
     "guest-share-link-approve.png",
   ]);
@@ -105,7 +103,6 @@ test("guest share link deny", async ({ page, mockRequest }) => {
   await page.waitForURL("/", { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "guest-share-link",
     "guest-share-link-deny.png",
   ]);

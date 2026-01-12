@@ -73,11 +73,7 @@ const NEXT_REQUEST_URL_WITH_PARAMS = getUrlWithQueryParams(
 test("activation render", async ({ page }) => {
   await page.goto(URL_WITH_PARAMS);
 
-  await expect(page).toHaveScreenshot([
-    "desktop",
-    "activation",
-    "activation-render.png",
-  ]);
+  await expect(page).toHaveScreenshot(["activation", "activation-render.png"]);
 });
 
 test("activation success", async ({ page, mockRequest }) => {
@@ -92,18 +88,13 @@ test("activation success", async ({ page, mockRequest }) => {
   await page.fill("[name='password']", "qwerty123");
   await page.getByTestId("password_input_eye_off_icon").click();
 
-  await expect(page).toHaveScreenshot([
-    "desktop",
-    "activation",
-    "activation-success.png",
-  ]);
+  await expect(page).toHaveScreenshot(["activation", "activation-success.png"]);
 
   await page.getByTestId("signup_button").click();
 
   await page.waitForURL("/", { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "activation",
     "activation-success-redirect.png",
   ]);
@@ -118,11 +109,7 @@ test("activation error", async ({ page }) => {
 
   await page.getByTestId("signup_button").click();
 
-  await expect(page).toHaveScreenshot([
-    "desktop",
-    "activation",
-    "activation-error.png",
-  ]);
+  await expect(page).toHaveScreenshot(["activation", "activation-error.png"]);
 });
 
 test("activation error tariffic limit", async ({ page, mockRequest }) => {
@@ -133,7 +120,6 @@ test("activation error tariffic limit", async ({ page, mockRequest }) => {
   await page.goto(URL_WITH_PARAMS);
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "activation",
     "activation-error-tariffic-limit.png",
   ]);
@@ -148,7 +134,6 @@ test("activation error user existed", async ({ page, mockRequest }) => {
   await page.goto(URL_WITH_PARAMS);
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "activation",
     "activation-user-existed.png",
   ]);
@@ -162,7 +147,6 @@ test("activation error quota failed", async ({ page, mockRequest }) => {
   await page.goto(URL_WITH_PARAMS);
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "activation",
     "activation-error-quota-failed.png",
   ]);

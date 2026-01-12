@@ -40,7 +40,7 @@ test("login render", async ({ page, mockRequest }) => {
   ]);
   await page.goto("/login");
 
-  await expect(page).toHaveScreenshot(["desktop", "login", "login-render.png"]);
+  await expect(page).toHaveScreenshot(["login", "login-render.png"]);
 });
 
 test("login error authentication failed", async ({ page, mockRequest }) => {
@@ -55,7 +55,6 @@ test("login error authentication failed", async ({ page, mockRequest }) => {
   await page.getByTestId("login_button").click();
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "login",
     "login-error-authentication-failed.png",
   ]);
@@ -71,7 +70,6 @@ test("login error not validated", async ({ page }) => {
   await page.getByTestId("login_button").click();
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "login",
     "login-error-not-validated.png",
   ]);
@@ -87,7 +85,6 @@ test("login error incorrect email", async ({ page }) => {
   await page.getByTestId("login_button").click();
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "login",
     "login-error-incorrect-email.png",
   ]);
@@ -103,7 +100,6 @@ test("login error incorrect email domain", async ({ page }) => {
   await page.getByTestId("login_button").click();
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "login",
     "login-error-incorrect-email-domain.png",
   ]);
@@ -115,7 +111,6 @@ test("login with with a registration button", async ({ page, mockRequest }) => {
   await page.goto("/login");
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "login",
     "login-with-registration-button.png",
   ]);
@@ -123,7 +118,6 @@ test("login with with a registration button", async ({ page, mockRequest }) => {
   await page.locator("#login_register").click();
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "login",
     "login-with-registration-button-modal.png",
   ]);
@@ -135,7 +129,6 @@ test("login with with access recovery", async ({ page, mockRequest }) => {
   await page.goto("/login");
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "login",
     "login-with-access-recovery.png",
   ]);
@@ -143,7 +136,6 @@ test("login with with access recovery", async ({ page, mockRequest }) => {
   await page.getByTestId("recover_access_link").click();
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "login",
     "login-with-access-recovery-modal.png",
   ]);
@@ -163,9 +155,5 @@ test("login with with hcaptcha", async ({ page, mockRequest }) => {
 
   await expect(page.getByTestId("captcha-container")).toBeVisible();
 
-  await expect(page).toHaveScreenshot([
-    "desktop",
-    "login",
-    "login-with-hcaptcha.png",
-  ]);
+  await expect(page).toHaveScreenshot(["login", "login-with-hcaptcha.png"]);
 });

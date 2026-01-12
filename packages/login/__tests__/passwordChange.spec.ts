@@ -66,7 +66,6 @@ test("password change render", async ({ page }) => {
   await page.goto(URL_WITH_PARAMS);
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "password-change",
     "password-change-render.png",
   ]);
@@ -79,7 +78,6 @@ test("password change success", async ({ page, mockRequest }) => {
   await page.fill("[name='password']", "qwerty123");
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "password-change",
     "password-change-success.png",
   ]);
@@ -89,7 +87,6 @@ test("password change success", async ({ page, mockRequest }) => {
   await page.waitForURL("/login?passwordChanged=true", { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "password-change",
     "password-change-success-redirect.png",
   ]);
@@ -102,7 +99,6 @@ test("password change error", async ({ page }) => {
   await page.getByTestId("create_password_button").click();
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "password-change",
     "password-change-error.png",
   ]);
@@ -116,7 +112,6 @@ test("password change error invalid", async ({ page, mockRequest }) => {
   await page.goto(URL_WITH_PARAMS);
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "password-change",
     "password-change-error-invalid.png",
   ]);
@@ -130,7 +125,6 @@ test("password change error expired", async ({ page, mockRequest }) => {
   await page.goto(URL_WITH_PARAMS);
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "password-change",
     "password-change-error-expired.png",
   ]);
@@ -145,7 +139,6 @@ test("password change error user excluded", async ({ page, mockRequest }) => {
   await page.goto(URL_WITH_PARAMS);
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "password-change",
     "password-change-error-user-excluded.png",
   ]);

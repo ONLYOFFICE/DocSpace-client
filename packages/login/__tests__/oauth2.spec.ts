@@ -35,11 +35,7 @@ import { expect, test } from "./fixtures/base";
 test("oauth2 login render", async ({ page }) => {
   await page.goto(`/login?client_id=${successClient.client_id}`);
 
-  await expect(page).toHaveScreenshot([
-    "desktop",
-    "oauth",
-    "oauth2-login-render.png",
-  ]);
+  await expect(page).toHaveScreenshot(["oauth", "oauth2-login-render.png"]);
 });
 
 test("oauth2 with list render", async ({ page, mockRequest }) => {
@@ -56,11 +52,7 @@ test("oauth2 with list render", async ({ page, mockRequest }) => {
   await page.getByTestId("login_button").click();
   await page.waitForURL("/login/tenant-list?**", { waitUntil: "load" });
 
-  await expect(page).toHaveScreenshot([
-    "desktop",
-    "oauth",
-    "oauth2-list-render.png",
-  ]);
+  await expect(page).toHaveScreenshot(["oauth", "oauth2-list-render.png"]);
 });
 
 test("oauth2 back button after list render", async ({ page, mockRequest }) => {
@@ -86,7 +78,6 @@ test("oauth2 back button after list render", async ({ page, mockRequest }) => {
   );
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "oauth",
     "oauth2-back-login-render.png",
   ]);
@@ -107,7 +98,7 @@ test("oauth2 back button after list render", async ({ page, mockRequest }) => {
 //   });
 
 //   await expect(page).toHaveScreenshot([
-//     "desktop",
+//
 //     "oauth",
 //     "oauth2-consent-render.png",
 //   ]);
@@ -139,7 +130,7 @@ test("oauth2 back button after list render", async ({ page, mockRequest }) => {
 //   );
 
 //   await expect(page).toHaveScreenshot([
-//     "desktop",
+//
 //     "oauth",
 //     "oauth2-consent-change-user.png",
 //   ]);

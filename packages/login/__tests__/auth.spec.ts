@@ -80,7 +80,7 @@ test("auth success", async ({ page, mockRequest }) => {
 
   await page.waitForURL("/", { waitUntil: "load" });
 
-  await expect(page).toHaveScreenshot(["desktop", "auth", "auth-success.png"]);
+  await expect(page).toHaveScreenshot(["auth", "auth-success.png"]);
 });
 
 test("auth with reference url success", async ({ page, mockRequest }) => {
@@ -94,7 +94,6 @@ test("auth with reference url success", async ({ page, mockRequest }) => {
   });
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "auth",
     "auth-with-reference-url-success.png",
   ]);
@@ -116,7 +115,6 @@ test("auth with file handler success", async ({ page, mockRequest }) => {
   );
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "auth",
     "auth-with-file-handler-success-redirect.png",
   ]);

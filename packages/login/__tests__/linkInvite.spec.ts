@@ -70,7 +70,6 @@ test("link invite email render", async ({ page, mockRequest }) => {
   await page.goto(URL_WITH_PARAMS);
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "link-invite",
     "link-invite-email-render.png",
   ]);
@@ -89,7 +88,6 @@ test("link invite login render", async ({ page, mockRequest }) => {
   await page.waitForURL("/login?loginData**", { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "link-invite",
     "link-invite-login-render.png",
   ]);
@@ -113,7 +111,6 @@ test("link invite registration render standalone", async ({
     .waitFor({ state: "attached" });
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "link-invite",
     "link-invite-registration-render-standalone.png",
   ]);
@@ -139,7 +136,6 @@ test("link invite registration render no standalone", async ({
     .waitFor({ state: "attached" });
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "link-invite",
     "link-invite-registration-render-no-standalone.png",
   ]);
@@ -156,7 +152,6 @@ test("link invite email error", async ({ page, mockRequest }) => {
   await page.getByTestId("email_continue_button").click();
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "link-invite",
     "link-invite-email-error.png",
   ]);
@@ -183,7 +178,6 @@ test("link invite login success", async ({ page, mockRequest }) => {
   await page.getByTestId("password_input_eye_off_icon").click();
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "link-invite",
     "link-invite-login-success.png",
   ]);
@@ -192,7 +186,6 @@ test("link invite login success", async ({ page, mockRequest }) => {
   await page.waitForURL("/", { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "link-invite",
     "link-invite-login-success-redirect.png",
   ]);
@@ -216,7 +209,6 @@ test("link invite login error", async ({ page, mockRequest }) => {
   await page.getByTestId("login_button").click();
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "link-invite",
     "link-invite-login-error.png",
   ]);
@@ -241,7 +233,6 @@ test("link invite registration success standalone", async ({
   await page.getByTestId("password_input_eye_off_icon").click();
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "link-invite",
     "link-invite-registration-success-standalone.png",
   ]);
@@ -250,7 +241,6 @@ test("link invite registration success standalone", async ({
   await page.waitForURL("/", { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "link-invite",
     "link-invite-registration-success-redirect-standalone.png",
   ]);
@@ -280,7 +270,6 @@ test("link invite registration success no standalone", async ({
   await page.getByTestId("password_input_eye_off_icon").click();
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "link-invite",
     "link-invite-registration-success-no-standalone.png",
   ]);
@@ -289,7 +278,6 @@ test("link invite registration success no standalone", async ({
   await page.waitForURL("/", { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "link-invite",
     "link-invite-registration-success-redirect-no-standalone.png",
   ]);
@@ -313,7 +301,7 @@ test("link invite registration error standalone", async ({
   await page.getByTestId("signup_button").click();
 
   await expect(page).toHaveScreenshot(
-    ["desktop", "link-invite", "link-invite-registration-error-standalone.png"],
+    ["link-invite", "link-invite-registration-error-standalone.png"],
     { fullPage: true },
   );
 });
@@ -339,11 +327,7 @@ test("link invite registration error no standalone", async ({
   await page.getByTestId("signup_button").click();
 
   await expect(page).toHaveScreenshot(
-    [
-      "desktop",
-      "link-invite",
-      "link-invite-registration-error-no-standalone.png",
-    ],
+    ["link-invite", "link-invite-registration-error-no-standalone.png"],
     { fullPage: true },
   );
 });

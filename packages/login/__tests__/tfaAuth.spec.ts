@@ -69,11 +69,7 @@ const NEXT_REQUEST_URL_WITH_PARAMS = getUrlWithQueryParams(
 test("tfa auth render", async ({ page }) => {
   await page.goto(URL_WITH_PARAMS);
 
-  await expect(page).toHaveScreenshot([
-    "desktop",
-    "tfa-auth",
-    "tfa-auth-render.png",
-  ]);
+  await expect(page).toHaveScreenshot(["tfa-auth", "tfa-auth-render.png"]);
 });
 
 test("tfa auth success", async ({ page, mockRequest }) => {
@@ -85,18 +81,13 @@ test("tfa auth success", async ({ page, mockRequest }) => {
 
   await page.getByTestId("app_code_input").fill("123456");
 
-  await expect(page).toHaveScreenshot([
-    "desktop",
-    "tfa-auth",
-    "tfa-auth-success.png",
-  ]);
+  await expect(page).toHaveScreenshot(["tfa-auth", "tfa-auth-success.png"]);
 
   await page.getByTestId("app_code_continue_button").click();
 
   await page.waitForURL("/", { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "tfa-auth",
     "tfa-auth-success-redirect.png",
   ]);
@@ -114,7 +105,6 @@ test("tfa auth error not validated", async ({ page, mockRequest }) => {
   await page.getByTestId("app_code_continue_button").click();
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "tfa-auth",
     "tfa-auth-error-not-validated.png",
   ]);
@@ -142,7 +132,6 @@ test("tfa auth redirects to room after successful submission", async ({
   await page.waitForURL("/rooms/shared/1");
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "tfa-auth",
     "tfa-auth-room-redirect.png",
   ]);

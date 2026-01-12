@@ -65,7 +65,6 @@ test("emp invite render standalone", async ({ page, mockRequest }) => {
   await page.goto(URL_WITH_PARAMS);
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "emp-invite",
     "emp-invite-render-standalone.png",
   ]);
@@ -80,7 +79,6 @@ test("emp invite render no standalone", async ({ page, mockRequest }) => {
   await page.goto(URL_WITH_PARAMS);
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "emp-invite",
     "emp-invite-render-no-standalone.png",
   ]);
@@ -96,7 +94,6 @@ test("emp invite success standalone", async ({ page, mockRequest }) => {
   await page.getByTestId("password_input_eye_off_icon").click();
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "emp-invite",
     "emp-invite-success-standalone.png",
   ]);
@@ -105,7 +102,6 @@ test("emp invite success standalone", async ({ page, mockRequest }) => {
   await page.waitForURL("/", { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "emp-invite",
     "emp-invite-success-redirect-standalone.png",
   ]);
@@ -128,7 +124,6 @@ test("emp invite success no standalone", async ({ page, mockRequest }) => {
   await page.getByTestId("password_input_eye_off_icon").click();
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "emp-invite",
     "emp-invite-success-no-standalone.png",
   ]);
@@ -137,7 +132,6 @@ test("emp invite success no standalone", async ({ page, mockRequest }) => {
   await page.waitForURL("/", { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "emp-invite",
     "emp-invite-success-redirect-no-standalone.png",
   ]);
@@ -152,7 +146,6 @@ test("emp invite error standalone", async ({ page }) => {
   await page.getByTestId("signup_button").click();
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "emp-invite",
     "emp-invite-error-standalone.png",
   ]);
@@ -171,7 +164,6 @@ test("emp invite error no standalone", async ({ page, mockRequest }) => {
   await page.getByTestId("signup_button").click();
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "emp-invite",
     "emp-invite-error-no-standalone.png",
   ]);

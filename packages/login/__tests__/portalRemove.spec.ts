@@ -56,7 +56,6 @@ test("portal remove render", async ({ page }) => {
   await page.goto(URL_WITH_PARAMS);
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "portal-remove",
     "portal-remove-render.png",
   ]);
@@ -72,7 +71,6 @@ test("portal remove delete", async ({ page, mockRequest }) => {
   await deleteButton.waitFor({ state: "detached" });
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "portal-remove",
     "portal-remove-delete.png",
   ]);
@@ -98,7 +96,6 @@ test("portal remove cancel", async ({ page }) => {
   await page.waitForURL("/", { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "portal-remove",
     "portal-remove-cancel.png",
   ]);

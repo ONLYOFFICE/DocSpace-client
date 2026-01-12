@@ -68,7 +68,6 @@ test("email change without auth", async ({ page }) => {
   await page.goto(URL_WITH_PARAMS);
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "email-change",
     "email-change-without-auth.png",
   ]);
@@ -86,7 +85,6 @@ test("email change success", async ({ page, mockRequest }) => {
   });
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "email-change",
     "email-change-success.png",
   ]);
@@ -100,7 +98,6 @@ test("email change error", async ({ page, mockRequest }) => {
   await page.goto(URL_WITH_PARAMS);
 
   await expect(page).toHaveScreenshot([
-    "desktop",
     "email-change",
     "email-change-error.png",
   ]);

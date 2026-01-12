@@ -65,6 +65,7 @@ type ItemData = {
   locked?: boolean;
   isFavorite?: boolean;
   isAIAgent?: boolean;
+  encrypted?: boolean;
 };
 
 export type BadgesProps = {

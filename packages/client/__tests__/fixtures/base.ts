@@ -36,10 +36,25 @@ export const test = base.extend<{
   wsMock: PlaywrightWebSocketMock;
 }>({
   page: async ({ page }, use) => {
+    await page.context().addCookies([
+      {
+        name: "smartbanner-closed",
+        value: "true",
+        domain: "127.0.0.1",
+        path: "/",
+      },
+    ]);
+
     // Route for logos
     await page.route("*/**/logo.ashx**", async (route) => {
       await route.fulfill({
         path: `../../public/images/logo/loginpage.svg`,
+      });
+    });
+
+    await page.route("*/**/logo.ashx?logotype=6**", async (route) => {
+      await route.fulfill({
+        path: `../../public/images/logo/leftmenu.svg`,
       });
     });
 

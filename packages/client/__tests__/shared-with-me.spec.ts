@@ -31,6 +31,7 @@ import {
 } from "@docspace/shared/__mocks__/e2e/handlers/share";
 
 import { expect, test } from "./fixtures/base";
+import { getListTestIds } from "./utils";
 
 test.describe("Shared with me", () => {
   test.beforeEach(async ({ mockRequest }) => {
@@ -61,7 +62,7 @@ test.describe("Shared with me", () => {
   test("should navigate to shared with me page", async ({
     page,
     mockRequest,
-  }) => {
+  }, testInfo) => {
     // Setup mock endpoints for authenticated user and folder data
     await mockRequest.router([endpoints.sharedWithMe]);
 
@@ -69,11 +70,15 @@ test.describe("Shared with me", () => {
     await page.goto("/shared-with-me/filter?folder=4");
 
     // Wait for the page to load and table to be visible
-    const table = page.getByTestId("table-body");
-    await expect(table).toBeVisible();
+    const { containerTestId, titleTestId } = getListTestIds(
+      testInfo.project.name,
+    );
+
+    const container = page.getByTestId(containerTestId);
+    await expect(container).toBeVisible();
 
     // Find the file link with more flexible selector (a tag anywhere within table-list-item)
-    const title = table.locator(".table-list-item a").first();
+    const title = container.locator(titleTestId).first();
 
     // Wait for the element to be visible and have text
     await expect(title).toBeVisible();
@@ -95,7 +100,6 @@ test.describe("Shared with me", () => {
     // Should not have any table list items
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "shared-with-me",
       "shared-with-me-empty.png",
     ]);
@@ -105,7 +109,7 @@ test.describe("Shared with me", () => {
     page,
     mockRequest,
     wsMock,
-  }) => {
+  }, testInfo) => {
     await mockRequest.router([
       endpoints.sharedWithMe,
       endpoints.settingsWithSocket,
@@ -115,10 +119,14 @@ test.describe("Shared with me", () => {
 
     await page.goto("/shared-with-me/filter?folder=4");
 
-    const table = page.getByTestId("table-body");
-    await expect(table).toBeVisible();
+    const { containerTestId } = getListTestIds(testInfo.project.name);
 
-    const contextMenuButton = table.getByTestId("context-menu-button").first();
+    const container = page.getByTestId(containerTestId);
+    await expect(container).toBeVisible();
+
+    const contextMenuButton = container
+      .getByTestId("context-menu-button")
+      .first();
     await expect(contextMenuButton).toBeVisible();
 
     await contextMenuButton.click();
@@ -140,7 +148,7 @@ test.describe("Shared with me", () => {
 
     submitButton.click();
 
-    const loader = table.getByTestId("loader").first();
+    const loader = container.getByTestId("loader").first();
 
     await expect(loader).toBeVisible();
 
@@ -163,7 +171,7 @@ test.describe("Shared with me", () => {
     page,
     mockRequest,
     wsMock,
-  }) => {
+  }, testInfo) => {
     await mockRequest.router([
       endpoints.sharedWithMe,
       endpoints.settingsWithSocket,
@@ -173,10 +181,12 @@ test.describe("Shared with me", () => {
 
     await page.goto("/shared-with-me/filter?folder=4");
 
-    const table = page.getByTestId("table-body");
-    await expect(table).toBeVisible();
+    const { containerTestId } = getListTestIds(testInfo.project.name);
 
-    const fileRow = table.locator("#file_1");
+    const container = page.getByTestId(containerTestId);
+    await expect(container).toBeVisible();
+
+    const fileRow = container.locator("#file_1");
     await expect(fileRow).toBeVisible();
 
     const icon = fileRow.getByTestId("room-icon");
@@ -204,7 +214,7 @@ test.describe("Shared with me", () => {
 
     submitButton.click();
 
-    const loader = table.getByTestId("loader").first();
+    const loader = container.getByTestId("loader").first();
 
     await expect(loader).toBeVisible();
 
@@ -226,7 +236,8 @@ test.describe("Shared with me", () => {
   test("should display 'Shared By' column in shared with me table header", async ({
     page,
     mockRequest,
-  }) => {
+  }, testInfo) => {
+    test.skip(testInfo.project.name !== "desktop", "Useless on mobile");
     await mockRequest.router([endpoints.sharedWithMe]);
 
     await page.goto("/shared-with-me/filter?folder=4");
@@ -241,7 +252,8 @@ test.describe("Shared with me", () => {
   test("should hide 'Shared By' column when disabled in table settings", async ({
     page,
     mockRequest,
-  }) => {
+  }, testInfo) => {
+    test.skip(testInfo.project.name !== "desktop", "Useless on mobile");
     await mockRequest.router([endpoints.sharedWithMe]);
 
     await page.goto("/shared-with-me/filter?folder=4");
@@ -271,7 +283,8 @@ test.describe("Shared with me", () => {
   test("should display 'Access Level' column in shared with me table header", async ({
     page,
     mockRequest,
-  }) => {
+  }, testInfo) => {
+    test.skip(testInfo.project.name !== "desktop", "Useless on mobile");
     await mockRequest.router([endpoints.sharedWithMe]);
 
     await page.goto("/shared-with-me/filter?folder=4");
@@ -288,7 +301,8 @@ test.describe("Shared with me", () => {
   test("should hide 'Access Level' column when disabled in table settings", async ({
     page,
     mockRequest,
-  }) => {
+  }, testInfo) => {
+    test.skip(testInfo.project.name !== "desktop", "Useless on mobile");
     await mockRequest.router([endpoints.sharedWithMe]);
 
     await page.goto("/shared-with-me/filter?folder=4");
@@ -319,16 +333,18 @@ test.describe("Shared with me", () => {
     page,
     mockRequest,
     context,
-  }) => {
+  }, testInfo) => {
     await context.grantPermissions(["clipboard-read", "clipboard-write"]);
     await mockRequest.router([endpoints.sharedWithMe]);
 
     await page.goto("/shared-with-me/filter?folder=4");
 
-    const tableBody = page.getByTestId("table-body");
-    await expect(tableBody).toBeVisible();
+    const { containerTestId } = getListTestIds(testInfo.project.name);
 
-    const contextMenuButton = tableBody
+    const container = page.getByTestId(containerTestId);
+    await expect(container).toBeVisible();
+
+    const contextMenuButton = container
       .getByTestId("context-menu-button")
       .first();
     await expect(contextMenuButton).toBeVisible();
@@ -340,7 +356,7 @@ test.describe("Shared with me", () => {
 
     await shareOption.click();
 
-    const copyLinkOption = page.getByTestId("option_copy-shared-link");
+    const copyLinkOption = page.getByTestId("copy-shared-link");
     await expect(copyLinkOption).toBeVisible();
 
     const shareLink = `${BASE_URL}/s/0000000`;
@@ -372,16 +388,18 @@ test.describe("Shared with me", () => {
     page,
     mockRequest,
     context,
-  }) => {
+  }, testInfo) => {
     await context.grantPermissions(["clipboard-read", "clipboard-write"]);
     await mockRequest.router([endpoints.sharedWithMe]);
 
     await page.goto("/shared-with-me/filter?folder=4");
 
-    const tableBody = page.getByTestId("table-body");
-    await expect(tableBody).toBeVisible();
+    const { containerTestId } = getListTestIds(testInfo.project.name);
 
-    const contextMenuButton = tableBody
+    const container = page.getByTestId(containerTestId);
+    await expect(container).toBeVisible();
+
+    const contextMenuButton = container
       .getByTestId("context-menu-button")
       .first();
     await expect(contextMenuButton).toBeVisible();
@@ -393,7 +411,7 @@ test.describe("Shared with me", () => {
 
     await shareOption.click();
 
-    const copyLinkOption = page.getByTestId("option_copy-shared-link");
+    const copyLinkOption = page.getByTestId("copy-shared-link");
     await expect(copyLinkOption).toBeVisible();
 
     await mockRequest.router([

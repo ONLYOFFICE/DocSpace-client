@@ -68,11 +68,7 @@ test.describe("Plugins", () => {
     const emptyView = page.getByTestId("empty-screen-container");
     await expect(emptyView).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "plugins",
-      "plugins-empty.png",
-    ]);
+    await expect(page).toHaveScreenshot(["plugins", "plugins-empty.png"]);
 
     const emptyTitle = page.getByText(/No plugins/i);
     await expect(emptyTitle).toBeVisible();
@@ -284,11 +280,7 @@ test.describe("Plugins", () => {
     const pluginAz = page.getByTestId("plugin_archives.zip");
     await expect(pluginAz).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "plugins",
-      "plugins-locale-az.png",
-    ]);
+    await expect(page).toHaveScreenshot(["plugins", "plugins-locale-az.png"]);
 
     await settingsButton.click();
     await expect(settingsDescription).toBeVisible();
@@ -302,7 +294,6 @@ test.describe("Plugins", () => {
     });
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "plugins",
       "plugins-locale-az-settings.png",
     ]);
@@ -355,7 +346,6 @@ test.describe("Plugins", () => {
     await expect(pluginEn).toBeVisible();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "plugins",
       "plugins-fallback-locale-en.png",
     ]);
@@ -372,7 +362,6 @@ test.describe("Plugins", () => {
     });
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "plugins",
       "plugins-fallback-locale-en-settings.png",
     ]);

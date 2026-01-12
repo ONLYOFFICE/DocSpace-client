@@ -27,6 +27,7 @@
 import { endpoints } from "@docspace/shared/__mocks__/e2e";
 
 import { expect, test } from "./fixtures/base";
+import { getListTestIds } from "./utils";
 
 test.describe("Accounts Access Control", () => {
   test.beforeEach(async ({ mockRequest }) => {
@@ -55,33 +56,35 @@ test.describe("Accounts Access Control", () => {
   test("should allow owner to access accounts page and see content", async ({
     page,
     mockRequest,
-  }) => {
+  }, testInfo) => {
     await mockRequest.router([endpoints.selfEmailActivatedClient]);
 
     await page.goto("/accounts/people/filter");
 
     // Should see table container
-    const tableContainer = page.getByTestId("table-container");
+    const { containerTestId } = getListTestIds(testInfo.project.name);
+    const tableContainer = page.getByTestId(containerTestId);
     await expect(tableContainer).toBeVisible();
   });
 
   test("should allow admin to access accounts page and see content", async ({
     page,
     mockRequest,
-  }) => {
+  }, testInfo) => {
     await mockRequest.router([endpoints.selfAdminOnly, endpoints.peopleList]);
 
     await page.goto("/accounts/people/filter");
 
     // Should see table container
-    const tableContainer = page.getByTestId("table-container");
+    const { containerTestId } = getListTestIds(testInfo.project.name);
+    const tableContainer = page.getByTestId(containerTestId);
     await expect(tableContainer).toBeVisible();
   });
 
   test("should allow room admin to access accounts page and see content", async ({
     page,
     mockRequest,
-  }) => {
+  }, testInfo) => {
     await mockRequest.router([
       endpoints.selfRoomAdminOnly, // Room admin user from existing handlers
     ]);
@@ -89,7 +92,8 @@ test.describe("Accounts Access Control", () => {
     await page.goto("/accounts/people/filter");
 
     // Should see table container
-    const tableContainer = page.getByTestId("table-container");
+    const { containerTestId } = getListTestIds(testInfo.project.name);
+    const tableContainer = page.getByTestId(containerTestId);
     await expect(tableContainer).toBeVisible();
   });
 

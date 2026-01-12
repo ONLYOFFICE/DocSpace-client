@@ -80,11 +80,11 @@ import {
   FILTER_ROOM_DOCUMENTS,
 } from "@docspace/shared/utils/filterConstants";
 
-// Encrypted download helpers
 import {
   downloadAndDecryptFile,
   triggerFileDownload,
 } from "SRC_DIR/helpers/encryptedDownload";
+import { requestUnlock } from "@docspace/shared/services/encryption/secretStorage";
 
 import {
   getCategoryTypeByFolderType,
@@ -1027,10 +1027,12 @@ class FilesActionStore {
         userKeys,
         String(userId),
         async () => {
-          console.warn(
-            "Passphrase required - ensure EncryptionProvider is set up",
-          );
-          return null;
+          // Request passphrase through the global unlock handler
+          const privateKey = await requestUnlock();
+          if (!privateKey) {
+            return null;
+          }
+          return "__KEY_CACHED__";
         },
         (progress) => {
           console.log(`Download progress: ${Math.round(progress * 100)}%`);

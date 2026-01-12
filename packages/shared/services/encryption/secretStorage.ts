@@ -30,6 +30,34 @@ const CACHE_TIMESTAMP = "docspace_encryption_cache_time";
 
 import { getCrypto } from "./keyManagement";
 
+type UnlockRequestCallback = () => Promise<CryptoKey | null>;
+let globalUnlockRequestHandler: UnlockRequestCallback | null = null;
+
+export function registerUnlockHandler(handler: UnlockRequestCallback): void {
+  globalUnlockRequestHandler = handler;
+}
+
+export function unregisterUnlockHandler(): void {
+  globalUnlockRequestHandler = null;
+}
+
+export async function requestUnlock(): Promise<CryptoKey | null> {
+  const cachedKey = await SecretStorageService.getCachedKey();
+  if (cachedKey) {
+    return cachedKey;
+  }
+
+  if (!globalUnlockRequestHandler) {
+    console.warn(
+      "[SecretStorageService] No unlock handler registered. " +
+        "Ensure EncryptionProvider is mounted.",
+    );
+    return null;
+  }
+
+  return globalUnlockRequestHandler();
+}
+
 function arrayBufferToBase64(buffer: ArrayBuffer): string {
   const bytes = new Uint8Array(buffer);
   let binary = "";

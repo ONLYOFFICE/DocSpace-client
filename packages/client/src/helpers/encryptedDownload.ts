@@ -80,16 +80,29 @@ export async function decryptDownloadedFile(
       };
     }
 
-    try {
-      privateKey = await decryptPrivateKey(userKeys.privateKeyEnc, passphrase);
+    if (passphrase === "__KEY_CACHED__") {
+      privateKey = await SecretStorageService.getCachedKey();
+      if (!privateKey) {
+        return {
+          success: false,
+          error: "Failed to retrieve cached encryption key",
+        };
+      }
+    } else {
+      try {
+        privateKey = await decryptPrivateKey(
+          userKeys.privateKeyEnc,
+          passphrase,
+        );
 
-      await SecretStorageService.cacheDecryptedKey(privateKey);
-    } catch {
-      SecretStorageService.markDecryptionAttempted();
-      return {
-        success: false,
-        error: "Invalid passphrase",
-      };
+        await SecretStorageService.cacheDecryptedKey(privateKey);
+      } catch {
+        SecretStorageService.markDecryptionAttempted();
+        return {
+          success: false,
+          error: "Invalid passphrase",
+        };
+      }
     }
   }
 

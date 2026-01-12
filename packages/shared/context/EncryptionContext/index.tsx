@@ -35,6 +35,10 @@ import React, {
 } from "react";
 
 import { SecretStorageService } from "../../services/encryption/secretStorage";
+import {
+  registerUnlockHandler,
+  unregisterUnlockHandler,
+} from "../../services/encryption/secretStorage";
 import { decryptPrivateKey } from "../../services/encryption/keyManagement";
 import type { SerializedKeyPair } from "../../services/encryption/types";
 
@@ -86,7 +90,7 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
 
   useEffect(() => {
     setIsUnlocked(SecretStorageService.hasDecryptedKey());
-  }, [userKeys]);
+  }, []);
 
   useEffect(() => {
     if (!showPassphraseDialog) {
@@ -163,6 +167,13 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
       setShowPassphraseDialog(true);
     });
   }, [isUnlocked, hasConfiguredKey, PassphraseDialog]);
+
+  useEffect(() => {
+    registerUnlockHandler(requireUnlock);
+    return () => {
+      unregisterUnlockHandler();
+    };
+  }, [requireUnlock]);
 
   const handlePassphraseSubmit = useCallback(
     async (passphrase: string): Promise<void> => {

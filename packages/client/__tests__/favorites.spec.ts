@@ -27,6 +27,7 @@
 import { endpoints } from "@docspace/shared/__mocks__/e2e";
 
 import { expect, test } from "./fixtures/base";
+import { getListTestIds } from "./utils";
 
 test.describe("Favorites", () => {
   test.beforeEach(async ({ mockRequest }) => {
@@ -54,24 +55,27 @@ test.describe("Favorites", () => {
     ]);
   });
 
-  test("should navigate to favorites page", async ({ page, mockRequest }) => {
+  test("should navigate to favorites page", async ({
+    page,
+    mockRequest,
+  }, testInfo) => {
     await mockRequest.router([endpoints.favorites]);
 
     await page.goto("/files/favorite/filter?folder=1");
 
-    const table = page.getByTestId("table-body");
-    await expect(table).toBeVisible();
+    const { containerTestId, titleTestId } = getListTestIds(
+      testInfo.project.name,
+    );
 
-    const title = table.locator(".table-list-item a").first();
+    const container = page.getByTestId(containerTestId);
+    await expect(container).toBeVisible();
+
+    const title = container.locator(titleTestId).first();
 
     await expect(title).toBeVisible();
     await expect(title).toHaveText("New document");
 
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "favorites",
-      "favorites.png",
-    ]);
+    await expect(page).toHaveScreenshot(["favorites", "favorites.png"]);
   });
 
   test("should handle empty favorites list", async ({ page, mockRequest }) => {
@@ -82,18 +86,14 @@ test.describe("Favorites", () => {
     const emptyView = page.getByTestId("empty-view");
     await expect(emptyView).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "favorites",
-      "favorites-empty.png",
-    ]);
+    await expect(page).toHaveScreenshot(["favorites", "favorites-empty.png"]);
   });
 
   test("should remove file from favorites", async ({
     page,
     mockRequest,
     wsMock,
-  }) => {
+  }, testInfo) => {
     await mockRequest.router([
       endpoints.favorites,
       endpoints.settingsWithSocket,
@@ -102,10 +102,13 @@ test.describe("Favorites", () => {
 
     await page.goto("/files/favorite/filter?folder=1");
 
-    const table = page.getByTestId("table-body");
-    await expect(table).toBeVisible();
+    const { containerTestId, titleTestId } = getListTestIds(
+      testInfo.project.name,
+    );
+    const container = page.getByTestId(containerTestId);
+    await expect(container).toBeVisible();
 
-    const title = table.locator(".table-list-item a").first();
+    const title = container.locator(titleTestId).first();
 
     await expect(title).toBeVisible();
     await expect(title).toHaveText("New document");
@@ -116,7 +119,6 @@ test.describe("Favorites", () => {
     await expect(removeFromFavorites).toBeVisible();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "favorites",
       "favorites-context-menu.png",
     ]);
@@ -142,18 +144,24 @@ test.describe("Favorites", () => {
   test("should context menu for favorite folder", async ({
     page,
     mockRequest,
-  }) => {
+  }, testInfo) => {
     await mockRequest.router([endpoints.favoritesMany]);
 
     await page.goto("/files/favorite/filter?folder=1");
 
-    const table = page.getByTestId("table-body");
-    await expect(table).toBeVisible();
+    const { containerTestId, rowTestId } = getListTestIds(
+      testInfo.project.name,
+    );
 
-    const cell = page.locator('[data-testid="favorites-cell-name-0"]');
-    await cell.locator('[data-testid="link"]').click({ button: "right" });
+    const container = page.getByTestId(containerTestId);
+    await expect(container).toBeVisible();
+
+    const row = container.getByTestId(rowTestId + "0");
+    const contextMenuButton = row.getByTestId("context-menu-button").first();
+    await expect(contextMenuButton).toBeVisible();
+
+    await contextMenuButton.click();
     await expect(page).toHaveScreenshot([
-      "desktop",
       "favorites",
       "favorites-folder-context-menu.png",
     ]);
@@ -162,18 +170,24 @@ test.describe("Favorites", () => {
   test("should context menu for favorite file via link", async ({
     page,
     mockRequest,
-  }) => {
+  }, testInfo) => {
     await mockRequest.router([endpoints.favoritesMany]);
 
     await page.goto("/files/favorite/filter?folder=1");
 
-    const table = page.getByTestId("table-body");
-    await expect(table).toBeVisible();
+    const { containerTestId, rowTestId } = getListTestIds(
+      testInfo.project.name,
+    );
 
-    const cell = page.locator('[data-testid="favorites-cell-name-1"]');
-    await cell.locator('[data-testid="link"]').click({ button: "right" });
+    const container = page.getByTestId(containerTestId);
+    await expect(container).toBeVisible();
+
+    const row = container.getByTestId(rowTestId + "1");
+    const contextMenuButton = row.getByTestId("context-menu-button").first();
+    await expect(contextMenuButton).toBeVisible();
+
+    await contextMenuButton.click();
     await expect(page).toHaveScreenshot([
-      "desktop",
       "favorites",
       "favorites-file-via-link-context-menu.png",
     ]);
@@ -182,18 +196,24 @@ test.describe("Favorites", () => {
   test("should context menu for favorite file from room", async ({
     page,
     mockRequest,
-  }) => {
+  }, testInfo) => {
     await mockRequest.router([endpoints.favoritesMany]);
 
     await page.goto("/files/favorite/filter?folder=1");
 
-    const table = page.getByTestId("table-body");
-    await expect(table).toBeVisible();
+    const { containerTestId, rowTestId } = getListTestIds(
+      testInfo.project.name,
+    );
 
-    const cell = page.locator('[data-testid="favorites-cell-name-2"]');
-    await cell.locator('[data-testid="link"]').click({ button: "right" });
+    const container = page.getByTestId(containerTestId);
+    await expect(container).toBeVisible();
+
+    const row = container.getByTestId(rowTestId + "2");
+    const contextMenuButton = row.getByTestId("context-menu-button").first();
+    await expect(contextMenuButton).toBeVisible();
+
+    await contextMenuButton.click();
     await expect(page).toHaveScreenshot([
-      "desktop",
       "favorites",
       "favorites-file-from-room-context-menu.png",
     ]);
@@ -202,18 +222,24 @@ test.describe("Favorites", () => {
   test("should context menu for favorite shared file", async ({
     page,
     mockRequest,
-  }) => {
+  }, testInfo) => {
     await mockRequest.router([endpoints.favoritesMany]);
 
     await page.goto("/files/favorite/filter?folder=1");
 
-    const table = page.getByTestId("table-body");
-    await expect(table).toBeVisible();
+    const { containerTestId, rowTestId } = getListTestIds(
+      testInfo.project.name,
+    );
 
-    const cell = page.locator('[data-testid="favorites-cell-name-3"]');
-    await cell.locator('[data-testid="link"]').click({ button: "right" });
+    const container = page.getByTestId(containerTestId);
+    await expect(container).toBeVisible();
+
+    const row = container.getByTestId(rowTestId + "3");
+    const contextMenuButton = row.getByTestId("context-menu-button").first();
+    await expect(contextMenuButton).toBeVisible();
+
+    await contextMenuButton.click();
     await expect(page).toHaveScreenshot([
-      "desktop",
       "favorites",
       "favorites-file-shared-context-menu.png",
     ]);
@@ -222,18 +248,24 @@ test.describe("Favorites", () => {
   test("should context menu for favorite archive", async ({
     page,
     mockRequest,
-  }) => {
+  }, testInfo) => {
     await mockRequest.router([endpoints.favoritesMany]);
 
     await page.goto("/files/favorite/filter?folder=1");
 
-    const table = page.getByTestId("table-body");
-    await expect(table).toBeVisible();
+    const { containerTestId, rowTestId } = getListTestIds(
+      testInfo.project.name,
+    );
 
-    const cell = page.locator('[data-testid="favorites-cell-name-4"]');
-    await cell.locator('[data-testid="link"]').click({ button: "right" });
+    const container = page.getByTestId(containerTestId);
+    await expect(container).toBeVisible();
+
+    const row = container.getByTestId(rowTestId + "4");
+    const contextMenuButton = row.getByTestId("context-menu-button").first();
+    await expect(contextMenuButton).toBeVisible();
+
+    await contextMenuButton.click();
     await expect(page).toHaveScreenshot([
-      "desktop",
       "favorites",
       "favorites-archive-context-menu.png",
     ]);
@@ -242,18 +274,24 @@ test.describe("Favorites", () => {
   test("should context menu for favorite image", async ({
     page,
     mockRequest,
-  }) => {
+  }, testInfo) => {
     await mockRequest.router([endpoints.favoritesMany]);
 
     await page.goto("/files/favorite/filter?folder=1");
 
-    const table = page.getByTestId("table-body");
-    await expect(table).toBeVisible();
+    const { containerTestId, rowTestId } = getListTestIds(
+      testInfo.project.name,
+    );
 
-    const cell = page.locator('[data-testid="favorites-cell-name-5"]');
-    await cell.locator('[data-testid="link"]').click({ button: "right" });
+    const container = page.getByTestId(containerTestId);
+    await expect(container).toBeVisible();
+
+    const row = container.getByTestId(rowTestId + "5");
+    const contextMenuButton = row.getByTestId("context-menu-button").first();
+    await expect(contextMenuButton).toBeVisible();
+
+    await contextMenuButton.click();
     await expect(page).toHaveScreenshot([
-      "desktop",
       "favorites",
       "favorites-image-context-menu.png",
     ]);
@@ -262,17 +300,18 @@ test.describe("Favorites", () => {
   test("should add file from my documents to favorites", async ({
     page,
     mockRequest,
-  }) => {
-    await mockRequest.router([
-      endpoints.myDocuments,
-    ]);
-    
+  }, testInfo) => {
+    await mockRequest.router([endpoints.myDocuments]);
+
     await page.goto("/rooms/personal/filter?folder=12764");
 
-    const table = page.getByTestId("table-body");
-    await expect(table).toBeVisible();
+    const { containerTestId, titleTestId } = getListTestIds(
+      testInfo.project.name,
+    );
+    const container = page.getByTestId(containerTestId);
+    await expect(container).toBeVisible();
 
-    const title = table.locator(".table-list-item a").first();
+    const title = container.locator(titleTestId).first();
     await expect(title).toBeVisible();
     await expect(title).toHaveText("Test document");
 
@@ -281,10 +320,7 @@ test.describe("Favorites", () => {
     const markAsFavorite = page.getByTestId("mark-as-favorite");
     await expect(markAsFavorite).toBeVisible();
 
-    await mockRequest.router([
-      endpoints.addToFavorites,
-      endpoints.getFileInfo,
-    ]);
+    await mockRequest.router([endpoints.addToFavorites, endpoints.getFileInfo]);
 
     await markAsFavorite.click();
 

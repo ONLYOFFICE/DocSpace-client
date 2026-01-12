@@ -108,7 +108,13 @@ export class EncryptionService {
       recipientPublicKey,
     );
 
-    const encryptedBlob = new Blob([encryptedContent], {
+    const encryptedWithIV = new Uint8Array(
+      iv.length + encryptedContent.byteLength,
+    );
+    encryptedWithIV.set(iv, 0);
+    encryptedWithIV.set(new Uint8Array(encryptedContent), iv.length);
+
+    const encryptedBlob = new Blob([encryptedWithIV], {
       type: "application/octet-stream",
     });
 
@@ -182,7 +188,13 @@ export class EncryptionService {
       }),
     );
 
-    const encryptedBlob = new Blob([encryptedContent], {
+    const encryptedWithIV = new Uint8Array(
+      iv.length + encryptedContent.byteLength,
+    );
+    encryptedWithIV.set(iv, 0);
+    encryptedWithIV.set(new Uint8Array(encryptedContent), iv.length);
+
+    const encryptedBlob = new Blob([encryptedWithIV], {
       type: "application/octet-stream",
     });
 
@@ -214,7 +226,15 @@ export class EncryptionService {
       throw new Error("You do not have access to decrypt this file");
     }
 
-    const iv = base64ToUint8Array(metadata.iv);
+    const encryptedArray = new Uint8Array(encryptedData);
+    const ivSize = ENCRYPTION_CONSTANTS.AES_GCM_IV_SIZE;
+
+    if (encryptedArray.length < ivSize) {
+      throw new Error("Invalid encrypted data - too short to contain IV");
+    }
+
+    const iv = encryptedArray.slice(0, ivSize);
+    const ciphertext = encryptedArray.slice(ivSize);
 
     let aesKeyRaw: Uint8Array;
     try {
@@ -239,7 +259,7 @@ export class EncryptionService {
       decryptedContent = await subtle.decrypt(
         { name: "AES-GCM", iv: iv as BufferSource },
         aesKey,
-        encryptedData,
+        ciphertext,
       );
     } catch {
       throw new Error("Failed to decrypt file content - data may be corrupted");
@@ -257,7 +277,17 @@ export class EncryptionService {
       throw new Error("File is not encrypted");
     }
 
-    const iv = base64ToUint8Array(metadata.iv);
+    // Extract IV from beginning of encrypted data
+    // Format: [12-byte IV][encrypted content with auth tag]
+    const encryptedArray = new Uint8Array(encryptedData);
+    const ivSize = ENCRYPTION_CONSTANTS.AES_GCM_IV_SIZE;
+
+    if (encryptedArray.length < ivSize) {
+      throw new Error("Invalid encrypted data - too short to contain IV");
+    }
+
+    const iv = encryptedArray.slice(0, ivSize);
+    const ciphertext = encryptedArray.slice(ivSize);
     const subtle = getCrypto();
 
     for (const encryptedKey of metadata.encryptedKeys) {
@@ -278,7 +308,7 @@ export class EncryptionService {
         const decryptedContent = await subtle.decrypt(
           { name: "AES-GCM", iv: iv as BufferSource },
           aesKey,
-          encryptedData,
+          ciphertext,
         );
 
         return new Blob([decryptedContent]);

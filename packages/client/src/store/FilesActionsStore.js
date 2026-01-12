@@ -1011,10 +1011,11 @@ class FilesActionStore {
         encryptedKeys: [
           {
             userId: String(userId),
-            data: myFileKey.privateKeyEnc,
+            publicKeyId: myFileKey.publicKeyId || "",
+            privateKeyEnc: myFileKey.privateKeyEnc,
           },
         ],
-        iv: "",
+        iv: "", // IV is now extracted from file content during decryption
         encryptedAt: myFileKey.createOn || new Date().toISOString(),
       };
 

@@ -1391,7 +1391,7 @@ class UploadDataStore {
               currentFileData.encryptionMetadata.encryptedKeys.map((key) => ({
                 userId: key.userId,
                 publicKeyId: publicKeyId,
-                privateKeyEnc: key.data,
+                privateKeyEnc: key.privateKeyEnc,
               }));
 
             console.log("[ENCRYPTION DEBUG] Setting file encryption keys:", {

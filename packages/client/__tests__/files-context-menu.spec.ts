@@ -26,6 +26,7 @@
 import { endpoints } from "@docspace/shared/__mocks__/e2e";
 
 import { expect, test } from "./fixtures/base";
+import { getListTestIds } from "./utils";
 
 test.describe("My documents context menu", () => {
   test.beforeEach(async ({ mockRequest }) => {
@@ -53,366 +54,468 @@ test.describe("My documents context menu", () => {
     ]);
   });
 
-  test("Folder menu", async ({ page, mockRequest }) => {
+  test("Folder menu", async ({ page, mockRequest }, testInfo) => {
     await mockRequest.router([endpoints.myDocumentsList]);
 
     await page.goto("/rooms/personal/filter?folder=12764");
 
-    const table = page.getByTestId("table-body");
-    await expect(table).toBeVisible();
+    const { containerTestId, rowTestId } = getListTestIds(
+      testInfo.project.name,
+    );
 
-    const folderItem = table.getByTestId("table-row-0");
-    const contextMenuButton = folderItem
-      .getByTestId("context-menu-button")
-      .first();
+    const container = page.getByTestId(containerTestId);
+    await expect(container).toBeVisible();
+
+    const row = container.getByTestId(rowTestId + "0");
+    const contextMenuButton = row.getByTestId("context-menu-button").first();
     await expect(contextMenuButton).toBeVisible();
 
     await contextMenuButton.click();
 
     const shareMenu = page.getByTestId("option_share");
-    await shareMenu.hover();
-    await expect(shareMenu).toBeVisible();
+    await shareMenu.click();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "context-menu",
       "files-context-menu_folder-share.png",
     ]);
 
+    if (testInfo.project.name === "mobile") {
+      const backArrow = page
+        .locator(".contextmenu-header")
+        .getByTestId("icon-button")
+        .first();
+      await backArrow.click();
+    }
+
     const moveMenu = page.getByTestId("option_move-or-copy");
-    await moveMenu.hover();
-    await expect(moveMenu).toBeVisible();
+    await moveMenu.click();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "context-menu",
       "files-context-menu_folder-move.png",
     ]);
   });
 
-  test("DOCX Document menu", async ({ page, mockRequest }) => {
+  test("DOCX Document menu", async ({ page, mockRequest }, testInfo) => {
     await mockRequest.router([endpoints.myDocumentsList]);
 
     await page.goto("/rooms/personal/filter?folder=12764");
 
-    const table = page.getByTestId("table-body");
-    await expect(table).toBeVisible();
+    const { containerTestId, rowTestId } = getListTestIds(
+      testInfo.project.name,
+    );
 
-    const folderItem = table.getByTestId("table-row-3");
-    const contextMenuButton = folderItem
-      .getByTestId("context-menu-button")
-      .first();
+    const container = page.getByTestId(containerTestId);
+    await expect(container).toBeVisible();
+
+    const row = container.getByTestId(rowTestId + "3");
+    const contextMenuButton = row.getByTestId("context-menu-button").first();
     await expect(contextMenuButton).toBeVisible();
 
     await contextMenuButton.click();
 
     const shareMenu = page.getByTestId("option_share");
 
-    await shareMenu.hover();
-    await expect(shareMenu).toBeVisible();
+    await shareMenu.click();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "context-menu",
       "files-context-menu_docx-share.png",
     ]);
 
+    if (testInfo.project.name === "mobile") {
+      const backArrow = page
+        .locator(".contextmenu-header")
+        .getByTestId("icon-button")
+        .first();
+      await backArrow.click();
+    }
+
     const moveMenu = page.getByTestId("option_move-or-copy");
-    await moveMenu.hover();
-    await expect(moveMenu).toBeVisible();
+    await moveMenu.click();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "context-menu",
       "files-context-menu_docx-move.png",
     ]);
 
+    if (testInfo.project.name === "mobile") {
+      const backArrow = page
+        .locator(".contextmenu-header")
+        .getByTestId("icon-button")
+        .first();
+      await backArrow.click();
+    }
+
     const downloadMenu = page.getByTestId("option_download").first();
-    await downloadMenu.hover();
-    await expect(downloadMenu).toBeVisible();
+    await downloadMenu.click();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "context-menu",
       "files-context-menu_docx-download.png",
     ]);
 
+    if (testInfo.project.name === "mobile") {
+      const backArrow = page
+        .locator(".contextmenu-header")
+        .getByTestId("icon-button")
+        .first();
+      await backArrow.click();
+    }
+
     const moreMenu = page.getByTestId("option_info");
-    await moreMenu.hover();
-    await expect(moreMenu).toBeVisible();
+    await moreMenu.click();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "context-menu",
       "files-context-menu_docx-more.png",
     ]);
   });
 
-  test("PPTX Presentation menu", async ({ page, mockRequest }) => {
+  test("PPTX Presentation menu", async ({ page, mockRequest }, testInfo) => {
     await mockRequest.router([endpoints.myDocumentsList]);
 
     await page.goto("/rooms/personal/filter?folder=12764");
 
-    const table = page.getByTestId("table-body");
-    await expect(table).toBeVisible();
+    const { containerTestId, rowTestId } = getListTestIds(
+      testInfo.project.name,
+    );
 
-    const folderItem = table.getByTestId("table-row-4");
-    const contextMenuButton = folderItem
-      .getByTestId("context-menu-button")
-      .first();
+    const container = page.getByTestId(containerTestId);
+    await expect(container).toBeVisible();
+
+    const row = container.getByTestId(rowTestId + "4");
+    const contextMenuButton = row.getByTestId("context-menu-button").first();
     await expect(contextMenuButton).toBeVisible();
 
     await contextMenuButton.click();
 
     const shareMenu = page.getByTestId("option_share");
 
-    await shareMenu.hover();
-    await expect(shareMenu).toBeVisible();
+    await shareMenu.click();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "context-menu",
       "files-context-menu_pptx-share.png",
     ]);
 
+    if (testInfo.project.name === "mobile") {
+      const backArrow = page
+        .locator(".contextmenu-header")
+        .getByTestId("icon-button")
+        .first();
+      await backArrow.click();
+    }
+
     const moveMenu = page.getByTestId("option_move-or-copy");
-    await moveMenu.hover();
-    await expect(moveMenu).toBeVisible();
+    await moveMenu.click();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "context-menu",
       "files-context-menu_pptx-move.png",
     ]);
 
+    if (testInfo.project.name === "mobile") {
+      const backArrow = page
+        .locator(".contextmenu-header")
+        .getByTestId("icon-button")
+        .first();
+      await backArrow.click();
+    }
+
     const downloadMenu = page.getByTestId("option_download").first();
-    await downloadMenu.hover();
-    await expect(downloadMenu).toBeVisible();
+    await downloadMenu.click();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "context-menu",
       "files-context-menu_pptx-download.png",
     ]);
 
+    if (testInfo.project.name === "mobile") {
+      const backArrow = page
+        .locator(".contextmenu-header")
+        .getByTestId("icon-button")
+        .first();
+      await backArrow.click();
+    }
+
     const moreMenu = page.getByTestId("option_info");
-    await moreMenu.hover();
-    await expect(moreMenu).toBeVisible();
+    await moreMenu.click();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "context-menu",
       "files-context-menu_pptx-more.png",
     ]);
   });
 
-  test("XLSX Spreadsheet menu", async ({ page, mockRequest }) => {
+  test("XLSX Spreadsheet menu", async ({ page, mockRequest }, testInfo) => {
     await mockRequest.router([endpoints.myDocumentsList]);
 
     await page.goto("/rooms/personal/filter?folder=12764");
 
-    const table = page.getByTestId("table-body");
-    await expect(table).toBeVisible();
+    const { containerTestId, rowTestId } = getListTestIds(
+      testInfo.project.name,
+    );
 
-    const folderItem = table.getByTestId("table-row-6");
-    const contextMenuButton = folderItem
-      .getByTestId("context-menu-button")
-      .first();
+    const container = page.getByTestId(containerTestId);
+    await expect(container).toBeVisible();
+
+    const row = container.getByTestId(rowTestId + "6");
+    const contextMenuButton = row.getByTestId("context-menu-button").first();
     await expect(contextMenuButton).toBeVisible();
 
     await contextMenuButton.click();
 
     const shareMenu = page.getByTestId("option_share");
 
-    await shareMenu.hover();
-    await expect(shareMenu).toBeVisible();
+    await shareMenu.click();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "context-menu",
       "files-context-menu_xlsx-share.png",
     ]);
 
+    if (testInfo.project.name === "mobile") {
+      const backArrow = page
+        .locator(".contextmenu-header")
+        .getByTestId("icon-button")
+        .first();
+      await backArrow.click();
+    }
+
     const moveMenu = page.getByTestId("option_move-or-copy");
-    await moveMenu.hover();
-    await expect(moveMenu).toBeVisible();
+    await moveMenu.click();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "context-menu",
       "files-context-menu_xlsx-move.png",
     ]);
 
+    if (testInfo.project.name === "mobile") {
+      const backArrow = page
+        .locator(".contextmenu-header")
+        .getByTestId("icon-button")
+        .first();
+      await backArrow.click();
+    }
+
     const downloadMenu = page.getByTestId("option_download").first();
-    await downloadMenu.hover();
-    await expect(downloadMenu).toBeVisible();
+    await downloadMenu.click();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "context-menu",
       "files-context-menu_xlsx-download.png",
     ]);
 
+    if (testInfo.project.name === "mobile") {
+      const backArrow = page
+        .locator(".contextmenu-header")
+        .getByTestId("icon-button")
+        .first();
+      await backArrow.click();
+    }
+
     const moreMenu = page.getByTestId("option_info");
-    await moreMenu.hover();
-    await expect(moreMenu).toBeVisible();
+    await moreMenu.click();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "context-menu",
       "files-context-menu_xlsx-more.png",
     ]);
   });
 
-  test("PDF Form menu", async ({ page, mockRequest }) => {
+  test("PDF Form menu", async ({ page, mockRequest }, testInfo) => {
     await mockRequest.router([endpoints.myDocumentsList]);
 
     await page.goto("/rooms/personal/filter?folder=12764");
 
-    const table = page.getByTestId("table-body");
-    await expect(table).toBeVisible();
+    const { containerTestId, rowTestId } = getListTestIds(
+      testInfo.project.name,
+    );
 
-    const folderItem = table.getByTestId("table-row-5");
-    const contextMenuButton = folderItem
-      .getByTestId("context-menu-button")
-      .first();
+    const container = page.getByTestId(containerTestId);
+    await expect(container).toBeVisible();
+
+    const row = container.getByTestId(rowTestId + "5");
+    const contextMenuButton = row.getByTestId("context-menu-button").first();
     await expect(contextMenuButton).toBeVisible();
 
     await contextMenuButton.click();
 
     const shareMenu = page.getByTestId("option_share");
 
-    await shareMenu.hover();
-    await expect(shareMenu).toBeVisible();
+    await shareMenu.click();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "context-menu",
       "files-context-menu_pdf-share.png",
     ]);
 
+    if (testInfo.project.name === "mobile") {
+      const backArrow = page
+        .locator(".contextmenu-header")
+        .getByTestId("icon-button")
+        .first();
+      await backArrow.click();
+    }
+
     const moveMenu = page.getByTestId("option_move-or-copy");
-    await moveMenu.hover();
-    await expect(moveMenu).toBeVisible();
+    await moveMenu.click();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "context-menu",
       "files-context-menu_pdf-move.png",
     ]);
 
+    if (testInfo.project.name === "mobile") {
+      const backArrow = page
+        .locator(".contextmenu-header")
+        .getByTestId("icon-button")
+        .first();
+      await backArrow.click();
+    }
+
     const downloadMenu = page.getByTestId("option_download").first();
-    await downloadMenu.hover();
-    await expect(downloadMenu).toBeVisible();
+    await downloadMenu.click();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "context-menu",
       "files-context-menu_pdf-download.png",
     ]);
 
+    if (testInfo.project.name === "mobile") {
+      const backArrow = page
+        .locator(".contextmenu-header")
+        .getByTestId("icon-button")
+        .first();
+      await backArrow.click();
+    }
+
     const moreMenu = page.getByTestId("option_info");
-    await moreMenu.hover();
-    await expect(moreMenu).toBeVisible();
+    await moreMenu.click();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "context-menu",
       "files-context-menu_pdf-more.png",
     ]);
   });
 
-  test("Image menu", async ({ page, mockRequest }) => {
+  test("Image menu", async ({ page, mockRequest }, testInfo) => {
     await mockRequest.router([endpoints.myDocumentsList]);
 
     await page.goto("/rooms/personal/filter?folder=12764");
 
-    const table = page.getByTestId("table-body");
-    await expect(table).toBeVisible();
+    const { containerTestId, rowTestId } = getListTestIds(
+      testInfo.project.name,
+    );
 
-    const folderItem = table.getByTestId("table-row-2");
-    const contextMenuButton = folderItem
-      .getByTestId("context-menu-button")
-      .first();
+    const container = page.getByTestId(containerTestId);
+    await expect(container).toBeVisible();
+
+    const row = container.getByTestId(rowTestId + "2");
+    const contextMenuButton = row.getByTestId("context-menu-button").first();
     await expect(contextMenuButton).toBeVisible();
 
     await contextMenuButton.click();
 
     const shareMenu = page.getByTestId("option_share");
 
-    await shareMenu.hover();
-    await expect(shareMenu).toBeVisible();
+    await shareMenu.click();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "context-menu",
       "files-context-menu_image-share.png",
     ]);
 
+    if (testInfo.project.name === "mobile") {
+      const backArrow = page
+        .locator(".contextmenu-header")
+        .getByTestId("icon-button")
+        .first();
+      await backArrow.click();
+    }
+
     const moveMenu = page.getByTestId("option_move-or-copy");
-    await moveMenu.hover();
-    await expect(moveMenu).toBeVisible();
+    await moveMenu.click();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "context-menu",
       "files-context-menu_image-move.png",
     ]);
 
+    if (testInfo.project.name === "mobile") {
+      const backArrow = page
+        .locator(".contextmenu-header")
+        .getByTestId("icon-button")
+        .first();
+      await backArrow.click();
+    }
+
     const moreMenu = page.getByTestId("option_info");
-    await moreMenu.hover();
-    await expect(moreMenu).toBeVisible();
+    await moreMenu.click();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "context-menu",
       "files-context-menu_image-more.png",
     ]);
   });
 
-  test("Media menu", async ({ page, mockRequest }) => {
+  test("Media menu", async ({ page, mockRequest }, testInfo) => {
     await mockRequest.router([endpoints.myDocumentsList]);
 
     await page.goto("/rooms/personal/filter?folder=12764");
 
-    const table = page.getByTestId("table-body");
-    await expect(table).toBeVisible();
+    const { containerTestId, rowTestId } = getListTestIds(
+      testInfo.project.name,
+    );
 
-    const folderItem = table.getByTestId("table-row-1");
-    const contextMenuButton = folderItem
-      .getByTestId("context-menu-button")
-      .first();
+    const container = page.getByTestId(containerTestId);
+    await expect(container).toBeVisible();
+
+    const row = container.getByTestId(rowTestId + "1");
+    const contextMenuButton = row.getByTestId("context-menu-button").first();
     await expect(contextMenuButton).toBeVisible();
 
     await contextMenuButton.click();
 
     const shareMenu = page.getByTestId("option_share");
 
-    await shareMenu.hover();
-    await expect(shareMenu).toBeVisible();
+    await shareMenu.click();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "context-menu",
       "files-context-menu_media-share.png",
     ]);
 
+    if (testInfo.project.name === "mobile") {
+      const backArrow = page
+        .locator(".contextmenu-header")
+        .getByTestId("icon-button")
+        .first();
+      await backArrow.click();
+    }
+
     const moveMenu = page.getByTestId("option_move-or-copy");
-    await moveMenu.hover();
-    await expect(moveMenu).toBeVisible();
+    await moveMenu.click();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "context-menu",
       "files-context-menu_media-move.png",
     ]);
 
+    if (testInfo.project.name === "mobile") {
+      const backArrow = page
+        .locator(".contextmenu-header")
+        .getByTestId("icon-button")
+        .first();
+      await backArrow.click();
+    }
+
     const moreMenu = page.getByTestId("option_info");
-    await moreMenu.hover();
-    await expect(moreMenu).toBeVisible();
+    await moreMenu.click();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "context-menu",
       "files-context-menu_media-more.png",
     ]);

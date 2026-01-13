@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 const { createServer } = require("http");
-const { parse } = require("url");
 const next = require("next");
 const config = require("./config/config.json");
 
@@ -47,18 +46,14 @@ import("./logger.mjs").then(({ logger }) => {
   const app = next({ dev, hostname, port });
   const handle = app.getRequestHandler();
 
-  app.prepare().then(() => {
-    createServer(async (req, res) => {
-      try {
-        // Be sure to pass `true` as the second argument to `url.parse`.
-        // This tells it to parse the query portion of the URL.
-        const parsedUrl = parse(req.url, true);
-
-        await handle(req, res, parsedUrl);
-      } catch (err) {
-        logger.error(`url: ${req.url}, error: ${err} Error occurred handling`);
-        res.statusCode = 500;
-        res.end("internal server error");
+	  app.prepare().then(() => {
+	    createServer(async (req, res) => {
+	      try {
+	        await handle(req, res);
+	      } catch (err) {
+	        logger.error(`url: ${req.url}, error: ${err} Error occurred handling`);
+	        res.statusCode = 500;
+	        res.end("internal server error");
       }
     })
       .once("error", (err) => {

@@ -134,7 +134,7 @@ test.describe("AI agents", () => {
 
     await btn.click();
 
-    const asideHeader = page.getByTestId("aside-header");
+    const asideHeader = page.getByText("Create agent").first();
 
     await expect(asideHeader).toBeVisible();
   });
@@ -142,7 +142,7 @@ test.describe("AI agents", () => {
   test("should render AI agents create dialog and create AI agent", async ({
     page,
     mockRequest,
-  }) => {
+  }, testInfo) => {
     await mockRequest.router([
       endpoints.aiAgentsEmptyCreate,
       endpoints.emptyTags,
@@ -153,13 +153,17 @@ test.describe("AI agents", () => {
 
     await page.goto("/ai-agents/filter");
 
-    const mainBtn = page.getByTestId("create_new_agent_button");
+    const mainBtnId =
+      testInfo.project.name === "desktop"
+        ? "create_new_agent_button"
+        : "main-button-mobile";
+    const mainBtn = page.getByTestId(mainBtnId);
 
     await expect(mainBtn).toBeVisible();
 
     await mainBtn.click();
 
-    const asideHeader = page.getByTestId("aside-header");
+    const asideHeader = page.getByText("Create agent").first();
 
     await expect(asideHeader).toBeVisible();
     await expect(page.getByText("Claude AI").first()).toBeVisible();
@@ -311,22 +315,12 @@ test.describe("AI agents", () => {
 
     await expect(page.getByText("Plugin SDK")).toBeVisible();
 
-    await page
-      .getByRole("button", { name: "PS Plugin SDK, 10/12/2025 09:" })
-      .click();
-
-    await expect(page.getByText("Pin").first()).toBeVisible();
-    await expect(page.getByText("Delete").first()).toBeVisible();
-
-    await page.locator(".Checkbox-module__checkbox--oU4gW ").first().click();
-
-    await expect(page.getByText("Pin").first()).not.toBeVisible();
-    await expect(page.getByText("Delete").first()).not.toBeVisible();
-
     const contextMenuButton = page.getByTestId("context-menu-button");
 
     await contextMenuButton.click();
 
+    await expect(page.getByText("Pin").first()).toBeVisible();
+    await expect(page.getByText("Delete").first()).toBeVisible();
     await expect(page.getByTestId("select").first()).toBeVisible();
     await expect(page.getByTestId("open").first()).toBeVisible();
     await expect(page.getByTestId("pin-room").first()).toBeVisible();

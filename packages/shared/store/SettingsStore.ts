@@ -914,17 +914,36 @@ class SettingsStore {
     this.mainBarVisible = visible;
   };
 
+  private swUpdateSkipOnce: boolean = (() => {
+    // Check on initialization if we just applied an update
+    const flag = sessionStorage.getItem("sw_update_applied");
+    if (flag) {
+      sessionStorage.removeItem("sw_update_applied");
+      return true;
+    }
+    return false;
+  })();
+
   setSwUpdateAvailable = (
     available: boolean,
     reloadOnly: boolean = false,
     callback: (() => void) | null = null,
   ) => {
+    // Skip showing update bar once if we just applied an update
+    if (available && this.swUpdateSkipOnce) {
+      this.swUpdateSkipOnce = false;
+      return;
+    }
+
     this.swUpdateAvailable = available;
     this.swUpdateReloadOnly = reloadOnly;
     this.swUpdateCallback = callback;
   };
 
   applySwUpdate = () => {
+    // Mark that we're applying an update to prevent showing the bar again after reload
+    sessionStorage.setItem("sw_update_applied", "true");
+
     if (this.swUpdateReloadOnly) {
       window.location.reload();
     } else if (this.swUpdateCallback) {

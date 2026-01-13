@@ -24,10 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { useState, useEffect, useCallback } from "react";
 import { withTranslation } from "react-i18next";
 
 import { SnackBar } from "@docspace/shared/components/snackbar";
 import { Link } from "@docspace/shared/components/link";
+
+const COUNTDOWN_SECONDS = 1 * 60; // 5 minutes
 
 const UpdateBar = ({
   t,
@@ -37,6 +40,27 @@ const UpdateBar = ({
   onLoad,
   currentColorScheme,
 }) => {
+  const [secondsLeft, setSecondsLeft] = useState(COUNTDOWN_SECONDS);
+
+  const formatTime = useCallback((totalSeconds) => {
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+  }, []);
+
+  useEffect(() => {
+    if (secondsLeft <= 0) {
+      onClick();
+      return;
+    }
+
+    const timer = setInterval(() => {
+      setSecondsLeft((prev) => prev - 1);
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [secondsLeft, onClick]);
+
   return (
     tReady && (
       <SnackBar
@@ -44,6 +68,7 @@ const UpdateBar = ({
         text={
           <>
             {t("Common:NewVersionDescription")}{" "}
+            {t("Common:AutoReloadIn", { time: formatTime(secondsLeft) })}{" "}
             <Link
               fontSize="12px"
               fontWeight="600"

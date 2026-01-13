@@ -29,7 +29,6 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import Backend from "i18next-http-backend";
 import { LANGUAGE } from "../constants";
-import { createUpdatePrompt } from "./client/ui/update-prompt";
 import {
   SW_CONFIG,
   SWConfig,
@@ -383,15 +382,6 @@ export class ServiceWorker {
 
     // Initialize i18n lazily for DOM-based prompt
     initializeI18n();
-
-    // Fallback to DOM-based prompt
-    createUpdatePrompt({
-      message: i18n.t("Common:NewVersionAvailable"),
-      updateButtonText: i18n.t("Common:Load"),
-      dismissButtonText: "Later",
-      onUpdate: applyUpdate,
-      autoHideDelay: 30000,
-    });
   }
 
   /**

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -340,6 +340,7 @@ const ToolsSettings = ({
                 isHovered
                 fontWeight={600}
                 onClick={onGoToWebSearchPage}
+                dataTestId="go-to-settings-link"
               >
                 {t("Common:GoToSettings")}
               </Link>
@@ -404,6 +405,8 @@ const ToolsSettings = ({
           },
         )}
         onClick={showMcpTools}
+        data-testid="chat-input-tools-button"
+        aria-disabled={!aiReady}
       >
         <IconButton iconName={McpToolReactSvgUrl} size={16} isFill={false} />
         <Text lineHeight="16px" fontSize="13px" fontWeight={600} noSelect>
@@ -419,6 +422,7 @@ const ToolsSettings = ({
           //ignoreChangeView
           headerOnlyMobile
           withoutBackHeaderButton
+          dataTestId="chat-input-tools-context-menu"
         />
       </TooltipContainer>
       {showManageConnections ? (

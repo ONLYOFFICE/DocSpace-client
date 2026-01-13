@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -76,6 +76,8 @@ const CreateChat = ({
         [styles.disabled]: isDisabled,
       })}
       onClick={onClickAction}
+      data-testid="create-chat"
+      aria-disabled={isDisabled}
     >
       <PlusReactSvgUrl />
       <Text fontSize="13px" lineHeight="15px" fontWeight={600}>

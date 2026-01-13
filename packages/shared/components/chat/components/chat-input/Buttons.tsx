@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -79,7 +79,7 @@ const Buttons = ({
   };
 
   return (
-    <div className={styles.chatInputButtons}>
+    <div className={styles.chatInputButtons} data-testid="chat-input-buttons">
       <div className={styles.chatInputButtonsTools}>
         <TooltipContainer
           as="div"
@@ -96,6 +96,7 @@ const Buttons = ({
             isFill={false}
             isDisabled={!aiReady}
             className={classNames({ [styles.disabled]: !aiReady })}
+            data-testid="chat-input-attachment-button"
           />
         </TooltipContainer>
         <ToolsSettings {...toolsSettings} isAdmin={isAdmin} aiReady={aiReady} />
@@ -108,6 +109,7 @@ const Buttons = ({
           [styles.disabled]: isSendButtonDisabled,
         })}
         {...sendIconProps}
+        data-testid="chat-input-send-button"
       />
     </div>
   );

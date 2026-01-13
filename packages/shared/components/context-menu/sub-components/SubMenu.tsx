@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -563,16 +563,18 @@ const SubMenu = (props: SubMenuProps) => {
             onChange={onClick}
             noAnimation
             isDisabled={item?.disabled ?? false}
+            dataTooltipId={item.disabled ? toggleTooltipId : undefined}
           />
         ) : null}
         {item.disabled && item.getTooltipContent ? (
           <Tooltip
-            float
+            className="context-menu-item-tooltip"
             openOnClick={isTouchDevice}
             id={tooltipTargetId}
             getContent={item.getTooltipContent}
             place="bottom-end"
             zIndex={1003}
+            clickable
           />
         ) : null}
       </li>

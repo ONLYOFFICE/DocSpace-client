@@ -1,5 +1,5 @@
 /*
- * (c) Copyright Ascensio System SIA 2009-2025
+ * (c) Copyright Ascensio System SIA 2009-2026
  *
  * This program is a free software product.
  * You can redistribute it and/or modify it under the terms
@@ -27,10 +27,13 @@
  */
 
 import AnthropicSvgUrl from "PUBLIC_DIR/images/ai-providers/anthropic.svg?url";
+import DeepSeekSvgUrl from "PUBLIC_DIR/images/ai-providers/deepseek.svg?url";
+import GoogleSvgUrl from "PUBLIC_DIR/images/ai-providers/google_ai.svg?url";
 import OllamaSvgUrl from "PUBLIC_DIR/images/ai-providers/ollama.svg?url";
 import OpenaiSvgUrl from "PUBLIC_DIR/images/ai-providers/openai.svg?url";
 import OpenRouterSvgUrl from "PUBLIC_DIR/images/ai-providers/openrouter.svg?url";
 import TogetherAiSvgUrl from "PUBLIC_DIR/images/ai-providers/together_ai.svg?url";
+import XaiSvgUrl from "PUBLIC_DIR/images/ai-providers/xai.svg?url";
 
 import { ProviderType } from "../../api/ai/enums";
 
@@ -46,6 +49,12 @@ export const getAiProviderIcon = (type: ProviderType) => {
       return OllamaSvgUrl;
     case ProviderType.OpenRouter:
       return OpenRouterSvgUrl;
+    case ProviderType.DeepSeek:
+      return DeepSeekSvgUrl;
+    case ProviderType.XAi:
+      return XaiSvgUrl;
+    case ProviderType.Google:
+      return GoogleSvgUrl;
     default:
       return null;
   }

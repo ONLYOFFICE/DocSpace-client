@@ -117,7 +117,7 @@ class OAuthStore {
     const cookieToken = getOAuthJWTSignature(userId);
     if (cookieToken) return;
 
-    if (this.setJwtTokenPromise) {
+    if (this.setJwtTokenPromise !== null) {
       await this.setJwtTokenPromise;
       return;
     }

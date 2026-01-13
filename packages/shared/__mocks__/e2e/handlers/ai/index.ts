@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -73,3 +73,15 @@ export {
   aiVectorizationPutHandler,
   PATH_AI_CONFIG_VECTORIZATION,
 } from "./vectorization";
+
+export * from "./roomsChatsConfig";
+
+export * from "./roomsServers";
+
+export * from "./roomsChats";
+
+export * from "./chat";
+
+export * from "./chatMessages";
+
+export * from "./messages";

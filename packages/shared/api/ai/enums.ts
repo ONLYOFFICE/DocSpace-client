@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,27 +24,30 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const enum RoleType {
+export enum RoleType {
   UserMessage = 0,
   AssistantMessage = 1,
   Error = 10,
 }
 
-export const enum ContentType {
+export enum ContentType {
   Text = 0,
   Tool = 1,
   Files = 2,
 }
 
-export const enum ProviderType {
+export enum ProviderType {
   OpenAi = 1,
   TogetherAi = 2,
   OpenAiCompatible = 3,
   Anthropic = 4,
   OpenRouter = 5,
+  DeepSeek = 6,
+  XAi = 7,
+  Google = 8,
 }
 
-export const enum EventType {
+export enum EventType {
   MessageStart = "message_start",
   MessageStop = "message_stop",
   NewToken = "new_token",
@@ -53,25 +56,25 @@ export const enum EventType {
   Error = "error",
 }
 
-export const enum ServerType {
+export enum ServerType {
   Custom,
   Portal,
   GitHub,
   Box,
 }
 
-export const enum ToolsPermission {
+export enum ToolsPermission {
   Allow,
   AlwaysAllow,
   Deny,
 }
 
-export const enum WebSearchType {
+export enum WebSearchType {
   None,
   Exa,
 }
 
-export const enum KnowledgeType {
+export enum KnowledgeType {
   None,
   OpenAi,
   OpenRouter,

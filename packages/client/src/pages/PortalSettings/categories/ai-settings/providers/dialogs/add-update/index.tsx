@@ -1,5 +1,5 @@
 /*
- * (c) Copyright Ascensio System SIA 2009-2025
+ * (c) Copyright Ascensio System SIA 2009-2026
  *
  * This program is a free software product.
  * You can redistribute it and/or modify it under the terms
@@ -93,6 +93,18 @@ const providerTypes: TOption[] = [
     key: ProviderType.OpenRouter,
     label: getAiProviderLabel(ProviderType.OpenRouter),
   },
+  {
+    key: ProviderType.DeepSeek,
+    label: getAiProviderLabel(ProviderType.DeepSeek),
+  },
+  {
+    key: ProviderType.XAi,
+    label: getAiProviderLabel(ProviderType.XAi),
+  },
+  {
+    key: ProviderType.Google,
+    label: getAiProviderLabel(ProviderType.Google),
+  },
 ];
 
 const getSelectedOptionByProviderType = (type?: ProviderType) => {
@@ -143,6 +155,9 @@ const AddUpdateDialogComponent = ({
     [ProviderType.TogetherAi]: { title: "", url: "", key: "" },
     [ProviderType.OpenAiCompatible]: { title: "", url: "", key: "" },
     [ProviderType.OpenRouter]: { title: "", url: "", key: "" },
+    [ProviderType.DeepSeek]: { title: "", url: "", key: "" },
+    [ProviderType.XAi]: { title: "", url: "", key: "" },
+    [ProviderType.Google]: { title: "", url: "", key: "" },
   });
 
   const initFormData = useRef({

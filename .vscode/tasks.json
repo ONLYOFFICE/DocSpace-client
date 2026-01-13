@@ -376,6 +376,21 @@
       }
     },
     {
+      "label": "Frontend | update deps",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; pnpm update --recursive",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Frontend | build",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm run build",
@@ -601,6 +616,36 @@
       }
     },
     {
+      "label": "Test | Jest:dependencies:audit",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; pnpm audit --audit-level=moderate",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Jest:licenses:audit",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; pnpm run licenses-audit",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Test | Jest:unit",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm test",
@@ -796,6 +841,51 @@
       }
     },
     {
+      "label": "Test | Test e2e docker build (editor)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/doceditor ; pnpm test:e2e:docker:build",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e docker start (editor)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/doceditor ; pnpm test:e2e:docker:start ; pnpm exec playwright show-report --port 9324 ${workspaceFolder}/playwright-report/doceditor",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e docker clear (editor)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/doceditor ; pnpm test:e2e:docker:clear",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Test | Biome",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm lint",
@@ -833,6 +923,18 @@
         "kind": "build",
         "isDefault": true
       },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Utils | Update copyright year",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; node ./scripts/update-copyright-year.js",
+      "group": "build",
       "presentation": {
         "reveal": "always",
         "panel": "new",

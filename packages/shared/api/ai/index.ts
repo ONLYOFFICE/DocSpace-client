@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,13 +26,13 @@
 
 import { toastr } from "../../components/toast";
 import { getCookie } from "../../utils";
+import { getAiModelName } from "../../utils/ai";
+import { checkFilterInstance } from "../../utils/common";
 
 import { request } from "../client";
 import type { TFile } from "../files/types";
 import type { KnowledgeType, ToolsPermission, WebSearchType } from "./enums";
 import RoomsFilter from "../rooms/filter";
-import { checkFilterInstance } from "../../utils/common";
-import { getAiModelName } from "../../utils/ai";
 
 import type {
   TCreateAiProvider,

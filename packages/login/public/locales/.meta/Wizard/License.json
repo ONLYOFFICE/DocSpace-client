@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/login/src/app/(root)/wizard/page.client.tsx",
       "line_number": 5,
-      "context": "// (c) Copyright Ascensio System SIA 2009-2025\n //\n // This program is a free software product.\n // You can redistribute it and/or modify it under the terms\n // of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software\n // Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended\n // to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of\n // any third-party rights.\n //\n // This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty",
+      "context": "// (c) Copyright Ascensio System SIA 2009-2026\n //\n // This program is a free software product.\n // You can redistribute it and/or modify it under the terms\n // of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software\n // Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended\n // to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of\n // any third-party rights.\n //\n // This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty",
       "module": "/packages/login"
     }
   ],

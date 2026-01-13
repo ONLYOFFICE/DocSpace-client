@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -65,7 +65,7 @@ class UserStore {
       const correctCulture = user.cultureName || portalCultureName;
 
       if (i18n && correctCulture && correctCulture !== i18n.language) {
-        i18n.changeLanguage(correctCulture);
+        await i18n.changeLanguage(correctCulture);
       }
     } catch (e) {
       console.error(e);

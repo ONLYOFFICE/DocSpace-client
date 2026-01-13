@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -61,7 +61,7 @@ describe("<RoomLogo />", () => {
 
     expect(logo).toHaveAttribute("id", "testId");
     expect(logo).toHaveClass("test-class");
-    expect(logo).toHaveStyle({ color: "red" });
+    expect(logo.style.color).toBe("red");
   });
 
   describe("Checkbox functionality", () => {

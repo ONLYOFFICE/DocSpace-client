@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -73,7 +73,7 @@ const EncryptDataPage = ({
           status={status}
         />
       ) : null}
-      <div className={classNames(styles.wrapper, { disabled: isDisabled })} data-testid="encrypt-data-page">
+      <div className={classNames(styles.wrapper, { [styles.disabled]: isDisabled })} data-testid="encrypt-data-page">
         <div className={styles.header}>
           <Text fontSize="16px" fontWeight={700}>
             {t("EncryptData")}

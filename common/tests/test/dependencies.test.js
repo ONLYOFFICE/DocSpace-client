@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -350,6 +350,7 @@ it("UnusedDependenciesTest: Verify that all dependencies in package.json files a
       "@types/node",
       "jest-environment-jsdom",
       "jest-styled-components",
+      "jsdom",
       "ts-jest",
       "ts-node",
       "jest-html-reporter",

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -83,6 +83,12 @@
     min-height: 28px;
     height: 28px;
     padding: 0;
+
+    &:focus {
+      background: var(--button-background-base-hover);
+      color: var(--button-color-base-hover);
+      border: var(--button-border-base-hover);
+    }
 
     :global(.button-content) {
       font-weight: 600;

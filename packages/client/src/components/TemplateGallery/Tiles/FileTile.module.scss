@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -39,7 +39,10 @@
   border-radius: 4px;
   background: var(--template-tile-background);
   padding: 10px 10px 0 10px;
-  &:hover {
+  outline: none;
+
+  &:hover,
+  &.focused {
     border-color: var(--template-tile-border-hover);
 
     .infoIcon {

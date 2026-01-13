@@ -1,5 +1,4 @@
 {
-  "AIAgentsDescription": "Podesite personalizovanog asistenta za svoj tim dodavanjem baze znanja, odabirom idealnog modela i povezivanjem MCP servera.",
   "AITools": "AI alati",
   "AItoolsConfirm": "Omogućavanje usluge alatki veštačke inteligencije omogućiće svim korisnicima {{productName}} pristup funkcijama koje pokreće veštačka inteligencija, pod uslovom da novčanik ima dovoljno sredstava. Da li ste sigurni da želite da nastavite?",
   "AIToolsEnabled": "Usluga AI alata je uspešno omogućena.",
@@ -32,6 +31,5 @@
   "TextTranslation": "Prevod teksta",
   "TextTranslationDescription": "Odmah prevedite tekst na željeni jezik, zadržavajući značenje i kontekst.",
   "ThirdPartyResourceDescription": "Poveži i sačuvaj bekape na cloud naloge kao što su Dropbox, Box, OneDrive ili Google Drive.",
-  "ThirdPartyStorageDescription": "Koristi servise trećih strana za skladištenje svojih bekapa. Idealno za povezivanje eksternih cloud platformi.",
-  "WebSearchEnabled": "Usluga AI veb pretrage je uspešno omogućena."
+  "ThirdPartyStorageDescription": "Koristi servise trećih strana za skladištenje svojih bekapa. Idealno za povezivanje eksternih cloud platformi."
 }

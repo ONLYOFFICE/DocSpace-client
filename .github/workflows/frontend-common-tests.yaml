@@ -1,6 +1,6 @@
 name: Frontend common tests
 
-on:
+'on':
   push:
     branches: [develop, release/v*, hotfix/v*]
     paths:
@@ -11,8 +11,8 @@ on:
       [packages/**, common/**, .github/workflows/frontend-common-tests.yaml]
 
 env:
-  NODE_VERSION: 22.x
-  PNPM_VERSION: 10.26.0
+  NODE_VERSION: 24.x
+  PNPM_VERSION: 10.28.0
 
 jobs:
   # Detect changes to optimize job execution
@@ -41,7 +41,22 @@ jobs:
           fetch-depth: 0
       - name: Detect file changes
         id: changes
+        shell: bash
         run: |
+          set -euo pipefail
+
+          set_output() {
+            local key="$1"
+            local value="$2"
+
+            if [ -n "${GITHUB_OUTPUT:-}" ]; then
+              echo "${key}=${value}" >> "$GITHUB_OUTPUT"
+            else
+              # Fallback for runners that don't support $GITHUB_OUTPUT yet.
+              echo "::set-output name=${key}::${value}"
+            fi
+          }
+
           # Get the base branch for comparison
           if [ "${{ github.event_name }}" = "pull_request" ]; then
             BASE_SHA="${{ github.event.pull_request.base.sha }}"
@@ -56,74 +71,94 @@ jobs:
 
           echo "Comparing against: $BASE_SHA"
 
-          # Get changed files
-          CHANGED_FILES=$(git diff --name-only $BASE_SHA HEAD || echo "")
-          echo "Changed files: $CHANGED_FILES"
+          # Ensure BASE_SHA exists locally (PRs from forks and shallow clones can miss it).
+          if [ "$BASE_SHA" != "HEAD~1" ] && ! git cat-file -e "$BASE_SHA^{commit}" 2>/dev/null; then
+            echo "Base SHA not found locally; fetching $BASE_SHA..."
+            git fetch --no-tags --depth=1 origin "$BASE_SHA"
+          fi
+
+          packages=false
+          common=false
+          playwright=false
+          locales=false
+          workflow=false
+
+          echo "Changed files:"
+          while IFS= read -r file; do
+            [ -n "$file" ] || continue
+            echo "$file"
+
+            case "$file" in
+              packages/*) packages=true ;;
+              common/*) common=true ;;
+              .github/workflows/*) workflow=true ;;
+              public/locales/* | common/tests/*) locales=true ;;
+              packages/client/* | packages/login/* | packages/doceditor/* | packages/management/* | packages/sdk/* | packages/shared/*)
+                playwright=true
+                ;;
+            esac
+          done < <(git diff --name-only "$BASE_SHA" HEAD || true)
 
           # Check for packages changes
-          if echo "$CHANGED_FILES" | grep -q "^packages/"; then
-            echo "packages=true" >> $GITHUB_OUTPUT
+          if [ "$packages" = "true" ]; then
+            set_output "packages" "true"
             echo "✅ Packages changes detected"
           else
-            echo "packages=false" >> $GITHUB_OUTPUT
+            set_output "packages" "false"
             echo "❌ No packages changes"
           fi
 
           # Check for common changes
-          if echo "$CHANGED_FILES" | grep -q "^common/"; then
-            echo "common=true" >> $GITHUB_OUTPUT
+          if [ "$common" = "true" ]; then
+            set_output "common" "true"
             echo "✅ Common changes detected"
           else
-            echo "common=false" >> $GITHUB_OUTPUT
+            set_output "common" "false"
             echo "❌ No common changes"
           fi
 
           # Check for playwright changes
-          if echo "$CHANGED_FILES" | grep -E "^packages/(login|sdk|shared)/"; then
-            echo "playwright=true" >> $GITHUB_OUTPUT
+          if [ "$playwright" = "true" ]; then
+            set_output "playwright" "true"
             echo "✅ Playwright changes detected"
           else
-            echo "playwright=false" >> $GITHUB_OUTPUT
+            set_output "playwright" "false"
             echo "❌ No playwright changes"
           fi
 
           # Check for locales changes
-          if echo "$CHANGED_FILES" | grep -E "(public/locales/|common/tests/)"; then
-            echo "locales=true" >> $GITHUB_OUTPUT
+          if [ "$locales" = "true" ]; then
+            set_output "locales" "true"
             echo "✅ Locales changes detected"
           else
-            echo "locales=false" >> $GITHUB_OUTPUT
+            set_output "locales" "false"
             echo "❌ No locales changes"
           fi
 
           # Check for workflow changes
-          if echo "$CHANGED_FILES" | grep -q "^\.github/workflows/"; then
-            echo "workflow=true" >> $GITHUB_OUTPUT
+          if [ "$workflow" = "true" ]; then
+            set_output "workflow" "true"
             echo "✅ Workflow changes detected"
           else
-            echo "workflow=false" >> $GITHUB_OUTPUT
+            set_output "workflow" "false"
             echo "❌ No workflow changes"
           fi
 
           # Set any_changes flag
-          if echo "$CHANGED_FILES" | grep -E "(^packages/|^common/|^\.github/workflows/)"; then
-            echo "any_changes=true" >> $GITHUB_OUTPUT
+          if [ "$packages" = "true" ] || [ "$common" = "true" ] || [ "$workflow" = "true" ]; then
+            set_output "any_changes" "true"
             echo "✅ Any relevant changes detected"
           else
-            echo "any_changes=false" >> $GITHUB_OUTPUT
+            set_output "any_changes" "false"
             echo "❌ No relevant changes detected"
           fi
 
-          # Output changed files (encode for safe transport)
-          if [ -n "$CHANGED_FILES" ]; then
-            # Convert newlines to commas for safe transport
-            CHANGED_FILES_ENCODED=$(echo "$CHANGED_FILES" | tr '\n' ',' | sed 's/,$//')
-            echo "changed_files=$CHANGED_FILES_ENCODED" >> $GITHUB_OUTPUT
-            echo "📁 Changed files: $CHANGED_FILES_ENCODED"
-          else
-            echo "changed_files=" >> $GITHUB_OUTPUT
-            echo "📁 No changed files detected"
-          fi
+          # Output changed files (shortened to avoid runner output limits)
+          CHANGED_FILES_ENCODED="$(
+            (git diff --name-only "$BASE_SHA" HEAD 2>/dev/null || true) | head -n 500 | tr '\n' ',' | sed 's/,$//'
+          )"
+          set_output "changed_files" "$CHANGED_FILES_ENCODED"
+          echo "📁 Changed files (up to 500): $CHANGED_FILES_ENCODED"
 
   # Combined static analysis and common tests
   static-analysis-and-tests:
@@ -456,12 +491,37 @@ jobs:
             GITHUB_RUN_ID=${{ github.run_id }}
             GITHUB_RUN_NUMBER=${{ github.run_number }}
 
+  # Playwright Doceditor tests
+  playwright-doceditor:
+    name: "Doceditor e2e tests"
+    runs-on: ubuntu-latest
+    needs: [changes, static-analysis-and-tests]
+    if: needs.changes.outputs.playwright == 'true' || needs.changes.outputs.workflow == 'true'
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Cleanup existing containers
+        run: docker ps -a --filter name=doceditor-tests-ci -q | xargs -r docker rm -f
+      - uses: adambirds/docker-compose-action@v1.5.0
+        with:
+          compose-file: packages/doceditor/compose.yaml
+          up-flags: --build --force-recreate --remove-orphans
+          down-flags: --volumes --remove-orphans
+          services: tests-ci
+          test-container: tests-ci
+          test-command: pnpm exec playwright test
+          environment: |
+            CI=true
+            GITHUB_WORKFLOW=${{ github.workflow }}
+            GITHUB_RUN_ID=${{ github.run_id }}
+            GITHUB_RUN_NUMBER=${{ github.run_number }}
+
   # Summary job to report overall status
   test-summary:
     name: "Test Summary"
     runs-on: ubuntu-latest
     needs:
-      [changes, static-analysis-and-tests, playwright-login, playwright-sdk]
+      [changes, static-analysis-and-tests, playwright-client, playwright-login, playwright-sdk, playwright-management, playwright-doceditor]
     if: always()
     timeout-minutes: 2
     steps:
@@ -474,8 +534,11 @@ jobs:
           echo "=== DEBUG: Job Results ==="
           echo "changes.result: '${{ needs.changes.result }}'"
           echo "static-analysis-and-tests.result: '${{ needs.static-analysis-and-tests.result }}'"
+          echo "playwright-client.result: '${{ needs.playwright-client.result }}'"
           echo "playwright-login.result: '${{ needs.playwright-login.result }}'"
           echo "playwright-sdk.result: '${{ needs.playwright-sdk.result }}'"
+          echo "playwright-management.result: '${{ needs.playwright-management.result }}'"
+          echo "playwright-doceditor.result: '${{ needs.playwright-doceditor.result }}'"
           echo "=========================="
 
           # Generate the report content line-by-line to avoid YAML parsing issues
@@ -524,7 +587,10 @@ jobs:
           echo "| **Static Analysis** | 🔒 Dependencies | ${{ needs.static-analysis-and-tests.outputs.dependencies_result || '⏭️ Skipped' }} | $([ '${{ needs.static-analysis-and-tests.outputs.dependencies_result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |" >> "$REPORT_FILE"
           echo "| **Static Analysis** | 📜 Licenses | ${{ needs.static-analysis-and-tests.outputs.licenses_result || '⏭️ Skipped' }} | $([ '${{ needs.static-analysis-and-tests.outputs.licenses_result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |" >> "$REPORT_FILE"
           echo "| **E2E Testing** | 🎭 Playwright Login | ${{ needs.playwright-login.result || '⏭️ Skipped' }} | $([ '${{ needs.playwright-login.result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |" >> "$REPORT_FILE"
+          echo "| **E2E Testing** | 🎭 Playwright Client | ${{ needs.playwright-client.result || '⏭️ Skipped' }} | $([ '${{ needs.playwright-client.result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |" >> "$REPORT_FILE"
           echo "| **E2E Testing** | 🎭 Playwright SDK | ${{ needs.playwright-sdk.result || '⏭️ Skipped' }} | $([ '${{ needs.playwright-sdk.result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |" >> "$REPORT_FILE"
+          echo "| **E2E Testing** | 🎭 Playwright Management | ${{ needs.playwright-management.result || '⏭️ Skipped' }} | $([ '${{ needs.playwright-management.result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |" >> "$REPORT_FILE"
+          echo "| **E2E Testing** | 🎭 Playwright Doceditor | ${{ needs.playwright-doceditor.result || '⏭️ Skipped' }} | $([ '${{ needs.playwright-doceditor.result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |" >> "$REPORT_FILE"
           echo '' >> "$REPORT_FILE"
           echo '## ✅ All Tests Completed!' >> "$REPORT_FILE"
           echo '' >> "$REPORT_FILE"

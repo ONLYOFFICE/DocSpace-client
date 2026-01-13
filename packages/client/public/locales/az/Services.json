@@ -1,5 +1,4 @@
 {
-  "AIAgentsDescription": "Komandanız üçün fərdiləşmiş bir müavini, bir bilik bazası əlavə etməklə, ideal modeli seçməklə və bir MCP serveri qoşmaqla təmin edin.",
   "AITools": "Süni İntellekt alətləri",
   "AItoolsConfirm": "Süni intellekt alətləri xidmətini aktiv etmək, bütün {{productName}} istifadəçilərinə, əgər hesab kifayət qədər vəsaitə malikdirsə, süni intellektlə təmin edilmiş funksiyalara daxil olmağa imkan verəcəkdir. Davam etmək istəyirsinizmi?",
   "AIToolsEnabled": "Süni intellekt alətləri xidməti uğurla aktivləşdirildi.",
@@ -32,6 +31,5 @@
   "TextTranslation": "Mətni çeviri",
   "TextTranslationDescription": "Mətninizi məna və kontekstı qoruyaraq dərhal istədiyiniz dilə çevirə bilərsiniz.",
   "ThirdPartyResourceDescription": "Dropbox, Box, OneDrive və ya Google Drive kimi bulud hesablarına qoşulub ehtiyat növbəsizləri saxlayın.",
-  "ThirdPartyStorageDescription": "Sizə məlumatlarınızı saxlamaq üçün üçüncü tərəf xidmətlərindən istifadə edin. Xarici bulud saxlama platformalarını birləşdirmək üçün idealdır.",
-  "WebSearchEnabled": "Süni intellekt veb axtarış xidməti uğurla aktivləşdirildi."
+  "ThirdPartyStorageDescription": "Sizə məlumatlarınızı saxlamaq üçün üçüncü tərəf xidmətlərindən istifadə edin. Xarici bulud saxlama platformalarını birləşdirmək üçün idealdır."
 }

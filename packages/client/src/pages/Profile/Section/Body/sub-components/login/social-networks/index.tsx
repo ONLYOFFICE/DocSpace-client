@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -163,7 +163,7 @@ const SocialNetworks = (props: SocialNetworksProps) => {
   if (providers?.length === 0) return null;
 
   return (
-    <div className={styles.socialNetworksWrapper}>
+    <div className={styles.socialNetworksWrapper} data-testid="profile-social-networks">
       <Text fontSize="16px" fontWeight={700} lineHeight="22px">
         {t("ConnectSocialNetworks")}
       </Text>

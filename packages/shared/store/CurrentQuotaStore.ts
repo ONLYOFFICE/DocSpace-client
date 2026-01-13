@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -55,7 +55,7 @@ import {
   YEAR_KEY,
   FREE_BACKUP,
 } from "../constants";
-import { Nullable } from "../types";
+import { Nullable, TTranslation } from "../types";
 import { UserStore } from "./UserStore";
 import { CurrentTariffStatusStore } from "./CurrentTariffStatusStore";
 import { SettingsStore } from "./SettingsStore";
@@ -519,17 +519,14 @@ class CurrentQuotasStore {
     }
   };
 
-  setAIAgentQuota = async (
-    quota: string | number,
-    t: (key: string) => string,
-  ) => {
+  setAIAgentQuota = async (quota: string | number, t: TTranslation) => {
     const isEnable = +quota !== -1;
 
     try {
       await setDefaultAIAgentQuota(isEnable, +quota);
       const toastrText = isEnable
-        ? t("AIAgentQuotaEnabled")
-        : t("AIAgentQuotaDisabled");
+        ? t("AIAgentQuotaEnabled", { aiAgent: t("Common:AIAgent") })
+        : t("AIAgentQuotaDisabled", { aiAgent: t("Common:AIAgent") });
 
       toastr.success(toastrText);
     } catch (e: unknown) {

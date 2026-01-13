@@ -1,5 +1,4 @@
 {
-  "AIAgentsDescription": "Nastavite osebnega asistenta za vašo ekipo z dodajanjem baze znanja, izbiro idealnega modela in povezavo MCP strežnika.",
   "AITools": "AI orodja",
   "AItoolsConfirm": "Omogočanje storitve AI orodij bo vsem uporabnikom {{productName}} omogočilo dostop do funkcij, ki jih poganja umetna inteligenca, če ima denarnica zadostna sredstva. Ste prepričani, da želite nadaljevati?",
   "AIToolsEnabled": "Orodja umetne inteligence so bila uspešno omogočena.",
@@ -32,6 +31,5 @@
   "TextTranslation": "Besedilni prevod",
   "TextTranslationDescription": "Prevajajte besedilo v želeno jezikovnost takoj, pri tem pa ohranjajte pomen in kontekst.",
   "ThirdPartyResourceDescription": "Povežite in varnostno kopirajte na račune v oblaku, kot so Dropbox, Box, OneDrive ali Google Drive.",
-  "ThirdPartyStorageDescription": "Uporabljajte storitve tretjih oseb za shranjevanje varnih kopij. Idealno za povezavo z zunanjimi platformami za shranjevanja v oblaku.",
-  "WebSearchEnabled": "Uspešno omogočena storitev iskanja na spletu z uporabo umetne inteligence."
+  "ThirdPartyStorageDescription": "Uporabljajte storitve tretjih oseb za shranjevanje varnih kopij. Idealno za povezavo z zunanjimi platformami za shranjevanja v oblaku."
 }

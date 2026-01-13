@@ -159,9 +159,14 @@
             "tooltip": "🛠️ Start the \"frontend install packages\" task"
           },
           {
-            "label": "Update dependencies",
-            "task": "Frontend | update dependencies",
+            "label": "Update deps",
+            "task": "Frontend | update deps",
             "tooltip": "🛠️ Start the \"frontend update dependencies\" task"
+          },
+          {
+            "label": "Update pnpm-lock.yaml",
+            "task": "Frontend | update pnpm-lock.yaml",
+            "tooltip": "🛠️ Start the \"frontend update pnpm-lock.yaml\" task"
           },
           {
             "label": "Build",
@@ -207,6 +212,11 @@
             "label": "Start storybook prod",
             "task": "Frontend | storybook prod",
             "tooltip": "🛠️ Start the \"frontend start storybook\" task"
+          },
+          {
+            "label": "Update copyright year",
+            "task": "Utils | Update copyright year",
+            "tooltip": "🛠️ Start the \"frontend start storybook\" task"
           }
         ],
         "tooltip": "🛠️ Client tasks"
@@ -214,6 +224,21 @@
       {
         "label": "Tests",
         "tasks": [
+          {
+            "label": "Lint",
+            "task": "Test | Biome",
+            "tooltip": "🛠️ Start the \"biome\" task"
+          },
+          {
+            "label": "Lint:fix",
+            "task": "Test | Biome:fix",
+            "tooltip": "🛠️ Start the \"biome (autofix)\" task"
+          },
+          {
+            "label": "Typescript issues (tsc)",
+            "task": "Test | Tsc",
+            "tooltip": "🛠️ Start the \"tsc\" task"
+          },
           {
             "label": "Test all common tests",
             "task": "Test | Jest:common",
@@ -240,9 +265,19 @@
             "tooltip": "🛠️ Start the \"Test | Jest:colors\" task"
           },
           {
-            "label": "Test dependencies (common)",
+            "label": "Test deps check (common)",
             "task": "Test | Jest:dependencies",
             "tooltip": "🛠️ Start the \"Test | Jest:dependencies\" task"
+          },
+          {
+            "label": "Test deps audit (common)",
+            "task": "Test | Jest:dependencies:audit",
+            "tooltip": "🛠️ Start the \"Test | Jest:dependencies:audit\" task"
+          },
+          {
+            "label": "Test licenses audit (common)",
+            "task": "Test | Jest:licenses:audit",
+            "tooltip": "🛠️ Start the \"Test | Jest:licenses:audit\" task"
           },
           {
             "label": "Test unit",
@@ -295,19 +330,34 @@
             "tooltip": "🛠️ Start the \"remove image for running e2e tests\" task"
           },
           {
-            "label": "Lint",
-            "task": "Test | Biome",
-            "tooltip": "🛠️ Start the \"biome\" task"
+            "label": "Test Management E2E build docker",
+            "task": "Test | Test e2e docker build (management)",
+            "tooltip": "🛠️ Start the \"test build in docker\" task"
           },
           {
-            "label": "Lint:fix",
-            "task": "Test | Biome:fix",
-            "tooltip": "🛠️ Start the \"biome (autofix)\" task"
+            "label": "Test Management E2E start docker",
+            "task": "Test | Test e2e docker start (management)",
+            "tooltip": "🛠️ Start the \"local frontend e2e tests in docker\" task"
           },
           {
-            "label": "Typescript issues (tsc)",
-            "task": "Test | Tsc",
-            "tooltip": "🛠️ Start the \"tsc\" task"
+            "label": "Test Management E2E clear docker",
+            "task": "Test | Test e2e docker clear (management)",
+            "tooltip": "🛠️ Start the \"remove image for running e2e tests\" task"
+          },
+          {
+            "label": "Test Editor E2E build docker",
+            "task": "Test | Test e2e docker build (editor)",
+            "tooltip": "🛠️ Start the \"test build in docker\" task"
+          },
+          {
+            "label": "Test Editor E2E start docker",
+            "task": "Test | Test e2e docker start (editor)",
+            "tooltip": "🛠️ Start the \"local frontend e2e tests in docker\" task"
+          },
+          {
+            "label": "Test Editor E2E clear docker",
+            "task": "Test | Test e2e docker clear (editor)",
+            "tooltip": "🛠️ Start the \"remove image for running e2e tests\" task"
           }
         ],
         "tooltip": "🛠️ Client tests tasks"

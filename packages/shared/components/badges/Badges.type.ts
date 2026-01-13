@@ -1,5 +1,5 @@
 /*
- * (c) Copyright Ascensio System SIA 2009-2025
+ * (c) Copyright Ascensio System SIA 2009-2026
  *
  * This program is a free software product.
  * You can redistribute it and/or modify it under the terms
@@ -69,7 +69,6 @@ type ItemData = {
 
 export type BadgesProps = {
   t: TTranslation;
-  theme: TTheme;
   item: ItemData;
   viewAs: TViewAs;
   showNew: boolean;
@@ -97,6 +96,7 @@ export type BadgesProps = {
   onRetryVectorization?: () => void;
   onClickFavorite?: () => void;
   isPublicRoom?: boolean;
+  themeIsBase?: boolean;
 };
 
 export type BadgeWrapperProps = {

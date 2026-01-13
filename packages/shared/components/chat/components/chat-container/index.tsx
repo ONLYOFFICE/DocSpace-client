@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,9 +30,12 @@ import classNames from "classnames";
 import { ChatContainerProps } from "../../Chat.types";
 import styles from "./ChatContainer.module.scss";
 
-const ChatContainer = ({ children }: ChatContainerProps) => {
+const ChatContainer = ({ children, isLoadingChat }: ChatContainerProps) => {
   return (
-    <div className={classNames(styles.chatContainer, "chat-container")}>
+    <div
+      className={classNames(styles.chatContainer, "chat-container")}
+      data-testid={isLoadingChat ? "chat-container-loading" : "chat-container"}
+    >
       {children}
     </div>
   );

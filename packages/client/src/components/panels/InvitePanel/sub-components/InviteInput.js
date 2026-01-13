@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -316,6 +316,59 @@ const InviteInput = ({
     onChangeInput(value);
   };
 
+  const addUser = (item) => {
+    const {
+      shared,
+      status,
+      roomType,
+      access,
+      isVisitor,
+      isGroup = false,
+    } = item;
+    const isDisabled = status === EmployeeStatus.Disabled;
+
+    if (isDisabled) {
+      toastr.warning(t("UsersCannotBeAdded"));
+    } else if (shared) {
+      toastr.warning(t("UsersAlreadyAdded"));
+    } else {
+      const guestWrongRoleInAgent =
+        isVisitor &&
+        roomType === RoomsType.AIRoom &&
+        access !== ShareAccessRights.ReadOnly;
+
+      if (isGroup && checkIfAccessPaid(access)) {
+        item = fixAccess(item, t, roomType);
+      }
+
+      if (guestWrongRoleInAgent) {
+        item = makeViewerRole(item, t, getViewerRole(t, roomType));
+      }
+
+      if (
+        !guestWrongRoleInAgent &&
+        isPaidUserRole(access) &&
+        (item.isVisitor || item.isCollaborator)
+      ) {
+        const topFreeRole = getTopFreeRole(t, roomType);
+
+        if (access !== topFreeRole.access) {
+          item = makeFreeRole(item, t, topFreeRole);
+
+          if (isUserTariffLimit) {
+            toastr.error(<PaidQuotaLimitError />);
+          }
+        }
+      }
+      const items = removeExist([item, ...inviteItems]);
+      setInviteItems(items);
+    }
+
+    setInputValue("");
+    setUsersList([]);
+    setIsAddEmailPanelBlocked(true);
+  };
+
   const getItemContent = (item) => {
     const {
       displayName,
@@ -326,7 +379,6 @@ const InviteInput = ({
       isGroup = false,
       status,
       isSystem,
-      isVisitor,
     } = item;
 
     const isDisabled = status === EmployeeStatus.Disabled;
@@ -339,53 +391,10 @@ const InviteInput = ({
         ? EveryoneIconUrl
         : null;
 
-    const addUser = () => {
-      if (isDisabled) {
-        toastr.warning(t("UsersCannotBeAdded"));
-      } else if (shared) {
-        toastr.warning(t("UsersAlreadyAdded"));
-      } else {
-        const guestWrongRoleInAgent =
-          isVisitor &&
-          roomType === RoomsType.AIRoom &&
-          item.access !== ShareAccessRights.ReadOnly;
-
-        if (isGroup && checkIfAccessPaid(item.access)) {
-          item = fixAccess(item, t, roomType);
-        }
-
-        if (guestWrongRoleInAgent) {
-          item = makeViewerRole(item, t, getViewerRole(t, roomType));
-        }
-
-        if (
-          !guestWrongRoleInAgent &&
-          isPaidUserRole(item.access) &&
-          (item.isVisitor || item.isCollaborator)
-        ) {
-          const topFreeRole = getTopFreeRole(t, roomType);
-
-          if (item.access !== topFreeRole.access) {
-            item = makeFreeRole(item, t, topFreeRole);
-
-            if (isUserTariffLimit) {
-              toastr.error(<PaidQuotaLimitError />);
-            }
-          }
-        }
-        const items = removeExist([item, ...inviteItems]);
-        setInviteItems(items);
-      }
-
-      setInputValue("");
-      setUsersList([]);
-      setIsAddEmailPanelBlocked(true);
-    };
-
     return (
       <DropDownItem
         key={id}
-        onClick={addUser}
+        onClick={() => addUser(item)}
         height={48}
         heightTablet={48}
         className="list-item"
@@ -419,6 +428,12 @@ const InviteInput = ({
 
   const addEmail = () => {
     if (!inputValue.trim() || searchRequestRunning) return;
+
+    const existUser = usersList.find((u) => u.email === inputValue);
+    if (existUser) {
+      addUser(existUser);
+      return;
+    }
 
     const items = toUserItems(inputValue);
 

@@ -3,7 +3,7 @@
   "content": "Email",
   "content_en_sha1_hash": "84add5b2952787581cb9a8851eef63d1ec75d22b",
   "created_at": "2025-05-19T21:30:44.776Z",
-  "updated_at": "2025-12-15T14:04:23.605Z",
+  "updated_at": "2025-12-19T13:32:31.919Z",
   "comment": {
     "text": "This translation key represents the label for displaying a user's email address, typically shown alongside their name in a welcome message or profile section. It appears in various UI elements, such as social authentication dialogs and contact filtering interfaces, where users' email addresses need to be displayed. The translated text should correspond to the English content \"Email\".",
     "is_auto": true,
@@ -48,13 +48,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 471,
+      "line_number": 478,
       "context": "/>\n ) : null}\n </div>\n \n <Text as=\"div\" className={styles.label}>\n {t(\"Common:Email\")}\n </Text>\n <div className={styles.emailContainer}>\n <div className={styles.emailEditContainer}>\n <Text\n data-tooltip-id=\"emailTooltip\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 471,
+      "line_number": 478,
       "context": "/>\n ) : null}\n </div>\n \n <Text as=\"div\" className={styles.label}>\n {t(\"Common:Email\")}\n </Text>\n <div className={styles.emailContainer}>\n <div className={styles.emailEditContainer}>\n <Text\n data-tooltip-id=\"emailTooltip\"",
       "module": "/packages/client"
     },
@@ -78,7 +78,7 @@
     },
     {
       "file_path": "/packages/login/src/app/(root)/wizard/page.client.tsx",
-      "line_number": 349,
+      "line_number": 343,
       "context": "name=\"wizard-email\"\n tabIndex={1}\n size={InputSize.large}\n scale\n value={email}\n placeholder={t(\"Common:Email\")}\n emailSettings={emailSettings}\n hasError={hasErrorEmail}\n onValidateInput={onEmailChangeHandler}\n isAutoFocussed\n onChange={onChangeEmail}",
       "module": "/packages/login"
     },

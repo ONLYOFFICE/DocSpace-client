@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -52,7 +52,7 @@ describe("<Tooltip />", () => {
 
     const tooltip = screen.getByTestId("tooltip");
     expect(tooltip).toHaveClass("custom-tooltip");
-    expect(tooltip).toHaveStyle({ color: "red" });
+    expect(tooltip.style.color).toBe("red");
   });
 
   it("renders with custom placement", () => {

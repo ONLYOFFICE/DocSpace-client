@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -50,7 +50,7 @@ const AIAgentListComponent = (props) => {
     roomFilterData,
     id,
   } = props;
-  const { t } = useTranslation("Settings");
+  const { t } = useTranslation(["Settings", "Common"]);
 
   const navigate = useNavigate();
 
@@ -103,7 +103,7 @@ const AIAgentListComponent = (props) => {
     <StyledStatistics>
       <div className="statistics-container">
         <Text fontWeight={600} className="item-statistic">
-          {t("Top5AIAgents")}
+          {t("Top5AIAgents", { aiAgents: t("Common:AIAgents") })}
         </Text>
         {agentsList}
 

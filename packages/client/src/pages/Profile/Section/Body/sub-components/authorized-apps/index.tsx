@@ -42,7 +42,7 @@ const AuthorizedApps = ({
   });
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-testid="profile-authorized-apps">
       {consents && consents?.length > 0 ? (
         <>
           <Text fontSize="12px" fontWeight="400" lineHeight="16px">

@@ -1,5 +1,4 @@
 {
-  "AIAgentsDescription": "Thiết lập một trợ lý cá nhân hóa cho nhóm của bạn bằng cách thêm cơ sở kiến thức, chọn mô hình lý tưởng và kết nối một máy chủ MCP.",
   "AITools": "Công cụ AI",
   "AItoolsConfirm": "Kích hoạt dịch vụ công cụ AI sẽ cấp quyền truy cập vào các tính năng hỗ trợ AI cho tất cả người dùng {{productName}}, với điều kiện ví có đủ tiền. Bạn có chắc chắn muốn tiếp tục không?",
   "AIToolsEnabled": "Các công cụ hỗ trợ AI đã được kích hoạt thành công.",
@@ -32,6 +31,5 @@
   "TextTranslation": "Dịch văn bản",
   "TextTranslationDescription": "Dịch văn bản sang ngôn ngữ mong muốn ngay lập tức, đồng thời giữ nguyên ý nghĩa và ngữ cảnh.",
   "ThirdPartyResourceDescription": "Kết nối và lưu trữ bản sao lưu lên các tài khoản đám mây như Dropbox, Box, OneDrive hoặc Google Drive.",
-  "ThirdPartyStorageDescription": "Sử dụng các dịch vụ của bên thứ ba để lưu trữ bản sao lưu của bạn. Lý tưởng để kết nối các nền tảng lưu trữ đám mây bên ngoài.",
-  "WebSearchEnabled": "Dịch vụ tìm kiếm trên web bằng AI đã được kích hoạt thành công."
+  "ThirdPartyStorageDescription": "Sử dụng các dịch vụ của bên thứ ba để lưu trữ bản sao lưu của bạn. Lý tưởng để kết nối các nền tảng lưu trữ đám mây bên ngoài."
 }

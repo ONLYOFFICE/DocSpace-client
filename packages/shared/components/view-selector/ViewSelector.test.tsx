@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -119,7 +119,7 @@ describe("<ViewSelector />", () => {
 
     const viewSelector = screen.getByTestId("view-selector");
     expect(viewSelector).toHaveClass("custom-class");
-    expect(viewSelector).toHaveStyle(customStyle);
+    expect(viewSelector.style.backgroundColor).toBe("red");
   });
 
   it("renders only one icon when isFilter is true", () => {

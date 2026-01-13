@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -62,11 +62,9 @@ describe("<Heading />", () => {
     );
 
     const heading = screen.getByTestId("heading");
-    expect(heading).toHaveStyle({
-      color: "red",
-      fontSize: "24px",
-      fontWeight: "700",
-    });
+    expect(heading.style.color).toBe("red");
+    expect(heading.style.fontSize).toBe("24px");
+    expect(heading.style.fontWeight).toBe("700");
   });
 
   it("renders with different heading levels", () => {

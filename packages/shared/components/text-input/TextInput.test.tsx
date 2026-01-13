@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -175,21 +175,22 @@ describe("<TextInput />", () => {
     render(<TextInput {...defaultProps} style={customStyle} />);
 
     const input = screen.getByTestId("text-input");
-    expect(input).toHaveStyle(customStyle);
+    expect(input.style.color).toBe("red");
+    expect(input.style.marginTop).toBe("10px");
   });
 
   it("handles font weight props correctly", () => {
     render(<TextInput {...defaultProps} fontWeight={700} />);
 
     const input = screen.getByTestId("text-input");
-    expect(input).toHaveStyle({ fontWeight: 700 });
+    expect(input.style.fontWeight).toBe("700");
   });
 
   it("applies bold style when isBold is true", () => {
     render(<TextInput {...defaultProps} isBold />);
 
     const input = screen.getByTestId("text-input");
-    expect(input).toHaveStyle({ fontWeight: 600 });
+    expect(input.style.fontWeight).toBe("600");
   });
 
   it("handles inputMode correctly", () => {

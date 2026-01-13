@@ -1,11 +1,11 @@
-FROM node:22-bookworm-slim
+FROM node:24-bookworm-slim
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 
 RUN apt-get -y update && apt-get install -yq
 
-RUN npm install -g pnpm@10.26.0
+RUN npm install -g pnpm@10.28.0
 
 WORKDIR /app
 

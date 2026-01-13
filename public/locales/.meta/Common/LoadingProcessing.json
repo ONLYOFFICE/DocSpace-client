@@ -3,7 +3,7 @@
   "content": "Loading...",
   "content_en_sha1_hash": "b04ba49f848624bb97ab094a2631d2ad74913498",
   "created_at": "2025-05-19T21:30:46.280Z",
-  "updated_at": "2025-11-03T12:10:35.413Z",
+  "updated_at": "2025-12-17T14:56:20.883Z",
   "comment": {
     "text": "This translation key is used to display a loading message when an operation is in progress. It appears on various buttons, including confirm and continue buttons, as well as a registration form button, and is intended to provide visual feedback to the user that something is happening behind the scenes.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/login/src/app/(root)/confirm/TfaAuth/page.client.tsx",
-      "line_number": 176,
+      "line_number": 172,
       "context": "primary\n size={ButtonSize.medium}\n tabIndex={3}\n label={\n isLoading\n ? t(\"Common:LoadingProcessing\")\n : t(\"Common:ContinueButton\")\n }\n isDisabled={!code.length || isLoading}\n isLoading={isLoading}\n onClick={onSubmit}",
       "module": "/packages/login"
     },

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -69,7 +69,7 @@ describe("<RadioButton />", () => {
     const label = screen.getByTestId("radio-button");
 
     expect(radio).toBeDisabled();
-    expect(label).toHaveStyle({ cursor: "default" });
+    expect(label.className).toContain("disabled");
   });
 
   it("accepts and applies custom className", () => {
@@ -85,7 +85,7 @@ describe("<RadioButton />", () => {
     renderComponent({ style: customStyle });
 
     const label = screen.getByTestId("radio-button");
-    expect(label).toHaveStyle(customStyle);
+    expect(label.style.marginTop).toBe("10px");
   });
 
   it("handles orientation prop", () => {

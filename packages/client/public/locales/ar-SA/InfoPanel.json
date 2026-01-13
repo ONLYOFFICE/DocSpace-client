@@ -2,7 +2,6 @@
   "AddedRoomTags": "تمت إضافة العلامات.",
   "Administration": "الإدارة",
   "AgentRenamed": "تمت إعادة تسمية الوكيل <1>«{{oldRoomTitle}}»</1> إلى <2>«{{roomTitle}}»</2>",
-  "AIAgentsEmptyScreenTent": "اطلعوا على تفاصيل وكلاء الذكاء الاصطناعي هنا",
   "AndMoreLabel": "و <1> {{count}} المزيد </ 1>",
   "CreationDate": "تاريخ الإنشاء",
   "Data": "بيانات",

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -192,7 +192,7 @@ const mediaViewerDataStore = new MediaViewerDataStore(
   selectedFolderStore,
 );
 
-const oformsStore = new OformsStore(settingsStore, userStore);
+const oformsStore = new OformsStore(settingsStore, userStore, treeFoldersStore);
 
 const secondaryProgressDataStore = new SecondaryProgressDataStore(
   treeFoldersStore,

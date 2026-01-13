@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -73,9 +73,7 @@ describe("<SelectorAddButton />", () => {
   it("accepts style", () => {
     render(<SelectorAddButton {...baseProps} style={{ color: "red" }} />);
 
-    expect(screen.getByTestId("selector-add-button")).toHaveStyle({
-      color: "red",
-    });
+    expect(screen.getByTestId("selector-add-button").style.color).toBe("red");
   });
 
   it("handles click when not disabled", () => {

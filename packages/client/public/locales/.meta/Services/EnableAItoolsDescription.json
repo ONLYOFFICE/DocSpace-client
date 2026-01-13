@@ -3,7 +3,7 @@
   "content": "Use AI-powered features while working in {{organizationName}} {{productName}} by adding funds to your wallet",
   "content_en_sha1_hash": "501b0f05a5323f6a61df983557725c62ee1fd707",
   "created_at": "2025-11-03T12:10:29.440Z",
-  "updated_at": "2025-11-03T12:29:00.370Z",
+  "updated_at": "2025-11-21T09:16:13.226Z",
   "comment": {
     "text": "This text describes how to enable AI-powered features within {{organizationName}} {{productName}} by adding funds to your wallet. It appears as a description in a dialog or settings panel, likely associated with a toggle to enable AI services. Translators should ensure the description accurately reflects the cost implications of enabling these features.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/AITools/AIServiceDialog.tsx",
-      "line_number": 184,
+      "line_number": 186,
       "context": "isEnabled={isEnabled}\n onToggle={handleToggleChange}\n title={t(\"Services:EnableAItools\", {\n currency: formatWalletCurrency!(aiToolsPrice!, 4),\n })}\n description={t(\"Services:EnableAItoolsDescription\", {\n organizationName: logoText,\n productName: t(\"Common:ProductName\"),\n })}\n testId=\"service-ai-toggle-button\"\n />",
       "module": "/packages/client"
     },

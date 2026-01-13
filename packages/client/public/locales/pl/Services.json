@@ -1,5 +1,4 @@
 {
-  "AIAgentsDescription": "Skonfiguruj spersonalizowanego asystenta dla swojego zespołu, dodając bazę wiedzy, wybierając idealny model i podłączając serwer MCP.",
   "AITools": "Narzędzia AI",
   "AItoolsConfirm": "Włączenie usługi narzędzi AI zapewni wszystkim użytkownikom {{productName}} dostęp do funkcji opartych na sztucznej inteligencji, pod warunkiem, że portfel posiada wystarczające środki. Czy na pewno chcesz kontynuować?",
   "AIToolsEnabled": "Usługa narzędzi AI włączona pomyślnie.",
@@ -32,6 +31,5 @@
   "TextTranslation": "Tekst tłumaczenia",
   "TextTranslationDescription": "Tłumacz tekst na żądany język natychmiast, zachowując przy tym znaczenie i kontekst.",
   "ThirdPartyResourceDescription": "Połącz i zapisuj kopie zapasowe w chmurze, takich jak Dropbox, Box, OneDrive lub Google Drive.",
-  "ThirdPartyStorageDescription": "Korzystaj z zewnętrznych usług do przechowywania kopii zapasowych. Idealne do łączenia platform zewnętrznych magazynów w chmurze.",
-  "WebSearchEnabled": "Usługa wyszukiwania w sieci AI pomyślnie włączona."
+  "ThirdPartyStorageDescription": "Korzystaj z zewnętrznych usług do przechowywania kopii zapasowych. Idealne do łączenia platform zewnętrznych magazynów w chmurze."
 }

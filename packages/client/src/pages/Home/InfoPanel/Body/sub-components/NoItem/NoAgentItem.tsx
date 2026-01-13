@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -37,7 +37,7 @@ import styles from "./NoItem.module.scss";
 
 const NoAgentItem = () => {
   const { isBase } = useTheme();
-  const { t } = useTranslation(["InfoPanel"]);
+  const { t } = useTranslation(["InfoPanel", "Common"]);
 
   const imageSrc = isBase
     ? InfoPanelRoomEmptyScreenSvgUrl
@@ -51,10 +51,13 @@ const NoAgentItem = () => {
       )}
     >
       <div className="no-thumbnail-img-wrapper">
-        <img src={imageSrc} alt="No AI agent" />
+        <img
+          src={imageSrc}
+          alt={t("NoAgent", { aiAgent: t("Common:AIAgent") })}
+        />
       </div>
       <Text className="no-item-text" textAlign="center">
-        {t("AIAgentsEmptyScreenTent")}
+        {t("AIAgentsEmptyScreenTent", { aiAgents: t("Common:AIAgents") })}
       </Text>
     </div>
   );

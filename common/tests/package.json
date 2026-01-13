@@ -19,9 +19,10 @@
     "open-report": "open-cli reports/tests-report.html"
   },
   "devDependencies": {
-    "@vitest/ui": "4.0.7",
-    "cross-env": "^7.0.3",
-    "vitest": "4.0.7",
+    "@vitest/ui": "4.0.17",
+    "cross-env": "^10.1.0",
+    "jsdom": "^27.4.0",
+    "vitest": "4.0.17",
     "open-cli": "^8.0.0"
   }
 }

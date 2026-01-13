@@ -3,7 +3,7 @@
   "content": "Save",
   "content_en_sha1_hash": "efc007a393f66cdb14d57d385822a3d9e36ef873",
   "created_at": "2025-05-19T21:30:48.300Z",
-  "updated_at": "2025-12-15T14:04:23.483Z",
+  "updated_at": "2025-12-23T10:05:43.147Z",
   "comment": {
     "text": "The translation key \"SaveButton\" is used to display the label for a save button on a UI component. In a file editor and dialog contexts, it appears as a button that triggers saving changes made to a document or form.",
     "is_auto": true,
@@ -102,31 +102,31 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/knowledge/index.tsx",
-      "line_number": 334,
+      "line_number": 301,
       "context": "</div>\n <div className={styles.buttonContainer}>\n <Button\n primary\n size={ButtonSize.small}\n label={t(\"SaveButton\")}\n scale={false}\n onClick={onSave}\n isLoading={saveRequestRunning}\n isDisabled={isSaveDisabled}\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/add-update/index.tsx",
-      "line_number": 390,
+      "line_number": 400,
       "context": "<ModalDialog.Footer>\n <Button\n primary\n size={ButtonSize.normal}\n label={t(\"Common:SaveButton\")}\n scale\n onClick={handleSubmitClick}\n isLoading={isRequestRunning}\n isDisabled={!canSubmit}\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/index.tsx",
-      "line_number": 284,
+      "line_number": 259,
       "context": "</div>\n <div className={styles.buttonContainer}>\n <Button\n primary\n size={ButtonSize.small}\n label={t(\"SaveButton\")}\n scale={false}\n onClick={onSave}\n isLoading={saveRequestRunning}\n isDisabled={isSaveDisabled}\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/dialogs/add/index.tsx",
-      "line_number": 159,
+      "line_number": 160,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n primary\n size={ButtonSize.normal}\n label={t(\"Common:SaveButton\")}\n scale\n onClick={handleSubmitClick}\n isLoading={loading}\n isDisabled={baseParamsError ? true : !hasChanges}\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/dialogs/edit/index.tsx",
-      "line_number": 185,
+      "line_number": 186,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n primary\n size={ButtonSize.normal}\n label={t(\"Common:SaveButton\")}\n scale\n onClick={handleSubmitClick}\n isLoading={loading}\n isDisabled={!hasChanges}\n />",
       "module": "/packages/client"
     },
@@ -156,7 +156,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/language-and-time-zone.js",
-      "line_number": 559,
+      "line_number": 558,
       "context": "className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={hasScroll}\n additionalClassSaveButton=\"language-time-zone-save\"\n additionalClassCancelButton=\"language-time-zone-cancel\"",
       "module": "/packages/client"
     },
@@ -307,7 +307,7 @@
     {
       "file_path": "/packages/login/src/app/(root)/confirm/PortalOwnerChange/page.client.tsx",
       "line_number": 101,
-      "context": "<ButtonsWrapper>\n <Button\n primary\n scale\n size={ButtonSize.medium}\n label={t(\"Common:SaveButton\")}\n tabIndex={2}\n isDisabled={false}\n onClick={onChangeOwnerClick}\n testId=\"save_change_owner_button\"\n />",
+      "context": "<div className={styles.buttonsWrapper}>\n <Button\n primary\n scale\n size={ButtonSize.medium}\n label={t(\"Common:SaveButton\")}\n tabIndex={2}\n isDisabled={false}\n onClick={onChangeOwnerClick}\n testId=\"save_change_owner_button\"\n />",
       "module": "/packages/login"
     },
     {
@@ -390,7 +390,7 @@
     },
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 627,
+      "line_number": 630,
       "context": "/>\n <SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onSaveAction}\n onCancelClick={onRestoreDefault}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:Restore\")}\n displaySettings\n hasScroll\n hideBorder\n showReminder={!isEqualLogo}",
       "module": "/packages/shared"
     }

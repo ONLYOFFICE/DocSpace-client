@@ -3,7 +3,7 @@
   "content": "Search",
   "content_en_sha1_hash": "bce06414177f72ab70e6387b6af9f8ceef0d6049",
   "created_at": "2025-05-19T21:30:48.328Z",
-  "updated_at": "2025-12-15T14:04:23.662Z",
+  "updated_at": "2025-12-22T14:25:01.218Z",
   "comment": {
     "text": "This translation key is used to display the label \"Search\" in various UI elements. It appears on a search input field and an icon button, inviting users to find specific items or content. The text should be translated as \"Search\" in English.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/FormGallery/Filter/SearchFilter/index.js",
-      "line_number": 59,
-      "context": "return (\n <SearchInput\n forwardedRef={ref}\n scale\n tabIndex={1}\n placeholder={t(\"Common:Search\")}\n value={value}\n onChange={onChangeValue}\n onClick={onInputClick}\n onClearSearch={onClear}\n dataTestId=\"form_gallery_search_filter\"",
+      "file_path": "/packages/client/src/components/TemplateGallery/Filter/SearchFilter/index.tsx",
+      "line_number": 81,
+      "context": "return (\n <SearchInput\n forwardedRef={ref}\n scale\n size={InputSize.base}\n placeholder={t(\"Common:Search\")}\n value={value}\n onChange={onChangeValue}\n onClick={onInputClick}\n onClearSearch={onClear}\n isDisabled={isLanguageFilterChange}",
       "module": "/packages/client"
     },
     {
@@ -72,7 +72,7 @@
     },
     {
       "file_path": "/packages/shared/selectors/AIAgent/index.tsx",
-      "line_number": 223,
+      "line_number": 225,
       "context": "onCancel: onClose,\n };\n \n const searchSelectorProps: TSelectorSearch = {\n withSearch: true,\n searchPlaceholder: t(\"Common:Search\"),\n searchValue,\n onSearch: onSearchAction,\n onClearSearch: onClearSearchAction,\n searchLoader: <SearchLoader />,\n isSearchLoading: isFirstLoad && !searchValue && !afterSearch.current,",
       "module": "/packages/shared"
     },

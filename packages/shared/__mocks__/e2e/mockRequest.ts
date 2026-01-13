@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -38,11 +38,27 @@ export class MockRequest {
           const method = route.request().method();
 
           if (endpoint.method && endpoint.method !== method) {
-            await route.continue();
+            await route.fallback();
             return;
           }
 
-          const json = await endpoint.dataHandler().json();
+          const requestHeaders = new Headers(route.request().headers());
+          const response = endpoint.dataHandlerWithHeaders
+            ? endpoint.dataHandlerWithHeaders(requestHeaders)
+            : endpoint.dataHandler();
+
+          if (endpoint.responseType === "text") {
+            const body = await response.text();
+
+            await route.fulfill({
+              body,
+              status: response.status ?? 200,
+            });
+
+            return;
+          }
+
+          const json = await response.json();
 
           await route.fulfill({ json, status: json.statusCode ?? 200 });
         });

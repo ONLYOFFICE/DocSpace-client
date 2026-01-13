@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -61,7 +61,7 @@ describe("<MainButton />", () => {
     const customStyle = { backgroundColor: "red" };
     render(<MainButton {...defaultProps} style={customStyle} />);
     const button = screen.getByText("Test Button").parentElement;
-    expect(button).toHaveStyle("background-color: red");
+    expect(button?.style.backgroundColor).toBe("red");
   });
 
   it("renders as disabled", () => {

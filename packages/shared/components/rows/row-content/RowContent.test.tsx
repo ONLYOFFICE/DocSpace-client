@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -125,7 +125,7 @@ describe("<RowContent />", () => {
       </RowContent>,
     );
 
-    expect(screen.getByTestId("row-content")).toHaveStyle(customStyle);
+    expect(screen.getByTestId("row-content").style.backgroundColor).toBe("red");
   });
 
   it("handles onClick event", () => {

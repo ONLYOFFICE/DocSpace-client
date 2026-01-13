@@ -2,7 +2,6 @@
   "AddedRoomTags": "Οι ετικέτες προστέθηκαν.",
   "Administration": "Διαχείριση",
   "AgentRenamed": "Agent <1>«{{oldRoomTitle}}»</1> μετονομάστηκε σε <2>«{{roomTitle}}»</2>",
-  "AIAgentsEmptyScreenTent": "Δείτε λεπτομέρειες για τους πράκτορες τεχνητής νοημοσύνης εδώ",
   "AndMoreLabel": "και <1>{{count}} περισσότερα</1>",
   "CreationDate": "Ημερομηνία δημιουργίας",
   "Data": "Δεδομένα",

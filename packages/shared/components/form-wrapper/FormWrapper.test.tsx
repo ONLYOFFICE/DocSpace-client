@@ -45,7 +45,7 @@ describe("FormWrapper", () => {
 
     const wrapper = screen.getByTestId("form-wrapper");
     expect(wrapper).toHaveClass(customClass);
-    expect(wrapper).toHaveStyle({ backgroundColor: "red" });
+    expect(wrapper.style.backgroundColor).toBe("red");
   });
 
   it("applies custom id", () => {

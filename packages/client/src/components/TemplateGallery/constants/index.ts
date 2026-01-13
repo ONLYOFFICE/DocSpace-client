@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -73,6 +73,8 @@ export const TAB_CONFIG = {
 export const SCROLL_HEIGHTS = {
   MOBILE: "calc(100vh - 227px)",
   DESKTOP: "calc(100vh - 286px)",
+  MOBILE_FORMS_ONLY: "calc(100vh - 190px)",
+  DESKTOP_FORMS_ONLY: "calc(100vh - 244px)",
 } as const;
 
 export const LANGUAGE_CULTURE_MAP: Record<string, string> = {

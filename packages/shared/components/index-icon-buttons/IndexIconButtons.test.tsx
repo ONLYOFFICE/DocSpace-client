@@ -1,5 +1,5 @@
 /*
- * (c) Copyright Ascensio System SIA 2009-2025
+ * (c) Copyright Ascensio System SIA 2009-2026
  *
  * This program is a free software product.
  * You can redistribute it and/or modify it under the terms
@@ -103,7 +103,7 @@ describe("<IndexIconButtons />", () => {
     render(<IndexIconButtons style={style} />);
 
     const root = screen.getByTestId("index-icon-buttons");
-    expect(root).toHaveStyle("background-color: red");
-    expect(root).toHaveStyle("padding: 10px");
+    expect(root.style.backgroundColor).toBe("red");
+    expect(root.style.padding).toBe("10px");
   });
 });

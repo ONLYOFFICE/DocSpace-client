@@ -203,7 +203,11 @@ export const settingsNoAuth = {
       minLength: 3,
       maxLength: 63,
     },
-
+    deepLink: {
+      androidPackageName: "com.onlyoffice.documents",
+      url: "oodocuments://openfile",
+      iosPackageId: "944896972",
+    },
     cookieSettingsEnabled: false,
     limitedAccessSpace: false,
     userNameRegex: "^[\\p{L}\\p{M}' \\-]+$",

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -41,9 +41,11 @@ const KnowledgeDisabledContainer = (props) => {
   const descriptionRoomNoAccess = isAdmin
     ? t("AIRoom:KnowledgeUnavailableDescription", {
         productName: t("Common:ProductName"),
+        aiAgents: t("Common:AIAgents"),
       })
     : t("AIRoom:KnowledgeUnavailableDescriptionUser", {
         productName: t("Common:ProductName"),
+        aiAgents: t("Common:AIAgents"),
       });
 
   const navigate = useNavigate();

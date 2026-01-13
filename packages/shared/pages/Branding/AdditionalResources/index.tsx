@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -76,23 +76,18 @@ export const AdditionalResources = ({
   };
 
   return (
-    <div className={styles.additionalResources}>
+    <div
+      className={classNames(styles.additionalResources, {
+        ["isEnableBranding"]: !isSettingPaid,
+        ["settings_unavailable"]: !isSettingPaid,
+      })}
+    >
       <div className={classNames(styles.header, "header")}>
-        <div
-          className={classNames(
-            styles.additionalHeader,
-            "settings_unavailable",
-          )}
-        >
+        <div className={styles.additionalHeader}>
           {t("Common:AdditionalResources")}
         </div>
       </div>
-      <div
-        className={classNames(
-          styles.additionalDescription,
-          "settings_unavailable",
-        )}
-      >
+      <div className={styles.additionalDescription}>
         {t("Common:AdditionalResourcesDescription", {
           productName: t("Common:ProductName"),
         })}

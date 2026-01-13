@@ -3,13 +3,19 @@
   "content": "Favorites",
   "content_en_sha1_hash": "07b3e447db02b7cc20a78a57c316febae22ed72b",
   "created_at": "2025-08-29T14:33:19.030Z",
-  "updated_at": "2025-12-17T07:49:08.076Z",
+  "updated_at": "2025-12-22T14:25:01.738Z",
   "comment": {
     "text": "This key displays the label for a user's saved or preferred items. It appears as the title for a folder in the tree view and as the tooltip for a button that toggles the \"favorite\" status of an item. Translators should ensure the translation conveys the meaning of \"saved items\" or \"preferred selections.\"",
     "is_auto": true,
     "updated_at": "2025-08-29T14:34:32.665Z"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/sub-components/DefaultPageSetting.tsx",
+      "line_number": 82,
+      "context": "{\n label: t(\"Common:SharedWithMe\"),\n key: FolderType.SHARE,\n },\n {\n label: t(\"Common:Favorites\"),\n key: FolderType.Favorites,\n },\n {\n label: t(\"Common:Recent\"),\n key: FolderType.Recent,",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/store/TreeFoldersStore.js",
       "line_number": 85,
@@ -18,7 +24,7 @@
     },
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 615,
+      "line_number": 613,
       "context": "iconName={FavoriteFillReactSvgUrl}\n className={classNames(\"badge icons-group\")}\n size={IconSizeType.medium}\n onClick={onClickFavorite}\n color=\"accent\"\n title={t(\"Common:Favorites\")}\n />\n ) : null}\n </div>\n );\n };",
       "module": "/packages/shared"
     },

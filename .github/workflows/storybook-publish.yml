@@ -11,8 +11,8 @@ on:
       - "packages/shared/**"
 
 env:
-  NODE_VERSION: 22.x
-  PNPM_VERSION: 10.26.0
+  NODE_VERSION: 24.x
+  PNPM_VERSION: 10.28.0
 
 jobs:
   build:

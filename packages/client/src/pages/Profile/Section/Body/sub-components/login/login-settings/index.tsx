@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -71,7 +71,7 @@ const LoginSettings = (props: LoginSettingsProps) => {
   }, []);
 
   return (
-    <div className={styles.loginSettingsWrapper}>
+    <div className={styles.loginSettingsWrapper} data-testid="profile-tfa">
       <div className={styles.header}>
         <Text fontSize="16px" fontWeight={700} lineHeight="22px">
           {t("Settings:TwoFactorAuth")}

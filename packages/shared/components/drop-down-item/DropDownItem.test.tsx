@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -119,7 +119,7 @@ describe("<DropDownItem />", () => {
     const style = { backgroundColor: "red" };
     render(<DropDownItem {...baseProps} style={style} />);
     const item = screen.getByTestId("drop-down-item");
-    expect(item).toHaveStyle(style);
+    expect(item.style.backgroundColor).toBe("red");
   });
 
   it("renders with additional element", () => {

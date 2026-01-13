@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -48,6 +48,7 @@ const SubmitToGalleryTile: FC<SubmitToGalleryTileProps> = ({
   isSubmitTile,
   submitToGalleryTileIsVisible,
   viewMobile,
+  isKeyboardFocused,
 }) => {
   const { isBase } = useTheme();
 
@@ -112,6 +113,7 @@ const SubmitToGalleryTile: FC<SubmitToGalleryTileProps> = ({
           onClick={onSubmitToGallery}
           size={ButtonSize.small}
           label={t("FormGallery:UploadGallery")}
+          isHovered={isKeyboardFocused}
           scale
         />
       </div>

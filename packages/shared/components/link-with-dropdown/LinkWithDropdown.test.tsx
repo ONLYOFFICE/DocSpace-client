@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -141,7 +141,7 @@ describe("LinkWithDropdown", () => {
     );
 
     const button = screen.getByRole("button", { name: "Link with dropdown" });
-    expect(button).toHaveStyle({ color: "red" });
+    expect(button.style.color).toBe("red");
   });
 
   it("handles disabled state", () => {

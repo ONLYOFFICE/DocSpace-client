@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -57,6 +57,7 @@ export const HEADER_NO_STANDALONE_SETTINGS =
 
 export const HEADER_ROOMS_LIST = "x-test-data-rooms-list";
 export const HEADER_FILTERED_ROOMS_LIST = "x-test-data-filtered-rooms-list";
+export const CONTEXT_MENU_ROOMS_LIST = "x-test-data-context-menu-rooms-list";
 
 export const HEADER_EMPTY_FOLDER = "x-test-data-empty-folder";
 export const HEADER_FILTERED_FOLDER = "x-test-data-filtered-folder";
@@ -78,6 +79,8 @@ export const HEADER_HCAPTCHA_SETTINGS = "x-test-data-hcaptcha-settings";
 
 export const HEADER_AI_DISABLED = "x-ai-config-disabled";
 
+export const HEADER_AI_WEB_SEARCH_DISABLED = "x-ai-config-web-search-disabled";
+
 export const HEADER_EMPTY_PORTAL = "x-empty-portal";
 
 export const HEADER_UNCOMPLETED_TENANT = "x-uncompleted-tenant";
@@ -86,3 +89,14 @@ export const HEADER_OPEN_SOURCE = "x-open-source";
 
 export const HEADER_ENCRYPTION_SETTINGS_ENCRYPTED =
   "x-encryption-settings-encrypted";
+
+export const HEADER_WITHOUT_CUSTOMIZATION = "x-without-customization";
+
+export const HEADER_OPEN_EDIT_WITH_PASSWORD = "x-open-edit-with-password";
+
+export const HEADER_FORM_YOUR_TURN_FILLING = "x-form-your-turn-filling";
+
+export const buildSseBody = (events: { event: string; data: unknown }[]) =>
+  events
+    .map((e) => `event: ${e.event}\n` + `data: ${JSON.stringify(e.data)}\n\n`)
+    .join("");

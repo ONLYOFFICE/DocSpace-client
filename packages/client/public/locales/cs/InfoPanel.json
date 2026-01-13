@@ -2,7 +2,6 @@
   "AddedRoomTags": "Přidané značky.",
   "Administration": "Správa",
   "AgentRenamed": "Agent <1>«{{oldRoomTitle}}»</1> přejmenován na <2>«{{roomTitle}}»</2>",
-  "AIAgentsEmptyScreenTent": "Podívejte se na detaily AI agentů zde.",
   "AndMoreLabel": "a <1>{{count}} další</1>",
   "CreationDate": "Datum vytvoření",
   "Data": "Data",

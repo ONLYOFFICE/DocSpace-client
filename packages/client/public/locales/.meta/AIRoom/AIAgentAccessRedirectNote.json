@@ -3,7 +3,7 @@
   "content": "You will be automatically redirected to the {{sectionName}} section in 5 seconds.",
   "content_en_sha1_hash": "657798d55e2aee88c6db6bde76d66ecabf1980b2",
   "created_at": "2025-11-25T06:36:55.164Z",
-  "updated_at": "2025-12-17T07:49:07.703Z",
+  "updated_at": "2025-12-19T13:04:02.980Z",
   "comment": {
     "text": "This translation key displays a redirect message informing the user they will be automatically redirected to the \"AIAgents\" section in 5 seconds. It appears within a \"NoAccessContainer\" component, likely indicating a redirection triggered by an AI agent access attempt. Translators should ensure the \"AIAgents\" text is accurately translated as it's used as a dynamic section name.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/NoAccessContainer.tsx",
-      "line_number": 140,
-      "context": "break;\n // TODO: for AI agents\n case NoAccessContainerType.Agent:\n emptyViewProps = {\n title: t(\"AIRoom:NoAccessAIAgentTitle\"),\n description: t(\"AIRoom:AIAgentAccessRedirectNote\", {\n sectionName: t(\"Common:AIAgents\"),\n }),\n icon: theme.isBase ? (\n <ManageAccessRightsLightIcon />\n ) : (",
+      "line_number": 142,
+      "context": "case NoAccessContainerType.Agent:\n emptyViewProps = {\n title: t(\"AIRoom:NoAccessAIAgentTitle\", {\n aiAgent: t(\"Common:AIAgent\"),\n }),\n description: t(\"AIRoom:AIAgentAccessRedirectNote\", {\n sectionName: t(\"Common:AIAgents\"),\n }),\n icon: theme.isBase ? (\n <ManageAccessRightsLightIcon />\n ) : (",
       "module": "/packages/client"
     }
   ],

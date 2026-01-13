@@ -1,24 +1,210 @@
 {
   "key_path": "DefineQuotaPerAIAgent",
-  "content": "Define quota per AI agent",
-  "content_en_sha1_hash": "178f2177b437dee4fb2f2c045466cb60ae95dc0a",
-  "created_at": "2025-11-06T18:29:07.747Z",
-  "updated_at": "2025-11-20T14:22:11.657Z",
+  "content": "Define quota per {{aiAgent}}",
+  "content_en_sha1_hash": "67bd11cee455fc7d91c09f4826591aa3fd7fa108",
+  "created_at": "2025-12-19T13:03:35.396Z",
+  "updated_at": "2025-12-22T10:10:15.552Z",
   "comment": {
-    "text": "This text appears as a label, likely on a button or form field, allowing users to define a quota limit for each AI agent. It's used within the storage management settings of the portal, enabling control over AI agent resource usage. Translators should consider the concept of resource limits and allocation.",
+    "text": "This key provides the label for a button or toggle used to define a quota specifically for an AI agent. It appears in the Portal Settings, within the storage management section, and refers to the AI agent, which is a common term for an automated assistant. Translators should ensure the phrasing accurately conveys the action of setting a limit for an AI agent's resource usage.",
     "is_auto": true,
-    "updated_at": "2025-11-06T18:39:57.191Z"
+    "updated_at": "2025-12-22T10:10:15.552Z"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerAIAgent.tsx",
-      "line_number": 54,
-      "context": "return (\n <QuotaPerItemComponent\n type=\"agent\"\n formLabel={t(\"QuotaPerAIAgent\")}\n toggleLabel={t(\"DefineQuotaPerAIAgent\")}\n disableQuota={disableQuota}\n saveQuota={saveQuota}\n {...initialSizeProp}\n isQuotaSet={isDefaultAIAgentsQuotaSet}\n tabIndex={3}",
+      "line_number": 56,
+      "context": "<QuotaPerItemComponent\n type=\"agent\"\n formLabel={t(\"QuotaPerAIAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n })}\n toggleLabel={t(\"DefineQuotaPerAIAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n })}\n disableQuota={disableQuota}\n saveQuota={saveQuota}\n {...initialSizeProp}",
       "module": "/packages/client"
     }
   ],
   "languages": {
     "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

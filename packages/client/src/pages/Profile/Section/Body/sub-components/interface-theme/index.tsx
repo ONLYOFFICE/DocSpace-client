@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -112,7 +112,7 @@ const InterfaceTheme = (props: InterfaceThemeProps) => {
     : t("Profile:SystemThemeDescription");
 
   return (
-    <div className={styles.interfaceTheme}>
+    <div className={styles.interfaceTheme} data-testid="profile-interface-theme">
       <div>
         <Checkbox
           className={styles.systemThemeCheckbox}

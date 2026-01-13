@@ -2,7 +2,6 @@
   "AddedRoomTags": "Tags hinzugefügt.",
   "Administration": "Verwaltung",
   "AgentRenamed": "Agent <1>«{{oldRoomTitle}}»</1> umbenannt in <2>«{{roomTitle}}»</2>",
-  "AIAgentsEmptyScreenTent": "Hier finden Sie Details zu den KI-Agenten",
   "AndMoreLabel": "und <1>{{count}} mehr</1>",
   "CreationDate": "Erstellungsdatum",
   "Data": "Daten",

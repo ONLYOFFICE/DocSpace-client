@@ -1,5 +1,4 @@
 {
-  "AIAgentsDescription": "通过添加知识库、选择理想模型并连接 MCP 服务器，为您的团队设置个性化助手。",
   "AITools": "AI 工具",
   "AItoolsConfirm": "启用 AI 工具服务将授予所有{{productName}}用户访问 AI 功能的权限，前提是钱包有足够资金。确定要继续吗？",
   "AIToolsEnabled": "AI 工具服务已成功启用。",
@@ -32,6 +31,5 @@
   "TextTranslation": "文本翻译",
   "TextTranslationDescription": "快速将文本翻译成目标语言，同时精准传达原意和上下文。",
   "ThirdPartyResourceDescription": "连接并保存备份到 Dropbox、Box、OneDrive 或 Google Drive 等云帐户。",
-  "ThirdPartyStorageDescription": "使用第三方服务存储备份。此功能非常适合连接外部云存储平台。",
-  "WebSearchEnabled": "AI 网络搜索服务已成功启用。"
+  "ThirdPartyStorageDescription": "使用第三方服务存储备份。此功能非常适合连接外部云存储平台。"
 }

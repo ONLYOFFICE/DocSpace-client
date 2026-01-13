@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -263,7 +263,9 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
       <div className=" set_room_params-info">
         <div>
           <Text fontSize="13px" lineHeight="20px" fontWeight={600} noSelect>
-            {t("Model")}
+            {t("Model", {
+              aiProvider: t("Common:AIProvider"),
+            })}
           </Text>
           <Text
             fontSize="12px"
@@ -272,7 +274,9 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
             className="set_room_params-info-description"
             noSelect
           >
-            {t("ModelDescription")}
+            {t("ModelDescription", {
+              aiProvider: t("Common:AIProvider"),
+            })}
           </Text>
           <Text
             fontSize="12px"

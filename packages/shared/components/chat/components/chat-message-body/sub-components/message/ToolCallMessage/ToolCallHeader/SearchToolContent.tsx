@@ -1,5 +1,5 @@
 /*
- * (c) Copyright Ascensio System SIA 2009-2025
+ * (c) Copyright Ascensio System SIA 2009-2026
  *
  * This program is a free software product.
  * You can redistribute it and/or modify it under the terms
@@ -49,7 +49,16 @@ const WebCrawlingToolContent = ({ content }: { content: TToolCallContent }) => {
   const toolInfo = ((content.result?.data as TToolCallResultSourceData)
     ?.title || content.arguments.url) as string;
 
-  return (
+  const hasError = !!content.result?.error;
+
+  return hasError ? (
+    <>
+      <ReactSVG className={styles.searchToolIcon} src={UniverseIcon} />
+      <Text fontSize="13px" lineHeight="20px" fontWeight={600} truncate>
+        {t("Common:WebCrawling")} | <span title={toolInfo}>{toolInfo}</span>
+      </Text>
+    </>
+  ) : (
     <Link
       style={{ display: "contents" }}
       href={content.arguments?.url as string}

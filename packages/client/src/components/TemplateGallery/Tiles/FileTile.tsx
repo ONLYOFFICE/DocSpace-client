@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -36,6 +36,7 @@ const FileTile: FC<FileTileProps> = ({
   smallPreview,
   onClickInfo,
   onClick,
+  isFocused = false,
 }) => {
   const previewSrc = item?.attributes.card_prewiew.data?.attributes.url;
   let nonStandardHorizontalTile = false;
@@ -64,8 +65,12 @@ const FileTile: FC<FileTileProps> = ({
     [styles.nonStandardHorizontalTile]: nonStandardHorizontalTile,
   });
 
+  const fileTileClass = classNames(styles.fileTile, {
+    [styles.focused]: isFocused,
+  });
+
   return (
-    <div className={styles.fileTile} onClick={onClick}>
+    <div className={fileTileClass} onClick={onClick} tabIndex={0}>
       <div className={thumbnailContainerClass}>
         <img
           src={previewSrc}

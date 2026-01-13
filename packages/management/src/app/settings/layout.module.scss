@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 // 
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -42,6 +42,34 @@
       :global(.sticky),
       :global(.sticky-indent) {
         display: none !important;
+      }
+    }
+  }
+
+  :global(:not(.isEnableBranding)){
+    :global(.settings_unavailable) {
+      color: var(--management-disable-color) !important;
+      pointer-events: none;
+      cursor: default;
+      
+      p {
+        color: var(--management-disable-color) !important;
+      }
+
+      label {
+        color: var(--management-disable-color) !important;
+      }
+
+      path {
+        fill: var(--management-disable-color) !important;
+      }
+
+      :global(.wl-helper-label){
+        color: var(--management-disable-color) !important;
+      }
+      
+      :global(.section-description){
+        color: var(--management-disable-color) !important;
       }
     }
   }

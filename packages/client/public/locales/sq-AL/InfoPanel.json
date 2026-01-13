@@ -2,7 +2,6 @@
   "AddedRoomTags": "Etiketat e shtuara.",
   "Administration": "Administrata",
   "AgentRenamed": "Agjenti <1>«{{oldRoomTitle}}»</1> u riemërua në <2>«{{roomTitle}}»</2>",
-  "AIAgentsEmptyScreenTent": "Shihni detajet e agjentëve të IA këtu",
   "AndMoreLabel": "dhe <1>{{count}} më shumë</1>",
   "CreationDate": "Data e krijimit",
   "Data": "Data",

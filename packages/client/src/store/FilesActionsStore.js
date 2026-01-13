@@ -3093,7 +3093,7 @@ class FilesActionStore {
   };
 
   onLeaveRoom = (t, isOwner = false) => {
-    const { selection, bufferSelection } = this.filesStore;
+    const { selection, setSelected, bufferSelection } = this.filesStore;
     const { user } = this.userStore;
 
     const room = selection.length
@@ -3140,6 +3140,9 @@ class FilesActionStore {
         }
 
         toastr.success(successText);
+      })
+      .finally(() => {
+        setSelected("none");
       });
   };
 

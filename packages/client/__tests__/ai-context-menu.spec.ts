@@ -26,6 +26,7 @@
 import { endpoints } from "@docspace/shared/__mocks__/e2e";
 
 import { expect, test } from "./fixtures/base";
+import { getListTestIds } from "./utils";
 
 test.describe("DocAdmin context menu", () => {
   test.beforeEach(async ({ mockRequest }) => {
@@ -53,65 +54,73 @@ test.describe("DocAdmin context menu", () => {
     ]);
   });
 
-  test("Doc admin agent manager", async ({ page, mockRequest }) => {
+  test("Doc admin agent manager", async ({ page, mockRequest }, testInfo) => {
     await mockRequest.router([endpoints.aiAgentsDocAdminManager]);
 
     await page.goto("/ai-agents/filter?folder=224866");
 
-    const table = page.getByTestId("table-body");
-    await expect(table).toBeVisible();
+    const { containerTestId, rowTestId } = getListTestIds(
+      testInfo.project.name,
+    );
 
-    const aiMenu = table.getByTestId("table-row-0");
+    const container = page.getByTestId(containerTestId);
+    await expect(container).toBeVisible();
+
+    const aiMenu = container.getByTestId(rowTestId + "0");
     const contextMenuButton = aiMenu.getByTestId("context-menu-button").first();
     await expect(contextMenuButton).toBeVisible();
     await contextMenuButton.click();
 
     const contextMenuMoreOptions = page.getByTestId("more-options");
-    await contextMenuMoreOptions.hover();
-    await expect(contextMenuMoreOptions).toBeVisible();
+    await contextMenuMoreOptions.click();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "context-menu",
       "ai-room_doc-admin-manager.png",
     ]);
   });
 
-  test("Doc admin content creator", async ({ page, mockRequest }) => {
+  test("Doc admin content creator", async ({ page, mockRequest }, testInfo) => {
     await mockRequest.router([endpoints.aiAgentsDocAdminCreator]);
 
     await page.goto("/ai-agents/filter?folder=224866");
 
-    const table = page.getByTestId("table-body");
-    await expect(table).toBeVisible();
+    const { containerTestId, rowTestId } = getListTestIds(
+      testInfo.project.name,
+    );
 
-    const aiMenu = table.getByTestId("table-row-0");
+    const container = page.getByTestId(containerTestId);
+    await expect(container).toBeVisible();
+
+    const aiMenu = container.getByTestId(rowTestId + "0");
     const contextMenuButton = aiMenu.getByTestId("context-menu-button").first();
     await expect(contextMenuButton).toBeVisible();
     await contextMenuButton.click();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "context-menu",
       "ai-room_doc-admin-creator.png",
     ]);
   });
 
-  test("Doc admin out of room", async ({ page, mockRequest }) => {
+  test("Doc admin out of room", async ({ page, mockRequest }, testInfo) => {
     await mockRequest.router([endpoints.aiAgentsDocAdminOutOfRoom]);
 
     await page.goto("/ai-agents/filter?folder=224866");
 
-    const table = page.getByTestId("table-body");
-    await expect(table).toBeVisible();
+    const { containerTestId, rowTestId } = getListTestIds(
+      testInfo.project.name,
+    );
 
-    const aiMenu = table.getByTestId("table-row-0");
+    const container = page.getByTestId(containerTestId);
+    await expect(container).toBeVisible();
+
+    const aiMenu = container.getByTestId(rowTestId + "0");
     const contextMenuButton = aiMenu.getByTestId("context-menu-button").first();
     await expect(contextMenuButton).toBeVisible();
     await contextMenuButton.click();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "context-menu",
       "ai-room_doc-admin-out-of-room.png",
     ]);
@@ -144,69 +153,76 @@ test.describe("RoomAdmin context menu", () => {
     ]);
   });
 
-  test("Agent owner", async ({ page, mockRequest }) => {
+  test("Agent owner", async ({ page, mockRequest }, testInfo) => {
     await mockRequest.router([endpoints.aiAgentsOwner]);
 
     await page.goto("/ai-agents/filter?folder=224866");
 
-    const table = page.getByTestId("table-body");
-    await expect(table).toBeVisible();
+    const { containerTestId, rowTestId } = getListTestIds(
+      testInfo.project.name,
+    );
 
-    const aiMenu = table.getByTestId("table-row-0");
+    const container = page.getByTestId(containerTestId);
+    await expect(container).toBeVisible();
+
+    const aiMenu = container.getByTestId(rowTestId + "0");
     const contextMenuButton = aiMenu.getByTestId("context-menu-button").first();
     await expect(contextMenuButton).toBeVisible();
     await contextMenuButton.click();
 
     const contextMenuMoreOptions = page.getByTestId("more-options");
-    await contextMenuMoreOptions.hover();
-    await expect(contextMenuMoreOptions).toBeVisible();
+    await contextMenuMoreOptions.click();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "context-menu",
       "ai-room_agent-owner.png",
     ]);
   });
 
-  test("Agent manager", async ({ page, mockRequest }) => {
+  test("Agent manager", async ({ page, mockRequest }, testInfo) => {
     await mockRequest.router([endpoints.aiAgentsManager]);
 
     await page.goto("/ai-agents/filter?folder=224866");
 
-    const table = page.getByTestId("table-body");
-    await expect(table).toBeVisible();
+    const { containerTestId, rowTestId } = getListTestIds(
+      testInfo.project.name,
+    );
 
-    const aiMenu = table.getByTestId("table-row-0");
+    const container = page.getByTestId(containerTestId);
+    await expect(container).toBeVisible();
+
+    const aiMenu = container.getByTestId(rowTestId + "0");
     const contextMenuButton = aiMenu.getByTestId("context-menu-button").first();
     await expect(contextMenuButton).toBeVisible();
     await contextMenuButton.click();
 
     const contextMenuMoreOptions = page.getByTestId("more-options");
-    await contextMenuMoreOptions.hover();
-    await expect(contextMenuMoreOptions).toBeVisible();
+    await contextMenuMoreOptions.click();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "context-menu",
       "ai-room_agent-manager.png",
     ]);
   });
 
-  test("Content creator", async ({ page, mockRequest }) => {
+  test("Content creator", async ({ page, mockRequest }, testInfo) => {
     await mockRequest.router([endpoints.aiAgentsCreator]);
 
     await page.goto("/ai-agents/filter?folder=224866");
 
-    const table = page.getByTestId("table-body");
-    await expect(table).toBeVisible();
+    const { containerTestId, rowTestId } = getListTestIds(
+      testInfo.project.name,
+    );
 
-    const aiMenu = table.getByTestId("table-row-0");
+    const container = page.getByTestId(containerTestId);
+    await expect(container).toBeVisible();
+
+    const aiMenu = container.getByTestId(rowTestId + "0");
     const contextMenuButton = aiMenu.getByTestId("context-menu-button").first();
     await expect(contextMenuButton).toBeVisible();
     await contextMenuButton.click();
 
     await expect(page).toHaveScreenshot([
-      "desktop",
       "context-menu",
       "ai-room_creator.png",
     ]);

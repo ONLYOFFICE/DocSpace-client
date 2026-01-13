@@ -26,6 +26,7 @@
 
 import { endpoints } from "@docspace/shared/__mocks__/e2e";
 import { expect, test } from "./fixtures/base";
+import { getListTestIds } from "./utils";
 
 test.describe("Context menu DocAdmin", () => {
   test.beforeEach(async ({ mockRequest }) => {
@@ -54,15 +55,19 @@ test.describe("Context menu DocAdmin", () => {
   });
 
   test.describe("Room manager", () => {
-    test("Custom without share", async ({ page, mockRequest }) => {
+    test("Custom without share", async ({ page, mockRequest }, testInfo) => {
       await mockRequest.router([endpoints.cmRoomListDocAdminManager]);
 
       await page.goto("/rooms/shared/");
 
-      const table = page.getByTestId("table-body");
-      await expect(table).toBeVisible();
+      const { containerTestId, rowTestId } = getListTestIds(
+        testInfo.project.name,
+      );
 
-      const customRoomWithoutLink = table.getByTestId("table-row-0");
+      const container = page.getByTestId(containerTestId);
+      await expect(container).toBeVisible();
+
+      const customRoomWithoutLink = container.getByTestId(rowTestId + "0");
       const contextMenuButton = customRoomWithoutLink
         .getByTestId("context-menu-button")
         .first();
@@ -71,26 +76,31 @@ test.describe("Context menu DocAdmin", () => {
       await contextMenuButton.click();
 
       const contextMenuMoveOptions = page.getByTestId("more-options");
-      await contextMenuMoveOptions.hover();
-      await expect(contextMenuMoveOptions).toBeVisible();
+      await contextMenuMoveOptions.click();
 
       await expect(page).toHaveScreenshot([
-        "desktop",
         "context-menu",
         "doc-admin-manager_custom-room.png",
       ]);
     });
 
-    test("Public/Form/Custom(Public)", async ({ page, mockRequest }) => {
+    test("Public/Form/Custom(Public)", async ({
+      page,
+      mockRequest,
+    }, testInfo) => {
       await mockRequest.router([endpoints.cmRoomListDocAdminManager]);
 
       await page.goto("/rooms/shared/");
 
-      const table = page.getByTestId("table-body");
-      await expect(table).toBeVisible();
+      const { containerTestId, rowTestId } = getListTestIds(
+        testInfo.project.name,
+      );
+
+      const container = page.getByTestId(containerTestId);
+      await expect(container).toBeVisible();
 
       // Public
-      const publicRoomWithoutLink = table.getByTestId("table-row-1");
+      const publicRoomWithoutLink = container.getByTestId(rowTestId + "1");
       const publicContextMenuButton = publicRoomWithoutLink
         .getByTestId("context-menu-button")
         .first();
@@ -99,11 +109,9 @@ test.describe("Context menu DocAdmin", () => {
       await publicContextMenuButton.click();
 
       const publicContextMenuMoveOptions = page.getByTestId("more-options");
-      await publicContextMenuMoveOptions.hover();
-      await expect(publicContextMenuMoveOptions).toBeVisible();
+      await publicContextMenuMoveOptions.click();
 
       await expect(page).toHaveScreenshot([
-        "desktop",
         "context-menu",
         "doc-admin-manager_public-room.png",
       ]);
@@ -111,7 +119,7 @@ test.describe("Context menu DocAdmin", () => {
       // Form room
 
       await page.goto("/rooms/shared/");
-      const formRoomWithoutLink = table.getByTestId("table-row-2");
+      const formRoomWithoutLink = container.getByTestId(rowTestId + "2");
       const formContextMenuButton = formRoomWithoutLink
         .getByTestId("context-menu-button")
         .first();
@@ -120,11 +128,9 @@ test.describe("Context menu DocAdmin", () => {
       await formContextMenuButton.click();
 
       const formContextMenuMoveOptions = page.getByTestId("more-options");
-      await formContextMenuMoveOptions.hover();
-      await expect(formContextMenuMoveOptions).toBeVisible();
+      await formContextMenuMoveOptions.click();
 
       await expect(page).toHaveScreenshot([
-        "desktop",
         "context-menu",
         "doc-admin-manager_form-room.png",
       ]);
@@ -132,7 +138,7 @@ test.describe("Context menu DocAdmin", () => {
       // Custom room (shared)
 
       await page.goto("/rooms/shared/");
-      const customRoomWithoutLink = table.getByTestId("table-row-3");
+      const customRoomWithoutLink = container.getByTestId(rowTestId + "3");
       const contextMenuButton = customRoomWithoutLink
         .getByTestId("context-menu-button")
         .first();
@@ -141,25 +147,27 @@ test.describe("Context menu DocAdmin", () => {
       await contextMenuButton.click();
 
       const contextMenuMoveOptions = page.getByTestId("more-options");
-      await contextMenuMoveOptions.hover();
-      await expect(contextMenuMoveOptions).toBeVisible();
+      await contextMenuMoveOptions.click();
 
       await expect(page).toHaveScreenshot([
-        "desktop",
         "context-menu",
         "doc-admin-manager_custom-shared-room.png",
       ]);
     });
 
-    test("Public third-party", async ({ page, mockRequest }) => {
+    test("Public third-party", async ({ page, mockRequest }, testInfo) => {
       await mockRequest.router([endpoints.cmRoomListDocAdminManager]);
 
       await page.goto("/rooms/shared/");
 
-      const table = page.getByTestId("table-body");
-      await expect(table).toBeVisible();
+      const { containerTestId, rowTestId } = getListTestIds(
+        testInfo.project.name,
+      );
 
-      const customRoomWithoutLink = table.getByTestId("table-row-4");
+      const container = page.getByTestId(containerTestId);
+      await expect(container).toBeVisible();
+
+      const customRoomWithoutLink = container.getByTestId(rowTestId + "4");
       const contextMenuButton = customRoomWithoutLink
         .getByTestId("context-menu-button")
         .first();
@@ -168,25 +176,27 @@ test.describe("Context menu DocAdmin", () => {
       await contextMenuButton.click();
 
       const contextMenuMoveOptions = page.getByTestId("more-options");
-      await contextMenuMoveOptions.hover();
-      await expect(contextMenuMoveOptions).toBeVisible();
+      await contextMenuMoveOptions.click();
 
       await expect(page).toHaveScreenshot([
-        "desktop",
         "context-menu",
         "doc-admin-manager_third-party-room.png",
       ]);
     });
 
-    test("Collaboration", async ({ page, mockRequest }) => {
+    test("Collaboration", async ({ page, mockRequest }, testInfo) => {
       await mockRequest.router([endpoints.cmRoomListDocAdminManager]);
 
       await page.goto("/rooms/shared/");
 
-      const table = page.getByTestId("table-body");
-      await expect(table).toBeVisible();
+      const { containerTestId, rowTestId } = getListTestIds(
+        testInfo.project.name,
+      );
 
-      const customRoomWithoutLink = table.getByTestId("table-row-5");
+      const container = page.getByTestId(containerTestId);
+      await expect(container).toBeVisible();
+
+      const customRoomWithoutLink = container.getByTestId(rowTestId + "5");
       const contextMenuButton = customRoomWithoutLink
         .getByTestId("context-menu-button")
         .first();
@@ -195,25 +205,27 @@ test.describe("Context menu DocAdmin", () => {
       await contextMenuButton.click();
 
       const contextMenuMoveOptions = page.getByTestId("more-options");
-      await contextMenuMoveOptions.hover();
-      await expect(contextMenuMoveOptions).toBeVisible();
+      await contextMenuMoveOptions.click();
 
       await expect(page).toHaveScreenshot([
-        "desktop",
         "context-menu",
         "doc-admin-manager_collaboration-room.png",
       ]);
     });
 
-    test("VDR", async ({ page, mockRequest }) => {
+    test("VDR", async ({ page, mockRequest }, testInfo) => {
       await mockRequest.router([endpoints.cmRoomListDocAdminManager]);
 
       await page.goto("/rooms/shared/");
 
-      const table = page.getByTestId("table-body");
-      await expect(table).toBeVisible();
+      const { containerTestId, rowTestId } = getListTestIds(
+        testInfo.project.name,
+      );
 
-      const customRoomWithoutLink = table.getByTestId("table-row-6");
+      const container = page.getByTestId(containerTestId);
+      await expect(container).toBeVisible();
+
+      const customRoomWithoutLink = container.getByTestId(rowTestId + "6");
       const contextMenuButton = customRoomWithoutLink
         .getByTestId("context-menu-button")
         .first();
@@ -222,11 +234,9 @@ test.describe("Context menu DocAdmin", () => {
       await contextMenuButton.click();
 
       const contextMenuMoveOptions = page.getByTestId("more-options");
-      await contextMenuMoveOptions.hover();
-      await expect(contextMenuMoveOptions).toBeVisible();
+      await contextMenuMoveOptions.click();
 
       await expect(page).toHaveScreenshot([
-        "desktop",
         "context-menu",
         "doc-admin-manager_vdr-room.png",
       ]);
@@ -234,15 +244,19 @@ test.describe("Context menu DocAdmin", () => {
   });
 
   test.describe("Content creator", () => {
-    test("Custom without share", async ({ page, mockRequest }) => {
+    test("Custom without share", async ({ page, mockRequest }, testInfo) => {
       await mockRequest.router([endpoints.cmRoomListContentCreator]);
 
       await page.goto("/rooms/shared/");
 
-      const table = page.getByTestId("table-body");
-      await expect(table).toBeVisible();
+      const { containerTestId, rowTestId } = getListTestIds(
+        testInfo.project.name,
+      );
 
-      const customRoomWithoutLink = table.getByTestId("table-row-0");
+      const container = page.getByTestId(containerTestId);
+      await expect(container).toBeVisible();
+
+      const customRoomWithoutLink = container.getByTestId(rowTestId + "0");
       const contextMenuButton = customRoomWithoutLink
         .getByTestId("context-menu-button")
         .first();
@@ -251,26 +265,31 @@ test.describe("Context menu DocAdmin", () => {
       await contextMenuButton.click();
 
       const contextMenuMoveOptions = page.getByTestId("more-options");
-      await contextMenuMoveOptions.hover();
-      await expect(contextMenuMoveOptions).toBeVisible();
+      await contextMenuMoveOptions.click();
 
       await expect(page).toHaveScreenshot([
-        "desktop",
         "context-menu",
         "doc-admin-content-creator_custom-room.png",
       ]);
     });
 
-    test("Public/Form/Custom(Public)", async ({ page, mockRequest }) => {
+    test("Public/Form/Custom(Public)", async ({
+      page,
+      mockRequest,
+    }, testInfo) => {
       await mockRequest.router([endpoints.cmRoomListContentCreator]);
 
       await page.goto("/rooms/shared/");
 
-      const table = page.getByTestId("table-body");
-      await expect(table).toBeVisible();
+      const { containerTestId, rowTestId } = getListTestIds(
+        testInfo.project.name,
+      );
+
+      const container = page.getByTestId(containerTestId);
+      await expect(container).toBeVisible();
 
       // Public
-      const publicRoomWithoutLink = table.getByTestId("table-row-1");
+      const publicRoomWithoutLink = container.getByTestId(rowTestId + "1");
       const publicContextMenuButton = publicRoomWithoutLink
         .getByTestId("context-menu-button")
         .first();
@@ -279,11 +298,9 @@ test.describe("Context menu DocAdmin", () => {
       await publicContextMenuButton.click();
 
       const publicContextMenuMoveOptions = page.getByTestId("more-options");
-      await publicContextMenuMoveOptions.hover();
-      await expect(publicContextMenuMoveOptions).toBeVisible();
+      await publicContextMenuMoveOptions.click();
 
       await expect(page).toHaveScreenshot([
-        "desktop",
         "context-menu",
         "doc-admin-content-creator_public-room.png",
       ]);
@@ -291,7 +308,7 @@ test.describe("Context menu DocAdmin", () => {
       // Form room
 
       await page.goto("/rooms/shared/");
-      const formRoomWithoutLink = table.getByTestId("table-row-2");
+      const formRoomWithoutLink = container.getByTestId(rowTestId + "2");
       const formContextMenuButton = formRoomWithoutLink
         .getByTestId("context-menu-button")
         .first();
@@ -300,11 +317,9 @@ test.describe("Context menu DocAdmin", () => {
       await formContextMenuButton.click();
 
       const formContextMenuMoveOptions = page.getByTestId("more-options");
-      await formContextMenuMoveOptions.hover();
-      await expect(formContextMenuMoveOptions).toBeVisible();
+      await formContextMenuMoveOptions.click();
 
       await expect(page).toHaveScreenshot([
-        "desktop",
         "context-menu",
         "doc-admin-content-creator_form-room.png",
       ]);
@@ -312,7 +327,7 @@ test.describe("Context menu DocAdmin", () => {
       // Custom room (shared)
 
       await page.goto("/rooms/shared/");
-      const customRoomWithoutLink = table.getByTestId("table-row-3");
+      const customRoomWithoutLink = container.getByTestId(rowTestId + "3");
       const contextMenuButton = customRoomWithoutLink
         .getByTestId("context-menu-button")
         .first();
@@ -321,25 +336,27 @@ test.describe("Context menu DocAdmin", () => {
       await contextMenuButton.click();
 
       const contextMenuMoveOptions = page.getByTestId("more-options");
-      await contextMenuMoveOptions.hover();
-      await expect(contextMenuMoveOptions).toBeVisible();
+      await contextMenuMoveOptions.click();
 
       await expect(page).toHaveScreenshot([
-        "desktop",
         "context-menu",
         "doc-admin-content-creator_custom-room-shared.png",
       ]);
     });
 
-    test("Public third-party", async ({ page, mockRequest }) => {
+    test("Public third-party", async ({ page, mockRequest }, testInfo) => {
       await mockRequest.router([endpoints.cmRoomListContentCreator]);
 
       await page.goto("/rooms/shared/");
 
-      const table = page.getByTestId("table-body");
-      await expect(table).toBeVisible();
+      const { containerTestId, rowTestId } = getListTestIds(
+        testInfo.project.name,
+      );
 
-      const customRoomWithoutLink = table.getByTestId("table-row-4");
+      const container = page.getByTestId(containerTestId);
+      await expect(container).toBeVisible();
+
+      const customRoomWithoutLink = container.getByTestId(rowTestId + "4");
       const contextMenuButton = customRoomWithoutLink
         .getByTestId("context-menu-button")
         .first();
@@ -348,21 +365,24 @@ test.describe("Context menu DocAdmin", () => {
       await contextMenuButton.click();
 
       await expect(page).toHaveScreenshot([
-        "desktop",
         "context-menu",
         "doc-admin-content-creator_public-third-party-room.png",
       ]);
     });
 
-    test("Collaboration", async ({ page, mockRequest }) => {
+    test("Collaboration", async ({ page, mockRequest }, testInfo) => {
       await mockRequest.router([endpoints.cmRoomListContentCreator]);
 
       await page.goto("/rooms/shared/");
 
-      const table = page.getByTestId("table-body");
-      await expect(table).toBeVisible();
+      const { containerTestId, rowTestId } = getListTestIds(
+        testInfo.project.name,
+      );
 
-      const customRoomWithoutLink = table.getByTestId("table-row-5");
+      const container = page.getByTestId(containerTestId);
+      await expect(container).toBeVisible();
+
+      const customRoomWithoutLink = container.getByTestId(rowTestId + "5");
       const contextMenuButton = customRoomWithoutLink
         .getByTestId("context-menu-button")
         .first();
@@ -371,11 +391,9 @@ test.describe("Context menu DocAdmin", () => {
       await contextMenuButton.click();
 
       const contextMenuMoveOptions = page.getByTestId("more-options");
-      await contextMenuMoveOptions.hover();
-      await expect(contextMenuMoveOptions).toBeVisible();
+      await contextMenuMoveOptions.click();
 
       await expect(page).toHaveScreenshot([
-        "desktop",
         "context-menu",
         "doc-admin-content-creator_collaboration-room.png",
       ]);
@@ -403,7 +421,7 @@ test.describe("Context menu DocAdmin", () => {
     //   await expect(contextMenuMoveOptions).toBeVisible();
 
     //   await expect(page).toHaveScreenshot([
-    //     "desktop",
+    //
     //     "context-menu",
     //     "doc-admin-content-creator_vdr-room.png",
     //   ]);
@@ -411,15 +429,19 @@ test.describe("Context menu DocAdmin", () => {
   });
 
   test.describe("Not in room", () => {
-    test("Custom without share", async ({ page, mockRequest }) => {
+    test("Custom without share", async ({ page, mockRequest }, testInfo) => {
       await mockRequest.router([endpoints.cmRoomListNotInRoom]);
 
       await page.goto("/rooms/shared/");
 
-      const table = page.getByTestId("table-body");
-      await expect(table).toBeVisible();
+      const { containerTestId, rowTestId } = getListTestIds(
+        testInfo.project.name,
+      );
 
-      const customRoomWithoutLink = table.getByTestId("table-row-0");
+      const container = page.getByTestId(containerTestId);
+      await expect(container).toBeVisible();
+
+      const customRoomWithoutLink = container.getByTestId(rowTestId + "0");
       const contextMenuButton = customRoomWithoutLink
         .getByTestId("context-menu-button")
         .first();
@@ -428,26 +450,31 @@ test.describe("Context menu DocAdmin", () => {
       await contextMenuButton.click();
 
       const contextMenuMoveOptions = page.getByTestId("more-options");
-      await contextMenuMoveOptions.hover();
-      await expect(contextMenuMoveOptions).toBeVisible();
+      await contextMenuMoveOptions.click();
 
       await expect(page).toHaveScreenshot([
-        "desktop",
         "context-menu",
         "doc-admin-not-in-room_custom-room.png",
       ]);
     });
 
-    test("Public/Form/Custom(Public)", async ({ page, mockRequest }) => {
+    test("Public/Form/Custom(Public)", async ({
+      page,
+      mockRequest,
+    }, testInfo) => {
       await mockRequest.router([endpoints.cmRoomListNotInRoom]);
 
       await page.goto("/rooms/shared/");
 
-      const table = page.getByTestId("table-body");
-      await expect(table).toBeVisible();
+      const { containerTestId, rowTestId } = getListTestIds(
+        testInfo.project.name,
+      );
+
+      const container = page.getByTestId(containerTestId);
+      await expect(container).toBeVisible();
 
       // Public
-      const publicRoomWithoutLink = table.getByTestId("table-row-1");
+      const publicRoomWithoutLink = container.getByTestId(rowTestId + "1");
       const publicContextMenuButton = publicRoomWithoutLink
         .getByTestId("context-menu-button")
         .first();
@@ -456,11 +483,9 @@ test.describe("Context menu DocAdmin", () => {
       await publicContextMenuButton.click();
 
       const publicContextMenuMoveOptions = page.getByTestId("more-options");
-      await publicContextMenuMoveOptions.hover();
-      await expect(publicContextMenuMoveOptions).toBeVisible();
+      await publicContextMenuMoveOptions.click();
 
       await expect(page).toHaveScreenshot([
-        "desktop",
         "context-menu",
         "doc-admin-not-in-room_public-room.png",
       ]);
@@ -468,7 +493,7 @@ test.describe("Context menu DocAdmin", () => {
       // Form room
 
       await page.goto("/rooms/shared/");
-      const formRoomWithoutLink = table.getByTestId("table-row-2");
+      const formRoomWithoutLink = container.getByTestId(rowTestId + "2");
       const formContextMenuButton = formRoomWithoutLink
         .getByTestId("context-menu-button")
         .first();
@@ -477,11 +502,9 @@ test.describe("Context menu DocAdmin", () => {
       await formContextMenuButton.click();
 
       const formContextMenuMoveOptions = page.getByTestId("more-options");
-      await formContextMenuMoveOptions.hover();
-      await expect(formContextMenuMoveOptions).toBeVisible();
+      await formContextMenuMoveOptions.click();
 
       await expect(page).toHaveScreenshot([
-        "desktop",
         "context-menu",
         "doc-admin-not-in-room_form-room.png",
       ]);
@@ -489,7 +512,7 @@ test.describe("Context menu DocAdmin", () => {
       // Custom room (shared)
 
       await page.goto("/rooms/shared/");
-      const customRoomWithoutLink = table.getByTestId("table-row-3");
+      const customRoomWithoutLink = container.getByTestId(rowTestId + "3");
       const contextMenuButton = customRoomWithoutLink
         .getByTestId("context-menu-button")
         .first();
@@ -498,25 +521,27 @@ test.describe("Context menu DocAdmin", () => {
       await contextMenuButton.click();
 
       const contextMenuMoveOptions = page.getByTestId("more-options");
-      await contextMenuMoveOptions.hover();
-      await expect(contextMenuMoveOptions).toBeVisible();
+      await contextMenuMoveOptions.click();
 
       await expect(page).toHaveScreenshot([
-        "desktop",
         "context-menu",
         "doc-admin-not-in-room_custom-room-shared.png",
       ]);
     });
 
-    test("Public third-party", async ({ page, mockRequest }) => {
+    test("Public third-party", async ({ page, mockRequest }, testInfo) => {
       await mockRequest.router([endpoints.cmRoomListNotInRoom]);
 
       await page.goto("/rooms/shared/");
 
-      const table = page.getByTestId("table-body");
-      await expect(table).toBeVisible();
+      const { containerTestId, rowTestId } = getListTestIds(
+        testInfo.project.name,
+      );
 
-      const customRoomWithoutLink = table.getByTestId("table-row-4");
+      const container = page.getByTestId(containerTestId);
+      await expect(container).toBeVisible();
+
+      const customRoomWithoutLink = container.getByTestId(rowTestId + "4");
       const contextMenuButton = customRoomWithoutLink
         .getByTestId("context-menu-button")
         .first();
@@ -525,21 +550,24 @@ test.describe("Context menu DocAdmin", () => {
       await contextMenuButton.click();
 
       await expect(page).toHaveScreenshot([
-        "desktop",
         "context-menu",
         "doc-admin-not-in-room_public-third-party-room.png",
       ]);
     });
 
-    test("Collaboration", async ({ page, mockRequest }) => {
+    test("Collaboration", async ({ page, mockRequest }, testInfo) => {
       await mockRequest.router([endpoints.cmRoomListNotInRoom]);
 
       await page.goto("/rooms/shared/");
 
-      const table = page.getByTestId("table-body");
-      await expect(table).toBeVisible();
+      const { containerTestId, rowTestId } = getListTestIds(
+        testInfo.project.name,
+      );
 
-      const customRoomWithoutLink = table.getByTestId("table-row-5");
+      const container = page.getByTestId(containerTestId);
+      await expect(container).toBeVisible();
+
+      const customRoomWithoutLink = container.getByTestId(rowTestId + "5");
       const contextMenuButton = customRoomWithoutLink
         .getByTestId("context-menu-button")
         .first();
@@ -548,25 +576,27 @@ test.describe("Context menu DocAdmin", () => {
       await contextMenuButton.click();
 
       const contextMenuMoveOptions = page.getByTestId("more-options");
-      await contextMenuMoveOptions.hover();
-      await expect(contextMenuMoveOptions).toBeVisible();
+      await contextMenuMoveOptions.click();
 
       await expect(page).toHaveScreenshot([
-        "desktop",
         "context-menu",
         "doc-admin-not-in-room_collaboration-room.png",
       ]);
     });
 
-    test("VDR", async ({ page, mockRequest }) => {
+    test("VDR", async ({ page, mockRequest }, testInfo) => {
       await mockRequest.router([endpoints.cmRoomListNotInRoom]);
 
       await page.goto("/rooms/shared/");
 
-      const table = page.getByTestId("table-body");
-      await expect(table).toBeVisible();
+      const { containerTestId, rowTestId } = getListTestIds(
+        testInfo.project.name,
+      );
 
-      const customRoomWithoutLink = table.getByTestId("table-row-6");
+      const container = page.getByTestId(containerTestId);
+      await expect(container).toBeVisible();
+
+      const customRoomWithoutLink = container.getByTestId(rowTestId + "6");
       const contextMenuButton = customRoomWithoutLink
         .getByTestId("context-menu-button")
         .first();
@@ -575,11 +605,9 @@ test.describe("Context menu DocAdmin", () => {
       await contextMenuButton.click();
 
       const contextMenuMoveOptions = page.getByTestId("more-options");
-      await contextMenuMoveOptions.hover();
-      await expect(contextMenuMoveOptions).toBeVisible();
+      await contextMenuMoveOptions.click();
 
       await expect(page).toHaveScreenshot([
-        "desktop",
         "context-menu",
         "doc-admin-not-in-room_vdr-room.png",
       ]);
@@ -614,15 +642,19 @@ test.describe("Context menu Room admin", () => {
   });
 
   test.describe("Room owner", () => {
-    test("Custom without share", async ({ page, mockRequest }) => {
+    test("Custom without share", async ({ page, mockRequest }, testInfo) => {
       await mockRequest.router([endpoints.cmRoomListRoomOwner]);
 
       await page.goto("/rooms/shared/");
 
-      const table = page.getByTestId("table-body");
-      await expect(table).toBeVisible();
+      const { containerTestId, rowTestId } = getListTestIds(
+        testInfo.project.name,
+      );
 
-      const customRoomWithoutLink = table.getByTestId("table-row-0");
+      const container = page.getByTestId(containerTestId);
+      await expect(container).toBeVisible();
+
+      const customRoomWithoutLink = container.getByTestId(rowTestId + "0");
       const contextMenuButton = customRoomWithoutLink
         .getByTestId("context-menu-button")
         .first();
@@ -631,26 +663,31 @@ test.describe("Context menu Room admin", () => {
       await contextMenuButton.click();
 
       const contextMenuMoveOptions = page.getByTestId("more-options");
-      await contextMenuMoveOptions.hover();
-      await expect(contextMenuMoveOptions).toBeVisible();
+      await contextMenuMoveOptions.click();
 
       await expect(page).toHaveScreenshot([
-        "desktop",
         "context-menu",
         "room-admin-room-owner_custom-room.png",
       ]);
     });
 
-    test("Public/Form/Custom(Public)", async ({ page, mockRequest }) => {
+    test("Public/Form/Custom(Public)", async ({
+      page,
+      mockRequest,
+    }, testInfo) => {
       await mockRequest.router([endpoints.cmRoomListRoomOwner]);
 
       await page.goto("/rooms/shared/");
 
-      const table = page.getByTestId("table-body");
-      await expect(table).toBeVisible();
+      const { containerTestId, rowTestId } = getListTestIds(
+        testInfo.project.name,
+      );
+
+      const container = page.getByTestId(containerTestId);
+      await expect(container).toBeVisible();
 
       // Public
-      const publicRoomWithoutLink = table.getByTestId("table-row-1");
+      const publicRoomWithoutLink = container.getByTestId(rowTestId + "1");
       const publicContextMenuButton = publicRoomWithoutLink
         .getByTestId("context-menu-button")
         .first();
@@ -659,11 +696,9 @@ test.describe("Context menu Room admin", () => {
       await publicContextMenuButton.click();
 
       const publicContextMenuMoveOptions = page.getByTestId("more-options");
-      await publicContextMenuMoveOptions.hover();
-      await expect(publicContextMenuMoveOptions).toBeVisible();
+      await publicContextMenuMoveOptions.click();
 
       await expect(page).toHaveScreenshot([
-        "desktop",
         "context-menu",
         "room-admin-room-owner_public-room.png",
       ]);
@@ -671,7 +706,7 @@ test.describe("Context menu Room admin", () => {
       // Form room
 
       await page.goto("/rooms/shared/");
-      const formRoomWithoutLink = table.getByTestId("table-row-2");
+      const formRoomWithoutLink = container.getByTestId(rowTestId + "2");
       const formContextMenuButton = formRoomWithoutLink
         .getByTestId("context-menu-button")
         .first();
@@ -680,11 +715,9 @@ test.describe("Context menu Room admin", () => {
       await formContextMenuButton.click();
 
       const formContextMenuMoveOptions = page.getByTestId("more-options");
-      await formContextMenuMoveOptions.hover();
-      await expect(formContextMenuMoveOptions).toBeVisible();
+      await formContextMenuMoveOptions.click();
 
       await expect(page).toHaveScreenshot([
-        "desktop",
         "context-menu",
         "room-admin-room-owner_form-room.png",
       ]);
@@ -692,7 +725,7 @@ test.describe("Context menu Room admin", () => {
       // Custom room (shared)
 
       await page.goto("/rooms/shared/");
-      const customRoomWithoutLink = table.getByTestId("table-row-3");
+      const customRoomWithoutLink = container.getByTestId(rowTestId + "3");
       const contextMenuButton = customRoomWithoutLink
         .getByTestId("context-menu-button")
         .first();
@@ -701,25 +734,27 @@ test.describe("Context menu Room admin", () => {
       await contextMenuButton.click();
 
       const contextMenuMoveOptions = page.getByTestId("more-options");
-      await contextMenuMoveOptions.hover();
-      await expect(contextMenuMoveOptions).toBeVisible();
+      await contextMenuMoveOptions.click();
 
       await expect(page).toHaveScreenshot([
-        "desktop",
         "context-menu",
         "room-admin-room-owner_custom-shared-room.png",
       ]);
     });
 
-    test("Public third-party", async ({ page, mockRequest }) => {
+    test("Public third-party", async ({ page, mockRequest }, testInfo) => {
       await mockRequest.router([endpoints.cmRoomListRoomOwner]);
 
       await page.goto("/rooms/shared/");
 
-      const table = page.getByTestId("table-body");
-      await expect(table).toBeVisible();
+      const { containerTestId, rowTestId } = getListTestIds(
+        testInfo.project.name,
+      );
 
-      const customRoomWithoutLink = table.getByTestId("table-row-4");
+      const container = page.getByTestId(containerTestId);
+      await expect(container).toBeVisible();
+
+      const customRoomWithoutLink = container.getByTestId(rowTestId + "4");
       const contextMenuButton = customRoomWithoutLink
         .getByTestId("context-menu-button")
         .first();
@@ -728,25 +763,27 @@ test.describe("Context menu Room admin", () => {
       await contextMenuButton.click();
 
       const contextMenuMoveOptions = page.getByTestId("more-options");
-      await contextMenuMoveOptions.hover();
-      await expect(contextMenuMoveOptions).toBeVisible();
+      await contextMenuMoveOptions.click();
 
       await expect(page).toHaveScreenshot([
-        "desktop",
         "context-menu",
         "room-admin-room-owner_third-party-room.png",
       ]);
     });
 
-    test("Collaboration", async ({ page, mockRequest }) => {
+    test("Collaboration", async ({ page, mockRequest }, testInfo) => {
       await mockRequest.router([endpoints.cmRoomListRoomOwner]);
 
       await page.goto("/rooms/shared/");
 
-      const table = page.getByTestId("table-body");
-      await expect(table).toBeVisible();
+      const { containerTestId, rowTestId } = getListTestIds(
+        testInfo.project.name,
+      );
 
-      const customRoomWithoutLink = table.getByTestId("table-row-5");
+      const container = page.getByTestId(containerTestId);
+      await expect(container).toBeVisible();
+
+      const customRoomWithoutLink = container.getByTestId(rowTestId + "5");
       const contextMenuButton = customRoomWithoutLink
         .getByTestId("context-menu-button")
         .first();
@@ -755,25 +792,27 @@ test.describe("Context menu Room admin", () => {
       await contextMenuButton.click();
 
       const contextMenuMoveOptions = page.getByTestId("more-options");
-      await contextMenuMoveOptions.hover();
-      await expect(contextMenuMoveOptions).toBeVisible();
+      await contextMenuMoveOptions.click();
 
       await expect(page).toHaveScreenshot([
-        "desktop",
         "context-menu",
         "room-admin-room-owner_collaboration-room.png",
       ]);
     });
 
-    test("VDR", async ({ page, mockRequest }) => {
+    test("VDR", async ({ page, mockRequest }, testInfo) => {
       await mockRequest.router([endpoints.cmRoomListRoomOwner]);
 
       await page.goto("/rooms/shared/");
 
-      const table = page.getByTestId("table-body");
-      await expect(table).toBeVisible();
+      const { containerTestId, rowTestId } = getListTestIds(
+        testInfo.project.name,
+      );
 
-      const customRoomWithoutLink = table.getByTestId("table-row-6");
+      const container = page.getByTestId(containerTestId);
+      await expect(container).toBeVisible();
+
+      const customRoomWithoutLink = container.getByTestId(rowTestId + "6");
       const contextMenuButton = customRoomWithoutLink
         .getByTestId("context-menu-button")
         .first();
@@ -782,11 +821,9 @@ test.describe("Context menu Room admin", () => {
       await contextMenuButton.click();
 
       const contextMenuMoveOptions = page.getByTestId("more-options");
-      await contextMenuMoveOptions.hover();
-      await expect(contextMenuMoveOptions).toBeVisible();
+      await contextMenuMoveOptions.click();
 
       await expect(page).toHaveScreenshot([
-        "desktop",
         "context-menu",
         "room-admin-room-owner_vdr-room.png",
       ]);
@@ -794,15 +831,19 @@ test.describe("Context menu Room admin", () => {
   });
 
   test.describe("Room manager", () => {
-    test("Custom without share", async ({ page, mockRequest }) => {
+    test("Custom without share", async ({ page, mockRequest }, testInfo) => {
       await mockRequest.router([endpoints.cmRoomListRoomAdminManager]);
 
       await page.goto("/rooms/shared/");
 
-      const table = page.getByTestId("table-body");
-      await expect(table).toBeVisible();
+      const { containerTestId, rowTestId } = getListTestIds(
+        testInfo.project.name,
+      );
 
-      const customRoomWithoutLink = table.getByTestId("table-row-0");
+      const container = page.getByTestId(containerTestId);
+      await expect(container).toBeVisible();
+
+      const customRoomWithoutLink = container.getByTestId(rowTestId + "0");
       const contextMenuButton = customRoomWithoutLink
         .getByTestId("context-menu-button")
         .first();
@@ -811,26 +852,31 @@ test.describe("Context menu Room admin", () => {
       await contextMenuButton.click();
 
       const contextMenuMoveOptions = page.getByTestId("more-options");
-      await contextMenuMoveOptions.hover();
-      await expect(contextMenuMoveOptions).toBeVisible();
+      await contextMenuMoveOptions.click();
 
       await expect(page).toHaveScreenshot([
-        "desktop",
         "context-menu",
         "room-admin-room-manager_custom-room.png",
       ]);
     });
 
-    test("Public/Form/Custom(Public)", async ({ page, mockRequest }) => {
+    test("Public/Form/Custom(Public)", async ({
+      page,
+      mockRequest,
+    }, testInfo) => {
       await mockRequest.router([endpoints.cmRoomListRoomAdminManager]);
 
       await page.goto("/rooms/shared/");
 
-      const table = page.getByTestId("table-body");
-      await expect(table).toBeVisible();
+      const { containerTestId, rowTestId } = getListTestIds(
+        testInfo.project.name,
+      );
+
+      const container = page.getByTestId(containerTestId);
+      await expect(container).toBeVisible();
 
       // Public
-      const publicRoomWithoutLink = table.getByTestId("table-row-1");
+      const publicRoomWithoutLink = container.getByTestId(rowTestId + "1");
       const publicContextMenuButton = publicRoomWithoutLink
         .getByTestId("context-menu-button")
         .first();
@@ -839,11 +885,9 @@ test.describe("Context menu Room admin", () => {
       await publicContextMenuButton.click();
 
       const publicContextMenuMoveOptions = page.getByTestId("more-options");
-      await publicContextMenuMoveOptions.hover();
-      await expect(publicContextMenuMoveOptions).toBeVisible();
+      await publicContextMenuMoveOptions.click();
 
       await expect(page).toHaveScreenshot([
-        "desktop",
         "context-menu",
         "room-admin-room-manager_public-room.png",
       ]);
@@ -851,7 +895,7 @@ test.describe("Context menu Room admin", () => {
       // Form room
 
       await page.goto("/rooms/shared/");
-      const formRoomWithoutLink = table.getByTestId("table-row-2");
+      const formRoomWithoutLink = container.getByTestId(rowTestId + "2");
       const formContextMenuButton = formRoomWithoutLink
         .getByTestId("context-menu-button")
         .first();
@@ -860,11 +904,9 @@ test.describe("Context menu Room admin", () => {
       await formContextMenuButton.click();
 
       const formContextMenuMoveOptions = page.getByTestId("more-options");
-      await formContextMenuMoveOptions.hover();
-      await expect(formContextMenuMoveOptions).toBeVisible();
+      await formContextMenuMoveOptions.click();
 
       await expect(page).toHaveScreenshot([
-        "desktop",
         "context-menu",
         "room-admin-room-manager_form-room.png",
       ]);
@@ -872,7 +914,7 @@ test.describe("Context menu Room admin", () => {
       // Custom room (shared)
 
       await page.goto("/rooms/shared/");
-      const customRoomWithoutLink = table.getByTestId("table-row-3");
+      const customRoomWithoutLink = container.getByTestId(rowTestId + "3");
       const contextMenuButton = customRoomWithoutLink
         .getByTestId("context-menu-button")
         .first();
@@ -881,25 +923,27 @@ test.describe("Context menu Room admin", () => {
       await contextMenuButton.click();
 
       const contextMenuMoveOptions = page.getByTestId("more-options");
-      await contextMenuMoveOptions.hover();
-      await expect(contextMenuMoveOptions).toBeVisible();
+      await contextMenuMoveOptions.click();
 
       await expect(page).toHaveScreenshot([
-        "desktop",
         "context-menu",
         "room-admin-room-manager_custom-shared-room.png",
       ]);
     });
 
-    test("Public third-party", async ({ page, mockRequest }) => {
+    test("Public third-party", async ({ page, mockRequest }, testInfo) => {
       await mockRequest.router([endpoints.cmRoomListRoomAdminManager]);
 
       await page.goto("/rooms/shared/");
 
-      const table = page.getByTestId("table-body");
-      await expect(table).toBeVisible();
+      const { containerTestId, rowTestId } = getListTestIds(
+        testInfo.project.name,
+      );
 
-      const customRoomWithoutLink = table.getByTestId("table-row-4");
+      const container = page.getByTestId(containerTestId);
+      await expect(container).toBeVisible();
+
+      const customRoomWithoutLink = container.getByTestId(rowTestId + "4");
       const contextMenuButton = customRoomWithoutLink
         .getByTestId("context-menu-button")
         .first();
@@ -908,25 +952,27 @@ test.describe("Context menu Room admin", () => {
       await contextMenuButton.click();
 
       const contextMenuMoveOptions = page.getByTestId("more-options");
-      await contextMenuMoveOptions.hover();
-      await expect(contextMenuMoveOptions).toBeVisible();
+      await contextMenuMoveOptions.click();
 
       await expect(page).toHaveScreenshot([
-        "desktop",
         "context-menu",
         "room-admin-room-manager_third-party-room.png",
       ]);
     });
 
-    test("Collaboration", async ({ page, mockRequest }) => {
+    test("Collaboration", async ({ page, mockRequest }, testInfo) => {
       await mockRequest.router([endpoints.cmRoomListRoomAdminManager]);
 
       await page.goto("/rooms/shared/");
 
-      const table = page.getByTestId("table-body");
-      await expect(table).toBeVisible();
+      const { containerTestId, rowTestId } = getListTestIds(
+        testInfo.project.name,
+      );
 
-      const customRoomWithoutLink = table.getByTestId("table-row-5");
+      const container = page.getByTestId(containerTestId);
+      await expect(container).toBeVisible();
+
+      const customRoomWithoutLink = container.getByTestId(rowTestId + "5");
       const contextMenuButton = customRoomWithoutLink
         .getByTestId("context-menu-button")
         .first();
@@ -935,25 +981,27 @@ test.describe("Context menu Room admin", () => {
       await contextMenuButton.click();
 
       const contextMenuMoveOptions = page.getByTestId("more-options");
-      await contextMenuMoveOptions.hover();
-      await expect(contextMenuMoveOptions).toBeVisible();
+      await contextMenuMoveOptions.click();
 
       await expect(page).toHaveScreenshot([
-        "desktop",
         "context-menu",
         "room-admin-room-manager_collaboration-room.png",
       ]);
     });
 
-    test("VDR", async ({ page, mockRequest }) => {
+    test("VDR", async ({ page, mockRequest }, testInfo) => {
       await mockRequest.router([endpoints.cmRoomListRoomAdminManager]);
 
       await page.goto("/rooms/shared/");
 
-      const table = page.getByTestId("table-body");
-      await expect(table).toBeVisible();
+      const { containerTestId, rowTestId } = getListTestIds(
+        testInfo.project.name,
+      );
 
-      const customRoomWithoutLink = table.getByTestId("table-row-6");
+      const container = page.getByTestId(containerTestId);
+      await expect(container).toBeVisible();
+
+      const customRoomWithoutLink = container.getByTestId(rowTestId + "6");
       const contextMenuButton = customRoomWithoutLink
         .getByTestId("context-menu-button")
         .first();
@@ -962,11 +1010,9 @@ test.describe("Context menu Room admin", () => {
       await contextMenuButton.click();
 
       const contextMenuMoveOptions = page.getByTestId("more-options");
-      await contextMenuMoveOptions.hover();
-      await expect(contextMenuMoveOptions).toBeVisible();
+      await contextMenuMoveOptions.click();
 
       await expect(page).toHaveScreenshot([
-        "desktop",
         "context-menu",
         "room-admin-room-manager_vdr-room.png",
       ]);
@@ -974,15 +1020,19 @@ test.describe("Context menu Room admin", () => {
   });
 
   test.describe("Content creator", () => {
-    test("Custom without share", async ({ page, mockRequest }) => {
+    test("Custom without share", async ({ page, mockRequest }, testInfo) => {
       await mockRequest.router([endpoints.cmRoomListRoomAdminCreator]);
 
       await page.goto("/rooms/shared/");
 
-      const table = page.getByTestId("table-body");
-      await expect(table).toBeVisible();
+      const { containerTestId, rowTestId } = getListTestIds(
+        testInfo.project.name,
+      );
 
-      const customRoomWithoutLink = table.getByTestId("table-row-0");
+      const container = page.getByTestId(containerTestId);
+      await expect(container).toBeVisible();
+
+      const customRoomWithoutLink = container.getByTestId(rowTestId + "0");
       const contextMenuButton = customRoomWithoutLink
         .getByTestId("context-menu-button")
         .first();
@@ -991,22 +1041,28 @@ test.describe("Context menu Room admin", () => {
       await contextMenuButton.click();
 
       await expect(page).toHaveScreenshot([
-        "desktop",
         "context-menu",
         "room-admin-content-creator_custom-room.png",
       ]);
     });
 
-    test("Public/Form/Custom(Public)", async ({ page, mockRequest }) => {
+    test("Public/Form/Custom(Public)", async ({
+      page,
+      mockRequest,
+    }, testInfo) => {
       await mockRequest.router([endpoints.cmRoomListRoomAdminCreator]);
 
       await page.goto("/rooms/shared/");
 
-      const table = page.getByTestId("table-body");
-      await expect(table).toBeVisible();
+      const { containerTestId, rowTestId } = getListTestIds(
+        testInfo.project.name,
+      );
+
+      const container = page.getByTestId(containerTestId);
+      await expect(container).toBeVisible();
 
       // Public
-      const publicRoomWithoutLink = table.getByTestId("table-row-1");
+      const publicRoomWithoutLink = container.getByTestId(rowTestId + "1");
       const publicContextMenuButton = publicRoomWithoutLink
         .getByTestId("context-menu-button")
         .first();
@@ -1015,7 +1071,6 @@ test.describe("Context menu Room admin", () => {
       await publicContextMenuButton.click();
 
       await expect(page).toHaveScreenshot([
-        "desktop",
         "context-menu",
         "room-admin-content-creator_public-room.png",
       ]);
@@ -1023,7 +1078,7 @@ test.describe("Context menu Room admin", () => {
       // Form room
 
       await page.goto("/rooms/shared/");
-      const formRoomWithoutLink = table.getByTestId("table-row-2");
+      const formRoomWithoutLink = container.getByTestId(rowTestId + "2");
       const formContextMenuButton = formRoomWithoutLink
         .getByTestId("context-menu-button")
         .first();
@@ -1032,7 +1087,6 @@ test.describe("Context menu Room admin", () => {
       await formContextMenuButton.click();
 
       await expect(page).toHaveScreenshot([
-        "desktop",
         "context-menu",
         "room-admin-content-creator_form-room.png",
       ]);
@@ -1040,7 +1094,7 @@ test.describe("Context menu Room admin", () => {
       // Custom room (shared)
 
       await page.goto("/rooms/shared/");
-      const customRoomWithoutLink = table.getByTestId("table-row-3");
+      const customRoomWithoutLink = container.getByTestId(rowTestId + "3");
       const contextMenuButton = customRoomWithoutLink
         .getByTestId("context-menu-button")
         .first();
@@ -1049,21 +1103,24 @@ test.describe("Context menu Room admin", () => {
       await contextMenuButton.click();
 
       await expect(page).toHaveScreenshot([
-        "desktop",
         "context-menu",
         "room-admin-content-creator_custom-shared-room.png",
       ]);
     });
 
-    test("Public third-party", async ({ page, mockRequest }) => {
+    test("Public third-party", async ({ page, mockRequest }, testInfo) => {
       await mockRequest.router([endpoints.cmRoomListRoomAdminCreator]);
 
       await page.goto("/rooms/shared/");
 
-      const table = page.getByTestId("table-body");
-      await expect(table).toBeVisible();
+      const { containerTestId, rowTestId } = getListTestIds(
+        testInfo.project.name,
+      );
 
-      const customRoomWithoutLink = table.getByTestId("table-row-4");
+      const container = page.getByTestId(containerTestId);
+      await expect(container).toBeVisible();
+
+      const customRoomWithoutLink = container.getByTestId(rowTestId + "4");
       const contextMenuButton = customRoomWithoutLink
         .getByTestId("context-menu-button")
         .first();
@@ -1072,21 +1129,24 @@ test.describe("Context menu Room admin", () => {
       await contextMenuButton.click();
 
       await expect(page).toHaveScreenshot([
-        "desktop",
         "context-menu",
         "room-admin-content-creator_third-party-room.png",
       ]);
     });
 
-    test("Collaboration", async ({ page, mockRequest }) => {
+    test("Collaboration", async ({ page, mockRequest }, testInfo) => {
       await mockRequest.router([endpoints.cmRoomListRoomAdminCreator]);
 
       await page.goto("/rooms/shared/");
 
-      const table = page.getByTestId("table-body");
-      await expect(table).toBeVisible();
+      const { containerTestId, rowTestId } = getListTestIds(
+        testInfo.project.name,
+      );
 
-      const customRoomWithoutLink = table.getByTestId("table-row-5");
+      const container = page.getByTestId(containerTestId);
+      await expect(container).toBeVisible();
+
+      const customRoomWithoutLink = container.getByTestId(rowTestId + "5");
       const contextMenuButton = customRoomWithoutLink
         .getByTestId("context-menu-button")
         .first();
@@ -1095,21 +1155,24 @@ test.describe("Context menu Room admin", () => {
       await contextMenuButton.click();
 
       await expect(page).toHaveScreenshot([
-        "desktop",
         "context-menu",
         "room-admin-content-creator_collaboration-room.png",
       ]);
     });
 
-    test("VDR", async ({ page, mockRequest }) => {
+    test("VDR", async ({ page, mockRequest }, testInfo) => {
       await mockRequest.router([endpoints.cmRoomListRoomAdminCreator]);
 
       await page.goto("/rooms/shared/");
 
-      const table = page.getByTestId("table-body");
-      await expect(table).toBeVisible();
+      const { containerTestId, rowTestId } = getListTestIds(
+        testInfo.project.name,
+      );
 
-      const customRoomWithoutLink = table.getByTestId("table-row-6");
+      const container = page.getByTestId(containerTestId);
+      await expect(container).toBeVisible();
+
+      const customRoomWithoutLink = container.getByTestId(rowTestId + "6");
       const contextMenuButton = customRoomWithoutLink
         .getByTestId("context-menu-button")
         .first();
@@ -1118,7 +1181,6 @@ test.describe("Context menu Room admin", () => {
       await contextMenuButton.click();
 
       await expect(page).toHaveScreenshot([
-        "desktop",
         "context-menu",
         "room-admin-content-creator_vdr-room.png",
       ]);

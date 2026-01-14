@@ -361,7 +361,6 @@ const InvitePanel = ({
               "Failed to re-encrypt file keys for new members:",
               encryptionError,
             );
-            toastr.warning(t("Common:EncryptedFilesKeyWarning"));
           }
         }
       }

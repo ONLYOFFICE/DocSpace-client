@@ -159,9 +159,14 @@
             "tooltip": "🛠️ Start the \"frontend install packages\" task"
           },
           {
-            "label": "Update dependencies",
-            "task": "Frontend | update dependencies",
+            "label": "Update deps",
+            "task": "Frontend | update deps",
             "tooltip": "🛠️ Start the \"frontend update dependencies\" task"
+          },
+          {
+            "label": "Update pnpm-lock.yaml",
+            "task": "Frontend | update pnpm-lock.yaml",
+            "tooltip": "🛠️ Start the \"frontend update pnpm-lock.yaml\" task"
           },
           {
             "label": "Build",
@@ -206,6 +211,11 @@
           {
             "label": "Start storybook prod",
             "task": "Frontend | storybook prod",
+            "tooltip": "🛠️ Start the \"frontend start storybook\" task"
+          },
+          {
+            "label": "Update copyright year",
+            "task": "Utils | Update copyright year",
             "tooltip": "🛠️ Start the \"frontend start storybook\" task"
           }
         ],
@@ -255,9 +265,19 @@
             "tooltip": "🛠️ Start the \"Test | Jest:colors\" task"
           },
           {
-            "label": "Test dependencies (common)",
+            "label": "Test deps check (common)",
             "task": "Test | Jest:dependencies",
             "tooltip": "🛠️ Start the \"Test | Jest:dependencies\" task"
+          },
+          {
+            "label": "Test deps audit (common)",
+            "task": "Test | Jest:dependencies:audit",
+            "tooltip": "🛠️ Start the \"Test | Jest:dependencies:audit\" task"
+          },
+          {
+            "label": "Test licenses audit (common)",
+            "task": "Test | Jest:licenses:audit",
+            "tooltip": "🛠️ Start the \"Test | Jest:licenses:audit\" task"
           },
           {
             "label": "Test unit",

@@ -1,5 +1,5 @@
 /*
- * (c) Copyright Ascensio System SIA 2009-2025
+ * (c) Copyright Ascensio System SIA 2009-2026
  *
  * This program is a free software product.
  * You can redistribute it and/or modify it under the terms
@@ -33,6 +33,9 @@ const TOGETHER_AI_LABEL = "TogetherAI";
 const OPENAI_COMPATIBLE_LABEL = "OpenAI-compatible";
 const ANTHROPIC_LABEL = "Anthropic";
 const OPENROUTER_LABEL = "OpenRouter";
+const DEEPSEEK_LABEL = "DeepSeek";
+const XAI_LABEL = "xAI";
+const GOOGLE_LABEL = "Google AI";
 
 export const getAiProviderLabel = (type: ProviderType) => {
   switch (type) {
@@ -46,6 +49,12 @@ export const getAiProviderLabel = (type: ProviderType) => {
       return ANTHROPIC_LABEL;
     case ProviderType.OpenRouter:
       return OPENROUTER_LABEL;
+    case ProviderType.DeepSeek:
+      return DEEPSEEK_LABEL;
+    case ProviderType.XAi:
+      return XAI_LABEL;
+    case ProviderType.Google:
+      return GOOGLE_LABEL;
     default:
       return "";
   }

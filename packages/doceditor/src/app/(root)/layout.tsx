@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,7 +34,6 @@ import "@docspace/shared/styles/theme.scss";
 
 import Providers from "@/providers";
 import Scripts from "@/components/Scripts";
-import StyledComponentsRegistry from "@/utils/registry";
 import { getColorTheme, getSettings, getUser } from "@/utils/actions";
 import { logger } from "@/../logger.mjs";
 
@@ -101,21 +100,18 @@ export default async function RootLayout({
         <meta name="apple-mobile-web-app-capable" content="yes" />
       </head>
       <body className={themeClass}>
-        <StyledComponentsRegistry>
-          <Providers
-            contextData={{
-              initialTheme: theme,
-              user,
-              settings,
-              systemTheme,
-              colorTheme,
-              locale,
-            }}
-          >
-            {children}
-          </Providers>
-        </StyledComponentsRegistry>
-
+        <Providers
+          contextData={{
+            initialTheme: theme,
+            user,
+            settings,
+            systemTheme,
+            colorTheme,
+            locale,
+          }}
+        >
+          {children}
+        </Providers>
         <Scripts />
       </body>
     </html>

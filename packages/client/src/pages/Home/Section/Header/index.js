@@ -26,6 +26,7 @@
 
 import PublicRoomIconUrl from "PUBLIC_DIR/images/public-room.react.svg?url";
 import LifetimeRoomIconUrl from "PUBLIC_DIR/images/lifetime-room.react.svg?url";
+import EncryptedRoomIconUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
 import RoundedArrowSvgUrl from "PUBLIC_DIR/images/rounded arrow.react.svg?url";
 import SharedLinkSvgUrl from "PUBLIC_DIR/images/icons/16/shared.link.svg?url";
 import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg?url";
@@ -514,9 +515,12 @@ const SectionHeaderContent = (props) => {
   const lifetime = selectedFolder?.lifetime || infoPanelRoom?.lifetime;
   const sharedType =
     (location.state?.isExternal || selectedFolder?.external) && !isPublicRoom;
+  const isEncryptedRoom = selectedFolder?.private === true;
 
   const titleIcon = React.useMemo(() => {
     if (sharedType) return SharedLinkSvgUrl;
+
+    if (isEncryptedRoom) return EncryptedRoomIconUrl;
 
     if (navigationButtonIsVisible && !isPublicRoom) {
       const roomInPath = (
@@ -541,6 +545,7 @@ const SectionHeaderContent = (props) => {
     return "";
   }, [
     sharedType,
+    isEncryptedRoom,
     navigationButtonIsVisible,
     isPublicRoom,
     isArchive,
@@ -555,6 +560,8 @@ const SectionHeaderContent = (props) => {
   const titleIconTooltip = React.useMemo(() => {
     if (sharedType) return t("Files:RecentlyOpenedTooltip");
 
+    if (isEncryptedRoom) return t("Common:PrivateRoomDescription");
+
     if (lifetime)
       return `${t("Files:RoomFilesLifetime", {
         days: lifetime.value,
@@ -568,7 +575,7 @@ const SectionHeaderContent = (props) => {
       }`;
 
     return null;
-  }, [sharedType, lifetime, t]);
+  }, [sharedType, isEncryptedRoom, lifetime, t]);
 
   const onLogoClick = React.useCallback(() => {
     if (isFrame) return;

@@ -24,43 +24,40 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { injectDefaultTheme } from "@docspace/shared/utils";
-
-export const TemplateAccess = styled.div.attrs(injectDefaultTheme)`
-  .template-access_description {
+.templateAccess {
+  .templateAccessDescription {
     margin-bottom: 8px;
   }
 
-  .template-access_wrapper {
+  .templateAccessWrapper {
     display: flex;
     align-items: center;
     margin-top: 12px;
 
-    .template-access_link {
+    .templateAccessLink {
       margin-inline-start: auto;
     }
   }
 
-  .template-access_avatar-container {
+  .templateAccessAvatarContainer {
     display: flex;
     align-items: center;
     gap: 8px;
 
-    .access-avatar-container {
+    .accessAvatarContainer {
       display: flex;
 
-      .template-access_avatar:not(:first-child) {
+      .templateAccessAvatar:not(:first-child) {
         margin-inline-start: -8px;
         z-index: 2;
       }
 
-      .template-access_avatar:last-child {
+      .templateAccessAvatar:last-child {
         z-index: 1;
       }
 
-      .template-access_avatar {
-        border: ${(props) => `1px solid ${props.theme.backgroundColor}`};
+      .templateAccessAvatar {
+        border: var(--template-access-avatar-border);
         border-radius: 50%;
         z-index: 3;
 
@@ -69,17 +66,17 @@ export const TemplateAccess = styled.div.attrs(injectDefaultTheme)`
     }
   }
 
-  .template-access_label {
+  .templateAccessLabel {
     margin-bottom: 8px;
   }
 
-  .template-access_display-name {
+  .templateAccessDisplayName {
     display: flex;
     align-items: center;
     gap: 4px;
 
-    .me-label {
-      color: ${({ theme }) => theme.text.disableColor};
+    .meLabel {
+      color: var(--template-access-me-label-color);
     }
   }
-`;
+}

@@ -37,7 +37,7 @@ import PublicRoomBar from "@docspace/shared/components/public-room-bar";
 import { TSelectorItem } from "@docspace/shared/components/selector";
 import { ShareAccessRights } from "@docspace/shared/enums";
 import { Encoder } from "@docspace/shared/utils/encoder";
-import * as Styled from "./TemplateAccess.styled";
+import styles from "./TemplateAccess.module.scss";
 
 const MAX_AVATARS_COUNT = 3;
 
@@ -84,7 +84,7 @@ const TemplateAccess = ({
 
     avatarList.push(
       <Avatar
-        className="template-access_avatar"
+        className={styles.templateAccessAvatar}
         size={AvatarSize.min}
         role={AvatarRole.none}
         isDefaultSource={roomOwner.hasAvatar}
@@ -117,8 +117,12 @@ const TemplateAccess = ({
   const accessLabel = getAccessLabel();
 
   return (
-    <Styled.TemplateAccess>
-      <Text className="template-access_label" fontWeight={600} fontSize="13px">
+    <div className={styles.templateAccess}>
+      <Text
+        className={styles.templateAccessLabel}
+        fontWeight={600}
+        fontSize="13px"
+      >
         {`${t("Files:AccessToTemplate")}:`}
       </Text>
 
@@ -127,7 +131,7 @@ const TemplateAccess = ({
           headerText={t("Files:TemplateAvailable")}
           bodyText={
             <>
-              <div className="template-access_description">
+              <div className={styles.templateAccessDescription}>
                 {t("Files:TemplateAvailableDescription", {
                   productName: t("Common:ProductName"),
                 })}
@@ -146,8 +150,8 @@ const TemplateAccess = ({
           }
         />
       ) : (
-        <div className="template-access_wrapper">
-          <div className="template-access_avatar-container">
+        <div className={styles.templateAccessWrapper}>
+          <div className={styles.templateAccessAvatarContainer}>
             {itemsLength === 1 ? (
               <>
                 <Avatar
@@ -157,16 +161,18 @@ const TemplateAccess = ({
                   source={getItemAvatarSource(roomOwner)}
                   userName={userName}
                 />
-                <div className="template-access_display-name">
+                <div className={styles.templateAccessDisplayName}>
                   <Text fontWeight={600} fontSize="13px">
                     {userName}
                   </Text>
-                  <Text className="me-label">({t("Common:MeLabel")})</Text>
+                  <Text className={styles.meLabel}>
+                    ({t("Common:MeLabel")})
+                  </Text>
                 </div>
               </>
             ) : (
               <>
-                <div className="access-avatar-container">{avatarList}</div>
+                <div className={styles.accessAvatarContainer}>{avatarList}</div>
                 <Text fontWeight={600} fontSize="14px">
                   {accessLabel}
                 </Text>
@@ -175,7 +181,7 @@ const TemplateAccess = ({
           </div>
 
           <Link
-            className="template-access_link"
+            className={styles.templateAccessLink}
             isHovered
             type={LinkType.action}
             fontWeight={600}
@@ -186,7 +192,7 @@ const TemplateAccess = ({
           </Link>
         </div>
       )}
-    </Styled.TemplateAccess>
+    </div>
   );
 };
 

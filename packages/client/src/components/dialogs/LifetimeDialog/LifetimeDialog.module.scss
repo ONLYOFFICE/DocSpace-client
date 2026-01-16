@@ -24,35 +24,22 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// Set custom environment variables here before requiring server.js
-process.env.NODE_ENV = process.env.NODE_ENV || "production";
-process.env.PORT = process.env.PORT || "5015";
-
-// You can pass command line arguments to the server.js process
-// by setting them before requiring the file
-const argv = (key) => {
-  if (process.argv.includes(`--${key}`)) return true;
-
-  return (
-    process.argv.find((arg) => arg.startsWith(`--${key}=`))?.split("=")[1] ||
-    null
-  );
-};
-
-// Set port from command line arguments if provided
-if (argv("app.port")) {
-  process.env.PORT = argv("app.port");
+.lifetimeBodyContainer {
+  display: grid;
+  gap: 18px;
 }
 
-// Set hostname from command line arguments if provided
-if (argv("app.hostname")) {
-  process.env.HOSTNAME = argv("app.hostname");
+.lifetimeFooterContainer {
+  width: 100%;
+
+  .lifetimeButtons {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  .lifetimeCheckbox {
+    margin-top: -6px;
+    margin-bottom: 26px;
+  }
 }
-
-console.log(
-  `Starting server with environment: NODE_ENV=${process.env.NODE_ENV}, PORT=${process.env.PORT}` +
-    (process.env.HOSTNAME ? `, HOSTNAME=${process.env.HOSTNAME}` : ""),
-);
-
-// Now require server.js which will use the environment variables we just set
-require("./packages/management/server.js");

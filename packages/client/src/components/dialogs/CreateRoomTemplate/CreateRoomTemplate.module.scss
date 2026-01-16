@@ -24,12 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-
-const StyledFooter = styled.div`
+.createRoomTemplateFooter {
   width: 100%;
 
-  .create-room-template_buttons {
+  .createRoomTemplateButtons {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -38,6 +36,4 @@ const StyledFooter = styled.div`
 
     margin-top: 16px;
   }
-`;
-
-export { StyledFooter };
+}

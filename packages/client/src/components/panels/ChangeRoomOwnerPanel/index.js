@@ -26,7 +26,7 @@
 
 import { useMemo } from "react";
 import { inject, observer } from "mobx-react";
-import styled, { css } from "styled-components";
+import classNames from "classnames";
 import PeopleSelector from "@docspace/shared/selectors/People";
 import { withTranslation } from "react-i18next";
 import Filter from "@docspace/shared/api/people/filter";
@@ -35,38 +35,7 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
-
-const StyledChangeRoomOwner = styled.div`
-  display: contents;
-
-  .change-owner_people-selector {
-    overflow: visible;
-  }
-
-  ${({ withFooterCheckbox }) =>
-    withFooterCheckbox &&
-    css`
-      .arrow-button {
-        display: none;
-      }
-
-      .selector_body {
-        height: calc(((100% - 16px) - 111px) - 54px);
-      }
-
-      .selector_footer {
-        height: 110px;
-        min-height: 110px;
-        max-height: 110px;
-      }
-
-      .selector_footer-checkbox {
-        background-color: ${(props) =>
-          props.theme.filesPanels.aside.backgroundColor};
-        padding: 17px 0 1px 0;
-      }
-    `}
-`;
+import styles from "./ChangeRoomOwnerPanel.module.scss";
 
 const ChangeRoomOwner = (props) => {
   const {
@@ -161,7 +130,7 @@ const ChangeRoomOwner = (props) => {
       infoText={infoText}
       emptyScreenHeader={t("Common:NotFoundMembers")}
       emptyScreenDescription={infoText}
-      className="change-owner_people-selector"
+      className={styles.changeOwnerPeopleSelector}
       data-test-id="change_owner_people_selector"
     />
   );
@@ -175,11 +144,15 @@ const ChangeRoomOwner = (props) => {
       withoutPadding
     >
       <ModalDialog.Body>
-        <StyledChangeRoomOwner
-          withFooterCheckbox={!showBackButton ? ownerIsCurrentUser : null}
+        <div
+          className={classNames(styles.changeRoomOwner, {
+            [styles.withFooterCheckbox]: !showBackButton
+              ? ownerIsCurrentUser
+              : false,
+          })}
         >
           {selectorComponent}
-        </StyledChangeRoomOwner>
+        </div>
       </ModalDialog.Body>
     </ModalDialog>
   ) : (

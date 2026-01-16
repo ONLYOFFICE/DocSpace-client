@@ -24,35 +24,30 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// Set custom environment variables here before requiring server.js
-process.env.NODE_ENV = process.env.NODE_ENV || "production";
-process.env.PORT = process.env.PORT || "5015";
+.changeRoomOwner {
+  display: contents;
 
-// You can pass command line arguments to the server.js process
-// by setting them before requiring the file
-const argv = (key) => {
-  if (process.argv.includes(`--${key}`)) return true;
+  .changeOwnerPeopleSelector {
+    overflow: visible;
+  }
 
-  return (
-    process.argv.find((arg) => arg.startsWith(`--${key}=`))?.split("=")[1] ||
-    null
-  );
-};
+  &.withFooterCheckbox {
+    :global(.arrow-button) {
+      display: none;
+    }
 
-// Set port from command line arguments if provided
-if (argv("app.port")) {
-  process.env.PORT = argv("app.port");
+    :global(.selector_body) {
+      height: calc(((100% - 16px) - 111px) - 54px);
+    }
+
+    :global(.selector_footer) {
+      height: 110px;
+      min-height: 110px;
+      max-height: 110px;
+    }
+
+    :global(.selector_footer-checkbox) {
+      padding: 17px 0 1px 0;
+    }
+  }
 }
-
-// Set hostname from command line arguments if provided
-if (argv("app.hostname")) {
-  process.env.HOSTNAME = argv("app.hostname");
-}
-
-console.log(
-  `Starting server with environment: NODE_ENV=${process.env.NODE_ENV}, PORT=${process.env.PORT}` +
-    (process.env.HOSTNAME ? `, HOSTNAME=${process.env.HOSTNAME}` : ""),
-);
-
-// Now require server.js which will use the environment variables we just set
-require("./packages/management/server.js");

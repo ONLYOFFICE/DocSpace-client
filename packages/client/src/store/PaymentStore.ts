@@ -360,13 +360,15 @@ class PaymentStore {
   }
 
   get walletCodeCurrency() {
-    if (this.balance) return this.balance?.subAccounts[0].currency;
+    if (this.balance && this.balance.subAccounts.length > 0)
+      return this.balance.subAccounts[0].currency;
 
     return "USD";
   }
 
   get walletBalance() {
-    if (this.balance) return this.balance?.subAccounts[0].amount;
+    if (this.balance && this.balance.subAccounts.length > 0)
+      return this.balance.subAccounts[0].amount;
 
     return 0.0;
   }

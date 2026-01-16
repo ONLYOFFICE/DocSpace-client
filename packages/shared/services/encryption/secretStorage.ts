@@ -24,11 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { getCrypto } from "./keyManagement";
+
 const ENCRYPTION_KEY_CACHE = "docspace_encryption_private_key";
 const DECRYPTION_ATTEMPTED = "docspace_decryption_attempted";
 const CACHE_TIMESTAMP = "docspace_encryption_cache_time";
-
-import { getCrypto } from "./keyManagement";
 
 type UnlockRequestCallback = () => Promise<CryptoKey | null>;
 let globalUnlockRequestHandler: UnlockRequestCallback | null = null;
@@ -196,11 +196,6 @@ export const SecretStorageService = {
 
     sessionStorage.removeItem(ENCRYPTION_KEY_CACHE);
     sessionStorage.removeItem(CACHE_TIMESTAMP);
-  },
-
-  resetAll(): void {
-    if (!isSessionStorageAvailable()) return;
-    this.clearCache();
   },
 };
 

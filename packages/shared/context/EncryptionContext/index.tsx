@@ -34,8 +34,8 @@ import React, {
   type ReactNode,
 } from "react";
 
-import { SecretStorageService } from "../../services/encryption/secretStorage";
 import {
+  SecretStorageService,
   registerUnlockHandler,
   unregisterUnlockHandler,
 } from "../../services/encryption/secretStorage";
@@ -88,10 +88,7 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
 
   const hasConfiguredKey = !!userKeys?.publicKey && !!userKeys?.privateKeyEnc;
 
-  useEffect(() => {
-    setIsUnlocked(SecretStorageService.hasDecryptedKey());
-  }, []);
-
+  // Clear error when dialog is closed
   useEffect(() => {
     if (!showPassphraseDialog) {
       setUnlockError(null);

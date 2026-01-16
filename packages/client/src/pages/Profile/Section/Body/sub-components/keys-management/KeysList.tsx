@@ -34,10 +34,7 @@ import { globalColors } from "@docspace/shared/themes";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
 
-import {
-  getPublicKeyFingerprint,
-  exportKeyToFile,
-} from "@docspace/shared/services/encryption/keyManagement";
+import { getPublicKeyFingerprint } from "@docspace/shared/services/encryption/keyManagement";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 
 import styles from "./keys-management.module.scss";

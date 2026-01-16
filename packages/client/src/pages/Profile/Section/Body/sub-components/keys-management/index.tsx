@@ -43,6 +43,7 @@ import type { SerializedKeyPair } from "@docspace/shared/services/encryption/typ
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 import {
   setEncryptionKeys,
+  updateEncryptionKeys,
   deleteEncryptionKey,
 } from "@docspace/shared/api/privacy";
 
@@ -90,14 +91,21 @@ const KeysManagement = ({
         const keyPair = await generateRSAKeyPair();
         const serialized = await serializeKeyPair(keyPair, passphrase);
 
-        await setEncryptionKeys({
-          publicKey: serialized.publicKey,
-          privateKeyEnc: serialized.privateKeyEnc,
-        });
+        // Use PUT when replacing existing keys, POST for new keys
+        if (hasKeys) {
+          await updateEncryptionKeys({
+            publicKey: serialized.publicKey,
+            privateKeyEnc: serialized.privateKeyEnc,
+          });
+        } else {
+          await setEncryptionKeys({
+            publicKey: serialized.publicKey,
+            privateKeyEnc: serialized.privateKeyEnc,
+          });
+        }
 
         await SecretStorageService.cacheDecryptedKey(keyPair.privateKey);
 
-        const existingKeys = encryptionKeys || [];
         const newKey: TEncryptionKeyPair = {
           id: crypto.randomUUID(),
           publicKey: serialized.publicKey,
@@ -105,7 +113,8 @@ const KeysManagement = ({
           userId: "",
           date: new Date().toISOString(),
         };
-        setUserEncryptionKeys?.([...existingKeys, newKey]);
+        // When replacing, we replace all keys; when new, just set the new key
+        setUserEncryptionKeys?.([newKey]);
         toastr.success(t("Common:EncryptionKeyGenerated"));
       } catch (error) {
         toastr.error(t("Common:EncryptionError"));
@@ -116,7 +125,7 @@ const KeysManagement = ({
         setPendingAction(null);
       }
     },
-    [t, setUserEncryptionKeys, encryptionKeys],
+    [t, setUserEncryptionKeys, hasKeys],
   );
 
   const handleExportSingleKey = useCallback(
@@ -192,10 +201,9 @@ const KeysManagement = ({
   const handleConfirmReplace = useCallback(async () => {
     if (pendingAction === "import" && importedKeyData) {
       try {
-        await setEncryptionKeys({
+        await updateEncryptionKeys({
           publicKey: importedKeyData.publicKey,
           privateKeyEnc: importedKeyData.privateKeyEnc,
-          update: true,
         });
         const newKey: TEncryptionKeyPair = {
           id: crypto.randomUUID(),

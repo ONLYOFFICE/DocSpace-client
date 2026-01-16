@@ -35,16 +35,6 @@ export type SerializedKeyPair = {
   userId?: string;
 };
 
-export type PrivacyRoomKeyRequestDto = {
-  publicKey: string;
-  privateKeyEnc: string;
-  update?: boolean;
-};
-
-export type PrivacyRoomKeysResponse = {
-  isSet: boolean;
-};
-
 export type ServerAccessRequestKeyDto = {
   userId: string; // GUID of user who can decrypt
   publicKeyId: string; // GUID of the public key used to encrypt
@@ -77,23 +67,6 @@ export type KeyExportFormat = {
     privateKeyEnc: string;
   };
 };
-
-export type CachedKeyPair = {
-  publicKey: string;
-  privateKeyPkcs8: string;
-  expiresAt: number;
-};
-
-export function convertMetadataToServerFormat(
-  metadata: FileEncryptionMetadata,
-  publicKeyId: string,
-): ServerAccessRequestKeyDto[] {
-  return metadata.encryptedKeys.map((key) => ({
-    userId: key.userId,
-    publicKeyId: publicKeyId,
-    privateKeyEnc: key.privateKeyEnc, // RSA-encrypted AES key
-  }));
-}
 
 export const ENCRYPTION_CONSTANTS = {
   RSA_KEY_SIZE: 2048,

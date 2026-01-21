@@ -25,10 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { RoomsType } from "@docspace/shared/enums";
-import {
-  encryptionService,
-  type EncryptFileResult,
-} from "@docspace/shared/services/encryption/encryptionService";
+import { encryptionService } from "@docspace/shared/services/encryption/encryptionService";
 import type { FileEncryptionMetadata } from "@docspace/shared/services/encryption/types";
 
 export type UploadConfig = {

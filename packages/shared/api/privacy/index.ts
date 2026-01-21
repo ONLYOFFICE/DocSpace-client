@@ -96,15 +96,6 @@ export async function getFilePublicKeys(fileId: string | number) {
   return res;
 }
 
-export async function getPublicKeysWithAccess(fileId: number | string) {
-  const res = (await request({
-    method: "get",
-    url: `privacyroom/access/${fileId}`,
-  })) as TEncryptionKeyPair[];
-
-  return res;
-}
-
 export async function deleteEncryptionKey(keyId: string) {
   const res = (await request({
     method: "delete",

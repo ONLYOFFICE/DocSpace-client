@@ -61,11 +61,6 @@ export type EncryptFileResult = {
   metadata: FileEncryptionMetadata;
 };
 
-export type EncryptFileForRecipientsResult = {
-  encryptedBlob: Blob;
-  metadata: FileEncryptionMetadata;
-};
-
 export type EncryptionProgressCallback = (progress: number) => void;
 
 export class EncryptionService {
@@ -74,12 +69,6 @@ export class EncryptionService {
     recipientPublicKeyBase64: string,
     recipientUserId: string,
   ): Promise<EncryptFileResult> {
-    console.log("[EncryptionService] Starting file encryption:", {
-      fileName: file.name,
-      fileSize: file.size,
-      recipientUserId,
-    });
-
     const subtle = getCrypto();
     const recipientPublicKey = await importPublicKey(recipientPublicKeyBase64);
     const fileBuffer = await file.arrayBuffer();
@@ -134,19 +123,13 @@ export class EncryptionService {
       encryptedAt: new Date().toISOString(),
     };
 
-    console.log("[EncryptionService] File encrypted successfully:", {
-      originalSize: file.size,
-      encryptedSize: encryptedBlob.size,
-      hasMetadata: true,
-    });
-
     return { encryptedBlob, metadata };
   }
 
   async encryptFileForRecipients(
     file: File,
     recipients: Array<{ userId: string; publicKeyBase64: string }>,
-  ): Promise<EncryptFileForRecipientsResult> {
+  ): Promise<EncryptFileResult> {
     if (recipients.length === 0) {
       throw new Error("At least one recipient is required");
     }
@@ -348,9 +331,14 @@ export class EncryptionService {
       newRecipientPublicKey,
     );
 
+    // Generate fingerprint for publicKeyId instead of storing full key
+    const publicKeyFingerprint = await getPublicKeyFingerprint(
+      newRecipientPublicKeyBase64,
+    );
+
     return {
       userId: newRecipientUserId,
-      publicKeyId: newRecipientPublicKeyBase64,
+      publicKeyId: publicKeyFingerprint,
       privateKeyEnc: encryptedAESKey,
     };
   }

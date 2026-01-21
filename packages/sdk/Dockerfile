@@ -24,6 +24,20 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    fonts-noto-cjk \
+    fonts-noto-core \
+    fonts-noto-ui-core \
+    fonts-noto-color-emoji \
+    fonts-noto-mono \
+    fonts-noto-extra \
+    fonts-roboto \
+    fonts-open-sans \
+    fonts-liberation \
+    fontconfig \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
 
 # Set PNPM store directory
@@ -32,13 +46,13 @@ RUN pnpm config set store-dir /root/.local/share/pnpm/store
 # Copy package files first for better layer caching
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
 
-# Copy the source code with correct directory structure
-COPY common/ ./common/
-COPY packages/sdk/ ./packages/sdk/
-COPY packages/shared/ ./packages/shared/
-COPY public/ ./public/
-
 # ENV NODE_OPTIONS="--max-old-space-size=8192"
+
+# Copy the source code with correct directory structure
+COPY common/tests/package-lock.json ./common/tests/package-lock.json
+COPY common/tests/package.json ./common/tests/package.json
+COPY packages/sdk/package.json ./packages/sdk/package.json
+COPY packages/shared/package.json ./packages/shared/package.json
 
 # Install dependencies with recursive installation
 RUN pnpm install --frozen-lockfile
@@ -48,6 +62,12 @@ RUN npm uninstall -g playwright playwright-core @playwright/test
 
 # Install Playwright browsers directly from the project's dependency
 RUN cd /app/packages/sdk && pnpm exec playwright install chromium --with-deps
+
+# Copy the source code with correct directory structure
+COPY common/ ./common/
+COPY packages/sdk/ ./packages/sdk/
+COPY packages/shared/ ./packages/shared/
+COPY public/ ./public/
 
 # Run before-build script (packages/runtime.json)
 RUN pnpm run before-build

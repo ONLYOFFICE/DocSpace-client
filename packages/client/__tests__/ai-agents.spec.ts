@@ -23,46 +23,41 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import { endpoints } from "@docspace/shared/__mocks__/e2e";
 
-import { expect, test } from "./fixtures/base";
+import {
+  aiAgentsHandler,
+  aiConfigHandler,
+  aiModelsHandler,
+  aiProvidersHandler,
+  aiServerHandler,
+  aiServersAvailableHandler,
+  roomTagsHandler,
+  selfActivationStatusHandler,
+  settingsHandler,
+  TypeSettings,
+} from "@docspace/shared/__mocks__/handlers";
+import { expect, test, TEST_PORT } from "./fixtures/base";
 
 test.describe("AI agents", () => {
   test.beforeEach(async ({ mockRequest }) => {
-    await mockRequest.router([
-      endpoints.settingsWithQuery,
-      endpoints.colorTheme,
-      endpoints.build,
-      endpoints.capabilities,
-      endpoints.selfEmailActivatedClient,
-      endpoints.tariff,
-      endpoints.quota,
-      endpoints.aiConfig,
-      endpoints.additionalSettings,
-      endpoints.getPortal,
-      endpoints.companyInfo,
-      endpoints.cultures,
-      endpoints.root,
-      endpoints.invitationSettings,
-      endpoints.filesSettings,
-      endpoints.webPlugins,
-      endpoints.thirdPartyCapabilities,
-      endpoints.thirdParty,
-      endpoints.docService,
-      endpoints.aiProvidersList,
-    ]);
+    mockRequest.use(
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      aiProvidersHandler(TEST_PORT),
+    );
   });
 
   test("should render AI agents not available", async ({
     page,
     mockRequest,
+    baseUrl,
   }) => {
-    await mockRequest.router([
-      endpoints.aiAgentsEmpty,
-      endpoints.aiConfigDisabled,
-    ]);
+    mockRequest.use(
+      aiAgentsHandler(TEST_PORT),
+      aiConfigHandler(TEST_PORT, true),
+    );
 
-    await page.goto("/ai-agents/filter");
+    await page.goto(`${baseUrl}/ai-agents/filter`);
 
     const emptyView = page.getByTestId("empty-view");
     await expect(emptyView).toBeVisible();
@@ -94,13 +89,17 @@ test.describe("AI agents", () => {
     await expect(portalSettingsHeader).toHaveText("AI settings");
   });
 
-  test("should render AI agents empty view", async ({ page, mockRequest }) => {
-    await mockRequest.router([
-      endpoints.aiAgentsEmptyCreate,
-      endpoints.emptyTags,
-    ]);
+  test("should render AI agents empty view", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(
+      aiAgentsHandler(TEST_PORT, { withCreate: true }),
+      roomTagsHandler(TEST_PORT),
+    );
 
-    await page.goto("/ai-agents/filter");
+    await page.goto(`${baseUrl}/ai-agents/filter`);
 
     const emptyView = page.getByTestId("empty-view");
     await expect(emptyView).toBeVisible();
@@ -142,16 +141,17 @@ test.describe("AI agents", () => {
   test("should render AI agents create dialog and create AI agent", async ({
     page,
     mockRequest,
+    baseUrl,
   }) => {
-    await mockRequest.router([
-      endpoints.aiAgentsEmptyCreate,
-      endpoints.emptyTags,
-      endpoints.aiModelsClaude,
-      endpoints.aiServer,
-      endpoints.aiServersAvailable,
-    ]);
+    mockRequest.use(
+      aiAgentsHandler(TEST_PORT, { withCreate: true }),
+      roomTagsHandler(TEST_PORT),
+      aiModelsHandler(TEST_PORT, { isClaude: true }),
+      aiServersAvailableHandler(TEST_PORT),
+      aiServerHandler(TEST_PORT),
+    );
 
-    await page.goto("/ai-agents/filter");
+    await page.goto(`${baseUrl}/ai-agents/filter`);
 
     const mainBtn = page.getByTestId("create_new_agent_button");
 
@@ -193,7 +193,7 @@ test.describe("AI agents", () => {
     await expect(page.getByText("Together AI").first()).toBeVisible();
     await expect(page.getByText("OpenRouter").first()).toBeVisible();
 
-    await mockRequest.router([endpoints.aiModelsOpenAI]);
+    mockRequest.use(aiModelsHandler(TEST_PORT, { isOpenAI: true }));
 
     await page.getByText("OpenAI").first().click();
 
@@ -297,7 +297,7 @@ test.describe("AI agents", () => {
   });
 
   test("should render AI agents list", async ({ page, mockRequest }) => {
-    await mockRequest.router([endpoints.aiAgentsListCreate]);
+    mockRequest.use(aiAgentsHandler(TEST_PORT, { withListCreate: true }));
 
     await page.goto("/ai-agents/filter");
 
@@ -305,7 +305,7 @@ test.describe("AI agents", () => {
   });
 
   test("should render AI agent context menu", async ({ page, mockRequest }) => {
-    await mockRequest.router([endpoints.aiAgentsListCreate]);
+    mockRequest.use(aiAgentsHandler(TEST_PORT, { withListCreate: true }));
 
     await page.goto("/ai-agents/filter");
 

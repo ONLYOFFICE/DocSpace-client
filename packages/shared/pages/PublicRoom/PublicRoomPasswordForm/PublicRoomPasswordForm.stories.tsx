@@ -33,10 +33,11 @@ import { useTranslation } from "react-i18next";
 import type { TPublicRoomPassword } from "../../../api/rooms/types";
 import { LinkSharingEntityType, ValidationStatus } from "../../../enums";
 
-import { createGetLogoHandler } from "../../../__mocks__/storybook/handlers/logo/getLogo";
-import { createValidatePublicRoomPasswordHandler } from "../../../__mocks__/storybook/handlers/files/validatePublicRoomPassword";
-
 import PublicRoomPassword, { type PublicRoomPasswordProps } from ".";
+import {
+  validatePublicRoomPasswordHandler,
+  logoHandler,
+} from "../../../__mocks__/handlers";
 
 const PublicRoomPasswordWithTranslation = (
   props: Omit<PublicRoomPasswordProps, "t">,
@@ -113,10 +114,7 @@ export const Default: Story = {
   },
   parameters: {
     msw: {
-      handlers: [
-        createGetLogoHandler(),
-        createValidatePublicRoomPasswordHandler(true),
-      ],
+      handlers: [logoHandler(), validatePublicRoomPasswordHandler("", true)],
     },
   },
 };

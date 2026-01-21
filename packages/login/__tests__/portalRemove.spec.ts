@@ -26,10 +26,8 @@
 
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 import { expect, test } from "./fixtures/base";
-import { endpoints } from "@docspace/shared/__mocks__/e2e";
 
 const URL = "/login/confirm/PortalRemove";
-const NEXT_REQUEST_URL = "*/**/login/confirm/PortalRemove";
 
 const QUERY_PARAMS = [
   {
@@ -47,13 +45,9 @@ const QUERY_PARAMS = [
 ];
 
 const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
-const NEXT_REQUEST_URL_WITH_PARAMS = getUrlWithQueryParams(
-  NEXT_REQUEST_URL,
-  QUERY_PARAMS,
-);
 
-test("portal remove render", async ({ page }) => {
-  await page.goto(URL_WITH_PARAMS);
+test("portal remove render", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -62,9 +56,8 @@ test("portal remove render", async ({ page }) => {
   ]);
 });
 
-test("portal remove delete", async ({ page, mockRequest }) => {
-  await mockRequest.router([endpoints.deletePortal]);
-  await page.goto(URL_WITH_PARAMS);
+test("portal remove delete", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   const deleteButton = page.getByTestId("delete_portal_button");
   await deleteButton.click();
@@ -90,12 +83,12 @@ test("portal remove delete", async ({ page, mockRequest }) => {
   );
 });
 
-test("portal remove cancel", async ({ page }) => {
-  await page.goto(URL_WITH_PARAMS);
+test("portal remove cancel", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("cancel_button").click();
 
-  await page.waitForURL("/", { waitUntil: "load" });
+  await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
     "desktop",

@@ -24,8 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { endpoints } from "@docspace/shared/__mocks__/e2e";
-
+import { selfActivationStatusHandler } from "@docspace/shared/__mocks__/handlers";
 import { expect, test } from "./fixtures/base";
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 
@@ -52,11 +51,18 @@ const QUERY_PARAMS = [
 
 const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
 
-test("email activation success", async ({ page, mockRequest }) => {
-  await mockRequest.router([endpoints.activationStatus]);
-  await page.goto(URL_WITH_PARAMS);
+test("email activation success", async ({
+  page,
+  baseUrl,
+  port,
+  clientRequestInterceptor,
+}) => {
+  clientRequestInterceptor.use(selfActivationStatusHandler(port, null, true));
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await page.waitForURL("/login", { waitUntil: "load" });
+  await page.waitForURL(`${baseUrl}/login`, {
+    waitUntil: "load",
+  });
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -65,9 +71,14 @@ test("email activation success", async ({ page, mockRequest }) => {
   ]);
 });
 
-test("email activation error", async ({ page, mockRequest }) => {
-  await mockRequest.router([endpoints.activationStatusError]);
-  await page.goto(URL_WITH_PARAMS);
+test("email activation error", async ({
+  page,
+  baseUrl,
+  clientRequestInterceptor,
+  port,
+}) => {
+  clientRequestInterceptor.use(selfActivationStatusHandler(port, 400));
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",

@@ -25,16 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import {
-  BASE_URL,
-  endpoints,
-  HEADER_AUTHENTICATED_SETTINGS,
-} from "@docspace/shared/__mocks__/e2e";
+  confirmHandler,
+  settingsHandler,
+  TypeSettings,
+} from "@docspace/shared/__mocks__/handlers";
 
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 import { expect, test } from "./fixtures/base";
 
 const URL = "/login/confirm/GuestShareLink";
-const NEXT_REQUEST_URL = "*/**/login/confirm/GuestShareLink";
 const QUERY_PARAMS = [
   {
     name: "type",
@@ -55,17 +54,19 @@ const QUERY_PARAMS = [
 ];
 
 const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
-const NEXT_REQUEST_URL_WITH_PARAMS = getUrlWithQueryParams(
-  NEXT_REQUEST_URL,
-  QUERY_PARAMS,
-);
 
-test("guest share link render", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-    HEADER_AUTHENTICATED_SETTINGS,
-  ]);
+test("guest share link render", async ({
+  page,
+  port,
+  serverRequestInterceptor,
+  baseUrl,
+}) => {
+  serverRequestInterceptor.use(
+    confirmHandler(port, undefined, true),
+    settingsHandler(port, TypeSettings.Authenticated),
+  );
 
-  await page.goto(URL_WITH_PARAMS);
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -74,16 +75,21 @@ test("guest share link render", async ({ page, mockRequest }) => {
   ]);
 });
 
-test("guest share link approve", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-    HEADER_AUTHENTICATED_SETTINGS,
-  ]);
-  await mockRequest.router([endpoints.addGuest]);
-  await page.goto(URL_WITH_PARAMS);
+test("guest share link approve", async ({
+  page,
+  port,
+  serverRequestInterceptor,
+  baseUrl,
+}) => {
+  serverRequestInterceptor.use(
+    settingsHandler(port, TypeSettings.Authenticated),
+  );
+
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("approve_button").click();
 
-  await page.waitForURL(`/accounts/guests/filter?**`, {
+  await page.waitForURL(`${baseUrl}/accounts/guests/filter?**`, {
     waitUntil: "load",
   });
 
@@ -94,15 +100,21 @@ test("guest share link approve", async ({ page, mockRequest }) => {
   ]);
 });
 
-test("guest share link deny", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-    HEADER_AUTHENTICATED_SETTINGS,
-  ]);
-  await page.goto(URL_WITH_PARAMS);
+test("guest share link deny", async ({
+  page,
+  port,
+  serverRequestInterceptor,
+  baseUrl,
+}) => {
+  serverRequestInterceptor.use(
+    settingsHandler(port, TypeSettings.Authenticated),
+  );
+
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("deny_button").click();
 
-  await page.waitForURL("/", { waitUntil: "load" });
+  await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
     "desktop",

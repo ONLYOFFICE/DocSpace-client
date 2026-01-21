@@ -26,7 +26,6 @@
 
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 import { expect, test } from "./fixtures/base";
-import { endpoints } from "@docspace/shared/__mocks__/e2e";
 
 const URL = "/login/confirm/PortalContinue";
 
@@ -47,8 +46,8 @@ const QUERY_PARAMS = [
 
 const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
 
-test("portal continue render", async ({ page }) => {
-  await page.goto(URL_WITH_PARAMS);
+test("portal continue render", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -57,9 +56,8 @@ test("portal continue render", async ({ page }) => {
   ]);
 });
 
-test("portal continue reactivate", async ({ page, mockRequest }) => {
-  await mockRequest.router([endpoints.continuePortal]);
-  await page.goto(URL_WITH_PARAMS);
+test("portal continue reactivate", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   const reactivateButton = page.getByTestId("continue_reactivate_button");
   await reactivateButton.click();
@@ -74,7 +72,7 @@ test("portal continue reactivate", async ({ page, mockRequest }) => {
 
   await page.getByTestId("redirect_portal_link").click();
 
-  await page.waitForURL("/", { waitUntil: "load" });
+  await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -83,12 +81,12 @@ test("portal continue reactivate", async ({ page, mockRequest }) => {
   ]);
 });
 
-test("portal continue cancel", async ({ page }) => {
-  await page.goto(URL_WITH_PARAMS);
+test("portal continue cancel", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("continue_cancel_button").click();
 
-  await page.waitForURL("/", { waitUntil: "load" });
+  await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
     "desktop",

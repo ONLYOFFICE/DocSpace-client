@@ -24,14 +24,25 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { endpoints } from "@docspace/shared/__mocks__/e2e";
-
+import {
+  fileByIdHandler,
+  filesSettingsHandler,
+  fillingSessionHandler,
+} from "@docspace/shared/__mocks__/handlers";
 import { expect, test } from "./fixtures/base";
 
 test.describe("Completed form", () => {
-  test("Completed form render", async ({ page, mockRequest }) => {
-    await mockRequest.router([endpoints.filesSettings]);
-    await page.goto("/doceditor/completed-form?fillingSessionId=1");
+  test("Completed form render", async ({
+    page,
+    serverRequestInterceptor,
+    port,
+    baseUrl,
+  }) => {
+    serverRequestInterceptor.use(
+      filesSettingsHandler(port),
+      fillingSessionHandler(port),
+    );
+    await page.goto(`${baseUrl}/doceditor/completed-form?fillingSessionId=1`);
 
     const form = page.getByTestId("completed_form_container");
     await expect(form).toBeVisible();
@@ -42,9 +53,14 @@ test.describe("Completed form", () => {
     ]);
   });
 
-  test("Empty completed form render", async ({ page, mockRequest }) => {
-    await mockRequest.router([endpoints.filesSettings]);
-    await page.goto("/doceditor/completed-form");
+  test("Empty completed form render", async ({
+    page,
+    serverRequestInterceptor,
+    port,
+    baseUrl,
+  }) => {
+    serverRequestInterceptor.use(filesSettingsHandler(port));
+    await page.goto(`${baseUrl}/doceditor/completed-form`);
 
     const form = page.getByTestId("completed_form_empty_container");
     await expect(form).toBeVisible();
@@ -55,10 +71,18 @@ test.describe("Completed form", () => {
     ]);
   });
 
-  test("VDR completed form render", async ({ page, mockRequest }) => {
-    await mockRequest.router([endpoints.filesSettings]);
+  test("VDR completed form render", async ({
+    page,
+    serverRequestInterceptor,
+    port,
+    baseUrl,
+  }) => {
+    serverRequestInterceptor.use(
+      filesSettingsHandler(port),
+      fileByIdHandler(port),
+    );
     await page.goto(
-      "/doceditor/completed-form?fileId=1&type=2&formId=1&roomId=1",
+      `${baseUrl}/doceditor/completed-form?fileId=1&type=2&formId=1&roomId=1`,
     );
 
     const form = page.getByTestId("completed_form_vdr_container");

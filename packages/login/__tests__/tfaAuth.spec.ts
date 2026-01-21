@@ -25,14 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import {
-  endpoints,
-  HEADER_SELF_ERROR_404,
-} from "@docspace/shared/__mocks__/e2e";
+  tfaAppValidateHandler,
+  selfHandler,
+} from "@docspace/shared/__mocks__/handlers";
 import { expect, test } from "./fixtures/base";
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 
 const URL = "/login/confirm/TfaAuth";
-const NEXT_REQUEST_URL = "*/**/login/confirm/TfaAuth";
 
 const QUERY_PARAMS = [
   {
@@ -61,13 +60,9 @@ const URL_WITH_LINK_DATA_PARAMS = getUrlWithQueryParams(
   URL,
   QUERY_PARAMS_WITH_LINK_DATA,
 );
-const NEXT_REQUEST_URL_WITH_PARAMS = getUrlWithQueryParams(
-  NEXT_REQUEST_URL,
-  QUERY_PARAMS,
-);
 
-test("tfa auth render", async ({ page }) => {
-  await page.goto(URL_WITH_PARAMS);
+test("tfa auth render", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -76,12 +71,8 @@ test("tfa auth render", async ({ page }) => {
   ]);
 });
 
-test("tfa auth success", async ({ page, mockRequest }) => {
-  await mockRequest.router([
-    endpoints.tfaAppValidate,
-    endpoints.loginWithTfaCode,
-  ]);
-  await page.goto(URL_WITH_PARAMS);
+test("tfa auth success", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("app_code_input").fill("123456");
 
@@ -93,7 +84,7 @@ test("tfa auth success", async ({ page, mockRequest }) => {
 
   await page.getByTestId("app_code_continue_button").click();
 
-  await page.waitForURL("/", { waitUntil: "load" });
+  await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -102,12 +93,16 @@ test("tfa auth success", async ({ page, mockRequest }) => {
   ]);
 });
 
-test("tfa auth error not validated", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-    HEADER_SELF_ERROR_404,
-  ]);
-  await mockRequest.router([endpoints.tfaAppValidateError]);
-  await page.goto(URL_WITH_PARAMS);
+test("tfa auth error not validated", async ({
+  page,
+  port,
+  baseUrl,
+  serverRequestInterceptor,
+  clientRequestInterceptor,
+}) => {
+  serverRequestInterceptor.use(selfHandler(port, 404));
+  clientRequestInterceptor.use(tfaAppValidateHandler(port, 400));
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("app_code_input").fill("123456");
 
@@ -122,15 +117,9 @@ test("tfa auth error not validated", async ({ page, mockRequest }) => {
 
 test("tfa auth redirects to room after successful submission", async ({
   page,
-  mockRequest,
+  baseUrl,
 }) => {
-  await mockRequest.router([
-    endpoints.tfaAppValidate,
-    endpoints.loginWithTfaCode,
-    endpoints.checkConfirmLink,
-  ]);
-
-  await page.goto(URL_WITH_LINK_DATA_PARAMS);
+  await page.goto(`${baseUrl}${URL_WITH_LINK_DATA_PARAMS}`);
 
   await page.evaluate(() => {
     sessionStorage.setItem("referenceUrl", "/rooms/shared/1");
@@ -139,7 +128,7 @@ test("tfa auth redirects to room after successful submission", async ({
   await page.getByTestId("app_code_input").fill("123456");
   await page.getByTestId("app_code_continue_button").click();
 
-  await page.waitForURL("/rooms/shared/1");
+  await page.waitForURL(`${baseUrl}/rooms/shared/1`);
 
   await expect(page).toHaveScreenshot([
     "desktop",

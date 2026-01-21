@@ -24,18 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import {
-  HEADER_LINK_EXPIRED,
-  HEADER_LINK_INVALID,
-  HEADER_USER_EXCLUDED,
-  endpoints,
-} from "@docspace/shared/__mocks__/e2e";
-
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 import { expect, test } from "./fixtures/base";
+import {
+  confirmHandler,
+  ErrorConfirm,
+} from "@docspace/shared/__mocks__/handlers";
 
 const URL = "/login/confirm/PasswordChange";
-const NEXT_REQUEST_URL = "*/**/login/confirm/PasswordChange";
 
 const QUERY_PARAMS = [
   {
@@ -57,13 +53,9 @@ const QUERY_PARAMS = [
 ];
 
 const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
-const NEXT_REQUEST_URL_WITH_PARAMS = getUrlWithQueryParams(
-  NEXT_REQUEST_URL,
-  QUERY_PARAMS,
-);
 
-test("password change render", async ({ page }) => {
-  await page.goto(URL_WITH_PARAMS);
+test("password change render", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -72,9 +64,8 @@ test("password change render", async ({ page }) => {
   ]);
 });
 
-test("password change success", async ({ page, mockRequest }) => {
-  await mockRequest.router([endpoints.changePassword, endpoints.login]);
-  await page.goto(URL_WITH_PARAMS);
+test("password change success", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.fill("[name='password']", "qwerty123");
 
@@ -86,7 +77,9 @@ test("password change success", async ({ page, mockRequest }) => {
 
   await page.getByTestId("create_password_button").click();
 
-  await page.waitForURL("/login?passwordChanged=true", { waitUntil: "load" });
+  await page.waitForURL(`${baseUrl}/login?passwordChanged=true`, {
+    waitUntil: "load",
+  });
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -95,8 +88,8 @@ test("password change success", async ({ page, mockRequest }) => {
   ]);
 });
 
-test("password change error", async ({ page }) => {
-  await page.goto(URL_WITH_PARAMS);
+test("password change error", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.fill("[name='password']", "123");
   await page.getByTestId("create_password_button").click();
@@ -108,12 +101,15 @@ test("password change error", async ({ page }) => {
   ]);
 });
 
-test("password change error invalid", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-    HEADER_LINK_INVALID,
-  ]);
+test("password change error invalid", async ({
+  page,
+  baseUrl,
+  serverRequestInterceptor,
+  port,
+}) => {
+  serverRequestInterceptor.use(confirmHandler(port, ErrorConfirm.Invalid));
 
-  await page.goto(URL_WITH_PARAMS);
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -122,12 +118,15 @@ test("password change error invalid", async ({ page, mockRequest }) => {
   ]);
 });
 
-test("password change error expired", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-    HEADER_LINK_EXPIRED,
-  ]);
+test("password change error expired", async ({
+  page,
+  baseUrl,
+  serverRequestInterceptor,
+  port,
+}) => {
+  serverRequestInterceptor.use(confirmHandler(port, ErrorConfirm.Expired));
 
-  await page.goto(URL_WITH_PARAMS);
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -136,13 +135,16 @@ test("password change error expired", async ({ page, mockRequest }) => {
   ]);
 });
 
-test("password change error user excluded", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-    HEADER_USER_EXCLUDED,
-  ]);
+test("password change error user excluded", async ({
+  page,
+  baseUrl,
+  serverRequestInterceptor,
+  port,
+}) => {
+  serverRequestInterceptor.use(confirmHandler(port, ErrorConfirm.UserExcluded));
 
   // Expected to go to default page
-  await page.goto(URL_WITH_PARAMS);
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",

@@ -24,25 +24,27 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import {
-  endpoints,
-  HEADER_ROOMS_LIST,
-  roomListHandler,
-} from "@docspace/shared/__mocks__/e2e";
-
 import { expect, test } from "./fixtures/base";
 import { describe } from "node:test";
+import {
+  roomListHandler,
+  roomListResolver,
+  TypeRoomList,
+} from "@docspace/shared/__mocks__/handlers";
 
 const path = "/sdk/room-selector";
 
 describe("Render room selector light", () => {
   test("should open light /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    clientRequestInterceptor,
+    serverRequestInterceptor,
+    port,
   }) => {
-    const pageRoute = `${path}?theme=Base`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+    const pageRoute = `${baseUrl}${path}?theme=Base`;
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -54,11 +56,14 @@ describe("Render room selector light", () => {
 
   test("should open light with search /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    serverRequestInterceptor,
+    port,
+    clientRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Base&search=true`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+    const pageRoute = `${baseUrl}${path}?theme=Base&search=true`;
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -70,12 +75,15 @@ describe("Render room selector light", () => {
 
   test("should open light with ru locale /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    serverRequestInterceptor,
+    port,
+    clientRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Base&locale=ru`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&locale=ru`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -87,11 +95,15 @@ describe("Render room selector light", () => {
 
   test("should open light with header /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    serverRequestInterceptor,
+    port,
+    clientRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Base&header=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&header=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
 
     await page.goto(pageRoute);
 
@@ -104,11 +116,15 @@ describe("Render room selector light", () => {
 
   test("should open light with cancel button /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    serverRequestInterceptor,
+    port,
+    clientRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Base&cancel=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
 
     await page.goto(pageRoute);
 
@@ -121,11 +137,15 @@ describe("Render room selector light", () => {
 
   test("should open light with header and search /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    serverRequestInterceptor,
+    port,
+    clientRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Base&header=true&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&header=true&search=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -137,11 +157,15 @@ describe("Render room selector light", () => {
 
   test("should open light with header and ru locale /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    serverRequestInterceptor,
+    port,
+    clientRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Base&header=true&locale=ru`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&header=true&locale=ru`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -153,11 +177,15 @@ describe("Render room selector light", () => {
 
   test("should open light with header and cancel button /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    serverRequestInterceptor,
+    port,
+    clientRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Base&header=true&cancel=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&header=true&cancel=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -169,11 +197,15 @@ describe("Render room selector light", () => {
 
   test("should open light with search and ru locale /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    serverRequestInterceptor,
+    port,
+    clientRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Base&locale=ru&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&locale=ru&search=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -185,11 +217,15 @@ describe("Render room selector light", () => {
 
   test("should open light with search and cancel button /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    serverRequestInterceptor,
+    port,
+    clientRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Base&cancel=true&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&search=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -201,11 +237,15 @@ describe("Render room selector light", () => {
 
   test("should open light with ru locale and cancel button /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    serverRequestInterceptor,
+    port,
+    clientRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Base&locale=ru&cancel=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&locale=ru&cancel=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -217,11 +257,15 @@ describe("Render room selector light", () => {
 
   test("should open light with header, search and ru locale /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    serverRequestInterceptor,
+    port,
+    clientRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Base&header=true&locale=ru&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&header=true&locale=ru&search=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -233,11 +277,15 @@ describe("Render room selector light", () => {
 
   test("should open light with header, search and cancel button /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    serverRequestInterceptor,
+    port,
+    clientRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Base&header=true&cancel=true&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&header=true&cancel=true&search=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -249,11 +297,15 @@ describe("Render room selector light", () => {
 
   test("should open light with search, ru locale and cancel button /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    serverRequestInterceptor,
+    port,
+    clientRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Base&locale=ru&cancel=true&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&locale=ru&cancel=true&search=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -265,11 +317,15 @@ describe("Render room selector light", () => {
 
   test("should open light with all features enabled /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    serverRequestInterceptor,
+    port,
+    clientRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Base&header=true&locale=ru&cancel=true&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&header=true&locale=ru&cancel=true&search=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -283,9 +339,9 @@ describe("Render room selector light", () => {
 describe("Room selector light empty", () => {
   test("should open light empty /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
   }) => {
-    const pageRoute = `${path}?theme=Base`;
+    const pageRoute = `${baseUrl}${path}?theme=Base`;
 
     await page.goto(pageRoute);
 
@@ -298,9 +354,10 @@ describe("Room selector light empty", () => {
 
   test("should open light empty with search /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
   }) => {
-    const pageRoute = `${path}?theme=Base&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&search=true`;
 
     await page.goto(pageRoute);
 
@@ -313,9 +370,10 @@ describe("Room selector light empty", () => {
 
   test("should open light empty with ru locale /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
   }) => {
-    const pageRoute = `${path}?theme=Base&locale=ru`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&locale=ru`;
 
     await page.goto(pageRoute);
 
@@ -328,9 +386,10 @@ describe("Room selector light empty", () => {
 
   test("should open light empty with header /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
   }) => {
-    const pageRoute = `${path}?theme=Base&header=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&header=true`;
 
     await page.goto(pageRoute);
 
@@ -343,9 +402,10 @@ describe("Room selector light empty", () => {
 
   test("should open light empty with cancel button /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
   }) => {
-    const pageRoute = `${path}?theme=Base&cancel=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true`;
 
     await page.goto(pageRoute);
 
@@ -358,9 +418,9 @@ describe("Room selector light empty", () => {
 
   test("should open light empty with header and search /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
   }) => {
-    const pageRoute = `${path}?theme=Base&header=true&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&header=true&search=true`;
 
     await page.goto(pageRoute);
 
@@ -373,9 +433,9 @@ describe("Room selector light empty", () => {
 
   test("should open light empty with header and ru locale /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
   }) => {
-    const pageRoute = `${path}?theme=Base&header=true&locale=ru`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&header=true&locale=ru`;
 
     await page.goto(pageRoute);
 
@@ -388,9 +448,9 @@ describe("Room selector light empty", () => {
 
   test("should open light empty with header and cancel button /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
   }) => {
-    const pageRoute = `${path}?theme=Base&header=true&cancel=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&header=true&cancel=true`;
 
     await page.goto(pageRoute);
 
@@ -403,9 +463,10 @@ describe("Room selector light empty", () => {
 
   test("should open light empty with search and ru locale /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
   }) => {
-    const pageRoute = `${path}?theme=Base&locale=ru&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&locale=ru&search=true`;
 
     await page.goto(pageRoute);
 
@@ -418,9 +479,10 @@ describe("Room selector light empty", () => {
 
   test("should open light empty with search and cancel button /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
   }) => {
-    const pageRoute = `${path}?theme=Base&cancel=true&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&search=true`;
 
     await page.goto(pageRoute);
 
@@ -433,9 +495,10 @@ describe("Room selector light empty", () => {
 
   test("should open light empty with ru locale and cancel button /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
   }) => {
-    const pageRoute = `${path}?theme=Base&locale=ru&cancel=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&locale=ru&cancel=true`;
 
     await page.goto(pageRoute);
 
@@ -448,9 +511,10 @@ describe("Room selector light empty", () => {
 
   test("should open light empty with header, search and ru locale /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
   }) => {
-    const pageRoute = `${path}?theme=Base&header=true&locale=ru&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&header=true&locale=ru&search=true`;
 
     await page.goto(pageRoute);
 
@@ -463,9 +527,10 @@ describe("Room selector light empty", () => {
 
   test("should open light empty with header, search and cancel button /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
   }) => {
-    const pageRoute = `${path}?theme=Base&header=true&cancel=true&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&header=true&cancel=true&search=true`;
 
     await page.goto(pageRoute);
 
@@ -478,9 +543,10 @@ describe("Room selector light empty", () => {
 
   test("should open light empty with search, ru locale and cancel button /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
   }) => {
-    const pageRoute = `${path}?theme=Base&locale=ru&cancel=true&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&locale=ru&cancel=true&search=true`;
 
     await page.goto(pageRoute);
 
@@ -493,9 +559,10 @@ describe("Room selector light empty", () => {
 
   test("should open light empty with all features enabled /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
   }) => {
-    const pageRoute = `${path}?theme=Base&header=true&locale=ru&cancel=true&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&header=true&locale=ru&cancel=true&search=true`;
 
     await page.goto(pageRoute);
 
@@ -510,11 +577,14 @@ describe("Room selector light empty", () => {
 describe("Render room rtl selector light", () => {
   test("should open light with ar-SA locale /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    serverRequestInterceptor,
+    port,
+    clientRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Base&locale=ar-SA`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+    const pageRoute = `${baseUrl}${path}?theme=Base&locale=ar-SA`;
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
 
     await page.goto(pageRoute);
 
@@ -527,11 +597,15 @@ describe("Render room rtl selector light", () => {
 
   test("should open light with header and ar-SA  locale /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    serverRequestInterceptor,
+    port,
+    clientRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Base&header=true&locale=ar-SA`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&header=true&locale=ar-SA`;
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -543,11 +617,15 @@ describe("Render room rtl selector light", () => {
 
   test("should open light with search and ar-SA locale /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    serverRequestInterceptor,
+    port,
+    clientRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Base&locale=ar-SA&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&locale=ar-SA&search=true`;
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -559,11 +637,15 @@ describe("Render room rtl selector light", () => {
 
   test("should open light with ar-SA locale and cancel button /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    serverRequestInterceptor,
+    port,
+    clientRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Base&locale=ar-SA&cancel=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&locale=ar-SA&cancel=true`;
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -575,11 +657,15 @@ describe("Render room rtl selector light", () => {
 
   test("should open light with header, search and ar-SA locale /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    serverRequestInterceptor,
+    port,
+    clientRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Base&header=true&locale=ar-SA&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&header=true&locale=ar-SA&search=true`;
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -591,11 +677,15 @@ describe("Render room rtl selector light", () => {
 
   test("should open light with search, ar-SA locale and cancel button /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    serverRequestInterceptor,
+    port,
+    clientRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Base&locale=ar-SA&cancel=true&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&locale=ar-SA&cancel=true&search=true`;
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -607,11 +697,15 @@ describe("Render room rtl selector light", () => {
 
   test("should open light with all features ar-SA enabled /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    serverRequestInterceptor,
+    port,
+    clientRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Base&header=true&locale=ar-SA&cancel=true&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&header=true&locale=ar-SA&cancel=true&search=true`;
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -625,9 +719,10 @@ describe("Render room rtl selector light", () => {
 describe("Room selector rtl light empty", () => {
   test("should open light empty with ar-SA locale /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
   }) => {
-    const pageRoute = `${path}?theme=Base&locale=ar-SA`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&locale=ar-SA`;
 
     await page.goto(pageRoute);
 
@@ -640,9 +735,10 @@ describe("Room selector rtl light empty", () => {
 
   test("should open light empty with header and ar-SA locale /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
   }) => {
-    const pageRoute = `${path}?theme=Base&header=true&locale=ar-SA`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&header=true&locale=ar-SA`;
 
     await page.goto(pageRoute);
 
@@ -655,9 +751,10 @@ describe("Room selector rtl light empty", () => {
 
   test("should open light empty with search and ar-SA locale /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
   }) => {
-    const pageRoute = `${path}?theme=Base&locale=ar-SA&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&locale=ar-SA&search=true`;
 
     await page.goto(pageRoute);
 
@@ -670,9 +767,10 @@ describe("Room selector rtl light empty", () => {
 
   test("should open light empty with ar-SA locale and cancel button /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
   }) => {
-    const pageRoute = `${path}?theme=Base&locale=ar-SA&cancel=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&locale=ar-SA&cancel=true`;
 
     await page.goto(pageRoute);
 
@@ -685,9 +783,10 @@ describe("Room selector rtl light empty", () => {
 
   test("should open light empty with header, search and ar-SA locale /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
   }) => {
-    const pageRoute = `${path}?theme=Base&header=true&locale=ar-SA&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&header=true&locale=ar-SA&search=true`;
 
     await page.goto(pageRoute);
 
@@ -700,11 +799,13 @@ describe("Room selector rtl light empty", () => {
 
   test("should open light empty with search, ar-SA locale and cancel button /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
+    clientRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Base&locale=ar-SA&cancel=true&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&locale=ar-SA&cancel=true&search=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -716,9 +817,10 @@ describe("Room selector rtl light empty", () => {
 
   test("should open light empty with all features ar-SA enabled /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
   }) => {
-    const pageRoute = `${path}?theme=Base&header=true&locale=ar-SA&cancel=true&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&header=true&locale=ar-SA&cancel=true&search=true`;
 
     await page.goto(pageRoute);
 
@@ -733,11 +835,15 @@ describe("Room selector rtl light empty", () => {
 describe("Render room selector dark", () => {
   test("should open dark /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
+    clientRequestInterceptor,
+    serverRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Dark`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -749,11 +855,15 @@ describe("Render room selector dark", () => {
 
   test("should open dark with search /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
+    clientRequestInterceptor,
+    serverRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Dark`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -765,11 +875,15 @@ describe("Render room selector dark", () => {
 
   test("should open dark with ru locale /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
+    clientRequestInterceptor,
+    serverRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Dark&locale=ru`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&locale=ru`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
 
     await page.goto(pageRoute);
 
@@ -782,11 +896,15 @@ describe("Render room selector dark", () => {
 
   test("should open dark with header /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
+    clientRequestInterceptor,
+    serverRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Dark&header=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&header=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
 
     await page.goto(pageRoute);
 
@@ -799,11 +917,15 @@ describe("Render room selector dark", () => {
 
   test("should open dark with cancel button /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
+    clientRequestInterceptor,
+    serverRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Dark&cancel=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&cancel=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
 
     await page.goto(pageRoute);
 
@@ -816,11 +938,15 @@ describe("Render room selector dark", () => {
 
   test("should open dark with header and search /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
+    clientRequestInterceptor,
+    serverRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Dark&header=true&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&header=true&search=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -832,11 +958,15 @@ describe("Render room selector dark", () => {
 
   test("should open dark with header and ru locale /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
+    clientRequestInterceptor,
+    serverRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Dark&header=true&locale=ru`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&header=true&locale=ru`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -848,11 +978,15 @@ describe("Render room selector dark", () => {
 
   test("should open dark with header and cancel button /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
+    clientRequestInterceptor,
+    serverRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Dark&header=true&cancel=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&header=true&cancel=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -864,11 +998,15 @@ describe("Render room selector dark", () => {
 
   test("should open dark with search and ru locale /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
+    clientRequestInterceptor,
+    serverRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Dark&locale=ru&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&locale=ru&search=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -880,11 +1018,15 @@ describe("Render room selector dark", () => {
 
   test("should open dark with search and cancel button /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
+    clientRequestInterceptor,
+    serverRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Dark&cancel=true&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&cancel=true&search=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -896,11 +1038,15 @@ describe("Render room selector dark", () => {
 
   test("should open dark with ru locale and cancel button /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
+    clientRequestInterceptor,
+    serverRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Dark&locale=ru&cancel=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&locale=ru&cancel=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -912,11 +1058,15 @@ describe("Render room selector dark", () => {
 
   test("should open dark with header, search and ru locale /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
+    clientRequestInterceptor,
+    serverRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Dark&header=true&locale=ru&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&header=true&locale=ru&search=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -928,11 +1078,15 @@ describe("Render room selector dark", () => {
 
   test("should open dark with header, search and cancel button /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
+    clientRequestInterceptor,
+    serverRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Dark&header=true&cancel=true&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&header=true&cancel=true&search=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -944,11 +1098,15 @@ describe("Render room selector dark", () => {
 
   test("should open dark with search, ru locale and cancel button /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
+    clientRequestInterceptor,
+    serverRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Dark&locale=ru&cancel=true&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&locale=ru&cancel=true&search=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -960,11 +1118,15 @@ describe("Render room selector dark", () => {
 
   test("should open dark with all features enabled /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
+    clientRequestInterceptor,
+    serverRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Dark&header=true&locale=ru&cancel=true&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&header=true&locale=ru&cancel=true&search=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -978,9 +1140,10 @@ describe("Render room selector dark", () => {
 describe("Room selector dark empty", () => {
   test("should open dark empty /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
   }) => {
-    const pageRoute = `${path}?theme=Dark`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark`;
 
     await page.goto(pageRoute);
 
@@ -993,9 +1156,10 @@ describe("Room selector dark empty", () => {
 
   test("should open dark empty with search /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
   }) => {
-    const pageRoute = `${path}?theme=Dark`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark`;
 
     await page.goto(pageRoute);
 
@@ -1008,9 +1172,10 @@ describe("Room selector dark empty", () => {
 
   test("should open dark empty with ru locale /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
   }) => {
-    const pageRoute = `${path}?theme=Dark&locale=ru`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&locale=ru`;
 
     await page.goto(pageRoute);
 
@@ -1023,9 +1188,10 @@ describe("Room selector dark empty", () => {
 
   test("should open dark empty with header /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
   }) => {
-    const pageRoute = `${path}?theme=Dark&header=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&header=true`;
 
     await page.goto(pageRoute);
 
@@ -1038,9 +1204,10 @@ describe("Room selector dark empty", () => {
 
   test("should open dark empty with cancel button /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
   }) => {
-    const pageRoute = `${path}?theme=Dark&cancel=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&cancel=true`;
 
     await page.goto(pageRoute);
 
@@ -1053,9 +1220,10 @@ describe("Room selector dark empty", () => {
 
   test("should open dark empty with header and search /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
   }) => {
-    const pageRoute = `${path}?theme=Dark&header=true&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&header=true&search=true`;
 
     await page.goto(pageRoute);
 
@@ -1068,9 +1236,10 @@ describe("Room selector dark empty", () => {
 
   test("should open dark empty with header and ru locale /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
   }) => {
-    const pageRoute = `${path}?theme=Dark&header=true&locale=ru`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&header=true&locale=ru`;
 
     await page.goto(pageRoute);
 
@@ -1083,9 +1252,10 @@ describe("Room selector dark empty", () => {
 
   test("should open dark empty with header and cancel button /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
   }) => {
-    const pageRoute = `${path}?theme=Dark&header=true&cancel=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&header=true&cancel=true`;
 
     await page.goto(pageRoute);
 
@@ -1098,9 +1268,10 @@ describe("Room selector dark empty", () => {
 
   test("should open dark empty with search and ru locale /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
   }) => {
-    const pageRoute = `${path}?theme=Dark&locale=ru&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&locale=ru&search=true`;
 
     await page.goto(pageRoute);
 
@@ -1113,9 +1284,10 @@ describe("Room selector dark empty", () => {
 
   test("should open dark empty with search and cancel button /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
   }) => {
-    const pageRoute = `${path}?theme=Dark&cancel=true&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&cancel=true&search=true`;
 
     await page.goto(pageRoute);
 
@@ -1128,9 +1300,10 @@ describe("Room selector dark empty", () => {
 
   test("should open dark empty with ru locale and cancel button /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
   }) => {
-    const pageRoute = `${path}?theme=Dark&locale=ru&cancel=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&locale=ru&cancel=true`;
 
     await page.goto(pageRoute);
 
@@ -1143,9 +1316,10 @@ describe("Room selector dark empty", () => {
 
   test("should open dark empty with header, search and ru locale /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
   }) => {
-    const pageRoute = `${path}?theme=Dark&header=true&locale=ru&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&header=true&locale=ru&search=true`;
 
     await page.goto(pageRoute);
 
@@ -1158,9 +1332,10 @@ describe("Room selector dark empty", () => {
 
   test("should open dark empty with header, search and cancel button /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
   }) => {
-    const pageRoute = `${path}?theme=Dark&header=true&cancel=true&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&header=true&cancel=true&search=true`;
 
     await page.goto(pageRoute);
 
@@ -1173,9 +1348,10 @@ describe("Room selector dark empty", () => {
 
   test("should open dark empty with search, ru locale and cancel button /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
   }) => {
-    const pageRoute = `${path}?theme=Dark&locale=ru&cancel=true&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&locale=ru&cancel=true&search=true`;
 
     await page.goto(pageRoute);
 
@@ -1188,9 +1364,10 @@ describe("Room selector dark empty", () => {
 
   test("should open dark empty with all features enabled /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
   }) => {
-    const pageRoute = `${path}?theme=Dark&header=true&locale=ru&cancel=true&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&header=true&locale=ru&cancel=true&search=true`;
 
     await page.goto(pageRoute);
 
@@ -1205,11 +1382,15 @@ describe("Room selector dark empty", () => {
 describe("Render room rtl selector dark", () => {
   test("should open dark with ar-SA locale /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
+    clientRequestInterceptor,
+    serverRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Dark&locale=ar-SA`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&locale=ar-SA`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
 
     await page.goto(pageRoute);
 
@@ -1222,11 +1403,15 @@ describe("Render room rtl selector dark", () => {
 
   test("should open dark with header and ar-SA  locale /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
+    clientRequestInterceptor,
+    serverRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Dark&header=true&locale=ar-SA`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&header=true&locale=ar-SA`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -1238,11 +1423,15 @@ describe("Render room rtl selector dark", () => {
 
   test("should open dark with search and ar-SA locale /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
+    clientRequestInterceptor,
+    serverRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Dark&locale=ar-SA&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&locale=ar-SA&search=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -1254,11 +1443,15 @@ describe("Render room rtl selector dark", () => {
 
   test("should open dark with ar-SA locale and cancel button /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
+    clientRequestInterceptor,
+    serverRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Dark&locale=ar-SA&cancel=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&locale=ar-SA&cancel=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -1270,11 +1463,15 @@ describe("Render room rtl selector dark", () => {
 
   test("should open dark with header, search and ar-SA locale /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
+    clientRequestInterceptor,
+    serverRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Dark&header=true&locale=ru&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&header=true&locale=ru&search=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -1286,11 +1483,15 @@ describe("Render room rtl selector dark", () => {
 
   test("should open dark with search, ar-SA locale and cancel button /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
+    clientRequestInterceptor,
+    serverRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Dark&locale=ar-SA&cancel=true&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&locale=ar-SA&cancel=true&search=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -1302,11 +1503,15 @@ describe("Render room rtl selector dark", () => {
 
   test("should open dark with all features ar-SA enabled /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
+    clientRequestInterceptor,
+    serverRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Dark&header=true&locale=ar-SA&cancel=true&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&header=true&locale=ar-SA&cancel=true&search=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -1320,9 +1525,10 @@ describe("Render room rtl selector dark", () => {
 describe("Room selector rtl dark empty", () => {
   test("should open dark empty with ar-SA locale /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
   }) => {
-    const pageRoute = `${path}?theme=Dark&locale=ar-SA`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&locale=ar-SA`;
 
     await page.goto(pageRoute);
 
@@ -1335,9 +1541,10 @@ describe("Room selector rtl dark empty", () => {
 
   test("should open dark empty with header and ar-SA locale /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
   }) => {
-    const pageRoute = `${path}?theme=Dark&header=true&locale=ar-SA`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&header=true&locale=ar-SA`;
 
     await page.goto(pageRoute);
 
@@ -1350,9 +1557,10 @@ describe("Room selector rtl dark empty", () => {
 
   test("should open dark empty with search and ar-SA locale /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
   }) => {
-    const pageRoute = `${path}?theme=Dark&locale=ar-SA&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&locale=ar-SA&search=true`;
 
     await page.goto(pageRoute);
 
@@ -1365,9 +1573,10 @@ describe("Room selector rtl dark empty", () => {
 
   test("should open dark empty with ar-SA locale and cancel button /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
   }) => {
-    const pageRoute = `${path}?theme=Dark&locale=ar-SA&cancel=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&locale=ar-SA&cancel=true`;
 
     await page.goto(pageRoute);
 
@@ -1380,9 +1589,10 @@ describe("Room selector rtl dark empty", () => {
 
   test("should open dark empty with header, search and ar-SA locale /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
   }) => {
-    const pageRoute = `${path}?theme=Dark&header=true&locale=ar-SA&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&header=true&locale=ar-SA&search=true`;
 
     await page.goto(pageRoute);
 
@@ -1395,9 +1605,10 @@ describe("Room selector rtl dark empty", () => {
 
   test("should open dark empty with search, ar-SA locale and cancel button /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
   }) => {
-    const pageRoute = `${path}?theme=Dark&locale=ar-SA&cancel=true&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&locale=ar-SA&cancel=true&search=true`;
 
     await page.goto(pageRoute);
 
@@ -1410,9 +1621,10 @@ describe("Room selector rtl dark empty", () => {
 
   test("should open dark empty with all features ar-SA enabled /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
   }) => {
-    const pageRoute = `${path}?theme=Dark&header=true&locale=ar-SA&cancel=true&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&header=true&locale=ar-SA&cancel=true&search=true`;
 
     await page.goto(pageRoute);
 
@@ -1427,11 +1639,15 @@ describe("Room selector rtl dark empty", () => {
 describe("Room selector custom labels", () => {
   test("should open with custom submit label /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
+    clientRequestInterceptor,
+    serverRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Base&acceptLabel=Custom`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&acceptLabel=Custom`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -1443,11 +1659,15 @@ describe("Room selector custom labels", () => {
 
   test("should open with custom cancel label /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
+    clientRequestInterceptor,
+    serverRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Base&cancelLabel=Custom&cancel=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancelLabel=Custom&cancel=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -1459,11 +1679,15 @@ describe("Room selector custom labels", () => {
 
   test("should open with custom submit and cancel label /sdk/room-selector route", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
+    clientRequestInterceptor,
+    serverRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Base&acceptLabel=CustomSub&cancelLabel=CustomCan&cancel=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&acceptLabel=CustomSub&cancelLabel=CustomCan&cancel=true`;
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -1477,10 +1701,14 @@ describe("Room selector custom labels", () => {
 describe("Room selector actions", () => {
   test("should handle accept button click and validate console logs for regular room", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
+    clientRequestInterceptor,
+    serverRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Base`;
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+    const pageRoute = `${baseUrl}${path}?theme=Base`;
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     // Add console log listener
@@ -1500,10 +1728,7 @@ describe("Room selector actions", () => {
 
     await button.click();
 
-    const hdrs = new Headers();
-    hdrs.set(HEADER_ROOMS_LIST, "1");
-
-    const roomList = await roomListHandler(hdrs).json();
+    const roomList = await roomListResolver(TypeRoomList.IsDefault).json();
     const selectedItem = roomList.response.folders[1];
 
     expect(selectedItem).toBeDefined();
@@ -1520,11 +1745,14 @@ describe("Room selector actions", () => {
 
   test("should handle cancel button click and validate console log", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
+    clientRequestInterceptor,
+    serverRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Base&cancel=true&cancelLabel=Cancel`;
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&cancelLabel=Cancel`;
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     // Add console log listener
@@ -1543,13 +1771,20 @@ describe("Room selector actions", () => {
 });
 
 describe("Room selector search actions", () => {
-  test("should handle search input", async ({ page, mockRequest }) => {
-    const pageRoute = `${path}?theme=Base&search=true`;
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-
+  test("should handle search input", async ({
+    page,
+    baseUrl,
+    port,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+  }) => {
+    const pageRoute = `${baseUrl}${path}?theme=Base&search=true`;
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
-    await mockRequest.router([endpoints.filteredRoomList]);
+    clientRequestInterceptor.use(
+      roomListHandler(port, TypeRoomList.IsFiltered),
+    );
 
     await page.waitForTimeout(1000);
 
@@ -1564,7 +1799,7 @@ describe("Room selector search actions", () => {
       "action-search-room-selector.png",
     ]);
 
-    await mockRequest.router([endpoints.emptyRoomList]);
+    clientRequestInterceptor.use(roomListHandler(port));
 
     await searchInput.fill("Empty filter");
 
@@ -1577,13 +1812,20 @@ describe("Room selector search actions", () => {
     ]);
   });
 
-  test("should handle search  input ar-SA", async ({ page, mockRequest }) => {
-    const pageRoute = `${path}?theme=Base&search=true&locale=ar-SA`;
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-
+  test("should handle search  input ar-SA", async ({
+    page,
+    baseUrl,
+    port,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+  }) => {
+    const pageRoute = `${baseUrl}${path}?theme=Base&search=true&locale=ar-SA`;
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
-    await mockRequest.router([endpoints.filteredRoomList]);
+    clientRequestInterceptor.use(
+      roomListHandler(port, TypeRoomList.IsFiltered),
+    );
 
     await page.waitForTimeout(1000);
 
@@ -1598,8 +1840,7 @@ describe("Room selector search actions", () => {
       "action-ar-SA-search-room-selector.png",
     ]);
 
-    await mockRequest.router([endpoints.emptyRoomList]);
-
+    clientRequestInterceptor.use(roomListHandler(port));
     await searchInput.fill("Empty filter");
 
     await page.waitForTimeout(1000);
@@ -1611,13 +1852,20 @@ describe("Room selector search actions", () => {
     ]);
   });
 
-  test("should handle dark search input", async ({ page, mockRequest }) => {
-    const pageRoute = `${path}?theme=Dark&search=true`;
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-
+  test("should handle dark search input", async ({
+    page,
+    baseUrl,
+    port,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+  }) => {
+    const pageRoute = `${baseUrl}${path}?theme=Dark&search=true`;
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
-    await mockRequest.router([endpoints.filteredRoomList]);
+    clientRequestInterceptor.use(
+      roomListHandler(port, TypeRoomList.IsFiltered),
+    );
 
     await page.waitForTimeout(1000);
 
@@ -1632,8 +1880,7 @@ describe("Room selector search actions", () => {
       "action-search-dark-room-selector.png",
     ]);
 
-    await mockRequest.router([endpoints.emptyRoomList]);
-
+    clientRequestInterceptor.use(roomListHandler(port));
     await searchInput.fill("Empty filter");
 
     await page.waitForTimeout(1000);
@@ -1647,14 +1894,20 @@ describe("Room selector search actions", () => {
 
   test("should handle dark search input ar-SA", async ({
     page,
-    mockRequest,
+    baseUrl,
+    port,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
   }) => {
-    const pageRoute = `${path}?theme=Dark&search=true&locale=ar-SA`;
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+    const pageRoute = `${baseUrl}${path}?theme=Dark&search=true&locale=ar-SA`;
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
 
     await page.goto(pageRoute);
 
-    await mockRequest.router([endpoints.filteredRoomList]);
+    clientRequestInterceptor.use(
+      roomListHandler(port, TypeRoomList.IsFiltered),
+    );
 
     await page.waitForTimeout(1000);
 
@@ -1669,8 +1922,7 @@ describe("Room selector search actions", () => {
       "action-ar-SA-dark-search-room-selector.png",
     ]);
 
-    await mockRequest.router([endpoints.emptyRoomList]);
-
+    clientRequestInterceptor.use(roomListHandler(port));
     await searchInput.fill("Empty filter");
 
     await page.waitForTimeout(1000);

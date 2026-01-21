@@ -44,14 +44,7 @@ import FilesFilter from "@docspace/shared/api/files/filter";
 import { TValidateShareRoom } from "@docspace/shared/api/rooms/types";
 import { FolderType } from "@docspace/shared/enums";
 import { SHARE_KEY_HEADER } from "@/utils/constants";
-import {
-  filesSettingsHandler,
-  folderHandler,
-  foldersTreeHandler,
-} from "@docspace/shared/__mocks__/e2e";
 import { logger } from "@/../logger.mjs";
-
-const IS_TEST = process.env.E2E_TEST;
 
 export async function getFilesSettings(): Promise<TFilesSettings | undefined> {
   logger.debug("Start GET /files/settings");
@@ -59,7 +52,7 @@ export async function getFilesSettings(): Promise<TFilesSettings | undefined> {
   try {
     const [req] = await createRequest([`/files/settings`], [["", ""]], "GET");
 
-    const res = IS_TEST ? filesSettingsHandler() : await fetch(req);
+    const res = await fetch(req);
 
     if (!res.ok) {
       logger.error(`GET /files/settings failed: ${res.status}`);
@@ -84,9 +77,7 @@ export async function getFoldersTree(): Promise<TFolder[]> {
       "GET",
     );
 
-    const res = IS_TEST
-      ? foldersTreeHandler()
-      : await fetch(req, { next: { revalidate: 300 } });
+    const res = await fetch(req, { next: { revalidate: 300 } });
 
     if (!res.ok) {
       logger.error(
@@ -182,9 +173,7 @@ export async function getFolder(
       [signal],
     );
 
-    const res = IS_TEST
-      ? folderHandler(await headers())
-      : await fetch(req, { next: { revalidate: 300 } });
+    const res = await fetch(req, { next: { revalidate: 300 } });
 
     if (!res.ok) {
       logger.error(`GET /files/${params} failed: ${res.status}`);

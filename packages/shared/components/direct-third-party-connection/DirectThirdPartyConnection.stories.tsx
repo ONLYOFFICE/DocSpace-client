@@ -30,9 +30,9 @@ import { ButtonSize } from "../button";
 
 import DirectThirdPartyConnection from "./DirectThirdPartyConnection";
 import {
-  createGetFolderHandler,
-  createGetFolderInfoHandler,
-} from "../../__mocks__/storybook/handlers/files/folders";
+  folderHandler,
+  folderInfoHandler,
+} from '../../__mocks__/handlers/files/folder'
 
 import {
   mockAccounts,
@@ -113,7 +113,7 @@ export const Connected: Story = {
   },
   parameters: {
     msw: {
-      handlers: [createGetFolderInfoHandler(), createGetFolderHandler()],
+      handlers: [folderInfoHandler(), folderHandler("")],
     },
   },
 };
@@ -129,7 +129,7 @@ export const WithError: Story = {
   },
   parameters: {
     msw: {
-      handlers: [createGetFolderInfoHandler(), createGetFolderHandler()],
+      handlers: [folderInfoHandler(), folderHandler("")],
     },
   },
 };
@@ -144,7 +144,7 @@ export const Disabled: Story = {
   },
   parameters: {
     msw: {
-      handlers: [createGetFolderInfoHandler(), createGetFolderHandler()],
+      handlers: [folderInfoHandler(), folderHandler("")],
     },
   },
 };

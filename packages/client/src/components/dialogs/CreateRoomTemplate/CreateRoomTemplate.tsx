@@ -41,9 +41,10 @@ import { TRoomParams, TRoomTagsParams } from "@docspace/shared/utils/rooms";
 
 import TagHandler from "../../../helpers/TagHandler";
 import SetRoomParams from "../CreateEditRoomDialog/sub-components/SetRoomParams";
-import { StyledFooter } from "./CreateRoomTemplate.styled";
 import TemplateAccessSettingsPanel from "../../panels/TemplateAccessSettingsPanel";
 import TemplateAccessSelector from "../../TemplateAccessSelector";
+
+import styles from "./CreateRoomTemplate.module.scss";
 
 type CreateRoomTemplateProps = {
   visible: boolean;
@@ -249,7 +250,7 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
       </ModalDialog.Body>
 
       <ModalDialog.Footer>
-        <StyledFooter>
+        <div className={styles.createRoomTemplateFooter}>
           <Checkbox
             label={t("Files:OpenCreatedTemplate")}
             isChecked={openCreatedIsChecked}
@@ -257,7 +258,7 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
             dataTestId="create_room_template_open_checkbox"
           />
 
-          <div className="create-room-template_buttons">
+          <div className={styles.createRoomTemplateButtons}>
             <Button
               id="create-room-template-modal_submit"
               tabIndex={5}
@@ -279,7 +280,7 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
               onClick={onClose}
             />
           </div>
-        </StyledFooter>
+        </div>
       </ModalDialog.Footer>
     </ModalDialog>
   );

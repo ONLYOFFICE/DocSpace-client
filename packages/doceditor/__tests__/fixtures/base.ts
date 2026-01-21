@@ -24,71 +24,108 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import {
+  BASE_URL,
+  createNextTestServer,
+  createServerRequestInterceptor,
+  setupAndResetHandlersServer,
+  SetupServer,
+  WorkerFixture,
+} from "@docspace/shared/__mocks__/e2e";
+import { allHandlers } from "@docspace/shared/__mocks__/handlers";
 import { test as base, Page } from "@playwright/test";
-import { MockRequest } from "@docspace/shared/__mocks__/e2e";
+import path from "path";
 
-export const test = base.extend<{
-  page: Page;
-  mockRequest: MockRequest;
-}>({
-  page: async ({ page }, use) => {
+export const test = base.extend<
+  {
+    page: Page;
+    clientRequestInterceptor: WorkerFixture;
+    resetHandlersServer: void;
+  },
+  {
+    serverRequestInterceptor: SetupServer;
+    port: string;
+    baseUrl: string;
+  }
+>({
+  page: async ({ page, port }, use) => {
     await page.context().addCookies([
       {
         name: "asc_auth_key",
         value: "test",
-        domain: "127.0.0.1",
+        domain: "localhost",
         path: "/",
       },
     ]);
 
     await page.setExtraHTTPHeaders({
-      "x-forwarded-host": "127.0.0.1:5113",
+      "x-forwarded-host": `localhost:${port}`,
       "x-forwarded-proto": "http",
-    });
-
-    await page.route("*/**/static/scripts/config.json**", async (route) => {
-      await route.fulfill({
-        status: 200,
-        contentType: "application/json",
-        body: JSON.stringify({}),
-      });
-    });
-
-    await page.route(
-      "*/**/static/scripts/browserDetector.js**",
-      async (route) => {
-        await route.fulfill({
-          status: 200,
-          contentType: "application/javascript",
-          body: "",
-        });
-      },
-    );
-
-    await page.route("*/**/logo.ashx**", async (route) => {
-      await route.fulfill({
-        path: "../../public/images/logo/loginpage.svg",
-      });
-    });
-
-    await page.route("**/_next/public/images/**", async (route, request) => {
-      const { pathname } = new URL(request.url());
-      const rel = pathname.split("/public/images/").at(-1);
-      if (!rel) {
-        await route.fallback();
-        return;
-      }
-      await route.fulfill({
-        path: `../../public/images/${rel}`,
-      });
     });
 
     await use(page);
   },
-  mockRequest: async ({ page }, use) => {
-    const mockRequest = new MockRequest(page);
-    await use(mockRequest);
-  },
+  port: [
+    async ({}, use) => {
+      const { port, server } = await createNextTestServer(
+        path.resolve(__dirname, "../../"),
+      );
+      await use(port);
+      server.close();
+    },
+    {
+      scope: "worker",
+      auto: true,
+    },
+  ],
+  baseUrl: [
+    async ({ port }, use) => {
+      await use(`${BASE_URL}:${port}`);
+    },
+    {
+      scope: "worker",
+      auto: true,
+    },
+  ],
+  serverRequestInterceptor: [
+    async ({}, use) => {
+      const requestInterceptor = await createServerRequestInterceptor();
+      await use(requestInterceptor);
+      requestInterceptor.close();
+    },
+    {
+      scope: "worker",
+      auto: true,
+    },
+  ],
+  resetHandlersServer: [
+    async ({ serverRequestInterceptor, port }, use) => {
+      const resetHandlers = await setupAndResetHandlersServer(
+        serverRequestInterceptor,
+        port,
+      );
+      await use();
+      resetHandlers();
+    },
+    {
+      auto: true,
+    },
+  ],
+  clientRequestInterceptor: [
+    async ({ page, port }, use) => {
+      const worker = new WorkerFixture({
+        page: page as never,
+        initialHandlers: allHandlers(port),
+      });
+
+      await worker.start();
+      await use(worker);
+      // await worker.stop();
+    },
+    {
+      auto: true,
+    },
+  ],
 });
 
 export { expect } from "@playwright/test";

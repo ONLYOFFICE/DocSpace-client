@@ -27,17 +27,16 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import {
-  createDeleteBackupHistoryHandler,
   createGetBackupHistoryHandler,
-} from "../../../__mocks__/storybook/handlers/portal/backupHistory";
-import { createDeleteBackupHandler } from "../../../__mocks__/storybook/handlers/portal/backup";
-import { createStartRestoreHandler } from "../../../__mocks__/storybook/handlers/portal/restore";
-import { createGetRoomsHandler } from "../../../__mocks__/storybook/handlers/files/rooms";
-import {
-  createGetFolderHandler,
-  createGetFolderInfoHandler,
-} from "../../../__mocks__/storybook/handlers/files/folders";
-import { createGetFolderTreeHandler } from "../../../__mocks__/storybook/handlers/files/foldersTree";
+  createDeleteBackupHistoryHandler,
+  createDeleteBackupHandler,
+  createStartRestoreHandler,
+  createRoomHandler,
+  folderHandler,
+  folderInfoHandler,
+  foldersTreeHandler,
+  TypeFolder,
+} from "../../../__mocks__/handlers/";
 
 import { RestoreBackup } from "./index";
 import {
@@ -77,14 +76,14 @@ const meta: Meta<typeof RestoreBackup> = {
     },
     msw: {
       handlers: [
-        createGetBackupHistoryHandler(),
-        createDeleteBackupHistoryHandler(),
-        createDeleteBackupHandler(),
+        createGetBackupHistoryHandler(""),
+        createDeleteBackupHistoryHandler(""),
+        createDeleteBackupHandler(""),
         createStartRestoreHandler(),
-        createGetFolderTreeHandler(),
-        createGetRoomsHandler(),
-        createGetFolderInfoHandler(),
-        createGetFolderHandler(true),
+        foldersTreeHandler(""),
+        createRoomHandler(""),
+        folderInfoHandler(),
+        folderHandler("", TypeFolder.IsEmpty),
       ],
     },
   },

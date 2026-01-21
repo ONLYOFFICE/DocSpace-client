@@ -25,27 +25,28 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import {
-  endpoints,
-  HEADER_OPEN_SOURCE
-} from "@docspace/shared/__mocks__/e2e";
-
+  colorThemeHandler,
+  tariffHandler,
+} from "@docspace/shared/__mocks__/handlers";
 import { expect, test } from "./fixtures/base";
 
 test.describe("Bonus", () => {
-  test.beforeEach(async ({ mockRequest }) => {
-    await mockRequest.router([endpoints.colorTheme]);
+  test.beforeEach(async ({ serverRequestInterceptor, port }) => {
+    serverRequestInterceptor.use(colorThemeHandler(port));
   });
 
-  test("should bonus settings render", async ({ page, mockRequest }) => {
-    await mockRequest.setHeaders("/management/bonus", [
-      HEADER_OPEN_SOURCE,
-    ]);
+  test("should bonus settings render", async ({
+    page,
+    baseUrl,
+    serverRequestInterceptor,
+    port,
+  }) => {
+    // Override tariff handler to return openSource: true
+    serverRequestInterceptor.use(tariffHandler(port, true));
 
-    await page.goto("/management/bonus");
+    await page.goto(`${baseUrl}/management/bonus`);
 
-    await expect(
-      page.getByTestId("bonus"),
-    ).toBeVisible();
+    await expect(page.getByTestId("bonus")).toBeVisible();
 
     await expect(page).toHaveScreenshot([
       "desktop",

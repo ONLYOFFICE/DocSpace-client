@@ -93,6 +93,7 @@ export type CreateUserFormProps = {
   isStandalone: boolean;
   logoText: string;
   invitationSettings?: TInvitationSettings;
+  hostName: string;
 };
 
 const CreateUserForm = (props: CreateUserFormProps) => {
@@ -108,6 +109,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     isStandalone,
     logoText,
     invitationSettings,
+    hostName,
   } = props;
 
   const { linkData, roomData, confirmLinkResult } =
@@ -281,7 +283,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
           email,
           roomName,
           displayName,
-          spaceAddress: window.location.host,
+          spaceAddress: hostName,
         },
         true,
       );

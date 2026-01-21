@@ -129,7 +129,7 @@ describe("Image Tests", () => {
     const usedImagesSet = new Set(usedImages);
 
     const uselessImages = allImgs.filter((img) => {
-      if (img.fileName.includes("default_user_photo_size_48-48")) return false;
+      if (img.fileName.includes("default_user_photo_size_48-48") || img.fileName.includes("default_user_photo_size_360-360")) return false;
 
       return !usedImagesSet.has(img.fileName);
     });

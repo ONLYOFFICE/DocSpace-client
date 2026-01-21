@@ -26,17 +26,18 @@
 
 import { Row } from "@docspace/shared/components/rows";
 import { Text } from "@docspace/shared/components/text";
+import styles from "./HotkeysPanel.module.scss";
 
 const NavigationBlock = ({ t, textStyles, keyTextStyles }) => {
   return (
     <>
-      <Row className="hotkeys_row">
+      <Row className={styles.hotkeysRow}>
         <>
           <Text {...textStyles}>{t("HotkeysGoToParentFolder")}</Text>
           <Text {...keyTextStyles}>Backspace</Text>
         </>
       </Row>
-      <Row className="hotkeys_row">
+      <Row className={styles.hotkeysRow}>
         <>
           <Text {...textStyles}>{t("HotkeysChangeView")}</Text>
           <Text {...keyTextStyles}>v</Text>

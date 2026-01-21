@@ -27,6 +27,7 @@
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { TooltipContent } from "../../../../pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/TooltipContent";
+import styles from "../EmbeddingPanel.module.scss";
 
 type CheckboxElementProps = {
   img: string;
@@ -48,7 +49,7 @@ const CheckboxElement = ({
   dataTestId,
 }: CheckboxElementProps) => {
   return (
-    <div className="embedding-panel_checkbox-element">
+    <div className={styles.embeddingPanelCheckboxElement}>
       <Checkbox
         className="checkbox"
         label={label}

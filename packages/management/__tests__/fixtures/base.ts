@@ -1,79 +1,131 @@
-import { test as base, Page } from "@playwright/test";
-import { MockRequest } from "@docspace/shared/__mocks__/e2e";
+// (c) Copyright Ascensio System SIA 2009-2026
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const test = base.extend<{
-  page: Page;
-  mockRequest: MockRequest;
-}>({
-  page: async ({ page }, use) => {
+import {
+  BASE_URL,
+  createNextTestServer,
+  createServerRequestInterceptor,
+  setupAndResetHandlersServer,
+  SetupServer,
+  WorkerFixture,
+} from "@docspace/shared/__mocks__/e2e";
+import { allHandlers } from "@docspace/shared/__mocks__/handlers";
+import { test as base, Page } from "@playwright/test";
+import path from "path";
+
+export const test = base.extend<
+  {
+    page: Page;
+    clientRequestInterceptor: WorkerFixture;
+    resetHandlersServer: void;
+  },
+  {
+    serverRequestInterceptor: SetupServer;
+    port: string;
+    baseUrl: string;
+  }
+>({
+  page: async ({ page, port }, use) => {
     await page.context().addCookies([
       {
         name: "asc_auth_key",
         value: "test",
-        domain: "127.0.0.1",
+        domain: "localhost",
         path: "/",
       },
     ]);
 
     await page.setExtraHTTPHeaders({
-      "x-forwarded-host": "127.0.0.1:5115",
+      "x-forwarded-host": `localhost:${port}`,
       "x-forwarded-proto": "http",
     });
 
-    await page.route("*/**/static/scripts/config.json**", async (route) => {
-      await route.fulfill({
-        status: 200,
-        contentType: "application/json",
-        body: JSON.stringify({}),
-      });
-    });
-
-    await page.route(
-      "*/**/static/scripts/browserDetector.js**",
-      async (route) => {
-        await route.fulfill({
-          status: 200,
-          contentType: "application/javascript",
-          body: "",
-        });
-      },
-    );
-
-    await page.route("*/**/logo.ashx**", async (route) => {
-      try {
-        await route.fulfill({
-          path: `../../public/images/logo/loginpage.svg`,
-        });
-      } catch {
-        await route.continue();
-      }
-    });
-
-    await page.route(
-      "*/**/management/_next/public/images/**",
-      async (route, request) => {
-        const imagePath = request
-          .url()
-          .split("/management/_next/public/images/")
-          .at(-1)!
-          .split("?")[0];
-
-        try {
-          await route.fulfill({
-            path: `../../public/images/${imagePath}`,
-          });
-        } catch {
-          await route.continue();
-        }
-      },
-    );
-
     await use(page);
   },
-  mockRequest: async ({ page }, use) => {
-    const mockRequest = new MockRequest(page);
-    await use(mockRequest);
-  },
+  port: [
+    async ({}, use) => {
+      const { port, server } = await createNextTestServer(
+        path.resolve(__dirname, "../../"),
+      );
+      await use(port);
+      server.close();
+    },
+    {
+      scope: "worker",
+      auto: true,
+    },
+  ],
+  baseUrl: [
+    async ({ port }, use) => {
+      await use(`${BASE_URL}:${port}`);
+    },
+    {
+      scope: "worker",
+      auto: true,
+    },
+  ],
+  serverRequestInterceptor: [
+    async ({}, use) => {
+      const requestInterceptor = await createServerRequestInterceptor();
+      await use(requestInterceptor);
+      requestInterceptor.close();
+    },
+    {
+      scope: "worker",
+      auto: true,
+    },
+  ],
+  resetHandlersServer: [
+    async ({ serverRequestInterceptor, port }, use) => {
+      const resetHandlers = await setupAndResetHandlersServer(
+        serverRequestInterceptor,
+        port,
+      );
+      await use();
+      resetHandlers();
+    },
+    {
+      auto: true,
+    },
+  ],
+  clientRequestInterceptor: [
+    async ({ page, port }, use) => {
+      const worker = new WorkerFixture({
+        page: page as never,
+        initialHandlers: allHandlers(port),
+      });
+
+      await worker.start();
+      await use(worker);
+      // await worker.stop();
+    },
+    {
+      auto: true,
+    },
+  ],
 });
 
 export { expect } from "@playwright/test";

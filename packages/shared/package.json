@@ -101,7 +101,8 @@
     "@babel/preset-react": "7.25.7",
     "@babel/preset-typescript": "7.25.7",
     "@biomejs/biome": "2.3.11",
-    "@playwright/test": "1.56.1",
+    "@playwright/test": "1.57.0",
+    "@msw/playwright": "^0.3.1",
     "@storybook/addon-actions": "^8.6.15",
     "@storybook/addon-controls": "^8.6.15",
     "@storybook/addon-designs": "^8.2.1",
@@ -181,7 +182,7 @@
   },
   "msw": {
     "workerDirectory": [
-      "__mocks__/storybook/mockServiceWorker"
+      "__mocks__/storybook"
     ]
   }
 }

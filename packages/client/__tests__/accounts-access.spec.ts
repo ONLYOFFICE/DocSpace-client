@@ -24,41 +24,36 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { endpoints } from "@docspace/shared/__mocks__/e2e";
-
-import { expect, test } from "./fixtures/base";
+import { expect, test, TEST_PORT } from "./fixtures/base";
+import {
+  rootHandler,
+  settingsHandler,
+  TypeSettings,
+  filesSettingsHandler,
+  peopleListHandler,
+  selfActivationStatusHandler,
+  selfByTypeHandler,
+  peopleListAccessDeniedHandler,
+} from "@docspace/shared/__mocks__/handlers";
 
 test.describe("Accounts Access Control", () => {
   test.beforeEach(async ({ mockRequest }) => {
-    await mockRequest.router([
-      endpoints.aiConfig,
-      endpoints.settingsWithQuery,
-      endpoints.colorTheme,
-      endpoints.build,
-      endpoints.capabilities,
-      endpoints.tariff,
-      endpoints.quota,
-      endpoints.additionalSettings,
-      endpoints.getPortal,
-      endpoints.companyInfo,
-      endpoints.cultures,
-      endpoints.root,
-      endpoints.invitationSettings,
-      endpoints.filesSettings,
-      endpoints.thirdPartyCapabilities,
-      endpoints.thirdParty,
-      endpoints.docService,
-      endpoints.peopleList,
-    ]);
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      filesSettingsHandler(TEST_PORT),
+      peopleListHandler(TEST_PORT),
+    );
   });
 
   test("should allow owner to access accounts page and see content", async ({
     page,
     mockRequest,
+    baseUrl,
   }) => {
-    await mockRequest.router([endpoints.selfEmailActivatedClient]);
+    mockRequest.use(selfActivationStatusHandler(TEST_PORT, null, false, true));
 
-    await page.goto("/accounts/people/filter");
+    await page.goto(`${baseUrl}/accounts/people/filter`);
 
     // Should see table container
     const tableContainer = page.getByTestId("table-container");
@@ -68,10 +63,12 @@ test.describe("Accounts Access Control", () => {
   test("should allow admin to access accounts page and see content", async ({
     page,
     mockRequest,
+    baseUrl,
   }) => {
-    await mockRequest.router([endpoints.selfAdminOnly, endpoints.peopleList]);
+    mockRequest.use(selfByTypeHandler(TEST_PORT, "admin"));
+    //await mockRequest.router([endpoints.selfAdminOnly, endpoints.peopleList]);
 
-    await page.goto("/accounts/people/filter");
+    await page.goto(`${baseUrl}/accounts/people/filter`);
 
     // Should see table container
     const tableContainer = page.getByTestId("table-container");
@@ -81,12 +78,11 @@ test.describe("Accounts Access Control", () => {
   test("should allow room admin to access accounts page and see content", async ({
     page,
     mockRequest,
+    baseUrl,
   }) => {
-    await mockRequest.router([
-      endpoints.selfRoomAdminOnly, // Room admin user from existing handlers
-    ]);
+    mockRequest.use(selfByTypeHandler(TEST_PORT, "roomAdmin"));
 
-    await page.goto("/accounts/people/filter");
+    await page.goto(`${baseUrl}/accounts/people/filter`);
 
     // Should see table container
     const tableContainer = page.getByTestId("table-container");
@@ -96,13 +92,14 @@ test.describe("Accounts Access Control", () => {
   test("should show NoAccessContainer for visitor", async ({
     page,
     mockRequest,
+    baseUrl,
   }) => {
-    await mockRequest.router([
-      endpoints.selfVisitorOnly,
-      endpoints.peopleListAccessDenied, // Return 403 for people list
-    ]);
+    mockRequest.use(
+      peopleListAccessDeniedHandler(TEST_PORT), // Return 403 for people list
+      selfByTypeHandler(TEST_PORT, "visitor"),
+    );
 
-    await page.goto("/accounts/people/filter");
+    await page.goto(`${baseUrl}/accounts/people/filter`);
 
     // Should see empty view
     const emptyView = page.getByTestId("empty-view");
@@ -112,13 +109,14 @@ test.describe("Accounts Access Control", () => {
   test("should show NoAccessContainer for regular user", async ({
     page,
     mockRequest,
+    baseUrl,
   }) => {
-    await mockRequest.router([
-      endpoints.selfRegularUserOnly,
-      endpoints.peopleListAccessDenied, // Return 403 for people list
-    ]);
+    mockRequest.use(
+      selfByTypeHandler(TEST_PORT, "regular"),
+      peopleListAccessDeniedHandler(TEST_PORT), // Return 403 for people list
+    );
 
-    await page.goto("/accounts/people/filter");
+    await page.goto(`${baseUrl}/accounts/people/filter`);
 
     // Should see empty view
     const emptyView = page.getByTestId("empty-view");

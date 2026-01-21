@@ -26,44 +26,32 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { expect, test } from "../fixtures/base";
-import { endpoints } from "@docspace/shared/__mocks__/e2e";
-import { PATH_AI_CONFIG_WEB_SEARCH } from "@docspace/shared/__mocks__/e2e/handlers/ai";
+import { settingsHandler, TypeSettings, selfActivationStatusHandler, aiProvidersHandler } from "@docspace/shared/__mocks__/handlers";
+import { aiWebSearchGetHandler, aiWebSearchPutHandler, PATH_AI_CONFIG_WEB_SEARCH } from "@docspace/shared/__mocks__/handlers/ai/webSearch";
+import { expect, test, TEST_PORT } from "../fixtures/base";
 
 test.describe("Web Search", () => {
-  test.beforeEach(async ({ mockRequest }) => {
-    await mockRequest.router([
-      endpoints.aiConfig,
-      endpoints.settingsWithQuery,
-      endpoints.colorTheme,
-      endpoints.build,
-      endpoints.capabilities,
-      endpoints.selfEmailActivatedClient,
-      endpoints.tariff,
-      endpoints.quota,
-      endpoints.additionalSettings,
-      endpoints.getPortal,
-      endpoints.companyInfo,
-      endpoints.cultures,
-      endpoints.root,
-      endpoints.invitationSettings,
-      endpoints.filesSettings,
-      endpoints.webPlugins,
-      endpoints.thirdPartyCapabilities,
-      endpoints.thirdParty,
-      endpoints.docService,
-    ]);
+  test.beforeEach(({ mockRequest }) => {
+     mockRequest.use(
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true)
+    );
   });
 
   test("should render web search with disabled elements if there are no ai providers", async ({
     page,
     mockRequest,
+    baseUrl
   }) => {
-    await mockRequest.router([
-      endpoints.aiProvidersEmptyList,
-      endpoints.aiWebSearchDisabled,
-    ]);
-    await page.goto("/portal-settings/ai-settings/search");
+    // await mockRequest.router([
+    //   endpoints.aiProvidersEmptyList,
+    //   endpoints.aiWebSearchDisabled,
+    // ]);
+    mockRequest.use(
+      aiProvidersHandler(TEST_PORT, false, true),
+      aiWebSearchGetHandler(TEST_PORT, 'disabled'),
+    );
+    await page.goto(`${baseUrl}/portal-settings/ai-settings/search`);
 
     const engineCombobox = page.getByTestId("web-search-engine-combobox");
     await expect(engineCombobox.getByRole("button")).toBeDisabled();
@@ -89,12 +77,17 @@ test.describe("Web Search", () => {
   test("should render web search with enabled engine combobox if there are ai providers", async ({
     page,
     mockRequest,
+    baseUrl
   }) => {
-    await mockRequest.router([
-      endpoints.aiProvidersList,
-      endpoints.aiWebSearchDisabled,
-    ]);
-    await page.goto("/portal-settings/ai-settings/search");
+    // await mockRequest.router([
+    //   endpoints.aiProvidersList,
+    //   endpoints.aiWebSearchDisabled,
+    // ]);
+    mockRequest.use(
+      aiProvidersHandler(TEST_PORT),
+      aiWebSearchGetHandler(TEST_PORT, 'disabled'),
+    );
+    await page.goto(`${baseUrl}/portal-settings/ai-settings/search`);
 
     const engineCombobox = page.getByTestId("web-search-engine-combobox");
     await expect(engineCombobox.getByRole("button")).toBeEnabled();
@@ -106,13 +99,18 @@ test.describe("Web Search", () => {
     ]);
   });
 
-  test("should set web search settings", async ({ page, mockRequest }) => {
-    await mockRequest.router([
-      endpoints.aiProvidersList,
-      endpoints.aiWebSearchDisabled,
-      endpoints.setWebSearchSettings,
-    ]);
-    await page.goto("/portal-settings/ai-settings/search");
+  test("should set web search settings", async ({ page, mockRequest, baseUrl }) => {
+    // await mockRequest.router([
+    //   endpoints.aiProvidersList,
+    //   endpoints.aiWebSearchDisabled,
+    //   endpoints.setWebSearchSettings,
+    // ]);
+    mockRequest.use(
+      aiProvidersHandler(TEST_PORT),
+      aiWebSearchGetHandler(TEST_PORT, 'disabled'),
+      aiWebSearchPutHandler(TEST_PORT),
+    );
+    await page.goto(`${baseUrl}/portal-settings/ai-settings/search`);
 
     const keyInput = page
       .getByTestId("web-search-key-input")
@@ -174,13 +172,18 @@ test.describe("Web Search", () => {
     ]);
   });
 
-  test("should reset web search settings", async ({ page, mockRequest }) => {
-    await mockRequest.router([
-      endpoints.aiProvidersList,
-      endpoints.aiWebSearchEnabled,
-      endpoints.setWebSearchSettings,
-    ]);
-    await page.goto("/portal-settings/ai-settings/search");
+  test("should reset web search settings", async ({ page, mockRequest, baseUrl }) => {
+    // await mockRequest.router([
+    //   endpoints.aiProvidersList,
+    //   endpoints.aiWebSearchEnabled,
+    //   endpoints.setWebSearchSettings,
+    // ]);
+    mockRequest.use(
+      aiProvidersHandler(TEST_PORT),
+      aiWebSearchGetHandler(TEST_PORT, 'enabled'),
+      aiWebSearchPutHandler(TEST_PORT),
+    );
+    await page.goto(`${baseUrl}/portal-settings/ai-settings/search`);
 
     const keyHiddenBanner = page.getByTestId("web-search-key-hidden-banner");
     await expect(keyHiddenBanner).toBeVisible();
@@ -236,12 +239,17 @@ test.describe("Web Search", () => {
   test("should render combobox with selected exa and empty key input if web search needs reset", async ({
     page,
     mockRequest,
+    baseUrl
   }) => {
-    await mockRequest.router([
-      endpoints.aiProvidersList,
-      endpoints.aiWebSearchNeedReset,
-    ]);
-    await page.goto("/portal-settings/ai-settings/search");
+    // await mockRequest.router([
+    //   endpoints.aiProvidersList,
+    //   endpoints.aiWebSearchNeedReset,
+    // ]);
+    mockRequest.use(
+      aiProvidersHandler(TEST_PORT),
+      aiWebSearchGetHandler(TEST_PORT, 'needReset'),
+    );
+    await page.goto(`${baseUrl}/portal-settings/ai-settings/search`);
 
     const engineCombobox = page.getByTestId("web-search-engine-combobox");
     await expect(engineCombobox.getByRole("button")).toBeEnabled();

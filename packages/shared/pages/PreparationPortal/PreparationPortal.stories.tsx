@@ -27,8 +27,9 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { PreparationPortal } from ".";
-import { createGetRestoreProgressHandler } from "../../__mocks__/storybook/handlers/portal/restore";
+
 import i18nextStoryDecorator from "../../.storybook/decorators/i18nextStoryDecorator";
+import { restoreProgressHandler } from "../../__mocks__/handlers/portal/restoreProgress";
 
 const meta = {
   title: "Pages/PreparationPortal",
@@ -76,7 +77,7 @@ export const Default: Story = {
   parameters: {
     docs: { disable: false },
     msw: {
-      handlers: [createGetRestoreProgressHandler({ progress: 70 })],
+      handlers: [restoreProgressHandler("", 70)],
     },
   },
 };
@@ -87,12 +88,7 @@ export const WithError: Story = {
   },
   parameters: {
     msw: {
-      handlers: [
-        createGetRestoreProgressHandler({
-          progress: 0,
-          error: "Something went wrong",
-        }),
-      ],
+      handlers: [restoreProgressHandler("", 0, "Something went wrong")],
     },
   },
 };
@@ -106,7 +102,7 @@ export const WithoutHeader: Story = {
   },
   parameters: {
     msw: {
-      handlers: [createGetRestoreProgressHandler({ progress: 20 })],
+      handlers: [restoreProgressHandler("", 20)],
     },
   },
 };

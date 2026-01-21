@@ -2476,6 +2476,7 @@
   --settings-backup-text-disabled: #{$gray};
   --settings-backup-background: #{$gray-light};
   --settings-backup-note-color: #{$gray};
+  --settings-api-keys-dialog-text: #{$light-gray-dark};
 }
 
 .dark {
@@ -2491,6 +2492,7 @@
   --settings-backup-text-disabled: #{$gray-dark-text};
   --settings-backup-background: #{$dark-gray-light};
   --settings-backup-note-color: #{$gray-dark};
+  --settings-api-keys-dialog-text: #{$gray-dark};
 }
 
 .light {
@@ -3166,4 +3168,22 @@
   --completed-form-description-color: #{$dark-gray-dark};
   --completed-form-box-background-color: #{$dark-gray-light};
   --completed-form-label-color: #{$dark-gray-dark};
+}
+
+.light { 
+  --template-access-avatar-border: 1px solid #{$white};
+  --template-access-me-label-color: #{$gray};
+} 
+
+.dark { 
+  --template-access-avatar-border: 1px solid #{$black};
+  --template-access-me-label-color: #{$gray-dark};
+}
+
+.light { 
+  --embedding-panel-info-block-background: #{$gray-light};
+} 
+
+.dark { 
+  --embedding-panel-info-block-background: #{$dark-gray-dark};
 }

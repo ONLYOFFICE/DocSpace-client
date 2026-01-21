@@ -26,115 +26,47 @@
 
 import { test as base, Page } from "@playwright/test";
 import {
-  MockRequest,
   PlaywrightWebSocketMock,
+  WorkerFixture,
+  BASE_URL,
 } from "@docspace/shared/__mocks__/e2e";
+import { allHandlers } from "@docspace/shared/__mocks__/handlers";
 
-export const test = base.extend<{
-  page: Page;
-  mockRequest: MockRequest;
-  wsMock: PlaywrightWebSocketMock;
-}>({
-  page: async ({ page }, use) => {
-    // Route for logos
-    await page.route("*/**/logo.ashx**", async (route) => {
-      await route.fulfill({
-        path: `../../public/images/logo/loginpage.svg`,
-      });
-    });
+export const TEST_PORT = process.env.PORT || "5110";
 
-    await page.route("*/**/static/scripts/**", async (route, request) => {
-      const scripts = request
-        .url()
-        .split("/static/scripts")
-        .at(-1)!
-        .split("?")[0];
-      await route.fulfill({
-        path: `../../public/scripts/${scripts}`,
-      });
-    });
-
-    await page.route("*/**/static/fonts/**", async (route, request) => {
-      const scripts = request
-        .url()
-        .split("/static/fonts")
-        .at(-1)!
-        .split("?")[0];
-      await route.fulfill({
-        path: `../../public/fonts/${scripts}`,
-      });
-    });
-
-    // Route for public images (direct access)
-    await page.route("*/**/static/images/**", async (route, request) => {
-      const imagePath = request
-        .url()
-        .split("/static/images/")
-        .at(-1)!
-        .split("?")[0];
-      await route.fulfill({
-        path: `../../public/images/${imagePath}`,
-      });
-    });
-
-    // Route for public locales (direct access)
-    await page.route("*/**/locales/**", async (route, request) => {
-      const url = request.url();
-
-      const hasStatic = url.includes("static");
-
-      const local = url.split("/locales/").at(-1)!.split("?")[0];
-
-      const path = hasStatic
-        ? `../../public/locales/${local}`
-        : `./public/locales/${local}`;
-
-      await route
-        .fulfill({
-          path,
-        })
-        .catch((e) => {});
-    });
-
-    // Route for plugin files (test plugins)
-    await page.route("*/**/plugins/**", async (route, request) => {
-      const url = request.url().split("/plugins/").at(-1)!.split("?")[0];
-
-      await route
-        .fulfill({
-          path: `./__tests__/plugins/${url}`,
-        })
-        .catch((e) => {});
-    });
-
-    // Route for static assets
-    // await page.route(
-    //   "*/**/static/scripts/config.json",
-    //   async (route, request) => {
-    //     await route.fulfill({
-    //       path: `../../public/scripts/config.json`,
-    //     });
-    //   },
-    // );
-
-    // // Route for React static files
-    // await page.route("*/**/static/js/**", async (route, request) => {
-    //   // For JS files, just continue with original request
-    //   await route.continue();
-    // });
-
-    // // Route for CSS files
-    // await page.route("*/**/static/css/**", async (route, request) => {
-    //   // For CSS files, just continue with original request
-    //   await route.continue();
-    // });
-
-    await use(page);
+export const test = base.extend<
+  {
+    page: Page;
+    mockRequest: WorkerFixture;
+    wsMock: PlaywrightWebSocketMock;
   },
-  mockRequest: async ({ page }, use) => {
-    const mockRequest = new MockRequest(page);
-    await use(mockRequest);
-  },
+  {
+    baseUrl: string;
+  }
+>({
+  baseUrl: [
+    async ({}, use) => {
+      await use(`${BASE_URL}:${TEST_PORT}`);
+    },
+    {
+      scope: "worker",
+      auto: true,
+    },
+  ],
+  mockRequest: [
+    async ({ page }, use) => {
+      const worker = new WorkerFixture({
+        page,
+        initialHandlers: allHandlers(TEST_PORT),
+      });
+
+      await worker.start();
+      await use(worker);
+    },
+    {
+      auto: true,
+    },
+  ],
   wsMock: async ({ page }, use) => {
     const wsMock = new PlaywrightWebSocketMock(page);
     await use(wsMock);

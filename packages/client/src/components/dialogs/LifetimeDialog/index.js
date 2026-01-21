@@ -5,7 +5,7 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Text } from "@docspace/shared/components/text";
-import { StyledBodyContent, StyledFooterContent } from "./StyledLifetimeDialog";
+import styles from "./LifetimeDialog.module.scss";
 
 const LifetimeDialogComponent = (props) => {
   const {
@@ -62,22 +62,22 @@ const LifetimeDialogComponent = (props) => {
     >
       <ModalDialog.Header>{t("Common:Warning")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <StyledBodyContent className="modal-dialog-content-body">
+        <div className={styles.lifetimeBodyContainer}>
           <Text fontWeight={600} fontSize="13px">
             {t("Files:LifetimeDialogDescriptionHeader")}
           </Text>
           <Text fontSize="13px">{t("Files:LifetimeDialogDescription")}</Text>
-        </StyledBodyContent>
+        </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
-        <StyledFooterContent>
+        <div className={styles.lifetimeFooterContainer}>
           <Checkbox
-            className="modal-dialog_lifetime-checkbox"
+            className={styles.lifetimeCheckbox}
             label={t("ConvertDialog:HideMessage")}
             isChecked={isChecked}
             onChange={onChange}
           />
-          <div className="modal-dialog_lifetime-buttons">
+          <div className={styles.lifetimeButtons}>
             <Button
               id="delete-file-modal_submit"
               key="OKButton"
@@ -96,7 +96,7 @@ const LifetimeDialogComponent = (props) => {
               onClick={onClose}
             />
           </div>
-        </StyledFooterContent>
+        </div>
       </ModalDialog.Footer>
     </ModalDialog>
   );

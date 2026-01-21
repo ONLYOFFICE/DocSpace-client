@@ -25,16 +25,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import {
-  endpoints,
-  HEADER_CONFIRM_WITHOUT_EMAIL,
-  HEADER_NO_STANDALONE_SETTINGS,
-} from "@docspace/shared/__mocks__/e2e";
+  settingsHandler,
+  TypeSettings,
+} from "@docspace/shared/__mocks__/handlers";
 
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 import { expect, test } from "./fixtures/base";
+import { selfGetByEmailHandler } from "@docspace/shared/__mocks__/handlers/people/self";
+import { loginHandler } from "@docspace/shared/__mocks__/handlers/authentication/login";
 
 const URL = "/login/confirm/LinkInvite";
-const NEXT_REQUEST_URL = "*/**/login/confirm/LinkInvite";
 
 const QUERY_PARAMS = [
   {
@@ -57,17 +57,14 @@ const QUERY_PARAMS = [
 
 const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
 
-const NEXT_REQUEST_URL_WITH_PARAMS = getUrlWithQueryParams(
-  NEXT_REQUEST_URL,
-  QUERY_PARAMS,
-);
+test.beforeEach(async ({ page }) => {
+  await page.setExtraHTTPHeaders({
+    "x-forwarded-host-test": "localhost",
+  });
+});
 
-test("link invite email render", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-    HEADER_CONFIRM_WITHOUT_EMAIL,
-  ]);
-  await mockRequest.router([endpoints.getUserByEmail]);
-  await page.goto(URL_WITH_PARAMS);
+test("link invite email render", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -76,17 +73,15 @@ test("link invite email render", async ({ page, mockRequest }) => {
   ]);
 });
 
-test("link invite login render", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-    HEADER_CONFIRM_WITHOUT_EMAIL,
-  ]);
-  await mockRequest.router([endpoints.getUserByEmail]);
-  await page.goto(URL_WITH_PARAMS);
+test("link invite login render", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("email-input-invite").fill("mail@mail.com");
   await page.getByTestId("email_continue_button").click();
 
-  await page.waitForURL("/login?loginData**", { waitUntil: "load" });
+  await page.waitForURL(`${baseUrl}/login?loginData**`, {
+    waitUntil: "load",
+  });
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -97,12 +92,12 @@ test("link invite login render", async ({ page, mockRequest }) => {
 
 test("link invite registration render standalone", async ({
   page,
-  mockRequest,
+  baseUrl,
+  port,
+  clientRequestInterceptor,
 }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-    HEADER_CONFIRM_WITHOUT_EMAIL,
-  ]);
-  await page.goto(URL_WITH_PARAMS);
+  clientRequestInterceptor.use(selfGetByEmailHandler(port, 404));
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("email-input-invite").fill("mail@mail.com");
   await page.getByTestId("email_continue_button").click();
@@ -121,14 +116,17 @@ test("link invite registration render standalone", async ({
 
 test("link invite registration render no standalone", async ({
   page,
-  mockRequest,
+  port,
+  clientRequestInterceptor,
+  serverRequestInterceptor,
+  baseUrl,
 }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-    HEADER_NO_STANDALONE_SETTINGS,
-    HEADER_CONFIRM_WITHOUT_EMAIL,
-  ]);
+  clientRequestInterceptor.use(selfGetByEmailHandler(port, 404));
+  serverRequestInterceptor.use(
+    settingsHandler(port, TypeSettings.NoStandalone),
+  );
 
-  await page.goto(URL_WITH_PARAMS);
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("email-input-invite").fill("mail@mail.com");
   await page.getByTestId("email_continue_button").click();
@@ -145,12 +143,14 @@ test("link invite registration render no standalone", async ({
   ]);
 });
 
-test("link invite email error", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-    HEADER_CONFIRM_WITHOUT_EMAIL,
-  ]);
-  await mockRequest.router([endpoints.getUserByEmail]);
-  await page.goto(URL_WITH_PARAMS);
+test("link invite email error", async ({
+  page,
+  baseUrl,
+  port,
+  clientRequestInterceptor,
+}) => {
+  clientRequestInterceptor.use(selfGetByEmailHandler(port));
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("email-input-invite").fill("mail.com");
   await page.getByTestId("email_continue_button").click();
@@ -162,22 +162,15 @@ test("link invite email error", async ({ page, mockRequest }) => {
   ]);
 });
 
-test("link invite login success", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-    HEADER_CONFIRM_WITHOUT_EMAIL,
-  ]);
-  await mockRequest.router([
-    endpoints.getUserByEmail,
-    endpoints.checkConfirmLink,
-    endpoints.login,
-  ]);
-
-  await page.goto(URL_WITH_PARAMS);
+test("link invite login success", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("email-input-invite").fill("mail@mail.com");
   await page.getByTestId("email_continue_button").click();
 
-  await page.waitForURL("/login?loginData**", { waitUntil: "load" });
+  await page.waitForURL(`${baseUrl}/login?loginData**`, {
+    waitUntil: "load",
+  });
 
   await page.fill("[name='password']", "qwerty123");
   await page.getByTestId("password_input_eye_off_icon").click();
@@ -189,7 +182,7 @@ test("link invite login success", async ({ page, mockRequest }) => {
   ]);
 
   await page.getByTestId("login_button").click();
-  await page.waitForURL("/", { waitUntil: "load" });
+  await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -198,18 +191,24 @@ test("link invite login success", async ({ page, mockRequest }) => {
   ]);
 });
 
-test("link invite login error", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-    HEADER_CONFIRM_WITHOUT_EMAIL,
-  ]);
-  await mockRequest.router([endpoints.getUserByEmail]);
-
-  await page.goto(URL_WITH_PARAMS);
+test("link invite login error", async ({
+  page,
+  baseUrl,
+  port,
+  clientRequestInterceptor,
+}) => {
+  clientRequestInterceptor.use(
+    selfGetByEmailHandler(port),
+    loginHandler(port, 404),
+  );
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("email-input-invite").fill("mail@mail.com");
   await page.getByTestId("email_continue_button").click();
 
-  await page.waitForURL("/login?loginData**", { waitUntil: "load" });
+  await page.waitForURL(`${baseUrl}/login?loginData**`, {
+    waitUntil: "load",
+  });
 
   await page.fill("[name='password']", "123");
 
@@ -224,13 +223,12 @@ test("link invite login error", async ({ page, mockRequest }) => {
 
 test("link invite registration success standalone", async ({
   page,
-  mockRequest,
+  baseUrl,
+  port,
+  clientRequestInterceptor,
 }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-    HEADER_CONFIRM_WITHOUT_EMAIL,
-  ]);
-  await mockRequest.router([endpoints.createUser, endpoints.login]);
-  await page.goto(URL_WITH_PARAMS);
+  clientRequestInterceptor.use(selfGetByEmailHandler(port, 404));
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("email-input-invite").fill("mail@mail.com");
   await page.getByTestId("email_continue_button").click();
@@ -246,8 +244,10 @@ test("link invite registration success standalone", async ({
     "link-invite-registration-success-standalone.png",
   ]);
 
-  await page.getByTestId("signup_button").click();
-  await page.waitForURL("/", { waitUntil: "load" });
+  await page.getByRole("button", { name: "Sign up" }).click();
+  await page.waitForURL(`${baseUrl}/`, {
+    waitUntil: "load",
+  });
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -258,15 +258,17 @@ test("link invite registration success standalone", async ({
 
 test("link invite registration success no standalone", async ({
   page,
-  mockRequest,
+  port,
+  clientRequestInterceptor,
+  serverRequestInterceptor,
+  baseUrl,
 }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-    HEADER_NO_STANDALONE_SETTINGS,
-    HEADER_CONFIRM_WITHOUT_EMAIL,
-  ]);
+  clientRequestInterceptor.use(selfGetByEmailHandler(port, 404));
+  serverRequestInterceptor.use(
+    settingsHandler(port, TypeSettings.NoStandalone),
+  );
 
-  await mockRequest.router([endpoints.createUser, endpoints.login]);
-  await page.goto(URL_WITH_PARAMS);
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("email-input-invite").fill("mail@mail.com");
   await page.getByTestId("email_continue_button").click();
@@ -286,7 +288,7 @@ test("link invite registration success no standalone", async ({
   ]);
 
   await page.getByTestId("signup_button").click();
-  await page.waitForURL("/", { waitUntil: "load" });
+  await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -297,12 +299,12 @@ test("link invite registration success no standalone", async ({
 
 test("link invite registration error standalone", async ({
   page,
-  mockRequest,
+  baseUrl,
+  port,
+  clientRequestInterceptor,
 }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-    HEADER_CONFIRM_WITHOUT_EMAIL,
-  ]);
-  await page.goto(URL_WITH_PARAMS);
+  clientRequestInterceptor.use(selfGetByEmailHandler(port, 404));
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("email-input-invite").fill("mail@mail.com");
   await page.getByTestId("email_continue_button").click();
@@ -320,14 +322,17 @@ test("link invite registration error standalone", async ({
 
 test("link invite registration error no standalone", async ({
   page,
-  mockRequest,
+  port,
+  clientRequestInterceptor,
+  serverRequestInterceptor,
+  baseUrl,
 }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-    HEADER_NO_STANDALONE_SETTINGS,
-    HEADER_CONFIRM_WITHOUT_EMAIL,
-  ]);
+  clientRequestInterceptor.use(selfGetByEmailHandler(port, 404));
+  serverRequestInterceptor.use(
+    settingsHandler(port, TypeSettings.NoStandalone),
+  );
 
-  await page.goto(URL_WITH_PARAMS);
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("email-input-invite").fill("mail@mail.com");
   await page.getByTestId("email_continue_button").click();

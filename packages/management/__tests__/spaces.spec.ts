@@ -25,22 +25,30 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import {
-  endpoints,
-  HEADER_EMPTY_PORTAL,
-  HEADER_UNCOMPLETED_TENANT,
-} from "@docspace/shared/__mocks__/e2e";
-
+  colorThemeHandler,
+  getPortalApiHandler,
+  registerHandler,
+  removePortalHandler,
+  setDomainHandler,
+  settingsHandler,
+  TypeSettings,
+} from "@docspace/shared/__mocks__/handlers";
 import { expect, test } from "./fixtures/base";
 
 test.describe("Spaces", () => {
-  test.beforeEach(async ({ mockRequest }) => {
-    await mockRequest.router([endpoints.colorTheme]);
+  test.beforeEach(async ({ serverRequestInterceptor, port }) => {
+    serverRequestInterceptor.use(colorThemeHandler(port));
   });
 
-  test("should configuration spaces state", async ({ page, mockRequest }) => {
-    await mockRequest.setHeaders("/management/spaces", [HEADER_EMPTY_PORTAL]);
+  test("should configuration spaces state", async ({
+    page,
+    baseUrl,
+    serverRequestInterceptor,
+    port,
+  }) => {
+    serverRequestInterceptor.use(getPortalApiHandler(port, true));
 
-    await page.goto("/management/spaces");
+    await page.goto(`${baseUrl}/management/spaces`);
 
     await expect(
       page.getByTestId("configuration-spaces-wrapper"),
@@ -52,12 +60,19 @@ test.describe("Spaces", () => {
     ]);
   });
 
-  test("should multiple spaces state", async ({ page, mockRequest }) => {
-    await mockRequest.setHeaders("/management/spaces", [
-      HEADER_UNCOMPLETED_TENANT,
-    ]);
+  test("should multiple spaces state", async ({
+    page,
+    baseUrl,
+    serverRequestInterceptor,
+    port,
+  }) => {
+    // Override to return portals with uncompleted tenant
+    serverRequestInterceptor.use(
+      getPortalApiHandler(port, false, true),
+      settingsHandler(port, TypeSettings.Connected),
+    );
 
-    await page.goto("/management/spaces");
+    await page.goto(`${baseUrl}/management/spaces`);
 
     await expect(page.getByTestId("multiple-spaces-wrapper")).toBeVisible();
     await expect(page).toHaveScreenshot([
@@ -67,10 +82,18 @@ test.describe("Spaces", () => {
     ]);
   });
 
-  test("should create second space", async ({ page, mockRequest }) => {
-    await mockRequest.router([endpoints.registerPortal]);
+  test("should create second space", async ({
+    page,
+    baseUrl,
+    serverRequestInterceptor,
+    port,
+  }) => {
+    serverRequestInterceptor.use(
+      registerHandler(port),
+      settingsHandler(port, TypeSettings.Connected),
+    );
 
-    await page.goto("/management/spaces");
+    await page.goto(`${baseUrl}/management/spaces`);
 
     await expect(page.getByTestId("multiple-spaces-wrapper")).toBeVisible();
 
@@ -92,9 +115,11 @@ test.describe("Spaces", () => {
       "spaces-create-space-modal.png",
     ]);
 
-    await mockRequest.setHeaders("**/management/spaces**", [
-      HEADER_UNCOMPLETED_TENANT,
-    ]);
+    // Override to return portals with uncompleted tenant after creation
+    serverRequestInterceptor.use(
+      getPortalApiHandler(port, false, true),
+      settingsHandler(port, TypeSettings.Connected),
+    );
 
     await createPortalButton.click();
 
@@ -105,13 +130,20 @@ test.describe("Spaces", () => {
     ]);
   });
 
-  test("should delete second space", async ({ page, mockRequest }) => {
-    await mockRequest.setHeaders("/management/spaces", [
-      HEADER_UNCOMPLETED_TENANT,
-    ]);
-    await mockRequest.router([endpoints.removePortal]);
+  test("should delete second space", async ({
+    page,
+    baseUrl,
+    serverRequestInterceptor,
+    port,
+  }) => {
+    // Start with uncompleted tenant
+    serverRequestInterceptor.use(getPortalApiHandler(port, false, true));
+    serverRequestInterceptor.use(
+      removePortalHandler(port),
+      settingsHandler(port, TypeSettings.Connected),
+    );
 
-    await page.goto("/management/spaces");
+    await page.goto(`${baseUrl}/management/spaces`);
 
     await expect(page.getByTestId("multiple-spaces-wrapper")).toBeVisible();
 
@@ -129,7 +161,8 @@ test.describe("Spaces", () => {
       "spaces-delete-space-modal.png",
     ]);
 
-    await mockRequest.setHeaders("**/management/spaces**", []);
+    // Override to return default portals after deletion
+    serverRequestInterceptor.use(getPortalApiHandler(port));
 
     await deleteSpaceButton.click();
 
@@ -140,13 +173,20 @@ test.describe("Spaces", () => {
     ]);
   });
 
-  test("should change domain dialog render", async ({ page, mockRequest }) => {
-    await mockRequest.setHeaders("/management/spaces", [
-      HEADER_UNCOMPLETED_TENANT,
-    ]); 
-    await mockRequest.router([endpoints.setDomain]);
+  test("should change domain dialog render", async ({
+    page,
+    baseUrl,
+    serverRequestInterceptor,
+    port,
+  }) => {
+    // Start with uncompleted tenant
+    serverRequestInterceptor.use(getPortalApiHandler(port, false, true));
+    serverRequestInterceptor.use(
+      setDomainHandler(port),
+      settingsHandler(port, TypeSettings.Connected),
+    );
 
-    await page.goto("/management/spaces");
+    await page.goto(`${baseUrl}/management/spaces`);
 
     await expect(page.getByTestId("multiple-spaces-wrapper")).toBeVisible();
 

@@ -23,38 +23,33 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import { endpoints } from "@docspace/shared/__mocks__/e2e";
 
-import { expect, test } from "./fixtures/base";
+import {
+  settingsHandler,
+  TypeSettings,
+  selfActivationStatusHandler,
+  selfByTypeHandler,
+  aiAgentsHandler,
+} from "@docspace/shared/__mocks__/handlers";
+import { expect, test, TEST_PORT } from "./fixtures/base";
+import { ShareAccessRights } from "@docspace/shared/enums";
 
 test.describe("DocAdmin context menu", () => {
   test.beforeEach(async ({ mockRequest }) => {
-    await mockRequest.router([
-      endpoints.aiConfig,
-      endpoints.settingsWithQuery,
-      endpoints.colorTheme,
-      endpoints.build,
-      endpoints.capabilities,
-      endpoints.selfEmailActivatedClient,
-      endpoints.tariff,
-      endpoints.quota,
-      endpoints.additionalSettings,
-      endpoints.getPortal,
-      endpoints.companyInfo,
-      endpoints.cultures,
-      endpoints.root,
-      endpoints.invitationSettings,
-      endpoints.filesSettings,
-      endpoints.webPlugins,
-
-      endpoints.thirdPartyCapabilities,
-      endpoints.thirdParty,
-      endpoints.docService,
-    ]);
+    mockRequest.use(
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      selfByTypeHandler(TEST_PORT),
+    );
   });
 
   test("Doc admin agent manager", async ({ page, mockRequest }) => {
-    await mockRequest.router([endpoints.aiAgentsDocAdminManager]);
+    mockRequest.use(
+      aiAgentsHandler(TEST_PORT, {
+        aiAccess: ShareAccessRights.RoomManager,
+        isDocAdmin: true,
+      }),
+    );
 
     await page.goto("/ai-agents/filter?folder=224866");
 
@@ -78,7 +73,12 @@ test.describe("DocAdmin context menu", () => {
   });
 
   test("Doc admin content creator", async ({ page, mockRequest }) => {
-    await mockRequest.router([endpoints.aiAgentsDocAdminCreator]);
+    mockRequest.use(
+      aiAgentsHandler(TEST_PORT, {
+        aiAccess: ShareAccessRights.Collaborator,
+        isDocAdmin: true,
+      }),
+    );
 
     await page.goto("/ai-agents/filter?folder=224866");
 
@@ -98,7 +98,13 @@ test.describe("DocAdmin context menu", () => {
   });
 
   test("Doc admin out of room", async ({ page, mockRequest }) => {
-    await mockRequest.router([endpoints.aiAgentsDocAdminOutOfRoom]);
+    mockRequest.use(
+      aiAgentsHandler(TEST_PORT, {
+        aiAccess: ShareAccessRights.None,
+        inRoom: false,
+        isDocAdmin: true,
+      }),
+    );
 
     await page.goto("/ai-agents/filter?folder=224866");
 
@@ -120,34 +126,21 @@ test.describe("DocAdmin context menu", () => {
 
 test.describe("RoomAdmin context menu", () => {
   test.beforeEach(async ({ mockRequest }) => {
-    await mockRequest.router([
-      endpoints.aiConfig,
-      endpoints.settingsWithQuery,
-      endpoints.colorTheme,
-      endpoints.build,
-      endpoints.capabilities,
-      endpoints.selfRoomAdminOnly,
-      endpoints.tariff,
-      endpoints.quota,
-      endpoints.additionalSettings,
-      endpoints.getPortal,
-      endpoints.companyInfo,
-      endpoints.cultures,
-      endpoints.root,
-      endpoints.invitationSettings,
-      endpoints.filesSettings,
-      endpoints.webPlugins,
-
-      endpoints.thirdPartyCapabilities,
-      endpoints.thirdParty,
-      endpoints.docService,
-    ]);
+    mockRequest.use(
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      selfByTypeHandler(TEST_PORT, "roomAdmin"),
+    );
   });
 
-  test("Agent owner", async ({ page, mockRequest }) => {
-    await mockRequest.router([endpoints.aiAgentsOwner]);
+  test("Agent owner", async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(
+      aiAgentsHandler(TEST_PORT, {
+        aiAccess: ShareAccessRights.None,
+      }),
+    );
 
-    await page.goto("/ai-agents/filter?folder=224866");
+    await page.goto(`${baseUrl}/ai-agents/filter?folder=224866`);
 
     const table = page.getByTestId("table-body");
     await expect(table).toBeVisible();
@@ -168,10 +161,14 @@ test.describe("RoomAdmin context menu", () => {
     ]);
   });
 
-  test("Agent manager", async ({ page, mockRequest }) => {
-    await mockRequest.router([endpoints.aiAgentsManager]);
+  test("Agent manager", async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(
+      aiAgentsHandler(TEST_PORT, {
+        aiAccess: ShareAccessRights.RoomManager,
+      }),
+    );
 
-    await page.goto("/ai-agents/filter?folder=224866");
+    await page.goto(`${baseUrl}/ai-agents/filter?folder=224866`);
 
     const table = page.getByTestId("table-body");
     await expect(table).toBeVisible();
@@ -192,10 +189,14 @@ test.describe("RoomAdmin context menu", () => {
     ]);
   });
 
-  test("Content creator", async ({ page, mockRequest }) => {
-    await mockRequest.router([endpoints.aiAgentsCreator]);
+  test("Content creator", async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(
+      aiAgentsHandler(TEST_PORT, {
+        aiAccess: ShareAccessRights.Collaborator,
+      }),
+    );
 
-    await page.goto("/ai-agents/filter?folder=224866");
+    await page.goto(`${baseUrl}/ai-agents/filter?folder=224866`);
 
     const table = page.getByTestId("table-body");
     await expect(table).toBeVisible();

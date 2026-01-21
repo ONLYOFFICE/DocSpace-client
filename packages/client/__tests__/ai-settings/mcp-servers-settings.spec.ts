@@ -26,46 +26,40 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { expect, test } from "../fixtures/base";
-import { endpoints } from "@docspace/shared/__mocks__/e2e";
-import { PATH_AI_SERVERS } from "@docspace/shared/__mocks__/e2e/handlers/ai";
+import { expect, test, TEST_PORT } from "../fixtures/base";
 import type { TServer } from "@docspace/shared/api/ai/types";
 import { ServerType } from "@docspace/shared/api/ai/enums";
+import { 
+  aiProvidersHandler,
+  aiServerPutHandler,
+  aiServerStatusPutHandler,
+  selfActivationStatusHandler,
+  settingsHandler,
+  TypeSettings,
+  aiServersDeleteHandler,
+  aiServersGetHandler,
+  aiServersPostHandler
+} from "@docspace/shared/__mocks__/handlers";
+import { PATH_AI_SERVERS } from "@docspace/shared/__mocks__/handlers/ai/servers";
 
 test.describe("MCP servers", () => {
-  test.beforeEach(async ({ mockRequest }) => {
-    await mockRequest.router([
-      endpoints.aiConfig,
-      endpoints.settingsWithQuery,
-      endpoints.colorTheme,
-      endpoints.build,
-      endpoints.capabilities,
-      endpoints.selfEmailActivatedClient,
-      endpoints.tariff,
-      endpoints.quota,
-      endpoints.additionalSettings,
-      endpoints.getPortal,
-      endpoints.companyInfo,
-      endpoints.cultures,
-      endpoints.root,
-      endpoints.invitationSettings,
-      endpoints.filesSettings,
-      endpoints.webPlugins,
-      endpoints.thirdPartyCapabilities,
-      endpoints.thirdParty,
-      endpoints.docService,
-    ]);
+  test.beforeEach( ({ mockRequest }) => {
+    mockRequest.use(
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true)
+    );
   });
 
   test("should navigate to mcp servers page and render mcp servers lists", async ({
     page,
     mockRequest,
+    baseUrl
   }) => {
-    await mockRequest.router([
-      endpoints.aiServersList,
-      endpoints.aiProvidersList,
-    ]);
-    await page.goto("/portal-settings/ai-settings/servers");
+    mockRequest.use(
+      aiServersGetHandler(TEST_PORT),
+      aiProvidersHandler(TEST_PORT),
+    );
+    await page.goto(`${baseUrl}/portal-settings/ai-settings/servers`);
 
     await expect(page.getByTestId("custom-mcp-list")).toBeVisible();
     await expect(page.getByTestId("system-mcp-list")).toBeVisible();
@@ -80,12 +74,13 @@ test.describe("MCP servers", () => {
   test("should render disabled elements on mcp servers page if there are no ai providers", async ({
     page,
     mockRequest,
+    baseUrl
   }) => {
-    await mockRequest.router([
-      endpoints.aiServersList,
-      endpoints.aiProvidersEmptyList,
-    ]);
-    await page.goto("/portal-settings/ai-settings/servers");
+    mockRequest.use(
+      aiServersGetHandler(TEST_PORT),
+      aiProvidersHandler(TEST_PORT, false, true),
+    );
+    await page.goto(`${baseUrl}/portal-settings/ai-settings/servers`);
 
     const addMcpButton = page.getByTestId("add-mcp-button");
     await expect(addMcpButton).toBeDisabled();
@@ -115,12 +110,13 @@ test.describe("MCP servers", () => {
   test("should render enabled elements on mcp servers page if there are ai providers", async ({
     page,
     mockRequest,
+    baseUrl
   }) => {
-    await mockRequest.router([
-      endpoints.aiServersList,
-      endpoints.aiProvidersList,
-    ]);
-    await page.goto("/portal-settings/ai-settings/servers");
+    mockRequest.use(
+      aiServersGetHandler(TEST_PORT),
+      aiProvidersHandler(TEST_PORT),
+    );
+    await page.goto(`${baseUrl}/portal-settings/ai-settings/servers`);
 
     const addMcpButton = page.getByTestId("add-mcp-button");
     await expect(addMcpButton).toBeEnabled();
@@ -145,13 +141,13 @@ test.describe("MCP servers", () => {
     ]);
   });
 
-  test("should add mcp server", async ({ page, mockRequest }) => {
-    await mockRequest.router([
-      endpoints.aiServersList,
-      endpoints.aiProvidersList,
-      endpoints.createAiServer,
-    ]);
-    await page.goto("/portal-settings/ai-settings/servers");
+  test("should add mcp server", async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(
+      aiServersGetHandler(TEST_PORT),
+      aiProvidersHandler(TEST_PORT),
+      aiServersPostHandler(TEST_PORT),  
+    );
+    await page.goto(`${baseUrl}/portal-settings/ai-settings/servers`);
 
     const addMcpButton = page.getByTestId("add-mcp-button");
     await addMcpButton.click();
@@ -227,19 +223,19 @@ test.describe("MCP servers", () => {
     ]);
   });
 
-  test("should delete mcp server", async ({ page, mockRequest }) => {
-    await mockRequest.router([
-      endpoints.aiServersList,
-      endpoints.aiProvidersList,
-      endpoints.deleteAiServer,
-    ]);
+  test("should delete mcp server", async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(
+      aiServersGetHandler(TEST_PORT),
+      aiProvidersHandler(TEST_PORT),
+      aiServersDeleteHandler(TEST_PORT),
+    );
 
     const listRespPromise = page.waitForResponse(
       (r) =>
         r.url().includes(PATH_AI_SERVERS) && r.request().method() === "GET",
     );
 
-    await page.goto("/portal-settings/ai-settings/servers");
+    await page.goto(`${baseUrl}/portal-settings/ai-settings/servers`);
 
     const listResp = await listRespPromise;
     const body = await listResp.json();
@@ -286,19 +282,19 @@ test.describe("MCP servers", () => {
     ]);
   });
 
-  test("should update mcp server", async ({ page, mockRequest }) => {
-    await mockRequest.router([
-      endpoints.aiServersList,
-      endpoints.aiProvidersList,
-      endpoints.updateAiServer,
-    ]);
+  test("should update mcp server", async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(
+      aiServersGetHandler(TEST_PORT),
+      aiProvidersHandler(TEST_PORT),
+      aiServerPutHandler(TEST_PORT),
+    );
 
     const listRespPromise = page.waitForResponse(
       (r) =>
         r.url().includes(PATH_AI_SERVERS) && r.request().method() === "GET",
     );
 
-    await page.goto("/portal-settings/ai-settings/servers");
+    await page.goto(`${baseUrl}/portal-settings/ai-settings/servers`);
 
     const listResp = await listRespPromise;
     const body = await listResp.json();
@@ -386,20 +382,20 @@ test.describe("MCP servers", () => {
     ]);
   });
 
-  test("should disable mcp server", async ({ page, mockRequest }) => {
-    await mockRequest.router([
-      endpoints.aiServersList,
-      endpoints.aiProvidersList,
-      endpoints.updateAiServer,
-      endpoints.disableAiServer,
-    ]);
+  test("should disable mcp server", async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(
+      aiServersGetHandler(TEST_PORT),
+      aiProvidersHandler(TEST_PORT),
+      aiServerStatusPutHandler(TEST_PORT, 'disable'),
+      aiServerPutHandler(TEST_PORT),
+    );
 
     const listRespPromise = page.waitForResponse(
       (r) =>
         r.url().includes(PATH_AI_SERVERS) && r.request().method() === "GET",
     );
 
-    await page.goto("/portal-settings/ai-settings/servers");
+    await page.goto(`${baseUrl}/portal-settings/ai-settings/servers`);
 
     const listResp = await listRespPromise;
     const body = await listResp.json();
@@ -444,20 +440,20 @@ test.describe("MCP servers", () => {
     ]);
   });
 
-  test("should enable mcp server", async ({ page, mockRequest }) => {
-    await mockRequest.router([
-      endpoints.aiServersListDisabled,
-      endpoints.aiProvidersList,
-      endpoints.updateAiServer,
-      endpoints.enableAiServer,
-    ]);
+  test("should enable mcp server", async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(
+      aiServersGetHandler(TEST_PORT, 'disabled'),
+      aiProvidersHandler(TEST_PORT),
+      aiServerStatusPutHandler(TEST_PORT, 'enable'),
+      aiServerPutHandler(TEST_PORT),
+    );
 
     const listRespPromise = page.waitForResponse(
       (r) =>
         r.url().includes(PATH_AI_SERVERS) && r.request().method() === "GET",
     );
 
-    await page.goto("/portal-settings/ai-settings/servers");
+    await page.goto(`${baseUrl}/portal-settings/ai-settings/servers`);
 
     const listResp = await listRespPromise;
     const body = await listResp.json();
@@ -499,15 +495,16 @@ test.describe("MCP servers", () => {
   test("should render alert icon and headers inputs in error state if mcp needs reset", async ({
     page,
     mockRequest,
+    baseUrl,
   }) => {
-    await mockRequest.router([
-      endpoints.aiServersListNeedReset,
-      endpoints.aiProvidersList,
-      endpoints.updateAiServer,
-      endpoints.enableAiServer,
-    ]);
+    mockRequest.use(
+      aiServersGetHandler(TEST_PORT, 'needReset'),
+      aiProvidersHandler(TEST_PORT),
+      aiServerStatusPutHandler(TEST_PORT, 'enable'),
+      aiServerPutHandler(TEST_PORT),
+    );
 
-    await page.goto("/portal-settings/ai-settings/servers");
+    await page.goto(`${baseUrl}/portal-settings/ai-settings/servers`);
 
     const customMcpTiles = page
       .getByTestId("custom-mcp-list")

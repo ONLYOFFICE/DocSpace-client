@@ -75,11 +75,4 @@ export default defineConfig({
       use: { ...devices["Desktop Safari"] },
     },  */
   ],
-
-  /* Run your local dev server before starting the tests */
-  webServer: {
-    command: "pnpm run test:start",
-    port: PORT,
-    timeout: 1000 * 60 * 5,
-  },
 });

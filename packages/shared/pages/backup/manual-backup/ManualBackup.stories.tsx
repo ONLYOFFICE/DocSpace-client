@@ -27,12 +27,14 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { createGetRoomsHandler } from "../../../__mocks__/storybook/handlers/files/rooms";
 import {
-  createGetFolderHandler,
-  createGetFolderInfoHandler,
-} from "../../../__mocks__/storybook/handlers/files/folders";
-import { createGetFolderTreeHandler } from "../../../__mocks__/storybook/handlers/files/foldersTree";
+  createRoomHandler,
+  folderHandler,
+  folderInfoHandler,
+  foldersTreeHandler,
+  createStartBackupHandler,
+  TypeFolder,
+} from "../../../__mocks__/handlers";
 
 import ManualBackup from "./index";
 import {
@@ -45,7 +47,6 @@ import {
 } from "../mockData";
 import type { ManualBackupProps } from "./ManualBackup.types";
 import { DOCUMENTS } from "./ManualBackup.constants";
-import { createStartBackupHandler } from "../../../__mocks__/storybook/handlers/portal/backup";
 
 const ManualBackupWithState = (props: ManualBackupProps) => {
   const selectedThirdPartyAccountProps =
@@ -72,11 +73,11 @@ const meta: Meta<typeof ManualBackup> = {
     },
     msw: {
       handlers: [
-        createGetFolderTreeHandler(),
-        createGetRoomsHandler(),
-        createGetFolderInfoHandler(),
-        createGetFolderHandler(true),
-        createStartBackupHandler(),
+        createRoomHandler(""),
+        foldersTreeHandler(""),
+        folderInfoHandler(""),
+        folderHandler("", TypeFolder.IsEmpty),
+        createStartBackupHandler(""),
       ],
     },
   },

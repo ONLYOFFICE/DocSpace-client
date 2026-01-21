@@ -26,6 +26,7 @@
 
 const { createServer } = require("http");
 const next = require("next");
+const config = require("./config/config.json");
 
 import("./logger.mjs").then(({ logger }) => {
   const dev = process.env.NODE_ENV === "development";
@@ -40,21 +41,21 @@ import("./logger.mjs").then(({ logger }) => {
   };
 
   const port = (argv("app.port") || process.env.PORT) ?? 5011;
-  const hostname = "0.0.0.0";
+  const hostname = (argv("app.hostname") || config.HOSTNAME) ?? "0.0.0.0";
 
   // when using middleware `hostname` and `port` must be provided below
   const app = next({ dev, hostname, port });
   const handle = app.getRequestHandler();
 
-	  app.prepare().then(() => {
-	    createServer(async (req, res) => {
-	      try {
-	        await handle(req, res);
-	      } catch (err) {
-	        console.error("Error occurred handling", req.url, err);
-	        logger.error(`url: ${req.url}, error: ${err} Error occurred handling`);
-	        res.statusCode = 500;
-	        res.end("internal server error");
+  app.prepare().then(() => {
+    createServer(async (req, res) => {
+      try {
+        await handle(req, res);
+      } catch (err) {
+        console.error("Error occurred handling", req.url, err);
+        logger.error(`url: ${req.url}, error: ${err} Error occurred handling`);
+        res.statusCode = 500;
+        res.end("internal server error");
       }
     })
       .once("error", (err) => {

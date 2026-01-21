@@ -23,40 +23,32 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import { endpoints } from "@docspace/shared/__mocks__/e2e";
 
-import { expect, test } from "./fixtures/base";
+import {
+  settingsHandler,
+  TypeSettings,
+  selfActivationStatusHandler,
+  myDocumentsHandler,
+  myHandler,
+  rootHandler,
+  filesSettingsHandler,
+} from "@docspace/shared/__mocks__/handlers";
+import { expect, test, TEST_PORT } from "./fixtures/base";
 
 test.describe("My documents context menu", () => {
-  test.beforeEach(async ({ mockRequest }) => {
-    await mockRequest.router([
-      endpoints.aiConfig,
-      endpoints.settingsWithQuery,
-      endpoints.colorTheme,
-      endpoints.build,
-      endpoints.capabilities,
-      endpoints.selfEmailActivatedClient,
-      endpoints.tariff,
-      endpoints.quota,
-      endpoints.additionalSettings,
-      endpoints.getPortal,
-      endpoints.companyInfo,
-      endpoints.cultures,
-      endpoints.root,
-      endpoints.invitationSettings,
-      endpoints.filesSettings,
-      endpoints.webPlugins,
-
-      endpoints.thirdPartyCapabilities,
-      endpoints.thirdParty,
-      endpoints.docService,
-    ]);
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      filesSettingsHandler(TEST_PORT),
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      myHandler(TEST_PORT, true),
+      myDocumentsHandler(TEST_PORT, true),
+    );
   });
 
-  test("Folder menu", async ({ page, mockRequest }) => {
-    await mockRequest.router([endpoints.myDocumentsList]);
-
-    await page.goto("/rooms/personal/filter?folder=12764");
+  test("Folder menu", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/rooms/personal/filter?folder=12764`);
 
     const table = page.getByTestId("table-body");
     await expect(table).toBeVisible();
@@ -90,10 +82,8 @@ test.describe("My documents context menu", () => {
     ]);
   });
 
-  test("DOCX Document menu", async ({ page, mockRequest }) => {
-    await mockRequest.router([endpoints.myDocumentsList]);
-
-    await page.goto("/rooms/personal/filter?folder=12764");
+  test("DOCX Document menu", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/rooms/personal/filter?folder=12764`);
 
     const table = page.getByTestId("table-body");
     await expect(table).toBeVisible();
@@ -148,10 +138,8 @@ test.describe("My documents context menu", () => {
     ]);
   });
 
-  test("PPTX Presentation menu", async ({ page, mockRequest }) => {
-    await mockRequest.router([endpoints.myDocumentsList]);
-
-    await page.goto("/rooms/personal/filter?folder=12764");
+  test("PPTX Presentation menu", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/rooms/personal/filter?folder=12764`);
 
     const table = page.getByTestId("table-body");
     await expect(table).toBeVisible();
@@ -206,10 +194,8 @@ test.describe("My documents context menu", () => {
     ]);
   });
 
-  test("XLSX Spreadsheet menu", async ({ page, mockRequest }) => {
-    await mockRequest.router([endpoints.myDocumentsList]);
-
-    await page.goto("/rooms/personal/filter?folder=12764");
+  test("XLSX Spreadsheet menu", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/rooms/personal/filter?folder=12764`);
 
     const table = page.getByTestId("table-body");
     await expect(table).toBeVisible();
@@ -264,10 +250,8 @@ test.describe("My documents context menu", () => {
     ]);
   });
 
-  test("PDF Form menu", async ({ page, mockRequest }) => {
-    await mockRequest.router([endpoints.myDocumentsList]);
-
-    await page.goto("/rooms/personal/filter?folder=12764");
+  test("PDF Form menu", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/rooms/personal/filter?folder=12764`);
 
     const table = page.getByTestId("table-body");
     await expect(table).toBeVisible();
@@ -322,10 +306,8 @@ test.describe("My documents context menu", () => {
     ]);
   });
 
-  test("Image menu", async ({ page, mockRequest }) => {
-    await mockRequest.router([endpoints.myDocumentsList]);
-
-    await page.goto("/rooms/personal/filter?folder=12764");
+  test("Image menu", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/rooms/personal/filter?folder=12764`);
 
     const table = page.getByTestId("table-body");
     await expect(table).toBeVisible();
@@ -370,10 +352,8 @@ test.describe("My documents context menu", () => {
     ]);
   });
 
-  test("Media menu", async ({ page, mockRequest }) => {
-    await mockRequest.router([endpoints.myDocumentsList]);
-
-    await page.goto("/rooms/personal/filter?folder=12764");
+  test("Media menu", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/rooms/personal/filter?folder=12764`);
 
     const table = page.getByTestId("table-body");
     await expect(table).toBeVisible();

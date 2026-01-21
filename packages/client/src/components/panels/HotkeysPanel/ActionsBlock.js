@@ -24,62 +24,62 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import { Row } from "@docspace/shared/components/rows";
 import { Text } from "@docspace/shared/components/text";
+import styles from "./HotkeysPanel.module.scss";
 
 const ActionsBlock = ({ t, textStyles, keyTextStyles, CtrlKey }) => {
   return (
     <>
-      <Row className="hotkeys_row">
+      <Row className={styles.hotkeysRow}>
         <>
           <Text {...textStyles}>{t("HotkeysOpen")}</Text>
           <Text {...keyTextStyles}>Enter</Text>
         </>
       </Row>
-      <Row className="hotkeys_row">
+      <Row className={styles.hotkeysRow}>
         <>
           <Text {...textStyles}>{t("HotkeysRemove")}</Text>
           <Text {...keyTextStyles}>{`# ${t("Common:Or")} Delete`}</Text>
         </>
       </Row>
-      {/* <Row className="hotkeys_row">
+      {/* <Row className={styles.hotkeysRow}>
         <>
           <Text {...textStyles}>{t("HotkeysUndoLastAction")}</Text>
           <Text {...keyTextStyles}>{CtrlKey}+z</Text>
         </>
       </Row>
-      <Row className="hotkeys_row">
+      <Row className={styles.hotkeysRow}>
         <>
           <Text {...textStyles}>{t("HotkeysRedoLastUndoneAction")}</Text>
           <Text {...keyTextStyles}>{CtrlKey}+Shift+z</Text>
         </>
       </Row> */}
-      <Row className="hotkeys_row">
+      <Row className={styles.hotkeysRow}>
         <>
           <Text {...textStyles}>{t("HotkeysCopySelected")}</Text>
           <Text {...keyTextStyles}>{`${CtrlKey} + c`}</Text>
         </>
       </Row>
-      <Row className="hotkeys_row">
+      <Row className={styles.hotkeysRow}>
         <>
           <Text {...textStyles}>{t("HotkeysPasteSelected")}</Text>
           <Text {...keyTextStyles}>{`${CtrlKey} + v`}</Text>
         </>
       </Row>
-      <Row className="hotkeys_row">
+      <Row className={styles.hotkeysRow}>
         <>
           <Text {...textStyles}>{t("HotkeysCutSelected")}</Text>
           <Text {...keyTextStyles}>{`${CtrlKey} + x`}</Text>
         </>
       </Row>
-      <Row className="hotkeys_row">
+      <Row className={styles.hotkeysRow}>
         <>
           <Text {...textStyles}>{t("HotkeysRenameSelected")}</Text>
           <Text {...keyTextStyles}>F2</Text>
         </>
       </Row>
-      <Row className="hotkeys_row">
+      <Row className={styles.hotkeysRow}>
         <>
           <Text {...textStyles}>{t("Common:AskAI")}</Text>
           <Text {...keyTextStyles}>{`${CtrlKey} + i`}</Text>

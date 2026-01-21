@@ -24,16 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import {
-  endpoints,
-  HEADER_LIST_CAPABILITIES,
-  successClient,
-} from "@docspace/shared/__mocks__/e2e";
+import { capabilitiesHandler } from "@docspace/shared/__mocks__/handlers";
 
 import { expect, test } from "./fixtures/base";
+import { successClient } from "@docspace/shared/__mocks__/handlers/oauth/client";
 
-test("oauth2 login render", async ({ page }) => {
-  await page.goto(`/login?client_id=${successClient.client_id}`);
+test("oauth2 login render", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}/login?client_id=${successClient.client_id}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -42,19 +39,23 @@ test("oauth2 login render", async ({ page }) => {
   ]);
 });
 
-test("oauth2 with list render", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders(`/login?client_id=${successClient.client_id}`, [
-    HEADER_LIST_CAPABILITIES,
-  ]);
-  await mockRequest.router([endpoints.oauthSignIn]);
+test("oauth2 with list render", async ({
+  page,
+  serverRequestInterceptor,
+  port,
+  baseUrl,
+}) => {
+  serverRequestInterceptor.use(capabilitiesHandler(port, true));
 
-  await page.goto(`/login?client_id=${successClient.client_id}`);
+  await page.goto(`${baseUrl}/login?client_id=${successClient.client_id}`);
 
   await page.fill("[name='login']", "email@mail.ru");
   await page.fill("[name='password']", "qwerty123");
 
   await page.getByTestId("login_button").click();
-  await page.waitForURL("/login/tenant-list?**", { waitUntil: "load" });
+  await page.waitForURL(`${baseUrl}/login/tenant-list?**`, {
+    waitUntil: "load",
+  });
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -63,23 +64,27 @@ test("oauth2 with list render", async ({ page, mockRequest }) => {
   ]);
 });
 
-test("oauth2 back button after list render", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders(`/login?client_id=${successClient.client_id}`, [
-    HEADER_LIST_CAPABILITIES,
-  ]);
-  await mockRequest.router([endpoints.oauthSignIn]);
+test("oauth2 back button after list render", async ({
+  page,
+  serverRequestInterceptor,
+  port,
+  baseUrl,
+}) => {
+  serverRequestInterceptor.use(capabilitiesHandler(port, true));
 
-  await page.goto(`/login?client_id=${successClient.client_id}`);
+  await page.goto(`${baseUrl}/login?client_id=${successClient.client_id}`);
 
   await page.fill("[name='login']", "email@mail.ru");
   await page.fill("[name='password']", "qwerty123");
 
   await page.getByTestId("login_button").click();
-  await page.waitForURL("/login/tenant-list?**", { waitUntil: "load" });
+  await page.waitForURL(`${baseUrl}/login/tenant-list?**`, {
+    waitUntil: "load",
+  });
 
   await page.getByTestId("back_to_login_button").click();
   await page.waitForURL(
-    `/login?type=oauth2&client_id=0aac3e2a-f41f-4fde-89d5-7208a13fbbc5`,
+    `${baseUrl}/login?type=oauth2&client_id=0aac3e2a-f41f-4fde-89d5-7208a13fbbc5`,
     {
       waitUntil: "load",
     },
@@ -128,7 +133,7 @@ test("oauth2 back button after list render", async ({ page, mockRequest }) => {
 //   });
 
 //   await context.clearCookies({ name: "asc_auth_key" });
-//   await mockRequest.router([endpoints.logout]);
+//   await clientRequestInterceptor.use([endpoints.logout]);
 
 //   await page.getByText("Not you?").click();
 //   await page.waitForURL(

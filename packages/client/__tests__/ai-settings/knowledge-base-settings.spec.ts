@@ -25,44 +25,36 @@
  * content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
-import { expect, test } from "../fixtures/base";
-import { endpoints } from "@docspace/shared/__mocks__/e2e";
-import { PATH_AI_CONFIG_VECTORIZATION } from "@docspace/shared/__mocks__/e2e/handlers/ai";
+import { 
+  aiProvidersHandler,
+  selfActivationStatusHandler,
+  settingsHandler,
+  TypeSettings,
+  aiVectorizationGetHandler,
+  aiVectorizationPutHandler, 
+ } from "@docspace/shared/__mocks__/handlers";
+import { expect, test, TEST_PORT } from "../fixtures/base";
+import {PATH_AI_CONFIG_VECTORIZATION } from "@docspace/shared/__mocks__/handlers/ai/vectorization";
+
 
 test.describe("Knowledge base", () => {
-  test.beforeEach(async ({ mockRequest }) => {
-    await mockRequest.router([
-      endpoints.aiConfig,
-      endpoints.settingsWithQuery,
-      endpoints.colorTheme,
-      endpoints.build,
-      endpoints.capabilities,
-      endpoints.selfEmailActivatedClient,
-      endpoints.tariff,
-      endpoints.quota,
-      endpoints.additionalSettings,
-      endpoints.getPortal,
-      endpoints.companyInfo,
-      endpoints.cultures,
-      endpoints.root,
-      endpoints.invitationSettings,
-      endpoints.filesSettings,
-      endpoints.webPlugins,
-      endpoints.thirdPartyCapabilities,
-      endpoints.thirdParty,
-      endpoints.docService,
-    ]);
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true)
+    );
   });
 
   test("should render knowledge settings page with disabled elements if there are no ai providers", async ({
     page,
     mockRequest,
+    baseUrl
   }) => {
-    await mockRequest.router([
-      endpoints.aiProvidersEmptyList,
-      endpoints.aiVectorizationSettingsDisabled,
-    ]);
-    await page.goto("/portal-settings/ai-settings/knowledge");
+    mockRequest.use(
+      aiProvidersHandler(TEST_PORT, false, true),
+      aiVectorizationGetHandler(TEST_PORT, "disabled"),
+    );
+    await page.goto(`${baseUrl}/portal-settings/ai-settings/knowledge`);
 
     const knowledgeForm = page.getByTestId("knowledge-form");
     await expect(knowledgeForm).toBeVisible();
@@ -93,12 +85,13 @@ test.describe("Knowledge base", () => {
   test("should render knowledge settings page with enabled engine combobox if there are ai providers", async ({
     page,
     mockRequest,
+    baseUrl
   }) => {
-    await mockRequest.router([
-      endpoints.aiProvidersList,
-      endpoints.aiVectorizationSettingsDisabled,
-    ]);
-    await page.goto("/portal-settings/ai-settings/knowledge");
+    mockRequest.use(
+      aiProvidersHandler(TEST_PORT),
+      aiVectorizationGetHandler(TEST_PORT, "disabled"),
+    );
+    await page.goto(`${baseUrl}/portal-settings/ai-settings/knowledge`);
 
     const knowledgeForm = page.getByTestId("knowledge-form");
     await expect(knowledgeForm).toBeVisible();
@@ -113,13 +106,13 @@ test.describe("Knowledge base", () => {
     ]);
   });
 
-  test("should set knowledge settings", async ({ page, mockRequest }) => {
-    await mockRequest.router([
-      endpoints.aiProvidersList,
-      endpoints.aiVectorizationSettingsDisabled,
-      endpoints.setVectorizationSettings,
-    ]);
-    await page.goto("/portal-settings/ai-settings/knowledge");
+  test("should set knowledge settings", async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(
+      aiProvidersHandler(TEST_PORT),
+      aiVectorizationGetHandler(TEST_PORT, "disabled"),
+      aiVectorizationPutHandler(TEST_PORT),
+    );
+    await page.goto(`${baseUrl}/portal-settings/ai-settings/knowledge`);
 
     const knowledgeForm = page.getByTestId("knowledge-form");
     await expect(knowledgeForm).toBeVisible();
@@ -183,13 +176,13 @@ test.describe("Knowledge base", () => {
     ]);
   });
 
-  test("should reset knowledge settings", async ({ page, mockRequest }) => {
-    await mockRequest.router([
-      endpoints.aiProvidersList,
-      endpoints.aiVectorizationSettingsEnabled,
-      endpoints.setVectorizationSettings,
-    ]);
-    await page.goto("/portal-settings/ai-settings/knowledge");
+  test("should reset knowledge settings", async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(
+      aiProvidersHandler(TEST_PORT),
+      aiVectorizationGetHandler(TEST_PORT, "enabled"),
+      aiVectorizationPutHandler(TEST_PORT),
+    );
+    await page.goto(`${baseUrl}/portal-settings/ai-settings/knowledge`);
 
     const knowledgeForm = page.getByTestId("knowledge-form");
     await expect(knowledgeForm).toBeVisible();
@@ -247,12 +240,13 @@ test.describe("Knowledge base", () => {
   test("should render combobox with selected OpenAI provider and empty key input if knowledge needs reset", async ({
     page,
     mockRequest,
+    baseUrl,
   }) => {
-    await mockRequest.router([
-      endpoints.aiProvidersList,
-      endpoints.aiVectorizationSettingsNeedReset,
-    ]);
-    await page.goto("/portal-settings/ai-settings/knowledge");
+    mockRequest.use(
+      aiProvidersHandler(TEST_PORT),
+      aiVectorizationGetHandler(TEST_PORT, "needReset"),
+    );
+    await page.goto(`${baseUrl}/portal-settings/ai-settings/knowledge`);
 
     const providerCombobox = page.getByTestId("knowledge-provider-combobox");
     await expect(providerCombobox.getByRole("button")).toBeEnabled();

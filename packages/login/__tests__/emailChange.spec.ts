@@ -25,15 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import {
-  endpoints,
-  HEADER_AUTHENTICATED_SETTINGS,
-} from "@docspace/shared/__mocks__/e2e";
-
+  selfChangeAuthDataHandler,
+  settingsHandler,
+  TypeSettings,
+} from "@docspace/shared/__mocks__/handlers";
 import { expect, test } from "./fixtures/base";
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 
 const URL = "/login/confirm/EmailChange";
-const NEXT_REQUEST_URL = "*/**/login/confirm/EmailChange";
 
 const QUERY_PARAMS = [
   {
@@ -59,13 +58,9 @@ const QUERY_PARAMS = [
 ];
 
 const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
-const NEXT_REQUEST_URL_WITH_PARAMS = getUrlWithQueryParams(
-  NEXT_REQUEST_URL,
-  QUERY_PARAMS,
-);
 
-test("email change without auth", async ({ page }) => {
-  await page.goto(URL_WITH_PARAMS);
+test("email change without auth", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -74,14 +69,18 @@ test("email change without auth", async ({ page }) => {
   ]);
 });
 
-test("email change success", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-    HEADER_AUTHENTICATED_SETTINGS,
-  ]);
-  await mockRequest.router([endpoints.changeEmail]);
-  await page.goto(URL_WITH_PARAMS);
+test("email change success", async ({
+  page,
+  baseUrl,
+  port,
+  serverRequestInterceptor,
+}) => {
+  serverRequestInterceptor.use(
+    settingsHandler(port, TypeSettings.Authenticated),
+  );
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await page.waitForURL("/profile/login?email_change=success", {
+  await page.waitForURL(`${baseUrl}/profile/login?email_change=success`, {
     waitUntil: "load",
   });
 
@@ -92,12 +91,18 @@ test("email change success", async ({ page, mockRequest }) => {
   ]);
 });
 
-test("email change error", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-    HEADER_AUTHENTICATED_SETTINGS,
-  ]);
-  await mockRequest.router([endpoints.changeEmailError]);
-  await page.goto(URL_WITH_PARAMS);
+test("email change error", async ({
+  page,
+  baseUrl,
+  port,
+  clientRequestInterceptor,
+  serverRequestInterceptor,
+}) => {
+  serverRequestInterceptor.use(
+    settingsHandler(port, TypeSettings.Authenticated),
+  );
+  clientRequestInterceptor.use(selfChangeAuthDataHandler(port, 400));
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",

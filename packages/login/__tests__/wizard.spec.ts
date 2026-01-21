@@ -25,23 +25,25 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import path from "path";
-
 import {
-  HEADER_WIZARD_SETTINGS,
-  HEADER_LICENCE_REQUIRED,
-  endpoints,
-  HEADER_WIZARD_WITH_AMI_SETTINGS,
-} from "@docspace/shared/__mocks__/e2e";
+  settingsHandler,
+  licenseRequiredHandler,
+  TypeSettings,
+} from "@docspace/shared/__mocks__/handlers";
 
 import { expect, test } from "./fixtures/base";
 
 const URL = "/login/wizard";
-const NEXT_REQUEST_URL = "*/**/login/wizard";
 
-test("wizard render", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL, [HEADER_WIZARD_SETTINGS]);
+test("wizard render", async ({
+  page,
+  port,
+  serverRequestInterceptor,
+  baseUrl,
+}) => {
+  serverRequestInterceptor.use(settingsHandler(port, TypeSettings.Wizard));
 
-  await page.goto(URL);
+  await page.goto(`${baseUrl}${URL}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -50,11 +52,14 @@ test("wizard render", async ({ page, mockRequest }) => {
   ]);
 });
 
-test("wizard success", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL, [HEADER_WIZARD_SETTINGS]);
-  await mockRequest.router([endpoints.wizardComplete]);
-
-  await page.goto(URL);
+test("wizard success", async ({
+  page,
+  port,
+  baseUrl,
+  serverRequestInterceptor,
+}) => {
+  serverRequestInterceptor.use(settingsHandler(port, TypeSettings.Wizard));
+  await page.goto(`${baseUrl}${URL}`);
 
   await page.fill("[name='wizard-email']", "email@mail.ru");
   await page
@@ -70,7 +75,8 @@ test("wizard success", async ({ page, mockRequest }) => {
   ]);
 
   await page.getByTestId("wizard_continue_button").click();
-  await page.waitForURL("/", { waitUntil: "load" });
+  await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
+  await page.waitForTimeout(1000);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -79,11 +85,15 @@ test("wizard success", async ({ page, mockRequest }) => {
   ]);
 });
 
-test("wizard error", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL, [HEADER_WIZARD_SETTINGS]);
-  await mockRequest.router([endpoints.wizardComplete]);
+test("wizard error", async ({
+  page,
+  port,
+  baseUrl,
+  serverRequestInterceptor,
+}) => {
+  serverRequestInterceptor.use(settingsHandler(port, TypeSettings.Wizard));
 
-  await page.goto(URL);
+  await page.goto(`${baseUrl}${URL}`);
 
   await page.fill("[name='wizard-email']", "email@123");
   await page
@@ -100,14 +110,16 @@ test("wizard error", async ({ page, mockRequest }) => {
   ]);
 });
 
-test("wizard with license success", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL, [
-    HEADER_WIZARD_SETTINGS,
-    HEADER_LICENCE_REQUIRED,
-  ]);
-  await mockRequest.router([endpoints.wizardComplete, endpoints.license]);
+test("wizard with license success", async ({
+  page,
+  port,
+  baseUrl,
+  serverRequestInterceptor,
+}) => {
+  serverRequestInterceptor.use(settingsHandler(port, TypeSettings.Wizard));
+  serverRequestInterceptor.use(licenseRequiredHandler(port, true));
 
-  await page.goto(URL);
+  await page.goto(`${baseUrl}${URL}`);
 
   await page.fill("[name='wizard-email']", "email@mail.ru");
   await page
@@ -130,7 +142,9 @@ test("wizard with license success", async ({ page, mockRequest }) => {
 
   await page.getByTestId("wizard_continue_button").click();
 
-  await page.waitForURL("/", { waitUntil: "load" });
+  await page.getByTestId("loader").waitFor({ state: "detached" });
+  await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
+  await page.waitForTimeout(1000);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -139,13 +153,16 @@ test("wizard with license success", async ({ page, mockRequest }) => {
   ]);
 });
 
-test("wizard with license error", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL, [
-    HEADER_WIZARD_SETTINGS,
-    HEADER_LICENCE_REQUIRED,
-  ]);
+test("wizard with license error", async ({
+  page,
+  port,
+  baseUrl,
+  serverRequestInterceptor,
+}) => {
+  serverRequestInterceptor.use(settingsHandler(port, TypeSettings.Wizard));
+  serverRequestInterceptor.use(licenseRequiredHandler(port, true));
 
-  await page.goto(URL);
+  await page.goto(`${baseUrl}${URL}`);
 
   await page.fill("[name='wizard-email']", "email@123");
   await page
@@ -162,12 +179,17 @@ test("wizard with license error", async ({ page, mockRequest }) => {
   ]);
 });
 
-test("wizard with ami render", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL, [
-    HEADER_WIZARD_WITH_AMI_SETTINGS,
-  ]);
+test("wizard with ami render", async ({
+  page,
+  port,
+  baseUrl,
+  serverRequestInterceptor,
+}) => {
+  serverRequestInterceptor.use(
+    settingsHandler(port, TypeSettings.WizardWithAmi),
+  );
 
-  await page.goto(URL);
+  await page.goto(`${baseUrl}${URL}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -176,12 +198,17 @@ test("wizard with ami render", async ({ page, mockRequest }) => {
   ]);
 });
 
-test("wizard with ami error", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL, [
-    HEADER_WIZARD_WITH_AMI_SETTINGS,
-  ]);
+test("wizard with ami error", async ({
+  page,
+  port,
+  baseUrl,
+  serverRequestInterceptor,
+}) => {
+  serverRequestInterceptor.use(
+    settingsHandler(port, TypeSettings.WizardWithAmi),
+  );
 
-  await page.goto(URL);
+  await page.goto(`${baseUrl}${URL}`);
 
   await page.getByTestId("wizard_continue_button").click();
 

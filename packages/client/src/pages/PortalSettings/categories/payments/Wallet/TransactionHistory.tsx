@@ -673,13 +673,9 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
         <Text isBold fontSize="16px" className={styles.transactionHistoryTitle}>
           {t("TransactionHistory")}
         </Text>
-        {(shouldShowClearButton || isTransactionHistoryExist) && isMobile
-          ? mobileFilter
-          : null}
+        {isMobile ? mobileFilter : null}
       </div>
-      {(shouldShowClearButton || isTransactionHistoryExist) && !isMobile
-        ? filterCombobox
-        : null}
+      {!isMobile ? filterCombobox : null}
 
       {isLoading ? (
         <TableLoader isMobile={isMobile} isTablet={isTablet} />

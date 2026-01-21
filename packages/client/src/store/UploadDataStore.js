@@ -41,6 +41,9 @@ import {
   uploadFile,
   convertFile,
   startUploadSession,
+  uploadChunkSequential,
+  uploadChunkParallel,
+  finalizeUploadSession,
   getFileConversationProgress,
   copyToFolder,
   moveToFolder,
@@ -1322,29 +1325,16 @@ class UploadDataStore {
     const {
       t,
       res, // file response data
-      fileSize, // file size
       index, // chunk index
       indexOfFile, // file index in the list
       path, // file path
       chunksLength, // length of file chunks
       resolve, // resolve cb
-      reject, // reject cb
-      isAsyncUpload = false, // async upload checker
-      isFinalize = false, // is finalize chunk
       //  allChunkUploaded, // needed for progress, files is uploaded, awaiting finalized chunk
       createNewIfExist,
     } = chunkUploadObj;
 
-    if (!res.data.data && res.data.message) {
-      return reject({
-        message: res.data.message,
-        chunkIndex: index,
-        chunkSize: fileSize,
-        isFinalize,
-      });
-    }
-
-    const { uploaded, id: fileId, file: fileInfo } = res.data.data;
+    const { uploaded, id: fileId, file: fileInfo } = res;
 
     // let uploadedSize;
 
@@ -1476,23 +1466,12 @@ class UploadDataStore {
     if (currentFile.action === "uploaded") {
       this.refreshFiles(currentFile);
     }
-    if (!isAsyncUpload || res.status === 201) {
-      return resolve();
-    }
+
+    return resolve();
   };
 
   asyncUpload = async (t, chunkData, resolve, reject, createNewIfExist) => {
-    const { operationId, fileSize, indexOfFile, path, length } = chunkData;
-
-    console.log("[ENCRYPTION DEBUG] asyncUpload called:", {
-      operationId,
-      fileSize,
-      indexOfFile,
-      length,
-      uploaded: this.uploaded,
-      hasFile: !!this.files[indexOfFile],
-      cancel: this.files[indexOfFile]?.cancel,
-    });
+    const { operationId, file, indexOfFile, path, length } = chunkData;
 
     if (
       this.uploaded ||
@@ -1533,43 +1512,22 @@ class UploadDataStore {
           ].isFinished = true;
         }
 
-        if (!res.data.data && res.data.message) {
-          delete this.asyncUploadObj[operationId];
-          return reject(res.data.message);
-        }
         this.asyncUpload(t, chunkData, resolve, reject, createNewIfExist);
 
         const activeLength = this.asyncUploadObj[operationId]
           ? this.asyncUploadObj[operationId].chunksArray.filter(
-              (x) => x.isActive,
-            ).length - 1
+            (x) => x.isActive,
+          ).length - 1
           : 0;
-
-        let allIsUploaded;
-        if (this.asyncUploadObj[operationId]) {
-          const finished = this.asyncUploadObj[operationId].chunksArray.filter(
-            (x) => x.isFinished,
-          );
-
-          allIsUploaded =
-            this.asyncUploadObj[operationId].chunksArray.length -
-            finished.length -
-            1; // 1 last
-        }
 
         this.checkChunkUpload({
           t,
           res,
-          fileSize,
           index: activeLength,
           indexOfFile,
           path,
           chunksLength: length,
           resolve,
-          reject,
-          isAsyncUpload: true,
-          isFinalize: false,
-          allChunkUploaded: allIsUploaded === 0,
           createNewIfExist,
         });
 
@@ -1597,15 +1555,11 @@ class UploadDataStore {
             this.checkChunkUpload({
               t,
               res: finalizeRes,
-              fileSize,
               index: finalizeIndex,
               indexOfFile,
               path,
               chunksLength: length,
               resolve,
-              reject,
-              isAsyncUpload: true,
-              isFinalize: true,
               createNewIfExist,
             });
           }
@@ -1617,7 +1571,8 @@ class UploadDataStore {
   };
 
   uploadFileChunks = async (
-    location,
+    sessionId,
+    folderId,
     requestsDataArray,
     fileSize,
     indexOfFile,
@@ -1655,8 +1610,10 @@ class UploadDataStore {
           isFinished: false,
           isFinalize: false,
           onUpload: () =>
-            uploadFile(
-              `${location}&chunkNumber=${index + 1}&upload=true`,
+            uploadChunkParallel(
+              folderId,
+              sessionId,
+              index + 1,
               requestsDataArray[index],
             ),
         });
@@ -1665,7 +1622,7 @@ class UploadDataStore {
         isActive: false,
         isFinished: false,
         isFinalize: true,
-        onUpload: () => uploadFile(`${location}&finalize=true`),
+        onUpload: () => finalizeUploadSession(folderId, sessionId),
       });
 
       console.log("[ENCRYPTION DEBUG] chunksArray created:", {
@@ -1708,20 +1665,21 @@ class UploadDataStore {
           return Promise.resolve();
         }
 
-        const res = await uploadFile(location, requestsDataArray[index]);
+        const res = await uploadChunkSequential(
+          folderId,
+          sessionId,
+          requestsDataArray[index],
+        );
         const resolve = (r) => Promise.resolve(r);
-        const reject = (err) => Promise.reject(err);
 
         this.checkChunkUpload({
           t,
           res,
-          fileSize,
           index,
           indexOfFile,
           path,
           chunksLength: length,
           resolve,
-          reject,
           createNewIfExist,
         });
 
@@ -1930,8 +1888,10 @@ class UploadDataStore {
     const fileName = file.name; // Keep original name
     const fileSize = fileToUpload.size;
 
+    const actualFolderId = isAIRoom ? knowledgeId : toFolderId;
+
     return startUploadSession(
-      isAIRoom ? knowledgeId : toFolderId,
+      actualFolderId,
       fileName,
       fileSize,
       "", // relativePath,
@@ -1949,9 +1909,9 @@ class UploadDataStore {
           hasMetadata: !!encryptionMetadata,
         });
 
-        const location = res.data.location;
-        const path = res.data.path;
-        const operationId = res.data.id;
+        const sessionId = res.id;
+        const path = res.path;
+        const operationId = res.id;
         const requestsDataArray = [];
 
         console.log("[ENCRYPTION DEBUG] Preparing chunks:", {
@@ -1980,13 +1940,14 @@ class UploadDataStore {
         });
 
         return {
-          location,
+          sessionId,
+          folderId: actualFolderId,
           requestsDataArray,
           path,
           operationId,
         };
       })
-      .then(({ location, requestsDataArray, path, operationId }) => {
+      .then(({ sessionId, folderId, requestsDataArray, path, operationId }) => {
         console.log("[ENCRYPTION DEBUG] Starting uploadFileChunks:", {
           location,
           requestsDataArrayLength: requestsDataArray.length,
@@ -2003,7 +1964,8 @@ class UploadDataStore {
             chunks < 2 ? 50 + basePercent : basePercent;
 
         return this.uploadFileChunks(
-          location,
+          sessionId,
+          folderId,
           requestsDataArray,
           fileSize,
           indexOfFile,
@@ -2417,24 +2379,24 @@ class UploadDataStore {
 
     return isCopy
       ? this.copyToAction(
-          destFolderId,
-          folderIds,
-          fileIds,
-          conflictResolveType,
-          deleteAfter,
-          operationId,
-          content,
-          toFillOut,
-        )
+        destFolderId,
+        folderIds,
+        fileIds,
+        conflictResolveType,
+        deleteAfter,
+        operationId,
+        content,
+        toFillOut,
+      )
       : this.moveToAction(
-          destFolderId,
-          folderIds,
-          fileIds,
-          conflictResolveType,
-          deleteAfter,
-          operationId,
-          toFillOut,
-        );
+        destFolderId,
+        folderIds,
+        fileIds,
+        conflictResolveType,
+        deleteAfter,
+        operationId,
+        toFillOut,
+      );
   };
 
   loopFilesOperations = async (data, pbData) => {

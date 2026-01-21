@@ -34,8 +34,7 @@ import {
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import Base from "@docspace/shared/themes/base";
-
-import { StyledHotkeysPanel } from "./StyledHotkeys";
+import styles from "./HotkeysPanel.module.scss";
 import SelectionBlock from "./SelectionBlock";
 import MoveBlock from "./MoveBlock";
 import ActionsBlock from "./ActionsBlock";
@@ -57,11 +56,11 @@ const HotkeysPanel = ({
   const textStyles = {
     fontSize: "13px",
     fontWeight: 600,
-    className: "hotkey-key-description",
+    className: styles.hotkeyKeyDescription,
   };
   const keyTextStyles = {
     ...textStyles,
-    ...{ color: theme.hotkeys.key.color, className: "hotkeys-key" },
+    ...{ color: theme.hotkeys.key.color, className: styles.hotkeysKey },
   };
 
   const CtrlKey = isMacOs ? "⌘" : "Ctrl";
@@ -86,8 +85,8 @@ const HotkeysPanel = ({
     >
       <ModalDialog.Header>{t("Common:Hotkeys")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <StyledHotkeysPanel>
-          <Heading className="hotkeys_sub-header">
+        <div>
+          <Heading className={styles.hotkeysSubHeader}>
             {t("HotkeysNavigation")}
           </Heading>
           <NavigationBlock
@@ -98,7 +97,7 @@ const HotkeysPanel = ({
           />
           {!isVisitor ? (
             <>
-              <Heading className="hotkeys_sub-header">
+              <Heading className={styles.hotkeysSubHeader}>
                 {t("HotkeysCreatingObjects")}
               </Heading>
               <CreationBlock
@@ -107,7 +106,7 @@ const HotkeysPanel = ({
                 keyTextStyles={keyTextStyles}
                 AltKey={AltKey}
               />
-              <Heading className="hotkeys_sub-header">
+              <Heading className={styles.hotkeysSubHeader}>
                 {t("HotkeysUploadingObjects")}
               </Heading>
               <UploadBlock
@@ -117,7 +116,7 @@ const HotkeysPanel = ({
               />
             </>
           ) : null}
-          <Heading className="hotkeys_sub-header">
+          <Heading className={styles.hotkeysSubHeader}>
             {t("HotkeysSelection")}
           </Heading>
           <SelectionBlock
@@ -127,14 +126,16 @@ const HotkeysPanel = ({
             CtrlKey={CtrlKey}
             AltKey={AltKey}
           />
-          <Heading className="hotkeys_sub-header">{t("HotkeysMove")}</Heading>
+          <Heading className={styles.hotkeysSubHeader}>
+            {t("HotkeysMove")}
+          </Heading>
           <MoveBlock
             t={t}
             textStyles={textStyles}
             keyTextStyles={keyTextStyles}
             CtrlKey={CtrlKey}
           />
-          <Heading className="hotkeys_sub-header">
+          <Heading className={styles.hotkeysSubHeader}>
             {t("HotkeysActions")}
           </Heading>
           <ActionsBlock
@@ -143,7 +144,7 @@ const HotkeysPanel = ({
             keyTextStyles={keyTextStyles}
             CtrlKey={CtrlKey}
           />
-          <Heading className="hotkeys_sub-header">
+          <Heading className={styles.hotkeysSubHeader}>
             {t("HotkeysApplicationActions")}
           </Heading>
           <ApplicationActionsBlock
@@ -152,7 +153,7 @@ const HotkeysPanel = ({
             keyTextStyles={keyTextStyles}
             CtrlKey={CtrlKey}
           />
-          <Heading className="hotkeys_sub-header">
+          <Heading className={styles.hotkeysSubHeader}>
             {t("HotkeysActionsInPreview")}
           </Heading>
           <PreviewActionsBlock
@@ -160,7 +161,7 @@ const HotkeysPanel = ({
             textStyles={textStyles}
             keyTextStyles={keyTextStyles}
           />
-        </StyledHotkeysPanel>
+        </div>
       </ModalDialog.Body>
     </ModalDialog>
   );

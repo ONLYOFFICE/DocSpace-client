@@ -25,19 +25,27 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import {
-  endpoints,
-  HEADER_FORM_YOUR_TURN_FILLING,
-} from "@docspace/shared/__mocks__/e2e";
-
+  fileByIdHandler,
+  filesSettingsHandler,
+  fillingStatusHandler,
+} from "@docspace/shared/__mocks__/handlers";
 import { expect, test } from "./fixtures/base";
 
 test.describe("Start filling", () => {
-  test("Start filling render", async ({ page, mockRequest }) => {
-    await mockRequest.setHeaders("**/doceditor**", [
-      HEADER_FORM_YOUR_TURN_FILLING,
-    ]);
-    await mockRequest.router([endpoints.filesSettings]);
-    await page.goto("/doceditor/start-filling?formId=1&roomId=1&share=qwerty");
+  test("Start filling render", async ({
+    page,
+    serverRequestInterceptor,
+    port,
+    baseUrl,
+  }) => {
+    serverRequestInterceptor.use(
+      filesSettingsHandler(port),
+      fileByIdHandler(port, true),
+      fillingStatusHandler(port),
+    );
+    await page.goto(
+      `${baseUrl}/doceditor/start-filling?formId=1&roomId=1&share=qwerty`,
+    );
 
     const form = page.getByTestId("completed_form_vdr_container");
     await expect(form).toBeVisible();

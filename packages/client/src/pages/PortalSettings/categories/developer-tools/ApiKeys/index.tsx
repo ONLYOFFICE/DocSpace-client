@@ -47,7 +47,7 @@ import CreateApiKeyDialog from "./sub-components/CreateApiKeyDialog";
 import DeleteApiKeyDialog from "./sub-components/DeleteApiKeyDialog";
 import ApiKeysView from "./sub-components";
 import { ApiKeysProps } from "./types";
-import { StyledApiKeys, StyledMobileButton } from "./StyledApiKeys";
+import styles from "./ApiKeys.module.scss";
 
 const ApiKeys = (props: ApiKeysProps) => {
   const {
@@ -146,22 +146,29 @@ const ApiKeys = (props: ApiKeysProps) => {
   }, [ready]);
 
   return (
-    <StyledApiKeys>
+    <div className={styles.apiKeys}>
       <div
-        className={classNames("api-keys_description", {
+        className={classNames(styles.apiKeysDescription, {
           withEmptyScreen: !!error,
         })}
       >
-        <Text lineHeight="20px" className="api-keys_text">
+        <Text lineHeight="20px" className={styles.apiKeysText}>
           {t("Settings:ApiKeysDescription", {
             productName: t("Common:ProductName"),
           })}
         </Text>
-        <Text className="api-keys_text api-keys_description-text">
+        <Text
+          className={classNames(
+            styles.apiKeysText,
+            styles.apiKeysDescriptionText,
+          )}
+        >
           {t("Settings:ApiKeysShareDescription")}
         </Text>
 
-        <Text className="api-keys_text api-keys_usage-text">
+        <Text
+          className={classNames(styles.apiKeysText, styles.apiKeysUsageText)}
+        >
           {t("Settings:ApiKeyViewUsage")}
         </Text>
         {apiKeysUrl ? (
@@ -183,7 +190,7 @@ const ApiKeys = (props: ApiKeysProps) => {
         ) : (
           <>
             {isMobile() ? (
-              <StyledMobileButton>
+              <div className={styles.dialogButtons}>
                 <Button
                   onClick={() => setCreateKeyDialogIsVisible(true)}
                   label={t("Settings:CreateNewSecretKey")}
@@ -192,7 +199,7 @@ const ApiKeys = (props: ApiKeysProps) => {
                   scale
                   testId="create_new_secret_key_button"
                 />
-              </StyledMobileButton>
+              </div>
             ) : (
               <Button
                 onClick={() => setCreateKeyDialogIsVisible(true)}
@@ -242,7 +249,7 @@ const ApiKeys = (props: ApiKeysProps) => {
           isRequestRunning={isRequestRunning}
         />
       ) : null}
-    </StyledApiKeys>
+    </div>
   );
 };
 

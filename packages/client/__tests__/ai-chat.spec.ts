@@ -23,54 +23,64 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import { endpoints } from "@docspace/shared/__mocks__/e2e";
 
-import { expect, test } from "./fixtures/base";
-import { SearchArea } from "@docspace/shared/enums";
+import { expect, test, TEST_PORT } from "./fixtures/base";
 import { TFile } from "@docspace/shared/api/files/types";
+import {
+  settingsHandler,
+  TypeSettings,
+  selfActivationStatusHandler,
+  selfByTypeHandler,
+  aiRoomsChatsConfigHandler,
+  aiRoomsServersHandler,
+  aiRoomsChatsHandler,
+  agentFolderChatHandler,
+  aiConfigHandler,
+  aiProvidersHandler,
+  rootHandler,
+  filesSettingsHandler,
+  aiChatHandler,
+  aiChatMessagesHandler,
+  agentFolderInfoHandler,
+  agentFolderResultStorageHandler,
+  aiChatPutHandler,
+  aiChatMessagesExportHandler,
+  favoritesHandler,
+  aiRoomsChatsStreamHandler,
+} from "@docspace/shared/__mocks__/handlers";
+import { SearchArea } from "@docspace/shared/enums";
 
 test.describe("AI chat", () => {
-  test.beforeEach(async ({ mockRequest }) => {
-    await mockRequest.router([
-      endpoints.settingsWithQuery,
-      endpoints.colorTheme,
-      endpoints.build,
-      endpoints.capabilities,
-      endpoints.tariff,
-      endpoints.quota,
-      endpoints.aiConfig,
-      endpoints.additionalSettings,
-      endpoints.getPortal,
-      endpoints.companyInfo,
-      endpoints.cultures,
-      endpoints.root,
-      endpoints.invitationSettings,
-      endpoints.filesSettings,
-      endpoints.webPlugins,
-      endpoints.thirdPartyCapabilities,
-      endpoints.thirdParty,
-      endpoints.docService,
-    ]);
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      filesSettingsHandler(TEST_PORT),
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      selfByTypeHandler(TEST_PORT),
+    );
   });
 
   // ================================== Portal admin ==================================
 
   test.describe("Portal admin", () => {
     test.beforeEach(async ({ mockRequest }) => {
-      await mockRequest.router([endpoints.selfEmailActivatedClient]);
+      mockRequest.use(selfActivationStatusHandler(TEST_PORT, null, true, true));
     });
 
     test("should render default empty ai chat", async ({
       page,
       mockRequest,
+      baseUrl,
     }) => {
-      await mockRequest.router([
-        endpoints.aiRoomsChatsConfigAllEnabled,
-        endpoints.aiRoomsServersEmpty,
-        endpoints.aiRoomsChatsEmpty,
-        endpoints.agentFolderChat,
-      ]);
-      await page.goto("/ai-agents/2/chat?folder=2");
+      mockRequest.use(
+        aiRoomsChatsConfigHandler(TEST_PORT),
+        aiRoomsServersHandler(TEST_PORT),
+        aiRoomsChatsHandler(TEST_PORT, "empty"),
+        agentFolderChatHandler(TEST_PORT),
+      );
+
+      await page.goto(`${baseUrl}/ai-agents/2/chat?folder=2`);
 
       const containerLoader = page.getByTestId("chat-container-loading");
 
@@ -89,16 +99,18 @@ test.describe("AI chat", () => {
     test("should render full size empty screen if ai not ready and there are no chats (admin)", async ({
       page,
       mockRequest,
+      baseUrl,
     }) => {
-      await mockRequest.router([
-        endpoints.aiRoomsChatsConfigAllEnabled,
-        endpoints.aiRoomsServersEmpty,
-        endpoints.aiRoomsChatsEmpty,
-        endpoints.agentFolderChat,
-        endpoints.aiConfigDisabled,
-        endpoints.aiProvidersEmptyList,
-      ]);
-      await page.goto("/ai-agents/2/chat?folder=2");
+      mockRequest.use(
+        aiRoomsChatsConfigHandler(TEST_PORT),
+        aiRoomsServersHandler(TEST_PORT),
+        aiRoomsChatsHandler(TEST_PORT, "empty"),
+        agentFolderChatHandler(TEST_PORT),
+
+        aiConfigHandler(TEST_PORT, true),
+        aiProvidersHandler(TEST_PORT, false, true),
+      );
+      await page.goto(`${baseUrl}/ai-agents/2/chat?folder=2`);
 
       const containerLoader = page.getByTestId("chat-container-loading");
 
@@ -123,16 +135,18 @@ test.describe("AI chat", () => {
     test("should render chat header with empty screen if ai not ready and there are chats (admin)", async ({
       page,
       mockRequest,
+      baseUrl,
     }) => {
-      await mockRequest.router([
-        endpoints.aiRoomsChatsConfigAllEnabled,
-        endpoints.aiRoomsServersEmpty,
-        endpoints.aiRoomsChats,
-        endpoints.agentFolderChat,
-        endpoints.aiConfigDisabled,
-        endpoints.aiProvidersEmptyList,
-      ]);
-      await page.goto("/ai-agents/2/chat?folder=2");
+      mockRequest.use(
+        aiRoomsChatsConfigHandler(TEST_PORT),
+        aiRoomsServersHandler(TEST_PORT),
+        aiRoomsChatsHandler(TEST_PORT),
+        agentFolderChatHandler(TEST_PORT),
+
+        aiConfigHandler(TEST_PORT, true),
+        aiProvidersHandler(TEST_PORT, false, true),
+      );
+      await page.goto(`${baseUrl}/ai-agents/2/chat?folder=2`);
 
       const containerLoader = page.getByTestId("chat-container-loading");
 
@@ -159,17 +173,18 @@ test.describe("AI chat", () => {
     test("should render chat with info block, disabled chat input and new chat button if ai not ready (admin)", async ({
       page,
       mockRequest,
+      baseUrl,
     }) => {
-      await mockRequest.router([
-        endpoints.aiRoomsChatsConfigAllEnabled,
-        endpoints.aiRoomsServersEmpty,
-        endpoints.aiRoomsChats,
-        endpoints.agentFolderChat,
-        endpoints.aiChat,
-        endpoints.aiChatMessages,
-        endpoints.aiConfigDisabled,
-      ]);
-      await page.goto("/ai-agents/2/chat?folder=2&chat=test-chat-id");
+      mockRequest.use(
+        aiRoomsChatsConfigHandler(TEST_PORT),
+        aiRoomsServersHandler(TEST_PORT),
+        aiRoomsChatsHandler(TEST_PORT),
+        agentFolderChatHandler(TEST_PORT),
+        aiChatMessagesHandler(TEST_PORT),
+        aiChatHandler(TEST_PORT),
+        aiConfigHandler(TEST_PORT, true),
+      );
+      await page.goto(`${baseUrl}/ai-agents/2/chat?folder=2&chat=test-chat-id`);
 
       const containerLoader = page.getByTestId("chat-container-loading");
 
@@ -206,16 +221,17 @@ test.describe("AI chat", () => {
     test("should render ai chat with user and ai messages", async ({
       page,
       mockRequest,
+      baseUrl,
     }) => {
-      await mockRequest.router([
-        endpoints.aiRoomsChatsConfigAllEnabled,
-        endpoints.aiRoomsServersEmpty,
-        endpoints.aiRoomsChatsEmpty,
-        endpoints.agentFolderChat,
-        endpoints.aiChat,
-        endpoints.aiChatMessages,
-      ]);
-      await page.goto("/ai-agents/2/chat?folder=2&chat=test-chat-id");
+      mockRequest.use(
+        aiRoomsChatsConfigHandler(TEST_PORT),
+        aiRoomsServersHandler(TEST_PORT),
+        aiRoomsChatsHandler(TEST_PORT, "empty"),
+        agentFolderChatHandler(TEST_PORT),
+        aiChatMessagesHandler(TEST_PORT),
+        aiChatHandler(TEST_PORT),
+      );
+      await page.goto(`${baseUrl}/ai-agents/2/chat?folder=2&chat=test-chat-id`);
 
       const containerLoader = page.getByTestId("chat-container-loading");
 
@@ -235,16 +251,17 @@ test.describe("AI chat", () => {
     test("should render ai message with base elements", async ({
       page,
       mockRequest,
+      baseUrl,
     }) => {
-      await mockRequest.router([
-        endpoints.aiRoomsChatsConfigAllEnabled,
-        endpoints.aiRoomsServersEmpty,
-        endpoints.aiRoomsChatsEmpty,
-        endpoints.agentFolderChat,
-        endpoints.aiChat,
-        endpoints.aiChatMessagesBaseElements,
-      ]);
-      await page.goto("/ai-agents/2/chat?folder=2&chat=test-chat-id");
+      mockRequest.use(
+        aiRoomsChatsConfigHandler(TEST_PORT),
+        aiRoomsServersHandler(TEST_PORT),
+        aiRoomsChatsHandler(TEST_PORT, "empty"),
+        agentFolderChatHandler(TEST_PORT),
+        aiChatMessagesHandler(TEST_PORT, "baseElements"),
+        aiChatHandler(TEST_PORT),
+      );
+      await page.goto(`${baseUrl}/ai-agents/2/chat?folder=2&chat=test-chat-id`);
 
       const containerLoader = page.getByTestId("chat-container-loading");
 
@@ -263,16 +280,17 @@ test.describe("AI chat", () => {
     test("should render ai message with code block", async ({
       page,
       mockRequest,
+      baseUrl,
     }) => {
-      await mockRequest.router([
-        endpoints.aiRoomsChatsConfigAllEnabled,
-        endpoints.aiRoomsServersEmpty,
-        endpoints.aiRoomsChatsEmpty,
-        endpoints.agentFolderChat,
-        endpoints.aiChat,
-        endpoints.aiChatMessagesCodeBlock,
-      ]);
-      await page.goto("/ai-agents/2/chat?folder=2&chat=test-chat-id");
+      mockRequest.use(
+        aiRoomsChatsConfigHandler(TEST_PORT),
+        aiRoomsServersHandler(TEST_PORT),
+        aiRoomsChatsHandler(TEST_PORT, "empty"),
+        agentFolderChatHandler(TEST_PORT),
+        aiChatMessagesHandler(TEST_PORT, "codeBlock"),
+        aiChatHandler(TEST_PORT),
+      );
+      await page.goto(`${baseUrl}/ai-agents/2/chat?folder=2&chat=test-chat-id`);
 
       const containerLoader = page.getByTestId("chat-container-loading");
 
@@ -291,16 +309,17 @@ test.describe("AI chat", () => {
     test("should render ai message with table", async ({
       page,
       mockRequest,
+      baseUrl,
     }) => {
-      await mockRequest.router([
-        endpoints.aiRoomsChatsConfigAllEnabled,
-        endpoints.aiRoomsServersEmpty,
-        endpoints.aiRoomsChatsEmpty,
-        endpoints.agentFolderChat,
-        endpoints.aiChat,
-        endpoints.aiChatMessagesTable,
-      ]);
-      await page.goto("/ai-agents/2/chat?folder=2&chat=test-chat-id");
+      mockRequest.use(
+        aiRoomsChatsConfigHandler(TEST_PORT),
+        aiRoomsServersHandler(TEST_PORT),
+        aiRoomsChatsHandler(TEST_PORT, "empty"),
+        agentFolderChatHandler(TEST_PORT),
+        aiChatMessagesHandler(TEST_PORT, "table"),
+        aiChatHandler(TEST_PORT),
+      );
+      await page.goto(`${baseUrl}/ai-agents/2/chat?folder=2&chat=test-chat-id`);
 
       const containerLoader = page.getByTestId("chat-container-loading");
 
@@ -319,16 +338,17 @@ test.describe("AI chat", () => {
     test("should render ai message with web search tool", async ({
       page,
       mockRequest,
+      baseUrl,
     }) => {
-      await mockRequest.router([
-        endpoints.aiRoomsChatsConfigAllEnabled,
-        endpoints.aiRoomsServersEmpty,
-        endpoints.aiRoomsChatsEmpty,
-        endpoints.agentFolderChat,
-        endpoints.aiChat,
-        endpoints.aiChatMessagesWebSearch,
-      ]);
-      await page.goto("/ai-agents/2/chat?folder=2&chat=test-chat-id");
+      mockRequest.use(
+        aiRoomsChatsConfigHandler(TEST_PORT),
+        aiRoomsServersHandler(TEST_PORT),
+        aiRoomsChatsHandler(TEST_PORT, "empty"),
+        agentFolderChatHandler(TEST_PORT),
+        aiChatMessagesHandler(TEST_PORT, "webSearch"),
+        aiChatHandler(TEST_PORT),
+      );
+      await page.goto(`${baseUrl}/ai-agents/2/chat?folder=2&chat=test-chat-id`);
 
       const containerLoader = page.getByTestId("chat-container-loading");
 
@@ -350,16 +370,17 @@ test.describe("AI chat", () => {
     test("should render ai message with failed web search tool", async ({
       page,
       mockRequest,
+      baseUrl,
     }) => {
-      await mockRequest.router([
-        endpoints.aiRoomsChatsConfigAllEnabled,
-        endpoints.aiRoomsServersEmpty,
-        endpoints.aiRoomsChatsEmpty,
-        endpoints.agentFolderChat,
-        endpoints.aiChat,
-        endpoints.aiChatMessagesWebSearchError,
-      ]);
-      await page.goto("/ai-agents/2/chat?folder=2&chat=test-chat-id");
+      mockRequest.use(
+        aiRoomsChatsConfigHandler(TEST_PORT),
+        aiRoomsServersHandler(TEST_PORT),
+        aiRoomsChatsHandler(TEST_PORT, "empty"),
+        agentFolderChatHandler(TEST_PORT),
+        aiChatMessagesHandler(TEST_PORT, "webSearchError"),
+        aiChatHandler(TEST_PORT),
+      );
+      await page.goto(`${baseUrl}/ai-agents/2/chat?folder=2&chat=test-chat-id`);
 
       const containerLoader = page.getByTestId("chat-container-loading");
 
@@ -381,16 +402,17 @@ test.describe("AI chat", () => {
     test("should render ai message with web crawling tool", async ({
       page,
       mockRequest,
+      baseUrl,
     }) => {
-      await mockRequest.router([
-        endpoints.aiRoomsChatsConfigAllEnabled,
-        endpoints.aiRoomsServersEmpty,
-        endpoints.aiRoomsChatsEmpty,
-        endpoints.agentFolderChat,
-        endpoints.aiChat,
-        endpoints.aiChatMessagesWebCrawling,
-      ]);
-      await page.goto("/ai-agents/2/chat?folder=2&chat=test-chat-id");
+      mockRequest.use(
+        aiRoomsChatsConfigHandler(TEST_PORT),
+        aiRoomsServersHandler(TEST_PORT),
+        aiRoomsChatsHandler(TEST_PORT, "empty"),
+        agentFolderChatHandler(TEST_PORT),
+        aiChatMessagesHandler(TEST_PORT, "webCrawling"),
+        aiChatHandler(TEST_PORT),
+      );
+      await page.goto(`${baseUrl}/ai-agents/2/chat?folder=2&chat=test-chat-id`);
 
       const containerLoader = page.getByTestId("chat-container-loading");
 
@@ -410,16 +432,17 @@ test.describe("AI chat", () => {
     test("should render ai message with failed web crawling tool", async ({
       page,
       mockRequest,
+      baseUrl,
     }) => {
-      await mockRequest.router([
-        endpoints.aiRoomsChatsConfigAllEnabled,
-        endpoints.aiRoomsServersEmpty,
-        endpoints.aiRoomsChatsEmpty,
-        endpoints.agentFolderChat,
-        endpoints.aiChat,
-        endpoints.aiChatMessagesWebCrawlingError,
-      ]);
-      await page.goto("/ai-agents/2/chat?folder=2&chat=test-chat-id");
+      mockRequest.use(
+        aiRoomsChatsConfigHandler(TEST_PORT),
+        aiRoomsServersHandler(TEST_PORT),
+        aiRoomsChatsHandler(TEST_PORT, "empty"),
+        agentFolderChatHandler(TEST_PORT),
+        aiChatMessagesHandler(TEST_PORT, "webCrawlingError"),
+        aiChatHandler(TEST_PORT),
+      );
+      await page.goto(`${baseUrl}/ai-agents/2/chat?folder=2&chat=test-chat-id`);
 
       const containerLoader = page.getByTestId("chat-container-loading");
 
@@ -441,16 +464,17 @@ test.describe("AI chat", () => {
     test("should render ai message with knowledge search tool", async ({
       page,
       mockRequest,
+      baseUrl,
     }) => {
-      await mockRequest.router([
-        endpoints.aiRoomsChatsConfigAllEnabled,
-        endpoints.aiRoomsServersEmpty,
-        endpoints.aiRoomsChatsEmpty,
-        endpoints.agentFolderChat,
-        endpoints.aiChat,
-        endpoints.aiChatMessagesKnowledgeSearch,
-      ]);
-      await page.goto("/ai-agents/2/chat?folder=2&chat=test-chat-id");
+      mockRequest.use(
+        aiRoomsChatsConfigHandler(TEST_PORT),
+        aiRoomsServersHandler(TEST_PORT),
+        aiRoomsChatsHandler(TEST_PORT, "empty"),
+        agentFolderChatHandler(TEST_PORT),
+        aiChatMessagesHandler(TEST_PORT, "knowledgeSearch"),
+        aiChatHandler(TEST_PORT),
+      );
+      await page.goto(`${baseUrl}/ai-agents/2/chat?folder=2&chat=test-chat-id`);
 
       const containerLoader = page.getByTestId("chat-container-loading");
 
@@ -472,16 +496,17 @@ test.describe("AI chat", () => {
     test("should render ai message with failed knowledge search tool", async ({
       page,
       mockRequest,
+      baseUrl,
     }) => {
-      await mockRequest.router([
-        endpoints.aiRoomsChatsConfigAllEnabled,
-        endpoints.aiRoomsServersEmpty,
-        endpoints.aiRoomsChatsEmpty,
-        endpoints.agentFolderChat,
-        endpoints.aiChat,
-        endpoints.aiChatMessagesKnowledgeSearchError,
-      ]);
-      await page.goto("/ai-agents/2/chat?folder=2&chat=test-chat-id");
+      mockRequest.use(
+        aiRoomsChatsConfigHandler(TEST_PORT),
+        aiRoomsServersHandler(TEST_PORT),
+        aiRoomsChatsHandler(TEST_PORT, "empty"),
+        agentFolderChatHandler(TEST_PORT),
+        aiChatMessagesHandler(TEST_PORT, "knowledgeSearchError"),
+        aiChatHandler(TEST_PORT),
+      );
+      await page.goto(`${baseUrl}/ai-agents/2/chat?folder=2&chat=test-chat-id`);
 
       const containerLoader = page.getByTestId("chat-container-loading");
 
@@ -503,16 +528,17 @@ test.describe("AI chat", () => {
     test("should render ai message with mcp tool", async ({
       page,
       mockRequest,
+      baseUrl,
     }) => {
-      await mockRequest.router([
-        endpoints.aiRoomsChatsConfigAllEnabled,
-        endpoints.aiRoomsServersEmpty,
-        endpoints.aiRoomsChatsEmpty,
-        endpoints.agentFolderChat,
-        endpoints.aiChat,
-        endpoints.aiChatMessagesMcpTool,
-      ]);
-      await page.goto("/ai-agents/2/chat?folder=2&chat=test-chat-id");
+      mockRequest.use(
+        aiRoomsChatsConfigHandler(TEST_PORT),
+        aiRoomsServersHandler(TEST_PORT),
+        aiRoomsChatsHandler(TEST_PORT, "empty"),
+        agentFolderChatHandler(TEST_PORT),
+        aiChatMessagesHandler(TEST_PORT, "mcpTool"),
+        aiChatHandler(TEST_PORT),
+      );
+      await page.goto(`${baseUrl}/ai-agents/2/chat?folder=2&chat=test-chat-id`);
 
       const containerLoader = page.getByTestId("chat-container-loading");
 
@@ -534,16 +560,17 @@ test.describe("AI chat", () => {
     test("should scroll to last message after opening chat", async ({
       page,
       mockRequest,
+      baseUrl,
     }) => {
-      await mockRequest.router([
-        endpoints.aiRoomsChatsConfigAllEnabled,
-        endpoints.aiRoomsServersEmpty,
-        endpoints.aiRoomsChatsEmpty,
-        endpoints.agentFolderChat,
-        endpoints.aiChat,
-        endpoints.aiChatMessagesMany,
-      ]);
-      await page.goto("/ai-agents/2/chat?folder=2&chat=test-chat-id");
+      mockRequest.use(
+        aiRoomsChatsConfigHandler(TEST_PORT),
+        aiRoomsServersHandler(TEST_PORT),
+        aiRoomsChatsHandler(TEST_PORT, "empty"),
+        agentFolderChatHandler(TEST_PORT),
+        aiChatMessagesHandler(TEST_PORT, "many"),
+        aiChatHandler(TEST_PORT),
+      );
+      await page.goto(`${baseUrl}/ai-agents/2/chat?folder=2&chat=test-chat-id`);
 
       const containerLoader = page.getByTestId("chat-container-loading");
 
@@ -562,16 +589,18 @@ test.describe("AI chat", () => {
     test("should redirect to result storage url if user can not use chat", async ({
       page,
       mockRequest,
+      baseUrl,
     }) => {
-      await mockRequest.router([
-        endpoints.aiRoomsChatsConfigAllEnabled,
-        endpoints.aiRoomsServersEmpty,
-        endpoints.aiRoomsChatsEmpty,
-        endpoints.agentFolderChatCanNotUseChat,
-        endpoints.agentFolderResultStorageCanNotUseChat,
-        endpoints.agentFolderInfoCanNotUseChat,
-      ]);
-      await page.goto("/ai-agents/2/chat?folder=2");
+      mockRequest.use(
+        aiRoomsChatsConfigHandler(TEST_PORT),
+        aiRoomsServersHandler(TEST_PORT),
+        aiRoomsChatsHandler(TEST_PORT, "empty"),
+        agentFolderChatHandler(TEST_PORT, "canNotUseChat"),
+        agentFolderResultStorageHandler(TEST_PORT, "canNotUseChat"),
+        agentFolderInfoHandler(TEST_PORT, "canNotUseChat"),
+      );
+
+      await page.goto(`${baseUrl}/ai-agents/2/chat?folder=2`);
 
       const containerLoader = page.getByTestId("chat-container-loading");
 
@@ -596,16 +625,20 @@ test.describe("AI chat", () => {
       ]);
     });
 
-    test("should open chat via chat select", async ({ page, mockRequest }) => {
-      await mockRequest.router([
-        endpoints.aiRoomsChatsConfigAllEnabled,
-        endpoints.aiRoomsServersEmpty,
-        endpoints.aiRoomsChats,
-        endpoints.agentFolderChat,
-        endpoints.aiChat,
-        endpoints.aiChatMessages,
-      ]);
-      await page.goto("/ai-agents/2/chat?folder=2");
+    test("should open chat via chat select", async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      mockRequest.use(
+        aiRoomsChatsConfigHandler(TEST_PORT),
+        aiRoomsServersHandler(TEST_PORT),
+        aiRoomsChatsHandler(TEST_PORT),
+        agentFolderChatHandler(TEST_PORT),
+        aiChatMessagesHandler(TEST_PORT),
+        aiChatHandler(TEST_PORT),
+      );
+      await page.goto(`${baseUrl}/ai-agents/2/chat?folder=2`);
 
       const containerLoader = page.getByTestId("chat-container-loading");
 
@@ -650,16 +683,16 @@ test.describe("AI chat", () => {
       ]);
     });
 
-    test("should delete chat", async ({ page, mockRequest }) => {
-      await mockRequest.router([
-        endpoints.aiRoomsChatsConfigAllEnabled,
-        endpoints.aiRoomsServersEmpty,
-        endpoints.aiRoomsChats,
-        endpoints.agentFolderChat,
-        endpoints.aiChat,
-        endpoints.aiChatMessages,
-      ]);
-      await page.goto("/ai-agents/2/chat?folder=2&chat=test-chat-id");
+    test("should delete chat", async ({ page, mockRequest, baseUrl }) => {
+      mockRequest.use(
+        aiRoomsChatsConfigHandler(TEST_PORT),
+        aiRoomsServersHandler(TEST_PORT),
+        aiRoomsChatsHandler(TEST_PORT),
+        agentFolderChatHandler(TEST_PORT),
+        aiChatMessagesHandler(TEST_PORT),
+        aiChatHandler(TEST_PORT),
+      );
+      await page.goto(`${baseUrl}/ai-agents/2/chat?folder=2&chat=test-chat-id`);
 
       const containerLoader = page.getByTestId("chat-container-loading");
 
@@ -694,7 +727,7 @@ test.describe("AI chat", () => {
 
       await removeItem.click();
 
-      const dialog = await page.getByRole("dialog");
+      const dialog = page.getByRole("dialog");
       await expect(dialog).toBeVisible();
 
       const confirmButton = dialog.getByTestId("delete_dialog_modal_submit");
@@ -710,16 +743,16 @@ test.describe("AI chat", () => {
       ]);
     });
 
-    test("should rename chat", async ({ page, mockRequest }) => {
-      await mockRequest.router([
-        endpoints.aiRoomsChatsConfigAllEnabled,
-        endpoints.aiRoomsServersEmpty,
-        endpoints.aiRoomsChats,
-        endpoints.agentFolderChat,
-        endpoints.aiChat,
-        endpoints.updateAiChat,
-      ]);
-      await page.goto("/ai-agents/2/chat?folder=2");
+    test("should rename chat", async ({ page, mockRequest, baseUrl }) => {
+      mockRequest.use(
+        aiRoomsChatsConfigHandler(TEST_PORT),
+        aiRoomsServersHandler(TEST_PORT),
+        aiRoomsChatsHandler(TEST_PORT),
+        agentFolderChatHandler(TEST_PORT),
+        aiChatHandler(TEST_PORT),
+        aiChatPutHandler(TEST_PORT),
+      );
+      await page.goto(`${baseUrl}/ai-agents/2/chat?folder=2`);
 
       const containerLoader = page.getByTestId("chat-container-loading");
 
@@ -773,32 +806,36 @@ test.describe("AI chat", () => {
       ]);
     });
 
-    test("should save chat to file", async ({ page, mockRequest, wsMock }) => {
-      await mockRequest.router([
-        endpoints.aiRoomsChatsConfigAllEnabled,
-        endpoints.aiRoomsServersEmpty,
-        endpoints.aiRoomsChats,
-        endpoints.agentFolderChat,
-        endpoints.aiChat,
-        endpoints.exportAiChatToFile,
-        endpoints.settingsWithSocket,
-      ]);
+    test("should save chat to file", async ({
+      page,
+      mockRequest,
+      wsMock,
+      baseUrl,
+    }) => {
+      mockRequest.use(
+        aiRoomsChatsConfigHandler(TEST_PORT),
+        aiRoomsServersHandler(TEST_PORT),
+        aiRoomsChatsHandler(TEST_PORT),
+        agentFolderChatHandler(TEST_PORT),
+        aiChatMessagesExportHandler(TEST_PORT),
+        aiChatMessagesHandler(TEST_PORT),
+        aiChatHandler(TEST_PORT),
+        settingsHandler(TEST_PORT, TypeSettings.AuthenticatedWithSocket),
+      );
 
       await wsMock.setupWebSocketMock();
 
-      await page.goto("/ai-agents/2/chat?folder=2");
+      await page.goto(`${baseUrl}/ai-agents/2/chat?folder=2`);
 
       const containerLoader = page.getByTestId("chat-container-loading");
 
       await expect(containerLoader).toBeVisible();
       await containerLoader.waitFor({ state: "hidden" });
 
-      await page.unroute(endpoints.agentFolderChat.url);
-
-      await mockRequest.router([
-        endpoints.resultStorageFolder,
-        endpoints.resultStorageFolderInfo,
-      ]);
+      mockRequest.use(
+        agentFolderResultStorageHandler(TEST_PORT),
+        agentFolderInfoHandler(TEST_PORT),
+      );
 
       const selectChat = page.getByTestId("select-chat");
       await expect(selectChat).toBeVisible();
@@ -830,6 +867,9 @@ test.describe("AI chat", () => {
 
       await page.getByTestId("selector_submit_button").click();
 
+      // Wait for the modal to close and socket subscription to be set up
+      await page.waitForTimeout(500);
+
       wsMock.emitExportChat({
         resultFile: {
           fileEntryType: 2,
@@ -853,16 +893,16 @@ test.describe("AI chat", () => {
       mockRequest,
       wsMock,
     }) => {
-      await mockRequest.router([
-        endpoints.aiRoomsChatsConfigAllEnabled,
-        endpoints.aiRoomsServersEmpty,
-        endpoints.aiRoomsChats,
-        endpoints.agentFolderChat,
-        endpoints.aiChat,
-        endpoints.exportAiMessageToFile,
-        endpoints.settingsWithSocket,
-        endpoints.aiChatMessages,
-      ]);
+      mockRequest.use(
+        settingsHandler(TEST_PORT, TypeSettings.AuthenticatedWithSocket),
+        aiRoomsChatsConfigHandler(TEST_PORT),
+        aiRoomsServersHandler(TEST_PORT),
+        aiRoomsChatsHandler(TEST_PORT),
+        agentFolderChatHandler(TEST_PORT),
+        aiChatMessagesExportHandler(TEST_PORT),
+        aiChatMessagesHandler(TEST_PORT),
+        aiChatHandler(TEST_PORT),
+      );
 
       await wsMock.setupWebSocketMock();
 
@@ -873,17 +913,18 @@ test.describe("AI chat", () => {
       await expect(containerLoader).toBeVisible();
       await containerLoader.waitFor({ state: "hidden" });
 
-      await page.unroute(endpoints.agentFolderChat.url);
-
-      await mockRequest.router([
-        endpoints.resultStorageFolder,
-        endpoints.resultStorageFolderInfo,
-      ]);
+      mockRequest.use(
+        agentFolderResultStorageHandler(TEST_PORT),
+        agentFolderInfoHandler(TEST_PORT),
+      );
 
       await expect(page.getByTestId("ai-message")).toBeVisible();
       await page.getByTitle("Save to file").click();
 
       await page.getByTestId("selector_submit_button").click();
+
+      // Wait for the modal to close and socket subscription to be set up
+      await page.waitForTimeout(500);
 
       wsMock.emitExportChat({
         resultFile: {
@@ -906,15 +947,16 @@ test.describe("AI chat", () => {
     test("should toggle web search if web search available", async ({
       page,
       mockRequest,
+      baseUrl,
     }) => {
-      await mockRequest.router([
-        endpoints.aiRoomsChatsConfigAllEnabled,
-        endpoints.aiRoomsServersEmpty,
-        endpoints.aiRoomsChats,
-        endpoints.agentFolderChat,
-        endpoints.aiChat,
-      ]);
-      await page.goto("/ai-agents/2/chat?folder=2");
+      mockRequest.use(
+        aiRoomsChatsConfigHandler(TEST_PORT),
+        aiRoomsServersHandler(TEST_PORT),
+        aiRoomsChatsHandler(TEST_PORT),
+        agentFolderChatHandler(TEST_PORT),
+        aiChatHandler(TEST_PORT),
+      );
+      await page.goto(`${baseUrl}/ai-agents/2/chat?folder=2`);
 
       const containerLoader = page.getByTestId("chat-container-loading");
 
@@ -937,18 +979,17 @@ test.describe("AI chat", () => {
     test("should render disabled web search and go to settings via tooltip if web search unavailable (admin)", async ({
       page,
       mockRequest,
+      baseUrl,
     }) => {
-      await page.unroute(endpoints.aiConfig.url);
-
-      await mockRequest.router([
-        endpoints.aiRoomsChatsConfigAllEnabled,
-        endpoints.aiRoomsServersEmpty,
-        endpoints.aiRoomsChats,
-        endpoints.agentFolderChat,
-        endpoints.aiChat,
-        endpoints.aiConfigWebSearchDisabled,
-      ]);
-      await page.goto("/ai-agents/2/chat?folder=2");
+      mockRequest.use(
+        aiRoomsChatsConfigHandler(TEST_PORT),
+        aiRoomsServersHandler(TEST_PORT),
+        aiRoomsChatsHandler(TEST_PORT),
+        agentFolderChatHandler(TEST_PORT),
+        aiChatHandler(TEST_PORT),
+        aiConfigHandler(TEST_PORT, false, true),
+      );
+      await page.goto(`${baseUrl}/ai-agents/2/chat?folder=2`);
 
       const containerLoader = page.getByTestId("chat-container-loading");
 
@@ -977,15 +1018,19 @@ test.describe("AI chat", () => {
       await expect(page).toHaveURL("/portal-settings/ai-settings/search");
     });
 
-    test("should attach and remove files", async ({ page, mockRequest }) => {
-      await mockRequest.router([
-        endpoints.aiRoomsChatsConfigAllEnabled,
-        endpoints.aiRoomsServersEmpty,
-        endpoints.aiRoomsChats,
-        endpoints.agentFolderChat,
-        endpoints.aiChat,
-      ]);
-      await page.goto("/ai-agents/2/chat?folder=2");
+    test("should attach and remove files", async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      mockRequest.use(
+        aiRoomsChatsConfigHandler(TEST_PORT),
+        aiRoomsServersHandler(TEST_PORT),
+        aiRoomsChatsHandler(TEST_PORT),
+        agentFolderChatHandler(TEST_PORT),
+        aiChatHandler(TEST_PORT),
+      );
+      await page.goto(`${baseUrl}/ai-agents/2/chat?folder=2`);
 
       const containerLoader = page.getByTestId("chat-container-loading");
 
@@ -999,7 +1044,7 @@ test.describe("AI chat", () => {
 
       await expect(selector).toBeVisible();
 
-      await mockRequest.router([endpoints.favorites]);
+      mockRequest.use(favoritesHandler(TEST_PORT));
 
       const favoritesOption = selector.getByTestId(/selector-item/).filter({
         hasText: "Favorites",
@@ -1030,17 +1075,18 @@ test.describe("AI chat", () => {
     test("should send message with text and file and receive response", async ({
       page,
       mockRequest,
+      baseUrl,
     }) => {
-      await mockRequest.router([
-        endpoints.aiRoomsChatsConfigAllEnabled,
-        endpoints.aiRoomsServersEmpty,
-        endpoints.aiRoomsChats,
-        endpoints.agentFolderChat,
-        endpoints.aiChat,
-        endpoints.aiRoomsChatsStream,
-      ]);
+      mockRequest.use(
+        aiRoomsChatsConfigHandler(TEST_PORT),
+        aiRoomsServersHandler(TEST_PORT),
+        aiRoomsChatsHandler(TEST_PORT),
+        agentFolderChatHandler(TEST_PORT),
+        aiChatHandler(TEST_PORT),
+        aiRoomsChatsStreamHandler(TEST_PORT),
+      );
 
-      await page.goto("/ai-agents/2/chat?folder=2");
+      await page.goto(`${baseUrl}/ai-agents/2/chat?folder=2`);
 
       const containerLoader = page.getByTestId("chat-container-loading");
 
@@ -1057,7 +1103,8 @@ test.describe("AI chat", () => {
 
       await expect(selector).toBeVisible();
 
-      await mockRequest.router([endpoints.favorites]);
+      //await mockRequest.router([endpoints.favorites]);
+      mockRequest.use(favoritesHandler(TEST_PORT));
 
       const favoritesOption = selector.getByTestId(/selector-item/).filter({
         hasText: "Favorites",
@@ -1088,17 +1135,18 @@ test.describe("AI chat", () => {
     test("should render tool call confirm dialog", async ({
       page,
       mockRequest,
+      baseUrl,
     }) => {
-      await mockRequest.router([
-        endpoints.aiRoomsChatsConfigAllEnabled,
-        endpoints.aiRoomsServersEmpty,
-        endpoints.aiRoomsChats,
-        endpoints.agentFolderChat,
-        endpoints.aiChat,
-        endpoints.aiRoomsChatsStreamMcpNeedApprove,
-      ]);
+      mockRequest.use(
+        aiRoomsChatsConfigHandler(TEST_PORT),
+        aiRoomsServersHandler(TEST_PORT),
+        aiRoomsChatsHandler(TEST_PORT),
+        agentFolderChatHandler(TEST_PORT),
+        aiChatHandler(TEST_PORT),
+        aiRoomsChatsStreamHandler(TEST_PORT, "mcpNeedApprove"),
+      );
 
-      await page.goto("/ai-agents/2/chat?folder=2");
+      await page.goto(`${baseUrl}/ai-agents/2/chat?folder=2`);
 
       const containerLoader = page.getByTestId("chat-container-loading");
 
@@ -1131,18 +1179,19 @@ test.describe("AI chat", () => {
     test("should save chat input state when switch between agent tabs", async ({
       page,
       mockRequest,
+      baseUrl,
     }) => {
-      await mockRequest.router([
-        endpoints.aiRoomsChatsConfigAllEnabled,
-        endpoints.aiRoomsServersEmpty,
-        endpoints.aiRoomsChats,
-        endpoints.agentFolderChat,
-        endpoints.aiChat,
-        endpoints.agentFolderResultStorage,
-        endpoints.agentFolderInfo,
-      ]);
+      mockRequest.use(
+        aiRoomsChatsConfigHandler(TEST_PORT),
+        aiRoomsServersHandler(TEST_PORT),
+        aiRoomsChatsHandler(TEST_PORT),
+        agentFolderChatHandler(TEST_PORT),
+        aiChatHandler(TEST_PORT),
+        agentFolderResultStorageHandler(TEST_PORT),
+        agentFolderInfoHandler(TEST_PORT),
+      );
 
-      await page.goto("/ai-agents/2/chat?folder=2");
+      await page.goto(`${baseUrl}/ai-agents/2/chat?folder=2`);
 
       const containerLoader = page.getByTestId("chat-container-loading");
 
@@ -1159,8 +1208,8 @@ test.describe("AI chat", () => {
 
       await expect(selector).toBeVisible();
 
-      await mockRequest.router([endpoints.favorites]);
-
+      //await mockRequest.router([endpoints.favorites]);
+      mockRequest.use(favoritesHandler(TEST_PORT));
       const favoritesOption = selector.getByTestId(/selector-item/).filter({
         hasText: "Favorites",
       });
@@ -1175,15 +1224,16 @@ test.describe("AI chat", () => {
       const chatTextArea = page.getByTestId("chat-input-textarea");
       await chatTextArea.fill("Lorem ipsum dolor sit amet");
 
-      await page.unroute(endpoints.favorites.url);
+      // await page.unroute(endpoints.favorites.url);
+      mockRequest.use(agentFolderResultStorageHandler(TEST_PORT));
 
       const resultStorageTab = page.getByTestId("result_tab");
       await resultStorageTab.click();
 
       await expect(page.getByTestId("empty-view")).toBeVisible();
 
-      await mockRequest.router([endpoints.agentFolderChat]);
-
+      //await mockRequest.router([endpoints.agentFolderChat]);
+      mockRequest.use(agentFolderChatHandler(TEST_PORT));
       const chatTab = page.getByTestId("chat_tab");
       await chatTab.click();
 
@@ -1194,19 +1244,20 @@ test.describe("AI chat", () => {
       ]);
     });
 
-    test("should save chat input state when when reload page", async ({
+    test("should save chat input state when reload page", async ({
       page,
       mockRequest,
+      baseUrl,
     }) => {
-      await mockRequest.router([
-        endpoints.aiRoomsChatsConfigAllEnabled,
-        endpoints.aiRoomsServersEmpty,
-        endpoints.aiRoomsChats,
-        endpoints.agentFolderChat,
-        endpoints.aiChat,
-      ]);
+      mockRequest.use(
+        aiRoomsChatsConfigHandler(TEST_PORT),
+        aiRoomsServersHandler(TEST_PORT),
+        aiRoomsChatsHandler(TEST_PORT),
+        agentFolderChatHandler(TEST_PORT),
+        aiChatHandler(TEST_PORT),
+      );
 
-      await page.goto("/ai-agents/2/chat?folder=2");
+      await page.goto(`${baseUrl}/ai-agents/2/chat?folder=2`);
 
       const containerLoader = page.getByTestId("chat-container-loading");
 
@@ -1223,7 +1274,8 @@ test.describe("AI chat", () => {
 
       await expect(selector).toBeVisible();
 
-      await mockRequest.router([endpoints.favorites]);
+      //await mockRequest.router([endpoints.favorites]);
+      mockRequest.use(favoritesHandler(TEST_PORT));
 
       const favoritesOption = selector.getByTestId(/selector-item/).filter({
         hasText: "Favorites",
@@ -1239,7 +1291,8 @@ test.describe("AI chat", () => {
       const chatTextArea = page.getByTestId("chat-input-textarea");
       await chatTextArea.fill("Lorem ipsum dolor sit amet");
 
-      await page.unroute(endpoints.favorites.url);
+      //await page.unroute(endpoints.favorites.url);
+      mockRequest.use(agentFolderChatHandler(TEST_PORT));
 
       await page.reload();
 
@@ -1257,23 +1310,24 @@ test.describe("AI chat", () => {
   // ================================== User ==================================
 
   test.describe("User", () => {
-    test.beforeEach(async ({ mockRequest }) => {
-      await mockRequest.router([endpoints.selfRegularUserOnly]);
+    test.beforeEach(({ mockRequest }) => {
+      mockRequest.use(selfByTypeHandler(TEST_PORT, "regular"));
     });
 
     test("should render full size empty screen without go to settings button if ai not ready and there are no chats (user)", async ({
       page,
       mockRequest,
+      baseUrl,
     }) => {
-      await mockRequest.router([
-        endpoints.aiRoomsChatsConfigAllEnabled,
-        endpoints.aiRoomsServersEmpty,
-        endpoints.aiRoomsChatsEmpty,
-        endpoints.agentFolderChat,
-        endpoints.aiConfigDisabled,
-        endpoints.aiProvidersEmptyList,
-      ]);
-      await page.goto("/ai-agents/2/chat?folder=2");
+      mockRequest.use(
+        aiRoomsChatsConfigHandler(TEST_PORT),
+        aiRoomsServersHandler(TEST_PORT),
+        aiRoomsChatsHandler(TEST_PORT, "empty"),
+        agentFolderChatHandler(TEST_PORT),
+        aiConfigHandler(TEST_PORT, true),
+        aiProvidersHandler(TEST_PORT, false, true),
+      );
+      await page.goto(`${baseUrl}/ai-agents/2/chat?folder=2`);
 
       const containerLoader = page.getByTestId("chat-container-loading");
 
@@ -1293,16 +1347,17 @@ test.describe("AI chat", () => {
     test("should render chat header with empty screen if ai not ready and there are chats (user)", async ({
       page,
       mockRequest,
+      baseUrl,
     }) => {
-      await mockRequest.router([
-        endpoints.aiRoomsChatsConfigAllEnabled,
-        endpoints.aiRoomsServersEmpty,
-        endpoints.aiRoomsChats,
-        endpoints.agentFolderChat,
-        endpoints.aiConfigDisabled,
-        endpoints.aiProvidersEmptyList,
-      ]);
-      await page.goto("/ai-agents/2/chat?folder=2");
+      mockRequest.use(
+        aiRoomsChatsConfigHandler(TEST_PORT),
+        aiRoomsServersHandler(TEST_PORT),
+        aiRoomsChatsHandler(TEST_PORT),
+        agentFolderChatHandler(TEST_PORT),
+        aiConfigHandler(TEST_PORT, true),
+        aiProvidersHandler(TEST_PORT, false, true),
+      );
+      await page.goto(`${baseUrl}/ai-agents/2/chat?folder=2`);
 
       const containerLoader = page.getByTestId("chat-container-loading");
 
@@ -1324,17 +1379,18 @@ test.describe("AI chat", () => {
     test("should render chat with info block, disabled chat input and new chat button if ai not ready (user)", async ({
       page,
       mockRequest,
+      baseUrl,
     }) => {
-      await mockRequest.router([
-        endpoints.aiRoomsChatsConfigAllEnabled,
-        endpoints.aiRoomsServersEmpty,
-        endpoints.aiRoomsChats,
-        endpoints.agentFolderChat,
-        endpoints.aiChat,
-        endpoints.aiChatMessages,
-        endpoints.aiConfigDisabled,
-      ]);
-      await page.goto("/ai-agents/2/chat?folder=2&chat=test-chat-id");
+      mockRequest.use(
+        aiRoomsChatsConfigHandler(TEST_PORT),
+        aiRoomsServersHandler(TEST_PORT),
+        aiRoomsChatsHandler(TEST_PORT),
+        agentFolderChatHandler(TEST_PORT),
+        aiChatMessagesHandler(TEST_PORT),
+        aiChatHandler(TEST_PORT),
+        aiConfigHandler(TEST_PORT, true),
+      );
+      await page.goto(`${baseUrl}/ai-agents/2/chat?folder=2&chat=test-chat-id`);
 
       const containerLoader = page.getByTestId("chat-container-loading");
 
@@ -1371,18 +1427,18 @@ test.describe("AI chat", () => {
     test("should render disabled web search with tooltip if web search unavailable (user)", async ({
       page,
       mockRequest,
+      baseUrl,
     }) => {
-      await page.unroute(endpoints.aiConfig.url);
+      mockRequest.use(
+        aiRoomsChatsConfigHandler(TEST_PORT),
+        aiRoomsServersHandler(TEST_PORT),
+        aiRoomsChatsHandler(TEST_PORT),
+        agentFolderChatHandler(TEST_PORT),
+        aiChatHandler(TEST_PORT),
+        aiConfigHandler(TEST_PORT, false, true),
+      );
 
-      await mockRequest.router([
-        endpoints.aiRoomsChatsConfigAllEnabled,
-        endpoints.aiRoomsServersEmpty,
-        endpoints.aiRoomsChats,
-        endpoints.agentFolderChat,
-        endpoints.aiChat,
-        endpoints.aiConfigWebSearchDisabled,
-      ]);
-      await page.goto("/ai-agents/2/chat?folder=2");
+      await page.goto(`${baseUrl}/ai-agents/2/chat?folder=2`);
 
       const containerLoader = page.getByTestId("chat-container-loading");
 

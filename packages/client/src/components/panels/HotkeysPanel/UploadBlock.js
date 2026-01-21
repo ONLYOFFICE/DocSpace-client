@@ -26,17 +26,18 @@
 
 import { Row } from "@docspace/shared/components/rows";
 import { Text } from "@docspace/shared/components/text";
+import styles from "./HotkeysPanel.module.scss";
 
 const CreationBlock = ({ t, textStyles, keyTextStyles }) => {
   return (
     <>
-      <Row className="hotkeys_row">
+      <Row className={styles.hotkeysRow}>
         <>
           <Text {...textStyles}>{t("HotkeysUploadFile")}</Text>
           <Text {...keyTextStyles}>Shift + u</Text>
         </>
       </Row>
-      <Row className="hotkeys_row">
+      <Row className={styles.hotkeysRow}>
         <>
           <Text {...textStyles}>{t("Article:UploadFolder")}</Text>
           <Text {...keyTextStyles}>Shift + i</Text>

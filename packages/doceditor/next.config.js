@@ -27,11 +27,22 @@
 /** @type {import('next').NextConfig} */
 
 const path = require("path");
-const pkg = require("./package.json");
+const fs = require("fs");
+
+// Use fs.readFileSync instead of require to avoid module system issues
+const packagePath = path.resolve(__dirname, "package.json");
+const pkg = JSON.parse(fs.readFileSync(packagePath, "utf8"));
+
 const BannerPlugin = require("webpack").BannerPlugin;
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
-const { getBanner } = require("@docspace/shared/utils/build").default;
+
+// Use createRequire to properly import ES module
+const { createRequire } = require("module");
+const requireESM = createRequire(__filename);
+
+const buildModule = requireESM("@docspace/shared/utils/build");
+const { getBanner } = buildModule.default;
 
 const version = pkg.version;
 const banner = getBanner(version);

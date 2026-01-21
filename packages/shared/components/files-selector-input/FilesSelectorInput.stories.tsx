@@ -30,11 +30,12 @@ import type { TBreadCrumb } from "../selector/Selector.types";
 
 import { FilesSelectorInput } from "./index";
 import {
-  createCreateRoomsHandler,
-  createGetRoomsHandler,
-} from "../../__mocks__/storybook/handlers/files/rooms";
-import { createGetFolderHandler } from "../../__mocks__/storybook/handlers/files/folders";
-import { createGetFolderTreeHandler } from "../../__mocks__/storybook/handlers/files/foldersTree";
+  roomListHandler,
+  createRoomHandler,
+  foldersTreeHandler,
+  folderHandler,
+  TypeRoomList,
+} from "../../__mocks__/handlers";
 
 const meta = {
   title: "Components/FilesSelectorInput",
@@ -48,10 +49,10 @@ const meta = {
     },
     msw: {
       handlers: [
-        createGetFolderTreeHandler(),
-        createGetRoomsHandler(),
-        createGetFolderHandler(),
-        createCreateRoomsHandler(),
+        roomListHandler("", TypeRoomList.IsDefault),
+        createRoomHandler(),
+        foldersTreeHandler(""),
+        folderHandler(""),
       ],
     },
   },

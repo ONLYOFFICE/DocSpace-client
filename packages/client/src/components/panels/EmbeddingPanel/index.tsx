@@ -61,7 +61,7 @@ import SearchDarkUrl from "PUBLIC_DIR/images/sdk-presets_search_dark.png";
 import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.react.svg?url";
 import CrossReactSvg from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 
-import { StyledBody } from "./StyledEmbeddingPanel";
+import styles from "./EmbeddingPanel.module.scss";
 
 import { DisplayBlock } from "./sub-components/DisplayBlock";
 import { CheckboxElement } from "./sub-components/CheckboxElement";
@@ -378,7 +378,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
   }, [link, prevLink, sharedLinksOptions]);
 
   const barTitle = (
-    <div className="embedding-panel_bar-header">
+    <div className={styles.embeddingPanelBarHeader}>
       <Link
         isHovered
         type={LinkType.action}
@@ -407,9 +407,9 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
     >
       <ModalDialog.Header>{t("Files:EmbeddingSettings")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <StyledBody>
+        <div className={styles.embeddingPanelBody}>
           {barIsVisible ? (
-            <div className="embedding-panel_banner">
+            <div className={styles.embeddingPanelBanner}>
               <Text fontSize="12px" fontWeight={400}>
                 {isAdmin ? (
                   <Trans
@@ -436,7 +436,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
                 )}
               </Text>
               <IconButton
-                className="embedding-panel_banner-close-icon"
+                className={styles.embeddingPanelBannerCloseIcon}
                 size={12}
                 iconName={CrossReactSvg}
                 onClick={onCloseBar}
@@ -444,18 +444,18 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
               />
             </div>
           ) : null}
-          <div className="embedding-panel_body">
+          <div>
             {sharedLinksOptions && sharedLinksOptions.length > 1 ? (
               <>
                 <Text
-                  className="embedding-panel_header-link"
+                  className={styles.embeddingPanelHeaderLink}
                   fontSize="15px"
                   fontWeight={600}
                 >
                   {t("EmbeddingPanel:Link")}
                 </Text>
                 <ComboBox
-                  className="embedding-panel_combo-box"
+                  className={styles.embeddingPanelComboBox}
                   scaled
                   onSelect={onChangeSharedLink}
                   options={sharedLinksOptions}
@@ -470,7 +470,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
 
             {showLinkBar ? (
               <PublicRoomBar
-                className="embedding-panel_bar"
+                className={styles.embeddingPanelBar}
                 headerText={barTitle}
                 bodyText={barSubTitle}
                 iconName={TabletLinkReactSvgUrl}
@@ -479,14 +479,14 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
             ) : null}
 
             <Text
-              className="embedding-panel_header-text"
+              className={styles.embeddingPanelHeaderText}
               fontSize="15px"
               fontWeight={600}
             >
               {t("EmbeddingPanel:DisplaySettings")}
             </Text>
 
-            <div className="embedding-panel_inputs-container">
+            <div className={styles.embeddingPanelInputsContainer}>
               <DisplayBlock
                 label={t("EmbeddingPanel:Width")}
                 inputValue={widthValue}
@@ -506,14 +506,14 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
             {!isFile ? (
               <>
                 <Text
-                  className="embedding-panel_header-text"
+                  className={styles.embeddingPanelHeaderText}
                   fontSize="15px"
                   fontWeight={600}
                 >
                   {t("JavascriptSdk:InterfaceElements")}
                 </Text>
 
-                <div className="embedding-panel_checkbox-container">
+                <div className={styles.embeddingPanelCheckboxContainer}>
                   <CheckboxElement
                     label={t("Common:Title")}
                     onChange={onHeaderChange}
@@ -540,16 +540,16 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
               </>
             ) : null}
 
-            <div className="embedding-panel_code-container">
+            <div className={styles.embeddingPanelCodeContainer}>
               <Text
-                className="embedding-panel_header-text"
+                className={styles.embeddingPanelHeaderText}
                 fontSize="15px"
                 fontWeight={600}
               >
                 {t("JavascriptSdk:Code")}
               </Text>
               <IconButton
-                className="embedding-panel_copy-icon"
+                className={styles.embeddingPanelCopyIcon}
                 size={16}
                 iconName={CopyReactSvgUrl}
                 onClick={onCopyLink}
@@ -563,7 +563,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
               />
             </div>
           </div>
-        </StyledBody>
+        </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

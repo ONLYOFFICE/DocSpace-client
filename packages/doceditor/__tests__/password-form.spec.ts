@@ -25,19 +25,25 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import {
-  endpoints,
-  HEADER_OPEN_EDIT_WITH_PASSWORD,
-} from "@docspace/shared/__mocks__/e2e";
-
+  filesSettingsHandler,
+  openEditHandler,
+  validatePublicRoomKeyPasswordHandler,
+} from "@docspace/shared/__mocks__/handlers";
 import { expect, test } from "./fixtures/base";
 
 test.describe("Password form", () => {
-  test("Password form render", async ({ page, mockRequest }) => {
-    await mockRequest.setHeaders("**/doceditor**", [
-      HEADER_OPEN_EDIT_WITH_PASSWORD,
-    ]);
-    await mockRequest.router([endpoints.filesSettings]);
-    await page.goto("/doceditor?fileId=1&share=qwerty");
+  test("Password form render", async ({
+    page,
+    serverRequestInterceptor,
+    port,
+    baseUrl,
+  }) => {
+    serverRequestInterceptor.use(
+      filesSettingsHandler(port),
+      openEditHandler(port, true),
+      validatePublicRoomKeyPasswordHandler(port),
+    );
+    await page.goto(`${baseUrl}/doceditor?fileId=1&share=qwerty`);
 
     const form = page.getByTestId("form-wrapper");
     await expect(form).toBeVisible();

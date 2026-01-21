@@ -24,23 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import {
-  endpoints,
-} from "@docspace/shared/__mocks__/e2e";
-
+import { colorThemeHandler } from "@docspace/shared/__mocks__/handlers";
 import { expect, test } from "./fixtures/base";
 
 test.describe("Payments", () => {
-  test.beforeEach(async ({ mockRequest }) => {
-    await mockRequest.router([endpoints.colorTheme]);
+  test.beforeEach(async ({ serverRequestInterceptor, port }) => {
+    serverRequestInterceptor.use(colorThemeHandler(port));
   });
 
-  test("should payments render", async ({ page }) => {
-    await page.goto("/management/payments");
+  test("should payments render", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/management/payments`);
 
-    await expect(
-      page.getByTestId("standalone-page"),
-    ).toBeVisible();
+    await expect(page.getByTestId("standalone-page")).toBeVisible();
 
     await expect(page).toHaveScreenshot([
       "desktop",

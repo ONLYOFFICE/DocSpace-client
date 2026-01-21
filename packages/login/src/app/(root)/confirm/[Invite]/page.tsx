@@ -68,7 +68,10 @@ async function Page(props: LinkInviteProps) {
   const confirmKey = getStringFromSearchParams(searchParams);
 
   const headersList = await headers();
-  const hostName = headersList.get("x-forwarded-host") ?? "";
+  const hostName =
+    headersList.get("x-forwarded-host-test") ??
+    headersList.get("x-forwarded-host") ??
+    "";
 
   const [
     user,
@@ -121,6 +124,7 @@ async function Page(props: LinkInviteProps) {
           isStandalone={settings.standalone}
           logoText={settings.logoText}
           invitationSettings={invitationSettings}
+          hostName={hostName}
         />
       </FormWrapper>
     </>

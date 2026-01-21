@@ -26,43 +26,38 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { expect, test } from "../fixtures/base";
-import { endpoints } from "@docspace/shared/__mocks__/e2e";
-import { PATH_AI_PROVIDERS } from "@docspace/shared/__mocks__/e2e/handlers/ai";
+import { expect, test, TEST_PORT } from "../fixtures/base";
 import { ProviderType } from "@docspace/shared/api/ai/enums";
+import { 
+  settingsHandler, 
+  selfActivationStatusHandler, 
+  TypeSettings, 
+  aiProvidersHandler, 
+  aiProvidersPostHandler, 
+  aiProvidersAvailableHandler,
+  aiModelsHandler,
+  aiProvidersDeleteHandler,
+  aiProvidersPutHandler
+} from "@docspace/shared/__mocks__/handlers";
+import { PATH_AI_PROVIDERS_LIST } from "@docspace/shared/__mocks__/handlers/ai/providers";
+
 
 test.describe("AI Provider", () => {
-  test.beforeEach(async ({ mockRequest }) => {
-    await mockRequest.router([
-      endpoints.aiConfig,
-      endpoints.settingsWithQuery,
-      endpoints.colorTheme,
-      endpoints.build,
-      endpoints.capabilities,
-      endpoints.selfEmailActivatedClient,
-      endpoints.tariff,
-      endpoints.quota,
-      endpoints.additionalSettings,
-      endpoints.getPortal,
-      endpoints.companyInfo,
-      endpoints.cultures,
-      endpoints.root,
-      endpoints.invitationSettings,
-      endpoints.filesSettings,
-      endpoints.webPlugins,
-      endpoints.thirdPartyCapabilities,
-      endpoints.thirdParty,
-      endpoints.docService,
-    ]);
+  test.beforeEach( ({ mockRequest }) => {
+    mockRequest.use(
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true)
+    );
   });
 
   test("should render empty AI providers page with description and add provider button", async ({
     page,
     mockRequest,
+    baseUrl
   }) => {
-    await mockRequest.router([endpoints.aiProvidersEmptyList]);
+    mockRequest.use(aiProvidersHandler(TEST_PORT, false, true));
 
-    await page.goto("/portal-settings/ai-settings/providers");
+    await page.goto(`${baseUrl}/portal-settings/ai-settings/providers`);
 
     const addProviderBtn = page.getByTestId("add-provider-button");
 
@@ -82,14 +77,13 @@ test.describe("AI Provider", () => {
     ]);
   });
 
-  test("should create AI provider", async ({ page, mockRequest }) => {
-    await mockRequest.router([
-      endpoints.aiProvidersEmptyList,
-      endpoints.createAiProvider,
-      endpoints.aiProvidersAvailable,
-    ]);
+  test("should create AI provider", async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(
+      aiProvidersHandler(TEST_PORT, false, true),
+      aiProvidersPostHandler(TEST_PORT),
+      aiProvidersAvailableHandler(TEST_PORT));
 
-    await page.goto("/portal-settings/ai-settings/providers");
+    await page.goto(`${baseUrl}/portal-settings/ai-settings/providers`);
 
     const addProviderBtn = page.getByTestId("add-provider-button");
     await expect(addProviderBtn).toBeVisible();
@@ -123,7 +117,7 @@ test.describe("AI Provider", () => {
     await providerKeyInput.fill("testkey");
 
     const reqPromise = page.waitForRequest(
-      (r) => r.url().endsWith(PATH_AI_PROVIDERS) && r.method() === "POST",
+      (r) => r.url().endsWith(PATH_AI_PROVIDERS_LIST) && r.method() === "POST",
     );
     await providerSaveButton.click();
     const req = await reqPromise;
@@ -146,19 +140,21 @@ test.describe("AI Provider", () => {
     ]);
   });
 
-  test("should delete AI Provider", async ({ page, mockRequest }) => {
-    await mockRequest.router([
-      endpoints.aiProvidersList,
-      endpoints.deleteAiProvider,
-      endpoints.aiModelsClaude,
-    ]);
+  test("should delete AI Provider", async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(
+      aiProvidersHandler(TEST_PORT),
+      aiProvidersDeleteHandler(TEST_PORT),
+      aiModelsHandler(TEST_PORT, {
+        isClaude: true,
+      }),
+    );
 
     const listRespPromise = page.waitForResponse(
       (r) =>
-        r.url().endsWith(PATH_AI_PROVIDERS) && r.request().method() === "GET",
+        r.url().endsWith(PATH_AI_PROVIDERS_LIST) && r.request().method() === "GET",
     );
 
-    await page.goto("/portal-settings/ai-settings/providers");
+    await page.goto(`${baseUrl}/portal-settings/ai-settings/providers`);
 
     const listResp = await listRespPromise;
     const body = await listResp.json();
@@ -186,7 +182,7 @@ test.describe("AI Provider", () => {
     );
 
     const deleteReqPromise = page.waitForRequest(
-      (r) => r.url().endsWith(PATH_AI_PROVIDERS) && r.method() === "DELETE",
+      (r) => r.url().endsWith(PATH_AI_PROVIDERS_LIST) && r.method() === "DELETE",
     );
 
     await deleteProviderButton.click();
@@ -206,20 +202,22 @@ test.describe("AI Provider", () => {
     ]);
   });
 
-  test("should update AI Provider", async ({ page, mockRequest }) => {
-    await mockRequest.router([
-      endpoints.aiProvidersList,
-      endpoints.aiProvidersAvailable,
-      endpoints.updateAiProvider,
-      endpoints.aiModelsClaude,
-    ]);
+  test("should update AI Provider", async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(
+      aiProvidersHandler(TEST_PORT),
+      aiProvidersAvailableHandler(TEST_PORT),
+      aiProvidersPutHandler(TEST_PORT),
+      aiModelsHandler(TEST_PORT, {
+        isClaude: true,
+      }),
+    );
 
     const listRespPromise = page.waitForResponse(
       (r) =>
-        r.url().endsWith(PATH_AI_PROVIDERS) && r.request().method() === "GET",
+        r.url().endsWith(PATH_AI_PROVIDERS_LIST) && r.request().method() === "GET",
     );
 
-    await page.goto("/portal-settings/ai-settings/providers");
+    await page.goto(`${baseUrl}/portal-settings/ai-settings/providers`);
 
     const listResp = await listRespPromise.then((res) => res.json());
     const firstProviderData = listResp.response[0];
@@ -265,12 +263,12 @@ test.describe("AI Provider", () => {
 
     const updateReqPromise = page.waitForRequest(
       (r) =>
-        r.url().endsWith(`${PATH_AI_PROVIDERS}/${firstProviderData.id}`) &&
+        r.url().endsWith(`${PATH_AI_PROVIDERS_LIST}/${firstProviderData.id}`) &&
         r.method() === "PUT",
     );
     const updateResPromise = page.waitForResponse(
       (r) =>
-        r.url().endsWith(`${PATH_AI_PROVIDERS}/${firstProviderData.id}`) &&
+        r.url().endsWith(`${PATH_AI_PROVIDERS_LIST}/${firstProviderData.id}`) &&
         r.request().method() === "PUT",
     );
 
@@ -299,15 +297,18 @@ test.describe("AI Provider", () => {
   test("should render error icon and key input in error state if AI Provider needs reset", async ({
     page,
     mockRequest,
+    baseUrl
   }) => {
-    await mockRequest.router([
-      endpoints.aiProvidersListNeedReset,
-      endpoints.aiProvidersAvailable,
-      endpoints.updateAiProvider,
-      endpoints.aiModelsClaude,
-    ]);
+    mockRequest.use(
+      aiProvidersHandler(TEST_PORT, true),
+      aiProvidersAvailableHandler(TEST_PORT),
+      aiProvidersPutHandler(TEST_PORT),
+      aiModelsHandler(TEST_PORT, {
+        isClaude: true,
+      }),
+    );
 
-    await page.goto("/portal-settings/ai-settings/providers");
+    await page.goto(`${baseUrl}/portal-settings/ai-settings/providers`);
 
     const firstProviderTile = page.getByTestId("ai-provider-tile").first();
     await expect(firstProviderTile).toBeVisible();
@@ -345,14 +346,17 @@ test.describe("AI Provider", () => {
   test("should render error icon in providers tiles if models are not available", async ({
     page,
     mockRequest,
+    baseUrl
   }) => {
-    await mockRequest.router([
-      endpoints.aiProvidersList,
-      endpoints.aiProvidersAvailable,
-      endpoints.aiModelsError,
-    ]);
+     mockRequest.use(
+      aiProvidersHandler(TEST_PORT),
+      aiProvidersAvailableHandler(TEST_PORT),
+      aiModelsHandler(TEST_PORT, {
+        isError: true,
+      }),
+    );
 
-    await page.goto("/portal-settings/ai-settings/providers");
+    await page.goto(`${baseUrl}/portal-settings/ai-settings/providers`);
     const tiles = page.getByTestId("ai-provider-tile");
     await expect(tiles).toHaveCount(4);
 
@@ -369,14 +373,17 @@ test.describe("AI Provider", () => {
   test("should not render error icon in providers tiles if models are available", async ({
     page,
     mockRequest,
+    baseUrl
   }) => {
-    await mockRequest.router([
-      endpoints.aiProvidersList,
-      endpoints.aiProvidersAvailable,
-      endpoints.aiModelsClaude,
-    ]);
+    mockRequest.use(
+      aiProvidersHandler(TEST_PORT),
+      aiProvidersAvailableHandler(TEST_PORT),
+      aiModelsHandler(TEST_PORT, {
+        isClaude: true,
+      }),
+    );
 
-    await page.goto("/portal-settings/ai-settings/providers");
+    await page.goto(`${baseUrl}/portal-settings/ai-settings/providers`);
     const tiles = page.getByTestId("ai-provider-tile");
     await expect(tiles).toHaveCount(4);
 

@@ -24,19 +24,23 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { endpoints } from "@docspace/shared/__mocks__/e2e";
-
+import { filesSettingsHandler } from "@docspace/shared/__mocks__/handlers";
 import { expect, test } from "./fixtures/base";
 
 test.describe("DeepLink", () => {
-  test("DeepLink render", async ({ page, mockRequest }, testInfo) => {
+  test("DeepLink render", async ({
+    page,
+    serverRequestInterceptor,
+    port,
+    baseUrl,
+  }, testInfo) => {
     test.skip(
       testInfo.project.name === "desktop",
       "DeepLink unsupported on desktop",
     );
 
-    await mockRequest.router([endpoints.filesSettings]);
-    await page.goto("/doceditor?fileId=1");
+    serverRequestInterceptor.use(filesSettingsHandler(port));
+    await page.goto(`${baseUrl}/doceditor?fileId=1`);
 
     const form = page.getByTestId("form-wrapper");
     await expect(form).toBeVisible();

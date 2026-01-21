@@ -26,7 +26,6 @@
 
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 import { expect, test } from "./fixtures/base";
-import { endpoints } from "@docspace/shared/__mocks__/e2e";
 
 const URL = "/login/confirm/ProfileRemove";
 
@@ -51,8 +50,8 @@ const QUERY_PARAMS = [
 
 const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
 
-test("profile remove render", async ({ page }) => {
-  await page.goto(URL_WITH_PARAMS);
+test("profile remove render", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -61,9 +60,8 @@ test("profile remove render", async ({ page }) => {
   ]);
 });
 
-test("profile remove success", async ({ page, context, mockRequest }) => {
-  await mockRequest.router([endpoints.removeUser]);
-  await page.goto(URL_WITH_PARAMS);
+test("profile remove success", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   const deleteButton = page.getByTestId("delete_profile_button");
   await deleteButton.click();

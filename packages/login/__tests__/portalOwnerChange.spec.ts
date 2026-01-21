@@ -26,7 +26,6 @@
 
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 import { expect, test } from "./fixtures/base";
-import { endpoints } from "@docspace/shared/__mocks__/e2e";
 
 const URL = "/login/confirm/PortalOwnerChange";
 
@@ -51,8 +50,8 @@ const QUERY_PARAMS = [
 
 const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
 
-test("portal owner change render", async ({ page }) => {
-  await page.goto(URL_WITH_PARAMS);
+test("portal owner change render", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -61,9 +60,8 @@ test("portal owner change render", async ({ page }) => {
   ]);
 });
 
-test("portal owner change save", async ({ page, mockRequest }) => {
-  await mockRequest.router([endpoints.changeOwner]);
-  await page.goto(URL_WITH_PARAMS);
+test("portal owner change save", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   const changeOwnerButton = page.getByTestId("save_change_owner_button");
   await changeOwnerButton.click();
@@ -77,12 +75,12 @@ test("portal owner change save", async ({ page, mockRequest }) => {
   ]);
 });
 
-test("portal owner change cancel", async ({ page }) => {
-  await page.goto(URL_WITH_PARAMS);
+test("portal owner change cancel", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("cancel_button").click();
 
-  await page.waitForURL("/", { waitUntil: "load" });
+  await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
     "desktop",

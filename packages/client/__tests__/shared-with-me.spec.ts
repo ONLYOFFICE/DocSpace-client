@@ -23,50 +23,35 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import { BASE_URL, endpoints } from "@docspace/shared/__mocks__/e2e";
-import { ShareAccessRights } from "@docspace/shared/enums";
-import {
-  createLinkRoute,
-  LINKS_FILE_PATH,
-} from "@docspace/shared/__mocks__/e2e/handlers/share";
 
-import { expect, test } from "./fixtures/base";
+import { ShareAccessRights } from "@docspace/shared/enums";
+
+import { expect, test, TEST_PORT } from "./fixtures/base";
+import {
+  rootHandler,
+  selfActivationStatusHandler,
+  settingsHandler,
+  sharedWithMeHandler,
+  TypeSettings,
+  shareHandler,
+  createLinkRouteHandler,
+  shareToUserHandler,
+} from "@docspace/shared/__mocks__/handlers";
+import { createLinksRouteHandler } from "@docspace/shared/__mocks__/handlers/share/link";
 
 test.describe("Shared with me", () => {
   test.beforeEach(async ({ mockRequest }) => {
-    await mockRequest.router([
-      endpoints.aiConfig,
-      endpoints.settingsWithQuery,
-      endpoints.colorTheme,
-      endpoints.build,
-      endpoints.capabilities,
-      endpoints.selfEmailActivatedClient,
-      endpoints.tariff,
-      endpoints.quota,
-      endpoints.additionalSettings,
-      endpoints.getPortal,
-      endpoints.companyInfo,
-      endpoints.cultures,
-      endpoints.root,
-      endpoints.invitationSettings,
-      endpoints.filesSettings,
-      endpoints.webPlugins,
-
-      endpoints.thirdPartyCapabilities,
-      endpoints.thirdParty,
-      endpoints.docService,
-    ]);
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      sharedWithMeHandler(TEST_PORT),
+    );
   });
 
-  test("should navigate to shared with me page", async ({
-    page,
-    mockRequest,
-  }) => {
-    // Setup mock endpoints for authenticated user and folder data
-    await mockRequest.router([endpoints.sharedWithMe]);
-
+  test("should navigate to shared with me page", async ({ page, baseUrl }) => {
     // Navigate to shared with me page
-    await page.goto("/shared-with-me/filter?folder=4");
+    await page.goto(`${baseUrl}/shared-with-me/filter?folder=4`);
 
     // Wait for the page to load and table to be visible
     const table = page.getByTestId("table-body");
@@ -83,11 +68,15 @@ test.describe("Shared with me", () => {
   test("should handle empty shared files list", async ({
     page,
     mockRequest,
+    baseUrl,
   }) => {
     // Create empty mock data
-    await mockRequest.router([endpoints.sharedWithMeEmpty]);
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      sharedWithMeHandler(TEST_PORT, "empty"),
+    );
 
-    await page.goto("/shared-with-me/filter?folder=4");
+    await page.goto(`${baseUrl}/shared-with-me/filter?folder=4`);
 
     const emptyView = page.getByTestId("empty-view");
     await expect(emptyView).toBeVisible();
@@ -105,15 +94,15 @@ test.describe("Shared with me", () => {
     page,
     mockRequest,
     wsMock,
+    baseUrl,
   }) => {
-    await mockRequest.router([
-      endpoints.sharedWithMe,
-      endpoints.settingsWithSocket,
-    ]);
+    mockRequest.use(
+      settingsHandler(TEST_PORT, TypeSettings.AuthenticatedWithSocket),
+    );
 
     await wsMock.setupWebSocketMock();
 
-    await page.goto("/shared-with-me/filter?folder=4");
+    await page.goto(`${baseUrl}/shared-with-me/filter?folder=4`);
 
     const table = page.getByTestId("table-body");
     await expect(table).toBeVisible();
@@ -136,7 +125,7 @@ test.describe("Shared with me", () => {
 
     await expect(submitButton).toBeVisible();
 
-    await mockRequest.router([endpoints.shareDelete]);
+    mockRequest.use(shareHandler(TEST_PORT));
 
     submitButton.click();
 
@@ -163,15 +152,15 @@ test.describe("Shared with me", () => {
     page,
     mockRequest,
     wsMock,
+    baseUrl,
   }) => {
-    await mockRequest.router([
-      endpoints.sharedWithMe,
-      endpoints.settingsWithSocket,
-    ]);
+    mockRequest.use(
+      settingsHandler(TEST_PORT, TypeSettings.AuthenticatedWithSocket),
+    );
 
     await wsMock.setupWebSocketMock();
 
-    await page.goto("/shared-with-me/filter?folder=4");
+    await page.goto(`${baseUrl}/shared-with-me/filter?folder=4`);
 
     const table = page.getByTestId("table-body");
     await expect(table).toBeVisible();
@@ -200,7 +189,7 @@ test.describe("Shared with me", () => {
 
     await expect(submitButton).toBeVisible();
 
-    await mockRequest.router([endpoints.shareDelete]);
+    mockRequest.use(shareHandler(TEST_PORT));
 
     submitButton.click();
 
@@ -225,11 +214,9 @@ test.describe("Shared with me", () => {
 
   test("should display 'Shared By' column in shared with me table header", async ({
     page,
-    mockRequest,
+    baseUrl,
   }) => {
-    await mockRequest.router([endpoints.sharedWithMe]);
-
-    await page.goto("/shared-with-me/filter?folder=4");
+    await page.goto(`${baseUrl}/shared-with-me/filter?folder=4`);
 
     const table = page.getByTestId("table-header");
     await expect(table).toBeVisible();
@@ -240,11 +227,9 @@ test.describe("Shared with me", () => {
 
   test("should hide 'Shared By' column when disabled in table settings", async ({
     page,
-    mockRequest,
+    baseUrl,
   }) => {
-    await mockRequest.router([endpoints.sharedWithMe]);
-
-    await page.goto("/shared-with-me/filter?folder=4");
+    await page.goto(`${baseUrl}/shared-with-me/filter?folder=4`);
 
     const tableHeader = page.getByTestId("table-header");
     await expect(tableHeader).toBeVisible();
@@ -270,11 +255,9 @@ test.describe("Shared with me", () => {
 
   test("should display 'Access Level' column in shared with me table header", async ({
     page,
-    mockRequest,
+    baseUrl,
   }) => {
-    await mockRequest.router([endpoints.sharedWithMe]);
-
-    await page.goto("/shared-with-me/filter?folder=4");
+    await page.goto(`${baseUrl}/shared-with-me/filter?folder=4`);
 
     const table = page.getByTestId("table-header");
     await expect(table).toBeVisible();
@@ -287,11 +270,9 @@ test.describe("Shared with me", () => {
 
   test("should hide 'Access Level' column when disabled in table settings", async ({
     page,
-    mockRequest,
+    baseUrl,
   }) => {
-    await mockRequest.router([endpoints.sharedWithMe]);
-
-    await page.goto("/shared-with-me/filter?folder=4");
+    await page.goto(`${baseUrl}/shared-with-me/filter?folder=4`);
 
     const tableHeader = page.getByTestId("table-header");
     await expect(tableHeader).toBeVisible();
@@ -319,11 +300,11 @@ test.describe("Shared with me", () => {
     page,
     mockRequest,
     context,
+    baseUrl,
   }) => {
     await context.grantPermissions(["clipboard-read", "clipboard-write"]);
-    await mockRequest.router([endpoints.sharedWithMe]);
 
-    await page.goto("/shared-with-me/filter?folder=4");
+    await page.goto(`${baseUrl}/shared-with-me/filter?folder=4`);
 
     const tableBody = page.getByTestId("table-body");
     await expect(tableBody).toBeVisible();
@@ -343,15 +324,15 @@ test.describe("Shared with me", () => {
     const copyLinkOption = page.getByTestId("option_copy-shared-link");
     await expect(copyLinkOption).toBeVisible();
 
-    const shareLink = `${BASE_URL}/s/0000000`;
+    const shareLink = `${baseUrl}/s/0000000`;
 
-    await mockRequest.router([
-      createLinkRoute({
+    mockRequest.use(
+      createLinkRouteHandler(TEST_PORT, {
         title: "Shared link",
         shareLink: shareLink,
         access: ShareAccessRights.ReadOnly,
       }),
-    ]);
+    );
 
     await copyLinkOption.click();
 
@@ -372,11 +353,11 @@ test.describe("Shared with me", () => {
     page,
     mockRequest,
     context,
+    baseUrl,
   }) => {
     await context.grantPermissions(["clipboard-read", "clipboard-write"]);
-    await mockRequest.router([endpoints.sharedWithMe]);
 
-    await page.goto("/shared-with-me/filter?folder=4");
+    await page.goto(`${baseUrl}/shared-with-me/filter?folder=4`);
 
     const tableBody = page.getByTestId("table-body");
     await expect(tableBody).toBeVisible();
@@ -396,17 +377,18 @@ test.describe("Shared with me", () => {
     const copyLinkOption = page.getByTestId("option_copy-shared-link");
     await expect(copyLinkOption).toBeVisible();
 
-    await mockRequest.router([
-      createLinkRoute(
+    mockRequest.use(
+      createLinkRouteHandler(
+        TEST_PORT,
         {
           linkId: "1",
           title: "Shared link",
-          shareLink: `${BASE_URL}/s/0000000`,
+          shareLink: `${baseUrl}/s/0000000`,
           access: ShareAccessRights.ReadOnly,
         },
         "POST",
       ),
-    ]);
+    );
 
     await copyLinkOption.click();
 
@@ -418,28 +400,28 @@ test.describe("Shared with me", () => {
     const manageOption = toastContent.getByTestId("link");
     await expect(manageOption).toBeVisible();
 
-    await mockRequest.router([
-      createLinkRoute(
+    mockRequest.use(
+      createLinksRouteHandler(
+        TEST_PORT,
         [
           {
             linkId: "1",
             title: "Shared link",
-            shareLink: `${BASE_URL}/s/0000000`,
+            shareLink: `${baseUrl}/s/0000000`,
             access: ShareAccessRights.ReadOnly,
           },
           {
             linkId: "2",
             title: "Shared link",
-            shareLink: `${BASE_URL}/s/0000000`,
+            shareLink: `${baseUrl}/s/0000000`,
             access: ShareAccessRights.ReadOnly,
           },
         ],
         "GET",
-        LINKS_FILE_PATH,
         true,
       ),
-      endpoints.shareToUser,
-    ]);
+      shareToUserHandler(TEST_PORT),
+    );
 
     await manageOption.click();
 

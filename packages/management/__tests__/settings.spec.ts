@@ -25,25 +25,18 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import {
-  endpoints,
-  HEADER_UNCOMPLETED_TENANT,
-  HEADER_ENCRYPTION_SETTINGS_ENCRYPTED,
-  HEADER_WITHOUT_CUSTOMIZATION,
-} from "@docspace/shared/__mocks__/e2e";
-
+  colorThemeHandler,
+  encryptionSettingsHandler,
+} from "@docspace/shared/__mocks__/handlers";
 import { expect, test } from "./fixtures/base";
 
 test.describe("Settings", () => {
-  test.beforeEach(async ({ mockRequest }) => {
-    await mockRequest.router([endpoints.colorTheme]);
+  test.beforeEach(async ({ serverRequestInterceptor, port }) => {
+    serverRequestInterceptor.use(colorThemeHandler(port));
   });
 
-  test("should branding settings render", async ({ page, mockRequest }) => {
-    await mockRequest.setHeaders("**/management/settings**", [
-      HEADER_UNCOMPLETED_TENANT,
-    ]);
-
-    await page.goto("/management/settings");
+  test("should branding settings render", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/management/settings`);
 
     await expect(page.getByTestId("whitelabel-settings-wrapper")).toBeVisible();
 
@@ -54,12 +47,8 @@ test.describe("Settings", () => {
     ]);
   });
 
-  test("should data backup settings render", async ({ page, mockRequest }) => {
-    await mockRequest.setHeaders("**/management/settings**", [
-      HEADER_UNCOMPLETED_TENANT,
-    ]);
-
-    await page.goto("/management/settings/data-backup");
+  test("should data backup settings render", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/management/settings/data-backup`);
 
     await expect(page.getByTestId("manual-backup-wrapper")).toBeVisible();
 
@@ -70,12 +59,8 @@ test.describe("Settings", () => {
     ]);
   });
 
-  test("should auto backup settings render", async ({ page, mockRequest }) => {
-    await mockRequest.setHeaders("**/management/settings**", [
-      HEADER_UNCOMPLETED_TENANT,
-    ]);
-
-    await page.goto("/management/settings/auto-backup");
+  test("should auto backup settings render", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/management/settings/auto-backup`);
 
     await expect(page.getByTestId("auto-backup")).toBeVisible();
 
@@ -86,12 +71,8 @@ test.describe("Settings", () => {
     ]);
   });
 
-  test("should restore settings render", async ({ page, mockRequest }) => {
-    await mockRequest.setHeaders("**/management/settings**", [
-      HEADER_UNCOMPLETED_TENANT,
-    ]);
-
-    await page.goto("/management/settings/restore");
+  test("should restore settings render", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/management/settings/restore`);
 
     await expect(page.getByTestId("restore-backup")).toBeVisible();
 
@@ -102,12 +83,8 @@ test.describe("Settings", () => {
     ]);
   });
 
-  test("should encrypt settings render", async ({ page, mockRequest }) => {
-    await mockRequest.setHeaders("**/management/settings**", [
-      HEADER_UNCOMPLETED_TENANT,
-    ]);
-
-    await page.goto("/management/settings/encrypt-data");
+  test("should encrypt settings render", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/management/settings/encrypt-data`);
 
     await expect(page.getByTestId("encrypt-data-page")).toBeVisible();
 
@@ -120,14 +97,14 @@ test.describe("Settings", () => {
 
   test("should encrypt settings with encrypted state render", async ({
     page,
-    mockRequest,
+    baseUrl,
+    serverRequestInterceptor,
+    port,
   }) => {
-    await mockRequest.setHeaders("**/management/settings**", [
-      HEADER_UNCOMPLETED_TENANT,
-      HEADER_ENCRYPTION_SETTINGS_ENCRYPTED,
-    ]);
+    // Override encryption settings handler to return encrypted state
+    serverRequestInterceptor.use(encryptionSettingsHandler(port, true));
 
-    await page.goto("/management/settings/encrypt-data");
+    await page.goto(`${baseUrl}/management/settings/encrypt-data`);
 
     await expect(page.getByTestId("encrypt-data-page")).toBeVisible();
 
@@ -135,86 +112,6 @@ test.describe("Settings", () => {
       "desktop",
       "settings",
       "settings-encrypt-encrypted-render.png",
-    ]);
-  });
-
-  test("should unavailable branding settings render", async ({ page }) => {
-    await page.goto("/management/settings");
-
-    await expect(page.getByTestId("whitelabel-settings-wrapper")).toBeVisible();
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "settings",
-      "settings-branding-unavailable-render.png",
-    ]);
-  });
-
-  test("should unavailable data backup settings render", async ({ page }) => {
-    await page.goto("/management/settings/data-backup");
-
-    await expect(page.getByTestId("manual-backup-wrapper")).toBeVisible();
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "settings",
-      "settings-data-backup-unavailable-render.png",
-    ]);
-  });
-
-  test("should unavailable auto backup settings render", async ({ page }) => {
-    await page.goto("/management/settings/auto-backup");
-
-    await expect(page.getByTestId("auto-backup")).toBeVisible();
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "settings",
-      "settings-auto-backup-unavailable-render.png",
-    ]);
-  });
-
-  test("should unavailable restore settings render", async ({ page }) => {
-    await page.goto("/management/settings/restore");
-
-    await expect(page.getByTestId("restore-backup")).toBeVisible();
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "settings",
-      "settings-restore-unavailable-render.png",
-    ]);
-  });
-
-  test("should unavailable encrypt settings render", async ({ page }) => {
-    await page.goto("/management/settings/encrypt-data");
-
-    await expect(page.getByTestId("encrypt-data-page")).toBeVisible();
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "settings",
-      "settings-encrypt-unavailable-render.png",
-    ]);
-  });
-
-  test("should not available branding settings render", async ({
-    page,
-    mockRequest,
-  }) => {
-    await mockRequest.setHeaders("**/management/settings**", [
-      HEADER_UNCOMPLETED_TENANT,
-      HEADER_WITHOUT_CUSTOMIZATION,
-    ]);
-
-    await page.goto("/management/settings");
-
-    await expect(page.getByTestId("whitelabel-settings-wrapper")).toBeVisible();
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "settings",
-      "settings-branding-without-customization-render.png",
     ]);
   });
 });

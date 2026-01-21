@@ -30,7 +30,7 @@ import {
   createGetEncryptionProgressHandler,
   createGetEncryptionHistoryHandler,
   type EncryptionHistoryItem,
-} from "../../__mocks__/storybook/handlers/portal/getEncryptionProgress";
+} from "../../__mocks__/handlers/authentication/getEncryptionProgress";
 
 import { EncryptionPortal } from ".";
 

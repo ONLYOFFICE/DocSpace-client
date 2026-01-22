@@ -24,8 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-
 import { useTranslation } from "react-i18next";
 import {
   ModalDialog,
@@ -35,12 +33,7 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { EmailInput } from "@docspace/shared/components/email-input";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
 import { Text } from "@docspace/shared/components/text";
-
-const DialogBodyWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-`;
+import styles from "./EmailChange.module.scss";
 
 interface EmailChangeDialogProps {
   visible: boolean;
@@ -78,7 +71,7 @@ const EmailChangeDialog = ({
     >
       <ModalDialog.Header>{t("AddEmail")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <DialogBodyWrapper>
+        <div className={styles.wrapper}>
           <Text>{displayName}</Text>
           <EmailInput
             placeholder={t("SMTPSettings:EnterEmail")}
@@ -92,7 +85,7 @@ const EmailChangeDialog = ({
             scale
             dataTestId="change_email_input"
           />
-        </DialogBodyWrapper>
+        </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

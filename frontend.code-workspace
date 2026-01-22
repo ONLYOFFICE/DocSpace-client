@@ -285,6 +285,46 @@
             "tooltip": "🛠️ Start the \"Test | Jest:unit\" task"
           },
           {
+            "label": "Test All E2E - Build",
+            "task": "Test | E2E All - Build",
+            "tooltip": "🛠️ Build unified E2E Docker image for all packages"
+          },
+          {
+            "label": "Test All E2E - Run",
+            "task": "Test | E2E All - Run",
+            "tooltip": "🛠️ Run all E2E tests (client, login, doceditor, sdk, management)"
+          },
+          {
+            "label": "Test All E2E - Report (client)",
+            "task": "Test | E2E All - Show Report (client)",
+            "tooltip": "🛠️ Open Client Playwright report (port 9325)"
+          },
+          {
+            "label": "Test All E2E - Report (login)",
+            "task": "Test | E2E All - Show Report (login)",
+            "tooltip": "🛠️ Open Login Playwright report (port 9326)"
+          },
+          {
+            "label": "Test All E2E - Report (doceditor)",
+            "task": "Test | E2E All - Show Report (doceditor)",
+            "tooltip": "🛠️ Open Doceditor Playwright report (port 9327)"
+          },
+          {
+            "label": "Test All E2E - Report (sdk)",
+            "task": "Test | E2E All - Show Report (sdk)",
+            "tooltip": "🛠️ Open SDK Playwright report (port 9328)"
+          },
+          {
+            "label": "Test All E2E - Report (management)",
+            "task": "Test | E2E All - Show Report (management)",
+            "tooltip": "🛠️ Open Management Playwright report (port 9329)"
+          },
+          {
+            "label": "Test All E2E - Clear",
+            "task": "Test | E2E All - Clear",
+            "tooltip": "🛠️ Remove unified E2E Docker image and volumes"
+          },
+          {
             "label": "Test Client E2E build docker",
             "task": "Test | Test e2e docker build (client)",
             "tooltip": "🛠️ Start the \"test build in docker\" task"

@@ -29,7 +29,7 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { PreparationPortal } from "@docspace/shared/pages/PreparationPortal";
-import StyledPreparationPortalDialog from "./StyledPreparationPortalDialog";
+import styles from "./PreparationPortal.module.scss";
 
 const PreparationPortalDialog = (props) => {
   const { t, tReady, preparationPortalVisible, setVisible } = props;
@@ -49,9 +49,9 @@ const PreparationPortalDialog = (props) => {
         {t("PortalRestoring", { productName: t("Common:ProductName") })}
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <StyledPreparationPortalDialog>
+        <div className={styles.wrapper}>
           <PreparationPortal withoutHeader isDialog style={{ padding: "0" }} />
-        </StyledPreparationPortalDialog>
+        </div>
       </ModalDialog.Body>
     </ModalDialog>
   );

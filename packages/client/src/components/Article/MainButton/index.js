@@ -47,16 +47,15 @@ import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
 import React, { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-
-import styled, { css } from "styled-components";
 import { useLocation } from "react-router";
+import classNames from "classnames";
+
 import { MainButton } from "@docspace/shared/components/main-button";
 import { toastr } from "@docspace/shared/components/toast";
 import { Button } from "@docspace/shared/components/button";
 import { isDesktop } from "@docspace/shared/utils";
 import { ArticleButtonLoader } from "@docspace/shared/skeletons/article";
 import { isMobile, isTablet } from "react-device-detect";
-import { globalColors } from "@docspace/shared/themes";
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import {
   Events,
@@ -72,62 +71,7 @@ import { getContactsView, createGroup } from "SRC_DIR/helpers/contacts";
 import MobileView from "./MobileView";
 import { encryptionUploadDialog } from "../../../helpers/desktop";
 
-const StyledButton = styled(Button)`
-  && {
-    font-weight: 700 !important;
-    font-size: 16px !important;
-    padding: 0;
-    opacity: ${(props) => (props.isDisabled ? 0.6 : 1)};
-    background-color: ${({ $currentColorScheme }) =>
-      $currentColorScheme.main?.accent} !important;
-    background: ${({ $currentColorScheme }) =>
-      $currentColorScheme.main?.accent};
-    border-color: ${({ $currentColorScheme }) =>
-      $currentColorScheme.main?.accent};
-
-    ${(props) =>
-      !props.isDisabled &&
-      css`
-        :hover {
-          background-color: ${({ $currentColorScheme }) =>
-            $currentColorScheme.main?.accent};
-          opacity: 0.85;
-          background: ${({ $currentColorScheme }) =>
-            $currentColorScheme.main?.accent};
-          border-color: ${({ $currentColorScheme }) =>
-            $currentColorScheme.main?.accent};
-        }
-
-        :active {
-          background-color: ${({ $currentColorScheme }) =>
-            $currentColorScheme.main?.accent};
-          background: ${({ $currentColorScheme }) =>
-            $currentColorScheme.main?.accent};
-          border-color: ${({ $currentColorScheme }) =>
-            $currentColorScheme.main?.accent} !important;
-          opacity: 1;
-          filter: brightness(90%);
-          cursor: pointer;
-        }
-      `}
-
-    .button-content {
-      color: ${({ $currentColorScheme }) => $currentColorScheme.text?.accent};
-      position: relative;
-      display: flex;
-      justify-content: space-between;
-      vertical-align: middle;
-      box-sizing: border-box;
-      padding-block: 5px;
-      padding-inline: 12px 14px;
-      line-height: 22px;
-      border-radius: 3px;
-
-      user-select: none;
-      -webkit-tap-highlight-color: ${globalColors.tapHighlight};
-    }
-  }
-`;
+import styles from "./main-button.module.scss";
 
 const ArticleMainButtonContent = (props) => {
   const {
@@ -830,8 +774,8 @@ const ArticleMainButtonContent = (props) => {
           onMainButtonClick={onMainButtonClick}
         />
       ) : isRoomsFolder ? (
-        <StyledButton
-          className="create-room-button"
+        <Button
+          className={classNames(styles.mainButton, "create-room-button")}
           id="rooms-shared_create-room-button"
           label={t("Common:NewRoom")}
           onClick={onCreateRoom}
@@ -844,8 +788,8 @@ const ArticleMainButtonContent = (props) => {
           testId="create_new_room_button"
         />
       ) : isAIAgentsFolder ? (
-        <StyledButton
-          className="create-agent-button"
+        <Button
+          className={classNames(styles.mainButton, "create-agent-button")}
           id="rooms-shared_create-agent-button"
           label={t("Common:NewAgent")}
           onClick={onCreateAgent}

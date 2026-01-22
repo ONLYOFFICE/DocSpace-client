@@ -29,8 +29,9 @@ import { inject, observer } from "mobx-react";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
 import { Text } from "@docspace/shared/components/text";
 
-import { StyledRoomItem } from "../NewFilesBadge.styled";
 import type { NewFilesPanelItemRoomProps } from "../NewFilesBadge.types";
+
+import styles from "../new-files-panel.module.scss";
 
 const NewFilesPanelItemRoomComponent = ({
   room,
@@ -43,7 +44,7 @@ const NewFilesPanelItemRoomComponent = ({
   };
 
   return (
-    <StyledRoomItem onClick={onClick}>
+    <div className={styles.roomItem} onClick={onClick}>
       <RoomIcon
         className="room-icon"
         imgClassName="room-image"
@@ -64,7 +65,7 @@ const NewFilesPanelItemRoomComponent = ({
       >
         {room.title}
       </Text>
-    </StyledRoomItem>
+    </div>
   );
 };
 

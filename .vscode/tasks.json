@@ -661,6 +661,126 @@
       }
     },
     {
+      "label": "Test | E2E All - Build",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; docker compose -f docker/e2e/compose.yaml build e2e-tests",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | E2E All - Run",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; docker compose -f docker/e2e/compose.yaml run --rm -e RUN_CLIENT=true -e RUN_LOGIN=true -e RUN_DOCEDITOR=true -e RUN_SDK=true -e RUN_MANAGEMENT=true e2e-tests",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | E2E All - Show Report (client)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/client ; pnpm exec playwright show-report --port 9325 ${workspaceFolder}/playwright-report/client",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | E2E All - Show Report (login)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/client ; pnpm exec playwright show-report --port 9326 ${workspaceFolder}/playwright-report/login",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | E2E All - Show Report (doceditor)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/client ; pnpm exec playwright show-report --port 9327 ${workspaceFolder}/playwright-report/doceditor",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | E2E All - Show Report (sdk)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/client ; pnpm exec playwright show-report --port 9328 ${workspaceFolder}/playwright-report/sdk",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | E2E All - Show Report (management)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/client ; pnpm exec playwright show-report --port 9329 ${workspaceFolder}/playwright-report/management",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | E2E All - Clear",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; docker compose -f docker/e2e/compose.yaml down --volumes --remove-orphans --rmi all",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Test | Test e2e docker build (client)",
       "type": "shell",
       "command": "cd ${workspaceFolder}/packages/client ; pnpm test:e2e:docker:build",

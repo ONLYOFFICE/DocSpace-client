@@ -24,22 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+import CatalogSpamIcon from "PUBLIC_DIR/images/icons/16/catalog.spam.react.svg";
+
+import capitalize from "lodash/capitalize";
+
 import { Text } from "@docspace/shared/components/text";
 import { Avatar } from "@docspace/shared/components/avatar";
 
-import CatalogSpamIcon from "PUBLIC_DIR/images/icons/16/catalog.spam.react.svg";
-import { commonIconsStyles } from "@docspace/shared/utils";
-import capitalize from "lodash/capitalize";
-import { StyledOwnerInfo } from "../../../ChangePortalOwnerDialog/StyledDialog";
-
-const StyledCatalogSpamIcon = styled(CatalogSpamIcon)`
-  ${commonIconsStyles}
-  path {
-    fill: ${(props) => props.theme.dialogs.errorText};
-  }
-  padding-inline-start: 8px;
-`;
+import styles from "SRC_DIR/components/dialogs/ChangePortalOwnerDialog/ChangePortalOwner.module.scss";
 
 const AccountInfo = ({ user }) => {
   const StatusNode = (
@@ -47,7 +39,7 @@ const AccountInfo = ({ user }) => {
   );
 
   return (
-    <StyledOwnerInfo>
+    <div className={styles.ownerInfo}>
       <Avatar
         className="avatar"
         role="user"
@@ -55,19 +47,19 @@ const AccountInfo = ({ user }) => {
         size="big"
         hideRoleIcon
       />
-      <div className="info">
+      <div className={styles.info}>
         <div className="avatar-name">
-          <Text className="display-name" title={user.displayName}>
+          <Text className={styles.displayName} title={user.displayName}>
             {user.displayName}
           </Text>
           {user.statusType === "disabled" ? (
-            <StyledCatalogSpamIcon size="small" />
+            <CatalogSpamIcon className={styles.spamIcon} data-size="small" />
           ) : null}
         </div>
 
         {StatusNode}
       </div>
-    </StyledOwnerInfo>
+    </div>
   );
 };
 

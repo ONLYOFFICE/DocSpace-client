@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled from "styled-components";
 import PropTypes from "prop-types";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
@@ -36,29 +35,7 @@ import { getTfaNewBackupCodes } from "@docspace/shared/api/settings";
 import { withTranslation } from "react-i18next";
 import { isDesktop } from "@docspace/shared/utils";
 
-const StyledBodyContent = styled.div`
-  .backup-codes-counter {
-    margin-top: 16px;
-    margin-bottom: 4px;
-    color: ${(props) => props.theme.client.settings.security.tfa.textColor};
-  }
-
-  .backup-codes-code {
-    font-weight: 600;
-    line-height: 20px;
-  }
-`;
-
-const StyledFooterContent = styled.div`
-  display: contents;
-
-  .backup-codes-print-link-wrapper {
-    display: flex;
-    align-items: center;
-
-    padding-inline-start: 8px;
-  }
-`;
+import styles from "./backup-codes.module.scss";
 
 class BackupCodesDialogComponent extends React.Component {
   getNewBackupCodes = async () => {
@@ -102,7 +79,7 @@ class BackupCodesDialogComponent extends React.Component {
       >
         <ModalDialog.Header>{t("BackupCodesTitle")}</ModalDialog.Header>
         <ModalDialog.Body>
-          <StyledBodyContent id="backup-codes-print-content">
+          <div id="backup-codes-print-content">
             <Text className="backup-codes-description-one" lineHeight="20px">
               {t("BackupCodesDescription")}
             </Text>
@@ -111,7 +88,7 @@ class BackupCodesDialogComponent extends React.Component {
             </Text>
 
             <Text
-              className="backup-codes-counter"
+              className={styles.backupCodesCounter}
               fontWeight={600}
               lineHeight="20px"
             >
@@ -129,7 +106,7 @@ class BackupCodesDialogComponent extends React.Component {
                       return (
                         <strong
                           key={item.code}
-                          className="backup-codes-code"
+                          className={styles.backupCodesCode}
                           data-testid={`backup_code_${index}`}
                           dir="auto"
                         >
@@ -141,10 +118,10 @@ class BackupCodesDialogComponent extends React.Component {
                   })
                 : null}
             </Text>
-          </StyledBodyContent>
+          </div>
         </ModalDialog.Body>
         <ModalDialog.Footer>
-          <StyledFooterContent>
+          <div className={styles.footer}>
             <Button
               key="RequestNewBtn"
               label={t("RequestNewButton")}
@@ -161,7 +138,7 @@ class BackupCodesDialogComponent extends React.Component {
               testId="backup_codes_cancel_button"
             />
             {isDesktop() ? (
-              <div className="backup-codes-print-link-wrapper">
+              <div className={styles.backupCodesPrintLinkWrapper}>
                 <Link
                   type="action"
                   fontSize="13px"
@@ -174,7 +151,7 @@ class BackupCodesDialogComponent extends React.Component {
                 </Link>
               </div>
             ) : null}
-          </StyledFooterContent>
+          </div>
         </ModalDialog.Footer>
       </ModalDialog>
     );

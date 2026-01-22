@@ -32,7 +32,7 @@ import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { QuotaForm } from "@docspace/shared/components/quota-form";
 
-import StyledBodyContent from "./StyledComponent";
+import styles from "./ChangeQuota.module.scss";
 
 const ChangeQuotaDialog = (props) => {
   const {
@@ -50,7 +50,7 @@ const ChangeQuotaDialog = (props) => {
     <ModalDialog visible={visible} onClose={onCloseClick}>
       <ModalDialog.Header>{t("Common:ChangeQuota")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <StyledBodyContent>
+        <div className={styles.content}>
           <Text>{t("Common:SetQuotaStorageLimit")}</Text>
           <QuotaForm
             onSetQuotaBytesSize={onSetQuotaBytesSize}
@@ -59,7 +59,7 @@ const ChangeQuotaDialog = (props) => {
             initialSize={initialSize}
             isAutoFocussed
           />
-        </StyledBodyContent>
+        </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

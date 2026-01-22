@@ -27,7 +27,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "styled-components";
+import classNames from "classnames";
 
 import { getConvertedQuota } from "@docspace/shared/utils/common";
 import { Text } from "@docspace/shared/components/text";
@@ -37,7 +37,8 @@ import api from "@docspace/shared/api";
 
 import { connectedCloudsTypeTitleTranslation } from "SRC_DIR/helpers/filesUtils";
 import { changeUserQuota } from "SRC_DIR/helpers/contacts";
-import { StyledBody, StyledText } from "./StyledComponent";
+
+import styles from "./space-quota.module.scss";
 
 const getOptions = (t, item, spaceLimited) => {
   const items = [
@@ -77,7 +78,6 @@ const getOptions = (t, item, spaceLimited) => {
 
 const SpaceQuota = (props) => {
   const {
-    hideColumns,
     isReadOnly,
     withoutLimitQuota,
     item,
@@ -98,15 +98,12 @@ const SpaceQuota = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation(["Common"]);
   const timeoutId = useRef(false);
-  const theme = useTheme();
 
   const usedQuota = getConvertedQuota(t, item?.usedSpace);
   const spaceLimited = getConvertedQuota(t, item?.quotaLimit);
   const defaultQuotaSize = getConvertedQuota(t, defaultSize);
 
   const options = getOptions(t, item, spaceLimited);
-
-  const sideInfoColor = theme.peopleTableRow.sideInfoColor;
 
   useEffect(() => {
     return () => {
@@ -190,31 +187,41 @@ const SpaceQuota = (props) => {
 
   if (withoutLimitQuota || item?.quotaLimit === undefined) {
     return (
-      <StyledText fontWeight={600} $withoutLimitQuota color={sideInfoColor}>
+      <Text
+        fontWeight={600}
+        className={classNames(styles.text, {
+          [styles.withoutPadding]: withoutLimitQuota,
+        })}
+      >
         {usedQuota}
-      </StyledText>
+      </Text>
     );
   }
 
   if (isReadOnly) {
     return (
-      <StyledText fontWeight={600} $isReadOnly color={sideInfoColor}>
+      <Text
+        fontWeight={600}
+        className={classNames(styles.text, {
+          [styles.withoutPadding]: isReadOnly,
+        })}
+      >
         {usedQuota} / {spaceLimited}
-      </StyledText>
+      </Text>
     );
   }
 
   return (
-    <StyledBody
-      hideColumns={hideColumns}
-      className={className}
-      isLoading={isLoading}
+    <div
+      className={classNames(styles.body, className)}
       data-testid={dataTestId}
     >
       <Text fontWeight={600}>{usedQuota} / </Text>
 
       <ComboBox
-        className="combobobox-space-quota"
+        className={classNames(styles.comboBoxSpaceQuota, {
+          [styles.loading]: isLoading,
+        })}
         selectedOption={selectedOption}
         options={comboboxOptions}
         onSelect={onChange}
@@ -225,7 +232,7 @@ const SpaceQuota = (props) => {
         manualWidth="auto"
         directionY="both"
       />
-    </StyledBody>
+    </div>
   );
 };
 

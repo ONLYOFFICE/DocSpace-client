@@ -38,7 +38,6 @@ const Body = ({
   user,
   targetUser,
   percent,
-  currentColorScheme,
   isAbortTransfer,
   dataReassignmentUrl,
   onTogglePeopleSelector,
@@ -69,7 +68,6 @@ const Body = ({
       <NewOwner
         t={t}
         targetUser={targetUser}
-        currentColorScheme={currentColorScheme}
         onTogglePeopleSelector={onTogglePeopleSelector}
       />
       <Description

@@ -34,30 +34,10 @@ import {
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import { Link, LinkType } from "@docspace/shared/components/link";
-import styled from "styled-components";
 
 import { TChangeUserTypeDialogData } from "SRC_DIR/helpers/contacts";
 import { getChangeTypeKey } from "./getChangeTypeKey";
-
-const StyledBody = styled.div`
-  .note-text {
-    margin: 0;
-  }
-
-  .warning-text {
-    margin: 16px 0;
-    color: ${(props) => props.theme.client.settings.backup.warningColor};
-  }
-
-  .body-text {
-    margin-top: 8px;
-  }
-
-  .body-link {
-    display: block;
-    margin-top: 12px;
-  }
-`;
+import styles from "./ChangeUserType.module.scss";
 
 type ChangeUserTypeDialogProps = {
   visible: boolean;
@@ -149,12 +129,12 @@ const ChangeUserTypeDialog = ({
     return (
       <>
         {!isDowngradeToUser ? (
-          <Text className="warning-text" fontSize="16px" fontWeight={700}>
+          <Text className={styles.warningText} fontSize="16px" fontWeight={700}>
             {t("Common:Warning")}
           </Text>
         ) : null}
 
-        <Text className="body-text">
+        <Text className={styles.bodyText}>
           {isDowngradeToUser ? (
             <Trans
               i18nKey="DataReassignmentInfo"
@@ -190,7 +170,7 @@ const ChangeUserTypeDialog = ({
 
         {needReassignData ? (
           <Link
-            className="body-link"
+            className={styles.bodyLink}
             type={LinkType.action}
             fontSize="13px"
             fontWeight={600}
@@ -216,7 +196,7 @@ const ChangeUserTypeDialog = ({
       );
 
     return (
-      <StyledBody>
+      <div>
         <Text>
           <Trans
             i18nKey="ChangeUserTypeMessage"
@@ -226,7 +206,7 @@ const ChangeUserTypeDialog = ({
           />
         </Text>
         {!isCurrentUserOwner ? (
-          <Text className="note-text">
+          <Text className={styles.noteText}>
             <Trans
               i18nKey="ChangeUserTypeNote"
               ns="ChangeUserTypeDialog"
@@ -239,7 +219,7 @@ const ChangeUserTypeDialog = ({
           </Text>
         ) : null}
         {isDowngradeType ? getDowngradeContent() : null}
-      </StyledBody>
+      </div>
     );
   };
 

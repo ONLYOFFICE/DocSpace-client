@@ -24,11 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useTheme } from "styled-components";
 import { useMemo, useCallback } from "react";
 import { useNavigate, LinkProps } from "react-router";
 import { isMobile } from "react-device-detect";
 
+import { useTheme } from "@docspace/shared/hooks/useTheme";
 import { toastr } from "@docspace/shared/components/toast";
 import {
   Events,
@@ -82,7 +82,7 @@ export const useEmptyView = (
 
   t: TTranslation,
 ) => {
-  const theme = useTheme();
+  const { isBase } = useTheme();
 
   const isAIRoom =
     selectedFolder?.roomType === RoomsType.AIRoom ||
@@ -129,7 +129,7 @@ export const useEmptyView = (
     );
     const icon = getIcon(
       type,
-      theme.isBase,
+      isBase,
       access,
       isFolder,
       folderType,
@@ -144,7 +144,7 @@ export const useEmptyView = (
   }, [
     type,
     t,
-    theme.isBase,
+    isBase,
     access,
     isFolder,
     folderType,

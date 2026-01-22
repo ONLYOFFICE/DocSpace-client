@@ -26,27 +26,11 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import styled from "styled-components";
+import classNames from "classnames";
 
 import { isMobile as isMobileUtils } from "@docspace/shared/utils";
 
-const StyledMain = styled.main`
-  height: ${(props) => props.mainHeight && `${props.mainHeight}px`};
-  width: 100%;
-  z-index: 0;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-
-  .main-container {
-    width: 100%;
-    height: 100%;
-
-    display: flex;
-    flex-direction: row;
-    box-sizing: border-box;
-  }
-`;
+import styles from "./main.module.scss";
 
 const Main = (props) => {
   const { mainBarVisible, isFrame } = props;
@@ -80,7 +64,15 @@ const Main = (props) => {
     onResize();
   }, [mainBarVisible, isFrame, onResize]);
 
-  return <StyledMain className="main" mainHeight={mainHeight} {...props} />;
+  const mainStyle = mainHeight ? { height: `${mainHeight}px` } : undefined;
+
+  return (
+    <main
+      className={classNames(styles.main, "main")}
+      style={mainStyle}
+      {...props}
+    />
+  );
 };
 
 Main.displayName = "Main";

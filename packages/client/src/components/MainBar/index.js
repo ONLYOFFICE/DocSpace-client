@@ -26,33 +26,13 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import styled from "styled-components";
 import { useLocation } from "react-router";
+import classNames from "classnames";
 
-import { mobile } from "@docspace/shared/utils";
 import { isPublicPreview } from "@docspace/shared/utils/common";
+
 import Bar from "./Bar";
-
-const StyledContainer = styled.div`
-  width: 100%;
-  max-width: 100%;
-
-  @media ${mobile} {
-    width: calc(100% + 8px);
-    max-width: calc(100% + 8px);
-  }
-
-  margin-inline-end: -16px;
-
-  #bar-banner {
-    margin-bottom: -3px;
-  }
-
-  #bar-frame {
-    min-width: 100%;
-    max-width: 100%;
-  }
-`;
+import styles from "./main-bar.module.scss";
 
 const MainBar = ({
   firstLoad,
@@ -87,11 +67,11 @@ const MainBar = ({
   if (!isVisible) return null;
 
   return (
-    <StyledContainer id="main-bar" className="main-bar">
+    <div id="main-bar" className={classNames(styles.container, "main-bar")}>
       {isVisibleBar && checkedMaintenance && !snackbarExist ? (
         <Bar firstLoad={firstLoad} setMaintenanceExist={setMaintenanceExist} />
       ) : null}
-    </StyledContainer>
+    </div>
   );
 };
 

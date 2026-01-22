@@ -27,6 +27,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import api from "@docspace/shared/api";
 import type { TNewFiles } from "@docspace/shared/api/rooms/types";
@@ -47,10 +48,11 @@ import type {
   NewFilesPanelInjectStore,
   NewFilesPanelProps,
 } from "../NewFilesBadge.types";
-import { StyledPanel } from "../NewFilesBadge.styled";
 
 import { NewFilesPanelLoader } from "./NewFilesPanelLoader";
 import { NewFilesPanelItem } from "./NewFilesPanelItem";
+
+import styles from "../new-files-panel.module.scss";
 
 const MIN_LOADER_TIMER = 500;
 
@@ -207,12 +209,22 @@ export const NewFilesPanelComponent = ({
     })
   );
 
+  const panelStyle = {
+    height: `${position.maxHeight}px`,
+    maxHeight: `${position.maxHeight}px`,
+    top: `${position.top}px`,
+    left: `${position.left}px`,
+  };
+
   const panel = (
     <>
-      <StyledPanel className="new-files-panel" position={position}>
+      <div
+        className={classNames(styles.panel, "new-files-panel")}
+        style={panelStyle}
+      >
         <Scrollbar autoFocus>{content}</Scrollbar>
         {markAsReadButton}
-      </StyledPanel>
+      </div>
       {!isMobile() ? (
         <Backdrop visible withoutBackground withoutBlur onClick={onClose} />
       ) : null}

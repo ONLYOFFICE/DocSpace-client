@@ -25,12 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
 import { getCookie, getCorrectDate } from "@docspace/shared/utils";
 import { globalColors } from "@docspace/shared/themes";
 import { LANGUAGE } from "@docspace/shared/constants";
+import { useTheme } from "@docspace/shared/hooks/useTheme";
 
 import { NewFilesPanelItemDateProps } from "../NewFilesBadge.types";
 
@@ -39,7 +39,7 @@ export const NewFilesPanelItemDate = ({
   culture,
 }: NewFilesPanelItemDateProps) => {
   const { t } = useTranslation(["Common"]);
-  const theme = useTheme();
+  const { isBase } = useTheme();
 
   const getTitle = () => {
     const now = new Date();
@@ -73,7 +73,7 @@ export const NewFilesPanelItemDate = ({
       fontSize="14px"
       lineHeight="16px"
       fontWeight={600}
-      color={theme.isBase ? globalColors.gray : globalColors.grayDark}
+      color={isBase ? globalColors.gray : globalColors.grayDark}
     >
       {title}
     </Text>

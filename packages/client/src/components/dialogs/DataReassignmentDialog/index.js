@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState, useEffect } from "react";
-import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import PeopleSelector from "@docspace/shared/selectors/People";
@@ -37,25 +36,9 @@ import api from "@docspace/shared/api";
 import { EmployeeActivationStatus, EmployeeType } from "@docspace/shared/enums";
 import Body from "./sub-components/Body";
 import Footer from "./sub-components/Footer";
+import styles from "./DataReassignment.module.scss";
 
 const { Filter } = api;
-
-const StyledBodyContent = styled.div`
-  display: contents;
-
-  .avatar-name {
-    display: flex;
-    align-items: center;
-  }
-
-  .delete-profile-checkbox {
-    margin-bottom: 16px;
-  }
-
-  .list-container {
-    gap: 6px;
-  }
-`;
 
 const statusTerminateCompleted = 3;
 let timerId;
@@ -261,7 +244,7 @@ const DataReassignmentDialog = ({
         {t("DataReassignmentDialog:DataReassignment")}
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <StyledBodyContent>
+        <div className={styles.bodyContent}>
           <Body
             t={t}
             tReady={tReady}
@@ -276,7 +259,7 @@ const DataReassignmentDialog = ({
             onTogglePeopleSelector={onTogglePeopleSelector}
             noRoomFilesToMove={noRoomFilesToMove}
           />
-        </StyledBodyContent>
+        </div>
       </ModalDialog.Body>
 
       <ModalDialog.Footer>

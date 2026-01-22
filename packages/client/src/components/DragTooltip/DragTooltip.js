@@ -25,37 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useCallback, useEffect, useRef } from "react";
-import styled, { useTheme } from "styled-components";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { injectDefaultTheme } from "@docspace/shared/utils";
 
-const StyledTooltip = styled.div.attrs(injectDefaultTheme)`
-  position: fixed;
-  display: none;
-  padding: 8px;
-  z-index: 250;
-  background: ${(props) => props.theme.filesDragTooltip.background};
-  border-radius: 6px;
-  font-size: 15px;
-  font-weight: 600;
-  -moz-border-radius: 6px;
-  -webkit-border-radius: 6px;
-  box-shadow: ${(props) => props.theme.filesDragTooltip.boxShadow};
-  -moz-box-shadow: ${(props) => props.theme.filesDragTooltip.boxShadow};
-  -webkit-box-shadow: ${(props) => props.theme.filesDragTooltip.boxShadow};
+import { useInterfaceDirection } from "@docspace/shared/hooks/useInterfaceDirection";
 
-  .tooltip-moved-obj-wrapper {
-    display: flex;
-    align-items: center;
-  }
-  .tooltip-moved-obj-icon {
-    margin-inline-end: 6px;
-  }
-  .tooltip-moved-obj-extension {
-    color: ${(props) => props.theme.filesDragTooltip.color};
-  }
-`;
+import styles from "./drag-tooltip.module.scss";
 
 const DragTooltip = (props) => {
   const tooltipRef = useRef(null);
@@ -70,8 +45,7 @@ const DragTooltip = (props) => {
   } = props;
   const { filesCount, operationName } = tooltipOptions;
 
-  const { interfaceDirection } = useTheme();
-  const isRtl = interfaceDirection === "rtl";
+  const { isRTL } = useInterfaceDirection();
 
   const setTooltipPosition = useCallback(() => {
     const tooltip = tooltipRef.current;
@@ -80,11 +54,11 @@ const DragTooltip = (props) => {
 
       const margin = 8;
       tooltip.style.left = `${
-        isRtl ? tooltipPageX - tooltip.offsetWidth : tooltipPageX + margin
+        isRTL ? tooltipPageX - tooltip.offsetWidth : tooltipPageX + margin
       }px`;
       tooltip.style.top = `${tooltipPageY + margin}px`;
     }
-  }, [tooltipPageX, tooltipPageY, isRtl]);
+  }, [tooltipPageX, tooltipPageY, isRTL]);
 
   useEffect(() => {
     setTooltipPosition();
@@ -104,17 +78,19 @@ const DragTooltip = (props) => {
     }
 
     return (
-      <div className="tooltip-moved-obj-wrapper">
+      <div className={styles.tooltipMovedObjWrapper}>
         {iconOfDraggedFile ? (
           <img
-            className="tooltip-moved-obj-icon"
+            className={styles.tooltipMovedObjIcon}
             src={`${iconOfDraggedFile}`}
             alt=""
           />
         ) : null}
         {nameOfMovedObj}
         {fileExtension ? (
-          <span className="tooltip-moved-obj-extension">.{fileExtension}</span>
+          <span className={styles.tooltipMovedObjExtension}>
+            .{fileExtension}
+          </span>
         ) : null}
       </div>
     );
@@ -130,7 +106,11 @@ const DragTooltip = (props) => {
         : t("TooltipElementsMoveMessage", { element: filesCount })
     : t("");
 
-  return <StyledTooltip ref={tooltipRef}>{tooltipLabel}</StyledTooltip>;
+  return (
+    <div className={styles.tooltip} ref={tooltipRef}>
+      {tooltipLabel}
+    </div>
+  );
 };
 
 export default inject(({ filesStore }) => {

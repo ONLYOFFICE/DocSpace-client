@@ -2698,6 +2698,7 @@ class ContextOptionsStore {
               "view",
               "fill-form",
               "edit",
+              "vectorization",
               "preview",
               "mark-read",
               "open-location",

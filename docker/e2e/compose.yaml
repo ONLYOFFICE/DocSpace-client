@@ -1,0 +1,49 @@
+services:
+  # CI service - runs tests based on environment variables
+  e2e-tests:
+    image: docspace-e2e-tests
+    build:
+      context: ../..
+      dockerfile: docker/e2e/Dockerfile
+    volumes:
+      - ../../playwright-report:/app/playwright-report
+      - ../../test-results:/app/test-results
+    environment:
+      - CI=${CI:-false}
+      - RUN_CLIENT=${RUN_CLIENT:-false}
+      - RUN_LOGIN=${RUN_LOGIN:-false}
+      - RUN_DOCEDITOR=${RUN_DOCEDITOR:-false}
+      - RUN_SDK=${RUN_SDK:-false}
+      - RUN_MANAGEMENT=${RUN_MANAGEMENT:-false}
+      - GITHUB_WORKFLOW=${GITHUB_WORKFLOW:-}
+      - GITHUB_RUN_ID=${GITHUB_RUN_ID:-}
+      - GITHUB_RUN_NUMBER=${GITHUB_RUN_NUMBER:-}
+
+  # Local development services with volume mounts for live reloading
+  e2e-tests-local:
+    image: docspace-e2e-tests
+    ports:
+      - "5110:5110"
+      - "5111:5111"
+      - "5112:5112"
+      - "5113:5113"
+      - "5115:5115"
+    volumes:
+      - ../../packages/client/__tests__:/app/packages/client/__tests__
+      - ../../packages/login/__tests__:/app/packages/login/__tests__
+      - ../../packages/doceditor/__tests__:/app/packages/doceditor/__tests__
+      - ../../packages/sdk/__tests__:/app/packages/sdk/__tests__
+      - ../../packages/management/__tests__:/app/packages/management/__tests__
+      - ../../packages/shared/__mocks__:/app/packages/shared/__mocks__
+      - ../../packages/client/playwright.config.ts:/app/packages/client/playwright.config.ts
+      - ../../packages/login/playwright.config.ts:/app/packages/login/playwright.config.ts
+      - ../../packages/doceditor/playwright.config.ts:/app/packages/doceditor/playwright.config.ts
+      - ../../packages/sdk/playwright.config.ts:/app/packages/sdk/playwright.config.ts
+      - ../../packages/management/playwright.config.ts:/app/packages/management/playwright.config.ts
+      - ../../playwright-report:/app/playwright-report
+    environment:
+      - RUN_CLIENT=${RUN_CLIENT:-false}
+      - RUN_LOGIN=${RUN_LOGIN:-false}
+      - RUN_DOCEDITOR=${RUN_DOCEDITOR:-false}
+      - RUN_SDK=${RUN_SDK:-false}
+      - RUN_MANAGEMENT=${RUN_MANAGEMENT:-false}

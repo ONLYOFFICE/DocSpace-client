@@ -166,10 +166,7 @@ const Badges = ({
         />
       ) : null}
       {statusType === "pending" ? (
-        <StyledSendClockIcon
-          className="pending-badge accounts-badge"
-          size={IconSizeType.small}
-        />
+        <StyledSendClockIcon className="pending-badge accounts-badge" />
       ) : null}
       {statusType === "disabled" ? (
         <StyledCatalogSpamIcon

@@ -28,10 +28,13 @@
 
 import { http } from "msw";
 import { API_PREFIX, BASE_URL } from "../../e2e/utils";
+import { VectorizationStatus } from "../../../enums";
 
 export const PATH_AGENT_FOLDER_CHAT = "files/:id(\\d+)";
 
 export const PATH_AGENT_FOLDER_RESULT_STORAGE = "files/:id(\\d+)";
+
+export const PATH_AGENT_FOLDER_KNOWLEDGE = "files/:id(\\d+)";
 
 export const PATH_AGENT_FOLDER_INFO = "files/folder/:id(\\d+)";
 
@@ -265,6 +268,295 @@ const getAgentFolderChat = ({ canUseChat }: { canUseChat: boolean }) => {
   };
 };
 
+const getMockKnowledgeFiles = (
+  vectorizationStatus: VectorizationStatus = VectorizationStatus.Completed,
+  canRetryVectorization: boolean = true,
+) => {
+  const security = {
+    Read: true,
+    Comment: false,
+    FillForms: false,
+    Review: false,
+    Edit: false,
+    Delete: true,
+    CustomFilter: false,
+    Rename: false,
+    ReadHistory: false,
+    Lock: false,
+    EditHistory: false,
+    Copy: true,
+    Move: false,
+    Duplicate: false,
+    SubmitToFormGallery: false,
+    Download: true,
+    Convert: false,
+    CreateRoomFrom: false,
+    CopyLink: false,
+    Embed: false,
+    StartFilling: false,
+    FillingStatus: false,
+    ResetFilling: false,
+    StopFilling: false,
+    OpenForm: false,
+    Vectorization: canRetryVectorization,
+    AskAi: true,
+  };
+
+  return [
+    {
+      folderId: 3,
+      version: 1,
+      versionGroup: 1,
+      contentLength: "75.02 KB",
+      pureContentLength: 76825,
+      fileStatus: 0,
+      mute: false,
+      viewUrl: "",
+      webUrl: "",
+      fileType: 5,
+      fileExst: ".xlsx",
+      comment: "Copied",
+      thumbnailStatus: 0,
+      formFillingStatus: 0,
+      viewAccessibility: {
+        ImageView: false,
+        MediaView: false,
+        WebView: true,
+        WebEdit: true,
+        WebReview: false,
+        WebCustomFilterEditing: true,
+        WebRestrictedEditing: false,
+        WebComment: true,
+        CanConvert: true,
+        MustConvert: false,
+      },
+      fileEntryType: 2,
+      vectorizationStatus,
+      id: 6,
+      rootFolderId: 1,
+      canShare: false,
+      security,
+      availableShareRights: {
+        ExternalLink: ["Editing", "Comment", "Read", "None"],
+        PrimaryExternalLink: ["Editing", "Comment", "Read", "None"],
+      },
+      title: "Test spreadsheet.xlsx",
+      access: 0,
+      shared: false,
+      sharedForUser: false,
+      parentShared: false,
+      shortWebUrl: "",
+      created: "2026-01-20T11:38:09.0000000+01:00",
+      createdBy: createdUpdatedByMock,
+      updated: "2026-01-20T11:38:09.0000000+01:00",
+      rootFolderType: 34,
+      updatedBy: createdUpdatedByMock,
+    },
+    {
+      folderId: 3,
+      version: 1,
+      versionGroup: 1,
+      contentLength: "400.77 KB",
+      pureContentLength: 410390,
+      fileStatus: 0,
+      mute: false,
+      viewUrl: "",
+      webUrl: "",
+      fileType: 7,
+      fileExst: ".docx",
+      comment: "Copied",
+      thumbnailStatus: 0,
+      formFillingStatus: 0,
+      viewAccessibility: {
+        ImageView: false,
+        MediaView: false,
+        WebView: true,
+        WebEdit: true,
+        WebReview: true,
+        WebCustomFilterEditing: false,
+        WebRestrictedEditing: false,
+        WebComment: true,
+        CanConvert: true,
+        MustConvert: false,
+      },
+      fileEntryType: 2,
+      vectorizationStatus,
+      id: 7,
+      rootFolderId: 1,
+      canShare: false,
+      security,
+      availableShareRights: {
+        ExternalLink: ["Editing", "Review", "Comment", "Read", "None"],
+        PrimaryExternalLink: ["Editing", "Review", "Comment", "Read", "None"],
+      },
+      title: "Test document.docx",
+      access: 0,
+      shared: false,
+      sharedForUser: false,
+      parentShared: false,
+      shortWebUrl: "",
+      created: "2026-01-20T11:38:09.0000000+01:00",
+      createdBy: createdUpdatedByMock,
+      updated: "2026-01-20T11:38:09.0000000+01:00",
+      rootFolderType: 34,
+      updatedBy: createdUpdatedByMock,
+    },
+    {
+      folderId: 3,
+      version: 1,
+      versionGroup: 1,
+      contentLength: "1.27 MB",
+      pureContentLength: 1329569,
+      fileStatus: 0,
+      mute: false,
+      viewUrl: "",
+      webUrl: "",
+      fileType: 10,
+      fileExst: ".pdf",
+      comment: "Copied",
+      thumbnailStatus: 0,
+      hasDraft: false,
+      formFillingStatus: 0,
+      isForm: true,
+      viewAccessibility: {
+        ImageView: false,
+        MediaView: false,
+        WebView: false,
+        WebEdit: true,
+        WebReview: false,
+        WebCustomFilterEditing: false,
+        WebRestrictedEditing: true,
+        WebComment: true,
+        CanConvert: true,
+        MustConvert: false,
+      },
+      fileEntryType: 2,
+      vectorizationStatus,
+      id: 5,
+      rootFolderId: 1,
+      canShare: false,
+      security,
+      availableShareRights: {
+        ExternalLink: ["Editing", "FillForms", "None"],
+        PrimaryExternalLink: ["Editing", "FillForms", "None"],
+      },
+      title: "Test form.pdf",
+      access: 0,
+      shared: false,
+      sharedForUser: false,
+      parentShared: false,
+      shortWebUrl: "",
+      created: "2026-01-20T11:38:07.0000000+01:00",
+      createdBy: createdUpdatedByMock,
+      updated: "2026-01-20T11:38:07.0000000+01:00",
+      rootFolderType: 34,
+      updatedBy: createdUpdatedByMock,
+    },
+  ];
+};
+
+const getAgentFolderKnowledge = (
+  options: {
+    isEmpty?: boolean;
+    canUploadFiles?: boolean;
+    vectorizationStatus?: VectorizationStatus;
+    canRetryVectorization?: boolean;
+  } = {},
+) => {
+  const {
+    isEmpty = false,
+    canUploadFiles = true,
+    vectorizationStatus = VectorizationStatus.Completed,
+    canRetryVectorization = true,
+  } = options;
+
+  const files = isEmpty
+    ? []
+    : getMockKnowledgeFiles(vectorizationStatus, canRetryVectorization);
+
+  return {
+    files,
+    folders: [],
+    current: {
+      parentId: 2,
+      filesCount: 0,
+      foldersCount: 0,
+      new: 0,
+      mute: false,
+      pinned: false,
+      private: false,
+      indexing: false,
+      denyDownload: false,
+      type: 32,
+      fileEntryType: 1,
+      id: 3,
+      rootFolderId: 1,
+      canShare: false,
+      security: {
+        Read: true,
+        Create: canUploadFiles,
+        Delete: false,
+        EditRoom: false,
+        Rename: false,
+        CopyTo: canUploadFiles,
+        Copy: false,
+        MoveTo: canUploadFiles,
+        Move: false,
+        Pin: false,
+        Mute: false,
+        EditAccess: false,
+        Duplicate: false,
+        Download: true,
+        CopySharedLink: false,
+        Reconnect: false,
+        CreateRoomFrom: false,
+        CopyLink: false,
+        Embed: false,
+        ChangeOwner: false,
+        IndexExport: false,
+        UseChat: false,
+      },
+      availableShareRights: {
+        ExternalLink: ["Editing", "Review", "Comment", "Read", "None"],
+        PrimaryExternalLink: ["Editing", "Review", "Comment", "Read", "None"],
+      },
+      title: "Knowledge",
+      access: 0,
+      shared: false,
+      sharedForUser: false,
+      parentShared: false,
+      shortWebUrl: "",
+      created: "2026-01-19T16:55:10.0000000+01:00",
+      createdBy: createdUpdatedByMock,
+      updated: "2026-01-19T16:55:10.0000000+01:00",
+      rootFolderType: 34,
+      updatedBy: createdUpdatedByMock,
+    },
+    pathParts: [
+      {
+        id: 224866,
+        title: "AI agents",
+        folderType: 34,
+      },
+      {
+        id: 2,
+        title: "Test agent",
+        roomType: 9,
+        folderType: 31,
+      },
+      {
+        id: 3,
+        title: "Knowledge",
+        folderType: 32,
+      },
+    ],
+    startIndex: 0,
+    count: 0,
+    total: 0,
+    new: 0,
+  };
+};
+
 const getAgentFolderResultStorage = ({
   canUseChat,
   isEmpty,
@@ -385,6 +677,91 @@ const successFolderChatCanNotUseChat = {
   statusCode: 200,
 };
 
+const successFolderKnowledgeVectorizationDisabled = {
+  response: getAgentFolderKnowledge({ canUploadFiles: false }),
+  count: 1,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/files/2?count=100&sortby=DateAndTime&sortOrder=descending`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+const successFolderKnowledgeEmpty = {
+  response: getAgentFolderKnowledge({ isEmpty: true }),
+  count: 1,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/files/2?count=100&sortby=DateAndTime&sortOrder=descending`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+const successFolderKnowledgeVectorizationCompleted = {
+  response: getAgentFolderKnowledge(),
+  count: 1,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/files/2?count=100&sortby=DateAndTime&sortOrder=descending`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+const successFolderKnowledgeVectorizationInProgress = {
+  response: getAgentFolderKnowledge({
+    vectorizationStatus: VectorizationStatus.InProgress,
+  }),
+  count: 1,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/files/2?count=100&sortby=DateAndTime&sortOrder=descending`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+const successFolderKnowledgeVectorizationFailed = {
+  response: getAgentFolderKnowledge({
+    vectorizationStatus: VectorizationStatus.Failed,
+  }),
+  count: 1,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/files/2?count=100&sortby=DateAndTime&sortOrder=descending`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+const successFolderKnowledgeVectorizationFailedNoRetry = {
+  response: getAgentFolderKnowledge({
+    vectorizationStatus: VectorizationStatus.Failed,
+    canRetryVectorization: false,
+  }),
+  count: 1,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/files/2?count=100&sortby=DateAndTime&sortOrder=descending`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
 const successFolderResultStorageDefault = {
   response: getAgentFolderResultStorage({ canUseChat: true, isEmpty: true }),
   count: 1,
@@ -461,6 +838,42 @@ export const agentFolderResultStorageResolver = (
   }
 };
 
+export const agentFolderKnowledgeResolver = (
+  type:
+    | "default"
+    | "empty"
+    | "vectorizationDisabled"
+    | "vectorizationFailed"
+    | "vectorizationFailedNoRetry"
+    | "vectorizationInProgress",
+) => {
+  switch (type) {
+    case "vectorizationDisabled":
+      return new Response(
+        JSON.stringify(successFolderKnowledgeVectorizationDisabled),
+      );
+    case "vectorizationFailed":
+      return new Response(
+        JSON.stringify(successFolderKnowledgeVectorizationFailed),
+      );
+
+    case "vectorizationFailedNoRetry":
+      return new Response(
+        JSON.stringify(successFolderKnowledgeVectorizationFailedNoRetry),
+      );
+    case "vectorizationInProgress":
+      return new Response(
+        JSON.stringify(successFolderKnowledgeVectorizationInProgress),
+      );
+    case "empty":
+      return new Response(JSON.stringify(successFolderKnowledgeEmpty));
+    case "default":
+      return new Response(
+        JSON.stringify(successFolderKnowledgeVectorizationCompleted),
+      );
+  }
+};
+
 export const agentFolderInfoResolver = (
   type: "default" | "canNotUseChat" = "default",
 ) => {
@@ -484,7 +897,7 @@ export const agentFolderChatHandler = (
       const searchArea = url.searchParams.get("searchArea");
 
       const folderId = params.id;
-      if (folderId === "2" && searchArea !== "6") {
+      if (folderId === "2" && searchArea !== "6" && searchArea !== "5") {
         return agentFolderChatResolver(type);
       }
       // Pass through to other handlers for non-agent folders
@@ -507,6 +920,32 @@ export const agentFolderResultStorageHandler = (
         return;
       }
       return agentFolderResultStorageResolver(type);
+    },
+  );
+};
+
+export const agentFolderKnowledgeHandler = (
+  port: string,
+  type:
+    | "default"
+    | "empty"
+    | "vectorizationDisabled"
+    | "vectorizationFailed"
+    | "vectorizationFailedNoRetry"
+    | "vectorizationInProgress" = "default",
+) => {
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_AGENT_FOLDER_KNOWLEDGE}`,
+    ({ request }) => {
+      // Only handle requests with searchArea=5 (Knowledge) to avoid intercepting other folder requests
+      const url = new URL(request.url);
+      const searchArea = url.searchParams.get("searchArea");
+
+      if (searchArea !== "5") {
+        return;
+      }
+
+      return agentFolderKnowledgeResolver(type);
     },
   );
 };

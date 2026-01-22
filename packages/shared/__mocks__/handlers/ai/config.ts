@@ -95,9 +95,32 @@ const successWebSearchDisabled = {
   statusCode: 200,
 };
 
+const successVectorizationDisabled = {
+  response: {
+    webSearchEnabled: true,
+    vectorizationEnabled: false,
+    aiReady: true,
+    portalMcpServerId: "id",
+    embeddingModel: "text-embedding-3-small",
+    knowledgeSearchToolName: "docspace_knowledge_search",
+    webSearchToolName: "docspace_web_search",
+    webCrawlingToolName: "docspace_web_crawling",
+  },
+  count: 1,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_CONFIG}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
 export const aiConfigResolver = (
   isDisabled?: boolean,
   isWebSearchDisabled?: boolean,
+  isVectorizationDisabled?: boolean,
 ): Response => {
   if (isDisabled) {
     return new Response(JSON.stringify(successDisabled));
@@ -107,6 +130,10 @@ export const aiConfigResolver = (
     return new Response(JSON.stringify(successWebSearchDisabled));
   }
 
+  if (isVectorizationDisabled) {
+    return new Response(JSON.stringify(successVectorizationDisabled));
+  }
+
   return new Response(JSON.stringify(success));
 };
 
@@ -114,8 +141,13 @@ export const aiConfigHandler = (
   port: string,
   isDisabled?: boolean,
   isWebSearchDisabled?: boolean,
+  isVectorizationDisabled?: boolean,
 ) => {
   return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_CONFIG}`, () => {
-    return aiConfigResolver(isDisabled, isWebSearchDisabled);
+    return aiConfigResolver(
+      isDisabled,
+      isWebSearchDisabled,
+      isVectorizationDisabled,
+    );
   });
 };

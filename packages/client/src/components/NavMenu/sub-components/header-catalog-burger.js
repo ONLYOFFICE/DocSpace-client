@@ -25,44 +25,24 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled from "styled-components";
 import PropTypes from "prop-types";
 
 import MenuIcon from "PUBLIC_DIR/images/menu.react.svg";
-import { injectDefaultTheme, mobile } from "@docspace/shared/utils";
-import { globalColors } from "@docspace/shared/themes";
 
-const StyledIconBox = styled.div`
-  display: none;
-
-  @media ${mobile} {
-    display: flex;
-  }
-
-  align-items: center;
-
-  padding-inline-start: 16px;
-  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
-`;
-
-const StyledMenuIcon = styled(MenuIcon).attrs(injectDefaultTheme)`
-  width: 20px;
-  height: 20px;
-
-  path {
-    fill: ${(props) => props.theme.catalog.headerBurgerColor};
-  }
-
-  cursor: pointer;
-`;
+import styles from "../nav.module.scss";
 
 const HeaderCatalogBurger = (props) => {
   const { onClick, ...rest } = props;
 
   return (
-    <StyledIconBox onClick={onClick} name="catalog-burger" {...rest}>
-      <StyledMenuIcon />
-    </StyledIconBox>
+    <div
+      className={styles.iconBox}
+      onClick={onClick}
+      name="catalog-burger"
+      {...rest}
+    >
+      <MenuIcon className={styles.menuIcon} />
+    </div>
   );
 };
 

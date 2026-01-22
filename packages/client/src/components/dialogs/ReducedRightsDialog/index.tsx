@@ -1,16 +1,11 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation, Trans } from "react-i18next";
-import styled from "styled-components";
 
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-
-const StyledText = styled(Text)`
-  margin-top: 16px;
-`;
 
 type ReducedRightsDialogProps = {
   visible: boolean;
@@ -53,7 +48,7 @@ const ReducedRightsDialog: React.FC<ReducedRightsDialogProps> = ({
           }}
           components={{ 1: <span style={{ fontWeight: 600 }} /> }}
         />
-        <StyledText>
+        <Text style={{ marginTop: "16px" }}>
           <Trans
             t={t}
             ns="Files"
@@ -61,12 +56,12 @@ const ReducedRightsDialog: React.FC<ReducedRightsDialogProps> = ({
             values={{ sectionName: t("Common:MyDocuments") }}
             components={{ 1: <span style={{ fontWeight: 600 }} /> }}
           />
-        </StyledText>
-        <StyledText>
+        </Text>
+        <Text style={{ marginTop: "16px" }}>
           {t("Common:ForQuestionsContactPortalAdmin", {
             productName: t("Common:ProductName"),
           })}
-        </StyledText>
+        </Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

@@ -25,9 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useTranslation } from "react-i18next";
-import { useTheme } from "styled-components";
 
 import { EmptyView } from "@docspace/shared/components/empty-view";
+import { useTheme } from "@docspace/shared/hooks/useTheme";
 
 import EmptyScreenServerErrorLightSvg from "PUBLIC_DIR/images/emptyview/empty.server.error.light.svg";
 import EmptyScreenServerErrorDarkSvg from "PUBLIC_DIR/images/emptyview/empty.server.error.dark.svg";
@@ -35,9 +35,9 @@ import ReloadArrowsSvg from "PUBLIC_DIR/images/icons/10/reload.arrows.svg";
 
 const EmptyServerErrorContainer = () => {
   const { t } = useTranslation(["Common"]);
-  const theme = useTheme();
+  const { isBase } = useTheme();
 
-  const icon = theme.isBase ? (
+  const icon = isBase ? (
     <EmptyScreenServerErrorLightSvg />
   ) : (
     <EmptyScreenServerErrorDarkSvg />

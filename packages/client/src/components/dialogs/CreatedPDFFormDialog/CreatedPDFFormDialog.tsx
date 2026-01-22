@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { FC } from "react";
-import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 import { observer, inject } from "mobx-react";
 
@@ -43,12 +42,13 @@ import { copyShareLink } from "@docspace/shared/components/share/Share.helpers";
 import { toastr } from "@docspace/shared/components/toast";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 import { getFileInfo } from "@docspace/shared/api/files";
+import { useTheme } from "@docspace/shared/hooks/useTheme";
 
-import { Wrapper } from "./CreatedPDFFormDialog.styled";
 import type {
   CreatedPDFFormDialogProps,
   InjectedCreatedPDFFormDialogProps,
 } from "./CreatedPDFFormDialog.types";
+import styles from "./CreatePDFForm.module.scss";
 
 const CreatedPDFFormDialogComponent = ({
   file,
@@ -60,7 +60,7 @@ const CreatedPDFFormDialogComponent = ({
   getFilesListItems,
 }: CreatedPDFFormDialogProps & InjectedCreatedPDFFormDialogProps) => {
   const { t } = useTranslation(["PDFFormDialog", "Common"]);
-  const theme = useTheme();
+  const { isBase } = useTheme();
 
   const onSubmit = async () => {
     try {
@@ -100,16 +100,16 @@ const CreatedPDFFormDialogComponent = ({
     >
       <ModalDialog.Header>{t("PDFform")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Wrapper>
-          {theme.isBase ? <HeaderIcon /> : <HeaderDarkIcon />}
+        <div className={styles.wrapper}>
+          {isBase ? <HeaderIcon /> : <HeaderDarkIcon />}
           <span>{description}</span>
           <Checkbox
-            className="created-pdf__checkbox"
+            className={styles.createdPdfCheckbox}
             onChange={handleChangeCheckbox}
             label={t("Common:DontShowAgain")}
             dataTestId="created_pdf_form_dialog_dont_show_again"
           />
-        </Wrapper>
+        </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

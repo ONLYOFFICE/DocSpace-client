@@ -41,12 +41,8 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { PasswordInput } from "@docspace/shared/components/password-input";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 
-import {
-  ModalContentContainer,
-  RoomIconWrapper,
-  RoomTitle,
-} from "./PasswordEntryDialog.styled";
 import type { PasswordEntryDialogProps } from "./PasswordEntryDialog.types";
+import styles from "./PasswordEntry.module.scss";
 
 const PasswordEntryDialog = ({
   onClose,
@@ -140,18 +136,18 @@ const PasswordEntryDialog = ({
     >
       <ModalDialog.Header>{t("Common:EnterPassword")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <ModalContentContainer>
+        <section className={styles.content}>
           <span>{t("Common:NeedPassword")}:</span>
-          <RoomIconWrapper>
+          <div className={styles.roomIconWrapper}>
             <PublicRoomIcon />
-            <RoomTitle>{title}</RoomTitle>
-          </RoomIconWrapper>
+            <h4 className={styles.roomTitle}>{title}</h4>
+          </div>
           <FieldContainer
             isVertical
             labelVisible={false}
             hasError={!!errorMessage}
             errorMessage={errorMessage}
-            className="password-field"
+            className={styles.passwordField}
           >
             <PasswordInput
               scale
@@ -171,7 +167,7 @@ const PasswordEntryDialog = ({
               placeholder={t("Common:Password")}
             />
           </FieldContainer>
-        </ModalContentContainer>
+        </section>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

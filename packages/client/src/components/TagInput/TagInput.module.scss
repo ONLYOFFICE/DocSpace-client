@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+@use "@docspace/shared/styles/mixins";
+
 .tagList {
   margin-top: 12px;
   display: flex;
@@ -41,6 +43,82 @@
     svg {
       width: 12px;
       height: 12px;
+    }
+  }
+}
+
+.tagInput {
+  position: relative;
+  cursor: pointer;
+  width: auto;
+  display: inline-block;
+
+  &.noTags {
+    margin-bottom: -8px;
+  }
+
+  :global(.dropdown-content-wrapper) {
+    margin-bottom: -4px;
+    max-width: 100%;
+    position: relative;
+  }
+}
+
+.tagDropdown {
+  margin-top: 4px;
+  padding: 6px 0;
+  background: var(--create-edit-dropdown-bg);
+  border: 1px solid var(--create-edit-dropdown-border);
+  box-shadow: 0px 12px 40px var(--popup-shadow);
+  border-radius: 3px;
+  overflow: hidden;
+  width: 446px;
+  max-width: 446px;
+
+  &.hidden {
+    visibility: hidden;
+  }
+
+  :global(.dropdown-item) {
+    min-width: 446px;
+    height: 32px !important;
+    max-height: 32px !important;
+    cursor: pointer;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 6px 8px;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 20px;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    &:hover {
+      background: var(--create-edit-dropdown-item-hover);
+    }
+
+    :global(.dropdown-item-separator) {
+      height: 7px !important;
+      max-height: 7px !important;
+    }
+  }
+
+  :global(.ScrollbarsCustom) {
+    .track-vertical {
+      height: 100% !important;
+    }
+    .scroll-body {
+      padding-bottom: unset !important;
+    }
+  }
+
+  @include mixins.mobile {
+    width: calc(100vw - 34px);
+    max-width: calc(100vw - 34px);
+    :global(.dropdown-item) {
+      min-width: calc(100vw - 34px);
     }
   }
 }

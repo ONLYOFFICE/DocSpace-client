@@ -25,17 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useEffect } from "react";
-import styled from "styled-components";
 import { isMobile, isIOS } from "react-device-detect";
 import { inject, observer } from "mobx-react";
 import { useLocation } from "react-router";
 import SmartBanner from "react-smartbanner";
 import { getCookie } from "@docspace/shared/utils";
 import "./main.css";
-
-const Wrapper = styled.div`
-  padding-bottom: 80px;
-`;
 
 const ReactSmartBanner = (props) => {
   const { t, ready, isBannerVisible, setIsBannerVisible, logoText } = props;
@@ -94,7 +89,7 @@ const ReactSmartBanner = (props) => {
     navigator.msMaxTouchPoints > 0;
 
   return isMobile && isBannerVisible && ready && isTouchDevice ? (
-    <Wrapper id="smart-banner">
+    <div id="smart-banner" style={{ paddingBottom: "80px" }}>
       <SmartBanner
         title={t("SmartBanner:AppName", {
           organizationName: logoText,
@@ -108,7 +103,7 @@ const ReactSmartBanner = (props) => {
         price={priceText}
         appMeta={appMeta}
       />
-    </Wrapper>
+    </div>
   ) : null;
 };
 

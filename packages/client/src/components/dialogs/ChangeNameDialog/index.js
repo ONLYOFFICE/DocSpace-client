@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState } from "react";
-import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -35,15 +34,7 @@ import { TextInput } from "@docspace/shared/components/text-input";
 import { Button } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 
-const StyledBodyContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-
-  .field {
-    margin: 0 !important;
-  }
-`;
+import styles from "./change-name.module.scss";
 
 const ChangeNameDialog = (props) => {
   const {
@@ -131,7 +122,7 @@ const ChangeNameDialog = (props) => {
         {t("PeopleTranslations:NameChangeButton")}
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <StyledBodyContent>
+        <div className={styles.content}>
           {(() => {
             const fields = [
               {
@@ -173,7 +164,7 @@ const ChangeNameDialog = (props) => {
                 key={field.id}
                 isVertical
                 labelText={field.label}
-                className="field"
+                className={styles.field}
                 hasError={field.hasError}
                 errorMessage={field.errorMessage}
                 dataTestId={field.dataTestId}
@@ -194,7 +185,7 @@ const ChangeNameDialog = (props) => {
               </FieldContainer>
             ));
           })()}
-        </StyledBodyContent>
+        </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

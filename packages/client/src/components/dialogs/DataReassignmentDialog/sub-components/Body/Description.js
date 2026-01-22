@@ -25,23 +25,24 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 
-import { StyledAvailableList } from "../../../ChangePortalOwnerDialog/StyledDialog";
+import styles from "SRC_DIR/components/dialogs/ChangePortalOwnerDialog/ChangePortalOwner.module.scss";
 
 const Description = ({ dataReassignmentUrl, noRoomFilesToMove }) => {
   const { t } = useTranslation("DataReassignmentDialog");
 
   return (
-    <StyledAvailableList className="list-container">
-      <Text className="list-item">
+    <div className={classNames(styles.availableList, "list-container")}>
+      <Text className={styles.listItem}>
         {noRoomFilesToMove
           ? t("RoomsOnlyReassignment")
           : t("DescriptionDataReassignment")}
       </Text>
-      <Text className="list-item">{t("NoteDataReassignment")}</Text>
+      <Text className={styles.listItem}>{t("NoteDataReassignment")}</Text>
 
       {dataReassignmentUrl ? (
         <Link
@@ -54,7 +55,7 @@ const Description = ({ dataReassignmentUrl, noRoomFilesToMove }) => {
           {t("MoreAboutDataTransfer")}
         </Link>
       ) : null}
-    </StyledAvailableList>
+    </div>
   );
 };
 

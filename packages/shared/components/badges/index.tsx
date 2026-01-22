@@ -540,6 +540,7 @@ const Badges = ({
               fontSize="9px"
               fontWeight={700}
               data-tooltip-id={preparingForAITooltipId}
+              dataTestId="preparing-for-ai-badge"
             />
           </BadgeWrapper>
           <Tooltip

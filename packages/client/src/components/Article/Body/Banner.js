@@ -26,14 +26,9 @@
 
 import React, { useEffect } from "react";
 import { observer, inject } from "mobx-react";
-import styled from "styled-components";
 
 import { CampaignsBanner } from "@docspace/shared/components/campaigns-banner";
 import { ADS_TIMEOUT } from "SRC_DIR/helpers/filesConstants";
-
-const StyledWrapper = styled.div`
-  margin-bottom: 16px;
-`;
 
 const Banner = ({
   setSubmitToGalleryDialogVisible,
@@ -82,7 +77,7 @@ const Banner = ({
   if (!isVisible) return null;
 
   return (
-    <StyledWrapper>
+    <div style={{ marginBottom: "16px" }}>
       {campaignBackground &&
       campaignTranslate &&
       campaignConfig &&
@@ -96,7 +91,7 @@ const Banner = ({
           onClose={onClose}
         />
       ) : null}
-    </StyledWrapper>
+    </div>
   );
 };
 

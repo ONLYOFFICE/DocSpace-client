@@ -26,7 +26,8 @@
 
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Button } from "@docspace/shared/components/button";
-import { StyledFooterWrapper } from "../../../ChangePortalOwnerDialog/StyledDialog";
+
+import styles from "SRC_DIR/components/dialogs/ChangePortalOwnerDialog/ChangePortalOwner.module.scss";
 
 const Footer = ({
   t,
@@ -44,8 +45,8 @@ const Footer = ({
 }) => {
   if (showProgress) {
     return (
-      <StyledFooterWrapper>
-        <div className="button-wrapper">
+      <div className={styles.footerWrapper}>
+        <div className={styles.buttonWrapper}>
           <Button
             label={
               isAbortTransfer && percent !== 100
@@ -65,12 +66,12 @@ const Footer = ({
             }
           />
         </div>
-      </StyledFooterWrapper>
+      </div>
     );
   }
 
   return (
-    <StyledFooterWrapper>
+    <div className={styles.footerWrapper}>
       {showDeleteProfileCheckbox ? (
         <div className="delete-profile-container">
           <Checkbox
@@ -81,7 +82,7 @@ const Footer = ({
           />
         </div>
       ) : null}
-      <div className="button-wrapper">
+      <div className={styles.buttonWrapper}>
         <Button
           label={t("DataReassignmentDialog:Reassign")}
           size="normal"
@@ -98,7 +99,7 @@ const Footer = ({
           onClick={onClose}
         />
       </div>
-    </StyledFooterWrapper>
+    </div>
   );
 };
 

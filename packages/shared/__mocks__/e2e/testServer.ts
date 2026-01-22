@@ -26,8 +26,8 @@
 
 import next from "next";
 import { createServer, Server } from "http";
-import { parse } from "url";
 import { AddressInfo } from "net";
+import type { UrlWithParsedQuery } from "url";
 
 /**
  * Creates a Next.js test server for e2e tests
@@ -47,8 +47,19 @@ export const createNextTestServer = async (
 
   const server: Server = await new Promise((resolve) => {
     const newServer = createServer((req, res) => {
-      const parsedUrl = parse(req.url || "/", true);
-      handle(req, res, parsedUrl);
+      const url = new URL(req.url || "/", `http://${req.headers.host}`);
+      const query: Record<string, string | string[]> = {};
+      url.searchParams.forEach((value, key) => {
+        const existing = query[key];
+        if (existing) {
+          query[key] = Array.isArray(existing)
+            ? [...existing, value]
+            : [existing, value];
+        } else {
+          query[key] = value;
+        }
+      });
+      handle(req, res, { pathname: url.pathname, query } as UrlWithParsedQuery);
     });
 
     newServer.listen(0, () => {

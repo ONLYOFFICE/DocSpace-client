@@ -40,7 +40,6 @@ import {
 } from "@docspace/shared/utils";
 import { LANGUAGE } from "@docspace/shared/constants";
 import config from "PACKAGE_FILE";
-// import EditingWrapperComponent from "../components/EditingWrapperComponent";
 
 // import { getDefaultFileName } from "SRC_DIR/helpers/filesUtils";
 // import ItemIcon from "../components/ItemIcon";

@@ -25,12 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useRef, useState, useEffect } from "react";
+import classNames from "classnames";
 
+import { DropDown } from "@docspace/shared/components/drop-down";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { isMobile, DomHelpers } from "@docspace/shared/utils";
-import { StyledDropDown } from "./StyledDropdown";
 import { TagDropDownProps } from "./TagInput.types";
+import styles from "./TagInput.module.scss";
 
 const MAX_ITEMS_COUNT = 7;
 
@@ -137,13 +139,14 @@ const TagDropdown = ({
   const dropdownItems = calcualateDisplayedDropdownItems();
 
   return (
-    <StyledDropDown
-      className="dropdown-content"
+    <DropDown
+      className={classNames(styles.tagDropdown, "dropdown-content", {
+        [styles.hidden]: !!dropdownItems.length,
+      })}
       open={open}
       forwardedRef={dropdownRef}
       maxHeight={dropdownMaxHeight}
       showDisabledItems={false}
-      hasItems={!!dropdownItems.length}
       clickOutsideAction={onClickOutside}
       withBackdrop={false}
       isDefaultMode={false}
@@ -157,7 +160,7 @@ const TagDropdown = ({
       ) : (
         dropdownItems
       )}
-    </StyledDropDown>
+    </DropDown>
   );
 };
 

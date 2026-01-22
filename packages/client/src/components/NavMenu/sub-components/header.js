@@ -27,61 +27,14 @@
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
+import classNames from "classnames";
 import { Link as LinkWithoutRedirect } from "react-router";
-import {
-  isDesktop,
-  NoUserSelect,
-  getLogoUrl,
-  injectDefaultTheme,
-} from "@docspace/shared/utils";
+import { isDesktop, getLogoUrl } from "@docspace/shared/utils";
 import { FolderType, WhiteLabelLogoType } from "@docspace/shared/enums";
-import { globalColors } from "@docspace/shared/themes";
 import HeaderCatalogBurger from "./header-catalog-burger";
 import { getUrlByDefaultFolderType } from "SRC_DIR/helpers/utils";
 
-const Header = styled.header.attrs(injectDefaultTheme)`
-  display: flex;
-  align-items: center;
-
-  background-color: ${(props) => props.theme.header.backgroundColor};
-
-  width: 100vw;
-  height: 48px;
-
-  .header-logo-wrapper {
-    height: 24px;
-
-    display: flex;
-    align-items: center;
-    justify-items: center;
-    -webkit-tap-highlight-color: ${globalColors.tapHighlight};
-
-    ${NoUserSelect}
-  }
-
-  .header-logo-icon {
-    position: absolute;
-    right: 50%; /* Does not require rtl mirroring */
-    transform: translateX(50%);
-    height: 24px;
-    cursor: pointer;
-
-    svg {
-      path:last-child {
-        fill: ${(props) => props.theme.client.home.logoColor};
-      }
-    }
-  }
-  .mobile-short-logo {
-    width: 146px;
-  }
-
-  .header-items-wrapper {
-    display: flex;
-    margin-inline-start: 82px;
-  }
-`;
+import styles from "../nav.module.scss";
 
 const HeaderComponent = ({
   currentProductName,
@@ -97,60 +50,6 @@ const HeaderComponent = ({
   const defaultUrl = getUrlByDefaultFolderType(
     defaultFolderType || FolderType.Rooms,
   );
-
-  // const isNavAvailable = mainModules.length > 0;
-
-  // const onLogoClick = () => {
-  //   history.push(defaultUrl);
-  //   backdropClick();
-  // };
-
-  // const onBadgeClick = React.useCallback((e) => {
-  //   if (!e) return;
-  //   const id = e.currentTarget.dataset.id;
-  //   const item = mainModules.find((m) => m.id === id);
-  //   toggleAside();
-
-  //   if (item) item.onBadgeClick(e);
-  // }, []);
-
-  // const handleItemClick = React.useCallback((e) => {
-  //   onItemClick(e);
-  //   backdropClick();
-  // }, []);
-
-  // const numberOfModules = mainModules.filter((item) => !item.separator).length;
-  // const needNavMenu = currentProductId !== "home";
-  // const mainModulesWithoutSettings = mainModules.filter(
-  //   (module) => module.id !== "settings"
-  // );
-
-  /* const navItems = mainModulesWithoutSettings.map(
-    ({ id, separator, iconUrl, notifications, link, title, dashed }) => {
-      const itemLink = getLink(link);
-      const shouldRenderIcon = checkIfModuleOld(link);
-      return (
-        <NavItem
-          separator={!!separator}
-          key={id}
-          data-id={id}
-          data-link={itemLink}
-          opened={isNavOpened}
-          active={id == currentProductId}
-          iconUrl={iconUrl}
-          badgeNumber={notifications}
-          onClick={handleItemClick}
-          onBadgeClick={onBadgeClick}
-          url={itemLink}
-          dashed={dashed}
-        >
-          {title}
-          {shouldRenderIcon && <StyledExternalLinkIcon color={linkColor} />}
-        </NavItem>
-      );
-    }
-  ); */
-
   const [isDesktopView, setIsDesktopView] = useState(isDesktop());
 
   const onResize = () => {
@@ -173,12 +72,16 @@ const HeaderComponent = ({
 
   return (
     <>
-      <Header
+      <header
         module={currentProductName}
         isLoaded={isLoaded}
         isPreparationPortal={isPreparationPortal}
         isAuthenticated={isAuthenticated}
-        className="navMenuHeader hidingHeader"
+        className={classNames(
+          styles.mainHeader,
+          "navMenuHeader",
+          "hidingHeader",
+        )}
         needNavMenu={false}
         isDesktopView={isDesktopView}
       >
@@ -190,74 +93,7 @@ const HeaderComponent = ({
             <img alt="logo" src={logo} className="header-logo-icon" />
           </LinkWithoutRedirect>
         )}
-        {/* {isNavAvailable &&
-          isDesktopView &&
-          currentProductId !== "home" && (
-            <StyledNavigationIconsWrapper>
-              {mainModules.map((item) => {
-                return (
-                  <React.Fragment key={item.id}>
-                    {item.iconUrl &&
-                      !item.separator &&
-                      item.id !== "settings" && (
-                        <HeaderNavigationIcon
-                          key={item.id}
-                          id={item.id}
-                          data-id={item.id}
-                          data-link={item.link}
-                          active={item.id == currentProductId}
-                          iconUrl={item.iconUrl}
-                          badgeNumber={item.notifications}
-                          onItemClick={onItemClick}
-                          onBadgeClick={onBadgeClick}
-                          url={item.link}
-                        />
-                      )}
-                  </React.Fragment>
-                );
-              })}
-            </StyledNavigationIconsWrapper>
-          )} */}
-      </Header>
-
-      {/* {!isDesktopView && (
-        <Nav
-          opened={isNavOpened}
-          onMouseEnter={onNavMouseEnter}
-          onMouseLeave={onNavMouseLeave}
-          numberOfModules={numberOfModules}
-        >
-          <NavLogoItem opened={isNavOpened} onClick={onLogoClick} />
-          <NavItem
-            separator={true}
-            key={"nav-products-separator"}
-            data-id={"nav-products-separator"}
-          />
-          {navItems}
-          <Box className="version-box">
-            <Link
-              as="a"
-              href={`https://github.com/ONLYOFFICE/Docspace/releases`}
-              target="_blank"
-              {...versionBadgeProps}
-            >
-              {t("Common:Version")} {version}
-            </Link>
-            <Text as="span" {...versionBadgeProps}>
-              {" "}
-              -{" "}
-            </Text>
-            <StyledLink>
-              <LinkWithoutRedirect
-                to={combineUrl(window.ClientConfig?.proxy?.url, "/about")}
-                className="nav-menu-header_link"
-              >
-                {t("Common:About")}
-              </LinkWithoutRedirect>
-            </StyledLink>
-          </Box>
-        </Nav>
-      )} */}
+      </header>
     </>
   );
 };

@@ -26,7 +26,6 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
@@ -39,12 +38,6 @@ import { sendInstructionsToChangeEmail } from "@docspace/shared/api/people";
 
 import { ErrorKeys } from "@docspace/shared/enums";
 import { inject, observer } from "mobx-react";
-
-const StyledBodyContent = styled.div`
-  .text-body {
-    margin-bottom: 16px;
-  }
-`;
 
 class ChangeEmailDialogComponent extends React.Component {
   constructor(props) {
@@ -190,8 +183,10 @@ class ChangeEmailDialogComponent extends React.Component {
       >
         <ModalDialog.Header>{t("EmailChangeTitle")}</ModalDialog.Header>
         <ModalDialog.Body className="email-dialog-body">
-          <StyledBodyContent>
-            <Text className="text-body">{t("EmailActivationDescription")}</Text>
+          <div>
+            <Text style={{ marginBottom: "16px" }}>
+              {t("EmailActivationDescription")}
+            </Text>
             <FieldContainer
               isVertical
               style={{ margin: "0" }}
@@ -214,7 +209,7 @@ class ChangeEmailDialogComponent extends React.Component {
                 testId="change_email_input"
               />
             </FieldContainer>
-          </StyledBodyContent>
+          </div>
         </ModalDialog.Body>
         <ModalDialog.Footer>
           <Button

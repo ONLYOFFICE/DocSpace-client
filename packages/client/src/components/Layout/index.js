@@ -26,44 +26,15 @@
 
 import PropTypes from "prop-types";
 import { inject, observer } from "mobx-react";
-import styled, { css } from "styled-components";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router";
 import { isMobile, isMobileOnly } from "react-device-detect";
+import classNames from "classnames";
 
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
-import {
-  isTablet as isTabletUtils,
-  mobileMore,
-  tablet,
-} from "@docspace/shared/utils";
+import { isTablet as isTabletUtils, tablet } from "@docspace/shared/utils";
 
-const StyledContainer = styled.div`
-  width: 100%;
-  height: 100dvh;
-
-  #customScrollBar {
-    z-index: 0;
-  }
-
-  ${(props) =>
-    isMobileOnly &&
-    !props.isPortrait &&
-    css`
-      display: flex;
-      width: auto;
-      padding: env(safe-area-inset-top) env(safe-area-inset-right)
-        env(safe-area-inset-bottom) env(safe-area-inset-left);
-    `}
-
-  @media ${mobileMore} {
-    #customScrollBar {
-      > .scroll-wrapper > .scroller > .scroll-body {
-        padding-inline: 0px !important;
-      }
-    }
-  }
-`;
+import styles from "./layout.module.scss";
 
 const Layout = (props) => {
   const {
@@ -164,13 +135,17 @@ const Layout = (props) => {
   }, []);
 
   return (
-    <StyledContainer className="Layout" isPortrait={isPortrait}>
+    <div
+      className={classNames("Layout", styles.layout, {
+        [styles.mobileLandscape]: isMobileOnly && !isPortrait,
+      })}
+    >
       {isSDKPath ? (
         children
       ) : (
         <Scrollbar id="customScrollBar">{children}</Scrollbar>
       )}
-    </StyledContainer>
+    </div>
   );
 };
 

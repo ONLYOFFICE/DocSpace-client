@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import PropTypes from "prop-types";
-import styled from "styled-components";
 import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
@@ -47,13 +46,9 @@ import { toastr } from "@docspace/shared/components/toast";
 import NewFilesBadge from "SRC_DIR/components/NewFilesBadge";
 import BonusItem from "./BonusItem";
 
-const StyledDragAndDrop = styled(DragAndDrop)`
-  display: contents;
-`;
-
-const CatalogDivider = styled.div`
-  height: 16px;
-`;
+const CatalogDivider = () => {
+  return <div style={{ height: "16px" }}></div>;
+};
 
 const Item = ({
   t,
@@ -169,7 +164,8 @@ const Item = ({
   const droppableClassName = isDragging ? "droppable" : "";
 
   return (
-    <StyledDragAndDrop
+    <DragAndDrop
+      style={{ display: "contents" }}
       key={item.id}
       data-title={item.title}
       value={value}
@@ -225,7 +221,7 @@ const Item = ({
         $currentColorScheme={currentColorScheme}
         dataTooltipId={`aiAgentsTooltip${item.id}`}
       />
-    </StyledDragAndDrop>
+    </DragAndDrop>
   );
 };
 

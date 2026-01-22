@@ -38,7 +38,7 @@ import { Link, LinkType } from "@docspace/shared/components/link";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { TCreatedBy } from "@docspace/shared/types";
 
-import * as Styled from "./index.styled";
+import styles from "./change-room-owner.module.scss";
 
 type ChangeRoomOwnerProps = {
   currentUserId?: string;
@@ -65,13 +65,13 @@ const ChangeRoomOwner = ({
   );
 
   return (
-    <Styled.ChangeRoomOwner>
+    <div>
       <Text className="change-owner-label" fontWeight={600} fontSize="13px">
         {isAgent ? t("Common:AgentOwner") : t("Files:RoomOwner")}
       </Text>
 
-      <div className="change-owner-display-wrapper">
-        <div className="change-owner-display">
+      <div className={styles.changeOwnerDisplayWrapper}>
+        <div className={styles.changeOwnerDisplay}>
           <Avatar
             className="change-owner-display-avatar"
             size={AvatarSize.base}
@@ -82,19 +82,19 @@ const ChangeRoomOwner = ({
             }
             userName={userName}
           />
-          <div className="change-owner-display-name">
+          <div className={styles.changeOwnerDisplayName}>
             <Text fontWeight={600} fontSize="13px">
               {userName}
             </Text>
             {roomOwner.id === currentUserId ? (
-              <Text className="me-label">({t("Common:MeLabel")})</Text>
+              <Text className={styles.meLabel}>({t("Common:MeLabel")})</Text>
             ) : null}
           </div>
         </div>
 
         {canChangeOwner ? (
           <Link
-            className="change-owner-link"
+            className={styles.changeOwnerLink}
             isHovered
             type={LinkType.action}
             fontWeight={600}
@@ -106,7 +106,7 @@ const ChangeRoomOwner = ({
           </Link>
         ) : null}
       </div>
-    </Styled.ChangeRoomOwner>
+    </div>
   );
 };
 

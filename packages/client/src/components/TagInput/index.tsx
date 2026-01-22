@@ -25,37 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useRef } from "react";
-import styled from "styled-components";
 import { TFunction } from "i18next";
-
+import classNames from "classnames";
 import TagList from "./TagList";
 
 import InputParam from "SRC_DIR/components/CreateEditDialogParams/InputParam";
 import TagHandler from "SRC_DIR/helpers/TagHandler";
 
 import TagDropdown from "./TagDropdown";
-
-const StyledTagInput = styled.div<{ hasTags: boolean }>`
-  position: relative;
-
-  .set_room_params-tag_input {
-    &-label_wrapper {
-      &-label {
-        cursor: pointer;
-        width: auto;
-        display: inline-block;
-      }
-    }
-  }
-
-  .dropdown-content-wrapper {
-    margin-bottom: -4px;
-    max-width: 100%;
-    position: relative;
-  }
-
-  ${({ hasTags }) => !hasTags && "margin-bottom: -8px"}
-`;
+import styles from "./TagInput.module.scss";
 
 type TagInputProps = {
   t: TFunction;
@@ -143,9 +121,10 @@ const TagInput = ({
   };
 
   return (
-    <StyledTagInput
-      className="set_room_params-input set_room_params-tag_input"
-      hasTags={!!tagHandler.tags.length}
+    <div
+      className={classNames(styles.tagInput, {
+        [styles.noTags]: !!tagHandler.tags.length,
+      })}
     >
       <InputParam
         ref={inputRef}
@@ -174,7 +153,7 @@ const TagInput = ({
       />
 
       <TagList tagHandler={tagHandler} isDisabled={isDisabled} />
-    </StyledTagInput>
+    </div>
   );
 };
 

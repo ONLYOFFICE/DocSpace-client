@@ -26,7 +26,6 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
 
 import { Avatar, AvatarSize } from "@docspace/shared/components/avatar";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
@@ -40,24 +39,7 @@ import {
 } from "@docspace/shared/utils/common";
 import ProfileMenu from "./profile-menu";
 
-const StyledDiv = styled.div`
-  width: 32px;
-  height: 32px;
-`;
-
-const StyledButtonWrapper = styled.div`
-  width: 100%;
-  padding: 12px 16px;
-  box-sizing: border-box;
-`;
-
-const StyledDropDownItem = styled(DropDownItem)`
-  padding: 0px 16px;
-  .drop-down-icon {
-    margin-inline-end: 12px;
-    height: 22px;
-  }
-`;
+import styles from "../nav.module.scss";
 
 class ProfileActions extends React.PureComponent {
   constructor(props) {
@@ -146,13 +128,13 @@ class ProfileActions extends React.PureComponent {
 
   render() {
     // console.log("Layout sub-component ProfileActions render");
-    const { userActions, isProduct } = this.props;
+    const { userActions } = this.props;
     const { user, opened, avatar } = this.state;
     const userRole = getUserType(user);
     const avatarRole = getUserAvatarRoleByType(userRole);
 
     return (
-      <StyledDiv isProduct={isProduct} ref={this.ref}>
+      <div className={styles.profileActions} ref={this.ref}>
         <Avatar
           onClick={this.onClick}
           role={avatarRole}
@@ -178,21 +160,25 @@ class ProfileActions extends React.PureComponent {
                 <React.Fragment key={key}>
                   {action ? (
                     action?.isButton ? (
-                      <StyledButtonWrapper>
+                      <div className={styles.buttonWrapper}>
                         <Button
                           size="normal"
                           scale
                           label={action.label}
                           onClick={action.onClick}
                         />
-                      </StyledButtonWrapper>
+                      </div>
                     ) : (
                       <Link
                         noHover
                         href={action.url}
                         onClick={this.onClickItemLink}
                       >
-                        <StyledDropDownItem {...action} noHover />
+                        <DropDownItem
+                          {...action}
+                          noHover
+                          className={styles.dropDownItem}
+                        />
                       </Link>
                     )
                   ) : null}
@@ -201,7 +187,7 @@ class ProfileActions extends React.PureComponent {
             })}
           </div>
         </ProfileMenu>
-      </StyledDiv>
+      </div>
     );
   }
 }
@@ -212,7 +198,6 @@ ProfileActions.propTypes = {
   userActions: PropTypes.array,
   userIsUpdate: PropTypes.bool,
   setUserIsUpdate: PropTypes.func,
-  isProduct: PropTypes.bool,
 };
 
 ProfileActions.defaultProps = {
@@ -220,7 +205,6 @@ ProfileActions.defaultProps = {
   user: {},
   userActions: [],
   userIsUpdate: false,
-  isProduct: false,
 };
 
 export default ProfileActions;

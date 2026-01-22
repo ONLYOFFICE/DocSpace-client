@@ -35,7 +35,7 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { SimulatePassword } from "@docspace/shared/components/simulate-password";
 
 import config from "PACKAGE_FILE";
-import StyledComponent from "./StyledConvertPasswordDialog";
+import styles from "./ConvertPassword.module.scss";
 
 const ConvertPasswordDialogComponent = (props) => {
   const {
@@ -141,9 +141,9 @@ const ConvertPasswordDialogComponent = (props) => {
     >
       <ModalDialog.Header>{dialogHeading}</ModalDialog.Header>
       <ModalDialog.Body>
-        <StyledComponent>
+        <div className={styles.wrapper}>
           <div className="convert-password-dialog_content">
-            <div className="convert-password-dialog_caption">
+            <div className={styles.caption}>
               <Text>
                 {makeForm
                   ? t("Translations:FileProtected").concat(
@@ -168,7 +168,7 @@ const ConvertPasswordDialogComponent = (props) => {
               />
             </div>
           </div>
-        </StyledComponent>
+        </div>
       </ModalDialog.Body>
 
       <ModalDialog.Footer>

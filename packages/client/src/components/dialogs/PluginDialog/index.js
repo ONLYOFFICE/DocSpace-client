@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
@@ -34,19 +33,7 @@ import { Portal } from "@docspace/shared/components/portal";
 import WrappedComponent from "SRC_DIR/helpers/plugins/WrappedComponent";
 import { PluginComponents } from "SRC_DIR/helpers/plugins/enums";
 import { messageActions } from "SRC_DIR/helpers/plugins/utils";
-import { injectDefaultTheme } from "@docspace/shared/utils";
-
-const StyledFullScreen = styled.div.attrs(injectDefaultTheme)`
-  position: fixed;
-  top: 0;
-  // doesn't require mirroring for RTL
-  left: 0;
-  z-index: 500;
-  background: ${(props) => props.theme.backgroundColor};
-
-  width: 100%;
-  height: 100%;
-`;
+import styles from "./PluginDialog.module.scss";
 
 const PluginDialog = ({
   isVisible,
@@ -165,7 +152,7 @@ const PluginDialog = ({
   const rootElement = document.getElementById("root");
 
   const dialog = fullScreen ? (
-    <StyledFullScreen>
+    <div className={styles.fullScreen}>
       <WrappedComponent
         pluginName={pluginName}
         component={{
@@ -175,7 +162,7 @@ const PluginDialog = ({
         setModalRequestRunning={setModalRequestRunning}
         modalRequestRunning={modalRequestRunning}
       />
-    </StyledFullScreen>
+    </div>
   ) : (
     <ModalDialog
       visible={isVisible}

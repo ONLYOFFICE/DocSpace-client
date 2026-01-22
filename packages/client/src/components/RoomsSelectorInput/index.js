@@ -34,7 +34,6 @@ import RoomSelector from "@docspace/shared/selectors/Room";
 
 import { Aside } from "@docspace/shared/components/aside";
 import { Backdrop } from "@docspace/shared/components/backdrop";
-import { StyledBodyWrapper } from "./StyledComponents";
 
 const RoomsSelectorInput = (props) => {
   const {
@@ -111,8 +110,10 @@ const RoomsSelectorInput = (props) => {
     />
   );
 
+  const bodyWrapperStyle = { maxWidth: maxWidth || "350px", margin: "16px 0" };
+
   return (
-    <StyledBodyWrapper maxWidth={maxWidth} className={className}>
+    <div style={bodyWrapperStyle} className={className}>
       <FileInput
         onClick={onClick}
         fromStorage
@@ -141,7 +142,7 @@ const RoomsSelectorInput = (props) => {
       >
         {SelectorBody}
       </Aside>
-    </StyledBodyWrapper>
+    </div>
   );
 };
 

@@ -24,14 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import SecuritySvgUrl from "PUBLIC_DIR/images/security.svg?url";
+
+import React from "react";
 import { inject, observer } from "mobx-react";
-import styled, { css } from "styled-components";
-import { injectDefaultTheme, NoUserSelect } from "@docspace/shared/utils";
+import classNames from "classnames";
+
 import { RoomIcon } from "@docspace/shared/components/room-icon";
 import { TLogo } from "@docspace/shared/api/rooms/types";
 import { TModel } from "@docspace/shared/components/room-icon/RoomIcon.types";
+
+import styles from "./icons.module.scss";
 
 type ItemIconProps = {
   icon?: string;
@@ -54,43 +57,6 @@ type ItemIconProps = {
   isTemplate?: boolean;
   dataTestId?: string;
 };
-
-const IconWrapper = styled.div.attrs(injectDefaultTheme)<{ isRoom?: boolean }>`
-  ${(props) =>
-    props.isRoom &&
-    css`
-      position: relative;
-      border-radius: 6px;
-
-      &::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        /* border: ${({ theme }) => theme.itemIcon.borderColor}; */
-        border: 1px solid transparent;
-        border-radius: 5px;
-        overflow: hidden;
-      }
-    `}
-
-  .react-svg-icon {
-    ${NoUserSelect}
-    ${(props) =>
-      props.isRoom &&
-      css`
-        vertical-align: middle;
-      `}
-  }
-`;
-
-const EncryptedFileIcon = styled.div`
-  background: url(${SecuritySvgUrl}) no-repeat 0 0 / 16px 16px transparent;
-  height: 16px;
-  position: absolute;
-  width: 16px;
-  margin-top: 14px;
-  margin-inline-start: 12px;
-`;
 
 const ItemIcon = ({
   icon,
@@ -118,7 +84,9 @@ const ItemIcon = ({
 
   return (
     <>
-      <IconWrapper isRoom={isRoom}>
+      <div
+        className={classNames(styles.iconWrapper, { [styles.isRoom]: isRoom })}
+      >
         <RoomIcon
           color={color}
           title={title}
@@ -136,8 +104,13 @@ const ItemIcon = ({
           className={className}
           dataTestId={dataTestId}
         />
-      </IconWrapper>
-      {isPrivacy && fileExst ? <EncryptedFileIcon /> : null}
+      </div>
+      {isPrivacy && fileExst ? (
+        <div
+          className={styles.encryptedFileIcon}
+          style={{ backgroundImage: `url(${SecuritySvgUrl})` }}
+        />
+      ) : null}
     </>
   );
 };

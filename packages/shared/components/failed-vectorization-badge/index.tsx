@@ -91,6 +91,7 @@ export const FailedVectorizationBadge = ({
           [styles.small]: size === "small",
           [styles.medium]: size === "medium",
         })}
+        dataTestId="failed-vectorization-badge"
       />
       <Tooltip
         id={tooltipId}

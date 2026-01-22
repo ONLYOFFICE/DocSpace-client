@@ -23,14 +23,18 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import classNames from "classnames";
+
 import type { TFile } from "@docspace/shared/api/files/types";
 
-import { StyledItem } from "../NewFilesBadge.styled";
 import type { NewFilesPanelItemProps } from "../NewFilesBadge.types";
 
 import { NewFilesPanelItemDate } from "./NewFilesPanelItemDate";
 import { NewFilesPanelItemRoom } from "./NewFilesPanelItemRoom";
 import { NewFilesPanelFileList } from "./NewFilesPanelFileList";
+
+import styles from "../new-files-panel.module.scss";
 
 export const NewFilesPanelItem = ({
   date,
@@ -43,7 +47,12 @@ export const NewFilesPanelItem = ({
   culture,
 }: NewFilesPanelItemProps) => {
   return (
-    <StyledItem isRooms={isRooms || isAgents} isFirst={isFirst}>
+    <div
+      className={classNames(styles.item, {
+        [styles.isRooms]: isRooms || isAgents,
+        [styles.isFirst]: isFirst,
+      })}
+    >
       <NewFilesPanelItemDate date={date} culture={culture} />
       {isRooms || isAgents ? (
         items.map((value) => {
@@ -88,6 +97,6 @@ export const NewFilesPanelItem = ({
           onClose={onClose}
         />
       )}
-    </StyledItem>
+    </div>
   );
 };

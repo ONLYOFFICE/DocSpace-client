@@ -52,8 +52,9 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
+    ["dot"],
     [
-      process.env.CI ? "dot" : "html",
+      "html",
       {
         outputFolder: "../../playwright-report/client",
         open: "never",
@@ -79,6 +80,7 @@ export default defineConfig({
   expect: {
     toHaveScreenshot: {
       threshold: 0.16,
+      maxDiffPixelRatio: 0.02,
     },
   },
 

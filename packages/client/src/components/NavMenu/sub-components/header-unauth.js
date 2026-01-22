@@ -26,11 +26,11 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
 import { useNavigate } from "react-router";
 import { inject, observer } from "mobx-react";
-import { globalColors } from "@docspace/shared/themes";
-import { mobile, getLogoUrl, injectDefaultTheme } from "@docspace/shared/utils";
+import classNames from "classnames";
+
+import { getLogoUrl } from "@docspace/shared/utils";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { LanguageCombobox } from "@docspace/shared/components/language-combobox";
 import { setLanguageForUnauthorized } from "@docspace/shared/utils/common";
@@ -39,67 +39,7 @@ import { Button } from "@docspace/shared/components/button";
 import PersonDefaultReactSvg from "PUBLIC_DIR/images/person.default.react.svg";
 
 import i18n from "../../../i18n";
-
-const Header = styled.header.attrs(injectDefaultTheme)`
-  align-items: start;
-  background-color: ${(props) => props.theme.header.backgroundColor};
-  display: flex;
-  width: 100vw;
-  height: 48px;
-  justify-content: center;
-
-  .header-items-wrapper {
-    width: 960px;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    @media ${mobile} {
-      width: 475px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      //padding: 0 16px;
-    }
-  }
-
-  .header-logo-wrapper {
-    -webkit-tap-highlight-color: ${globalColors.tapHighlight};
-    height: 24px;
-  }
-
-  .header-logo-min_icon {
-    display: none;
-    cursor: pointer;
-    width: 24px;
-    height: 24px;
-  }
-
-  .header-logo-icon {
-    width: 100%;
-    height: 24px;
-    padding: 12px 0;
-    cursor: pointer;
-  }
-
-  .language-combo-box {
-    //margin: auto;
-    // margin-right: 8px;
-    position: absolute;
-    inset-inline-end: 8px;
-    top: 6px;
-  }
-`;
-
-const StyledButton = styled(Button)`
-  position: absolute;
-  inset-inline-end: 8px;
-  top: 8px;
-  svg path {
-    fill: ${globalColors.white};
-  }
-`;
+import styles from "../nav.module.scss";
 
 const HeaderUnAuth = ({
   wizardToken,
@@ -133,7 +73,10 @@ const HeaderUnAuth = ({
   const showSignInButton = !isFrame && isPublicRoom && !isAuthenticated;
 
   return (
-    <Header isLoaded={isLoaded} className="navMenuHeaderUnAuth">
+    <header
+      isLoaded={isLoaded}
+      className={classNames(styles.unAuthHeader, "navMenuHeaderUnAuth")}
+    >
       <div className="header-items-wrapper">
         {(!isAuthenticated || isPublicRoom) && isLoaded ? (
           <div>
@@ -150,8 +93,8 @@ const HeaderUnAuth = ({
         ) : null}
       </div>
       {showSignInButton ? (
-        <StyledButton
-          className="header-mobile-sign-in"
+        <Button
+          className={classNames(styles.unAuthButton, "header-mobile-sign-in")}
           primary
           style={{ minWidth: "32px", padding: 0 }}
           size="small"
@@ -171,7 +114,7 @@ const HeaderUnAuth = ({
           isMobileView
         />
       ) : null}
-    </Header>
+    </header>
   );
 };
 

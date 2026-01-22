@@ -26,6 +26,7 @@
 
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
+import classNames from "classnames";
 
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
@@ -36,7 +37,7 @@ import { RoomsType } from "@docspace/shared/enums";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 
 import { withTranslation } from "react-i18next";
-import { DeleteLinkDialogContainer } from "./DeleteLinkDialog.styled";
+import styles from "./DeleteLink.module.scss";
 
 const DeleteLinkDialogComponent = (props) => {
   const {
@@ -119,12 +120,14 @@ const DeleteLinkDialogComponent = (props) => {
           : t("Files:DeleteLink")}
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <DeleteLinkDialogContainer className="modal-dialog-content-body">
+        <div
+          className={classNames(styles.container, "modal-dialog-content-body")}
+        >
           <Text lineHeight="20px">{getDescription()}</Text>
           {link.sharedTo.primary ? (
             <Text lineHeight="20px">{t("Files:ActionCannotUndone")}</Text>
           ) : null}
-        </DeleteLinkDialogContainer>
+        </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

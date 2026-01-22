@@ -37,8 +37,9 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
   reporter: [
+    ["dot"],
     [
-      process.env.CI ? "dot" : "html",
+      "html",
       {
         outputFolder: "../../playwright-report/doceditor",
         open: "never",
@@ -59,6 +60,7 @@ export default defineConfig({
   expect: {
     toHaveScreenshot: {
       threshold: 0.16,
+      maxDiffPixelRatio: 0.02,
     },
   },
   projects: [

@@ -24,143 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import CrossIcon from "PUBLIC_DIR/images/icons/17/cross.react.svg";
+
 import React from "react";
 import PropTypes from "prop-types";
 import { inject, observer } from "mobx-react";
+import classNames from "classnames";
 
 import { Avatar } from "@docspace/shared/components/avatar";
 import { DropDown } from "@docspace/shared/components/drop-down";
-
-import styled, { css, withTheme } from "styled-components";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-
-import { injectDefaultTheme, mobile, tablet } from "@docspace/shared/utils";
-import CrossIcon from "PUBLIC_DIR/images/icons/17/cross.react.svg";
 import { Portal } from "@docspace/shared/components/portal";
 
-const StyledWrapper = styled.div``;
-
-const StyledDropDown = styled(DropDown)`
-  z-index: 500 !important;
-
-  top: ${(props) =>
-    props.isBannerVisible && props.withPortal ? "134px" : "54px"} !important;
-
-  inset-inline-end: 20px !important;
-
-  @media ${tablet} {
-    inset-inline-end: 16px !important;
-  }
-
-  @media ${mobile} {
-    position: fixed;
-
-    top: unset !important;
-    inset-inline: 0 !important;
-    bottom: 0 !important;
-    width: 100vw;
-
-    border: none !important;
-
-    border-radius: 6px 6px 0px 0px !important;
-    padding: 0 !important;
-  }
-`;
-
-const StyledControlContainer = styled.div.attrs(injectDefaultTheme)`
-  width: 24px;
-  height: 24px;
-  position: absolute;
-  top: -34px;
-  inset-inline-end: 10px;
-  border-radius: 100px;
-  cursor: pointer;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 290;
-
-  @media ${mobile} {
-    display: flex;
-  }
-`;
-
-const StyledCrossIcon = styled(CrossIcon).attrs(injectDefaultTheme)`
-  width: 17px;
-  height: 17px;
-  path {
-    stroke: ${(props) => props.theme.catalog.control.fill};
-  }
-`;
-
-const commonStyle = css`
-  font-family: ${(props) => props.theme.fontFamily};
-  font-style: normal;
-  color: ${(props) => props.theme.menuContainer.color};
-  max-width: 300px;
-  @media ${mobile} {
-    max-width: calc(100vw - 84px);
-  }
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`;
-
-export const StyledProfileMenu = styled(DropDownItem)`
-  position: relative;
-  overflow: visible;
-  padding: 0px;
-  cursor: pointer;
-  display: inline-block;
-  max-width: 600px;
-`;
-
-export const MenuContainer = styled.div.attrs(injectDefaultTheme)`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 12px;
-  position: relative;
-  height: 76px;
-  background: ${(props) => props.theme.menuContainer.background};
-  border-radius: 6px 6px 0px 0px;
-  padding: 16px;
-  cursor: default;
-  box-sizing: border-box;
-
-  @media ${mobile} {
-    max-width: 100vw;
-    background: ${(props) => props.theme.menuContainer.background};
-  }
-
-  .avatar {
-    height: 40px;
-    width: 40px;
-    min-height: 40px;
-    min-width: 40px;
-  }
-`;
-
-export const MainLabelContainer = styled.div.attrs(injectDefaultTheme)`
-  font-size: 16px;
-  line-height: 28px;
-
-  width: auto;
-
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-
-  ${commonStyle}
-`;
-
-export const LabelContainer = styled.div.attrs(injectDefaultTheme)`
-  font-weight: normal;
-  font-size: 11px;
-  line-height: 16px;
-
-  ${commonStyle}
-`;
+import styles from "../nav.module.scss";
 
 class ProfileMenu extends React.Component {
   renderDropDown = () => {
@@ -178,8 +54,10 @@ class ProfileMenu extends React.Component {
     // console.log("Current theme: ", this.props.theme);
 
     return (
-      <StyledDropDown
-        className={className}
+      <DropDown
+        className={classNames(styles.profileMenuDropDown, className, {
+          [styles.withBanner]: isBannerVisible,
+        })}
         directionX="right"
         open={open}
         clickOutsideAction={clickOutsideAction}
@@ -189,8 +67,8 @@ class ProfileMenu extends React.Component {
         isBannerVisible={isBannerVisible}
         withPortal
       >
-        <StyledProfileMenu>
-          <MenuContainer>
+        <DropDownItem className={styles.profileMenu}>
+          <div className={styles.menuContainer}>
             <Avatar
               className="avatar"
               size="medium"
@@ -200,15 +78,18 @@ class ProfileMenu extends React.Component {
               hideRoleIcon
             />
             <div>
-              <MainLabelContainer>{displayName}</MainLabelContainer>
-              <StyledControlContainer onClick={clickOutsideAction}>
-                <StyledCrossIcon />
-              </StyledControlContainer>
+              <div className={styles.mainLabelContainer}>{displayName}</div>
+              <div
+                className={styles.controlContainer}
+                onClick={clickOutsideAction}
+              >
+                <CrossIcon className={styles.crossIcon} />
+              </div>
             </div>
-          </MenuContainer>
-        </StyledProfileMenu>
+          </div>
+        </DropDownItem>
         {children}
-      </StyledDropDown>
+      </DropDown>
     );
   };
 
@@ -219,7 +100,7 @@ class ProfileMenu extends React.Component {
 
     const root = document.getElementById("root");
 
-    const wrapper = <StyledWrapper>{element}</StyledWrapper>;
+    const wrapper = <div>{element}</div>;
 
     return <Portal element={wrapper} appendTo={root} visible={open} />;
   }
@@ -241,4 +122,4 @@ export default inject(({ settingsStore }) => {
   const { isBannerVisible } = settingsStore;
 
   return { isBannerVisible };
-})(observer(withTheme(ProfileMenu)));
+})(observer(ProfileMenu));

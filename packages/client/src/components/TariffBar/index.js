@@ -25,31 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useEffect } from "react";
-import styled from "styled-components";
 import { useNavigate } from "react-router";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { Text } from "@docspace/shared/components/text";
+
 import { getSaasBar, getEnterpriseBar, checkBar } from "./helpers";
-
-const StyledWrapper = styled.div`
-  display: grid;
-  cursor: pointer;
-
-  #tariff-bar-text:hover {
-    opacity: 0.85;
-  }
-
-  #tariff-bar-text:active {
-    filter: brightness(0.9);
-  }
-
-  .hidden {
-    display: none;
-  }
-`;
+import styles from "./tariff-bar.module.scss";
 
 const PROXY_BASE_URL = combineUrl(
   window.ClientConfig?.proxy?.url,
@@ -110,7 +94,7 @@ const TariffBar = ({
 
   if (!tariffBar) return null;
   return (
-    <StyledWrapper>
+    <div className={styles.tariffBar}>
       <Text
         id="tariff-bar-text"
         as="div"
@@ -125,7 +109,7 @@ const TariffBar = ({
       >
         {tariffBar.label}
       </Text>
-    </StyledWrapper>
+    </div>
   );
 };
 

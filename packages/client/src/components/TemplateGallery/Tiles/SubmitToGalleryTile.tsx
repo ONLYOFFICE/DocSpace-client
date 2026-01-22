@@ -28,11 +28,10 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
-import { useTheme } from "styled-components";
 import hexRgb from "hex-rgb";
 import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg?url";
 import { globalColors } from "@docspace/shared/themes";
-
+import { useTheme } from "@docspace/shared/hooks/useTheme";
 import classNames from "classnames";
 import styles from "./SubmitToGalleryTile.module.scss";
 import type { FC } from "react";

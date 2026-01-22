@@ -26,7 +26,7 @@
     "date-and-time": "3.6.0",
     "hex-rgb": "5.0.0",
     "i18next": "23.7.19",
-    "lodash": "4.17.21",
+    "lodash": "4.17.23",
     "mobx": "6.13.5",
     "mobx-react": "7.6.0",
     "moment-timezone": "0.5.46",

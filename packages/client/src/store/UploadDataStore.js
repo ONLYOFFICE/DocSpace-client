@@ -1471,7 +1471,7 @@ class UploadDataStore {
   };
 
   asyncUpload = async (t, chunkData, resolve, reject, createNewIfExist) => {
-    const { operationId, file, indexOfFile, path, length } = chunkData;
+    const { operationId, indexOfFile, path, length } = chunkData;
 
     if (
       this.uploaded ||
@@ -1516,8 +1516,8 @@ class UploadDataStore {
 
         const activeLength = this.asyncUploadObj[operationId]
           ? this.asyncUploadObj[operationId].chunksArray.filter(
-            (x) => x.isActive,
-          ).length - 1
+              (x) => x.isActive,
+            ).length - 1
           : 0;
 
         this.checkChunkUpload({
@@ -2379,24 +2379,24 @@ class UploadDataStore {
 
     return isCopy
       ? this.copyToAction(
-        destFolderId,
-        folderIds,
-        fileIds,
-        conflictResolveType,
-        deleteAfter,
-        operationId,
-        content,
-        toFillOut,
-      )
+          destFolderId,
+          folderIds,
+          fileIds,
+          conflictResolveType,
+          deleteAfter,
+          operationId,
+          content,
+          toFillOut,
+        )
       : this.moveToAction(
-        destFolderId,
-        folderIds,
-        fileIds,
-        conflictResolveType,
-        deleteAfter,
-        operationId,
-        toFillOut,
-      );
+          destFolderId,
+          folderIds,
+          fileIds,
+          conflictResolveType,
+          deleteAfter,
+          operationId,
+          toFillOut,
+        );
   };
 
   loopFilesOperations = async (data, pbData) => {

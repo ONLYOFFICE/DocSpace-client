@@ -1235,6 +1235,7 @@ class FilesStore {
         requests.push(getIsEncryptionSupport());
       }
       requests.push(getEncryptionKeys());
+      requests.push(this.userStore.getEncryptionKeys());
     }
     requests.push(getFilesSettings());
 

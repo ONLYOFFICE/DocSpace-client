@@ -680,17 +680,23 @@ class ContextOptionsStore {
   };
 
   onClickDownload = (item, t) => {
-    const { viewUrl, isFolder } = item;
+    const { viewUrl, isFolder, encrypted } = item;
     const isFile = !isFolder;
 
     const { openUrl } = this.settingsStore;
     const { downloadAction } = this.filesActionsStore;
 
-    isFile
-      ? openUrl(viewUrl, UrlActionType.Download)
-      : downloadAction(t("Common:ArchivingData"), item).catch((err) =>
-          toastr.error(err),
-        );
+    if (isFile && encrypted) {
+      downloadAction(t("Translations:DownloadOperation"), item).catch((err) =>
+        toastr.error(err),
+      );
+    } else if (isFile) {
+      openUrl(viewUrl, UrlActionType.Download);
+    } else {
+      downloadAction(t("Common:ArchivingData"), item).catch((err) =>
+        toastr.error(err),
+      );
+    }
   };
 
   onClickDownloadAs = () => {

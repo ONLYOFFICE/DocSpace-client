@@ -1375,28 +1375,19 @@ class UploadDataStore {
       const currentFileData = this.files[indexOfFile];
       if (currentFileData?.encrypted && currentFileData?.encryptionMetadata) {
         const { publicKeyId } = this.getUserEncryptionKeys();
-        if (publicKeyId && currentFileData.encryptionMetadata.encryptedKeys) {
+        if (currentFileData.encryptionMetadata.encryptedKeys) {
           try {
             const serverKeys =
               currentFileData.encryptionMetadata.encryptedKeys.map((key) => ({
                 userId: key.userId,
-                publicKeyId: publicKeyId,
+                publicKeyId: publicKeyId || key.publicKeyId || "",
                 privateKeyEnc: key.privateKeyEnc,
               }));
 
-            console.log("[ENCRYPTION DEBUG] Setting file encryption keys:", {
-              fileId,
-              keysCount: serverKeys.length,
-            });
-
             await setFileEncryptionKeys(fileId, serverKeys);
-
-            console.log(
-              "[ENCRYPTION DEBUG] File encryption keys set successfully",
-            );
           } catch (error) {
             console.error(
-              "[ENCRYPTION DEBUG] Failed to set file encryption keys:",
+              "[ENCRYPTION] Failed to set file encryption keys:",
               error,
             );
           }

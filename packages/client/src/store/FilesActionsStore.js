@@ -47,7 +47,6 @@ import {
   deleteVersionFile,
   enableCustomFilter,
   getFileEncryptionAccess,
-  getPresignedUri,
 } from "@docspace/shared/api/files";
 import {
   Events,
@@ -966,15 +965,7 @@ class FilesActionStore {
     }
 
     try {
-      console.log(
-        "[ENCRYPTION DEBUG] Fetching encryption access for file:",
-        file.id,
-      );
       const encryptionInfo = await getFileEncryptionAccess(file.id);
-      console.log(
-        "[ENCRYPTION DEBUG] Encryption info received:",
-        encryptionInfo,
-      );
 
       if (!encryptionInfo || !encryptionInfo.fileKeys) {
         return Promise.resolve();
@@ -988,15 +979,7 @@ class FilesActionStore {
         return Promise.resolve();
       }
 
-      console.log("[ENCRYPTION DEBUG] Found file key for user:", myFileKey);
-
-      console.log(
-        "[ENCRYPTION DEBUG] Getting presigned URI for file:",
-        file.id,
-      );
-      const presignedInfo = await getPresignedUri(file.id);
-      const downloadUrl = presignedInfo?.url || file.viewUrl;
-      console.log("[ENCRYPTION DEBUG] Download URL:", downloadUrl);
+      const downloadUrl = file.viewUrl;
 
       const userKeys = {
         publicKey: encryptionKeys[0].publicKey,
@@ -1027,26 +1010,24 @@ class FilesActionStore {
         userKeys,
         String(userId),
         async () => {
-          // Request passphrase through the global unlock handler
           const privateKey = await requestUnlock();
+
           if (!privateKey) {
             return null;
           }
           return "__KEY_CACHED__";
-        },
-        (progress) => {
-          console.log(`Download progress: ${Math.round(progress * 100)}%`);
         },
       );
 
       if (result.success && result.file) {
         triggerFileDownload(result.file);
       } else {
-        toastr.error(result.error);
+        toastr.error(result.error || "Failed to decrypt file");
       }
     } catch (error) {
-      console.error("[ENCRYPTION DEBUG] Download error:", error);
-      toastr.error(error.message);
+      toastr.error(
+        error.message || "An error occurred while downloading the file",
+      );
     }
 
     return Promise.resolve();

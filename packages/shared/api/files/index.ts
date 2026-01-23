@@ -1286,7 +1286,7 @@ export async function setFileEncryptionKeys(
   const res = await request({
     method: "put",
     url: `files/${fileId}/access`,
-    data: { keys },
+    data: keys,
   });
 
   return res;

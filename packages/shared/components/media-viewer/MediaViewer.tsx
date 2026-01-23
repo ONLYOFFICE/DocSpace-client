@@ -96,6 +96,7 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
   const isWillUnmountRef = useRef(false);
   const lastRemovedFileIdRefRef = useRef<number>(undefined);
 
+  // biome-ignore lint/correctness/noUnusedVariables: TODO fix
   const [isDecrypting, setIsDecrypting] = useState(false);
 
   const [title, setTitle] = useState<string>("");

@@ -38,6 +38,10 @@ import { getFileExtension } from "../../utils/common";
 import { checkDialogsOpen } from "../../utils/checkDialogsOpen";
 import { decodeTiff } from "../../utils/decodeTiff";
 import { isNullOrUndefined } from "../../utils/typeGuards";
+import { getFileEncryptionAccess } from "../../api/files";
+import { encryptionService } from "../../services/encryption/encryptionService";
+import { requestUnlock } from "../../services/encryption/secretStorage";
+import type { FileEncryptionMetadata } from "../../services/encryption/types";
 
 import { ViewerWrapper } from "./sub-components/ViewerWrapper";
 
@@ -67,6 +71,8 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
     currentDeviceType,
     isPublicFile = false,
     autoPlay = false,
+    userId,
+    onDecryptionError,
 
     t,
     getIcon,
@@ -85,9 +91,12 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
 
   const TiffAbortSignalRef = useRef<AbortController>(undefined);
   const HeicAbortSignalRef = useRef<AbortController>(undefined);
+  const EncryptedAbortSignalRef = useRef<AbortController>(undefined);
 
   const isWillUnmountRef = useRef(false);
   const lastRemovedFileIdRefRef = useRef<number>(undefined);
+
+  const [isDecrypting, setIsDecrypting] = useState(false);
 
   const [title, setTitle] = useState<string>("");
   const [fileUrl, setFileUrl] = useState<string | undefined>(() => {
@@ -373,6 +382,110 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
     }
   }, []);
 
+  const fetchAndDecryptFile = useCallback(
+    async (src: string, fileId: number, title: string) => {
+      if (!userId) {
+        onDecryptionError?.("User ID not available for decryption");
+        return;
+      }
+
+      EncryptedAbortSignalRef.current?.abort();
+      EncryptedAbortSignalRef.current = new AbortController();
+      setIsDecrypting(true);
+
+      try {
+        // 1. Get encryption access info from server
+        const encryptionInfo = await getFileEncryptionAccess(fileId);
+
+        // 2. Find user's encrypted file key
+        const userFileKey = encryptionInfo.fileKeys?.find(
+          (k) => k.userId === userId || k.userId === String(userId),
+        );
+
+        if (!userFileKey) {
+          throw new Error("You don't have access to decrypt this file");
+        }
+
+        // 3. Request unlock (prompts passphrase dialog if needed)
+        const privateKey = await requestUnlock();
+        if (!privateKey) {
+          throw new Error("Encryption key not available");
+        }
+
+        // 4. Fetch encrypted content
+        const response = await fetch(src, {
+          signal: EncryptedAbortSignalRef.current?.signal,
+        });
+
+        if (!response.ok) {
+          throw new Error(`Failed to fetch file: ${response.status}`);
+        }
+
+        const encryptedData = await response.arrayBuffer();
+
+        // 5. Build metadata for decryption
+        const metadata: FileEncryptionMetadata = {
+          encrypted: true,
+          version: 1,
+          encryptionAlgorithm: "AES-256-GCM",
+          keyEncryptionAlgorithm: "RSA-OAEP-SHA256",
+          encryptedKeys: [
+            {
+              userId,
+              publicKeyId: userFileKey.publicKeyId,
+              privateKeyEnc: userFileKey.privateKeyEnc,
+            },
+          ],
+          iv: "",
+          encryptedAt: "",
+        };
+
+        // 6. Decrypt file
+        const decryptedBlob = await encryptionService.decryptFile(
+          encryptedData,
+          metadata,
+          privateKey,
+          userId,
+        );
+
+        // 7. Get MIME type from file extension
+        const ext = getFileExtension(title).toLowerCase();
+        const mimeTypes: Record<string, string> = {
+          jpg: "image/jpeg",
+          jpeg: "image/jpeg",
+          png: "image/png",
+          gif: "image/gif",
+          webp: "image/webp",
+          tif: "image/tiff",
+          tiff: "image/tiff",
+          heic: "image/heic",
+          mp4: "video/mp4",
+          webm: "video/webm",
+          mp3: "audio/mpeg",
+          wav: "audio/wav",
+          ogg: "audio/ogg",
+          pdf: "application/pdf",
+        };
+        const mimeType = mimeTypes[ext] || "application/octet-stream";
+
+        // 8. Create blob URL with correct MIME type
+        const typedBlob = new Blob([decryptedBlob], { type: mimeType });
+        setFileUrl(URL.createObjectURL(typedBlob));
+      } catch (error) {
+        if (error instanceof Error) {
+          if (error.name === "AbortError") {
+            return;
+          }
+          console.error("[MediaViewer] Decryption error:", error.message);
+          onDecryptionError?.(error.message);
+        }
+      } finally {
+        setIsDecrypting(false);
+      }
+    },
+    [userId, onDecryptionError],
+  );
+
   const onSetSelectionFile = useCallback(() => {
     setBufferSelection?.(targetFile);
   }, [setBufferSelection, targetFile]);
@@ -384,7 +497,12 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
     };
   });
 
-  const { src, title: currentTitle, fileId } = playlist[playlistPos];
+  const {
+    src,
+    title: currentTitle,
+    fileId,
+    encrypted: isEncrypted,
+  } = playlist[playlistPos];
 
   useEffect(() => {
     if (!isNullOrUndefined(fileId) && currentFileId !== fileId) {
@@ -395,6 +513,8 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
   useEffect(() => {
     return () => {
       TiffAbortSignalRef.current?.abort();
+      HeicAbortSignalRef.current?.abort();
+      EncryptedAbortSignalRef.current?.abort();
     };
   }, []);
 
@@ -406,17 +526,23 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
       return;
     }
 
-    if (!isTiff(extension) && !isHeic(extension)) {
+    // Handle encrypted files
+    if (isEncrypted) {
       TiffAbortSignalRef.current?.abort();
       HeicAbortSignalRef.current?.abort();
+      setFileUrl(undefined);
+      fetchAndDecryptFile(src, fileId, currentTitle);
+    } else if (!isTiff(extension) && !isHeic(extension)) {
+      TiffAbortSignalRef.current?.abort();
+      HeicAbortSignalRef.current?.abort();
+      EncryptedAbortSignalRef.current?.abort();
       setFileUrl(src);
-    }
-
-    if (isHeic(extension)) {
+    } else if (isHeic(extension)) {
+      EncryptedAbortSignalRef.current?.abort();
       setFileUrl(undefined);
       fetchAndSetHeicDataURL(src);
-    }
-    if (isTiff(extension)) {
+    } else if (isTiff(extension)) {
+      EncryptedAbortSignalRef.current?.abort();
       setFileUrl(undefined);
       fetchAndSetTiffDataURL(src);
     }
@@ -434,10 +560,12 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
     files,
     fileId,
     currentTitle,
+    isEncrypted,
     setBufferSelection,
     onEmptyPlaylistError,
     fetchAndSetTiffDataURL,
     fetchAndSetHeicDataURL,
+    fetchAndDecryptFile,
   ]);
 
   useEffect(() => {

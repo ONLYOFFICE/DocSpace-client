@@ -45,6 +45,7 @@ const FilesMediaViewer = (props) => {
     visible,
     currentMediaFileId,
     deleteItemAction,
+    downloadAction,
     setMediaViewerData,
 
     setRemoveMediaItem,
@@ -95,6 +96,7 @@ const FilesMediaViewer = (props) => {
     isPublicRoom,
     openUrl,
     autoPlay,
+    userId,
   } = props;
 
   const navigate = useNavigate();
@@ -209,11 +211,17 @@ const FilesMediaViewer = (props) => {
   const onDownloadMediaFile = useCallback(
     (id) => {
       if (playlist.length > 0) {
-        const viewUrlFile = playlist.find((file) => file.fileId === id).src;
+        const file = files.find((f) => f.id === id);
+
+        if (file?.encrypted) {
+          return downloadAction(t("Translations:DownloadOperation"), file);
+        }
+
+        const viewUrlFile = playlist.find((item) => item.fileId === id).src;
         return openUrl(viewUrlFile, UrlActionType.Download);
       }
     },
-    [playlist],
+    [playlist, files, downloadAction, t, openUrl],
   );
 
   const onMediaViewerClose = useCallback(async () => {
@@ -300,6 +308,7 @@ const FilesMediaViewer = (props) => {
             onEmptyPlaylistError={onMediaViewerClose}
             deleteDialogVisible={deleteDialogVisible}
             pluginContextMenuItems={pluginContextMenuItems}
+            userId={userId}
           />
         }
       />
@@ -320,6 +329,7 @@ export default inject(
     pluginStore,
     settingsStore,
     publicRoomStore,
+    userStore,
   }) => {
     const { currentDeviceType, openUrl } = settingsStore;
     const {
@@ -329,6 +339,7 @@ export default inject(
     } = clientLoadingStore;
 
     const { fetchPublicRoom, isPublicRoom } = publicRoomStore;
+    const { user } = userStore;
 
     const setIsLoading = (param) => {
       setIsSectionFilterLoading(param);
@@ -366,7 +377,7 @@ export default inject(
       changeUrl,
       autoPlay,
     } = mediaViewerDataStore;
-    const { deleteItemAction } = filesActionsStore;
+    const { deleteItemAction, downloadAction } = filesActionsStore;
     const { getIcon, extsImagePreviewed, extsMediaPreviewed } =
       filesSettingsStore;
     const { isFavoritesFolder, archiveRoomsId } = treeFoldersStore;
@@ -433,6 +444,7 @@ export default inject(
       visible: playlist.length > 0 && visible,
       currentMediaFileId,
       deleteItemAction,
+      downloadAction,
       setMediaViewerData,
       extsImagePreviewed,
       extsMediaPreviewed,
@@ -477,6 +489,7 @@ export default inject(
       fetchPublicRoom,
       isPublicRoom,
       openUrl,
+      userId: user?.id ? String(user.id) : undefined,
     };
   },
 )(withTranslation(["Files", "Translations"])(observer(FilesMediaViewer)));

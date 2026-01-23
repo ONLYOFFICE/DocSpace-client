@@ -71,6 +71,7 @@ export type PlaylistType = {
   title: string;
   thumbnailUrl: string;
   version: number;
+  encrypted?: boolean;
 };
 
 export type BoundsType = {
@@ -110,6 +111,10 @@ export type MediaViewerProps = {
   autoPlay?: boolean;
 
   isPublicFile?: boolean;
+  /** User ID for encrypted file decryption. */
+  userId?: string;
+  /** Callback when decryption fails. */
+  onDecryptionError?: (error: string) => void;
   /** List of playlists. */
   playlist: PlaylistType[];
   /** List of file extensions that can be previewed as images. */

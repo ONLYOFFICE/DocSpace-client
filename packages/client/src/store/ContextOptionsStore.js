@@ -687,9 +687,7 @@ class ContextOptionsStore {
     const { downloadAction } = this.filesActionsStore;
 
     if (isFile && encrypted) {
-      downloadAction(t("Translations:DownloadOperation"), item).catch((err) =>
-        toastr.error(err),
-      );
+      downloadAction("", item).catch((err) => toastr.error(err));
     } else if (isFile) {
       openUrl(viewUrl, UrlActionType.Download);
     } else {

@@ -394,10 +394,7 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
       setIsDecrypting(true);
 
       try {
-        // 1. Get encryption access info from server
         const encryptionInfo = await getFileEncryptionAccess(fileId);
-
-        // 2. Find user's encrypted file key
         const userFileKey = encryptionInfo.fileKeys?.find(
           (k) => k.userId === userId || k.userId === String(userId),
         );
@@ -406,13 +403,11 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
           throw new Error("You don't have access to decrypt this file");
         }
 
-        // 3. Request unlock (prompts passphrase dialog if needed)
         const privateKey = await requestUnlock();
         if (!privateKey) {
           throw new Error("Encryption key not available");
         }
 
-        // 4. Fetch encrypted content
         const response = await fetch(src, {
           signal: EncryptedAbortSignalRef.current?.signal,
         });
@@ -423,7 +418,6 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
 
         const encryptedData = await response.arrayBuffer();
 
-        // 5. Build metadata for decryption
         const metadata: FileEncryptionMetadata = {
           encrypted: true,
           version: 1,
@@ -440,7 +434,6 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
           encryptedAt: "",
         };
 
-        // 6. Decrypt file
         const decryptedBlob = await encryptionService.decryptFile(
           encryptedData,
           metadata,
@@ -448,7 +441,6 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
           userId,
         );
 
-        // 7. Get MIME type from file extension
         const ext = getFileExtension(title).toLowerCase();
         const mimeTypes: Record<string, string> = {
           jpg: "image/jpeg",
@@ -468,7 +460,6 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
         };
         const mimeType = mimeTypes[ext] || "application/octet-stream";
 
-        // 8. Create blob URL with correct MIME type
         const typedBlob = new Blob([decryptedBlob], { type: mimeType });
         setFileUrl(URL.createObjectURL(typedBlob));
       } catch (error) {
@@ -526,7 +517,6 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
       return;
     }
 
-    // Handle encrypted files
     if (isEncrypted) {
       TiffAbortSignalRef.current?.abort();
       HeicAbortSignalRef.current?.abort();

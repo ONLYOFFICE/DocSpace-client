@@ -214,7 +214,7 @@ const FilesMediaViewer = (props) => {
         const file = files.find((f) => f.id === id);
 
         if (file?.encrypted) {
-          return downloadAction(t("Translations:DownloadOperation"), file);
+          return downloadAction("", file);
         }
 
         const viewUrlFile = playlist.find((item) => item.fileId === id).src;

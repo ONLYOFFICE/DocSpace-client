@@ -92,18 +92,6 @@
   user-select: all;
 }
 
-.passphraseForm {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  min-width: 320px;
-}
-
-.passphraseHint {
-  color: var(--text-secondary);
-  line-height: 1.4;
-}
-
 .keysList {
   margin-bottom: 20px;
 }

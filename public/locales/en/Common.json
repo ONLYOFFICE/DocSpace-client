@@ -1127,5 +1127,16 @@
   "Deleting": "Deleting",
   "EncryptionError": "An error occurred during the encryption operation",
   "Algorithm": "Algorithm",
-  "Confirm": "Confirm"
+  "Confirm": "Confirm",
+  "ChangePassphrase": "Change passphrase",
+  "ChangePassphraseHint": "Enter your current passphrase and create a new one. Your encryption key will be re-encrypted with the new passphrase.",
+  "CurrentPassphrase": "Current passphrase",
+  "EnterCurrentPassphrase": "Enter current passphrase",
+  "NewPassphrase": "New passphrase",
+  "EnterNewPassphrase": "Enter new passphrase",
+  "ConfirmNewPassphrase": "Confirm new passphrase",
+  "CurrentPassphraseRequired": "Current passphrase is required",
+  "PassphraseMustBeDifferent": "New passphrase must be different from current",
+  "InvalidPassphrase": "Invalid passphrase",
+  "PassphraseUpdated": "Passphrase updated successfully"
 }

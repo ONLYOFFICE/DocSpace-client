@@ -36,69 +36,84 @@ import { PasswordInput } from "@docspace/shared/components/password-input";
 import { InputSize } from "@docspace/shared/components/text-input";
 import { Text } from "@docspace/shared/components/text";
 
-import styles from "./PassphraseModal.module.scss";
+import styles from "./KeyRotationDialog.module.scss";
 
-type PassphraseModalProps = {
+type KeyRotationDialogProps = {
   visible: boolean;
-  onSubmit: (passphrase: string) => void;
+  onSubmit: (oldPassphrase: string, newPassphrase: string) => Promise<void>;
   onCancel: () => void;
-  isNew: boolean;
+  error?: string | null;
   isLoading?: boolean;
 };
 
 const MIN_LENGTH = 8;
 
-export const PassphraseModal: React.FC<PassphraseModalProps> = ({
+export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
   visible,
   onSubmit,
   onCancel,
-  isNew,
+  error: externalError,
   isLoading = false,
 }) => {
   const { t, ready } = useTranslation(["Common"]);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const [passphrase, setPassphrase] = useState("");
+  const [currentPassphrase, setCurrentPassphrase] = useState("");
+  const [newPassphrase, setNewPassphrase] = useState("");
   const [confirmPassphrase, setConfirmPassphrase] = useState("");
-  const [error, setError] = useState("");
+  const [localError, setLocalError] = useState("");
 
-  // Reset form and focus when dialog opens
   useEffect(() => {
     if (visible) {
-      setPassphrase("");
+      setCurrentPassphrase("");
+      setNewPassphrase("");
       setConfirmPassphrase("");
-      setError("");
+      setLocalError("");
       setTimeout(() => inputRef.current?.focus(), 100);
     }
   }, [visible]);
 
-  const handleSubmit = useCallback(() => {
-    if (passphrase.length < MIN_LENGTH) {
-      setError(t("Common:PassphraseTooShort", { length: MIN_LENGTH }));
+  const error = externalError || localError;
+
+  const handleSubmit = useCallback(async () => {
+    setLocalError("");
+
+    if (!currentPassphrase) {
+      setLocalError(t("Common:CurrentPassphraseRequired"));
       return;
     }
 
-    if (isNew && passphrase !== confirmPassphrase) {
-      setError(t("Common:PassphraseMismatch"));
+    if (newPassphrase.length < MIN_LENGTH) {
+      setLocalError(t("Common:PassphraseTooShort", { length: MIN_LENGTH }));
       return;
     }
 
-    onSubmit(passphrase);
-    setPassphrase("");
-    setConfirmPassphrase("");
-    setError("");
-  }, [passphrase, confirmPassphrase, isNew, onSubmit, t]);
+    if (newPassphrase !== confirmPassphrase) {
+      setLocalError(t("Common:PassphraseMismatch"));
+      return;
+    }
+
+    if (currentPassphrase === newPassphrase) {
+      setLocalError(t("Common:PassphraseMustBeDifferent"));
+      return;
+    }
+
+    await onSubmit(currentPassphrase, newPassphrase);
+  }, [currentPassphrase, newPassphrase, confirmPassphrase, onSubmit, t]);
 
   const handleCancel = useCallback(() => {
-    setPassphrase("");
+    setCurrentPassphrase("");
+    setNewPassphrase("");
     setConfirmPassphrase("");
-    setError("");
+    setLocalError("");
     onCancel();
   }, [onCancel]);
 
   const isValid =
-    passphrase.length >= MIN_LENGTH &&
-    (!isNew || passphrase === confirmPassphrase);
+    currentPassphrase.length > 0 &&
+    newPassphrase.length >= MIN_LENGTH &&
+    newPassphrase === confirmPassphrase &&
+    currentPassphrase !== newPassphrase;
 
   const isDisabled = !isValid || isLoading;
 
@@ -111,16 +126,12 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
       isLoading={!ready}
       autoMaxHeight
     >
-      <ModalDialog.Header>
-        {isNew ? t("Common:CreatePassphrase") : t("Common:EnterPassphrase")}
-      </ModalDialog.Header>
+      <ModalDialog.Header>{t("Common:ChangePassphrase")}</ModalDialog.Header>
 
       <ModalDialog.Body>
         <div className={styles.container}>
           <Text className={styles.description}>
-            {isNew
-              ? t("Common:CreatePassphraseHint")
-              : t("Common:PassphraseHint")}
+            {t("Common:ChangePassphraseHint")}
           </Text>
 
           {error && (
@@ -131,49 +142,87 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
             </div>
           )}
 
-          <div className={styles.inputWrapper}>
-            <PasswordInput
-              id="passphrase"
-              inputName="passphrase"
-              inputValue={passphrase}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                setPassphrase(e.target.value);
-                setError("");
-              }}
-              placeholder={t("Common:Passphrase")}
-              scale
-              size={InputSize.base}
-              simpleView
-              isDisabled={isLoading}
-              hasError={!!error}
-              autoComplete={isNew ? "new-password" : "current-password"}
-              tabIndex={1}
-            />
-          </div>
-
-          {isNew && (
+          {/* Current Passphrase */}
+          <div className={styles.inputGroup}>
+            <Text fontSize="13px" fontWeight={600}>
+              {t("Common:CurrentPassphrase")}
+            </Text>
             <div className={styles.inputWrapper}>
               <PasswordInput
-                id="confirmPassphrase"
-                inputName="confirmPassphrase"
-                inputValue={confirmPassphrase}
+                id="currentPassphrase"
+                inputName="currentPassphrase"
+                inputValue={currentPassphrase}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  setConfirmPassphrase(e.target.value);
-                  setError("");
+                  setCurrentPassphrase(e.target.value);
+                  setLocalError("");
                 }}
-                placeholder={t("Common:ConfirmPassphrase")}
+                placeholder={t("Common:EnterCurrentPassphrase")}
+                scale
+                size={InputSize.base}
+                simpleView
+                isDisabled={isLoading}
+                hasError={!!error && !currentPassphrase}
+                autoComplete="current-password"
+                tabIndex={1}
+              />
+            </div>
+          </div>
+
+          <div className={styles.inputGroup}>
+            <Text fontSize="13px" fontWeight={600}>
+              {t("Common:NewPassphrase")}
+            </Text>
+            <div className={styles.inputWrapper}>
+              <PasswordInput
+                id="newPassphrase"
+                inputName="newPassphrase"
+                inputValue={newPassphrase}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  setNewPassphrase(e.target.value);
+                  setLocalError("");
+                }}
+                placeholder={t("Common:EnterNewPassphrase")}
                 scale
                 size={InputSize.base}
                 simpleView
                 isDisabled={isLoading}
                 hasError={
-                  !!confirmPassphrase && passphrase !== confirmPassphrase
+                  !!error &&
+                  newPassphrase.length > 0 &&
+                  newPassphrase.length < MIN_LENGTH
                 }
                 autoComplete="new-password"
                 tabIndex={2}
               />
             </div>
-          )}
+          </div>
+
+          <div className={styles.inputGroup}>
+            <Text fontSize="13px" fontWeight={600}>
+              {t("Common:ConfirmNewPassphrase")}
+            </Text>
+            <div className={styles.inputWrapper}>
+              <PasswordInput
+                id="confirmNewPassphrase"
+                inputName="confirmNewPassphrase"
+                inputValue={confirmPassphrase}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  setConfirmPassphrase(e.target.value);
+                  setLocalError("");
+                }}
+                placeholder={t("Common:ConfirmNewPassphrase")}
+                scale
+                size={InputSize.base}
+                simpleView
+                isDisabled={isLoading}
+                hasError={
+                  !!confirmPassphrase && newPassphrase !== confirmPassphrase
+                }
+                autoComplete="new-password"
+                tabIndex={3}
+              />
+            </div>
+          </div>
         </div>
       </ModalDialog.Body>
 
@@ -184,10 +233,10 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
           key="SubmitButton"
           onClick={handleSubmit}
           size={ButtonSize.normal}
-          label={t("Common:ContinueButton")}
+          label={t("Common:ChangePassphrase")}
           isDisabled={isDisabled}
           isLoading={isLoading}
-          tabIndex={3}
+          tabIndex={4}
         />
         <Button
           scale
@@ -196,7 +245,7 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
           size={ButtonSize.normal}
           label={t("Common:CancelButton")}
           isDisabled={isLoading}
-          tabIndex={4}
+          tabIndex={5}
         />
       </ModalDialog.Footer>
     </ModalDialog>

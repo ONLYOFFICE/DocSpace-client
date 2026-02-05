@@ -24,9 +24,30 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// Re-export all modules
-export * from "./types";
-export * from "./keyManagement";
-export * from "./secretStorage";
-export * from "./encryptionService";
-export * from "./keyRotation";
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.description {
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.errorBox {
+  padding: 12px;
+  background-color: var(--color-error-light);
+  border-radius: 4px;
+  border-left: 3px solid var(--color-error);
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.inputWrapper {
+  width: 100%;
+}

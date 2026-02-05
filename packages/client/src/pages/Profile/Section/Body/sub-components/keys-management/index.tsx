@@ -39,6 +39,7 @@ import {
   getPublicKeyFingerprint,
 } from "@docspace/shared/services/encryption/keyManagement";
 import { SecretStorageService } from "@docspace/shared/services/encryption/secretStorage";
+import { rotateUserKey } from "@docspace/shared/services/encryption/keyRotation";
 import type { SerializedKeyPair } from "@docspace/shared/services/encryption/types";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 import {
@@ -50,6 +51,7 @@ import {
 import { KeysList } from "./KeysList";
 import { PassphraseModal } from "./PassphraseModal";
 import { ConfirmationModal } from "./ConfirmationModal";
+import { KeyRotationDialog } from "./KeyRotationDialog";
 
 import styles from "./keys-management.module.scss";
 
@@ -82,6 +84,13 @@ const KeysManagement = ({
   const [importedKeyData, setImportedKeyData] =
     useState<SerializedKeyPair | null>(null);
 
+  const [showRotationDialog, setShowRotationDialog] = useState(false);
+  const [isRotating, setIsRotating] = useState(false);
+  const [rotationError, setRotationError] = useState<string | null>(null);
+  const [rotatingKey, setRotatingKey] = useState<TEncryptionKeyPair | null>(
+    null,
+  );
+
   const hasKeys = encryptionKeys && encryptionKeys.length > 0;
 
   const handleGenerateKey = useCallback(
@@ -113,7 +122,6 @@ const KeysManagement = ({
           userId: "",
           date: new Date().toISOString(),
         };
-        // When replacing, we replace all keys; when new, just set the new key
         setUserEncryptionKeys?.([newKey]);
         toastr.success(t("Common:EncryptionKeyGenerated"));
       } catch (error) {
@@ -252,8 +260,6 @@ const KeysManagement = ({
 
     try {
       await deleteEncryptionKey(pendingDeleteKeyId);
-      // Filter out the deleted key from local state instead of using API response
-      // (backend may auto-generate new keys which we don't want)
       const remainingKeys = (encryptionKeys || []).filter(
         (key) => key.id !== pendingDeleteKeyId,
       );
@@ -270,12 +276,63 @@ const KeysManagement = ({
     }
   }, [pendingDeleteKeyId, t, setUserEncryptionKeys, encryptionKeys]);
 
+  const handleRotateRequest = useCallback((keyData: TEncryptionKeyPair) => {
+    setRotatingKey(keyData);
+    setRotationError(null);
+    setShowRotationDialog(true);
+  }, []);
+
+  const handleRotatePassphrase = useCallback(
+    async (oldPassphrase: string, newPassphrase: string) => {
+      if (!rotatingKey) return;
+
+      setIsRotating(true);
+      setRotationError(null);
+
+      try {
+        const { newEncryptedPrivateKey } = await rotateUserKey(
+          oldPassphrase,
+          newPassphrase,
+          rotatingKey.privateKeyEnc,
+          rotatingKey.publicKey,
+          rotatingKey.id,
+        );
+
+        const updatedKey: TEncryptionKeyPair = {
+          id: crypto.randomUUID(),
+          publicKey: rotatingKey.publicKey,
+          privateKeyEnc: newEncryptedPrivateKey,
+          userId: rotatingKey.userId,
+          date: new Date().toISOString(),
+        };
+        setUserEncryptionKeys?.([updatedKey]);
+
+        toastr.success(t("Common:PassphraseUpdated"));
+        setShowRotationDialog(false);
+        setRotatingKey(null);
+      } catch (error) {
+        console.error("Passphrase rotation failed:", error);
+        setRotationError(t("Common:InvalidPassphrase"));
+      } finally {
+        setIsRotating(false);
+      }
+    },
+    [rotatingKey, t, setUserEncryptionKeys],
+  );
+
+  const handleRotationCancel = useCallback(() => {
+    setShowRotationDialog(false);
+    setRotatingKey(null);
+    setRotationError(null);
+  }, []);
+
   return (
     <div className={styles.sectionBody}>
       <KeysList
         keys={encryptionKeys || []}
         onDelete={handleDeleteKeyRequest}
         onExport={handleExportSingleKey}
+        onRotate={handleRotateRequest}
         isDeleting={isDeleting}
         deletingKeyId={deletingKeyId}
       />
@@ -336,6 +393,13 @@ const KeysManagement = ({
           setShowConfirmDelete(false);
           setPendingDeleteKeyId(null);
         }}
+      />
+      <KeyRotationDialog
+        visible={showRotationDialog}
+        onSubmit={handleRotatePassphrase}
+        onCancel={handleRotationCancel}
+        error={rotationError}
+        isLoading={isRotating}
       />
     </div>
   );

@@ -33,6 +33,7 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import { globalColors } from "@docspace/shared/themes";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
+import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 
 import { getPublicKeyFingerprint } from "@docspace/shared/services/encryption/keyManagement";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
@@ -43,6 +44,7 @@ type KeyItemProps = {
   keyData: TEncryptionKeyPair;
   onDelete: (keyId: string) => void;
   onExport: (keyData: TEncryptionKeyPair) => void;
+  onRotate: (keyData: TEncryptionKeyPair) => void;
   isDeleting: boolean;
   deletingKeyId: string | null;
 };
@@ -51,6 +53,7 @@ const KeyItem: React.FC<KeyItemProps> = ({
   keyData,
   onDelete,
   onExport,
+  onRotate,
   isDeleting,
   deletingKeyId,
 }) => {
@@ -78,6 +81,10 @@ const KeyItem: React.FC<KeyItemProps> = ({
     onExport(keyData);
   }, [onExport, keyData]);
 
+  const handleRotate = useCallback(() => {
+    onRotate(keyData);
+  }, [onRotate, keyData]);
+
   const isCurrentlyDeleting = isDeleting && deletingKeyId === keyData.id;
   const createdDate = keyData.date ? new Date(keyData.date) : null;
 
@@ -89,6 +96,14 @@ const KeyItem: React.FC<KeyItemProps> = ({
           backgroundColor={globalColors.secondGreen}
         />
         <div className={styles.keyItemActions}>
+          <IconButton
+            className={styles.actionButton}
+            iconName={RefreshReactSvgUrl}
+            size={16}
+            onClick={handleRotate}
+            isDisabled={isDeleting}
+            title={t("Common:ChangePassphrase")}
+          />
           <IconButton
             className={styles.actionButton}
             iconName={DownloadReactSvgUrl}
@@ -154,6 +169,7 @@ type KeysListProps = {
   keys: TEncryptionKeyPair[];
   onDelete: (keyId: string) => void;
   onExport: (keyData: TEncryptionKeyPair) => void;
+  onRotate: (keyData: TEncryptionKeyPair) => void;
   isDeleting: boolean;
   deletingKeyId: string | null;
 };
@@ -162,6 +178,7 @@ export const KeysList: React.FC<KeysListProps> = ({
   keys,
   onDelete,
   onExport,
+  onRotate,
   isDeleting,
   deletingKeyId,
 }) => {
@@ -193,6 +210,7 @@ export const KeysList: React.FC<KeysListProps> = ({
             keyData={key}
             onDelete={onDelete}
             onExport={onExport}
+            onRotate={onRotate}
             isDeleting={isDeleting}
             deletingKeyId={deletingKeyId}
           />

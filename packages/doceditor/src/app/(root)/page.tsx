@@ -70,6 +70,7 @@ async function Page(props: RootPageProps) {
     is_file,
     editorGoBack,
     isSDK,
+    encrypted,
   } = searchParams ?? initialSearchParams;
 
   const baseSdkConfig: TFrameConfig & { is_file?: boolean; isSDK?: boolean } = {
@@ -191,6 +192,7 @@ async function Page(props: RootPageProps) {
         shareKey={share}
         baseSdkConfig={baseSdkConfig}
         deepLinkSettings={deepLinkSettings?.handlingMode}
+        encryptedSessionId={encrypted}
       />
     </>
   );

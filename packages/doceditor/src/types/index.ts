@@ -84,6 +84,7 @@ export type RootPageProps = {
       share: string;
       editorType: string;
       error?: string;
+      encrypted?: string;
     }> &
       SdkSearchParams
   >;
@@ -237,6 +238,7 @@ export type TResponse =
       shareKey?: string;
       deepLinkSettings?: number;
       baseSdkConfig?: TFrameConfig;
+      encryptedSessionId?: string;
     }
   | {
       error: TError;
@@ -252,6 +254,7 @@ export type TResponse =
       shareKey?: string;
       deepLinkSettings?: number;
       baseSdkConfig?: TFrameConfig;
+      encryptedSessionId?: string;
     };
 
 export type EditorProps = {
@@ -268,6 +271,7 @@ export type EditorProps = {
   filesSettings?: TFilesSettings;
   organizationName?: string;
   shareKey?: string;
+  encryptedSessionId?: string;
 
   onDownloadAs?: (obj: object) => void;
   openShareFormDialog?: () => void;
@@ -398,6 +402,7 @@ export interface UseEventsProps {
   sdkConfig?: TFrameConfig | null;
   organizationName: string;
   shareKey?: string;
+  encryptedSessionId?: string;
   setFillingStatusDialogVisible?: React.Dispatch<React.SetStateAction<boolean>>;
   openShareFormDialog?: VoidFunction;
   onStartFillingVDRPanel?: (roles: TFormRole[]) => void;
@@ -430,6 +435,7 @@ export type THistoryData =
 export type TDocEditor = {
   setReferenceData?: (data: TGetReferenceDataRequest) => void;
   showMessage?: (data: string) => void;
+  openDocument?: (data: Uint8Array) => void;
   refreshHistory?: ({
     currentVersion,
     history,

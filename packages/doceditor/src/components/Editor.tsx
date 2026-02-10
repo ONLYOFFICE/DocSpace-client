@@ -86,6 +86,7 @@ const Editor = ({
   setFillingStatusDialogVisible,
   openShareFormDialog,
   onStartFilling,
+  encryptedSessionId,
 }: EditorProps) => {
   const { t, i18n } = useTranslation(["Common", "Editor", "DeepLink"]);
   const { isBase } = useTheme();
@@ -119,6 +120,7 @@ const Editor = ({
 
     onRequestRefreshFile,
     onInfo,
+    onSaveEncryptedDocument,
   } = useEditorEvents({
     user,
     successAuth,
@@ -135,6 +137,7 @@ const Editor = ({
     openShareFormDialog,
     onStartFillingVDRPanel,
     shareKey,
+    encryptedSessionId,
   });
 
   useInit({
@@ -160,16 +163,22 @@ const Editor = ({
   );
 
   const newConfig: IConfig = useMemo(() => {
-    return config
-      ? {
-          document: config.document,
-          documentType: config.documentType,
-          token: config.token,
-          type: config.type,
-          editorConfig: { ...config.editorConfig },
-        }
-      : {};
-  }, [config]);
+    if (!config) return {};
+
+    const cfg: IConfig = {
+      document: { ...config.document },
+      documentType: config.documentType,
+      token: config.token,
+      type: config.type,
+      editorConfig: { ...config.editorConfig },
+    };
+
+    if (encryptedSessionId && cfg.document) {
+      cfg.document.url = "__data__";
+    }
+
+    return cfg;
+  }, [config, encryptedSessionId]);
 
   // if (config) newConfig.editorConfig = { ...config.editorConfig };
 
@@ -308,6 +317,14 @@ const Editor = ({
 
   if (config?.fillingStatus) {
     newConfig.events.onRequestFillingStatus = onRequestFillingStatus;
+  }
+
+  if (encryptedSessionId && newConfig.events) {
+    (newConfig.events as Record<string, unknown>).onSaveDocument =
+      onSaveEncryptedDocument;
+    delete newConfig.events.onRequestHistory;
+    delete newConfig.events.onRequestRestore;
+    delete newConfig.events.onRequestHistoryData;
   }
 
   return (

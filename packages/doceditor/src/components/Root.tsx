@@ -116,6 +116,7 @@ const Root = ({
 
   deepLinkSettings,
   baseSdkConfig,
+  encryptedSessionId,
 }: TResponse) => {
   const editorRef = React.useRef<null | HTMLElement>(null);
 
@@ -358,6 +359,7 @@ const Root = ({
           setFillingStatusDialogVisible={setFillingStatusDialogVisible}
           openShareFormDialog={openShareFormDialog}
           onStartFilling={onStartFilling}
+          encryptedSessionId={encryptedSessionId}
         />
       ) : null}
 

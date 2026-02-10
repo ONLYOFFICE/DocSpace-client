@@ -41,7 +41,14 @@ import {
   sendEditorNotify,
   markAsFavorite,
   removeFromFavorite,
+  updateFileStream,
 } from "@docspace/shared/api/files";
+import { encryptionService } from "@docspace/shared/services/encryption";
+import {
+  getEditBuffer,
+  deleteEditBuffer,
+  cleanupStaleBuffers,
+} from "@docspace/shared/utils/encryptedEditBuffer";
 import {
   TEditHistory,
   TGetReferenceData,
@@ -92,6 +99,7 @@ const useEditorEvents = ({
   sdkConfig,
   organizationName,
   shareKey,
+  encryptedSessionId,
   setFillingStatusDialogVisible,
   openShareFormDialog,
   onStartFillingVDRPanel,
@@ -192,13 +200,28 @@ const useEditorEvents = ({
     }
   }, []);
 
-  const onSDKAppReady = React.useCallback(() => {
+  const onSDKAppReady = React.useCallback(async () => {
     docEditor = window.DocEditor.instances[EDITOR_ID];
 
     fixSize();
 
     if (errorMessage || isSkipError)
       return docEditor?.showMessage?.(errorMessage || t("Common:InvalidLink"));
+
+    if (encryptedSessionId) {
+      try {
+        const entry = await getEditBuffer(encryptedSessionId);
+        if (entry) {
+          docEditor?.openDocument?.(new Uint8Array(entry.buffer));
+        } else {
+          docEditor?.showMessage?.("Encrypted edit session expired");
+        }
+      } catch (e) {
+        console.error("[DocEditor] Failed to load encrypted buffer:", e);
+        docEditor?.showMessage?.("Failed to load encrypted file");
+      }
+      return;
+    }
 
     console.log("ONLYOFFICE Document Editor is ready", docEditor);
     const url = window.location.href;
@@ -232,7 +255,7 @@ const useEditorEvents = ({
 
       window.history.pushState({}, "", `/doceditor${search}`);
     }
-  }, [config?.Error, errorMessage, isSkipError, searchParams, t, fixSize]);
+  }, [config?.Error, errorMessage, isSkipError, searchParams, t, fixSize, encryptedSessionId]);
 
   const onDocumentReady = React.useCallback(() => {
     // console.log("onDocumentReady", { docEditor });
@@ -856,6 +879,61 @@ const useEditorEvents = ({
     [onSDKInfo, successAuth, fileInfo?.id],
   );
 
+  const onSaveEncryptedDocument = React.useCallback(
+    async (event: object) => {
+      if (!encryptedSessionId) return;
+
+      try {
+        const editedBuffer = (event as { data: ArrayBuffer }).data;
+        const entry = await getEditBuffer(encryptedSessionId);
+        if (!entry) {
+          toastr.error("Encrypted edit session expired. Cannot save.");
+          return;
+        }
+
+        const plainFile = new File([editedBuffer], entry.fileName, {
+          type: entry.fileType,
+        });
+        const { encryptedBlob } = await encryptionService.encryptFile(
+          plainFile,
+          entry.userPublicKey,
+          entry.userId,
+        );
+
+        const encFile = new File([encryptedBlob], entry.fileName, {
+          type: "application/octet-stream",
+        });
+        await updateFileStream(entry.fileId, encFile, true, false);
+
+        toastr.success("Encrypted file saved successfully.");
+      } catch (e) {
+        console.error("[DocEditor] Failed to save encrypted file:", e);
+        toastr.error(
+          (e as { message?: string })?.message ||
+            "Failed to save encrypted file",
+        );
+      }
+    },
+    [encryptedSessionId],
+  );
+
+  React.useEffect(() => {
+    if (!encryptedSessionId) return;
+
+    cleanupStaleBuffers().catch(console.error);
+
+    const handleBeforeUnload = () => {
+      deleteEditBuffer(encryptedSessionId).catch(console.error);
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      deleteEditBuffer(encryptedSessionId).catch(console.error);
+    };
+  }, [encryptedSessionId]);
+
   return {
     createUrl,
     documentReady,
@@ -883,6 +961,7 @@ const useEditorEvents = ({
     onRequestStartFilling,
     onRequestRefreshFile,
     onInfo,
+    onSaveEncryptedDocument,
   };
 };
 

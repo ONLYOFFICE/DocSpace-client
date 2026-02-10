@@ -156,6 +156,16 @@ import {
   showInfoPanel,
 } from "SRC_DIR/helpers/info-panel";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
+import { getFileEncryptionAccess } from "@docspace/shared/api/files";
+import {
+  requestUnlock,
+  encryptionService,
+} from "@docspace/shared/services/encryption";
+import {
+  generateEditSessionId,
+  storeEditBuffer,
+} from "@docspace/shared/utils/encryptedEditBuffer";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 const LOADER_TIMER = 500;
 let loadingTime;
@@ -700,6 +710,106 @@ class ContextOptionsStore {
   onClickDownloadEncrypted = (item) => {
     const { openUrl } = this.settingsStore;
     openUrl(item.viewUrl, UrlActionType.Download);
+  };
+
+  onClickEditEncrypted = async (item) => {
+    const { encryptionKeys, user } = this.userStore;
+
+    if (!encryptionKeys || encryptionKeys.length === 0) {
+      toastr.error(
+        "You need to set up encryption keys to edit encrypted files.",
+      );
+      return;
+    }
+
+    const userId = user?.id;
+    if (!userId) return;
+
+    try {
+      const encryptionInfo = await getFileEncryptionAccess(item.id);
+
+      if (!encryptionInfo || !encryptionInfo.fileKeys) {
+        toastr.error("No encryption access info available for this file.");
+        return;
+      }
+
+      const myFileKey = encryptionInfo.fileKeys.find(
+        (k) => k.userId === userId || k.userId === String(userId),
+      );
+
+      if (!myFileKey) {
+        toastr.error("You don't have access to decrypt this file.");
+        return;
+      }
+
+      const privateKey = await requestUnlock();
+      if (!privateKey) {
+        toastr.error("Encryption key not available.");
+        return;
+      }
+
+      const response = await fetch(item.viewUrl);
+      if (!response.ok) {
+        toastr.error(`Failed to fetch file: ${response.status}`);
+        return;
+      }
+
+      const encryptedData = await response.arrayBuffer();
+
+      const metadata = {
+        encrypted: true,
+        version: 1,
+        encryptionAlgorithm: "AES-256-GCM",
+        keyEncryptionAlgorithm: "RSA-OAEP-SHA256",
+        encryptedKeys: [
+          {
+            userId: String(userId),
+            publicKeyId: myFileKey.publicKeyId || "",
+            privateKeyEnc: myFileKey.privateKeyEnc,
+          },
+        ],
+        iv: "",
+        encryptedAt: myFileKey.createOn || new Date().toISOString(),
+      };
+
+      const decryptedBlob = await encryptionService.decryptFile(
+        encryptedData,
+        metadata,
+        privateKey,
+        String(userId),
+      );
+
+      const buffer = await decryptedBlob.arrayBuffer();
+      const sessionId = generateEditSessionId(item.id);
+
+      await storeEditBuffer({
+        id: sessionId,
+        fileId: item.id,
+        buffer,
+        fileName: item.title,
+        fileType: item.contentType || "application/octet-stream",
+        userPublicKey: encryptionKeys[0].publicKey,
+        encryptionMetadata: metadata,
+        userId: String(userId),
+        createdAt: Date.now(),
+      });
+
+      const searchParams = new URLSearchParams();
+      searchParams.append("fileId", String(item.id));
+      searchParams.append("encrypted", sessionId);
+
+      const url = combineUrl(
+        window.ClientConfig?.proxy?.url,
+        `/doceditor?${searchParams.toString()}`,
+      );
+
+      const { openOnNewPage } = this.filesSettingsStore;
+      window.open(url, openOnNewPage ? "_blank" : "_self");
+    } catch (error) {
+      toastr.error(
+        error.message || "An error occurred while opening the encrypted file.",
+      );
+    }
   };
 
   onClickDownloadAs = () => {
@@ -1927,6 +2037,14 @@ class ContextOptionsStore {
         disabled: false,
       },
       {
+        id: "option_edit-encrypted",
+        key: "edit-encrypted",
+        label: t("Common:EditEncryptedFile"),
+        icon: AccessEditReactSvgUrl,
+        onClick: () => this.onClickEditEncrypted(item),
+        disabled: !item.security?.Edit,
+      },
+      {
         id: "option_vectorization",
         key: "vectorization",
         label: t("Files:Vectorization"),
@@ -2723,6 +2841,7 @@ class ContextOptionsStore {
               "view",
               "fill-form",
               "edit",
+              "edit-encrypted",
               "vectorization",
               "preview",
               "mark-read",

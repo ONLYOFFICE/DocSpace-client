@@ -2761,6 +2761,7 @@ class FilesStore {
         "select",
         "fill-form",
         "edit",
+        "edit-encrypted",
         "open-pdf",
         "vectorization",
         "preview",
@@ -2934,6 +2935,10 @@ class FilesStore {
 
       if (canOpenPlayer || !canEditFile) {
         fileOptions = removeOptions(fileOptions, ["edit"]);
+      }
+
+      if (!isEncrypted || !item.viewAccessibility?.WebEdit || !item.security?.Edit) {
+        fileOptions = removeOptions(fileOptions, ["edit-encrypted"]);
       }
 
       if (!(shouldFillForm && canFillForm) || !item.isForm) {

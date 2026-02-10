@@ -712,13 +712,11 @@ class ContextOptionsStore {
     openUrl(item.viewUrl, UrlActionType.Download);
   };
 
-  onClickEditEncrypted = async (item) => {
+  onClickEditEncrypted = async (item, t) => {
     const { encryptionKeys, user } = this.userStore;
 
     if (!encryptionKeys || encryptionKeys.length === 0) {
-      toastr.error(
-        "You need to set up encryption keys to edit encrypted files.",
-      );
+      toastr.error(t("Common:EncryptionKeysRequired"));
       return;
     }
 
@@ -729,7 +727,7 @@ class ContextOptionsStore {
       const encryptionInfo = await getFileEncryptionAccess(item.id);
 
       if (!encryptionInfo || !encryptionInfo.fileKeys) {
-        toastr.error("No encryption access info available for this file.");
+        toastr.error(t("Common:EncryptionAccessNotAvailable"));
         return;
       }
 
@@ -738,19 +736,23 @@ class ContextOptionsStore {
       );
 
       if (!myFileKey) {
-        toastr.error("You don't have access to decrypt this file.");
+        toastr.error(t("Common:EncryptionDecryptAccessDenied"));
         return;
       }
 
       const privateKey = await requestUnlock();
       if (!privateKey) {
-        toastr.error("Encryption key not available.");
+        toastr.error(t("Common:EncryptionKeyNotAvailable"));
         return;
       }
 
       const response = await fetch(item.viewUrl);
       if (!response.ok) {
-        toastr.error(`Failed to fetch file: ${response.status}`);
+        toastr.error(
+          t("Common:EncryptionFetchFileFailed", {
+            status: response.status,
+          }),
+        );
         return;
       }
 
@@ -2041,7 +2043,7 @@ class ContextOptionsStore {
         key: "edit-encrypted",
         label: t("Common:EditEncryptedFile"),
         icon: AccessEditReactSvgUrl,
-        onClick: () => this.onClickEditEncrypted(item),
+        onClick: () => this.onClickEditEncrypted(item, t),
         disabled: !item.security?.Edit,
       },
       {

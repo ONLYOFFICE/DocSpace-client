@@ -214,11 +214,11 @@ const useEditorEvents = ({
         if (entry) {
           docEditor?.openDocument?.(new Uint8Array(entry.buffer));
         } else {
-          docEditor?.showMessage?.("Encrypted edit session expired");
+          docEditor?.showMessage?.(t("Common:EncryptionEditSessionExpired"));
         }
       } catch (e) {
         console.error("[DocEditor] Failed to load encrypted buffer:", e);
-        docEditor?.showMessage?.("Failed to load encrypted file");
+        docEditor?.showMessage?.(t("Common:EncryptionLoadFileFailed"));
       }
       return;
     }
@@ -887,7 +887,7 @@ const useEditorEvents = ({
         const editedBuffer = (event as { data: ArrayBuffer }).data;
         const entry = await getEditBuffer(encryptedSessionId);
         if (!entry) {
-          toastr.error("Encrypted edit session expired. Cannot save.");
+          toastr.error(t("Common:EncryptionEditSessionExpired"));
           return;
         }
 
@@ -905,16 +905,16 @@ const useEditorEvents = ({
         });
         await updateFileStream(entry.fileId, encFile, true, false);
 
-        toastr.success("Encrypted file saved successfully.");
+        toastr.success(t("Common:EncryptionFileSaved"));
       } catch (e) {
         console.error("[DocEditor] Failed to save encrypted file:", e);
         toastr.error(
           (e as { message?: string })?.message ||
-            "Failed to save encrypted file",
+            t("Common:EncryptionSaveFileFailed"),
         );
       }
     },
-    [encryptedSessionId],
+    [encryptedSessionId, t],
   );
 
   React.useEffect(() => {

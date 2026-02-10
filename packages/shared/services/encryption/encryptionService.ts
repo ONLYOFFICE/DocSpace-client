@@ -37,6 +37,12 @@ import {
   getPublicKeyFingerprint,
   getCrypto,
 } from "./keyManagement";
+import {
+  isChunkedFormat,
+  encryptFileChunked,
+  decryptChunked,
+  shouldUseChunkedEncryption,
+} from "./streamingEncryption";
 
 function arrayBufferToBase64(buffer: ArrayBuffer): string {
   const bytes = new Uint8Array(buffer);
@@ -68,48 +74,63 @@ export class EncryptionService {
     file: File,
     recipientPublicKeyBase64: string,
     recipientUserId: string,
+    onProgress?: EncryptionProgressCallback,
   ): Promise<EncryptFileResult> {
-    const subtle = getCrypto();
     const recipientPublicKey = await importPublicKey(recipientPublicKeyBase64);
-    const fileBuffer = await file.arrayBuffer();
     const aesKeyRaw = generateAESKey();
 
-    const aesKey = await subtle.importKey(
-      "raw",
-      aesKeyRaw as BufferSource,
-      { name: "AES-GCM", length: ENCRYPTION_CONSTANTS.AES_KEY_SIZE },
-      false,
-      ["encrypt"],
-    );
+    let encryptedBlob: Blob;
+    let version: number;
+    let iv: Uint8Array;
 
-    const iv = crypto.getRandomValues(
-      new Uint8Array(ENCRYPTION_CONSTANTS.AES_GCM_IV_SIZE),
-    );
+    if (shouldUseChunkedEncryption(file.size)) {
+      encryptedBlob = await encryptFileChunked(file, aesKeyRaw, onProgress);
+      version = 2;
+      iv = new Uint8Array(0);
+    } else {
+      const subtle = getCrypto();
+      const fileBuffer = await file.arrayBuffer();
 
-    const encryptedContent = await subtle.encrypt(
-      { name: "AES-GCM", iv: iv as BufferSource },
-      aesKey,
-      fileBuffer,
-    );
+      const aesKey = await subtle.importKey(
+        "raw",
+        aesKeyRaw as BufferSource,
+        { name: "AES-GCM", length: ENCRYPTION_CONSTANTS.AES_KEY_SIZE },
+        false,
+        ["encrypt"],
+      );
+
+      iv = crypto.getRandomValues(
+        new Uint8Array(ENCRYPTION_CONSTANTS.AES_GCM_IV_SIZE),
+      );
+
+      const encryptedContent = await subtle.encrypt(
+        { name: "AES-GCM", iv: iv as BufferSource },
+        aesKey,
+        fileBuffer,
+      );
+
+      const encryptedWithIV = new Uint8Array(
+        iv.length + encryptedContent.byteLength,
+      );
+      encryptedWithIV.set(iv, 0);
+      encryptedWithIV.set(new Uint8Array(encryptedContent), iv.length);
+
+      encryptedBlob = new Blob([encryptedWithIV], {
+        type: "application/octet-stream",
+      });
+      version = 1;
+
+      onProgress?.(1);
+    }
 
     const encryptedAESKey = await encryptAESKeyWithRSA(
       aesKeyRaw,
       recipientPublicKey,
     );
 
-    const encryptedWithIV = new Uint8Array(
-      iv.length + encryptedContent.byteLength,
-    );
-    encryptedWithIV.set(iv, 0);
-    encryptedWithIV.set(new Uint8Array(encryptedContent), iv.length);
-
-    const encryptedBlob = new Blob([encryptedWithIV], {
-      type: "application/octet-stream",
-    });
-
     const metadata: FileEncryptionMetadata = {
       encrypted: true,
-      version: 1,
+      version,
       encryptionAlgorithm: "AES-256-GCM",
       keyEncryptionAlgorithm: "RSA-OAEP-SHA256",
       encryptedKeys: [
@@ -209,6 +230,19 @@ export class EncryptionService {
       throw new Error("You do not have access to decrypt this file");
     }
 
+    let aesKeyRaw: Uint8Array;
+    try {
+      aesKeyRaw = await decryptAESKeyWithRSA(userKey.privateKeyEnc, privateKey);
+    } catch {
+      throw new Error(
+        "Failed to decrypt file key - you may not have access to this file",
+      );
+    }
+
+    if (isChunkedFormat(encryptedData)) {
+      return decryptChunked(encryptedData, aesKeyRaw);
+    }
+
     const encryptedArray = new Uint8Array(encryptedData);
     const ivSize = ENCRYPTION_CONSTANTS.AES_GCM_IV_SIZE;
 
@@ -218,15 +252,6 @@ export class EncryptionService {
 
     const iv = encryptedArray.slice(0, ivSize);
     const ciphertext = encryptedArray.slice(ivSize);
-
-    let aesKeyRaw: Uint8Array;
-    try {
-      aesKeyRaw = await decryptAESKeyWithRSA(userKey.privateKeyEnc, privateKey);
-    } catch {
-      throw new Error(
-        "Failed to decrypt file key - you may not have access to this file",
-      );
-    }
 
     const subtle = getCrypto();
     const aesKey = await subtle.importKey(
@@ -260,8 +285,24 @@ export class EncryptionService {
       throw new Error("File is not encrypted");
     }
 
-    // Extract IV from beginning of encrypted data
-    // Format: [12-byte IV][encrypted content with auth tag]
+    const chunked = isChunkedFormat(encryptedData);
+
+    if (chunked) {
+      for (const encryptedKey of metadata.encryptedKeys) {
+        try {
+          const aesKeyRaw = await decryptAESKeyWithRSA(
+            encryptedKey.privateKeyEnc,
+            privateKey,
+          );
+          return await decryptChunked(encryptedData, aesKeyRaw);
+        } catch {
+          continue;
+        }
+      }
+      throw new Error("Failed to decrypt file - no valid key found");
+    }
+
+    // Legacy v1 format: [12-byte IV][encrypted content with auth tag]
     const encryptedArray = new Uint8Array(encryptedData);
     const ivSize = ENCRYPTION_CONSTANTS.AES_GCM_IV_SIZE;
 

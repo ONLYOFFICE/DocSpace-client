@@ -30,3 +30,4 @@ export * from "./keyManagement";
 export * from "./secretStorage";
 export * from "./encryptionService";
 export * from "./keyRotation";
+export * from "./streamingEncryption";

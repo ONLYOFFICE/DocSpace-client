@@ -27,6 +27,10 @@
 import { RoomsType } from "@docspace/shared/enums";
 import { encryptionService } from "@docspace/shared/services/encryption/encryptionService";
 import type { FileEncryptionMetadata } from "@docspace/shared/services/encryption/types";
+import {
+  estimateChunkedEncryptedSize,
+  shouldUseChunkedEncryption,
+} from "@docspace/shared/services/encryption/streamingEncryption";
 
 export type UploadConfig = {
   file: File;
@@ -98,9 +102,8 @@ export async function prepareEncryptedUpload(
     file,
     userPublicKey,
     userId,
+    onProgress,
   );
-
-  onProgress?.(1); // 100%
 
   return {
     data: encryptedBlob,
@@ -170,9 +173,11 @@ export async function prepareMultipleEncryptedUploads(
 }
 
 export function estimateEncryptedSize(files: File[]): number {
-  const OVERHEAD_PER_FILE = 256 + 12 + 16;
-  return files.reduce(
-    (total, file) => total + file.size + OVERHEAD_PER_FILE,
-    0,
-  );
+  const LEGACY_OVERHEAD_PER_FILE = 256 + 12 + 16;
+  return files.reduce((total, file) => {
+    if (shouldUseChunkedEncryption(file.size)) {
+      return total + estimateChunkedEncryptedSize(file.size);
+    }
+    return total + file.size + LEGACY_OVERHEAD_PER_FILE;
+  }, 0);
 }

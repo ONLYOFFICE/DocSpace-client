@@ -697,6 +697,11 @@ class ContextOptionsStore {
     }
   };
 
+  onClickDownloadEncrypted = (item) => {
+    const { openUrl } = this.settingsStore;
+    openUrl(item.viewUrl, UrlActionType.Download);
+  };
+
   onClickDownloadAs = () => {
     this.dialogsStore.setDownloadDialogVisible(true);
   };
@@ -2163,6 +2168,14 @@ class ContextOptionsStore {
           Boolean(item.external && item.isLinkExpired),
       },
       {
+        id: "option_download-encrypted",
+        key: "download-encrypted",
+        label: t("Common:DownloadWithoutDecryption"),
+        icon: DownloadReactSvgUrl,
+        onClick: () => this.onClickDownloadEncrypted(item),
+        disabled: !item.security?.Download,
+      },
+      {
         id: "option_room-info",
         key: "room-info",
         label: item.isAIAgent ? t("Common:AgentInfo") : t("Common:RoomInfo"),
@@ -2565,7 +2578,11 @@ class ContextOptionsStore {
       (option) => option.key === "download-as",
     );
 
-    if (downloadOption && downloadAsOption) {
+    const downloadEncryptedOption = newOptions.find(
+      (option) => option.key === "download-encrypted",
+    );
+
+    if (downloadOption && (downloadAsOption || downloadEncryptedOption)) {
       const originalDownloadOption = {
         ...downloadOption,
         key: "download-original",
@@ -2577,11 +2594,15 @@ class ContextOptionsStore {
         originalDownloadOption,
       ];
 
+      const downloadItemKeys = ["download-original"];
+      if (downloadEncryptedOption) downloadItemKeys.push("download-encrypted");
+      if (downloadAsOption) downloadItemKeys.push("download-as");
+
       menuGroupsConfig.push({
         groupKey: "download",
         groupLabel: downloadOption.label,
         groupIcon: downloadOption.icon,
-        itemKeys: ["download-original", "download-as"],
+        itemKeys: downloadItemKeys,
         needsGrouping: false,
         minItemsCount: 1,
       });

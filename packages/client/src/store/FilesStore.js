@@ -2801,6 +2801,7 @@ class FilesStore {
         "mark-as-favorite",
         "remove-from-favorites",
         "download",
+        "download-encrypted",
         "download-as",
         "convert",
         "move", // category
@@ -2880,6 +2881,10 @@ class FilesStore {
 
       if (!canDownload) {
         fileOptions = removeOptions(fileOptions, ["download"]);
+      }
+
+      if (!canDownload || !isEncrypted) {
+        fileOptions = removeOptions(fileOptions, ["download-encrypted"]);
       }
 
       if (

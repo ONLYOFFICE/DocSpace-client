@@ -40,6 +40,7 @@ export type DecryptConfig = {
   userKeys: SerializedKeyPair;
   userId: string;
   onPassphraseRequired: () => Promise<string | null>;
+  onProgress?: (progress: number) => void;
 };
 
 export type DecryptResult = {
@@ -59,6 +60,7 @@ export async function decryptDownloadedFile(
     userKeys,
     userId,
     onPassphraseRequired,
+    onProgress,
   } = config;
 
   if (!metadata.encrypted) {
@@ -112,6 +114,7 @@ export async function decryptDownloadedFile(
       metadata,
       privateKey,
       userId,
+      onProgress,
     );
 
     const decryptedFile = new File([decryptedBlob], originalFileName, {
@@ -154,6 +157,7 @@ export async function downloadAndDecryptFile(
   userId: string,
   onPassphraseRequired: () => Promise<string | null>,
   onProgress?: (progress: number) => void,
+  onDecryptProgress?: (progress: number) => void,
 ): Promise<DecryptResult> {
   try {
     const response = await fetch(downloadUrl);
@@ -207,6 +211,7 @@ export async function downloadAndDecryptFile(
       userKeys,
       userId,
       onPassphraseRequired,
+      onProgress: onDecryptProgress,
     });
   } catch (downloadError) {
     return {

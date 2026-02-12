@@ -220,6 +220,7 @@ export class EncryptionService {
     metadata: FileEncryptionMetadata,
     privateKey: CryptoKey,
     userId: string,
+    onProgress?: EncryptionProgressCallback,
   ): Promise<Blob> {
     if (!metadata.encrypted) {
       throw new Error("File is not encrypted");
@@ -240,7 +241,7 @@ export class EncryptionService {
     }
 
     if (isChunkedFormat(encryptedData)) {
-      return decryptChunked(encryptedData, aesKeyRaw);
+      return decryptChunked(encryptedData, aesKeyRaw, onProgress);
     }
 
     const encryptedArray = new Uint8Array(encryptedData);
@@ -273,6 +274,7 @@ export class EncryptionService {
       throw new Error("Failed to decrypt file content - data may be corrupted");
     }
 
+    onProgress?.(1);
     return new Blob([decryptedContent]);
   }
 
@@ -280,6 +282,7 @@ export class EncryptionService {
     encryptedData: ArrayBuffer,
     metadata: FileEncryptionMetadata,
     privateKey: CryptoKey,
+    onProgress?: EncryptionProgressCallback,
   ): Promise<Blob> {
     if (!metadata.encrypted) {
       throw new Error("File is not encrypted");
@@ -294,7 +297,7 @@ export class EncryptionService {
             encryptedKey.privateKeyEnc,
             privateKey,
           );
-          return await decryptChunked(encryptedData, aesKeyRaw);
+          return await decryptChunked(encryptedData, aesKeyRaw, onProgress);
         } catch {
           continue;
         }
@@ -335,6 +338,7 @@ export class EncryptionService {
           ciphertext,
         );
 
+        onProgress?.(1);
         return new Blob([decryptedContent]);
       } catch {
         continue;

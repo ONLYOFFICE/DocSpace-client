@@ -26,6 +26,7 @@
 
 import { makeAutoObservable, runInAction } from "mobx";
 import { Trans } from "react-i18next";
+import i18n from "../i18n";
 import { TIMEOUT } from "SRC_DIR/helpers/filesConstants";
 import uniqueid from "lodash/uniqueId";
 import sumBy from "lodash/sumBy";
@@ -1351,7 +1352,11 @@ class UploadDataStore {
     //       : fileSize - index * this.filesSettingsStore.chunkUploadSize;
     // }
 
-    const percentCurrentFile = (index / chunksLength) * 100;
+    const rawPercent = (index / chunksLength) * 100;
+    const isEncryptedFile = !!this.files[indexOfFile]?.encrypted;
+    const percentCurrentFile = isEncryptedFile
+      ? 20 + (rawPercent * 80) / 100
+      : rawPercent;
 
     const fileIndex = this.uploadedFilesHistory.findIndex(
       (f) => f.uniqueId === this.files[indexOfFile].uniqueId,
@@ -1842,6 +1847,13 @@ class UploadDataStore {
                 progress * 20,
               );
             }
+            const newPercent = this.getFilesPercent();
+            this.percent = newPercent;
+            this.primaryProgressDataStore.setPrimaryProgressBarData({
+              operation: OPERATIONS_NAME.upload,
+              percent: newPercent,
+              label: i18n.t("Files:Encrypting"),
+            });
           },
         );
 

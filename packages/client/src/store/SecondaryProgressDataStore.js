@@ -315,6 +315,7 @@ class SecondaryProgressDataStore {
         items: updatedItems,
         completed: isCompleted,
         percent: progressInfo.percent,
+        ...(progressInfo.label && { label: progressInfo.label }),
       };
     } else {
       const progress = {

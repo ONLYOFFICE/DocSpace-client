@@ -117,6 +117,7 @@ import { createFolderNavigation } from "SRC_DIR/helpers/createFolderNavigation";
 import { hideInfoPanel } from "SRC_DIR/helpers/info-panel";
 
 import { OPERATIONS_NAME, CategoryType } from "@docspace/shared/constants";
+import i18n from "../i18n";
 import { checkProtocol } from "../helpers/files-helpers";
 import FilesHeaderOptionStore from "./FilesHeaderOptionStore";
 import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
@@ -964,6 +965,10 @@ class FilesActionStore {
       return Promise.resolve();
     }
 
+    const { setSecondaryProgressBarData } =
+      this.uploadDataStore.secondaryProgressDataStore;
+    const operationId = uniqueid("operation_");
+
     try {
       const encryptionInfo = await getFileEncryptionAccess(file.id);
 
@@ -1002,6 +1007,12 @@ class FilesActionStore {
         encryptedAt: myFileKey.createOn || new Date().toISOString(),
       };
 
+      setSecondaryProgressBarData({
+        operation: OPERATIONS_NAME.download,
+        percent: 0,
+        operationId,
+      });
+
       const result = await downloadAndDecryptFile(
         downloadUrl,
         metadata,
@@ -1017,7 +1028,31 @@ class FilesActionStore {
           }
           return "__KEY_CACHED__";
         },
+        (progress) => {
+          setSecondaryProgressBarData({
+            operation: OPERATIONS_NAME.download,
+            percent: Math.floor(progress * 70),
+            label: i18n.t("Files:Downloading"),
+            operationId,
+          });
+        },
+        (progress) => {
+          setSecondaryProgressBarData({
+            operation: OPERATIONS_NAME.download,
+            percent: 70 + Math.floor(progress * 30),
+            label: i18n.t("Files:Decrypting"),
+            operationId,
+          });
+        },
       );
+
+      setSecondaryProgressBarData({
+        operation: OPERATIONS_NAME.download,
+        percent: 100,
+        completed: true,
+        alert: !result.success,
+        operationId,
+      });
 
       if (result.success && result.file) {
         triggerFileDownload(result.file);
@@ -1025,6 +1060,14 @@ class FilesActionStore {
         toastr.error(result.error || "Failed to decrypt file");
       }
     } catch (error) {
+      setSecondaryProgressBarData({
+        operation: OPERATIONS_NAME.download,
+        percent: 100,
+        completed: true,
+        alert: true,
+        operationId,
+      });
+
       toastr.error(
         error.message || "An error occurred while downloading the file",
       );

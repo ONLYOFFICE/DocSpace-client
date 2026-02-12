@@ -222,9 +222,9 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
   return (
     <EncryptionContext.Provider value={value}>
       {children}
-      {PassphraseDialog && (
+      {PassphraseDialog && showPassphraseDialog && (
         <PassphraseDialog
-          visible={showPassphraseDialog}
+          visible
           isLoading={isUnlocking}
           error={unlockError}
           onSubmit={handlePassphraseSubmit}

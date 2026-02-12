@@ -1229,7 +1229,7 @@ class FilesActionStore {
           alert: true,
           operationId,
         });
-        toastr.error("Failed to decrypt all selected files");
+        toastr.error(i18n.t("Files:DecryptAllFailed"));
         return;
       }
 
@@ -1255,7 +1255,9 @@ class FilesActionStore {
 
       if (failures.length > 0) {
         toastr.warning(
-          `Failed to decrypt: ${failures.join(", ")}`,
+          i18n.t("Files:DecryptPartialFailed", {
+            fileNames: failures.join(", "),
+          }),
           null,
           0,
           true,

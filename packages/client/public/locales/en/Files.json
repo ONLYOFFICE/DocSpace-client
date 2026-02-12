@@ -61,6 +61,8 @@
   "DocumentEdited": "Cannot perform the action because the document is being edited.",
   "DownloadAll": "Download all",
   "CompressingFiles": "Compressing files",
+  "DecryptAllFailed": "Failed to decrypt all selected files",
+  "DecryptPartialFailed": "Failed to decrypt: {{fileNames}}",
   "Decrypting": "Decrypting",
   "Downloading": "Downloading",
   "DuplicateFolderItem": "The folder <2>{{title}}</2> successfully duplicated",

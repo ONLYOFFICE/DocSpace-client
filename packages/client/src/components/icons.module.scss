@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 @use "@docspace/shared/styles/mixins";
+@use "@docspace/shared/styles/variables/colors";
 
 .iconWrapper {
   position: relative;
@@ -71,7 +72,7 @@
   inset-inline-end: 0;
 
   :global(.security-shield) {
-    fill: #35ad17;
+    fill: colors.$light-status-positive;
     stroke: white;
     stroke-width: 1px;
   }

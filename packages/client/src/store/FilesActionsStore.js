@@ -81,6 +81,9 @@ import {
 
 import {
   downloadAndDecryptFile,
+  downloadAndDecryptFileToBuffer,
+  createZipFromBuffers,
+  deduplicateFileNames,
   triggerFileDownload,
 } from "SRC_DIR/helpers/encryptedDownload";
 import { requestUnlock } from "@docspace/shared/services/encryption/secretStorage";
@@ -934,10 +937,14 @@ class FilesActionStore {
       return Promise.resolve();
     }
 
+    const encryptedFiles = [];
+
     selection.forEach((elem) => {
       if (!elem.fileExst && elem.isFolder) {
         folderIds.push(elem.id);
         items.push({ id: elem.id });
+      } else if (elem.encrypted) {
+        encryptedFiles.push(elem);
       } else {
         fileIds.push(elem.id);
         items.push({ id: elem.id, fileExst: elem.fileExst });
@@ -945,7 +952,18 @@ class FilesActionStore {
     });
 
     this.setGroupMenuBlocked(true);
-    return this.downloadFiles(fileIds, folderIds, label).finally(() =>
+
+    const promises = [];
+
+    if (encryptedFiles.length > 0) {
+      promises.push(this.downloadEncryptedFilesAsZip(encryptedFiles));
+    }
+
+    if (fileIds.length > 0 || folderIds.length > 0) {
+      promises.push(this.downloadFiles(fileIds, folderIds, label));
+    }
+
+    return Promise.all(promises).finally(() =>
       this.setGroupMenuBlocked(false),
     );
   };
@@ -1074,6 +1092,188 @@ class FilesActionStore {
     }
 
     return Promise.resolve();
+  };
+
+  downloadEncryptedFilesAsZip = async (encryptedFiles) => {
+    const { encryptionKeys, user } = this.userStore;
+
+    if (!encryptionKeys || encryptionKeys.length === 0) {
+      toastr.error(
+        "You need to set up encryption keys to download encrypted files.",
+      );
+      return;
+    }
+
+    const userId = user?.id;
+    if (!userId) return;
+
+    const { setSecondaryProgressBarData } =
+      this.uploadDataStore.secondaryProgressDataStore;
+    const operationId = uniqueid("operation_");
+
+    try {
+      const privateKey = await requestUnlock();
+      if (!privateKey) {
+        return;
+      }
+
+      const onPassphraseRequired = async () => "__KEY_CACHED__";
+
+      const userKeys = {
+        publicKey: encryptionKeys[0].publicKey,
+        privateKeyEnc: encryptionKeys[0].privateKeyEnc,
+      };
+
+      const fileNames = deduplicateFileNames(
+        encryptedFiles.map((f) => f.title),
+      );
+      const totalFiles = encryptedFiles.length;
+      const results = [];
+      const failures = [];
+
+      setSecondaryProgressBarData({
+        operation: OPERATIONS_NAME.download,
+        percent: 0,
+        operationId,
+      });
+
+      for (let i = 0; i < totalFiles; i++) {
+        const file = encryptedFiles[i];
+        const fileName = fileNames[i];
+        const fileShare = 100 / totalFiles;
+        const fileBase = fileShare * i;
+
+        try {
+          setSecondaryProgressBarData({
+            operation: OPERATIONS_NAME.download,
+            percent: Math.floor(fileBase),
+            label: `${i18n.t("Files:Downloading")} (${i + 1}/${totalFiles})`,
+            operationId,
+          });
+
+          const encryptionInfo = await getFileEncryptionAccess(file.id);
+
+          if (!encryptionInfo?.fileKeys) {
+            failures.push(fileName);
+            continue;
+          }
+
+          const myFileKey = encryptionInfo.fileKeys.find(
+            (k) => k.userId === userId || k.userId === String(userId),
+          );
+
+          if (!myFileKey) {
+            failures.push(fileName);
+            continue;
+          }
+
+          const metadata = {
+            encrypted: true,
+            version: 1,
+            encryptionAlgorithm: "AES-256-GCM",
+            keyEncryptionAlgorithm: "RSA-OAEP-SHA256",
+            encryptedKeys: [
+              {
+                userId: String(userId),
+                publicKeyId: myFileKey.publicKeyId || "",
+                privateKeyEnc: myFileKey.privateKeyEnc,
+              },
+            ],
+            iv: "",
+            encryptedAt: myFileKey.createOn || new Date().toISOString(),
+          };
+
+          const result = await downloadAndDecryptFileToBuffer(
+            file.viewUrl,
+            metadata,
+            fileName,
+            file.contentType || "application/octet-stream",
+            userKeys,
+            String(userId),
+            onPassphraseRequired,
+            (progress) => {
+              setSecondaryProgressBarData({
+                operation: OPERATIONS_NAME.download,
+                percent: Math.floor(fileBase + progress * fileShare * 0.6),
+                label: `${i18n.t("Files:Downloading")} (${i + 1}/${totalFiles})`,
+                operationId,
+              });
+            },
+            (progress) => {
+              setSecondaryProgressBarData({
+                operation: OPERATIONS_NAME.download,
+                percent: Math.floor(
+                  fileBase + fileShare * 0.6 + progress * fileShare * 0.3,
+                ),
+                label: `${i18n.t("Files:Decrypting")} (${i + 1}/${totalFiles})`,
+                operationId,
+              });
+            },
+          );
+
+          if (result.success && result.data) {
+            results.push({ name: result.fileName, data: result.data });
+          } else {
+            failures.push(fileName);
+          }
+        } catch {
+          failures.push(fileName);
+        }
+      }
+
+      if (results.length === 0) {
+        setSecondaryProgressBarData({
+          operation: OPERATIONS_NAME.download,
+          percent: 100,
+          completed: true,
+          alert: true,
+          operationId,
+        });
+        toastr.error("Failed to decrypt all selected files");
+        return;
+      }
+
+      setSecondaryProgressBarData({
+        operation: OPERATIONS_NAME.download,
+        percent: 95,
+        label: i18n.t("Files:CompressingFiles"),
+        operationId,
+      });
+
+      const zipData = createZipFromBuffers(results);
+      const zipBlob = new Blob([zipData], { type: "application/zip" });
+
+      triggerFileDownload(zipBlob, "Files.zip");
+
+      setSecondaryProgressBarData({
+        operation: OPERATIONS_NAME.download,
+        percent: 100,
+        completed: true,
+        alert: failures.length > 0,
+        operationId,
+      });
+
+      if (failures.length > 0) {
+        toastr.warning(
+          `Failed to decrypt: ${failures.join(", ")}`,
+          null,
+          0,
+          true,
+        );
+      }
+    } catch (error) {
+      setSecondaryProgressBarData({
+        operation: OPERATIONS_NAME.download,
+        percent: 100,
+        completed: true,
+        alert: true,
+        operationId,
+      });
+
+      toastr.error(
+        error.message || "An error occurred while downloading encrypted files",
+      );
+    }
   };
 
   completeAction = async (selectedItem, type) => {

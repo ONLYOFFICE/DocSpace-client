@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { Zip, ZipPassThrough } from "fflate";
+
 import { encryptionService } from "@docspace/shared/services/encryption/encryptionService";
 import { SecretStorageService } from "@docspace/shared/services/encryption/secretStorage";
 import { decryptPrivateKey } from "@docspace/shared/services/encryption/keyManagement";
@@ -239,6 +241,108 @@ export function triggerFileDownload(
   document.body.removeChild(a);
 
   setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+export type BatchDecryptResult = {
+  success: boolean;
+  data?: Uint8Array;
+  fileName: string;
+  error?: string;
+};
+
+export async function downloadAndDecryptFileToBuffer(
+  downloadUrl: string,
+  metadata: FileEncryptionMetadata,
+  originalFileName: string,
+  originalFileType: string,
+  userKeys: SerializedKeyPair,
+  userId: string,
+  onPassphraseRequired: () => Promise<string | null>,
+  onDownloadProgress?: (progress: number) => void,
+  onDecryptProgress?: (progress: number) => void,
+): Promise<BatchDecryptResult> {
+  const decryptResult = await downloadAndDecryptFile(
+    downloadUrl,
+    metadata,
+    originalFileName,
+    originalFileType,
+    userKeys,
+    userId,
+    onPassphraseRequired,
+    onDownloadProgress,
+    onDecryptProgress,
+  );
+
+  if (!decryptResult.success || !decryptResult.file) {
+    return {
+      success: false,
+      fileName: originalFileName,
+      error: decryptResult.error,
+    };
+  }
+
+  const arrayBuffer = await decryptResult.file.arrayBuffer();
+
+  return {
+    success: true,
+    data: new Uint8Array(arrayBuffer),
+    fileName: originalFileName,
+  };
+}
+
+export function createZipFromBuffers(
+  files: Array<{ name: string; data: Uint8Array }>,
+): Uint8Array {
+  const outputChunks: Uint8Array[] = [];
+  let totalSize = 0;
+
+  const zip = new Zip((err, chunk) => {
+    if (err) throw err;
+    outputChunks.push(chunk);
+    totalSize += chunk.length;
+  });
+
+  for (const file of files) {
+    const entry = new ZipPassThrough(file.name);
+    zip.add(entry);
+    entry.push(file.data, true);
+  }
+
+  zip.end();
+
+  const result = new Uint8Array(totalSize);
+  let offset = 0;
+  for (const chunk of outputChunks) {
+    result.set(chunk, offset);
+    offset += chunk.length;
+  }
+
+  return result;
+}
+
+export function deduplicateFileNames(names: string[]): string[] {
+  const counts = new Map<string, number>();
+  const result: string[] = [];
+
+  for (const name of names) {
+    const count = counts.get(name) ?? 0;
+    counts.set(name, count + 1);
+
+    if (count === 0) {
+      result.push(name);
+    } else {
+      const dotIdx = name.lastIndexOf(".");
+      if (dotIdx > 0) {
+        const base = name.slice(0, dotIdx);
+        const ext = name.slice(dotIdx);
+        result.push(`${base} (${count})${ext}`);
+      } else {
+        result.push(`${name} (${count})`);
+      }
+    }
+  }
+
+  return result;
 }
 
 export function canUserDecrypt(

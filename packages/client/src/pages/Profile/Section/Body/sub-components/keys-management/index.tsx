@@ -363,16 +363,18 @@ const KeysManagement = ({
           />
         </div>
       </div>
-      <PassphraseModal
-        visible={showPassphraseModal}
-        onSubmit={handleGenerateKey}
-        onCancel={() => {
-          setShowPassphraseModal(false);
-          setPendingAction(null);
-        }}
-        isNew={!hasKeys || pendingAction === "generate"}
-        isLoading={isGenerating}
-      />
+      {showPassphraseModal && (
+        <PassphraseModal
+          visible
+          onSubmit={handleGenerateKey}
+          onCancel={() => {
+            setShowPassphraseModal(false);
+            setPendingAction(null);
+          }}
+          isNew={!hasKeys || pendingAction === "generate"}
+          isLoading={isGenerating}
+        />
+      )}
       <ConfirmationModal
         visible={showConfirmReplace}
         title={t("Common:ReplaceKey")}
@@ -394,13 +396,15 @@ const KeysManagement = ({
           setPendingDeleteKeyId(null);
         }}
       />
-      <KeyRotationDialog
-        visible={showRotationDialog}
-        onSubmit={handleRotatePassphrase}
-        onCancel={handleRotationCancel}
-        error={rotationError}
-        isLoading={isRotating}
-      />
+      {showRotationDialog && (
+        <KeyRotationDialog
+          visible
+          onSubmit={handleRotatePassphrase}
+          onCancel={handleRotationCancel}
+          error={rotationError}
+          isLoading={isRotating}
+        />
+      )}
     </div>
   );
 };

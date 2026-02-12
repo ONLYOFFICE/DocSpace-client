@@ -60,6 +60,7 @@
   "DisableNotifications": "Disable notifications",
   "DocumentEdited": "Cannot perform the action because the document is being edited.",
   "DownloadAll": "Download all",
+  "CompressingFiles": "Compressing files",
   "Decrypting": "Decrypting",
   "Downloading": "Downloading",
   "DuplicateFolderItem": "The folder <2>{{title}}</2> successfully duplicated",

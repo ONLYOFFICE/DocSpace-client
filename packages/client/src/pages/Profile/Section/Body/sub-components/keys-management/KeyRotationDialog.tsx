@@ -162,7 +162,7 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
                 simpleView
                 isDisabled={isLoading}
                 hasError={!!error && !currentPassphrase}
-                autoComplete="current-password"
+                autoComplete="one-time-code"
                 tabIndex={1}
               />
             </div>
@@ -191,7 +191,7 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
                   newPassphrase.length > 0 &&
                   newPassphrase.length < MIN_LENGTH
                 }
-                autoComplete="new-password"
+                autoComplete="one-time-code"
                 tabIndex={2}
               />
             </div>
@@ -218,7 +218,7 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
                 hasError={
                   !!confirmPassphrase && newPassphrase !== confirmPassphrase
                 }
-                autoComplete="new-password"
+                autoComplete="one-time-code"
                 tabIndex={3}
               />
             </div>

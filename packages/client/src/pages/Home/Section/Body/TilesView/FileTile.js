@@ -178,6 +178,7 @@ const FileTile = (props) => {
       isArchive={item.isArchive}
       isTemplate={item.isTemplate}
       badgeUrl={badgeUrl}
+      encrypted={item.encrypted}
     />
   );
 

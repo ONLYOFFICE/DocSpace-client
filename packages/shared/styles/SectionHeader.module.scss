@@ -90,7 +90,7 @@
       }
 
       .title-icon {
-        svg {
+        svg:not(.security) {
           path {
             fill: var(--room-icon-link-icon-path);
           }
@@ -131,8 +131,18 @@
     :global {
       .header-container {
         .title-icon {
-          svg {
+          svg:not(.security) {
             path {
+              fill: var(--background-color);
+            }
+          }
+
+          .security {
+            .security-shield {
+              fill: colors.$light-status-positive;
+            }
+
+            .security-check {
               fill: var(--background-color);
             }
           }

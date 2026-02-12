@@ -27,12 +27,13 @@
 @use "@docspace/shared/styles/mixins";
 
 .iconWrapper {
+  position: relative;
+
   :global(.react-svg-icon) {
     @include mixins.no-user-select;
   }
 
   &.isRoom {
-    position: relative;
     border-radius: 6px;
 
     &::before {
@@ -63,13 +64,31 @@
 }
 
 .encryptedFileIcon {
-  background-repeat: no-repeat;
-  background-position: 0 0;
-  background-size: 16px 16px;
-  background-color: transparent;
-  height: 16px;
-  width: 16px;
+  height: 14px;
+  width: 12px;
   position: absolute;
-  margin-top: 14px;
-  margin-inline-start: 12px;
+  bottom: 0;
+  inset-inline-end: 0;
+
+  :global(.security-shield) {
+    fill: #35ad17;
+    stroke: white;
+    stroke-width: 1px;
+  }
+
+  :global(.security-check) {
+    fill: white;
+  }
+}
+
+:global(.theme-dark) {
+  .encryptedFileIcon {
+    :global(.security-shield) {
+      stroke: black;
+    }
+
+    :global(.security-check) {
+      fill: black;
+    }
+  }
 }

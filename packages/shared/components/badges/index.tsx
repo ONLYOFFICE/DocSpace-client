@@ -42,7 +42,6 @@ import CustomFilter12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/custom-filter.
 import CustomFilter16ReactSvgUrl from "PUBLIC_DIR/images/icons/16/custom-filter.react.svg?url";
 import LockedIconReactSvg from "PUBLIC_DIR/images/file.actions.locked.react.svg?url";
 import LockedIconReact12Svg from "PUBLIC_DIR/images/icons/12/lock.react.svg?url";
-import EncryptedIcon16ReactSvg from "PUBLIC_DIR/images/icons/16/catalog-settings-security.svg?url";
 import FavoriteFillReactSvgUrl from "PUBLIC_DIR/images/favorite.fill.react.svg?url";
 
 import { isMobile as isMobileDevice } from "react-device-detect";
@@ -152,7 +151,6 @@ const Badges = ({
     locked,
     isFavorite,
     isAIAgent,
-    encrypted,
     // startFilling,
   } = item;
 
@@ -405,38 +403,6 @@ const Badges = ({
             title={t("Common:UnblockFile")}
           />
         </div>
-      ) : null}
-
-      {encrypted && !isTile ? (
-        <IconButton
-          iconName={EncryptedIcon16ReactSvg}
-          className={classNames(
-            styles.iconBadge,
-            "badge tablet-badge icons-group encrypted-badge",
-          )}
-          data-id={id}
-          size={sizeBadge}
-          color={globalColors.mainGreen}
-          hoverColor={globalColors.mainGreen}
-          title={t("Common:ProtectedFiles")}
-        />
-      ) : null}
-
-      {encrypted && isTile ? (
-        <BadgeWrapper isTile={isTile}>
-          <IconButton
-            iconName={EncryptedIcon16ReactSvg}
-            className={classNames(
-              styles.iconBadge,
-              "badge tablet-badge icons-group encrypted-badge",
-            )}
-            data-id={id}
-            size={IconSizeType.medium}
-            color={globalColors.mainGreen}
-            hoverColor={globalColors.mainGreen}
-            title={t("Common:ProtectedFiles")}
-          />
-        </BadgeWrapper>
       ) : null}
 
       {item.viewAccessibility?.MustConvert &&

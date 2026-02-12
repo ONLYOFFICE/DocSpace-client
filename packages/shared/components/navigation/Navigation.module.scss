@@ -524,6 +524,14 @@
       gap: 8px;
 
       @include mixins.truncate;
+
+      .title-icon {
+        min-width: 16px;
+        min-height: 16px;
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+      }
     }
 
     .navigation-header-separator {

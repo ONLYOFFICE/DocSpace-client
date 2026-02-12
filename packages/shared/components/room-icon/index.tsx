@@ -343,7 +343,7 @@ const RoomIcon = ({
                 },
                 "room-icon_button",
               )}
-              isFill
+              isFill={!badgeUrl?.includes("security.react.svg")}
             />
 
             {tooltipContent ? (

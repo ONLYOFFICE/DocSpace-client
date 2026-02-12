@@ -24,9 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import SecuritySvgUrl from "PUBLIC_DIR/images/security.svg?url";
+import SecuritySvgUrl from "PUBLIC_DIR/images/icons/12/security.react.svg?url";
 
 import React from "react";
+import { ReactSVG } from "react-svg";
 import { inject, observer } from "mobx-react";
 import classNames from "classnames";
 
@@ -40,6 +41,7 @@ type ItemIconProps = {
   icon?: string;
   fileExst?: string;
   isPrivacy?: boolean;
+  encrypted?: boolean;
   isRoom?: boolean;
   title: string;
   logo?: TLogo | string;
@@ -62,6 +64,7 @@ const ItemIcon = ({
   icon,
   fileExst,
   isPrivacy,
+  encrypted,
   isRoom,
   title,
   logo,
@@ -83,35 +86,33 @@ const ItemIcon = ({
   const showDefaultRoomIcon = !isLoadedRoomIcon && isRoom;
 
   return (
-    <>
-      <div
-        className={classNames(styles.iconWrapper, { [styles.isRoom]: isRoom })}
-      >
-        <RoomIcon
-          color={color}
-          title={title}
-          size={size}
-          radius={radius}
-          isArchive={isArchive}
-          showDefault={showDefault || showDefaultRoomIcon}
-          imgClassName={imgClassName || "react-svg-icon"}
-          logo={isRoom ? logo : icon}
-          badgeUrl={badgeUrl || ""}
-          isTemplate={isTemplate}
-          withEditing={withEditing}
-          model={model}
-          onChangeFile={onChangeFile}
-          className={className}
-          dataTestId={dataTestId}
-        />
-      </div>
-      {isPrivacy && fileExst ? (
-        <div
+    <div
+      className={classNames(styles.iconWrapper, { [styles.isRoom]: isRoom })}
+    >
+      <RoomIcon
+        color={color}
+        title={title}
+        size={size}
+        radius={radius}
+        isArchive={isArchive}
+        showDefault={showDefault || showDefaultRoomIcon}
+        imgClassName={imgClassName || "react-svg-icon"}
+        logo={isRoom ? logo : icon}
+        badgeUrl={badgeUrl || ""}
+        isTemplate={isTemplate}
+        withEditing={withEditing}
+        model={model}
+        onChangeFile={onChangeFile}
+        className={className}
+        dataTestId={dataTestId}
+      />
+      {(isPrivacy || encrypted) && fileExst ? (
+        <ReactSVG
+          src={SecuritySvgUrl}
           className={styles.encryptedFileIcon}
-          style={{ backgroundImage: `url(${SecuritySvgUrl})` }}
         />
       ) : null}
-    </>
+    </div>
   );
 };
 

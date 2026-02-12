@@ -26,7 +26,7 @@
 
 import PublicRoomIconUrl from "PUBLIC_DIR/images/public-room.react.svg?url";
 import LifetimeRoomIconUrl from "PUBLIC_DIR/images/lifetime-room.react.svg?url";
-import EncryptedRoomIconUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
+import EncryptedRoomIconUrl from "PUBLIC_DIR/images/icons/16/security.react.svg?url";
 import RoundedArrowSvgUrl from "PUBLIC_DIR/images/rounded arrow.react.svg?url";
 import SharedLinkSvgUrl from "PUBLIC_DIR/images/icons/16/shared.link.svg?url";
 import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg?url";
@@ -741,7 +741,10 @@ const SectionHeaderContent = (props) => {
   const contextMenuHeader = React.useMemo(() => {
     const srcLogo = selectedFolder?.logo || null;
     const title = currentTitle || selectedFolder?.title || "";
-    const headerBadgeUrl = titleIcon.includes("public-room") ? titleIcon : "";
+    const headerBadgeUrl =
+      titleIcon.includes("public-room") || titleIcon.includes("security")
+        ? titleIcon
+        : "";
 
     const iconUrl = getIcon(
       32,

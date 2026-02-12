@@ -144,6 +144,7 @@ const SimpleFilesRow = React.memo((props) => {
       isArchive={item.isArchive}
       isTemplate={item.isTemplate}
       badgeUrl={badgeUrl}
+      encrypted={item.encrypted}
     />
   );
 

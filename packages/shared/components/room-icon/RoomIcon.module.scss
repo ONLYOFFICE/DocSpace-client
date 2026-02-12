@@ -258,7 +258,7 @@
   }
 
   .roomIconButton {
-    svg {
+    svg:not(:global(.security)) {
       path {
         fill: var(--room-icon-background-color) !important;
       }
@@ -278,6 +278,18 @@
           fill: var(--room-icon-link-icon-background) !important;
         }
       }
+
+      .security {
+        .security-shield {
+          fill: colors.$light-status-positive !important;
+          stroke: var(--room-icon-background-color) !important;
+          stroke-width: 1px;
+        }
+
+        .security-check {
+          fill: var(--room-icon-background-color) !important;
+        }
+      }
     }
 
     &.isHovered {
@@ -287,7 +299,7 @@
     }
   }
 
-  .roomIconButton:has(svg:not(:global(.link))) {
+  .roomIconButton:has(svg:not(:global(.link)):not(:global(.security))) {
     width: 12px;
     height: 12px;
     border: 1px solid var(--room-icon-background-color);

@@ -24,11 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { getFolder } from "@docspace/shared/api/files";
 import {
-  getFileAccessKeys,
-  setFileAccessKeys,
-} from "@docspace/shared/api/privacy";
+  getFolder,
+  getFileEncryptionAccess,
+  setFileEncryptionKeys,
+} from "@docspace/shared/api/files";
 import { getUserById } from "@docspace/shared/api/people";
 import { encryptionService } from "@docspace/shared/services/encryption";
 import { requestUnlock } from "@docspace/shared/services/encryption/secretStorage";
@@ -126,26 +126,9 @@ export async function reEncryptRoomKeysForNewMembers(
   const results: FileKeyReEncryptionResult[] = [];
   const { currentUserId, onProgress } = options;
 
-  const usersNeedingKeys: NewRoomMember[] = [];
+  const validMembers = newMembers.filter((m) => m.id);
 
-  for (const member of newMembers) {
-    if (!member.id) continue;
-
-    let publicKey: string | undefined = member.publicKey;
-    if (!publicKey) {
-      publicKey = (await getUserPublicKey(member.id)) ?? undefined;
-    }
-
-    if (publicKey) {
-      usersNeedingKeys.push({ ...member, publicKey });
-    } else {
-      console.warn(
-        `User ${member.id} does not have encryption keys set up - they will not be able to access encrypted files`,
-      );
-    }
-  }
-
-  if (usersNeedingKeys.length === 0) {
+  if (validMembers.length === 0) {
     return results;
   }
 
@@ -163,10 +146,19 @@ export async function reEncryptRoomKeysForNewMembers(
     throw new Error("Failed to unlock private key - cannot re-encrypt files");
   }
 
+  // Cache public keys resolved per member to avoid redundant lookups
+  const publicKeyCache = new Map<string, string | null>();
+  for (const member of validMembers) {
+    if (member.publicKey) {
+      publicKeyCache.set(member.id, member.publicKey);
+    }
+  }
+
   for (let i = 0; i < encryptedFiles.length; i++) {
     const file = encryptedFiles[i];
     try {
-      const existingKeys = await getFileAccessKeys(file.id);
+      const encryptionInfo = await getFileEncryptionAccess(file.id);
+      const existingKeys = encryptionInfo.fileKeys;
 
       if (!existingKeys || existingKeys.length === 0) {
         results.push({
@@ -181,7 +173,7 @@ export async function reEncryptRoomKeysForNewMembers(
 
       const newKeys: ServerAccessRequestKeyDto[] = [];
 
-      for (const member of usersNeedingKeys) {
+      for (const member of validMembers) {
         const alreadyHasAccess = existingKeys.some(
           (k) => k.userId === member.id,
         );
@@ -189,7 +181,24 @@ export async function reEncryptRoomKeysForNewMembers(
           continue;
         }
 
-        if (!member.publicKey) {
+        // Resolve public key: cache → encryptionInfo.userKeys → user profile
+        let publicKey = publicKeyCache.get(member.id);
+        if (publicKey === undefined) {
+          const userKeyEntry = encryptionInfo.userKeys?.find(
+            (uk) => uk.userId === member.id,
+          );
+          publicKey = userKeyEntry?.publicKey || null;
+
+          if (!publicKey) {
+            publicKey = await getUserPublicKey(member.id);
+          }
+          publicKeyCache.set(member.id, publicKey);
+        }
+
+        if (!publicKey) {
+          console.warn(
+            `User ${member.id} does not have encryption keys set up - they will not be able to access encrypted files`,
+          );
           continue;
         }
 
@@ -198,7 +207,7 @@ export async function reEncryptRoomKeysForNewMembers(
             metadata,
             privateKey,
             currentUserId,
-            member.publicKey,
+            publicKey,
             member.id,
           );
           newKeys.push(newKey);
@@ -211,7 +220,15 @@ export async function reEncryptRoomKeysForNewMembers(
       }
 
       if (newKeys.length > 0) {
-        await setFileAccessKeys(file.id, newKeys);
+        const allKeys = [
+          ...existingKeys.map((k) => ({
+            userId: k.userId,
+            publicKeyId: k.publicKeyId || "",
+            privateKeyEnc: k.privateKeyEnc,
+          })),
+          ...newKeys,
+        ];
+        await setFileEncryptionKeys(file.id, allKeys);
       }
 
       results.push({

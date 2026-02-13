@@ -51,7 +51,11 @@ import {
   fileCopyAs,
   checkIsFileExist,
   setFileEncryptionKeys,
+  getFileEncryptionAccess,
 } from "@docspace/shared/api/files";
+import { getFilePublicKeys } from "@docspace/shared/api/privacy";
+import { encryptionService } from "@docspace/shared/services/encryption";
+import { requestUnlock } from "@docspace/shared/services/encryption/secretStorage";
 import { toastr } from "@docspace/shared/components/toast";
 import { getOperationProgress } from "@docspace/shared/utils/getOperationProgress";
 
@@ -195,6 +199,95 @@ class UploadDataStore {
 
   setEncryptionEnabled = (enabled) => {
     this.encryptionEnabled = enabled;
+  };
+
+  encryptKeysForRoomMembers = async (fileId, currentUserId) => {
+    try {
+      // getFilePublicKeys returns public keys of ALL room members with file access
+      const [publicKeys, encryptionInfo] = await Promise.all([
+        getFilePublicKeys(fileId),
+        getFileEncryptionAccess(fileId),
+      ]);
+
+      const existingFileKeys = encryptionInfo.fileKeys;
+      if (!existingFileKeys || existingFileKeys.length === 0) return;
+
+      // Build a set of user IDs that already have file keys
+      const existingKeyUserIds = new Set(
+        existingFileKeys.map((k) => String(k.userId)),
+      );
+
+      // Collect public keys for users who don't yet have file keys
+      // Store { publicKey, keyId } — keyId is the GUID the backend expects as publicKeyId
+      const publicKeyMap = new Map();
+      if (Array.isArray(publicKeys)) {
+        for (const pk of publicKeys) {
+          if (!pk.publicKey || !pk.userId) continue;
+          const uid = String(pk.userId);
+          if (uid === String(currentUserId)) continue;
+          if (existingKeyUserIds.has(uid)) continue;
+          publicKeyMap.set(uid, { publicKey: pk.publicKey, keyId: pk.id || "" });
+        }
+      }
+
+      if (publicKeyMap.size === 0) return;
+
+      const privateKey = await requestUnlock();
+      if (!privateKey) return;
+
+      const metadata = {
+        encrypted: true,
+        version: 1,
+        encryptionAlgorithm: "AES-256-GCM",
+        keyEncryptionAlgorithm: "RSA-OAEP-SHA256",
+        iv: "",
+        encryptedAt: new Date().toISOString(),
+        encryptedKeys: existingFileKeys.map((k) => ({
+          userId: k.userId,
+          publicKeyId: k.publicKeyId || "",
+          privateKeyEnc: k.privateKeyEnc,
+        })),
+      };
+
+      const newKeys = [];
+
+      for (const [userId, { publicKey, keyId }] of publicKeyMap) {
+        try {
+          const newKey = await encryptionService.createKeyForRecipient(
+            metadata,
+            privateKey,
+            currentUserId,
+            publicKey,
+            userId,
+          );
+          // Use the actual key GUID from the server, not the fingerprint hash
+          newKey.publicKeyId = keyId;
+          newKeys.push(newKey);
+        } catch (error) {
+          console.error(
+            `[ENCRYPTION] Failed to create key for user ${userId}:`,
+            error,
+          );
+        }
+      }
+
+      if (newKeys.length > 0) {
+        const allKeys = [
+          ...existingFileKeys.map((k) => ({
+            userId: k.userId,
+            publicKeyId: k.publicKeyId || "",
+            privateKeyEnc: k.privateKeyEnc,
+          })),
+          ...newKeys,
+        ];
+        await setFileEncryptionKeys(fileId, allKeys);
+      }
+    } catch (error) {
+      console.error(
+        "[ENCRYPTION] Failed to encrypt keys for room members:",
+        error,
+      );
+    }
   };
 
   getUserEncryptionKeys = () => {
@@ -1390,6 +1483,11 @@ class UploadDataStore {
               }));
 
             await setFileEncryptionKeys(fileId, serverKeys);
+
+            const { userId } = this.getUserEncryptionKeys();
+            if (userId) {
+              await this.encryptKeysForRoomMembers(fileId, userId);
+            }
           } catch (error) {
             console.error(
               "[ENCRYPTION] Failed to set file encryption keys:",
@@ -1474,23 +1572,15 @@ class UploadDataStore {
       !this.files[indexOfFile] ||
       this.files[indexOfFile].cancel
     ) {
-      console.log(
-        "[ENCRYPTION DEBUG] asyncUpload early return - upload check failed",
-      );
       return resolve();
     }
 
     if (!this.asyncUploadObj[operationId]) {
-      console.log(
-        "[ENCRYPTION DEBUG] asyncUpload early return - no asyncUploadObj",
-      );
       return reject();
     }
     const chunkObjIndex = this.asyncUploadObj[
       operationId
     ].chunksArray.findIndex((x) => !x.isActive && !x.isFinalize);
-
-    console.log("[ENCRYPTION DEBUG] asyncUpload chunkObjIndex:", chunkObjIndex);
 
     if (chunkObjIndex !== -1) {
       this.asyncUploadObj[operationId].chunksArray[chunkObjIndex].isActive =
@@ -1582,21 +1672,7 @@ class UploadDataStore {
     const { uploadThreadCount } = this.filesSettingsStore;
     const length = requestsDataArray.length;
 
-    console.log("[ENCRYPTION DEBUG] uploadFileChunks called:", {
-      location,
-      requestsDataArrayLength: length,
-      fileSize,
-      indexOfFile,
-      operationId,
-      toFolderId,
-      uploadThreadCount,
-    });
-
     const isThirdPartyFolder = typeof toFolderId === "string";
-    console.log(
-      "[ENCRYPTION DEBUG] uploadFileChunks isThirdPartyFolder:",
-      isThirdPartyFolder,
-    );
 
     if (!isThirdPartyFolder) {
       const chunksArray = [];
@@ -1621,11 +1697,6 @@ class UploadDataStore {
         onUpload: () => finalizeUploadSession(folderId, sessionId),
       });
 
-      console.log("[ENCRYPTION DEBUG] chunksArray created:", {
-        chunksArrayLength: chunksArray.length,
-        operationId,
-      });
-
       if (!this.asyncUploadObj[operationId]) {
         this.asyncUploadObj[operationId] = { chunksArray: [] };
         this.asyncUploadObj[operationId].chunksArray = chunksArray;
@@ -1633,11 +1704,6 @@ class UploadDataStore {
 
       const promise = new Promise((resolve, reject) => {
         let i = length <= uploadThreadCount ? length : uploadThreadCount;
-        console.log("[ENCRYPTION DEBUG] Starting async upload loops:", {
-          i,
-          length,
-          uploadThreadCount,
-        });
         while (i !== 0) {
           this.asyncUpload(
             t,
@@ -1825,14 +1891,6 @@ class UploadDataStore {
       isPrivate,
     );
 
-    console.log("[ENCRYPTION DEBUG] Upload encryption check:", {
-      roomType,
-      isPrivate,
-      publicKey: publicKey ? publicKey.substring(0, 50) + "..." : null,
-      userId,
-      shouldEncrypt,
-    });
-
     if (shouldEncrypt && !isEncrypted) {
       try {
         const prepared = await this.prepareFileForEncryptedUpload(
@@ -1865,19 +1923,8 @@ class UploadDataStore {
           encryptionMetadata = prepared.encryptionMetadata;
           isEncrypted = true;
 
-          console.log("[ENCRYPTION DEBUG] File encrypted:", {
-            originalSize: file.size,
-            encryptedSize: fileToUpload.size,
-            metadata: encryptionMetadata,
-          });
-
           this.files[indexOfFile].encryptionMetadata = encryptionMetadata;
           this.files[indexOfFile].encrypted = true;
-        } else {
-          console.log(
-            "[ENCRYPTION DEBUG] File NOT encrypted, prepared:",
-            prepared,
-          );
         }
       } catch (error) {
         console.error("Encryption failed:", error);
@@ -1904,25 +1951,10 @@ class UploadDataStore {
       encryptionMetadata,
     )
       .then((res) => {
-        console.log("[ENCRYPTION DEBUG] Upload session created:", {
-          isEncrypted,
-          fileSize,
-          originalFileSize: file.size,
-          fileToUploadSize: fileToUpload.size,
-          hasMetadata: !!encryptionMetadata,
-        });
-
         const sessionId = res.id;
         const path = res.path;
         const operationId = res.id;
         const requestsDataArray = [];
-
-        console.log("[ENCRYPTION DEBUG] Preparing chunks:", {
-          chunks,
-          chunkUploadSize,
-          location,
-          operationId,
-        });
 
         let chunk = 0;
 
@@ -1938,10 +1970,6 @@ class UploadDataStore {
           chunk++;
         }
 
-        console.log("[ENCRYPTION DEBUG] Chunks prepared:", {
-          requestsDataArrayLength: requestsDataArray.length,
-        });
-
         return {
           sessionId,
           folderId: actualFolderId,
@@ -1951,12 +1979,6 @@ class UploadDataStore {
         };
       })
       .then(({ sessionId, folderId, requestsDataArray, path, operationId }) => {
-        console.log("[ENCRYPTION DEBUG] Starting uploadFileChunks:", {
-          location,
-          requestsDataArrayLength: requestsDataArray.length,
-          path,
-          operationId,
-        });
         const fileIndex = this.uploadedFilesHistory.findIndex(
           (f) => f.uniqueId === this.files[indexOfFile].uniqueId,
         );

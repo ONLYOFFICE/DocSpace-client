@@ -38,8 +38,8 @@
     }
 
     .absentUserError {
-      --absent-user-error-color: #{rgba($dark-error-status, 0.3)};
-      --absent-user-error-color-text: #{$dark-error-status};
+      --absent-user-error-color: #{rgba(colors.$dark-error-status, 0.3)};
+      --absent-user-error-color-text: #{colors.$dark-error-status};
     }
   }
 }
@@ -58,8 +58,8 @@
     }
 
     .absentUserError {
-      --absent-user-error-color: #{rgba($main-red, 0.09)};
-      --absent-user-error-color-text: #{$gray-text};
+      --absent-user-error-color: #{rgba(colors.$main-red, 0.09)};
+      --absent-user-error-color-text: #{colors.$gray-text};
     }
   }
 }

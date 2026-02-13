@@ -286,7 +286,7 @@ const PassphraseDialog: React.FC<PassphraseDialogProps> = ({
               simpleView
               isDisabled={isLoading}
               hasError={!!errorMessage}
-              autoComplete="one-time-code"
+              autoComplete="new-password"
               tabIndex={1}
             />
           </div>
@@ -327,7 +327,7 @@ const PassphraseDialog: React.FC<PassphraseDialogProps> = ({
                   !!state.confirmPassphrase &&
                   state.passphrase !== state.confirmPassphrase
                 }
-                autoComplete="one-time-code"
+                autoComplete="new-password"
                 tabIndex={2}
               />
             </div>

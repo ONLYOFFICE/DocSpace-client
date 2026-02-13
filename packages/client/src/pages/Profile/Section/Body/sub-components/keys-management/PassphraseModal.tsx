@@ -146,7 +146,7 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
               simpleView
               isDisabled={isLoading}
               hasError={!!error}
-              autoComplete="one-time-code"
+              autoComplete="new-password"
               tabIndex={1}
             />
           </div>
@@ -169,7 +169,7 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                 hasError={
                   !!confirmPassphrase && passphrase !== confirmPassphrase
                 }
-                autoComplete="one-time-code"
+                autoComplete="new-password"
                 tabIndex={2}
               />
             </div>

@@ -253,7 +253,7 @@ const PassphraseDialog: React.FC<PassphraseDialogProps> = ({
 
   return (
     <ModalDialog
-      zIndex={410}
+      zIndex={1010}
       visible={visible}
       onClose={handleCancel}
       displayType={ModalDialogType.modal}

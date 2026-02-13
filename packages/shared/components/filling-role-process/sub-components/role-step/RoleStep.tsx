@@ -104,12 +104,12 @@ const RoleStep = ({
 
         {match(false)
           .when(
-            () => isTurnOfAbsentUser && withHistory,
+            () => isTurnOfAbsentUser && withHistory && onInviteUser,
             () => (
               <button
                 type="button"
                 onClick={() =>
-                  onInviteUser(user.id, ShareAccessRights.FormFilling)
+                  onInviteUser?.(user.id, ShareAccessRights.FormFilling)
                 }
                 className={styles.sendInvitationAgain}
                 aria-label={t("Common:SendInvitationAgain")}

@@ -39,5 +39,5 @@ export interface RoleStepProps {
   withHistory?: boolean;
   stoppedBy?: TUser;
   isTurnOfAbsentUser?: boolean;
-  onInviteUser: (userId: string, access: ShareAccessRights) => void;
+  onInviteUser?: (userId: string, access: ShareAccessRights) => void;
 }

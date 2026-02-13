@@ -77,6 +77,9 @@ const ICON_COMPONENTS = {
     <MarkAsReadIcon data-testid="icon-markAsRead" />
   ),
   [FloatingButtonIcons.backup]: <BackupIcon data-testid="icon-backup" />,
+  [FloatingButtonIcons.roomReencryption]: (
+    <RefreshIcon data-testid="icon-roomReencryption" />
+  ),
 } as const;
 
 const FloatingButton = forwardRef<HTMLDivElement, FloatingButtonProps>(

@@ -81,6 +81,7 @@
   "EmptySection": "Empty {{sectionName}}",
   "EnableNotifications": "Enable notifications",
   "Encrypting": "Encrypting",
+  "ReEncryptingFiles": "Re-encrypting files",
   "ErrorChangeIndex": "Error when changing index. The problem may be caused on the server side. Reload the page or check your Internet connection settings.",
   "ErrorCopyItem": "Error copying <2>{{title}}</2> to <1>{{folderName}}</1>",
   "ErrorCopyItems": "Error copying <2>{{qty}} elements</2> to <1>{{folderName}}</1>",

@@ -54,6 +54,8 @@ export interface FileKeyReEncryptionResult {
 export interface RoomEncryptionOptions {
   /** Current user's ID */
   currentUserId: string;
+  /** Progress callback: called with (processed, total) after each file */
+  onProgress?: (processed: number, total: number) => void;
 }
 
 async function getEncryptedFilesInRoom(roomId: number): Promise<TFile[]> {
@@ -122,7 +124,7 @@ export async function reEncryptRoomKeysForNewMembers(
   options: RoomEncryptionOptions,
 ): Promise<FileKeyReEncryptionResult[]> {
   const results: FileKeyReEncryptionResult[] = [];
-  const { currentUserId } = options;
+  const { currentUserId, onProgress } = options;
 
   const usersNeedingKeys: NewRoomMember[] = [];
 
@@ -153,13 +155,16 @@ export async function reEncryptRoomKeysForNewMembers(
     return results;
   }
 
+  onProgress?.(0, encryptedFiles.length);
+
   const privateKey = await requestUnlock();
 
   if (!privateKey) {
     throw new Error("Failed to unlock private key - cannot re-encrypt files");
   }
 
-  for (const file of encryptedFiles) {
+  for (let i = 0; i < encryptedFiles.length; i++) {
+    const file = encryptedFiles[i];
     try {
       const existingKeys = await getFileAccessKeys(file.id);
 
@@ -220,6 +225,8 @@ export async function reEncryptRoomKeysForNewMembers(
         error: error instanceof Error ? error.message : "Unknown error",
       });
     }
+
+    onProgress?.(i + 1, encryptedFiles.length);
   }
 
   return results;

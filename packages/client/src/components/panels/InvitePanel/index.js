@@ -34,10 +34,11 @@ import {
   ShareAccessRights,
   RoomsType,
 } from "@docspace/shared/enums";
-import { LOADER_TIMEOUT } from "@docspace/shared/constants";
+import { LOADER_TIMEOUT, OPERATIONS_NAME } from "@docspace/shared/constants";
 
 import { Button } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
+import uniqueid from "lodash/uniqueId";
 import { isDesktop, isMobile } from "@docspace/shared/utils";
 import api from "@docspace/shared/api";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
@@ -83,6 +84,7 @@ const InvitePanel = ({
   checkGuests,
   hasGuests,
   currentUserId,
+  setSecondaryProgressBarData,
 }) => {
   const [invitePanelIsLoding, setInvitePanelIsLoading] = useState(
     roomId !== -1,
@@ -346,25 +348,6 @@ const InvitePanel = ({
         ? await api.people.inviteUsers(data)
         : await api.rooms.setRoomSecurity(roomId, data);
 
-      if (isRooms && selectedRoom?.private) {
-        const newMemberIds = inviteItems
-          .filter((item) => item.id && !item.isGroup)
-          .map((item) => ({ id: item.id }));
-
-        if (newMemberIds.length > 0) {
-          try {
-            await reEncryptRoomKeysForNewMembers(roomId, newMemberIds, {
-              currentUserId,
-            });
-          } catch (encryptionError) {
-            console.error(
-              "Failed to re-encrypt file keys for new members:",
-              encryptionError,
-            );
-          }
-        }
-      }
-
       if (!isRooms) {
         setIsNewUserByCurrentUser(true);
       }
@@ -378,6 +361,56 @@ const InvitePanel = ({
       }
 
       updateInfoPanelMembers();
+
+      if (isRooms && selectedRoom?.private) {
+        const newMemberIds = inviteItems
+          .filter((item) => item.id && !item.isGroup)
+          .map((item) => ({ id: item.id }));
+
+        if (newMemberIds.length > 0) {
+          const operationId = uniqueid("operation_");
+
+          setSecondaryProgressBarData({
+            operation: OPERATIONS_NAME.roomReencryption,
+            percent: 0,
+            operationId,
+          });
+
+          reEncryptRoomKeysForNewMembers(roomId, newMemberIds, {
+            currentUserId,
+            onProgress: (processed, total) => {
+              const percent = Math.floor((processed / total) * 100);
+              setSecondaryProgressBarData({
+                operation: OPERATIONS_NAME.roomReencryption,
+                percent,
+                operationId,
+              });
+            },
+          })
+            .then(() => {
+              setSecondaryProgressBarData({
+                operation: OPERATIONS_NAME.roomReencryption,
+                percent: 100,
+                completed: true,
+                alert: false,
+                operationId,
+              });
+            })
+            .catch((error) => {
+              console.error(
+                "Failed to re-encrypt file keys for new members:",
+                error,
+              );
+              setSecondaryProgressBarData({
+                operation: OPERATIONS_NAME.roomReencryption,
+                percent: 100,
+                completed: true,
+                alert: true,
+                operationId,
+              });
+            });
+        }
+      }
     } catch (err) {
       let error = err;
 
@@ -630,6 +663,7 @@ export default inject(
     authStore,
     currentQuotaStore,
     userStore,
+    uploadDataStore,
   }) => {
     const { theme, standalone, allowInvitingGuests, checkGuests, hasGuests } =
       settingsStore;
@@ -656,6 +690,9 @@ export default inject(
 
     const { isOwner, isAdmin } = userStore.user;
 
+    const { setSecondaryProgressBarData } =
+      uploadDataStore.secondaryProgressDataStore;
+
     return {
       folders,
       setInviteLanguage,
@@ -681,6 +718,7 @@ export default inject(
       checkGuests,
       hasGuests,
       currentUserId: userStore.user.id,
+      setSecondaryProgressBarData,
     };
   },
 )(

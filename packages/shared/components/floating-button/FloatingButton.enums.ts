@@ -43,4 +43,5 @@ export const FloatingButtonIcons = {
   markAsRead: OPERATIONS_NAME.markAsRead,
   other: OPERATIONS_NAME.other,
   backup: OPERATIONS_NAME.backup,
+  roomReencryption: OPERATIONS_NAME.roomReencryption,
 } as const;

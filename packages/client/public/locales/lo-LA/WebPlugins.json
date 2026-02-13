@@ -8,6 +8,8 @@
   "NeedSettings": "ຕ້ອງການເຂົ້າການຕັ້ງຄ່າ",
   "NoPlugins": "ບໍ່ມີການເພີ່ມປລັກອິນ",
   "NotNeedSettings": "ບໍ່ຈຳເປັນຕ້ອງໃສ່ການຕັ້ງຄ່າ",
+  "PluginIsNotCompatible": "ເວີຊັນ plugin SDK ບໍ່ກົງກັບເວີຊັນ {{productName}}. ກະລຸນາອັບເດດເປັນເວີຊັນທີ່ເຂົ້າກັນໄດ້.",
+  "PluginLoadedSuccessfully": "ໂຫຼດປລັກອິນສຳເລັດແລ້ວ",
   "PluginSamples": "ຕົວຢ່າງປລັກອິນ",
   "PluginSDK": "ປລັກອິນ SDK",
   "PluginSDKDescription": "ການນໍາໃຊ້ Plugin SDK ທ່ານສາມາດຂະຫຍາຍ ການເຮັດວຽກ {{productName}} ຂອງທ່ານ, ເຊື່ອມຕໍ່ການບໍລິການພາກສ່ວນທີສາມຫຼືປັບປຸງປະສົບການຂອງຜູ້ໃຊ້ທີ່ມີຢູ່ແລ້ວ. ທີ່ນີ້ທ່ານສາມາດຊອກຫາຕົວຢ່າງ plugin ທີ່ມີແຫຼ່ງລະຫັດທີ່ມີຢູ່ໃນ GitHub.",

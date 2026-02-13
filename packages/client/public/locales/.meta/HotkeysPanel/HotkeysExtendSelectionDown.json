@@ -3,7 +3,7 @@
   "content": "Extend selection down",
   "content_en_sha1_hash": "da6dc8dcf677a977da4fadd6d15a1e42c52974c7",
   "created_at": "2025-05-19T21:30:55.049Z",
-  "updated_at": "2025-05-21T10:32:49.856Z",
+  "updated_at": "2025-05-24T10:42:38.580Z",
   "comment": {
     "text": "This translation key is used to display the label for a hotkey that extends selection down, appearing as part of the UI in a hotkeys panel. It is associated with the keyboard shortcut \"Shift + ↓\". Translators should provide an alternative phrase that makes sense in their language and cultural context.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Azerbaijani translation \"Seçimi sağa doğru uzadın\" translates to 'Extend selection to the right'. The English 'Extend selection down' refers to extending the selection downwards, not to the right.",
-          "suggestion": "Seçimi aşağı doğru uzadın"
+          "description": "The translation 'Seçimi sağa doğru uzadın' translates to 'Extend selection to the right'. The English phrase 'Extend selection down' refers to moving the selection downwards, not to the right.",
+          "suggestion": "Seçimi aşağı doğru uzat"
         }
       ],
       "approved_at": null
@@ -45,13 +45,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Разширяване на избора надолу\" is understandable, a more natural and common translation of \"Extend selection down\" in a software context might be \"Разширяване на селекцията надолу\" or \"Добавяне на елементи към селекцията надолу\". \"Избор\" can sometimes feel too general.",
-          "suggestion": "Разширяване на селекцията надолу"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -96,13 +90,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Ընդարձակում է ընտրարկումը վար\" does not accurately convey the meaning of \"Extend selection down.\" It appears to be a fragmented or incomplete translation. \"Ընդարձակում է\" means 'extends', but \"ընտրարկումը վար\" is unclear and doesn't properly translate 'selection down'.",
-          "suggestion": "A more accurate translation would be something like \"տեղաշարժել ընտրությունը դեպի ներքև\" (telasharjvel entrutyun depi nerkev), which translates to 'move selection downwards', or potentially \"ընտրության ներքևում ընդարձակում\" (entrutyan nerkevum endardzum), meaning 'extension at the bottom of the selection'."
+          "description": "The translation 'Ընդարձակում է ընտրարկումը վար' does not accurately convey the meaning of \"Extend selection down\". It appears to be a fragmented or incomplete translation.",
+          "suggestion": "A more accurate translation would be something like 'տեղաշարժել ընտրությունը դեպի ներքև' (tel'asharj' en'trutyun depi ner'kev) which translates to 'move the selection downwards' or 'ընտրությունը ցնելով ավելին' (en'trutyun ts'nelov avelin) which translates to 'extend the selection downwards'."
         },
         {
-          "type": "grammar",
-          "description": "Even if the individual words were intended, the Armenian sentence structure is unusual and doesn't flow naturally. It lacks a clear subject and verb agreement.",
-          "suggestion": "The suggested corrections above address the grammatical issues as part of providing a more accurate translation."
+          "type": "spelling",
+          "description": "The word 'վար' appears to be a typo or an incorrect word choice. It doesn't seem to fit the context.",
+          "suggestion": "This word needs to be replaced with something more relevant to the context of selecting and extending a selection. Consider the suggestions in the incorrect_translation issue for alternatives."
         }
       ],
       "approved_at": null
@@ -119,8 +113,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '選択範囲の拡大（下）' is a literal translation but might be overly verbose or unclear to a Japanese user. 'Extend selection down' implies an action that expands the selected area downwards. A more natural phrasing might focus on the action of 'moving' or 'extending' the selection.",
-          "suggestion": "検討: 選択範囲を下へ拡張, 選択を下へ拡張, 選択を下方向に拡大"
+          "description": "The translation \"選択範囲の拡大（下）\" while technically correct, is a bit literal and clunky. It conveys the meaning but doesn't flow naturally in Japanese UI. \"Extend\" is somewhat abstract in this context and might benefit from a more direct phrasing.",
+          "suggestion": "「下方向への拡大」 or 「下へ選択範囲を拡大」"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of parentheses around '下' is not standard for UI labels in Japanese. Parentheses often imply a secondary or optional meaning, which isn't intended here.",
+          "suggestion": "Remove the parentheses. For example: 「下方向への拡大」or 「下へ選択範囲を拡大」"
         }
       ],
       "approved_at": null
@@ -131,8 +130,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '아래쪽으로 선택 확장' while technically correct, doesn't flow naturally in Korean for UI elements. It sounds a bit literal and robotic.",
-          "suggestion": "Consider '선택 영역 아래로 확장' or '아래로 선택 확대' for a more natural and idiomatic feel in a UI context. The best option will depend on the precise context within the application."
+          "description": "The translation '아래쪽으로 선택 확장' is a literal translation and while understandable, it's not the most natural or idiomatic Korean for \"Extend selection down.\" It sounds slightly awkward.",
+          "suggestion": "Consider alternatives like '선택 영역 아래로 확장' or '선택 항목 아래로 확장'. The best option depends on the overall tone and style of the user interface."
         }
       ],
       "approved_at": null
@@ -191,8 +190,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'තේරීම පහළට පතුරුවන්න' is understandable, it's a rather literal and slightly awkward translation of 'Extend selection down'. A more natural Sinhala phrasing would better convey the intended meaning.",
-          "suggestion": "A more idiomatic translation could be 'පෙselect කරපු කොටස පහළට වැඩි කරන්න' or 'පෙselect කරපු කොටස පහළට ගෙනත් එක් කරන්න'."
+          "description": "The translation 'තේරීම පහළට පතුරුවන්න' while conveying a general idea of extending selection down, doesn't precisely reflect the English meaning. 'Extend' implies a gradual or increasing expansion, whereas 'පතුරුවන්න' (pathuruwanna) means to spread or scatter.  A more accurate translation would convey the idea of expanding or broadening the selection downwards.",
+          "suggestion": "තේරීම පහළට විහිදුවන්න (Therim pahalata vihiduwanna) - which means 'expand the selection downwards' or  තේරීම පහළට වැඩි කරන්න (Therim pahalata wadi kornna) - which means 'increase selection downwards'."
         }
       ],
       "approved_at": null
@@ -203,8 +202,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Rozšíriť výber nadol' literally translates to 'Extend selection down'. However, in Slovak, 'nadol' means 'downwards'. The standard and more accurate term for 'down' in this context (extending a selection) would be 'dolu'.",
-          "suggestion": "Rozšíriť výber dolu"
+          "description": "The Slovak translation 'Rozšíriť výber nadol' literally translates to 'Extend selection down', but it's more natural to say 'Rozšíriť výber smerom nadol' or 'Rozšíriť výber dole'. While technically correct, it lacks fluency and common usage.",
+          "suggestion": "Rozšíriť výber smerom nadol"
         }
       ],
       "approved_at": null
@@ -215,7 +214,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Premakni izbiro navzdol' literally translates to 'Move selection down'. While understandable, 'Extend selection down' implies expanding the selection, not just moving it. A more accurate translation would convey the idea of expanding the selection.",
+          "description": "While 'Premakni izbiro navzdol' is understandable, a more accurate and natural translation of 'Extend selection down' would be 'Razširi izbiro navzdol'. 'Premakni' implies moving an existing selection, while 'Razširi' implies extending it.",
           "suggestion": "Razširi izbiro navzdol"
         }
       ],
@@ -227,7 +226,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Прошири селекцију доле' doesn't fully capture the meaning of 'Extend selection down.' While 'Прошири' (Proshiri) correctly conveys 'extend,' 'доле' (dole) meaning 'down' is a little too literal. A more natural translation might convey the idea of expanding the selection downwards, not just locating it 'down'.",
+          "description": "The translation \"Прошири селекцију доле\" while conveying the general idea of 'Extend selection down', isn't the most natural or accurate phrasing in Serbian. \"Прошири селекцију надоле\" would be a more idiomatic and accurate translation, implying 'downwards' or 'further down'.",
           "suggestion": "Прошири селекцију надоле"
         }
       ],
@@ -263,8 +262,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '向下扩展选定' while literally meaning 'extend selection down', doesn't fully capture the nuance of extending a selection downwards. It focuses on the 'extend' action, but the core concept of 'selection' might be lost or require further context.",
-          "suggestion": "考虑使用更强调选择区域向下的扩展，例如 '向下扩展选择范围' 或 '向下滑动选择' depending on the exact functionality."
+          "description": "The translation '向下扩展选定' while technically correct, doesn't quite capture the nuance of 'Extend selection down' in the context of hotkeys. It sounds a bit literal and formal. A more natural translation might prioritize clarity and brevity for a user interface element.",
+          "suggestion": "扩展向下选"
         }
       ],
       "approved_at": null

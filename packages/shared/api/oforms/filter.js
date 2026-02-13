@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,10 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
 import { toUrlParams } from "../../utils/common";
+import { validateAndFixObject } from "../../utils/filterValidator";
 
 const PAGE = "pagination[page]";
 const PAGE_SIZE = "pagination[pageSize]";
@@ -49,6 +49,11 @@ const DEFAULT_SORT_ORDER = "";
 const DEFAULT_CATEGORIZE_BY = "";
 const DEFAULT_CATEGORY_ID = "";
 const DEFAULT_EXTENSION = "pdf";
+
+const typeDefinition = {
+  sortBy: ["name_form", "updatedAt"],
+  sortOrder: ["asc", "desc"],
+};
 
 class OformsFilter {
   constructor(
@@ -76,6 +81,51 @@ class OformsFilter {
   }
 
   static getDefault(total = DEFAULT_TOTAL, extension = DEFAULT_EXTENSION) {
+    return new OformsFilter(
+      DEFAULT_PAGE,
+      DEFAULT_PAGE_SIZE,
+      DEFAULT_CATEGORIZE_BY,
+      DEFAULT_CATEGORY_ID,
+      DEFAULT_LOCALE,
+      DEFAULT_SEARCH,
+      extension,
+      DEFAULT_SORT_BY,
+      DEFAULT_SORT_ORDER,
+      total,
+    );
+  }
+
+  static getDefaultDocx(total = DEFAULT_TOTAL, extension = "docx") {
+    return new OformsFilter(
+      DEFAULT_PAGE,
+      DEFAULT_PAGE_SIZE,
+      DEFAULT_CATEGORIZE_BY,
+      DEFAULT_CATEGORY_ID,
+      DEFAULT_LOCALE,
+      DEFAULT_SEARCH,
+      extension,
+      DEFAULT_SORT_BY,
+      DEFAULT_SORT_ORDER,
+      total,
+    );
+  }
+
+  static getDefaultSpreadsheet(total = DEFAULT_TOTAL, extension = "xlsx") {
+    return new OformsFilter(
+      DEFAULT_PAGE,
+      DEFAULT_PAGE_SIZE,
+      DEFAULT_CATEGORIZE_BY,
+      DEFAULT_CATEGORY_ID,
+      DEFAULT_LOCALE,
+      DEFAULT_SEARCH,
+      extension,
+      DEFAULT_SORT_BY,
+      DEFAULT_SORT_ORDER,
+      total,
+    );
+  }
+
+  static getDefaultPresentation(total = DEFAULT_TOTAL, extension = "pptx") {
     return new OformsFilter(
       DEFAULT_PAGE,
       DEFAULT_PAGE_SIZE,
@@ -142,8 +192,10 @@ class OformsFilter {
   }
 
   toUrlParams = () => {
+    const fixedValidObject = validateAndFixObject(this, typeDefinition);
+
     const { categorizeBy, categoryId, locale, search, sortBy, sortOrder } =
-      this;
+      fixedValidObject;
 
     const dtoFilter = {};
     dtoFilter[CATEGORIZE_BY] = categorizeBy;
@@ -157,6 +209,8 @@ class OformsFilter {
   };
 
   toApiUrlParams = () => {
+    const fixedValidObject = validateAndFixObject(this, typeDefinition);
+
     const {
       page,
       pageSize,
@@ -167,7 +221,7 @@ class OformsFilter {
       extension,
       sortBy,
       sortOrder,
-    } = this;
+    } = fixedValidObject;
 
     const dtoFilter = {};
     dtoFilter[PAGE] = page;

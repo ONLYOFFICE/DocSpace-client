@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,18 +25,27 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useRef, useEffect } from "react";
-import moment from "moment";
 import classNames from "classnames";
+import type { DateTime } from "luxon";
 
 import ClockIcon from "PUBLIC_DIR/images/clock.react.svg";
 
 import { ButtonKeys } from "../../enums";
+
+import {
+  parseToDateTime,
+  formatDate,
+  addToDate,
+  subtractFromDate,
+} from "../../utils/date";
 
 import { TimePicker } from "../time-picker";
 import { DatePicker } from "../date-picker";
 
 import { DateTimePickerProps } from "./DateTimerPicker.types";
 import styles from "./DateTimePicker.module.scss";
+import { ComboBox, TOption } from "../combobox";
+import { useTranslation } from "react-i18next";
 
 const DateTimePicker = (props: DateTimePickerProps) => {
   const {
@@ -50,34 +59,74 @@ const DateTimePicker = (props: DateTimePickerProps) => {
     maxDate,
     locale,
     openDate,
+    dataTestId,
+    hideCross,
+    useMaxTime,
   } = props;
+
+  const { t } = useTranslation("Common");
+
+  const options = [
+    { key: "AM", label: t("AM") },
+    { key: "PM", label: t("PM") },
+  ];
 
   const [isTimeFocused, setIsTimeFocused] = useState(false);
 
-  const [date, setDate] = useState(initialDate ? moment(initialDate) : null);
+  const [date, setDate] = useState<DateTime | null>(
+    initialDate ? parseToDateTime(initialDate) : null,
+  );
+  const [isTwelveHourFormat, setIsTwelveHourFormat] = useState(true);
+  const initialDateTime = initialDate ? parseToDateTime(initialDate) : null;
+  const [selectedFormat, setSelectedFormat] = useState<TOption>(
+    initialDateTime && initialDateTime.hour >= 12 ? options[1] : options[0],
+  );
 
   const showTimePicker = () => setIsTimeFocused(true);
   const hideTimePicker = () => setIsTimeFocused(false);
 
-  const handleChange = (d: moment.Moment | null) => {
+  const handleChange = (d: DateTime | null) => {
+    if (isTwelveHourFormat && d) {
+      setSelectedFormat(d.hour >= 12 ? options[1] : options[0]);
+    }
+
     onChange?.(d);
     setDate(d);
   };
 
-  const timePickerRef = useRef<HTMLInputElement | null>(null);
+  const timePickerRef = useRef<HTMLDivElement | null>(null);
 
   const handleClick = (e: MouseEvent) => {
     const target = e.target as HTMLElement;
+    if (!target) return;
+
+    const dropDownElement =
+      target.tagName === "SPAN" ? target.parentElement : target;
+    const containsDropDown =
+      dropDownElement?.classList.contains("drop-down-item");
+
     if (
-      target &&
       timePickerRef?.current &&
-      !timePickerRef?.current?.contains(target)
-    )
+      !timePickerRef?.current?.contains(target) &&
+      !containsDropDown
+    ) {
       setIsTimeFocused(false);
+    }
   };
   const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === ButtonKeys.enter || event.key === ButtonKeys.tab) {
       setIsTimeFocused(false);
+    }
+  };
+
+  const onSelectFormat = (opt: TOption) => {
+    setSelectedFormat(opt);
+    if (!date) return;
+
+    if (opt.key === "AM") {
+      handleChange(subtractFromDate(date, 12, "hours"));
+    } else {
+      handleChange(addToDate(date, 12, "hours"));
     }
   };
 
@@ -90,13 +139,24 @@ const DateTimePicker = (props: DateTimePickerProps) => {
     };
   }, []);
 
+  useEffect(() => {
+    // Check if locale uses 12-hour time format
+    // Most locales use 24-hour format except US, AU, PH, etc.
+    const twelveHourLocales = ["en-US", "en-AU", "en-PH", "en"];
+    const is12Hour =
+      twelveHourLocales.some((l) => locale.startsWith(l)) ||
+      locale === "en-GB";
+
+    setIsTwelveHourFormat(is12Hour);
+  }, [initialDate, locale]);
+
   return (
     <div
       className={classNames(styles.selectors, className, {
         [styles.hasError]: hasError,
       })}
       id={id}
-      data-testid="date-time-picker"
+      data-testid={dataTestId ?? "date-time-picker"}
       aria-label={selectDateText}
       aria-invalid={hasError}
     >
@@ -109,6 +169,8 @@ const DateTimePicker = (props: DateTimePickerProps) => {
         locale={locale}
         openDate={openDate}
         outerDate={date}
+        hideCross={hideCross}
+        useMaxTime={useMaxTime}
       />
       <span
         className={styles.timeSelector}
@@ -116,15 +178,26 @@ const DateTimePicker = (props: DateTimePickerProps) => {
       >
         {date !== null ? (
           isTimeFocused ? (
-            <TimePicker
-              initialTime={date}
-              onChange={handleChange}
-              tabIndex={0}
-              onBlur={hideTimePicker}
-              focusOnRender
-              forwardedRef={timePickerRef}
-              aria-label="Time picker"
-            />
+            <div className={styles.timePicker} ref={timePickerRef}>
+              <TimePicker
+                initialTime={date}
+                onChange={handleChange}
+                tabIndex={0}
+                onBlur={hideTimePicker}
+                focusOnRender
+                aria-label="Time picker"
+                isTwelveHourFormat={isTwelveHourFormat}
+                meridiem={String(selectedFormat.key)}
+              />
+              {isTwelveHourFormat ? (
+                <ComboBox
+                  options={options}
+                  selectedOption={selectedFormat}
+                  onSelect={onSelectFormat}
+                  scaledOptions
+                />
+              ) : null}
+            </div>
           ) : (
             <span
               className={classNames(styles.timeCell, {
@@ -133,7 +206,7 @@ const DateTimePicker = (props: DateTimePickerProps) => {
               onClick={showTimePicker}
               data-testid="date-time-picker-time-display"
               role="button"
-              aria-label={`Current time: ${date.format("HH:mm")}`}
+              aria-label={`Current time: ${formatDate(date, "HH:mm")}`}
               tabIndex={0}
             >
               <ClockIcon
@@ -141,7 +214,9 @@ const DateTimePicker = (props: DateTimePickerProps) => {
                 aria-hidden="true"
                 data-testid="date-time-picker-clock-icon"
               />
-              {date.format("HH:mm")}
+              {isTwelveHourFormat
+                ? formatDate(date, "hh:mm a")
+                : formatDate(date, "HH:mm")}
             </span>
           )
         ) : null}

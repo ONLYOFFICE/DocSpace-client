@@ -3,7 +3,7 @@
   "content": "Select Delivery time",
   "content_en_sha1_hash": "cb7f00b15366fe4367c92e2cb5d4888fcd7ea603",
   "created_at": "2025-05-19T21:30:49.835Z",
-  "updated_at": "2025-05-21T00:56:37.027Z",
+  "updated_at": "2025-08-04T07:30:01.458Z",
   "comment": {
     "text": "SelectDeliveryTime is used as a button title to prompt users to select their preferred delivery time when viewing portal settings. This key appears in a \"Add Button\" component within a FilterDialog sub-component.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/FilterDialog/DeliveryDatePicker.js",
-      "line_number": 311,
+      "line_number": 315,
       "context": "<TimePickerCell>\n <SelectorAddButton\n title={t(\"Common:AddButton\")}\n onClick={showTimePicker}\n className=\"mr-8 add-delivery-time-button\"\n label={t(\"SelectDeliveryTime\")}\n />\n </TimePickerCell>\n )\n ) : null}\n </Selectors>",
       "module": "/packages/client"
     }
@@ -66,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, 'Seleccione plazo de entrega' is a rather formal and literal translation. A more natural and user-friendly translation would be 'Elige hora de entrega' or 'Selecciona la hora de entrega'.",
-          "suggestion": "Elige hora de entrega"
+          "description": "While 'Seleccione plazo de entrega' is understandable, it's not the most natural or idiomatic translation of 'Select Delivery time.' 'Plazo de entrega' implies a timeframe rather than the act of selection.",
+          "suggestion": "Seleccione la hora de entrega"
         }
       ],
       "approved_at": null
@@ -93,7 +93,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Seleziona Tempo di consegna' is a very literal translation. A more natural phrasing in Italian would be 'Scegli orario di consegna' or 'Imposta orario di consegna'.",
+          "suggestion": "Scegli orario di consegna"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -102,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '配信時間の選択' is technically correct but could be improved for a more natural and user-friendly feel. '配信時間の選択' directly translates to 'Selection of Delivery Time.' A more common and natural phrasing would be '配達時間を選択' (Haitatsu jikan o sentaku).",
-          "suggestion": "配達時間を選択"
+          "description": "The translation '配信時間の選択' while technically correct, doesn't fully capture the nuance of 'Select Delivery time'. It's a bit formal. A more natural and user-friendly translation would be something like '配達時間を選ぶ' (Haitatsu jikan o erabu).",
+          "suggestion": "配達時間を選ぶ (Haitatsu jikan o erabu)"
         }
       ],
       "approved_at": null
@@ -114,7 +120,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation \"전송 시간 선택\" translates to \"Select Sending time,\" which is not the intended meaning of \"Select Delivery time.\" It should refer to the time of delivery, not the time of transmission.",
+          "description": "The Korean translation \"전송 시간 선택\" literally translates to 'Select Sending time'. The English content refers to 'Delivery time,' which needs to be accurately conveyed.",
           "suggestion": "배송 시간 선택"
         }
       ],
@@ -162,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Selectare Timp de livrare' is a literal translation of 'Select Delivery time' but sounds unnatural in Romanian. 'Selectare' implies a selection process, which isn't the most fluent way to convey the meaning of choosing a delivery time.",
-          "suggestion": "A more natural translation would be 'Alege timpul de livrare' or 'Selectează timpul de livrare'."
+          "description": "The translation 'Selectare Timp de livrare' is a literal translation but not the most natural phrasing in Romanian. 'Selectare' is somewhat formal and 'Timp de livrare' is a bit clunky. A more natural phrasing would convey the meaning of selecting a delivery time.",
+          "suggestion": "A more natural translation would be 'Alegere ora de livrare' or 'Selectați ora de livrare'."
         }
       ],
       "approved_at": null
@@ -174,7 +180,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Выбрать время отправки' translates to 'Select delivery time' but more accurately means 'Select sending time'. While related to delivery, it's not the most precise translation of 'delivery time'. A more accurate translation might be 'Выбрать время доставки'.",
+          "description": "The English phrase \"Select Delivery time\" refers to choosing a delivery time slot. The Russian translation \"Выбрать время отправки\" translates to \"Select sending time,\" which is not the same. \"Отправки\" refers to sending, not delivery.",
           "suggestion": "Выбрать время доставки"
         }
       ],
@@ -183,18 +189,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'බාරදෙන' might be confusing. It literally translates to 'giving' or 'handing over', which isn't the intended meaning of 'delivery'.",
-          "suggestion": "Consider 'සැපයුම් කාලය' (sapayu kalaaya) or 'රැගෙන ඒමේ කාලය' (ragnea emee kalaaya) which are closer to 'delivery time'."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While grammatically correct, the direct translation 'බාරදෙන වේලාව තෝරන්න' doesn't quite capture the nuance of 'Select Delivery time'. It implies selecting a time to hand something over.",
-          "suggestion": "Consider a phrasing closer to 'සැපයුම් කාලය තෝරන්න' (sapayu kalaaya thooranna) which translates to 'Select delivery time'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -215,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Одабери време доставе' is not the most natural or accurate translation of 'Select Delivery time'. While 'Одабери' is correct for 'Select', 'време доставе' is a less common and slightly awkward phrasing for 'delivery time'.",
-          "suggestion": "Избери време доставе (Izberi vreme dostave) or Одаберите време доставе (Odaberite vreme dostave)"
+          "description": "The Serbian translation 'Одабери време доставе' is not a fully accurate translation of 'Select Delivery time'. It lacks the word 'time' in the Serbian sentence, implying 'Choose delivery'.",
+          "suggestion": "Одабери време доставе"
         }
       ],
       "approved_at": null
@@ -239,7 +234,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Виберіть час доставлення' is a literal translation but could be more natural. 'Доставлення' is less common than 'доставки'.",
+          "description": "The translation 'Виберіть час доставлення' while understandable, isn't the most natural or precise translation of 'Select Delivery time'. 'Доставлення' is a more formal term. A more common and fluent option would be 'Виберіть час доставки'.",
           "suggestion": "Виберіть час доставки"
         }
       ],
@@ -251,7 +246,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Chọn thời gian Gửi' is not accurate. 'Gửi' means 'send' and doesn't convey the meaning of 'delivery time'. The intended meaning is to choose a time for delivery.",
+          "description": "The Vietnamese translation \"Chọn thời gian Gửi\" translates to \"Select Delivery Send\" which is not accurate. It should translate to \"Select Delivery Time\" or something similar indicating the time for delivery.",
           "suggestion": "Chọn thời gian giao hàng"
         }
       ],
@@ -263,8 +258,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '选择传递时间' (Xuǎnzé chuándì shíjiān) literally translates to 'Select delivery time'. However, '传递' (chuándì) implies transmitting or conveying, which isn't the typical meaning for delivery time selection. A more natural and accurate translation would focus on choosing a delivery slot.",
-          "suggestion": "选择送货时间 (Xuǎnzé sònghuò shíjiān)"
+          "description": "The translation \"选择传递时间\" (xuǎnzé chuándì shíjiān) is not the most natural or accurate translation of \"Select Delivery time\".  '传递' (chuándì) implies a transfer of goods, not the act of selecting a delivery time.",
+          "suggestion": "选择送货时间 (xuǎnzé sònghuò shíjiān) - This translates to \"Select Delivery time\" and is a more common and natural phrasing."
         }
       ],
       "approved_at": null

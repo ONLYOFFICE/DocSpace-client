@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,8 +31,11 @@ import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Avatar } from "@docspace/shared/components/avatar";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import { toastr } from "@docspace/shared/components/toast";
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
+import { Link } from "@docspace/shared/components/link";
+import { useState } from "react";
+import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
 
 const StyledContainer = styled.div`
   display: flex;
@@ -53,6 +56,20 @@ const StyledContainer = styled.div`
   .payer-info {
     margin-inline-end: 3px;
   }
+    
+  .payer-info_container{
+    display: flex;
+    gap:8px;
+    flex-wrap:wrap;
+    align-items: center;
+
+    .loader_container{
+      .refresh-data_loader{
+        height:16px;
+      }
+    }
+  }
+
   .payer-info_wrapper {
     height: max-content;
     display: grid;
@@ -76,7 +93,14 @@ const StyledContainer = styled.div`
       cursor: pointer;
       text-decoration: underline;
     }
-  }
+
+    .payer-info_refresh-data {
+      cursor: ${(props) => (props.isDisabled ? "default" : "pointer")};
+      color: ${(props) =>
+        props.isDisabled
+          ? props.theme.client.settings.payment.payerInfo.disableColor
+          : "inherit"};
+    }
 `;
 
 const PayerInformation = ({
@@ -87,10 +111,39 @@ const PayerInformation = ({
   payerInfo,
   email,
   isNotPaidPeriod,
-
+  fetchPayerInfo = async () => {},
   isStripePortalAvailable,
 }) => {
-  const { t } = useTranslation("Payments");
+  const { t } = useTranslation(["Payments", "Common"]);
+
+  const [isDisabled, setDisabled] = useState(false);
+  const goToStripePortal = () => {
+    accountLink
+      ? window.open(accountLink, "_blank")
+      : toastr.error(t("Common:UnexpectedError"));
+  };
+
+  const onRefreshData = async () => {
+    setDisabled(true);
+    try {
+      await fetchPayerInfo(true);
+    } catch (error) {
+      let errorMessage = "";
+
+      if (typeof error === "object") {
+        errorMessage =
+          error?.response?.data?.error?.message ||
+          error?.statusText ||
+          error?.message ||
+          "";
+      } else if (typeof error === "string") {
+        errorMessage = error;
+      }
+
+      toastr.error(errorMessage || t("Common:UnexpectedError"));
+    }
+    setDisabled(false);
+  };
 
   const renderTooltip = (
     <HelpButton
@@ -105,6 +158,7 @@ const PayerInformation = ({
           </Text>
         </>
       }
+      dataTestId="payer_info_help_button"
     />
   );
 
@@ -136,57 +190,88 @@ const PayerInformation = ({
 
   const unknownPayerInformation = (
     <div>
-      <Text as="span" fontSize="13px" noSelect>
+      <Text as="span" fontSize="13px">
         {unknownPayerDescription()}
       </Text>
       <div>
         {isStripePortalAvailable ? (
-          <ColorTheme
-            noSelect
-            fontWeight={600}
-            href={accountLink}
-            tag="a"
-            themeId={ThemeId.Link}
-            target="_blank"
-            className="payer-info_account-link"
-          >
-            {t("ChooseNewPayer")}
-          </ColorTheme>
+          <div className="payer-info_container">
+            <Trans
+              t={t}
+              i18nKey="ChooseNewPayerOrRefrashData"
+              components={{
+                1: (
+                  <Link
+                    noSelect
+                    fontWeight={600}
+                    tag="a"
+                    target="_blank"
+                    className="payer-info_account-link"
+                    color="accent"
+                    onClick={goToStripePortal}
+                    dataTestId="stripe_customer_portal_link"
+                  />
+                ),
+                2: (
+                  <Link
+                    noSelect
+                    fontWeight={600}
+                    onClick={isDisabled ? () => {} : onRefreshData}
+                    textDecoration="underline dotted"
+                    className="payer-info_refresh-data"
+                    dataTestId="stripe_customer_refresh_data"
+                  />
+                ),
+              }}
+            />
+            {isDisabled ? (
+              <div className="loader_container">
+                <Loader
+                  color=""
+                  size="16px"
+                  type={LoaderTypes.track}
+                  className="refresh-data_loader"
+                />
+              </div>
+            ) : null}
+          </div>
         ) : null}
       </div>
     </div>
   );
 
   const payerInformation = isStripePortalAvailable ? (
-    <ColorTheme
+    <Link
       noSelect
       fontWeight={600}
-      href={accountLink}
       className="payer-info_account-link"
       tag="a"
-      themeId={ThemeId.Link}
       target="_blank"
+      color="accent"
+      onClick={goToStripePortal}
+      dataTestId="stripe_customer_portal_link"
     >
       {t("StripeCustomerPortal")}
-    </ColorTheme>
+    </Link>
   ) : (
-    <ColorTheme
+    <Link
       fontWeight={600}
       href={`mailto:${email}`}
       tag="a"
-      themeId={ThemeId.Link}
+      color="accent"
+      dataTestId="payer_email_link"
     >
       {email}
-    </ColorTheme>
+    </Link>
   );
 
   const payerName = () => {
-    let emailUnfoundedUser;
+    let emailUnfoundedUser = "";
 
-    if (email) emailUnfoundedUser = `«${email}»`;
+    if (email) emailUnfoundedUser = `"${email}"`;
 
     return (
-      <Text as="span" fontWeight={600} noSelect fontSize="14px">
+      <Text as="span" fontWeight={600} fontSize="14px">
         {payerInfo ? (
           payerInfo.displayName
         ) : (
@@ -212,7 +297,7 @@ const PayerInformation = ({
     : {};
 
   return (
-    <StyledContainer style={style}>
+    <StyledContainer style={style} isDisabled={isDisabled}>
       <div className="payer-info_avatar">
         <Avatar
           size="base"
@@ -241,21 +326,16 @@ const PayerInformation = ({
 
 export default inject(
   ({ settingsStore, paymentStore, userStore, currentTariffStatusStore }) => {
-    const {
-      accountLink,
-      isStripePortalAvailable,
-      payerInfo: walletPayer,
-      payer,
-    } = paymentStore;
+    const { accountLink, isStripePortalAvailable } = paymentStore;
     const { theme } = settingsStore;
     const {
       isGracePeriod,
       isNotPaidPeriod,
-      payerInfo: paymentPayer,
+      walletCustomerEmail,
+      walletCustomerInfo,
+      fetchPayerInfo,
     } = currentTariffStatusStore;
     const { user } = userStore;
-
-    const payerInfo = paymentPayer ?? walletPayer;
 
     return {
       isStripePortalAvailable,
@@ -264,8 +344,9 @@ export default inject(
       accountLink,
       isGracePeriod,
       isNotPaidPeriod,
-      email: payer,
-      payerInfo,
+      email: walletCustomerEmail,
+      payerInfo: walletCustomerInfo,
+      fetchPayerInfo,
     };
   },
 )(observer(PayerInformation));

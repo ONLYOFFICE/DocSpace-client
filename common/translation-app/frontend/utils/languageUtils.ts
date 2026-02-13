@@ -19,6 +19,7 @@ const cultures = [
   "ro",
   "sk",
   "sl",
+  "sq-AL",
   "fi",
   "vi",
   "tr",
@@ -81,14 +82,15 @@ export const languageMap: Record<string, string> = {
   "sr-Cyrl-RS": "Serbian (Cyrillic)",
   "sr-Latn-RS": "Serbian (Latin)",
   "uk-UA": "Ukrainian",
+  "sq-AL": "Albanian",
 };
 
 // Check if all cultures are in the languageMap, if not, add them with their code as name
-cultures.forEach(code => {
+cultures.forEach((code) => {
   if (!languageMap[code]) {
     // Extract base code if it's a region-specific code
     const baseCode = code.includes("-") ? code.split("-")[0] : code;
-    
+
     // If we have a name for the base code, use it as a base for the region name
     if (baseCode !== code && languageMap[baseCode]) {
       languageMap[code] = code;
@@ -114,11 +116,11 @@ export const LANGUAGE_COLORS: Record<string, string> = {
   pt: "#a0c6b8", // Portugal - Soft green/red blend
   ja: "#f0d0d0", // Japan - Soft white/red blend
   ko: "#c3d4e5", // South Korea - Soft blue/red/black blend
-  nl: "#c0d3e8", // Netherlands - Soft red/white/blue blend 
+  nl: "#c0d3e8", // Netherlands - Soft red/white/blue blend
   pl: "#e0c4c4", // Poland - Soft white/red blend
   cs: "#b7c3e1", // Czech Republic - Soft blue/white/red blend
   fi: "#c8d6e5", // Finland - Soft blue/white blend
-  
+
   // Additional languages
   tr: "#e5c3c3", // Turkey - Soft red with white
   ar: "#d1d6be", // Arabic (various) - Soft green blend
@@ -137,12 +139,12 @@ export const LANGUAGE_COLORS: Record<string, string> = {
 };
 
 // Generate colors for all cultures not yet defined
-cultures.forEach(code => {
+cultures.forEach((code) => {
   // Check if this culture code already has a color
   if (!LANGUAGE_COLORS[code]) {
     // Extract base code if it's a region-specific code
     const baseCode = code.includes("-") ? code.split("-")[0] : code;
-    
+
     // If we have a color for the base code, use it
     if (baseCode !== code && LANGUAGE_COLORS[baseCode]) {
       LANGUAGE_COLORS[code] = LANGUAGE_COLORS[baseCode];
@@ -152,13 +154,14 @@ cultures.forEach(code => {
       for (let i = 0; i < code.length; i++) {
         hash = code.charCodeAt(i) + ((hash << 5) - hash);
       }
-      
+
       // Convert to a soft pastel hex color
-      let r = (hash & 0xFF) % 156 + 100; // 100-255 range for a softer color
-      let g = ((hash >> 8) & 0xFF) % 156 + 100;
-      let b = ((hash >> 16) & 0xFF) % 156 + 100;
-      
-      LANGUAGE_COLORS[code] = `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
+      let r = ((hash & 0xff) % 156) + 100; // 100-255 range for a softer color
+      let g = (((hash >> 8) & 0xff) % 156) + 100;
+      let b = (((hash >> 16) & 0xff) % 156) + 100;
+
+      LANGUAGE_COLORS[code] =
+        `#${r.toString(16).padStart(2, "0")}${g.toString(16).padStart(2, "0")}${b.toString(16).padStart(2, "0")}`;
     }
   }
 });
@@ -187,9 +190,12 @@ export const getLanguageColor = (languageCode: string): string => {
 
   // Check if this is a language in our supported cultures
   const isSupportedCulture = cultures.includes(languageCode);
-  
+
   // If not supported and not a region variant of a supported culture, return a neutral gray
-  if (!isSupportedCulture && !cultures.some(c => languageCode.startsWith(c.split('-')[0]))) {
+  if (
+    !isSupportedCulture &&
+    !cultures.some((c) => languageCode.startsWith(c.split("-")[0]))
+  ) {
     return "#aaaaaa"; // Neutral gray for unsupported languages
   }
 
@@ -213,11 +219,11 @@ export const getLanguageColor = (languageCode: string): string => {
   }
 
   // Convert to a soft pastel hex color
-  let r = (hash & 0xFF) % 156 + 100; // 100-255 range for a softer color
-  let g = ((hash >> 8) & 0xFF) % 156 + 100;
-  let b = ((hash >> 16) & 0xFF) % 156 + 100;
-  
-  return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
+  let r = ((hash & 0xff) % 156) + 100; // 100-255 range for a softer color
+  let g = (((hash >> 8) & 0xff) % 156) + 100;
+  let b = (((hash >> 16) & 0xff) % 156) + 100;
+
+  return `#${r.toString(16).padStart(2, "0")}${g.toString(16).padStart(2, "0")}${b.toString(16).padStart(2, "0")}`;
 };
 
 /**

@@ -1,5 +1,5 @@
 /*
- * (c) Copyright Ascensio System SIA 2009-2025
+ * (c) Copyright Ascensio System SIA 2009-2026
  *
  * This program is a free software product.
  * You can redistribute it and/or modify it under the terms
@@ -48,7 +48,7 @@ export default function useDownloadActions() {
 
   const { openDialog } = useDialogsStore();
   const { setSortedFiles } = useDownloadDialogStore();
-  const { isDocument, isMasterForm, isPresentation, isSpreadsheet } =
+  const { isDocument, isMasterForm, isPresentation, isSpreadsheet, isDiagram } =
     useFileType();
   const { downloadFiles } = useDownloadFiles();
 
@@ -102,6 +102,7 @@ export default function useDownloadActions() {
         isSpreadsheet,
         isPresentation,
         isMasterForm,
+        isDiagram,
       ),
     );
     openDialog(SDKDialogs.DownloadDialog);
@@ -111,6 +112,7 @@ export default function useDownloadActions() {
     isMasterForm,
     isPresentation,
     isSpreadsheet,
+    isDiagram,
     openDialog,
     setSortedFiles,
   ]);

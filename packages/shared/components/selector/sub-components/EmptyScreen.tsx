@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,14 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useContext } from "react";
+import React, { use } from "react";
 import { useTranslation } from "react-i18next";
 
 import PlusSvgUrl from "PUBLIC_DIR/images/icons/12/plus.svg?url";
 import UpSvgUrl from "PUBLIC_DIR/images/up.svg?url";
 import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
 
-import { classNames } from "@docspace/shared/utils";
+import { classNames } from "../../../utils";
 
 import { RoomsType } from "../../../enums";
 
@@ -42,6 +42,7 @@ import { Link, LinkType } from "../../link";
 
 import useCreateDropDown from "../hooks/useCreateDropDown";
 import { EmptyScreenContext } from "../contexts/EmptyScreen";
+import { BreadCrumbsContext } from "../contexts/BreadCrumbs";
 
 import NewItemDropDown from "./NewItemDropDown";
 import { SearchContext, SearchDispatchContext } from "../contexts/Search";
@@ -51,7 +52,8 @@ import styles from "../Selector.module.scss";
 import { EmptyScreenProps } from "../Selector.types";
 
 const linkStyles = {
-  isHovered: true,
+  noHover: true,
+  isHovered: false,
   type: LinkType.action,
   fontWeight: "600",
   className: "empty-folder_link",
@@ -62,6 +64,7 @@ const EmptyScreen = ({
   withSearch,
   items,
   inputItemVisible,
+  hideBackButton,
 }: EmptyScreenProps) => {
   const {
     emptyScreenImage,
@@ -70,12 +73,14 @@ const EmptyScreen = ({
     searchEmptyScreenImage,
     searchEmptyScreenHeader,
     searchEmptyScreenDescription,
-  } = useContext(EmptyScreenContext);
+  } = use(EmptyScreenContext);
+  const { withBreadCrumbs, breadCrumbs, onSelectBreadCrumb } =
+    React.use(BreadCrumbsContext);
 
   const { t } = useTranslation(["Common"]);
 
-  const { onClearSearch } = useContext(SearchContext);
-  const setIsSearch = useContext(SearchDispatchContext);
+  const { onClearSearch } = use(SearchContext);
+  const setIsSearch = use(SearchDispatchContext);
   const { isOpenDropDown, setIsOpenDropDown, onCloseDropDown } =
     useCreateDropDown();
 
@@ -103,6 +108,10 @@ const EmptyScreen = ({
     createItem.onCreateClick?.();
   };
 
+  const onBackClick = () => {
+    onSelectBreadCrumb?.(breadCrumbs?.[breadCrumbs.length - 2]);
+  };
+
   if (
     !withSearch &&
     createItem?.isRoomsOnly &&
@@ -128,22 +137,20 @@ const EmptyScreen = ({
         {currentHeader}
       </Heading>
 
-      <Text className="empty-description" noSelect>
-        {currentDescription}
-      </Text>
-      {createItem ? (
-        <div className="buttons">
-          <div className="empty-folder_container-links">
+      <Text className="empty-description">{currentDescription}</Text>
+      <div className="buttons">
+        {createItem ? (
+          <div
+            className="empty-folder_container-links"
+            onClick={onCreateClickAction}
+          >
             <IconButton
               className="empty-folder_container-icon"
               size={12}
-              onClick={onCreateClickAction}
               iconName={PlusSvgUrl}
               isFill
             />
-            <Link {...linkStyles} onClick={onCreateClickAction}>
-              {items[0].label}
-            </Link>
+            <Link {...linkStyles}>{items[0].label}</Link>
             {isOpenDropDown && createItem && createItem.dropDownItems ? (
               <NewItemDropDown
                 dropDownItems={createItem.dropDownItems}
@@ -152,31 +159,30 @@ const EmptyScreen = ({
               />
             ) : null}
           </div>
-          <div className="empty-folder_container-links">
+        ) : null}
+
+        {(withBreadCrumbs || createItem) && (!hideBackButton || withSearch) ? (
+          <div
+            className="empty-folder_container-links"
+            onClick={
+              withSearch
+                ? () => onClearSearch?.(() => setIsSearch(false))
+                : onBackClick
+            }
+          >
             <IconButton
               className="empty-folder_container-icon"
               size={12}
-              onClick={
-                withSearch
-                  ? () => onClearSearch?.(() => setIsSearch(false))
-                  : createItem.onBackClick
-              }
               iconName={withSearch ? ClearEmptyFilterSvgUrl : UpSvgUrl}
               isFill
             />
-            <Link
-              {...linkStyles}
-              onClick={
-                withSearch
-                  ? () => onClearSearch?.(() => setIsSearch(false))
-                  : createItem.onBackClick
-              }
-            >
+
+            <Link {...linkStyles}>
               {withSearch ? t("Common:ClearFilter") : t("Common:Back")}
             </Link>
           </div>
-        </div>
-      ) : null}
+        ) : null}
+      </div>
     </div>
   );
 };

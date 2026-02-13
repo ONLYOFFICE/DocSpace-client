@@ -1,0 +1,28 @@
+{
+  "key_path": "AIProviderSettingDescription",
+  "content": "Connect your own AI service to unlock advanced features in {{productName}}. Once added, it will be accessible to all users in {{aiChats}}.",
+  "content_en_sha1_hash": "a65fbd5865591bc45637f4aadcb15bfb36b35fad",
+  "created_at": "2025-12-23T10:30:50.784Z",
+  "updated_at": "2025-12-23T10:41:10.159Z",
+  "comment": {
+    "text": "This text describes how to connect a custom AI service to unlock advanced features within the product. It appears as a description in the AI settings section, informing users that the connected AI service will be available to all users in the AI chat area. Translators should ensure the language accurately conveys the benefit of integrating a third-party AI provider.",
+    "is_auto": true,
+    "updated_at": "2025-12-23T10:41:10.159Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/index.tsx",
+      "line_number": 149,
+      "context": "if (!aiProvidersInitied) return <ProvidersLoader />;\n \n return (\n <div className={styles.aiProvider}>\n <Text className={styles.description}>\n {t(\"AISettings:AIProviderSettingDescription\", {\n productName: t(\"Common:ProductName\"),\n aiChats: t(\"Common:AIChats\"),\n })}\n </Text>\n {aiProviderSettingsUrl ? (",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

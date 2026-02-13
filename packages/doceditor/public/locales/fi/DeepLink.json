@@ -1,5 +1,7 @@
 {
+  "DeepLinkOnlyAppText": "Voit avata dokumentin vain mobiilisovelluksessa.",
   "DeepLinkText": "Voit avata asiakirjan portaalissa tai mobiilisovelluksessa",
+  "DownloadApp": "Lataa sovellus",
   "OpenInApp": "Avaa sovelluksessa",
   "OpeningDocument": "Avataan asiakirjaa",
   "RememberChoice": "Muista valinta seuraavan kerran asiakirjoja avatessa",

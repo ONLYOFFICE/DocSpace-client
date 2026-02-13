@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -101,12 +101,11 @@ const TableRow = (props: TableRowProps) => {
     onChangeApiKeyParams,
     onDeleteApiKey,
     onEditApiKey,
-    permissions,
   } = props;
 
   const { t } = useTranslation(["Common"]);
 
-  const selectedOption = getItemPermissions(permissions, item.permissions);
+  const selectedOption = getItemPermissions(item.permissions);
 
   const permissionTranslation = getPermissionsOptionTranslation(
     selectedOption,
@@ -141,6 +140,7 @@ const TableRow = (props: TableRowProps) => {
             <ApiKeysLifetimeIcon
               t={t}
               item={item}
+              expiresAt={item.expiresAt}
               expiresAtDate={expiresAtDate}
             />
           </div>

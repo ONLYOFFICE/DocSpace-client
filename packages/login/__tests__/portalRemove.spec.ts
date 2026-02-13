@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,12 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
+
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 import { expect, test } from "./fixtures/base";
-import { endpoints } from "@docspace/shared/__mocks__/e2e";
 
 const URL = "/login/confirm/PortalRemove";
-const NEXT_REQUEST_URL = "*/**/login/confirm/PortalRemove";
 
 const QUERY_PARAMS = [
   {
@@ -41,44 +41,38 @@ const QUERY_PARAMS = [
     value: "123",
   },
   {
-    name: "email",
-    value: "mail@mail.com",
+    name: "encemail",
+    value: "b5COc6kRm3veeYqA72sOfA&uid=66faa6e4-f133-11ea-b126-00ffeec8b4ef",
   },
 ];
 
 const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
-const NEXT_REQUEST_URL_WITH_PARAMS = getUrlWithQueryParams(
-  NEXT_REQUEST_URL,
-  QUERY_PARAMS,
-);
 
-test("portal remove render", async ({ page }) => {
-  await page.goto(URL_WITH_PARAMS);
+test("portal remove render", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "portal-remove",
     "portal-remove-render.png",
   ]);
 });
 
-test("portal remove delete", async ({ page, mockRequest }) => {
-  await mockRequest.router([endpoints.deletePortal]);
-  await page.goto(URL_WITH_PARAMS);
+test("portal remove delete", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await page.getByRole("button", { name: "Delete" }).click();
+  const deleteButton = page.getByTestId("delete_portal_button");
+  await deleteButton.click();
 
-  await page
-    .getByRole("button", { name: "Delete" })
-    .waitFor({ state: "detached" });
+  await deleteButton.waitFor({ state: "detached" });
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "portal-remove",
     "portal-remove-delete.png",
   ]);
 
-  await page.getByTestId("link").click();
+  await page.getByTestId("redirect_site_link").click();
 
   await page.waitForURL(new RegExp("^(http|https)://(.*)"), {
     waitUntil: "commit",
@@ -91,14 +85,14 @@ test("portal remove delete", async ({ page, mockRequest }) => {
   );
 });
 
-test("portal remove cancel", async ({ page }) => {
-  await page.goto(URL_WITH_PARAMS);
+test("portal remove cancel", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await page.getByRole("button", { name: "Cancel" }).click();
+  await page.getByTestId("cancel_button").click();
 
-  await page.waitForURL("/", { waitUntil: "load" });
+  await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "portal-remove",
     "portal-remove-cancel.png",

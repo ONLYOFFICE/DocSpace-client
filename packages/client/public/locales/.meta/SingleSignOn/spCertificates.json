@@ -3,7 +3,7 @@
   "content": "SP Certificates",
   "content_en_sha1_hash": "ddb5368e6f2802175629771e18ffdae9be88db3d",
   "created_at": "2025-05-19T21:30:50.156Z",
-  "updated_at": "2025-05-21T01:52:41.583Z",
+  "updated_at": "2025-05-24T03:06:24.690Z",
   "comment": {
     "text": "\"SP Certificates\" - This translation key is used to display a label for Single Sign-On certificates in the PortalSettings UI. It typically appears as a button or modal title, guiding users to select their SP certificates.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"شهادات SP\" is a direct transliteration of 'SP Certificates' rather than a proper translation conveying the meaning. 'SP' is an acronym and should ideally be explained or rendered in a way that makes sense in the Saudi Arabian context. While understandable, it's not the most natural rendering.",
+          "suggestion": "Consider translating 'SP' to its full meaning if possible or leaving it as 'SP' and adding a brief explanation elsewhere if necessary. A more contextual translation might involve describing the certificates' purpose or issuer."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -42,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Сертификати на доставчика на услуги\" is a literal translation of 'Service Provider Certificates,' which is more accurate than 'SP Certificates'. While understandable, it's less concise and may not be the best choice depending on the context. 'SP Certificates' typically refers to certificates used by Service Providers in a Single Sign-On context.",
-          "suggestion": "Consider \"Сертификати на доставчици на услуги\" or \"Сертификати на SP\" if 'SP' is already defined or understood in the target audience. If it's intended to be more technical, \"Сертификати на доставчика на услуги\" is acceptable but a more concise option would be preferred."
+          "description": "The translation 'Сертификати на доставчика на услуги' is a literal translation that doesn't quite capture the meaning of 'SP Certificates' in the context of Single Sign-On. 'SP' refers to Service Provider, which isn't directly conveyed in the Bulgarian translation. While technically correct, it's not ideal.",
+          "suggestion": "Consider 'Сертификати на сервисни доставчици' or 'Сертификати на осигуряващите услуги' for a more accurate and idiomatic translation. A more context-aware translation would significantly improve clarity."
         }
       ],
       "approved_at": null
@@ -90,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'վկայագրեր' (vkayagrer) technically translates to 'certificates,' in the context of Single Sign-On (SSO) and SP Certificates, a more accurate and commonly used Armenian term would be something along the lines of 'Համակարգող ծառայության վկայականներ' (Hamakargorg tsareayutyan vkayakanner) or a shortened version 'Համակարգող վկայականներ' (Hamakargorg vkayakanner).  'Վկայագրեր' is too general and might cause confusion.",
-          "suggestion": "Consider using 'Համակարգող ծառայության վկայականներ' or 'Համակարգող վկայականներ'."
+          "description": "While \"SP վկայագրեր\" is a literal translation of \"SP Certificates,\" it might not be the most natural or accurate translation in the context of Single Sign-On.  'վկայագրեր' implies a more formal certificate, while 'SP Certificates' could refer to a configuration or collection of certificates.",
+          "suggestion": "Consider a translation like \"SP-ի վկայականներ\" or \"SP ծառայության վկայագրեր\" if a more contextually appropriate term is needed. Further context on how 'SP Certificates' is used would help determine the best translation."
         }
       ],
       "approved_at": null
@@ -114,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"SP인증서\" is a literal translation of \"SP Certificates,\" it might be more naturally rendered as \"SP 인증서 목록\" or \"SP 인증서 정보\" depending on the context. \"SP인증서\" lacks the nuance of 'certificates' implying a collection or information.",
-          "suggestion": "Consider \"SP 인증서 목록\" or \"SP 인증서 정보\" for better clarity and naturalness."
+          "description": "While \"SP인증서\" is a literal translation of \"SP Certificates\", it lacks the article 's' implying a collection of certificates. A more natural translation would include a pluralizing element or a context-specific phrasing.",
+          "suggestion": "Consider \"SP 인증서 목록\" (SP Certificate List) or a contextually appropriate phrasing to convey the meaning of multiple certificates."
         }
       ],
       "approved_at": null
@@ -126,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'ໃບຮັບຮອງ' is a valid translation for 'certificate', the phrase 'ໃບຮັບຮອງ SP' might be too literal and potentially unclear to Lao speakers. 'SP' is an abbreviation that might not be universally understood. A more natural translation might be something that explains the purpose of the certificates if that context is known.",
-          "suggestion": "Consider re-evaluating the translation to ensure clarity. If 'SP' refers to a specific entity or system, the translation should explain that. For instance, if 'SP' refers to 'Service Provider', a translation reflecting that would be more helpful. If the target audience is technical, 'ໃບຮັບຮອງ SP' might be acceptable."
+          "description": "The translation \"ໃບຮັບຮອງ SP\" is a literal translation of 'SP Certificates'. While understandable, a more natural Lao translation might be \"ໃບຢັ້ງຢືນ SP\" or \"ສຽງຮັບຮອງຕົວຕົນຂອງ SP\".",
+          "suggestion": "ໃບຢັ້ງຢືນ SP"
         }
       ],
       "approved_at": null
@@ -156,7 +162,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Certificados do PS' is understandable, 'PS' is an abbreviation that might not be universally recognized. 'SP' stands for Service Provider, and a more accurate and clear translation would be 'Certificados do Provedor de Serviço'.",
+          "description": "While 'Certificados do PS' is a possible translation, 'PS' is an abbreviation that might not be universally understood by all Portuguese speakers. 'SP' stands for Service Provider, and a more understandable translation might be 'Certificados do Provedor de Serviço' or 'Certificados do Fornecedor de Serviços'.",
           "suggestion": "Certificados do Provedor de Serviço"
         }
       ],
@@ -174,13 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Certificate de furnizor de servicii\" is a literal translation of \"Service Provider Certificates\" and doesn't accurately reflect the meaning of \"SP Certificates\" in the context of Single Sign-On. \"SP\" refers to Service Provider, not just any service provider.",
-          "suggestion": "Certificat(e) SP"
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, 'Certificate de furnizor de servicii' uses a definite article which might not be appropriate depending on the documentation style. A more general term would be clearer.",
-          "suggestion": "Certificat(e) SP"
+          "description": "The Romanian translation \"Certificate de furnizor de servicii\" is a literal translation of \"Service Provider Certificates\" rather than accurately conveying the meaning of \"SP Certificates\". SP stands for Service Provider in this context, and a more appropriate translation would directly indicate that.",
+          "suggestion": "Certificate SP (Service Provider)"
         }
       ],
       "approved_at": null
@@ -197,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'SP සහතික' is a literal translation of 'SP Certificates' but may not be the most natural or understandable phrasing in Sinhala. ' සහතික' simply means 'certificates'. It doesn't convey the specific context of 'SP Certificates' which refers to certificates used for Single Sign-On.",
-          "suggestion": "Consider a more contextually accurate translation, such as 'එකම ල໊ගින් සඳහා එස්‍පී සහතිකයන්' (Ekama Loggin Sakata ESPi Sahathikayan) - 'SP Certificates for Single Login' or a similar phrasing that clarifies the purpose of the certificates."
+          "description": "The translation \"SP සහතික\" is a literal transliteration of \"SP Certificates\" and doesn't convey the intended meaning of certificates related to a Service Provider (SP) in a Single Sign-On context. It would be better to describe the function or purpose.",
+          "suggestion": "A more appropriate translation would be something like \"సేවාප සැපයුම්කරු සහතිකයන්\" (Service Provider Certificates) or \"එක ඒකාබද්ධ ල໊ග්ගිං සඳහා SP සහතිකයන්\" (SP Certificates for Single Sign-On)."
         }
       ],
       "approved_at": null
@@ -239,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Сертифікати постачальника сервісу\" is a literal translation but isn't the most natural or idiomatic way to say 'SP Certificates' in Ukrainian in a technical context. It's technically correct, but could be improved.",
-          "suggestion": "Сертифікати постачальників послуг"
+          "description": "The translation 'Сертифікати постачальника сервісу' is a literal translation that doesn't fully convey the meaning of 'SP Certificates' in a technical context. 'SP' stands for Service Provider, and a more natural Ukrainian phrasing would be closer to 'Сертифікати сервісних провайдерів' or 'Сертифікати сервісів'.",
+          "suggestion": "Сертифікати сервісних провайдерів"
         }
       ],
       "approved_at": null
@@ -251,8 +252,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Chứng nhận SP\" is a literal translation of \"SP Certificates\" but doesn't convey the meaning accurately in Vietnamese. 'SP' likely refers to 'Service Provider' in the context of Single Sign-On. A more accurate translation would incorporate that understanding.",
-          "suggestion": "Chứng chỉ của nhà cung cấp dịch vụ (Service Provider)"
+          "description": "The translation 'Chứng nhận SP' is a literal translation and doesn't convey the intended meaning of 'SP Certificates' accurately. 'SP' refers to Service Provider, and a more appropriate translation would convey this context.",
+          "suggestion": "Chứng chỉ của Nhà cung cấp dịch vụ (SP)"
         }
       ],
       "approved_at": null

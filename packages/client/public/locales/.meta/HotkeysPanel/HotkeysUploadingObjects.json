@@ -3,7 +3,7 @@
   "content": "Uploading items",
   "content_en_sha1_hash": "4a40257e25730f672c9e3cabe78c8ba98a8af632",
   "created_at": "2025-05-19T21:30:55.102Z",
-  "updated_at": "2025-05-21T10:20:33.853Z",
+  "updated_at": "2025-08-12T19:46:25.979Z",
   "comment": {
     "text": "Uploading objects is displayed on a sub-header. It appears below a button in the \"Hotkeys\" panel. This text should be translated to indicate the action being performed when uploading items, such as files or other data.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/HotkeysPanel/index.js",
-      "line_number": 112,
+      "line_number": 111,
       "context": "textStyles={textStyles}\n keyTextStyles={keyTextStyles}\n AltKey={AltKey}\n />\n <Heading className=\"hotkeys_sub-header\">\n {t(\"HotkeysUploadingObjects\")}\n </Heading>\n <UploadBlock\n t={t}\n textStyles={textStyles}\n keyTextStyles={keyTextStyles}",
       "module": "/packages/client"
     }
@@ -36,8 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Elementlərin yüklənilməsi\" is technically correct, it's a bit literal and formal. \"Uploading items\" often implies uploading files or objects, and a more natural Azerbaijani translation might be \"Faylların yüklənməsi\" or \"Objektlərin yüklənməsi\" depending on the context.",
-          "suggestion": "Consider \"Faylların yüklənməsi\" (Uploading files) or \"Objektlərin yüklənməsi\" (Uploading objects)."
+          "description": "While \"Elementlərin yüklənilməsi\" is technically correct, it's a bit formal and doesn't quite capture the colloquial feel of 'Uploading items'. 'Items' refers to uploadable objects, which might be files or other data.",
+          "suggestion": "Faylların yüklənməsi"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Elementlərin yüklənilməsi\" implies elements as in UI elements, not the objects being uploaded. The term 'items' in English commonly refers to files, documents, or other data being uploaded.",
+          "suggestion": "Yüklənən fayllar"
         }
       ],
       "approved_at": null
@@ -90,8 +95,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Միավորների վերբեռնում\" is a literal translation of 'items' as 'units.' 'Items' in this context likely refers to files or objects being uploaded, not units of measurement or something similar. A more accurate translation would convey the action of uploading files or objects.",
-          "suggestion": "Consider a translation like \"ֆայլերի վերբեռնում\" (files upload) or \"գոյությունների վերբեռնում\" (objects upload) depending on the precise meaning in the application."
+          "description": "While \"Միավորների վերբեռնում\" is technically translatable to 'Uploading items/points', 'Միավորներ' specifically means 'points' or 'scores'. 'Items' in this context likely refers to files or objects being uploaded, not just points. The translation is too literal.",
+          "suggestion": "Consider a more contextually accurate translation like \"Ֆայլերի վերբեռնում\" (Uploading files) or \"Բաների վերբեռնում\" (Uploading objects/things) depending on the precise meaning in the UI."
         }
       ],
       "approved_at": null
@@ -102,7 +107,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Caricamento elementi' is not the most natural or accurate translation of 'Uploading items'. While technically correct, it sounds slightly awkward. A more idiomatic translation would be 'Caricamento oggetti' or 'Trasferimento elementi'.",
+          "description": "The translation \"Caricamento elementi\" is not the most natural or accurate translation of \"Uploading items\". \"Elementi\" refers to elements in a more general sense. A more appropriate translation would focus on the action of uploading files or objects.",
           "suggestion": "Caricamento oggetti"
         }
       ],
@@ -117,13 +122,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"항목 업로드\" is literally 'item upload,' it's not the most natural way to express 'Uploading items' in Korean in a UI context. It sounds a bit stiff and technical.",
-          "suggestion": "Consider alternatives like \"파일 업로드\" (file upload - often used for uploading objects) or \"업로드 중\" (uploading - more concise and common)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -138,7 +137,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Notiek vienumu augšupielāde\" is technically correct, it's a bit verbose and formal for a hotkey label. A more concise and natural translation would be preferable.",
+          "description": "While \"Notiek vienumu augšupielāde\" is technically correct, it's a bit verbose and formal for a hotkey panel. A more natural and concise translation would be better.",
           "suggestion": "Augšupielāde"
         }
       ],
@@ -147,13 +146,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Items uploaden' is grammatically correct, but not as natural-sounding as other options. While technically correct, 'Het uploaden van items' or 'Items aan het uploaden' would be more idiomatic Dutch.",
-          "suggestion": "Het uploaden van items"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -168,8 +161,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"A carregar itens\" while grammatically correct, doesn't fully capture the nuance of 'Uploading items'. A more accurate translation would convey the action of uploading, not just the state of being loaded.",
-          "suggestion": "A enviar itens"
+          "description": "The translation \"A carregar itens\" is a literal translation and sounds unnatural in Portuguese. A more natural and idiomatic translation would be 'Carregando itens' or 'A fazer upload de itens'.",
+          "suggestion": "Carregando itens"
         }
       ],
       "approved_at": null
@@ -186,7 +179,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Încărcare elemente\" is a literal translation of 'Uploading items' but sounds awkward in Romanian. A more natural translation would emphasize the process of uploading.",
+          "description": "The Romanian translation \"Încărcare elemente\" is a literal translation that lacks the context of 'Uploading items'. A more natural and accurate translation would convey the action being performed.",
           "suggestion": "Încărcarea elementelor"
         }
       ],
@@ -204,8 +197,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"අථක උඩුගත වෙමින්\" doesn't accurately convey the meaning of \"Uploading items.\" \"අථක\" (athaka) means 'inanimate' or 'lifeless', which isn't relevant to uploading. \"උඩුගත වෙමින්\" (udugata vemin) means 'uploading'. A more accurate translation should focus on the action of uploading, not on the state of the items.",
-          "suggestion": "Possible suggestions include: \"ගබඩා කරමින්\" (gabada karamin - Storing/Saving), \"උඩුගත කරමින්\" (udugata karamin - Uploading), or a more descriptive phrase that accurately reflects the context."
+          "description": "The Sinhala translation \"අථක උඩුගත වෙමින්\" doesn't accurately convey the meaning of \"Uploading items\". \"අථක\" (athaka) generally means 'unripe' or 'immature', which doesn't fit the context of uploading.",
+          "suggestion": "A more accurate translation could be \"ප්‍රතිරූපණයක් උඩුගත වෙමින්\" (Prathiroopayak Udugata Vemin) - meaning 'An upload is happening', or \"දේපොතු උඩුගත වෙමින්\" (Depothu Udugata Vemin) - meaning 'Items are being uploaded'."
         }
       ],
       "approved_at": null
@@ -228,7 +221,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Отпремљивање ставки\" is understandable, a more natural and accurate translation for 'Uploading items' in this context (likely referring to uploading files or objects in a software interface) would be something like 'Упоређивање ставки' or 'Отскачивање ставки'. \"Отпремљивање\" implies a shipping or delivery process, which is not the intended meaning.",
+          "description": "While \"Отпремљивање ставки\" is understandable, a more natural and accurate translation of \"Uploading items\" in this context (likely referring to uploading files or objects within a software interface) would be \"Упоређивање ставки\" or \"Отпремање ставки\". \"Отпремљивање\" implies a more complex or involved process than simple uploading.",
           "suggestion": "Упоређивање ставки"
         }
       ],
@@ -240,8 +233,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Otpremljivanje stavki\" is not the most natural or accurate translation of \"Uploading items.\" \"Otpremljivanje\" implies sending something away, while \"Uploading\" suggests transferring data to a server or storage.",
-          "suggestion": "Uploadovanje predmeta"
+          "description": "While 'Otpremljivanje stavki' is understandable, a more accurate and natural translation of 'Uploading items' in this context would be 'Učitavanje predmeta' or 'Prenos stavki'. 'Otpremljivanje' implies shipping or sending out, which isn't the intended meaning of uploading.",
+          "suggestion": "Učitavanje predmeta"
         }
       ],
       "approved_at": null
@@ -258,7 +251,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Передавання елементів' while technically correct, doesn't quite capture the nuance of 'Uploading items'. 'Uploading' implies sending files or data to a remote server. 'Передавання' is more general and could mean transferring in various contexts. A better translation would convey the specific action of uploading.",
+          "description": "While 'Передавання елементів' is grammatically correct, it's not the most natural or idiomatic translation of 'Uploading items' in Ukrainian. 'Завантаження елементів' would be a more common and accurate translation, capturing the meaning of uploading data.",
           "suggestion": "Завантаження елементів"
         }
       ],
@@ -270,8 +263,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Đang tải lên các mục\" is technically correct, a more natural and idiomatic translation for \"Uploading items\" in this context (likely referring to files or data) would be \"Đang tải các mục\" or \"Đang tải lên dữ liệu\".  The inclusion of 'các' is slightly redundant and less common in this specific use case.",
-          "suggestion": "Đang tải các mục"
+          "description": "While technically correct, \"Đang tải lên các mục\" is a bit literal and sounds less natural in Vietnamese. 'Các mục' can be replaced with a more fluent phrasing.",
+          "suggestion": "Đang tải lên tài liệu"
         }
       ],
       "approved_at": null
@@ -282,8 +275,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "“项目” (xiangmu) translates to “projects” or “items” in a more general sense, but 'items' in this context refers to objects being uploaded. '物品' (wupin) would be a more accurate translation for 'items' in this specific UI element context.",
-          "suggestion": "上传物品"
+          "description": "While \"上传项目\" (Shàngchuán xiàngmù) is technically correct, it's not the most natural or idiomatic translation for \"Uploading items\" in the context of hotkeys. \"项目\" (xiàngmù) often refers to projects, not individual items being uploaded.",
+          "suggestion": "上传文件 (Shàngchuán wénjiàn) - Uploading files; or 上传物品 (Shàngchuán wùpǐn) - Uploading objects/goods. The best choice depends on the specific context."
         }
       ],
       "approved_at": null

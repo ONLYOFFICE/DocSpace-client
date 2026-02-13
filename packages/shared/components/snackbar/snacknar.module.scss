@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,17 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../styles/variables/devices.scss";
-@import "../../styles/_mixins.scss";
-@import "../../styles/variables/_colors.scss";
-@import "../../styles/common-icons-style.scss";
+@use "../../styles/mixins";
+@use "../../styles/variables/colors";
 
 .iframe {
   border: none;
   height: 60px;
   width: 100%;
 
-  @include tablet {
+  @include mixins.tablet {
     min-width: var(--section-width) + 40px;
   }
 }
@@ -47,13 +45,15 @@
   position: relative;
   display: flex;
   align-items: flex-start;
-  color: #{$white};
+  color: var(--snackbar-color);
   line-height: 16px;
   margin: 0;
   opacity: var(--opacity, 0);
   width: 100%;
-  background-color: var(--background-color);
+  background-color: var(--snackbar-background-color);
   background-image: var(--background-image);
+  border-inline-start: 4px solid var(--snackbar-border-color);
+  box-sizing: border-box;
 
   & > div,
   & > button {
@@ -79,8 +79,17 @@
   justify-content: start;
 
   .logo {
+    height: 16px;
+    width: 16px;
     box-sizing: border-box;
   }
+}
+
+.headerContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
 }
 
 .textHeader {
@@ -108,7 +117,7 @@
   display: inline-block;
   border: none;
   font-size: inherit;
-  color: #{$black};
+  color: #{colors.$black};
   margin-block: 0 4px;
   margin-inline: 12px 4px;
 
@@ -124,7 +133,7 @@
   background: inherit;
   border: none;
   font-size: 13px !important;
-  color: #{$dark-black};
+  color: #{colors.$dark-black};
   cursor: pointer;
   line-height: 14px;
 
@@ -140,28 +149,29 @@
   display: inline-block;
   border: none;
   font-size: inherit;
-  color: #{$dark-black};
+  color: #{colors.$dark-black};
   cursor: pointer;
   text-decoration: underline;
 
-  @include tablet {
+  @include mixins.tablet {
     // doesn't require mirroring for RTL
     right: 14px;
   }
 }
 
 .crossIcon {
-  @include common-icons-style;
+  @include mixins.common-icons-style;
 
   path {
-    fill: #{$gray};
+    fill: #{colors.$gray};
   }
 }
 
 .infoIcon {
-  @include common-icons-style;
+  @include mixins.common-icons-style;
+  vertical-align: unset !important;
 
   path {
-    fill: var(--color);
+    fill: var(--snackbar-icon-color);
   }
 }

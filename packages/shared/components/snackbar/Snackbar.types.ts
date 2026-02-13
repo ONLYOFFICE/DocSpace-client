@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -41,6 +41,10 @@ export type SnackbarProps = {
    */
   headerText?: string;
   /**
+   * Specifies additional information text next to the header.
+   */
+  additionalHeaderText?: string;
+  /**
    * Specifies the button text.
    */
   btnText?: string;
@@ -48,14 +52,6 @@ export type SnackbarProps = {
    * Specifies the source of the image used as the Snackbar background.
    */
   backgroundImg?: string;
-  /**
-   * Specifies the background color.
-   */
-  backgroundColor?: string;
-  /**
-   * Specifies the text color.
-   */
-  textColor?: string;
   /**
    * Displays the icon.
    */
@@ -112,6 +108,8 @@ export type SnackbarProps = {
    * Callback when close button is clicked.
    */
   onClose?: () => void;
+
+  skipBlur?: boolean;
 };
 
 /**

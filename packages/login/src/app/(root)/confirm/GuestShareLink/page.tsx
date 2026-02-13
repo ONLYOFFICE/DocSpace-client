@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,8 +26,7 @@
 
 import {
   getSettings,
-  getUser,
-  getUserByEmail,
+  getUserByEncEmail,
   getUserFromConfirm,
 } from "@/utils/actions";
 import { cookies } from "next/headers";
@@ -35,28 +34,34 @@ import { cookies } from "next/headers";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { getStringFromSearchParams } from "@/utils";
 
-import GuestShareLinkForm from "./page.client";
 import { GreetingGuestContainer } from "@/components/GreetingContainer";
+import { logger } from "logger.mjs";
+import { TConfirmLinkParams } from "@/types";
+import GuestShareLinkForm from "./page.client";
 
 type GuestShareLinkProps = {
-  searchParams: { [key: string]: string };
+  searchParams: Promise<{ [key: string]: string }>;
 };
 
-async function Page({ searchParams }: GuestShareLinkProps) {
-  const uid = searchParams.uid;
-  const email = searchParams.email;
+async function Page(props: GuestShareLinkProps) {
+  logger.info("GuestShareLink page");
+
+  const { searchParams: sp } = props;
+  const searchParams = (await sp) as TConfirmLinkParams;
+  const uid = searchParams.uid ?? "";
+  const encemail = searchParams.encemail ?? "";
   const confirmKey = getStringFromSearchParams(searchParams);
 
   const [settings, initiator, guest] = await Promise.all([
     getSettings(),
     getUserFromConfirm(uid, confirmKey),
-    getUserByEmail(email, confirmKey),
+    getUserByEncEmail(encemail, confirmKey),
   ]);
 
   const settingsCulture =
     typeof settings === "string" ? undefined : settings?.culture;
 
-  const culture = cookies().get(LANGUAGE)?.value ?? settingsCulture;
+  const culture = (await cookies()).get(LANGUAGE)?.value ?? settingsCulture;
 
   return (
     <>
@@ -64,12 +69,12 @@ async function Page({ searchParams }: GuestShareLinkProps) {
         displayName={initiator?.displayName}
         culture={culture}
       />
-      {settings && typeof settings !== "string" && (
+      {settings && typeof settings !== "string" ? (
         <GuestShareLinkForm
           guestDisplayName={guest?.displayName}
           guestAvatar={guest?.avatar}
         />
-      )}
+      ) : null}
     </>
   );
 }

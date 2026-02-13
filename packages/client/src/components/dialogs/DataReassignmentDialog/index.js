@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState, useEffect } from "react";
-import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import PeopleSelector from "@docspace/shared/selectors/People";
@@ -34,28 +33,12 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Backdrop } from "@docspace/shared/components/backdrop";
 
 import api from "@docspace/shared/api";
-import { EmployeeType } from "@docspace/shared/enums";
+import { EmployeeActivationStatus, EmployeeType } from "@docspace/shared/enums";
 import Body from "./sub-components/Body";
 import Footer from "./sub-components/Footer";
+import styles from "./DataReassignment.module.scss";
 
 const { Filter } = api;
-
-const StyledBodyContent = styled.div`
-  display: contents;
-
-  .avatar-name {
-    display: flex;
-    align-items: center;
-  }
-
-  .delete-profile-checkbox {
-    margin-bottom: 16px;
-  }
-
-  .list-container {
-    gap: 6px;
-  }
-`;
 
 const statusTerminateCompleted = 3;
 let timerId;
@@ -197,6 +180,7 @@ const DataReassignmentDialog = ({
 
   const filter = Filter.getDefault();
   filter.role = [EmployeeType.Admin, EmployeeType.RoomAdmin];
+  filter.employeeStatus = EmployeeActivationStatus.Activated;
 
   if (selectorVisible) {
     return (
@@ -260,7 +244,7 @@ const DataReassignmentDialog = ({
         {t("DataReassignmentDialog:DataReassignment")}
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <StyledBodyContent>
+        <div className={styles.bodyContent}>
           <Body
             t={t}
             tReady={tReady}
@@ -275,7 +259,7 @@ const DataReassignmentDialog = ({
             onTogglePeopleSelector={onTogglePeopleSelector}
             noRoomFilesToMove={noRoomFilesToMove}
           />
-        </StyledBodyContent>
+        </div>
       </ModalDialog.Body>
 
       <ModalDialog.Footer>
@@ -298,31 +282,35 @@ const DataReassignmentDialog = ({
   );
 };
 
-export default inject(({ settingsStore, peopleStore, userStore }) => {
-  const {
-    setDataReassignmentDialogVisible,
-    dataReassignmentDeleteProfile,
-    setDataReassignmentDeleteProfile,
-  } = peopleStore.dialogStore;
-  const { currentColorScheme, dataReassignmentUrl } = settingsStore;
+export default inject(
+  ({ settingsStore, peopleStore, userStore, infoPanelStore }) => {
+    const {
+      setDataReassignmentDialogVisible,
+      dataReassignmentDeleteProfile,
+      setDataReassignmentDeleteProfile,
+    } = peopleStore.dialogStore;
+    const { currentColorScheme, dataReassignmentUrl } = settingsStore;
 
-  const { user: currentUser } = userStore;
+    const { user: currentUser } = userStore;
 
-  const { needResetUserSelection, setSelected } = peopleStore.usersStore;
+    const { needResetUserSelection, setSelected } = peopleStore.usersStore;
 
-  return {
-    setDataReassignmentDialogVisible,
-    theme: settingsStore.theme,
-    currentColorScheme,
-    currentUser,
-    deleteProfile: dataReassignmentDeleteProfile,
-    setDataReassignmentDeleteProfile,
+    const { isVisible: infoPanelVisible } = infoPanelStore;
 
-    dataReassignmentUrl,
-    needResetUserSelection,
-    setSelected,
-  };
-})(
+    return {
+      setDataReassignmentDialogVisible,
+      theme: settingsStore.theme,
+      currentColorScheme,
+      currentUser,
+      deleteProfile: dataReassignmentDeleteProfile,
+      setDataReassignmentDeleteProfile,
+
+      dataReassignmentUrl,
+      needResetUserSelection: !infoPanelVisible || needResetUserSelection,
+      setSelected,
+    };
+  },
+)(
   observer(
     withTranslation([
       "Common",

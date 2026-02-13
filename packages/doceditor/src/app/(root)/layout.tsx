@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,25 +34,22 @@ import "@docspace/shared/styles/theme.scss";
 
 import Providers from "@/providers";
 import Scripts from "@/components/Scripts";
-import StyledComponentsRegistry from "@/utils/registry";
 import { getColorTheme, getSettings, getUser } from "@/utils/actions";
 import { logger } from "@/../logger.mjs";
 
 import "@/styles/globals.scss";
-
-const log = logger.child({ module: "Root layout" });
 
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const hdrs = headers();
-  const cookieStore = cookies();
+  const hdrs = await headers();
+  const cookieStore = await cookies();
 
   if (hdrs.get("x-health-check") || hdrs.get("referer")?.includes("/health")) {
-    log.info("get health check and return empty layout");
-    return <></>;
+    logger.info("get health check and return empty layout");
+    return null;
   }
 
   const [user, settings, colorTheme] = await Promise.all([
@@ -82,7 +79,12 @@ export default async function RootLayout({
     (typeof settings === "object" && settings.culture) ||
     "en";
 
-  if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
+  const baseURL = await getBaseUrl();
+
+  if (settings === "access-restricted") {
+    logger.info("Root layout access-restricted");
+    redirect(`${baseURL}/${settings}`);
+  }
 
   return (
     <html lang="en" translate="no">
@@ -98,21 +100,18 @@ export default async function RootLayout({
         <meta name="apple-mobile-web-app-capable" content="yes" />
       </head>
       <body className={themeClass}>
-        <StyledComponentsRegistry>
-          <Providers
-            contextData={{
-              initialTheme: theme,
-              user,
-              settings,
-              systemTheme,
-              colorTheme,
-              locale,
-            }}
-          >
-            {children}
-          </Providers>
-        </StyledComponentsRegistry>
-
+        <Providers
+          contextData={{
+            initialTheme: theme,
+            user,
+            settings,
+            systemTheme,
+            colorTheme,
+            locale,
+          }}
+        >
+          {children}
+        </Providers>
         <Scripts />
       </body>
     </html>

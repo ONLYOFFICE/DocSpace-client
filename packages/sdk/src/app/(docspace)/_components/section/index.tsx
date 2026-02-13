@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,12 +28,13 @@
 
 import React from "react";
 import { observer } from "mobx-react";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
 
 import Section from "@docspace/shared/components/section";
 
+import useDeviceType from "@/hooks/useDeviceType";
 import { useSettingsStore } from "../../_store/SettingsStore";
 
 type SectionProps = {
@@ -56,9 +57,9 @@ export const SectionWrapper = observer(
     isEmptyPage,
     filesFilter,
     showFilter = true,
-    showHeader = true,
   }: SectionProps) => {
     const searchParams = useSearchParams();
+    const pathname = usePathname();
 
     const getValue = (key: string) => {
       const value = searchParams.get(key);
@@ -66,11 +67,11 @@ export const SectionWrapper = observer(
     };
 
     showFilter = getValue("showFilter") as boolean;
-    showHeader = getValue("showHeader") as boolean;
 
     const [isFiltered, setIsFiltered] = React.useState(() =>
       FilesFilter.getFilter({
         search: `?${filesFilter}`,
+        pathname,
       } as Location)!.isFiltered(),
     );
 
@@ -79,6 +80,7 @@ export const SectionWrapper = observer(
     }, [searchParams]);
 
     const settingsStore = useSettingsStore();
+    const { currentDeviceType } = useDeviceType();
 
     const isEmptyList = settingsStore.isEmptyList || isEmptyPage;
 
@@ -88,11 +90,9 @@ export const SectionWrapper = observer(
         settingsStudio={false}
         viewAs="row"
         isEmptyPage={isEmptyList}
-        currentDeviceType={settingsStore.currentDeviceType}
+        currentDeviceType={currentDeviceType}
       >
-        <Section.SectionHeader>
-          {showHeader ? sectionHeaderContent : null}
-        </Section.SectionHeader>
+        <Section.SectionHeader>{sectionHeaderContent}</Section.SectionHeader>
 
         <Section.SectionFilter>
           {showFilter

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { makeAutoObservable, runInAction } from "mobx";
+import axios from "axios";
 
 import { toastr } from "@docspace/shared/components/toast";
 
@@ -62,6 +63,8 @@ class WebhooksStore {
 
   configName = "";
 
+  errorWebhooks = null;
+
   constructor(settingsStore) {
     makeAutoObservable(this);
 
@@ -83,8 +86,11 @@ class WebhooksStore {
   loadWebhooks = async () => {
     const { passwordSettings, getPortalPasswordSettings } = this.settingsStore;
 
+    const abortController = new AbortController();
+    this.settingsStore.addAbortControllers(abortController);
+
     try {
-      const webhooksData = await getAllWebhooks();
+      const webhooksData = await getAllWebhooks(abortController.signal);
       if (!passwordSettings) {
         await getPortalPasswordSettings();
       }
@@ -103,7 +109,12 @@ class WebhooksStore {
         }));
       });
     } catch (error) {
+      if (axios.isCancel(error)) return;
+
       console.error(error);
+      runInAction(() => {
+        this.errorWebhooks = { error: "error" };
+      });
     }
   };
 
@@ -135,7 +146,7 @@ class WebhooksStore {
 
   toggleEnabled = async (desiredWebhook, t) => {
     try {
-      await toggleEnabledWebhook(desiredWebhook);
+      const res = await toggleEnabledWebhook(desiredWebhook);
       const index = this.webhooks.findIndex(
         (webhook) => webhook.id === desiredWebhook.id,
       );
@@ -145,6 +156,8 @@ class WebhooksStore {
           ? t("WebhookEnabled")
           : t("WebhookDisabled"),
       );
+
+      return res;
     } catch (error) {
       toastr.error(error);
     }

@@ -3,7 +3,7 @@
   "content": "The selected guests will be moved to the {{membersSection}} section and assigned the <strong>'{{ secondType }}'</strong> type. {{productName}} admins can access {{productName}} settings, manage and archive rooms, invite new users and assign roles below their level. {{productName}} admins have access to the {{documentsSection}} section.",
   "content_en_sha1_hash": "88ee3565e7278333f18e98758425d1d926d181c4",
   "created_at": "2025-05-19T21:30:56.920Z",
-  "updated_at": "2025-05-20T09:37:51.818Z",
+  "updated_at": "2025-05-24T14:08:44.555Z",
   "comment": {
     "text": "The \"ChangeGuestsTypeToAdminMulti\" translation key describes the action of assigning a guest to an admin role in the [productName] settings, moving them to the {{membersSection}} section, and granting access to various features. This text is used in a dialog or button that allows admins to manage user types.",
     "is_auto": true,
@@ -27,7 +27,28 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The strong tag around '{{ secondType }}' is correctly placed in both the English and Arabic text.",
+          "suggestion": null
+        },
+        {
+          "type": "formatting",
+          "description": "The strong tag around '{{ secondType }}' is correctly placed in both the English and Arabic text.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word \"أرشفتها\" in \"إدارة الغرف وأرشفتها\" could be better phrased. While technically correct (archiving them), it feels slightly awkward.  A more natural phrasing for Arabic might be 'تأرشفة الغرف'.",
+          "suggestion": "تأرشفة الغرف"
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence \"يمكن لمسؤولي {{productName}} الوصول إلى إعدادات {{productName}}، إدارة الغرف وأرشفتها، دعوة مستخدمين جدد، وتعيين أدوار أقل من مستواهم\" is a bit long and could be broken down for better readability.  It could be split into multiple sentences.",
+          "suggestion": "يمكن لمسؤولي {{productName}} الوصول إلى إعدادات {{productName}}. يمكنهم إدارة الغرف وتأشفتها، دعوة مستخدمين جدد، وتعيين أدوار أقل من مستواهم."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -39,7 +60,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Bulgarian translation retains the English markdown (strong tags) which might not be the preferred formatting in Bulgarian. Consider whether bolding is necessary or if a different emphasis is more appropriate.",
+          "suggestion": "Review the use of bolding and consider if it aligns with Bulgarian style conventions.  If not, remove or adjust the <strong > tags."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -51,25 +78,69 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The English content uses 'membersSection' as a variable. The German translation maintains the same variable without any indication that it should be localized. While technically correct, it might be better to ensure consistency if the English version is localized elsewhere.",
+          "suggestion": "Consider localizing 'membersSection' if the English version is also localized. If not, leaving it as is is acceptable."
+        },
+        {
+          "type": "formatting",
+          "description": "The English content uses 'documentsSection' as a variable. The German translation maintains the same variable without any indication that it should be localized. While technically correct, it might be better to ensure consistency if the English version is localized elsewhere.",
+          "suggestion": "Consider localizing 'documentsSection' if the English version is also localized. If not, leaving it as is is acceptable."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The strong tag is used correctly for '{{ secondType }}' in both English and Greek versions.",
+          "suggestion": null
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence 'Οι διαχειριστές {{productName}} μπορούν να έχουν πρόσβαση στις ρυθμίσεις {{productName}}, να διαχειρίζονται και να αρχειοθετούν δωμάτια, να προσκαλούν νέους χρήστες και να αναθέτουν ρόλους κάτω από το επίπεδό τους' can be improved for better flow. While technically correct, it's a bit clunky. A more natural phrasing might separate the verbs.",
+          "suggestion": "Οι διαχειριστές {{productName}} μπορούν να έχουν πρόσβαση στις ρυθμίσεις {{productName}}, να διαχειρίζονται και να αρχειοθετούν δωμάτια, να προσκαλούν νέους χρήστες και να αναθέτουν ρόλους σε χρήστες με χαμηλότερο επίπεδο."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'κάτω από το επίπεδό τους' could be more precise. It's currently 'below their level', which can be interpreted as hierarchy. A more suitable translation that signifies assigning roles to users *with* a lower level of access would be more appropriate.",
+          "suggestion": "σε χρήστες με χαμηλότερο επίπεδο"
+        }
+      ],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Spanish translation uses \"Los administradores de {{productName}}\" twice, which mirrors the English. Consider varying the phrasing for better flow. While technically correct, it sounds repetitive.",
+          "suggestion": "Los administradores de {{productName}} pueden... y estos administradores de {{productName}} también tienen..."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The sentence 'he voivat hallita ja arkistoida huoneita' is grammatically awkward. 'Hallita' often implies more complex management than simply 'manage'.",
+          "suggestion": "he voivat hallinnoida ja arkistoida huoneita"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'oikeudet {{documentsSection}} -osioon' is not the best translation of 'access to {{documentsSection}} section'. It's too literal and sounds unnatural.",
+          "suggestion": "pääsy {{documentsSection}} -osioon"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,7 +152,18 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The strong tag is correctly used for the type, but the surrounding text might need review for better flow in Armenian.",
+          "suggestion": "Consider rephrasing the sentence around the strong tag to improve readability in Armenian. For example, 'Ընտրված հյուրերը կտեղափոխվեն {{membersSection}} բաժին և կได้รับ <strong>'{{ secondType }}'</strong> կարգավիճակ:' (The selected guests will be moved to the {{membersSection}} section and will receive the <strong>'{{ secondType }}'</strong> status.)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'assign roles below their level' could be more accurately translated to convey the nuance of 'roles lower than their own'. The current translation might imply a less hierarchical relationship.",
+          "suggestion": "Consider translating 'assign roles below their level' as 'նշանակել իրենցից ցածր կարգի դերեր' or 'նշանակել ցածր կարգի դերեր' which more clearly indicates roles lower in hierarchy."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,19 +175,47 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'assign roles below their level' is translated as '自分のレベル以下の役割を割り当てることができます'. A more natural and accurate translation would be something like '下位の役割を割り当てることができます' (shitai no yakuwari wo atsumete koto ga dekimasu) or 'より下位の役割を割り当てることができます' (yori shitai no yakuwari wo atsumete koto ga dekimasu).",
+          "suggestion": "下位の役割を割り当てることができます"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'below their level' is awkwardly translated. A more natural Korean translation for \"below their level\" regarding roles would be something like '하위 레벨' or '더 낮은 레벨'.",
+          "suggestion": "자신의 레벨보다 낮은 역할을 할당할 수 있습니다. -> 자신의 레벨보다 하위 역할을 할당할 수 있습니다."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ຖືກມອບຫມາຍ' could be more naturally translated as 'ຖືກຕັ້ງເປັນ' or 'ໄດ້ຮັບ' in this context. While technically correct, 'ຖືກມອບຫມາຍ' feels slightly awkward.",
+          "suggestion": "ຖືກຕັ້ງເປັນ"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'ເຊิญຜູ້ໃຊ້ບໍານົນ' is a bit awkward. 'ບໍານົນ' generally refers to civilians. It's unclear what 'ເຊิญຜູ້ໃຊ້ບໍານົນ' intends to convey. It might be meant to refer to 'invite non-admin users' or 'invite regular users'.",
+          "suggestion": "ເຊิญຜູ້ໃຊ້ທົ່ວໄປ"
+        },
+        {
+          "type": "formatting",
+          "description": "The strong tags around '{{ secondType }}' are inconsistent with the English version. While they may be intended to emphasize the type, it's worth verifying that this is what's desired.",
+          "suggestion": "Review the intended emphasis of the strong tag. Consider removing it if the English version doesn't utilize it."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -141,49 +251,127 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'assigned the' is translated as 'li se va stabili tipul'. While not strictly incorrect, it's less natural. A more accurate and natural translation would be 'vor primi tipul' or 'vor avea tipul'.",
+          "suggestion": "vor primi tipul"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'in funcţie de nivelul lor' is a literal translation of 'below their level'. A more natural Romanian phrasing would be 'inferior nivelului lor' or 'de nivel inferior'.",
+          "suggestion": "inferior nivelului lor"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Russian translation maintains the use of angle brackets around the placeholders `{{membersSection}}`, `{{secondType}}`, `{{productName}}` and `{{documentsSection}}` which mirrors the English source. Ensure this is consistent with the platform's conventions.",
+          "suggestion": "Verify if the platform expects angle brackets around placeholders in Russian translations. If not, remove them."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'назначению ролей ниже своего уровня' translates literally to 'assigning roles below their level'. A more natural and precise Russian phrasing might be 'присваиванием ролей с более низким уровнем доступа' or similar, to specifically emphasize access levels.",
+          "suggestion": "Consider revising 'назначению ролей ниже своего уровня' to 'присваиванием ролей с более низким уровнем доступа' or a similar natural phrasing."
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Sinhala translation maintains the strong tag formatting, which is good. Ensure consistent use of strong tags in the English and Sinhala versions for similar emphasis.",
+          "suggestion": "Verify consistent use of strong tags across both languages."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'භූමිකා පවරන්න හැක' translates to 'can assign roles' but might be more accurately translated to reflect the nuance of 'assign roles *below their level*'.",
+          "suggestion": "Consider translating 'ඔවුන්ගේ පහළ මට්ටමේ භූමිකා පවරන්න හැක' to something more precise like 'ඔවුන්ගේ පහත තෙත්මට්ටමේ භූමිකාවල පවරන්න හැක' or rephrasing to convey the meaning 'can assign roles to users of lower levels'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Slovak translation uses the masculine singular 'bude mu priradený' which doesn't agree with the plural 'Vybraní hostia' (selected guests). It should be plural as well.",
+          "suggestion": "Vybraní hostia budú premiestnení do časti {{membersSection}} a bude im priradený typ <strong>'{{ secondType }}'</strong>."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The formatting of the strong tags (<code>'{{ secondType }}'</code>) appears to be preserved correctly in the Slovenian translation, matching the English original.",
+          "suggestion": null
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'assign roles below their level' translates to 'dodeljujejo vloge nižje od svoje'. While understandable, a more precise translation, especially in the context of user permissions, might be 'dodeljevanje vlog nižje stopnje' or 'dodeljujejo vloge z nižjo stopnjo dostopa'.",
+          "suggestion": "dodeljujejo vloge z nižjo stopnjo dostopa"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase 'испод њиховог нивоа' (below their level) is grammatically awkward. It should be 'испод њиховог нивоа' to agree with the implied possessor (admins).",
+          "suggestion": "испод свог нивоа"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The strong tag around '{{ secondType }}' is correctly preserved in the Serbian translation.",
+          "suggestion": "No change needed."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While generally accurate, 'dodeljeni' (assigned) might feel slightly awkward. 'Dobijaju' or 'imaju' (have) might be more natural depending on the exact nuance intended.",
+          "suggestion": "Consider 'Dobijaju' or 'imaju' instead of 'dodeljeni' to improve fluency."
+        },
+        {
+          "type": "grammatical",
+          "description": "The repetition of '{{productName}} administratori' sounds slightly clunky. It is grammatically correct, but slightly awkward to read.",
+          "suggestion": "Consider rephrasing to avoid repetition. For example, 'Administratori {{productName}}...' or '{{productName}} administratori...' (while retaining the current structure is possible, the fluidity could be improved)."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The phrase 'The selected guests will be moved to' is missing from the Turkish translation.",
+          "suggestion": "Seçilen konuklar, {{membersSection}} bölümüne taşınacak ve"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -195,13 +383,35 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'below their level' is not accurately translated. A more accurate translation would convey the meaning of having permissions lower than the admin's.",
+          "suggestion": "A more accurate translation for 'below their level' could be 'thấp hơn quyền hạn của họ' or 'mức thấp hơn quyền hạn của họ'."
+        },
+        {
+          "type": "formatting",
+          "description": "The original English uses `<strong>` tags to emphasize '{{ secondType }}'. This is reflected in the Vietnamese translation. While technically correct, it might be more natural to avoid this emphasis if it doesn't align with common Vietnamese stylistic choices. Consider if the emphasis is truly necessary.",
+          "suggestion": "Evaluate if the strong tag is necessary; consider removing it for a more natural flow. If kept, ensure its usage aligns with standard Vietnamese writing conventions."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'assign roles below their level' is translated as '分配其级别以下的权限'. While technically correct, it's a bit awkward. A more natural translation would be something like '分配低于其级别的权限' or '分配下级权限'.",
+          "suggestion": "分配低于其级别的权限"
+        },
+        {
+          "type": "formatting",
+          "description": "The strong tags are correctly used for the `secondType` variable, but it’s important to ensure consistent styling across all instances of variables within the application.",
+          "suggestion": "No change needed, but ensure variable styling consistency."
+        }
+      ],
       "approved_at": null
     }
   }

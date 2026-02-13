@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,11 +26,11 @@
 
 import React from "react";
 import { useNavigate, Link } from "react-router";
-import { useTheme } from "styled-components";
 
 import { getLogoUrl } from "../../../utils";
 import { DeviceType, WhiteLabelLogoType } from "../../../enums";
 import { ArticleHeaderLoader } from "../../../skeletons/article";
+import { useTheme } from "../../../hooks/useTheme";
 
 import { AsideHeader } from "../../aside-header";
 import BackButton from "./BackButton";
@@ -52,25 +52,43 @@ const ArticleHeader = ({
   ...rest
 }: ArticleHeaderProps) => {
   const navigate = useNavigate();
-  const theme = useTheme();
+  const { isBase } = useTheme();
 
   const onLogoClick = () => {
     onLogoClickAction?.();
     navigate("/");
   };
 
-  const burgerLogo = getLogoUrl(WhiteLabelLogoType.LeftMenu, !theme.isBase);
-  const logo = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme.isBase);
+  const burgerLogo = getLogoUrl(
+    WhiteLabelLogoType.LeftMenu,
+    !isBase,
+    false,
+    "",
+    true,
+  );
+  const logo = getLogoUrl(
+    WhiteLabelLogoType.LightSmall,
+    !isBase,
+    false,
+    "",
+    true,
+  );
 
   if (currentDeviceType === DeviceType.mobile)
     return (
       <AsideHeader
-        headerHeight="49px"
+        headerHeight={showBackButton ? "76px" : "49px"}
         isCloseable
         withoutBorder
         onCloseClick={onIconClick}
         headerComponent={
-          showBackButton ? <BackButton showText={showText} /> : null
+          showBackButton ? (
+            <BackButton
+              showText={showText}
+              currentDeviceType={currentDeviceType}
+              toggleArticleOpen={onIconClick}
+            />
+          ) : null
         }
       />
     );

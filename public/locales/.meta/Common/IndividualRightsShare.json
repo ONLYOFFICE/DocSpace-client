@@ -1,0 +1,28 @@
+{
+  "key_path": "IndividualRightsShare",
+  "content": "Individual rights",
+  "content_en_sha1_hash": "5785bb996e7dca407fc9b1a4f1d0d442268e3b19",
+  "created_at": "2025-10-07T15:38:57.568Z",
+  "updated_at": "2025-10-07T15:43:41.073Z",
+  "comment": {
+    "text": "This key displays the text \"Individual rights\" within a dialog (likely for editing group members). It's used in a tooltip to inform users about the rights associated with a group member, and the specific wording changes based on whether the group is a room or not. Translators should maintain the clear and informative nature of the text.",
+    "is_auto": true,
+    "updated_at": "2025-10-07T15:43:41.073Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/dialogs/edit-group-members-dialog/sub-components/GroupMember/index.tsx",
+      "line_number": 211,
+      "context": "openOnClick={false}\n tooltipContent={\n <Text fontSize=\"12px\" fontWeight={600}>\n {isRoom\n ? t(\"Common:IndividualRights\")\n : t(\"Common:IndividualRightsShare\")}\n </Text>\n }\n />\n ) : null}\n </div>",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

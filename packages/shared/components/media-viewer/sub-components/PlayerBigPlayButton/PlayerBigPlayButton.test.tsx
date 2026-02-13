@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,37 +24,36 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React from "react";
+import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import { PlayerBigPlayButton } from ".";
+import styles from "./PlayerBigPlayButton.module.scss";
 
 // Mock BigIconPlay SVG component
-jest.mock("PUBLIC_DIR/images/media.bgplay.react.svg", () => {
-  const DummyBigIconPlay = React.forwardRef<HTMLDivElement>(
-    (props: React.HTMLAttributes<HTMLDivElement>, ref) => (
-      <div {...props} ref={ref}>
-        Play Icon
-      </div>
-    ),
+vi.mock("PUBLIC_DIR/images/media.bgplay.react.svg", () => {
+  const DummyBigIconPlay = ({
+    ref,
+    ...props
+  }: React.HTMLAttributes<HTMLDivElement> & {
+    ref?: React.RefObject<HTMLDivElement>;
+  }) => (
+    <div {...props} ref={ref}>
+      Play Icon
+    </div>
   );
   DummyBigIconPlay.displayName = "BigIconPlay";
-  return DummyBigIconPlay;
+  return { default: DummyBigIconPlay };
 });
-
-// Mock styles
-jest.mock("./sub-components/PlayerBigPlayButton.module.scss", () => ({
-  wrapper: "wrapper",
-}));
 
 describe("PlayerBigPlayButton", () => {
   const defaultProps = {
     visible: true,
-    onClick: jest.fn(),
+    onClick: vi.fn(),
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders correctly when visible", () => {
@@ -62,7 +61,7 @@ describe("PlayerBigPlayButton", () => {
 
     const button = screen.getByTestId("player-big-play-button");
     expect(button).toBeInTheDocument();
-    expect(button).toHaveClass("wrapper");
+    expect(button).toHaveClass(styles.wrapper);
     expect(button).toHaveAttribute("aria-label", "Play media");
 
     const icon = screen.getByTestId("play-icon");
@@ -87,7 +86,7 @@ describe("PlayerBigPlayButton", () => {
     });
 
     Object.defineProperty(mockEvent, "preventDefault", {
-      value: jest.fn(),
+      value: vi.fn(),
     });
 
     fireEvent(button, mockEvent);

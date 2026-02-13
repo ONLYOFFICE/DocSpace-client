@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -39,8 +39,6 @@ const commonInputStyles = css<{
     (props.scale && "100%") ||
     (props.size === "base" && props.theme.input.width.base) ||
     (props.size === "middle" && props.theme.input.width.middle) ||
-    (props.size === "big" && props.theme.input.width.big) ||
-    (props.size === "huge" && props.theme.input.width.huge) ||
     (props.size === "large" && props.theme.input.width.large)};
 
   background-color: ${(props) =>

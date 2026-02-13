@@ -3,7 +3,7 @@
   "content": "Please, keep in mind: the portal user email will be taken from the 'Mail Attribute' setting. If it is missing, it will be formed in the following way: 'Login Attribute + @ + LDAP Domain'. In case such an email does not exist, the user will not receive any portal notification.",
   "content_en_sha1_hash": "8572743e32379ae667edfb0ddac6d16c85a44092",
   "created_at": "2025-05-19T21:30:54.199Z",
-  "updated_at": "2025-05-21T08:24:31.527Z",
+  "updated_at": "2025-05-24T08:37:08.199Z",
   "comment": {
     "text": "This translation key is used to display a disclaimer about how user portal emails are handled when the \"Mail Attribute\" setting is missing. It explains that an alternative email will be generated using the \"Login Attribute\" and LDAP domain, and informs users they won't receive notifications if this email doesn't exist.",
     "is_auto": true,
@@ -30,18 +30,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Mail Attribute' is translated as 'ميزة البريد' which translates more literally as 'Mail Feature'. A more accurate translation would be something along the lines of 'سمة البريد' (Mail Attribute) or 'حقل البريد' (Mail Field).",
-          "suggestion": "سمة البريد"
+          "description": "The phrase \"Mail Attribute\" is translated as \"ميزة البريد\" (mizat al-bareed), which translates to 'Mail Feature'. It should be translated more accurately to reflect the attribute setting in LDAP, perhaps \"صفة البريد\" (sifat al-bareed) meaning 'Mail Attribute' or 'Mail Property'.",
+          "suggestion": "صفة البريد (sifat al-bareed)"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Login Attribute' is translated as 'خاصية تسجيل الدخول'. While understandable, a more precise translation would be 'سمة تسجيل الدخول' (Login Attribute).",
-          "suggestion": "سمة تسجيل الدخول"
+          "description": "The phrase 'Login Attribute' is translated as 'خاصية تسجيل الدخول' (khasiat tasjeel al-dukhool). While understandable, it could be more precise and impactful. A better translation could be 'اسم تسجيل الدخول' (ism tasjeel al-dukhool) which directly translates to 'Login Name'.",
+          "suggestion": "اسم تسجيل الدخول (ism tasjeel al-dukhool)"
         },
         {
           "type": "formatting",
-          "description": "The use of quotes around 'خاصية تسجيل الدخول + @ + مجال LDAP' is inconsistent with the English's use of single quotes.",
-          "suggestion": "Maintain consistency in quotation marks, either using double quotes or single quotes throughout the entire text."
+          "description": "The phrase \"Login Attribute + @ + LDAP Domain\" is formatted using the '+' symbol which is not standard Arabic notation for concatenation. Consider using Arabic characters to denote the concatenation or use a different presentation to improve readability.",
+          "suggestion": "اسم تسجيل الدخول @ مجال LDAP"
         }
       ],
       "approved_at": null
@@ -52,18 +52,23 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'Attribute' is inconsistently transliterated. It appears as 'Atribut' in the translation, which is a misspelling.",
-          "suggestion": "Attribute should be consistently transliterated as 'atribut'."
+          "description": "The word 'Atribut' is consistently misspelled. It should be 'Attribute'.",
+          "suggestion": "Attribute"
         },
         {
           "type": "grammar",
-          "description": "The phrase 'Əgər çatışmazsa' is slightly awkward. While understandable, a more natural phrasing exists.",
-          "suggestion": "Consider replacing 'Əgər çatışmazsa' with 'Əgər bu parametr doldurulmayıbsa' or 'Əgər bu qiymət boşdur'. "
+          "description": "The phrase 'Əgər çatışmazsa' is awkward. A more natural phrasing would be 'Əgər bu parametr doldurulmayıbsa' or 'Əgər bu qiymət yoxdursa'.",
+          "suggestion": "Əgər bu parametr doldurulmayıbsa"
         },
         {
-          "type": "formatting",
-          "description": "The quotation marks around 'Login Atribut + @ + LDAP Domain' are not standard Azerbaijani quotation marks.",
-          "suggestion": "Replace English quotation marks with Azerbaijani quotation marks: «Login Atribut + @ + LDAP Domain»."
+          "type": "incorrect_translation",
+          "description": "'Mail Attribute' has been translated as 'Mail Atribut'. This should be translated as 'Poçt atributu'.",
+          "suggestion": "Poçt atributu"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "'Login Attribute' has been translated as 'Login Atribut'. This should be translated as 'Daxilolma atributu'.",
+          "suggestion": "Daxilolma atributu"
         }
       ],
       "approved_at": null
@@ -74,8 +79,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Bulgarian translation uses quotation marks that don't match the English. English uses double quotes (\"), Bulgarian ideally should too for consistency. While single quotes are acceptable in Bulgarian, using double quotes aligns better with the source.",
-          "suggestion": "Replace single quotes with double quotes for consistency. Change 'Пощенски атрибут' to \"Пощенски атрибут\" and 'Входен атрибут' to \"Входен атрибут\"."
+          "description": "The translation includes quotation marks around 'Входен атрибут + @ + LDAP Домейн'. While technically correct, it's unusual in Bulgarian to include quotation marks in this context and might feel unnatural. It's more common to describe the format without them.",
+          "suggestion": "Remove the quotation marks: 'Входен атрибут + @ + LDAP Домейн'"
         }
       ],
       "approved_at": null
@@ -86,8 +91,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "Inconsistent use of quotation marks. English uses single quotes for 'Mail Attribute' and 'Login Attribute', while Czech uses double quotes.",
-          "suggestion": "Maintain consistency with single quotes, or switch to double quotes for all occurrences of attribute names."
+          "description": "The Czech translation retains the English quotation marks (``) which are not standard Czech quotation marks. They should be replaced with guillemets (» and «).",
+          "suggestion": "Replace `` with » and «. For example, change „Mail Attribute“ to »Mail Attribute«."
         }
       ],
       "approved_at": null
@@ -103,19 +108,29 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The phrase 'Χαρακτηριστικό Εισόδου' is used inconsistently. It should be consistently translated as 'Login Attribute' or a more accurate equivalent.",
-          "suggestion": "Consider using a more consistent term for 'Login Attribute' throughout the translation. For example, 'Συμβατικό Εισόδου' might be a more accurate translation."
+          "type": "incorrect_translation",
+          "description": "The phrase 'portal user email' is translated as 'email του χρήστη πύλης'. While technically correct, it would sound more natural in Greek as 'email χρήστη της πύλης' or 'email του χρήστη για την πύλη'.",
+          "suggestion": "email χρήστη της πύλης"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'πόρτα' is used, meaning 'door' or 'gateway'. It should be 'πύλη' to accurately reflect 'portal'.",
-          "suggestion": "Replace 'πόρτα' with 'πύλη' to accurately translate 'portal'."
+          "description": "The phrase 'Mail Attribute' is translated as 'Χαρακτηριστικό Αλληλογραφίας'. A more common and understandable term would be 'Χαρακτηριστικό Email'.",
+          "suggestion": "Χαρακτηριστικό Email"
         },
         {
-          "type": "formatting",
-          "description": "The English content uses single quotes around the formed email address components ('Login Attribute + @ + LDAP Domain'). The Greek translation uses double quotes. This could be confusing and should be consistent.",
-          "suggestion": "Use single quotes consistently throughout the Greek translation for the formed email address components, to match the English original."
+          "type": "incorrect_translation",
+          "description": "'Login Attribute' is translated as 'Χαρακτηριστικό Εισόδου'. While understandable, a more accurate and frequently used translation in this context would be 'Χαρακτηριστικό Σύνδεσης'.",
+          "suggestion": "Χαρακτηριστικό Σύνδεσης"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "'LDAP Domain' is translated as 'Τομέας LDAP'. While technically correct, 'LDAP Τομέας' flows better and is more commonly used.",
+          "suggestion": "LDAP Τομέας"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The sentence 'In case such an email does not exist...' is translated as 'Σε περίπτωση που δεν υπάρχει τέτοιο email...'. While accurate, it can be made more fluent by saying 'Εάν δεν υπάρχει τέτοιο email...'",
+          "suggestion": "Εάν δεν υπάρχει τέτοιο email..."
         }
       ],
       "approved_at": null
@@ -126,18 +141,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Mail Attribute' is translated as 'Atributo de correo'. While technically correct, a more common and clearer translation for a technical context might be 'Atributo de Correo Electrónico' or 'Atributo de Email'.",
-          "suggestion": "Consider translating 'Mail Attribute' as 'Atributo de Correo Electrónico' or 'Atributo de Email'."
+          "description": "The phrase 'Mail Attribute' is translated as 'Atributo de correo'. While technically correct, 'Atributo de Correo Electrónico' would be more precise and clear in this context.",
+          "suggestion": "Atributo de Correo Electrónico"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Login Attribute' is translated as 'Atributo de inicio de sesión'. A more common and natural translation in this context would be 'Atributo de Inicio' or 'Atributo de Acceso'.",
-          "suggestion": "Consider translating 'Login Attribute' as 'Atributo de Inicio' or 'Atributo de Acceso'."
-        },
-        {
-          "type": "formatting",
-          "description": "While not incorrect, consistently using italics or quotation marks for the attribute names would improve readability. The current translation mixes them.",
-          "suggestion": "Maintain consistent formatting for attribute names (e.g., consistently use single quotes or italics)."
+          "description": "The phrase 'Login Attribute' is translated as 'Atributo de inicio de sesión'. A more natural and potentially clearer translation would be 'Atributo de inicio'.",
+          "suggestion": "Atributo de inicio"
         }
       ],
       "approved_at": null
@@ -148,8 +158,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "Inconsistent use of single quotes around attribute names. English uses single quotes, Finnish uses them as well, but it's unclear why both use them. Consistency would improve readability.",
-          "suggestion": "Consider removing the single quotes around 'Postiattribuutti' and 'Kirjautumisattribuutti' to improve readability. Alternatively, ensure consistent use of single quotes across both languages."
+          "description": "Inconsistent use of single quotes. The English uses single quotes around 'Mail Attribute' and 'Login Attribute', while the Finnish uses single quotes only around 'Postiattribuutti'. Consistent formatting would improve readability.",
+          "suggestion": "Consider using single quotes around 'Kirjautumisattribuutti' as well to match the English original, or removing all single quotes altogether for a more natural Finnish flow."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While generally accurate, 'Portaalin ilmoituksia' could be more naturally phrased. 'Portaalin notifikaatioita' or 'Portaalin viestejä' might be more common and idiomatic in Finnish.",
+          "suggestion": "Consider replacing 'Portaalin ilmoituksia' with 'Portaalin notifikaatioita' or 'Portaalin viestejä'."
         }
       ],
       "approved_at": null
@@ -160,23 +175,23 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'portal user email' is translated as 'adresse e-mail de l'utilisateur de l'espace'. While understandable, a more natural and precise translation would be something like 'adresse e-mail de l'utilisateur du portail'. The word 'espace' refers to a 'space' which isn't quite the intended meaning.",
-          "suggestion": "adresse e-mail de l'utilisateur du portail"
+          "description": "The phrase 'portal user email' is translated as 'adresse e-mail de l'utilisateur de l'espace'. While technically correct, 'utilisateur de l'espace' is a bit clunky. A more natural translation might be 'e-mail de l'utilisateur du portail'.",
+          "suggestion": "e-mail de l'utilisateur du portail"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Mail Attribute' is translated as 'paramètre \"Attribut de messagerie\"'.  While technically correct, the English original uses quotation marks to indicate a setting. The French translation should also use quotation marks, and 'paramètre' might be too formal. 'Réglage' or 'Option' could also be suitable alternatives.",
-          "suggestion": "réglage \"Attribut de messagerie\""
+          "description": "The phrase 'Mail Attribute' is translated as 'paramètre \"Attribut de messagerie\"'.  It would be more consistent to use 'Attribut Courrier' rather than 'Attribut de messagerie' as 'courriel' is the French equivalent of 'email'.",
+          "suggestion": "paramètre \"Attribut Courrier\""
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Login Attribute' is translated as 'Attribut de connexion'. This is accurate, but consider adding a specific article ('Le' or 'L’') for better flow. 'L’Attribut de connexion' would be a better translation.",
-          "suggestion": "L’Attribut de connexion"
+          "description": "The phrase 'Login Attribute' is translated as 'Attribut de connexion'. While not incorrect, 'Attribut de connexion' can be shortened to 'Attribut de connexion' as 'Login' is a commonly understood term within a technical context.",
+          "suggestion": "Attribut de connexion"
         },
         {
           "type": "incorrect_translation",
-          "description": "The term 'LDAP Domain' is translated as 'Domaine LDAP'. While understandable, adding 'le' ('le Domaine LDAP') would make it more natural.",
-          "suggestion": "le Domaine LDAP"
+          "description": "The phrase 'LDAP Domain' is translated as 'Domaine LDAP'.  While not incorrect, it's more standard to keep the capitalization of LDAP in French.",
+          "suggestion": "Domaine LDAP"
         }
       ],
       "approved_at": null
@@ -186,19 +201,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Mail Attribute' is translated as 'Փոստի հատկանիշ'. While technically correct, a more natural and clear translation in this context might be 'Էլ. փոստի հատկանիշ' (Email Attribute) or 'Էլեկտրոնային փոստի կարգավորում' (Email Setting).",
-          "suggestion": "Consider translating 'Mail Attribute' as 'Էլ. փոստի հատկանիշ' or 'Էլեկտրոնային փոստի կարգավորում'."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Login Attribute' is translated as 'Մուտքի հատկանիշ'. While technically correct, a more natural phrasing could be 'Մուտքագրման հատկանիշ' or 'Մուտքի դաշտ'.",
-          "suggestion": "Consider translating 'Login Attribute' as 'Մուտքագրման հատկանիշ' or 'Մուտքի դաշտ'."
-        },
-        {
           "type": "formatting",
-          "description": "The English content uses quotation marks for specific terms. The Armenian translation should follow the same convention.",
-          "suggestion": "Ensure consistent use of quotation marks around 'Փոստի հատկանիշ' and 'Մուտքի հատկանիշ' like the original English version."
+          "description": "The use of quotes around \"Փոստի հատկանիշ\" is inconsistent with the English 'Mail Attribute'.  It should be consistent throughout the Armenian translation.",
+          "suggestion": "Use double quotes around \"Մուտքի հատկանիշ\" and \"LDAP տիրույթ\" to maintain consistency."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'LDAP տիրույթ' (LDAP domain) while technically correct, could be clearer. Users might not be familiar with the term 'domain' in this context.",
+          "suggestion": "Consider a more user-friendly term like 'LDAP գոտի' (LDAP zone) or 'LDAP ենթադոմեն' (LDAP subdomain) depending on the specific technical meaning and audience."
         }
       ],
       "approved_at": null
@@ -209,18 +219,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Mail Attribute' is translated as 'Attributo posta'. A more accurate translation, considering the context, would be 'Attributo Email' or 'Attributo di posta elettronica'. 'Attributo posta' sounds slightly unnatural in Italian in this context.",
-          "suggestion": "Attributo Email"
+          "description": "'Mail Attribute' is translated as 'Attributo posta'. While technically correct, 'Attributo email' would be more natural and consistent with the usage of 'Attributo login'.",
+          "suggestion": "'Mail Attribute' should be translated as 'Attributo email'."
         },
         {
           "type": "formatting",
-          "description": "The quotation marks used for 'Attributo posta', 'Attributo login', and 'Dominio LDAP' are single quotation marks. These should be double quotation marks to match the English source and standard practice.",
-          "suggestion": "Use double quotation marks: \"Attributo Email\", \"Attributo login\", \"Dominio LDAP\""
+          "description": "The use of single quotes around 'Attributo posta', 'Attributo login', and 'Dominio LDAP' is inconsistent. It would be more appropriate to use double quotes for all or none.",
+          "suggestion": "Use double quotes instead of single quotes, e.g., 'Attributo posta' -> \"Attributo posta\" or remove the quotes altogether if not crucial for technical distinction."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Login Attribute' is translated as 'Attributo login'. While understandable, a more precise and common translation would be 'Attributo di accesso' or 'Attributo di login'.",
-          "suggestion": "Attributo di accesso"
+          "type": "grammar",
+          "description": "The phrase 'nel caso in cui tale email non esista' is grammatically correct but slightly verbose. A more concise and natural phrasing would improve readability.",
+          "suggestion": "Replace 'nel caso in cui tale email non esista' with 'se tale email non esiste'."
         }
       ],
       "approved_at": null
@@ -231,8 +241,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation uses a full stop (.) at the end of each sentence, which is common in Japanese but might feel slightly abrupt or overly formal in certain portal contexts. Consider using a more conversational tone (e.g., omitting the full stop or using a softer ending particle).",
-          "suggestion": "Review the overall tone and consider removing the full stops or using a more conversational ending particle (e.g., ～です、～ます, ～ね)."
+          "description": "The sentence structure could be improved for better readability in Japanese. It reads a little stiff.",
+          "suggestion": "ポータルユーザのメールアドレスは「メール属性」設定から取得されます。もしメール属性が設定されていない場合は、「ログイン属性 + @ + LDAPドメイン」で自動的に作成されます。しかし、そのようなメールアドレスが存在しない場合、ユーザはポータル通知を受け取れません。"
         }
       ],
       "approved_at": null
@@ -242,24 +252,19 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Please, keep in mind' is translated as '다음 사항을 유의하세요'. While technically correct, it's a bit formal for the context. A more natural and user-friendly translation might be something like '참고하세요' or '알려드립니다'.",
-          "suggestion": "참고하세요: or 알려드립니다:"
-        },
-        {
           "type": "formatting",
-          "description": "The colon after 'Please, keep in mind' is missing in the Korean translation. It is crucial for clarity and mirroring the English structure.",
-          "suggestion": "다음 사항을 유의하세요: 포털 사용자 이메일은..."
+          "description": "The phrase '다음 사항을 유의하세요:' is a bit formal for a user-facing notification. Consider a more approachable phrasing.",
+          "suggestion": "다음과 같이 참고해주세요:"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'will be formed' is translated as '구성됩니다'. While accurate, '생성됩니다' (saengseongdoemnida) might be more appropriate to convey the meaning of email creation.",
-          "suggestion": "구성됩니다' -> 생성됩니다"
+          "description": "“구성됩니다: '로그인 속성 + @ + LDAP 도메인'” translates literally as 'composed'. A better phrasing would convey how the email is *formed* or *created*.",
+          "suggestion": "‘로그인 속성 + @ + LDAP 도메인’ 형식으로 만들어집니다."
         },
         {
           "type": "cultural",
-          "description": "The passive voice used in the English ('will be formed') translates to a slightly awkward phrasing in Korean.  While acceptable, consider rephrasing for smoother flow. For example, '로그인 속성 + @ + LDAP 도메인'으로 만들어집니다 (is made/constructed) is a viable alternative, though lengthier.",
-          "suggestion": "Consider rephrasing the 'will be formed' part to improve natural flow, though this is a minor concern."
+          "description": "While technically correct, the use of '사용자는 포털 알림을 받지 못합니다' (the user will not receive portal notifications) is very direct and could be softened for better user experience.",
+          "suggestion": "해당 이메일 주소로 포털 알림이 발송되지 않습니다."
         }
       ],
       "approved_at": null
@@ -270,18 +275,23 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'ກະລຸນາສືນໍ້າໃຈໃສ່' (kalanu sunuam jai sai) is a very polite and somewhat formal way of saying 'please keep in mind'. A more natural and common phrasing for this context would be 'ກະລຸນາຮັບຊາບວ່າ' (kalanu rap chaap wa) or 'ຢ່າລືມວ່າ' (yaa leum wa).",
-          "suggestion": "Replace 'ກະລຸນາສືນໍ້າໃຈໃສ່' with 'ກະລຸນາຮັບຊາບວ່າ' or 'ຢ່າລືມວ່າ'."
+          "description": "The phrase 'Please, keep in mind' is translated as 'ກະລຸນາສືນໍ້າໃຈໃສ່'. While understandable, a more direct and common translation would be 'ກະລຸນາຮັບຊາບ' or 'ກະລຸນາຈົ່ງຊຶ້ງ'.",
+          "suggestion": "ກະລຸນາຮັບຊາບ"
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'ມືໍ່' (muo) is incorrect. It means 'hand'. The correct word to use here is 'ຈະບໍ່' (ja bo).",
-          "suggestion": "Replace 'ມືໍ່' with 'ຈະບໍ່'."
+          "description": "The word 'portal' is translated as 'ພອດທະບານ'. While technically correct, a more commonly understood term might be 'ເວັບໄຊ້' or 'ເວັບໄຊ້ລຸ່ມ'.",
+          "suggestion": "ເວັບໄຊ້"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'ພອດທະບານໃດໆ' (porttaban dai dai) is a literal translation of 'any portal' and sounds unnatural.  It should be a more general term for notification.",
-          "suggestion": "Replace 'ພອດທະບານໃດໆ' with 'ການແຈ້ງເຕືອນ' or similar."
+          "description": "The phrase 'user will not receive any portal notification' is translated as 'ຜູ້ໃຊ້ມືໍ່ໄດ້ຮັບການແຈ້ງເຕືອນຈາກພອດທະບານໃດໆ'. The word 'ມືໍ່' seems out of place and doesn't convey the correct meaning.  A better translation would focus on the lack of notification.",
+          "suggestion": "ຜູ້ໃຊ້ມືໍ່ໄດ້ຮັບການແຈ້ງເຕືອນຈາກເວັບໄຊ້"
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence 'ຖ້າມື້ນອກຈາກນັ້ນອີເມລ໌ເຊັ່ນນີ້ບໍ່ມີຢູ່' has awkward phrasing. The word 'ນອກຈາກນັ້ນ' doesn't fit well here.",
+          "suggestion": "ຖ້ານອກຈາກນີ້ອີເມລ໌ເຊັ່ນນີ້ບໍ່ມີຢູ່"
         }
       ],
       "approved_at": null
@@ -292,18 +302,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Latvian translation uses a colon after 'Ņemiet vērā:' which is standard. However, a more formal tone might benefit from a semicolon instead.",
-          "suggestion": "Replace ':' with ';'"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Mail Attribute' is translated as 'Pasta atribūts'. While technically correct, a more idiomatic and clearer translation might be 'E-pasta atribūts' or 'E-pasta lauks'.",
-          "suggestion": "Change 'Pasta atribūts' to 'E-pasta atribūts' or 'E-pasta lauks'"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Login Attribute' is translated as 'Pieteikšanās atribūts'. It might be more understandable to the user to use 'Iespējošanas atribūts' or similar, depending on the specific attribute being referenced.",
-          "suggestion": "Consider alternative translation for 'Login Attribute' - e.g., 'Iespējošanas atribūts'"
+          "description": "The Latvian translation uses a colon (:) after 'Ņemiet vērā:' which is not consistent with common practice in Latvian. A period (.) would be more appropriate.",
+          "suggestion": "Ņemiet vērā. portāla lietotāja e-pasts..."
         }
       ],
       "approved_at": null
@@ -317,7 +317,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Polish translation uses quotes around 'Atrybut poczty' and 'Atrybut logowania'. The English uses single quotes. Consistency should be maintained. While not strictly incorrect, it impacts readability and feels slightly off.",
+          "suggestion": "Consider using single quotes around 'Atrybut poczty' and 'Atrybut logowania' to match the English source: 'Atrybut poczty' and 'Atrybut logowania'."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -326,18 +332,23 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Mail Attribute' is translated as 'Atributo de e-mail'. While technically correct, 'Atributo de Correio' is a more natural and common translation for 'Mail Attribute' in this context within a technical setting.",
+          "description": "The phrase 'Mail Attribute' is translated as 'Atributo de e-mail'. While understandable, 'Atributo de Correio' might be more accurate and commonly used in a technical context in Portuguese.",
           "suggestion": "Consider translating 'Mail Attribute' as 'Atributo de Correio'."
         },
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Login Attribute' is translated as 'Atributo Login'. This is grammatically incorrect in Portuguese. The correct structure would be 'Atributo de Login'.",
+          "description": "The English phrase 'Login Attribute' is translated as 'Atributo Login'. While technically correct, a more natural and clearer phrasing in Portuguese would be 'Atributo de Login'.",
           "suggestion": "Change 'Atributo Login' to 'Atributo de Login'."
         },
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'LDAP Domain' is translated as 'Domínio LDAP'.  While understandable, 'Domínio do LDAP' would flow more naturally in Portuguese.",
-          "suggestion": "Consider translating 'LDAP Domain' as 'Domínio do LDAP'."
+          "description": "The English phrase 'LDAP Domain' is translated as 'Domínio LDAP'. While understandable,  'Domínio do LDAP' would be more precise and commonly used.",
+          "suggestion": "Change 'Domínio LDAP' to 'Domínio do LDAP'."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of single quotes (') is consistent but may benefit from double quotes (\" ) for better readability and adherence to common Portuguese style, especially in technical documentation.",
+          "suggestion": "Consider using double quotes (\"\") instead of single quotes (') throughout the text."
         }
       ],
       "approved_at": null
@@ -348,18 +359,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Mail Attribute' is translated as 'Atributo de e-mail'. While technically correct, a more natural and common phrasing in Portuguese would be 'Atributo de Correio Eletrônico' or simply 'Atributo de Email'. 'Atributo de e-mail' sounds a bit clunky.",
-          "suggestion": "Change 'Atributo de e-mail' to 'Atributo de Correio Eletrônico' or 'Atributo de Email'."
+          "description": "The phrase 'Mail Attribute' is translated as 'Atributo de e-mail'. While technically correct, 'Atributo de Mail' would be more common and natural in Brazilian Portuguese when referring to a setting.",
+          "suggestion": "Consider translating 'Mail Attribute' as 'Atributo de Mail'."
         },
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Login Attribute' is translated as 'Atributo Login'. While understandable, this is not standard Portuguese usage. It should be 'Atributo de Login'.",
-          "suggestion": "Change 'Atributo Login' to 'Atributo de Login'."
-        },
-        {
-          "type": "formatting",
-          "description": "The use of single quotes around 'Atributo Login + @ + Domínio LDAP' feels slightly awkward. Using double quotes is more common for literal representations of strings.",
-          "suggestion": "Change single quotes to double quotes: \"Atributo Login + @ + Domínio LDAP\""
+          "description": "The phrase 'Login Attribute' is translated as 'Atributo Login'. A more natural and common translation would be 'Atributo de Login'.",
+          "suggestion": "Translate 'Login Attribute' as 'Atributo de Login'."
         }
       ],
       "approved_at": null
@@ -370,23 +376,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Mail Attribute' is translated as 'Atributul Mail'. While understandable, 'Atributul de e-mail' would be more natural and accurate in Romanian, maintaining consistency with 'Atributul de conectare'.",
-          "suggestion": "Atributul de e-mail"
+          "description": "The phrase 'Mail Attribute' is translated as 'Atributul Mail'. While understandable, a more natural translation would be 'Atributul de E-mail' or 'Atributul Poștal'.",
+          "suggestion": "Atributul de E-mail"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Login Attribute' is translated as 'Atributul de conectare'. While technically correct, 'Atributul de autentificare' or 'Atributul de logare' might be more commonly used and clearer for Romanian users in this context.",
+          "description": "The phrase 'Login Attribute' is translated as 'Atributul de conectare'. A more accurate translation would be 'Atributul de autentificare'.",
           "suggestion": "Atributul de autentificare"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'LDAP Domain' is translated as 'Domeniu LDAP'. A more natural translation would be 'Domeniul LDAP', mirroring the established pattern.",
-          "suggestion": "Domeniul LDAP"
-        },
-        {
           "type": "formatting",
-          "description": "The phrase 'Atributul de conectare + @ + Domeniu LDAP' uses '+'. This is not the standard way to indicate concatenation in Romanian. A colon (:) or a simple space would be better.",
-          "suggestion": "Atributul de conectare : @ : Domeniul LDAP"
+          "description": "The formatting for attributes within the email address formation isn't consistently italicized or quoted.  The English version uses single quotes. Maintaining consistency would improve readability.",
+          "suggestion": "Ensure the attributes are consistently within single quotes, like this: 'Atributul de autentificare + @ + Domeniu LDAP'"
         }
       ],
       "approved_at": null
@@ -397,13 +398,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The phrase 'Атрибут почты' should ideally be enclosed in quotes to match the English 'Mail Attribute'.",
-          "suggestion": "Обратите внимание: адрес электронной почты пользователя портала будет взят из параметра \"Атрибут почты\"."
+          "description": "The phrase \"Атрибут почты\" is enclosed in quotes, while \"Атрибут входа\" and \"LDAP Домен\" are not. This inconsistency makes the translation feel slightly awkward. While technically correct, standardizing the quote usage would improve readability.",
+          "suggestion": "Change \"Атрибут почты\" to \"Атрибут входа\" or remove the quotes from both."
         },
         {
-          "type": "formatting",
-          "description": "The phrase 'Атрибут входа' should ideally be enclosed in quotes to match the English 'Login Attribute'.",
-          "suggestion": "Обратите внимание: адрес электронной почты пользователя портала будет взят из параметра \"Атрибут почты\". Если он отсутствует, то он будет сформирован следующим образом: \"Атрибут входа + @ + LDAP Домен\"."
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Mail Attribute' is translated as \"Атрибут почты\". While understandable, a more accurate and commonly used term might be \"Почтовый атрибут\". This depends on the specific terminology used in the context of the portal.",
+          "suggestion": "Consider translating 'Mail Attribute' as \"Почтовый атрибут\"."
         }
       ],
       "approved_at": null
@@ -413,19 +414,24 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "'Mail Attribute' is translated as 'තැපැල් ගුණාංගය'. While technically correct, a more natural phrasing might be 'විද්‍යුත් ලිපිනය ගුණාංගය' (vidyuth lipinaya gunangaya) or 'විද්‍යුත් ලිපිනය සැකසුම' (vidyuth lipinaya sakasumu).",
-          "suggestion": "Consider using 'විද්‍යුත් ලිපිනය ගුණාංගය' or 'විද්‍යුත් ලිපිනය සැකසුම' for 'Mail Attribute'."
+          "type": "spelling",
+          "description": "The word 'ලොග්ඉන්' should be 'ප්‍රවිධාන'. 'Login' is better translated as 'ප්‍රවිධාන'.",
+          "suggestion": "ප්‍රවිධාන"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'අතුරුදහන් වී තිබේ නම්' could be more naturally phrased as 'නැත්නම්'.",
+          "suggestion": "නැත්නම්"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Login Attribute' is translated as 'ලොග්ඉන් ගුණාංගය'. While understandable, 'පිවිසුම් ගුණාංගය' (pivasum gunangaya) could be a more precise and natural translation.",
-          "suggestion": "Consider using 'පිවිසුම් ගුණාංගය' for 'Login Attribute'."
+          "description": "The phrase 'portal user' is translated as 'ද්වාර පරිශීලක'. 'පරිශීලක' is a very formal translation of 'user'. Using 'භාවිතකරු' would be more common and natural.",
+          "suggestion": "භාවිතකරු"
         },
         {
           "type": "formatting",
-          "description": "The '+' symbol in the English content is replicated in the Sinhala translation. While not inherently wrong, it might be stylistically better to remove them.",
-          "suggestion": "Remove the '+' symbols. For example, change 'ලොග්ඉන් ගුණාංගය + @ + LDAP ප්‍රදේශය' to 'ලොග්ඉන් ගුණාංගය @ LDAP ප්‍රදේශය'."
+          "description": "The English uses single quotes for example attributes in the warning. The Sinhala translation should follow the same formatting.",
+          "suggestion": "Use single quotes: 'ලොග්ඉන් ගුණාංගය'"
         }
       ],
       "approved_at": null
@@ -435,19 +441,19 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'e=mail' is a typo and should be 'e-mail'.",
-          "suggestion": "e-mail"
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Mail Attribute' is translated as 'Atribút Pošta'. While technically correct, a more natural and common Slovak translation would be 'Atribút E-mail' or 'E-mailový atribút'.",
+          "suggestion": "Atribút E-mail"
         },
         {
           "type": "incorrect_translation",
-          "description": "“Atribút Pošta” is not the best translation for 'Mail Attribute'. It's too literal and sounds awkward in Slovak. A more natural translation would be 'Poštový atribút' or 'Atribút e-mailu'.",
-          "suggestion": "Atribút e-mailu"
+          "description": "The English phrase 'Login Attribute' is translated as 'Atribút Prihlásenie'. While understandable, 'Atribút Prihlásenia' is more grammatically correct and commonly used.",
+          "suggestion": "Atribút Prihlásenia"
         },
         {
-          "type": "incorrect_translation",
-          "description": "“Atribút Prihlásenie” is a literal translation of 'Login Attribute'. While understandable, a more natural phrase in this context might be 'Atribút prihlásenia'.",
-          "suggestion": "Atribút prihlásenia"
+          "type": "formatting",
+          "description": "The English text uses quotation marks for 'Mail Attribute' and 'Login Attribute'.  These should consistently be used in the Slovak translation as well.",
+          "suggestion": "“Atribút E-mail” and “Atribút Prihlásenia”"
         }
       ],
       "approved_at": null
@@ -458,13 +464,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Mail Attribute' is translated as 'Atributi pošte'. While technically correct, it's a bit clunky. A more natural translation might be 'Poštni atribut' or 'Attribut e-pošte'.",
-          "suggestion": "Consider 'Poštni atribut' or 'Attribut e-pošte'"
+          "description": "The English phrase 'Mail Attribute' is translated as 'Atributi pošte'. While technically correct, 'Poštni atribut' would be a more natural and common phrasing in Slovenian for this context. 'Atributi pošte' reads a bit awkwardly.",
+          "suggestion": "Atribut pošti"
         },
         {
           "type": "incorrect_translation",
-          "description": "The original English uses 'Login Attribute' which is a specific technical term. The Slovenian translation doesn't explicitly convey this. It could be misinterpreted as a generic attribute.",
-          "suggestion": "Clarify 'Login Attribute' with something like 'Attribut za prijavo' or 'Attribut za vstop' to make the technical meaning clear."
+          "description": "The phrase 'Login Attribute' is consistently used. While understandable, it might be more accurate to use the equivalent Slovenian term, which could depend on the specific system being referred to. Without more context, it's difficult to provide a definitive suggestion, but it’s a potential point for refinement.",
+          "suggestion": "Prijava atribut"
+        },
+        {
+          "type": "formatting",
+          "description": "The usage of single quotes ('...') throughout the translation feels inconsistent with typical Slovenian style, which often uses double quotes (“…”).",
+          "suggestion": "Replace single quotes with double quotes: (“Login Attribute + @ + LDAP Domain”)."
         }
       ],
       "approved_at": null
@@ -472,60 +483,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Portal user email' is translated as 'емаил корисника портал'. While technically correct, a more natural phrasing in Serbian would be 'емаил корисника портала' or 'емаил корисника на порталу'.",
-          "suggestion": "емаил корисника портала"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Mail Attribute' is translated as 'Мејл Атрибут'. While understandable, using a more established and commonly used term like 'Поставке е-маила' or 'Атрибут за е-маил' would be clearer.",
-          "suggestion": "Поставке е-маила"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Login Attribute' is translated as 'Атрибут за пријаву'. While technically correct, 'Атрибут за пријаву' can be a bit clunky. 'Атрибут за логин' would be more commonplace.",
-          "suggestion": "Атрибут за логин"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'will be formed' is translated as 'биће формиран'. A more flowing and natural translation would be 'ће бити креиран' or 'ће бити генерисан'.",
-          "suggestion": "ће бити креиран"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'will not receive any portal notification' is translated as 'неће примити обавештење са портала'. A more conversational and natural phrasing could be 'неће добити обавештење са портала'.",
-          "suggestion": "неће добити обавештење са портала"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Mail Attribute' is literally translated to 'Mejl Atribut'. While understandable, 'Mejl' is archaic. A more natural translation would be 'Adresa Elektronske Pošte Atribut' or simply 'Atribut adrese e-pošte'.",
-          "suggestion": "Atribut adrese e-pošte"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Login Attribute' is literally translated to 'Atribut za prijavu'. While understandable, a more common and accurate translation would be 'Atribut za ulazak' or 'Atribut za učitavanje'.",
-          "suggestion": "Atribut za ulazak"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The sentence 'Ako nedostaje, biće formiran na sledeći način' is a bit clunky. It could be improved for better flow. 'Ako nedostaje, formiraće se na sledeći način' is more natural.",
-          "suggestion": "Ako nedostaje, formiraće se na sledeći način"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'U slučaju da takav mejl ne postoji' translates literally but sounds somewhat formal and unnatural. A more fluid phrasing would be 'Ako ne postoji takav mejl' or 'Ako takav mejl ne postoji'.",
-          "suggestion": "Ako takav mejl ne postoji"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -534,18 +498,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Mail Attribute' is translated as 'Posta Özelliği'. While technically correct, 'E-posta Özelliği' would be more natural and common usage for 'Mail Attribute' in this context.",
-          "suggestion": "Change 'Posta Özelliği' to 'E-posta Özelliği'"
+          "description": "'Mail Attribute' is translated as 'Posta Özelliği'. While technically correct, 'E-posta Özelliği' would be more natural and precise in this context, referring specifically to an email attribute.",
+          "suggestion": "Replace 'Posta Özelliği' with 'E-posta Özelliği'"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Login Attribute' is translated as 'Oturum Açma Özelliği'. While understandable, 'Giriş Özelliği' is a more accurate and common translation.",
-          "suggestion": "Change 'Oturum Açma Özelliği' to 'Giriş Özelliği'"
-        },
-        {
-          "type": "formatting",
-          "description": "The quotation marks around 'Login Attribute + @ + LDAP Domain' are inconsistent with the quotes used around 'Mail Attribute'.",
-          "suggestion": "Ensure consistent use of quotation marks. Either use single quotes throughout or double quotes throughout."
+          "description": "'Login Attribute' is translated as 'Oturum Açma Özelliği'.  'Giriş Özelliği' or 'Kullanıcı Adı Özelliği' is a better translation here as 'Oturum Açma' carries connotations beyond simply the attribute used for login.",
+          "suggestion": "Replace 'Oturum Açma Özelliği' with 'Giriş Özelliği' or 'Kullanıcı Adı Özelliği'"
         }
       ],
       "approved_at": null
@@ -553,23 +512,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The phrase \"Атрибут пошти\" is in quotes, which doesn't match the English's implicit formatting. It should ideally match the original formatting style.",
-          "suggestion": "Consider removing the quotes around \"Атрибут пошти\" to align with the English original's implicit formatting (no quotes). Alternatively, ensure consistent use of quotes throughout the document."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Mail Attribute' is translated as \"Атрибут пошти\". While technically correct, a more idiomatic translation for a technical setting might be \"Поштовий атрибут\" to better reflect the concept of a mail attribute.",
-          "suggestion": "Consider translating 'Mail Attribute' as \"Поштовий атрибут\" for improved clarity in a technical context."
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence \"Якщо вона відсутня, то буде сформована таким чином...\" could be slightly more elegant. The 'то' is a bit clunky.",
-          "suggestion": "Consider rewriting as \"Якщо вона відсутня, буде сформована таким чином...\" to improve flow."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -578,13 +521,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Mail Attribute' is translated as 'Thuộc tính thư'. While technically correct, a more natural and common translation would be 'Thuộc tính email'.",
-          "suggestion": "Change 'Thuộc tính thư' to 'Thuộc tính email'."
+          "description": "The phrase 'Mail Attribute' is translated as 'Thuộc tính thư'. While understandable, 'Thuộc tính bưu điện' is a more precise and common translation for 'Mail Attribute' in this technical context.",
+          "suggestion": "Consider translating 'Mail Attribute' as 'Thuộc tính bưu điện'."
         },
         {
           "type": "incorrect_translation",
-          "description": "'Login Attribute' is translated as 'Thuộc tính đăng nhập'. This is accurate but can be slightly improved for clarity and flow. Consider a more explanatory translation.",
-          "suggestion": "Consider 'Thuộc tính đăng nhập' to be translated as 'Thuộc tính xác thực' or 'Thuộc tính tài khoản' depending on the specific context."
+          "description": "The phrase 'Login Attribute' is translated as 'Thuộc tính đăng nhập'. While technically correct, 'Thuộc tính đăng nhập' can be perceived as slightly awkward. A more natural phrasing might be 'Thuộc tính xác thực' or simply 'Thuộc tính đăng ký'.",
+          "suggestion": "Consider translating 'Login Attribute' as 'Thuộc tính xác thực' or 'Thuộc tính đăng ký'."
+        },
+        {
+          "type": "formatting",
+          "description": "The single quotes around 'Thuộc tính đăng nhập + @ + Tên miền LDAP' could be more consistently applied or omitted. It's slightly jarring to have them in one place and not another.",
+          "suggestion": "Ensure consistent use of single quotes around attribute names or omit them entirely for a cleaner look."
         }
       ],
       "approved_at": null

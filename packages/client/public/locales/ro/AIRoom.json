@@ -1,0 +1,18 @@
+{
+  "AIAgentAccessRedirectNote": "Veți fi redirecționat automat către secțiunea {{sectionName}} în 5 secunde.",
+  "AIChat": "Chat cu IA",
+  "AIInstructions": "Instrucțiuni pentru IA",
+  "CreateChat": "Creare chat",
+  "EmptyKnowledgeDescriptionActions": "Încercați aceste acțiuni pentru a începe:",
+  "EmptyKnowledgeTitle": "Niciun fișier nu a fost deocamdată încărcat",
+  "EmptyResultsTitle": "Deocamdată niciun rezultat",
+  "InstructionsDescriptionAgentExample": "Exemplu: “Sunteți un asistent IA pentru relații publice care ajută la redactarea și editarea comunicatelor de presă. Mențineți un ton profesionist, convingător și prietenos care este acceptabil pentru media. Evidențiați clar mesajele cheie, evitați jargonul și păstrați-vă limbajul concis și captivant.",
+  "KnowledgeDescription": "Încărcați fișierele de pe calculatorul sau {{productName}} pentru a oferi contextul suplimentar chat-ului. Mențiune: o parte sau întregul conținut încărcat poate fi partajat în timpul conversației.",
+  "KnowledgeSelectIn": "Selectare din {{productName}}",
+  "KnowledgeUnavailable": "Baza de cunoștințe nu este disponibilă",
+  "MCP": "Instrumente MCP în această sală",
+  "ResponseQualityNode": "<1>Notă:</1> Calitatea răspunsurilor depinde de model; recomandăm să folosiţi modele cele mai noi pentru rezultate mai performante.",
+  "ResultStorage": "Stocare rezultate",
+  "UploadFilesDevice": "Încărcați fișierele de pe diapozitivul dvs peronal",
+  "UploadFilesPortal": "Încărcați fișierele din {{sectionNameFirst}} sau {{sectionNameSecond}}"
+}

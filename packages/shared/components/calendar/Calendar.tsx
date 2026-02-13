@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,12 +24,20 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable no-console */
 import React, { useEffect, useState } from "react";
-import moment from "moment";
 import classNames from "classnames";
 import { Scrollbar } from "../scrollbar";
 import { Days, Months, Years } from "./sub-components";
+
+import type { DateTime } from "luxon";
+import {
+  now,
+  parseToDateTime,
+  startOf,
+  endOf,
+  dateDiffAbs,
+  formatDate,
+} from "../../utils/date";
 
 import { getValidDates } from "./utils";
 import { CalendarProps } from "./Calendar.types";
@@ -49,22 +57,27 @@ const Calendar = ({
   isMobile,
   forwardedRef,
   isScroll = false,
+  dataTestId,
+  useMaxTime,
 }: CalendarProps) => {
-  moment.locale(locale);
+  const handleDateChange = (date: DateTime) => {
+    // Combine the new date with the existing time from selectedDate
+    const dateStr = formatDate(date, "yyyy-MM-dd");
+    const timeStr = selectedDate ? formatDate(selectedDate, "HH:mm") : "00:00";
+    let formattedDate = parseToDateTime(`${dateStr}T${timeStr}`)!;
 
-  const handleDateChange = (date: moment.Moment) => {
-    const formattedDate = moment(
-      date.format("YYYY-MM-DD") +
-        (selectedDate ? ` ${selectedDate.format("HH:mm")}` : ""),
-    );
+    if (useMaxTime) {
+      formattedDate = endOf(formattedDate, "day")!;
+    }
+
     setSelectedDate?.(formattedDate);
     onChange?.(formattedDate);
   };
 
-  const [observedDate, setObservedDate] = useState(moment());
+  const [observedDate, setObservedDate] = useState<DateTime>(now());
   const [selectedScene, setSelectedScene] = useState(0);
-  const [resultMinDate, setResultMinDate] = useState(moment());
-  const [resultMaxDate, setResultMaxDate] = useState(moment());
+  const [resultMinDate, setResultMinDate] = useState<DateTime>(now());
+  const [resultMaxDate, setResultMaxDate] = useState<DateTime>(now());
 
   useEffect(() => {
     const [min, max] = getValidDates(minDate, maxDate);
@@ -74,27 +87,27 @@ const Calendar = ({
   }, [minDate, maxDate]);
 
   useEffect(() => {
-    let date = moment(initialDate);
+    let date = initialDate ? parseToDateTime(initialDate) : null;
     const [min, max] = getValidDates(minDate, maxDate);
 
-    if (!initialDate) {
-      const today = moment();
+    if (!date) {
+      const today = now();
       date =
         today <= max && today >= min
           ? today
-          : Math.abs(today.diff(min, "day")) > Math.abs(today.diff(max, "day"))
-            ? max.clone()
-            : min.clone();
+          : dateDiffAbs(today, min, "days") > dateDiffAbs(today, max, "days")
+            ? max
+            : min;
 
-      date.startOf("day");
-      date = moment();
+      date = startOf(date, "day")!;
+      date = now();
     } else if (date > max || date < min) {
       date =
-        Math.abs(date.diff(min, "day")) > Math.abs(date.diff(max, "day"))
-          ? max.clone()
-          : min.clone();
+        dateDiffAbs(date, min, "days") > dateDiffAbs(date, max, "days")
+          ? max
+          : min;
 
-      date.startOf("day");
+      date = startOf(date, "day")!;
 
       console.warn(
         "Initial date is out of min/max dates boundaries. Initial date will be set as closest boundary value",
@@ -154,7 +167,7 @@ const Calendar = ({
       })}
       style={style}
       ref={forwardedRef}
-      data-testid="calendar"
+      data-testid={dataTestId ?? "calendar"}
     >
       {CalendarNode}
     </div>

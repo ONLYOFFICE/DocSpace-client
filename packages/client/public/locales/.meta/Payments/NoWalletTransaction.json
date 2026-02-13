@@ -1,0 +1,28 @@
+{
+  "key_path": "NoWalletTransaction",
+  "content": "No transactions yet",
+  "content_en_sha1_hash": "494bb679a0f766ed24393326527815d49e768958",
+  "created_at": "2025-05-28T09:33:06.757Z",
+  "updated_at": "2025-05-28T09:35:50.651Z",
+  "comment": {
+    "text": "The \"NoWalletTransaction\" translation key is used to display a message indicating that there are currently no transactions to show. It appears as an icon and accompanying text within a UI component, possibly on a payment settings page or dashboard. This text provides a clear indication of the absence of transaction data.",
+    "is_auto": true,
+    "updated_at": "2025-05-28T09:35:50.651Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/TransactionBody.tsx",
+      "line_number": 74,
+      "context": "<NoTransactionsIcon />\n );\n \n const title = hasAppliedDateFilter\n ? t(\"NoFindingsFound\")\n : t(\"NoWalletTransaction\");\n const description = hasAppliedDateFilter\n ? t(\"NoTransactionsFilter\")\n : t(\"NoWalletTransactionDescription\");\n \n const emptyView = (",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

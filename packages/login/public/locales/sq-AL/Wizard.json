@@ -1,0 +1,13 @@
+{
+  "Desc": "Ju lutem konfiguroni të dhënat e regjistrimit të {{productName}}.",
+  "ErrorEmail": "Adresë e pavlefshme emaili",
+  "ErrorInstanceId": "ID e pavlefshme e shembullit",
+  "ErrorLicenseBody": "Licenca nuk është e vlefshme. Sigurohuni që të zgjidhni skedarin e duhur.",
+  "ErrorPassword": "Fjalëkalimi nuk i plotëson kërkesat",
+  "ErrorUploadLicenseFile": "Zgjidhni një skedar licence",
+  "License": "Pranoni kushtet e",
+  "LicenseLink": "Marrëveshjet e licencës",
+  "PlaceholderLicense": "Dosja juaj e licencës",
+  "Timezone": "Zona kohore",
+  "WelcomeTitle": "Mirë se vini në {{productName}} tuaj!"
+}

@@ -1,0 +1,18 @@
+{
+  "AIAgentAccessRedirectNote": "U wordt automatisch doorgestuurd naar de {{sectionName}} sectie in 5 seconden.",
+  "AIChat": "AI-Chat",
+  "AIInstructions": "AI Instructies",
+  "CreateChat": "Maak chat",
+  "EmptyKnowledgeDescriptionActions": "Probeer deze acties om aan de slag te gaan:",
+  "EmptyKnowledgeTitle": "Nog geen bestanden geüpload.",
+  "EmptyResultsTitle": "Nog geen resultaten.",
+  "InstructionsDescriptionAgentExample": "Voorbeeld: \"Je bent een AI-PR-assistent die helpt bij het schrijven en bewerken van persberichten. Handhaaf een professionele, zelfverzekerde en mediavriendelijke toon. Benadruk belangrijke boodschappen duidelijk, vermijd jargon en houd de tekst beknopt en boeiend.\"",
+  "KnowledgeDescription": "Upload bestanden van uw computer of {{productName}} om de chat meer context te geven. Let op: een deel of alle geüploade inhoud kan tijdens het gesprek worden getoond.",
+  "KnowledgeSelectIn": "Selecteer in {{productName}}",
+  "KnowledgeUnavailable": "Kennisbank niet beschikbaar",
+  "MCP": "MCP tools voor deze kamer",
+  "ResponseQualityNode": "<1>Let op:</1> De kwaliteit van de antwoorden kan variëren per model; nieuwere modellen worden aanbevolen voor de beste resultaten.",
+  "ResultStorage": "Resultaatopslag",
+  "UploadFilesDevice": "Upload bestanden vanaf uw persoonlijke apparaat",
+  "UploadFilesPortal": "Upload bestanden vanuit {{sectionNameFirst}} of {{sectionNameSecond}}"
+}

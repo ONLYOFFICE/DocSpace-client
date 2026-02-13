@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,112 +26,191 @@
 
 import React from "react";
 import classNames from "classnames";
+import Linkify from "linkify-react";
+import { ReactSVG } from "react-svg";
+import { useTranslation } from "react-i18next";
+import copy from "copy-to-clipboard";
 
-import AIIconReactSvgUrl from "PUBLIC_DIR/images/ai.chat.avatar.react.svg?url";
+import CopyIconUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 
-import { TFile } from "../../../../../../api/files/types";
+import { ContentType, RoleType } from "../../../../../../api/ai/enums";
 
+import { Link, LinkTarget } from "../../../../../link";
 import { Avatar, AvatarRole, AvatarSize } from "../../../../../avatar";
+import { Text } from "../../../../../text";
 
-import { MessageProps } from "../../../../types";
-
-import FilePreview from "../../../file-preview";
+import type { MessageProps } from "../../../../Chat.types";
+import { useChatStore } from "../../../../store/chatStore";
 
 import styles from "../../ChatMessageBody.module.scss";
 
-import Agent from "./agent";
 import Markdown from "./Markdown";
-import ButtonsBlock from "./ButtonsBlock";
+import ToolCallMessage from "./ToolCallMessage";
+import Error from "./Error";
+import Files from "./Files";
+import Buttons from "./Buttons";
+
+const renderLink = ({
+  attributes,
+  content,
+}: {
+  attributes: { href?: string };
+  content: string;
+}) => (
+  <Link
+    href={attributes.href}
+    className={styles.link}
+    target={LinkTarget.blank}
+    fontSize="15px"
+    lineHeight="22px"
+    color="accent"
+  >
+    {content}
+  </Link>
+);
 
 const Message = ({
   message,
-  displayFileExtension,
-  vectorizedFiles,
-  user,
-  isFullScreen,
-  currentDeviceType,
+  idx,
+  userAvatar,
+  isLast,
   getIcon,
+  getResultStorageId,
+  folderFormValidation,
 }: MessageProps) => {
-  const files: TFile[] = message.fileIds?.length
-    ? (message.fileIds
-        ?.map((id) => {
-          const file = vectorizedFiles.find((f) => String(f.id) === String(id));
+  const { t } = useTranslation(["Common"]);
 
-          if (!file) return false;
+  const { currentChat } = useChatStore();
 
-          return file;
-        })
-        .filter(Boolean) as TFile[])
-    : [];
+  const isUser = message.role === RoleType.UserMessage;
+  const isError = message.role === RoleType.Error;
 
-  console.log(message);
+  if (isUser) {
+    const files = message.contents.filter((c) => c.type === ContentType.Files);
+
+    return (
+      <div className={styles.userMessageContainer} data-testid="user-message">
+        <div
+          key={`${currentChat?.id}-${message.createdOn}-${idx * 2}`}
+          className={classNames(styles.userMessage)}
+        >
+          <Avatar
+            size={AvatarSize.min}
+            source={currentChat?.createdBy.avatarOriginal ?? userAvatar}
+            role={AvatarRole.user}
+            noClick
+            isNotIcon
+          />
+
+          <div className={classNames(styles.chatMessageContent)}>
+            {files ? <Files files={files} getIcon={getIcon} /> : null}
+
+            {message.contents.map((c) => {
+              if (c.type === ContentType.Text)
+                return (
+                  <div
+                    key={`${currentChat?.id}-${c.text}-${idx * 2}`}
+                    className={classNames(styles.chatMessageUser)}
+                  >
+                    <Text
+                      fontSize="15px"
+                      lineHeight="22px"
+                      fontWeight={400}
+                      className={classNames(styles.paragraph)}
+                    >
+                      <Linkify
+                        options={{
+                          validate: {
+                            url: (value) => /^https?:\/\//.test(value),
+                          },
+                          render: renderLink,
+                        }}
+                      >
+                        {c.text}
+                      </Linkify>
+                    </Text>
+                  </div>
+                );
+
+              return null;
+            })}
+          </div>
+        </div>
+        <div className={styles.userMessageBtns}>
+          <div
+            className={styles.buttonsBlockItem}
+            onClick={() => {
+              const fullText = message.contents
+                .map((c) => {
+                  if (c.type === ContentType.Text) return c.text;
+
+                  return "";
+                })
+                .join("");
+
+              copy(fullText);
+            }}
+            title={t("CopyMessage")}
+          >
+            <ReactSVG src={CopyIconUrl} />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (isError)
+    return (
+      <div
+        key={`error-${currentChat?.id}-${message.createdOn}-${idx * 2}`}
+        data-testid="error-message"
+      >
+        <Error content={message.contents[0]} />
+      </div>
+    );
+
+  const fullText = message.contents
+    .map((c) => {
+      if (c.type === ContentType.Text) return c.text;
+
+      return "";
+    })
+    .join("");
 
   return (
     <div
-      className={classNames(styles.message, {
-        [styles.userMessage]: message.isSend,
-        [styles.isFullScreen]: isFullScreen,
-      })}
+      key={`${currentChat?.id}-${message.createdOn}-${idx * 2}`}
+      data-testid="ai-message"
     >
-      <Avatar
-        size={AvatarSize.min}
-        source={!message.isSend ? AIIconReactSvgUrl : user.avatarSmall || ""}
-        role={AvatarRole.user}
-        noClick
-        isNotIcon
-        imgClassName={!message.isSend ? styles.aiAvatar : ""}
-      />
+      {message.contents.map((c, mId) => {
+        if (c.type === ContentType.Text)
+          return (
+            <Markdown
+              key={`${idx}_${c.type}_${mId}`}
+              chatMessage={c.text}
+              isFirst={mId === 0}
+            />
+          );
 
-      <div className={classNames(styles.chatMessageContent)}>
-        <div
-          className={classNames(
-            styles.chatMessagePadding,
-            styles.chatMessageBorderRadius,
-            {
-              [styles.chatMessageUser]: message.isSend,
-              [styles.chatMessageAI]: !message.isSend,
-              [styles.chatMessageError]: message.category === "error",
-            },
-          )}
-        >
-          {message.content_blocks &&
-          message.content_blocks.length > 0 &&
-          message.content_blocks.some((b) =>
-            b.contents.some((bc) => bc.type === "tool_use"),
-          ) ? (
-            <Agent content={message.content_blocks} />
-          ) : null}
+        if (c.type === ContentType.Tool)
+          return <ToolCallMessage key={`${c.name}_${mId * 2}`} content={c} />;
 
-          <Markdown chatMessage={message.message as string} />
-        </div>
-
-        {message.isSend && files && files.length > 0 ? (
-          <FilePreview
-            files={files.map((f) => ({
-              id: f.id,
-              label: f.title.replace(f.fileExst, ""),
-              fileExst: f.fileExst,
-              fileType: f.fileType,
-              parentId: f.folderId,
-              rootFolderType: f.rootFolderType,
-              security: f.security,
-              icon: "",
-            }))}
-            displayFileExtension={displayFileExtension}
-            getIcon={getIcon}
-          />
-        ) : null}
-
-        {!message.isSend ? (
-          <ButtonsBlock
-            message={message.message as string}
-            getIcon={getIcon}
-            currentDeviceType={currentDeviceType}
-          />
-        ) : null}
-      </div>
+        return null;
+      })}
+      {message.id ? (
+        <Buttons
+          text={fullText}
+          chatName={currentChat?.title}
+          isLast={isLast}
+          messageId={message.id}
+          messageIndex={idx}
+          getIcon={getIcon}
+          getResultStorageId={getResultStorageId}
+          folderFormValidation={folderFormValidation}
+        />
+      ) : null}
     </div>
   );
 };
 
-export default Message;
+export default React.memo(Message);

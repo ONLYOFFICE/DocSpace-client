@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,6 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 export type TextProps = {
+  /** Ref to access the DOM element or React component instance */
+  ref?: React.RefObject<HTMLDivElement | null>;
   /** Sets the tag through which the component is rendered */
   as?: React.ElementType;
   /** Accepts the tag id */
@@ -81,6 +83,8 @@ export type TextProps = {
   containerWidth?: string;
   /** Used in container component */
   containerMinWidth?: string;
+  /** Test id */
+  dataTestId?: string;
 };
 
 export type StyledTextProps = {

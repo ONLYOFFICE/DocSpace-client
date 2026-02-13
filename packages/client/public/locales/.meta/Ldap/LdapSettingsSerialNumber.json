@@ -3,7 +3,7 @@
   "content": "Serial number",
   "content_en_sha1_hash": "a5349d62e6c174c229df311a7ebe9c1a78acdc94",
   "created_at": "2025-05-19T21:30:54.296Z",
-  "updated_at": "2025-05-21T08:04:25.383Z",
+  "updated_at": "2025-05-24T08:18:23.616Z",
   "comment": {
     "text": "This translation key is used for displaying a serial number related to LDAP certificate information. It appears on screen within the CertificateDialog.js component, specifically in the confirmation section of the \"Add Certificate to Store\" step. Translators should provide a label that describes this numerical value.",
     "is_auto": true,
@@ -57,7 +57,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Αύξων αριθμός\" can be a valid translation for \"serial number\", it leans more towards \"incrementing number\" or \"running number.\" It's not the most direct or common translation for 'serial number' in a technical context like LDAP settings. A more common and clearer translation would be 'Σειριακός αριθμός'.",
+          "suggestion": "Σειριακός αριθμός"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -84,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Սերիայի համար\" is a literal translation of 'serial number' but doesn't convey the intended meaning in the context of LDAP settings. It translates to 'number of series' which is not accurate. A more appropriate translation would focus on the 'serial' aspect.",
-          "suggestion": "Մարմին համար (Marmīn hamar) or Սերիական համար (Serial’akan hamar)"
+          "description": "The Armenian translation \"Սերիայի համար\" is a literal translation of \"serial number\" and while understandable, it's not the most natural way to express the term in Armenian within a technical context related to LDAP settings. It implies 'serial number for...' which is not accurate.",
+          "suggestion": "Consider \"Համարային ծրագիր\" or \"ծրագրային համար\" depending on the specific technical nuance desired.  If a more literal and widely understood term is needed, \"սերիական համար\" is a more suitable alternative."
         }
       ],
       "approved_at": null
@@ -114,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ເລກທີ\" (lek thi) translates to 'number' or 'number [ordinal]', not specifically 'serial number'. While it could be used in context, it's not the most precise translation of 'serial number'.",
-          "suggestion": "Consider using a more specific Lao term for 'serial number' if one exists. Alternatively, a more descriptive phrase could be used to convey the meaning in context."
+          "description": "'ເລກທີ' translates to 'number' or 'number sequence', not specifically 'serial number'. While it can sometimes be used, it's not the most accurate translation for this context.",
+          "suggestion": "Consider using 'ໝາຍເລກຊຸດ' (maai lek chut) which more accurately translates to 'serial number'."
         }
       ],
       "approved_at": null
@@ -168,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'අංක පිළිවෙල' (anka pilivele) translates literally to 'number sequence', it doesn't fully capture the meaning of 'Serial number' in the context of LDAP settings. A more accurate translation would convey the idea of a unique identifier or a progressive number assigned to an object.",
-          "suggestion": "Possible alternatives include: 'අංකාවලිය' (ankavali - list of numbers), 'අනුරේඛ අංකය' (anurekha ankaya - serial number/sequence number), or 'අද්විතීය අංකය' (adwitheeeya ankaya - unique number), depending on the specific nuance required."
+          "description": "The Sinhala translation \"අංක පිළිවෙල\" (angka pilivela) literally translates to 'number sequence'. While related to 'serial number', it's not the most accurate or common translation. A more accurate translation of 'serial number' would be 'අනුරේඛ අංකය' (anurekha ankaya) or 'මාර්ග අංකය' (marga ankaya).",
+          "suggestion": "Consider using 'අනුරේඛ අංකය' (anurekha ankaya) or 'මාර්ග අංකය' (marga ankaya)."
         }
       ],
       "approved_at": null

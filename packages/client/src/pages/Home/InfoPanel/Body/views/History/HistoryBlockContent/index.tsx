@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,6 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
+
+import {
+  TFeedAction,
+  TFeedData,
+  RoomMember,
+  FeedActionKeys,
+} from "@docspace/shared/api/rooms/types";
+
 import HistoryUserList from "./UserList";
 import HistoryMainText from "./MainText";
 import HistoryItemList from "./ItemList";
@@ -33,19 +41,26 @@ import HistoryUserGroupRoleChange from "./UserGroupRoleChange";
 import HistoryRoomTagList from "./RoomTagList";
 import { getFeedInfo } from "../FeedInfo";
 
-import { HistoryBlockContentProps } from "./HistoryBlockContent.types";
+type HistoryBlockContentProps = {
+  feed: TFeedAction<TFeedData | RoomMember>;
+  historyWithFileList?: boolean;
+};
 
 const HistoryBlockContent = ({
   feed,
   historyWithFileList,
 }: HistoryBlockContentProps) => {
-  const { actionType, targetType } = getFeedInfo(feed);
+  const feedInfo = getFeedInfo(feed);
+
+  if (!feedInfo) return null;
+
+  const { actionType, targetType } = feedInfo;
 
   return (
     <div className="info-panel_history-block">
       {(targetType === "user" || targetType === "group") &&
       actionType === "update" ? (
-        <HistoryUserGroupRoleChange feed={feed} />
+        <HistoryUserGroupRoleChange feed={feed as TFeedAction<RoomMember>} />
       ) : null}
 
       <HistoryMainText feed={feed} />
@@ -55,7 +70,7 @@ const HistoryBlockContent = ({
         historyWithFileList ||
         actionType === "changeIndex") ? (
         <HistoryItemList
-          feed={feed}
+          feed={feed as TFeedAction<TFeedData>}
           actionType={actionType}
           targetType={targetType}
         />
@@ -64,17 +79,20 @@ const HistoryBlockContent = ({
       {feed.related.length > 0 &&
       targetType === "group" &&
       actionType !== "update" ? (
-        <HistoryGroupList feed={feed} />
+        <HistoryGroupList feed={feed as TFeedAction<TFeedData>} />
       ) : null}
 
       {feed.related.length > 0 &&
       targetType === "user" &&
       actionType !== "update" ? (
-        <HistoryUserList feed={feed} />
+        <HistoryUserList feed={feed as TFeedAction<RoomMember>} />
       ) : null}
 
       {targetType === "roomTag" ? (
-        <HistoryRoomTagList feed={feed} actionType={actionType} />
+        <HistoryRoomTagList
+          feed={feed as TFeedAction<TFeedData>}
+          actionType={actionType}
+        />
       ) : null}
     </div>
   );

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -39,6 +39,7 @@ export const defaultSize = {
 export const sdkVersion = {
   "101": "1.0.1",
   "200": "2.0.0",
+  "210": "2.1.0",
 } as const;
 
 export const sdkSource = {

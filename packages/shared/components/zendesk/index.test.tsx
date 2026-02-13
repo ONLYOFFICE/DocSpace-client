@@ -1,13 +1,14 @@
 import React from "react";
+import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { render, act } from "@testing-library/react";
 import { Zendesk } from "./index";
 import { zendeskAPI } from "./Zendesk.utils";
 
-jest.mock("./Zendesk.utils", () => ({
+vi.mock("./Zendesk.utils", () => ({
   zendeskAPI: {
-    getChanges: jest.fn(),
-    addChanges: jest.fn(),
-    clearChanges: jest.fn(),
+    getChanges: vi.fn(),
+    addChanges: vi.fn(),
+    clearChanges: vi.fn(),
   },
 }));
 
@@ -17,25 +18,24 @@ describe("Zendesk", () => {
 
   beforeEach(() => {
     // Clear all mocks
-    jest.clearAllMocks();
+    vi.clearAllMocks();
 
     // Reset window.zE and zESettings
+    // @ts-expect-error Fix types
     delete window.zE;
     delete window.zESettings;
 
     // Mock createElement and appendChild
     mockScript = document.createElement("script");
-    jest.spyOn(document, "createElement").mockReturnValue(mockScript);
-    jest
-      .spyOn(document.body, "appendChild")
-      .mockImplementation(() => mockScript);
+    vi.spyOn(document, "createElement").mockReturnValue(mockScript);
+    vi.spyOn(document.body, "appendChild").mockImplementation(() => mockScript);
 
     // Mock getElementById to simulate script not already loaded
-    jest.spyOn(document, "getElementById").mockReturnValue(null);
+    vi.spyOn(document, "getElementById").mockReturnValue(null);
   });
 
   afterEach(() => {
-    jest.restoreAllMocks();
+    vi.restoreAllMocks();
   });
 
   it("should not insert script when live chat is disabled", () => {
@@ -65,9 +65,9 @@ describe("Zendesk", () => {
   });
 
   it("should not insert script if it already exists", () => {
-    jest
-      .spyOn(document, "getElementById")
-      .mockReturnValue(document.createElement("script"));
+    vi.spyOn(document, "getElementById").mockReturnValue(
+      document.createElement("script"),
+    );
 
     render(<Zendesk zendeskKey={mockZendeskKey} isShowLiveChat />);
 
@@ -90,8 +90,8 @@ describe("Zendesk", () => {
   });
 
   it("should call onLoaded callback when script loads", () => {
-    const onLoaded = jest.fn();
-    (zendeskAPI.getChanges as jest.Mock).mockReturnValue([]);
+    const onLoaded = vi.fn();
+    vi.mocked(zendeskAPI.getChanges).mockReturnValue([]);
 
     render(
       <Zendesk
@@ -114,7 +114,7 @@ describe("Zendesk", () => {
       ["webWidget", "show"],
       ["webWidget", "updateSettings", { color: { theme: "#000000" } }],
     ];
-    (zendeskAPI.getChanges as jest.Mock).mockReturnValue(mockChanges);
+    vi.mocked(zendeskAPI.getChanges).mockReturnValue(mockChanges);
 
     render(<Zendesk zendeskKey={mockZendeskKey} isShowLiveChat />);
 
@@ -131,7 +131,7 @@ describe("Zendesk", () => {
   });
 
   it("should not process changes if there are no waiting changes", () => {
-    (zendeskAPI.getChanges as jest.Mock).mockReturnValue([]);
+    vi.mocked(zendeskAPI.getChanges).mockReturnValue([]);
 
     render(<Zendesk zendeskKey={mockZendeskKey} isShowLiveChat />);
 

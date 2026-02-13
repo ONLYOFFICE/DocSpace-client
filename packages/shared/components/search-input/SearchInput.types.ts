@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -66,4 +66,8 @@ export type SearchInputProps = {
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
   /** Determines whether the input should reset to the original value when focus is lost */
   resetOnBlur?: boolean;
+  /** Added data-testid for testing  */
+  dataTestId?: string;
+  /** HTML tabindex property */
+  tabIndex?: number;
 };

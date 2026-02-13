@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,8 +34,9 @@ import { Button } from "@docspace/shared/components/button";
 
 import { TPortal } from "@/types";
 
-import StyledTenantList from "./page.styled";
 import Item from "./_sub-components/Item";
+
+import styles from "./TenantList.module.scss";
 
 type TenantListProps = {
   baseDomain: string;
@@ -56,9 +57,9 @@ const TenantList = ({ clientId, baseDomain }: TenantListProps) => {
   };
 
   return (
-    <StyledTenantList>
-      <Text className="more-accounts">{t("MorePortals")}</Text>
-      <div className="items-list">
+    <div className={styles.tenantList}>
+      <Text className={styles.moreAccounts}>{t("MorePortals")}</Text>
+      <div className={styles.itemsList}>
         {data.portals.map((item) => (
           <Item portal={item} key={item.portalName} baseDomain={baseDomain} />
         ))}
@@ -66,9 +67,10 @@ const TenantList = ({ clientId, baseDomain }: TenantListProps) => {
       <Button
         onClick={goToLogin}
         label={t("BackToSignIn")}
-        className="back-button"
+        className={styles.backButton}
+        testId="back_to_login_button"
       />
-    </StyledTenantList>
+    </div>
   );
 };
 

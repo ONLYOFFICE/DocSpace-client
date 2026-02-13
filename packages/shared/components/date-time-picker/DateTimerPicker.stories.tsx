@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,10 +26,11 @@
 
 import React from "react";
 import { StoryObj, Meta } from "@storybook/react";
-import moment from "moment";
+import type { DateTime } from "luxon";
 
 import { DateTimePicker } from "./DateTimePicker";
 import { DateTimePickerProps } from "./DateTimerPicker.types";
+import { now } from "../../utils/date";
 
 const locales = [
   "az",
@@ -127,12 +128,11 @@ export const Default: Story = {
     locale: "en",
     maxDate: new Date(`${new Date().getFullYear() + 10}/01/01`),
     minDate: new Date("1970/01/01"),
-    openDate: moment(),
+    openDate: now(),
     selectDateText: "Select date",
     className: "date-time-picker",
     id: "default-date-time-picker",
     hasError: false,
-    onChange: (date: null | moment.Moment) =>
-      console.log("Date changed:", date),
+    onChange: (date: null | DateTime) => console.log("Date changed:", date),
   },
 };

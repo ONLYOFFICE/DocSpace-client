@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -80,6 +80,7 @@ const SubInfoPanelBody = ({
       scrollClass="section-scroll info-panel-scroll"
       createContext
       className={styles.scrollbar}
+      id="info-panel-body"
     >
       {children}
     </Scrollbar>

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,16 +29,17 @@ import type { Metadata } from "next";
 import { ThemeKeys } from "@docspace/shared/enums";
 import { SYSTEM_THEME_KEY } from "@docspace/shared/constants";
 import { getDirectionByLanguage } from "@docspace/shared/utils/common";
+import { getFontFamilyDependingOnLanguage } from "@docspace/shared/utils/rtlUtils";
 
 import "@docspace/shared/styles/theme.scss";
 
 import "@/styles/globals.scss";
 import { getColorTheme, getPortalCultures, getSettings } from "@/api/settings";
 import { LOCALE_HEADER, THEME_HEADER } from "@/utils/constants";
-import StyledComponentsRegistry from "@/utils/registry";
 import Providers from "@/providers";
 import { getSelf } from "@/api/people";
 import Scripts from "@/components/Scripts";
+import { logger } from "@/../logger.mjs";
 
 export const metadata: Metadata = {
   title: "ONLYOFFICE",
@@ -49,13 +50,16 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const hdrs = headers();
+  logger.info("SDK layout");
+
+  const hdrs = await headers();
 
   if (hdrs.get("x-health-check") || hdrs.get("referer")?.includes("/health")) {
-    return <></>;
+    logger.info("get health check and return empty layout");
+    return null;
   }
 
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
 
   const [self, portalSettings, colorTheme, portalCultures] = await Promise.all([
     getSelf(),
@@ -79,7 +83,7 @@ export default async function RootLayout({
     | undefined;
 
   const currentColorScheme = colorTheme?.themes.find(
-    (theme) => theme.id === colorTheme.selected,
+    (t) => t.id === colorTheme.selected,
   );
 
   const dirClass = getDirectionByLanguage(locale || "en");
@@ -95,6 +99,8 @@ export default async function RootLayout({
     "--color-scheme-text-buttons": currentColorScheme?.text.buttons,
 
     "--interface-direction": dirClass,
+
+    "--font-family": getFontFamilyDependingOnLanguage(locale),
   } as React.CSSProperties;
 
   return (
@@ -111,23 +117,20 @@ export default async function RootLayout({
         <meta name="apple-mobile-web-app-capable" content="yes" />
       </head>
       <body style={styles} className={`${dirClass} ${themeClass}`}>
-        <StyledComponentsRegistry>
-          <Providers
-            contextData={{
-              initialTheme: theme,
-              user: self,
-              settings:
-                typeof portalSettings === "string" ? undefined : portalSettings,
-              systemTheme,
-              colorTheme,
-              locale,
-              portalCultures,
-            }}
-          >
-            {children}
-          </Providers>
-        </StyledComponentsRegistry>
-
+        <Providers
+          contextData={{
+            initialTheme: theme,
+            user: self,
+            settings:
+              typeof portalSettings === "string" ? undefined : portalSettings,
+            systemTheme,
+            colorTheme,
+            locale,
+            portalCultures,
+          }}
+        >
+          {children}
+        </Providers>
         <Scripts />
       </body>
     </html>

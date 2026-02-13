@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,15 +25,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React from "react";
 import { observer, inject } from "mobx-react";
-import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 import { TUser } from "@docspace/shared/api/people/types";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import { UserStore } from "@docspace/shared/store/UserStore";
+import { useTheme } from "@docspace/shared/hooks/useTheme";
+
 import TutorialPreview from "PUBLIC_DIR/images/form_filling_tutorial.gif";
 import TutorialPreviewDark from "PUBLIC_DIR/images/form_filling_tutorial_dark.gif";
 
 import DialogsStore from "SRC_DIR/store/DialogsStore";
-import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 
 import {
   ModalDialog,
@@ -42,7 +43,7 @@ import {
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { getFormFillingTipsStorageName } from "@docspace/shared/utils";
-import { StyledModalDialog } from "./FormFillingTips.styled";
+import styles from "./FormFillingTips.module.scss";
 
 type FormFillingTipsDialogProps = {
   visible: DialogsStore["welcomeFormFillingTipsVisible"];
@@ -73,9 +74,9 @@ const FormFillingTipsDialog = (props: FormFillingTipsDialogProps) => {
     }
   };
 
-  const theme = useTheme();
+  const { isBase } = useTheme();
 
-  const image = theme.isBase ? TutorialPreview : TutorialPreviewDark;
+  const image = isBase ? TutorialPreview : TutorialPreviewDark;
 
   const onOpenGuidance = () => {
     setWelcomeFormFillingTipsVisible(false);
@@ -98,7 +99,8 @@ const FormFillingTipsDialog = (props: FormFillingTipsDialogProps) => {
   const { t } = useTranslation(["FormFillingTipsDialog"]);
 
   return (
-    <StyledModalDialog
+    <ModalDialog
+      className={styles.wrapper}
       autoMaxHeight
       visible={visible}
       onClose={onClose}
@@ -110,7 +112,6 @@ const FormFillingTipsDialog = (props: FormFillingTipsDialogProps) => {
           fontWeight="700"
           fontSize="16px"
           lineHeight="22px"
-          truncate
         >
           {t("WelcomeFillingForm")}
         </Text>
@@ -162,7 +163,7 @@ const FormFillingTipsDialog = (props: FormFillingTipsDialogProps) => {
           scale
         />
       </ModalDialog.Footer>
-    </StyledModalDialog>
+    </ModalDialog>
   );
 };
 
@@ -172,7 +173,7 @@ export default inject(
     userStore,
   }: {
     dialogsStore: DialogsStore;
-    userStore: UsersStore;
+    userStore: UserStore;
   }) => {
     const {
       welcomeFormFillingTipsVisible: visible,

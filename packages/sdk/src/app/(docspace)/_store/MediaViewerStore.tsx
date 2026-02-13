@@ -1,5 +1,5 @@
 /*
- * (c) Copyright Ascensio System SIA 2009-2025
+ * (c) Copyright Ascensio System SIA 2009-2026
  *
  * This program is a free software product.
  * You can redistribute it and/or modify it under the terms
@@ -72,8 +72,9 @@ export const MediaViewerStoreContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
+  const store = React.useMemo(() => new MediaViewerStore(), []);
   return (
-    <MediaViewerStoreContext.Provider value={new MediaViewerStore()}>
+    <MediaViewerStoreContext.Provider value={store}>
       {children}
     </MediaViewerStoreContext.Provider>
   );

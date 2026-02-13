@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,18 +25,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import { Checkbox } from "../../../components/checkbox";
 import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
 
-import { useResponsiveNavigation } from "../../../hooks/useResponsiveNavigation";
-
-import { StyledAdditionalResources } from "./AdditionalResources.styled";
 import { IAdditionalResources } from "./AdditionalResources.types";
-import { brandingRedirectUrl } from "../constants";
+import styles from "./AdditionalResources.module.scss";
 
 export const AdditionalResources = ({
-  t,
   isSettingPaid,
   feedbackAndSupportEnabled,
   helpCenterEnabled,
@@ -44,19 +42,13 @@ export const AdditionalResources = ({
   onRestore,
   isLoading,
   additionalResourcesIsDefault,
-  deviceType,
 }: IAdditionalResources) => {
+  const { t } = useTranslation("Common");
   const [feedbackEnabled, setFeedbackEnabled] = useState(
     feedbackAndSupportEnabled,
   );
   const [helpEnabled, setHelpEnabled] = useState(helpCenterEnabled);
   const [hasChanges, setHasChanges] = useState(false);
-
-  useResponsiveNavigation({
-    redirectUrl: brandingRedirectUrl,
-    currentLocation: "additional-resources",
-    deviceType,
-  });
 
   useEffect(() => {
     if (
@@ -84,21 +76,29 @@ export const AdditionalResources = ({
   };
 
   return (
-    <StyledAdditionalResources>
-      <div className="header">
-        <div className="additional-header settings_unavailable">
-          {t("Settings:AdditionalResources")}
+    <div
+      className={classNames(styles.additionalResources, {
+        ["isEnableBranding"]: !isSettingPaid,
+        ["settings_unavailable"]: !isSettingPaid,
+      })}
+    >
+      <div className={classNames(styles.header, "header")}>
+        <div className={styles.additionalHeader}>
+          {t("Common:AdditionalResources")}
         </div>
       </div>
-      <div className="settings_unavailable additional-description">
-        {t("Settings:AdditionalResourcesDescription", {
+      <div className={styles.additionalDescription}>
+        {t("Common:AdditionalResourcesDescription", {
           productName: t("Common:ProductName"),
         })}
       </div>
-      <div className="branding-checkbox">
+      <div className={classNames(styles.brandingCheckbox)}>
         <Checkbox
           data-testid="show-feedback-support"
-          className="show-feedback-support checkbox"
+          className={classNames(
+            styles.checkbox,
+            "show-feedback-support checkbox",
+          )}
           isDisabled={!isSettingPaid}
           label={t("ShowFeedbackAndSupport")}
           isChecked={feedbackEnabled}
@@ -107,7 +107,7 @@ export const AdditionalResources = ({
 
         <Checkbox
           data-testid="show-help-center"
-          className="show-help-center checkbox"
+          className={classNames(styles.checkbox)}
           isDisabled={!isSettingPaid}
           label={t("ShowHelpCenter")}
           isChecked={helpEnabled}
@@ -120,12 +120,14 @@ export const AdditionalResources = ({
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:Restore")}
         displaySettings
-        reminderText={t("YouHaveUnsavedChanges")}
+        reminderText={t("Common:YouHaveUnsavedChanges")}
         showReminder={(isSettingPaid && hasChanges) || isLoading}
         disableRestoreToDefault={additionalResourcesIsDefault || isLoading}
         additionalClassSaveButton="additional-resources-save"
         additionalClassCancelButton="additional-resources-cancel"
+        saveButtonDataTestId="additional-resources-save-button"
+        cancelButtonDataTestId="additional-resources-cancel-button"
       />
-    </StyledAdditionalResources>
+    </div>
   );
 };

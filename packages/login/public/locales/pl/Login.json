@@ -1,6 +1,8 @@
 {
   "ChangePasswordSuccess": "Hasło zostało pomyślnie zmienione",
   "CodeTitle": "Kod został wysłany",
+  "ConfirmEmailChange": "Potwierdź zmianę adresu e-mail",
+  "ConfirmEmailChangeText": "Zażądałeś zmiany adresu e-mail na koncie {{productName}}. Aby kontynuować, proszę zaloguj się przy użyciu aktualnych danych uwierzytelniających.",
   "ErrorInvalidText": "Za 10 sekund nastąpi przekierowanie na <1>{{productName}}</1>",
   "ForgotPassword": "Nie pamiętasz hasła?",
   "LDAPUsernamePlaceholder": "Nazwa użytkownika {{ldap_domain}}",

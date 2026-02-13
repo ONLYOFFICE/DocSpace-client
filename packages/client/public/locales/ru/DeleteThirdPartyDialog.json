@@ -1,5 +1,0 @@
-{
-  "DisconnectCloudTitle": "Отключить облако",
-  "SuccessDeleteThirdParty": "Сторонний ресурс {{service}} отключен",
-  "ThirdPartyDisconnectPrompt": "Вы уверены, что хотите удалить {{service}}? Это не повлияет на ваш аккаунт {{account}}."
-}

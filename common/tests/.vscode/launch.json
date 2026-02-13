@@ -1,0 +1,36 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Run locales.test.js with FIX_MOVED_KEYS",
+      "program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+      "args": [
+        "--runTestsByPath",
+        "${workspaceFolder}/test/locales.test.js",
+        "--testNamePattern=NotFoundEnKey",
+        "--detectOpenHandles"
+      ],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "env": {
+        "FIX_MOVED_KEYS": "true"
+      }
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Run locales.test.js (Dry Run - No Fixes)",
+      "program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+      "args": [
+        "--runTestsByPath",
+        "${workspaceFolder}/test/locales.test.js",
+        "--testNamePattern=NotFoundEnKey",
+        "--detectOpenHandles"
+      ],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    }
+  ]
+}

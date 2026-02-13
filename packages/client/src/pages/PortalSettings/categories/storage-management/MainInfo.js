@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,10 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
-import moment from "moment";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
+import { parseToDateTime, formatDateLocalized } from "@docspace/shared/utils/date";
 
 import { StyledMainInfo } from "./StyledComponent";
 
@@ -36,11 +36,11 @@ const MainInfoComponent = (props) => {
   const { portalInfo, activeUsersCount } = props;
   const { t } = useTranslation("Settings");
 
-  const creationDate = moment(portalInfo.creationDateTime).format("L");
+  const creationDate = formatDateLocalized(parseToDateTime(portalInfo.creationDateTime), "DATE_SHORT");
 
   return (
     <StyledMainInfo>
-      <Text fontSize="14px" fontWeight={400}>
+      <Text fontSize="14px" fontWeight={400} dataTestId="portal_created_date">
         {t("PortalCreatedDate", { date: creationDate })}
       </Text>
       <Text fontSize="14px" fontWeight={400}>

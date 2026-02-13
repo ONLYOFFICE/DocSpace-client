@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -79,7 +79,7 @@ export interface SwipeEventData {
    */
   initial: Vector2;
   /**
-   * "Absolute velocity" (speed) - √(absX^2 + absY^2) / time
+   * "Absolute velocity" (speed) - sqr(absX^2 + absY^2) / time
    */
   velocity: number;
   /**

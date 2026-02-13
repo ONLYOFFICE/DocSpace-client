@@ -1,19 +1,19 @@
 {
   "key_path": "DeleteUserMessage",
-  "content": "{{userCaption}} <strong>{{user}}</strong> will be deleted. This action cannot be undone.",
-  "content_en_sha1_hash": "7642f09084fe82ba204a82245382506eb9f0b4a8",
-  "created_at": "2025-05-19T21:30:56.669Z",
-  "updated_at": "2025-05-20T09:38:27.734Z",
+  "content": "{{userCaption}} <1>{{user}}</1> will be deleted. This action cannot be undone.",
+  "content_en_sha1_hash": "e425610a088ab7fe9a49f77ab58e47425c2a0dda",
+  "created_at": "2025-06-30T12:20:12.974Z",
+  "updated_at": "2025-06-30T12:20:47.275Z",
   "comment": {
-    "text": "This translation key is used for a confirmation message displayed when deleting a user's profile. It informs the user that their account will be deleted and provides context about the action. This message appears in a dialog prompt related to reassigning data or accessing guest-only documents.",
+    "text": "This translation key is used for a confirmation message that will be displayed when deleting a user's profile. It informs the user that their account will be deleted and that this action cannot be undone, typically appearing in a dialog box or alert.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:38:27.734Z"
+    "updated_at": "2025-06-30T12:20:47.275Z"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
-      "line_number": 90,
-      "context": "needReassignData || onlyGuests\n ? warningMessageReassign\n : warningMessageMyDocuments;\n \n const deleteMessage = (\n <Trans i18nKey=\"DeleteUserMessage\" ns=\"DeleteProfileEverDialog\" t={t}>\n {{ userCaption: onlyGuests ? t(\"Common:Guest\") : t(\"Common:User\") }}\n <strong>{{ user: users[0].displayName }}</strong>\n </Trans>\n );",
+      "line_number": 94,
+      "context": "? warningMessageReassign\n : warningMessageMyDocuments;\n \n const deleteMessage = (\n <Trans\n i18nKey=\"DeleteUserMessage\"\n ns=\"DeleteProfileEverDialog\"\n t={t as TFunction}\n values={{\n userCaption: onlyGuests ? t(\"Common:Guest\") : t(\"Common:User\"),\n user: users[0].displayName,",
       "module": "/packages/client"
     }
   ],
@@ -163,6 +163,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,7 +34,7 @@ import { RoomsType } from "../../enums";
 import { RoomLogo } from "../room-logo";
 import { IconButton } from "../icon-button";
 import { Text } from "../text";
-import { Badge } from "../badge";
+import { TooltipContainer } from "../tooltip";
 
 import {
   getRoomTypeDescriptionTranslation,
@@ -42,7 +42,6 @@ import {
 } from "./RoomType.utils";
 import styles from "./RoomType.module.scss";
 import { RoomTypeProps } from "./RoomType.types";
-import { globalColors } from "../../themes";
 
 const RoomType = ({
   roomType,
@@ -86,24 +85,9 @@ const RoomType = ({
 
       <div className="choose_room-info_wrapper">
         <div className="choose_room-title">
-          <Text noSelect className="choose_room-title-text">
-            {t(room.title)}
-          </Text>
-          {isTemplate ? (
-            <Badge
-              label={t("Common:New")}
-              backgroundColor={globalColors.lightBlueMain}
-              fontSize="9px"
-              fontWeight={700}
-              borderRadius="50px"
-              noHover
-              isHovered={false}
-            />
-          ) : null}
+          <Text className="choose_room-title-text">{t(room.title)}</Text>
         </div>
-        <Text noSelect className="choose_room-description">
-          {t(room.description)}
-        </Text>
+        <Text className="choose_room-description">{t(room.description)}</Text>
       </div>
 
       <IconButton
@@ -116,21 +100,23 @@ const RoomType = ({
   );
 
   return type === "listItem" ? (
-    <div
+    <TooltipContainer
+      as="div"
       className={classNames(styles.roomType, styles.listItem, {
         [styles.isOpen]: isOpen,
       })}
       id={id}
       title={disabled ? "" : t(room.title)}
       onClick={onClick}
-      data-tooltip-id={disabled ? "create-room-tooltip" : ""}
+      data-tooltip-id={disabled ? "create-room-tooltip" : undefined}
       data-testid="room-type-list-item"
       data-selected-id={selectedId}
     >
       {content}
-    </div>
+    </TooltipContainer>
   ) : type === "dropdownButton" ? (
-    <div
+    <TooltipContainer
+      as="div"
       id={id}
       title={t(room.title)}
       onClick={onClick}
@@ -141,9 +127,10 @@ const RoomType = ({
       data-testid="room-type-dropdown-button"
     >
       {content}
-    </div>
+    </TooltipContainer>
   ) : type === "dropdownItem" ? (
-    <div
+    <TooltipContainer
+      as="div"
       id={id}
       title={t(room.title)}
       onClick={onClick}
@@ -154,9 +141,10 @@ const RoomType = ({
       data-testid="room-type-dropdown-item"
     >
       {content}
-    </div>
+    </TooltipContainer>
   ) : (
-    <div
+    <TooltipContainer
+      as="div"
       id={id}
       title={t(room.title)}
       data-selected-id={selectedId}
@@ -165,7 +153,7 @@ const RoomType = ({
       })}
     >
       {content}
-    </div>
+    </TooltipContainer>
   );
 };
 

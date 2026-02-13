@@ -3,7 +3,7 @@
   "content": "File created",
   "content_en_sha1_hash": "c31110d4975b0bad1ea1e2be1bc41fb9a13d5680",
   "created_at": "2025-05-19T21:30:49.723Z",
-  "updated_at": "2025-05-21T01:12:40.347Z",
+  "updated_at": "2025-05-24T02:26:38.874Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -41,8 +41,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Vytvořený soubor\" is a passive construction. While technically correct, a more natural and direct translation of \"File created\" would be something like \"Nový soubor\" or \"Vzniklý soubor\". \"Vytvořený soubor\" implies a creator, which isn't necessarily conveyed in the English phrase.",
-          "suggestion": "Nový soubor"
+          "description": "While 'Vytvořený soubor' is understandable, it's a bit literal and not the most natural phrasing for 'File created' in a technical context. It sounds passive and less active.",
+          "suggestion": "Soubor vytvořen"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "Another possible improvement for a more concise and natural translation.",
+          "suggestion": "Vytvoření souboru"
         }
       ],
       "approved_at": null
@@ -107,8 +112,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ເຟັ້ນຖືກສ້າງຂຶ້ນ\" is not the most natural or accurate translation of \"File created.\" It translates literally as \"File was created.\" While not entirely wrong, it's less common and slightly awkward.",
-          "suggestion": "ເອກະສານຖືກສ້າງຂຶ້ນ (Ekasane thuk sang khun) - This translates to \"Document was created,\" which is a more natural and common phrasing in Lao for this context. Alternatively, ສ້າງເອກະສານ (Sang ekasane) - 'Create document' would also be acceptable."
+          "description": "The Lao translation \"ເຟັ້ນຖືກສ້າງຂຶ້ນ\" is not the most natural or accurate translation of \"File created.\" \"ເຟັ້ນ\" refers to a type of container or basket, not a file.",
+          "suggestion": "Consider using a more accurate translation like \"ເອກະສານຖືກສ້າງຂຶ້ນ\" (document created) or \"ໄຟລ໌ຖືກສ້າງຂຶ້ນ\" (file created - transliteration)."
         }
       ],
       "approved_at": null
@@ -146,13 +151,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Fișierul a fost creat' is grammatically correct, it's a more literal and somewhat verbose translation of 'File created.' A more natural and concise Romanian translation would be 'Fișier nou' or 'Fișier creat'.",
-          "suggestion": "Fișier nou"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -167,8 +166,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"ප්‍රමාණය කරන ලද පත්‍රය\" translates to 'sized document' or 'scaled paper' which is not an accurate representation of 'File created'. It doesn't convey the meaning of a new file being generated.",
-          "suggestion": "A more accurate translation would be something along the lines of \"ආව නව ගොනුව\" (Awa nawa gonuwa) which translates to 'New file arrived', or \"ගොනුව නිර්මාණය කරන ලදී\" (Gonuwa nirmanaya karanada ladi) which translates to 'File was created'."
+          "description": "The Sinhala translation \"ප්‍රමාණය කරන ලද පත්‍රය\" translates to \"sized document\" or \"scaled document\". This does not accurately convey the meaning of \"File created\".",
+          "suggestion": "A more appropriate translation would be something like \"කුරුකල පත්‍රය\" (kurukala pathraya) which means 'created file', or \"පත්‍රය නිර්මාණය කරන ලදී\" (pathraya nirmanaya karana ladi) meaning 'file was created'."
         }
       ],
       "approved_at": null
@@ -179,8 +178,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovak translation 'Súbor vytvorený' while technically correct, isn't the most natural or idiomatic way to express 'File created' in Slovak in this context. It sounds a bit literal.",
-          "suggestion": "Consider 'Nový súbor vytvorený' or 'Vytvorený súbor' for a more natural phrasing. Another option would be 'Vznikol nový súbor'."
+          "description": "While 'Súbor vytvorený' is technically correct, a more natural and idiomatic translation of 'File created' would be 'Vytvorený súbor' or 'Nový súbor'.  'Súbor vytvorený' sounds a little awkward in Slovak.",
+          "suggestion": "Vytvorený súbor"
         }
       ],
       "approved_at": null
@@ -194,19 +193,19 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The Cyrillic character 'ј' is missing. 'Фајл' should be 'Фaјл'.",
-          "suggestion": "Фaјл креиран"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Fajl' is a transliteration and not a fully correct Serbian word. The more appropriate spelling would be 'Datoteka'.",
+          "suggestion": "Datoteka"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

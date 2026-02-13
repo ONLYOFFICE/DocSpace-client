@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,8 +28,9 @@ export const hasOwnProperty = (obj: unknown, propertyName: string): boolean => {
   if (!obj) return false;
 
   try {
+    // biome-ignore lint/suspicious/noPrototypeBuiltins: TODO fix
     return Object.prototype.hasOwnProperty.call(obj, propertyName);
-  } catch (error) {
+  } catch {
     return false;
   }
 };

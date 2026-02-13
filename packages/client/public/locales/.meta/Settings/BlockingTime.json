@@ -3,7 +3,7 @@
   "content": "Blocking time (sec)",
   "content_en_sha1_hash": "490a942a08ee42cd63c3e4b0cf291fa362e24a10",
   "created_at": "2025-05-19T21:30:50.711Z",
-  "updated_at": "2025-05-21T05:04:12.370Z",
+  "updated_at": "2025-09-26T15:21:06.426Z",
   "comment": {
     "text": "This translation key is used for the label that displays a blocking time value in seconds on the brute force protection settings page. It appears in a dropdown menu or similar control within the security category of portal settings, allowing users to configure the duration for blocking IP addresses after a certain number of failed login attempts.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/bruteForceProtection.js",
-      "line_number": 63,
-      "context": "isDefaultPasswordProtection,\n setBruteForceProtectionSettings,\n } = props;\n \n const defaultNumberAttempt = numberAttempt?.toString();\n const defaultBlockingTime = blockingTime?.toString();\n const defaultCheckPeriod = checkPeriod?.toString();\n \n const [currentNumberAttempt, setCurrentNumberAttempt] =\n useState(defaultNumberAttempt);\n const [currentBlockingTime, setCurrentBlockingTime] =",
+      "line_number": 71,
+      "context": "tfaStore,\n setup,\n } = props;\n \n const defaultNumberAttempt = numberAttempt?.toString();\n const defaultBlockingTime = blockingTime?.toString();\n const defaultCheckPeriod = checkPeriod?.toString();\n \n const [currentNumberAttempt, setCurrentNumberAttempt] =\n useState(defaultNumberAttempt);\n const [currentBlockingTime, setCurrentBlockingTime] =",
       "module": "/packages/client"
     }
   ],
@@ -27,25 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'وقت الحظر (بالثانية)' while technically correct, is a bit literal and could be improved for natural flow in a UI setting. \"بالثانية\" explicitly stating 'in seconds' is somewhat redundant as 'Blocking time' already implies seconds.",
-          "suggestion": "وقت الحظر (ثواني)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Bloklama vaxtı\" correctly translates to \"Blocking time,\" \"san\" is the general term for \"second.\" A more specific translation for \"sec\" (as in seconds) would be \"soniyə\".",
-          "suggestion": "Bloklama vaxtı (soniyə)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -96,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The unit 'sec' is not translated into Armenian. It's expected to be included in the Armenian translation if consistency with the English version is required.",
-          "suggestion": "Արգելափակման ժամանակը (վրկ)"
+          "description": "The translation includes \"(վրկ)\" which translates to \"sec\" in English. While technically correct, adding the abbreviation within parentheses might be less common or preferred in Armenian user interfaces. Consider removing it for a cleaner look.",
+          "suggestion": "Արգելափակման ժամանակը"
         }
       ],
       "approved_at": null
@@ -126,13 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The Lao word for 'blocking' is likely incorrect. 'ປິດກັ້ນ' isn't a common or standard term for 'blocking' in this context. It appears to be a combination of 'ປິດ' (close) and 'ກັ້ນ' (prevent), but the combination is awkward.",
-          "suggestion": "Consider using 'ໄລຍະເວລາປິດລັດ' (lai ya vela pit lat) which translates to 'blocking duration' or 'blocking period'. Alternatively, 'ເວລາລັອກ' (vela lock) is a more direct translation using the loanword 'lock'."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The current translation 'ເວລາປິດກັ້ນ (ວິນາທີ)' doesn't flow naturally in Lao. The combination of 'ປິດກັ້ນ' is not idiomatic.",
-          "suggestion": "Using 'ໄລຍະເວລາປິດລັດ (ວິນາທີ)' or 'ເວລາລັອກ (ວິນາທີ)' would provide a more accurate and natural translation."
+          "description": "The Lao word for 'blocking' or 'block' (in the context of time restriction) is likely to be 'ຢຸດຕັ້ງຊั่วຄราว' rather than 'ປິດກັ້ນ'. 'ປິດກັ້ນ' translates to 'lock and prevent' which doesn't perfectly convey the intended meaning.",
+          "suggestion": "ເວລາຢຸດຕັ້ງຊั่วຄราว (ວິນາທີ)"
         }
       ],
       "approved_at": null
@@ -149,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Blokkeertijd' is a direct transliteration of 'Blocking time' but lacks the natural flow of Dutch. A more idiomatic translation would be 'Blokkeerduur'.",
-          "suggestion": "Blokkeerduur (sec)"
+          "description": "The direct translation of 'Blocking time' is not idiomatic in Dutch. 'Blocking time' implies a duration of time someone is prevented from doing something. A more natural translation would consider the context. Possible alternatives include 'Blokkeringstijd (sec)' or 'Tijdsduur blokkering (sec)' depending on the specific meaning within the settings.",
+          "suggestion": "Consider 'Blokkeringstijd (sec)' or 'Tijdsduur blokkering (sec)' for a more natural and contextually accurate translation."
         }
       ],
       "approved_at": null
@@ -191,13 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"අවහිර කාලය (තත්.)\" while conveying the general idea, isn't the most natural or precise translation of \"Blocking time (sec)\". \"Blocking time\" implies a duration or period, whereas \"අවහිර කාලය\" can simply mean 'blocked time' without necessarily implying duration.",
-          "suggestion": "Consider \"අවහිර තත්පහ (තත්.)\" or \"අවහිර කාලසීමාව (තත්.)\" which more accurately conveys the concept of 'blocking time' as a duration."
-        },
-        {
-          "type": "formatting",
-          "description": "The abbreviation \"(තත්.)\" meaning seconds is placed correctly, but it could benefit from an explanation for users who may not understand it directly.",
-          "suggestion": "Consider adding a tooltip or short explanation of \"තත්.\" (seconds) within the UI or documentation for better user understanding."
+          "description": "The translation 'අවහිර කාලය (තත්.)' while technically correct, doesn't perfectly convey the meaning of 'Blocking time (sec)'. 'Blocking time' implies a duration or period of blocking, whereas 'අවහිර කාලය' can simply mean 'blocked time'. Including the abbreviation 'තත්.' for 'seconds' might be slightly abrupt for some users, depending on the overall tone of the settings.",
+          "suggestion": "Consider a more descriptive phrase like 'අවහිර තත්පහ (තත්.)' or 'අවහිර වන කාලසීමාව (තත්.)' which more closely reflects the concept of a blocking duration. If space is a concern, 'අවහිර කාලය (තත්)' is acceptable, but less ideal."
         }
       ],
       "approved_at": null

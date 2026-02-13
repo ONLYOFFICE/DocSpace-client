@@ -1,4 +1,5 @@
-@import "../../styles/variables/colors";
+@use "../../styles/variables/colors";
+@use "../../styles/mixins";
 
 .roomIcon {
   display: flex;
@@ -12,6 +13,7 @@
   img {
     max-width: 100%;
     height: auto;
+    @include mixins.no-user-select;
   }
 
   :global {
@@ -331,5 +333,5 @@
   opacity: 1;
   transform: translateY(0);
   position: relative;
-  color: var(--room-icon-text-color, #{$black});
+  color: var(--room-icon-text-color, #{colors.$black});
 }

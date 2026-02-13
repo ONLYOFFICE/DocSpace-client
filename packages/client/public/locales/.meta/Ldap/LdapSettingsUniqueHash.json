@@ -3,7 +3,7 @@
   "content": "Unique hash",
   "content_en_sha1_hash": "e0bc38ad22b3cf1f1b09afd2bd0520e8b7bfe8da",
   "created_at": "2025-05-19T21:30:54.301Z",
-  "updated_at": "2025-05-21T08:03:48.855Z",
+  "updated_at": "2025-05-24T08:17:40.776Z",
   "comment": {
     "text": "This translation key is used to display a unique identifier (\"Unique hash\") in a user interface, specifically in a certificate issue details section. The purpose is to provide a distinct value for each certificate issue, likely used for identification or tracking purposes within the LDAP settings context.",
     "is_auto": true,
@@ -60,12 +60,12 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Μοναδικό σύμβολο #\" doesn't accurately convey the meaning of \"Unique hash\". \"Hash\" refers to a specific type of data representation and \"σύμβολο\" (symbol) doesn't capture that.",
-          "suggestion": "Μοναδικός κώδικας κατακερματισμού"
+          "description": "The translation 'Μοναδικό σύμβολο #' doesn't accurately convey the meaning of 'Unique hash'. 'Σύμβολο' (symbol) is not the best word choice. 'Hash' implies a cryptographic function, and a more accurate translation would reflect that.",
+          "suggestion": "Μοναδική κατακερματισμένη τιμή"
         },
         {
           "type": "formatting",
-          "description": "The '#' at the end of the Greek translation seems extraneous and doesn't align with the English term's structure.",
+          "description": "The '#' at the end of the Greek translation is unnecessary and doesn't translate anything. It seems to be added without purpose.",
           "suggestion": "Remove the '#' character."
         }
       ],
@@ -119,8 +119,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ຄ່າແກ້ໄຂລາຍງານສະເພາະ' does not accurately convey the meaning of 'Unique hash'. It translates to something like 'Specific report value' which is unrelated.",
-          "suggestion": "A more appropriate translation would focus on the concept of uniqueness. Possible suggestions include: 'ລະຫັດສະເພາະ', 'ຄ່າແກ້ໄຂລາຍງານໂດດດ່ຽວ', or 'ລະຫັດລາຍງານໂດດດ່ຽວ'. The best choice will depend on the specific technical context."
+          "description": "The Lao translation 'ຄ່າແກ້ໄຂລາຍງານສະເພາະ' translates to 'Specific report value/edit'. It doesn't accurately convey the meaning of 'Unique hash'. A 'hash' is a one-way cryptographic function, and the translation doesn't reflect this.",
+          "suggestion": "A more accurate translation would convey the concept of a unique identifier or fingerprint. Possible suggestions include: 'ລະຫັດລາຍເຊັນພິເສດ' (la-hit laiy sen phiset - unique signature/code) or 'ຄ່າແຫ່ງຕົວລະອຽດພິເສດ' (khaa haeng tua la-iet phiset - unique detail value). The best option depends on the overall context."
         }
       ],
       "approved_at": null
@@ -131,8 +131,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Unikāls jaucējkods\" is a literal translation of \"Unique hash,\" it might not be the most natural or understandable term in Latvian for a technical setting. \"Unikāls saites kods\" or \"Unikāls identifikators\" might be more appropriate depending on the specific context.",
-          "suggestion": "Consider \"Unikāls saites kods\" or \"Unikāls identifikators\" if the context allows."
+          "description": "While 'Unikāls jaucējkods' is a literal translation, it might not be the most natural or easily understood term in Latvian for 'Unique hash' in a technical context. 'Unikāls identifikators' or 'Unikāls saites kods' might be more appropriate depending on the specific application.",
+          "suggestion": "Consider 'Unikāls identifikators' or 'Unikāls saites kods' for better clarity and naturalness."
         }
       ],
       "approved_at": null
@@ -188,13 +188,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Edinstven\" is a valid Slovenian word meaning 'unique', the direct transliteration of 'hash' is often preferred in technical contexts. Using the English term 'hash' directly might be more accurate and consistent with technical terminology.",
-          "suggestion": "Consider using 'hash' directly, or 'Edinstven hash' if retaining a translated term is crucial."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -215,8 +209,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation 'Benzersiz veri' translates to 'Unique data' rather than 'Unique hash'. 'Hash' has no direct equivalent that maintains the technical meaning.",
-          "suggestion": "Consider 'Benzersiz karma' or 'Eşsiz karma'. Alternatively, if the context allows for a more descriptive phrasing, 'Eşsiz tanımlayıcı' could be used."
+          "description": "The translation 'Benzersiz veri' doesn't accurately convey the meaning of 'Unique hash'. 'Hash' refers to a specific cryptographic function and 'veri' (data) is too generic. A more accurate translation would involve conveying the concept of a unique identifier or code.",
+          "suggestion": "Consider translations like 'Eşsiz karma' or 'Benzersiz tanımlayıcı' depending on the context."
         }
       ],
       "approved_at": null

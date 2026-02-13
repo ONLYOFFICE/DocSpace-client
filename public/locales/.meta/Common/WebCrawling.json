@@ -1,0 +1,28 @@
+{
+  "key_path": "WebCrawling",
+  "content": "Web crawling",
+  "content_en_sha1_hash": "358b1643a23f6468c430bdf829af3459c4b5ac48",
+  "created_at": "2025-10-27T16:14:24.665Z",
+  "updated_at": "2025-10-27T16:24:03.469Z",
+  "comment": {
+    "text": "This key translates to \"Web crawling\" and is used as a label describing the type of tool call within a chat message body. It appears as part of a header that indicates a search tool was used to generate a response, alongside the tool's specific name. Translators should consider a brief and descriptive term for web search functionality.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T16:24:03.469Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/chat/components/chat-message-body/sub-components/message/ToolCallMessage/ToolCallHeader/SearchToolContent.tsx",
+      "line_number": 61,
+      "context": "target={LinkTarget.blank}\n textDecoration=\"none\"\n >\n <ReactSVG className={styles.searchToolIcon} src={UniverseIcon} />\n <Text fontSize=\"13px\" lineHeight=\"20px\" fontWeight={600} truncate>\n {t(\"Common:WebCrawling\")} | <span title={toolInfo}>{toolInfo}</span>\n </Text>\n <ReactSVG className={styles.externalLinkIcon} src={ExternalLinkIcon} />\n </Link>\n );\n };",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

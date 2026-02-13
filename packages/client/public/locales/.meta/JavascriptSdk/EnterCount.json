@@ -3,7 +3,7 @@
   "content": "Enter count",
   "content_en_sha1_hash": "5b8f4704ee28ce808517489f31e27c09500a5144",
   "created_at": "2025-05-19T21:30:54.470Z",
-  "updated_at": "2025-05-21T09:11:52.558Z",
+  "updated_at": "2025-08-04T07:30:01.408Z",
   "comment": {
     "text": "The translation key \"EnterCount\" is used to display a placeholder text for a count input field in a user interface. This text will be replaced by a numeric value entered by the user. It appears as a label for a text input field in the PortalSettings categories page.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/ItemsCountBlock.js",
-      "line_number": 69,
-      "context": "/>\n </LabelGroup>\n <TextInput\n scale\n onChange={onChangeCount}\n placeholder={t(\"EnterCount\")}\n value={value}\n tabIndex={6}\n />\n </ControlsGroup>\n );",
+      "line_number": 70,
+      "context": "/>\n </LabelGroup>\n <TextInput\n scale\n onChange={onChangeCount}\n placeholder={t(\"EnterCount\")}\n value={value}\n tabIndex={6}\n testId=\"items_count_input\"\n />\n </ControlsGroup>",
       "module": "/packages/client"
     }
   ],
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Sayı daxil edin\" is a literal translation but doesn't quite capture the nuance of 'Enter count' in a UI context. It sounds more like a direct instruction rather than a label.",
-          "suggestion": "Consider alternatives like \"Rəqəm daxil edin\" or \"Miqdar daxil edin\" which might be more appropriate depending on the context."
+          "description": "The translation \"Sayı daxil edin\" is a literal translation of 'Enter count'. A more natural phrasing in Azerbaijani would be something like \"Rəqəmi daxil edin\" or \"Sayı girin\".",
+          "suggestion": "Rəqəmi daxil edin"
         }
       ],
       "approved_at": null
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Въведете броят' is not grammatically correct. 'Броят' is in the nominative case, but it needs to be in the accusative case to agree with the verb 'Въведете'.",
-          "suggestion": "Въведете броя"
+          "description": "The translation 'Въведете броят' is not the most accurate or natural translation of 'Enter count'. It translates literally as 'Enter the number', which isn't ideal. A more accurate and natural translation would be something like 'Въведете число' or 'Въведете количество'.",
+          "suggestion": "Въведете число"
         }
       ],
       "approved_at": null
@@ -78,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Especificar\" is a valid verb, \"Enter count\" implies providing a numerical value. \"Especificar recuento\" feels more like specifying what constitutes a count, rather than inputting the count itself. A more accurate translation might be \"Introducir cantidad\" or \"Ingresar cantidad\".",
-          "suggestion": "Introducir cantidad"
+          "description": "While 'Especificar recuento' is understandable, it's a more formal and less natural translation of 'Enter count'. A more common and user-friendly translation might be 'Ingresar cantidad' or 'Introducir cantidad'. 'Especificar' implies a level of detail or precision that might not be intended.",
+          "suggestion": "Ingresar cantidad"
         }
       ],
       "approved_at": null
@@ -93,7 +93,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Saisir le nombre\" is grammatically correct, a more idiomatic translation of \"Enter count\" would be \"Entrer le nombre\". \"Saisir\" implies a more deliberate input, while \"Entrer\" is more neutral and aligns better with a user interface action.",
+          "suggestion": "Entrer le nombre"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -102,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Մուտքագրել հաշվարկը\" doesn't accurately convey the meaning of \"Enter count.\" \"Մուտքագրել\" implies inputting or typing something.  \"Enter count\" refers to specifying a numerical value representing a quantity.",
-          "suggestion": "Հաշվարկի քանակը"
+          "description": "The Armenian translation \"Մուտքագրել հաշվարկը\" literally translates to \"Enter calculation.\" While close, \"count\" implies a number or quantity. A more accurate translation would convey this.",
+          "suggestion": "Մուտքագրել քանակը (Mut’yagrel k’anaki)"
         }
       ],
       "approved_at": null
@@ -114,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Inserisci\" is correct for 'enter', \"conteggio\" is a more formal word for 'count' and might not be the most natural translation in this context. A more colloquial and possibly more appropriate translation would be 'Numero' or 'Quantità'.",
-          "suggestion": "Inserisci numero"
+          "description": "While 'Inserisci conteggio' is technically correct, a more natural and idiomatic translation for 'Enter count' in this context (likely referring to a numerical input) would be 'Immetti il numero' or 'Inserisci il numero'. 'Conteggio' is more suited for a tally or count of objects.",
+          "suggestion": "Immetti il numero"
         }
       ],
       "approved_at": null
@@ -126,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"数を入力\" while technically correct (meaning 'enter number'), lacks the nuance of 'count' in this context. It feels more generic.",
-          "suggestion": "Consider a more specific translation like \"個数を入力\" (kazu o nyūryoku) which explicitly refers to a quantity or count."
+          "description": "The translation \"数を入力\" while technically correct, is a bit literal. A more natural and contextually appropriate translation for 'Enter count' in a Javascript SDK context might be something like \"カウントを入力\" (Kanto o nyuuputsu) or \"個数を入力\" (Kazu o nyuuputsu). The original phrase could imply either any number or a specific quantity.",
+          "suggestion": "カウントを入力"
         }
       ],
       "approved_at": null
@@ -135,13 +141,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"개수 입력\" is technically correct, \"입력하세요\" would provide a more natural and complete instruction. \"개수 입력\" simply states 'count input,' which isn't as helpful as 'enter the count'.",
-          "suggestion": "개수 입력하세요"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -150,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ເຂົ້ານັບ\" literally translates to \"enter count\" but may not be the most natural or accurate translation of \"Enter count\" in context. It depends on the intended meaning. A more accurate translation, depending on context, could be something like \"ຈໍານວນເຂົ້າ\" (amount entered) or a more contextual phrase.",
-          "suggestion": "Consider alternatives like \"ຈໍານວນເຂົ້າ\" or a phrase that better reflects the intended meaning within the JavascriptSdk's functionality."
+          "description": "The Lao translation \"ເຂົ້ານັບ\" literally translates to \"enter count\" which is a direct transliteration of the English phrase. While understandable, it's not the most natural or idiomatic way to express \"Enter count\" in Lao. A more appropriate translation would depend on the context, but options like 'ໃສ່ຈຳນວນ' (sai jamnuan - enter number) or 'ປ້ອນຈຳນວນ' (pon jamnuan - input number) might be better depending on the intended meaning.",
+          "suggestion": "Consider 'ໃສ່ຈຳນວນ' or 'ປ້ອນຈຳນວນ' depending on the specific context. Further clarification of the context would allow for a more accurate suggestion."
         }
       ],
       "approved_at": null
@@ -180,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Introduzir' can mean 'enter,' in the context of a Javascript SDK property name like 'EnterCount,' a more accurate translation would be 'Contagem' or 'Número de itens.' 'Introduzir' implies an action of inputting, whereas 'EnterCount' likely refers to the count itself.",
-          "suggestion": "Contagem"
+          "description": "The translation \"Introduzir contagem\" is not the most natural or accurate translation of \"Enter count\". \"Introduzir\" implies introducing something new, while \"Enter count\" refers to inputting a numerical value.",
+          "suggestion": "Contagem inserida"
         }
       ],
       "approved_at": null
@@ -189,7 +189,13 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Digite a contagem\" is understandable, a more natural and commonly used translation for 'Enter count' would be 'Insira a contagem' or 'Preencha a contagem'. \"Digite\" implies typing something, while 'Enter' can refer to submitting or inserting a value.",
+          "suggestion": "Insira a contagem"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -198,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Introduceţi numărul\" is a literal translation, but doesn't convey the intended meaning of 'Enter count' in a user interface context. It's overly formal. A more appropriate translation would be something like 'Introduceți cantitatea' or 'Introduceți numărul de...'.",
-          "suggestion": "Introduceți cantitatea"
+          "description": "The translation \"Introduceţi numărul\" is a literal translation of \"Enter count\" but doesn't quite convey the intended meaning in a natural Romanian way. While 'Introduceți' means 'Enter', 'numărul' means 'the number'. It's unclear if 'count' refers to a specific number or a general count. A better translation would depend on the specific context of the JavascriptSdk. EnterCount.",
+          "suggestion": "Consider translations such as: 'Introduceți valoarea', 'Introduceți cantitatea', or 'Specificați numărul', depending on the context. If it is a numerical count, 'Introduceți numărul' is acceptable, but less idiomatic than alternatives."
         }
       ],
       "approved_at": null
@@ -216,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ගණන යොදන්න' translates more accurately to 'Enter the number' or 'Add the count' rather than simply 'Enter count'. It lacks the possessive or article that makes it a natural phrase in Sinhala when referring to an input field.",
-          "suggestion": "ගණන ඇතුළත් කරන්න (Gannata atulath karanna) - Enter the number / Enter the count"
+          "description": "The translation 'ගණන යොදන්න' literally translates to 'enter count'. While understandable, a more natural and contextually appropriate Sinhala translation for a UI label or input prompt might be 'එක්සත් කරන්න' (Ek Sath Kannatha) - meaning 'add' or 'combine' in the sense of inputting a numerical value, or 'ගණන ඇතුළත් කරන්න' (Gannata Athelata Kannath).  'ගණන යොදන්න' sounds slightly awkward.",
+          "suggestion": "ගණන ඇතුළත් කරන්න"
         }
       ],
       "approved_at": null
@@ -246,7 +252,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Unesi broj' literally translates to 'Enter number', while the original English phrase is 'Enter count'. While related, 'count' implies a quantity or number of items, not just any number. 'Unesi količinu' would be a more accurate translation.",
+          "description": "The translation 'Unesi broj' literally translates to 'Enter number,' while the English phrase is 'Enter count.' These are not synonymous. 'Count' refers to a quantity or number, whereas 'broj' specifically means 'number'.",
           "suggestion": "Unesi količinu"
         }
       ],

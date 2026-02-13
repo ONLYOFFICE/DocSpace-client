@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -23,44 +23,42 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import { TFunction } from "i18next";
 
 import { TColorScheme, TTheme } from "@docspace/shared/themes";
 import { TTranslation } from "@docspace/shared/types";
 
-import { PluginScopes } from "SRC_DIR/helpers/plugins/enums";
 import { TPlugin } from "SRC_DIR/helpers/plugins/types";
+import PluginStore from "SRC_DIR/store/PluginStore";
 
 export interface PluginDropzoneProps {
   onDrop: <T extends File>(acceptedFiles: T[]) => void;
   isLoading: boolean;
   isDisabled: boolean;
+  dataTestId?: string;
 }
 
 export interface PluginsEmptyScreen {
   t: TTranslation;
   theme: TTheme;
   withUpload: boolean;
+  pluginsSdkUrl: string | undefined;
+  currentColorScheme: TColorScheme;
   onDrop: <T extends File>(acceptedFiles: T[]) => void;
 }
 
-export interface PluginItemProps {
-  name: string;
-  version: string;
-  description?: string;
-
-  enabled: boolean;
+export interface PluginItemProps extends TPlugin {
   updatePlugin: (
     name: string,
     status: boolean,
     settings?: string,
+    t?: TFunction,
   ) => Promise<unknown>;
-
-  scopes: PluginScopes | PluginScopes[];
 
   openSettingsDialog: (name: string) => void;
 
-  image: string;
-  url: string;
+  theme: TTheme;
+  dataTestId?: string;
 }
 
 export interface ListLoaderProps {
@@ -79,7 +77,7 @@ export interface PluginsProps {
     status: boolean,
     settings?: string,
   ) => Promise<unknown>;
-  addPlugin: (data: FormData) => Promise<void>;
+  addPlugin: PluginStore["addPlugin"];
 
   updatePlugins: (fromList?: boolean) => Promise<void>;
 
@@ -88,4 +86,14 @@ export interface PluginsProps {
 
   isLoading: boolean;
   isEmptyList: boolean;
+
+  pluginsSdkUrl: string | undefined;
+
+  showPortalSettingsLoader: boolean;
+}
+
+export interface UploadDecsriptionProps {
+  pluginsSdkUrl: string | undefined;
+  currentColorScheme: TColorScheme;
+  t: TTranslation;
 }

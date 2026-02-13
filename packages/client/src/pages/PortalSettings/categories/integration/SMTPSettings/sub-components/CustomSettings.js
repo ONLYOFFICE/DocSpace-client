@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,7 +27,12 @@
 import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
 
-import { TextInput } from "@docspace/shared/components/text-input";
+import {
+  InputSize,
+  InputType,
+  TextInput,
+} from "@docspace/shared/components/text-input";
+import { PasswordInput } from "@docspace/shared/components/password-input";
 import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Checkbox } from "@docspace/shared/components/checkbox";
@@ -114,6 +119,7 @@ const CustomSettings = (props) => {
         onChange={onChangeToggle}
         label={t("Common:Authentication")}
         isDisabled={isLoading}
+        dataTestId="smtp_auth_toggle_button"
       />
 
       <div className="smtp-settings_title smtp-settings_login">
@@ -130,6 +136,7 @@ const CustomSettings = (props) => {
         value={settings[HOST_LOGIN]}
         isDisabled={isLoading || !settings[AUTHENTICATION]}
         scale
+        testId="smtp_host_login_imput"
       />
 
       <div className="smtp-settings_title">
@@ -138,14 +145,20 @@ const CustomSettings = (props) => {
           *
         </Text>
       </div>
-      <TextInput
+      <PasswordInput
+        simpleView={true}
+        autoComplete="off"
         className="smtp-settings_input"
-        name={HOST_PASSWORD}
+        inputName={HOST_PASSWORD}
         placeholder={t("Common:EnterPassword")}
         onChange={onChange}
-        value={settings[HOST_PASSWORD]}
+        inputValue={settings[HOST_PASSWORD]}
         isDisabled={isLoading || !settings[AUTHENTICATION]}
         scale
+        inputType={InputType.password}
+        size={InputSize.base}
+        testId="smtp_host_password_input"
+        sanitizeValue={(v) => v.replace(/\s/g, "")}
       />
 
       <Checkbox
@@ -155,6 +168,7 @@ const CustomSettings = (props) => {
         isChecked={settings[USE_NTLM]}
         onChange={onChangeCheckbox}
         isDisabled={isLoading || !settings[AUTHENTICATION]}
+        dataTestId="smtp_auth_ntlm_checkbox"
       />
     </div>
   );
@@ -175,6 +189,7 @@ const CustomSettings = (props) => {
         onChange={onChange}
         value={settings[HOST]}
         scale
+        testId="smtp_host_domain_input"
       />
 
       <div className="smtp-settings_title">
@@ -192,6 +207,7 @@ const CustomSettings = (props) => {
         value={settings[PORT].toString()}
         scale
         hasError={errors[PORT]}
+        testId="smtp_port_input"
       />
       {enableAuthComponent}
 
@@ -204,6 +220,7 @@ const CustomSettings = (props) => {
         onChange={onChange}
         value={settings[SENDER_DISPLAY_NAME]}
         scale
+        testId="smtp_sender_display_name_input"
       />
 
       <div className="smtp-settings_title">
@@ -218,6 +235,7 @@ const CustomSettings = (props) => {
         place="top"
         hasError={errors[SENDER_EMAIL_ADDRESS]}
         errorMessage={t("Common:IncorrectEmail")}
+        dataTestId="smtp_sender_email_container"
       >
         <EmailInput
           name={SENDER_EMAIL_ADDRESS}
@@ -228,6 +246,7 @@ const CustomSettings = (props) => {
           hasError={errors[SENDER_EMAIL_ADDRESS] ?? false}
           placeholder={t("EnterEmail")}
           scale
+          dataTestId="smtp_sender_email_input"
         />
       </FieldContainer>
 
@@ -238,6 +257,7 @@ const CustomSettings = (props) => {
         label={t("EnableSSL")}
         isChecked={settings[ENABLE_SSL]}
         onChange={onChangeCheckbox}
+        dataTestId="enable_ssl_checkbox"
       />
       <ButtonContainer
         t={t}

@@ -1,0 +1,253 @@
+// (c) Copyright Ascensio System SIA 2009-2026
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import {
+  colorThemeHandler,
+  encryptionSettingsHandler,
+  getPortalHandler,
+  quotaHandler,
+} from "@docspace/shared/__mocks__/handlers";
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
+import { expect, test } from "./fixtures/base";
+
+test.describe("Settings", () => {
+  test.beforeEach(async ({ serverRequestInterceptor, port }) => {
+    serverRequestInterceptor.use(colorThemeHandler(port));
+  });
+
+  test("should branding settings render", async ({
+    page,
+    baseUrl,
+    serverRequestInterceptor,
+    port,
+  }) => {
+    serverRequestInterceptor.use(getPortalHandler(port, false, true));
+
+    await page.goto(`${baseUrl}/management/settings`);
+
+    await expect(page.getByTestId("whitelabel-settings-wrapper")).toBeVisible();
+
+    await expectScreenshot(page,[
+      "desktop",
+      "settings",
+      "settings-branding-render.png",
+    ]);
+  });
+
+  test("should data backup settings render", async ({
+    page,
+    baseUrl,
+    port,
+    serverRequestInterceptor,
+  }) => {
+    serverRequestInterceptor.use(getPortalHandler(port, false, true));
+
+    await page.goto(`${baseUrl}/management/settings/data-backup`);
+
+    await expect(page.getByTestId("manual-backup-wrapper")).toBeVisible();
+
+    await expectScreenshot(page,[
+      "desktop",
+      "settings",
+      "settings-data-backup-render.png",
+    ]);
+  });
+
+  test("should auto backup settings render", async ({
+    page,
+    baseUrl,
+    port,
+    serverRequestInterceptor,
+  }) => {
+    serverRequestInterceptor.use(getPortalHandler(port, false, true));
+
+    await page.goto(`${baseUrl}/management/settings/auto-backup`);
+
+    await expect(page.getByTestId("auto-backup")).toBeVisible();
+
+    await expectScreenshot(page,[
+      "desktop",
+      "settings",
+      "settings-auto-backup-render.png",
+    ]);
+  });
+
+  test("should restore settings render", async ({
+    page,
+    baseUrl,
+    port,
+    serverRequestInterceptor,
+  }) => {
+    serverRequestInterceptor.use(getPortalHandler(port, false, true));
+    await page.goto(`${baseUrl}/management/settings/restore`);
+
+    await expect(page.getByTestId("restore-backup")).toBeVisible();
+
+    await expectScreenshot(page,[
+      "desktop",
+      "settings",
+      "settings-restore-render.png",
+    ]);
+  });
+
+  test("should encrypt settings render", async ({
+    page,
+    baseUrl,
+    port,
+    serverRequestInterceptor,
+  }) => {
+    serverRequestInterceptor.use(getPortalHandler(port, false, true));
+    await page.goto(`${baseUrl}/management/settings/encrypt-data`);
+
+    await expect(page.getByTestId("encrypt-data-page")).toBeVisible();
+
+    await expectScreenshot(page,[
+      "desktop",
+      "settings",
+      "settings-encrypt-render.png",
+    ]);
+  });
+
+  test("should encrypt settings with encrypted state render", async ({
+    page,
+    baseUrl,
+    serverRequestInterceptor,
+    port,
+  }) => {
+    // Override encryption settings handler to return encrypted state
+    serverRequestInterceptor.use(
+      getPortalHandler(port, false, true),
+      encryptionSettingsHandler(port, true),
+    );
+
+    await page.goto(`${baseUrl}/management/settings/encrypt-data`);
+
+    await expect(page.getByTestId("encrypt-data-page")).toBeVisible();
+
+    await expectScreenshot(page,[
+      "desktop",
+      "settings",
+      "settings-encrypt-encrypted-render.png",
+    ]);
+  });
+
+  test("should unavailable branding settings render", async ({
+    page,
+    baseUrl,
+  }) => {
+    await page.goto(`${baseUrl}/management/settings`);
+
+    await expect(page.getByTestId("whitelabel-settings-wrapper")).toBeVisible();
+
+    await expectScreenshot(page,[
+      "desktop",
+      "settings",
+      "settings-branding-unavailable-render.png",
+    ]);
+  });
+
+  test("should unavailable data backup settings render", async ({
+    page,
+    baseUrl,
+  }) => {
+    await page.goto(`${baseUrl}/management/settings/data-backup`);
+
+    await expect(page.getByTestId("manual-backup-wrapper")).toBeVisible();
+
+    await expectScreenshot(page,[
+      "desktop",
+      "settings",
+      "settings-data-backup-unavailable-render.png",
+    ]);
+  });
+
+  test("should unavailable auto backup settings render", async ({
+    page,
+    baseUrl,
+  }) => {
+    await page.goto(`${baseUrl}/management/settings/auto-backup`);
+
+    await expect(page.getByTestId("auto-backup")).toBeVisible();
+
+    await expectScreenshot(page,[
+      "desktop",
+      "settings",
+      "settings-auto-backup-unavailable-render.png",
+    ]);
+  });
+
+  test("should unavailable restore settings render", async ({
+    page,
+    baseUrl,
+  }) => {
+    await page.goto(`${baseUrl}/management/settings/restore`);
+
+    await expect(page.getByTestId("restore-backup")).toBeVisible();
+
+    await expectScreenshot(page,[
+      "desktop",
+      "settings",
+      "settings-restore-unavailable-render.png",
+    ]);
+  });
+
+  test("should unavailable encrypt settings render", async ({
+    page,
+    baseUrl,
+  }) => {
+    await page.goto(`${baseUrl}/management/settings/encrypt-data`);
+
+    await expect(page.getByTestId("encrypt-data-page")).toBeVisible();
+
+    await expectScreenshot(page,[
+      "desktop",
+      "settings",
+      "settings-encrypt-unavailable-render.png",
+    ]);
+  });
+
+  test("should not available branding settings render", async ({
+    page,
+    baseUrl,
+    serverRequestInterceptor,
+    port,
+  }) => {
+    serverRequestInterceptor.use(
+      getPortalHandler(port, false, true),
+      quotaHandler(port, false),
+    );
+
+    await page.goto(`${baseUrl}/management/settings`);
+
+    await expect(page.getByTestId("whitelabel-settings-wrapper")).toBeVisible();
+
+    await expectScreenshot(page,[
+      "desktop",
+      "settings",
+      "settings-branding-without-customization-render.png",
+    ]);
+  });
+});

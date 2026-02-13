@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -45,7 +45,7 @@ export interface SelectedItemProps {
     propKey: string | number,
     label: TLabel,
     group?: string | FilterGroups,
-    e?: React.MouseEvent<HTMLDivElement>,
+    e?: React.MouseEvent<HTMLElement>,
   ) => void;
   /** Sets the button to present a disabled state */
   isDisabled?: boolean;
@@ -60,8 +60,9 @@ export interface SelectedItemProps {
   /** Accepts group key to remove item */
   group?: string;
   /** Passes ref to component */
-  forwardedRef?: React.RefObject<HTMLDivElement>;
+  forwardedRef?: React.RefObject<HTMLDivElement | null>;
   classNameCloseButton?: string;
   hideCross?: boolean;
   title?: string;
+  dataTestId?: string;
 }

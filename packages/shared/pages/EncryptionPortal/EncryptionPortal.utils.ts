@@ -1,5 +1,4 @@
-/* eslint-disable no-param-reassign */
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,7 +24,23 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const returnToPortal = () => {
+export const isStorybook = (): boolean => {
+  if (typeof window === "undefined" || typeof document === "undefined")
+    return false;
+
+  return document.querySelector('[class^="sb-"]') !== null;
+};
+
+export const returnToPortal = (withoutTimeout = false) => {
+  if (isStorybook()) {
+    return;
+  }
+
+  if (withoutTimeout) {
+    window.location.replace("/");
+    return;
+  }
+
   setTimeout(() => {
     window.location.replace("/");
   }, 5000);

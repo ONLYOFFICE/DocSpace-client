@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -45,6 +45,7 @@ export const SocialButton = memo((props: SocialButtonProps) => {
     isDisabled = false,
     noHover = false,
     className,
+    dataTestId,
     $iconOptions,
     ...otherProps
   } = props;
@@ -62,7 +63,7 @@ export const SocialButton = memo((props: SocialButtonProps) => {
         [styles.small]: size !== "base",
         [styles.noHover]: noHover,
       })}
-      data-testid="social-button"
+      data-testid={dataTestId ?? "social-button"}
       data-icon-options-color={$iconOptions ? $iconOptions.color : null}
       style={buttonStyle}
       tabIndex={tabIndex}

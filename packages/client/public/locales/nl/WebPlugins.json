@@ -8,6 +8,8 @@
   "NeedSettings": "Instellingen invoeren",
   "NoPlugins": "Geen plug-ins toegevoegd",
   "NotNeedSettings": "Instellingen invoeren is niet nodig",
+  "PluginIsNotCompatible": "De plugin SDK-versie komt niet overeen met de versie van {{productName}}. Werk alsjeblieft bij naar een compatibele versie.",
+  "PluginLoadedSuccessfully": "Plugin succesvol geladen",
   "PluginSamples": "Plugin-voorbeelden",
   "PluginSDK": "Plugin SDK",
   "PluginSDKDescription": "Met behulp van Plugin SDK kunt u uw {{productName}} functionaliteit uitbreiden, services van derden aansluiten of de bestaande gebruikerservaring verbeteren. Hier vindt u de plug-ins met broncode die beschikbaar is op GitHub.",

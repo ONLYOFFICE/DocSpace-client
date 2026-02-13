@@ -1,0 +1,18 @@
+{
+  "AIAgentAccessRedirectNote": "Você será redirecionado para a seção {{sectionName}} em 5 segundos.",
+  "AIChat": "Chat de IA",
+  "AIInstructions": "Instruções de IA",
+  "CreateChat": "Criar chat",
+  "EmptyKnowledgeDescriptionActions": "Experimente estas ações para começar:",
+  "EmptyKnowledgeTitle": "Ainda não há arquivos enviados",
+  "EmptyResultsTitle": "Ainda não há resultados",
+  "InstructionsDescriptionAgentExample": "Exemplo: “Você é um assistente de RP de IA que ajuda a escrever e editar comunicados de imprensa. Mantenha um tom profissional, confiante e adequado à mídia. Destaque as mensagens-chave com clareza, evite jargões e mantenha o texto conciso e envolvente.”",
+  "KnowledgeDescription": "Carregue arquivos do seu computador ou {{productName}} para fornecer um contexto melhor para o chat. Observação: parte ou todo o conteúdo carregado pode ser exposto durante a conversa.",
+  "KnowledgeSelectIn": "Selecione em {{productName}}",
+  "KnowledgeUnavailable": "Base de Conhecimento indisponível",
+  "MCP": "Ferramentas MCP para esta sala",
+  "ResponseQualityNode": "<1>Nota:</1> A qualidade da resposta pode variar dependendo do modelo; modelos mais recentes são recomendados para melhores resultados.",
+  "ResultStorage": "Armazenamento de resultados",
+  "UploadFilesDevice": "Carregue arquivos a partir do seu dispositivo pessoal",
+  "UploadFilesPortal": "Carregue arquivos de {{sectionNameFirst}} ou {{sectionNameSecond}}"
+}

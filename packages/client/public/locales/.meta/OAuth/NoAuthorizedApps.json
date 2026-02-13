@@ -3,7 +3,7 @@
   "content": "No authorized apps",
   "content_en_sha1_hash": "c1f73d4def787f095d112a62e150b77244de4f23",
   "created_at": "2025-05-19T21:30:53.918Z",
-  "updated_at": "2025-05-21T07:09:36.021Z",
+  "updated_at": "2025-09-22T10:04:14.012Z",
   "comment": {
     "text": "\"NoAuthorizedApps\" is used to display a message indicating that there are no authorized apps. It appears in an empty list screen, providing feedback to users about their app settings on the Profile page. Translators should provide a clear and concise equivalent of this message for all languages, using phrases like \"No authorized applications available\" or similar expressions.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/authorized-apps/sub-components/EmptyScreen.tsx",
-      "line_number": 11,
-      "context": "const EmptyScreen = ({ t }: { t: TTranslation }) => {\n return (\n <EmptyScreenContainer\n imageSrc={EmptyScreenPersonsSvgUrl}\n imageAlt=\"Empty apps list\"\n headerText={t(\"NoAuthorizedApps\")}\n descriptionText={t(\"ProfileDescription\")}\n />\n );\n };",
+      "line_number": 15,
+      "context": "return (\n <EmptyScreenContainer\n imageSrc={isBase ? EmptyScreenOauthSvgUrl : EmptyScreenOauthDarkSvgUrl}\n imageAlt=\"Empty apps list\"\n headerText={t(\"NoAuthorizedApps\")}\n descriptionText={t(\"ProfileDescription\")}\n />\n );\n };",
       "module": "/packages/client"
     }
   ],
@@ -105,13 +105,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'ອະນຸຍາດ' is correctly spelled, but a more common and potentially clearer phrasing for 'authorized' in this context might be 'ຮັບອະນຸຍາດ'.",
-          "suggestion": "ຮັບອະນຸຍາດ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -162,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'අනුමතිත ඇප්ස් නැත.' is a literal translation and might not be the most natural way to express 'No authorized apps' in Sinhala. While technically correct, it can sound slightly awkward.",
-          "suggestion": "Consider a more idiomatic translation like 'අනුමැතිය ලද ඇප්ස් කවරමNone juga.' or 'අනුමැතිය ලැබුණු ඇප්ස් නැත.' which conveys the meaning more naturally."
+          "description": "The translation \"අනුමතිත ඇප්ස් නැත.\" while conveying the general meaning, could be more accurately translated as \"අනුමැතිය ලද ඇප්ස් නැත\" or \"අනුමැතිය ලැබුණු ඇප්ස් නැත.\" The term 'අනුමතිත' is a constructed word and less common than 'අනුමැතිය ලද' or 'අනුමැතිය ලැබුණු'.",
+          "suggestion": "අනුමැතිය ලද ඇප්ස් නැත."
         }
       ],
       "approved_at": null

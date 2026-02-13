@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -153,6 +153,7 @@ const HistoryFilterHeader = (props) => {
             id="filter-button"
             onClick={openFiltersModal}
             isGroupMenuVisible={isGroupMenuVisible}
+            data-testid="webhook_filter_button"
           >
             <IconButton iconName={FilterReactSvrUrl} size={16} />
             <span hidden={historyFilters === null} />

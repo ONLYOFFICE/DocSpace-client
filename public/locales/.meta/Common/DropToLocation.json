@@ -1,0 +1,28 @@
+{
+  "key_path": "DropToLocation",
+  "content": "Drop to: {{folderName}}",
+  "content_en_sha1_hash": "e078085b1f00e4e3d886ab2241801879621c6a7f",
+  "created_at": "2025-08-11T18:11:29.863Z",
+  "updated_at": "2025-08-11T18:12:30.269Z",
+  "comment": {
+    "text": "This key displays a tooltip on a button indicating the destination folder when dropping a file. The text \"Drop to: {{folderName}}\" informs the user where the file will be placed. Translators should ensure the destination folder name is clearly communicated.",
+    "is_auto": true,
+    "updated_at": "2025-08-11T18:12:30.269Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/operations-progress-button/PreviewButton.tsx",
+      "line_number": 300,
+      "context": "tooltipContent={\n animationState !== \"hidingUnder\" &&\n animationState !== \"dropping\" &&\n (dropTargetFolderName || lastKnownTitle) ? (\n <Text fontWeight={600} fontSize=\"14px\">\n {t(\"Common:DropToLocation\", {\n folderName: dropTargetFolderName || lastKnownTitle,\n })}\n </Text>\n ) : null\n }",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

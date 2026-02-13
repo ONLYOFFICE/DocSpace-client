@@ -1,0 +1,28 @@
+{
+  "key_path": "DisableServerDescription",
+  "content": "If you block this server, it will no longer be available to users, but its settings will remain intact. \nUnblocking it later may require users to reauthorize, depending on the provider's requirements.",
+  "content_en_sha1_hash": "785067b622f7ecd29c2c98692bcd6fc214f3d25f",
+  "created_at": "2025-10-27T16:14:31.651Z",
+  "updated_at": "2025-10-27T17:32:26.661Z",
+  "comment": {
+    "text": "This text appears within a dialog box used to disable an AI server. It explains that disabling the server removes it from user access but preserves its configuration, and re-enabling it may require user reauthorization. This helps users understand the consequences of disabling the server.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T17:32:26.661Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/dialogs/disable/index.tsx",
+      "line_number": 78,
+      "context": "<ModalDialog.Header>\n {t(\"AISettings:DisableMCPServer\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text>\n <Trans t={t} i18nKey=\"DisableServerDescription\" ns=\"AISettings\" />\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n primary",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

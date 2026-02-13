@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,6 +26,8 @@
 
 import type { TTranslation } from "@docspace/shared/types";
 import { TColorScheme } from "@docspace/shared/themes";
+import FilesStore from "SRC_DIR/store/FilesStore";
+import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
 
 export interface ICover {
   data: string;
@@ -35,6 +37,11 @@ export interface ICover {
 export interface ILogo {
   color: string;
   cover: ICover;
+}
+
+export interface ILogoCover {
+  color: string;
+  cover: string;
 }
 
 interface IRoomCoverDialogProps {
@@ -52,7 +59,7 @@ export interface RoomLogoCoverProps {
   title?: string;
   covers?: ICover[] | undefined;
   setCover: (color: string, icon: string | ICover) => void;
-  cover: ILogo;
+  cover: ILogoCover;
   setRoomCoverDialogProps: (params: IRoomCoverDialogProps) => void;
   roomCoverDialogProps: IRoomCoverDialogProps;
   forwardedRef?: React.ForwardedRef<HTMLDivElement>;
@@ -71,13 +78,19 @@ export type CoverDialogProps = RoomLogoCoverProps & {
   setRoomLogoCoverDialogVisible: (value: boolean) => void;
   createRoomDialogVisible: boolean;
   editRoomDialogPropsVisible: boolean;
+  createAgentDialogVisible: boolean;
+  editAgentDialogVisible: boolean;
   roomLogoCoverDialogVisible: boolean;
   templateEventVisible: boolean;
+  setEnabledHotkeys?: FilesStore["setEnabledHotkeys"];
+  uploadedFile: AvatarEditorDialogStore["uploadedFile"];
+  setUploadedFile: AvatarEditorDialogStore["setUploadedFile"];
+  isAIAgentsFolderRoot: boolean;
 };
 
 export interface CustomLogoProps {
   color: string | null;
-  icon: string | ILogo | null;
+  icon: string | ILogo | ICover | ILogoCover | null;
   withoutIcon: boolean;
   isBaseTheme: boolean;
   roomTitle: string;

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,6 +27,7 @@ import { ReactSVG } from "react-svg";
 
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
+import { TooltipContainer } from "@docspace/shared/components/tooltip";
 import { inject, observer } from "mobx-react";
 import { TColorScheme, TTheme } from "@docspace/shared/themes";
 import { useTranslation } from "react-i18next";
@@ -76,32 +77,48 @@ const Integration: React.FC<{
         {t("IntegrationDescription", { productName: t("Common:ProductName") })}
       </Text>
       <div className="icons">
-        <div className="icon" title={zoomTitle}>
+        <TooltipContainer
+          as="div"
+          data-testid="integration_zoom_container"
+          className="icon"
+          title={zoomTitle}
+        >
           <ReactSVG
             className="icon-zoom"
             src={ZoomIcon}
             onClick={() => window.open(zoomUrl, "_blank")}
           />
-        </div>
+        </TooltipContainer>
 
-        <div className="icon" title={wordPressTitle}>
+        <TooltipContainer
+          as="div"
+          data-testid="integration_wordpress_container"
+          className="icon"
+          title={wordPressTitle}
+        >
           <ReactSVG
             className="icon-wordpress"
             src={WordpressIcon}
             onClick={() => window.open(wordPressUrl, "_blank")}
           />
-        </div>
+        </TooltipContainer>
 
-        <div className="icon" title={drupalTitle}>
+        <TooltipContainer
+          as="div"
+          data-testid="integration_drupal_container"
+          className="icon"
+          title={drupalTitle}
+        >
           <ReactSVG
             className="icon-drupal"
             src={DrupalIcon}
             onClick={() => window.open(drupalUrl, "_blank")}
           />
-        </div>
+        </TooltipContainer>
       </div>
       <div className="link-container">
         <Link
+          data-testid="all_connectors_link"
           className="link"
           noHover
           color={currentColorScheme.main?.accent}
@@ -110,7 +127,7 @@ const Integration: React.FC<{
           {t("SeeAllConnectors")}
         </Link>
 
-        <div className="icon">
+        <div data-testid="all_connectors_icon" className="icon">
           <ReactSVG
             className="icon-arrow"
             src={ArrowIcon}

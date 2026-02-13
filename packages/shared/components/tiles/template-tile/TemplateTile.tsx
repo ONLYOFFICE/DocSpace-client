@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,9 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
 import { useTranslation } from "react-i18next";
+import { Text } from "../../text";
+import { Link } from "../../link";
 import { TemplateTileProps, TemplateItem } from "./TemplateTile.types";
 import { TileItem } from "../tile-container/TileContainer.types";
 import { BaseTile } from "../base-tile/BaseTile";
@@ -86,16 +86,18 @@ export const TemplateTile = ({
       </div>
       <div className={styles.field}>
         {item.createdBy ? (
-          <Link
-            isHovered
-            truncate
-            fontSize="13px"
-            fontWeight={600}
-            className={styles.text}
-            onClick={openUser}
-          >
-            {item.createdBy.displayName}
-          </Link>
+          <div>
+            <Link
+              isHovered
+              truncate
+              fontSize="13px"
+              fontWeight={600}
+              className={styles.text}
+              onClick={openUser}
+            >
+              {item.createdBy.displayName}
+            </Link>
+          </div>
         ) : null}
         {showStorageInfo && SpaceQuotaComponent ? (
           <SpaceQuotaComponent

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,17 +24,20 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ReactSVG } from "react-svg";
 import classNames from "classnames";
-import { Link } from "react-router";
 import { isMobile } from "react-device-detect";
+
+import { useAnimation } from "../../hooks/useAnimation";
 
 import { Text } from "../text";
 import { Badge } from "../badge";
 
-import styles from "./ArticleItem.module.scss";
+import { TooltipContainer } from "../tooltip";
+
 import { ArticleItemProps } from "./ArticleItem.types";
+import styles from "./ArticleItem.module.scss";
 
 const getInitial = (text: string) => text.substring(0, 1).toUpperCase();
 
@@ -63,12 +66,32 @@ export const ArticleItemPure = (props: ArticleItemProps) => {
     badgeTitle,
     badgeComponent,
     title,
-    linkData,
     item,
+    iconNode,
+    withAnimation,
+    dataTooltipId,
   } = props;
+
+  // Animation hook
+  const {
+    animationPhase,
+    isAnimationReady,
+    animationElementRef,
+    parentElementRef,
+    endWidth,
+    triggerAnimation,
+  } = useAnimation(isActive);
+
+  const textRef = useRef<HTMLParagraphElement>(null);
+  const [isTextTruncated, setIsTextTruncated] = useState(false);
 
   const onClickAction = (e: React.MouseEvent) => {
     onClick?.(e, id);
+
+    // Start animation if withAnimation is true
+    if (withAnimation) {
+      triggerAnimation();
+    }
   };
   const onMouseDown = (e: React.MouseEvent) => {
     if (e.button !== 1) return;
@@ -101,94 +124,108 @@ export const ArticleItemPure = (props: ArticleItemProps) => {
     );
   };
 
-  const tooltipTitle = !showText ? title : undefined;
+  const tooltipTitle = !showText || isTextTruncated ? title : undefined;
+
+  useEffect(() => {
+    const textElement = textRef.current;
+    if (!showText || !textElement) return;
+
+    setIsTextTruncated(textElement.scrollWidth > textElement.clientWidth);
+  }, [showText, title]);
 
   const renderItem = () => {
     return (
-      <Link
-        style={{ textDecoration: "none" }}
-        to={linkData?.path}
-        state={linkData?.state}
+      <TooltipContainer
+        as="div"
+        className={classNames(styles.articleItemContainer, className, {
+          [styles.showText]: showText,
+          [styles.endOfBlock]: isEndOfBlock,
+          [styles.active]: isActive,
+        })}
+        style={style}
+        data-testid="article-item"
+        title={tooltipTitle}
+        ref={parentElementRef}
+        data-tooltip-id={dataTooltipId}
       >
         <div
-          className={classNames(styles.articleItemContainer, className, {
-            [styles.showText]: showText,
-            [styles.endOfBlock]: isEndOfBlock,
+          className={classNames(styles.articleItemSibling, {
+            [styles.active]: isActive,
+            [styles.animationReady]: isAnimationReady,
+            [styles.animatedProgress]:
+              isActive && animationPhase === "progress",
+            [styles.animatedFinish]: isActive && animationPhase === "finish",
+            [styles.dragging]: isDragging,
+            [styles.dragActive]: isDragActive,
+            [styles.mobileDevice]: isMobile,
+          })}
+          style={{ "--end-width": `${endWidth}%` } as React.CSSProperties}
+          id={folderId}
+          onClick={onClickAction}
+          onMouseUp={onMouseUpAction}
+          onMouseDown={onMouseDown}
+          data-testid="article-item-sibling"
+          ref={animationElementRef}
+        />
+        <div
+          className={classNames(styles.articleItemImg, {
             [styles.active]: isActive,
           })}
-          style={style}
-          data-testid="article-item"
-          title={tooltipTitle}
         >
-          <div
-            className={classNames(styles.articleItemSibling, {
-              [styles.active]: isActive,
-              [styles.dragging]: isDragging,
-              [styles.dragActive]: isDragActive,
-              [styles.mobileDevice]: isMobile,
-            })}
-            id={folderId}
-            onClick={onClickAction}
-            onMouseUp={onMouseUpAction}
-            onMouseDown={onMouseDown}
-            data-testid="article-item-sibling"
-          />
-          <div
-            className={classNames(styles.articleItemImg, {
-              [styles.active]: isActive,
-            })}
-          >
+          {iconNode ? (
+            <div className={styles.nodeIcon}>{iconNode}</div>
+          ) : icon ? (
             <ReactSVG className={styles.icon} src={icon} />
-            {!showText ? (
-              <>
-                {showInitial ? (
-                  <Text className={styles.articleItemInitialText}>
-                    {getInitial(text)}
-                  </Text>
-                ) : null}
-                {showBadge && !iconBadge ? (
-                  <div
-                    className={classNames(styles.articleItemBadgeWrapper, {
-                      [styles.showText]: showText,
-                    })}
-                    onClick={onClickBadgeAction}
-                  />
-                ) : null}
-              </>
-            ) : null}
-          </div>
-          {showText ? (
-            <Text
-              className={classNames(styles.articleItemText, {
-                [styles.active]: isActive,
-              })}
-              noSelect
-            >
-              {text}
-            </Text>
           ) : null}
-          {showBadge && showText ? (
-            <div
-              className={classNames(styles.articleItemBadgeWrapper, {
-                [styles.showText]: showText,
-              })}
-              onClick={onClickBadgeAction}
-              title={badgeTitle}
-            >
-              {iconBadge ? (
-                <ReactSVG className={styles.articleItemIcon} src={iconBadge} />
-              ) : (
-                (badgeComponent ?? (
-                  <Badge
-                    className={styles.articleItemBadge}
-                    label={labelBadge}
-                  />
-                ))
-              )}
-            </div>
+          {!showText ? (
+            <>
+              {showInitial ? (
+                <Text className={classNames(styles.articleItemInitialText)}>
+                  {getInitial(text)}
+                </Text>
+              ) : null}
+              {showBadge && !iconBadge ? (
+                <TooltipContainer
+                  as="div"
+                  className={classNames(styles.articleItemBadgeWrapper, {
+                    [styles.showText]: showText,
+                  })}
+                  onClick={onClickBadgeAction}
+                />
+              ) : null}
+            </>
           ) : null}
         </div>
-      </Link>
+        {showText ? (
+          <Text
+            ref={textRef}
+            className={classNames(styles.articleItemText, "articleItemText", {
+              [styles.active]: isActive,
+            })}
+            noSelect
+          >
+            {text}
+          </Text>
+        ) : null}
+        {showBadge && showText ? (
+          <TooltipContainer
+            as="div"
+            className={classNames(styles.articleItemBadgeWrapper, {
+              [styles.showText]: showText,
+            })}
+            onClick={onClickBadgeAction}
+            title={badgeTitle}
+          >
+            {iconBadge ? (
+              <ReactSVG className={styles.articleItemIcon} src={iconBadge} />
+            ) : (
+              (badgeComponent ?? (
+                <Badge className={styles.articleItemBadge} label={labelBadge} />
+              ))
+            )}
+          </TooltipContainer>
+        ) : null}
+      </TooltipContainer>
     );
   };
 

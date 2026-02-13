@@ -3,7 +3,7 @@
   "content": "The file you open will be converted to the Office Open XML format (docx or xlsx) for faster viewing and editing.",
   "content_en_sha1_hash": "9507fc970eb372f149cc24fa018de9ed8efd6a72",
   "created_at": "2025-05-19T21:30:56.879Z",
-  "updated_at": "2025-05-20T09:37:57.949Z",
+  "updated_at": "2025-09-23T07:24:24.079Z",
   "comment": {
     "text": "This translation key is used to display a message when converting files to Office Open XML format. The message informs users that their file will be converted for faster viewing and editing, typically in a dialog or conversion process.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Arabic translation lacks a closing parenthesis after 'Office Open XML'. It should be 'Office Open XML)'.",
+          "suggestion": "سيتم تحويل المستند الذي تفتحه إلى تنسيق Office Open XML) (docx أو xlsx) لعرض وتحرير أسرع."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -69,7 +75,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'muokkaamisen' should ideally be 'muokattavaksi'. While 'muokkaamisen' is not incorrect, 'muokattavaksi' conveys the meaning of 'for editing' more naturally in this context.",
+          "suggestion": "Asiakirja, jonka avaat muutetaan Office Open XML-muotoon (docx tai xlsx) nopeamman katselun ja muokattavaksi."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,7 +93,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Armenian translation uses a colon (:) after 'ավելի արագ դիտելու և խմբագրելու համար:'. In English, there isn't a colon in the original sentence. While not strictly incorrect, it might be stylistically different and potentially unnecessary.",
+          "suggestion": "Consider removing the colon at the end of the sentence: Ձեր բացած փաստաթղթի ֆայլը կվերածվի Office Open XML ձևաչափի (docx կամ xlsx)՝ ավելի արագ դիտելու և խմբագրելու համար"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -99,13 +117,25 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'for faster viewing and editing' is not fully captured by the Korean translation. While '더 빠르게 확인하고 편집할 수 있도록' conveys 'for faster viewing and editing', it loses some nuance. A more accurate translation might emphasize the benefit of the conversion.",
+          "suggestion": "여는 문서는 Office Open XML 형식(docx 또는 xlsx)으로 변환되어 더욱 빠르고 효율적으로 확인하고 편집할 수 있습니다."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation uses \"ຄວາມສະຫງ່າງາມ\" which translates to \"elegance\" or \"beauty.\" While understandable in context, it doesn't accurately convey the meaning of \"faster viewing and editing.\" A more accurate translation would focus on speed or efficiency.",
+          "suggestion": "ເອກະສານທີ່ທ່ານເປີດຈະຖືກປ່ຽນເປັນຮູບແບບ Office Open XML (docx ຫຼື xlsx) ເພື່ອຄວາມໄວກວ່າເກົ່າໃນການເບິ່ງແລະການແກ້ໄຂ."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -153,7 +183,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \" වේගවත් නැරඹීම සහ සංස්කරණය කිරීම සඳහා\" (for faster viewing and editing) could be more naturally translated as \"වේගයෙන් නැරඹීමට හා සංස්කරණය කිරීමට\" (for quickly viewing and editing). The current wording feels slightly awkward in Sinhala.",
+          "suggestion": "වේගයෙන් නැරඹීමට හා සංස්කරණය කිරීමට"
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, the repetition of 'ke' ( කෙරේ) at the end of the sentence could be slightly improved for readability. Consider restructuring.",
+          "suggestion": "ඔබ විවෘත කරන ගොනුව Office Open XML ආකෘතියට (docx හෝ xlsx) පරිවර්තනය කෙරේ, එය වේගයෙන් නැරඹීමට හා සංස්කරණය කිරීමට හේතු වේ."
+        }
+      ],
       "approved_at": null
     },
     "sk": {

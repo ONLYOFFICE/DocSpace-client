@@ -1,5 +1,7 @@
 {
+  "DeepLinkOnlyAppText": "Sadece mobil uygulamada belgeyi açabilirsiniz.",
   "DeepLinkText": "Belgeyi portalda veya mobil uygulamada açabilirsiniz",
+  "DownloadApp": "Uygulama'yı indirin",
   "OpenInApp": "Uygulamada aç",
   "OpeningDocument": "Belge açılıyor",
   "RememberChoice": "Bir sonraki sefer belgeleri açarken seçimi hatırla",

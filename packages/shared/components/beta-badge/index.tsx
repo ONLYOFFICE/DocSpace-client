@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,6 +27,7 @@
 import React from "react";
 import { Trans, useTranslation } from "react-i18next";
 
+import { buildDataTestId } from "../../utils/common";
 import { InfoBadge } from "../info-badge";
 import { Link, LinkTarget } from "../link";
 import { DeviceType } from "../../enums";
@@ -43,6 +44,7 @@ const BetaBadge = ({
   currentDeviceType,
   withOutFeedbackLink = false,
   withoutTooltip = false,
+  dataTestId,
 }: BetaBadgeProps) => {
   const { t } = useTranslation(["Common", "Settings"]);
 
@@ -65,12 +67,17 @@ const BetaBadge = ({
                 href={forumLinkUrl}
                 target={LinkTarget.blank}
                 color={currentColorScheme?.main?.accent}
+                dataTestId={buildDataTestId(dataTestId, "forum_link")}
               />
             ),
             3: (
               <Link
                 href={`mailto:${documentationEmail}`}
                 color={currentColorScheme?.main?.accent}
+                dataTestId={buildDataTestId(
+                  dataTestId,
+                  "documentation_email_link",
+                )}
               />
             ),
           }}
@@ -90,6 +97,7 @@ const BetaBadge = ({
     : {
         tooltipTitle: t("Common:BetaBadgeTitle"),
         tooltipDescription,
+        dataTestId,
       };
 
   return (

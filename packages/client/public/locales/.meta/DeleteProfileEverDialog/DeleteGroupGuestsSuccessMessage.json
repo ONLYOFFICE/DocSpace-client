@@ -3,7 +3,7 @@
   "content": "Guests have been successfully deleted.",
   "content_en_sha1_hash": "dcb6b74488ac068257038d834da093877562be1d",
   "created_at": "2025-05-19T21:30:56.654Z",
-  "updated_at": "2025-05-20T09:38:30.274Z",
+  "updated_at": "2025-05-24T13:20:46.479Z",
   "comment": {
     "text": "This translation key is used to display a success message when deleting group guests. It appears as a toast notification after clicking the \"Delete\" button in a delete profile ever dialog. Translators should provide a confirmation of successful deletion for group guest removal.",
     "is_auto": true,
@@ -105,7 +105,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ບັນຊີ' (bansi) which means 'account' is used, but in this context 'ບັນຊີ' is not necessary and could be simplified. It feels slightly too literal.",
+          "suggestion": "ບັນຊີຜູ້ເຂົ້າຊົມຖືກລົບອອກສຳເລັດແລ້ວ."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -153,7 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'maka' (මකා) is slightly informal in this context. A more formal option would be 'vagaya' (වගා).",
+          "suggestion": "Replace 'මකා' with 'වගා'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +183,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'obrisani' (deleted) doesn't quite capture the nuance of 'Guests have been successfully deleted'. It's more like 'Guests have been erased' or 'Guests have been wiped'. A more accurate translation might be 'Гости су успешно уклоњени.'",
+          "suggestion": "Гости су успешно уклоњени."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

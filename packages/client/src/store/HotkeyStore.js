@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -33,6 +33,7 @@ import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { toastr } from "@docspace/shared/components/toast";
 import { isMobile, getCountTilesInRow } from "@docspace/shared/utils";
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
+import { clearTextSelection } from "@docspace/shared/utils/copy";
 
 import config from "PACKAGE_FILE";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
@@ -59,6 +60,10 @@ class HotkeyStore {
   elemOffset = 0;
 
   hotkeysClipboardAction = null;
+
+  selectionAreaIsEnabled = true;
+
+  withContentSelection = false;
 
   constructor(
     filesStore,
@@ -125,9 +130,8 @@ class HotkeyStore {
     }
 
     const { isViewerOpen } = this.filesActionsStore.mediaViewerDataStore;
-    const isChatWidget = !!e.target.closest("langflow-chat-widget");
 
-    const someDialogIsOpen = checkDialogsOpen() || isViewerOpen || isChatWidget;
+    const someDialogIsOpen = checkDialogsOpen() || isViewerOpen;
 
     if (
       someDialogIsOpen ||
@@ -137,7 +141,7 @@ class HotkeyStore {
       return e;
 
     const isDefaultKeys =
-      ["PageUp", "PageDown", "Home", "End"].indexOf(e.code) > -1;
+      ["PageUp", "PageDown", "Home", "End", "KeyV"].indexOf(e.code) > -1;
 
     if (
       ["Space", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].indexOf(
@@ -548,7 +552,7 @@ class HotkeyStore {
       this.filesStore;
 
     setSelected("all");
-    if (!hotkeyCaret) {
+    if (!hotkeyCaret && filesList.length) {
       this.setCaret(filesList[0]);
       setHotkeyCaretStart(filesList[0]);
     }
@@ -695,8 +699,6 @@ class HotkeyStore {
           if (conflicts.length) {
             setConflictDialogData(conflicts, operationData);
           } else {
-            if (!isCopy) this.filesStore.setMovingInProgress(!isCopy);
-
             await itemOperationToFolder(operationData);
           }
         })
@@ -737,6 +739,81 @@ class HotkeyStore {
       .catch((err) => {
         toastr.error(err, null, 0, true);
       });
+  };
+
+  setSelectionAreaIsEnabled = (selectionAreaIsEnabled) => {
+    this.selectionAreaIsEnabled = selectionAreaIsEnabled;
+  };
+
+  setWithContentSelection = (withContentSelection) => {
+    this.withContentSelection = withContentSelection;
+  };
+
+  enableSelection = (e) => {
+    if (e.type === "keydown" && this.selectionAreaIsEnabled) {
+      clearTextSelection();
+      this.setSelectionAreaIsEnabled(false);
+      this.setWithContentSelection(true);
+    } else if (e.type === "keyup") {
+      this.setSelectionAreaIsEnabled(true);
+    }
+    e.preventDefault();
+  };
+
+  getTileItems = (item, itemId) => {
+    const tileItems = item.querySelectorAll(".tile-item");
+    let id = null;
+
+    tileItems.forEach((tileItem) => {
+      if (tileItem.childNodes[0].id === itemId) {
+        id = tileItem.childNodes[0].id;
+      }
+    });
+
+    return id;
+  };
+
+  openContextMenu = () => {
+    const { selection, filesList, viewAs } = this.filesStore;
+
+    if (!selection.length) return;
+
+    const index = filesList.findIndex(
+      (i) => i.id === selection[0].id && i.isFolder === selection[0].isFolder,
+    );
+    const firstSelectedItem = filesList[index];
+    const itemId = firstSelectedItem.isFolder
+      ? `folder_${firstSelectedItem.id}`
+      : `file_${firstSelectedItem.id}`;
+
+    const windowItems = document.querySelectorAll(".window-item");
+
+    windowItems.forEach((item) => {
+      let nodeId = item.childNodes[0].id;
+
+      if (viewAs === "tile") {
+        nodeId = this.getTileItems(item, itemId) ?? nodeId;
+      }
+
+      if (nodeId === itemId) {
+        const cmButton = item.querySelector(".context-menu-button");
+        if (!cmButton) return;
+
+        const rect = cmButton.getBoundingClientRect();
+
+        const event = new MouseEvent("contextmenu", {
+          bubbles: true,
+          cancelable: true,
+          view: window,
+          clientX: rect.left,
+          clientY: rect.top,
+          button: 2,
+        });
+
+        cmButton.dispatchEvent(event);
+        this.selectFile();
+      }
+    });
   };
 
   get countTilesInRow() {

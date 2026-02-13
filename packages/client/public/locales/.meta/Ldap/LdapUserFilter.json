@@ -3,7 +3,7 @@
   "content": "User Filter",
   "content_en_sha1_hash": "2bd6f4fb71dfc1df3cd10c33278ff414bed11062",
   "created_at": "2025-05-19T21:30:54.330Z",
-  "updated_at": "2025-05-21T07:58:00.615Z",
+  "updated_at": "2025-08-11T18:11:59.243Z",
   "comment": {
     "text": "LdapUserFilter is a filter field used to set conditions for LDAP user authentication. It appears on the Connection Settings page and allows users to define specific filters for LDAP users.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/ConnectionSettings.js",
-      "line_number": 183,
-      "context": "style={LAST_FIELD_STYLE}\n isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.userFilter}\n labelText={t(\"LdapUserFilter\")}\n tooltipContent={t(\"LdapUserFilterTooltip\")}\n inlineHelpButton\n isRequired\n >\n <LdapFieldComponent",
+      "line_number": 191,
+      "context": "style={LAST_FIELD_STYLE}\n isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.userFilter}\n labelText={t(\"LdapUserFilter\")}\n tooltipContent={t(\"LdapUserFilterTooltip\")}\n inlineHelpButton\n isRequired\n dataTestId=\"user_filter_field_container\"\n >",
       "module": "/packages/client"
     }
   ],
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"تصفية المستخدم\" is a literal translation of \"User Filter\", it's not the most natural or commonly used phrasing in Arabic for this context. It sounds slightly technical and not user-friendly.",
-          "suggestion": "Consider \"مرشح المستخدم\" (Mursih Al-Mustakhdim) which translates to 'User Selection/Filter' and is more common and understandable in a user interface context."
+          "description": "While 'تصفية المستخدم' (Tasfiya Al-Mustakhdim) is a literal translation of 'User Filter', it doesn't convey the intended meaning as a filter used in LDAP configurations. A more accurate and idiomatic translation would better reflect the technical context.",
+          "suggestion": "مرشح المستخدم (Marashah Al-Mustakhdim) - This term aligns more closely with 'filter' in a technical context."
         }
       ],
       "approved_at": null
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Օգտատիրոջ զտիչ' while technically meaning 'User Filter', doesn't quite capture the nuance and common usage of 'User Filter' in technical contexts. It sounds overly formal and potentially confusing to Armenian speakers familiar with LDAP.",
-          "suggestion": "Consider 'Օգտատերմիչ' or 'Օգտագործողի զտիչ'. The best choice will depend on the specific LDAP implementation and the intended audience."
+          "description": "The translation 'Օգտատիրոջ զտիչ' while technically conveying 'User Filter', doesn't sound natural or commonly used in Armenian for this context. 'զտիչ' implies a filter in a more technical, mechanical sense. A more natural translation would be something like 'Օգտահարոջ ֆիլտր' (Ogtaharoij filter) or 'Օգտատերմինի փնտրող' (Ogtatermini phtroxogh).",
+          "suggestion": "Consider 'Օգտահարոջ ֆիլտր' (Ogtaharoij filter) or 'Օգտատերմինի փնտրող' (Ogtatermini phtroxogh)."
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ຕົວປ່ຽນແກ້ໄຂຜູ້ໃຊ້\" (tua bpien kae phu sai) literally translates to 'User Editor'. While it might be understandable, 'User Filter' implies a filtering mechanism, not an editor. A more accurate translation would convey the concept of filtering or selection.",
-          "suggestion": "Possible alternatives include: 'ຕົວປ່ຽນແກ້ງຜູ້ໃຊ້' (tua bpien kaeng phu sai) - User Sifter/Filter, or 'ຕົວເລືອກຜູ້ໃຊ້' (tua leuak phu sai) - User Selection."
+          "description": "The Lao translation 'ຕົວປ່ຽນແກ້ໄຂຜູ້ໃຊ້' (tua bpen aek phu sai) translates to 'User Modifier' or 'User Editor', not 'User Filter'.  While technically related, it doesn't accurately convey the meaning of 'User Filter'.",
+          "suggestion": "Consider 'ຕົວກັ່ນຕອງຜູ້ໃຊ້' (tua kan tong phu sai) which more closely translates to 'User Filter'."
         }
       ],
       "approved_at": null
@@ -174,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"පරිශීලක පෙරහන\" (parishīlaka perahana) is a possible translation, a more common and accurate translation of \"User Filter\" in a technical context like LDAP would be \"භාවිතාකරන්නන් පෙරහන\" (bhavitakarañña perahana) or \"කාර්යමණ්ඩල පෙරහන\" (karmyānda perahana). \"පරිශීලක\" (parishīlaka) usually refers to a hobbyist or enthusiast, not a user in a technical setting.",
-          "suggestion": "Replace \"පරිශීලක පෙරහන\" with \"භාවිතාකරන්නන් පෙරහන\" or \"කාර්යමණ්ඩල පෙරහන\"."
+          "description": "The translation \"පරිශීලක පෙරහන\" while containing relevant terms, doesn't quite capture the precise meaning of \"User Filter\" in a technical context within LDAP. \"පරිශීලක\" (parishilaka) generally means 'enthusiast' or 'devotee,' which isn't accurate for a filter. \"පෙරහන\" (perahana) means 'filter' but the overall phrase feels awkward.",
+          "suggestion": "A more accurate translation might be \"කාර්ය මූලික පෙරහන\" (kaarya moolika perahana), where 'kaarya moolika' means 'functional' or 'operational' implying a filter used to select users based on defined criteria. Another option is \"භාවිතර පෙරහන\" (bhavitara perahana), which translates to 'user filter', using a more direct translation for user."
         }
       ],
       "approved_at": null
@@ -219,13 +219,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Bộ lọc Người dùng\" is understandable, a more accurate and common translation of 'User Filter' in a technical context would be \"Lọc người dùng\". 'Bộ lọc' implies a collection of filters, whereas 'User Filter' typically refers to a single filter.",
-          "suggestion": "Lọc người dùng"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

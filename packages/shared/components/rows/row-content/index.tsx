@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -74,6 +74,7 @@ const RowContent = (props: RowContentProps) => {
       data-testid="row-content"
     >
       <div
+        data-testid="main-container-wrapper"
         className={classNames(
           styles.mainContainerWrapper,
           "row-main-container-wrapper",
@@ -95,6 +96,7 @@ const RowContent = (props: RowContentProps) => {
           };
           return (
             <div
+              data-testid="side-container"
               className={classNames(styles.sideContainerWrapper)}
               key={`side-${index * 10}`}
               style={{
@@ -110,6 +112,7 @@ const RowContent = (props: RowContentProps) => {
       })}
       {!disableSideInfo ? (
         <div
+          data-testid="tablet-side-info"
           className={classNames(styles.tabletSideInfo)}
           style={{ color: sideColor }}
         >

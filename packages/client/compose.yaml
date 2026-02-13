@@ -1,0 +1,14 @@
+services:
+  tests-ci:
+    image: client-tests
+    build:
+      context: ../..
+      dockerfile: packages/client/Dockerfile
+  tests-local:
+    image: client-tests
+    ports:
+      - "5110:5110"
+    volumes:
+      - ./__tests__:/app/packages/client/__tests__
+      - ./playwright.config.ts:/app/packages/client/playwright.config.ts
+      - ../../playwright-report/client:/app/playwright-report/client

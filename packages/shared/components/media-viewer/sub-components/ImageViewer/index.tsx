@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -83,6 +83,7 @@ export const ImageViewer = ({
   // imageId,
   // version,
   isDecodedImage,
+  isAnimatedImage,
   contextModel,
   errorTitle,
   devices,
@@ -99,9 +100,9 @@ export const ImageViewer = ({
 
   const lastTapTimeRef = useRef<number>(0);
   const isDoubleTapRef = useRef<boolean>(false);
-  const setTimeoutIDTapRef = useRef<NodeJS.Timeout>();
+  const setTimeoutIDTapRef = useRef<NodeJS.Timeout>(undefined);
   // const changeSourceTimeoutRef = useRef<NodeJS.Timeout>();
-  const timeoutRef = useRef<NodeJS.Timeout>();
+  const timeoutRef = useRef<NodeJS.Timeout>(undefined);
   const startAngleRef = useRef<number>(0);
   const toolbarRef = useRef<ImperativeHandle>(null);
 
@@ -162,7 +163,6 @@ export const ImageViewer = ({
 
   //     changeSource(blob);
   //   } catch (error) {
-  //     // eslint-disable-next-line no-console
   //     console.log(error);
   //   }
   // }, [src, imageId, version, isTiff, changeSource]);
@@ -927,7 +927,6 @@ export const ImageViewer = ({
 
   //   indexedDBHelper
   //     .getItem(IndexedDBStores.images, imageId)
-  //     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   //     .then((result: any) => {
   //       if (result && result.version === version) {
   //         changeSource(result.src);
@@ -955,7 +954,7 @@ export const ImageViewer = ({
     return () => {
       if (imgRef.current) {
         // abort img loading
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+
         imgRef.current.src = "";
       }
     };
@@ -992,22 +991,24 @@ export const ImageViewer = ({
           data-testid="image-wrapper"
         >
           <animated.img
-            className={classNames(styles.image)}
-            draggable="false"
-            src={
-              window.ClientConfig?.imageThumbnails &&
-              thumbnailSrc &&
-              !showOriginSrc
-                ? `${thumbnailSrc}&size=3840x2160&view=true`
-                : src
-            }
-            ref={imgRef}
-            style={style}
-            onDoubleClick={handleDoubleTapOrClick}
-            onLoad={imageLoaded}
-            onError={onError}
-            onContextMenu={(event) => event.preventDefault()}
-            data-testid="image-content"
+            {...({
+              className: classNames(styles.image),
+              draggable: false,
+              src:
+                window.ClientConfig?.imageThumbnails &&
+                thumbnailSrc &&
+                !showOriginSrc &&
+                !isAnimatedImage
+                  ? `${thumbnailSrc}&size=3840x2160&view=true`
+                  : src,
+              ref: imgRef,
+              style,
+              onDoubleClick: handleDoubleTapOrClick,
+              onLoad: imageLoaded,
+              onError,
+              onContextMenu: (event: MouseEvent) => event.preventDefault(),
+              "data-testid": "image-content",
+            } as unknown as React.ImgHTMLAttributes<HTMLImageElement>)}
           />
         </div>
       </div>

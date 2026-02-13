@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,9 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { endpoints } from "@docspace/shared/__mocks__/e2e";
-
-import { expect, test } from "./fixtures/base";
+import { selfActivationStatusHandler } from "@docspace/shared/__mocks__/handlers";
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
+import { test } from "./fixtures/base";
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 
 const URL = "/login/confirm/EmailActivation";
@@ -41,8 +41,8 @@ const QUERY_PARAMS = [
     value: "123",
   },
   {
-    name: "email",
-    value: "mail@mail.com",
+    name: "encemail",
+    value: "b5COc6kRm3veeYqA72sOfA&uid=66faa6e4-f133-11ea-b126-00ffeec8b4ef",
   },
   {
     name: "uid",
@@ -52,24 +52,36 @@ const QUERY_PARAMS = [
 
 const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
 
-test("email activation success", async ({ page, mockRequest }) => {
-  await mockRequest.router([endpoints.activationStatus]);
-  await page.goto(URL_WITH_PARAMS);
+test("email activation success", async ({
+  page,
+  baseUrl,
+  port,
+  clientRequestInterceptor,
+}) => {
+  clientRequestInterceptor.use(selfActivationStatusHandler(port, null, true));
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await page.waitForURL("/login?confirmedEmail=**", { waitUntil: "load" });
+  await page.waitForURL(`${baseUrl}/login`, {
+    waitUntil: "load",
+  });
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "email-activation",
     "email-activation-success.png",
   ]);
 });
 
-test("email activation error", async ({ page, mockRequest }) => {
-  await mockRequest.router([endpoints.activationStatusError]);
-  await page.goto(URL_WITH_PARAMS);
+test("email activation error", async ({
+  page,
+  baseUrl,
+  clientRequestInterceptor,
+  port,
+}) => {
+  clientRequestInterceptor.use(selfActivationStatusHandler(port, 400));
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "email-activation",
     "email-activation-error.png",

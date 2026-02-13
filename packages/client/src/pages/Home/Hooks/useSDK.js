@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -130,7 +130,7 @@ const useSDK = ({
           case "createFolder":
             {
               const { parentFolderId, title } = data;
-              res = await createFolder(parentFolderId, title);
+              res = await createFolder(parentFolderId, title.trimEnd());
 
               refreshFiles();
             }

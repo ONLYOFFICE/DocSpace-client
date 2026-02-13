@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,19 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable global-require */
 let fetchApi;
 if (typeof fetch === "function") {
-  if (typeof global !== "undefined" && global.fetch) {
+  if (typeof globalThis !== "undefined" && globalThis.fetch) {
+    fetchApi = globalThis.fetch;
+  } else if (typeof global !== "undefined" && global.fetch) {
     fetchApi = global.fetch;
-  } else if (typeof window !== "undefined" && window.fetch) {
-    fetchApi = window.fetch;
   }
 }
 
 if (
   typeof require !== "undefined" &&
-  (typeof window === "undefined" || typeof window.document === "undefined")
+  typeof globalThis !== "undefined" &&
+  globalThis.document === "undefined"
 ) {
   let f = fetchApi || require("cross-fetch");
   if (f.default) f = f.default;

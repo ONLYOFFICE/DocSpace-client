@@ -3,7 +3,7 @@
   "content": "The element itself",
   "content_en_sha1_hash": "9aced7d006e732132bb5f1f09abdcbdbbc8dea2e",
   "created_at": "2025-05-19T21:30:54.464Z",
-  "updated_at": "2025-05-21T09:12:38.768Z",
+  "updated_at": "2025-08-04T07:30:01.408Z",
   "comment": {
     "text": "This translation key is used to display a label for a radio button option that references a specific element in its context. It appears in the UI as a radio button within a configuration settings page, likely allowing users to select whether they want to focus on an individual element or another aspect of their project. Translators should provide a localized version of this text to describe \"The element itself\" in the user's preferred language.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/MainElementParameter.js",
-      "line_number": 52,
-      "context": "config,\n setConfig,\n isButtonMode = false,\n }) => {\n const elementDisplayOptions = [\n { value: \"element\", label: t(\"ElementItself\") },\n {\n value: \"button\",\n label: (\n <RowContainer>\n {t(\"Common:Button\")}",
+      "line_number": 54,
+      "context": "isButtonMode = false,\n }) => {\n const elementDisplayOptions = [\n {\n value: \"element\",\n label: t(\"ElementItself\"),\n dataTestId: \"element_radio_button\",\n },\n {\n value: \"button\",\n label: (",
       "module": "/packages/client"
     }
   ],
@@ -81,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Տարրն ինքնին' is a literal translation, it might sound slightly awkward or overly formal in Armenian. A more natural translation depending on the context might be 'այն տարրը' or 'ամենայն տարր' (depending on the nuance required). 'Տարրն ինքնին' could imply a distinction being made, which may not be the intention.",
-          "suggestion": "Consider 'այն տարրը' or 'ամենայն տարր' for a more natural flow, depending on the intended meaning."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -114,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'ອົງປະກອບຂອງມັນເອງ' is technically correct, it's overly literal and doesn't convey the intended meaning of 'The element itself' in a natural Lao way. It's clunky and could be improved for clarity.",
-          "suggestion": "Consider alternatives like 'ຕົວແກ້ໄຂໂຕເອງ' (tua gae toe ng), 'ໂຕມັນເອງ' (to man ng) or contextually appropriate phrasing depending on the purpose of the translation."
+          "description": "While \"ອົງປະກອບຂອງມັນເອງ\" is a literal translation, it's not the most natural or idiomatic way to convey \"The element itself\" in Lao. It sounds a bit clunky.",
+          "suggestion": "Consider alternatives like \"ຕົວແຫ່ງຕົນເອງ\" or simply \"ມັນເອງ\" depending on the context. The best option would depend on how 'The element itself' is used in the original English."
         }
       ],
       "approved_at": null
@@ -126,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Pats elements\" is understandable, it's not the most natural or idiomatic translation of \"The element itself.\" \"Pats elements\" can be interpreted literally as 'The very element'. A more appropriate translation would capture the emphasis of 'itself'.",
-          "suggestion": "Izmantojiet vairāk kontekstualizētu tulkojumu, kas atbilst izmantošanas veidam. Piemēram, varētu būt \"Pats elements\" vai, atkarībā no konteksta, arī \"Šis elements\" vai \"Konkrētais elements\"."
+          "description": "While \"Pats elements\" is understandable, a more idiomatic translation of \"The element itself\" in Latvian would be \"Šis elements\" or \"Konkrētais elements\". \"Pats\" implies ownership or possession which isn't the intended meaning here.",
+          "suggestion": "Šis elements"
         }
       ],
       "approved_at": null
@@ -174,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"අංගයම\" (angayama) is a possible translation for \"The element itself\", it lacks nuance and may not accurately convey the intended meaning in all contexts. It's a bit too literal and could sound awkward depending on usage. A more natural translation might depend on the context where 'The element itself' is used.  It's quite emphatic and might be more suited to situations where you specifically want to highlight the element's intrinsic nature.",
-          "suggestion": "Consider alternative translations like \"ඒ සංඝඨනය\" (e sanghatana - that component/element), \"මූලිකත්වය\" (mulika thva - the originality/the core), or a phrasing tailored to the specific context."
+          "description": "While \"අංගයම\" (angayama) is a possible translation, it's quite literal and doesn't convey the nuance of \"The element itself\". It can sound slightly awkward in typical usage. A more natural translation would depend on the context.",
+          "suggestion": "Consider alternatives like \"එයම\" (eyama) which means 'it itself' or a phrase that better reflects the meaning within the Javascript SDK's context."
         }
       ],
       "approved_at": null
@@ -195,13 +189,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Сам елемент' is a literal translation of 'The element itself', it might sound slightly awkward or unnatural in a technical context. A more idiomatic translation might be 'Елемент сам по себи' or 'Сам по себе елемент', depending on the desired nuance.",
+          "suggestion": "Consider 'Елемент сам по себи' or 'Сам по себе елемент' for a more natural-sounding translation."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Sam element' is a literal translation and doesn't convey the nuance of 'The element itself'. It sounds awkward in Serbian. A more natural translation would be 'Sam po sebi'.",
+          "suggestion": "Sam po sebi"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

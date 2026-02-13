@@ -1,0 +1,18 @@
+{
+  "AIAgentAccessRedirectNote": "Samodejno boste preusmerjeni v razdelek {{sectionName}} v 5 sekundah.",
+  "AIChat": "AI-Klep",
+  "AIInstructions": "Navodila za umetno inteligenco",
+  "CreateChat": "Ustvari klepetal",
+  "EmptyKnowledgeDescriptionActions": "Poskusite naslednje ukaze za začetek:",
+  "EmptyKnowledgeTitle": "Še nobena datoteka ni bila naložena.",
+  "EmptyResultsTitle": "Še ni rezultatov.",
+  "InstructionsDescriptionAgentExample": "Primer: \"Vi ste AI PR pomočnik, ki pomaga pri pisanju in urejanju obvestil za javnost. Ohranite profesionalen, samozloben in medijsko prijazen ton. Izpostavite ključne poudarke jasno, izogibajte se žargonu in ohranite besedilo jedrnato in privlačno.\"",
+  "KnowledgeDescription": "Naložite datoteke z računalnika ali {{productName}}, da zagotovite boljši kontekst za klepet. Opomba: med pogovorom je morda vidna vsa ali del vsebine, ki ste jo naložili.",
+  "KnowledgeSelectIn": "Izberi v {{productName}}",
+  "KnowledgeUnavailable": "Baza znanja ni na voljo",
+  "MCP": "MCP orodja za to sobo",
+  "ResponseQualityNode": "<1>Opomba:</1> Kakovost odgovorov se lahko razlikuje glede na model; za najboljše rezultate priporočamo novejše modele.",
+  "ResultStorage": "Shranjevanje rezultatov",
+  "UploadFilesDevice": "Naložite datoteke iz vaše osebne naprave.",
+  "UploadFilesPortal": "Naložite datoteke iz  {{sectionNameFirst}} ali {{sectionNameSecond}}"
+}

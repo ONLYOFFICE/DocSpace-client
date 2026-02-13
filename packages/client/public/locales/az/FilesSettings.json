@@ -1,7 +1,7 @@
 {
   "CancellaionNotification": "Ləğvetmə bildirişini yenidən göstərməyin",
   "DisplayFileExtension": "Fayl adının yanında fayl uzantısını göstərin",
-  "DisplayNotification": "Zibil qutusuna atılan zaman bildirişi göstər",
   "OpenSameTab": "Eyni tabda {{organizationName}} redaktorunu açın",
-  "OriginalCopy": "Faylın nüsxəsini orijinal formatda da yadda saxla"
+  "OriginalCopy": "Faylın nüsxəsini orijinal formatda da yadda saxla",
+  "TrashMoveConfirmation": "{{sectionName}} bölməsinə əşyaları köçürdükdə bildiriş göstər"
 }

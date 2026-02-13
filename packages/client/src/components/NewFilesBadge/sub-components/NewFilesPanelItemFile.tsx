@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,6 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React from "react";
 import { inject, observer } from "mobx-react";
+import classNames from "classnames";
+
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 
@@ -35,11 +37,12 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import FolderLocationIconSvgUrl from "PUBLIC_DIR/images/folder.location.react.svg?url";
 import config from "PACKAGE_FILE";
 
-import { StyledFileItem } from "../NewFilesBadge.styled";
 import {
   NewFilesPanelItemFileInjectStore,
   NewFilesPanelItemFileProps,
 } from "../NewFilesBadge.types";
+
+import styles from "../new-files-panel.module.scss";
 
 const NewFilesPanelItemFileComponent = ({
   item,
@@ -82,7 +85,7 @@ const NewFilesPanelItemFileComponent = ({
   };
 
   return (
-    <StyledFileItem isRooms={isRooms}>
+    <div className={classNames(styles.fileItem, { [styles.isRooms]: isRooms })}>
       <div className="info-container" onClick={onClick}>
         <RoomIcon
           className="file-icon"
@@ -109,7 +112,7 @@ const NewFilesPanelItemFileComponent = ({
         size={16}
         onClick={onOpenFileLocation}
       />
-    </StyledFileItem>
+    </div>
   );
 };
 

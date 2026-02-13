@@ -1,5 +1,4 @@
-import { isSeparator } from "@docspace/shared/utils/typeGuards";
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -73,12 +72,12 @@ export type TCulturesOption =
       isBeta?: boolean;
       key: string | number;
       label: string;
-      icon?: string | React.ReactElement | React.ElementType;
+      icon?: string | React.ElementType | React.ReactElement;
     }
   | {
       isBeta?: boolean;
       key: string | number;
-      icon?: string | React.ReactElement | React.ElementType;
+      icon?: string | React.ElementType | React.ReactElement;
     };
 
 export type TDataContext = {
@@ -92,36 +91,45 @@ export type TConfirmRouteContext = {
     confirmHeader?: string;
     key?: string;
     emplType?: string;
-    email?: string;
+    encemail?: string;
     uid?: string;
     type?: string;
     first?: string;
     roomId?: string;
     firstname?: string;
     lastname?: string;
+    redirected?: string;
   };
   roomData: {
     roomId?: string;
     title?: string;
+    isAgent?: boolean;
+  };
+  confirmLinkResult: {
+    result?: ValidationResult;
+    email?: string;
   };
 };
 
 export type TConfirmLinkParams = {
   key: string;
   emplType?: string;
-  email: string;
+  encemail: string;
   uid?: string;
   type?: string;
   first?: string;
   roomId?: string;
   linkData?: string;
   culture?: string;
+  redirected?: string;
 };
 
 export type TConfirmLinkResult = {
   result: ValidationResult;
   roomId?: string;
   title?: string;
+  isAgent?: boolean;
+  email?: string;
 };
 
 export type TCreateUserData = {
@@ -224,4 +232,6 @@ export type ForgotPasswordModalDialogProps = {
   isVisible: boolean;
   userEmail?: string;
   onDialogClose: () => void;
+  reCaptchaPublicKey?: string;
+  reCaptchaType?: RecaptchaType;
 };

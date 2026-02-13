@@ -1,5 +1,5 @@
 /*
- * (c) Copyright Ascensio System SIA 2009-2025
+ * (c) Copyright Ascensio System SIA 2009-2026
  *
  * This program is a free software product.
  * You can redistribute it and/or modify it under the terms
@@ -54,10 +54,10 @@ export default function useDownloadFiles() {
       let finished = data.finished;
 
       while (!finished) {
-        const item = await getOperationProgress(
+        const item = (await getOperationProgress(
           data.id,
           t("Common:UnexpectedError"),
-        );
+        )) as TOperation;
         operationItem = item;
 
         finished = item ? item.finished : true;
@@ -80,7 +80,7 @@ export default function useDownloadFiles() {
         const operation = operations?.[operations.length - 1];
 
         if (!operation) {
-          return Promise.reject();
+          return await Promise.reject();
         }
 
         if (operation.error) {

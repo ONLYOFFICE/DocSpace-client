@@ -1,6 +1,4 @@
-@import "../../styles/variables/index.scss";
-@import "../../styles/variables/_colors.scss";
-@import "../../styles/_mixins.scss";
+@use "../../styles/mixins";
 
 .iconButton {
   opacity: 0.5;
@@ -177,7 +175,7 @@
       }
     }
 
-    @include tablet-and-below {
+    @include mixins.tablet-and-below {
       inset-inline-end: 16px;
 
       .Toastify__toast {
@@ -198,7 +196,7 @@
       }
     }
 
-    @include mobile {
+    @include mixins.mobile {
       inset-inline: 0;
       margin: auto;
       width: 100%;
@@ -306,4 +304,8 @@
       }
     }
   }
+}
+
+.toastrIcon {
+  @include mixins.common-icons-style;
 }

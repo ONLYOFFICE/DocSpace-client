@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,9 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../styles/variables/index.scss";
-@import "../../styles/variables/_colors.scss";
-@import "../../styles/_mixins.scss";
+@use "../../styles/variables";
+@use "../../styles/variables/colors";
+@use "../../styles/mixins";
 
 .wrapper {
   .saveButton {
@@ -52,7 +52,7 @@
     padding-bottom: 16px;
     width: 195px;
 
-    @include mobile {
+    @include mixins.mobile {
       width: calc(100vw - 32px);
     }
 
@@ -79,7 +79,7 @@
           right: 13px;
         }
 
-        @include mobile {
+        @include mixins.mobile {
           width: calc(100vw - 44px);
         }
       }
@@ -107,7 +107,7 @@
         width: 30px;
         height: 30px;
         box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.25);
-        border: 8px solid #{$white};
+        border: 8px solid #{variables.$white};
       }
     }
   }

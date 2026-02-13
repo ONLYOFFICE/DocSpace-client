@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { tablet, mobile } from "@docspace/shared/utils";
+import { mobile } from "@docspace/shared/utils";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 
 export const StyledModalDialog = styled(ModalDialog)`
@@ -51,11 +51,16 @@ export const StyledBodyContent = styled.div`
     gap: 8px;
 
     .welcome-text {
+      width: 100%;
       line-height: 20px;
     }
 
     & > .no-gap {
       margin-top: -8px;
+    }
+
+    .paid-badge {
+      margin-left: 4px;
     }
   }
 
@@ -69,24 +74,13 @@ export const StyledBodyContent = styled.div`
     color: ${(props) => props.theme.currentColorScheme?.main.accent};
   }
 
-  @media ${tablet} {
-    .account-details {
-      padding: 12px;
-    }
-  }
-
   @media ${mobile} {
-    .welcome-image {
-      margin-bottom: 16px;
-    }
-
     .account-details {
       width: 100%;
       padding: 12px 8px;
-
-      & > .welcome-product-name {
-        margin-bottom: 16px;
-      }
+    }
+    .welcome-image {
+      margin-bottom: 16px;
     }
 
     .welcome-auth-social-image {
@@ -107,29 +101,5 @@ export const StyledInfoRow = styled.div`
     width: 156px;
     min-width: 156px;
     flex-shrink: 0;
-  }
-
-  .info-value {
-    max-width: 300px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-weight: 600;
-
-    @media ${mobile} {
-      max-width: 200px;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 4px;
-
-      .change-domain_link {
-        margin-left: 0;
-      }
-
-      .welcome-text {
-        max-width: 100%;
-        width: 100%;
-      }
-    }
   }
 `;

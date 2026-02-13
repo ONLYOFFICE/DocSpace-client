@@ -3,7 +3,7 @@
   "content": "Verify Logout Responses Sign",
   "content_en_sha1_hash": "7d58f1ce1d37735efcc621d9ffa4a144a42d3297",
   "created_at": "2025-05-19T21:30:50.103Z",
-  "updated_at": "2025-05-21T02:07:56.094Z",
+  "updated_at": "2025-08-11T18:11:59.266Z",
   "comment": {
     "text": "This translation key is used for the label of a checkbox that controls the sign response request for logout in single sign-on integration settings. It appears as part of a checkbox set and is translated to indicate its purpose.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/CheckboxSet.js",
-      "line_number": 122,
+      "line_number": 142,
       "context": "className=\"checkbox-input\"\n isDisabled={isDisabled}\n onChange={setCheckbox}\n label={\n prefix === \"idp\"\n ? t(\"idpSignResponseRequest\")\n : t(\"spSignResponseRequest\")\n }\n name={checkboxesNames[prefix][2]}\n tabIndex={12}\n isChecked={",
       "module": "/packages/client"
     }
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Verify Logout Responses Sign\" is ambiguous. It could refer to verifying the signature on the logout responses, or a process of verifying the responses themselves. The Arabic translation \"تحقق من استجابات تسجيل الخروج\" translates literally to \"Verify Logout Responses.\" Without more context, it's difficult to determine if this captures the intended meaning. The use of 'sign' is missing.",
-          "suggestion": "Consider re-evaluating the English original to clarify the intended meaning. Possible alternatives: 'Verify Signed Logout Responses', 'Verify Logout Response Signature', or 'Validate Logout Responses'."
+          "description": "The English phrase 'Verify Logout Responses Sign' is awkward and likely means 'Verify Signed Logout Responses'. The Arabic translation 'تحقق من استجابات تسجيل الخروج' translates literally to 'Verify Logout Responses', which misses the 'Signed' aspect. It doesn't convey the act of verifying signatures on the logout responses.",
+          "suggestion": "Consider translating the intended meaning, which likely includes 'signed'. A more accurate Arabic translation could be: 'تحقق من استجابات تسجيل الخروج الموقعة' (Verify Signed Logout Responses)."
         }
       ],
       "approved_at": null
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Çıxış Cavabları İşarəsini Təsdiqləyin\" doesn't accurately convey the meaning of \"Verify Logout Responses Sign\".  'İşarəsini' implies verifying a signature *of* the responses, not verifying the responses themselves are signed or valid. The original English refers to verifying the legitimacy or validity of the signed responses.",
-          "suggestion": "Consider a translation like \"Çıxış Cavablarının İmzalanmasını Təsdiqləyin\" (Verify the signing of logout responses) or \"Çıxış Cavablarının Əlqəsdən Gəlməsini Təsdiqləyin\" (Verify the authenticity of the logout responses)."
+          "description": "The English phrase \"Verify Logout Responses Sign\" is ambiguous. It could refer to verifying the signature on the logout response or verifying the response itself. The Azerbaijani translation \"Çıxış Cavabları İşarəsini Təsdiqləyin\" directly translates to \"Verify the Sign of Logout Responses\". This suggests it refers to verifying the signature, which may not be the intended meaning. A more general translation focusing on the response itself would be preferable.",
+          "suggestion": "Consider a translation like \"Çıxış Cavablarını Təsdiqləyin\" (Verify Logout Responses) or \"Çıxış Cavablarının Etibarlılığını Yoxlayın\" (Check the Validity of Logout Responses)."
         }
       ],
       "approved_at": null
@@ -54,13 +54,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Потвърждение на подписа за отговор на отписване' is a literal translation that doesn't quite convey the intended meaning of 'Verify Logout Responses Sign'. 'Отписване' translates to 'logout' which is redundant. A more natural translation would focus on verifying the signature within the logout response.",
-          "suggestion": "Преглед на подписа в отговор на излизане"
+          "description": "The translation \"Потвърждение на подписа за отговор на отписване\" is a literal translation of \"Verify Logout Responses Sign\" and doesn't accurately convey the intended meaning.  'Logout Responses Sign' likely refers to the verification of a digitally signed response from an Identity Provider (IdP) during a logout process. The term 'sign' is misleading and confusing in this context.",
+          "suggestion": "Потвърждение на подписан отговор за излизане"
         },
         {
-          "type": "formatting",
-          "description": "The translation is a long phrase. Consider breaking it down for better readability in the user interface, if applicable.",
-          "suggestion": "If possible, split the phrase into two parts: 'Преглед на подписа' and 'в отговор на излизане'."
+          "type": "incorrect_translation",
+          "description": "The word 'отписване' is commonly used for 'unregistering' or 'dropping out of a course'.  'Излизане' is more appropriate for 'logout'.",
+          "suggestion": "Replace 'отписване' with 'излизане'."
         }
       ],
       "approved_at": null
@@ -71,13 +71,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Podpis reakcí na ověření odhlášení' doesn't accurately convey the meaning of 'Verify Logout Responses Sign'. 'Sign' refers to a signature, not the action of signing. The entire phrase implies verification of signed responses related to logout.",
-          "suggestion": "Ověření podpisů odpovědí odhlášení"
+          "description": "The translation 'Podpis reakcí na ověření odhlášení' doesn't accurately convey the meaning of 'Verify Logout Responses Sign'. 'Verify' implies checking or confirming, while 'Podpis' focuses solely on the signature. The Czech translation sounds like it's describing the signature of the response, not the action of verifying it.",
+          "suggestion": "Zkontrolujte podpisy odpovědí na odhlášení"
         },
         {
-          "type": "grammar",
-          "description": "While technically grammatically correct, 'Podpis reakcí na ověření odhlášení' sounds awkward and overly literal. The word order is not typical Czech.",
-          "suggestion": "Podepsané odpovědi na odhlášení by měly být ověřeny"
+          "type": "incorrect_translation",
+          "description": "The verb 'ověření' (verification) is redundant given that 'odhlášení' (logout) already implies a verification process. It makes the sentence overly verbose.",
+          "suggestion": "Zkontrolujte podpisy odpovědí na odhlášení"
         }
       ],
       "approved_at": null
@@ -94,13 +94,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Verify Logout Responses Sign\" is not accurately translated. \"Verify\" implies checking or confirming, and \"Logout Responses Sign\" is awkward. The Greek translation literally translates this phrase but doesn't convey the intended meaning.",
-          "suggestion": "Consider a translation like \"Επαλήθευση υπογραφής απαντήσεων αποσύνδεσης\" (Verification of Logout Response Signature) or \"Έλεγχος υπογραφής απαντήσεων αποσύνδεσης\" (Check Logout Response Signature)"
+          "description": "The translation \"Υπογραφή απαντήσεων επαλήθευσης αποσύνδεσης\" is a literal translation and doesn't accurately convey the meaning of \"Verify Logout Responses Sign\". The original English phrase implies a verification process *of* signed responses, rather than signing the responses themselves.",
+          "suggestion": "Επαλήθευση υπογεγραμμένων απαντήσεων αποσύνδεσης"
         },
         {
-          "type": "formatting",
-          "description": "The translation uses a series of words that might benefit from a more natural flow. Combining some phrases could improve readability.",
-          "suggestion": "Consider restructuring the translated phrase to improve flow.  The suggested corrections above incorporate this."
+          "type": "spelling",
+          "description": "While technically correct, 'αποσύνδεσης' (aposindesis) is a slightly less common word for 'logout' in this context.  A more natural alternative might be better.",
+          "suggestion": "Αποσύνδεσης or Διακοπής λειτουργίας"
         }
       ],
       "approved_at": null
@@ -111,8 +111,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Verify Logout Responses Sign' is a bit awkward. A more accurate translation of 'Verify Logout Responses Sign' would focus on verifying the signature on the responses. The current translation focuses too much on 'responses'.",
-          "suggestion": "Verificar la firma de las respuestas de cierre de sesión"
+          "description": "The phrase 'cierre de sesión' while generally acceptable, is a more literal translation of 'logout' and might not be the most natural phrasing for this context. A more idiomatic translation might be 'finalización de sesión' or 'cerraremos sesión'.",
+          "suggestion": "Consider 'Verificar la firma de respuestas de finalización de sesión' or 'Verificar la firma de respuestas para cerrar sesión'."
         }
       ],
       "approved_at": null
@@ -126,7 +126,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Verify Logout Responses Sign\" is awkward. A more natural English phrasing would be \"Verify Signatures on Logout Responses\" or \"Verify Logout Response Signatures\". The current French translation \"Vérifier la signature des réponses à la déconnexion\" is technically correct but doesn't perfectly capture the implied emphasis on *signatures*.",
+          "suggestion": "Consider rephrasing the English to 'Verify Logout Response Signatures' to better align with the French translation."
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -135,8 +141,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Ստուգեք «Ելք»-ի պատասխանների նշանը\" is not a direct or accurate translation of \"Verify Logout Responses Sign\". \"Sign\" likely refers to a signature, not a sign. \"Logout Responses\" implies a series of responses, while the Armenian translates more literally as 'responses' which lacks specificity.",
-          "suggestion": "Consider \"Ստուգեք Ելքի պատասխանների թվագրությունը\" (Stuggeq Yelk'i patasxanneri twagragrutyun) - which translates to 'Verify Logout Responses Signature' or \"Ստուգեք Ելքի պատասխանների թվագրությունը\" (Stuggeq Yelk'i patasxanneri twagragrutyun) - which translates to 'Verify Logout Responses Timestamp'."
+          "description": "The translation \"Ստուգեք «Ելք»-ի պատասխանների նշանը\" is a literal translation of 'Verify Logout Responses Sign' but doesn't convey the intended meaning of verifying signatures on logout responses.  'Sign' in this context refers to a digital signature, not a physical signature.",
+          "suggestion": "A more accurate translation would be something like \"Ստուգեք հեռացման պատասխանների թվագրությունը\" or \"Ստուգեք հեռացման պատասխանների էլեկտրոնային թվագրությունը\" (if specifically referring to digital signatures).  It needs to indicate that the focus is on verifying the signature/authentication of the response."
         }
       ],
       "approved_at": null
@@ -147,7 +153,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Verify Logout Responses Sign' is not accurately translated. 'Sign' likely refers to the digital signature applied to the response, not a literal sign. The Italian translation doesn't capture this nuance.",
+          "description": "The translation 'Verifica il segno delle risposte di disconnessione' is not an accurate translation of 'Verify Logout Responses Sign'. 'Segno' translates to 'mark' or 'sign' in a more general sense, and doesn't convey the intended meaning of 'sign' as in digital signature or authentication.",
           "suggestion": "Verifica la firma delle risposte di disconnessione"
         }
       ],
@@ -159,8 +165,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ログアウトレスポンス署名の確認' is a literal translation of 'Verify Logout Responses Sign' but doesn't fully convey the meaning in a natural Japanese way. 'Sign' in this context likely refers to a signature on the response, not the act of signing itself. A more appropriate translation would emphasize the verification of the signature.",
-          "suggestion": "ログアウトレスポンスの署名検証"
+          "description": "The translation \"ログアウトレスポンス署名の確認\" (logout response signature verification) is a literal translation that doesn't quite capture the nuance of \"Verify Logout Responses Sign.\" It suggests verifying the signatures *of* logout responses, rather than the process of verification itself being signed.",
+          "suggestion": "Consider a more contextual translation like \"ログアウトレスポンスの署名検証の確認\" (Confirmation of Logout Response Signature Validation) or \"ログアウトレスポンス署名検証の確認\" (Confirmation of Logout Response Signature Verification Process). Alternatively, if the intent is to verify that the sign process is correct, consider something like \"ログアウトレスポンス署名要求の検証\" (Verification of Logout Response Signature Request)."
         }
       ],
       "approved_at": null
@@ -171,8 +177,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Verify Logout Responses Sign' is a bit awkward and likely refers to verifying the signature on logout response requests. The Korean translation '로그아웃 응답 서명 확인' is technically correct but could be improved for clarity. A more natural phrasing might emphasize the verification of the signature *of* the logout responses.",
-          "suggestion": "로그아웃 응답 서명 확인 (로그아웃 응답의 서명 확인)"
+          "description": "The English phrase \"Verify Logout Responses Sign\" is slightly awkward. A more natural English translation might be \"Verify Signatures on Logout Responses\" or \"Verify Signed Logout Responses\". The Korean translation, \"로그아웃 응답 서명 확인\", accurately conveys the meaning of 'verify signatures on logout responses' but might benefit from re-evaluation to reflect the nuances of a more polished English source.",
+          "suggestion": "Consider if the English source phrase can be improved to 'Verify Signed Logout Responses' for a more natural flow, which might then affect the Korean translation. If 'Verify Logout Responses Sign' is the absolute source, the Korean translation is acceptable."
         }
       ],
       "approved_at": null
@@ -183,13 +189,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ຢືນ​ຢັນ​ການ​ຕອບ​ສະ​ຫນອງ​ການ​ອອກ​ຈາກ​ລະ​ບົບ\" is a literal translation of 'Verify Logout Responses Sign' but doesn't accurately convey the intended meaning of 'Verify Logout Responses'. It's too verbose and technically incorrect. The phrase 'Sign' doesn't directly translate into Lao in this context.",
-          "suggestion": "ຢືນ​ຢັນ​ການ​ອອກ​ຈາກ​ລະ​ບົບ"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The inclusion of 'ການຕອບສະຫນອງ' (response) is redundant. 'ຢືນຢັນການອອກຈາກລະບົບ' is a more concise and understandable translation.",
-          "suggestion": "ຢືນ​ຢັນ​ການ​ອອກ​ຈາກ​ລະ​ບົບ"
+          "description": "The English phrase \"Verify Logout Responses Sign\" is not perfectly captured by \"ຢືນ​ຢັນ​ການ​ຕອບ​ສະ​ຫນອງ​ການ​ອອກ​ຈາກ​ລະ​ບົບ\". A more accurate translation would convey 'Verify Signatures of Logout Responses'. The current translation emphasizes the response itself rather than the signature verification aspect.",
+          "suggestion": "ຢືນ​ຢັນ​ລາຍ​ເຊັນ​ຂອງ​ການ​ຕອບ​ສະ​ຫນອງ​ການ​ອອກ​ຈາກ​ລະ​ບົບ"
         }
       ],
       "approved_at": null
@@ -200,8 +201,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Pārbaudīt atteikšanās atbilžu parakstīšanos' is not an accurate translation of 'Verify Logout Responses Sign'.  'Logout Responses Sign' implies a process of verifying the signature on responses from an identity provider during a logout flow. The Latvian translation is overly literal and doesn't convey the intended meaning.",
-          "suggestion": "A more appropriate translation might be 'Apstiprināt izrakstīšanās atbildžu parakstus' or 'Pārbaudīt izrakstīšanās atbildžu digitālos parakstus'."
+          "description": "The translation 'Pārbaudīt atteikšanās atbilžu parakstīšanos' doesn't accurately reflect the meaning of 'Verify Logout Responses Sign'. 'Atteikšanās' means 'rejection' or 'refusal,' which isn't quite right for 'Logout'.  'Parakstīšanos' means 'signing', while the original English suggests signing a response, not the act of signing itself.",
+          "suggestion": "Pārbaudīt izrakstīšanās atbildžu parakstīšanos"
         }
       ],
       "approved_at": null
@@ -212,13 +213,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Verifieer Uitloggen Reacties Ondertekening' is a literal translation and doesn't quite capture the meaning of 'Verify Logout Responses Sign'. 'Sign' in this context likely refers to a signed response, not the act of signing something.",
-          "suggestion": "Verifieer ondertekende uitlogreacties"
+          "description": "The translation \"Verifieer Uitloggen Reacties Ondertekening\" is not the most natural or accurate rendering of \"Verify Logout Responses Sign.\" \"Ondertekening\" (signing) refers to the act of signing, not the signed response itself. A more accurate translation would focus on the verification of the signed responses.",
+          "suggestion": "Verifieer Ondertekende Uitlogreacties"
         },
         {
           "type": "formatting",
-          "description": "The translation is a single, long phrase. Consider breaking it down for better readability in UI elements.",
-          "suggestion": "Consider splitting into multiple lines or using a more descriptive phrase like 'Controleer ondertekende uitlogreacties' or 'Verifieer de ondertekening van uitlogreacties'."
+          "description": "While not strictly incorrect, the word order could be improved for readability in Dutch.",
+          "suggestion": "Verifieer Ondertekende Uitlogreacties"
         }
       ],
       "approved_at": null
@@ -229,8 +230,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Zweryfikuj podpis odpowiedzi wylogowania' is a literal translation and doesn't fully convey the meaning of 'Verify Logout Responses Sign'. The English phrase implies verifying the signature on the responses received during the logout process. A more accurate translation might focus on verifying the signature.",
-          "suggestion": "Zweryfikuj podpis odpowiedzi wylogowania"
+          "description": "The translation 'Zweryfikuj podpis odpowiedzi wylogowania' is too literal and doesn't fully capture the meaning of 'Verify Logout Responses Sign'. It focuses on 'signing' rather than the verification process itself. A better translation would emphasize the verification of the response, not just the signature.",
+          "suggestion": "Zweryfikuj odpowiedzi wylogowania"
         }
       ],
       "approved_at": null
@@ -241,13 +242,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Verify Logout Responses Sign' is not accurately translated. 'Logout Responses' implies responses received *from* the IdP after a logout request. The Portuguese translation implies a signing process *of* the responses, which isn't the intended meaning. 'Logout Responses' should be translated to reflect the received nature of the responses.",
-          "suggestion": "Consider 'Verificar Respostas de Término de Sessão' or 'Validar Respostas de Término de Sessão' - these more accurately convey the verification aspect of responses received after a logout request."
+          "description": "The English phrase \"Verify Logout Responses Sign\" is not accurately translated. \"Logout Responses Sign\" implies a signature on the logout responses, which is not the intended meaning. The English phrase likely means \"Verify Logout Response Signatures\" or something similar.",
+          "suggestion": "Consider a translation that more accurately reflects the meaning of 'Verify Logout Response Signatures', such as 'Verificar Assinaturas das Respostas de Término de Sessão' or 'Validar Assinaturas das Respostas de Desconexão'."
         },
         {
           "type": "formatting",
-          "description": "The Portuguese phrase uses a conjunction 'e' (and) which may be unnecessary and makes the sentence slightly less fluid.  Removing the 'e' improves readability. ",
-          "suggestion": "Remove the 'e' between 'Respostas' and 'Término de Sessão'."
+          "description": "The phrase 'Término de Sessão' is slightly formal. While correct, it might benefit from a more conversational or common equivalent depending on the target audience.",
+          "suggestion": "Consider 'Desconexão' as an alternative to 'Término de Sessão'.  Assess whether the formality of 'Término de Sessão' is appropriate for the context."
         }
       ],
       "approved_at": null
@@ -258,12 +259,12 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Verifique o sinal de respostas de logout' doesn't accurately convey the meaning of 'Verify Logout Responses Sign'. The phrase 'o sinal de respostas' is awkward and doesn't translate 'responses' correctly. It implies verifying a signal *of* the responses, not the responses themselves.",
+          "description": "The translation \"Verifique o sinal de respostas de logout\" is not an accurate translation of \"Verify Logout Responses Sign.\" It's a literal, but not idiomatic, translation. 'Sinal' (signal) doesn't quite fit the context.",
           "suggestion": "Verifique as respostas assinadas de logout"
         },
         {
-          "type": "grammatical",
-          "description": "While not strictly incorrect, 'as respostas assinadas' is slightly more natural phrasing than 'as respostas assinadas'.",
+          "type": "formatting",
+          "description": "The translation uses a somewhat awkward phrasing due to the literal translation. A more natural Portuguese phrasing would improve readability.",
           "suggestion": "Verifique as respostas assinadas de logout"
         }
       ],
@@ -275,8 +276,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Verificarea semnăturii cu răspunsul de deconectare\" is a literal translation but doesn't fully capture the meaning of \"Verify Logout Responses Sign.\" It's a bit awkward and technical-sounding for a user-facing message. A more natural Romanian equivalent would focus on confirming the logout process.",
-          "suggestion": "Consider alternatives like \"Confirmarea deconectării semnate\" or \"Verifică deconectarea semnată\" or \"Confirmă răspunsul de deconectare semnat\" depending on the specific context and desired level of formality."
+          "description": "The translation 'Verificarea semnăturii cu răspunsul de deconectare' is not a direct or accurate translation of 'Verify Logout Responses Sign'. 'Sign' refers to the signature itself, not the act of verifying it. The Romanian translation focuses on the verification process rather than the signature.",
+          "suggestion": "Consider 'Verifică semnăturile răspunsurilor de deconectare' or 'Verificarea semnăturii în răspunsul de deconectare'."
         }
       ],
       "approved_at": null
@@ -287,8 +288,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Проверять подпись ответов выхода\" is a literal translation that doesn't quite capture the meaning of \"Verify Logout Responses Sign\".  'Logout Responses' implies responses *from* the Identity Provider (IdP) after a logout request. 'Sign' is ambiguous. A more accurate translation would convey the verification of the digital signature on the logout response.",
-          "suggestion": "Consider a more nuanced translation that conveys verification of a digital signature on the logout response, such as 'Проверять цифровую подпись ответов выхода из системы' or 'Проверять подлинность ответов выхода'."
+          "description": "The English phrase 'Verify Logout Responses Sign' is not directly translatable to 'Проверять подпись ответов выхода' in a natural and accurate way. 'Logout Responses Sign' implies verifying the signature on the logout response. The Russian translation literally translates to 'Check the signature of exit responses,' which is slightly awkward and doesn't fully capture the intended meaning. A better translation would emphasize verification of the signature, not just checking its presence.",
+          "suggestion": "Consider 'Проверять подписи ответов выхода' or 'Верифицировать подписи ответов выхода'.  Both options convey the 'verify' aspect more accurately."
         }
       ],
       "approved_at": null
@@ -299,8 +300,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Verify Logout Responses Sign' is a bit unusual and likely refers to verifying the signatures on logout response messages. The Sinhala translation 'පිටවීමේ ප්‍රතිචාර සත්‍යාපනය' translates to 'Verification of Logout Responses'. While not entirely incorrect, it misses the nuance of 'sign' in the original, implying signature verification.",
-          "suggestion": "Consider a more precise translation that explicitly mentions signature verification, for example: 'පිටවීමේ ප්‍රතිචාරයේ సంతకం ధృవీకరణ' (if a direct translation of 'signature verification' is acceptable and fits the overall tone of the UI)."
+          "description": "The translation 'පිටවීමේ ප්‍රතිචාර සත්‍යාපනය' is a literal translation of \"Logout Responses Verify.\" It misses the nuance of 'Sign' in 'Verify Logout Responses Sign'. A more accurate translation would incorporate the concept of verification related to a signature or signed response.",
+          "suggestion": "පිටවීමේ ප්‍රතිචාරයේ సంతకం සත්‍යාපනය (Pitawime praticharaye santakaṁ satyāpana) - This translates to 'Verify Logout Response Signature'."
         }
       ],
       "approved_at": null
@@ -311,8 +312,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Verify Logout Responses Sign\" is a bit awkward. A more natural translation would consider the implied action of signing the response itself. \"Kontrola podpisu odpovedí na odhlásenie\" focuses solely on checking the signature, but doesn't fully capture the original meaning. While technically correct, it can be misinterpreted.",
-          "suggestion": "Kontrola podpisovania odpovedí na odhlásenie"
+          "description": "The translation 'Kontrola podpisu odpovedí na odhlásenie' is not a direct or accurate translation of 'Verify Logout Responses Sign'. 'Verify' implies a process of checking or confirming, while 'Kontrola' leans more towards 'check' or 'inspection.' Also, 'Sign' isn't conveyed.",
+          "suggestion": "Overenie podpisových odpovedí pri odhlásení"
         }
       ],
       "approved_at": null
@@ -323,8 +324,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Verify Logout Responses Sign' is awkward. It likely means 'Verify signatures on logout responses' or 'Verify signed logout responses'. The Slovenian translation 'Preveri odzive na odjave' translates to 'Verify logout responses' which is accurate but misses the 'signed' aspect. ",
-          "suggestion": "Consider revising the English source to 'Verify signed logout responses' or 'Verify signatures on logout responses'.  Alternatively, if the 'signed' aspect is not critical, the Slovenian translation is acceptable, but it's important to understand the nuance of the original English meaning."
+          "description": "The English phrase \"Verify Logout Responses Sign\" is not accurately translated. \"Verify\" implies checking or confirming something. \"Sign\" in this context likely refers to a digitally signed response. The Slovenian translation focuses only on \"logout responses\" and misses the crucial aspect of verification and signature.",
+          "suggestion": "Preveri podpisane odzive na odjave"
         }
       ],
       "approved_at": null
@@ -335,8 +336,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Verify Logout Responses Sign' is ambiguous and likely refers to verifying the signature on the response received during a logout process. The Serbian translation 'Провера потписа одговора на одјављивање' is technically correct but might be misinterpreted. A more accurate and clearer translation would be 'Провера потписа одговора при одјављивању' or 'Верификација потписа одговора при одјављивању'.",
-          "suggestion": "Провера потписа одговора при одјављивању"
+          "description": "The English phrase 'Verify Logout Responses Sign' is somewhat awkward. A more natural English phrasing might be 'Verify Signed Logout Responses' or 'Verify Signatures on Logout Responses.'  The Serbian translation, 'Провера потписа одговора на одјављивање,' accurately translates the literal words but may not convey the intended meaning as effectively.  'Odjavljivanje' refers to the process of logging out, but the intended meaning likely refers to verifying a signed response *related* to the logout process.",
+          "suggestion": "Consider rephrasing the English to 'Verify Signed Logout Responses' and then translating that to Serbian. A possible translation could be 'Провера потписа на одговоре приликом одјављивања' or 'Провера потписа за одјављивање'."
         }
       ],
       "approved_at": null
@@ -347,18 +348,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Provera potpisa jdgovora na jdjavljivanje' is not an accurate translation of 'Verify Logout Responses Sign'.  'jdgovora' and 'jdjavljivanje' appear to be typos or incorrect abbreviations related to 'odgovora' (response) and 'prijavljivanje' (login/signing in).  The overall meaning is lost.",
-          "suggestion": "Provera potpisa odgovora na odjavljivanje"
+          "description": "The translation \"Provera potpisa jdgovora na jdjavljivanje\" is not an accurate translation of \"Verify Logout Responses Sign\". \"jdgovora\" and \"jdjavljivanje\" appear to be misinterpretations of 'response' and 'logout/logging out' respectively. The phrase 'Verify Logout Responses Sign' implies verification of signatures on responses received during the logout process.",
+          "suggestion": "A more accurate translation might be something like \"Provera potpisa odgovora na odjavljivanje\" or \"Verifikacija potpisa odgovora prilikom odjave\"."
         },
         {
           "type": "spelling",
-          "description": "'jdgovora' is likely a misspelling of 'odgovora'.",
-          "suggestion": "odgovora"
-        },
-        {
-          "type": "spelling",
-          "description": "'jdjavljivanje' is likely a misspelling of 'odjavljivanje'.",
-          "suggestion": "odjavljivanje"
+          "description": "\"jdgovora\" and \"jdjavljivanje\" are not valid Serbian words. They seem to be incorrect transcriptions.",
+          "suggestion": "Replace with correct Serbian equivalents like \"odgovora\" and \"odjavljivanje\" respectively."
         }
       ],
       "approved_at": null
@@ -366,7 +362,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Verify Logout Responses Sign\" is somewhat ambiguous. \"Sign\" could refer to a signature or a sign. The Turkish translation \"Oturum Kapatma Yanıtları İmzasını Doğrula\" strongly implies a digital signature. It's crucial to confirm this is the intended meaning in the original context. A more neutral translation might be 'Oturum Kapatma Yanıtlarını Doğrula' if the specific signature aspect isn't required.",
+          "suggestion": "Consider 'Oturum Kapatma Yanıtlarını Doğrula' if the phrase refers to validating the responses generally, not specifically their digital signature."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -375,7 +377,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Перевірити підпис відповідей виходу' doesn't fully capture the meaning of 'Verify Logout Responses Sign'. 'Sign' is likely referring to the signature itself, not the responses. A more accurate translation would focus on verifying the signature of the logout responses.",
+          "description": "The translation \"Перевірити підпис відповідей виходу\" is not the most natural or precise translation of \"Verify Logout Responses Sign\". 'Logout' often implies 'exit'. The phrase 'відповідей виходу' could be improved.",
           "suggestion": "Перевірити підпис відповідей на вихід"
         }
       ],
@@ -387,8 +389,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Verify Logout Responses Sign\" is ambiguous. 'Sign' likely refers to a digital signature. The Vietnamese translation \"Xác minh dấu hiệu phản hồi đăng xuất\" translates to \"Verify Logout Response Sign/Mark/Symbol\". It doesn't explicitly convey the concept of a digital signature.",
-          "suggestion": "Xác minh chữ ký phản hồi đăng xuất"
+          "description": "The translation \"Xác minh dấu hiệu phản hồi đăng xuất\" doesn't fully capture the meaning of \"Verify Logout Responses Sign\". \"Dấu hiệu\" (sign) refers to a signature, but the English phrase implies verification of a response related to logout.  A more accurate translation would convey the verification process itself.",
+          "suggestion": "Xác minh phản hồi đăng xuất"
         }
       ],
       "approved_at": null
@@ -399,7 +401,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Verify Logout Responses Sign' is not directly equivalent to '校验登出响应签名'.  'Verify' implies a confirmation process, while '校验' implies validation. 'Responses Sign' is a slightly awkward phrasing; it's likely referring to the signature *of* the logout responses. A more accurate translation should reflect this.",
+          "description": "The translation '校验登出响应签名' while generally understandable, doesn't perfectly capture the nuance of 'Verify Logout Responses Sign'. 'Verify' implies a process of checking or validating.  '校验' is correct for 'verify', but 'Responses Sign' is a bit awkward. A more natural phrasing would consider that the responses are *signed* and need verification of that signature.",
           "suggestion": "校验登出响应的签名"
         }
       ],

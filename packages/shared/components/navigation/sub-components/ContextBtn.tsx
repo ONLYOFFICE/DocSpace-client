@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,6 +30,7 @@ import VerticalDotsReactSvg from "PUBLIC_DIR/images/icons/17/vertical-dots.react
 
 import { IconButton } from "../../icon-button";
 import { ContextMenu, ContextMenuRefType } from "../../context-menu";
+import { TooltipContainer } from "../../tooltip";
 
 import { TContextButtonProps } from "../Navigation.types";
 
@@ -39,13 +40,16 @@ const ContextButton = ({
   withMenu = true,
   isTrashFolder,
   isMobile,
+  isMobileOnly,
   id,
-  title,
   onCloseDropBox,
   onContextOptionsClick,
   contextButtonAnimation,
   guidAnimationVisible,
   setGuidAnimationVisible,
+  ignoreChangeView,
+  contextMenuHeader,
+  title,
   ...rest
 }: TContextButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -131,9 +135,11 @@ const ContextButton = ({
   const model = getData();
 
   return (
-    <div
+    <TooltipContainer
+      as="div"
       ref={ref}
       className={`${className} ${animationClasses.join(" ")}`}
+      title={title}
       {...rest}
     >
       <IconButton
@@ -148,10 +154,14 @@ const ContextButton = ({
         ref={menuRef}
         onHide={onHide}
         scaled={false}
-        withBackdrop
+        withBackdrop={isMobileOnly}
         leftOffset={isTrashFolder ? 188 : isMobile ? 150 : 0}
+        ignoreChangeView={ignoreChangeView}
+        headerOnlyMobile={!!contextMenuHeader}
+        header={contextMenuHeader}
+        badgeUrl={contextMenuHeader?.badgeUrl}
       />
-    </div>
+    </TooltipContainer>
   );
 };
 

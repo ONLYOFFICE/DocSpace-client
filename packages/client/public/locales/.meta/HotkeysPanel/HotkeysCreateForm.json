@@ -3,7 +3,7 @@
   "content": "Create blank form template",
   "content_en_sha1_hash": "02874ddd5e01e99c422ca4ea2510d696e82ff091",
   "created_at": "2025-05-19T21:30:55.038Z",
-  "updated_at": "2025-05-21T10:34:50.303Z",
+  "updated_at": "2025-05-24T10:44:40.729Z",
   "comment": {
     "text": "\"This translation key is used to display the text 'Create blank form template' in the application. It appears on a hotkeys panel within the UI, likely as an explanation or tooltip for the keyboard shortcut 'Shift + p'.\"",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Boş forma şablonu yaradın\" implies \"You created a blank form template.\" The English says \"Create blank form template\" which is an instruction or a button label.  The Azerbaijani translation should reflect this action, not indicate that the action has already been completed.",
-          "suggestion": "Boş forma şablonu yarat"
+          "description": "The translation \"Boş forma şablonu yaradın\" literally translates to \"You created a blank form template.\" While technically correct, it's less natural and doesn't convey the intended meaning of 'Create blank form template' which implies the action of creating the template itself, not that the user already did it. It needs to be changed to reflect the action of creation.",
+          "suggestion": "Yeni boş forma şablonu yaradın"
         }
       ],
       "approved_at": null
@@ -126,8 +126,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Dutch translation \"Leeg blanco formuliersjabloon maken\" is redundant. \"Leeg\" and \"blanco\" both mean 'blank'.",
-          "suggestion": "Maak blanco formuliersjabloon"
+          "description": "The translation 'Leeg blanco formuliersjabloon maken' is redundant. 'Leeg' and 'blanco' both mean 'blank' in Dutch.",
+          "suggestion": "Maak een blanco formuliersjabloon"
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'formuliersjabloon' contains a spelling error. The correct word is 'formulier sjabloon' or 'formulier(s) sjabloon(nen)' depending on the intended pluralization.",
+          "suggestion": "formulier sjabloon"
         }
       ],
       "approved_at": null
@@ -150,8 +155,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Criar modelo de formulário branco' is too literal. 'Blank' in this context implies an empty, pre-formatted template. A more appropriate translation would convey this meaning.",
-          "suggestion": "Criar modelo de formulário vazio"
+          "description": "The translation \"Criar modelo de formulário branco\" is not the most natural or accurate rendering of \"Create blank form template\". \"Blank\" can be interpreted as \"em branco\" or \"vazio\" in Portuguese. \"Form template\" is also sometimes translated as \"template de formulário\" or just \"modelo\".",
+          "suggestion": "Criar modelo de formulário em branco"
         }
       ],
       "approved_at": null
@@ -162,13 +167,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Creează un document necompletat dintr-un șablon' doesn't quite capture the meaning of 'Create blank form template'. 'Document' is not the best fit for 'form'. A more accurate translation would focus on the 'form' aspect.",
-          "suggestion": "Creează un formular gol din șablon"
-        },
-        {
-          "type": "formatting",
-          "description": "While not a major issue, 'din un șablon' is slightly awkward Romanian. The 'un' is redundant.",
-          "suggestion": "Creează un formular gol din șablon"
+          "description": "The translation \"Creează un document necompletat dintr-un șablon\" is not an accurate translation of \"Create blank form template.\" 'Document' is not the same as a form. 'Necompletat' (incomplete) doesn't quite capture the meaning of 'blank'.",
+          "suggestion": "Creează un șablon de formular gol"
         }
       ],
       "approved_at": null
@@ -185,8 +185,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'හිස් ආකෘතිපත්‍ර අච්චුවක් සාදන්න' literally translates to 'Create a blank form mold'. While understandable, 'mold' (අච්චුවක්) isn't the correct term for a template. It implies something physical, not a digital form template.",
-          "suggestion": "හිස් ආකෘතිපත්‍රයක් සාදන්න (His aakruthipatrayak saadan) - This translates to 'Create a blank form.'"
+          "description": "The translation \"හිස් ආකෘතිපත්‍ර අච්චුවක් සාදන්න\" while literally translatable, doesn't accurately convey the meaning of \"Create blank form template\". 'අච්චුවක්' (acchuwak) which means 'mold' or 'die' is not appropriate for a template. It implies a physical object rather than a digital form.",
+          "suggestion": "Consider a translation that uses words like 'නව ආකෘතියක් සාදා ගන්න' (nawa aakruthiyak saada ganne) which means 'create a new form' or 'ආකෘතිපත්‍රයක් සාදා ගන්න' (aakruthipathrayak saada ganne) which means 'create a form template'."
         }
       ],
       "approved_at": null
@@ -197,7 +197,7 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'prázdneho' is spelled incorrectly. It should be 'prázdneho'.",
+          "description": "The word 'prázdneho' is missing a hyphen. It should be 'prázdneho'.",
           "suggestion": "Vytvoriť šablónu prázdneho formulára"
         }
       ],
@@ -221,8 +221,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Kreiraj prazan šablon obrazac' is a bit awkward. 'Obrazac' means 'form' but the English uses 'template'. A better translation would reflect the concept of a blank form *template*.",
-          "suggestion": "Kreiraj prazan šablon za obrasce"
+          "description": "The translation \"Kreiraj prazan šablon obrazac\" is not the most natural or accurate translation of \"Create blank form template.\" While understandable, it's a bit clunky. \"Kreiraj prazan formular\" would be a better option.",
+          "suggestion": "Kreiraj prazan formular"
+        },
+        {
+          "type": "formatting",
+          "description": "The Serbian translation doesn't fully reflect the original English phrase's emphasis on a 'template'. While 'formular' is acceptable, 'template' implies a reusable structure.",
+          "suggestion": "Kreiraj prazan šablon formular"
         }
       ],
       "approved_at": null
@@ -239,7 +244,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Створити пустий із шаблону' doesn't accurately convey the meaning of 'Create blank form template'. 'із шаблону' implies creating something *from* a template, not creating a blank template itself.",
+          "description": "The translation \"Створити пустий із шаблону\" doesn't accurately convey the meaning of \"Create blank form template.\" \"Із шаблону\" implies creating something *from* a template, whereas the English implies creating a completely blank template.",
           "suggestion": "Створити порожній шаблон"
         }
       ],

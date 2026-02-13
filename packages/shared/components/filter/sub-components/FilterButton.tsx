@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,15 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import classNames from "classnames";
-
-import FilterReactSvg from "PUBLIC_DIR/images/filter.react.svg";
-
-import { IconButton } from "../../icon-button";
 
 import { FilterButtonProps } from "../Filter.types";
-
-import styles from "../Filter.module.scss";
 
 import FilterBlock from "./FilterBlock";
 import FilterIcon from "./FilterIcon";

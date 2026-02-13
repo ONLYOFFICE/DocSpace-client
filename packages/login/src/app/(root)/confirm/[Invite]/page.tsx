@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,11 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { cookies, headers } from "next/headers";
 
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import { LANGUAGE } from "@docspace/shared/constants";
+import { EmployeeType } from "@docspace/shared/enums";
 
 import { GreetingCreateUserContainer } from "@/components/GreetingContainer";
 import { getStringFromSearchParams } from "@/utils";
@@ -39,24 +40,38 @@ import {
   getThirdPartyProviders,
   getUserFromConfirm,
   getInvitationSettings,
+  getUserByEncEmail,
 } from "@/utils/actions";
+import { logger } from "logger.mjs";
+import { TConfirmLinkParams } from "@/types";
 import CreateUserForm from "./page.client";
 
 type LinkInviteProps = {
-  searchParams: { [key: string]: string };
-  params: { Invite: string };
+  searchParams: Promise<{ [key: string]: string }>;
+  params: Promise<{ Invite: string }>;
 };
 
-async function Page({ searchParams, params }: LinkInviteProps) {
-  if (params.Invite !== "LinkInvite" && params.Invite !== "EmpInvite")
+async function Page(props: LinkInviteProps) {
+  logger.info("Invite page");
+  const { searchParams: sp, params: p } = props;
+  const searchParams = (await sp) as TConfirmLinkParams;
+  const params = await p;
+  if (params.Invite !== "LinkInvite" && params.Invite !== "EmpInvite") {
+    logger.info(`Invite page notFound params.Invite: ${params.Invite}`);
     return notFound();
+  }
 
-  const type = searchParams.type;
+  const type = searchParams.type ?? "";
   const uid = searchParams.uid;
+  const emplType = searchParams.emplType ?? "";
+  const encemail = searchParams.encemail ?? "";
   const confirmKey = getStringFromSearchParams(searchParams);
 
-  const headersList = headers();
-  const hostName = headersList.get("x-forwarded-host") ?? "";
+  const headersList = await headers();
+  const hostName =
+    headersList.get("x-forwarded-host-test") ??
+    headersList.get("x-forwarded-host") ??
+    "";
 
   const [
     user,
@@ -66,7 +81,9 @@ async function Page({ searchParams, params }: LinkInviteProps) {
     passwordSettings,
     invitationSettings,
   ] = await Promise.all([
-    getUserFromConfirm(uid, confirmKey),
+    uid
+      ? getUserFromConfirm(uid, confirmKey)
+      : getUserByEncEmail(encemail, confirmKey),
     getSettings(),
     getThirdPartyProviders(true),
     getCapabilities(),
@@ -74,40 +91,44 @@ async function Page({ searchParams, params }: LinkInviteProps) {
     getInvitationSettings(),
   ]);
 
+  if (
+    !invitationSettings?.allowInvitingGuests &&
+    emplType === String(EmployeeType.Guest)
+  ) {
+    redirect("/");
+  }
+
   const settingsCulture =
     typeof settings === "string" ? undefined : settings?.culture;
 
-  const culture = cookies().get(LANGUAGE)?.value ?? settingsCulture;
+  const culture = (await cookies()).get(LANGUAGE)?.value ?? settingsCulture;
 
-  return (
+  return settings && typeof settings !== "string" ? (
     <>
-      {settings && typeof settings !== "string" && (
-        <>
-          <GreetingCreateUserContainer
-            type={type}
-            displayName={user?.displayName}
-            culture={culture}
-            hostName={hostName}
-          />
-          <FormWrapper id="invite-form">
-            <CreateUserForm
-              userNameRegex={settings.userNameRegex}
-              passwordHash={settings.passwordHash}
-              displayName={user?.displayName}
-              passwordSettings={passwordSettings}
-              capabilities={capabilities}
-              thirdPartyProviders={thirdParty}
-              legalTerms={settings.externalResources.common?.entries.legalterms}
-              licenseUrl={settings.externalResources.common?.entries.license}
-              isStandalone={settings.standalone}
-              logoText={settings.logoText}
-              invitationSettings={invitationSettings}
-            />
-          </FormWrapper>
-        </>
-      )}
+      <GreetingCreateUserContainer
+        type={type}
+        displayName={user?.displayName}
+        culture={culture}
+        hostName={hostName}
+      />
+      <FormWrapper id="invite-form">
+        <CreateUserForm
+          userNameRegex={settings.userNameRegex}
+          passwordHash={settings.passwordHash}
+          displayName={user?.displayName}
+          passwordSettings={passwordSettings}
+          capabilities={capabilities}
+          thirdPartyProviders={thirdParty}
+          legalTerms={settings.externalResources?.common?.entries?.legalterms}
+          licenseUrl={settings.externalResources?.common?.entries?.license}
+          isStandalone={settings.standalone}
+          logoText={settings.logoText}
+          invitationSettings={invitationSettings}
+          hostName={hostName}
+        />
+      </FormWrapper>
     </>
-  );
+  ) : null;
 }
 
 export default Page;

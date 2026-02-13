@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -37,10 +37,10 @@ import {
 import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
 
-import { TEventData, UseSelectFolderDialogProps } from "@/types";
+import { TEventData } from "@/types";
 import { saveAs } from "@/utils";
 
-const useSelectFolderDialog = ({}: UseSelectFolderDialogProps) => {
+const useSelectFolderDialog = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
@@ -78,13 +78,13 @@ const useSelectFolderDialog = ({}: UseSelectFolderDialogProps) => {
 
     const currentExst = fileName.split(".").pop();
 
-    const title =
+    const newTitle =
       currentExst !== extension ? fileName.concat(`.${extension}`) : fileName;
 
     if (isChecked) {
-      saveAs(title, url, selectedItemId, isChecked);
+      saveAs(newTitle, url, selectedItemId, isChecked);
     } else {
-      const savingInfo = await saveAs(title, url, selectedItemId, isChecked);
+      const savingInfo = await saveAs(newTitle, url, selectedItemId, isChecked);
 
       if (savingInfo) {
         const docEditor =
@@ -104,7 +104,7 @@ const useSelectFolderDialog = ({}: UseSelectFolderDialogProps) => {
     isFirstLoad: boolean,
     isSelectedParentFolder: boolean,
     selectedItemId: string | number | undefined,
-    selectedItemType: "rooms" | "files" | undefined,
+    selectedItemType: "rooms" | "files" | "agents" | undefined,
     isRoot: boolean,
     selectedItemSecurity:
       | TFileSecurity
@@ -112,10 +112,16 @@ const useSelectFolderDialog = ({}: UseSelectFolderDialogProps) => {
       | TRoomSecurity
       | undefined,
     selectedFileInfo: TSelectedFileInfo,
+    isDisabledFolder?: boolean,
+    isInsideKnowledge?: boolean,
+    isInsideResultStorage?: boolean,
   ) => {
     if (isFirstLoad) return true;
     if (requestRunning.current) return true;
-    if (!!selectedFileInfo) return true;
+    if (selectedFileInfo) return true;
+
+    if (selectedItemType === "agents") return true;
+    if (isInsideResultStorage) return true;
 
     if (!selectedItemSecurity) return false;
 

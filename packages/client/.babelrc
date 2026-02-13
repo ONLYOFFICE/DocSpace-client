@@ -5,7 +5,8 @@
     ["@babel/preset-react", { "runtime": "automatic" }]
   ],
   "plugins": [
+    // "babel-plugin-react-compiler", // Switching between tabs breaks
     "@babel/plugin-transform-runtime",
-    "@babel/plugin-proposal-class-properties"
+    "@babel/plugin-transform-class-properties"
   ]
 }

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -33,9 +33,13 @@ import { DeviceType } from "@docspace/shared/enums";
 
 export interface RegisterNewButtonProps {
   currentDeviceType?: DeviceType;
+  isDisabled?: boolean;
 }
 
-const RegisterNewButton = ({ currentDeviceType }: RegisterNewButtonProps) => {
+const RegisterNewButton = ({
+  currentDeviceType,
+  isDisabled,
+}: RegisterNewButtonProps) => {
   const { t } = useTranslation(["OAuth"]);
 
   const navigate = useNavigate();
@@ -53,6 +57,8 @@ const RegisterNewButton = ({ currentDeviceType }: RegisterNewButtonProps) => {
       label={t("RegisterNewApp")}
       primary
       onClick={onClick}
+      isDisabled={isDisabled}
+      testId="register_new_app_button"
     />
   );
 };

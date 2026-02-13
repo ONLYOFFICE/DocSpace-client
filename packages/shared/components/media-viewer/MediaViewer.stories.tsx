@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -154,6 +154,7 @@ const DefaultTemplate = (props: MediaViewerProps) => {
 
 const filesMock: TFile[] = [
   {
+    shortWebUrl: "",
     isFile: true,
     access: 0,
     canShare: true,
@@ -201,6 +202,7 @@ const filesMock: TFile[] = [
       CreateRoomFrom: false,
       CopyLink: false,
       Embed: false,
+      Vectorization: false,
     },
     shared: false,
     thumbnailStatus: 1,
@@ -229,11 +231,12 @@ const filesMock: TFile[] = [
       WebView: false,
     },
     viewUrl:
-      "https://helpcenter.onlyoffice.com/ru/images/Help/Guides/big/guide139/hyperlink_settings.png",
+      "https://api.onlyoffice.com/assets/images/docs-preview-0b9d9065d713625e222dcfeb451de62c.png",
     webUrl:
-      "https://helpcenter.onlyoffice.com/ru/images/Help/Guides/big/guide139/hyperlink_settings.png",
+      "https://api.onlyoffice.com/assets/images/docs-preview-0b9d9065d713625e222dcfeb451de62c.png",
   },
   {
+    shortWebUrl: "",
     isFile: true,
     access: 0,
     canShare: true,
@@ -281,6 +284,7 @@ const filesMock: TFile[] = [
       CreateRoomFrom: false,
       CopyLink: false,
       Embed: false,
+      Vectorization: false,
     },
     shared: false,
     thumbnailStatus: 1,
@@ -309,15 +313,15 @@ const filesMock: TFile[] = [
       WebView: false,
     },
     viewUrl:
-      "https://helpcenter.onlyoffice.com/ru/images/Help/GettingStarted/DocSpace/Big/RoomTypes.png",
+      "https://static-blog.onlyoffice.com/wp-content/uploads/2025/05/15170532/How-to-create-a-DocSpace-plugin-634x320.png",
     webUrl:
-      "https://helpcenter.onlyoffice.com/ru/images/Help/GettingStarted/DocSpace/Big/RoomTypes.png",
+      "https://static-blog.onlyoffice.com/wp-content/uploads/2025/05/15170532/How-to-create-a-DocSpace-plugin-634x320.png",
   },
 ];
 
 const extsImagePreviewed = [".png", ".jpg", ".jpeg", ".gif", ".svg"];
 
-export const ImageGallery: Story = {
+export const DesktopView: Story = {
   args: {
     files: filesMock,
     currentDeviceType: DeviceType.desktop,

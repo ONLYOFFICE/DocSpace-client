@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,7 +26,7 @@
 
 import { toastr } from "@docspace/shared/components/toast";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import { Link } from "@docspace/shared/components/link";
 
 import { makeAutoObservable } from "mobx";
 import { Trans } from "react-i18next";
@@ -107,12 +107,12 @@ class SecondaryProgressDataStore {
 
     const commonComponents = {
       1: (
-        <ColorTheme
+        <Link
           tag="a"
-          themeId={ThemeId.Link}
           onClick={onClickLocation}
           target="_blank"
-          $isUnderline
+          textDecoration="underline"
+          color="accent"
         />
       ),
       2: <span style={{ fontWeight: "600" }} />,
@@ -370,12 +370,32 @@ class SecondaryProgressDataStore {
         (item) => item.operationId === operationId,
       );
       if (itemIndex === -1) return;
-      operationObject.items.splice(itemIndex, 1);
-      if (operationObject.items.length === 0) {
-        this.secondaryOperationsArray.splice(operationIndex, 1);
+
+      const newItems = operationObject.items.filter(
+        (item) => item.operationId !== operationId,
+      );
+
+      if (newItems.length === 0) {
+        const newSecondaryOperationsArray =
+          this.secondaryOperationsArray.filter(
+            (_, index) => index !== operationIndex,
+          );
+
+        this.secondaryOperationsArray = [...newSecondaryOperationsArray];
+      } else {
+        const newSecondaryOperationsArray = this.secondaryOperationsArray.map(
+          (item, index) =>
+            index === operationIndex ? { ...item, items: newItems } : item,
+        );
+
+        this.secondaryOperationsArray = [...newSecondaryOperationsArray];
       }
     } else {
-      this.secondaryOperationsArray.splice(operationIndex, 1);
+      const newSecondaryOperationsArray = this.secondaryOperationsArray.filter(
+        (_, index) => index !== operationIndex,
+      );
+
+      this.secondaryOperationsArray = [...newSecondaryOperationsArray];
     }
     console.log("clearSecondaryProgressData", this.secondaryOperationsArray);
   };

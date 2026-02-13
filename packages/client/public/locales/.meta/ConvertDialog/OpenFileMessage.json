@@ -3,7 +3,7 @@
   "content": "The document file you open will be converted to the Office Open XML format for quick viewing and editing.",
   "content_en_sha1_hash": "9de0c615b3fdd60d1a33c6f1aab9a1102479e8e0",
   "created_at": "2025-05-19T21:30:56.890Z",
-  "updated_at": "2025-05-20T09:37:55.750Z",
+  "updated_at": "2025-09-23T07:24:24.079Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that a document file will be converted to Office Open XML format when opened. It appears in a modal dialog body and is displayed depending on whether the file conversion type is XML or not.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Arabic translation includes the English term 'Office Open XML' without transliteration or explanation for a Saudi Arabic audience. It might be unclear to users unfamiliar with the term.",
+          "suggestion": "Consider transliterating or explaining 'Office Open XML' for better clarity. For example: سيتم تحويل ملف المستند الذي تفتحه إلى صيغة Office Open XML (تنسيق مفتوح لبرامج Microsoft Office) لعرضه وتحريره بسرعة."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -39,7 +45,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Bulgarian translation 'Файлът с документи, който отваряте, ще бъде преобразуван в Office Open XML формат за бързо гледане и редактиране.' is a literal translation, but slightly awkward. The phrase 'Файлът с документи' is redundant. A more natural phrasing would focus on 'document' or 'the file'.",
+          "suggestion": "Файлът, който отваряте, ще бъде преобразуван в Office Open XML формат за бързо гледане и редактиране."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -51,7 +63,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'you open' is translated as 'das Sie öffnen möchten'. While grammatically correct, it's more natural and concise to simply use 'das Sie öffnen' which conveys the same meaning in this context.",
+          "suggestion": "Das Dokument, das Sie öffnen, wird ins Office-Open-XML-Format für eine schnelle Durchsicht und Bearbeitung umgewandelt."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -63,7 +81,18 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase \"que Usted abre\" is overly formal and sounds awkward in Spanish. A more natural phrasing would use a less formal pronoun.",
+          "suggestion": "que abre"
+        },
+        {
+          "type": "formatting",
+          "description": "The comma after 'documento' in the translation is unnecessary and disrupts the flow.",
+          "suggestion": "El documento que abre se convertirá al formato Office Open XML para la vista y edición rápida."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -87,19 +116,47 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The verb tense 'viene convertito' (is being converted) might be slightly awkward. A more natural phrasing in Italian would be using the future tense or a simpler present tense.",
+          "suggestion": "Il documento che apri sarà convertito nel formato Office Open XML per la visualizzazione e la modifica più rapide."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'より高速に表示、編集するように' doesn't perfectly capture the nuance of 'for quick viewing and editing.' It implies the conversion *results* in quicker viewing and editing, rather than being *for the purpose* of quicker viewing and editing.",
+          "suggestion": "開いた文書ファイルは、Office Open XML形式に変換され、迅速な表示と編集が可能になります。"
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence is a bit long and could be broken down for better readability in Japanese.  While grammatically correct, it's a bit clunky.",
+          "suggestion": "開いた文書ファイルはOffice Open XML形式に変換されます。これにより、より迅速な表示と編集が可能になります。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The sentence structure is awkward and doesn't flow naturally in Korean. The verb '변환됩니다' (is converted) is placed oddly.",
+          "suggestion": "당신이 열 문서 파일은 빠르게 확인하고 수정할 수 있도록 Office Open XML 형식으로 변환됩니다."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrasing 'Office Open XML 형식 로' is grammatically incorrect. '로' is a particle indicating direction or means. It should be '으로' or '으로 변환됩니다'.",
+          "suggestion": "Office Open XML 형식으로 변환됩니다."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -111,13 +168,30 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase 'Dokumentu fails jūs atverat' sounds slightly awkward and could be more naturally expressed. It's a bit literal from the English phrasing and creates an unnatural flow in Latvian.",
+          "suggestion": "Dokumentu fails, kuru jūs atverat, vai atvertais fails, tiks konvertēts..."
+        },
+        {
+          "type": "formatting",
+          "description": "While grammatically correct, the sentence structure is a bit long and could be broken up for better readability. Consider splitting it into two sentences.",
+          "suggestion": "Dokumentu fails, kuru jūs atverat, tiks konvertēts Office Open XML formātā. Tas nodrošinās ātrāku apskati un rediģēšanu."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Office Open XML' is better translated as 'Open XML' in Dutch, as 'Office' is redundant and commonly omitted.",
+          "suggestion": "Het bestand dat je opent zal worden geconverteerd naar het Open XML formaat voor snellere weergave en bewerking."
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -129,7 +203,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'quick viewing and editing' is not perfectly conveyed. 'Rápida' (quick) applies to both viewing and editing, which might not be the intended nuance. A more precise translation might separate the quickness.",
+          "suggestion": "O documento que abriu será convertido para o formato Office Open XML para uma visualização rápida e edição eficiente."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -153,13 +233,40 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ඔෆිස්' is a transliteration and might be better represented with a more localized equivalent if available. While understandable, it lacks nuance.",
+          "suggestion": "Consider if a localized term for 'Office' is more suitable. If not, keep 'ඔෆිස්' but note its transliteration nature."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure could be slightly improved for better flow and naturalness in Sinhala. Specifically, the phrase 'ඔබ විවෘත කරන ලේඛන ගොනුව' is a bit clunky.",
+          "suggestion": "Consider restructuring the sentence to 'විවෘත කරන ලේඛන ගොනුව ඔබට' or 'ඔබ විවෘත කරන ගොනුව'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While the translation conveys the general meaning, 'හරිවනු ලැබේ' is not the most natural way to express 'converted'. It's closer to 'will be done' rather than a specific conversion.",
+          "suggestion": "Replace 'හරිවනු ලැබේ' with a more precise term for 'converted', like 'ප່ຽරෙනු ලැබේ' (piyarunu delve) or 'අවර්තනු ලැබේ' (awarthanu delve)."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'prekonvertuje' (will be converted) implies a more significant conversion than intended. 'Prevedie' would be a more accurate translation for 'converted' in this context, suggesting a simpler transformation or adaptation.",
+          "suggestion": "Dokument ktorý otvoríte sa pre rýchlejšie prezeranie a úpravu sa prevedie na formát Office Open XML."
+        },
+        {
+          "type": "formatting",
+          "description": "While grammatically correct, the sentence structure 'Dokument ktorý otvoríte sa prevedie...' sounds slightly awkward in Slovak. A more natural flow might be achieved by rephrasing.",
+          "suggestion": "Po otvorení bude dokument prevedený do formátu Office Open XML pre rýchlejšie prezeranie a úpravu."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -171,13 +278,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'биц́е' (bice) should ideally be 'ће бити' (ce biti) for better flow and more natural Serbian. While 'биц́е' is grammatically correct, 'ће бити' is more commonly used in this context.",
+          "suggestion": "ће бити"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'biće' is not consistently formatted. While acceptable, it appears as a diacritic mark when a regular 'će' might be more common and readable in modern Serbian.",
+          "suggestion": "Datoteka dokumenta koju otvorite biće konvertovana u Office Open XML format radi brzog pregleda i uređivanja."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -189,13 +308,35 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Для швидшого перегляду та редагування файл документа, який ви відкриваєте, буде перетворено у формат Office Open XML' is a bit clunky and not as natural as it could be. While technically correct, it lacks flow. The phrase 'який ви відкриваєте' is redundant.",
+          "suggestion": "Для швидшого перегляду та редагування файл документа буде перетворено у формат Office Open XML."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure is long and could be broken down for better readability.",
+          "suggestion": "Файл документа, який ви відкриваєте, буде перетворено у формат Office Open XML для швидшого перегляду та редагування."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'for quick viewing and editing' is not fully captured in the Vietnamese translation. 'giúp sửa và xem nhanh hơn' primarily emphasizes editing and viewing speed, but doesn't convey the 'conversion' aspect as clearly as the original.",
+          "suggestion": "Tài liệu bạn mở sẽ được chuyển đổi sang định dạng Office Open XML để có thể xem và chỉnh sửa nhanh chóng."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the Vietnamese translation uses a slightly less formal tone than the English. The English uses a more neutral tone appropriate for a software interface.",
+          "suggestion": "Tài liệu bạn mở sẽ được chuyển sang định dạng Office Open XML để hỗ trợ xem và chỉnh sửa nhanh chóng."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,7 +28,7 @@ import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation, Trans } from "react-i18next";
 import { useNavigate, useLocation } from "react-router";
-import moment from "moment-timezone";
+import { parseToDateTime, formatDateLocalized } from "@docspace/shared/utils/date";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
@@ -50,10 +50,12 @@ const InviteQuotaWarningDialog = (props) => {
     isGracePeriod,
     currentTariffPlanTitle,
     isPaymentPageAvailable,
+    standalone,
   } = props;
 
   const navigate = useNavigate();
   const location = useLocation();
+
   const isAccounts = location.pathname.includes("accounts/people");
 
   const [datesData, setDatesData] = useState({});
@@ -61,22 +63,19 @@ const InviteQuotaWarningDialog = (props) => {
   const { fromDate, byDate, delayDaysCount } = datesData;
 
   const gracePeriodDays = () => {
-    const fromDateMoment = moment(dueDate);
-    const byDateMoment = moment(delayDueDate);
+    const fromDateDt = parseToDateTime(dueDate);
+    const byDateDt = parseToDateTime(delayDueDate);
 
     setDatesData({
-      fromDate: fromDateMoment.format("LL"),
-      byDate: byDateMoment.format("LL"),
-      delayDaysCount: getDaysRemaining(byDateMoment),
+      fromDate: fromDateDt ? formatDateLocalized(fromDateDt, "DATE_MED", { locale: language }) : "",
+      byDate: byDateDt ? formatDateLocalized(byDateDt, "DATE_MED", { locale: language }) : "",
+      delayDaysCount: getDaysRemaining(byDateDt),
     });
   };
 
   useEffect(() => {
-    moment.locale(language);
-    if (window.timezone) moment().tz(window.timezone);
-
     gracePeriodDays();
-  }, [language, window.timezone]);
+  }, [language, dueDate, delayDueDate]);
 
   const onClose = () => {
     if (!isGracePeriod) {
@@ -104,23 +103,49 @@ const InviteQuotaWarningDialog = (props) => {
 
   const contentForGracePeriod = (
     <>
-      <Text fontWeight={700} noSelect>
-        {t("BusinessPlanPaymentOverdue", {
-          planName: currentTariffPlanTitle,
-        })}
+      <Text fontWeight={700}>
+        {standalone
+          ? t("LicenseExpired")
+          : t("BusinessPlanPaymentOverdue", {
+              planName: currentTariffPlanTitle,
+            })}
       </Text>
       <br />
-      <Text noSelect as="div">
-        <Trans t={t} i18nKey="GracePeriodActivatedInfo" ns="Payments">
-          Grace period activated
-          <strong>
-            from {{ fromDate }} to {{ byDate }}
-          </strong>
-          (days remaining: {{ delayDaysCount }})
-        </Trans>
+      <Text as="div">
+        {standalone ? (
+          <Trans
+            i18nKey="GracePeriodActive"
+            ns="Payments"
+            t={t}
+            values={{
+              fromDate,
+              byDate,
+              delayDaysCount,
+            }}
+            components={{
+              1: <Text as="span" />,
+            }}
+          />
+        ) : (
+          <Trans t={t} i18nKey="GracePeriodActivatedInfo" ns="Payments">
+            Grace period activated
+            <strong>
+              from {{ fromDate }} to {{ byDate }}
+            </strong>
+            (days remaining: {{ delayDaysCount }})
+          </Trans>
+        )}
       </Text>
       <br />
-      <Text>{t("GracePeriodActivatedDescription")}</Text>
+      <Text>
+        {standalone
+          ? t("LicenseGracePeriodInfo", {
+              productName: t("Common:ProductName"),
+            })
+          : t("GracePeriodActivatedDescription", {
+              productName: t("Common:ProductName"),
+            })}
+      </Text>
     </>
   );
 
@@ -173,6 +198,7 @@ export default inject(
     dialogsStore,
     currentTariffStatusStore,
     currentQuotaStore,
+    settingsStore,
   }) => {
     const { isPaymentPageAvailable } = authStore;
     const { dueDate, delayDueDate, isGracePeriod } = currentTariffStatusStore;
@@ -180,6 +206,7 @@ export default inject(
 
     const { inviteQuotaWarningDialogVisible, setQuotaWarningDialogVisible } =
       dialogsStore;
+    const { standalone } = settingsStore;
 
     return {
       isPaymentPageAvailable,
@@ -190,6 +217,7 @@ export default inject(
       dueDate,
       delayDueDate,
       isGracePeriod,
+      standalone,
     };
   },
 )(observer(withTranslation(["Payments", "Common"])(InviteQuotaWarningDialog)));

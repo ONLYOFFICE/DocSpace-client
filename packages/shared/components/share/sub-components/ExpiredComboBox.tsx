@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,28 +26,25 @@
 
 import { useState, useRef, useEffect } from "react";
 import { useTranslation, Trans } from "react-i18next";
+import type { DateTime } from "luxon";
 
-import moment from "moment";
+import { now, addToDate } from "../../../utils/date";
 
 import { Text } from "../../text";
-import { LinkWithDropdown } from "../../link-with-dropdown";
 import { Link, LinkType } from "../../link";
+import { globalColors } from "../../../themes";
+import { LinkWithDropdown } from "../../link-with-dropdown";
 
 import { getDate, getExpiredOptions } from "../Share.helpers";
 import { ExpiredComboBoxProps } from "../Share.types";
 
 import ShareCalendar from "./ShareCalendar";
-import { globalColors } from "../../../themes";
-import { ShareAccessRights } from "../../../enums";
-import { classNames } from "../../../utils";
+import styles from "../Share.module.scss";
 
 const ExpiredComboBox = ({
   link,
   changeExpirationOption,
   isDisabled,
-  isRoomsLink,
-  changeAccessOption,
-  availableExternalRights,
   removedExpiredLink,
 }: ExpiredComboBoxProps) => {
   const { t, i18n } = useTranslation(["Common"]);
@@ -67,17 +64,17 @@ const ExpiredComboBox = ({
   };
 
   const setTwelveHours = () => {
-    const currentDate = moment().add(12, "hour");
+    const currentDate = addToDate(now(), 12, "hours");
     changeExpirationOption(link, currentDate);
   };
 
   const setOneDay = () => {
-    const currentDate = moment().add(1, "days");
+    const currentDate = addToDate(now(), 1, "days");
     changeExpirationOption(link, currentDate);
   };
 
   const setSevenDays = () => {
-    const currentDate = moment().add(7, "days");
+    const currentDate = addToDate(now(), 7, "days");
     changeExpirationOption(link, currentDate);
   };
 
@@ -93,21 +90,12 @@ const ExpiredComboBox = ({
     setShowCalendar(false);
   };
 
-  const setDateFromCalendar = (e: moment.Moment) => {
-    const currentDate = moment(e);
-    changeExpirationOption(link, currentDate);
+  const setDateFromCalendar = (e: DateTime) => {
+    changeExpirationOption(link, e);
   };
 
-  const onRemoveLink = () => {
-    if (isRoomsLink) return removedExpiredLink?.(link);
-
-    if (availableExternalRights.None)
-      changeAccessOption(
-        {
-          access: ShareAccessRights.None,
-        },
-        link,
-      );
+  const onReactivate = () => {
+    removedExpiredLink(link, true);
   };
 
   useEffect(() => {
@@ -132,9 +120,9 @@ const ExpiredComboBox = ({
 
       return (
         <Trans t={t} i18nKey="LinkExpireAfter" ns="Common">
-          The link will expire after
+          The link will expire
           <LinkWithDropdown
-            className="expired-options"
+            className={styles.expiredOptions}
             color={globalColors.lightBlueMain}
             dropdownType="alwaysDashed"
             data={expiredOptions}
@@ -155,7 +143,7 @@ const ExpiredComboBox = ({
       <Trans t={t} i18nKey="LinkIsValid" ns="Common">
         The link is valid for
         <LinkWithDropdown
-          className="expired-options"
+          className={styles.expiredOptions}
           color={globalColors.lightBlueMain}
           dropdownType="alwaysDashed"
           data={expiredOptions}
@@ -175,9 +163,7 @@ const ExpiredComboBox = ({
     <div ref={bodyRef}>
       {isExpired ? (
         <Text
-          className={classNames("expire-text", {
-            "expire-text-room": Boolean(isRoomsLink),
-          })}
+          className={styles.expireText}
           as="div"
           fontSize="12px"
           fontWeight="400"
@@ -188,16 +174,15 @@ const ExpiredComboBox = ({
             fontWeight={400}
             fontSize="12px"
             color={globalColors.lightBlueMain}
-            onClick={onRemoveLink}
+            onClick={onReactivate}
+            dataTestId="expired_combo_box_remove_link"
           >
-            {t("Common:RemoveLink")}
+            {t("Common:ReactivateLink")}
           </Link>
         </Text>
       ) : (
         <Text
-          className={classNames("expire-text", {
-            "expire-text-room": Boolean(isRoomsLink),
-          })}
+          className={styles.expireText}
           as="div"
           fontSize="12px"
           fontWeight="400"
@@ -208,11 +193,10 @@ const ExpiredComboBox = ({
       {showCalendar ? (
         <ShareCalendar
           bodyRef={bodyRef}
-          onDateSet={setDateFromCalendar}
-          calendarRef={calendarRef}
-          closeCalendar={onCalendarClose}
           locale={i18n.language}
-          useDropDown={isRoomsLink}
+          calendarRef={calendarRef}
+          onDateSet={setDateFromCalendar}
+          closeCalendar={onCalendarClose}
         />
       ) : null}
     </div>

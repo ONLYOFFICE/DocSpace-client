@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -107,40 +107,6 @@ export const getInnerHeight = (el: HTMLElement): number => {
  */
 export const getInnerWidth = (el: HTMLElement): number => {
   return getInnerSize(el, "width", "paddingLeft", "paddingRight");
-};
-
-/**
- * @description Return unique UUID v4
- */
-export const uuid = () => {
-  // eslint-disable-next-line @typescript-eslint/no-shadow
-  let uuid = "";
-
-  for (let i = 0; i < 32; i++) {
-    switch (i) {
-      case 8:
-      case 20: {
-        uuid += `-${Math.trunc(Math.random() * 16).toString(16)}`;
-
-        break;
-      }
-      case 12: {
-        uuid += "-4";
-
-        break;
-      }
-      case 16: {
-        uuid += `-${((Math.random() * 16) | (0 & 3) | 8).toString(16)}`;
-
-        break;
-      }
-      default: {
-        uuid += Math.trunc(Math.random() * 16).toString(16);
-      }
-    }
-  }
-
-  return uuid;
 };
 
 /**

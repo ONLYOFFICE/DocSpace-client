@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -278,6 +278,7 @@ const StyledTableRow = styled(TableRow)`
 
   .table-container_file-name-cell,
   .table-container_index-cell {
+    ${(props) => props.dragging && rowCheckboxDraggingStyle};
     ${(props) =>
       props.showHotkeyBorder &&
       css`
@@ -286,7 +287,6 @@ const StyledTableRow = styled(TableRow)`
 
         ${hotkeyBorderStyle}
       `};
-    ${(props) => props.dragging && rowCheckboxDraggingStyle};
   }
 
   .table-container_element-wrapper {

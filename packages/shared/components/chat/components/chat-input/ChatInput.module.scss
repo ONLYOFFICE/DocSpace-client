@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,12 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../../../styles/variables/devices.scss";
-@import "../../../../styles/mixins.scss";
-
 .chatInput {
   width: 100%;
-  max-width: 740px;
+  max-width: 700px;
 
   position: relative;
 
@@ -38,17 +35,29 @@
 
   box-sizing: border-box;
 
-  padding: 0 20px;
-
   textarea {
     padding: 0;
     background-color: var(--chat-input-background-color);
 
     min-height: 66px;
+
+    text-align: var(--input-text-align);
   }
 
-  @include tablet-and-below {
-    padding: 0 16px;
+  .chatInputTextArea {
+    min-height: 56px !important;
+    max-height: 112px !important;
+
+    &.disabled {
+      textarea {
+        background-color: var(--chat-input-background-color) !important;
+      }
+
+      textarea::placeholder {
+        color: var(--chat-input-placeholder-disabled-color) !important;
+        -webkit-text-fill-color: var(--chat-input-placeholder-disabled-color) !important;
+      }
+    }
   }
 
   .chatInputTextAreaWrapper {
@@ -58,30 +67,14 @@
     max-height: 172px !important;
 
     background-color: var(--chat-input-background-color);
-    border: none;
+    border: var(--chat-input-border);
   }
 
-  .chatInputTextAreaWrapperWithFiles {
-    padding: var(--chat-input-textarea-wrapper-with-files-padding);
-    min-height: var(--chat-input-textarea-wrapper-with-files-height) !important;
-    max-height: var(
-      --chat-input-textarea-wrapper-with-files-max-height
-    ) !important;
+  .chatInputTextAreaWrapperFiles {
+    padding: 50px 8px 44px;
 
-    background-color: var(--chat-input-background-color);
-    border: none;
-  }
-
-  &.disabled {
-    .chatInputTextAreaWrapper,
-    .chatInputTextAreaWrapperWithFiles {
-      background-color: var(--input-disabled-bg);
-    }
-  }
-
-  .chatInputTextArea {
-    min-height: 56px !important;
-    max-height: 112px !important;
+    min-height: 160px !important;
+    max-height: 216px !important;
   }
 }
 
@@ -94,69 +87,269 @@
   position: absolute;
 
   bottom: 6px;
-  padding: 0 8px;
 
   box-sizing: border-box;
 
-  width: calc(100% - 40px);
+  padding: 0 8px;
+  width: 100%;
+}
 
-  @include tablet-and-below {
-    width: calc(100% - 32px);
-  }
+.chatInputButtonsTools {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 
-  .chatInputButtonsFile {
-    width: 32px;
+  gap: 4px;
+
+  .chatInputButton {
     height: 32px;
 
-    border: 1px solid var(--chat-input-button-file-border-color);
-
-    background-color: var(--chat-button-file-background-color);
-
-    border-radius: 3px;
+    padding: 0 8px;
 
     box-sizing: border-box;
 
+    border-radius: 3px;
+
     display: flex;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
+    gap: 8px;
+
+    cursor: pointer;
+
+    p {
+      color: var(--chat-input-tools-button-color);
+    }
 
     svg {
+      cursor: pointer;
+
       path {
-        fill: var(--chat-input-button-file-color) !important;
+        fill: var(--chat-input-tools-button-color);
+      }
+    }
+
+    &:hover:not(.disabled) {
+      background-color: var(--chat-input-tools-button-hover-background);
+    }
+
+    &.disabled {
+      cursor: not-allowed;
+
+      svg {
+        cursor: not-allowed;
+
+        path {
+          fill: var(--chat-input-tools-button-disabled-color);
+        }
+      }
+    }
+
+    &.chatInputToolsButton {
+      svg {
+        circle {
+          stroke: var(--chat-input-tools-button-color)
+        }
+      }
+
+      &.activeChatInputButton {
+        svg {
+          circle {
+            stroke: var(--chat-input-tools-button-active-color);
+          }
+        }
+      }
+
+      &.disabled {
+        cursor: not-allowed;
+
+        p {
+          color: var(--chat-input-tools-button-disabled-color);
+        }
+
+        svg {
+          circle {
+            stroke: var(--chat-input-tools-button-disabled-color);
+          }
+        }
       }
     }
   }
 
-  .chatInputButtonsSend {
-    border: none;
+  .activeChatInputButton {
+    background-color: var(--chat-input-tools-button-active-background);
 
-    background-color: var(--accent-main);
-
-    cursor: pointer;
+    p {
+      color: var(--chat-input-tools-button-active-color);
+    }
 
     svg {
       path {
-        fill: var(--chat-input-button-send-color) !important;
+        fill: var(--chat-input-tools-button-active-color);
       }
-    }
-
-    &.disabled {
-      opacity: 0.6;
-
-      cursor: not-allowed;
-    }
-
-    .whiteSquare {
-      width: 12px;
-      height: 12px;
-
-      background-color: #fff;
-
-      border-radius: 2px;
     }
   }
 }
 
-.selectFileDropDown {
-  top: unset !important;
+.chatInputButtonsSend {
+  width: 32px;
+  height: 32px;
+
+  border: none;
+
+  background-color: var(--chat-input-send-button-background);
+
+  border-radius: 3px;
+
+  cursor: pointer;
+
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    path {
+      fill: var(--chat-input-send-button-color) !important;
+    }
+  }
+
+  &:not(.disabled):hover {
+    opacity: 0.85;
+  }
+
+  &.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  .square {
+    width: 12px;
+    height: 12px;
+
+    background-color: var(--chat-input-send-button-color);
+
+    border-radius: 2px;
+  }
+}
+
+.toolSettingsWrapper {
+  width: calc(100% + 16px);
+  height: fit-content;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+
+  padding-top: 16px;
+
+  margin-inline-end: -16px;
+
+  box-sizing: border-box;
+
+  .toolSettingsItem {
+    width: 100%;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+
+    padding: 0 16px;
+
+    box-sizing: border-box;
+
+    .toolSettingsItemInfo {
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+
+      gap: 8px;
+
+      img {
+        width: 32px;
+        height: 32px;
+      }
+    }
+  }
+}
+
+.filesList {
+  width: 100%;
+
+  position: absolute;
+
+  height: 44px;
+
+  top: 6px;
+
+  padding: 0 8px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  box-sizing: border-box;
+
+  .filesListWrapper {
+    width: fit-content;
+    display: flex;
+    gap: 6px;
+
+    .filesListItem {
+      width: fit-content;
+      min-width: fit-content;
+      height: 32px;
+
+      padding-inline-end: 8px;
+
+      display: flex;
+      align-items: center;
+
+      border: 1px solid var(--chat-input-file-border-color);
+      background-color: var(--chat-input-file-background-color);
+
+      border-radius: 6px;
+
+      .filesListItemIcon {
+        width: 32px;
+        height: 32px;
+
+        div {
+          width: 32px;
+          height: 32px;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+    }
+
+    .filesListItemInfo {
+      display: flex;
+      align-items: center;
+
+      gap: 8px;
+
+      max-width: 300px;
+
+      .filesListItemInfoText {
+        display: flex;
+        flex-direction: row;
+
+        max-width: calc(100% - 24px);
+
+        span {
+          color: var(--chat-file-item-exst-color);
+        }
+      }
+    }
+  }
+}
+
+.chatInputText {
+  margin-top: 4px;
 }

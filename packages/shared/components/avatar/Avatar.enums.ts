@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,11 +34,12 @@ export enum AvatarRole {
   none = "",
 }
 
-export const enum AvatarSize {
+export enum AvatarSize {
   max = "max",
   big = "big",
   medium = "medium",
   base = "base",
   small = "small",
   min = "min",
+  extraSmall = "extraSmall",
 }

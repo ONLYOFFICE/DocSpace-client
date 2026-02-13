@@ -1,0 +1,20 @@
+{
+  "DisableGeneralDescription": "Ju mund të fshini ose mund të aktivizoni përdoruesit e çaktivizuar më vonë, nëëse është e nevojshme. Kjo është e rëndësishme të keni parasysh që nuk mund të çaktivizoni përdorues si Pronari dhe vetveten.",
+  "DisableGuest": "Çaktivizoni mysafirin",
+  "DisableGuestDescription": "Nëse e çaktivizoni këtë mysafir, ata nuk do të mund të hyjnë në {{productName}}.",
+  "DisableGuests": "Çaktivizoni mysafirët",
+  "DisableGuestsDescription": "Në qoftë se i çaktivizoni këta mysafirë, ata nuk do të mund të hyjnë në {{productName}}.",
+  "DisableGuestsGeneralDescription": "Mund të fshini ose aktivizoni mysafirët e çaktivizuar më vonë, nëse është e nevojshme.",
+  "DisableUser": "Çaktivizoni përdoruesin",
+  "DisableUserDescription": "Në qoftë se çaktivizoni këtë përdorues, ata nuk do të mund të hyjnë në {{productName}}, ndërkohë që dokumentet dhe të dhënat e tyre do të mbeten të paprekura.",
+  "DisableUsers": "Çaktivizoni përdoruesit",
+  "DisableUsersDescription": "Në qoftë se e çaktivizoni këtë përdorues, ata nuk do të mund të hyjnë në {{productName}}, ndërkohë që dokumentet dhe të dhënat e tyre do të mbeten të paprekura.",
+  "EnableGuest": "Aktifizoni mysafirin",
+  "EnableGuestDescription": "Në qoftë se e aktivizoni këtë mysafir, ata do të mund të hyjnë përsëri në {{productName}}.",
+  "EnableGuests": "Aktivizoni mysafirët",
+  "EnableGuestsDescription": "Në qoftë se i aktivizoni këta mysafirë, ata do të mund të hyjnë përsëri në {{productName}}.",
+  "EnableUser": "Aktivizoni përdoruesin",
+  "EnableUserDescription": "Në qoftë se e aktivizoni këtë përdorues, ata do të mund të hyjnë përsëri në {{productName}} dhe të kenë akses në dokumentet dhe të dhënat e tyre.",
+  "EnableUsers": "Aktivizoni përdoruesit",
+  "EnableUsersDescription": "Në qoftë se i aktivizoni këta përdorues, ata do të mund të hyjnë përsëri në {{productName}} dhe të kenë akses në dokumentet dhe të dhënat e tyre."
+}

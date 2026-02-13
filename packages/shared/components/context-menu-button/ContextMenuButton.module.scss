@@ -1,10 +1,10 @@
-@import "../../styles/variables/_colors.scss";
+@use "../../styles/variables/colors";
 
 .outer {
   display: inline-block;
   position: relative;
   cursor: pointer;
-  -webkit-tap-highlight-color: #{$tap-highlight};
+  -webkit-tap-highlight-color: #{colors.$tap-highlight};
 
   &.displayIconBorder {
     border: var(--context-menu-button-border);

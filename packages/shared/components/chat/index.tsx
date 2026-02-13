@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,68 +25,137 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { observer } from "mobx-react";
 
-import { CHAT_ID } from "../../api/flows/flows.constants";
-
-import ChatHeader from "./components/chat-header";
-import ChatBody from "./components/chat-body";
-import ChatMessageBody from "./components/chat-message-body";
-import ChatInput from "./components/chat-input";
-
-import { FilesStoreContextProvider } from "./store/filesStore";
 import { MessageStoreContextProvider } from "./store/messageStore";
-import { ModelStoreContextProvider } from "./store/modelStore";
+import { ChatStoreContextProvider, useChatStore } from "./store/chatStore";
 
-import { ChatProps } from "./types";
+import type { ChatProps } from "./Chat.types";
 
-const Chat = ({
-  currentDeviceType,
-  displayFileExtension,
-  aiChatID = CHAT_ID,
-  aiSelectedFolder,
-  aiUserId,
-  vectorizedFiles,
-  user,
-  isFullScreen,
+import ChatContainer from "./components/chat-container";
+import ChatHeader from "./components/chat-header";
+import ChatMessageBody from "./components/chat-message-body";
+import { ChatNoAccessScreen } from "./components/chat-no-access-screen";
+import ChatFooter from "./components/chat-footer";
 
-  getIcon,
-}: ChatProps) => {
-  return (
-    <FilesStoreContextProvider>
-      <MessageStoreContextProvider
-        aiChatID={aiChatID}
-        aiSelectedFolder={aiSelectedFolder}
-        aiUserId={aiUserId}
-      >
-        <ModelStoreContextProvider selectedFolder={aiSelectedFolder}>
-          <ChatBody
-            isFullScreen={isFullScreen}
-            currentDeviceType={currentDeviceType}
-          >
-            <ChatHeader
-              isFullScreen={isFullScreen}
-              currentDeviceType={currentDeviceType}
-              isPanel={false}
-            />
+import { CHAT_SUPPORTED_FORMATS } from "./Chat.constants";
+
+export { CHAT_SUPPORTED_FORMATS };
+
+const Chat = observer(
+  ({
+    isLoadingChat,
+    selectedModel,
+    getIcon,
+    roomId,
+    userAvatar,
+    attachmentFile,
+    clearAttachmentFile,
+    toolsSettings,
+    isAdmin = false,
+    standalone = false,
+    aiReady = false,
+    getResultStorageId,
+    setIsAIAgentChatDelete,
+    setDeleteDialogVisible,
+    folderFormValidation,
+  }: ChatProps & { isLoadingChat: boolean }) => {
+    const { currentChat } = useChatStore();
+
+    const showEmptyScreen = !isLoadingChat && !aiReady && !currentChat;
+
+    React.useEffect(() => {
+      window.dispatchEvent(
+        new CustomEvent("select-chat", {
+          detail: {
+            chatId: currentChat?.id,
+          },
+        }),
+      );
+    }, [currentChat?.id]);
+
+    return (
+      <>
+        <ChatHeader
+          selectedModel={selectedModel}
+          isLoading={isLoadingChat}
+          getIcon={getIcon}
+          getResultStorageId={getResultStorageId}
+          roomId={roomId}
+          aiReady={aiReady}
+          setIsAIAgentChatDelete={setIsAIAgentChatDelete}
+          setDeleteDialogVisible={setDeleteDialogVisible}
+          folderFormValidation={folderFormValidation}
+        />
+        {showEmptyScreen ? (
+          <ChatNoAccessScreen
+            aiReady={aiReady}
+            standalone={standalone}
+            isPortalAdmin={isAdmin}
+          />
+        ) : (
+          <>
             <ChatMessageBody
-              displayFileExtension={displayFileExtension}
+              userAvatar={userAvatar}
+              isLoading={isLoadingChat}
               getIcon={getIcon}
-              vectorizedFiles={vectorizedFiles}
-              user={user}
-              isFullScreen={isFullScreen}
-              currentDeviceType={currentDeviceType}
+              getResultStorageId={getResultStorageId}
+              folderFormValidation={folderFormValidation}
             />
-            <ChatInput
-              currentDeviceType={currentDeviceType}
-              displayFileExtension={displayFileExtension}
+            <ChatFooter
+              attachmentFile={attachmentFile}
+              clearAttachmentFile={clearAttachmentFile}
+              isLoading={isLoadingChat}
               getIcon={getIcon}
-              vectorizedFiles={vectorizedFiles}
+              selectedModel={selectedModel}
+              toolsSettings={toolsSettings}
+              isPortalAdmin={isAdmin}
+              aiReady={aiReady}
+              standalone={standalone}
             />
-          </ChatBody>
-        </ModelStoreContextProvider>
+          </>
+        )}
+      </>
+    );
+  },
+);
+
+const ChatWrapper = (props: ChatProps) => {
+  const {
+    roomId,
+    isLoading,
+
+    initChats,
+
+    messagesSettings,
+
+    isAdmin = false,
+    standalone = false,
+    aiReady = false,
+  } = props;
+
+  const isLoadingChat = isLoading || !roomId;
+  const hasChats = initChats?.chats?.length > 0;
+
+  if (!isLoadingChat && !aiReady && !hasChats) {
+    return (
+      <ChatNoAccessScreen
+        aiReady={aiReady}
+        standalone={standalone}
+        isPortalAdmin={isAdmin}
+      />
+    );
+  }
+
+  return (
+    <ChatStoreContextProvider roomId={roomId} {...initChats}>
+      <MessageStoreContextProvider roomId={roomId} {...messagesSettings}>
+        <ChatContainer isLoadingChat={isLoadingChat}>
+          <Chat {...props} isLoadingChat={isLoadingChat} />
+        </ChatContainer>
       </MessageStoreContextProvider>
-    </FilesStoreContextProvider>
+    </ChatStoreContextProvider>
   );
 };
 
-export default Chat;
+export default ChatWrapper;

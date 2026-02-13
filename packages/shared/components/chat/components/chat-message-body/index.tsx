@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,56 +24,74 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { observer } from "mobx-react";
 import classNames from "classnames";
+import { useTranslation } from "react-i18next";
 
-import { TFile } from "../../../../api/files/types";
-import { TUser } from "../../../../api/people/types";
+import socket, { SocketCommands, SocketEvents } from "../../../../utils/socket";
 
-import { DeviceType } from "../../../../enums";
-
-import { Scrollbar } from "../../../scrollbar";
-import type { Scrollbar as CustomScrollbar } from "../../../scrollbar/custom-scrollbar";
+import { Loader, LoaderTypes } from "../../../loader";
 
 import { useMessageStore } from "../../store/messageStore";
+import { useChatStore } from "../../store/chatStore";
+
+import type { MessageBodyProps } from "../../Chat.types";
 
 import EmptyScreen from "./sub-components/EmptyScreen";
 import Message from "./sub-components/message";
 
+import { useChatScroll } from "./hooks/useChatScroll";
 import styles from "./ChatMessageBody.module.scss";
 
 const ChatMessageBody = ({
-  displayFileExtension,
-  vectorizedFiles,
-  user,
+  userAvatar,
   getIcon,
-  isFullScreen,
-  currentDeviceType,
-}: {
-  displayFileExtension: boolean;
-  vectorizedFiles: TFile[];
-  user: TUser;
-  getIcon: (size: number, fileExst: string) => string;
-  isFullScreen: boolean;
-  currentDeviceType: DeviceType;
-}) => {
-  const { messages } = useMessageStore();
-  const scrollbarRef = useRef<CustomScrollbar>(null);
+  isLoading,
+  getResultStorageId,
+  folderFormValidation,
+}: MessageBodyProps) => {
+  const {
+    messages,
+    isStreamRunning,
+    isRequestRunning,
+    fetchNextMessages,
+    addMessageId,
+  } = useMessageStore();
+  const { currentChat } = useChatStore();
 
-  const isEmpty = messages.length === 0;
+  const { t } = useTranslation(["Common"]);
 
-  // Scroll to bottom whenever messages change
+  const chatBodyRef = useRef<HTMLDivElement>(null);
+
+  const isEmpty = messages.length === 0 || isLoading;
+
   useEffect(() => {
-    if (isEmpty) return;
+    if (!currentChat?.id) return;
 
-    // Use requestAnimationFrame to ensure the DOM has been updated
-    // Method 1: Use the scrollbar instance if available
-    requestAnimationFrame(() => {
-      if (scrollbarRef.current?.scrollToBottom) {
-        scrollbarRef.current.scrollToBottom();
-      }
+    socket?.emit(SocketCommands.Subscribe, {
+      roomParts: `CHAT-${currentChat?.id}`,
     });
+
+    return () => {
+      socket?.emit(SocketCommands.Unsubscribe, {
+        roomParts: `CHAT-${currentChat?.id}`,
+      });
+    };
+  }, [currentChat?.id]);
+
+  useEffect(() => {
+    socket?.on(SocketEvents.ChatMessageId, (data) => {
+      addMessageId(data.messageId);
+    });
+  }, [addMessageId]);
+
+  useChatScroll({
+    chatBodyRef,
+    isEmpty,
+    fetchNextMessages,
+    currentChat,
+    messages,
   });
 
   return (
@@ -81,35 +99,36 @@ const ChatMessageBody = ({
       className={classNames(styles.chatMessageBody, {
         [styles.empty]: isEmpty,
       })}
+      data-testid="chat-message-body"
     >
-      {messages.length === 0 ? (
-        <EmptyScreen />
+      {isEmpty ? (
+        <EmptyScreen isLoading={isLoading} />
       ) : (
-        <Scrollbar ref={scrollbarRef} className="chat-scroll-bar">
-          <div
-            className={classNames(styles.chatMessageContainer, {
-              [styles.isFullScreen]: isFullScreen,
-            })}
-          >
-            {messages.map((message) => {
-              if (!message) return;
-              if (message.message === "") return null;
-
-              return (
-                <Message
-                  key={message.id}
-                  message={message}
-                  displayFileExtension={displayFileExtension}
-                  vectorizedFiles={vectorizedFiles}
-                  user={user}
-                  getIcon={getIcon}
-                  isFullScreen={isFullScreen}
-                  currentDeviceType={currentDeviceType}
-                />
-              );
-            })}
-          </div>
-        </Scrollbar>
+        <div
+          className={classNames(styles.chatMessageContainer)}
+          ref={chatBodyRef}
+        >
+          {messages.map((message, index) => {
+            return (
+              <Message
+                key={`${currentChat?.id}-${message.createdOn}-${index * 2}`}
+                message={message}
+                idx={index}
+                userAvatar={userAvatar}
+                isLast={index === 0}
+                getIcon={getIcon}
+                getResultStorageId={getResultStorageId}
+                folderFormValidation={folderFormValidation}
+              />
+            );
+          })}
+          {!isStreamRunning && isRequestRunning ? (
+            <div className={styles.chatLoader}>
+              <Loader type={LoaderTypes.track} />
+              {t("Common:Analyzing")}
+            </div>
+          ) : null}
+        </div>
       )}
     </div>
   );

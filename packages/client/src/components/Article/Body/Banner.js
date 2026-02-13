@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,14 +26,9 @@
 
 import React, { useEffect } from "react";
 import { observer, inject } from "mobx-react";
-import styled from "styled-components";
 
 import { CampaignsBanner } from "@docspace/shared/components/campaigns-banner";
 import { ADS_TIMEOUT } from "SRC_DIR/helpers/filesConstants";
-
-const StyledWrapper = styled.div`
-  margin-bottom: 16px;
-`;
 
 const Banner = ({
   setSubmitToGalleryDialogVisible,
@@ -45,6 +40,7 @@ const Banner = ({
   campaignConfig,
   currentCampaign,
 }) => {
+  const [isVisible, setIsVisible] = React.useState(true);
   const updateBanner = async () => {
     await getBanner();
   };
@@ -72,8 +68,16 @@ const Banner = ({
     return () => clearInterval(adsInterval);
   }, []);
 
+  useEffect(() => {
+    const isVisibleStorage = localStorage.getItem("integrationUITests");
+
+    if (isVisibleStorage) setIsVisible(false);
+  }, []);
+
+  if (!isVisible) return null;
+
   return (
-    <StyledWrapper>
+    <div style={{ marginBottom: "16px" }}>
       {campaignBackground &&
       campaignTranslate &&
       campaignConfig &&
@@ -87,7 +91,7 @@ const Banner = ({
           onClose={onClose}
         />
       ) : null}
-    </StyledWrapper>
+    </div>
   );
 };
 

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -80,7 +80,7 @@ const RemoveUserConfirmationDialog = ({
     >
       <ModalDialog.Header>{t("People:RemoveUser")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text noSelect>{t("People:RemoveUserConfirmationText")}</Text>
+        <Text>{t("People:RemoveUserConfirmationText")}</Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

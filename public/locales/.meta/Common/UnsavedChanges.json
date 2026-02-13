@@ -1,0 +1,28 @@
+{
+  "key_path": "UnsavedChanges",
+  "content": "Unsaved changes",
+  "content_en_sha1_hash": "29267269c048b5a9f836a97c23d40ba065c4b454",
+  "created_at": "2025-10-27T16:14:23.063Z",
+  "updated_at": "2025-10-27T16:24:30.449Z",
+  "comment": {
+    "text": "This text appears as the title of a dialog box, alerting the user that there are unsaved changes to their work. It's used to inform the user before navigating away from a page or closing a window where data hasn't been saved yet. The translation should convey a clear warning about potential data loss.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T16:24:30.449Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/dialogs/unsaved-changes-dialog/index.tsx",
+      "line_number": 59,
+      "context": "visible={visible}\n onClose={onClose}\n isLoading={!ready}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>{t(\"Common:UnsavedChanges\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>{t(\"Common:UnsavedChangesDescription\")}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

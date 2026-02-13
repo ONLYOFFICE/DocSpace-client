@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,13 +31,14 @@ import { useTheme } from "styled-components";
 import { isMobile } from "@docspace/shared/utils";
 import { Text } from "@docspace/shared/components/text";
 import { Badge } from "@docspace/shared/components/badge";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { globalColors } from "@docspace/shared/themes";
+import { Link } from "@docspace/shared/components/link";
 
 import { StyledBaseQuotaComponent, StyledMainTitle } from "./StyledComponent";
 import { QuotaPerRoomComponentSection } from "./sub-components/QuotaPerRoom";
 import { QuotaPerUserComponentSection } from "./sub-components/QuotaPerUser";
 import MobileQuotasComponent from "./sub-components/MobileQuotas";
+import { QuotaPerAIAgentComponentSection } from "./sub-components/QuotaPerAIAgent";
 
 const QuotaPerItemsComponent = ({ isStatisticsAvailable }) => {
   if (isMobile())
@@ -45,11 +46,13 @@ const QuotaPerItemsComponent = ({ isStatisticsAvailable }) => {
 
   return (
     <>
-      <QuotaPerRoomComponentSection isDisabled={!isStatisticsAvailable} />
+      <QuotaPerRoomComponentSection />
       <QuotaPerUserComponentSection />
+      <QuotaPerAIAgentComponentSection />
     </>
   );
 };
+
 const QuotasComponent = (props) => {
   const { t } = useTranslation("Settings");
   const theme = useTheme();
@@ -79,15 +82,16 @@ const QuotasComponent = (props) => {
       <Text className="quotas_description">
         {t("Settings:QuotasDescription")}{" "}
         {storageManagementUrl ? (
-          <ColorTheme
-            themeId={ThemeId.Link}
+          <Link
             tag="a"
             isHovered={false}
             target="_blank"
             href={storageManagementUrl}
+            color="accent"
+            dataTestId="help_center_link"
           >
             {t("Common:HelpCenter")}
-          </ColorTheme>
+          </Link>
         ) : null}
       </Text>
 

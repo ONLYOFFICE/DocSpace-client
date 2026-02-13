@@ -1,0 +1,14 @@
+services:
+  tests-ci:
+    image: management-tests
+    build:
+      context: ../..
+      dockerfile: packages/management/Dockerfile
+  tests-local:
+    image: management-tests
+    ports:
+      - "5115:5115"
+    volumes:
+      - ./__tests__:/app/packages/management/__tests__
+      - ./playwright.config.ts:/app/packages/management/playwright.config.ts
+      - ../../playwright-report/management:/app/playwright-report/management

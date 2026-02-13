@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,7 +29,7 @@ import { Trans } from "react-i18next";
 import { Text } from "@docspace/shared/components/text";
 import { HelpButton } from "@docspace/shared/components/help-button";
 
-import PeopleIcon from "PUBLIC_DIR/images/icons/16/catalog.accounts.react.svg?url";
+import type { TFunction } from "i18next";
 import SelectFileStep from "../../components/SelectFileStep";
 import SelectUsersStep from "../../components/SelectUsersStep";
 import SelectUsersTypeStep from "../../components/SelectUsersTypeStep";
@@ -37,10 +37,8 @@ import ImportStep from "../../components/ImportStep";
 import ImportProcessingStep from "../../components/ImportProcessingStep";
 import ImportCompleteStep from "../../components/ImportCompleteStep";
 
-import { TFunciton } from "../../types";
-
 export const getStepsData = (
-  t: TFunciton,
+  t: TFunction,
   isTypeSelectEmpty: boolean,
   logoText: string,
 ) => {
@@ -129,17 +127,13 @@ export const getStepsData = (
           t={t}
           serviceName="Google Workspace"
           usersExportDetails={{
-            name: t("Common:Contacts"),
-            icon: PeopleIcon,
+            name: t("InfoPanel:Users"),
           }}
           personalExportDetails={{
             name: t("Settings:GoogleDriveFiles"),
           }}
-          sharedFilesExportDetails={{
-            name: t("Settings:SharedFiles"),
-          }}
-          sharedFoldersExportDetails={{
-            name: t("Settings:SharedFolders"),
+          sharedFilesAndFoldersExportDetails={{
+            name: t("Settings:SharedFilesAndFoldersDetails"),
           }}
         />
       ),

@@ -23,14 +23,21 @@ export default defineConfig({
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
+  workers: Number(process.env.WORKERS) || (process.env.CI ? 1 : undefined),
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
+    ["dot"],
     [
-      process.env.CI ? "dot" : "html",
+      "html",
       {
         outputFolder: "../../playwright-report/login",
         open: "never",
+      },
+    ],
+    [
+      "json",
+      {
+        outputFile: "../../playwright-report/login/test-results.json",
       },
     ],
   ],
@@ -44,6 +51,12 @@ export default defineConfig({
     trace: "on-first-retry",
   },
   snapshotPathTemplate: "{testDir}/screenshots{/projectName}/{arg}{ext}",
+  expect: {
+    toHaveScreenshot: {
+      threshold: 0.16,
+      // maxDiffPixelRatio: 0.02,
+    },
+  },
 
   /* Configure projects for major browsers */
   projects: [
@@ -64,11 +77,4 @@ export default defineConfig({
       use: { ...devices["Desktop Safari"] },
     },  */
   ],
-
-  /* Run your local dev server before starting the tests */
-  webServer: {
-    command: "yarn test:start",
-    port: PORT,
-    timeout: 1000 * 60 * 5,
-  },
 });

@@ -3,7 +3,7 @@
   "content": "File upload",
   "content_en_sha1_hash": "0ace8ef1b6a975a594252501b9d36470f2bd79a6",
   "created_at": "2025-05-19T21:30:56.885Z",
-  "updated_at": "2025-05-20T09:37:56.743Z",
+  "updated_at": "2025-09-23T07:24:24.079Z",
   "comment": {
     "text": "The translation key \"FileUploadTitle\" is used to display the text \"File upload\" in a modal dialog header. It is used as a fallback title when converting a single file, and as the title for uploading a file, allowing users to select a file from their device.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Azerbaijani translation \"Fayl yükləndi\" translates to \"File uploaded\" in English, not \"File upload\". The original English phrase indicates the action of uploading a file, whereas the translation indicates the state of a file being uploaded.",
+          "suggestion": "Fayl yüklə"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -69,7 +75,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Finnish translation 'Tiedosto ladattu' translates to 'File uploaded', not 'File upload'. The original English phrase describes the action of uploading, while the translation describes a completed action.",
+          "suggestion": "Tiedoston lataus"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,7 +93,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ֆայլը վերբեռնում' (Fayly verbternum) is a verb phrase meaning 'uploading a file.' The English 'File upload' is a noun phrase describing the action of uploading a file. A more appropriate translation would be 'Ֆայլի վերբեռնում' (Fayli verbternum) which means 'File upload'.",
+          "suggestion": "Ֆայլի վերբեռնում"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -129,7 +147,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ficheiro carregado' literally translates to 'File loaded'. The correct translation for 'File upload' should be something like 'Envio de ficheiro' or 'Carregar ficheiro'.",
+          "suggestion": "Envio de ficheiro"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -153,7 +177,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'උඩුගත කරන්න' while generally understood as 'upload', is more literally 'to upload'. A more concise and common translation for 'File upload' would be 'ගොනුව උඩුගත කිරීම' (Gonuwa Udugath Karima) or simply 'උඩුගත කිරීම' (Udugath Karima).",
+          "suggestion": "ගොනුව උඩුගත කිරීම"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,13 +201,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation \"Отпремање датотеке\" literally translates to 'Sending a file'. While related to file upload, it's not the direct equivalent of 'File upload'. A more accurate translation would be 'Уплоад датотеке' or 'Прикачи датотеку'.",
+          "suggestion": "Уплоад датотеке"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation \"Otpremanje datoteke\" is a more literal translation of 'uploading a file' rather than a direct translation of 'File upload'. A more accurate translation for the context of a title would be 'Upload fajla' or 'Fajlovi'.",
+          "suggestion": "Upload fajla"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,8 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TileItem } from "@docspace/shared/components/tiles/tile-container/TileContainer.types";
-import { ContextMenuModel } from "@docspace/shared/components/context-menu/ContextMenu.types";
+import type { TileItem } from "../tile-container/TileContainer.types";
+import { ContextMenuModel } from "../../context-menu/ContextMenu.types";
 
 export type BaseTileProps = {
   /** Indicates if the room is selected */
@@ -65,6 +65,27 @@ export type BaseTileProps = {
   onLeave?: () => void;
   className?: string;
   onRoomClick?: (e: React.MouseEvent) => void;
-  checkboxContainerRef?: React.RefObject<HTMLDivElement>;
-  forwardRef?: React.RefObject<HTMLDivElement>;
+  checkboxContainerRef?: React.RefObject<HTMLDivElement | null>;
+  forwardRef?: React.RefObject<HTMLDivElement | null>;
+  /** Data test id for the tile */
+  dataTestId?: string;
+  badgeUrl?: string;
+};
+
+export type ItemProps = {
+  title?: string;
+  icon?: string;
+  logo?: {
+    original?: string;
+    large?: string;
+    medium?: string;
+    small?: string;
+    color?: string;
+    cover?: string | { data: string; id: string };
+  };
+  displayName?: string;
+};
+
+export type TileChildProps = {
+  item: ItemProps;
 };

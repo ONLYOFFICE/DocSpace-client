@@ -1,4 +1,4 @@
-@import "../../styles/_mixins.scss";
+@use "../../styles/mixins";
 
 .text {
   outline: 0;
@@ -19,7 +19,7 @@
   }
 
   &.noSelect {
-    @include no-user-select;
+    @include mixins.no-user-select;
   }
 
   &.truncate {

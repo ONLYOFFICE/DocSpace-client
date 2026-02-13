@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -40,11 +40,7 @@ import { LinkType } from "@docspace/shared/components/link";
 import { TSelectorItem } from "@docspace/shared/components/selector";
 import Filter from "@docspace/shared/api/people/filter";
 import { getMembersList } from "@docspace/shared/api/people";
-import {
-  AccountsSearchArea,
-  EmployeeType,
-  RoomsType,
-} from "@docspace/shared/enums";
+import { AccountsSearchArea, EmployeeType } from "@docspace/shared/enums";
 import { TTranslation } from "@docspace/shared/types";
 import { TUser } from "@docspace/shared/api/people/types";
 import { TGroup } from "@docspace/shared/api/groups/types";
@@ -67,7 +63,6 @@ type InviteInputProps = {
   t: TTranslation;
   roomId: string | number;
 
-  roomType: RoomsType;
   inviteItems: TSelectorItem[];
   setInviteItems: (items: TSelectorItem[]) => void;
   setAddUsersPanelVisible: (visible: boolean) => void;
@@ -77,7 +72,6 @@ type InviteInputProps = {
 const InviteInput = ({
   t,
   roomId,
-  roomType,
   inviteItems,
   setInviteItems,
   setAddUsersPanelVisible,
@@ -90,8 +84,6 @@ const InviteInput = ({
   const [dropDownWidth, setDropDownWidth] = useState(0);
   const [searchRequestRunning, setSearchRequestRunning] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
-
-  const isPublicRoomType = roomType === RoomsType.PublicRoom;
 
   const dropDownMaxHeight = usersList.length > 5 ? { maxHeight: 240 } : {};
 
@@ -120,14 +112,14 @@ const InviteInput = ({
       if (query.length >= MIN_SEARCH_VALUE) {
         const filter = Filter.getDefault();
 
-        const searchArea = isPublicRoomType
-          ? AccountsSearchArea.People
-          : AccountsSearchArea.Any;
-
         filter.role = [EmployeeType.Admin, EmployeeType.RoomAdmin];
         filter.search = query;
 
-        const users = await getMembersList(searchArea, roomId, filter);
+        const users = await getMembersList(
+          AccountsSearchArea.Any,
+          roomId,
+          filter,
+        );
 
         setUsersList(users.items);
 
@@ -140,7 +132,7 @@ const InviteInput = ({
 
       setSearchRequestRunning(false);
     },
-    [isPublicRoomType, roomId],
+    [roomId],
   );
 
   const debouncedSearch = useCallback(
@@ -169,22 +161,14 @@ const InviteInput = ({
   };
 
   const getItemContent = useCallback(
-    (item) => {
-      const {
-        avatar,
-        displayName,
-        name: groupName,
-        email,
-        id,
-        shared,
-        isGroup = false,
-      } = item;
+    (item: TUser | TGroup) => {
+      const { id, shared } = item;
 
       const addUser = () => {
         if (shared) {
           toastr.warning(t("UsersAlreadyAdded"));
         } else {
-          setInviteItems([item, ...inviteItems]);
+          setInviteItems([item, ...inviteItems] as TSelectorItem[]);
         }
 
         setInputValue("");
@@ -203,18 +187,18 @@ const InviteInput = ({
           <Avatar
             size={AvatarSize.min}
             role={AvatarRole.user}
-            source={avatar}
-            userName={groupName}
-            isGroup={isGroup}
+            source={(item as TUser).avatar}
+            userName={(item as TGroup).name}
+            isGroup={(item as TGroup).isGroup}
           />
 
           <div className="list-item_content">
             <div className="list-item_content-box">
               <SearchItemText $primary disabled={shared}>
-                {displayName || groupName}
+                {"displayName" in item ? item.displayName : item.name}
               </SearchItemText>
             </div>
-            <SearchItemText>{email}</SearchItemText>
+            <SearchItemText>{(item as TUser).email}</SearchItemText>
           </div>
           {shared ? (
             <SearchItemText $info>{t("Common:Invited")}</SearchItemText>
@@ -264,6 +248,7 @@ const InviteInput = ({
           type={LinkType.action}
           isHovered
           onClick={openUsersPanel}
+          dataTestId="template_access_settings_choose_from_list_link"
         >
           {t("Translations:ChooseFromList")}
         </StyledLink>
@@ -280,11 +265,11 @@ const InviteInput = ({
             onChange={onChange}
             placeholder={t("Files:AddAdminByNameOrEmail")}
             value={inputValue}
-            isAutoFocussed
             type={InputType.search}
             withBorder={false}
             isDisabled={isDisabled}
             onKeyDown={onKeyDown}
+            testId="template_access_settings_search_input"
           />
 
           <div className="append" onClick={onClearInput}>

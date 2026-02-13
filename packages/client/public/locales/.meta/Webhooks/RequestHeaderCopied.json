@@ -3,7 +3,7 @@
   "content": "POST request header successfully copied to clipboard",
   "content_en_sha1_hash": "ca124d3d017bd3d886527d03bb4cc89a5a901183",
   "created_at": "2025-05-19T21:30:49.793Z",
-  "updated_at": "2025-05-21T01:03:55.211Z",
+  "updated_at": "2025-05-24T02:17:55.401Z",
   "comment": {
     "text": "This translation key is used to display a message when the request headers are successfully copied to the clipboard. It appears as a button label in the UI.",
     "is_auto": true,
@@ -36,8 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'mübadilə buferinə' (to swap buffer) doesn't accurately convey the meaning of 'clipboard'. It's generally understood as 'keçmiş buferinə' or 'yaddaş buferinə' for clipboard.",
-          "suggestion": "POST sorğu başlığı uğurla keçmiş buferinə nüsxələndi"
+          "description": "The translation \"mübadilə buferinə\" is too literal. \"Buferinə\" means \"into the buffer\". A more natural translation of \"clipboard\" would be \"keçici yaddaş\" or \"qeyd siyahısı\".",
+          "suggestion": "POST sorğu başlığı uğurla keçici yaddaşa (or qeyd siyahısına) nüsxələndi"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation maintains the word order which might be slightly awkward in Azerbaijani. While not strictly incorrect, rearranging the sentence can improve readability.",
+          "suggestion": "Keçici yaddaşda (or qeyd siyahısında) POST sorğu başlığı uğurla nüsxələndi"
         }
       ],
       "approved_at": null
@@ -90,7 +95,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English content refers to the request header, while the Armenian translation refers to the request body. This is a significant translation error.",
+          "description": "The English content refers to the request header, but the Armenian translation refers to the request body (\"մարմինը\"). This is a significant mistranslation.",
           "suggestion": "POST հարցման վերագլուխը հաջողությամբ պատճենվեց սեղմատախտակում"
         }
       ],
@@ -120,8 +125,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ຄລິບບອດ' (clipboard) is spelled correctly, but might benefit from a more common Lao term depending on the target audience. While technically accurate, a simpler term could improve comprehension.",
-          "suggestion": "Consider using a more colloquial term for 'clipboard' if appropriate for the intended audience, such as 'ໜ້າຈໍ' (screen) or a more specific term for the area where the copy is placed. This is a stylistic suggestion, not a definitive error."
+          "description": "The word 'ຄລິບບອດ' is potentially misspelled. The common and more accurate term for 'clipboard' in Lao is 'ແຜ່ນກ໊ອບ'.",
+          "suggestion": "ແຜ່ນກ໊ອບ"
         }
       ],
       "approved_at": null
@@ -138,8 +143,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"klembord\" is somewhat dated. A more modern and common term would be \"knippbord\".",
-          "suggestion": "POST-aanvraagheader succesvol gekopieerd naar knippbord"
+          "description": "While technically correct, 'klembord' is an older, less common term for clipboard. 'Kopieerbord' is the more current and widely understood term.",
+          "suggestion": "POST-aanvraagheader succesvol gekopieerd naar kopieerbord"
         }
       ],
       "approved_at": null
@@ -153,19 +158,19 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation uses a full stop at the end of the sentence. While grammatically correct, it might be more consistent with other similar messages to omit it.",
-          "suggestion": "Cabeçalho da solicitação POST copiado com sucesso para a área de transferência"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'área de transferência' should be 'área de transferência'.",
+          "suggestion": "área de transferência"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -186,13 +191,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'POST ඉල්ලීමේ ශ්‍රීර්ෂකය පසුරු පුවරුවට පිටපත් විය' is not the most natural or accurate rendering of 'POST request header successfully copied to clipboard'.  'ඉල්ලීමේ' (illime) means 'request' but sounds formal in this context. A more conversational option would be 'POST දැනුම්දීමේ' (POST dhenumidde).",
-          "suggestion": "POST දැනුම්දීමේ ශ්‍රීර්ෂකය පසුරු පුවරුවට පිටපත් විය"
-        },
-        {
-          "type": "spelling",
-          "description": "While technically correct, 'පසුරු පුවරුවට' (pasuru puwaruwato) is a more formal/literal way to say 'clipboard'.  A more commonly used phrase would be 'clipboard එක'.",
-          "suggestion": "clipboard එකට"
+          "description": "The translation 'POST ඉල්ලීමේ ශ්‍රීර්ෂකය පසුරු පුවරුවට පිටපත් විය' is a literal translation and not idiomatic Sinhala. It sounds awkward. 'ඉල්ලීම' (illaim) means request, 'ශ්‍රීර්ෂකය' (shreershakaya) means header, 'පසුරු පුවරුවට' (pasuru puwaruwata) means clipboard, ' පිටපත් විය' (pitakath viya) means copied. While technically correct, it's not how a native speaker would phrase it.",
+          "suggestion": "Consider a more natural phrasing such as: 'POST ඉල්ලුමේදී, හිඩරිං පසුරු පුවරුවට සාර්ථකව පිටපත් විය' (POST illumede, hidaring pasuru puwaruwata saarthakava pitakath viya) - 'During the POST request, the header was successfully copied to the clipboard'."
         }
       ],
       "approved_at": null
@@ -208,9 +208,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'odložišče' is a valid term but might be more accurately translated as 'spomin' or 'shranišče' in the context of a clipboard. 'Odložišče' often refers to a waste disposal bin.",
-          "suggestion": "Glava zahteve POST je bila uspešno kopirana v spomin."
+          "type": "incorrect_translation",
+          "description": "The translation 'Glava zahteve POST je bila uspešno kopirana v odložišče' is technically correct but a more natural and commonly used phrasing would be preferred. 'Glava zahteve POST' is a bit literal. A better translation would convey the meaning of 'request header' more elegantly in Slovenian.",
+          "suggestion": "Uspešno je bila kopirana zahtevana glava POST v odložišče."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the passive voice ('je bila kopirana') is slightly less common in this context. Active voice could improve readability.",
+          "suggestion": "Uspešno smo kopirali glavo zahteve POST v odložišče."
         }
       ],
       "approved_at": null
@@ -221,13 +226,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"привремену меморију\" (privremenu memoriju) translates to \"temporary memory\" or \"clipboard\" in English. While it's close, \"clipboard\" is a more accurate term for the context of copying a header. \"Привремену меморију\" implies more of a system memory space rather than the user's clipboard.",
-          "suggestion": "Уклињено у међуспројектовање"
+          "description": "The Serbian translation \"Заглавље POST захтева је успешно копирано у привремену меморију\" is a literal translation and not the most natural way to express the concept in Serbian. 'Привремену меморију' (temporary memory) is not the standard term for a clipboard.",
+          "suggestion": "Успешно је копирано заглавље POST захтева у клипоард."
         },
         {
           "type": "formatting",
-          "description": "While not technically incorrect, the Serbian translation is a bit wordy and formal for a notification message.  It could be more concise.",
-          "suggestion": "Заглавље POST захтева успешно копирано у клипборд"
+          "description": "The translation uses a long sentence.  Consider breaking it down for better readability, especially in a UI.",
+          "suggestion": "Копирано заглавље POST захтева."
         }
       ],
       "approved_at": null
@@ -238,8 +243,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'privremena memorija' (temporary memory) is not the standard translation for 'clipboard' in this context. 'Clipboard' is typically translated as 'osečak' or 'bifer'. 'Privremena memorija' implies a more general memory storage.",
-          "suggestion": "Zaglavlje POST zahteva je uspešno kopirano u osekac."
+          "description": "The term \"privremena memorija\" translates to 'temporary memory' which isn't the common or understood meaning of 'clipboard' in this context. 'Clipboard' refers to the area where copied text is stored for pasting.",
+          "suggestion": "Zaglavlje POST zahteva je uspešno kopirano u isečak"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses a full stop after 'memorija'. While grammatically correct, in technical contexts, omitting it might improve readability and consistency.",
+          "suggestion": "Zaglavlje POST zahteva je uspešno kopirano u isečak"
         }
       ],
       "approved_at": null
@@ -262,13 +272,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is not quite accurate. 'POST request header' is quite technical. A more natural phrasing for Vietnamese users might be 'Tiêu đề yêu cầu POST' or 'Header yêu cầu POST'. The existing translation is understandable but less idiomatic.",
-          "suggestion": "Tiêu đề yêu cầu POST đã được sao chép thành công vào bộ nhớ tạm"
+          "description": "The translation \"Đã sao chép thành công POST request header vào bộ nhớ tạm\" is a literal translation and might sound unnatural. 'POST request header' could be better phrased to be more understandable in Vietnamese.",
+          "suggestion": "Consider alternatives like \"Đã sao chép thành công tiêu đề yêu cầu POST vào bảng nhớ tạm\" or \"Đã sao chép thành công header yêu cầu POST vào clipboard\"."
         },
         {
           "type": "formatting",
-          "description": "While technically correct, the word order in Vietnamese often benefits from some adjustment. Placing 'thành công' (successfully) before 'đã sao chép' sounds more natural.",
-          "suggestion": "Đã sao chép thành công tiêu đề yêu cầu POST vào bộ nhớ tạm"
+          "description": "The phrase 'bộ nhớ tạm' (temporary memory) is more technically accurate than 'clipboard' in some contexts. While understandable, 'clipboard' is often used interchangeably.",
+          "suggestion": "If clarity is paramount, retain 'bộ nhớ tạm'. If emphasizing ease of use, consider a more direct translation that reflects 'clipboard' as a common user term. If maintaining the original meaning, 'bảng nhớ tạm' is slightly better than 'bộ nhớ tạm'."
         }
       ],
       "approved_at": null

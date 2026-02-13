@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,27 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
-import moment from "moment";
+import { now, addToDate } from "../../../utils/date";
 
-import { isMobile } from "../../../utils/device";
+import { useIsMobile } from "../../../hooks/useIsMobile";
 
 import { Calendar } from "../../calendar";
-import { ShareCalendarProps } from "../Share.types";
-import { StyledDropDown } from "../Share.styled";
+import { DropDown } from "../../drop-down";
+import { Scrollbar } from "../../scrollbar";
 
-const StyledCalendar = styled(Calendar)`
-  position: absolute;
-  inset-inline-end: 32px;
+import type { ShareCalendarProps } from "../Share.types";
+import styles from "../Share.module.scss";
 
-  ${(props) =>
-    props.isMobile &&
-    css`
-      position: fixed;
-      bottom: 0;
-      inset-inline-start: 0;
-    `}
-`;
+const calendarHeight = 376;
+const calendarWidth = 362;
 
 const ShareCalendar = ({
   onDateSet,
@@ -52,37 +44,53 @@ const ShareCalendar = ({
   calendarRef,
   locale,
   bodyRef,
-  useDropDown,
 }: ShareCalendarProps) => {
-  const selectedDate = moment();
-  const maxDate = moment().add(10, "years");
+  const selectedDate = now();
+  const maxDate = addToDate(now(), 10, "years")!;
+
+  const isMobileView = useIsMobile();
+
+  const height = Math.min(
+    typeof window !== "undefined" ? window.innerHeight : 0,
+    calendarHeight,
+  );
 
   const calendarComponent = (
-    <StyledCalendar
-      className="share-link_calendar"
+    <Calendar
+      className={styles.calendar}
       selectedDate={selectedDate}
       setSelectedDate={onDateSet}
       onChange={closeCalendar}
-      isMobile={isMobile()}
+      isMobile={isMobileView}
       forwardedRef={calendarRef}
       locale={locale}
       minDate={selectedDate}
       maxDate={maxDate}
+      dataTestId="info_panel_share_calendar"
+      id="share_calendar"
     />
   );
 
-  return useDropDown ? (
-    <StyledDropDown
+  return (
+    <DropDown
       open
-      isDefaultMode={false}
+      topSpace={0}
+      isDefaultMode
+      directionY="both"
       forwardedRef={bodyRef}
       eventTypes={["mousedown"]}
-      withBackdrop={false}
+      className={styles.dropDown}
+      withBackdrop={isMobileView}
+      isMobileView={isMobileView}
+      withBackground={isMobileView}
+      usePortalBackdrop={isMobileView}
+      shouldShowBackdrop={isMobileView}
+      clickOutsideAction={() => closeCalendar()}
     >
-      {calendarComponent}
-    </StyledDropDown>
-  ) : (
-    calendarComponent
+      <Scrollbar style={{ height, width: calendarWidth }}>
+        {calendarComponent}
+      </Scrollbar>
+    </DropDown>
   );
 };
 

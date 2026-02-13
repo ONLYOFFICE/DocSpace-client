@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { ITooltip } from "react-tooltip";
+import { ITooltip, TooltipRefProps } from "react-tooltip";
 
 export type TTooltipPlace =
   | "top"
@@ -63,6 +63,7 @@ export type TooltipProps = Pick<
   | "noArrow"
   | "opacity"
   | "imperativeModeOnly"
+  | "delayShow"
 > & {
   /** Sets a callback function that generates the tip content dynamically */
   getContent?: ({
@@ -80,4 +81,53 @@ export type TooltipProps = Pick<
   /** Whether to allow fallback to the perpendicular axis of the preferred placement */
   fallbackAxisSideDirection?: TFallbackAxisSideDirection;
   noUserSelect?: boolean;
+  ref?: React.RefObject<TooltipRefProps | null>;
+  dataTestId?: string;
+  zIndex?: number;
+  tooltipStyle?: React.CSSProperties;
 };
+
+export type MouseEventHandler = (e: React.MouseEvent<HTMLElement>) => void;
+
+export type TooltipHandlers = {
+  anchorId: string;
+  handleMouseEnter: MouseEventHandler;
+  handleMouseLeave: MouseEventHandler;
+  handleClick: MouseEventHandler;
+};
+
+export interface WithTooltipProps {
+  title?: string;
+  tooltipContent?: React.ReactNode;
+  tooltipPlace?: TTooltipPlace;
+  tooltipFitToContent?: boolean;
+}
+
+export type OmitTooltipProps<T> = Omit<
+  T,
+  "title" | "tooltipContent" | "tooltipPlace" | "tooltipFitToContent"
+>;
+
+export function omitTooltipProps<T extends Record<string, unknown>>(
+  props: T & Partial<WithTooltipProps>,
+): OmitTooltipProps<T> {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // biome-ignore lint/correctness/noUnusedVariables: <we get these arguments from the components, but we don't pass them along>
+  const { title, tooltipContent, tooltipPlace, tooltipFitToContent, ...rest } =
+    props;
+  return rest as OmitTooltipProps<T>;
+}
+
+export type ComponentProps = OmitTooltipProps<
+  React.HTMLAttributes<HTMLElement> & {
+    onClick?: MouseEventHandler;
+    onMouseEnter?: MouseEventHandler;
+    onMouseLeave?: MouseEventHandler;
+  }
+>;
+
+declare global {
+  interface Window {
+    __systemTooltipRef?: React.RefObject<TooltipRefProps | null>;
+  }
+}

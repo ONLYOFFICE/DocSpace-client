@@ -3,7 +3,7 @@
   "content": "File content copy restriction",
   "content_en_sha1_hash": "22485d0ba5b777269282cce9513e5ec6c9422dba",
   "created_at": "2025-05-19T21:30:54.486Z",
-  "updated_at": "2025-05-21T09:09:44.634Z",
+  "updated_at": "2025-05-24T09:21:46.292Z",
   "comment": {
     "text": "This translation key is used to restrict access to a file content copy feature. It will appear as a button or link in a UI element where users can choose to copy file content.",
     "is_auto": true,
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"تقييد نسخ محتوى الملف\" is a somewhat literal translation and might sound less natural in Arabic. A more idiomatic translation emphasizing restriction would improve the user experience.",
-          "suggestion": "قد يكون \"حظر نسخ محتوى الملف\" or \"منع نسخ محتوى الملف\" more natural and user-friendly, conveying a stronger sense of restriction."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -42,8 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Fayl məzmununun nüxsəsinin məhdudlaşdırılması\" is overly literal and not the most natural way to express \"File content copy restriction\" in Azerbaijani.  'Nüxsəsinin' (of a copy) is unnecessary and adds complexity.",
-          "suggestion": "Consider a more concise and natural translation like \"Faylın köçürməsinin qadağan edilməsi\" (Prohibition of file copying) or \"Faylın surətini çıxarmaya məhdudiyyət\" (Restriction on extracting a file's copy)."
+          "description": "The translation \"Fayl məzmununun nüxsəsinin məhdudlaşdırılması\" is overly literal and complex for a user-facing key. 'Nüxsəsi' (copy) is awkward in this context. A more natural translation is needed.",
+          "suggestion": "Faylın məzmununun kopyalanmasına məhdudiyyət"
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase is a bit long and could be shortened for better readability and UI placement.",
+          "suggestion": "Fayl məzmunu kopyalama məhdudiyyəti"
         }
       ],
       "approved_at": null
@@ -54,8 +53,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ограничение за копиране съдържанието на файла' is a bit literal and could be improved for clarity and naturalness in Bulgarian. A more natural phrasing would convey the restriction on *copying* the file content.",
-          "suggestion": "Ограничение за копиране на съдържанието на файла"
+          "description": "The translation \"Ограничение за копиране съдържанието на файла\" is overly literal. A more natural translation would convey the restriction on copying file content.",
+          "suggestion": "Ограничение при копиране на файл"
         }
       ],
       "approved_at": null
@@ -96,8 +95,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Limite de copie du contenu d'un fichier\" is understandable, it's a bit verbose and doesn't perfectly capture the conciseness of 'File content copy restriction'. A more accurate and natural translation might be \"Restriction de copie de contenu\" or \"Restriction de la copie de fichier\".",
-          "suggestion": "Restriction de copie de contenu"
+          "description": "While technically correct, 'Limite de copie du contenu d'un fichier' is a bit clunky and verbose. A more natural and concise translation would be better.",
+          "suggestion": "Restriction de copie de fichier"
         }
       ],
       "approved_at": null
@@ -105,13 +104,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Ֆայլի բովանդակության պատճենման սահմանափակում' while grammatically correct, is a very literal translation. A more natural Armenian phrasing for 'File content copy restriction' might be 'Ֆայլի բովանդակության պատճենման արգելք' or 'Ֆայլի բովանդակության պատճենմանը վերաբերող սահմանափակում'.",
-          "suggestion": "Consider 'Ֆայլի բովանդակության պատճենման արգելք' or 'Ֆայլի բովանդակության պատճենմանը վերաբերող սահմանափակում'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -123,13 +116,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"ファイル内容のコピー制限 \" is a literal translation but could be improved for naturalness in Japanese. While technically correct, it sounds somewhat stiff. A more natural phrasing might consider the context of the restriction and user experience.",
-          "suggestion": "Consider alternatives like \"ファイル内容のコピー禁止\" (File content copy prohibition) or \"ファイル内容のコピーを制限しています\" (We restrict file content copying), depending on the intended nuance."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -141,23 +128,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'ໄຟລ໌' (file) should be consistently spelled throughout the translation.",
-          "suggestion": "No change needed, the spelling is correct."
-        },
-        {
-          "type": "grammar",
-          "description": "While grammatically correct, the translation could be slightly more natural. Consider rephrasing for improved flow.",
-          "suggestion": "ການຈຳກັດການຖ່າຍຖອນເນື້ອໃນໄຟລ໌"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'restriction' can have multiple nuances. While 'ການຈຳກັດ' (kan jam-kid) is a valid translation, it might be overly formal or strong depending on the intended meaning of 'restriction'.",
-          "suggestion": "Consider alternatives like 'ຂໍ້ກຳນົດ' (kho kam-nod) for 'regulation' or 'ກົນໄກ' (gon-mai) for 'mechanism' if they fit the context better."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -208,8 +179,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'තහනම' (tahanama) is a valid word but its usage might be slightly formal for a user interface label. A more common and slightly less formal alternative might be better.",
-          "suggestion": "ගොනු පිටපත් කිරීමේ සීමාව (Gonu pitapatha karimē simavā)"
+          "description": "The word 'තහනම' (tahanama) while generally correct, can be slightly formal for this context. A more common and slightly less formal phrasing might be more suitable.",
+          "suggestion": "ගොනු අන්තර්ගත පිටපත් කිරීමේ තහනම"
         }
       ],
       "approved_at": null
@@ -232,13 +203,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Рестрикција копије садржаја датотеке' is technically correct but sounds overly formal and literal. 'Рестрикција' is a loanword from English and not the most natural choice in this context.",
+          "description": "The term \"Рестрикција\" (Restrikcija) is a direct transliteration of 'restriction' and might not be the most natural or easily understood term in Serbian. While technically correct, a more common and accessible term would improve clarity.",
           "suggestion": "Ограничење копирања садржаја датотеке"
-        },
-        {
-          "type": "formatting",
-          "description": "While technically not incorrect, using a single, longer sentence might not be ideal for UI elements. Breaking it up could improve readability.",
-          "suggestion": "Ограничење копирања садржаја датотеке."
         }
       ],
       "approved_at": null

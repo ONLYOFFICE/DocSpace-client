@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import { RadioButton } from ".";
 
 const baseProps = {
@@ -54,7 +54,7 @@ describe("<RadioButton />", () => {
   });
 
   it("calls onClick handler when clicked and onChange is not provided", () => {
-    const onClick = jest.fn();
+    const onClick = vi.fn();
     renderComponent({ onClick, isChecked: false });
 
     const radio = screen.getByRole("radio");
@@ -69,7 +69,7 @@ describe("<RadioButton />", () => {
     const label = screen.getByTestId("radio-button");
 
     expect(radio).toBeDisabled();
-    expect(label).toHaveStyle({ cursor: "default" });
+    expect(label.className).toContain("disabled");
   });
 
   it("accepts and applies custom className", () => {
@@ -85,7 +85,7 @@ describe("<RadioButton />", () => {
     renderComponent({ style: customStyle });
 
     const label = screen.getByTestId("radio-button");
-    expect(label).toHaveStyle(customStyle);
+    expect(label.style.marginTop).toBe("10px");
   });
 
   it("handles orientation prop", () => {
@@ -115,7 +115,7 @@ describe("<RadioButton />", () => {
   });
 
   it("calls onChange when provided", () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     renderComponent({ onChange });
 
     const radio = screen.getByRole("radio");

@@ -3,7 +3,7 @@
   "content": "Select next item up",
   "content_en_sha1_hash": "5f64a2463187ada6fc34e1aee18d04b790dc954c",
   "created_at": "2025-05-19T21:30:55.095Z",
-  "updated_at": "2025-05-21T10:22:29.896Z",
+  "updated_at": "2025-05-24T10:31:50.048Z",
   "comment": {
     "text": "This translation key is used to display the label for a \"Select next item up\" hotkey action in the UI. It appears as a button label and is part of the selection block component in the HotkeysPanel.",
     "is_auto": true,
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'حدد العنصر التالي لأعلى' while understandable, isn't the most natural or idiomatic way to express 'Select next item up' in Arabic. It's a literal translation and lacks nuance. A more common phrasing might focus on moving to the previous item in a list.",
-          "suggestion": "اختر العنصر الذي يسبقه"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -42,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Yuxarıdakı növbəti elementi seçin' while understandable, doesn't perfectly capture the meaning of 'Select next item up' in the context of hotkeys. It's a bit literal. A more natural phrasing would emphasize navigation.",
-          "suggestion": "Yuxarıdakı elementə keç"
+          "description": "The translation 'Yuxarıdakı növbəti elementi seçin' is a literal translation that doesn't quite capture the idiomatic meaning of 'Select next item up' in a UI context. It sounds overly formal and verbose.",
+          "suggestion": "Consider a more natural phrasing like 'Yuxarı elementə keç' or 'Yuxarıdakı elementə seçin'."
         }
       ],
       "approved_at": null
@@ -54,7 +48,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Изберете следващия елемент нагоре' while literally meaning 'Select the next element up,' isn't the most natural or precise translation of 'Select next item up' in the context of hotkeys. It sounds slightly awkward. A more idiomatic translation would be something like 'Изберете предходния елемент' or 'Изберете горния елемент'.",
+          "description": "The translation 'Изберете следващия елемент нагоре' is too literal and doesn't flow naturally in Bulgarian for a user interface element like a hotkey. It implies 'up' in a physical sense.",
           "suggestion": "Изберете предходния елемент"
         }
       ],
@@ -63,7 +57,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Select next item up' implies selecting the item *above* the currently selected one in a list. The Czech translation 'Vybrat další položku nahoru' literally translates to 'Select next item up/above' which isn't quite as precise. It could be interpreted as selecting the next item in a general upward direction, not specifically in a hierarchical list.",
+          "suggestion": "Consider a more contextually accurate translation like 'Vybrat položku výše' (Select item above) or 'Vybrat položku s vyšším číslem' (Select item with a higher number) depending on the specific UI element."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -78,13 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Επιλέξτε το επόμενο στοιχείο επάνω' is a literal translation of 'Select next item up' but doesn't convey the intended meaning in a natural Greek way, especially in a UI context. 'Επάνω' implies a vertical direction, which might not be the case for hotkeys. It could be misinterpreted.",
+          "description": "The translation \"Επιλέξτε το επόμενο στοιχείο επάνω\" while literally correct, doesn't fully capture the nuance of 'Select next item up' in the context of hotkeys. 'Επάνω' implies physically upwards, which may not be the intended meaning. A more appropriate translation focusing on the order/sequence is needed.",
           "suggestion": "Επιλέξτε το επόμενο στοιχείο προς τα πάνω"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "A more concise and idiomatic translation might be better suited for a hotkeys panel. The current translation is a bit verbose.",
-          "suggestion": "Επόμενο στοιχείο"
         }
       ],
       "approved_at": null
@@ -95,7 +90,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Seleccionar el siguiente elemento hacia arriba\" is a literal translation but doesn't convey the intended meaning of 'Select next item up' in the context of hotkeys. It sounds awkward.",
+          "description": "The translation 'Seleccionar el siguiente elemento hacia arriba' is a literal translation that doesn't fully capture the nuance of 'Select next item up' in a hotkeys context. It sounds slightly unnatural.",
           "suggestion": "Seleccionar elemento anterior"
         }
       ],
@@ -107,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Valitse seuraava kohde yltä' doesn't accurately convey the meaning of 'Select next item up.' 'Yltä' literally means 'from above' which isn't the intended meaning in this context. It would be more appropriate to convey 'up' as 'ylöspäin' or 'alempaa'.",
-          "suggestion": "Valitse seuraava kohde ylöspäin"
+          "description": "The translation \"Valitse seuraava kohde yltä\" is not the best representation of 'Select next item up'. 'Yltä' literally means 'from above' which doesn't convey the intended meaning of selecting the previous item in a list or hierarchy.",
+          "suggestion": "Valitse edellinen kohde"
         }
       ],
       "approved_at": null
@@ -119,7 +114,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Sélectionner l'élément suivant vers le haut\" is a literal translation that doesn't quite capture the intended meaning of \"Select next item up\". It's a bit clunky and less idiomatic in French.",
+          "description": "The translation 'Sélectionner l'élément suivant vers le haut' is not the most natural or accurate translation of 'Select next item up'. It's too literal.",
           "suggestion": "Sélectionner l'élément précédent"
         }
       ],
@@ -131,7 +126,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ընտրեք հաջորդ միավորը աջ կողմում' doesn't accurately convey the meaning of 'Select next item up'. The phrase 'աջ կողմում' (to the right) is misplaced and changes the meaning. The correct direction is 'up' which does not have a direct equivalent of location in this context.",
+          "description": "The translation 'Ընտրեք հաջորդ միավորը աջ կողմում' does not accurately convey the meaning of 'Select next item up'. The phrase 'աջ կողմում' (to the right) is incorrect in this context. 'Up' implies moving to a higher position or a previous one in a list, not to the right.",
           "suggestion": "Ընտրեք հաջորդ միավորը վերևում"
         }
       ],
@@ -143,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Selezionare l'elemento successivo in alto\" is a literal translation and doesn't convey the intended meaning of 'Select next item up' in a user interface context. It's a bit clunky and doesn't sound natural.",
-          "suggestion": "Consider a more idiomatic translation such as \"Seleziona l'elemento precedente\" or \"Seleziona l'elemento di sopra\"."
+          "description": "The translation 'Selezionare l'elemento successivo in alto' doesn't accurately convey the meaning of 'Select next item up'. 'In alto' implies a literal upward direction, while the English phrase refers to selecting the preceding item in a list or sequence.",
+          "suggestion": "Selezionare l'elemento precedente"
         }
       ],
       "approved_at": null
@@ -154,9 +149,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The parenthesis \"(\" after '上' seems unnecessary and might disrupt readability in a user interface. It's not standard for UI text in Japanese.",
-          "suggestion": "次のアイテムを選択（上） -> 次のアイテムを選択"
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Select next item up' implies selecting the item above the currently selected item. The Japanese translation, \"次のアイテムを選択（上）\", while including (上) for 'up', doesn't fully convey the 'next' aspect. A more accurate translation would specify 'previous' item, as 'up' can be ambiguous depending on the UI context.",
+          "suggestion": "次のアイテムを選択（前）"
         }
       ],
       "approved_at": null
@@ -167,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '위로 다음 항목 선택' doesn't fully convey the meaning of 'Select next item up'.  '위로' implies 'upwards', but the English phrase means selecting the previous item in a list or sequence.",
-          "suggestion": "이전 항목 선택 (Ijeon hang'eom seontaek)"
+          "description": "The translation \"위로 다음 항목 선택\" is a literal translation and doesn't convey the intended meaning of 'Select next item up' in a user interface context. It sounds awkward and unnatural.",
+          "suggestion": "Consider a more natural phrasing like \"이전 항목 선택\" (select previous item) or \"위 항목 선택\" (select item above), depending on the precise UI interaction."
         }
       ],
       "approved_at": null
@@ -179,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ເລືອກລາຍການຕໍ່ໄປ' literally translates to 'Select next item'. The English phrase 'Select next item up' implies selecting an item above the currently selected one, typically in a list or hierarchy. The Lao translation doesn't convey the 'up' directional aspect.",
-          "suggestion": "ເລືອກລາຍການຂຶ້ນໜຶ່ງ"
+          "description": "The Lao translation 'ເລືອກລາຍການຕໍ່ໄປ' translates to 'Select next item'. The English 'Select next item up' implies moving up a list or hierarchy.  'ຕໍ່ໄປ' specifically means 'next'.",
+          "suggestion": "ເລືອກລາຍການຂຶ້ນເທິງ"
         }
       ],
       "approved_at": null
@@ -191,7 +186,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Izvēlēties nākamo vienumu uz augšu' is a literal translation but doesn't convey the intended meaning of navigating hotkeys. 'Up' in this context refers to a list, not a physical direction.",
+          "description": "The translation 'Izvēlēties nākamo vienumu uz augšu' is a literal translation and doesn't quite convey the meaning of 'Select next item up' in a user interface context. It's a bit clunky.",
           "suggestion": "Izvēlēties iepriekšējo vienumu"
         }
       ],
@@ -203,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Kies het volgende item omhoog' is not the most natural or accurate translation of 'Select next item up'. While 'omhoog' conveys 'up', it's a bit literal and doesn't sound idiomatic. It implies movement upwards, rather than selection.",
-          "suggestion": "Een betere vertaling zou zijn: 'Selecteer het item erboven' or 'Selecteer het volgende item naar boven'."
+          "description": "The translation 'Kies het volgende item omhoog' doesn't perfectly convey the meaning of 'Select next item up'. 'Omhoog' (up) can be ambiguous. A more accurate translation would reflect moving to the previous item in a list or selection.",
+          "suggestion": "Select a previous option: 'Select het vorige item' or 'Select de vorige optie'"
         }
       ],
       "approved_at": null
@@ -212,13 +207,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Zaznacz kolejny element powyżej' is a literal translation and not the most natural way to express 'Select next item up' in Polish in a UI context. It sounds slightly awkward.",
-          "suggestion": "Zaznacz element powyżej"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -227,7 +216,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Selecionar o próximo item acima\" is not the most natural or accurate rendering of \"Select next item up\". While technically correct, it sounds a bit awkward in Portuguese.  A better translation would convey the 'up' direction in a more idiomatic way.",
+          "description": "The translation 'Selecionar o próximo item acima' is a literal translation and doesn't quite convey the meaning of 'Select next item up' in the context of hotkeys. It sounds slightly awkward.",
           "suggestion": "Selecionar item anterior"
         }
       ],
@@ -239,7 +228,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Selecionar o próximo item acima' is a literal translation but doesn't convey the intended meaning of navigating a list upwards using hotkeys. It implies selecting an item *above* the current one, rather than the previous one in a sequence.",
+          "description": "The translation 'Selecionar o próximo item acima' is not the most natural or accurate translation of 'Select next item up'. 'Acima' implies a literal 'above' which isn't the intended meaning.",
           "suggestion": "Selecionar item anterior"
         }
       ],
@@ -251,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Selectează următorul element de deasupra' is a literal translation and doesn't accurately convey the meaning of 'Select next item up' in the context of hotkeys. It sounds awkward.",
-          "suggestion": "Selectează elementul precedent"
+          "description": "The translation \"Selectează următorul element de deasupra\" is a literal translation that doesn't convey the intended meaning of 'Select next item up' in the context of hotkeys. It sounds awkward.",
+          "suggestion": "Selectează elementul anterior"
         }
       ],
       "approved_at": null
@@ -263,13 +252,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Выделить следующий объект сверху' is too literal and doesn't convey the intended meaning of 'Select next item up' in the context of hotkeys. 'Object' isn't the correct term for an item in a hotkeys panel.",
+          "description": "The translation 'Выделить следующий объект сверху' is too literal and doesn't convey the meaning of 'Select next item up' in the context of hotkeys. 'Object' is also too general. It should be 'элемент' (element).",
           "suggestion": "Выбрать предыдущий элемент"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'сверху' (above/top) implies a vertical direction, which is not relevant to selecting the previous item in a list of hotkeys. The 'up' in the English phrase refers to the position in the list, not a physical location.",
-          "suggestion": "Removing 'сверху' and rephrasing the sentence."
         }
       ],
       "approved_at": null
@@ -280,13 +264,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ඉහළ ඊළඟ අථකය තෝරන්න\" doesn't accurately convey the meaning of \"Select next item up\". 'අථකය' (athakaya) translates to 'attribute' or 'property' and isn't suitable in this context.  The intended meaning is to move to the previous item in a list or panel.",
-          "suggestion": "A more accurate translation would be something like \"ඊළඟ ඉස්තරුව පైన තෝරන්න\" (eelagena istharuvapine thooranna) - which translates to 'Select the item above the next one' or something similar conveying the concept of moving up in a sequence. Another option might be \"ඉහළ ඊළඟ තේරීම” (ihala eelagena thheerima) which means 'Select the next selection above'."
-        },
-        {
-          "type": "spelling",
-          "description": "While not definitively incorrect, 'අථකය' (athakaya) is a less common and potentially confusing word. It's more likely users wouldn't understand its intent.",
-          "suggestion": "Avoid using 'අථකය' and use a more common and direct term relating to selection or item."
+          "description": "The translation \"ඉහළ ඊළඟ අථකය තෝරන්න\" doesn't accurately convey the meaning of \"Select next item up.\" The word 'අථකය' (athakaya) is likely a misinterpretation. It translates to something like 'property' or 'attribute', which isn't suitable in this context.  The intended meaning is to select the item *above* the currently selected item in a list.",
+          "suggestion": "Possible suggestions include: \"ඊළඟ ඉහළ වරය තෝරන්න\" (eelaga ihala waraya thoranna - Select the next item above), or \"ඉහළ ඇති වරය තෝරන්න\" (ihala athi waraya thoranna - Select the item above)."
         }
       ],
       "approved_at": null
@@ -294,13 +273,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Vybrať ďalšiu položku hore' while technically correct, doesn't fully convey the nuance of 'Select next item up' in the context of hotkeys. 'Up' refers to a hierarchical or list-based selection. The translation is too literal.",
-          "suggestion": "Consider a phrasing like 'Vybrať položku o jednu úroveň nahor' or 'Vybrať položku vyššie' which better reflects the intended meaning within a hotkey panel."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -309,8 +282,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Izberi naslednji predmet zgoraj' is a literal translation that doesn't quite capture the nuance of 'Select next item up' in a user interface context. It sounds a bit awkward and technical.",
-          "suggestion": "Izberi predhodni element"
+          "description": "The translation 'Izberi naslednji predmet zgoraj' is not the most natural or idiomatic way to express 'Select next item up' in Slovenian. It's too literal. A better phrasing would focus on movement or selection within a list/group.",
+          "suggestion": "Consider 'Izberi predhodni element' or 'Izberi element nad tem'."
         }
       ],
       "approved_at": null
@@ -321,8 +294,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Одабери следећу ставку горе' doesn't fully convey the meaning of 'Select next item up'. 'Ставку' (stavku) refers to 'item', but 'горе' (gore) means 'up' as a location, not in the context of selecting the previous item in a list. A better translation would imply moving to the previous item in a sequence or list.",
-          "suggestion": "Одабери претходну ставку"
+          "description": "The translation 'Одабери следећу ставку горе' is a literal translation but doesn't convey the intended meaning in a natural way for a UI element like a hotkey panel. It sounds overly formal and slightly awkward.",
+          "suggestion": "Избери производ претходну"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation should be concise for a hotkey label. 'Одабери' is a bit verbose.",
+          "suggestion": "Избери претходну"
         }
       ],
       "approved_at": null
@@ -333,8 +311,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Odaberi sledeću stavku gore' doesn't accurately convey the meaning of 'Select next item up'. 'Stavka' refers to an item or clause, which isn't quite the right context for a list of hotkeys. 'Up' is also not naturally translated.",
-          "suggestion": "Odaberi prethodni unos"
+          "description": "The translation 'Odaberi sledeću stavku gore' doesn't accurately convey the meaning of 'Select next item up.' 'Stavka' translates to 'item' or 'line' but in this context, it's unclear. 'Up' implies moving up a list or hierarchy.",
+          "suggestion": "Odaberi prethodni element"
+        },
+        {
+          "type": "spelling",
+          "description": "While technically correct, 'gore' is a less natural way to express 'up' in this context.",
+          "suggestion": "Consider removing 'gore' entirely, or using 'navgore' if emphasizing upward movement."
         }
       ],
       "approved_at": null
@@ -345,8 +328,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Sıradaki öğeyi yukarı doğru seç' is not the most natural or idiomatic way to express 'Select next item up' in Turkish. While technically correct, it's a bit literal and clunky.",
-          "suggestion": "Consider 'Yukarıdaki öğeyi seç' or 'Bir üst öğeyi seç'."
+          "description": "The translation 'Sıradaki öğeyi yukarı doğru seç' is not the most natural or idiomatic way to express \"Select next item up\" in Turkish. While technically correct, it feels a bit clunky.",
+          "suggestion": "Öğeyi bir yukarı seç"
+        },
+        {
+          "type": "formatting",
+          "description": "The 'doğru' in 'yukarı doğru seç' adds unnecessary length and complexity.  The suggestion removes it.",
+          "suggestion": null
         }
       ],
       "approved_at": null
@@ -357,7 +345,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Вибрати наступний елемент угорі' doesn't accurately convey the meaning of 'Select next item up'. 'Угорі' implies a physical position (at the top), while the English phrase refers to the item above in a list or sequence. A more appropriate translation would convey the concept of 'next in the sequence' or 'previous' depending on the context.",
+          "description": "The translation 'Вибрати наступний елемент угорі' doesn't quite capture the nuance of 'Select next item up'. 'Угорі' literally means 'upwards' or 'at the top' and isn't the most natural way to express selecting the item above in a list or sequence. It's functionally correct, but stylistically awkward.",
           "suggestion": "Вибрати попередній елемент"
         }
       ],
@@ -369,7 +357,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Chọn mục tiếp theo bên trên' doesn't fully capture the meaning of 'Select next item up'. 'Bên trên' literally means 'above' and doesn't convey the sense of selecting the previous item in a list or sequence. It suggests a physical location rather than a selection order.",
+          "description": "The translation 'Chọn mục tiếp theo bên trên' doesn't accurately convey the meaning of 'Select next item up'. 'Bên trên' (above) isn't the correct spatial relation. It should imply moving to the previous item in a list or selection.",
           "suggestion": "Chọn mục phía trước"
         }
       ],
@@ -381,8 +369,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '向上选择下一个项目' doesn't quite capture the nuance of 'Select next item up.' It's a literal translation that might be slightly confusing to a user. 'Up' implies a specific directional relationship.",
-          "suggestion": "考虑使用更自然的表达方式，例如“向上移动选择” 或 “选择上一个项目” (choose the previous item). The best choice depends on the specific UI context."
+          "description": "The translation '向上选择下一个项目' doesn't fully convey the meaning of 'Select next item up'.  '向上' (upward) is accurate, but '项目' (project/item) feels too formal and doesn't quite capture the nuance of selecting an option in a list or panel. It would be more appropriate to use a word representing 'option' or 'entry'.",
+          "suggestion": "向上选择上一个选项"
         }
       ],
       "approved_at": null

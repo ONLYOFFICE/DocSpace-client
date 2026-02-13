@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,37 +34,10 @@ import {
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import { Link, LinkType } from "@docspace/shared/components/link";
-import styled from "styled-components";
 
-import DialogStore from "SRC_DIR/store/contacts/DialogStore";
 import { TChangeUserTypeDialogData } from "SRC_DIR/helpers/contacts";
 import { getChangeTypeKey } from "./getChangeTypeKey";
-
-interface TStore {
-  peopleStore: {
-    dialogStore: DialogStore;
-  };
-}
-
-const StyledBody = styled.div`
-  .note-text {
-    margin: 0;
-  }
-
-  .warning-text {
-    margin: 16px 0;
-    color: ${(props) => props.theme.client.settings.backup.warningColor};
-  }
-
-  .body-text {
-    margin-top: 8px;
-  }
-
-  .body-link {
-    display: block;
-    margin-top: 12px;
-  }
-`;
+import styles from "./ChangeUserType.module.scss";
 
 type ChangeUserTypeDialogProps = {
   visible: boolean;
@@ -74,10 +47,10 @@ type ChangeUserTypeDialogProps = {
   secondType: string;
   onClose: VoidFunction;
   onChangeUserType: VoidFunction;
-  personalUserFolderTitle?: string;
-  setDataReassignmentDialogVisible: (visible: boolean) => void;
-  setDialogData: (data: any) => void;
-  dialogData: TChangeUserTypeDialogData;
+
+  setDataReassignmentDialogVisible?: (visible: boolean) => void;
+  setDialogData?: (data: unknown) => void;
+  dialogData?: TChangeUserTypeDialogData;
   isDowngradeType: boolean;
   isDowngradeToUser: boolean;
   isCurrentUserOwner?: boolean;
@@ -91,7 +64,7 @@ const ChangeUserTypeDialog = ({
   secondType,
   onClose,
   onChangeUserType,
-  personalUserFolderTitle,
+
   setDataReassignmentDialogVisible,
   setDialogData,
   dialogData,
@@ -107,7 +80,7 @@ const ChangeUserTypeDialog = ({
     reassignUserData,
     cancelReassignment,
     needReassignData,
-  } = dialogData;
+  } = dialogData!;
 
   const { t } = useTranslation(["ChangeUserTypeDialog", "People", "Common"]);
 
@@ -115,7 +88,7 @@ const ChangeUserTypeDialog = ({
   const translationValues = {
     userName: isSingleUser ? userNames[0] : undefined,
     membersSection: t("Common:Members"),
-    documentsSection: t("Common:MyFilesSection"),
+    documentsSection: t("Common:MyDocuments"),
     productName: t("Common:ProductName"),
     secondType,
   };
@@ -127,7 +100,7 @@ const ChangeUserTypeDialog = ({
   );
 
   const onClickReassignData = (currentUserAsDefault?: boolean) => {
-    setDialogData({
+    setDialogData?.({
       user,
       getReassignmentProgress,
       reassignUserData,
@@ -137,7 +110,7 @@ const ChangeUserTypeDialog = ({
       noRoomFilesToMove: true,
     });
 
-    setDataReassignmentDialogVisible(true);
+    setDataReassignmentDialogVisible?.(true);
 
     onClose();
   };
@@ -156,12 +129,12 @@ const ChangeUserTypeDialog = ({
     return (
       <>
         {!isDowngradeToUser ? (
-          <Text className="warning-text" fontSize="16px" fontWeight={700}>
+          <Text className={styles.warningText} fontSize="16px" fontWeight={700}>
             {t("Common:Warning")}
           </Text>
         ) : null}
 
-        <Text className="body-text">
+        <Text className={styles.bodyText}>
           {isDowngradeToUser ? (
             <Trans
               i18nKey="DataReassignmentInfo"
@@ -174,7 +147,7 @@ const ChangeUserTypeDialog = ({
                 i18nKey="PersonalDataDeletion"
                 ns="ChangeUserTypeDialog"
                 t={t}
-                values={{ sectionName: personalUserFolderTitle }}
+                values={{ sectionName: t("Common:MyDocuments") }}
                 components={{
                   1: <span style={{ fontWeight: 600 }} />,
                 }}
@@ -185,7 +158,7 @@ const ChangeUserTypeDialog = ({
                   i18nKey="DataReassignmentWithFilesDeletion"
                   ns="ChangeUserTypeDialog"
                   t={t}
-                  values={{ sectionName: personalUserFolderTitle }}
+                  values={{ sectionName: t("Common:MyDocuments") }}
                   components={{
                     1: <span style={{ fontWeight: 600 }} />,
                   }}
@@ -197,7 +170,7 @@ const ChangeUserTypeDialog = ({
 
         {needReassignData ? (
           <Link
-            className="body-link"
+            className={styles.bodyLink}
             type={LinkType.action}
             fontSize="13px"
             fontWeight={600}
@@ -223,7 +196,7 @@ const ChangeUserTypeDialog = ({
       );
 
     return (
-      <StyledBody>
+      <div>
         <Text>
           <Trans
             i18nKey="ChangeUserTypeMessage"
@@ -233,7 +206,7 @@ const ChangeUserTypeDialog = ({
           />
         </Text>
         {!isCurrentUserOwner ? (
-          <Text className="note-text">
+          <Text className={styles.noteText}>
             <Trans
               i18nKey="ChangeUserTypeNote"
               ns="ChangeUserTypeDialog"
@@ -246,7 +219,7 @@ const ChangeUserTypeDialog = ({
           </Text>
         ) : null}
         {isDowngradeType ? getDowngradeContent() : null}
-      </StyledBody>
+      </div>
     );
   };
 
@@ -269,6 +242,7 @@ const ChangeUserTypeDialog = ({
           primary
           onClick={onChangeType}
           isLoading={isRequestRunning}
+          testId="change_user_type_dialog_confirm"
         />
         <Button
           id="change-user-type-modal_cancel"
@@ -277,6 +251,7 @@ const ChangeUserTypeDialog = ({
           scale
           onClick={onClose}
           isDisabled={isRequestRunning}
+          testId="change_user_type_dialog_cancel"
         />
       </ModalDialog.Footer>
     </ModalDialog>
@@ -288,13 +263,13 @@ export default inject(({ peopleStore, userStore }: TStore) => {
     setDataReassignmentDialogVisible,
     setDialogData,
     data: dialogData,
-  } = peopleStore.dialogStore;
+  } = peopleStore.dialogStore!;
   const { user } = userStore;
 
   return {
     setDataReassignmentDialogVisible,
     setDialogData,
     dialogData,
-    isCurrentUserOwner: user.isOwner,
+    isCurrentUserOwner: user!.isOwner,
   };
 })(observer(ChangeUserTypeDialog));

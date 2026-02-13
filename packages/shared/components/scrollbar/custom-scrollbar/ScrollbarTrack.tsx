@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -106,11 +106,11 @@ class ScrollbarTrack extends React.Component<ScrollbarTrackProps, unknown> {
 
   public render(): React.ReactElement<unknown> | null {
     const {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      // biome-ignore lint/correctness/noUnusedVariables: used in destructuring to exclude from props
       elementRef,
 
       axis,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      // biome-ignore lint/correctness/noUnusedVariables: used in destructuring to exclude from props
       onClick,
 
       ...props

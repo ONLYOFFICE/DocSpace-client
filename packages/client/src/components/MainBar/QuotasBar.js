@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -53,20 +53,26 @@ const QuotasBar = ({
   };
 
   const getTenantCustomQuota = () => {
-    if (!isAdmin) return t("RemoveFilesOrContactToUpgradeQuota");
+    if (!isAdmin)
+      return t("RemoveFilesOrContactToUpgradeQuota", {
+        productName: t("Common:ProductName"),
+      });
 
     return (
-      <Trans i18nKey="TenantCustomQuotaDescription" t={t}>
-        You can remove the unnecessary files or change quota in the
-        <Link
-          fontSize="12px"
-          fontWeight="400"
-          color={currentColorScheme?.main?.accent}
-          onClick={onClickAction}
-        >
-          Storage management settings.
-        </Link>
-      </Trans>
+      <Trans
+        t={t}
+        i18nKey="TenantCustomQuotaDescription"
+        components={{
+          1: (
+            <Link
+              fontSize="12px"
+              fontWeight="400"
+              color={currentColorScheme?.main?.accent}
+              onClick={onClickAction}
+            />
+          ),
+        }}
+      />
     );
   };
 
@@ -80,9 +86,6 @@ const QuotasBar = ({
       <Trans
         t={t}
         i18nKey="UserTariffAlmostReachedForAdmins"
-        values={{
-          productName: t("Common:ProductName"),
-        }}
         components={{
           1: (
             <Link
@@ -99,7 +102,8 @@ const QuotasBar = ({
   };
 
   const getUserTariffLimit = () => {
-    if (!isAdmin) return t("UserTariffReached");
+    if (!isAdmin)
+      return t("UserTariffReached", { productName: t("Common:ProductName") });
 
     return (
       <Trans
@@ -213,6 +217,9 @@ const QuotasBar = ({
       <Trans
         t={t}
         i18nKey="RoomQuotaDescription"
+        values={{
+          productName: t("Common:ProductName"),
+        }}
         components={{
           1: (
             <Link
@@ -310,6 +317,7 @@ const QuotasBar = ({
       opacity={1}
       onLoad={onLoad}
       onAction={onCloseAction}
+      showIcon
     />
   ) : null;
 };

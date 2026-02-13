@@ -3,7 +3,7 @@
   "content": "Enable this setting to disable downloads and content copying for users with the \"{{role}}\" role.",
   "content_en_sha1_hash": "d2ad963c095604e49bab1866809e7b2772f3a3e1",
   "created_at": "2025-05-19T21:30:56.829Z",
-  "updated_at": "2025-05-20T09:38:04.499Z",
+  "updated_at": "2025-08-12T19:46:25.850Z",
   "comment": {
     "text": "This translation key is used to display a descriptive text that explains the purpose of a setting to restrict downloads and content copying, particularly for users with a specific role. It appears in a dialog box where users can adjust this setting.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/VirtualDataRoomBlock.js",
-      "line_number": 159,
+      "line_number": 162,
       "context": "/>\n </Block>\n <Block\n headerText={t(\"RestrictCopyAndDownload\")}\n bodyText={\n <Trans t={t} i18nKey=\"RestrictCopyAndDownloadDescription\">\n Enable this setting to disable downloads and content copying for\n users with the {{ role }} role.\n </Trans>\n }\n onChange={onChangeRestrictCopyAndDownload}",
       "module": "/packages/client"
     }
@@ -33,13 +33,25 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Azerbaijani translation begins with \"Enable this setting\" which is a direct translation. A more natural phrasing would be to rephrase the beginning of the sentence to align better with typical Azerbaijani sentence structure. Although not incorrect, it sounds somewhat awkward.",
+          "suggestion": "\"{{role}}\" rolu olan istifadəçilər üçün endirmə və məzmunun kopyalanmasını məhdudlaşdırmaq üçün bu parametri aktivləşdirin."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The quotation marks around \"{{role}}\" are different in the English and Bulgarian versions. English uses double quotes, while Bulgarian uses double angled quotes.",
+          "suggestion": "Replace \"{{role}}\" with \"{{role}}\"."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -81,7 +93,18 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word \"դեր\" (der) is used for 'role'. While technically correct, 'պաշտոն' (pashton) could be a more natural and contextually appropriate term for 'role' in this setting, implying a specific position or privilege.",
+          "suggestion": "Միացրեք այս կարգավորումը՝ \"{{role}}\" պաշտոն ունեցող օգտատերերի համար ներբեռնումները և բովանդակության պատճենումն անջատելու համար:"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of double quotes \"\" around the `{{role}}` variable is consistent with English, but Armenian typically uses single quotes ' '. While not strictly incorrect, using single quotes would be more aligned with Armenian writing conventions.",
+          "suggestion": "Միացրեք այս կարգավորումը՝ '{{role}}' դեր ունեցող օգտատերերի համար ներբեռնումները և բովանդակության պատճենումն անջատելու համար:"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,7 +116,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"この設定を有効にすると、「{{role}}」役割を持つユーザーのダウンロードとコンテンツのコピーが無効になります\" is a bit literal and could be improved for naturalness.  A more natural phrasing might emphasize the restriction.",
+          "suggestion": "この設定を有効にすると、「{{role}}」役割を持つユーザーはダウンロードやコンテンツのコピーができません。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -105,19 +134,37 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ການສໍາເນົາເນື້ອຫາ\" (kansaneua neuha) is a literal translation of 'content copying'. While understandable, a more natural phrasing in Lao would be something like \"ການຖ່າຍຖອນເນື້ອຫາ\" (kan thai thon neuha) or \"ການຜະລິດເນື້ອຫາຄືນ\" (kan phalit neuha khuen) which implies copying. \"ການຜະລິດເນື້ອຫາຄືນ\" might be the closest equivalent in meaning.",
+          "suggestion": "Consider replacing \"ການສໍາເນົາເນື້ອຫາ\" with \"ການຖ່າຍຖອນເນື້ອຫາ\" or \"ການຜະລິດເນື້ອຫາຄືນ\" for a more natural Lao phrasing."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The double curly braces around 'role' are not properly escaped. It appears the intent was to include a variable, but the structure needs correction.",
+          "suggestion": "Iespējojiet šo iestatījumu, lai atspējotu lejupielādes un satura kopēšanu lietotājiem ar lomu {{role}}."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrasing 'content copying' is not perfectly captured by 'kopiëren van het materiaal'. While 'kopiëren' is correct for copying, 'het materiaal' (the material) is slightly less precise than 'content'. A better translation would incorporate a closer equivalent to 'content'.",
+          "suggestion": "Schakel deze instelling in om het downloaden en kopiëren van de inhoud uit te schakelen voor gebruikers met de rol '{{role}}'."
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -129,7 +176,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'utilizadors' is misspelled. It should be 'usuários'.",
+          "suggestion": "usuários"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -141,7 +194,18 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English term 'Restrict Copy and Download Description' is not directly translated. The translation focuses on the functionality rather than conveying the meaning of the setting's description.",
+          "suggestion": "Consider a translation that more accurately reflects the purpose of the setting description, such as 'Descriere: Restricționează copierea și descărcarea' or similar."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'dezactiva' is correct for 'disable', the phrase 'copierea conținutului' can be improved for clarity and naturalness in Romanian. A more common and natural phrasing would be 'copierea materialelor' or 'copierea datelor'.",
+          "suggestion": "Replace 'copierea conținutului' with 'copierea materialelor' or 'copierea datelor'."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +217,23 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'භූමිකාව' (bhoomikavaa) is a valid word but 'භූමිකාව' would be more appropriate in this context, referring to the 'role' as in user role.",
+          "suggestion": "භූමිකාවේ"
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure could be slightly improved for better flow.  The current phrasing is technically correct, but less natural.",
+          "suggestion": "මෙම සැකසුම ක්‍රියාත්මක කිරීමෙන්, {{role}} භූමිකාවකින් යුතු පරිශීලකයින් සඳහා බාගත කිරීම සහ අන්තර්ගත පිටපත් කිරීම අක්‍රිය කළ හැක."
+        },
+        {
+          "type": "formatting",
+          "description": "The double quotes around the `{{role}}` placeholder should ideally be consistent with the English original.",
+          "suggestion": "No change needed, but ensure consistency with other translations using this placeholder."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -183,7 +263,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The opening quote mark for the role name in the Turkish translation is missing. It should mirror the English structure: '{{role}}'.",
+          "suggestion": "\"{{role}}\" rolüne sahip kullanıcılar için..."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -201,7 +287,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase '具有 {{role}}权限' (has {{role}} permission) is slightly awkward. A more natural phrasing would be '拥有 {{role}} 角色' (has the {{role}} role) or '{{role}} 权限' ({{role}} permission).",
+          "suggestion": "拥有 {{role}} 角色"
+        }
+      ],
       "approved_at": null
     }
   }

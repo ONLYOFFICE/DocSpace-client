@@ -3,7 +3,7 @@
   "content": "Extend selection right",
   "content_en_sha1_hash": "c3dceee4dbd194cf2440205ab46c372553ef5ed9",
   "created_at": "2025-05-19T21:30:55.052Z",
-  "updated_at": "2025-05-21T10:32:00.641Z",
+  "updated_at": "2025-05-24T10:41:51.499Z",
   "comment": {
     "text": "The translation key \"HotkeysExtendSelectionRight\" is used to display the text \"Extend selection right\" in a UI component. It appears in a hotkey configuration section of an editor or panel, where it explains the function of pressing Shift + →. The key is likely associated with a keyboard shortcut option for extending the selection area to the right.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Azerbaijani translation 'Seçimi sağa doğru uzadın' literally translates to \"Extend the selection to the right.\" While understandable, it's not the most natural or idiomatic way to express \"Extend selection right\" in Azerbaijani. It implies an action by the user, rather than a description of the function’s behavior. A more appropriate phrasing would emphasize the extending of the selection itself.",
-          "suggestion": "Seçimi sağa genişləndirin"
+          "description": "The translation \"Seçimi sağa doğru uzadın\" doesn't accurately convey the meaning of \"Extend selection right.\" It implies the user extended the selection, not that the selection extends to the right. It needs to describe the action of extending the selection to the right.",
+          "suggestion": "Seçimi sağa genişləndir"
         }
       ],
       "approved_at": null
@@ -90,13 +90,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Ընդարձակում է ընտրարկումը աջ\" is a literal translation and doesn't convey the intended meaning of 'extend selection right' in the context of hotkeys. It sounds unnatural and unclear.",
-          "suggestion": "A better translation would be something like \"աջ ընտրության ընդարձակում\" or \"ընտրության աջ ընդարձակում\" (depending on preferred phrasing)."
+          "description": "The translation 'Ընդարձակում է ընտրարկումը աջ' is a literal translation and doesn't convey the intended meaning of 'Extend selection right' in a natural Armenian way. It sounds awkward and overly verbose.",
+          "suggestion": "Consider a more natural translation like 'աջ ընտրումը ընդարձակել' or 'ընտրումը աջ ընդարձակել'."
         },
         {
           "type": "grammar",
-          "description": "The Armenian translation uses the verb form \"ընդարձակում է\" which implies a continuous action.  While not strictly incorrect, it may not be the most suitable for a hotkey label which should convey a direct action.",
-          "suggestion": "Consider a more direct phrasing using a noun or a participle. For example, using \"աջ ընտրության ընդարձակում\" (right selection expansion) which avoids the verb form."
+          "description": "The sentence structure 'Ընդարձակում է ընտրարկումը աջ' feels grammatically clunky.  The verb 'ընդարձակում է' (extends) is awkwardly placed.",
+          "suggestion": "Reordering the words as suggested in the incorrect_translation issue would improve the grammar."
         }
       ],
       "approved_at": null
@@ -113,8 +113,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"選択範囲の拡大（右）\" is a bit literal and not the most natural phrasing for a hotkey label. It's a bit clunky. A more natural translation would focus on the action of extending the selection.",
-          "suggestion": "Consider \"右への拡大\" or \"右拡張\" for a more concise and natural phrasing.  The parenthetical (right) feels awkward in Japanese."
+          "description": "While technically correct, \"拡大（右）\" is a bit clunky and not the most natural way to express 'Extend selection right' in Japanese. It directly translates to 'Expansion (right)'. A more natural phrasing would better reflect the intended meaning of extending a selection.",
+          "suggestion": "選択範囲を右に拡張"
         }
       ],
       "approved_at": null
@@ -125,8 +125,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '오른쪽으로 선택 확장' while understandable, isn't the most natural or idiomatic way to say 'Extend selection right' in Korean. It's a bit literal.",
-          "suggestion": "Consider alternatives like '오른쪽 선택 확장' or '선택을 오른쪽으로 확장' which are more common phrases for this action."
+          "description": "The translation '오른쪽으로 선택 확장' is literal and doesn't flow naturally in Korean. It's understandable, but not idiomatic. 'Extend selection right' implies expanding the selection to the right.",
+          "suggestion": "Consider a more natural phrasing like '선택 영역 오른쪽으로 확장' or '오른쪽으로 선택 늘리기'."
         }
       ],
       "approved_at": null
@@ -137,7 +137,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ຂະຫຍາຍການເລືອກທີ່ຖືກຕ້ອງ' literally translates to 'Extend the selection to the right'. While conveying the general idea, it doesn't perfectly match the English 'Extend selection right'. A more accurate translation might focus on simply extending the selection to the right.",
+          "description": "The Lao translation 'ຂະຫຍາຍການເລືອກທີ່ຖືກຕ້ອງ' literally translates to 'extend the selection that is correct'. While understandable, it's not the most natural way to express 'Extend selection right' in Lao. It implies the selection is *already* correct and needs extending.",
           "suggestion": "ຂະຫຍາຍການເລືອກໄປທາງຂວາ"
         }
       ],
@@ -164,13 +164,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Expandir a seleção para a direita\" is understandable, it's a bit verbose and doesn't quite capture the concise nature of \"Extend selection right.\" A more direct translation would be better.",
-          "suggestion": "Estender seleção para a direita"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -197,8 +191,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"තේරීම දකුණට පතුරුවන්න\" is understandable, it's a somewhat literal translation. A more natural and idiomatic rendering of \"Extend selection right\" in Sinhala would better convey the meaning in a user interface context. \"Extend selection right\" implies expanding or adding to the existing selection, not simply spreading it to the right.",
-          "suggestion": "තෝරාගත් කොටස දකුණට වැඩිකරන්න (Thora gat kotasa dakhuna weradikaran)"
+          "description": "The translation 'තේරීම දකුණට පතුරුවන්න' while conveying the general idea of extending selection to the right, isn't the most natural or idiomatic way to express it in Sinhala within a software context. 'Extend' can be better translated to 'දිගටා' or 'වැඩි කරන්න'. 'පතුරුවන්න' is more suitable for spreading or distributing something.",
+          "suggestion": "තේරීම දකුණට දිගටා"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "A more literal and potentially clearer translation, considering the software context, might be 'අයිතියට ව්‍යාප්ත කරන්න'. This option uses 'ව්‍යාප්ත' which is closer to 'extend' in terms of spreading or expanding something.",
+          "suggestion": "තේරීම අයිතියට ව්‍යාප්ත කරන්න"
         }
       ],
       "approved_at": null
@@ -215,7 +214,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Premakni izbiro na desno' literally translates to 'Move selection to the right'. While understandable, it doesn't capture the nuance of 'Extend selection right' which implies expanding the existing selection.",
+          "description": "The translation 'Premakni izbiro na desno' while literally translating to 'Move selection to the right', doesn't quite capture the meaning of 'Extend selection right'. 'Extend' implies adding to the existing selection, whereas 'Premakni' implies moving the entire selection.",
           "suggestion": "Razširi izbiro na desno"
         }
       ],
@@ -227,8 +226,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Прошири селекцију десно\" is understandable, a more accurate and natural translation for \"Extend selection right\" would be something like \"Прошири избор удесно\" or \"Проширење избора удесно\". \"Селекцију\" is a direct transliteration and sounds less natural in this context.",
-          "suggestion": "Прошири избор удесно"
+          "description": "The translation 'Прошири селекцију десно' while understandable, isn't the most natural or precise translation of 'Extend selection right' in a software context. 'Прошири' implies expansion, but 'Extend' can also mean to move to the right.",
+          "suggestion": "Проширење селекције удесно"
         }
       ],
       "approved_at": null

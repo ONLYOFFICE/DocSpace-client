@@ -8,6 +8,8 @@
       "PUBLIC_DIR/*": ["../../public/*"],
       "SRC_DIR/*": ["./src/*"],
       "PACKAGE_FILE": ["./package.json"]
-    }
-  }
+    },
+    "target": "esnext"
+  },
+  "include": ["**/*.ts", "**/*.tsx", "types/**/*.d.ts"]
 }

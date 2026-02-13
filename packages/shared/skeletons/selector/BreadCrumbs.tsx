@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,12 +34,7 @@ interface BreadCrumbsProps extends RectangleSkeletonProps {
   style?: React.CSSProperties;
 }
 
-const BreadCrumbsLoader = ({
-  id,
-  className,
-  style,
-  ...rest
-}: BreadCrumbsProps) => {
+const BreadCrumbsLoader = ({ style, ...rest }: BreadCrumbsProps) => {
   return (
     <div className={styles.container} data-testid="bread-crumbs-loader">
       <RectangleSkeleton

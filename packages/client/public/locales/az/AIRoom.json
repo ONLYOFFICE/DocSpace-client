@@ -1,0 +1,18 @@
+{
+  "AIAgentAccessRedirectNote": "5 saniyədən sonra siz {{sectionName}} bölməsinə avtomatik olaraq yönləndiriləcəksiniz.",
+  "AIChat": "Süni İntellekt-Çat",
+  "AIInstructions": "Süni İntellekt Təlimatları",
+  "CreateChat": "Söhbət yarat",
+  "EmptyKnowledgeDescriptionActions": "Bu işə başlamak üçün aşağıdakı hərəkətləri sınayın:",
+  "EmptyKnowledgeTitle": "Hələlik fayl yüklənməyib",
+  "EmptyResultsTitle": "Hələlik nəticə yoxdur",
+  "InstructionsDescriptionAgentExample": "Misal: “Siz mətbuat açıqlamalarının yazılmasına və redaktə edilməsinə kömək edən süni intellektlə PR köməkçisisiniz. Peşəkar, özünəinamlı və mediaya uyğun bir tonda qalın. Əsas mesajları aydın şəkildə vurğulayın, terminlərdən çəkinin və mətnin qısa və cəlbedici olmasını təmin edin.”",
+  "KnowledgeDescription": "Komputerinizdən və ya {{productName}} proqramından faylları yükləyin ki, söhbət üçün daha yaxşı kontekst yarana bilsin. Qeyd: söhbət zamanı yüklənən məzmunun bir hissəsi və ya hamısı göstərilə bilər.",
+  "KnowledgeSelectIn": "{{productName}} seçim edin",
+  "KnowledgeUnavailable": "Bilgi Bazası mövcud deyil",
+  "MCP": "Bu otaq üçün MCP alətləri",
+  "ResponseQualityNode": "<1>Qeyd:</1> Müxbirə görə cavabın keyfiyyəti dəyişə bilər; daha yaxşı nəticələr üçün daha yeni modellər tövsiyə edilir.",
+  "ResultStorage": "Nəticə saxlanması",
+  "UploadFilesDevice": "Şəxsi cihazınızdan faylları yükləyin",
+  "UploadFilesPortal": "{{sectionNameFirst}} və ya {{sectionNameSecond}} bölmələrindən faylları yükləyin"
+}

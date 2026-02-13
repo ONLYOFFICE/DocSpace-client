@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -33,14 +33,12 @@ import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
-import { showLoader, hideLoader } from "@docspace/shared/utils/common";
-
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { Badge } from "@docspace/shared/components/badge";
 
 import { Button } from "@docspace/shared/components/button";
-import { isMobile } from "@docspace/shared/utils";
+import { isMobile, NoUserSelect } from "@docspace/shared/utils";
 import { globalColors } from "@docspace/shared/themes";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
@@ -86,11 +84,15 @@ const RootContainer = styled.div`
     min-height: 116px;
     padding-block: 12px 8px;
     padding-inline: 20px 12px;
+
+    .integration-image {
+      ${NoUserSelect}
+    }
   }
 
   .request-block {
     margin-bottom: 20px;
-    padding: 46px;
+    padding: 32px 46px;
     display: flex;
     gap: 24px;
     align-items: center;
@@ -127,24 +129,17 @@ class ThirdPartyServices extends React.Component {
     };
   }
 
-  componentDidMount() {
-    const { getConsumers, fetchAndSetConsumers } = this.props;
-    showLoader();
-    const urlParts = window.location.href.split("?");
-    if (urlParts.length > 1) {
-      const queryValue = urlParts[1].split("=")[1];
-      fetchAndSetConsumers(queryValue)
-        .then((isConsumerExist) => isConsumerExist && this.onModalOpen())
-        .finally(() => hideLoader());
-    } else {
-      getConsumers().finally(() => hideLoader());
-    }
-  }
-
   componentDidUpdate(prevProps) {
-    const { t, tReady } = this.props;
+    const { t, tReady, openThirdPartyModal } = this.props;
     if (prevProps.tReady !== tReady && tReady)
       setDocumentTitle(t("ThirdPartyAuthorization"));
+
+    if (
+      openThirdPartyModal !== prevProps.openThirdPartyModal &&
+      openThirdPartyModal
+    ) {
+      this.onModalOpen();
+    }
   }
 
   onChangeLoading = (status) => {
@@ -184,15 +179,18 @@ class ThirdPartyServices extends React.Component {
       isThirdPartyAvailable,
       supportEmail,
       logoText,
+      tReady,
+      standalone,
     } = this.props;
     const { dialogVisible, isLoading } = this.state;
     const { onModalClose, onModalOpen, setConsumer, onChangeLoading } = this;
 
-    const freeConsumers = consumers.filter(
-      (consumer) => consumer.canSet === false,
-    );
     const paidConsumers = consumers.filter(
-      (consumer) => !freeConsumers.includes(consumer),
+      (consumer) => consumer.paid === true,
+    );
+
+    const freeConsumers = consumers.filter(
+      (consumer) => !paidConsumers.includes(consumer),
     );
 
     const imgSrc = theme.isBase ? IntegrationSvgUrl : IntegrationDarkSvgUrl;
@@ -201,50 +199,56 @@ class ThirdPartyServices extends React.Component {
 
     return (
       <>
-        <RootContainer className="RootContainer">
-          <Text className="third-party-description">
-            {t("AuthorizationKeysInfo")}
-          </Text>
-          <div className="third-party-box">
-            {integrationSettingsUrl ? (
-              <Link
-                className="third-party-link"
-                color={currentColorScheme.main?.accent}
-                isHovered
-                target="_blank"
-                href={integrationSettingsUrl}
-              >
-                {t("Common:LearnMore")}
-              </Link>
-            ) : null}
-          </div>
-          <div className="consumer-item-wrapper request-block">
-            <img
-              className="integration-image"
-              src={imgSrc}
-              alt="integration_icon"
-            />
-            <Text>
-              {t("IntegrationRequest", {
-                productName: t("Common:ProductName"),
-                organizationName: logoText,
-              })}
+        {!consumers.length || !tReady ? (
+          <ThirdPartyLoader />
+        ) : (
+          <RootContainer className="RootContainer">
+            <Text className="third-party-description">
+              {t("AuthorizationKeysInfo")}
             </Text>
-            <Button
-              label={t("Submit")}
-              primary
-              size="normal"
-              minWidth="138px"
-              onClick={submitRequest}
-              scale={isMobile()}
-            />
-          </div>
-          {!consumers.length ? (
-            <ThirdPartyLoader />
-          ) : (
+            <div className="third-party-box">
+              {integrationSettingsUrl ? (
+                <Link
+                  className="third-party-link"
+                  color={currentColorScheme.main?.accent}
+                  isHovered
+                  target="_blank"
+                  href={integrationSettingsUrl}
+                  dataTestId="integration_settings_link"
+                >
+                  {t("Common:LearnMore")}
+                </Link>
+              ) : null}
+            </div>
+            <div className="consumer-item-wrapper request-block">
+              <img
+                className="integration-image"
+                src={imgSrc}
+                alt="integration_icon"
+              />
+              <Text>
+                {t("IntegrationRequest", {
+                  productName: t("Common:ProductName"),
+                  organizationName: logoText,
+                })}
+              </Text>
+              <Button
+                label={t("Submit")}
+                primary
+                size="normal"
+                minWidth="138px"
+                onClick={submitRequest}
+                scale={isMobile()}
+                testId="submit_request_team_button"
+              />
+            </div>
             <div className="consumers-list-container">
               {freeConsumers.map((consumer) => (
-                <div className="consumer-item-wrapper" key={consumer.name}>
+                <div
+                  className="consumer-item-wrapper"
+                  key={consumer.name}
+                  data-testid={`${consumer.name}_item`}
+                >
                   <ConsumerItem
                     consumer={consumer}
                     dialogVisible={dialogVisible}
@@ -256,6 +260,7 @@ class ThirdPartyServices extends React.Component {
                     updateConsumerProps={updateConsumerProps}
                     t={t}
                     isThirdPartyAvailable={isThirdPartyAvailable}
+                    standalone={standalone}
                   />
                 </div>
               ))}
@@ -278,7 +283,11 @@ class ThirdPartyServices extends React.Component {
                 </div>
               ) : null}
               {paidConsumers.map((consumer) => (
-                <div className="consumer-item-wrapper" key={consumer.name}>
+                <div
+                  className="consumer-item-wrapper"
+                  key={consumer.name}
+                  data-testid={`consumer_${consumer.name}_item`}
+                >
                   <ConsumerItem
                     consumer={consumer}
                     dialogVisible={dialogVisible}
@@ -290,12 +299,13 @@ class ThirdPartyServices extends React.Component {
                     updateConsumerProps={updateConsumerProps}
                     t={t}
                     isThirdPartyAvailable={isThirdPartyAvailable}
+                    standalone={standalone}
                   />
                 </div>
               ))}
             </div>
-          )}
-        </RootContainer>
+          </RootContainer>
+        )}
         {dialogVisible ? (
           <ConsumerModalDialog
             t={t}
@@ -317,7 +327,6 @@ ThirdPartyServices.propTypes = {
   i18n: PropTypes.object.isRequired,
   consumers: PropTypes.arrayOf(PropTypes.object).isRequired,
   integrationSettingsUrl: PropTypes.string,
-  getConsumers: PropTypes.func.isRequired,
   updateConsumerProps: PropTypes.func.isRequired,
   setSelectedConsumer: PropTypes.func.isRequired,
 };
@@ -329,13 +338,14 @@ export default inject(({ setup, settingsStore, currentQuotaStore }) => {
     currentColorScheme,
     companyInfoSettingsData,
     logoText,
+    standalone,
   } = settingsStore;
   const {
-    getConsumers,
     integration,
     updateConsumerProps,
     setSelectedConsumer,
     fetchAndSetConsumers,
+    openThirdPartyModal,
   } = setup;
   const { consumers } = integration;
   const { isThirdPartyAvailable } = currentQuotaStore;
@@ -344,7 +354,6 @@ export default inject(({ setup, settingsStore, currentQuotaStore }) => {
     theme,
     consumers,
     integrationSettingsUrl,
-    getConsumers,
     updateConsumerProps,
     setSelectedConsumer,
     fetchAndSetConsumers,
@@ -352,5 +361,7 @@ export default inject(({ setup, settingsStore, currentQuotaStore }) => {
     isThirdPartyAvailable,
     supportEmail: companyInfoSettingsData?.email,
     logoText,
+    openThirdPartyModal,
+    standalone,
   };
 })(withTranslation(["Settings", "Common"])(observer(ThirdPartyServices)));

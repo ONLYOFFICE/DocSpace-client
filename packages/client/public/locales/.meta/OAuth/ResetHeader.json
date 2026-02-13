@@ -3,7 +3,7 @@
   "content": "Reset client secret",
   "content_en_sha1_hash": "0801d7f7175fdcf12e141a570e84a590edfa9dd1",
   "created_at": "2025-05-19T21:30:54.001Z",
-  "updated_at": "2025-05-21T07:01:31.145Z",
+  "updated_at": "2025-05-24T07:15:35.787Z",
   "comment": {
     "text": "This translation key is used to display the text \"Reset client secret\" in a reset dialog component, specifically within the OAuth category of developer tools. It appears as a header on a modal dialog that allows users to reset their client secret.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While the translation is understandable, \"إعادة تعيين السر السري للعميل\" is a very literal translation and sounds unnatural. A more idiomatic translation would be preferred.",
-          "suggestion": "إعادة تعيين مفتاح العميل السري"
+          "description": "The translation 'إعادة تعيين السر السري للعميل' while technically correct, is overly literal and not the most natural way to express 'Reset client secret' in Arabic. The term 'سر سري' (secret secret) is redundant.",
+          "suggestion": "إعادة تعيين مفتاح العميل (I'aadah ta'yeen miftaah al-'ameel)"
         }
       ],
       "approved_at": null
@@ -54,8 +54,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Obnovení důvěrného klientského klíče\" is overly literal and sounds awkward in Czech. \"Obnovení tajného klíče klienta\" or \"Resetování klíčového hesla klienta\" would be more natural and accurate.",
+          "description": "The translation \"Obnovení důvěrného klientského klíče\" is a bit too literal and verbose. While technically correct, it doesn't flow naturally. 'Client secret' is often referred to more simply in Czech in a technical context.",
           "suggestion": "Obnovení tajného klíče klienta"
+        },
+        {
+          "type": "formatting",
+          "description": "The wording 'důvěrného klientského klíče' is a little clunky. Better flow with a simpler phrasing.",
+          "suggestion": "tajného klíče klienta"
         }
       ],
       "approved_at": null
@@ -96,8 +101,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Վերականգնել հաճախորդի գաղտնի բանալին\" is technically correct, a more natural and common translation for 'Reset client secret' would be something like \"Ջնջել հաճախորդի գաղտնի բանալին\" or \"Փոխարինել հաճախորդի գաղտնի բանալին\". 'Վերականգնել' implies restoration from a previous state, which isn't necessarily the intended meaning of a reset.",
-          "suggestion": "Ջնջել հաճախորդի գաղտնի բանալին"
+          "description": "The translation \"Վերականգնել հաճախորդի գաղտնի բանալին\" (Verakanvel hachxor'di gaghthni banalin) translates to 'Restore client secret' rather than 'Reset client secret'. While 'restore' is close in meaning, 'reset' is more accurate in this context.",
+          "suggestion": "Consider \"Վերակողմնորոշել հաճախորդի գաղտնի բանալին\" (Verakognmoroshel hachxor'di gaghthni banalin) which more closely aligns with 'reset'."
         }
       ],
       "approved_at": null
@@ -126,8 +131,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ຣີເຊັດຄວາມລັບຂອງຜູ້ໃຊ້' literally translates to 'Reset the secret of the user'. While understandable, it's not the most natural or precise translation for 'Reset client secret'. It implies a personal user secret rather than a client-side secret used for authentication.",
-          "suggestion": "ຣີເຊັດຄວາມລັບຂອງຄລາຍເອັນท์ (Reset client secret) or ຣີເຊັດຄວາມລັບຂອງແອັບພິເຄຊັນ (Reset application secret)"
+          "description": "The Lao translation \"ຣີເຊັດຄວາມລັບຂອງຜູ້ໃຊ້\" literally translates to \"Reset the secret of the user.\" While understandable, it's not the most natural or precise translation of \"Reset client secret.\" \"Client\" is missing.",
+          "suggestion": "ຣີເຊັດຄວາມລັບຂອງໄคล້ອນท์ (Reset the client secret)"
         }
       ],
       "approved_at": null
@@ -168,13 +173,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'cheie secretă' while technically correct, is not the most natural Romanian equivalent for 'client secret'. A more common and understandable translation would be 'secret client'.",
-          "suggestion": "Secret client"
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the use of 'Resetare' might be slightly formal. 'Resetează' would be more conversational and potentially better suited depending on the context.",
-          "suggestion": "Resetează secretul clientului"
+          "description": "The translation 'Resetare cheie secretă' isn't the most natural or accurate translation of 'Reset client secret'. While technically correct, it's a bit literal. A more idiomatic translation would be 'Resetează parola clientului' or 'Resetează cheia clientului'.",
+          "suggestion": "Resetează parola clientului"
         }
       ],
       "approved_at": null
@@ -191,8 +191,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"පාරිභෝගික රහසය නැවත සකසන්න\" while literally meaning 're-arrange client secret', isn't the most natural phrasing for 'Reset client secret' in Sinhala. It sounds slightly technical and clunky. A more common and understandable phrasing would be closer to 'පාරිභෝගික රහසය ප්‍රතිස්ථාපනය කරන්න' (Paribhogika rahasaya pratisthapana karanna) or 'පාරිභෝගික රහසය වෙනස් කරන්න' (Paribhogika rahasaya venas karanna).",
-          "suggestion": "පාරිභෝගික රහසය ප්‍රතිස්ථාපනය කරන්න"
+          "description": "The translation 'පාරිභෝගික රහසය නැවත සකසන්න' while technically conveying the meaning of 'Reset client secret', is a bit formal and not the most natural phrasing in Sinhala. 'පාරිභෝගික රහසය' is a direct translation of 'client secret' which might not be understood by all users.",
+          "suggestion": "Consider a more natural phrasing like 'මුළුතැන්පත් රහසය යාවත්කාලීකරණය කරන්න' (Muluthenpatha rahasaya yawatakalikarana karanna) which translates to 'Update client secret' or 'නව මුළුතැන්පත් රහසය සකසන්න' (Nava muluthenpatha rahasaya sakasanna) - 'Set a new client secret'."
         }
       ],
       "approved_at": null
@@ -215,8 +215,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Ресетуј тајни кључ клијента' is a literal translation of 'Reset client secret'. A more natural and idiomatic Serbian translation would be 'Врсти тајни кључ клијента' or 'Обнови тајни кључ клијента'. 'Ресетуј' is often used, but it's an anglicism.",
-          "suggestion": "Врсти тајни кључ клијента"
+          "description": "The term 'reset' is directly translated as 'resetuj'. While understandable, it's more natural to use a Serbian equivalent for 'reset' in this context. 'reset' is often used as is in technical Serbian, but a more precise and common alternative would be 'поништи' (ponisti).",
+          "suggestion": "поништи тајни кључ клијента"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation maintains the English word 'client' without adapting it to Serbian. While understood, using the Serbian equivalent would be more consistent.",
+          "suggestion": "поништи тајни кључ клијента"
         }
       ],
       "approved_at": null

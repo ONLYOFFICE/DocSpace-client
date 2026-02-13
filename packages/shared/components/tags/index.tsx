@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -42,6 +42,11 @@ const Tags: FC<TagsProps> = ({
   removeTagIcon,
   onMouseEnter,
   onMouseLeave,
+  isDefaultMode = true,
+  directionY,
+  fixedDirection,
+  manualY,
+  manualX,
 }) => {
   const [renderedTags, setRenderedTags] = React.useState<TagType[]>([]);
 
@@ -191,6 +196,11 @@ const Tags: FC<TagsProps> = ({
                 roomType={tag.roomType}
                 onMouseEnter={onMouseEnter}
                 onMouseLeave={onMouseLeave}
+                isDefaultMode={isDefaultMode}
+                directionY={directionY}
+                fixedDirection={fixedDirection}
+                manualY={manualY}
+                manualX={manualX}
               />
             );
           })

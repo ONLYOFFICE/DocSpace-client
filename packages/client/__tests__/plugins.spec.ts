@@ -1,0 +1,424 @@
+// (c) Copyright Ascensio System SIA 2009-2026
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import {
+  filesSettingsHandler,
+  selfActivationStatusHandler,
+  selfHandlerWithCulture,
+  settingsHandler,
+  TypeSettings,
+  updateUserCultureHandler,
+  webPluginsAddHandler,
+  webPluginsHandler,
+  webPluginsUpdateHandler,
+} from "@docspace/shared/__mocks__/handlers";
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
+import { expect, test, TEST_PORT } from "./fixtures/base";
+
+test.describe("Plugins", () => {
+  test.beforeEach(async ({ mockRequest }) => {
+    mockRequest.use(
+      settingsHandler(TEST_PORT, TypeSettings.AuthenticatedWithPlugins),
+      filesSettingsHandler(TEST_PORT),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+    );
+  });
+
+  test("should navigate to plugins page and display empty state", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(webPluginsHandler(TEST_PORT));
+
+    await page.goto(`${baseUrl}/portal-settings/integration/plugins`);
+
+    await expect(page.locator(".settings-section_header")).toBeVisible();
+
+    const emptyView = page.getByTestId("empty-screen-container");
+    await expect(emptyView).toBeVisible();
+
+    await expectScreenshot(page,[
+      "desktop",
+      "plugins",
+      "plugins-empty.png",
+    ]);
+
+    const emptyTitle = page.getByText(/No plugins/i);
+    await expect(emptyTitle).toBeVisible();
+  });
+
+  test("should display plugins list with data", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(webPluginsHandler(TEST_PORT, "withData"));
+
+    await page.goto(`${baseUrl}/portal-settings/integration/plugins`);
+
+    await expect(page.locator(".settings-section_header")).toBeVisible();
+
+    const pluginsList = page.locator('[data-testid^="plugin_test-plugin"]');
+    await expect(pluginsList).toHaveCount(2);
+
+    const plugin1 = page.getByTestId("plugin_test-plugin-one");
+    await expect(plugin1).toBeVisible();
+    await expect(
+      plugin1.getByText("Test Plugin One for e2e testing"),
+    ).toBeVisible();
+    await expect(plugin1.getByText("1.1.0")).toBeVisible();
+
+    const plugin3 = page.getByTestId("plugin_test-plugin-three");
+    await expect(plugin3).toBeVisible();
+    await expect(
+      plugin3.getByText("Test Plugin Three for e2e testing"),
+    ).toBeVisible();
+    await expect(plugin3.getByText("1.3.0")).toBeVisible();
+  });
+
+  test("should upload .zip plugin when upload is enabled", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(webPluginsHandler(TEST_PORT, "withData"));
+
+    await page.goto(`${baseUrl}/portal-settings/integration/plugins`);
+
+    await expect(page.locator(".settings-section_header")).toBeVisible();
+
+    const pluginsListBefore = page.locator(
+      '[data-testid^="plugin_test-plugin"]',
+    );
+    await expect(pluginsListBefore).toHaveCount(2);
+
+    const dropzone = page.getByTestId("upload_plugin_dropzone");
+    await expect(dropzone).toBeVisible();
+    const dropzoneInput = dropzone.getByTestId("dropzone-input");
+
+    mockRequest.use(webPluginsAddHandler(TEST_PORT));
+
+    await dropzoneInput.setInputFiles({
+      name: "dummy.zip",
+      mimeType: "application/zip",
+      buffer: Buffer.from("dummy zip data"),
+    });
+
+    const pluginsListAfter = page.locator(
+      '[data-testid^="plugin_test-plugin"]',
+    );
+    await expect(pluginsListAfter).toHaveCount(3);
+
+    const plugin2 = page.getByTestId("plugin_test-plugin-two");
+    await expect(plugin2).toBeVisible();
+  });
+
+  test("should toggle plugin enabled state", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(webPluginsHandler(TEST_PORT, "withData"));
+
+    await page.goto(`${baseUrl}/portal-settings/integration/plugins`);
+
+    await expect(page.locator(".settings-section_header")).toBeVisible();
+
+    const plugin1 = page.getByTestId("plugin_test-plugin-one");
+    await expect(plugin1).toBeVisible();
+
+    const toggleSwitch = plugin1.getByTestId("enable_plugin_toggle_button");
+    await expect(toggleSwitch).toBeVisible();
+
+    const toggleSwitchInput = toggleSwitch.getByTestId("toggle-button-input");
+    await expect(toggleSwitchInput).toBeChecked();
+
+    mockRequest.use(webPluginsUpdateHandler(TEST_PORT));
+
+    await toggleSwitch.click();
+
+    await expect(toggleSwitchInput).not.toBeChecked();
+
+    await toggleSwitch.click();
+
+    await expect(toggleSwitchInput).toBeChecked();
+  });
+
+  test("should delete plugin successfully", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(webPluginsHandler(TEST_PORT, "withData"));
+
+    await page.goto(`${baseUrl}/portal-settings/integration/plugins`);
+
+    await expect(page.locator(".settings-section_header")).toBeVisible();
+
+    const pluginsListBefore = page.locator(
+      '[data-testid^="plugin_test-plugin"]',
+    );
+    await expect(pluginsListBefore).toHaveCount(2);
+
+    const plugin3 = page.getByTestId("plugin_test-plugin-three");
+    await expect(plugin3).toBeVisible();
+
+    const settingsButton = plugin3.getByTestId("open_settings_icon_button");
+    await expect(settingsButton).toBeVisible();
+    await settingsButton.click();
+
+    const deleteButton = page.getByTestId("settings_delete_plugin_button");
+    await expect(deleteButton).toBeVisible();
+    await deleteButton.click();
+
+    const confirmDeleteButton = page.getByRole("button", {
+      name: "OK",
+      exact: true,
+    });
+
+    await expect(confirmDeleteButton).toBeVisible();
+    await confirmDeleteButton.click();
+
+    const pluginsListAfter = page.locator(
+      '[data-testid^="plugin_test-plugin"]',
+    );
+    await expect(pluginsListAfter).toHaveCount(1);
+    await expect(plugin3).not.toBeVisible();
+  });
+
+  test("should display plugin information correctly", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(webPluginsHandler(TEST_PORT, "withData"));
+
+    await page.goto(`${baseUrl}/portal-settings/integration/plugins`);
+
+    await expect(page.locator(".settings-section_header")).toBeVisible();
+
+    const plugin1 = page.getByTestId("plugin_test-plugin-one");
+    await expect(plugin1).toBeVisible();
+
+    await expect(
+      plugin1.getByRole("heading", { name: "test-plugin-one" }),
+    ).toBeVisible();
+
+    const versionBadge = plugin1.getByTestId(
+      "plugin_version_test-plugin-one_badge",
+    );
+    await expect(versionBadge).toBeVisible();
+    await expect(versionBadge).toContainText("1.1.0");
+  });
+
+  // test("should display and change plugin localization on az locale", async ({
+  //   page,
+  //   mockRequest,
+  //   baseUrl
+  // }) => {
+  //   // Debug: log HTML responses
+  //   const htmlResponses: string[] = [];
+  //   page.on('response', async (response) => {
+  //     const url = response.url();
+  //     const contentType = response.headers()['content-type'] || '';
+  //     if (url.includes('/api/') && contentType.includes('text/html')) {
+  //       htmlResponses.push(url);
+  //       console.log('[HTML RESPONSE]', url);
+  //     }
+  //   });
+
+  //   // Load plugin with locale support
+  //   mockRequest.use(webPluginsHandler(TEST_PORT, "withLocale"));
+
+  //   await page.goto(`${baseUrl}/portal-settings/integration/plugins`);
+
+  //   // Check initial plugin display (English by default)
+  //   const plugin = page.getByTestId("plugin_archives.zip");
+  //   await expect(plugin).toBeVisible();
+
+  //   // Verify English name and description
+  //   await expect(
+  //     plugin.getByRole("heading", { name: "archives.zip" }),
+  //   ).toBeVisible();
+  //   await expect(
+  //     plugin.getByText("Plugin for working with archives"),
+  //   ).toBeVisible();
+
+  //   // Open plugin settings to check settings localization
+  //   const settingsButton = plugin.getByTestId("open_settings_icon_button");
+  //   await expect(settingsButton).toBeVisible();
+  //   await settingsButton.click();
+
+  //   // Verify settings dialog shows English text
+  //   const settingsDescription = page.getByTestId("settings_plugin_description");
+  //   await expect(settingsDescription).toBeVisible();
+  //   await expect(
+  //     settingsDescription.getByText("Plugin for working with archives"),
+  //   ).toBeVisible();
+
+  //   // Navigate to profile to change language
+  //   await page.goto("/portal-settings/profile/login");
+
+  //   // Find and click language selector
+  //   const languageSelector = page.getByTestId("language_combo_box").first();
+  //   await expect(languageSelector).toBeVisible();
+  //   await languageSelector.click();
+
+  //   // Set up handlers for culture change before clicking
+  //   mockRequest.use(
+  //     updateUserCultureHandler(TEST_PORT, "az"),
+  //     selfHandlerWithCulture(TEST_PORT, "az"),
+  //   );
+
+  //   await page.getByTestId("drop_down_item_az").first().click();
+
+  //   // Set LANGUAGE cookie to az for plugin localization
+  //   await page.context().addCookies([{
+  //     name: "language",
+  //     value: "az",
+  //     domain: "localhost",
+  //     path: "/",
+  //   }]);
+
+  //   mockRequest.use(webPluginsHandler(TEST_PORT, "withLocale"));
+
+  //   await page.goto(`${baseUrl}/portal-settings/integration/plugins`);
+
+  //   await expect(page.locator(".settings-section_header")).toBeVisible();
+
+  //   const pluginAz = page.getByTestId("plugin_archives.zip");
+  //   await expect(pluginAz).toBeVisible();
+
+  //   await expectScreenshot(page,[
+  //     "desktop",
+  //     "plugins",
+  //     "plugins-locale-az.png",
+  //   ]);
+
+  //   await settingsButton.click();
+  //   await expect(settingsDescription).toBeVisible();
+
+  //   await page.evaluate(() => {
+  //     const dateText = document.querySelector(
+  //       "[data-testid='plugin_upload_date_text']",
+  //     ) as HTMLDivElement;
+
+  //     dateText.style.display = "none";
+  //   });
+
+  //   await expectScreenshot(page,[
+  //     "desktop",
+  //     "plugins",
+  //     "plugins-locale-az-settings.png",
+  //   ]);
+  // });
+
+  test("should display en as fallback locale", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(webPluginsHandler(TEST_PORT, "withLocale"));
+
+    await page.goto(`${baseUrl}/portal-settings/integration/plugins`);
+
+    const plugin = page.getByTestId("plugin_archives.zip");
+    await expect(plugin).toBeVisible();
+
+    await expect(
+      plugin.getByRole("heading", { name: "archives.zip" }),
+    ).toBeVisible();
+    await expect(
+      plugin.getByText("Plugin for working with archives"),
+    ).toBeVisible();
+
+    const settingsButton = plugin.getByTestId("open_settings_icon_button");
+    await expect(settingsButton).toBeVisible();
+    await settingsButton.click();
+
+    const settingsDescription = page.getByTestId("settings_plugin_description");
+    await expect(settingsDescription).toBeVisible();
+    await expect(
+      settingsDescription.getByText("Plugin for working with archives"),
+    ).toBeVisible();
+
+    await page.goto(`${baseUrl}/portal-settings/profile/login`);
+
+    const languageSelector = page.getByTestId("language_combo_box").first();
+    await expect(languageSelector).toBeVisible();
+    await languageSelector.click();
+
+    mockRequest.use(
+      updateUserCultureHandler(TEST_PORT, "lv"),
+      selfHandlerWithCulture(TEST_PORT, "lv"),
+    );
+
+    await page.getByTestId("drop_down_item_lv").first().click();
+
+    // Set LANGUAGE cookie to lv for plugin localization (should fallback to en)
+    await page.context().addCookies([
+      {
+        name: "language",
+        value: "lv",
+        domain: "localhost",
+        path: "/",
+      },
+    ]);
+
+    mockRequest.use(webPluginsHandler(TEST_PORT, "withLocale"));
+
+    await page.goto("/portal-settings/integration/plugins");
+
+    await expect(page.locator(".settings-section_header")).toBeVisible();
+
+    const pluginEn = page.getByTestId("plugin_archives.zip");
+    await expect(pluginEn).toBeVisible();
+
+    await expectScreenshot(page,[
+      "desktop",
+      "plugins",
+      "plugins-fallback-locale-en.png",
+    ]);
+
+    await settingsButton.click();
+    await expect(settingsDescription).toBeVisible();
+
+    await page.evaluate(() => {
+      const dateText = document.querySelector(
+        "[data-testid='plugin_upload_date_text']",
+      ) as HTMLDivElement;
+
+      dateText.style.display = "none";
+    });
+
+    await expectScreenshot(page,[
+      "desktop",
+      "plugins",
+      "plugins-fallback-locale-en-settings.png",
+    ]);
+  });
+});

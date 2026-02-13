@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,16 +24,32 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { ScrollbarProps as ScrollbarLibraryProps } from "./custom-scrollbar";
+import {
+  ScrollbarProps as ScrollbarLibraryProps,
+  Scrollbar as CustomScrollbar,
+} from "./custom-scrollbar";
 
 type PickedScrollbarLibraryProps = Pick<
   ScrollbarLibraryProps,
-  "id" | "className" | "style" | "noScrollY" | "noScrollX" | "createContext"
+  | "id"
+  | "className"
+  | "style"
+  | "noScrollY"
+  | "noScrollX"
+  | "createContext"
+  | "translateContentSizeYToHolder"
+  | "translateContentSizeXToHolder"
+  | "translateContentSizesToHolder"
+  | "rtl"
 >;
 
 export type ScrollbarProps = PickedScrollbarLibraryProps & {
+  /** Ref to access the DOM element or React component instance */
+  ref?: React.Ref<CustomScrollbar | null>;
   /** This class will be placed on scroller element */
   scrollClass?: string;
+  /** This class will be placed on scroller body element */
+  scrollBodyClassName?: string;
   /** Enable tracks auto hiding.  */
   autoHide?: boolean;
   /** Fix scrollbar size. */
@@ -63,5 +79,5 @@ export type CustomScrollbarsVirtualListProps = Pick<
   | "paddingAfterLastItem"
 > & {
   forwardedRef?: React.ForwardedRef<unknown>;
-  contentRef?: React.MutableRefObject<HTMLDivElement | null>;
+  contentRef?: React.RefObject<HTMLDivElement | null>;
 };

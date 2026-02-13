@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -46,7 +46,7 @@ const PortalRenamingDialog = (props) => {
         {t("Settings:PortalRenaming", { productName: t("Common:ProductName") })}
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <Text fontSize="13px" fontWeight={400} noSelect>
+        <Text fontSize="13px" fontWeight={400}>
           {t("Settings:PortalRenamingModalText")}
         </Text>
       </ModalDialog.Body>
@@ -60,6 +60,7 @@ const PortalRenamingDialog = (props) => {
           onClick={onSave}
           isLoading={isSaving}
           tabIndex={3}
+          testId="portal_renaming_continue_button"
         />
         <Button
           key="CloseBtn"
@@ -69,6 +70,7 @@ const PortalRenamingDialog = (props) => {
           onClick={onClose}
           isDisabled={isSaving}
           tabIndex={4}
+          testId="portal_renaming_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

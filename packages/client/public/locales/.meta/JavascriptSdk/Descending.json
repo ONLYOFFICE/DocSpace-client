@@ -3,7 +3,7 @@
   "content": "Descending",
   "content_en_sha1_hash": "36377adf43984d298439110cf96f95529471c501",
   "created_at": "2025-05-19T21:30:54.453Z",
-  "updated_at": "2025-05-21T09:15:24.810Z",
+  "updated_at": "2025-08-04T07:30:01.393Z",
   "comment": {
     "text": "This translation key is used to display \"Descending\" as a sorting option for file categories in the Portal Settings page. It appears on a dropdown menu, allowing users to select whether files should be displayed by creation date or author. The translation of this label will be used to provide clarity and consistency across different languages.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
       "line_number": 112,
-      "context": "{ key: \"DateAndTimeCreation\", label: t(\"Files:ByCreation\") },\n { key: \"Author\", label: t(\"Files:ByAuthor\") },\n ];\n \n const dataSortOrder = [\n { key: \"descending\", label: t(\"Descending\"), default: true },\n { key: \"ascending\", label: t(\"Ascending\") },\n ];\n \n const columnDisplayOptions = [\n { value: \"default\", label: t(\"DefaultColumnsOption\") },",
+      "context": "{ key: \"DateAndTimeCreation\", label: t(\"Files:ByCreation\") },\n { key: \"Author\", label: t(\"Files:ByAuthor\") },\n ];\n \n const dataSortOrder = [\n { key: \"descending\", label: t(\"Descending\"), default: true },\n { key: \"ascending\", label: t(\"Ascending\") },\n ];\n \n const columnDisplayOptions = [\n {",
       "module": "/packages/client"
     }
   ],
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Czech translation \"Sestupně\" is the imperative form of the verb 'sestupovat' (to descend). 'Descending' as an adjective describing an order or arrangement would be better translated as 'sestupný'.",
-          "suggestion": "sestupný"
+          "description": "The Czech translation \"Sestupně\" is a verbal adjective and doesn't accurately convey the meaning of \"Descending\" which describes an order or sequence. \"Sestupně\" implies an action of descending, not a state of being in descending order.",
+          "suggestion": "Zvažte použití \"Sestupné\" (Sestupné řazení) nebo \"Klesající\" (Klesající řazení) pro přesnější překlad v kontextu JavascriptSdk."
         }
       ],
       "approved_at": null
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Նվազման կարգով' is a literal translation of 'Descending', it's a bit formal and doesn't convey the nuance of a sorting order in a technical context. A more common and natural translation for 'Descending' in the context of Javascript SDK and sorting would be 'անվերադարձ' (anveradars).",
-          "suggestion": "անվերադարձ"
+          "description": "While \"Նվազման կարգով\" is a literal translation of 'Descending', it might be too formal or verbose for a Javascript SDK key. A more common or concise alternative might be preferable depending on the context of the SDK's usage.",
+          "suggestion": "Consider alternatives like \"իջողական\" or \"կտրականաբար\" if they fit the SDK's terminology."
         }
       ],
       "approved_at": null
@@ -111,7 +111,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While '내림차순' is a valid Korean word, it translates to 'descending order' rather than simply 'Descending'.  'Descending' as an adjective or noun modifier might require a different nuance.",
+          "suggestion": "Consider alternatives like '내림' (naerim) for a more direct translation, or retaining the English term 'Descending' depending on the context."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -120,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ລົງມາ' (long maa) primarily means \"to come down\" or \"descend\". While it can imply a downward direction, it doesn't directly translate the concept of \"descending\" as in sorting or ordering. A more accurate translation would depend on the specific context of \"Descending\" in the Javascript SDK.",
-          "suggestion": "A better translation would depend on the context. Possible alternatives include: 'ຕາມລຽງຊ້ຽງລົງ' (taam liang siang long - in descending order), or a more descriptive phrase related to the specific function of the Javascript SDK."
+          "description": "The Lao translation 'ລົງມາ' (long maa) literally translates to 'coming down' or 'descending' as a movement. While it can sometimes be used to convey the concept of 'descending' in a sorting context, it's not the most accurate or standard translation for the term 'Descending' as it relates to sorting or ordering.",
+          "suggestion": "Consider using 'ລຸດລົງ' (lud long) which more accurately translates to 'decreasing' or 'descending' in a numerical or order-based sense, or 'ຕາມລຳດັບລຸດລົງ' (taam lam dap lut long) which means 'in descending order'."
         }
       ],
       "approved_at": null
@@ -162,7 +168,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Descendent' is a valid Romanian word, it doesn't accurately convey the meaning of 'Descending' in a technical context like a Javascript SDK. 'Descending' typically refers to order or direction (e.g., sorting in descending order). 'Descendent' means 'descendant'.",
+          "description": "The Romanian translation 'Descendent' doesn't accurately convey the meaning of 'Descending'. 'Descendent' refers to a lineage or offspring, while 'Descending' refers to a downward movement or order.",
           "suggestion": "Coborâre"
         }
       ],
@@ -177,13 +183,25 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"අවරෝහණ\" is a valid Sinhala word, it generally refers to 'decrement' or 'reduction' rather than the English term 'Descending' which implies an ordered sequence from largest to smallest. A more appropriate translation for 'Descending' in the context of a Javascript SDK might be 'ලබාපහසු' (labāpahāsu) or 'අවහිරවාහී' (avahiravāhī), indicating a downward trend or order.",
+          "suggestion": "Consider 'ලබාපහසු' (labāpahāsu) or 'අවහිරවාහී' (avahiravāhī) as alternatives."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation \"Zostupne\" primarily means \"descending\" in the sense of physically going down, like a decline or descent. While it can be used metaphorically, it's not the most accurate translation for 'Descending' in the context of sorting or ordering, which typically implies a reverse order.  A more appropriate translation would be \"Klesajúce\" or \"Reverzné\".",
+          "suggestion": "Consider using \"Klesajúce\" or \"Reverzné\" for a more accurate translation depending on the exact context."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -198,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Силазно\" translates to \"downward\" or \"descending\" in a general sense, but in the context of JavascriptSdk, it's likely referring to sorting order. A more accurate translation would be \"Опадајући\" which specifically means \"descending (order)\".",
-          "suggestion": "Опадајући"
+          "description": "The Serbian (Cyrillic) translation \"Силазно\" while phonetically similar, doesn't accurately convey the meaning of \"Descending\". \"Силазно\" generally means 'downwards' or 'decreasing,' but \"Descending\" implies a specific ordered sequence moving from highest to lowest. A more accurate translation would depend on the specific context of its usage within the Javascript SDK. Possible alternatives include 'Опадајући' (decreasing, declining) or a more descriptive phrase.",
+          "suggestion": "Consider alternatives like 'Опадајући' or a context-specific phrase that better reflects the meaning of 'Descending' in the Javascript SDK."
         }
       ],
       "approved_at": null
@@ -210,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Latin) translation 'Silazno' is not the correct translation of 'Descending'. While 'Silazno' can mean 'descending', it more accurately translates to 'downward' or 'declining'. 'Descending' implies a movement down a scale or hierarchy, which is better conveyed by 'Opadajuće' or 'Sklizujuće' in Serbian.",
-          "suggestion": "Consider using 'Opadajuće' or 'Sklizujuće' as alternatives for 'Descending'."
+          "description": "The Serbian (Latin) translation 'Silazno' is not the correct translation for 'Descending'. 'Silazno' means 'descending' in the sense of a downward slope or staircase. The appropriate translation for 'Descending' (as in sorting order) would be 'Opadajući'.",
+          "suggestion": "Opadajući"
         }
       ],
       "approved_at": null
@@ -228,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"За спаданням\" is a literal translation of \"Descending,\" it's not the most natural or idiomatic way to express the concept of descending order in a technical context within Ukrainian. It's grammatically correct but sounds awkward.",
-          "suggestion": "Consider alternatives like \"У порядку спадання\" or \"Зменшення\" depending on the precise meaning within the Javascript SDK. \"У порядку спадання\" is often used for lists or sequences, while \"Зменшення\" might be appropriate if referring to a decreasing value."
+          "description": "While \"За спаданням\" is technically a valid translation, it's not the most natural or common way to translate \"Descending\" in a technical context like a Javascript SDK key. It implies \"According to descent\" or \"By decreasing\". A more accurate and common translation would be \"Зменшення\" or \"Сортування за спаданням\" depending on the exact use case.",
+          "suggestion": "Consider \"Зменшення\" or \"Сортування за спаданням\" for a more natural and accurate translation."
         }
       ],
       "approved_at": null

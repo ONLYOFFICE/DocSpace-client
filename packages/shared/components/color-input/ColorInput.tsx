@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -46,6 +46,7 @@ const ColorInput = ({
   isDisabled,
   hasError,
   hasWarning,
+  dataTestId,
 }: ColorInputProps) => {
   const [color, setColor] = useState(
     defaultColor || globalColors.lightBlueMain,
@@ -66,7 +67,7 @@ const ColorInput = ({
 
   return (
     <div
-      data-testid="color-input"
+      data-testid={dataTestId ?? "color-input"}
       className={classNames(styles.wrapper, className)}
       id={id}
     >
@@ -95,7 +96,6 @@ const ColorInput = ({
       </div>
 
       <DropDown
-        directionX="left"
         manualY="48px"
         withBackdrop
         isDefaultMode={false}

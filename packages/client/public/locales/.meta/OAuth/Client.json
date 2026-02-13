@@ -3,7 +3,7 @@
   "content": "Client",
   "content_en_sha1_hash": "1bdd79b12628d8c4ec4226ff4207341dcb869ab8",
   "created_at": "2025-05-19T21:30:53.831Z",
-  "updated_at": "2025-05-21T07:26:00.186Z",
+  "updated_at": "2025-06-30T12:20:31.469Z",
   "comment": {
     "text": "The translation key \"Client\" is used to display the label for a form field related to a client in an OAuth setup. It appears in a block component that allows users to manage OAuth settings and is likely displayed on a form or settings page for developers.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/ClientBlock.tsx",
-      "line_number": 34,
+      "line_number": 35,
       "context": "import copy from \"copy-to-clipboard\";\n \n import { toastr } from \"@docspace/shared/components/toast\";\n import { TTranslation } from \"@docspace/shared/types\";\n \n import { StyledBlock, StyledInputBlock } from \"../ClientForm.styled\";\n \n import BlockHeader from \"./BlockHeader\";\n import InputGroup from \"./InputGroup\";\n \n interface ClientBlockProps {",
       "module": "/packages/client"
     }
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ນະຄູຝາກ\" does not accurately convey the meaning of \"Client\" in the context of OAuth. \"ນະຄູຝາກ\" translates to \"depositary\" or \"trustee,\" which is not the intended meaning.",
-          "suggestion": "A more appropriate translation for \"Client\" in an OAuth context would be something like \"ລູກຄ້າ\" (luk kha) which means \"customer\" or \"client\" or \"ຜູ້ໃຊ້\" (phu chai) which means \"user\"."
+          "description": "The Lao translation \"ນະຄູຝາກ\" does not accurately convey the meaning of \"Client\" in the context of OAuth. \"ນະຄູຝາກ\" generally means \"depositary\" or \"warehouse,\" which is unrelated to a client application.",
+          "suggestion": "A more appropriate translation for \"Client\" in this context might be something like \"ແອັບພິເຄຊັນຜູ້ໃຊ້\" (application user) or \"ໄคล້ອນท์\" (transliteration of 'client'). The best option would depend on the wider context and the desired level of technical accuracy."
         }
       ],
       "approved_at": null
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"පාරිභෝගිකයා\" (paribhogeekayaa) typically refers to 'consumer' or 'customer'. 'Client' in the context of OAuth refers to an application that requests access to resources on behalf of a user. A more accurate translation would be something like 'අයදුම්පත' (ayaduṁpatha) which means application or 'උපයෝගිතා' (upayogitaa) meaning 'utility' or 'tool', depending on the desired nuance. 'පාරිභෝගිකයා' is semantically different.",
-          "suggestion": "Consider 'අයදුම්පත' (ayaduṁpatha) or 'උපයෝගිතා' (upayogitaa)"
+          "description": "While \"පාරිභෝගිකයා\" (paribhōgikayā) can mean 'consumer' or 'customer,' it doesn't perfectly capture the technical meaning of 'Client' in an OAuth context. 'Client' refers to an application accessing resources on behalf of a user. A more appropriate translation would convey the 'application' or 'software' aspect.",
+          "suggestion": "Consider \"අයදුම්පත\" (ayadumapata - application) or \"සඟය යෙදුම\" (sagaya yeduma - companion application) depending on the specific context.  A more literal, though potentially less understandable, option could be \"පහන යෙදුම\" (pahana yeduma - accessing application)."
         }
       ],
       "approved_at": null
@@ -210,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Khách' can have multiple meanings in Vietnamese. While it can mean 'guest', in the context of OAuth and clients, a more precise translation would be 'ứng dụng' (application) or 'khách hàng' (customer, in a software/service context). 'Khách' is too general and may lead to confusion.",
-          "suggestion": "ứng dụng"
+          "description": "While \"Khách\" can mean \"guest\" or \"customer,\" it's not the most accurate translation for \"Client\" in the context of OAuth. \"Client\" refers to an application accessing resources on behalf of a user. A more suitable translation would be something like \"ứng dụng\" (application) or \"khách hàng\" (customer), depending on the specific nuance required.",
+          "suggestion": "Consider using \"ứng dụng\" (application) or \"khách hàng\" (customer) instead of \"Khách\"."
         }
       ],
       "approved_at": null

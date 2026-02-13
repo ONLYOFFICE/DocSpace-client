@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,9 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../styles/variables/index.scss";
-@import "../../styles/variables/_colors.scss";
-@import "../../styles/_mixins.scss";
+@use "../../styles/variables";
+@use "../../styles/variables/colors";
+@use "../../styles/mixins";
 
 .providerRow {
   width: 100%;
@@ -34,6 +34,8 @@
   align-items: center;
   align-content: center;
   padding: 8px 0;
+  padding-inline-start: 16px;
+  cursor: pointer;
 
   display: grid;
   grid-template-columns: 32px minmax(100px, 501px) 100px;
@@ -45,14 +47,35 @@
 
     :global(.dark) & {
       path {
-        fill: #{$white};
+        fill: #{variables.$white};
       }
     }
+  }
+
+  &:hover {
+    background-color: var(--more-login-row-hover-color);
+  }
+
+  &:active {
+    background-color: var(--more-login-row-pressed-color);
   }
 
   .providerName {
     overflow-wrap: break-word;
     padding: 0 12px;
     line-height: 16px;
+  }
+
+  .providerIcon,
+  .providerIcon > div {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+  }
+
+  :global(#modal-scroll > .scroll-wrapper > .scroller > .scroll-body) {
+    margin-inline-end: 0 !important;
+    padding-inline-end: 0 !important;
   }
 }

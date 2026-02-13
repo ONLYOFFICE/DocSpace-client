@@ -1,0 +1,343 @@
+{
+  "key_path": "ThirdPartyDisconnectPrompt",
+  "content": "Are you sure you want to remove the {{service}}? This will not affect your {{account}} account in any way.",
+  "content_en_sha1_hash": "6c59206f54809027b688a9b82f186032c0a4a006",
+  "created_at": "2025-05-26T07:15:48.781Z",
+  "updated_at": "2025-10-14T01:40:37.865Z",
+  "comment": {
+    "text": "This translation key is used for a confirmation prompt in a user interface, specifically a dialog that allows users to disconnect from third-party services. The text appears as part of a modal dialog and informs the user about the consequences of removing the service, which will not affect their account in any way.",
+    "is_auto": true,
+    "updated_at": "2025-05-26T08:03:19.236Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/dialogs/delete-third-party/DeleteThirdPartyDialog.tsx",
+      "line_number": 125,
+      "context": ">\n <ModalDialog.Header>\n {t(\"Common:DisconnectCloudTitle\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n {t(\"Common:ThirdPartyDisconnectPrompt\", {\n service: removeItem.title,\n account: removeItem.provider_key,\n })}\n </ModalDialog.Body>\n <ModalDialog.Footer>",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Arabic translation uses a space before the question mark. While not strictly incorrect, it's more common to omit this space in formal Arabic writing. This is a minor stylistic preference.",
+          "suggestion": "هل أنت متأكد أنك تريد إزالة {{service}}؟ هذا لن يؤثر على حساب {{account}} بأي شكل."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Azerbaijani translation uses spaces around the curly braces `{{}}`. While not strictly incorrect, it deviates from the English source which does not have spaces. It's recommended to match the source formatting for consistency.",
+          "suggestion": "Remove the spaces around the curly braces: \"{{service}}xidmətini silmək istədiyinizə əminsiniz? Bu, {{account}} hesabınıza heç bir şəkildə təsir etməyəcək.\""
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Czech translation uses a non-breaking space ( ) instead of a regular space before '{{service}}'.",
+          "suggestion": "Replace ' ' with a regular space."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The semicolon (;) is used incorrectly. It should be replaced with a period (.) or a conjunction to improve readability.",
+          "suggestion": "Είστε βέβαιοι ότι θέλετε να αφαιρέσετε το {{service}}.; Αυτό δεν θα επηρεάσει με κανέναν τρόπο τον λογαριασμό σας {{account}}."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'με κανέναν τρόπο' (with no way) is a bit verbose and might sound overly formal. A more natural phrasing would be preferable.",
+          "suggestion": "Είστε βέβαιοι ότι θέλετε να αφαιρέσετε το {{service}}.; Αυτό δεν θα επηρεάσει τον λογαριασμό σας {{account}}."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'nunguna' is a misspelling of 'ninguna'.",
+          "suggestion": "¿Está seguro de que desea eliminar el {{service}}? Esto no afectará su cuenta {{account}} de ninguna manera."
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Finnish translation uses a space before the hyphen in \"{{account}}-tililläsi\". While not strictly incorrect, it's more common and preferred to omit the space in Finnish, especially in formal communication. It can look slightly awkward.",
+          "suggestion": "Haluatko varmasti poistaa {{service}}? Tämä ei vaikuta {{account}}-tilillesi millään tavalla."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Armenian translation uses a question mark after the first sentence. While grammatically correct, the English original uses a statement followed by a question in a combined sentence structure. Maintaining that structure might improve readability and flow. Consider restructuring the Armenian to reflect this.",
+          "suggestion": "Իսկապե՞ս ուզում եք հեռացնել {{service}}-ը։ Սա չի ազդի ձեր {{account}} հաշվի վրա:"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'rimuovere' for 'remove' is technically correct, but 'disconnettere' might be a more natural and contextually appropriate translation in this scenario, considering it's referring to disconnecting from a third-party service. 'Rimuovere' sounds more like deleting something entirely.",
+          "suggestion": "Sei sicuro di voler disconnettere {{service}}? Questo non influirà in alcun modo sul tuo account {{account}}."
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The double curly braces `{{...}}` are used consistently in the English content, and should be maintained in the Japanese translation to indicate placeholders.",
+          "suggestion": "{{service}} を削除してもよろしいですか？これは {{account}} アカウントには影響しません。"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Korean translation includes a particle '을(를)' which is not present in the English original. While grammatically correct, it might feel slightly unnatural or too formal depending on the intended tone. Consider whether removing it maintains the intended meaning and tone.",
+          "suggestion": "Consider removing '을(를)' to see if the sentence flows better: \"{{service}} 제거하시겠습니까? 이 작업은 {{account}} 계정에 아무런 영향을 미치지 않습니다.\""
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ລົບຂໍ້ມູນ\" (lop khomun) literally translates to \"delete data\".  While it conveys the general idea of removing a connection, it might be more accurate to use a term closer to \"disconnect\" or \"remove connection\" which is more contextually appropriate for the action described.  \"ຖອນຕົວ\" (thon tua) or a similar phrase might be preferable depending on the specific service.",
+          "suggestion": "Consider using a term closer to 'disconnect' or 'remove connection' like 'ຖອນຕົວ' (thon tua) or rephrasing the phrase to better convey the action of severing a connection."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Latvian translation uses a non-breaking space ( ) instead of a regular space before the word 'kontu'. While technically correct, it's unusual in Latvian and might look strange. Using a regular space is preferable.",
+          "suggestion": "Vai tiešām vēlaties noņemt {{service}}? Tas nekādā veidā neietekmēs jūsu {{account}} kontu."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Dutch translation uses an ellipsis (…). While acceptable, a more natural flow might be achieved by removing it or replacing it with a comma.",
+          "suggestion": "Weet u zeker dat u {{service}} wilt verwijderen? Dit heeft geen invloed op uw {{account}}-account."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'account' is technically correct, using '{{account}}-account' is redundant and sounds unnatural in Dutch.  It's better to simply use '{{account}}'.",
+          "suggestion": "Weet u zeker dat u {{service}} wilt verwijderen? Dit heeft geen invloed op uw {{account}}."
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The use of a non-breaking space ( ) before '{{service}}' appears unusual and potentially unnecessary. It disrupts the natural flow of the text.",
+          "suggestion": "Remove the non-breaking space before '{{service}}'."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'eliminaţi' is a more forceful and less common way to say 'remove' in this context. A more natural and user-friendly option would be 'deconectaţi' or 'înlăturaţi'.",
+          "suggestion": "Sigur doriţi să deconectaţi {{service}}? Acest lucru nu va afecta în niciun fel contul dvs {{account}}."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation appears to be in Slovenian, not Sinhala. The English phrase 'Are you sure you want to remove the {{service}}?' has not been translated to Sinhala.",
+          "suggestion": "The translation needs to be done to Sinhala. A possible Sinhala translation would be: 'තබන්නෙන්මද {{service}} ඉවත් කරන්නද? ඒ නිසා {{account}} ගිණුමට කිසිම ảnh hưởngයක් ഉണ്ടാ නොවනු ඇත.' (Tabannemathma {{service}} iwath karannda? Ae nisa {{account}} ginumathakama kiyamai anuyakak noveu nema.)"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The use of a non-breaking space ( ) instead of a regular space before '{{service}}' appears unusual. It might be unintentional and impact readability.",
+          "suggestion": "Replace the non-breaking space with a regular space: 'Ali ste prepričani, da želite odstraniti {{service}}?'"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'уклоните' (uklonite) is a bit awkward and doesn't quite capture the meaning of 'remove' in this context. A more natural translation would be 'uklonite' or 'obrisete'.",
+          "suggestion": "Да ли сте сигурни да желите да обришете {{service}}? or Да ли сте сигурни да желите да уклоните {{service}}?"
+        },
+        {
+          "type": "spelling",
+          "description": "The Serbian text starts with 'Да' which is capitalized unnecessarily.",
+          "suggestion": "Да ли сте сигурни да желите да уклоните {{service}}? Ово ни на који начин неће утицати на ваш {{account}} налог."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Vietnamese translation uses a space before the opening curly brace in '{{service}}'. This is not standard formatting and should be removed.",
+          "suggestion": "Bạn có chắc chắn muốn xóa {{service}} không? Điều này sẽ không ảnh hưởng đến tài khoản {{account}} của bạn."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

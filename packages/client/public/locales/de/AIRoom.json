@@ -1,0 +1,18 @@
+{
+  "AIAgentAccessRedirectNote": "Sie werden in 5 Sekunden automatisch zum Abschnitt {{sectionName}} weitergeleitet.",
+  "AIChat": "KI-Chat",
+  "AIInstructions": "KI-Anweisungen",
+  "CreateChat": "Chat erstellen",
+  "EmptyKnowledgeDescriptionActions": "Versuchen Sie diese Schritte, um loszulegen:",
+  "EmptyKnowledgeTitle": "Noch keine Dateien hochgeladen",
+  "EmptyResultsTitle": "Noch keine Ergebnisse",
+  "InstructionsDescriptionAgentExample": "Beispiel: „Sie sind ein KI-PR-Assistent, der beim Verfassen und Bearbeiten von Pressemitteilungen hilft. Achten Sie auf einen professionellen, selbstbewussten und medienfreundlichen Ton. Heben Sie Kernbotschaften deutlich hervor, vermeiden Sie Fachjargon und gestalten Sie den Text prägnant und ansprechend.“",
+  "KnowledgeDescription": "Laden Sie Dateien von Ihrem Computer oder {{productName}} hoch, um den Chat mit mehr Kontext zu versehen. Hinweis: Einige oder alle hochgeladenen Inhalte können während des Gesprächs sichtbar sein.",
+  "KnowledgeSelectIn": "In {{productName}} wählen",
+  "KnowledgeUnavailable": "Wissensdatenbank nicht verfügbar",
+  "MCP": "MCP-Tools für diesen Raum",
+  "ResponseQualityNode": "<1>Hinweis:</1> Die Antwortqualität kann je nach Modell variieren; für beste Ergebnisse werden neuere Modelle empfohlen.",
+  "ResultStorage": "Ergebnisspeicherung",
+  "UploadFilesDevice": "Laden Sie Dateien von Ihrem persönlichen Gerät hoch",
+  "UploadFilesPortal": "Laden Sie Dateien von {{sectionNameFirst}} oder {{sectionNameSecond}} hoch"
+}

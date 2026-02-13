@@ -1,0 +1,28 @@
+{
+  "key_path": "CopiedToClipboard",
+  "content": "Copied to clipboard",
+  "content_en_sha1_hash": "0e7383487387213f8f33b310d457c956a84efa2d",
+  "created_at": "2025-11-25T11:52:41.121Z",
+  "updated_at": "2025-11-25T11:54:16.679Z",
+  "comment": {
+    "text": "This key displays a success message to the user confirming that code has been copied to the clipboard. It appears as a toast notification after the copy action is performed within a code block in the chat interface. Translators should ensure the wording accurately conveys a successful copy operation.",
+    "is_auto": true,
+    "updated_at": "2025-11-25T11:54:16.679Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/chat/components/chat-message-body/sub-components/message/CodeBlock.tsx",
+      "line_number": 58,
+      "context": "const { isBase } = useTheme();\n const { t } = useTranslation([\"Common\"]);\n \n const onCopy = () => {\n copy(content);\n toastr.success(successCopyMessage ?? t(\"Common:CopiedToClipboard\"));\n };\n \n return (\n <div className={styles.codeContainer}>\n <div className={styles.codeHeader}>",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

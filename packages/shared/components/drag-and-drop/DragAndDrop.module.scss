@@ -1,15 +1,14 @@
-@import "../../styles/variables/colors";
-@import "../../styles/variables/devices";
-@import "../../styles/mixins";
+@use "../../styles/variables/colors";
+
+@use "../../styles/mixins";
 
 .dragAndDrop {
   height: var(--drag-and-drop-height);
-  border: var(--drag-and-drop-border);
   margin-inline-start: -2px;
   position: relative;
   outline: none;
 
-  @include tablet {
+  @include mixins.tablet {
     margin-inline-start: 0;
   }
 
@@ -21,7 +20,11 @@
     }
   }
 
-  &:not(.dragging) {
+  &.dragDisabled {
+    opacity: 0.4;
+  }
+
+  &:not(.dragging):not(.dragDisabled) {
     background: none !important;
   }
 }

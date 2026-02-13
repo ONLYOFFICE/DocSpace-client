@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -87,6 +87,7 @@ const ResetDialog = (props: ResetDialogProps) => {
           primary
           isLoading={isRequestRunning}
           onClick={onResetClick}
+          testId="reset_dialog_ok_button"
         />
         <Button
           className="cancel-button"
@@ -96,6 +97,7 @@ const ResetDialog = (props: ResetDialogProps) => {
           scale
           isDisabled={isRequestRunning}
           onClick={onClose}
+          testId="reset_dialog_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

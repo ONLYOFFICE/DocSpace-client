@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -35,12 +35,17 @@ import { makeAutoObservable, runInAction } from "mobx";
 import TrashIconSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
 import PenSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 import UploadSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
+import { ROOM_ACTION_KEYS } from "@docspace/shared/constants";
 
 import {
   getRoomCovers,
   setRoomCover,
   removeLogoFromRoom,
 } from "@docspace/shared/api/rooms";
+
+/**
+ * @typedef {import("@docspace/shared/components/files-selector-input/FilesSelectorInput.types").BackupToPublicRoomOptionType } BackupToPublicRoomOptionType
+ */
 
 class DialogsStore {
   authStore;
@@ -97,8 +102,6 @@ class DialogsStore {
 
   changeQuotaDialogVisible = false;
 
-  unsavedChangesDialogVisible = false;
-
   moveToPublicRoomVisible = false;
 
   moveToPublicRoomData = null;
@@ -152,6 +155,12 @@ class DialogsStore {
 
   isRoomDelete = false;
 
+  isAIAgentChatDelete = {
+    visible: false,
+    itemName: "",
+    onDeleteAction: () => {},
+  };
+
   convertItem = null;
 
   formCreationInfo = null;
@@ -168,6 +177,8 @@ class DialogsStore {
 
   createRoomDialogVisible = false;
 
+  createAgentDialogVisible = false;
+
   createRoomConfirmDialogVisible = false;
 
   editLinkPanelIsVisible = false;
@@ -176,6 +187,9 @@ class DialogsStore {
 
   submitToGalleryDialogVisible = false;
 
+  /**
+   * @type {?import("@docspace/shared/types").LinkParamsType}
+   */
   linkParams = null;
 
   leaveRoomDialogVisible = false;
@@ -215,8 +229,6 @@ class DialogsStore {
 
   isNewQuotaItemsByCurrentUser = false;
 
-  guestReleaseTipDialogVisible = false;
-
   covers = null;
 
   cover = null;
@@ -244,11 +256,28 @@ class DialogsStore {
     onClose: null,
   };
 
+  createAgentDialogProps = {
+    title: "",
+    visible: false,
+    onClose: null,
+  };
+
+  editAgentDialogProps = {
+    visible: false,
+    item: null,
+    onClose: null,
+  };
+
   createPDFFormFileProps = {
     visible: false,
     file: null,
     localKey: "",
     onClose: null,
+  };
+
+  aiAgentSelectorDialogProps = {
+    visible: false,
+    file: null,
   };
 
   newFilesPanelFolderId = null;
@@ -300,6 +329,12 @@ class DialogsStore {
 
   socialAuthWelcomeDialogVisible = false;
 
+  selectFileAiKnowledgeDialogVisible = false;
+
+  connectAccountDialogVisible = false;
+
+  disconnectAccountDialogVisible = false;
+
   constructor(
     authStore,
     treeFoldersStore,
@@ -334,8 +369,16 @@ class DialogsStore {
     this.newFilesPanelFolderId = folderId;
   };
 
-  setGuestReleaseTipDialogVisible = (visible) => {
-    this.guestReleaseTipDialogVisible = visible;
+  setAiAgentSelectorDialogProps = (visible, file) => {
+    this.aiAgentSelectorDialogProps = {
+      visible,
+      file:
+        file === null ? null : (file ?? this.aiAgentSelectorDialogProps.file),
+    };
+  };
+
+  setIsAIAgentChatDelete = ({ visible, itemName, onDeleteAction }) => {
+    this.isAIAgentChatDelete = { visible, itemName, onDeleteAction };
   };
 
   setEditRoomDialogProps = (props) => {
@@ -348,6 +391,14 @@ class DialogsStore {
 
   setCreateRoomDialogProps = (props) => {
     this.createRoomDialogProps = props;
+  };
+
+  setCreateAgentDialogProps = (props) => {
+    this.createAgentDialogProps = props;
+  };
+
+  setEditAgentDialogProps = (props) => {
+    this.editAgentDialogProps = props;
   };
 
   setInviteLanguage = (culture) => {
@@ -690,6 +741,10 @@ class DialogsStore {
     this.selectFileFormRoomOpenRoot = openRoot;
   };
 
+  setSelectFileAiKnowledgeDialogVisible = (visible) => {
+    this.selectFileAiKnowledgeDialogVisible = visible;
+  };
+
   createMasterForm = async (fileInfo, options) => {
     const { extension = "pdf", withoutDialog, preview } = options;
 
@@ -769,6 +824,10 @@ class DialogsStore {
     this.createRoomDialogVisible = createRoomDialogVisible;
   };
 
+  setCreateAgentDialogVisible = (value) => {
+    this.createAgentDialogVisible = value;
+  };
+
   setCreateRoomConfirmDialogVisible = (createRoomConfirmDialogVisible) => {
     this.createRoomConfirmDialogVisible = createRoomConfirmDialogVisible;
   };
@@ -778,20 +837,19 @@ class DialogsStore {
   };
 
   setFormItem = (formItem) => {
-    if (formItem && !formItem.exst) {
+    if (formItem && !formItem.fileExst) {
       const splitted = formItem.title.split(".");
       formItem.title = splitted.slice(0, -1).join(".");
-      formItem.exst = splitted.length !== 1 ? `.${splitted.at(-1)}` : null;
+      formItem.fileExst = splitted.length !== 1 ? `.${splitted.at(-1)}` : null;
     }
     this.formItem = formItem;
   };
 
+  /**
+   * @param {import("@docspace/shared/types").LinkParamsType} linkParams
+   */
   setLinkParams = (linkParams) => {
     this.linkParams = linkParams;
-  };
-
-  setUnsavedChangesDialog = (unsavedChangesDialogVisible) => {
-    this.unsavedChangesDialogVisible = unsavedChangesDialogVisible;
   };
 
   setEditLinkPanelIsVisible = (editLinkPanelIsVisible) => {
@@ -819,6 +877,10 @@ class DialogsStore {
     this.moveToPublicRoomData = data;
   };
 
+  /**
+   * @param {boolean} visible
+   * @param {null | BackupToPublicRoomOptionType } [data]
+   */
   setBackupToPublicRoomVisible = (visible, data = null) => {
     this.backupToPublicRoomVisible = visible;
     this.backupToPublicRoomData = data;
@@ -833,8 +895,13 @@ class DialogsStore {
   };
 
   /**
+   * @typedef {import("@docspace/shared/api/files/types").TFile} TFile
+   * @typedef {import("@docspace/shared/api/files/types").TFolder} TFolder
+   * @typedef {import("@docspace/shared/api/rooms/types").TRoom} TRoom
+   *
    * @param {boolean =} visible
-   * @param {import("@docspace/shared/api/rooms/types").TRoom =} item
+   * @param { TRoom | TFolder | TFile } [item = null]
+   * @param {boolean} [isDownload = false]
    * @returns {void}
    */
   setPasswordEntryDialog = (
@@ -948,11 +1015,8 @@ class DialogsStore {
   };
 
   setRoomLogoCover = async (roomId) => {
-    const res = await setRoomCover(
-      roomId || this.coverSelection?.id,
-      this.cover,
-    );
-    this.infoPanelStore.updateInfoPanelSelection(res);
+    await setRoomCover(roomId || this.coverSelection?.id, this.cover);
+
     this.setRoomCoverDialogProps({
       ...this.roomCoverDialogProps,
       withSelection: true,
@@ -961,9 +1025,10 @@ class DialogsStore {
   };
 
   deleteRoomLogo = async () => {
+    console.log(this.coverSelection);
     if (!this.coverSelection) return;
-    const res = await removeLogoFromRoom(this.coverSelection.id);
-    this.infoPanelStore.updateInfoPanelSelection(res);
+
+    await removeLogoFromRoom(this.coverSelection.id);
   };
 
   getLogoCoverModel = (t, hasImage, onDelete) => {
@@ -971,7 +1036,7 @@ class DialogsStore {
       {
         label: t("RoomLogoCover:UploadPicture"),
         icon: UploadSvgUrl,
-        key: "upload",
+        key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_UPLOAD,
         onClick: (ref) => ref.current.click(),
       },
 
@@ -979,13 +1044,13 @@ class DialogsStore {
         ? {
             label: t("Common:Delete"),
             icon: TrashIconSvgUrl,
-            key: "delete",
+            key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_DELETE,
             onClick: onDelete ? onDelete() : () => this.deleteRoomLogo(),
           }
         : {
             label: t("RoomLogoCover:CustomizeCover"),
             icon: PenSvgUrl,
-            key: "cover",
+            key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_CUSTOMIZE_COVER,
             onClick: () => this.setRoomLogoCoverDialogVisible(true),
           },
     ];
@@ -1034,6 +1099,14 @@ class DialogsStore {
 
   setSocialAuthWelcomeDialogVisible = (visible) => {
     this.socialAuthWelcomeDialogVisible = visible;
+  };
+
+  setConnectAccountDialogVisible = (visible) => {
+    this.connectAccountDialogVisible = visible;
+  };
+
+  setDisconnectAccountDialogVisible = (visible) => {
+    this.disconnectAccountDialogVisible = visible;
   };
 }
 

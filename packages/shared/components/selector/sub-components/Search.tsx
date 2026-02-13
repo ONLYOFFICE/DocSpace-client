@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useContext, useCallback } from "react";
+import React, { use, useCallback } from "react";
 import { SearchInput } from "../../search-input";
 import { InputSize } from "../../text-input";
 
@@ -41,10 +41,10 @@ const Search = React.memo(({ isSearch }: SearchProps) => {
     withSearch,
     onClearSearch,
     onSearch,
-  } = useContext(SearchContext);
-  const setIsSearch = useContext(SearchDispatchContext);
+  } = use(SearchContext);
+  const setIsSearch = use(SearchDispatchContext);
 
-  const { isBreadCrumbsLoading } = useContext(BreadCrumbsContext);
+  const { isBreadCrumbsLoading, bodyIsLoading } = use(BreadCrumbsContext);
 
   const onClearSearchAction = useCallback(() => {
     onClearSearch?.(() => setIsSearch(false));
@@ -61,19 +61,22 @@ const Search = React.memo(({ isSearch }: SearchProps) => {
     [onClearSearchAction, onSearch, setIsSearch],
   );
 
-  if (isBreadCrumbsLoading || isSearchLoading) return searchLoader;
+  if (isBreadCrumbsLoading || isSearchLoading || (!isSearch && bodyIsLoading))
+    return searchLoader;
 
   if (!withSearch || !isSearch) return null;
 
   return (
     <SearchInput
-      className="search-input"
+      className="search-input selector-search-input"
       placeholder={searchPlaceholder}
       value={searchValue ?? ""}
       onChange={onSearchAction}
       onClearSearch={onClearSearchAction}
       size={InputSize.base}
       resetOnBlur
+      dataTestId="selector_search_input"
+      tabIndex={1}
     />
   );
 });

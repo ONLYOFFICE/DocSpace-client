@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -44,6 +44,7 @@ import { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelecto
 import type {
   ConflictResolveType,
   FilesSelectorFilterTypes,
+  FolderType,
   RoomsType,
   StartFillingMode,
 } from "@docspace/shared/enums";
@@ -74,17 +75,19 @@ export type SdkSearchParams = {
 };
 
 export type RootPageProps = {
-  searchParams: Partial<{
-    fileId: string;
-    fileid: string;
-    version: string;
-    doc: string;
-    action: ActionType;
-    share: string;
-    editorType: string;
-    error?: string;
-  }> &
-    SdkSearchParams;
+  searchParams: Promise<
+    Partial<{
+      fileId: string;
+      fileid: string;
+      version: string;
+      doc: string;
+      action: ActionType;
+      share: string;
+      editorType: string;
+      error?: string;
+    }> &
+      SdkSearchParams
+  >;
 };
 export type TDocumentInfo = {
   favorite: boolean;
@@ -119,6 +122,7 @@ export type TDocument = {
     instanceId: string;
     key: string;
     roomId: string;
+    canEditRoom: boolean;
   };
   title: string;
   token: string;
@@ -210,6 +214,7 @@ export interface IInitialConfig {
   startFillingMode?: StartFillingMode;
   fillingSessionId?: string;
   fillingStatus?: boolean;
+  quotaExceededScope?: number;
 }
 
 export type TError = {
@@ -298,8 +303,6 @@ export type TEvent = {
   data: TEventData;
 };
 
-export interface UseSelectFolderDialogProps {}
-
 export interface UseSelectFileDialogProps {
   instanceId: string;
 }
@@ -311,7 +314,7 @@ export interface SelectFolderDialogProps {
     isFirstLoad: boolean,
     isSelectedParentFolder: boolean,
     selectedItemId: string | number | undefined,
-    selectedItemType: "rooms" | "files" | undefined,
+    selectedItemType: "rooms" | "files" | "agents" | undefined,
     isRoot: boolean,
     selectedItemSecurity:
       | TFileSecurity
@@ -319,6 +322,9 @@ export interface SelectFolderDialogProps {
       | TRoomSecurity
       | undefined,
     selectedFileInfo: TSelectedFileInfo,
+    isDisabledFolder?: boolean,
+    isInsideKnowledge?: boolean,
+    isInsideResultStorage?: boolean,
   ) => boolean;
   onClose: () => void;
   onSubmit: (
@@ -334,7 +340,7 @@ export interface SelectFolderDialogProps {
   fileInfo: TFile;
   filesSettings: TFilesSettings;
   fileSaveAsExtension?: string;
-  organizationName: string;
+  selectedFolderId?: string | number;
 }
 
 export interface SelectFileDialogProps {
@@ -347,7 +353,7 @@ export interface SelectFileDialogProps {
     isFirstLoad: boolean,
     isSelectedParentFolder: boolean,
     selectedItemId: string | number | undefined,
-    selectedItemType: "rooms" | "files" | undefined,
+    selectedItemType: "rooms" | "files" | "agents" | undefined,
     isRoot: boolean,
     selectedItemSecurity:
       | TFileSecurity
@@ -370,6 +376,7 @@ export interface SelectFileDialogProps {
   ) => Promise<void>;
   fileInfo: TFile;
   filesSettings: TFilesSettings;
+  selectedFolderId?: string | number;
 }
 
 export interface UseSocketHelperProps {
@@ -377,6 +384,8 @@ export interface UseSocketHelperProps {
   user?: TUser;
   shareKey?: string;
   standalone?: boolean;
+  folderId?: string | number;
+  folderType?: FolderType;
 }
 
 export interface UseEventsProps {
@@ -430,7 +439,7 @@ export type TDocEditor = {
     history,
   }: {
     currentVersion?: number;
-    history?: {};
+    history?: object;
     error?: string;
   }) => void;
   setHistoryData?: (obj: THistoryData) => void;
@@ -438,6 +447,18 @@ export type TDocEditor = {
   setUsers?: ({ c, users }: { c: string; users: TSharedUsers[] }) => void;
   startFilling?: VoidFunction;
   requestRoles?: VoidFunction;
+  setFavorite?: (favorite: boolean) => void;
+  createConnector?: () => TEditorConnector;
+};
+
+export type TEditorConnector = {
+  attachEvent: (id: string, action: (...args: unknown[]) => void) => void;
+  sendEvent: (name: string, data?: string | object | unknown[]) => void;
+  executeMethod: (
+    name: string,
+    params: object[],
+    callback: (response: object | { error: string }) => void,
+  ) => void;
 };
 
 export type TCatchError =
@@ -466,7 +487,7 @@ export type StartFillingSelectorDialogProps = {
     isFirstLoad: boolean,
     isSelectedParentFolder: boolean,
     selectedItemId: string | number | undefined,
-    selectedItemType: "rooms" | "files" | undefined,
+    selectedItemType: "rooms" | "files" | "agents" | undefined,
     isRoot: boolean,
     selectedItemSecurity:
       | TFileSecurity
@@ -496,7 +517,7 @@ export type ConflictStateType = {
   resolve: (
     value: ConflictResolveType | PromiseLike<ConflictResolveType>,
   ) => void;
-  reject: (reason?: any) => void;
+  reject: (reason?: unknown) => void;
   fileName: string;
   folderName: string;
 };
@@ -504,4 +525,12 @@ export type ConflictStateType = {
 export type TFormRole = {
   name: string;
   color: string;
+};
+
+export type TEditorAIEvent = {
+  id: string;
+  type: string;
+  url: string;
+  streaming: boolean;
+  options: RequestInit & { headers: Record<string, string> };
 };

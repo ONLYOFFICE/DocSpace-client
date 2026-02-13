@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,103 +24,139 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../../../styles/variables/devices.scss";
-@import "../../../../styles/mixins";
+@use "../../../../styles/mixins";
 
 .chatHeader {
   width: 100%;
-  height: 64px;
 
-  padding: 16px 20px;
+  padding: 16px 0;
 
   box-sizing: border-box;
 
   display: flex;
   align-items: center;
+  flex-shrink: 0;
 
   gap: 16px;
 
-  &[data-panel="true"] {
-    padding-bottom: 0px;
-    height: 48px;
+  min-height: 48px;
+  position: sticky;
+  top: calc(var(--section-header-height) + var(--section-submenu-height));
+
+  background: var(--background-color);
+
+  z-index: 1;
+
+  @include mixins.tablet-and-below {
+    top: calc(var(--section-header-height-tablet) + var(--section-submenu-height));
   }
 
-  @include tablet-and-below {
-    padding: 16px;
+  @include mixins.mobile {
+    top: calc(var(--section-header-height-mobile) + var(--section-submenu-height));
+  }
+}
+
+.createChat {
+  width: fit-content;
+  min-width: fit-content;
+  height: 32px;
+
+  box-sizing: border-box;
+
+  border-radius: 6px;
+
+  padding: 8px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  &:hover:not(.disabled) {
+    background-color: var(--chat-header-button-hover-background);
   }
 
-  .fullScreenContainer {
-    width: fit-content;
+  cursor: pointer;
 
-    display: flex;
-    align-items: center;
-
-    gap: 16px;
+  svg {
+    path {
+      fill: var(--chat-header-button-svg-color);
+    }
   }
 
-  .selectChat {
-    width: 32px;
-    height: 32px;
+  &.disabled {
+    cursor: not-allowed;
 
-    min-width: 32px;
+    p {
+      color: var(--chat-header-button-disabled-color);
+    }
 
-    box-sizing: border-box;
+    svg {
+      path {
+        fill: var(--chat-header-button-disabled-color);
+      }
+    }
+  }
+}
 
-    border-radius: 50%;
+.selectChat {
+  width: 32px;
+  height: 32px;
 
-    background-color: var(--chat-header-button-background-color);
+  min-width: 32px;
+
+  box-sizing: border-box;
+
+  border-radius: 3px;
+
+  &:hover {
+    background-color: var(--chat-header-button-hover-background);
+
+    cursor: pointer;
+  }
+
+  &.open {
+    background-color: var(--chat-header-button-active-background);
+  }
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  svg {
+    path {
+      fill: var(--chat-header-button-svg-color);
+    }
+  }
+}
+
+.dropdowItemWrapper {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+
+  .chatListItemTitle {
+    text-align: var(--input-text-align);
+    unicode-bidi: plaintext;
+  }
+
+  .iconButtonWrapper {
+    width: 16px;
+    height: 16px;
 
     display: flex;
     align-items: center;
     justify-content: center;
-
-    cursor: pointer;
-
-    svg {
-      path {
-        fill: var(--chat-header-button-svg-color);
-      }
-    }
-  }
-
-  .createChat {
-    width: fit-content;
-    min-width: fit-content;
-    height: 32px;
-
-    box-sizing: border-box;
-
-    border-radius: 16px;
-
-    padding: 8px;
-
-    display: flex;
-    align-items: center;
-
-    gap: 10px;
-
-    background-color: var(--chat-header-button-background-color);
-
-    cursor: pointer;
-
-    svg {
-      path {
-        fill: var(--chat-header-button-svg-color);
-      }
-    }
   }
 }
 
-.dropDownItemDate {
-  padding-top: 8px;
-
-  color: var(--chat-header-select-session-date-color);
+.selectModel {
+  color: var(--chat-header-model-color);
 
   cursor: default;
-}
-
-.dropDownItemTruncate {
-  span {
-    @include truncate;
-  }
 }

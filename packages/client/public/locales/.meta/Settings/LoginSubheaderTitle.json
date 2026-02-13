@@ -3,7 +3,7 @@
   "content": "This subsection is used to monitor the latest user login activity including successful logins and failed attempts with an indication of reasons.",
   "content_en_sha1_hash": "b34e2be66de68cff67840aca5ca9d1eb6bf3fd38",
   "created_at": "2025-05-19T21:30:51.843Z",
-  "updated_at": "2025-05-21T03:54:43.368Z",
+  "updated_at": "2025-08-04T07:30:01.557Z",
   "comment": {
     "text": "\"This subsection is used to monitor the latest user login activity, including successful logins and failed attempts. The title of this subsection will appear as a header in the login history section, providing context to users viewing their login activity.\"",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/login-history/index.js",
-      "line_number": 88,
+      "line_number": 90,
       "context": "securityLifetime &&\n securityLifetime.loginHistoryLifeTime && (\n <HistoryMainContent\n t={t}\n loginHistory\n subHeader={t(\"LoginSubheaderTitle\")}\n latestText={t(\"LoginLatestText\")}\n storagePeriod={t(\"StoragePeriod\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n lifetime={securityLifetime.loginHistoryLifeTime}",
       "module": "/packages/client"
     }
@@ -36,13 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'This subsection is used to monitor...' is somewhat passive. A more natural Azerbaijani phrasing might convey a more active role.  The direct translation works, but could be improved for flow.",
-          "suggestion": "Bu alt bölmə son istifadəçi giriş fəaliyyətini, uğurlu girişləri və uğursuz cəhdləri, o cümlədən səbəbləri izləmək üçün nəzərdə tutulub."
+          "description": "The phrase \"Bu alt bölmə...istifadə olunur\" is slightly awkward. A more natural phrasing would be \"Bu bölmə...istifadə edilir\". 'İzlemek' (to monitor) is used correctly, but the sentence structure around it could be improved for better flow.",
+          "suggestion": "Bu bölmə uğurlu girişlər və uğursuz cəhdlər daxil olmaqla, səbəblərlə son istifadəçi giriş fəaliyyətini izlemek üçün istifadə edilir."
         },
         {
-          "type": "grammar",
-          "description": "While not strictly incorrect, 'o cümlədən' is slightly formal and verbose. A more conversational alternative might be preferable depending on the overall tone.",
-          "suggestion": "Bu alt bölmə son istifadəçi giriş fəaliyyətini, uğurlu girişləri və uğursuz cəhdləri, habeli səbəbləri izləmək üçün nəzərdə tutulub."
+          "type": "spelling",
+          "description": "The word 'uğursuz' is misspelled. It should be 'uğursuz'.",
+          "suggestion": "uğursuz"
         }
       ],
       "approved_at": null
@@ -107,13 +107,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"with an indication of reasons\" is too literal. A more natural Japanese translation would convey the purpose of showing reasons in a less cumbersome way. The current translation feels awkward.",
-          "suggestion": "このサブセクションは、ログインの成功や失敗を含む最新のユーザーログイン活動を、理由付きで監視するために使用されます。"
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the repeated use of \"を\" makes the sentence feel a bit clunky.  Slight restructuring can improve flow.",
-          "suggestion": "このサブセクションは、ログインの成功や失敗を含む最新のユーザーログイン活動を、理由と共に監視するために使用されます。"
+          "description": "The English phrase 'with an indication of reasons' is not accurately translated. '理由の表示とともに' implies a direct visual display of reasons, which may not be the intended meaning. The original English implies a general indication or explanation of the reasons for login attempts.",
+          "suggestion": "このサブセクションは、ログインの成功や失敗を含む最新のユーザーログイン活動を、その理由に関する情報とともに監視するために使用されます。"
         }
       ],
       "approved_at": null
@@ -121,18 +116,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '이 하위 섹션은 성공적인 로그인과 실패한 로그인 시도 및 그 이유를 포함하여 최신 사용자 로그인 활동을 모니터링하는 데 사용됩니다.' is a bit literal and doesn't flow naturally in Korean. The phrase '포함하여' (including) is redundant given the rest of the sentence structure.",
-          "suggestion": "이 하위 섹션은 성공적인 로그인과 실패한 로그인 시도, 그리고 그 이유를 통해 최신 사용자 로그인 활동을 모니터링합니다."
-        },
-        {
-          "type": "formatting",
-          "description": "The punctuation is correct, but consider the flow for Korean readers.  Slight rephrasing improves readability.",
-          "suggestion": "As in the corrected translation: 이 하위 섹션은 성공적인 로그인과 실패한 로그인 시도, 그리고 그 이유를 통해 최신 사용자 로그인 활동을 모니터링합니다."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -141,18 +125,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"This subsection is used to monitor\" is better translated as \"ຈຸດປະສົງຂອງພາກສ່ວນຍ່ອຍນີ້ຄືການຕິດຕາມ\" or something similar, conveying purpose rather than simply stating it's used.",
-          "suggestion": "ຈຸດປະສົງຂອງພາກສ່ວນຍ່ອຍນີ້ຄືການຕິດຕາມ"
+          "description": "The phrase \"This subsection is used to monitor\" is translated as \"ພາກສ່ວນຍ່ອຍນີ້ຖືກນໍາໃຊ້ເພື່ອຕິດຕາມ\". While technically correct, a more natural and idiomatic translation would be something like \"ພາກສ່ວນນີ້ໃຊ້ເພື່ອຕິດຕາມ\" or \"ຈຸດນີ້ໃຊ້ເພື່ອຕິດຕາມ\".  The passive voice in the Lao translation sounds slightly awkward in this context.",
+          "suggestion": "ພາກສ່ວນນີ້ໃຊ້ເພື່ອຕິດຕາມ"
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'attempts' is rendered as 'ຄວາມພະຍາຍາມ' which is correct but lacks the nuance of 'login attempts'. A more specific term might improve clarity.",
-          "suggestion": "ການເຂົ້າສູ່ລະບົບທີ່ພະຍາຍາມ"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"with an indication of reasons\" is a bit stiff. A more natural translation might be \"ພ້ອມດ້ວຍການລະບຸສາເຫດ\" or similar.",
-          "suggestion": "ພ້ອມດ້ວຍການລະບຸສາເຫດ"
+          "description": "The phrase 'failed attempts' is translated as 'ຄວາມພະຍາຍາມທີ່ລົ້ມເຫລວ'. This is grammatically correct, but a more concise and commonly used translation would be 'ຄວາມພະຍາຍາມທີ່ບໍ່ສໍາເລັດ'.",
+          "suggestion": "ຄວາມພະຍາຍາມທີ່ບໍ່ສໍາເລັດ"
         }
       ],
       "approved_at": null
@@ -175,18 +154,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"This subsection is used to monitor\" is too literal. \"Dana podsekcja służy do monitorowania\" is grammatically correct but sounds awkward in Polish. A more natural translation would be \"Ta podsekcja służy do monitorowania...\" or \"W tej podsekcji można monitorować...\"",
+          "description": "The English phrase 'This subsection is used to monitor...' is awkwardly translated to 'Dana podsekcja służy do monitorowania...'. A more natural Polish phrasing would be 'Ta podsekcja służy do monitorowania...' or 'Sekcja ta służy do monitorowania...'",
           "suggestion": "Ta podsekcja służy do monitorowania..."
         },
         {
           "type": "incorrect_translation",
-          "description": "The word \"logowania\" is used twice, which is repetitive. While technically correct, it can be improved for readability.  It's implying 'login activity' twice.",
-          "suggestion": "Dana podsekcja służy do monitorowania logowania użytkowników, w tym udanych prób i nieudanych prób zalogowania ze wskazaniem przyczyny."
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the sentence structure is a bit long and could benefit from splitting into two for improved readability.  A slight restructure would sound more natural in Polish.",
-          "suggestion": "Dana podsekcja służy do monitorowania logowania przez użytkowników. Zawiera informacje o udanych i nieudanych próbach zalogowania ze wskazaniem przyczyny."
+          "description": "The term 'failed attempts' is translated as 'nieudanych prób zalogowania'. While technically correct, 'nieudanych logowań' would be a more concise and commonly used term in this context.",
+          "suggestion": "nieudanych logowań"
         }
       ],
       "approved_at": null
@@ -215,13 +189,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'This subsection is used to monitor...' is better translated as something more active, like 'This section allows you to monitor...'. The current translation 'Этот раздел используется для отслеживания...' is technically correct but sounds passive and less user-friendly in Russian.",
-          "suggestion": "Этот раздел позволяет отслеживать..."
+          "description": "The English phrase 'This subsection is used to monitor...' translates more accurately to 'Этот подраздел предназначен для отслеживания...' or 'Этот раздел предназначен для отслеживания...'. 'Используется' implies usage in a more general sense, not specifically for monitoring.",
+          "suggestion": "Этот подраздел предназначен для отслеживания последних действий пользователя в системе, включая успешные входы и неудачные попытки с указанием причин."
         },
         {
           "type": "incorrect_translation",
-          "description": "The term 'login activity' is not perfectly captured by 'действия пользователя в системе'. A more accurate translation might be 'входы в систему' or 'процесс входа в систему'.",
-          "suggestion": "входы в систему"
+          "description": "The phrase 'login activity' translates more accurately to 'действия пользователя в системе' rather than just 'действия пользователя'. The addition of 'в системе' clarifies the context.",
+          "suggestion": "Этот подраздел предназначен для отслеживания последних действий пользователя в системе, включая успешные входы и неудачные попытки с указанием причин."
         }
       ],
       "approved_at": null
@@ -232,13 +206,18 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'තැත් කිරීම්' (tath krimak) is a bit awkward. While technically correct, it can be improved for better flow.",
-          "suggestion": "තැත් කිරීම් වෙනුවට 'ප්‍රයත්න' (prayatna) භාවිතා කළ හැකිය."
+          "description": "The word 'තැත් කිරීම්' (tath krimak) should be 'ප්‍රයත්න'. While 'tath krimak' can mean 'attempts', 'prayathna' is more commonly used and sounds more natural in this context.",
+          "suggestion": "ප්‍රයත්න"
         },
         {
           "type": "grammar",
-          "description": "The sentence structure is a bit long and complex for natural Sinhala. It could be broken down for clarity.",
-          "suggestion": "සාර්ථක පිවිසීම් සහ හේතුව සහිත අසාර්ථක පිවිසුම් ප්‍රයත්න ඇතුළුව, නවතම පරිශ්‍රීලක පිවිසුම් ක්‍රියාකාරකම් නිරීක්‍ෂණයට මෙම අනුකොටස භාවිතා කරයි."
+          "description": "The sentence structure is a bit convoluted. While grammatically correct, it could be more fluent. The phrase 'සාර්ථක පිවිසීම් සහ හේතු සහිත අසාර්ථක' (saarthaka pivisima saha hethu sahitha asaarthaka) sounds awkward.",
+          "suggestion": "සාර්ථක පිවිසීම් සහ හේතු සහිත අසාර්ථක පිවිසුම් ප්‍රයත්න ඇතුළුව..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English content mentions 'with an indication of reasons'. The Sinhala translation implies this but doesn't explicitly convey it as clearly. The word 'හේතුව' (hethu) is present, but a more precise phrasing could enhance clarity.",
+          "suggestion": "සාර්ථක පිවිසීම් සහ හේතුවන්ට අමතරව අසාර්ථක පිවිසුම් ප්‍රයත්න..."
         }
       ],
       "approved_at": null
@@ -254,9 +233,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'with an indication of reasons' is not accurately translated. 'Opisi razlogov' literally translates to 'descriptions of reasons', while the English implies a more succinct indication or explanation.",
-          "suggestion": "Ta pododdelek se uporablja za spremljanje zadnje dejavnosti prijave uporabnikov, vključno z uspešnimi prijavami in neuspelimi poskusi s prikazom razlogov."
+          "type": "spelling",
+          "description": "The word 'prijavami' is missing an accent. It should be 'prijavami'.",
+          "suggestion": "prijavami"
         }
       ],
       "approved_at": null
@@ -279,13 +258,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"with an indication of reasons\" is not accurately translated. 'Nedenleriyle birlikte' literally translates to 'together with reasons,' which isn't the intended meaning. It implies the reasons are *included* with the failed attempts, rather than providing an indication of them.",
-          "suggestion": "Bu alt bölüm, başarılı oturum açmalar ve nedenleriyle birlikte başarısız oturum açma girişimlerini ve bunların nedenlerini de içeren en son kullanıcı oturum açma etkinliğini izlemek için kullanılır."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'girişimleri' (attempts) is missing. The original text refers to 'failed attempts'.",
-          "suggestion": "Bu alt bölüm, başarılı oturum açmalar ve nedenleriyle birlikte başarısız oturum açma girişimlerini ve bunların nedenlerini de içeren en son kullanıcı oturum açma etkinliğini izlemek için kullanılır."
+          "description": "The English phrase 'with an indication of reasons' is not accurately translated. 'Nedenleriyle birlikte' literally means 'together with reasons,' which doesn't quite capture the nuance of indicating reasons or providing explanations. It implies the reasons are simply accompanying the failed attempts, not that they are being shown or indicated.",
+          "suggestion": "Bu alt bölüm, başarılı oturum açmalar ve başarısız denemeler dahil olmak üzere en son kullanıcı oturum açma etkinliğini izlemek için kullanılır; başarısız denemelerin nedenleri belirtilir."
         }
       ],
       "approved_at": null
@@ -302,13 +276,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"This subsection is used to monitor\" is somewhat clunky in Vietnamese. A more natural translation would be something like \"Mục này được sử dụng để theo dõi\" or \"Phần này dùng để theo dõi\".",
-          "suggestion": "Mục này được sử dụng để theo dõi hoạt động đăng nhập mới nhất của người dùng bao gồm đăng nhập thành công và các lần cố đăng nhập không thành công với thông tin nguyên nhân."
+          "description": "The phrase \"This subsection\" is not accurately conveyed by \"Phần phụ này.\" A more appropriate translation would be something like \"Phần này\" or \"Mục này\", which simply indicates 'this section'.",
+          "suggestion": "Mục này được sử dụng để theo dõi..."
         },
         {
           "type": "incorrect_translation",
-          "description": "The term \"failed attempts\" is translated as \"các lần cố đăng nhập không thành công\". While accurate, it's a bit verbose. A more concise option would be \"các lần đăng nhập không thành công\".",
-          "suggestion": "Phần phụ này được sử dụng để theo dõi hoạt động đăng nhập mới nhất của người dùng bao gồm đăng nhập thành công và các lần đăng nhập không thành công với thông tin nguyên nhân."
+          "description": "The phrase 'failed attempts' is a bit clunky. While 'các lần cố đăng nhập không thành công' is technically correct, a more natural flow would be 'các lần đăng nhập không thành công'.",
+          "suggestion": "các lần đăng nhập không thành công"
         }
       ],
       "approved_at": null
@@ -319,13 +293,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"This subsection is used to monitor\" is not accurately translated. \"了解\" (liao jie - to understand) doesn't convey the active monitoring aspect. A more suitable translation would emphasize observation or tracking.",
-          "suggestion": "使用此子部分监控最新用户登录活动"
+          "description": "The English content mentions 'failed attempts with an indication of reasons.' The translation '及其原因说明' is technically correct, but lacks the emphasis on 'indication' or highlighting the reasons. It's more of a simple statement of reasons rather than an explanation or display of those reasons.",
+          "suggestion": "了解最新用户登录活动，包括登录成功和失败的尝试次数及失败原因的说明。"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"原因说明\" (reason explanation) is a bit clunky. While technically correct, it lacks the elegance of the English \"indication of reasons\".",
-          "suggestion": "原因提示"
+          "type": "formatting",
+          "description": "While not a critical error, the punctuation after '次数' and before '及其' is slightly awkward in Chinese. A more natural flow would improve readability.",
+          "suggestion": "了解最新用户登录活动，包括登录成功和失败的尝试次数，及其原因说明。"
         }
       ],
       "approved_at": null

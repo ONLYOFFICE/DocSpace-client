@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,6 +31,7 @@ import { getRoomTypeTitleTranslation } from "@docspace/shared/components/room-ty
 
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
+import { createPluginFileHandlers } from "@docspace/shared/utils/plugin-file-utils";
 
 import { DeviceType } from "@docspace/shared/enums";
 import { tablet } from "@docspace/shared/utils";
@@ -106,9 +107,11 @@ const SimpleFilesTileContent = styled(TileContent)`
 
     font-size: ${(props) =>
       (props.isRooms && "16px") ||
-      (!props.isRooms && props.currentDeviceType === DeviceType.desktop
-        ? "13px"
-        : "14px")};
+      (
+        !props.isRooms && props.currentDeviceType === DeviceType.desktop
+          ? "13px"
+          : "14px"
+      )};
   }
 
   .item-file-exst {
@@ -117,12 +120,14 @@ const SimpleFilesTileContent = styled(TileContent)`
 
   ${({ isRooms, isTemplate }) =>
     isRooms ||
-    (isTemplate &&
-      css`
+    (
+      isTemplate &&
+        css`
         .item-file-name {
           font-size: 16px;
         }
-      `)}
+      `
+    )}
 
   @media ${tablet} {
     display: inline-flex;
@@ -148,6 +153,12 @@ const FilesTileContent = ({
 
   const roomType = getRoomTypeTitleTranslation(t, item.roomType);
 
+  let linkProps = { ...linkStyles };
+
+  if (item?.isPlugin) {
+    linkProps = createPluginFileHandlers(item, linkProps);
+  }
+
   return (
     <SimpleFilesTileContent
       sideColor={theme.filesSection.tilesView.sideColor}
@@ -163,7 +174,7 @@ const FilesTileContent = ({
         title={title}
         fontWeight={isTemplate ? 700 : 600}
         target="_blank"
-        {...linkStyles}
+        {...linkProps}
         color={theme.filesSection.tilesView.color}
         isTextOverflow
         dir="auto"

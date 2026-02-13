@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,8 +26,8 @@
 
 "use client";
 
-import moment from "moment-timezone";
 import { TTranslation } from "../types";
+import { parseToDateTime } from "./date";
 
 import { isArrayEqual } from "./array";
 import * as email from "./email";
@@ -44,6 +44,7 @@ import getCorrectDate from "./getCorrectDate";
 import { handleAnyClick } from "./event";
 import { getTextColor } from "./getTextColor";
 import { getFormFillingTipsStorageName } from "./getFormFillingTipsStorageName";
+import { uuid } from "./uuid";
 
 import DomHelpers from "./domHelpers";
 import ObjectUtils from "./objectUtils";
@@ -64,12 +65,14 @@ import {
 } from "./device";
 import { getCookie } from "./cookie";
 import { Context, Provider, Consumer } from "./context";
-import commonIconsStyles, { IconSizeType } from "./common-icons-style";
+import commonIconsStyles, {
+  IconSizeType,
+  isIconSizeType,
+} from "./common-icons-style";
 import { classNames } from "./classNames";
 import { getBannerAttribute, getLanguage } from "./banner";
-import { NoUserSelect, TextUserSelect } from "./commonStyles";
+import { NoUserSelect } from "./commonStyles";
 import { commonInputStyles } from "./commonInputStyles";
-import { commonTextStyles } from "./commonTextStyles";
 import {
   RoomsTypeValues,
   RoomsTypes,
@@ -96,6 +99,9 @@ import { getFromLocalStorage } from "./getFromLocalStorage";
 import { fakeFormFillingList } from "./formFillingTourData";
 import { getCountTilesInRow } from "./getCountTilesInRow";
 import { getSelectFormatTranslation } from "./getSelectFormatTranslation";
+import * as userFilterUtils from "./userFilterUtils";
+import * as filterConstants from "./filterConstants";
+import { getAiProviderIcon, getServerIcon, getAiProviderLabel } from "./ai";
 
 export {
   isBetaLanguage,
@@ -107,9 +113,7 @@ export {
   parseAddresses,
   getParts,
   NoUserSelect,
-  TextUserSelect,
   commonInputStyles,
-  commonTextStyles,
   INFO_PANEL_WIDTH,
   EmailSettings,
   parseAddress,
@@ -121,6 +125,7 @@ export {
   classNames,
   commonIconsStyles,
   IconSizeType,
+  isIconSizeType,
   Context,
   Provider,
   Consumer,
@@ -158,6 +163,12 @@ export {
   fakeFormFillingList,
   getCountTilesInRow,
   getSelectFormatTranslation,
+  userFilterUtils,
+  filterConstants,
+  getAiProviderIcon,
+  getServerIcon,
+  getAiProviderLabel,
+  uuid,
 };
 
 export const getModalType = () => {
@@ -165,7 +176,8 @@ export const getModalType = () => {
 };
 
 export const isValidDate = (date: Date) => {
-  return moment(date).tz(window.timezone).year() !== 9999;
+  const dt = parseToDateTime(date);
+  return dt ? dt.setZone(window.timezone).year !== 9999 : false;
 };
 
 export const presentInArray = (
@@ -239,7 +251,9 @@ export const getLastColumn = (
 export const isLockedSharedRoom = (item?: TRoom) => {
   if (!item) return false;
 
-  return Boolean(item.external && item.passwordProtected && !item.expired);
+  return Boolean(
+    item.external && item.passwordProtected && !item.isLinkExpired,
+  );
 };
 
 export const addLog = (log: string, category: "socket") => {
@@ -306,6 +320,8 @@ export const getCheckboxItemId = (key: string | FilterType | RoomsType) => {
       return "selected-only-presentations";
     case FilterType.SpreadsheetsOnly:
       return "selected-only-spreadsheets";
+    case FilterType.DiagramsOnly:
+      return "selected-only-diagrams";
     case FilterType.ImagesOnly:
       return "selected-only-images";
     case FilterType.MediaOnly:
@@ -354,6 +370,8 @@ export const getCheckboxItemLabel = (
       return t("Common:Archives");
     case FilterType.FilesOnly:
       return t("Common:Files");
+    case FilterType.DiagramsOnly:
+      return t("Common:Diagrams");
 
     case `room-${RoomsType.CustomRoom}`:
       return t("Common:CustomRooms");

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,11 +30,10 @@ import { withTranslation } from "react-i18next";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 
-import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
-
 import { injectDefaultTheme } from "@docspace/shared/utils";
+import { MobileCategoryWrapper } from "@docspace/shared/components/mobile-category-wrapper";
+
 import LoaderCustomizationNavbar from "./sub-components/loaderCustomizationNavbar";
-import MobileCategoryWrapper from "../../components/MobileCategoryWrapper";
 
 const StyledComponent = styled.div.attrs(injectDefaultTheme)`
   .combo-button-label {
@@ -49,6 +48,7 @@ const CustomizationNavbar = ({
   isLoadedPage,
   isSettingPaid,
   enablePortalRename,
+  isEnterprise,
 }) => {
   const isLoadedSetting = tReady;
   const navigate = useNavigate();
@@ -88,10 +88,12 @@ const CustomizationNavbar = ({
       />
       {enablePortalRename ? (
         <MobileCategoryWrapper
-          title={t("PortalRenaming")}
+          title={t("PortalRenaming", { productName: t("Common:ProductName") })}
           subtitle={t("PortalRenamingNavDescription")}
           url="/portal-settings/customization/general/portal-renaming"
           onClickLink={onClickLink}
+          withPaidBadge={!isSettingPaid}
+          badgeLabel={t("Common:Paid")}
         />
       ) : null}
       <MobileCategoryWrapper
@@ -100,19 +102,27 @@ const CustomizationNavbar = ({
         url="/portal-settings/customization/general/configure-deep-link"
         onClickLink={onClickLink}
       />
+      {isEnterprise ? (
+        <MobileCategoryWrapper
+          title={t("AdManagement")}
+          subtitle={t("AdManagementDescription", {
+            productName: t("Common:ProductName"),
+          })}
+          url="/portal-settings/customization/general/ad-management"
+          onClickLink={onClickLink}
+        />
+      ) : null}
     </StyledComponent>
   );
 };
 
-export default inject(({ common, settingsStore }) => {
+export default inject(({ common, settingsStore, currentTariffStatusStore }) => {
   const { enablePortalRename } = settingsStore;
   const { setIsLoadedCustomizationNavbar } = common;
+  const { isEnterprise } = currentTariffStatusStore;
   return {
     setIsLoadedCustomizationNavbar,
     enablePortalRename,
+    isEnterprise,
   };
-})(
-  withCultureNames(
-    observer(withTranslation(["Settings", "Common"])(CustomizationNavbar)),
-  ),
-);
+})(observer(withTranslation(["Settings", "Common"])(CustomizationNavbar)));

@@ -1,0 +1,7 @@
+{
+  "LblInviteAgain": "Ftoni përsëri",
+  "MessageEmailActivationInstuctionsSentOnEmail": "Udhëzimet e aktivizimit të email-it janë dërguar në adresën e email-it <1>{{email}}</1>.",
+  "RemoveUser": "Hiqni përdoruesin",
+  "RemoveUserConfirmationText": "Ju lutemi vini re se ky përdorues po merr pjesë aktive në plotësimin e formularit. Nëse vazhdoni, çdo formë në të cilën ata përfshihen do të ndalet në hapin e tyre.",
+  "UserStatus": "Statusi"
+}

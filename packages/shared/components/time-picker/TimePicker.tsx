@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,10 +25,18 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useRef, useState, useEffect } from "react";
-import moment from "moment";
 import classNames from "classnames";
+import type { DateTime } from "luxon";
 
 import { InputSize, InputType, TextInput } from "../text-input";
+
+import {
+  parseToDateTime,
+  formatDate,
+  startOf,
+  now,
+  parseWithFormat,
+} from "../../utils/date";
 
 import { TimePickerProps } from "./TimePicker.types";
 import styles from "./TimePicker.module.scss";
@@ -43,19 +51,23 @@ const TimePicker = ({
   onBlur,
   focusOnRender = false,
   forwardedRef,
+  testId,
+  isTwelveHourFormat,
+  meridiem,
 }: TimePickerProps) => {
   const hoursInputRef = useRef<HTMLInputElement>(null);
   const minutesInputRef = useRef<HTMLInputElement>(null);
 
-  const [date, setDate] = useState(
-    initialTime ? moment(initialTime) : moment().startOf("day"),
+  const [date, setDate] = useState<DateTime>(
+    initialTime ? parseToDateTime(initialTime)! : startOf(now(), "day")!,
   );
 
   const [isInputFocused, setIsInputFocused] = useState(false);
 
-  const [hours, setHours] = useState(moment(date, "HH:mm").format("HH"));
+  const hoursFormat = isTwelveHourFormat ? "hh" : "HH";
+  const [hours, setHours] = useState(formatDate(date, hoursFormat));
 
-  const [minutes, setMinutes] = useState(moment(date, "HH:mm").format("mm"));
+  const [minutes, setMinutes] = useState(formatDate(date, "mm"));
 
   const mountRef = useRef(false);
 
@@ -76,18 +88,19 @@ const TimePicker = ({
 
   const changeHours = (time: string) => {
     setHours(time);
-    setDate(
-      moment(
-        `${date.format("YYYY-MM-DD")} ${time}:${minutes}`,
-        "YYYY-MM-DD HH:mm",
-      ),
+    const dateStr = `${formatDate(date, "yyyy-MM-dd")} ${time}:${minutes}`;
+    const newDate = parseWithFormat(dateStr, "yyyy-MM-dd HH:mm");
+    if (newDate) setDate(newDate);
+
+    const dateFormat = isTwelveHourFormat
+      ? "yyyy-MM-dd hh:mm a"
+      : "yyyy-MM-dd HH:mm";
+
+    const parsedDate = parseWithFormat(
+      `${formatDate(date, "yyyy-MM-dd")} ${time}:${minutes} ${meridiem ?? ""}`.trim(),
+      dateFormat,
     );
-    onChange(
-      moment(
-        `${date.format("YYYY-MM-DD")} ${time}:${minutes}`,
-        "YYYY-MM-DD HH:mm",
-      ),
-    );
+    if (parsedDate) onChange(parsedDate);
   };
 
   const onHoursBlur = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -108,18 +121,19 @@ const TimePicker = ({
 
   const changeMinutes = (time: string) => {
     setMinutes(time);
-    setDate(
-      moment(
-        `${date.format("YYYY-MM-DD")} ${hours}:${time}`,
-        "YYYY-MM-DD HH:mm",
-      ),
+    const dateStr = `${formatDate(date, "yyyy-MM-dd")} ${hours}:${time}`;
+    const newDate = parseWithFormat(dateStr, "yyyy-MM-dd HH:mm");
+    if (newDate) setDate(newDate);
+
+    const dateFormat = isTwelveHourFormat
+      ? "yyyy-MM-dd hh:mm a"
+      : "yyyy-MM-dd HH:mm";
+
+    const parsedDate = parseWithFormat(
+      `${formatDate(date, "yyyy-MM-dd")} ${hours}:${time} ${meridiem ?? ""}`.trim(),
+      dateFormat,
     );
-    onChange(
-      moment(
-        `${date.format("YYYY-MM-DD")} ${hours}:${time}`,
-        "YYYY-MM-DD HH:mm",
-      ),
-    );
+    if (parsedDate) onChange(parsedDate);
   };
 
   const handleChangeHours = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -136,13 +150,17 @@ const TimePicker = ({
     }
     if (!/^\d+$/.test(h)) return;
 
-    if (+h > 23) {
+    const maxHours = isTwelveHourFormat ? 12 : 23;
+
+    if (+h > maxHours) {
       focusMinutesInput();
       if (h.length === 2) changeHours(`0${h[0]}`);
       return;
     }
 
-    if (h.length === 1 && +h > 2) {
+    const maxHoursDigit = isTwelveHourFormat ? 1 : 2;
+
+    if (h.length === 1 && +h > maxHoursDigit) {
       changeHours(`0${h}`);
       focusMinutesInput();
       return;
@@ -195,7 +213,7 @@ const TimePicker = ({
         [styles.isFocused]: isInputFocused,
       })}
       ref={forwardedRef}
-      data-testid="time-picker"
+      data-testid={testId ?? "time-picker"}
       role="group"
       aria-label="Time picker"
     >

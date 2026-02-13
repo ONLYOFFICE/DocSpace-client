@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -43,7 +43,7 @@ export type AsideProps = AsideHeaderProps & {
   /** Disables body scroll when aside is open */
   withoutBodyScroll?: boolean;
   /** Callback function when the aside is closed */
-  onClose: () => void;
+  onClose?: () => void;
   /** Removes the header section if true */
   withoutHeader?: boolean;
 };

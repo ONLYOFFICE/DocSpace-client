@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -41,12 +41,8 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { PasswordInput } from "@docspace/shared/components/password-input";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 
-import {
-  ModalContentContainer,
-  RoomIconWrapper,
-  RoomTitle,
-} from "./PasswordEntryDialog.styled";
 import type { PasswordEntryDialogProps } from "./PasswordEntryDialog.types";
+import styles from "./PasswordEntry.module.scss";
 
 const PasswordEntryDialog = ({
   onClose,
@@ -56,7 +52,7 @@ const PasswordEntryDialog = ({
   onClickDownload,
 }: PasswordEntryDialogProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const abortControllerRef = useRef<AbortController>();
+  const abortControllerRef = useRef<AbortController>(undefined);
 
   const { t } = useTranslation(["UploadPanel", "Common"]);
 
@@ -117,7 +113,6 @@ const PasswordEntryDialog = ({
       if (axios.isCancel(error)) return;
 
       toastr.error(error as Error);
-      // eslint-disable-next-line no-console
       console.error(error);
     } finally {
       setIsLoading(false);
@@ -141,18 +136,18 @@ const PasswordEntryDialog = ({
     >
       <ModalDialog.Header>{t("Common:EnterPassword")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <ModalContentContainer>
+        <section className={styles.content}>
           <span>{t("Common:NeedPassword")}:</span>
-          <RoomIconWrapper>
+          <div className={styles.roomIconWrapper}>
             <PublicRoomIcon />
-            <RoomTitle>{title}</RoomTitle>
-          </RoomIconWrapper>
+            <h4 className={styles.roomTitle}>{title}</h4>
+          </div>
           <FieldContainer
             isVertical
             labelVisible={false}
             hasError={!!errorMessage}
             errorMessage={errorMessage}
-            className="password-field"
+            className={styles.passwordField}
           >
             <PasswordInput
               scale
@@ -172,7 +167,7 @@ const PasswordEntryDialog = ({
               placeholder={t("Common:Password")}
             />
           </FieldContainer>
-        </ModalContentContainer>
+        </section>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

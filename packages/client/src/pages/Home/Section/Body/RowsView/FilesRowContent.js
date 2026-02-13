@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,9 +30,10 @@ import { isTablet } from "@docspace/shared/utils";
 
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
-import { SimpleFilesRowContent } from "@docspace/shared/styles/FilesRow.styled";
+import { FilesRowContent as SimpleFilesRowContent } from "@docspace/shared/components/files-row";
 import { getSpaceQuotaAsText } from "@docspace/shared/utils/common";
 import { getFileTypeName } from "@docspace/shared/utils/getFileType";
+import { createPluginFileHandlers } from "@docspace/shared/utils/plugin-file-utils";
 
 import { SortByFieldName } from "@docspace/shared/enums";
 import withContent from "../../../../../HOCs/withContent";
@@ -53,6 +54,7 @@ const FilesRowContent = ({
   quickButtons,
   theme,
   isRooms,
+  isAIAgentsFolder,
   isTrashFolder,
   filterSortBy,
   createdDate,
@@ -125,6 +127,12 @@ const FilesRowContent = ({
 
   const mainInfo = contentComponent();
 
+  let linkProps = { ...linkStyles };
+
+  if (item?.isPlugin) {
+    linkProps = createPluginFileHandlers(item, linkProps);
+  }
+
   return (
     <SimpleFilesRowContent
       sectionWidth={sectionWidth}
@@ -140,7 +148,7 @@ const FilesRowContent = ({
         fontWeight="600"
         fontSize="15px"
         target="_blank"
-        {...linkStyles}
+        {...linkProps}
         isTextOverflow
         dir="auto"
         truncate
@@ -152,7 +160,7 @@ const FilesRowContent = ({
       </Link>
       <div className="badges">
         {badgesComponent}
-        {!isRoom && !isRooms ? quickButtons : null}
+        {!isRoom && !isRooms && !isAIAgentsFolder ? quickButtons : null}
       </div>
 
       {isIndexing ? (
@@ -196,11 +204,13 @@ export default inject(
       isArchiveFolder,
       isTemplatesFolder,
       isPersonalReadOnly,
+      isAIAgentsFolder,
     } = treeFoldersStore;
     const { isIndexedFolder } = selectedFolderStore;
 
     const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
-    const filterSortBy = isRooms ? roomsFilter.sortBy : filter.sortBy;
+    const filterSortBy =
+      isRooms || isAIAgentsFolder ? roomsFilter.sortBy : filter.sortBy;
 
     const { isDefaultRoomsQuotaSet } = currentQuotaStore;
 

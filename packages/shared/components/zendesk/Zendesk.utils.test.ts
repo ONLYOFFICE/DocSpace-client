@@ -1,7 +1,8 @@
+import { describe, it, expect, afterEach, beforeEach, vi } from "vitest";
 import { zendeskAPI } from "./Zendesk.utils";
 
 describe("ZendeskAPI", () => {
-  let originalZE: unknown;
+  let originalZE: typeof window.zE;
 
   beforeEach(() => {
     // Store original zE if it exists
@@ -9,6 +10,7 @@ describe("ZendeskAPI", () => {
     // Clear any changes before each test
     zendeskAPI.clearChanges();
     // Reset window.zE
+    // @ts-expect-error Fix types
     delete window.zE;
   });
 
@@ -27,7 +29,7 @@ describe("ZendeskAPI", () => {
     });
 
     it("should call window.zE when Zendesk is initialized", () => {
-      const mockZE = jest.fn();
+      const mockZE = vi.fn();
       window.zE = mockZE;
 
       const args = ["webWidget", "show"];
@@ -54,7 +56,7 @@ describe("ZendeskAPI", () => {
     });
 
     it("should not add changes to queue when Zendesk is initialized", () => {
-      const mockZE = jest.fn();
+      const mockZE = vi.fn();
       window.zE = mockZE;
 
       const args = ["webWidget", "show"];

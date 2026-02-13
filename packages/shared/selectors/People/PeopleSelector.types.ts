@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -38,12 +38,16 @@ import {
 
 import type Filter from "../../api/people/filter";
 
-export interface UserTooltipProps {
+export type UserTooltipProps = {
   avatarUrl: string;
   label: string;
   email: string;
   position: string;
-}
+  className?: string;
+
+  // Accessibility attributes
+  "aria-label"?: string;
+};
 
 export type ContactsSelectorGroups =
   | { withGroups: true; isGroupsOnly?: boolean }
@@ -60,6 +64,8 @@ export type PeopleSelectorProps = TSelectorHeader &
   TSelectorAccessRights &
   TSelectorWithAside &
   TSelectorSubmitButton & {
+    targetEntityType?: "file" | "folder" | "room";
+    disabledInvitedText?: string;
     id?: string;
     className?: string;
     style?: React.CSSProperties;
@@ -86,5 +92,10 @@ export type PeopleSelectorProps = TSelectorHeader &
     injectedElement?: React.ReactElement;
     alwaysShowFooter?: boolean;
     onlyRoomMembers?: boolean;
+    isAgent?: boolean;
+    // Accessibility attributes
+    "aria-label"?: string;
+    "data-selector-type"?: string;
+    "data-test-id"?: string;
   } & ContactsSelectorGroups &
   ContactsSelectorGuests;

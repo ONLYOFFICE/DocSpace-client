@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,9 +29,11 @@ import React from "react";
 import { BadgeProps } from "./Badge.types";
 import styles from "./Badge.module.scss";
 import { Text } from "../text";
+import { TooltipContainer } from "../tooltip";
 
-const Badge = React.forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
+const Badge = (props: BadgeProps) => {
   const {
+    ref,
     onClick,
     fontSize = "11px",
     color,
@@ -42,7 +44,6 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
     maxWidth = "50px",
     height,
     type,
-    compact,
     isHovered = false,
     border,
     label = 0,
@@ -53,6 +54,7 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
     isVersionBadge,
     isPaidBadge,
     isMutedBadge,
+    dataTestId,
     ...rest
   } = props;
 
@@ -75,12 +77,18 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
     "--badge-background-color": backgroundColor,
   } as React.CSSProperties;
 
-  const innerStyle = {
-    maxWidth,
-    padding,
-    borderRadius,
-    "--badge-background-color": backgroundColor,
-  } as React.CSSProperties;
+  const innerStyle = isPaidBadge
+    ? ({
+        padding,
+        borderRadius,
+        "--badge-background-color": backgroundColor,
+      } as React.CSSProperties)
+    : ({
+        maxWidth,
+        padding,
+        borderRadius,
+        "--badge-background-color": backgroundColor,
+      } as React.CSSProperties);
 
   const textStyle = {
     fontSize,
@@ -89,7 +97,8 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
   } as React.CSSProperties;
 
   return (
-    <div
+    <TooltipContainer
+      as="div"
       ref={ref}
       className={`${styles.badge} ${styles.themed} ${className || ""}`}
       style={badgeStyle}
@@ -100,7 +109,7 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
       aria-label={`${label} ${type || ""}`}
       aria-live="polite"
       aria-atomic="true"
-      data-testid="badge"
+      data-testid={dataTestId ?? "badge"}
       data-hidden={!shouldDisplay}
       data-no-hover={noHover}
       data-is-hovered={isHovered}
@@ -113,10 +122,10 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
       <div
         className={styles.inner}
         style={innerStyle}
-        data-compact={compact}
         data-type={type}
         data-testid="badge-inner"
         aria-hidden="true"
+        data-no-hover={noHover}
       >
         <Text
           className={styles.text}
@@ -128,9 +137,9 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
           {label}
         </Text>
       </div>
-    </div>
+    </TooltipContainer>
   );
-});
+};
 
 Badge.displayName = "Badge";
 

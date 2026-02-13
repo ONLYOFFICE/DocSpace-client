@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, afterEach, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import NavLogoReactSvgUrl from "PUBLIC_DIR/images/nav.logo.react.svg?url";
 
@@ -40,12 +40,12 @@ const baseProps = {
   disabled: false,
   icon: NavLogoReactSvgUrl,
   noHover: false,
-  onClick: jest.fn(),
+  onClick: vi.fn(),
 };
 
 describe("<DropDownItem />", () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders without error", () => {
@@ -75,7 +75,7 @@ describe("<DropDownItem />", () => {
   });
 
   it("handles selected item click", () => {
-    const onClickSelectedItem = jest.fn();
+    const onClickSelectedItem = vi.fn();
     render(
       <DropDownItem
         {...baseProps}
@@ -90,7 +90,7 @@ describe("<DropDownItem />", () => {
   });
 
   it("renders with toggle button", () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     render(
       <DropDownItem {...baseProps} withToggle checked onClick={onChange} />,
     );
@@ -119,7 +119,7 @@ describe("<DropDownItem />", () => {
     const style = { backgroundColor: "red" };
     render(<DropDownItem {...baseProps} style={style} />);
     const item = screen.getByTestId("drop-down-item");
-    expect(item).toHaveStyle(style);
+    expect(item.style.backgroundColor).toBe("red");
   });
 
   it("renders with additional element", () => {

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,14 +26,14 @@
 
 import styled, { css } from "styled-components";
 import LifetimeReactSvgUrl from "PUBLIC_DIR/images/lifetime.react.svg?url";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { IconSizeType } from "@docspace/shared/utils";
 import { Tooltip } from "@docspace/shared/components/tooltip";
 import { Text } from "@docspace/shared/components/text";
 import { TTranslation } from "@docspace/shared/types";
 import { TApiKey } from "@docspace/shared/api/api-keys/types";
 import { globalColors } from "@docspace/shared/themes";
-import moment from "moment-timezone";
+import { now, parseToDateTime, isAfter } from "@docspace/shared/utils/date";
+import { IconButton } from "@docspace/shared/components/icon-button";
 
 const StyledApiKeysLifetimeIcon = styled.div<{ isExpired: boolean }>`
   ${({ isExpired }) =>
@@ -57,14 +57,16 @@ const StyledApiKeysLifetimeIcon = styled.div<{ isExpired: boolean }>`
 export const ApiKeysLifetimeIcon = ({
   t,
   item,
+  expiresAt,
   expiresAtDate,
 }: {
   t: TTranslation;
   item: TApiKey;
+  expiresAt: string;
   expiresAtDate: string;
 }) => {
-  const showLifetimeIcon = expiresAtDate;
-  const isExpired = moment().isAfter(moment(expiresAtDate));
+  const showLifetimeIcon = expiresAt;
+  const isExpired = isAfter(now(), parseToDateTime(expiresAt));
 
   const getTooltipContent = () => (
     <Text fontSize="12px" fontWeight={400} noSelect>
@@ -76,13 +78,13 @@ export const ApiKeysLifetimeIcon = ({
 
   return showLifetimeIcon ? (
     <StyledApiKeysLifetimeIcon isExpired={isExpired}>
-      <ColorTheme
-        themeId={ThemeId.IconButton}
+      <IconButton
         iconName={LifetimeReactSvgUrl}
         className="api-keys_lifetime"
         size={IconSizeType.medium}
         isClickable
         data-tooltip-id={`lifetimeTooltip${item.id}`}
+        isFill={false}
       />
       <Tooltip
         id={`lifetimeTooltip${item.id}`}

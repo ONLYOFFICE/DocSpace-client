@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,6 +26,7 @@
 
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
+import { TFunction } from "i18next";
 
 import { SearchInput } from "@docspace/shared/components/search-input";
 import { InputSize } from "@docspace/shared/components/text-input";
@@ -37,7 +38,7 @@ import AccountsPaging from "../../sub-components/AccountsPaging";
 import { Wrapper } from "../../StyledDataImport";
 import { InjectedTypeSelectProps, TypeSelectProps } from "../../types";
 import { MigrationButtons } from "../../sub-components/MigrationButtons";
-import UsersInfoBlock from "../../sub-components/UsersInfoBlock";
+import AdminsInfoBlock from "../../sub-components/AdminsInfoBlock";
 
 const PAGE_SIZE = 25;
 const REFRESH_TIMEOUT = 100;
@@ -61,12 +62,18 @@ const SelectUsersTypeStep = (props: TypeSelectProps) => {
 
     cancelUploadDialogVisible,
     setCancelUploadDialogVisible,
+    totalUsedUsers,
+    limitAdmins,
   } = props as InjectedTypeSelectProps;
 
   const [boundaries, setBoundaries] = useState([0, PAGE_SIZE]);
   const [dataPortion, setDataPortion] = useState(
     filteredUsers.slice(...boundaries),
   );
+
+  useEffect(() => {
+    setDataPortion(filteredUsers.slice(...boundaries));
+  }, [boundaries, filteredUsers, users]);
 
   const handleDataChange = (leftBoundary: number, rightBoundary: number) => {
     setBoundaries([leftBoundary, rightBoundary]);
@@ -95,6 +102,8 @@ const SelectUsersTypeStep = (props: TypeSelectProps) => {
   const showCancelDialog = () => setCancelUploadDialogVisible(true);
   const hideCancelDialog = () => setCancelUploadDialogVisible(false);
 
+  const isLimitsReached = limitAdmins ? totalUsedUsers > limitAdmins : false;
+
   const Buttons = (
     <MigrationButtons
       className="save-cancel-buttons"
@@ -106,18 +115,20 @@ const SelectUsersTypeStep = (props: TypeSelectProps) => {
       displaySettings
       migrationCancelLabel={t("Settings:CancelImport")}
       onMigrationCancelClick={showCancelDialog}
+      saveButtonDisabled={isLimitsReached}
     />
   );
-
-  useEffect(() => {
-    setDataPortion(filteredUsers.slice(...boundaries));
-  }, [boundaries, filteredUsers, users]);
 
   return (
     <Wrapper>
       {Buttons}
 
-      <UsersInfoBlock />
+      {limitAdmins ? (
+        <AdminsInfoBlock
+          limitAdmins={limitAdmins}
+          totalUsedUsers={totalUsedUsers}
+        />
+      ) : null}
 
       {filteredUsers.length > 0 ? (
         <>
@@ -136,7 +147,7 @@ const SelectUsersTypeStep = (props: TypeSelectProps) => {
 
           {filteredUsers.length > PAGE_SIZE && filteredAccounts.length > 0 ? (
             <AccountsPaging
-              t={t}
+              t={t as TFunction}
               numberOfItems={filteredUsers.length}
               setDataPortion={handleDataChange}
               pagesPerPage={PAGE_SIZE}
@@ -176,9 +187,7 @@ export default inject<TStore>(({ importAccountsStore, dialogsStore }) => {
     setMigratingWorkspace,
     setMigrationPhase,
     totalUsedUsers,
-    quota,
-    checkedUsers,
-    withEmailUsers,
+    limitAdmins,
   } = importAccountsStore;
   const { cancelUploadDialogVisible, setCancelUploadDialogVisible } =
     dialogsStore;
@@ -200,8 +209,6 @@ export default inject<TStore>(({ importAccountsStore, dialogsStore }) => {
     cancelUploadDialogVisible,
     setCancelUploadDialogVisible,
     totalUsedUsers,
-    quota,
-    checkedUsers,
-    withEmailUsers,
+    limitAdmins,
   };
 })(observer(SelectUsersTypeStep));

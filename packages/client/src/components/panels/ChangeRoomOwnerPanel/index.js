@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,7 +26,7 @@
 
 import { useMemo } from "react";
 import { inject, observer } from "mobx-react";
-import styled, { css } from "styled-components";
+import classNames from "classnames";
 import PeopleSelector from "@docspace/shared/selectors/People";
 import { withTranslation } from "react-i18next";
 import Filter from "@docspace/shared/api/people/filter";
@@ -35,38 +35,7 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
-
-const StyledChangeRoomOwner = styled.div`
-  display: contents;
-
-  .change-owner_people-selector {
-    overflow: visible;
-  }
-
-  ${({ withFooterCheckbox }) =>
-    withFooterCheckbox &&
-    css`
-      .arrow-button {
-        display: none;
-      }
-
-      .selector_body {
-        height: calc(((100% - 16px) - 111px) - 54px);
-      }
-
-      .selector_footer {
-        height: 110px;
-        min-height: 110px;
-        max-height: 110px;
-      }
-
-      .selector_footer-checkbox {
-        background-color: ${(props) =>
-          props.theme.filesPanels.aside.backgroundColor};
-        padding: 17px 0 1px 0;
-      }
-    `}
-`;
+import styles from "./ChangeRoomOwnerPanel.module.scss";
 
 const ChangeRoomOwner = (props) => {
   const {
@@ -79,8 +48,9 @@ const ChangeRoomOwner = (props) => {
     roomOwnerId,
     changeRoomOwner,
     userId,
-    updateInfoPanelSelection,
     useModal = true,
+    isAIAgent,
+    updateInfoPanelMembers,
   } = props;
 
   const handleClosePanel = () => {
@@ -99,7 +69,7 @@ const ChangeRoomOwner = (props) => {
       onOwnerChange && onOwnerChange(user[0]);
     } else {
       await changeRoomOwner(t, user[0]?.id, isChecked);
-      updateInfoPanelSelection();
+      updateInfoPanelMembers();
     }
     handleClosePanel();
   };
@@ -117,6 +87,22 @@ const ChangeRoomOwner = (props) => {
 
   const ownerIsCurrentUser = roomOwnerId === userId;
 
+  const headerLabel = isAIAgent
+    ? t("Files:ChangeTheAgentOwner")
+    : t("Files:ChangeTheRoomOwner");
+
+  const infoText = isAIAgent
+    ? t("Files:ChangeAgentOwnerSelectorInfo", {
+        productName: t("Common:ProductName"),
+      })
+    : t("CreateEditRoomDialog:PeopleSelectorInfo", {
+        productName: t("Common:ProductName"),
+      });
+
+  const footerCheckboxLabel = isAIAgent
+    ? t("Files:LeaveTheAgent")
+    : t("Files:LeaveTheRoom");
+
   const selectorComponent = (
     <PeopleSelector
       withCancelButton
@@ -130,25 +116,22 @@ const ChangeRoomOwner = (props) => {
         onCloseClick: handleClosePanel,
         onBackClick,
         withoutBackButton: !showBackButton,
-        headerLabel: t("Files:ChangeTheRoomOwner"),
+        headerLabel,
       }}
       filter={filter}
       withFooterCheckbox={!showBackButton ? ownerIsCurrentUser : null}
-      footerCheckboxLabel={t("Files:LeaveTheRoom")}
+      footerCheckboxLabel={footerCheckboxLabel}
       isChecked={!showBackButton}
       withOutCurrentAuthorizedUser
       filterUserId={roomOwnerId}
       currentUserId={userId}
       disableDisabledUsers
       withInfo
-      infoText={t("CreateEditRoomDialog:PeopleSelectorInfo", {
-        productName: t("Common:ProductName"),
-      })}
+      infoText={infoText}
       emptyScreenHeader={t("Common:NotFoundMembers")}
-      emptyScreenDescription={t("CreateEditRoomDialog:PeopleSelectorInfo", {
-        productName: t("Common:ProductName"),
-      })}
-      className="change-owner_people-selector"
+      emptyScreenDescription={infoText}
+      className={styles.changeOwnerPeopleSelector}
+      data-test-id="change_owner_people_selector"
     />
   );
 
@@ -161,11 +144,15 @@ const ChangeRoomOwner = (props) => {
       withoutPadding
     >
       <ModalDialog.Body>
-        <StyledChangeRoomOwner
-          withFooterCheckbox={!showBackButton ? ownerIsCurrentUser : null}
+        <div
+          className={classNames(styles.changeRoomOwner, {
+            [styles.withFooterCheckbox]: !showBackButton
+              ? ownerIsCurrentUser
+              : false,
+          })}
         >
           {selectorComponent}
-        </StyledChangeRoomOwner>
+        </div>
       </ModalDialog.Body>
     </ModalDialog>
   ) : (
@@ -185,7 +172,8 @@ export default inject(
     const { changeRoomOwnerIsVisible, setChangeRoomOwnerIsVisible } =
       dialogsStore;
     const { selection, bufferSelection } = filesStore;
-    const { updateInfoPanelSelection } = infoPanelStore;
+
+    const { updateInfoPanelMembers } = infoPanelStore;
 
     const room = selection.length
       ? selection[0]
@@ -199,7 +187,8 @@ export default inject(
       roomOwnerId: room?.createdBy?.id,
       changeRoomOwner: filesActionsStore.changeRoomOwner,
       userId: id,
-      updateInfoPanelSelection,
+      isAIAgent: room?.isAIAgent,
+      updateInfoPanelMembers,
     };
   },
 )(

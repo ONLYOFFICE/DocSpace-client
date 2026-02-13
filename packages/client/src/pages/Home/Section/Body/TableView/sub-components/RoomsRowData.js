@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,10 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useMemo } from "react";
 import { inject, observer } from "mobx-react";
+
 import { TableCell } from "@docspace/shared/components/table";
 import { classNames, getLastColumn } from "@docspace/shared/utils";
+
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import FileNameCell from "./FileNameCell";
 import TypeCell from "./TypeCell";
@@ -61,9 +63,16 @@ const RoomsRowDataComponent = (props) => {
     quickButtonsComponent,
     item,
     tableStorageName,
+    index,
+    t,
   } = props;
 
-  const lastColumn = getLastColumn(tableStorageName);
+  const storageColumns = localStorage.getItem(tableStorageName);
+  const lastColumn = useMemo(
+    () => getLastColumn(tableStorageName),
+    [tableStorageName, storageColumns],
+  );
+
   const quickButtonsComponentNode = (
     <StyledQuickButtonsContainer>
       {quickButtonsComponent}
@@ -74,6 +83,7 @@ const RoomsRowDataComponent = (props) => {
     <>
       <TableCell
         {...dragStyles}
+        dataTestId={`rooms-cell-name-${index}`}
         className={classNames(
           selectionProp?.className,
           "table-container_file-name-cell",
@@ -81,12 +91,17 @@ const RoomsRowDataComponent = (props) => {
         value={value}
       >
         <FileNameCell
+          item={item}
           theme={theme}
           onContentSelect={onContentFileSelect}
           checked={checkedProps}
           element={element}
           inProgress={inProgress}
-          {...props}
+          titleWithoutExt={props.titleWithoutExt}
+          linkStyles={props.linkStyles}
+          t={t}
+          isIndexEditingMode={props.isIndexEditingMode}
+          displayFileExtension={props.displayFileExtension}
         />
         <StyledBadgesContainer showHotkeyBorder={showHotkeyBorder}>
           {badgesComponent}
@@ -96,11 +111,8 @@ const RoomsRowDataComponent = (props) => {
 
       {roomColumnTypeIsEnabled ? (
         <TableCell
-          style={
-            !roomColumnTypeIsEnabled
-              ? { background: "none !important" }
-              : dragStyles.style
-          }
+          dataTestId={`rooms-cell-type-${index}`}
+          style={dragStyles.style}
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
@@ -108,8 +120,9 @@ const RoomsRowDataComponent = (props) => {
           )}
         >
           <TypeCell
+            t={t}
+            item={item}
             sideColor={theme.filesSection.tableView.row.sideColor}
-            {...props}
           />
           {lastColumn === "Type" ? quickButtonsComponentNode : null}
         </TableCell>
@@ -119,16 +132,15 @@ const RoomsRowDataComponent = (props) => {
 
       {roomColumnTagsIsEnabled ? (
         <TableCell
-          style={
-            !roomColumnTagsIsEnabled
-              ? { background: "none !important" }
-              : dragStyles.style
-          }
+          dataTestId={`rooms-cell-tags-${index}`}
+          style={dragStyles.style}
           {...selectionProp}
         >
           <TagsCell
+            item={props.item}
+            tagCount={props.tagCount}
+            onSelectTag={props.onSelectTag}
             sideColor={theme.filesSection.tableView.row.sideColor}
-            {...props}
           />
           {lastColumn === "Tags" ? quickButtonsComponentNode : null}
         </TableCell>
@@ -138,11 +150,8 @@ const RoomsRowDataComponent = (props) => {
 
       {roomColumnOwnerIsEnabled ? (
         <TableCell
-          style={
-            !roomColumnOwnerIsEnabled
-              ? { background: "none" }
-              : dragStyles.style
-          }
+          dataTestId={`rooms-cell-owner-${index}`}
+          style={dragStyles.style}
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
@@ -151,7 +160,8 @@ const RoomsRowDataComponent = (props) => {
         >
           <AuthorCell
             sideColor={theme.filesSection.tableView.row.sideColor}
-            {...props}
+            fileOwner={props.fileOwner}
+            item={item}
           />
           {lastColumn === "Owner" ? quickButtonsComponentNode : null}
         </TableCell>
@@ -161,11 +171,8 @@ const RoomsRowDataComponent = (props) => {
 
       {roomColumnActivityIsEnabled ? (
         <TableCell
-          style={
-            !roomColumnActivityIsEnabled
-              ? { background: "none" }
-              : dragStyles.style
-          }
+          dataTestId={`rooms-cell-activity-${index}`}
+          style={dragStyles.style}
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
@@ -174,7 +181,11 @@ const RoomsRowDataComponent = (props) => {
         >
           <DateCell
             sideColor={theme.filesSection.tableView.row.sideColor}
-            {...props}
+            create={props.create}
+            updatedDate={props.updatedDate}
+            createdDate={props.createdDate}
+            lastOpenedDate={props.lastOpenedDate}
+            isRecentFolder={props.isRecentFolder}
           />
           {lastColumn === "Activity" ? quickButtonsComponentNode : null}
         </TableCell>
@@ -183,7 +194,11 @@ const RoomsRowDataComponent = (props) => {
       )}
       {showStorageInfo ? (
         roomQuotaColumnIsEnable ? (
-          <TableCell className="table-cell_Storage/Quota">
+          <TableCell
+            dataTestId={`rooms-cell-storage-${index}`}
+            className="table-cell_Storage/Quota"
+            style={dragStyles.style}
+          >
             <SpaceQuota
               item={item}
               type="room"

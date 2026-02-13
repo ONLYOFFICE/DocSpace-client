@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import PropTypes from "prop-types";
-import styled from "styled-components";
 import { useTranslation, Trans } from "react-i18next";
 
 import { Button } from "@docspace/shared/components/button";
@@ -35,17 +34,7 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { inject, observer } from "mobx-react";
 import { getConvertedSize } from "@docspace/shared/utils/common";
 
-const StyledBodyContent = styled.div`
-  display: contents;
-
-  .cannot-downgrade-plan {
-    margin-bottom: 16px;
-  }
-
-  .save-or-change {
-    margin-top: 16px;
-  }
-`;
+import styles from "./ChangePricingPlan.module.scss";
 
 const ChangePricingPlanDialog = ({
   visible,
@@ -97,18 +86,18 @@ const ChangePricingPlanDialog = ({
     >
       <ModalDialog.Header>{t("ChangePricingPlan")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <StyledBodyContent>
-          <Text fontSize="13px" isBold className="cannot-downgrade-plan">
+        <div className={styles.content}>
+          <Text fontSize="13px" isBold className={styles.cannotDowngradePlan}>
             {t("CannotChangePlan")}
           </Text>
           {planUsersLimitations}
           <br />
           {storagePlanLimitations}
 
-          <Text fontSize="13px" className="save-or-change">
+          <Text fontSize="13px" className={styles.saveOrChange}>
             {t("SaveOrChange")}
           </Text>
-        </StyledBodyContent>
+        </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

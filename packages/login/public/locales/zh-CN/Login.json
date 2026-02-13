@@ -1,6 +1,8 @@
 {
   "ChangePasswordSuccess": "密码已成功更改",
   "CodeTitle": "代码已通过电子邮件发送给您的",
+  "ConfirmEmailChange": "确认更改的邮箱地址",
+  "ConfirmEmailChangeText": "您已申请更改{{productName}}账户的邮箱地址，请使用当前凭据登录以继续操作。",
   "ErrorInvalidText": "10 秒后，您将被重定向到<1>{{productName}}</1>",
   "ForgotPassword": "忘记密码？",
   "LDAPUsernamePlaceholder": "用户名{{ldap_domain}}",

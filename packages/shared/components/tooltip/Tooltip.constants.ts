@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,3 +25,5 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 export const DEFAULT_OFFSET = 4;
+export const DEFAULT_DELAY_SHOW = 700;
+export const SYSTEM_TOOLTIP_TOP_OFFSET = 15;

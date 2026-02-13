@@ -1,0 +1,28 @@
+{
+  "key_path": "AIRoomDescription",
+  "content": "A versatile chat powered by your chosen text model. Use it to solve everyday tasks and collaborate on text documents, spreadsheets, and presentations. All files added to the room are automatically used as context during your conversations with the chat.",
+  "content_en_sha1_hash": "09632c1987210f7024ec0e3a3c6d32e5d2b64847",
+  "created_at": "2025-10-27T16:14:10.301Z",
+  "updated_at": "2025-10-27T16:54:25.838Z",
+  "comment": {
+    "text": "This key provides a short description for an AI-powered chat room. It explains that the chat uses a text model to help with tasks and collaboration, automatically using any added files as context. This description appears within the UI to inform users about the functionality of the AI room.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T16:54:25.838Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/room-type/RoomType.utils.ts",
+      "line_number": 44,
+      "context": "case RoomsType.VirtualDataRoom:\n return t(\"Common:VirtualDataRoomDescription\");\n case RoomsType.CustomRoom:\n return t(\"Common:CustomRoomDescription\");\n case RoomsType.AIRoom:\n return t(\"Common:AIRoomDescription\");\n case RoomsType.PublicRoom:\n return t(\"Common:PublicRoomInfo\");\n case RoomsType.FormRoom:\n return t(\"Common:FormFilingRoomInfo\");\n default:",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -33,9 +33,9 @@ const DateCell = ({
   createdDate,
   sideColor,
   lastOpenedDate,
-  isRecentTab,
+  isRecentFolder,
 }) => {
-  const date = isRecentTab
+  const date = isRecentFolder
     ? lastOpenedDate
     : create
       ? createdDate
@@ -55,4 +55,4 @@ const DateCell = ({
   );
 };
 
-export default DateCell;
+export default React.memo(DateCell);

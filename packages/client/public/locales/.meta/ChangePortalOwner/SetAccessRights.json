@@ -3,7 +3,7 @@
   "content": "Set access rights",
   "content_en_sha1_hash": "4cbcac2997ec0e814421347366cf3f305b113674",
   "created_at": "2025-05-19T21:30:57.000Z",
-  "updated_at": "2025-05-20T09:37:39.316Z",
+  "updated_at": "2025-05-24T14:20:25.135Z",
   "comment": {
     "text": "This translation key is used to describe the action of setting access rights. It will appear as a button label in a UI element, such as a dialog or settings page, and instructs the user to assign permissions to an entity (e.g., portal owner).",
     "is_auto": true,
@@ -123,7 +123,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Konfiguruj prawa dostępu\" is understandable, it's not the most natural or direct translation of \"Set access rights.\" \"Ustaw prawa dostępu\" would be a more accurate and common translation.",
+          "suggestion": "Ustaw prawa dostępu"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -141,7 +147,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Configurare\" is acceptable, \"Set\" implies a more direct action. \"Stabili drepturi de acces\" would be a more accurate translation.",
+          "suggestion": "Stabili drepturi de acces"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -171,13 +183,30 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Постави права приступа' is not an accurate translation of 'Set access rights'. 'Приступа' refers to access, but 'права' implies rights, which doesn't quite align with the English phrasing. A more accurate translation would focus on 'postavke' (settings) or 'dostup' (access).",
+          "suggestion": "Подеси права приступа"
+        },
+        {
+          "type": "spelling",
+          "description": "While 'Постави' isn't inherently incorrect, 'Подеси' is more common and idiomatic in this context, conveying the meaning of setting or configuring.",
+          "suggestion": "Подеси"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Postavi prava pristupa\" is not the most natural or accurate translation of \"Set access rights.\" While technically correct, it's a bit literal and less common usage. A more natural translation would be something like \"Dodeljivanje prava pristupa\" or \"Postavljanje prava pristupa\".",
+          "suggestion": "Dodeljivanje prava pristupa"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

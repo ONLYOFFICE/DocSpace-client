@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -53,13 +53,7 @@ export interface PrivateRouteProps
   identityServerEnabled?: boolean;
   isCommunity?: boolean;
   isEnterprise?: boolean;
-  isLoadedUser?: boolean;
-
-  validatePublicRoomKey: ((key: string) => void) | undefined;
-  publicRoomKey: string | null | undefined;
-  roomId: string | undefined;
-  isLoadedPublicRoom: boolean | undefined;
-  isLoadingPublicRoom: boolean | undefined;
+  standalone: boolean;
 }
 
 export interface PublicRouteProps

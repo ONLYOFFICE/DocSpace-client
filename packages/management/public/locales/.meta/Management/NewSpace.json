@@ -3,7 +3,7 @@
   "content": "New space",
   "content_en_sha1_hash": "89f3d523d25760ac054c8911723ac46a60384838",
   "created_at": "2025-05-19T21:30:57.459Z",
-  "updated_at": "2025-05-20T09:47:55.516Z",
+  "updated_at": "2025-05-26T07:57:33.005Z",
   "comment": {
     "text": "This translation key is used for the label \"New space\" which appears on a button in the MultipleSpaces component, likely triggering the creation of a new portal when clicked.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/management/src/categories/spaces/sub-components/MultipleSpaces.tsx",
-      "line_number": 66,
-      "context": "return (\n <StyledMultipleSpaces>\n <div className=\"multiple-spaces-section\">\n <Button\n size={buttonSize}\n label={t(\"NewSpace\")}\n className=\"spaces-button\"\n primary\n onClick={() => setCreatePortalDialogVisible(true)}\n />\n <SpacesRowContainer portals={portals} />",
+      "file_path": "/packages/management/src/app/spaces/multiple/header.tsx",
+      "line_number": 43,
+      "context": "const { t } = useTranslation([\"Management\"]);\n const { currentDeviceType } = useDeviceType();\n const { spacesStore } = useStores();\n const { setCreatePortalDialogVisible } = spacesStore;\n \n const onNewSpaceClick = () => {\n setCreatePortalDialogVisible(true);\n };\n \n return (\n <>",
       "module": "/packages/management"
     }
   ],
@@ -51,7 +51,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The German translation 'Neues Space' doesn't fully capture the meaning of \"New space\". 'Space' is an English loanword and using it directly might not be the best option. A more appropriate translation would depend on the context (e.g., 'Neuer Platz', 'Neuer Bereich', 'Neue Fläche').",
+          "suggestion": "Consider alternative translations like 'Neuer Platz', 'Neuer Bereich', or 'Neue Fläche' depending on the specific meaning of \"New space\"."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -153,7 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"නව අඩවිය\" (nawa adawiya) is a possible translation for \"New space,\" it's quite literal and might not convey the intended meaning depending on the context. 'New space' can refer to a new website, a new area, or a new opportunity. \"නව ඉඩම\" (nawa idam) might be a more versatile and common translation in some contexts, or perhaps a more specific translation depending on the intended meaning of 'New space'.",
+          "suggestion": "Consider 'නව ඉඩම' (nawa idam) or a more context-specific translation."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -201,7 +213,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"新协作空间\" (Xīn Xiézuò Kōngjiān) translates to \"New Collaborative Space\". While \"new space\" can imply collaboration, \"新协作空间\" is a more specific translation and might not accurately reflect the original meaning depending on the intended context.  \"新空间\" (Xīn Kōngjiān) would be a more direct and literal translation of \"New Space\".",
+          "suggestion": "Consider using \"新空间\" (Xīn Kōngjiān) for a more literal translation, or evaluate if \"新协作空间\" truly fits the intended meaning."
+        }
+      ],
       "approved_at": null
     }
   }

@@ -3,7 +3,7 @@
   "content": "There will be two different folders in the destination",
   "content_en_sha1_hash": "9a65fed564ea437210a6034adccdbc92a281eede",
   "created_at": "2025-05-19T21:30:43.884Z",
-  "updated_at": "2025-05-22T11:56:37.345Z",
+  "updated_at": "2025-05-28T09:30:02.218Z",
   "comment": {
     "text": "\"There will be two different folders in the destination\" is a description used to inform users about the expected structure of the target location during folder creation.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\ConflictResolveDialog\\index.tsx",
+      "file_path": "/packages/client/src/components/dialogs/ConflictResolveDialog/index.tsx",
       "line_number": 296,
       "context": "};\n const getDuplicateDescription = () => {\n return isFileDialog\n ? t(\"Common:CreateDescription\")\n : isFolderDialog\n ? t(\"Common:CreateFolderDescription\")\n : t(\"Common:FoldersAndFilesWillBeCopied\");\n };\n const getSkipDescription = () => {\n return isFileDialog\n ? t(\"Common:SkipDescription\")",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

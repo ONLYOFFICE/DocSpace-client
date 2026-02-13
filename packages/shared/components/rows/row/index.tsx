@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,28 +24,30 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useRef } from "react";
-import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow2.react.svg?url";
-import { isMobile } from "react-device-detect"; // TODO: isDesktop=true for IOS(Firefox & Safari)
+"use client";
+
+import equal from "fast-deep-equal";
 import classNames from "classnames";
-import { IconSizeType } from "../../../utils";
+import React, { useRef } from "react";
+import { isMobile } from "react-device-detect"; // TODO: isDesktop=true for IOS(Firefox & Safari)
 
 import { VDRIndexingAction } from "../../../enums";
 import { isMobile as isMobileUtils } from "../../../utils/device";
 
 import { Checkbox } from "../../checkbox";
-import { ColorTheme, ThemeId } from "../../color-theme";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
 } from "../../context-menu-button";
 import { ContextMenu, ContextMenuRefType } from "../../context-menu";
 import { Loader, LoaderTypes } from "../../loader";
+import { IndexIconButtons } from "../../index-icon-buttons";
+
 import { RowProps } from "./Row.types";
 import { hasOwnProperty } from "../../../utils/object";
 import styles from "./Row.module.scss";
 
-const Row = (props: RowProps) => {
+const Row = React.memo((props: RowProps) => {
   const {
     checked,
     children,
@@ -72,6 +74,7 @@ const Row = (props: RowProps) => {
     badgeUrl,
     isDisabled,
     isIndexEditingMode,
+    dataTestId,
   } = props;
 
   const cm = useRef<ContextMenuRefType>(null);
@@ -110,6 +113,23 @@ const Row = (props: RowProps) => {
 
   let contextMenuHeader;
   if (React.isValidElement(children) && children.props.item) {
+    const coverValue = children.props.item.logo?.cover;
+    let coverObject;
+
+    // Handle both string and object types for cover
+    if (coverValue) {
+      if (typeof coverValue === "string") {
+        // If cover is a string, create an ICover object with the string as data
+        coverObject = {
+          data: coverValue,
+          id: "",
+        };
+      } else if (typeof coverValue === "object") {
+        // If cover is already an object with data and id
+        coverObject = coverValue;
+      }
+    }
+
     contextMenuHeader = {
       icon: children.props.item.icon,
       avatar: children.props.item.avatar,
@@ -118,7 +138,7 @@ const Row = (props: RowProps) => {
         : children.props.item.displayName || "",
       color: children.props.item.logo?.color,
       logo: children.props.item.logo?.medium,
-      cover: children.props.item.logo?.cover,
+      cover: coverObject,
       original: "",
       large: "",
       medium: "",
@@ -146,6 +166,7 @@ const Row = (props: RowProps) => {
       onContextMenu={onContextMenu}
       className={classNames(
         styles.row,
+        checked ? "checked" : "",
         {
           [styles.withoutBorder]: withoutBorder,
           [styles.modern]: mode === "modern",
@@ -154,7 +175,7 @@ const Row = (props: RowProps) => {
         },
         className,
       )}
-      data-testid="row"
+      data-testid={dataTestId ?? "row"}
     >
       {inProgress ? (
         <Loader
@@ -239,26 +260,14 @@ const Row = (props: RowProps) => {
           <div className={styles.contentElement}>{contentElement}</div>
         ) : null}
         {isIndexEditingMode ? (
-          <>
-            <ColorTheme
-              themeId={ThemeId.IndexIconButton}
-              iconName={ArrowReactSvgUrl}
-              className="index-up-icon"
-              size={IconSizeType.small}
-              onClick={(e: React.MouseEvent<HTMLElement>) =>
-                changeIndex(e, VDRIndexingAction.HigherIndex)
-              }
-            />
-            <ColorTheme
-              themeId={ThemeId.IndexIconButton}
-              iconName={ArrowReactSvgUrl}
-              className="index-down-icon"
-              size={IconSizeType.small}
-              onClick={(e: React.MouseEvent<HTMLElement>) =>
-                changeIndex(e, VDRIndexingAction.LowerIndex)
-              }
-            />
-          </>
+          <IndexIconButtons
+            onUpIndexClick={(e: React.MouseEvent<HTMLElement>) =>
+              changeIndex(e, VDRIndexingAction.HigherIndex)
+            }
+            onDownIndexClick={(e: React.MouseEvent<HTMLElement>) =>
+              changeIndex(e, VDRIndexingAction.LowerIndex)
+            }
+          />
         ) : (
           <>
             {renderContext ? (
@@ -290,6 +299,6 @@ const Row = (props: RowProps) => {
       </div>
     </div>
   );
-};
+}, equal);
 
 export { Row };

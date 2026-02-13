@@ -1,5 +1,5 @@
 /*
- * (c) Copyright Ascensio System SIA 2009-2025
+ * (c) Copyright Ascensio System SIA 2009-2026
  *
  * This program is a free software product.
  * You can redistribute it and/or modify it under the terms
@@ -65,7 +65,8 @@ const getPlayList = (files: TFileItem[]) => {
           fileStatus: file.fileStatus,
           canShare: file.canShare,
           version: file.version,
-          thumbnailUrl: file.thumbnailUrl || "",
+          thumbnailUrl:
+            !file.providerItem && file.thumbnailUrl ? file.thumbnailUrl : "",
         });
 
         const thumbnailIsNotCreated =

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,42 +26,14 @@
 
 import { useMemo } from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
 import { useTranslation } from "react-i18next";
-import { tablet } from "@docspace/shared/utils";
+import classNames from "classnames";
 import { inject, observer } from "mobx-react";
-import { globalColors } from "@docspace/shared/themes";
+
 import ProfileActions from "./profile-actions";
 
-const StyledNav = styled.nav`
-  display: flex;
+import styles from "../nav.module.scss";
 
-  padding-block: 0;
-  padding-inline: 16px 20px;
-
-  align-items: center;
-  position: absolute;
-
-  inset-inline-end: 0;
-  height: 48px;
-  z-index: 180 !important;
-
-  & > div {
-    margin: 0 16px;
-    padding: 0;
-    min-width: 24px;
-  }
-
-  @media ${tablet} {
-    padding-block: 0;
-    padding-inline: 16px 0;
-  }
-  .icon-profile-menu {
-    cursor: pointer;
-    -webkit-tap-highlight-color: ${globalColors.tapHighlight};
-    z-index: 300;
-  }
-`;
 const HeaderNav = ({
   user,
   isAuthenticated,
@@ -70,11 +42,11 @@ const HeaderNav = ({
   getActions,
   hideProfileMenu,
 }) => {
-  const { t } = useTranslation(["Common", "About"]);
+  const { t } = useTranslation(["Common"]);
   const userActions = useMemo(() => getActions(t), [getActions, t]);
 
   return (
-    <StyledNav className="profileMenuIcon hidingHeader">
+    <nav className={classNames(styles.nav, "profileMenuIcon", "hidingHeader")}>
       {isAuthenticated && user && !hideProfileMenu ? (
         <ProfileActions
           userActions={userActions}
@@ -83,7 +55,7 @@ const HeaderNav = ({
           setUserIsUpdate={setUserIsUpdate}
         />
       ) : null}
-    </StyledNav>
+    </nav>
   );
 };
 

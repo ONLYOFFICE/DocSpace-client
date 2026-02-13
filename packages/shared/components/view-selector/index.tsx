@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,6 +31,7 @@ import classNames from "classnames";
 
 import { TViewSelectorOption, ViewSelectorProps } from "./ViewSelector.types";
 import styles from "./ViewSelector.module.scss";
+import { TooltipContainer } from "../tooltip";
 
 const ViewSelector = ({
   isDisabled,
@@ -69,7 +70,8 @@ const ViewSelector = ({
       const { value, icon, id } = el;
 
       return (
-        <div
+        <TooltipContainer
+          as="div"
           className={classNames(styles.iconWrapper, {
             "view-selector-icon": true,
             [styles.disabled]: isDisabled,
@@ -88,7 +90,7 @@ const ViewSelector = ({
           data-testid="view-selector-icon"
         >
           {typeof icon === "string" ? <ReactSVG src={icon} /> : icon}
-        </div>
+        </TooltipContainer>
       );
     });
   };
@@ -102,7 +104,8 @@ const ViewSelector = ({
       const { value, icon } = element;
 
       return (
-        <div
+        <TooltipContainer
+          as="div"
           className={classNames(styles.iconWrapper, {
             [styles.disabled]: isDisabled,
             [styles.filter]: isFilter,
@@ -117,7 +120,7 @@ const ViewSelector = ({
           data-testid="view-selector-icon"
         >
           {typeof icon === "string" ? <ReactSVG src={icon} /> : icon}
-        </div>
+        </TooltipContainer>
       );
     }
 

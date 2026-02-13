@@ -3,7 +3,7 @@
   "content": "Lifetime (min)",
   "content_en_sha1_hash": "20610b86435a234a6314cab2a967b3e0bbfd719f",
   "created_at": "2025-05-19T21:30:51.805Z",
-  "updated_at": "2025-05-21T03:56:51.050Z",
+  "updated_at": "2025-09-17T13:43:01.892Z",
   "comment": {
     "text": "This translation key describes the minimum lifetime of a session. It is used to set the duration for which user data remains stored in session storage.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/sessionLifetime.js",
       "line_number": 44,
-      "context": "import isEqual from \"lodash/isEqual\";\n \n import { DeviceType } from \"@docspace/shared/enums\";\n import { saveToSessionStorage } from \"@docspace/shared/utils/saveToSessionStorage\";\n import { getFromSessionStorage } from \"@docspace/shared/utils/getFromSessionStorage\";\n import SessionLifetimeLoader from \"../sub-components/loaders/session-lifetime-loader\";\n import { LearnMoreWrapper } from \"../StyledSecurity\";\n \n const MainContainer = styled.div`\n width: 100%;",
+      "context": "import isEqual from \"lodash/isEqual\";\n \n import { DeviceType } from \"@docspace/shared/enums\";\n import { saveToSessionStorage } from \"@docspace/shared/utils/saveToSessionStorage\";\n import { getFromSessionStorage } from \"@docspace/shared/utils/getFromSessionStorage\";\n import SessionLifetimeLoader from \"../sub-components/loaders/session-lifetime-loader\";\n import { LearnMoreWrapper } from \"../StyledSecurity\";\n import useSecurity from \"../useSecurity\";\n import { createDefaultHookSettingsProps } from \"../../../utils/createDefaultHookSettingsProps\";\n \n const MainContainer = styled.div`",
       "module": "/packages/client"
     }
   ],
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation \"الوقت المتبقي (دقيقة)\" translates to \"Remaining Time (minute)\" which is not equivalent to \"Lifetime (min)\".  'Lifetime' implies a total or indefinite duration, while 'Remaining Time' suggests a time left.",
-          "suggestion": "Consider alternatives like \"المدة (دقيقة)\" which translates to 'Duration (minute)' or \"الفترة الزمنية (دقيقة)\" which translates to 'Time period (minute)' depending on the precise meaning intended."
+          "description": "The Arabic translation \"الوقت المتبقي (دقيقة)\" translates to \"Remaining Time (minute)\". It doesn't accurately convey the meaning of \"Lifetime (min)\". \"Lifetime\" implies a total duration, whereas \"Remaining Time\" implies a duration yet to be experienced.",
+          "suggestion": "Consider a translation like \"المدة (دقيقة)\" which translates to \"Duration (minute)\" or \"الفترة (دقيقة)\" which means \"Period (minute)\". The best option depends on the specific context of 'Lifetime'."
         }
       ],
       "approved_at": null
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ömürlük (dəq)' isn't the most natural or precise translation of \"Lifetime (min)\". While 'Ömürlük' is accurate for 'Lifetime', '(dəq)' doesn't directly translate to '(min)'. It's more of a transliteration. A more accurate translation of '(min)' would be '(dəqiqə)' or simply '(dəq.)'.",
-          "suggestion": "Ömürlük (dəqiqə)"
+          "description": "While 'Ömürlük' translates to 'Lifetime', the abbreviation '(dəq)' is a literal translation of '(min)'. It is more appropriate to use a more natural Azerbaijani abbreviation for minutes, like '(dəq.)' or simply omit it if the context makes it clear.",
+          "suggestion": "Ömürlük (dəq.)"
         }
       ],
       "approved_at": null
@@ -78,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Duración (min)' doesn't fully capture the meaning of 'Lifetime (min)'. 'Lifetime' implies a duration that extends indefinitely or for a very long time, while 'Duración' simply means 'duration'.",
-          "suggestion": "Consider 'Vida útil (min)' or 'Periodo de vida (min)' to better convey the meaning of 'Lifetime'."
+          "description": "The translation 'Duración (min)' doesn't fully capture the meaning of 'Lifetime (min)'. 'Lifetime' implies a length or period of existence, which 'Duración' represents, but 'Lifetime' has a slightly different nuance.",
+          "suggestion": "Vida útil (min)"
         }
       ],
       "approved_at": null
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Աշխատաժամ (րոպե)\" translates to 'Working hours (minute)' which is not an accurate translation of 'Lifetime (min)'. 'Lifetime' implies duration or period, which is not conveyed by 'աշխատաժամ'.",
-          "suggestion": "Consider alternatives like \"Ժամկետ (րոպե)\" (Duration (minute)) or \"Տևողություն (րոպե)\" (Length (minute)) or \"Կյանքի տևողություն (րոպե)\" (Lifetime duration (minute)) depending on the specific context."
+          "description": "The Armenian translation \"Աշխատաժամ (րոպե)\" translates to 'Working hours (minute)' which is not an accurate translation of 'Lifetime (min)'.  'Lifetime' in this context likely refers to the duration or validity period, not working hours.",
+          "suggestion": "A more accurate translation would be something like \"Ժամկետ (րոպե)” (Jamket (rope)), which means 'Term (minute)' or \"Տևականություն (րոպե)” (Tevakanut'yun (rope)), meaning 'Duration (minute)'.  The best option depends on the specific context."
         }
       ],
       "approved_at": null
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Durata\" is a valid Italian word for \"Duration\", \"Lifetime\" implies a lasting or permanent state. \"Durata\" suggests a time period, which is a less precise translation.",
-          "suggestion": "Consider alternatives like \"Vita\" (Life) or \"Permanenza\" (Permanence) to more accurately convey the meaning of 'Lifetime'."
+          "description": "The translation 'Durata (min)' is a reasonable approximation of 'Lifetime (min)', but 'Lifetime' implies a total duration or period, while 'Durata' simply means duration. A more precise translation might consider alternatives like 'Periodo (min)' or 'Tempo di vita (min)'.",
+          "suggestion": "Consider 'Periodo (min)' or 'Tempo di vita (min)' for a more accurate translation."
         }
       ],
       "approved_at": null
@@ -123,13 +123,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Lifetime (min)' refers to the duration of a subscription or access, expressed in minutes. The Japanese translation '有効期間（分）' accurately conveys 'Valid Period (min)' but not necessarily 'Lifetime'. 'Lifetime' suggests a perpetual or very long duration, which isn't explicitly conveyed.",
-          "suggestion": "Consider '無期限（分）' to better reflect 'Lifetime', or '有効期間（分）' if the intent is to indicate a term rather than a lifetime."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -138,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English \"Lifetime (min)\" refers to a duration measured in minutes, indicating the maximum lifetime in minutes. The Korean translation \"수명(분)\" while containing \"분\" (minutes), doesn't fully capture the concept of a *maximum* lifetime.  A more accurate translation would specify 'maximum' or '최대' before 수명.",
-          "suggestion": "최대 수명(분)"
+          "description": "The translation '수명(분)' doesn't fully capture the meaning of 'Lifetime (min)'. While '수명' translates to 'lifetime', the addition of '(분)' which means '(min)' feels abrupt and not natural in Korean. It's a literal translation that doesn't consider the context and flow of the UI.",
+          "suggestion": "Consider alternatives like '수명(최소)' - 'Lifetime (minimum)' or '최소 수명(분)' - 'Minimum lifetime (min)' depending on the specific UI context."
         }
       ],
       "approved_at": null
@@ -150,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ຕະຫຼອດຊີວິດ (ນາທີ)' literally translates to 'Lifetime (minutes)'. While 'ຕະຫຼອດຊີວິດ' is correct for 'Lifetime', adding '(ນາທີ)' (minutes) might not be the most natural or accurate translation in this context. It implies a lifetime is measured in minutes, which is likely not the intended meaning. It's possible it's meant to indicate a minimum duration, but that's not clear from the English.",
-          "suggestion": "Consider a translation that conveys the intended meaning of a minimum lifetime duration.  Options include: 'ໄລຍະເວລາທີ່ໃຊ້ໄດ້ຢ່າງຕໍ່ເນື່ອງຢ່າງໜ້ອຍ' (minimum continuous duration), 'ເວລາທີ່ໃຊ້ໄດ້ຢ່າງໜ້ອຍ' (minimum duration), or simply 'ໄລຍະເວລາ' (duration) if the 'min' is implicit in the UI context.  Further context is needed to determine the best option."
+          "description": "The Lao translation \"ຕະຫຼອດຊີວິດ (ນາທີ)\" literally translates to \"Lifetime (minutes)\". While technically correct, the English phrase \"Lifetime (min)\" implies a minimum duration, and the direct translation doesn't convey that nuance. It's more accurate to convey the concept of a minimum lifetime.",
+          "suggestion": "ຕະຫຼອດຊີວິດຢ່າງໜ້ອຍ (ນາທີ)"
         }
       ],
       "approved_at": null
@@ -174,7 +168,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Długość (min)\" doesn't accurately reflect the meaning of \"Lifetime (min)\". \"Lifetime\" refers to the duration or lifespan of something, while \"Długość\" primarily means length or distance. A more accurate translation would convey the concept of duration or lifespan.",
+          "description": "The translation 'Długość (min)' does not accurately convey the meaning of 'Lifetime (min)'. 'Lifetime' refers to the duration or period something lasts, whereas 'Długość' means 'length'.",
           "suggestion": "Żywotność (min)"
         }
       ],
@@ -186,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Duração (min)\" doesn't accurately convey the meaning of \"Lifetime (min)\". \"Lifetime\" refers to the duration of something, but \"Duração\" is a more general term for duration. A more accurate translation would emphasize the concept of a lifespan or continuous existence.",
-          "suggestion": "Existência (min) or Vida útil (min)"
+          "description": "The translation 'Duração (min)' doesn't accurately convey the meaning of 'Lifetime (min)'. 'Lifetime' implies a period of existence or validity. 'Duração' means 'duration', which is related but not a direct equivalent. A better translation would emphasize the 'lifetime' aspect.",
+          "suggestion": "Vida útil (min)"
         }
       ],
       "approved_at": null
@@ -204,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Durata\" is a valid Romanian word for \"Duration\", it doesn't perfectly capture the nuance of \"Lifetime\" in this context (likely referring to a minimum duration or period). \"Durată minimă\" would be a more accurate translation.",
-          "suggestion": "Durată minimă (min)"
+          "description": "While \"Durata\" is a valid translation for \"Lifetime\", it doesn't fully capture the nuance of 'Lifetime' in this context (which likely refers to a time duration). 'Durată (min)' translates to 'Duration (min)'.  'Lifetime' in a settings context often refers to the valid duration of something.",
+          "suggestion": "Viață (min)"
         }
       ],
       "approved_at": null
@@ -216,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Срок службы (мин)' doesn't fully capture the meaning of 'Lifetime (min)'. 'Срок службы' translates to 'service life' or 'lifespan' which is close, but not a direct equivalent of 'Lifetime' in the context of settings, particularly concerning a limited time. A more accurate translation would convey the sense of a specified duration or limit.",
-          "suggestion": "Consider 'Длительность (мин)' or 'Время работы (мин)' as alternatives to better convey the meaning of 'Lifetime (min)'."
+          "description": "While 'Срок службы' is a possible translation for 'Lifetime', it is more accurately translated as 'Service Life' or 'Operational Life'. 'Lifetime' in this context (settings for a device) likely refers to the minimum expected lifespan, not the total existence duration.",
+          "suggestion": "Consider alternatives like 'Ресурс (мин)' (Resource (min)) or 'Минимальный срок службы (мин)' (Minimum Service Life (min)) to better convey the intended meaning."
         }
       ],
       "approved_at": null
@@ -228,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ආයුකාලය (විනාඩි)' while literally meaning 'Lifespan (minutes)', doesn't fully convey the intended meaning of 'Lifetime (min)' in a settings context. 'Lifetime' often implies a duration or period, and 'ආයුකාලය' can sometimes suggest a natural lifespan. A more appropriate translation would depend on the precise context within the settings, but 'သက်တမ်း (ນາທີ)' (using Thai as an example of how it might be conveyed more accurately) or similar phrasing that clearly indicates duration would be better.",
-          "suggestion": "Consider a translation that emphasizes duration, such as 'සම කාලීනය (විනාඩි)' (sama kaalina (vinadi)) or 'පරිශ්රම කාලය (විනාඩි)' (parishrama kaalaya (vinadi)) depending on the exact setting it refers to."
+          "description": "The English term 'Lifetime' refers to a duration, which is typically represented in days, weeks, or years. While 'ආයුකාලය' correctly translates to 'Lifespan' or 'Lifetime', appending '(විනාඩි)' which translates to '(minutes)' is inaccurate. The English implies a minimum duration, not specifically in minutes.",
+          "suggestion": "Consider using a more general term for duration or clarifying the unit of measurement if 'minutes' is the intended meaning. Possible suggestions: 'သက်ဆိုင်ရာໄລ (අවකාශය)' (Relevant Duration) or 'သက်ဆိုင်ရာໄລ (අංශු)' (Relevant Period) depending on context, or 'ආයුකාලය (අවකාශය)' (Lifespan/Lifetime (Duration)). If minutes are absolutely necessary, a note should be added clarifying that."
         }
       ],
       "approved_at": null
@@ -252,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Време трајања (мин)' while generally understandable, is not the most accurate or natural translation for 'Lifetime (min)'. 'Lifetime' implies a duration until the end, whereas 'Време трајања' is more generic for 'duration'.",
-          "suggestion": "Consider 'Животни век (мин)' or 'Трајање (мин)' for a more precise translation, depending on the specific context. 'Животни век' emphasizes the length of existence, while 'Трајање' is a more general duration."
+          "description": "The English phrase 'Lifetime (min)' is intended to convey a duration or period, often referring to a subscription or service length. While 'Време трајања (мин)' translates to 'Duration (min)', it doesn't fully capture the nuance of 'Lifetime' in this context. 'Lifetime' implies a period extending indefinitely or until a certain end.  'Trajanje' suggests a finite duration, which might be misleading.",
+          "suggestion": "Consider a translation that emphasizes the length or expanse of the time period, such as 'Распон времена (мин)' or 'Максимално време трајања (мин)'."
         }
       ],
       "approved_at": null
@@ -264,8 +258,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English term 'Lifetime' implies a duration or period, which is accurately captured by 'Vreme trajanja' in Serbian. However, 'Lifetime' in this context (Settings) likely refers to a maximum allowable duration, not just any duration. A more precise translation might be 'Maksimalno vreme trajanja' or 'Najduže vreme trajanja'.",
-          "suggestion": "Maksimalno vreme trajanja"
+          "description": "The English term 'Lifetime' is best translated as 'Trajanje' in this context, rather than 'Vreme trajanja'. 'Vreme trajanja' is more general and implies a period of time, while 'Trajanje' directly refers to the duration.",
+          "suggestion": "Trajanje (min)"
         }
       ],
       "approved_at": null
@@ -276,13 +270,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Lifetime' is often translated as 'ömür' in Turkish, especially in a more formal or technical context. 'Kullanım ömrü' while technically correct (use life), sounds less natural than simply 'Ömür (dk)'",
-          "suggestion": "Ömür (dk)"
-        },
-        {
-          "type": "formatting",
-          "description": "The use of parentheses around 'dk' in both the source and translation is consistent, which is good. However, consider if a space before the parentheses improves readability: 'Kullanım ömrü ( dk)' or 'Ömür ( dk)'",
-          "suggestion": "Kullanım ömrü ( dk)"
+          "description": "The English term \"Lifetime\" is more accurately translated as \"Yaşam Süresi\" in Turkish, especially in a settings context referring to the duration something is valid. \"Kullanım ömrü\" implies the lifespan of a product, not a time period.",
+          "suggestion": "Yaşam Süresi (dk)"
         }
       ],
       "approved_at": null
@@ -296,7 +285,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English term 'Lifetime' in this context refers to a duration or validity period, not necessarily a literal lifespan. 'Thời gian tồn tại' (time of existence) isn't the most accurate translation. 'Thời hạn' or 'Thời lượng' would be better choices.",
+          "suggestion": "Thời hạn (phút)"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
@@ -305,8 +300,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"寿命（分钟）\" (shou ming (fen zhong)) translates to \"lifespan (minutes)\" which doesn't quite capture the meaning of 'Lifetime (min)' in a settings context. It implies a literal lifespan.  'Lifetime' in this context likely refers to the duration a setting remains active or valid, not the lifespan of something.",
-          "suggestion": "Consider a more contextually appropriate translation like \"持续时间（分钟）\" (chi xu shi jian (fen zhong)) which means 'Duration (minutes)' or \"生效时长（分钟）\" (sheng xiao shi chang (fen zhong)) which means 'Active duration (minutes)'."
+          "description": "The translation \"寿命（分钟）\" literally translates to \"lifespan (minutes)\". While understandable, \"Lifetime (min)\" typically refers to the duration of a feature or subscription, not the lifespan of a person or object. A more accurate translation would depend on the specific context, but \"持续时间（分钟）\" or \"有效期（分钟）\" would be better alternatives.",
+          "suggestion": "Consider alternatives like \"持续时间（分钟）\" or \"有效期（分钟）\" depending on context."
         }
       ],
       "approved_at": null

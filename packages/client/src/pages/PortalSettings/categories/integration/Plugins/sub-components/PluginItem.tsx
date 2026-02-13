@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -37,29 +37,33 @@ import PluginSettingsIconUrl from "PUBLIC_DIR/images/plugin.settings.react.svg?u
 import PluginDefaultLogoUrl from "PUBLIC_DIR/images/plugin.default-logo.png";
 
 import { getPluginUrl } from "SRC_DIR/helpers/plugins/utils";
-import { PluginScopes } from "SRC_DIR/helpers/plugins/enums";
 
 import { StyledPluginItem, StyledPluginHeader } from "../Plugins.styled";
 import { PluginItemProps } from "../Plugins.types";
 
 const PluginItem = ({
   name,
+  nameLocale,
   version,
+  compatible,
   description,
+  descriptionLocale,
 
   enabled,
   updatePlugin,
 
-  scopes,
   openSettingsDialog,
 
   image,
   url,
+  dataTestId,
+  theme,
 }: PluginItemProps) => {
-  const imgSrc = image ? getPluginUrl(url, `/assets/${image}`) : null;
   const { t } = useTranslation(["Common"]);
 
-  const withSettings = scopes.includes(PluginScopes.Settings);
+  const imgSrc = image
+    ? getPluginUrl(url, `/assets/${image}?hash=${version}`)
+    : null;
 
   const onChangeStatus = () => {
     updatePlugin?.(name, !enabled, undefined, t);
@@ -69,48 +73,76 @@ const PluginItem = ({
     openSettingsDialog?.(name);
   };
 
+  const incompatibleTooltip = t("WebPlugins:PluginIsNotCompatible", {
+    productName: t("ProductName"),
+  });
+
+  const badgeId = `plugin_version_${name}_badge`;
+
+  const badge = (
+    <Badge
+      label={version}
+      fontSize="12px"
+      fontWeight={700}
+      noHover={compatible}
+      backgroundColor={
+        compatible
+          ? globalColors.mainGreen
+          : theme.isBase
+            ? globalColors.lightErrorStatus
+            : globalColors.darkErrorStatus
+      }
+      dataTestId={badgeId}
+    />
+  );
+
   return (
-    <StyledPluginItem description={description}>
+    <StyledPluginItem description={description} data-testid={dataTestId}>
       <img
         className="plugin-logo"
         src={imgSrc || PluginDefaultLogoUrl}
         alt="Plugin logo"
+        data-testid="plugin_logo"
       />
       <div className="plugin-info">
         <StyledPluginHeader>
-          <Heading className="plugin-name">{name}</Heading>
+          <Heading className="plugin-name">{nameLocale}</Heading>
           <div className="plugin-controls">
-            {withSettings ? (
-              <IconButton
-                iconName={PluginSettingsIconUrl}
-                size={16}
-                onClick={onOpenSettingsDialog}
-              />
-            ) : null}
+            <IconButton
+              iconName={PluginSettingsIconUrl}
+              size={16}
+              onClick={onOpenSettingsDialog}
+              data-testid="open_settings_icon_button"
+            />
             <ToggleButton
               className="plugin-toggle-button"
               onChange={onChangeStatus}
               isChecked={enabled}
+              dataTestId="enable_plugin_toggle_button"
             />
           </div>
         </StyledPluginHeader>
 
-        <Badge
-          label={version}
-          fontSize="12px"
-          fontWeight={700}
-          noHover
-          backgroundColor={globalColors.mainGreen}
-        />
+        {!compatible ? (
+          <div
+            data-tooltip-id="system-tooltip"
+            data-tooltip-content={incompatibleTooltip}
+            data-tooltip-place="bottom"
+          >
+            {badge}
+          </div>
+        ) : (
+          badge
+        )}
 
-        {imgSrc && description ? (
+        {descriptionLocale ? (
           <Text
             className="plugin-description"
             fontWeight={400}
             lineHeight="20px"
-            title={description}
+            title={descriptionLocale}
           >
-            {description}
+            {descriptionLocale}
           </Text>
         ) : null}
       </div>

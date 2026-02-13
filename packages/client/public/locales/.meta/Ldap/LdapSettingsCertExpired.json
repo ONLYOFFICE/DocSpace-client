@@ -3,7 +3,7 @@
   "content": "Certificate is expired",
   "content_en_sha1_hash": "0e0e2850e34d19c183e47644c6c298a42a529894",
   "created_at": "2025-05-19T21:30:54.278Z",
-  "updated_at": "2025-05-21T08:06:52.322Z",
+  "updated_at": "2025-05-24T08:20:43.280Z",
   "comment": {
     "text": "This translation key is used to display a notification when an LDAP certificate has expired. It appears in the CertificateDialog.js file as part of an error message, indicating that action needs to be taken to update or renew the certificate. The translation will help inform users about the status of their LDAP connection.",
     "is_auto": true,
@@ -81,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Վկայականը ժամկետանց է\" is a literal translation of \"Certificate is expired\", it sounds slightly awkward in Armenian. A more natural phrasing would emphasize the expiration.",
-          "suggestion": "Վկայականը սպառվել է ժամկետը"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -162,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ප්‍රමාණපත්‍රය කාලය ඉකුත්වී ඇත' while understandable, is not the most natural or precise translation of 'Certificate is expired'. A more common and accurate translation would be something like 'සertifikat එක අවසන් වීමේදී' or 'සertifikat අවසන් වී ඇත'.",
-          "suggestion": "සertifikat අවසන් වී ඇත"
+          "description": "The translation \"ප්‍රමාණපත්‍රය කාලය ඉකුත්වී ඇත\" is a literal translation of \"Certificate is expired\" but lacks nuance. A more natural Sinhala phrasing for this context (LDAP settings) would be something like \"සertificate එක අවසන් වී ඇත\" or \"සertificate වලට කාලීනත්වය අවතක්සේදී ඇත\" which conveys the meaning of expiry in a more common and understandable way in a technical setting.",
+          "suggestion": "Consider \"සertificate එක අවසන් වී ඇත\" or \"සertificate වලට කාලීනත්වය අවතක්සේදී ඇත\"."
         }
       ],
       "approved_at": null

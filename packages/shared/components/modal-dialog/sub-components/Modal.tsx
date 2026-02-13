@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -51,6 +51,7 @@ const Modal = ({
   autoMaxHeight,
   autoMaxWidth,
   onClose,
+  onBackClick,
   isLoading,
   header,
   body,
@@ -62,35 +63,40 @@ const Modal = ({
   containerVisible,
   isDoubleFooterLine,
 
-  embedded,
   withForm,
   withoutPadding,
+  withoutHeaderMargin,
   hideContent,
 
   isInvitePanelLoader = false,
   onSubmit,
   withBodyScrollForcibly = false,
   withBorder = false,
+  dataTestId,
+  scrollbarCreateContext,
+  backdropVisible = true,
+  closeOnBackdropClick = true,
   ...rest
 }: ModalSubComponentsProps) => {
   const contentRef = React.useRef<null | HTMLDivElement>(null);
 
   const headerComponent = React.isValidElement(header)
-    ? header.props.children
+    ? (header.props as { children: React.ReactNode }).children
     : null;
   const bodyComponent = React.isValidElement(body)
-    ? (body.props.children as React.ReactNode)
+    ? (body.props as { children: React.ReactNode }).children
     : null;
   const footerComponent = React.isValidElement(footer)
-    ? footer.props.children
+    ? (footer.props as { children: React.ReactNode }).children
     : null;
   const containerComponent = React.isValidElement(container)
-    ? container.props.children
+    ? (container.props as { children: React.ReactNode }).children
     : null;
 
   const validateOnMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     const target = e.target as HTMLDivElement;
-    if (target.id === "modal-onMouseDown-close") onClose?.();
+    if (target.id === "modal-onMouseDown-close" && closeOnBackdropClick)
+      onClose?.();
   };
 
   const headerProps = React.isValidElement(header)
@@ -155,6 +161,7 @@ const Modal = ({
     headerProps.className,
     {
       [styles.displayTypeModal]: currentDisplayType === "modal",
+      [styles.withoutHeaderMargin]: withoutHeaderMargin,
     },
   );
 
@@ -188,11 +195,12 @@ const Modal = ({
       className={classNames(styles.modal, {
         [styles.modalActive]: visible,
       })}
-      data-testid="modal"
+      data-testid={dataTestId ?? "modal"}
     >
       <ModalBackdrop
         className={classNames({
           [styles.modalBackdropActive]: visible,
+          [styles.hideBackdrop]: visible && !backdropVisible,
           "backdrop-active": visible,
         })}
         zIndex={zIndex}
@@ -211,6 +219,7 @@ const Modal = ({
               ref={contentRef}
               style={{ marginBottom: contentMarginBottom }}
               className={contentClassName}
+              data-testid="modal-dialog"
             >
               {isLoading ? (
                 currentDisplayType === "modal" ? (
@@ -238,6 +247,7 @@ const Modal = ({
                       className={headerClassName}
                       header={headerComponent}
                       onCloseClick={onClose}
+                      onBackClick={onBackClick}
                       {...rest}
                     />
                   ) : null}
@@ -255,6 +265,7 @@ const Modal = ({
                           className="modal-scroll"
                           noScrollY={isScrollLocked}
                           paddingAfterLastItem={ASIDE_PADDING_AFTER_LAST_ITEM}
+                          createContext={scrollbarCreateContext}
                         >
                           {bodyComponent}
                         </Scrollbar>

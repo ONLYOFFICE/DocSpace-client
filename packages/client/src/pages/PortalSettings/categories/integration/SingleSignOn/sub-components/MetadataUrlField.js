@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -64,6 +64,7 @@ const MetadataUrlField = ({
   placeholder,
   tooltipContent,
   tooltipClass,
+  dataTestId,
 }) => {
   const { t } = useTranslation("Translations");
 
@@ -81,6 +82,7 @@ const MetadataUrlField = ({
           offsetRight={0}
           tooltipContent={tooltipContent}
           className={tooltipClass}
+          dataTestId={dataTestId ? `${dataTestId}_help_button` : undefined}
         />
       </Text>
       <InputBlock
@@ -92,6 +94,7 @@ const MetadataUrlField = ({
         iconName={CopyReactSvgUrl}
         iconSize={16}
         onIconClick={onCopyClick}
+        testId={dataTestId ? `${dataTestId}_input` : undefined}
       />
     </StyledWrapper>
   );

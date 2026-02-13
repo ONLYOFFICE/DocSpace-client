@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,6 +34,20 @@ const StyledEmptyContainer = styled.div`
 
   display: flex;
   justify-content: center;
+`;
+
+const StyledUploadDescription = styled.div.attrs(injectDefaultTheme)`
+  .upload-description-text {
+    max-width: 700px;
+    color: ${(props) => props.theme.client.settings.common.descriptionColor};
+    line-height: 20px;
+  }
+
+  .link-learn-more {
+    display: inline-block;
+    font-weight: 600;
+    margin-top: 8px;
+  }
 `;
 
 const StyledContainer = styled.div`
@@ -144,4 +158,5 @@ export {
   PluginListContainer,
   StyledPluginItem,
   StyledPluginHeader,
+  StyledUploadDescription,
 };

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -43,15 +43,7 @@ import { Link } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
 
 import { EmployeeActivationStatus } from "@docspace/shared/enums";
-import {
-  StyledOwnerInfo,
-  StyledPeopleSelectorInfo,
-  StyledPeopleSelector,
-  StyledAvailableList,
-  StyledFooterWrapper,
-  StyledSelectedOwnerContainer,
-  StyledSelectedOwner,
-} from "./StyledDialog";
+import styles from "./ChangePortalOwner.module.scss";
 
 const ChangePortalOwnerDialog = ({
   t,
@@ -63,7 +55,6 @@ const ChangePortalOwnerDialog = ({
   displayName,
   avatar,
   id,
-  currentColorScheme,
 }) => {
   const [selectorVisible, setSelectorVisible] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
@@ -160,82 +151,101 @@ const ChangePortalOwnerDialog = ({
             currentUserId={id}
             disableDisabledUsers
             filter={filter}
+            dataTestId="change_portal_owner_people_selector"
           />
         </ModalDialog.Container>
       ) : null}
       <ModalDialog.Header>{t("Translations:OwnerChange")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <StyledOwnerInfo>
+        <div className={styles.ownerInfo}>
           <Avatar className="avatar" role="owner" source={avatar} size="big" />
-          <div className="info">
-            <Text className="display-name" noSelect title={displayName}>
+          <div className={styles.info}>
+            <Text className={styles.displayName} title={displayName}>
               {displayName}
             </Text>
-            <Text className="status" noSelect title={t("Common:Owner")}>
+            <Text className={styles.status} title={t("Common:Owner")}>
               {t("Common:Owner")}
             </Text>
           </div>
-        </StyledOwnerInfo>
+        </div>
 
-        <StyledPeopleSelectorInfo>
-          <Text className="new-owner" noSelect title={t("NewPortalOwner")}>
+        <div className={styles.peopleSelectorInfo}>
+          <Text
+            className={styles.newOwner}
+            title={t("NewPortalOwner", {
+              productName: t("Common:ProductName"),
+            })}
+          >
             {t("NewPortalOwner", { productName: t("Common:ProductName") })}
           </Text>
-          <Text className="description" noSelect title={t("ChangeInstruction")}>
+          <Text
+            className={styles.description}
+            title={t("ChangeInstruction", {
+              productName: t("Common:ProductName"),
+            })}
+          >
             {t("ChangeInstruction", { productName: t("Common:ProductName") })}
           </Text>
-        </StyledPeopleSelectorInfo>
+        </div>
 
         {selectedUser ? (
-          <StyledSelectedOwnerContainer>
-            <StyledSelectedOwner currentColorScheme={currentColorScheme}>
-              <Text className="text">{selectedUser.label}</Text>
+          <div className={styles.selectedOwnerContainer}>
+            <div className={styles.selectedOwner}>
+              <Text className={styles.text}>{selectedUser.label}</Text>
               <ReactSVG
-                className="cross-icon"
+                className={styles.crossIcon}
                 onClick={onClearSelectedItem}
                 src={CrossReactSvgUrl}
+                data-testid="change_portal_owner_clear_selected_owner_button"
               />
-            </StyledSelectedOwner>
+            </div>
 
             <Link
               type="action"
               isHovered
               fontWeight={600}
               onClick={onTogglePeopleSelector}
+              dataTestId="change_portal_owner_change_user_link"
             >
               {t("ChangeUser")}
             </Link>
-          </StyledSelectedOwnerContainer>
+          </div>
         ) : (
-          <StyledPeopleSelector>
+          <div className={styles.peopleSelector}>
             <SelectorAddButton
               className="selector-add-button"
               onClick={onTogglePeopleSelector}
               label={t("Translations:ChooseFromList")}
               noSelect
               titleText={t("Translations:ChooseFromList")}
+              testId="change_portal_owner_choose_from_list_button"
             />
-          </StyledPeopleSelector>
+          </div>
         )}
 
-        <StyledAvailableList>
-          <Text className="list-header" noSelect title={t("PortalOwnerCan")}>
+        <div className={styles.availableList}>
+          <Text
+            className={styles.listHeader}
+            title={t("PortalOwnerCan", {
+              productName: t("Common:ProductName"),
+            })}
+          >
             {t("PortalOwnerCan", { productName: t("Common:ProductName") })}
           </Text>
 
           {ownerRights?.map((item) => (
-            <Text key={item} className="list-item" noSelect title={item}>
+            <Text key={item} className={styles.listItem} title={item}>
               — {item};
             </Text>
           ))}
-        </StyledAvailableList>
+        </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
-        <StyledFooterWrapper>
-          <Text className="info" noSelect>
+        <div className={styles.footerWrapper}>
+          <Text className={styles.info}>
             {t("Settings:AccessRightsChangeOwnerConfirmText")}
           </Text>
-          <div className="button-wrapper">
+          <div className={styles.buttonWrapper}>
             <Button
               tabIndex={5}
               label={t("Common:ChangeButton")}
@@ -245,6 +255,7 @@ const ChangePortalOwnerDialog = ({
               isDisabled={!selectedUser}
               onClick={onChangeAction}
               isLoading={isLoading}
+              testId="change_portal_owner_change_button"
             />
             <Button
               tabIndex={5}
@@ -253,20 +264,20 @@ const ChangePortalOwnerDialog = ({
               scale
               onClick={onCloseAction}
               isDisabled={isLoading}
+              testId="change_portal_owner_cancel_button"
             />
           </div>
-        </StyledFooterWrapper>
+        </div>
       </ModalDialog.Footer>
     </ModalDialog>
   );
 };
 
-export default inject(({ setup, userStore, settingsStore }) => {
+export default inject(({ setup, userStore }) => {
   const { displayName, avatar, id } = userStore.user;
-  const { currentColorScheme } = settingsStore;
   const { sendOwnerChange } = setup;
 
-  return { displayName, avatar, id, sendOwnerChange, currentColorScheme };
+  return { displayName, avatar, id, sendOwnerChange };
 })(
   withTranslation(["ChangePortalOwner", "Common", "Translations", "Settings"])(
     observer(ChangePortalOwnerDialog),

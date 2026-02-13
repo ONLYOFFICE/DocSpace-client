@@ -1,5 +1,7 @@
 {
+  "DeepLinkOnlyAppText": "Bạn chỉ có thể mở tài liệu trong ứng dụng di động.",
   "DeepLinkText": "Bạn có thể mở tài liệu trên cổng thông tin hoặc trong ứng dụng di động",
+  "DownloadApp": "Tải ứng dụng",
   "OpenInApp": "Mở trong ứng dụng",
   "OpeningDocument": "Đang mở tài liệu",
   "RememberChoice": "Ghi nhớ lựa chọn khi mở tài liệu lần sau",

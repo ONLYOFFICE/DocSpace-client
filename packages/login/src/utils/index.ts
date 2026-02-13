@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -46,6 +46,7 @@ export async function oAuthLogin(profile: string) {
       window.location.href = redirectPath;
     }
   } catch (e) {
+    console.error(e);
     isSuccess = false;
     return isSuccess;
   }
@@ -179,11 +180,10 @@ export const getConfirmDataFromInvitation = (
 export const getStringFromSearchParams = (searchParams: {
   [key: string]: string;
 }): string => {
-  let stringSearchParams = "";
-
-  for (const [key, value] of Object.entries(searchParams)) {
-    stringSearchParams += `&${key}=${value}`;
-  }
+  const stringSearchParams = Object.entries(searchParams).reduce(
+    (acc, [key, value]) => `${acc}&${key}=${value}`,
+    "",
+  );
 
   return stringSearchParams.slice(1);
 };
@@ -221,10 +221,11 @@ export const encodeParams = (str: string) => {
 };
 
 export async function getAvailablePortals(data: {
-  Email: string;
-  PasswordHash: string;
+  Email?: string;
+  PasswordHash?: string;
   recaptchaResponse?: string | null | undefined;
   recaptchaType?: unknown | undefined;
+  ThirdPartyProfile?: string;
 }) {
   const config = window.ClientConfig;
 
@@ -266,9 +267,8 @@ export async function getAvailablePortals(data: {
 
       const portals = (await Promise.all(portalsRes.map((res) => res.json())))
         .map(
-          (portals: {
-            tenants: { portalLink: string; portalName: string }[];
-          }) => portals.tenants,
+          (p: { tenants: { portalLink: string; portalName: string }[] }) =>
+            p.tenants,
         )
         .flat();
 

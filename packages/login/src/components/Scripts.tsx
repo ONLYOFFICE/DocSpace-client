@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -77,6 +77,22 @@ const Scripts = () => {
             });
           `}
       </Script>
+      <script
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: TODO fix
+        dangerouslySetInnerHTML={{
+          __html: `
+            (function() {
+              try {
+                const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                document.body.classList.remove('light', 'dark');
+                document.body.classList.add(isDark ? 'dark' : 'light');
+              } catch (e) {
+                console.log(e);
+              }
+            })();
+          `,
+        }}
+      />
     </>
   );
 };

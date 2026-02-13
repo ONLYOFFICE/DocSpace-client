@@ -1,0 +1,28 @@
+{
+  "key_path": "FormVDRFinalizedDescription",
+  "content": "The form has been fully completed by all recipients and is now finalized. It is available in view-only mode.",
+  "content_en_sha1_hash": "37373e6a27374e9441989bb6f86718941aadf84e",
+  "created_at": "2025-10-13T15:33:20.092Z",
+  "updated_at": "2025-10-13T15:35:12.401Z",
+  "comment": {
+    "text": "This text indicates that a form is finished and all recipients have completed it. It's used to display a status message within the UI, likely as a visual cue to confirm the form's finalization. Translators should ensure the wording reflects a finished and uneditable state.",
+    "is_auto": true,
+    "updated_at": "2025-10-13T15:35:12.401Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/doceditor/src/components/completed-form/CompletedVDRForm.tsx",
+      "line_number": 159,
+      "context": "return isYournTurn\n ? t(\"CompletedForm:FormVDRYouFirstRecepientDescription\")\n : t(\"CompletedForm:FormVDRNextRecepientDescription\");\n }\n \n if (completed) return t(\"CompletedForm:FormVDRFinalizedDescription\");\n \n return t(\"CompletedForm:FormVDRSectionCompletedDescription\");\n }, [t, isStartFilling, completed, isYournTurn]);\n \n const title = useMemo(() => getTitleWithoutExtension(form, false), [form]);",
+      "module": "/packages/doceditor"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

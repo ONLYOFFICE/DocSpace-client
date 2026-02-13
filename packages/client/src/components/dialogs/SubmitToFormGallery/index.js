@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,8 +32,8 @@ import { observer, inject } from "mobx-react";
 import { Trans, withTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 import FilesSelector from "SRC_DIR/components/FilesSelector";
-import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
+import { useEventListener } from "@docspace/shared/hooks/useEventListener";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
@@ -46,16 +46,14 @@ const SubmitToFormGallery = ({
   formItem,
   setFormItem,
   getIcon,
-  currentColorScheme,
   canSubmitToFormGallery,
   submitToFormGallery,
-  fetchGuideLink,
 }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const [guideLink, setGuideLink] = useState(null);
-
   const abortControllerRef = useRef(new AbortController());
+
+  const keydownOptionsRef = useRef({ capture: true, passive: false });
 
   let formItemIsSet = !!formItem;
 
@@ -94,6 +92,7 @@ const SubmitToFormGallery = ({
     setIsSubmitting(true);
 
     const origin = combineUrl(window.ClientConfig?.proxy?.url);
+
     const fileSrc = `${origin}/filehandler.ashx?action=download&fileid=${formItem.id}`;
 
     const file = await fetch(fileSrc)
@@ -116,18 +115,57 @@ const SubmitToFormGallery = ({
     )
       .then((res) => {
         if (!res.data) throw new Error(res.statusText);
+        toastr.success(t("Common:Done"));
         window.location.replace(res.data);
       })
-      .catch((err) => onError(err))
+      .catch(() => {
+        toastr.error(t("Common:SomethingWentWrong"));
+        onClose();
+      })
       .finally(() => onClose());
   };
 
-  useEffect(() => {
-    (async () => {
-      const fetchedGuideLink = await fetchGuideLink();
-      setGuideLink(fetchedGuideLink);
-    })();
-  }, []);
+  useEventListener(
+    "keydown",
+    (e) => {
+      if (!visible) return;
+      if (isSelectingForm) return;
+
+      const target = e.target;
+      const tagName = target?.tagName;
+      const isEditable =
+        tagName === "INPUT" ||
+        tagName === "TEXTAREA" ||
+        Boolean(target?.isContentEditable);
+
+      if (isEditable) return;
+
+      if (e.key === "Escape") {
+        e.preventDefault();
+        e.stopPropagation();
+        onClose();
+        return;
+      }
+
+      if (e.key === "Enter") {
+        if (e.repeat) return;
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        if (!formItem) {
+          onOpenFormSelector();
+          return;
+        }
+
+        if (!isSubmitting) {
+          void onSubmitToGallery();
+        }
+      }
+    },
+    undefined,
+    keydownOptionsRef.current,
+  );
 
   if (!canSubmitToFormGallery()) return null;
 
@@ -135,63 +173,54 @@ const SubmitToFormGallery = ({
     return (
       <FilesSelector
         key="select-file-dialog"
-        filterParam={FilesSelectorFilterTypes.PDF}
-        descriptionText={t("Common:SelectPDFFormat")}
+        filterParam="TemplateGalleryTypes"
         isPanelVisible
         onSelectFile={onSelectForm}
         onClose={onCloseFormSelector}
+        withRecentTreeFolder
+        withFavoritesTreeFolder
+        withAIAgentsTreeFolder
+        isSelect
+        isPortalView
+        withoutDescriptionText
       />
     );
 
-  console.log(formItem);
-
   return (
-    <ModalDialog visible={visible} onClose={onClose} autoMaxHeight>
-      <ModalDialog.Header>{t("Common:SubmitToFormGallery")}</ModalDialog.Header>
+    <Styled.ModalDialogStyled
+      visible={visible}
+      onClose={onClose}
+      isLarge={formItem}
+      autoMaxHeight
+    >
+      <ModalDialog.Header>
+        {t("Common:SubmitToTemplateGallery")}
+      </ModalDialog.Header>
       <ModalDialog.Body>
-        <div>{t("FormGallery:SubmitToGalleryDialogMainInfo")}</div>
-        <div>
-          <Trans
-            t={t}
-            i18nKey="SubmitToGalleryDialogGuideInfo"
-            ns="FormGallery"
-          >
-            Learn how to create perfect forms and increase your chance to get
-            approval in our
-            <Link
-              color={currentColorScheme.main?.accent}
-              href={guideLink || "#"}
-              type="page"
-              target="_blank"
-              isBold
-              isHovered
-            >
-              guide
-            </Link>
-            .
-          </Trans>
+        <div className="info">
+          {t("FormGallery:SubmitToGalleryDialogMainInfo")}
         </div>
 
         {formItem ? (
-          <Styled.FormItem>
-            <ReactSVG className="icon" src={getIcon(32, formItem.fileExst)} />
+          <div className="item-wrapper">
+            <ReactSVG className="icon" src={getIcon(24, formItem.fileExst)} />
             <div className="item-title">
               {formItem?.title ? (
-                [
+                <>
                   <span className="name" key="name">
                     {formItem.title}
-                  </span>,
-                  formItem.fileExst && (
+                  </span>
+                  {formItem.fileExst ? (
                     <span className="exst" key="exst">
                       {formItem.fileExst}
                     </span>
-                  ),
-                ]
+                  ) : null}
+                </>
               ) : (
                 <span className="name">{`${formItem.fileExst}`}</span>
               )}
             </div>
-          </Styled.FormItem>
+          </div>
         ) : null}
       </ModalDialog.Body>
       <ModalDialog.Footer>
@@ -199,28 +228,30 @@ const SubmitToFormGallery = ({
           <Button
             primary
             size="normal"
-            label={t("FormGallery:SelectForm")}
+            label={t("FormGallery:SelectTemplate")}
             onClick={onOpenFormSelector}
             scale
+            testId="submit_to_gallery_select_form_button"
           />
         ) : (
           <Button
             primary
             size="normal"
-            label={t("Common:SubmitToGallery")}
+            label={t("Settings:Submit")}
             onClick={onSubmitToGallery}
             isLoading={isSubmitting}
-            scale
+            testId="submit_to_gallery_apply_button"
           />
         )}
         <Button
           size="normal"
           label={t("Common:CancelButton")}
           onClick={onClose}
-          scale
+          scale={!formItem}
+          testId="submit_to_gallery_cancel_button"
         />
       </ModalDialog.Footer>
-    </ModalDialog>
+    </Styled.ModalDialogStyled>
   );
 };
 
@@ -240,6 +271,11 @@ export default inject(
     currentColorScheme: settingsStore.currentColorScheme,
     canSubmitToFormGallery: accessRightsStore.canSubmitToFormGallery,
     submitToFormGallery: oformsStore.submitToFormGallery,
-    fetchGuideLink: oformsStore.fetchGuideLink,
   }),
-)(withTranslation("Common", "FormGallery")(observer(SubmitToFormGallery)));
+)(
+  withTranslation(
+    "Common",
+    "FormGallery",
+    "Settings",
+  )(observer(SubmitToFormGallery)),
+);

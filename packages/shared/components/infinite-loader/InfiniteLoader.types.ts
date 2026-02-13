@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -44,12 +44,10 @@ export type InfiniteLoaderProps = {
   countTilesInRow?: number;
   showSkeleton?: boolean;
   currentFolderId?: string | number;
+  smallPreview?: boolean;
+  isOneTile?: boolean;
 };
 
 export type ListComponentProps = InfiniteLoaderProps & {
-  scroll: Element | (Window & typeof globalThis);
-};
-
-export type GridComponentProps = InfiniteLoaderProps & {
   scroll: Element | (Window & typeof globalThis);
 };

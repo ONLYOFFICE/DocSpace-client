@@ -3,7 +3,7 @@
   "content": "The file copy will be created in the <strong>{{folderTitle}}</strong> folder.",
   "content_en_sha1_hash": "3273fcf8e47ee80db4b47756d8934bf476806321",
   "created_at": "2025-05-19T21:30:56.881Z",
-  "updated_at": "2025-05-20T09:37:57.667Z",
+  "updated_at": "2025-09-23T07:24:24.080Z",
   "comment": {
     "text": "This translation key is used to display a message indicating where a converted file will be saved. It appears in a conversion dialog and is displayed when showing or hiding a \"file destination visible\" toggle button.",
     "is_auto": true,
@@ -45,7 +45,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Czech translation uses the genitive case ('složce') after 'v', which is grammatically incorrect. The correct case should be nominative ('složka').",
+          "suggestion": "Kopie souboru bude vytvořena v <strong>{{folderTitle}}</strong> složka."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -81,31 +87,61 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Ֆայլի պատճենը կստեղծվի՝ <strong>{{folderTitle}}</strong> պանակ:\" is a literal translation and could be improved for natural flow in Armenian.  A more natural phrasing might be \"Ֆայլի պատճենը գտնվելու է <strong>{{folderTitle}}</strong> պանակում:\" (The file copy will be located in the <strong>{{folderTitle}}</strong> folder.).",
+          "suggestion": "Ֆայլի պատճենը գտնվելու է <strong>{{folderTitle}}</strong> պանակում:"
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'The file copy will be created' is better translated as 'La copia del file verrà creata' or 'Verrà creata una copia del file' in Italian to reflect a more natural flow. 'La copia di file viene creata' implies an ongoing process, which isn't the intended meaning.",
+          "suggestion": "La copia del file verrà creata nella cartella <strong>{{folderTitle}}</strong>."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The strong tag is present in both the English and Japanese versions. While technically not an error, it's important to confirm if this is intentional and consistent with the application's style guide. A review of how this tag is used across the application is recommended.",
+          "suggestion": "Verify the intended purpose of the strong tag and ensure consistency across the application. If it's solely for visual emphasis, consider if a different approach might be more appropriate."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'will be created' is too literal. A more natural Korean phrasing would be '저장됩니다' (jeojangdoemnida) which means 'will be saved'.",
+          "suggestion": "파일 복사가 <strong>{{folderTitle}}</strong> 폴더에 저장됩니다"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ໂຟນເດີ' is likely a misspelling of 'ໂຟນເດີບີ້' which is the Lao word for folder. While 'ໂຟນເດີ' might be understood, it's not the standard term.",
+          "suggestion": "ໂຟນເດີບີ້"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -123,13 +159,25 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The strong tag is correctly applied in both the English and Polish versions, maintaining the formatting.",
+          "suggestion": null
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'file copy' is better translated as 'cópia do arquivo' in Portuguese, rather than just 'copia do ficheiro'. While 'copia do ficheiro' isn't strictly wrong, 'cópia do arquivo' is more common and natural.",
+          "suggestion": "A cópia do arquivo será criada na pasta <strong>{{folderTitle}}</strong>."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -153,13 +201,25 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ගොනුවේ පිටපත <strong>{{folderTitle}}</strong> බහාලුමේ තබනු ඇත.' is a literal translation and doesn't quite convey the natural phrasing in Sinhala for 'file copy will be created in'. A more natural phrasing would be something along the lines of 'ගොනුවේ පිටපත <strong>{{folderTitle}}</strong> බහාලුමට බదిලි කෙරේ'.",
+          "suggestion": "ගොනුවේ පිටපත <strong>{{folderTitle}}</strong> බහාලුමට බదిලි කෙරේ"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Slovak translation preserves the strong tag as in the English content. It's important to check if this is intended or if the formatting should be adapted for the Slovak language context.",
+          "suggestion": "Review if the <strong/> tag is necessary in the Slovak version. Consider adapting the formatting if needed."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -171,13 +231,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'фолдеру' is a less formal and slightly outdated term. It's a direct transliteration of 'folder' and not commonly used in modern Serbian.",
+          "suggestion": "фолдер"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'folder' is incorrectly transliterated as 'folderu'. It should be 'folder'.",
+          "suggestion": "folder"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -189,7 +261,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Ukrainian translation retains the HTML strong tag, which might not be desired depending on the overall formatting of the UI. Consider removing it or adjusting it to match the Ukrainian UI style.",
+          "suggestion": "Consider removing the <strong/> tags if they are not necessary for the Ukrainian UI or adjust them based on Ukrainian UI styling guidelines."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -201,7 +279,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"该文件的副本将在文件夹中创建\" is a literal and somewhat awkward translation. A more natural Chinese phrasing would be better.",
+          "suggestion": "该文件将复制到<strong>{{folderTitle}}</strong>文件夹中."
+        }
+      ],
       "approved_at": null
     }
   }

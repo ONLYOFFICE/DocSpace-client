@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -215,6 +215,7 @@ const WebhookDialog = (props) => {
             className={isSettingsModal ? "margin-0" : ""}
             isDisabled={isLoading}
             required
+            dataTestId="webhook_name_input"
           />
           <LabledInput
             id={`${additionalId}-payload-url-input`}
@@ -226,6 +227,7 @@ const WebhookDialog = (props) => {
             hasError={!isValid.uri}
             isDisabled={isLoading}
             required
+            dataTestId="payload_url_input"
           />
           <SecretKeyInput
             isResetVisible={isResetVisible}
@@ -260,6 +262,7 @@ const WebhookDialog = (props) => {
             onChange={onInputChange}
             isDisabled={isLoading}
             maxLength={36}
+            dataTestId="target-id-input"
           />
           <button
             type="submit"
@@ -282,11 +285,13 @@ const WebhookDialog = (props) => {
             onClick={handleSubmitClick}
             isDisabled={isLoading}
             isLoading={isLoading}
+            testId="webhook_submit_button"
           />
           <Button
             id="cancel-button"
             label={t("Common:CancelButton")}
             size="normal"
+            testId="webhook_cancel_button"
             onClick={onModalClose}
           />
         </Footer>

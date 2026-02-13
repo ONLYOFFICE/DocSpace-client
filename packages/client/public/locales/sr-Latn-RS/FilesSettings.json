@@ -1,7 +1,7 @@
 {
   "CancellaionNotification": "Ne prikazuj više obaveštenje o otkazivanju",
   "DisplayFileExtension": "Prikaz ekstenzije fajla pored imena fajla",
-  "DisplayNotification": "Prikaži notifikaciju kada pomerate stavke u Otpad",
   "OpenSameTab": "Otvori {{organizationName}} uređivač u istoj kartici",
-  "OriginalCopy": "Sačuvaj kopiju datoteke u originalnom formatu takođe"
+  "OriginalCopy": "Sačuvaj kopiju datoteke u originalnom formatu takođe",
+  "TrashMoveConfirmation": "Prikaži obaveštenje kada se stavke premeštaju u {{sectionName}}"
 }

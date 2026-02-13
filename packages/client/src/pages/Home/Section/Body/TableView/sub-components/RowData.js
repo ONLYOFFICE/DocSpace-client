@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,12 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { TableCell } from "@docspace/shared/components/table";
+import { IndexIconButtons } from "@docspace/shared/components/index-icon-buttons";
 import { classNames, getLastColumn } from "@docspace/shared/utils";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
-import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow2.react.svg?url";
 import { VDRIndexingAction } from "@docspace/shared/enums";
 import FileNameCell from "./FileNameCell";
 import TypeCell from "./TypeCell";
@@ -53,6 +51,7 @@ const RowDataComponent = (props) => {
     dragStyles,
     selectionProp,
     value,
+    documentTitle,
     theme,
     onContentFileSelect,
     checkedProps,
@@ -63,32 +62,17 @@ const RowDataComponent = (props) => {
     quickButtonsComponent,
 
     tableStorageName,
-    columnStorageName,
     isIndexEditingMode,
     changeIndex,
-    isIndexedFolder,
     erasureColumnIsEnabled,
+    index,
+    isPersonalReadOnly,
+    t,
+    item,
+    linkStyles,
   } = props;
 
-  const [lastColumn, setLastColumn] = useState(
-    getLastColumn(
-      tableStorageName,
-      localStorage.getItem(columnStorageName),
-      isIndexedFolder,
-    ),
-  );
-
-  useEffect(() => {
-    const newLastColumn = getLastColumn(
-      tableStorageName,
-      localStorage.getItem(columnStorageName),
-      isIndexedFolder,
-    );
-
-    if (newLastColumn && newLastColumn !== lastColumn) {
-      setLastColumn(newLastColumn);
-    }
-  });
+  const lastColumn = getLastColumn(tableStorageName);
 
   const quickButtonsComponentNode = (
     <StyledQuickButtonsContainer>
@@ -97,55 +81,54 @@ const RowDataComponent = (props) => {
   );
 
   const indexComponentNode = (
-    <div
-      className="index-arrows-container"
+    <IndexIconButtons
+      containerClassName="index-arrows-container"
       style={
         lastColumn === "Name"
-          ? { display: "flex", justifyContent: "flex-end", flexGrow: "1" }
-          : { display: "flex" }
+          ? { justifyContent: "flex-end", flexGrow: "1" }
+          : {}
       }
-    >
-      <ColorTheme
-        themeId={ThemeId.IndexIconButton}
-        iconName={ArrowReactSvgUrl}
-        className="index-up-icon change-index_icon"
-        size="small"
-        onClick={(e) => changeIndex(e, VDRIndexingAction.HigherIndex)}
-      />
-      <ColorTheme
-        themeId={ThemeId.IndexIconButton}
-        iconName={ArrowReactSvgUrl}
-        className="index-down-icon change-index_icon"
-        size="small"
-        onClick={(e) => changeIndex(e, VDRIndexingAction.LowerIndex)}
-      />
-    </div>
+      commonIconClassName="change-index_icon"
+      onUpIndexClick={(e) => changeIndex(e, VDRIndexingAction.HigherIndex)}
+      onDownIndexClick={(e) => changeIndex(e, VDRIndexingAction.LowerIndex)}
+    />
   );
 
   const lastColumnContent = isIndexEditingMode
     ? indexComponentNode
     : quickButtonsComponentNode;
 
+  const sideColor = theme.filesSection.tableView.row.sideColor;
+
   return (
     <>
       <TableCell
         {...dragStyles}
+        dataTestId={`files-cell-name-${index}`}
         className={classNames(
           selectionProp?.className,
           "table-container_file-name-cell",
-          lastColumn === "Name" && isIndexEditingMode
-            ? "index-buttons-name"
-            : "",
+          dragStyles.className,
+          {
+            "table-container_file-name-cell-first":
+              value?.indexOf("first") > -1,
+          },
         )}
         value={value}
+        documentTitle={documentTitle}
       >
         <FileNameCell
+          t={t}
+          item={item}
           theme={theme}
-          onContentSelect={onContentFileSelect}
-          checked={checkedProps}
           element={element}
+          checked={checkedProps}
           inProgress={inProgress}
-          {...props}
+          linkStyles={linkStyles}
+          titleWithoutExt={props.titleWithoutExt}
+          onContentSelect={onContentFileSelect}
+          isIndexEditingMode={isIndexEditingMode}
+          displayFileExtension={props.displayFileExtension}
         />
         <StyledBadgesContainer showHotkeyBorder={showHotkeyBorder}>
           {badgesComponent}
@@ -155,9 +138,8 @@ const RowDataComponent = (props) => {
 
       {authorColumnIsEnabled ? (
         <TableCell
-          style={
-            !authorColumnIsEnabled ? { background: "none" } : dragStyles.style
-          }
+          dataTestId={`files-cell-author-${index}`}
+          style={dragStyles.style}
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
@@ -168,8 +150,9 @@ const RowDataComponent = (props) => {
           )}
         >
           <AuthorCell
-            sideColor={theme.filesSection.tableView.row.sideColor}
-            {...props}
+            item={item}
+            sideColor={sideColor}
+            fileOwner={props.fileOwner}
           />
           {lastColumn === "Author" ? lastColumnContent : null}
         </TableCell>
@@ -179,11 +162,8 @@ const RowDataComponent = (props) => {
 
       {createdColumnIsEnabled ? (
         <TableCell
-          style={
-            !createdColumnIsEnabled
-              ? { background: "none !important" }
-              : dragStyles.style
-          }
+          dataTestId={`files-cell-created-${index}`}
+          style={dragStyles.style}
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
@@ -195,8 +175,11 @@ const RowDataComponent = (props) => {
         >
           <DateCell
             create
-            sideColor={theme.filesSection.tableView.row.sideColor}
-            {...props}
+            sideColor={sideColor}
+            updatedDate={props.updatedDate}
+            createdDate={props.createdDate}
+            lastOpenedDate={props.lastOpenedDate}
+            isRecentFolder={props.isRecentFolder}
           />
           {lastColumn === "Created" ? lastColumnContent : null}
         </TableCell>
@@ -206,9 +189,8 @@ const RowDataComponent = (props) => {
 
       {modifiedColumnIsEnabled ? (
         <TableCell
-          style={
-            !modifiedColumnIsEnabled ? { background: "none" } : dragStyles.style
-          }
+          dataTestId={`files-cell-modified-${index}`}
+          style={dragStyles.style}
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
@@ -219,8 +201,11 @@ const RowDataComponent = (props) => {
           )}
         >
           <DateCell
-            sideColor={theme.filesSection.tableView.row.sideColor}
-            {...props}
+            sideColor={sideColor}
+            updatedDate={props.updatedDate}
+            createdDate={props.createdDate}
+            lastOpenedDate={props.lastOpenedDate}
+            isRecentFolder={props.isRecentFolder}
           />
           {lastColumn === "Modified" ? lastColumnContent : null}
         </TableCell>
@@ -228,21 +213,17 @@ const RowDataComponent = (props) => {
         <div />
       )}
 
-      {erasureColumnIsEnabled ? (
+      {isPersonalReadOnly && erasureColumnIsEnabled ? (
         <TableCell
-          style={
-            !erasureColumnIsEnabled ? { background: "none" } : dragStyles.style
-          }
+          dataTestId={`files-cell-erasure-${index}`}
+          style={dragStyles.style}
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
             lastColumn === "Erasure" ? "no-extra-space" : "",
           )}
         >
-          <ErasureCell
-            sideColor={theme.filesSection.tableView.row.sideColor}
-            {...props}
-          />
+          <ErasureCell sideColor={sideColor} item={item} t={t} />
         </TableCell>
       ) : (
         <div />
@@ -250,9 +231,8 @@ const RowDataComponent = (props) => {
 
       {sizeColumnIsEnabled ? (
         <TableCell
-          style={
-            !sizeColumnIsEnabled ? { background: "none" } : dragStyles.style
-          }
+          dataTestId={`files-cell-size-${index}`}
+          style={dragStyles.style}
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
@@ -260,10 +240,7 @@ const RowDataComponent = (props) => {
             lastColumn === "Size" && isIndexEditingMode ? "index-buttons" : "",
           )}
         >
-          <SizeCell
-            sideColor={theme.filesSection.tableView.row.sideColor}
-            {...props}
-          />
+          <SizeCell sideColor={sideColor} item={item} />
           {lastColumn === "Size" ? lastColumnContent : null}
         </TableCell>
       ) : (
@@ -272,11 +249,8 @@ const RowDataComponent = (props) => {
 
       {typeColumnIsEnabled ? (
         <TableCell
-          style={
-            !typeColumnIsEnabled
-              ? { background: "none !important" }
-              : dragStyles.style
-          }
+          dataTestId={`files-cell-type-${index}`}
+          style={dragStyles.style}
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
@@ -284,10 +258,7 @@ const RowDataComponent = (props) => {
             lastColumn === "Type" && isIndexEditingMode ? "index-buttons" : "",
           )}
         >
-          <TypeCell
-            sideColor={theme.filesSection.tableView.row.sideColor}
-            {...props}
-          />
+          <TypeCell sideColor={sideColor} item={item} t={t} />
           {lastColumn === "Type" ? lastColumnContent : null}
         </TableCell>
       ) : (
@@ -297,7 +268,7 @@ const RowDataComponent = (props) => {
   );
 };
 
-export default inject(({ tableStore, selectedFolderStore }) => {
+export default inject(({ tableStore, treeFoldersStore }) => {
   const {
     authorColumnIsEnabled,
     createdColumnIsEnabled,
@@ -305,11 +276,10 @@ export default inject(({ tableStore, selectedFolderStore }) => {
     sizeColumnIsEnabled,
     typeColumnIsEnabled,
     tableStorageName,
-    columnStorageName,
     erasureColumnIsEnabled,
   } = tableStore;
 
-  const { isIndexedFolder } = selectedFolderStore;
+  const { isPersonalReadOnly } = treeFoldersStore;
 
   return {
     authorColumnIsEnabled,
@@ -318,9 +288,8 @@ export default inject(({ tableStore, selectedFolderStore }) => {
     sizeColumnIsEnabled,
     typeColumnIsEnabled,
     tableStorageName,
-    columnStorageName,
 
-    isIndexedFolder,
     erasureColumnIsEnabled,
+    isPersonalReadOnly,
   };
 })(observer(RowDataComponent));

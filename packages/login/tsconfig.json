@@ -1,8 +1,14 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "types": ["./index.d.ts"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "types": [
+      "./index.d.ts"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -14,7 +20,7 @@
     "baseUrl": "./",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "incremental": true,
     "plugins": [
       {
@@ -22,9 +28,15 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"],
-      "PUBLIC_DIR/*": ["../../public/*"],
-      "ASSETS_DIR/*": ["./public/*"]
+      "@/*": [
+        "./src/*"
+      ],
+      "PUBLIC_DIR/*": [
+        "../../public/*"
+      ],
+      "ASSETS_DIR/*": [
+        "./public/*"
+      ]
     },
     "forceConsistentCasingInFileNames": true
   },
@@ -35,7 +47,12 @@
     ".next/types/**/*.ts",
     "next.config.js",
     "./.next/types/**/*.ts",
-    "__tests__/.spec.ts"
+    "__tests__/.spec.ts",
+    ".next/dev/types/**/*.ts",
+    ".next\\dev/types/**/*.ts",
+    ".next\\dev/types/**/*.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }

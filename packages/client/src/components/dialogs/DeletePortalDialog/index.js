@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,8 +28,8 @@ import { Trans, useTranslation } from "react-i18next";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
+import { Link } from "@docspace/shared/components/link";
 import { sendDeletePortalEmail } from "@docspace/shared/api/portal";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 const DeletePortalDialog = (props) => {
   const { t, ready } = useTranslation("Settings", "Common");
@@ -55,23 +55,24 @@ const DeletePortalDialog = (props) => {
       displayType="modal"
     >
       <ModalDialog.Header>
-        {t("DeletePortal", { productName: t("Common:ProductName") })}
+        {t("Common:DeletePortal", { productName: t("Common:ProductName") })}
       </ModalDialog.Header>
       <ModalDialog.Body>
         <Trans t={t} i18nKey="DeletePortalInfo" ns="Settings">
           Before you delete the portal, please make sure that automatic billing
           is turned off. You may check the status of automatic billing in
-          <ColorTheme
+          <Link
             className="stripe-url-link"
             tag="a"
-            themeId={ThemeId.Link}
             fontSize="13px"
             fontWeight="600"
             href={stripeUrl}
             target="_blank"
+            color="accent"
+            dataTestId="stripe_url_link"
           >
             on your Stripe customer portal.
-          </ColorTheme>
+          </Link>
         </Trans>
       </ModalDialog.Body>
       <ModalDialog.Footer>
@@ -83,6 +84,7 @@ const DeletePortalDialog = (props) => {
           scale
           primary
           onClick={onDeleteClick}
+          testId="submit_delete_portal_button"
         />
         <Button
           className="cancel-button"
@@ -91,6 +93,7 @@ const DeletePortalDialog = (props) => {
           size="normal"
           scale
           onClick={onClose}
+          testId="cancel_delete_portal_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

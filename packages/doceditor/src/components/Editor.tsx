@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,9 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 "use client";
-import React, { useMemo } from "react";
-import { useTranslation } from "react-i18next";
 
+import React, { useMemo } from "react";
+import dynamic from "next/dynamic";
+import { useTranslation } from "react-i18next";
 import {
   DocumentEditor,
   type IConfig,
@@ -36,14 +37,16 @@ import {
 import { ThemeKeys } from "@docspace/shared/enums";
 import { getEditorTheme } from "@docspace/shared/utils";
 import { EDITOR_ID } from "@docspace/shared/constants";
+import { useTheme } from "@docspace/shared/hooks/useTheme";
 
-import { getBackUrl, isFormRole } from "@/utils";
-import { IS_DESKTOP_EDITOR, IS_ZOOM, SHOW_CLOSE } from "@/utils/constants";
+import UserAvatarBaseSvgUrl from "PUBLIC_DIR/images/avatar.editor.base.svg?url";
+import UserAvatarDarkSvgUrl from "PUBLIC_DIR/images/avatar.editor.dark.svg?url";
+
+import { IS_DESKTOP_EDITOR, IS_ZOOM } from "@/utils/constants";
 import { EditorProps, TGoBack } from "@/types";
 import {
   onSDKRequestHistoryClose,
   onSDKRequestEditRights,
-  onSDKInfo,
   onSDKWarning,
   onSDKError,
   onSDKRequestRename,
@@ -51,6 +54,10 @@ import {
 } from "@/utils/events";
 import useInit from "@/hooks/useInit";
 import useEditorEvents from "@/hooks/useEditorEvents";
+import useGoBackAndClose from "@/hooks/useGoBackAndClose";
+import { isPDFDocument } from "@/utils";
+
+import Bar from "./Bar";
 
 const Editor = ({
   config,
@@ -82,7 +89,9 @@ const Editor = ({
   openShareFormDialog,
   onStartFilling,
 }: EditorProps) => {
+  console.log("config", config);
   const { t, i18n } = useTranslation(["Common", "Editor", "DeepLink"]);
+  const { isBase } = useTheme();
 
   const openOnNewPage = IS_ZOOM ? false : !filesSettings?.openEditorInSameTab;
 
@@ -112,6 +121,7 @@ const Editor = ({
     onRequestStartFilling,
 
     onRequestRefreshFile,
+    onInfo,
   } = useEditorEvents({
     user,
     successAuth,
@@ -141,6 +151,17 @@ const Editor = ({
     organizationName,
   });
 
+  const { goBack, close } = useGoBackAndClose(
+    fileInfo,
+    sdkConfig,
+    user,
+    successAuth,
+    openOnNewPage,
+    i18n,
+    t,
+    config?.editorConfig?.customization?.goback?.url,
+  );
+
   const newConfig: IConfig = useMemo(() => {
     return config
       ? {
@@ -155,84 +176,47 @@ const Editor = ({
 
   // if (config) newConfig.editorConfig = { ...config.editorConfig };
 
-  //if (view && newConfig.editorConfig) newConfig.editorConfig.mode = "view";
-
-  let goBack: TGoBack = {} as TGoBack;
-
-  if (fileInfo) {
-    const editorGoBack = sdkConfig?.editorGoBack;
-
-    const openFileLocationText = (
-      (
-        i18n.getDataByLanguage(i18n.language) as unknown as {
-          Editor: { [key: string]: string };
-        }
-      )?.["Editor"] as {
-        [key: string]: string;
-      }
-    )?.["FileLocation"]; // t("FileLocation");
-
-    if (editorGoBack === false || user?.isVisitor || !user) {
-    } else if (editorGoBack === "event") {
-      goBack = {
-        requestClose: true,
-        text: openFileLocationText,
-        blank: openOnNewPage,
-      };
-    } else {
-      goBack = {
-        requestClose:
-          typeof window !== "undefined"
-            ? (window.ClientConfig?.editor?.requestClose ?? false)
-            : false,
-        text: openFileLocationText,
-        blank: openOnNewPage,
-      };
-      if (
-        typeof window !== "undefined" &&
-        !window.ClientConfig?.editor?.requestClose
-      ) {
-        goBack.url = getBackUrl(fileInfo.rootFolderType, fileInfo.folderId);
-      }
-    }
-  }
+  // if (view && newConfig.editorConfig) newConfig.editorConfig.mode = "view";
 
   const sdkCustomization: NonNullable<
     IConfig["editorConfig"]
   >["customization"] = sdkConfig?.editorCustomization;
 
-  const theme = sdkCustomization?.uiTheme || user?.theme;
+  try {
+    if (
+      newConfig.document &&
+      newConfig.document.info &&
+      !fileInfo?.requestToken
+    )
+      newConfig.document.info.favorite = !!fileInfo?.isFavorite;
+
+    const url = typeof window !== "undefined" ? window.location.href : "";
+
+    if (url.indexOf("anchor") !== -1) {
+      const splitUrl = url.split("anchor=");
+      const decodeURI = decodeURIComponent(splitUrl[1]);
+      const obj = JSON.parse(decodeURI);
+
+      if (newConfig.editorConfig)
+        newConfig.editorConfig.actionLink = {
+          action: obj.action,
+        };
+    }
+  } catch (error) {
+    console.error(error);
+  }
 
   if (newConfig.editorConfig) {
+    const theme = sdkCustomization?.uiTheme || user?.theme;
+
     newConfig.editorConfig.customization = {
       ...newConfig.editorConfig.customization,
       ...sdkCustomization,
-      goback: { ...goBack },
       uiTheme: getEditorTheme(theme as ThemeKeys),
+      goback: { ...goBack },
+      close,
     };
-
-    if (SHOW_CLOSE && !sdkConfig?.isSDK) {
-      newConfig.editorConfig.customization.close = {
-        visible: SHOW_CLOSE,
-        text: t("Common:CloseButton"),
-      };
-    }
   }
-
-  //if (newConfig.document && newConfig.document.info)
-  //  newConfig.document.info.favorite = false;
-
-  // const url = window.location.href;
-
-  // if (url.indexOf("anchor") !== -1) {
-  //   const splitUrl = url.split("anchor=");
-  //   const decodeURI = decodeURIComponent(splitUrl[1]);
-  //   const obj = JSON.parse(decodeURI);
-
-  //   config.editorConfig.actionLink = {
-  //     action: obj.action,
-  //   };
-  // }
 
   newConfig.events = {
     onDocumentReady,
@@ -240,7 +224,7 @@ const Editor = ({
     onRequestEditRights: () =>
       onSDKRequestEditRights(t, fileInfo, newConfig.documentType),
     onAppReady: onSDKAppReady,
-    onInfo: onSDKInfo,
+    onInfo,
     onWarning: onSDKWarning,
     onError: onSDKError,
     onRequestHistoryData: onSDKRequestHistoryData,
@@ -254,6 +238,27 @@ const Editor = ({
     onRequestRefreshFile,
   };
 
+  if (
+    (typeof window !== "undefined" &&
+      window.ClientConfig?.editor?.requestClose) ||
+    close?.visible ||
+    IS_ZOOM
+  ) {
+    newConfig.events.onRequestClose = onSDKRequestClose;
+  }
+
+  if (
+    typeof window !== "undefined" &&
+    newConfig.editorConfig?.user &&
+    newConfig.editorConfig.user.image?.includes(
+      "default_user_photo_size_48-48.png",
+    )
+  ) {
+    newConfig.editorConfig.user.image = isBase
+      ? `${window.location.origin}${UserAvatarBaseSvgUrl}`
+      : `${window.location.origin}${UserAvatarDarkSvgUrl}`;
+  }
+
   if (successAuth) {
     newConfig.events.onRequestUsers = onSDKRequestUsers;
     newConfig.events.onRequestSendNotify = onSDKRequestSendNotify;
@@ -261,8 +266,8 @@ const Editor = ({
     if (!user?.isVisitor) {
       newConfig.events.onRequestSaveAs = onSDKRequestSaveAs;
       if (
-        IS_DESKTOP_EDITOR ||
-        (typeof window !== "undefined" && !openOnNewPage)
+        !isPDFDocument(fileInfo) &&
+        (IS_DESKTOP_EDITOR || (typeof window !== "undefined" && !openOnNewPage))
       ) {
         newConfig.events.onRequestCreateNew = onSDKRequestCreateNew;
       }
@@ -299,15 +304,6 @@ const Editor = ({
     newConfig.events.onRequestRestore = onSDKRequestRestore;
   }
 
-  if (
-    (typeof window !== "undefined" &&
-      window.ClientConfig?.editor?.requestClose) ||
-    SHOW_CLOSE ||
-    IS_ZOOM
-  ) {
-    newConfig.events.onRequestClose = onSDKRequestClose;
-  }
-
   if (config?.startFilling && !IS_ZOOM) {
     newConfig.events.onRequestStartFilling = onRequestStartFilling;
     newConfig.events.onStartFilling = onStartFilling;
@@ -318,23 +314,35 @@ const Editor = ({
   }
 
   return (
-    <DocumentEditor
-      id={EDITOR_ID}
-      documentServerUrl={documentServerUrl}
-      config={
-        errorMessage || isSkipError
-          ? {
-              events: {
-                onAppReady: onSDKAppReady,
-              },
-            }
-          : newConfig
-      }
-      height="100%"
-      width="100%"
-      events_onDocumentReady={onDocumentReady}
-    />
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        width: "100%",
+      }}
+    >
+      <div style={{ height: "auto", overflow: "visible" }}>
+        <Bar quotaExceededScope={config?.quotaExceededScope} />
+      </div>
+      <DocumentEditor
+        id={EDITOR_ID}
+        documentServerUrl={documentServerUrl}
+        config={
+          errorMessage || isSkipError
+            ? {
+                events: {
+                  onAppReady: onSDKAppReady,
+                },
+              }
+            : newConfig
+        }
+        height="100%"
+        width="100%"
+        events_onDocumentReady={onDocumentReady}
+      />
+    </div>
   );
 };
 
-export default Editor;
+export default dynamic(() => Promise.resolve(Editor), { ssr: false });

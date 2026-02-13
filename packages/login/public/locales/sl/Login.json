@@ -1,6 +1,8 @@
 {
   "ChangePasswordSuccess": "Geslo je bilo uspešno spremenjeno",
   "CodeTitle": "Koda vam je bila poslana po e-pošti",
+  "ConfirmEmailChange": "Potrdite spremembo e-pošte",
+  "ConfirmEmailChangeText": "Zahtevali ste spremembo e-naslova na vašem računu {{productName}}. Za nadaljevanje, se prosim prijavite z vašimi trenutnimi poverilnicami.",
   "ErrorInvalidText": "V 10 sekundah boste preusmerjeni na <1>{{productName}}</1>",
   "ForgotPassword": "Ste pozabili geslo?",
   "LDAPUsernamePlaceholder": "Uporabniško ime za {{ldap_domain}} ",

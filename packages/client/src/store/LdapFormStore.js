@@ -113,12 +113,15 @@ class LdapFormStore {
 
   currentQuotaStore = null;
 
+  settingsStore = null;
+
   confirmationResetModal = false;
 
-  constructor(currentQuotaStore) {
+  constructor(currentQuotaStore, settingsStore) {
     makeAutoObservable(this);
 
     this.currentQuotaStore = currentQuotaStore;
+    this.settingsStore = settingsStore;
   }
 
   mapSettings = (data) => {
@@ -210,12 +213,21 @@ class LdapFormStore {
   };
 
   load = async (t) => {
-    if (this.isLoaded) return;
+    // if (this.isLoaded) return;
+
+    const ldapSettingsAbortController = new AbortController();
+    const cronLdapAbortController = new AbortController();
+    const ldapDefaultAbortController = new AbortController();
+    this.settingsStore.addAbortControllers([
+      ldapSettingsAbortController,
+      cronLdapAbortController,
+      ldapDefaultAbortController,
+    ]);
 
     const [settingsRes, cronRes, defaultRes] = await Promise.allSettled([
-      getLdapSettings(),
-      getCronLdap(),
-      getLdapDefaultSettings(),
+      getLdapSettings(ldapSettingsAbortController.signal),
+      getCronLdap(cronLdapAbortController.signal),
+      getLdapDefaultSettings(ldapDefaultAbortController.signal),
     ]);
 
     if (settingsRes.status == "fulfilled") {
@@ -241,6 +253,14 @@ class LdapFormStore {
       cronRes.status == "rejected" ||
       defaultRes.status == "rejected"
     ) {
+      if (
+        settingsRes?.reason?.message === "canceled" ||
+        cronRes?.reason?.message === "canceled" ||
+        defaultRes?.reason?.message === "canceled"
+      ) {
+        return;
+      }
+
       console.error(
         "Error while loading LDAP settings",
         settingsRes?.reason,

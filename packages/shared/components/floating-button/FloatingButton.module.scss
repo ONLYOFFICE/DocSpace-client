@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,9 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../styles/variables/index.scss";
-@import "../../styles/variables/_colors.scss";
-@import "../../styles/_mixins.scss";
+@use "../../styles/variables";
+@use "../../styles/variables/colors";
+@use "../../styles/mixins";
 
 .circle {
   position: relative;
@@ -43,7 +43,8 @@
     border: 2px solid transparent;
     border-radius: 50%;
     opacity: 1;
-    background-image: linear-gradient(
+    background-image:
+      linear-gradient(
         var(--color-scheme-main-accent),
         var(--color-scheme-main-accent)
       ),
@@ -62,7 +63,8 @@
     &.withProgress {
       animation: none;
       transition: all 0.3s ease-out;
-      background-image: linear-gradient(
+      background-image:
+        linear-gradient(
           var(--color-scheme-main-accent),
           var(--color-scheme-main-accent)
         ),
@@ -159,14 +161,6 @@
   inset-inline-start: 20px;
   top: 0px;
 
-  &.alert {
-    svg {
-      path {
-        fill: var(--status-icon-color-negative) !important;
-      }
-    }
-  }
-
   &.complete {
     svg {
       path {
@@ -177,7 +171,7 @@
 }
 
 .floatingButtonWrapper {
-  @include desktop {
+  @include mixins.desktop {
     position: absolute;
     z-index: 300;
     inset-inline-end: 0;

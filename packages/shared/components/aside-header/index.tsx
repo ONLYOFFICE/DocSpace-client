@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -53,6 +53,7 @@ const AsideHeader = (props: AsideHeaderProps) => {
     withoutBorder = false,
     headerHeight,
     headerComponent,
+    dataTestId,
   } = props;
 
   const containerRef = React.useRef<HTMLDivElement>(null);
@@ -65,6 +66,7 @@ const AsideHeader = (props: AsideHeaderProps) => {
       onClick={onBackClick}
       isFill
       isClickable
+      dataTestId="aside_header_back_icon_button"
     />
   );
 
@@ -77,6 +79,7 @@ const AsideHeader = (props: AsideHeaderProps) => {
       isClickable
       isStroke
       aria-label="close"
+      dataTestId="aside_header_close_icon_button"
     />
   );
 
@@ -84,12 +87,7 @@ const AsideHeader = (props: AsideHeaderProps) => {
 
   const headerComponentRender =
     typeof header === "string" ? (
-      <Text
-        fontSize="21px"
-        fontWeight={700}
-        className={styles.headerComponent}
-        noSelect
-      >
+      <Text fontSize="21px" fontWeight={700} className={styles.headerComponent}>
         {header}
       </Text>
     ) : (
@@ -149,7 +147,7 @@ const AsideHeader = (props: AsideHeaderProps) => {
         [styles.customHeaderHeight]: headerHeight,
       })}
       style={style}
-      data-testid="aside-header"
+      data-testid={dataTestId ?? "aside-header"}
     >
       {isLoading ? loaderComponent : mainComponent}
     </div>

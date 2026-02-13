@@ -3,7 +3,7 @@
   "content": "Verify Auth Responses Sign",
   "content_en_sha1_hash": "c23e7e3e2e865e4a6cfba1a6ded472c00450480e",
   "created_at": "2025-05-19T21:30:50.091Z",
-  "updated_at": "2025-05-21T02:12:08.675Z",
+  "updated_at": "2025-08-11T18:11:59.265Z",
   "comment": {
     "text": "The translation key \"idpAuthRequest\" is used to display a checkbox label that verifies authentication responses signed by an IdP (Identity Provider). It appears in a UI component for single sign-on integration settings, allowing users to toggle this verification.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/CheckboxSet.js",
-      "line_number": 86,
+      "line_number": 104,
       "context": ": \"sp-sign-auth-requests\"\n }\n className=\"checkbox-input\"\n isDisabled={isDisabled}\n onChange={setCheckbox}\n label={prefix === \"idp\" ? t(\"idpAuthRequest\") : t(\"spAuthRequest\")}\n name={checkboxesNames[prefix][0]}\n tabIndex={10}\n isChecked={\n prefix === \"idp\" ? idpVerifyAuthResponsesSign : spSignAuthRequests\n }",
       "module": "/packages/client"
     }
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Verify Auth Responses Sign\" is ambiguous. It could mean 'Verify the signatures on Auth Responses' or 'Verify the signing of Auth Responses.' The Arabic translation \"التحقق من توقيع استجابات المصادقة\" leans towards the former, implying verification of signatures *on* the responses, rather than the signing process itself. Depending on the intended meaning, a more accurate translation might be required.",
-          "suggestion": "Consider clarifying the intended meaning of the English phrase and adjusting the Arabic translation accordingly. For example, if the intention is to verify the process of signing, a phrase like \"التحقق من عملية توقيع استجابات المصادقة\" might be better."
+          "description": "The English phrase 'Verify Auth Responses Sign' is a slightly awkward phrasing. A more natural English translation might be 'Verify signatures on authentication responses' or 'Verify authentication response signatures.' The Arabic translation, while technically correct, doesn't capture the nuance of 'signatures on responses'. It simply translates 'Sign' as 'توقيع', which implies a broader concept of signing rather than specifically signatures.",
+          "suggestion": "Consider a more precise translation to better reflect the meaning of 'signatures on authentication responses'. For example, 'التحقق من بصمات رقمية على استجابات المصادقة' (Al-tahaqquq min basamaat raqameyya 'ala istijabat al-musadaqa) - 'Verification of digital signatures on authentication responses'."
         }
       ],
       "approved_at": null
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Doğrulama Cavabları İşarəsini Təsdiqləyin\" doesn't accurately convey the meaning of \"Verify Auth Responses Sign\". 'Sign' in the English context refers to a digital signature, not a visual mark or signal. The Azerbaijani translation implies verification of a signal or indication.",
-          "suggestion": "Consider a translation that reflects the verification of a digital signature. For example, \"Elektron İmza ilə Cavabları Yoxlayın\" (Verify Responses with Electronic Signature) or \"Cavabların Rəsmən Təsdiqini Yoxlayın\" (Verify the Official Confirmation of Responses)."
+          "description": "The translation \"Doğrulama Cavabları İşarəsini Təsdiqləyin\" doesn't accurately convey the meaning of \"Verify Auth Responses Sign\". 'Sign' in this context refers to a digital signature, not a hand signal or mark. A more accurate translation would involve 'imza' (signature) or a phrase describing verifying a digital signature.",
+          "suggestion": "Doğrulama Cavablarının İmzasını Yoxlayın"
         }
       ],
       "approved_at": null
@@ -54,12 +54,12 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Потвърждение на подписа за упълномощени отговори' doesn't accurately convey the meaning of 'Verify Auth Responses Sign'. 'Упълномощени отговори' translates to 'authorized responses,' which is not the intended meaning. The phrase 'Verify Auth Responses Sign' implies checking the signature on the authentication responses, not verifying the responses themselves are authorized.",
+          "description": "The translation 'Потвърждение на подписа за упълномощени отговори' doesn't accurately convey the meaning of 'Verify Auth Responses Sign'. The term 'упълномощени отговори' (authorized responses) is not a direct translation of 'Auth Responses'. It implies a level of authorization that isn't necessarily present in the original English.",
           "suggestion": "Потвърждение на подписа на отговорите за удостоверяване"
         },
         {
           "type": "formatting",
-          "description": "The suggested translation 'Потвърждение на подписа на отговорите за удостоверяване' could benefit from a more concise phrasing, as the current wording is slightly verbose.",
+          "description": "The suggested translation is a bit lengthy. While accuracy is paramount, consider if a shorter, more natural phrasing could be achieved.",
           "suggestion": "Проверка на подписа на отговорите за удостоверяване"
         }
       ],
@@ -71,13 +71,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Podpis reakcí na žádosti o ověření' doesn't accurately convey the meaning of 'Verify Auth Responses Sign'. 'Verify' implies checking or validating, while 'Podpis' translates to 'Signature'. The original phrase likely refers to verifying the signatures on authentication requests or responses. A more accurate translation would focus on 'verification' of the response, not just the signature.",
-          "suggestion": "Ověření podpisů v odpovědích na žádosti o ověření"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrasing 'reakcí na žádosti' (responses to requests) is slightly awkward. It's not inherently wrong but could be improved for clarity and flow.",
-          "suggestion": "odpovědí na autentizační požadavky"
+          "description": "The translation 'Podpis reakcí na žádosti o ověření' doesn't fully capture the meaning of 'Verify Auth Responses Sign'. 'Verify' implies checking or validating, which is not explicitly present.  'Sign' likely refers to a digital signature. A better translation would incorporate this nuance.",
+          "suggestion": "Potvrzení podpisů v odpovědích na autorizační požadavky"
         }
       ],
       "approved_at": null
@@ -94,13 +89,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Υπογραφή απαντήσεων επαλήθευσης εξουσιοδότησης\" is a bit literal and doesn't convey the intended meaning of 'Verify Auth Responses Sign'. 'Verify' implies checking or confirming, and the original English phrase suggests a focus on the signature aspect of the authentication response. The Greek translation focuses more on the signature itself, rather than the verification process.",
-          "suggestion": "Επαλήθευση ψηφιακής υπογραφής απαντήσεων εξουσιοδότησης"
+          "description": "The English phrase \"Verify Auth Responses Sign\" is not accurately translated. \"Verify\" implies a process of checking or confirming. \"Sign\" in this context likely refers to a digital signature, which isn't directly conveyed in the Greek translation. A more accurate translation would emphasize authentication and verification of signed responses.",
+          "suggestion": "Επαλήθευση υπογεγραμμένων απαντήσεων εξουσιοδότησης"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The translation doesn't flow naturally in Greek.  A more idiomatic phrasing would improve readability.",
-          "suggestion": "Έλεγχος ψηφιακής υπογραφής απαντήσεων εξουσιοδότησης"
+          "type": "formatting",
+          "description": "The Greek translation could benefit from a slight restructuring to improve readability. While grammatically correct, the phrase feels a bit long and clunky.",
+          "suggestion": "Επαλήθευση υπογεγραμμένων απαντήσεων εξουσιοδότησης"
         }
       ],
       "approved_at": null
@@ -129,8 +124,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Ստուգեք Auth Responses Sign-ը\" is a literal translation and doesn't convey the intended meaning of \"Verify Auth Responses Sign.\" It sounds awkward and doesn't flow naturally in Armenian. The phrase \"Auth Responses Sign\" should be translated more contextually to reflect the purpose of verification.",
-          "suggestion": "Consider a translation that conveys the meaning of verifying a signature or confirmation related to authentication responses. For example, something like \"Բարձրացրեք ապացույցի ստորագրությունը\" (Bardsracy acuytsi storagrutyun) which translates to \"Confirm the authentication signature\" or a more general \"Հաստատեք ապացույցի ստացումը\" (Hastatec apaguyci storacvum) which means \"Confirm the receipt of the proof\"."
+          "description": "The Armenian translation \"Ստուգեք Auth Responses Sign-ը\" is a literal translation and doesn't convey the intended meaning of 'Verify Auth Responses Sign'.  It sounds awkward and might be misinterpreted.  The phrase 'Sign' is used as a technical term, and a more appropriate translation might focus on verification of the response's signature or authenticity.",
+          "suggestion": "Consider a more nuanced translation that focuses on verifying the authenticity or signature of the Auth Responses, such as \"Ստուգեք ապրանցումային նշանը ճշտության համար\" (Check the signature for accuracy) or \"Ստուգեք ապրանցումային տեղեկությունների ճշտությունը\" (Check the accuracy of the signature information)."
+        },
+        {
+          "type": "formatting",
+          "description": "The hyphen in \"Sign-ը\" feels unnatural in Armenian. It's likely best to integrate 'Sign' more naturally into the Armenian sentence structure.",
+          "suggestion": "Remove the hyphen and integrate 'Sign' into a more fluent phrase as suggested in the incorrect translation issue."
         }
       ],
       "approved_at": null
@@ -141,13 +141,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"segno delle risposte di autenticazione\" isn't the most natural or accurate translation of \"Auth Responses Sign\". \"Segno\" implies a signature or mark, which isn't necessarily the core meaning.  A better translation would convey the verification process itself.",
-          "suggestion": "Verifica delle risposte di autenticazione"
-        },
-        {
-          "type": "formatting",
-          "description": "While not a major issue, the sentence feels slightly clunky.  Consider reordering for better flow.",
-          "suggestion": "Verifica le risposte di autenticazione"
+          "description": "The English phrase 'Verify Auth Responses Sign' is ambiguous. It's unclear if 'Sign' refers to a signature or a sign. A more accurate translation should clarify the intended meaning. Given the context of Single Sign-On (SSO), 'Sign' most likely refers to a digital signature.  'Verifica segno delle risposte di autenticazione' translates literally as 'Verify sign of authentication responses', which is not as natural or precise.",
+          "suggestion": "Verifica la firma delle risposte di autenticazione"
         }
       ],
       "approved_at": null
@@ -161,13 +156,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"Verify Auth Responses Sign\" is not directly translatable. It implies verifying the signature on authentication responses. \"인증 응답 서명 확인\" is a reasonable translation but could be more precise. A more literal translation reflecting the 'sign' could be '인증 응답 서명 검증' which more clearly indicates validation.",
-          "suggestion": "인증 응답 서명 검증"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -176,13 +165,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ຢືນຢັນ ການຕອບຮັບຂອງການກວດສອບ ຄວາມຖືກຕ້ອງ\" doesn't accurately convey the meaning of 'Verify Auth Responses Sign'. It's too literal and complex. The phrase 'ການກວດສອບ ຄວາມຖືກຕ້ອງ' (checking for correctness) is redundant and doesn't fit the context.",
-          "suggestion": "A more appropriate translation might be something like \"ຢືນຢັນລາຍເຊັນຂອງການຕອບຮັບການກວດສອບ\" or \"ຢືນຢັນລາຍເຊັນການຕອບຮັບ\" (Verify the signature of the authentication response)."
+          "description": "The Lao translation \"ຢືນຢັນ ການຕອບຮັບຂອງການກວດສອບ ຄວາມຖືກຕ້ອງ\" doesn't accurately convey the meaning of \"Verify Auth Responses Sign\". The phrase 'ການກວດສອບ ຄວາມຖືກຕ້ອງ' (checking correctness) is redundant and doesn't fit the context of verifying a signed authentication response.",
+          "suggestion": "ຢືນຢັນລາຍເຊັນຂອງການຕອບຮັບການກວດສອບ"
         },
         {
           "type": "grammar",
-          "description": "The phrase \"ການຕອບຮັບຂອງການກວດສອບ ຄວາມຖືກຕ້ອງ\" is grammatically awkward in Lao.  The structure needs to be more streamlined.",
-          "suggestion": "Consider restructuring the sentence for better flow and clarity."
+          "description": "The phrasing \"ການຕອບຮັບຂອງການກວດສອບ\" is a bit clunky.  It's less direct and natural than it could be.",
+          "suggestion": "ການຕອບຮັບ"
         }
       ],
       "approved_at": null
@@ -193,13 +182,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Autentifikācijas atbilžu verificēšanas parakstīšanos\" is not an accurate translation of 'Verify Auth Responses Sign'. 'Parakstīšanos' implies 'signing', which is not the intended meaning. The sentence should convey the action of verifying the signatures on the auth responses.",
-          "suggestion": "Autentifikācijas atbilžu parakstu validēšana"
+          "description": "The translation \"Autentifikācijas atbilžu verificēšanas parakstīšanos\" is overly literal and doesn't convey the intended meaning of 'Verify Auth Responses Sign' in a natural way in Latvian. The phrase 'parakstīšanos' (signing) is misplaced and doesn't fit the context of verification.",
+          "suggestion": "A more accurate and natural translation would be something like \"Autentifikācijas atbilžu verifikācija\" or \"Autentifikācijas atbilžu apstiprināšana\".  A further improvement might involve including 'paraksts' (signature) if the verification specifically checks the signature."
         },
         {
           "type": "formatting",
-          "description": "The translation is a bit lengthy and could be simplified for better readability in a UI context.",
-          "suggestion": "Autentifikācijas atbilžu parakstu verifikācija"
+          "description": "The translation is a very long phrase, which can be difficult to read and may not fit well within UI elements. Consider breaking it down if possible.",
+          "suggestion": "If the context allows, consider splitting the phrase into two parts, such as 'Autentifikācijas atbildes verifikācija' followed by another phrase indicating the purpose."
         }
       ],
       "approved_at": null
@@ -210,13 +199,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Verifieer Auth Reacties Ondertekening' doesn't accurately convey the meaning of 'Verify Auth Responses Sign'. 'Reacties' translates to 'responses', which is correct, but 'Ondertekening' translates to 'signing' and doesn't align with the English phrase 'Sign'. A more accurate translation would involve something like 'Verifieer de ondertekening van de autorisatieresponsen'.",
+          "description": "The translation 'Verifieer Auth Reacties Ondertekening' is not a natural or accurate translation of 'Verify Auth Responses Sign'. 'Reacties' translates to 'responses', but 'Ondertekening' is more accurately 'signature'.  The phrase also isn't flowing naturally in Dutch.",
           "suggestion": "Verifieer de ondertekening van de autorisatieresponsen"
-        },
-        {
-          "type": "formatting",
-          "description": "The Dutch translation is a single, long phrase. While grammatically correct, it lacks the flow and clarity of the English original. Consider breaking it up for better readability.",
-          "suggestion": "Verifieer de ondertekening van autorisatieresponsen."
         }
       ],
       "approved_at": null
@@ -224,7 +208,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Zweryfikuj podpis odpowiedzi autoryzacji' is a literal translation but doesn't quite capture the intended meaning of 'Verify Auth Responses Sign'. 'Sign' in this context likely refers to the digital signature and isn't a direct translation of 'podpis'.",
+          "suggestion": "Zweryfikuj podpisy odpowiedzi uwierzytelniania"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -233,13 +223,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Sinal para Verificar Respostas de Autenticação\" doesn't accurately convey the meaning of \"Verify Auth Responses Sign\". \"Sinal\" (signal) doesn't fit the context of verifying a signature.",
+          "description": "The translation 'Sinal para Verificar Respostas de Autenticação' doesn't accurately convey the meaning of 'Verify Auth Responses Sign'. 'Sinal' implies a signal or indication, whereas 'Verify' suggests confirming or validating. The intended meaning relates to signing or verifying the signatures on authentication responses.",
           "suggestion": "Verificar Assinaturas de Respostas de Autenticação"
-        },
-        {
-          "type": "formatting",
-          "description": "The phrase 'de Autenticação' could be more concise. While grammatically correct, it might be improved for clarity and flow.",
-          "suggestion": "Verificar Assinaturas de Respostas de Autenticação (or Verificar Assinaturas nas Respostas de Autenticação)"
         }
       ],
       "approved_at": null
@@ -250,8 +235,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Verifique o sinal de respostas de autenticação' doesn't accurately reflect the meaning of 'Verify Auth Responses Sign'. 'Sinal' (signal) isn't the appropriate term in this context. It should convey a verification process related to authentication responses.",
-          "suggestion": "Verifique as assinaturas das respostas de autenticação"
+          "description": "The translation \"Verifique o sinal de respostas de autenticação\" doesn't accurately convey the meaning of \"Verify Auth Responses Sign.\"  'Sinal' (signal) isn't the correct term. It implies a technical signal, whereas the English refers to verifying the signature on authentication responses.",
+          "suggestion": "Verifique a assinatura das respostas de autenticação"
         }
       ],
       "approved_at": null
@@ -262,13 +247,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Verificarea semnăturii cu răspunsul de autentificare\" is a bit literal and doesn't quite capture the meaning of \"Verify Auth Responses Sign\". It sounds technical and clunky in Romanian. A more natural translation would be something along the lines of \"Verifică semnăturile răspunsurilor de autentificare\" or \"Verificarea semnăturilor din răspunsurile de autentificare\".",
-          "suggestion": "Verifică semnăturile răspunsurilor de autentificare"
-        },
-        {
-          "type": "grammar",
-          "description": "The use of \"cu\" in \"Verificarea semnăturii cu răspunsul de autentificare\" is grammatically awkward in this context. Using \"din\" or a more direct verb construction is preferable.",
-          "suggestion": "Verifică semnăturile răspunsurilor de autentificare"
+          "description": "The translation \"Verificarea semnăturii cu răspunsul de autentificare\" is not the most natural or accurate translation of \"Verify Auth Responses Sign\". The English phrase implies verifying the signature *on* the auth response, rather than verifying the signature *with* the auth response. \"Verificarea semnăturii pe răspunsul de autentificare\" would be closer.",
+          "suggestion": "Verificarea semnăturii pe răspunsul de autentificare"
         }
       ],
       "approved_at": null
@@ -279,8 +259,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Проверять подпись ответов аутентификации' is too literal and doesn't flow naturally in Russian. 'Auth Responses' isn't commonly translated directly like that in technical contexts.",
-          "suggestion": "Разумнее было бы перевести как 'Проверка подписи ответов на аутентификацию' or 'Проверка цифровой подписи ответов аутентификации'."
+          "description": "The translation 'Проверять подпись ответов аутентификации' is a literal translation but could be improved for clarity and naturalness. 'Auth Responses' is quite technical. A more user-friendly equivalent might be 'ответов на аутентификацию' or 'ответов аутентификации'.",
+          "suggestion": "Проверять подпись ответов на аутентификацию"
         }
       ],
       "approved_at": null
@@ -291,8 +271,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ද්වි සාධක ප්‍රතිචාරය සත්‍යාපනය' does not accurately convey the meaning of 'Verify Auth Responses Sign'. 'Auth Responses Sign' refers to verifying the signature of the authentication responses, not just verifying any response related to dual factors.",
-          "suggestion": "A more accurate translation would focus on 'signature verification' of authentication responses. Consider something like 'ප්‍රමauthentिकेशन ප්‍රතිචාරය సంతకం ధృవీకరణ' (pramauthikēna pratikriya santaka dhruvikarana) - Authentication Response Signature Verification."
+          "description": "The translation 'ද්වි සාධක ප්‍රතිචාරය සත්‍යාපනය' doesn't fully capture the meaning of 'Verify Auth Responses Sign'. 'Auth Responses Sign' implies a signature verification process, which is not explicitly conveyed. 'ද්වි සාධක' (dual factor) emphasizes a specific authentication method, which may not be the intended focus. A more accurate translation would need to incorporate the idea of signature verification.",
+          "suggestion": "Consider a translation that conveys the concept of 'signature verification' along with the authentication aspect. Possible alternatives could be something like 'අනුමැතිrespuesta ක්‍රියාවලි సంతకం ధృవీకరణ' (Authorization process signature verification) or a more conceptual equivalent like 'අනුමැතිrespuesta సంతకం ధృవీకరణ' (Authorization signature verification)."
         }
       ],
       "approved_at": null
@@ -303,8 +283,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Kontrola podpisu overovacích odpovedí' while understandable, doesn't fully capture the nuance of 'Verify Auth Responses Sign'. 'Verify' implies checking the signature's validity, not just a general 'check'. A more accurate translation might incorporate 'overenie' (verification) for a closer match to the English meaning.",
-          "suggestion": "Overenie platnosti podpisu overovacích odpovedí"
+          "description": "The English phrase 'Verify Auth Responses Sign' is a bit awkward. A more accurate and natural translation considering the context of Single Sign-On (SSO) would be 'Ověřte podpis autorizačních požadavků' or 'Ověření podpisu autorizačních požadavků'. 'Kontrola podpisu overovacích odpovedí' while technically correct, lacks the precision and common terminology used in SSO implementations.",
+          "suggestion": "Ověřte podpis autorizačních požadavků"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'overovacích' is a less common and slightly awkward construction in this context. 'Autorizačních' is more directly related to the authentication/authorization process.",
+          "suggestion": "autorizačních"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English term 'responses' is best translated as 'požadavků' in this SSO context, rather than 'odpovědí'.",
+          "suggestion": "požadavků"
         }
       ],
       "approved_at": null
@@ -315,8 +305,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Preveri odzive za avtentikacijo\" doesn't fully capture the meaning of \"Verify Auth Responses Sign\". 'Sign' refers to a digital signature, which is missing in the translation. 'Avtentikacijo' is a valid translation for authentication, but lacks the explicit meaning of signature verification.",
-          "suggestion": "Preveri podpisane odzive za avtentikacijo"
+          "description": "The translation \"Preveri odzive za avtentikacijo\" doesn't fully capture the meaning of \"Verify Auth Responses Sign.\"  The phrase \"Sign\" is omitted. \"Auth Responses\" implies a signed response which is important information. \"Odzive za avtentikacijo\" can be interpreted as responses *related to* authentication, not necessarily *authentication responses themselves*.  It's also a bit verbose.",
+          "suggestion": "Consider a more precise translation like \"Preveri podpisane avtentikacijske odgovore\" or \"Preveri podpis avtentikacijskega odgovora\". A shorter and perhaps better alternative would be \"Preveri avtentikacijske odgovore\" if the signing aspect is implicitly understood by the context."
         }
       ],
       "approved_at": null
@@ -327,8 +317,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Verify Auth Responses Sign\" is ambiguous. It's unclear if 'Sign' is modifying 'Responses' or referring to a signature. A more accurate translation would reflect this nuance. 'Verify Auth Responses Sign' likely means 'Verify the signatures on the authentication responses'.",
-          "suggestion": "Провери потписе на аутентификационим одговорима"
+          "description": "The English phrase 'Verify Auth Responses Sign' is ambiguous and likely refers to verifying the signature of authentication responses. The Serbian translation 'Провери потпис аутентификационих одговора' is a reasonable direct translation but could be improved for clarity and flow in a technical context. A more accurate and natural translation might be 'Верификуј потпис аутентификационих одговора' or 'Проверите потпис аутентификационих одговора'.",
+          "suggestion": "Верификуј потпис аутентификационих одговора"
         }
       ],
       "approved_at": null
@@ -339,13 +329,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Proveri potpis autentifikacionih odgovora\" is a literal translation but doesn't fully capture the nuance of \"Verify Auth Responses Sign.\"  'Sign' in this context refers to a digital signature. A more accurate translation would convey that.",
-          "suggestion": "Proveri digitalni potpis autentifikacionih odgovora"
+          "description": "The translation 'Proveri potpis autentifikacionih odgovora' is not a direct or optimal translation of 'Verify Auth Responses Sign'. 'Sign' implies a signature, and 'potpis' specifically means signature. While technically correct, it lacks nuance. A more natural translation would better convey the intended meaning, which is likely to verify the authentication response.",
+          "suggestion": "Proveri autentifikacioni odgovori - overite potpis"
         },
         {
-          "type": "spelling",
-          "description": "While technically correct, 'autentifikacionih' is a less common and slightly awkward phrasing. A more natural alternative exists.",
-          "suggestion": "Proveri digitalni potpis autentifikacionih odgovora"
+          "type": "formatting",
+          "description": "The translation could benefit from improved readability. Separating 'Verify' and 'Signature' improves clarity.",
+          "suggestion": "Proveri autentifikacioni odgovori, overite potpis"
         }
       ],
       "approved_at": null
@@ -362,13 +352,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Перевіряти підпис відповідей автентифікації' is too literal and could be improved for clarity and naturalness in Ukrainian. While technically correct, it sounds clunky. 'Auth' is translated as 'автентифікації', which is correct but contributes to the formal tone.",
-          "suggestion": "Consider a more natural phrasing like 'Перевіряти цифрові підписи відповідей автентифікації' or 'Перевірка цифрових підписів відповідей автентифікації' depending on the specific context and intended level of formality."
+          "description": "The translation 'Перевіряти підпис відповідей автентифікації' is a literal translation and doesn't convey the intended meaning of 'Verify Auth Responses Sign' naturally in Ukrainian. 'Sign' refers to a digital signature. A more natural translation would focus on verifying the digital signature of the authentication response.",
+          "suggestion": "Перевіряти цифровий підпис відповідей автентифікації"
         },
         {
-          "type": "formatting",
-          "description": "The phrase 'Перевіряти підпис відповідей автентифікації' is a continuous verb phrase.  It might be better to split it into two clauses or use a different construction for better readability, especially if it's a UI label.",
-          "suggestion": "Consider 'Перевірка цифрового підпису відповідей автентифікації' or 'Підпис відповідей автентифікації перевіряється'."
+          "type": "incorrect_translation",
+          "description": "The word 'автентифікації' is grammatically correct, but a more concise and common phrase could be used.",
+          "suggestion": "Перевіряти цифровий підпис відповідей авторизації"
         }
       ],
       "approved_at": null
@@ -379,13 +369,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Xác minh dấu hiệu phản hồi xác thực' doesn't accurately convey the meaning of 'Verify Auth Responses Sign'. 'Dấu hiệu' (sign) is not the correct term in this context. It seems to be implying a signature, but 'sign' in this context refers to the response itself. The correct translation should focus on verifying the authenticity of the authentication response.",
-          "suggestion": "Xác minh tính xác thực của phản hồi xác thực"
+          "description": "The translation 'Xác minh dấu hiệu phản hồi xác thực' is not an accurate representation of 'Verify Auth Responses Sign'. 'Dấu hiệu' (sign/mark) doesn't quite capture the meaning of 'Sign' in the context of digital signatures or authentication.",
+          "suggestion": "Xác minh chữ ký phản hồi xác thực"
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'xác thực' is repeated. While not grammatically incorrect, it sounds redundant in Vietnamese. A more elegant solution would avoid this repetition.",
-          "suggestion": "Xác minh phản hồi ủy quyền"
+          "description": "While 'chữ ký' (signature) is better than 'dấu hiệu', the phrasing 'phản hồi xác thực' (authentication response) can be slightly improved for clarity.",
+          "suggestion": "Xác minh chữ ký của phản hồi xác thực"
         }
       ],
       "approved_at": null
@@ -396,8 +386,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '校验认证响应签名' while technically correct, doesn't fully capture the nuance of 'Verify Auth Responses Sign'. 'Verify' implies a checking or validation process. '校验' is a good start, but a more complete translation might consider adding language to reflect the verification aspect.",
-          "suggestion": "验证认证响应签名 (Yànzhèng rènzhèng xiǎngyìng qiānmù)"
+          "description": "The translation '校验认证响应签名' while technically correct, isn't the most natural or common way to express 'Verify Auth Responses Sign' in Chinese. It's a bit formal and literal. A more conversational and easily understood translation would be better.",
+          "suggestion": "验证认证响应签名 (Yanzheng renzheng xiangying qianming)"
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "Synchronization will allow to upload all the data from the portal and update the new data after changing the settings. Sync every time you have new data on users in the portal.",
   "content_en_sha1_hash": "57a5ecb9065bfe2e09c3eb6293967e5a6539d7ac",
   "created_at": "2025-05-19T21:30:54.176Z",
-  "updated_at": "2025-05-21T08:27:55.845Z",
+  "updated_at": "2025-08-12T19:46:26.193Z",
   "comment": {
     "text": "This translation key is used to describe the functionality of the \"Synchronize\" toggle button on Portal Settings pages, indicating that it enables syncing portal data with LDAP settings. The text appears in an unavailable state (indicated by a specific class name) and is translated as part of the LdapAutoSyncToggleDescription key.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/ToggleAutoSync.js",
       "line_number": 139,
-      "context": "fontWeight={400}\n lineHeight=\"16px\"\n className=\"settings_unavailable\"\n noSelect\n >\n {t(\"LdapAutoSyncToggleDescription\")}\n </Text>\n </div>\n </StyledWrapper>\n );\n };",
+      "context": "fontSize=\"12px\"\n fontWeight={400}\n lineHeight=\"16px\"\n className=\"settings_unavailable\"\n >\n {t(\"LdapAutoSyncToggleDescription\")}\n </Text>\n </div>\n </StyledWrapper>\n );\n };",
       "module": "/packages/client"
     }
   ],
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Sync every time you have new data on users in the portal\" is a bit awkward and could be improved. The Arabic translation, while technically correct, maintains this awkwardness. A more natural Arabic phrasing would be better.",
+          "suggestion": "ستقم بالمزامنة في كل مرة تكون لديك بيانات جديدة للمستخدمين في البوابة."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -36,23 +42,18 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The sentence 'Sinxronizasiya bütün məlumatların portaldan yüklənməsinə və parametrlər dəyişdirildikdən sonra yeni məlumatların yenilənməsinə imkan verəcək' is grammatically awkward. The use of the dative case and the phrasing is not the most natural way to express this in Azerbaijani.",
-          "suggestion": "Sinxronizasiya, portaldakı bütün məlumatları yükləyəcək və parametrlər dəyişdirildikdən sonra yeni məlumatları yeniləyəcək."
+          "description": "The phrase 'Sinxronizasiya bütün məlumatların portaldan yüklənməsinə...' is slightly awkward. It would be better to rephrase to improve flow.",
+          "suggestion": "Sinxronizasiya portaldan bütün məlumatları yükləməyə və parametrlər dəyişdikdən sonra yeni məlumatları yeniləyəcək."
+        },
+        {
+          "type": "grammar",
+          "description": "The use of 'sınxronizasiya edin' at the end feels like a command. A more natural phrasing would be advisory.",
+          "suggestion": "Portalda istifadəçilər üçün yeni məlumatınız varsa sinxronizasiya etməyi unutmayın."
         },
         {
           "type": "incorrect_translation",
-          "description": "While 'parametrler' translates to 'parameters,' the usage feels slightly formal for this context. A simpler word might be more appropriate.",
-          "suggestion": "Consider using 'tənzimləmələr' instead of 'parametrler'."
-        },
-        {
-          "type": "formatting",
-          "description": "The sentence structure feels long and complex, making it less readable. Breaking it into shorter sentences would improve clarity.",
-          "suggestion": "Split the first sentence into two: 'Sinxronizasiya bütün məlumatların portaldan yüklənməsinə imkan verir. Parametrler dəyişdirildikdən sonra yeni məlumatların yenilənməsinə də imkan verir.'"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Sinxronizasiya edin' at the end feels overly directive and unnatural. It's more common to offer a suggestion rather than give a direct command.",
-          "suggestion": "Replace 'Sinxronizasiya edin' with 'Sinxronizasiya etməyi unutmayın' (Don't forget to synchronize) or 'Portalda istifadəçilər üçün yeni məlumatınız hər dəfə olduqda sinxronizasiya etməyi tövsiyə edirik' (We recommend synchronizing whenever you have new user data in the portal)."
+          "description": "While 'yüklənməsinə' is technically correct, a more natural word choice for 'upload' in this context might be 'daşırmaya'.",
+          "suggestion": "Sinxronizasiya portaldan bütün məlumatları daşırmaya və parametrlər dəyişdikdən sonra yeni məlumatları yeniləyəcək."
         }
       ],
       "approved_at": null
@@ -69,13 +70,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Sync every time you have new data on users in the portal\" is translated as \"Synchronizace probíhá pokaždé, když se na portálu objeví nová data o uživatelích.\" While understandable, it's less direct and slightly awkward in Czech. A more natural phrasing would emphasize the action of initiating the sync.",
-          "suggestion": "Synchronizujte pokaždé, když se na portálu objeví nová data o uživatelích."
+          "description": "The English phrase 'Sync every time you have new data on users in the portal' is not fully captured in the Czech translation. The Czech translation implies synchronization happens whenever *any* new data about users appears, whereas the English suggests it's intended to be initiated by the user when *they* have new data.",
+          "suggestion": "Synchronizujte, když máte na portálu nová data o uživatelích."
         },
         {
           "type": "formatting",
-          "description": "The Czech translation uses a passive voice (\"Synchronizace probíhá...\") which isn't consistent with the English active voice (\"Synchronization will allow...\").",
-          "suggestion": "Consider rephrasing to use an active voice for greater consistency, although the passive isn't incorrect."
+          "description": "The Czech translation lacks consistent capitalization. 'Synchronizace' should be capitalized at the beginning of the sentence.",
+          "suggestion": "Synchronizace umožní nahrát všechna data z portálu a po změně nastavení aktualizovat nová data. Synchronizace probíhá pokaždé, když se na portálu objeví nová data o uživatelích."
         }
       ],
       "approved_at": null
@@ -86,13 +87,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Sync every time you have new data on users in the portal' is translated too literally. It's awkward in German. A more natural phrasing would convey the meaning of regular synchronization.",
-          "suggestion": "Die Synchronisierung sollte jedes Mal durchgeführt werden, wenn sich Benutzerdaten im Portal ändern."
+          "description": "The phrase 'Sync every time you have new data on users in the portal' is not accurately reflected in the German translation. The German phrasing is a bit clunky and doesn't flow as naturally. A more accurate and natural translation would convey the idea of synchronizing whenever new user data exists.",
+          "suggestion": "Die Synchronisierung sollte jedes Mal durchgeführt werden, wenn neue Benutzerdaten im Portal vorhanden sind."
         },
         {
           "type": "formatting",
-          "description": "The sentence 'Synchronisieren Sie jedes Mal, wenn Sie neue Daten über Benutzer im Portal haben' is a command, but the preceding sentence is declarative. This creates an inconsistency in tone.",
-          "suggestion": "Ändern Sie den Satz 'Synchronisieren Sie jedes Mal, wenn Sie neue Daten über Benutzer im Portal haben' in einen deklarativen Satz, um die Konsistenz zu gewährleisten. Zum Beispiel: 'Führen Sie die Synchronisierung immer dann durch, wenn sich Benutzerdaten im Portal ändern.'"
+          "description": "The German translation uses 'Synchronisieren Sie' (formal 'you'). Consider using the informal 'Synchronisiere' for better user engagement, depending on the portal's tone.",
+          "suggestion": "Die Synchronisierung sollte jedes Mal durchgeführt werden, wenn neue Benutzerdaten im Portal vorhanden sind. Synchronisiere jedes Mal, wenn..."
         }
       ],
       "approved_at": null
@@ -103,8 +104,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation uses a slightly informal tone with the phrase 'Κάντε συγχρονισμό'. A more formal phrasing would be more appropriate for technical documentation.",
-          "suggestion": "Εκτελέστε συγχρονισμό (Execute synchronization) or Συγχρονίστε (Synchronize)"
+          "description": "The translation uses a slightly informal tone with 'Κάντε συγχρονισμό'. A more formal and professional tone would be better suited for a settings description.",
+          "suggestion": "Αναβαθμίστε τον συγχρονισμό κάθε φορά που έχετε νέα δεδομένα για τους χρήστες στην πύλη."
         }
       ],
       "approved_at": null
@@ -118,13 +119,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The phrase 'Synkronoi aina, kun sinulla on portaalissa uutta tietoa käyttäjistä' feels slightly abrupt. It might be more natural to soften the tone.",
-          "suggestion": "Synkronoi aina kun sinulla on uutta tietoa käyttäjistä portaalissa."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -133,13 +128,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Sync every time you have new data on users in the portal' is translated as 'Synchronisez chaque fois que vous avez de nouvelles données sur les utilisateurs dans l’espace.' While understandable, 'espace' (space) isn't the best fit for 'portal'. A more accurate translation would be 'portail' or a more descriptive term like 'plateforme'.",
-          "suggestion": "Synchronisez chaque fois que vous avez de nouvelles données sur les utilisateurs dans le portail."
+          "description": "The English phrase \"Sync every time you have new data on users in the portal\" is not accurately reflected in the French translation. \"L’espace\" is a generic term and doesn't convey the specific meaning of \"portal.\" The overall phrasing is also a bit awkward.",
+          "suggestion": "La synchronisation permet de télécharger toutes les données du portail et de mettre à jour les nouvelles données après avoir modifié les paramètres. Synchronisez chaque fois que vous avez de nouvelles données concernant les utilisateurs sur le portail."
         },
         {
           "type": "formatting",
-          "description": "The French translation, while grammatically correct, could benefit from a slight adjustment to flow more naturally. The repetition of 'données' feels a little clunky.",
-          "suggestion": "La synchronisation permet de télécharger toutes les données du portail et de mettre à jour les informations après avoir modifié les paramètres. Synchronisez chaque fois que vous avez de nouvelles données sur les utilisateurs dans le portail."
+          "description": "The French translation uses 'L’espace' instead of the more formal 'portail', which could create a disconnect with the rest of the interface.  Consistency is important.",
+          "suggestion": "Ensure consistent terminology across the entire application. Replacing 'L’espace' with 'portail' is recommended for maintaining consistency."
         }
       ],
       "approved_at": null
@@ -149,9 +144,19 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "spelling",
+          "description": "The word \"Սինխրոնիզացիա\" is repeated multiple times. While technically correct, it might be stylistically improved. Consider using variations or pronouns.",
+          "suggestion": "Consider alternatives like \"Սինխրոնացման գործընթացը\" or using pronouns to avoid repetition."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase \"Սինխրոնիզացրեք ամեն անգամ, երբ պորտալում օգտատերերի մասին նոր տվյալներ ունեք:\" feels slightly abrupt and could be rephrased for better flow. The imperative \"Սինխրոնիզացրեք\" is strong.",
+          "suggestion": "Consider a softer phrasing like \"Հետևողականորեն սինխրոնացրեք, երբ պորտալում օգտատերերի մասին նոր տվյալներ ունեք:\" (Consistently sync when you have new user data in the portal)."
+        },
+        {
           "type": "formatting",
-          "description": "The translation uses 'Սինխրոնիզացրեք' which is an imperative form. While not incorrect, it could be slightly softened to a more descriptive tone to match the original English. Consider a more informative phrasing.",
-          "suggestion": "Consider using a phrasing like 'Միշտ համապարակեք, երբ պորտալում օգտատերերի մասին նոր տվյալներ ունեք' (Always synchronize when you have new data about users in the portal)"
+          "description": "Consistency in terminology. Using 'պորտալում' twice feels slightly clunky. ",
+          "suggestion": "Consider replacing the second instance with a pronoun or a simplified phrase (e.g., 'ներսում')."
         }
       ],
       "approved_at": null
@@ -159,7 +164,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Sync every time you have new data on users in the portal' is a bit awkward. A more natural Italian translation might be 'Sincronizza ogni volta che hai nuovi dati relativi agli utenti nel portale' or 'Sincronizza ogni volta che ci sono nuovi dati relativi agli utenti nel portale.' The current translation literally translates 'on users' which doesn't quite convey the intended meaning.",
+          "suggestion": "Sincronizza ogni volta che hai nuovi dati relativi agli utenti nel portale."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -168,13 +179,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Sync every time you have new data on users in the portal\" is not accurately reflected in the Japanese translation. The Japanese reads more like \"Synchronize every time new user data exists in the portal,\" which is slightly different in nuance.  A better translation would focus on the *action* of syncing when new data is present.",
-          "suggestion": "同期により、ポータルからすべてのデータをアップロードし、設定変更後に新しいデータを更新することができます。ポータルのユーザーデータに変更があるたびに同期してください。"
+          "description": "The phrase \"Sync every time you have new data on users in the portal\" is not accurately translated. The Japanese translation implies syncing 'every time' which might be too frequent and confusing for users. A more nuanced translation is needed to convey the intention of syncing when updates occur, not necessarily every time a user is modified.",
+          "suggestion": "同期は、ポータルに新しいユーザーデータがある場合、またはユーザー情報に変更があった場合に実行してください。"
         },
         {
           "type": "formatting",
-          "description": "The repetition of \"ポータル (portal)\" can be improved for readability.  While not strictly incorrect, it can be slightly clunky in Japanese.",
-          "suggestion": "同期により、ポータルからすべてのデータをアップロードし、設定変更後に新しいデータを更新することができます。ポータル側のユーザーデータに変更があるたびに同期してください。"
+          "description": "The sentence structure is slightly awkward. While grammatically correct, it could be improved for better flow.",
+          "suggestion": "同期により、ポータルからすべてのデータをアップロードし、設定変更後、ポータルのユーザー情報に新しいデータがあれば更新できます。ユーザー情報に変更があるたびに同期してください。"
         }
       ],
       "approved_at": null
@@ -184,14 +195,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The sentence \"동기화를 통해 포털에서 모든 데이터를 업로드하고 설정을 변경한 후 새 데이터를 업데이트할 수 있습니다.\" is a bit long and complex for Korean. It could be broken down for better readability.",
-          "suggestion": "동기화를 통해 포털의 모든 데이터를 업로드하고, 설정을 변경한 후에는 새로운 데이터를 업데이트할 수 있습니다."
+          "type": "incorrect_translation",
+          "description": "The phrase \"Sync every time you have new data on users in the portal\" is overly literal and not natural in Korean. A more natural phrasing would convey the same meaning.",
+          "suggestion": "포털에 사용자 정보가 변경될 때마다 동기화하세요."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Sync every time you have new data on users in the portal' is translated literally but loses some nuance. It doesn't clearly convey the intention of regular syncing.",
-          "suggestion": "포털 사용자 데이터가 변경될 때마다 동기화하세요."
+          "type": "formatting",
+          "description": "The sentence structure could be improved for better flow in Korean. The current translation feels a bit clunky.",
+          "suggestion": "포털의 데이터를 동기화하면, 설정을 변경한 후 새 데이터를 업데이트할 수 있습니다. 포털에 사용자 정보가 변경될 때마다 동기화하세요."
         }
       ],
       "approved_at": null
@@ -202,13 +213,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Sync every time you have new data on users in the portal\" is too literal and reads awkwardly in Lao. The meaning of synchronization is not fully conveyed.",
-          "suggestion": "ການເຊື່ອມໂອ້ານຈະຊ່ວຍໃຫ້ສາມາດອັບໂຫຼດຂໍ້ມູນທັງໝົດຈາກເວັບໄຊ້ ແລະປັບປ່ຽນຂໍ້ມູນໃໝ່ຫຼັງຈາກປ່ຽນການຕັ້ງຄ່າໄດ້ ຄວນເຊື່ອມໂອ້ານເປັນໄລຍະເພື່ອໃຫ້ຂໍ້ມູນຖືກຕ້ອງຕາມເວລາ."
-        },
-        {
-          "type": "formatting",
-          "description": "The use of \"ຕະຫຼອດເວລາ\" (always) is too strong. It implies constant synchronization, which might not be the intention. It could be misinterpreted as needing to sync every second.",
-          "suggestion": "Remove \"ຕະຫຼອດເວລາ\" and replace with a more appropriate phrase indicating periodic synchronization."
+          "description": "The phrase \"Sync every time you have new data on users in the portal\" is translated as \"ຈົ່ງເຊື່ອມໂອ້ານໃນເວລາທີ່ມີຂໍ້ມູນໃໝ່ກ່ຽວກັບຜູ້ໃຊ້ຢູ່ໃນເວັບໄຊ້ຕະຫຼອດເວລາ\".  While technically correct, it's overly literal and sounds unnatural in Lao.  'ຕະຫຼອດເວລາ' (always) is too strong and might imply constant syncing is required, which isn't the intended meaning.",
+          "suggestion": "Consider a more nuanced phrasing such as 'ເມື່ອມີຂໍ້ມູນຜູ້ໃຊ້ໃໝ່ຢູ່ໃນເວັບໄຊ້' (When there is new user data on the website) or 'ເວລາທີ່ມີຂໍ້ມູນຜູ້ໃຊ້ໃໝ່' (When there is new user information)."
         }
       ],
       "approved_at": null
@@ -219,8 +225,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The sentence \"Sinhronizējiet katru reizi, kad portālā ir jauni dati par lietotājiem\" feels slightly abrupt. While grammatically correct, it lacks the flow of the English 'Sync every time...'.",
-          "suggestion": "Sinhronizējiet katru reizi, kad portālā parādās jauni dati par lietotājiem."
+          "description": "Repetitive use of 'Sinhronizējiet' (Synchronize). The text ends with a command that is already explained in the preceding sentence.",
+          "suggestion": "Sinhronizējiet reizi, kad portālā ir jauninājumi par lietotājiem."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Sync every time you have new data...' is somewhat awkward and direct in the translation. A more natural flow would be to imply the action rather than explicitly stating it.",
+          "suggestion": "Sinhronizējiet, kad portālā ir jauni dati par lietotājiem."
         }
       ],
       "approved_at": null
@@ -230,14 +241,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Sync every time you have new data on users in the portal' is awkwardly translated. 'on users in the portal' is unclear. It should be more specific about the data being synchronized.",
-          "suggestion": "Synchroniseer telkens wanneer u nieuwe gebruikersgegevens in het portaal heeft."
+          "type": "grammar",
+          "description": "The sentence \"Synchroniseer elke keer als u nieuwe gegevens over gebruikers in de portaal hebt\" is grammatically awkward. The use of 'in de portaal' is incorrect.  It should be 'in het portaal'.",
+          "suggestion": "Synchroniseer elke keer als u nieuwe gegevens over gebruikers in het portaal hebt."
         },
         {
-          "type": "formatting",
-          "description": "The word 'portaal' appears twice. While not technically incorrect, it could be smoother to rephrase to avoid repetition.",
-          "suggestion": "Synchroniseer telkens wanneer u nieuwe gebruikersgegevens in het portaal of in de database heeft."
+          "type": "incorrect_translation",
+          "description": "The translation of 'Sync' as 'Synchroniseer' is technically correct, but in this context, a more conversational and less formal translation might be preferred, especially given the original English is relatively informal.  'Synchroniseren' would be a more common choice.",
+          "suggestion": "Synchroniseren maakt het mogelijk om alle gegevens van het portaal te uploaden en de nieuwe gegevens bij te werken na het wijzigen van de instellingen. Synchroniseer elke keer als u nieuwe gegevens over gebruikers in het portaal hebt."
         }
       ],
       "approved_at": null
@@ -248,13 +259,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrase 'nowych danych po zmianie ustawień' is grammatically awkward. It implies updating *new* data after changing settings, which isn't the intended meaning. It should describe updating the portal data based on new settings.",
-          "suggestion": "Synchronizacja umożliwia przesyłanie wszystkich danych z portalu i aktualizację danych po zmianie ustawień."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'na temat użytkowników w portalu' is a literal translation of 'on users in the portal' and sounds unnatural in Polish. A more natural phrasing would be something along the lines of 'dotyczących użytkowników'.",
-          "suggestion": "Synchronizuj za każdym razem, gdy masz nowe dane dotyczące użytkowników w portalu."
+          "description": "The phrase \"na temat użytkowników w portalu\" sounds slightly awkward. It's technically correct, but less natural than alternatives.",
+          "suggestion": "na temat użytkowników na portalu"
         }
       ],
       "approved_at": null
@@ -265,8 +271,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Sync every time you have new data on users in the portal' is awkwardly translated. The English implies a regular synchronization when new user data is available. The Portuguese 'Sincronize sempre que tiver novos dados de usuários no portal' is a more literal translation, but loses some nuance.",
-          "suggestion": "A sincronização permitirá fazer upload de todos os dados do portal e atualizar os novos dados após alterar as configurações. Sincronize sempre que houver novos dados de usuários no portal."
+          "description": "The phrase 'Sync every time you have new data on users in the portal' is not accurately reflected in the Portuguese translation. The English implies a regular synchronization process, whereas the Portuguese just states 'Sincronize sempre que tiver novos dados de usuários no portal', which means 'Synchronize whenever you have new user data in the portal.' This lacks the nuance of a regular/automatic sync.",
+          "suggestion": "A sincronização permitirá fazer upload de todos os dados do portal e atualizar os novos dados após alterar as configurações. Sincronize regularmente sempre que houver novos dados de usuários no portal. / A sincronização permite carregar todos os dados do portal e atualizar as novidades após as alterações nas configurações. Sincronize sempre que houver novos dados de usuários no portal para manter os dados atualizados."
         }
       ],
       "approved_at": null
@@ -277,13 +283,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Sync every time you have new data on users in the portal' is not accurately reflected in the Portuguese translation.  'on users' doesn't directly translate and implies a location. A more accurate phrasing would focus on the data itself.",
-          "suggestion": "A sincronização permitirá fazer upload de todos os dados do portal e atualizar os novos dados após alterar as configurações. Sincronize sempre que houver novos dados de usuários no portal."
+          "description": "The phrase \"upload all the data\" is a bit awkward in Portuguese. While technically correct, a more natural phrasing would be preferred.",
+          "suggestion": "A sincronização permitirá baixar todos os dados do portal e atualizar os novos dados após alterar as configurações."
         },
         {
-          "type": "grammar",
-          "description": "The phrase 'Sincronize sempre que tiver novos dados de usuários no portal' uses the verb 'ter' (to have) when 'houver' (there being) would be more appropriate and grammatically correct in this context to indicate the existence of new user data.",
-          "suggestion": "Sincronize sempre que houver novos dados de usuários no portal."
+          "type": "incorrect_translation",
+          "description": "The phrase \"Sync every time you have new data on users in the portal\" is not as natural as it could be. 'On users' is not the right prepositional phrase.",
+          "suggestion": "Sincronize sempre que tiver novos dados de usuários no portal."
         }
       ],
       "approved_at": null
@@ -294,18 +300,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Realizarea sincronizării este necesară de fiecare dată\" is too formal and doesn't accurately convey the original meaning of \"Sync every time\". A more natural Romanian phrasing is needed.",
-          "suggestion": "Actualizați datele de fiecare dată când adăugați utilizatori noi în portal."
+          "description": "The phrase \"Realizarea sincronizării este necesară de fiecare dată\" is too formal and doesn't accurately convey the meaning of \"Sync every time\". It sounds like a requirement rather than a recommendation.",
+          "suggestion": "Sincronizarea trebuie făcută de fiecare dată când adăugați date noi despre utilizatori în portal."
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'încărcarea' (uploading) and 'actualizarea' (updating) are used sequentially, but the meaning is slightly awkward. The original English uses 'Synchronization' which implies both.",
-          "suggestion": "Sincronizarea permite actualizarea datelor de pe portalul și adăugarea datelor noi după modificarea setărilor."
+          "description": "The original English uses 'upload' and 'update'.  The Romanian uses 'încărcarea' (upload) and 'actualizarea' (update). While technically correct, 'încărcarea' implies a one-time action, while the English implies a repeated upload during synchronization. A stronger synonym for repeated data transfer would be beneficial.",
+          "suggestion": "Sincronizarea permite transferul tuturor datelor de pe portal și actualizarea datelor după modificarea setărilor."
         },
         {
           "type": "formatting",
-          "description": "The sentence structure is a little disjointed. Combining the first two sentences might improve flow.",
-          "suggestion": "Sincronizarea permite încărcarea și actualizarea datelor de pe portal, asigurându-vă că datele reflectă modificările de setări. Actualizați datele de fiecare dată când adăugați utilizatori noi în portal."
+          "description": "The sentence structure is a little clunky. Combining some phrases would improve readability.",
+          "suggestion": "Sincronizarea permite transferul tuturor datelor de pe portal și actualizarea acestora după modificarea setărilor. Efectuați sincronizarea de fiecare dată când adăugați date noi despre utilizatori în portal."
         }
       ],
       "approved_at": null
@@ -316,8 +322,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "Repetitive phrasing - the sentence 'Synchronization will allow to upload all the data from the portal and update the new data after changing the settings' is repeated in both English and Russian.",
-          "suggestion": "Consider rephrasing the Russian translation to avoid repetition. For example: 'Синхронизация позволит загрузить все данные с портала и обновить их после изменения настроек. Синхронизируйте каждый раз, когда у вас появляются новые данные о пользователях на портале.'"
+          "description": "Repetitive phrasing. The phrase 'Синхронизируйте каждый раз, когда у вас появляются новые данные о пользователях на портале' is a direct repetition of the English phrasing and sounds less natural in Russian. While technically correct, it's clunky.",
+          "suggestion": "Синхронизируйте при появлении новых данных о пользователях на портале."
         }
       ],
       "approved_at": null
@@ -328,13 +334,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Sync every time you have new data on users in the portal\" is translated as \"ද්වාරයෙහි පරිශීලකයින් පිළිබඳ නව දත්ත ඇති සෑම අවස්ථාවකම සමමුහුර්ත කරන්න\". A more accurate translation would convey the sense of synchronization occurring periodically or when necessary, rather than literally 'every time'. The current translation is overly literal and might imply unnecessary frequent synchronizations.",
-          "suggestion": "සමමුහුර්තකරණය අවශ්‍ය සෑම අවස්ථාවකම කරන්න. (Samamuhurthakaranya avashya samaya avashya karma.) - Synchronize whenever necessary."
+          "description": "The phrase \"Sync every time you have new data on users in the portal\" is awkwardly translated.  'On users in the portal' doesn't flow naturally in Sinhala. A more accurate and natural phrasing is needed.",
+          "suggestion": "සමමුහුර්තකරණය පරිශීලකයින් පිළිබඳ නව දත්ත ඇති සෑම අවස්ථාවකම කරන්න."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'upload' (උඩුගත කිරීමට) might be better translated as 'transfer' or 'synchronize' depending on the precise meaning intended. While 'upload' is understandable, it isn't the most precise or natural choice in this context.",
+          "suggestion": " Replace 'උඩුගත කිරීමට' with 'transfer' or 'synchronize' (depending on intended meaning).  For example:  'transfer' would be 'රවර්ණය කිරීමට'."
         },
         {
           "type": "formatting",
-          "description": "The translation uses Sinhalese script, which is correct. However, ensuring consistent script usage and proper punctuation within the larger application interface is crucial.  This is beyond the scope of this verification, but a consideration for overall UI/UX.",
-          "suggestion": "N/A - Recommend broader UI/UX review"
+          "description": "The sentence structure feels slightly disjointed. While understandable, it could be smoother.",
+          "suggestion": "Consider restructuring the second sentence for better flow. For example, combining parts of the two sentences to improve readability."
         }
       ],
       "approved_at": null
@@ -345,13 +356,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Sync every time you have new data on users in the portal\" is translated literally as \"Synchronizujte vždy, keď máte na portáli nové údaje o používateľoch.\" While technically correct, it's somewhat clunky in Slovak. A more natural phrasing would emphasize the recurring nature of the synchronization.",
-          "suggestion": "Synchronizujte vždy, keď sú na portáli nové údaje o používateľoch, alebo po zmene nastavení."
+          "description": "The phrase 'upload all the data' is awkwardly translated as 'nahrať všetky údaje'. While technically correct, 'importovať všetky údaje' or 'preložiť všetky údaje' would be more natural in this context.",
+          "suggestion": "Synchronizácia umožní importovať všetky údaje z portálu a aktualizovať nové údaje po zmene nastavení. Synchronizujte vždy, keď máte na portáli nové údaje o používateľoch."
         },
         {
           "type": "formatting",
-          "description": "The English content uses sentence fragments. The Slovak translation follows the same structure. This may be less formal than preferred.",
-          "suggestion": "Consider restructuring for a smoother flow in Slovak. E.g., 'Synchronizácia umožní nahrať všetky údaje z portálu a aktualizovať nové údaje po zmene nastavení. Pravidelne synchronizujte, keď máte nové údaje o používateľoch na portáli.'"
+          "description": "The repeated use of 'Synchronizujte' (imperative form) feels a bit abrupt. It could be softened for better flow.",
+          "suggestion": "Synchronizácia umožní importovať všetky údaje z portálu a aktualizovať nové údaje po zmene nastavení. Uistite sa, že synchronizujete vždy, keď máte na portáli nové údaje o používateľoch."
         }
       ],
       "approved_at": null
@@ -361,9 +372,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The sentence 'Sinhroniziraj vsakič, ko so na voljo novi podatki o uporabnikih na portalu' could be improved for flow. 'So na voljo' is grammatically correct but sounds slightly awkward.",
-          "suggestion": "Sinhroniziraj vsakič, ko so na voljo novi uporabniški podatki na portalu."
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Sync every time you have new data on users in the portal' is a bit awkward and could be improved. The Slovenian translation 'Sinhroniziraj vsakič, ko so na voljo novi podatki o uporabnikih na portalu' is a literal translation but slightly clunky. A more natural flow might be achieved.",
+          "suggestion": "Sinhronizirajte kadar koli imate nove podatke o uporabnikih na portalu."
+        },
+        {
+          "type": "formatting",
+          "description": "The imperative 'Sinhroniziraj' (Sync) should probably be 'Sinhronizirajte' to match the formal tone and reflect the plural subject implied by 'data'.",
+          "suggestion": "Sinhronizirajte"
         }
       ],
       "approved_at": null
@@ -373,14 +389,19 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The sentence 'Синхронизујте сваки пут када имате нове податке о корисницима на порталу.' could be improved for flow. It's a bit abrupt.",
-          "suggestion": "Синхронизујте сваки пут када имате нове информације о корисницима на порталу."
+          "type": "incorrect_translation",
+          "description": "The phrase 'upload all the data' is not accurately translated. 'Отпремање' implies uploading, but the original intent seems to be a two-way synchronization, not just an upload.",
+          "suggestion": "Синхронизација ће омогућити слање и примање података са портала..."
         },
         {
           "type": "incorrect_translation",
-          "description": "The English content uses 'data'. While 'податке' (podatke) is a valid translation, 'информације' (informacije) might be more natural and accessible in this context, especially for a less technical audience.",
-          "suggestion": "Replace 'податке' with 'информације' throughout the translation."
+          "description": "The term 'Sync every time you have new data' could be more natural in Serbian. 'Синхронизујте сваки пут када имате нове податке' is technically correct but sounds a bit clunky.",
+          "suggestion": "Синхронизујте када год имате нове информације о корисницима на порталу."
+        },
+        {
+          "type": "spelling",
+          "description": "While 'податке' is technically correct, 'информације' might be more appropriate for describing user data in this context.",
+          "suggestion": "Синхронизујте када год имате нове информације о корисницима на порталу."
         }
       ],
       "approved_at": null
@@ -388,7 +409,18 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Sinhronizujte' is a verb in the imperative mood. While grammatically correct, it might sound overly directive. A more polite or explanatory phrasing might be better suited depending on the overall tone of the application.",
+          "suggestion": "Consider phrasing it as 'Obavezno sinhronizujte' (Mandatory sync) or 'Preporučuje se sinhronizacija' (Synchronization is recommended)."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Obavezno sinhronizujte' might be accurate in conveying urgency, the original English suggests a more frequent, but not necessarily mandatory, action. The current translation implies a strict requirement.",
+          "suggestion": "Consider 'Sinhronizujte kada imate nove podatke o korisnicima na portalu' to align more closely with the English original."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -397,18 +429,13 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrase 'ayarlar değiştirildikten sonra' is slightly awkward. It could be more naturally phrased.",
-          "suggestion": "ayarlar değiştirildikten sonra yeni verilerin güncellenmesini sağlar."
+          "description": "The sentence \"Senkronizasyon, portaldan tüm verilerin yüklenmesine ve ayarlar değiştirildikten sonra yeni verilerin güncellenmesine olanak sağlayacaktır.\" is a bit verbose and could be improved for flow.  'Olanak sağlayacaktır' is formal and can be simplified.",
+          "suggestion": "Senkronizasyon, portaldaki tüm verilerin yüklenmesini ve ayarlar değiştirildikten sonra yeni verilerin güncellenmesini sağlar."
         },
         {
           "type": "grammar",
-          "description": "The sentence 'Portaldaki kullanıcılara ilişkin her yeni veriye sahip olduğunuzda senkronizasyon yapın.' is a bit formal and could be simplified for better readability.",
-          "suggestion": "Portaldaki kullanıcılarınızda yeni veriler olduğunda senkronizasyon yapın."
-        },
-        {
-          "type": "formatting",
-          "description": "The entire translation is a single long sentence. Splitting it into shorter sentences would improve readability.",
-          "suggestion": "Senkronizasyon, portaldan tüm verilerin yüklenmesine ve ayarlar değiştirildikten sonra yeni verilerin güncellenmesini sağlar. Portaldaki kullanıcılarınızda yeni veriler olduğunda senkronizasyon yapın."
+          "description": "The phrase 'Portaldaki kullanıcılara ilişkin her yeni veriye sahip olduğunuzda senkronizasyon yapın' is a bit clunky. 'İlişkin' is unnecessary and makes the sentence less direct.",
+          "suggestion": "Portaldaki kullanıcılar için her yeni veriniz olduğunda senkronizasyon yapın."
         }
       ],
       "approved_at": null
@@ -419,13 +446,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Sync every time you have new data on users in the portal\" is not fully captured by \"Синхронізація відбувається кожен раз, коли є нові дані щодо користувачів на порталі.\". It implies an automatic process and a suggestion for the user to manually trigger it.",
-          "suggestion": "Синхронізація відбувається автоматично щоразу, коли з'являються нові дані щодо користувачів на порталі."
+          "description": "The English phrase \"Sync every time you have new data on users in the portal\" is not accurately reflected in the Ukrainian translation. The Ukrainian translation implies that the synchronization *happens* every time, rather than the user initiating it.",
+          "suggestion": "Синхронізацію слід виконувати щоразу, коли з'являються нові дані про користувачів у порталі."
         },
         {
           "type": "formatting",
-          "description": "Repetition of 'Synchronization' makes the translation sound less natural. While technically correct, it's repetitive.",
-          "suggestion": "Синхронізація дозволить передати всі дані з порталу та оновити нові дані після зміни параметрів. Автоматична синхронізація відбувається щоразу, коли з'являються нові дані щодо користувачів на порталі."
+          "description": "The repeated use of \"Синхронізація\" in close proximity feels somewhat repetitive and unnatural in Ukrainian. While not incorrect, it could be improved for flow.",
+          "suggestion": "Синхронізація дозволить передати всі дані з порталу та оновити нові дані після зміни параметрів. Виконуйте синхронізацію щоразу, коли з'являються нові дані про користувачів у порталі."
         }
       ],
       "approved_at": null
@@ -436,13 +463,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Sync every time you have new data on users in the portal' is not accurately translated. 'On users' is awkward in Vietnamese and 'in the portal' is redundant.",
+          "description": "The phrase \"Sync every time you have new data on users in the portal\" is not accurately translated. While the general meaning is conveyed, a more natural Vietnamese phrasing would improve clarity and flow. The word order and phrasing are a bit awkward.",
           "suggestion": "Đồng bộ hóa mỗi khi bạn có dữ liệu người dùng mới trong cổng thông tin."
         },
         {
           "type": "formatting",
-          "description": "Repetitive use of 'Đồng bộ hóa' can be improved for better readability.  While technically correct, it reads slightly clunky.",
-          "suggestion": "Đồng bộ sẽ cho phép tải lên tất cả dữ liệu từ cổng thông tin và cập nhật dữ liệu mới sau khi thay đổi cài đặt. Hãy đồng bộ khi có dữ liệu người dùng mới."
+          "description": "Repetitive use of 'Đồng bộ hóa' makes the sentence a bit clunky. Consider rephrasing to avoid the repetition.",
+          "suggestion": "Việc đồng bộ hóa sẽ cho phép tải lên tất cả dữ liệu từ cổng thông tin và cập nhật dữ liệu mới sau khi thay đổi cài đặt. Thực hiện đồng bộ hóa mỗi khi bạn có dữ liệu người dùng mới trong cổng thông tin."
         }
       ],
       "approved_at": null
@@ -453,13 +480,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Sync every time you have new data on users in the portal' is not accurately conveyed by '每次门户中有新用户数据时都将进行同步'.  It's a bit clunky and doesn't capture the immediacy or necessity implied by the English.",
-          "suggestion": "同步每次在门户中有新的用户数据，或在您更改设置后。"
-        },
-        {
-          "type": "formatting",
-          "description": "The Chinese translation lacks a more natural flow and sentence structure. It's somewhat literal and doesn't read as smoothly as it could.",
-          "suggestion": "同步功能可以上传门户中的所有数据，并在更改设置后更新数据。 每次门户有新的用户数据时，建议同步。"
+          "description": "The English phrase \"Sync every time you have new data on users in the portal\" is not accurately reflected in the Chinese translation. The Chinese translation simply states \"每次门户中有新用户数据时都将进行同步\" which translates to 'Synchronization will be performed every time there is new user data in the portal.' It lacks the active instruction/suggestion of 'Sync every time...'.",
+          "suggestion": "同步将允许从门户上传所有数据并在更改设置后更新新数据。当门户有新用户数据时，请同步。"
         }
       ],
       "approved_at": null

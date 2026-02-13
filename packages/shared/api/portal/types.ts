@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,13 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { TError } from "../../utils/axiosClient";
-import { TariffState } from "../../enums";
+import type { TariffState, BackupStorageType, QuotaState } from "../../enums";
 
 export type TQuotas = {
   id: number;
   quantity: number;
   wallet?: boolean;
   dueDate?: string;
+  nextQuantity?: number;
+  state?: QuotaState;
 };
 
 export type TPortalTariff = {
@@ -61,6 +63,7 @@ export type TBasePaymentFeature = {
 
 export type TStringPaymentFeature = TBasePaymentFeature & {
   title: string;
+  value?: number;
 };
 
 export type TNumericPaymentFeature = TBasePaymentFeature & {
@@ -80,7 +83,7 @@ export type TPaymentQuota = {
   id: number;
   title: string;
   price: {
-    value: string;
+    value: number;
     currencySymbol?: string;
     isoCurrencySymbol?: string;
   };
@@ -98,6 +101,10 @@ export type TPaymentQuota = {
   };
   tenantCustomQuota: {
     quota: number;
+    enableQuota: boolean;
+  };
+  aiAgentsQuota: {
+    defaultQuota: number;
     enableQuota: boolean;
   };
 };
@@ -139,10 +146,86 @@ export type TRestoreProgress = {
   error?: TError;
 };
 
+export type TBackupHistory = {
+  id: string;
+  fileName: string;
+  storageType: BackupStorageType;
+  createdOn: string;
+  expiresOn: string;
+};
+
+export type TBackupSchedule = {
+  backupsStored: number;
+  cronParams: {
+    day: number;
+    hour: number;
+    period: number;
+  };
+  dump: boolean;
+  lastBackupTime: string;
+  storageParams: {
+    folderId: string;
+    module?: string;
+    tenantId?: string;
+  };
+  storageType: BackupStorageType;
+};
+
+export type TStorageRegion = {
+  displayName: string;
+  originalSystemName: string;
+  partitionDnsSuffix: string;
+  partitionName: string;
+  systemName: string;
+};
+
+export type TBackupProgress = {
+  progress: number;
+  error?: TError;
+  warning?: string;
+  link?: string;
+  isCompleted: boolean;
+};
+
+export type TDocServerLicense = {
+  branding: boolean;
+  customization: boolean;
+  timeLimited: boolean;
+  end_date: string;
+  trial: boolean;
+  customer_id: string;
+  resource_key: string;
+  users_count: number;
+  users_expire: number;
+  connections: number;
+  docspace_dev: boolean;
+};
+
+export type TLicenseQuota = {
+  userQuota: Record<string, string>;
+  license: TDocServerLicense;
+  totalUsers: number;
+  portalUsers: number;
+  externalUsers: number;
+  licenseTypeByUsers: boolean;
+};
+
 export type TCustomerInfo = {
   paymentMethodStatus: number;
   email: string | null;
   portalId: string | null;
+  payer: {
+    avatar: string;
+    avatarMax: string;
+    avatarMedium: string;
+    avatarOriginal: string;
+    avatarSmall: string;
+    displayName: string;
+    hasAvatar: boolean;
+    id: string;
+    isAnonim: boolean;
+    profileUrl: string;
+  } | null;
 };
 
 export type TBalance =
@@ -159,8 +242,12 @@ export type TTransactionCollection = {
   quantity: number;
   amount: number;
   credit: number;
-  withdrawal: number;
+  debit: number;
   currency: string;
+  description: string;
+  details: string;
+  participantName?: string;
+  participantDisplayName?: string;
 };
 
 export type TTransactionHistory = {
@@ -177,4 +264,15 @@ export type TAutoTopUpSettings = {
   minBalance: number;
   upToBalance: number;
   currency: string | null;
+};
+
+export type TransactionHistoryReport = {
+  id: string;
+  error: string;
+  percentage: number;
+  isCompleted: boolean;
+  status: number;
+  resultFileId: number;
+  resultFileName: string;
+  resultFileUrl: string;
 };

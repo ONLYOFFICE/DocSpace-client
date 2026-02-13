@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,9 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import type { DateTime } from "luxon";
+import type { Nullable } from "../../types";
+
 export type DateTimePickerProps = {
   /** Date object */
-  initialDate?: moment.Moment | Date;
+  initialDate?: Nullable<DateTime | Date | string>;
   /** Select date text */
   selectDateText: string;
   /** Allows to set classname */
@@ -34,15 +37,19 @@ export type DateTimePickerProps = {
   /** Allows to set id */
   id: string;
   /** Allow you to handle changing events of component */
-  onChange: (d: null | moment.Moment) => void;
+  onChange: (d: null | DateTime) => void;
   /** Specifies min choosable calendar date */
-  minDate?: moment.Moment | Date;
+  minDate?: DateTime | Date;
   /** Specifies max choosable calendar date */
-  maxDate?: moment.Moment | Date;
+  maxDate?: DateTime | Date;
   /** Specifies calendar locale */
   locale: string;
   /** Indicates the input field has an error  */
   hasError: boolean;
   /** Allows to set first shown date in calendar */
-  openDate: moment.Moment;
+  openDate: DateTime | Date;
+  /** Allows to set data-testid */
+  dataTestId?: string;
+  hideCross?: boolean;
+  useMaxTime?: boolean;
 };

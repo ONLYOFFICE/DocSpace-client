@@ -26,6 +26,7 @@
   "LdapGroupNameAttribute": "Grupas nosaukuma atribūts",
   "LdapGroupNameAttributeTooltip": "Norādiet objekta atribūtu, kas atbilst grupas nosaukumam.",
   "LdapGroupUserAttributeTooltip": "Ievadiet lietotāja objekta atribūtu, ko izmanto, lai noteiktu, vai šis lietotājs ir grupu dalībnieks.",
+  "LdapIntegrationDescription": "Importēt lietotājus un grupas, izmantojot LDAP, un iespējot lietotāju autentifikāciju, izmantojot LDAP serverī glabātos loginus/paroles. Lietotāji tiks importēti uzreiz pēc iestatījumu saglabāšanas. Vēlāk pievienotie lietotāji tiks importēti pirmajās autentifikācijas reizēs. Ja vēlaties nodrošināt piekļuvi tikai, izmantojot LDAP, atspējojiet iespēju uzaicināt jaunus {{productName}} biedrus, izmantojot {{sectionName}}: <1>{{link}}</1>",
   "LdapLoginAttribute": "Pieteikšanās atribūts",
   "LdapLoginAttributeTooltip": "Ievadiet objekta atribūtu, kas atbilst lietotāja pieteikšanās datiem.",
   "LdapLoginTooltip": "Norādiet pieteikšanās lietotāju, kuram ir LDAP servera lasīšanas piekļuves tiesības.",

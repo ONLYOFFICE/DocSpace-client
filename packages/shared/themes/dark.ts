@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -109,6 +109,7 @@ const {
   darkGreyAction,
   darkActive,
   darkGreyHover,
+  grayLightText,
 } = globalColors;
 
 const Dark: TTheme = {
@@ -671,8 +672,6 @@ const Dark: TTheme = {
     width: {
       base: "173px",
       middle: "300px",
-      big: "350px",
-      huge: "500px",
       large: "550px",
     },
 
@@ -701,24 +700,18 @@ const Dark: TTheme = {
     width: {
       base: "173px",
       middle: "300px",
-      big: "350px",
-      huge: "500px",
       large: "550px",
     },
 
     height: {
       base: "32px",
       middle: "38px",
-      big: "38px",
-      huge: "39px",
       large: "44px",
     },
 
     paddingRight: {
       base: "37px",
       middle: "48px",
-      big: "53px",
-      huge: "58px",
       large: "64px",
     },
 
@@ -731,16 +724,12 @@ const Dark: TTheme = {
       width: {
         base: "30px",
         middle: "36px",
-        big: "37px",
-        huge: "38px",
         large: "48px",
       },
 
       height: {
         base: "30px",
         middle: "36px",
-        big: "36px",
-        huge: "37px",
         large: "42px",
       },
     },
@@ -748,8 +737,6 @@ const Dark: TTheme = {
       width: {
         base: "15px",
         middle: "15px",
-        big: "16px",
-        huge: "16px",
         large: "16px",
       },
     },
@@ -806,18 +793,6 @@ const Dark: TTheme = {
     hoverIconColor: grayDark,
   },
 
-  inputPhone: {
-    activeBorderColor: lightSecondMain,
-    inactiveBorderColor: grayDarkStrong,
-    errorBorderColor: darkErrorStatus,
-    backgroundColor: black,
-    color: white,
-    scrollBackground: grayDark,
-    placeholderColor: grayDark,
-    dialCodeColor: grayDark,
-    width: "320px",
-    height: "44px",
-  },
   textInput: {
     fontWeight: "normal",
     placeholderColor: grayDark,
@@ -834,24 +809,18 @@ const Dark: TTheme = {
     lineHeight: {
       base: "20px",
       middle: "20px",
-      big: "20px",
-      huge: "21px",
-      large: "20px",
+      large: "22px",
     },
 
     fontSize: {
       base: "13px",
       middle: "14px",
-      big: "16px",
-      huge: "18px",
       large: "16px",
     },
 
     padding: {
       base: "5px 6px",
       middle: "8px 12px",
-      big: "8px 16px",
-      huge: "8px 20px",
       large: "11px 12px",
     },
   },
@@ -1444,25 +1413,7 @@ const Dark: TTheme = {
     marginRight: "2px",
     borderRadius: "50%",
   },
-  rombsLoader: {
-    blue: {
-      colorStep_1: black,
-      colorStep_2: black,
-      colorStep_3: "#323032",
-      colorStep_4: "#323032",
-    },
-    red: {
-      colorStep_1: black,
-      colorStep_2: black,
-      colorStep_3: "#323032",
-    },
-    green: {
-      colorStep_1: black,
-      colorStep_2: black,
-      colorStep_3: "#323032",
-      colorStep_4: "#323032",
-    },
-  },
+
   dialogLoader: {
     borderBottom: `1px solid ${black}`,
   },
@@ -2875,9 +2826,9 @@ const Dark: TTheme = {
         priceColor: darkGrayDark,
         storageSizeTitle: gray,
 
-        backgroundColor: lightDarkGrayHover,
+        backgroundColor: darkGrayLight,
         linkColor: link,
-        tariffText: grayDark,
+        tariffText: grayLightText,
         border: `1px solid ${grayDarkStrong}`,
         backgroundBenefitsColor: black,
         rectangleColor: lightDarkGrayHover,
@@ -2893,7 +2844,7 @@ const Dark: TTheme = {
         },
 
         benefitsContainer: {
-          iconsColor: grayDark,
+          iconsColor: darkGrayDark,
         },
         contactContainer: {
           textColor: darkGrayDark,
@@ -2901,6 +2852,10 @@ const Dark: TTheme = {
         },
         warningColor: darkErrorStatus,
         color: darkStatusWarning,
+
+        payerInfo: {
+          disableColor: grayDark,
+        },
       },
 
       migration: {
@@ -2921,10 +2876,10 @@ const Dark: TTheme = {
         comboBoxLabelColor: white,
         importSectionBackground: darkGrayLight,
         importSectionTextColor: grayDark,
-        importItemBackground: black,
+        importItemBackground: darkGrayLight,
         importItemDisableBackground: lightDarkGrayHover,
         importItemTextColor: darkGrayDark,
-        importItemDisableTextColor: grayDarkText,
+        importItemDisableTextColor: grayDark,
         importItemDescription: gray,
         importIconColor: darkGrayDark,
         groupMenuBackground: black,
@@ -3066,17 +3021,6 @@ const Dark: TTheme = {
     descriptionTextColor: grayDark,
   },
 
-  codeInput: {
-    background: darkGrayLight,
-    border: `1px solid ${grayDarkStrong}`,
-    color: white,
-    lineColor: grayDark,
-    disabledBackground: grayDarkStrong,
-    disabledBorder: `1px solid ${grayDarkStrong}`,
-    disabledColor: grayDark,
-    focusBorder: `1px solid ${lightSecondMain}`,
-  },
-
   accessRightSelect: {
     descriptionColor: grayDark,
   },
@@ -3128,6 +3072,9 @@ const Dark: TTheme = {
     submitToGalleryTile: {
       bodyText: darkGrayDark,
       closeIconFill: darkGrayDark,
+      border: `1px solid ${grayDarkStrong}`,
+      background: darkGrayLight,
+      colorExt: gray,
     },
   },
 

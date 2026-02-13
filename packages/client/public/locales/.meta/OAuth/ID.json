@@ -3,7 +3,7 @@
   "content": "ID",
   "content_en_sha1_hash": "89f89c02cf47e091e726a4e07b88af0966806897",
   "created_at": "2025-05-19T21:30:53.908Z",
-  "updated_at": "2025-05-21T07:10:22.917Z",
+  "updated_at": "2025-06-30T12:20:31.469Z",
   "comment": {
     "text": "The \"ID\" translation key is used to display a label for an input field, likely in a form or fields section. It appears as a simple text label, and its purpose is to provide a clear indication of what user input is required (in this case, the ID).",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/ClientBlock.tsx",
-      "line_number": 82,
+      "line_number": 85,
       "context": "return (\n <StyledBlock>\n <BlockHeader header={t(\"Client\")} helpButtonText={helpButtonText} />\n <StyledInputBlock>\n <InputGroup\n label={t(\"ID\")}\n name=\"\"\n value={value.id}\n error=\"\"\n onChange={onChange}\n withCopy",
       "module": "/packages/client"
     }
@@ -156,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"අංකය\" (ankaya) translates to 'number' or 'figure,' which isn't the most accurate translation for 'ID' in the context of OAuth. While 'ID' can sometimes represent a number, it often refers to an identifier, which is a more general concept.",
-          "suggestion": "Consider a translation like \"గుర్తింపు\" (gurthimpu), which means 'identification' or 'identifier,' or \"සංඛ්‍යාත්මක හඳුනාගැනීම\" (sankhyamatika hadunaganeyima) for a more literal 'numerical identification'."
+          "description": "The translation \"අංකය\" (ankaya) means 'number' which is not an accurate translation of 'ID' (Identifier). An ID typically refers to a unique identifier, not just a number.",
+          "suggestion": "A more accurate translation would depend on the context. Options include: හැඳුම් අංකය (hadum ankaya - identification number), අනන්‍යතාව (ananyathava - identity), or හැඳුම් (hadum - identifier)."
         }
       ],
       "approved_at": null
@@ -189,19 +189,19 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Turkish translation 'Kimlik' while generally meaning 'Identity,' might be too broad for the context of an 'ID' in OAuth. A more precise translation like 'Tanımlayıcı' (Identifier) or 'Numara' (Number) might be more appropriate depending on the specific purpose of the ID.",
-          "suggestion": "Consider 'Tanımlayıcı' or 'Numara' for a more accurate translation depending on the context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Ідентифікатор' is a valid Ukrainian word, it's a more formal and technical translation of 'ID'. A more common and user-friendly translation might be 'ID' itself, or perhaps 'ідентифікаційний номер' depending on the context. 'ID' is frequently used directly in Ukrainian, especially in technical settings.",
+          "suggestion": "Consider using 'ID' directly or 'ідентифікаційний номер' for broader usability, depending on the overall tone of the application."
+        }
+      ],
       "approved_at": null
     },
     "vi": {

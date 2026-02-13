@@ -1,28 +1,22 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation, Trans } from "react-i18next";
-import styled from "styled-components";
 
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
-const StyledText = styled(Text)`
-  margin-top: 16px;
-`;
-
 type ReducedRightsDialogProps = {
   visible: boolean;
   adminName: string;
   setReducedRightsData: (visible: boolean, admin?: string) => void;
-  personalUserFolderTitle?: string;
 };
 
 const ReducedRightsDialog: React.FC<ReducedRightsDialogProps> = ({
   visible,
   adminName,
-  personalUserFolderTitle,
+
   setReducedRightsData,
 }) => {
   const { t } = useTranslation(["Common", "Files"]);
@@ -54,20 +48,20 @@ const ReducedRightsDialog: React.FC<ReducedRightsDialogProps> = ({
           }}
           components={{ 1: <span style={{ fontWeight: 600 }} /> }}
         />
-        <StyledText>
+        <Text style={{ marginTop: "16px" }}>
           <Trans
             t={t}
             ns="Files"
             i18nKey="PersonalContentRemovalNotice"
-            values={{ sectionName: personalUserFolderTitle }}
+            values={{ sectionName: t("Common:MyDocuments") }}
             components={{ 1: <span style={{ fontWeight: 600 }} /> }}
           />
-        </StyledText>
-        <StyledText>
+        </Text>
+        <Text style={{ marginTop: "16px" }}>
           {t("Common:ForQuestionsContactPortalAdmin", {
             productName: t("Common:ProductName"),
           })}
-        </StyledText>
+        </Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -81,7 +75,7 @@ const ReducedRightsDialog: React.FC<ReducedRightsDialogProps> = ({
         <Button
           key="RedirectButton"
           label={t("Files:GoToSection", {
-            sectionName: t("Common:MyFilesSection"),
+            sectionName: t("Common:MyDocuments"),
           })}
           size={ButtonSize.normal}
           onClick={onRedirect}
@@ -92,15 +86,12 @@ const ReducedRightsDialog: React.FC<ReducedRightsDialogProps> = ({
   );
 };
 
-export default inject(({ dialogsStore, treeFoldersStore }: TStore) => {
+export default inject(({ dialogsStore }: TStore) => {
   const { reducedRightsData, setReducedRightsData } = dialogsStore;
-
-  const { personalUserFolderTitle } = treeFoldersStore;
 
   return {
     visible: reducedRightsData.visible,
     adminName: reducedRightsData.adminName,
     setReducedRightsData,
-    personalUserFolderTitle,
   };
 })(observer(ReducedRightsDialog));

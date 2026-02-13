@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -57,6 +57,7 @@ const AccountsTable = (props: AccountsTableProps) => {
     changeGroupType(UserTypes.RoomAdmin);
     toggleAllAccounts(false, [], checkedAccountType);
   };
+
   const setTypeUser = () => {
     changeGroupType(UserTypes.User);
     toggleAllAccounts(false, [], checkedAccountType);
@@ -112,7 +113,7 @@ const AccountsTable = (props: AccountsTableProps) => {
 export default inject<TStore>(({ setup, userStore, importAccountsStore }) => {
   const { viewAs } = setup;
   const { changeGroupType, UserTypes, toggleAllAccounts } = importAccountsStore;
-  const { isOwner } = userStore.user;
+  const { isOwner } = userStore.user || {};
 
   return {
     viewAs,

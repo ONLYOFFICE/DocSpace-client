@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,7 +32,7 @@ import {
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-type ChangeLinkTypeDialog = {
+type ChangeLinkTypeDialogProps = {
   visible: boolean;
   onClose: VoidFunction;
   onSubmit: VoidFunction;
@@ -42,7 +42,7 @@ const ChangeLinkTypeDialog = ({
   visible,
   onClose,
   onSubmit,
-}: ChangeLinkTypeDialog) => {
+}: ChangeLinkTypeDialogProps) => {
   const { t } = useTranslation(["Common", "ChangeLinkTypeDialog"]);
 
   return (

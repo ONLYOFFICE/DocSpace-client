@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,15 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState } from "react";
-import { useTranslation } from "react-i18next";
+import { useState, useRef, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { QuotaForm } from "@docspace/shared/components/quota-form";
 
 import { StyledBaseQuotaComponent } from "../StyledComponent";
-import QuotaForm from "../../../../../components/QuotaForm";
 
 let timerId = null;
 const QuotaPerItemComponent = (props) => {
@@ -48,13 +47,21 @@ const QuotaPerItemComponent = (props) => {
     type,
 
     tabIndex,
+    dataTestId,
+    toggleDescription,
   } = props;
-
-  const { t } = useTranslation("Settings");
 
   const [isToggleChecked, setIsToggleChecked] = useState(isQuotaSet);
 
   const [isLoading, setIsLoading] = useState(false);
+
+  const quotaFormRef = useRef(null);
+
+  useEffect(() => {
+    if (isToggleChecked && quotaFormRef.current) {
+      quotaFormRef.current?.focus();
+    }
+  }, [isToggleChecked]);
 
   const onToggleChange = async (e) => {
     const { checked } = e.currentTarget;
@@ -103,19 +110,14 @@ const QuotaPerItemComponent = (props) => {
           onChange={onToggleChange}
           isChecked={isToggleChecked}
           isDisabled={isDisabled || isLoading}
+          dataTestId={dataTestId ? `${dataTestId}_button` : undefined}
         />
         <Text className="toggle_label" fontSize="12px">
-          {type === "user"
-            ? t("UserDefaultQuotaDescription", {
-                productName: t("Common:ProductName"),
-                sectionName: t("Common:MyFilesSection"),
-              })
-            : t("SetDefaultRoomQuota", {
-                productName: t("Common:ProductName"),
-              })}
+          {toggleDescription}
         </Text>
         {isToggleChecked ? (
           <QuotaForm
+            ref={quotaFormRef}
             isButtonsEnable
             label={formLabel}
             maxInputWidth="214px"
@@ -125,6 +127,7 @@ const QuotaPerItemComponent = (props) => {
             onCancel={onCancel}
             initialSize={initialSize}
             tabIndex={tabIndex}
+            dataTestId={dataTestId ? `${dataTestId}_form` : undefined}
           />
         ) : null}
       </div>
@@ -133,16 +136,13 @@ const QuotaPerItemComponent = (props) => {
 };
 
 export default inject(({ currentQuotaStore, storageManagement }, { type }) => {
-  const { setUserQuota, defaultUsersQuota, defaultRoomsQuota } =
-    currentQuotaStore;
+  const { setUserQuota } = currentQuotaStore;
   const { isStatisticsAvailable } = currentQuotaStore;
 
   const { updateQuotaInfo } = storageManagement;
 
-  const defaultQuota = type === "user" ? defaultUsersQuota : defaultRoomsQuota;
   return {
     setUserQuota,
-    defaultQuota,
     isDisabled: !isStatisticsAvailable,
     updateQuotaInfo,
   };

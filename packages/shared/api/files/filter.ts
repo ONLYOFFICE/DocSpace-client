@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,36 +24,49 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
 import queryString from "query-string";
 
-import { ApplyFilterOption, FilterType } from "../../enums";
-import { getObjectByLocation, toUrlParams } from "../../utils/common";
-import { TViewAs, TSortOrder, TSortBy } from "../../types";
+import {
+  ApplyFilterOption,
+  FilterLocation,
+  FilterType,
+  SearchArea,
+} from "../../enums";
+import {
+  getObjectByLocation,
+  toUrlParams,
+  getCategoryType,
+} from "../../utils/common";
+import { TViewAs, TSortOrder, TSortBy, ValueOf } from "../../types";
+import { validateAndFixObject } from "../../utils/filterValidator";
+import { CategoryType } from "../../constants";
 
 const DEFAULT_PAGE = 0;
 const DEFAULT_PAGE_COUNT = 25;
 const DEFAULT_TOTAL = 0;
-const DEFAULT_SORT_BY: TSortBy = "DateAndTime";
-const DEFAULT_SORT_ORDER: TSortOrder = "descending";
+const DEFAULT_SORT_BY: TSortBy | null = "DateAndTime";
+const DEFAULT_SORT_ORDER: TSortOrder | null = "descending";
 const DEFAULT_VIEW: TViewAs = "row";
 const DEFAULT_FILTER_TYPE: FilterType | null = null;
 const DEFAULT_SEARCH_TYPE: boolean | null = null; // withSubfolders
 const DEFAULT_SEARCH: string | null = null;
 const DEFAULT_AUTHOR_TYPE: string | null = null;
+const DEFAULT_SHARED_BY_TYPE: string | null = null;
 const DEFAULT_ROOM_ID: number | null = null;
 const DEFAULT_FOLDER = "@my";
 const DEFAULT_SEARCH_IN_CONTENT: boolean | null = null;
 const DEFAULT_EXCLUDE_SUBJECT: boolean | null = null;
 const DEFAULT_APPLY_FILTER_OPTION: ApplyFilterOption | null = null;
 const DEFAULT_EXTENSION: string | null = null;
-const DEFAULT_SEARCH_AREA: number | null = 3;
+const DEFAULT_SEARCH_AREA: number | SearchArea | null = null;
 const DEFAULT_KEY: string | null = null;
+const DEFAULT_LOCATION: FilterLocation | null = null;
 
 const SEARCH_TYPE = "withSubfolders";
 const AUTHOR_TYPE = "authorType";
+const SHARED_BY = "sharedBy";
 const FILTER_TYPE = "filterType";
 const ROOM_ID = "roomId";
 const SEARCH = "search";
@@ -70,6 +83,10 @@ const APPLY_FILTER_OPTION = "applyFilterOption";
 const EXTENSION = "extension";
 const SEARCH_AREA = "searchArea";
 const KEY = "key";
+const DATE = "date";
+const TAGS = "tags";
+const LOCATION = "location";
+const AREA = "area";
 
 // TODO: add next params
 // subjectGroup bool
@@ -81,6 +98,7 @@ const getOtherSearchParams = () => {
   const filterSearchParams = [
     SEARCH_TYPE,
     AUTHOR_TYPE,
+    SHARED_BY,
     FILTER_TYPE,
     ROOM_ID,
     SEARCH,
@@ -96,19 +114,38 @@ const getOtherSearchParams = () => {
     EXTENSION,
     SEARCH_AREA,
     KEY,
+    DATE,
+    TAGS,
+    LOCATION,
+    AREA,
   ];
 
-  Array.from(searchParams.keys()).forEach((key) => {
-    if (
-      filterSearchParams.some(
-        (param) => param.toLowerCase() === key.toLowerCase(),
-      )
-    ) {
-      searchParams.delete(key);
+  filterSearchParams.forEach((param) => {
+    const keys = Array.from(searchParams.keys());
+    const keyToDelete = keys.find(
+      (key) => key.toLowerCase() === param.toLowerCase(),
+    );
+    if (keyToDelete) {
+      searchParams.delete(keyToDelete);
     }
   });
 
   return searchParams.toString();
+};
+
+export const typeDefinition = {
+  filterType: Object.values(FilterType).map((value) => String(value)), // enum FilterType
+  applyFilterOption: Object.values(ApplyFilterOption), // enum ApplyFilterOption
+  sortBy: [
+    "DateAndTime",
+    "DateAndTimeCreation",
+    "AZ",
+    "Type",
+    "Size",
+    "Title",
+    "Author",
+  ] as TSortBy[], // type TSortBy
+  sortOrder: ["ascending", "descending"] as TSortOrder[], // type TSortOrder
 };
 
 class FilesFilter {
@@ -116,9 +153,9 @@ class FilesFilter {
 
   pageCount: number;
 
-  sortBy: TSortBy;
+  sortBy: TSortBy | null;
 
-  sortOrder: TSortOrder;
+  sortOrder: TSortOrder | null;
 
   viewAs: TViewAs;
 
@@ -131,6 +168,8 @@ class FilesFilter {
   roomId: number | null;
 
   authorType: string | null;
+
+  sharedBy: string | null;
 
   total: number;
 
@@ -150,18 +189,51 @@ class FilesFilter {
 
   key: string | null = null;
 
-  static getDefault(total = DEFAULT_TOTAL) {
-    return new FilesFilter(DEFAULT_PAGE, DEFAULT_PAGE_COUNT, total);
+  location: FilterLocation | null = null;
+
+  static getDefault(
+    options: {
+      pageCount?: number;
+      total?: number;
+      categoryType?: ValueOf<typeof CategoryType>;
+    } = {},
+  ) {
+    const {
+      pageCount = DEFAULT_PAGE_COUNT,
+      total = DEFAULT_TOTAL,
+      categoryType = CategoryType.Personal,
+    } = options;
+
+    const filter = new FilesFilter(DEFAULT_PAGE, pageCount, total);
+
+    switch (categoryType) {
+      case CategoryType.Recent:
+        filter.sortBy = null;
+        filter.sortOrder = null;
+        filter.folder = "@recent";
+        break;
+      case CategoryType.SharedWithMe:
+        filter.folder = "@share";
+        break;
+      case CategoryType.Favorite:
+        filter.folder = "@favorites";
+        break;
+      default:
+    }
+
+    return filter;
   }
 
-  static getFilter(location: Location) {
+  static getFilter(location: Location): FilesFilter {
     if (!location) return this.getDefault();
+
+    const categoryType = getCategoryType(location);
 
     const urlFilter = getObjectByLocation(location);
 
-    if (!urlFilter) return null;
+    const defaultFilter = FilesFilter.getDefault({ categoryType });
 
-    const defaultFilter = FilesFilter.getDefault();
+    if (!urlFilter) return defaultFilter;
 
     const filterType =
       (urlFilter[FILTER_TYPE] && +urlFilter[FILTER_TYPE]) ||
@@ -172,6 +244,9 @@ class FilesFilter {
         urlFilter[AUTHOR_TYPE].includes("_") &&
         urlFilter[AUTHOR_TYPE]) ||
       defaultFilter.authorType;
+
+    const sharedBy = urlFilter[SHARED_BY] || defaultFilter.sharedBy;
+
     const roomId = urlFilter[ROOM_ID] || defaultFilter.roomId;
     const withSubfolders =
       (urlFilter[SEARCH_TYPE] && urlFilter[SEARCH_TYPE]) ||
@@ -197,6 +272,8 @@ class FilesFilter {
       (urlFilter[SEARCH_AREA] && urlFilter[SEARCH_AREA]) ||
       defaultFilter.searchArea;
     const key = (urlFilter[KEY] && urlFilter[KEY]) || defaultFilter.key;
+    const locationFilter =
+      (urlFilter[LOCATION] && +urlFilter[LOCATION]) || defaultFilter.location;
 
     const newFilter = new FilesFilter(
       page,
@@ -217,6 +294,8 @@ class FilesFilter {
       extension,
       searchArea,
       key,
+      locationFilter,
+      sharedBy,
     );
 
     return newFilter;
@@ -241,6 +320,8 @@ class FilesFilter {
     extension = DEFAULT_EXTENSION,
     searchArea = DEFAULT_SEARCH_AREA,
     key = DEFAULT_KEY,
+    location = DEFAULT_LOCATION,
+    sharedBy = DEFAULT_SHARED_BY_TYPE,
   ) {
     this.page = page;
     this.pageCount = pageCount;
@@ -260,6 +341,8 @@ class FilesFilter {
     this.extension = extension;
     this.searchArea = searchArea;
     this.key = key;
+    this.location = location;
+    this.sharedBy = sharedBy;
   }
 
   getStartIndex = () => {
@@ -275,6 +358,8 @@ class FilesFilter {
   };
 
   toApiUrlParams = () => {
+    const fixedValidObject = validateAndFixObject(this, typeDefinition);
+
     const {
       authorType,
       filterType,
@@ -291,7 +376,9 @@ class FilesFilter {
       applyFilterOption,
       extension,
       searchArea,
-    } = this;
+      location,
+      sharedBy,
+    } = fixedValidObject;
 
     const isFilterSet =
       filterType ||
@@ -322,6 +409,8 @@ class FilesFilter {
       applyFilterOption,
       extension,
       searchArea,
+      location,
+      sharedBy,
     };
 
     const str = toUrlParams(dtoFilter, true);
@@ -329,6 +418,8 @@ class FilesFilter {
   };
 
   toUrlParams = () => {
+    const fixedValidObject = validateAndFixObject(this, typeDefinition);
+
     const {
       authorType,
       filterType,
@@ -346,7 +437,9 @@ class FilesFilter {
       extension,
       searchArea,
       key,
-    } = this;
+      location,
+      sharedBy,
+    } = fixedValidObject;
 
     const dtoFilter: { [key: string]: unknown } = {};
 
@@ -357,6 +450,7 @@ class FilesFilter {
     if (search) dtoFilter[SEARCH] = search.trim();
     if (roomId) dtoFilter[ROOM_ID] = roomId;
     if (authorType) dtoFilter[AUTHOR_TYPE] = authorType;
+    if (sharedBy) dtoFilter[SHARED_BY] = sharedBy;
     if (folder) dtoFilter[FOLDER] = folder;
     if (pageCount !== DEFAULT_PAGE_COUNT) dtoFilter[PAGE_COUNT] = pageCount;
     if (URLParams.preview) dtoFilter[PREVIEW] = URLParams.preview;
@@ -366,6 +460,7 @@ class FilesFilter {
     if (extension) dtoFilter[EXTENSION] = extension;
     if (searchArea) dtoFilter[SEARCH_AREA] = searchArea;
     if (key) dtoFilter[KEY] = key;
+    if (location) dtoFilter[LOCATION] = location;
 
     dtoFilter[PAGE] = page + 1;
     dtoFilter[SORT_BY] = sortBy;
@@ -374,6 +469,7 @@ class FilesFilter {
     const otherSearchParams = getOtherSearchParams();
 
     const str = toUrlParams(dtoFilter, true);
+
     return `${str}&${otherSearchParams}`;
   };
 
@@ -391,7 +487,9 @@ class FilesFilter {
         this.searchInContent ||
         this.excludeSubject ||
         this.applyFilterOption ||
-        this.extension,
+        this.extension ||
+        this.location ||
+        this.sharedBy,
     );
   }
 
@@ -415,6 +513,8 @@ class FilesFilter {
       this.extension,
       this.searchArea,
       this.key,
+      this.location,
+      this.sharedBy,
     );
   }
 
@@ -435,7 +535,9 @@ class FilesFilter {
       this.excludeSubject === filter.excludeSubject &&
       this.applyFilterOption === filter.applyFilterOption &&
       this.extension === filter.extension &&
-      this.searchArea === filter.searchArea;
+      this.searchArea === filter.searchArea &&
+      this.location === filter.location &&
+      this.sharedBy === filter.sharedBy;
 
     return equals;
   }

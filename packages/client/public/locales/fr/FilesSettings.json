@@ -1,7 +1,7 @@
 {
   "CancellaionNotification": "Ne plus afficher la notification d'annulation",
   "DisplayFileExtension": "Afficher l'extension du fichier à côté du nom du fichier",
-  "DisplayNotification": "Afficher une notification lors du déplacement d'éléments vers la corbeille",
   "OpenSameTab": "Ouvrir l'éditeur {{organizationName}} dans le même onglet",
-  "OriginalCopy": "Sauvegarder également la copie du fichier dans le format original."
+  "OriginalCopy": "Sauvegarder également la copie du fichier dans le format original.",
+  "TrashMoveConfirmation": "Afficher une notification lors du déplacement d'éléments vers {{sectionName}}"
 }

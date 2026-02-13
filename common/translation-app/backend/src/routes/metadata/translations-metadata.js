@@ -5,73 +5,12 @@ const path = require("path");
 const fs = require("fs-extra");
 const appRootPath = require("app-root-path").toString();
 const { projectLocalesMap } = require("../../config/config");
-const glob = require("glob");
-const { writeJsonWithConsistentEol } = require("../../utils/fsUtils");
 
-/**
- * Find metadata file for a specific key
- * @param {string} projectName - Project name
- * @param {string} namespace - Namespace
- * @param {string} keyPath - Key path
- * @returns {Promise<{filePath: string, data: object}>} Metadata file info
- */
-async function findMetadataFile(projectName, namespace, keyPath) {
-  const localesPath = projectLocalesMap[projectName];
-  if (!localesPath) {
-    throw new Error(`Project ${projectName} not found in configuration`);
-  }
-
-  const projectPath = path.join(appRootPath, localesPath);
-  const metaDir = path.join(projectPath, ".meta");
-  const namespacePath = path.join(metaDir, namespace);
-  const metadataFilePath = path.join(namespacePath, `${keyPath}.json`);
-
-  if (await fs.pathExists(metadataFilePath)) {
-    const data = await fs.readJson(metadataFilePath);
-    return { filePath: metadataFilePath, data };
-  }
-
-  return null;
-}
-
-/**
- * Find all metadata files for a namespace
- * @param {string} projectName - Project name
- * @param {string} namespace - Namespace
- * @returns {Promise<Array<{filePath: string, data: object}>>} Metadata files
- */
-async function findNamespaceMetadataFiles(projectName, namespace) {
-  const localesPath = projectLocalesMap[projectName];
-  if (!localesPath) {
-    throw new Error(`Project ${projectName} not found in configuration`);
-  }
-
-  const projectPath = path.join(appRootPath, localesPath);
-  const metaDir = path.join(projectPath, ".meta");
-  const namespacePath = path.join(metaDir, namespace);
-
-  if (!(await fs.pathExists(namespacePath))) {
-    return [];
-  }
-
-  // Use normalized path with forward slashes for glob to work on all platforms
-  const namespacePathPattern = path
-    .join(namespacePath, "*.json")
-    .replace(/\\/g, "/");
-  const files = glob.sync(namespacePathPattern);
-  const result = [];
-
-  for (const filePath of files) {
-    try {
-      const data = await fs.readJson(filePath);
-      result.push({ filePath, data });
-    } catch (error) {
-      console.error(`Error reading metadata file ${filePath}:`, error);
-    }
-  }
-
-  return result;
-}
+const {
+  writeJsonWithConsistentEol,
+  findMetadataFile,
+  findNamespaceMetadataFiles,
+} = require("../../utils/fsUtils");
 
 /**
  * @param {FastifyInstance} fastify - Fastify instance

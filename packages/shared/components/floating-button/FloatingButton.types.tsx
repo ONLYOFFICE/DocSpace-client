@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -36,6 +36,8 @@ export type FloatingButtonProps = {
   style?: React.CSSProperties;
   /** Sets the icon on the button */
   icon?: keyof typeof FloatingButtonIcons;
+  /** Custom icon URL */
+  iconUrl?: string;
   /** Displays the alert */
   alert?: boolean;
   /**  Sets a callback function that is triggered when the button is clicked */

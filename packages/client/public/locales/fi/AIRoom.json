@@ -1,0 +1,18 @@
+{
+  "AIAgentAccessRedirectNote": "Ohjaat automaattisesti {{sectionName}}-osioon 5 sekunnissa.",
+  "AIChat": "AI-Chat",
+  "AIInstructions": "AI Ohjeet",
+  "CreateChat": "Luo chat",
+  "EmptyKnowledgeDescriptionActions": "Kokeile näitä toimintoja päästäksesi alkuun:",
+  "EmptyKnowledgeTitle": "Ei tiedostoja vielä ladattu",
+  "EmptyResultsTitle": "Ei tuloksia vielä",
+  "InstructionsDescriptionAgentExample": "Esimerkki: \"Olet tekoälyviestintäavustaja, joka auttaa kirjoittamaan ja muokkaamaan lehdistötiedotteita. Säilytä ammattimainen, itsevarma ja mediaystävällinen sävy. Korosta keskeisiä viestejä selkeästi, vältä ammattikieltä ja pidä teksti ytimekkäänä ja kiinnostavana.\"",
+  "KnowledgeDescription": "Lataa tiedostoja tietokoneeltasi tai {{productName}}-palvelusta, jotta chatissa on parempi konteksti. Huomio: osa tai kaikki ladatut tiedot voivat näkyä keskustelun aikana.",
+  "KnowledgeSelectIn": "Valitse {{productName}}",
+  "KnowledgeUnavailable": "Tietokanta ei ole käytettävissä",
+  "MCP": "MCP työkalut tähän huoneeseen",
+  "ResponseQualityNode": "<1>Huomautus:</1> Vastausten laatu voi vaihdella mallista riippuen; parempien tulosten saavuttamiseksi suositellaan uusia malleja.",
+  "ResultStorage": "Tulosten tallennus",
+  "UploadFilesDevice": "Lataa tiedostoja henkilökohtaiselta laitteeltasi",
+  "UploadFilesPortal": "Lataa tiedostoja osiosta {{sectionNameFirst}} tai {{sectionNameSecond}}"
+}

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,55 +25,32 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
-import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
+import { RectangleSkeleton } from "../../../../../skeletons";
+
+import { Text } from "../../../../text";
+
+import { MessageEmptyProps } from "../../../Chat.types";
 
 import styles from "../ChatMessageBody.module.scss";
 
-import { Text } from "../../../../text";
-import { IconButton } from "../../../../icon-button";
-
-const EmptyScreen = () => {
-  const [closed, setClosed] = React.useState(false);
-
+const EmptyScreen = ({ isLoading }: MessageEmptyProps) => {
   const { t } = useTranslation(["Common"]);
 
   return (
-    <>
-      <div
-        className={classNames(
-          styles.chatEmptyMessage,
-          styles.chatMessagePadding,
-          styles.chatMessageUser,
-          { [styles.closed]: closed },
-        )}
-      >
-        <Text
-          fontSize="12px"
-          lineHeight="16px"
-          fontWeight={400}
-          className={styles.chatMessageTextColor}
-        >
-          {t("Common:AIChatEmptyMessage")}
-        </Text>
-        <IconButton
-          iconName={CrossReactSvgUrl}
-          isClickable
-          size={12}
-          onClick={() => setClosed(true)}
-        />
-      </div>
-      <Text
-        className={styles.chatEmptyHelpMessage}
-        isBold
-        fontSize="18px"
-        lineHeight="24px"
-      >
-        {t("Common:AIChatHelp")}
-      </Text>
-    </>
+    <Text
+      className={styles.chatEmptyHelpMessage}
+      isBold
+      fontSize="18px"
+      lineHeight="24px"
+    >
+      {isLoading ? (
+        <RectangleSkeleton height="24px" width="140px" borderRadius="3px" />
+      ) : (
+        t("Common:AIChatOfferHelp")
+      )}
+    </Text>
   );
 };
 

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,13 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import {
-  EmployeeStatus,
-  EmployeeType,
-  RoomsType,
-  ShareAccessRights,
-  FileType,
-} from "../../enums";
+import { EmployeeStatus, EmployeeType, RoomsType, ShareAccessRights, FileType, FolderType } from "../../enums";
 import { MergeTypes, Nullable, WithFlag } from "../../types";
 
 import { TFileSecurity, TFolderSecurity } from "../../api/files/types";
@@ -44,7 +38,7 @@ import { TTabItem } from "../tabs";
 import { SelectorAccessRightsMode } from "./Selector.enums";
 
 // header
-type THeaderBackButton =
+export type THeaderBackButton =
   | {
       onBackClick: () => void;
       withoutBackButton: false;
@@ -69,6 +63,7 @@ export type TInfoBar = {
 };
 
 export type InfoBarProps = {
+  ref?: React.RefObject<HTMLDivElement | null>;
   visible: boolean;
   className?: string;
 };
@@ -92,24 +87,18 @@ export type TSelectorHeader = WithFlag<
 >;
 
 // bread crumbs
-type TOnBreadCrumbClick = ({
-  e,
-  open,
-  item,
-}: {
-  e: React.MouseEvent;
-  open: boolean;
-  item: TBreadCrumb;
-}) => void;
+type TOnBreadCrumbClick = ({ e, open, item }: { e: React.MouseEvent; open: boolean; item: TBreadCrumb }) => void;
 
 export type TBreadCrumb = {
   id: string | number;
   label: string;
   isRoom?: boolean;
+  isAgent?: boolean;
   minWidth?: string;
   roomType?: RoomsType;
   shared?: boolean;
   onClick?: TOnBreadCrumbClick;
+  rootFolderType?: FolderType;
 };
 
 export type TDisplayedItem = {
@@ -118,6 +107,7 @@ export type TDisplayedItem = {
   isArrow: boolean;
   isList: boolean;
   isRoom?: boolean;
+  isAgent?: boolean;
   listItems?: TBreadCrumb[];
 };
 
@@ -129,6 +119,7 @@ export type TSelectorBreadCrumbs = WithFlag<
     breadCrumbs: TBreadCrumb[];
     breadCrumbsLoader: React.ReactNode;
     onSelectBreadCrumb: (item: TBreadCrumb) => void;
+    bodyIsLoading: boolean;
   }
 >;
 
@@ -188,6 +179,8 @@ export type EmptyScreenProps = {
 
   items: TSelectorItem[];
   inputItemVisible: boolean;
+
+  hideBackButton?: boolean;
 };
 
 export type TSelectorEmptyScreen = {
@@ -297,26 +290,19 @@ type TWithAccessRightsProps = {
   accessRightsMode?: SelectorAccessRightsMode;
 };
 
-export type TSelectorWithAside = WithFlag<
-  "useAside",
-  {
-    useAside: true;
-    onClose: VoidFunction;
-    withoutBackground?: boolean;
-    withBlur?: boolean;
-  }
->;
+type TAsideCommonProps = {
+  withoutBackground?: boolean;
+  withBlur?: boolean;
+};
 
-export type TSelectorAccessRights = WithFlag<
-  "withAccessRights",
-  TWithAccessRightsProps
->;
+export type TSelectorWithAside =
+  | ({ useAside: true; onClose: VoidFunction } & TAsideCommonProps)
+  | ({ useAside?: false; onClose?: VoidFunction } & TAsideCommonProps);
 
-export type AccessSelectorProps = Omit<
-  TWithAccessRightsProps,
-  "withAccessRights"
-> & {
-  footerRef: React.RefObject<HTMLDivElement>;
+export type TSelectorAccessRights = WithFlag<"withAccessRights", TWithAccessRightsProps>;
+
+export type AccessSelectorProps = Omit<TWithAccessRightsProps, "withAccessRights"> & {
+  footerRef: React.RefObject<HTMLDivElement | null>;
 };
 
 // footer input
@@ -332,6 +318,7 @@ export type TSelectorInput = WithFlag<
 
 export type TSelectorFooterInput = TSelectorInput & {
   setNewFooterInputValue: React.Dispatch<React.SetStateAction<string>>;
+  withErrorFooter?: boolean;
 };
 
 // footer checkbox
@@ -364,6 +351,7 @@ export type TRenderCustomItem = (
   email?: string,
   isGroup?: boolean,
   status?: EmployeeStatus,
+  id?: string | number,
 ) => React.ReactNode | null;
 
 export type SelectorProps = TSelectorHeader &
@@ -385,14 +373,11 @@ export type SelectorProps = TSelectorHeader &
     className?: string;
     style?: React.CSSProperties;
 
-    onSelect?: (
-      item: TSelectorItem,
-      isDoubleClick: boolean,
-      doubleClickCallback: () => Promise<void>,
-    ) => void;
+    onSelect?: (item: TSelectorItem, isDoubleClick: boolean, doubleClickCallback: () => Promise<void>) => void;
 
     isMultiSelect: boolean;
     selectedItems?: TSelectorItem[];
+    maxSelectedItems?: number;
 
     disableFirstFetch?: boolean;
     loadNextPage: (startIndex: number) => Promise<void>;
@@ -407,6 +392,10 @@ export type SelectorProps = TSelectorHeader &
 
     isSSR?: boolean;
     selectedItem?: TSelectorItem | null; // no multiSelect only
+    dataTestId?: string;
+
+    hideBackButton?: boolean;
+    folderFormValidation?: RegExp;
   };
 
 export type BodyProps = TSelectorInfo &
@@ -429,11 +418,14 @@ export type BodyProps = TSelectorInfo &
 
     withFooterInput?: boolean;
     withFooterCheckbox?: boolean;
+    withErrorFooter?: boolean;
     descriptionText?: string;
     withInfoBadge?: boolean;
     injectedElement?: React.ReactElement;
 
     isSSR?: boolean;
+    hideBackButton?: boolean;
+    isLimitReached?: boolean;
   };
 
 export type FooterProps = TSelectorFooterSubmitButton &
@@ -444,6 +436,7 @@ export type FooterProps = TSelectorFooterSubmitButton &
     isMultiSelect: boolean;
     selectedItemsCount: number;
     requestRunning?: boolean;
+    withErrorFooter?: boolean;
   };
 
 type TSelectorItemEmpty = {
@@ -486,9 +479,11 @@ type TSelectorItemEmpty = {
   placeholder?: undefined;
   cover?: undefined;
   userType?: undefined;
+  isMCP?: undefined;
 
   isRoomsOnly?: undefined;
   createDefineRoomType?: undefined;
+  isSystem?: undefined;
 };
 
 export type TSelectorItemUser = MergeTypes<
@@ -501,6 +496,8 @@ export type TSelectorItemUser = MergeTypes<
     isCollaborator: boolean;
     isRoomAdmin: boolean;
     avatar: string;
+    avatarSmall?: string;
+    userName?: string;
     hasAvatar: boolean;
     role: AvatarRole;
     userType: EmployeeType;
@@ -551,6 +548,8 @@ export type TSelectorItemRoom = MergeTypes<
     color?: string;
     iconOriginal?: string;
     cover?: ICover;
+    tags?: string[];
+    title?: string;
   }
 >;
 
@@ -558,7 +557,16 @@ export type TSelectorItemGroup = MergeTypes<
   TSelectorItemEmpty,
   {
     isGroup: boolean;
+    isSystem?: boolean;
     name: string;
+  }
+>;
+
+export type TSelectorItemMCP = MergeTypes<
+  TSelectorItemEmpty,
+  {
+    isMCP: boolean;
+    icon?: string;
   }
 >;
 
@@ -599,7 +607,8 @@ type TSelectorItemType =
   | TSelectorItemRoom
   | TSelectorItemGroup
   | TSelectorItemNew
-  | TSelectorItemInput;
+  | TSelectorItemInput
+  | TSelectorItemMCP;
 
 export type TSelectorItem = TSelectorItemType & {
   label: string;
@@ -613,6 +622,10 @@ export type TSelectorItem = TSelectorItemType & {
   lifetimeTooltip?: string | null;
   viewUrl?: string;
   isTemplate?: boolean;
+  templateAccess?: ShareAccessRights;
+  templateIsOwner?: boolean;
+  disableMultiSelect?: boolean;
+  isSeparator?: boolean;
 };
 
 export type Data = {
@@ -627,6 +640,7 @@ export type Data = {
   savedInputValue: Nullable<string>;
   setSavedInputValue: (value: Nullable<string>) => void;
   listHeight: number;
+  isLimitReached?: boolean;
 };
 
 export interface ItemProps {

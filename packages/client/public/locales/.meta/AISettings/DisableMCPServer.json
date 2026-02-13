@@ -1,0 +1,28 @@
+{
+  "key_path": "DisableMCPServer",
+  "content": "Disable server",
+  "content_en_sha1_hash": "265e807fc34e11374d7051b3a1cd0ac6d8901ad9",
+  "created_at": "2025-10-27T16:14:31.648Z",
+  "updated_at": "2025-10-27T17:32:55.889Z",
+  "comment": {
+    "text": "This text appears as the header of a dialog used to disable a Minecraft server. It informs the user they are about to disable the server and is part of the AI settings. Translators should maintain the imperative tone, indicating an action to be taken.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T17:32:55.889Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/dialogs/disable/index.tsx",
+      "line_number": 74,
+      "context": "};\n \n return (\n <ModalDialog visible displayType={ModalDialogType.modal} onClose={onClose}>\n <ModalDialog.Header>\n {t(\"AISettings:DisableMCPServer\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text>\n <Trans t={t} i18nKey=\"DisableServerDescription\" ns=\"AISettings\" />\n </Text>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

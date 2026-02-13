@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,7 +28,7 @@ import { RoomsType } from "../../enums";
 
 export interface RoomLogoProps {
   /** Accepts room type */
-  type: RoomsType;
+  type?: RoomsType;
   /** Adds privacy icon  */
   isPrivacy?: boolean;
   /** Adds archive icon  */

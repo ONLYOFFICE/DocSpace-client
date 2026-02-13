@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -77,15 +77,18 @@ const ButtonContainer = (props) => {
       (settings[HOST_PASSWORD]?.trim() === "" ||
         settings[HOST_LOGIN]?.trim() === "");
 
+    let valid = true;
+
     if (
       authInvalid ||
       settings[HOST]?.trim() === "" ||
       settings[PORT]?.toString()?.trim() === "" ||
       settings[SENDER_EMAIL_ADDRESS]?.trim() === ""
-    )
-      return false;
+    ) {
+      valid = false;
+    }
 
-    return true;
+    return valid;
   };
 
   const setErrors = () => {
@@ -110,7 +113,7 @@ const ButtonContainer = (props) => {
 
     try {
       await updateSMTPSettings();
-      toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (e) {
       toastr.error(e);
     }
@@ -196,7 +199,7 @@ const ButtonContainer = (props) => {
 
     try {
       await resetSMTPSettings();
-      toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (e) {
       toastr.error(e);
     }
@@ -220,6 +223,7 @@ const ButtonContainer = (props) => {
         isDisabled={isLoading || !isValidForm() || isSMTPInitialSettings}
         isLoading={buttonOperation.save}
         scale={currentDeviceType === DeviceType.mobile}
+        testId="smtp_settings_save_button"
       />
       <Button
         label={t("Settings:DefaultSettings")}
@@ -228,6 +232,7 @@ const ButtonContainer = (props) => {
         isLoading={buttonOperation.reset}
         isDisabled={isLoading || isDefaultSettings}
         scale={currentDeviceType === DeviceType.mobile}
+        testId="smtp_default_settings_button"
       />
       <Button
         label={t("SendTestMail")}
@@ -236,6 +241,7 @@ const ButtonContainer = (props) => {
         isDisabled={isLoading || !isSMTPInitialSettings}
         isLoading={buttonOperation.send}
         scale={currentDeviceType === DeviceType.mobile}
+        testId="send_test_mail_button"
       />
     </ButtonStyledComponent>
   );

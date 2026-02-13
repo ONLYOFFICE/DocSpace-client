@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -45,11 +45,6 @@ type PublicRoomPageProps = {
   filesSettings: TFilesSettings;
   portalSettings: TSettings;
   filesFilter: string;
-  baseConfig: {
-    showHeader?: boolean;
-    showFilter?: boolean;
-    folder?: string;
-  };
 };
 
 function PublicRoomPage({
@@ -58,11 +53,10 @@ function PublicRoomPage({
   filesFilter,
   portalSettings,
   shareKey,
-  baseConfig,
 }: PublicRoomPageProps) {
   const { folders, files, total, current } = folderList;
 
-  const { sdkConfig } = useSDKConfig();
+  useSDKConfig();
 
   const filesSettingsStore = useFilesSettingsStore();
   const settingsStore = useSettingsStore();

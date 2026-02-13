@@ -1,0 +1,28 @@
+{
+  "key_path": "DeleteImage",
+  "content": "Delete image",
+  "content_en_sha1_hash": "ffc2726494407897059a9193827586abe1ae0b48",
+  "created_at": "2025-10-27T16:14:31.662Z",
+  "updated_at": "2025-10-27T17:35:52.629Z",
+  "comment": {
+    "text": "This text appears on a link that allows a user to delete an image. It's used as the label for a delete action within the AI settings, likely on a server configuration page. Translators should ensure the wording conveys the action of removing an image.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T17:35:52.629Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/hooks/useIcon.tsx",
+      "line_number": 122,
+      "context": "fontWeight={600}\n isHovered\n onClick={onDeleteIcon}\n className={styles.deleteImageLink}\n >\n {t(\"AISettings:DeleteImage\")}\n </Link>\n </>\n ) : (\n <SelectorAddButton\n label={t(\"OAuth:SelectNewImage\")}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

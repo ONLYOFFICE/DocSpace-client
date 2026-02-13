@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -33,7 +33,7 @@ import SocketHelper, {
   SocketEvents,
 } from "@docspace/shared/utils/socket";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-
+import { FolderType } from "@docspace/shared/enums";
 import { EDITOR_ID } from "@docspace/shared/constants";
 
 import { UseSocketHelperProps } from "@/types";
@@ -43,6 +43,8 @@ const useSocketHelper = ({
   user,
   shareKey,
   standalone,
+  folderId,
+  folderType,
 }: UseSocketHelperProps) => {
   React.useEffect(() => {
     SocketHelper?.connect(socketUrl, shareKey ?? "");
@@ -56,7 +58,20 @@ const useSocketHelper = ({
     SocketHelper?.emit(SocketCommands.Subscribe, {
       roomParts: user?.id || "",
     });
+
+    if (user?.id)
+      SocketHelper?.emit(SocketCommands.Subscribe, {
+        roomParts: `user-${user.id}-quota`,
+      });
   }, [user?.id]);
+
+  React.useEffect(() => {
+    if (folderId && folderType === FolderType.Rooms) {
+      SocketHelper?.emit(SocketCommands.Subscribe, {
+        roomParts: `room-${folderId}-quota`,
+      });
+    }
+  }, [folderId]);
 
   React.useEffect(() => {
     if (standalone) {
@@ -67,6 +82,13 @@ const useSocketHelper = ({
   }, [standalone]);
 
   React.useEffect(() => {
+    SocketHelper?.emit(SocketCommands.Subscribe, {
+      roomParts: "tenant-quota",
+    });
+    // SocketHelper?.emit(SocketCommands.Subscribe, {
+    //   roomParts: "QUOTA",
+    //   individual: true,
+    // });
     const callback = async () => {
       try {
         // const message = t("Common:PreparationPortalTitle");
@@ -90,26 +112,35 @@ const useSocketHelper = ({
   }, []);
 
   React.useEffect(() => {
-    const callback = async (loginEventId: unknown) => {
-      console.log(`[WS] "logout-session"`, loginEventId, user?.loginEventId);
+    const callback = async ({
+      loginEventId,
+      redirectUrl,
+    }: {
+      loginEventId: unknown;
+      redirectUrl: string | null;
+    }) => {
+      const eventId = Number(loginEventId);
 
-      if (
-        Number(loginEventId) === user?.loginEventId ||
-        Number(loginEventId) === 0
-      ) {
-        sessionStorage.setItem("referenceUrl", window.location.href);
-        if (user) sessionStorage.setItem("loggedOutUserId", user.id);
+      if (eventId !== user?.loginEventId && eventId !== 0) return;
 
-        const docEditor =
-          typeof window !== "undefined" &&
-          window.DocEditor?.instances[EDITOR_ID];
+      console.log(
+        `[WS] "logout-session"`,
+        loginEventId,
+        user?.loginEventId,
+        redirectUrl,
+      );
 
-        docEditor?.requestClose();
+      const { pathname, search, origin } = window.location;
+      const loginUrl = redirectUrl || window.ClientConfig?.proxy?.url;
 
-        window.location.replace(
-          combineUrl(window.ClientConfig?.proxy?.url, "/login"),
-        );
-      }
+      sessionStorage.setItem(
+        "referenceUrl",
+        `${redirectUrl || origin}${pathname}${search}`,
+      );
+      if (user?.id) sessionStorage.setItem("loggedOutUserId", user.id);
+
+      window.DocEditor?.instances[EDITOR_ID]?.requestClose();
+      window.location.replace(combineUrl(loginUrl, "/login"));
     };
 
     SocketHelper?.on(SocketEvents.LogoutSession, callback);
@@ -117,7 +148,7 @@ const useSocketHelper = ({
     return () => {
       SocketHelper?.off(SocketEvents.LogoutSession, callback);
     };
-  }, [user, user?.loginEventId]);
+  }, [user?.id, user?.loginEventId]);
 };
 
 export default useSocketHelper;

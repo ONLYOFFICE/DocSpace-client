@@ -16,10 +16,10 @@ const useUpdateSearchParamId = (
 
     if (id !== fileId) {
       url.searchParams.set("fileId", fileId);
-      history.pushState(
+      window.history.pushState(
         {},
         "",
-        `${url.pathname}${url.search}${urlHash ? urlHash : ""}`,
+        `${url.pathname}${url.search}${urlHash || ""}`,
       );
     }
   }, [fileId, hash]);

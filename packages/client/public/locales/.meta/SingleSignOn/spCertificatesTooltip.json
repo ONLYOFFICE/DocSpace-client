@@ -3,7 +3,7 @@
   "content": "The Service provider certificates used to sign and encrypt the requests and responses from the SP",
   "content_en_sha1_hash": "1e5d8b6931596c260395a4c8c3dc9e23e6e18228",
   "created_at": "2025-05-19T21:30:50.158Z",
-  "updated_at": "2025-05-21T01:52:15.330Z",
+  "updated_at": "2025-05-24T03:05:59.733Z",
   "comment": {
     "text": "This translation key is used for the tooltip that displays the meaning of \"Service provider certificates\" in the Single Sign On settings page. It appears as a button label when the prefix is set to \"sp\" and provides context about the certificates used by a service provider.",
     "is_auto": true,
@@ -30,7 +30,7 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'مقدم' (muqaddim) is a less common and potentially awkward phrasing for 'Service provider'. A more common and clear term would be 'مزود الخدمة' (mazwud al-khidma).",
+          "description": "The word 'مقدم' (muqaddim) is not the most common or natural word to use for 'Service provider' in this context. 'مزود' (muzawwid) is more appropriate.",
           "suggestion": "شهادات مزود الخدمة المستخدمة لتوقيع وتشفير الطلبات والاستجابات من مزود الخدمة"
         }
       ],
@@ -41,9 +41,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'şifrələmək' is a valid word, but the phrasing 'imzalamaq və şifrələmək' sounds slightly awkward in Azerbaijani. It would be more natural to say something like 'imzalamaq və şifrləmə' or 'imzalama və şifrlə'.",
-          "suggestion": "Xidmət təminatçısı sertifikatları SP-dən gələn sorğuları və cavabları imzalamaq və şifrləmə üçün istifadə olunur"
+          "type": "grammar",
+          "description": "The phrase 'SP-dən gələn' is slightly awkward. A more natural phrasing would improve readability.",
+          "suggestion": "SP-dən olan"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'imzalamaq və şifrələmək' (sign and encrypt) could be more accurately translated as 'təsdiqləmək və şifrləmək' to better align with the technical context of certificates.",
+          "suggestion": "təsdiqləmək və şifrləmək"
         }
       ],
       "approved_at": null
@@ -54,8 +59,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Сертификатите на доставчика на услуги, използвани за подписване и криптиране на заявките и отговорите от доставчика на услуги' is overly repetitive.  The phrase 'доставчика на услуги' (service provider) is used multiple times.",
-          "suggestion": "Сертификатите на доставчика на услуги, използвани за подписване и криптиране на заявки и отговори."
+          "description": "The translation 'Сертификатите на доставчика на услуги, използвани за подписване и криптиране на заявките и отговорите от доставчика на услуги' is redundant. The phrase 'доставчика на услуги' (service provider) is repeated.",
+          "suggestion": "Сертификатите на доставчика на услуги, използвани за подписване и криптиране на заявките и отговорите."
         }
       ],
       "approved_at": null
@@ -77,9 +82,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'πάροχος' is repeated. While technically correct, it's slightly redundant and could be improved for flow.",
-          "suggestion": "Τα πιστοποιητικά παρόχου υπηρεσιών που χρησιμοποιούνται για την υπογραφή και την κρυπτογράφηση των αιτήσεων και των απαντήσεων από τον πάροχο."
+          "type": "incorrect_translation",
+          "description": "The term 'Service provider' is translated as 'πάροχου υπηρεσιών'. While technically correct, it's a bit verbose and less common in technical Greek. A more concise and frequently used term would be 'παροχέα υπηρεσιών'.",
+          "suggestion": "Replace 'πάροχου υπηρεσιών' with 'παροχέα υπηρεσιών'."
         }
       ],
       "approved_at": null
@@ -108,13 +113,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ծառայությունների' (ts'arayiut'yneri) is a genitive plural form. While grammatically correct in this context, consider if a nominative or other case would be more natural depending on the overall sentence flow. It might be slightly awkward.",
-          "suggestion": "Consider whether a nominative form like 'ծառայությունների վկայականները' would read more naturally, although this change would impact grammatical agreement with the verb."
+          "description": "The word 'ծառայությունների' (ts'ar'ayut'yaneri) is a slightly awkward transliteration. While technically correct, 'ծառայությունների' (ts'ar'ayut'yaneri) is more standard.",
+          "suggestion": "Consider using a more standard spelling: Ծառայությունների"
         },
         {
           "type": "formatting",
-          "description": "The abbreviation 'SP' is used in both the English and Armenian content. While this is acceptable, ensuring consistency in capitalization (SP vs. sP) or potentially providing a full translation the first time the abbreviation is used could improve clarity for readers unfamiliar with the term.",
-          "suggestion": "Consider adding a parenthetical explanation of 'SP' the first time it's used, e.g., 'ծառայությունների մատակարարի վկայականները... SP (ծառայությունների մատակարար)'"
+          "description": "While the sentence is grammatically correct, it might benefit from a slight restructuring for better readability in Armenian. The long sentence structure can be dense.",
+          "suggestion": "Consider splitting the sentence or rephrasing for clarity. For example: 'Ծառայությունների մատակարարի վկայականները՝ օգտագործվում են SP-ից ստացված հարցումներն ու պատասխանները ստորագրելու և գաղտնագրելու համար։' (Service provider certificates are used to sign and encrypt requests and responses from the SP.)"
         }
       ],
       "approved_at": null
@@ -125,8 +130,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'SP' should be consistent. It's abbreviated as 'SP' in the English content, so it should be 'SP' in the Italian translation as well.",
-          "suggestion": "I certificati del fornitore di servizi utilizzati per firmare e crittografare le richieste e le risposte dall’SP"
+          "description": "The abbreviation 'SP' is not translated or explained. While it might be understood by some, it's best to consistently use the full term.",
+          "suggestion": "I certificati del fornitore di servizi utilizzati per firmare e crittografare le richieste e le risposte dal fornitore di servizi."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'dall’SP' is slightly awkward. While technically correct, it can be improved for better flow.",
+          "suggestion": "I certificati del fornitore di servizi utilizzati per firmare e crittografare le richieste e le risposte del fornitore di servizi."
         }
       ],
       "approved_at": null
@@ -136,9 +146,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'サービスプロバイダ証明書' (service provider certificates) is technically correct but could be more natural. 'サービスプロバイダの証明書' is slightly more common and reads more fluently.",
-          "suggestion": "SP からのリクエストとレスポンスの署名と暗号化に使用されるサービスプロバイダの証明書"
+          "type": "formatting",
+          "description": "The Japanese translation lacks a period at the end of the sentence, which is standard Japanese punctuation.",
+          "suggestion": "SP からのリクエストとレスポンスの署名と暗号化に使用されるサービスプロバイダ証明書。"
         }
       ],
       "approved_at": null
@@ -148,14 +158,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "“SP” is an abbreviation that should be consistently translated or defined. While it's commonly understood in technical contexts, it's better to ensure clarity for a wider audience.",
-          "suggestion": "Consider replacing the first instance of 'SP' with '서비스 제공자 (Service Provider)' or including a parenthetical explanation: 'SP(서비스 제공자)'."
+          "type": "incorrect_translation",
+          "description": "The translation is technically correct but lacks clarity and flow for a tooltip. 'SP의 요청 및 응답을 서명하고 암호화하는 데 사용되는 서비스 공급자 인증서' is a bit clunky and formal for a tooltip.",
+          "suggestion": "SP에서 보내고 받는 요청과 응답을 보호하기 위해 사용되는 서비스 공급자 인증서"
         },
         {
           "type": "formatting",
-          "description": "While technically correct, the phrasing is a bit dense and formal for tooltip content. It could be made more conversational.",
-          "suggestion": "Consider rephrasing to something like: 'SP(서비스 제공자)로부터의 요청 및 응답 서명 및 암호화에 사용되는 인증서입니다.' (This translates to: 'It is the certificate used to sign and encrypt requests and responses from the Service Provider.')"
+          "description": "Tooltip text should be concise. The current translation is a bit long.",
+          "suggestion": "Consider shortening the suggested correction or using a more succinct phrasing to fit the tooltip space."
         }
       ],
       "approved_at": null
@@ -166,13 +176,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ເຊັນ' (sen) is a transliteration of 'sign' and might be confusing. It's better to use a more direct equivalent in Lao if possible.",
-          "suggestion": "Consider using 'ລາຍເຊັນ' (lai sen) which more accurately represents 'sign' in this context, though it might be slightly longer."
+          "description": "The term 'ເຊັນ' (sen) is used, which is a transliteration of 'sign'. While understandable, it's not the most accurate or common term for 'sign' in a technical context. It might be better to use a more descriptive term.",
+          "suggestion": "Consider using 'ລາຍເຊັນ' (lai sen) or 'ຢັ້ງຢືນ' (yang yin) instead of 'ເຊັນ' (sen)."
         },
         {
           "type": "grammar",
-          "description": "The sentence structure 'ໃບຢັ້ງຢືນຜູ້ໃຫ້ບໍລິການທີ່ໃຊ້ເພື່ອເຊັນ ແລະເຂົ້າລະຫັດ...' is a bit convoluted. While grammatically correct, it could be smoother.",
-          "suggestion": "Consider restructuring the sentence to something like 'ໃບຢັ້ງຢືນຂອງຜູ້ໃຫ້ບໍລິການທີ່ຖືກນໍາໃຊ້ເພື່ອລາຍເຊັນ ແລະເຂົ້າລະຫັດ...' which translates to 'The certificates of the service provider that are used to sign and encrypt...' "
+          "description": "The sentence structure 'ໃບຢັ້ງຢືນຜູ້ໃຫ້ບໍລິການທີ່ໃຊ້ເພື່ອເຊັນ ແລະເຂົ້າລະຫັດການຮ້ອງຂໍ ແລະຄຳຕອບຈາກ SP' is a bit long and slightly awkward. It could be improved for better flow.",
+          "suggestion": "Consider restructuring the sentence, perhaps something like: 'ໃບຢັ້ງຢືນຂອງຜູ້ໃຫ້ບໍລິການຖືກນໍາໃຊ້ເພື່ອຢັ້ງຢືນ ແລະເຂົ້າລະຫັດການຮ້ອງຂໍ ແລະຄໍາຕອບຈາກ SP' (Yang yin khong phu hai borikan thuk namchai phuea yang yin lae khao lahath kan rong kho lae kham top jak SP)."
         }
       ],
       "approved_at": null
@@ -182,9 +192,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The phrase \"ko izmanto SP pieprasījumu un atbilžu parakstīšanai, un šifrēšanai\" is grammatically awkward. It reads as though the certificates are used for both signing and encrypting.  A more natural phrasing would better reflect the English meaning.",
-          "suggestion": "Pakalpojumu sniedzēja sertifikāti, kas izmanto SP pieprasījumu parakstīšanai un atbilžu šifrēšanai."
+          "type": "incorrect_translation",
+          "description": "The translation 'ko izmanto SP pieprasījumu un atbilžu parakstīšanai, un šifrēšanai' is a bit clunky. A more natural phrasing would improve readability.",
+          "suggestion": "ko izmanto, lai parakstītu un šifrētu SP pieprasījumus un atbildes"
         }
       ],
       "approved_at": null
@@ -198,13 +208,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'usługodawcy' appears twice and while technically correct, it's slightly redundant and makes the sentence sound less fluent. A more natural phrasing might avoid repetition.",
-          "suggestion": "Certyfikaty usługodawców używane do podpisywania i szyfrowania żądań oraz odpowiedzi."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -213,13 +217,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "“Prestador de serviços” is a literal translation of “Service provider.” While understandable, a more natural translation in Portuguese would be “Fornecedor de serviços” or potentially just “Fornecedor,” depending on context.  'SP' is generally understood, but consistently translating the full term is preferable.",
-          "suggestion": "Consider using “Fornecedor de serviços” or “Fornecedor” instead of “Prestador de serviços”. Consider expanding the acronym SP the first time it's used, such as 'Service Provider (SP)'"
+          "description": "The translation of 'Service provider' as 'prestador de serviços' is technically correct but less common and slightly less clear in Portuguese. 'Fornecedor de serviços' is a more standard and easily understood term.",
+          "suggestion": "Os certificados do fornecedor de serviços utilizados para assinar e encriptar os pedidos e respostas do PS"
         },
         {
-          "type": "spelling",
-          "description": "The word 'encriptar' should be 'encriptar'.",
-          "suggestion": "Replace 'encriptar' with 'cifrar' or 'criptografar'. While 'encriptar' is commonly used, 'cifrar' or 'criptografar' are more technically accurate."
+          "type": "incorrect_translation",
+          "description": "While 'PS' is understandable within the context, clarifying it to 'prestador de serviços' would improve readability for users unfamiliar with the abbreviation.",
+          "suggestion": "Os certificados do fornecedor de serviços utilizados para assinar e encriptar os pedidos e respostas do prestador de serviços"
         }
       ],
       "approved_at": null
@@ -236,13 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'furnizorului' appears multiple times. While technically correct, it sounds slightly repetitive. Consider a more elegant phrasing.",
-          "suggestion": "Certificatele furnizorilor de servicii utilizate pentru a semna şi a cripta solicitările şi răspunsurile de la furnizor."
-        },
-        {
-          "type": "grammar",
-          "description": "While technically correct, using 'din partea furnizorului de servicii' is a bit clunky. A more natural phrasing would improve readability.",
-          "suggestion": "Certificatele furnizorului de servicii utilizate pentru a semna şi a cripta solicitările şi răspunsurile furnizorului."
+          "description": "The word 'furnizorului' is used repeatedly. While technically correct, it might feel a bit repetitive in Romanian. Consider alternatives for better flow.",
+          "suggestion": "Consider rephrasing to avoid repeated use of 'furnizorului'. For instance, 'Certificatele utilizate de furnizorul de servicii...'"
         }
       ],
       "approved_at": null
@@ -259,13 +258,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'SP වෙතින් ඉල්ලීම් සහ ප්‍රතිචාර අත්සන් තැබීමට සහ සංකේතනයට සේවා ප්‍රතිපාදකගේ සහතික භාවිතා කරයි' is not a precise translation of 'The Service provider certificates used to sign and encrypt the requests and responses from the SP'. It reads as 'The certificate of the service provider is used to sign and encrypt requests and responses from SP.' It doesn't convey the certificates *are used*. It should emphasize the certificates are being utilized.",
-          "suggestion": "SP වෙතින් පිටවන ඉල්ලීම් සහ ප්‍රතිචාර අත්සන් කිරීමට හා සංකේතනය කිරීමට සේවා ප්‍රතිපාදකගේ සහතිකයන් භාවිතා වේ"
+          "description": "The translation \"SP වෙතින් ඉල්ලීම් සහ ප්‍රතිචාර අත්සන් තැබීමට සහ සංකේතනයට සේවා ප්‍රතිපාදකගේ සහතික භාවිතා කරයි\" doesn't fully capture the meaning of the English content. It literally translates to 'The service provider uses the certificate to sign and encrypt requests and responses from the SP'. The English implies these certificates *are used*, not that the provider *uses* them. It's a passive construction.",
+          "suggestion": "SP වෙතින් ලැබෙන ඉල්ලීම් සහ ප්‍රතිචාර අත්සන් තැබීමට හා සංකේතනයට සේවා ප්‍රතිපාදකගේ සහතික භාවිතා වේ."
         },
         {
-          "type": "formatting",
-          "description": "The word 'සංකේතනයට' is unnecessarily followed by 'ට'.",
-          "suggestion": "Remove the 'ට' after 'සංකේතනය'"
+          "type": "spelling",
+          "description": "The word 'සංකේතනයට' (sankethanayaṭa) might be better as ' සංකේතනය සඳහා' (sankethanaya daka) for better flow, although both are acceptable.",
+          "suggestion": "SP වෙතින් ලැබෙන ඉල්ලීම් සහ ප්‍රතිචාර අත්සන් තැබීමට හා සංකේතනය සඳහා සේවා ප්‍රතිපාදකගේ සහතික භාවිතා වේ."
         }
       ],
       "approved_at": null
@@ -276,8 +275,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Certifikáty poskytovateľa služieb' is technically correct but could be improved for clarity and naturalness. 'Poskytovateľa služieb' is a very literal translation of 'Service provider'. A more common and understandable phrasing would be 'služobného poskytovateľa' or just 'poskytovateľa'.",
-          "suggestion": "Certifikáty poskytovateľa alebo služobného poskytovateľa"
+          "description": "The translation 'Certifikáty poskytovateľa služieb' is a literal translation of 'Service provider certificates'. A more natural phrasing in Slovak would be 'Certifikáty poskytovateľov služieb' or 'Certifikáty poskytovaných služieb'.",
+          "suggestion": "Certifikáty poskytovateľov služieb"
+        },
+        {
+          "type": "formatting",
+          "description": "The term 'SP' is not translated. While common, it would be more user-friendly to explain it.",
+          "suggestion": "Certifikáty poskytovateľa služieb používané na podpisovanie a šifrovanie požiadaviek a odpovedí od poskytovateľa služby (SP)"
         }
       ],
       "approved_at": null
@@ -288,13 +292,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'Service provider' is better translated as 'ponudnik storitev' which is already used in the provided translation. However, 'The' before 'Service provider' is redundant and can be removed for a more natural flow in Slovenian.",
-          "suggestion": "ponudnik storitev, ki se uporabljajo za podpisovanje in šifriranje zahtev in odgovorov SP"
+          "description": "The term 'Service provider' is not directly translated. While 'ponudnika storitev' is technically correct, it's a bit verbose for a tooltip. A more concise and common translation might be 'ponudnikov storitev' or even just 'ponudnikov'.",
+          "suggestion": "Certifikati ponudnikov storitev, ki se uporabljajo za podpisovanje in šifriranje zahtev in odgovorov SP"
         },
         {
           "type": "formatting",
-          "description": "While not strictly incorrect, adding a comma after 'ponudnika storitev' would improve readability in Slovenian.",
-          "suggestion": "Certifikati ponudnika storitev, ki se uporabljajo za podpisovanje in šifriranje zahtev in odgovorov SP"
+          "description": "The translation maintains the structure of the English, which is acceptable. However, for tooltip conciseness, consider rephrasing for better flow in Slovenian. This could involve restructuring the sentence.",
+          "suggestion": "Certifikati, uporabljeni za podpisovanje in šifriranje zahtev in odgovorov SP"
         }
       ],
       "approved_at": null
@@ -305,13 +309,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'Service provider' is translated as 'пружаоца услуга' which is grammatically correct but sounds overly formal and repetitive. A more natural translation would be 'носиоца услуге' or 'провајдера услуге'.",
-          "suggestion": "Сертификати носиоца услуге који се користе за потписивање и енкрипцију захтева и одговора од носиоца услуге."
+          "description": "The translation \"Сертификати пружаоца услуга који се користе за потписивање и енкрипцију захтева и одговора од пружаоца услуга\" is a bit verbose and repetitive. The phrase 'пружаоца услуга' (service provider) is repeated unnecessarily.",
+          "suggestion": "Сертификати пружаоца услуга који се користе за потписивање и шифровање захтева и одговора."
         },
         {
           "type": "incorrect_translation",
-          "description": "The repetition of 'провајдера услуге' makes the sentence clunky. It would be more fluent to avoid repeating the term.",
-          "suggestion": "Сертификати носиоца услуге који се користе за потписивање и енкрипцију захтева и одговора."
+          "description": "The word 'енкрипцију' is a direct transliteration of 'encryption'. A more natural Serbian word for encryption is 'шифровање'.",
+          "suggestion": "Replace 'енкрипцију' with 'шифровање'."
         }
       ],
       "approved_at": null
@@ -322,13 +326,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Sertifikati pružaoca usluga koji se koriste za potpisivanje i enkripciju zahteva i odgovora od pružaoca usluga' is a bit verbose and repetitive. The phrase 'od pružaoca usluga' is redundant as it is already established what the certificates belong to.",
-          "suggestion": "Sertifikati pružaoca usluga korišćeni za potpisivanje i enkriptovanje zahteva i odgovora."
-        },
-        {
-          "type": "formatting",
-          "description": "The translation uses a semi-colon, but a period would be more appropriate in this context.",
-          "suggestion": "Sertifikati pružaoca usluga korišćeni za potpisivanje i enkriptovanje zahteva i odgovora."
+          "description": "The translation \"Sertifikati pružaoca usluga koji se koriste za potpisivanje i enkripciju zahteva i odgovora od pružaoca usluga\" is somewhat redundant. The phrase 'od pružaoca usluga' repeats the 'pružaoca usluga'.  A more concise translation would improve clarity.",
+          "suggestion": "Sertifikati pružaoca usluga koji se koriste za potpisivanje i enkripciju zahteva i odgovora."
         }
       ],
       "approved_at": null
@@ -338,9 +337,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'şifrelemek' is correctly spelled but its usage in this context might benefit from a more accessible term.  While technically correct, it's a specialized term that might not be understood by all users.",
-          "suggestion": "SP'den gelen istekleri ve yanıtları imzalamak ve güvenliğini sağlamak için kullanılan Hizmet sağlayıcı sertifikaları"
+          "type": "incorrect_translation",
+          "description": "The translation 'SP'den gelen istekleri ve yanıtları imzalamak ve şifrelemek için kullanılan Hizmet sağlayıcı sertifikaları' is a literal translation that could be improved for clarity and flow in Turkish. The phrasing 'SP'den gelen' is slightly awkward.",
+          "suggestion": "Hizmet Sağlayıcı (SP) tarafından gönderilen istek ve yanıtları imzalamak ve şifrelemek için kullanılan sertifikalar."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, including 'Hizmet Sağlayıcı (SP)' clarifies the acronym for Turkish readers and is generally preferred.",
+          "suggestion": "Add the full term 'Hizmet Sağlayıcı (SP)' at least once for clarity."
         }
       ],
       "approved_at": null
@@ -350,14 +354,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The translation uses a lengthy sentence structure that could be simplified for better readability. While technically correct, it feels slightly cumbersome in Ukrainian.",
-          "suggestion": "Сертифікати постачальника сервісів, які використовуються для підпису та шифрування запитів та відповідей від СП."
-        },
-        {
           "type": "incorrect_translation",
-          "description": "While 'постачальника сервісу' is a valid translation of 'Service provider', in technical contexts, 'сервісний провайдер' might be more commonly used and sound more natural.",
-          "suggestion": "Сертифікати сервісного провайдера, які використовуються для підпису та шифрування запитів та відповідей від СП."
+          "description": "The term 'Service provider' is a bit clunky in the Ukrainian translation. While technically correct, it could be improved for readability and natural flow.  'Постачальник сервісу' is overly literal and less common than alternatives.",
+          "suggestion": "Consider alternatives like 'сервісний провайдер' or 'провайдер послуг' for a more natural Ukrainian phrasing.  A full rewrite to 'Сертифікати сервісного провайдера, які використовуються для підпису та шифрування запитів і відповідей від провайдера.'"
         }
       ],
       "approved_at": null
@@ -368,8 +367,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Service provider certificates' isn't perfectly captured by 'chứng chỉ nhà cung cấp dịch vụ'. A more accurate translation, especially in a technical context, might be 'chứng chỉ dịch vụ' or 'chứng chỉ của nhà cung cấp dịch vụ'.",
-          "suggestion": "chứng chỉ dịch vụ or chứng chỉ của nhà cung cấp dịch vụ"
+          "description": "The translation 'Chứng chỉ nhà cung cấp dịch vụ' is a literal translation of 'Service provider certificates' and while understandable, it's not the most natural phrasing in Vietnamese. 'Nhà cung cấp dịch vụ' is a bit clunky.  A more natural phrasing might involve using 'dịch vụ' as an adjective, or simply 'Chứng chỉ dịch vụ'.",
+          "suggestion": "Chứng chỉ dịch vụ"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'ký và mã hóa' is technically correct, but 'mã hóa' can be more specifically 'mã hóa dữ liệu'. While contextually acceptable here, it might be slightly less precise. The overall flow could be improved.",
+          "suggestion": "ký và mã hóa yêu cầu và phản hồi"
         }
       ],
       "approved_at": null
@@ -380,13 +384,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '用于对来自 SP 的请求和响应进行签名与加密的服务供应商证书' is a bit literal and could be improved for better flow and naturalness in Chinese. While technically correct, it's not the most elegant way to phrase it.",
-          "suggestion": "考虑使用更流畅的表达方式，例如：“用于对来自服务提供商 (SP) 的请求和响应进行签名和加密的证书。” or “服务提供商 (SP) 请求和响应的签名和加密所用的证书。”"
+          "description": "The translation is technically correct but lacks the nuance and clarity of the English original. \"用于对来自 SP 的请求和响应进行签名与加密的服务供应商证书\" is a bit verbose and doesn't flow as naturally as the English 'The Service provider certificates used to sign and encrypt the requests and responses from the SP'.  It prioritizes a literal translation which isn't always the best approach.",
+          "suggestion": "用于签名和加密来自 SP 的请求和响应的服务提供商证书"
         },
         {
           "type": "formatting",
-          "description": "Consider adding a space after the colon in 'SingleSignOn:spCertificatesTooltip' when providing the key name to the translator to improve readability.",
-          "suggestion": "Provide the key name as 'SingleSignOn: spCertificatesTooltip'."
+          "description": "While not a critical error, the use of '服务供应商' is less common than '服务提供商' in this context. It would be more consistent with industry terminology.",
+          "suggestion": "Replace '服务供应商' with '服务提供商'"
         }
       ],
       "approved_at": null

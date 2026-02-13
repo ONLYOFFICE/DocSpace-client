@@ -3,7 +3,7 @@
   "content": "Mail",
   "content_en_sha1_hash": "92379cbb8ecf696194b47b619a87e9e4f9a75db2",
   "created_at": "2025-05-19T21:30:54.238Z",
-  "updated_at": "2025-05-21T08:13:43.093Z",
+  "updated_at": "2025-08-11T18:11:59.237Z",
   "comment": {
     "text": "This translation key is used as the label for a field that allows users to specify mail addresses associated with LDAP integration. It appears in a form within the Portal Settings category of an application, typically prompting users to select or enter a mail address.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/AttributeMapping.js",
-      "line_number": 174,
-      "context": "style={FIELD_STYLE}\n isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.mail}\n labelText={t(\"LdapMail\")}\n isRequired\n >\n <LdapFieldComponent\n name={MAIL}\n hasError={errors.mail}",
+      "line_number": 181,
+      "context": "style={FIELD_STYLE}\n isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.mail}\n labelText={t(\"LdapMail\")}\n isRequired\n dataTestId=\"mail_field_container\"\n >\n <LdapFieldComponent\n name={MAIL}",
       "module": "/packages/client"
     }
   ],
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'E-Mail' is a common and acceptable translation for 'Mail', it's a loanword and can sometimes feel less natural depending on the context. 'Postfach' or 'Nachricht' might be more suitable depending on the specific function of 'Mail' in the application.",
-          "suggestion": "Consider 'Postfach' or 'Nachricht' as alternatives depending on context."
+          "description": "While 'E-Mail' is a common and acceptable translation for 'Mail' in German, it is a loanword. A more native German term might be considered depending on the context, though 'E-Mail' is widely understood. Given the key likely refers to a technical setting, 'E-Mail' is acceptable.",
+          "suggestion": null
         }
       ],
       "approved_at": null
@@ -75,13 +75,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Posti' can refer to mail, 'Ldap:LdapMail' likely refers to email functionality or configuration. 'Posti' is a more general term for postal mail and may not accurately convey the intended meaning.",
-          "suggestion": "Consider 'Sähköposti' which is the Finnish word for 'email'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -96,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation 'Էլ․հասցե' is a transliteration of 'E-mail' and not a direct translation of 'Mail'. While commonly understood, it's not the most accurate rendering of 'Mail' which can simply mean postal mail.",
-          "suggestion": "Consider 'դպչյալ' (dpc'yal) for a more direct translation of 'Mail' as postal mail. However, given the context of LDAP and email addresses, 'Էլ․հասցե' is acceptable but less precise."
+          "description": "The Armenian translation 'Էլ․հասցե' is a transliteration of 'E-mail' rather than a direct translation of 'Mail'. While understandable, it's not the most natural or common Armenian word for 'Mail'. A more accurate and common translation would be 'դեպոզիտ' (depozit) or 'անվամբեր' (anvamber), although the best choice might depend on the specific context.",
+          "suggestion": "Consider 'դեպոզիտ' (depozit) or 'անվամբեր' (anvamber) as alternatives, or clarify the context to determine the best translation."
         }
       ],
       "approved_at": null
@@ -126,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ບົດຕິ໋ງ' translates to 'configuration' or 'setting', not 'Mail'. This is an inaccurate translation of the English word 'Mail'.",
-          "suggestion": "The correct Lao translation for 'Mail' should be investigated. Options include 'ອີເມລ໌' (email) or a more descriptive phrase depending on the specific context. A more accurate translation is needed."
+          "description": "The Lao translation 'ບົດຕິ໋ງ' translates to 'setting' or 'configuration' rather than 'mail'. This is not an accurate translation of the English word 'Mail'.",
+          "suggestion": "The appropriate Lao translation for 'Mail' would likely be 'ອີເມລ໌' (email) or a more descriptive term depending on the context."
         }
       ],
       "approved_at": null
@@ -156,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Correspondência' can mean 'Mail', it's not the most common or direct translation in this context. 'Email' or 'Correio eletrônico' would be more appropriate for a technical setting like LDAP configuration.",
-          "suggestion": "Consider 'Email' or 'Correio eletrônico'."
+          "description": "The translation 'Correspondência' while technically meaning 'Correspondence,' isn't the most natural or common translation for 'Mail' in this context (likely referring to email). 'Email' or 'Correio Eletrónico' would be more appropriate.",
+          "suggestion": "Correio Eletrónico or Email"
         }
       ],
       "approved_at": null
@@ -168,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Correspondência' can mean 'Mail' in certain contexts, it's not the most common or direct translation for 'Mail' as a technical term related to LDAP. 'Email' or 'Correio Eletrônico' would be more appropriate.",
-          "suggestion": "Correio Eletrônico or Email"
+          "description": "While \"Correspondência\" can mean 'correspondence' or 'mail', it's not the most common or natural translation for 'Mail' in the context of LDAP configuration.  'Email' would be a more standard and accurate translation.",
+          "suggestion": "Email"
         }
       ],
       "approved_at": null
@@ -198,7 +192,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovak translation \"Pošta\" while meaning \"post office\", is not the common or most accurate translation for \"Mail\" in the context of LDAP configuration, which typically refers to email. A more accurate translation would be \"Email\" or \"Správa\" (message).",
+          "description": "While \"Pošta\" can mean \"mail\" in Slovak, in the context of LDAP configuration related to mail services, \"Email\" or a more specific term like \"Emailová služba\" would be a more accurate and understandable translation.",
           "suggestion": "Email"
         }
       ],
@@ -216,7 +210,7 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The Serbian (Cyrillic) translation 'Мејл' is a transliteration of 'Mail' and while common, it's not the most formal or accurate translation. The more standard/formal translation would be 'Пошта'.",
+          "description": "The Serbian (Cyrillic) translation 'Мејл' is a phonetic transcription of the English word 'Mail'. While understandable, a more standard and accurate translation would be 'Пошта'.",
           "suggestion": "Пошта"
         }
       ],
@@ -228,7 +222,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Mejl' is a colloquial term for 'Mail' in Serbian, it might not be appropriate for a technical context like LDAP configuration. 'Pošta' would be a more formal and universally understood translation.",
+          "description": "The translation 'Mejl' for 'Mail' is a colloquial and potentially dated term. While understood, it's not the standard or most accurate translation. A more appropriate translation would be 'Pošta'.",
           "suggestion": "Pošta"
         }
       ],

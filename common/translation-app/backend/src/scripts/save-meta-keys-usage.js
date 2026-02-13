@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -65,7 +65,8 @@ const getAllFiles = (dir) => {
         filePath.includes("campaigns") ||
         filePath.includes("storybook-static") ||
         filePath.includes("node_modules") ||
-        filePath.includes(".meta")
+        filePath.includes(".meta") ||
+        filePath.includes(".nx")
       ) {
         return null;
       }
@@ -78,9 +79,23 @@ const getAllFiles = (dir) => {
 };
 
 const convertPathToOS = (filePath) => {
-  return path.sep == "/"
-    ? filePath.replace("\\", "/")
-    : filePath.replace("/", "\\");
+  return path.normalize(filePath);
+};
+
+const sortUsageEntries = (usages = []) => {
+  return [...usages].sort((a, b) => {
+    const filePathCompare = a.file_path.localeCompare(b.file_path);
+    if (filePathCompare !== 0) return filePathCompare;
+
+    const moduleCompare = a.module.localeCompare(b.module);
+    if (moduleCompare !== 0) return moduleCompare;
+
+    if (a.line_number !== b.line_number) {
+      return a.line_number - b.line_number;
+    }
+
+    return a.context.localeCompare(b.context);
+  });
 };
 
 let workspaces = [];
@@ -287,10 +302,10 @@ javascripts.forEach(({ workspace, files }) => {
 
       // Create usage object with all the required information
       const usage = {
-        file_path: filePath.replace(BASE_DIR, ""),
+        file_path: filePath.replace(BASE_DIR, "").replace(/\\/g, "/"),
         line_number: lineNumber,
         context: codeFragment,
-        module: workspace.replace(BASE_DIR, ""),
+        module: workspace.replace(BASE_DIR, "").replace(/\\/g, "/"),
       };
 
       if (!usagesData[metaPath]) {
@@ -299,17 +314,16 @@ javascripts.forEach(({ workspace, files }) => {
 
       usagesData[metaPath].push(usage);
     });
-
-    const jsFile = {
-      path: filePath,
-      translationKeys: translationKeys,
-    };
-
-    javascriptFiles.push(jsFile);
   });
 });
 
-console.log(`Found javascriptFiles = ${javascriptFiles.length}.`);
+console.log(`Found usages = ${Object.keys(usagesData).length}.`);
+
+console.log(`Found parseJsonErrors = ${parseJsonErrors.length}.`);
+
+console.log(`Found translationFiles = ${translationFiles.length}.`);
+
+console.log(`Found javascripts = ${javascripts.length}.`);
 
 Object.entries(usagesData).forEach(([metaPath, usages]) => {
   try {
@@ -323,7 +337,17 @@ Object.entries(usagesData).forEach(([metaPath, usages]) => {
 
     const meta = JSON.parse(metaData);
 
-    meta.usage = usages;
+    const sortedUsages = sortUsageEntries(usages);
+    const existingSortedUsages = Array.isArray(meta.usage)
+      ? sortUsageEntries(meta.usage)
+      : [];
+
+    //todo: compare usages with meta.usage skip update if no changes
+    if (JSON.stringify(existingSortedUsages) === JSON.stringify(sortedUsages)) {
+      return;
+    }
+
+    meta.usage = sortedUsages;
     meta.updated_at = new Date().toISOString();
 
     writeJsonWithConsistentEolSync(metaPath, meta, { spaces: 2 });

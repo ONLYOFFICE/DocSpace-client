@@ -8,6 +8,8 @@
   "NeedSettings": "Trebuie să definiți setările",
   "NoPlugins": "Niciun plugin nu a fost adăugat",
   "NotNeedSettings": "Nu trebuie să definiți setările",
+  "PluginIsNotCompatible": "Versiunea SDK a pluginului nu se potrivește cu versiunea a {{productName}}. Vă rugăm să actualizați la o versiune compatibilă.",
+  "PluginLoadedSuccessfully": "Plugin-ul a fost încărcat cu succes.",
   "PluginSamples": "Exemple de plugin-uri",
   "PluginSDK": "Kit de dezvoltare a plugin-urilor",
   "PluginSDKDescription": "Cu ajutorul kit-ului de dezvoltare a pligin-urilor puteți extinde funcționalitatea spațiului {{productName}}, puteți conecta servicii terțe sau puteți îmbunătăți experiența utilizatorilor. Aici puteți găsi exemple de plugin-uri cu codul sursă disponibil pe GitHub. ",

@@ -1,7 +1,7 @@
 {
   "CancellaionNotification": "취소 알림을 다시 표시하지 않음",
   "DisplayFileExtension": "파일 이름 옆에 파일 확장자를 표시하세요",
-  "DisplayNotification": "항목을 휴지통에 넣을 때 알림 표시",
   "OpenSameTab": "같은 탭에서 {{organizationName}} 편집기를 여세요",
-  "OriginalCopy": "파일 복사본을 원본 형식으로도 저장"
+  "OriginalCopy": "파일 복사본을 원본 형식으로도 저장",
+  "TrashMoveConfirmation": "{{sectionName}}으로 아이템을 이동할 때 알림 표시"
 }

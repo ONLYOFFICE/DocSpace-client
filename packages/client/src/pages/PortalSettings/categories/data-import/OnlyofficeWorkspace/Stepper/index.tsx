@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,7 +30,8 @@ import { Text } from "@docspace/shared/components/text";
 import { HelpButton } from "@docspace/shared/components/help-button";
 
 import UserSolidIcon from "PUBLIC_DIR/images/icons/16/catalog.user.solid.react.svg?url";
-import SharedIcon from "PUBLIC_DIR/images/icons/16/catalog.old.share.react.svg?url";
+import SharedIcon from "PUBLIC_DIR/images/icons/16/catalog.shared.react.svg?url";
+import type { TFunction } from "i18next";
 import SelectFileStep from "../../components/SelectFileStep";
 import SelectUsersStep from "../../components/SelectUsersStep";
 import SelectUsersTypeStep from "../../components/SelectUsersTypeStep";
@@ -38,10 +39,8 @@ import ImportStep from "../../components/ImportStep";
 import ImportProcessingStep from "../../components/ImportProcessingStep";
 import ImportCompleteStep from "../../components/ImportCompleteStep";
 
-import { TFunciton } from "../../types";
-
 export const getStepsData = (
-  t: TFunciton,
+  t: TFunction,
   isTypeSelectEmpty: boolean,
   logoText: string,
 ) => {
@@ -74,7 +73,11 @@ export const getStepsData = (
       description: isTypeSelectEmpty ? (
         <>
           <b>{t("Settings:RolesAreSet")}</b>
-          <div>{t("Settings:UsersAreRegistered")}</div>
+          <div>
+            {t("Settings:UsersAreRegistered", {
+              productName: t("Common:ProductName"),
+            })}
+          </div>
         </>
       ) : (
         <>
@@ -114,6 +117,7 @@ export const getStepsData = (
               bottom: "-2px",
               margin: "0px 5px",
             }}
+            dataTestId="types_and_privileges_help_button"
           />
         </>
       ),
@@ -137,11 +141,7 @@ export const getStepsData = (
             name: t("Common:MyDocuments"),
             icon: UserSolidIcon,
           }}
-          sharedFilesExportDetails={{
-            name: t("Common:SharedWithMe"),
-            icon: SharedIcon,
-          }}
-          sharedFoldersExportDetails={{
+          sharedFilesAndFoldersExportDetails={{
             name: t("Common:SharedWithMe"),
             icon: SharedIcon,
           }}

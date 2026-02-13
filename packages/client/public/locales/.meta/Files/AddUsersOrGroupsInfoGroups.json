@@ -3,7 +3,7 @@
   "content": "Only <1>{{productName}}</1> and <1>Room admins</1> from the selected groups will be able to create rooms using this template.",
   "content_en_sha1_hash": "52d7251a5ba9f653029bd6363ccd951396dfadc6",
   "created_at": "2025-05-19T21:30:55.244Z",
-  "updated_at": "2025-05-20T09:40:12.264Z",
+  "updated_at": "2025-05-24T12:41:54.375Z",
   "comment": {
     "text": "This translation key is used to display a message indicating who can create rooms using a specific template. The message appears in a template access selector component and informs users about the restrictions on who can create rooms.",
     "is_auto": true,
@@ -27,13 +27,30 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"مسؤولو الغرف\" (mas'ooloo al-ghuraf) translates to 'Room officials' which isn't quite the meaning of 'Room admins'. 'Room admins' implies a more administrative role.",
+          "suggestion": "مسؤولو إدارة الغرف (mas'ooloo idarat al-ghuraf) - 'Room Management Officials' or مدراء الغرف (mudara' al-ghuraf) - 'Room Managers'."
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Azerbaijani translation retains the `<1>` and `<1>` tags from the English content. These tags should be removed from the final translation as they are likely placeholders for dynamic content and not part of the actual text.",
+          "suggestion": "Remove the `<1>` tags from the translation."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Otaq adminləri\" translates to \"Room admins\", a more natural phrasing in Azerbaijani might be \"Otaq administratorları\".",
+          "suggestion": "Change \"Otaq adminləri\" to \"Otaq administratorları\"."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -45,7 +62,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Czech translation maintains the <1> tags around \"{{productName}}\" and \"správci místností\", which is consistent with the English source. While technically correct, it is unusual to leave these tags in the final translated output. Consider removing them if they are not meant to be displayed in the UI.",
+          "suggestion": "Remove the <1> tags from the Czech translation if they are not necessary for the context of the UI. For example: \"Pomocí této šablony budou moci vytvářet místnosti pouze {{productName}} a správci místností z vybraných skupin.\""
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -57,19 +80,37 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Room admins' is translated as 'διαχειριστές δωματίων'. While technically correct, it's less clear and natural in Greek. A more appropriate translation would convey the meaning of administrators specifically managing rooms within the platform.",
+          "suggestion": "Consider a translation like 'διοικητές δωματίων' or 'διαχειριστές χώρου' which emphasizes the administrative role within the platform rather than simply 'room managers'."
+        }
+      ],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"administradores de salas\" is a literal translation of \"Room admins\" and might sound unnatural in Spanish. A more natural phrasing would be \"administradores de habitaciones\" or \"administradores de espacios\" depending on the context of 'room'.",
+          "suggestion": "Consider using \"administradores de habitaciones\" or \"administradores de espacios\" instead of \"administradores de salas\"."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Room admins\" is translated as \"Huoneen pääkäyttäjät\". While technically correct, \"Huoneen ylläpitäjät\" might be a more natural and commonly used term for room administrators in Finnish, especially in a technical context.",
+          "suggestion": "Replace \"Huoneen pääkäyttäjät\" with \"Huoneen ylläpitäjät\"."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,37 +122,78 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Room admins' is translated as 'սենյակների ադմինները'. While technically correct, it sounds less natural in Armenian. A more natural phrasing would be 'սենյակների վարչակազմը' (senyagneri varchakazmi) or 'սենյակների հոգսիչները' (senyagneri hogsičnery).",
+          "suggestion": "Consider using 'սենյակների վարչակազմը' or 'սենյակների հոգսիչները' for a more natural phrasing."
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Room admins' is translated as 'gli Amministratori della stanza'. While technically correct, it's less idiomatic and sounds awkward in Italian. A more natural translation would be 'amministratori delle stanze' or 'amministratori degli spazi'.",
+          "suggestion": "amministratori delle stanze"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'from the selected groups' is not accurately conveyed. The Japanese translation just says 'from the selected groups' without specifying that they *are* the selected groups.",
+          "suggestion": "選択されたグループのユーザーのみが、このテンプレートを使用してルームを作成できます。"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The Japanese translation implies that all users from the selected groups are room admins, which is likely not the intended meaning.",
+          "suggestion": "選択されたグループから{{productName}}の管理者およびルーム管理者が、このテンプレートを使用してルームを作成できます。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Korean translation retains the <1> tags from the English content, which is unnecessary and incorrect in Korean formatting.",
+          "suggestion": "Remove the <1> tags from the Korean translation.  It should read: \"선택한 그룹의 {{productName}} 및 룸 관리자만 이 템플릿을 사용하여 룸을 생성할 수 있습니다.\""
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Lao translation retains the English tags <1>{{productName}}</1> and <1>Room admins</1>. These tags are unnecessary and should be removed.",
+          "suggestion": "Remove the tags <1>{{productName}}</1> and <1>Room admins</1> from the Lao translation."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'Room admins' is translated as 'Telpas administratori'. While technically correct, a more natural and commonly used translation would be 'Telpu administratori'. The plural form is more appropriate given the context.",
+          "suggestion": "Telpu administratori"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -123,7 +205,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Only <1>{{productName}}</1> and <1>Room admins</1> from the selected groups...' is not perfectly mirrored. The Polish translation reverses the order, placing 'administratorzy pokoi' first. While understandable, maintaining the original English order might be preferable for consistency.",
+          "suggestion": "Tylko <1>{{productName}}</1> i <1>administratorzy pokoi</1> z wybranych grup będą w stanie tworzyć pokoje za pomocą tego szablonu."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -141,43 +229,105 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of 'Room admins' as 'Administratori de sală' is technically correct but sounds slightly awkward in Romanian. A more natural phrasing would be 'Administratorii de săli' or 'Administratori de camere'.",
+          "suggestion": "Consider 'Administratorii de săli' or 'Administratori de camere'."
+        },
+        {
+          "type": "formatting",
+          "description": "The Romanian translation maintains the same brackets (<1>...</1>) as the English original. While functional, these brackets aren't standard Romanian formatting and might be confusing for the reader. It's best to remove them if they don't serve a specific purpose in the final output.",
+          "suggestion": "Remove the brackets (<1>...</1>) from the translated text if not required for rendering or specific formatting."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Russian translation retains the <1> tags from the English content. These tags should ideally be removed or adapted to the Russian formatting conventions.",
+          "suggestion": "Remove or adapt the <1> tags. Consider if the tags are necessary for the application consuming the translated text. If not, simply remove them. If they are necessary, ensure the tags are compatible with the Russian system."
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Room admins\" is translated as \"කාමර පරිපාලකයන්\". While technically correct, it's quite literal and doesn't flow naturally in Sinhala.  A more natural phrasing would depend on the specific context, but something like \"කාමර කළමණාකරුවන්\" or a more specific role description might be better.",
+          "suggestion": "Consider alternatives like \"කාමර කළමණාකරුවන්\" or a role description appropriate for the target audience."
+        },
+        {
+          "type": "formatting",
+          "description": "The `<1>{{productName}}</1>` and `<1>Room admins</1>` tags are preserved in the Sinhala translation. While technically not an error, these tags should ideally be removed if they are intended only for processing in the original English context.",
+          "suggestion": "Remove the `<1>` tags if they are placeholders for processing and not meant to be visible in the final Sinhala output."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation of 'Room admins' is too literal. A more natural and idiomatic translation would be 'Správcovia miestností' or 'Správci miestností'.",
+          "suggestion": "Správcovia miestností"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Room admins' is translated as 'skrbniki sob'. While technically correct, a more natural translation for 'Room admins' in this context might be 'Skrbniki sob' (with capitalization to signify a role) or perhaps 'Administratorji sob', to better reflect the professional nature of the role.",
+          "suggestion": "Consider 'Skrbniki sob' or 'Administratorji sob'."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Room admins' is translated as 'администратори соба'. While technically correct, a more natural and common translation in Serbian would be 'администратори просторија' or 'администратори соба' (though the latter is slightly less formal). The current translation sounds somewhat awkward.",
+          "suggestion": "администратори просторија"
+        },
+        {
+          "type": "formatting",
+          "description": "The tags `<1>{{productName}}</1>` and `<1>Room admins</1>` are not correctly mirrored in the Serbian translation. While the opening tags `<1>` are present, the closing tags should be `</1>` consistently.",
+          "suggestion": "Ensure consistent closing tags mirroring the English content."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Room admins' is translated as 'administratori soba'. While technically correct, a more natural translation would be 'administratori prostorija' or 'administratori za prostorije'.",
+          "suggestion": "administratori prostorija"
+        },
+        {
+          "type": "formatting",
+          "description": "The brackets around 'Room admins' are inconsistent with the brackets around 'productName'.",
+          "suggestion": "Maintain consistent formatting, e.g., 'administratori soba'."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -189,19 +339,47 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Ukrainian translation incorrectly uses `<1>` tags to mark the placeholders. These tags are incorrect for Ukrainian translation workflows. The placeholders should be handled differently.",
+          "suggestion": "Review the translation workflow and ensure the placeholders are handled correctly. The `<1>` tags should be removed and the placeholders should be passed directly to the translation tool, or another appropriate method used."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The `<1>` tags are present in both the English and Vietnamese content. They are likely placeholders and should be reviewed by a developer to ensure they are handled correctly in the application.  While technically not an error in the translation itself, their presence necessitates verification.",
+          "suggestion": "Confirm that the `<1>` tags are intended and are handled correctly within the application's context. If they're just for display/extraction during translation, they could be removed."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Room admins\" is translated as \"Quản trị viên phòng\". While technically correct, a more natural-sounding Vietnamese phrasing might be \"Người quản lý phòng\" or \"Admin phòng\". \"Quản trị viên phòng\" is a more formal term.",
+          "suggestion": "Consider translating \"Room admins\" as \"Người quản lý phòng\" or \"Admin phòng\" for better readability and a more colloquial feel."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Only...will be able to\" is better translated as something more natural in Chinese. The current translation, while technically correct, sounds a bit awkward. \"可使用\" (can use) is too direct.",
+          "suggestion": "仅限于所选群组中的<1>{{productName}}</1>和<1>房间管理员</1>可以使用此模板创建房间。"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of <1> tags seems inconsistent. The English content contains them, and so does the Chinese translation. Ensure consistency with the original format or determine if the tags are needed in the Chinese version.",
+          "suggestion": "Consider removing the <1> tags from the Chinese translation if they are intended for specific processing and not for display."
+        }
+      ],
       "approved_at": null
     }
   }

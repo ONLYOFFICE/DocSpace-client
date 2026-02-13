@@ -8,6 +8,8 @@
   "NeedSettings": "Tarvitsee sisäänpääsyasetukset",
   "NoPlugins": "Ei liitännäisiä lisätty",
   "NotNeedSettings": "Tarvitsee sisäänpääsyasetukset",
+  "PluginIsNotCompatible": "Lisäosan SDK-versio ei täsmää {{productName}}-version kanssa. Päivitä yhteensopivaan versioon.",
+  "PluginLoadedSuccessfully": "Lisäosa ladattu onnistuneesti",
   "PluginSamples": "Laajennusmallit",
   "PluginSDK": "SDK-laajennus",
   "PluginSDKDescription": "Käyttämällä SDK-laajennusta voit laajentaa {{productName}}-n toiminnallisuutta, yhdistää kolmansien osapuolien palveluihin tai parantaa olemassaolevaa käyttäjäkokemusta. Täältä löydät GitHubissa saatavilla olevat laajennusmallit.",

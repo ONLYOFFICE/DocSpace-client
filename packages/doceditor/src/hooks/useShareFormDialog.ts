@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,9 +26,9 @@
 
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
-import useStartFillingSelectDialog from "./useStartFillingSelectDialog";
 import type { TFile } from "@docspace/shared/api/files/types";
 import { RoomsType } from "@docspace/shared/enums";
+import useStartFillingSelectDialog from "./useStartFillingSelectDialog";
 
 export const useShareFormDialog = (
   fileInfo: TFile | undefined,

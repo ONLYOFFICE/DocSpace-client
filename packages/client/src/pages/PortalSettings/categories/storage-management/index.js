@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,7 +27,6 @@
 import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import moment from "moment";
 
 import { SettingsStorageManagementSkeleton } from "@docspace/shared/skeletons/settings";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
@@ -40,17 +39,14 @@ import RegionComponent from "./Region";
 import { StyledBody } from "./StyledComponent";
 import StyledSettingsSeparator from "../../StyledSettingsSeparator";
 
-const StorageManagement = ({
-  isInit,
-  language,
-  init,
-  clearIntervalCheckRecalculate,
-  standalone,
-}) => {
-  useEffect(() => {
-    moment.locale(language);
-    init();
+const StorageManagementWrapper = (props) => {
+  const {
+    clearIntervalCheckRecalculate,
+    standalone,
+    showPortalSettingsLoader,
+  } = props;
 
+  useEffect(() => {
     return () => {
       clearIntervalCheckRecalculate();
     };
@@ -62,7 +58,7 @@ const StorageManagement = ({
     ready && setDocumentTitle(t("Settings:StorageManagement"));
   }, [ready]);
 
-  if (!ready || !isInit) return <SettingsStorageManagementSkeleton />;
+  if (showPortalSettingsLoader) return <SettingsStorageManagementSkeleton />;
 
   return (
     <StyledBody>
@@ -79,16 +75,15 @@ const StorageManagement = ({
 };
 
 export const Component = inject(
-  ({ authStore, storageManagement, settingsStore }) => {
-    const { language } = authStore;
-    const { init, isInit, clearIntervalCheckRecalculate } = storageManagement;
+  ({ storageManagement, settingsStore, clientLoadingStore }) => {
+    const { clearIntervalCheckRecalculate } = storageManagement;
     const { standalone } = settingsStore;
+    const { showPortalSettingsLoader } = clientLoadingStore;
+
     return {
-      isInit,
-      language,
-      init,
       clearIntervalCheckRecalculate,
       standalone,
+      showPortalSettingsLoader,
     };
   },
-)(observer(StorageManagement));
+)(observer(StorageManagementWrapper));

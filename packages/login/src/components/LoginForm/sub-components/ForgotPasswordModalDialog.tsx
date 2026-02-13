@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -38,17 +38,22 @@ import { FieldContainer } from "@docspace/shared/components/field-container";
 import { toastr } from "@docspace/shared/components/toast";
 import { sendInstructionsToChangePassword } from "@docspace/shared/api/people";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
-import { InputSize, InputType } from "@docspace/shared/components/text-input";
+import { InputSize } from "@docspace/shared/components/text-input";
 import { ButtonKeys } from "@docspace/shared/enums";
+import { useCaptcha } from "@docspace/shared/hooks/useCaptcha";
+import { useTheme } from "@docspace/shared/hooks/useTheme";
+import Captcha from "@docspace/shared/components/captcha";
 
-import { ForgotPasswordModalDialogProps } from "@/types";
+import { ForgotPasswordModalDialogProps, TError } from "@/types";
 
-import ModalDialogContainer from "../../ModalDialogContainer";
+import styles from "../../modal.module.scss";
 
 const ForgotPasswordModalDialog = ({
   isVisible,
   userEmail,
   onDialogClose,
+  reCaptchaPublicKey,
+  reCaptchaType,
 }: ForgotPasswordModalDialogProps) => {
   const [email, setEmail] = useState(userEmail ?? "");
   const [emailError, setEmailError] = useState(false);
@@ -57,9 +62,32 @@ const ForgotPasswordModalDialog = ({
   const [isShowError, setIsShowError] = useState(false);
 
   const { t } = useTranslation(["Login", "Common"]);
+  const { isBase } = useTheme();
+
+  const captcha = useCaptcha({
+    publicKey: reCaptchaPublicKey,
+    type: reCaptchaType,
+  });
+
+  React.useEffect(() => {
+    if (isVisible && reCaptchaPublicKey) {
+      captcha.request();
+    } else if (!isVisible) {
+      captcha.dismiss();
+      setEmailError(false);
+      setIsShowError(false);
+      setErrorText("");
+    }
+  }, [isVisible, reCaptchaPublicKey, captcha.request, captcha.dismiss]);
+
+  React.useEffect(() => {
+    return () => {
+      captcha.dismiss();
+    };
+  }, [captcha.dismiss]);
 
   const onChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
-    //console.log("onChangeEmail", event.target.value);
+    // console.log("onChangeEmail", event.target.value);
     setEmail(event.target.value);
     setEmailError(false);
     setIsShowError(false);
@@ -70,18 +98,64 @@ const ForgotPasswordModalDialog = ({
       setEmailError(true);
       setIsShowError(true);
     } else {
+      const captchaValidation = captcha.validate();
+      if (!captchaValidation.isValid) {
+        return;
+      }
+
+      const captchaToken = captchaValidation.token;
+
       setIsLoading(true);
 
       try {
-        const res = (await sendInstructionsToChangePassword(email)) as string;
+        const res = (await sendInstructionsToChangePassword(
+          email,
+          captchaToken,
+          reCaptchaType,
+        )) as string;
         toastr.success(res);
-      } catch (e) {
-        toastr.error(e as string);
-      } finally {
         onDialogClose();
+      } catch (e) {
+        const error = e as TError;
+
+        let errorMessage = "";
+        if (typeof error === "object") {
+          errorMessage =
+            error?.response?.data?.error?.message ||
+            error?.statusText ||
+            error?.message ||
+            "";
+        } else if (typeof error === "string") {
+          errorMessage = error;
+        }
+
+        if (errorMessage) {
+          toastr.error(errorMessage);
+        }
+
+        const status =
+          typeof error === "object" ? error?.response?.status : undefined;
+
+        if (reCaptchaPublicKey && status === 403) {
+          captcha.request();
+        } else if (captcha.isVisible) {
+          captcha.reset();
+        }
+      } finally {
+        setIsLoading(false);
       }
     }
-  }, [email, emailError, onDialogClose]);
+  }, [
+    email,
+    emailError,
+    captcha.validate,
+    captcha.request,
+    captcha.reset,
+    captcha.isVisible,
+    onDialogClose,
+    reCaptchaPublicKey,
+    reCaptchaType,
+  ]);
 
   const onKeyDown = React.useCallback(
     (e: KeyboardEvent) => {
@@ -121,29 +195,29 @@ const ForgotPasswordModalDialog = ({
     >
       <ModalDialog.Header>{t("PasswordRecoveryTitle")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <ModalDialogContainer>
+        <div className={styles.modalContainer}>
           <Text
             key="text-body"
             className="text-body"
             isBold={false}
             fontSize="13px"
-            noSelect
           >
             {t("MessageSendPasswordRecoveryInstructionsOnEmail")}
           </Text>
 
           <FieldContainer
-            className="email-reg-field"
+            className={styles.emailRegField}
             key="e-mail"
             isVertical
-            hasError={isShowError && emailError}
+            hasError={isShowError ? emailError : undefined}
             labelVisible={false}
             errorMessage={
               errorText ? t(`Common:${errorText}`) : t("Common:RequiredField")
             }
+            dataTestId="email_input_field"
           >
             <EmailInput
-              hasError={isShowError && emailError}
+              hasError={isShowError ? emailError : undefined}
               placeholder={t("Common:RegistrationEmail")}
               isAutoFocussed
               id="forgot-password-modal_email"
@@ -158,7 +232,21 @@ const ForgotPasswordModalDialog = ({
               onBlur={onBlurEmail}
             />
           </FieldContainer>
-        </ModalDialogContainer>
+          {captcha.shouldRender ? (
+            <Captcha
+              key="forgot-password-captcha"
+              id="forgot-password-captcha-widget"
+              type={captcha.captchaType}
+              publicKey={reCaptchaPublicKey}
+              themeMode={isBase ? "light" : "dark"}
+              visible={captcha.isVisible}
+              hasError={captcha.isError}
+              errorText={t("Errors:LoginWithBruteForceCaptcha")}
+              onTokenChange={captcha.onTokenChange}
+              resetSignal={captcha.resetSignal}
+            />
+          ) : null}
+        </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -175,6 +263,7 @@ const ForgotPasswordModalDialog = ({
           isLoading={isLoading}
           isDisabled={isLoading}
           tabIndex={2}
+          testId="forgot_password_send_button"
         />
         <Button
           id="forgot-password-modal_cancel"
@@ -188,6 +277,7 @@ const ForgotPasswordModalDialog = ({
           // isLoading={isLoading}
           isDisabled={isLoading}
           tabIndex={2}
+          testId="forgot_password_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

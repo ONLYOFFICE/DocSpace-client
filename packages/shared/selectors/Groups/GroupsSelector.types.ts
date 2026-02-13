@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,18 +27,20 @@
 import {
   TAccessRight,
   TSelectorHeader,
+  TSelectorWithAside,
 } from "../../components/selector/Selector.types";
 import { TSelectorItem } from "../../components/selector";
 
-export type GroupsSelectorProps = TSelectorHeader & {
-  id?: string;
-  className?: string;
-  onSubmit: (
-    selectedItems: TSelectorItem[],
-    access?: TAccessRight | null,
-    fileName?: string,
-    isFooterCheckboxChecked?: boolean,
-  ) => void | Promise<void>;
-};
+export type GroupsSelectorProps = TSelectorHeader &
+  TSelectorWithAside & {
+    id?: string;
+    className?: string;
+    onSubmit: (
+      selectedItems: TSelectorItem[],
+      access?: TAccessRight | null,
+      fileName?: string,
+      isFooterCheckboxChecked?: boolean,
+    ) => void | Promise<void>;
+  };
 
 export type GroupsSelectorItem = Pick<TSelectorItem, "id" | "label">;

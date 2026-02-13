@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,9 +29,9 @@ import React from "react";
 import { SectionFooterProps } from "../Section.types";
 import styles from "../Section.module.scss";
 
-const SectionFooter = ({ children }: SectionFooterProps) => {
+const SectionFooter = React.memo(({ children }: SectionFooterProps) => {
   return <div className={styles.footer}>{children}</div>;
-};
+});
 
 SectionFooter.displayName = "SectionFooter";
 

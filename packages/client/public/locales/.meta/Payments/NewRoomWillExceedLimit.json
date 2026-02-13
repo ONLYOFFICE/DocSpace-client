@@ -3,7 +3,7 @@
   "content": "Creating this room is not possible since the limit is reached for the number of rooms included in your current plan.",
   "content_en_sha1_hash": "a04a1156e2e2826b884b0b81d56586ced44b5f15",
   "created_at": "2025-05-19T21:30:53.704Z",
-  "updated_at": "2025-05-21T06:33:48.483Z",
+  "updated_at": "2025-05-24T06:48:15.205Z",
   "comment": {
     "text": "This translation key is used to display a message when creating a new room exceeds the limit of rooms included in a user's current plan. It appears as part of an alert dialog warning the user that their plan has reached its room capacity. The message aims to inform users of this constraint and encourage them to choose a new plan if needed.",
     "is_auto": true,
@@ -155,44 +155,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'සීමාව' (seemawa) is a valid Sinhala word and is correctly used to mean 'limit'.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'කර ඇති' (kara athi) is a valid Sinhala phrase and means 'has been included'.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'නිර්මාණය කිරීමේ' (nirmanayakrine) is a valid Sinhala word and means 'creating'.",
-          "suggestion": null
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence structure is grammatically correct, maintaining a natural flow in Sinhala.",
-          "suggestion": null
-        },
-        {
-          "type": "missing_content",
-          "description": "The translation accurately conveys the meaning of the original English content.",
-          "suggestion": null
-        },
-        {
           "type": "incorrect_translation",
-          "description": "The translation appears to accurately convey the meaning of the English phrase.",
-          "suggestion": null
+          "description": "The translation is accurate in conveying the meaning, but could be slightly more natural sounding in Sinhala. The phrasing 'මෙම කාමරය නිර්මාණය කිරීමේ හැකියාවක් නැත' (this room cannot be created) feels a bit formal.",
+          "suggestion": "ඔබේ වත්මන් සැලැස්මේ කාමර සංඛ්‍යාව අවමحدිතය. එම නිසා මෙම කාමරය නිර්මාණය කිරීමට නොහැකිය."
         },
         {
           "type": "formatting",
-          "description": "The punctuation is appropriately used and the sentence is well-structured.",
-          "suggestion": null
-        },
-        {
-          "type": "cultural",
-          "description": "The language used is appropriate for a formal and technical context, such as a software application.",
-          "suggestion": null
+          "description": "The translation includes a somewhat long sentence. Breaking it into two sentences might improve readability.",
+          "suggestion": "ඔබේ වත්මන් සැලැස්මේ ඇතුළත් කර ඇති කාමර සංඛ්‍යාව සඳහා සීමාව ළඟා වී ඇත. එම නිසා මෙම කාමරය නිර්මාණය කිරීමට හැකියාවක් නැත."
         }
       ],
       "approved_at": null
@@ -206,18 +176,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Ustvarjanje te sobe ni mogoče, ker je dosežena omejitev števila sob, ki je določena za vaš trenutni tarifni načrt.\" is a bit too formal and verbose for a user-facing message. The phrase 'ki je določena za vaš trenutni tarifni načrt' (which is specified for your current plan) adds unnecessary complexity.",
-          "suggestion": "Ustvarjanje te sobe ni mogoče, ker ste dosegli/dosegle dovoljeno število sob v vašem načrtu."
-        },
-        {
-          "type": "formatting",
-          "description": "The use of formal language 'dosežena omejitev' might not be the most user-friendly option. Consider using a more conversational tone.",
-          "suggestion": "Consider alternatives like 'dosegli ste mejo' or 'dosegli ste največji možiti števil'. This depends on brand voice but generally a more casual wording is preferred."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -226,8 +185,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'просторије' (prostorije) is used throughout. While technically correct, 'собе' (sobe - rooms) might be a more natural and common choice in this context for a user-facing message.",
-          "suggestion": "Consider using 'собе' (sobe) instead of 'просторије' (prostorije)."
+          "description": "The word 'просторије' is technically correct but can sound a bit formal or archaic in this context. 'Соби' would be a more natural and commonly used term for 'rooms' in this situation.",
+          "suggestion": "Креирање ове собе није могуће јер је достигнут лимит за број соба укључених у ваш тренутни план."
         }
       ],
       "approved_at": null
@@ -262,8 +221,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '由于当前费用版本的房间数量已达上限，因此无法创建该房间' is a bit verbose and formal for the English 'Creating this room is not possible since the limit is reached for the number of rooms included in your current plan.'. A more natural and concise translation would be better.",
-          "suggestion": "由于您的套餐房间数量已达上限，无法创建此房间。"
+          "description": "The translation '由于当前费用版本的房间数量已达上限' is a bit too formal and technical for a user-facing error message. '费用版本' (fee version) is not a typical term users understand. A simpler phrasing would be more user-friendly.",
+          "suggestion": "由于您当前的套餐已达到房间数量上限，因此无法创建该房间。"
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure is slightly clunky. While grammatically correct, it could flow better.",
+          "suggestion": "由于您当前的套餐已达到房间数量上限，因此无法创建该房间。"
         }
       ],
       "approved_at": null

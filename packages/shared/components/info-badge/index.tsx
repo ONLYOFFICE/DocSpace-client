@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -43,28 +43,46 @@ const InfoBadge: FC<InfoBadgeProps> = ({
   place = "bottom",
   tooltipDescription,
   tooltipTitle,
+  dataTestId,
 }) => {
   const id = useId();
 
   const tooltipRef = useRef<TooltipRefProps>(null);
 
-  const onClose = useCallback(() => {
+  const onClose = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
     tooltipRef.current?.close();
   }, []);
 
+  const isSimpleContent =
+    typeof tooltipTitle === "string" && typeof tooltipDescription === "string";
+
+  const tooltipHtmlContent = isSimpleContent
+    ? `<div style="max-width: 300px;">
+         <div style="font-weight: 600; margin-bottom: 8px;">${tooltipTitle}</div>
+         <div>${tooltipDescription}</div>
+       </div>`
+    : null;
+
   return (
-    <div data-testid="info-badge">
+    <div data-testid={dataTestId ?? "info-badge"}>
       <Badge
         noHover
         fontSize="9px"
         isHovered={false}
         borderRadius="50px"
         label={label}
-        data-tooltip-id={id}
+        data-tooltip-id={isSimpleContent ? "info-tooltip" : id}
+        {...(isSimpleContent && tooltipHtmlContent
+          ? {
+              "data-tooltip-html": tooltipHtmlContent,
+              "data-tooltip-place": place,
+            }
+          : {})}
         backgroundColor={globalColors.mainPurple}
       />
 
-      {tooltipDescription && tooltipTitle ? (
+      {!isSimpleContent && tooltipDescription && tooltipTitle ? (
         <Tooltip
           id={id}
           ref={tooltipRef}
@@ -82,6 +100,7 @@ const InfoBadge: FC<InfoBadgeProps> = ({
                 {tooltipTitle}
               </h3>
               <IconButton
+                data-testid="close-tooltip-button"
                 isFill
                 size={16}
                 onClick={onClose}

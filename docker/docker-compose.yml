@@ -6,9 +6,10 @@ services:
     container_name: onlyoffice-frontend
     ports:
       - "5001:5001" # Client
-      - "5011:5011" # Management
-      - "5013:5013" # Login
-      - "5015:5015" # DocEditor
+      - "5011:5011" # Login
+      - "5013:5013" # DocEditor
+      - "5015:5015" # Management
+      - "5099:5099" # SDK
     environment:
       - NODE_ENV=production
     restart: unless-stopped
@@ -16,4 +17,4 @@ services:
 networks:
   default:
     name: onlyoffice
-    external: true
+    external: false

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,7 +29,11 @@ type PickedDivProps = Pick<
   "className" | "id" | "style"
 >;
 
-type HeaderIcon = { key: string; url: string; onClick: () => void };
+type HeaderIcon = {
+  key: string;
+  url: string;
+  onClick: () => void;
+};
 
 export type AsideHeaderProps = PickedDivProps & {
   /** Header content - can be a string or a ReactNode */
@@ -52,4 +56,5 @@ export type AsideHeaderProps = PickedDivProps & {
   isBackButton?: boolean;
   /** Click handler for the back button */
   onBackClick?: () => void;
+  dataTestId?: string;
 };

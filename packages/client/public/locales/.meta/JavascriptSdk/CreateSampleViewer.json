@@ -3,7 +3,7 @@
   "content": "Create sample Viewer embed",
   "content_en_sha1_hash": "77e46f467ad0af7310c64afe014ff7ce67b032fe",
   "created_at": "2025-05-19T21:30:54.408Z",
-  "updated_at": "2025-05-21T09:23:24.876Z",
+  "updated_at": "2025-08-04T07:30:01.400Z",
   "comment": {
     "text": "This translation key is used for the \"Create Sample Viewer\" button header in the Developer Tools category of Portal Settings. It provides a title for a preset that allows users to embed sample viewers.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Viewer.js",
       "line_number": 182,
-      "context": ");\n \n return (\n <PresetWrapper\n description={t(\"ViewerDescription\")}\n header={t(\"CreateSampleViewer\")}\n >\n <Container>\n <PreviewBlock\n t={t}\n loadCurrentFrame={initFrame}",
+      "context": ");\n \n return (\n <PresetWrapper\n description={t(\"ViewerDescription\")}\n header={t(\"CreateSampleViewer\")}\n >\n <Container>\n <PreviewBlock\n loadCurrentFrame={initFrame}\n preview={preview}",
       "module": "/packages/client"
     }
   ],
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While the translation is understandable, \"قم بإنشاء نموذج تضمين للعارض\" is a somewhat literal and slightly awkward translation of \"Create sample Viewer embed.\" A more natural phrasing might be preferable.",
-          "suggestion": "Consider a more fluent translation like \"إنشاء معاينة للعرض\" or \"إنشاء عرض تجريبي\"."
+          "description": "The translation 'قم بإنشاء نموذج تضمين للعارض' while understandable, doesn't perfectly capture the meaning of 'Create sample Viewer embed'.  'نموذج تضمين للعارض' is a bit literal. A more natural phrasing might emphasize creating a *sample* Viewer itself, rather than just embedding one.",
+          "suggestion": "قم بإنشاء عارض نموذج (Qum bi inshaa' 'aareD namouthaj) - This translates to 'Create a sample Viewer'."
         }
       ],
       "approved_at": null
@@ -42,13 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'İzləyici yerləşdirmə nümunəsi yaradın' is a literal translation but doesn't fully capture the meaning of 'Create sample Viewer embed'. It's a bit clunky and not how a native speaker would naturally phrase it. 'Embed' isn't directly translated.",
-          "suggestion": "Consider a more natural phrasing such as 'Viewer nümunəsinin yerləşdirilməsi' or 'Viewer yerləşdirmə nümunəsi hazırlayın'."
-        },
-        {
-          "type": "formatting",
-          "description": "The translation uses a verb in the imperative mood ('yaratın'). While grammatically correct, the context of a software label or button might benefit from a noun phrase or a more descriptive term.",
-          "suggestion": "Consider 'Viewer yerləşdirmə nümunəsi' (Sample Viewer embed) or 'Viewer nümunə yerləşdirməsi' "
+          "description": "The translation 'İzləyici yerləşdirmə nümunəsi yaradın' while technically understandable, doesn't convey the concise meaning of 'Create sample Viewer embed'. It's a bit too literal and wordy. 'İzləyici' means viewer, 'yerləşdirmə' means embedding, and 'nümunəsi' means sample. A more natural phrasing would better capture the intended meaning.",
+          "suggestion": "Consider alternatives like 'Viewer nümunəsi yerləşdirməsi yarat' or 'Viewer təqdimatı üçün nümunə yerləşdirməsi yaradın'."
         }
       ],
       "approved_at": null
@@ -56,7 +51,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Създайте примерно вграждане за Viewer' is not ideal. 'примерно' translates to 'sample' or 'example', but 'вграждане' is a more general term for 'embed.' A more accurate translation would focus on the action of creating an embed.",
+          "suggestion": "Създайте демонстрационно вграждане за Viewer"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -65,13 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Vytvoření vzorku vložení prohlížeče' is too literal and doesn't convey the intended meaning of 'Create sample Viewer embed' effectively. 'Vložení prohlížeče' sounds awkward.",
-          "suggestion": "Consider a more natural phrasing like 'Vytvoření ukázkového prohlížeče' or 'Vytvoření ukázky prohlížeče'."
-        },
-        {
-          "type": "formatting",
-          "description": "The translation uses a compound noun 'vložení prohlížeče' which can sound clunky. Breaking it up might improve readability.",
-          "suggestion": "Consider restructuring the phrase to improve flow, possibly by using a prepositional phrase or different verb choice."
+          "description": "The translation 'Vytvoření vzorku vložení prohlížeče' is a literal translation and doesn't quite capture the meaning of 'Create sample Viewer embed'. It sounds technical and slightly awkward in Czech. A more natural phrasing would be more like 'Vytvoření ukázkového prohlížeče' or 'Vytvoření ukázkového vloženého prohlížeče'.",
+          "suggestion": "Vytvoření ukázkového prohlížeče"
         }
       ],
       "approved_at": null
@@ -88,13 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Δημιουργία δείγματος ενσωμάτωσης Προγράμματος προβολής\" is a bit literal and could be more natural. 'Viewer' is often just referred to as 'Προβολή' in Greek in this context.",
-          "suggestion": "Δημιουργία δείγματος ενσωμάτωσης Προβολής"
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the capitalization of 'Προγράμματος προβολής' might be better as 'Προβολής' for consistency and flow, as 'Προβολή' often doesn't require that level of capitalization.",
-          "suggestion": "Δημιουργία δείγματος ενσωμάτωσης Προβολής"
+          "description": "The translation \"Δημιουργία δείγματος ενσωμάτωσης Προγράμματος προβολής\" is a literal translation but sounds slightly awkward in Greek. A more natural phrasing would be something along the lines of \"Δημιουργία ενσωματωμένου δείγματος προβολέα\" or \"Ενσωμάτωση δείγματος προβολέα\".",
+          "suggestion": "Δημιουργία ενσωματωμένου δείγματος προβολέα"
         }
       ],
       "approved_at": null
@@ -105,7 +96,12 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Crear ejemplo de la incrustación del visor' is not the most natural or accurate translation of 'Create sample Viewer embed'. 'Incrustación' refers to an embedding or inset, which isn't precisely what's meant here. A better translation would convey the creation of a sample viewer instance or display.",
+          "description": "The translation 'Crear ejemplo de la incrustación del visor' is not the most natural or accurate rendering of 'Create sample Viewer embed'. 'Incrustación' refers more to the embedding itself, not the viewer. A better translation would focus on creating a sample viewer.",
+          "suggestion": "Crear visor de ejemplo"
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'del visor' could be improved for flow. It's a bit clunky.",
           "suggestion": "Crear visor de ejemplo"
         }
       ],
@@ -114,18 +110,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Luo esimerkki Katselija-upotuksesta' is a literal translation that doesn't flow naturally in Finnish. 'Katselija-upotuksesta' is a bit awkward.",
-          "suggestion": "Luo esimerkkikatselija"
-        },
-        {
-          "type": "formatting",
-          "description": "The translation uses a hyphenated compound word 'Katselija-upotuksesta', which is grammatically correct but could potentially be simplified for better readability.",
-          "suggestion": "Consider rephrasing to avoid the hyphenated compound if possible, while maintaining accuracy."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -140,8 +125,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Ստեղծեք դիտողի ներկառուցման նմուշ\" is a literal translation of 'Create sample Viewer embed'. A more natural Armenian phrasing would be 'Ստեղծեք դիտողի նմուշային ներկառուցում' or 'Ստեղծեք դիտողի նմուշ ներկառուցում'. 'Ներկառուցման' is grammatically correct but sounds less idiomatic.",
-          "suggestion": "Ստեղծեք դիտողի նմուշային ներկառուցում"
+          "description": "The translation 'Ստեղծեք դիտողի ներկառուցման նմուշ' (Stegecek ditogi nerkarcutzman numush) is not the most natural or accurate translation of 'Create sample Viewer embed'. 'Ներկառուցման' (nerkarcutzman) implies 'embedded' but a more direct and common translation for 'embed' might be something like 'ներմուծում' (nermudzum) or a rephrasing to convey the meaning.",
+          "suggestion": "Consider 'Ստեղծեք դիտողի նմուշներ ներմուծելու համար' (Stegecek ditogi numushner nermudzelu hamar) or 'Ստեղծեք դիտողի նմուշի ներմուծում' (Stegecek ditogi numoshi nermudzum) or a simpler rephrasing depending on the intended context."
         }
       ],
       "approved_at": null
@@ -152,12 +137,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Crea un campione di incorporamento del Visualizzatore' is not the most natural or accurate rendering of 'Create sample Viewer embed'. 'Incorporamento' is a technical term that might not be easily understood. A more natural translation would focus on the viewer itself.",
-          "suggestion": "Crea un visualizzatore di esempio"
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the phrase 'del Visualizzatore' feels slightly clunky. Using the definite article 'del' may not be the best choice.",
+          "description": "The translation 'Crea un campione di incorporamento del Visualizzatore' is not the most natural or accurate translation of 'Create sample Viewer embed'. 'Incorporamento' is a more formal term than might be necessary. A more user-friendly translation might focus on the purpose of the embed.",
           "suggestion": "Crea un visualizzatore di esempio"
         }
       ],
@@ -172,19 +152,19 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '샘플 뷰어 임베드 생성' is technically correct but could be more natural. '임베드 생성' feels a bit clunky. A more natural phrasing would incorporate '만들기' or '구현하기'.",
+          "suggestion": "샘플 뷰어 임베드 만들기"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'ຕົວຢ່າງ' (tua yang) is spelled correctly, but a more natural phrasing might be considered depending on context. While technically accurate, it's a bit literal.",
-          "suggestion": "Consider 'ຕົວເບິ່ງຕົວຢ່າງ' (tua beng tua yang) for a slightly more idiomatic feel, although 'ຕົວຢ່າງການຝັງຕົວເບິ່ງ' is understandable."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -193,13 +173,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Izveidot skatītāja iegulšanas paraugu\" is a bit literal and could be improved for naturalness. 'Embed' is not directly translatable; a better phrasing is needed.",
-          "suggestion": "Izveidot skatītāja parauga demonstrāciju"
-        },
-        {
-          "type": "formatting",
-          "description": "The phrase 'iegulšanas paraugu' could be more flowing. Consider restructuring the sentence for better readability.",
-          "suggestion": "Izveidot skatītāja parauga iegulšanu"
+          "description": "The translation \"Izveidot skatītāja iegulšanas paraugu\" is a bit literal and could be improved for naturalness. 'Embed' doesn't translate directly to 'iegulšanas' in this context. A more natural phrasing would be something like 'Izveidot skatītāja parauga iekšējumu'.",
+          "suggestion": "Izveidot skatītāja parauga iekšējumu"
         }
       ],
       "approved_at": null
@@ -216,8 +191,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Utwórz próbne osadzenie Przeglądarki' is not the most natural or accurate rendering of 'Create sample Viewer embed'. 'Przeglądarki' is the genitive case, implying the embed *belongs to* the Viewer, rather than being *a* Viewer.  A better translation would convey the creation of a Viewer instance or a preview of a Viewer.",
-          "suggestion": "Utwórz przykładowy widok / Utwórz demo przeglądarki / Utwórz przykładowe okno przeglądarki"
+          "description": "The translation \"Utwórz próbne osadzenie Przeglądarki\" is not the most natural or accurate translation of \"Create sample Viewer embed\".  'Przeglądarki' is the genitive case of 'Przeglądarka' (Viewer), suggesting the embedding is *of* a Viewer, rather than a Viewer embed.",
+          "suggestion": "Utwórz próbkowy widok w osadzeniu"
         }
       ],
       "approved_at": null
@@ -225,7 +200,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'incorporação' while technically correct for 'embed,' sounds a bit formal and less natural in this context. A more conversational and common translation would be 'visor' or 'visualização'.",
+          "suggestion": "Criar exemplo de visualização do visualizador"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -240,13 +221,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Creare exemplu Vizualizator pentru încorporare' is somewhat literal and doesn't flow naturally in Romanian. 'Vizualizator' is technically correct, but 'viewer' often implies a more interactive experience. A more natural translation might focus on the functionality.",
-          "suggestion": "Creează un vizualizator de exemplu (pentru integrare)"
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the phrasing 'pentru încorporare' feels a bit clunky and could be made more concise.",
-          "suggestion": "Creează un vizualizator de exemplu (pentru integrare)"
+          "description": "The translation 'Creare exemplu Vizualizator pentru încorporare' is a literal translation that doesn't quite capture the natural flow of the English phrase 'Create sample Viewer embed'. A more natural Romanian phrasing would better convey the original meaning.",
+          "suggestion": "Crearea unui Vizualizator de probă pentru încorporare"
         }
       ],
       "approved_at": null
@@ -257,13 +233,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Создать образец встраивания Просмотрщика' is a bit literal and doesn't flow naturally. 'Встраивания' is clunky.  'Просмотрщик' directly translates 'Viewer' but sounds unnatural in this context.",
-          "suggestion": "Consider a more natural phrasing like 'Создать демонстрационный Viewer' or 'Создать пример Viewer' or 'Создать Viewer для примера'."
-        },
-        {
-          "type": "formatting",
-          "description": "The capitalization of 'Просмотрщик' is unusual. It should likely match the capitalization of the original 'Viewer'.",
-          "suggestion": "Change 'Просмотрщик' to 'просмотрщик'."
+          "description": "The translation \"Создать образец встраивания Просмотрщика\" is a literal translation and doesn't convey the meaning of 'Create sample Viewer embed' naturally in Russian. 'Embed' is a technical term and might require a more specific translation or explanation.",
+          "suggestion": "Consider alternatives like \"Создать демонстрационный просмотрщик\" (Create demonstrative Viewer) or \"Создать пример встраивания просмотрщика\" (Create example of Viewer embed), depending on the desired nuance."
         }
       ],
       "approved_at": null
@@ -274,8 +245,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'කාවද්දන ආදර්ශ නරඹනයක් සාදන්න' doesn't perfectly capture the meaning of 'Create sample Viewer embed'. 'කාවද්දන' (kawaddana) implies 'to show' or 'to display' rather than 'create'. The focus is on the creation aspect of the English phrase.",
-          "suggestion": "සාදන්න ආදර්ශ නරඹනයක් (saadanna aadarsya narambanayak) - This more directly translates to 'Create a sample Viewer'."
+          "description": "The translation 'කාවද්දන ආදර්ශ නරඹනයක් සාදන්න' while literally meaning 'Create a captivating sample viewer', doesn't fully capture the concise meaning of 'Create sample Viewer embed'.  'කාවද්දන' (captivating) adds a connotation not present in the English phrase. A more accurate translation focusing on 'creation' and 'embedding' would be preferable.",
+          "suggestion": "සාදන්න ආදර්ශ නරඹනයක් (Saadanna aadarsya narambanayak) - Create a sample viewer"
         }
       ],
       "approved_at": null
@@ -286,13 +257,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Vytvoriť vzor vloženia pre Viewer' doesn't fully capture the meaning of 'Create sample Viewer embed'. 'Vloženia' is a bit awkward; 'embed' is a specific type of inclusion. A better translation would convey the purpose of creating a sample embed.",
+          "description": "The translation 'Vytvoriť vzor vloženia pre Viewer' doesn't fully capture the meaning of 'Create sample Viewer embed'. 'Vloženia' translates to 'insertion', but 'embed' has a more specific meaning related to integrating something into a webpage. A more accurate translation would incorporate this nuance.",
           "suggestion": "Vytvoriť ukážkový embed pre Viewer"
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, using a more colloquial term like 'embed' maintains consistency with English terminology often used in technical contexts.",
-          "suggestion": "Consider retaining 'embed' as is."
         }
       ],
       "approved_at": null
@@ -309,13 +275,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Направи пример уградње Прегледача\" doesn't accurately convey the meaning of \"Create sample Viewer embed\". \"Уградње\" implies installation, while \"embed\" refers to integrating a viewer within a larger context.  A more accurate translation would focus on displaying or demonstrating the viewer.",
-          "suggestion": "Направи демонстрацију Прегледача"
-        },
-        {
-          "type": "spelling",
-          "description": "While technically correct, 'Прегледача' could be more consistently written as 'Прегледaчa' to adhere more strictly to standard Serbian grammar (genitive case).  The difference is subtle, but consistency is important.",
-          "suggestion": "Направи демонстрацију Прегледaчa"
+          "description": "The Serbian translation 'Направи пример уградње Прегледача' doesn't accurately convey the meaning of 'Create sample Viewer embed'.  'Уградње' (ugradnje) implies installation or integration, while 'embed' has a more specific meaning related to including content within a webpage. A more accurate translation would focus on the concept of a sample or example embedding.",
+          "suggestion": "Consider alternatives like 'Направи пример уграђеног прегледача' (Napravi primer ugrađenog pregledača - Create a sample embedded viewer) or 'Направи пример уграђивања прегледача' (Napravi primer ugrađivanja pregledača - Create an example of embedding the viewer)."
         }
       ],
       "approved_at": null
@@ -326,13 +287,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Napravi primer ugradnje Pregledača' is a literal translation but doesn't fully capture the meaning of 'Create sample Viewer embed'. 'Embed' implies integrating something into a website or application. The Serbian translation misses this nuance.",
-          "suggestion": "Napravi demo Pregledača (za integraciju)"
+          "description": "The translation \"Napravi primer ugradnje Pregledača\" is a bit literal and doesn't quite capture the nuance of 'Create sample Viewer embed'. 'Embed' is a key concept that's not directly conveyed.",
+          "suggestion": "Consider a translation like \"Kreiraj demo ugradnju Pregledača\" or \"Napravi demonstracionu ugradnju Pregledača\" which better conveys the purpose of a sample embed."
         },
         {
           "type": "spelling",
-          "description": "The word 'Pregledača' seems to be missing an accent. It should be 'Pregledača'.",
-          "suggestion": "Pregledača"
+          "description": "While 'Pregledača' is technically correct, in modern Serbian, 'pregledača' (with lowercase 'p') is more common, especially in technical contexts. Although this isn't strictly an error, it might appear slightly formal.",
+          "suggestion": "Consider using 'pregledača' instead of 'Pregledača'."
         }
       ],
       "approved_at": null
@@ -340,13 +301,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Örnek Görüntüleyici yerleştirmesi oluştur' while technically correct, doesn't quite capture the conciseness of 'Create sample Viewer embed'. 'Yerleştirmesi' is a bit verbose.",
-          "suggestion": "Örnek Görüntüleyici oluştur"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -361,8 +316,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Tạo mẫu nhúng Trình xem' is not the most natural or idiomatic translation of 'Create sample Viewer embed'. 'Embed' is not directly translated.",
-          "suggestion": "Tạo trình xem mẫu tích hợp"
+          "description": "The translation 'Tạo mẫu nhúng Trình xem' while technically correct, could be improved for naturalness. 'Embed' translates more naturally as 'nhúng' but can also be implied. A more idiomatic translation might prioritize clarity and flow.",
+          "suggestion": "Tạo Trình xem mẫu"
         }
       ],
       "approved_at": null

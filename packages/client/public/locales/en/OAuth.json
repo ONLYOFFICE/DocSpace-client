@@ -32,7 +32,7 @@
   "DeveloperTokenCopied": "Developer token successfully copied to clipboard",
   "DisableApplication": "Disable application",
   "DisableApplicationDescription": "If you disable this application, all active consents and authorization will be revoked. If necessary, you can enable the disabled application later.",
-  "DisableApplicationNote": "<strong>Note:</strong> That all users all again be required to complete the consent screen",
+  "DisableApplicationNote": "<strong>Note:</strong> All users will be required to complete the consent screen again",
   "DisableApplications": "Disable applications",
   "DisableApplicationsDescription": "If you disable these applications, all active consents and authorization will be revoked. If necessary, you can enable the disabled applications later.",
   "EditApp": "Edit application",

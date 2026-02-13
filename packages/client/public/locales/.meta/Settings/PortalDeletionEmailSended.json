@@ -3,7 +3,7 @@
   "content": "A link to confirm the operation has been sent to {{ownerEmail}} (the email address of the space owner).",
   "content_en_sha1_hash": "d504d626fe71c890b6a3d1a8fc891320d7a4c83e",
   "created_at": "2025-05-19T21:30:52.216Z",
-  "updated_at": "2025-05-21T03:41:30.975Z",
+  "updated_at": "2025-09-26T15:21:06.153Z",
   "comment": {
     "text": "This translation key is used to display a confirmation message after sending an email to the space owner confirming portal deletion. It appears in a success toast notification that pops up when a delete or deactivation button is clicked, and it provides context for the user through placeholders for the owner's email address.",
     "is_auto": true,
@@ -18,13 +18,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/delete-data/portalDeactivation.js",
-      "line_number": 69,
+      "line_number": 63,
       "context": "const onDeactivateClick = async () => {\n try {\n await sendSuspendPortalEmail();\n toastr.success(\n t(\"PortalDeletionEmailSended\", { ownerEmail: owner.email }),\n );\n } catch (error) {\n toastr.error(error);\n }\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/delete-data/portalDeletion.js",
-      "line_number": 80,
+      "line_number": 76,
       "context": "setIsDialogVisible(true);\n } else {\n try {\n await sendDeletePortalEmail();\n toastr.success(\n t(\"PortalDeletionEmailSended\", { ownerEmail: owner.email }),\n );\n } catch (error) {\n toastr.error(error);\n }\n }",
       "module": "/packages/client"
     }
@@ -48,13 +48,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"A link to confirm the operation\" is slightly awkward. \"Tranzaksiyanı təsdiqləmək üçün keçid\" translates more literally to 'A link to confirm the transaction'.  While understandable, it doesn't perfectly convey the intended meaning of confirming an operation or action.",
-          "suggestion": "Tranzaksiyanın təsdiqlənməsi üçün keçid"
+          "description": "The phrase \"Tranzaksiyanı təsdiqləmək üçün keçid\" is a bit literal and could be improved to sound more natural. 'Təsdiqləmək' directly translates to 'to confirm,' which is understandable, but a more fluent phrasing might be preferred.",
+          "suggestion": "Təsdiqləmə üçün bir keçid"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'domen sahibinin e-poçt ünvanı' is a literal translation of 'space owner's email address.' A more natural phrasing might be used.",
-          "suggestion": "məkan sahibi e-poçt ünvanına"
+          "description": "While 'domen sahibinin e-poçt ünvanı' is technically correct, 'fəsilə sahibi e-poçt ünvanı' would be more accurate and commonly used in this context, referring specifically to the space owner.",
+          "suggestion": "fəsilə sahibi e-poçt ünvanı"
         }
       ],
       "approved_at": null
@@ -71,13 +71,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is a bit literal and sounds unnatural in Czech. \"Odkaz pro potvrzení operace\" is clunky. A more natural phrasing would be 'Odkaz pro potvrzení smazání' or 'Potvrzovací odkaz'.",
-          "suggestion": "Na adresu {{ownerEmail}} byl odeslán potvrzovací odkaz."
+          "description": "The translation 'Na adresu {{ownerEmail}} byl odeslán odkaz pro potvrzení operace. (e-mailová adresa vlastníka prostoru).' is a bit clunky. While technically correct, it's overly literal and not how a Czech speaker would naturally phrase this. The parenthetical explanation is also unnecessary and disrupts the flow.",
+          "suggestion": "Odkaz pro potvrzení operace byl odeslán na adresu {{ownerEmail}} (e-mail vlastníka prostoru)."
         },
         {
           "type": "formatting",
-          "description": "The phrase \"(e-mailová adresa vlastníka prostoru)\" is a clarification that isn't strictly necessary and disrupts the flow. It's better to omit it or integrate it more smoothly.",
-          "suggestion": "Na adresu {{ownerEmail}} byl odeslán potvrzovací odkaz."
+          "description": "The parenthetical explanation '(e-mailová adresa vlastníka prostoru)' is grammatically correct, but feels like an unnecessary clarification.  A more concise approach would improve readability.",
+          "suggestion": "Odkaz pro potvrzení operace byl odeslán na adresu {{ownerEmail}} (e-mail vlastníka)."
         }
       ],
       "approved_at": null
@@ -88,8 +88,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'operation' is a bit vague in this context. 'Vorgang' can be translated to operation but a more specific word like 'Löschvorgang' (deletion process) would be more accurate and clearer for the user.",
-          "suggestion": "Ein Link zur Bestätigung des Löschvorgangs wurde an {{ownerEmail}} (die E-Mail-Adresse des Raumbesitzers)."
+          "description": "The term 'PortalDeletionEmailSended' suggests the email was *already* sent. The translation implies a link was sent. A more accurate translation would reflect the action of sending.",
+          "suggestion": "Ein Link zur Bestätigung der Löschung wurde an {{ownerEmail}} (die E-Mail-Adresse des Raumbesitzers) gesendet."
+        },
+        {
+          "type": "formatting",
+          "description": "The term 'Löschung' is slightly more specific than 'Vorgang' and is more accurate in this context. Consider using it to align with the key name.",
+          "suggestion": "Ein Link zur Bestätigung der Löschung wurde an {{ownerEmail}} (die E-Mail-Adresse des Raumbesitzers) gesendet."
         }
       ],
       "approved_at": null
@@ -100,8 +105,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The phrase 'η διεύθυνση ηλεκτρονικού ταχυδρομείου' is a bit verbose. A more concise phrasing would improve readability.",
-          "suggestion": "Ένας σύνδεσμος για την επιβεβαίωση της λειτουργίας έχει σταλεί στο {{ownerEmail}} (στο email του ιδιοκτήτη του χώρου)."
+          "description": "The phrase '(η διεύθυνση ηλεκτρονικού ταχυδρομείου του ιδιοκτήτη του χώρου)' is a bit verbose and could be more concise. While technically correct, it disrupts the flow.",
+          "suggestion": "Consider shortening to '(η διεύθυνση email του χώρου)' or simply '(email του ιδιοκτήτη).' "
         }
       ],
       "approved_at": null
@@ -109,13 +114,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"the email address of the space owner\" is somewhat literal and could be more naturally translated. While technically correct, it's not as idiomatic in Spanish.",
-          "suggestion": "Se ha enviado un enlace para confirmar la operación a {{ownerEmail}} (la dirección de correo electrónico del propietario del espacio)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -124,13 +123,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Toiminnonvahvistuslinkki on lähetetty' is a bit literal and awkward. A more natural Finnish phrasing would be 'Vahvistuslinkki on lähetetty' or 'Vahvistuslinkki on lähetetty'. The term 'Toiminnonvahvistus' is unnecessary and adds complexity.",
-          "suggestion": "Vahvistuslinkki on lähetetty"
+          "description": "The translation of 'A link to confirm the operation' is not quite accurate. 'Toiminnonvahvistuslinkki' is a bit clunky. A more natural translation would be something like 'Vahvistuslinkki toimenpiteelle' or 'Linkki toimenpiteen varmistamiseksi'.",
+          "suggestion": "Vahvistuslinkki toimenpiteelle"
         },
         {
           "type": "grammar",
-          "description": "While grammatically correct, the sentence could flow better. Consider reordering for clarity.",
-          "suggestion": "Vahvistuslinkki on lähetetty {{ownerEmail}} osoitteeseen (tilan omistajan sähköpostiosoite)."
+          "description": "The sentence structure is slightly awkward. It's grammatically correct but could be improved for readability.",
+          "suggestion": "Vahvistuslinkki toimenpiteelle on lähetetty {{ownerEmail}} osoitteeseen (tilan omistajan sähköpostiosoite)."
         }
       ],
       "approved_at": null
@@ -146,14 +145,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'էլ.փոստի' is a shortened version of 'էլեկտրոնային փոստի' (email) and while common, using the full word is generally preferred for clarity in formal settings.",
-          "suggestion": "էլեկտրոնային փոստի"
+          "type": "incorrect_translation",
+          "description": "The phrase \"տարածքի սեփականատիրոջ էլ.փոստի հասցեն\" is a bit verbose and literal. A more natural Armenian phrasing would be something like \"տարածքի սեփականատիրոջ էլեկտրոնային հասցե\" or simply \"սեփականատիրոջ էլեկտրոնային հասցե\" (owner's email address).",
+          "suggestion": "Գործողությունը հաստատող հղում է ուղարկվել {{ownerEmail}} (սեփականատիրոջ էլեկտրոնային հասցեն)."
         },
         {
           "type": "formatting",
-          "description": "The word 'հասցեն' (address) feels slightly redundant after 'էլեկտրոնային փոստի' or 'էլ.փոստի'.",
-          "suggestion": "Գործողությունը հաստատող հղում է ուղարկվել {{ownerEmail}} (տարածքի սեփականատիրոջ էլեկտրոնային փոստ)."
+          "description": "While not strictly incorrect, the punctuation in the Armenian translation could be improved for better flow. A period after \"հասցեն\" would be preferable.",
+          "suggestion": "Գործողությունը հաստատող հղում է ուղարկվել {{ownerEmail}} (սեփականատիրոջ էլեկտրոնային հասցեն):"
         }
       ],
       "approved_at": null
@@ -170,8 +169,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Japanese translation uses parentheses `()` instead of a more natural Japanese way of indicating clarification. While not incorrect, it feels slightly unnatural and less fluent in Japanese.",
-          "suggestion": "スペース所有者のメールアドレスに操作確認用のリンクが送信されました。"
+          "description": "The parentheses around 'スペース所有者のメールアドレス' are unnecessarily separated from the preceding text. It disrupts readability.",
+          "suggestion": "{{ownerEmail}}（スペース所有者のメールアドレス）に操作確認用のリンクが送信されました。"
         }
       ],
       "approved_at": null
@@ -182,8 +181,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Korean translation uses parenthesis around '스페이스 소유자의 이메일 주소' which might seem less natural than other formatting options. Consider using an em dash or a comma for better readability in Korean.",
-          "suggestion": "작업을 확인하는 링크가 {{ownerEmail}} — 스페이스 소유자의 이메일 주소 — 로 발송되었습니다."
+          "description": "The Korean translation includes parentheses around '스페이스 소유자의 이메일 주소'. This breaks the natural flow of the sentence and is less common in Korean. It should be integrated into the main sentence.",
+          "suggestion": "작업을 확인하는 링크가 {{ownerEmail}}로 발송되었습니다 (스페이스 소유자의 이메일 주소)."
         }
       ],
       "approved_at": null
@@ -193,9 +192,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'the email address of the space owner' is a bit literal and could be phrased more naturally in Lao. 'ເຈົ້າຂອງພື້ນທີ່' directly translates to 'owner of the area/space', which is accurate but might feel slightly formal in this context.",
-          "suggestion": "ລິ້ງເພື່ອຢືນຢັນການດຳເນີນການໄດ້ຖືກສົ່ງໄປຫາ {{ownerEmail}} (ອີເມວຂອງເຈົ້າຂອງ)."
+          "type": "spelling",
+          "description": "The word 'ລິ້ງ' (ling) should be 'ລິ້ງການ' (ling kan) to be more accurate when referring to a link. While 'ລິ້ງ' is understandable, it's not the most natural phrasing.",
+          "suggestion": "ລິ້ງການເພື່ອຢືນຢັນການດຳເນີນການໄດ້ຖືກສົ່ງໄປຫາ"
         }
       ],
       "approved_at": null
@@ -203,13 +202,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Latvian translation uses parentheses after the email address. While not strictly incorrect, it's less common and slightly more formal than simply stating the email address directly. Consider removing the parentheses for a more natural flow.",
-          "suggestion": "Saite darbības apstiprināšanai ir nosūtīta uz {{ownerEmail}}, telpas īpašnieka e-pasta adresi."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -224,13 +217,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"operation\" is not ideal. \"Działanie\" can be interpreted broadly. In this context, it would be better to use a more specific term like \"usunięcie\" (deletion) or \"procedura\" (procedure).",
+          "description": "The phrase \"działanie\" (action) is too generic. It doesn't accurately convey the meaning of 'operation' in this context, which refers to the deletion process. A more suitable translation would be something along the lines of 'usunięcie' (deletion) or 'procedura usunięcia' (deletion procedure).",
           "suggestion": "Link potwierdzający usunięcie został wysłany na adres {{ownerEmail}} (adres e-mail właściciela obszaru roboczego)."
         },
         {
           "type": "formatting",
-          "description": "While technically correct, the sentence structure feels a little awkward in Polish. A slight rearrangement can improve flow.",
-          "suggestion": "Link potwierdzający usunięcie został wysłany na adres e-mail {{ownerEmail}} właściciela obszaru roboczego."
+          "description": "While technically correct, the phrasing \"adres e-mail właściciela obszaru roboczego\" is a bit wordy. It could be simplified.",
+          "suggestion": "Link potwierdzający usunięcie został wysłany na adres {{ownerEmail}} (e-mail właściciela)."
         }
       ],
       "approved_at": null
@@ -241,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"foi enviada\" (was sent) is not the best translation for \"has been sent.\" It implies a passive action where the email was simply sent, rather than actively dispatched. A more accurate translation would convey that the email *was dispatched* or *delivered* to the owner.",
-          "suggestion": "Um link para confirmar que a operação foi *despachada/enviada* para {{ownerEmail}} (o endereço de email do proprietário do espaço)."
+          "description": "The translation 'Um link para confirmar que a operação foi enviada para...' implies the link was *sent*, rather than that a link was *sent to* the recipient. It doesn't accurately reflect the English sentence's meaning.",
+          "suggestion": "Um link para confirmar a operação foi enviado para..."
         }
       ],
       "approved_at": null
@@ -259,8 +252,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'spaţiului proprietarului' is a bit clunky and not the most natural way to express 'space owner'. A more natural translation would be 'proprietarului spaţiului' or simply 'proprietarului'.",
-          "suggestion": "Linkul de confirmare a operaţiei a fost trimis către {{ownerEmail}} (adresa email a proprietarului spaţiului)."
+          "description": "The translation 'Linkul de confirmare a operaţiei a fost trimis către' is a bit literal and awkward. A more natural Romanian phrasing would be 'Un link de confirmare a fost trimis către' or 'A fost trimis un link de confirmare către'.",
+          "suggestion": "A fost trimis un link de confirmare către"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'adresa email a spaţiului proprietarului' is somewhat verbose and can be simplified.  'adresa de email a proprietarului' is more concise and flows better.",
+          "suggestion": "adresa de email a proprietarului"
         }
       ],
       "approved_at": null
@@ -268,13 +266,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"A link to confirm the operation\" is better translated as \"Ссылка для подтверждения действия\" instead of \"Ссылка для подтверждения операции\". 'Операция' implies a more complex action than simply confirming a deletion.",
-          "suggestion": "Ссылка для подтверждения действия была отправлена на {{ownerEmail}} (адрес электронной почты владельца)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -283,13 +275,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'වි-තැපැල් ලිපිනය' is an awkward construction for 'email address'. It's a literal translation of 'post address'.",
-          "suggestion": "මෙහෙයුම තහවුරු කිරීමට සබැඳියක් {{ownerEmail}} වෙත යවා ඇත (අවකාශයේ හිමිකරුගේ තැපැල් ලිපිනය)."
+          "description": "The translation of \"A link to confirm the operation\" is not accurate. \"මෙහෙයුම තහවුරු කිරීමට සබැඳියක්\" literally translates to 'a link to confirm the operation'. While not incorrect, it's slightly awkward in Sinhala. A more natural phrasing would be something like 'මෙහෙයුම සිදු කිරීමට අනුමැතිය ලබා ගැනීම සඳහා සබැඳියක්'",
+          "suggestion": "මෙහෙයුම සිදු කිරීමට අනුමැතිය ලබා ගැනීම සඳහා සබැඳියක්"
         },
         {
           "type": "formatting",
-          "description": "The hyphen in 'වි-තැපැල්' is unnecessary and breaks the flow.",
-          "suggestion": "මෙහෙයුම තහවුරු කිරීමට සබැඳියක් {{ownerEmail}} වෙත යවා ඇත (අවකාශයේ හිමිකරුගේ තැපැල් ලිපිනය)."
+          "description": "The variable `{{ownerEmail}}` appears correctly, but ensure this variable is properly implemented within the Sinhala UI to display the correct email address dynamically.",
+          "suggestion": "No change needed, but confirm proper UI implementation."
         }
       ],
       "approved_at": null
@@ -305,9 +297,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'elektronski' is overly formal for this context. A more natural word would be 'e-poštni'.",
-          "suggestion": "Povezava za potrditev operacije je bila poslana na {{ownerEmail}} (e-poštni naslov lastnika prostora)."
+          "type": "incorrect_translation",
+          "description": "The translation \"Povezava za potrditev operacije je bila poslana na\" is a bit literal and could be more naturally phrased. \"Operacija\" is a bit formal for a user-facing message.",
+          "suggestion": "Povezava za potrditev je bila poslana na"
+        },
+        {
+          "type": "formatting",
+          "description": "The parentheses around the explanation of `ownerEmail` feel a bit disjointed. It's common to integrate the explanation more smoothly.",
+          "suggestion": "Povezava za potrditev je bila poslana na {{ownerEmail}}, elektronski naslov lastnika prostora."
         }
       ],
       "approved_at": null
@@ -317,9 +314,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The translation 'Линк за потврду операције је послат на' is a bit clunky. A more natural translation would be 'Упутство за потврду операције је послато на' or 'Послато је упутство за потврду операције на'.",
+          "suggestion": "Упутство за потврду операције је послато на"
+        },
+        {
           "type": "formatting",
-          "description": "The Serbian translation lacks a period at the end of the sentence.",
-          "suggestion": "Линк за потврду операције је послат на {{ownerEmail}} (емаил адреса власника простора)."
+          "description": "The Serbian translation uses a colon after 'на' which is unusual in this context.  It looks slightly awkward.",
+          "suggestion": "Упутство за потврду операције је послато на {{ownerEmail}}"
         }
       ],
       "approved_at": null
@@ -330,8 +332,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Link za potvrdu operacije je poslat na...' is a bit literal. A more natural phrasing would be 'Poslat je link za potvrdu operacije na...' or 'Link za potvrdu operacije poslat je na...'",
-          "suggestion": "Poslat je link za potvrdu operacije na {{ownerEmail}} (email adresa vlasnika prostora)."
+          "description": "The translation 'Link za potvrdu operacije je poslat na...' is grammatically correct but could be more natural. 'Poslat' (sent) implies a single, immediate action. A more fitting translation would convey that a link was *delivered* or *mailed* to the email address.  It is also slightly more formal than the English original.",
+          "suggestion": "Link za potvrdu operacije je poslan na {{ownerEmail}} (email adresa vlasnika prostora)."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of parentheses is consistent with the English source, but an alternative could be a dash for greater readability.",
+          "suggestion": "Link za potvrdu operacije je poslat na {{ownerEmail}} - (email adresa vlasnika prostora)."
         }
       ],
       "approved_at": null
@@ -342,13 +349,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is overly literal and a bit awkward. The phrase 'işlemi onaylamak için bir bağlantı gönderildi' (a link has been sent to confirm the operation) is not the most natural way to express this in Turkish. A more fluent option would imply that the recipient needs to confirm the deletion.",
-          "suggestion": "İşlemi onaylamanızı rica etmeniz için {{ownerEmail}} adresine bir bağlantı gönderildi."
+          "description": "The translation \"işlemi onaylamak için bir bağlantı gönderildi\" (a link has been sent to confirm the operation) is a bit passive and less natural in Turkish. It's more common to use a more active voice structure.",
+          "suggestion": "Bir bağlantı, işlemi onaylamak için {{ownerEmail}} adresine (alan sahibinin e-posta adresi) gönderildi."
         },
         {
           "type": "formatting",
-          "description": "While technically correct, the parentheses and explanation '(alan sahibinin e-posta adresi)' are less common and feel a bit clunky. It's generally assumed the email address belongs to the owner.",
-          "suggestion": "İşlemi onaylamanızı rica etmeniz için {{ownerEmail}} adresine bir bağlantı gönderildi."
+          "description": "The placement of the parenthetical explanation (alan sahibinin e-posta adresi) feels slightly awkward. It could be rephrased to flow better.",
+          "suggestion": "{{ownerEmail}} adresine (alan sahibinin e-posta adresi olan) bir bağlantı gönderildi."
         }
       ],
       "approved_at": null
@@ -356,7 +363,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"адреса електронної пошти\" (address of the email) is redundant. \"Електронна пошта\" already implies an address.",
+          "suggestion": "Посилання для підтвердження операції надіслано на адресу {{ownerEmail}} (адреса власника простору)."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -365,8 +378,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"địa chỉ email của chủ sở hữu không gian\" is a bit verbose and slightly unnatural. A more concise and natural translation would be \"email của chủ không gian\".",
-          "suggestion": "Một liên kết để xác nhận hoạt động đã được gửi đến {{ownerEmail}} (email của chủ không gian)."
+          "description": "The translation of \"the email address of the space owner\" is slightly awkward. While technically correct, it's not the most natural way to express it in Vietnamese. \"chủ sở hữu không gian\" is correct, but the overall phrasing could be improved.",
+          "suggestion": "Một liên kết để xác nhận hoạt động đã được gửi đến {{ownerEmail}} (địa chỉ email của chủ không gian)."
         }
       ],
       "approved_at": null
@@ -377,8 +390,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The parenthesis and the clarifying phrase \"(the email address of the space owner)\" are not seamlessly integrated into the Chinese translation. While the meaning is conveyed, a more natural flow could improve readability.",
-          "suggestion": "操作确认链接已发送至 {{ownerEmail}}（空间所有者邮箱）。"
+          "description": "The use of parentheses after the email address is slightly awkward and could be improved for better readability in Chinese. While technically correct, it reads a bit clunky.",
+          "suggestion": "操作确认链接已发送至 {{ownerEmail}}，该地址为空间所有者邮件地址。"
         }
       ],
       "approved_at": null

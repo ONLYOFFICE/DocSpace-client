@@ -1,5 +1,5 @@
 /*
- * (c) Copyright Ascensio System SIA 2009-2025
+ * (c) Copyright Ascensio System SIA 2009-2026
  *
  * This program is a free software product.
  * You can redistribute it and/or modify it under the terms
@@ -35,6 +35,7 @@ import {
 } from "../../enums";
 import { TRoomSecurity } from "../../api/rooms/types";
 import type {
+  TFile,
   TFileSecurity,
   TFileViewAccessibility,
   TFolderSecurity,
@@ -59,11 +60,15 @@ type ItemData = {
   viewAccessibility?: TFileViewAccessibility;
   formFillingStatus?: FileFillingFormStatus;
   customFilterEnabled?: boolean;
+  vectorizationStatus?: TFile["vectorizationStatus"];
+  lockedBy?: string;
+  locked?: boolean;
+  isFavorite?: boolean;
+  isAIAgent?: boolean;
 };
 
 export type BadgesProps = {
   t: TTranslation;
-  theme: TTheme;
   item: ItemData;
   viewAs: TViewAs;
   showNew: boolean;
@@ -74,12 +79,13 @@ export type BadgesProps = {
   setConvertDialogVisible?: () => void;
   onUnpinClick?: () => void;
   onUnmuteClick?: () => void;
+  onClickLock?: () => void;
   isMutedBadge?: boolean;
   isTrashFolder?: boolean;
   isArchiveFolderRoot?: boolean;
   onCopyPrimaryLink?: () => void;
   isArchiveFolder?: boolean;
-  isRecentTab?: boolean;
+  isRecentFolder?: boolean;
   canEditing?: boolean;
   isTemplatesFolder?: boolean;
   onCreateRoom?: () => void;
@@ -88,6 +94,11 @@ export type BadgesProps = {
   isExtsCustomFilter?: boolean;
   customFilterExternalLink?: string;
   openFillingStatus?: (item: ItemData) => void;
+  onRetryVectorization?: () => void;
+  onClickFavorite?: () => void;
+  isPublicRoom?: boolean;
+  themeIsBase?: boolean;
+  editorsTooltip?: React.ReactElement;
 };
 
 export type BadgeWrapperProps = {

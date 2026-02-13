@@ -1,5 +1,5 @@
 /*
- * (c) Copyright Ascensio System SIA 2009-2025
+ * (c) Copyright Ascensio System SIA 2009-2026
  *
  * This program is a free software product.
  * You can redistribute it and/or modify it under the terms
@@ -29,8 +29,11 @@
 import { PublicRoomError } from "@docspace/shared/pages/PublicRoom";
 
 import ClientOnly from "@/components/ClientOnly";
+import { logger } from "../../../../../../logger.mjs";
 
 export default async function ExpiredLinkPage() {
+  logger.info("Public-room error expired-link page");
+
   return (
     <ClientOnly>
       <PublicRoomError />

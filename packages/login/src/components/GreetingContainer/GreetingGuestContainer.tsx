@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,22 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable @next/next/no-img-element */
-
 "use client";
 
 import { Trans, useTranslation } from "react-i18next";
-import { useTheme } from "styled-components";
+import classNames from "classnames";
 
 import { Text } from "@docspace/shared/components/text";
-import { getLogoUrl } from "@docspace/shared/utils";
-import { WhiteLabelLogoType } from "@docspace/shared/enums";
 
 import { DEFAULT_GUEST_TEXT } from "@/utils/constants";
-import { GreetingContainer } from "./GreetingCreateUserContainer/GreetingCreateUserContainer.styled";
+import { Logo } from "../Logo";
+import styles from "./GreetingCreateUserContainer/GreetingCreateUserContainer.module.scss";
 
 type GreetingGuestContainerProps = {
-  firstName?: string;
   displayName?: string;
   culture?: string;
 };
@@ -49,19 +45,11 @@ export const GreetingGuestContainer = ({
   culture,
 }: GreetingGuestContainerProps) => {
   const { t } = useTranslation(["Common"]);
-  const theme = useTheme();
-
-  const logoUrl = getLogoUrl(
-    WhiteLabelLogoType.LoginPage,
-    !theme.isBase,
-    false,
-    culture,
-  );
 
   return (
-    <GreetingContainer>
-      <img src={logoUrl} className="portal-logo guest" alt="greeting-logo" />
-      <div className="tooltip guest">
+    <div className={styles.greetingContainer}>
+      <Logo culture={culture} className={styles.guest} />
+      <div className={classNames(styles.tooltip, styles.guest)}>
         <Text fontSize="16px">
           <Trans
             t={t}
@@ -72,11 +60,18 @@ export const GreetingGuestContainer = ({
               displayName,
             }}
             components={{
-              1: <Text fontWeight={600} as="strong" fontSize="16px" />,
+              1: (
+                <Text
+                  key="component_key"
+                  fontWeight={600}
+                  as="strong"
+                  fontSize="16px"
+                />
+              ),
             }}
           />
         </Text>
       </div>
-    </GreetingContainer>
+    </div>
   );
 };

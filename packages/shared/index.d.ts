@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,6 +29,11 @@ declare module "*.svg?url" {
   export default content;
 }
 declare module "*.png" {
+  const content: string;
+  export default content;
+}
+
+declare module "*.gif" {
   const content: string;
   export default content;
 }
@@ -68,15 +73,15 @@ declare module "resize-image" {
 
   interface ResizeImage extends ImageTypes {
     resize2Canvas: (
-      img: HTMLImageElement,
-      width: number,
-      heigh: number,
-    ) => HTMLCanvasElement;
-    resize: (
-      img: HTMLImageElement,
+      img: HTMLImageElement | ImageBitmap,
       width: number,
       height: number,
-      type: ImageFormat,
+    ) => HTMLCanvasElement;
+    resize: (
+      img: HTMLImageElement | HTMLCanvasElement,
+      width: number,
+      height: number,
+      type?: ImageFormat,
     ) => string;
   }
 

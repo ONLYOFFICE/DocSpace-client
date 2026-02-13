@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,24 +26,22 @@
 
 "use client";
 
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import { Text } from "@docspace/shared/components/text";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { toastr } from "@docspace/shared/components/toast";
 
-import { TError } from "@/types";
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
-import { ButtonsWrapper } from "@/components/Confirm.styled";
 import {
   Avatar,
   AvatarRole,
   AvatarSize,
 } from "@docspace/shared/components/avatar";
-import { addGuest } from "@docspace/shared/api/people";
-import Filter from "@docspace/shared/api/people/filter";
+import { useGuestShareLink } from "@/hooks/useGuestShareLink";
+import styles from "../confirm.module.scss";
 
 type GuestShareLinkFormProps = {
   guestDisplayName?: string;
@@ -54,92 +52,55 @@ const GuestShareLinkForm = ({
   guestDisplayName,
   guestAvatar,
 }: GuestShareLinkFormProps) => {
-  const { linkData } = useContext(ConfirmRouteContext);
-  const { confirmHeader = "", email = "" } = linkData;
+  const { linkData, confirmLinkResult } = useContext(ConfirmRouteContext);
+  const { confirmHeader = "" } = linkData;
+  const { email = "" } = confirmLinkResult;
   const { t } = useTranslation(["Confirm", "Common"]);
 
-  const [isLoading, setIsLoading] = useState(false);
-
-  const onApproveInvite = async () => {
-    setIsLoading(true);
-
-    try {
-      setIsLoading(false);
-
-      await addGuest(email, confirmHeader);
-      const newFilter = Filter.getDefault();
-      newFilter.area = "guests";
-      newFilter.group = null;
-
-      window.location.replace(
-        `/accounts/guests/filter?${newFilter.toUrlParams()}`,
-      );
-    } catch (error) {
-      const knownError = error as TError;
-      let errorMessage: string;
-
-      if (typeof knownError === "object") {
-        errorMessage =
-          knownError?.response?.data?.error?.message ||
-          knownError?.statusText ||
-          knownError?.message ||
-          "";
-      } else {
-        errorMessage = knownError;
-      }
-      console.error(errorMessage);
-
-      setIsLoading(false);
-      toastr.error(errorMessage);
-    }
-  };
-
-  const onDenyInvite = () => {
-    window.location.replace("/");
-  };
+  const { onApproveInvite, onDenyInvite, isLoading } = useGuestShareLink();
 
   return (
-    <>
-      <FormWrapper>
-        <Avatar
-          className="guest-avatar"
-          role={AvatarRole.guest}
-          source={guestAvatar ?? ""}
-          size={AvatarSize.big}
-          isDefaultSource
-        />
-        <div className="guest-info-wrapper">
-          <Text fontSize="16px" fontWeight="700" className="guest-name">
-            {guestDisplayName}
-          </Text>
-          <Text fontSize="13px" fontWeight="400" className="guest-email">
-            {email}
-          </Text>
-        </div>
-        <ButtonsWrapper className="buttons-guest">
-          <Button
-            primary
-            scale
-            size={ButtonSize.medium}
-            label={t("Common:Approve")}
-            tabIndex={2}
-            isDisabled={isLoading}
-            onClick={onApproveInvite}
-          />
-          <Button
-            scale
-            size={ButtonSize.medium}
-            label={t("Common:Deny")}
-            tabIndex={2}
-            isDisabled={isLoading}
-            onClick={onDenyInvite}
-          />
-        </ButtonsWrapper>
-        <Text fontSize="12px" fontWeight="400" className="guest-info">
-          {t("Common:GuestInvitationInfo")}
+    <FormWrapper>
+      <Avatar
+        className="guest-avatar"
+        role={AvatarRole.guest}
+        source={guestAvatar ?? ""}
+        size={AvatarSize.big}
+        isDefaultSource
+      />
+      <div className="guest-info-wrapper">
+        <Text fontSize="16px" fontWeight="700" className="guest-name">
+          {guestDisplayName}
         </Text>
-      </FormWrapper>
-    </>
+        <Text fontSize="13px" fontWeight="400" className="guest-email">
+          {email}
+        </Text>
+      </div>
+      <div className={classNames(styles.buttonsWrapper, styles.buttonsGuest)}>
+        <Button
+          primary
+          scale
+          size={ButtonSize.medium}
+          label={t("Common:Approve")}
+          tabIndex={2}
+          isDisabled={isLoading}
+          onClick={() => onApproveInvite(email, confirmHeader)}
+          testId="approve_button"
+        />
+        <Button
+          scale
+          size={ButtonSize.medium}
+          label={t("Common:Deny")}
+          tabIndex={2}
+          isDisabled={isLoading}
+          onClick={onDenyInvite}
+          testId="deny_button"
+        />
+      </div>
+      <Text fontSize="12px" fontWeight="400" className="guest-info">
+        {t("Common:GuestApprovalNote", { sectionName: t("Common:Contacts") })}
+      </Text>
+    </FormWrapper>
   );
 };
 

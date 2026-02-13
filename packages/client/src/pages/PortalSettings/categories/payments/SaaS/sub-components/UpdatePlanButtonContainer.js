@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -40,6 +40,7 @@ import { updatePayment } from "@docspace/shared/api/portal";
 import { Text } from "@docspace/shared/components/text";
 
 import DowngradePlanButtonContainer from "./DowngradePlanButtonContainer";
+import ChangePricingPlanDialog from "../../../../../../components/dialogs/ChangePricingPlanDialog";
 
 const StyledBody = styled.div`
   button {
@@ -48,8 +49,7 @@ const StyledBody = styled.div`
 `;
 const StyledModalBody = styled.div`
   .text-warning {
-    margin: 16px 0 8px 0;
-    color: ${(props) => props.theme.client.settings.backup.warningColor};
+    margin-top: 16px;
   }
 `;
 
@@ -76,9 +76,14 @@ const UpdatePlanButtonContainer = ({
   cardLinkedOnFreeTariff,
   tariffPlanTitle,
   totalPrice,
-  currencySymbol,
+  formatPaymentCurrency,
+  canDowngradeTariff,
+  walletCustomerStatusNotActive,
+  cardLinked,
 }) => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisiblePaymentConfirm, setIsVisiblePaymentConfirm] = useState(false);
+  const [isVisibleDowngradePlanDialog, setIsVisibleDowngradePlanDialog] =
+    useState(false);
 
   const resetIntervalSuccess = () => {
     intervalId &&
@@ -133,21 +138,43 @@ const UpdatePlanButtonContainer = ({
     }, 2000);
   };
   const onClose = () => {
-    setIsVisible(false);
+    setIsVisiblePaymentConfirm(false);
+  };
+
+  const goLinkCard = () => {
+    cardLinked
+      ? window.open(cardLinked, "_self")
+      : toastr.error(t("Common:UnexpectedError"));
   };
 
   const onUpdateTariff = async () => {
     try {
-      timerId = setTimeout(() => {
-        setIsLoading(true);
-      }, 500);
+      setIsLoading(true);
 
-      if (isVisible) onClose();
+      if (isVisiblePaymentConfirm) onClose();
 
       const res = await updatePayment(managersCount, isYearTariff);
 
       if (res === false) {
-        toastr.error(t("ErrorNotification"));
+        const errorText =
+          cardLinkedOnFreeTariff && walletCustomerStatusNotActive ? (
+            <>
+              {t("CardUnlinked")} <br />
+              {t("LinkNewCard")} {"  "}
+              <a
+                onClick={goLinkCard}
+                fontWeight={600}
+                style={{ textDecoration: "underline" }}
+                data-testid="add_payment_method_link"
+              >
+                {t("AddPaymentMethod")}
+              </a>
+            </>
+          ) : (
+            t("ErrorNotification")
+          );
+
+        toastr.error(errorText);
 
         setIsLoading(false);
         clearTimeout(timerId);
@@ -157,13 +184,50 @@ const UpdatePlanButtonContainer = ({
       }
 
       previousManagersCount = maxCountManagersByQuota;
-      waitingForQuota();
+      const quotaRes = await api.portal.getPortalQuota(true);
+      const managersObject = quotaRes.features.find(
+        (obj) => obj.id === MANAGER,
+      );
+
+      if (managersObject?.value !== previousManagersCount) {
+        setPortalQuotaValue(quotaRes);
+        resetIntervalSuccess();
+      } else {
+        waitingForQuota();
+      }
     } catch (e) {
+      console.error(e);
       toastr.error(t("ErrorNotification"));
       setIsLoading(false);
       clearTimeout(timerId);
       timerId = null;
     }
+  };
+
+  const isPassedByQuota = () => {
+    return isAlreadyPaid ? canDowngradeTariff : canPayTariff;
+  };
+
+  const onDowngradeTariff = () => {
+    if (isPassedByQuota()) {
+      onUpdateTariff();
+      return;
+    }
+
+    setIsVisibleDowngradePlanDialog(true);
+  };
+
+  const onOpenPaymentDialog = () => {
+    if (isPassedByQuota()) {
+      setIsVisiblePaymentConfirm(true);
+      return;
+    }
+
+    setIsVisibleDowngradePlanDialog(true);
+  };
+
+  const onCloseDowngradePlanDialog = () => {
+    setIsVisibleDowngradePlanDialog(false);
   };
 
   useEffect(() => {
@@ -198,6 +262,7 @@ const UpdatePlanButtonContainer = ({
         isDisabled={isLessCountThanAcceptable || isLoading || isDisabled}
         onClick={goToStripePortal}
         isLoading={isLoading}
+        testId="upgrade_plan_button"
       />
     ) : (
       <DowngradePlanButtonContainer
@@ -220,15 +285,16 @@ const UpdatePlanButtonContainer = ({
           size="medium"
           primary
           isDisabled={isLoading || isDisabled}
-          onClick={() => setIsVisible(true)}
+          onClick={onOpenPaymentDialog}
           isLoading={isLoading}
+          testId="upgrade_plan_button"
         />
       );
     }
 
     return isDowngradePlan ? (
       <DowngradePlanButtonContainer
-        onUpdateTariff={onUpdateTariff}
+        onDowngradeTariff={onDowngradeTariff}
         isDisabled={isDisabled}
         buttonLabel={t("DowngradeNow")}
       />
@@ -243,18 +309,27 @@ const UpdatePlanButtonContainer = ({
         }
         onClick={onUpdateTariff}
         isLoading={isLoading}
+        testId="upgrade_plan_button"
       />
     );
   };
+
   return (
     <StyledBody>
       {isAlreadyPaid || cardLinkedOnFreeTariff
         ? updatingCurrentTariffButton()
         : payTariffButton()}
 
-      {isVisible ? (
+      {isVisibleDowngradePlanDialog ? (
+        <ChangePricingPlanDialog
+          visible={isVisibleDowngradePlanDialog}
+          onClose={onCloseDowngradePlanDialog}
+        />
+      ) : null}
+
+      {isVisiblePaymentConfirm ? (
         <ModalDialog
-          visible={isVisible}
+          visible={isVisiblePaymentConfirm}
           onClose={onClose}
           displayType={ModalDialogType.modal}
         >
@@ -277,18 +352,15 @@ const UpdatePlanButtonContainer = ({
                   i18nKey="ChargeAmount"
                   ns="Payments"
                   t={t}
-                  values={{ currencySymbol, price: totalPrice }}
+                  values={{ price: formatPaymentCurrency(totalPrice) }}
                   components={{
                     1: <span style={{ fontWeight: 600 }} />,
                   }}
                 />
               </Text>
-              <Text className="text-warning" isBold fontSize="16px">
-                {t("Common:Warning")}
-              </Text>
-              <Text>
+              <Text className="text-warning">
                 <Trans
-                  i18nKey="PaymentNonRefundable"
+                  i18nKey="ActionCannotBeUndone"
                   ns="Payments"
                   t={t}
                   components={{
@@ -306,6 +378,7 @@ const UpdatePlanButtonContainer = ({
               primary
               scale
               onClick={onUpdateTariff}
+              testId="confirm_payment_button"
             />
             <Button
               key="CancelButton"
@@ -313,6 +386,7 @@ const UpdatePlanButtonContainer = ({
               size={ButtonSize.normal}
               scale
               onClick={onClose}
+              testId="cancel_payment_button"
             />
           </ModalDialog.Footer>
         </ModalDialog>
@@ -334,8 +408,9 @@ export default inject(
       currentTariffPlanTitle,
       isYearTariff,
     } = currentQuotaStore;
-    const { tariffPlanTitle, planCost } = paymentQuotasStore;
-    const { isNotPaidPeriod, isGracePeriod } = currentTariffStatusStore;
+    const { tariffPlanTitle } = paymentQuotasStore;
+    const { isNotPaidPeriod, isGracePeriod, walletCustomerStatusNotActive } =
+      currentTariffStatusStore;
 
     const {
       setIsLoading,
@@ -349,6 +424,9 @@ export default inject(
       canPayTariff,
       cardLinkedOnFreeTariff,
       totalPrice,
+      formatPaymentCurrency,
+      canDowngradeTariff,
+      cardLinked,
     } = paymentStore;
 
     return {
@@ -369,8 +447,11 @@ export default inject(
       isYearTariff,
       cardLinkedOnFreeTariff,
       tariffPlanTitle,
-      currencySymbol: planCost.currencySymbol,
+      formatPaymentCurrency,
       totalPrice,
+      canDowngradeTariff,
+      walletCustomerStatusNotActive,
+      cardLinked,
     };
   },
 )(observer(UpdatePlanButtonContainer));

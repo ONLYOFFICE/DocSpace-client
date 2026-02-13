@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,10 +26,8 @@
 
 "use client";
 
-import React, { useCallback, useEffect, useContext } from "react";
+import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
-import { useSearchParams } from "next/navigation";
-import styled from "styled-components";
 
 import { SocialButtonsGroup } from "@docspace/shared/components/social-buttons-group";
 import { Text } from "@docspace/shared/components/text";
@@ -43,44 +41,23 @@ import SSOIcon from "PUBLIC_DIR/images/sso.react.svg";
 
 import { LoginDispatchContext, LoginValueContext } from "./Login";
 
-const StyledThirdParty = styled.div<{ isVisible: boolean }>`
-  width: 100%;
-  height: auto;
-`;
-
 type ThirdPartyProps = {
   thirdParty?: TThirdPartyProvider[];
   capabilities?: TCapabilities;
-  ssoUrl?: string;
   ssoExists?: boolean;
   oauthDataExists?: boolean;
-  hideAuthPage?: boolean;
 };
 
 const ThirdParty = ({
   thirdParty,
   capabilities,
-  ssoUrl,
   ssoExists,
   oauthDataExists,
-  hideAuthPage,
 }: ThirdPartyProps) => {
   const { isLoading } = useContext(LoginValueContext);
   const { setIsModalOpen } = useContext(LoginDispatchContext);
 
-  const searchParams = useSearchParams();
-
   const { t } = useTranslation(["Login", "Common"]);
-
-  useEffect(() => {
-    if (
-      ssoUrl &&
-      hideAuthPage &&
-      searchParams?.get("skipssoredirect") !== "true"
-    ) {
-      window.location.replace(ssoUrl);
-    }
-  }, [capabilities, searchParams, ssoUrl, hideAuthPage]);
 
   const onSocialButtonClick = useCallback(
     (e: React.MouseEvent<Element, MouseEvent>) => {
@@ -98,13 +75,13 @@ const ThirdParty = ({
       let url = targetElement.dataset.url || "";
 
       try {
-        //Lifehack for Twitter
+        // Lifehack for Twitter
         if (providerName == "twitter") {
           url += "authCallback";
         }
 
         const tokenGetterWin =
-          window["AscDesktopEditor"] !== undefined
+          window.AscDesktopEditor !== undefined
             ? (window.location.href = url)
             : window.open(
                 url,
@@ -143,7 +120,7 @@ const ThirdParty = ({
 
   return (
     isVisible && (
-      <StyledThirdParty isVisible={isVisible}>
+      <div style={{ width: "100%", height: "auto" }}>
         <div className="line">
           <Text className="or-label">{t("Common:orContinueWith")}</Text>
         </div>
@@ -155,7 +132,7 @@ const ThirdParty = ({
           isDisabled={isLoading}
           {...ssoProps}
         />
-      </StyledThirdParty>
+      </div>
     )
   );
 };

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,7 +26,10 @@
 
 export type RowContentProps = {
   /** Components displayed inside RowContent */
-  children: React.ReactNode[];
+  children: React.ReactElement<{
+    containerWidth?: string;
+    children?: React.ReactElement;
+  }>[];
   /** Accepts class */
   className?: string;
   /** Disables SideElements */

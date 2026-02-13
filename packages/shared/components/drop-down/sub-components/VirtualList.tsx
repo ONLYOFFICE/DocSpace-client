@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -53,7 +53,10 @@ const VirtualList = ({
   const activeIndex = useMemo(() => {
     let foundIndex = -1;
     React.Children.forEach(cleanChildren, (child, index) => {
-      if (React.isValidElement(child) && child.props?.disabled) {
+      if (
+        React.isValidElement(child) &&
+        (child.props as { disabled?: boolean })?.disabled
+      ) {
         foundIndex = index;
       }
     });
@@ -71,17 +74,23 @@ const VirtualList = ({
 
       let index = currentIndexRef.current;
 
+      if (!children || !Array.isArray(children)) {
+        return;
+      }
+
       switch (event.code) {
-        case "ArrowDown":
-          index += 1;
+        case "ArrowDown": {
+          if (children?.[index + 1]) index += 1;
+          else index = 0;
           break;
+        }
+
         case "ArrowUp":
-          index -= 1;
+          if (children?.[index - 1]) index -= 1;
+          else index = children.length - 1;
           break;
         case "Enter":
           return (
-            children &&
-            Array.isArray(children) &&
             children[index] &&
             React.isValidElement(children?.[index]) &&
             children?.[index]?.props?.onClick()

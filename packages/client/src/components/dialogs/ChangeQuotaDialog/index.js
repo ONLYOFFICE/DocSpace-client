@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,9 +30,9 @@ import { useTranslation } from "react-i18next";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
+import { QuotaForm } from "@docspace/shared/components/quota-form";
 
-import QuotaForm from "../../QuotaForm";
-import StyledBodyContent from "./StyledComponent";
+import styles from "./ChangeQuota.module.scss";
 
 const ChangeQuotaDialog = (props) => {
   const {
@@ -50,8 +50,8 @@ const ChangeQuotaDialog = (props) => {
     <ModalDialog visible={visible} onClose={onCloseClick}>
       <ModalDialog.Header>{t("Common:ChangeQuota")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <StyledBodyContent>
-          <Text noSelect>{t("Common:SetQuotaStorageLimit")}</Text>
+        <div className={styles.content}>
+          <Text>{t("Common:SetQuotaStorageLimit")}</Text>
           <QuotaForm
             onSetQuotaBytesSize={onSetQuotaBytesSize}
             isLoading={isLoading}
@@ -59,7 +59,7 @@ const ChangeQuotaDialog = (props) => {
             initialSize={initialSize}
             isAutoFocussed
           />
-        </StyledBodyContent>
+        </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

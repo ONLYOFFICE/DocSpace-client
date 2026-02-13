@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,10 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled from "styled-components";
 import { Meta, StoryObj } from "@storybook/react";
 
 import { SelectedItem } from "./SelectedItem";
+import styles from "./SelectedItem.stories.module.scss";
 
 const meta = {
   title: "Base UI Components/SelectedItem",
@@ -51,28 +51,11 @@ export const Default: Story = {
   },
 };
 
-const StyledContainer = styled.div`
-  padding: 0;
-  display: grid;
-  grid-gap: 10px;
-`;
-
-const StyledContainerInline = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  margin-bottom: 10px;
-
-  > * {
-    margin-inline-end: 10px;
-    margin-bottom: 10px;
-  }
-`;
-
 const AllTemplate = () => {
   const onCloseHandler = () => {};
   return (
     <>
-      <StyledContainerInline>
+      <div className={styles.containerInline}>
         <SelectedItem
           label="Selected item"
           propKey=""
@@ -86,16 +69,16 @@ const AllTemplate = () => {
           isDisabled
           onClose={onCloseHandler}
         />
-      </StyledContainerInline>
+      </div>
 
-      <StyledContainer>
+      <div className={styles.container}>
         <SelectedItem
           label="Selected item"
           propKey=""
           isInline={false}
           onClose={onCloseHandler}
         />
-      </StyledContainer>
+      </div>
     </>
   );
 };

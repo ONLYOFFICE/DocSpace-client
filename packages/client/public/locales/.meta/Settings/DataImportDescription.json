@@ -3,7 +3,7 @@
   "content": "Import data from a third party service to {{organizationName}} {{productName}}. Data import allows transferring data such as all users, their personal and shared documents.",
   "content_en_sha1_hash": "d3eff090b70a55f1d87037e6d061a57396691184",
   "created_at": "2025-05-19T21:30:51.065Z",
-  "updated_at": "2025-05-21T04:39:25.937Z",
+  "updated_at": "2025-09-29T11:28:56.121Z",
   "comment": {
     "text": "The translation key \"DataImportDescription\" is used to describe the data import feature for transferring data from a third party service to an organization's product. It appears in UI elements related to data import settings, such as portals and workspaces. The translation should provide a clear and concise explanation of this functionality.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/Providers.tsx",
-      "line_number": 97,
-      "context": "if (!areProvidersReady) return <DataImportLoader />;\n return (\n <WorkspacesContainer>\n <Text className=\"data-import-description\">\n {t(\"DataImportDescription\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n })}\n </Text>\n <Text className=\"data-import-subtitle\">{t(\"UploadBackupData\")}</Text>",
+      "line_number": 87,
+      "context": "if (showPortalSettingsLoader || !ready) return <DataImportLoader />;\n \n return (\n <WorkspacesContainer>\n <Text className=\"data-import-description\">\n {t(\"DataImportDescription\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n })}\n \n {dataImportUrl ? (",
       "module": "/packages/client"
     }
   ],
@@ -30,8 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Arabic translation includes placeholders {{organizationName}} and {{productName}} without any surrounding punctuation or specific formatting to indicate they are variables meant to be replaced. This can look awkward in Arabic.",
-          "suggestion": "Consider adding a space before and after the placeholders: 'استيراد البيانات من خدمة طرف ثالث إلى {{organizationName}} {{productName}}. يتيح استيراد البيانات نقل البيانات مثل جميع المستخدمين، والمستندات الشخصية والمشتركة.'"
+          "description": "The placeholders {{organizationName}} and {{productName}} are not properly rendered. They should be incorporated seamlessly within the translated text.",
+          "suggestion": "استيراد البيانات من خدمة طرف ثالث إلى [اسم المؤسسة] [اسم المنتج]. يتيح استيراد البيانات نقل البيانات مثل جميع المستخدمين، والمستندات الشخصية والمشتركة."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The Arabic phrasing 'خدمة طرف ثالث' (service of a third party) is technically correct, but sounds somewhat unnatural. It is better to use a more common and fluent phrasing.",
+          "suggestion": "استيراد البيانات من خدمة خارجية"
         }
       ],
       "approved_at": null
@@ -42,8 +47,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The use of \"{{organizationName}} {{productName}}\" in the Azerbaijani translation doesn't perfectly match the English, where the curly braces indicate variables. It should ideally retain the variable placeholders or be adjusted for natural language flow.",
-          "suggestion": "Consider rephrasing to integrate the variable names more naturally, e.g., '...{{organizationName}} və {{productName}}-ə məlumatları idxal edin.'"
+          "description": "The Azerbaijani translation uses a full stop (.) after '{{productName}}'. It would be more consistent with Azerbaijani grammar and sentence structure to omit it here.",
+          "suggestion": "Üçüncü tərəf xidmətindən {{organizationName}} {{productName}} məlumatları idxal edin."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Məlumatların idxalı bütün istifadəçilər, şəxsi və paylaşılan sənədlər kimi məlumatların ötürülməsinə imkan verir\" is somewhat convoluted and not the most natural way to express the intended meaning.  It literally translates to 'Data import allows the transfer of information such as all users, personal and shared documents'. A more direct and fluent translation would improve readability.",
+          "suggestion": "Məlumatların idxalı bütün istifadəçiləri, şəxsi və paylaşılan sənədləri daxil olmaqla məlumatları ötürməyə imkan verir."
         }
       ],
       "approved_at": null
@@ -54,13 +64,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'Входирайте' (Vhodirate) is not the most natural or accurate translation of 'Import'.  'Въвеждане на данни' or simply 'Импортиране на данни' would be more common and clearer.",
-          "suggestion": "Импортиране на данни from a third party service to {{organizationName}} {{productName}}"
+          "description": "The word 'Входирайте' is not the most natural or accurate translation of 'Import'. A more appropriate translation would be 'Качете' or 'Импортирайте'. 'Входирайте' often implies formal entry of data, not necessarily importing.",
+          "suggestion": "Качете данни от услуга на трета страна в {{organizationName}} {{productName}}. Качването на данни позволява прехвърляне на данни като всички потребители, техните лични и споделени документи."
         },
         {
           "type": "incorrect_translation",
-          "description": "The repeated use of 'Входиране' can sound redundant.  While technically correct, it's stylistically awkward.",
-          "suggestion": "Импортирането на данни позволява прехвърляне на данни като всички потребители, техните лични и споделени документи."
+          "description": "The repetition of 'Входирането на данни' is slightly awkward. While grammatically correct, it could be improved for readability.",
+          "suggestion": "Качването на данни позволява прехвърляне на данни като всички потребители, техните лични и споделени документи."
         }
       ],
       "approved_at": null
@@ -74,13 +84,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'all users' is translated as 'allen Benutzern'. While grammatically correct, it could be more natural in German to use 'alle Benutzer'. The dative case ('Benutzern') implies a direct action being performed *on* the users, whereas 'alle Benutzer' simply refers to the entirety of the users.",
-          "suggestion": "alle Benutzer"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -89,7 +93,7 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The order of {{organizationName}} and {{productName}} is reversed compared to the English original. It should be '{{organizationName}} {{productName}}' in the Greek translation as well.",
+          "description": "The order of `{{organizationName}}` and `{{productName}}` is reversed compared to the English original. It should be `{{organizationName}} {{productName}}` not `{{productName}} του {{organizationName}}`.",
           "suggestion": "Εισαγάγετε δεδομένα από μια υπηρεσία τρίτου μέρους στο {{organizationName}} {{productName}}."
         }
       ],
@@ -107,13 +111,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Tuo ...:n tiedot' is not the most natural way to say 'Import data from...'. A more common and flowing translation would be 'Siirrä tietoja...'.",
-          "suggestion": "Siirrä tietoja {{organizationName}} {{productName}}..."
+          "description": "The phrase \"Tuo ... :n tiedot\" is awkward. While grammatically correct, it's not the most natural way to express 'Import data to...'. A more fluent option would be 'Siirrä tietoja...lle'.",
+          "suggestion": "Siirrä tietoja {{organizationName}} {{productName}}:lle kolmannen osapuolen palvelusta"
         },
         {
-          "type": "grammar",
-          "description": "The use of 'esim.' (e.g.) is a bit informal for a formal settings description. It's better to use a more comprehensive phrasing.",
-          "suggestion": "sisältäen esimerkiksi käyttäjien, heidän henkilökohtaiset ja jaetut asiakirjat."
+          "type": "incorrect_translation",
+          "description": "The phrase 'esim. käyttäjien' (e.g., users) feels a little jarring and doesn't quite convey the full scope of the English 'such as'.",
+          "suggestion": "kuten käyttäjien"
+        },
+        {
+          "type": "formatting",
+          "description": "The colon and space after the organization/product name are not standard Finnish sentence structure and could be improved for readability.",
+          "suggestion": "Siirrä tietoja {{organizationName}} {{productName}} kolmannen osapuolen palvelusta"
         }
       ],
       "approved_at": null
@@ -124,18 +133,18 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrase 'depuis une service tierce' is grammatically incorrect. 'Service' is feminine, so the preposition 'depuis' should be followed by 'une service'.",
+          "description": "The phrase 'depuis une service tierce' is grammatically incorrect. 'Service' is masculine, so it needs the masculine article 'un'.",
           "suggestion": "Importer des données depuis un service tiers vers {{organizationName}} {{productName}}"
         },
         {
           "type": "grammar",
-          "description": "The phrase 'tous utilisateurs' is grammatically incorrect.  'Utilisateurs' is masculine plural, so it requires the masculine plural article 'tous'.",
-          "suggestion": "tous les utilisateurs"
+          "description": "The phrase 'toutes utilisateurs' is grammatically incorrect. 'Utilisateurs' is masculine plural, so it requires the masculine plural article 'tous'.",
+          "suggestion": "Importer des données depuis un service tiers vers {{organizationName}} {{productName}}. L'importation des données permet de transférer les données telles que tous les utilisateurs, leurs documents personnels et partagés."
         },
         {
           "type": "incorrect_translation",
-          "description": "The English 'allows transferring' is translated as 'permet de transférer'. While correct, a more natural phrasing in French might be preferred. Considering the context, 'permet le transfert de' could be an alternative.",
-          "suggestion": "L'importation des données permet le transfert de données telles que tous les utilisateurs..."
+          "description": "While not strictly incorrect, 'L'importation des données permet de transférer' is a bit verbose. A more direct translation of 'Data import allows transferring' would be 'L'import de données permet de...' ",
+          "suggestion": "Importer des données depuis un service tiers vers {{organizationName}} {{productName}}. L'import de données permet de transférer..."
         }
       ],
       "approved_at": null
@@ -146,8 +155,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The colon (:) after \"{{productName}}\" appears to be unnecessary and disrupts the flow of the Armenian sentence.",
-          "suggestion": "Remove the colon after '{{productName}}'."
+          "description": "The Armenian translation includes a colon after the first sentence. The English original doesn't. While not strictly incorrect, it changes the flow and might be better without it.",
+          "suggestion": "Remove the colon after \"{{productName}}\"."
         }
       ],
       "approved_at": null
@@ -158,8 +167,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Import data from a third party service to {{organizationName}} {{productName}}' is a bit awkward in Italian. While technically correct, it doesn't flow naturally. 'To' is not the best preposition here.",
-          "suggestion": "Importa dati da un servizio di terze parti in {{organizationName}} {{productName}}."
+          "description": "The phrase 'Import data from a third party service to {{organizationName}} {{productName}}' is a bit clunky in Italian. A more natural phrasing would be 'Importa dati da un servizio di terze parti *in* {{organizationName}} {{productName}}'.",
+          "suggestion": "Importa dati da un servizio di terze parti *in* {{organizationName}} {{productName}}"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Data import allows transferring data...' sounds a little formal in Italian. A more conversational and flowing translation would be 'L'importazione dei dati *permette di* trasferire dati...'",
+          "suggestion": "L'importazione dei dati *permette di* trasferire dati..."
         }
       ],
       "approved_at": null
@@ -170,18 +184,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"その個人\" (sono kojin) is unnatural and doesn't accurately translate \"their personal\". It implies a separate individual.",
-          "suggestion": "Replace \"その個人\" with something like \"ユーザーごとの個人情報\" (user goto no kojin jōhō) or simply remove it, as the context of 'personal documents' already implies personal information."
+          "description": "The phrase \"その個人\" (sono kojin) is awkward and doesn't accurately translate \"their personal\".  It sounds like referring to a specific individual's personal information rather than the users' personal documents.",
+          "suggestion": "すべてのユーザーの個人ドキュメント (subete no yūzā no kojin dokyumento)"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrasing \"データを転送することができます\" (data o tensō suru koto ga dekimasu) is a bit formal and verbose. It could be more naturally expressed.",
-          "suggestion": "Replace with \"データを転送できます\" (data o tensō dekimasu) which is more concise and natural."
-        },
-        {
-          "type": "formatting",
-          "description": "The spacing around the variables {{organizationName}} and {{productName}} is consistent throughout. No issues identified.",
-          "suggestion": null
+          "description": "The entire phrase after \"データのインポートは\" is a bit convoluted.  A more natural phrasing would improve readability.",
+          "suggestion": "データのインポートにより、すべてのユーザー、個人ドキュメント、共有ドキュメントなどのデータを転送できます。(Data no inporto ni yori, subete no yūzā, kojin dokyumento, kyōyū dokyumento nado no dāta o tensoku dekimasu.)"
         }
       ],
       "approved_at": null
@@ -189,7 +198,18 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"가져오기하세요\" (gajeo-gi-haseyo) is overly formal and a bit awkward in this context. It translates to \"import, please\" which isn't the most natural way to phrase it.",
+          "suggestion": "Consider a more natural phrasing like \"{{organizationName}} {{productName}}으로 데이터를 가져오기 하세요\" or simply \"{{organizationName}} {{productName}}으로 데이터를 가져오세요\"."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of 'transfer data' is somewhat literal.  While accurate, it might be improved for flow.  The sentence structure is a bit clunky.",
+          "suggestion": "Consider rewording the latter part of the sentence to something like \"모든 사용자와 개인 및 공유 문서 등 다양한 데이터를 전송할 수 있습니다\" (allows transferring various data such as all users and their personal and shared documents)."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -198,13 +218,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ສ່ວນບຸກຄົນ\" (suan buk khon) is a literal translation of \"personal\" and doesn't convey the intended meaning of \"personal documents.\" A more appropriate term would be something like \"ເອກະສານສ່ວນຕົວ\" (ek kasan suan tua) or \"ເອກະສານສະບຸກຄົນ\" (ek kasan sabuk khon).",
-          "suggestion": "ເອກະສານສ່ວນຕົວ"
+          "description": "The phrase \"ບໍລິການພາກສ່ວນທີສາມ\" (bōri-gaan phāak-sùan thī-sāam) directly translates to \"third-party service,\" which is technically correct but can sound a bit formal and less natural in Lao. A more user-friendly phrasing might be preferable.",
+          "suggestion": "Consider rephrasing to something like \"ຈາກການບໍລິການນອກ“ (jàak gaan bōri-gaan nɔ̀k) - 'from an external service'."
         },
         {
           "type": "incorrect_translation",
-          "description": "The overall flow of the sentence regarding shared documents is a bit awkward. The Lao translation of 'shared documents' is accurate, but the sentence structure isn't as natural as it could be.",
-          "suggestion": "ການນໍາເຂົ້າຂໍ້ມູນອະນຸຍາດໃຫ້ໂອນຂໍ້ມູນເຊັ່ນຜູ້ໃຊ້ທັງຫມົດ, ເອກະສານສ່ວນຕົວ ແລະເອກະສານທີ່ແບ່ງປັນ."
+          "description": "The phrase \"ເອກະສານທີ່ແບ່ງປັນ\" (ē-gà-sǎan thī̀ bɛ̀ng-pan) translates to \"shared documents\", but in this context, 'documents shared among users' might be a more accurate meaning.",
+          "suggestion": "Consider rephrasing to something like \"ເອກະສານທີ່ໃຊ້ຮ່ວມກັນ“ (ē-gà-sǎan thī̀ xài rûam gan) - 'documents used together/shared among users'."
         }
       ],
       "approved_at": null
@@ -215,8 +235,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Importējiet datus no trešās puses pakalpojuma {{organizationName}} {{productName}}\" is slightly awkward. It implies importing *to* the organization and product, rather than *into* them. A more natural phrasing would be \"Importējiet datus trešās puses pakalpojumā {{organizationName}} {{productName}}\" or \"Importējiet datus uz {{organizationName}} {{productName}}\".",
-          "suggestion": "Importējiet datus trešās puses pakalpojumā {{organizationName}} {{productName}}"
+          "description": "The phrase 'Importējiet datus no trešās puses pakalpojuma {{organizationName}} {{productName}}' is slightly awkward. It directly translates 'Import data from a third party service to {{organizationName}} {{productName}}' but in Latvian, it would flow better to say 'Importējiet datus pakalpojumā {{organizationName}} {{productName}} no trešās puses pakalpojuma'.",
+          "suggestion": "Importējiet datus pakalpojumā {{organizationName}} {{productName}} no trešās puses pakalpojuma."
         }
       ],
       "approved_at": null
@@ -233,8 +253,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'podmiotu trzeciego' is a formal and somewhat clunky way to say 'third party'. A more natural and common phrasing would be 'zewnętrznej usługi' or 'zewnętrznego dostawcy'.",
+          "description": "The phrase 'podmiotu trzeciego' is a bit formal and can be improved for better readability and naturalness in Polish. A more common and accessible phrasing would be 'zewnętrznej usługi' or 'zewnętrznego dostawcy'.",
           "suggestion": "Importuj dane z zewnętrznej usługi do {{organizationName}} {{productName}}."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'transfer' (translated as 'transfer') is often used in English, but in Polish, 'przeniesienie' or 'przesyłanie' would be more natural. 'Transfer' can sound a bit jargon-y.",
+          "suggestion": "Import danych umożliwia przeniesienie danych, takich jak wszyscy użytkownicy oraz ich prywatne i współdzielone dokumenty."
         }
       ],
       "approved_at": null
@@ -251,8 +276,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Data import' is better translated as 'Importação de dados' rather than just 'A importação de dados'. While both are technically correct, the latter is slightly more verbose and less natural in Brazilian Portuguese in this context.",
-          "suggestion": "Importe dados de um serviço de terceiros para o {{organizationName}} {{productName}}. A importação de dados permite a transferência de dados como todos os usuários, seus documentos pessoais e compartilhados."
+          "description": "The phrase 'Data import' is translated as 'A importação de dados'. While technically correct, it's slightly awkward in Portuguese. A more natural phrasing would be 'Importação de dados'.",
+          "suggestion": "Importação de dados"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation retains the English phrasing 'such as'. A more idiomatic equivalent in Portuguese would be 'como por exemplo' or simply a comma.",
+          "suggestion": "como por exemplo"
         }
       ],
       "approved_at": null
@@ -263,23 +293,18 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrase 'de a transfera' is grammatically incorrect. It should be 'de a transfera' or simply 'de a transfera'.",
-          "suggestion": "de a transfera"
+          "description": "The phrase 'de a transfera' is grammatically incorrect. It should be 'de a transfera' or better, 'transferarea'.",
+          "suggestion": "Importul datelor permite transferarea datelor, precum toți utilizatori, documentele lor personale și partajate."
         },
         {
           "type": "grammar",
-          "description": "The sentence structure is awkward. It's more natural to say 'Importul datelor permite transferarea datelor...'",
-          "suggestion": "Importul datelor permite transferarea datelor..."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "“third party service” translates better as 'serviciu extern' rather than 'serviciu terță parte'.",
-          "suggestion": "serviciu extern"
+          "description": "The use of 'precum' feels a bit formal and slightly awkward in this context. It's not inherently wrong, but a more natural phrasing might be better.",
+          "suggestion": "Importul datelor permite transferarea datelor, incluzând toți utilizatori, documentele lor personale și partajate."
         },
         {
           "type": "formatting",
-          "description": "The phrase 'spațiu {{organizationName}} {{productName}}' is unclear and could be improved. It's not obvious what 'spațiu' refers to.",
-          "suggestion": "în {{organizationName}} {{productName}}"
+          "description": "The placement of 'toți utilizatori' feels slightly abrupt. A comma or other punctuation might improve readability.",
+          "suggestion": "Importul datelor permite transferarea datelor, incluzând, toți utilizatori, documentele lor personale și partajate."
         }
       ],
       "approved_at": null
@@ -290,8 +315,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'allows transferring data' is a less natural way to express the meaning in Russian. A more common and natural phrasing would be 'позволяет переносить данные' or 'дает возможность переносить данные'.",
-          "suggestion": "Импорт данных позволяет переносить данные"
+          "description": "The phrase 'allows transferring' is not the most natural way to express 'allows transferring' in Russian. A more fluent phrasing would be 'позволяет переносить'.",
+          "suggestion": "Импорт данных позволяет переносить такие данные, как все пользователи, их личные и общие документы."
         }
       ],
       "approved_at": null
@@ -302,13 +327,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"බාහිර සේවාවකින්\" (bahira sevawakakin) translates to 'from an external service', which is a bit clunky. A more natural phrasing would be something like \"තෙවන පාර්ශව සේවාවකින්\" (thavana parshava sevawakakin) which means 'from a third-party service'.",
-          "suggestion": "බාහිර සේවාවකින් -> තෙවන පාර්ශව සේවාවකින්"
+          "description": "The phrase 'බාහිර සේවාවකින්' (bahira sevawakakin) translates to 'from an external service', while the English uses 'third party service'. While 'external' is not incorrect, 'third party' is more specific and accurate in this context.",
+          "suggestion": "බාහිර තුන් වන පාක්ෂික සේවාවකින්"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of 'allows transferring' is a bit clunky. A more natural phrasing would improve readability.",
+          "suggestion": "හුවමාරු කිරීමේ හැකියාව ඇත"
         },
         {
           "type": "formatting",
-          "description": "The template variables {{organizationName}} and {{productName}} should be consistent with the English version, preserving their format and function within the Sinhala sentence.",
-          "suggestion": "Ensure consistent usage of {{organizationName}} and {{productName}} as in the English version."
+          "description": "The variable placeholders '{{organizationName}}' and '{{productName}}' are correctly preserved, which is good.",
+          "suggestion": null
         }
       ],
       "approved_at": null
@@ -328,23 +358,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'трец́е стране' (treće strane) is an awkward and inaccurate translation of 'third party'. It literally means 'third country'. The correct translation should convey the meaning of a third-party service.",
-          "suggestion": "Увезите податке из услуге спољашњег партнера у {{organizationName}} {{productName}}."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Увоз' (Uvoz) is a direct translation of 'Import', and while understandable, 'Увези' (Uvezi) as part of the verb phrase would be more natural and idiomatic. Although 'Увезите' is grammatically correct, 'Увоз' isn't appropriate here.",
-          "suggestion": "Увезите податке из услуге спољашњег партнера у {{organizationName}} {{productName}}. Увези података омогуц́ава пренос података..."
-        },
-        {
-          "type": "formatting",
-          "description": "The Serbian translation should maintain the same use of placeholders as the English content.",
-          "suggestion": "Увезите податке из услуге спољашњег партнера у {{organizationName}} {{productName}}. Увоз података омогуц́ава пренос података као што су сви корисници, њихови лични и заједнички документи."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -352,14 +366,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'Uvezite' is potentially misspelled. The correct spelling should be 'Uvežite'.",
-          "suggestion": "Uvežite"
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence structure in 'Uvoz podataka omogućava prenos podataka...' is slightly awkward. It repeats 'podatke' (data).",
-          "suggestion": "Uvoz podataka omogućava prenos svih korisnika, njihovih ličnih i zajedničkih dokumenata."
+          "type": "formatting",
+          "description": "The Serbian translation uses a period (.) after 'organizationName' and 'productName' within the template variables, which is not consistent with the English original. The English version does not have periods within the variables.",
+          "suggestion": "Remove the periods after 'organizationName' and 'productName' within the translation: 'Uvezite podatke iz usluge treće strane u {{organizationName}} {{productName}}...'"
         }
       ],
       "approved_at": null
@@ -367,7 +376,23 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The use of '’' (right single quotation mark) instead of a standard apostrophe (') is inconsistent and looks unprofessional. It should be a standard apostrophe.",
+          "suggestion": "Replace all instances of ‘ with ’. (e.g., ‘organizationName’ should be 'organizationName')"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'veri içe aktarma' is a bit clunky. A more natural phrasing would be 'veri aktarımı' or 'verileri aktarma'.",
+          "suggestion": "Change 'veri içe aktarma' to 'veri aktarımı' or 'verileri aktarma'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The use of 'sağlar' implies the functionality 'provides'. A better translation would be 'olanağını sunar' or 'mümkün kılar'.",
+          "suggestion": "Change 'sağlar' to 'olanağını sunar' or 'mümkün kılar'."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -375,14 +400,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Ukrainian translation uses \"простору\" instead of a more natural equivalent for 'to' in this context. While technically correct, it sounds somewhat formal and clunky. A better translation might use \"в\" or \"до\" depending on the intended nuance.",
-          "suggestion": "Consider replacing \"простору\" with a more natural equivalent like \"в\" or \"до\" (e.g., \"в {{organizationName}} {{productName}}\" or \"до {{organizationName}} {{productName}}\")"
-        },
-        {
           "type": "incorrect_translation",
-          "description": "The phrase 'third party service' is translated as 'стороннього сервісу'. While accurate, a more conversational translation might be 'іншої служби' or 'зовнішнього сервісу'.",
-          "suggestion": "Consider using 'іншої служби' or 'зовнішнього сервісу' for 'third party service'."
+          "description": "The word 'простору' (prostoru) used for '{{organizationName}} {{productName}}' is not the most natural translation in this context. It implies a 'space' or 'area,' which might not be the intended meaning.  A better option would be 'в {{organizationName}} {{productName}}' or 'до {{organizationName}} {{productName}}' to indicate importing *into* the organization/product.",
+          "suggestion": "Імпортуйте дані зі стороннього сервісу в {{organizationName}} {{productName}}. or Імпортуйте дані зі стороннього сервісу до {{organizationName}} {{productName}}."
         }
       ],
       "approved_at": null
@@ -393,8 +413,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Việc nhập dữ liệu cho phép\" is slightly awkward. A more natural translation would be \"Quá trình nhập dữ liệu cho phép\" or simply \"Nhập dữ liệu cho phép\".",
-          "suggestion": "Nhập dữ liệu cho phép"
+          "description": "The phrase \"Việc nhập dữ liệu cho phép\" is slightly awkward. A more natural phrasing would be \"Việc nhập dữ liệu cho phép...\" or \"Nhập dữ liệu cho phép...\"",
+          "suggestion": "Nhập dữ liệu cho phép..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"tài liệu dùng chung của họ\" could be more precisely translated to reflect that the documents belong to the users, not that the users are sharing *the sharing*.",
+          "suggestion": "tài liệu cá nhân và tài liệu dùng chung của người dùng."
         }
       ],
       "approved_at": null
@@ -405,8 +430,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"允许传输数据\" (allows transferring data) is a somewhat awkward and less natural way to express the English 'allows transferring data'. A more common and natural phrasing would be '支持数据传输' (supports data transfer).",
-          "suggestion": "将数据从第三方服务导入 {{organizationName}}{{productName}}。数据导入支持数据传输，例如所有用户、他们的个人和共享文档。"
+          "description": "The phrase \"确保数据资产无缝衔接\" (ensures seamless data asset connection) is a bit too formal and doesn't directly translate the meaning of 'Data import allows transferring data...'. A more direct translation would be better. While technically accurate, it feels unnecessarily complex for this context.",
+          "suggestion": "考虑使用更直接的表达，例如“可将数据导入至” (can import data to) or “允许数据迁移至” (allows data migration to)."
+        },
+        {
+          "type": "formatting",
+          "description": "The Chinese translation includes a “​” character at the end. This is likely an artifact of copy/pasting and should be removed.",
+          "suggestion": "Remove the “​” character at the end of the translation."
         }
       ],
       "approved_at": null

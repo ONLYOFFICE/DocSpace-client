@@ -3,7 +3,7 @@
   "content": "Create spreadsheet",
   "content_en_sha1_hash": "aabb914cc2d4d7ca8505c225cce9704135be3dbf",
   "created_at": "2025-05-19T21:30:55.044Z",
-  "updated_at": "2025-05-21T10:34:06.623Z",
+  "updated_at": "2025-05-24T10:43:53.602Z",
   "comment": {
     "text": "This translation key is used for the text \"Create spreadsheet\" in a Hotkeys panel within a file creation process. It appears as a label next to a hotkey combination (Shift + s) that allows users to create a new spreadsheet. The translation of this key will be displayed on the UI, guiding users to associate the specific keyboard shortcut with the corresponding action.",
     "is_auto": true,
@@ -81,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Ստեղծել աղյուսակաթերթ\" is a literal translation, it sounds somewhat awkward and unnatural in Armenian. A more natural phrasing would be something like \"Создаել գործատեղային պանակ\" or \"Ստեղծել պանակ\".",
-          "suggestion": "Ստեղծել պանակ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -108,7 +102,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"스프레드 시트를 만듭니다\" while technically correct, sounds slightly awkward and overly formal for a hotkey label. A more natural phrasing would be more appropriate.",
+          "description": "The translation '스프레드 시트를 만듭니다' is technically correct but sounds slightly unnatural in Korean. A more natural phrasing would be '스프레드시트 만들기' or '스프레드시트 생성'.",
           "suggestion": "스프레드시트 만들기"
         }
       ],
@@ -198,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Elektronik Tablo Oluştur' is technically correct, a more natural and commonly used translation for 'Create spreadsheet' would be 'Excel Oluştur'. 'Elektronik Tablo' is a more literal and less conversational phrase.",
-          "suggestion": "Excel Oluştur"
+          "description": "While \"Elektronik Tablo Oluştur\" is understandable, a more natural and common translation for \"spreadsheet\" in this context would be \"Excel Tablosu\". \"Elektronik Tablo\" is a more literal translation and less idiomatic.",
+          "suggestion": "Excel Tablosu Oluştur"
         }
       ],
       "approved_at": null

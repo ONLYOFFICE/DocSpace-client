@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -40,7 +40,7 @@ import { ComboBox } from "@docspace/shared/components/combobox";
 
 import { PluginComponents } from "./enums";
 
-import { messageActions } from "./utils";
+import { borderToStyle, messageActions } from "./utils";
 
 const PLUGIN_IFRAME_TITLE = "Plugin iframe";
 
@@ -60,6 +60,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
     updateEventListenerItems,
     updateFileItems,
     updatePlugin,
+    setPluginSelectorVisible,
+    setPluginSelectorProps,
   } = pluginStore;
 
   return {
@@ -75,6 +77,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
     updateEventListenerItems,
     updateFileItems,
     updatePlugin,
+    setPluginSelectorVisible,
+    setPluginSelectorProps,
   };
 })(
   observer(
@@ -96,6 +100,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
       updateEventListenerItems,
       updateFileItems,
       updatePlugin,
+      setPluginSelectorVisible,
+      setPluginSelectorProps,
     }) => {
       const [elementProps, setElementProps] = React.useState(component.props);
 
@@ -105,7 +111,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
         isRequestRunning,
         setIsRequestRunning,
         setModalRequestRunning,
-      } = React.useContext(PropsContext);
+        modalRequestRunning,
+      } = React.use(PropsContext);
 
       React.useEffect(() => {
         if (
@@ -145,25 +152,35 @@ export const PluginComponent = inject(({ pluginStore }) => {
             padding: paddingProp,
             margin: marginProp,
             display: displayProp,
-            border: borderProp,
             background: backgroundProp,
             flex: flexProp,
             overflow: overflowProp,
+            ...borderToStyle(borderProp),
             ...elementRest,
           };
         }
 
         switch (componentName) {
           case PluginComponents.box: {
-            const childrenComponents = elementProps?.children?.map((item) => (
-              <PluginComponent
-                key={`box-${item.component}`}
-                component={item}
-                pluginName={pluginName}
-              />
-            ));
+            const childrenComponents = elementProps?.children?.map(
+              (item, index) => (
+                <PluginComponent
+                  key={`${pluginName}-box-${item.component}-${index}`}
+                  component={item}
+                  pluginName={pluginName}
+                />
+              ),
+            );
 
-            return <div style={elementStyles}>{childrenComponents}</div>;
+            return (
+              <div
+                id={elementProps?.id}
+                className={elementProps?.className}
+                style={elementStyles}
+              >
+                {childrenComponents}
+              </div>
+            );
           }
 
           case PluginComponents.text: {
@@ -178,26 +195,25 @@ export const PluginComponent = inject(({ pluginStore }) => {
             const onChangeAction = () => {
               const message = elementProps.onChange();
 
-              messageActions(
+              messageActions({
                 message,
                 setElementProps,
-
                 pluginName,
-
                 setSettingsPluginDialogVisible,
                 setCurrentSettingsDialogPlugin,
                 updatePluginStatus,
                 updatePropsContext,
                 setPluginDialogVisible,
                 setPluginDialogProps,
-
                 updateContextMenuItems,
                 updateInfoPanelItems,
                 updateMainButtonItems,
                 updateProfileMenuItems,
                 updateEventListenerItems,
                 updateFileItems,
-              );
+                setPluginSelectorVisible,
+                setPluginSelectorProps,
+              });
             };
 
             return <Checkbox {...elementProps} onChange={onChangeAction} />;
@@ -207,26 +223,25 @@ export const PluginComponent = inject(({ pluginStore }) => {
             const onChangeAction = () => {
               const message = elementProps.onChange();
 
-              messageActions(
+              messageActions({
                 message,
                 setElementProps,
-
                 pluginName,
-
                 setSettingsPluginDialogVisible,
                 setCurrentSettingsDialogPlugin,
                 updatePluginStatus,
                 updatePropsContext,
                 setPluginDialogVisible,
                 setPluginDialogProps,
-
                 updateContextMenuItems,
                 updateInfoPanelItems,
                 updateMainButtonItems,
                 updateProfileMenuItems,
                 updateEventListenerItems,
                 updateFileItems,
-              );
+                setPluginSelectorVisible,
+                setPluginSelectorProps,
+              });
             };
 
             return <ToggleButton {...elementProps} onChange={onChangeAction} />;
@@ -236,26 +251,25 @@ export const PluginComponent = inject(({ pluginStore }) => {
             const onChangeAction = (e) => {
               const message = elementProps.onChange(e.target.value);
 
-              messageActions(
+              messageActions({
                 message,
                 setElementProps,
-
                 pluginName,
-
                 setSettingsPluginDialogVisible,
                 setCurrentSettingsDialogPlugin,
                 updatePluginStatus,
                 updatePropsContext,
                 setPluginDialogVisible,
                 setPluginDialogProps,
-
                 updateContextMenuItems,
                 updateInfoPanelItems,
                 updateMainButtonItems,
                 updateProfileMenuItems,
                 updateEventListenerItems,
                 updateFileItems,
-              );
+                setPluginSelectorVisible,
+                setPluginSelectorProps,
+              });
             };
 
             return <Textarea {...elementProps} onChange={onChangeAction} />;
@@ -265,26 +279,25 @@ export const PluginComponent = inject(({ pluginStore }) => {
             const onChangeAction = (e) => {
               const message = elementProps.onChange(e.target.value);
 
-              messageActions(
+              messageActions({
                 message,
                 setElementProps,
-
                 pluginName,
-
                 setSettingsPluginDialogVisible,
                 setCurrentSettingsDialogPlugin,
                 updatePluginStatus,
                 updatePropsContext,
                 setPluginDialogVisible,
                 setPluginDialogProps,
-
                 updateContextMenuItems,
                 updateInfoPanelItems,
                 updateMainButtonItems,
                 updateProfileMenuItems,
                 updateEventListenerItems,
                 updateFileItems,
-              );
+                setPluginSelectorVisible,
+                setPluginSelectorProps,
+              });
             };
 
             return <TextInput {...elementProps} onChange={onChangeAction} />;
@@ -295,7 +308,7 @@ export const PluginComponent = inject(({ pluginStore }) => {
               withLoadingAfterClick,
               disableWhileRequestRunning,
               isSaveButton,
-              modalRequestRunning,
+              settingsModalRequestRunning,
               setSettingsModalRequestRunning,
               onCloseAction,
               ...rest
@@ -313,28 +326,26 @@ export const PluginComponent = inject(({ pluginStore }) => {
 
               const message = await elementProps.onClick();
 
-              messageActions(
+              messageActions({
                 message,
                 setElementProps,
-
                 pluginName,
-
                 setSettingsPluginDialogVisible,
                 setCurrentSettingsDialogPlugin,
                 updatePluginStatus,
                 updatePropsContext,
                 setPluginDialogVisible,
                 setPluginDialogProps,
-
                 updateContextMenuItems,
                 updateInfoPanelItems,
                 updateMainButtonItems,
                 updateProfileMenuItems,
                 updateEventListenerItems,
                 updateFileItems,
-
                 updatePlugin,
-              );
+                setPluginSelectorVisible,
+                setPluginSelectorProps,
+              });
 
               setIsRequestRunning && setIsRequestRunning(false);
               setModalRequestRunning && setModalRequestRunning(false);
@@ -347,13 +358,14 @@ export const PluginComponent = inject(({ pluginStore }) => {
 
             const isLoading = withLoadingAfterClick
               ? isSaveButton
-                ? modalRequestRunning
-                : isRequestRunning || rest.isLoading
+                ? settingsModalRequestRunning
+                : isRequestRunning || rest.isLoading || modalRequestRunning
               : rest.isLoading;
+
             const isDisabled = disableWhileRequestRunning
               ? isSaveButton
-                ? modalRequestRunning
-                : isRequestRunning || rest.isDisabled
+                ? settingsModalRequestRunning
+                : isRequestRunning || rest.isDisabled || modalRequestRunning
               : rest.isDisabled;
 
             return (
@@ -370,26 +382,25 @@ export const PluginComponent = inject(({ pluginStore }) => {
             const onSelectAction = (option) => {
               const message = elementProps.onSelect(option);
 
-              messageActions(
+              messageActions({
                 message,
                 setElementProps,
-
                 pluginName,
-
                 setSettingsPluginDialogVisible,
                 setCurrentSettingsDialogPlugin,
                 updatePluginStatus,
                 updatePropsContext,
                 setPluginDialogVisible,
                 setPluginDialogProps,
-
                 updateContextMenuItems,
                 updateInfoPanelItems,
                 updateMainButtonItems,
                 updateProfileMenuItems,
                 updateEventListenerItems,
                 updateFileItems,
-              );
+                setPluginSelectorVisible,
+                setPluginSelectorProps,
+              });
             };
 
             return <ComboBox {...elementProps} onSelect={onSelectAction} />;
@@ -437,6 +448,7 @@ const WrappedComponent = ({
   setSaveButtonProps,
 
   setModalRequestRunning,
+  modalRequestRunning,
 }) => {
   const [contextProps, setContextProps] = React.useState({});
 
@@ -463,14 +475,20 @@ const WrappedComponent = ({
       isRequestRunning,
       setIsRequestRunning,
       setModalRequestRunning,
+      modalRequestRunning,
     }),
-    [contextProps, isRequestRunning, setModalRequestRunning],
+    [
+      contextProps,
+      isRequestRunning,
+      setModalRequestRunning,
+      modalRequestRunning,
+    ],
   );
 
   return (
-    <PropsContext.Provider value={contextValue}>
+    <PropsContext value={contextValue}>
       <PluginComponent component={component} pluginName={pluginName} />
-    </PropsContext.Provider>
+    </PropsContext>
   );
 };
 

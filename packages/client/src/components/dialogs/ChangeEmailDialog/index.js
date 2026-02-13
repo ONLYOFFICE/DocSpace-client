@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,7 +26,6 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
@@ -39,12 +38,6 @@ import { sendInstructionsToChangeEmail } from "@docspace/shared/api/people";
 
 import { ErrorKeys } from "@docspace/shared/enums";
 import { inject, observer } from "mobx-react";
-
-const StyledBodyContent = styled.div`
-  .text-body {
-    margin-bottom: 16px;
-  }
-`;
 
 class ChangeEmailDialogComponent extends React.Component {
   constructor(props) {
@@ -90,7 +83,7 @@ class ChangeEmailDialogComponent extends React.Component {
     } = this.props;
     const { id } = user;
     const newProfile = user;
-    newProfile.email = email;
+    // newProfile.email = email;
 
     const isSelf = profile?.id === id;
 
@@ -178,7 +171,6 @@ class ChangeEmailDialogComponent extends React.Component {
   };
 
   render() {
-    console.log("ChangeEmailDialog render");
     const { t, tReady, visible, onClose } = this.props;
     const { isRequestRunning, email, errorMessage, hasError } = this.state;
 
@@ -191,8 +183,10 @@ class ChangeEmailDialogComponent extends React.Component {
       >
         <ModalDialog.Header>{t("EmailChangeTitle")}</ModalDialog.Header>
         <ModalDialog.Body className="email-dialog-body">
-          <StyledBodyContent>
-            <Text className="text-body">{t("EmailActivationDescription")}</Text>
+          <div>
+            <Text style={{ marginBottom: "16px" }}>
+              {t("EmailActivationDescription")}
+            </Text>
             <FieldContainer
               isVertical
               style={{ margin: "0" }}
@@ -200,6 +194,7 @@ class ChangeEmailDialogComponent extends React.Component {
               errorMessage={errorMessage}
               hasError={hasError}
               labelVisible={false}
+              dataTestId="change_email_field"
             >
               <EmailInput
                 id="new-email"
@@ -211,9 +206,10 @@ class ChangeEmailDialogComponent extends React.Component {
                 onKeyUp={this.onKeyPress}
                 hasError={hasError}
                 placeholder={t("EnterEmail")}
+                testId="change_email_input"
               />
             </FieldContainer>
-          </StyledBodyContent>
+          </div>
         </ModalDialog.Body>
         <ModalDialog.Footer>
           <Button
@@ -225,6 +221,7 @@ class ChangeEmailDialogComponent extends React.Component {
             primary
             onClick={this.onValidateEmail}
             isLoading={isRequestRunning}
+            testId="change_email_send_button"
           />
           <Button
             className="cancel-button"
@@ -234,6 +231,7 @@ class ChangeEmailDialogComponent extends React.Component {
             scale
             onClick={onClose}
             isDisabled={isRequestRunning}
+            testId="change_email_cancel_button"
           />
         </ModalDialog.Footer>
       </ModalDialog>

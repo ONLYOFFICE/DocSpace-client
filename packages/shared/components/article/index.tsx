@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from "react";
 import { isMobile, isMobileOnly, isIOS } from "react-device-detect";
 
@@ -47,6 +46,7 @@ import styles from "./Article.module.scss";
 import { HEADER_NAME, MAIN_BUTTON_NAME, BODY_NAME } from "./Article.constants";
 import { ArticleProps } from "./Article.types";
 
+// biome-ignore-start lint/correctness/noUnusedVariables: TODO fix
 const ArticleHeader = ({ children }: { children: React.ReactNode }) => null;
 ArticleHeader.displayName = HEADER_NAME;
 
@@ -92,7 +92,6 @@ const Article = ({
   isFreeTariff,
   isGracePeriod,
   isLicenseDateExpired,
-  isLicenseExpiring,
   isPaymentPageAvailable,
   isTrial,
   standalone,
@@ -115,6 +114,7 @@ const Article = ({
   downloaddesktopUrl,
   officeforandroidUrl,
   officeforiosUrl,
+  showBackButton,
 }: ArticleProps) => {
   const [articleHeaderContent, setArticleHeaderContent] =
     React.useState<null | React.JSX.Element>(null);
@@ -128,6 +128,7 @@ const Article = ({
   const updateSizeRef = React.useRef<null | ReturnType<typeof setTimeout>>(
     null,
   );
+  // biome-ignore-end lint/correctness/noUnusedVariables: TODO fix
 
   const onMobileBack = React.useCallback(() => {
     // close article
@@ -226,15 +227,14 @@ const Article = ({
 
   const hideDevTools =
     user?.isVisitor ||
-    (user?.isCollaborator && limitedAccessDevToolsForUsers) ||
+    (!user?.isAdmin && limitedAccessDevToolsForUsers) ||
     window.location.pathname.includes("portal-settings") ||
-    window.location.pathname.includes("management");
+    window.location.pathname.includes("management") ||
+    window.location.pathname.includes("accounts");
 
   const pathDevTools = user?.isAdmin
     ? "/portal-settings/developer-tools"
     : "/developer-tools";
-
-  const showBackButton = window.location.pathname.includes("portal-settings");
 
   const articleComponent = (
     <>
@@ -274,7 +274,12 @@ const Article = ({
           scrollClass="article-scroller"
         >
           {showBackButton && currentDeviceType !== DeviceType.mobile ? (
-            <BackButton showText={showText} />
+            <BackButton
+              showText={showText}
+              currentDeviceType={currentDeviceType}
+              onLogoClickAction={onLogoClickAction}
+              isLoading={isBurgerLoading}
+            />
           ) : null}
           {articleBodyContent ? articleBodyContent.props.children : null}
           {!showArticleLoader ? (

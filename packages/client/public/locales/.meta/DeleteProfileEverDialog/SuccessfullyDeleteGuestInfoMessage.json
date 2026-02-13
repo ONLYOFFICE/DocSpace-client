@@ -3,7 +3,7 @@
   "content": "The guest has been successfully deleted",
   "content_en_sha1_hash": "13429d56b528f8b805da3b8af5aff71a716917b2",
   "created_at": "2025-05-19T21:30:56.678Z",
-  "updated_at": "2025-05-20T09:38:26.113Z",
+  "updated_at": "2025-05-24T13:14:56.948Z",
   "comment": {
     "text": "This translation key is used to display a success message when a guest's information is successfully deleted. It appears in a toast notification in a delete profile dialog. Translators should provide a phrase indicating that a guest has been removed or deleted from the system.",
     "is_auto": true,
@@ -153,7 +153,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'මකා' (maka) is a valid form, but 'හැකිව' (hakiwa) might be a better choice for conveying 'successfully' depending on the desired nuance. 'මකා' implies just deletion, whereas 'හැකිව' implies a successful completion of the deletion process.",
+          "suggestion": "ආගන්තුකයෙකු සාර්ථකව හැකිව මකා දමා ඇත"
+        }
+      ],
       "approved_at": null
     },
     "sk": {

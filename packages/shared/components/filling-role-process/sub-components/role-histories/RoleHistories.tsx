@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,9 +26,9 @@
 
 import { decode } from "he";
 import { DateTime } from "luxon";
-import classNames from "classnames";
 import React, { useMemo } from "react";
 import { Trans, useTranslation } from "react-i18next";
+import { classNames } from "../../../../utils";
 
 import styles from "./RoleHistories.module.scss";
 import type { RoleHistoryProps } from "./RoleHistories.types";
@@ -50,7 +50,7 @@ const RoleHistories = ({
         "Common:HistoryOpenedAtDate",
       ),
       [FillingFormStatusHistory.SubmissionDate.toString()]: t(
-        "Common:HistorySubmissionDate",
+        "Common:HistorySubmittedPartDescription",
       ),
       [FillingFormStatusHistory.StopDate.toString()]: (
         <Trans
@@ -83,7 +83,7 @@ const RoleHistories = ({
         const text = historyTexts[key];
 
         return (
-          <li aria-label={text} key={value} className={styles.roleHistoryItem}>
+          <li key={value} className={styles.roleHistoryItem}>
             <span className={styles.action}>{text}</span>
             <time className={styles.date} dateTime={value}>
               {date}

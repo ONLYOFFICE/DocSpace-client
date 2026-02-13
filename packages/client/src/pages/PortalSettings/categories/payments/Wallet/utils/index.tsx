@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,36 +24,63 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { TTranslation } from "@docspace/shared/types";
+import { truncateNumberToFraction } from "@docspace/shared/utils/common";
+
+const truncateNumberToFractionNumeric = (
+  value: number,
+  fractionDigits: number,
+) => {
+  if (!Number.isFinite(value)) return value;
+
+  const factor = 10 ** fractionDigits;
+  return Math.trunc(value * factor) / factor;
+};
+
 export const formattedBalanceTokens = (
   language: string,
   amount: number,
   currency: string,
+  maximumFractionDigits: number = 3,
 ) => {
+  const truncatedStr = truncateNumberToFraction(amount, maximumFractionDigits);
+  const truncated = Number(truncatedStr);
+
   const formatter = new Intl.NumberFormat(language, {
     style: "currency",
     currency,
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  });
-
-  return formatter.formatToParts(amount);
-};
-
-export const formatCurrencyValue = (
-  language: string,
-  amount: number,
-  currency: string,
-  minimumFractionDigits: number = 0,
-  maximumFractionDigits: number = 0,
-) => {
-  const formatter = new Intl.NumberFormat(language, {
-    style: "currency",
-    currency,
-    minimumFractionDigits,
+    minimumFractionDigits: maximumFractionDigits,
     maximumFractionDigits,
   });
 
-  return formatter.format(amount);
+  return formatter.formatToParts(truncated);
+};
+
+export const getEffectiveFraction = (
+  value: number,
+  isScientific: boolean = false,
+  fractionDigits: number = 0,
+): number => {
+  const str = value.toString();
+
+  if (isScientific) {
+    const [mantissa, expPart] = str.split("e-");
+    const exponent = Number(expPart);
+
+    const mantissaFraction = mantissa.split(".")[1]?.length;
+
+    const actualFractionDigits = exponent + mantissaFraction;
+
+    if (fractionDigits === 0) return actualFractionDigits;
+
+    return Math.min(fractionDigits, actualFractionDigits);
+  }
+
+  const actualFractionLength = str.split(".")[1]?.length;
+
+  if (fractionDigits === 0) return actualFractionLength;
+
+  return Math.min(fractionDigits, actualFractionLength);
 };
 
 export const accountingLedgersFormat = (
@@ -62,10 +89,43 @@ export const accountingLedgersFormat = (
   isCredit: boolean,
   currency: string,
 ) => {
-  return `${isCredit ? "+" : "-"}${new Intl.NumberFormat(language, {
+  const maximumFractionDigits = 8;
+
+  let effectiveDigits = maximumFractionDigits;
+
+  const str = amount.toString();
+  const isScientific = /e/i.test(str);
+
+  const isWholeNumber = isScientific
+    ? false
+    : Number.isFinite(amount) && Math.abs(amount - Math.trunc(amount)) < 1e-9;
+
+  if (!isWholeNumber) {
+    effectiveDigits = getEffectiveFraction(amount, isScientific);
+  }
+
+  const effectiveFractionDigits = isWholeNumber ? 2 : effectiveDigits;
+
+  const truncated = isScientific
+    ? truncateNumberToFractionNumeric(amount, effectiveFractionDigits)
+    : amount;
+
+  const formatter = new Intl.NumberFormat(language, {
     style: "currency",
     currency,
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 7,
-  }).format(amount)}`;
+    minimumFractionDigits: effectiveFractionDigits,
+    maximumFractionDigits: effectiveFractionDigits,
+  });
+
+  const value = formatter.format(truncated);
+  return `${isCredit ? "+" : "-"}${value}`;
+};
+
+export const getServiceQuantity = (
+  t: TTranslation,
+  quantity: number,
+  serviceUnit?: string,
+) => {
+  if (!serviceUnit) return "—";
+  return t("UnitCount", { unit: serviceUnit, count: quantity });
 };

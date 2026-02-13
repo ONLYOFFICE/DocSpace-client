@@ -1,0 +1,21 @@
+/* Story-only overrides for DropBox placement and controls */
+
+/* Place dropbox directly under title-block */
+[data-is-drop-box-component="true"] {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  display: none !important;
+}
+
+/* Hide back arrow and its separator inside DropBox */
+[data-is-drop-box-component="true"] .navigation-arrow-container,
+[data-is-drop-box-component="true"] .navigation-header-separator,
+[data-is-drop-box-component="true"] .arrow-button {
+  display: none !important;
+}
+
+[data-testid="backdrop"] + [data-is-frame="false"] {
+  width: 100px !important;
+  left: 286px !important;
+  top: 144px !important;
+}

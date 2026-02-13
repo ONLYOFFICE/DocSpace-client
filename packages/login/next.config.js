@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,30 +27,39 @@
 /** @type {import('next').NextConfig} */
 
 const path = require("path");
-const pkg = require("./package.json");
+const fs = require("fs");
+
+// Use fs.readFileSync instead of require to avoid module system issues
+const packagePath = path.resolve(__dirname, "package.json");
+const pkg = JSON.parse(fs.readFileSync(packagePath, "utf8"));
+
 const BannerPlugin = require("webpack").BannerPlugin;
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 
+// Use createRequire to properly import ES module
+const { createRequire } = require("module");
+const requireESM = createRequire(__filename);
+
+const buildModule = requireESM("@docspace/shared/utils/build");
+const { getBanner } = buildModule.default;
+
 const version = pkg.version;
-
-const getBuildDate = () => {
-  const timeElapsed = Date.now();
-  const today = new Date(timeElapsed);
-  return JSON.stringify(today.toISOString().split(".")[0] + "Z");
-};
-
-const getBuildYear = () => {
-  const timeElapsed = Date.now();
-  const today = new Date(timeElapsed);
-  return today.getFullYear();
-};
+const banner = getBanner(version);
 
 const nextConfig = {
   basePath: "/login",
-  output: "standalone",
   typescript: {
-    ignoreBuildErrors: process.env.TS_ERRORS_IGNORE === "true",
+    ignoreBuildErrors: true,
   },
+  serverExternalPackages: [
+    "nconf",
+    "date-and-time",
+    "winston",
+    "winston-cloudwatch",
+    "winston-daily-rotate-file",
+    "@aws-sdk/client-cloudwatch-logs",
+  ],
   compiler: {
     styledComponents: true,
   },
@@ -67,13 +76,42 @@ const nextConfig = {
     },
   },
   webpack: (config) => {
-    config.devtool = "source-map";
+    const isProduction = config.mode === "production";
+    // Add resolve configuration for shared package
+    config.resolve = {
+      ...config.resolve,
+      alias: {
+        ...config.resolve?.alias,
+        "@docspace/shared": path.resolve(__dirname, "../shared"),
+      },
+    };
 
-    if (config.mode === "production") {
+    config.devtool = isProduction ? "source-map" : false; // TODO: replace to "eval-cheap-module-source-map" if you want to debug in a browser;
+
+    if (isProduction) {
       config.optimization = {
         splitChunks: { chunks: "all" },
         minimize: true,
         minimizer: [
+          new CssMinimizerPlugin({
+            minimizerOptions: {
+              preset: [
+                "default",
+                {
+                  discardComments: {
+                    removeAll: false,
+                    remove: (comment) => {
+                      // Keep copyright comments that contain the copyright text
+                      const isCopyright =
+                        comment.includes("Copyright Ascensio System SIA") &&
+                        comment.includes("https://www.onlyoffice.com/");
+                      return !isCopyright;
+                    },
+                  },
+                },
+              ],
+            },
+          }),
           new TerserPlugin({
             terserOptions: {
               format: {
@@ -89,13 +127,7 @@ const nextConfig = {
       config.plugins.push(
         new BannerPlugin({
           raw: true,
-          banner: `/*
-* (c) Copyright Ascensio System SIA 2009-${getBuildYear()}. All rights reserved
-*
-* https://www.onlyoffice.com/
-*
-* Version: ${version} (build: ${getBuildDate()})
-*/`,
+          banner,
         }),
       );
     }
@@ -159,6 +191,11 @@ const nextConfig = {
 
     return config;
   },
+  devIndicators: false,
 };
+
+if (process.env.DEPLOY) {
+  nextConfig.output = "standalone";
+}
 
 module.exports = nextConfig;

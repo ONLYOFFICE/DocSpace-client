@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,35 +34,53 @@ import PortalDeactivationSection from "./portalDeactivation";
 import PortalDeletionSection from "./portalDeletion";
 import DeleteDataLoader from "./DeleteDataLoader";
 import config from "../../../../../package.json";
+import useDeleteData from "./useDeleteData";
 
 const DeleteData = (props) => {
-  const { t, isNotPaidPeriod, tReady } = props;
+  const {
+    t,
+    isNotPaidPeriod,
+    tReady,
+    getPortalOwner,
+    showPortalSettingsLoader,
+    clearAbortControllerArr,
+  } = props;
 
   const navigate = useNavigate();
   const location = useLocation();
 
   const [currentTabId, setCurrentTabId] = useState();
-  const [isLoading, setIsLoading] = useState(false);
+
+  const { stripeUrl, fetchPortalDeletionData, fetchPortalDeactivationData } =
+    useDeleteData({
+      getPortalOwner,
+    });
 
   const data = [
     {
       id: "deletion",
-      name: t("DeletePortal", { productName: t("Common:ProductName") }),
-      content: <PortalDeletionSection />,
+      name: t("Common:DeletePortal", { productName: t("Common:ProductName") }),
+      content: <PortalDeletionSection stripeUrl={stripeUrl} />,
+      onClick: async () => {
+        clearAbortControllerArr();
+        await fetchPortalDeletionData();
+      },
     },
     {
       id: "deactivation",
       name: t("PortalDeactivation", { productName: t("Common:ProductName") }),
       content: <PortalDeactivationSection />,
+      onClick: async () => {
+        clearAbortControllerArr();
+        await fetchPortalDeactivationData();
+      },
     },
   ];
 
   useEffect(() => {
     const path = location.pathname;
     const currentTab = data.find((item) => path.includes(item.id));
-    if (currentTab !== -1 && data.length) setCurrentTabId(currentTab.id);
-
-    setIsLoading(true);
+    if (currentTab && data.length) setCurrentTabId(currentTab.id);
   }, [location.pathname]);
 
   const onSelect = (e) => {
@@ -76,7 +94,8 @@ const DeleteData = (props) => {
     setCurrentTabId(e.id);
   };
 
-  if (!isLoading || !tReady) return <DeleteDataLoader />;
+  if (showPortalSettingsLoader || !tReady) return <DeleteDataLoader />;
+
   return isNotPaidPeriod ? (
     <PortalDeletionSection />
   ) : (
@@ -84,14 +103,23 @@ const DeleteData = (props) => {
       items={data}
       selectedItemId={currentTabId}
       onSelect={(e) => onSelect(e)}
+      withAnimation
     />
   );
 };
 
-export const Component = inject(({ currentTariffStatusStore }) => {
-  const { isNotPaidPeriod } = currentTariffStatusStore;
+export const Component = inject(
+  ({ currentTariffStatusStore, settingsStore, clientLoadingStore }) => {
+    const { isNotPaidPeriod } = currentTariffStatusStore;
+    const { getPortalOwner, clearAbortControllerArr } = settingsStore;
 
-  return {
-    isNotPaidPeriod,
-  };
-})(observer(withTranslation("Settings")(DeleteData)));
+    const { showPortalSettingsLoader } = clientLoadingStore;
+
+    return {
+      isNotPaidPeriod,
+      getPortalOwner,
+      showPortalSettingsLoader,
+      clearAbortControllerArr,
+    };
+  },
+)(observer(withTranslation("Settings")(DeleteData)));

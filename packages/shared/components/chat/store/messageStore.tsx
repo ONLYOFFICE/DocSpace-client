@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,580 +24,628 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { makeAutoObservable } from "mobx";
 import React from "react";
-import { makeAutoObservable, runInAction } from "mobx";
-
-import FlowsApi from "../../../api/flows/flows.api";
-import { Flow, Tweaks } from "../../../api/flows/flows.types";
-
-import { TSelectorItem } from "../../selector";
-
-import { ChatMessageType, PropertiesType } from "../types/chat";
 import {
-  extractFilesFromMessage,
-  removeFolderFromMessage,
-  getSessionId,
-  getChatDate,
-} from "../utils";
-import { ChatEvents } from "../enums";
+  getChatMessages,
+  sendMessageToChat,
+  startNewChat,
+} from "../../../api/ai";
+import { ContentType, EventType, RoleType } from "../../../api/ai/enums";
+import type {
+  TContent,
+  TMessage,
+  TToolCallContent,
+} from "../../../api/ai/types";
+import type { TFile } from "../../../api/files/types";
+
+import { toastr } from "../../toast";
+
+import type { TMessageStoreProps } from "../Chat.types";
 
 export default class MessageStore {
-  flowId = "";
+  messages: TMessage[] = [];
 
-  saveToFileFlow: Flow | null = null;
+  startIndex: number = 0;
 
-  aiSelectedFolder: string | number = "";
+  totalMessages: number = 0;
 
-  aiUserId = "";
+  currentChatId: string = "";
 
-  messages: ChatMessageType[] = [];
+  roomId: number | string = "";
 
-  sessions: Map<string, ChatMessageType[]> = new Map();
+  abortController: AbortController = new AbortController();
 
-  sortedSessions: Array<[string, Date]> = [];
+  isRequestRunning: boolean = false;
 
-  currentSession = "";
+  isStreamRunning: boolean = false;
 
-  isInit = false;
+  isGetMessageRequestRunning: boolean = false;
 
-  isRequestRunning = false;
+  knowledgeSearchToolName: string = "";
 
-  isSelectSessionOpen = false;
+  webSearchToolName: string = "";
 
-  abortController: AbortController | null = null;
+  webCrawlingToolName: string = "";
+
+  toolsConfirmQueue: string[] = [];
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  setFlowId = (flowId: string) => {
-    this.flowId = flowId;
+  addToToolsConfirmQueue = (id: string) => {
+    this.toolsConfirmQueue.push(id);
   };
 
-  setAiUserId = (aiUserId: string) => {
-    this.aiUserId = aiUserId;
+  removeFromToolsConfirmQueue = (id: string) => {
+    this.toolsConfirmQueue = this.toolsConfirmQueue.filter(
+      (item) => item !== id,
+    );
   };
 
-  setAiSelectedFolder = (aiSelectedFolder: string | number) => {
-    this.aiSelectedFolder = aiSelectedFolder;
-
-    this.currentSession = getSessionId(aiSelectedFolder, this.aiUserId);
+  addMessage = (message: TMessage) => {
+    this.messages.push(message);
   };
 
-  setIsSelectSessionOpen = (value: boolean) => {
-    this.isSelectSessionOpen = value;
+  replaceLastMessage = (newMessage: TMessage) => {
+    const lastIndex = this.messages.length - 1;
+    if (lastIndex < 0) return;
+
+    this.messages[lastIndex] = newMessage;
   };
 
-  fetchMessages = async () => {
-    if (this.isRequestRunning) return;
+  getLastMessage() {
+    return this.messages.at(-1) ?? null;
+  }
 
-    this.isRequestRunning = true;
+  setRoomId = (roomId: number | string) => {
+    this.roomId = roomId;
+  };
 
-    const [messages, saveToFileFlow] = await Promise.all([
-      FlowsApi.getMessages(this.flowId, this.aiSelectedFolder.toString()),
-      FlowsApi.getSaveToFileFlow(),
-    ]);
+  setCurrentChatId = (chatId: string) => {
+    this.currentChatId = chatId;
+  };
 
-    const sessions = new Map<string, ChatMessageType[]>();
+  setMessages = (messages: TMessage[]) => {
+    this.messages = messages;
+  };
 
-    messages.forEach((message) => {
-      const { cleanedMessage, fileIds } = extractFilesFromMessage(message.text);
+  setKnowledgeSearchToolName = (knowledgeSearchToolName: string) => {
+    this.knowledgeSearchToolName = knowledgeSearchToolName;
+  };
 
-      const msgWithoutFolder = removeFolderFromMessage(cleanedMessage);
+  setWebSearchToolName = (webSearchToolName: string) => {
+    this.webSearchToolName = webSearchToolName;
+  };
 
-      const isSend = message.sender === "User";
+  setWebCrawlingToolName = (webCrawlingToolName: string) => {
+    this.webCrawlingToolName = webCrawlingToolName;
+  };
 
-      const chatMessage: ChatMessageType = {
-        isSend,
-        message: isSend ? msgWithoutFolder : message.text,
-        sender_name: message.sender_name,
-        id: message.id,
-        timestamp: message.timestamp,
-        session: message.session_id,
-        edit: message.edit,
-        content_blocks: message.content_blocks || [],
-        category: message.category || "",
-        properties: (message.properties || {}) as PropertiesType,
-        fileIds,
+  setStartIndex = (startIndex: number) => {
+    this.startIndex = startIndex;
+  };
+
+  setTotalMessages = (totalMessages: number) => {
+    this.totalMessages = totalMessages;
+  };
+
+  setIsGetMessageRequestRunning = (isGetMessageRequestRunning: boolean) => {
+    this.isGetMessageRequestRunning = isGetMessageRequestRunning;
+  };
+
+  setIsRequestRunning = (isRequestRunning: boolean) => {
+    this.isRequestRunning = isRequestRunning;
+  };
+
+  setIsStreamRunning = (isStreamRunning: boolean) => {
+    this.isStreamRunning = isStreamRunning;
+  };
+
+  startNewChat = async () => {
+    this.setCurrentChatId("");
+    this.setMessages([]);
+    this.setStartIndex(0);
+    this.setTotalMessages(0);
+  };
+
+  setInitMessages = (
+    messages: TMessage[],
+    totalMessages: number,
+    chatId: string,
+  ) => {
+    this.setMessages(messages);
+    this.setStartIndex(totalMessages > 100 ? 100 : totalMessages);
+    this.setTotalMessages(totalMessages);
+    this.setCurrentChatId(chatId);
+  };
+
+  fetchMessages = async (chatId: string) => {
+    if (this.isGetMessageRequestRunning) return;
+
+    this.setIsGetMessageRequestRunning(true);
+
+    try {
+      const { items, total } = await getChatMessages(chatId, 0);
+      const reversedItems = items.reverse();
+
+      this.setMessages(reversedItems);
+      this.setStartIndex(total > 100 ? 100 : total);
+      this.setTotalMessages(total);
+      this.setCurrentChatId(chatId);
+    } catch (error) {
+      console.error(error);
+      toastr.error(error as string);
+    } finally {
+      this.setIsGetMessageRequestRunning(false);
+    }
+  };
+
+  fetchNextMessages = async () => {
+    if (!this.currentChatId) return;
+
+    if (this.isGetMessageRequestRunning) return;
+
+    if (this.totalMessages <= this.startIndex) return;
+
+    this.setIsGetMessageRequestRunning(true);
+
+    try {
+      const { items, total } = await getChatMessages(
+        this.currentChatId,
+        this.startIndex,
+      );
+      const reversedItems = items.reverse();
+
+      this.setMessages([...reversedItems, ...this.messages]);
+      this.setStartIndex(this.startIndex + 100);
+      this.setTotalMessages(total);
+    } catch (error) {
+      console.error(error);
+      toastr.error(error as string);
+    } finally {
+      this.setIsGetMessageRequestRunning(false);
+    }
+  };
+
+  addMessageId = (id: number) => {
+    const lastMessage = this.getLastMessage();
+
+    if (!lastMessage) return;
+
+    this.replaceLastMessage({ ...lastMessage, id });
+
+    this.setIsStreamRunning(false);
+    this.setIsRequestRunning(false);
+  };
+
+  addUserMessage = (message: string, files: Partial<TFile>[]) => {
+    const filesContent: TContent[] = files.map((f) => {
+      return {
+        type: ContentType.Files,
+        extension: f.fileExst ? f.fileExst : "",
+        title: f.title ? f.title : "",
+        id: f.id ? Number(f.id) : 0,
       };
-
-      if (!chatMessage.session) {
-        return;
-      }
-
-      if (!sessions.has(chatMessage.session)) {
-        sessions.set(chatMessage.session, []);
-      }
-
-      sessions.get(chatMessage.session)?.push(chatMessage);
     });
 
-    const newSessions = new Map<string, ChatMessageType[]>();
+    const newMsg: TMessage = {
+      role: RoleType.UserMessage,
+      createdOn: new Date().toString(),
+      contents: [{ type: ContentType.Text, text: message }, ...filesContent],
+    };
 
-    const timestampSessions = new Map<string, Date>();
+    const lastMessage = this.getLastMessage();
 
-    Array.from(sessions.entries()).forEach(([sessionId, sessionMessages]) => {
-      const sortedByTime = [...sessionMessages].sort(
-        (a, b) =>
-          new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime(),
-      );
-
-      const finalSessionHistory: ChatMessageType[] = [];
-
-      const userMessages: ChatMessageType[] = [];
-      const aiMessages: ChatMessageType[] = [];
-
-      sortedByTime.forEach((msg) => {
-        if (msg.isSend) {
-          userMessages.push(msg);
-        } else {
-          aiMessages.push(msg);
-        }
-      });
-
-      for (
-        let i = 0;
-        i < Math.max(userMessages.length, aiMessages.length);
-        i += 1
-      ) {
-        if (i < userMessages.length) {
-          finalSessionHistory.push(userMessages[i]);
-        }
-
-        if (i < aiMessages.length) {
-          finalSessionHistory.push(aiMessages[i]);
-        }
-      }
-
-      newSessions.set(sessionId, finalSessionHistory);
-      timestampSessions.set(
-        sessionId,
-        new Date(finalSessionHistory[finalSessionHistory.length - 1].timestamp),
-      );
-    });
-
-    const sortedTimestampSessions = Array.from(timestampSessions.entries())
-      .sort((a, b) => {
-        return new Date(a[1]).getTime() - new Date(b[1]).getTime();
-      })
-      .reverse();
-
-    runInAction(() => {
-      this.sessions = newSessions;
-      this.saveToFileFlow = saveToFileFlow;
-      this.sortedSessions = sortedTimestampSessions;
-      this.isInit = true;
-      this.isRequestRunning = false;
-    });
-  };
-
-  addMessage = async (text: string, sender: string, sender_name: string) => {
-    if (!this.messages.length) {
-      const startMsg = extractFilesFromMessage(
-        removeFolderFromMessage(text.substring(0, 25)),
-      );
-
-      this.currentSession = `${this.currentSession}_${startMsg.cleanedMessage}`;
+    if (lastMessage?.role === RoleType.Error) {
+      this.replaceLastMessage(newMsg);
+    } else {
+      this.addMessage(newMsg);
     }
 
-    const msgs = await FlowsApi.addMessage(
-      text,
-      sender,
-      sender_name,
-      this.currentSession,
-      this.flowId,
-    );
-
-    const newMsgs = msgs.map((message) => {
-      const { cleanedMessage, fileIds } = extractFilesFromMessage(message.text);
-
-      const msgWithoutFolder = removeFolderFromMessage(cleanedMessage);
-
-      const isSend = message.sender === "User";
-
-      return {
-        isSend,
-        message: isSend ? msgWithoutFolder : message.text,
-        sender_name: message.sender_name,
-        id: message.id,
-        timestamp: message.timestamp,
-        session: message.session_id,
-        edit: message.edit,
-        content_blocks: message.content_blocks || [],
-        category: message.category || "",
-        properties: (message.properties || {}) as PropertiesType,
-        fileIds,
-      };
-    });
-
-    runInAction(() => {
-      this.messages = [...this.messages, ...newMsgs];
-
-      if (this.sessions.get(this.currentSession)) {
-        this.sessions.get(this.currentSession)!.push(...newMsgs);
-      } else {
-        this.sessions.set(this.currentSession, newMsgs);
-        this.sortedSessions = [
-          [
-            this.currentSession,
-            new Date(newMsgs[newMsgs.length - 1].timestamp),
-          ],
-          ...this.sortedSessions,
-        ];
-      }
-    });
+    this.setTotalMessages(this.totalMessages + 1);
+    this.setStartIndex(this.startIndex + 1);
   };
 
-  sendMessage = async (
-    message: string,
-    files: TSelectorItem[],
-    callback: VoidFunction,
-  ) => {
-    if (this.isRequestRunning) return;
-    this.isRequestRunning = true;
+  addNewAIMessage = (message: string) => {
+    const lastMessage = this.getLastMessage();
+
+    if (lastMessage?.role === RoleType.AssistantMessage) {
+      const newMsg: TMessage = {
+        ...lastMessage,
+        contents: [
+          ...lastMessage.contents,
+          { type: ContentType.Text, text: message },
+        ],
+      };
+
+      this.replaceLastMessage(newMsg);
+      return;
+    } else {
+      const newMsg: TMessage = {
+        role: RoleType.AssistantMessage,
+        createdOn: new Date().toString(),
+        contents: [{ type: ContentType.Text, text: message }],
+      };
+
+      this.addMessage(newMsg);
+
+      this.setTotalMessages(this.totalMessages + 1);
+      this.setStartIndex(this.startIndex + 1);
+    }
+  };
+
+  continueAIMessage = (message: string) => {
+    const lastMessage = this.getLastMessage();
+    if (!lastMessage) return;
+
+    const msg: TMessage = {
+      ...lastMessage,
+      contents: [
+        ...lastMessage.contents.slice(0, -1),
+        {
+          type: ContentType.Text,
+          text: message,
+        },
+      ],
+    };
+
+    this.replaceLastMessage(msg);
+  };
+
+  handleMetadata = (jsonData: string) => {
+    const { chatId, error } = JSON.parse(jsonData);
+
+    if (chatId) {
+      this.setCurrentChatId(chatId);
+    }
+
+    if (error) {
+      toastr.error(error as string);
+    }
+  };
+
+  handleToolCall = (jsonData: string) => {
+    const { name, arguments: args, callId, ...rest } = JSON.parse(jsonData);
+    const lastMessage = this.getLastMessage();
+
+    const shouldCreateNewMessage =
+      lastMessage?.role !== RoleType.AssistantMessage;
+
+    const content = {
+      type: ContentType.Tool,
+      name,
+      arguments: args,
+      callId,
+      ...rest,
+    };
+
+    if (shouldCreateNewMessage) {
+      const newMsg: TMessage = {
+        role: RoleType.AssistantMessage,
+        createdOn: new Date().toString(),
+        contents: [content],
+      };
+
+      this.addMessage(newMsg);
+      this.setTotalMessages(this.totalMessages + 1);
+      this.setStartIndex(this.startIndex + 1);
+    } else {
+      const newMsg: TMessage = {
+        ...lastMessage,
+        contents: [...lastMessage.contents, content],
+      };
+
+      this.replaceLastMessage(newMsg);
+    }
+  };
+
+  handleToolResult = (jsonData: string) => {
+    const { result, callId } = JSON.parse(jsonData);
+    const lastMessage = this.getLastMessage();
+    if (!lastMessage) return;
+
+    const lstMsgContents = lastMessage.contents;
+
+    const idx = lstMsgContents?.findIndex(
+      (c) => (c as TToolCallContent).callId === callId,
+    );
+
+    const content = {
+      ...lstMsgContents[idx],
+      managed: false,
+      result,
+    } as TToolCallContent;
+
+    const newMsg: TMessage = {
+      ...lastMessage,
+
+      contents: [
+        ...lstMsgContents.slice(0, idx),
+        content,
+        ...lstMsgContents.slice(idx + 1),
+      ],
+    };
+
+    this.replaceLastMessage(newMsg);
+  };
+
+  handleStreamError = (jsonData: string) => {
+    this.setIsStreamRunning(true);
+    let message = "";
+    try {
+      message = JSON.parse(jsonData).message;
+    } catch {
+      message = jsonData;
+    }
+
+    const newMsg: TMessage = {
+      role: RoleType.Error,
+      createdOn: new Date().toString(),
+      contents: [{ type: ContentType.Text, text: message }],
+    };
+
+    this.addMessage(newMsg);
+  };
+
+  startStream = async (stream?: ReadableStream<Uint8Array> | null) => {
+    if (!stream) {
+      this.setIsRequestRunning(false);
+      this.setIsStreamRunning(false);
+
+      return;
+    }
 
     try {
       const textDecoder = new TextDecoder();
 
-      const filesStr = files.length
-        ? `\n@${files.map((f) => f.id).join(",@")}`
-        : "";
+      const reader = stream.getReader();
 
-      const folderStr = `\n@folder-${this.aiSelectedFolder}`;
+      let prevMsg = "";
+      let msg = "";
 
-      this.abortController = new AbortController();
+      let buffer = "";
+      let chunkIdx = -1;
 
-      if (!this.messages.length) {
-        const startMsg = extractFilesFromMessage(
-          removeFolderFromMessage(message.substring(0, 25)),
-        );
-
-        this.currentSession = `${this.currentSession}_${startMsg.cleanedMessage}`;
-      }
-
-      const eventsResponse = await FlowsApi.sendMessage(
-        {
-          inputs: {
-            input_value: `${message}${filesStr}${folderStr}`,
-            session: this.currentSession,
-          },
-          files: [],
-        },
-        this.abortController!,
-      );
-
-      const reader = eventsResponse.getReader();
-
-      const stream = async () => {
-        if (this.abortController?.signal.aborted)
-          throw this.abortController.signal.reason;
-
+      const streamHandler = async () => {
         const { done, value } = await reader.read();
 
         if (done) {
+          this.setIsRequestRunning(false);
+          this.setIsStreamRunning(false);
+
+          try {
+            reader.cancel();
+          } catch (e) {
+            console.log(e);
+            // Ignore cancel errors
+          }
           return;
         }
 
         const decodedChunk = textDecoder.decode(value);
 
-        const allChunks = decodedChunk.split("\n\n").filter(Boolean);
+        buffer += decodedChunk;
 
         try {
-          allChunks.forEach(async (c) => {
-            try {
-              if (
-                !c.includes('"event": "add_message"') &&
-                !c.includes('"event": "token"') &&
-                !c.includes('"event": "end"')
-              )
-                return;
+          const jsonData = JSON.parse(decodedChunk);
 
-              const chunk = JSON.parse(c);
+          if (jsonData.error) {
+            this.handleStreamError(JSON.stringify(jsonData.error));
 
-              if (chunk.event === "add_message") {
-                const data = chunk.data;
+            reader.cancel();
 
-                const { cleanedMessage, fileIds } = extractFilesFromMessage(
-                  removeFolderFromMessage(data.text),
-                );
+            return;
+          }
+        } catch {
+          // ignore
+        }
 
-                runInAction(() => {
-                  if (
-                    this.messages.length &&
-                    this.messages[this.messages.length - 1].id === data.id
-                  ) {
-                    this.messages[this.messages.length - 1] = {
-                      ...this.messages[this.messages.length - 1],
-                      message: cleanedMessage,
-                      fileIds,
-                      content_blocks: data.content_blocks,
-                    };
+        try {
+          const chunks = buffer.split("\n\n");
 
-                    return;
-                  }
+          chunks.pop();
 
-                  callback();
+          chunks.forEach(async (chunk, idx) => {
+            if (!chunk || idx <= chunkIdx) return;
 
-                  this.messages = [
-                    ...this.messages,
-                    {
-                      ...data,
-                      message: cleanedMessage,
-                      fileIds,
-                      isSend:
-                        !this.messages[0] ||
-                        data.sender === this.messages[0].sender_name,
-                    },
-                  ];
-                });
-              }
+            chunkIdx = idx;
 
-              if (chunk.event === "token") {
-                runInAction(() => {
-                  this.messages[this.messages.length - 1].message +=
-                    chunk.data.chunk;
-                });
-              }
+            const [event, data] = chunk.split("\n");
 
-              if (chunk.event === "end") {
-                const userMsg = this.messages[this.messages.length - 2];
-                const msg = this.messages[this.messages.length - 1];
+            const dataKey = "data:";
 
-                runInAction(() => {
-                  this.isRequestRunning = false;
+            if (!data || !data.startsWith(dataKey)) {
+              return;
+            }
 
-                  if (this.sessions.get(this.currentSession)) {
-                    this.sessions.get(this.currentSession)!.push(userMsg, msg);
+            const jsonData = data.slice(dataKey.length).trim();
+
+            if (!jsonData) {
+              return;
+            }
+
+            if (event.includes(EventType.MessageStart)) {
+              this.setIsStreamRunning(true);
+
+              this.handleMetadata(jsonData);
+
+              return;
+            }
+
+            if (event.includes(EventType.NewToken)) {
+              try {
+                const { text } = JSON.parse(jsonData);
+
+                msg += text;
+
+                if (msg) {
+                  if (prevMsg) {
+                    this.continueAIMessage(msg);
                   } else {
-                    this.sessions.set(this.currentSession, [userMsg, msg]);
-                    this.sortedSessions = [
-                      [this.currentSession, new Date(msg.timestamp)],
-                      ...this.sortedSessions,
-                    ];
+                    this.addNewAIMessage(msg);
                   }
-                });
+                  prevMsg = msg;
+                }
+              } catch {
+                // ignore
               }
-            } catch (e: unknown) {
-              console.log(e);
+            }
+
+            if (event.includes(EventType.ToolCall)) {
+              try {
+                msg = "";
+                prevMsg = "";
+
+                this.handleToolCall(jsonData);
+              } catch {
+                // ignore
+              }
+
+              return;
+            }
+
+            if (event.includes(EventType.ToolResult)) {
+              msg = "";
+              prevMsg = "";
+
+              try {
+                this.handleToolResult(jsonData);
+              } catch {
+                // ignore
+              }
+
+              return;
+            }
+
+            if (event.includes(EventType.Error)) {
+              this.handleStreamError(jsonData);
+            }
+
+            if (event.includes(EventType.MessageStop)) {
+              try {
+                try {
+                  const { messageId } = JSON.parse(jsonData);
+
+                  if (messageId) this.addMessageId(messageId);
+                } catch {
+                  // ignore
+                }
+
+                reader.cancel();
+              } catch (e) {
+                console.log(e);
+              }
             }
           });
-          if (this.isRequestRunning) await stream();
-        } catch (e: unknown) {
-          if (
-            (e as Error).name === "AbortError" ||
-            (e as Error).message.includes("aborted")
-          ) {
-            console.log("Request was canceled");
-            const userMsg = this.messages[this.messages.length - 2];
-            const msg = this.messages[this.messages.length - 1];
 
-            if (this.sessions.get(this.currentSession)) {
-              this.sessions.get(this.currentSession)!.push(userMsg, msg);
-            } else {
-              this.sessions.set(this.currentSession, [userMsg, msg]);
-              this.sortedSessions = [
-                [this.currentSession, new Date(msg.timestamp)],
-                ...this.sortedSessions,
-              ];
-            }
-            this.isRequestRunning = false;
-            this.abortController = null;
-          }
+          await streamHandler();
+        } catch (e) {
+          console.log(e);
+        } finally {
+          this.setIsRequestRunning(false);
+          this.setIsStreamRunning(false);
         }
       };
 
-      await stream();
-    } catch (e) {
-      if (
-        e instanceof Error &&
-        (e.name === "AbortError" ||
-          e.message.includes("aborted") ||
-          e.message.includes("abort"))
-      ) {
-        console.log("Request was canceled at outer level");
-        this.isRequestRunning = false;
-        this.abortController = null;
-        return;
-      }
-      console.log("Unexpected error in sendMessage:", e);
-      this.isRequestRunning = false;
-    }
-  };
-
-  saveMessageToFile = async (
-    message: string,
-    title: string,
-    folderId: number | string,
-  ) => {
-    if (!this.saveToFileFlow) return;
-
-    const tweaks: Tweaks = {};
-
-    this.saveToFileFlow.data.nodes.forEach((n) => {
-      if (n.id.includes("ContentInput")) {
-        tweaks[n.id] = { input_value: message };
-      }
-
-      if (n.id.includes("TitleInput")) {
-        tweaks[n.id] = { input_value: title.replace(".", "") };
-      }
-
-      if (n.id.includes("FolderIDInput")) {
-        tweaks[n.id] = { input_value: String(folderId) };
-      }
-    });
-
-    await FlowsApi.simpleRunFlow(
-      this.saveToFileFlow.id,
-      "",
-      "text",
-      "text",
-      tweaks,
-    );
-  };
-
-  cancelBuild = () => {
-    try {
-      if (this.abortController) {
-        this.abortController.abort();
-        this.isRequestRunning = false;
-      }
+      await streamHandler();
     } catch (e) {
       console.log(e);
+      toastr.error(e as string);
+    } finally {
+      this.setIsRequestRunning(false);
+      this.setIsStreamRunning(false);
     }
   };
 
-  selectSession = (session: string) => {
-    if (!this.sessions.has(session)) return;
+  startChat = async (message: string, files: Partial<TFile>[]) => {
+    try {
+      this.addUserMessage(message, files);
 
-    this.currentSession = session;
-    this.messages = this.sessions.get(session) || [];
+      this.setIsRequestRunning(true);
+
+      this.abortController.abort("Start new chat");
+
+      this.abortController = new AbortController();
+
+      const stream = await startNewChat(
+        this.roomId,
+        message,
+        files.map((f) => (f.id ? f.id.toString() : "")),
+        this.abortController,
+      );
+
+      await this.startStream(stream);
+    } catch (e) {
+      this.handleStreamError(JSON.stringify(e));
+    }
   };
 
-  startNewSessions = () => {
-    if (this.isRequestRunning) return;
+  sendMessage = async (message: string, files: Partial<TFile>[]) => {
+    try {
+      this.addUserMessage(message, files);
 
-    this.currentSession = getSessionId(this.aiSelectedFolder, this.aiUserId);
-    this.messages = [];
+      this.setIsRequestRunning(true);
+
+      this.abortController.abort("Start new message");
+
+      this.abortController = new AbortController();
+
+      const stream = await sendMessageToChat(
+        this.currentChatId,
+        message,
+        files.map((f) => (f.id ? f.id.toString() : "")),
+        this.abortController,
+      );
+
+      await this.startStream(stream);
+    } catch (e) {
+      this.handleStreamError(JSON.stringify(e));
+    }
   };
 
-  get isEmptyMessages() {
-    return this.messages.length === 0;
-  }
-
-  get preparedMessages() {
-    const messages: {
-      title: string;
-      value: string;
-      isActive?: boolean;
-      isDate?: boolean;
-    }[] = [];
-
-    let prevDate: string = "";
-
-    this.sortedSessions.forEach(([value, date]) => {
-      const currentDate = getChatDate(date);
-      if (prevDate !== currentDate) {
-        prevDate = currentDate;
-
-        if (prevDate === "today") {
-          messages.push({
-            title: "",
-            value: prevDate,
-            isActive: false,
-            isDate: true,
-          });
-        } else if (prevDate === "yesterday") {
-          messages.push({
-            title: "",
-            value: prevDate,
-            isActive: false,
-            isDate: true,
-          });
-        } else if (prevDate) {
-          messages.push({
-            title: prevDate,
-            value: prevDate,
-            isActive: false,
-            isDate: true,
-          });
-        }
+  stopMessage = () => {
+    if (this.isRequestRunning) {
+      try {
+        this.abortController.abort("Stop message");
+      } catch (e) {
+        console.log(e);
       }
+    }
+  };
 
-      const splitedValue = value.split("_");
-
-      messages.push({
-        title: splitedValue[1],
-        value,
-        isActive: value === this.currentSession,
-      });
-    });
-
-    return messages;
-  }
+  findPreviousUserMessage = (fromIndex: number) => {
+    for (let i = fromIndex - 1; i >= 0; i--) {
+      if (this.messages[i].role === RoleType.UserMessage)
+        return this.messages[i];
+    }
+    return undefined;
+  };
 }
 
 export const MessageStoreContext = React.createContext<MessageStore>(
-  undefined!,
+  {} as MessageStore,
 );
 
 export const MessageStoreContextProvider = ({
   children,
-  aiChatID,
-  aiSelectedFolder,
-  aiUserId,
-}: {
-  children: React.ReactNode;
-  aiChatID: string;
-  aiSelectedFolder: string | number;
-  aiUserId: string;
-}) => {
+  roomId,
+  messages,
+  chatId,
+  total,
+}: TMessageStoreProps) => {
   const store = React.useMemo(() => new MessageStore(), []);
 
   React.useEffect(() => {
-    store.setFlowId(aiChatID);
-    store.setAiUserId(aiUserId);
-    store.setAiSelectedFolder(aiSelectedFolder);
-
-    store.fetchMessages();
-  }, [store, aiChatID, aiSelectedFolder, aiUserId]);
+    store.setRoomId(roomId);
+  }, [store, roomId]);
 
   React.useEffect(() => {
-    const handleUserMessage = (event: CustomEvent) => {
-      const { file, isSummary } = event.detail;
+    if (store.isRequestRunning) return;
 
-      if (isSummary) {
-        store.addMessage(`Summarize file \n @${file.id}`, "User", "User");
-      }
-    };
-
-    const handleAiMessage = (event: CustomEvent) => {
-      const { text, sender, sender_name: senderName } = event.detail;
-
-      store.addMessage(text, sender, senderName);
-    };
-
-    window.addEventListener(
-      ChatEvents.ADD_USER_MESSAGE,
-      handleUserMessage as EventListener,
-    );
-
-    window.addEventListener(
-      ChatEvents.ADD_AI_MESSAGE,
-      handleAiMessage as EventListener,
-    );
-
-    return () => {
-      window.removeEventListener(
-        ChatEvents.ADD_USER_MESSAGE,
-        handleUserMessage as EventListener,
-      );
-      window.removeEventListener(
-        ChatEvents.ADD_AI_MESSAGE,
-        handleAiMessage as EventListener,
-      );
-    };
-  }, [store]);
+    if (chatId) store.setInitMessages(messages, total, chatId);
+  }, [chatId, store, messages, total]);
 
   return (
     <MessageStoreContext.Provider value={store}>

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,6 +34,7 @@ import { DropDown } from "../drop-down";
 import { DropDownItem } from "../drop-down-item";
 import { IconButton } from "../icon-button";
 import { Text } from "../text";
+import { TooltipContainer } from "../tooltip";
 
 import type { TagProps } from "./Tag.types";
 import styles from "./Tag.module.scss";
@@ -57,8 +58,14 @@ const TagPure = ({
   removeTagIcon,
   roomType,
   providerType,
+  dataTestId,
   onMouseEnter,
   onMouseLeave,
+  isDefaultMode = true,
+  directionY,
+  fixedDirection,
+  manualY = "4px",
+  manualX,
 }: TagProps) => {
   const [openDropdown, setOpenDropdown] = React.useState(false);
 
@@ -137,7 +144,7 @@ const TagPure = ({
         onClick={openDropdownAction}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
-        data-testid="tag"
+        data-testid="tag_container"
       >
         <Text className={styles.tagText} fontSize="13px" noSelect>
           ...
@@ -147,7 +154,11 @@ const TagPure = ({
         open={openDropdown}
         forwardedRef={tagRef}
         clickOutsideAction={onClickOutside}
-        manualY="4px"
+        isDefaultMode={isDefaultMode}
+        manualY={manualY}
+        manualX={manualX}
+        directionY={directionY}
+        fixedDirection={fixedDirection}
       >
         {advancedOptions.map((t, index) => (
           <DropDownItem
@@ -155,6 +166,7 @@ const TagPure = ({
             key={`${t}_${index * 50}`}
             onClick={onClickAction}
             data-tag={t}
+            testId={dataTestId ?? "tag_item"}
           >
             <Text
               className={classNames(styles.dropdownText, {
@@ -171,7 +183,8 @@ const TagPure = ({
       </DropDown>
     </>
   ) : (
-    <div
+    <TooltipContainer
+      as="div"
       title={label}
       onClick={onClickAction}
       className={classNames(styles.tag, "tag", className, {
@@ -185,7 +198,7 @@ const TagPure = ({
       style={{ ...style, maxWidth: tagMaxWidth }}
       data-tag={label}
       id={id}
-      data-testid="tag"
+      data-testid={dataTestId ?? "tag_item"}
       aria-label={label}
       aria-disabled={isDisabled}
       onMouseEnter={onMouseEnter}
@@ -216,7 +229,7 @@ const TagPure = ({
           ) : null}
         </>
       )}
-    </div>
+    </TooltipContainer>
   );
 };
 

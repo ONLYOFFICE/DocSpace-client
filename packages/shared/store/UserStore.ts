@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,15 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable no-console */
-/* eslint-disable no-underscore-dangle */
 import { makeAutoObservable, runInAction } from "mobx";
 
 import api from "../api";
 import { TUser } from "../api/people/types";
 import { EmployeeActivationStatus, ThemeKeys } from "../enums";
 import { TI18n } from "../types";
-import { getUserType } from "../utils/common";
+import { getUserType, getStringUserType } from "../utils/common";
 
 class UserStore {
   user: TUser | null = null;
@@ -50,10 +48,7 @@ class UserStore {
   }
 
   loadCurrentUser = async () => {
-    let user = null;
-    if (window?.__ASC_INITIAL_EDITOR_STATE__?.user)
-      user = window.__ASC_INITIAL_EDITOR_STATE__.user;
-    else user = await api.people.getUser();
+    const user = await api.people.getUser();
 
     this.setUser(user as TUser);
 
@@ -70,7 +65,7 @@ class UserStore {
       const correctCulture = user.cultureName || portalCultureName;
 
       if (i18n && correctCulture && correctCulture !== i18n.language) {
-        i18n.changeLanguage(correctCulture);
+        await i18n.changeLanguage(correctCulture);
       }
     } catch (e) {
       console.error(e);
@@ -92,10 +87,15 @@ class UserStore {
     this.user = user;
   };
 
-  changeEmail = async (userId: string, email: string, key: string) => {
+  changeEmail = async (
+    userId: string,
+    email: string,
+    encemail: string,
+    key: string,
+  ) => {
     this.setIsLoading(true);
 
-    const user = await api.people.changeEmail(userId, email, key);
+    const user = await api.people.changeEmail(userId, email, encemail, key);
 
     this.setUser(user);
     this.setIsLoading(false);
@@ -108,13 +108,13 @@ class UserStore {
   ) => {
     this.setIsLoading(true);
 
-    const user = await api.people.updateActivationStatus(
+    const users = await api.people.updateActivationStatus(
       activationStatus,
       userId,
       key,
     );
 
-    this.setUser(user);
+    this.setUser(users[0]);
     this.setIsLoading(false);
   };
 
@@ -174,6 +174,8 @@ class UserStore {
     this.user.quotaLimit = quotaLimit;
   };
 
+  isMe = (userId: string) => this.user?.id === userId;
+
   get withActivationBar() {
     return (
       this.user &&
@@ -198,6 +200,10 @@ class UserStore {
 
   get userType() {
     return getUserType(this.user!);
+  }
+
+  get stringUserType() {
+    return getStringUserType(this.user!);
   }
 }
 

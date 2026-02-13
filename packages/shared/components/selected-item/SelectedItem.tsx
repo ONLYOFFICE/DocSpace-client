@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,6 +29,7 @@ import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 import { IconButton } from "../icon-button";
 import { SelectedItemProps } from "./SelectedItem.types";
 import styles from "./SelectedItem.module.scss";
+import { TooltipContainer } from "../tooltip";
 
 export const SelectedItemPure = (props: SelectedItemProps) => {
   const {
@@ -45,6 +46,7 @@ export const SelectedItemPure = (props: SelectedItemProps) => {
     classNameCloseButton,
     hideCross,
     title,
+    dataTestId,
   } = props;
   if (!label) return null;
 
@@ -52,8 +54,8 @@ export const SelectedItemPure = (props: SelectedItemProps) => {
     if (!isDisabled) onClose(propKey, label, group || "", e);
   };
 
-  const handleOnClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    const target = e.target as HTMLDivElement;
+  const handleOnClick = (e: React.MouseEvent<HTMLElement>) => {
+    const target = e.target as HTMLElement;
 
     if (!isDisabled && !target.classList.contains("selected-tag-removed"))
       onClick?.(propKey, label, group, e);
@@ -77,12 +79,13 @@ export const SelectedItemPure = (props: SelectedItemProps) => {
     .join(" ");
 
   return (
-    <div
+    <TooltipContainer
+      as="div"
       onClick={handleOnClick}
       className={selectedItemClassNames}
       id={id}
       ref={forwardedRef}
-      data-testid="selected-item"
+      data-testid={dataTestId ?? "selected-item"}
       title={title}
     >
       <div className={labelClassNames}>{label}</div>
@@ -96,7 +99,7 @@ export const SelectedItemPure = (props: SelectedItemProps) => {
           isDisabled={isDisabled}
         />
       ) : null}
-    </div>
+    </TooltipContainer>
   );
 };
 

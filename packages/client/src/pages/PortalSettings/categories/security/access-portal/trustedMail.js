@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -33,6 +33,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 import { toastr } from "@docspace/shared/components/toast";
+
 import { size } from "@docspace/shared/utils";
 import isEqual from "lodash/isEqual";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
@@ -40,6 +41,7 @@ import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-butto
 import { DeviceType } from "@docspace/shared/enums";
 import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
+import { isValidDomainName } from "@docspace/shared/utils/email";
 import TrustedMailLoader from "../sub-components/loaders/trusted-mail-loader";
 import UserFields from "../sub-components/user-fields";
 import { LearnMoreWrapper } from "../StyledSecurity";
@@ -59,26 +61,26 @@ const MainContainer = styled.div`
 const TrustedMail = (props) => {
   const {
     t,
-
+    tReady,
     trustedDomainsType,
     trustedDomains,
     setMailDomainSettings,
     currentColorScheme,
     trustedMailDomainSettingsUrl,
     currentDeviceType,
+    onSettingsSkeletonNotShown,
+    isInit,
   } = props;
 
   const navigate = useNavigate();
   const location = useLocation();
-
-  const regexp =
-    /^[a-zA-Z0-9][a-zA-Z0-9-]{0,255}[a-zA-Z0-9](?:\.[a-zA-Z]{1,})+/; // check domain name valid
 
   const [type, setType] = useState("0");
   const [domains, setDomains] = useState([]);
   const [showReminder, setShowReminder] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMessages, setErrorMessages] = useState([]);
 
   const checkWidth = () => {
     window.innerWidth > size.mobile &&
@@ -114,6 +116,12 @@ const TrustedMail = (props) => {
   };
 
   useEffect(() => {
+    if (!onSettingsSkeletonNotShown) return;
+    if (!(currentDeviceType !== DeviceType.desktop && !isLoading))
+      onSettingsSkeletonNotShown("TrustedMail");
+  }, [currentDeviceType, isLoading]);
+
+  useEffect(() => {
     checkWidth();
     window.addEventListener("resize", checkWidth);
 
@@ -132,6 +140,12 @@ const TrustedMail = (props) => {
   }, [isLoading]);
 
   useEffect(() => {
+    if (isInit) {
+      setIsLoading(true);
+    }
+  }, [isInit]);
+
+  useEffect(() => {
     if (!isLoading) return;
     const defaultSettings = getFromSessionStorage("defaultTrustedMailSettings");
     const newSettings = {
@@ -148,13 +162,22 @@ const TrustedMail = (props) => {
   }, [type, domains]);
 
   const onSelectDomainType = (e) => {
-    if (type !== e.target.value) {
-      setType(e.target.value);
+    if (type === e.target.value) return;
+    setType(e.target.value);
+    if (e.target.value === "1" && domains.length === 0) {
+      setDomains([...domains]);
+      setShowReminder(true);
     }
   };
 
   const onClickAdd = () => {
     setDomains([...domains, ""]);
+    setErrorMessages((prev) => [...prev, null]);
+  };
+
+  const checkDuplicate = (domains,input, index) => {
+    const firstIndex = domains.findIndex((d) => d === input && d !== "");
+    return firstIndex !== -1 && firstIndex !== index;
   };
 
   const onChangeInput = (e, index) => {
@@ -163,19 +186,51 @@ const TrustedMail = (props) => {
     setDomains(newInputs);
   };
 
+  const getErrorMessage = (domain, index, domainsArray = domains) => {
+    
+    const isDuplicate = checkDuplicate(domainsArray, domain, index);
+    const isValidFormat = isValidDomainName(domain) && domain !== "";
+    
+    if (isDuplicate) return t("Common:DomainAlreadyAdded");
+    if (!isValidFormat) return t("Common:IncorrectDomain");
+    return null;
+  };
+
+  const validateAllDomains = (domainsArray) => {
+    return domainsArray.map((domain, index) => 
+      getErrorMessage(domain, index, domainsArray)
+    );
+  };
+
   const onDeleteInput = (index) => {
     const newInputs = Array.from(domains);
     newInputs.splice(index, 1);
     setDomains(newInputs);
+    
+    setErrorMessages(validateAllDomains(newInputs));
+  };
+
+  const onCheckValid = (domain, index) => {
+    const errorMessage = getErrorMessage(domain, index);
+    
+    setErrorMessages((prev) => {
+      const newErrors = [...prev];
+      newErrors[index] = errorMessage;
+      return newErrors;
+    });
+
+    return !errorMessage;
   };
 
   const onSaveClick = async () => {
     setIsSaving(true);
-    const valid = domains.map((domain) => regexp.test(domain));
-    console.log("valid", valid);
+
+    const valid = domains.map((domain, index) => {
+      return onCheckValid(domain, index);
+    });
+
     if (type === "1" && valid.includes(false)) {
       setIsSaving(false);
-      toastr.error(t("Common:IncorrectDomain"));
       return;
     }
 
@@ -195,7 +250,7 @@ const TrustedMail = (props) => {
         domains,
       });
       setShowReminder(false);
-      toastr.success(t("SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (error) {
       toastr.error(error);
     }
@@ -209,9 +264,10 @@ const TrustedMail = (props) => {
     setType(defaultSettings?.type || "0");
     setDomains(defaultSettings?.domains || []);
     setShowReminder(false);
+    setErrorMessages([]);
   };
 
-  if (currentDeviceType !== DeviceType.desktop && !isLoading) {
+  if ((currentDeviceType !== DeviceType.desktop && !isLoading) || !tReady) {
     return <TrustedMailLoader />;
   }
 
@@ -227,6 +283,7 @@ const TrustedMail = (props) => {
         {trustedMailDomainSettingsUrl ? (
           <Link
             className="link-learn-more"
+            dataTestId="trusted_mail_component_learn_more"
             color={currentColorScheme.main?.accent}
             target="_blank"
             isHovered
@@ -249,16 +306,19 @@ const TrustedMail = (props) => {
             id: "trusted-mail-disabled",
             label: t("Common:Disabled"),
             value: "0",
+            dataTestId: "trusted_mail_disabled",
           },
           {
             id: "any-domains",
             label: t("AllDomains"),
             value: "2",
+            dataTestId: "trusted_mail_any_domains",
           },
           {
             id: "custom-domains",
             label: t("CustomDomains"),
             value: "1",
+            dataTestId: "trusted_mail_custom_domains",
           },
         ]}
         selected={type}
@@ -271,10 +331,15 @@ const TrustedMail = (props) => {
           buttonLabel={t("AddTrustedDomain")}
           onChangeInput={onChangeInput}
           onDeleteInput={onDeleteInput}
+          onBlurAction={(index) => onCheckValid(domains[index], index)}
           onClickAdd={onClickAdd}
-          regexp={regexp}
+          validateFunc={isValidDomainName}
           classNameAdditional="add-trusted-domain"
-          isAutoFocussed
+          inputDataTestId="trusted_mail_domain_input"
+          deleteIconDataTestId="trusted_mail_delete_domain_icon"
+          addButtonDataTestId="trusted_mail_add_domain_button"
+          hideDeleteIcon={domains.length === 1}
+          errorMessages={errorMessages}
         />
       ) : null}
 
@@ -283,7 +348,7 @@ const TrustedMail = (props) => {
         onSaveClick={onSaveClick}
         onCancelClick={onCancelClick}
         showReminder={showReminder}
-        reminderText={t("YouHaveUnsavedChanges")}
+        reminderText={t("Common:YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
         displaySettings
@@ -291,12 +356,14 @@ const TrustedMail = (props) => {
         isSaving={isSaving}
         additionalClassSaveButton="trusted-mail-save"
         additionalClassCancelButton="trusted-mail-cancel"
+        cancelButtonDataTestId="trusted_mail_cancel_button"
+        saveButtonDataTestId="trusted_mail_save_button"
       />
     </MainContainer>
   );
 };
 
-export const TrustedMailSection = inject(({ settingsStore }) => {
+export const TrustedMailSection = inject(({ settingsStore, setup }) => {
   const {
     trustedDomainsType,
     trustedDomains,
@@ -306,6 +373,8 @@ export const TrustedMailSection = inject(({ settingsStore }) => {
     currentDeviceType,
   } = settingsStore;
 
+  const { isInit } = setup;
+
   return {
     trustedDomainsType,
     trustedDomains,
@@ -313,5 +382,6 @@ export const TrustedMailSection = inject(({ settingsStore }) => {
     currentColorScheme,
     trustedMailDomainSettingsUrl,
     currentDeviceType,
+    isInit,
   };
 })(withTranslation(["Settings", "Common"])(observer(TrustedMail)));

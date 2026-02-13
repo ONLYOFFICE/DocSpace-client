@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,13 +31,15 @@ import uniqueid from "lodash/uniqueId";
 import sumBy from "lodash/sumBy";
 import { ConflictResolveType } from "@docspace/shared/enums";
 import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import {
   getFileInfo,
   getFolderInfo,
   uploadFile,
   convertFile,
   startUploadSession,
+  uploadChunkSequential,
+  uploadChunkParallel,
+  finalizeUploadSession,
   getFileConversationProgress,
   copyToFolder,
   moveToFolder,
@@ -52,9 +54,9 @@ import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
-import { globalColors } from "@docspace/shared/themes";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
+import { Link } from "@docspace/shared/components/link";
 
 const removeDuplicate = (items) => {
   const obj = {};
@@ -68,15 +70,15 @@ const removeDuplicate = (items) => {
 const getConversationProgress = async (fileId) => {
   const promise = new Promise((resolve, reject) => {
     setTimeout(() => {
-      try {
-        getFileConversationProgress(fileId).then((res) => {
+      getFileConversationProgress(fileId)
+        .then((res) => {
           // console.log(`getFileConversationProgress fileId:${fileId}`, res);
           resolve(res);
+        })
+        .catch((error) => {
+          // console.error("getFileConversationProgress error", error);
+          reject(error);
         });
-      } catch (error) {
-        console.error(error);
-        reject(error);
-      }
     }, 1000);
   });
 
@@ -99,6 +101,8 @@ class UploadDataStore {
   dialogsStore;
 
   filesSettingsStore;
+
+  aiRoomStore;
 
   files = [];
 
@@ -152,6 +156,8 @@ class UploadDataStore {
 
   totalErrorsCount = 0;
 
+  finishUploadFilesCalled = false;
+
   constructor(
     settingsStore,
     treeFoldersStore,
@@ -161,6 +167,7 @@ class UploadDataStore {
     primaryProgressDataStore,
     dialogsStore,
     filesSettingsStore,
+    aiRoomStore,
   ) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -171,6 +178,7 @@ class UploadDataStore {
     this.primaryProgressDataStore = primaryProgressDataStore;
     this.dialogsStore = dialogsStore;
     this.filesSettingsStore = filesSettingsStore;
+    this.aiRoomStore = aiRoomStore;
   }
 
   removeFiles = (fileIds) => {
@@ -254,6 +262,8 @@ class UploadDataStore {
   };
 
   cancelUpload = (t) => {
+    this.finishUploadFilesCalled = false;
+
     const newUploadData = {
       filesSize: this.filesSize,
       uploadedFiles: this.uploadedFiles,
@@ -289,7 +299,7 @@ class UploadDataStore {
     this.setUploadData(newUploadData);
     this.uploadedFilesHistory = newHistory;
 
-    toastr.info(t("CancelUpload"));
+    toastr.info(t("Common:CancelUpload"));
   };
 
   cancelConversion = () => {
@@ -400,12 +410,9 @@ class UploadDataStore {
 
       updatedFile.fileInfo.fileExst = file.fileInfo.fileExst;
 
-      this.displayedConversionFiles[fileIndex] = {
-        ...updatedFile,
-        action: "convert",
-        error: null,
-        errorShown: false,
-      };
+      this.displayedConversionFiles[fileIndex].action = "convert";
+      this.displayedConversionFiles[fileIndex].error = null;
+      this.displayedConversionFiles[fileIndex].errorShown = false;
     } else {
       this.displayedConversionFiles.push(file);
     }
@@ -418,53 +425,38 @@ class UploadDataStore {
   convertFile = (file, t, isOpen) => {
     this.dialogsStore.setConvertItem(null);
 
-    const fileIndex =
-      file.index ?? this.files.findIndex((el) => el.fileId === file.fileId);
+    const fileHistoryIndex = this.uploadedFilesHistory.findIndex(
+      (el) => el.fileId === file.fileId,
+    );
+    const secondConverting = fileHistoryIndex > -1;
 
-    if (fileIndex > -1 && this.files[fileIndex].inConversion) return;
-
-    const secondConvertingWithPassword =
-      hasOwnProperty(file, "password") || fileIndex > -1;
-    const conversionPositionIndex =
-      hasOwnProperty(file, "index") || fileIndex > -1;
+    if (
+      secondConverting &&
+      this.uploadedFilesHistory[fileHistoryIndex].inConversion
+    )
+      return;
 
     if (this.converted) {
       this.filesToConversion = [];
       this.convertFilesSize = 0;
-      // if (!secondConvertingWithPassword)
-      //   this.files = this.files.filter((f) => f.action === "converted");
     }
 
-    if (secondConvertingWithPassword) {
-      const operationName = OPERATIONS_NAME.upload;
-      this.primaryProgressDataStore.setPrimaryProgressBarData({
-        operation: operationName,
-        alert: false,
-      });
-    }
+    const operationName = OPERATIONS_NAME.upload;
+    this.primaryProgressDataStore.setPrimaryProgressBarData({
+      operation: operationName,
+      alert: false,
+    });
 
-    if (secondConvertingWithPassword && conversionPositionIndex) {
-      this.files.splice(fileIndex, 1, file);
-    } else {
-      this.files.push(file);
-    }
+    this.uploadedFilesHistory[fileHistoryIndex].action = "convert";
+    this.uploadedFilesHistory[fileHistoryIndex].error = null;
+    this.uploadedFilesHistory[fileHistoryIndex].errorShown = false;
 
     if (!this.filesToConversion.length) {
       this.filesToConversion.push(file);
 
-      if (secondConvertingWithPassword && conversionPositionIndex) {
-        this.uploadedFilesHistory[fileIndex].action = "convert";
-        this.uploadedFilesHistory[fileIndex].error = null; // reset error to show loader for convert with password
-        this.uploadedFilesHistory[fileIndex].errorShown = false;
-      } else {
-        this.uploadedFilesHistory.push(file);
-      }
-
-      this.startConversion(t, isOpen, true, secondConvertingWithPassword);
+      this.startConversion(t, isOpen);
     } else {
       this.filesToConversion.push(file);
-      if (!secondConvertingWithPassword && !conversionPositionIndex)
-        this.uploadedFilesHistory.push(file);
     }
   };
 
@@ -643,14 +635,15 @@ class UploadDataStore {
   };
 
   startConversion = async (t, isOpen = false) => {
-    const { isRecentFolder, isFavoritesFolder, isShareFolder } =
+    const { isRecentFolder, isFavoritesFolder, isSharedWithMeFolder } =
       this.treeFoldersStore;
 
     if (!this.converted) return;
 
     const { storeOriginalFiles } = this.filesSettingsStore;
 
-    const isSortedFolder = isRecentFolder || isFavoritesFolder || isShareFolder;
+    const isSortedFolder =
+      isRecentFolder || isFavoritesFolder || isSharedWithMeFolder;
     const needToRefreshFilesList = !isSortedFolder || !storeOriginalFiles;
 
     runInAction(() => (this.converted = false));
@@ -680,16 +673,20 @@ class UploadDataStore {
         const error = t("FailedToConvert");
 
         runInAction(() => {
-          if (file) file.error = error;
-          if (historyFile) historyFile.error = error;
+          if (file) {
+            file.error = error;
+            file.inConversion = false;
+          }
+          if (historyFile) {
+            historyFile.error = error;
+            historyFile.inConversion = false;
+          }
         });
 
         if (this.uploaded) {
-          this.totalErrorsCount += 1;
           const primaryProgressData = {
             operation: OPERATIONS_NAME.upload,
             alert: true,
-            errorCount: this.totalErrorsCount,
           };
 
           this.primaryProgressDataStore.setPrimaryProgressBarData(
@@ -710,9 +707,28 @@ class UploadDataStore {
         let error = null;
 
         while (progress < 100) {
-          const response = await getConversationProgress(fileId);
-          progress = response?.[0]?.progress;
-          fileInfo = response?.[0]?.result;
+          let response = null;
+          try {
+            response = await getConversationProgress(fileId);
+            progress = response?.[0]?.progress;
+            fileInfo = response?.[0]?.result;
+          } catch (err) {
+            // console.log("Error in startConversion while loop:", fileId, err);
+            const conversionError = err.message || t("FailedToConvert");
+
+            runInAction(() => {
+              if (file) {
+                file.error = conversionError;
+                file.inConversion = false;
+              }
+              if (historyFile) {
+                historyFile.error = conversionError;
+                historyFile.inConversion = false;
+              }
+            });
+
+            break;
+          }
 
           runInAction(() => {
             const currentFile = this.files.find((f) => f.fileId === fileId);
@@ -737,12 +753,10 @@ class UploadDataStore {
                 newFile.inConversion = false;
                 if (fileInfo === "password") {
                   newFile.needPassword = true;
-                  this.totalErrorsCount += 1;
 
                   this.primaryProgressDataStore.setPrimaryProgressBarData({
                     operation: OPERATIONS_NAME.upload,
                     alert: true,
-                    errorCount: this.totalErrorsCount,
                   });
                 }
               }
@@ -806,12 +820,9 @@ class UploadDataStore {
               if (error.indexOf("password") !== -1) {
                 hFile.needPassword = true;
 
-                this.totalErrorsCount += 1;
-
                 this.primaryProgressDataStore.setPrimaryProgressBarData({
                   operation: OPERATIONS_NAME.upload,
                   alert: true,
-                  errorCount: this.totalErrorsCount,
                 });
               } else hFile.action = "converted";
             }
@@ -895,6 +906,7 @@ class UploadDataStore {
         const fileIndex = this.files.findIndex(
           (f) => f.uniqueId === notUploadedFiles[i].uniqueId,
         );
+
         if (fileIndex !== -1) {
           this.currentUploadNumber += 1;
           this.startSessionFunc(fileIndex, t, createNewIfExist);
@@ -910,7 +922,7 @@ class UploadDataStore {
       const notUploadedFiles = this.tempConversionFiles.filter(
         (f) => !f.inAction,
       );
-      this.parallelUploading(notUploadedFiles);
+      this.parallelUploading(notUploadedFiles, t);
     }
 
     this.tempConversionFiles = [];
@@ -1010,10 +1022,17 @@ class UploadDataStore {
   };
 
   handleUploadConflicts = async (t, toFolderId, uploadData) => {
+    const { isAIRoom } = this.selectedFolderStore;
     const filesArray = uploadData.files.map((fileInfo) => fileInfo.file.name);
 
+    const checkConflicts =
+      uploadData.files.findIndex((f) => f.toFolderId === toFolderId) > -1;
+
     try {
-      let conflicts = await checkIsFileExist(toFolderId, filesArray);
+      let conflicts =
+        isAIRoom || !checkConflicts
+          ? []
+          : await checkIsFileExist(toFolderId, filesArray);
       const folderInfo = await getFolderInfo(toFolderId);
 
       conflicts = conflicts.map((fileTitle) => ({
@@ -1044,23 +1063,35 @@ class UploadDataStore {
       }
 
       toastr.error(errorMessage, null, 0, true);
+
+      if (this.uploaded) {
+        this.primaryProgressDataStore.setPrimaryProgressBarData({
+          operation: OPERATIONS_NAME.upload,
+          completed: this.uploaded,
+          alert: this.uploadedFilesHistory.length === 0,
+          ...(this.uploadedFilesHistory.length === 0 && { showPanel: null }),
+        });
+      }
     }
   };
 
   startUpload = (uploadFiles, folderId, t) => {
     const { canConvert } = this.filesSettingsStore;
 
+    const { isAIRoom } = this.selectedFolderStore;
+
+    const { knowledgeId } = this.aiRoomStore;
+
     const toFolderId = folderId || this.selectedFolderStore.id;
 
     if (this.uploaded) {
-      this.files = this.files.filter((f) => f.action !== "upload");
+      this.files = this.files.filter((f) => f.action !== "upload" || f.error);
       this.filesSize = 0;
       this.uploadToFolder = null;
       this.percent = 0;
-      this.totalErrorsCount = 0;
     }
     if (this.uploaded && this.converted) {
-      this.files = [];
+      this.files = this.files.filter((f) => f.error);
       this.filesToConversion = [];
       this.uploadedFilesSize = 0;
       this.asyncUploadObj = {};
@@ -1085,9 +1116,9 @@ class UploadDataStore {
         uniqueId: uniqueid("download_row-key_"),
         fileId: null,
         // toFolderId,
-        toFolderId: file.parentFolderId,
+        toFolderId: isAIRoom ? knowledgeId : file.parentFolderId,
         action: "upload",
-        error: file.size ? null : t("Files:EmptyFile"),
+        error: null,
         fileInfo: null,
         cancel: false,
         needConvert,
@@ -1162,10 +1193,11 @@ class UploadDataStore {
         (x) => x.id === currentFile?.fileInfo?.id,
       );
 
-      let folderInfo = null;
+      const folderInfo = null;
       const index = path.findIndex((x) => x === this.selectedFolderStore.id);
       const folderId = index !== -1 ? path[index + 1] : null;
-      if (folderId) folderInfo = await getFolderInfo(folderId);
+      // if (folderId && folderId !== this.aiRoomStore.knowledgeId)
+      //   folderInfo = await getFolderInfo(folderId);
 
       const newPath = [];
       if (folderInfo || path[path.length - 1] === this.selectedFolderStore.id) {
@@ -1191,6 +1223,7 @@ class UploadDataStore {
         if (folderInfo) {
           const isFolderExist = newFolders.find((x) => x.id === folderInfo.id);
           if (!isFolderExist && folderInfo) {
+            console.error(this.selectedFolderStore.id);
             newFolders.unshift(folderInfo);
             setFolders(newFolders);
             const newFilter = filter;
@@ -1234,29 +1267,16 @@ class UploadDataStore {
     const {
       t,
       res, // file response data
-      fileSize, // file size
       index, // chunk index
       indexOfFile, // file index in the list
       path, // file path
       chunksLength, // length of file chunks
       resolve, // resolve cb
-      reject, // reject cb
-      isAsyncUpload = false, // async upload checker
-      isFinalize = false, // is finalize chunk
       //  allChunkUploaded, // needed for progress, files is uploaded, awaiting finalized chunk
       createNewIfExist,
     } = chunkUploadObj;
 
-    if (!res.data.data && res.data.message) {
-      return reject({
-        message: res.data.message,
-        chunkIndex: index,
-        chunkSize: fileSize,
-        isFinalize,
-      });
-    }
-
-    const { uploaded, id: fileId, file: fileInfo } = res.data.data;
+    const { uploaded, id: fileId, file: fileInfo } = res;
 
     // let uploadedSize;
 
@@ -1357,14 +1377,12 @@ class UploadDataStore {
     if (currentFile.action === "uploaded") {
       this.refreshFiles(currentFile);
     }
-    if (!isAsyncUpload || res.status === 201) {
-      return resolve();
-    }
+
+    return resolve();
   };
 
   asyncUpload = async (t, chunkData, resolve, reject, createNewIfExist) => {
-    const { operationId, file, fileSize, indexOfFile, path, length } =
-      chunkData;
+    const { operationId, file, indexOfFile, path, length } = chunkData;
 
     if (
       this.uploaded ||
@@ -1397,10 +1415,6 @@ class UploadDataStore {
           ].isFinished = true;
         }
 
-        if (!res.data.data && res.data.message) {
-          delete this.asyncUploadObj[operationId];
-          return reject(res.data.message);
-        }
         this.asyncUpload(t, chunkData, resolve, reject, createNewIfExist);
 
         const activeLength = this.asyncUploadObj[operationId]
@@ -1409,31 +1423,14 @@ class UploadDataStore {
             ).length - 1
           : 0;
 
-        let allIsUploaded;
-        if (this.asyncUploadObj[operationId]) {
-          const finished = this.asyncUploadObj[operationId].chunksArray.filter(
-            (x) => x.isFinished,
-          );
-
-          allIsUploaded =
-            this.asyncUploadObj[operationId].chunksArray.length -
-            finished.length -
-            1; // 1 last
-        }
-
         this.checkChunkUpload({
           t,
           res,
-          fileSize,
           index: activeLength,
           indexOfFile,
           path,
           chunksLength: length,
           resolve,
-          reject,
-          isAsyncUpload: true,
-          isFinalize: false,
-          allChunkUploaded: allIsUploaded === 0,
           createNewIfExist,
         });
 
@@ -1461,15 +1458,11 @@ class UploadDataStore {
             this.checkChunkUpload({
               t,
               res: finalizeRes,
-              fileSize,
               index: finalizeIndex,
               indexOfFile,
               path,
               chunksLength: length,
               resolve,
-              reject,
-              isAsyncUpload: true,
-              isFinalize: true,
               createNewIfExist,
             });
           }
@@ -1481,7 +1474,8 @@ class UploadDataStore {
   };
 
   uploadFileChunks = async (
-    location,
+    sessionId,
+    folderId,
     requestsDataArray,
     fileSize,
     indexOfFile,
@@ -1504,8 +1498,10 @@ class UploadDataStore {
           isFinished: false,
           isFinalize: false,
           onUpload: () =>
-            uploadFile(
-              `${location}&chunkNumber=${index + 1}&upload=true`,
+            uploadChunkParallel(
+              folderId,
+              sessionId,
+              index + 1,
               requestsDataArray[index],
             ),
         });
@@ -1514,7 +1510,7 @@ class UploadDataStore {
         isActive: false,
         isFinished: false,
         isFinalize: true,
-        onUpload: () => uploadFile(`${location}&finalize=true`),
+        onUpload: () => finalizeUploadSession(folderId, sessionId),
       });
 
       if (!this.asyncUploadObj[operationId]) {
@@ -1547,20 +1543,21 @@ class UploadDataStore {
           return Promise.resolve();
         }
 
-        const res = await uploadFile(location, requestsDataArray[index]);
+        const res = await uploadChunkSequential(
+          folderId,
+          sessionId,
+          requestsDataArray[index],
+        );
         const resolve = (r) => Promise.resolve(r);
-        const reject = (err) => Promise.reject(err);
 
         this.checkChunkUpload({
           t,
           res,
-          fileSize,
           index,
           indexOfFile,
           path,
           chunksLength: length,
           resolve,
-          reject,
           createNewIfExist,
         });
 
@@ -1569,10 +1566,82 @@ class UploadDataStore {
     }
   };
 
+  retryConvertFiles = (t, fileId) => {
+    const fileIndex = this.files.findIndex((f) => f.fileId === fileId);
+    const fileConversionInxex = this.displayedConversionFiles.findIndex(
+      (f) => f.fileId === fileId,
+    );
+
+    if (fileIndex > -1) {
+      const retryFile = this.files[fileIndex];
+      retryFile.inConversion = false;
+    }
+
+    if (fileConversionInxex === -1) return;
+
+    const retryFileConversion =
+      this.displayedConversionFiles[fileConversionInxex];
+
+    retryFileConversion.inConversion = false;
+
+    this.convertFileFromFiles(retryFileConversion, t);
+  };
+
+  retryUploadFiles = (t, uniqueId) => {
+    const fileIndex = this.files.findIndex((f) => f.uniqueId === uniqueId);
+    const fileUploadedIndex = this.uploadedFilesHistory.findIndex(
+      (f) => f.uniqueId === uniqueId,
+    );
+    const retryFile = this.files[fileIndex];
+    const retryFileUploaded = this.uploadedFilesHistory[fileUploadedIndex];
+
+    if (retryFileUploaded.action === "convert") {
+      retryFileUploaded.inConversion = false;
+      retryFile.inConversion = false;
+      this.convertFile(retryFileUploaded, t);
+      return;
+    }
+
+    retryFile.action = "upload";
+    retryFile.error = "";
+    retryFile.inAction = false;
+    retryFile.percent = 0;
+
+    retryFileUploaded.action = "upload";
+    retryFileUploaded.error = "";
+    retryFileUploaded.inAction = false;
+    retryFileUploaded.errorShown = false;
+    retryFileUploaded.percent = 0;
+
+    if (this.uploaded) {
+      const newUploadData = {
+        filesSize: this.convertFilesSize,
+        uploadedFiles: this.uploadedFiles,
+        percent: this.percent,
+        uploaded: false,
+      };
+
+      this.setUploadData(newUploadData);
+      const progressData = {
+        completed: false,
+        percent: this.percent,
+        operation: OPERATIONS_NAME.upload,
+        alert: false,
+        showPanel: this.setUploadPanelVisible,
+      };
+
+      this.primaryProgressDataStore.setPrimaryProgressBarData(progressData);
+    }
+
+    this.parallelUploading([retryFile], t);
+  };
+
   startUploadFiles = async (t, createNewIfExist = true) => {
+    this.finishUploadFilesCalled = false;
+
     const files = this.files;
 
-    if (files.length === 0 || this.filesSize === 0) {
+    if (files.length === 0) {
       return this.finishUploadFiles(t);
     }
 
@@ -1592,8 +1661,8 @@ class UploadDataStore {
   };
 
   startSessionFunc = (indexOfFile, t, createNewIfExist = true) => {
-    // console.log("START UPLOAD SESSION FUNC");
-
+    const { isAIRoom } = this.selectedFolderStore;
+    const { knowledgeId } = this.aiRoomStore;
     if (!this.uploaded && this.files.length === 0) {
       this.uploaded = true;
       this.asyncUploadObj = {};
@@ -1602,12 +1671,14 @@ class UploadDataStore {
     }
 
     const item = this.files[indexOfFile];
+
     this.files[indexOfFile].inAction = true;
 
     if (!item) {
       console.error("Empty files");
       return Promise.resolve();
     }
+
     if (
       item.action === "uploaded" ||
       item.action === "convert" ||
@@ -1623,12 +1694,17 @@ class UploadDataStore {
     const { chunkUploadSize } = this.filesSettingsStore;
 
     const { file, toFolderId /* , action */ } = item;
-    const chunks = Math.ceil(file.size / chunkUploadSize, chunkUploadSize);
+    const chunks =
+      file.size === 0
+        ? 1
+        : Math.ceil(file.size / chunkUploadSize, chunkUploadSize);
     const fileName = file.name;
     const fileSize = file.size;
 
+    const actualFolderId = isAIRoom ? knowledgeId : toFolderId;
+
     return startUploadSession(
-      toFolderId,
+      actualFolderId,
       fileName,
       fileSize,
       "", // relativePath,
@@ -1637,10 +1713,9 @@ class UploadDataStore {
       createNewIfExist,
     )
       .then((res) => {
-        const location = res.data.location;
-        const path = res.data.path;
-        const operationId = res.data.id;
-
+        const sessionId = res.id;
+        const path = res.path;
+        const operationId = res.id;
         const requestsDataArray = [];
 
         let chunk = 0;
@@ -1654,13 +1729,14 @@ class UploadDataStore {
         }
 
         return {
-          location,
+          sessionId,
+          folderId: actualFolderId,
           requestsDataArray,
           path,
           operationId,
         };
       })
-      .then(({ location, requestsDataArray, path, operationId }) => {
+      .then(({ sessionId, folderId, requestsDataArray, path, operationId }) => {
         const fileIndex = this.uploadedFilesHistory.findIndex(
           (f) => f.uniqueId === this.files[indexOfFile].uniqueId,
         );
@@ -1668,7 +1744,8 @@ class UploadDataStore {
           this.uploadedFilesHistory[fileIndex].percent = chunks < 2 ? 50 : 0;
 
         return this.uploadFileChunks(
-          location,
+          sessionId,
+          folderId,
           requestsDataArray,
           fileSize,
           indexOfFile,
@@ -1681,14 +1758,11 @@ class UploadDataStore {
         );
       })
       .catch((error) => {
-        this.totalErrorsCount += 1;
-
         if (this.files[indexOfFile] === undefined) {
           this.primaryProgressDataStore.setPrimaryProgressBarData({
             operation: OPERATIONS_NAME.upload,
             completed: true,
             alert: true,
-            errorCount: this.totalErrorsCount,
           });
           return Promise.resolve();
         }
@@ -1738,7 +1812,6 @@ class UploadDataStore {
           percent: newPercent,
           completed: allFilesIsUploaded,
           alert: true,
-          errorCount: this.totalErrorsCount,
         });
 
         this.currentUploadNumber -= 1;
@@ -1762,7 +1835,9 @@ class UploadDataStore {
               !f.cancel,
           ) === -1;
 
-        if (allFilesIsUploaded) {
+        if (allFilesIsUploaded && !this.finishUploadFilesCalled) {
+          this.finishUploadFilesCalled = true;
+
           if (!this.filesToConversion.length) {
             this.finishUploadFiles(t, !!this.tempConversionFiles.length);
           } else {
@@ -1783,68 +1858,86 @@ class UploadDataStore {
       });
   };
 
-  finishUploadFiles = (t, waitConversion) => {
-    const filesWithErrors = this.uploadedFilesHistory.filter(
-      (f) => f.error && !f.errorShown,
-    );
-    const filesWithoutErrors = this.uploadedFilesHistory.filter(
-      (f) => !f.error,
-    );
-    const totalErrorsCount = filesWithErrors.length;
-
-    if (totalErrorsCount > 0) {
-      filesWithErrors.forEach((f) => {
-        const historyFile = this.uploadedFilesHistory.find(
-          (file) => file.uniqueId === f.uniqueId,
-        );
-
-        if (f.error.indexOf("password") > -1) {
-          toastr.warning(
-            <Trans
-              i18nKey="Common:PasswordProtectedFiles"
-              t={t}
-              components={[
-                <ColorTheme
-                  key="a"
-                  tag="a"
-                  themeId={ThemeId.Link}
-                  isHovered
-                  color={globalColors.link}
-                  onClick={() => {
-                    toastr.clear();
-                    this.setUploadPanelVisible(true);
-                  }}
-                />,
-              ]}
-            />,
-            null,
-            60000,
-            true,
-          );
-        } else {
-          toastr.error(f.error);
-        }
-        if (historyFile) {
-          historyFile.errorShown = true;
-        }
-      });
-
-      // for empty file
-      this.totalErrorsCount += 1;
-      this.primaryProgressDataStore.setPrimaryProgressBarData({
-        operation: OPERATIONS_NAME.upload,
-        alert: true,
-        errorCount: this.totalErrorsCount,
-      });
-
-      console.log("Errors: ", totalErrorsCount);
-    } else {
+  showFinishUploadToastr = (
+    t,
+    totalErrorsCount,
+    filesWithoutErrors,
+    filesWithErrors,
+    filesWithAllErrors,
+  ) => {
+    if (totalErrorsCount === 0) {
       toastr.success(
         t("Common:ItemsSuccessfullyUploaded", {
           count: filesWithoutErrors.length,
         }),
       );
+      return;
     }
+
+    this.primaryProgressDataStore.setPrimaryProgressBarData({
+      operation: OPERATIONS_NAME.upload,
+      alert: true,
+      errorCount: filesWithAllErrors,
+    });
+
+    this.uploadedFilesHistory.forEach((f) => {
+      f.errorShown = true;
+    });
+
+    console.log("Errors: ", totalErrorsCount);
+
+    if (totalErrorsCount > 1) {
+      toastr.error(t("UploadPanel:UploadingError"));
+      return;
+    }
+
+    const errorItem = filesWithErrors[0];
+    const passwordErrorIndex = errorItem.error.indexOf("password");
+
+    if (passwordErrorIndex === -1) {
+      toastr.error(errorItem.error);
+      return;
+    }
+
+    toastr.warning(
+      <Trans
+        i18nKey="Common:PasswordProtectedFiles"
+        t={t}
+        components={[
+          <Link
+            key="a"
+            tag="a"
+            isHovered
+            color="accent"
+            onClick={() => {
+              toastr.clear();
+              this.setUploadPanelVisible(true);
+            }}
+          />,
+        ]}
+      />,
+      null,
+      60000,
+      true,
+    );
+  };
+
+  finishUploadFiles = (t, waitConversion) => {
+    const filesWithErrors = this.uploadedFilesHistory.filter(
+      (f) => f.error && !f.errorShown,
+    );
+    const filesWithAllErrors = this.uploadedFilesHistory.filter((f) => f.error);
+    const filesWithoutErrors = this.uploadedFilesHistory.filter(
+      (f) => !f.error,
+    );
+
+    this.showFinishUploadToastr(
+      t,
+      filesWithAllErrors.length,
+      filesWithoutErrors,
+      filesWithErrors,
+      filesWithAllErrors.length,
+    );
 
     this.uploaded = true;
     this.converted = true;
@@ -1868,7 +1961,7 @@ class UploadDataStore {
       const toFolderId = this.files[0]?.toFolderId;
 
       if (toFolderId) {
-        SocketHelper.emit(SocketCommands.RefreshFolder, {
+        SocketHelper?.emit(SocketCommands.RefreshFolder, {
           toFolderId,
         });
       }
@@ -1918,13 +2011,14 @@ class UploadDataStore {
     )
       .then((res) => {
         let data = null;
+        const operation = res[0];
 
-        if (res && res.length > 0) {
-          if (res[res.length - 1]?.error) {
-            return Promise.reject(res[res.length - 1]);
+        if (operation) {
+          if (operation?.error) {
+            return Promise.reject(operation);
           }
 
-          data = res[res.length - 1] ? res[res.length - 1] : null;
+          data = operation ?? null;
         }
 
         if (!data) {
@@ -1965,7 +2059,6 @@ class UploadDataStore {
     toFillOut,
   ) => {
     const { setSecondaryProgressBarData } = this.secondaryProgressDataStore;
-    const { refreshFiles, setMovingInProgress } = this.filesStore;
     const pbData = { operation: OPERATIONS_NAME.move, operationId };
     return moveToFolder(
       destFolderId,
@@ -1978,12 +2071,13 @@ class UploadDataStore {
       .then((res) => {
         let data = null;
 
-        if (res && res.length > 0) {
-          if (res[res.length - 1]?.error) {
-            return Promise.reject(res[res.length - 1]);
+        const operation = res[0];
+        if (operation) {
+          if (operation?.error) {
+            return Promise.reject(operation);
           }
 
-          data = res[res.length - 1] ? res[res.length - 1] : null;
+          data = operation ?? null;
         }
 
         if (!data) {
@@ -2012,9 +2106,6 @@ class UploadDataStore {
         this.clearActiveOperations(fileIds, folderIds);
 
         return Promise.reject(err);
-      })
-      .finally(() => {
-        refreshFiles().then(() => setMovingInProgress(false));
       });
   };
 
@@ -2111,7 +2202,9 @@ class UploadDataStore {
       const item = await getOperationProgress(
         data.id,
         getUnexpectedErrorText(),
+        true,
       );
+
       operationItem = item;
 
       // progress = item ? item.progress : 100;
@@ -2150,14 +2243,11 @@ class UploadDataStore {
   };
 
   moveToCopyTo = (destFolderId, pbData, isCopy, fileIds, folderIds) => {
-    const { removeFiles } = this.filesStore;
-
     const { setSecondaryProgressBarData } = this.secondaryProgressDataStore;
     const isMovingSelectedFolder =
       !isCopy && folderIds && this.selectedFolderStore.id === folderIds[0];
 
     if (!isCopy || destFolderId === this.selectedFolderStore.id) {
-      !isCopy && removeFiles(fileIds, folderIds);
       this.clearActiveOperations(fileIds, folderIds);
 
       isMovingSelectedFolder &&
@@ -2183,7 +2273,7 @@ class UploadDataStore {
       (el) => !fileIds?.includes(el.id),
     );
     const newActiveFolders = activeFolders.filter(
-      (el) => !folderIds.includes(el.id),
+      (el) => !folderIds?.includes(el.id),
     );
 
     setActiveFiles(newActiveFiles);

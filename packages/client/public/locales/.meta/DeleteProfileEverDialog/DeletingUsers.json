@@ -3,7 +3,7 @@
   "content": "Deleting users",
   "content_en_sha1_hash": "ef72e6a554f2b6e1a2e4fc6258787996c2e58d5f",
   "created_at": "2025-05-19T21:30:56.671Z",
-  "updated_at": "2025-05-20T09:38:27.394Z",
+  "updated_at": "2025-05-24T13:16:47.567Z",
   "comment": {
     "text": "This translation key is used for the string \"DeletingUsers\" which appears in a delete user dialog, indicating that users are being deleted. It may be displayed as part of a button label or in a modal header.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"İstifadəçilər silinir\" literally translates to \"Users are being deleted.\" The English content \"Deleting users\" is more of an action or title, not a description of an ongoing process. A more accurate translation would be something like \"Silməklər\" (Deletions) or \"Profil silməsi\" (Profile Deletion).",
+          "suggestion": "Profil silməsi"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -105,7 +111,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"ກຳລັງລຶບຜູ້ໃຊ້\" is a literal translation of \"Deleting users,\" it conveys an ongoing action. \"Deleting users\" often refers to the action itself, or the process, not necessarily that it's currently happening. A more accurate translation would emphasize the action or process of deleting, rather than the ongoing state.",
+          "suggestion": "Consider \"ການລຶບຜູ້ໃຊ້\" (kan luep phou sai) which translates to \"user deletion\" or \"deletion of users\"."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -117,7 +129,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Gebruikers aan het verwijderen' literally translates to 'Users are removing' which implies an action being performed *on* the users, rather than the action *of* deleting them. A more accurate translation would convey the process of deletion.",
+          "suggestion": "Gebruikers verwijderen"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -153,7 +171,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"පරිශ්‍රීලකයින් මැකෙමින්\" is not the most natural or accurate translation of \"Deleting users.\" The word මැකෙමින් (makeming) implies 'being deleted', which is a continuous process, rather than a single action of deleting.  It suggests an ongoing deletion, not a one-time action.",
+          "suggestion": "A more accurate translation would be something like \"පරිශ්‍රීලකයන් ඉවත් කිරීම\" (Parishreelakan iwath kirima - Removing users) or \"පරිශ්‍රීලකයින් දමනය\" (Parishreelakin damanya - Deletion of users)."
+        }
+      ],
       "approved_at": null
     },
     "sk": {

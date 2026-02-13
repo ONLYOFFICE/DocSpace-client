@@ -3,7 +3,7 @@
   "content": "Setting up Columns",
   "content_en_sha1_hash": "9c3fb7fb9f0ad28973475952ac36c53654ca8162",
   "created_at": "2025-05-19T21:30:54.684Z",
-  "updated_at": "2025-05-21T08:35:13.734Z",
+  "updated_at": "2025-08-04T07:30:01.394Z",
   "comment": {
     "text": "This translation key is used to display the text \"Setting up Columns\" in a UI component, specifically a checkbox label in a portal settings page, allowing users to toggle the visibility of column settings.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 484,
-      "context": "/>\n </LabelGroup>\n <LabelGroup>\n <Checkbox\n className=\"checkbox\"\n label={t(\"SettingUpColumns\")}\n onChange={toggleShowSettings}\n isChecked={config.showSettings}\n />\n <HelpButton\n place=\"right\"",
+      "line_number": 491,
+      "context": "/>\n </LabelGroup>\n <LabelGroup>\n <Checkbox\n className=\"checkbox\"\n label={t(\"SettingUpColumns\")}\n onChange={toggleShowSettings}\n isChecked={config.showSettings}\n dataTestId=\"show_settings_checkbox\"\n />\n <HelpButton",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 484,
-      "context": "/>\n </LabelGroup>\n <LabelGroup>\n <Checkbox\n className=\"checkbox\"\n label={t(\"SettingUpColumns\")}\n onChange={toggleShowSettings}\n isChecked={config.showSettings}\n />\n <HelpButton\n place=\"right\"",
+      "line_number": 491,
+      "context": "/>\n </LabelGroup>\n <LabelGroup>\n <Checkbox\n className=\"checkbox\"\n label={t(\"SettingUpColumns\")}\n onChange={toggleShowSettings}\n isChecked={config.showSettings}\n dataTestId=\"show_settings_checkbox\"\n />\n <HelpButton",
       "module": "/packages/client"
     }
   ],
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"إعدادات الأعمدة\" is a literal translation, \"Setting up Columns\" often implies configuring or defining columns, rather than just their settings. A more accurate translation might emphasize the process of configuration.",
-          "suggestion": "تكوين الأعمدة (Takween Al-'amoudat) - Meaning 'Configuring the Columns'"
+          "description": "While 'إعدادات الأعمدة' is a literal translation of 'Settings for Columns', 'Setting up Columns' implies a process of configuration or arrangement. A more accurate translation would convey this dynamic aspect.",
+          "suggestion": "تكوين الأعمدة (Takween al-'Amoud) - meaning 'Configuring the Columns' or  ترتيب الأعمدة (Tartib al-'Amoud) - meaning 'Arranging the Columns'."
         }
       ],
       "approved_at": null
@@ -45,7 +45,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Sütunların quraşdırılması' is a literal translation, 'Setting up Columns' often implies configuration or arrangement. A more idiomatic translation might be more suitable depending on the context. 'Sütunların təyinatı' (Column assignments) or 'Sütunların hazırlanması' (Column preparation) could be considered.",
+          "suggestion": "Consider 'Sütunların təyinatı' or 'Sütunların hazırlanması' for a more contextually accurate translation."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -90,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Régler\" can mean 'to set up,' it often implies adjusting or fixing something. \"Setting up Columns\" implies a more initial creation or configuration, which \"Régler Colonnes\" doesn't fully convey. A better translation might focus on creation or configuration.",
-          "suggestion": "Consider alternatives like \"Configurer les colonnes\" (to configure columns) or \"Créer les colonnes\" (to create the columns)."
+          "description": "The translation \"Régler Colonnes\" doesn't accurately convey the meaning of \"Setting up Columns\". \"Régler\" implies adjusting or fixing, whereas \"Setting up\" means creating or configuring. A more accurate translation would depend on the specific context of \"Setting up Columns,\" but a possible alternative is \"Configurer les colonnes\".",
+          "suggestion": "Configurer les colonnes"
         }
       ],
       "approved_at": null
@@ -111,7 +117,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"カラムの設定\" is a literal translation of 'Setting up Columns', it lacks the nuance of 'setup'. It could be interpreted more accurately as '列の設定と構成' (Column Setup and Configuration) or simply '列の設定' if the context is clear that it refers to the setup process.",
+          "suggestion": "列の設定と構成"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -120,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"열 설정\" while literally meaning 'column settings' doesn't fully capture the nuance of 'Setting up Columns' in the context of JavascriptSdk. It implies a simple setting process, whereas 'Setting up Columns' often refers to initial configuration or design.",
-          "suggestion": "Consider a more nuanced translation like \"열 구성\" (Column Configuration) or \"열 디자인\" (Column Design), depending on the specific context of JavascriptSdk."
+          "description": "The translation '열 설정' while understandable, doesn't perfectly capture the nuance of 'Setting up Columns.' '열 설정' literally means 'column setting,' which is technically correct but lacks the implied action of *configuring* or *arranging* columns.",
+          "suggestion": "Consider a translation like '열 구성' (column configuration) or '열 배치' (column arrangement) to better convey the intended meaning of setting up."
         }
       ],
       "approved_at": null
@@ -129,13 +141,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"ການຕັ້ງຄ່າຖັນ\" is a literal translation of \"Setting up Columns\", it might not be the most natural or accurate translation in context. \"Setting up Columns\" often refers to configuring or arranging columns in a UI or data structure. A more accurate translation might depend on the specific context.",
-          "suggestion": "Consider alternatives like \"ການຈັດຖັນຄໍານຸ່ມ\" (arrangement of columns) or \"ການຕັ້ງຄ່າຄໍານຸ່ມ\" (configuring columns) depending on the specific context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -186,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"තීරූ පිහිටුවමින්\" (thirū pihituwamin) is a literal translation and doesn't fully capture the meaning of 'Setting up Columns'. It implies an ongoing process.  'Setting up Columns' often refers to initial configuration or definition.",
-          "suggestion": "A more appropriate translation might be \"පillarුවල සැකසීම\" (pillarwala säkesima) - meaning 'arranging/configuring pillars/columns', or \"පillarුවල නිර්ණය\" (pillarwala nirṇaya) - meaning 'defining columns'."
+          "description": "The translation \"තීරූ පිහිටුවමින්\" is a literal translation of \"Setting up Columns\" but doesn't convey the intended meaning in a natural Sinhala way. \"Setting up Columns\" often refers to configuring or arranging columns, not necessarily the act of erecting them.",
+          "suggestion": "A more appropriate translation would be something like \"පillar සැකසීම\" (pillar sakisima) which means 'arranging columns' or \"පillar සංවිධානය කිරීම\" (pillar sanvidhanaya kirima) which means 'organizing columns'."
         }
       ],
       "approved_at": null
@@ -210,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Постављање Колона\" is a literal translation of \"Setting up Columns\", it doesn't convey the full meaning in a technical context. 'Setting up' implies configuration or initialization, which isn't perfectly captured by 'Постављање'.",
-          "suggestion": "Consider alternatives like \"Иницијализација Колона\" (Initialization of Columns) or \"Конфигурисање Колона\" (Configuring Columns) depending on the precise meaning intended."
+          "description": "While 'Постављање' can mean 'Setting up', it's more accurately 'Placement' or 'Installation'. 'Setting up' implies a more complex process of configuration which isn't fully captured by 'Постављање'.",
+          "suggestion": "Consider alternatives like 'Припрема Колона' (Preparing Columns) or 'Конфигурисање Колона' (Configuring Columns) which better reflect the intended meaning of 'Setting up'."
         }
       ],
       "approved_at": null
@@ -228,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Sütunlar Ayarlanıyor\" while literally meaning \"Columns are being adjusted\" doesn't fully capture the meaning of \"Setting up Columns\". It implies an ongoing process rather than the initial configuration or setup.",
-          "suggestion": "Sütunların Yapılandırılması"
+          "description": "The translation \"Sütunlar Ayarlanıyor\" literally translates to \"Columns are being adjusted.\" While not entirely wrong, it doesn't fully capture the meaning of \"Setting up Columns,\" which implies initial configuration or creation. A more accurate translation would convey the act of establishing or defining columns.",
+          "suggestion": "Sütunlar Kuruluyor"
         }
       ],
       "approved_at": null

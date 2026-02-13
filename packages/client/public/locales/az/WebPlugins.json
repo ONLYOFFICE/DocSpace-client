@@ -8,6 +8,8 @@
   "NeedSettings": "Parametrləri daxil etməlisiniz",
   "NoPlugins": "Heç bir plagin əlavə edilməyib",
   "NotNeedSettings": "Parametrləri daxil etməlisiniz",
+  "PluginIsNotCompatible": "Plugin SDK versiyası {{productName}} versiyası ilə üstə düşmür. Xahiş edirik uyğun versiyaya yeniləyin.",
+  "PluginLoadedSuccessfully": "Plugin yüklandı uğurla",
   "PluginSamples": "Plagin nümunələri",
   "PluginSDK": "Plagin SDK",
   "PluginSDKDescription": "Plugin SDK-dan istifadə edərək, {{productName}} funksionallığınızı genişləndirə, üçüncü tərəf xidmətlərinə qoşula və ya mövcud istifadəçi təcrübəsini təkmilləşdirə bilərsiniz. Burada GitHub-da mövcud kod mənbəyi olan plaginlərin nümunələrini tapa bilərsiniz.",

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,15 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import { RowContainer } from ".";
 
 const baseProps = {
   manualHeight: "500px",
   useReactWindow: true,
-  onScroll: jest.fn(),
-  fetchMoreFiles: jest.fn().mockResolvedValue(undefined),
+  onScroll: vi.fn(),
+  fetchMoreFiles: vi.fn().mockResolvedValue(undefined),
   hasMoreFiles: true,
   itemCount: 2,
   filesLength: 2,
@@ -117,7 +117,7 @@ describe("<RowContainer />", () => {
     );
 
     const container = screen.getByTestId("row-container");
-    expect(container).toHaveStyle({ backgroundColor: "red" });
+    expect(container.style.backgroundColor).toBe("red");
   });
 
   it("renders InfiniteLoaderComponent when useReactWindow is true", () => {

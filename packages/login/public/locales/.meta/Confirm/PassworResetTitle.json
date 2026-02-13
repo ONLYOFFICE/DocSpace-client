@@ -3,7 +3,7 @@
   "content": "Now you can create a new password.",
   "content_en_sha1_hash": "f9c8b3b6fa375c17d32d673a51e5ccfc8b276b9b",
   "created_at": "2025-05-19T21:30:57.374Z",
-  "updated_at": "2025-05-20T09:47:26.476Z",
+  "updated_at": "2025-06-30T12:20:31.657Z",
   "comment": {
     "text": "This translation key is used for the title of a password reset confirmation page, appearing as \"Now you can create a new password.\" in the UI. It provides context to users after they have successfully changed their password.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/login/src/app/(root)/confirm/PasswordChange/page.client.tsx",
       "line_number": 134,
-      "context": "return (\n <>\n <div className=\"password-form\">\n <Text fontSize=\"16px\" fontWeight=\"600\" className=\"subtitle\">\n {t(\"PassworResetTitle\")}\n </Text>\n <FieldContainer\n isVertical={true}\n labelVisible={false}\n hasError={isPasswordErrorShow && !passwordValid}",
+      "context": "return (\n <>\n <div className=\"password-form\">\n <Text fontSize=\"16px\" fontWeight=\"600\" className=\"subtitle\">\n {t(\"PassworResetTitle\")}\n </Text>\n <FieldContainer\n isVertical\n labelVisible={false}\n hasError={isPasswordErrorShow ? !passwordValid : undefined}",
       "module": "/packages/login"
     }
   ],
@@ -93,7 +93,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"これで新しいパスワードが作成できます。\" literally translates to 'Now a new password can be created.' which is not as natural or user-friendly as conveying 'You can now create a new password.' The phrasing focuses on the password's capability rather than the user's action.",
+          "suggestion": "新しいパスワードを設定できます。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -129,7 +135,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Agora pode criar uma nova palavra-chave' is a literal translation and not the most natural way to express 'Now you can create a new password' in Portuguese. 'Palavra-chave' is technically correct but 'senha' is more commonly used for password.",
+          "suggestion": "Agora pode criar uma nova senha."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -171,7 +183,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Сада можете креирати нову лозинку' is understandable, a more natural and idiomatic translation of 'Now you can create a new password' would be 'Сада можете да креирате нову лозинку'. The addition of 'да' before 'креирате' is standard practice in Serbian.",
+          "suggestion": "Сада можете да креирате нову лозинку."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -201,7 +219,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '现在您可创建新密码' is technically correct but sounds slightly unnatural. A more natural phrasing would emphasize the ability to *reset* the password, not just create a new one.",
+          "suggestion": "现在您可以重置密码。"
+        }
+      ],
       "approved_at": null
     }
   }

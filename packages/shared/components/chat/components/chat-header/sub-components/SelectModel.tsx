@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,44 +24,40 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { observer } from "mobx-react";
+import { getAiModelName } from "../../../../../utils/ai";
 
-import {
-  ComboBox,
-  ComboBoxDisplayType,
-  ComboBoxSize,
-} from "../../../../combobox";
+import { RectangleSkeleton } from "../../../../../skeletons/rectangle";
 
-import { useModelStore } from "../../../store/modelStore";
+import { Text } from "../../../../text";
+
+import type { SelectModelProps } from "../../../Chat.types";
 
 import styles from "../ChatHeader.module.scss";
 
-const SelectModel = () => {
-  const { preparedModels, preparedSelectedModel, setCurrentModel } =
-    useModelStore();
+const SelectModel = ({ selectedModel, isLoading }: SelectModelProps) => {
+  if (isLoading) {
+    return (
+      <RectangleSkeleton
+        width="96px"
+        height="32px"
+        borderRadius="3px"
+        style={{ minWidth: "32px" }}
+      />
+    );
+  }
 
-  if (!preparedModels.length) return null;
+  const name = getAiModelName(selectedModel);
 
   return (
-    <ComboBox
-      options={preparedModels.map((o) => ({
-        ...o,
-        className: styles.dropDownItemTruncate,
-      }))}
-      selectedOption={preparedSelectedModel}
-      displayType={ComboBoxDisplayType.default}
-      size={ComboBoxSize.content}
-      showDisabledItems
-      onSelect={setCurrentModel}
-      isDefaultMode
-      noBorder
-      directionX="right"
-      modernView
-      style={{ overflow: "hidden", maxWidth: "fit-content" }}
-      scaledOptions
-    />
+    <Text
+      fontSize="13px"
+      fontWeight={600}
+      lineHeight="20px"
+      className={styles.selectModel}
+    >
+      {name}
+    </Text>
   );
 };
 
-export default observer(SelectModel);
+export default SelectModel;

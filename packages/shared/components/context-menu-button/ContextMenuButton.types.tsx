@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -68,6 +68,8 @@ export interface ContextMenuButtonProps {
   directionX?: TDirectionX;
   /** Direction Y */
   directionY?: TDirectionY;
+  /** Fixes the direction of the dropdown */
+  fixedDirection?: boolean;
   /** Accepts class */
   className?: string;
   /** Accepts id */
@@ -91,4 +93,5 @@ export interface ContextMenuButtonProps {
   isFill?: boolean;
   zIndex?: number;
   asideHeader?: React.ReactNode;
+  testId?: string;
 }

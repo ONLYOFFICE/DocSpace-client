@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,8 +28,7 @@ import EmptyTrashDialog from "./EmptyTrashDialog";
 import DeleteDialog from "./DeleteDialog";
 import DownloadDialog from "./DownloadDialog";
 import ConvertDialog from "./ConvertDialog";
-import DeleteThirdPartyDialog from "./DeleteThirdPartyDialog";
-import ConnectDialog from "./ConnectDialog";
+import ConnectDialog from "./ConnectDialog/ConnectDialogWrapper";
 import ConflictResolveDialog from "./ConflictResolveDialog";
 import ChangeEmailDialog from "./ChangeEmailDialog";
 import ChangePasswordDialog from "./ChangePasswordDialog";
@@ -55,7 +54,6 @@ import CreateRoomConfirmDialog from "./CreateRoomConfirmDialog";
 import PortalRenamingDialog from "./PortalRenamingDialog";
 import DataReassignmentDialog from "./DataReassignmentDialog";
 import SubmitToFormGallery from "./SubmitToFormGallery";
-import UnsavedChangesDialog from "./UnsavedChangesDialog";
 import DeleteLinkDialog from "./DeleteLinkDialog";
 import MoveToPublicRoom from "./MoveToPublicRoom";
 import SettingsPluginDialog from "./SettingsPluginDialog";
@@ -65,23 +63,25 @@ import ChangeQuotaDialog from "./ChangeQuotaDialog";
 import DeletePluginDialog from "./DeletePluginDialog";
 import ShareFolderDialog from "./ShareFolderDialog";
 import EditGroupMembersDialog from "./EditGroupMembersDialog";
-import ChangeStorageQuotaDialog from "./ChangeStorageQuotaDialog";
 import DeleteGroupDialog from "./DeleteGroupDialog";
 import RoomLogoCoverDialog from "./RoomLogoCoverDialog";
 import RemoveGuestDialog from "./RemoveGuest";
-import GuestReleaseTipDialog from "./GuestReleaseTip";
 import DeleteVersionDialog from "./DeleteVersionDialog";
 import CancelOperationDialog from "./CancelOperationDialog";
 import FormFillingTipsDialog from "./FormFillingTipsDialog";
 import ReducedRightsDialog from "./ReducedRightsDialog";
 import SocialAuthWelcomeDialog from "./SocialAuthWelcomeDialog";
+import StorageTariffDeactiveted from "./StorageTariffDeactiveted";
+import ConnectAccountDialog from "./ConnectAccountDialog";
+import DisconnectAccountDialog from "./DisconnectAccountDialog";
+import CreateAgentDialog from "./CreateEditAgentDialog/CreateAgentDialog";
+import ResetTemplateDialog from "./ResetTemplateDialog";
 
 export {
   EmptyTrashDialog,
   DeleteDialog,
   DownloadDialog,
   ConvertDialog,
-  DeleteThirdPartyDialog,
   ConnectDialog,
   ConflictResolveDialog,
   ChangeEmailDialog,
@@ -108,7 +108,6 @@ export {
   PortalRenamingDialog,
   DataReassignmentDialog,
   SubmitToFormGallery,
-  UnsavedChangesDialog,
   DeleteLinkDialog,
   MoveToPublicRoom,
   SettingsPluginDialog,
@@ -118,14 +117,17 @@ export {
   ShareFolderDialog,
   EditGroupMembersDialog,
   ChangeQuotaDialog,
-  ChangeStorageQuotaDialog,
   DeleteGroupDialog,
   RoomLogoCoverDialog,
   RemoveGuestDialog,
-  GuestReleaseTipDialog,
   DeleteVersionDialog,
   CancelOperationDialog,
   FormFillingTipsDialog,
   ReducedRightsDialog,
   SocialAuthWelcomeDialog,
+  StorageTariffDeactiveted,
+  ConnectAccountDialog,
+  DisconnectAccountDialog,
+  CreateAgentDialog,
+  ResetTemplateDialog,
 };

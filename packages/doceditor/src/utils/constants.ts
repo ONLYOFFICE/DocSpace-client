@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,9 +32,7 @@ export const IS_ZOOM =
     window?.navigator?.userAgent?.includes("ZoomApps"));
 
 export const IS_DESKTOP_EDITOR =
-  typeof window !== "undefined"
-    ? window["AscDesktopEditor"] !== undefined
-    : false;
+  typeof window !== "undefined" ? window.AscDesktopEditor !== undefined : false;
 
 export const IS_VIEW =
   typeof window !== "undefined"
@@ -42,11 +40,6 @@ export const IS_VIEW =
     : false;
 
 export const REPLACED_URL_PATH = "/web-apps/apps/api/documents/api.js";
-
-export const SHOW_CLOSE =
-  typeof document !== "undefined" &&
-  document.referrer !== "" &&
-  window.history.length > 1;
 
 export const availableActions: Record<ActionType, boolean> = {
   edit: true,

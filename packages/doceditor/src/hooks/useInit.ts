@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,12 +27,10 @@
 import React from "react";
 import { isIOS, deviceType } from "react-device-detect";
 
-import { FolderType } from "@docspace/shared/enums";
-
 import { UseInitProps } from "@/types";
 import { setDocumentTitle, showDocEditorMessage } from "@/utils";
 import initDesktop from "@/utils/initDesktop";
-import { IS_DESKTOP_EDITOR, IS_VIEW } from "@/utils/constants";
+import { IS_DESKTOP_EDITOR } from "@/utils/constants";
 
 const useInit = ({
   config,

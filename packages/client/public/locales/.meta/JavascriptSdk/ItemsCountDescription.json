@@ -3,7 +3,7 @@
   "content": "You can specify the number of files / folders displayed on one page, as well as specify which page to start displaying",
   "content_en_sha1_hash": "345cec54076fe57a2866410f20947221b6fc0997",
   "created_at": "2025-05-19T21:30:54.541Z",
-  "updated_at": "2025-05-21T09:01:48.873Z",
+  "updated_at": "2025-08-04T07:30:01.408Z",
   "comment": {
     "text": "\"This translation key is used for the tooltip that explains how to customize the number of files/folders displayed on a page and specifies which page to display.\"",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/ItemsCountBlock.js",
       "line_number": 62,
-      "context": "<Label className=\"label\" text={t(\"ItemsCount\")} />\n <HelpButton\n offsetRight={0}\n size={12}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"ItemsCountDescription\")}</Text>\n }\n />\n </LabelGroup>\n <TextInput\n scale",
+      "context": "<Label className=\"label\" text={t(\"ItemsCount\")} />\n <HelpButton\n offsetRight={0}\n size={12}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"ItemsCountDescription\")}</Text>\n }\n dataTestId=\"items_count_help_button\"\n />\n </LabelGroup>\n <TextInput",
       "module": "/packages/client"
     }
   ],
@@ -35,9 +35,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"as well as specify which page to start displaying\" is not the most natural way to express that in Azerbaijani. It's a bit literal and clunky.",
-          "suggestion": "Consider a more fluid phrasing like \"həmçinin göstərməyə hansı səhifədən başlanılacağını da göstərə bilərsiniz\" or \"həmçinin göstərməyə başlanacaq səhifəni də təyin edə bilərsiniz.\""
+          "type": "formatting",
+          "description": "The translation uses a semicolon (;) where a conjunction (and/or) might be more natural in Azerbaijani. While not strictly incorrect, it can make the sentence feel slightly clunky.",
+          "suggestion": "Səhifədə göstərilən faylların/qovluqların sayını təyin edə bilərsiniz, eləcə də hansı səhifənin göstərilməyə başlayacağını."
         }
       ],
       "approved_at": null
@@ -48,13 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'факлове' is a misspelling of 'файлове'. It should be 'файлове' (files).",
+          "description": "The word 'факлове' is likely a misspelling of 'файлове'. 'Факлове' translates to 'torches' in Bulgarian, which is not the intended meaning.",
           "suggestion": "файлове"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'folders' is translated as 'папки', which is correct. However, the original English content implies that both files and folders are entities that could be configured, and the translation accurately reflects that. Therefore, the translation is acceptable, but the phrasing could be slightly improved for flow.",
-          "suggestion": "Можете да посочите броя файлове/папки, които ще се показват на страница, както и коя страница да се покаже"
         }
       ],
       "approved_at": null
@@ -71,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'which page to start displaying' is not accurately translated. 'Specify which page to start displaying' implies selecting a starting point. A better translation would clarify that it's selecting a *specific* page number.",
-          "suggestion": "Sie können die Anzahl der Dateien/Ordner festlegen, die auf einer Seite angezeigt werden sollen, sowie die anzuzeigende Seite festlegen."
+          "description": "The phrase \"die Seite festlegen, die angezeigt werden soll\" is a bit awkward and verbose in German. It literally translates to 'specify the page that should be displayed.' A more natural phrasing would be something like 'die anzuzeigende Seite'.",
+          "suggestion": "Sie können die Anzahl der Dateien/Ordner festlegen, die auf einer Seite angezeigt werden sollen, sowie die anzuzeigende Seite."
         }
       ],
       "approved_at": null
@@ -89,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"qué página debe empezar a mostrarse\" is awkward and not the most natural way to express the English meaning. A better phrasing would indicate the starting page for display.",
-          "suggestion": "Puede especificar el número de archivos / carpetas que se muestran en una página, así como especificar la página de inicio a mostrar."
+          "description": "The phrase \"qué página debe empezar a mostrarse\" is a bit awkward. A more natural phrasing would be \"qué página se debe mostrar\".",
+          "suggestion": "qué página se debe mostrar"
         }
       ],
       "approved_at": null
@@ -98,13 +93,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'kansioiden' contains a typo. It should be 'kansioiden'.",
-          "suggestion": "Voit määrittää sekä yhdellä sivulla näytettävien tiedostojen/kansioiden määrän että miltä sivulta näyttäminen aloitetaan"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -116,18 +105,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'You can specify' is translated somewhat passively. A more active and natural-sounding translation in Armenian might be preferred. While technically correct, it lacks the directness of the original.",
-          "suggestion": "Մեկ էջում ցուցադրվող ֆայլերի/թղթապանակների քանակը կարող եք սահմանել, ինչպես նաև որ էջից սկսել ցուցադրել"
-        },
-        {
-          "type": "formatting",
-          "description": "The phrase 'as well as specify which page to start displaying' is a bit awkwardly phrased. Separating the two actions ('specifying the number' and 'specifying the page') creates a slight pause in the flow.",
-          "suggestion": "Կարող եք նշել մեկ էջում ցուցադրվող ֆայլերի/թղթապանակների քանակը։ Կարող եք նաև նշել, թե որ էջից սկսել ցուցադրել"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -136,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'qual quale pagina viene visualizzata' is awkward. It should more accurately reflect 'which page to start displaying'. The current translation implies 'which page *is* displayed'.",
-          "suggestion": "È possibile specificare il numero di file/cartelle visualizzate in una pagina, nonché specificare da quale pagina iniziare la visualizzazione."
+          "description": "The phrase 'quale pagina viene visualizzata' is a literal translation of 'which page to start displaying' and doesn't convey the intended meaning accurately. It implies the user is seeing *which* page is displayed, rather than specifying the starting page.",
+          "suggestion": "È possibile specificare il numero di file/cartelle visualizzate in una pagina, nonché specificare la pagina di partenza."
         }
       ],
       "approved_at": null
@@ -148,13 +126,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"You can specify...as well as specify...\" is overly literal and sounds slightly awkward in Japanese. While not strictly incorrect, it could be more naturally phrased. The repetition of 'specify' feels clunky.",
-          "suggestion": "ページごとのファイル/フォルダの表示数や、開始ページを指定できます。"
+          "description": "The English phrase \"You can specify the number of files / folders displayed on one page\" is not fully captured. The Japanese translation focuses solely on specifying the *number* but doesn't explicitly mention the ability to *display* them.",
+          "suggestion": "1ページに表示するファイル/フォルダの数を指定でき、それぞれのページを表示できます。"
         },
         {
-          "type": "formatting",
-          "description": "The use of particles (e.g., は, を) could be slightly adjusted for smoother flow. While the current phrasing is understandable, it could be more elegant.",
-          "suggestion": "ページごとのファイル/フォルダの表示数や、開始ページを指定できます。"
+          "type": "incorrect_translation",
+          "description": "The English phrase \"as well as specify which page to start displaying\" is somewhat awkwardly translated. The connection between specifying the number and specifying the starting page isn't as clear.",
+          "suggestion": "また、表示を開始するページも指定できます。"
         }
       ],
       "approved_at": null
@@ -165,13 +143,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term '디스플레이' is used repeatedly and is not the most natural Korean word for 'display' in this context. A more common and appropriate term would be '표시' or '출력'.",
-          "suggestion": "한 페이지에 표시되는 파일 / 폴더 수와 표시를 시작할 페이지를 지정할 수 있습니다"
-        },
-        {
-          "type": "formatting",
-          "description": "The sentence feels slightly long and could be broken down for better readability. Consider separating the two actions being described.",
-          "suggestion": "한 페이지에 표시되는 파일 / 폴더 수를 지정할 수 있습니다. 또한 표시를 시작할 페이지를 지정할 수 있습니다."
+          "description": "The word '디스플레이' (dispeullei) is a transliteration of 'display' and isn't the most natural Korean term in this context. A more appropriate term would be '표시' (pyojeo).",
+          "suggestion": "한 페이지에 표시 되는 파일 / 폴더 수와 표시를 시작할 페이지를 지정할 수 있습니다"
         }
       ],
       "approved_at": null
@@ -181,9 +154,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"as well as specify which page to start displaying\" is not accurately conveyed. A more accurate translation would focus on the concept of pagination or starting point.",
-          "suggestion": "ທ່ານສາມາດກໍານົດຈໍານວນຂອງໄຟລ໌ / ໂຟນເດີທີ່ສະແດງຢູ່ໃນຫນ້າຫນຶ່ງ, ແລະກໍານົດເລກຫນ້າທີ່ຈະເລີ່ມສະແດງ"
+          "type": "formatting",
+          "description": "The Lao translation uses Lao script that is not consistently spaced. It looks cramped and difficult to read.",
+          "suggestion": "Ensure consistent spacing between words and punctuation marks to improve readability. For example, add spaces after commas and before conjunctions."
         }
       ],
       "approved_at": null
@@ -194,8 +167,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"kuru lapu sākt rādīt\" is awkward and doesn't accurately convey \"specify which page to start displaying.\" It literally translates to 'which page to start showing'.",
-          "suggestion": "Jūs varat norādīt, no kādas lapas sākt rādīt failus / mapes."
+          "description": "The phrase \"kuru lapu sākt rādīt\" is a literal translation of \"which page to start displaying\" but sounds unnatural in Latvian. A more natural phrasing would be something like \"no kādas lapas sākt rādīt\".",
+          "suggestion": "no kādas lapas sākt rādīt"
         }
       ],
       "approved_at": null
@@ -206,8 +179,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The sentence structure is slightly awkward. While technically correct, it could be improved for better readability in Dutch. The repetition of 'opgeven' feels clunky.",
-          "suggestion": "U kunt het aantal bestanden/mappen dat op één pagina wordt weergegeven instellen, en bepalen vanaf welke pagina de weergave begint."
+          "description": "The sentence structure is a bit clunky. The repetition of 'opgeven' (specify) makes the sentence feel less natural.",
+          "suggestion": "U kunt het aantal bestanden/mappen per pagina instellen en de startpagina bepalen."
         }
       ],
       "approved_at": null
@@ -224,8 +197,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"que deve começar a ser apresentada\" is a bit awkward and doesn't accurately convey the meaning of \"which page to start displaying\". It implies a continuous presentation rather than a starting point.",
-          "suggestion": "Consider a more direct translation like \"a página por onde começar a visualizar\" or \"a página inicial a exibir\"."
+          "description": "The phrase \"que deve começar a ser apresentada\" is awkward and doesn't accurately reflect the meaning of \"which page to start displaying\".  It implies a forced starting point rather than a selection.",
+          "suggestion": "Consider alternatives like \"qual página iniciar a exibição\" or \"qual página começar a mostrar\"."
         }
       ],
       "approved_at": null
@@ -233,13 +206,7 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"qual página começar a exibir\" is awkward and not the most natural way to express \"specify which page to start displaying\". A more accurate and fluent translation would be 'qual página iniciar a exibição' or 'qual página começar a mostrar'.",
-          "suggestion": "qual página iniciar a exibição"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -248,12 +215,12 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrase 'număr de pagină de început afișaj' is grammatically awkward. It lacks proper agreement and flow.",
+          "description": "The phrase 'număr de pagină de început afișaj' is grammatically awkward. 'Afișaj' is unnecessary and the phrase doesn't flow naturally.",
           "suggestion": "Puteți indica numărul fișierelor / folderelor pe o pagină, precum și pagina de început a afișajului."
         },
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'specify which page to start displaying' is not perfectly captured by 'număr de pagină de început afișaj'. The Romanian translation emphasizes the *number* of the starting page rather than simply specifying the page.",
+          "description": "While 'număr de pagină de început afișaj' attempts to convey 'which page to start displaying', it's not idiomatic Romanian. The phrasing is overly literal.",
           "suggestion": "Puteți indica numărul fișierelor / folderelor pe o pagină, precum și pagina de început a afișajului."
         }
       ],
@@ -271,18 +238,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ඔබට එක් පිටුවක පෙන්වන ගොනු / බහාලුම් ගණන දැක්වීමට හැකි අතර\" is a bit convoluted and doesn't flow naturally. A more direct translation of \"You can specify the number of files / folders displayed on one page\" would be clearer.",
-          "suggestion": "ඔබට එක් පිටුවකට පෙන්වන ගොනු / ෆෝල්ඩර් ගණන තීරණය කළ හැකිය."
+          "description": "The phrase \"ඔබට එක් පිටුවක පෙන්වන ගොනු / බහාලුම් ගණන දැක්වීමට හැකි අතර\" is a bit literal and awkward. A more natural phrasing would better convey the meaning of specifying the number of files/folders per page.",
+          "suggestion": "ඔබට එක් පිටුවක ප්‍රදර්ශනය වන ගොනු/බහාලුම් සංඛ්‍යාව සැකසිය හැකි අතර..."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"කිනම් පිටුවෙන් පෙන්වීම ආරම්භ කළ යුතු දැයි සඳහන් කරන්න\" is a literal translation that could be improved for clarity.  A more natural phrasing for \"specify which page to start displaying\" would be better.",
-          "suggestion": "ඔබට ආරම්භ කිරීමට අවශ්‍ය පිටුවත් සඳහන් කළ හැකිය."
-        },
-        {
-          "type": "formatting",
-          "description": "The translation is a single long sentence. Breaking it into two separate sentences would improve readability.",
-          "suggestion": "ඔබට එක් පිටුවකට පෙන්වන ගොනු / ෆෝල්ඩර් ගණන තීරණය කළ හැකිය. ඔබට ආරම්භ කිරීමට අවශ්‍ය පිටුවත් සඳහන් කළ හැකිය."
+          "description": "The phrase \"කිනම් පිටුවෙන් පෙන්වීම ආරම්භ කළ යුතු දැයි සඳහන් කරන්න\" is also a bit clunky. It's a literal translation but could be improved for clarity and natural flow.",
+          "suggestion": "ඕනෑම පිටුවකින් පෙන්වීම ආරම්භ කිරීමට ඔබට හැකිය."
         }
       ],
       "approved_at": null
@@ -298,9 +260,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'as well as specify which page to start displaying' is not the most natural or accurate translation of 'as well as specify which page to start displaying'. It's a bit clunky in Slovenian.",
-          "suggestion": "Suggest a more concise translation like: 'in določiti, katero stran naj se začne prikazovati' or 'in določiti začetno stran'."
+          "type": "grammar",
+          "description": "The phrase 'katera stran naj se začne prikazovati' is grammatically awkward. A more natural phrasing would improve readability.",
+          "suggestion": "katero stran želite začeti prikazyvati"
         }
       ],
       "approved_at": null
@@ -311,18 +273,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'фолдера' is misspelled. It should be 'фолдери'.",
+          "description": "The word 'фолдера' is misspelled. The correct spelling is 'фолдери'.",
           "suggestion": "фолдери"
         },
         {
           "type": "grammar",
-          "description": "The phrase 'која страница ц́е почети да се приказује' is grammatically awkward. A more natural phrasing would be 'на којој страници ће почети приказ'.",
-          "suggestion": "на којој страници ће почети приказ"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'ц́е' is technically correct for future tense, using 'ће' is more common and natural in modern Serbian (Cyrillic).",
-          "suggestion": "ће"
+          "description": "The phrase 'која страница ц́е почети да се приказује' could be more naturally phrased. While technically correct, it's a bit clunky.",
+          "suggestion": "која страница да се приказује"
         }
       ],
       "approved_at": null
@@ -333,8 +290,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"koja stranica će početi da se prikazuje\" is not the most natural or accurate translation of \"specify which page to start displaying.\" A better phrasing would indicate the starting page number.",
-          "suggestion": "Možete da odredite broj datoteka / foldera prikazanih na jednoj stranici, kao i da odredite broj stranice sa koje će se prikaz početi."
+          "description": "The phrase \"koja stranica će početi da se prikazuje\" is awkward and doesn't accurately convey the English meaning of \"specify which page to start displaying\". A more natural translation would be something like \"odredite sa koje strane da počnete da prikazujete\" or \"odredite prvu stranicu za prikaz\".",
+          "suggestion": "Odredite sa koje strane da počnete da prikazujete"
         }
       ],
       "approved_at": null
@@ -345,8 +302,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"as well as specify which page to start displaying\" is a bit clunky. A more natural Turkish phrasing would improve readability.",
-          "suggestion": "Bir sayfada görüntülenen dosya / klasör sayısını ve hangi sayfadan başlayarak görüntüleyeceğinizi belirleyebilirsiniz."
+          "description": "The phrase \"as well as specify which page to start displaying\" is a bit clunky in Turkish. A more natural phrasing would be \"hangi sayfadan başlamak istediğinizi\" or something similar.",
+          "suggestion": "Bir sayfada görüntülenen dosya / klasör sayısını ve hangi sayfadan başlamak istediğinizi belirleyebilirsiniz."
         }
       ],
       "approved_at": null
@@ -354,7 +311,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'You can specify...' is translated as 'Можна вказати...'. While technically correct, a more natural and fluent translation might be 'Ви можете вказати...' (Vy mozhete vkazaty...) which aligns better with common usage in Ukrainian technical documentation.",
+          "suggestion": "Ви можете вказати кількість файлів/папок, які буде показано на одній сторінці, а також вказати, з якої сторінки почати показ"
+        }
+      ],
       "approved_at": null
     },
     "vi": {

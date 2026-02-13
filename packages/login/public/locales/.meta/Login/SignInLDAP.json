@@ -3,7 +3,7 @@
   "content": "Sign in to: {{ldap_domain}}",
   "content_en_sha1_hash": "16daade75c08d30c914fdaa19a53ee78c2bd9363",
   "created_at": "2025-05-19T21:30:57.267Z",
-  "updated_at": "2025-05-20T09:47:42.493Z",
+  "updated_at": "2025-05-24T14:58:37.615Z",
   "comment": {
     "text": "This translation key is used to display a sign-in message that includes an LDAP domain. It appears as a label on a checkbox in the LDAP login form, guiding users to sign in using their LDAP credentials. The placeholder {{ldap_domain}} allows translators to provide a specific LDAP domain for each language variation.",
     "is_auto": true,
@@ -81,7 +81,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Մուտք գործեl' contains a spelling error. The correct form should be 'Մուտք գործել'.",
+          "suggestion": "Մուտք գործել"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,13 +99,25 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"にサインインする\" is grammatically correct but sounds slightly unnatural in this context. A more natural phrasing would be \"にログインする\" or \"へログインする\". 'サインイン' is borrowed from English and while understood, 'ログイン' is more common for this type of action.",
+          "suggestion": "{{ldap_domain}}にログインする"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Sign in to\" is not accurately translated. \"로그인\" directly translates to \"Login\", not \"Sign in to\". A more appropriate translation would consider how this phrase is used within the application's context.  It's possible '로그인:' is correct, but requires more context.",
+          "suggestion": "Consider if '로그인:' is sufficient or if a more descriptive phrase is needed based on UI flow (e.g., '로그인하여:', '다음으로 로그인:')."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -129,7 +147,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Entre em\" is technically correct, it's not the most natural or idiomatic way to say \"Sign in to\" in Portuguese in this context. A more appropriate translation would be \"Acesse\" or \"Faça login em\".",
+          "suggestion": "Acesse: {{ldap_domain}}"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -153,7 +177,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"පුරන්න: {{ldap_domain}}\" does not accurately convey the meaning of \"Sign in to: {{ldap_domain}}\".  \"පුරන්න\" means \"fill\" or \"complete\". \"Sign in\" implies authentication, not filling something out.",
+          "suggestion": "A more accurate translation would be something along the lines of \"ප්‍රවේශවීම: {{ldap_domain}}\" (Praveshavima: {{ldap_domain}}) which means 'Access/Log in: {{ldap_domain}}' or \"තුලට බැස්සෙන්න: {{ldap_domain}}\" (Thulata bassenna: {{ldap_domain}}) which means 'Log in: {{ldap_domain}}'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +201,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation \"Пријави се на: {{ldap_domain}}\" is a literal translation of 'Sign in to:' but might not be the most natural phrasing for Serbian users. A more common and user-friendly translation for 'Sign in to' would be 'Улазак у:'.",
+          "suggestion": "Улазак у: {{ldap_domain}}"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

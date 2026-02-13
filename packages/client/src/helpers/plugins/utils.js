@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,35 +31,40 @@ import { Events } from "@docspace/shared/enums";
 import config from "PACKAGE_FILE";
 
 import { PluginActions, PluginToastType } from "./enums";
+import { CategoryType } from "@docspace/shared/constants";
+import { getCategoryType } from "@docspace/shared/utils/common";
+import { uuid } from "@docspace/shared/utils";
 
-export const messageActions = (
+export const messageActions = ({
   message,
   setElementProps,
-
   pluginName,
-
   setSettingsPluginDialogVisible,
   setCurrentSettingsDialogPlugin,
   updatePluginStatus,
   updatePropsContext,
   setPluginDialogVisible,
   setPluginDialogProps,
-
+  setPluginSelectorVisible,
+  setPluginSelectorProps,
+  addPluginFloatingOperations,
+  removePluginFloatingOperations,
+  updatePluginFloatingOperations,
   updateContextMenuItems,
   updateInfoPanelItems,
   updateMainButtonItems,
   updateProfileMenuItems,
   updateEventListenerItems,
   updateFileItems,
-
+  updateCreateDialogProps,
   updatePlugin,
-) => {
+}) => {
   if (!message || !message.actions || message.actions.length === 0) return;
 
   message.actions.forEach((action) => {
     switch (action) {
       case PluginActions.updateProps:
-        setElementProps && setElementProps({ ...message.newProps });
+        setElementProps?.({ ...message.newProps });
 
         break;
 
@@ -70,7 +75,7 @@ export const messageActions = (
         break;
 
       case PluginActions.updateStatus:
-        updatePluginStatus && updatePluginStatus(pluginName);
+        updatePluginStatus?.(pluginName);
 
         break;
 
@@ -97,21 +102,75 @@ export const messageActions = (
         }
 
         break;
+      case PluginActions.showSelector:
+        {
+          if (!message.selectorProps) return;
+
+          setPluginSelectorVisible?.(true);
+          setPluginSelectorProps?.({
+            ...message.selectorProps,
+            pluginName,
+          });
+        }
+        break;
+
+      case PluginActions.closeSelector:
+        setPluginSelectorVisible?.(false);
+        setPluginSelectorProps?.(null);
+        break;
+
+      case PluginActions.updateSelector:
+        {
+          if (!message.selectorProps) return;
+
+          setPluginSelectorProps?.({
+            ...message.selectorProps,
+            pluginName,
+          });
+        }
+        break;
+
+      case PluginActions.addFloatingOperationsButton:
+        {
+          if (!message.floatingOperationsButtonProps) return;
+          addPluginFloatingOperations?.({
+            ...message.floatingOperationsButtonProps,
+            pluginName,
+          });
+        }
+        break;
+
+      case PluginActions.removeFloatingOperationsButton: {
+        if (!message.floatingOperationsButtonPropsId) return;
+        removePluginFloatingOperations?.(
+          message.floatingOperationsButtonPropsId,
+        );
+        break;
+      }
+
+      case PluginActions.updateFloatingOperationsButton:
+        {
+          if (!message.floatingOperationsButtonProps) return;
+
+          updatePluginFloatingOperations?.({
+            ...message.floatingOperationsButtonProps,
+            pluginName,
+          });
+        }
+        break;
 
       case PluginActions.showSettingsModal:
         if (pluginName) {
-          setSettingsPluginDialogVisible &&
-            setSettingsPluginDialogVisible(true);
-          setCurrentSettingsDialogPlugin &&
-            setCurrentSettingsDialogPlugin({
-              pluginName,
-            });
+          setSettingsPluginDialogVisible?.(true);
+          setCurrentSettingsDialogPlugin?.({
+            pluginName,
+          });
         }
         break;
 
       case PluginActions.closeSettingsModal:
-        setSettingsPluginDialogVisible && setSettingsPluginDialogVisible(false);
-        setCurrentSettingsDialogPlugin && setCurrentSettingsDialogPlugin(null);
+        setSettingsPluginDialogVisible?.(false);
+        setCurrentSettingsDialogPlugin?.(null);
 
         break;
 
@@ -131,42 +190,46 @@ export const messageActions = (
         }
         break;
 
+      case PluginActions.updateCreateDialogModal:
+        if (message.createDialogProps) {
+          updateCreateDialogProps?.(message.createDialogProps);
+        }
+        break;
+
       case PluginActions.showModal:
         if (message.modalDialogProps) {
-          setPluginDialogVisible && setPluginDialogVisible(true);
-          setPluginDialogProps &&
-            setPluginDialogProps(message.modalDialogProps);
+          setPluginDialogVisible?.(true);
+          setPluginDialogProps?.({ ...message.modalDialogProps, pluginName });
         }
-
         break;
 
       case PluginActions.closeModal:
-        setPluginDialogVisible && setPluginDialogVisible(false);
-        setPluginDialogProps && setPluginDialogProps(null);
+        setPluginDialogVisible?.(false);
+        setPluginDialogProps?.(null);
         break;
 
       case PluginActions.updateContextMenuItems:
-        updateContextMenuItems && updateContextMenuItems(pluginName);
+        updateContextMenuItems?.(pluginName);
 
         break;
       case PluginActions.updateInfoPanelItems:
-        updateInfoPanelItems && updateInfoPanelItems(pluginName);
+        updateInfoPanelItems?.(pluginName);
 
         break;
       case PluginActions.updateMainButtonItems:
-        updateMainButtonItems && updateMainButtonItems(pluginName);
+        updateMainButtonItems?.(pluginName);
 
         break;
       case PluginActions.updateProfileMenuItems:
-        updateProfileMenuItems && updateProfileMenuItems(pluginName);
+        updateProfileMenuItems?.(pluginName);
 
         break;
       case PluginActions.updateEventListenerItems:
-        updateEventListenerItems && updateEventListenerItems(pluginName);
+        updateEventListenerItems?.(pluginName);
 
         break;
       case PluginActions.updateFileItems:
-        updateFileItems && updateFileItems(pluginName);
+        updateFileItems?.(pluginName);
 
         break;
 
@@ -209,3 +272,25 @@ export const getPluginUrl = (url, file) => {
     file,
   );
 };
+
+export const isAIAgents = () => {
+  const categoryType = getCategoryType(window.location);
+
+  return (
+    categoryType === CategoryType.Chat ||
+    categoryType === CategoryType.AIAgent ||
+    categoryType === CategoryType.AIAgents ||
+    window.location.pathname.startsWith("/ai-agents")
+  );
+};
+
+export function borderToStyle(border = {}) {
+  const { width, style, color, radius } = border;
+
+  const borderValue = [width, style, color].filter(Boolean).join(" ");
+
+  return {
+    ...(borderValue ? { border: borderValue } : {}),
+    ...(radius ? { borderRadius: radius } : {}),
+  };
+}

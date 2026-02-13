@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,8 +26,8 @@
 
 import React, { useLayoutEffect, useRef, useState } from "react";
 import InfiniteLoader from "react-window-infinite-loader";
-import { FixedSizeList as List } from "react-window";
-import { classNames } from "@docspace/shared/utils";
+import { VariableSizeList as List } from "react-window";
+import { classNames } from "../../../utils";
 import { RoomsType } from "../../../enums";
 import { Nullable } from "../../../types";
 import styles from "../Selector.module.scss";
@@ -51,6 +51,7 @@ import { Item } from "./Item";
 import { Info } from "./Info";
 import { VirtualScroll } from "./VirtualScroll";
 import { Tabs } from "../../tabs";
+import InputItem from "./InputItem";
 
 const CONTAINER_PADDING = 16;
 const HEADER_HEIGHT = 54;
@@ -63,6 +64,7 @@ const SELECT_ALL_HEIGHT = 61;
 const FOOTER_HEIGHT = 73;
 const FOOTER_WITH_NEW_NAME_HEIGHT = 145;
 const FOOTER_WITH_CHECKBOX_HEIGHT = 181;
+const ERROR_FOOTER_HEIGHT = 20;
 
 const Body = ({
   footerVisible,
@@ -93,21 +95,26 @@ const Body = ({
   injectedElement,
 
   isSSR,
+
+  hideBackButton,
+  withErrorFooter,
+  isLimitReached,
 }: BodyProps) => {
   const infoBarRef = useRef<HTMLDivElement>(null);
   const injectedElementRef = useRef<HTMLElement>(null);
   const [infoBarHeight, setInfoBarHeight] = useState(0);
   const [injectedElementHeight, setInjectedElementHeight] = useState(0);
 
-  const { withSearch } = React.useContext(SearchContext);
-  const isSearch = React.useContext(SearchValueContext);
-  const { withInfoBar } = React.useContext(InfoBarContext);
+  const { withSearch } = React.use(SearchContext);
+  const isSearch = React.use(SearchValueContext);
+  const { withInfoBar } = React.use(InfoBarContext);
 
-  const { withBreadCrumbs } = React.useContext(BreadCrumbsContext);
+  const { withBreadCrumbs, isBreadCrumbsLoading } =
+    React.useContext(BreadCrumbsContext);
 
-  const { withTabs, tabsData, activeTabId } = React.useContext(TabsContext);
+  const { withTabs, tabsData, activeTabId } = React.use(TabsContext);
 
-  const { withSelectAll } = React.useContext(SelectAllContext);
+  const { withSelectAll } = React.use(SelectAllContext);
 
   const [bodyHeight, setBodyHeight] = React.useState(0);
   const [savedInputValue, setSavedInputValue] =
@@ -129,6 +136,15 @@ const Body = ({
       : isEmptyInput
         ? 1
         : items.length;
+
+  const isShareFormEmpty =
+    itemsCount === 0 &&
+    !isSearch &&
+    Boolean(items?.[0]?.isRoomsOnly) &&
+    (Boolean(items?.[0]?.createDefineRoomType === RoomsType.FormRoom) ||
+      Boolean(items?.[0]?.createDefineRoomType === RoomsType.VirtualDataRoom));
+
+  const visibleInfoBar = !isShareFormEmpty && !isBreadCrumbsLoading;
 
   const resetCache = React.useCallback(() => {
     if (listOptionsRef && listOptionsRef.current) {
@@ -204,9 +220,12 @@ const Body = ({
       if (infoEl) {
         const { height } = infoEl.getBoundingClientRect();
         setInfoBarHeight(height + CONTAINER_PADDING);
+        return;
       }
     }
-  }, [withInfoBar, itemsCount]);
+
+    setInfoBarHeight(0);
+  }, [withInfoBar, itemsCount, visibleInfoBar]);
   useLayoutEffect(() => {
     if (injectedElement) {
       const element = injectedElementRef.current;
@@ -245,13 +264,9 @@ const Body = ({
 
   if (descriptionText) listHeight -= BODY_DESCRIPTION_TEXT_HEIGHT;
 
-  const isShareFormEmpty =
-    itemsCount === 0 &&
-    Boolean(items?.[0]?.isRoomsOnly) &&
-    (Boolean(items?.[0]?.createDefineRoomType === RoomsType.FormRoom) ||
-      Boolean(items?.[0]?.createDefineRoomType === RoomsType.VirtualDataRoom));
-
   const getFooterHeight = () => {
+    if (withErrorFooter && withFooterCheckbox && withFooterInput)
+      return FOOTER_WITH_CHECKBOX_HEIGHT + ERROR_FOOTER_HEIGHT;
     if (withFooterCheckbox) return FOOTER_WITH_CHECKBOX_HEIGHT;
     if (withFooterInput) return FOOTER_WITH_NEW_NAME_HEIGHT;
     return FOOTER_HEIGHT;
@@ -260,6 +275,16 @@ const Body = ({
   const getHeaderHeight = () => {
     if (withTabs) return HEADER_HEIGHT;
     return HEADER_HEIGHT + CONTAINER_PADDING;
+  };
+
+  const cloneProps = { ref: injectedElementRef };
+
+  const getItemSize = (index: number): number => {
+    if (items[index]?.isSeparator) {
+      return 16;
+    }
+
+    return 48;
   };
 
   return (
@@ -284,15 +309,13 @@ const Body = ({
       }
     >
       <InfoBar
-        className={styles.selectorInfoBar}
         ref={infoBarRef}
-        visible={itemsCount !== 0}
+        visible={visibleInfoBar}
+        className={styles.selectorInfoBar}
       />
       <BreadCrumbs visible={!isShareFormEmpty} />
 
-      {injectedElement
-        ? React.cloneElement(injectedElement, { ref: injectedElementRef })
-        : null}
+      {injectedElement ? React.cloneElement(injectedElement, cloneProps) : null}
 
       {withTabs && tabsData ? (
         <Tabs
@@ -319,6 +342,7 @@ const Body = ({
           withSearch={isSearch}
           items={items}
           inputItemVisible={inputItemVisible}
+          hideBackButton={hideBackButton}
         />
       ) : (
         <>
@@ -369,11 +393,26 @@ const Body = ({
                       savedInputValue,
                       setSavedInputValue,
                       listHeight,
+                      isLimitReached,
                     }}
                   />
                 </div>
               ))}
             </Scrollbar>
+          ) : items.length === 2 && items[1]?.isInputItem ? (
+            <InputItem
+              defaultInputValue={savedInputValue ?? items[1].defaultInputValue}
+              onAcceptInput={items[1].onAcceptInput}
+              onCancelInput={items[1].onCancelInput}
+              style={{}}
+              color={items[1].color}
+              roomType={items[1].roomType}
+              cover={items[1].cover}
+              icon={items[1].icon}
+              setInputItemVisible={setInputItemVisible}
+              setSavedInputValue={setSavedInputValue}
+              placeholder={items[1].placeholder}
+            />
           ) : (
             <InfiniteLoader
               ref={listOptionsRef}
@@ -399,8 +438,9 @@ const Body = ({
                     savedInputValue,
                     setSavedInputValue,
                     listHeight,
+                    isLimitReached,
                   }}
-                  itemSize={48}
+                  itemSize={getItemSize}
                   onItemsRendered={onItemsRendered}
                   ref={ref}
                   outerElementType={VirtualScroll}

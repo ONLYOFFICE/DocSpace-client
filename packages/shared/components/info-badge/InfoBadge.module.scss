@@ -1,5 +1,5 @@
-@import "../../styles/variables/index.scss";
-@import "../../styles/_mixins.scss";
+@use "../../styles/variables";
+@use "../../styles/mixins";
 
 .tooltip {
   :global {
@@ -11,7 +11,7 @@
       visibility: visible !important;
       opacity: 1 !important;
 
-      @include mobile {
+      @include mixins.mobile {
         max-width: calc(100vw - 32px);
       }
     }

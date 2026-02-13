@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { isSafari, isTablet } from "react-device-detect";
 import throttle from "lodash/throttle";
@@ -65,6 +64,7 @@ const ModalDialog = ({
   children,
   visible,
   onClose,
+  onBackClick,
 
   className,
   displayType = ModalDialogType.modal,
@@ -88,14 +88,20 @@ const ModalDialog = ({
   withBodyScroll = false,
   containerVisible = false,
   withoutPadding = false,
+  withoutHeaderMargin = false,
   hideContent = false,
+  dataTestId,
+  backdropVisible,
 
   ...rest
 }: ModalDialogProps) => {
-  const onCloseEvent = React.useCallback(() => {
-    if (embedded) return;
-    if (isCloseable) onClose?.();
-  }, [embedded, isCloseable, onClose]);
+  const onCloseEvent = React.useCallback(
+    (e?: React.MouseEvent) => {
+      if (embedded) return;
+      if (isCloseable) onClose?.(e);
+    },
+    [embedded, isCloseable, onClose],
+  );
 
   const [currentDisplayType, setCurrentDisplayType] = useState(
     getCurrentDisplayType(displayType, displayTypeDetailed),
@@ -122,6 +128,16 @@ const ModalDialog = ({
 
     const onKeyPress = (e: KeyboardEvent) => {
       if ((e.key === "Esc" || e.key === "Escape") && visible) onCloseEvent();
+
+      if (
+        e.key === "Backspace" &&
+        e.target instanceof HTMLElement &&
+        e.target.nodeName !== "INPUT" &&
+        e.target.nodeName !== "TEXTAREA" &&
+        visible
+      ) {
+        onBackClick?.();
+      }
     };
 
     window.addEventListener("resize", onResize);
@@ -136,7 +152,14 @@ const ModalDialog = ({
       window.removeEventListener("touchmove", onSwipe);
       window.addEventListener("touchend", onSwipeEnd);
     };
-  }, [displayType, displayTypeDetailed, onClose, onCloseEvent, visible]);
+  }, [
+    displayType,
+    displayTypeDetailed,
+    onClose,
+    onCloseEvent,
+    visible,
+    onBackClick,
+  ]);
 
   useEffect(() => {
     return () => {
@@ -173,6 +196,7 @@ const ModalDialog = ({
             withFooterBorder ?? displayType === ModalDialogType.aside
           }
           onClose={onCloseEvent}
+          onBackClick={onBackClick}
           isLoading={isLoading}
           header={header}
           body={body}
@@ -184,7 +208,10 @@ const ModalDialog = ({
           isCloseable={isCloseable ? !embedded : false}
           embedded={embedded}
           withoutPadding={withoutPadding}
+          withoutHeaderMargin={withoutHeaderMargin}
           hideContent={hideContent}
+          dataTestId={dataTestId}
+          backdropVisible={backdropVisible}
           {...rest}
         />
       }

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,289 +24,307 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useMemo } from "react";
+import React, { KeyboardEvent } from "react";
 import classNames from "classnames";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import SelectReactSvgUrl from "PUBLIC_DIR/images/select.react.svg?url";
-import SendReactSvgUrl from "PUBLIC_DIR/images/icons/12/arrow.up.react.svg?url";
+import type { TFile } from "../../../../api/files/types";
+import { RectangleSkeleton } from "../../../../skeletons";
 
 import { Textarea } from "../../../textarea";
-import { IconButton } from "../../../icon-button";
-import { DropDown } from "../../../drop-down";
-import { DropDownItem } from "../../../drop-down-item";
 import { Text } from "../../../text";
-import { TSelectorItem } from "../../../selector";
 
-import { useFilesStore } from "../../store/filesStore";
 import { useMessageStore } from "../../store/messageStore";
+import { useChatStore } from "../../store/chatStore";
 
-import FilePreview from "../file-preview";
+import type { ChatInputProps } from "../../Chat.types";
 
-import FilesSelector from "./components/FileSelector";
+import Attachment from "./Attachment";
+import FilesList from "./FilesList";
+import Buttons from "./Buttons";
 
 import styles from "./ChatInput.module.scss";
-import { ChatInputProps } from "./ChatInput.types";
 
 const ChatInput = ({
-  currentDeviceType,
-  displayFileExtension,
-  vectorizedFiles,
-
   getIcon,
+  isLoading,
+  attachmentFile,
+  clearAttachmentFile,
+  selectedModel,
+  toolsSettings,
+  isPortalAdmin,
+  aiReady,
 }: ChatInputProps) => {
   const { t } = useTranslation(["Common"]);
 
-  const {
-    sendMessage,
-    cancelBuild,
-    isInit,
-    isRequestRunning,
-    isEmptyMessages,
-    currentSession,
-  } = useMessageStore();
-  const { files, wrapperHeight, clearFiles, addFile } = useFilesStore();
+  const { startChat, sendMessage, currentChatId, isRequestRunning, roomId } =
+    useMessageStore();
+  const { fetchChat, currentChat } = useChatStore();
 
   const [value, setValue] = React.useState("");
-  const [fileValue, setFileValue] = React.useState("");
-  const [showSelector, setShowSelector] = React.useState(false);
-  const [showDropDown, setShowDropDown] = React.useState(false);
-  const [startPosition, setStartPosition] = React.useState(-1);
+  const [selectedFiles, setSelectedFiles] = React.useState<Partial<TFile>[]>(
+    [],
+  );
+  const [isFilesSelectorVisible, setIsFilesSelectorVisible] =
+    React.useState(false);
 
-  const prevSession = React.useRef(currentSession);
-  const inputRef = React.useRef<HTMLDivElement>(null);
+  const prevSession = React.useRef<string>(null);
 
-  const isSendDisabled = !isInit ? false : value ? isRequestRunning : false;
+  const saveChangesToStorage = React.useCallback(
+    (value: string | null, selectedFiles: Partial<TFile>[]) => {
+      if (!roomId) return;
+
+      const localStorageId = `chat-${roomId}`;
+
+      const saved = localStorage.getItem(localStorageId);
+
+      const parsedSaved = saved ? JSON.parse(saved) : {};
+
+      const currentChat = currentChatId || "empty";
+
+      const obj: Record<string, Record<string, unknown>> = {
+        ...parsedSaved,
+      };
+
+      obj[currentChat] = {
+        value: value === null ? obj[currentChat]?.value || "" : value || "",
+        selectedFiles: selectedFiles.length
+          ? selectedFiles
+          : obj[currentChat]?.selectedFiles || [],
+        time: Date.now(),
+      };
+
+      if (!value && !selectedFiles.length) {
+        delete obj[currentChat];
+      }
+
+      localStorage.setItem(localStorageId, JSON.stringify(obj));
+    },
+    [currentChatId, roomId],
+  );
+
+  const handleSelectFile = React.useCallback(
+    (file: Partial<TFile>[]) => {
+      saveChangesToStorage(null, file);
+      setSelectedFiles(file);
+    },
+    [saveChangesToStorage],
+  );
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    if (isSendDisabled) return;
-
     const val = e.target.value;
 
     if (val === "\n") {
-      setShowDropDown(false);
-      setStartPosition(-1);
       return;
     }
 
-    const lastSymbol = val[val.length - 1];
-
-    if (lastSymbol === "@") {
-      setShowDropDown(true);
-      setStartPosition(val.length - 1);
-      setFileValue("");
-    }
-    if (lastSymbol === " " || !val) {
-      setShowDropDown(false);
-      setFileValue("");
-      setStartPosition(-1);
-    }
-
-    if (showDropDown) {
-      // Include all characters after '@' including the last one
-      setFileValue(val.substring(startPosition + 1));
-    }
-
     setValue(val);
+
+    saveChangesToStorage(val, selectedFiles);
   };
 
-  const toggleSelector = () => {
-    setShowSelector((prev) => !prev);
+  const handleRemoveFile = (file: Partial<TFile>) => {
+    handleSelectFile(selectedFiles.filter((f) => f.id !== file.id));
   };
 
-  const sendMessageAction = React.useCallback(() => {
-    if (isRequestRunning || !value || showSelector) return;
+  const sendMessageAction = React.useCallback(async () => {
+    if (!value.trim()) return;
 
-    sendMessage(value, files, () => {
+    try {
+      if (!currentChatId) {
+        startChat(value, selectedFiles);
+      } else {
+        sendMessage(value, selectedFiles);
+      }
+
       setValue("");
-      clearFiles();
-    });
-  }, [isRequestRunning, value, showSelector, files, sendMessage, clearFiles]);
+      setSelectedFiles([]);
+      saveChangesToStorage("", []);
+    } catch (e) {
+      console.log(e);
+    }
+  }, [
+    currentChatId,
+    startChat,
+    sendMessage,
+    saveChangesToStorage,
+    value,
+    selectedFiles,
+  ]);
 
   const onKeyEnter = React.useCallback(
-    (e: KeyboardEvent) => {
-      if (e.key === "Enter" && !e.shiftKey) return sendMessageAction();
-      if (e.key === "Escape") return setShowSelector(false);
+    (e: KeyboardEvent<HTMLTextAreaElement>) => {
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+
+        if (!isRequestRunning) {
+          sendMessageAction();
+        }
+      }
     },
-    [sendMessageAction],
+    [sendMessageAction, isRequestRunning],
   );
 
+  const showFilesSelector = () => {
+    setIsFilesSelectorVisible(true);
+  };
+  const hideFilesSelector = () => setIsFilesSelectorVisible(false);
+
+  const toggleFilesSelector = () => {
+    if (isFilesSelectorVisible) {
+      hideFilesSelector();
+    } else {
+      showFilesSelector();
+    }
+  };
+
   React.useEffect(() => {
-    window.addEventListener("keydown", onKeyEnter);
+    if (currentChatId && !currentChat) {
+      fetchChat(currentChatId);
+    }
 
-    return () => {
-      window.removeEventListener("keydown", onKeyEnter);
-    };
-  }, [onKeyEnter]);
+    if (!roomId) return;
+
+    if (prevSession.current === currentChatId) {
+      return;
+    }
+
+    prevSession.current = currentChatId;
+
+    const localStorageId = `chat-${roomId}`;
+
+    const saved = localStorage.getItem(localStorageId);
+
+    const currentChatName = currentChatId || "empty";
+
+    const parsedSaved: Record<string, Record<string, unknown>> = saved
+      ? JSON.parse(saved)
+      : {};
+
+    if (Object.keys(parsedSaved).length === 0) {
+      setValue("");
+      setSelectedFiles([]);
+
+      return;
+    }
+
+    // Validate and remove items older than 5 minutes
+    const FIVE_MINUTES = 5 * 60 * 1000;
+    const now = Date.now();
+    const validatedSaved: Record<string, Record<string, unknown>> = {};
+
+    for (const [key, item] of Object.entries(parsedSaved)) {
+      const time = (item.time as number) || 0;
+      if (now - time < FIVE_MINUTES) {
+        validatedSaved[key] = item;
+      }
+    }
+
+    // Update localStorage with validated items
+    if (
+      Object.keys(validatedSaved).length !== Object.keys(parsedSaved).length
+    ) {
+      localStorage.setItem(localStorageId, JSON.stringify(validatedSaved));
+    }
+
+    if (validatedSaved[currentChatName]) {
+      setValue(validatedSaved[currentChatName].value as string);
+
+      setSelectedFiles(
+        validatedSaved[currentChatName].selectedFiles as Partial<TFile>[],
+      );
+    } else {
+      setValue("");
+      setSelectedFiles([]);
+    }
+  }, [
+    roomId,
+    currentChatId,
+    currentChat,
+
+    fetchChat,
+  ]);
 
   React.useEffect(() => {
-    if (currentSession.includes(prevSession.current)) return;
-
-    prevSession.current = currentSession;
-    setValue("");
-    clearFiles();
-  }, [currentSession, clearFiles]);
-
-  const withFile = files.length !== 0;
-
-  const placeholder = isEmptyMessages
-    ? t("Common:AIChatInputFirstMessage")
-    : t("Common:AIChatInputAskAI");
-
-  const isDisabled = !isInit ? !value : isRequestRunning ? false : !value;
-
-  const sendIconProps = !isInit
-    ? { onClick: sendMessageAction, isDisabled, iconNode: null }
-    : {
-        onClick: isRequestRunning ? cancelBuild : sendMessageAction,
-        isDisabled,
-        iconNode: isRequestRunning ? (
-          <div className={styles.whiteSquare} />
-        ) : null,
-      };
-
-  const dropDownItems = useMemo(() => {
-    const items = vectorizedFiles
-      .filter((file) => !files.find((f) => f.id === file.id))
-      .filter((file) => {
-        if (fileValue) {
-          return file.title.toLowerCase().includes(fileValue.toLowerCase());
-        }
-
-        return true;
-      })
-      .map((item) => (
-        <DropDownItem
-          key={item.id}
-          onClick={() => {
-            const selectorItem: TSelectorItem = {
-              label: item.title,
-              fileExst: item.fileExst,
-              id: item.id,
-              icon: "",
-              parentId: item.folderId,
-              rootFolderType: item.rootFolderType,
-              security: item.security,
-              fileType: item.fileType,
-            };
-
-            // Remove the '@' and any text after it from the input value
-            setValue((prev) => prev.substring(0, startPosition));
-
-            setFileValue("");
-            setShowDropDown(false);
-            setStartPosition(-1);
-
-            addFile(selectorItem);
-          }}
-        >
-          <img src={getIcon(24, item.fileExst)} alt={item.title} />
-          <Text truncate> {item.title}</Text>
-        </DropDownItem>
-      ));
-
-    return items;
-  }, [vectorizedFiles, getIcon, files, fileValue, addFile, startPosition]);
-
-  const style = useMemo(() => {
-    if (!inputRef.current || !showDropDown) return;
-
-    const rects = inputRef.current.getBoundingClientRect();
-
-    const width =
-      currentDeviceType === "desktop" ? rects.width - 40 : rects.width - 32;
-
-    return {
-      width: `${width}px`,
-      bottom: `${window.innerHeight - rects.bottom + rects.height + 4}px`,
-    };
-  }, [showDropDown, currentDeviceType]);
+    if (attachmentFile) {
+      setTimeout(() => {
+        const file = [
+          {
+            id: Number(attachmentFile.id),
+            title: attachmentFile.title,
+            fileExst: attachmentFile.fileExst,
+          },
+        ];
+        handleSelectFile(file);
+        clearAttachmentFile();
+      }, 0);
+    }
+  }, [attachmentFile, handleSelectFile, clearAttachmentFile]);
 
   return (
-    <div
-      className={classNames(styles.chatInput)}
-      style={
-        {
-          "--chat-input-textarea-wrapper-with-files-padding": `${wrapperHeight + 24}px 8px 44px`,
-          "--chat-input-textarea-wrapper-with-files-height": `${116 + wrapperHeight + 24}px`,
-          "--chat-input-textarea-wrapper-with-files-max-height": `${172 + wrapperHeight + 24}px`,
-        } as React.CSSProperties
-      }
-      ref={inputRef}
-    >
-      <Textarea
-        onChange={handleChange}
-        value={value}
-        isFullHeight
-        className={styles.chatInputTextArea}
-        wrapperClassName={classNames({
-          [styles.chatInputTextAreaWrapperWithFiles]: withFile,
-          [styles.chatInputTextAreaWrapper]: !withFile,
-        })}
-        placeholder={placeholder}
-        isChatMode
-      />
-      <FilePreview
-        getIcon={getIcon}
-        displayFileExtension={displayFileExtension}
-        withRemoveFile
-        files={files}
-      />
-      <div className={styles.chatInputButtons}>
-        <IconButton
-          iconName={SelectReactSvgUrl}
-          size={16}
-          isClickable
-          onClick={toggleSelector}
-          className={styles.chatInputButtonsFile}
-        />
+    <>
+      <div className={classNames(styles.chatInput, "chat-input")}>
+        {isLoading ? (
+          <RectangleSkeleton width="100%" height="116px" borderRadius="3px" />
+        ) : (
+          <>
+            <Textarea
+              onChange={handleChange}
+              value={value}
+              isFullHeight
+              className={classNames(styles.chatInputTextArea, {
+                [styles.disabled]: !aiReady,
+              })}
+              wrapperClassName={classNames({
+                [styles.chatInputTextAreaWrapper]: true,
+                [styles.chatInputTextAreaWrapperFiles]:
+                  selectedFiles.length > 0,
+              })}
+              placeholder={t("Common:AIChatInput")}
+              isChatMode
+              fontSize={15}
+              isDisabled={!aiReady}
+              onKeyDown={onKeyEnter}
+              dataTestId="chat-input-textarea"
+            />
 
-        <IconButton
-          iconName={SendReactSvgUrl}
-          size={12}
-          isClickable
-          className={classNames(
-            styles.chatInputButtonsFile,
-            styles.chatInputButtonsSend,
-            {
-              [styles.disabled]: isDisabled,
-            },
-          )}
-          {...sendIconProps}
-        />
+            <FilesList
+              files={selectedFiles}
+              getIcon={getIcon}
+              onRemove={handleRemoveFile}
+            />
+
+            <Buttons
+              isFilesSelectorVisible={isFilesSelectorVisible}
+              toggleFilesSelector={toggleFilesSelector}
+              sendMessageAction={sendMessageAction}
+              value={value}
+              selectedModel={selectedModel}
+              toolsSettings={toolsSettings}
+              isAdmin={isPortalAdmin}
+              aiReady={aiReady}
+            />
+          </>
+        )}
       </div>
-      {showSelector ? (
-        <FilesSelector
-          showSelector={showSelector}
-          toggleSelector={toggleSelector}
-          getIcon={getIcon}
-          currentDeviceType={currentDeviceType}
-          includedItems={vectorizedFiles.map((v) => v.id)}
-        />
-      ) : null}
-      {showDropDown ? (
-        <DropDown
-          open={showDropDown}
-          directionY="top"
-          forwardedRef={inputRef}
-          clickOutsideAction={() => setShowDropDown(false)}
-          style={style}
-          offsetLeft={currentDeviceType === "desktop" ? 20 : 16}
-          isNoFixedHeightOptions
-          maxHeight={dropDownItems.length > 7 ? 300 : undefined}
-          className={styles.selectFileDropDown}
+      <Attachment
+        isVisible={isFilesSelectorVisible}
+        toggleAttachment={toggleFilesSelector}
+        getIcon={getIcon}
+        setSelectedFiles={handleSelectFile}
+      />
+      {!isLoading ? (
+        <Text
+          fontSize="10px"
+          fontWeight={400}
+          className={styles.chatInputText}
+          noSelect
         >
-          {dropDownItems.length ? (
-            dropDownItems
-          ) : (
-            <DropDownItem noActive noHover>
-              No results
-            </DropDownItem>
-          )}
-        </DropDown>
+          {t("Common:AICanMakeMistakes")}
+        </Text>
       ) : null}
-    </div>
+    </>
   );
 };
 

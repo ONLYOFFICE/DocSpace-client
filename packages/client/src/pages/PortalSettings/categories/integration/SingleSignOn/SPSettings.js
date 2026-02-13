@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,6 +26,7 @@
 
 import { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router";
+import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { size } from "@docspace/shared/utils";
@@ -42,6 +43,12 @@ import UsersType from "./UsersType";
 const SPSettings = ({ currentDeviceType }) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { ready } = useTranslation([
+    "SingleSignOn",
+    "Settings",
+    "Common",
+    "Ldap",
+  ]);
   const isMobileView = currentDeviceType === DeviceType.mobile;
 
   const checkWidth = () => {
@@ -55,6 +62,8 @@ const SPSettings = ({ currentDeviceType }) => {
     window.addEventListener("resize", checkWidth);
     return () => window.removeEventListener("resize", checkWidth);
   }, []);
+
+  if (!ready) return null;
 
   return (
     <div className="service-provider-settings">

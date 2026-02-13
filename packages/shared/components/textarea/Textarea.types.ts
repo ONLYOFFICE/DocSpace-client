@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { ChangeEvent } from "react";
+import { ChangeEvent, KeyboardEvent } from "react";
 
 export type TextareaProps = {
   /** Class name */
@@ -47,6 +47,8 @@ export type TextareaProps = {
   name?: string;
   /** Sets a callback function that allows handling the component's changing events */
   onChange?: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+  /** Sets a callback function that allows handling the component's keyDown events */
+  onKeyDown?: (e: KeyboardEvent<HTMLTextAreaElement>) => void;
   /** Placeholder for Textarea  */
   placeholder?: string;
   /** Accepts css style */
@@ -84,4 +86,5 @@ export type TextareaProps = {
   paddingLeftProp?: string;
 
   isChatMode?: boolean;
+  dataTestId?: string;
 };

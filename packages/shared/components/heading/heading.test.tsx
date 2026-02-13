@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,18 +25,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
+import { describe, it, expect } from "vitest";
+import { screen, render } from "@testing-library/react";
 
 import { Heading } from ".";
 import { HeadingLevel, HeadingSize } from "./Heading.enums";
 import styles from "./Heading.module.scss";
 
-import { renderWithTheme } from "../../utils/render-with-theme";
-
 describe("<Heading />", () => {
   it("renders without error", () => {
-    renderWithTheme(
+    render(
       <Heading
         level={HeadingLevel.h4}
         size={HeadingSize.medium}
@@ -50,7 +48,7 @@ describe("<Heading />", () => {
   });
 
   it("renders with inherited text props", () => {
-    renderWithTheme(
+    render(
       <Heading
         level={HeadingLevel.h1}
         color="red"
@@ -64,15 +62,13 @@ describe("<Heading />", () => {
     );
 
     const heading = screen.getByTestId("heading");
-    expect(heading).toHaveStyle({
-      color: "red",
-      fontSize: "24px",
-      fontWeight: "700",
-    });
+    expect(heading.style.color).toBe("red");
+    expect(heading.style.fontSize).toBe("24px");
+    expect(heading.style.fontWeight).toBe("700");
   });
 
   it("renders with different heading levels", () => {
-    const { rerender } = renderWithTheme(
+    const { rerender } = render(
       <Heading level={HeadingLevel.h1}>H1 Heading</Heading>,
     );
     expect(screen.getByRole("heading", { level: 1 })).toBeInTheDocument();
@@ -82,7 +78,7 @@ describe("<Heading />", () => {
   });
 
   it("renders with different sizes", () => {
-    const { rerender } = renderWithTheme(
+    const { rerender } = render(
       <Heading level={HeadingLevel.h1} size={HeadingSize.large}>
         Large heading
       </Heading>,
@@ -100,7 +96,7 @@ describe("<Heading />", () => {
   });
 
   it("renders with different types", () => {
-    const { rerender } = renderWithTheme(
+    const { rerender } = render(
       <Heading level={HeadingLevel.h1} type="menu">
         Menu heading
       </Heading>,
@@ -118,7 +114,7 @@ describe("<Heading />", () => {
   });
 
   it("renders with custom data-testid", () => {
-    renderWithTheme(
+    render(
       <Heading level={HeadingLevel.h1} data-testid="custom-heading">
         Custom test id heading
       </Heading>,
@@ -127,7 +123,7 @@ describe("<Heading />", () => {
   });
 
   it("renders with aria-label", () => {
-    renderWithTheme(
+    render(
       <Heading level={HeadingLevel.h1} aria-label="Descriptive label">
         Aria labeled heading
       </Heading>,

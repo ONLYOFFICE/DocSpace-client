@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,7 +34,14 @@ class PrimaryProgressDataStore {
 
   primaryOperationsArray = [];
 
-  constructor() {
+  dropTargetPreview = null;
+
+  startDropPreview = true;
+
+  constructor(filesStore, selectedFolderStore) {
+    this.filesStore = filesStore;
+    this.selectedFolderStore = selectedFolderStore;
+
     makeAutoObservable(this);
   }
 
@@ -70,10 +77,14 @@ class PrimaryProgressDataStore {
         progressInfo.label = getOperationsProgressTitle(operation);
       }
 
-      this.primaryOperationsArray[operationIndex] = {
+      const updatedOperation = {
         ...operationObject,
         ...progressInfo,
       };
+
+      const newPrimaryOperationsArray = this.primaryOperationsArray.slice();
+      newPrimaryOperationsArray[operationIndex] = updatedOperation;
+      this.primaryOperationsArray = newPrimaryOperationsArray;
     } else {
       const progress = {
         operation,
@@ -94,13 +105,9 @@ class PrimaryProgressDataStore {
         (item) => !item.completed,
       );
 
-      this.primaryOperationsArray.splice(
-        0,
-        this.primaryOperationsArray.length,
-        ...incompleteOperations,
-      );
+      this.primaryOperationsArray = [...incompleteOperations];
 
-      console.log("clearPrimaryProgressData", this.primaryOperationsArray);
+      // console.log("clearPrimaryProgressData", this.primaryOperationsArray);
       return;
     }
 
@@ -110,9 +117,20 @@ class PrimaryProgressDataStore {
 
     if (operationIndex === -1) return;
 
-    this.primaryOperationsArray.splice(operationIndex, 1);
+    const newPrimaryOperationsArray = this.primaryOperationsArray.filter(
+      (_, index) => index !== operationIndex,
+    );
+
+    this.primaryOperationsArray = [...newPrimaryOperationsArray];
 
     console.log("clearPrimaryProgressData", this.primaryOperationsArray);
+  };
+
+  clearDropPreviewLocation = () => {
+    // console.log("clearDropPreviewLocation");
+
+    this.setStartDropPreview(false);
+    this.dropTargetPreview = null;
   };
 
   get primaryOperationsCompleted() {
@@ -142,6 +160,27 @@ class PrimaryProgressDataStore {
     } else {
       this.needErrorChecking = [];
     }
+  };
+
+  setStartDropPreview = (visible) => {
+    if (this.startDropPreview === visible) return;
+
+    this.startDropPreview = visible;
+  };
+
+  setDropTargetPreview = (title) => {
+    if (this.filesStore.startDrag && title === this.selectedFolderStore.title) {
+      this.dropTargetPreview = null;
+      return;
+    }
+
+    if (!title && !this.startDropPreview) return;
+
+    if (this.dropTargetPreview === title) return;
+
+    this.setStartDropPreview(true);
+
+    this.dropTargetPreview = title;
   };
 }
 

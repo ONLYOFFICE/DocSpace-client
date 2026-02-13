@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,9 +26,9 @@
 
 "use client";
 
-import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 import { ChangeEvent, MouseEvent, useRef, useState, useMemo } from "react";
+import classNames from "classnames";
 
 import {
   createPasswordHash,
@@ -83,13 +83,8 @@ import {
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg";
 
 import { TError, TTimeZoneOption } from "@/types";
-import {
-  StyledAcceptTerms,
-  StyledInfo,
-  StyledLink,
-  WizardContainer,
-} from "./page.styled";
 import { toastr } from "@docspace/shared/components/toast";
+import styles from "./wizard.module.scss";
 
 type WizardFormProps = {
   passwordSettings?: TPasswordSettings;
@@ -148,7 +143,6 @@ function WizardForm(props: WizardFormProps) {
 
   const { t, i18n } = useTranslation(["Wizard", "Common"]);
 
-  const theme = useTheme();
   const { currentDeviceType } = useDeviceType();
 
   const refPassInput = useRef<Nullable<PasswordInputHandle>>(null);
@@ -198,7 +192,8 @@ function WizardForm(props: WizardFormProps) {
   };
 
   const onLanguageSelect = (lang: TOption) => {
-    setLanguageForUnauthorized(lang.key.toString());
+    setLanguageForUnauthorized(lang.key.toString(), false);
+    i18n.changeLanguage(lang.key.toString());
   };
 
   const onTimezoneSelect = (timezone: TOption) => {
@@ -214,7 +209,7 @@ function WizardForm(props: WizardFormProps) {
     setHasErrorLicense(false);
     setInvalidLicense(false);
 
-    let fd = new FormData();
+    const fd = new FormData();
     fd.append("files", file as Blob);
 
     if (!wizardToken) return;
@@ -254,13 +249,13 @@ function WizardForm(props: WizardFormProps) {
     const emptyInstanceId = instanceId.trim() === "";
 
     if (emptyEmail || emptyPassword) {
-      emptyEmail && setHasErrorEmail(true);
-      emptyPassword && setHasErrorPass(true);
+      if (emptyEmail) setHasErrorEmail(true);
+      if (emptyPassword) setHasErrorPass(true);
       anyError = true;
     }
 
     if (isAmi && emptyInstanceId) {
-      emptyInstanceId && setHasErrorInstanceId(true);
+      if (emptyInstanceId) setHasErrorInstanceId(true);
       anyError = true;
     }
 
@@ -327,51 +322,53 @@ function WizardForm(props: WizardFormProps) {
   };
 
   return (
-    <WizardContainer>
-      <Text fontWeight={600} fontSize="16px" className="form-header">
+    <div className={styles.wizardContainer}>
+      <Text fontWeight={600} fontSize="16px" className={styles.formHeader}>
         {t("Wizard:Desc", { productName: t("Common:ProductName") })}
       </Text>
       <FieldContainer
-        className="wizard-field"
-        isVertical={true}
+        className={styles.wizardField}
+        isVertical
         labelVisible={false}
         hasError={hasErrorEmail}
         errorMessage={t("ErrorEmail")}
+        dataTestId="email_field_container"
       >
         <EmailInput
           name="wizard-email"
           tabIndex={1}
           size={InputSize.large}
-          scale={true}
+          scale
           value={email}
           placeholder={t("Common:Email")}
           emailSettings={emailSettings}
           hasError={hasErrorEmail}
           onValidateInput={onEmailChangeHandler}
-          isAutoFocussed={true}
+          isAutoFocussed
           onChange={onChangeEmail}
           isDisabled={isCreated}
         />
       </FieldContainer>
 
       <FieldContainer
-        className="wizard-field password-field"
-        isVertical={true}
+        className={classNames(styles.wizardField, styles.passwordField)}
+        isVertical
         labelVisible={false}
         hasError={hasErrorPass}
         errorMessage={t("ErrorPassword")}
+        dataTestId="password_field_container"
       >
         <PasswordInput
           ref={refPassInput}
           tabIndex={2}
           size={InputSize.large}
-          scale={true}
+          scale
           inputValue={password}
           inputType={InputType.password}
           passwordSettings={passwordSettings}
           isDisabled={isCreated}
           placeholder={t("Common:Password")}
-          isDisableTooltip={true}
+          isDisableTooltip
           hasError={hasErrorPass}
           onChange={onChangePassword}
           autoComplete="current-password"
@@ -379,30 +376,33 @@ function WizardForm(props: WizardFormProps) {
         />
       </FieldContainer>
 
-      <StyledLink>
+      <div className={styles.linkWrapper}>
         <IconButton
           size={12}
           iconNode={<RefreshReactSvgUrl />}
           onClick={generatePassword}
+          dataTestId="generate_password_icon_button"
         />
         <Link
-          className="generate-password-link"
+          className={styles.generatePasswordLink}
           type={LinkType.action}
           fontWeight={600}
-          isHovered={true}
+          isHovered
           onClick={generatePassword}
+          dataTestId="generate_password_link"
         >
           {t("Common:GeneratePassword")}
         </Link>
-      </StyledLink>
+      </div>
 
-      {isAmi && (
+      {isAmi ? (
         <FieldContainer
-          className="wizard-field instance-id-field"
-          isVertical={true}
+          className={classNames(styles.wizardField, "instance-id-field")}
+          isVertical
           labelVisible={false}
           hasError={hasErrorInstanceId}
           errorMessage={t("ErrorInstanceId")}
+          dataTestId="instance_id_field_container"
         >
           <TextInput
             id="instance-id"
@@ -412,23 +412,25 @@ function WizardForm(props: WizardFormProps) {
             hasError={hasErrorInstanceId}
             value={instanceId}
             placeholder={t("Common:InstanceId")}
-            scale={true}
+            scale
             tabIndex={3}
             isDisabled={isCreated}
             onChange={onChangeInstanceId}
+            testId="instance_id_input"
           />
         </FieldContainer>
-      )}
+      ) : null}
 
-      {isRequiredLicense && (
+      {isRequiredLicense ? (
         <FieldContainer
-          className="license-filed"
-          isVertical={true}
+          className={styles.licenseField}
+          isVertical
           labelVisible={false}
           hasError={hasErrorLicense}
           errorMessage={
             invalidLicense ? t("ErrorLicenseBody") : t("ErrorUploadLicenseFile")
           }
+          dataTestId="license_field_container"
         >
           <FileInput
             scale
@@ -438,24 +440,25 @@ function WizardForm(props: WizardFormProps) {
             onInput={onLicenseFileHandler}
             hasError={hasErrorLicense}
             isDisabled={isCreated}
+            data-test-id="license_file_input"
           />
         </FieldContainer>
-      )}
+      ) : null}
 
-      <StyledInfo>
-        <Text className="text" fontWeight={400}>
+      <div className={styles.infoWrapper}>
+        <Text className={styles.text} fontWeight={400}>
           {t("Common:Domain")}
         </Text>
-        <Text fontWeight={600} className="machine-name">
+        <Text fontWeight={600} className={styles.machineName}>
           {machineName}
         </Text>
-      </StyledInfo>
+      </div>
 
-      <StyledInfo>
-        <Text className="text" fontWeight={400}>
+      <div className={styles.infoWrapper}>
+        <Text className={styles.text} fontWeight={400}>
           {t("Common:Language")}
         </Text>
-        <div className="wrapper__language-selector">
+        <div className={styles.wrapperLanguageSelector}>
           <ComboBox
             withoutPadding
             directionY="both"
@@ -466,30 +469,32 @@ function WizardForm(props: WizardFormProps) {
             scaled={isMobileView}
             scaledOptions={false}
             size={ComboBoxSize.content}
-            showDisabledItems={true}
+            showDisabledItems
             dropDownMaxHeight={364}
             manualWidth="250px"
             isDefaultMode={!isMobileView}
             withBlur={isMobileView}
             fillIcon={false}
-            modernView={true}
+            modernView
+            dataTestId="wizard_language_combobox"
+            dropDownTestId="wizard_language_dropdown"
           />
           {currentCulture &&
-            "isBeta" in currentCulture &&
-            currentCulture.isBeta && (
-              <BetaBadge
-                withOutFeedbackLink
-                place="bottom"
-                forumLinkUrl={forumLinkUrl}
-                currentDeviceType={currentDeviceType}
-                documentationEmail={documentationEmail}
-              />
-            )}
+          "isBeta" in currentCulture &&
+          currentCulture.isBeta ? (
+            <BetaBadge
+              withOutFeedbackLink
+              place="bottom"
+              forumLinkUrl={forumLinkUrl}
+              currentDeviceType={currentDeviceType}
+              documentationEmail={documentationEmail}
+            />
+          ) : null}
         </div>
-      </StyledInfo>
+      </div>
 
-      <StyledInfo>
-        <Text className="text" fontWeight={400}>
+      <div className={styles.infoWrapper}>
+        <Text className={styles.text} fontWeight={400}>
           {t("Timezone")}
         </Text>
         <ComboBox
@@ -503,19 +508,21 @@ function WizardForm(props: WizardFormProps) {
           scaled={isMobileView}
           scaledOptions={false}
           size={ComboBoxSize.content}
-          showDisabledItems={true}
+          showDisabledItems
           dropDownMaxHeight={364}
           manualWidth="350px"
           isDefaultMode={!isMobileView}
           withBlur={isMobileView}
           fillIcon={false}
-          modernView={true}
+          modernView
+          dataTestId="timezone_combobox"
+          dropDownTestId="timezone_dropdown"
         />
-      </StyledInfo>
+      </div>
 
-      <StyledAcceptTerms>
+      <div className={styles.acceptTerms}>
         <Checkbox
-          className="wizard-checkbox"
+          className={styles.wizardCheckbox}
           id="license"
           name="confirm"
           label={t("License")}
@@ -524,31 +531,32 @@ function WizardForm(props: WizardFormProps) {
           isDisabled={isCreated}
           hasError={hasErrorAgree}
           truncate={false}
+          dataTestId="agree_terms_checkbox"
         />
         <Link
+          className={classNames(styles.licenseLink, {
+            [styles.hasErrorAgree]: hasErrorAgree,
+          })}
           type={LinkType.page}
-          color={
-            hasErrorAgree
-              ? theme.checkbox.errorColor
-              : theme.currentColorScheme?.main.accent
-          }
           fontSize="13px"
           target={LinkTarget.blank}
           href={licenseUrl}
+          dataTestId="license_agreements_link"
         >
           {t("LicenseLink")}
         </Link>
-      </StyledAcceptTerms>
+      </div>
 
       <Button
         size={ButtonSize.medium}
-        scale={true}
+        scale
         primary
         label={t("Common:ContinueButton")}
         isLoading={isCreated}
         onClick={onContinueClick}
+        testId="wizard_continue_button"
       />
-    </WizardContainer>
+    </div>
   );
 }
 

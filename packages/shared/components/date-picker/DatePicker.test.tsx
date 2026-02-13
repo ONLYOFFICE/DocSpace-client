@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,38 +25,39 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import moment from "moment";
-import "@testing-library/jest-dom";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { screen, render, fireEvent, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { DatePicker } from "./DatePicker";
+import {
+  now,
+  createDateTime,
+  addToDate,
+  startOf,
+} from "../../utils/date";
 
 // Mock selector-add-button
-jest.mock("../selector-add-button", () => ({
+vi.mock("../selector-add-button", () => ({
   SelectorAddButton: ({
     children,
-    ...props
+    // ...props
   }: {
     children: React.ReactNode;
-  }) => (
-    <div data-testid="mock-selector-add-button" {...props}>
-      {children}
-    </div>
-  ),
+  }) => <div data-testid="mock-selector-add-button">{children}</div>,
 }));
 
 describe("DatePicker tests", () => {
   const defaultProps = {
-    maxDate: moment().add(10, "years").startOf("year").toDate(),
-    minDate: moment("1970-01-01").toDate(),
-    openDate: moment(),
+    maxDate: startOf(addToDate(now(), 10, "years")!, "year")!.toJSDate(),
+    minDate: new Date("1970-01-01"),
+    openDate: now(),
     locale: "en",
     selectDateText: "Select date",
-    onChange: jest.fn(),
+    onChange: vi.fn(),
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders without selected date", () => {
@@ -73,7 +74,7 @@ describe("DatePicker tests", () => {
   });
 
   it("renders with initial date", () => {
-    const initialDate = moment("2024-01-15");
+    const initialDate = createDateTime(2024, 1, 15);
     render(
       <DatePicker
         initialDate={initialDate}
@@ -89,7 +90,7 @@ describe("DatePicker tests", () => {
   });
 
   it("shows calendar icon when enabled", () => {
-    const initialDate = moment("2024-01-15");
+    const initialDate = createDateTime(2024, 1, 15);
     render(
       <DatePicker
         initialDate={initialDate}
@@ -107,7 +108,7 @@ describe("DatePicker tests", () => {
   });
 
   it("opens calendar on click and handles date selection", async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     render(<DatePicker {...defaultProps} onChange={onChange} />);
 
     const dateSelector = screen.getByTestId("date-selector");
@@ -130,8 +131,8 @@ describe("DatePicker tests", () => {
   });
 
   it("handles date deletion", async () => {
-    const onChange = jest.fn();
-    const initialDate = moment("2024-01-15");
+    const onChange = vi.fn();
+    const initialDate = createDateTime(2024, 1, 15);
     const { rerender } = render(
       <DatePicker
         {...defaultProps}
@@ -162,7 +163,7 @@ describe("DatePicker tests", () => {
   });
 
   it("updates date when outerDate prop changes", async () => {
-    const initialDate = moment("2024-01-15");
+    const initialDate = createDateTime(2024, 1, 15);
     const { rerender } = render(
       <DatePicker
         {...defaultProps}
@@ -176,7 +177,7 @@ describe("DatePicker tests", () => {
       "15 Jan 2024",
     );
 
-    const newInitialDate = moment("2024-02-01");
+    const newInitialDate = createDateTime(2024, 2, 1);
 
     rerender(
       <DatePicker

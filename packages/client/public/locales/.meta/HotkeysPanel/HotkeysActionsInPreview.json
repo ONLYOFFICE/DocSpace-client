@@ -3,7 +3,7 @@
   "content": "Other actions",
   "content_en_sha1_hash": "28ee59aa4a0d2debd33eaa04e0f4d44c8e894a17",
   "created_at": "2025-05-19T21:30:54.988Z",
-  "updated_at": "2025-05-21T10:37:37.629Z",
+  "updated_at": "2025-05-24T10:47:29.787Z",
   "comment": {
     "text": "\"This translation key is used to display a label for an 'Other actions' section in a hotkeys preview panel. It appears as a heading and is related to user interface controls.\"",
     "is_auto": true,
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Sonstiges' is a valid German word, it doesn't fully capture the nuance of 'Other actions' in the context of a hotkeys panel. It's a bit too general.",
-          "suggestion": "Consider a more specific translation like 'Zusätzliche Aktionen' (Additional Actions) or 'Weitere Aktionen' (Further Actions)."
+          "description": "While \"Sonstiges\" is a valid German word, it doesn't perfectly capture the meaning of \"Other actions\" in this context. \"Sonstiges\" is more general and might imply miscellaneous items rather than actions. A more suitable translation would convey the idea of actions not directly listed.",
+          "suggestion": "Alternative suggestions include: \"Weitere Aktionen\", \"Zusätzliche Aktionen\", or \"Weitere Funktionen\" depending on the specific application of 'Other actions'."
         }
       ],
       "approved_at": null
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"기타 작업\" while technically correct, doesn't quite capture the nuance of 'Other actions' in a user interface context. '기타 작업' implies general tasks, while 'Other actions' typically refers to additional options or commands within a specific functionality. A more appropriate translation might emphasize this context.",
-          "suggestion": "Consider \"추가 작업\" (chu-ga-jak) for 'Additional Actions' or \"다른 작업\" (da-reun jak-seup) for 'Other Actions', depending on the UI design and surrounding text."
+          "description": "While \"기타 작업\" (gita jageop) is technically correct, it's a rather formal and literal translation of \"Other actions.\" For a hotkey panel, a more natural and user-friendly translation would be preferable.",
+          "suggestion": "Consider alternatives like \"추가 작업\" (chuga jageop - additional actions) or \"다른 작업\" (dameun jageop - other actions) for a more conversational tone."
         }
       ],
       "approved_at": null
@@ -186,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Друге радње\" is a literal translation of \"Other actions\" but doesn't quite capture the nuance. \"Other actions\" in this context likely refers to a list of alternative functions or controls. A more natural translation might be \"Алтернативне радње\" or \"Додатне радње\".",
-          "suggestion": "Алтернативне радње"
+          "description": "The Serbian (Cyrillic) translation \"Друге радње\" is a literal translation of \"Other actions\" but doesn't convey the intended meaning in the context of a user interface. It would be better to use a phrasing that implies a list of additional actions or options.",
+          "suggestion": "Могуће радње"
         }
       ],
       "approved_at": null

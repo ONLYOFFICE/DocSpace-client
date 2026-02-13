@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,6 +29,13 @@ import classNames from "classnames";
 import { HeaderButtons } from "./HeaderButtons";
 import { MonthsHeaderProps } from "../Calendar.types";
 import styles from "../Calendar.module.scss";
+import {
+  subtractFromDate,
+  addToDate,
+  endOf,
+  startOf,
+  formatDate,
+} from "../../../utils/date";
 
 export const MonthsHeader = ({
   observedDate,
@@ -43,21 +50,20 @@ export const MonthsHeader = ({
 
   const onLeftClick = () =>
     setObservedDate((prevObservedDate) =>
-      prevObservedDate.clone().subtract(1, "year"),
+      subtractFromDate(prevObservedDate, 1, "years")!,
     );
 
   const onRightClick = () =>
     setObservedDate((prevObservedDate) =>
-      prevObservedDate.clone().add(1, "year"),
+      addToDate(prevObservedDate, 1, "years")!,
     );
 
-  const isLeftDisabled =
-    observedDate.clone().subtract(1, "year").endOf("year").endOf("month") <
-    minDate;
+  const prevYear = subtractFromDate(observedDate, 1, "years")!;
+  const isLeftDisabled = endOf(endOf(prevYear, "year")!, "month")! < minDate;
 
+  const nextYear = addToDate(observedDate, 1, "years")!;
   const isRightDisabled =
-    observedDate.clone().add(1, "year").startOf("year").startOf("month") >
-    maxDate;
+    startOf(startOf(nextYear, "year")!, "month")! > maxDate;
 
   return (
     <div className={styles.headerContainer}>
@@ -65,7 +71,7 @@ export const MonthsHeader = ({
         className={classNames(styles.title, "months-header")}
         onClick={onTitleClick}
       >
-        {observedDate.format("YYYY")}
+        {formatDate(observedDate, "yyyy")}
         <span className={styles.headerActionIcon} />
       </h2>
       <HeaderButtons

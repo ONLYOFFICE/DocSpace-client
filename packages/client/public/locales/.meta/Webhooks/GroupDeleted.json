@@ -3,7 +3,7 @@
   "content": "Group deleted",
   "content_en_sha1_hash": "0420357dbb1540365a7676ba86d9e6fbf8e461a2",
   "created_at": "2025-05-19T21:30:49.770Z",
-  "updated_at": "2025-05-21T01:07:27.421Z",
+  "updated_at": "2025-05-24T02:21:27.449Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that a group has been deleted. It appears on a web interface in a developer tool or category settings page, likely on a button or dialog element triggering a group deletion action.",
     "is_auto": true,
@@ -156,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"පක්ෂය මකා දමා ඇත\" literally translates to \"Party deleted\". While 'group' and 'party' can sometimes be interchangeable in certain contexts, 'group' generally refers to a collection of people, whereas 'party' implies a political entity.  A more accurate translation for 'group' would be 'මණ්ඩලය' or 'කාණ්ඩය'.",
-          "suggestion": "Consider using 'මණ්ඩලය මකා දමා ඇත' or 'කාණ්ඩය මකා දමා ඇත'."
+          "description": "The translation 'පක්ෂය මකා දමා ඇත' (pakshaya makā dāmā ata) literally translates to 'party deleted'. 'Group' has a broader meaning than 'party' in this context. It could refer to a group of people, a group within an application, etc.",
+          "suggestion": "Consider using a more general term for 'group', such as 'මණ්ඩලය' (mandalaya) which translates to 'group' or 'circle', or 'කාණ්ඩය' (kaandaya) which translates to 'section' or 'group'. The best option would depend on the specific context of the webhook."
         }
       ],
       "approved_at": null
@@ -186,7 +186,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'obrisana' can mean deleted, 'izbrisana' is the more common and natural translation of 'deleted' in Serbian (Latin script) in this context. 'Obrisana' implies a deliberate erasing or carving away, which isn't the intended meaning of a group being deleted.",
+          "description": "While 'obrisana' is a valid word meaning 'deleted', 'Grupa obrisana' sounds unnatural in Serbian. A more common and natural translation would be 'Grupa izbrisana'.",
           "suggestion": "Grupa izbrisana"
         }
       ],

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,7 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { TSelectorItem } from "../../components/selector";
-import {
+import { WithFlag, Nullable } from "../../types";
+import type {
   TBreadCrumb,
   TInfoBar,
   TSelectorHeader,
@@ -43,9 +44,10 @@ import {
   FolderType,
   RoomsType,
   FileType,
+  RoomSearchArea,
 } from "../../enums";
 import { TRoom, TRoomSecurity } from "../../api/rooms/types";
-import { Nullable } from "../../types";
+import { TGetIcon } from "../utils/types";
 
 export type TCreateDefineRoom = {
   label: string;
@@ -66,45 +68,52 @@ export interface UseRootHelperProps {
 
   setIsInit: (value: boolean) => void;
   treeFolders?: TFolder[];
+  withRecentTreeFolder?: boolean;
+  withFavoritesTreeFolder?: boolean;
+  withAIAgentsTreeFolder?: boolean;
   isUserOnly?: boolean;
 }
 
 export type UseSocketHelperProps = {
   setItems: React.Dispatch<React.SetStateAction<TSelectorItem[]>>;
-  setBreadCrumbs: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
+  setBreadCrumbs?: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
   setTotal: React.Dispatch<React.SetStateAction<number>>;
   disabledItems: (string | number)[];
-  filterParam?: string | number;
-  withCreate: boolean;
+  disabledFolderType?: FolderType;
+  filterParam?: string;
+  withCreate?: boolean;
+  disableBySecurity?: string;
 };
 
-export type UseRoomsHelperProps = {
-  setBreadCrumbs: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
-  setHasNextPage: (value: boolean) => void;
-  setTotal: (value: number) => void;
-  setItems: React.Dispatch<React.SetStateAction<TSelectorItem[]>>;
-  setIsRoot: (value: boolean) => void;
+export type UseRoomsHelperProps = TUseInputItemHelper & {
   searchValue?: string;
+  disableThirdParty?: boolean;
   isRoomsOnly: boolean;
+  roomType?: RoomsType | RoomsType[];
+  excludeItems?: (number | string | undefined)[];
+  isInit: boolean;
+  createDefineRoomLabel?: string;
+  createDefineRoomType?: RoomsType;
   onSetBaseFolderPath?: (
     value: number | string | undefined | TBreadCrumb[],
   ) => void;
-  isInit: boolean;
-  setIsInit: (value: boolean) => void;
-  withCreate: boolean;
-  createDefineRoomLabel?: string;
-  createDefineRoomType?: RoomsType;
   getRootData?: () => Promise<void>;
-  setSelectedItemType: React.Dispatch<
-    React.SetStateAction<"rooms" | "files" | undefined>
+  subscribe: (id: number) => void;
+  withInit?: boolean;
+  setIsInit: (value: boolean) => void;
+  setBreadCrumbs?: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
+  setHasNextPage: (value: boolean) => void;
+  setTotal: (value: number) => void;
+  setIsRoot?: (value: boolean) => void;
+  setSelectedItemType?: React.Dispatch<
+    React.SetStateAction<"rooms" | "files" | "agents" | undefined>
   >;
-  setSelectedItemSecurity: React.Dispatch<
+  setSelectedItemSecurity?: React.Dispatch<
     React.SetStateAction<
       TRoomSecurity | TFileSecurity | TFolderSecurity | undefined
     >
   >;
-  subscribe: (id: number) => void;
-  withInit?: boolean;
+  searchArea?: RoomSearchArea;
 };
 
 export type UseFilesHelpersProps = {
@@ -119,6 +128,7 @@ export type UseFilesHelpersProps = {
   setIsInit: (value: boolean) => void;
   searchValue?: string;
   disabledItems: (string | number)[];
+  disabledFolderType?: FolderType;
   includedItems?: (string | number)[];
   setSelectedItemSecurity: (value: TFileSecurity | TFolderSecurity) => void;
   isThirdParty: boolean;
@@ -143,17 +153,22 @@ export type UseFilesHelpersProps = {
   withCreate: boolean;
   shareKey?: string;
   setSelectedItemId: (value: number | string) => void;
-  setSelectedItemType: (value?: "rooms" | "files") => void;
+  setSelectedItemType: (value?: "rooms" | "files" | "agents") => void;
 
   withInit?: boolean;
 
+  setIsInsideKnowledge: (value: boolean) => void;
+  setIsInsideResultStorage: (value: boolean) => void;
+
   applyFilterOption?: ApplyFilterOption;
+
+  disableBySecurity?: string;
 };
 
 export type TUseInputItemHelper = {
-  withCreate: boolean;
+  withCreate?: boolean;
   selectedItemId?: string | number | undefined;
-  setItems: React.Dispatch<React.SetStateAction<TSelectorItem[]>>;
+  setItems?: React.Dispatch<React.SetStateAction<TSelectorItem[]>>;
 };
 
 export type TSelectedFileInfo = {
@@ -165,32 +180,22 @@ export type TSelectedFileInfo = {
   inPublic?: boolean | undefined;
 } | null;
 
-export type TGetIcon = (size: number, fileExst: string) => string;
+export type TFilesSelectorInit = WithFlag<
+  "withInit",
+  {
+    withInit: true;
+    initTotal: number;
+    initHasNextPage: boolean;
+    initItems: TRoom[] | (TFolder | TFile)[];
+    initBreadCrumbs: TBreadCrumb[];
+    initSelectedItemType: "rooms" | "files" | "agents";
+    initSelectedItemId: string | number;
+    initSearchValue?: Nullable<string>;
+  }
+>;
 
-export type TFilesSelectorInit =
-  | {
-      withInit: true;
-      initTotal: number;
-      initHasNextPage: boolean;
-      initItems: TRoom[] | (TFolder | TFile)[];
-      initBreadCrumbs: TBreadCrumb[];
-      initSelectedItemType: "rooms" | "files";
-      initSelectedItemId: string | number;
-      initSearchValue?: Nullable<string>;
-    }
-  | {
-      withInit?: never;
-      initItems?: never;
-      initTotal?: never;
-      initHasNextPage?: never;
-      initSearchValue?: never;
-      initSelectedItemType?: never;
-      initSelectedItemId?: never;
-      initBreadCrumbs?: never;
-    };
-
-export type FilesSelectorProps = TSelectorHeader &
-  TInfoBar &
+export type FilesSelectorProps = TInfoBar &
+  TSelectorHeader &
   TFilesSelectorInit &
   (
     | {
@@ -200,6 +205,7 @@ export type FilesSelectorProps = TSelectorHeader &
     | { getIcon?: never; filesSettings: TFilesSettings }
   ) & {
     disabledItems: (string | number)[];
+    disabledFolderType?: FolderType;
     includedItems?: (string | number)[];
     filterParam?: string | number;
     withoutBackButton: boolean;
@@ -209,11 +215,16 @@ export type FilesSelectorProps = TSelectorHeader &
     shareKey?: string;
 
     treeFolders?: TFolder[];
+    withRecentTreeFolder?: boolean;
+    withFavoritesTreeFolder?: boolean;
+    withAIAgentsTreeFolder?: boolean;
+
     onSetBaseFolderPath?: (
       value: number | string | undefined | TBreadCrumb[],
     ) => void;
     isUserOnly?: boolean;
     openRoot?: boolean;
+    roomType?: RoomsType | RoomsType[];
     isRoomsOnly: boolean;
     isThirdParty: boolean;
     rootThirdPartyId?: string;
@@ -232,12 +243,14 @@ export type FilesSelectorProps = TSelectorHeader &
       isChecked: boolean,
       selectedTreeNode: TFolder,
       selectedFileInfo: TSelectedFileInfo,
+      isInsideKnowledge?: boolean,
+      isInsideResultStorage?: boolean,
     ) => void | Promise<void>;
     getIsDisabled: (
       isFirstLoad: boolean,
       isSelectedParentFolder: boolean,
       selectedItemId: string | number | undefined,
-      selectedItemType: "rooms" | "files" | undefined,
+      selectedItemType: "rooms" | "files" | "agents" | undefined,
       isRoot: boolean,
       selectedItemSecurity:
         | TFileSecurity
@@ -246,6 +259,8 @@ export type FilesSelectorProps = TSelectorHeader &
         | undefined,
       selectedFileInfo: TSelectedFileInfo,
       isDisabledFolder?: boolean,
+      isInsideKnowledge?: boolean,
+      isInsideResultStorage?: boolean,
     ) => boolean;
     setIsDataReady?: (value: boolean) => void;
     submitButtonLabel: string;
@@ -274,4 +289,9 @@ export type FilesSelectorProps = TSelectorHeader &
 
     isMultiSelect?: boolean;
     onSelectItem?: (item: TSelectorItem) => void;
+    isPortalView?: boolean;
+    maxSelectedItems?: number;
+    renderInPortal?: boolean;
+    disableBySecurity?: string;
+    folderFormValidation?: RegExp;
   };

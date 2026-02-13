@@ -1,0 +1,28 @@
+{
+  "key_path": "LastUpdateInfo",
+  "content": "Last update",
+  "content_en_sha1_hash": "cf1b91677c424704e7d3a429fb90869242e87885",
+  "created_at": "2025-12-22T09:40:17.990Z",
+  "updated_at": "2025-12-22T10:07:47.589Z",
+  "comment": {
+    "text": "This key displays the label \"Last update\" within the information panel of a gallery view. It's used to indicate when the gallery content was last modified and helps users understand the freshness of the data. Translators should ensure the translation conveys a similar sense of recent modification.",
+    "is_auto": true,
+    "updated_at": "2025-12-22T10:07:47.589Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Gallery/index.tsx",
+      "line_number": 175,
+      "context": "<div\n className=\"property\"\n data-testid=\"info_panel_gallery_date_modified_property\"\n >\n <Text className={classNames(styles.select, \"property-title\")}>\n {t(\"InfoPanel:LastUpdateInfo\")}\n </Text>\n <Text className={classNames(styles.select, \"property-content\")}>\n {getCorrectDate(\n culture ?? \"en\",\n gallerySelected.attributes.updatedAt,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

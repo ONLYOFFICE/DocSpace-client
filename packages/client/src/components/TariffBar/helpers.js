@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -46,16 +46,18 @@ export const getSaasBar = (
 export const getEnterpriseBar = (
   t,
   isPaymentPageAvailable,
-  isEnterprise,
   isTrial,
   isLicenseExpiring,
   isLicenseDateExpired,
   trialDaysLeft,
   paymentDate,
+  isGracePeriod,
+  isLifetimeLicense,
+  isCommunity,
 ) => {
   if (
     isPaymentPageAvailable &&
-    isEnterprise &&
+    !isCommunity &&
     (isTrial || isLicenseExpiring || isLicenseDateExpired)
   ) {
     if (isTrial) {
@@ -66,11 +68,25 @@ export const getEnterpriseBar = (
         color: ORANGE,
       };
     }
+
+    if (!isLifetimeLicense && isLicenseExpiring)
+      return {
+        label: t("Common:LicenseExpiresOn", { date: paymentDate }),
+        color: ORANGE,
+      };
+
+    if (!isLifetimeLicense && isGracePeriod)
+      return {
+        label: t("Common:LicenseExpired", { date: paymentDate }),
+        color: RED,
+      };
+
     if (isLicenseDateExpired)
       return {
         label: t("Common:SubscriptionExpiredTitle"),
         color: RED,
       };
+
     return {
       label: t("Common:SubscriptionIsExpiring", { date: paymentDate }),
       color: ORANGE,

@@ -1,6 +1,6 @@
-@import "../../styles/mixins.scss";
-@import "../../styles/variables/devices.scss";
-@import "../../styles/variables/colors.scss";
+@use "../../styles/mixins";
+
+@use "../../styles/variables/colors";
 
 .wrapper {
   display: flex;
@@ -14,7 +14,7 @@
   .titleLink {
     margin-bottom: 12px;
     line-height: 16px;
-    color: #{$gray};
+    color: #{colors.$gray};
   }
 }
 

@@ -1,0 +1,28 @@
+{
+  "key_path": "CreateChatDescription",
+  "content": "Go to the {{aiChat}} tab to get started.",
+  "content_en_sha1_hash": "ca9912b97d9fe6919f5e155bec852d385ffc9523",
+  "created_at": "2025-12-23T10:30:51.130Z",
+  "updated_at": "2025-12-23T10:36:32.541Z",
+  "comment": {
+    "text": "This text appears on a button or link that directs users to the AI Chat tab to begin using the AI chat feature. It instructs users to navigate to the \"AI Chat\" section to get started. Translators should ensure \"AI Chat\" is consistently translated throughout the application.",
+    "is_auto": true,
+    "updated_at": "2025-12-23T10:36:32.541Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
+      "line_number": 582,
+      "context": "const path = getCategoryUrl(CategoryType.Chat, filesFilter.folder);\n \n window.DocSpace.navigate(`${path}?${filesFilter.toUrlParams()}`);\n },\n description: t(\"AIRoom:CreateChatDescription\", {\n aiChat: t(\"AIRoom:AIChat\"),\n }),\n disabled: !canUseChat,\n },\n ];",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

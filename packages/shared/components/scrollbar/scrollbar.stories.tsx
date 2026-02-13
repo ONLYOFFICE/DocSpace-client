@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -43,12 +43,12 @@ const meta = {
     autoHide: {
       control: "boolean",
       description: "Automatically hide scrollbar when not in use",
-      table: { defaultValue: { summary: false } },
+      table: { defaultValue: { summary: "false" } },
     },
     fixedSize: {
       control: "boolean",
       description: "Keep scrollbar thumb size fixed",
-      table: { defaultValue: { summary: false } },
+      table: { defaultValue: { summary: "false" } },
     },
     paddingAfterLastItem: {
       control: "text",

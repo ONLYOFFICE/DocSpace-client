@@ -1,11 +1,24 @@
-@import "../../styles/common-input-styles.scss";
+@use "../../styles/mixins";
 
 .iconBlock {
   display: flex;
   align-items: center;
-  height: 100%;
+  /* Match icon container height to text line-height for perfect vertical centering */
+  height: auto;
   padding-inline-end: 8px;
   padding-inline-start: 1px;
+
+  &[data-size="base"] {
+    height: var(--text-input-line-height-base);
+  }
+  &[data-size="middle"] {
+    height: var(--text-input-line-height-middle);
+  }
+  // Large uses same right padding, only height differs
+  &[data-size="large"] {
+    height: var(--text-input-line-height-large);
+    padding-inline-end: 12px;
+  }
 
   background-color: inherit;
 }
@@ -24,31 +37,33 @@
 }
 
 .append {
+  display: flex;
   align-items: center;
   margin: 0;
   background-color: inherit;
 }
 
 .inputGroup {
-  @include common-input-color-styles;
+  @include mixins.common-input-color-styles;
 
   width: 100%;
 
   display: flex;
+  align-items: center;
+  -webkit-background-clip: padding-box !important;
+  background-clip: padding-box;
 
   :global {
     .append {
       background: inherit;
+      -webkit-background-clip: padding-box !important;
+      background-clip: padding-box;
+      display: flex;
+      align-items: center;
     }
-  }
 
-  input:-webkit-autofill,
-  input:-webkit-autofill:hover,
-  input:-webkit-autofill:focus,
-  input:-webkit-autofill:active {
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: #fff;
-    transition: background-color 5000s ease-in-out 0s;
-    box-shadow: inset 0 0 20px 20px #23232329;
+    .input-block-icon {
+      background-color: inherit;
+    }
   }
 }

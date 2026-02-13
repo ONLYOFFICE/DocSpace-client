@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -70,7 +70,7 @@ const Editor = (props) => {
 
   setDocumentTitle(t("JavascriptSdk"));
 
-  const [version, onSetVersion] = useState(sdkVersion[200]);
+  const [version, onSetVersion] = useState(sdkVersion[210]);
 
   const [source, onSetSource] = useState(sdkSource.Package);
 
@@ -182,7 +182,6 @@ const Editor = (props) => {
     >
       <Container>
         <PreviewBlock
-          t={t}
           loadCurrentFrame={initFrame}
           preview={preview}
           theme={theme}
@@ -209,6 +208,7 @@ const Editor = (props) => {
                   filterParam={FilesSelectorFilterTypes.ALL}
                   isSelect
                   isDocumentIcon
+                  withAIAgentsTreeFolder
                 />
               </FilesSelectorInputWrapper>
             </ControlsGroup>

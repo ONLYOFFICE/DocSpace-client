@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,12 +28,14 @@ export const DEFAULT_EMAIL_TEXT =
   "User <1>{{email}}</1> is already registered in this {{productName}}, enter your password or go back to continue with another email.";
 export const DEFAULT_ROOM_TEXT =
   "<strong>{{displayName}}</strong> invites you to join the room <strong>{{roomName}}</strong> for secure document collaboration.";
+export const DEFAULT_AGENT_TEXT =
+  "<strong>{{displayName}}</strong> invites you to join the {{aiAgent}} <strong>{{agentName}}</strong>.";
 export const DEFAULT_PORTAL_TEXT =
   "<strong>{{displayName}}</strong> invites you to join the room <strong>{{roomName}}</strong> for secure document collaboration.";
 export const DEFAULT_GUEST_TEXT =
   "<strong>{{displayName}}</strong> wants to share with you the contact of the guest.";
 
-  export const TFA_ANDROID_APP_URL =
+export const TFA_ANDROID_APP_URL =
   "https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2";
 export const TFA_IOS_APP_URL =
   "https://apps.apple.com/app/google-authenticator/id388497605";

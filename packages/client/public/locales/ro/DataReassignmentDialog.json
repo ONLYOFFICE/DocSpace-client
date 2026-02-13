@@ -3,7 +3,7 @@
   "AllDataTransferred": "Toate datele au fost transferate",
   "DataReassignment": "Reatribuirea datelor",
   "DeleteProfileIsFinished": "Ștergeți profilul când reatribuirea datelor se termină",
-  "DescriptionDataReassignment": "Sălile create de utilizatorul și documentele stocate în sălile acestui utilizator vor fi transferate.",
+  "DescriptionDataReassignment": "Fișierele și sălile create de acest utilizator vor fi transferate.",
   "Interrupted": "Procesul a fost întrerupt, unele date nu au putut fi transferate",
   "MoreAboutDataTransfer": "Mai multe despre transfer de date",
   "NewDataOwner": "Proprietarul nou al datelor",

@@ -3,7 +3,7 @@
   "content": "codes:",
   "content_en_sha1_hash": "182fa94ceffa8e593b7c9b54ae58703edfb9445b",
   "created_at": "2025-05-19T21:30:57.036Z",
-  "updated_at": "2025-05-20T09:37:35.703Z",
+  "updated_at": "2025-08-11T18:11:59.119Z",
   "comment": {
     "text": "This translation key is used to display a count of backup codes. It appears as a counter text in a dialog component and indicates the number of codes available for backup purposes.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/BackupCodesDialog/index.js",
       "line_number": 118,
-      "context": "<Text\n className=\"backup-codes-counter\"\n fontWeight={600}\n lineHeight=\"20px\"\n >\n {backupCodesCount} {t(\"CodesCounter\")}\n </Text>\n \n <Text className=\"backup-codes-codes\" isBold>\n {backupCodes.length > 0\n ? backupCodes.map((item) => {",
+      "context": "<Text\n className=\"backup-codes-counter\"\n fontWeight={600}\n lineHeight=\"20px\"\n >\n {backupCodesCount} {t(\"CodesCounter\")}\n </Text>\n \n <Text\n className=\"backup-codes-codes\"\n isBold",
       "module": "/packages/client"
     }
   ],
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'kodlar::' doesn't accurately represent the English content 'codes:'. The double colon is unnecessary and changes the meaning. It should be a simple pluralization.",
+          "suggestion": "kodlar"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -81,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"Կոդեր\" simply translates to \"Codes\". It lacks the colon (:) that is present in the English original.  This omission could affect the formatting and readability within the UI.",
+          "suggestion": "Կոդեր:"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -105,7 +117,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ລະຫັັດ\" translates to \"code\" or \"codes\" literally, but lacks the context of being a label or prefix. It doesn't convey the meaning of \"codes:\" which indicates a count or display of codes.",
+          "suggestion": "ລະຫັດ:"
+        }
+      ],
       "approved_at": null
     },
     "lv": {

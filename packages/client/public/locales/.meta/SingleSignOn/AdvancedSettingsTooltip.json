@@ -3,7 +3,7 @@
   "content": "Hide default authentication page and automatically redirect to SSO service.",
   "content_en_sha1_hash": "c798644a2826666749452b9712f3f550f8cfe279",
   "created_at": "2025-05-19T21:30:50.061Z",
-  "updated_at": "2025-05-21T02:18:16.518Z",
+  "updated_at": "2025-08-11T18:11:59.254Z",
   "comment": {
     "text": "This translation key is used to describe a tooltip that explains the meaning of hiding the default authentication page and automatically redirecting to an SSO service. The tooltip appears when a checkbox related to Single Sign-On (SSO) integration is enabled or disabled in the Portal Settings category.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/AdvancedSettings.tsx",
-      "line_number": 93,
-      "context": "name=\"hideAuthPage\"\n isChecked={hideAuthPage}\n isDisabled={!enableSso || isLoadingXml}\n onChange={setCheckbox}\n />\n <HelpButton tooltipContent={t(\"AdvancedSettingsTooltip\")} />\n </div>\n \n <div className=\"advanced-block\">\n <Checkbox\n id=\"disable-email-verification\"",
+      "line_number": 95,
+      "context": "isDisabled={!enableSso || isLoadingXml}\n onChange={setCheckbox}\n dataTestId=\"hide_auth_page_checkbox\"\n />\n <HelpButton\n tooltipContent={t(\"AdvancedSettingsTooltip\")}\n dataTestId=\"hide_auth_page_help_button\"\n />\n </div>\n \n <div className=\"advanced-block\">",
       "module": "/packages/client"
     }
   ],
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'إخفاء صفحة المصادقة الافتراضية وإعادة التوجيه تلقائيًا إلى خدمة Single Sign-On (SSO).' is technically correct but can be improved for clarity and naturalness in Arabic. Specifically, 'خدمة Single Sign-On (SSO)' is a direct transliteration and may not be the most understandable way to refer to the service. While understandable to a technical audience, a more user-friendly explanation might be better.",
-          "suggestion": "إخفاء صفحة تسجيل الدخول الافتراضية وإعادة التوجيه تلقائيًا إلى خدمة تسجيل الدخول الموحد."
+          "description": "The term \"Single Sign-On (SSO)\" is translated literally and may not be easily understood by all users. While technically correct, a more user-friendly explanation might be preferable, such as 'خدمة تسجيل الدخول الموحد' (Unified Login Service).",
+          "suggestion": "Consider using 'خدمة تسجيل الدخول الموحد' instead of 'خدمة Single Sign-On (SSO)' to improve user understanding. Alternatively, keep the English term but provide a brief explanation in parentheses afterwards."
         }
       ],
       "approved_at": null
@@ -42,8 +42,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'default' is misspelled as 'defolt'.",
-          "suggestion": "default"
+          "description": "The word 'doğrulama' (authentication) is spelled correctly, but it's a loanword and might benefit from a more localized alternative for better clarity depending on the target audience.",
+          "suggestion": "Consider using a more common Azerbaijani equivalent for 'authentication' if available and appropriate for the context (e.g., 'təsdiqləmə')."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure is a bit clunky.  While grammatically correct, it could be more natural-sounding in Azerbaijani.",
+          "suggestion": "Consider rephrasing to something like: 'Sistemə daxil olma səhifəsini gizləyin və avtomatik olaraq SSO xidmətinə yönləndirilməsini təmin edin.' (Hide the login page and ensure automatic redirection to the SSO service.)"
         }
       ],
       "approved_at": null
@@ -51,7 +56,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The term 'удостоверяване' might be a more formal or technical term than necessary for a tooltip. It could be replaced with a more common word.",
+          "suggestion": "Скриване на страницата за вход по подразбиране и автоматично пренасочване към SSO услуга."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -66,13 +77,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Standard-Authentifizierungsseite und automatische Weiterleitung zum SSO-Dienst ausblenden' is a literal translation and doesn't flow naturally in German. It lacks clarity and sounds awkward. The phrase 'ausblenden' for 'hide' isn't always the best choice in this context.",
-          "suggestion": "Verbergen Sie die Standard-Authentifizierungsseite und leiten Sie Benutzer automatisch zum SSO-Dienst weiter."
+          "description": "The translation 'Standard-Authentifizierungsseite und automatische Weiterleitung zum SSO-Dienst ausblenden' is a literal translation that doesn't quite convey the intended meaning. It implies hiding the page *and* automatically redirecting. The English implies a function where hiding the page *results in* automatic redirection. The German construction is awkward.",
+          "suggestion": "Standard-Authentifizierungsseite ausblenden und automatisch zum SSO-Dienst weiterleiten."
         },
         {
           "type": "grammar",
-          "description": "The sentence structure is somewhat clunky. A more natural flow would separate the two actions.",
-          "suggestion": "Verbergen Sie die Standard-Authentifizierungsseite. Benutzer werden automatisch zum SSO-Dienst weitergeleitet."
+          "description": "The original German translation uses 'und' twice in quick succession, making it slightly clunky. While grammatically correct, it's not the most elegant phrasing.",
+          "suggestion": "Standard-Authentifizierungsseite ausblenden und automatisch zum SSO-Dienst weiterleiten."
         }
       ],
       "approved_at": null
@@ -80,13 +91,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'SSO' is in English in the Greek translation. It should ideally be translated or transliterated.",
-          "suggestion": "Απόκρυψη της προεπιλεγμένης σελίδας ελέγχου ταυτότητας και αυτόματη ανακατεύθυνση στην υπηρεσία Ενιαίας Είσοδου (ΕΕ)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -113,13 +118,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'վերահղել' is a bit ambiguous. While technically correct, it might be better to use a more precise term for redirection, especially in a technical context. It can mean 'redirect' or 'refer' depending on the context.",
-          "suggestion": "Consider using 'վերահուշել' or 'վերավարել' to more accurately convey the meaning of redirect."
+          "description": "The word 'վերահղել' (verahgl'el) is slightly awkward. While technically correct, a more natural phrasing might be preferred.",
+          "suggestion": "վերահուշել (verahush'el) or վերաբերցնել (veraber'ts'nel)"
         },
         {
-          "type": "grammar",
-          "description": "While grammatically correct, the sentence structure could be improved for better flow and readability in Armenian. The phrase 'ավտոմատ կերպով վերահղել' can be slightly clunky.",
-          "suggestion": "Consider restructuring the sentence to something like: 'Թաքցնել լռելյայն նույնականացման էջը և վերահուշել ավտոմատ կերպով SSO ծառայությանը:' or 'Ավտոմատ կերպով վերահուշել SSO ծառայությանը, թաքցնելով լռելյայն նույնականացման էջը:' (reordering the clauses for flow)."
+          "type": "incorrect_translation",
+          "description": "While the translation is understandable, 'վերահղել' can be interpreted as redirecting *to* a page, rather than automatically redirecting. The English emphasizes automaticity.",
+          "suggestion": "Ավտոմատ կերպով վերահուշել կամ վերաբերցնել SSO ծառայությանը"
         }
       ],
       "approved_at": null
@@ -142,13 +147,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English content implies a function to *hide* the default authentication page. The Korean translation uses '숨기기' (sumgigi) which translates to 'hide,' which is accurate. However, the overall phrasing could be more natural for a tooltip context. It sounds a bit too literal.",
-          "suggestion": "기본 인증 페이지를 숨기고 SSO 서비스로 자동 리디렉션합니다."
-        },
-        {
-          "type": "formatting",
-          "description": "The current phrasing uses a conjunction ('및') which can feel a little abrupt in a tooltip.  Using a more flowing connection would improve readability.",
-          "suggestion": "기본 인증 페이지를 숨기고 SSO 서비스로 자동 리디렉션합니다."
+          "description": "The translation '기본 인증 페이지 숨기기 및 SSO 서비스로 자동 리디렉션' doesn't fully capture the nuance of 'Hide default authentication page and automatically redirect to SSO service.' It's a bit too literal. A more natural Korean phrasing would improve readability.",
+          "suggestion": "기본 인증 페이지를 숨기고 SSO 서비스로 자동 연결."
         }
       ],
       "approved_at": null
@@ -158,9 +158,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ປ່ຽນເສັ້ນທາງ' (pian sentang) translates to 'change route' or 'redirect', but 'redirect' is a more accurate and common term in this context. While not strictly incorrect, 'ປ່ຽນເສັ້ນທາງ' is less precise.",
-          "suggestion": "ປ່ຽນເສັ້ນທາງອັດຕະໂນມັດ (pian sentang attonomat) -  to more closely represent 'automatically redirect'"
+          "type": "spelling",
+          "description": "The word 'ບໍລິການ' (borikan) is used for 'service'. While technically correct, in this context 'ເວັບໄຊ້' (websai) might be more appropriate to specifically refer to an SSO service, as it implies a web-based application.",
+          "suggestion": "ບໍລິການ → ເວັບໄຊ້"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'ປ່ຽນເສັ້ນທາງ' (pian sane thang) which translates to 'change route' is slightly awkward. A more natural phrasing would be 'ນຳທາງ' (nam thang) which means 'navigate' or 'redirect'.",
+          "suggestion": "ປ່ຽນເສັ້ນທາງ → ນຳທາງ"
         }
       ],
       "approved_at": null
@@ -174,7 +179,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Standaard authenticatiepagina verbergen en automatisch doorverwijzen naar SSO-dienst' doesn't perfectly capture the meaning of 'Hide default authentication page and automatically redirect to SSO service'. While generally understandable, 'verbergen' (hide) might be too strong. A softer phrasing like 'Maskeer' (mask) or 'Verberg de weergave van' (hide the display of) could be more appropriate depending on the context of the UI.",
+          "suggestion": "Maskeer standaard authenticatiepagina en automatisch doorverwijzen naar SSO-dienst."
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -201,13 +212,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'SSO service' should be translated as 'serviciu Single Sign-On' to maintain clarity and accuracy. Using just 'serviciu SSO' might be ambiguous to Romanian speakers.",
-          "suggestion": "Ascundere pagina de autentificare implicită şi redirecționare automată spre serviciu Single Sign-On."
+          "description": "The translation 'Ascundere pagina de autentificare implicită şi redirecționare automată spre serviciu SSO' is not fully accurate. 'SSO service' should be translated to something more understandable for a Romanian audience. While 'serviciu SSO' is understandable due to the increasing prevalence of English loanwords, it would be more user-friendly to explain what SSO is.",
+          "suggestion": "Ascundere pagina de autentificare implicită și redirecționare automată către serviciul de autentificare unică (SSO)."
         },
         {
           "type": "formatting",
-          "description": "While technically correct, it's stylistically better to use a more natural Romanian phrasing for clarity and flow. The original English is relatively concise, and the translation is a bit literal.",
-          "suggestion": "Ascunde pagina de autentificare implicită și redirecționează automat către serviciul Single Sign-On."
+          "description": "The use of 'și' instead of '&' in the tooltip could improve readability. While 'și' is grammatically correct, '&' is more common in technical UI.",
+          "suggestion": "Ascundere pagina de autentificare implicită & redirecționare automată spre serviciu SSO."
         }
       ],
       "approved_at": null
@@ -224,18 +235,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'default authentication page' is not accurately conveyed by 'පෙරනිමි ද්වි සාධක පිටුව'. 'ද්වි සාධක' typically refers to two-factor authentication, which isn't implied in the original English. The English refers to the general authentication page, not necessarily two-factor.",
-          "suggestion": "පෙරනිමි පිවිසුම් පිටුව (peranimipivusum pituvata) - This translates to 'default authentication page'."
+          "description": "The phrase \"පෙරනිමි ද්වි සාධක පිටුව\" translates to \"default two-factor page\" which is not what the English text refers to. The English text refers to the default authentication page, not specifically a two-factor page. The Sinhala translation seems to be conflating authentication with two-factor authentication.",
+          "suggestion": "පෙරනිමි ප්‍රත්‍යාස්ථිතික පිටුව (peranimī pratyāsthiti pituwa) - This translates to 'default authentication page'."
         },
         {
           "type": "incorrect_translation",
-          "description": "While 'තනි-පිවිසුම් (SSO) සේවාව' is technically correct for 'SSO service,' it's a somewhat literal translation. It could be more natural-sounding.",
-          "suggestion": "එකම-පිවිසුම් (SSO) සේවාව (ekama-pivusum (SSO) sevava) or කෙටි-පිවිසුම් (SSO) සේවාව (ketipivusum (SSO) sevava) - These are slightly more idiomatic translations for 'SSO service'."
+          "description": "The term 'හවරන්න' (havaranna) in the phrase 'හරවා යවන්න' (harawa yavana) is a more forceful 'send' than 'redirect'. 'Redirect' suggests a more controlled movement.",
+          "suggestion": "ලිපිය යවන්න (lipiya yavana) - 'Redirect' or 'transfer'."
         },
         {
-          "type": "formatting",
-          "description": "The inclusion of (SSO) in parentheses looks slightly awkward in Sinhala. It's unusual to include the English acronym directly like that.",
-          "suggestion": "Avoid including (SSO) directly in the translated text. If clarity requires it, explain SSO elsewhere."
+          "type": "spelling",
+          "description": "While 'තනි-පිවිසුම්' (thani-pivisum) is understandable, 'එකම-පිවිසුම්' (ekama-pivisum) could be more commonly understood as 'single sign-on'.",
+          "suggestion": "එකම-පිවිසුම් (ekama-pivisum)"
         }
       ],
       "approved_at": null
@@ -255,7 +266,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Сакријте' is spelled incorrectly. The correct spelling is 'Sakrijte'.",
+          "suggestion": "Sakrijte"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

@@ -1,0 +1,18 @@
+{
+  "AIAgentAccessRedirectNote": "Ju do të ridrehtoheni automatikisht në seksionin {{sectionName}} në 5 sekonda.",
+  "AIChat": "Bisedë - IA",
+  "AIInstructions": "Udhëzimet e AI",
+  "CreateChat": "Krijoni bisedë",
+  "EmptyKnowledgeDescriptionActions": "Provoni këto veprime për të filluar:",
+  "EmptyKnowledgeTitle": "Nuk ka ende skedarë të ngarkuar",
+  "EmptyResultsTitle": "Nuk ka ende rezultate",
+  "InstructionsDescriptionAgentExample": "Shembull: “Ju jeni një asistent AI PR që ndihmon në shkrimin dhe redaktimin e komunikatave për media. Mbani një ton profesional, të sigurt dhe miqësor për mediat. Nxirrni qartë mesazhet kryesore, shmangni zhargonin dhe mbani tekstin të qartë dhe tërheqës.”",
+  "KnowledgeDescription": "Ngarko skedarë nga kompjuteri yt ose {{productName}} për të ofruar kontekst më të mirë për bisedën. Shënim: një pjesë ose e gjithë përmbajtja e ngarkuar mund të ekspozohet gjatë bisedës.",
+  "KnowledgeSelectIn": "Zgjidh në {{productName}}",
+  "KnowledgeUnavailable": "Baza e njohurive e paaktive",
+  "MCP": "Mjetet MCP për këtë dhomë",
+  "ResponseQualityNode": "<1>Shënim:</1> Cilësia e përgjigjeve mund të ndryshojë sipas modelit; modelet më të reja rekomandohen për rezultate më të mira.",
+  "ResultStorage": "Ruajtja e rezultateve",
+  "UploadFilesDevice": "Ngarko skedarë nga pajisja jote personale",
+  "UploadFilesPortal": "Ngarko skedarë nga {{sectionNameFirst}} ose {{sectionNameSecond}}"
+}

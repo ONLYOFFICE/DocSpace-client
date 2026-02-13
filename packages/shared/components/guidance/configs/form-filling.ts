@@ -37,7 +37,10 @@ export const getFormFillingConfig = ({ t }: GuidanceConfig): GuidanceStep[] => [
         type: GuidanceElementType.Content,
         refKey: GuidanceRefKey.Share,
         offset: {
-          value: 2,
+          left: -2,
+          top: -2,
+          width: 6,
+          height: 5,
         },
         smallBorder: true,
       },
@@ -84,7 +87,7 @@ export const getFormFillingConfig = ({ t }: GuidanceConfig): GuidanceStep[] => [
     header: t("FormFillingTipsDialog:HeaderUploading"),
     description: t("FormFillingTipsDialog:DescriptionUploading", {
       productName: t("Common:ProductName"),
-      sectionName: t("Common:MyFilesSection"),
+      sectionName: t("Common:MyDocuments"),
     }),
     key: "form-filling-uploading",
     placement: "side",

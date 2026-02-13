@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,23 +24,27 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import moment from "moment";
+import type { DateTime } from "luxon";
+import { getMonths, addToDate } from "../../../utils/date";
 
-export const getCalendarMonths = (observedDate: moment.Moment) => {
-  const months = moment
-    .monthsShort()
-    .map((month) => month[0].toUpperCase() + month.substring(1));
+export const getCalendarMonths = (observedDate: DateTime) => {
+  // Get short month names and capitalize first letter
+  const months = getMonths("short").map(
+    (month) => month[0].toUpperCase() + month.substring(1),
+  );
 
-  const monthsObjs = months.map((month) => ({
-    key: `${observedDate.format("YYYY")}-${moment().month(month).format("M")}`,
+  const currentYear = observedDate.year;
+  const nextYear = addToDate(observedDate, 1, "years")!.year;
+
+  const monthsObjs = months.map((month, index) => ({
+    key: `${currentYear}-${index + 1}`,
     value: month,
   }));
 
+  // Add first 4 months of next year
   for (let i = 0; i < 4; i += 1) {
     monthsObjs.push({
-      key: `${observedDate.clone().add(1, "year").format("YYYY")}-${moment()
-        .month(months[i])
-        .format("M")}`,
+      key: `${nextYear}-${i + 1}`,
       value: monthsObjs[i].value,
     });
   }

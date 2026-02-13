@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -51,6 +51,8 @@ const TypeCell = ({ t, item, sideColor }) => {
         return t("Common:Presentation");
       case FileType.Document:
         return t("Common:Document");
+      case FileType.Diagram:
+        return t("Common:Diagram");
       case FileType.OForm:
       case FileType.OFormTemplate:
       case FileType.PDF: {
@@ -85,4 +87,4 @@ const TypeCell = ({ t, item, sideColor }) => {
     </StyledTypeCell>
   );
 };
-export default TypeCell;
+export default React.memo(TypeCell);

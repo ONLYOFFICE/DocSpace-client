@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -35,12 +35,12 @@ import {
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import { FieldContainer } from "@docspace/shared/components/field-container";
-import { InputSize, InputType } from "@docspace/shared/components/text-input";
+import { InputSize } from "@docspace/shared/components/text-input";
 import { TenantTrustedDomainsType } from "@docspace/shared/enums";
 
 import { RegisterModalDialogProps } from "@/types";
 
-import ModalDialogContainer from "../../ModalDialogContainer";
+import styles from "../../modal.module.scss";
 
 const RegisterModalDialog = ({
   visible,
@@ -70,7 +70,7 @@ const RegisterModalDialog = ({
   const getDomains = () => {
     if (trustedDomains)
       return trustedDomains.map((domain, i) => (
-        <span key={i}>
+        <span key={domain}>
           <b>
             {domain}
             {i === trustedDomains.length - 1 ? "." : ", "}
@@ -84,9 +84,7 @@ const RegisterModalDialog = ({
       <>
         {t("RegisterTextBodyBeforeDomainsList")} {getDomains()}{" "}
       </>
-    ) : (
-      <></>
-    );
+    ) : null;
   };
 
   return (
@@ -99,24 +97,25 @@ const RegisterModalDialog = ({
     >
       <ModalDialog.Header>{t("RegisterTitle")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <ModalDialogContainer>
-          <Text key="text-body" isBold={false} fontSize="13px" noSelect>
+        <div className={styles.modalContainer}>
+          <Text key="text-body" isBold={false} fontSize="13px">
             {getDomainsBlock()}
             {t("RegisterTextBodyAfterDomainsList")}
           </Text>
 
           <FieldContainer
-            className="email-reg-field"
+            className={styles.emailRegField}
             key="e-mail"
             isVertical
-            hasError={isShowError && emailErr}
+            hasError={isShowError ? emailErr : undefined}
             labelVisible={false}
             errorMessage={
               errorText ? t(`Common:${errorText}`) : t("Common:RequiredField")
             }
+            dataTestId="register_email_field"
           >
             <EmailInput
-              hasError={isShowError && emailErr}
+              hasError={isShowError ? emailErr : undefined}
               placeholder={t("Common:RegistrationEmail")}
               isAutoFocussed
               id="registration-modal_email"
@@ -132,7 +131,7 @@ const RegisterModalDialog = ({
               autoComplete="username"
             />
           </FieldContainer>
-        </ModalDialogContainer>
+        </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -147,6 +146,7 @@ const RegisterModalDialog = ({
           isLoading={loading}
           isDisabled={loading}
           tabIndex={3}
+          testId="register_send_button"
         />
 
         <Button
@@ -161,6 +161,7 @@ const RegisterModalDialog = ({
           isLoading={loading}
           isDisabled={loading}
           tabIndex={2}
+          testId="register_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

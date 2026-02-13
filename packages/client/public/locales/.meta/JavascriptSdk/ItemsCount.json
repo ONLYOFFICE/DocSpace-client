@@ -3,7 +3,7 @@
   "content": "Items count on one page",
   "content_en_sha1_hash": "8f75108937ce0addb4bf5b22dc439d961d558a53",
   "created_at": "2025-05-19T21:30:54.538Z",
-  "updated_at": "2025-05-21T09:02:15.317Z",
+  "updated_at": "2025-05-24T09:14:21.095Z",
   "comment": {
     "text": "\"Items count on one page\" is a label used to display the number of items per page in a pagination control. It is typically found on a settings or configuration page, such as the Portal Settings categories, where users can customize their data viewing experience.",
     "is_auto": true,
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While the translation is understandable, a more natural and accurate translation would be 'عدد العناصر لكل صفحة' (number of items per page). 'في صفحة واحدة' implies a single, specific page, whereas 'Items count on one page' generally refers to the number of items displayed on a single page within a larger listing.",
-          "suggestion": "عدد العناصر لكل صفحة"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -42,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Bəndlər bir səhifədə sayılır\" doesn't accurately convey the meaning of \"Items count on one page.\" \"Bəndlər\" translates to 'paragraphs' or 'clauses,' which is not what 'items' refers to in this context. It implies counting paragraphs instead of items.",
-          "suggestion": "Consider a translation like \"Bir səhifədə olan məhsul sayı\" or \"Səhifədəki sayğac sayı\" depending on the specific 'items' being referenced."
+          "description": "The translation 'Bəndlər bir səhifədə sayılır' does not accurately convey the meaning of 'Items count on one page'. 'Bəndlər' translates to 'paragraphs' or 'clauses', which is not what 'items' refers to in this context. The phrase 'sayılır' implies 'is counted,' but the core meaning of 'items' is missing.",
+          "suggestion": "Mövcud olan sayğac elementlərin sayı bir səhifədə"
         }
       ],
       "approved_at": null
@@ -66,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Anzahl der Artikel' is too literal and doesn't fully convey the meaning of 'Items count on one page'. While 'Artikel' is correct for 'items', 'Anzahl' emphasizes the *number* and the phrase lacks the context of being *on one page*.",
-          "suggestion": "Consider 'Anzahl der Produkte pro Seite' or 'Produkte pro Seite' for a more accurate translation that captures the context."
+          "description": "The translation \"Anzahl der Artikel\" is a general translation for 'number of items' but doesn't specifically convey the meaning of 'items count on one page'. It's too broad.",
+          "suggestion": "A more accurate translation might be something like \"Anzahl der Artikel pro Seite\" or \"Artikelanzahl pro Seite\" to reflect the context of 'items count on one page'."
         }
       ],
       "approved_at": null
@@ -75,13 +69,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Στοιχεία σε μία σελίδα\" is a literal translation but might not be the most natural or idiomatic way to express \"Items count on one page\" in Greek. It emphasizes the 'items' rather than the 'count'.",
-          "suggestion": "Αριθμός αντικειμένων ανά σελίδα"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -108,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Միավորների քանակ\" literally translates to 'Units quantity'. While it conveys a general idea of count, it doesn't accurately reflect the English phrase 'Items count on one page'. A more accurate translation would emphasize the concept of 'items' specifically related to a page.",
-          "suggestion": "Consider a translation like \"Մի առանձնյակի քանակ մեկ էջում\" (Number of items on one page) or \"ապրանքների քանակ մեկ էջում\" (Number of products on one page), depending on the context of 'items'."
+          "description": "The translation \"Միավորների քանակ\" translates to \"Number of units/points\" which is not an exact equivalent to \"Items count on one page\". It focuses on the quantity of units, not the count of items displayed per page.",
+          "suggestion": "Consider \"Մեկ էջում առկա իրերի քանակ\" (Number of items available on one page) or \"Մեկ էջում ցուցադրվող իրերի քանակ\" (Number of items displayed per page)."
         }
       ],
       "approved_at": null
@@ -138,7 +126,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ຈໍານວນລາຍການ\" translates to \"number of items\" which isn't a direct equivalent of \"Items count on one page\". It misses the \"on one page\" context.",
+          "description": "The Lao translation \"ຈໍານວນລາຍການ\" translates to \"number of items\" or \"list of items\" which isn't a precise equivalent of \"Items count on one page\". It lacks the context of 'on one page'.",
           "suggestion": "ຈໍານວນລາຍການຕໍ່ໜ້າ"
         }
       ],
@@ -156,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Items tellen op één pagina' isn't the most natural or accurate rendering of 'Items count on one page'. 'Tellen' implies an action of counting, whereas 'Items count' is more of a property or display value. A better translation would convey the quantity being displayed.",
-          "suggestion": "Aantal items per pagina"
+          "description": "The Dutch translation \"Items tellen op één pagina\" translates literally to \"Items count on one page.\" While understandable, it's not the most natural way to express the concept in Dutch. A more idiomatic translation would convey the intended meaning of 'number of items' or 'quantity of items'.",
+          "suggestion": "Aar aantal items per pagina"
         }
       ],
       "approved_at": null
@@ -180,8 +168,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Os itens contam em uma página' is not an accurate translation of 'Items count on one page'. The verb 'contar' (to count) is used incorrectly.  It should describe *how many* items, not the items themselves performing the action of counting.",
+          "description": "The translation 'Os itens contam em uma página' is not accurate. The correct translation should reflect the English meaning of 'Items count on one page'.",
           "suggestion": "Os itens exibidos por página"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'Os itens contam' is grammatically incorrect. The verb conjugation 'contam' doesn't fit the context.",
+          "suggestion": "Os itens exibidos"
         }
       ],
       "approved_at": null
@@ -192,7 +185,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Număr de elemente' is a literal translation of 'number of elements' which doesn't fully capture the meaning of 'Items count on one page'. It lacks the context of being on a single page.",
+          "description": "The translation \"Număr de elemente\" is too literal and doesn't fully convey the meaning of \"Items count on one page\". It's missing the context of being on a page.",
           "suggestion": "Numărul de elemente pe pagină"
         }
       ],
@@ -210,8 +203,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"එක් පිටුවක අථක ගණන\" doesn't accurately convey the meaning of \"Items count on one page\".  \"අථක\" implies something illusory or unreal.  A more accurate translation would focus on the number of items displayed.",
-          "suggestion": "Consider using \"එක් පිටුවක ඇති వస్తువుల సంఖ్య\" (Ek pituwake athu vastuwa samakaya) or similar phrasing to accurately represent the number of items."
+          "description": "The translation \"එක් පිටුවක අථක ගණන\" doesn't accurately convey the meaning of \"Items count on one page.\" \"අථක\" means 'non-existent' or 'void'. The intended meaning is 'number' or 'quantity'.",
+          "suggestion": "එක් පිටුවක ඇති వస్తువుల සංඛ්‍යාව (Ek pituwak athu vastuvala sankyavava)"
         }
       ],
       "approved_at": null
@@ -240,8 +233,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'Items' is better translated as 'proizvoda' instead of 'stavki'. 'Stavki' generally refers to items on an invoice or list of ingredients, not products displayed on a page.",
-          "suggestion": "Broj proizvoda na jednoj stranici"
+          "description": "The English phrase 'Items count' is better translated as 'Broj predmeta' rather than 'Broj stavki'. 'Stavke' often refers to line items or entries in a list, while 'predmeti' is a more general term for items.",
+          "suggestion": "Broj predmeta na jednoj stranici"
         }
       ],
       "approved_at": null
@@ -270,8 +263,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, '一页上的项目数' sounds a bit clunky and formal for a user interface label. A more natural and concise translation would be better.",
-          "suggestion": "一页显示的项目数"
+          "description": "The translation '一页上的项目数' is a literal translation of 'Items count on one page'. While understandable, a more natural and idiomatic Chinese translation would be '每页项目数' or '每页物品数量'.",
+          "suggestion": "每页项目数"
         }
       ],
       "approved_at": null

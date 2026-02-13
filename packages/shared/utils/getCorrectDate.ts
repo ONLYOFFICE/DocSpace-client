@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,38 +24,34 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import moment, { Moment } from "moment-timezone";
-import "moment/locale/en-gb";
+import { DateTime } from "luxon";
+
+import {
+  parseToDateTime,
+  formatDate,
+  convertMomentFormatToLuxon,
+  getAppTimezone,
+} from "./date";
 
 export default function getCorrectDate(
   locale: string,
-  date: string | Date,
+  date: string | Date | DateTime,
   dateFormat = "L",
   timeFormat = "LT",
   tz?: string,
 ) {
   if (!date || date === "0001-01-01T00:00:00.0000000Z") return "—";
 
-  moment.locale(locale);
+  const dt = parseToDateTime(date);
+  if (!dt) return "—";
 
-  let curDate: Moment | string = moment(date).locale(locale);
-  let curTime: Moment | string = moment(date).locale(locale);
+  const timezone = tz || getAppTimezone();
 
-  if (tz) {
-    curDate = curDate.tz(tz).format(dateFormat);
-    curTime = curTime.tz(tz).format(timeFormat);
+  const luxonDateFormat = convertMomentFormatToLuxon(dateFormat);
+  const luxonTimeFormat = convertMomentFormatToLuxon(timeFormat);
 
-    const correctDate = `${curDate} ${curTime}`;
+  const curDate = formatDate(dt, luxonDateFormat, { locale, timezone });
+  const curTime = formatDate(dt, luxonTimeFormat, { locale, timezone });
 
-    return correctDate;
-  }
-
-  const { timezone } = window;
-
-  curDate = curDate.tz(timezone).format(dateFormat);
-  curTime = curTime.tz(timezone).format(timeFormat);
-
-  const correctDate = `${curDate} ${curTime}`;
-
-  return correctDate;
+  return `${curDate} ${curTime}`;
 }

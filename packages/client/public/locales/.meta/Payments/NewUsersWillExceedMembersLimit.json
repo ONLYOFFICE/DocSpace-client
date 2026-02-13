@@ -3,7 +3,7 @@
   "content": "Adding new paid users is not possible since the limit is reached for the number of admins included in your current plan.",
   "content_en_sha1_hash": "546ea52957fa116e3801c00313b930d49b40071c",
   "created_at": "2025-05-19T21:30:53.706Z",
-  "updated_at": "2025-05-21T06:33:28.670Z",
+  "updated_at": "2025-05-24T06:48:01.241Z",
   "comment": {
     "text": "This translation key displays a message to users when adding new paid users is not possible due to reaching the limit on admins in their current plan. It appears as an error message in a dialog, prompting the user to consider upgrading their plan. The context is for a specific warning about exceeding membership limits.",
     "is_auto": true,
@@ -108,13 +108,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation's phrasing 'ບັນຫາຄໍານິ້າມສຳລັບຈຳນວນຜູ້ປົກຄອງ' is not the most natural way to express 'the limit is reached for the number of admins'. It's a bit convoluted and doesn't directly convey the meaning of a limit being reached.",
-          "suggestion": "ການເພີ່ມຜູ້ໃຊ້ຈ່າຍທືນໃໝ່ບໍ່ສາມາດເຮັດໄດ້ເພາະວ່າຈຳນວນຜູ້ປົກຄອງທີ່ອະນຸຍາດໃນແຜນການປັດຈຸບັນຂອງທ່ານເຕັມແລ້ວ"
+          "description": "The translation \"ບັນຫາຄໍານິ້າມສຳລັບຈຳນວນຜູ້ປົກຄອງ\" is not the best translation for 'limit for the number of admins.' A more accurate translation would be something like \"ຈຳນວນຜູ້ປົກຄອງສູງສຸດ\" or \"ຂີດຈຳກັດຂອງຜູ້ປົກຄອງ\". The current phrasing is overly technical and less natural.",
+          "suggestion": "ປ່ຽນແປງເປັນ \"ຈຳນວນຜູ້ປົກຄອງສູງສຸດ\" ຫຼື \"ຂີດຈຳກັດຂອງຜູ້ປົກຄອງ\""
         },
         {
           "type": "formatting",
-          "description": "The Lao translation uses a slightly formal tone which may not suit all contexts. Consider a more conversational tone if appropriate.",
-          "suggestion": "Consider a more conversational phrasing, such as 'ບໍ່ສາມາດເພີ່ມຜູ້ໃຊ້ຈ່າຍທືນໃໝ່ໄດ້ເພາະວ່າແຜນການປັດຈຸບັນຂອງທ່ານເຕັມຈຳນວນຜູ້ປົກຄອງແລ້ວ.'"
+          "description": "The phrase \"ໃນແຜນການປັດຈຸບັນຂອງທ່ານ\" could be shortened to \"ໃນແຜນຂອງທ່ານ\" to improve readability. While not strictly incorrect, the longer phrasing is slightly clunky.",
+          "suggestion": "ປ່ຽນແປງເປັນ \"ໃນແຜນຂອງທ່ານ\""
         }
       ],
       "approved_at": null
@@ -152,7 +152,18 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Imposibil de adăugat utilizatori cu plată noi\" is a bit clunky. A more natural Romanian phrasing would be \"Nu se pot adăuga utilizatori plătitori noi\" or \"Adăugarea de utilizatori plătitori noi nu este posibilă\".",
+          "suggestion": "Nu se pot adăuga utilizatori plătitori noi"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'administratori' (administrators) doesn't always perfectly align with 'admins' in this context. It implies a higher level of access than might be conveyed by 'admins'.",
+          "suggestion": "Nu se pot adăuga utilizatori plătitori noi deoarece limita maximă de persoane incluse în planul dvs. actual a fost atinsă."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -167,18 +178,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'පරිශීලකයින්' (parishilakayin) is a less common and slightly awkward choice for 'users' in this context. A more natural word would be 'භාවිත කරන්නන්' (bhavithakarannein).",
-          "suggestion": "Replace 'පරිශීලකයින්' with 'භාවිත කරන්නන්'."
+          "description": "The word 'පරිශීලකයින්' (parishiilakayin) is a less common and slightly archaic way to say 'users'. A more common and natural word would be 'භාවිතකරුවන්' (bhavitakarvva).",
+          "suggestion": "Replace 'පරිශීලකයින්' with 'භාවිතකරුවන්'."
         },
         {
           "type": "grammar",
-          "description": "While grammatically correct, the sentence structure 'ඔබේ වත්මන් සැලැසේ ඇතුළත් කළ හැකි පරිපාලකයන්ගේ ප්‍රමාණය ඉක්මවා ඇති නිසා...' is a bit clunky. A smoother construction would be more direct.",
-          "suggestion": "Rephrase to: 'ඔබේ වත්මන් සැලැසේ පරිපාලකයන් ප්‍රමාණය ඉක්මවා ඇති නිසා...'"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'paid users' is somewhat lost in the translation. While 'ගෙවුම්' (gevu) accurately represents 'paid', the overall impact of the meaning diminishes. There isn't a direct translation for nuance.",
-          "suggestion": "Consider clarifying by adding a phrase emphasizing the nature of the users or re-evaluating how best to convey 'paid' in Sinhala without losing the essence."
+          "description": "While grammatically correct, the sentence structure could be more natural and fluent in Sinhala. The phrase 'ඒවායින් එකතු කිරීමේ හැකියාවක් නැත' (ekathukarineva athyavakin naetha) is a bit clunky. A more natural phrasing would suggest removing the phrase altogether, or rephrasing the sentence.",
+          "suggestion": "Consider rephrasing the sentence to improve flow. For example: 'ඔබේ වත්මන් සැලැසේ ඇතුළත් කළ හැකි පරිපාලකයන්ගේ ප්‍රමාණය ඉක්මවා ඇති නිසා නව ගෙවුම් භාවිතකරුවන් එක් කිරීමට නොහැකිය'."
         }
       ],
       "approved_at": null
@@ -192,7 +198,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'admins' is translated as 'skrbnikov'. While 'skrbnikov' can mean 'administrators' or 'caretakers', 'administrators' is more accurate in this context referring to users with administrative privileges on a platform.",
+          "suggestion": "Dodajanje novih plačljivih uporabnikov ni mogoče, ker je dosežena omejitev števila administratorjev, ki je določena za vaš trenutni tarifni načrt."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -231,13 +243,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation doesn't fully capture the nuance of \"paid users.\"  \"付费用户\" directly translates to 'paying users,' which is acceptable, but 'new paid users' implies an addition to an existing user base, which isn't explicitly conveyed. A more accurate translation might emphasize '新增加的付费用户' (newly added paying users).",
-          "suggestion": "新增加的付费用户无法添加，由于当前费用版本的管理员数量已达上限。"
+          "description": "The translation '由于当前费用版本的管理员数量已达上限' doesn't perfectly capture the nuance of 'the limit is reached for the number of admins included in your current plan'. It focuses solely on admin quantity, missing the aspect of the plan's limitations.",
+          "suggestion": "由于您的当前付费套餐管理员数量已达上限，因此无法添加新的付费用户。"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase '费用版本' (fee version) is a bit clunky. It's more natural to use a term like '套餐' (package) or '订阅计划' (subscription plan).",
-          "suggestion": "新增加的付费用户无法添加，由于当前套餐的管理员数量已达上限。"
+          "type": "formatting",
+          "description": "While not strictly incorrect, the phrasing '因此无法添加新的付费用户' could be slightly smoother.",
+          "suggestion": "因此，无法添加新的付费用户。"
         }
       ],
       "approved_at": null

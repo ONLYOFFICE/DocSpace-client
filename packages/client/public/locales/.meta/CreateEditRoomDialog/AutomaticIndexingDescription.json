@@ -3,7 +3,7 @@
   "content": "Enable automatic indexing to index files and folders by serial number. Sorting by number will be set as default for all users.",
   "content_en_sha1_hash": "6f5d6b18806c6e849ff261231c92aab80a0fe2d9",
   "created_at": "2025-05-19T21:30:56.781Z",
-  "updated_at": "2025-05-20T09:38:11.670Z",
+  "updated_at": "2025-08-12T19:46:25.848Z",
   "comment": {
     "text": "\"This translation key is used for the description of automatic indexing feature in a virtual data room block. It explains how this feature works and its default sorting behavior. The translated text will appear in a dialog that allows users to configure automatic indexing.\"",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/VirtualDataRoomBlock.js",
-      "line_number": 137,
-      "context": "return (\n <StyledVirtualDataRoomBlock>\n <Block\n headerText={t(\"AutomaticIndexing\")}\n bodyText={t(\"AutomaticIndexingDescription\")}\n onChange={onChangeAutomaticIndexing}\n isDisabled={false}\n isChecked={roomParams.indexing}\n />\n <Block",
+      "line_number": 138,
+      "context": "return (\n <StyledVirtualDataRoomBlock>\n <Block\n headerText={t(\"AutomaticIndexing\")}\n bodyText={t(\"AutomaticIndexingDescription\")}\n onChange={onChangeAutomaticIndexing}\n isDisabled={false}\n isChecked={roomParams.indexing}\n dataTestId=\"virtual_data_room_automatic_indexing\"\n />",
       "module": "/packages/client"
     }
   ],
@@ -27,13 +27,35 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"to index files and folders by serial number\" is not accurately reflected. The Arabic translation focuses on sorting, while the English implies indexing for searchability. While sorting *is* enabled by indexing, the primary function is not explicitly conveyed.",
+          "suggestion": "تمكين الفهرسة التلقائية لتنظيم الملفات والمجلدات (وفهرستها) حسب الرقم التسلسلي. سيتم تعيين الفرز حسب الرقم كافتراضي لجميع المستخدمين."
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, the sentence structure feels a bit awkward in Arabic. The separation of the two actions (enabling indexing AND setting default sort) could be smoother.",
+          "suggestion": "لتمكين الفهرسة التلقائية لفرز الملفات والمجلدات حسب الرقم التسلسلي، وسيتم تعيين الفرز حسب الرقم كافتراضي لجميع المستخدمين."
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'by serial number' is not accurately conveyed. 'Seriya nömrəsinə görə' literally translates to 'according to serial number,' which isn't the intended meaning. A better translation would imply indexing *using* the serial number.",
+          "suggestion": "Fayl və qovluqları seriya nömrələri ilə indeksləşdirmək üçün avtomatik indeksləşdirməni aktivləşdirin."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure is a bit clunky. The sentence about sorting could be made smoother.",
+          "suggestion": "Fayl və qovluqları seriya nömrəsinə görə indeksləşdirmək üçün avtomatik indeksləşdirməni aktivləşdirin. Bütün istifadəçilər üçün nömrə üzrə çeşidləmə standart olaraq tətbiq ediləcək."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -69,19 +91,47 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'hakemistotiedostoihin' is overly literal and doesn't quite capture the intended meaning of 'files and folders'. It translates to 'directory files'. A more natural Finnish phrasing would be more encompassing of both files and folders.",
+          "suggestion": "Tiedostoihin ja kansioihin"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'sarjanumeron perusteella' while technically correct, sounds a bit formal.  A more conversational Finnish alternative might be better.",
+          "suggestion": "sarjanumeroiden perusteella"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"serial number\" is more accurately translated as \"numéro de série\" in French. While \"numéro\" is used, \"numéro de série\" is more precise and maintains the intended meaning.",
+          "suggestion": "Activez l'indexation automatique pour indexer les fichiers et les dossiers par numéro de série. Le tri par numéro de série sera défini par défaut pour tous les utilisateurs."
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Ըստ թվերի դասակարգումը\" could be improved. While technically correct, it's a bit clunky. A more natural phrasing for 'Sorting by number' would be something like \"Համարով դասակարգումը\" or \"Համարային դասակարգումը\".",
+          "suggestion": "Համարով դասակարգումը կսահմանվի որպես լռելյայն բոլոր օգտատերերի համար:"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English text mentions \"serial number\". \"Սերիական համար\" is a direct transliteration and might not be the most understandable term for Armenian speakers. It might be more appropriate to use a more descriptive term, depending on the context.",
+          "suggestion": "Consider replacing \"սերիական համար\" with a more contextually accurate term, if possible (e.g., something related to sequential numbering or order). If 'serial number' is essential, a footnote or explanation might be helpful."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,25 +143,69 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"シリアル番号によるファイルとフォルダの自動インデックス作成を有効にします\" is a bit literal and could be more naturally phrased. A more common phrasing would be something like \"シリアル番号に基づいてファイルとフォルダを自動的にインデックス化します\" or \"シリアル番号でファイルとフォルダを自動インデックス化するように設定します\".",
+          "suggestion": "シリアル番号に基づいてファイルとフォルダを自動的にインデックス化します"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"番号によるソートがすべてのユーザーのデフォルトとして設定されます\" is grammatically correct but could be more fluent.  It's a bit clunky. A better way to express it might be \"すべてのユーザーのデフォルトのソート順として番号順が設定されます\" or something similar.",
+          "suggestion": "すべてのユーザーのデフォルトのソート順として番号順が設定されます"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"일련 번호로 파일과 폴더를 인덱싱하기 위해\" is a bit awkward. A more natural translation would be something along the lines of \"파일과 폴더를 일련 번호에 따라 색인화하기 위해\". The current phrasing sounds like indexing *using* serial numbers, while the English implies indexing *by* serial number.",
+          "suggestion": "파일과 폴더를 일련 번호에 따라 색인화하기 위해"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'ດຶງດູດການຄົ້ນຫາ' (dung duat kan khon ha) translates more accurately to 'enable searching' or 'trigger search' rather than 'attract search'. The English conveys enabling the indexing process, not attracting files.",
+          "suggestion": "ປ່ຽນເປັນ 'ເປີດໃຊ້ການຄົ້ນຫາແບບອັດຕະໂນມັດ' (pert sai kan khon ha baep at-ta-no-mat) or 'ເປີດໃຊ້ການນໍາໃຊ້ການຄົ້ນຫາແບບອັດຕະໂນມັດ' (pert sai kan nam sai kan khon ha baep at-ta-no-mat)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'ການນໍາໃຊ້ການຄົ້ນຫາ' (kan nam sai kan khon ha) is redundant and sounds unnatural. The word 'ຄົ້ນຫາ' already implies the action of searching/indexing.",
+          "suggestion": "ຖອນຖອນຄຳວ່າ 'ການນໍາໃຊ້' ຈາກປະໂຫວດ"
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence is long and could be broken down for better readability. A period is followed by 'ການຈັດລຽງຕາມເລກຳນວນຈະຖືກຕັ້ງຄ່າ'.",
+          "suggestion": "Split the sentence into two: 'ດຶງດູດການຄົ້ນຫາແບບອັດຕະໂນມັດ ເພື່ອຄົ້ນຫາເອກະສານແລະໂຟນເດີຕາມເລກຳນວນ.'  Then add: 'ການຈັດລຽງຕາມເລກຳນວນຈະຖືກຕັ້ງຄ່າເປັນຄ່າເລີ່ມຕົ້ນສໍາລັບຜູ້ໃຊ້ທຸກຄົນ.'"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"indeksa failiem un mapēm\" is somewhat awkward. It literally translates to 'to index files and folders', which is redundant as 'automātisku indeksēšanu' already implies indexing.",
+          "suggestion": "Iespējojiet automātisku indeksēšanu failu un mapju indeksei (or simply: Iespējojiet automātisku indeksēšanu failu un mapju)"
+        },
+        {
+          "type": "formatting",
+          "description": "There's a missing space before 'noklusējums'.",
+          "suggestion": "Iespējojiet automātisku indeksēšanu failu un mapju indeksei. Kārtošana pēc numura tiks iestatīta kā noklusējums visiem lietotājiem."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -129,31 +223,76 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'utilizadors' is misspelled. It should be 'utilizadores'.",
+          "suggestion": "utilizadores"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'serial number' is not accurately translated. 'Número de série' literally translates to 'serial number' and might not be the most natural or understandable term in this context for a Brazilian Portuguese audience. It's possible a more general term like 'ordem' (order) or 'número' (number) would be better depending on the exact meaning of 'serial number' in the application.",
+          "suggestion": "Consider using 'ordem' or 'número' instead of 'número de série' depending on the intended meaning. If 'serial number' is crucial to the concept, provide more context or explanation to the user."
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"pe baza numărului de serie\" is a literal translation of \"by serial number\" and isn't the most natural way to express it in Romanian. It sounds somewhat clunky.",
+          "suggestion": "Consider 'prin numărul de serie' or 'folosind numărul de serie' for a more fluent translation."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"va fi stabilită ca valoarea implicită\" is accurate but slightly formal for a user-facing description. It could be simplified.",
+          "suggestion": "Consider 'va fi setată ca implicită' or 'va deveni implicită' for a more conversational tone."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The phrase 'установлена ​​по умолчанию' uses a visually awkward spacing with the ellipses. It disrupts the readability.",
+          "suggestion": "Включите автоматическую индексацию для индексации файлов и папок по серийному номеру. Сортировка по номеру будет установлена по умолчанию для всех пользователей."
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"සුචිගත කිරීම\" (suchigata kirimata) is used repeatedly. While it technically means 'indexing', it sounds repetitive and unnatural in Sinhala. A more natural phrasing would vary the wording.",
+          "suggestion": "Consider replacing some instances of 'සුචිගත කිරීම' with synonyms like 'ලේඛනගත කිරීම' (lekhanagata kirimata - recording/registering) or rephrasing to avoid repetition. For example, instead of 'සුචිගත කිරීම', try 'ලේඛනගත කිරීම' or 'එය ලේඛනගත කිරීම'."
+        },
+        {
+          "type": "grammatical",
+          "description": "The phrase 'සියලුම පරිශීලකයින් සඳහා' (siyalum parishiilakayin dharaka) is grammatically correct but a little stiff. A more natural phrasing would improve flow.",
+          "suggestion": "Consider rephrasing 'සියලුම පරිශීලකයින් සඳහා' to something like 'සියලුම යොවුන්' (siyalum yowan - all users) or 'පරිශීලකයන්' (parishiilakayan) to improve readability."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'default' is not perfectly captured by 'පෙරනිමියෙන් සකසනු ලැබේ' (peranimien sakasanu regawe). It implies setting or arranging, but doesn't directly convey 'default'.",
+          "suggestion": "Rephrase 'පෙරනිමියෙන් සකසනු ලැබේ' to 'පෙරනිමි ලෙස සැකසීමට' (peranimii lesa sakasimaata) which more accurately translates to 'to be set as default'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,13 +316,30 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Serbian word 'fajlova' should be 'datoteka' or 'fajlova' consistently.  'fajlova' appears to be the more common choice in this context.",
+          "suggestion": "Datoteka or Fajlova"
+        },
+        {
+          "type": "spelling",
+          "description": "The Serbian word 'fascikli' should be 'foldera' or 'fascikli' consistently. 'foldera' is more common in modern Serbian for this usage.",
+          "suggestion": "Foldera or Fascikli"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'serial number' is translated as 'seri numarasına'. While technically correct, in this context, it might be better to use a term that conveys the idea of sequential order or naming convention. 'Sıralı numara' or 'sıra numarası' could be more natural depending on the specific file/folder naming convention being referenced.",
+          "suggestion": "Consider using 'sıralı numara' or 'sıra numarası' depending on the specific context to better convey the meaning of 'serial number'."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -195,13 +351,30 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"chỉ mục theo số seri\" is a literal translation of \"by serial number\" but sounds awkward in Vietnamese. 'Số thứ tự' would be a more natural way to express 'serial number' in this context.",
+          "suggestion": "Cho phép lập chỉ mục tự động cho các tập tin và thư mục theo số thứ tự."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Sắp xếp theo số sẽ được đặt làm mặc định cho tất cả người dùng' is slightly clunky.  A more fluent translation would rephrase it.",
+          "suggestion": "Việc sắp xếp theo số sẽ được áp dụng làm mặc định cho tất cả người dùng."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"serial number\" is translated as \"序号\". While technically correct, \"序列号\" (xùlièhào) is a more precise and common translation for 'serial number' in the context of file indexing and numbering.",
+          "suggestion": "启用自动索引，通过序列号对文件和文件夹进行索引。所有用户的默认排序方式将设置为按序列号排序。"
+        }
+      ],
       "approved_at": null
     }
   }

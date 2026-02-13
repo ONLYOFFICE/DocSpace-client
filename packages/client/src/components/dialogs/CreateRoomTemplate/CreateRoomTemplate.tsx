@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -37,11 +37,14 @@ import { TRoom } from "@docspace/shared/api/rooms/types";
 import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
 import { TSelectorItem } from "@docspace/shared/components/selector";
 import { TUser } from "@docspace/shared/api/people/types";
-import TagHandler from "../CreateEditRoomDialog/handlers/TagHandler";
+import { TRoomParams, TRoomTagsParams } from "@docspace/shared/utils/rooms";
+
+import TagHandler from "../../../helpers/TagHandler";
 import SetRoomParams from "../CreateEditRoomDialog/sub-components/SetRoomParams";
-import { StyledFooter } from "./CreateRoomTemplate.styled";
 import TemplateAccessSettingsPanel from "../../panels/TemplateAccessSettingsPanel";
 import TemplateAccessSelector from "../../TemplateAccessSelector";
+
+import styles from "./CreateRoomTemplate.module.scss";
 
 type CreateRoomTemplateProps = {
   visible: boolean;
@@ -49,7 +52,7 @@ type CreateRoomTemplateProps = {
   onSave: (params: TRoom, open: boolean) => void;
   item: TRoom;
   fetchedTags: TRoom["tags"];
-  fetchedRoomParams: TRoom;
+  fetchedRoomParams: TRoomParams;
   isLoading: boolean;
 };
 
@@ -64,7 +67,7 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
     isLoading,
   } = props;
 
-  const [roomParams, setRoomParams] = useState({
+  const [roomParams, setRoomParams] = useState<TRoomParams | TSelectorItem[]>({
     ...fetchedRoomParams,
   });
   const [inviteItems, setInviteItems] = useState([
@@ -87,15 +90,25 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
     }));
 
   const onCreateRoomTemplate = () => {
+    // Check if roomParams is a TRoom object (has a title property) and not an array
+    if (!roomParams || Array.isArray(roomParams) || !("title" in roomParams)) {
+      console.error("Room parameters are in an invalid format");
+      return;
+    }
+
     if (!roomParams.title.trim()) {
       setIsValidTitle(false);
       return;
     }
 
-    onSave({ ...roomParams, isAvailable }, openCreatedIsChecked);
+    // Now TypeScript knows roomParams is a TRoom-like object
+    onSave(
+      { ...roomParams, isAvailable } as unknown as TRoom,
+      openCreatedIsChecked,
+    );
   };
 
-  const setRoomTags = (newTags: TRoom["tags"]) => {
+  const setRoomTags = (newTags: TRoomTagsParams[]) => {
     setRoomParams({ ...roomParams, tags: newTags });
   };
 
@@ -136,17 +149,37 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
   };
 
   const checkIfUserInvited = (user: TUser) => {
-    return inviteItems.findIndex((x) => x.id === user.id) > -1;
+    return (
+      inviteItems.findIndex(
+        (x) => x.id === user.id && x.templateAccess !== ShareAccessRights.None,
+      ) > -1
+    );
   };
 
   const onSubmitItems = (users: TSelectorItem[]) => {
-    const items = [...inviteItems, ...users];
+    // Transform TSelectorItem objects to match the expected inviteItems format
+    const mappedUsers = users.map((user) => ({
+      ...user,
+      templateIsOwner: false,
+      avatarSmall: user.avatar || "",
+      profileUrl: "", // Add the required profileUrl property
+      displayName: user.displayName || "", // Ensure displayName is a string
+      hasAvatar: !!user.avatar,
+      // templateAccess: 1, // Default access right (assuming 1 is ReadWrite)
+    }));
 
-    setInviteItems(items);
+    const items = [...inviteItems, ...mappedUsers];
+
+    // Use type assertion since we've ensured the structure matches
+    setInviteItems(items as typeof inviteItems);
     onCloseAddUsersPanel();
   };
 
-  const tagHandler = new TagHandler(roomParams.tags, setRoomTags, fetchedTags);
+  const tagHandler = new TagHandler(
+    !Array.isArray(roomParams) && "tags" in roomParams ? roomParams.tags : [],
+    setRoomTags,
+    fetchedTags,
+  );
 
   return (
     <ModalDialog
@@ -217,14 +250,15 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
       </ModalDialog.Body>
 
       <ModalDialog.Footer>
-        <StyledFooter>
+        <div className={styles.createRoomTemplateFooter}>
           <Checkbox
             label={t("Files:OpenCreatedTemplate")}
             isChecked={openCreatedIsChecked}
             onChange={onChangeOpenCreated}
+            dataTestId="create_room_template_open_checkbox"
           />
 
-          <div className="create-room-template_buttons">
+          <div className={styles.createRoomTemplateButtons}>
             <Button
               id="create-room-template-modal_submit"
               tabIndex={5}
@@ -246,7 +280,7 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
               onClick={onClose}
             />
           </div>
-        </StyledFooter>
+        </div>
       </ModalDialog.Footer>
     </ModalDialog>
   );

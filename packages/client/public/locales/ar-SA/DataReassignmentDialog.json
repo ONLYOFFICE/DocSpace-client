@@ -3,7 +3,7 @@
   "AllDataTransferred": "تم تحويل جميع البيانات",
   "DataReassignment": "إعادة تعيين البيانات",
   "DeleteProfileIsFinished": "قم بحذف الحساب عند انتهاء إعادة التعيين",
-  "DescriptionDataReassignment": "سنقوم بتحويل الغرف التي تم انشائها بواسطة مستخدم والملفات المخزنة في غرف المستخدم.",
+  "DescriptionDataReassignment": "سوف نقوم بنقل الملفات المشتركة والغرف التي تم إنشاؤها بواسطة جهة الاتصال.",
   "Interrupted": "نعتذر، بعض البيانات لا يمكن تحويلها",
   "MoreAboutDataTransfer": "المزيد عن تحويل البيانات",
   "NewDataOwner": "مالك البيانات الجديد",

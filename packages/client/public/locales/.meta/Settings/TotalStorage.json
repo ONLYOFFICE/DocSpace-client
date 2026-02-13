@@ -3,7 +3,7 @@
   "content": "Total storage: {{size}}",
   "content_en_sha1_hash": "e06c93dc0bbbd266fdd9420f93b6eccfba049adc",
   "created_at": "2025-05-19T21:30:52.974Z",
-  "updated_at": "2025-05-21T02:43:50.803Z",
+  "updated_at": "2025-05-26T07:57:32.791Z",
   "comment": {
     "text": "This translation key displays the total storage size used by a user or system. It is expected to be shown in a formatted manner, likely as part of a list or widget displaying storage usage information.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/StorageSpaceUsed.js",
-      "line_number": 49,
+      "line_number": 50,
       "context": "StyledMainTitle,\n } from \"./StyledComponent\";\n \n const DiskSpaceUsedComponent = (props) => {\n const {\n usedTotalStorageSizeCount,\n maxTotalSizeByQuota,\n standalone,\n isTenantCustomQuotaSet,\n portalInfo,\n updateTenantCustomQuota,",
       "module": "/packages/client"
     }
@@ -57,7 +57,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Greek translation uses an abbreviation 'Συνολικός αποθ. χώρος' for 'Total storage'. While understandable, it's less formal than the English, which uses the full phrase. Consider translating to 'Συνολικός αποθηκευτικός χώρος' for better consistency.",
+          "suggestion": "Συνολικός αποθηκευτικός χώρος: {{size}}"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -141,7 +147,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Spaţiu de stocare în total: {{size}}' is a literal translation but sounds unnatural in Romanian. A more natural phrasing would be 'Spațiul total de stocare: {{size}}' or 'Capacitate totală de stocare: {{size}}'.",
+          "suggestion": "Spațiul total de stocare: {{size}}"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -155,9 +167,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The translation \"මුළු ආචයනය: {{size}}\" is not the most natural or accurate translation of \"Total storage: {{size}}\". 'ආචයනය' (aachayanaya) translates to 'extraction' or 'absorption', which isn't suitable for 'storage'.",
+          "suggestion": "මුළු నిවුල් ප්‍රමාණය: {{size}}"
+        },
+        {
           "type": "spelling",
-          "description": "The word 'ආචයනය' (aachayanaya) is not the correct translation for 'storage' in this context. It's closer to 'respect' or 'reverence'.",
-          "suggestion": "මුළු ගබඩාව: {{size}}"
+          "description": "While 'ආචයනය' is a valid word, the correct term for storage in this context should be 'නිවුල් ප්‍රමාණය'.",
+          "suggestion": "නිවුල් ප්‍රමාණය"
         }
       ],
       "approved_at": null

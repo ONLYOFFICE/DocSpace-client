@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -53,14 +53,14 @@ const useChangeLinkTypeDialog = () => {
 
   const openChangeLinkTypeDialog = useCallback(
     (
-      promise: TResolver<
+      p: TResolver<
         Nullable<(res: string) => void>,
         Nullable<(rej: string) => void>
       >,
     ) => {
       setChangeLinkTypeDialogVisible(true);
 
-      setPromise(promise);
+      setPromise(p);
     },
     [],
   );

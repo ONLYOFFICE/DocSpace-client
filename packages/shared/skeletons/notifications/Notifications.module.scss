@@ -1,6 +1,5 @@
-@import "../../styles/mixins.scss";
-@import "../../styles/variables/_colors.scss";
-@import "../../styles/variables/devices.scss";
+@use "../../styles/mixins";
+@use "../../styles/variables/colors";
 
 .notification {
   display: grid;

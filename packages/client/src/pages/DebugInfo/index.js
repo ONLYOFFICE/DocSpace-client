@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,7 +34,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { Loader } from "@docspace/shared/components/loader";
 import styled from "styled-components";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import { Link } from "@docspace/shared/components/link";
 
 const StyledBodyContent = styled.div`
   display: contents;
@@ -88,15 +88,9 @@ const StyledFooterContent = styled.div`
 `;
 
 const MarkdownLink = ({ href, children }) => (
-  <ColorTheme
-    fontWeight="600"
-    target="_blank"
-    tag="a"
-    href={href}
-    themeId={ThemeId.Link}
-  >
+  <Link fontWeight="600" target="_blank" tag="a" href={href} color="accent">
     {children}
-  </ColorTheme>
+  </Link>
 );
 
 const DebugInfoDialog = (props) => {
@@ -121,10 +115,9 @@ const DebugInfoDialog = (props) => {
         <StyledBodyContent>
           {/* <Text>{`# Build version: ${BUILD_VERSION}`}</Text> */}
           <Text>
-            # Version:{" "}
-            <span className="version">{VERSION /* eslint-disable-line */}</span>
+            # Version: <span className="version">{VERSION}</span>
           </Text>
-          <Text>{`# Build date: ${BUILD_AT}` /* eslint-disable-line */}</Text>
+          <Text>{`# Build date: ${BUILD_AT}`}</Text>
           {user ? (
             <Text>{`# Current User: ${user?.displayName} (id:${user?.id})`}</Text>
           ) : null}

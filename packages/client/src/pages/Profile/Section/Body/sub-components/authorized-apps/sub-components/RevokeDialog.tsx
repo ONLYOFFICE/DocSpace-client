@@ -116,6 +116,7 @@ const RevokeDialog = ({
           size={ButtonSize.normal}
           isLoading={isRequestRunning}
           onClick={onRevokeAction}
+          testId="dialog_revoke_consent_button"
         />
         <Button
           label={t("Common:CancelButton")}
@@ -123,6 +124,7 @@ const RevokeDialog = ({
           size={ButtonSize.normal}
           isDisabled={isRequestRunning}
           onClick={onCloseAction}
+          testId="dialog_revoke_consent_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

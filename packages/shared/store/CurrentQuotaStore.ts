@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,10 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable class-methods-use-this */
 import { makeAutoObservable } from "mobx";
+import axios from "axios";
 
-import { setDefaultUserQuota, setDefaultRoomQuota } from "../api/settings";
+import {
+  setDefaultUserQuota,
+  setDefaultRoomQuota,
+  setDefaultAIAgentQuota,
+} from "../api/settings";
 
 import { toastr } from "../components/toast";
 import { TData } from "../components/toast/Toast.type";
@@ -38,7 +42,6 @@ import {
   TPaymentQuota,
   TNumericPaymentFeature,
   TBooleanPaymentFeature,
-  TStringPaymentFeature,
 } from "../api/portal/types";
 import {
   MANAGER,
@@ -50,15 +53,18 @@ import {
   COUNT_FOR_SHOWING_BAR,
   PERCENTAGE_FOR_SHOWING_BAR,
   YEAR_KEY,
+  FREE_BACKUP,
 } from "../constants";
-import { Nullable } from "../types";
+import { Nullable, TTranslation } from "../types";
 import { UserStore } from "./UserStore";
 import { CurrentTariffStatusStore } from "./CurrentTariffStatusStore";
-
+import { SettingsStore } from "./SettingsStore";
 class CurrentQuotasStore {
   currentPortalQuota: Nullable<TPaymentQuota> = null;
 
   userStore: UserStore | null = null;
+
+  settingsStore: SettingsStore | null = null;
 
   currentTariffStatusStore: CurrentTariffStatusStore | null = null;
 
@@ -69,10 +75,12 @@ class CurrentQuotasStore {
   constructor(
     userStoreConst: UserStore,
     currentTariffStatusStore: CurrentTariffStatusStore,
+    settingsStore: SettingsStore,
   ) {
     makeAutoObservable(this);
     this.userStore = userStoreConst;
     this.currentTariffStatusStore = currentTariffStatusStore;
+    this.settingsStore = settingsStore;
   }
 
   setIsLoaded = (isLoaded: boolean) => {
@@ -213,6 +221,28 @@ class CurrentQuotasStore {
     return result?.value;
   }
 
+  get isBackupPaid() {
+    const result = this.currentPortalQuotaFeatures.get(
+      FREE_BACKUP,
+    ) as TNumericPaymentFeature;
+    return result?.value !== -1;
+  }
+
+  get maxFreeBackups(): number {
+    const result = this.currentPortalQuotaFeatures.get(
+      FREE_BACKUP,
+    ) as TNumericPaymentFeature;
+
+    return result?.value ?? 0;
+  }
+
+  get isLifetimeLicense() {
+    const result = this.currentPortalQuotaFeatures.get(
+      "lifetime",
+    ) as TBooleanPaymentFeature;
+    return result?.value;
+  }
+
   get isRestoreAndAutoBackupAvailable() {
     const result = this.currentPortalQuotaFeatures.get(
       "restore",
@@ -235,7 +265,7 @@ class CurrentQuotasStore {
   }
 
   get currentTariffPlanTitle() {
-    return this.currentPortalQuota?.title;
+    return this.currentPortalQuota?.title ?? "";
   }
 
   get quotaCharacteristics() {
@@ -254,9 +284,11 @@ class CurrentQuotasStore {
   get maxUsersCountInRoom() {
     const result = this.currentPortalQuotaFeatures.get(USERS_IN_ROOM);
 
-    if (!result || !result?.value) return PortalFeaturesLimitations.Limitless;
+    if (!result) return PortalFeaturesLimitations.Limitless;
 
-    return result?.value;
+    if ("value" in result && result?.value) return result.value;
+
+    return PortalFeaturesLimitations.Limitless;
   }
 
   get isRoomsTariffAlmostLimit() {
@@ -386,6 +418,10 @@ class CurrentQuotasStore {
     return this.currentPortalQuota?.usersQuota?.enableQuota;
   }
 
+  get isDefaultAIAgentsQuotaSet() {
+    return this.currentPortalQuota?.aiAgentsQuota?.enableQuota;
+  }
+
   get isTenantCustomQuotaSet() {
     return this.currentPortalQuota?.tenantCustomQuota?.enableQuota;
   }
@@ -396,6 +432,10 @@ class CurrentQuotasStore {
 
   get defaultUsersQuota() {
     return this.currentPortalQuota?.usersQuota?.defaultQuota;
+  }
+
+  get defaultAIAgentsQuota() {
+    return this.currentPortalQuota?.aiAgentsQuota?.defaultQuota;
   }
 
   get tenantCustomQuota() {
@@ -439,11 +479,21 @@ class CurrentQuotasStore {
   };
 
   fetchPortalQuota = async (refresh?: boolean) => {
-    return api.portal.getPortalQuota(refresh).then((res) => {
-      this.setPortalQuotaValue(res);
+    const abortController = new AbortController();
+    this.settingsStore?.addAbortControllers(abortController);
 
-      this.setIsLoaded(true);
-    });
+    return api.portal
+      .getPortalQuota(refresh, abortController.signal)
+      .then((res) => {
+        this.setPortalQuotaValue(res);
+
+        this.setIsLoaded(true);
+      })
+      .catch((e) => {
+        if (axios.isCancel(e)) return;
+
+        throw e;
+      });
   };
 
   setUserQuota = async (quota: string | number, t: (key: string) => string) => {
@@ -469,6 +519,21 @@ class CurrentQuotasStore {
       const toastrText = isEnable
         ? t("RoomQuotaEnabled")
         : t("RoomQuotaDisabled");
+
+      toastr.success(toastrText);
+    } catch (e: unknown) {
+      toastr.error(e as TData);
+    }
+  };
+
+  setAIAgentQuota = async (quota: string | number, t: TTranslation) => {
+    const isEnable = +quota !== -1;
+
+    try {
+      await setDefaultAIAgentQuota(isEnable, +quota);
+      const toastrText = isEnable
+        ? t("AIAgentQuotaEnabled", { aiAgent: t("Common:AIAgent") })
+        : t("AIAgentQuotaDisabled", { aiAgent: t("Common:AIAgent") });
 
       toastr.success(toastrText);
     } catch (e: unknown) {

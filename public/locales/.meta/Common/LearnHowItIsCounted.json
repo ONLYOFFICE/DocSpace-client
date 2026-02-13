@@ -1,0 +1,28 @@
+{
+  "key_path": "LearnHowItIsCounted",
+  "content": "Learn how it is counted",
+  "content_en_sha1_hash": "a89a5c65b6b953fa6ae8051a31d64dea72c7a0e7",
+  "created_at": "2025-09-19T15:39:09.524Z",
+  "updated_at": "2025-09-19T16:00:28.428Z",
+  "comment": {
+    "text": "This text appears as a link within a User Statistics Dialog, directing users to a resource explaining how a specific statistic is calculated. It provides clarification on the methodology behind the displayed data. Translators should ensure the translation accurately conveys the meaning of \"how it is counted.\"",
+    "is_auto": true,
+    "updated_at": "2025-09-19T16:00:28.428Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/dialogs/UserStatisticsDialog/index.tsx",
+      "line_number": 83,
+      "context": "target={LinkTarget.blank}\n href={docspaceFaqUrl}\n fontWeight={600}\n dataTestId=\"learn_how_counted_link\"\n >\n {t(\"LearnHowItIsCounted\")}\n </Link>\n ) : null}\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

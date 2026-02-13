@@ -26,6 +26,7 @@
   "LdapGroupNameAttribute": "Atrybut nazwy grupy",
   "LdapGroupNameAttributeTooltip": "Określ atrybut obiektu, który odpowiada nazwie grupy.",
   "LdapGroupUserAttributeTooltip": "Wprowadź atrybut obiektu użytkownika używany do określenia, czy użytkownik jest członkiem grup.",
+  "LdapIntegrationDescription": "Importuj użytkowników i grupy za pomocą LDAP, i włącz uwierzytelnianie użytkowników poprzez loginy/hasła przechowywane na serwerze LDAP. Użytkownicy zostaną zaimportowani natychmiast po zapisaniu ustawień. Dodawani później użytkownicy zostaną zaimportowani podczas ich pierwszego uwierzytelnienia. Jeśli chcesz zapewnić dostęp tylko za pomocą LDAP, wyłącz opcję zapraszania nowych członków {{productName}} za pomocą {{sectionName}}: <1>{{link}}</1>",
   "LdapLoginAttribute": "Atrybut logowania:",
   "LdapLoginAttributeTooltip": "Wprowadź atrybut obiektu odpowiadający loginowi użytkownika.",
   "LdapLoginTooltip": "Określ użytkownika loginu, który ma uprawnienia dostępu do odczytu serwera LDAP.",

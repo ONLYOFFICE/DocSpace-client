@@ -1,0 +1,28 @@
+{
+  "key_path": "UploadGallery",
+  "content": "Upload in the Gallery",
+  "content_en_sha1_hash": "8c1056100fa9aeb4490cd4be3742e86110cd39a8",
+  "created_at": "2025-12-22T09:40:18.228Z",
+  "updated_at": "2025-12-22T10:04:49.858Z",
+  "comment": {
+    "text": "This key is used for the label text on a button that allows users to upload content to a gallery. The button, appearing within a gallery tile, prompts the user to submit their work. Translators should ensure the phrasing encourages content submission.",
+    "is_auto": true,
+    "updated_at": "2025-12-22T10:04:49.858Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/TemplateGallery/Tiles/SubmitToGalleryTile.tsx",
+      "line_number": 114,
+      "context": "<Button\n className={styles.buttonSubmit}\n onClick={onSubmitToGallery}\n size={ButtonSize.small}\n label={t(\"FormGallery:UploadGallery\")}\n scale\n />\n </div>\n </div>\n );",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

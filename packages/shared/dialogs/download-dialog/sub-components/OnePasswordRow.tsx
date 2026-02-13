@@ -1,5 +1,5 @@
 /*
- * (c) Copyright Ascensio System SIA 2009-2025
+ * (c) Copyright Ascensio System SIA 2009-2026
  *
  * This program is a free software product.
  * You can redistribute it and/or modify it under the terms
@@ -56,9 +56,9 @@ export const OnePasswordRow = ({
   const { t } = useTranslation(["Common"]);
   const inputRef = useRef(null);
 
-  const onChangePassword = (pwd: string) => {
+  const onChangePassword = useCallback((pwd: string) => {
     setPassword(pwd);
-  };
+  }, []);
 
   const updateDownloadItem = useCallback(
     (fileId: number, updates: { format?: string; password?: string }) => {

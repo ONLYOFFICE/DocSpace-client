@@ -1,6 +1,8 @@
 {
   "ChangePasswordSuccess": "Şifrə uğurla dəyişdirildi",
   "CodeTitle": "Kod e-poçt vasitəsilə göndərilmişdir",
+  "ConfirmEmailChange": "E-poçtunuzu dəyişdiyinizi təsdiqləyin",
+  "ConfirmEmailChangeText": "{{productName}} hesabınızdakı e-poçt ünvanını dəyişmək üçün siz bir istəyiniz olub. Davam etmək üçün, mövcud hesab parametrlərinizlə giriş etməlisiniz.",
   "ErrorInvalidText": "10 saniyədə <1>{{productName}}</1> yönləndiriləcəksiniz",
   "ForgotPassword": "Parolunuzu unutmusunuz mu?",
   "LDAPUsernamePlaceholder": "{{ldap_domain}} istifadəçi adı",

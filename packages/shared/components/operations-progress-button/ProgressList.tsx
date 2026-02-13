@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -44,7 +44,11 @@ interface ProgressListProps {
   onOpenPanel: () => void;
   operations: Operation[];
   panelOperations?: Operation[];
-  clearOperationsData?: (operationId: string | null, operation: string) => void;
+  clearOperationsData?: (
+    operationId: string | null,
+    operation: string,
+    operationItem?: Operation,
+  ) => void;
   clearPanelOperationsData?: (
     operationId: string | null,
     operation: string,
@@ -95,11 +99,19 @@ const ProgressList = ({
     onOpenPanel();
   };
 
+  const getOperationKey = (item: Operation) => {
+    if (item.id) return item.id;
+
+    return `${item.operation}-${item.items?.[0]?.operationId ?? ""}-${
+      item.completed
+    }`;
+  }
+
   return (
     <div className="progress-container">
       {operations.map((item) => (
         <div
-          key={`${item.operation}-${item.items?.[0]?.operationId ?? ""}-${item.completed}`}
+          key={getOperationKey(item)}
           className="progress-list"
         >
           <ProgressBar
@@ -107,10 +119,12 @@ const ProgressList = ({
             label={item.label}
             alert={item.alert}
             open
-            iconUrl={getIcon(item.operation)}
+            iconUrl={item.iconUrl || getIcon(item.operation)}
             onClickAction={() => {}}
             withoutProgress
-            onClearProgress={clearOperationsData}
+            onClearProgress={(operationId, operation) =>
+              clearOperationsData?.(operationId, operation, item)
+            }
             operation={item.operation}
           />
         </div>
@@ -126,7 +140,7 @@ const ProgressList = ({
             alert={item.alert}
             percent={item.percent}
             open
-            iconUrl={getIcon(item.operation)}
+            iconUrl={item.iconUrl || getIcon(item.operation)}
             onClickAction={() => {}}
             onClearProgress={clearPanelOperationsData}
             operation={item.operation}

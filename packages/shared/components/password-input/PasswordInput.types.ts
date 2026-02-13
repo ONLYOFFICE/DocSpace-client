@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -108,6 +108,7 @@ export type TPasswordTooltipProps = {
 };
 
 type PasswordInputBaseProps = {
+  ref?: React.RefObject<PasswordInputHandle | null>;
   /** Input value */
   inputValue?: string;
   /** Required to associate the password field with the email field */
@@ -154,4 +155,6 @@ export type PasswordInputProps = Omit<
     inputWidth?: string;
     /** Callback function triggered on input change */
     onChange?: (e: React.ChangeEvent<HTMLInputElement>, value?: string) => void;
+    /** Optional function to sanitize the input value in real time (e.g. strip spaces) */
+    sanitizeValue?: (value: string) => string;
   };

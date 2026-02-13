@@ -3,7 +3,7 @@
   "content": "Email",
   "content_en_sha1_hash": "84add5b2952787581cb9a8851eef63d1ec75d22b",
   "created_at": "2025-05-19T21:30:57.264Z",
-  "updated_at": "2025-05-20T09:47:43.040Z",
+  "updated_at": "2025-08-21T11:22:39.943Z",
   "comment": {
     "text": "The \"RegistrationEmailWatermark\" translation key is used to display a placeholder text for an email input field in a login form. It appears as a tooltip or a default value displayed when the user enters an email address.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/login/src/components/LoginForm/sub-components/EmailContainer.tsx",
-      "line_number": 155,
-      "context": "<EmailInput\n id=\"login_username\"\n name=\"login\"\n hasError={isEmailErrorShow}\n value={identifier}\n placeholder={t(\"RegistrationEmailWatermark\")}\n size={InputSize.large}\n scale={true}\n isAutoFocussed={true}\n tabIndex={1}\n isDisabled={isLoading}",
+      "line_number": 169,
+      "context": "<EmailInput\n id=\"login_username\"\n name=\"login\"\n hasError={isEmailErrorShow}\n value={identifier}\n placeholder={t(\"RegistrationEmailWatermark\")}\n size={InputSize.large}\n scale\n isAutoFocussed\n tabIndex={1}\n isDisabled={isLoading}",
       "module": "/packages/login"
     }
   ],
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Elektron poçt' is a literal translation of 'Email' which is acceptable, but a more natural and commonly used Azerbaijani term for 'Email' would be 'E-poçt'. While 'Elektron poçt' isn't wrong, it feels slightly formal and less idiomatic.",
+          "suggestion": "E-poçt"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -75,7 +81,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Adresse de courriel' is a technically correct translation for 'Email', it's quite formal and lengthy for a watermark. A shorter, more common and user-friendly translation would be more appropriate.",
+          "suggestion": "Courriel"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -141,19 +153,37 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"E-mail\" is a common transliteration, \"Email\" is becoming increasingly accepted and understood in Romanian. Using \"Email\" aligns with current trends and reduces the perceived foreignness of the text. 'E-mail' can also feel slightly dated.",
+          "suggestion": "Email"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Регистрационный email\" is too literal and unnecessarily verbose. While technically correct, it doesn't reflect the typical user experience for this type of watermark.",
+          "suggestion": "Email"
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'වි-තැපෑල' does not accurately convey the meaning of \"Email\". It appears to be a corrupted or inaccurate transliteration. 'තැපෑල' alone means 'post office'.",
+          "suggestion": "The correct translation for \"Email\" in Sinhala is 'විද්‍යුත් ලිපිනය' (vidyut lipinaya) or a simpler 'ලිපිනය' (lipinaya)."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -189,7 +219,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Електронна пошта\" is a more formal translation of \"Email\". While accurate, it might be too verbose for a watermark. A shorter and more common translation like \"Пошта\" or \"Емейл\" would be more appropriate for a watermark.",
+          "suggestion": "Consider using \"Пошта\" or \"Емейл\" for a watermark."
+        }
+      ],
       "approved_at": null
     },
     "vi": {

@@ -3,7 +3,7 @@
   "content": "Enable Single Sign-on Authentication",
   "content_en_sha1_hash": "6d72c77415fb19a9ef6ab7954c952ed693af686f",
   "created_at": "2025-05-19T21:30:50.190Z",
-  "updated_at": "2025-05-21T01:40:10.294Z",
+  "updated_at": "2025-08-11T18:11:59.267Z",
   "comment": {
     "text": "This translation key is used to display the label for a toggle switch that enables Single Sign-on authentication. It appears in the UI as a settings category title and is intended to be displayed when the feature is not available. Translators should ensure the text accurately conveys the intent of enabling SSO, while also considering the context in which it will be used.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/ToggleSSO.js",
-      "line_number": 96,
+      "line_number": 97,
       "context": "fontWeight={600}\n lineHeight=\"20px\"\n noSelect\n className=\"settings_unavailable\"\n >\n {t(\"TurnOnSSO\")}\n </Text>\n {!isSSOAvailable ? (\n <Badge\n backgroundColor={\n theme.isBase",
       "module": "/packages/client"
     }
@@ -36,13 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Birdəfəlik Girişli Doğrulamanı aktivləşdirin' is a literal translation and sounds awkward in Azerbaijani. A more natural phrasing would emphasize the 'activation' of SSO.",
-          "suggestion": "Tək Giriş Doğrulamasını aktiv edin"
-        },
-        {
-          "type": "spelling",
-          "description": "While technically correct, 'Birdəfəlik' can be simplified. It is preferred 'Tək' in this context.",
-          "suggestion": "Tək"
+          "description": "The translation 'Birdəfəlik Girişli Doğrulamanı aktivləşdirin' is not the most natural or precise translation of 'Enable Single Sign-on Authentication'. While technically correct, it can be improved for clarity and flow.",
+          "suggestion": "Consider alternatives like 'Tək Girişli Doğrulama Aktiv Et' or 'Tək Giriş Doğrulamasını Yandırın'."
         }
       ],
       "approved_at": null
@@ -56,13 +51,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Povolení jednotného přihlašovacího ověřování\" is a very literal and somewhat clunky translation. A more natural and user-friendly phrasing would be more appropriate.",
-          "suggestion": "Možnosti: 'Povolit jednotné přihlašování', 'Zapnout jednotné přihlašování', 'Aktivovat jednotné přihlašování'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -83,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Habilitar la autenticación de inicio de sesión único' is a literal translation and not the most natural or idiomatic way to say 'Enable Single Sign-on Authentication' in Spanish. 'Inicio de sesión único' is a very direct translation of 'Single Sign-on' and less commonly used. A more natural phrasing would be 'Habilitar la autenticación de inicio de sesión único' or 'Activar la autenticación de inicio de sesión único'.",
-          "suggestion": "Habilitar la autenticación de inicio de sesión único"
+          "description": "The translation 'Habilitar la autenticación de inicio de sesión único' is a literal translation and not the most natural phrasing in Spanish. 'Inicio de sesión único' is technically correct, but 'autenticación de un solo inicio de sesión' or simply 'autenticación SSO' would be more common and understandable.",
+          "suggestion": "Habilitar la autenticación de un solo inicio de sesión"
         }
       ],
       "approved_at": null
@@ -95,8 +84,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Salli vahvistaminen yhdellä sisäänkirjautumisella' is a literal translation that doesn't flow naturally in Finnish. A more idiomatic translation for 'Enable Single Sign-on Authentication' would be more easily understood.",
-          "suggestion": "Ota käyttöön yhden sisäänkirjautumisen tunnistautuminen"
+          "description": "The translation 'Salli vahvistaminen yhdellä sisäänkirjautumisella' is a literal translation but doesn't flow naturally in Finnish. It could be improved for better readability and a more idiomatic expression.",
+          "suggestion": "Ota yksittäinen sisäänkirjautuminen käyttöön"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'vahvistaminen' (authentication) sounds slightly formal and awkward in this context. A more common and user-friendly term might be better.",
+          "suggestion": "Ota yksittäinen sisäänkirjautuminen käyttöön"
         }
       ],
       "approved_at": null
@@ -113,8 +107,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Միացնել մեկանգամյա մուտքգործման իսկորոշումը' is not a precise translation of 'Enable Single Sign-on Authentication'. While it conveys a similar meaning, 'իսկորոշումը' (decision/setting) isn't the most natural choice.  'Միացնել մեկանգամյա մուտքի համակարգը' or 'Միացնել մեկանգամյա մուտքի գործունեությունը' would be more accurate.",
-          "suggestion": "Միացնել մեկանգամյա մուտքի համակարգը"
+          "description": "The translation 'Միացնել մեկանգամյա մուտքգործման իսկորոշումը' is not the most natural or accurate translation of 'Enable Single Sign-on Authentication'. While technically correct, it's a bit clunky and verbose. 'Միացնել մեկանգամյա մուտք' (Miatsnel mekangamya mutq) or 'Միացնել SSO' (Miatsnel SSO) would be more common and user-friendly.",
+          "suggestion": "Միացնել մեկանգամյա մուտք (Miatsnel mekangamya mutq) or Միացնել SSO (Miatsnel SSO)"
         }
       ],
       "approved_at": null
@@ -122,7 +116,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Abilita l’autenticazione Single Sign-on\" is too literal and doesn't flow naturally in Italian. While technically correct, it sounds awkward.",
+          "suggestion": "Consider a more natural phrasing like \"Attiva l'autenticazione Single Sign-on\" or \"Abilita l'accesso tramite Single Sign-on\"."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -142,9 +142,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'ການ' is often redundant in Lao and can be removed to improve readability. While not strictly incorrect, it makes the sentence feel a bit verbose.",
-          "suggestion": "ເປີດໃຊ້ການພິສູດຢືນຢັນການເຂົ້າສູ່ລະບົບດຽວ -> ເປີດໃຊ້ພິສູດຢືນຢັນການເຂົ້າສູ່ລະບົບດຽວ"
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ເປີດໃຊ້ການພິສູດຢືນຢັນການເຂົ້າສູ່ລະບົບດຽວ' is a literal translation and doesn't quite capture the natural phrasing for 'Enable Single Sign-on Authentication' in Lao. It sounds somewhat formal and technical.",
+          "suggestion": "Consider a more natural phrasing like 'ເຊື່ອມຕໍ່ການເຂົ້າສູ່ລະບົບດຽວ' or 'ອະນຸຍາດການໃຊ້ສັນລະນາມເຂົ້າສູ່ລະບົບດຽວ' depending on the overall tone and context."
         }
       ],
       "approved_at": null
@@ -155,8 +155,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Iespējot vienotās pierakstīšanās autentifikāciju' is a very literal translation and sounds unnatural in Latvian. While technically correct, a more natural phrasing would improve user experience.",
-          "suggestion": "Ieteicams apsvērt alternatīvu tulkojumu, piemēram: 'Aktivizēt vienoto pieteikšanos' vai 'Iestatīt vienotu pieteikšanos'."
+          "description": "While technically correct, 'autentifikāciju' is a very literal and somewhat clunky translation of 'Authentication'. A more natural phrasing in Latvian would be 'autentifikāciju' or 'iestatījumus'.",
+          "suggestion": "Iespējot vienotās pierakstīšanās iestatījumus"
         }
       ],
       "approved_at": null
@@ -167,8 +167,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Single Sign-on Verificatie inschakelen' while understandable, isn't the most natural phrasing in Dutch. 'Verificatie' is a more technical term. A more user-friendly translation for 'Authentication' would be 'Authenticatie' or 'Inloggen'.",
-          "suggestion": "Single Sign-on Authenticatie inschakelen"
+          "description": "The translation 'Single Sign-on Verificatie inschakelen' is not the most natural or idiomatic Dutch for 'Enable Single Sign-on Authentication'. While technically correct, it sounds slightly awkward.",
+          "suggestion": "A better translation might be 'Single Sign-on Authenticatie activeren' or 'Activeer Single Sign-on Authenticatie'."
         }
       ],
       "approved_at": null
@@ -176,7 +176,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Włącz uwierzytelnianie za pomocą pojedynczego logowania\" is a very literal and somewhat clunky translation. A more natural Polish phrasing would be more user-friendly. \"Pojedynczego logowania\" sounds overly formal in this context.",
+          "suggestion": "Włącz uwierzytelnianie pojedynczego logowania"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -185,8 +191,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Permitir o Início de Sessão Único' is a literal translation but doesn't convey the intended meaning of 'Enable Single Sign-on Authentication' in a natural and user-friendly way in Portuguese. While technically correct, it sounds clunky.",
-          "suggestion": "Consider 'Ativar Autenticação por Sign-in Único' or 'Habilitar Sign-in Único' for a more natural and common phrasing.  'Ativar' or 'Habilitar' are better equivalents for 'Enable' in this context."
+          "description": "The translation 'Permitir o Início de Sessão Único' is a literal translation that doesn't flow naturally in Portuguese. While technically correct, it's not the most common or idiomatic way to express 'Enable Single Sign-on Authentication'.",
+          "suggestion": "Consider 'Ativar Autenticação de Acesso Único' or 'Habilitar Acesso Único'."
         }
       ],
       "approved_at": null
@@ -197,8 +203,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'logon único' is not the most common or natural way to express 'Single Sign-on' in Brazilian Portuguese. 'Autenticação de único sign-in' or 'Autenticação de acesso único' would be more standard and clearer.",
-          "suggestion": "Autenticação de acesso único"
+          "description": "The term 'logon único' is a literal translation of 'Single Sign-on' and is not the standard terminology in Brazilian Portuguese. The correct term is 'Single Sign-On' itself or 'Autenticação Única'.",
+          "suggestion": "Consider using 'Autenticação Única' or keeping 'Single Sign-On' as is, as it's increasingly common in technical contexts."
         }
       ],
       "approved_at": null
@@ -206,13 +212,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'Activare autentificare unică (SSO)' is a bit literal. A more natural Romanian phrasing for 'Enable Single Sign-on Authentication' would be 'Permite autentificarea unică (SSO)' or 'Activează autentificarea unică (SSO)'.",
-          "suggestion": "Permite autentificarea unică (SSO)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -221,13 +221,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Включить аутентификацию с помощью технологии единого входа\" is a bit literal and verbose. While technically correct, it's not the most natural phrasing in Russian. 'Единого входа' is a slightly clunky way to refer to Single Sign-On.",
-          "suggestion": "Включить единый вход"
-        },
-        {
-          "type": "formatting",
-          "description": "The translation uses a full sentence structure which may be too formal for a UI label. A shorter, more concise option would be preferable.",
-          "suggestion": "Включить единый вход"
+          "description": "The translation 'Включить аутентификацию с помощью технологии единого входа' is a literal translation and a bit clunky in Russian. A more natural and idiomatic translation would be preferred.",
+          "suggestion": "Включить единый вход (Enable Single Sign-on)"
         }
       ],
       "approved_at": null
@@ -238,8 +233,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'තනි පිවිසුම සබල කරන්න' while conveying the general idea of 'Enable Single Sign-on Authentication', isn't the most natural or precise phrasing in Sinhala.  'තනි පිවිසුම' translates to 'Single Access' which is close but not exact. A more accurate translation would incorporate the 'Authentication' aspect. The word 'sabal' means 'enable', and that part is accurate.",
-          "suggestion": "තනි ලාගිනය කිරීම් සබල කරන්න (Tani Lagoonium Kimik Savala Kanna)"
+          "description": "While the translation is understandable, it's a very literal translation and might not be the most natural way to express 'Enable Single Sign-on Authentication' in Sinhala. It focuses on 'single entry' rather than 'single sign-on'.",
+          "suggestion": "Consider a translation that more accurately conveys the concept of Single Sign-On, such as 'අ egyszer වරම පිවිසීමේ ක්‍රියාවලිය ක්‍රියාත්මක කරන්න' (A ekasa varama pivisumee kriyawalieya kriyathan karanna) - 'Activate the Single Sign-on process'."
         }
       ],
       "approved_at": null
@@ -256,13 +251,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"preverjanje pristnosti enkratne prijave\" is a very literal and somewhat clunky translation. A more natural Slovenian phrasing would be more easily understood by the user.",
-          "suggestion": "Omogoči prijavo z enim računom"
+          "description": "The translation 'Omogoči preverjanje pristnosti enkratne prijave' is a literal translation but sounds awkward in Slovenian. 'Single Sign-on' is often shortened to 'SSO' even in translated contexts, especially in technical documentation.",
+          "suggestion": "Omogoči SSO preverjanje pristnosti"
         },
         {
           "type": "incorrect_translation",
-          "description": "The term \"enkratne prijave\" (single sign-on) can be perceived as too technical for a general user. A simpler, more user-friendly translation is preferable.",
-          "suggestion": "Omogoči prijavo z enim računom"
+          "description": "While 'preverjanje pristnosti' is technically correct for 'authentication', a more natural term in this context would be 'prijava'.",
+          "suggestion": "Omogoči SSO prijavo"
         }
       ],
       "approved_at": null
@@ -272,9 +267,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The English term 'Single Sign-on' is included in parentheses after the Serbian translation. While understandable, it's less elegant and may disrupt the flow. Consider integrating it more seamlessly.",
+          "type": "incorrect_translation",
+          "description": "The translation is overly literal and doesn't flow naturally in Serbian. The phrase 'једнократну пријаву (Single Sign-on)' is clunky. While it includes the English term, it disrupts the readability.",
           "suggestion": "Омогући аутентификацију једнократне пријаве (Single Sign-on)"
+        },
+        {
+          "type": "formatting",
+          "description": "The inclusion of '(Single Sign-on)' within parentheses disrupts the sentence structure and is stylistically awkward.",
+          "suggestion": "If retention of the English term is necessary, consider placing it in parentheses at the end of the sentence: 'Омогући аутентификацију једнократне пријаве (Single Sign-on)'"
         }
       ],
       "approved_at": null
@@ -285,13 +285,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Omogući jednokratnu prijavu (Single Sign-on) autentifikaciju' is overly literal and not the most natural phrasing in Serbian.  'Jednokratnu prijavu' directly translates to 'single login,' which isn't ideal. The term 'Single Sign-on' in parentheses is redundant since it's already explained.",
-          "suggestion": "Omogući prijavu preko jedinstvenog sistema autentifikacije"
+          "description": "The term 'jednokratnu prijavu' literally translates to 'one-time login' which isn't accurate for 'Single Sign-on'. While it conveys a similar concept, it's not the established terminology.",
+          "suggestion": "Use 'povezanu prijavu' or 'povezani ulazak' which are closer to the meaning of 'Single Sign-on'. Alternatively, keep 'Single Sign-on' in English, perhaps with a clarifying explanation if necessary. For example: 'Omogući Single Sign-on (povezani ulazak) autentifikaciju'."
         },
         {
           "type": "formatting",
-          "description": "The parenthetical inclusion of '(Single Sign-on)' is unnecessary and disrupts the flow of the Serbian text.",
-          "suggestion": "Remove '(Single Sign-on)'"
+          "description": "The inclusion of '(Single Sign-on)' in parentheses is a bit awkward. It's redundant as the Serbian term attempts to explain the English term.",
+          "suggestion": "Consider removing the parenthetical explanation or rephrasing to be more natural. If the English term is retained, ensure consistency in its capitalization."
         }
       ],
       "approved_at": null
@@ -308,13 +308,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Увімкнути автентифікацію єдиного входу' is a literal translation of 'Enable Single Sign-on Authentication'. While technically correct, it's not the most natural or user-friendly way to express this in Ukrainian. A more idiomatic translation would improve clarity and user experience.",
-          "suggestion": "Розширити можливості входу через єдиний обліковий запис"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'єдиного входу' (single entry) is a less common way to refer to 'single sign-on' in Ukrainian. It can be confusing.",
-          "suggestion": "Розширити можливості входу за допомогою єдиного облікового запису"
+          "description": "The translation 'Увімкнути автентифікацію єдиного входу' while understandable, is not the most natural or concise way to translate 'Enable Single Sign-on Authentication'. A more fluent translation would be 'Увімкнути автентифікацію через єдиний вхід' or 'Увімкнути єдиний вхід'.",
+          "suggestion": "Увімкнути автентифікацію через єдиний вхід"
         }
       ],
       "approved_at": null
@@ -325,8 +320,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Vietnamese translation \"Thuật toán giải mã mặc định\" translates to \"Default decoding algorithm\". This is not an accurate translation of \"Enable Single Sign-on Authentication\".",
-          "suggestion": "A more accurate translation would be something like \"Bật xác thực Đăng nhập một lần\" or \"Kích hoạt xác thực Đăng nhập một lần\"."
+          "description": "The Vietnamese translation \"Thuật toán giải mã mặc định\" translates to \"Default decoding algorithm.\" This is not an accurate translation of \"Enable Single Sign-on Authentication.\" It completely misses the meaning of Single Sign-on (SSO).",
+          "suggestion": "A more accurate translation would be something along the lines of \"Bật xác thực Đăng nhập một chạm\" or \"Kích hoạt xác thực Đăng nhập một chạm\", depending on the desired level of formality."
         }
       ],
       "approved_at": null

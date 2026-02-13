@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,27 +27,18 @@
 import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
-import {
-  StyledPeopleSelectorInfo,
-  StyledPeopleSelector,
-  StyledSelectedOwnerContainer,
-  StyledSelectedOwner,
-} from "../../../ChangePortalOwnerDialog/StyledDialog";
 
-const ChoiceNewOwner = ({
-  t,
-  targetUser,
-  currentColorScheme,
-  onTogglePeopleSelector,
-}) => {
+import styles from "SRC_DIR/components/dialogs/ChangePortalOwnerDialog/ChangePortalOwner.module.scss";
+
+const ChoiceNewOwner = ({ t, targetUser, onTogglePeopleSelector }) => {
   if (targetUser)
     return (
-      <StyledSelectedOwnerContainer>
-        <StyledSelectedOwner currentColorScheme={currentColorScheme}>
+      <div className={styles.selectedOwnerContainer}>
+        <div className={styles.selectedOwner}>
           <Text className="text">
             {targetUser.displayName ? targetUser.displayName : targetUser.label}
           </Text>
-        </StyledSelectedOwner>
+        </div>
 
         <Link
           type="action"
@@ -57,11 +48,11 @@ const ChoiceNewOwner = ({
         >
           {t("ChangePortalOwner:ChangeUser")}
         </Link>
-      </StyledSelectedOwnerContainer>
+      </div>
     );
 
   return (
-    <StyledPeopleSelector>
+    <div className={styles.peopleSelector}>
       <SelectorAddButton
         className="selector-add-button"
         onClick={onTogglePeopleSelector}
@@ -69,31 +60,25 @@ const ChoiceNewOwner = ({
         titleText={t("Translations:ChooseFromList")}
         noSelect
       />
-    </StyledPeopleSelector>
+    </div>
   );
 };
 
-const NewOwner = ({
-  t,
-  targetUser,
-  currentColorScheme,
-  onTogglePeopleSelector,
-}) => {
+const NewOwner = ({ t, targetUser, onTogglePeopleSelector }) => {
   return (
     <>
-      <StyledPeopleSelectorInfo>
-        <Text className="new-owner" noSelect>
+      <div className={styles.peopleSelectorInfo}>
+        <Text className={styles.newOwner}>
           {t("DataReassignmentDialog:NewDataOwner")}
         </Text>
-        <Text className="description" noSelect>
+        <Text className={styles.description}>
           {t("DataReassignmentDialog:UserToWhomTheDataWillBeTransferred")}
         </Text>
-      </StyledPeopleSelectorInfo>
+      </div>
 
       <ChoiceNewOwner
         t={t}
         targetUser={targetUser}
-        currentColorScheme={currentColorScheme}
         onTogglePeopleSelector={onTogglePeopleSelector}
       />
     </>

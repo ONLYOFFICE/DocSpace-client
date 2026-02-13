@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -49,7 +49,7 @@ const DropDown = (props: DropDownProps) => {
     showDisabledItems = false,
     isDefaultMode = true,
     fixedDirection = false,
-    offsetLeft = 0,
+    offsetX = 0,
     enableKeyboardEvents = true,
     usePortalBackdrop = false,
     shouldShowBackdrop = false,
@@ -89,7 +89,7 @@ const DropDown = (props: DropDownProps) => {
         showDisabledItems={showDisabledItems}
         isDefaultMode={isDefaultMode}
         fixedDirection={fixedDirection}
-        offsetLeft={offsetLeft}
+        offsetX={offsetX}
         enableKeyboardEvents={enableKeyboardEvents}
         backDrop={backDrop}
         {...props}

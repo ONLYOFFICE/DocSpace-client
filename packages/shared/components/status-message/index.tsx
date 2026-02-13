@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,26 +26,26 @@
 import React from "react";
 import DangerToastReactSvg from "PUBLIC_DIR/images/danger.toast.react.svg";
 
-import styled from "styled-components";
-import commonIconsStyles, {
-  IconSizeType,
-} from "../../utils/common-icons-style";
+import { IconSizeType } from "../../utils/common-icons-style";
 import styles from "./StatusMessage.module.scss";
 import { Text } from "../text";
 
 interface StatusMessageProps {
-  message: string;
+  message: string | React.ReactNode;
+  isWarning?: boolean;
 }
 
-const StyledDangerIcon = styled(DangerToastReactSvg)`
-  ${commonIconsStyles}
-`;
-
-const StatusMessage: React.FC<StatusMessageProps> = ({ message }) => {
+const StatusMessage: React.FC<StatusMessageProps> = ({
+  message,
+  isWarning,
+}) => {
   const [isVisible, setIsVisible] = React.useState(true);
+
   const [isShowComponent, setIsShowComponent] = React.useState(!!message);
   const messageRef = React.useRef<HTMLDivElement>(null);
-  const prevMessageRef = React.useRef<string | undefined>(message);
+  const prevMessageRef = React.useRef<string | React.ReactNode | undefined>(
+    message,
+  );
   const shouldShowAfterAnimationRef = React.useRef(false);
 
   React.useEffect(() => {
@@ -113,9 +113,12 @@ const StatusMessage: React.FC<StatusMessageProps> = ({ message }) => {
   return (
     <div
       ref={messageRef}
-      className={`${styles.body} ${!isVisible ? styles.hide : ""}`}
+      className={`${styles.body} ${!isVisible ? styles.hide : ""} ${isWarning ? styles.warning : ""}`}
     >
-      <StyledDangerIcon size={IconSizeType.medium} />
+      <DangerToastReactSvg
+        className={styles.dangerToastIcon}
+        data-size={IconSizeType.medium}
+      />
       <Text>{prevMessageRef.current}</Text>
     </div>
   );

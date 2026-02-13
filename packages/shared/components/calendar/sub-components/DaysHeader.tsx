@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,6 +29,13 @@ import classNames from "classnames";
 import { HeaderButtons } from "./HeaderButtons";
 import { DaysHeaderProps } from "../Calendar.types";
 import styles from "../Calendar.module.scss";
+import {
+  subtractFromDate,
+  addToDate,
+  endOf,
+  startOf,
+  formatDate,
+} from "../../../utils/date";
 
 export const DaysHeader = ({
   observedDate,
@@ -43,18 +50,20 @@ export const DaysHeader = ({
 
   const onLeftClick = () =>
     setObservedDate((prevObservedDate) =>
-      prevObservedDate.clone().subtract(1, "month"),
+      subtractFromDate(prevObservedDate, 1, "months")!,
     );
 
   const onRightClick = () =>
     setObservedDate((prevObservedDate) =>
-      prevObservedDate.clone().add(1, "month"),
+      addToDate(prevObservedDate, 1, "months")!,
     );
 
   const isLeftDisabled =
-    observedDate.clone().subtract(1, "month").endOf("month") < minDate;
+    endOf(subtractFromDate(observedDate, 1, "months")!, "month")! < minDate;
   const isRightDisabled =
-    observedDate.clone().add(1, "month").startOf("month") > maxDate;
+    startOf(addToDate(observedDate, 1, "months")!, "month")! > maxDate;
+
+  const monthName = formatDate(observedDate, "MMMM");
 
   return (
     <div className={styles.headerContainer}>
@@ -62,9 +71,8 @@ export const DaysHeader = ({
         onClick={onTitleClick}
         className={classNames(styles.title, "days-header")}
       >
-        {observedDate.format("MMMM").charAt(0).toUpperCase() +
-          observedDate.format("MMMM").substring(1)}{" "}
-        {observedDate.format("YYYY")}
+        {monthName.charAt(0).toUpperCase() + monthName.substring(1)}{" "}
+        {formatDate(observedDate, "yyyy")}
         <span className={styles.headerActionIcon} />
       </h2>
       <HeaderButtons

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -55,13 +55,6 @@ const InputComponent = ({
   mask,
   forwardedRef,
   keepCharPositions,
-  hasError,
-  hasWarning,
-  scale,
-  withBorder,
-  fontWeight,
-  isBold,
-  size,
 
   // Rest of props
   ...props
@@ -83,10 +76,15 @@ const InputComponent = ({
     ...props,
   };
 
+  // MaskedInput expects `size` to be a number, while our TextInput props may use an enum.
+  // Omit `size` when rendering MaskedInput and the native input to avoid the type mismatch.
+  // biome-ignore lint/correctness/noUnusedVariables: TODO fix
+  const { size, ...commonPropsForInput } = commonProps;
+
   if (mask) {
     return (
       <MaskedInput
-        {...commonProps}
+        {...commonPropsForInput}
         mask={mask}
         guide={guide}
         keepCharPositions={keepCharPositions}
@@ -94,7 +92,7 @@ const InputComponent = ({
     );
   }
 
-  return <input {...commonProps} ref={forwardedRef} />;
+  return <input {...commonPropsForInput} ref={forwardedRef} />;
 };
 
 export const Input = memo(InputComponent);

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,6 +28,8 @@ import { LoaderTypes } from "./Loader.enums";
 import { TColorScheme } from "../../themes";
 
 export type LoaderProps = {
+  /** Ref to access the DOM element or React component instance */
+  ref?: React.RefObject<SVGSVGElement>;
   /** Custom color for the loader. Can be any valid CSS color value */
   color?: string;
   /**

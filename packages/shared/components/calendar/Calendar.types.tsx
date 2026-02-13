@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import moment from "moment";
+import type { DateTime } from "luxon";
 
 export interface CalendarProps {
   /** Class name */
@@ -33,52 +33,55 @@ export interface CalendarProps {
   id?: string;
   /** Specifies the calendar locale */
   locale: string;
-  /** Value of selected date (moment object) */
-  selectedDate: moment.Moment;
+  /** Value of selected date (DateTime object) */
+  selectedDate: DateTime;
   /** Allows handling the changing events of the component */
-  onChange?: (formattedDate: moment.Moment) => void;
+  onChange?: (formattedDate: DateTime) => void;
   /** Changes the selected date state */
-  setSelectedDate?: (formattedDate: moment.Moment) => void;
+  setSelectedDate?: (formattedDate: DateTime) => void;
   /** Specifies the minimum selectable date */
-  minDate?: moment.Moment | Date;
+  minDate?: DateTime | Date;
   /** Specifies the maximum selectable date */
-  maxDate?: moment.Moment | Date;
+  maxDate?: DateTime | Date;
   /** Accepts css style */
   style?: React.CSSProperties;
   /** First shown date */
-  initialDate?: moment.Moment | Date;
+  initialDate?: DateTime | Date;
   isMobile?: boolean;
-  forwardedRef?: React.RefObject<HTMLDivElement>;
+  forwardedRef?: React.RefObject<HTMLDivElement | null>;
   isScroll?: boolean;
+  /** Data test id for testing */
+  dataTestId?: string;
+  useMaxTime?: boolean;
 }
 
 export interface DaysProps {
-  observedDate: moment.Moment;
-  setObservedDate: React.Dispatch<React.SetStateAction<moment.Moment>>;
+  observedDate: DateTime;
+  setObservedDate: React.Dispatch<React.SetStateAction<DateTime>>;
   setSelectedScene: React.Dispatch<React.SetStateAction<number>>;
-  handleDateChange: (date: moment.Moment) => void;
-  selectedDate: moment.Moment;
-  minDate: moment.Moment;
-  maxDate: moment.Moment;
+  handleDateChange: (date: DateTime) => void;
+  selectedDate: DateTime;
+  minDate: DateTime;
+  maxDate: DateTime;
   isMobile: boolean;
   isScroll?: boolean;
 }
 
 export interface DaysHeaderProps {
-  observedDate: moment.Moment;
-  setObservedDate: React.Dispatch<React.SetStateAction<moment.Moment>>;
+  observedDate: DateTime;
+  setObservedDate: React.Dispatch<React.SetStateAction<DateTime>>;
   setSelectedScene: React.Dispatch<React.SetStateAction<number>>;
-  minDate: moment.Moment;
-  maxDate: moment.Moment;
+  minDate: DateTime;
+  maxDate: DateTime;
   isMobile: boolean;
 }
 
 export interface DaysBodyProps {
-  observedDate: moment.Moment;
-  handleDateChange: (date: moment.Moment) => void;
-  selectedDate: moment.Moment;
-  minDate: moment.Moment;
-  maxDate: moment.Moment;
+  observedDate: DateTime;
+  handleDateChange: (date: DateTime) => void;
+  selectedDate: DateTime;
+  minDate: DateTime;
+  maxDate: DateTime;
   isMobile: boolean;
   isScroll?: boolean;
 }
@@ -92,51 +95,51 @@ export interface HeaderButtonsProps {
 }
 
 export interface MonthsProps {
-  observedDate: moment.Moment;
-  setObservedDate: React.Dispatch<React.SetStateAction<moment.Moment>>;
-  selectedDate: moment.Moment;
+  observedDate: DateTime;
+  setObservedDate: React.Dispatch<React.SetStateAction<DateTime>>;
+  selectedDate: DateTime;
   setSelectedScene: React.Dispatch<React.SetStateAction<number>>;
-  minDate: moment.Moment;
-  maxDate: moment.Moment;
+  minDate: DateTime;
+  maxDate: DateTime;
   isMobile: boolean;
   isScroll?: boolean;
 }
 
 export interface MonthsBodyProps {
-  observedDate: moment.Moment;
-  setObservedDate: React.Dispatch<React.SetStateAction<moment.Moment>>;
-  selectedDate: moment.Moment;
+  observedDate: DateTime;
+  setObservedDate: React.Dispatch<React.SetStateAction<DateTime>>;
+  selectedDate: DateTime;
   setSelectedScene: React.Dispatch<React.SetStateAction<number>>;
-  minDate: moment.Moment;
-  maxDate: moment.Moment;
+  minDate: DateTime;
+  maxDate: DateTime;
   isMobile: boolean;
   isScroll?: boolean;
 }
 
 export interface MonthsHeaderProps {
-  observedDate: moment.Moment;
-  setObservedDate: React.Dispatch<React.SetStateAction<moment.Moment>>;
+  observedDate: DateTime;
+  setObservedDate: React.Dispatch<React.SetStateAction<DateTime>>;
   setSelectedScene: React.Dispatch<React.SetStateAction<number>>;
-  minDate: moment.Moment;
-  maxDate: moment.Moment;
+  minDate: DateTime;
+  maxDate: DateTime;
   isMobile: boolean;
 }
 
 export interface YearsProps {
-  observedDate: moment.Moment;
-  setObservedDate: React.Dispatch<React.SetStateAction<moment.Moment>>;
-  selectedDate: moment.Moment;
+  observedDate: DateTime;
+  setObservedDate: React.Dispatch<React.SetStateAction<DateTime>>;
+  selectedDate: DateTime;
   setSelectedScene: React.Dispatch<React.SetStateAction<number>>;
-  minDate: moment.Moment;
-  maxDate: moment.Moment;
+  minDate: DateTime;
+  maxDate: DateTime;
   isMobile: boolean;
   isScroll?: boolean;
 }
 
 export interface YearsHeaderProps {
-  observedDate: moment.Moment;
-  setObservedDate: React.Dispatch<React.SetStateAction<moment.Moment>>;
-  minDate: moment.Moment;
-  maxDate: moment.Moment;
+  observedDate: DateTime;
+  setObservedDate: React.Dispatch<React.SetStateAction<DateTime>>;
+  minDate: DateTime;
+  maxDate: DateTime;
   isMobile: boolean;
 }

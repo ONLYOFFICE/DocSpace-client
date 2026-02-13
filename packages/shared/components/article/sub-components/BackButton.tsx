@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,31 +25,61 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow-left.react.svg?url";
+import ArrowTabletIcon from "PUBLIC_DIR/images/arrow-left.long.react.svg?url";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { IconButton } from "../../icon-button";
 import { Text } from "../../text";
+import { DeviceType } from "../../../enums";
+
+import { ArticleHeaderLoader } from "../../../skeletons/article";
+
 import styles from "../Article.module.scss";
 
-const BackButton = ({ showText }: { showText: boolean }) => {
+const BackButton = ({
+  showText,
+  currentDeviceType,
+  onLogoClickAction,
+  isLoading,
+  toggleArticleOpen,
+}: {
+  showText: boolean;
+  currentDeviceType: DeviceType;
+  onLogoClickAction?: () => void;
+  isLoading?: boolean;
+  toggleArticleOpen?: () => void;
+}) => {
   const { t } = useTranslation("Common");
   const navigate = useNavigate();
 
   const onClickBack = () => {
+    onLogoClickAction?.();
+
+    if (toggleArticleOpen && currentDeviceType === DeviceType.mobile)
+      toggleArticleOpen();
+
     navigate("/");
   };
 
+  const icon =
+    currentDeviceType === DeviceType.desktop ? ArrowIcon : ArrowTabletIcon;
+
+  if (isLoading)
+    return (
+      <ArticleHeaderLoader
+        height="18px"
+        width="211px"
+        showText={showText}
+        className={styles.backButton}
+      />
+    );
   return (
     <div
       className={styles.backButton}
       data-show-article={showText ? "true" : "false"}
       onClick={onClickBack}
     >
-      <IconButton
-        className={styles.arrowIcon}
-        iconName={ArrowIcon}
-        isClickable
-      />
+      <IconButton className={styles.arrowIcon} iconName={icon} isClickable />
       {showText ? <Text truncate>{t("Common:Back")}</Text> : null}
     </div>
   );

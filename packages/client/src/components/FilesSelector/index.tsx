@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,12 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable no-restricted-syntax */
 import React, { useMemo } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { FolderType } from "@docspace/shared/enums";
+import { FilterType, FolderType } from "@docspace/shared/enums";
 import FilesSelector from "@docspace/shared/selectors/Files";
 import { toastr } from "@docspace/shared/components/toast";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
@@ -39,7 +38,10 @@ import {
   TFolder,
   TFolderSecurity,
 } from "@docspace/shared/api/files/types";
-import { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
+import {
+  TBreadCrumb,
+  TSelectorItem,
+} from "@docspace/shared/components/selector/Selector.types";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
 import { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
 import { TRoom, TRoomSecurity } from "@docspace/shared/api/rooms/types";
@@ -54,7 +56,7 @@ import FilesStore from "SRC_DIR/store/FilesStore";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 
 import { FilesSelectorProps } from "./FilesSelector.types";
-import { getAcceptButtonLabel, getHeaderLabel, getIsDisabled } from "./utils";
+import { getAcceptButtonLabel, getIsDisabled } from "./utils";
 
 let disabledItems: (string | number)[] = [];
 
@@ -89,6 +91,9 @@ const FilesSelectorWrapper = ({
   rootFolderType,
 
   treeFolders,
+  withRecentTreeFolder,
+  withFavoritesTreeFolder,
+  withAIAgentsTreeFolder,
 
   selection,
   // disabledItems,
@@ -96,7 +101,6 @@ const FilesSelectorWrapper = ({
   checkFileConflicts,
   itemOperationToFolder,
   clearActiveOperations,
-  setMovingInProgress,
   setSelected,
   setMoveToPanelVisible,
   setRestorePanelVisible,
@@ -144,7 +148,10 @@ const FilesSelectorWrapper = ({
   withCreate,
   folderIsShared,
   checkCreating,
-  logoText,
+  isMultiSelect,
+  disableBySecurity,
+  isPortalView = false,
+  withoutDescriptionText = false,
 }: FilesSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation([
     "Files",
@@ -154,6 +161,18 @@ const FilesSelectorWrapper = ({
 
   const [isRequestRunning, setIsRequestRunning] =
     React.useState<boolean>(false);
+
+  const [selectedFiles, setSelectedFiles] = React.useState<TSelectorItem[]>([]);
+
+  const onSelectAction = (file: TSelectorItem) => {
+    if (file.isFolder) return;
+
+    if (selectedFiles.find((f) => f.id === file.id)) {
+      setSelectedFiles(selectedFiles.filter((f) => f.id !== file.id));
+    } else {
+      setSelectedFiles((prev) => [...prev, file]);
+    }
+  };
 
   const onCloseAction = () => {
     setInfoPanelIsMobileHidden(false);
@@ -209,9 +228,9 @@ const FilesSelectorWrapper = ({
       const several = selection.length > 1;
 
       // for backup
-      if (!selection.length) return t("Files:BackupNotAllowedInFormRoom");
+      if (!selection.length) return t("Common:BackupNotAllowedInFormRoom");
 
-      const option = { organizationName: logoText };
+      const option = { organizationName: t("Common:OrganizationName") };
 
       if (isCopy)
         return several
@@ -284,11 +303,14 @@ const FilesSelectorWrapper = ({
 
         setSelectedItems();
         try {
-          const conflicts = (await checkFileConflicts(
-            selectedItemId,
-            folderIds,
-            fileIds,
-          )) as [];
+          const conflicts =
+            selectedTreeNode.type === FolderType.Knowledge
+              ? []
+              : ((await checkFileConflicts(
+                  selectedItemId,
+                  folderIds,
+                  fileIds,
+                )) as []);
 
           if (conflicts.length) {
             setConflictDialogData(conflicts, operationData);
@@ -296,8 +318,6 @@ const FilesSelectorWrapper = ({
           } else {
             setIsRequestRunning(false);
             onCloseAndDeselectAction();
-            const move = !isCopy;
-            if (move) setMovingInProgress(move);
             sessionStorage.setItem("filesSelectorPath", `${selectedItemId}`);
 
             try {
@@ -330,25 +350,32 @@ const FilesSelectorWrapper = ({
       if (onSave && selectedItemId)
         onSave(null, selectedItemId, fileName, isChecked);
       if (onSelectTreeNode) onSelectTreeNode(selectedTreeNode);
+      if (onSelectFile && selectedFiles.length && isMultiSelect) {
+        onSelectFile(selectedFiles);
+
+        if (!embedded) onCloseAndDeselectAction();
+
+        return;
+      }
       if (onSelectFile && selectedFileInfo)
         onSelectFile(selectedFileInfo, breadCrumbs);
       if (!embedded) onCloseAndDeselectAction();
     }
   };
 
-  const headerLabel = getHeaderLabel(
-    t,
-    isEditorDialog,
-    isCopy,
-    isRestoreAll,
-    isMove,
-    isSelect,
-    filterParam,
-    isRestore,
-    isFormRoom,
-    isThirdParty,
-    isSelectFolder,
-  );
+  // const headerLabel = getHeaderLabel(
+  //   t,
+  //   isEditorDialog,
+  //   isCopy,
+  //   isRestoreAll,
+  //   isMove,
+  //   isSelect,
+  //   filterParam,
+  //   isRestore,
+  //   isFormRoom,
+  //   isThirdParty,
+  //   isSelectFolder,
+  // );
 
   const defaultAcceptButtonLabel = getAcceptButtonLabel(
     t,
@@ -367,7 +394,7 @@ const FilesSelectorWrapper = ({
     isFirstLoad: boolean,
     isSelectedParentFolder: boolean,
     selectedItemId: string | number | undefined,
-    selectedItemType: "rooms" | "files" | undefined,
+    selectedItemType: "rooms" | "files" | "agents" | undefined,
     isRoot: boolean,
     selectedItemSecurity:
       | TFileSecurity
@@ -376,6 +403,8 @@ const FilesSelectorWrapper = ({
       | undefined,
     selectedFileInfo: TSelectedFileInfo,
     isDisabledFolder?: boolean,
+    isInsideKnowledge?: boolean,
+    isInsideResultStorage?: boolean,
   ) => {
     return getIsDisabled(
       isFirstLoad,
@@ -393,6 +422,9 @@ const FilesSelectorWrapper = ({
       includeFolder,
       isRestore,
       isDisabledFolder,
+      isInsideKnowledge,
+      isInsideResultStorage,
+      selectedItemType === "agents",
     );
   };
 
@@ -402,10 +434,18 @@ const FilesSelectorWrapper = ({
     <FilesSelector
       openRoot={openRootVar}
       disabledItems={disabledItems}
+      disabledFolderType={
+        isMove || isCopy || isRestore || isRestoreAll
+          ? FolderType.ResultStorage
+          : undefined
+      }
       filterParam={filterParam}
       getIcon={getIcon}
       setIsDataReady={setIsDataReady}
       treeFolders={treeFolders}
+      withRecentTreeFolder={withRecentTreeFolder}
+      withFavoritesTreeFolder={withFavoritesTreeFolder}
+      withAIAgentsTreeFolder={withAIAgentsTreeFolder}
       onSetBaseFolderPath={onSetBaseFolderPath}
       isUserOnly={isUserOnly}
       isRoomsOnly={isRoomsOnly}
@@ -420,8 +460,8 @@ const FilesSelectorWrapper = ({
       onCancel={onCloseAction}
       onSubmit={onAccept}
       getIsDisabled={getIsDisabledAction}
+      onSelectItem={onSelectAction}
       withHeader={withHeader}
-      headerLabel={headerLabel}
       submitButtonLabel={acceptButtonLabel || defaultAcceptButtonLabel}
       withCancelButton={withCancelButton}
       isPanelVisible={isPanelVisible}
@@ -437,7 +477,12 @@ const FilesSelectorWrapper = ({
       withSearch={withSearch}
       withPadding={withPadding}
       descriptionText={
-        !withSubtitle || !filterParam || filterParam === "ALL"
+        !withSubtitle ||
+        !filterParam ||
+        filterParam === "ALL" ||
+        (filterParam as unknown as FilterType) !== FilterType.DocumentsOnly ||
+        !descriptionText ||
+        withoutDescriptionText
           ? ""
           : (descriptionText ?? t("Common:SelectDOCXFormat"))
       }
@@ -455,6 +500,9 @@ const FilesSelectorWrapper = ({
       headerProps={headerProps}
       formProps={formProps}
       checkCreating={checkCreating}
+      isMultiSelect={isMultiSelect}
+      disableBySecurity={disableBySecurity}
+      isPortalView={isPortalView}
     />
   );
 };
@@ -489,6 +537,7 @@ export default inject(
       id,
       currentFolderId: currentFolderIdProp,
       isThirdParty,
+      openRoot: openRootProp,
     }: FilesSelectorProps,
   ) => {
     const {
@@ -502,7 +551,7 @@ export default inject(
       filesActionsStore;
     const { itemOperationToFolder, clearActiveOperations } = uploadDataStore;
 
-    const { treeFolders, roomsFolderId, myFolderId } = treeFoldersStore;
+    const { treeFolders, roomsFolderId } = treeFoldersStore;
 
     const {
       restorePanelVisible,
@@ -520,13 +569,12 @@ export default inject(
 
     const { setIsMobileHidden: setInfoPanelIsMobileHidden } = infoPanelStore;
 
-    const { currentDeviceType, logoText } = settingsStore;
+    const { currentDeviceType } = settingsStore;
 
     const {
       selection,
       bufferSelection,
       filesList,
-      setMovingInProgress,
       setSelected,
       filesSettingsStore,
     } = filesStore;
@@ -570,13 +618,29 @@ export default inject(
       selectionsWithoutEditing.filter((i) => "isFolder" in i && i.isFolder)
         .length > 0;
 
+    const getFolderIdForRecent = () => {
+      // Don't know which folder should be selected. Can be files from different folders
+      if (selectionsWithoutEditing.length !== 1) {
+        return undefined;
+      }
+
+      const [selectedFile] = selectionsWithoutEditing;
+
+      // File is shared via link
+      if ("requestToken" in selectedFile && selectedFile.requestToken) {
+        return undefined;
+      }
+
+      return "folderId" in selectedFile ? selectedFile?.folderId : undefined;
+    };
+
     const fromFolderId =
       id ||
       (rootFolderType === FolderType.Archive ||
       rootFolderType === FolderType.TRASH
         ? undefined
         : rootFolderType === FolderType.Recent
-          ? myFolderId
+          ? getFolderIdForRecent()
           : selectedId === selectionsWithoutEditing[0]?.id &&
               "isFolder" in selectionsWithoutEditing[0] &&
               selectionsWithoutEditing[0]?.isFolder
@@ -584,6 +648,8 @@ export default inject(
             : selectedId);
 
     const folderId = fromFolderId;
+    const openRoot =
+      openRootProp || (rootFolderType === FolderType.Recent && !fromFolderId);
 
     return {
       fromFolderId,
@@ -606,7 +672,6 @@ export default inject(
       checkFileConflicts,
       itemOperationToFolder,
       clearActiveOperations,
-      setMovingInProgress,
       setSelected,
       setCopyPanelVisible,
       setRestoreAllPanelVisible,
@@ -626,7 +691,7 @@ export default inject(
           : folderId || currentFolderIdProp,
       filesSettings,
       folderIsShared: shared,
-      logoText,
+      openRoot,
     };
   },
 )(observer(FilesSelectorWrapper));

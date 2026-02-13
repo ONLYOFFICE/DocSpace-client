@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,69 +25,122 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState } from "react";
+import { TFunction } from "i18next";
+
 import { inject, observer } from "mobx-react";
-import { Trans, withTranslation } from "react-i18next";
-import { useNavigate, NavigateFunction } from "react-router";
-import { TTranslation } from "@docspace/shared/types";
+import { Trans, useTranslation } from "react-i18next";
 import { decode } from "he";
+import classNames from "classnames";
+
+import SortDesc from "PUBLIC_DIR/images/sort.desc.react.svg";
+
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
-import { Feed } from "./HistoryBlockContent.types";
+import { TUser } from "@docspace/shared/api/people/types";
+
 import {
-  StyledHistoryBlockExpandLink,
-  StyledHistoryLink,
-} from "../../../styles/history";
+  RoomMember,
+  TFeedAction,
+  FeedActionKeys,
+} from "@docspace/shared/api/rooms/types";
+
+import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
+
+import styles from "../History.module.scss";
 
 const EXPANSION_THRESHOLD = 8;
 
 interface HistoryUserListProps {
-  t: TTranslation;
-  feed: Feed;
-  openUser?: (user: any, navigate: NavigateFunction) => void;
+  feed: TFeedAction<RoomMember>;
+  openUser?: InfoPanelStore["openUser"];
+
   isVisitor?: boolean;
   isCollaborator?: boolean;
   withWrapping?: boolean;
 }
 
 const HistoryUserList = ({
-  t,
   feed,
   openUser,
   isVisitor,
   isCollaborator,
   withWrapping,
 }: HistoryUserListProps) => {
-  const navigate = useNavigate();
+  const { t } = useTranslation(["InfoPanel"]);
 
   const [isExpanded, setIsExpanded] = useState(
     feed.related.length + 1 <= EXPANSION_THRESHOLD,
   );
   const onExpand = () => setIsExpanded(true);
 
-  const usersData = [
-    feed.data,
-    ...feed.related.map((relatedFeed: any) => relatedFeed.data),
-  ];
+  const usersData = [feed, ...feed.related];
 
   return (
     <>
-      {usersData.map(({ user }, i) => {
+      {usersData.map(({ id, data: member, action }, i) => {
         if (!isExpanded && i > EXPANSION_THRESHOLD - 1) return null;
         const withComma = !isExpanded
           ? i < EXPANSION_THRESHOLD - 1
           : i < usersData.length - 1;
 
-        const userName = decode(user.displayName);
+        const user: TUser | null =
+          "user" in member ? (member.user as TUser) : null;
+
+        const isChangeOwnerAction =
+          action.key === FeedActionKeys.RoomChangeOwner;
+
+        if (isChangeOwnerAction) {
+          const currentOwner: TUser | null =
+            "owner" in member ? (member.owner as TUser) : null;
+          const oldOwner: TUser | null =
+            "oldOwner" in member ? (member.oldOwner as TUser) : null;
+
+          if (!currentOwner || !oldOwner) return;
+
+          const ownerName = decode(currentOwner?.displayName);
+          const oldOwnerName = decode(oldOwner?.displayName);
+
+          return (
+            <div
+              key={id}
+              data-testid={`history_user_${i}`}
+              className={styles.historyUserLink}
+            >
+              <Link
+                className="text link"
+                onClick={() => openUser!(oldOwner)}
+                title={oldOwnerName}
+                dataTestId={`history_user_link_${i}`}
+              >
+                {oldOwnerName}
+              </Link>
+              <div className="arrow-wrapper">
+                <SortDesc className="arrow-index" />
+              </div>
+              <Link
+                className="text link"
+                onClick={() => openUser!(currentOwner)}
+                title={ownerName}
+                dataTestId={`history_user_link_${i}`}
+              >
+                {ownerName}
+              </Link>
+            </div>
+          );
+        }
+
+        if (!user) return;
+
+        const userName = decode(user?.displayName);
 
         return (
-          <StyledHistoryLink
-            key={user.id}
-            className="StyledHistoryLink"
+          <div
+            key={id}
+            className={styles.historyLink}
             style={
-              withWrapping
-                ? { display: "inline", wordBreak: "break-all" }
-                : null
+              withWrapping ? { display: "inline", wordBreak: "break-all" } : {}
             }
+            data-testid={`history_user_${i}`}
           >
             {isVisitor || isCollaborator ? (
               <Text as="span" className="text">
@@ -96,11 +149,12 @@ const HistoryUserList = ({
             ) : (
               <Link
                 className="text link"
-                onClick={() => openUser!(user, navigate)}
+                onClick={() => openUser!(user)}
                 style={
-                  withWrapping ? { display: "inline", textWrap: "wrap" } : null
+                  withWrapping ? { display: "inline", textWrap: "wrap" } : {}
                 }
                 title={userName}
+                dataTestId={`history_user_link_${i}`}
               >
                 {userName}
               </Link>
@@ -108,23 +162,27 @@ const HistoryUserList = ({
 
             {withComma ? "," : null}
             {feed.related.length > 0 ? <div className="space" /> : null}
-          </StyledHistoryLink>
+          </div>
         );
       })}
 
       {!isExpanded ? (
-        <StyledHistoryBlockExpandLink
-          className="user-list-expand-link"
+        <div
+          className={classNames(
+            styles.historyBlockExpandLink,
+            styles.userListExpandLink,
+          )}
           onClick={onExpand}
+          data-testid="history_users_expand_more"
         >
           <Trans
-            t={t}
+            t={t as TFunction}
             ns="InfoPanel"
             i18nKey="AndMoreLabel"
             values={{ count: usersData.length - EXPANSION_THRESHOLD }}
-            components={{ 1: <strong /> }}
+            components={{ 1: <strong key="count-strong" /> }}
           />
-        </StyledHistoryBlockExpandLink>
+        </div>
       ) : null}
     </>
   );
@@ -132,6 +190,7 @@ const HistoryUserList = ({
 
 export default inject<TStore>(({ infoPanelStore, userStore }) => ({
   openUser: infoPanelStore.openUser,
+
   isVisitor: userStore?.user?.isVisitor,
   isCollaborator: userStore?.user?.isCollaborator,
-}))(withTranslation(["InfoPanel"])(observer(HistoryUserList)));
+}))(observer(HistoryUserList));

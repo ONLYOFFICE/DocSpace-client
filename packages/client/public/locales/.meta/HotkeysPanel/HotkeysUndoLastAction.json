@@ -3,7 +3,7 @@
   "content": "Undo the last action",
   "content_en_sha1_hash": "a3d3ea26f243caecc9bb50b4df97676274dd58f5",
   "created_at": "2025-05-19T21:30:55.098Z",
-  "updated_at": "2025-05-21T10:20:57.143Z",
+  "updated_at": "2025-05-24T10:30:27.405Z",
   "comment": {
     "text": "This translation key describes the text that appears next to a keyboard shortcut (# Ctrl + z) on a HotkeysPanel component in the actions block section, instructing users to undo their last action.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Son hərəkəti ləğv edin' is understandable, a more natural and accurate translation of 'Undo the last action' would be 'Əvvəlki hərəkəti geri qaytarın' or 'Son hərəkəti geri al'. 'Ləğv edin' implies cancellation rather than reverting.",
+          "suggestion": "Əvvəlki hərəkəti geri qaytarın"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -45,7 +51,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Vrátit poslední akci' is too literal and doesn't convey the nuance of 'Undo'. It literally translates to 'Return the last action.' A more natural translation for 'Undo' in this context would be 'Zrušit poslední akci'.",
+          "suggestion": "Zrušit poslední akci"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -54,7 +66,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Rückgängig machen\" is a general term for \"undo.\" It doesn't specifically refer to undoing the *last* action, which the English implies. A more accurate translation would convey the specificity of \"last action\".",
+          "description": "The translation \"Rückgängig machen\" is a general term for \"Undo\" and doesn't specifically convey \"the last action.\" While understandable, it lacks the nuance of the English phrase.",
           "suggestion": "Rückgängig machen der letzten Aktion"
         }
       ],
@@ -87,7 +99,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Հետարկել վերջին գործողությունը\" (Hetarkel verjin gortsoghutyun) is a literal translation that is not the most natural way to express \"Undo the last action\" in Armenian. While technically correct, it can sound slightly awkward.",
+          "suggestion": "Consider a more idiomatic translation like \"Չեղարկել վերջին գործողությունը\" (Chelegarkel verjin gortsoghutyun) or \"Ավազել վերջին գործողությունը\" (Avazel verjin gortsoghutyun).  The best option depends on the overall tone and style of the application."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -108,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Undo the last action\" is best translated as \"이전 작업 취소\" or \"마지막 작업 취소\" with a more natural flow in Korean. While \"마지막 작업 실행 취소\" is understandable, the \"실행\" (execution) part is redundant and makes the translation sound awkward. It implies actively re-executing then undoing.",
-          "suggestion": "이전 작업 취소"
+          "description": "The translation \"마지막 작업 실행 취소\" is a literal translation of \"Undo the last action.\" While understandable, a more natural and idiomatic Korean expression for \"Undo\" in this context would be \"실행 취소\". The current phrasing feels slightly robotic.",
+          "suggestion": "실행 취소"
         }
       ],
       "approved_at": null
@@ -120,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ກະ' appears to be a typo. It should likely be 'ກະກຳ'",
-          "suggestion": "ຍົກເລີກການກະກຳ ສຸດທ້າຍ"
+          "description": "The Lao word 'ກະ' is misspelled. It should be 'ກໍ'.",
+          "suggestion": "ຍົກເລີກການກະກໍ ທຳ ສຸດທ້າຍ"
         }
       ],
       "approved_at": null
@@ -174,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'අවසාන ක්‍රියාව පෙරසේ තබන්න' is a literal translation of \"undo the last action\" but isn't the most natural phrasing in Sinhala for undoing an action. It sounds a bit clunky.",
-          "suggestion": "Consider a more idiomatic translation like 'පසු ක්‍රියාව අවලංගු කරන්න' (Pasu kriyāwa avalaṅgu karanna) which means 'Cancel the previous action' or 'පසු ක්‍රියාව හරවා ගන්න' (Pasu kriyāwa haravā gana) which means 'reverse the previous action'."
+          "description": "The translation \"අවසාන ක්‍රියාව පෙරසේ තබන්න\" is a literal translation and doesn't convey the intended meaning of 'Undo' in the context of hotkeys. 'Undo' implies reverting to a previous state, not simply 'putting the last action before'.",
+          "suggestion": "පසු ක්‍රියාව අවලංගු කරන්න (Pasu kriyawa avalangu karanna) - This translates to 'Cancel the previous action' and is more aligned with the function of an 'Undo' hotkey."
         }
       ],
       "approved_at": null
@@ -204,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Poništi poslednju radnju\" while understandable, is not the most natural or idiomatic way to translate \"Undo the last action.\" \"Poništiti\" implies a more complete erasure, while \"Undo\" is generally a reversible action. A better translation would convey the reversibility of the action.",
-          "suggestion": "Razotkrij poslednju radnju"
+          "description": "The translation \"Poništi poslednju radnju\" while understandable, isn't the most natural or precise translation of \"Undo the last action\". \"Poništi\" implies a more complete deletion or reset, while \"Undo\" suggests reverting to a previous state.",
+          "suggestion": "Razmisliti o opcijama kao što su \"Ponovi poslednju radnju\" ili \"Vrati poslednju radnju\". \"Vrati poslednju radnju\" sounds the most natural and accurately conveys the meaning of 'Undo'."
         }
       ],
       "approved_at": null
@@ -234,8 +252,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"撤销上次的行动\" (chexiao shàng cì de xíngdòng) is a bit formal and verbose for a hotkey label. A more concise and natural translation would be better.",
-          "suggestion": "撤销"
+          "description": "The translation '撤销上次的行动' is a literal translation and sounds slightly awkward in Chinese. While technically correct, it's not the most natural way to express 'Undo the last action' in a UI context.",
+          "suggestion": "撤销上一步 or 撤销"
         }
       ],
       "approved_at": null

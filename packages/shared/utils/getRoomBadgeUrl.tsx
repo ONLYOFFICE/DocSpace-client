@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,7 +34,7 @@ import type { Nullable } from "../types";
 
 type ItemType = {
   shared: boolean;
-  roomType: RoomsType;
+  roomType?: RoomsType;
   external?: boolean;
 };
 
@@ -57,7 +57,7 @@ export const getRoomBadgeUrl = (
   item?: Nullable<ItemType>,
   size: SizeIcon = 12,
 ) => {
-  if (!item) return null;
+  if (!item || !item.roomType) return null;
 
   const { link, planet } = icons[size];
 

@@ -3,7 +3,7 @@
   "content": "Enter ID",
   "content_en_sha1_hash": "27387cf42f2649ef31b1ec321943a87ecf3c4dc3",
   "created_at": "2025-05-19T21:30:54.475Z",
-  "updated_at": "2025-05-21T09:11:14.771Z",
+  "updated_at": "2025-08-04T07:30:01.406Z",
   "comment": {
     "text": "This translation key is used for a placeholder text in a user input field. It appears as a prompt to enter an ID in a specific UI component, likely a form or settings page, and can be found within developer tools related to frame IDs in a portal settings context.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/FrameIdSetter.js",
       "line_number": 60,
-      "context": "<Label className=\"label\" text={t(\"FrameId\")} />\n <TextInput\n scale\n value={frameId}\n onChange={onChangeFrameId}\n placeholder={t(\"EnterId\")}\n tabIndex={4}\n />\n </ControlsGroup>\n );\n };",
+      "context": "<Label className=\"label\" text={t(\"FrameId\")} />\n <TextInput\n scale\n value={frameId}\n onChange={onChangeFrameId}\n placeholder={t(\"EnterId\")}\n tabIndex={4}\n testId=\"frame_id_input\"\n />\n </ControlsGroup>\n );",
       "module": "/packages/client"
     }
   ],
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"أدخل رقم المعرف\" is a very literal translation and sounds slightly unnatural in this context. 'ID' is often referred to as 'معرّف' (Mu'arrif) instead of 'رقم المعرف' (Raqm al-Mu'arrif - number of the identifier).",
-          "suggestion": "أدخل المعرّف"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -48,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Въведете id' directly translates 'Enter ID' but is not idiomatic Bulgarian. While technically correct, a more natural phrasing would be 'Въведете идентификационен номер' or 'Въведете ID'.",
-          "suggestion": "Въведете идентификационен номер"
+          "description": "The translation 'Въведете id' is technically correct but stylistically awkward. 'id' should ideally be translated as 'идентификатор' or simply omitted and the phrase should be 'Въведете идентификационен номер' or 'Въведете номер'.",
+          "suggestion": "Въведете идентификатор"
         }
       ],
       "approved_at": null
@@ -60,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, 'Zadejte id' is not the most natural or idiomatic Czech translation for 'Enter ID'. It's a literal translation. A more common and user-friendly translation would be 'Vložte ID' or 'Zadejte číslo ID'.",
-          "suggestion": "Vložte ID"
+          "description": "While 'Zadejte id' is technically a translation, it lacks proper capitalization.  'id' should be capitalized as 'ID' to mirror the English source and maintain consistency. Also, it's common to use a space after 'Zadejte'.",
+          "suggestion": "Zadejte ID"
         }
       ],
       "approved_at": null
@@ -78,13 +72,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Εισάγετε αναγνωριστικού\" is not the most natural or accurate translation of \"Enter ID.\" While technically correct, it's overly literal and sounds awkward in Greek. \"Εισάγετε ID\" is a more common and accepted translation, especially in technical contexts.",
+          "description": "The translation 'Εισάγετε αναγνωριστικού' is not the most natural or accurate translation of 'Enter ID'. While technically correct, it's overly literal. A more idiomatic translation would be 'Εισάγετε ID' or 'Κωδικός ID'.",
           "suggestion": "Εισάγετε ID"
         },
         {
           "type": "formatting",
-          "description": "The translation uses a genitive case (\"αναγνωριστικού\") which can be perceived as overly formal in this context. A nominative or accusative form might be more suitable depending on the surrounding text.",
-          "suggestion": "Consider using a nominative or accusative form, or further context is needed."
+          "description": "The translation includes a space before the noun 'αναγνωριστικού'. While not strictly incorrect, it is less common and looks slightly awkward.  Removing the space provides a cleaner appearance.",
+          "suggestion": "Εισάγετεαναγνωριστικού"
         }
       ],
       "approved_at": null
@@ -95,7 +89,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Introducir id' is understandable, a more natural and common translation for 'Enter ID' in Spanish would be 'Ingrese ID' or 'Introduzca ID'. 'Introducir id' is grammatically correct but less idiomatic.",
+          "description": "While \"Introducir id\" is understandable, a more natural and idiomatic translation of 'Enter ID' in Spanish would be \"Ingrese ID\" or \"Introduzca ID\". \"Introducir id\" sounds slightly awkward.",
           "suggestion": "Ingrese ID"
         }
       ],
@@ -119,13 +113,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Մուտքագրել id\" is a literal translation of \"Enter ID.\" A more natural and idiomatic translation would be something along the lines of \"Համարանիշ մուտքագրել\" (Hamaranish mut'yagrel) which means 'Enter number' or 'Input number', depending on context.",
-          "suggestion": "Համարանիշ մուտքագրել"
+          "description": "The translation 'Մուտքագրել id' is a literal translation and doesn't convey the intended meaning of 'Enter ID' in a natural Armenian way. It's overly technical.",
+          "suggestion": "Մուտքնել ID"
         },
         {
           "type": "formatting",
-          "description": "The translation uses the English word 'id'. It's preferable to either use an Armenian equivalent or consistently use the English term (which may be appropriate given the context of a Javascript SDK).",
-          "suggestion": "Consider replacing 'id' with an Armenian equivalent if one exists and is contextually appropriate. Otherwise, maintain consistency with the use of the English term."
+          "description": "While technically correct, including 'id' in lowercase feels out of place, as 'ID' is usually capitalized in English.",
+          "suggestion": "Մուտքնել ID"
         }
       ],
       "approved_at": null
@@ -154,8 +148,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ໃສ່ id\" is a literal translation of 'enter id' but doesn't convey the intended meaning as naturally as a more idiomatic expression. While understandable, it may not be the best choice for a user interface.",
-          "suggestion": "Consider a more natural phrasing like \"ລະบุ id\" (Specify ID) or \"ປ້ອນ id\" (Input ID)."
+          "description": "While \"ໃສ່ id\" is understandable, it's a direct transliteration. A more natural Lao translation for 'Enter ID' would be something like \"ປ້ອນ id\" or \"ລະบุ id\".",
+          "suggestion": "ປ້ອນ id"
         }
       ],
       "approved_at": null
@@ -166,8 +160,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English 'ID' is often abbreviated in Latvian, making 'id' a more natural and common translation. 'Ievadiet id' is technically correct, but sounds less fluent.",
-          "suggestion": "Ievadi id"
+          "description": "The translation 'Ievadiet id' is a literal translation but doesn't flow naturally in Latvian. While technically correct, a more natural phrasing would be preferred for user interface elements.",
+          "suggestion": "Ievadi ID"
         }
       ],
       "approved_at": null
@@ -175,13 +169,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Voor IDin' does not accurately reflect the meaning of 'Enter ID'. 'Voor' means 'for' which is not the intended meaning. It's likely intended to convey the action of inputting an ID.",
-          "suggestion": "Vul ID in"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -196,8 +184,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Introduzir id\" is a literal translation and doesn't quite convey the intended meaning of 'Enter ID' in a user interface context. 'Enter' implies inputting data, not simply introducing the ID.",
-          "suggestion": "Insira o ID"
+          "description": "The translation \"Introduzir id\" is not the most natural or idiomatic Portuguese translation for \"Enter ID\". While technically correct, it sounds somewhat formal and less user-friendly.",
+          "suggestion": "Consider alternatives like \"Digite o ID\" or \"Insira o ID\", which are more common and conversational."
         }
       ],
       "approved_at": null
@@ -208,7 +196,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Enter ID\" is best translated as \"Insira o ID\" or \"Digite o ID\". While \"Digite o id\" is understandable, \"Insira o ID\" is more formal and consistent with common UI/UX practices in Portuguese (Brazil). \"Digite o ID\" is acceptable, but adding the definite article 'o' before 'id' makes it more natural.",
+          "description": "While technically correct, 'Digite o id' is a very literal translation. A more natural and idiomatic translation would be 'Insira o ID' or 'Informe o ID'.",
           "suggestion": "Insira o ID"
         }
       ],
@@ -217,7 +205,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Introduceţi ID-ul\" is technically correct, it's a bit formal and verbose for a user interface label. A more natural and common translation would be \"Introduceți ID\" or \"Introduce ID\".",
+          "suggestion": "Introduceți ID"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -232,8 +226,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"හැඳු. යොදන්න\" is not the most natural or accurate translation of \"Enter ID\". While it technically conveys the meaning, it sounds somewhat awkward.",
-          "suggestion": "A more natural and common translation would be \"ID ඇතුළත් කරන්න\" or \"අංකය ඇතුළත් කරන්න\" (Ankaya Athulath Karanna) which means \"Enter Number\" or \"ID Enter Karanna\"."
+          "description": "The translation 'හැඳු. යොදන්න' is not the most natural or accurate translation of 'Enter ID'. While it literally translates to 'Identify. Enter,' it doesn't convey the intended meaning of providing an ID.",
+          "suggestion": "ලිපි හැඳුම ඇතුළත් කරන්න (Lipi haduma athulatha kornna) - This translates to 'Enter the ID' or 'Input the ID'. Alternatively, හැඳුම ඇතුළත් කරන්න (Haduma athulatha kornna) - 'Enter ID'."
         }
       ],
       "approved_at": null
@@ -243,9 +237,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'Zadajte id' is a literal translation of 'Enter ID'. While understandable, a more natural Slovak phrasing would be 'Vložte ID' or 'Zadaním ID'.",
-          "suggestion": "Vložte ID"
+          "type": "formatting",
+          "description": "The translation uses lowercase 'id' instead of capitalized 'ID'. While technically understandable, it deviates from the English original's capitalization and may be inconsistent with other related terms.",
+          "suggestion": "Zadajte ID"
         }
       ],
       "approved_at": null
@@ -268,8 +262,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Unesi ID' is not the most natural or accurate translation of 'Enter ID'. While 'Unesi' is a valid form of the verb 'unesi' (to enter), it sounds somewhat awkward in this context. A more natural translation would be 'Uneti ID'.",
-          "suggestion": "Uneti ID"
+          "description": "The translation \"Unesi ID\" is not the most natural or accurate translation of \"Enter ID\". \"Unesi ID\" literally translates to \"Insert ID\". A more appropriate translation would convey the action of inputting or providing the ID.",
+          "suggestion": "Unesite ID"
         }
       ],
       "approved_at": null
@@ -280,7 +274,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Kimliği girin\" is technically correct, a more natural and commonly used translation for \"Enter ID\" in a user interface context would be \"ID girin\". \"Kimliği girin\" sounds more formal and less conversational.",
+          "description": "While 'Kimliği girin' is technically correct, a more natural and commonly used translation for \"Enter ID\" in a software context would be 'ID girin'.",
           "suggestion": "ID girin"
         }
       ],
@@ -298,13 +292,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Nhập id' is a literal translation and doesn't sound natural in Vietnamese. 'id' is often used directly in Vietnamese in technical contexts, but a more fluent translation would use a Vietnamese term for identifier or reference.",
+          "description": "The translation 'Nhập id' is a direct transliteration of 'Enter ID'. While understandable, a more natural and idiomatic Vietnamese translation would be 'Nhập mã định danh' or 'Nhập ID'.",
           "suggestion": "Nhập mã định danh"
         },
         {
           "type": "formatting",
-          "description": "The word 'id' is not capitalized in the English source. While commonly used, consistent capitalization between the source and target would be preferred.",
-          "suggestion": "nhập mã định danh"
+          "description": "The word 'id' is in lowercase. While not technically incorrect, it's common practice to capitalize it, especially in technical contexts.",
+          "suggestion": "Nhập ID"
         }
       ],
       "approved_at": null

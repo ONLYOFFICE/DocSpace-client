@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,11 +30,14 @@ import type { TOperation } from "../api/files/types";
 export const getOperationProgress = async (
   id: string,
   errorMessage: string,
+  isOneOperation: boolean = false,
 ) => {
+  const operationId = isOneOperation ? id : undefined;
+
   const promise = new Promise<TOperation | undefined>((resolve, reject) => {
     setTimeout(async () => {
       try {
-        await getProgress().then((res) => {
+        await getProgress(operationId).then((res) => {
           if (!res || res.length === 0) {
             reject(errorMessage);
           }
@@ -42,7 +45,7 @@ export const getOperationProgress = async (
           const currentItem = res.find((x) => x.id === id);
 
           if (currentItem?.error) {
-            reject(currentItem);
+            reject(currentItem.error);
           }
           resolve(currentItem);
         });
@@ -51,5 +54,6 @@ export const getOperationProgress = async (
       }
     }, 1000);
   });
+
   return promise;
 };

@@ -1,5 +1,5 @@
 /*
- * (c) Copyright Ascensio System SIA 2009-2025
+ * (c) Copyright Ascensio System SIA 2009-2026
  *
  * This program is a free software product.
  * You can redistribute it and/or modify it under the terms
@@ -31,7 +31,7 @@
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
-import { frameCallCommand } from "../../../utils/common";
+import { frameCallCommand, frameCallEvent } from "../../../utils/common";
 import ErrorContainer from "../../../components/error-container/ErrorContainer";
 
 const PublicRoomError = ({ isInvalid }: { isInvalid?: boolean }) => {
@@ -45,7 +45,8 @@ const PublicRoomError = ({ isInvalid }: { isInvalid?: boolean }) => {
 
   useEffect(() => {
     frameCallCommand("setIsLoaded");
-  }, []);
+    frameCallEvent({ event: isInvalid ? "onNotFound" : "onNoAccess" });
+  }, [isInvalid]);
 
   return ready ? (
     <ErrorContainer headerText={headerText} bodyText={bodyText} />

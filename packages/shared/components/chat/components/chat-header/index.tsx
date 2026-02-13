@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,11 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import { useRef } from "react";
 import { observer } from "mobx-react";
 
-import { useMessageStore } from "../../store/messageStore";
-import { ChatHeaderProps } from "../../types";
+import { ChatHeaderProps } from "../../Chat.types";
 
 import styles from "./ChatHeader.module.scss";
 
@@ -37,31 +36,35 @@ import CreateChat from "./sub-components/CreateChat";
 import SelectModel from "./sub-components/SelectModel";
 
 const ChatHeader = ({
-  isFullScreen,
-  currentDeviceType,
-
-  isPanel,
+  selectedModel,
+  isLoading,
+  getIcon,
+  roomId,
+  aiReady,
+  getResultStorageId,
+  setIsAIAgentChatDelete,
+  setDeleteDialogVisible,
+  folderFormValidation,
 }: ChatHeaderProps) => {
-  const { sessions, messages, isSelectSessionOpen } = useMessageStore();
+  const headerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div className={styles.chatHeader} data-panel={isPanel ? "true" : "false"}>
-      {isFullScreen &&
-      currentDeviceType === "desktop" &&
-      !isPanel &&
-      isSelectSessionOpen ? null : (
-        <>
-          {sessions.size > 0 ? (
-            <SelectChat
-              isFullScreen={isFullScreen}
-              currentDeviceType={currentDeviceType}
-            />
-          ) : null}
-          {messages.length > 0 ? <CreateChat /> : null}
-        </>
-      )}
-
-      {isPanel ? null : <SelectModel />}
+    <div
+      ref={headerRef}
+      className={`${styles.chatHeader} chat-header`}
+      data-testid="chat-header"
+    >
+      <SelectChat
+        isLoadingProp={isLoading}
+        getIcon={getIcon}
+        getResultStorageId={getResultStorageId}
+        roomId={roomId}
+        setIsAIAgentChatDelete={setIsAIAgentChatDelete}
+        setDeleteDialogVisible={setDeleteDialogVisible}
+        folderFormValidation={folderFormValidation}
+      />
+      <CreateChat isLoadingProp={isLoading} isDisabled={!aiReady} />
+      <SelectModel selectedModel={selectedModel} isLoading={isLoading} />
     </div>
   );
 };

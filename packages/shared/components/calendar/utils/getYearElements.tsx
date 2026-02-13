@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,44 +25,46 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import moment from "moment";
 import classNames from "classnames";
+import type { DateTime } from "luxon";
 
 import styles from "../Calendar.module.scss";
+import { now, endOf, createDateTime } from "../../../utils/date";
 
 export const getYearElements = (
   years: string[],
-  setObservedDate: React.Dispatch<React.SetStateAction<moment.Moment>>,
+  setObservedDate: React.Dispatch<React.SetStateAction<DateTime>>,
   setSelectedScene: React.Dispatch<React.SetStateAction<number>>,
-  selectedDate: moment.Moment,
-  minDate: moment.Moment,
-  maxDate: moment.Moment,
+  selectedDate: DateTime,
+  minDate: DateTime,
+  maxDate: DateTime,
 ) => {
   const onDateClick = (year: string) => {
+    const yearNum = parseInt(year, 10);
     setObservedDate((prevObservedDate) =>
-      moment(
-        `${moment(year, "YYYY").format("YYYY")}-${prevObservedDate.format("MM")}-01`,
-        "YYYY-MM-DD",
-      ),
+      createDateTime(yearNum, prevObservedDate.month, 1),
     );
     setSelectedScene((prevSelectedScene) => prevSelectedScene - 1);
+  };
+
+  const isDisabled = (year: string) => {
+    const yearNum = parseInt(year, 10);
+    const yearStart = createDateTime(yearNum, 1, 1);
+    const yearEnd = endOf(createDateTime(yearNum, 12, 1), "month")!;
+    return yearEnd < minDate || yearStart > maxDate;
   };
 
   const yearElements = years.map((year) => (
     <button
       type="button"
       className={classNames(styles.dateItem, "year", {
-        [styles.disabled]: moment(year).endOf("year").endOf("month") < minDate,
-        [styles.disabled]: moment(year) > maxDate,
+        [styles.disabled]: isDisabled(year),
         [styles.big]: true,
         [styles.isSecondary]: true,
       })}
       key={year}
       onClick={() => onDateClick(year)}
-      disabled={
-        moment(year).endOf("year").endOf("month") < minDate ||
-        moment(year) > maxDate
-      }
+      disabled={isDisabled(year)}
     >
       {year}
     </button>
@@ -73,43 +75,35 @@ export const getYearElements = (
       <button
         type="button"
         className={classNames(styles.dateItem, "year", {
-          [styles.disabled]:
-            moment(years[i]).endOf("year").endOf("month") < minDate,
-          [styles.disabled]: moment(years[i]) > maxDate,
+          [styles.disabled]: isDisabled(years[i]),
           [styles.big]: true,
         })}
         key={years[i]}
         onClick={() => onDateClick(years[i])}
-        disabled={
-          moment(years[i]).endOf("year").endOf("month") < minDate ||
-          moment(years[i]) > maxDate
-        }
+        disabled={isDisabled(years[i])}
       >
         {years[i]}
       </button>
     );
   }
 
-  const currentYearIndex = years.indexOf(moment().format("YYYY"));
-  const selectedYearIndex = years.indexOf(moment(selectedDate).format("YYYY"));
+  const currentYear = String(now().year);
+  const selectedYear = String(selectedDate.year);
+  const currentYearIndex = years.indexOf(currentYear);
+  const selectedYearIndex = years.indexOf(selectedYear);
+
   if (selectedYearIndex !== -1) {
     yearElements[selectedYearIndex] = (
       <button
         type="button"
         className={classNames(styles.dateItem, "year", {
-          [styles.disabled]:
-            moment(years[selectedYearIndex]).endOf("year").endOf("month") <
-            minDate,
-          [styles.disabled]: moment(years[selectedYearIndex]) > maxDate,
+          [styles.disabled]: isDisabled(years[selectedYearIndex]),
           [styles.big]: true,
           [styles.focused]: true,
         })}
         key={years[selectedYearIndex]}
         onClick={() => onDateClick(years[selectedYearIndex])}
-        disabled={
-          moment(years[selectedYearIndex]).endOf("year").endOf("month") <
-            minDate || moment(years[selectedYearIndex]) > maxDate
-        }
+        disabled={isDisabled(years[selectedYearIndex])}
       >
         {years[selectedYearIndex]}
       </button>
@@ -120,19 +114,13 @@ export const getYearElements = (
       <button
         type="button"
         className={classNames(styles.dateItem, "year", {
-          [styles.disabled]:
-            moment(years[selectedYearIndex]).endOf("year").endOf("month") <
-            minDate,
-          [styles.disabled]: moment(years[selectedYearIndex]) > maxDate,
+          [styles.disabled]: isDisabled(years[currentYearIndex]),
           [styles.big]: true,
           [styles.isCurrent]: true,
         })}
         key={years[currentYearIndex]}
         onClick={() => onDateClick(years[currentYearIndex])}
-        disabled={
-          moment(years[currentYearIndex]).endOf("year").endOf("month") <
-            minDate || moment(years[currentYearIndex]) > maxDate
-        }
+        disabled={isDisabled(years[currentYearIndex])}
       >
         {years[currentYearIndex]}
       </button>

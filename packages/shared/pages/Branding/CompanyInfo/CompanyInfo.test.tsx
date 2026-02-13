@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,36 +25,19 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
+import { describe, it, expect, beforeEach, vi } from "vitest";
+import { screen, fireEvent, render } from "@testing-library/react";
 
 import { CompanyInfo } from ".";
 import { DeviceType } from "../../../enums";
-import { renderWithTheme } from "../../../utils/render-with-theme";
 
-interface TransProps {
-  t: (key: string, values?: Record<string, unknown>) => string;
-  i18nKey: string;
-  values?: Record<string, unknown>;
-  components?: Record<string, React.ReactElement>;
-  ns?: string;
-  children?: React.ReactNode;
-}
-
-jest.mock("react-i18next", () => ({
-  Trans: ({ t, i18nKey, values }: TransProps) => {
-    return t(i18nKey, { ...values });
-  },
-}));
-
-jest.mock("../../../hooks/useResponsiveNavigation", () => ({
-  useResponsiveNavigation: jest.fn(),
+vi.mock("../../../hooks/useResponsiveNavigation", () => ({
+  useResponsiveNavigation: vi.fn(),
 }));
 
 const defaultProps = {
-  t: (key: string) => key,
   isSettingPaid: true,
-  onShowExample: jest.fn(),
+  onShowExample: vi.fn(),
   companySettings: {
     address: "Test Address",
     companyName: "Test Company",
@@ -63,35 +46,51 @@ const defaultProps = {
     site: "https://example.com",
     isDefault: true,
     isLicensor: false,
+    hideAbout: false,
   },
-  onSave: jest.fn(),
-  onRestore: jest.fn(),
+  displayAbout: true,
+  isBrandingAvailable: true,
+  onSave: vi.fn(),
+  onRestore: vi.fn(),
   isLoading: false,
   companyInfoSettingsIsDefault: false,
   deviceType: DeviceType.desktop,
+  licenseAgreementsUrl: "https://example.com",
+  isEnterprise: true,
+  logoText: "ONLYOFFICE",
+  standalone: true,
+  buildVersionInfo: {
+    version: "",
+    buildDate: "",
+    docSpace: "",
+    communityServer: "",
+    documentServer: "",
+  },
 };
 
 describe("<CompanyInfo />", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders without error", () => {
-    renderWithTheme(<CompanyInfo {...defaultProps} />);
+    render(<CompanyInfo {...defaultProps} />);
 
-    expect(
-      screen.getByText("Settings:CompanyInfoSettings"),
-    ).toBeInTheDocument();
+    expect(screen.getByText("CompanyInfoSettings")).toBeInTheDocument();
   });
 
   it("disables inputs when isSettingPaid is false", () => {
-    renderWithTheme(<CompanyInfo {...defaultProps} isSettingPaid={false} />);
+    render(<CompanyInfo {...defaultProps} isSettingPaid={false} />);
 
-    const companyNameInput = screen.getByTestId("company-name-input");
-    const addressInput = screen.getByTestId("address-input");
-    const emailInput = screen.getByTestId("email-input");
-    const phoneInput = screen.getByTestId("phone-input");
-    const siteInput = screen.getByTestId("site-input");
+    const companyNameInput = screen.getByTestId(
+      "company_info_settings_company_name_input",
+    );
+    const addressInput = screen.getByTestId(
+      "company_info_settings_address_input",
+    );
+    const emailInput = screen.getByTestId("company_info_settings_email_input");
+    const phoneInput = screen.getByTestId("company_info_settings_phone_input");
+    const siteInput = screen.getByTestId("company_info_settings_site_input");
 
     expect(companyNameInput).toBeDisabled();
     expect(addressInput).toBeDisabled();
@@ -101,9 +100,11 @@ describe("<CompanyInfo />", () => {
   });
 
   it("updates state when inputs change", () => {
-    renderWithTheme(<CompanyInfo {...defaultProps} />);
+    render(<CompanyInfo {...defaultProps} />);
 
-    const companyNameInput = screen.getByTestId("company-name-input");
+    const companyNameInput = screen.getByTestId(
+      "company_info_settings_company_name_input",
+    );
     fireEvent.change(companyNameInput, {
       target: { value: "New Company Name" },
     });
@@ -112,15 +113,17 @@ describe("<CompanyInfo />", () => {
   });
 
   it("calls onSave with correct parameters", () => {
-    const onSave = jest.fn();
-    renderWithTheme(<CompanyInfo {...defaultProps} onSave={onSave} />);
+    const onSave = vi.fn();
+    render(<CompanyInfo {...defaultProps} onSave={onSave} />);
 
-    const companyNameInput = screen.getByTestId("company-name-input");
+    const companyNameInput = screen.getByTestId(
+      "company_info_settings_company_name_input",
+    );
     fireEvent.change(companyNameInput, {
       target: { value: "New Company Name" },
     });
 
-    const saveButton = screen.getByTestId("save-button");
+    const saveButton = screen.getByTestId("company_info_settings_save_button");
     fireEvent.click(saveButton);
 
     expect(onSave).toHaveBeenCalledWith(
@@ -129,26 +132,29 @@ describe("<CompanyInfo />", () => {
       defaultProps.companySettings.email,
       defaultProps.companySettings.phone,
       defaultProps.companySettings.site,
+      !defaultProps.displayAbout,
     );
   });
 
   it("shows validation errors for invalid inputs", () => {
-    renderWithTheme(<CompanyInfo {...defaultProps} />);
+    render(<CompanyInfo {...defaultProps} />);
 
-    const emailInput = screen.getByTestId("email-input");
+    const emailInput = screen.getByTestId("company_info_settings_email_input");
     fireEvent.change(emailInput, { target: { value: "invalid-email" } });
 
-    const saveButton = screen.getByTestId("save-button");
+    const saveButton = screen.getByTestId("company_info_settings_save_button");
     expect(saveButton).toBeDisabled();
   });
 
   it("enables save button only when changes are valid", () => {
-    renderWithTheme(<CompanyInfo {...defaultProps} />);
+    render(<CompanyInfo {...defaultProps} />);
 
-    const saveButton = screen.getByTestId("save-button");
+    const saveButton = screen.getByTestId("company_info_settings_save_button");
     expect(saveButton).toBeDisabled();
 
-    const companyNameInput = screen.getByTestId("company-name-input");
+    const companyNameInput = screen.getByTestId(
+      "company_info_settings_company_name_input",
+    );
     fireEvent.change(companyNameInput, {
       target: { value: "New Company Name" },
     });

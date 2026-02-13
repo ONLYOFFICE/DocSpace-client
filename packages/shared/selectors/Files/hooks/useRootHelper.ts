@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useContext } from "react";
+import React, { use } from "react";
 
 import { useTranslation } from "react-i18next";
 import { FolderType } from "../../../enums";
@@ -32,16 +32,19 @@ import { getFoldersTree } from "../../../api/files";
 import { TFolder } from "../../../api/files/types";
 import { getCatalogIconUrlByType } from "../../../utils/catalogIconHelper";
 import { TSelectorItem } from "../../../components/selector";
+import { getDefaultBreadCrumb } from "../../utils";
+import { LoadersContext } from "../../utils/contexts/Loaders";
 
 import { UseRootHelperProps } from "../FilesSelector.types";
-import { getDefaultBreadCrumb } from "../FilesSelector.utils";
-import { LoadersContext } from "../contexts/Loaders";
 
 const useRootHelper = ({
   setBreadCrumbs,
 
   setItems,
   treeFolders,
+  withRecentTreeFolder,
+  withFavoritesTreeFolder,
+  withAIAgentsTreeFolder,
 
   setTotal,
   setHasNextPage,
@@ -51,7 +54,7 @@ const useRootHelper = ({
   const { t } = useTranslation(["Common"]);
 
   const { setIsBreadCrumbsLoading, setIsNextPageLoading, setIsFirstLoad } =
-    useContext(LoadersContext);
+    use(LoadersContext);
 
   const [isRoot, setIsRoot] = React.useState<boolean>(false);
   const requestRunning = React.useRef(false);
@@ -72,6 +75,7 @@ const useRootHelper = ({
       currentTree = treeFolders;
     } else {
       const folders = await getFoldersTree();
+
       currentTree = folders;
     }
 
@@ -82,10 +86,35 @@ const useRootHelper = ({
 
       if (
         (!isUserOnly && folder.rootFolderType === FolderType.Rooms) ||
-        folder.rootFolderType === FolderType.USER
+        folder.rootFolderType === FolderType.USER ||
+        (withRecentTreeFolder && folder.rootFolderType === FolderType.Recent) ||
+        (withFavoritesTreeFolder &&
+          folder.rootFolderType === FolderType.Favorites) ||
+        (withAIAgentsTreeFolder &&
+          folder.rootFolderType === FolderType.AIAgents)
       ) {
+        let title = "";
+        switch (folder.rootFolderType) {
+          case FolderType.USER:
+            title = t("Common:MyDocuments");
+            break;
+          case FolderType.Rooms:
+            title = t("Common:Rooms");
+            break;
+          case FolderType.Favorites:
+            title = t("Common:Favorites");
+            break;
+          case FolderType.Recent:
+            title = t("Common:Recent");
+            break;
+          case FolderType.AIAgents:
+            title = t("Common:AIAgents");
+            break;
+          default:
+            break;
+        }
         newItems.push({
-          label: folder.title,
+          label: title,
           id: folder.id,
           parentId: folder.parentId,
           rootFolderType: folder.rootFolderType,
@@ -94,6 +123,7 @@ const useRootHelper = ({
           security: folder.security,
           isFolder: true,
           avatar,
+          disableMultiSelect: true,
         });
       }
     });
@@ -116,6 +146,8 @@ const useRootHelper = ({
     setItems,
     setTotal,
     treeFolders,
+    withRecentTreeFolder,
+    withFavoritesTreeFolder,
     t,
   ]);
 

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,6 +28,7 @@ import { TTranslation } from "../../../types";
 import { LANGUAGE } from "../../../constants";
 import { getCookie } from "../../../utils";
 import getCorrectDate from "../../../utils/getCorrectDate";
+import { combineUrl } from "../../../utils/combineUrl";
 
 const fileRegex = /@\d+/g;
 
@@ -102,4 +103,32 @@ export const getChateTranslationDate = (t: TTranslation, value: string) => {
     : value === "yesterday"
       ? t("Common:Yesterday")
       : "";
+};
+
+/**
+ * Formats a JavaScript object into a nicely formatted JSON string with markdown code block syntax
+ * @param obj - The object to format as JSON
+ * @returns A string formatted as a markdown code block with JSON syntax highlighting
+ */
+export const formatJsonWithMarkdown = (
+  obj: Record<string, unknown>,
+): string => {
+  // Format the JSON with 2 space indentation
+  const formattedJson = JSON.stringify(obj, null, 2);
+
+  // Return the formatted JSON wrapped in markdown code block syntax
+  return `\`\`\`json\n${formattedJson}\n\`\`\``;
+};
+
+export const openFile = (id: string) => {
+  const searchParams = new URLSearchParams();
+
+  searchParams.set("fileId", id);
+
+  const url = combineUrl(
+    window.location.origin,
+    `/doceditor?${searchParams.toString()}`,
+  );
+
+  window.open(url, "_blank");
 };

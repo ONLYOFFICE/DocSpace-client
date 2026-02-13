@@ -3,7 +3,7 @@
   "content": "Subscription will be automatically renewed on {{finalDate}} with updated pricing and specifications. You can cancel it or change your billing info on your Stripe customer portal.",
   "content_en_sha1_hash": "f7c32402a08d667135c600c9b76018150ae168ad",
   "created_at": "2025-05-19T21:30:53.654Z",
-  "updated_at": "2025-05-21T06:46:57.081Z",
+  "updated_at": "2025-08-12T19:46:26.223Z",
   "comment": {
     "text": "This translation key is used to display a notification about automatic renewal of a subscription, including the final date and updated pricing information. It appears in the Stripe customer portal, likely on a payment settings page or dialog. The goal is to inform users about upcoming renewal details.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/PaymentContainer.js",
-      "line_number": 291,
-      "context": "noSelect\n fontSize=\"14px\"\n lineHeight=\"16px\"\n className=\"payment-info_managers-price\"\n >\n <Trans t={t} i18nKey=\"BusinessFinalDateInfo\" ns=\"Payments\">\n {{ finalDate: paymentDate }}\n </Trans>\n </Text>\n );\n };",
+      "line_number": 275,
+      "context": "<Text\n fontSize=\"14px\"\n lineHeight=\"16px\"\n className=\"payment-info_managers-price\"\n >\n <Trans t={t} i18nKey=\"BusinessFinalDateInfo\" ns=\"Payments\">\n {{ finalDate: paymentDate }}\n </Trans>\n </Text>\n );\n };",
       "module": "/packages/client"
     }
   ],
@@ -36,13 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'change your billing info' is not accurately translated. 'ləğv edə və ya dəyişə bilərsiniz' literally translates to 'cancel or change'. While 'dəyişə bilərsiniz' does mean 'can change', the context implies *billing* information, not just any change.",
-          "suggestion": "Abunəlikləri Stripe müştəri portalınızda faktura məlumatlarınızı dəyişə və ya ləğv edə bilərsiniz."
-        },
-        {
-          "type": "formatting",
-          "description": "The English content uses double curly braces for the variable {{finalDate}}. The Azerbaijani translation uses the same double curly braces, which might be inconsistent with the platform's templating system. It is recommended to check the platform's accepted format for variable insertion.",
-          "suggestion": "Verify if the platform accepts double curly braces for variable insertion. If not, adjust the format accordingly."
+          "description": "“ləğv edə” translates to “cancel” but is a bit formal and unnatural in this context. A more natural translation for ‘cancel’ would be ‘dayandırmaq’ or ‘etibarsızlaşdırmaq’.",
+          "suggestion": "Abunəlik {{finalDate}} tarixində yenilənmiş qiymət və spesifikasiyalarla avtomatik yenilənəcək. Siz Stripe müştəri portalınızda faktura məlumatlarınızı dayandırmaq və ya dəyişə bilərsiniz."
         }
       ],
       "approved_at": null
@@ -65,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'updated pricing and specifications' is not perfectly captured by 'aktualisierten Preisen und Spezifikationen'. A more accurate translation might consider phrasing that emphasizes the changes themselves, like 'geänderten Preisen und Spezifikationen' or 'Preisen und Spezifikationen, die sich geändert haben'.",
-          "suggestion": "Consider 'geänderten Preisen und Spezifikationen' or 'Preisen und Spezifikationen, die sich geändert haben'."
+          "description": "The English phrase 'billing info' is not perfectly translated. 'Rechnungsdaten' is more accurately translated as 'invoice details' rather than 'billing info'. While understandable, it's not the most natural phrasing in German.",
+          "suggestion": "Das Abonnement wird automatisch am {{finalDate}} mit aktualisierten Preisen und Spezifikationen verlängert. Sie können es kündigen oder Ihre Zahlungsdaten in Ihrem Stripe-Kundenportal ändern."
         }
       ],
       "approved_at": null
@@ -83,13 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Subscription will be automatically renewed' is better translated as 'La suscripción se renovará automáticamente.' The current translation 'La suscripción se renovará' loses the automatic aspect.",
-          "suggestion": "La suscripción se renovará automáticamente el {{finalDate}}"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'billing info' is not directly translated. 'Datos de facturación' is a correct translation, but 'información de facturación' is also suitable and may be more familiar to some users.",
-          "suggestion": "Puede cancelarla o cambiar su información de facturación en su portal de cliente de Stripe."
+          "description": "The English phrase 'updated pricing and specifications' is not perfectly captured by 'precios y especificaciones actualizados.' A more accurate translation would be something like 'precios y condiciones actualizadas' or 'precios y especificaciones revisadas'.",
+          "suggestion": "La suscripción se renovará automáticamente el {{finalDate}} con precios y condiciones actualizadas."
         }
       ],
       "approved_at": null
@@ -100,13 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'specifications' is not accurately translated. 'Teknisillä tiedoilla' translates more closely to 'technical details' rather than 'specifications'. While not entirely wrong, it lacks the precision of 'specifications' in a subscription context.",
-          "suggestion": "Consider using a more precise term for 'specifications,' such as 'ehdoilla' (terms) or a more descriptive phrase depending on the specific meaning intended. The best option would depend on the overall context and desired level of formality."
-        },
-        {
-          "type": "formatting",
-          "description": "The use of brackets and capitalization in the Finnish translation differs from the English. It is generally considered good practice for variables like {{finalDate}} to maintain consistency in both languages.",
-          "suggestion": "Ensure the variable {{finalDate}} is formatted consistently with the English version, maintaining the curly braces and variable name."
+          "description": "The term 'specifications' is translated as 'teknisillä tiedoilla'. While technically correct, 'määrittelyillä' or 'ominaisuuksilla' might be a more natural and common translation in this context, particularly when discussing subscription features.",
+          "suggestion": "Consider using 'määrittelyillä' or 'ominaisuuksilla' instead of 'teknisillä tiedoilla'."
         }
       ],
       "approved_at": null
@@ -117,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The French translation uses a lowercase 'l' in 'L’abonnement'. This should be capitalized.",
-          "suggestion": "L’abonnement"
+          "description": "The phrase 'updated pricing and specifications' is a bit clunky in French. While technically correct, it's not the most natural wording.",
+          "suggestion": "Consider rephrasing to something like 'avec de nouveaux tarifs et des spécifications mises à jour' or 'avec des tarifs et des spécifications actualisés'."
         }
       ],
       "approved_at": null
@@ -128,9 +113,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The term 'Բնութագրերով' (bnut'yagrerov) translates to 'characteristics' or 'features', which is less precise than 'specifications' in the English context. 'Տեխնիկական առանձնայություններ' (tekhnikakan aranznacyuter) or 'մասնագիտական պարամետրեր' (masnagitsagan parameetr) might be more accurate depending on the specific context.",
+          "suggestion": "Consider using 'Տեխնիկական առանձնայություններ' or 'մասնագիտական պարամետրեր' instead of 'Բնութագրերով'."
+        },
+        {
           "type": "formatting",
-          "description": "The Armenian translation uses a colon (:) after '{{finalDate}}' which doesn't match the English format.",
-          "suggestion": "Remove the colon after {{finalDate}}. The Armenian sentence should read: '… {{finalDate}}-ին' "
+          "description": "The Armenian translation uses a colon after '{{finalDate}}', which is not present in the original English sentence. This might affect the overall flow and readability.",
+          "suggestion": "Remove the colon after '{{finalDate}}' to match the English sentence structure."
         }
       ],
       "approved_at": null
@@ -147,18 +137,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Subscription will be automatically renewed' is not accurately reflected in the Japanese translation. '自動更新されます' (jido kōshin sareru) implies a more passive automatic renewal, whereas the English emphasizes the action being taken automatically.",
-          "suggestion": "サブスクリプションは{{finalDate}}日に、価格と仕様を更新して自動的に更新されます。(Sabusukuripushon wa {{finalDate}} ni, kakaku to shikō o kōshin shite jidōteki ni kōshin saremasu.) - This emphasizes the automatic nature of the renewal."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'with updated pricing and specifications' is not fully conveyed. While '価格と仕様を更新して' (kakaku to shikō o kōshin shite) translates to 'with updated pricing and specifications,' it lacks the nuance of a future-oriented aspect.",
-          "suggestion": "サブスクリプションは、価格と仕様が更新された状態で{{finalDate}}日に自動更新されます。(Sabusukuripushon wa, kakaku to shikō ga kōshin saita jōtai de {{finalDate}} ni jidō kōshin saremasu.) - This adds a future-oriented phrasing to clarify that the pricing and specifications will be updated *before* renewal."
+          "description": "The phrase \"updated pricing and specifications\" is not accurately conveyed by \"価格と仕様を更新して\". It implies a process of updating, rather than the result of being updated. A more accurate translation would describe the date as being when the subscription *with* updated pricing and specs will renew.",
+          "suggestion": "サブスクリプションは、更新された価格と仕様で{{finalDate}}日に自動更新されます。(Subscription will be automatically renewed on {{finalDate}} with updated pricing and specifications.)"
         },
         {
           "type": "formatting",
-          "description": "The placement of the date '{{finalDate}}' feels a little awkward. It's separated from the surrounding phrase with just a space.",
-          "suggestion": "サブスクリプションは、価格と仕様を更新して{{finalDate}}日に自動更新されます。 (Consider adding a comma or other punctuation to improve readability. For instance: サブスクリプションは、価格と仕様を更新して、{{finalDate}}日に自動更新されます。)"
+          "description": "The use of \"日に\" is grammatically correct, but slightly less common than just using the date. Considering brevity and modern Japanese style, it can be removed.",
+          "suggestion": "サブスクリプションは、更新された価格と仕様で{{finalDate}}自動更新されます。(Subscription will be automatically renewed on {{finalDate}} with updated pricing and specifications.)"
         }
       ],
       "approved_at": null
@@ -169,13 +154,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"updated pricing and specifications\" is not accurately translated. \"업데이트된 요금 및 사양\" (updated pricing and specifications) is a literal translation but doesn't fully convey the nuance. A more natural Korean phrasing would emphasize the change in terms or conditions.",
-          "suggestion": "구독이 {{finalDate}}에 변경된 약관 및 사양으로 자동 갱신됩니다."
+          "description": "The English phrase 'Subscription will be automatically renewed' is not fully captured by the Korean '구독이 자동 갱신됩니다'. It implies a renewal *process* is happening automatically, not just that it's renewed automatically. A more accurate translation might be '구독은 자동으로 갱신 절차가 진행됩니다' (Subscription undergoes an automatic renewal process).",
+          "suggestion": "구독은 자동으로 갱신 절차가 진행됩니다"
         },
         {
-          "type": "formatting",
-          "description": "The placement of the \"{{finalDate}}\" variable seems fine, but ensure consistent formatting is used throughout the entire application.  Consider if other date variables will follow the same placement.",
-          "suggestion": "Maintain consistent formatting for all variables."
+          "type": "incorrect_translation",
+          "description": "The English phrase 'with updated pricing and specifications' is translated as '업데이트된 요금 및 사양으로'. While technically correct, it's a bit stiff. A more natural Korean phrasing might be '새로운 요금 및 사양으로' (with new pricing and specifications).",
+          "suggestion": "새로운 요금 및 사양으로"
         }
       ],
       "approved_at": null
@@ -186,13 +171,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ພ້ອມກັບລາຄາທີ່ອັບເດດ ແລະສະເພາະ\" could be improved for clarity. \"ອັບເດດ ແລະສະເພາະ\" is a bit clunky. A better translation might emphasize 'new pricing and details'.",
-          "suggestion": "ພ້ອມດ້ວຍລາຄາ ແລະລາຍລະອຽດທີ່ປ່ຽນແປງ"
+          "description": "The phrase \"ພ້ອມກັບລາຄາທີ່ອັບເດດ ແລະສະເພາະ\" could be improved. \"ອັບເດດ\" is acceptable but \"ສະເພາະ\" (specifications) doesn't quite convey the intended meaning in this context. A better translation for 'specifications' would be something that implies 'terms' or 'details'.",
+          "suggestion": "ພ້ອມກັບລາຄາທີ່ອັບເດດ ແລະລາຍລະອຽດ"
         },
         {
           "type": "formatting",
-          "description": "The use of 'ປະຕູລູກຄ້າ Stripe ຂອງທ່ານ' is a bit verbose. It could be shortened.",
-          "suggestion": "ບັນຊີລູກຄ້າ Stripe ຂອງທ່ານ"
+          "description": "The use of \"ປະຕູລູກຄ້າ Stripe ຂອງທ່ານ\" is slightly awkward. It’s a literal translation, but sounds less natural in Lao.",
+          "suggestion": "ປະຕູຜູ້ໃຊ້ Stripe ຂອງທ່ານ"
         }
       ],
       "approved_at": null
@@ -203,13 +188,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'Subscription' is not accurately translated. 'Abonements' is more akin to 'subscriptions' in a general sense, not a specific subscription.",
-          "suggestion": "Abonements should be replaced with a more precise term, perhaps 'Jūsu abonements' (Your subscription) or a rephrased sentence to avoid the need for a direct translation of 'Subscription'."
+          "description": "The word 'Subscription' is not directly translated. While 'Abonements' can be used in context, a more specific translation considering the context of automatic renewal might be better (e.g., 'Abonements atjaunošana').",
+          "suggestion": "Consider replacing 'Abonements' with 'Abonements atjaunošana' for increased clarity."
         },
         {
-          "type": "formatting",
-          "description": "The placement of 'Jūsu' feels slightly awkward. While technically correct, it may improve readability to restructure the sentence.",
-          "suggestion": "Consider rephrasing to something like 'Jūsu abonements tiks...' or 'Abonements tiks automātiski atjaunots Jūsu...' for better flow."
+          "type": "incorrect_translation",
+          "description": "While 'varat to atcelt' is correct, it could be more naturally phrased as 'Jūs varat to atcelt' to emphasize the action is directed at the user.",
+          "suggestion": "Replace 'varat to atcelt' with 'Jūs varat to atcelt'."
         }
       ],
       "approved_at": null
@@ -226,13 +211,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"po aktualnej cenie\" is not the best translation for 'with updated pricing'. It implies a price that's currently active, rather than a price that will be updated.",
-          "suggestion": "Subskrypcja zostanie automatycznie odnowiona {{finalDate}} z nowymi cenami i aktualnymi specyfikacjami."
+          "description": "The phrase \"po aktualnej cenie\" is not the best translation for \"with updated pricing\". It translates to 'at current price' which is too literal. It doesn't convey the sense of updated pricing.",
+          "suggestion": "Subskrypcja zostanie automatycznie odnowiona {{finalDate}} z nową ceną i z aktualnymi specyfikacjami."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"na swoim koncie w portalu klienta Stripe\" is slightly awkward and less direct than it could be. A more natural phrasing would be preferred.",
-          "suggestion": "na swoim koncie Stripe."
+          "description": "“na swoim koncie w portalu klienta Stripe” is a bit awkward. While technically correct, it's not the most natural way to say it in Polish.",
+          "suggestion": "na swoim koncie w portalu Stripe."
         }
       ],
       "approved_at": null
@@ -242,9 +227,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'billing info' is translated as 'informações de faturação'. While technically correct, 'informações de pagamento' might be more natural and user-friendly in this context, as it explicitly refers to the method of payment.",
-          "suggestion": "A subscrição será automaticamente renovada em {{finalDate}} com preços e especificações atualizadas. Pode cancelá-la ou alterar as suas informações de pagamento no seu portal de clientes Stripe."
+          "type": "formatting",
+          "description": "The Portuguese translation uses a period (.) after 'especificações', which is stylistically less common in this context compared to a comma (,) as used in the English version. While grammatically correct, the period feels abrupt.",
+          "suggestion": "Change the period after 'especificações' to a comma (',')."
         }
       ],
       "approved_at": null
@@ -255,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'updated pricing and specifications' is not perfectly captured by 'preços e especificações atualizados'. A more accurate translation would convey 'preços e condições atualizados' or 'preços e detalhes atualizados'.",
-          "suggestion": "Preços e condições atualizados"
+          "description": "The phrase 'change your billing info' is translated as 'alterar suas informações de cobrança'. While technically correct, a more natural and commonly used phrasing would be 'atualizar suas informações de pagamento'. 'Cobrança' implies a charge, while 'pagamento' is more general and appropriate for billing information.",
+          "suggestion": "A assinatura será renovada automaticamente em {{finalDate}} com preços e especificações atualizados. Você pode cancelá-lo ou atualizar suas informações de pagamento no portal do cliente Stripe."
         }
       ],
       "approved_at": null
@@ -267,13 +252,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"aplicabile după actualizarea\" is awkward and doesn't accurately reflect the meaning of 'with updated pricing and specifications'. It literally translates to 'applicable after the update'.",
+          "description": "The phrase \"aplicabile după actualizarea\" is awkward and doesn't accurately convey the meaning of \"with updated pricing and specifications.\" It suggests the pricing and specs are becoming applicable *after* the renewal, which isn't the intended meaning.",
           "suggestion": "Abonamentul va fi reînnoit automat la {{finalDate}} cu prețuri și specificații actualizate."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'portalul dvs. de client Stripe' is not the most natural Romanian phrasing. 'Stripe customer portal' is better expressed as 'portalul tău Stripe de clienți' or more simply 'portalul tău Stripe'.",
-          "suggestion": "Puteţi să anulaţi sau să schimbaţi informaţiile de facturare pe portalul tău Stripe."
+          "description": "The word 'client' is used instead of 'client Stripe'. It should clarify it refers to the Stripe customer portal.",
+          "suggestion": "Puteți să anulați sau să schimbați informațiile de facturare pe portalul dvs. de client Stripe."
         }
       ],
       "approved_at": null
@@ -284,13 +269,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The placeholder {{finalDate}} is not consistently formatted. It's crucial to ensure it aligns with the expected date format for Russian users (e.g., DD.MM.YYYY).",
-          "suggestion": "Ensure {{finalDate}} displays the date in a format suitable for Russian users (e.g., DD.MM.YYYY)."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'техническими характеристиками' (technical characteristics) might be too literal and potentially confusing for the user in this context. It's possible to use a more user-friendly term.",
-          "suggestion": "Consider replacing 'техническими характеристиками' with a more accessible term like 'условиями' (terms) or 'услугами' (services)."
+          "description": "The translation includes a space before the variable {{finalDate}}. While not strictly incorrect, it's more common to have no space in Russian in this context.",
+          "suggestion": "Remove the space before {{finalDate}}."
         }
       ],
       "approved_at": null
@@ -301,18 +281,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"යාවත්කාලීන මිලකරණය සහ පිරිවිතර\" is a bit literal and can be improved for natural flow. A more idiomatic translation of \"updated pricing and specifications\" would be something like \"නව මිලකරණය හා විශේෂතා\".",
-          "suggestion": "නව මිලකරණය හා විශේෂතා"
+          "description": "The phrase 'updated pricing and specifications' is not accurately translated. 'යාවත්කාලීන මිලකරණය සහ පිරිවිතර' is a literal translation but might not convey the intended meaning naturally in Sinhala. A more natural phrasing would consider context.",
+          "suggestion": "Consider a phrasing like 'නව මිලකරණ හා විශේෂතා' or 'තවදුර මිල හා විශේෂතා'."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of {{finalDate}} is inconsistent with established Sinhala sentence structure. It is positioned awkwardly within the sentence.",
+          "suggestion": "Re-integrate the variable more fluidly within the Sinhala sentence. For example, '{{finalDate}} දිනදී...' or 'ඔබගේ දායකත්‍වය {{finalDate}} දිනදී...'."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ස්ට්‍රයිප් පාරිභෝගික ද්වාරයෙහි\" is a literal translation of \"Stripe customer portal\". A more natural phrasing would be \"ස්ට්‍රයිප් ගනුදෙනුකරු පෝර‍්ටල‍්\" or \"ස්ට්‍රයිප් පාරිභෝගික පෝර‍්ටල‍්\".",
-          "suggestion": "ස්ට්‍රයිප් ගනුදෙනුකරු පෝර‍්ටල‍්"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'ද්වාරයෙහි' is a little archaic or overly formal. Replacing it with simpler phrasing improves readability.",
-          "suggestion": "දේශපිට"
+          "description": "The phrase 'Stripe customer portal' is translated as 'ස්ට්‍රයිප් පාරිභෝගික ද්වාරයෙහි'. While technically correct, it sounds rather formal and potentially confusing. A more user-friendly translation might be preferable.",
+          "suggestion": "Consider 'ස්ට්‍රයිප් ගනුදෙනුකරු පෝර‍්ටල්' or 'ස්ට්‍රයිප් ගණුදෙනුකරු වෙබ් අඩවිය'."
         }
       ],
       "approved_at": null
@@ -335,13 +315,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ц́е' is unusual and potentially incorrect. It seems like an attempt at 'ће' which is the correct form of the future tense auxiliary verb.",
-          "suggestion": "Претплата ће бити аутоматски обновљена..."
+          "description": "The word 'ц́е' appears to be a misrepresentation of 'ће'.",
+          "suggestion": "ће"
         },
         {
           "type": "grammar",
-          "description": "The phrase 'Можете га отказати' is grammatically correct, but slightly less formal than might be appropriate for a subscription notification.  Consider a more direct phrasing.",
-          "suggestion": "Можете га отказати или променити своје податке за наплату..."
+          "description": "While technically correct, the phrasing 'Можете га отказати' is somewhat clunky in Serbian. A more natural phrasing would be 'Можете га отказати или променити...' or 'Можете да га отказате...' ",
+          "suggestion": "Можете да га отказате или променити..."
         }
       ],
       "approved_at": null
@@ -352,13 +332,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The curly braces around 'finalDate' are not escaped in the Serbian translation. This could cause issues in rendering the content where the curly braces are interpreted as part of the text instead of placeholders.",
-          "suggestion": "Escape the curly braces: \\{{finalDate}}\\."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'ga' in 'Možete ga otkazati' is ambiguous. 'ga' is a pronoun that doesn't clearly refer to 'Pretplata'. It's better to be more explicit.",
-          "suggestion": "Možete otkazati pretplatu ili promeniti svoje podatke za naplatu..."
+          "description": "The curly braces around 'finalDate' are inconsistent with typical formatting conventions. They should likely be removed to allow for variable insertion.",
+          "suggestion": "Pretplata će biti automatski obnovljena {{finalDate}} sa ažuriranim cenama i specifikacijama. Možete ga otkazati ili promeniti svoje podatke za naplatu na vašem Stripe korisničkom portalu."
         }
       ],
       "approved_at": null
@@ -369,13 +344,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The phrase 'Stripe müşteri portalınızda' could be improved for clarity and flow. It's a bit clunky.",
-          "suggestion": "Stripe müşteri portalınız üzerinden"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'fatura bilgilerinizi' is a less common and slightly less natural phrasing compared to alternatives.  A more common phrase for 'billing info' in this context might be preferred.",
-          "suggestion": "ödeme bilgilerinizi"
+          "description": "The Turkish translation does not retain the formatting of the English text, which includes double curly braces around 'finalDate'.",
+          "suggestion": "Ensure the Turkish translation also uses double curly braces around {{finalDate}}.  For example: \"Abonelik, güncellenmiş fiyatlandırma ve spesifikasyonlarla {{finalDate}} tarihinde otomatik olarak yenilenecektir.\""
         }
       ],
       "approved_at": null
@@ -383,13 +353,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Ukrainian translation retains the double curly braces `{{finalDate}}` which are used as placeholders in the English version. In Ukrainian, these should be removed or replaced with a more appropriate placeholder if needed.",
-          "suggestion": "Consider removing the braces: 'Підписку буде автоматично поновлено [дата] з оновленими тарифами та специфікаціями.' or use a Ukrainian placeholder if one exists."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -398,18 +362,23 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Subscription' is translated as 'Gói dịch vụ đăng ký'. While technically correct, 'Gói dịch vụ' is a bit formal. 'Đăng ký' already implies a subscription. A simpler and more natural translation might be 'Dịch vụ đăng ký' or just 'Dịch vụ'.",
-          "suggestion": "Dịch vụ đăng ký"
+          "description": "The phrase 'Subscription' is translated as 'Gói dịch vụ đăng ký'. While technically correct, 'Gói đăng ký' would be more natural and concise in this context.",
+          "suggestion": "Gói đăng ký sẽ được tự động gia hạn vào ngày {{finalDate}}..."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'cancel it' is translated as 'hủy nó'. While understandable, 'hủy' can have a more final and negative connotation. A more appropriate translation might be 'hủy đăng ký' (cancel subscription) for clarity.",
-          "suggestion": "hủy đăng ký"
+          "description": "The phrase 'updated pricing and specifications' is translated as 'mức phí và tính năng được cập nhật'. While not incorrect, a more natural phrasing would be 'giá và các thông số đã được cập nhật' or 'giá cả và các tính năng đã được cập nhật'.",
+          "suggestion": "Gói đăng ký sẽ được tự động gia hạn vào ngày {{finalDate}} với giá và các thông số đã được cập nhật."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Stripe customer portal' is directly translated. While technically accurate, it is quite formal for most users. A more approachable term could be considered.",
-          "suggestion": "trang thông tin khách hàng Stripe"
+          "description": "The phrase 'cancel it' is translated as 'hủy nó'. While understood, a more natural phrasing would be 'hủy đăng ký'.",
+          "suggestion": "Bạn có thể hủy đăng ký hoặc thay đổi thông tin thanh toán..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Stripe customer portal' is translated as 'cổng thông tin khách hàng Stripe của bạn'. While correct, a more natural phrasing would be 'cổng khách hàng Stripe'.",
+          "suggestion": "…trên cổng khách hàng Stripe."
         }
       ],
       "approved_at": null
@@ -417,13 +386,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The original English content uses double curly braces `{{finalDate}}` for the variable. The Chinese translation uses single curly braces `{finalDate}`. While both might work depending on the templating engine, maintaining consistency with the source is preferred.",
-          "suggestion": "Change `{finalDate}` to `{{finalDate}}`"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

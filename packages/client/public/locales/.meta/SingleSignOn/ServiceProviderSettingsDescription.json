@@ -3,7 +3,7 @@
   "content": "Configure Service Provider settings and add SP certificates for Single Sign-On.",
   "content_en_sha1_hash": "368366022e4a1e30cbc788ad70c6a9e0b4d14b43",
   "created_at": "2025-05-19T21:30:50.130Z",
-  "updated_at": "2025-05-21T02:00:15.080Z",
+  "updated_at": "2025-08-11T18:11:59.260Z",
   "comment": {
     "text": "Configure Service Provider settings and add SP certificates for Single Sign-On. This key is used to display a brief description in the UI for configuring Single Sign-On (SSO) integration settings, likely found on a settings page or button.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/MobileView.js",
       "line_number": 55,
-      "context": "<StyledWrapper>\n <MobileCategoryWrapper\n title={t(\"ServiceProviderSettings\", {\n organizationName: logoText,\n })}\n subtitle={t(\"ServiceProviderSettingsDescription\")}\n url=\"/portal-settings/integration/sso/settings\"\n withPaidBadge={!isSSOAvailable}\n badgeLabel={t(\"Common:Paid\")}\n onClickLink={onClickLink}\n />",
+      "context": "<StyledWrapper>\n <MobileCategoryWrapper\n title={t(\"ServiceProviderSettings\", {\n organizationName: logoText,\n })}\n subtitle={t(\"ServiceProviderSettingsDescription\")}\n url=\"/portal-settings/integration/sso/settings\"\n withPaidBadge={!isSSOAvailable}\n badgeLabel={t(\"Common:Paid\")}\n onClickLink={onClickLink}\n dataTestId=\"sp_settings\"",
       "module": "/packages/client"
     }
   ],
@@ -30,13 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Single Sign-On' is translated as 'لمرة واحدة لتسجيل الدخول' which is a literal translation that doesn't accurately convey the concept of Single Sign-On. A more appropriate translation would emphasize unified authentication or centralized login.",
-          "suggestion": "قم بتهيئة إعدادات مزود الخدمة وإضافة شهادات SP لتسجيل دخول موحد."
-        },
-        {
-          "type": "formatting",
-          "description": "The translation uses a direct translation of 'Single Sign-On' instead of incorporating established Arabic terminology for the concept, which may cause confusion for the target audience.  Consider using a commonly understood term within the context of IT security.",
-          "suggestion": "Consider researching and using a standard Arabic term for 'Single Sign-On' prevalent in the target audience's IT environment."
+          "description": "The phrase 'Single Sign-On' is translated as 'لمرة واحدة لتسجيل الدخول'. While technically conveying 'one-time login,' it's not the standard and widely understood translation for 'Single Sign-On' in a technical context.  'تسجيل دخول موحد' (Tasjeel Dukhul Mowahhad) is the more accurate and recognized term.",
+          "suggestion": "Use 'تسجيل دخول موحد' (Tasjeel Dukhul Mowahhad) instead of 'لمرة واحدة لتسجيل الدخول'."
         }
       ],
       "approved_at": null
@@ -46,9 +41,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The translation uses a colon after 'Tək Giriş' which is not present in the English source. While not incorrect, it changes the phrasing slightly.",
-          "suggestion": "Remove the colon after 'Tək Giriş'."
+          "type": "spelling",
+          "description": "The word 'parametrleri' is a misspelling of 'parametrlerini'.",
+          "suggestion": "Tək Giriş üçün Xidmət Provayderi parametrinləri konfiqurasiya edin və SP sertifikatları əlavə edin."
         }
       ],
       "approved_at": null
@@ -74,7 +69,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The term 'ενιαία σύνδεση' is a common but slightly verbose translation of 'Single Sign-On'. A more concise and widely understood option would be 'μοναδική σύνδεση'.",
+          "suggestion": "μοναδική σύνδεση"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -95,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Single Sign-On' is translated as 'authentification unique.' While technically correct, 'authentification unique' is less common and sounds less natural in French than 'authentification simple' or 'liaison unique'.",
-          "suggestion": "Configurez les paramètres du fournisseur de services et ajouter des certificats SP pour l'authentification simple."
+          "description": "The term \"authentification unique\" is a literal translation of \"Single Sign-On\" and while technically correct, it is not the standard or most natural French term. The common and preferred translation is \"authentification fédérée\" or \"connexion unique\".",
+          "suggestion": "Configurez les paramètres du fournisseur de services et ajoutez des certificats SP pour l'authentification fédérée."
         }
       ],
       "approved_at": null
@@ -107,13 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"Single Sign-On\" is translated as \"Միակ Մուտք սիստեմի համար\". While technically correct, a more natural and commonly used translation would be \"Միասնական Մուտք\" or \"Ազգային ճանապարհային մուտք\".",
-          "suggestion": "Միասնական Մուտք"
-        },
-        {
-          "type": "formatting",
-          "description": "The sentence structure is a bit clunky.  It's more natural to say \"ավելացրեք SP սերտիֆիկատներ միասնական մուտքի համար\" instead of \"Միակ Մուտք սիստեմի համար\".",
-          "suggestion": "Կարգավորեք Ծառայությունների Մատակարարի կարգավորումները և ավելացրեք SP սերտիֆիկատներ միասնական մուտքի համար:"
+          "description": "The phrase \"Միակ Մուտք սիստեմի համար\" translates to \"for Single Sign-On system\" which is a bit redundant. A more concise translation would be 'Միակ մուտքի համար' or 'միակ մուտքի համար'.",
+          "suggestion": "Կարգավորեք Ծառայությունների Մատակարարի կարգավորումները և ավելացրեք SP սերտիֆիկատներ միակ մուտքի համար:"
         }
       ],
       "approved_at": null
@@ -133,7 +129,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'add SP certificates' could be more accurately translated to reflect the nuance of 'upload' or 'register' certificates within a configuration setting. '추가하세요' (add) is functional, but '등록하세요' (register) or '업로드하세요' (upload) might be more common in a technical context.",
+          "suggestion": "서비스 공급자 설정을 구성하고 싱글 사인온을 위한 SP 인증서를 등록하세요."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -142,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ຄັ້ງດຽວ' (khang diao) is a colloquial term for 'single'. While understandable, a more formal and precise term might be preferable for a technical setting.",
-          "suggestion": "Consider using a more formal term like 'ລຳ ເດັຽວ' (lam diao) or 'ສະບາຍດີ' (sabai di)"
+          "description": "The term 'ໃບຢັ້ງຢືນ' (bai yang yuen) is correct for 'certificate', but it's a formal term. In some contexts, a slightly more accessible term like 'ໃບຮັບຮອງ' (bai rup hong) might be preferable for broader understanding.",
+          "suggestion": "Consider 'ໃບຮັບຮອງ SP ສຳລັບການເຂົ້າສູ່ລະບົບຄັ້ງດຽວ' as an alternative."
         }
       ],
       "approved_at": null
@@ -166,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English term 'Service Provider' is best translated as 'dostawca usług' in this context, not 'usługodawca'. 'Usługodawca' can imply the entity *providing* a service, while 'dostawca usług' more accurately describes the role in a Single Sign-On configuration.",
-          "suggestion": "Skonfiguruj ustawienia dostawcy usług i dodaj jego certyfikaty dla pojedynczego logowania."
+          "description": "The term \"Single Sign-On\" is translated as \"pojedynczego logowania\". While technically correct, a more common and natural translation would be \"logowania pojedynczego\" or \"jednego logowania\".",
+          "suggestion": "Skonfiguruj ustawienia usługodawcy i dodaj jego certyfikaty dla logowania pojedynczego."
         }
       ],
       "approved_at": null
@@ -178,13 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Single Sign-On' is translated as 'logon único'. While 'logon' is understandable, 'autenticação única' or 'acesso único' would be a more accurate and commonly used translation for Single Sign-On in a technical context in Portuguese.",
-          "suggestion": "Consider translating 'Single Sign-On' as 'autenticação única' or 'acesso único'."
-        },
-        {
-          "type": "formatting",
-          "description": "The use of 'SP' is not explicitly defined. While it might be understood by technical users, adding a brief explanation or translation the first time it's used would improve clarity.",
-          "suggestion": "Consider adding a brief explanation like 'certificados SP (provedores de serviços)' the first time 'SP' is used."
+          "description": "The English term 'Single Sign-On' is translated as 'logon único'. While accurate, 'autenticação única' is a more common and technically precise translation of 'Single Sign-On' in Portuguese within an IT context.",
+          "suggestion": "Defina as configurações do provedor de serviços e adicione certificados SP para autenticação única."
         }
       ],
       "approved_at": null
@@ -195,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'Single Sign-On' is translated as 'logon único'. While understandable, 'Autenticação Única' is the more standard and technically accurate translation for Single Sign-On in Brazilian Portuguese in a technical context.",
-          "suggestion": "Autenticação Única"
+          "description": "The English phrase 'Single Sign-On' is more accurately translated as 'Autenticação Única' instead of 'logon único'. While 'logon único' is understandable, 'Autenticação Única' is the standard and more precise term in Portuguese (Brazil) for Single Sign-On.",
+          "suggestion": "Defina as configurações do provedor de serviços e adicione certificados SP para Autenticação Única."
         }
       ],
       "approved_at": null
@@ -207,8 +204,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'Single Sign-On' is not translated. While 'autentificarea unică' is a good translation of 'single sign-on', the full term 'Single Sign-On' should ideally be included or referenced to ensure clarity for users familiar with the English terminology.",
-          "suggestion": "Consider adding 'Single Sign-On' or a short explanation alongside 'autentificarea unică' for better understanding. For example: 'Configurați setări Furnizor de servicii și adăugați certificate de furnizor de servicii pentru autentificarea unică (Single Sign-On).' or 'Configurați setări Furnizor de servicii și adăugați certificate de furnizor de servicii pentru autentificarea unică, cunoscută și ca Single Sign-On.'"
+          "description": "The term 'Single Sign-On' is not translated. It should be 'autentificare unică'.",
+          "suggestion": "Configurați setări Furnizor de servicii și adăugați certificate de furnizor de servicii pentru autentificarea unică."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'ServiceProvider' is translated as 'Furnizor de servicii', which is correct. However, it might be better to maintain consistency and use 'Furnizor de servicii' throughout the text.",
+          "suggestion": "No change needed, but consider consistency."
         }
       ],
       "approved_at": null
@@ -225,18 +227,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'ServiceProvider' is translated as 'සේවා ප්‍රතිපාදක'. While technically correct, a more common and understandable term in Sinhala might be 'සේවා සපයුතුවලැ'.",
-          "suggestion": "සේවා සපයුතුවලැ සැකසුම්"
+          "description": "The phrase 'Single Sign-On' is directly translated as 'තනි පිවිසුම'. While understandable, a more common and natural Sinhala equivalent for Single Sign-On might be 'එකම ල໊ගින්' or 'එකම පරිශීලක පිවිසුම'. The current translation, while not *wrong*, doesn't flow as naturally.",
+          "suggestion": "Consider translating 'Single Sign-On' as 'එකම ල໊ගින්' or 'එකම පරිශීලක පිවිසුම'."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The term 'Single Sign-On' is translated as 'තනි පිවිසුම (SSO)'. While the abbreviation (SSO) is provided, it might be clearer to use a more descriptive term or explain the concept briefly.",
-          "suggestion": "එකම ල໊ගින් (One Login) / ඒකම පිවිසුම් පද්ධතිය"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'SP certificates' is translated as 'SP සහතික'.  It's a bit clunky. A more fluent phrasing would be 'SP ඩිජිටල් සහතික'.",
-          "suggestion": "SP ඩිජිටල් සහතික"
+          "type": "formatting",
+          "description": "The acronym 'SP' is not translated or explained.  It's likely that the target audience won't understand what 'SP' refers to.",
+          "suggestion": "Expand 'SP' to 'සේවා සම්පාදක' or similar, or provide a brief explanation in parentheses after the first mention of 'SP'."
         }
       ],
       "approved_at": null
@@ -247,7 +244,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovak translation 'Nakonfigurujte nastavenia poskytovateľa služieb a pridajte certifikáty SP pre jednotné prihlásenie' uses 'Nakonfigurujte,' which is Serbian/Croatian, not Slovak.  The correct Slovak verb to use is 'Nakonfigurujte' should be 'Konfigurujte'.",
+          "description": "The Slovak translation uses 'Nakonfigurujte', which is a Czech word, not Slovak. It should be 'Nakonfigurujte' -> 'Konfigurujte'.",
           "suggestion": "Konfigurujte nastavenia poskytovateľa služieb a pridajte certifikáty SP pre jednotné prihlásenie."
         }
       ],
@@ -264,14 +261,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The abbreviation 'SP' is used without explanation. While common in technical contexts, it might be unclear to some users. Consider expanding it or providing a tooltip.",
-          "suggestion": "Consider adding a brief explanation of 'SP' or providing a tooltip when the term is first used. For example, 'Сертификати пружаоца услуге (SP)'"
-        },
-        {
-          "type": "formatting",
-          "description": "The phrase 'Single Sign-On' is not translated. Maintaining consistency with English terms is acceptable if the target audience is familiar with the term, but it's worth considering whether a Serbian equivalent would be more accessible.",
-          "suggestion": "Consider translating 'Single Sign-On' to its Serbian equivalent if one exists and aligns with established terminology.  If the term remains as 'Single Sign-On', ensure consistency across the entire application."
+          "type": "incorrect_translation",
+          "description": "The term 'ServiceProvider' is awkwardly translated as 'пружаоца услуга'. A more natural and widely understood translation would be 'провајдера услуга' or 'сервис провајдера'.",
+          "suggestion": "Конфигуришите подешавања сервис провајдера и додајте сертификате SP-а за Single Sign-On."
         }
       ],
       "approved_at": null
@@ -281,14 +273,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The term 'pružaoce usluga' is unnecessarily formal. A more common and natural phrasing would be 'davalaca usluga' or simply 'provođača'.",
-          "suggestion": "Konfigurišite podešavanja davaoca usluga i dodajte sertifikate SP-a za Single Sign-On."
+          "type": "incorrect_translation",
+          "description": "The translation of \"Service Provider\" as \"pružaoca usluga\" is technically correct but a more standard and widely understood term in Serbian IT context would be \"proizvođač usluga\" or even just \"proizvođač\". \"Pružaoc\" is more general and less specific to the IT service provider context. \"SP\" remains untranslated, which is acceptable given the niche audience.",
+          "suggestion": "Konfigurišite podešavanja proizvođača usluga i dodajte sertifikate SP-a za Single Sign-On."
         },
         {
           "type": "formatting",
-          "description": "While technically correct, 'SP-a' is a slightly awkward possessive form. A more natural wording would omit the possessive.",
-          "suggestion": "Konfigurišite podešavanja davaoca usluga i dodajte SP sertifikate za Single Sign-On."
+          "description": "While technically correct, the sentence structure could be slightly improved for better flow in Serbian. Adding a connector ('i') after 'podešavanja' makes it flow more naturally.",
+          "suggestion": "Konfigurišite podešavanja proizvođača usluga, i dodajte sertifikate SP-a za Single Sign-On."
         }
       ],
       "approved_at": null
@@ -299,13 +291,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'SS sertifikaları' is an abbreviation that might not be universally understood by Turkish speakers. 'SS' refers to 'Single Sign-On' but the translation doesn't clarify this.",
-          "suggestion": "Tek Oturum Açma (SSO) sertifikalarını ekleyin."
+          "description": "The translation 'SS sertifikaları' for 'SP certificates' is not ideal. 'SP' stands for Service Provider, and while 'SS' could be interpreted as Single Sign-On, it's not standard terminology. It's better to translate it as 'Hizmet Sağlayıcı Sertifikaları' or 'Servis Sağlayıcı Sertifikaları' for clarity.",
+          "suggestion": "Hizmet Sağlayıcı Sertifikaları"
         },
         {
           "type": "formatting",
-          "description": "The sentence could be improved for readability. There's a slight awkwardness in the word order.",
-          "suggestion": "Tek Oturum Açma için servis sağlayıcı ayarlarını yapılandırın ve SSO sertifikalarını ekleyin."
+          "description": "The Turkish translation uses a verb ('yapılandırın') at the beginning of the sentence, which is grammatically correct but may sound less natural than starting with a noun phrase. Consider rephrasing for improved flow.",
+          "suggestion": "Tek Oturum Açma için Hizmet Sağlayıcı ayarlarını yapılandırın ve Hizmet Sağlayıcı sertifikaları ekleyin."
         }
       ],
       "approved_at": null
@@ -313,7 +305,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'його сертифікати' (his certificates) is not ideal. 'Сертифікати провайдера' or 'сертифікати постачальника послуг' would be more accurate to match the original 'SP certificates'.",
+          "suggestion": "Налаштуйте параметри постачальника послуг та додайте сертифікати постачальника послуг для єдиного входу."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -322,13 +320,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'Single Sign-On' is translated as 'Đăng Nhập Một Lần'. While technically correct, 'Đăng nhập duy nhất' is a more common and natural-sounding translation in Vietnamese for Single Sign-On.",
+          "description": "The term 'Single Sign-On' is translated as 'Đăng Nhập Một Lần'. While technically correct, a more common and easily understood translation might be 'Đăng nhập duy nhất'.",
           "suggestion": "Đăng nhập duy nhất"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Service Provider' is translated as 'Nhà cung cấp Dịch vụ'. While accurate, 'Nhà cung cấp dịch vụ' is a bit formal. Considering the context, 'Nhà cung cấp' might be more concise and suitable.",
-          "suggestion": "Nhà cung cấp"
         }
       ],
       "approved_at": null
@@ -336,13 +329,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"用于单一登录的 SP 证书\" is a bit awkward. It literally translates to 'SP certificates for single login'. A more natural and accurate translation would be something like \"用于单点登录的 SP 证书\" (for Single Sign-On SP certificates) or \"用于单点登录的 SP 证书文件\" (SP certificate files for Single Sign-On).",
-          "suggestion": "用于单点登录的 SP 证书"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

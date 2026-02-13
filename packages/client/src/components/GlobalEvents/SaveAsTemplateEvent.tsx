@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,6 +31,7 @@ import { TRoom } from "@docspace/shared/api/rooms/types";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
 import { toastr } from "@docspace/shared/components/toast";
 import { Text } from "@docspace/shared/components/text";
+import { TRoomParams } from "@docspace/shared/utils/rooms";
 
 import CreateRoomTemplate from "../dialogs/CreateRoomTemplate/CreateRoomTemplate";
 
@@ -87,7 +88,7 @@ const SaveAsTemplateEvent = (props: SaveAsTemplateEventProps) => {
     },
     isPrivate: false,
     icon: {
-      uploadedFile: item.logo.original,
+      uploadedFile: item?.logo?.original,
       tmpFile: "",
       x: 0.5,
       y: 0.5,
@@ -164,7 +165,7 @@ const SaveAsTemplateEvent = (props: SaveAsTemplateEventProps) => {
       item={item}
       onClose={onCloseEvent}
       fetchedTags={fetchedTags}
-      fetchedRoomParams={fetchedRoomParams}
+      fetchedRoomParams={fetchedRoomParams as unknown as TRoomParams}
       onSave={onSave}
       isLoading={isLoading}
     />

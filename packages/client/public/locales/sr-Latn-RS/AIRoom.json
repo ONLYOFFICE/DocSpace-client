@@ -1,0 +1,18 @@
+{
+  "AIAgentAccessRedirectNote": "Automatski ćete biti vraćeni na {{sectionName}} odeljak za 5 sekundi.",
+  "AIChat": "AI razgovor",
+  "AIInstructions": "AI instrukcije",
+  "CreateChat": "Kreirajte ćaskanje",
+  "EmptyKnowledgeDescriptionActions": "Probajte ove radnje da biste započeli:",
+  "EmptyKnowledgeTitle": "Još uvek nema otpremljenih datoteka",
+  "EmptyResultsTitle": "Još nema rezultata",
+  "InstructionsDescriptionAgentExample": "Primer: „Vi ste AI PR asistent koji pomaže u pisanju i uređivanju saopštenja za medije. Održavajte profesionalan, samouveren i medijski prihvatljiv ton. Jasno istaknite ključne poruke, izbegavajte žargon i držite tekst konciznim i privlačnim.”",
+  "KnowledgeDescription": "Otpremite datoteke sa svog računara ili sa {{productName}} da biste obezbedili bolji kontekst za ćaskanje. Napomena: deo ili ceo otpremljeni sadržaj može biti otkriven tokom razgovora.",
+  "KnowledgeSelectIn": "Izaberite u {{productName}}",
+  "KnowledgeUnavailable": "Baza znanja je nedostupna",
+  "MCP": "MCP alati za ovu sobu",
+  "ResponseQualityNode": "<1>Napomena:</1> Kvalitet odgovora može varirati u zavisnosti od modela; noviji modeli se preporučuju za najbolje rezultate.",
+  "ResultStorage": "Skladištenje rezultata",
+  "UploadFilesDevice": "Otpremite datoteke sa svog ličnog uređaja",
+  "UploadFilesPortal": "Otpremite datoteke sa {{sectionNameFirst}} ili {{sectionNameSecond}}"
+}

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,18 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import {
-  HEADER_LINK_EXPIRED,
-  HEADER_LINK_INVALID,
-  HEADER_USER_EXCLUDED,
-  endpoints,
-} from "@docspace/shared/__mocks__/e2e";
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
-import { expect, test } from "./fixtures/base";
+import { test } from "./fixtures/base";
+import {
+  confirmHandler,
+  ErrorConfirm,
+} from "@docspace/shared/__mocks__/handlers";
 
 const URL = "/login/confirm/PasswordChange";
-const NEXT_REQUEST_URL = "*/**/login/confirm/PasswordChange";
 
 const QUERY_PARAMS = [
   {
@@ -47,8 +45,8 @@ const QUERY_PARAMS = [
     value: "123",
   },
   {
-    name: "email",
-    value: "mail@mail.com",
+    name: "encemail",
+    value: "b5COc6kRm3veeYqA72sOfA&uid=66faa6e4-f133-11ea-b126-00ffeec8b4ef",
   },
   {
     name: "uid",
@@ -57,94 +55,100 @@ const QUERY_PARAMS = [
 ];
 
 const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
-const NEXT_REQUEST_URL_WITH_PARAMS = getUrlWithQueryParams(
-  NEXT_REQUEST_URL,
-  QUERY_PARAMS,
-);
 
-test("password change render", async ({ page }) => {
-  await page.goto(URL_WITH_PARAMS);
+test("password change render", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "password-change",
     "password-change-render.png",
   ]);
 });
 
-test("password change success", async ({ page, mockRequest }) => {
-  await mockRequest.router([endpoints.changePassword, endpoints.login]);
-  await page.goto(URL_WITH_PARAMS);
+test("password change success", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await page.getByTestId("text-input").fill("qwerty123");
+  await page.fill("[name='password']", "qwerty123");
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "password-change",
     "password-change-success.png",
   ]);
 
-  await page.getByTestId("button").click();
+  await page.getByTestId("create_password_button").click();
 
-  await page.waitForURL("/", { waitUntil: "load" });
+  await page.waitForURL(`${baseUrl}/login?passwordChanged=true`, {
+    waitUntil: "load",
+  });
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "password-change",
     "password-change-success-redirect.png",
   ]);
 });
 
-test("password change error", async ({ page }) => {
-  await page.goto(URL_WITH_PARAMS);
+test("password change error", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await page.getByTestId("text-input").fill("123");
-  await page.getByTestId("button").click();
+  await page.fill("[name='password']", "123");
+  await page.getByTestId("create_password_button").click();
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "password-change",
     "password-change-error.png",
   ]);
 });
 
-test("password change error invalid", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-    HEADER_LINK_INVALID,
-  ]);
+test("password change error invalid", async ({
+  page,
+  baseUrl,
+  serverRequestInterceptor,
+  port,
+}) => {
+  serverRequestInterceptor.use(confirmHandler(port, ErrorConfirm.Invalid));
 
-  await page.goto(URL_WITH_PARAMS);
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "password-change",
     "password-change-error-invalid.png",
   ]);
 });
 
-test("password change error expired", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-    HEADER_LINK_EXPIRED,
-  ]);
+test("password change error expired", async ({
+  page,
+  baseUrl,
+  serverRequestInterceptor,
+  port,
+}) => {
+  serverRequestInterceptor.use(confirmHandler(port, ErrorConfirm.Expired));
 
-  await page.goto(URL_WITH_PARAMS);
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "password-change",
     "password-change-error-expired.png",
   ]);
 });
 
-test("password change error user excluded", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-    HEADER_USER_EXCLUDED,
-  ]);
+test("password change error user excluded", async ({
+  page,
+  baseUrl,
+  serverRequestInterceptor,
+  port,
+}) => {
+  serverRequestInterceptor.use(confirmHandler(port, ErrorConfirm.UserExcluded));
 
   // Expected to go to default page
-  await page.goto(URL_WITH_PARAMS);
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "password-change",
     "password-change-error-user-excluded.png",

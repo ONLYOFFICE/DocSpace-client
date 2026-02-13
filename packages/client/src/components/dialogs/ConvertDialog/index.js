@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,35 +25,17 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState } from "react";
-import styled from "styled-components";
+import { withTranslation, Trans } from "react-i18next";
+import { inject, observer } from "mobx-react";
+import classNames from "classnames";
+
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 
-import { withTranslation, Trans } from "react-i18next";
-import { inject, observer } from "mobx-react";
-import { FolderType } from "@docspace/shared/enums";
-
-const StyledFooterContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  width: 100%;
-
-  .convert_dialog_checkboxes {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .convert_dialog_buttons {
-    display: flex;
-    flex-direction: row;
-    gap: 8px;
-  }
-`;
+import styles from "./ConvertDialog.module.scss";
 
 const ConvertDialogComponent = (props) => {
   const {
@@ -71,7 +53,7 @@ const ConvertDialogComponent = (props) => {
     rootFoldersTitles,
     isRecentFolder,
     isFavoritesFolder,
-    isShareFolder,
+    isSharedWithMeFolder,
 
     createNewIfExist,
     isUploadAction,
@@ -94,11 +76,12 @@ const ConvertDialogComponent = (props) => {
 
   let rootFolderTitle = "";
   const convertSingleFile = !!convertItem;
-  const sortedFolder = isRecentFolder || isFavoritesFolder || isShareFolder;
+  const sortedFolder =
+    isRecentFolder || isFavoritesFolder || isSharedWithMeFolder;
 
   if (convertSingleFile && sortedFolder) {
-    rootFolderTitle = isShareFolder
-      ? rootFoldersTitles[FolderType.USER]?.title
+    rootFolderTitle = isSharedWithMeFolder
+      ? t("Common:MyDocuments")
       : rootFoldersTitles[convertItem.rootFolderType]?.title;
   }
 
@@ -189,8 +172,8 @@ const ConvertDialogComponent = (props) => {
         ) : null}
       </ModalDialog.Body>
       <ModalDialog.Footer>
-        <StyledFooterContent className="convert_dialog_footer">
-          <div className="convert_dialog_checkboxes">
+        <div className={classNames(styles.footer, "convert_dialog_footer")}>
+          <div className={styles.convertDialogCheckboxes}>
             <Checkbox
               className="convert_dialog_checkbox"
               label={t("SaveOriginalFormatMessage")}
@@ -222,7 +205,7 @@ const ConvertDialogComponent = (props) => {
               />
             ) : null}
           </div>
-          <div className="convert_dialog_buttons">
+          <div className={styles.convertDialogButtons}>
             <Button
               key="ContinueButton"
               label={t("Common:ContinueButton")}
@@ -239,7 +222,7 @@ const ConvertDialogComponent = (props) => {
               onClick={onCloseDialog}
             />
           </div>
-        </StyledFooterContent>
+        </div>
       </ModalDialog.Footer>
     </ModalDialog>
   );
@@ -261,7 +244,7 @@ export default inject(
       rootFoldersTitles,
       isRecentFolder,
       isFavoritesFolder,
-      isShareFolder,
+      isSharedWithMeFolder,
     } = treeFoldersStore;
     const {
       convertUploadedFiles,
@@ -295,7 +278,7 @@ export default inject(
       rootFoldersTitles,
       isRecentFolder,
       isFavoritesFolder,
-      isShareFolder,
+      isSharedWithMeFolder,
       createNewIfExist,
       isUploadAction,
       cancelUploadAction,

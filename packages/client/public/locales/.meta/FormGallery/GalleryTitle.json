@@ -1,0 +1,28 @@
+{
+  "key_path": "GalleryTitle",
+  "content": "{{organizationName}} Template Gallery",
+  "content_en_sha1_hash": "b86e8e51bcad11193e478b90db1856a65b069719",
+  "created_at": "2025-12-22T09:40:18.217Z",
+  "updated_at": "2025-12-22T10:06:47.951Z",
+  "comment": {
+    "text": "This translation key provides the title for a template gallery, displaying the organization's name. It appears as the title within a gallery tile, specifically in the \"Submit to Gallery\" section of the UI. Translators should replace \"{{organizationName}}\" with the relevant organization name for the displayed gallery.",
+    "is_auto": true,
+    "updated_at": "2025-12-22T10:06:47.951Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/TemplateGallery/Tiles/SubmitToGalleryTile.tsx",
+      "line_number": 99,
+      "context": "className={styles.closeIcon}\n />\n \n <div className={styles.info}>\n <div className={styles.title}>\n {t(\"FormGallery:GalleryTitle\", {\n organizationName: logoText,\n })}\n </div>\n <div className={styles.body}>\n {t(\"Common:SubmitToGalleryBlockBody\", {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

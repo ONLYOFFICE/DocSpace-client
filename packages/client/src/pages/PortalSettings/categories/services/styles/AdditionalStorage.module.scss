@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,19 +24,37 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-.storageContainer {
+.servicesWrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 320px);
+  gap: 16px;
+
+  &.servicesWrapperMobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.serviceContainer {
   display: flex;
   flex-direction: column;
   padding: 16px;
   border: 1px solid var(--border-service-color);
   border-radius: 6px;
-  margin-bottom: 16px;
-  max-width: 320px;
+
+  min-height: 148px;
   box-sizing: border-box;
   cursor: pointer;
+
   &:not(.disabled):hover {
     background-color: var(--background-service-color);
   }
+}
+
+.middleBlock {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 12px;
 }
 
 .disabled {
@@ -59,16 +77,31 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  width: 100%;
+  height: 100%;
+
+  rect {
+    fill: var(--color-scheme-main-buttons);
+    opacity: 0.1;
+  }
+
+  path {
+    fill: var(--color-scheme-main-buttons);
+    opacity: 1;
+  }
 }
 
 .contentContainer {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  height: 100%;
+  .containerTitle {
+    margin-bottom: 4px;
+  }
 }
 
 .priceContainer {
-  margin-top: 12px;
+  margin-top: auto;
 }
 
 .iconsContainer {
@@ -87,4 +120,35 @@
 .storageDescription {
   color: var(--payment-text-color);
   margin-bottom: 20px;
+  max-width: 660px;
+}
+.payerContainer {
+  margin-bottom: 20px;
+}
+
+.changeShedule {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+
+  &.warningColor {
+    color: var(--payment-warning-color);
+    svg {
+      path {
+        fill: var(--payment-warning-color);
+      }
+    }
+  }
+  &.greenColor {
+    color: var(--payment-credit-color);
+    svg {
+      path {
+        fill: var(--payment-credit-color);
+      }
+    }
+  }
+}
+
+.spacer {
+  flex-grow: 1;
 }

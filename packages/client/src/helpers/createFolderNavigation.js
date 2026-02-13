@@ -1,8 +1,13 @@
 import FilesFilter from "@docspace/shared/api/files/filter";
 
-import { RoomsType } from "@docspace/shared/enums";
+import { RoomsType, SearchArea } from "@docspace/shared/enums";
+import { getUserFilter } from "@docspace/shared/utils/userFilterUtils";
+import {
+  FILTER_ARCHIVE_DOCUMENTS,
+  FILTER_ROOM_DOCUMENTS,
+} from "@docspace/shared/utils/filterConstants";
 
-import { CategoryType } from "SRC_DIR/helpers/constants";
+import { CategoryType } from "@docspace/shared/constants";
 
 import { getCategoryUrl, getCategoryTypeByFolderType } from "./utils";
 
@@ -12,7 +17,6 @@ export const createFolderNavigation = async (
   userId,
   roomType,
   currentTitle,
-  getPublicKey,
 ) => {
   if (!item) return { url: "", state: {} };
 
@@ -29,26 +33,31 @@ export const createFolderNavigation = async (
     security,
   } = item;
 
-  const path = getCategoryUrl(
-    getCategoryTypeByFolderType(rootFolderType, id),
-    id,
-  );
+  const isAiRoom = itemRoomType === RoomsType.AIRoom;
+
+  const aiAgentStartCategory = security.UseChat
+    ? CategoryType.Chat
+    : CategoryType.AIAgent;
+
+  const path = isAiRoom
+    ? getCategoryUrl(aiAgentStartCategory, id)
+    : getCategoryUrl(getCategoryTypeByFolderType(rootFolderType, id), id);
   const filter = FilesFilter.getDefault();
   const filterObj = FilesFilter.getFilter(window.location);
 
-  if (isRoom) {
-    const key =
-      categoryType === CategoryType.Archive
-        ? `UserFilterArchiveRoom=${userId}`
-        : `UserFilterSharedRoom=${userId}`;
+  if (isAiRoom) {
+    if (!security.UseChat) filter.searchArea = SearchArea.ResultStorage;
+  } else if (isRoom) {
+    if (userId) {
+      const key =
+        categoryType === CategoryType.Archive
+          ? `${FILTER_ARCHIVE_DOCUMENTS}=${userId}`
+          : `${FILTER_ROOM_DOCUMENTS}=${userId}`;
 
-    const filterStorageSharedRoom = userId && localStorage.getItem(key);
+      const filterObject = getUserFilter(key);
 
-    if (filterStorageSharedRoom) {
-      const splitFilter = filterStorageSharedRoom.split(",");
-
-      filter.sortBy = splitFilter[0];
-      filter.sortOrder = splitFilter[1];
+      if (filterObject?.sortBy) filter.sortBy = filterObject.sortBy;
+      if (filterObject?.sortOrder) filter.sortOrder = filterObject.sortOrder;
     }
   } else if (filterObj) {
     // For the document section at all levels there is one sorting
@@ -57,11 +66,6 @@ export const createFolderNavigation = async (
   }
 
   filter.folder = id;
-
-  if (getPublicKey) {
-    const shareKey = await getPublicKey(item);
-    if (shareKey) filter.key = shareKey;
-  }
 
   const isShared = shared || navigationPath?.findIndex((r) => r.shared) > -1;
 
@@ -75,6 +79,7 @@ export const createFolderNavigation = async (
     isRoom,
     rootRoomTitle: roomType ? currentTitle : "",
     isPublicRoomType: itemRoomType === RoomsType.PublicRoom || false,
+    isAiRoomType: isAiRoom,
     isShared,
     isExternal,
     canCreate: security?.canCreate,

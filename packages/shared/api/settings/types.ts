@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -119,16 +119,18 @@ export type TSettings = {
   };
   formGallery: TFormGallery;
   wizardToken?: string;
-  defaultPage?: string;
+  defaultFolderType?: string;
   tagManagerId?: string;
+  limitedAccessSpace: boolean;
   enabledJoin?: boolean;
   recaptchaPublicKey?: string;
   recaptchaType?: RecaptchaType;
   maxImageUploadSize: number;
   isAmi: boolean;
   logoText: string;
-  externalResources: TExternalResources;
   displayAbout: boolean;
+  externalResources: TExternalResources;
+  licenseAgreementsUrl?: string;
 };
 
 export type TCustomSchema = {
@@ -152,7 +154,6 @@ export type TGetColorTheme = {
 };
 
 export type TApiEntries = {
-  apikeys: string;
   docspace: string;
   "javascript-sdk": string;
   "plugins-sdk": string;
@@ -169,6 +170,7 @@ export type TCommonEntries = {
   license: string;
   paymentemail: string;
   supportemail: string;
+  feedback: string;
 };
 
 export type THelpCenterEntries = {
@@ -182,25 +184,21 @@ export type THelpCenterEntries = {
   connectamazon: string;
   connectapple: string;
   connectbox: string;
-  connectclickatell: string;
-  connectdocusign: string;
   connectdropbox: string;
   connectfacebook: string;
   connectfirebase: string;
   connectgoogle: string;
   connectgooglecloudstorage: string;
   connectlinkedin: string;
-  connectmailru: string;
   connectmicrosoft: string;
   connectonedrive: string;
   connectrackspace: string;
-  connectselectel: string;
-  connectsmsc: string;
   connecttelegram: string;
-  connectvk: string;
-  connectwordpress: string;
-  connectyandex: string;
+  connecttwitter: string;
+  connectwechat: string;
+  connectzoom: string;
   creatingbackup: string;
+  configuringsettings: string;
   docspacemanagingrooms: string;
   enterpriseinstall: string;
   enterpriseinstallscript: string;
@@ -223,6 +221,20 @@ export type THelpCenterEntries = {
   welcomepage: string;
   limiteddevtools: string;
   encryption: string;
+  docspacefaq: string;
+  configureDeepLink: string;
+  invitationSettings: string;
+  singleSignOn: string;
+  pluginsSdk: string;
+  smtp: string;
+  dataImport: string;
+  apikeys: string;
+  aisettings: string;
+  aiprovidersettings: string;
+  mcpserverssettings: string;
+  websearchsettings: string;
+  knowledgesettings: string;
+  documentService: string;
 };
 
 export type TIntegrationsEntries = {
@@ -345,6 +357,7 @@ export type TCompanyInfo = {
   email: string;
   address: string;
   phone: string;
+  hideAbout: boolean;
   isLicensor: boolean;
   isDefault: boolean;
 };
@@ -498,8 +511,28 @@ export type TSendWelcomeEmailData = { isSendWelcomeEmail: boolean };
 
 export type TPortalCultures = string[];
 
+export type PropertiesType = { name: string; value: string; title: string };
+
+export type TStorageBackup = {
+  id: string;
+  current: boolean;
+  isSet: boolean;
+  title: string;
+  properties: PropertiesType[];
+};
+
 export type TEncryptionSettings = {
   password: string;
   status: EncryptionStatus;
   notifyUsers: boolean;
+};
+
+export type TTelegramCheck = {
+  status: string;
+  username?: string;
+};
+
+export type TNotificationChannel = {
+  name: string;
+  isEnabled: boolean;
 };

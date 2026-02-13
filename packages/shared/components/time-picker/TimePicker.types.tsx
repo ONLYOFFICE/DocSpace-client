@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,13 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Moment } from "moment";
+import type { DateTime } from "luxon";
 
 export type TimePickerProps = {
   /** Initial time value */
-  initialTime?: object | string | Date | Moment;
+  initialTime?: string | Date | DateTime;
   /** Callback function when time changes */
-  onChange?: (date: Moment) => void;
+  onChange?: (date: DateTime) => void;
   /** Additional CSS class */
   className?: string;
   /** CSS class for input */
@@ -44,5 +44,11 @@ export type TimePickerProps = {
   /** Whether to focus the input on render */
   focusOnRender?: boolean;
   /** Forwarded ref */
-  forwardedRef?: React.RefObject<HTMLDivElement>;
+  forwardedRef?: React.RefObject<HTMLDivElement | null>;
+  /** Test id */
+  testId?: string;
+  /** Whether to use 12-hour time format (with AM/PM) instead of 24-hour format */
+  isTwelveHourFormat?: boolean;
+  /** The meridiem indicator (AM/PM) for 12-hour format */
+  meridiem?: string;
 };

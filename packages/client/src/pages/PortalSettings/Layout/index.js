@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,9 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect } from "react";
+import { useParams, useLocation } from "react-router";
 import Article from "@docspace/shared/components/article";
 import { inject, observer } from "mobx-react";
 import Section from "@docspace/shared/components/section";
+import { DeviceType } from "@docspace/shared/enums";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import ArticleWrapper from "SRC_DIR/components/ArticleWrapper";
@@ -36,29 +38,37 @@ import SectionWrapper from "SRC_DIR/components/Section";
 
 import SectionHeaderContent from "./Section/Header";
 import { ArticleHeaderContent, ArticleBodyContent } from "./Article";
+import Warning from "./WarningComponent";
 
-const ArticleSettings = React.memo(({ showArticleLoader, needPageReload }) => {
-  const onLogoClickAction = () => {
-    if (needPageReload) {
-      window.location.replace("/");
-    }
-  };
+import HistoryHeader from "../categories/developer-tools/Webhooks/WebhookHistory/sub-components/HistoryHeader";
+import DetailsNavigationHeader from "../categories/developer-tools/Webhooks/WebhookEventDetails/sub-components/DetailsNavigationHeader";
+import OAuthSectionHeader from "../categories/developer-tools/OAuth/OAuthSectionHeader";
 
-  return (
-    <ArticleWrapper
-      showArticleLoader={showArticleLoader}
-      onLogoClickAction={onLogoClickAction}
-    >
-      <Article.Header>
-        <ArticleHeaderContent />
-      </Article.Header>
+const ArticleSettings = React.memo(
+  ({ showArticleLoader, needPageReload, isNotPaidPeriod }) => {
+    const onLogoClickAction = () => {
+      if (needPageReload) {
+        window.location.replace("/");
+      }
+    };
 
-      <Article.Body>
-        <ArticleBodyContent />
-      </Article.Body>
-    </ArticleWrapper>
-  );
-});
+    return (
+      <ArticleWrapper
+        showArticleLoader={showArticleLoader}
+        onLogoClickAction={onLogoClickAction}
+        showBackButton={!isNotPaidPeriod}
+      >
+        <Article.Header>
+          <ArticleHeaderContent />
+        </Article.Header>
+
+        <Article.Body>
+          <ArticleBodyContent />
+        </Article.Body>
+      </ArticleWrapper>
+    );
+  },
+);
 
 ArticleSettings.displayName = "ArticleSettings";
 
@@ -74,7 +84,27 @@ const Layout = ({
 
   isLoadedArticleBody,
   needPageReload,
+  isNotPaidPeriod,
+  currentDeviceType,
 }) => {
+  const { id, eventId } = useParams();
+  const location = useLocation();
+
+  const path = location.pathname.includes("/portal-settings")
+    ? "/portal-settings"
+    : "";
+
+  const webhookHistoryPath = `${path}/developer-tools/webhooks/${id}`;
+  const webhookDetailsPath = `${path}/developer-tools/webhooks/${id}/${eventId}`;
+  const oauthCreatePath = `${path}/developer-tools/oauth/create`;
+  const oauthEditPath = `${path}/developer-tools/oauth/${id}`;
+  const currentPath = window.location.pathname;
+
+  useEffect(() => {
+    const sel = window.getSelection?.();
+    if (sel?.rangeCount) sel.removeAllRanges();
+  }, [location.pathname]);
+
   useEffect(() => {
     currentProductId !== "settings" && setCurrentProductId("settings");
   }, [language, currentProductId, setCurrentProductId]);
@@ -88,12 +118,28 @@ const Layout = ({
       <ArticleSettings
         showArticleLoader={!isLoadedArticleBody}
         needPageReload={needPageReload}
+        isNotPaidPeriod={isNotPaidPeriod}
       />
       {!isGeneralPage ? (
         <SectionWrapper viewAs="settings" withBodyScroll settingsStudio>
           <Section.SectionHeader>
-            <SectionHeaderContent />
+            {currentPath === webhookHistoryPath ? (
+              <HistoryHeader />
+            ) : currentPath === webhookDetailsPath ? (
+              <DetailsNavigationHeader />
+            ) : currentPath === oauthCreatePath ||
+              currentPath === oauthEditPath ? (
+              <OAuthSectionHeader isEdit={currentPath === oauthEditPath} />
+            ) : (
+              <SectionHeaderContent />
+            )}
           </Section.SectionHeader>
+
+          {currentDeviceType !== DeviceType.desktop ? (
+            <Section.SectionWarning>
+              <Warning />
+            </Section.SectionWarning>
+          ) : null}
 
           <Section.SectionBody>{children}</Section.SectionBody>
         </SectionWrapper>
@@ -102,29 +148,39 @@ const Layout = ({
   );
 };
 
-export default inject(({ authStore, settingsStore, setup, pluginStore }) => {
-  const { language } = authStore;
-  const { addUsers } = setup.headerAction;
+export default inject(
+  ({
+    authStore,
+    settingsStore,
+    setup,
+    pluginStore,
+    currentTariffStatusStore,
+  }) => {
+    const { language } = authStore;
+    const { addUsers } = setup.headerAction;
 
-  const {
-    setCurrentProductId,
-    enablePlugins,
+    const {
+      setCurrentProductId,
+      enablePlugins,
+      currentDeviceType,
+      isLoadedArticleBody,
+    } = settingsStore;
+    const { isNotPaidPeriod } = currentTariffStatusStore;
+    const { isInit: isInitPlugins, initPlugins, needPageReload } = pluginStore;
 
-    isLoadedArticleBody,
-  } = settingsStore;
+    return {
+      language,
+      setCurrentProductId,
+      addUsers,
 
-  const { isInit: isInitPlugins, initPlugins, needPageReload } = pluginStore;
+      enablePlugins,
+      isInitPlugins,
+      initPlugins,
 
-  return {
-    language,
-    setCurrentProductId,
-    addUsers,
-
-    enablePlugins,
-    isInitPlugins,
-    initPlugins,
-
-    isLoadedArticleBody,
-    needPageReload,
-  };
-})(withLoading(observer(Layout)));
+      isLoadedArticleBody,
+      needPageReload,
+      isNotPaidPeriod,
+      currentDeviceType,
+    };
+  },
+)(withLoading(observer(Layout)));

@@ -3,7 +3,7 @@
   "content": "The default session lifetime is 20 minutes. Check this option to set it to 1 year. To set your own value, go to Settings.",
   "content_en_sha1_hash": "60cf33ff72de97da76b5228f12ac633e787a023b",
   "created_at": "2025-05-19T21:30:57.266Z",
-  "updated_at": "2025-05-20T09:47:42.751Z",
+  "updated_at": "2025-10-16T07:29:36.009Z",
   "comment": {
     "text": "The \"RememberHelper\" translation key provides a hint to users about the default session lifetime and allows them to customize it in settings. It is used in the Forgot Container component of the LoginForm.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/login/src/components/LoginForm/sub-components/ForgotContainer.tsx",
-      "line_number": 86,
-      "context": "<HelpButton\n id=\"login_remember-hint\"\n className=\"help-button\"\n offsetRight={0}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"RememberHelper\")}</Text>\n }\n tooltipMaxWidth={isMobileOnly ? \"240px\" : \"340px\"}\n />\n }\n />",
+      "line_number": 91,
+      "context": "<HelpButton\n id=\"login_remember-hint\"\n className=\"help-button\"\n offsetRight={0}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"RememberHelper\")}</Text>\n }\n tooltipMaxWidth={isMobileOnly ? \"240px\" : \"340px\"}\n dataTestId=\"remember_help_button\"\n />\n }",
       "module": "/packages/login"
     }
   ],
@@ -27,13 +27,35 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Check this option\" is translated as \"حدد هذا الخيار\". While technically correct, a more natural translation for user interface contexts would be something like \"اختر هذا الخيار\" (Akhtar hatha al-khiyar) or \"فعِّل هذا الخيار\" (Fa'il hatha al-khiyar).",
+          "suggestion": "اختر هذا الخيار"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Check this option\" is not accurately translated. \"qutunu klikləyin\" (click the box) implies a checkbox, which might not be the intended meaning. A more accurate translation would convey checking an option or selecting a setting.",
+          "suggestion": "Seçilmiş müddəti dəyişmək üçün, seçiminizi edin."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Uzatmaq üçün qutunu klikləyin\" implies extension, whereas the English indicates setting a lifetime.",
+          "suggestion": "Müddəti 1 ilə təyin etmək üçün seçiminizi edin."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure feels a bit disjointed. The phrases are not seamlessly connected.",
+          "suggestion": "Susmaya görə sessiya müddəti 20 dəqiqədir. 1 illik müddət təyin etmək üçün seçiminizi edin. Başqa müddət istəyirsinizsə, Ayarlar bölməsinə keçin."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -51,7 +73,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The German translation uses a colon (:) which is not consistent with English usage. English generally uses a period (.) in this context.",
+          "suggestion": "Change ':' to '.' after 'Minuten'."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -69,7 +97,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Check this option\" is translated as \"Valitse tämä vaihtoehto\". While technically correct, a more natural Finnish phrasing would be something like \"Merkitse tämä vaihtoehto\" or \"Valitse tämä asetus\". \"Valitse tämä vaihtoehto\" sounds slightly awkward.",
+          "suggestion": "Merkitse tämä vaihtoehto"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,7 +115,18 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word \"աշխատաշրջանի\" (ashkhataSHRJANI) translates to \"working period\" or \"work cycle\" which isn't the best fit for \"session lifetime\". A more accurate translation would be something along the lines of \"ժամաշրջի տևողությունը\" (jamashrji tevoqutyun) which means \"session duration\".",
+          "suggestion": "Replace \"աշխատաշրջանի\" with \"ժամաշրջի տևողությունը\"."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word \"տարի սահմանելու համար\" (tari sahmanelu hamar) is a literal translation of “to set to 1 year” but sounds awkward.  A more natural phrasing would be something closer to “1 տարվա ընձեռնելու համար” (1 t'avra enzerrelu hamar)",
+          "suggestion": "Replace \"տարի սահմանելու համար\" with \"1 տարվա ընձեռնելու համար\""
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,13 +138,30 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"このオプションをチェックすると、1年間に設定されます\" is awkward and doesn't accurately convey the meaning of \"Check this option to set it to 1 year.\" A more natural translation would imply setting the value to 1 year, not activating a setting.",
+          "suggestion": "このオプションをチェックすると、有効期限を1年に設定されます。"
+        },
+        {
+          "type": "formatting",
+          "description": "While not a severe error, the phrase \"設定」で設定します is a bit repetitive. While grammatically correct, it's stylistically not the most fluent.",
+          "suggestion": "「設定」で変更してください。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses a more formal tone which might not align with the English phrasing. While grammatically correct, it could be softened for better user experience.",
+          "suggestion": "기본 세션 기간은 20분입니다. 1년으로 설정하려면 이 옵션을 선택하세요. 원하는 기간으로 설정하려면 설정으로 이동하세요."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -129,7 +191,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Check this option\" is translated as \"Clique nesta opção\". While technically correct, it could be more natural in Portuguese. \"Selecione esta opção\" or \"Marque esta opção\" would be better alternatives.",
+          "suggestion": "Selecione esta opção"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -141,7 +209,18 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The phrase 'Bifați caseta de selectare' is a bit formal and could be simplified. While technically correct, it doesn't flow naturally.",
+          "suggestion": "Selectați caseta"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'prelungi' (prolong) implies extending an existing duration, while the English suggests setting a new one.  'Setare' or 'modificare' might be more accurate.",
+          "suggestion": "Selectați caseta pentru a seta durata până la un an."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +232,23 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"මෙම විකල්පය බලන්න\" is too literal. A more natural translation for \"Check this option\" would be \"මෙම විකල්පය තෝడන්න\" or \"මෙම විකල්පයselect කරන්න\". \" බලන්න\" implies to look at, not to select.",
+          "suggestion": "මෙම විකල්පය තෝడන්න"
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure \"එය වසරකට සැකසීමට මෙම විකල්පය බලන්න.\" is a bit awkward. It's better to rephrase.",
+          "suggestion": "වසරකට සැකසීමට ඔබට මෙම විකල්පය තෝඩන්න."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence \"සැකසුම් වෙත ගොස් ඔබ කැමති අගයක් සැකසීමට ද හැකිය.\" could be more smoothly connected to the previous sentence. A period separation makes it sound like a new instruction rather than a continuation.",
+          "suggestion": "සැකසුම් වෙත ගොස් ඔබට කැමති අගයක් සැකසීමට හැකිය."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,7 +272,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'godinu' (year) is correctly spelled, but contextually 'godina' should be 'godina'.",
+          "suggestion": "Označite ovu opciju da biste je postavili na 1 godina."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -189,7 +290,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Оберіть цей параметр, щоб задати для нього значення 1 рік\" is awkward. 'Для нього' refers to 'значення' (value), but the construction isn't natural in Ukrainian. It implies setting a value *for* the parameter itself, rather than setting the parameter to a value.",
+          "suggestion": "Оберіть цей параметр, щоб встановити значення 1 рік."
+        }
+      ],
       "approved_at": null
     },
     "vi": {

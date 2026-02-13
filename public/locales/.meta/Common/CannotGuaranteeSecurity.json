@@ -1,0 +1,28 @@
+{
+  "key_path": "CannotGuaranteeSecurity",
+  "content": "We cannot guarantee the security or privacy practices of third-party integrations.",
+  "content_en_sha1_hash": "d3c2f84b2b8fe198f9c7f4504bc2214216a1bbe6",
+  "created_at": "2025-10-27T16:14:24.293Z",
+  "updated_at": "2025-11-13T07:58:08.576Z",
+  "comment": {
+    "text": "This text appears in a confirmation dialog for tool calls. It informs the user that the platform cannot guarantee the security practices of the integrated third-party tool, providing a disclaimer related to data shared with that tool. It's crucial for translators to convey this limitation of responsibility.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T16:48:26.451Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/chat/components/chat-message-body/sub-components/message/ToolCallMessage/ToolCallConfirmDialog.tsx",
+      "line_number": 112,
+      "context": "status={ToolCallStatus.Confirmation}\n placement={ToolCallPlacement.ConfirmDialog}\n />\n <div>\n <Text>{t(\"Common:ReviewAction\")}</Text>\n <Text>{t(\"Common:CannotGuaranteeSecurity\")}</Text>\n </div>\n </div>\n </ModalDialog.Body>\n \n <ModalDialog.Footer>",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,8 +34,23 @@ import { TArrowButtonProps } from "../Navigation.types";
 
 const ArrowButton = ({
   isRootFolder,
+  showBackButton,
   onBackToParentFolder,
 }: TArrowButtonProps) => {
+  if (showBackButton) {
+    return (
+      <div className="navigation-arrow-container">
+        <IconButton
+          iconNode={<ArrowPathReactSvg />}
+          size={17}
+          isFill
+          onClick={onBackToParentFolder}
+          className="arrow-button"
+        />
+      </div>
+    );
+  }
+
   return !isRootFolder ? (
     <div className="navigation-arrow-container">
       <IconButton

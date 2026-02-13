@@ -3,7 +3,7 @@
   "content": "Connect type",
   "content_en_sha1_hash": "f2f5d6b96589cfbba8fc184ea280940374144cf9",
   "created_at": "2025-05-19T21:30:54.694Z",
-  "updated_at": "2025-05-21T08:33:24.533Z",
+  "updated_at": "2025-05-24T08:46:14.201Z",
   "comment": {
     "text": "This translation key is used to display a label for a \"Connect type\" dropdown in the Portal Settings page. It appears as a label next to a ComboBox option and should be translated to \"Connect type\".",
     "is_auto": true,
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Тип свързване\" is a literal translation of \"Connect type\" but doesn't accurately convey the intended meaning in the context of a Javascript SDK. \"Connect type\" likely refers to the type of connection method (e.g., OAuth, API Key, etc.). \"Тип свързване\" implies a connection *of* something, not *how* something connects.",
-          "suggestion": "Consider alternatives like \"Метод на свързване\" (Connection Method), \"Вид на връзката\" (Type of Connection), or a more context-specific term depending on the available connection options."
+          "description": "The translation \"Тип свързване\" while understandable, doesn't perfectly capture the nuance of \"Connect type\". \"Connect type\" implies the *kind* of connection, whereas \"Тип свързване\" is more literally \"Type of connecting\". A better translation would be something closer to \"Тип на връзка\".",
+          "suggestion": "Тип на връзка"
         }
       ],
       "approved_at": null
@@ -72,7 +72,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Tipo de conexion\" is understandable, a more accurate and idiomatic translation of \"Connect type\" would be \"Tipo de conexión\" (with an accent on the 'e'). 'Conexion' is masculine, and adjectives and articles need to agree.",
+          "description": "While \"Tipo de conexion\" is understandable, \"Tipo de conexión\" is the more accurate and standard translation of \"Connect type\" in Spanish. The word \"conexión\" requires the accented character.",
           "suggestion": "Tipo de conexión"
         }
       ],
@@ -93,13 +93,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Միացման տեսակ\" is a literal translation of 'Connect type,' it might not be the most natural or idiomatic way to express the concept in Armenian. Depending on the context of the Javascript SDK, a more appropriate translation might be something like \"Մալուտման տեսակ\" (Method type) or a more descriptive phrase depending on what 'Connect type' refers to.",
-          "suggestion": "Consider whether 'Մալուտման տեսակ' or a more context-specific phrase is more accurate and natural in Armenian."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -117,13 +111,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '연결 유형' while technically correct, doesn't fully capture the nuance of 'Connect type'. 'Connect type' implies a selection or specification of connection methods, not just a general 'type of connection'.",
-          "suggestion": "Consider a translation like '연결 방식' (connection method) or '연결 종류' (connection kind) for a closer match, depending on the context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -132,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"ຊະນິດເຊື່ອມຕໍ່\" is technically correct, it's a very literal translation of \"Connect type\". A more natural and user-friendly translation in Lao might be something like \"ປະເພດການເຊື່ອມຕໍ່\" (pà-phet gaan-sêuam-dtòr) or \"ລັກສະນະການເຊື່ອມຕໍ່\" (laks-naa gaan-sêuam-dtòr). The best option depends on the broader context of its usage.",
-          "suggestion": "Consider \"ປະເພດການເຊື່ອມຕໍ່\" or \"ລັກສະນະການເຊື່ອມຕໍ່\" for a more natural translation."
+          "description": "The translation \"ຊະນິດເຊື່ອມຕໍ່\" while understandable, isn't the most natural or accurate translation of 'Connect type'. A more appropriate translation might be 'ປະເພດເຊື່ອມຕໍ່' which more closely reflects the meaning of 'type' as a categorization.",
+          "suggestion": "ປະເພດເຊື່ອມຕໍ່"
         }
       ],
       "approved_at": null
@@ -141,7 +129,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Savienojuma veids\" is a literal translation of 'Connect type' but doesn't convey the intended meaning in a natural or idiomatic way. 'Connect type' likely refers to the method or protocol used for connection (e.g., API, OAuth).",
+          "suggestion": "Consider alternatives like \"Savienojuma metode\" (Connection method) or \"Savienojuma protokols\" (Connection protocol) depending on the context."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -150,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Type verbinding\" doesn't accurately convey the meaning of \"Connect type\". \"Connect type\" refers to the method or mechanism used to connect something, not the act of connecting itself. A better translation would be something like \"Verbindingstype\" or \"Type van verbinding\".",
-          "suggestion": "Verbindingstype"
+          "description": "The translation \"Type verbinding\" doesn't accurately convey the meaning of \"Connect type\". \"Connect type\" refers to the kind of connection being made, whereas \"Type verbinding\" literally translates to \"Type connection\", which changes the nuance.",
+          "suggestion": "A more accurate translation would depend on the context. Some possibilities include: \"Verbindingstype\", \"Type van verbinding\", or \"Soort verbinding\"."
         }
       ],
       "approved_at": null
@@ -168,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Ligue o tipo\" is not an accurate translation of \"Connect type\". \"Ligue\" translates to \"turn on\" or \"connect\" in the sense of establishing a connection, but \"tipo\" doesn't convey the meaning of 'type' in this context. It's likely referring to the type of connection (e.g., OAuth, API Key).",
-          "suggestion": "A better translation would be something like \"Tipo de conexão\" (Connection type) or \"Tipo de ligação\" (Connection type)."
+          "description": "The translation 'Ligue o tipo' does not accurately convey the meaning of 'Connect type'. 'Ligue' translates to 'turn on' or 'connect' in a general sense, but 'type' in this context likely refers to a connection type (e.g., OAuth, API key).",
+          "suggestion": "Consider 'Tipo de conexão' or 'Tipo de autenticação' depending on the specific context of 'Connect type'."
         }
       ],
       "approved_at": null
@@ -186,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Tip conectare\" is understandable, \"Tip conexiune\" is a more accurate and natural translation of \"Connect type\" in Romanian. \"Conectare\" implies an action, while \"conexiune\" refers to the established link or connection itself.",
-          "suggestion": "Tip conexiune"
+          "description": "While \"Tip conectare\" is understandable, \"Tip de conectare\" would be a more natural and grammatically correct translation for \"Connect type\" in Romanian. \"Tip\" often needs the \"de\" to indicate 'type of'.",
+          "suggestion": "Tip de conectare"
         }
       ],
       "approved_at": null
@@ -204,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ප්‍රකරණය සම්බන්ධ කරන්න\" doesn't accurately convey the meaning of \"Connect type\". \"ප්‍රකරණය\" primarily means 'type' or 'matter', but \"සම්බන්ධ කරන්න\" means 'to connect'. This implies an action, whereas the English phrase describes a characteristic or category. A more accurate translation would describe the type of connection.",
-          "suggestion": "Consider alternatives like \"සම්බන්ධතා වර්ගය\" (Sambandathā Vargaaya) - Connection Type, or \"සංදේශන වර්ගය\" (Sansadegena Vargaaya) - Communication Type, depending on the specific context of 'Connect type'."
+          "description": "The Sinhala translation \"ප්‍රකරණය සම්බන්ධ කරන්න\" translates to \"Connect matter/subject\" which doesn't accurately convey the meaning of \"Connect type\". It sounds awkward and doesn't align with the English term’s intended meaning.",
+          "suggestion": "A more accurate translation might be \"සම්බන්ධ ක්‍රමය\" (Sambahanda Kramaya) which translates to \"Connection Method/Type\" or \"සම්බන්ධතා වර්ගය\" (Sambahandathā Varga-yā) which means \"Connection Type\"."
         }
       ],
       "approved_at": null
@@ -228,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Тип повезивања\" translates to \"Connection type\" rather than \"Connect type\". While close, it shifts the meaning slightly.",
-          "suggestion": "Consider \"Тип повезивања\" or \"Тип спајања\" for a more accurate translation. Further context would help determine the best option."
+          "description": "The translation \"Тип повезивања\" while literally meaning \"Type of connection\" doesn't fully capture the intended meaning of \"Connect type\" in the context of a Javascript SDK source type. It implies a method or process of connecting, rather than the type of source being connected.",
+          "suggestion": "A better translation might be \"Тип извора\" (Type of Source) or \"Изворна врста\" (Source Type)."
         }
       ],
       "approved_at": null
@@ -240,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Tip povezivanja' while technically correct, isn't the most natural or idiomatic translation for 'Connect type' in this context. 'Tip povezivanja' can be understood, but a more common and user-friendly translation might be 'Način povezivanja' or 'Vrsta povezivanja'.",
-          "suggestion": "Način povezivanja"
+          "description": "The translation \"Tip povezivanja\" while technically correct, isn't the most natural or idiomatic translation of 'Connect type'. It's a bit literal. A more natural translation might be 'Vrsta povezivanja'.",
+          "suggestion": "Vrsta povezivanja"
         }
       ],
       "approved_at": null

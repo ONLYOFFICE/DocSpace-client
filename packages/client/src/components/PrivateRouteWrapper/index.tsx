@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -43,7 +43,6 @@ const PrivateRouteWrapper = ({
   isPortalDeactivate,
   tenantStatus,
   user,
-  isLoadedUser,
   restricted,
   withCollaborator,
   withManager,
@@ -51,17 +50,12 @@ const PrivateRouteWrapper = ({
   limitedAccessSpace,
   baseDomain,
   displayAbout,
-  validatePublicRoomKey,
-  publicRoomKey,
-  roomId,
-  isLoadedPublicRoom,
-  isLoadingPublicRoom,
   limitedAccessDevToolsForUsers,
+  standalone,
 }: Partial<PrivateRouteProps>) => {
   return (
     <PrivateRoute
       user={user!}
-      isLoadedUser={isLoadedUser}
       isAdmin={isAdmin!}
       isLoaded={isLoaded!}
       isLogout={isLogout!}
@@ -80,12 +74,8 @@ const PrivateRouteWrapper = ({
       limitedAccessSpace={limitedAccessSpace ?? null}
       baseDomain={baseDomain!}
       displayAbout={displayAbout!}
-      validatePublicRoomKey={validatePublicRoomKey}
-      publicRoomKey={publicRoomKey}
-      roomId={roomId}
-      isLoadedPublicRoom={isLoadedPublicRoom}
-      isLoadingPublicRoom={isLoadingPublicRoom}
       limitedAccessDevToolsForUsers={limitedAccessDevToolsForUsers!}
+      standalone={standalone!}
     >
       {children}
     </PrivateRoute>
@@ -93,13 +83,7 @@ const PrivateRouteWrapper = ({
 };
 
 export default inject<TStore>(
-  ({
-    authStore,
-    settingsStore,
-    userStore,
-    currentTariffStatusStore,
-    publicRoomStore,
-  }) => {
+  ({ authStore, settingsStore, userStore, currentTariffStatusStore }) => {
     const { isAuthenticated, isLoaded, isAdmin, isLogout, capabilities } =
       authStore;
 
@@ -108,7 +92,7 @@ export default inject<TStore>(
 
     const identityServerEnabled = capabilities?.identityServerEnabled;
 
-    const { user, isLoaded: isLoadedUser } = userStore;
+    const { user } = userStore;
 
     const {
       wizardCompleted,
@@ -119,22 +103,14 @@ export default inject<TStore>(
       baseDomain,
       displayAbout,
       limitedAccessDevToolsForUsers,
+      standalone,
     } = settingsStore;
-
-    const {
-      validatePublicRoomKey,
-      publicRoomKey,
-      roomId,
-      isLoaded: isLoadedPublicRoom,
-      isLoading: isLoadingPublicRoom,
-    } = publicRoomStore;
 
     return {
       isPortalDeactivate,
       isCommunity,
       isNotPaidPeriod,
       user,
-      isLoadedUser,
       isAuthenticated,
       isAdmin,
       isLoaded,
@@ -147,12 +123,9 @@ export default inject<TStore>(
       limitedAccessSpace,
       baseDomain,
       displayAbout,
-      validatePublicRoomKey,
-      publicRoomKey,
-      roomId,
-      isLoadedPublicRoom,
-      isLoadingPublicRoom,
+
       limitedAccessDevToolsForUsers,
+      standalone,
     };
   },
 )(observer(PrivateRouteWrapper));

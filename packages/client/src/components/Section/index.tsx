@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,12 +31,19 @@ import Section, { SectionProps } from "@docspace/shared/components/section";
 
 const SectionWrapper = ({
   children,
+  viewAs,
 
   ...rest
 }: SectionProps) => {
   const location = useLocation();
+  const isInfoPanelAvailable = viewAs !== "settings";
+
   return (
-    <Section {...rest} pathname={location.pathname}>
+    <Section
+      {...rest}
+      pathname={location.pathname}
+      isInfoPanelAvailable={isInfoPanelAvailable}
+    >
       {children}
     </Section>
   );
@@ -48,19 +55,17 @@ export default inject(
     dialogsStore,
     infoPanelStore,
     indexingStore,
-    flowStore,
     filesSettingsStore,
     selectedFolderStore,
     userStore,
   }: {
-    settingsStore: any;
-    dialogsStore: any;
-    infoPanelStore: any;
-    indexingStore: any;
-    flowStore: any;
-    filesSettingsStore: any;
-    selectedFolderStore: any;
-    userStore: any;
+    settingsStore: TStore["settingsStore"];
+    dialogsStore: TStore["dialogsStore"];
+    infoPanelStore: TStore["infoPanelStore"];
+    indexingStore: TStore["indexingStore"];
+    filesSettingsStore: TStore["filesSettingsStore"];
+    selectedFolderStore: TStore["selectedFolderStore"];
+    userStore: TStore["userStore"];
   }) => {
     const {
       isDesktopClient: isDesktop,
@@ -85,7 +90,6 @@ export default inject(
       createRoomDialogVisible || invitePanelOptions.visible;
 
     const { isScrollLocked: isInfoPanelScrollLocked } = infoPanelStore;
-    const { aiChatIsVisible, setAiChatIsVisible, vectorizedFiles } = flowStore;
 
     const { getIcon, displayFileExtension } = filesSettingsStore;
 
@@ -107,13 +111,11 @@ export default inject(
       snackbarExist,
       showText,
       isInfoPanelScrollLocked,
-      aiChatIsVisible,
-      setAiChatIsVisible,
+
       getIcon,
       displayFileExtension,
       aiSelectedFolder: id,
-      aiUserId: flowStore.userId,
-      vectorizedFiles,
+
       user,
     };
   },

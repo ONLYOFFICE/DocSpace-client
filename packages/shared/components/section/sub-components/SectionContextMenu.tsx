@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,8 +34,7 @@ const areEqual = (
   prevProps: SectionContextMenuProps,
   nextProps: SectionContextMenuProps,
 ) => {
-  if (!isEqual(prevProps, nextProps)) return true;
-  return false;
+  return isEqual(prevProps, nextProps);
 };
 
 const SectionContextMenu = React.memo(

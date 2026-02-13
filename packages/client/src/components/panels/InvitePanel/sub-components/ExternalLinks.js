@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,43 +24,44 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// import MediaDownloadReactSvgUrl from "PUBLIC_DIR/images/media.download.react.svg?url";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
-import React, { useState, useRef } from "react";
+import ButtonAlertIcon from "PUBLIC_DIR/images/button.alert.react.svg";
+import ClockIconUrl from "PUBLIC_DIR/images/clock.react.svg?url";
+import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/icons/12/person-plus.react.svg?url";
+import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-common.svg?url";
+import { useRef } from "react";
 import { inject, observer } from "mobx-react";
+import classNames from "classnames";
 
-import { copyShareLink } from "@docspace/shared/utils/copy";
+import { getCookie, getCorrectDate } from "@docspace/shared/utils";
 import { toastr } from "@docspace/shared/components/toast";
-// import { objectToGetParams } from "@docspace/shared/utils/common";
 
 import { InputBlock } from "@docspace/shared/components/input-block";
-// import { IconButton } from "@docspace/shared/components/icon-button";
-// import { DropDown } from "@docspace/shared/components/drop-down";
-// import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { Text } from "@docspace/shared/components/text";
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { Heading } from "@docspace/shared/components/heading";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
-// import { globalColors } from "@docspace/shared/themes";
-import { filterPaidRoleOptions } from "SRC_DIR/helpers";
+import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
+import { filterNotReadOnlyOptions } from "@docspace/shared/utils/filterNotReadOnlyOptions";
 import api from "@docspace/shared/api";
+import { RoomsType } from "@docspace/shared/enums";
 import AccessSelector from "../../../AccessSelector";
 import PaidQuotaLimitError from "../../../PaidQuotaLimitError";
-import {
-  StyledSubHeader,
-  StyledInviteInput,
-  StyledInviteInputContainer,
-  StyledToggleButton,
-  StyledDescription,
-  StyledExternalLink,
-} from "../StyledInvitePanel";
+
+import styles from "../InvitePanel.module.scss";
 
 import { getFreeUsersRoleArray, getFreeUsersTypeArray } from "../utils";
+import { deleteInviteLink } from "@docspace/shared/api/portal";
+import { now, parseToDateTime, isAfter } from "@docspace/shared/utils/date";
+import { LANGUAGE } from "@docspace/shared/constants";
 
 const ExternalLinks = ({
   t,
   roomId,
   roomType,
-  defaultAccess,
   shareLinks,
   setShareLinks,
   isOwner,
@@ -70,28 +71,29 @@ const ExternalLinks = ({
   setActiveLink,
   activeLink,
   isMobileView,
-  getPortalInviteLink,
   isUserTariffLimit,
   standalone,
   allowInvitingGuests,
+  setLinkSettingsPanelVisible,
+  onSelectAccess,
+  copyLink,
+  editLink,
+  isLinksToggling,
+  setIsLinksToggling,
+  culture,
+  setInviteContactsLink,
+  hideSelector,
+  setInvitePanelOptions,
 }) => {
-  const [isLinksToggling, setIsLinksToggling] = useState(false);
+  const showUsersJoinedBlock = !!activeLink?.maxUseCount;
+  const showLifetimeBlock = !!activeLink?.expirationDate;
+  const showUsersLimitWarning =
+    activeLink?.currentUseCount >= activeLink?.maxUseCount;
+  const linkIsExpired = isAfter(now(), parseToDateTime(activeLink?.expirationDate));
 
-  // const [actionLinksVisible, setActionLinksVisible] = useState(false);
+  const locale = getCookie(LANGUAGE) ?? culture ?? "en";
 
   const inputsRef = useRef();
-
-  const copyLink = (link) => {
-    if (link) {
-      toastr.success(
-        `${t("Common:LinkCopySuccess")}. ${t("Translations:LinkValidTime", {
-          days_count: 7,
-        })}`,
-      );
-
-      copyShareLink(link);
-    }
-  };
 
   const disableLink = async () => {
     shareLinks?.length &&
@@ -101,52 +103,9 @@ const ExternalLinks = ({
         0,
         shareLinks[0].id,
       ));
+    setActiveLink({});
+    onChangeExternalLinksVisible(false);
     return setShareLinks([]);
-  };
-
-  const editLink = async () => {
-    const type = getDefaultAccessUser(roomType);
-
-    const link = await api.rooms.setInvitationLinks(roomId, "Invite", type);
-
-    const { shareLink, id, title, expirationDate } = link.sharedTo;
-
-    const newShareLink = {
-      id,
-      title,
-      shareLink,
-      expirationDate,
-      access: link.access || defaultAccess,
-    };
-
-    copyLink(shareLink);
-    setShareLinks([newShareLink]);
-    return setActiveLink(newShareLink);
-  };
-
-  const onSelectAccess = async (access) => {
-    let link = null;
-    const selectedAccess = access.access;
-
-    if (roomId === -1) {
-      link = shareLinks.find((l) => l.access === selectedAccess);
-
-      link.shareLink = await getPortalInviteLink(selectedAccess);
-
-      setActiveLink(link);
-    } else {
-      api.rooms.setInvitationLinks(
-        roomId,
-        "Invite",
-        +selectedAccess,
-        shareLinks[0].id,
-      );
-
-      link = shareLinks[0];
-      setActiveLink(shareLinks[0]);
-    }
-
-    copyLink(link.shareLink);
   };
 
   const toggleLinks = async (e) => {
@@ -157,17 +116,21 @@ const ExternalLinks = ({
     try {
       if (roomId === -1) {
         if (e?.target?.checked) {
-          const link = shareLinks.find((l) => l.access === defaultAccess);
-
-          link.shareLink = await getPortalInviteLink(defaultAccess);
-
-          setActiveLink(link);
-          copyLink(link.shareLink);
+          await setInviteContactsLink();
+        } else {
+          setInvitePanelOptions({
+            visible: true,
+            hideSelector,
+            defaultAccess: activeLink.access,
+            roomId: -1,
+          });
+          await deleteInviteLink(activeLink.id);
+          setActiveLink({});
+          onChangeExternalLinksVisible(false);
         }
       } else {
         !externalLinksVisible ? await editLink() : await disableLink();
       }
-      onChangeExternalLinksVisible(!externalLinksVisible);
     } catch (error) {
       toastr.error(error.message);
     } finally {
@@ -175,48 +138,7 @@ const ExternalLinks = ({
     }
   };
 
-  const onCopyLink = () => copyLink(activeLink.shareLink);
-
-  // const toggleActionLinks = () => {
-  //   setActionLinksVisible(!actionLinksVisible);
-  // };
-
-  // const closeActionLinks = () => {
-  //   setActionLinksVisible(false);
-  // };
-
-  // const shareEmail = useCallback(
-  //   (link) => {
-  //     const { title, shareLink } = link;
-  //     const subject = t("SharingPanel:ShareEmailSubject", { title });
-  //     const body = t("SharingPanel:ShareEmailBody", { title, shareLink });
-
-  //     const mailtoLink = `mailto:${objectToGetParams({
-  //       subject,
-  //       body,
-  //     })}`;
-
-  //     window.open(mailtoLink, "_self");
-
-  //     closeActionLinks();
-  //   },
-  //   [closeActionLinks, t],
-  // );
-
-  // const shareTwitter = useCallback(
-  //   (link) => {
-  //     const { shareLink } = link;
-
-  //     const twitterLink = `https://twitter.com/intent/tweet${objectToGetParams({
-  //       text: shareLink,
-  //     })}`;
-
-  //     window.open(twitterLink, "", "width=1000,height=670");
-
-  //     closeActionLinks();
-  //   },
-  //   [closeActionLinks],
-  // );
+  const onCopyLink = () => copyLink(activeLink);
 
   const availableAccess =
     roomId === -1 ? getFreeUsersTypeArray() : getFreeUsersRoleArray();
@@ -231,117 +153,214 @@ const ExternalLinks = ({
     standalone,
   );
 
+  const getAgentAccesses = () => {
+    return filterNotReadOnlyOptions(accesses).filter(
+      (o) => !o.isSeparator && !o.disabled,
+    );
+  };
+
   const filteredAccesses =
-    roomType === -1 ? accesses : filterPaidRoleOptions(accesses);
+    roomType === -1
+      ? accesses
+      : roomType === RoomsType.AIRoom
+        ? getAgentAccesses()
+        : filterPaidRoleOptions(accesses);
+
+  const description =
+    roomId === -1
+      ? t("InviteViaLinkDescriptionAccounts", {
+          productName: t("Common:ProductName"),
+        })
+      : roomType === RoomsType.AIRoom
+        ? allowInvitingGuests
+          ? t("InviteViaLinkDescriptionAgentGuest")
+          : t("InviteViaLinkDescriptionAgentMembers", {
+              productName: t("Common:ProductName"),
+            })
+        : allowInvitingGuests
+          ? t("InviteViaLinkDescriptionRoomGuest")
+          : t("InviteViaLinkDescriptionRoomMembers", {
+              productName: t("Common:ProductName"),
+            });
 
   return (
-    <StyledExternalLink noPadding ref={inputsRef}>
-      <StyledSubHeader $inline>
+    <div className={styles.externalLink} ref={inputsRef}>
+      <Heading
+        className={classNames(styles.subHeader, {
+          [styles.inline]: true,
+        })}
+      >
         {t("InviteViaLink")}
-        {/* {false ? (
-          <div style={{ position: "relative" }}>
-            <IconButton
-              size={16}
-              iconName={MediaDownloadReactSvgUrl}
-              hoverColor={globalColors.black}
-              iconColor={globalColors.gray}
-              onClick={toggleActionLinks}
-            />
-            <DropDown
-              open={actionLinksVisible}
-              clickOutsideAction={closeActionLinks}
-              withBackdrop={false}
-              isDefaultMode={false}
-              fixedDirection
-            >
-              <DropDownItem
-                label={`${t("Common:ShareVia")} e-mail`}
-                onClick={() => shareEmail(activeLink[0])}
-              />
-              <DropDownItem
-                label={`${t("Common:ShareVia")} Twitter`}
-                onClick={() => shareTwitter(activeLink[0])}
-              />
-            </DropDown>
-          </div>
-        ) : null} */}
-        <StyledToggleButton
-          className="invite-via-link"
+
+        <IconButton
+          iconName={SettingsReactSvgUrl}
+          size={16}
+          dataTestId="link-settings_icon"
+          onClick={() => setLinkSettingsPanelVisible(true)}
+        />
+
+        <ToggleButton
+          className={classNames("invite-via-link", styles.toggleButton)}
           isChecked={externalLinksVisible}
           onChange={toggleLinks}
           isDisabled={isLinksToggling}
+          dataTestId="invite_panel_external_links_toggle"
         />
-      </StyledSubHeader>
-      <StyledDescription noSelect>
-        {roomId === -1
-          ? t("InviteViaLinkDescriptionAccounts", {
-              productName: t("Common:ProductName"),
-            })
-          : !allowInvitingGuests
-            ? t("InviteViaLinkDescriptionRoomMembers", {
-                productName: t("Common:ProductName"),
-              })
-            : t("InviteViaLinkDescriptionRoomGuest")}
-      </StyledDescription>
+      </Heading>
+      <Text className={styles.description}>{description}</Text>
       {externalLinksVisible ? (
-        <StyledInviteInputContainer key={activeLink.id}>
-          <StyledInviteInput isShowCross>
-            <InputBlock
-              className="input-link"
-              iconSize={16}
-              iconButtonClassName="copy-link-icon"
-              scale
-              value={activeLink.shareLink}
-              isReadOnly
-              iconName={CopyReactSvgUrl}
-              onIconClick={onCopyLink}
-            />
-          </StyledInviteInput>
-          <AccessSelector
-            className="invite-via-link-access"
-            t={t}
-            roomType={roomType}
-            defaultAccess={activeLink.access}
-            onSelectAccess={onSelectAccess}
-            containerRef={inputsRef}
-            isOwner={isOwner}
-            isMobileView={isMobileView}
-            isSelectionDisabled={isUserTariffLimit}
-            selectionErrorText={<PaidQuotaLimitError />}
-            filteredAccesses={filteredAccesses}
-            availableAccess={availableAccess}
-          />
-        </StyledInviteInputContainer>
+        <>
+          <div className={styles.inviteInputContainer} key={activeLink.id}>
+            <div
+              className={classNames(styles.inviteInput, {
+                [styles.isShowCross]: true,
+              })}
+            >
+              <InputBlock
+                className={classNames(styles.copyLinkIcon, styles.inputLink)}
+                iconSize={16}
+                iconButtonClassName="copy-link-icon"
+                scale
+                value={activeLink.shareLink}
+                isReadOnly
+                iconName={CopyReactSvgUrl}
+                onIconClick={onCopyLink}
+                dataTestId="invite_panel_external_link_input"
+              />
+            </div>
+            {roomId !== -1 ? (
+              <AccessSelector
+                className="invite-via-link-access"
+                t={t}
+                roomType={roomType}
+                defaultAccess={activeLink.access}
+                onSelectAccess={onSelectAccess}
+                containerRef={inputsRef}
+                isOwner={isOwner}
+                isAdmin={isAdmin}
+                isMobileView={isMobileView}
+                isSelectionDisabled={isUserTariffLimit}
+                selectionErrorText={<PaidQuotaLimitError />}
+                filteredAccesses={filteredAccesses}
+                availableAccess={availableAccess}
+                dataTestId="invite_panel_external_link_access"
+              />
+            ) : null}
+          </div>
+
+          {showLifetimeBlock || showUsersJoinedBlock ? (
+            <div className={styles.inviteViaLinkSettingsContainer}>
+              {showLifetimeBlock ? (
+                <div className={styles.inviteViaLinkSettings}>
+                  <IconButton
+                    className={styles.inviteViaLinkSettingsIcon}
+                    iconName={ClockIconUrl}
+                    size={12}
+                    isDisabled
+                  />
+                  <Text
+                    className={styles.inviteViaLinkSettingsText}
+                    fontSize="12px"
+                    fontWeight={400}
+                  >
+                    {t("Files:ValidUntil")}
+                  </Text>
+                  <Text
+                    fontSize="12px"
+                    fontWeight={600}
+                    className={classNames(styles.inviteViaLinkText, {
+                      [styles.isError]: linkIsExpired,
+                    })}
+                  >
+                    {getCorrectDate(locale, activeLink.expirationDate)}
+                  </Text>
+                  {linkIsExpired ? (
+                    <HelpButton
+                      place="right"
+                      iconNode={<ButtonAlertIcon />}
+                      tooltipMaxWidth="344px"
+                      tooltipContent={
+                        <>
+                          <Text>{t("Common:LinkSettingsExpired")}</Text>
+                          <Text>
+                            {t("Files:LinkSettingsExpiredToastDescription")}
+                          </Text>
+                        </>
+                      }
+                      className={styles.inviteViaLinkSettingsWarning}
+                    />
+                  ) : null}
+                </div>
+              ) : null}
+
+              {showUsersJoinedBlock ? (
+                <div className={styles.inviteViaLinkSettings}>
+                  <IconButton
+                    iconName={PersonPlusReactSvgUrl}
+                    size={12}
+                    isDisabled
+                  />
+                  <Text
+                    className={styles.inviteViaLinkSettingsText}
+                    fontSize="12px"
+                    fontWeight={400}
+                  >
+                    {t("Files:UsersJoined")}
+                  </Text>
+                  <Text
+                    fontSize="12px"
+                    fontWeight={600}
+                    className={classNames(styles.inviteViaLinkText, {
+                      [styles.isError]: showUsersLimitWarning,
+                    })}
+                  >
+                    {activeLink.currentUseCount}/{activeLink.maxUseCount}
+                  </Text>
+                  {showUsersLimitWarning ? (
+                    <HelpButton
+                      place="right"
+                      iconNode={<ButtonAlertIcon />}
+                      tooltipContent={
+                        <>
+                          <Text>{t("Files:LinkSettingsUsersLimitToast")}</Text>
+                          <Text>
+                            {t("Files:LinkSettingsUsersLimitToastDescription")}
+                          </Text>
+                        </>
+                      }
+                      className={styles.inviteViaLinkSettingsWarning}
+                      tooltipMaxWidth="344px"
+                    />
+                  ) : null}
+                </div>
+              ) : null}
+            </div>
+          ) : null}
+        </>
       ) : null}
-    </StyledExternalLink>
+    </div>
   );
 };
 
 export default inject(
-  ({
-    userStore,
-    dialogsStore,
-    peopleStore,
-    currentQuotaStore,
-    settingsStore,
-  }) => {
+  ({ userStore, dialogsStore, currentQuotaStore, settingsStore }) => {
     const { isOwner, isAdmin } = userStore.user;
-    const { invitePanelOptions } = dialogsStore;
+    const { invitePanelOptions, setInvitePanelOptions } = dialogsStore;
     const { roomId, hideSelector, defaultAccess } = invitePanelOptions;
-    const { getPortalInviteLink } = peopleStore.inviteLinksStore;
     const { isUserTariffLimit } = currentQuotaStore;
-    const { standalone, allowInvitingGuests } = settingsStore;
+    const { standalone, allowInvitingGuests, culture } = settingsStore;
 
     return {
+      culture,
       roomId,
       hideSelector,
       defaultAccess,
       isOwner,
       isAdmin,
-      getPortalInviteLink,
       isUserTariffLimit,
       standalone,
       allowInvitingGuests,
+      setInvitePanelOptions,
     };
   },
 )(observer(ExternalLinks));

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,28 +24,64 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import PlusReactSvgUrl from "PUBLIC_DIR/images/icons/16/plus.svg";
+
+import { RectangleSkeleton } from "../../../../../skeletons";
 
 import { Text } from "../../../../text";
 
 import { useMessageStore } from "../../../store/messageStore";
+import { useChatStore } from "../../../store/chatStore";
 
 import styles from "../ChatHeader.module.scss";
 
-const CreateChat = () => {
-  const { startNewSessions } = useMessageStore();
+const CreateChat = ({
+  isLoadingProp,
+  isDisabled,
+}: {
+  isLoadingProp?: boolean;
+  isDisabled?: boolean;
+}) => {
+  const { messages, isRequestRunning, startNewChat } = useMessageStore();
+  const { setCurrentChat } = useChatStore();
 
   const { t } = useTranslation(["Common"]);
 
+  if (isLoadingProp)
+    return (
+      <RectangleSkeleton
+        width="96px"
+        height="32px"
+        borderRadius="3px"
+        style={{ minWidth: "32px" }}
+      />
+    );
+
+  if (messages.length === 0) return null;
+
+  const onClickAction = () => {
+    if (isDisabled || isRequestRunning) return;
+
+    setCurrentChat(null);
+    startNewChat();
+  };
+
   return (
-    <div className={styles.createChat} onClick={startNewSessions}>
+    <div
+      className={classNames(styles.createChat, {
+        [styles.disabled]: isDisabled,
+      })}
+      onClick={onClickAction}
+      data-testid="create-chat"
+      aria-disabled={isDisabled}
+    >
       <PlusReactSvgUrl />
-      <Text fontSize="14px" lineHeight="16px" fontWeight={600}>
-        {t("Common:AINewChat")}
+      <Text fontSize="13px" lineHeight="15px" fontWeight={600}>
+        {t("AINewChat")}
       </Text>
     </div>
   );

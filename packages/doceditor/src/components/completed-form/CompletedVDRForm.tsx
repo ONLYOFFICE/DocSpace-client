@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -23,18 +23,20 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
+import classNames from "classnames";
 
 import PDFIcon from "PUBLIC_DIR/images/icons/32/pdf.svg";
 import EyeIcon from "PUBLIC_DIR/images/eye.react.svg";
 import FormFillIcon from "PUBLIC_DIR/images/form.fill.rect.svg";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 
+import { useTheme } from "@docspace/shared/hooks/useTheme";
 import { getBgPattern, getLogoUrl } from "@docspace/shared/utils/common";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import {
@@ -50,15 +52,6 @@ import {
 import { Heading, HeadingLevel } from "@docspace/shared/components/heading";
 import { Text } from "@docspace/shared/components/text";
 
-import {
-  Box,
-  CompletedFormLayout,
-  ContainerCompletedForm,
-  Footer,
-  Header,
-  TextWrapper,
-  VDRMainContent,
-} from "./CompletedForm.styled";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { InputBlock } from "@docspace/shared/components/input-block";
 import { InputSize, InputType } from "@docspace/shared/components/text-input";
@@ -66,8 +59,6 @@ import {
   RoleStep,
   StatusIndicator,
 } from "@docspace/shared/components/filling-role-process";
-import type { CompletedVDRFormProps } from "./CompletedForm.types";
-import { getFolderUrl } from "./CompletedForm.helper";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 import { toastr } from "@docspace/shared/components/toast";
 import SocketHelper, {
@@ -75,6 +66,10 @@ import SocketHelper, {
   SocketEvents,
 } from "@docspace/shared/utils/socket";
 import type { TFile } from "@docspace/shared/api/files/types";
+import type { TEditFileData } from "@docspace/shared/utils/socket";
+import { getFolderUrl } from "./CompletedForm.helper";
+import type { CompletedVDRFormProps } from "./CompletedForm.types";
+import styles from "./completed-form.module.scss";
 
 export const CompletedVDRForm = (props: CompletedVDRFormProps) => {
   const { user, file, roomId, isStartFilling, formFillingStatus, settings } =
@@ -85,11 +80,11 @@ export const CompletedVDRForm = (props: CompletedVDRFormProps) => {
 
   const isInitSocket = useRef(false);
 
-  const theme = useTheme();
+  const { isBase, currentColorScheme } = useTheme();
 
-  const bgPattern = getBgPattern(theme.currentColorScheme?.id);
-  const logoUrl = getLogoUrl(WhiteLabelLogoType.LoginPage, !theme.isBase);
-  const smallLogoUrl = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme.isBase);
+  const bgPattern = getBgPattern(currentColorScheme?.id);
+  const logoUrl = getLogoUrl(WhiteLabelLogoType.LoginPage, !isBase);
+  const smallLogoUrl = getLogoUrl(WhiteLabelLogoType.LightSmall, !isBase);
 
   const isYournTurn = form.formFillingStatus === FileFillingFormStatus.YourTurn;
   const completed = form.formFillingStatus === FileFillingFormStatus.Completed;
@@ -102,19 +97,20 @@ export const CompletedVDRForm = (props: CompletedVDRFormProps) => {
 
   useEffect(() => {
     if (!isInitSocket.current) {
-      SocketHelper.connect(socketUrl, "");
+      SocketHelper?.connect(socketUrl, "");
     }
 
     const fileSocketPart = `FILE-${formId}`;
 
-    if (!SocketHelper.socketSubscribers.has(fileSocketPart))
-      SocketHelper.emit(SocketCommands.Subscribe, {
+    if (!SocketHelper?.socketSubscribers.has(fileSocketPart))
+      SocketHelper?.emit(SocketCommands.Subscribe, {
         roomParts: [fileSocketPart],
         individual: true,
       });
 
-    const stopEditFileHandler = (id: number | string) => {
-      if (Number(id) === formId) {
+    const stopEditFileHandler = (data: TEditFileData) => {
+      const fileId = typeof data === "object" ? data.fileId : data;
+      if (Number(fileId) === formId) {
         setForm((prev) => ({
           ...prev,
           fileStatus: prev.fileStatus & ~FileStatus.IsEditing,
@@ -122,11 +118,11 @@ export const CompletedVDRForm = (props: CompletedVDRFormProps) => {
       }
     };
 
-    SocketHelper.on(SocketEvents.StopEditFile, stopEditFileHandler);
+    SocketHelper?.on(SocketEvents.StopEditFile, stopEditFileHandler);
 
     isInitSocket.current = true;
     return () => {
-      SocketHelper.off(SocketEvents.StopEditFile, stopEditFileHandler);
+      SocketHelper?.off(SocketEvents.StopEditFile, stopEditFileHandler);
     };
   }, [socketUrl, formId]);
 
@@ -151,11 +147,11 @@ export const CompletedVDRForm = (props: CompletedVDRFormProps) => {
   const headerDescription = useMemo(() => {
     if (isStartFilling) {
       return isYournTurn
-        ? t("CompletedForm:FormVDRYourTurnDescription")
-        : t("CompletedForm:FormVDRConfirmationOfStartDescription");
+        ? t("CompletedForm:FormVDRYouFirstRecepientDescription")
+        : t("CompletedForm:FormVDRNextRecepientDescription");
     }
 
-    if (completed) return t("CompletedForm:FormVDRCompletedDescription");
+    if (completed) return t("CompletedForm:FormVDRFinalizedDescription");
 
     return t("CompletedForm:FormVDRSectionCompletedDescription");
   }, [t, isStartFilling, completed, isYournTurn]);
@@ -187,23 +183,44 @@ export const CompletedVDRForm = (props: CompletedVDRFormProps) => {
 
   const isEditing = form.fileStatus === FileStatus.IsEditing;
 
+  const bgBlockStyle = {
+    "--bg-pattern": bgPattern,
+  } as React.CSSProperties;
+
   return (
-    <ContainerCompletedForm bgPattern={bgPattern}>
+    <section className={styles.container} style={bgBlockStyle} data-testid="completed_form_vdr_container">
       <Scrollbar fixedSize>
-        <CompletedFormLayout className="completed-form__vdr-layout">
-          <Header>
+        <div
+          className={classNames(
+            styles.completedFormLayout,
+            "completed-form__vdr-layout",
+          )}
+        >
+          <header className={styles.header}>
             <picture className="completed-form__logo">
               <source media={mobile} srcSet={smallLogoUrl} />
               <source media={mobileMore} srcSet={logoUrl} />
               <img src={logoUrl} alt="logo" />
             </picture>
-            <TextWrapper className="completed-form__text-wrapper">
+            <section
+              className={classNames(
+                styles.textWrapper,
+                "completed-form__text-wrapper",
+              )}
+            >
               <Heading level={HeadingLevel.h1}>{header}</Heading>
-              <Text noSelect>{headerDescription}</Text>
-            </TextWrapper>
-          </Header>
-          <VDRMainContent>
-            <Box className="completed-form__file" onClick={handleClickFile}>
+              <Text>{headerDescription}</Text>
+            </section>
+          </header>
+          <main className={styles.vdrMainContent}>
+            <div
+              className={classNames(
+                styles.completedFormBox,
+                "completed-form__file",
+              )}
+              onClick={handleClickFile}
+              data-testid="completed_form_file_container"
+            >
               <PDFIcon />
               <h5 className="completed-form__file-name">{title}</h5>
               {isYournTurn ? (
@@ -211,7 +228,7 @@ export const CompletedVDRForm = (props: CompletedVDRFormProps) => {
               ) : (
                 <EyeIcon className="completed-form_icon" />
               )}
-            </Box>
+            </div>
             <label htmlFor="form-link" className="completed-form__form-link">
               {label}
               <InputBlock
@@ -224,9 +241,15 @@ export const CompletedVDRForm = (props: CompletedVDRFormProps) => {
                 iconButtonClassName="input__copy-link-icon"
                 iconName={CopyReactSvgUrl}
                 onIconClick={copyLinkFile}
+                dataTestId="copy_link_input_block"
               />
             </label>
-            <Box className="completed-form__roles">
+            <div
+              className={classNames(
+                styles.completedFormBox,
+                "completed-form__roles",
+              )}
+            >
               {formFillingStatus.map(
                 ({ user: useRole, roleName, roleStatus }, index, arr) => {
                   return (
@@ -245,21 +268,22 @@ export const CompletedVDRForm = (props: CompletedVDRFormProps) => {
               {completed ? (
                 <StatusIndicator status={FileFillingFormStatus.Completed} />
               ) : null}
-            </Box>
-          </VDRMainContent>
-          <Footer>
+            </div>
+          </main>
+          <footer className={styles.footer}>
             <Button
               className="primary-button"
               scale
               primary
               size={ButtonSize.medium}
-              isLoading={isTurnToFill && isEditing}
+              isLoading={isTurnToFill ? isEditing : false}
               label={
                 isTurnToFill
                   ? t("CompletedForm:FillOutForm")
                   : t("Common:CopyLink")
               }
               onClick={isTurnToFill ? handleFillForm : copyLinkFile}
+              testId={isTurnToFill ? "fill_form_button" : "copy_link_button"}
             />
             <Button
               className="secondary-button"
@@ -267,6 +291,7 @@ export const CompletedVDRForm = (props: CompletedVDRFormProps) => {
               size={ButtonSize.medium}
               label={isTurnToFill ? t("Common:CopyLink") : t("Common:GoToRoom")}
               onClick={isTurnToFill ? copyLinkFile : handleBackToRoom}
+              testId={isTurnToFill ? "copy_link_button" : "go_to_room_button"}
             />
             {isTurnToFill ? (
               <Link
@@ -274,13 +299,14 @@ export const CompletedVDRForm = (props: CompletedVDRFormProps) => {
                 className="link"
                 onClick={handleBackToRoom}
                 prefetch={false}
+                data-testid="go_to_room_link"
               >
                 {t("Common:GoToRoom")}
               </Link>
             ) : null}
-          </Footer>
-        </CompletedFormLayout>
+          </footer>
+        </div>
       </Scrollbar>
-    </ContainerCompletedForm>
+    </section>
   );
 };

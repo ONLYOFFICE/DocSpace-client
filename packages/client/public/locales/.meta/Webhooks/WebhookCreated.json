@@ -3,7 +3,7 @@
   "content": "Webhook created",
   "content_en_sha1_hash": "4fec41e584d1c46a1ba94ed9b46ff397d40c5ee9",
   "created_at": "2025-05-19T21:30:49.867Z",
-  "updated_at": "2025-05-21T00:51:40.321Z",
+  "updated_at": "2025-05-24T02:05:26.046Z",
   "comment": {
     "text": "The \"WebhookCreated\" translation key is used to display a success message when a new webhook is created. It appears in a notification dialog after submitting the webhook settings. The exact wording may vary depending on whether the webhooks are being edited or created for the first time.",
     "is_auto": true,
@@ -42,7 +42,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Създадена уеб кука\" is a literal translation of 'Webhook created'. A more natural and accurate translation in Bulgarian would be something like \"Създаден уебхук\" or \"Създадена уеб кука\". The term 'уебхук' is the accepted term in Bulgarian for Webhook.",
+          "description": "The translation 'Създадена уеб кука' is a literal translation of 'Webhook created'. While understandable, a more natural and accurate translation would be 'Създаден уебхук'.  'Уебхук' is the standard term for 'Webhook' in Bulgarian, especially in technical contexts.",
           "suggestion": "Създаден уебхук"
         }
       ],
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Webhook creé' is not the grammatically correct French translation of 'Webhook created'. 'Créé' is the past participle and needs to be conjugated properly.",
-          "suggestion": "Webhook créé"
+          "description": "The French translation 'Webhook creé' is not grammatically correct for indicating a webhook has been created. It should be in the past participle form, used with 'a été' or similar.",
+          "suggestion": "Webhook a été créé"
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Webhook ສ້າງ' is a literal translation of 'Webhook created'. While understandable, a more natural Lao translation might be 'ໄດ້ສ້າງ Webhook' or 'Webhook ຖືກສ້າງ'.",
-          "suggestion": "ໄດ້ສ້າງ Webhook"
+          "description": "The translation 'Webhook ສ້າງ' is a literal translation of 'Webhook created'. While understandable, a more natural and accurate translation would convey the sense of completion and addition to a list or system.  'Webhook ສ້າງແລ້ວ' (Webhook created already) or 'ສ້າງ Webhook' (Created Webhook) might be more appropriate depending on the specific context.",
+          "suggestion": "Consider 'Webhook ສ້າງແລ້ວ' or 'ສ້າງ Webhook' depending on context."
         }
       ],
       "approved_at": null
@@ -132,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Tīmekļa aizķere ir izveidota' doesn't accurately convey the meaning of 'Webhook created'. 'Aizķere' translates to 'traffic jam' or 'blockage,' which is not related to webhooks.",
-          "suggestion": "A more accurate translation would be something like 'Tīmekļa atspēkošanas funkcija izveidota' or 'Webhook ir izveidots'."
+          "description": "The translation \"Tīmekļa aizķere ir izveidota\" is not an accurate translation of \"Webhook created.\" \"Aizķere\" means \"congestion\" or \"blockage.\" Webhooks are not congestion.",
+          "suggestion": "Webhook izveidots"
         }
       ],
       "approved_at": null
@@ -168,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Webhook creat' is an incomplete translation of 'Webhook created'. It is missing the verb 'created' in the past participle form.",
-          "suggestion": "Webhook-ul a fost creat"
+          "description": "The translation \"Webhook creat\" is an incomplete translation of \"Webhook created\". It's missing the verb ending and doesn't convey the full meaning.",
+          "suggestion": "Webhook a fost creat"
         }
       ],
       "approved_at": null
@@ -204,7 +204,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Webhook креиран\" uses the verb \"креиран\" which means \"created\" as a passive participle. The more natural and active phrasing would be \"Webhook створен\" or \"Webхук је створен\".",
+          "description": "The Serbian translation 'Webhook креиран' is an incorrect translation of 'Webhook created'. The correct translation should be 'Webhook створен'. 'Креиран' means 'created' in a more general sense, while 'створен' specifically refers to something being created or generated.",
           "suggestion": "Webhook створен"
         }
       ],
@@ -216,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Webhook kreiran' is incomplete. It needs a verb conjugation to be grammatically correct. It translates to 'Webhook created' but is not a full sentence.",
-          "suggestion": "Webhook je kreiran"
+          "description": "The translation 'Webhook kreiran' is grammatically incorrect. The verb 'kreirati' (to create) is needed, and it should be conjugated correctly in the past tense. The correct past tense form is 'kreiran je'.",
+          "suggestion": "Webhook kreiran je"
         }
       ],
       "approved_at": null
@@ -243,7 +243,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Webhook 已被创建' is grammatically correct but sounds slightly passive and less natural. A more common and concise way to express 'Webhook created' would be 'Webhook 已创建'.",
+          "suggestion": "Webhook 已创建"
+        }
+      ],
       "approved_at": null
     }
   }

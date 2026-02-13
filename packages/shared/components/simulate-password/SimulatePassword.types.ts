@@ -1,5 +1,5 @@
 /*
- * (c) Copyright Ascensio System SIA 2009-2025
+ * (c) Copyright Ascensio System SIA 2009-2026
  *
  * This program is a free software product.
  * You can redistribute it and/or modify it under the terms
@@ -30,7 +30,7 @@ import React from "react";
 
 export type SimulatePasswordProps = {
   onChange: (value: string) => void;
-  forwardedRef: React.RefObject<HTMLInputElement>;
+  forwardedRef: React.RefObject<HTMLInputElement | null>;
   onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   inputMaxWidth?: string;
   isDisabled?: boolean;

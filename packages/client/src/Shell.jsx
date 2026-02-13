@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,8 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import moment from "moment-timezone";
 import React, { useEffect } from "react";
+import { now, parseToDateTime, formatDate, formatDateLocalized, isBefore, isAfter } from "@docspace/shared/utils/date";
 import { Outlet, useLocation } from "react-router";
 import { useTheme } from "styled-components";
 import { inject, observer } from "mobx-react";
@@ -40,6 +40,7 @@ import SocketHelper, {
 import { Portal } from "@docspace/shared/components/portal";
 import { SnackBar } from "@docspace/shared/components/snackbar";
 import { Toast, toastr } from "@docspace/shared/components/toast";
+import { RootTooltip } from "@docspace/shared/components/tooltip/rootTooltip";
 import { ToastType } from "@docspace/shared/components/toast/Toast.enums";
 import { updateTempContent } from "@docspace/shared/utils/common";
 import { DeviceType, IndexedDBStores } from "@docspace/shared/enums";
@@ -48,6 +49,8 @@ import { useThemeDetector } from "@docspace/shared/hooks/useThemeDetector";
 import { sendToastReport } from "@docspace/shared/utils/crashReport";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { getCookie, deleteCookie } from "@docspace/shared/utils/cookie";
+import { handleCopy } from "@docspace/shared/utils/copy";
+
 import "@docspace/shared/styles/theme.scss";
 
 import config from "PACKAGE_FILE";
@@ -89,12 +92,7 @@ const Shell = ({ page = "home", ...rest }) => {
     pagesWithoutNavMenu,
     isFrame,
     barTypeInFrame,
-    setShowGuestReleaseTip,
 
-    isOwner,
-    isAdmin,
-    releaseDate,
-    registrationDate,
     logoText,
     setLogoText,
     standalone,
@@ -124,41 +122,24 @@ const Shell = ({ page = "home", ...rest }) => {
     }
   }, []);
 
-  useEffect(() => {
-    moment.updateLocale("ar-sa", {
-      longDateFormat: {
-        LT: "h:mm a",
-        LTS: "h:mm:ss a",
-        L: "YYYY/MM/DD",
-        LL: "YYYY MMMM D",
-        LLL: "h:mm a YYYY MMMM D",
-        LLLL: "h:mm a YYYY MMMM D dddd",
-      },
-    });
-
-    moment.locale(language);
-  }, []);
+  // Locale is handled by Luxon date utilities - no global locale setup needed
 
   useEffect(() => {
-    SocketHelper.emit(SocketCommands.Subscribe, {
-      roomParts: "storage-encryption",
-    });
-
-    SocketHelper.emit(SocketCommands.Subscribe, {
+    SocketHelper?.emit(SocketCommands.Subscribe, {
       roomParts: "restore",
     });
 
     if (standalone) {
-      SocketHelper.emit(SocketCommands.SubscribeInSpaces, {
+      SocketHelper?.emit(SocketCommands.SubscribeInSpaces, {
         roomParts: "restore",
       });
     }
 
-    SocketHelper.emit(SocketCommands.Subscribe, {
+    SocketHelper?.emit(SocketCommands.Subscribe, {
       roomParts: "quota",
     });
 
-    SocketHelper.emit(SocketCommands.Subscribe, {
+    SocketHelper?.emit(SocketCommands.Subscribe, {
       roomParts: "QUOTA",
       individual: true,
     });
@@ -166,14 +147,18 @@ const Shell = ({ page = "home", ...rest }) => {
 
   useEffect(() => {
     if (standalone) {
-      SocketHelper.emit(SocketCommands.SubscribeInSpaces, {
+      SocketHelper?.emit(SocketCommands.SubscribeInSpaces, {
         roomParts: "restore",
+      });
+
+      SocketHelper?.emit(SocketCommands.SubscribeInSpaces, {
+        roomParts: "storage-encryption",
       });
     }
   }, [standalone]);
 
   useEffect(() => {
-    SocketHelper.emit(SocketCommands.Subscribe, { roomParts: userId });
+    SocketHelper?.emit(SocketCommands.Subscribe, { roomParts: userId });
   }, [userId]);
 
   useEffect(() => {
@@ -188,43 +173,68 @@ const Shell = ({ page = "home", ...rest }) => {
   }, [userId]);
 
   useEffect(() => {
-    SocketHelper.on(SocketEvents.RestoreBackup, () => {
+    SocketHelper?.on(SocketEvents.RestoreBackup, () => {
       setPreparationPortalDialogVisible(true);
     });
 
     return () => {
-      SocketHelper.off(SocketEvents.RestoreBackup, () => {
+      SocketHelper?.off(SocketEvents.RestoreBackup, () => {
         setPreparationPortalDialogVisible(false);
       });
     };
   }, [setPreparationPortalDialogVisible]);
 
   useEffect(() => {
-    const callback = (loginEventId) => {
-      console.log(`[WS] "logout-session"`, loginEventId, userLoginEventId);
-
-      if (userLoginEventId === loginEventId || loginEventId === 0) {
-        sessionStorage.setItem("referenceUrl", window.location.href);
-        sessionStorage.setItem("loggedOutUserId", userId);
-
-        window.location.replace(
-          combineUrl(window.ClientConfig?.proxy?.url, "/login"),
-        );
-      }
+    const storageEncryptionHandler = () => {
+      window.location.href = "/encryption-portal";
     };
 
-    SocketHelper.on(SocketEvents.LogoutSession, callback);
+    SocketHelper?.on(SocketEvents.StorageEncryption, storageEncryptionHandler);
 
     return () => {
-      SocketHelper.off(SocketEvents.LogoutSession, callback);
+      SocketHelper?.off(
+        SocketEvents.StorageEncryption,
+        storageEncryptionHandler,
+      );
     };
-  }, [userLoginEventId]);
+  }, []);
+
+  useEffect(() => {
+    const callback = ({ loginEventId, redirectUrl }) => {
+      console.log(
+        `[WS] "logout-session"`,
+        loginEventId,
+        userLoginEventId,
+        redirectUrl,
+      );
+
+      if (userLoginEventId !== loginEventId && loginEventId !== 0) return;
+
+      const { pathname, search, origin } = window.location;
+      const redirectDomain = redirectUrl || origin;
+      const loginUrl = redirectUrl || window.ClientConfig?.proxy?.url;
+
+      sessionStorage.setItem(
+        "referenceUrl",
+        `${redirectDomain}${pathname}${search}`,
+      );
+      sessionStorage.setItem("loggedOutUserId", userId);
+
+      window.location.replace(combineUrl(loginUrl, "/login"));
+    };
+
+    SocketHelper?.on(SocketEvents.LogoutSession, callback);
+
+    return () => {
+      SocketHelper?.off(SocketEvents.LogoutSession, callback);
+    };
+  }, [userLoginEventId, userId]);
 
   let snackTimer = null;
   let fbInterval = null;
   // let lastCampaignStr = null;
   const LS_CAMPAIGN_DATE = "maintenance_to_date";
-  const DATE_FORMAT = "YYYY-MM-DD";
+  const DATE_FORMAT = "yyyy-MM-dd";
   const SNACKBAR_TIMEOUT = 10000;
 
   const clearSnackBarTimer = () => {
@@ -256,29 +266,29 @@ const Shell = ({ page = "home", ...rest }) => {
       skipMaintenance = true;
     }
 
-    const to = moment(toDate).local();
+    const to = parseToDateTime(toDate)?.toLocal();
 
     const watchedCampaignDateStr = localStorage.getItem(LS_CAMPAIGN_DATE);
 
-    const campaignDateStr = to.format(DATE_FORMAT);
+    const campaignDateStr = to ? formatDate(to, DATE_FORMAT) : null;
     if (campaignDateStr == watchedCampaignDateStr) {
       console.log("Skip snackBar by already watched");
       skipMaintenance = true;
     }
 
-    const from = moment(fromDate).local();
-    const now = moment();
+    const from = parseToDateTime(fromDate)?.toLocal();
+    const currentTime = now();
 
-    if (now.isBefore(from)) {
+    if (from && isBefore(currentTime, from)) {
       setSnackBarTimer(campaign);
 
       SnackBar.close();
-      console.log(`Show snackBar has been delayed for 1 minute`, now);
+      console.log(`Show snackBar has been delayed for 1 minute`, currentTime);
       skipMaintenance = true;
     }
 
-    if (now.isAfter(to)) {
-      console.log("Skip snackBar by current date", now);
+    if (to && isAfter(currentTime, to)) {
+      console.log("Skip snackBar by current date", currentTime);
       SnackBar.close();
       skipMaintenance = true;
     }
@@ -307,7 +317,7 @@ const Shell = ({ page = "home", ...rest }) => {
 
     // lastCampaignStr = campaignStr;
 
-    const targetDate = to.locale(language).format("LL");
+    const targetDate = to ? formatDateLocalized(to, "DATE_MED", { locale: language }) : "";
 
     const barConfig = {
       parentElementId: "main-bar",
@@ -321,7 +331,7 @@ const Shell = ({ page = "home", ...rest }) => {
         setMaintenanceExist(false);
         setSnackbarExist(false);
         SnackBar.close();
-        localStorage.setItem(LS_CAMPAIGN_DATE, to.format(DATE_FORMAT));
+        localStorage.setItem(LS_CAMPAIGN_DATE, to ? formatDate(to, DATE_FORMAT) : "");
       },
       opacity: 1,
       onLoad: () => {
@@ -430,10 +440,6 @@ const Shell = ({ page = "home", ...rest }) => {
   }, []);
 
   useEffect(() => {
-    console.log("Current page ", page);
-  }, [page]);
-
-  useEffect(() => {
     if (userTheme) setTheme(userTheme);
   }, [userTheme]);
 
@@ -476,29 +482,12 @@ const Shell = ({ page = "home", ...rest }) => {
   }, [isLoaded]);
 
   useEffect(() => {
-    if (isFrame) return setShowGuestReleaseTip(false);
+    document.addEventListener("copy", handleCopy);
 
-    if (!releaseDate || !registrationDate) return;
-
-    if (!isAdmin && !isOwner) return setShowGuestReleaseTip(false);
-
-    const closed = localStorage.getItem(`closedGuestReleaseTip-${userId}`);
-
-    if (closed) return setShowGuestReleaseTip(false);
-
-    const regDate = new Date(registrationDate).getTime();
-    const release = new Date(releaseDate).getTime();
-
-    setShowGuestReleaseTip(regDate < release);
-  }, [
-    isFrame,
-    userId,
-    setShowGuestReleaseTip,
-    isAdmin,
-    isOwner,
-    releaseDate,
-    registrationDate,
-  ]);
+    return () => {
+      document.removeEventListener("copy", handleCopy);
+    };
+  }, []);
 
   const rootElement = document.getElementById("root");
 
@@ -520,6 +509,7 @@ const Shell = ({ page = "home", ...rest }) => {
   return (
     <Layout>
       {toast}
+      <RootTooltip />
       {isMobileOnly && !isFrame ? (
         <ReactSmartBanner t={t} ready={ready} />
       ) : null}
@@ -550,7 +540,6 @@ const ShellWrapper = inject(
     userStore,
     currentTariffStatusStore,
     dialogsStore,
-    flowStore,
   }) => {
     const { i18n } = useTranslation();
 
@@ -577,8 +566,6 @@ const ShellWrapper = inject(
       frameConfig,
       isPortalDeactivate,
       isPortalRestoring,
-      setShowGuestReleaseTip,
-      buildVersionInfo,
       logoText,
       setLogoText,
       standalone,
@@ -615,7 +602,7 @@ const ShellWrapper = inject(
 
     return {
       loadBaseInfo: async () => {
-        await Promise.all([init(false, i18n), flowStore.autoLogin()]);
+        await init(false, i18n);
 
         setModuleInfo(config.homepage, "home");
         setProductVersion(config.version);
@@ -655,8 +642,6 @@ const ShellWrapper = inject(
       pagesWithoutNavMenu,
       isFrame,
       barTypeInFrame: frameConfig?.showHeaderBanner,
-      setShowGuestReleaseTip,
-      releaseDate: buildVersionInfo.releaseDate,
       logoText,
       setLogoText,
       standalone,

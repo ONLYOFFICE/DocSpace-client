@@ -3,7 +3,7 @@
   "content": "Quick sharing",
   "content_en_sha1_hash": "660b23a00ba73a3e08d794e2f110b7cb5498b3c5",
   "created_at": "2025-05-19T21:30:55.137Z",
-  "updated_at": "2025-05-21T10:46:46.400Z",
+  "updated_at": "2025-05-24T10:56:33.278Z",
   "comment": {
     "text": "This translation key is used for a button label that enables quick sharing, likely appearing in a file guidance component. The text \"Quick sharing\" will be displayed as the label when translated, allowing users to easily access this feature within the UI.",
     "is_auto": true,
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"ແບ່ງປັນຢ່າງໄວ\" (baeng pan yang vai) is understandable, a more natural and idiomatic translation of 'Quick sharing' might be something like 'ການແບ່ງປັນຢ່າງໄວ' (kaan baeng pan yang vai) or 'ແບ່ງປັນໄວ' (baeng pan vai). The addition of 'ການ' (kaan) makes it more aligned with standard Lao sentence structure.",
-          "suggestion": "ແບ່ງປັນໄວ (baeng pan vai) or ການແບ່ງປັນຢ່າງໄວ (kaan baeng pan yang vai)"
+          "description": "While 'ແບ່ງປັນຢ່າງໄວ' is a literal translation of 'Quick sharing', it might not be the most natural or idiomatic phrasing in Lao. A more user-friendly translation might be something like 'ແບ່ງປັນໄວ' (sharing fast) or 'ແບ່ງປັນຢ່າງສະດວກ' (sharing conveniently).",
+          "suggestion": "ແບ່ງປັນໄວ"
         }
       ],
       "approved_at": null
@@ -156,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Быстрое предоставление доступа\" while technically correct, doesn't convey the brevity and casual tone of \"Quick sharing\". \"Quick sharing\" implies a fast and easy sharing process, whereas \"Быстрое предоставление доступа\" is more formal and lengthy.",
-          "suggestion": "Быстрое распространение"
+          "description": "While \"Быстрое предоставление доступа\" is technically correct, it's a bit verbose and doesn't convey the same brevity as \"Quick sharing\". It's too literal.",
+          "suggestion": "Consider a more concise translation like \"Быстрый доступ\" or \"Оперативный доступ\" which better reflects the meaning of 'Quick sharing' in a UI context."
         }
       ],
       "approved_at": null

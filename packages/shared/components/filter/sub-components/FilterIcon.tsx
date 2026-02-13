@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,6 +30,7 @@ import classNames from "classnames";
 import styles from "../Filter.module.scss";
 
 import { IconButton } from "../../icon-button";
+import { TooltipContainer } from "../../tooltip";
 
 type FilterIconProps = {
   onClick: () => void;
@@ -37,6 +38,7 @@ type FilterIconProps = {
   isOpen?: boolean;
   id?: string;
   title?: string;
+  dataTestId?: string;
 };
 
 const FilterIcon = ({
@@ -45,9 +47,11 @@ const FilterIcon = ({
   onClick,
   isOpen,
   isShowIndicator,
+  dataTestId,
 }: FilterIconProps) => {
   return (
-    <div
+    <TooltipContainer
+      as="div"
       id={id}
       onClick={onClick}
       title={title}
@@ -55,10 +59,13 @@ const FilterIcon = ({
         [styles.button]: true,
         [styles.isOpen]: isOpen,
       })}
+      data-testid={dataTestId ?? "filter_icon_button"}
     >
       <IconButton iconNode={<FilterReactSvg />} size={16} />
-      {isShowIndicator ? <div className={styles.indicator} /> : null}
-    </div>
+      {isShowIndicator ? (
+        <div className={styles.indicator} data-testid="filter_icon_indicator" />
+      ) : null}
+    </TooltipContainer>
   );
 };
 

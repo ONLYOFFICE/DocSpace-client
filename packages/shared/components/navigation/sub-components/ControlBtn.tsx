@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -37,7 +37,6 @@ import ToggleInfoPanelButton from "./ToggleInfoPanelBtn";
 import PlusButton from "./PlusBtn";
 import ContextButton from "./ContextBtn";
 import WarningComponent from "./WarningComponent";
-import ChatBtn from "./ChatBtn";
 
 const ControlButtons = ({
   isRootFolder,
@@ -58,6 +57,7 @@ const ControlButtons = ({
   getContextOptionsFolder,
   isTrashFolder,
   isMobile,
+  isMobileOnly,
   onContextOptionsClick,
   isPublicRoom,
 
@@ -81,10 +81,8 @@ const ControlButtons = ({
   setGuidAnimationVisible,
   isContextButtonVisible,
 
-  // Chat props
-  withChat,
-  chatOpen,
-  toggleChat,
+  isPlusButtonVisible,
+  contextMenuHeader,
 }: TControlButtonProps) => {
   const toggleInfoPanelAction = () => {
     toggleInfoPanel?.();
@@ -111,9 +109,12 @@ const ControlButtons = ({
 
   const renderTariffBar = () => {
     if (!tariffBar || isFrame) return null;
+
+    const cloneProps = { title };
+
     return (
       <div className={styles.tariffWrapper}>
-        {React.cloneElement(tariffBar, { title })}
+        {React.cloneElement(tariffBar, cloneProps)}
       </div>
     );
   };
@@ -137,6 +138,8 @@ const ControlButtons = ({
   };
 
   const renderContextButton = (visible: boolean) => {
+    // console.log(visible);
+
     if (!visible || isFrame) return null;
 
     return (
@@ -145,14 +148,17 @@ const ControlButtons = ({
         className="option-button"
         getData={getContextOptionsFolder}
         withMenu={withMenu}
-        title={titles?.actions}
+        title={title}
         isTrashFolder={isTrashFolder}
         isMobile={isMobile || false}
+        isMobileOnly={isMobileOnly || false}
+        contextMenuHeader={contextMenuHeader}
         onCloseDropBox={onCloseDropBox}
         onContextOptionsClick={onContextOptionsClick}
         contextButtonAnimation={contextButtonAnimation}
         guidAnimationVisible={guidAnimationVisible}
         setGuidAnimationVisible={setGuidAnimationVisible}
+        ignoreChangeView={!!(isMobile && !!contextMenuHeader)}
       />
     );
   };
@@ -176,21 +182,14 @@ const ControlButtons = ({
     return <WarningComponent title={titles?.warningText} />;
   };
 
-  const renderChatButton = () => {
-    if (!withChat || isDesktop) return null;
-
-    return <ChatBtn chatOpen={chatOpen} toggleChat={toggleChat} />;
-  };
-
   return (
     <div
       className={styles.controlButtonContainer}
       data-is-frame={isFrame}
       data-show-title={showTitle}
     >
-      {renderPlusButton()}
+      {isPlusButtonVisible ? renderPlusButton() : null}
       {renderContextButton((isContextButtonVisible && !isPublicRoom) ?? false)}
-      {renderChatButton()}
       {renderToggleInfoPanel()}
       {renderContextButton((isPublicRoom && containVisible) ?? false)}
       {renderWarning()}

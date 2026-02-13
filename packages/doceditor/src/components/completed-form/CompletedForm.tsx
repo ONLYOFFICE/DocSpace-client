@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -23,12 +23,12 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 "use client";
 
 import React from "react";
 import { decode } from "he";
 import Link from "next/link";
-import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 
 import PDFIcon from "PUBLIC_DIR/images/icons/32/pdf.svg";
@@ -39,6 +39,7 @@ import MailIcon from "PUBLIC_DIR/images/icons/12/mail.svg";
 import { toastr } from "@docspace/shared/components/toast";
 import { Text } from "@docspace/shared/components/text";
 import { getBgPattern, getLogoUrl } from "@docspace/shared/utils/common";
+import { useTheme } from "@docspace/shared/hooks/useTheme";
 
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
@@ -56,20 +57,11 @@ import {
 
 import useUpdateSearchParamId from "@/hooks/useUpdateSearchParamId";
 
-import {
-  CompletedFormLayout,
-  ButtonWrapper,
-  TextWrapper,
-  Box,
-  FormNumberWrapper,
-  ManagerWrapper,
-  MainContent,
-  ContainerCompletedForm,
-} from "./CompletedForm.styled";
-
 import type { CompletedFormProps } from "./CompletedForm.types";
 import { getFolderUrl } from "./CompletedForm.helper";
 import { CompletedFormEmpty } from "./CompletedForm.empty";
+
+import styles from "./completed-form.module.scss";
 
 const BIG_FORM_NUMBER = 9_999_999;
 
@@ -79,15 +71,15 @@ export const CompletedForm = ({
   isShareFile,
   isSDK,
 }: CompletedFormProps) => {
-  const theme = useTheme();
+  const { isBase, currentColorScheme } = useTheme();
   const { t } = useTranslation(["CompletedForm", "Common"]);
 
   useUpdateSearchParamId(session?.response.originalForm.id.toString());
 
-  const logoUrl = getLogoUrl(WhiteLabelLogoType.LoginPage, !theme.isBase);
-  const smallLogoUrl = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme.isBase);
+  const logoUrl = getLogoUrl(WhiteLabelLogoType.LoginPage, !isBase);
+  const smallLogoUrl = getLogoUrl(WhiteLabelLogoType.LightSmall, !isBase);
 
-  const bgPattern = getBgPattern(theme.currentColorScheme?.id);
+  const bgPattern = getBgPattern(currentColorScheme?.id);
 
   if (!session) return <CompletedFormEmpty />;
 
@@ -133,27 +125,36 @@ export const CompletedForm = ({
     ...(isShareFile ? { is_file: "true" } : {}),
   });
 
+  const bgBlockStyle = {
+    "--bg-pattern": bgPattern,
+  } as React.CSSProperties;
+
   return (
-    <ContainerCompletedForm bgPattern={bgPattern}>
+    <section className={styles.container} style={bgBlockStyle} data-testid="completed_form_container">
       <Scrollbar fixedSize>
-        <CompletedFormLayout>
+        <div className={styles.completedFormLayout}>
           <picture className="completed-form__logo">
             <source media={mobile} srcSet={smallLogoUrl} />
             <source media={mobileMore} srcSet={logoUrl} />
             <img src={logoUrl} alt="logo" />
           </picture>
-          <TextWrapper>
+          <section className={styles.textWrapper}>
             <Heading level={HeadingLevel.h1}>
               {t("CompletedForm:FormCompletedSuccessfully")}
             </Heading>
-            <Text noSelect>
+            <Text>
               {isAnonym
                 ? t("CompletedForm:DescriptionForAnonymous")
                 : t("CompletedForm:DescriptionForRegisteredUser")}
             </Text>
-          </TextWrapper>
-          <MainContent>
-            <Box className="completed-form__file">
+          </section>
+          <main className={styles.mainContent}>
+            <div
+              className={classNames(
+                styles.completedFormBox,
+                "completed-form__file",
+              )}
+            >
               <PDFIcon />
               <Heading
                 className="completed-form__filename"
@@ -166,23 +167,28 @@ export const CompletedForm = ({
                 className="completed-form__download"
                 iconName={isAnonym ? DownloadIconUrl : LinkIconUrl}
                 onClick={isAnonym ? handleDownload : copyLinkFile}
+                dataTestId={
+                  isAnonym
+                    ? "download_form_icon_button"
+                    : "copy_link_icon_button"
+                }
               />
-            </Box>
-            <FormNumberWrapper>
+            </div>
+            <div className={styles.formNumberWrapper}>
               <span className="label">{t("CompletedForm:FormNumber")}</span>
-              <Box>
+              <div className={styles.completedFormBox}>
                 <Text
                   className={classNames("completed-form__form-number", {
-                    ["form-number--big"]: formNumber > BIG_FORM_NUMBER,
+                    "form-number--big": formNumber > BIG_FORM_NUMBER,
                   })}
                 >
                   {formNumber}
                 </Text>
-              </Box>
-            </FormNumberWrapper>
-            <ManagerWrapper>
+              </div>
+            </div>
+            <div className={styles.managerWrapper}>
               <span className="label">{t("CompletedForm:FormOwner")}</span>
-              <Box>
+              <div className={styles.completedFormBox}>
                 <Avatar
                   className="manager__avatar"
                   size={AvatarSize.medium}
@@ -195,14 +201,19 @@ export const CompletedForm = ({
                 <Link
                   className="manager__mail link"
                   href={`mailto:${manager.email}`}
+                  data-testid="manager_email_link"
                 >
                   <MailIcon />
                   <span>{manager.email}</span>
                 </Link>
-              </Box>
-            </ManagerWrapper>
-          </MainContent>
-          <ButtonWrapper isShareFile={isShareFile && !isRoomMember}>
+              </div>
+            </div>
+          </main>
+          <footer
+            className={classNames(styles.buttonWrapper, {
+              [styles.shareFile]: isShareFile ? !isRoomMember : false,
+            })}
+          >
             <Button
               scale
               primary
@@ -213,25 +224,32 @@ export const CompletedForm = ({
                   : t("CompletedForm:CheckReadyForms")
               }
               onClick={isAnonym ? handleDownload : gotoCompleteFolder}
+              testId={
+                isAnonym
+                  ? "download_form_button"
+                  : "goto_complete_folder_button"
+              }
             />
-            {(!isShareFile || isRoomMember) && !isSDK && (
+            {(!isShareFile || isRoomMember) && !isSDK ? (
               <Button
                 scale
                 size={ButtonSize.medium}
                 label={t("CompletedForm:BackToRoom")}
                 onClick={handleBackToRoom}
+                testId="back_to_room_button"
               />
-            )}
-          </ButtonWrapper>
+            ) : null}
+          </footer>
           <Link
             className="link"
             href={`/?${fillAgainSearchParams.toString()}`}
             prefetch={false}
+            data-testid="fill_again_link"
           >
             {t("CompletedForm:FillItOutAgain")}
           </Link>
-        </CompletedFormLayout>
+        </div>
       </Scrollbar>
-    </ContainerCompletedForm>
+    </section>
   );
 };

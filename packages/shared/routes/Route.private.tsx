@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,12 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable react/prop-types */
+import { Navigate, useLocation } from "react-router";
 
-import React, { useEffect } from "react";
-import { Navigate, useLocation, useSearchParams } from "react-router";
-
-import FilesFilter from "@docspace/shared/api/files/filter";
 import AppLoader from "../components/app-loader";
 
 import { TenantStatus } from "../enums";
@@ -53,7 +49,6 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     wizardCompleted,
 
     user,
-    isLoadedUser,
     children,
     restricted,
     tenantStatus,
@@ -62,68 +57,14 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     identityServerEnabled,
     baseDomain,
     limitedAccessSpace,
-    displayAbout,
-
-    validatePublicRoomKey,
-    publicRoomKey,
-    roomId,
-    isLoadedPublicRoom,
-    isLoadingPublicRoom,
 
     limitedAccessDevToolsForUsers,
+    standalone,
   } = props;
 
   const location = useLocation();
-  const [searchParams] = useSearchParams();
-
-  useEffect(() => {
-    const key = searchParams.get("key");
-
-    if (
-      key &&
-      (!publicRoomKey || publicRoomKey !== key) &&
-      location.pathname.includes("/rooms/shared") &&
-      !isLoadedPublicRoom &&
-      !isLoadingPublicRoom &&
-      isLoadedUser &&
-      validatePublicRoomKey
-    ) {
-      validatePublicRoomKey(key);
-    }
-  }, [
-    searchParams,
-    publicRoomKey,
-    location.pathname,
-    isLoadedPublicRoom,
-    isLoadingPublicRoom,
-    isLoadedUser,
-    validatePublicRoomKey,
-  ]);
 
   const renderComponent = () => {
-    const key = searchParams.get("key");
-
-    if (location.pathname.includes("/rooms/shared")) {
-      if (!isLoadedUser) {
-        return <AppLoader />;
-      }
-
-      if (!user && isAuthenticated) {
-        const filter = FilesFilter.getDefault();
-        const subFolder = new URLSearchParams(window.location.search).get(
-          "folder",
-        );
-        const path = "/rooms/share";
-
-        filter.folder = subFolder || roomId || "";
-        if (key) {
-          filter.key = key;
-        }
-
-        return <Navigate to={`${path}?${filter.toUrlParams()}`} />;
-      }
-    }
-
     if (!user && isAuthenticated) {
       if (isPortalDeactivate) {
         window.location.replace(
@@ -150,6 +91,8 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       sessionStorage.removeItem("loggedOutUserId");
     }
 
+    const isAccountsPage = location.pathname.includes("/accounts");
+
     const isPortalUrl =
       location.pathname === "/preparation-portal" ||
       location.pathname === "/management/preparation-portal";
@@ -168,6 +111,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       location.pathname === "/portal-settings/delete-data/deactivation";
 
     const isBonusPage = location.pathname === "/portal-settings/bonus";
+    const isServicesPage = location.pathname === "/portal-settings/services";
 
     const isPortalRenameUrl =
       location.pathname ===
@@ -184,13 +128,14 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       "/portal-settings/management",
     );
     const isFileManagement = location.pathname.includes("file-management");
-    const isManagement = location.pathname.includes("management");
+    const isManagement =
+      location.pathname.includes("management") &&
+      !location.pathname.includes("ad-management");
     const isPaymentPageUnavailable =
       location.pathname.includes("payments") && isCommunity;
     const isBonusPageUnavailable =
       location.pathname.includes("bonus") && !isCommunity;
 
-    const isAboutPage = location.pathname.includes("about");
     const isDeveloperToolsPage = location.pathname.includes("/developer-tools");
 
     if (location.pathname === "/shared/invalid-link") {
@@ -229,7 +174,8 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
         ((!user?.isOwner || (baseDomain && baseDomain === "localhost")) &&
           isPortalDeletionUrl) ||
         (isCommunity && isPaymentsUrl) ||
-        (isEnterprise && isBonusPage))
+        (isEnterprise && isBonusPage) ||
+        (standalone && isServicesPage))
     ) {
       return <Navigate replace to="/" />;
     }
@@ -272,7 +218,8 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       (user?.isOwner || user?.isAdmin) &&
       !isPaymentsUrl &&
       !isBackupUrl &&
-      !isPortalDeletionUrl
+      !isPortalDeletionUrl &&
+      !location.pathname.includes("wallet")
     ) {
       return (
         <Navigate
@@ -315,10 +262,6 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       );
     }
 
-    if (isAboutPage && !displayAbout) {
-      return <Navigate replace to="/error/404" />;
-    }
-
     if (isManagement && !isPortalManagement && !isFileManagement) {
       if (isLoaded && !isAuthenticated) return <Navigate replace to="/" />;
       if ((user && !user?.isAdmin) || limitedAccessSpace)
@@ -328,7 +271,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
         return <Navigate replace to="/management/bonus" />;
       if (isBonusPageUnavailable)
         return <Navigate replace to="/management/payments" />;
-
+      console.log("here");
       return children;
     }
 
@@ -359,6 +302,10 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     if (isDeveloperToolsPage) {
       if (user?.isVisitor || (limitedAccessDevToolsForUsers && !user?.isAdmin))
         return <Navigate replace to="/error/403" />;
+    }
+
+    if (isAccountsPage) {
+      return children;
     }
 
     if (

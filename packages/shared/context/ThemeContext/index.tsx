@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,17 +26,31 @@
 
 import React, { createContext } from "react";
 
+import type { TColorScheme } from "../../themes";
+
 type TTheme = "Base" | "Dark";
 
-type ThemeProviderProps = {
+type TThemeContextValue = {
   theme: TTheme;
+  currentColorScheme?: TColorScheme;
+};
+
+type ThemeProviderProps = TThemeContextValue & {
   children: React.ReactNode;
 };
 
-export const ThemeContext = createContext<TTheme>("Base");
+export const ThemeContext = createContext<TThemeContextValue>({
+  theme: "Base",
+});
 
-export const ThemeProvider = ({ theme, children }: ThemeProviderProps) => {
+export const ThemeProvider = ({
+  theme,
+  currentColorScheme,
+  children,
+}: ThemeProviderProps) => {
   return (
-    <ThemeContext.Provider value={theme}>{children}</ThemeContext.Provider>
+    <ThemeContext value={{ theme, currentColorScheme }}>
+      {children}
+    </ThemeContext>
   );
 };

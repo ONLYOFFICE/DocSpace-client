@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -36,7 +36,7 @@ import { ownerChange } from "@docspace/shared/api/settings";
 
 import { TError } from "@/types";
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
-import { ButtonsWrapper } from "@/components/Confirm.styled";
+import styles from "../confirm.module.scss";
 
 type ChangeOwnerFormProps = {
   newOwner?: string;
@@ -55,7 +55,7 @@ const ChangeOwnerForm = ({ newOwner }: ChangeOwnerFormProps) => {
     try {
       await ownerChange(ownerId, confirmKey);
       setIsOwnerChanged(true);
-      setTimeout(() => (location.href = "/"), 10000);
+      setTimeout(() => (window.location.href = "/"), 10000);
     } catch (error) {
       const knownError = error as TError;
       let errorMessage: string;
@@ -76,46 +76,44 @@ const ChangeOwnerForm = ({ newOwner }: ChangeOwnerFormProps) => {
   };
 
   const onCancelClick = () => {
-    location.href = "/";
+    window.location.href = "/";
   };
 
-  return (
+  return isOwnerChanged ? (
+    <Text>
+      {t("ConfirmOwnerPortalSuccessMessage", {
+        productName: t("Common:ProductName"),
+      })}
+    </Text>
+  ) : (
     <>
-      {isOwnerChanged ? (
-        <Text>
-          {t("ConfirmOwnerPortalSuccessMessage", {
-            productName: t("Common:ProductName"),
-          })}
-        </Text>
-      ) : (
-        <>
-          <Text className="subtitle">
-            {t("ConfirmOwnerPortalTitle", {
-              newOwner: newOwner,
-              productName: t("Common:ProductName"),
-            })}
-          </Text>
-          <ButtonsWrapper>
-            <Button
-              primary
-              scale
-              size={ButtonSize.medium}
-              label={t("Common:SaveButton")}
-              tabIndex={2}
-              isDisabled={false}
-              onClick={onChangeOwnerClick}
-            />
-            <Button
-              scale
-              size={ButtonSize.medium}
-              label={t("Common:CancelButton")}
-              tabIndex={2}
-              isDisabled={false}
-              onClick={onCancelClick}
-            />
-          </ButtonsWrapper>
-        </>
-      )}
+      <Text className="subtitle">
+        {t("ConfirmOwnerPortalTitle", {
+          newOwner,
+          productName: t("Common:ProductName"),
+        })}
+      </Text>
+      <div className={styles.buttonsWrapper}>
+        <Button
+          primary
+          scale
+          size={ButtonSize.medium}
+          label={t("Common:SaveButton")}
+          tabIndex={2}
+          isDisabled={false}
+          onClick={onChangeOwnerClick}
+          testId="save_change_owner_button"
+        />
+        <Button
+          scale
+          size={ButtonSize.medium}
+          label={t("Common:CancelButton")}
+          tabIndex={2}
+          isDisabled={false}
+          onClick={onCancelClick}
+          testId="cancel_button"
+        />
+      </div>
     </>
   );
 };

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,15 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import {
-  endpoints,
-  HEADER_NO_STANDALONE_SETTINGS,
-} from "@docspace/shared/__mocks__/e2e";
-
-import { expect, test } from "./fixtures/base";
+  confirmHandler,
+  settingsHandler,
+  TypeSettings,
+} from "@docspace/shared/__mocks__/handlers";
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
+import { test } from "./fixtures/base";
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 
 const URL = "/login/confirm/EmpInvite";
-const NEXT_REQUEST_URL = "*/**/login/confirm/EmpInvite";
 
 const QUERY_PARAMS = [
   {
@@ -45,8 +45,8 @@ const QUERY_PARAMS = [
     value: "123",
   },
   {
-    name: "email",
-    value: "mail@mail.com",
+    name: "encemail",
+    value: "b5COc6kRm3veeYqA72sOfA&uid=66faa6e4-f133-11ea-b126-00ffeec8b4ef",
   },
   {
     name: "emplType",
@@ -55,128 +55,149 @@ const QUERY_PARAMS = [
 ];
 
 const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
-const NEXT_REQUEST_URL_WITH_PARAMS = getUrlWithQueryParams(
-  NEXT_REQUEST_URL,
-  QUERY_PARAMS,
-);
 
-test("emp invite render standalone", async ({ page, mockRequest }) => {
-  await mockRequest.router([endpoints.getUserByEmail]);
-  await page.goto(URL_WITH_PARAMS);
+test("emp invite render standalone", async ({
+  page,
+  baseUrl,
+  port,
+  serverRequestInterceptor,
+}) => {
+  serverRequestInterceptor.use(confirmHandler(port, undefined, true));
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "emp-invite",
     "emp-invite-render-standalone.png",
   ]);
 });
 
-test("emp invite render no standalone", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-    HEADER_NO_STANDALONE_SETTINGS,
-  ]);
+test("emp invite render no standalone", async ({
+  page,
+  baseUrl,
+  serverRequestInterceptor,
+  port,
+}) => {
+  serverRequestInterceptor.use(confirmHandler(port, undefined, true));
+  serverRequestInterceptor.use(
+    settingsHandler(port, TypeSettings.NoStandalone),
+  );
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await mockRequest.router([endpoints.getUserByEmail]);
-  await page.goto(URL_WITH_PARAMS);
-
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "emp-invite",
     "emp-invite-render-no-standalone.png",
   ]);
 });
 
-test("emp invite success standalone", async ({ page, mockRequest }) => {
-  await mockRequest.router([endpoints.createUser, endpoints.login]);
-  await page.goto(URL_WITH_PARAMS);
+test("emp invite success standalone", async ({
+  page,
+  baseUrl,
+  port,
+  serverRequestInterceptor,
+}) => {
+  serverRequestInterceptor.use(confirmHandler(port, undefined, true));
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.fill("[name='first-name']", "firstName");
   await page.fill("[name='last-name']", "lastName");
-  await page
-    .getByTestId("input-block")
-    .getByTestId("text-input")
-    .fill("qwerty123");
-  await page.getByTestId("input-block").getByRole("img").click();
+  await page.fill("[name='password']", "qwerty123");
+  await page.getByTestId("password_input_eye_off_icon").click();
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "emp-invite",
     "emp-invite-success-standalone.png",
   ]);
 
-  await page.getByRole("button", { name: "Sign up" }).click();
-  await page.waitForURL("/", { waitUntil: "load" });
+  await page.getByTestId("signup_button").click();
+  await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "emp-invite",
     "emp-invite-success-redirect-standalone.png",
   ]);
 });
 
-test("emp invite success no standalone", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-    HEADER_NO_STANDALONE_SETTINGS,
-  ]);
+test("emp invite success no standalone", async ({
+  page,
+  baseUrl,
+  serverRequestInterceptor,
+  port,
+}) => {
+  serverRequestInterceptor.use(
+    confirmHandler(port, undefined, true),
+    settingsHandler(port, TypeSettings.NoStandalone),
+  );
 
-  await mockRequest.router([endpoints.createUser, endpoints.login]);
-  await page.goto(URL_WITH_PARAMS);
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.fill("[name='first-name']", "firstName");
   await page.fill("[name='last-name']", "lastName");
-  await page
-    .getByTestId("input-block")
-    .getByTestId("text-input")
-    .fill("qwerty123");
+  await page.fill("[name='password']", "qwerty123");
 
-  await page.getByTestId("checkbox").click();
+  await page.getByTestId("news_checkbox").click();
 
-  await page.getByTestId("input-block").getByRole("img").click();
+  await page.getByTestId("password_input_eye_off_icon").click();
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "emp-invite",
     "emp-invite-success-no-standalone.png",
   ]);
 
-  await page.getByRole("button", { name: "Sign up" }).click();
-  await page.waitForURL("/", { waitUntil: "load" });
+  await page.getByTestId("signup_button").click();
+  await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "emp-invite",
     "emp-invite-success-redirect-no-standalone.png",
   ]);
 });
 
-test("emp invite error standalone", async ({ page }) => {
-  await page.goto(URL_WITH_PARAMS);
+test("emp invite error standalone", async ({
+  page,
+  baseUrl,
+  port,
+  serverRequestInterceptor,
+}) => {
+  serverRequestInterceptor.use(confirmHandler(port, undefined, true));
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await page.getByTestId("input-block").getByTestId("text-input").fill("123");
-  await page.getByTestId("input-block").getByRole("img").click();
+  await page.fill("[name='password']", "123");
+  await page.getByTestId("password_input_eye_off_icon").click();
 
-  await page.getByRole("button", { name: "Sign up" }).click();
+  await page.getByTestId("signup_button").click();
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "emp-invite",
     "emp-invite-error-standalone.png",
   ]);
 });
 
-test("emp invite error no standalone", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-    HEADER_NO_STANDALONE_SETTINGS,
-  ]);
+test("emp invite error no standalone", async ({
+  page,
+  baseUrl,
+  serverRequestInterceptor,
+  port,
+}) => {
+  serverRequestInterceptor.use(
+    confirmHandler(port, undefined, true),
+    settingsHandler(port, TypeSettings.NoStandalone),
+  );
 
-  await page.goto(URL_WITH_PARAMS);
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await page.getByTestId("input-block").getByTestId("text-input").fill("123");
-  await page.getByTestId("input-block").getByRole("img").click();
+  await page.fill("[name='password']", "123");
+  await page.getByTestId("password_input_eye_off_icon").click();
 
-  await page.getByRole("button", { name: "Sign up" }).click();
+  await page.getByTestId("signup_button").click();
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "emp-invite",
     "emp-invite-error-no-standalone.png",

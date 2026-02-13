@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,11 +28,12 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
+import { MobileCategoryWrapper } from "@docspace/shared/components/mobile-category-wrapper";
+
 import { StyledBaseQuotaComponent } from "../StyledComponent";
-import MobileCategoryWrapper from "../../../components/MobileCategoryWrapper";
 
 const MobileQuotasComponent = ({ isDisabled }) => {
-  const { t } = useTranslation("Settings");
+  const { t } = useTranslation(["Settings", "Common"]);
   const navigate = useNavigate();
 
   const onClickLink = (e) => {
@@ -57,7 +58,20 @@ const MobileQuotasComponent = ({ isDisabled }) => {
         url="/portal-settings/management/disk-space/quota-per-user"
         subtitle={t("UserDefaultQuotaDescription", {
           productName: t("Common:ProductName"),
-          sectionName: t("Common:MyFilesSection"),
+          sectionName: t("Common:MyDocuments"),
+        })}
+        isDisabled={isDisabled}
+      />
+      <MobileCategoryWrapper
+        title={t("QuotaPerAIAgent", {
+          aiAgent: t("Common:AIAgent"),
+        })}
+        onClickLink={onClickLink}
+        url="/portal-settings/management/disk-space/quota-per-ai-agent"
+        subtitle={t("SetDefaultAIAgentQuota", {
+          productName: t("Common:ProductName"),
+          aiAgents: t("Common:AIAgents"),
+          aiAgent: t("Common:AIAgent"),
         })}
         isDisabled={isDisabled}
       />

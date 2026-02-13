@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,9 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import { getConvertedQuota } from "@docspace/shared/utils/common";
 import { Text } from "@docspace/shared/components/text";
@@ -36,7 +37,8 @@ import api from "@docspace/shared/api";
 
 import { connectedCloudsTypeTitleTranslation } from "SRC_DIR/helpers/filesUtils";
 import { changeUserQuota } from "SRC_DIR/helpers/contacts";
-import { StyledBody, StyledText } from "./StyledComponent";
+
+import styles from "./space-quota.module.scss";
 
 const getOptions = (t, item, spaceLimited) => {
   const items = [
@@ -73,9 +75,9 @@ const getOptions = (t, item, spaceLimited) => {
 
   return items;
 };
+
 const SpaceQuota = (props) => {
   const {
-    hideColumns,
     isReadOnly,
     withoutLimitQuota,
     item,
@@ -90,10 +92,12 @@ const SpaceQuota = (props) => {
     needResetSelection,
     setSelected,
     inRoom,
+    dataTestId,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation(["Common"]);
+  const timeoutId = useRef(false);
 
   const usedQuota = getConvertedQuota(t, item?.usedSpace);
   const spaceLimited = getConvertedQuota(t, item?.quotaLimit);
@@ -101,38 +105,47 @@ const SpaceQuota = (props) => {
 
   const options = getOptions(t, item, spaceLimited);
 
+  useEffect(() => {
+    return () => {
+      clearTimeout(timeoutId.current);
+    };
+  }, []);
+
   const successCallback = (users) => {
     onSuccess && onSuccess(users);
     setIsLoading(false);
-
+    clearTimeout(timeoutId.current);
     needResetSelection && setSelected("close");
   };
 
   const abortCallback = () => {
     onAbort && onAbort();
     setIsLoading(false);
-
+    clearTimeout(timeoutId.current);
     needResetSelection && setSelected("close");
   };
 
   const onChange = async ({ action }) => {
-    setIsLoading(true);
-
     if (action === "change") {
       changeQuota([item], successCallback, abortCallback);
 
       return;
     }
 
+    timeoutId.current = setTimeout(() => {
+      setIsLoading(true);
+    }, 500);
+
     if (action === "no-quota") {
       try {
-        const items = await updateQuota([item.id], -1, inRoom);
+        const items = await updateQuota([item.id], -1, inRoom());
+
+        successCallback(items);
 
         options.forEach((o) => {
           if (o.key === "no-quota") o.label = t("Common:Unlimited");
         });
 
-        successCallback(items);
         toastr.success(t("Common:StorageQuotaDisabled"));
       } catch (e) {
         abortCallback();
@@ -143,7 +156,7 @@ const SpaceQuota = (props) => {
     }
 
     try {
-      const items = await resetQuota([item.id], inRoom);
+      const items = await resetQuota([item.id], inRoom());
 
       options.forEach((o) => {
         if (o.key === "default-quota") o.label = defaultQuotaSize;
@@ -160,6 +173,9 @@ const SpaceQuota = (props) => {
   const action = item?.quotaLimit === -1 ? "no-quota" : "current-size";
 
   const selectedOption = options.find((elem) => elem.action === action);
+  const comboboxOptions = options.filter(
+    (elem) => elem.action !== "current-size",
+  );
 
   if (item.providerType) {
     return (
@@ -171,32 +187,43 @@ const SpaceQuota = (props) => {
 
   if (withoutLimitQuota || item?.quotaLimit === undefined) {
     return (
-      <StyledText fontWeight={600} $withoutLimitQuota>
+      <Text
+        fontWeight={600}
+        className={classNames(styles.text, {
+          [styles.withoutPadding]: withoutLimitQuota,
+        })}
+      >
         {usedQuota}
-      </StyledText>
+      </Text>
     );
   }
 
   if (isReadOnly) {
     return (
-      <StyledText fontWeight={600} $isReadOnly>
+      <Text
+        fontWeight={600}
+        className={classNames(styles.text, {
+          [styles.withoutPadding]: isReadOnly,
+        })}
+      >
         {usedQuota} / {spaceLimited}
-      </StyledText>
+      </Text>
     );
   }
 
   return (
-    <StyledBody
-      hideColumns={hideColumns}
-      className={className}
-      isLoading={isLoading}
+    <div
+      className={classNames(styles.body, className)}
+      data-testid={dataTestId}
     >
       <Text fontWeight={600}>{usedQuota} / </Text>
 
       <ComboBox
-        className="combobobox-space-quota"
+        className={classNames(styles.comboBoxSpaceQuota, {
+          [styles.loading]: isLoading,
+        })}
         selectedOption={selectedOption}
-        options={options}
+        options={comboboxOptions}
         onSelect={onChange}
         scaled={false}
         size="content"
@@ -205,7 +232,7 @@ const SpaceQuota = (props) => {
         manualWidth="auto"
         directionY="both"
       />
-    </StyledBody>
+    </div>
   );
 };
 
@@ -223,35 +250,61 @@ export default inject(
     const { usersStore } = peopleStore;
     const { needResetUserSelection, setSelected: setUsersSelected } =
       usersStore;
-    const { changeRoomQuota } = filesActionsStore;
+    const { changeRoomQuota, changeAIAgentsQuota } = filesActionsStore;
     const {
       setCustomRoomQuota,
-      setSelected: setRoomsSelected,
+      setCustomAIAgentQuota,
       resetRoomQuota,
+      resetAIAgentQuota,
+      setSelected: setRoomsSelected,
       needResetFilesSelection,
     } = filesStore;
 
     const {
       isDefaultUsersQuotaSet,
       isDefaultRoomsQuotaSet,
+      isDefaultAIAgentsQuotaSet,
       defaultUsersQuota,
       defaultRoomsQuota,
+      defaultAIAgentsQuota,
     } = currentQuotaStore;
 
-    const { infoPanelSelection } = infoPanelStore;
-    const inRoom = !!infoPanelSelection?.navigationPath;
+    const { inRoom, isVisible: infoPanelVisible } = infoPanelStore;
 
-    const changeQuota = type === "user" ? changeUserQuota : changeRoomQuota;
+    const changeQuota =
+      type === "user"
+        ? changeUserQuota
+        : type === "agent"
+          ? changeAIAgentsQuota
+          : changeRoomQuota;
+
     const updateQuota =
-      type === "user" ? api.people.setCustomUserQuota : setCustomRoomQuota;
+      type === "user"
+        ? api.people.setCustomUserQuota
+        : type === "agent"
+          ? setCustomAIAgentQuota
+          : setCustomRoomQuota;
 
     const resetQuota =
-      type === "user" ? api.people.resetUserQuota : resetRoomQuota;
+      type === "user"
+        ? api.people.resetUserQuota
+        : type === "agent"
+          ? resetAIAgentQuota
+          : resetRoomQuota;
 
     const withoutLimitQuota =
-      type === "user" ? !isDefaultUsersQuotaSet : !isDefaultRoomsQuotaSet;
+      type === "user"
+        ? !isDefaultUsersQuotaSet
+        : type === "agent"
+          ? !isDefaultAIAgentsQuotaSet
+          : !isDefaultRoomsQuotaSet;
 
-    const defaultSize = type === "user" ? defaultUsersQuota : defaultRoomsQuota;
+    const defaultSize =
+      type === "user"
+        ? defaultUsersQuota
+        : type === "agent"
+          ? defaultAIAgentsQuota
+          : defaultRoomsQuota;
 
     const needResetSelection =
       type === "user" ? needResetUserSelection : needResetFilesSelection;
@@ -265,7 +318,7 @@ export default inject(
       updateQuota,
       resetQuota,
       defaultSize,
-      needResetSelection,
+      needResetSelection: !infoPanelVisible || needResetSelection,
       inRoom,
     };
   },

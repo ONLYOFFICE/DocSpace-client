@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -36,6 +36,7 @@ import {
   TextInput,
 } from "@docspace/shared/components/text-input";
 import { dimensionsModel } from "../../../../pages/PortalSettings/categories/developer-tools/JavascriptSDK/constants";
+import styles from "../EmbeddingPanel.module.scss";
 
 type DisplayBlockProps = {
   label: string;
@@ -53,17 +54,22 @@ const DisplayBlock = ({
   onSelectDimension,
 }: DisplayBlockProps) => {
   return (
-    <div className="embedding-panel_block">
-      <Text fontSize="13px" fontWeight={600} className="embedding-panel_text">
+    <div className={styles.embeddingPanelBlock}>
+      <Text
+        fontSize="13px"
+        fontWeight={600}
+        className={styles.embeddingPanelText}
+      >
         {label}
       </Text>
-      <div className="embedding-panel_size-block">
+      <div className={styles.embeddingPanelSizeBlock}>
         <TextInput
           type={InputType.text}
           size={InputSize.base}
-          className="embedding-panel_input"
+          className={styles.embeddingPanelInput}
           value={inputValue}
           onChange={onInputChange}
+          testId="embedding_panel_size_input"
         />
         <ComboBox
           size={ComboBoxSize.content}
@@ -74,6 +80,7 @@ const DisplayBlock = ({
           selectedOption={selectedOption}
           displaySelectedOption
           directionY="bottom"
+          dataTestId="embedding_panel_size_combobox"
         />
       </div>
     </div>

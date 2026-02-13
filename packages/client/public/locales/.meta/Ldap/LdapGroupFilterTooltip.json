@@ -3,7 +3,7 @@
   "content": "Use search LDAP filter to select groups that will be imported. Please note that only users from these groups will be added.",
   "content_en_sha1_hash": "dc6338d561e32252d4896cb60ea66b4caf7e0c0f",
   "created_at": "2025-05-19T21:30:54.213Z",
-  "updated_at": "2025-05-21T08:20:15.479Z",
+  "updated_at": "2025-08-11T18:11:59.245Z",
   "comment": {
     "text": "This translation key is used for a tooltip that provides guidance on using an LDAP filter to select groups for import. It helps users understand that only members of these groups will be added.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/GroupMembership.js",
-      "line_number": 156,
-      "context": "isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n labelText={t(\"LdapGroupFilter\")}\n hasError={errors.groupFilter}\n tooltipContent={t(\"LdapGroupFilterTooltip\")}\n className=\"ldap_group-filter\"\n inlineHelpButton\n isRequired\n >\n <LdapFieldComponent",
+      "line_number": 162,
+      "context": "isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n labelText={t(\"LdapGroupFilter\")}\n hasError={errors.groupFilter}\n tooltipContent={t(\"LdapGroupFilterTooltip\")}\n className=\"ldap_group-filter\"\n inlineHelpButton\n isRequired\n dataTestId=\"group_filter_field_container\"\n >",
       "module": "/packages/client"
     }
   ],
@@ -30,13 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"استخدم تصفية LDAP للبحث\" is a somewhat literal translation of \"Use search LDAP filter\". A more natural and user-friendly phrasing would be \"استخدم عامل تصفية LDAP...\" or \"استخدم فلتر بحث LDAP...\"",
-          "suggestion": "استخدم عامل تصفية LDAP..."
+          "description": "The translation 'استخدم تصفية LDAP للبحث لتحديد المجموعات التي سيتم استيرادها' is a literal translation and could be improved for better flow and naturalness in Arabic. Specifically, 'تصفية LDAP للبحث' is a bit clunky.  A more natural phrasing would be something along the lines of 'استخدم عامل تصفية LDAP لتحديد...'",
+          "suggestion": "استخدم عامل تصفية LDAP لتحديد المجموعات التي سيتم استيرادها."
         },
         {
-          "type": "formatting",
-          "description": "The use of periods after each sentence in Arabic is correct, but consistency in applying this throughout the UI is recommended.",
-          "suggestion": null
+          "type": "incorrect_translation",
+          "description": "The phrase 'يرجى ملاحظة أنه سيتم إضافة المستخدمين من هذه المجموعات فقط.' is grammatically correct, but could be more concise and impactful. 'فقط' (only) is redundant given the context.",
+          "suggestion": "يرجى ملاحظة أنه سيتم إضافة المستخدمين من هذه المجموعات فقط."
         }
       ],
       "approved_at": null
@@ -47,13 +47,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'İdxal' is a bit uncommon in this context. A more common and understandable word would be 'daxil etmək'.",
-          "suggestion": "Daxil ediləcək qrupları seçmək üçün LDAP axtarış filtrindən istifadə edin."
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence 'Yalnız bu qruplardakı istifadəçilərin əlavə olunacağını nəzərə alın.' could be more fluid. The phrase 'nəzərə alın' feels slightly awkward.",
-          "suggestion": "Yalnız bu qruplardakı istifadəçilər əlavə olunacaqdır."
+          "description": "The word 'İdxal' is likely a typo and should be 'İstifadə'.",
+          "suggestion": "İstifadə ediləcək"
         }
       ],
       "approved_at": null
@@ -70,13 +65,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'K výběru skupin, které budou importovány, použijte filtr LDAP pro vyhledávání' is a bit clunky. The phrase 'použijte filtr LDAP pro vyhledávání' (use LDAP filter for searching) doesn't directly correspond to 'Use search LDAP filter'. A more natural translation would emphasize *applying* the filter.",
-          "suggestion": "K výběru skupin pro import použijte vyhledávací filtr LDAP. Upozorňujeme, že budou přidáni pouze uživatelé z těchto skupin."
+          "description": "The translation \"K výběru skupin, které budou importovány, použijte filtr LDAP pro vyhledávání.\" is not the most natural phrasing. 'Use search LDAP filter' implies a direct application of a filter, while this translation emphasizes using a filter *for* searching. The emphasis is slightly off.",
+          "suggestion": "K importovaným skupinám použijte filtr LDAP. Upozorňujeme, že budou přidáni pouze uživatelé z těchto skupin."
         },
         {
           "type": "formatting",
-          "description": "While grammatically correct, the sentence structure could be improved for better flow and readability. Splitting the information into two sentences would enhance clarity.",
-          "suggestion": "Použijte vyhledávací filtr LDAP k výběru skupin, které budou importovány. Upozorňujeme, že budou přidáni pouze uživatelé z těchto skupin."
+          "description": "The Czech translation is split into two sentences, while the English is a single sentence with a note.  While not strictly incorrect, it's beneficial to consider restructuring for consistency or flow.",
+          "suggestion": "K importovaným skupinám použijte filtr LDAP. Upozorňujeme, že budou přidáni pouze uživatelé z těchto skupin."
         }
       ],
       "approved_at": null
@@ -117,18 +112,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Օգտագործել որոնման LDAP զտիչը\" is a literal translation of \"Use search LDAP filter\". A more natural Armenian phrasing would be something like \"Բացի LDAP զտիչով խմբերը ընտրելու համար\" (Use an LDAP filter to select groups).",
-          "suggestion": "Բացի LDAP զտիչով խմբերը ընտրելու համար"
+          "description": "The phrase \"Օգտագործել որոնման LDAP զտիչը\" could be more accurately translated as 'Use an LDAP search filter'. While technically correct, 'որոնման' (search) feels slightly redundant and can be omitted for conciseness.",
+          "suggestion": "Օգտագործել LDAP զտիչը"
         },
         {
           "type": "incorrect_translation",
-          "description": "The term 'զտիչ' (filter) while technically correct, might be too technical for the intended audience. A more accessible term might be preferable depending on the user base.",
-          "suggestion": "Consider using a more accessible term like 'տրամադրիչ' or 'շարքիչ' depending on context and target audience."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Խնդրում ենք նկատի ունենալ, որ կավելացվեն միայն այս խմբերի օգտվողները:\" is quite formal. A more conversational tone could be used.  \"Խնդրում ենք հաշվի առնել, որ միայն այս խմբերի անդամները կավելացվեն\" (Please note that only members of these groups will be added.) is slightly better.",
-          "suggestion": "Խնդրում ենք հաշվի առնել, որ միայն այս խմբերի անդամները կավելացվեն"
+          "description": "The phrase \"կավելացվեն միայն այս խմբերի օգտվողները\" is a literal translation of 'only users from these groups will be added'. A more natural flow in Armenian might be 'միայն այս խմբերում գտնվող օգտվողները կավելացվեն'.",
+          "suggestion": "միայն այս խմբերում գտնվող օգտվողները կավելացվեն"
         }
       ],
       "approved_at": null
@@ -142,7 +132,18 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"インポートするグループを選択します\" (import suru group o sentaku shimasu) is a bit literal and could be improved for naturalness. A more natural phrasing would emphasize the filtering action.",
+          "suggestion": "インポート対象のグループをLDAPフィルタで絞り込みます。(Import the target groups using an LDAP filter.)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"これらのグループのユーザーのみが追加されることに注意してください\" is a bit clunky. It can be simplified for better flow.",
+          "suggestion": "これらのグループのユーザーのみが取り込まれます。(Only users from these groups will be imported.)"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -151,13 +152,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"가져오기할 그룹을 선택하기 위해\" is a bit clunky. A more natural Korean phrasing would be '그룹 가져오기를 위해' or '그룹 선택을 위해'.",
-          "suggestion": "그룹 선택을 위해 검색 LDAP 필터를 사용하세요."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"해당 그룹의 사용자만 추가된다는 점을 참고하세요\" is grammatically correct but sounds somewhat formal and stiff for a tooltip. It can be simplified.",
-          "suggestion": "해당 그룹의 사용자만 추가됩니다."
+          "description": "The phrase \"해당 그룹의 사용자만 추가된다는 점을 참고하세요\" could be more naturally translated as \"선택된 그룹의 사용자만 추가됩니다.\" or \"선택된 그룹의 사용자만 추가될 것입니다.\" The current phrasing is grammatically correct but slightly awkward.",
+          "suggestion": "선택된 그룹의 사용자만 추가됩니다."
         }
       ],
       "approved_at": null
@@ -167,14 +163,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The phrase 'ໃຊ້ໄດ້ແລ້ວ' is awkwardly placed and doesn't translate to anything meaningful in the English context. It seems like an incomplete thought.",
-          "suggestion": "Remove 'ໃຊ້ໄດ້ແລ້ວ'. The sentence flows better without it."
+          "type": "incorrect_translation",
+          "description": "The phrase \"ໃຊ້ໄດ້ແລ້ວ\" (used laeo) seems out of place and doesn't accurately convey the intended meaning of 'Please note'. It’s likely an unintended addition or mistranslation.",
+          "suggestion": "Remove \"ໃຊ້ໄດ້ແລ້ວ\" and rephrase the sentence for clarity.  Consider something like \"ສັງເກດວ່າ\" (sang ket wa) or \"ແດ່ໃສ່ໃຈວ່າ\" (dae sai jai wa)."
         },
         {
           "type": "incorrect_translation",
-          "description": "While the general meaning is conveyed, 'ຕົວປ່ຽນແກ້ໄຂການຄົ້ນຫາ' is a very literal translation of 'search filter'. A more natural Lao equivalent could be explored.",
-          "suggestion": "Consider using a more idiomatic Lao expression for 'search filter' that better fits the context, perhaps something closer to 'ການກັ່ນຕອນການຄົ້ນຫາ' or similar. Further research may be required to find the most appropriate term."
+          "description": "While technically correct, the sentence structure is a bit awkward.  'ຜູ້ໃຊ້ຈາກກຸ່ມເຫລົ່ານີ້ເທົ່ານັ້ນທີ່ຈະຖືກເພີ່ມເຂົ້າ' (phu sai jak khum leo ni thao nan ja thuk phoem khao) could be more fluid.",
+          "suggestion": "Consider rephrasing to: 'ຜູ້ໃຊ້ຈາກກຸ່ມເຫລົ່ານີ້ຈະຖືກເພີ່ມເຂົ້າເທົ່ານັ້ນ' (phu sai jak khum leo ni ja thuk phoem khao thao nan) or 'ຜູ້ໃຊ້ໃນກຸ່ມເຫລົ່ານີ້ຈະຖືກເພີ່ມເຂົ້າເທົ່ານັ້ນ' (phu sai nai khum leo ni ja thuk phoem khao thao nan)."
         }
       ],
       "approved_at": null
@@ -215,13 +211,13 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Romanian translation uses 'pentru importul' which is less idiomatic. It should be 'pentru import'.",
-          "suggestion": "Folosiți filtru de căutare LDAP pentru a selecta grupuri pentru import."
+          "description": "The preposition 'pentru' is repeated unnecessarily. The phrase 'pentru importul' can be shortened to 'pentru import'.",
+          "suggestion": "Folosiți filtru de căutare LDAP pentru a selecta grupuri pentru import. Vă rugăm să rețineți că vor fi adăugate numai utilizatorii din aceste grupuri."
         },
         {
           "type": "grammar",
-          "description": "The Romanian translation uses 'vor fi adăugate', which is grammatically correct but sounds a bit formal and passive. A more natural phrasing would be 'vor fi adăugați' or 'se vor adăuga'.",
-          "suggestion": "Folosiți filtru de căutare LDAP pentru a selecta grupuri pentru import. Vă rugăm să rețineți că vor fi adăugați numai utilizatorii din aceste grupuri."
+          "description": "It's more natural in Romanian to use a reflexive verb in this context. \"Vor fi adăugate\" is correct, but could be improved.",
+          "suggestion": "Vor fi adăugați numai utilizatorii din aceste grupuri."
         }
       ],
       "approved_at": null
@@ -238,13 +234,18 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'පෙරහන' (perahana) is a direct transliteration of 'filter'. While understandable, a more natural Sinhala equivalent might be 'ගවේෂණ පෙරහණය' (gaveshana perahana) or simply 'පෙරහණය' (perahana) depending on the desired level of formality.",
-          "suggestion": "ගවේෂණ පෙරහණය"
+          "description": "The word 'ආයාත' (aayata) is used, which is correct for 'import'.",
+          "suggestion": null
         },
         {
           "type": "grammar",
-          "description": "The sentence structure 'මෙම සමූහවල සිටින පරිශීලකයින් පමණක් එකතු කරනු ලැබේ' (mema samūhavala sitina parīśīlakayin pamaṇak ekathuka karanu labē) can be slightly improved for smoother reading. A more natural phrasing would be 'මෙම සමූහවල සිටින පරිශීලකයින් පමණක් එක් කරනු ලැබේ' (mema samūhavala sitina parīśīlakayin pamaṇak ek karanu labē).",
-          "suggestion": "මෙම සමූහවල සිටින පරිශීලකයින් පමණක් එක් කරනු ලැබේ"
+          "description": "The sentence structure 'මෙම සමූහවල සිටින පරිශීලකයින් පමණක් එකතු කරනු ලැබේ' (Mema samuhavala sitina parishesilakayin pamanamak ethakunu karanu labe) is grammatically correct but could be slightly more natural sounding. A more common phrasing might be 'මෙම සමූහවල සිටින පරිශීලකයින් පමණක් අ එක්රින' (Mema samuhavala sitina parishesilakayin pamanamak ekarinu).",
+          "suggestion": "මෙම සමූහවල සිටින පරිශීලකයින් පමණක් එක්රින."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation maintains the same sentence structure as the English, which is acceptable. However, Sinhala often allows for more flexibility in phrasing, which could lead to a more elegant translation.",
+          "suggestion": null
         }
       ],
       "approved_at": null
@@ -261,13 +262,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Please note that' is too formal for the context of a tooltip.  'Upoštevaj' (Consider) doesn't quite capture the intended meaning of emphasizing a restriction. A more natural phrasing would be something like 'Pozor' (Attention) or 'Pomembno' (Important).",
-          "suggestion": "Uporabi iskalni filter LDAP, da izbereš skupine, ki bodo uvožene. Pozor: dodani bodo samo uporabniki iz teh skupin."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The passive voice 'will be added' ('bodo dodani') is less direct than the English. A more active voice may improve readability.",
-          "suggestion": "Uporabi iskalni filter LDAP, da izbereš skupine, ki bodo uvožene. Pozor: v te skupine bodo dodani samo uporabniki."
+          "description": "The phrase \"Upoštevaj, da bodo dodani samo uporabniki iz teh skupin\" is a bit clunky. 'Upoštevaj' (consider) isn't the most natural way to phrase this. It's not incorrect, but could be improved for better flow.",
+          "suggestion": "Namesto 'Upoštevaj, da bodo dodani samo uporabniki iz teh skupin', bolje bi bilo 'Samo uporabniki iz teh skupin bodo dodani' or 'Dodani bodo samo uporabniki iz teh skupin'."
         }
       ],
       "approved_at": null
@@ -278,8 +274,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ц́е' appears multiple times. This is an incorrect representation of 'će' in Serbian Cyrillic. It appears to be an OCR error or an improper use of the combining character.",
-          "suggestion": "Replace all instances of 'ц́е' with 'ће'."
+          "description": "The word 'ц́е' appears multiple times and is likely a rendering issue. It should be 'ће'.",
+          "suggestion": "ће"
         }
       ],
       "approved_at": null
@@ -290,8 +286,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"pretragu da biste izabrali\" is somewhat awkward. A more natural phrasing would be \"za odabir\" or \"kako biste odabrali\".",
-          "suggestion": "Koristite LDAP filter za odabir grupa koje će biti uvezene."
+          "description": "The phrase \"da biste izabrali grupe koje će biti uvezene\" is somewhat awkward. A more natural phrasing would be \"za odabir grupa koje će biti uvezene\".",
+          "suggestion": "Koristite LDAP filter za pretragu za odabir grupa koje će biti uvezene."
+        },
+        {
+          "type": "formatting",
+          "description": "The semicolon after 'uvezene' is unnecessary. Serbian generally avoids semicolons in informal contexts.",
+          "suggestion": "Koristite LDAP filter za pretragu za odabir grupa koje će biti uvezene. Imajte na umu da će biti dodati samo korisnici iz ovih grupa."
         }
       ],
       "approved_at": null
@@ -314,13 +315,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'nhập' (import) in the context of LDAP groups could be confusing. A more accurate translation might be 'đồng bộ hóa' (synchronize) or 'nhập vào hệ thống' (import into the system). 'Nhập' is too generic and could be misinterpreted.",
-          "suggestion": "Sử dụng bộ lọc LDAP tìm kiếm để chọn các nhóm sẽ được đồng bộ hóa. Xin lưu ý rằng chỉ những người dùng từ các nhóm này mới được thêm vào."
-        },
-        {
-          "type": "formatting",
-          "description": "While grammatically correct, the sentence structure could be slightly improved for better flow in Vietnamese. Consider restructuring the sentences for a more natural feel.",
-          "suggestion": "Sử dụng bộ lọc LDAP để chọn các nhóm sẽ được nhập vào hệ thống. Xin lưu ý rằng chỉ những người dùng từ các nhóm đã chọn mới được thêm."
+          "description": "The translation 'Sử dụng bộ lọc LDAP tìm kiếm để chọn các nhóm sẽ được nhập' could be improved for clarity and flow. The phrase 'tìm kiếm' (search) is redundant as 'bộ lọc LDAP' already implies a search filter. A more natural phrasing might omit it.",
+          "suggestion": "Sử dụng bộ lọc LDAP để chọn các nhóm sẽ được nhập."
         }
       ],
       "approved_at": null

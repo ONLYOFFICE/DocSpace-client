@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { useTranslation } from "react-i18next";
 import copy from "copy-to-clipboard";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { a11yDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
@@ -37,19 +38,24 @@ import { useTheme } from "../../../../../../hooks/useTheme";
 
 import { Text } from "../../../../../text";
 import { IconButton } from "../../../../../icon-button";
+import { Scrollbar } from "../../../../../scrollbar";
+import { toastr } from "../../../../../toast";
 
 import styles from "../../ChatMessageBody.module.scss";
 
-type CodeBlockProps = {
-  language?: string;
-  content: string;
-};
+import { MessageCodeBlockProps } from "../../../../Chat.types";
 
-const CodeBlock = ({ language, content }: CodeBlockProps) => {
+const CodeBlock = ({
+  language,
+  content,
+  successCopyMessage,
+}: MessageCodeBlockProps) => {
   const { isBase } = useTheme();
+  const { t } = useTranslation(["Common"]);
 
   const onCopy = () => {
     copy(content);
+    toastr.success(successCopyMessage ?? t("Common:CopiedToClipboard"));
   };
 
   return (
@@ -63,14 +69,20 @@ const CodeBlock = ({ language, content }: CodeBlockProps) => {
           onClick={onCopy}
         />
       </div>
-      <SyntaxHighlighter
-        language={language}
-        style={isBase ? a11yLight : a11yDark}
-        className={styles.codeBody}
-        customStyle={isBase ? {} : { background: "none" }}
+      <Scrollbar
+        className={styles.codeBlockScroll}
+        translateContentSizeYToHolder
+        rtl={false}
       >
-        {content}
-      </SyntaxHighlighter>
+        <SyntaxHighlighter
+          language={language}
+          style={isBase ? a11yLight : a11yDark}
+          className={styles.codeBody}
+          customStyle={isBase ? {} : { background: "none" }}
+        >
+          {content}
+        </SyntaxHighlighter>
+      </Scrollbar>
     </div>
   );
 };

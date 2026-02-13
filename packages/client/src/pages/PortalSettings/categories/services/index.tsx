@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,81 +24,407 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import { useLocation, useNavigate } from "react-router";
+
 import { toastr } from "@docspace/shared/components/toast";
+import {
+  AI_TOOLS,
+  BACKUP_SERVICE,
+  TOTAL_SIZE,
+  WEB_SEARCH,
+} from "@docspace/shared/constants";
+import { setServiceState } from "@docspace/shared/api/portal";
 
-import AdditionalStorage from "./AdditionalStorage";
-import StorageDialog from "./StorageDialog";
+import { StorageTariffDeactiveted } from "SRC_DIR/components/dialogs";
+import TopUpModal from "SRC_DIR/components/panels/TopUpBalance/TopUpModal";
+
+import ServicesItems from "./ServicesItems";
 import ServicesLoader from "./ServicesLoader";
+import StoragePlanUpgrade from "./sub-components/AdditionalStorage/StoragePlanUpgrade";
+import StoragePlanCancel from "./sub-components/AdditionalStorage/StoragePlanCancel";
+import GracePeriodModal from "./sub-components/AdditionalStorage/GracePeriodModal";
+import BackupServiceDialog from "./sub-components/Backup/BackupServiceDialog";
+import ConfirmationDialog from "./sub-components/ConfirmationDialog";
+import AIServiceDialog from "./sub-components/AITools/AIServiceDialog";
+import WebSearchDialog from "./sub-components/WebSearch/WebSearchDialog";
 
-type ServicesProps = {
-  servicesInit: () => void;
-  isInitServicesPage: boolean;
-};
+const Services = (props: InjectedProps) => {
+  const {
+    isInitServicesPage,
+    isVisibleWalletSettings,
+    isGracePeriod,
+    previousStoragePlanSize,
+    isShowStorageTariffDeactivatedModal,
+    changeServiceState,
+    isCardLinkedToPortal,
+    setConfirmActionType,
+    confirmActionType,
+    setIsInitServicesPage,
+    setVisibleWalletSetting,
+    showPortalSettingsLoader,
+    isFreeTariff,
+  } = props;
+  const { t, ready } = useTranslation(["Payments", "Services", "Common"]);
+  const [dialogVisibility, setDialogVisibility] = useState({
+    [TOTAL_SIZE]: false,
+    [BACKUP_SERVICE]: false,
+    [AI_TOOLS]: false,
+    [WEB_SEARCH]: false,
+  });
 
-let timerId: NodeJS.Timeout | null = null;
+  const updateDialogVisibility = (
+    dialogType: keyof typeof dialogVisibility,
+    isVisible: boolean,
+  ) => {
+    setDialogVisibility((prev) => ({
+      ...prev,
+      [dialogType]: isVisible,
+    }));
+  };
 
-const Services: React.FC<ServicesProps> = ({
-  servicesInit,
-  isInitServicesPage,
-}) => {
-  const { t, ready } = useTranslation(["Payments", "Common"]);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isConfirmDialogVisible, setIsConfirmDialogVisible] = useState(false);
+  const [isCurrentConfirmState, setIsCurrentConfirmState] = useState(false);
+  const [isStorageCancelattion, setIsStorageCancellation] = useState(false);
+  const [isGracePeriodModalVisible, setIsGracePeriodModalVisible] =
+    useState(false);
+  const [previousValue, setPreviousValue] = useState(0);
 
-  const [showLoader, setShowLoader] = useState(false);
+  const [isTopUpBalanceVisible, setIsTopUpBalanceVisible] = useState(false);
+
   const shouldShowLoader = !isInitServicesPage || !ready;
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { openDialog } = location.state || {};
+
+  const previousDialogRef = useRef<boolean>(false);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        await servicesInit();
-      } catch (error) {
-        toastr.error(t("Common:UnexpectedError"));
-      }
-    };
+    if (!isVisibleWalletSettings || !isInitServicesPage) return;
 
-    fetchData();
-  }, [servicesInit]);
+    if (confirmActionType === TOTAL_SIZE) {
+      updateDialogVisibility(TOTAL_SIZE, isVisibleWalletSettings);
+    } else {
+      setIsTopUpBalanceVisible(true);
+    }
+  }, [
+    isVisibleWalletSettings,
+    confirmActionType,
+    isInitServicesPage,
+    updateDialogVisibility,
+  ]);
 
   useEffect(() => {
-    timerId = setTimeout(() => {
-      setShowLoader(true);
-    }, 200);
+    if (openDialog) {
+      updateDialogVisibility(TOTAL_SIZE, openDialog);
+      setPreviousValue(previousStoragePlanSize);
+      navigate(location.pathname, { replace: true });
+    }
+  }, [openDialog, updateDialogVisibility]);
 
+  useEffect(() => {
     return () => {
-      if (timerId) clearTimeout(timerId);
+      setIsInitServicesPage(false);
     };
   }, []);
 
-  const onClick = () => {
-    setIsVisible(true);
+  const confirmationDialogContent = {
+    [BACKUP_SERVICE]: {
+      title: t("Common:Confirmation"),
+      body: !isCurrentConfirmState
+        ? t("Services:EnableBackupConfirm", {
+            productName: t("Common:ProductName"),
+          })
+        : isFreeTariff
+          ? t("Services:DisableBackupConfirmWithoutQuota", {
+              productName: t("Common:ProductName"),
+            })
+          : t("Services:DisableBackupConfirm", {
+              productName: t("Common:ProductName"),
+            }),
+    },
+    [AI_TOOLS]: {
+      title: t("Common:Confirmation"),
+      body: t("Services:AItoolsConfirm", {
+        productName: t("Common:ProductName"),
+      }),
+    },
+    [WEB_SEARCH]: {
+      title: t("Common:Confirmation"),
+      body: "Temp Web Search Description Text",
+    },
+  };
+
+  const getDialogContent = (actionType: string | null) => {
+    if (!actionType || !(actionType in confirmationDialogContent)) {
+      return { title: "", body: "" };
+    }
+    return confirmationDialogContent[
+      actionType as keyof typeof confirmationDialogContent
+    ];
+  };
+
+  const onClick = (id: string) => {
+    setConfirmActionType(id);
+
+    if (id === TOTAL_SIZE && isGracePeriod) {
+      setIsGracePeriodModalVisible(true);
+      return;
+    }
+
+    updateDialogVisibility(id as keyof typeof dialogVisibility, true);
   };
 
   const onClose = () => {
-    setIsVisible(false);
+    updateDialogVisibility(TOTAL_SIZE, false);
   };
 
-  return shouldShowLoader ? (
-    showLoader ? (
-      <ServicesLoader />
-    ) : null
+  const onCloseStorageCancell = () => {
+    setIsStorageCancellation(false);
+  };
+
+  const onToggle = async (id: string, currentEnabled: boolean) => {
+    setConfirmActionType(id);
+
+    setIsCurrentConfirmState(currentEnabled);
+
+    if (id === TOTAL_SIZE) {
+      if (currentEnabled) {
+        setIsStorageCancellation(true);
+        return;
+      }
+      updateDialogVisibility(TOTAL_SIZE, true);
+
+      return;
+    }
+
+    if (!currentEnabled && !isCardLinkedToPortal) {
+      setIsTopUpBalanceVisible(true);
+      return;
+    }
+
+    if (id !== TOTAL_SIZE) {
+      if (dialogVisibility[id as keyof typeof dialogVisibility]) {
+        previousDialogRef.current = true;
+      }
+    }
+
+    if (!currentEnabled || id === BACKUP_SERVICE)
+      setIsConfirmDialogVisible(true);
+    else {
+      const raw = {
+        service: id,
+        enabled: false,
+      };
+
+      changeServiceState(id);
+
+      try {
+        await setServiceState(raw);
+      } catch (error) {
+        console.error(error);
+        toastr.error(t("Common:UnexpectedError"));
+        changeServiceState(id);
+      }
+    }
+  };
+
+  const onCloseGracePeriodModal = () => {
+    setIsGracePeriodModalVisible(false);
+  };
+
+  const onCloseBackup = () => {
+    updateDialogVisibility(BACKUP_SERVICE, false);
+  };
+
+  const onCloseAiService = () => {
+    updateDialogVisibility(AI_TOOLS, false);
+  };
+
+  const onCloseWebSearch = () => {
+    updateDialogVisibility(WEB_SEARCH, false);
+  };
+
+  const onCloseConfirmDialog = () => {
+    const isDialogVisible = previousDialogRef.current;
+
+    previousDialogRef.current = false;
+
+    if (isDialogVisible && confirmActionType) {
+      updateDialogVisibility(
+        confirmActionType as keyof typeof dialogVisibility,
+        true,
+      );
+    }
+
+    setIsConfirmDialogVisible(false);
+  };
+
+  const onConfirm = async () => {
+    if (!confirmActionType) return;
+
+    const raw = {
+      service: confirmActionType,
+      enabled: !isCurrentConfirmState,
+    };
+
+    setIsConfirmDialogVisible(false);
+    changeServiceState(confirmActionType);
+
+    const getSuccessMessage = () => {
+      if (confirmActionType === BACKUP_SERVICE) {
+        return t("Services:BackupServiceEnabled");
+      }
+      if (confirmActionType === AI_TOOLS) {
+        return t("Services:AIToolsEnabled");
+      }
+      if (confirmActionType === WEB_SEARCH) {
+        return t("Services:WebSearchEnabled", {
+          webSearch: t("Common:WebSearchAI"),
+        });
+      }
+    };
+
+    try {
+      const result = await setServiceState(raw);
+
+      if (!result) {
+        toastr.error(t("Common:UnexpectedError"));
+        changeServiceState(confirmActionType);
+        return;
+      }
+
+      if (!isCurrentConfirmState) toastr.success(getSuccessMessage());
+    } catch (error) {
+      console.error(error);
+      toastr.error(t("Common:UnexpectedError"));
+      changeServiceState(confirmActionType);
+    }
+  };
+
+  const onCloseTopUpModal = (isTopUp: boolean | Event) => {
+    setIsTopUpBalanceVisible(false);
+    setVisibleWalletSetting(false);
+    if (isTopUp) {
+      setIsConfirmDialogVisible(true);
+    }
+  };
+
+  return shouldShowLoader && showPortalSettingsLoader ? (
+    <ServicesLoader />
   ) : (
     <>
-      <AdditionalStorage onClick={onClick} />
-      <StorageDialog visible={isVisible} onClose={onClose} />
+      <ServicesItems onClick={onClick} onToggle={onToggle} />
+      {isShowStorageTariffDeactivatedModal ? (
+        <StorageTariffDeactiveted
+          visible={isShowStorageTariffDeactivatedModal}
+        />
+      ) : null}
+      {dialogVisibility[TOTAL_SIZE] ? (
+        <StoragePlanUpgrade
+          visible={dialogVisibility[TOTAL_SIZE]}
+          onClose={onClose}
+          previousValue={previousValue}
+        />
+      ) : null}
+      {isStorageCancelattion ? (
+        <StoragePlanCancel
+          visible={isStorageCancelattion}
+          onClose={onCloseStorageCancell}
+        />
+      ) : null}
+      {isGracePeriodModalVisible ? (
+        <GracePeriodModal
+          visible={isGracePeriodModalVisible}
+          onClose={onCloseGracePeriodModal}
+        />
+      ) : null}
+      {dialogVisibility[BACKUP_SERVICE] ? (
+        <BackupServiceDialog
+          visible={dialogVisibility[BACKUP_SERVICE]}
+          onClose={onCloseBackup}
+          onToggle={onToggle}
+        />
+      ) : null}
+      {dialogVisibility[AI_TOOLS] ? (
+        <AIServiceDialog
+          visible={dialogVisibility[AI_TOOLS]}
+          onClose={onCloseAiService}
+          onToggle={onToggle}
+        />
+      ) : null}
+      {dialogVisibility[WEB_SEARCH] ? (
+        <WebSearchDialog
+          visible={dialogVisibility[WEB_SEARCH]}
+          onClose={onCloseWebSearch}
+          onToggle={onToggle}
+        />
+      ) : null}
+      {isConfirmDialogVisible && confirmActionType ? (
+        <ConfirmationDialog
+          visible={isConfirmDialogVisible}
+          onClose={onCloseConfirmDialog}
+          onConfirm={onConfirm}
+          title={getDialogContent(confirmActionType).title}
+          bodyText={getDialogContent(confirmActionType).body}
+        />
+      ) : null}
+      {isTopUpBalanceVisible ? (
+        <TopUpModal
+          visible={isTopUpBalanceVisible}
+          onClose={onCloseTopUpModal}
+        />
+      ) : null}
     </>
   );
 };
 
-export const Component = inject(({ paymentStore }: TStore) => {
-  const { servicesInit, isInitServicesPage } = paymentStore;
+const mapStoreToProps = ({
+  servicesStore,
+  currentTariffStatusStore,
+  paymentStore,
+  clientLoadingStore,
+  currentQuotaStore,
+}: TStore) => {
+  const {
+    isInitServicesPage,
+    isVisibleWalletSettings,
+    setConfirmActionType,
+    confirmActionType,
+    setIsInitServicesPage,
+    setVisibleWalletSetting,
+  } = servicesStore;
+  const { isGracePeriod, previousStoragePlanSize } = currentTariffStatusStore;
+  const { isFreeTariff } = currentQuotaStore;
+  const {
+    isShowStorageTariffDeactivatedModal,
+    changeServiceState,
+    isCardLinkedToPortal,
+  } = paymentStore;
+
+  const { showPortalSettingsLoader } = clientLoadingStore;
 
   return {
-    servicesInit,
     isInitServicesPage,
+    isVisibleWalletSettings,
+    isShowStorageTariffDeactivatedModal,
+    isGracePeriod,
+    previousStoragePlanSize,
+    changeServiceState,
+    isCardLinkedToPortal,
+    setConfirmActionType,
+    confirmActionType,
+    setIsInitServicesPage,
+    setVisibleWalletSetting,
+    showPortalSettingsLoader,
+    isFreeTariff,
   };
-})(observer(Services));
+};
 
-export default Component;
+type InjectedProps = ReturnType<typeof mapStoreToProps>;
+
+export const Component = inject(mapStoreToProps)(
+  observer(Services),
+) as unknown as React.ComponentType;

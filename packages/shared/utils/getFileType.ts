@@ -1,8 +1,11 @@
-import { TFunction } from "i18next";
+import { TTranslation } from "../types/index";
 
 import { FileType } from "../enums";
 
-export const getFileTypeName = (fileType: FileType | string, t: TFunction) => {
+export const getFileTypeName = (
+  fileType: FileType | string,
+  t: TTranslation,
+) => {
   switch (fileType) {
     case FileType.Unknown:
       return t("Common:Unknown");
@@ -18,6 +21,8 @@ export const getFileTypeName = (fileType: FileType | string, t: TFunction) => {
       return t("Common:Spreadsheet");
     case FileType.Presentation:
       return t("Common:Presentation");
+    case FileType.Diagram:
+      return t("Common:Diagram");
     case FileType.Document:
     case FileType.OFormTemplate:
     case FileType.OForm:

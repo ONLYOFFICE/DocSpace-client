@@ -1,4 +1,4 @@
-FROM node:22-alpine
+FROM node:24-bookworm-slim
 
 # Set up working directory
 WORKDIR /app/common/translation-app/frontend

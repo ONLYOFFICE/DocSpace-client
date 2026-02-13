@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -77,6 +77,7 @@ const MembersParam = ({
         <SelectorAddButton
           iconName={PlusSvgUrl}
           label={t("PeopleTranslations:AddMembers")}
+          testId="select_members"
         />
       </Styled.AddMembersButton>
 
@@ -92,11 +93,12 @@ const MembersParam = ({
         ) : (
           groupMembers
             .filter((member) => member.id !== groupManager?.id)
-            .map((member) => (
+            .map((member, index) => (
               <GroupMemberRow
                 key={member.id}
                 groupMember={member}
                 removeMember={removeMember}
+                dataTestId={`group_member_row_${index}`}
               />
             ))
         )

@@ -1,5 +1,5 @@
 import React from "react";
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import { ArticleHeaderLoader } from ".";
 import { HeaderLoaderProps } from "./HeaderLoader.types";
 
@@ -15,7 +15,7 @@ export default {
   },
 } as Meta;
 
-const Template: Story<HeaderLoaderProps> = (args) => (
+const Template: StoryFn<HeaderLoaderProps> = (args) => (
   <ArticleHeaderLoader {...args} />
 );
 

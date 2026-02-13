@@ -3,7 +3,7 @@
   "content": "Welcome to the Form Filling Room!",
   "content_en_sha1_hash": "0df6f06ac784f688e2513f68c38cbed7fdc580f5",
   "created_at": "2025-05-19T21:30:55.153Z",
-  "updated_at": "2025-05-21T10:42:08.479Z",
+  "updated_at": "2025-08-21T11:22:39.817Z",
   "comment": {
     "text": "This translation key is used for a header text in a dialog box that welcomes users to a form filling interface. The text appears as a modal dialog's header. Translators should provide a warm and inclusive greeting for this context.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/FormFillingTipsDialog/index.tsx",
       "line_number": 115,
-      "context": "fontWeight=\"700\"\n fontSize=\"16px\"\n lineHeight=\"22px\"\n truncate\n >\n {t(\"WelcomeFillingForm\")}\n </Text>\n </ModalDialog.Header>\n <ModalDialog.Body>\n <div>\n <Text",
+      "context": "className=\"welcome-tips-header\"\n fontWeight=\"700\"\n fontSize=\"16px\"\n lineHeight=\"22px\"\n >\n {t(\"WelcomeFillingForm\")}\n </Text>\n </ModalDialog.Header>\n <ModalDialog.Body>\n <div>\n <Text",
       "module": "/packages/client"
     }
   ],
@@ -83,9 +83,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation \"Բարի գալուստ Ձևաթղթերի լրացման սենյակ:\" is a literal translation and sounds slightly unnatural. A more natural and welcoming greeting in Armenian would be something like \"Добро пожаловать в комнату заполнения форм\" (if Russian influence is acceptable) or \"Միջոց լրացնելու ձևերը\" (literal but less common) or a more colloquial equivalent depending on the target audience.",
-          "suggestion": "Consider \"Добро пожаловать в комнату заполнения форм\" or a more colloquial greeting like 'Hello! Welcome to the form filling room.'"
+          "type": "spelling",
+          "description": "The word 'Ձևաթղթերի' (Devathghtereri) seems to be a genitive plural form. While technically correct, it might sound slightly formal and stiff in this context. A more conversational option might be preferred.",
+          "suggestion": "Consider using a more direct possessive form, such as 'Ձևաթղթի' (Devathghti) - 'Form's' or a phrase like 'Ձևաթղթի համար' (Devathghti hamar) - 'For forms'."
         }
       ],
       "approved_at": null
@@ -126,8 +126,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Welkom in de kamer voor het Invullen van Formulieren' is overly literal and slightly awkward. A more natural Dutch phrasing would be more appropriate.",
-          "suggestion": "Welkom in de formulierkamer"
+          "description": "The translation 'Welkom in de kamer voor het Invullen van Formulieren' is a bit verbose and less natural than a more concise option. 'Kamer voor het invullen van formulieren' could be shortened.",
+          "suggestion": "Welkom in de formulierenkamer"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'het Invullen' is slightly less common and more formal than 'invullen'.",
+          "suggestion": "Welkom in de kamer om formulieren in te vullen"
         }
       ],
       "approved_at": null

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,5 +34,8 @@ export interface CreatedPDFFormDialogProps {
   localKey: string;
 }
 
-export interface InjectedCreatedPDFFormDialogProps
-  extends Pick<TStore["contextOptionsStore"], "onCopyLink"> {}
+export interface InjectedCreatedPDFFormDialogProps {
+  getItemUrl: TStore["filesStore"]["getItemUrl"];
+  getManageLinkOptions: TStore["contextOptionsStore"]["getManageLinkOptions"];
+  getFilesListItems: TStore["filesStore"]["getFilesListItems"];
+}

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,11 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useRef, useState, useEffect } from "react";
-import moment from "moment";
 import classNames from "classnames";
+import type { DateTime } from "luxon";
 
 import CalendarIconUrl from "PUBLIC_DIR/images/calendar.react.svg?url";
 import CalendarIcon from "PUBLIC_DIR/images/calendar.react.svg";
+
+import { parseToDateTime, formatDate, now } from "../../utils/date";
 
 import { Calendar } from "../calendar";
 import { SelectorAddButton } from "../selector-add-button";
@@ -52,24 +54,44 @@ const DatePicker = (props: DatePickerProps) => {
     openDate,
     isMobile,
     hideCross,
+    autoPosition,
+    testId,
+    useMaxTime,
   } = props;
 
   const calendarRef = useRef<HTMLDivElement | null>(null);
   const selectorRef = useRef<HTMLDivElement | null>(null);
   const selectedItemRef = useRef<HTMLDivElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const [shouldAlignRight, setShouldAlignRight] = useState(false);
 
-  const [date, setDate] = useState(initialDate ? moment(initialDate) : null);
+  const [date, setDate] = useState<DateTime | null>(
+    initialDate ? parseToDateTime(initialDate) : null,
+  );
 
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
-  const toggleCalendar = () =>
-    setIsCalendarOpen((prevIsCalendarOpen) => !prevIsCalendarOpen);
+  const toggleCalendar = () => {
+    setIsCalendarOpen((prevIsCalendarOpen) => {
+      if (!prevIsCalendarOpen && autoPosition) {
+        const container = containerRef.current;
+        if (container) {
+          const rect = container.getBoundingClientRect();
+          const viewportWidth = window.innerWidth;
+          const spaceToRight = viewportWidth - rect.left;
+
+          setShouldAlignRight(spaceToRight < 340);
+        }
+      }
+      return !prevIsCalendarOpen;
+    });
+  };
 
   const closeCalendar = () => {
     setIsCalendarOpen(false);
   };
 
-  const handleChange = (d: null | moment.Moment) => {
+  const handleChange = (d: null | DateTime) => {
     onChange?.(d);
     setDate(d);
     closeCalendar();
@@ -115,12 +137,12 @@ const DatePicker = (props: DatePickerProps) => {
       setDate(null);
     }
 
-    if (
-      outerDate &&
-      moment(outerDate).format("YYYY-MM-D HH:mm") !==
-        moment(date).format("YYYY-MM-D HH:mm")
-    ) {
-      setDate(outerDate);
+    if (outerDate) {
+      const outerDateFormatted = formatDate(outerDate, "yyyy-MM-d HH:mm");
+      const dateFormatted = date ? formatDate(date, "yyyy-MM-d HH:mm") : "";
+      if (outerDateFormatted !== dateFormatted) {
+        setDate(outerDate);
+      }
     }
   }, [date, outerDate]);
 
@@ -128,8 +150,9 @@ const DatePicker = (props: DatePickerProps) => {
     <div
       className={classNames(styles.wrapper, className)}
       id={id}
-      data-testid="date-picker"
+      data-testid={testId ?? "date-picker"}
       role="presentation"
+      ref={containerRef}
     >
       {!date ? (
         <div
@@ -147,6 +170,7 @@ const DatePicker = (props: DatePickerProps) => {
             className="add-delivery-date-button"
             iconName={CalendarIconUrl}
             label={selectDateText}
+            noSelect
           />
         </div>
       ) : null}
@@ -167,24 +191,26 @@ const DatePicker = (props: DatePickerProps) => {
                   className={styles.calendarIcon}
                   data-testid="calendar-icon"
                 />
-                {date.format("DD MMM YYYY")}
+                {formatDate(date, "dd MMM yyyy")}
               </span>
             ) : (
-              date.format("DD MMM YYYY")
+              formatDate(date, "dd MMM yyyy")
             )
           }
           onClick={toggleCalendar}
           forwardedRef={selectedItemRef}
-          aria-label={`Selected date: ${date.format("DD MMMM YYYY")}`}
+          aria-label={`Selected date: ${formatDate(date, "dd MMMM yyyy")}`}
           aria-expanded={isCalendarOpen}
         />
       ) : null}
 
       {isCalendarOpen ? (
         <Calendar
-          className={styles.calendar}
+          className={classNames(styles.calendar, {
+            [styles.rightAligned]: shouldAlignRight,
+          })}
           isMobile={isMobile}
-          selectedDate={date ?? moment()}
+          selectedDate={date ?? now()}
           setSelectedDate={handleChange}
           onChange={closeCalendar}
           forwardedRef={calendarRef}
@@ -192,6 +218,7 @@ const DatePicker = (props: DatePickerProps) => {
           maxDate={maxDate}
           locale={locale}
           initialDate={openDate}
+          useMaxTime={!date ? useMaxTime : false}
           aria-label="Date picker calendar"
         />
       ) : null}

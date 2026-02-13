@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,40 +25,40 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import "@testing-library/jest-dom";
-import { screen, fireEvent, waitFor } from "@testing-library/react";
+import { describe, it, expect, vi } from "vitest";
+import { screen, waitFor, render } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 import { InfoBadge } from ".";
 import type InfoBadgeProps from "./InfoBadge.types";
-
-import { renderWithTheme } from "../../utils/render-with-theme";
 
 const baseProps: InfoBadgeProps = {
   label: "label",
   offset: 4,
   place: "bottom",
-  tooltipDescription: "Description",
-  tooltipTitle: "Title",
+  tooltipDescription: <div>Description</div>,
+  tooltipTitle: <div>Title</div>,
 };
 
 describe("<InfoBadge />", () => {
   it("renders without error", () => {
-    renderWithTheme(<InfoBadge {...baseProps} />);
+    render(<InfoBadge {...baseProps} />);
 
     expect(screen.getByTestId("info-badge")).toBeInTheDocument();
   });
 
   it("renders badge with correct label", () => {
-    renderWithTheme(<InfoBadge {...baseProps} />);
+    render(<InfoBadge {...baseProps} />);
 
     expect(screen.getByText(baseProps.label)).toBeInTheDocument();
   });
 
   it("renders tooltip with correct title and description", async () => {
-    renderWithTheme(<InfoBadge {...baseProps} />);
+    const user = userEvent.setup();
+    render(<InfoBadge {...baseProps} />);
 
     const badge = screen.getByText(baseProps.label);
-    fireEvent.click(badge);
+    await user.click(badge);
 
     await waitFor(() => {
       expect(screen.getByTestId("tooltip-title")).toBeInTheDocument();
@@ -67,10 +67,11 @@ describe("<InfoBadge />", () => {
   });
 
   it("closes tooltip when close button is clicked", async () => {
-    renderWithTheme(<InfoBadge {...baseProps} />);
+    const user = userEvent.setup();
+    render(<InfoBadge {...baseProps} />);
 
     const badge = screen.getByText(baseProps.label);
-    fireEvent.click(badge);
+    await user.click(badge);
 
     // Wait for the tooltip to be visible
     await waitFor(() => {
@@ -78,32 +79,51 @@ describe("<InfoBadge />", () => {
     });
 
     // Now find the close button and click it
-    const closeButton = screen.getByTestId("icon-button");
-    fireEvent.click(closeButton);
+    const closeButton = screen.getByTestId("close-tooltip-button");
+    await user.click(closeButton);
 
     try {
       await waitFor(() => {
         expect(screen.queryByTestId("tooltip-title")).not.toBeInTheDocument();
       });
-    } catch (e) {
+    } catch {
       expect(true);
     }
   });
 
   it("renders with custom place and offset", async () => {
+    const user = userEvent.setup();
     const customProps = {
       ...baseProps,
       place: "top" as const,
       offset: 10,
     };
 
-    renderWithTheme(<InfoBadge {...customProps} />);
+    render(<InfoBadge {...customProps} />);
 
     const badge = screen.getByText(baseProps.label);
-    fireEvent.click(badge);
+    await user.click(badge);
 
     await waitFor(() => {
       expect(screen.getByTestId("tooltip-title")).toBeInTheDocument();
     });
+  });
+
+  it("renders simple string content tooltip", async () => {
+    const simpleProps: InfoBadgeProps = {
+      label: "label",
+      offset: 4,
+      place: "bottom",
+      tooltipDescription: "Simple description",
+      tooltipTitle: "Simple title",
+    };
+
+    render(<InfoBadge {...simpleProps} />);
+
+    const badge = screen.getByTestId("badge");
+
+    // For simple content, tooltip uses global tooltip with data-tooltip-html
+    expect(badge).toHaveAttribute("data-tooltip-id", "info-tooltip");
+    expect(badge).toHaveAttribute("data-tooltip-html");
   });
 });

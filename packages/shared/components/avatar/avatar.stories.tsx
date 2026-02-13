@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -37,6 +37,14 @@ const meta = {
     editAction: { action: "editAction" },
     onClick: { action: "onClick" },
     onChangeFile: { action: "onChangeFile" },
+    role: {
+      control: "select",
+      options: Object.values(AvatarRole),
+    },
+    size: {
+      control: "select",
+      options: Object.values(AvatarSize),
+    },
   },
   parameters: {
     docs: {

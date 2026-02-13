@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -64,9 +64,7 @@ type GroupsTableHeaderProps = {
   navigate: NavigateFunction;
   location: Location;
 
-  containerRef: React.MutableRefObject<
-    Nullable<React.ForwardedRef<HTMLDivElement>>
-  >;
+  containerRef: React.RefObject<Nullable<React.ForwardedRef<HTMLDivElement>>>;
 };
 
 type GroupTableHeaderState = { columns: TableHeaderColumn[] };
@@ -205,7 +203,6 @@ class GroupsTableHeader extends React.Component<
       infoPanelVisible,
       columnStorageName,
       columnInfoPanelStorageName,
-      tableStorageName,
     } = this.props;
 
     const sortBy = filter!.sortBy === "displayname" ? "AZ" : filter!.sortBy;
@@ -219,7 +216,6 @@ class GroupsTableHeader extends React.Component<
         columns={columns as TTableColumn[]}
         columnStorageName={columnStorageName!}
         columnInfoPanelStorageName={columnInfoPanelStorageName!}
-        tableStorageName={tableStorageName!}
         sectionWidth={sectionWidth}
         infoPanelVisible={infoPanelVisible}
         useReactWindow

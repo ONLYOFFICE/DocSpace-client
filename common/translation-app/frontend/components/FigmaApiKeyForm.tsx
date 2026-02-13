@@ -53,11 +53,11 @@ const FigmaApiKeyForm: React.FC<FigmaApiKeyFormProps> = ({ onSaved }) => {
         </p>
         <ol className="text-sm text-gray-600 dark:text-gray-400 list-decimal pl-5 mb-4 space-y-1">
           <li>Go to <a href="https://www.figma.com/developers/api#access-tokens" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 underline">Figma API Access Tokens</a></li>
-          <li>Click on "Create a personal access token"</li>
+          <li>Click on &quot;Create a personal access token&quot;</li>
           <li>Copy the generated token and paste it below</li>
         </ol>
         <div className="text-sm text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/20 p-2 rounded border border-amber-200 dark:border-amber-800">
-          <strong>Note:</strong> Your API key is stored only in your browser's localStorage and is not sent to our servers.
+          <strong>Note:</strong> Your API key is stored only in your browser&apos;s localStorage and is not sent to our servers.
         </div>
       </div>
 

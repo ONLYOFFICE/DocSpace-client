@@ -3,7 +3,7 @@
   "content": "This token can be used to access your account (<1>{{supportEmail}}</1>) via API calls. Don't share it with anyone. Make sure you copy this token now as you won't see it again.",
   "content_en_sha1_hash": "9631ed702f217ba0c462057da6317a7f1e0b872e",
   "created_at": "2025-05-19T21:30:53.903Z",
-  "updated_at": "2025-05-21T07:11:22.849Z",
+  "updated_at": "2025-08-04T07:30:01.442Z",
   "comment": {
     "text": "This translation key is used for a warning message that advises users not to share their API token and provides instructions on how to copy it. It appears in a generate developer token dialog, prompting users to take action before the token is lost.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/GenerateDeveloperTokenDialog.tsx",
-      "line_number": 199,
+      "line_number": 207,
       "context": "<>\n <Text style={{ marginBottom: \"16px\" }}>\n <Trans\n t={t}\n ns=\"OAuth\"\n i18nKey=\"GenerateTokenWarning\"\n values={{\n supportEmail: email,\n }}\n components={{\n 1: (",
       "module": "/packages/client"
     }
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The variable substitution `<1>{{supportEmail}}</1>` is consistently formatted. No issues found.",
-          "suggestion": null
+          "description": "The bracketed variable {{supportEmail}} is correctly placed, but consider standardizing placement across all translated strings for consistency.",
+          "suggestion": "No change needed, but maintain consistency with other translations."
         }
       ],
       "approved_at": null
@@ -78,13 +78,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Tiliisi kirjautumiseen\" (to log into your account) isn't the best translation for \"access your account.\" A more accurate translation would emphasize access, not just login.",
-          "suggestion": "Tätä tunnusta voidaan käyttää tilisi käyttöön (<1>{{supportEmail}}</1>) API puheluiden kautta."
+          "description": "The phrase \"Tiliisi kirjautumiseen\" (to log into your account) doesn't quite capture the meaning of \"access your account\" in the context of an API token. It implies regular login, which isn't the purpose of an API token.",
+          "suggestion": "Tätä tunnusta voidaan käyttää tilisi käyttöön API-kutsujen kautta."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The sentence structure 'API puheluiden kautta' could be improved for better flow in Finnish. While technically correct, it isn't the most natural phrasing.",
-          "suggestion": "Tätä tunnusta voidaan käyttää tilisi käyttöön (<1>{{supportEmail}}</1>) API-kutsujen kautta."
+          "type": "formatting",
+          "description": "The use of \"API puheluiden kautta\" is slightly less common than using the English loanword or a slightly different phrasing.",
+          "suggestion": "Tätä tunnusta voidaan käyttää tilisi käyttöön API-kutsujen kautta."
         }
       ],
       "approved_at": null
@@ -101,13 +101,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'token' is transliterated as 'տոկեն'. While acceptable, it might be more natural to use the Armenian equivalent if one exists and is commonly understood in this context. Consider using a more native equivalent if possible.",
-          "suggestion": "Consider researching and potentially replacing 'տոկեն' with a more natural Armenian equivalent if available and widely understood."
+          "description": "The word 'token' is used repeatedly. While acceptable, it might be more natural to use a more Armenian equivalent or alternate phrasing to avoid repetition.",
+          "suggestion": "Consider using a more Armenian equivalent for 'token' or varying the sentence structure to avoid repetitive usage of 'token'."
         },
         {
           "type": "formatting",
-          "description": "The Armenian translation preserves the `<1>{{supportEmail}}</1>` tag from the English. This is technically correct, but the tag might be rendered differently or not at all in the target language's context. Ensure the tag is handled correctly within the Armenian display environment.",
-          "suggestion": "Verify that the `<1>{{supportEmail}}</1>` tag is displayed correctly within the Armenian UI or application."
+          "description": "The email placeholder (<1>{{supportEmail}}</1>) appears consistently formatted, which is correct.",
+          "suggestion": "N/A - Formatting is consistent."
         }
       ],
       "approved_at": null
@@ -124,13 +124,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"もう二度と表示されませんので\" (mou nidoto hyouji saremasen node) is a bit stiff and overly formal for a warning message. A more natural and friendly phrasing would be better.",
-          "suggestion": "もう一度表示されません (mou ichido hyouji shimasen) - 'It won't appear again'"
+          "description": "The phrase \"もう二度と表示されませんので\" (mou nidoto hyouji saremasen node) is a bit clunky and overly formal. A more natural way to express \"you won't see it again\" would be something like \"もう一度表示されません\" (mou ichido hyouji shimasen) or \"再表示されません\" (sai-hyouji saremasen).",
+          "suggestion": "Replace \"もう二度と表示されませんので\" with \"もう一度表示されません\" or \"再表示されません\"."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"保管してください\" (hokan shite kudasai) translates to 'store' or 'keep in storage,' but a more appropriate translation for this context would imply safekeeping in a personal space. It feels too institutional.",
-          "suggestion": "控えてください (sashite kudasai) - 'Keep safe' or 'Keep it for reference'"
+          "description": "The addition of \"保管してください\" (hozon shite kudasai - 'please store') is not explicitly mentioned in the original English text. While storing is implied, adding it feels a little too prescriptive.",
+          "suggestion": "Consider removing \"保管してください\" to keep the translation closer to the original."
         }
       ],
       "approved_at": null
@@ -141,8 +141,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Korean translation retains the HTML-like tag `<1>{{supportEmail}}</1>`. While this might be intended to preserve the original formatting, it's unusual and potentially confusing in Korean. It's better to integrate the email address directly into the sentence.",
-          "suggestion": "이 토큰은 API 호출을 통해 계정({{supportEmail}})에 액세스하는 데 사용될 수 있습니다."
+          "description": "The Korean translation retains the HTML-like tags (<1>{{supportEmail}}</1>) from the English content. These tags should be removed or replaced with appropriate formatting.",
+          "suggestion": "Remove the tags: 이 토큰은 API 호출을 통해 계정({{supportEmail}})에 액세스하는 데 사용될 수 있습니다."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While generally correct, the phrase '또한 다시 볼 수 없을테니' (also, since you won't see it again) sounds slightly unnatural in Korean. A more natural phrasing emphasizing the importance of saving the token would be better.",
+          "suggestion": "이 토큰은 다시 표시되지 않으니 지금 복사해 두세요."
         }
       ],
       "approved_at": null
@@ -152,14 +157,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Lao translation preserves the `<1>{{supportEmail}}</1>` formatting, which may not be ideal for Lao users. It's preferable to adapt the format to be more natural in Lao.",
-          "suggestion": "Consider replacing `<1>{{supportEmail}}</1>` with a more natural Lao phrasing, such as 'ອີເມລ໌ສະຫນັບສະຫນູນຂອງທ່ານ: {{supportEmail}}' (Your support email: {{supportEmail}})"
-        },
-        {
           "type": "incorrect_translation",
-          "description": "The phrase 'ການໂທຫາ API' (calls to API) while technically correct, sounds clunky in Lao. A more natural phrasing would be more appropriate.",
-          "suggestion": "Replace 'ການໂທຫາ API' with 'ການໃຊ້ API' (using API) or 'ຜ່ານ API' (via API)."
+          "description": "The phrase \"ການໂທຫາ API\" (calling API) is a less common and potentially confusing way to describe API calls in Lao. A more natural phrasing would be something like 'ການໃຊ້ງານ API' (using API) or 'ການເຊື່ອມຕໍ່ກັບ API' (connecting to API).",
+          "suggestion": "ຕົວລະຫັດນີ້ສາມາດນໍາໃຊ້ເພື່ອເຂົ້າເຖິງບັນຊີຂອງທ່ານ (<1>{{supportEmail}}</1>) ຜ່ານການໃຊ້ງານ API."
         }
       ],
       "approved_at": null
@@ -170,13 +170,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'marķieri' (marker) is not the most accurate translation of 'token' in this context. 'Token' refers to an authentication token, and a more appropriate translation would be 'atslēga' (key) or 'tālšrādumāts' (access token).",
-          "suggestion": "Šo atslēgu var izmantot, lai piekļūtu savam kontam (<1>{{supportEmail}}</1>), izmantojot API izsaukumus. Nedodiet to citiem. Noteikti nokopējiet šo atslēgu tūlīt, jo tas vairs nebūs redzams."
+          "description": "The word \"marķieri\" (marker) is used instead of \"tālrunis\" (token). While \"marķieri\" can sometimes refer to a token, in this context, it's confusing and inaccurate.",
+          "suggestion": "Šo tālruni var izmantot, lai piekļūtu savam kontam..."
         },
         {
-          "type": "formatting",
-          "description": "The formatting tags <1> and </1> seem to be intended to signify a variable substitution, but it's crucial to verify that the translation is consistent with the original formatting.  It's assumed the formatting is intentional. No correction needed, just flagged for review.",
-          "suggestion": "No change needed - review formatting to ensure consistency with the original."
+          "type": "incorrect_translation",
+          "description": "The phrase 'Nedodiet to citiem' is a bit formal and less natural in this context. A more casual and direct phrasing would be better.",
+          "suggestion": "Neizdodiet to citiem."
         }
       ],
       "approved_at": null
@@ -193,7 +193,7 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrase 'Upewnij się, że skopiowano token teraz' is grammatically awkward. It translates to 'Make sure the token has been copied now,' which implies an action completed by someone else. It should be phrased in the imperative mood.",
+          "description": "The phrase 'Upewnij się, że skopiowano token teraz' is grammatically awkward. The passive voice sounds unnatural.",
           "suggestion": "Upewnij się, że skopiujesz token teraz."
         }
       ],
@@ -202,7 +202,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'partilhe' (share) is slightly less common and formal than a more natural equivalent in this context. 'Compartilhe' would be more commonly used and sound more conversational.",
+          "suggestion": "Compartilhe"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -216,14 +222,19 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Romanian translation uses the same HTML-like tags (<1>{{supportEmail}}</1>) as the English. This is likely intended for placeholder replacement but could be a formatting issue if rendered incorrectly.",
-          "suggestion": "Verify the intended rendering of the <1>{{supportEmail}}</1> tag. If it's intended to be a placeholder, ensure the templating engine handles it correctly. Consider standardizing to a more common placeholder format if possible."
+          "type": "spelling",
+          "description": "The word 'împărtășiți' should be 'împărtășiți'.",
+          "suggestion": "împărtășiți"
         },
         {
           "type": "grammar",
-          "description": "The phrase 'nu-l veți mai putea găsi mai târziu' (you won't be able to find it later) is grammatically correct, but sounds slightly awkward in this context. It implies a search, rather than the token disappearing.",
-          "suggestion": "Consider replacing 'nu-l veți mai putea găsi mai târziu' with 'nu-l veți mai putea vedea' (you won't be able to see it again), which better reflects the token's visibility after generation."
+          "description": "The phrase 'nu-l veți mai putea găsi mai târziu' is a bit awkward and can be improved for clarity and naturalness.",
+          "suggestion": "nu-l veți mai vedea"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'găsi' (find) is technically correct, 'vedea' (see) is a more natural and accurate translation of 'see' in this context, emphasizing the token's disappearance.",
+          "suggestion": "nu-l veți mai vedea"
         }
       ],
       "approved_at": null
@@ -239,14 +250,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'ටෝකනය' (token) is repeated multiple times. While not strictly incorrect, it can be slightly repetitive and less fluent. Consider varying the terminology.",
-          "suggestion": "Consider using synonyms like 'අංකිත කොතෙක්' or simply 'අංකය' in some instances to avoid repetition. Example: 'මෙම අංකය ඔබට API ඇමතුම් හරහා ඔබේ ගිණුමට...' "
+          "type": "formatting",
+          "description": "The Sinhala translation retains the English HTML-like tags (<1>{{supportEmail}}</1>). These tags are unnecessary and should be removed.",
+          "suggestion": "Remove the tags <1>{{supportEmail}}</1> from the translation. The email address should be displayed directly."
         },
         {
           "type": "grammar",
-          "description": "The sentence 'ඔබට මෙය නැවත දැකීමට නොහැකි නිසා, මෙම ටෝකනය දැන් පිටපත් කර ගන්න' could be more naturally phrased. The causal relationship isn't perfectly clear.",
-          "suggestion": "Consider restructuring the sentence to: 'ඔබට මෙය නැවත දැකීමට නොහැකි බැවින්, දැන් මෙම ටෝකනය පිටපත් කර ගන්න.' or 'මෙම ටෝකනය ඔබට නැවත දැකීමට නොහැකි බැවින්, දැන් පිටපත් කර ගන්න.'"
+          "description": "The phrase 'ඔබට මෙය නැවත දැකීමට නොහැකි නිසා' is slightly awkward. While grammatically correct, it can be phrased more naturally.",
+          "suggestion": "Replace 'ඔබට මෙය නැවත දැකීමට නොහැකි නිසා' with 'ඔබට මෙය නැවත නොපෙනෙනවා' or 'ඔබට මෙය නැවත නොᱧෙදෙනවා'."
         }
       ],
       "approved_at": null
@@ -262,9 +273,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'lasneje' is a misspelling. It should be 'ponovno'.",
-          "suggestion": "ponovno"
+          "type": "incorrect_translation",
+          "description": "The word 'lasneje' is incorrect and doesn't accurately convey the meaning of 'again'. It appears to be a typo or a misunderstanding of the English word.",
+          "suggestion": "Ne pozabite takoj kopirati tega žetona, saj ga ne boste več videli."
         }
       ],
       "approved_at": null
@@ -272,13 +283,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The angle brackets are not properly closed. The closing bracket should be `</1>`, and is currently `</1>`.",
-          "suggestion": "Ensure the closing angle bracket matches the opening bracket: `</1>`"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -293,13 +298,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Make sure you copy this token now as you won't see it again' is overly literal and doesn't flow naturally in Turkish. It's a bit awkward and could be improved.",
-          "suggestion": "Şimdi kopyalayın, çünkü daha sonra tekrar görünemez."
+          "description": "The word 'belirteci' is a less common and slightly formal way to say 'token' in Turkish. 'Token' itself is widely understood and accepted, especially in technical contexts. Using 'belirteci' makes the sentence feel slightly unnatural.",
+          "suggestion": "Bu token, API çağrıları aracılığıyla hesabınıza (<1>{{supportEmail}}</1>) erişmek için kullanılabilir. Bunu kimseyle paylaşmayın. Bu token'ı bir daha görmeyeceğiniz için şimdi kopyaladığınızdan emin olun."
         },
         {
-          "type": "formatting",
-          "description": "The original English uses `<1>{{supportEmail}}</1>`. The Turkish translation preserves the same format. While technically correct, it's atypical in Turkish UI/UX and might be better rendered with standard HTML or UI components.  Consider how this will be displayed and if a simpler format would be more user-friendly.  The current format implies it's meant to be interpreted by a system, not necessarily presented directly to the user.",
-          "suggestion": "Consider adapting the formatting to a standard HTML email display (e.g., `<span>{{supportEmail}}</span>`) or removing the tags if the rendering system is not intended to process them.  This depends on the intended display context."
+          "type": "grammatical",
+          "description": "While technically correct, 'bir daha görmeyeceğiniz için' is a bit wordy. A more concise and natural phrasing would improve readability.",
+          "suggestion": "Bu token, API çağrıları aracılığıyla hesabınıza (<1>{{supportEmail}}</1>) erişmek için kullanılabilir. Bunu kimseyle paylaşmayın. Bir daha görmeyeceğinizi unutmayın ve şimdi kopyalayın."
         }
       ],
       "approved_at": null
@@ -307,7 +312,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Ukrainian translation retains the HTML tags (<1> and </1>) from the English original. These should be removed or adapted for proper Ukrainian formatting, depending on the intended display.",
+          "suggestion": "Remove the HTML tags or replace them with appropriate Ukrainian formatting tags (e.g., bolding or italics) if necessary."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -316,13 +327,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"các cuộc gọi API\" is a literal translation of \"API calls\". A more natural Vietnamese phrasing would be \"kêu gọi API\" or simply \"API\".",
-          "suggestion": "Mã token này có thể được sử dụng để truy cập tài khoản của bạn (<1>{{supportEmail}}</1>) thông qua kêu gọi API."
+          "description": "The phrase \"các cuộc gọi API\" is a literal translation of \"API calls\" and sounds unnatural in Vietnamese. A more natural phrasing would be \"kêu gọi API\" or \"yêu cầu API\".",
+          "suggestion": "Mã token này có thể được sử dụng để truy cập tài khoản của bạn (<1>{{supportEmail}}</1>) thông qua các yêu cầu API."
         },
         {
-          "type": "formatting",
-          "description": "The Vietnamese translation follows the English formatting with the <1> and </1> tags, which is technically correct but may seem awkward in Vietnamese. While preserving the tag is important for dynamic content replacement, consider a slight rephrasing if possible.",
-          "suggestion": "Consider rephrasing slightly to improve flow, while maintaining the tags. For example: 'Mã token này có thể được sử dụng để truy cập tài khoản của bạn (<1>{{supportEmail}}</1>)' "
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Đừng chia sẻ mã với bất kỳ ai\" is a bit stiff. A more conversational tone would be better.",
+          "suggestion": "Đừng chia sẻ mã này với bất kỳ ai."
         }
       ],
       "approved_at": null
@@ -333,13 +344,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"由于令牌不会再次显示\" (due to the token will not display again) is a somewhat awkward and unnatural translation of \"Make sure you copy this token now as you won't see it again.\" A more natural phrasing would emphasize the one-time nature of the token.",
-          "suggestion": "此令牌仅显示一次，请立即复制。"
-        },
-        {
-          "type": "formatting",
-          "description": "The Chinese translation maintains the `<1>{{supportEmail}}</1>` tags, which is consistent with the original English, but it's crucial to ensure the rendering of these tags is correct in the target platform. This is more of a functional issue than a translation issue itself, but should be noted.",
-          "suggestion": "Verify that the tags `<1>{{supportEmail}}</1>` render correctly on the target platform.  Consider if a more robust templating approach is needed."
+          "description": "The phrase \"Make sure you copy this token now as you won't see it again\" is translated as \"由于令牌不会再次显示，请立即复制此令牌.\" While technically correct, it's less natural and impactful in Chinese. A more natural phrasing would emphasize the one-time nature of the token.",
+          "suggestion": "“由于此令牌仅显示一次，请务必立即复制它。” (Yinwei ci token jin xianshi yici, qing wu bi li ji fu zhi ta.) - This translates to: 'Because this token is only displayed once, be sure to copy it immediately.'"
         }
       ],
       "approved_at": null

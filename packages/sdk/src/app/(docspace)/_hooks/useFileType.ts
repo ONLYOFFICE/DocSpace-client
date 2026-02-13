@@ -1,5 +1,5 @@
 /*
- * (c) Copyright Ascensio System SIA 2009-2025
+ * (c) Copyright Ascensio System SIA 2009-2026
  *
  * This program is a free software product.
  * You can redistribute it and/or modify it under the terms
@@ -64,11 +64,18 @@ export default function useFileType() {
     [filesSettings?.masterFormExtension],
   );
 
+  const isDiagram = useCallback(
+    (extension: string) =>
+      presentInArray(filesSettings?.extsDiagram ?? [], extension),
+    [filesSettings?.extsDiagram],
+  );
+
   return {
     isDocument,
     isPresentation,
     isSpreadsheet,
     isArchive,
     isMasterForm,
+    isDiagram,
   };
 }

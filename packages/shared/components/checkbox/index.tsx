@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,36 +32,39 @@ import CheckboxCheckedIcon from "PUBLIC_DIR/images/checkbox.checked.react.svg";
 import CheckboxIcon from "PUBLIC_DIR/images/checkbox.react.svg";
 
 import { Text } from "../text";
+import { TooltipContainer } from "../tooltip";
 
 import { CheckboxProps } from "./Checkbox.types";
 import styles from "./Checkbox.module.scss";
 
-const RenderCheckboxIcon = ({
-  isChecked,
-  isIndeterminate,
-  tabIndex,
-}: {
-  isChecked: boolean;
-  isIndeterminate: boolean;
-  tabIndex: number;
-}) => {
-  return isIndeterminate ? (
-    <CheckboxIndeterminateIcon
-      tabIndex={tabIndex}
-      className={classNames(styles.checkbox, "not-selectable")}
-    />
-  ) : isChecked ? (
-    <CheckboxCheckedIcon
-      tabIndex={tabIndex}
-      className={classNames(styles.checkbox, "not-selectable")}
-    />
-  ) : (
-    <CheckboxIcon
-      tabIndex={tabIndex}
-      className={classNames(styles.checkbox, "not-selectable")}
-    />
-  );
-};
+const RenderCheckboxIcon = React.memo(
+  ({
+    isChecked,
+    isIndeterminate,
+    tabIndex,
+  }: {
+    isChecked: boolean;
+    isIndeterminate: boolean;
+    tabIndex: number;
+  }) => {
+    return isIndeterminate ? (
+      <CheckboxIndeterminateIcon
+        tabIndex={tabIndex}
+        className={classNames(styles.checkbox, "not-selectable")}
+      />
+    ) : isChecked ? (
+      <CheckboxCheckedIcon
+        tabIndex={tabIndex}
+        className={classNames(styles.checkbox, "not-selectable")}
+      />
+    ) : (
+      <CheckboxIcon
+        tabIndex={tabIndex}
+        className={classNames(styles.checkbox, "not-selectable")}
+      />
+    );
+  },
+);
 
 const CheckboxPure = ({
   id,
@@ -79,6 +82,7 @@ const CheckboxPure = ({
   name,
   tabIndex = -1,
   helpButton,
+  dataTestId,
   ...rest
 }: CheckboxProps) => {
   const [checked, setChecked] = React.useState(isChecked);
@@ -113,7 +117,8 @@ const CheckboxPure = ({
   };
 
   return (
-    <label
+    <TooltipContainer
+      as="label"
       id={id}
       style={style}
       className={classNames(styles.label, className, {
@@ -122,7 +127,7 @@ const CheckboxPure = ({
         [styles.error]: hasError,
       })}
       title={title}
-      data-testid="checkbox"
+      data-testid={dataTestId ?? "checkbox"}
     >
       <input
         className={styles.hiddenInput}
@@ -163,7 +168,7 @@ const CheckboxPure = ({
           </span>
         ) : null}
       </div>
-    </label>
+    </TooltipContainer>
   );
 };
 

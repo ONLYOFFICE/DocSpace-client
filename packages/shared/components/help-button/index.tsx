@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,96 +24,111 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { forwardRef } from "react";
-import type { TooltipRefProps } from "react-tooltip";
-
-import InfoReactSvgUrl from "PUBLIC_DIR/images/info.react.svg";
-
+import React from "react";
+import uniqueId from "lodash/uniqueId";
+import InfoReactSvg from "PUBLIC_DIR/images/info.react.svg";
 import { classNames } from "../../utils";
 import { IconButton } from "../icon-button";
 import { Tooltip } from "../tooltip";
-
 import type { HelpButtonProps } from "./HelpButton.types";
 
-const HelpButton = forwardRef<TooltipRefProps, HelpButtonProps>(
-  (props, ref) => {
-    const {
-      id,
-      className = "icon-button",
-      iconName,
-      size = 12,
-      color,
-      dataTip,
-      getContent,
-      place,
-      offset,
-      style,
-      afterShow,
-      afterHide,
-      tooltipMaxWidth,
-      tooltipContent,
-      openOnClick = true,
-      isClickable = true,
-      children,
-      isOpen,
-      noUserSelect,
-    } = props;
+const HelpButton = (props: HelpButtonProps) => {
+  const {
+    id,
+    className = "icon-button",
+    iconName,
+    size = 12,
+    color,
+    dataTip,
+    getContent,
+    place,
+    offset,
+    style,
+    afterShow,
+    afterHide,
+    tooltipMaxWidth,
+    tooltipContent,
+    openOnClick = true,
+    isClickable = true,
+    children,
+    isOpen,
+    noUserSelect,
+    dataTestId,
+    tooltipStyle,
+    iconNode,
+    tooltipRef,
+  } = props;
 
-    const uniqueId = React.useId();
+  const currentId = id || uniqueId();
+  const componentClass = classNames(className, "help-icon");
 
-    const currentId = id || uniqueId;
+  const contentString = React.useMemo(() => {
+    if (getContent) {
+      const content = getContent({ content: null, activeAnchor: null });
+      return typeof content === "string" ? content : null;
+    }
+    return typeof tooltipContent === "string" ? tooltipContent : null;
+  }, [getContent, tooltipContent]);
 
-    const anchorSelect = children
-      ? `div[id='${currentId}']`
-      : `div[id='${currentId}'] svg`;
+  const useGlobalTooltip = contentString !== null;
 
-    const componentClass = classNames(className, "help-icon");
+  const globalTooltipProps = useGlobalTooltip
+    ? {
+        "data-tooltip-id": "info-tooltip",
+        "data-tooltip-content": contentString,
+        "data-tooltip-place": place || "top",
+      }
+    : {};
 
-    const tooltipProps = {
-      clickable: true,
-      openOnClick,
-      place: place || "top",
-      offset,
-      afterShow,
-      afterHide,
-      maxWidth: tooltipMaxWidth,
-      anchorSelect,
-      isOpen,
-      noUserSelect,
-    };
+  const anchorSelect = children
+    ? `div[id='${currentId}']`
+    : `div[id='${currentId}'] svg`;
 
-    return (
-      <div style={style} data-testid="help-button">
-        {children ? (
-          <div id={currentId} className={componentClass}>
-            {children}
-          </div>
+  const localTooltipProps = {
+    clickable: true,
+    openOnClick,
+    place: place || "top",
+    offset,
+    afterShow,
+    afterHide,
+    maxWidth: tooltipMaxWidth,
+    anchorSelect,
+    isOpen,
+    noUserSelect,
+    tooltipStyle,
+    ref: tooltipRef,
+  };
+
+  return (
+    <div style={style} data-testid={dataTestId ?? "help-button"}>
+      {children ? (
+        <div id={currentId} className={componentClass} {...globalTooltipProps}>
+          {children}
+        </div>
+      ) : (
+        <IconButton
+          id={currentId}
+          className={componentClass}
+          isClickable={isClickable}
+          iconName={iconName}
+          iconNode={iconNode ?? <InfoReactSvg />}
+          size={size}
+          color={color}
+          data-for={currentId}
+          dataTip={dataTip}
+          {...globalTooltipProps}
+        />
+      )}
+
+      {!useGlobalTooltip && (getContent || tooltipContent) ? (
+        getContent ? (
+          <Tooltip {...localTooltipProps} getContent={getContent} />
         ) : (
-          <IconButton
-            id={currentId}
-            className={componentClass}
-            isClickable={isClickable}
-            iconName={iconName}
-            iconNode={<InfoReactSvgUrl />}
-            size={size}
-            color={color}
-            data-for={currentId}
-            dataTip={dataTip}
-          />
-        )}
-
-        {getContent ? (
-          <Tooltip ref={ref} {...tooltipProps} getContent={getContent} />
-        ) : tooltipContent ? (
-          <Tooltip ref={ref} {...tooltipProps}>
-            {tooltipContent}
-          </Tooltip>
-        ) : null}
-      </div>
-    );
-  },
-);
-
-HelpButton.displayName = "HelpButton";
+          <Tooltip {...localTooltipProps}>{tooltipContent}</Tooltip>
+        )
+      ) : null}
+    </div>
+  );
+};
 
 export { HelpButton };

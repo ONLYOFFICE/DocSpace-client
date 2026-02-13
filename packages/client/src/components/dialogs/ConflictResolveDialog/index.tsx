@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -374,12 +374,12 @@ export default inject<TStore>(
     } = filesStore;
 
     const files = items
-      ? items.filter((f: TFile) => {
+      ? (items as TFile[]).filter((f: TFile) => {
           return f.isFile || f.fileExst || f.contentLength;
         })
       : [];
     const folders = items
-      ? items.filter((f: TFile) => {
+      ? (items as TFile[]).filter((f: TFile) => {
           return !f.fileExst && !f.contentLength && !f.isFile;
         })
       : [];

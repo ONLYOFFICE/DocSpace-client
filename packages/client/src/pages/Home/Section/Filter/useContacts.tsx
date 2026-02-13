@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -177,6 +177,9 @@ type UseContactsFilterProps = {
   standalone: boolean;
   showStorageInfo: boolean;
   isDefaultRoomsQuotaSet: boolean;
+
+  groupsStore: GroupsStore;
+  usersStore: UsersStore;
 };
 
 export const useContactsFilter = ({
@@ -196,6 +199,8 @@ export const useContactsFilter = ({
   standalone,
   showStorageInfo,
   isDefaultRoomsQuotaSet,
+  groupsStore,
+  usersStore,
 }: UseContactsFilterProps) => {
   const navigate = useNavigate();
   const { groupId } = useParams();
@@ -274,7 +279,12 @@ export const useContactsFilter = ({
 
   const onContactsSearch = React.useCallback(
     (searchValue: string) => {
-      const newFilter = isGroups ? groupsFilter.clone() : usersFilter.clone();
+      const currentFilterGroups = groupsStore.groupsFilter;
+      const currentFilterUsers = usersStore.filter;
+
+      const newFilter = isGroups
+        ? currentFilterGroups.clone()
+        : currentFilterUsers.clone();
 
       const url = getContactsUrl(contactsTab, usersFilter.group ?? undefined);
 
@@ -592,7 +602,7 @@ export const useContactsFilter = ({
           {
             key: "filter-account",
             group: "filter-account",
-            label: t("ConnectDialog:Account"),
+            label: t("Common:Account"),
             isHeader: true,
             isLast: false,
           },

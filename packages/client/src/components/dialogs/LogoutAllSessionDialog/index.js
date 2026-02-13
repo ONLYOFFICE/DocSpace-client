@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -73,6 +73,7 @@ const LogoutAllSessionDialog = ({
             isChecked={isChecked}
             onChange={onChangeCheckbox}
             label={t("Profile:ChangePasswordAfterLoggingOut")}
+            testId="dialog_change_password_checkbox"
           />
         </div>
       </ModalDialog.Body>
@@ -86,6 +87,7 @@ const LogoutAllSessionDialog = ({
           primary
           onClick={onClickLogout}
           isLoading={isLoading}
+          testId="dialog_logout_button"
         />
         <Button
           className="cancel-button"
@@ -95,6 +97,7 @@ const LogoutAllSessionDialog = ({
           scale
           onClick={onClose}
           isDisabled={isLoading}
+          testId="dialog_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

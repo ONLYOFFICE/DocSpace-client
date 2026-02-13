@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,51 +24,53 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import moment from "moment";
+import type { DateTime } from "luxon";
+import {
+  startOf,
+  formatDate,
+  subtractFromDate,
+  addToDate,
+  daysInMonth,
+} from "../../../utils/date";
 
-export const getCalendarDays = (date: moment.Moment) => {
-  const observedDate = moment(date);
+export const getCalendarDays = (date: DateTime) => {
+  const observedDate = date;
 
-  const prevMonthDays = [];
-  const currentMonthDays = [];
-  const nextMonthDays = [];
+  const prevMonthDays: { key: string; value: string }[] = [];
+  const currentMonthDays: { key: string; value: string }[] = [];
+  const nextMonthDays: { key: string; value: string }[] = [];
   const maxCalendarDays = 42;
 
-  const firstCalendarMonday = observedDate
-    .clone()
-    .startOf("month")
-    .startOf("week")
-    .date();
+  // Get first day of month, then start of that week (Monday)
+  const firstOfMonth = startOf(observedDate, "month")!;
+  const firstCalendarMonday = startOf(firstOfMonth, "week")!.day;
 
-  let yearMonthDate = observedDate.clone().format("YYYY-MM-");
+  let yearMonthDate = formatDate(observedDate, "yyyy-MM-");
 
-  for (let i = 1; i <= observedDate.clone().daysInMonth(); i += 1) {
+  const currentMonthDaysCount = daysInMonth(observedDate);
+  for (let i = 1; i <= currentMonthDaysCount; i += 1) {
     currentMonthDays.push({
-      key: yearMonthDate + moment(yearMonthDate + i, "YYYY-MM-D").format("D"),
-      value: moment(yearMonthDate + i, "YYYY-MM-D").format("D"),
+      key: yearMonthDate + String(i),
+      value: String(i),
     });
   }
 
   if (firstCalendarMonday !== 1) {
-    const prevMonthLength = observedDate
-      .clone()
-      .subtract(1, "months")
-      .daysInMonth();
+    const prevMonth = subtractFromDate(observedDate, 1, "months")!;
+    const prevMonthLength = daysInMonth(prevMonth);
 
-    yearMonthDate = observedDate
-      .clone()
-      .subtract(1, "months")
-      .format("YYYY-MM-");
+    yearMonthDate = formatDate(prevMonth, "yyyy-MM-");
 
     for (let i = firstCalendarMonday; i <= prevMonthLength; i += 1) {
       prevMonthDays.push({
-        key: yearMonthDate + moment(yearMonthDate + i, "YYYY-MM-D").format("D"),
-        value: moment(yearMonthDate + i, "YYYY-MM-D").format("D"),
+        key: yearMonthDate + String(i),
+        value: String(i),
       });
     }
   }
 
-  yearMonthDate = observedDate.clone().add(1, "months").format("YYYY-MM-");
+  const nextMonth = addToDate(observedDate, 1, "months")!;
+  yearMonthDate = formatDate(nextMonth, "yyyy-MM-");
 
   for (
     let i = 1;
@@ -76,8 +78,8 @@ export const getCalendarDays = (date: moment.Moment) => {
     i += 1
   ) {
     nextMonthDays.push({
-      key: yearMonthDate + moment(yearMonthDate + i, "YYYY-MM-D").format("D"),
-      value: moment(yearMonthDate + i, "YYYY-MM-D").format("D"),
+      key: yearMonthDate + String(i),
+      value: String(i),
     });
   }
 

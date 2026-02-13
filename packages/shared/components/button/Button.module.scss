@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../styles/variables/_colors.scss";
+@use "../../styles/variables/colors";
 
 .button {
   position: relative;
@@ -134,6 +134,56 @@
     }
   }
 
+  // Filled variant
+  &.filled {
+    background: var(--filled-button-background-color);
+    color: var(--filled-button-text-color);
+    border: none;
+    opacity: 1;
+
+    &:not(.filledStroke) {
+      path {
+        fill: var(--filled-button-text-color-hover);
+      }
+    }
+
+    &.filledStroke {
+      svg {
+        path {
+          stroke: var(--filled-button-text-color-hover);
+        }
+      }
+    }
+
+    &:hover:not(:disabled) {
+      background: var(--filled-button-hover-background-color);
+      color: var(--filled-button-text-color-hover);
+
+      border: none;
+
+      &:not(.filledStroke) {
+        path {
+          fill: var(--filled-button-text-color-hover);
+        }
+      }
+
+      &.filledStroke {
+        svg {
+          path {
+            stroke: var(--filled-button-text-color-hover);
+          }
+        }
+      }
+    }
+
+    &:active:not(:disabled) {
+      background: var(--filled-button-active-background-color);
+      color: var(--filled-button-text-color-hover);
+
+      border: none;
+    }
+  }
+
   // Disabled state
   &:disabled {
     cursor: default;
@@ -214,7 +264,7 @@
 
   &.isDisabled {
     cursor: default;
-    pointer-events: none;
+    // pointer-events: none;
     background-color: var(--button-background-base-disabled);
     color: var(--button-color-base-disabled);
     border-color: var(--button-border-base-disabled);

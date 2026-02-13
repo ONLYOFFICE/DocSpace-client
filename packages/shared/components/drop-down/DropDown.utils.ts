@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,10 +30,11 @@ import { isTablet } from "../../utils";
 const getItemHeight = (item: React.ReactElement) => {
   const isTabletDevice = isTablet();
 
-  const height = item?.props.height ?? 32;
-  const heightTablet = item?.props.heightTablet ?? 36;
+  const height = (item?.props as { height?: number }).height ?? 32;
+  const heightTablet =
+    (item?.props as { heightTablet?: number }).heightTablet ?? 36;
 
-  if (item && item.props.isSeparator) {
+  if (item && (item.props as { isSeparator: boolean }).isSeparator) {
     return isTabletDevice ? 16 : 12;
   }
 

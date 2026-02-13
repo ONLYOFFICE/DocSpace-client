@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,18 +27,21 @@
 "use client";
 
 import { notFound, useSearchParams } from "next/navigation";
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { getCookie } from "@docspace/shared/utils";
 import { LANGUAGE } from "@docspace/shared/constants";
+import AppLoader from "@docspace/shared/components/app-loader";
 
 import { ValidationResult } from "@/utils/enums";
 import { ConfirmRouteProps, TConfirmRouteContext } from "@/types";
+import { useGuestShareLink } from "@/hooks/useGuestShareLink";
 
 export const ConfirmRouteContext = createContext<TConfirmRouteContext>({
   linkData: {},
   roomData: {},
+  confirmLinkResult: {},
 });
 
 function ConfirmRoute(props: ConfirmRouteProps) {
@@ -48,6 +51,8 @@ function ConfirmRoute(props: ConfirmRouteProps) {
   const [stateData, setStateData] = useState<TConfirmRouteContext | undefined>(
     undefined,
   );
+
+  const { onGuestsShareLinkInvalid } = useGuestShareLink();
 
   const { i18n, t } = useTranslation(["Common"]);
   const searchParams = useSearchParams();
@@ -63,17 +68,41 @@ function ConfirmRoute(props: ConfirmRouteProps) {
     throw new Error(t("Common:AccessDenied"));
   }
 
+  const value = useMemo(
+    () => ({
+      linkData: stateData?.linkData ?? {},
+      confirmLinkResult: stateData?.confirmLinkResult ?? {},
+      roomData: stateData?.roomData ?? {},
+    }),
+    [stateData?.linkData, stateData?.roomData, stateData?.confirmLinkResult],
+  );
+
   useEffect(() => {
-    if (location.search.includes("culture")) return;
+    if (window.location.search.includes("culture")) return;
     const lng = getCookie(LANGUAGE);
 
-    isAuthenticated && i18n.changeLanguage(lng);
+    if (isAuthenticated) i18n.changeLanguage(lng);
   }, [isAuthenticated, i18n]);
+
+  const isGuestShareLinkInvalid =
+    confirmLinkParams.type === "GuestShareLink" &&
+    confirmLinkResult.result === ValidationResult.Invalid;
+
+  useEffect(() => {
+    if (isGuestShareLinkInvalid) {
+      onGuestsShareLinkInvalid();
+    }
+  }, [isGuestShareLinkInvalid]);
+
+  if (isGuestShareLinkInvalid) {
+    return <AppLoader />;
+  }
 
   if (!stateData) {
     switch (confirmLinkResult.result) {
-      case ValidationResult.Ok:
+      case ValidationResult.Ok: {
         const confirmHeader = searchParams?.toString();
+
         const linkData = {
           ...confirmLinkParams,
           confirmHeader,
@@ -82,9 +111,16 @@ function ConfirmRoute(props: ConfirmRouteProps) {
         const roomData = {
           roomId: confirmLinkResult?.roomId,
           title: confirmLinkResult?.title,
+          isAgent: confirmLinkResult?.isAgent,
         };
-        setStateData((val) => ({ ...val, linkData, roomData }));
+        setStateData((val) => ({
+          ...val,
+          linkData,
+          roomData,
+          confirmLinkResult,
+        }));
         break;
+      }
       case ValidationResult.Invalid:
         console.error("invalid link", {
           confirmLinkParams,
@@ -96,7 +132,12 @@ function ConfirmRoute(props: ConfirmRouteProps) {
           confirmLinkParams,
           validationResult: confirmLinkResult.result,
         });
-        throw new Error(t("Common:LinkExpired"));
+        if (confirmLinkParams.type === "LinkInvite") {
+          window.location.href = "/login/error/link-expired";
+        } else {
+          throw new Error(t("Common:LinkExpired"));
+        }
+        return;
       case ValidationResult.TariffLimit:
         console.error("tariff limit", {
           confirmLinkParams,
@@ -108,7 +149,12 @@ function ConfirmRoute(props: ConfirmRouteProps) {
           confirmLinkParams,
           validationResult: confirmLinkResult.result,
         });
-        throw new Error(t("Common:Error"));
+        if (confirmLinkParams.type === "LinkInvite") {
+          window.location.href = "/login/error/link-quota";
+        } else {
+          throw new Error(t("Common:Error"));
+        }
+        return;
       default:
         console.error("unknown link", {
           confirmLinkParams,
@@ -119,12 +165,7 @@ function ConfirmRoute(props: ConfirmRouteProps) {
   }
 
   return (
-    <ConfirmRouteContext.Provider
-      value={{
-        linkData: stateData?.linkData ?? {},
-        roomData: stateData?.roomData ?? {},
-      }}
-    >
+    <ConfirmRouteContext.Provider value={value}>
       {children}
     </ConfirmRouteContext.Provider>
   );

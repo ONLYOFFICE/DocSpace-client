@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -63,7 +63,7 @@ const FieldMapping = (props) => {
   return (
     <StyledWrapper>
       <div className="attribute-matching-box">
-        <Text as="h2" fontSize="15px" fontWeight={600} noSelect>
+        <Text as="h2" fontSize="15px" fontWeight={600}>
           {t("AttributeMatching")}
         </Text>
 
@@ -73,6 +73,7 @@ const FieldMapping = (props) => {
           tooltipContent={
             <Text fontSize="12px">{t("AttributeMatchingTooltip")}</Text>
           }
+          dataTestId="attribute_mapping_help_button"
         />
       </div>
 
@@ -83,6 +84,7 @@ const FieldMapping = (props) => {
         tabIndex={16}
         value={firstName}
         hasError={firstNameHasError}
+        dataTestId="first_name_field"
       />
 
       <SsoFormField
@@ -92,6 +94,7 @@ const FieldMapping = (props) => {
         tabIndex={17}
         value={lastName}
         hasError={lastNameHasError}
+        dataTestId="last_name_field"
       />
 
       <SsoFormField
@@ -101,6 +104,7 @@ const FieldMapping = (props) => {
         tabIndex={18}
         value={email}
         hasError={emailHasError}
+        dataTestId="email_field"
       />
 
       {/* <SsoFormField

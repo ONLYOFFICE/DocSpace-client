@@ -3,7 +3,7 @@
   "content": "The folder <2>{{title}}</2> successfully moved to <1>{{folderName}}</1>",
   "content_en_sha1_hash": "c503607b8021da55c3d04b160547b8d9f045a36a",
   "created_at": "2025-05-19T21:30:55.847Z",
-  "updated_at": "2025-05-21T11:45:31.322Z",
+  "updated_at": "2025-05-24T11:53:48.556Z",
   "comment": {
     "text": "The translation key \"MoveFolderItem\" is used to display a success message when a folder has been successfully moved. It appears in a UI where a file or folder operation results in a successful move, such as a confirmation dialog or toast notification. The message includes the original folder name and the destination of the move.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The order of the placeholders is reversed in the Azerbaijani translation compared to the English original. The English is <1>{{folderName}}</1> after the moved folder, while the Azerbaijani has <1>{{folderName}}</1> before.",
-          "suggestion": "Change the order of placeholders to: \"<2>{{title}}</2> qovluğu uğurla <1>{{folderName}}</1> qovluğuna köçürüldü\"."
+          "description": "The order of the placeholders is reversed compared to the English content. The English content has <1>{{folderName}}</1> after <2>{{title}}</2>, but the Azerbaijani translation has it the other way around.",
+          "suggestion": "Change the order of the placeholders to match the English content: \"<2>{{title}}</2> qovluğu uğurla <1>{{folderName}}</1> qovluğuna köçürüldü\" should become \"<2>{{title}}</2> qovluğu uğurla <1>{{folderName}}</1> qovluğuna köçürüldü\"."
         }
       ],
       "approved_at": null
@@ -51,7 +51,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The curly braces for variable insertion in the Czech translation are inconsistent. `<1>` and `<2>` are used, but the original English uses `<1>` for `folderName` and `<2>` for `title`. It should be consistent with the English template.",
+          "suggestion": "Change `<1>{{folderName}}</1>` to `<2>{{folderName}}</2>` and `<2>{{title}}</2>` to `<1>{{title}}</1>` to match the original English order."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -69,13 +75,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The tag order is incorrect. The English content places the `<1>{{folderName}}</1>` tag *after* the `<2>{{title}}</2>` tag, while the Spanish translation places it before.",
-          "suggestion": "Reorder the tags to match the English: \"La carpeta <2>{{title}}</2> se ha movido correctamente <1>{{folderName}}</1>\""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Japanese translation maintains the HTML tags `<2>{{title}}</2>` and `<1>{{folderName}}</1>` which are present in the English content. While not technically incorrect, it is unusual to leave these tags in the translated content unless specifically requested or necessary for the application displaying the text.",
-          "suggestion": "Consider removing the HTML tags if they are not required for display.  For example: フォルダー {{title}} が {{folderName}} に正常に移動されました"
+          "description": "The angle brackets around {{title}} and {{folderName}} are inconsistent with the English content. The English uses <2> and <1> while the Japanese uses the same.",
+          "suggestion": "Ensure consistent angle bracket numbering across both languages. If the numbering is important for parsing or display, it should match the English: フォルダー <1>{{title}}</1> が <2>{{folderName}}</2> に正常に移動されました"
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Korean translation retains the HTML tags (<2> and <1>) which are unnecessary and may cause display issues in some contexts. The original English content uses them, but it's generally better to remove them in the translation if they aren't functionally required.",
-          "suggestion": "Remove the <2> and <1> tags. The translation should be: \"{{title}} 폴더가 {{folderName}} 폴더로 이동되었습니다\""
+          "description": "The original English content uses `<1>` for `folderName` and `<2>` for `title`. The Korean translation reverses these tags.",
+          "suggestion": "Adjust the tags to match the original English: `<2>{{title}}</2> 폴더가 <1>{{folderName}}</1> 폴더로 이동되었습니다"
         }
       ],
       "approved_at": null
@@ -131,9 +131,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'ຢ່າງສະບາຍດີ' (yang sabai di) translates to 'successfully' or 'well'. While not incorrect, a more natural translation for 'successfully' in this context might be 'เรียบร้อย' (riap roi) in Lao.",
-          "suggestion": "ໄຟລ໌ <2>{{title}}</2> ຍ້າຍໄປທີ່ <1>{{folderName}}</1> ຢ່າງเรียบร້ອຍ"
+          "type": "incorrect_translation",
+          "description": "The word 'successfully' is missing from the Lao translation. The English sentence explicitly states a successful move.",
+          "suggestion": "ໄຟລ໌ <2>{{title}}</2> ຍ້າຍໄປທີ່ <1>{{folderName}}</1> ຢ່າງສະຫງ່າງາມ"
         }
       ],
       "approved_at": null
@@ -141,19 +141,37 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'moved to' is translated as 'pārvietota uz'. While technically correct, a more natural and commonly used translation in Latvian for this context would be 'nonesta uz' or 'pārvietota'.",
+          "suggestion": "Mape <2>{{title}}</2> veiksmīgi nonesta uz <1>{{folderName}}</1>"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Dutch translation uses 'is' (present tense) instead of 'werd' (past tense) which is more appropriate given the context of a completed action.  While 'is' isn't strictly incorrect, 'werd' would more accurately reflect the successful movement.",
+          "suggestion": "De map <2>{{title}}</2> werd succesvol verplaatst naar <1>{{folderName}}</1>"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The tag order is incorrect. The English content uses <2>{{title}}</2> and <1>{{folderName}}</1>, while the Polish translation uses <2>{{title}}</2> and <1>{{folderName}}</1>. This should be consistent with the English source.",
+          "suggestion": "Change the Polish translation to use <1>{{folderName}}</1> and <2>{{title}}</2> to match the English source."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -171,13 +189,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The tags <1> and <2> are in the reverse order compared to the English content. They should be <1> and <2> respectively.",
-          "suggestion": "Change the tags in the Romanian translation to <1>{{folderName}}</1> and <2>{{title}}</2>."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -192,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Sinhala translation maintains the HTML tags but the order is reversed. The English has <2>{{title}}</2> and <1>{{folderName}}</1>, whereas the Sinhala has <1>{{folderName}}</1> before <2>{{title}}</2>. This disrupts the intended flow and meaning.",
-          "suggestion": "Reorder the HTML tags to match the English: ෆෝල්ඩරය <2>{{title}}</2> සාර්ථකව <1>{{folderName}}</1> වෙත ගෙනයන ලදී."
+          "description": "The Sinhala translation maintains the HTML tags from the English content, which is generally not desirable in natural language output. The tags should be removed.",
+          "suggestion": "ෆෝල්ඩරය <2>{{title}}</2> සාර්ථකව <1>{{folderName}}</1> වෙත ගෙනයන ලදී."
         }
       ],
       "approved_at": null
@@ -201,7 +213,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The angle brackets around the variables {{title}} and {{folderName}} are correctly placed, mirroring the English original.",
+          "suggestion": null
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -215,9 +233,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'folder' is transliterated as 'Фолдер'. While understandable, the more standard and preferred transliteration for 'folder' in Serbian (Cyrillic) is 'папка'.",
-          "suggestion": "папка"
+          "type": "incorrect_translation",
+          "description": "The English word 'moved' is better translated as 'премештен' in Serbian (Cyrillic) to maintain the sense of a folder being moved.  While 'премештен' is correct, a more natural phrasing would use a more conversational verb.",
+          "suggestion": "Фолдер <2>{{title}}</2> успешно пребачен у <1>{{folderName}}</1>"
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "A {{parameter1}} and {{parameter2}} is set for this link. To configure it,",
   "content_en_sha1_hash": "d8cdc157f20199789743912d5a155894ebdb2db9",
   "created_at": "2025-05-19T21:30:54.556Z",
-  "updated_at": "2025-05-21T08:59:17.107Z",
+  "updated_at": "2025-05-24T09:11:41.321Z",
   "comment": {
     "text": "This translation key is used to display a descriptive text that explains the configuration options for a link set. It appears in the UI when viewing settings for links, providing users with instructions on how to configure the link settings.",
     "is_auto": true,
@@ -30,13 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'A {{parameter1}} and {{parameter2}} is set for this link' is not perfectly conveyed. A more natural Arabic phrasing might be 'تم تحديد {{parameter1}} و {{parameter2}} لهذا الارتباط'. The original translation implies setting, while 'تحديد' (tahdeed) implies identification or specification, which is often more accurate in a technical context.",
-          "suggestion": "تم تحديد {{parameter1}} و {{parameter2}} لهذا الارتباط."
-        },
-        {
-          "type": "formatting",
-          "description": "While grammatically acceptable, the Arabic sentence structure could be slightly improved for better flow. Placing 'لهذا الارتباط' (for this link) at the end often makes the sentence more natural in Arabic.",
-          "suggestion": "تم تحديد {{parameter1}} و {{parameter2}} لهذا الارتباط."
+          "description": "The phrase 'is set for this link' is not accurately reflected in the Arabic translation. 'تم تعيين' implies 'has been set' rather than a more active setting. A more accurate translation might emphasize the setting process itself.",
+          "suggestion": "Consider rephrasing to something like 'تم تحديد {{parameter1}} و {{parameter2}} لهذا الارتباط' ({{parameter1}} and {{parameter2}} have been determined for this link) or 'يتم استخدام {{parameter1}} و {{parameter2}} لهذا الارتباط' ({{parameter1}} and {{parameter2}} are used for this link)."
         }
       ],
       "approved_at": null
@@ -50,7 +45,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'A {{parameter1}} and {{parameter2}} is set for this link' sounds awkward and potentially incorrect in the Bulgarian translation. A more natural phrasing would be '{{parameter1}} и {{parameter2}} са зададени за този линк'.  The original phrasing implies the parameters *are* a set.",
+          "suggestion": "За този линк са зададени {{parameter1}} и {{parameter2}}. "
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -58,14 +59,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The Czech translation uses \"Pro tento odkaz je nastaven...\" which literally translates to 'For this link is set...'.  A more natural phrasing would be something like 'U tohoto odkazu je nastaveno...' or 'Tento odkaz má nastaveno...'  The verb 'mít' (to have) is generally preferred in this context.",
-          "suggestion": "U tohoto odkazu je nastaven {{parameter1}} a {{parameter2}}. Pro jeho konfiguraci"
+          "type": "incorrect_translation",
+          "description": "The English phrase 'A {{parameter1}} and {{parameter2}} is set for this link' translates more accurately as 'Nastaven je {{parameter1}} a {{parameter2}} pro tento odkaz.' The current Czech translation's word order is slightly awkward and implies that the link is setting the parameters, rather than the parameters being associated with the link.",
+          "suggestion": "Nastaven je {{parameter1}} a {{parameter2}} pro tento odkaz."
         },
         {
           "type": "grammar",
-          "description": "While grammatically correct, the current translation feels somewhat stiff and less natural.  Consider restructuring the sentence for a better flow in Czech.",
-          "suggestion": "Tento odkaz má nastaven {{parameter1}} a {{parameter2}}. Pro jeho konfiguraci"
+          "description": "The sentence 'Pro tento odkaz je nastaven {{parameter1}} a {{parameter2}}' could be improved for readability and flow. While grammatically correct, a more natural phrasing is possible.",
+          "suggestion": "Nastaveno je {{parameter1}} a {{parameter2}} pro tento odkaz."
         }
       ],
       "approved_at": null
@@ -76,13 +77,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"A {{parameter1}} and {{parameter2}} is set for this link\" is translated as \"Für diesen Link sind die folgenden Parameter festgelegt: {{parameter1}} und {{parameter2}}\". While technically correct, it's a bit clunky. A more natural German translation would be something like \"Die Parameter {{parameter1}} und {{parameter2}} sind für diesen Link festgelegt\".",
-          "suggestion": "Die Parameter {{parameter1}} und {{parameter2}} sind für diesen Link festgelegt."
+          "description": "The English phrase \"A {{parameter1}} and {{parameter2}} is set for this link\" is not perfectly conveyed by \"Für diesen Link sind die folgenden Parameter festgelegt: {{parameter1}} und {{parameter2}}\". A more accurate translation would be something like \"Die Parameter {{parameter1}} und {{parameter2}} sind für diesen Link festgelegt\" or \"Für diesen Link wurden die Parameter {{parameter1}} und {{parameter2}} festgelegt\". The current translation reads a bit awkwardly.",
+          "suggestion": "Für diesen Link wurden die Parameter {{parameter1}} und {{parameter2}} festgelegt."
         },
         {
           "type": "formatting",
-          "description": "The English sentence structure 'A...and...is set' is not directly mirrored in the German translation. This can result in an awkward flow.",
-          "suggestion": "While a direct translation is possible, restructuring the sentence might improve readability in German. Consider a more active voice."
+          "description": "The colon after \"festgelegt\" in the German translation appears to be unnecessarily placed. It creates an unnatural sentence structure.",
+          "suggestion": "Für diesen Link wurden die Parameter {{parameter1}} und {{parameter2}} festgelegt"
         }
       ],
       "approved_at": null
@@ -93,13 +94,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Μια παράμετρος {{parameter1}} και {{parameter2}}\" translates literally to \"One parameter {{parameter1}} and {{parameter2}}\". It should be closer to 'A value for {{parameter1}} and {{parameter2}}' to accurately reflect the English meaning of 'A {{parameter1}} and {{parameter2}}'.",
-          "suggestion": "Μια τιμή για {{parameter1}} και {{parameter2}}"
+          "description": "The phrase 'A {{parameter1}} and {{parameter2}} is set' is translated as 'Μια παράμετρος {{parameter1}} και {{parameter2}} έχει οριστεί'. While technically correct, it sounds unnatural in Greek.  A more natural phrasing would be 'Έχουν οριστεί παράμετροι {{parameter1}} και {{parameter2}}'.",
+          "suggestion": "Έχουν οριστεί παράμετροι {{parameter1}} και {{parameter2}}"
         },
         {
-          "type": "formatting",
-          "description": "The Greek translation lacks a proper punctuation mark at the end of the sentence. It requires a period or other appropriate punctuation.",
-          "suggestion": "Μια τιμή για {{parameter1}} και {{parameter2}} έχει οριστεί για αυτόν τον σύνδεσμο. Για να τον διαμορφώσετε."
+          "type": "grammar",
+          "description": "The phrase 'Για να τον διαμορφώσετε' (To configure it) sounds slightly awkward.  It implies 'it' refers to 'the link' but the connection isn't immediately obvious. A more natural phrasing might be 'Για να το διαμορφώσετε' to be more generic, or clarify what 'it' refers to.",
+          "suggestion": "Για να το διαμορφώσετε"
         }
       ],
       "approved_at": null
@@ -107,13 +108,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'A {{parameter1}} and {{parameter2}} is set for this link' translates more accurately as 'Se ha establecido un {{parameter1}} y un {{parameter2}} para este enlace.' or 'Se ha configurado un {{parameter1}} y un {{parameter2}} para este enlace.' The current translation 'Se establece...' uses the present tense while the English implies a completed action.",
-          "suggestion": "Se ha establecido un {{parameter1}} y un {{parameter2}} para este enlace."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -122,13 +117,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"A {{parameter1}} and {{parameter2}} is set for this link\" is awkwardly translated as \"{{parameter1}} ja {{parameter2}} asetetaan tälle linkille.\" A more natural Finnish phrasing would emphasize that the parameters are being *assigned* or *defined* for the link, rather than that they are *being set*.",
-          "suggestion": "{{parameter1}} ja {{parameter2}} määritetään tälle linkille."
+          "description": "The English phrase \"A {{parameter1}} and {{parameter2}} is set for this link\" is somewhat awkward. A more natural translation would be \"{{parameter1}} ja {{parameter2}} on määritetty tälle linkille.\" The current translation \"asetetaan\" implies an action being performed *on* the link, rather than the parameters *being* set. ",
+          "suggestion": "{{parameter1}} ja {{parameter2}} on määritetty tälle linkille."
         },
         {
           "type": "incorrect_translation",
-          "description": "The English \"To configure it\" is translated as \"Määrittääksesi sen,\" which is grammatically correct but lacks the directness of the original. It implies a more complex configuration process than intended.",
-          "suggestion": "Sen määrittämiseksi"
+          "description": "The English phrase \"To configure it,\" is awkwardly translated. It could be better represented in Finnish as \"Sen määrittämiseksi,\" or a more conversational \"Määritettäessä\".",
+          "suggestion": "Sen määrittämiseksi,"
         }
       ],
       "approved_at": null
@@ -139,8 +134,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"A {{parameter1}} and {{parameter2}} is set for this link\" is not accurately reflected in the French translation. The original implies that parameter1 and parameter2 are *values* being set, whereas the French implies they *are* the parameters themselves.",
-          "suggestion": "Consider rephrasing the English to be more precise, or adjust the French to better match. For example, English: \"Values for {{parameter1}} and {{parameter2}} are set for this link.\""
+          "description": "The English phrase \"A {{parameter1}} and {{parameter2}} is set for this link\" implies a singular setting. The French translation \"{{parameter1}} et {{parameter2}} sont les paramètres définis pour ce lien\" implies that parameter1 and parameter2 *are* the parameters. This is a significant semantic shift.",
+          "suggestion": "Consider rephrasing the English to be more accurate and less ambiguous, or revising the French translation to align with the original meaning. For example, the English could be \"These {{parameter1}} and {{parameter2}} are set for this link,\" and the French could be \"Les {{parameter1}} et {{parameter2}} suivants sont les paramètres définis pour ce lien.\" or \"Les paramètres {{parameter1}} et {{parameter2}} sont définis pour ce lien."
         }
       ],
       "approved_at": null
@@ -150,14 +145,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'նշանները' is a bit ambiguous. While it can mean 'signs' or 'symbols', it might be more appropriate to use a word that more directly translates to 'values' or 'settings' depending on the context of 'parameter1' and 'parameter2'.",
-          "suggestion": "Consider using a more specific term like 'արժեքները' (values) or 'գործողությունները' (actions) if that aligns with the context."
-        },
-        {
           "type": "incorrect_translation",
-          "description": "The English phrase 'To configure it' is quite generic. Depending on the context, a more specific translation might be better. 'configure' can have several interpretations.",
-          "suggestion": "Consider options like 'Դրա կարգավորման համար' (For its adjustment) or 'Դրա սահմանման համար' (For its definition) depending on the exact meaning."
+          "description": "The English phrase \"A {{parameter1}} and {{parameter2}} is set\" is grammatically incorrect. It should be \"{{parameter1}} and {{parameter2}} are set\". The Armenian translation doesn't reflect this corrected grammar and simply translates the original incorrect English. While the translation itself is technically correct to the provided English, it perpetuates the error.",
+          "suggestion": "Correct the English to \"{{parameter1}} and {{parameter2}} are set\" and update the Armenian translation accordingly to reflect the subject being plural: \"Այս հղման համար սահմանված են {{parameter1}} և {{parameter2}} լոգոները: Այն կարգավորելու համար,\" (Assuming 'parameter1' and 'parameter2' represent logos)"
         }
       ],
       "approved_at": null
@@ -165,13 +155,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The Italian translation uses 'sono impostati' (are set). While grammatically correct, it's slightly less fluid than alternatives.  A more natural phrasing might be 'è impostato'.",
-          "suggestion": "È impostato per questo link."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -180,8 +164,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"A {{parameter1}} and {{parameter2}} is set\" is not accurately translated. The Japanese translation implies an ownership or belonging relationship (\"~に設定されています\") that might not be the intended meaning. A more accurate translation might suggest the parameters *are* the setting.",
-          "suggestion": "このリンクには{{parameter1}}と{{parameter2}}が設定されています。設定するには、"
+          "description": "The phrase \"A {{parameter1}} and {{parameter2}} is set\" is grammatically incorrect in English. It should be \"{{parameter1}} and {{parameter2}} are set\" or \"{{parameter1}} and {{parameter2}} have been set\". The Japanese translation accurately reflects the incorrect English phrasing.",
+          "suggestion": "The English content should be corrected to \"{{parameter1}} and {{parameter2}} are set for this link. To configure it,\"."
         }
       ],
       "approved_at": null
@@ -192,13 +176,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"A {{parameter1}} and {{parameter2}} is set\" is not accurately translated. The use of 'and' implies a connection between parameter1 and parameter2, which isn't explicitly conveyed by '및' (and) in Korean. A better phrasing would emphasize that each parameter is set separately.",
-          "suggestion": "이 링크에는 {{parameter1}}이 설정되어 있고, {{parameter2}}도 설정되어 있습니다. (This link has {{parameter1}} set, and {{parameter2}} is also set.)"
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly an error, the Korean sentence structure could be improved for naturalness. Combining the two sentences would flow better.",
-          "suggestion": "이 링크에는 {{parameter1}}이 설정되어 있고, {{parameter2}}도 설정되어 있습니다. 구성하려면,"
+          "description": "The English phrase \"A {{parameter1}} and {{parameter2}} is set\" is grammatically awkward. It should be \"{{parameter1}} and {{parameter2}} are set\".  The Korean translation maintains this awkwardness.  The 'and' should imply plural, and thus 'are' should be used.",
+          "suggestion": "이 링크에는 {{parameter1}} 및 {{parameter2}}가 설정되었습니다. 구성하려면,"
         }
       ],
       "approved_at": null
@@ -208,9 +187,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The Lao translation uses 'ຖືກຕັ້ງໄວ້' which implies a passive voice. A more natural phrasing might be to use an active voice construction. Also, the phrasing 'ສຳລັບລິ້ງນີ້' (for this link) can be a bit clunky. A more fluent wording might be 'ໃນລິ້ງນີ້' (in this link).",
-          "suggestion": "A {{parameter1}} ແລະ {{parameter2}} ຖືກນຳໃຊ້ໃນລິ້ງນີ້. ເພື່ອ​ຕັ້ງ​ຄ່າ​ມັນ​,"
+          "type": "incorrect_translation",
+          "description": "The phrase 'is set for this link' is not accurately conveyed. A more natural translation would be 'ຖືກນໍາໃຊ້ສໍາລັບລິ້ງນີ້' or 'ຖືກກຳນົດໄວ້ສໍາລັບລິ້ງນີ້'.",
+          "suggestion": "ຖືກນໍາໃຊ້ສໍາລັບລິ້ງນີ້"
         }
       ],
       "approved_at": null
@@ -220,9 +199,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'A {{parameter1}} and {{parameter2}} is set for this link' translates more accurately to '{{parameter1}} un {{parameter2}} ir norādīti šai saitei' rather than 'ir iestatīts'. 'Iestatīts' implies something is being configured actively, while 'norādīti' simply indicates the values are specified.",
-          "suggestion": "{{parameter1}} un {{parameter2}} ir norādīti šai saitei."
+          "type": "grammar",
+          "description": "The Latvian translation uses \"ir iestatīts\" which implies a passive voice and a singular subject. The English implies a plural subject, and a more natural phrasing would be \"ir iestatīti\".",
+          "suggestion": "Ir iestatīti šai saitei."
         }
       ],
       "approved_at": null
@@ -233,8 +212,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English sentence uses a possessive structure ('A ... and ... is set'). The Dutch translation literally translates this, which is grammatically awkward in Dutch. It would be more natural to use a phrasing that expresses that something *has* a parameter.",
-          "suggestion": "Een {{parameter1}} en {{parameter2}} zijn toegewezen aan deze link. Om dit te configureren,"
+          "description": "The phrase 'A {{parameter1}} and {{parameter2}} is set' is grammatically awkward and doesn't quite convey the intended meaning in Dutch. It sounds like the parameters themselves are being set, rather than a link using them. The English implies a configuration using the parameters.",
+          "suggestion": "Een {{parameter1}} en {{parameter2}} zijn gebruikt voor deze link. Om dit te configureren,"
         }
       ],
       "approved_at": null
@@ -244,9 +223,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Polish translation lacks a period at the end of the sentence, making it grammatically incomplete.",
-          "suggestion": "Dla danego linku ustawiono parametry {{parameter1}} i {{parameter2}}. Aby go skonfigurować,."
+          "type": "spelling",
+          "description": "The word 'linku' should be 'link'.",
+          "suggestion": "Dla danego linka ustawiono parametry {{parameter1}} i {{parameter2}}. Aby go skonfigurować,"
         }
       ],
       "approved_at": null
@@ -268,9 +247,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The Romanian translation uses \"sunt setate\" which is grammatically correct but sounds a bit clunky. A more natural phrasing would be \"sunt definiți\" or \"sunt configurați\".",
-          "suggestion": "Parametrii {{parameter1}} și {{parameter2}} sunt definiți pentru acest link. Pentru a configura,"
+          "type": "spelling",
+          "description": "The word 'și' is missing an accent. It should be 'și'.",
+          "suggestion": "și"
         }
       ],
       "approved_at": null
@@ -281,8 +260,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation lacks the punctuation at the end of the sentence. It should end with a period or other appropriate punctuation mark.",
-          "suggestion": "Для этой ссылки заданы {{parameter1}} и {{parameter2}}. Чтобы настроить её,"
+          "description": "The Russian translation lacks a period at the end of the sentence.",
+          "suggestion": "Для этой ссылки заданы {{parameter1}} и {{parameter2}}. Чтобы настроить ее,"
         }
       ],
       "approved_at": null
@@ -293,8 +272,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'සකසා ඇත' is a bit awkward. A more natural phrasing for 'is set' or 'has been configured' might be 'මාලාවක්' or 'උත්සහගත' respectively.",
-          "suggestion": "මෙම සබැඳිය සඳහා {{parameter1}} සහ {{parameter2}} මාලාවක් ඇත. එය වින්‍යාසගත කිරීමට,"
+          "description": "The English phrase 'A {{parameter1}} and {{parameter2}} is set for this link' is not accurately translated. The Sinhala translation 'මෙම සබැඳිය සඳහා {{parameter1}} සහ {{parameter2}} සකසා ඇත' implies that parameter1 and parameter2 *were made* or *arranged* for the link, rather than a setting or configuration.",
+          "suggestion": "Consider a translation like: 'මෙම සබැඳිය සඳහා {{parameter1}} සහ {{parameter2}} වැනි සැකසීම් පවතී.' (This link has settings like {{parameter1}} and {{parameter2}}.) or 'මෙම සබැඳිය සඳහා {{parameter1}} හා {{parameter2}} පරිදි වින්‍යාසගත කර ඇත.' (This link is configured with {{parameter1}} and {{parameter2}}.)"
+        },
+        {
+          "type": "formatting",
+          "description": "The word 'හා' is a more formal and slightly less common conjunction than 'සහ'. While grammatically correct, 'සහ' feels slightly more conversational and might be preferable depending on the overall tone.",
+          "suggestion": "Replace 'හා' with 'සහ'."
         }
       ],
       "approved_at": null
@@ -305,8 +289,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovak translation \"Pre tento odkaz sú nastavené {{parameter1}} a {{parameter2}}. Pre konfiguráciu\" lacks the concluding part of the English sentence, \"To configure it.\" The sentence feels incomplete.",
-          "suggestion": "Pre tento odkaz sú nastavené {{parameter1}} a {{parameter2}}. Pre konfiguráciu, "
+          "description": "The Slovak translation \"Pre tento odkaz sú nastavené {{parameter1}} a {{parameter2}}. Pre konfiguráciu\" is incomplete. The English content continues with \"To configure it,\". The Slovak translation is missing this portion.",
+          "suggestion": "Pre tento odkaz sú nastavené {{parameter1}} a {{parameter2}}. Pre konfiguráciu je potrebné..."
         }
       ],
       "approved_at": null
@@ -317,8 +301,13 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Slovenian translation \"Za to povezavo sta nastavljena {{parameter1}} in {{parameter2}}. Za konfiguriranje\" is grammatically awkward. The use of 'sta' implies two items. While technically correct, it's better to use a more natural phrasing.  The sentence fragment 'Za konfiguriranje' is also incomplete and needs to be finished.",
-          "suggestion": "Za to povezavo sta nastavljena {{parameter1}} in {{parameter2}}. Za konfiguracijo preberite navodila."
+          "description": "The Slovenian translation lacks a conjunction to properly connect the two parameters. 'in' implies 'and' but a more formal connector would improve readability.",
+          "suggestion": "Za to povezavo sta nastavljena {{parameter1}} in {{parameter2}}, kar omogoča..."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation ends abruptly. The original English sentence is incomplete, implying instructions or further explanation will follow. The Slovenian translation leaves the sentence incomplete which is jarring.",
+          "suggestion": "Za to povezavo sta nastavljena {{parameter1}} in {{parameter2}}. Za konfiguriranje se..."
         }
       ],
       "approved_at": null
@@ -329,8 +318,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Serbian translation uses the imperfect tense 'су постављени' which can sound awkward in this context. A more natural phrasing would use the aorist tense.",
-          "suggestion": "Use the aorist tense: '{{parameter1}} и {{parameter2}} постављени су за овај линк. Да бисте их конфигурисали,' "
+          "description": "The Serbian translation uses 'су' which implies the parameters are a plural concept. Given the English uses 'a', it should reflect a singular concept.  'је' would be more appropriate to agree with 'a'.",
+          "suggestion": "{{parameter1}} и {{parameter2}} је постављен за овај линк. Да бисте га конфигурисали,"
         }
       ],
       "approved_at": null
@@ -341,8 +330,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Serbian translation uses \"su postavljeni\" which implies a passive voice. While grammatically correct, it might sound less natural than an active voice construction. Considering the context, a more direct active voice could improve clarity.",
-          "suggestion": "Consider revising to something like \"{{parameter1}} i {{parameter2}} postavljaju se za ovaj link. Da biste ih konfigurisali,\" or \"{{parameter1}} i {{parameter2}} određeni su za ovaj link. Da biste ih konfigurisali,\" depending on the intended nuance."
+          "description": "The Serbian translation uses the plural form 'su' (are) when referring to a single link. It should be the singular form 'je' (is).",
+          "suggestion": "{{parameter1}} i {{parameter2}} je postavljeno za ovaj link. Da biste ih konfigurisali,"
         }
       ],
       "approved_at": null
@@ -358,9 +347,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"A {{parameter1}} and {{parameter2}} is set for this link\" translates more accurately as \"{{parameter1}} та {{parameter2}} встановлено для цього посилання.\" The current translation \"{{parameter1}} і {{parameter2}} встановлено для цього посилання\" uses 'i' instead of 'та', which is less formal and less precise in Ukrainian in this context.",
+          "suggestion": "Для цього посилання встановлено {{parameter1}} та {{parameter2}}."
+        },
+        {
           "type": "formatting",
-          "description": "The Ukrainian translation lacks the closing punctuation (period) at the end of the sentence.",
-          "suggestion": "Для цього посилання встановлено {{parameter1}} і {{parameter2}}. Щоб налаштувати посилання,."
+          "description": "The phrase \"Щоб налаштувати посилання,\" is missing a period at the end. While this might be acceptable depending on the platform, it's good practice to include it.",
+          "suggestion": "Щоб налаштувати посилання."
         }
       ],
       "approved_at": null
@@ -371,8 +365,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"A {{parameter1}} and {{parameter2}} is set for this link\" is not perfectly translated. A more natural Vietnamese translation would use a verb describing the setting of the parameters. The current translation, \"Một {{parameter1}} và {{parameter2}} được đặt cho liên kết này,\" implies the parameters themselves are 'placed' rather than 'configured/set'.",
-          "suggestion": "Một {{parameter1}} và {{parameter2}} đã được thiết lập cho liên kết này. Để định cấu hình,"
+          "description": "The phrase \"A {{parameter1}} and {{parameter2}}\" is not perfectly translated. While understandable, a more natural Vietnamese phrasing might be preferable. A literal translation can sound awkward.",
+          "suggestion": "Một {{parameter1}} và {{parameter2}} đã được thiết lập cho liên kết này."
         }
       ],
       "approved_at": null
@@ -383,8 +377,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'A {{parameter1}} and {{parameter2}} is set for this link' is translated to '为此链接设置了 {{parameter1}} 和 {{parameter2}}'. While not strictly incorrect, the wording could be improved to be more natural. 'A' is omitted in the translation. It sounds a bit abrupt in Chinese without the article.",
-          "suggestion": "为此链接设置了 {{parameter1}} 和 {{parameter2}}。 "
+          "description": "The English phrase \"A {{parameter1}} and {{parameter2}} is set for this link\" is not accurately reflected in the Chinese translation. The Chinese translation implies that the parameters themselves were 'set', rather than that a link was configured *with* those parameters.  A more accurate translation would imply the configuration aspect.",
+          "suggestion": "为此链接已配置 {{parameter1}} 和 {{parameter2}}。如要配置，"
         }
       ],
       "approved_at": null

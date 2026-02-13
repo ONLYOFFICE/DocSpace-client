@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -107,15 +107,16 @@ export const StyledBlocksContainer = styled.div`
 `;
 
 export const StyledInfoContainer = styled.div.attrs(injectDefaultTheme)<{
-  showDescription: boolean;
-  withShowText: boolean;
+	showDescription: boolean;
+	withShowText: boolean;
 }>`
   width: 100%;
-  height: 100%;
+  height: fit-content;
 
   box-sizing: border-box;
 
   padding-top: 16px;
+  padding-bottom: 16px;
 
   display: flex;
   flex-direction: column;
@@ -154,7 +155,7 @@ export const StyledInfoContainer = styled.div.attrs(injectDefaultTheme)<{
 
   .description {
     max-height: ${(props) =>
-      props.showDescription ? "100%" : props.withShowText ? "100px" : "100%"};
+			props.showDescription ? "100%" : props.withShowText ? "100px" : "100%"};
 
     overflow: hidden;
 

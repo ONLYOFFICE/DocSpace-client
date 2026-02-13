@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,14 +27,18 @@
 import React from "react";
 import equal from "fast-deep-equal/react";
 import { isMobileOnly, isMobile, isTablet } from "react-device-detect";
+import classNames from "classnames";
+
+import EmptyIcon from "PUBLIC_DIR/images/empty.svg?url";
 
 import { DropDown } from "../drop-down";
 import { DropDownItem } from "../drop-down-item";
+import { TooltipContainer } from "../tooltip";
 
 import { ComboButton } from "./sub-components/ComboButton";
-import { StyledComboBox } from "./ComboBox.styled";
 import { ComboBoxSize, ComboBoxDisplayType } from "./ComboBox.enums";
 import type { TComboboxProps, TOption } from "./ComboBox.types";
+import styles from "./ComboBox.module.scss";
 
 const compare = (prevProps: TComboboxProps, nextProps: TComboboxProps) => {
   return equal(prevProps, nextProps);
@@ -122,6 +126,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
         | KeyboardEvent,
     ) => {
       if (option.isSeparator) return;
+      if (option.disabled && option.tooltip) return;
 
       setIsOpen((v) => {
         setIsOpenItemAccess?.(!v);
@@ -214,7 +219,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
     fixedDirection,
     withBlur,
     fillIcon,
-    offsetLeft,
+    offsetX,
     modernView,
     withBackdrop = true,
     isAside,
@@ -241,6 +246,11 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
     tabIndex,
     onClickSelectedItem,
     shouldShowBackdrop,
+    dropDownClassName,
+    dropDownTestId,
+    dataTestId,
+    noSelect = true,
+    useImageIcon = false,
   } = props;
 
   React.useEffect(() => {
@@ -298,53 +308,78 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
 
   const disableMobileView = optionsCount < 4 || hideMobileView;
 
-  const renderOptions = () => {
-    const dropDownBody = options?.map((option) => {
+  const renderedOptions = React.useMemo(() => {
+    if (!options?.length) return null;
+
+    const selectedLabel = selectedOption?.label;
+    const selectedKey = selectedOption?.key;
+
+    return options.map((option) => {
       const { key, disabled, label, icon, isBeta } = option;
 
+      const isSameAsSelectedLabel = label === selectedLabel;
+      const isSameAsSelectedKey = key === selectedKey;
+
       const optionDisabled =
-        disabled ||
-        (!displaySelectedOption && option?.label === selectedOption?.label);
+        disabled || (!displaySelectedOption && isSameAsSelectedLabel);
 
       const isActiveOption = withLabel
-        ? label === selectedOption?.label
-        : key === selectedOption?.key;
-
+        ? isSameAsSelectedLabel
+        : isSameAsSelectedKey;
       const isActive = displaySelectedOption && isActiveOption;
-
       const isSelected = isActiveOption;
+
+      const handleClick = (
+        e: React.ChangeEvent<HTMLInputElement> | React.MouseEvent<HTMLElement>,
+      ) => optionClick(option, e);
+      const handleClickSelected = () => onClickSelectedItem?.(option);
 
       return (
         <DropDownItem
           key={key}
+          testId={
+            option.dataTestId ||
+            `drop_down_item_${key.toString().toLowerCase()}`
+          }
           label={label}
           icon={icon}
           isBeta={isBeta}
-          data-testid="drop-down-item"
           data-focused={isOpen ? isActiveOption : undefined}
           data-is-separator={option.isSeparator || undefined}
           data-type={option.type || undefined}
-          aria-disabled={option.disabled || undefined}
+          aria-disabled={optionDisabled || undefined}
           className={`drop-down-item ${option?.className || ""}`}
           textOverflow={textOverflow}
           disabled={optionDisabled}
-          onClick={(e) => optionClick(option, e)}
-          onClickSelectedItem={() => onClickSelectedItem?.(option)}
+          onClick={handleClick}
+          onClickSelectedItem={handleClickSelected}
           fillIcon={fillIcon}
           isModern={noBorder}
           isActive={isActive}
           isSelected={isSelected}
           style={optionStyle}
           isSeparator={option.isSeparator}
+          tooltip={option.tooltip}
         />
       );
     });
+  }, [
+    options,
+    selectedOption?.label,
+    selectedOption?.key,
+    displaySelectedOption,
+    withLabel,
+    textOverflow,
+    fillIcon,
+    noBorder,
+    optionStyle,
+    isOpen,
+    onClickSelectedItem,
+    optionClick,
+  ]);
 
-    return dropDownBody;
-  };
-
-  const renderDropDown = () => {
-    const dropDownProps = {
+  const dropDownProps = React.useMemo(
+    () => ({
       open: isOpen,
       directionX,
       directionY,
@@ -354,7 +389,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
       fixedDirection,
       forwardedRef: ref,
       withBlur,
-      offsetLeft,
+      offsetX,
       withBackdrop,
       isAside,
       withBackground,
@@ -369,37 +404,90 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
       topSpace,
       usePortalBackdrop,
       style,
-      showDisabledItems,
+      showDisabledItems: true,
       isDefaultMode,
       clickOutsideAction: handleClickOutside,
       shouldShowBackdrop,
-    };
+      className: dropDownClassName,
+      dataTestId: dropDownTestId,
+    }),
+    [
+      isOpen,
+      directionX,
+      directionY,
+      manualWidth,
+      manualX,
+      manualY,
+      fixedDirection,
+      withBlur,
+      offsetX,
+      withBackdrop,
+      isAside,
+      withBackground,
+      advancedOptionsCount,
+      isMobileView,
+      withoutPadding,
+      isNoFixedHeightOptions,
+      forceCloseClickOutside,
+      withoutBackground,
+      dropDownId,
+      topSpace,
+      usePortalBackdrop,
+      style,
+      showDisabledItems,
+      isDefaultMode,
+      handleClickOutside,
+      shouldShowBackdrop,
+      dropDownClassName,
+      dropDownTestId,
+    ],
+  );
 
-    const dropDownOptions = advancedOptions || renderOptions();
+  const dropDownContent = advancedOptions || renderedOptions;
 
-    return (
+  const dropDownElement = React.useMemo(
+    () => (
       <DropDown
         {...dropDownProps}
         {...dropDownMaxHeightProp}
         {...dropDownManualWidthProp}
       >
-        {dropDownOptions}
+        {dropDownContent}
       </DropDown>
-    );
-  };
+    ),
+    [
+      dropDownProps,
+      dropDownMaxHeightProp,
+      dropDownManualWidthProp,
+      dropDownContent,
+    ],
+  );
+
+  const comboboxClasses = classNames(styles.combobox, className, styles[size], {
+    [styles.scaled]: scaled,
+    [styles.isOpen]: isOpen,
+    [styles.noSelect]: noSelect,
+    [styles.disableMobileView]: disableMobileView,
+    [styles.withoutPadding]: withoutPadding,
+  });
+
+  const imageProps = useImageIcon
+    ? {
+        imageIcon: EmptyIcon,
+        imageAlt: selectedOption.label
+          ? selectedOption.label
+          : (selectedOption.key as string),
+      }
+    : {};
 
   return (
-    <StyledComboBox
+    <TooltipContainer
+      as="div"
+      className={comboboxClasses}
       ref={ref}
-      size={size as ComboBoxSize}
-      scaled={scaled}
       onClick={comboBoxClick}
-      isOpen={isOpen}
-      disableMobileView={disableMobileView}
-      withoutPadding={withoutPadding}
-      data-testid="combobox"
+      data-testid={dataTestId ?? "combobox"}
       title={title}
-      className={className}
       data-scaled={scaledOptions || undefined}
       style={style}
     >
@@ -423,10 +511,12 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
         type={type}
         plusBadgeValue={plusBadgeValue}
         displayArrow={displayArrow}
+        noSelect={noSelect}
+        {...imageProps}
       />
 
-      {displayType !== "toggle" ? renderDropDown() : null}
-    </StyledComboBox>
+      {displayType !== "toggle" ? dropDownElement : null}
+    </TooltipContainer>
   );
 };
 

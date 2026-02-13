@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,18 +29,30 @@ import React from "react";
 import { I18nextProvider } from "react-i18next";
 import { RouterProvider } from "react-router";
 import { Provider as MobxProvider } from "mobx-react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import store from "SRC_DIR/store";
-import ThemeProvider from "./components/ThemeProviderWrapper";
-import ErrorBoundary from "./components/ErrorBoundaryWrapper";
-
-import i18n from "./i18n";
 
 import "@docspace/shared/polyfills/broadcastchannel";
 
 import "@docspace/shared/styles/custom.scss";
 
+import ThemeProvider from "./components/ThemeProviderWrapper";
+import ErrorBoundary from "./components/ErrorBoundaryWrapper";
+
 import router from "./router";
+
+import i18n from "./i18n";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: 1,
+      staleTime: 5 * 60 * 1000,
+    },
+  },
+});
 
 const App = () => {
   React.useEffect(() => {
@@ -53,15 +65,17 @@ const App = () => {
   }, []);
 
   return (
-    <MobxProvider {...store}>
-      <I18nextProvider i18n={i18n}>
-        <ThemeProvider>
-          <ErrorBoundary>
-            <RouterProvider router={router} />
-          </ErrorBoundary>
-        </ThemeProvider>
-      </I18nextProvider>
-    </MobxProvider>
+    <QueryClientProvider client={queryClient}>
+      <MobxProvider {...store}>
+        <I18nextProvider i18n={i18n}>
+          <ThemeProvider>
+            <ErrorBoundary>
+              <RouterProvider router={router} />
+            </ErrorBoundary>
+          </ThemeProvider>
+        </I18nextProvider>
+      </MobxProvider>
+    </QueryClientProvider>
   );
 };
 

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -63,7 +63,7 @@ const useError = ({ error }: UseErrorProps) => {
     if (error?.status === 402) {
       const portalUrl = window.location.origin;
 
-      history.pushState({}, "false", portalUrl);
+      window.history.pushState({}, "false", portalUrl);
       document.location.reload();
     } else {
       const tempElm = document.getElementById("loader");

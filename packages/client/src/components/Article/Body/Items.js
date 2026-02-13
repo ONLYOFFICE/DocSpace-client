@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import PropTypes from "prop-types";
-import styled from "styled-components";
 import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
@@ -38,23 +37,18 @@ import {
 import { FOLDER_NAMES } from "@docspace/shared/constants";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 
-import { ArticleItem } from "@docspace/shared/components/article-item";
+import { ArticleItem } from "@docspace/shared/components/article-item/ArticleItemWrapper";
 import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
 
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
 import { toastr } from "@docspace/shared/components/toast";
+
 import NewFilesBadge from "SRC_DIR/components/NewFilesBadge";
-import AccountsItem from "./AccountsItem";
 import BonusItem from "./BonusItem";
-// import FlowsItem from "./FlowsItem";
 
-const StyledDragAndDrop = styled(DragAndDrop)`
-  display: contents;
-`;
-
-const CatalogDivider = styled.div`
-  height: 16px;
-`;
+const CatalogDivider = () => {
+  return <div style={{ height: "16px" }}></div>;
+};
 
 const Item = ({
   t,
@@ -80,6 +74,8 @@ const Item = ({
   getLinkData,
   onBadgeClick,
   roomsFolderId,
+  aiAgentsFolderId,
+  setDropTargetPreview,
 }) => {
   const [isDragActive, setIsDragActive] = useState(false);
 
@@ -89,13 +85,22 @@ const Item = ({
   let value = "";
   if (isDragging) value = `${item.id} dragging`;
 
+  React.useEffect(() => {
+    if (isDragging) {
+      if (isDragActive) setDropTargetPreview(item.title);
+      else setDropTargetPreview(null);
+    }
+  }, [isDragging, isDragActive]);
+
   const onDropZoneUpload = React.useCallback(
     (files, uploadToFolder) => {
+      const dragged = dragging;
+
       dragging && setDragging(false);
 
-      createFoldersTree(t, files, uploadToFolder)
+      createFoldersTree(t, files, uploadToFolder, dragged)
         .then((f) => {
-          if (f.length > 0) startUpload(f, null, t);
+          if (f.length > 0) startUpload(f, uploadToFolder, t);
         })
         .catch((err) => {
           toastr.error(err);
@@ -134,6 +139,8 @@ const Item = ({
 
   const onClickAction = React.useCallback(
     (e, selectedFolderId) => {
+      if (e?.ctrlKey || e?.metaKey || e?.shiftKey || e?.button) return;
+
       setBufferSelection(null);
 
       onClick?.(
@@ -151,11 +158,14 @@ const Item = ({
     item.id,
     item.title,
     item.rootFolderType,
-    item.security.Create,
+    item.security?.Create,
   );
 
+  const droppableClassName = isDragging ? "droppable" : "";
+
   return (
-    <StyledDragAndDrop
+    <DragAndDrop
+      style={{ display: "contents" }}
       key={item.id}
       data-title={item.title}
       value={value}
@@ -163,7 +173,8 @@ const Item = ({
       dragging={dragging ? isDragging : null}
       onDragOver={onDragOver}
       onDragLeave={onDragLeave}
-      className="document-catalog"
+      className={`document-catalog ${droppableClassName}`}
+      data-document-title={item.title}
     >
       <ArticleItem
         item={item}
@@ -186,19 +197,31 @@ const Item = ({
         labelBadge={labelBadge}
         onClickBadge={onBadgeClick}
         iconBadge={iconBadge}
-        badgeTitle={labelBadge ? "" : t("EmptyRecycleBin")}
+        withAnimation
+        badgeTitle={
+          labelBadge
+            ? ""
+            : t("EmptySection", { sectionName: t("Common:TrashSection") })
+        }
         badgeComponent={
           <NewFilesBadge
             newFilesCount={labelBadge}
-            folderId={item.id === roomsFolderId ? "rooms" : item.id}
+            folderId={
+              item.id === roomsFolderId
+                ? "rooms"
+                : item.id === aiAgentsFolderId
+                  ? "agents"
+                  : item.id
+            }
             parentDOMId={folderId}
             onBadgeClick={onBadgeClick}
           />
         }
         linkData={linkData}
         $currentColorScheme={currentColorScheme}
+        dataTooltipId={`aiAgentsTooltip${item.id}`}
       />
-    </StyledDragAndDrop>
+    </DragAndDrop>
   );
 };
 
@@ -243,6 +266,8 @@ const Items = ({
 
   getLinkData,
   roomsFolderId,
+  aiAgentsFolderId,
+  setDropTargetPreview,
 }) => {
   const getFolderIcon = React.useCallback((item) => {
     return getCatalogIconUrlByType(item.rootFolderType);
@@ -275,7 +300,7 @@ const Items = ({
 
       if (item.rootFolderType === FolderType.TRASH && startDrag && !isArchive) {
         return draggableItems.some(
-          (draggableItem) => draggableItem.security.Delete,
+          (draggableItem) => draggableItem?.security?.Delete,
         );
       }
 
@@ -301,7 +326,9 @@ const Items = ({
 
   const onRemove = React.useCallback(() => {
     const translations = {
-      deleteFromTrash: t("Translations:DeleteFromTrash"),
+      deleteFromTrash: t("Translations:TrashItemsDeleteSuccess", {
+        sectionName: t("Common:TrashSection"),
+      }),
     };
 
     deleteAction(translations);
@@ -318,14 +345,16 @@ const Items = ({
 
   const getItems = React.useCallback(
     (elm) => {
-      const items = elm.map((item, index) => {
+      const items = elm.map((item) => {
         const isTrash = item.rootFolderType === FolderType.TRASH;
         const showBadge = emptyTrashInProgress
           ? false
           : item.newItems
             ? item.newItems > 0 && true
             : isTrash && !trashIsEmpty;
+
         const labelBadge = showBadge ? item.newItems : null;
+
         const iconBadge = isTrash ? ClearTrashReactSvgUrl : null;
 
         return (
@@ -340,7 +369,6 @@ const Items = ({
             dragging={dragging}
             getFolderIcon={getFolderIcon}
             isActive={item.id === activeItemId}
-            isLastItem={index === elm.length - 1}
             showText={showText}
             onClick={onClick}
             getLinkData={getLinkData}
@@ -353,40 +381,47 @@ const Items = ({
             folderId={`document_catalog-${FOLDER_NAMES[item.rootFolderType]}`}
             currentColorScheme={currentColorScheme}
             roomsFolderId={roomsFolderId}
+            aiAgentsFolderId={aiAgentsFolderId}
             onHide={onHide}
             isIndexEditingMode={isIndexEditingMode}
+            setDropTargetPreview={setDropTargetPreview}
+            isLastItem={isTrash}
+            currentDeviceType={currentDeviceType}
           />
         );
       });
 
-      if (!isVisitor && !isCollaborator)
-        items.splice(
-          3,
-          0,
-          <AccountsItem
-            key="accounts-item"
-            onClick={onClick}
-            getLinkData={getLinkData}
-            isActive={activeItemId === "accounts"}
-          />,
-        );
+      // guest doesn't have my documents by default, but has if he was downgraded from another type
+      const hasMyDocuments = elm.some(
+        (f) => f.rootFolderType === FolderType.USER,
+      );
 
-      // if (!isVisitor) {
-      //   items.splice(
-      //     4,
-      //     0,
-      //     <FlowsItem
-      //       key="flows-item"
-      //       onClick={onClick}
-      //       getLinkData={getLinkData}
-      //       isActive={activeItemId === "flows"}
-      //       item={{ rootFolderType: FolderType.Flows }}
-      //     />,
-      //   );
-      // }
+      const agentsDividerIndex = 1;
+      let roomsDividerIndex = 4;
+      let recentDividerIndex = 8;
 
-      if (!isVisitor) items.splice(3, 0, <CatalogDivider key="other-header" />);
-      else items.splice(2, 0, <CatalogDivider key="other-header" />);
+      if (!hasMyDocuments) {
+        roomsDividerIndex = 3;
+        recentDividerIndex = 7;
+      }
+
+      items.splice(
+        agentsDividerIndex,
+        0,
+        <CatalogDivider key="ai-agents-divider" />,
+      );
+
+      items.splice(
+        roomsDividerIndex,
+        0,
+        <CatalogDivider key="rooms-divider" />,
+      );
+
+      items.splice(
+        recentDividerIndex,
+        0,
+        <CatalogDivider key="recent-divider" />,
+      );
 
       if (isCommunity && isPaymentPageAvailable)
         items.push(<BonusItem key="bonus-item" />);
@@ -462,14 +497,15 @@ export default inject(
 
     const { firstLoad } = clientLoadingStore;
 
-    const { startUpload } = uploadDataStore;
-
+    const { startUpload, primaryProgressDataStore } = uploadDataStore;
+    const { setDropTargetPreview } = primaryProgressDataStore;
     const {
       treeFolders,
       myFolderId,
       commonFolderId,
       isPrivacyFolder,
       roomsFolderId,
+      aiAgentsFolderId,
     } = treeFoldersStore;
 
     const { id, access: folderAccess } = selectedFolderStore;
@@ -517,7 +553,9 @@ export default inject(
       folderAccess,
       currentColorScheme,
       roomsFolderId,
+      aiAgentsFolderId,
       isIndexEditingMode,
+      setDropTargetPreview,
     };
   },
 )(withTranslation(["Files", "Common", "Translations"])(observer(Items)));

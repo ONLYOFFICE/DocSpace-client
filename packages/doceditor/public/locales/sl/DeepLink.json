@@ -1,5 +1,7 @@
 {
+  "DeepLinkOnlyAppText": "Dokument lahko odprete samo v mobilni aplikaciji.",
   "DeepLinkText": "Dokument lahko odprete na portalu ali v mobilni aplikaciji",
+  "DownloadApp": "Prenesite aplikacijo",
   "OpenInApp": "Odprite v aplikaciji",
   "OpeningDocument": "Odprite dokument",
   "RememberChoice": "Zapomni si izbiro za naslednja odpiranja dokumentov",

@@ -1,0 +1,28 @@
+{
+  "key_path": "NotificationsChannels",
+  "content": "Notification channels",
+  "content_en_sha1_hash": "c4e1f6537bf828144b981ba259de79a5733aad3d",
+  "created_at": "2025-09-10T09:59:16.152Z",
+  "updated_at": "2025-09-26T15:21:06.462Z",
+  "comment": {
+    "text": "This key represents the label \"Notification channels,\" likely referring to a section or list displaying available notification methods (e.g., email, push). It appears within the Notifications component, potentially as a heading or title for a settings area. Translators should consider the overall context of managing notification preferences.",
+    "is_auto": true,
+    "updated_at": "2025-09-10T10:03:56.750Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/NotificationsChannels.tsx",
+      "line_number": 47,
+      "context": "import Channel from \"./sub-components/Channel\";\n \n import styles from \"./Notifications.module.scss\";\n \n type NotificationsChannelsProps = {\n connectAccountDialogVisible?: TStore[\"dialogsStore\"][\"connectAccountDialogVisible\"];\n disconnectAccountDialogVisible?: TStore[\"dialogsStore\"][\"disconnectAccountDialogVisible\"];\n setConnectAccountDialogVisible?: TStore[\"dialogsStore\"][\"setConnectAccountDialogVisible\"];\n setDisconnectAccountDialogVisible?: TStore[\"dialogsStore\"][\"setDisconnectAccountDialogVisible\"];\n user?: TStore[\"userStore\"][\"user\"];",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,8 +28,10 @@
 
 import React from "react";
 import { I18nextProvider } from "react-i18next";
+import { usePathname, useSearchParams } from "next/navigation";
 
 import { ThemeProvider } from "@docspace/shared/components/theme-provider";
+import { RootTooltip } from "@docspace/shared/components/tooltip/rootTooltip";
 import { TFirebaseSettings } from "@docspace/shared/api/settings/types";
 import FirebaseHelper from "@docspace/shared/utils/firebase";
 import { TUser } from "@docspace/shared/api/people/types";
@@ -41,7 +43,6 @@ import useTheme from "@/hooks/useTheme";
 import pkgFile from "../../package.json";
 
 import ErrorBoundaryWrapper from "./ErrorBoundary";
-import { usePathname, useSearchParams } from "next/navigation";
 
 export const Providers = ({
   children,
@@ -63,15 +64,17 @@ export const Providers = ({
   const confirmType = searchParams?.get("type");
 
   let shouldRedirect = true;
-  if (redirectURL === "unavailable" && confirmType === "PortalContinue") {
+  if (redirectURL === "/unavailable" && confirmType === "PortalContinue") {
     shouldRedirect = false;
   }
 
   const pathName = usePathname();
-  const expectedPathName = `/${redirectURL}`;
 
   React.useEffect(() => {
-    if (redirectURL && confirmType === "GuestShareLink") {
+    if (
+      redirectURL &&
+      (confirmType === "GuestShareLink" || confirmType === "EmailChange")
+    ) {
       sessionStorage.setItem(
         "referenceUrl",
         `/confirm/${confirmType}?${searchParams?.toString()}`,
@@ -80,9 +83,20 @@ export const Providers = ({
   }, [redirectURL, searchParams, confirmType]);
 
   React.useEffect(() => {
-    if (shouldRedirect && redirectURL && pathName !== expectedPathName)
-      window.location.replace(expectedPathName);
-  }, [redirectURL, pathName, expectedPathName, shouldRedirect]);
+    // On the first navigation from an email link, the auth cookie is not sent
+    // because it has SameSite=Strict. To access the cookie,
+    // we perform a client-side redirect and set a special flag.
+    if (confirmType === "EmailChange" && !searchParams.get("redirected")) {
+      window.location.replace(
+        `/confirm/${confirmType}?${searchParams?.toString()}&redirected=true`,
+      );
+    }
+  }, [searchParams, confirmType]);
+
+  React.useEffect(() => {
+    if (shouldRedirect && redirectURL && pathName !== redirectURL)
+      window.location.replace(redirectURL);
+  }, [redirectURL, pathName, shouldRedirect]);
 
   const { i18n } = useI18N({
     settings: value.settings,
@@ -93,7 +107,6 @@ export const Providers = ({
     user,
     colorTheme: value.colorTheme,
     systemTheme: value.systemTheme,
-    i18n,
     lang: locale,
   });
 
@@ -105,11 +118,10 @@ export const Providers = ({
           version={pkgFile.version}
           firebaseHelper={firebaseHelper}
         >
-          {shouldRedirect && redirectURL && expectedPathName !== pathName ? (
-            <></>
-          ) : (
-            children
-          )}
+          <RootTooltip />
+          {shouldRedirect && redirectURL && pathName !== redirectURL
+            ? null
+            : children}
         </ErrorBoundaryWrapper>
       </I18nextProvider>
     </ThemeProvider>

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,8 +30,8 @@ import FileSvgUrl from "PUBLIC_DIR/images/icons/32/file.svg?url";
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import moment from "moment-timezone";
 import { ReactSVG } from "react-svg";
+import { now, parseToDateTime, isAfter } from "@docspace/shared/utils/date";
 
 import { Text } from "@docspace/shared/components/text";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
@@ -86,14 +86,14 @@ const CertificatesTable = (props) => {
       return `${new Date(date).toLocaleDateString()}`;
     };
 
-    const isExpired = moment().isAfter(moment(certificate.expiredDate));
+    const isExpired = isAfter(now(), parseToDateTime(certificate.expiredDate));
 
     return (
       <div key={`certificate-${index}`} className="row">
         <ReactSVG src={FileSvgUrl} />
         <div className="column">
           <div className="column-row">
-            <Text fontWeight={600} fontSize="14px" lineHeight="16px" noSelect>
+            <Text fontWeight={600} fontSize="14px" lineHeight="16px">
               {certificate.domainName}
             </Text>
           </div>
@@ -103,7 +103,6 @@ const CertificatesTable = (props) => {
               fontSize="12px"
               fontWeight={600}
               lineHeight="16px"
-              noSelect
             >
               {certificate.action}
               {" | "}

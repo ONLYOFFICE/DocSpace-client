@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,65 +24,39 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
 import { isIOS, isFirefox } from "react-device-detect";
 import { inject, observer } from "mobx-react";
+
 import { getBgPattern } from "@docspace/shared/utils/common";
-import { mobile } from "@docspace/shared/utils";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 
-const StyledWrapper = styled.div`
-  height: ${(props) =>
-    props.height
-      ? props.height
-      : isIOS && !isFirefox
-        ? "calc(var(--vh, 1vh) * 100)"
-        : "100vh"};
-  width: 100vw;
-  z-index: 0;
-  display: flex;
-  flex-direction: row;
-  box-sizing: border-box;
-
-  @media ${mobile} {
-    height: auto;
-    min-height: 100%;
-    width: 100%;
-    min-width: 100%;
-  }
-`;
-
-const BgBlock = styled.div`
-  background-image: ${(props) => props.bgPattern};
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  z-index: -1;
-
-  @media ${mobile} {
-    background-image: none;
-  }
-`;
+import styles from "./confirm-wrapper.module.scss";
 
 const ConfirmWrapper = (props) => {
   const { children, currentColorScheme, height } = props;
   const bgPattern = getBgPattern(currentColorScheme?.id);
+  const computedHeight = height
+    ? height
+    : isIOS && !isFirefox
+      ? "calc(var(--vh, 1vh) * 100)"
+      : "100vh";
+
+  const wrapperStyle = { height: computedHeight };
+  const bgBlockStyle = {
+    "--bg-pattern": bgPattern,
+  };
+
   const content = (
     <>
-      <BgBlock bgPattern={bgPattern} />
+      <div className={styles.bgBlock} style={bgBlockStyle} />
       {children}
     </>
   );
 
   return (
-    <StyledWrapper height={height}>
+    <div className={styles.wrapper} style={wrapperStyle}>
       {height ? content : <Scrollbar>{content}</Scrollbar>}
-    </StyledWrapper>
+    </div>
   );
 };
 

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -23,18 +23,180 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import {
-  HEADER_LIST_CAPABILITIES,
-  HEADER_LIST_THIRD_PARTY_PROVIDERS,
-} from "@docspace/shared/__mocks__/e2e";
+  capabilitiesHandler,
+  loginHandler,
+  settingsHandler,
+  TypeSettings,
+} from "@docspace/shared/__mocks__/handlers";
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import { expect, test } from "./fixtures/base";
+import { thirdPartyProvidersHandler } from "@docspace/shared/__mocks__/handlers/people/thirdPartyProviders";
 
-test("login render", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders("/login", [
-    HEADER_LIST_CAPABILITIES,
-    HEADER_LIST_THIRD_PARTY_PROVIDERS,
+test("login render", async ({
+  page,
+  serverRequestInterceptor,
+  port,
+  baseUrl,
+}) => {
+  serverRequestInterceptor.use(
+    capabilitiesHandler(port, true),
+    thirdPartyProvidersHandler(port, true),
+  );
+  await page.goto(`${baseUrl}/login`);
+
+  await expectScreenshot(page,["desktop", "login", "login-render.png"]);
+});
+
+test("login error authentication failed", async ({
+  page,
+  port,
+  clientRequestInterceptor,
+  baseUrl,
+}) => {
+  clientRequestInterceptor.use(loginHandler(port, 401));
+
+  await page.goto(`${baseUrl}/login`);
+
+  await page.getByTestId("email-input").fill("email@mail.ru");
+
+  await page.fill("[name='password']", "qwerty123");
+
+  await page.getByTestId("login_button").click();
+
+  await expectScreenshot(page,[
+    "desktop",
+    "login",
+    "login-error-authentication-failed.png",
   ]);
-  await page.goto("/login");
+});
 
-  await expect(page).toHaveScreenshot(["desktop", "login", "login-render.png"]);
+test("login error not validated", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}/login`);
+
+  await page.getByTestId("email-input").fill("");
+
+  await page.fill("[name='password']", "");
+
+  await page.getByTestId("login_button").click();
+
+  await expectScreenshot(page,[
+    "desktop",
+    "login",
+    "login-error-not-validated.png",
+  ]);
+});
+
+test("login error incorrect email", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}/login`);
+
+  await page.getByTestId("email-input").fill("email");
+
+  await page.fill("[name='password']", "qwerty123");
+
+  await page.getByTestId("login_button").click();
+
+  await expectScreenshot(page,[
+    "desktop",
+    "login",
+    "login-error-incorrect-email.png",
+  ]);
+});
+
+test("login error incorrect email domain", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}/login`);
+
+  await page.getByTestId("email-input").fill("email@mail.com2");
+
+  await page.fill("[name='password']", "qwerty123");
+
+  await page.getByTestId("login_button").click();
+
+  await expectScreenshot(page,[
+    "desktop",
+    "login",
+    "login-error-incorrect-email-domain.png",
+  ]);
+});
+
+test("login with with a registration button", async ({
+  page,
+  port,
+  baseUrl,
+  serverRequestInterceptor,
+}) => {
+  serverRequestInterceptor.use(settingsHandler(port, TypeSettings.EnabledJoin));
+
+  await page.goto(`${baseUrl}/login`);
+
+  await expectScreenshot(page,[
+    "desktop",
+    "login",
+    "login-with-registration-button.png",
+  ]);
+
+  await page.locator("#login_register").click();
+
+  await expectScreenshot(page,[
+    "desktop",
+    "login",
+    "login-with-registration-button-modal.png",
+  ]);
+});
+
+test("login with with access recovery", async ({
+  page,
+  serverRequestInterceptor,
+  port,
+  baseUrl,
+}) => {
+  serverRequestInterceptor.use(
+    settingsHandler(port, TypeSettings.EnableAdmMess),
+  );
+
+  await page.goto(`${baseUrl}/login`);
+
+  await expectScreenshot(page,[
+    "desktop",
+    "login",
+    "login-with-access-recovery.png",
+  ]);
+
+  await page.getByTestId("recover_access_link").click();
+
+  await expectScreenshot(page,[
+    "desktop",
+    "login",
+    "login-with-access-recovery-modal.png",
+  ]);
+});
+
+test("login with hcaptcha", async ({
+  page,
+  port,
+  clientRequestInterceptor,
+  serverRequestInterceptor,
+  baseUrl,
+}) => {
+  serverRequestInterceptor.use(
+    settingsHandler(port, TypeSettings.WithHCaptcha),
+  );
+  clientRequestInterceptor.use(loginHandler(port, 403));
+
+  await page.goto(`${baseUrl}/login`);
+
+  await page.getByTestId("email-input").fill("email@mail.com");
+
+  await page.fill("[name='password']", "qwerty1234");
+
+  await page.getByTestId("login_button").click();
+
+  await expect(page.getByTestId("captcha-container")).toBeVisible();
+
+  await expectScreenshot(page,[
+    "desktop",
+    "login",
+    "login-with-hcaptcha.png",
+  ]);
 });

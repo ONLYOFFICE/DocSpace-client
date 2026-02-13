@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,25 +24,34 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { memo, forwardRef } from "react";
+import { memo } from "react";
 import type { HeaderProps } from "./StartFillingPanel.types";
+import { TooltipContainer } from "../../components/tooltip";
 
 export const Header = memo(
-  forwardRef<HTMLDivElement, HeaderProps>(
-    ({ t, roleName, className, openInvitePanel }, ref) => (
-      <div className={className} ref={ref}>
-        <h3
-          title={t("Common:RoleFields", {
-            roleName,
-          })}
-        >
-          {t("Common:RoleFields", {
-            roleName,
-          })}
-        </h3>
+  ({
+    ref,
+    t,
+    roleName,
+    className,
+    openInvitePanel,
+    canEditRoom,
+  }: HeaderProps) => (
+    <div className={className} ref={ref}>
+      <TooltipContainer
+        as="h3"
+        title={t("Common:RecipientFields", {
+          recipientName: roleName,
+        })}
+      >
+        {t("Common:RecipientFields", {
+          recipientName: roleName,
+        })}
+      </TooltipContainer>
+      {canEditRoom ? (
         <span onClick={openInvitePanel}>{t("Common:AddUserToRoom")}</span>
-      </div>
-    ),
+      ) : null}
+    </div>
   ),
 );
 

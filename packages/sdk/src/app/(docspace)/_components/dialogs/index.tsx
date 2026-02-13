@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -37,9 +37,7 @@ import DownloadDialog from "./components/download-dialog";
 export const Dialogs = () => {
   const { isDialogOpen } = useDialogsStore();
 
-  return (
-    <>{isDialogOpen(SDKDialogs.DownloadDialog) ? <DownloadDialog /> : null}</>
-  );
+  return isDialogOpen(SDKDialogs.DownloadDialog) ? <DownloadDialog /> : null;
 };
 
 export default observer(Dialogs);

@@ -3,7 +3,7 @@
   "content": "Move right without changing selection",
   "content_en_sha1_hash": "8ecb0b0db2d492fa704b675c6c279b003a727180",
   "created_at": "2025-05-19T21:30:55.063Z",
-  "updated_at": "2025-05-21T10:29:35.101Z",
+  "updated_at": "2025-05-24T10:39:25.886Z",
   "comment": {
     "text": "This translation key describes the action of moving right without changing the selection in a user interface component. It appears in a hotkey panel, specifically next to the \"→\" arrow key symbol, indicating that this key combination will move focus or selection to the right side of an element or container.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Move right without changing selection\" implies a command or instruction. The Azerbaijani translation \"Seçimi dəyişmədən sağa hərəkət edin\" is a literal translation that is grammatically correct, but sounds slightly unnatural as an instruction in this context. A more natural phrasing would be something like \"Seçimi dəyişmədən sağ tərəfə keç\".",
-          "suggestion": "Seçimi dəyişmədən sağ tərəfə keç"
+          "description": "The translation \"Seçimi dəyişmədən sağa hərəkət edin\" is a literal translation but doesn't fully capture the nuance of \"Move right without changing selection.\" It sounds slightly awkward in Azerbaijani. A more natural phrasing would emphasize the action of moving and maintaining the current selection.",
+          "suggestion": "Seçimi qoruyaraq sağa get"
         }
       ],
       "approved_at": null
@@ -45,7 +45,18 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Преместване надясно без промяна на избора' is a bit literal and doesn't quite capture the nuance of 'Move right without changing selection' in a user interface context. It sounds clunky.",
+          "suggestion": "Преместване надясно (без смяна на селекцията)"
+        },
+        {
+          "type": "formatting",
+          "description": "The suggested correction includes parentheses. Ensure this formatting is consistent with other UI elements in the application.",
+          "suggestion": "Confirm parentheses usage aligns with application standards."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -57,7 +68,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Nach rechts, ohne die Auswahl zu ändern' is a literal translation that isn't idiomatic. A more natural phrasing would convey the intended meaning better.",
+          "suggestion": "Rechts verschieben, ohne die Auswahl zu ändern"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -102,7 +119,12 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"選択を変えずに移動（右）\" doesn't fully convey the meaning of 'Move right without changing selection.' While '移動（右）' indicates moving right, the phrase '選択を変えずに' (without changing selection) could be more accurately represented to emphasize the 'without changing selection' part. It's a bit literal.",
+          "description": "The translation \"選択を変えずに移動（右）\" is literal and lacks the nuance of 'without changing selection'. It's technically correct but not ideal. A more natural phrasing might convey the 'without changing selection' aspect more effectively.",
+          "suggestion": "選択を維持して右へ移動"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of parentheses for 'right' feels slightly unnatural in Japanese. It's a functional indication, but could be improved for better flow.",
           "suggestion": "選択を維持して右へ移動"
         }
       ],
@@ -117,13 +139,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"ຍ້າຍຂວາໂດຍບໍ່ມີການປ່ຽນການເລືອກ\" is a literal translation and may not convey the intended meaning as naturally as possible in Lao. It's a bit clunky.",
-          "suggestion": "Consider a more concise phrasing like \"ຍ້າຍຂວາມື້ບໍ່ປ່ຽນການເລືອກ\" or \"ຍ້າຍຂວາບໍ່ປ່ຽນການເລືອກ\" which flows more naturally in Lao."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -168,8 +184,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Перейти вправо без изменения области выделения\" is a bit too literal and formal. It doesn't quite capture the nuance of 'Move right without changing selection' in the context of hotkeys. 'Области выделения' translates to 'selection area,' which is more complex than just 'selection'.",
-          "suggestion": "Перейти вправо, не меняя выделение"
+          "description": "The English phrase 'Move right without changing selection' implies moving the focus or active element to the right while maintaining the current selection. The Russian translation 'Перейти вправо без изменения области выделения' translates to 'Move right without changing the selection area'.  'Selection area' is broader than 'selection', potentially leading to confusion. It suggests the entire selected area is preserved rather than just maintaining the focused element's selection.",
+          "suggestion": "Consider a translation like 'Перейти вправо, сохраняя текущий выбор' or 'Перейти вправо, не меняя текущий выбор'. These more closely reflect the intent of maintaining the selection state."
         }
       ],
       "approved_at": null
@@ -180,8 +196,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'තේරීම වෙනස් නොකර දකුණට යන්න' while literally meaning 'go right without changing selection', doesn't fully capture the nuance of 'Move right without changing selection'. 'Move right' implies an action performed on something, which isn't clearly conveyed.  A more natural phrasing might emphasize the movement action.",
-          "suggestion": "තේරීම නොවෙනස්කොට දකුණට ඇද්දන්න"
+          "description": "The translation 'තේරීම වෙනස් නොකර දකුණට යන්න' while literally meaning 'Move right without changing selection', doesn't fully capture the nuance of 'Move right without changing selection' within the context of a hotkey panel. It might be perceived as overly formal or technical.",
+          "suggestion": "තෝ chọn කිරීම් మార్చకుండా വല දෙසට යන්න (Tho chọn kirimatu marchanadu vala desa tho yana) - This attempts to convey the meaning in a more natural and user-friendly way, emphasizing movement to the right while maintaining selection."
         }
       ],
       "approved_at": null
@@ -207,7 +223,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Pomeraj desno bez menjanja selekcije' is a very literal translation and sounds somewhat clunky in Serbian. A more natural phrasing would be preferred.",
+          "suggestion": "Pomeri se desno bez promene selekcije"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -216,8 +238,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Seçimi değiştirmeden sağa git' while understandable, doesn't fully capture the nuance of \"Move right without changing selection\". A more precise translation would emphasize the 'move' action, rather than just describing the result.",
-          "suggestion": "Seçimi koruyarak sağa hareket et"
+          "description": "The translation 'Seçimi değiştirmeden sağa git' doesn't fully capture the nuance of 'Move right without changing selection'. It's a literal translation but loses the implied action of moving a panel or element. A more natural Turkish phrasing would better convey the meaning.",
+          "suggestion": "Consider 'Seçimi koruyarak sağa hareket et' or 'Seçimi değiştirmeden sağa kaydır'"
         }
       ],
       "approved_at": null
@@ -240,8 +262,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"向右移动而不改变选定\" doesn't fully capture the meaning of \"Move right without changing selection.\" The phrase \"选定\" (xuǎn dìng) typically refers to 'selection' as a process or the act of selecting, not the selected item itself. A more accurate translation would emphasize 'the selected item'.",
-          "suggestion": "向右移动，不改变选中对象 (Xiàng yòu yídòng, bù gǎibiàn xuǎnzhōng duìxiàng)"
+          "description": "The translation '向右移动而不改变选定' doesn't perfectly capture the nuance of \"Move right without changing selection\".  '选定' implies a selection *has* already been made. The English phrase describes moving something to the right while maintaining the current selection.",
+          "suggestion": "向右移动，保持当前选中项"
         }
       ],
       "approved_at": null

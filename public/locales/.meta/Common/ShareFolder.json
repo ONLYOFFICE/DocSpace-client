@@ -1,0 +1,28 @@
+{
+  "key_path": "ShareFolder",
+  "content": "Share this folder",
+  "content_en_sha1_hash": "d3f176d5d32755268adb0267e9ada02f92c15cf2",
+  "created_at": "2025-08-26T11:15:01.359Z",
+  "updated_at": "2025-09-23T07:24:24.401Z",
+  "comment": {
+    "text": "This key displays the text for a button or link that allows users to share a folder. It appears in the sharing interface, likely as part of a dialog or panel, and should be translated to accurately reflect the action of sharing a folder.",
+    "is_auto": true,
+    "updated_at": "2025-08-26T11:17:06.609Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/share/sub-components/ShareInfoBar.tsx",
+      "line_number": 67,
+      "context": "};\n }\n \n return {\n headerText: isFolder\n ? t(\"Common:ShareFolder\")\n : t(\"Common:ShareDocument\"),\n bodyText: isFolder\n ? t(\"Common:ShareFolderDescription\")\n : t(\"Common:ShareDocumentDescription\"),\n iconName: InfoIcon,",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

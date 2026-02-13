@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -41,6 +41,7 @@ import { Link, LinkType } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
 import { InputSize } from "@docspace/shared/components/text-input";
 import { InjectedSelectFileStepProps, SelectFileStepProps } from "../types";
+import { TMigrationStatusResult } from "@docspace/shared/api/settings/types";
 
 const Wrapper = styled.div`
   max-width: 700px;
@@ -173,6 +174,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
   const [isNetworkError, setIsNetworkError] = useState(false);
   const [isFileError, setIsFileError] = useState(false);
   const [isBackupEmpty, setIsBackupEmpty] = useState(false);
+  const [error, setError] = useState<string>("");
   const isAbort = useRef(false);
 
   const [uploadFile, setFile] = useState<File | File[]>();
@@ -180,7 +182,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
   const [chunkSize, setChunkSize] = useState(0);
 
   const [failTries, setFailTries] = useState(FAIL_TRIES);
-  const uploadInterval = useRef<number>();
+  const uploadInterval = useRef<number>(undefined);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -189,7 +191,6 @@ const SelectFileStep = (props: SelectFileStepProps) => {
       isDefaultRoomsQuotaSet ||
       isTenantCustomQuotaSet;
     setWarningQuotaDialogVisible(isQuotaWarningVisible);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isDefaultUsersQuotaSet, isDefaultRoomsQuotaSet, isTenantCustomQuotaSet]);
 
   const onClickRedirect = () => {
@@ -197,9 +198,18 @@ const SelectFileStep = (props: SelectFileStepProps) => {
   };
 
   const handleError = useCallback(
-    (message?: string) => {
+    (message?: string, result?: TMigrationStatusResult) => {
+      if (result) {
+        if (message && result.failedArchives.length === 0) {
+          setError(message);
+        }
+
+        if (result.failedArchives.length > 0) {
+          setIsFileError(true);
+        }
+      }
+
       toastr.error(message || t("Common:SomethingWentWrong"));
-      setIsFileError(true);
       setLoadingStatus("none");
       clearInterval(uploadInterval.current);
     },
@@ -220,8 +230,8 @@ const SelectFileStep = (props: SelectFileStepProps) => {
         return;
       }
 
-      if (res.parseResult.failedArchives.length > 0 || res.error) {
-        handleError(res.error);
+      if (res.error) {
+        handleError(res.error, res.parseResult);
         return;
       }
 
@@ -299,6 +309,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
 
     setProgress(0);
     setIsFileError(false);
+    setError("");
     setIsBackupEmpty(false);
     setIsSaveDisabled(true);
     setLoadingStatus("upload");
@@ -406,6 +417,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
           accept={acceptedExtensions}
           size={InputSize.base}
           isMultiple={migratorName === "GoogleWorkspace"}
+          data-test-id="upload_backup_file_input"
         />
       </FileUploadContainer>
       {fileLoadingStatus === "upload" || fileLoadingStatus === "proceed" ? (
@@ -423,6 +435,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
               label={t("Common:CancelButton")}
               onClick={onCancel}
               scale={isMobile()}
+              data-test-id="cancel_upload_backup_button"
             />
           </div>
         </FileUploadContainer>
@@ -443,9 +456,21 @@ const SelectFileStep = (props: SelectFileStepProps) => {
                 isHovered
                 fontWeight={600}
                 onClick={onDownloadArchives}
+                dataTestId="check_unsupported_files_link"
               >
                 {t("Settings:CheckUnsupportedFiles")}
               </Link>
+            </div>
+          ) : null}
+
+          {error ? (
+            <div>
+              <ProgressBar
+                percent={100}
+                className="complete-progress-bar"
+                label={t("Common:LoadingIsComplete")}
+              />
+              <Text className="error-text">{error}</Text>
             </div>
           ) : null}
 
@@ -471,6 +496,8 @@ const SelectFileStep = (props: SelectFileStepProps) => {
               cancelButtonLabel={t("Common:Back")}
               displaySettings
               showReminder
+              saveButtonDataTestId="upload_to_server_button"
+              cancelButtonDataTestId="back_to_providers_button"
             />
           ) : (
             <SaveCancelButtons
@@ -484,6 +511,8 @@ const SelectFileStep = (props: SelectFileStepProps) => {
                 migratingWorkspace !== migratorName || isSaveDisabled
               }
               showReminder
+              saveButtonDataTestId="next_step_button"
+              cancelButtonDataTestId="back_to_providers_button"
             />
           )}
         </ErrorBlock>

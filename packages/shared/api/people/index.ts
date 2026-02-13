@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
 import { AxiosRequestConfig } from "axios";
@@ -38,6 +37,7 @@ import {
   AccountsSearchArea,
   EmployeeStatus,
   EmployeeType,
+  RecaptchaType,
 } from "../../enums";
 import { Nullable } from "../../types";
 
@@ -57,12 +57,16 @@ export async function getUserList(
   if (filter) {
     checkFilterInstance(filter, Filter);
 
-    params = `/filter?${filter.toApiUrlParams()}`;
+    const search = filter.toApiUrlParams();
+
+    params = `/filter?${search}`;
   }
+
+  const url = `/people${params}`;
 
   const res = (await request({
     method: "get",
-    url: `/people${params}`,
+    url,
     signal,
   })) as TGetUserList;
 
@@ -216,14 +220,19 @@ export function changePassword(userId, passwordHash, key) {
   });
 }
 
-export async function changeEmail(userId: string, email: string, key: string) {
-  const data = { email };
+export async function changeEmail(
+  userId: string,
+  email: string,
+  encemail: string,
+  confirmKey: string,
+) {
+  const data = encemail ? { encemail } : { email };
 
   const res = (await request({
     method: "put",
-    url: `/people/${userId}/password`,
+    url: `/people/${userId}/email`,
     data,
-    headers: { confirm: key },
+    headers: { confirm: confirmKey },
   })) as TUser;
 
   return res;
@@ -239,7 +248,7 @@ export async function updateActivationStatus(
     url: `/people/activationstatus/${activationStatus}`,
     data: { userIds: [userId] },
     headers: { confirm: key },
-  })) as TUser;
+  })) as TUser[];
 
   return res;
 }
@@ -271,11 +280,21 @@ export function deleteSelf(key) {
   });
 }
 
-export function sendInstructionsToChangePassword(email) {
+export function sendInstructionsToChangePassword(
+  email: string,
+  recaptchaResponse: string | null | undefined = "",
+  recaptchaType?: RecaptchaType,
+) {
+  const data: Record<string, unknown> = { email, recaptchaResponse };
+
+  if (typeof recaptchaType !== "undefined") {
+    data.recaptchaType = recaptchaType;
+  }
+
   return request({
     method: "post",
     url: "/people/password",
-    data: { email },
+    data,
   });
 }
 
@@ -314,10 +333,11 @@ export function changeProductAdmin(userId, productId, administrator) {
   });
 }
 
-export async function getUserById(userId: string) {
+export async function getUserById(userId: string, signal?: AbortSignal) {
   const res = (await request({
     method: "get",
     url: `/people/${userId}`,
+    signal,
   })) as TUser;
 
   res.displayName = Encoder.htmlDecode(res.displayName);
@@ -562,6 +582,7 @@ export async function getLinkToShareGuest(userId: string) {
 export async function addGuest(
   email: string,
   confirmKey: Nullable<string> = null,
+  skipLogout = false,
 ) {
   const options = {
     method: "post",
@@ -571,7 +592,7 @@ export async function addGuest(
 
   if (confirmKey) options.headers = { confirm: confirmKey };
 
-  const res = await request(options);
+  const res = await request({ ...options, skipLogout });
 
   return res;
 }
@@ -614,6 +635,8 @@ export async function getMembersList(
   searchArea: AccountsSearchArea,
   roomId: string | number,
   filter = Filter.getDefault(),
+  signal?: AbortSignal,
+  targetEntityType: "file" | "folder" | "room" = "room",
 ) {
   let params = "";
 
@@ -635,18 +658,19 @@ export async function getMembersList(
 
   switch (searchArea) {
     case AccountsSearchArea.People:
-      url = `people/room/${roomId}${params}`;
+      url = `people/${targetEntityType}/${roomId}${params}`;
       break;
     case AccountsSearchArea.Groups:
-      url = `group/room/${roomId}${params}`;
+      url = `group/${targetEntityType}/${roomId}${params}`;
       break;
     default:
-      url = `accounts/room/${roomId}/search${params}`;
+      url = `accounts/${targetEntityType}/${roomId}/search${params}`;
   }
 
   const res = (await request({
     method: "get",
     url,
+    signal,
   })) as { items: (TUser | TGroup)[]; total: number };
 
   res.items = res.items.map((member) => {
@@ -670,7 +694,10 @@ export async function getMembersList(
   return res;
 }
 
-export async function setCustomUserQuota(userIds: string[], quota: string) {
+export async function setCustomUserQuota(
+  userIds: string[],
+  quota: string | number,
+) {
   const data = {
     userIds,
     quota: +quota,

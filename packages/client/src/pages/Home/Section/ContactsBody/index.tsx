@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -37,17 +37,22 @@ import FilesActionStore from "SRC_DIR/store/FilesActionsStore";
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
 import DialogStore from "SRC_DIR/store/contacts/DialogStore";
+import FilesStore from "SRC_DIR/store/FilesStore";
 import ContactsHotkeysStore from "SRC_DIR/store/contacts/ContactsHotkeysStore";
-import { getContactsView } from "SRC_DIR/helpers/contacts";
 
 import { useAccountsHotkeys } from "../../Hooks";
 
 import Users from "./Users";
 import Groups from "./Groups";
+import NoAccessContainer, {
+  NoAccessContainerType,
+} from "SRC_DIR/components/EmptyContainer/NoAccessContainer";
 
 type SectionBodyContentProps = {
+  currentView: string;
   isUsersLoading?: UsersStore["isUsersLoading"];
   selectUser?: UsersStore["selectUser"];
+  clearSelection: UsersStore["clearSelection"];
   setPeopleSelection?: UsersStore["setSelection"];
   setPeopleBufferSelection?: UsersStore["setBufferSelection"];
   setGroupsSelection?: GroupsStore["setSelection"];
@@ -62,18 +67,26 @@ type SectionBodyContentProps = {
   selectAll?: ContactsHotkeysStore["selectAll"];
   deselectAll?: ContactsHotkeysStore["deselectAll"];
   openItem?: ContactsHotkeysStore["openItem"];
+  openContextMenu: ContactsHotkeysStore["openContextMenu"];
   onClickBack?: FilesActionStore["onClickBack"];
   getTfaType?: TfaStore["getTfaType"];
+  enableSelection: ContactsHotkeysStore["enableSelection"];
+  viewAs: PeopleStore["viewAs"];
+  membersSelection: UsersStore["selection"];
+  groupsSelection: GroupsStore["selection"];
+  isErrorAccountNotAvailable?: boolean;
 };
 
 const SectionBodyContent = (props: SectionBodyContentProps) => {
   const {
+    currentView,
     setPeopleSelection,
     setGroupsSelection,
     setPeopleBufferSelection,
     setGroupsBufferSelection,
     setChangeOwnerDialogVisible,
     selectUser,
+    clearSelection,
     enabledHotkeys,
     isUsersLoading,
     selectBottom,
@@ -86,11 +99,18 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     openItem,
     onClickBack,
     getTfaType,
+    enableSelection,
+    viewAs,
+    membersSelection,
+    groupsSelection,
+    isErrorAccountNotAvailable,
+    openContextMenu,
   } = props;
 
   const location = useLocation();
 
-  const contactsTab = getContactsView(location);
+  const selection =
+    currentView !== "groups" ? membersSelection : groupsSelection;
 
   useAccountsHotkeys({
     enabledHotkeys: enabledHotkeys!,
@@ -102,6 +122,10 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     deselectAll: deselectAll!,
     openItem: openItem!,
     onClickBack: onClickBack!,
+    enableSelection,
+    viewAs,
+    selection,
+    openContextMenu,
   });
 
   const onMouseDown = useCallback(
@@ -143,6 +167,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     }
 
     if (location?.state?.user) {
+      clearSelection();
       selectUser!(location?.state?.user);
     }
   }, [
@@ -159,7 +184,11 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     return () => window.removeEventListener("mousedown", onMouseDown);
   }, [onMouseDown, getTfaType]);
 
-  return contactsTab !== "groups" ? <Users /> : <Groups />;
+  if (isErrorAccountNotAvailable) {
+    return <NoAccessContainer type={NoAccessContainerType.Account} />;
+  }
+
+  return currentView !== "groups" ? <Users /> : <Groups />;
 };
 
 export default inject(
@@ -167,10 +196,12 @@ export default inject(
     peopleStore,
     filesActionsStore,
     tfaStore,
+    filesStore,
   }: {
     peopleStore: PeopleStore;
     filesActionsStore: FilesActionStore;
     tfaStore: TfaStore;
+    filesStore: FilesStore;
   }) => {
     const {
       usersStore,
@@ -179,19 +210,23 @@ export default inject(
       contactsHotkeysStore,
 
       enabledHotkeys,
+      viewAs,
     } = peopleStore;
     const {
       isFiltered,
       isUsersLoading,
 
       selectUser,
+      clearSelection,
       setSelection: setPeopleSelection,
       setBufferSelection: setPeopleBufferSelection,
+      selection: membersSelection,
     } = usersStore!;
 
     const {
       setSelection: setGroupsSelection,
       setBufferSelection: setGroupsBufferSelection,
+      selection: groupsSelection,
     } = groupsStore!;
 
     const { setChangeOwnerDialogVisible } = dialogStore!;
@@ -206,11 +241,16 @@ export default inject(
       selectAll,
       deselectAll,
       openItem,
+      openContextMenu,
+
+      enableSelection,
     } = contactsHotkeysStore!;
 
     const { onClickBack } = filesActionsStore;
 
     const { getTfaType } = tfaStore;
+
+    const { isErrorAccountNotAvailable } = filesStore;
 
     return {
       isFiltered,
@@ -220,6 +260,7 @@ export default inject(
       setGroupsBufferSelection,
       setChangeOwnerDialogVisible,
       selectUser,
+      clearSelection,
       enabledHotkeys,
       isUsersLoading,
 
@@ -232,8 +273,15 @@ export default inject(
       deselectAll,
       openItem,
       onClickBack,
+      openContextMenu,
 
       getTfaType,
+
+      enableSelection,
+      viewAs,
+      membersSelection,
+      groupsSelection,
+      isErrorAccountNotAvailable,
     };
   },
 )(

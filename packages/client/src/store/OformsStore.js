@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,7 +28,6 @@ import { makeAutoObservable, runInAction } from "mobx";
 
 import OformsFilter from "@docspace/shared/api/oforms/filter";
 import {
-  getGuideLinkByLocale,
   submitToGallery,
   getOformLocales,
   getOforms,
@@ -49,7 +48,7 @@ const myDocumentsFolderId = 2;
 class OformsStore {
   settingsStore;
 
-  infoPanelStore;
+  treeFoldersStore;
 
   userStore = null;
 
@@ -60,6 +59,8 @@ class OformsStore {
   oformsIsLoading = false;
 
   oformsLoadError = false;
+
+  oformsNetworkError = false;
 
   oformsFilter = OformsFilter.getDefault();
 
@@ -79,25 +80,34 @@ class OformsStore {
 
   oformFilesLoaded = false;
 
+  templateGalleryVisible = false;
+
+  isVisibleInfoPanelTemplateGallery = false;
+
+  currentExtensionGallery = ".docx";
+
   submitToGalleryTileIsVisible = !localStorage.getItem(
     "submitToGalleryTileIsHidden",
   );
 
-  constructor(settingsStore, infoPanelStore, userStore) {
+  constructor(settingsStore, userStore, treeFoldersStore) {
     this.settingsStore = settingsStore;
-    this.infoPanelStore = infoPanelStore;
     this.userStore = userStore;
+    this.treeFoldersStore = treeFoldersStore;
     makeAutoObservable(this);
   }
 
   get defaultOformLocale() {
-    const userLocale =
-      getCookie(LANGUAGE) || this.userStore.user?.cultureName || "en";
+    const userLocale = getCookie(LANGUAGE) || this.userStore.user?.cultureName;
     const convertedLocale = convertToLanguage(userLocale);
 
-    return this.oformLocales?.includes(convertedLocale)
+    const locale = this.oformLocales?.includes(convertedLocale)
       ? convertedLocale
-      : "en";
+      : this.oformLocales?.includes(this.settingsStore.culture)
+        ? this.settingsStore.culture
+        : "en";
+
+    return locale;
   }
 
   setOformFiles = (oformFiles) => (this.oformFiles = oformFiles);
@@ -116,7 +126,6 @@ class OformsStore {
 
   setGallerySelected = (gallerySelected) => {
     this.gallerySelected = gallerySelected;
-    this.infoPanelStore.setInfoPanelSelection(gallerySelected);
   };
 
   setOformLocales = (oformLocales) => (this.oformLocales = oformLocales);
@@ -135,6 +144,12 @@ class OformsStore {
 
   setOformFilesLoaded = (oformFilesLoaded) => {
     this.oformFilesLoaded = oformFilesLoaded;
+  };
+
+  setIsVisibleInfoPanelTemplateGallery = (
+    isVisibleInfoPanelTemplateGallery,
+  ) => {
+    this.isVisibleInfoPanelTemplateGallery = isVisibleInfoPanelTemplateGallery;
   };
 
   fetchOformLocales = async () => {
@@ -162,8 +177,9 @@ class OformsStore {
     const templateDescription = "&fields[5]=template_desc";
     const cardPrewiew = "&populate[card_prewiew][fields][6]=url";
     const templateImage = "&populate[template_image][fields][7]=formats";
+    const templateSize = "&populate[file_oform][fields][8]=size";
 
-    const fields = `${formName}${updatedAt}${defaultDescription}${templateDescription}${cardPrewiew}${templateImage}`;
+    const fields = `${formName}${updatedAt}${defaultDescription}${templateDescription}${cardPrewiew}${templateImage}${templateSize}`;
     const params = `?${fields}&${filter.toApiUrlParams()}`;
 
     const apiUrl = combineUrl(domain, path, params);
@@ -171,13 +187,17 @@ class OformsStore {
     try {
       const oforms = await getOforms(apiUrl);
       this.oformsLoadError = false;
+      this.oformsNetworkError = false;
       return oforms;
     } catch (err) {
       const status = err?.response?.status;
+      const isNetworkError = err?.code === "ERR_NETWORK";
       const isApiError = status === 404 || status === 500;
-      // console.log({ err, isApiError });
+
       if (isApiError) {
         this.oformsLoadError = true;
+      } else if (isNetworkError) {
+        this.oformsNetworkError = true;
       } else {
         toastr.error(err);
       }
@@ -213,7 +233,7 @@ class OformsStore {
 
     runInAction(() => {
       this.setOformsFilter(newOformsFilter);
-      this.setOformFiles([...this.oformFiles, ...newForms]);
+      this.setOformFiles([...(this.oformFiles || []), ...newForms]);
       this.setOformsIsLoading(false);
     });
   };
@@ -228,7 +248,7 @@ class OformsStore {
     return categoryType;
   };
 
-  getCategoryTitle = (category, locale = this.defaultOformLocale) => {
+  getCategoryTitle = (category, locale = this.oformsFilter.locale) => {
     if (!category) return "";
 
     const categoryType = this.getTypeOfCategory(category);
@@ -305,13 +325,6 @@ class OformsStore {
     return categories;
   };
 
-  fetchGuideLink = async (locale = this.defaultOformLocale) => {
-    const { uploadDomain, uploadDashboard } = this.settingsStore.formGallery;
-    const url = combineUrl(uploadDomain, uploadDashboard, `/blog-links`);
-    const guideLink = await getGuideLinkByLocale(url, locale);
-    return guideLink;
-  };
-
   filterOformsByCategory = (categorizeBy, categoryId) => {
     if (!categorizeBy || !categoryId) this.currentCategory = null;
 
@@ -349,6 +362,21 @@ class OformsStore {
     runInAction(() => this.fetchOforms(newOformsFilter));
   };
 
+  initTemplateGallery = async () => {
+    await this.fetchOformLocales();
+
+    const firstLoadFilter = this.treeFoldersStore.isFormRoomRoot
+      ? OformsFilter.getDefault()
+      : OformsFilter.getDefaultDocx();
+
+    firstLoadFilter.locale = this.defaultOformLocale;
+
+    await Promise.all([
+      this.fetchOforms(firstLoadFilter),
+      this.fetchCurrentCategory(),
+    ]);
+  };
+
   sortOforms = (sortBy, sortOrder) => {
     if (!sortBy || !sortOrder) return;
 
@@ -360,17 +388,33 @@ class OformsStore {
     runInAction(() => this.fetchOforms(newOformsFilter));
   };
 
-  resetFilters = () => {
+  resetFilters = async (ext) => {
     this.currentCategory = null;
-    const newOformsFilter = OformsFilter.getDefault();
-    newOformsFilter.locale = this.defaultOformLocale;
 
-    runInAction(() => this.fetchOforms(newOformsFilter));
+    const defaultFilter =
+      ext === ".docx"
+        ? OformsFilter.getDefaultDocx()
+        : ext === ".xlsx"
+          ? OformsFilter.getDefaultSpreadsheet()
+          : ext === ".pptx"
+            ? OformsFilter.getDefaultPresentation()
+            : OformsFilter.getDefault();
+
+    defaultFilter.locale = this.defaultOformLocale;
+    await this.fetchOforms(defaultFilter);
   };
 
   hideSubmitToGalleryTile = () => {
     localStorage.setItem("submitToGalleryTileIsHidden", true);
     this.submitToGalleryTileIsVisible = false;
+  };
+
+  setTemplateGalleryVisible = (templateGalleryVisible) => {
+    this.templateGalleryVisible = templateGalleryVisible;
+  };
+
+  setCurrentExtensionGallery = (extension) => {
+    this.currentExtensionGallery = extension;
   };
 
   get hasGalleryFiles() {
@@ -382,7 +426,7 @@ class OformsStore {
   }
 
   get hasMoreForms() {
-    return this.oformFiles.length < this.oformsFilterTotal;
+    return this.oformFiles && this.oformFiles.length < this.oformsFilterTotal;
   }
 }
 

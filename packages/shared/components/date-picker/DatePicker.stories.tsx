@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,10 +26,18 @@
 
 import React, { useState } from "react";
 import type { Meta, StoryFn } from "@storybook/react";
-import moment from "moment";
+import type { DateTime } from "luxon";
 
 import { DatePicker } from "./DatePicker";
 import { DatePickerProps } from "./DatePicker.types";
+import {
+  now,
+  addToDate,
+  startOf,
+  createDateTime,
+  parseToDateTime,
+  formatDate,
+} from "../../utils/date";
 
 export default {
   title: "Components/DatePicker",
@@ -84,64 +92,73 @@ export default {
   },
 } as Meta;
 
+const Wrapper = ({ children }: { children: React.ReactNode }) => {
+  return <div style={{ height: "280px", padding: "20px" }}>{children}</div>;
+};
+
 const Template: StoryFn<typeof DatePicker> = ({
   initialDate,
   ...rest
 }: DatePickerProps) => {
-  const [selectedDate, setSelectedDate] = useState<moment.Moment | null>(
-    initialDate ? moment(initialDate) : null,
+  const [selectedDate, setSelectedDate] = useState<DateTime | null>(
+    initialDate ? parseToDateTime(initialDate) : null,
   );
 
   return (
-    <DatePicker
-      {...rest}
-      initialDate={initialDate}
-      onChange={(date) => {
-        rest.onChange?.(date);
-        setSelectedDate(date);
-      }}
-      outerDate={selectedDate}
-    />
+    <Wrapper>
+      <DatePicker
+        {...rest}
+        initialDate={initialDate}
+        onChange={(date) => {
+          rest.onChange?.(date);
+          setSelectedDate(date);
+        }}
+        outerDate={selectedDate}
+      />
+    </Wrapper>
   );
 };
 
 export const Default = Template.bind({});
 Default.args = {
-  maxDate: moment().add(10, "years").startOf("year"),
-  minDate: moment("1970-01-01"),
-  openDate: moment(),
+  maxDate: startOf(addToDate(now(), 10, "years")!, "year")!,
+  minDate: createDateTime(1970, 1, 1),
+  openDate: now(),
   locale: "en",
   selectDateText: "Select date",
   onChange: (date) =>
-    console.log("Selected date:", date?.format("DD MMM YYYY") ?? "No date"),
+    console.log(
+      "Selected date:",
+      date ? formatDate(date, "dd MMM yyyy") : "No date",
+    ),
 };
 
 export const WithInitialDate = Template.bind({});
 WithInitialDate.args = {
   ...Default.args,
-  initialDate: moment(),
+  initialDate: now(),
   selectDateText: "Date with initial value",
-};
-
-export const WithCalendarIcon = Template.bind({});
-WithCalendarIcon.args = {
-  ...Default.args,
-  initialDate: moment(),
-  showCalendarIcon: true,
-  selectDateText: "Date with calendar icon",
 };
 
 export const WithCustomOpenDate = Template.bind({});
 WithCustomOpenDate.args = {
   ...Default.args,
-  openDate: moment().add(1, "month"),
+  openDate: addToDate(now(), 1, "months")!,
   selectDateText: "Date with custom open date",
 };
 
-export const WithDateRange = Template.bind({});
-WithDateRange.args = {
+export const WithFutureOnlyDates = Template.bind({});
+WithFutureOnlyDates.args = {
   ...Default.args,
-  minDate: moment().subtract(1, "month"),
-  maxDate: moment().add(1, "month"),
-  selectDateText: "Date with range constraints",
+  minDate: startOf(now(), "day")!,
+  selectDateText: "Only future dates available",
+};
+
+export const WithSpecificYear = Template.bind({});
+WithSpecificYear.args = {
+  ...Default.args,
+  minDate: createDateTime(2023, 1, 1),
+  maxDate: createDateTime(2023, 12, 31),
+  openDate: createDateTime(2023, 6, 15),
+  selectDateText: "Only dates from 2023",
 };

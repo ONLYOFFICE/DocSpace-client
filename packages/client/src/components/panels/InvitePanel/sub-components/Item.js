@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,9 +28,13 @@ import debounce from "lodash.debounce";
 import InfoEditReactSvgUrl from "PUBLIC_DIR/images/info.edit.react.svg?url";
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import InfoRoleSvgUrl from "PUBLIC_DIR/images/info.role.react.svg?url";
+import DeleteIcon from "PUBLIC_DIR/images/mobile.actions.remove.react.svg";
+import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg";
+import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 
 import { useState, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
+import classNames from "classnames";
 
 import { Avatar } from "@docspace/shared/components/avatar";
 import { Text } from "@docspace/shared/components/text";
@@ -47,35 +51,33 @@ import {
   RoomsType,
 } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { Button } from "@docspace/shared/components/button";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
-import { filterPaidRoleOptions } from "SRC_DIR/helpers";
+import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
+import { filterNotReadOnlyOptions } from "@docspace/shared/utils/filterNotReadOnlyOptions";
 
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
 import Filter from "@docspace/shared/api/people/filter";
 import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
 import AccessSelector from "../../../AccessSelector";
-import {
-  StyledEditInput,
-  StyledEditButton,
-  StyledCheckIcon,
-  StyledCrossIcon,
-  StyledHelpButton,
-  StyledDeleteIcon,
-  StyledInviteUserBody,
-  ErrorWrapper,
-  StyledRow,
-} from "../StyledInvitePanel";
+
+import styles from "../InvitePanel.module.scss";
+
 import {
   getFreeUsersRoleArray,
   getFreeUsersTypeArray,
   getTopFreeRole,
+  getViewerRole,
   isPaidUserRole,
 } from "../utils";
 
 const Item = ({
   t,
   item,
+  index,
   theme,
   setInviteItems,
   inviteItems,
@@ -134,20 +136,14 @@ const Item = ({
       return;
     }
 
-    const isPublicRoomType = roomType === RoomsType.PublicRoom;
-
     const filter = Filter.getDefault();
-
-    const searchArea = isPublicRoomType
-      ? AccountsSearchArea.People
-      : AccountsSearchArea.Any;
 
     filter.search = value;
 
     const users =
       roomId === -1
         ? await getUserList(filter)
-        : await getMembersList(searchArea, roomId, filter);
+        : await getMembersList(AccountsSearchArea.People, roomId, filter);
 
     setSearchRequestRunning(false);
 
@@ -182,20 +178,26 @@ const Item = ({
       : isRolePaid &&
         (type === EmployeeType.Guest || type === EmployeeType.User);
 
+  const isReadOnlyFiltered =
+    roomType === RoomsType.AIRoom && type === EmployeeType.Guest;
+
   const isGroupRoleFiltered = isRolePaid && item.isGroup;
 
   const filteredAccesses =
     roomId === -1
       ? accesses
-      : item.isGroup ||
-          isUserRolesFilterd ||
-          type === EmployeeType.Guest ||
-          type === EmployeeType.User
-        ? filterPaidRoleOptions(accesses)
-        : accesses;
+      : isReadOnlyFiltered
+        ? filterNotReadOnlyOptions(accesses)
+        : item.isGroup ||
+            isUserRolesFilterd ||
+            type === EmployeeType.Guest ||
+            type === EmployeeType.User
+          ? filterPaidRoleOptions(accesses)
+          : accesses;
 
-  const defaultAccess =
-    isUserRolesFilterd || isGroupRoleFiltered
+  const defaultAccess = isReadOnlyFiltered
+    ? getViewerRole(t, roomType)
+    : isUserRolesFilterd || isGroupRoleFiltered
       ? getTopFreeRole(t, roomType)
       : filteredAccesses.find((option) => option.access === +access);
 
@@ -213,7 +215,8 @@ const Item = ({
     const hasErrors = inviteItems.some((elm) => !!elm.errors?.length);
     const needRemoveGuests = !allowInvitingGuests
       ? inviteItems.some(
-          (inviteItem) => inviteItem.userType === EmployeeType.Guest,
+          (inviteItem) =>
+            inviteItem.userType === EmployeeType.Guest && !inviteItem.status,
         )
       : false;
 
@@ -308,15 +311,19 @@ const Item = ({
   const availableAccess =
     roomId === -1 ? getFreeUsersTypeArray() : getFreeUsersRoleArray();
 
-  const hasNotFoundEmail = !allowInvitingGuests && type === EmployeeType.Guest;
+  const hasNotFoundEmail = isGroup
+    ? false
+    : !allowInvitingGuests && type === EmployeeType.Guest && !status;
 
   const displayBody = (
     <>
-      <StyledInviteUserBody>
+      <div className={styles.inviteUserBody}>
         <div
-          className={isGroup ? "invite-user-box group-name" : "invite-user-box"}
+          className={classNames(styles.inviteUserBox, {
+            [styles.isGroup]: isGroup,
+          })}
         >
-          <Text {...textProps} truncate noSelect>
+          <Text {...textProps} truncate>
             {inputValue}
           </Text>
           {status === EmployeeStatus.Pending ? <StyledSendClockIcon /> : null}
@@ -324,20 +331,20 @@ const Item = ({
 
         {!isGroup ? (
           <Text
-            className="label about-label"
+            className={styles.aboutLabel}
             fontWeight={400}
             fontSize="12px"
-            noSelect
             truncate
           >
             {`${typeLabel} | ${email}`}
           </Text>
         ) : null}
-      </StyledInviteUserBody>
+      </div>
 
       {hasError || hasNotFoundEmail ? (
-        <ErrorWrapper>
-          <StyledHelpButton
+        <div className={styles.errorWrapper}>
+          <HelpButton
+            className={styles.helpButton}
             iconName={InfoEditReactSvgUrl}
             displayType="auto"
             offsetRight={0}
@@ -350,17 +357,21 @@ const Item = ({
             size={16}
             color={theme.infoPanel.errorColor}
           />
-          <StyledDeleteIcon
-            className="delete-icon"
+          <DeleteIcon
+            className={classNames(styles.rowIcons, {
+              [styles.isClicked]: true,
+            })}
             size="medium"
             onClick={removeItem}
+            data-testid="invite_panel_item_delete_button"
           />
-        </ErrorWrapper>
+        </div>
       ) : (
-        <div className="role-access">
+        <div className={styles.roleAccess}>
           {warning ? (
-            <div className="role-warning">
-              <StyledHelpButton
+            <div className={styles.roleWarning}>
+              <HelpButton
+                className={styles.helpButton}
                 tooltipContent={warning}
                 iconName={InfoRoleSvgUrl}
                 size={16}
@@ -380,6 +391,7 @@ const Item = ({
             setIsOpenItemAccess={setIsOpenItemAccess}
             isMobileView={isMobileView}
             noBorder
+            dataTestId="invite_panel_item_access_selector"
             {...((roomId === -1 || !avatar || isVisitor) && {
               isSelectionDisabled: isUserTariffLimit,
               selectionErrorText: <PaidQuotaLimitError />,
@@ -391,28 +403,43 @@ const Item = ({
     </>
   );
 
-  const okIcon = <StyledCheckIcon size="scale" />;
-  const cancelIcon = <StyledCrossIcon size="scale" />;
+  const okIcon = <CheckIcon className={styles.rowIcons} size="scale" />;
+  const cancelIcon = <CrossIcon className={styles.rowIcons} size="scale" />;
 
   const editBody = (
     <>
-      <StyledEditInput value={inputValue} onChange={changeValue} scale />
-      <StyledEditButton
+      <TextInput
+        className={styles.editBodyInputStyles}
+        value={inputValue}
+        onChange={changeValue}
+        scale
+        testId="invite_panel_item_edit_input"
+      />
+      <Button
+        className={styles.editButton}
         icon={okIcon}
         onClick={saveEdit}
         isDisabled={searchRequestRunning}
+        testId="invite_panel_item_save_button"
       />
-      <StyledEditButton icon={cancelIcon} onClick={cancelEdit} />
+      <Button
+        className={styles.editButton}
+        icon={cancelIcon}
+        onClick={cancelEdit}
+        testId="invite_panel_item_cancel_button"
+      />
     </>
   );
 
   return (
-    <StyledRow
+    <div
       key={item.id}
       style={style}
-      className="row-item"
-      hasWarning={!!item.warning}
-      edit={edit}
+      className={classNames("row-item", styles.rowItem, styles.styledRow, {
+        [styles.isEdit]: edit,
+        [styles.hasWarning]: !!item.warning,
+      })}
+      data-testid={`invite_panel_item_${index}`}
     >
       <Avatar
         size="min"
@@ -420,9 +447,10 @@ const Item = ({
         source={source}
         isGroup={isGroup}
         userName={groupName}
+        dataTestId={`invite_panel_item_avatar_${index}`}
       />
       {edit ? editBody : displayBody}
-    </StyledRow>
+    </div>
   );
 };
 

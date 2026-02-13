@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -131,31 +131,31 @@ export const connectedCloudsTypeTitleTranslation = (key, t) => {
   switch (key) {
     case "Box":
     case "BoxNet":
-      return t("Translations:TypeTitleBoxNet");
+      return t("Common:TypeTitleBoxNet");
 
     case "DropBox":
     case "DropboxV2":
-      return t("Translations:TypeTitleDropBox");
+      return t("Common:TypeTitleDropBox");
 
     case "DocuSign":
-      return t("Translations:TypeTitleDocuSign");
+      return t("Common:TypeTitleDocuSign");
 
     case "Google":
     case "GoogleDrive":
-      return t("Translations:TypeTitleGoogle");
+      return t("Common:TypeTitleGoogle");
 
     case "OneDrive":
     case "SkyDrive":
-      return t("Translations:TypeTitleSkyDrive");
+      return t("Common:TypeTitleSkyDrive");
 
     case "SharePoint":
-      return t("Translations:TypeTitleSharePoint");
+      return t("Common:TypeTitleSharePoint");
     case "WebDav":
-      return t("Translations:TypeTitleWebDav");
+      return t("Common:TypeTitleWebDav");
     case "kDrive":
-      return t("Translations:TypeTitlekDrive");
+      return t("Common:TypeTitlekDrive");
     case "Yandex":
-      return t("Translations:TypeTitleYandex");
+      return t("Common:TypeTitleYandex");
 
     default:
       return key;

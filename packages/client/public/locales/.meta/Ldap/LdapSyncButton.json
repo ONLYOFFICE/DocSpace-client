@@ -3,7 +3,7 @@
   "content": "Sync users",
   "content_en_sha1_hash": "ef3b2becca7b9d065d4fc56d36dab3c502ddc054",
   "created_at": "2025-05-19T21:30:54.308Z",
-  "updated_at": "2025-05-21T08:02:37.273Z",
+  "updated_at": "2025-08-21T11:22:39.894Z",
   "comment": {
     "text": "This translation key is used for the \"Sync users\" label on a button that triggers LDAP synchronization. The button appears in a sync container component and is disabled when LDAP integration is not enabled or UID is disabled.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/SyncContainer.js",
-      "line_number": 120,
-      "context": "tabIndex={-1}\n className=\"manual-sync-button\"\n size={buttonSize}\n primary\n onClick={onSync}\n label={t(\"LdapSyncButton\")}\n isDisabled={!isLdapEnabledOnServer || isUIDisabled}\n />\n \n <ProgressContainer operation={LDAPOperation.Sync} />",
+      "line_number": 118,
+      "context": "tabIndex={-1}\n className=\"manual-sync-button\"\n size={buttonSize}\n primary\n onClick={onSync}\n label={t(\"LdapSyncButton\")}\n isDisabled={!isLdapEnabledOnServer || isUIDisabled}\n testId=\"manual_sync_button\"\n />\n \n <ProgressContainer operation={LDAPOperation.Sync} />",
       "module": "/packages/client"
     }
   ],
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Uživatelé synchronizace\" is a literal translation but doesn't convey the intended meaning of 'Sync users'. It sounds awkward and unnatural in Czech.",
-          "suggestion": "A better translation would be \"Synchronizovat uživatele\" or \"Uživatelská synchronizace\"."
+          "description": "The Czech translation 'Uživatelé synchronizace' is a literal translation and doesn't convey the intended meaning of 'Sync users'. It translates to 'Users synchronization', which is awkward.",
+          "suggestion": "A better translation would be something like 'Synchronizovat uživatele' (Synchronize users) or 'Uživatelská synchronizace' (User synchronization)."
         }
       ],
       "approved_at": null
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Սինխրոնիզացված օգտվողներ' literally translates to 'Synchronized users'. The English 'Sync users' implies an action of synchronizing, not a state of being synchronized.  It doesn't convey the meaning of a button that initiates a synchronization process.",
-          "suggestion": "Consider 'Սինխրոնացնել օգտվողներ' (Sinkhronantnel ogtavorner) which translates to 'Synchronize users' or 'Միացրեք օգտվողներ' (Miatsrek ogtavorner) which translates to 'Connect users' or 'Թարմացրեք օգտվողներ' (Tarmatsrek ogtavorner) which translates to 'Refresh users'."
+          "description": "The translation \"Սինխրոնիզացված օգտվողներ\" (Sinxronizatsvad ogtvoghner) literally translates to 'Synchronized users'. The intended meaning of 'Sync users' is more accurately conveyed as a process of synchronization, not a state of being synchronized.",
+          "suggestion": "Consider \"Օգտվողների համապարակշակում\" (Ogtvoghneri hamaparaksakoum) or \"Օգտվողների սինխրոնիզացիա\" (Ogtvoghneri sinkronizatsia) which better reflects the action of synchronizing users."
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ຊິງຂໍ້ມູນຜູ້ໃຊ້\" literally translates to \"grab user data.\" While understandable, it doesn't accurately convey the meaning of 'Sync users,' which implies updating or synchronizing data. A more accurate translation would reflect the process of synchronization.",
-          "suggestion": "Consider a translation like \"ອັບເດດຂໍ້ມູນຜູ້ໃຊ້\" (update user data) or \"ເຊື່ອມໂອ້ຂໍ້ມູນຜູ້ໃຊ້\" (synchronize user data)."
+          "description": "The Lao translation 'ຊິງຂໍ້ມູນຜູ້ໃຊ້' literally translates to 'take user data'. While understandable, a more natural and accurate translation of 'Sync users' would convey the meaning of synchronizing or updating user information.",
+          "suggestion": "ອັບເດດຂໍ້ມູນຜູ້ໃຊ້"
         }
       ],
       "approved_at": null
@@ -174,13 +174,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'පරිශීලකයින්' (parishiilakayin) is technically correct for 'users', but in this context, 'භාවිතාකරන්නන්' (bhavitakaraannnan) or 'පරිශීලකයන්' (parishiilakayan) might be more natural and commonly used in user interface contexts. The current form is a more formal and less common phrasing.",
-          "suggestion": "Consider using 'භාවිතාකරන්නන්' or 'පරිශීලකයන්' instead of 'පරිශීලකයින්'."
+          "description": "The word 'පරිශීලකයින්' (parishiilakayin) is a less common and potentially incorrect word for 'users'. It implies 'enthusiasts' or 'devotees' rather than 'users'.",
+          "suggestion": "පරිශ්‍රමකරුවන් (parishramakaran) or ඊළඟ පරිශීලකයින් (eelanage parishilakayin) might be a more appropriate translation of 'users' in this context, though the latter still has the enthusiast connotation."
         },
         {
           "type": "incorrect_translation",
-          "description": "While 'සමමුහුර්ත' (samamuhurta) is a valid translation for 'sync', it can sound overly technical and formal in a user interface. A more understandable term might be preferable.",
-          "suggestion": "Consider using 'එකතු කරන්න' (ekathu kanna) or 'ගැළපෙනවා' (galapenawa) to convey the concept of synchronizing. For example: 'පරිශීලකයින් එකතු කරන්න'."
+          "description": "While 'සමමුහුර්ත කරන්න' (samamuhurta kanna) is a valid Sinhala word, it translates to 'synchronize' which is a bit formal. 'නැවතsynchronize කරන්න' is more accurate.",
+          "suggestion": "පරිශීලකයින් නැවතsynchronize කරන්න (parishiilakayin nawaath synchronize kanna)"
         }
       ],
       "approved_at": null

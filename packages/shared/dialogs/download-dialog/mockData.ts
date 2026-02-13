@@ -1,5 +1,5 @@
 /*
- * (c) Copyright Ascensio System SIA 2009-2025
+ * (c) Copyright Ascensio System SIA 2009-2026
  *
  * This program is a free software product.
  * You can redistribute it and/or modify it under the terms
@@ -35,6 +35,7 @@ import {
 
 export const files: TDownloadedFile[] = [
   {
+    shortWebUrl: "",
     access: 0,
     comment: "Uploaded",
     contentLength: "56.83 KB",
@@ -99,6 +100,7 @@ export const files: TDownloadedFile[] = [
       CreateRoomFrom: false,
       EditForm: false,
       Embed: false,
+      Vectorization: false,
     },
     viewAccessibility: {
       ImageView: false,
@@ -119,6 +121,7 @@ export const files: TDownloadedFile[] = [
     fileEntryType: 2,
   },
   {
+    shortWebUrl: "",
     access: 0,
     comment: "The file is unlocked",
     contentLength: "136 KB",
@@ -183,6 +186,7 @@ export const files: TDownloadedFile[] = [
       CreateRoomFrom: false,
       EditForm: false,
       Embed: false,
+      Vectorization: false,
     },
     viewAccessibility: {
       ImageView: false,
@@ -203,6 +207,8 @@ export const files: TDownloadedFile[] = [
     fileEntryType: 2,
   },
   {
+    shortWebUrl: "",
+
     access: 0,
     comment: "Uploaded",
     contentLength: "56.83 KB",
@@ -267,6 +273,7 @@ export const files: TDownloadedFile[] = [
       CreateRoomFrom: false,
       EditForm: false,
       Embed: false,
+      Vectorization: false,
     },
     viewAccessibility: {
       ImageView: false,
@@ -287,6 +294,8 @@ export const files: TDownloadedFile[] = [
     fileEntryType: 2,
   },
   {
+    shortWebUrl: "",
+
     access: 0,
     comment: "Uploaded",
     contentLength: "140.79 KB",
@@ -351,6 +360,7 @@ export const files: TDownloadedFile[] = [
       CreateRoomFrom: false,
       EditForm: false,
       Embed: false,
+      Vectorization: false,
     },
     viewAccessibility: {
       ImageView: false,
@@ -372,6 +382,8 @@ export const files: TDownloadedFile[] = [
   },
 
   {
+    shortWebUrl: "",
+
     access: 0,
     comment: "Uploaded",
     contentLength: "1.08 MB",
@@ -441,6 +453,7 @@ export const files: TDownloadedFile[] = [
       CopyLink: true,
       Embed: true,
       EditForm: false,
+      Vectorization: false,
     },
     viewAccessibility: {
       ImageView: false,
@@ -461,6 +474,8 @@ export const files: TDownloadedFile[] = [
     fileEntryType: 2,
   },
   {
+    shortWebUrl: "",
+
     access: 0,
     comment: "Uploaded",
     contentLength: "1.08 MB",
@@ -530,6 +545,7 @@ export const files: TDownloadedFile[] = [
       CopyLink: true,
       Embed: true,
       EditForm: false,
+      Vectorization: false,
     },
     viewAccessibility: {
       ImageView: false,
@@ -596,6 +612,7 @@ export const sortedFiles: TSortedFiles = {
   documents: files.filter((f) => isFile(f) && f.fileExst === ".docx"),
   spreadsheets: files.filter((f) => isFile(f) && f.fileExst === ".xlsx"),
   presentations: files.filter((f) => isFile(f) && f.fileExst === ".pptx"),
+  diagrams: [],
   masterForms: [],
   pdfForms: [],
   other: [],

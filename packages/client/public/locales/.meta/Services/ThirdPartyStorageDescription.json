@@ -1,0 +1,28 @@
+{
+  "key_path": "ThirdPartyStorageDescription",
+  "content": "Use third-party services to store your backups. Ideal for connecting external cloud storage platforms.",
+  "content_en_sha1_hash": "7915836bf8554d9973e1eae8f2e91a95b16fb91a",
+  "created_at": "2025-08-21T14:45:38.904Z",
+  "updated_at": "2025-10-27T16:14:33.629Z",
+  "comment": {
+    "text": "This text describes the option to store backups using external cloud storage services. It appears as a description within the Backup Service Dialog, helping users understand how to connect to third-party storage platforms. This option is ideal for users who prefer to manage their backups off-site.",
+    "is_auto": true,
+    "updated_at": "2025-08-21T14:47:46.356Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/Backup/BackupServiceDialog.tsx",
+      "line_number": 109,
+      "context": "icon: <MoveIcon />,\n },\n {\n id: \"third-party-storage\",\n title: t(\"Common:ThirdPartyStorage\"),\n description: t(\"ThirdPartyStorageDescription\"),\n icon: <CloudsIcon />,\n },\n {\n id: \"automatic-backup\",\n title: t(\"Common:AutoBackup\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

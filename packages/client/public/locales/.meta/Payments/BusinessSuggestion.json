@@ -3,7 +3,7 @@
   "content": "Customize your {{planName}} plan",
   "content_en_sha1_hash": "dedf0379b4d790a1161df6c27673df411d75ce35",
   "created_at": "2025-05-19T21:30:53.661Z",
-  "updated_at": "2025-05-21T06:44:05.218Z",
+  "updated_at": "2025-08-12T19:46:26.222Z",
   "comment": {
     "text": "This translation key is used for a suggested customization message in a payment plan settings section. It appears as a tooltip on a payment plan selection element and provides instructions to customize the chosen plan.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/PaymentContainer.js",
-      "line_number": 222,
-      "context": "noSelect\n fontSize=\"16px\"\n isBold\n className=\"payment-info_suggestion\"\n >\n <Trans t={t} i18nKey=\"BusinessSuggestion\" ns=\"Payments\">\n {{ planName: tariffPlanTitle }}\n </Trans>\n </Text>\n );\n }",
+      "line_number": 213,
+      "context": "}\n \n if (isPaidPeriod && !isNonProfit) {\n return (\n <Text fontSize=\"16px\" isBold className=\"payment-info_suggestion\">\n <Trans t={t} i18nKey=\"BusinessSuggestion\" ns=\"Payments\">\n {{ planName: tariffPlanTitle }}\n </Trans>\n </Text>\n );\n }",
       "module": "/packages/client"
     }
   ],
@@ -39,49 +39,25 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The variable {{planName}} appears correctly in both the English and Bulgarian versions.",
-          "suggestion": null
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Přizpůsobte si svůj tarif {{planName}}\" is understandable, a more natural and accurate translation of \"Customize your {{planName}} plan\" would be something like \"Upravte si svůj tarif {{planName}}\" or \"Personalizujte svůj tarif {{planName}}\". \"Přizpůsobte\" implies a broader adaptation, while \"upravte\" or \"personalizujte\" better convey the customization aspect of a plan.",
-          "suggestion": "Upravte si svůj tarif {{planName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The German translation uses a hyphen (-) to connect 'Plan' to the `planName` variable. While technically correct, it might be more natural to use 'Ihr {{planName}} Plan' (your {{planName}} plan) for better readability and flow in German.",
-          "suggestion": "Passen Sie Ihren Ihr {{planName}} Plan an"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Greek translation uses a semicolon instead of a space before the {{planName}} variable. While understandable, a space would be more natural in Greek.",
-          "suggestion": "Προσαρμογή του προγράμματός σας {{planName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -96,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'ohjelmaa' can mean 'plan', in this context referring to a subscription or service tier, 'suunnitelmaa' would be a more accurate and natural translation of 'plan'. 'Ohjelmaa' typically refers to a program or show.",
-          "suggestion": "Mukauta {{planName}} suunnitelmaa"
+          "description": "While \"ohjelmaa\" can mean \"plan,\" in the context of a subscription or service plan, \"pakettia\" or \"tilausta\" would be more accurate and natural. \"Ohjelmaa\" is more often used for software or programs.",
+          "suggestion": "Mukauta {{planName}} pakettia"
         }
       ],
       "approved_at": null
@@ -107,9 +83,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "While 'Personnalisez' is correct for 'Customize', 'plan tarifaire' is overly literal and can sound clunky in French. A more natural translation would be something like 'Personnalisez votre abonnement' or 'Personnalisez votre forfait'.",
-          "suggestion": "Personnalisez votre abonnement {{planName}}"
+          "type": "formatting",
+          "description": "The French translation includes 'tarifaire' which while not incorrect, isn't strictly necessary and can be removed for a slightly more natural flow. The English uses 'plan' which is more concise.",
+          "suggestion": "Personnalisez votre plan {{planName}}"
         }
       ],
       "approved_at": null
@@ -165,7 +141,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Personalize' is a valid translation for 'Customize', it doesn't fully capture the nuance of adapting or modifying a plan to suit specific needs. 'Customize' implies a more tailored alteration.",
+          "suggestion": "Adapte o plano {{planName}}"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -180,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Gestionați abonamentul dvs {{planName}}' is a functional equivalent but not the most natural or direct translation of 'Customize your {{planName}} plan'. 'Customize' implies tailoring or adjusting, whereas 'Gestionați' (manage) is broader. A better translation might be 'Personalizați-vă planul {{planName}}' or 'Adaptați-vă planul {{planName}}'.",
-          "suggestion": "Personalizați-vă planul {{planName}}"
+          "description": "The Romanian translation 'Gestionați abonamentul dvs {{planName}}' translates to 'Manage your subscription {{planName}}'. While not entirely wrong, 'Customize' implies more than just management. A more accurate translation for 'Customize' might be 'Personalizați'.",
+          "suggestion": "Personalizați abonamentul dvs. {{planName}}"
         }
       ],
       "approved_at": null
@@ -195,13 +177,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'අභිරුචිකරණය' (abiruchikaranya) is a valid term for 'customize' but it's a bit formal for the context of a business suggestion.  A more conversational option might be better.",
-          "suggestion": "ඔබගේ {{planName}} සැලසුම වෙනස් කරන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -213,7 +189,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation retains the variable {{planName}} which is consistent with the English source. This is acceptable but confirm this is desired in the final translated output.",
+          "suggestion": "Confirm whether the variable {{planName}} should be included and consistently formatted."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -222,8 +204,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'Прилагоди' is a valid translation for 'Customize,' but a more natural and common translation for this context would be 'Изузе' (Izuze). 'Прилагоди' can imply adjusting something already existing, while 'Изузе' emphasizes creating a custom plan.",
-          "suggestion": "Изузе свој {{planName}} план"
+          "description": "The Serbian (Cyrillic) translation \"Прилагоди свој {{planName}} план\" doesn't accurately convey the meaning of \"Customize your {{planName}} plan\". \"Прилагоди\" is a good start, but it's more like 'adjust' or 'modify'.  'Customize' implies more extensive personalization. A better translation would use a term that signifies a higher degree of personalization.",
+          "suggestion": "Персонализуј свој {{planName}} план"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of Cyrillic characters in a context that may primarily use Latin characters (e.g., in a system or interface) might lead to display issues or require specific encoding support. While not technically an error, it's important to consider the display environment.",
+          "suggestion": "Consider the target platform and user base to determine if Latin characters would be more appropriate for better compatibility. If Cyrillic is required, ensure proper encoding support."
         }
       ],
       "approved_at": null
@@ -258,8 +245,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"自定义您的{{planName}}版本\" doesn't accurately convey the meaning of \"Customize your {{planName}} plan.\" \"版本\" (version) implies a different iteration of the plan, while \"Customize\" refers to personalizing or modifying the existing plan.  It's also a bit clunky.",
-          "suggestion": "自定义您的{{planName}}方案"
+          "description": "“版本” (banben) translates to 'version' which isn't the best fit for 'plan' in this context. It implies a software version, not a payment plan level. A better translation for 'plan' would be something like '套餐' (taocan) or '方案' (fang'an).",
+          "suggestion": "自定义您的{{planName}}套餐"
         }
       ],
       "approved_at": null

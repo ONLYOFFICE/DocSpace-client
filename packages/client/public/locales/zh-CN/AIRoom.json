@@ -1,0 +1,18 @@
+{
+  "AIAgentAccessRedirectNote": "系统将在5秒后自动跳转至{{sectionName}}模块。",
+  "AIChat": "AI 对话",
+  "AIInstructions": "AI 指令",
+  "CreateChat": "创建对话",
+  "EmptyKnowledgeDescriptionActions": "尝试以下操作以开始使用：",
+  "EmptyKnowledgeTitle": "暂未上传文件",
+  "EmptyResultsTitle": "暂无结果",
+  "InstructionsDescriptionAgentExample": "示例：“您是一位 AI 公关助理，负责撰写和编辑新闻稿。请保持专业、自信且媒体友好的语气。清晰突出关键信息，避免使用术语，并保持文本简洁明了且引人入胜。”",
+  "KnowledgeDescription": "从您的计算机或{{productName}}上传文件，为对话提供上下文。注意：部分或全部上传内容可能会在对话期间显示。",
+  "KnowledgeSelectIn": "在{{productName}}中选择",
+  "KnowledgeUnavailable": "知识库不可用",
+  "MCP": "此房间的 MCP 工具",
+  "ResponseQualityNode": "<1>注意：</1> 响应质量可能因模型而异；建议使用较新的模型以获得最佳效果。",
+  "ResultStorage": "结果存储",
+  "UploadFilesDevice": "从个人设备上传文件",
+  "UploadFilesPortal": "从{{sectionNameFirst}}或{{sectionNameSecond}}上传文件"
+}

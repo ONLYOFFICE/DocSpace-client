@@ -292,7 +292,9 @@ async function routes(fastify, options) {
           .map((r) => r.language);
         return reply.code(500).send({
           success: false,
-          error: `Failed to rename key in languages: ${failedLanguages.join(", ")}`,
+          error: `Failed to rename key in languages: ${failedLanguages.join(
+            ", "
+          )}`,
         });
       }
 
@@ -337,126 +339,14 @@ async function routes(fastify, options) {
         });
       }
 
-      // Get available languages
-      const languages = await fsUtils.getAvailableLanguages(projectName);
-
-      if (!languages.length) {
-        return reply.code(404).send({
-          success: false,
-          error: "No languages found for project",
-        });
-      }
-
-      // Move key in all language files
-      const results = await Promise.all(
-        languages.map(async (language) => {
-          // Read the source translation file
-          const sourceTranslations = await fsUtils.readTranslationFile(
-            projectName,
-            language,
-            sourceNamespace
-          );
-
-          if (!sourceTranslations)
-            return { language, success: false, error: "Source file not found" };
-
-          // Get the value from the key
-          const keyParts = keyPath.split(".");
-          let value = sourceTranslations;
-          let tempValue;
-
-          for (const part of keyParts) {
-            if (!value || typeof value !== "object" || !(part in value)) {
-              return { language, success: false, error: "Key not found" };
-            }
-            tempValue = value[part];
-            value = value[part];
-          }
-
-          if (value === undefined) {
-            return {
-              language,
-              success: false,
-              error: "Key value is undefined",
-            };
-          }
-
-          // Read the target translation file
-          let targetTranslations = await fsUtils.readTranslationFile(
-            targetProjectName,
-            language,
-            targetNamespace
-          );
-
-          // If target doesn't exist, create it
-          if (!targetTranslations) {
-            targetTranslations = {};
-          }
-
-          // Set the value at the same key path in target
-          let current = targetTranslations;
-          for (let i = 0; i < keyParts.length - 1; i++) {
-            const part = keyParts[i];
-            if (!current[part]) {
-              current[part] = {};
-            }
-            current = current[part];
-          }
-          current[keyParts[keyParts.length - 1]] = tempValue;
-
-          // Write updated target translations
-          const targetSuccess = await fsUtils.writeTranslationFile(
-            targetProjectName,
-            language,
-            targetNamespace,
-            targetTranslations
-          );
-
-          if (!targetSuccess) {
-            return {
-              language,
-              success: false,
-              error: "Failed to write target file",
-            };
-          }
-
-          // Remove the key from source translations
-          const updatedSourceTranslations = JSON.parse(
-            JSON.stringify(sourceTranslations)
-          );
-          current = updatedSourceTranslations;
-
-          for (let i = 0; i < keyParts.length - 1; i++) {
-            const part = keyParts[i];
-            if (!current[part]) break;
-            current = current[part];
-          }
-          delete current[keyParts[keyParts.length - 1]];
-
-          // Write updated source translations
-          const sourceSuccess = await fsUtils.writeTranslationFile(
-            projectName,
-            language,
-            sourceNamespace,
-            updatedSourceTranslations
-          );
-
-          return { language, success: sourceSuccess && targetSuccess };
-        })
+      // Move key to another namespace
+      const success = await fsUtils.moveKeyToNamespace(
+        projectName,
+        sourceNamespace,
+        targetProjectName,
+        targetNamespace,
+        keyPath
       );
-
-      const allSucceeded = results.every((r) => r.success);
-
-      if (!allSucceeded) {
-        const failedLanguages = results
-          .filter((r) => !r.success)
-          .map((r) => `${r.language}${r.error ? ` (${r.error})` : ""}`);
-
-        return reply.code(500).send({
-          success: false,
-          error: `Failed to move key in languages: ${failedLanguages.join(", ")}`,
-        });
-      }
 
       // Broadcast update to connected clients
       fastify.io.emit("translation:key-moved", {
@@ -468,8 +358,8 @@ async function routes(fastify, options) {
       });
 
       return {
-        success: true,
-        message: "Translation key moved successfully in all languages",
+        success,
+        message: "Translation key moved successfully",
       };
     } catch (error) {
       request.log.error(error);
@@ -564,9 +454,14 @@ async function routes(fastify, options) {
             .map((r) => r.language);
           return reply.code(500).send({
             success: false,
-            error: `Failed to delete key in languages: ${failedLanguages.join(", ")}`,
+            error: `Failed to delete key in languages: ${failedLanguages.join(
+              ", "
+            )}`,
           });
         }
+
+        // remove .meta file for this key
+        fsUtils.removeMetaFile(projectName, namespace, keyPath);
 
         // Broadcast update to connected clients
         fastify.io.emit("translation:key-deleted", {

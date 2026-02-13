@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,8 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import moment from "moment";
 import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
+import { DateTime } from "luxon";
 import { Meta, StoryObj } from "@storybook/react";
 import { useTranslation } from "react-i18next";
 
@@ -228,7 +228,7 @@ export default meta;
 export const Default: Story = {
   args: {
     locale: "en-GB",
-    timezone: moment.tz(moment.tz.guess()).format("Z"),
+    timezone: DateTime.local().toFormat("ZZ"),
   },
 
   render: ({ value: defaultValue = defaultCronString, locale, timezone }) => {

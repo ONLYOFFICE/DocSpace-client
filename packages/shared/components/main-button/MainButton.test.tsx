@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,11 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import { MainButton } from ".";
 
-jest.mock("react-svg", () => ({
+vi.mock("react-svg", () => ({
   ReactSVG: () => <div className="img" />,
 }));
 
@@ -54,24 +54,24 @@ describe("<MainButton />", () => {
   it("accepts className", () => {
     render(<MainButton {...defaultProps} className="custom-class" />);
     const button = screen.getByText("Test Button").parentElement;
-    expect(button).toHaveClass("custom-class");
+    expect(button?.className).toContain("custom-class");
   });
 
   it("accepts style", () => {
     const customStyle = { backgroundColor: "red" };
     render(<MainButton {...defaultProps} style={customStyle} />);
     const button = screen.getByText("Test Button").parentElement;
-    expect(button).toHaveStyle("background-color: red");
+    expect(button?.style.backgroundColor).toBe("red");
   });
 
   it("renders as disabled", () => {
     render(<MainButton {...defaultProps} isDisabled />);
     const button = screen.getByText("Test Button").parentElement;
-    expect(button).toHaveClass("disabled");
+    expect(button?.className).toContain("disabled");
   });
 
   it("prevents click when disabled", () => {
-    const onAction = jest.fn();
+    const onAction = vi.fn();
     render(
       <MainButton
         {...defaultProps}
@@ -87,7 +87,7 @@ describe("<MainButton />", () => {
   });
 
   it("calls onAction when not disabled and not dropdown", () => {
-    const onAction = jest.fn();
+    const onAction = vi.fn();
     render(
       <MainButton
         {...defaultProps}
@@ -105,13 +105,13 @@ describe("<MainButton />", () => {
   it("renders dropdown arrow when isDropdown is true", () => {
     render(<MainButton {...defaultProps} isDropdown />);
     const button = screen.getByText("Test Button").parentElement;
-    expect(button).toHaveClass("dropdown");
+    expect(button?.className).toContain("dropdown");
   });
 
   it("does not render dropdown arrow when isDropdown is false", () => {
     render(<MainButton {...defaultProps} isDropdown={false} />);
     const button = screen.getByText("Test Button").parentElement;
-    expect(button).not.toHaveClass("dropdown");
+    expect(button?.className).not.toContain("dropdown");
   });
 
   it("uses default text when not provided", () => {

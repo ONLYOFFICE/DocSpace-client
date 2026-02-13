@@ -1,0 +1,28 @@
+{
+  "key_path": "PreparationForAIFailedInfo",
+  "content": "Couldn’t prepare the file for AI — run preparation again.",
+  "content_en_sha1_hash": "6c920133128b3b46618545a65f82fa0474ad171c",
+  "created_at": "2025-10-27T16:14:24.446Z",
+  "updated_at": "2025-10-27T16:31:06.117Z",
+  "comment": {
+    "text": "This text explains why a file couldn't be processed by AI, instructing the user to rerun the preparation process. It appears as informational text accompanying a failed AI preparation indicator, likely within a file processing interface. Translators should maintain the helpful and instructional tone.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T16:31:06.117Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/failed-vectorization-badge/index.tsx",
+      "line_number": 70,
+      "context": "<div>\n <Text fontWeight={600} fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"Common:PreparationForAIFailed\")}\n </Text>\n <Text fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"Common:PreparationForAIFailedInfo\")}\n </Text>\n {withRetryVectorization ? (\n <Link\n type={LinkType.action}\n fontWeight={600}",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

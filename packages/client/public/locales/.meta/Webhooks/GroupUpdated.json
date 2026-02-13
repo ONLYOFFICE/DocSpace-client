@@ -3,7 +3,7 @@
   "content": "Group updated",
   "content_en_sha1_hash": "c13e7905dd3d91a99d06cb1d72d307870710937a",
   "created_at": "2025-05-19T21:30:49.773Z",
-  "updated_at": "2025-05-21T01:07:17.870Z",
+  "updated_at": "2025-05-24T02:21:17.813Z",
   "comment": {
     "text": "The \"GroupUpdated\" translation key is used to display a notification when a group is updated in the PortalSettings page. This text appears as part of a confirmation message or tooltip, informing users that a change has been made to their groups.",
     "is_auto": true,
@@ -156,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'පක්ෂය යාවත්කාලීන කරන ලදී' (pakshaya yavatkaalina karan ladee) literally translates to 'Party updated'. While 'group' and 'party' can sometimes be used interchangeably, in the context of webhooks, 'group' typically refers to a group of users or entities, not a political party. The nuance is lost.",
-          "suggestion": "Consider a more accurate translation like 'මණ්ඩලය යාවත්කාලීන කරන ලදී' (mandalyaya yavatkaalina karan ladee) which translates to 'Group updated'. Alternatively, 'සන්ගීතය යාවත්කාලීන කරන ලදී' (sangeethaya yavatkaalina karan ladee) could be used, although 'mandalyaya' is generally preferred."
+          "description": "The translation \"පක්ෂය යාවත්කාලීන කරන ලදී\" (pakshaya yavatkaalina karan ladee) literally translates to 'Party updated'. 'Group' is a broader term than 'party' and might not accurately reflect the intended meaning of 'Group updated' in the context of webhooks.",
+          "suggestion": "Consider a more general term for 'group' in Sinhala, such as \"මණ්ඩලය යාවත්කාලීන කරන ලදී\" (mandhalaya yavatkaalina karan ladee) or \"විළුකුල යාවත්කාලීන කරන ලදී\" (vilukulaya yavatkaalina karan ladee). The most appropriate translation depends on the specific context of the webhook."
         }
       ],
       "approved_at": null

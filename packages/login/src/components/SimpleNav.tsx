@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,50 +27,12 @@
 "use client";
 
 import React from "react";
-import styled, { useTheme } from "styled-components";
 
 import { TPortalCultures } from "@docspace/shared/api/settings/types";
-import { mobile } from "@docspace/shared/utils/device";
-import { getLogoUrl } from "@docspace/shared/utils/common";
-import { WhiteLabelLogoType } from "@docspace/shared/enums";
-import { injectDefaultTheme } from "@docspace/shared/utils";
 
 import LanguageComboboxWrapper from "./LanguageCombobox";
-
-/* eslint-disable @next/next/no-img-element */
-
-const StyledSimpleNav = styled.div.attrs(injectDefaultTheme)`
-  display: none;
-  height: 48px;
-  align-items: center;
-  justify-content: center;
-  background-color: ${(props) => props.theme?.login?.navBackground};
-
-  .logo {
-    height: 24px;
-  }
-
-  .modile-combobox {
-    .combo-button {
-      border-width: 0;
-      background: transparent;
-    }
-  }
-
-  @media ${mobile} {
-    display: flex;
-
-    .language-combo-box {
-      position: absolute;
-      top: 7px;
-      inset-inline-end: 20px;
-
-      .combo-button {
-        gap: 8px;
-      }
-    }
-  }
-`;
+import { Logo } from "./Logo";
+import styles from "./SimpleNav.module.scss";
 
 interface SimpleNavProps {
   culture?: string;
@@ -83,27 +45,16 @@ const SimpleNav = ({
   initialCultures,
   isLanguageComboboxVisible = true,
 }: SimpleNavProps) => {
-  const theme = useTheme();
-
-  const isDark = !theme.isBase;
-
-  const logoUrl = getLogoUrl(
-    WhiteLabelLogoType.LightSmall,
-    isDark,
-    false,
-    culture,
-  );
-
   return (
-    <StyledSimpleNav id="login-header">
-      <img className="logo" src={logoUrl} alt="logo-url" />
-      {isLanguageComboboxVisible && (
+    <div id="login-header" className={styles.simpleNav}>
+      <Logo culture={culture} isMobile />
+      {isLanguageComboboxVisible ? (
         <LanguageComboboxWrapper
-          className="modile-combobox"
+          className={styles.mobileComboBox}
           initialCultures={initialCultures}
         />
-      )}
-    </StyledSimpleNav>
+      ) : null}
+    </div>
   );
 };
 

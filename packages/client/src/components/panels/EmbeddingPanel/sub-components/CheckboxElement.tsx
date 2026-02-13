@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,6 +27,7 @@
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { TooltipContent } from "../../../../pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/TooltipContent";
+import styles from "../EmbeddingPanel.module.scss";
 
 type CheckboxElementProps = {
   img: string;
@@ -35,6 +36,7 @@ type CheckboxElementProps = {
   description: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   isChecked: boolean;
+  dataTestId?: string;
 };
 
 const CheckboxElement = ({
@@ -44,19 +46,22 @@ const CheckboxElement = ({
   description,
   onChange,
   isChecked,
+  dataTestId,
 }: CheckboxElementProps) => {
   return (
-    <div className="embedding-panel_checkbox-element">
+    <div className={styles.embeddingPanelCheckboxElement}>
       <Checkbox
         className="checkbox"
         label={label}
         onChange={onChange}
         isChecked={isChecked}
+        dataTestId={`${dataTestId}_embedding_panel_checkbox`}
       />
       <HelpButton
         place="right"
         offsetRight={4}
         size={12}
+        dataTestId={`${dataTestId}_embedding_panel_help_button`}
         tooltipContent={
           <TooltipContent img={img} title={title} description={description} />
         }

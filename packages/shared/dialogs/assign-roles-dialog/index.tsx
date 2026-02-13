@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -51,9 +51,9 @@ export const AssignRolesDialog = ({
       onClose={onClose}
       displayType={ModalDialogType.modal}
     >
-      <ModalDialog.Header>{t("Common:AssignRoles")}</ModalDialog.Header>
+      <ModalDialog.Header>{t("Common:AssignRecipients")}</ModalDialog.Header>
       <ModalDialog.Body>
-        {t("Common:AssignRolesDescription", { roomName })}
+        {t("Common:AssignRecipientsDescription", { roomName })}
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

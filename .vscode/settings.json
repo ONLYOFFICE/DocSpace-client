@@ -2,7 +2,6 @@
   "files.exclude": {
     "**/packages": true,
     "**/.nuget": true,
-    // "**/common": true,
     "**/Data": true,
     "**/i18next": true,
     //"**/node_modules": true,
@@ -20,5 +19,10 @@
     "**/LICENSE": true,
     "**/build/install": true
   },
-  "gitlens.remotes": [{ "domain": "git.onlyoffice.com", "type": "Gitea" }]
+  "gitlens.remotes": [
+    {
+      "domain": "git.onlyoffice.com",
+      "type": "Gitea"
+    }
+  ],
 }

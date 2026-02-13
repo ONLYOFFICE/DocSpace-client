@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,7 +34,7 @@ import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelpe
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
 
-import { ArticleItem } from "@docspace/shared/components/article-item";
+import { ArticleItem } from "@docspace/shared/components/article-item/ArticleItemWrapper";
 import { ArticleFolderLoader } from "@docspace/shared/skeletons/article";
 import {
   // getKeyByLink,
@@ -67,6 +67,8 @@ const ArticleBodyContent = (props) => {
   const prevLocation = React.useRef(null);
 
   const location = useLocation();
+
+  const isMobileView = currentDeviceType === DeviceType.mobile;
 
   // React.useEffect(() => {
   //   // prevLocation.current = location;
@@ -143,24 +145,31 @@ const ArticleBodyContent = (props) => {
         setSelectedKeys(["6-0"]);
       }
 
-      if (location.pathname.includes("developer")) {
+      if (location.pathname.includes("ai-settings")) {
         setSelectedKeys(["7-0"]);
       }
 
-      if (location.pathname.includes("delete-data")) {
+      if (location.pathname.includes("developer")) {
         setSelectedKeys(["8-0"]);
       }
 
-      if (location.pathname.includes("payments")) {
+      if (location.pathname.includes("delete-data")) {
         setSelectedKeys(["9-0"]);
       }
 
-      if (location.pathname.includes("services")) {
+      if (location.pathname.includes("payments")) {
         setSelectedKeys(["10-0"]);
       }
 
-      if (location.pathname.includes("bonus")) {
+      if (
+        location.pathname.includes("services") &&
+        !location.pathname.includes("third-party-services")
+      ) {
         setSelectedKeys(["11-0"]);
+      }
+
+      if (location.pathname.includes("bonus")) {
+        setSelectedKeys(["12-0"]);
       }
     }
   }, [
@@ -181,7 +190,7 @@ const ArticleBodyContent = (props) => {
   };
 
   const onSelect = () => {
-    if (currentDeviceType === DeviceType.mobile) {
+    if (isMobileView) {
       toggleArticleOpen();
     }
   };
@@ -211,7 +220,7 @@ const ArticleBodyContent = (props) => {
       case "Migration":
         return t("Migration");
       case "Backup":
-        return t("Backup");
+        return t("Common:Backup");
       case "Common:PaymentsTitle":
         return t("Common:PaymentsTitle");
       case "ManagementCategoryDataManagement":
@@ -220,8 +229,8 @@ const ArticleBodyContent = (props) => {
         return t("Ldap:LdapSettings");
       case "LdapSyncTitle":
         return t("Ldap:LdapSyncTitle");
-      case "RestoreBackup":
-        return t("RestoreBackup");
+      case "Common:RestoreBackup":
+        return t("Common:RestoreBackup");
       case "PortalDeletion":
         return t("PortalDeletion", { productName: t("Common:ProductName") });
       case "Common:DeveloperTools":
@@ -236,6 +245,8 @@ const ArticleBodyContent = (props) => {
         return t("StorageManagement");
       case "Services":
         return t("Services");
+      case "AISettings":
+        return t("Settings:AISettings");
       default:
         throw new Error("Unexpected translation key");
     }
@@ -258,14 +269,15 @@ const ArticleBodyContent = (props) => {
 
     if (standalone) {
       const deletionTKey = isCommunity
-        ? "Common:PaymentsTitle"
-        : "Common:Bonus";
+        ? ["Common:PaymentsTitle", "Services"]
+        : ["Common:Bonus", "Services"];
 
-      const index = resultTree.findIndex((el) => el.tKey === deletionTKey);
-
-      if (index !== -1) {
-        resultTree.splice(index, 1);
-      }
+      deletionTKey.forEach((key) => {
+        const index = resultTree.findIndex((el) => el.tKey === key);
+        if (index !== -1) {
+          resultTree.splice(index, 1);
+        }
+      });
     } else {
       const index = resultTree.findIndex((n) => n.tKey === "Common:Bonus");
       if (index !== -1) {
@@ -296,9 +308,7 @@ const ArticleBodyContent = (props) => {
       const title = mapKeys(item.tKey);
       const linkData = getLinkData(item.key);
 
-      const style = isLastIndex
-        ? { margin: `${item.key.includes(9) ? "16px 0px" : "0"}` }
-        : { marginTop: `${item.key.includes(9) ? "16px" : "0"}` };
+      const style = { marginTop: `${item.key.includes(9) ? "16px" : "0"}` };
 
       items.push(
         <ArticleItem
@@ -315,6 +325,8 @@ const ArticleBodyContent = (props) => {
           folderId={item.id}
           style={style}
           $currentColorScheme={currentColorScheme}
+          withAnimation={!isMobileView}
+          isEndOfBlock={isLastIndex}
         />,
       );
     });
@@ -343,7 +355,7 @@ export default inject(
 
     const { isNotPaidPeriod, isCommunity } = currentTariffStatusStore;
     const { user } = userStore;
-    const { isOwner } = user;
+    const { isOwner } = user || {};
     const {
       standalone,
       showText,

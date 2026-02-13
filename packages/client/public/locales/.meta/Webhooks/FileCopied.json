@@ -3,7 +3,7 @@
   "content": "File copied",
   "content_en_sha1_hash": "4a6bc2861eef671be7f536859194a8d6b3428164",
   "created_at": "2025-05-19T21:30:49.720Z",
-  "updated_at": "2025-05-21T01:12:55.644Z",
+  "updated_at": "2025-05-24T02:26:51.674Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -38,13 +38,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Zkopírovaný soubor\" is technically correct, it's a rather literal and less natural translation of \"File copied\" in this context. A more idiomatic translation would better suit a UI element indicating a file copy action.",
-          "suggestion": "Soubor zkopírován"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -104,7 +98,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ເຟັ້ນຖືກສຳເນົາແລ້ວ\" doesn't accurately convey the meaning of \"File copied.\" \"ເຟັ້ນ\" refers to a strainer or filter, which is not related to file copying. \"ສຳເນົາ\" means copy, but the initial part is incorrect.",
+          "suggestion": "A more accurate translation would be something like \"ເອກະສານຖືກສຳເນົາແລ້ວ\" (Dokkar thuk samnea laew) which means \"The document has been copied\" or \"ເອກະສານຖືກຖ່າຍອອກແລ້ວ\" (Dokkar thuk thai ok laew) which means \"The document has been transferred.\" Alternatively, \"ໄຟຖືກແບ່ງປັນແລ້ວ\" (Fai thuk baeng pin laew) could be used, loosely translating as “File shared”."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -155,8 +155,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"ප්‍රතිලේඛනය කරන ලදී\" translates to \"recorded\" or \"duplicated\", not \"copied\".  'ප්‍රතිලේඛනය' relates to creating a record or copy, but lacks the direct meaning of 'copied'.",
-          "suggestion": "A more accurate translation for \"File copied\" would be \"ගොනුව පිටපත් කරන ලදී\" (gonuwa pitakaraṇa la dī) or \"ගොනුව ඇත්තටම පිටපත් විය“. (gonuwa attakata pita viya)"
+          "description": "The Sinhala translation 'ප්‍රතිලේඛනය කරන ලදී' (pratileyakanaya karan ladi) translates to 'recorded' or 'duplicated' rather than 'copied'. The correct meaning of 'File copied' refers to the action of creating a duplicate of a file.",
+          "suggestion": "A more accurate translation would be something along the lines of 'ឯකតា කරන ලදී' (ekata karan ladi) which means 'copied'."
         }
       ],
       "approved_at": null
@@ -167,7 +167,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovak translation 'Súbor skopírovaný' is a literal translation and sounds unnatural. A more natural and common way to express 'File copied' in Slovak would be 'Skopírovaný súbor' or simply 'Skopírované'.",
+          "description": "The Slovak translation 'Súbor skopírovaný' is a literal translation and sounds unnatural. A more natural and idiomatic translation for 'File copied' would be 'Skopírovaný súbor' or 'Prehľadávač súboru'.",
           "suggestion": "Skopírovaný súbor"
         }
       ],
@@ -182,13 +182,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The Serbian (Cyrillic) translation 'Фајл копиран' is missing the definite article. While omission is sometimes acceptable, 'File copied' usually implies a specific file.",
-          "suggestion": "Фајл је копиран"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

@@ -3,7 +3,7 @@
   "content": "Scopes are used to limit your app's access to all user-related data, and they'll let you specify exactly what kind of access you need.",
   "content_en_sha1_hash": "626ffa4197cd8a9b599084855d2df9504318e839",
   "created_at": "2025-05-19T21:30:54.034Z",
-  "updated_at": "2025-05-21T06:53:18.390Z",
+  "updated_at": "2025-08-04T07:30:01.432Z",
   "comment": {
     "text": "ScopesHelp is used to describe what scopes are and how they limit app access. It appears as a tooltip or help text next to a field where users select scopes, such as in forms related to OAuth settings.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/ScopesBlock.tsx",
-      "line_number": 237,
+      "line_number": 239,
       "context": "return (\n <StyledScopesContainer isRequiredError={isRequiredError}>\n <BlockHeader\n className=\"header\"\n header={t(\"ScopesHeader\")}\n helpButtonText={t(\"ScopesHelp\")}\n isRequired\n />\n \n <Text\n className=\"header\"",
       "module": "/packages/client"
     }
@@ -36,13 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"Scopes\" as \"Əhatə dairələri\" is not the most natural or common rendering in Azerbaijani. While technically correct, 'İstifadəçi sahələri' or 'İstifadəçi xüquqları' might be better alternatives depending on the context. 'Əhatə dairələri' sounds slightly awkward.",
-          "suggestion": "Consider 'İstifadəçi sahələri' or 'İstifadəçi xüquqları' for a more idiomatic translation of 'Scopes'."
+          "description": "The term \"Əhatə dairələri\" for \"Scopes\" is technically correct, but might be less common or slightly awkward for a technical audience. A more common and precise term would be \"İstifadəçi izinləri\" or simply \"İzinlər\".",
+          "suggestion": "Consider replacing \"Əhatə dairələri\" with \"İstifadəçi izinləri\" or \"İzinlər\"."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'giriş növünü' translates 'kind of access' too literally.  It could be more naturally expressed as 'təqdim olunan imkanları' or 'xidmətlərə çıxışı'.",
-          "suggestion": "Change 'giriş növünü' to 'təqdim olunan imkanları' or 'xidmətlərə çıxışı' to improve readability and natural flow."
+          "description": "The phrase \"giriş növünü\" is a literal translation of \"kind of access\". A more natural phrasing in Azerbaijani would be \"xidmətə giriş imkanını\".",
+          "suggestion": "Replace \"giriş növünü\" with \"xidmətə giriş imkanını\"."
         }
       ],
       "approved_at": null
@@ -59,8 +59,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'Rozsahy' (Ranges) doesn't accurately convey the meaning of 'Scopes' in the context of OAuth. 'Scopes' refers to permissions.",
-          "suggestion": "Povolení (Permissions) slouží k omezení přístupu aplikace ke všem datům souvisejícím s uživatelem a umožňují přesně určit, jaký druh přístupu potřebujete."
+          "description": "The word 'Rozsahy' (Ranges) doesn't accurately convey the meaning of 'Scopes' in the context of OAuth. 'Scopes' refers to specific permissions.",
+          "suggestion": "Přístupová práva (Access Rights) or Rozsahy oprávnění (Scope Permissions)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'umožňují přesně určit, jaký druh přístupu potřebujete' could be more accurately translated to reflect the developer's role in defining the scope, not the user's need.",
+          "suggestion": "umožňují vám definovat, jaký druh přístupu vaše aplikace potřebuje."
         }
       ],
       "approved_at": null
@@ -68,7 +73,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'Bereiche' is a literal translation of 'Scopes' and while technically correct, it's not the most natural or commonly used term in this context in German. 'Scopes' often refers to 'Umfang' or 'Zugriffsbereiche' when discussing access permissions.",
+          "suggestion": "Consider using 'Umfang' or 'Zugriffsbereiche' instead of 'Bereiche'. For example: 'Umfänge werden verwendet...' or 'Zugriffsbereiche werden verwendet...'"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -77,8 +88,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"Scopes\" is translated as \"πεδία εφαρμογής\" which literally translates to \"application fields\". This is not an accurate translation of the technical term \"scopes\" in OAuth context. A better translation would be something along the lines of \"πεδία εξουσιοδότησης\" (authorization scopes) or \"περιοχές εξουσιοδότησης\" (authorization areas).",
-          "suggestion": "Consider translating 'Scopes' as 'πεδία εξουσιοδότησης' or 'περιοχές εξουσιοδότησης'."
+          "description": "The term 'Scopes' is translated as 'πεδία εφαρμογής'. While not entirely wrong, it's not the most natural or commonly used translation for 'Scopes' in a technical context. 'Εμβέλεια' or 'πεδίο εφαρμογής' might be better alternatives, depending on the precise intended meaning and target audience.",
+          "suggestion": "Consider translating 'Scopes' as 'Εμβέλεια' or 'πεδίο εφαρμογής' for better clarity and naturalness."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'let you specify' is translated as 'θα σας επιτρέψουν να καθορίσετε'. While grammatically correct, it's a bit verbose. A more concise translation might improve readability.",
+          "suggestion": "Consider translating 'θα σας επιτρέψουν να καθορίσετε' as 'σας επιτρέπει να καθορίσετε' or 'σας δίνει τη δυνατότητα να καθορίσετε'."
         }
       ],
       "approved_at": null
@@ -86,13 +102,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'ambitos' while technically correct for 'scopes' in a technical context, can be perceived as less common and potentially confusing for a broader audience. 'Permisos' or 'alcances' might be better alternatives depending on the overall tone and target audience.",
-          "suggestion": "Consider using 'Permisos' or 'Alcances' instead of 'Ambitos'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -104,13 +114,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Scopes' is translated as 'champs d'application'. While technically correct, it's a very literal and somewhat awkward translation in this context. 'Portées' would be a more common and natural translation for 'Scopes' in the context of OAuth.",
-          "suggestion": "Les portées sont utilisées pour limiter l'accès de votre application à toutes les données relatives à l'utilisateur, et elles vous permettent de spécifier exactement le type d'accès dont vous avez besoin."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -119,13 +123,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'Scopes' is not explicitly translated. While understandable in context, a more accurate translation might include a term for 'Scopes' itself, to increase clarity.",
-          "suggestion": "Consider adding a term for 'Scopes' in the translation, perhaps using a transliteration or a more descriptive phrase like 'Առաջարկվող լուռություններ (Scopes)'."
+          "description": "The term 'Scopes' is translated as 'Շրջանակներն' which can mean 'frames' or 'circles' rather than 'permissions' or 'ranges' which is more appropriate in the context of OAuth scopes. A more accurate translation would be something like 'Առնչությունների շրջանակներ' or 'Առնչություններ' focusing on the access permissions.",
+          "suggestion": "Consider translating 'Scopes' as 'Առնչությունների շրջանակներ' or 'Առնչություններ'."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'what kind of access you need' could be more naturally phrased in Armenian. The current translation feels a bit literal and clunky.",
-          "suggestion": "Instead of 'ինչ տեսակի մուտք է ձեզ անհրաժեշտ,' consider something like 'ինչ տեսակի իրավունքներ ձեզ անհրաժեշտ են' (what kind of permissions you need)."
+          "description": "The phrase 'let you specify' is translated as 'թույլ կտան ձեզ հստակեցնել'. While technically correct, 'հստակեցնել' (to clarify) doesn't fully capture the sense of 'specify' or 'define' access requirements. A better option would be something like 'անվճարկել' (to determine) or 'կարգավորել' (to regulate).",
+          "suggestion": "Consider translating 'let you specify' as 'անվճարկել ձեզ' or 'կարգավորել ձեզ'."
         }
       ],
       "approved_at": null
@@ -142,13 +146,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"let you specify exactly what kind of access you need\" is translated as \"必要なアクセスを正確に指定することができます\". While technically correct, it's a bit formal and indirect for typical user-facing text. A more natural phrasing would be more conversational.",
-          "suggestion": "必要なアクセスを細かく指定できます (Hitsuyou na akusesu o komane-ku shite dekimasu)."
+          "description": "The phrase \"let you specify exactly what kind of access you need\" is not accurately conveyed by \"必要なアクセスを正確に指定することができます\". A more natural and accurate translation would emphasize the user's ability to define the scope.",
+          "suggestion": "必要なアクセスをユーザー自身が正確に定義することができます。"
         },
         {
-          "type": "formatting",
-          "description": "The translation uses a rather complex sentence structure which might be difficult to parse for some users. Breaking it up into two shorter sentences could improve readability.",
-          "suggestion": "スコープは、アプリがすべてのユーザー関連データにアクセスするのを制限するために使用されます。必要なアクセスを正確に指定することができます。"
+          "type": "grammatical",
+          "description": "The sentence structure feels slightly awkward. While grammatically correct, it could be more fluid in Japanese.",
+          "suggestion": "スコープは、アプリがユーザー関連データへのアクセスを制限し、ユーザーが必要なアクセスを正確に指定できるようにするために使用されます。"
         }
       ],
       "approved_at": null
@@ -159,13 +163,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '액세스하는 것을 제한하는 데 사용되며' is overly literal and slightly awkward. It directly translates 'used to limit...access' but doesn't flow naturally in Korean. A more natural phrasing would focus on the purpose of scopes.",
-          "suggestion": "필요한 데이터에 대한 앱의 접근 권한을 제한하는 데 사용되며"
+          "description": "The phrase 'access하는 것을 제한하는 데 사용되며' is not the most natural Korean phrasing. It literally translates to 'used to limit access doing'. A more natural phrasing would convey the action of limiting access more directly.",
+          "suggestion": "범위는 모든 사용자 관련 데이터에 대한 앱의 액세스를 제한하는 데 사용되며"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase '액세스 유형' is technically correct but could be more specific and user-friendly. '접근 권한 종류' or '사용 권한 범위' would be better.",
-          "suggestion": "필요한 접근 권한의 종류를 지정할 수 있도록 합니다."
+          "description": "The word '유형' (type) is a bit awkward in this context. It implies a categorization of access rather than the specific access being requested.",
+          "suggestion": "필요한 액세스 종류를 지정할 수 있도록 합니다."
         }
       ],
       "approved_at": null
@@ -176,13 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'limit your app's access' is translated as 'ຈໍາກັດການເຂົ້າເຖິງຂໍ້ມູນ...ຂອງແອັບຯຂອງທ່ານ'. While technically correct, it could be more naturally translated to something like 'ຈໍາກັດສິດໃນການເຂົ້າເຖິງຂໍ້ມູນຂອງແອັບຯຂອງທ່ານ' (limit the right to access data of your app).",
-          "suggestion": "ຈໍາກັດສິດໃນການເຂົ້າເຖິງຂໍ້ມູນຂອງແອັບຯຂອງທ່ານ"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'they'll let you specify' is translated as 'ພວກມັນຈະຊ່ວຍໃຫ້ທ່ານສາມາດລະບຸ'. A more natural phrasing would be 'ມັນຈະຊ່ວຍໃຫ້ທ່ານສາມາດລະບຸໄດ້' or 'ມັນຈະເຮັດໃຫ້ທ່ານສາມາດລະບຸໄດ້'.",
-          "suggestion": "ມັນຈະຊ່ວຍໃຫ້ທ່ານສາມາດລະບຸໄດ້"
+          "description": "The phrase \"ພວກມັນຈະຊ່ວຍໃຫ້ທ່ານສາມາດລະບຸຢ່າງຖືກຕ້ອງວ່າທ່ານຕ້ອງການການເຂົ້າເຖິງປະເພດໃດ\" is a bit clunky and doesn't quite capture the fluidity of the English \"they'll let you specify exactly what kind of access you need.\" A more natural phrasing would be preferable.",
+          "suggestion": "ພວກມັນຈະຊ່ວຍໃຫ້ທ່ານສາມາດກຳນົດຢ່າງຈະແຈ້ງວ່າທ່ານຕ້ອງການສິດໃນການເຂົ້າເຖິງຂໍ້ມູນປະເພດໃດ."
         }
       ],
       "approved_at": null
@@ -190,7 +189,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"exactly what kind of access you need\" is somewhat awkward in Latvian. While the translation is technically correct, it's not the most natural way to express the idea. \"precīzi norādīt, kāda veida piekļuve jums ir nepieciešama\" is a bit verbose.",
+          "suggestion": "Consider rephrasing to something like \"ļaus norādīt nepieciešamo piekļuves veidu\" or \"ļaus precīzi definēt nepieciešamo piekļuvi\"."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -202,7 +207,18 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Scopes' is translated as 'Zakresy'. While technically correct, 'Zakresy' can sometimes imply a range or extent rather than the specific permissions conveyed by 'Scopes' in this context. A more precise translation might be 'Uprawnienia' (Permissions).",
+          "suggestion": "Uprawnienia"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'limit your app's access' is translated as 'ograniczania dostępu Twojej aplikacji'. It's grammatically correct, but it could be slightly improved for clarity and flow. ",
+          "suggestion": "ograniczenia dostępu Twojej aplikacji"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -211,8 +227,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"let you specify\" is a bit awkward in Portuguese. A more natural phrasing would be \"permitem que você defina\" or \"permitem que você determine\".",
-          "suggestion": "permitem que você defina exatamente que tipo de acesso você precisa."
+          "description": "The phrase 'user-related data' is translated as 'dados relacionados ao utilizador'. While technically correct, a more natural and commonly used translation in Portuguese would be 'dados do utilizador' or 'informações do utilizador'.",
+          "suggestion": "dados do utilizador"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'they'll let you' is translated as 'permitem que você'. A more fluent phrasing would be 'permitirão que você' or a simpler 'você pode'.",
+          "suggestion": "você pode"
         }
       ],
       "approved_at": null
@@ -229,13 +250,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'Domenii de aplicare' is a literal translation of 'Scopes' but doesn't convey the correct meaning in this context. 'Scopes' refers to permissions, not application domains.",
-          "suggestion": "Consider using a term like 'Permisiuni' or 'Autorizații' which are more commonly used to describe OAuth scopes in Romanian."
+          "description": "'Scopes' is translated as 'Domenii de aplicare'. While technically correct, it's a bit formal and less idiomatic for this context. 'Scopes' often refers to a specific set of permissions, and a more natural translation might be 'permisiuni' or 'domenii de acces'.",
+          "suggestion": "Consider translating 'Scopes' as 'permisiuni' or 'domenii de acces'."
         },
         {
-          "type": "grammar",
-          "description": "The phrase 'datele asociate utilizatorilor' could be slightly improved for flow.",
-          "suggestion": "Consider 'datele utilizatorilor' or 'datele referitoare la utilizatori'."
+          "type": "incorrect_translation",
+          "description": "The phrase 'datele asociate utilizatorilor' is a bit verbose. While grammatically correct, it could be simplified.",
+          "suggestion": "Consider 'datele utilizatorilor' for a more concise phrasing."
         }
       ],
       "approved_at": null
@@ -246,8 +267,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"Scopes\" is translated as \"Области действия\". While technically correct, \"Области действия\" sounds overly formal and technical in this context. A more natural and understandable translation would be something like \"Права доступа\" or \"Разрешения\".",
-          "suggestion": "Consider translating 'Scopes' as 'Права доступа' or 'Разрешения'."
+          "description": "The word 'Scopes' is translated as 'Области действия'. While technically correct, 'Области действия' is a less common and slightly awkward translation for 'Scopes' in this context. A more natural and understandable translation would be something like 'Права доступа' or 'Диапазоны доступа'.",
+          "suggestion": "Consider using 'Права доступа' or 'Диапазоны доступа' instead of 'Области действия'."
         }
       ],
       "approved_at": null
@@ -258,13 +279,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'scopes' is not accurately translated. 'අපේක්ෂාවන්' translates to 'expectations' or 'requirements,' which doesn't convey the meaning of 'scopes' in the OAuth context. A better translation would focus on the concept of permissions or access ranges.",
-          "suggestion": "Consider using a translation like 'අවසරයන්' (avamarayan - permissions) or 'ප්‍රවේශ ප්‍රදේශ' (praveśa pradēśa - access ranges) to better reflect the meaning of 'scopes'."
+          "description": "The translation of 'Scopes' is not directly translated. 'Scopes' refers to the authorization scopes in OAuth. It would be beneficial to find a more direct translation or explanation, if a direct translation isn't feasible.",
+          "suggestion": "Consider using a term like 'අවසර ප්‍රදේශ' (awasaya pradēsha) or providing a brief explanation within the translated text if a direct translation is unavailable."
         },
         {
           "type": "grammatical",
-          "description": "The sentence structure is a bit awkward.  'අපේක්ෂාවන් යෙදුමක පරිශීලකයන්ගේ සියලු දත්ත වෙත ප්‍රවේශය සීමා කිරීමට භාවිතා කරනු ලැබේ' is literally 'Expectations are used to limit access to all user data in an application.' While understandable, it could be improved for smoother reading.",
-          "suggestion": "Rephrase to something like: 'අවසරයන් යෙදුමකට පරිශීලකයන්ගේ සියලු දත්ත වෙත ප්‍රවේශය සීමා කිරීමට අවශ්‍ය වේ.' (avamarayan yēdumata parišīlakanaga siyallu dathata praveśa simā karamin awasya vae - Permissions are necessary to limit access to all user data in an application.)"
+          "description": "The sentence structure could be improved for better flow. 'අපේක්ෂාවන් යෙදුමක පරිශීලකයන්ගේ සියලු දත්ත වෙත ප්‍රවේශය සීමා කිරීමට භාවිතා කරනු ලැබේ' is a bit convoluted.",
+          "suggestion": "Consider restructuring to: 'අවසර ප්‍රදේශ යෙදුමක පරිශීලකයන්ගේ සියලු දත්ත වෙත ප්‍රවේශය සීමා කිරීමට භාවිතා වෙයි, ඒ අනුව ඔබට අවශ්‍ය ප්‍රවේශයේ වර්ගය හරියටම සඳහාවි.' or a similar rephrasing that is more natural in Sinhala."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'let' in the English content is not adequately translated. 'let you specify exactly what kind of access you need' implies a capability or permission. The Sinhala 'සඳහාවි' only means 'to mention'.",
+          "suggestion": "Consider using a verb that better captures the meaning of 'let,' such as 'ඔබට හැකිවනු ඇත' (obata akāvenu athā) – ‘will allow you’ or similar wording to convey the ability to specify."
         }
       ],
       "approved_at": null
@@ -272,13 +298,30 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Rozsahy' is an unusual and potentially inaccurate translation of 'Scopes' in this context. 'Scopes' refers to permissions, and a more accurate translation would be 'opravnenia' or 'rozsahy oprávnení'. While 'rozsahy' isn't strictly wrong, it lacks the precision needed for technical documentation.",
+          "suggestion": "Consider using 'opravnenia' or 'rozsahy oprávnení' to more accurately convey the meaning of 'Scopes'."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Scopes' is not directly translated. While 'Obseg' is a possible translation for 'Scope' in a general sense, it might not be the most natural or understandable term in this context for Slovenian users familiar with OAuth. It's a technical term and a more descriptive or explanatory translation might be better.",
+          "suggestion": "Consider using a phrase like 'Dostopna območja' or 'Pooblastila' as a possible alternative to 'Obseg' to better convey the meaning of 'Scopes' in the context of OAuth."
+        },
+        {
+          "type": "grammatical",
+          "description": "The phrasing 'in vam bo omogočil, da natančno določite' could be slightly more fluent. It's grammatically correct, but sounds a bit clunky in Slovenian.",
+          "suggestion": "Consider rephrasing to 'in vam omogoča natančno določitev' or 'in vas opolnomoči za natančno določitev'."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -287,13 +330,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'опсези' is incorrect. The correct word should be 'опсези' (plural of 'опис').",
-          "suggestion": "Описи се користе"
+          "description": "The word 'Опсези' is a misspelling of 'Опсези'.",
+          "suggestion": "Опсези"
         },
         {
           "type": "grammar",
-          "description": "The phrase 'који се односе на кориснике' is grammatically awkward. It could be phrased more naturally.",
-          "suggestion": "који се односе на кориснике"
+          "description": "The sentence 'Опсези се користе...' could be improved for flow. While grammatically correct, it's a little clunky. A more natural phrasing might be 'Опсези се користе...' followed by 'за...'",
+          "suggestion": "Опсези се користе за ограничавање..."
         }
       ],
       "approved_at": null
@@ -305,11 +348,6 @@
         {
           "type": "spelling",
           "description": "The word 'Opsezi' is a misspelling of 'Opcije'.",
-          "suggestion": "Opcije"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'Opcije' is a more common and natural translation for 'Scopes' in this context than 'Opsezi'. 'Scopes' refers to allowed permissions, and 'Opcije' (options) fits better.",
           "suggestion": "Opcije"
         }
       ],
@@ -327,13 +365,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'Scopes' is translated as 'Ділянки', which means 'plots' or 'sections.' This isn't the correct meaning of 'Scopes' in the context of OAuth. 'Scopes' refers to the permissions an application requests.",
-          "suggestion": "A more appropriate translation for 'Scopes' would be 'Області доступу' or 'Права доступу', which directly convey the concept of access permissions."
+          "description": "The word 'Scopes' is translated as 'Ділянки', which means 'plots' or 'areas'. This doesn't accurately convey the meaning of 'Scopes' in the context of OAuth. 'Scopes' refers to permissions.",
+          "suggestion": "Розширені права доступу (Rozshireni prava dostupu) or Права доступу (Pravy dostupu) would be more accurate translations of 'Scopes'."
         },
         {
-          "type": "grammar",
-          "description": "The sentence 'Вони дозволяють вказати, який саме доступ потрібен' sounds slightly awkward in Ukrainian. The word 'саме' is not essential and makes the sentence more clunky.",
-          "suggestion": "Consider removing 'саме' for a more natural flow: 'Вони дозволяють вказати, який доступ потрібен.'"
+          "type": "grammatical",
+          "description": "While grammatically correct, the sentence 'Вони дозволяють вказати, який саме доступ потрібен' is a bit clunky. It could be more elegantly phrased.",
+          "suggestion": "Вони дозволяють визначити, який саме доступ вам потрібен (They allow you to specify the access you need)."
         }
       ],
       "approved_at": null
@@ -344,8 +382,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'let you specify' is a bit clunky in Vietnamese. A more natural phrasing would convey the same meaning.",
-          "suggestion": "Phạm vi được sử dụng để giới hạn quyền truy cập của ứng dụng vào tất cả dữ liệu liên quan đến người dùng, và cho phép bạn xác định chính xác loại quyền truy cập cần thiết."
+          "description": "The translation of \"Scopes\" as \"Phạm vi\" is technically correct but might be slightly awkward for a general user. \"Phạm vi\" is more commonly used in a technical context. A more user-friendly translation could be something like \"Quyền truy cập\" or \"Phạm vi truy cập\".",
+          "suggestion": "Consider using \"Quyền truy cập\" or \"Phạm vi truy cập\" instead of \"Phạm vi\"."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'chúng sẽ cho phép bạn' is a bit verbose.  A more concise and natural phrasing would improve readability.",
+          "suggestion": "Consider replacing 'chúng sẽ cho phép bạn' with 'sẽ cho phép bạn' or 'giúp bạn'."
         }
       ],
       "approved_at": null

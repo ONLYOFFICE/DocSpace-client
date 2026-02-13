@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -52,7 +52,7 @@ export type FileInputProps = {
   /** Used as HTML `name` property */
   name?: string;
   /** Called when a file is selected */
-  onInput: (file: File | File[]) => void;
+  onInput?: (file: File | File[]) => void;
   /** Specifies the files visible for upload */
   accept?: string[];
   /** Specifies the label for the upload button */

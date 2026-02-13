@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -139,6 +139,22 @@ const getPosition = (
   type: GuidanceElementType,
   isRTL: boolean = false,
 ): ClippedPosition => {
+  if (
+    offset?.left !== undefined &&
+    offset?.top !== undefined &&
+    offset?.width !== undefined &&
+    offset?.height !== undefined
+  ) {
+    return {
+      left: rects.left + offset.left,
+      top: rects.top + offset.top,
+      width: rects.width + offset.width,
+      height: rects.height + offset.height,
+      bottom: rects.bottom + offset.height,
+      right: rects.right + offset.width,
+    };
+  }
+
   const dimensions =
     viewAs === "tile" || type === GuidanceElementType.Content
       ? getViewTypeBasedDimensions(rects, viewAs, offset)

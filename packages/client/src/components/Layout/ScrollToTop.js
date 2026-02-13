@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -41,9 +41,9 @@ const ScrollToTop = ({ currentDeviceType }) => {
   }, [pathname, currentDeviceType]);
 
   useEffect(() => {
-    !state?.disableScrollToTop &&
-      scrollRef.current &&
-      scrollRef.current.scrollTo(0, 0);
+    if (!state?.disableScrollToTop && scrollRef.current) {
+      // scrollRef.current.scrollTo(0, 0); // TODO: Bug 75845 - Rooms. The scroll in the room list is reset before entering a room. | Firefox
+    }
   }, [pathname]);
 
   return null;

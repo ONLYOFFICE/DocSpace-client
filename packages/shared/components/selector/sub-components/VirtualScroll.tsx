@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,21 +24,49 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { forwardRef, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
 import { CustomScrollbarsVirtualList } from "../../scrollbar";
 import { ASIDE_PADDING_AFTER_LAST_ITEM } from "../../../constants";
 
-export const VirtualScroll = forwardRef((props, ref) => {
+export const VirtualScroll = ({
+  ref,
+  ...props
+}: {
+  ref?: React.RefObject<unknown>;
+}) => {
   const scrollContentRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const isSearchInputFocused =
-      document.activeElement?.classList.contains("search-input-block");
+    const isSearchInputFocused = document.activeElement?.closest(
+      ".search-input-block",
+    );
 
     if (!isSearchInputFocused) {
       scrollContentRef.current?.focus();
     }
+  }, []);
+
+  useEffect(() => {
+    const onTabClick = (e: KeyboardEvent) => {
+      if (e.key !== "Tab") return;
+
+      e.preventDefault();
+
+      const searchInput = document.querySelector(
+        ".selector-search-input input",
+      ) as HTMLInputElement;
+
+      if (searchInput) {
+        searchInput.focus();
+      }
+    };
+
+    scrollContentRef.current?.addEventListener("keydown", onTabClick);
+
+    return () => {
+      scrollContentRef.current?.removeEventListener("keydown", onTabClick);
+    };
   }, []);
 
   return (
@@ -50,6 +78,6 @@ export const VirtualScroll = forwardRef((props, ref) => {
       contentRef={scrollContentRef}
     />
   );
-});
+};
 
 VirtualScroll.displayName = "VirtualScroll";

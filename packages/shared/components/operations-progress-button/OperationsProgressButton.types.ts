@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 export interface Operation {
+  id?: string;
   operation: string;
   label: string;
   alert: boolean;
@@ -33,12 +34,14 @@ export interface Operation {
   withoutStatus?: boolean;
   showPanel?: (open: boolean) => void;
   withoutProgress?: boolean;
+  iconUrl?: string;
   items?: Array<{
     operationId: string;
     percent: number;
   }>;
   errorCount?: number;
-}
+  dragged?: string | null;
+  }
 
 export interface OperationsProgressProps {
   panelOperations?: Operation[];
@@ -48,8 +51,10 @@ export interface OperationsProgressProps {
   clearOperationsData?: (
     operationId?: string | null,
     operation?: string | null,
+    operationItem?: Operation,
   ) => void;
   clearPanelOperationsData?: (operation?: string | null) => void;
+  clearDropPreviewLocation?: () => void;
   cancelUpload?: (t: (key: string) => string) => void;
   onOpenPanel?: () => void;
   mainButtonVisible?: boolean;
@@ -58,6 +63,8 @@ export interface OperationsProgressProps {
   onCancelOperation?: (callback: () => void) => void;
   percent?: number;
   isInfoPanelVisible?: boolean;
+  dropTargetFolderName?: string | null;
+  isDragging?: boolean;
 }
 export interface ProgressBarMobileProps {
   /** Display text for the progress bar */

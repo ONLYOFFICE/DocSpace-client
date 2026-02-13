@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,32 +24,32 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import { Row } from "@docspace/shared/components/rows";
 import { Text } from "@docspace/shared/components/text";
+import styles from "./HotkeysPanel.module.scss";
 
 const MoveBlock = ({ t, textStyles, keyTextStyles, CtrlKey }) => {
   return (
     <>
-      <Row className="hotkeys_row">
+      <Row className={styles.hotkeysRow}>
         <>
           <Text {...textStyles}>{t("HotkeysMoveDown")}</Text>
           <Text {...keyTextStyles}>{CtrlKey} + ↓</Text>
         </>
       </Row>
-      <Row className="hotkeys_row">
+      <Row className={styles.hotkeysRow}>
         <>
           <Text {...textStyles}>{t("HotkeysMoveUp")}</Text>
           <Text {...keyTextStyles}>{CtrlKey} + ↑</Text>
         </>
       </Row>
-      <Row className="hotkeys_row">
+      <Row className={styles.hotkeysRow}>
         <>
           <Text {...textStyles}>{t("HotkeysMoveLeft")}</Text>
           <Text {...keyTextStyles}>{CtrlKey} + ←</Text>
         </>
       </Row>
-      <Row className="hotkeys_row">
+      <Row className={styles.hotkeysRow}>
         <>
           <Text {...textStyles}>{t("HotkeysMoveRight")}</Text>
           <Text {...keyTextStyles}>{CtrlKey} + →</Text>

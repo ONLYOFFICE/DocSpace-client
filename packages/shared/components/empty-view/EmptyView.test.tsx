@@ -1,12 +1,13 @@
 import React from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { BrowserRouter } from "react-router";
-import "@testing-library/jest-dom";
 
 import EmptyFilterRoomsLightIcon from "PUBLIC_DIR/images/emptyFilter/empty.filter.rooms.light.svg";
 import ClearEmptyFilterSvg from "PUBLIC_DIR/images/clear.empty.filter.svg";
 import { EmptyView } from ".";
 import { EmptyViewProps } from "./EmptyView.types";
+import styles from "./EmptyView.module.scss";
 
 const mockProps: EmptyViewProps = {
   icon: <EmptyFilterRoomsLightIcon />,
@@ -23,7 +24,7 @@ const mockOptionsProps = {
       icon: <ClearEmptyFilterSvg />,
       to: "/test",
       description: "Test Action",
-      onClick: jest.fn(),
+      onClick: vi.fn(),
     },
   ],
 };
@@ -37,7 +38,7 @@ describe("EmptyView", () => {
     );
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders without options", () => {
@@ -74,33 +75,33 @@ describe("EmptyView", () => {
     const title = screen.getByText("Test Title");
     const description = screen.getByText("Test Description");
 
-    expect(wrapper).toHaveClass("wrapper");
-    expect(title).toHaveClass("headerTitle");
-    expect(description).toHaveClass("subheading");
+    expect(wrapper).toHaveClass(styles.wrapper);
+    expect(title).toHaveClass(styles.headerTitle);
+    expect(description).toHaveClass(styles.subheading);
   });
 
   it("renders icon when provided", () => {
-    renderComponent(mockProps);
+    const { container } = renderComponent(mockProps);
 
-    const icon = screen.getByText("", { selector: "test-file-stub" });
-    expect(icon).toBeInTheDocument();
+    // Check that an SVG element exists in the header
+    const header = container.querySelector(`.${styles.header}`);
+    const svg = header?.querySelector("svg");
+    expect(svg).toBeInTheDocument();
   });
 
   it("renders options in body section when provided", () => {
     renderComponent(mockOptionsProps);
 
-    const wrapper = screen.getByTestId("empty-view");
-    const body = wrapper?.querySelector(".body");
+    const body = screen.getByTestId("empty-view-body");
     expect(body).toBeInTheDocument();
-    expect(body).toHaveClass("body");
+    expect(body).toHaveClass(styles.body);
     expect(body?.children.length).toBe(1);
   });
 
   it("does not render body section when no options provided", () => {
     renderComponent(mockProps);
 
-    const wrapper = screen.getByTestId("empty-view");
-    const body = wrapper?.querySelector(".body");
+    const body = screen.queryByTestId("empty-view-body");
     expect(body).not.toBeInTheDocument();
   });
 });

@@ -3,7 +3,7 @@
   "content": "Certificate name does not match hostname",
   "content_en_sha1_hash": "f83375c96d293cef492f4de1562d1d2ef0250ef4",
   "created_at": "2025-05-19T21:30:54.276Z",
-  "updated_at": "2025-05-21T08:07:18.225Z",
+  "updated_at": "2025-05-24T08:21:05.131Z",
   "comment": {
     "text": "\"This translation key is used to display an error message when a certificate's common name does not match its hostname in the LDAP settings. It appears in a Certificate Dialog, specifically as an option for an error type.\"",
     "is_auto": true,
@@ -57,13 +57,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Το όνομα του πιστοποιητικού δεν ταιριάζει με το όνομα κεντρικού υπολογιστή' while understandable, is a bit literal and could be improved for naturalness. 'Hostname' is often translated as 'όνομα τομέα' (domain name) in this context.",
-          "suggestion": "Το όνομα του πιστοποιητικού δεν ταιριάζει με το όνομα τομέα"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -90,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Վկայագրի անունը չի համընկնում հյուրընկալողի անվան հետ' is a literal translation of 'Certificate name does not match hostname'. While technically correct, it's a bit clunky. A more natural Armenian phrasing might be better for a user interface message. 'Հյուրընկալողի անվան հետ' (with the hostname) can be slightly ambiguous; it could refer to the server itself or just the hostname part. ",
-          "suggestion": "Consider a more user-friendly alternative, such as: 'Վկայագրի անունը չի համապատասխանում դոմենային անվան հետ' (Certificate name does not match domain name) or 'Վկայագրի անունը չի համապատասխանում կայքի դոմենային անվան հետ' (Certificate name does not match website domain name)."
+          "description": "The translation \"Վկայագրի անունը չի համընկնում հյուրընկալողի անվան հետ\" while literally correct, isn't the most natural way to express \"Certificate name does not match hostname\" in Armenian. 'Host' is often translated more directly as 'մալեշին' (maleshin) in technical contexts.",
+          "suggestion": "Վկայագրի անունը չի համընկնում դոմեյնի անվան հետ"
         }
       ],
       "approved_at": null
@@ -119,9 +113,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ຊື່ໃບຢັ້ງຢືນບໍ່ຕົັ້ງກັນກັບຊື່ເຄື່ອງແມ່ຂ່າຍ' is a literal translation but could be more natural. 'ເຄື່ອງແມ່ຂ່າຍ' translates to 'server', but 'hostname' specifically refers to the name assigned to a server. A more accurate and natural phrasing would involve directly mentioning the hostname.",
-          "suggestion": "Consider 'ຊື່ໃບຢັ້ງຢືນບໍ່ຕົັ້ງກັນກັບຊື່ໂດເມນ' (Certificate name does not match domain name) or 'ຊື່ໃບຢັ້ງຢືນບໍ່ຕົັ້ງກັນກັບຊື່ເຄື່ອງແມ່ຂ່າຍທີ່ໃຊ້ງານ' (Certificate name does not match the hostname in use)."
+          "type": "spelling",
+          "description": "The word 'ຕົັ້ງ' in 'ຕົັ້ງກັນ' might be slightly awkward. While technically correct, a more natural phrasing might be preferred.",
+          "suggestion": "Consider using 'ຖືກຕ້ອງ' instead of 'ຕົັ້ງ' in 'ຕົັ້ງກັນ', resulting in 'ຖືກຕ້ອງກັບ'."
         }
       ],
       "approved_at": null
@@ -132,13 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Sertifikāta nosaukums neatbilst resursdatora nosaukumam\" is a literal translation of 'Certificate name does not match hostname'. While technically correct, 'resursdatora' isn't the most common or natural way to refer to a hostname in Latvian. A more natural phrasing would incorporate the concept of a server or domain.",
-          "suggestion": "Sertifikāta nosaukums nesakrīt ar servera nosaukumu"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'nesakrīt' is accurate, a more fluent and commonly used alternative could be considered.",
-          "suggestion": "Sertifikāta nosaukums nav saderīgs ar servera nosaukumu"
+          "description": "The translation 'Sertifikāta nosaukums neatbilst resursdatora nosaukumam' is a literal translation but 'resursdatora' isn't the most natural term in this context. 'resursdators' is more accurately translated as 'server'. A more natural translation would prioritize clarity for the user.",
+          "suggestion": "Sertifikāta nosaukums neatbilst servera nosaukumam"
         }
       ],
       "approved_at": null
@@ -173,8 +162,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Nume de certificat nu se potrivește cu nume de gazdă' is a literal translation but might not be the most natural way to express this in Romanian. A more idiomatic translation would be 'Numele certificatului nu corespunde cu numele domeniului' or 'Certificatul nu are un nume corespunzător domeniului'.",
-          "suggestion": "Certificatul nu are un nume corespunzător domeniului"
+          "description": "The translation 'Nume de certificat nu se potrivește cu nume de gazdă' is a literal translation but lacks the nuance of the original. 'Hostname' is often translated as 'nume de domeniu'.",
+          "suggestion": "Nume certificat nu corespunde cu numele domeniului"
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence is a bit long and could be more concise. Removing 'de certificat' reduces verbosity.",
+          "suggestion": "Certificatul nu corespunde cu numele domeniului"
         }
       ],
       "approved_at": null
@@ -191,8 +185,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'පරිදිපාන නම සත්කාරක නම සමඟ නොගැලපේ' is a literal translation and doesn't convey the natural meaning of 'Certificate name does not match hostname'. A more idiomatic translation would be better. 'Certificate name' is typically referred to as 'සertificate' in technical Sinhala contexts, or a more descriptive term depending on the audience.",
-          "suggestion": "Consider a translation like: 'සertificate එකේ නම සත්කාරකයේ නම සමඟ නොගැලපේ' or 'සertificate නම සත්කාරකයේ නම සමඟ නොගැලපේ'."
+          "description": "The translation 'පරිදිපාන නම සත්කාරක නම සමඟ නොගැලපේ' is a literal translation and doesn't convey the meaning of 'Certificate name does not match hostname' in a natural Sinhala way.  'Certificate name' translates well, but 'hostname' is not accurately represented. A more accurate translation would emphasize the server aspect.",
+          "suggestion": "A better translation would be something like 'සත්‍යාපන පත්‍රයේ නම සgetServer නම සමඟ නොගැළපේ' (Satyāpanapatrāyē nama server nama samāga nagalapē), or 'සත්‍යාපන පත්‍රයේ නම සgetServer ලිපිනය සමඟ නොගැලපේ' (Satyāpanapatrāyē nama server lipiyanā samāga nagalapē)."
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, the Sinhala translation uses full words which can sound formal for a UI element. Consider a slightly more concise alternative if appropriate for the context.",
+          "suggestion": "Evaluate if a shorter, more colloquial phrasing is suitable based on the UI style guide. Consider options if they convey the same meaning more concisely."
         }
       ],
       "approved_at": null
@@ -215,8 +214,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Име сертификата се не поклапа са именом хоста\" is a literal translation that doesn't flow naturally in Serbian. It emphasizes the 'not matching' aspect too much. A more natural phrasing would be more idiomatic.",
-          "suggestion": "Сертификат не одговара именом хоста"
+          "description": "The translation 'Име сертификата се не поклапа са именом хоста' is grammatically correct but the phrasing could be more natural. A better translation would convey the meaning 'The certificate name does not match the hostname' in a more idiomatic Serbian way.",
+          "suggestion": "Име сертификата не одговара називу хоста"
         }
       ],
       "approved_at": null
@@ -227,8 +226,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ime sertifikata se ne poklapa sa imenom hosta' is technically correct, but sounds a bit awkward in Serbian. A more natural phrasing would be 'Naziv sertifikata ne odgovara imenu hosta' or 'Sertifikat ime ne odgovara imenu hosta'.",
-          "suggestion": "Naziv sertifikata ne odgovara imenu hosta"
+          "description": "The translation 'Ime sertifikata se ne poklapa sa imenom hosta' is a literal translation but sounds unnatural in Serbian. A more natural phrasing would be 'Naziv sertifikata ne odgovara nazivu hosta'.",
+          "suggestion": "Naziv sertifikata ne odgovara nazivu hosta"
         }
       ],
       "approved_at": null

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,33 +24,31 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { WithFlag } from "../../types";
 import { TRoom } from "../../api/rooms/types";
 import {
   TSelectorCancelButton,
   TSelectorHeader,
   TSelectorItem,
+  TSelectorWithAside,
 } from "../../components/selector/Selector.types";
 
 import { RoomSearchArea, RoomsType } from "../../enums";
 
-export type TInitValue =
-  | {
-      withInit: true;
-      initItems: TRoom[];
-      initTotal: number;
-      initHasNextPage: boolean;
-      initSearchValue?: string;
-    }
-  | {
-      withInit?: never;
-      initItems?: never;
-      initTotal?: never;
-      initHasNextPage?: never;
-      initSearchValue?: never;
-    };
+export type TInitValue = WithFlag<
+  "withInit",
+  {
+    withInit: true;
+    initItems: TRoom[];
+    initTotal: number;
+    initHasNextPage: boolean;
+    initSearchValue?: string;
+  }
+>;
 
 export type RoomSelectorProps = TSelectorHeader &
-  TSelectorCancelButton & {
+  TSelectorCancelButton &
+  TSelectorWithAside & {
     id?: string;
     className?: string;
     style?: React.CSSProperties;
@@ -63,11 +61,14 @@ export type RoomSelectorProps = TSelectorHeader &
     excludeItems?: (number | string | undefined)[];
     setIsDataReady?: (value: boolean) => void;
     submitButtonLabel?: string;
-    withSearch?: boolean;
 
     disableThirdParty?: boolean;
 
     withPadding?: boolean;
+    withSearch?: boolean;
+    withCreate?: boolean;
+    createDefineRoomLabel?: string;
+    createDefineRoomType?: RoomsType;
 
     emptyScreenHeader?: string;
     emptyScreenDescription?: string;

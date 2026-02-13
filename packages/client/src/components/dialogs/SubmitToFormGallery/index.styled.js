@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,23 +25,41 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
+import { injectDefaultTheme } from "@docspace/shared/utils";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 
-export const FormItem = styled.div`
-  width: 100%;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: row;
-  padding: 8px 16px;
-  align-items: center;
-  justify-content: start;
-  gap: 8px;
-  border-radius: 6px;
-  background: ${(props) => props.theme.infoPanel.history.fileBlockBg};
+export const ModalDialogStyled = styled(ModalDialog).attrs(injectDefaultTheme)`
+  .info {
+    line-height: 20px;
+    padding-bottom: 16px;
+  }
+
+  ${(props) =>
+    !props.isLarge &&
+    `
+        .info:last-child {
+            padding-bottom: 0;
+        }
+        `};
+
+  .item-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border: ${({ theme }) => theme.oformGallery.submitToGalleryTile.border};
+    border-radius: 6px;
+    padding: 4px;
+    width: max-content;
+    user-select: none;
+  }
 
   .icon {
-    margin: 4px;
     width: 24px;
     height: 24px;
+    margin-inline-end: 4px;
     svg {
       width: 24px;
       height: 24px;
@@ -49,10 +67,8 @@ export const FormItem = styled.div`
   }
 
   .item-title {
-    margin: 8px 0;
     font-weight: 600;
-    font-size: 14px;
-    line-height: 16px;
+    font-size: 13px;
     display: flex;
     min-width: 0;
     gap: 0;
@@ -65,7 +81,7 @@ export const FormItem = styled.div`
 
     .exst {
       flex-shrink: 0;
-      color: ${(props) => props.theme.infoPanel.history.fileExstColor};
+      color: ${({ theme }) => theme.oformGallery.submitToGalleryTile.colorExt};
     }
   }
 `;

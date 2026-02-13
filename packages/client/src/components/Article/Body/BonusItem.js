@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,7 +28,7 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { ArticleItem } from "@docspace/shared/components/article-item";
+import { ArticleItem } from "@docspace/shared/components/article-item/ArticleItemWrapper";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { useNavigate } from "react-router";
 import GiftReactSvgUrl from "PUBLIC_DIR/images/gift.react.svg?url";
@@ -64,6 +64,7 @@ const BonusItem = ({ showText, toggleArticleOpen, currentColorScheme }) => {
       onClick={onClick}
       folderId="document_catalog-bonus"
       style={{ marginBottom: "16px" }}
+      linkData={{ path: bonusUrl }}
       $currentColorScheme={currentColorScheme}
     />
   );

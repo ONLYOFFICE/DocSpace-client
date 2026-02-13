@@ -3,7 +3,7 @@
   "content": "Select to {{productName}}",
   "content_en_sha1_hash": "a4087cedfe5229e56d7a33ecd56a49f3bb29e90d",
   "created_at": "2025-05-19T21:30:54.675Z",
-  "updated_at": "2025-05-21T08:37:02.980Z",
+  "updated_at": "2025-08-04T07:30:01.410Z",
   "comment": {
     "text": "This translation key is used for a placeholder text that displays when users select an option in a user interface element, providing a default message to be displayed next to a product name. It appears on a form or input field within a developer tool and should display the name of a specific product.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/MainElementParameter.js",
-      "line_number": 130,
-      "context": "<ControlsGroup>\n <Label className=\"label\" text={t(\"ButtonText\")} />\n <TextInput\n scale\n onChange={setButtonText}\n placeholder={t(\"SelectToPortal\", {\n productName: t(\"Common:ProductName\"),\n })}\n value={buttonValue}\n tabIndex={3}\n />",
+      "line_number": 137,
+      "context": "<ControlsGroup>\n <Label className=\"label\" text={t(\"ButtonText\")} />\n <TextInput\n scale\n onChange={setButtonText}\n placeholder={t(\"SelectToPortal\", {\n productName: t(\"Common:ProductName\"),\n })}\n value={buttonValue}\n tabIndex={3}\n testId=\"button_mode_text_input\"",
       "module": "/packages/client"
     }
   ],
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'حدد لـ {{productName}}' while technically conveys 'Select to {{productName}}', it's not the most natural or idiomatic way to express it in Arabic. A better translation would incorporate a more fluent phrasing for 'Select to'.",
-          "suggestion": "اختر للانتقال إلى {{productName}} (Ikhtar lil-intiqaal ila {{productName}})"
+          "description": "The Arabic translation \"حدد لـ {{productName}}\" literally translates to 'Select for {{productName}}'. The English 'Select to {{productName}}' implies selection *leading to* or *resulting in* the product. A more accurate translation would convey that connection. 'حدد للانتقال إلى {{productName}}' (Select to go to {{productName}}), 'حدد للوصول إلى {{productName}}' (Select to access {{productName}}), or 'حدد لـ {{productName}}' (Select for {{productName}} - acceptable but not ideal) would be better depending on the intended context.",
+          "suggestion": "حدد للانتقال إلى {{productName}}"
         }
       ],
       "approved_at": null
@@ -42,13 +42,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Azerbaijani translation \"{{productName}}-ə seçin\" doesn't accurately convey the meaning of \"Select to {{productName}}\". The preposition \"-ə\" indicates movement towards, which isn't the intended action. It should imply selection or choosing.",
-          "suggestion": "{{productName}}-i seçin"
+          "description": "The translation \"{{productName}}-ə seçin\" is not a natural or accurate translation of \"Select to {{productName}}\". The preposition 'to' doesn't directly translate to '-ə' in this context. A more appropriate translation would emphasize the selection *into* the product.",
+          "suggestion": "{{productName}}-ə keçid edin"
         },
         {
           "type": "formatting",
-          "description": "While the template variable {{productName}} is correctly placed, a more natural Azerbaijani sentence structure might benefit from adjusting its position.",
-          "suggestion": "Seçin {{productName}}-i"
+          "description": "The hyphenated construction '-ə' might look odd in Azerbaijani. Consider if a different phrasing would read better.",
+          "suggestion": "Consider alternatives to the hyphenated structure for better readability."
         }
       ],
       "approved_at": null
@@ -59,8 +59,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Bulgarian translation 'Изберете за {{productName}}' literally translates to 'Select for {{productName}}'. The English phrase 'Select to {{productName}}' implies a destination or connection *to* the product. A more accurate translation would convey this sense of direction or purpose.",
-          "suggestion": "Изберете към {{productName}}"
+          "description": "The translation 'Изберете за {{productName}}' is a literal translation of 'Select to {{productName}}' but doesn't convey the intended meaning naturally in Bulgarian. 'Select to' implies selection *leading to* a portal or product. A better translation would convey that meaning.",
+          "suggestion": "Преминете към {{productName}}"
         }
       ],
       "approved_at": null
@@ -71,8 +71,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Czech translation 'Vybrat do {{productName}}' is a literal translation that doesn't convey the intended meaning of 'Select to {{productName}}'. 'Vybrat do' translates to 'Select into/to'. A more natural Czech phrasing would depend on the context, but a better option would likely be something like 'Výběr do...', 'Přidat do...', or 'Přenést do...'",
-          "suggestion": "Consider alternative translations like 'Výběr do {{productName}}', 'Přidat do {{productName}}', or 'Přenést do {{productName}}', depending on the intended action."
+          "description": "The Czech translation \"Vybrat do {{productName}}\" doesn't accurately convey the meaning of 'Select to {{productName}}'. \"Vybrat do\" literally translates to \"Select into\", which might not be the intended meaning.  A more accurate translation might be 'Výběr do' or 'Přesun do'.",
+          "suggestion": "Consider 'Výběr do {{productName}}' or 'Přesun do {{productName}}' for a more accurate translation."
         }
       ],
       "approved_at": null
@@ -89,7 +89,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Greek translation 'Επιλέξτε στο {{productName}}' literally translates to 'Select in {{productName}}'. A more natural Greek phrasing for 'Select to {{productName}}' would be 'Επιλέξτε για το {{productName}}' or 'Επιλέξτε προς το {{productName}}'.",
+          "description": "The Greek translation 'Επιλέξτε στο {{productName}}' literally translates to 'Select to {{productName}}'. A more natural and accurate translation for 'Select to' in this context would be 'Επιλέξτε για το' or 'Επιλέξτε προς το'. 'Στο' implies 'in the' or 'to the' in a physical sense.",
           "suggestion": "Επιλέξτε για το {{productName}}"
         }
       ],
@@ -107,8 +107,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Finnish translation \"Valitse {{productName}}:n\" is grammatically incorrect. The possessive suffix ':n' is not appropriate in this context. It implies ownership but is not the correct way to link 'Valitse' (Select) to a product name. It should be combined with a more appropriate preposition.",
-          "suggestion": "Valitse {{productName}}."
+          "description": "The Finnish translation \"Valitse {{productName}}:n\" is grammatically incorrect. The possessive ending '-n' is used incorrectly in this context. It should likely be a genitive case, but requires careful consideration of the relationship between 'Select' and '{{productName}}'.",
+          "suggestion": "Valitse {{productName}} -vaihtoehto"
         }
       ],
       "approved_at": null
@@ -116,7 +116,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Select to' doesn't translate directly to 'Sélectionner pour'. A more accurate translation would be 'Sélectionner vers' or 'Sélectionner pour accéder à'. 'Pour' implies a purpose or destination, which isn't the intended meaning of 'to' in this context.",
+          "suggestion": "Sélectionner vers {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -125,8 +131,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Ընտրել {{productName}}\" literally translates to \"Select {{productName}}\". While technically correct, it lacks the implied 'to' found in the original English.  A more natural translation would convey the intention of selecting *to* a portal or destination.",
-          "suggestion": "Ընտրել դեպի {{productName}}"
+          "description": "The Armenian translation 'Ընտրել {{productName}}' literally translates to 'Select {{productName}}'. While technically correct, it lacks the nuance of the English phrase 'Select to {{productName}}'. It might sound abrupt or less user-friendly. A more natural Armenian phrasing might convey a sense of directing the user *towards* the product.",
+          "suggestion": "Consider 'Ընտրել դեպի {{productName}}' (Select towards {{productName}}) or 'Ընտրել և վարձել {{productName}}-ին' (Select and go to {{productName}}) depending on the specific context and desired user flow. Further context is needed for a more precise suggestion."
         }
       ],
       "approved_at": null
@@ -137,8 +143,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Select to' doesn't translate directly to 'Seleziona per'. 'Select to' implies selection leading to a specific destination or action. A more accurate translation might be 'Seleziona per aprire' (Select to open) or 'Seleziona per accedere a' (Select to access). The best choice depends on the context.",
-          "suggestion": "Consider 'Seleziona per aprire' or 'Seleziona per accedere a' depending on the context."
+          "description": "The English phrase \"Select to\" is awkward and uncommon. A more natural translation would be \"Seleziona per\" but the most appropriate would be something like \"Vai a\" or \"Accedi a\" depending on the context of the button's functionality.",
+          "suggestion": "Consider alternative translations such as \"Vai a {{productName}}\" or \"Accedi a {{productName}}\" for better clarity and a more natural Italian phrasing."
         }
       ],
       "approved_at": null
@@ -149,8 +155,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Japanese translation \"{{productName}}に選択\" is not a natural or accurate translation of \"Select to {{productName}}\". It literally translates to '{{productName}} to select', which doesn't convey the intended meaning. It sounds unnatural.",
-          "suggestion": "A more natural translation would be something like \"{{productName}}へ選択\" ({{productName}} e sakusei) or \"{{productName}}を選択\" ({{productName}} o saku)."
+          "description": "The translation \"{{productName}}に選択\" is not a natural or accurate translation of \"Select to {{productName}}\". The phrase \"に選択\" is grammatically awkward and doesn't convey the intended meaning of selecting something *to* a portal or product.",
+          "suggestion": "A more appropriate translation would be something like \"{{productName}}へ選択\" ({{productName}} e sakusen - select to/towards {{productName}}) or \"{{productName}}を選択\" ({{productName}} o sentaku - select {{productName}}). The best option depends on the precise nuance required."
         }
       ],
       "approved_at": null
@@ -161,8 +167,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"{{productName}}로 선택\" is a literal translation and doesn't convey the intended meaning of 'Select to {{productName}}'. It sounds awkward in Korean. The preposition 'to' is not directly translatable in this context.",
-          "suggestion": "Consider a more natural phrasing like \"{{productName}}으로 이동\" (Move to {{productName}}) or \"{{productName}} 선택\" (Select {{productName}}) depending on the specific functionality. A more context-aware translation is needed."
+          "description": "The Korean translation \"{{productName}}로 선택\" is a literal translation but doesn't flow naturally in Korean. It suggests 'select *to* {{productName}}' instead of 'select *into* {{productName}}' or 'choose {{productName}}'.",
+          "suggestion": "{{productName}} 선택"
         }
       ],
       "approved_at": null
@@ -176,7 +182,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Atlasīt uz {{productName}}' is a literal translation that doesn't quite convey the intended meaning of 'Select to {{productName}}'. 'Uz' can imply 'onto' or 'to' in a physical sense, which isn't appropriate for this context. A more natural translation would focus on linking or directing the selection.",
+          "suggestion": "Izvēlēties {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -185,8 +197,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Selecteer naar {{productName}}' is not the most natural or accurate translation of 'Select to {{productName}}'. 'To' in this context implies 'into' or 'leading to'.",
-          "suggestion": "Selecteer {{productName}}"
+          "description": "The Dutch translation 'Selecteer naar {{productName}}' is a literal translation and doesn't convey the intended meaning of 'Select to {{productName}}'. It sounds awkward in Dutch. A more natural phrasing would be 'Selecteren voor {{productName}}' or 'Kies voor {{productName}}'.",
+          "suggestion": "Selecteren voor {{productName}}"
         }
       ],
       "approved_at": null
@@ -200,13 +212,25 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Selecione para {{productName}}' is not the most natural or accurate translation of 'Select to {{productName}}'. A more appropriate translation would be something like 'Escolha para {{productName}}' or 'Vá para {{productName}}'. 'Selecione' feels too formal and direct.",
+          "suggestion": "Escolha para {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Selecione para {{productName}}' is a literal translation and doesn't quite convey the intended meaning of 'Select to {{productName}}' in a natural Brazilian Portuguese way. It's grammatically correct but sounds slightly awkward.",
+          "suggestion": "Consider alternatives like 'Acessar {{productName}}' (Access {{productName}}) or 'Ir para {{productName}}' (Go to {{productName}}), depending on the user flow. A more natural phrasing would depend on the context of the selection."
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -215,8 +239,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Selectare pentru {{productName}}\" is a literal translation and doesn't flow naturally in Romanian.  'Selectare' isn't the most common or idiomatic choice for 'Select'.",
-          "suggestion": "Selectați pentru {{productName}}"
+          "description": "The translation 'Selectare pentru {{productName}}' is not the most natural or accurate translation of 'Select to {{productName}}'. 'Select to' implies selection leading somewhere. 'Selectare pentru' simply means 'selection for'.",
+          "suggestion": "Selectează pentru {{productName}}"
         }
       ],
       "approved_at": null
@@ -227,7 +251,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Выберите для {{productName}}\" while grammatically correct, doesn't accurately convey the meaning of \"Select to {{productName}}\".  \"Select to\" implies selection *leading* to a portal. \"Выберите для\" translates more literally as 'Choose for'. A better translation would capture the 'leading to' aspect.",
+          "description": "The translation 'Выберите для {{productName}}' doesn't quite convey the meaning of 'Select to {{productName}}'. 'Выберите' means 'choose' or 'select', but the preposition 'для' (for) isn't the best fit. It implies selecting *for* something, rather than selecting *into* or *to* something.",
           "suggestion": "Выберите {{productName}}"
         }
       ],
@@ -239,8 +263,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"{{productName}} වෙත තෝරන්න\" is not the most natural or accurate rendering of 'Select to {{productName}}'. 'Select to' implies a destination or redirection.  'වෙත තෝරන්න' literally means 'to select'. A better translation might emphasize the action of being redirected or sent.",
-          "suggestion": "{{productName}} වෙත යන්න"
+          "description": "The translation \"{{productName}} වෙත තෝරන්න\" literally translates to 'Select to {{productName}}'. While understandable, a more natural Sinhala phrasing would be '{{productName}} ත්‍රික්කුවන්න' or '{{productName}} තෝරන්න'. 'වෙත තෝරන්න' sounds slightly awkward.",
+          "suggestion": "{{productName}} ත්‍රික්කුවන්න"
         }
       ],
       "approved_at": null
@@ -251,8 +275,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovak translation \"Vybrať priestor {{productName}}\" doesn't accurately convey the meaning of \"Select to {{productName}}\". \"Vybrať\" generally means 'to choose' or 'to select', but the preposition 'to' in the original sentence implies a destination or portal. A more accurate translation would depend on the context of 'Select', but a better option might involve 'prechod do' (transition to) or 'otvorenie' (opening) if it opens a portal.",
-          "suggestion": "Consider alternatives like 'Prechod do {{productName}}' or 'Otvorenie {{productName}}', depending on context."
+          "description": "The translation 'Vybrať priestor {{productName}}' doesn't accurately convey the meaning of 'Select to {{productName}}'. 'Vybrať' (to select/choose) is close, but 'to' implies a direction or association, which is lost in translation. A more accurate translation would convey the idea of 'selecting and going to/linking to' the product.",
+          "suggestion": "Consider alternatives like 'Prejsť na {{productName}}' (Go to {{productName}}) or 'Prepojiť s {{productName}}' (Connect with {{productName}}). The best option depends on the exact functionality."
         }
       ],
       "approved_at": null
@@ -263,8 +287,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Izberi v {{productName}}' is not the most natural or accurate translation of 'Select to {{productName}}'. 'Izberi v' implies 'choose within' or 'select from within', which isn't the intended meaning. A more accurate translation would convey the action of directing a selection *to* a portal.",
-          "suggestion": "Izberi za {{productName}}"
+          "description": "The translation 'Izberi v {{productName}}' is not the most natural way to say 'Select to {{productName}}' in Slovenian. 'Izberi v' implies 'select within' or 'choose from within', which isn't the intended meaning. A better translation would convey the idea of selecting and being directed to a portal.",
+          "suggestion": "Izberi portal {{productName}}"
         }
       ],
       "approved_at": null
@@ -275,8 +299,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Изабери за {{productName}}' doesn't accurately convey the meaning of 'Select to {{productName}}'. 'Изабери' means 'Choose' or 'Select', but 'за' typically translates to 'for' or 'to' in a possessive or purpose-oriented sense.  The nuance of the English phrase 'Select to' (implying a redirection or link) is lost.",
-          "suggestion": "Consider 'Пребаци на {{productName}}' (Translate to/Redirect to {{productName}}), 'Оди на {{productName}}' (Go to {{productName}}), or 'Упути на {{productName}}' (Redirect to {{productName}}). The best option will depend on the specific UI functionality."
+          "description": "The Serbian translation 'Изабери за {{productName}}' literally translates to 'Choose for {{productName}}'. A more natural and accurate translation would convey the idea of selecting a destination or target. The phrase 'Select to' doesn't directly translate well.",
+          "suggestion": "Избери дестинацију {{productName}}"
         }
       ],
       "approved_at": null
@@ -287,8 +311,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Izaberi za {{productName}}\" doesn't accurately convey the meaning of \"Select to {{productName}}\". 'Select' implies a choice or assignment *towards* something. 'Izaberi' translates to 'Choose,' which lacks the directionality.",
-          "suggestion": "Consider a translation like \"Odaberi za {{productName}}\" or \"Poveži sa {{productName}}\" depending on the precise context and desired nuance. 'Odaberi' is closer to 'Select' but still doesn't perfectly convey the intended meaning. 'Poveži' (connect) might be suitable if the selection leads to a connection with the product."
+          "description": "The translation 'Izaberi za {{productName}}' doesn't fully convey the meaning of 'Select to {{productName}}'. 'Select to' implies selection *for* or *leading to* a portal. A more accurate translation would be 'Odaberi portal za {{productName}}' or 'Izaberite portal za {{productName}}'. 'Izaberi za' is too literal and doesn't accurately reflect the intended function.",
+          "suggestion": "Odaberi portal za {{productName}}"
         }
       ],
       "approved_at": null
@@ -296,7 +320,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"{{productName}} için seç\" doesn't accurately convey the meaning of \"Select to {{productName}}\". A more accurate translation would emphasize 'to' or 'into'.",
+          "suggestion": "{{productName}}'e seç"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

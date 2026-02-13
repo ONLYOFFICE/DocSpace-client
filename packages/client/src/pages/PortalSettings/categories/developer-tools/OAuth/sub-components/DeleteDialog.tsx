@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -95,6 +95,7 @@ const DeleteClientDialog = (props: DeleteClientDialogProps) => {
           primary
           isLoading={isRequestRunning}
           onClick={onDeleteClick}
+          testId="delete_app_ok_button"
         />
         <Button
           className="cancel-button"
@@ -104,6 +105,7 @@ const DeleteClientDialog = (props: DeleteClientDialogProps) => {
           scale
           isDisabled={isRequestRunning}
           onClick={onClose}
+          testId="delete_app_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

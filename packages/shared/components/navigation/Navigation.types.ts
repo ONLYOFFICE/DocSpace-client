@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,9 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { RefObject, LegacyRef } from "react";
+import { RefObject } from "react";
 import { DeviceType } from "../../enums";
 import { TGetContextMenuModel } from "../context-menu";
+import type { HeaderType } from "../context-menu/ContextMenu.types";
 
 export type TOnBackToParenFolder = () => void;
 
@@ -43,6 +44,7 @@ export type TContextButtonProps = {
   withMenu?: boolean;
   isTrashFolder?: boolean;
   isMobile: boolean;
+  isMobileOnly?: boolean;
   id: string;
   title?: string;
   onCloseDropBox?: () => void;
@@ -52,6 +54,8 @@ export type TContextButtonProps = {
   ) => () => void;
   guidAnimationVisible?: boolean;
   setGuidAnimationVisible?: (visible: boolean) => void;
+  ignoreChangeView?: boolean;
+  contextMenuHeader?: HeaderType;
 };
 
 export type TPlusButtonProps = {
@@ -63,7 +67,7 @@ export type TPlusButtonProps = {
   onPlusClick?: VoidFunction;
   isFrame?: boolean;
   onCloseDropBox?: () => void;
-  forwardedRef?: React.RefObject<HTMLDivElement>;
+  forwardedRef?: React.RefObject<HTMLDivElement | null>;
 };
 
 export type TToggleInfoPanelButtonProps = {
@@ -76,6 +80,7 @@ export type TToggleInfoPanelButtonProps = {
 
 export type TArrowButtonProps = {
   isRootFolder: boolean;
+  showBackButton?: boolean;
   onBackToParentFolder: TOnBackToParenFolder;
 };
 
@@ -134,17 +139,7 @@ export type TRowParam = {
 
 export type TRowData = [TNavigationItem[], TOnNavigationItemClick, TRowParam];
 
-export type TChatProps = {
-  chatOpen?: boolean;
-  toggleChat?: (value: boolean) => void;
-};
-
-type TChat = {
-  withChat?: boolean;
-} & TChatProps;
-
-export type TControlButtonProps = TChat &
-  Omit<TToggleInfoPanelButtonProps, "id"> &
+export type TControlButtonProps = Omit<TToggleInfoPanelButtonProps, "id"> &
   Omit<TPlusButtonProps, "getData" | "className"> &
   Omit<TContextButtonProps, "getData" | "className" | "id"> & {
     /** Controls visibility of PlusButton */
@@ -173,10 +168,12 @@ export type TControlButtonProps = TChat &
     isEmptyPage?: boolean;
 
     isMobile?: boolean;
+    isMobileOnly?: boolean;
     /** Used for guidance */
-    addButtonRef?: RefObject<HTMLDivElement>;
-    buttonRef?: LegacyRef<HTMLButtonElement>;
+    addButtonRef?: RefObject<HTMLDivElement | null>;
+    buttonRef?: React.RefObject<HTMLButtonElement>;
     isContextButtonVisible?: boolean;
+    isPlusButtonVisible?: boolean;
   };
 
 export type TDropBoxProps = TArrowButtonProps &
@@ -190,6 +187,7 @@ export type TDropBoxProps = TArrowButtonProps &
     | "isMobile"
   > &
   TRowParam & {
+    ref?: React.RefObject<HTMLDivElement | null>;
     sectionHeight: number;
     dropBoxWidth: number;
 
@@ -200,6 +198,8 @@ export type TDropBoxProps = TArrowButtonProps &
     burgerLogo: string;
     navigationTitleContainerNode: React.ReactNode;
     onCloseDropBox: () => void;
+    /** Controls rendering of title/header inside DropBox; defaults to true */
+    showTitleInDropBox?: boolean;
   };
 
 export type TNavigationProps = Omit<
@@ -234,4 +234,6 @@ export type TNavigationProps = Omit<
     showNavigationButton: boolean;
     titleIconTooltip?: string;
     onLogoClick?: () => void;
+    contextMenuHeader?: HeaderType;
+    showBackButton?: boolean;
   };

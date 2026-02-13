@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,9 +27,10 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import api from "@docspace/shared/api";
-import { TNewFiles } from "@docspace/shared/api/rooms/types";
+import type { TNewFiles } from "@docspace/shared/api/rooms/types";
 import { Portal } from "@docspace/shared/components/portal";
 import { toastr } from "@docspace/shared/components/toast";
 import {
@@ -38,19 +39,20 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
-import { Nullable } from "@docspace/shared/types";
+import type { Nullable } from "@docspace/shared/types";
 import { isDesktop, isMobile } from "@docspace/shared/utils";
 import { ButtonKeys } from "@docspace/shared/enums";
 
 import { Backdrop } from "@docspace/shared/components/backdrop";
-import {
+import type {
   NewFilesPanelInjectStore,
   NewFilesPanelProps,
 } from "../NewFilesBadge.types";
-import { StyledPanel } from "../NewFilesBadge.styled";
 
 import { NewFilesPanelLoader } from "./NewFilesPanelLoader";
 import { NewFilesPanelItem } from "./NewFilesPanelItem";
+
+import styles from "../new-files-panel.module.scss";
 
 const MIN_LOADER_TIMER = 500;
 
@@ -74,6 +76,7 @@ export const NewFilesPanelComponent = ({
   const timerRef = React.useRef<Nullable<NodeJS.Timeout>>(null);
 
   const isRooms = folderId === "rooms";
+  const isAgents = folderId === "agents";
 
   const markAsReadAction = React.useCallback(async () => {
     if (isMarkAsReadRunning) return;
@@ -82,10 +85,11 @@ export const NewFilesPanelComponent = ({
 
     const folderIDs: (string | number)[] = [];
 
-    if (isRooms) {
+    if (isRooms || isAgents) {
       data.forEach(({ items }) => {
         items.forEach((item) => {
           if ("room" in item) folderIDs.push(item.room.id);
+          if ("agent" in item) folderIDs.push(item.agent.id);
         });
       });
     } else {
@@ -96,7 +100,15 @@ export const NewFilesPanelComponent = ({
     setIsMarkAsReadRunning(false);
 
     onClose();
-  }, [folderId, isMarkAsReadRunning, isRooms, data, markAsRead, onClose]);
+  }, [
+    folderId,
+    isMarkAsReadRunning,
+    isRooms,
+    isAgents,
+    data,
+    markAsRead,
+    onClose,
+  ]);
 
   React.useEffect(() => {
     return () => {
@@ -114,7 +126,9 @@ export const NewFilesPanelComponent = ({
 
         const newFiles = isRooms
           ? await api.files.getNewFiles(folderId)
-          : await api.files.getNewFolderFiles(folderId);
+          : isAgents
+            ? await api.files.getNewFilesAgents()
+            : await api.files.getNewFolderFiles(folderId);
 
         dataFetched.current = true;
         requestRunning.current = false;
@@ -124,9 +138,11 @@ export const NewFilesPanelComponent = ({
 
         const ms = currentDate.getTime() - startLoaderTime.getTime();
         if (ms < MIN_LOADER_TIMER) {
-          return (timerRef.current = setTimeout(() => {
+          timerRef.current = setTimeout(() => {
             setIsLoading(false);
-          }, MIN_LOADER_TIMER - ms));
+
+            return;
+          }, MIN_LOADER_TIMER - ms);
         }
 
         setIsLoading(false);
@@ -175,32 +191,43 @@ export const NewFilesPanelComponent = ({
   );
 
   const content = isLoading ? (
-    <NewFilesPanelLoader isRooms={isRooms} />
+    <NewFilesPanelLoader isRooms={isRooms || isAgents} />
   ) : (
-    <>
-      {data.map(({ date, items }, index) => {
-        return (
-          <NewFilesPanelItem
-            key={date}
-            date={date}
-            items={items}
-            isRooms={isRooms}
-            isFirst={index === 0}
-            culture={culture}
-            onClose={onClose}
-          />
-        );
-      })}
-    </>
+    data.map(({ date, items }, index) => {
+      return (
+        <NewFilesPanelItem
+          key={date}
+          date={date}
+          items={items}
+          isRooms={isRooms}
+          isAgents={isAgents}
+          isFirst={index === 0}
+          culture={culture}
+          onClose={onClose}
+        />
+      );
+    })
   );
+
+  const panelStyle = {
+    height: `${position.maxHeight}px`,
+    maxHeight: `${position.maxHeight}px`,
+    top: `${position.top}px`,
+    left: `${position.left}px`,
+  };
 
   const panel = (
     <>
-      <StyledPanel className="new-files-panel" position={position}>
+      <div
+        className={classNames(styles.panel, "new-files-panel")}
+        style={panelStyle}
+      >
         <Scrollbar autoFocus>{content}</Scrollbar>
         {markAsReadButton}
-      </StyledPanel>
-      {!isMobile() ? <Backdrop visible withoutBackground withoutBlur /> : null}
+      </div>
+      {!isMobile() ? (
+        <Backdrop visible withoutBackground withoutBlur onClick={onClose} />
+      ) : null}
     </>
   );
 

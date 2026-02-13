@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,9 +29,9 @@ import React from "react";
 import { SectionSubmenuProps } from "../Section.types";
 import styles from "../Section.module.scss";
 
-const SectionSubmenu = ({ children }: SectionSubmenuProps) => {
-  return <div className={styles.submenu}>{children}</div>;
-};
+const SectionSubmenu = React.memo(({ children }: SectionSubmenuProps) => {
+  return <div className={`${styles.submenu} section-tabs`}>{children}</div>;
+});
 
 SectionSubmenu.displayName = "SectionSubmenu";
 

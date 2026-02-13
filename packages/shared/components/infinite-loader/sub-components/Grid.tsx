@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,7 +31,7 @@ import classNames from "classnames";
 import { TileSkeleton } from "../../../skeletons/tiles";
 import { RectangleSkeleton } from "../../../skeletons/rectangle";
 
-import { GridComponentProps } from "../InfiniteLoader.types";
+import { ListComponentProps } from "../InfiniteLoader.types";
 import styles from "../InfiniteLoader.module.scss";
 
 const GridComponent = ({
@@ -46,12 +46,12 @@ const GridComponent = ({
   scroll,
   showSkeleton,
   currentFolderId,
-}: GridComponentProps) => {
+}: ListComponentProps) => {
   const loaderRef = useRef<InfiniteLoader | null>(null);
   const listRef = useRef<List | null>(null);
 
   const usePrevious = (value?: number | string) => {
-    const prevRef = useRef<number | string>();
+    const prevRef = useRef<number | string>(undefined);
 
     useEffect(() => {
       prevRef.current = value;
@@ -88,7 +88,7 @@ const GridComponent = ({
     isScrolling: boolean;
   }) => {
     const elem = children[index] as React.ReactElement;
-    const itemClassNames = elem.props?.className;
+    const itemClassNames = (elem.props as { className?: string })?.className;
 
     const isFolder = itemClassNames?.includes("isFolder");
     const isRoom = itemClassNames?.includes("isRoom");

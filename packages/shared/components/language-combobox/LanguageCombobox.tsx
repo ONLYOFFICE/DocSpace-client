@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -40,6 +40,15 @@ const LanguageCombobox = (props: ComboboxProps) => {
     className,
     withBorder = true,
     isMobileView = false,
+    dataTestId,
+    directionY = "both",
+    fixedDirection = false,
+    isDefaultMode = true,
+    manualWidth = "42px",
+    usePortalBackdrop = false,
+    withBackdrop = false,
+    shouldShowBackdrop = false,
+    isDisabled = false,
   } = props;
 
   const { i18n } = useTranslation(["Common"]);
@@ -73,11 +82,13 @@ const LanguageCombobox = (props: ComboboxProps) => {
         className,
         "language-combo-box",
       )}
-      directionY="both"
+      directionY={directionY}
+      fixedDirection={fixedDirection}
+      isDefaultMode={isDefaultMode}
       options={cultureNames}
       selectedOption={currentCulture}
       onSelect={onSelect}
-      isDisabled={false}
+      isDisabled={isDisabled}
       scaled={false}
       scaledOptions={false}
       size={ComboBoxSize.content}
@@ -85,14 +96,17 @@ const LanguageCombobox = (props: ComboboxProps) => {
       dropDownMaxHeight={300}
       fillIcon={false}
       displaySelectedOption
-      manualWidth="42px"
+      manualWidth={manualWidth}
       noBorder={false}
       type="onlyIcon"
       optionStyle={{ padding: "0 8px" }}
       isMobileView={isMobileView}
       withBlur={isMobileView}
       withLabel={!!withLabel}
-      data-test-id="language-combobox"
+      usePortalBackdrop={usePortalBackdrop}
+      withBackdrop={withBackdrop}
+      shouldShowBackdrop={shouldShowBackdrop}
+      dataTestId={dataTestId ?? "language-combobox"}
       role="combobox"
       aria-label="Select language"
       aria-expanded="false"

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,27 +26,11 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import styled from "styled-components";
+import classNames from "classnames";
 
 import { isMobile as isMobileUtils } from "@docspace/shared/utils";
 
-const StyledMain = styled.main`
-  height: ${(props) => props.mainHeight && `${props.mainHeight}px`};
-  width: 100%;
-  z-index: 0;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-
-  .main-container {
-    width: 100%;
-    height: 100%;
-
-    display: flex;
-    flex-direction: row;
-    box-sizing: border-box;
-  }
-`;
+import styles from "./main.module.scss";
 
 const Main = (props) => {
   const { mainBarVisible, isFrame } = props;
@@ -57,21 +41,11 @@ const Main = (props) => {
   const onResize = React.useCallback(() => {
     let correctHeight = window.innerHeight;
 
-    if (mainBarVisible && isMobileUtils()) {
-      const mainBar = document.getElementById("main-bar");
-
-      if (mainBar) {
-        const mainBarHeight = mainBar.offsetHeight || 0;
-        if (mainBarHeight === 0)
-          return (updateSizeRef.current = setTimeout(() => onResize(), 0));
-
-        correctHeight -= mainBarHeight;
-      }
-    }
-
     // 48 - its nav menu with burger, logo and user avatar
+    // 3 - its IndicatorLoader
     if (isMobileUtils() && !isFrame) {
       correctHeight -= 48;
+      correctHeight -= 3;
     }
 
     setMainHeight(correctHeight);
@@ -90,7 +64,15 @@ const Main = (props) => {
     onResize();
   }, [mainBarVisible, isFrame, onResize]);
 
-  return <StyledMain className="main" mainHeight={mainHeight} {...props} />;
+  const mainStyle = mainHeight ? { height: `${mainHeight}px` } : undefined;
+
+  return (
+    <main
+      className={classNames(styles.main, "main")}
+      style={mainStyle}
+      {...props}
+    />
+  );
 };
 
 Main.displayName = "Main";

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -33,6 +33,7 @@ import { TFileItem, TFolderItem } from "../_hooks/useItemList";
 
 class ActiveItemsStore {
   activeFoldersIdsMap: Map<number, boolean> = new Map();
+
   activeFilesIdsMap: Map<number, boolean> = new Map();
 
   constructor() {
@@ -52,9 +53,8 @@ class ActiveItemsStore {
   isItemActive = (item: TFileItem | TFolderItem) => {
     if (item.isFolder) {
       return this.activeFoldersIdsMap.get(item.id) || false;
-    } else {
-      return this.activeFilesIdsMap.get(item.id) || false;
     }
+    return this.activeFilesIdsMap.get(item.id) || false;
   };
 }
 
@@ -67,8 +67,9 @@ export const ActiveItemsStoreContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
+  const store = React.useMemo(() => new ActiveItemsStore(), []);
   return (
-    <ActiveItemsStoreContext.Provider value={new ActiveItemsStore()}>
+    <ActiveItemsStoreContext.Provider value={store}>
       {children}
     </ActiveItemsStoreContext.Provider>
   );

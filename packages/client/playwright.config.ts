@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -49,9 +49,24 @@ export default defineConfig({
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
+  workers: Number(process.env.WORKERS) || (process.env.CI ? 1 : undefined),
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [["html", { outputFolder: "../../playwright-report/client" }]],
+  reporter: [
+    ["dot"],
+    [
+      "html",
+      {
+        outputFolder: "../../playwright-report/client",
+        open: "never",
+      },
+    ],
+    [
+      "json",
+      {
+        outputFile: "../../playwright-report/client/test-results.json",
+      },
+    ],
+  ],
 
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
@@ -64,7 +79,8 @@ export default defineConfig({
   snapshotPathTemplate: "{testDir}/screenshots{/projectName}/{arg}{ext}",
   expect: {
     toHaveScreenshot: {
-      maxDiffPixelRatio: 0.01,
+      threshold: 0.16,
+      // maxDiffPixelRatio: 0.02,
     },
   },
 
@@ -72,7 +88,10 @@ export default defineConfig({
   projects: [
     {
       name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
+      use: {
+        ...devices["Desktop Chrome"],
+        viewport: { width: 1440, height: 1024 },
+      },
     },
     /*     {
       name: "firefox",
@@ -87,7 +106,7 @@ export default defineConfig({
 
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: "yarn test:start",
+    command: "pnpm run test:start",
     port: PORT,
     timeout: 1000 * 60 * 5,
   },

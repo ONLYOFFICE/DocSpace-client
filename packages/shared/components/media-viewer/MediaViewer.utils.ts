@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -284,3 +284,5 @@ export const formatTime = (time: number): string => {
 export const isTiff = (extension: string) =>
   extension === ".tiff" || extension === ".tif";
 export const isHeic = (extension: string) => extension === ".heic";
+export const isGif = (extension: string) => extension === ".gif";
+export const isWebp = (extension: string) => extension === ".webp";

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -36,6 +36,7 @@ import { DropDownItem } from "../../drop-down-item";
 import { IconButton } from "../../icon-button";
 import { ViewSelector } from "../../view-selector";
 import { Text } from "../../text";
+import { TooltipContainer } from "../../tooltip";
 
 import { SortButtonProps, TSortDataItem } from "../Filter.types";
 import styles from "../Filter.module.scss";
@@ -146,7 +147,11 @@ const SortButton = ({
     <>
       {viewSelectorVisible ? (
         <>
-          <DropDownItem noHover className="view-selector-item">
+          <DropDownItem
+            noHover
+            className="view-selector-item"
+            testId="filter_sort_view_selector_item"
+          >
             <Text fontWeight={600}>{view}</Text>
             <ViewSelector
               className="view-selector"
@@ -166,6 +171,7 @@ const SortButton = ({
           className={item.className}
           key={item.key}
           data-value={item.key}
+          testId={`filter_sort_option_${item.key}`}
         >
           <Text fontWeight={600}>{item.label}</Text>
           <SortDesc
@@ -185,13 +191,15 @@ const SortButton = ({
   }
 
   return (
-    <div
+    <TooltipContainer
+      as="div"
       onClick={toggleCombobox}
       id={id}
       title={title}
       className={styles.sortButton}
       data-row-view={viewAs === "row" ? "true" : "false"}
       data-desc={selectedSortData.sortDirection === "desc" ? "true" : "false"}
+      data-testid="filter_sort_button"
     >
       <ComboBox
         opened={isOpen}
@@ -199,7 +207,7 @@ const SortButton = ({
         className="sort-combo-box"
         options={[]}
         selectedOption={{ key: "", label: "" }}
-        directionX="right"
+        directionX="left"
         directionY="both"
         scaled
         size={ComboBoxSize.content}
@@ -212,10 +220,12 @@ const SortButton = ({
         withBlur={false}
         withBackdrop
         onBackdropClick={toggleCombobox}
+        type="onlyIcon"
+        dataTestId="filter_sort_combobox"
       >
         <IconButton iconNode={<SortReactSvg />} size={16} />
       </ComboBox>
-    </div>
+    </TooltipContainer>
   );
 };
 

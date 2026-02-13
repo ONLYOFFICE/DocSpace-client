@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -44,6 +44,7 @@ export const EmailInput = ({
   handleAnimationStart,
   onChange,
   onBlur,
+  dataTestId,
   ...rest
 }: EmailInputProps) => {
   const [inputValue, setInputValue] = React.useState(value);
@@ -103,7 +104,7 @@ export const EmailInput = ({
       onChange={handleChange}
       onBlur={onBlur}
       onAnimationStart={handleAnimationStart}
-      testId="email-input"
+      testId={dataTestId ?? "email-input"}
     />
   );
 };

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,14 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { expect, describe, it } from "vitest";
 import { render, screen } from "@testing-library/react";
-
-import "@testing-library/jest-dom";
 
 import Cron from "./Cron";
 
-test("<Cron />: render without error", () => {
-  render(<Cron value="* * * * *" setValue={() => {}} />);
+describe("<Cron />", () => {
+  it("renders without error", () => {
+    render(<Cron value="* * * * *" setValue={() => {}} />);
 
-  expect(screen.queryByTestId("cron")).toBeInTheDocument();
+    expect(screen.queryByTestId("cron")).toBeInTheDocument();
+  });
 });

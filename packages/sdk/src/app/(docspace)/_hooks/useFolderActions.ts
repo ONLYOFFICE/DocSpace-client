@@ -19,7 +19,7 @@ export default function useFolderActions({ t }: UseFolderActionsProps) {
     setCurrentTitle,
     setCurrentIsRootRoom,
   } = useNavigationStore();
-  const { setBufferSelection, setSelection } = useFilesSelectionStore();
+  const { setSelection } = useFilesSelectionStore();
   const { shareKey } = useSettingsStore();
 
   const openFolder = React.useCallback(
@@ -28,7 +28,7 @@ export default function useFolderActions({ t }: UseFolderActionsProps) {
 
       filter.folder = folderId.toString();
 
-      const filterUrl = `?${shareKey ? "key=" + shareKey + "&" : ""}${filter.toUrlParams()}`;
+      const filterUrl = `?${shareKey ? `key=${shareKey}&` : ""}${filter.toUrlParams()}`;
 
       updateNavigationItems(folderId);
       setCurrentFolderId(folderId);

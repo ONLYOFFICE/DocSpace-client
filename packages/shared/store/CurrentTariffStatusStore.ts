@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,37 +24,56 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable no-console */
 import { makeAutoObservable, runInAction } from "mobx";
-import moment from "moment-timezone";
+import axios from "axios";
 
-import { TariffState } from "../enums";
 import api from "../api";
-import { getUserByEmail } from "../api/people";
-import { TPortalTariff, TQuotas } from "../api/portal/types";
-import { TUser } from "../api/people/types";
+import { getWalletPayer } from "../api/portal";
+
+import { PaymentMethodStatus, QuotaState, TariffState } from "../enums";
+
+import { TCustomerInfo, TPortalTariff, TQuotas } from "../api/portal/types";
 import { isValidDate } from "../utils";
 import { getDaysLeft, getDaysRemaining } from "../utils/common";
+import {
+  parseToDateTime,
+  dateDiff,
+  formatDateLocalized,
+  getAppTimezone,
+  isAfter,
+  now,
+} from "../utils/date";
 import { Nullable } from "../types";
 import { UserStore } from "./UserStore";
+import { SettingsStore } from "./SettingsStore";
 
 class CurrentTariffStatusStore {
   userStore: UserStore;
+
+  settingsStore: SettingsStore;
 
   portalTariffStatus: Nullable<TPortalTariff> = null;
 
   isLoaded = false;
 
-  payerInfo: TUser | null = null;
-
   language: string = "en";
 
   walletQuotas: TQuotas[] = [];
 
-  constructor(userStore: UserStore) {
+  previousWalletQuota: TQuotas[] = [];
+
+  payerInfo: TCustomerInfo = {
+    portalId: null,
+    paymentMethodStatus: 0,
+    email: null,
+    payer: null,
+  };
+
+  constructor(userStore: UserStore, settingsStore: SettingsStore) {
     makeAutoObservable(this);
 
     this.userStore = userStore;
+    this.settingsStore = settingsStore;
   }
 
   setLanguage = (language: string) => {
@@ -93,6 +112,57 @@ class CurrentTariffStatusStore {
     return this.portalTariffStatus ? this.portalTariffStatus.dueDate : null;
   }
 
+  get storageSubscriptionExpiryDate() {
+    return this.walletQuotas[0]?.dueDate;
+  }
+
+  get hasStorageSubscription() {
+    return this.walletQuotas?.length > 0;
+  }
+
+  get hasPreviousStorageSubscription() {
+    return this.previousWalletQuota?.length > 0;
+  }
+
+  get currentStoragePlanSize() {
+    if (!this.hasStorageSubscription || !this.walletQuotas[0]) return 0;
+    return this.walletQuotas[0].quantity || 0;
+  }
+
+  get previousStoragePlanSize() {
+    if (!this.hasPreviousStorageSubscription || !this.previousWalletQuota[0])
+      return 0;
+    return this.previousWalletQuota[0].quantity || 0;
+  }
+
+  get hasScheduledStorageChange() {
+    if (!this.hasStorageSubscription || !this.walletQuotas[0]) return false;
+
+    return (this.walletQuotas[0].nextQuantity ?? -1) >= 0;
+  }
+
+  get nextStoragePlanSize() {
+    if (!this.hasStorageSubscription || !this.walletQuotas[0]) return undefined;
+    return this.walletQuotas[0].nextQuantity;
+  }
+
+  get storageExpiryDate() {
+    if (!this.storageSubscriptionExpiryDate) return "";
+
+    return formatDateLocalized(this.storageSubscriptionExpiryDate, "DATE_FULL", {
+      locale: this.language,
+      timezone: getAppTimezone(),
+    });
+  }
+
+  get daysUntilStorageExpiry() {
+    if (!this.storageSubscriptionExpiryDate) return 0;
+
+    return Math.floor(
+      dateDiff(this.storageSubscriptionExpiryDate, now(), "days"),
+    );
+  }
+
   get delayDueDate() {
     return this.portalTariffStatus
       ? this.portalTariffStatus.delayDueDate
@@ -111,33 +181,13 @@ class CurrentTariffStatusStore {
     return this.portalTariffStatus?.licenseDate;
   }
 
-  setPayerInfo = async (payer?: string) => {
-    const payerInfo = payer ?? this.customerId;
-
-    try {
-      if (!payerInfo || !payerInfo?.length) {
-        this.payerInfo = null;
-        return;
-      }
-
-      const result = await getUserByEmail(payerInfo);
-      if (!result) {
-        this.payerInfo = null;
-        return;
-      }
-
-      this.payerInfo = result;
-    } catch (e) {
-      this.payerInfo = null;
-      console.error(e);
-    }
-  };
-
   get paymentDate() {
-    moment.locale(this.language);
     if (this.dueDate === null) return "";
 
-    return moment(this.dueDate).tz(window.timezone).format("LL");
+    return formatDateLocalized(this.dueDate, "DATE_FULL", {
+      locale: this.language,
+      timezone: getAppTimezone(),
+    });
   }
 
   get isPaymentDateValid() {
@@ -148,28 +198,32 @@ class CurrentTariffStatusStore {
   get isLicenseDateExpired() {
     if (!this.isPaymentDateValid) return;
 
-    return moment() > moment(this.dueDate).tz(window.timezone);
+    const dueDateDt = parseToDateTime(this.dueDate);
+    if (!dueDateDt) return;
+
+    return isAfter(now(), dueDateDt.setZone(getAppTimezone()));
   }
 
   get gracePeriodEndDate() {
-    moment.locale(this.language);
     if (this.delayDueDate === null) return "";
 
     const endDate = isValidDate(this.delayDueDate)
       ? this.delayDueDate
       : this.dueDate;
 
-    return moment(endDate).tz(window.timezone).format("LL");
+    return formatDateLocalized(endDate, "DATE_FULL", {
+      locale: this.language,
+      timezone: getAppTimezone(),
+    });
   }
 
   get delayDaysCount() {
-    moment.locale(this.language);
     if (this.delayDueDate === null) return "";
     return getDaysRemaining(this.delayDueDate);
   }
 
   get isLicenseExpiring() {
-    if (!this.dueDate || !this.isEnterprise) return;
+    if (!this.dueDate) return false;
 
     const days = getDaysLeft(this.dueDate);
 
@@ -184,23 +238,94 @@ class CurrentTariffStatusStore {
     return getDaysLeft(this.dueDate);
   }
 
-  fetchPortalTariff = async (refresh?: boolean) => {
-    return api.portal.getPortalTariff(refresh).then((res) => {
+  get walletCustomerEmail() {
+    return this.payerInfo.email;
+  }
+
+  get walletCustomerUnlinkedStatus() {
+    return this.payerInfo.paymentMethodStatus === PaymentMethodStatus.None;
+  }
+
+  get walletCustomerExpiredStatus() {
+    return this.payerInfo.paymentMethodStatus === PaymentMethodStatus.Expired;
+  }
+
+  get walletCustomerStatusNotActive() {
+    if (!this.walletCustomerEmail) return false;
+
+    return (
+      this.walletCustomerUnlinkedStatus || this.walletCustomerExpiredStatus
+    );
+  }
+
+  get walletCustomerInfo() {
+    return this.payerInfo.payer;
+  }
+
+  fetchPayerInfo = async (isRefresh?: boolean) => {
+    const abortController = new AbortController();
+    this.settingsStore.addAbortControllers(abortController);
+
+    try {
+      const res = await getWalletPayer(isRefresh, abortController.signal);
+
       if (!res) return;
 
-      const { user } = this.userStore;
+      this.payerInfo = res;
 
-      runInAction(() => {
-        this.portalTariffStatus = res;
+      return res;
+    } catch (e) {
+      if (axios.isCancel(e)) {
+        return;
+      }
+      console.error(e);
+      throw e;
+    }
+  };
 
-        if (user?.isAdmin)
-          this.walletQuotas = res.quotas.filter(
-            (quota) => quota.wallet === true,
-          ) as TQuotas[];
+  fetchPortalTariff = async (refresh?: boolean) => {
+    const abortController = new AbortController();
+    this.settingsStore.addAbortControllers(abortController);
+
+    return api.portal
+      .getPortalTariff(refresh, abortController.signal)
+      .then((res) => {
+        if (!res) return;
+
+        const { user } = this.userStore;
+
+        runInAction(() => {
+          this.portalTariffStatus = res;
+
+          if (user?.isAdmin) {
+            const quota = res.quotas.find((q) => q.wallet === true);
+
+            if (quota) {
+              if (quota.state === QuotaState.Overdue) {
+                this.previousWalletQuota = [quota];
+                this.walletQuotas = [];
+              } else {
+                this.walletQuotas = [quota];
+                this.previousWalletQuota = [];
+              }
+            } else {
+              this.walletQuotas = [];
+              this.previousWalletQuota = [];
+            }
+          }
+        });
+
+        this.setIsLoaded(true);
+
+        return {
+          res: this.portalTariffStatus,
+          walletQuotas: this.walletQuotas,
+        };
+      })
+      .catch((err) => {
+        if (axios.isCancel(err)) return;
+        throw err;
       });
-
-      this.setIsLoaded(true);
-    });
   };
 }
 

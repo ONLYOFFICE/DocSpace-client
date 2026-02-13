@@ -1,5 +1,7 @@
 {
+  "DeepLinkOnlyAppText": "您只能在移动应用中打开文档",
   "DeepLinkText": "您可以在门户或移动应用中打开文档",
+  "DownloadApp": "下载应用程序",
   "OpenInApp": "在应用中打开",
   "OpeningDocument": "正在打开文档",
   "RememberChoice": "下次打开文档时记住该选择",

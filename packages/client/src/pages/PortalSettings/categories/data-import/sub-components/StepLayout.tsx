@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -38,7 +38,7 @@ const DescriptionWrapper = styled.div`
 
   .data-import-counter {
     margin-top: 19px;
-    margin-bottom: 9px;
+    margin-bottom: 8px;
   }
 
   .data-import-section-description {

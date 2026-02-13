@@ -8,6 +8,8 @@
   "NeedSettings": "設定の入力",
   "NoPlugins": "プラグインの追加なし",
   "NotNeedSettings": "設定入力が不要",
+  "PluginIsNotCompatible": "プラグインSDKのバージョンが{{productName}}のバージョンと一致しません。互換性のあるバージョンに更新してください。",
+  "PluginLoadedSuccessfully": "プラグインが正常に読み込まれました",
   "PluginSamples": "プラグインのサンプル",
   "PluginSDK": "プラグインSDK",
   "PluginSDKDescription": "プラグインSDKを使用すると、{{productName}}の機能を拡張したり、サードパーティのサービスと接続したり、既存のユーザーエクスペリエンスを向上させたりすることができます。ここでは、GitHubで利用可能なコードソース付きのプラグインサンプルを見つけることができます。",

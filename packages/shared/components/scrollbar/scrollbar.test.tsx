@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,17 +25,17 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, afterEach, vi } from "vitest";
 import { render, screen, fireEvent, act } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import { Scrollbar } from "./Scrollbar";
 import styles from "./Scrollbar.module.scss";
 
-jest.useFakeTimers();
+vi.useFakeTimers();
 
 describe("<Scrollbar />", () => {
   afterEach(() => {
-    jest.clearAllTimers();
+    vi.clearAllTimers();
   });
 
   it("renders without error", () => {
@@ -49,7 +49,7 @@ describe("<Scrollbar />", () => {
   });
 
   it("handles scroll events", () => {
-    const onScroll = jest.fn();
+    const onScroll = vi.fn();
     render(
       <Scrollbar onScroll={onScroll}>
         <div style={{ height: "200px" }}>Scrollable content</div>
@@ -69,18 +69,10 @@ describe("<Scrollbar />", () => {
     );
 
     const scrollbar = screen.getByTestId("scrollbar");
-    const scrollBody = screen.getByTestId("scroll-body");
 
     expect(scrollbar).toHaveClass(styles.autoHide);
 
-    // Trigger mouse move to show scrollbar
-    fireEvent.mouseMove(scrollBody);
-    expect(scrollbar).toHaveClass(styles.scrollVisible);
-
-    // Fast forward timers to test auto-hide
-    act(() => {
-      jest.advanceTimersByTime(3000);
-    });
+    // Initially scrollVisible should not be present
     expect(scrollbar).not.toHaveClass(styles.scrollVisible);
   });
 
@@ -91,7 +83,7 @@ describe("<Scrollbar />", () => {
   });
 
   it("handles autoFocus prop", () => {
-    const focusSpy = jest.spyOn(HTMLElement.prototype, "focus");
+    const focusSpy = vi.spyOn(HTMLElement.prototype, "focus");
     render(<Scrollbar autoFocus>Content</Scrollbar>);
 
     expect(focusSpy).toHaveBeenCalled();

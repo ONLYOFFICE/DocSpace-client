@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,47 +25,90 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { test as base, Page } from "@playwright/test";
-import { MockRequest } from "@docspace/shared/__mocks__/e2e";
+import path from "path";
+import {
+  BASE_URL,
+  createNextTestServer,
+  createServerRequestInterceptor,
+  setupAndResetHandlersServer,
+  WorkerFixture,
+  SetupServer,
+} from "@docspace/shared/__mocks__/e2e";
+import { allHandlers } from "@docspace/shared/__mocks__/handlers";
 
-export const test = base.extend<{
-  page: Page;
-  mockRequest: MockRequest;
-}>({
-  page: async ({ page }, use) => {
-    await page.route("*/**/logo.ashx**", async (route) => {
-      await route.fulfill({
-        path: `../../public/images/logo/loginpage.svg`,
+export const test = base.extend<
+  {
+    page: Page;
+    clientRequestInterceptor: WorkerFixture;
+    resetHandlersServer: void;
+  },
+  {
+    serverRequestInterceptor: SetupServer;
+    port: string;
+    baseUrl: string;
+  }
+>({
+  port: [
+    async ({}, use) => {
+      const { port, server } = await createNextTestServer(
+        path.resolve(__dirname, "../../.."),
+      );
+      await use(port);
+      server.close();
+    },
+    {
+      scope: "worker",
+      auto: true,
+    },
+  ],
+  baseUrl: [
+    async ({ port }, use) => {
+      await use(`${BASE_URL}:${port}`);
+    },
+    {
+      scope: "worker",
+      auto: true,
+    },
+  ],
+  serverRequestInterceptor: [
+    async ({}, use) => {
+      const requestInterceptor = await createServerRequestInterceptor();
+      await use(requestInterceptor);
+      requestInterceptor.close();
+    },
+    {
+      scope: "worker",
+      auto: true,
+    },
+  ],
+  resetHandlersServer: [
+    async ({ serverRequestInterceptor, port }, use) => {
+      const resetHandlers = await setupAndResetHandlersServer(
+        serverRequestInterceptor,
+        port,
+      );
+      await use();
+      resetHandlers();
+    },
+    {
+      auto: true,
+    },
+  ],
+  clientRequestInterceptor: [
+    async ({ page, port }, use) => {
+      const worker = new WorkerFixture({
+        page,
+        initialHandlers: allHandlers(port),
       });
-    });
-    await page.route(
-      "*/**/sdk/_next/public/images/**/*",
-      async (route, request) => {
-        const imagePath = request
-          .url()
-          .split("/sdk/_next/public/images/")
-          .at(-1)!
-          .split("?")[0];
-        await route.fulfill({
-          path: `../../public/images/${imagePath}`,
-        });
-      },
-    );
 
-    await page.route(
-      "*/**/static/scripts/config.json",
-      async (route, request) => {
-        await route.fulfill({
-          path: `../../public/scripts/config.json`,
-        });
-      },
-    );
-
-    await use(page);
-  },
-  mockRequest: async ({ page }, use) => {
-    const mockRequest = new MockRequest(page);
-    await use(mockRequest);
-  },
+      await worker.start();
+      await use(worker);
+      //await worker.stop();
+    },
+    {
+      auto: true,
+    },
+  ],
 });
 
 export { expect } from "@playwright/test";

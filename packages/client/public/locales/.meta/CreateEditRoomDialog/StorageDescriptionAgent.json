@@ -1,0 +1,28 @@
+{
+  "key_path": "StorageDescriptionAgent",
+  "content": "Storage quota set per agent. You can change this value or turn off storage limit.",
+  "content_en_sha1_hash": "8b8c6bcf79513b149c8cd8f0054c3de29d767278",
+  "created_at": "2025-11-03T12:10:33.218Z",
+  "updated_at": "2025-11-03T12:17:54.927Z",
+  "comment": {
+    "text": "This text explains the storage quota setting for agents, allowing users to adjust the limit or disable it entirely. It appears in the Room Quota form, providing information about agent-specific storage settings. Translators should focus on conveying the user's ability to control storage limits.",
+    "is_auto": true,
+    "updated_at": "2025-11-03T12:17:54.927Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/RoomQuota/index.tsx",
+      "line_number": 66,
+      "context": "return (\n <QuotaForm\n label={t(\"Common:StorageQuota\")}\n description={\n isAgent ? t(\"StorageDescriptionAgent\") : t(\"StorageDescription\")\n }\n checkboxLabel={\n isAgent ? t(\"DisableRoomQuotaAgent\") : t(\"DisableRoomQuota\")\n }\n onSetQuotaBytesSize={onSetQuotaBytesSize}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

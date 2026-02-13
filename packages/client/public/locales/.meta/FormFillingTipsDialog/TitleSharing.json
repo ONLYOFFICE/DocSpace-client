@@ -3,7 +3,7 @@
   "content": "Invite other {{productName}} members to the room to fill out the uploaded PDF forms. Copy a public access link to share the room with external users.",
   "content_en_sha1_hash": "ad1e0c87a150973b6306b6c592210f7a01ea10ce",
   "created_at": "2025-05-19T21:30:55.146Z",
-  "updated_at": "2025-05-21T10:45:05.399Z",
+  "updated_at": "2025-05-24T10:55:01.487Z",
   "comment": {
     "text": "This translation key is used to describe a tip on how to share a room for filling out PDF forms in a user interface. It explains that users should invite other members of {{productName}} to join and copy a public access link to share the room with external users. This appears to be part of a dialog or guidance component, likely related to sharing or inviting others to complete a form.",
     "is_auto": true,
@@ -30,13 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation includes the English term 'PDF' within Arabic text. It's preferable to consistently use Arabic terminology or transliterate the term.",
-          "suggestion": "استخدموا مصطلحًا عربيًا مكافئًا لـ 'PDF' أو قموا بتعديل الصياغة لتجنب استخدام المصطلح الإنجليزي مباشرة. على سبيل المثال، 'نماذج PDF' يمكن أن تصبح 'نماذج بصيغة PDF'."
+          "description": "The Arabic translation uses quotation marks (\"PDF\") around \"PDF\" which might not be standard or visually appealing in this context. Consider removing them or using a more appropriate typographical mark.",
+          "suggestion": "Remove the quotation marks: 'قوموا بدعوة أعضاء {{productName}} الآخرين إلى الغرفة لتعبئة نماذج PDF التي تم رفعها. انسخوا رابط وصول عام لمشاركة الغرفة مع مستخدمين خارجيين.'"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Copy a public access link' is rather literal. A more natural Arabic phrasing would improve readability.",
-          "suggestion": "Instead of 'انسخوا رابط وصول عام', consider 'انسخوا رابطًا عامًا لمشاركة' or 'شاركوا رابطًا عامًا لمشاركة'."
+          "description": "The phrasing 'نسخوا رابط وصول عام' (copy a public access link) is grammatically correct but slightly less natural. A more fluid translation might be better.",
+          "suggestion": "Consider 'انسخوا رابطًا عامًا' (copy a public link) for improved flow."
         }
       ],
       "approved_at": null
@@ -44,13 +44,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Copy a public access link\" is slightly awkward in Azerbaijani. A more natural phrasing would be 'İctimai linki kopyalayın'.",
-          "suggestion": "İctimai linki kopyalayın"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -80,13 +74,30 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Copy a public access link' is too literal. A more natural Spanish phrasing would be 'Comparte un enlace público'.",
+          "suggestion": "Comparte un enlace público para compartir la sala con usuarios externos."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Copy a public access link\" is a bit awkward in Finnish. A more natural phrasing would be 'Jaa julkinen linkki'.",
+          "suggestion": "Jaa julkinen linkki jakaaksesi huoneen ulkoisten käyttäjien kanssa."
+        },
+        {
+          "type": "formatting",
+          "description": "The spacing before 'jakaaksesi' could be improved for better readability.",
+          "suggestion": "Kopioi julkinen linkki jakaaksesi huoneen ulkoisten käyttäjien kanssa."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -101,13 +112,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Հրավիրեք այլ {{productName}} անդամների սենյակ՝ վերբեռնված PDF ձևերը լրացնելու համար\" is not the most natural Armenian. It literally translates to 'Invite other {{productName}} members to the room to fill out the uploaded PDF forms.' A more natural phrasing would emphasize the purpose of inviting them to the room.",
-          "suggestion": "Հրավիրեք այլ {{productName}} անդամներ սենյակ՝ վերբեռնված PDF ձևերն ամբողջելու համար:"
+          "description": "The phrase \"վերբեռնված PDF ձևերը լրացնելու համար\" (to fill out the uploaded PDF forms) could be more naturally translated as \"միասին լրացնելու համար վերբեռնված PDF ձևերը\" or something similar to reflect the collaborative aspect of filling forms in a room. The current phrasing is grammatically correct but feels a little awkward.",
+          "suggestion": "Հրավիրեք այլ {{productName}} անդամների սենյակ՝ միասին լրացնելու համար վերբեռնված PDF ձևերը:"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrasing 'արտաքին օգտատերերի հետ կիսվելու համար' is a bit formal. It translates to 'to share with external users'.",
-          "suggestion": "միջոցով արտաքին օգտատերերի հետ կիսելու համար:"
+          "type": "formatting",
+          "description": "The colon after \"հանրային հղումը\" feels a bit abrupt.  Adding a connector word or phrase would improve flow.",
+          "suggestion": "Հրավիրեք այլ {{productName}} անդամների սենյակ՝ վերբեռնված PDF ձևերը լրացնելու համար: Պատճենեք հանրային հղումը, որպեսզի սենյակը արտաքին օգտատերերի հետ կիսվեք:"
         }
       ],
       "approved_at": null
@@ -124,8 +135,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Copy a public access link to share the room with external users\" is not accurately reflected. The Japanese translation \"外部ユーザーとルームを共有するための公開アクセスリンクもコピーできます\" implies that copying the link is optional and a secondary action, rather than a necessary step for sharing with external users.",
-          "suggestion": "アップロードされたPDFフォームに記入するために、他の{{productName}}メンバーをルームに招待します。外部ユーザーとルームを共有するには、公開アクセスリンクをコピーしてください。"
+          "description": "The phrase \"Copy a public access link to share the room with external users\" is not fully captured. The Japanese translation \"外部ユーザーとルームを共有するための公開アクセスリンクもコピーできます\" literally translates to 'You can also copy a public access link to share the room with external users.' It adds the 'you can' which is not present in the English original and alters the tone.",
+          "suggestion": "アップロードされたPDFフォームに記入するために、他の{{productName}}メンバーをルームに招待します。外部ユーザーとルームを共有するための公開アクセスリンクをコピーしてください。"
         }
       ],
       "approved_at": null
@@ -142,8 +153,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ໂດຍໃຊ້ລິ້ງສາທາລະນະ\" (by using a public link) is slightly awkward. A more natural phrasing would be something like \"ດ້ວຍການແບ່ງປັນລິ້ງສາທາລະນະ\" (by sharing a public link).",
-          "suggestion": "ດ້ວຍການແບ່ງປັນລິ້ງສາທາລະນະ"
+          "description": "The phrase \"Copy a public access link\" is translated as \"ໂດຍໃຊ້ລິ້ງສາທາລະນະ\" which literally means 'by using a public link'. A more accurate translation would convey the action of copying the link.",
+          "suggestion": "ໂດຍກ໊ອບລິ້ງສາທາລະນະ"
+        },
+        {
+          "type": "formatting",
+          "description": "There is no clear separation/break between the two sentences in the translation. It reads as one long run-on sentence.",
+          "suggestion": "ເຊື້ອເຊີນສະມາຊິກ {{productName}} ຄົນອື່ນເຂົ້າໃນຫ້ອງເພື່ອຕື່ມແບບຟອມ PDF ທີ່ຖືກໂຫຼດຂຶ້ນ. ໃຊ້ລິ້ງສາທາລະນະເພື່ອແບ່ງປັນຫ້ອງກັບຜູ້ໃຊ້ນອກ."
         }
       ],
       "approved_at": null
@@ -172,7 +188,7 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation uses 'partilhar' which is more common in Portugal. For a broader Portuguese audience (including Brazil), 'compartilhar' would be more appropriate.",
+          "description": "The Portuguese translation uses 'partilhar' which is more common in Portugal. In Brazil, 'compartilhar' would be more appropriate for wider audience appeal.",
           "suggestion": "Convide outros membros {{productName}} para a sala para preencherem os formulários PDF carregados. Copie um link de acesso público para compartilhar a sala com utilizadores externos."
         }
       ],
@@ -190,13 +206,13 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrase 'pentru completare a formularelor PDF încărcate' is grammatically awkward.  'Completare' is a noun, but the sentence structure implies an action. It's better to use a verb.",
-          "suggestion": "Invitați alți membrii {{productName}} în sala pentru a completa formularele PDF încărcate."
+          "description": "The Romanian phrase 'pentru completare a formularelor PDF încărcate' is grammatically awkward. The preposition 'a' is unnecessary and the construction is not natural.",
+          "suggestion": "Invitați alți membri {{productName}} în sala pentru a completa formularele PDF încărcate."
         },
         {
-          "type": "spelling",
-          "description": "While not strictly incorrect, 'utilizatorii externi' sounds slightly formal. Considering the context, 'oameni din afară' might be more natural. However, 'utilizatorii externi' is acceptable and preserves accuracy.",
-          "suggestion": "Invitați alți membrii {{productName}} în sala pentru a completa formularele PDF încărcate. Copiați link-ul public pentru a partaja sala cu oamenii din afară."
+          "type": "grammar",
+          "description": "While understandable, the use of 'link-ul public' sounds slightly less formal than the English 'public access link'.",
+          "suggestion": "Copiați link-ul de acces public pentru a partaja sala cu utilizatorii externi."
         }
       ],
       "approved_at": null
@@ -213,18 +229,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"කාමරයට අනෙකුත් {{productName}} සාමාජිකයන්ව ආරාධනා කරමින්\" can be improved for clarity and natural flow. A more direct translation of 'Invite other {{productName}} members to the room' would enhance readability.",
-          "suggestion": "කාමරයට අනෙකුත් {{productName}} සාමාජිකයන්ව කැඳවන්න"
+          "description": "The phrase \"කාමරයට අනෙකුත් {{productName}} සාමාජිකයන්ව ආරාධනා කරමින්\" translates more accurately to 'Inviting other {{productName}} members to the room'. The current translation feels somewhat awkward. A more natural phrasing could be 'කාමරයට අනෙකුත් {{productName}} සාමාජිකයන්ව ඇමතීමට' (Kamaraṭa anekunath {{productName}} samājikawan amathīma) or 'කාමරයට අනෙකුත් {{productName}} සාමාජිකයන්ව එකතු කිරීමට'.",
+          "suggestion": "කාමරයට අනෙකුත් {{productName}} සාමාජිකයන්ව එකතු කිරීමට"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"බාහිර පරිශීලකයින් සමඟ කාමරය බෙදා ගැනීමට\" is a bit literal and could be more elegantly translated to reflect a natural phrasing in Sinhala. It could also be slightly improved to use a more accurate synonym for 'share'.",
-          "suggestion": "බාහිර පිරිස සමඟ කාමරය බෙදා ගැනීමට"
+          "description": "The phrase \"පොදු ප්‍රවේශ සම්බන්ධතාවයක් පිටපත් කරන්න\" translates to 'copy a public access link'. While technically correct, it would be better to say 'පොදු ප්‍රවේශ ලේබලය පිටපත් කරන්න' (pōdu pravēsha lēbayala piṭapat karanna), which more directly conveys copying a link label.",
+          "suggestion": "පොදු ප්‍රවේශ ලේබලය පිටපත් කරන්න"
         },
         {
           "type": "formatting",
-          "description": "The use of '{{productName}}' seems correct but ensure consistency in the Sinhala translation. Verify it functions as intended for dynamic content injection.",
-          "suggestion": "No direct suggestion - ensure correct implementation for dynamic content."
+          "description": "The sentence structure could be improved for better readability. Separating the actions would enhance clarity. The current phrasing is a bit convoluted.",
+          "suggestion": "කාමරයට අනෙකුත් {{productName}} සාමාජිකයන්ව ආරාධනා කරමින්, උඩුගත කළ PDF ආකෘති පිරවීමට ඔවුන්ට ඉඩ දෙන්න. බාහිර පරිශීලකයින් සමඟ කාමරය බෙදා ගැනීමට පොදු ප්‍රවේශ ලේබලය පිටපත් කරන්න."
         }
       ],
       "approved_at": null
@@ -241,13 +257,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'PDF' should be capitalized as it's an acronym.",
-          "suggestion": "PDF should be written as PDF."
-        },
-        {
-          "type": "grammar",
-          "description": "The phrase 'če želite sobo deliti z zunanjimi uporabniki' is grammatically correct but reads slightly awkwardly. A more natural phrasing could be considered.",
-          "suggestion": "Alternative phrasing: 'Za deljenje sobe z zunanjimi uporabniki, kopirajte povezavo za javni dostop.'"
+          "description": "The word 'obrazce' (forms) is missing an accent. It should be 'obrazcé'.",
+          "suggestion": "obrazcé"
         }
       ],
       "approved_at": null
@@ -257,14 +268,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The word 'room' is translated as 'sobu'. While technically correct, in the context of collaborative PDF form filling, 'простор' (prostor) or 'радну просторију' (radnu prostoriju) might be a more natural and accurate translation to convey a shared workspace. 'Soba' implies a physical room, which isn't the intended meaning.",
-          "suggestion": "Позовите друге чланове {{productName}} да попуњавају отпремљене PDF формуларе у **простору** или **радној просторији**. Копирајте јавни линк за дељење собе са спољним корисницима."
-        },
-        {
           "type": "formatting",
-          "description": "The phrase 'Copy a public access link' could benefit from a clearer instruction in Serbian. 'Копирајте јавни линк' is functional, but a more direct instruction like 'Копирајте линк за дељење' might be more user-friendly.",
-          "suggestion": "Копирајте **линк за дељење** јавни линк за дељење собе са спољним корисницима."
+          "description": "The Serbian translation lacks the bolding applied to 'productName' in the English version. While not strictly an error, maintaining formatting consistency enhances clarity.",
+          "suggestion": "Позовите друге чланове **{{productName}}** у собу како би попуњавали отпремљене PDF формуларе. Копирајте јавни линк за дељење собе са спољним корисницима."
         }
       ],
       "approved_at": null
@@ -275,13 +281,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'pozovite' (invite) doesn't quite capture the nuance of 'invite other members'. While technically correct, a more appropriate word would convey more of a collaborative or group participation feel. 'Dodajte' (add) or 'Uključite' (include) might be better alternatives.",
-          "suggestion": "Dodajte druge članove {{productName}} u sobu kako bi popunjavali otpremljene PDF formulare."
+          "description": "The English phrase 'Invite other {{productName}} members' is translated as 'Pozovite druge članove {{productName}}'. While understandable, a more accurate translation conveying invitation would be 'Pozovite ostale članove {{productName}}'. 'Ostale' emphasizes 'other' more directly.",
+          "suggestion": "Pozovite ostale članove {{productName}}"
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'deljenje' (sharing) is technically correct but 'omogućite pristup' (enable access) is a more natural phrasing in this context for describing providing access to a room.",
-          "suggestion": "Kopirajte javni link za omogućite pristup sobe sa spoljnim korisnicima."
+          "description": "The English phrase 'to fill out the uploaded PDF forms' is translated as 'kako bi popunjavali otpremljene PDF formulare'.  'Popunjavati' is correct but 'otpremljene' (shipped/despatched) doesn't accurately represent 'uploaded'. A better translation would be 'uploadovane' or 'prispele PDF formulare'.",
+          "suggestion": "Pozovite ostale članove {{productName}} kako bi popunjavali uploadovane/prispele PDF formulare."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Copy a public access link to share the room with external users' is translated as 'Kopirajte javni link za deljenje sobe sa spoljnim korisnicima.'. While accurate, it lacks a slightly more natural flow.  Consider rephrasing to include 'da biste'.",
+          "suggestion": "Kopirajte javni link da biste delili sobu sa spoljnim korisnicima."
         }
       ],
       "approved_at": null
@@ -292,8 +303,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Copy a public access link\" is too literal. A more natural Turkish phrasing would be \"Herkese açık bir bağlantı kopyalayın\" or \"Herkese açık bir paylaşım bağlantısı oluşturun ve kopyalayın\".",
-          "suggestion": "Herkese açık bir paylaşım bağlantısı oluşturun ve kopyalayın."
+          "description": "The phrase \"Copy a public access link\" is not directly equivalent to \"genel erişim bağlantısını kopyalayın\". While understandable, a more accurate translation would be something like \"Herkese açık bağlantıyı kopyalayın\" or \"Paylaşılabilir bağlantıyı kopyalayın\".",
+          "suggestion": "Herkese açık bağlantıyı kopyalayın."
         }
       ],
       "approved_at": null
@@ -301,13 +312,25 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses a full stop at the end of the second sentence, which is not consistent with the English original and may make it sound less conversational.",
+          "suggestion": "Remove the full stop at the end of the second sentence: 'Скопіюйте посилання публічного доступу, щоб поділитися кімнатою із зовнішніми користувачами' becomes 'Скопіюйте посилання публічного доступу, щоб поділитися кімнатою із зовнішніми користувачами'"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Copy a public access link' is slightly awkward in Vietnamese. A more natural phrasing would be 'Sao chép đường liên kết công khai'.",
+          "suggestion": "Sao chép đường liên kết công khai"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

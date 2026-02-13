@@ -3,7 +3,7 @@
   "content": "Deletion request successfully sent to the {{productName}} owner's email address <1>{{email}}</1> ",
   "content_en_sha1_hash": "b26d8411a71a0cdcb60384157277f1024a7a992a",
   "created_at": "2025-05-19T21:30:57.430Z",
-  "updated_at": "2025-05-20T09:47:59.958Z",
+  "updated_at": "2025-06-30T12:20:31.763Z",
   "comment": {
     "text": "This translation key is used for a success message that is displayed to the user after sending a deletion request. It informs the user that the deletion request has been successfully sent to the owner's email address of the associated product. This message appears in a dialog box or notification after clicking a delete button.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/management/src/categories/spaces/sub-components/dialogs/DeletePortalDialog/index.tsx",
-      "line_number": 83,
-      "context": "t(\"PortalDeleted\", { productName: t(\"Common:ProductName\") })\n );\n } else {\n toastr.success(\n <Trans\n i18nKey=\"DeleteRequestSuccess\"\n values={{\n productName: t(\"Common:ProductName\"),\n email,\n }}\n components={{",
+      "file_path": "/packages/management/src/dialogs/delete-portal/index.tsx",
+      "line_number": 79,
+      "context": ");\n router.refresh();\n } else {\n toastr.success(\n <Trans\n i18nKey=\"DeleteRequestSuccess\"\n values={{\n productName: t(\"Common:ProductName\"),\n email,\n }}\n components={{",
       "module": "/packages/management"
     }
   ],
@@ -27,19 +27,52 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Arabic translation \"بمالك {{productName}}\" is an awkward and potentially incorrect translation of \"to the {{productName}} owner's email address\". It literally translates to 'with the owner of {{productName}}'. It should indicate possession or relationship.",
+          "suggestion": "تم إرسال طلب الحذف بنجاح إلى عنوان البريد الإلكتروني الخاص بمالك {{productName}}"
+        },
+        {
+          "type": "formatting",
+          "description": "The closing tags <1> are misplaced in the Arabic translation.  They are within the 'بمالك {{productName}}' phrase instead of surrounding just the email address, as intended in the English original.",
+          "suggestion": "تم إرسال طلب الحذف بنجاح إلى عنوان البريد الإلكتروني الخاص <1>{{email}}<1> بمالك {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"istifadəçinin\" (user's) doesn't accurately reflect \"owner's\" in the English context. The product owner implies responsibility and control, not just any user.",
+          "suggestion": "Silinmə sorğusu uğurla {{productName}} hesabının sahibi olan <1>{{email}}</1> e-poçt ünvanına göndərildi"
+        },
+        {
+          "type": "formatting",
+          "description": "The closing angle bracket `</1>` appears to be a typo, and doesn't match the opening tag.",
+          "suggestion": "Silinmə sorğusu uğurla {{productName}} hesabının sahibi olan <1>{{email}}</1>"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Deletion request successfully sent\" is not fully conveyed. A more accurate translation would reflect the action of sending the request, not just that it's successful.",
+          "suggestion": "Заявката за изтриване беше изпратена успешно..."
+        },
+        {
+          "type": "formatting",
+          "description": "The original English uses `<1>` and `</1>` to mark the email, the Bulgarian translation also uses the same markup which is slightly unusual.",
+          "suggestion": "Consider removing the surrounding `<1>` and `</1>` tags or replacing them with a more standard format."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -51,19 +84,37 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Besitzers' is grammatically correct but might sound slightly awkward in a user-facing message. A more natural phrasing might be 'Kontoinhabers' (account holder) or something similar, depending on the exact context.",
+          "suggestion": "Löschanforderung erfolgreich an die E-Mail-Adresse des {{productName}}-Kontoinhabers gesendet <1>{{email}}</1>"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Greek translation retains the HTML tags `<1>` and `</1>`. These tags are not standard in Greek text and should be removed.",
+          "suggestion": "Remove the HTML tags. The text should be: Το αίτημα διαγραφής εστάλη επιτυχώς στη διεύθυνση email του ιδιοκτήτη {{productName}} {{email}}"
+        }
+      ],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Deletion request successfully sent' is not directly conveyed by 'La solicitud de eliminación se ha enviado correctamente'. A more accurate translation would be 'La solicitud de eliminación fue enviada correctamente' or 'Se ha enviado correctamente la solicitud de eliminación'.",
+          "suggestion": "Se ha enviado correctamente la solicitud de eliminación."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -75,13 +126,25 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The `<1>` tags are present in both the English and French versions, indicating they are part of the intended formatting. No change needed.",
+          "suggestion": null
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The email address in the Armenian translation has the same HTML tags as the English content.  This is likely unnecessary and could be simplified.",
+          "suggestion": "Ջնջման հարցումը հաջողությամբ ուղարկվել է {{productName}} սեփականատիրոջ էլ. հասցեին: {{email}}"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,19 +156,47 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"削除リクエストは、{{productName}}のオーナーの<1>{{email}}</1>メールアドレスまで送信されました\" is a literal translation that sounds unnatural in Japanese. A more natural phrasing would be something like \"削除リクエストを{{productName}}のオーナーの<1>{{email}}</1>に送信しました\" or \"{{productName}}のオーナーの<1>{{email}}</1>に削除リクエストを送信しました\".",
+          "suggestion": "{{productName}}のオーナーの<1>{{email}}</1>に削除リクエストを送信しました"
+        },
+        {
+          "type": "formatting",
+          "description": "The Japanese translation retains the <1> and </1> tags from the English content. These tags don't have a corresponding meaning or function in Japanese and should be removed.",
+          "suggestion": "削除リクエストは、{{productName}}のオーナーの{{email}}メールアドレスまで送信されました"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> are not standard and appear to be incorrect.  The intent was likely to mark the email address, but the tag syntax is wrong. Standard HTML requires opening and closing tags with the same name.",
+          "suggestion": "Consider replacing `<1>{{email}}</1>` with `<span>{{email}}</span>` or a similar appropriate HTML tag if the email address needs to be styled differently."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'ຄຳກວດກາ' (kam kwat kha) translates to 'request' but in this context, 'ຄຳຮ້ອງ' (kam rong) would be a more accurate translation for 'request'. 'ຄຳກວດກາ' implies an inspection or check.",
+          "suggestion": "ຄຳຮ້ອງລົບອອກຖືກສົ່ງໄປທີ່ອີເມວຂອງເຈົ້າຂອງ {{productName}} ແລ້ວ <1>{{email}}</1>"
+        },
+        {
+          "type": "spelling",
+          "description": "While technically not incorrect, 'ຖືກສົ່ງໄປ' can be slightly more naturally rendered as 'ຖືກສົ່ງ' in this context. 'ໄປ' adds a bit of unnecessary wording.",
+          "suggestion": "ຄຳຮ້ອງລົບອອກຖືກສົ່ງທີ່ອີເມວຂອງເຈົ້າຂອງ {{productName}} ແລ້ວ <1>{{email}}</1>"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -117,31 +208,71 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags `<1>` are not standard and seem to be placeholders for variable insertion. While functional in some systems, they're not universally understood and should ideally be replaced with a more standard method (e.g., double curly braces).",
+          "suggestion": "Consider using a standard variable insertion method like {{email}} instead of <1>{{email}}</1>."
+        }
+      ],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The tag <1> is used in both the English and Polish versions. This is likely unnecessary and might confuse developers implementing the translation.",
+          "suggestion": "Remove the tags <1> from both the English and Polish content."
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, the Polish translation could be slightly improved for flow. Using 'na adres e-mail' is correct but slightly less natural than a more concise wording.",
+          "suggestion": "Consider rephrasing to: 'Prośba o usunięcie została pomyślnie wysłana właścicielowi {{productName}} na adres e-mail: <1>{{email}}</1>'"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Deletion request successfully sent' is not perfectly captured by 'Pedido de eliminação enviado com sucesso'. A more accurate translation might be 'Solicitação de exclusão enviada com sucesso' or 'Requisito de eliminação enviado com sucesso'. 'Pedido' implies a request for something to be *obtained*, not *deleted*.",
+          "suggestion": "Solicitação de exclusão enviada com sucesso"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The email address tag <1>{{email}}</1> is not correctly formatted.  The closing tag should be </1>.",
+          "suggestion": "Change </1> to </1>."
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation doesn't fully capture the nuance of 'sent to the {{productName}} owner's email address'. It translates to 'to the email address which belongs to the owner'. While understandable, it's less direct.",
+          "suggestion": "Solicitarea de ștergere a fost trimisă cu succes la adresa de e-mail a proprietarului {{productName}}: <1>{{email}}</1>"
+        },
+        {
+          "type": "formatting",
+          "description": "The placement of the <1>{{email}}</1> tags is slightly awkward after the preposition 'la'.",
+          "suggestion": "Solicitarea de ștergere a fost trimisă cu succes la adresa de e-mail <1>{{email}}</1> a proprietarului {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,13 +284,25 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Sinhala translation retains the HTML tags <1>{{email}}</1> which are not appropriate for typical Sinhala text. These tags should be removed.",
+          "suggestion": "Remove the HTML tags:  {{email}}"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Slovak translation maintains the HTML tags <1> and </1>, which are present in the English content. While technically correct, it's generally better to remove these tags in a localized translation if they're not being used for specific HTML rendering.",
+          "suggestion": "Remove the HTML tags <1> and </1> from the Slovak translation.  The translation should be: \"Žiadosť o vymazanie bola úspešne odoslaná na e-mail majiteľa {{productName}} {{email}}\""
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -171,19 +314,47 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Захтев' (Zahtev) which translates to 'Request' is overly formal. A more natural and common translation would be 'Упит' (Upit).",
+          "suggestion": "Упит за брисање је успешно послат на емаил адресу власника {{productName}}<1>{{email}}</1>"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of `<1>` and `</1>` for email address seems unnecessary and unconventional in Serbian. Standard HTML tags or no tags are generally preferred.",
+          "suggestion": "Упит за брисање је успешно послат на емаил адресу власника {{productName}} {{email}}"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The angle brackets '<1> and </1>' are not standard in Serbian and may cause confusion. They seem to be intended to mark the email variable, but a different approach is needed.",
+          "suggestion": "Consider removing the angle brackets or replacing them with a more common approach for marking variables in Serbian, such as using curly braces {{ }} or parentheses ( ).  Alternatively, the variable could be incorporated into the sentence more naturally."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Zahtev za brisanje je uspešno poslat\" sounds slightly awkward. A more natural phrasing would use the reflexive verb.",
+          "suggestion": "Consider replacing \"Zahtev za brisanje je uspešno poslat\" with \"Zahtev za brisanje je uspešno poslat na\" or even better, \"Zahtev za brisanje je uspešno prosleđen na\"."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Turkish translation uses a semicolon (;) instead of a comma (,) after 'sahibinin' which is grammatically incorrect in this context. Turkish uses a comma here.",
+          "suggestion": "Silme talebi {{productName}} sahibinin, <1>{{email}}</1> e-posta adresine başarıyla gönderildi "
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -195,7 +366,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Deletion request successfully sent to the {{productName}} owner's email address' is not accurately reflected in the Vietnamese translation. A more natural phrasing would be 'Yêu cầu hủy đã được gửi thành công đến địa chỉ email của chủ sở hữu {{productName}}'. The original Vietnamese emphasizes deletion, while the English implies a request that will be processed.",
+          "suggestion": "Yêu cầu hủy đã được gửi thành công đến địa chỉ email của chủ sở hữu {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

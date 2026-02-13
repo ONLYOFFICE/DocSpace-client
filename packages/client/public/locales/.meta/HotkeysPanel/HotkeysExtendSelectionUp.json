@@ -3,7 +3,7 @@
   "content": "Extend selection up",
   "content_en_sha1_hash": "aaa950882a83710ee632094d3f0e9915b936c6b6",
   "created_at": "2025-05-19T21:30:55.054Z",
-  "updated_at": "2025-05-21T10:31:37.091Z",
+  "updated_at": "2025-05-24T10:41:29.044Z",
   "comment": {
     "text": "The translation key \"HotkeysExtendSelectionUp\" is used to display the text \"Extend selection up\" in UI elements, indicating a keyboard shortcut that extends the selected text upwards. This text appears in hotkey lists or labels within the application, guiding users on how to use this specific shortcut.",
     "is_auto": true,
@@ -84,13 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ընդարձակում է ընտրարկումը վեր' is a literal translation and doesn't convey the intended meaning of 'Extend selection up' naturally in Armenian. It reads awkwardly.",
-          "suggestion": "A more natural translation would be something like 'Վերցնել ընտրությունը վերև' or 'Ընտրությունը վերև ընդարձակել' or 'Վերև ընտրությունը ընդարձակել'."
-        },
-        {
-          "type": "grammar",
-          "description": "The phrase 'Ընդարձակում է ընտրարկումը վեր' has a somewhat clumsy grammatical construction. The verb 'ընդարձակում է' (extends) isn't directly connected to the object 'ընտրարկումը' in a clear way.",
-          "suggestion": "As suggested above, rephrasing to a more natural sentence structure would address this."
+          "description": "The Armenian translation \"Ընդարձակում է ընտրարկումը վեր\" is not an accurate translation of \"Extend selection up.\" It literally translates to \"Extends the selection up.\"  It's too literal and doesn't convey the meaning of expanding the selection upwards. It sounds unnatural in Armenian.",
+          "suggestion": "A better translation would be something like \"Բարձրացնել ընտրությունը\" (Bardsracnel entruyteun - Raise the selection) or \"Ընտրության վերևում ընդարձակել\" (Entrutyun veroum endardzakel - Extend the selection upwards)."
         }
       ],
       "approved_at": null
@@ -107,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"選択範囲の拡大（上）\" while understandable, isn't the most natural or precise translation of \"Extend selection up.\" \"Extend selection up\" implies expanding the selection to include elements above the current selection.  \"拡大（上）\" focuses solely on enlargement, without emphasizing the 'up' aspect which is crucial for functionality.  A better translation would capture the 'upward extension' aspect.",
-          "suggestion": "選択範囲を上に拡大"
+          "description": "The translation \"選択範囲の拡大（上）\" literally translates to 'Selection range expansion (up)'. While understandable, it's not the most natural or idiomatic way to convey 'Extend selection up' in Japanese. It's a bit too literal and could be more concise.",
+          "suggestion": "候補: 「上へ拡大」, 「上方向へ拡大」, or simply 「上へ」 if the context makes the 'selection' clear."
         }
       ],
       "approved_at": null
@@ -119,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '위쪽으로 선택 확장' while literally meaning 'Extend selection up', doesn't flow naturally in Korean for a user interface context. It sounds a bit robotic.",
-          "suggestion": "선택 영역 위로 확장"
+          "description": "The translation \"위쪽으로 선택 확장\" is not the most natural or accurate translation of \"Extend selection up.\" While it's understandable, it sounds somewhat literal and clunky in Korean.",
+          "suggestion": "Consider alternatives like \"선택 영역 위로 확장\" or \"위로 선택 영역 확장하기\" which sound more idiomatic and natural in Korean.  The best option might depend on the surrounding UI text."
         }
       ],
       "approved_at": null
@@ -131,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ຂະຫຍາຍການເລືອກ' translates to 'expand selection', not 'extend selection'. 'Extend' implies a slight movement or addition, while 'expand' is a more accurate representation of the English meaning in this context.",
-          "suggestion": "ຂະຫຍາຍການເລືອກຢ່າງເທິງ"
+          "description": "The Lao translation 'ຂະຫຍາຍການເລືອກ' translates to 'expand selection'. The English 'Extend selection up' implies a specific direction, which is not conveyed by 'expand selection'.",
+          "suggestion": "ຂະຫຍາຍການເລືອກຂຶ້ນ"
         }
       ],
       "approved_at": null
@@ -185,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'තේරීම ඉහළට පතුරුවන්න' is a literal translation but doesn't fully convey the meaning of 'Extend selection up' in a UI context. It implies spreading the selection upwards, whereas 'extend' in this context means to increase the selection's range upwards.",
-          "suggestion": "A more appropriate translation would be 'උඩට තේරීම වැඩි කරන්න' (Udatha therima wenikanna) or 'උඩු තේරීම පතුරුවන්න' (Uddu therima pathuruvanna), which more accurately reflects the action of extending the selection upward."
+          "description": "The translation 'තේරීම ඉහළට පතුරුවන්න' while conveying a similar meaning, doesn't perfectly capture the nuance of 'Extend selection up'. 'පතුරුවන්න' implies spreading or scattering, which isn't the core action of extending a selection.  A more direct translation focusing on extending the selection boundary would be more accurate.",
+          "suggestion": "තේරීම උඩුගත කරන්න"
         }
       ],
       "approved_at": null
@@ -203,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Premakni izbiro navzgor' while literally meaning 'Move selection upwards,' doesn't perfectly capture the nuance of 'Extend selection up.' 'Extend' implies expansion, which 'Premakni' doesn't convey.",
-          "suggestion": "Razširi izbiro navzgor"
+          "description": "The translation 'Premakni izbiro navzgor' literally translates to 'Move selection upwards'. While understandable, a more accurate and natural translation for 'Extend selection up' would better convey the action of expanding the selection.",
+          "suggestion": "Razširi izbor navzgor"
         }
       ],
       "approved_at": null
@@ -215,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Прошири селекцију горе' while understandable, doesn't perfectly convey the meaning of 'Extend selection up'. A more accurate translation would consider the action of extending the selection *to* the element above.",
-          "suggestion": "Прошири селекцију нагоре"
+          "description": "The translation 'Прошири селекцију горе' is a literal translation and doesn't quite capture the nuance of 'Extend selection up' in the context of a hotkey. It sounds slightly awkward and not idiomatic.",
+          "suggestion": "Раширено селекцију нагоре"
         }
       ],
       "approved_at": null
@@ -242,13 +237,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Mở rộng lựa chọn lên' is understandable, a more natural and common translation for 'Extend selection up' in this context (likely a UI element) would be 'Mở rộng vùng chọn lên' or 'Mở rộng lựa chọn lên trên'. The use of 'vùng chọn' specifies the selection area more accurately.",
-          "suggestion": "Mở rộng vùng chọn lên"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
@@ -257,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '向上扩展选定' doesn't accurately convey the meaning of 'Extend selection up'.  'Extend' implies increasing the selection, and 'up' specifies the direction. The current translation focuses on extending and selecting, but lacks the directional clarity.",
-          "suggestion": "向上扩大选择"
+          "description": "The translation '向上扩展选定' while conveying a similar meaning, isn't the most natural or idiomatic way to express \"Extend selection up\" in Chinese. It sounds slightly awkward.",
+          "suggestion": "向上扩展选择 (shàng xiàng kuòzhǎn xuǎnzé) - This is a more common and natural way to say 'extend selection up'."
         }
       ],
       "approved_at": null

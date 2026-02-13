@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,21 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../styles/variables/_colors.scss";
+@use "../../styles/variables/colors";
 
 :global(.dark) {
   :local {
     .tooltip {
-      --tooltip-bg-color: #{$black};
-      --tooltip-text-color: #{$white};
+      --tooltip-bg-color: #{colors.$black};
+      --tooltip-text-color: #{colors.$white};
       --tooltip-max-width: 320px;
     }
   }
 }
 
 .tooltip {
-  --tooltip-bg-color: #{$white};
-  --tooltip-text-color: #{$black};
+  --tooltip-bg-color: #{colors.$white};
+  --tooltip-text-color: #{colors.$black};
   --tooltip-max-width: 320px;
 
   &.noUserSelect {
@@ -56,6 +56,7 @@
     padding: 8px 12px;
     max-width: min(100vw, var(--tooltip-max-width));
     color: var(--tooltip-text-color);
+    font-size: 12px;
     z-index: 999;
     box-sizing: border-box;
 
@@ -113,5 +114,12 @@
         background: none !important;
       }
     }
+  }
+
+  :global(#system-tooltip) {
+    max-width: min(100vw, 800px) !important;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
   }
 }

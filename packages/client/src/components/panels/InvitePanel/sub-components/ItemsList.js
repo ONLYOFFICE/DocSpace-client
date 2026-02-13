@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,26 +24,26 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect, useRef, memo, useCallback } from "react";
+import { useState, useEffect, useRef, memo, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { FixedSizeList as List } from "react-window";
 import { CustomScrollbarsVirtualList } from "@docspace/shared/components/scrollbar";
 import useResizeObserver from "use-resize-observer";
 import { useTheme } from "styled-components";
 import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
+import classNames from "classnames";
 import Item from "./Item";
-
-import { ScrollList } from "../StyledInvitePanel";
+import styles from "../InvitePanel.module.scss";
 
 const USER_ITEM_HEIGHT = 48;
 
-const VirtualScroll = React.forwardRef((props, ref) => (
+const VirtualScroll = ({ ref, ...props }) => (
   <CustomScrollbarsVirtualList
     {...props}
     ref={ref}
     paddingAfterLastItem={ASIDE_PADDING_AFTER_LAST_ITEM}
   />
-));
+);
 
 VirtualScroll.displayName = "VirtualScroll";
 
@@ -74,6 +74,7 @@ const Row = memo(({ data, index, style }) => {
     <Item
       t={t}
       item={item}
+      index={index}
       key={item.id}
       style={style}
       theme={theme}
@@ -175,11 +176,15 @@ const ItemsList = ({
     isMobileView && isOpenItemAccess ? "auto" : "transform";
 
   return (
-    <ScrollList
+    <div
+      className={classNames(styles.scrollList, {
+        [styles.isAutoHeight]: scrollAllPanelContent && isTotalListHeight,
+        [styles.withOffset]: !!offsetTop,
+      })}
       offsetTop={offsetTop}
       ref={bodyRef}
-      scrollAllPanelContent={scrollAllPanelContent}
-      isTotalListHeight={isTotalListHeight}
+      data-testid="invite_panel_items_scroll_list"
+      style={{ "--offset-top": `${offsetTop}px` }}
     >
       <List
         style={{ overflow: overflowStyle, willChange: willChangeStyle }}
@@ -204,10 +209,11 @@ const ItemsList = ({
           allowInvitingGuests,
         }}
         outerElementType={!scrollAllPanelContent ? VirtualScroll : null}
+        data-testid="invite_panel_items_list"
       >
         {Row}
       </List>
-    </ScrollList>
+    </div>
   );
 };
 

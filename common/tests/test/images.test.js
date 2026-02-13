@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,10 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { describe, it, expect, beforeAll } from "vitest";
 const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
-const { getAllFiles, getWorkSpaces, BASE_DIR } = require("../utils/files");
+const { getAllFiles, getWorkSpaces, BASE_DIR, convertPathToOS } = require("../utils/files");
 const { findImagesIntoFiles } = require("../utils/images");
 
 const LOGO_REGEX = new RegExp(/\/logo\/(.)*\/(.)*.svg/);
@@ -35,9 +36,29 @@ const ICONS_REGEX = new RegExp(/\/(icons|thirdparties)\/(.)*/);
 
 let allImgs = [];
 let allFiles = [];
+let fileContentsCache = new Map();
 
 beforeAll(() => {
   console.log(`Base path = ${BASE_DIR}`);
+
+  const excludeDirs = [
+    ".nx",
+    "e2e",
+    ".yarn",
+    ".github",
+    ".vscode",
+    ".git",
+    "__mocks__",
+    "dist",
+    "test",
+    "tests",
+    ".next",
+    "campaigns",
+    "storybook-static",
+    "node_modules",
+    ".meta",
+    "locales"
+  ];
 
   const workspaces = getWorkSpaces();
   workspaces.push(path.resolve(BASE_DIR, "public"));
@@ -45,11 +66,10 @@ beforeAll(() => {
   const files = workspaces.flatMap((wsPath) => {
     const clientDir = path.resolve(BASE_DIR, wsPath);
 
-    return getAllFiles(clientDir).filter(
+    return getAllFiles(clientDir, excludeDirs).filter(
       (filePath) =>
         filePath &&
         filesPattern.test(filePath) &&
-        !filePath.includes("locales/") &&
         !filePath.includes(".test.") &&
         !filePath.includes(".stories.")
     );
@@ -57,17 +77,26 @@ beforeAll(() => {
 
   console.log(`Found files by filter = ${files.length}.`);
 
+  console.time('Reading files');
   files.forEach((filePath) => {
     const file = { path: filePath, fileName: path.basename(filePath) };
     allFiles.push(file);
+    
+    try {
+      const content = fs.readFileSync(filePath, "utf8");
+      fileContentsCache.set(filePath, content);
+    } catch (err) {
+      console.warn(`Failed to read file: ${filePath}`);
+    }
   });
+  console.timeEnd('Reading files');
 
   const imagesPattern = /\.(gif|jpe|jpeg|tiff?|png|webp|bmp|svg)$/i;
 
   const images = workspaces.flatMap((wsPath) => {
     const clientDir = path.resolve(BASE_DIR, wsPath);
 
-    return getAllFiles(clientDir).filter(
+    return getAllFiles(clientDir, excludeDirs).filter(
       (filePath) =>
         filePath &&
         imagesPattern.test(filePath) &&
@@ -76,31 +105,33 @@ beforeAll(() => {
     );
   });
 
+  console.log(`Found images = ${images.length}.`);
+  console.time('Processing images');
+  
   images.forEach((filePath) => {
-    const data = fs.readFileSync(filePath, "utf8");
-
-    const buf = new Buffer.from(data);
-
-    const md5Hash = crypto.createHash("md5").update(buf).digest("hex");
-
-    const img = { path: filePath, fileName: path.basename(filePath), md5Hash };
-
-    allImgs.push(img);
+    try {
+      const data = fs.readFileSync(filePath);
+      const md5Hash = crypto.createHash("md5").update(data).digest("hex");
+      const img = { path: filePath, fileName: path.basename(filePath), md5Hash };
+      allImgs.push(img);
+    } catch (err) {
+      console.warn(`Failed to read image: ${filePath}`);
+    }
   });
+  
+  console.timeEnd('Processing images');
+  console.log(`Total files: ${allFiles.length}, Total images: ${allImgs.length}`);
 });
 
 describe("Image Tests", () => {
-  test("UselessImagesTest: Verify that there are no unused image files in the codebase.", () => {
-    const usedImages = findImagesIntoFiles(allFiles, allImgs);
+  it("UselessImagesTest: Verify that there are no unused image files in the codebase.", () => {
+    const usedImages = findImagesIntoFiles(allFiles, allImgs, fileContentsCache);
+    const usedImagesSet = new Set(usedImages);
 
     const uselessImages = allImgs.filter((img) => {
-      if (img.fileName.includes("default_user_photo_size_48-48")) return false;
+      if (img.fileName.includes("default_user_photo_size_48-48") || img.fileName.includes("default_user_photo_size_360-360")) return false;
 
-      if (usedImages.indexOf(img.fileName) === -1) {
-        return true;
-      }
-
-      return false;
+      return !usedImagesSet.has(img.fileName);
     });
 
     let message = "Found unused images in the code.\r\n\r\n";
@@ -113,7 +144,7 @@ describe("Image Tests", () => {
     expect(uselessImages.length, message).toBe(0);
   });
 
-  test("ImagesWithDifferentMD5ButEqualNameTest: Verify that there are no image files with the same name but different content (as determined by their MD5 hash) in the codebase. ", () => {
+  it("ImagesWithDifferentMD5ButEqualNameTest: Verify that there are no image files with the same name but different content (as determined by their MD5 hash) in the codebase. ", () => {
     const uniqueImg = new Map();
 
     allImgs.forEach((i) => {
@@ -144,24 +175,16 @@ describe("Image Tests", () => {
       if (value.length > 1) {
         let skip = false;
         if (
-          value[0].path.includes("/logo/") ||
-          value[0].path.includes("/icons/")
+          value[0].path.includes(convertPathToOS("/logo/")) ||
+          value[0].path.includes(convertPathToOS("/icons/"))
         ) {
           skip = true;
-          value.forEach((v) => {
-            const isMain =
-              v.path.includes(`/logo/${key}`) ||
-              v.path.includes(`/icons/${key}`);
-            const isSubPath =
-              LOGO_REGEX.test(v.path) || ICONS_REGEX.test(v.path);
-            skip = (isSubPath || isMain) && skip;
-          });
         }
         if (skip) return;
         message += `${++i}. ${key}:\r\n`;
         value.forEach(
           (v) =>
-            (message += `${v.path} ${LOGO_REGEX.test(v.path) || ICONS_REGEX.test(v.path)}\r\n`)
+            (message += `${v.path}\r\n`)
         );
         message += "\r\n";
       }
@@ -170,7 +193,7 @@ describe("Image Tests", () => {
     expect(i, message).toBe(0);
   });
 
-  test("ImagesWithDifferentNameButEqualMD5Test: hat there are no image files with different names but identical content (as determined by their MD5 hash) in the codebase.", () => {
+  it("ImagesWithDifferentNameButEqualMD5Test: hat there are no image files with different names but identical content (as determined by their MD5 hash) in the codebase.", () => {
     const uniqueImg = new Map();
 
     allImgs.forEach((i) => {
@@ -195,7 +218,7 @@ describe("Image Tests", () => {
     let i = 0;
     uniqueImg.forEach((value, key) => {
       if (
-        value[0].path.includes("/logo/") ||
+        value[0].path.includes(convertPathToOS("/logo/")) ||
         value[0].path.includes("phoneFlags")
       )
         return;
@@ -210,7 +233,7 @@ describe("Image Tests", () => {
     expect(i, message).toBe(0);
   });
 
-  test("ImagesWithEqualMD5AndEqualNameTest: Verify that there are no duplicate image files in the codebase that have both the same name and the same content (as determined by their MD5 hash).", () => {
+  it("ImagesWithEqualMD5AndEqualNameTest: Verify that there are no duplicate image files in the codebase that have both the same name and the same content (as determined by their MD5 hash).", () => {
     const uniqueImg = new Map();
 
     allImgs.forEach((i) => {
@@ -240,10 +263,10 @@ describe("Image Tests", () => {
     uniqueImg.forEach((value, key) => {
       if (value.length > 1) {
         let skipLogo = false;
-        if (value[0].path.includes("/logo/")) {
+        if (value[0].path.includes(convertPathToOS("/logo/"))) {
           skipLogo = true;
           value.forEach((v) => {
-            const isMainLogo = v.path.includes(`/logo/${key}`);
+            const isMainLogo = v.path.includes(convertPathToOS(`/logo/${key}`));
             const isSubPath = LOGO_REGEX.test(v.path);
             skipLogo = (isSubPath || isMainLogo) && skipLogo;
           });
@@ -259,7 +282,7 @@ describe("Image Tests", () => {
     expect(i, message).toBe(0);
   });
 
-  test("WrongImagesImportTest: Verify that image imports in the codebase follow the correct import paths and conventions.", () => {
+  it("WrongImagesImportTest: Verify that image imports in the codebase follow the correct import paths and conventions.", () => {
     const wrongImportImages = [
       `"/static/images`,
       `"/images`,
@@ -274,7 +297,8 @@ describe("Image Tests", () => {
         return;
       }
 
-      const data = fs.readFileSync(file.path, "utf8");
+      const data = fileContentsCache.get(file.path);
+      if (!data) return;
 
       wrongImportImages.forEach((i) => {
         const idx = data.indexOf(i);

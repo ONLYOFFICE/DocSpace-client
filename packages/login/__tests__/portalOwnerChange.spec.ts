@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,9 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
+
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
-import { expect, test } from "./fixtures/base";
-import { endpoints } from "@docspace/shared/__mocks__/e2e";
+import { test } from "./fixtures/base";
 
 const URL = "/login/confirm/PortalOwnerChange";
 
@@ -40,8 +41,8 @@ const QUERY_PARAMS = [
     value: "123",
   },
   {
-    name: "email",
-    value: "mail@mail.com",
+    name: "encemail",
+    value: "b5COc6kRm3veeYqA72sOfA&uid=66faa6e4-f133-11ea-b126-00ffeec8b4ef",
   },
   {
     name: "uid",
@@ -51,41 +52,39 @@ const QUERY_PARAMS = [
 
 const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
 
-test("portal owner change render", async ({ page }) => {
-  await page.goto(URL_WITH_PARAMS);
+test("portal owner change render", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "portal-owner-change",
     "portal-owner-change-render.png",
   ]);
 });
 
-test("portal owner change save", async ({ page, mockRequest }) => {
-  await mockRequest.router([endpoints.changeOwner]);
-  await page.goto(URL_WITH_PARAMS);
+test("portal owner change save", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await page.getByRole("button", { name: "Save" }).click();
+  const changeOwnerButton = page.getByTestId("save_change_owner_button");
+  await changeOwnerButton.click();
 
-  await page
-    .getByRole("button", { name: "Save" })
-    .waitFor({ state: "detached" });
+  await changeOwnerButton.waitFor({ state: "detached" });
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "portal-owner-change",
     "portal-owner-change-save.png",
   ]);
 });
 
-test("portal owner change cancel", async ({ page }) => {
-  await page.goto(URL_WITH_PARAMS);
+test("portal owner change cancel", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await page.getByRole("button", { name: "Cancel" }).click();
+  await page.getByTestId("cancel_button").click();
 
-  await page.waitForURL("/", { waitUntil: "load" });
+  await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "portal-owner-change",
     "portal-owner-change-cancel.png",

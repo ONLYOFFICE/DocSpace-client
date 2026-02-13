@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -41,6 +41,7 @@ export const TileContainer = ({
   headingFiles,
   isDesc,
   style,
+  noSelect,
 }: TileContainerProps) => {
   const Rooms: React.ReactElement[] = [];
   const Folders: React.ReactElement[] = [];
@@ -67,6 +68,7 @@ export const TileContainer = ({
       Folders.push(
         <div
           className={classNames(
+            "tile-item",
             styles.tileItemWrapper,
             styles.folder,
             "folder",
@@ -80,6 +82,7 @@ export const TileContainer = ({
       Templates.push(
         <div
           className={classNames(
+            "tile-item",
             styles.tileItemWrapper,
             styles.template,
             "template",
@@ -92,7 +95,12 @@ export const TileContainer = ({
     } else if (isRoom) {
       Rooms.push(
         <div
-          className={classNames(styles.tileItemWrapper, styles.room, "room")}
+          className={classNames(
+            "tile-item",
+            styles.tileItemWrapper,
+            styles.room,
+            "room",
+          )}
           key={itemId}
         >
           {item}
@@ -101,7 +109,12 @@ export const TileContainer = ({
     } else {
       Files.push(
         <div
-          className={classNames(styles.tileItemWrapper, styles.file, "file")}
+          className={classNames(
+            "tile-item",
+            styles.tileItemWrapper,
+            styles.file,
+            "file",
+          )}
           key={itemId}
         >
           {item}
@@ -182,7 +195,9 @@ export const TileContainer = ({
 
   return (
     <div
-      className={classNames(className, styles.tileContainer)}
+      className={classNames(className, styles.tileContainer, {
+        [styles.noSelect]: noSelect,
+      })}
       id={id}
       style={style}
     >

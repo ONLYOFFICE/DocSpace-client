@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect } from "react";
-import moment from "moment-timezone";
+import { formatDate } from "@docspace/shared/utils/date";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 
@@ -49,13 +49,7 @@ const StatusBarWrapper = styled.div`
 const SelectedDateTime = ({ historyFilters, clearDate }) => {
   return (
     <SelectedItem
-      label={`${moment(historyFilters.deliveryDate)
-        .tz(window.timezone)
-        .format("DD MMM YYYY")} ${moment(historyFilters.deliveryFrom)
-        .tz(window.timezone)
-        .format("HH:mm")} - ${moment(historyFilters.deliveryTo)
-        .tz(window.timezone)
-        .format("HH:mm")}`}
+      label={`${formatDate(historyFilters.deliveryDate.setZone(window.timezone), "dd MMM yyyy")} ${formatDate(historyFilters.deliveryFrom.setZone(window.timezone), "HH:mm")} - ${formatDate(historyFilters.deliveryTo.setZone(window.timezone), "HH:mm")}`}
       onClose={clearDate}
       onClick={clearDate}
     />
@@ -64,7 +58,7 @@ const SelectedDateTime = ({ historyFilters, clearDate }) => {
 
 const SelectedDate = ({ historyFilters, clearDate }) => (
   <SelectedItem
-    label={moment(historyFilters.deliveryDate).format("DD MMM YYYY")}
+    label={formatDate(historyFilters.deliveryDate, "dd MMM yyyy")}
     onClose={clearDate}
     onClick={clearDate}
   />
@@ -100,8 +94,8 @@ const StatusBar = (props) => {
 
   const isEqualDates = (firstDate, secondDate) => {
     return (
-      firstDate.format("YYYY-MM-D HH:mm") ===
-      secondDate.format("YYYY-MM-D HH:mm")
+      formatDate(firstDate, "yyyy-MM-d HH:mm") ===
+      formatDate(secondDate, "yyyy-MM-d HH:mm")
     );
   };
 
@@ -123,11 +117,11 @@ const StatusBar = (props) => {
       {historyFilters.deliveryDate !== null ? (
         !isEqualDates(
           historyFilters.deliveryFrom,
-          historyFilters.deliveryFrom.clone().startOf("day"),
+          historyFilters.deliveryFrom.startOf("day"),
         ) ||
         !isEqualDates(
           historyFilters.deliveryTo,
-          historyFilters.deliveryTo.clone().endOf("day"),
+          historyFilters.deliveryTo.endOf("day"),
         ) ? (
           <SelectedDateTime
             historyFilters={historyFilters}

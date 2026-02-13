@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useContext } from "react";
+import React, { use } from "react";
 import { useTranslation } from "react-i18next";
 
 import {
@@ -39,19 +39,23 @@ import {
 } from "../../../api/files/types";
 import { TRoom, TRoomSecurity } from "../../../api/rooms/types";
 import { TTranslation } from "../../../types";
-import { FileType } from "../../../enums";
+import { FileType, FolderType } from "../../../enums";
 
 import { FilesSelectorProps, TFilesSelectorInit } from "../FilesSelector.types";
 import {
   convertFoldersToItems,
   convertRoomsToItems,
   convertFilesToItems,
-} from "../FilesSelector.utils";
-import { SettingsContext } from "../contexts/Settings";
+} from "../../utils";
+import { SettingsContext } from "../../utils/contexts/Settings";
 
 type UseSelectorStateProps = Pick<
   FilesSelectorProps,
-  "checkCreating" | "filterParam" | "disabledItems" | "withCreate"
+  | "checkCreating"
+  | "filterParam"
+  | "disabledItems"
+  | "withCreate"
+  | "disableBySecurity"
 >;
 
 const transformInitItems = (
@@ -62,6 +66,7 @@ const transformInitItems = (
   getIcon: (fileExst: string) => string,
   initSelectedItemType?: string,
   filterParam?: string | number,
+  disableBySecurity?: string,
 ) => {
   const rooms = convertRoomsToItems(
     items.filter((item) => "roomType" in item && item.roomType) as TRoom[],
@@ -78,6 +83,8 @@ const transformInitItems = (
     items.filter((item) => "folderId" in item && item.folderId) as TFile[],
     getIcon,
     filterParam,
+    undefined,
+    disableBySecurity,
   );
 
   return [
@@ -112,9 +119,11 @@ const useSelectorState = ({
   initSelectedItemId,
   initSelectedItemType,
   initTotal,
+
+  disableBySecurity,
 }: UseSelectorStateProps & TFilesSelectorInit) => {
   const { t } = useTranslation(["Common"]);
-  const { getIcon } = useContext(SettingsContext);
+  const { getIcon } = use(SettingsContext);
 
   const [breadCrumbs, setBreadCrumbs] = React.useState<TBreadCrumb[]>(
     withInit ? initBreadCrumbs : [],
@@ -132,11 +141,12 @@ const useSelectorState = ({
           getIcon,
           initSelectedItemType,
           filterParam,
+          disableBySecurity,
         )
       : [],
   );
   const [selectedItemType, setSelectedItemType] = React.useState<
-    "rooms" | "files" | undefined
+    "rooms" | "files" | "agents" | undefined
   >(withInit ? initSelectedItemType : undefined);
   const [selectedItemId, setSelectedItemId] = React.useState<
     number | string | undefined
@@ -164,6 +174,27 @@ const useSelectorState = ({
     boolean | undefined
   >(checkCreating);
   const [isInit, setIsInit] = React.useState<boolean>(!withInit);
+  const [isInsideKnowledge, setIsInsideKnowledge] =
+    React.useState<boolean>(false);
+  const [isInsideResultStorage, setIsInsideResultStorage] =
+    React.useState<boolean>(false);
+
+  const [withCreateState, setWithCreateState] =
+    React.useState<boolean>(withCreate);
+
+  React.useEffect(() => {
+    const isInsideKnowledgeState = !!selectedTreeNode?.path?.find(
+      (f) => f.folderType === FolderType.Knowledge,
+    );
+    const isInsideResultStorageState = !!selectedTreeNode?.path?.find(
+      (f) => f.folderType === FolderType.ResultStorage,
+    );
+    setWithCreateState(
+      withCreate && !isInsideKnowledgeState && !isInsideResultStorageState,
+    );
+    setIsInsideKnowledge(isInsideKnowledgeState);
+    setIsInsideResultStorage(isInsideResultStorageState);
+  }, [selectedTreeNode, withCreate]);
 
   return {
     breadCrumbs,
@@ -192,6 +223,11 @@ const useSelectorState = ({
     setIsDisabledFolder,
     isInit,
     setIsInit,
+    isInsideKnowledge,
+    setIsInsideKnowledge,
+    isInsideResultStorage,
+    setIsInsideResultStorage,
+    withCreateState,
   };
 };
 

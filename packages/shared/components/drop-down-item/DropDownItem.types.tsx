@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -89,7 +89,11 @@ export type DropDownItemProps = {
 
   // Event Handlers
   /** Callback function triggered when the item is clicked */
-  onClick?: (e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>) => void;
+  onClick?: (
+    e: React.MouseEvent<HTMLElement> | React.ChangeEvent<HTMLInputElement>,
+  ) => void;
+  /** Callback function triggered on mouse down */
+  onMouseDown?: (e: React.MouseEvent<HTMLElement>) => void;
   /** Callback function triggered when a selected item is clicked */
   onClickSelectedItem?: () => void;
   /** Callback function to control the open state of a parent dropdown */
@@ -106,4 +110,8 @@ export type DropDownItemProps = {
   tabIndex?: number;
   /** Sets minimum width for the root element */
   minWidth?: string;
+
+  testId?: string;
+
+  tooltip?: string;
 };

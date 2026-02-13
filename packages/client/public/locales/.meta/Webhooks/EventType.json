@@ -3,7 +3,7 @@
   "content": "Event type",
   "content_en_sha1_hash": "23f657cb1808bbd1809ee6f087ace27b821719e2",
   "created_at": "2025-05-19T21:30:49.716Z",
-  "updated_at": "2025-05-21T01:13:43.271Z",
+  "updated_at": "2025-05-24T02:27:36.909Z",
   "comment": {
     "text": "The \"EventType\" translation key is used to display the event type name in various UI elements, such as a details bar and a table header. It appears in contexts where event triggers are being displayed, allowing users to understand the nature of an event.",
     "is_auto": true,
@@ -87,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Իրադարձության տեսակ\" is a literal translation of \"Event type\", it might sound slightly formal or technical depending on the specific context of webhooks. A more natural phrasing might be preferred.",
+          "suggestion": "Consider alternatives like \"Դեպքի տեսակ\" or \"Իրադարձության բնույթ\" depending on the desired tone and audience."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -186,7 +192,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Tip događaja\" is understandable, a more accurate and common translation of \"Event type\" would be \"Vrsta događaja\". \"Tip\" often refers to a specific kind of something, whereas \"Event type\" describes the nature of the event.",
+          "description": "While \"Tip događaja\" is understandable, a more accurate and idiomatic translation of \"Event type\" would be \"Vrsta događaja\". \"Tip\" is sometimes used, but \"Vrsta\" is generally preferred for technical contexts.",
           "suggestion": "Vrsta događaja"
         }
       ],

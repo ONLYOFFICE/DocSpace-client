@@ -3,7 +3,7 @@
   "content": "Enable this option if you want to add groups from LDAP server to {{productName}} Accounts. Please note that only users who belong to these groups will be added.",
   "content_en_sha1_hash": "b9ce909a518bb12d1a4224e200ca4366908b2784",
   "created_at": "2025-05-19T21:30:54.218Z",
-  "updated_at": "2025-05-21T08:19:13.267Z",
+  "updated_at": "2025-08-11T18:11:59.244Z",
   "comment": {
     "text": "This translation key is used to provide a tooltip explaining the purpose of enabling group membership from an LDAP server in {{productName}} accounts. It appears as a help button when the \"Enable this option\" checkbox is selected, and its content will be displayed when the user hovers over the label.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/GroupMembership.js",
-      "line_number": 101,
-      "context": "onChange={setIsGroupMembership}\n label={t(\"LdapGroupMembership\")}\n isDisabled={!isLdapEnabled || isUIDisabled}\n />\n <HelpButton\n tooltipContent={t(\"LdapGroupMembershipTooltip\", {\n productName: t(\"Common:ProductName\"),\n })}\n />\n </div>\n <div className=\"group_membership-container\">",
+      "line_number": 102,
+      "context": "label={t(\"LdapGroupMembership\")}\n isDisabled={!isLdapEnabled || isUIDisabled}\n dataTestId=\"group_membership_toggle_button\"\n />\n <HelpButton\n tooltipContent={t(\"LdapGroupMembershipTooltip\", {\n productName: t(\"Common:ProductName\"),\n })}\n dataTestId=\"group_membership_help_button\"\n />\n </div>",
       "module": "/packages/client"
     }
   ],
@@ -27,18 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"دليل LDAP\" (directory LDAP) is a literal translation and might not be the most natural or clear way to refer to an LDAP server in Saudi Arabic. A more common and understandable term might be preferred.",
-          "suggestion": "Consider using a more idiomatic phrase like \"خادم LDAP\" (LDAP server) or \"مستند LDAP\" (LDAP documentation) depending on the specific context and audience."
-        },
-        {
-          "type": "formatting",
-          "description": "The placeholder {{productName}} is present in the Arabic translation, which is appropriate. However, consistency in handling placeholders across all translations should be ensured.",
-          "suggestion": "Verify the placeholder formatting aligns with other translated strings."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -47,8 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'hesablarına' (accounts) is written with a final 'larına' which is correct but could be slightly improved for readability, depending on the desired tone. While not technically incorrect, using 'hesablarına' feels slightly formal and could be softened.",
-          "suggestion": "hesabları"
+          "description": "The word 'Hesablarına' is misspelled. It should be 'Hesablarına'.",
+          "suggestion": "Hesablarına"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'nəzərə alın' is grammatically awkward. It's better to use a more natural phrasing.",
+          "suggestion": "xahiş edirik qeyd edin"
         }
       ],
       "approved_at": null
@@ -56,7 +50,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Bulgarian translation uses a period (.) at the end of the first sentence, which might be more appropriate with a comma (,) to match the English version's flow.",
+          "suggestion": "Активирайте тази опция, ако искате да добавите групи от LDAP сървър към {{productName}} профили, молим да имате предвид, че ще бъдат добавени само потребители, които принадлежат към тези групи."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -65,8 +65,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"budou přidáni\" is grammatically awkward and suggests a passive construction where an action is implied. It's better to use an active voice.",
-          "suggestion": "Pouze uživatelé, kteří patří do těchto skupin, budou přidáni."
+          "description": "The phrase \"budou přidáni\" is grammatically incorrect. It should be \"budou přidáni uživatelé\" or \"bude přidán uživatel\". The original English suggests individual users are being added, not a general addition.",
+          "suggestion": "Budou přidáni uživatelé."
         }
       ],
       "approved_at": null
@@ -83,13 +83,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The variable '{{productName}}' is not consistently formatted. It should be checked for proper localization and rendering in the Greek interface.",
-          "suggestion": "Verify that '{{productName}}' is correctly localized and renders properly in Greek. Consider whether a direct translation of 'productName' is necessary or if a more contextually relevant term is preferred."
-        },
-        {
-          "type": "grammar",
-          "description": "The phrase 'Λογαριασμούς {{productName}}' could be improved for flow. It feels slightly abrupt.",
-          "suggestion": "Consider rephrasing to 'στον λογαριασμό {{productName}}' or 'στους λογαριασμούς του {{productName}}' for better readability."
+          "description": "The variable `{{productName}}` is not consistently formatted within the Greek translation. It is enclosed in Greek characters, which might cause rendering issues. It should ideally remain as is to ensure proper substitution.",
+          "suggestion": "Keep the variable as `{{productName}}`."
         }
       ],
       "approved_at": null
@@ -106,13 +101,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'tileihin' (into tiles) is an awkward and potentially incorrect translation for 'Accounts'. 'Accounts' refers to user accounts within the product, not graphical tiles.",
-          "suggestion": "Ota tämä vaihtoehto käyttöön, jos haluat lisätä ryhmiä LDAP-palvelimelta {{productName}}-käyttäjätileihin. (Enable this option if you want to add groups from the LDAP server to {{productName}} user accounts.)"
+          "description": "The term \"-tileihin\" in \"{{productName}}-tileihin\" is not a natural translation for 'Accounts'. It implies adding groups to tiles, which is not the intended meaning.  'Accounts' should be translated to something more appropriate.",
+          "suggestion": "Ota tämä vaihtoehto käyttöön, jos haluat lisätä ryhmiä LDAP-palvelimelta {{productName}}-käyttäjätileille."
         },
         {
           "type": "formatting",
-          "description": "The English content uses '{{productName}}' which should be preserved in the Finnish translation.",
-          "suggestion": "No change needed. It is already present."
+          "description": "The term 'käyttäjätileille' is not properly capitalized. It needs to be capitalized as a noun.",
+          "suggestion": "Ota tämä vaihtoehto käyttöön, jos haluat lisätä ryhmiä LDAP-palvelimelta {{productName}}-käyttäjätileille."
         }
       ],
       "approved_at": null
@@ -129,8 +124,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Armenian translation uses a colon (:) after 'հաշիվներում' which is unusual in this context. It would be more natural to omit it.",
-          "suggestion": "Միացրեք այս տարբերակը, եթե ցանկանում եք խմբեր ավելացնել LDAP սերվերից {{productName}} հաշիվներ։ Խնդրում ենք նկատի ունենալ, որ կավելացվեն միայն այս խմբերին պատկանող օգտվողները:"
+          "description": "The Armenian translation lacks the double curly braces around `productName` as present in the English source.  This will likely cause rendering issues.",
+          "suggestion": "Change \"{{productName}}\" to \"{{productName}}\" in the Armenian translation."
         }
       ],
       "approved_at": null
@@ -144,19 +139,19 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The double curly braces '{{productName}}' are present in the translation, mirroring the English. While technically not an error, it's best practice to ensure these are handled consistently with how the product handles variables in the target language. Verify if the variable should be rendered as text in Japanese or handled via localization.",
-          "suggestion": "Check if {{productName}} should be replaced with the localized product name in the UI or if this placeholder is intended."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Korean translation retains the English phrase 'LDAP 서버' (LDAP server) which might be more naturally expressed as 'LDAP' in Korean technical documentation. While understandable, it's a minor stylistic point.",
+          "suggestion": "Consider simplifying to 'LDAP에서 {{productName}} 계정에 그룹을 추가하려면 이 옵션을 활성화하세요.'"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -165,13 +160,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ຂອງເຈົ້າດ້ວຍ\" is awkward and doesn't quite convey the meaning of \"to {{productName}} Accounts\". It sounds overly informal and possessive.",
-          "suggestion": "Consider rephrasing to something like \"ເຂົ້າໃນບັນຊີ {{productName}}\""
+          "description": "The phrase \"ຂອງເຈົ້າດ້ວຍ\" (of you with) at the end of the first sentence feels unnatural and unnecessary. It doesn't directly translate to the English meaning and sounds awkward.",
+          "suggestion": "Remove \"ຂອງເຈົ້າດ້ວຍ\" or rephrase the sentence to something like \"ເພີ່ມກຸ່ມຈາກເຄື່ອງແມ່ຂ່າຍ LDAP ໃສ່ບັນຊີ {{productName}}ໄດ້\" (can add groups from LDAP server to {{productName}} accounts)."
         },
         {
-          "type": "formatting",
-          "description": "While the use of Lao script is correct, the sentence structure is slightly convoluted. It would benefit from clearer phrasing for better readability.",
-          "suggestion": "Reorganize the sentence structure for better flow, for example: \"ເປີດຕົວເລືອກນີ້ຖ້າທ່ານຕ້ອງການເພີ່ມກຸ່ມຈາກເຄື່ອງແມ່ຂ່າຍ LDAP ເຂົ້າໃນບັນຊີ {{productName}}. ກະລຸນາສັງເກດວ່າຜູ້ໃຊ້ທີ່ຢູ່ໃນກຸ່ມເຫລົ່ານີ້ເທົ່ານັ້ນທີ່ຈະຖືກເພີ່ມເຂົ້າ.\""
+          "type": "incorrect_translation",
+          "description": "The wording \"ຜູ້ໃຊ້ທີ່ຢູ່ໃນກຸ່ມເຫລົ່ານີ້ເທົ່ານັ້ນທີ່ຈະຖືກເພີ່ມເຂົ້າ\" is a bit literal and could be more natural.  A more fluent translation might better convey the exclusivity of the group membership.",
+          "suggestion": "Consider rephrasing to \"ຜູ້ໃຊ້ທີ່ເປັນສະມາຊິກຂອງກຸ່ມເຫລົ່ານີ້ເທົ່ານັ້ນທີ່ຈະຖືກເພີ່ມເຂົ້າ\" (only users who are members of these groups will be added) or \"ພຽງແຕ່ຜູ້ໃຊ້ທີ່ຢູ່ໃນກຸ່ມເຫລົ່ານີ້ຈະຖືກເພີ່ມເຂົ້າ\" (only users in these groups will be added)."
         }
       ],
       "approved_at": null
@@ -213,12 +208,7 @@
         {
           "type": "spelling",
           "description": "The word 'aceată' is a misspelling of 'această'.",
-          "suggestion": "această"
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence structure 'Vă rugăm să rețineți că vor fi adăugate numai utilizatorii din aceste grupuri' could be more naturally phrased.",
-          "suggestion": "Vă rugăm să rețineți că vor fi adăugați doar utilizatorii care aparțin acestor grupuri."
+          "suggestion": "Activați această opțiune dacă doriți să adăugați grupuri de pe un server LDAP la secțiunea Conturi {{productName}}. Vă rugăm să rețineți că vor fi adăugate numai utilizatorii din aceste grupuri."
         }
       ],
       "approved_at": null
@@ -234,19 +224,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'සේවකයෙන්' (sevakayan) is an unusual way to refer to a server. A more common and accurate term would be 'ගොඩසgetServer' (godas server).",
-          "suggestion": "LDAP ගොඩසgetServer"
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence 'මෙම සමූහයන්ට අයත් පරිශීලකයින් පමණක් එක් කරනු ලැබේ' is a bit awkward. It can be rephrased for better flow.",
-          "suggestion": "මෙම සමූහයන්හි සාමාජිකයින් පමණක් එක් කරනු ලැබේ."
+          "type": "incorrect_translation",
+          "description": "The phrase \"මෙම සමූහයන්ට අයත් පරිශීලකයින් පමණක් එක් කරනු ලැබේ\" is a somewhat literal translation and could be more naturally phrased. It implies 'only enthusiasts' instead of 'users'.",
+          "suggestion": "මෙම සමූහයන් වල සාමාජිකයින් පමණක් එක් කරනු ලැබේ."
         },
         {
           "type": "formatting",
-          "description": "The double curly braces `{{productName}}` are present in both English and Sinhala, which is expected. However, ensure the variable is correctly resolved during rendering.",
-          "suggestion": "N/A - Check variable resolution during rendering."
+          "description": "The use of the ellipsis (dots) within Sinhala text can be awkward. It’s better to rephrase for smoother readability.",
+          "suggestion": "Remove the ellipsis if possible and rephrase the sentence for better flow."
         }
       ],
       "approved_at": null
@@ -254,7 +239,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The variable {{productName}} is not properly formatted within the Slovak translation. It should be consistent with the English source.",
+          "suggestion": "Túto možnosť povoľte, ak chcete pridať skupiny zo servera LDAP do účtov {{productName}}. Upozorňujeme, že pridaní budú len používatelia, ktorí patria do týchto skupín."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -262,9 +253,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Slovenian translation uses 'Upoštevaj' which is slightly informal and doesn't quite match the tone of the English 'Please note'. A more formal phrasing would be better.",
-          "suggestion": "Consider replacing 'Upoštevaj' with 'Prosimo upoštevajte' or 'Pozor'."
+          "type": "incorrect_translation",
+          "description": "The phrase \"Upoštevaj, da bodo dodani...\" is a somewhat awkward and overly formal translation of \"Please note that...\". A more natural phrasing would be \"Pozor, da bodo...\" or \"Opomba, da bodo...\"",
+          "suggestion": "Pozor, da bodo dodani samo uporabniki, ki pripadajo tem skupinam."
         }
       ],
       "approved_at": null
@@ -275,13 +266,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'Омогуц́ите' (Omogućite) should have an accent mark above the 'и' to correctly reflect the English 'Enable'.",
-          "suggestion": "Омогућите"
+          "description": "The word 'Омогуц́ите' is a valid but somewhat archaic or formal way to say 'Enable'. A more common and natural phrasing would be 'Укључите'.",
+          "suggestion": "Укључите"
         },
         {
           "type": "grammar",
-          "description": "The phrase 'Имајте на уму да ц́е бити додати' (Imaјte na umu da će biti dodati) is slightly awkward. A more natural phrasing might be 'Само корисници који припадају овим групама ће бити додани'.",
-          "suggestion": "Само корисници који припадају овим групама ће бити додани."
+          "description": "The phrase 'ц́е бити додати' is grammatically correct but could be more concise and natural. A more fluent phrasing would be 'додаће се'.",
+          "suggestion": "додаће се"
         }
       ],
       "approved_at": null
@@ -292,13 +283,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word \"Omogućite\" should be lowercase at the beginning of the sentence for better readability.",
+          "description": "The word 'Omogućite' should be lowercase to maintain consistency with the English 'Enable'.",
           "suggestion": "omogućite"
         },
         {
           "type": "grammar",
-          "description": "The sentence \"Imajte na umu da će biti dodati samo korisnici koji pripadaju ovim grupama.\" is a bit awkward. A more natural phrasing would be to use the active voice.",
-          "suggestion": "Imajte na umu da će se dodati samo korisnici koji pripadaju ovim grupama."
+          "description": "The sentence 'Imajte na umu da će biti dodati samo korisnici koji pripadaju ovim grupama.' is slightly awkward. A more natural phrasing would be 'Samo korisnici koji pripadaju ovim grupama će biti dodati.'",
+          "suggestion": "Samo korisnici koji pripadaju ovim grupama će biti dodati."
         }
       ],
       "approved_at": null
@@ -308,9 +299,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Turkish translation includes \"LDAP sunucusundan {{productName}} Hesaplarına\". It would be more natural to use a connector like \"e\" (to) between 'LDAP sunucusundan' and 'Hesaplarına' to improve readability. It currently reads a bit abruptly.",
-          "suggestion": "LDAP sunucusundan {{productName}} Hesaplarına **e** grup eklemek istiyorsanız bu seçeneği etkinleştirin."
+          "type": "incorrect_translation",
+          "description": "The phrase 'bu gruplara ait olan kullanıcıların' could be improved for clarity and naturalness. A more idiomatic translation would convey the meaning more effectively.",
+          "suggestion": "Sadece bu gruplara üye olan kullanıcılar eklenecektir."
         }
       ],
       "approved_at": null
@@ -320,9 +311,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The variable {{productName}} is not formatted consistently with English. In Ukrainian, it's best to ensure that placeholders are enclosed in curly braces.  The variable is enclosed in curly braces, but it's a good practice to be consistent.",
-          "suggestion": "Ensure consistent formatting for variables. Consider using more distinct surrounding characters, like double curly braces if consistent with the rest of the documentation."
+          "type": "incorrect_translation",
+          "description": "The phrase \"Увімкніть цей параметр\" is a bit formal for a tooltip. A more conversational and user-friendly alternative would be better.",
+          "suggestion": "Увімкніть цю опцію"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The use of \"буде додано\" (will be added) is slightly awkward. It implies a future action that might not be immediate.",
+          "suggestion": "будуть додані"
         }
       ],
       "approved_at": null
@@ -333,13 +329,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The variable {{productName}} is not properly rendered. It should be replaced with the actual product name.",
-          "suggestion": "Replace {{productName}} with the actual product name. For example, if the product name is 'MyApplication', the translated sentence should read: 'Bật tùy chọn này nếu bạn muốn thêm các nhóm từ máy chủ LDAP vào  Tài Khoản MyApplication.'"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'những người dùng từ các nhóm này' is slightly awkward in Vietnamese. A more natural phrasing would emphasize belonging to the groups.",
-          "suggestion": "Change 'những người dùng từ các nhóm này' to 'những người dùng thuộc các nhóm này' or 'những người dùng nằm trong các nhóm này'."
+          "description": "The placeholder {{productName}} is not properly handled. It appears verbatim in the Vietnamese translation.",
+          "suggestion": "Replace {{productName}} with the actual product name or use a placeholder that can be dynamically populated."
         }
       ],
       "approved_at": null

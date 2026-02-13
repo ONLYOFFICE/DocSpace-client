@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,13 +26,11 @@
 
 "use client";
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useEffect, useMemo } from "react";
+import equal from "fast-deep-equal";
+import React, { useEffect, useMemo, memo, FC, PropsWithChildren } from "react";
 
 import { Provider } from "../../utils";
 import { DeviceType } from "../../enums";
-
-import { FloatingButton } from "../floating-button";
 
 import SectionContainer from "./sub-components/SectionContainer";
 import SubSectionHeader from "./sub-components/SectionHeader";
@@ -59,33 +57,32 @@ import {
 } from "./Section.constants";
 import { parseChildren } from "./Section.utils";
 
-import { ChatWidget } from "./sub-components/ChatWidget";
 import OperationsProgressButton from "../operations-progress-button";
 
 export type { SectionProps };
 
-const SectionHeader = ({ children }: { children: React.ReactNode }) => null;
+const SectionHeader: FC<PropsWithChildren> = () => null;
 SectionHeader.displayName = SECTION_HEADER_NAME;
 
-const SectionFilter = ({ children }: { children?: React.ReactNode }) => null;
+const SectionFilter: FC<PropsWithChildren> = () => null;
 SectionFilter.displayName = SECTION_FILTER_NAME;
 
-const SectionBody = ({ children }: { children: React.ReactNode }) => null;
+const SectionBody: FC<PropsWithChildren> = () => null;
 SectionBody.displayName = SECTION_BODY_NAME;
 
-const SectionFooter = ({ children }: { children: React.ReactNode }) => null;
+const SectionFooter: FC<PropsWithChildren> = () => null;
 SectionFooter.displayName = SECTION_FOOTER_NAME;
 
-const InfoPanelBody = ({ children }: { children: React.ReactNode }) => null;
+const InfoPanelBody: FC<PropsWithChildren> = () => null;
 InfoPanelBody.displayName = SECTION_INFO_PANEL_BODY_NAME;
 
-const InfoPanelHeader = ({ children }: { children: React.ReactNode }) => null;
+const InfoPanelHeader: FC<PropsWithChildren> = () => null;
 InfoPanelHeader.displayName = SECTION_INFO_PANEL_HEADER_NAME;
 
-const SectionWarning = ({ children }: { children: React.ReactNode }) => null;
+const SectionWarning: FC<PropsWithChildren> = () => null;
 SectionWarning.displayName = SECTION_WARNING_NAME;
 
-const SectionSubmenu = ({ children }: { children: React.ReactNode }) => null;
+const SectionSubmenu: FC<PropsWithChildren> = () => null;
 SectionSubmenu.displayName = SECTION_SUBMENU_NAME;
 
 const Section = (props: SectionProps) => {
@@ -99,7 +96,6 @@ const Section = (props: SectionProps) => {
     isInfoPanelAvailable = true,
     settingsStudio = false,
     isInfoPanelScrollLocked,
-    isFormGallery,
     currentDeviceType,
 
     isInfoPanelVisible,
@@ -123,19 +119,23 @@ const Section = (props: SectionProps) => {
 
     primaryOperationsAlert,
     needErrorChecking,
-    chatFiles,
 
-    aiChatIsVisible,
-    setAiChatIsVisible,
-    mainBarVisible,
+    withTabs,
 
-    getIcon,
-    displayFileExtension,
-    aiChatID,
-    aiSelectedFolder,
-    aiUserId,
-    vectorizedFiles,
-    user,
+    withoutFooter = false,
+    onDragOverEmpty,
+    onDragLeaveEmpty,
+    dragging,
+    clearDropPreviewLocation,
+    dropTargetPreview,
+    startDropPreview,
+    fullHeightBody,
+    asideInfoPanel,
+
+    pluginOperations = [],
+    pluginOperationsCompleted,
+    pluginOperationsAlert,
+    pluginShowCancelButton,
   } = props;
 
   const [sectionSize, setSectionSize] = React.useState<{
@@ -219,168 +219,206 @@ const Section = (props: SectionProps) => {
   );
 
   const isShowOperationButton =
-    secondaryActiveOperations?.length || primaryOperationsArray?.length;
+    secondaryActiveOperations?.length ||
+    primaryOperationsArray?.length ||
+    pluginOperations?.length ||
+    startDropPreview;
 
-  const isCompletedOperations = () => {
-    if (
-      secondaryActiveOperations?.length > 0 &&
-      primaryOperationsArray?.length > 0 &&
-      secondaryActiveOperations.length + primaryOperationsArray.length > 1
-    )
-      return secondaryOperationsCompleted && primaryOperationsCompleted;
+  const isCompletedOperations = useMemo(() => {
+    const hasMultipleOperations =
+      (secondaryActiveOperations?.length || 0) +
+        (primaryOperationsArray?.length || 0) +
+        (pluginOperations?.length || 0) >
+      1;
+
+    if (hasMultipleOperations) {
+      const completionStates = [];
+
+      if (secondaryActiveOperations?.length)
+        completionStates.push(secondaryOperationsCompleted);
+
+      if (primaryOperationsArray?.length)
+        completionStates.push(primaryOperationsCompleted);
+
+      if (pluginOperations?.length)
+        completionStates.push(pluginOperationsCompleted);
+
+      return completionStates.every((state) => state);
+    }
+
+    if (pluginOperations?.length > 0) return pluginOperationsCompleted;
 
     if (secondaryActiveOperations?.length > 0)
       return secondaryOperationsCompleted;
-
+    
     return primaryOperationsCompleted;
-  };
+  }, [
+    secondaryOperationsCompleted,
+    primaryOperationsCompleted,
+    pluginOperationsCompleted,
+    secondaryActiveOperations,
+    primaryOperationsArray,
+    pluginOperations,
+  ]);
 
   const showCancelButton =
-    primaryOperationsArray.length > 0 &&
-    !primaryOperationsCompleted &&
-    primaryOperationsArray.some((op) => op.operation === "upload");
+    (primaryOperationsArray.length > 0 &&
+      !primaryOperationsCompleted &&
+      primaryOperationsArray.some((op) => op.operation === "upload")) ||
+    pluginShowCancelButton;
+
+  const isInfoVisible = canDisplay && isInfoPanelVisible;
+
+  if (!isSectionAvailable) return null;
 
   return (
-    isSectionAvailable && (
-      <Provider value={providerValue}>
-        <SectionContainer
-          viewAs={viewAs}
-          ref={containerRef}
-          isSectionHeaderAvailable={isSectionHeaderAvailable}
-          isInfoPanelVisible={isInfoPanelVisible}
-          withBodyScroll={withBodyScroll}
-          currentDeviceType={currentDeviceType}
-        >
-          {currentDeviceType !== DeviceType.mobile ? (
-            <div className="section-sticky-container">
-              {isSectionHeaderAvailable ? (
-                <SubSectionHeader
-                  className="section-header_header"
-                  isFormGallery={isFormGallery}
-                >
-                  {sectionHeaderContent}
-                </SubSectionHeader>
-              ) : null}
+    <Provider value={providerValue}>
+      <SectionContainer
+        viewAs={viewAs}
+        ref={containerRef}
+        isSectionHeaderAvailable={isSectionHeaderAvailable}
+        isInfoPanelVisible={isInfoPanelVisible}
+        withBodyScroll={withBodyScroll}
+        currentDeviceType={currentDeviceType}
+      >
+        {currentDeviceType !== DeviceType.mobile ? (
+          <div className="section-sticky-container">
+            {isSectionHeaderAvailable ? (
+              <SubSectionHeader className="section-header_header">
+                {sectionHeaderContent}
+              </SubSectionHeader>
+            ) : null}
 
-              {isSectionSubmenuAvailable ? (
-                <SubSectionSubmenu>{sectionSubmenuContent}</SubSectionSubmenu>
-              ) : null}
+            {isSectionSubmenuAvailable ? (
+              <SubSectionSubmenu>{sectionSubmenuContent}</SubSectionSubmenu>
+            ) : null}
 
-              {isSectionFilterAvailable &&
-              currentDeviceType === DeviceType.desktop ? (
-                <SubSectionFilter className="section-header_filter">
-                  {sectionFilterContent}
-                </SubSectionFilter>
-              ) : null}
-            </div>
-          ) : null}
-
-          {isSectionBodyAvailable ? (
-            <SubSectionBody
-              onDrop={onDrop}
-              uploadFiles={uploadFiles}
-              withScroll={withBodyScroll}
-              autoFocus={currentDeviceType === DeviceType.desktop}
-              viewAs={viewAs}
-              settingsStudio={settingsStudio}
-              isFormGallery={isFormGallery}
-              currentDeviceType={currentDeviceType}
-              getContextModel={getContextModel}
-              isIndexEditingMode={isIndexEditingMode}
-              pathname={pathname}
-            >
-              {isSectionHeaderAvailable &&
-              currentDeviceType === DeviceType.mobile ? (
-                <SubSectionHeader
-                  className="section-body_header"
-                  isFormGallery={isFormGallery}
-                >
-                  {sectionHeaderContent}
-                </SubSectionHeader>
-              ) : null}
-              {currentDeviceType !== DeviceType.desktop ? (
-                <SubSectionWarning>{sectionWarningContent}</SubSectionWarning>
-              ) : null}
-              {isSectionSubmenuAvailable &&
-              currentDeviceType === DeviceType.mobile ? (
-                <SubSectionSubmenu>{sectionSubmenuContent}</SubSectionSubmenu>
-              ) : null}
-              {isSectionFilterAvailable &&
-              currentDeviceType !== DeviceType.desktop ? (
-                <SubSectionFilter className="section-body_filter">
-                  {sectionFilterContent}
-                </SubSectionFilter>
-              ) : null}
-              <SubSectionBodyContent>
-                {sectionBodyContent}
-              </SubSectionBodyContent>
-              <SubSectionFooter>{sectionFooterContent}</SubSectionFooter>
-            </SubSectionBody>
-          ) : null}
-
-          {isShowOperationButton ? (
-            <OperationsProgressButton
-              clearOperationsData={clearSecondaryProgressData}
-              operations={secondaryActiveOperations}
-              operationsCompleted={isCompletedOperations()}
-              clearPanelOperationsData={clearPrimaryProgressData}
-              operationsAlert={
-                primaryOperationsAlert || secondaryOperationsAlert
-              }
-              needErrorChecking={needErrorChecking}
-              panelOperations={primaryOperationsArray}
-              cancelUpload={cancelUpload}
-              onOpenPanel={onOpenUploadPanel}
-              mainButtonVisible={mainButtonVisible}
-              showCancelButton={showCancelButton}
-              isInfoPanelVisible={isInfoPanelVisible || aiChatIsVisible}
-            />
-          ) : null}
-        </SectionContainer>
-
-        <ChatWidget
-          viewAs={viewAs!}
-          isVisible={aiChatIsVisible!}
-          setIsVisible={setAiChatIsVisible!}
-          anotherDialogOpen={anotherDialogOpen!}
-          currentDeviceType={currentDeviceType!}
-          getIcon={getIcon!}
-          displayFileExtension={displayFileExtension!}
-          aiChatID={aiChatID!}
-          aiSelectedFolder={aiSelectedFolder!}
-          aiUserId={aiUserId!}
-          vectorizedFiles={vectorizedFiles!}
-          user={user!}
-        />
-
-        {isInfoPanelAvailable ? (
-          <InfoPanel
-            isVisible={isInfoPanelVisible}
-            setIsVisible={setIsInfoPanelVisible}
-            isMobileHidden={isMobileHidden}
-            canDisplay={canDisplay}
-            anotherDialogOpen={anotherDialogOpen}
-            viewAs={viewAs}
-            currentDeviceType={currentDeviceType}
-          >
-            <SubInfoPanelHeader>{infoPanelHeaderContent}</SubInfoPanelHeader>
-            <SubInfoPanelBody isInfoPanelScrollLocked={isInfoPanelScrollLocked}>
-              {infoPanelBodyContent}
-            </SubInfoPanelBody>
-          </InfoPanel>
+            {isSectionFilterAvailable &&
+            currentDeviceType === DeviceType.desktop ? (
+              <SubSectionFilter className="section-header_filter">
+                {sectionFilterContent}
+              </SubSectionFilter>
+            ) : null}
+          </div>
         ) : null}
-      </Provider>
-    )
+
+        {isSectionBodyAvailable ? (
+          <SubSectionBody
+            onDrop={onDrop}
+            onDragOverEmpty={onDragOverEmpty}
+            onDragLeaveEmpty={onDragLeaveEmpty}
+            uploadFiles={uploadFiles}
+            withScroll={withBodyScroll}
+            autoFocus={currentDeviceType === DeviceType.desktop}
+            viewAs={viewAs}
+            settingsStudio={settingsStudio}
+            currentDeviceType={currentDeviceType}
+            getContextModel={getContextModel}
+            isIndexEditingMode={isIndexEditingMode}
+            pathname={pathname}
+            withoutFooter={withoutFooter}
+            fullHeightBody={fullHeightBody}
+          >
+            {isSectionHeaderAvailable &&
+            currentDeviceType === DeviceType.mobile ? (
+              <SubSectionHeader className="section-body_header">
+                {sectionHeaderContent}
+              </SubSectionHeader>
+            ) : null}
+            {currentDeviceType !== DeviceType.desktop ? (
+              <SubSectionWarning>{sectionWarningContent}</SubSectionWarning>
+            ) : null}
+            {isSectionSubmenuAvailable &&
+            currentDeviceType === DeviceType.mobile ? (
+              <SubSectionSubmenu>{sectionSubmenuContent}</SubSectionSubmenu>
+            ) : null}
+            {isSectionFilterAvailable &&
+            currentDeviceType !== DeviceType.desktop ? (
+              <SubSectionFilter
+                withTabs={withTabs}
+                className="section-body_filter"
+              >
+                {sectionFilterContent}
+              </SubSectionFilter>
+            ) : null}
+            <SubSectionBodyContent>{sectionBodyContent}</SubSectionBodyContent>
+            {withoutFooter ? null : (
+              <SubSectionFooter>{sectionFooterContent}</SubSectionFooter>
+            )}
+          </SubSectionBody>
+        ) : null}
+
+        {isShowOperationButton ? (
+          <OperationsProgressButton
+            clearOperationsData={clearSecondaryProgressData}
+            operations={[
+              ...(secondaryActiveOperations || []),
+              ...(pluginOperations || []),
+            ]}
+            operationsCompleted={isCompletedOperations}
+            clearPanelOperationsData={clearPrimaryProgressData}
+            clearDropPreviewLocation={clearDropPreviewLocation}
+            operationsAlert={
+              primaryOperationsAlert ||
+              secondaryOperationsAlert ||
+              pluginOperationsAlert
+            }
+            needErrorChecking={needErrorChecking}
+            panelOperations={primaryOperationsArray}
+            cancelUpload={cancelUpload}
+            onOpenPanel={onOpenUploadPanel}
+            mainButtonVisible={mainButtonVisible}
+            showCancelButton={showCancelButton}
+            isInfoPanelVisible={isInfoVisible}
+            dropTargetFolderName={dropTargetPreview}
+            isDragging={dragging}
+          />
+        ) : null}
+      </SectionContainer>
+
+      {isInfoPanelAvailable ? (
+        <InfoPanel
+          isVisible={isInfoPanelVisible}
+          setIsVisible={setIsInfoPanelVisible}
+          isMobileHidden={isMobileHidden}
+          canDisplay={canDisplay}
+          anotherDialogOpen={anotherDialogOpen}
+          viewAs={viewAs}
+          currentDeviceType={currentDeviceType}
+          asideInfoPanel={asideInfoPanel}
+        >
+          <SubInfoPanelHeader>{infoPanelHeaderContent}</SubInfoPanelHeader>
+          <SubInfoPanelBody isInfoPanelScrollLocked={isInfoPanelScrollLocked}>
+            {infoPanelBodyContent}
+          </SubInfoPanelBody>
+        </InfoPanel>
+      ) : null}
+    </Provider>
   );
 };
 
-Section.SectionHeader = SectionHeader;
-Section.SectionFilter = SectionFilter;
-Section.SectionBody = SectionBody;
-Section.SectionFooter = SectionFooter;
-Section.InfoPanelBody = InfoPanelBody;
-Section.InfoPanelHeader = InfoPanelHeader;
-Section.SectionWarning = SectionWarning;
-Section.SectionSubmenu = SectionSubmenu;
+// Define the type for components with static properties
+type SectionComponentType = FC<SectionProps> & {
+  SectionHeader: typeof SectionHeader;
+  SectionFilter: typeof SectionFilter;
+  SectionBody: typeof SectionBody;
+  SectionFooter: typeof SectionFooter;
+  InfoPanelBody: typeof InfoPanelBody;
+  InfoPanelHeader: typeof InfoPanelHeader;
+  SectionWarning: typeof SectionWarning;
+  SectionSubmenu: typeof SectionSubmenu;
+};
 
-export default Section;
+// Create the memoized component with explicit type assertion
+const MemoizedSection = memo(Section, equal) as unknown as SectionComponentType;
+
+MemoizedSection.SectionHeader = SectionHeader;
+MemoizedSection.SectionFilter = SectionFilter;
+MemoizedSection.SectionBody = SectionBody;
+MemoizedSection.SectionFooter = SectionFooter;
+MemoizedSection.InfoPanelBody = InfoPanelBody;
+MemoizedSection.InfoPanelHeader = InfoPanelHeader;
+MemoizedSection.SectionWarning = SectionWarning;
+MemoizedSection.SectionSubmenu = SectionSubmenu;
+
+export default MemoizedSection;

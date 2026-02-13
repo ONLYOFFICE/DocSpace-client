@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,50 +24,58 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable no-console */
-import moment from "moment";
+import type { DateTime } from "luxon";
+import {
+  now,
+  addToDate,
+  parseToDateTime,
+  createDateTime,
+} from "../../../utils/date";
 
 export const getValidDates = (
-  currentMinDate?: moment.Moment | Date,
-  currentMaxDate?: moment.Moment | Date,
-  minDate?: moment.Moment | Date,
-  maxDate?: moment.Moment | Date,
-) => {
-  if (!minDate) {
-    minDate = moment("01/01/1970", "DD/MM/YYYY");
+  currentMinDate?: DateTime | Date,
+  currentMaxDate?: DateTime | Date,
+  minDate?: DateTime | Date,
+  maxDate?: DateTime | Date,
+): [DateTime, DateTime] => {
+  let minDt: DateTime | null = minDate ? parseToDateTime(minDate) : null;
+  let maxDt: DateTime | null = maxDate ? parseToDateTime(maxDate) : null;
+
+  if (!minDt) {
+    minDt = createDateTime(1970, 1, 1);
   }
-  if (!maxDate) {
-    maxDate = moment();
-    maxDate.add(10, "years");
+  if (!maxDt) {
+    maxDt = addToDate(now(), 10, "years")!;
   }
 
-  if (minDate >= maxDate) {
-    minDate = moment("01/01/1970", "DD/MM/YYYY");
-    maxDate = moment();
-    maxDate.add(10, "years");
+  if (minDt >= maxDt) {
+    minDt = createDateTime(1970, 1, 1);
+    maxDt = addToDate(now(), 10, "years")!;
     console.error(
       "The minimum date is farther than or same as the maximum date. minDate and maxDate are set to default",
     );
   }
-  minDate = moment(minDate);
-  maxDate = moment(maxDate);
 
-  if (!currentMinDate) {
-    currentMinDate = minDate;
+  let currentMinDt: DateTime | null = currentMinDate
+    ? parseToDateTime(currentMinDate)
+    : null;
+  let currentMaxDt: DateTime | null = currentMaxDate
+    ? parseToDateTime(currentMaxDate)
+    : null;
+
+  if (!currentMinDt) {
+    currentMinDt = minDt;
   }
-  if (!currentMaxDate) {
-    currentMaxDate = maxDate;
+  if (!currentMaxDt) {
+    currentMaxDt = maxDt;
   }
 
-  let resultMinDate = moment(currentMinDate);
-  let resultMaxDate = moment(currentMaxDate);
-
-  resultMinDate = resultMinDate < minDate ? minDate : resultMinDate;
-  resultMaxDate = resultMaxDate > maxDate ? maxDate : resultMaxDate;
+  let resultMinDate = currentMinDt < minDt ? minDt : currentMinDt;
+  let resultMaxDate = currentMaxDt > maxDt ? maxDt : currentMaxDt;
 
   if (resultMinDate >= resultMaxDate) {
-    resultMinDate = minDate;
-    resultMaxDate = maxDate;
+    resultMinDate = minDt;
+    resultMaxDate = maxDt;
   }
 
   return [resultMinDate, resultMaxDate];

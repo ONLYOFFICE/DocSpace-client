@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,6 +32,7 @@ import { IconButton } from "../../icon-button";
 import { ContextMenu, ContextMenuRefType } from "../../context-menu";
 import { TPlusButtonProps } from "../Navigation.types";
 import { isMobile } from "../../../utils";
+import { TooltipContainer } from "../../tooltip";
 
 const PlusButton = ({
   className,
@@ -42,6 +43,7 @@ const PlusButton = ({
   id,
   onCloseDropBox,
   forwardedRef,
+  title,
   ...rest
 }: TPlusButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -70,7 +72,14 @@ const PlusButton = ({
   const model = getData();
 
   return (
-    <div ref={forwardedRef} className={className} {...rest}>
+    <TooltipContainer
+      as="div"
+      ref={forwardedRef}
+      className={className}
+      title={title}
+      {...rest}
+      data-testid="plus-button"
+    >
       <IconButton
         onClick={onClick}
         iconName={PlusReactSvgUrl}
@@ -89,7 +98,7 @@ const PlusButton = ({
         ignoreChangeView
         withBackdrop={isMobile()}
       />
-    </div>
+    </TooltipContainer>
   );
 };
 

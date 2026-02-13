@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,11 +25,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import moment from "moment";
 import classNames from "classnames";
 import { HeaderButtons } from "./HeaderButtons";
 import { YearsHeaderProps } from "../Calendar.types";
 import styles from "../Calendar.module.scss";
+import {
+  subtractFromDate,
+  addToDate,
+  endOf,
+  createDateTime,
+} from "../../../utils/date";
 
 export const YearsHeader = ({
   observedDate,
@@ -38,24 +43,26 @@ export const YearsHeader = ({
   maxDate,
   isMobile,
 }: YearsHeaderProps) => {
-  const selectedYear = observedDate.year();
+  const selectedYear = observedDate.year;
   const firstYear = selectedYear;
 
   const onLeftClick = () =>
     setObservedDate((prevObservedDate) =>
-      prevObservedDate.clone().subtract(10, "year"),
+      subtractFromDate(prevObservedDate, 10, "years")!,
     );
 
   const onRightClick = () =>
     setObservedDate((prevObservedDate) =>
-      prevObservedDate.clone().add(10, "year"),
+      addToDate(prevObservedDate, 10, "years")!,
     );
 
-  const isLeftDisabled =
-    moment(`${firstYear - 1}`)
-      .endOf("year")
-      .endOf("month") < minDate;
-  const isRightDisabled = moment(`${firstYear + 10}`) > maxDate;
+  const prevYearEnd = endOf(
+    endOf(createDateTime(firstYear - 1, 12, 1), "year")!,
+    "month",
+  )!;
+  const isLeftDisabled = prevYearEnd < minDate;
+  const nextYearStart = createDateTime(firstYear + 10, 1, 1);
+  const isRightDisabled = nextYearStart > maxDate;
 
   return (
     <div className={styles.headerContainer}>
@@ -64,8 +71,7 @@ export const YearsHeader = ({
           [styles.disabled]: true,
         })}
       >
-        {moment(firstYear, "YYYY").format("YYYY")}-
-        {moment(firstYear + 9, "YYYY").format("YYYY")}
+        {firstYear}-{firstYear + 9}
         <span className={styles.headerActionIcon} />
       </h2>
       <HeaderButtons

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,6 +26,7 @@
 
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
+import { TFunction } from "i18next";
 
 import { SearchInput } from "@docspace/shared/components/search-input";
 
@@ -36,10 +37,10 @@ import { searchMigrationUsers } from "SRC_DIR/pages/PortalSettings/utils/importU
 import AccountsTable from "./AccountsTable";
 import AccountsPaging from "../../sub-components/AccountsPaging";
 import { Wrapper } from "../../StyledDataImport";
-import { NoEmailUsersBlock } from "../../sub-components/NoEmailUsersBlock";
 import { AddEmailsStepProps, InjectedAddEmailsStepProps } from "../../types";
 import { MigrationButtons } from "../../sub-components/MigrationButtons";
 import UsersInfoBlock from "../../sub-components/UsersInfoBlock";
+import { NoEmailUsersBlock } from "../../sub-components/NoEmailUsersBlock";
 
 const PAGE_SIZE = 25;
 const REFRESH_TIMEOUT = 100;
@@ -62,8 +63,7 @@ const AddEmailsStep = (props: AddEmailsStepProps) => {
     setMigrationPhase,
     cancelUploadDialogVisible,
     setCancelUploadDialogVisible,
-    totalUsedUsers,
-    quota,
+    selectedWithoutEmail,
   } = props as InjectedAddEmailsStepProps;
 
   const [dataPortion, setDataPortion] = useState(
@@ -114,9 +114,7 @@ const AddEmailsStep = (props: AddEmailsStepProps) => {
       cancelButtonLabel={t("Common:Back")}
       showReminder
       displaySettings
-      saveButtonDisabled={
-        areCheckedUsersEmpty || (quota.max ? totalUsedUsers > quota.max : false)
-      }
+      saveButtonDisabled={areCheckedUsersEmpty}
       migrationCancelLabel={t("Settings:CancelImport")}
       onMigrationCancelClick={showCancelDialog}
     />
@@ -125,14 +123,18 @@ const AddEmailsStep = (props: AddEmailsStepProps) => {
   return (
     <Wrapper>
       {users.withoutEmail.length > 0 ? (
-        <NoEmailUsersBlock t={t} users={users.withoutEmail.length} />
-      ) : null}
-
-      {users.withoutEmail.length > 0 ? (
         <>
+          <NoEmailUsersBlock
+            t={t as TFunction}
+            users={users.withoutEmail.length}
+          />
+
           {Buttons}
 
-          <UsersInfoBlock />
+          <UsersInfoBlock
+            selectedUsers={selectedWithoutEmail}
+            totalUsers={users.withoutEmail.length}
+          />
 
           <SearchInput
             id="search-users-input"
@@ -142,18 +144,21 @@ const AddEmailsStep = (props: AddEmailsStepProps) => {
             refreshTimeout={REFRESH_TIMEOUT}
             onClearSearch={onClearSearchInput}
             size={InputSize.base}
+            dataTestId="search_users_input"
           />
 
-          <AccountsTable t={t} accountsData={filteredAccounts} />
+          <AccountsTable t={t as TFunction} accountsData={filteredAccounts} />
 
           {users.withoutEmail.length > PAGE_SIZE ? (
             <AccountsPaging
-              t={t}
+              t={t as TFunction}
               numberOfItems={users.withoutEmail.length}
               setDataPortion={handleDataChange}
               pagesPerPage={PAGE_SIZE}
             />
           ) : null}
+
+          {filteredAccounts.length > 0 ? Buttons : null}
         </>
       ) : (
         <>
@@ -163,8 +168,6 @@ const AddEmailsStep = (props: AddEmailsStepProps) => {
           {Buttons}
         </>
       )}
-
-      {filteredAccounts.length > 0 ? Buttons : null}
 
       {cancelUploadDialogVisible ? (
         <CancelUploadDialog
@@ -196,8 +199,7 @@ export default inject<TStore>(({ importAccountsStore, dialogsStore }) => {
     setWorkspace,
     setMigratingWorkspace,
     setMigrationPhase,
-    totalUsedUsers,
-    quota,
+    selectedWithoutEmail,
   } = importAccountsStore;
 
   const { cancelUploadDialogVisible, setCancelUploadDialogVisible } =
@@ -218,10 +220,8 @@ export default inject<TStore>(({ importAccountsStore, dialogsStore }) => {
     setWorkspace,
     setMigratingWorkspace,
     setMigrationPhase,
-
     cancelUploadDialogVisible,
     setCancelUploadDialogVisible,
-    totalUsedUsers,
-    quota,
+    selectedWithoutEmail,
   };
 })(observer(AddEmailsStep));

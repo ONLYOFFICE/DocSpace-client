@@ -3,7 +3,7 @@
   "content": "Set it up",
   "content_en_sha1_hash": "40fae241a10242574bd20a3c4a2fa07cd8077f99",
   "created_at": "2025-05-19T21:30:54.681Z",
-  "updated_at": "2025-05-21T08:35:58.438Z",
+  "updated_at": "2025-08-04T07:30:01.394Z",
   "comment": {
     "text": "This translation key is used for a button or dialog option that allows users to customize columns. In this specific context, it enables a user to select an alternative way of displaying columns, which is currently labeled as \"Set it up\".",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 118,
-      "context": "{ key: \"ascending\", label: t(\"Ascending\") },\n ];\n \n const columnDisplayOptions = [\n { value: \"default\", label: t(\"DefaultColumnsOption\") },\n { value: \"custom\", label: t(\"SetItUp\") },\n ];\n \n const [columnsOptions, setColumnsOptions] = useState([\n { key: \"Owner\", label: t(\"Common:Owner\") },\n { key: \"Activity\", label: t(\"Files:LastActivity\") },",
+      "line_number": 122,
+      "context": "{\n value: \"default\",\n label: t(\"DefaultColumnsOption\"),\n dataTestId: \"default_radio_button\",\n },\n { value: \"custom\", label: t(\"SetItUp\"), dataTestId: \"custom_radio_button\" },\n ];\n \n const [columnsOptions, setColumnsOptions] = useState([\n { key: \"Owner\", label: t(\"Common:Owner\") },\n { key: \"Activity\", label: t(\"Files:LastActivity\") },",
       "module": "/packages/client"
     }
   ],
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Quraşdırın' translates to 'Install' or 'Set up' in a more formal context, but 'Set it up' is a more casual phrase. A more accurate, casual translation might be 'Hazırlayın' or 'Tetikləyin' depending on the exact usage.",
-          "suggestion": "Consider 'Hazırlayın' or 'Tetikləyin' for a more casual equivalent."
+          "description": "While 'Quraşdırın' can mean 'install' or 'set up', it's a more formal and technical term. For a phrase like 'Set it up', a more colloquial and user-friendly translation might be more appropriate.",
+          "suggestion": "Consider alternatives like 'hazırlayın' (prepare) or 'başlayın' (start), depending on the context of 'Set it up'."
         }
       ],
       "approved_at": null
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Nastavení\" (Settings) doesn't accurately convey the meaning of \"Set it up\". \"Set it up\" implies a process of configuration or initial setup, whereas \"Nastavení\" simply means settings.",
-          "suggestion": "Possible suggestions include: \"Založení\" (Establishment), \"Konfigurace\" (Configuration), \"Nastavení a spuštění\" (Setup and Launch), or a more context-dependent phrasing."
+          "description": "The Czech translation \"Nastavení\" translates to \"Settings\" or \"Configuration\", not \"Set it up\". It doesn't convey the action of establishing or configuring something.",
+          "suggestion": "Possible alternatives depending on context: 'Založení', 'Konfigurace', 'Připravení', 'Instalace'."
         }
       ],
       "approved_at": null
@@ -72,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Ρύθμιση' translates to 'Setting' or 'Configuration' and doesn't fully capture the meaning of 'Set it up,' which implies initialization or getting something ready for use. A better translation would convey that action.",
-          "suggestion": "Εγκατάσταση"
+          "description": "'Ρύθμιση' translates to 'Setup' or 'Configuration' rather than 'Set it up'. While not completely wrong, it lacks the immediacy and action implied by the English phrase.",
+          "suggestion": "Consider 'Εγκατάσταση' (Installation) or 'Ετοιμασία' (Preparation) for a closer translation of 'Set it up', depending on the specific context."
         }
       ],
       "approved_at": null
@@ -81,7 +81,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Configúrelo\" is a possible translation, it's quite formal. \"Configúrelo\" implies a more complex setup than \"Set it up\" often suggests. A more appropriate translation might depend on the specific context of the JavascriptSdk.",
+          "suggestion": "Consider alternatives like \"Actívelo\", \"Póngalo en marcha\", or \"Instálalo\" depending on the context.  A more literal, but still acceptable, option would be \"Póngalo en marcha\"."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -90,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Aseta se\" is a literal translation of \"Set it up\", it lacks the implied setup context. \"Set it up\" often refers to configuring or installing something. A more accurate translation would convey that nuance.",
-          "suggestion": "Consider alternatives like \"Konfiguroi se\" (Configure it) or \"Asenna se\" (Install it), depending on the specific context of 'Set it up'."
+          "description": "While 'Aseta se' is a literal translation of 'Set it up', it lacks the nuance of the English phrase. 'Set it up' often implies configuration or installation, not just placing something. A more contextually accurate translation might be 'Konfiguroi' (Configure) or 'Asenna' (Install), depending on the specific meaning within the Javascript SDK.",
+          "suggestion": "Consider 'Konfiguroi' or 'Asenna' for a more accurate translation, or retain 'Aseta se' if the context clearly indicates a simple placement."
         }
       ],
       "approved_at": null
@@ -102,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "“Réglage” is a general term for 'setting' or 'adjustment'. While technically not *wrong*, it doesn't capture the full meaning of 'Set it up,' which implies configuration or installation. A more suitable translation would depend on the specific context of how 'Set it up' is used.",
-          "suggestion": "Consider alternatives like 'Configurer', 'Installer', or 'Mettre en place' depending on the context. Without context, 'Configurer' might be a good general option."
+          "description": "The translation \"Réglage\" doesn't fully capture the meaning of \"Set it up\". \"Set it up\" implies configuration or installation. \"Réglage\" translates more closely to 'adjustment' or 'setting'.",
+          "suggestion": "Consider alternatives like \"Installation\" or \"Configuration\" depending on the context."
         }
       ],
       "approved_at": null
@@ -114,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Նախադրեք այն\" (Nahadrek ayn) is a literal translation of \"set it up\" but doesn't fully capture the nuance. It implies a more formal or technical setup. Depending on the context, a more natural Armenian translation might be needed. The best translation would depend on what \"set it up\" refers to.",
-          "suggestion": "Consider alternatives like \"Կազմեք\" (Kazmek - to organize/prepare), \"Տեղադրեք\" (Teladrek - to install), or a more context-specific phrasing."
+          "description": "While \"Նախադրեք այն\" is technically a possible translation of 'Set it up', it's quite formal and doesn't quite capture the casual tone of the English phrase. It's more akin to 'Pre-configure it' or 'Install it'.",
+          "suggestion": "Consider alternatives like \"Սարքեք այն\" (sark'ek ayn) - 'Arrange it' or 'Prepare it', or something more context-specific depending on what 'Set it up' refers to. A more colloquial option could also be explored, if appropriate."
         }
       ],
       "approved_at": null
@@ -132,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"設定\" (settei) generally means 'settings' or 'configuration', not the English phrase 'Set it up'. It lacks the nuance of initial setup or preparation.",
-          "suggestion": "Consider alternatives like \"初期設定\" (shoki-settei - initial setup), \"構築\" (kochiku - construction/building), or \"準備\" (junbi - preparation) depending on the context.  Without more context, a more generic '設定する' (settei suru - to set up) might be appropriate."
+          "description": "The translation \"設定\" (settei) is too generic for \"Set it up.\" While \"settei\" means \"setting\" or \"configuration,\" it lacks the nuance of establishing something or preparing it for use. A more accurate translation would depend on the context of how \"Set it up\" is being used.",
+          "suggestion": "Consider alternatives like: \"初期設定\" (shoki-settei - initial setup), \"構築\" (kochiku - construct/build), or a more context-specific phrase like \"導入\" (dounyuu - implementation/introduction)."
         }
       ],
       "approved_at": null
@@ -141,13 +147,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"설정하기\" (seoljeonghagi) is a valid Korean word meaning 'to set up' or 'to configure', it's a more formal or technical term.  'Set it up' often implies a simpler, more casual setup process.  A more colloquial and potentially more accurate translation would depend on the context.  '설치하다' (seolchihada - to install) or '준비하다' (junbihada - to prepare) might be more appropriate depending on the specific situation.",
-          "suggestion": "Consider '설치하다' (seolchihada) or '준비하다' (junbihada) depending on context, or explore a more casual phrasing if the context allows."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -156,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"ຕັ້ງມັນຂຶ້ນ\" is a literal translation of \"set it up\", it might not convey the intended meaning depending on the context. \"Set it up\" can mean configure, install, or prepare. A more appropriate translation would depend on the exact use case within the Javascript SDK.",
-          "suggestion": "Consider alternative translations like \"ຕິດຕັ້ງ\" (install), \"ຕັ້ງຄ່າ\" (configure), or \"ກະກຽມໄວ້\" (prepare), depending on the context."
+          "description": "While \"ຕັ້ງມັນຂຶ້ນ\" is a literal translation of \"set it up\", it might not be the most natural or idiomatic way to express the same meaning in Lao depending on the context.  'Set it up' can refer to configuration, installation, or preparation. A more contextually appropriate translation might be needed.",
+          "suggestion": "Consider alternatives like \"ຕິດຕັ້ງມັນ\" (tit tang man - install it), \"ກະກຽມມັນ\" (ga-giem man - prepare it), or \"ເຮັດໃຫ້ມັນຮຸ່ງ\" (het hai man hung - get it going) depending on the specific context."
         }
       ],
       "approved_at": null
@@ -165,13 +165,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "'Iestatīt' is a literal translation of 'Set it up' but lacks the context of setup and configuration often associated with the English phrase. Depending on the specific Javascript SDK's functionality, a more contextually accurate translation might be needed (e.g., 'Konfigurēt', 'Sakārtot').",
-          "suggestion": "Consider alternative translations like 'Konfigurēt' (configure) or 'Sakārtot' (set up/organize) to better reflect the SDK's purpose.  Further context about the JavascriptSdk:SetItUp function is needed to determine the most appropriate translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -186,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Skonfiguruj' is a valid Polish word, it's a bit formal and doesn't quite capture the casual tone of 'Set it up'. Depending on the context, a more appropriate translation might be 'Ustaw' or 'Zainstaluj'.",
-          "suggestion": "Consider 'Ustaw' or 'Zainstaluj' for a more contextually accurate translation."
+          "description": "While \"Skonfiguruj\" is a possible translation, it's quite formal and might not be the best fit for a Javascript SDK setup instruction. \"Skonfiguruj\" implies a more complex configuration. \"Ustaw\" or \"Zainstaluj\" (Install) might be more appropriate depending on the context.",
+          "suggestion": "Consider alternatives like \"Ustaw\" or \"Zainstaluj\" depending on the exact meaning of 'Set it up' in the Javascript SDK context."
         }
       ],
       "approved_at": null
@@ -195,7 +189,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Configurá-lo' is a possible translation, it's quite literal and might not fully capture the nuance of 'Set it up', which can imply installation, initial configuration, or getting something ready to use.  A more natural translation might depend on the context in which 'Set it up' is used.",
+          "suggestion": "Consider alternatives like 'Instalar e configurar', 'Prepará-lo', or 'Colocá-lo em funcionamento' depending on the context."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -204,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Configurá-lo\" is a possible translation, \"Set it up\" often implies a more complete setup or initial configuration. \"Configurá-lo\" is more general. A more suitable translation might be \"Configurar Inicialmente\" or \"Implementar\" depending on the context.",
-          "suggestion": "Consider \"Configurar Inicialmente\" or \"Implementar\" for a more accurate translation, depending on the exact context."
+          "description": "While 'Configurá-lo' is a possible translation, it doesn't fully capture the nuance of 'Set it up'. 'Set it up' often implies initial configuration or installation. 'Configurá-lo' is more about adjusting existing settings. A better translation might depend on the context.",
+          "suggestion": "Consider 'Instalá-lo' (if referring to installation) or 'Configurar' (more general, but might need more context to determine appropriateness)."
         }
       ],
       "approved_at": null
@@ -216,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Configurare' is a valid Romanian word, it doesn't fully capture the nuance of 'Set it up'. 'Set it up' implies initialization or getting something ready to use, which 'Configurare' primarily means 'to configure'. A more accurate translation might be 'Inițializare' or 'Pregătire'.",
-          "suggestion": "Inițializare"
+          "description": "'Configurare' while a possible translation, doesn't fully capture the nuance of 'Set it up' which implies initial setup or configuration. It's more literal. A better translation would depend on the context of use. Possible alternatives include 'Inițializează', 'Configurează', or a more descriptive phrase.",
+          "suggestion": "Consider alternatives like 'Inițializează', 'Configurează', or a context-specific phrase reflecting initial setup."
         }
       ],
       "approved_at": null
@@ -231,13 +231,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "'පිහිටුවන්න' translates more closely to 'establish' or 'install' rather than 'set it up'. While it can be used in some contexts, it's not the most natural translation for 'set it up'. A more appropriate translation would depend on the context of how 'set it up' is being used.",
-          "suggestion": "Consider alternative translations like 'තියෙන්න' (tiyanna - to prepare), 'ගොඩනඟන්න' (godananganna - to build), or a more context-specific phrase."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -246,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Nastaviť\" can mean \"to set up,\" it lacks the nuance and common usage of \"Set it up\" which implies initial configuration or preparation. A more suitable translation would capture the context of the Javascript SDK setup.",
-          "suggestion": "Consider alternatives like \"Konfigurácia\", \"Inštalácia a konfigurácia\", or \"Zriadenie\" depending on the specific usage in the Javascript SDK."
+          "description": "While 'Nastaviť' can mean 'to set up', it's quite literal and lacks the nuance of the English phrase 'Set it up'. It can sound abrupt or incomplete in context. A more natural Slovak equivalent would depend on the specific context, but options like 'Zriadiť', 'Konfigurovať', 'Nastaviť a spustiť' (set up and launch) or 'Postupiť' (to hand over/set up) could be more appropriate.",
+          "suggestion": "Consider a more context-dependent translation such as 'Zriadiť', 'Konfigurovať', 'Nastaviť a spustiť' or 'Postupiť'."
         }
       ],
       "approved_at": null
@@ -264,8 +258,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Постави\" is a literal translation of \"set\" and doesn't fully capture the meaning of \"set it up\" which implies configuration or initial setup. It is also somewhat informal and may not be appropriate depending on the context.",
-          "suggestion": "Consider alternatives like \"Припреми\" (Prepare), \"Подеси\" (Adjust/Configure), or \"Уреди\" (Arrange/Set up), depending on the specific function being referred to. A more context-aware translation would be better."
+          "description": "The translation \"Постави\" is a literal translation of \"set\" but lacks the full meaning of \"set it up,\" which implies configuration or installation. It could be interpreted as simply 'put' or 'place'.",
+          "suggestion": "Consider a more contextually accurate translation such as \"Подеси\" (podesi) which implies adjustment or configuration, or \"Инсталирај\" (installiraj) if the context refers to installation."
         }
       ],
       "approved_at": null
@@ -276,8 +270,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Postavi\" while grammatically correct, doesn't fully capture the nuance of \"Set it up\". \"Postavi\" means \"I put\" or \"I placed\", implying a singular action. \"Set it up\" can imply a more complex process of configuration or preparation.",
-          "suggestion": "Consider alternatives like \"Postavio sam\" (I set up), \"Podesio sam\" (I configured), or a more context-specific translation depending on what 'Set it up' refers to (e.g., 'instalirao sam' - I installed)."
+          "description": "The translation \"Postavi\" translates to \"I placed\" or \"I put\" and doesn't accurately convey the meaning of \"Set it up,\" which implies initial configuration or installation. A more appropriate translation would depend on the context of what is being set up. It lacks the nuance of initial configuration.",
+          "suggestion": "Consider alternatives like \"Postavi ga\" (I set it up), \"Podesio ga\" (I configured it), or \"Postavio sam ga\" (I installed it), depending on the context."
         }
       ],
       "approved_at": null
@@ -300,8 +294,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Thiết lập nó\" is a literal translation of \"Set it up\", it's not the most natural or idiomatic way to express the same concept in Vietnamese. It sounds somewhat clunky and formal.",
-          "suggestion": "Consider alternatives like: \"Cài đặt\" (Install), \"Chuẩn bị\" (Prepare), or a more context-dependent phrase. Without more context, \"Cài đặt\" is a good general alternative."
+          "description": "While \"Thiết lập nó\" is technically correct, it's a bit awkward and overly literal. A more natural and idiomatic translation for \"Set it up\" would depend on the context. For example, if it means 'configure', 'install', or 'establish'.",
+          "suggestion": "Consider alternative translations like: \"Cài đặt\" (install), \"Thiết lập\" (configure/establish - more general), or \"Khởi tạo\" (initialize) based on the context."
         }
       ],
       "approved_at": null
@@ -312,8 +306,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'设置' is a general term for 'setting' or 'configuration'. While not necessarily *wrong*, 'Set it up' implies a process of initial configuration or installation. '设置' is more neutral. A more accurate translation might be '安装配置' (install and configure) or '初始化' (initialize), depending on the context.",
-          "suggestion": "Consider '安装配置' or '初始化' for more contextually accurate translations."
+          "description": "'设置' is a valid translation for 'setup' in some contexts, but it lacks the nuance of 'set it up' which implies configuration and initialization. It's a more general 'set' rather than a specific setup process.",
+          "suggestion": "Consider alternatives like '初始化设置' (initial setup), '配置' (configuration), or '安装并配置' (install and configure), depending on the specific context of 'JavascriptSdk:SetItUp'."
         }
       ],
       "approved_at": null

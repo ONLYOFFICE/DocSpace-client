@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -74,7 +74,6 @@ const EmptyScreenContainer = (props: EmptyScreenContainerProps) => {
           fontSize="19px"
           fontWeight="700"
           className={classNames(styles.header, "ec-header")}
-          noSelect
         >
           {headerText}
         </Text>
@@ -85,7 +84,6 @@ const EmptyScreenContainer = (props: EmptyScreenContainerProps) => {
           as="span"
           fontWeight="600"
           className={classNames(styles.subheading, "ec-subheading")}
-          noSelect
         >
           {subheadingText}
         </Text>
@@ -96,7 +94,6 @@ const EmptyScreenContainer = (props: EmptyScreenContainerProps) => {
           as="span"
           fontSize="12px"
           className={classNames(styles.description, "ec-desc")}
-          noSelect
         >
           {descriptionText}
         </Text>

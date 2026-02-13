@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,13 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React from "react";
+import classNames from "classnames";
+
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
-import {
-  StyledFileItem,
-  StyledItem,
-  StyledRoomItem,
-} from "../NewFilesBadge.styled";
+import styles from "../new-files-panel.module.scss";
 
 type NewFilesPanelLoaderProps = {
   isRooms: boolean;
@@ -40,22 +38,40 @@ export const NewFilesPanelLoader = ({ isRooms }: NewFilesPanelLoaderProps) => {
   if (isRooms)
     return (
       <>
-        <StyledItem isRooms isFirst isLoader>
+        <div
+          className={classNames(styles.item, {
+            [styles.isRooms]: isRooms,
+            [styles.isFirst]: true,
+            [styles.isLoader]: true,
+          })}
+        >
           <RectangleSkeleton className="date-item" width="80px" height="16px" />
           <div className="room-items-container">
-            <StyledRoomItem>
+            <div className={styles.roomItem}>
               <RectangleSkeleton width="120px" height="24px" />
-            </StyledRoomItem>
+            </div>
             <div className="file-items-container">
-              <StyledFileItem isRooms>
+              <div
+                className={classNames(styles.fileItem, {
+                  [styles.isRooms]: isRooms,
+                })}
+              >
                 <RectangleSkeleton width="100%" height="32px" />
-              </StyledFileItem>
-              <StyledFileItem isRooms>
+              </div>
+              <div
+                className={classNames(styles.fileItem, {
+                  [styles.isRooms]: isRooms,
+                })}
+              >
                 <RectangleSkeleton width="100%" height="32px" />
-              </StyledFileItem>
-              <StyledFileItem isRooms>
+              </div>
+              <div
+                className={classNames(styles.fileItem, {
+                  [styles.isRooms]: isRooms,
+                })}
+              >
                 <RectangleSkeleton width="100%" height="32px" />
-              </StyledFileItem>
+              </div>
               <RectangleSkeleton
                 className="more-items"
                 width="120px"
@@ -63,45 +79,75 @@ export const NewFilesPanelLoader = ({ isRooms }: NewFilesPanelLoaderProps) => {
               />
             </div>
           </div>
-        </StyledItem>
-        <StyledItem isRooms isFirst={false} isLoader>
+        </div>
+        <div
+          className={classNames(styles.item, {
+            [styles.isRooms]: isRooms,
+            [styles.isFirst]: false,
+            [styles.isLoader]: true,
+          })}
+        >
           <RectangleSkeleton className="date-item" width="80px" height="16px" />
           <div className="room-items-container">
-            <StyledRoomItem>
+            <div className={styles.roomItem}>
               <RectangleSkeleton width="120px" height="24px" />
-            </StyledRoomItem>
+            </div>
             <div className="file-items-container">
-              <StyledFileItem isRooms>
+              <div
+                className={classNames(styles.fileItem, {
+                  [styles.isRooms]: isRooms,
+                })}
+              >
                 <RectangleSkeleton width="100%" height="32px" />
-              </StyledFileItem>
-              <StyledFileItem isRooms>
+              </div>
+              <div
+                className={classNames(styles.fileItem, {
+                  [styles.isRooms]: isRooms,
+                })}
+              >
                 <RectangleSkeleton width="100%" height="32px" />
-              </StyledFileItem>
-              <StyledFileItem isRooms>
+              </div>
+              <div
+                className={classNames(styles.fileItem, {
+                  [styles.isRooms]: isRooms,
+                })}
+              >
                 <RectangleSkeleton width="100%" height="32px" />
-              </StyledFileItem>
+              </div>
             </div>
           </div>
-        </StyledItem>
+        </div>
       </>
     );
 
   return (
-    <StyledItem isRooms={false} isFirst isLoader>
+    <div
+      className={classNames(styles.item, {
+        [styles.isRooms]: false,
+        [styles.isFirst]: true,
+        [styles.isLoader]: true,
+      })}
+    >
       <RectangleSkeleton className="date-item" width="80px" height="16px" />
 
       <div className="file-items-container">
-        <StyledFileItem isRooms={false}>
+        <div
+          className={classNames(styles.fileItem, { [styles.isRooms]: false })}
+        >
           <RectangleSkeleton width="100%" height="32px" />
-        </StyledFileItem>
-        <StyledFileItem isRooms={false}>
+        </div>
+        <div
+          className={classNames(styles.fileItem, { [styles.isRooms]: false })}
+        >
           <RectangleSkeleton width="100%" height="32px" />
-        </StyledFileItem>
-        <StyledFileItem isRooms={false}>
+        </div>
+        <div
+          className={classNames(styles.fileItem, { [styles.isRooms]: false })}
+        >
           <RectangleSkeleton width="100%" height="32px" />
-        </StyledFileItem>
+        </div>
         <RectangleSkeleton className="more-items" width="120px" height="24px" />
       </div>
-    </StyledItem>
+    </div>
   );
 };

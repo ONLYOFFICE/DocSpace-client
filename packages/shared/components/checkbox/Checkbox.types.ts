@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -55,4 +55,6 @@ export type CheckboxProps = PickedTextProps &
     helpButton?: React.ReactNode;
     /** Notifies if the error occurs */
     hasError?: boolean;
+    /** Test id for the checkbox */
+    dataTestId?: string;
   };

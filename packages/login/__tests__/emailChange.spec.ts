@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,9 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { endpoints } from "@docspace/shared/__mocks__/e2e";
-
-import { expect, test } from "./fixtures/base";
+import {
+  selfChangeAuthDataHandler,
+  settingsHandler,
+  TypeSettings,
+} from "@docspace/shared/__mocks__/handlers";
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
+import { test } from "./fixtures/base";
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 
 const URL = "/login/confirm/EmailChange";
@@ -41,35 +45,67 @@ const QUERY_PARAMS = [
     value: "123",
   },
   {
-    name: "email",
-    value: "mail@mail.com",
+    name: "encemail",
+    value: "b5COc6kRm3veeYqA72sOfA&uid=66faa6e4-f133-11ea-b126-00ffeec8b4ef",
   },
   {
     name: "uid",
     value: "123",
   },
+  {
+    name: "redirected",
+    value: "true",
+  },
 ];
 
 const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
 
-test("email change success", async ({ page, mockRequest }) => {
-  await mockRequest.router([endpoints.changeEmail]);
-  await page.goto(URL_WITH_PARAMS);
+test("email change without auth", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await page.waitForURL("/profile?email_change=success", { waitUntil: "load" });
+  await expectScreenshot(page,[
+    "desktop",
+    "email-change",
+    "email-change-without-auth.png",
+  ]);
+});
 
-  await expect(page).toHaveScreenshot([
+test("email change success", async ({
+  page,
+  baseUrl,
+  port,
+  serverRequestInterceptor,
+}) => {
+  serverRequestInterceptor.use(
+    settingsHandler(port, TypeSettings.Authenticated),
+  );
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
+
+  await page.waitForURL(`${baseUrl}/profile/login?email_change=success`, {
+    waitUntil: "load",
+  });
+
+  await expectScreenshot(page,[
     "desktop",
     "email-change",
     "email-change-success.png",
   ]);
 });
 
-test("email change error", async ({ page, mockRequest }) => {
-  await mockRequest.router([endpoints.changeEmailError]);
-  await page.goto(URL_WITH_PARAMS);
+test("email change error", async ({
+  page,
+  baseUrl,
+  port,
+  clientRequestInterceptor,
+  serverRequestInterceptor,
+}) => {
+  serverRequestInterceptor.use(
+    settingsHandler(port, TypeSettings.Authenticated),
+  );
+  clientRequestInterceptor.use(selfChangeAuthDataHandler(port, 400));
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "email-change",
     "email-change-error.png",

@@ -3,7 +3,7 @@
   "content": "Enter title",
   "content_en_sha1_hash": "0f84658cc7db030dad659aafdf53069d1f3f7f96",
   "created_at": "2025-05-19T21:30:51.532Z",
-  "updated_at": "2025-05-21T04:16:16.906Z",
+  "updated_at": "2025-10-03T13:19:30.540Z",
   "comment": {
     "text": "The \"EnterTitle\" translation key is used to display a placeholder text in a form field on a welcome page. It will be visible until the title is entered by the user and appears as a dynamic placeholder when the form is in a loading state.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/welcome-page-settings.js",
-      "line_number": 338,
-      "context": "value={state.greetingTitle}\n onChange={onChangeGreetingTitle}\n isDisabled={\n state.isLoadingGreetingSave || state.isLoadingGreetingRestore\n }\n placeholder={t(\"EnterTitle\")}\n />\n </FieldContainer>\n </div>\n );",
+      "line_number": 368,
+      "context": "testId=\"customization_welcome_page_text_input\"\n onChange={onChangeGreetingTitle}\n isDisabled={\n state.isLoadingGreetingSave || state.isLoadingGreetingRestore\n }\n placeholder={t(\"EnterTitle\")}\n hasError={!state.isValidTitle}\n />\n </FieldContainer>\n </div>\n );",
       "module": "/packages/client"
     }
   ],
@@ -114,7 +114,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ievadiet nosaukums' is not a correct translation of 'Enter title'. 'Nosaukums' means 'name' or 'title' in the nominative case. The correct form needs to be in the imperative mood.",
+          "description": "The Latvian translation 'Ievadiet nosaukums' is not the most natural or accurate translation of 'Enter title'. 'Nosaukums' means 'name', but 'title' has a more specific meaning. A more appropriate translation would use a word like 'nosaukuma'.",
           "suggestion": "Ievadiet nosaukuma"
         }
       ],
@@ -153,13 +153,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Russian translation \"Укажите название\" is a functional equivalent but not the most natural or direct translation of \"Enter title\".  \"Enter title\" implies inputting a title, while \"Укажите название\" translates to \"Specify the name/title\". While understandable, it's slightly more formal and less user-friendly.",
-          "suggestion": "Впишите название (Vpishite nazvaniye)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -168,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'සිරැසිය යොදන්න' (siriya ya dannā) translates to 'Enter a secret' or 'Add a secret'. The intended meaning of 'Enter title' is to request a user to input a title.",
-          "suggestion": "කාර්තුවක් යොදා ගන්න (kārthuwak ya dā gannā) - which translates to 'Enter a title' or 'Add a title'."
+          "description": "The translation \"සිරැසිය යොදන්න\" doesn't accurately convey the meaning of 'Enter title'. 'සිරැසිය' primarily means 'beauty' or 'grace' and 'යොදන්න' means 'to add' or 'to apply'. The intended meaning is to input a title.",
+          "suggestion": "කාර්තුවන ශීර්ෂකය ඇතුළත් කරන්න"
         }
       ],
       "approved_at": null
@@ -198,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Unesi naslov' doesn't fully capture the meaning of 'Enter title'. A more accurate translation would be 'Unesite naslov'. The imperative form 'unesite' is more appropriate for a UI label.",
-          "suggestion": "Unesite naslov"
+          "description": "The translation \"Unesi naslov\" is a literal translation and doesn't quite capture the meaning of 'Enter title' in a UI context. A more natural translation would be 'Naslov:' or 'Unesite naslov:'",
+          "suggestion": "Naslov:"
         }
       ],
       "approved_at": null

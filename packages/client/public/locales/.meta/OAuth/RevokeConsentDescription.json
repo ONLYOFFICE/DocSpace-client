@@ -3,7 +3,7 @@
   "content": "Once you revoke the consent to use the {{organizationName}} {{productName}} auth data in the service {{name}}, {{organizationName}} {{productName}} will automatically stop logging into {{name}}. Your account in {{name}} will not be deleted.",
   "content_en_sha1_hash": "5c1fc56c860f847aa560f81753e9b963fc6b2e30",
   "created_at": "2025-05-19T21:30:54.010Z",
-  "updated_at": "2025-05-21T07:00:43.594Z",
+  "updated_at": "2025-05-24T07:14:47.179Z",
   "comment": {
     "text": "This translation key is used to describe what happens when a user revokes consent to use their {{organizationName}} {{productName}} authentication data. It will be displayed in a dialog (RevokeDialog) when a user chooses to revoke consent and informs them that their account will not be deleted, but the service will stop logging into their account.",
     "is_auto": true,
@@ -30,13 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"تفويض\" (tafweedh) for \"auth data\" is not the most natural or accurate translation in this context. A more suitable term would convey the concept of authorization or consent.",
-          "suggestion": "Consider using a term like \"بيانات صلاحية\" (bayanat salahiyyah) which means 'authorization data' or \"بيانات تفويض المستخدم\" (bayanat tafweedh al-mustakhdim) which means 'user authorization data'."
-        },
-        {
-          "type": "formatting",
-          "description": "The repetition of '{{organizationName}} {{productName}}' makes the sentence sound awkward in Arabic. While variables are used in the English source, the Arabic translation should strive for a more fluid read.",
-          "suggestion": "Rephrase the sentence to avoid the repetition, potentially using a pronoun or a more descriptive phrase to refer to the organization and product."
+          "description": "The Arabic translation uses \"بيانات تفويض\" (bayanat tafweedh) for \"auth data\". While technically correct, a more natural and common phrasing in this context would be something like \"بيانات تسجيل الدخول\" (bayanat tasjeel al-dookhol) or \"بيانات المصادقة\" (bayanat al-musaadaqa).",
+          "suggestion": "Consider using \"بيانات تسجيل الدخول\" or \"بيانات المصادقة\" instead of \"بيانات تفويض\"."
         }
       ],
       "approved_at": null
@@ -47,18 +42,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ləğv etdikdə\" (when you revoke) is a bit awkward. A more natural phrasing would be \"ləğv etsəniz\" or \"ləğv etməklə\".",
-          "suggestion": "{{organizationName}} {{productName}} şirkətinin identifikasiya məlumatından {{name}} üçün istifadə etmək icazəsini ləğv etməklə..."
+          "description": "The phrase 'revoke the consent to use' is not accurately translated. 'İstifadə etmək icazəsini ləğv etdikdə' is a bit literal and could be improved for naturalness. A more natural translation might be '{{organizationName}} {{productName}} hesabının {{name}} xidmətində identifikasiya məlumatı istifadə etmək hüququnu ləğv etdiyinizdə'.",
+          "suggestion": "{{organizationName}} {{productName}} hesabının {{name}} xidmətində identifikasiya məlumatı istifadə etmək hüququnu ləğv etdiyinizdə"
         },
         {
           "type": "incorrect_translation",
-          "description": "The word \"hesabına\" appears twice in close proximity. While technically correct, it can be slightly repetitive. Consider rephrasing.",
-          "suggestion": "{{organizationName}} {{productName}} şirkətinin identifikasiya məlumatından {{name}} üçün istifadə etmək icazəsini ləğv etməklə, {{organizationName}} {{productName}} avtomatik olaraq {{name}} daxil olmağı dayandıracaq. {{name}} ünvanındakı hesabınız silinməyəcək."
+          "description": "The translation of 'will automatically stop logging into' is a bit awkward. 'Avtomatik olaraq {{name}} hesabına daxil olmağı dayandıracaq' is literal. A more natural phrasing would be '{{name}} hesabına girişini dayandıracaq'.",
+          "suggestion": "{{name}} hesabına girişini dayandıracaq"
         },
         {
-          "type": "formatting",
-          "description": "Consistency in the use of variable placeholders.  Ensure that `{{...}}` is applied consistently throughout the translation.",
-          "suggestion": "Double-check all occurrences of variable placeholders to ensure they are properly formatted and consistently applied."
+          "type": "incorrect_translation",
+          "description": "The phrase 'Your account in {{name}} will not be deleted' is too literal. It's better to rephrase it to '{{name}} hesabınız silinməyəcək'.",
+          "suggestion": "{{name}} hesabınız silinməyəcək"
         }
       ],
       "approved_at": null
@@ -69,13 +64,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"logging into\" is not ideal. \"Влиза в\" (vliaz v) literally means 'enters' and while understandable, it's not the most natural way to express logging into a service in Bulgarian. A better phrasing would convey the sense of authentication or access.",
-          "suggestion": "След като отмените съгласието за използване на данните за удостоверяване на {{organizationName}} {{productName}} в услугата {{name}}, {{organizationName}} {{productName}} автоматично ще спре достъпа си до {{name}}."
+          "description": "The translation of \"logging into\" is not accurate. \"Влиза\" (vliza) implies entering a system, which is not the correct meaning in the context of authentication data.",
+          "suggestion": "Consider using a more precise term like \"автоматично няма да може да се удостоверява\" (avtomatichen ne ma da se udostveryava) which translates to 'will automatically be unable to authenticate'."
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'профил' (profil) is used for 'account'. While not entirely wrong, 'акаунт' (account) is the more common and direct translation in the context of online services.",
-          "suggestion": "След като отмените съгласието за използване на данните за удостоверяване на {{organizationName}} {{productName}} в услугата {{name}}, {{organizationName}} {{productName}} автоматично ще спре достъпа си до {{name}}. Вашият акаунт в {{name}} няма да бъде изтрит."
+          "description": "The translation of \"Your account\" should more accurately reflect \"profile\" as indicated in the English content. \"Профил\" is the correct term here.",
+          "suggestion": "No change needed, \"Вашият профил\" is accurate and reflects the English context."
         }
       ],
       "approved_at": null
@@ -86,13 +81,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Czech translation has an unnecessary period after the first occurrence of '{{organizationName}}'.",
-          "suggestion": "Remove the period after '{{organizationName}}' in 'Po odvolání souhlasu s použitím {{organizationName}} {{productName}} autorizačních údajů ve službě {{name}}, {{organizationName}}.'"
+          "description": "Missing period after organizationName in the Czech translation. The sentence is abruptly cut off.",
+          "suggestion": "Po odvolání souhlasu s použitím {{organizationName}} {{productName}} autorizačních údajů ve službě {{name}}, {{organizationName}}. "
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'auth data' is translated as 'autorizačních údajů'. While technically correct, a more natural translation for this context might be 'přístupových údajů'.",
-          "suggestion": "Consider translating 'auth data' as 'přístupových údajů' for improved readability and flow."
+          "description": "The phrase 'autorizačních údajů' is a literal translation of 'auth data'. It's technically correct, but a more natural Czech phrasing might be 'přístupových údajů' or 'ověřovacích údajů'.",
+          "suggestion": "Po odvolání souhlasu s použitím {{organizationName}} {{productName}} přístupových/ověřovacích údajů ve službě {{name}}, {{organizationName}}."
         }
       ],
       "approved_at": null
@@ -103,13 +98,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'Auth-Daten' is an awkward translation of 'auth data'. It's understandable but not ideal. A more natural translation might be 'Authentifizierungsdaten' or 'Zugangsdaten'.",
-          "suggestion": "Consider using 'Authentifizierungsdaten' or 'Zugangsdaten' instead of 'Auth-Daten'."
+          "description": "The term 'Auth-Daten' is a direct translation of 'auth data' but sounds unnatural in German. It's better to use a more common phrasing like 'Authentifizierungsdaten' or 'Zugangsdaten'.",
+          "suggestion": "Sobald Sie die Zustimmung zur Nutzung der Authentifizierungsdaten von {{organizationName}} {{productName}} im Dienst {{name}} widerrufen..."
         },
         {
-          "type": "formatting",
-          "description": "While not incorrect, the translation doesn't maintain the same stylistic flow as the English version. The English uses a slightly more conversational tone.",
-          "suggestion": "Review the phrasing to better match the conversational tone of the original English."
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'die Anmeldung bei {{name}} stoppen' is a bit clunky. A more natural phrasing would be 'den Login zu {{name}} beenden' or 'nicht mehr bei {{name}} anmelden können'.",
+          "suggestion": "Sobald Sie die Zustimmung zur Nutzung der Authentifizierungsdaten von {{organizationName}} {{productName}} im Dienst {{name}} widerrufen, wird {{organizationName}} {{productName}} den Login zu {{name}} beenden."
         }
       ],
       "approved_at": null
@@ -120,13 +115,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"auth data\" is translated as \"δεδομένων εξουσιοδότησης\". While technically correct, it's overly formal and might be confusing for the average user. A simpler translation like \"δεδομένων πρόσβασης\" (access data) or \"δεδομένων σύνδεσης\" (connection data) might be more appropriate.",
-          "suggestion": "Consider translating \"auth data\" as \"δεδομένων πρόσβασης\" or \"δεδομένων σύνδεσης\"."
-        },
-        {
-          "type": "formatting",
-          "description": "The translation retains the English variable placeholders ({{organizationName}}, {{productName}}, {{name}}). While this might be necessary depending on the system rendering the translation, it's preferable for the final user experience to have these replaced with the appropriate values.",
-          "suggestion": "Ensure the placeholders are replaced with the corresponding values for the target language and platform."
+          "description": "The phrase \"auth data\" is translated as \"δεδομένων εξουσιοδότησης\". While technically correct, it's a bit clunky and less natural in Greek. A more common and understandable translation would be \"δεδομένων πρόσβασης\" or \"δεδομένων χρήσης\".",
+          "suggestion": "Μόλις ανακαλέσετε τη συγκατάθεση για τη χρήση των δεδομένων πρόσβασης του {{productName}} της {{organizationName}} στην υπηρεσία {{name}}, το {{productName}} της {{organizationName}} θα σταματήσει αυτόματα να συνδέεται στο {{name}}. Ο λογαριασμός σας στο {{name}} δεν θα διαγραφεί."
         }
       ],
       "approved_at": null
@@ -143,13 +133,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"kirjautumisen tilille\" is awkward. It translates literally to \"logging into account,\" but a more natural phrasing would be \"kirjautumisen\" (logging).",
-          "suggestion": "Jos peruutat suostumuksen käyttää {{organizationName}} {{productName}} todennustietoja palvelussa {{name}}, {{organizationName}} {{productName}} lopettaa automaattisesti kirjautumisen {{name}}."
+          "description": "The phrase \"kirjautumisen tilille\" is not the most natural way to express \"logging into\". A more natural translation would be \"kirjautumisen\" or \"sisäänkirjautumisen\".",
+          "suggestion": "Jos peruutat suostumuksen käyttää {{organizationName}} {{productName}} todennustietoja palvelussa {{name}}, {{organizationName}} {{productName}} lopettaa automaattisesti sisäänkirjautumisen {{name}}."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'tilillä verkkotunnuksessa' is not the best way to express that the account exists within a service. It's overly literal.",
-          "suggestion": "Tilisi palvelussa {{name}} ei poistu."
+          "description": "The word \"verkkotunnuksessa\" (in the domain) is not the correct word choice. \"Palvelussa\" is more suitable as the content refers to the service itself, not the domain where the service resides.",
+          "suggestion": "Jos peruutat suostumuksen käyttää {{organizationName}} {{productName}} todennustietoja palvelussa {{name}}, {{organizationName}} {{productName}} lopettaa automaattisesti sisäänkirjautumisen {{name}}. Tiliäsi palvelussa {{name}} ei poisteta."
         }
       ],
       "approved_at": null
@@ -157,13 +147,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"auth data\" is translated as \"données d'authentification\". While technically correct, a more natural and common translation in this context would be \"données d'authentification et d'autorisation\" or simply \"informations d'authentification\".",
-          "suggestion": "données d'authentification et d'autorisation or informations d'authentification"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -172,13 +156,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Once you revoke the consent\" is translated as \"Երբ չեղարկեք\".  A more accurate translation would be something like \"Երբ չեղարկեք համաձայնությունը\" or \"Երբ դուք չեղարկեք համաձայնությունը\". The current translation is grammatically awkward.",
-          "suggestion": "Երբ դուք չեղարկեք համաձայնությունը"
+          "description": "The phrase \"Երբ չեղարկեք... համաձայնությունը\" is an awkward phrasing. A more natural way to say 'Once you revoke the consent' would be 'Երբ չեղարկեք համաձայնությունը'.",
+          "suggestion": "Երբ չեղարկեք համաձայնությունը"
         },
         {
-          "type": "formatting",
-          "description": "The punctuation after the first sentence feels abrupt. A smoother transition might require a conjunction or a semicolon.",
-          "suggestion": "Երբ դուք չեղարկեք համաձայնությունը, {{organizationName}} {{productName}} ավտոմատ կերպով կդադարեցնի մուտքը {{name}}։ Ձեր հաշիվը {{name}}-ում չի ջնջվի։"
+          "type": "incorrect_translation",
+          "description": "The phrase 'ավտոմատ կերպով կդադարեցնի մուտքը' could be improved for clarity.  It literally translates to 'will automatically stop the entry'.  A better phrasing would indicate stopping the automatic login.",
+          "suggestion": "ավտոմատ կերպով դադարեցնելու է մուտքը"
         }
       ],
       "approved_at": null
@@ -188,14 +172,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The phrase \"{{organizationName}} {{productName}}\" is repeated excessively and could be shortened for better readability. While technically correct, it's a bit clunky in Italian.",
-          "suggestion": "Consider rephrasing to something like \"dati di autenticazione del servizio {{organizationName}} {{productName}}\" or simply \"dati di autenticazione di {{organizationName}}\" if the product name is implied."
+          "type": "incorrect_translation",
+          "description": "The phrase \"stop logging into\" is not the most natural Italian translation for \"stop accessing\". A better phrasing would convey the action of revoking access rather than simply stopping the login action.",
+          "suggestion": "Una volta revocato il consenso all'uso dei dati di autenticazione di {{organizationName}} {{productName}} nel servizio {{name}}, {{organizationName}} {{productName}} non potrà più accedere a {{name}}."
         },
         {
-          "type": "grammar",
-          "description": "While \"Il vostro account\" is grammatically correct, it's slightly formal for many contexts. A more common and natural phrasing would be \"Il tuo account\".",
-          "suggestion": "Change \"Il vostro account\" to \"Il tuo account\""
+          "type": "incorrect_translation",
+          "description": "The phrase 'Il vostro account' sounds slightly formal. While not incorrect, a more conversational and friendly tone might be preferred.",
+          "suggestion": "Il tuo account"
         }
       ],
       "approved_at": null
@@ -206,8 +190,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Japanese translation includes unnecessary spaces around the organizationName and productName variables, which may not be ideal for display.",
-          "suggestion": "Remove unnecessary spaces around the variables. For example, change '{{organizationName}}の{{productName}}' to '{{organizationName}}の{{productName}}'."
+          "description": "The Japanese translation lacks consistent use of punctuation, specifically periods at the end of sentences. While not strictly incorrect, it affects readability and flow in Japanese. It's common to end sentences with periods.",
+          "suggestion": "{{organizationName}}の{{productName}}認証データを{{name}}で使用することへの同意を取り消すと、{{organizationName}}の{{productName}}は自動的に{{name}}へのログインを停止します。{{name}}のアカウントは削除されません。"
         }
       ],
       "approved_at": null
@@ -218,13 +202,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'revoke the consent to use' is translated a bit too literally. A more natural Korean phrasing would be better. Specifically, the wording around consent revocation feels stilted.",
-          "suggestion": "Consider rephrasing '사용에 대한 동의를 철회하면' to something like '동의를 취소하면' or '동의를 해제하면' for a more fluent and natural feel.  The best option would depend on the specific tone desired for the overall text."
+          "description": "The phrase \"Once you revoke the consent\" is not accurately translated. A more natural Korean phrasing would be '{{organizationName}} {{productName}} 인증 데이터 사용에 대한 동의를 취소하시면'.",
+          "suggestion": "{{organizationName}} {{productName}} 인증 데이터 사용에 대한 동의를 취소하시면"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'stop logging into' is not naturally translated. '{{name}}에 로그인하는 것을 중단합니다' can be improved to '{{name}}에 로그인하는 것을 멈춥니다' or '더 이상 {{name}}에 로그인되지 않습니다'.",
+          "suggestion": "더 이상 {{name}}에 로그인되지 않습니다"
         },
         {
           "type": "formatting",
-          "description": "While technically correct, the repetition of \"{{organizationName}} {{productName}}\" in the translation can feel clunky. Depending on the context, it might be possible to use a shorter designation for brevity if the broader context makes it clear what is being referred to.  For example, if {{organizationName}} and {{productName}} frequently appear together.",
-          "suggestion": "Consider if a shortened designation is appropriate for {{organizationName}} {{productName}}, if the surrounding text already provides sufficient context. Alternatively, explore rewording to reduce repetition."
+          "description": "The Korean translation includes multiple instances of \"{{name}}\" and \"{{organizationName}} {{productName}}\". While the variables are correct, consider if repeating them is the best approach from a readability perspective. Can they be simplified or referenced differently?",
+          "suggestion": "Review for readability and consider alternative phrasing to avoid repetition of variables if possible."
         }
       ],
       "approved_at": null
@@ -234,14 +223,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The term 'ຕົກລົງ' is a slightly awkward translation of 'consent' in this context. While technically correct, it's not the most natural phrasing. A more common and clearer term might be preferable.",
-          "suggestion": "Consider using 'ການອະນຸຍາດ' (kan anu yat) instead of 'ຕົກລົງ' (tok long) for 'consent'."
+          "type": "incorrect_translation",
+          "description": "The phrase 'revoke the consent' is not perfectly translated. While 'ຍົກເລີກການຕົກລົງ' is understandable, a more natural translation might be 'ຖອນການຕົກລົງ' or 'ຍຸຕິການຕົກລົງ'.",
+          "suggestion": "ເມື່ອທ່ານຖອນການຕົກລົງໃຫ້ໃຊ້ຂໍ້ມູນການຮັບຮອງຕົວ..."
         },
         {
-          "type": "grammar",
-          "description": "The phrase 'ຂໍ້ມູນການຮັບຮອງຕົວ' (khomun kan rap hong tua) is a bit verbose. A more concise and readable version might be better.",
-          "suggestion": "Consider simplifying to 'ຂໍ້ມູນການເຊື່ອມໂຊ້' (khomun kan sieam so) or 'ຂໍ້ມູນການອະນຸຍາດ' (khomun kan anu yat)."
+          "type": "incorrect_translation",
+          "description": "The phrasing 'ບໍລິການ {{name}}' sounds slightly unnatural in Lao. It's better to rephrase to describe the context more clearly.",
+          "suggestion": "ເມື່ອທ່ານຍົກເລີກການຕົກລົງໃຫ້ໃຊ້ຂໍ້ມູນການຮັບຮອງຕົວ {{organizationName}} {{productName}} ຂອງແອັບຯ ຫຼື ບໍລິການ {{name}}..."
         }
       ],
       "approved_at": null
@@ -252,13 +241,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"šeit: {{name}}\" is awkward and doesn't accurately convey the English meaning of \"in {{name}}\". It implies a physical location rather than the service.",
-          "suggestion": "Kad atsauksiet piekrišanu {{organizationName}} {{productName}} autorizācijas datu izmantošanai pakalpojumā {{name}}, {{organizationName}} {{productName}} automātiski pārtrauksiet pieteikšanos pakalpojumā {{name}}. Jūsu konts pakalpojumā {{name}} netiks izdzēsts."
+          "description": "The phrase 'automatically stop logging into' is translated as 'automātiski pārtrauksiet pieteikšanos šeit:'. While technically correct, it sounds awkward and less natural in Latvian. A more accurate and fluent translation would be something like 'automātiski vairs nevarēsiet pieteikties'.",
+          "suggestion": "automātiski vairs nevarēsiet pieteikties"
         },
         {
           "type": "formatting",
-          "description": "The repeated use of \"šeit:\" is clunky and unnecessary. It should be removed for better readability.",
-          "suggestion": "Remove 'šeit:' before each {{name}}."
+          "description": "The repetition of 'šeit:' before each instance of {{name}} feels redundant and breaks the flow of the sentence. It's unnecessary in Latvian.",
+          "suggestion": "Remove 'šeit:' before each {{name}}"
         }
       ],
       "approved_at": null
@@ -269,13 +258,18 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Dutch translation uses the plural form 'diensten' (services) after 'in'. It should be singular 'dienst' to match the English usage of 'service'.",
-          "suggestion": "Zodra u de toestemming voor het gebruik van de {{organizationName}} {{productName}} auth gegevens in de dienst, {{name}}, {{organizationName}} {{productName}} automatisch stoppen met inloggen op {{name}}."
+          "description": "The phrase 'in de diensten' is grammatically awkward. It should be rephrased for better flow.",
+          "suggestion": "Zodra u de toestemming voor het gebruik van de {{organizationName}} {{productName}} auth gegevens in {{name}} intrekt, stoppen {{organizationName}} {{productName}} automatisch met inloggen op {{name}}."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure is a bit clunky. It can be simplified for better readability.",
+          "suggestion": "Zodra u de toestemming intrekt voor het gebruik van de {{organizationName}} {{productName}} auth gegevens in {{name}}, stopt {{organizationName}} {{productName}} automatisch met inloggen op {{name}}. Uw account op {{name}} wordt niet verwijderd."
         },
         {
           "type": "grammar",
-          "description": "The phrase 'stoppen met inloggen op' is slightly awkward in Dutch. A more natural phrasing would be 'stoppen met inloggen bij'.",
-          "suggestion": "Zodra u de toestemming voor het gebruik van de {{organizationName}} {{productName}} auth gegevens in de dienst, {{name}}, {{organizationName}} {{productName}} automatisch stoppen met inloggen bij {{name}}."
+          "description": "The word 'intrekt' (to revoke) is more appropriate in this context than 'gebruik' (use).",
+          "suggestion": "Zodra u de toestemming intrekt voor het gebruik van de {{organizationName}} {{productName}} auth gegevens in {{name}}, stopt {{organizationName}} {{productName}} automatisch met inloggen op {{name}}. Uw account op {{name}} wordt niet verwijderd."
         }
       ],
       "approved_at": null
@@ -286,18 +280,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Polish translation is awkwardly phrased and doesn't flow naturally. The repetition of '{{organizationName}} {{productName}}' is jarring.",
-          "suggestion": "Po wycofaniu zgody na użycie danych autoryzacji dla {{organizationName}} {{productName}} w usłudze {{name}}, {{organizationName}} {{productName}} przestanie automatycznie logować się w {{name}}. Twoje konto w {{name}} nie zostanie usunięte."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'danych autoryzacji' is technically correct but could be simplified for clarity. Consider using a more common term like 'danych uwierzytelniających' or simply 'danych'.",
-          "suggestion": "Po wycofaniu zgody na użycie danych uwierzytelniających {{organizationName}} dla {{productName}} w usłudze {{name}}, {{organizationName}} {{productName}} przestanie automatycznie logować się w {{name}}. Twoje konto w {{name}} nie zostanie usunięte."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The repetition of '{{organizationName}} {{productName}}' continues to be a problem. The translated sentence reads too awkwardly.",
+          "description": "The Polish translation contains a repetition of '{{productName}} {{organizationName}}'. The English only mentions the organization and product once in this context. The repeated phrase makes the sentence awkward and unclear.",
           "suggestion": "Po wycofaniu zgody na użycie danych autoryzacji {{organizationName}} dla {{productName}} w usłudze {{name}}, {{organizationName}} przestanie automatycznie logować się w {{name}}. Twoje konto w {{name}} nie zostanie usunięte."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure is slightly awkward. While grammatically correct, it could be improved for better flow.",
+          "suggestion": "Po wycofaniu zgody na użycie danych autoryzacji {{organizationName}} dla {{productName}} w usłudze {{name}}, {{organizationName}} przestanie automatycznie logować się do {{name}}. Twoje konto w {{name}} nie zostanie usunięte."
         }
       ],
       "approved_at": null
@@ -307,14 +296,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Portuguese translation uses '{{organizationName}} {{productName}}' consistently. It is more natural in Portuguese to use a more fluid phrasing, such as 'dados de autenticação da {{organizationName}} para o {{productName}}' or similar, to avoid the repetition and abruptness.",
-          "suggestion": "Consider revising to something like: 'dados de autenticação da {{organizationName}} para o {{productName}}' to improve flow."
-        },
-        {
-          "type": "grammar",
-          "description": "The phrasing 'A sua conta em {{name}} não será eliminada' is grammatically correct but sounds slightly formal. A more conversational alternative could improve readability.",
-          "suggestion": "Consider using: 'A sua conta em {{name}} não será apagada.' or 'Sua conta em {{name}} não será excluída.' "
+          "type": "incorrect_translation",
+          "description": "The word 'eliminada' (eliminated) is used for 'deleted'. While technically correct, 'apagada' or 'desativada' might be more natural and commonly used in Portuguese when referring to an account in a service.",
+          "suggestion": "Depois de revogar o consentimento para usar os dados de autenticação {{organizationName}} {{productName}} no serviço {{name}}, {{organizationName}} {{productName}} interromperá automaticamente o login em {{name}}. A sua conta em {{name}} não será apagada/desativada."
         }
       ],
       "approved_at": null
@@ -330,14 +314,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"de serviciul {{name}}\" is awkward and doesn't accurately convey the meaning of 'in the service {{name}}'. A more natural translation would be 'în serviciul {{name}}' or 'pentru serviciul {{name}}'.",
-          "suggestion": "Odată ce ați revocat consimțământul pentru utilizarea datelor de autentificare {{organizationName}} {{productName}} în serviciul {{name}}/pentru serviciul {{name}}, {{organizationName}} {{productName}} va opri automat autentificarea pentru {{name}}."
+          "type": "grammar",
+          "description": "The Romanian translation uses 'de serviciul {{name}}'. A more natural phrasing would be 'pentru serviciul {{name}}' or 'în cadrul serviciului {{name}}'.",
+          "suggestion": "Odată ce ați revocat consimțământul pentru utilizarea datelor de autentificare {{organizationName}} {{productName}} pentru serviciul {{name}}, {{organizationName}} {{productName}} va opri automat autentificarea pentru {{name}}. Contul dvs {{name}} nu va fi șters."
         },
         {
           "type": "formatting",
-          "description": "Spacing after 'Odată ce' should be adjusted for better readability.",
-          "suggestion": "Odată ce ați revocat..."
+          "description": "The phrase 'Contul dvs {{name}}' is slightly awkward. It's better to use 'contul dumneavoastră în {{name}}' or 'contul tău din {{name}}'.",
+          "suggestion": "Odată ce ați revocat consimțământul pentru utilizarea datelor de autentificare {{organizationName}} {{productName}} pentru serviciul {{name}}, {{organizationName}} {{productName}} va opri automat autentificarea pentru {{name}}. Contul dumneavoastră în {{name}} nu va fi șters."
         }
       ],
       "approved_at": null
@@ -354,13 +338,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'revoke' is directly translated as 'අ අව revoke කළ පසු'. While understandable, a more natural Sinhala phrasing would be preferable. 'අ අව revoke කළ පසු' sounds abrupt and doesn't quite convey the nuance of revoking consent.",
-          "suggestion": "ඔබ {{organizationName}} {{productName}} හි අවසරය {{name}} සේවාවේ භාවිතය සඳහා ඉවත් කළ පසු"
+          "description": "The word 'revoke' is awkwardly translated as ' අව revoke'. It's a direct transliteration and doesn't flow naturally in Sinhala. A more appropriate translation would depend on the intended nuance, but 'ඉවත් කිරීම' (ivata kirima - removal) or 'අහෝසි කිරීම' (ahosi kirima - abolishment) would be better alternatives.",
+          "suggestion": "ඔබ {{organizationName}} {{productName}} හි බලපත්‍රය {{name}} සේවාවේ භාවිතය සඳහා ඉවත් කිරීම කළ පසු"
         },
         {
-          "type": "formatting",
-          "description": "The repeated use of '{{organizationName}} {{productName}}' makes the sentence clunky. A better phrasing would improve readability. Consider rephrasing to avoid repetition if possible.",
-          "suggestion": "Consider incorporating a pronoun or a more concise reference to the entity if appropriate within the broader context."
+          "type": "incorrect_translation",
+          "description": "The phrase 'ඇතුළු වීම' (athuluvima - entering) is not the best way to describe logging in. 'පිවිහ යැම' (piviha yama) or 'පිවිසීම' (pivisima) would be more accurate.",
+          "suggestion": "ඔබ {{organizationName}} {{productName}} හි බලපත්‍රය {{name}} සේවාවේ භාවිතය සඳහා ඉවත් කිරීම කළ පසු, {{organizationName}} {{productName}} විසින් {{name}} වෙත පිවිසීම ස්වයංක්‍රීයව නවත්වනු ලැබේ."
         }
       ],
       "approved_at": null
@@ -371,8 +355,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'autorizačných údajov' is a less common and slightly awkward translation of 'auth data'. A more natural Slovak translation would be 'prístupových údajov' or 'prihlasovacieho dátum'.",
-          "suggestion": "Po odvolaní súhlasu na používanie {{organizationName}} {{productName}} prístupových údajov v službe {{name}},..."
+          "description": "The phrase 'auth data' is translated as 'autorizačných údajov'. While technically correct, 'prístupových údajov' might be a more natural and common translation in this context, especially when referring to authentication data.",
+          "suggestion": "Po odvolaní súhlasu na používanie {{organizationName}} {{productName}} prístupových údajov v službe {{name}}, {{organizationName}} {{productName}} sa automaticky prestane prihlasovať do služby {{name}}. Váš účet v {{name}} nebude vymazaný."
         }
       ],
       "approved_at": null
@@ -383,18 +367,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"auth data\" is not adequately translated. \"Avtorizaciji\" is a reasonable attempt but might be clearer as \"podatkih za avtorizacijo\" or similar.",
-          "suggestion": "Ko prekličete soglasje za uporabo podatkov za avtorizacijo {{organizationName}} {{productName}} v storitvi {{name}},..."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word \"prijavljati\" is slightly awkward in this context. While technically correct, it implies logging in repeatedly. A more accurate translation might be \"sinhronizirati\" (sync) or a phrase indicating data processing.",
-          "suggestion": "Ko prekličete soglasje za uporabo podatkov za avtorizacijo {{organizationName}} {{productName}} v storitvi {{name}}, se bo {{organizationName}} {{productName}} samodejno prenehal sinhronizirati podatke v {{name}}."
-        },
-        {
-          "type": "formatting",
-          "description": "While technically correct, the repetition of \"{{organizationName}} {{productName}}\" makes the sentence clunky.  Consider if this can be rephrased for better readability.  While template variables are important, this phrasing might benefit from some restructuring.",
-          "suggestion": "Consider rephrasing to avoid the repetition of \"{{organizationName}} {{productName}}\" for improved flow. This is dependent on broader context and desired tone."
+          "description": "The English phrase \"automatically stop logging into\" is translated as \"samodejno prenehal prijavljati v\". While understandable, a more natural and accurate translation would be \"samodejno nehalo prijavljati v\" or \"samodejno ne bo več prijavo v\".",
+          "suggestion": "Ko prekličete soglasje za uporabo podatkov o avtorizaciji {{organizationName}} {{productName}} v storitvi {{name}}, se bo {{organizationName}} {{productName}} samodejno nehalo prijavljati v {{name}}."
         }
       ],
       "approved_at": null
@@ -405,13 +379,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word \"опозовете\" (opozovete) implies a stronger action than \"revoke\".  While technically correct, a more suitable translation for \"revoke\" in this context would be \"укинете\" (ukinete) or \"повучете\" (povučete).",
-          "suggestion": "Када укинете/повучете пристанак за коришћење..."
-        },
-        {
-          "type": "formatting",
-          "description": "The translation uses Cyrillic script. Ensure consistency with the source language formatting, and that the platform/system supports Cyrillic display.",
-          "suggestion": "N/A - Ensure proper display support for Cyrillic"
+          "description": "The word \"пристанак\" (pristanak) translates more closely to 'agreement' or 'acceptance' rather than 'consent'.  While understandable, it'd be more accurate to use a more direct translation of consent.",
+          "suggestion": "Када опозовете сагласност за коришћење {{organizationName}} {{productName}} података за ауторизацију у сервису {{name}}, {{organizationName}} {{productName}} ће аутоматски престати да се пријављује на {{name}}. Ваш налог на {{name}} неће бити обрисан."
         }
       ],
       "approved_at": null
@@ -421,9 +390,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "spelling",
+          "description": "The word 'prijavljuje' is more accurately translated as 'ulazi' or 'povezuje' in this context. 'Prijavljuje' implies a user action, whereas the system automatically stops logging in.",
+          "suggestion": "Kada opozovete pristanak za korišćenje {{organizationName}} {{productName}} podataka za autorizaciju u servisu {{name}}, {{organizationName}} {{productName}} će automatski prestati da se povezuje na {{name}}."
+        },
+        {
           "type": "formatting",
-          "description": "The double curly braces `{{...}}` are inconsistent throughout. They appear to be intended as placeholders.",
-          "suggestion": "Ensure consistent use of `{{...}}` or another chosen placeholder format throughout the translated text."
+          "description": "While not strictly incorrect, the repetitive use of '{{organizationName}} {{productName}}' can be slightly clunky. Consider if the sentence can be restructured to avoid this repetition.",
+          "suggestion": "Kada opozovete pristanak za korišćenje podataka za autorizaciju {{organizationName}} {{productName}} u servisu {{name}}, {{organizationName}} {{productName}} će automatski prestati da se povezuje na {{name}}. Vaš nalog na {{name}} neće biti obrisan."
         }
       ],
       "approved_at": null
@@ -434,8 +408,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Turkish translation includes repeated use of \"{{organizationName}} {{productName}}\". While acceptable, it can be slightly clunky. Consider a more natural phrasing or variable substitution if possible within the context of the UI.",
-          "suggestion": "Explore alternative phrasing to avoid repetition. For example, if '{{organizationName}} {{productName}}' refers to a specific entity, consider using a pronoun or a shorter reference in subsequent mentions."
+          "description": "The Turkish translation consistently uses '{{name}}' which is a placeholder and not naturally occurring in Turkish. It should be replaced with the actual service name.",
+          "suggestion": "Replace all instances of '{{name}}' with the actual service name in Turkish, e.g., 'bu hizmette' or the specific Turkish name of the service."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'otomatik olarak {{name}} üzerinde oturum açmayı durduracaktır' is awkward. A more natural phrasing would indicate that the user will stop logging in to the service.",
+          "suggestion": "Consider revising to something like '{{organizationName}} {{productName}} otomatik olarak {{name}} hizmetinde oturumunuzu kapatacaktır' or '{{organizationName}} {{productName}} otomatik olarak {{name}} hizmetinden çıkış yapmanızı sağlayacaktır'."
         }
       ],
       "approved_at": null
@@ -446,13 +425,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"входити до\" (vkhodyty do) is not the most natural way to express \"logging into\" in Ukrainian. A more accurate translation would be something like \"автоматично не зможе входити\" (avtomatichno ne змоzhe vkhodyty) or \"перестане автоматично заходити\" (pereстане avtomatichno zakhodyty).",
-          "suggestion": "Після того як ви відкликаєте згоду на використання даних аутентифікації {{productName}} {{organizationName}} в службі {{name}}, {{productName}} {{organizationName}} перестане автоматично заходити до {{name}}."
+          "description": "The phrase \"входити до\" is awkward and not the best translation for \"logging into.\" A more natural phrasing would be \"автоматично не зможе входити\" or \"перестане автоматично авторизуватися\".",
+          "suggestion": "Після того як ви відкликаєте згоду на використання даних аутентифікації {{productName}} {{organizationName}} в службі {{name}}, {{productName}} {{organizationName}} перестане автоматично авторизуватися в {{name}}."
         },
         {
-          "type": "formatting",
-          "description": "The repetition of '{{productName}} {{organizationName}}' is awkward. While it's present in the English, a more fluent Ukrainian might rearrange or omit one instance if the meaning is clear from context.",
-          "suggestion": "Після того як ви відкликаєте згоду на використання даних аутентифікації {{productName}} {{organizationName}} в службі {{name}}, {{productName}} припинить автоматично заходити до {{name}}. Your account in {{name}} will not be deleted."
+          "type": "incorrect_translation",
+          "description": "While grammatically correct, \"авторизуватися\" is more formal than \"logging into\" implies. A simpler phrasing could also work.",
+          "suggestion": "Після того як ви відкликаєте згоду на використання даних аутентифікації {{productName}} {{organizationName}} в службі {{name}}, {{productName}} {{organizationName}} припинить автоматично входити до {{name}}."
         }
       ],
       "approved_at": null
@@ -463,8 +442,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Vietnamese translation contains a double rendering of '{{productName}}{{organizationName}}'. This is likely a formatting error and should be a single entity.",
-          "suggestion": "Replace '{{productName}}{{organizationName}}' with '{{productName}} {{organizationName}}' or '{{organizationName}} {{productName}}' depending on the desired order, to match the English source."
+          "description": "The translation uses \"{{productName}}{{organizationName}\" which creates a concatenated name. It should likely be separated by a space or other appropriate connector based on the desired style.  It might be more natural to say '{{productName}} {{organizationName}}' or '{{productName}} của {{organizationName}}'.",
+          "suggestion": "Consider using '{{productName}} {{organizationName}}' or '{{productName}} của {{organizationName}}' depending on the desired style."
         }
       ],
       "approved_at": null
@@ -475,8 +454,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The variable `{{organizationName}} {{productName}}` appears multiple times. While technically correct, it might be more readable to use a more concise format or a single variable like `{{app_name}}` or `{{service_name}}` if possible in the overall localization system. This isn't necessarily an error, but a suggestion for improved clarity.",
-          "suggestion": "Consider consolidating `{{organizationName}} {{productName}}` into a single variable for consistency and readability, e.g., `{{app_name}}` or `{{service_name}}`."
+          "description": "The translation maintains the template variables {{organizationName}}, {{productName}}, and {{name}} exactly as in the English version. While technically correct, it might benefit from a more natural phrasing in Chinese to avoid jarring repetition and make it more user-friendly.",
+          "suggestion": "Consider rephrasing the sentence to naturally integrate the organization and product names without explicitly repeating the template variables. For example, '在您撤销在服务{{name}}中使用{{organizationName}} {{productName}}身份验证数据的同意后，{{organizationName}} {{productName}}的登录将自动停止...' (After you revoke consent for {{organizationName}} {{productName}} authentication data to be used in service {{name}}, {{organizationName}} {{productName}} login will automatically stop...)"
         }
       ],
       "approved_at": null

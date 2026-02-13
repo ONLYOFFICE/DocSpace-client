@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,51 +26,61 @@
 
 import { Row } from "@docspace/shared/components/rows";
 import { Text } from "@docspace/shared/components/text";
+import styles from "./HotkeysPanel.module.scss";
 
 const CreationBlock = ({ t, textStyles, keyTextStyles, AltKey }) => {
   return (
     <>
-      <Row className="hotkeys_row">
+      <Row className={styles.hotkeysRow}>
         <>
           <Text {...textStyles}>{t("HotkeysCreateDocument")}</Text>
           <Text {...keyTextStyles}>Shift + d</Text>
         </>
       </Row>
-      <Row className="hotkeys_row">
+      <Row className={styles.hotkeysRow}>
         <>
           <Text {...textStyles}>{t("HotkeysCreateSpreadsheet")}</Text>
           <Text {...keyTextStyles}>Shift + s</Text>
         </>
       </Row>
-      <Row className="hotkeys_row">
+      <Row className={styles.hotkeysRow}>
         <>
           <Text {...textStyles}>{t("HotkeysCreatePresentation")}</Text>
           <Text {...keyTextStyles}>Shift + p</Text>
         </>
       </Row>
-      <Row className="hotkeys_row">
+      <Row className={styles.hotkeysRow}>
         <>
           <Text {...textStyles}>{t("HotkeysCreateForm")}</Text>
           <Text {...keyTextStyles}>Shift + o</Text>
         </>
       </Row>
-      <Row className="hotkeys_row">
+      <Row className={styles.hotkeysRow}>
         <>
           <Text {...textStyles}>{t("HotkeysCreateFormFromFile")}</Text>
           <Text {...keyTextStyles}>{`${AltKey} + Shift + o`}</Text>
         </>
       </Row>
-      <Row className="hotkeys_row">
+      <Row className={styles.hotkeysRow}>
         <>
           <Text {...textStyles}>{t("HotkeysCreateFolder")}</Text>
           <Text {...keyTextStyles}>Shift + f</Text>
         </>
       </Row>
 
-      <Row className="hotkeys_row">
+      <Row className={styles.hotkeysRow}>
         <>
           <Text {...textStyles}>{t("Common:CreateRoom")}</Text>
-          <Text {...keyTextStyles}>{`${AltKey} + Shift + r`}</Text>
+          <Text {...keyTextStyles}>Shift + r</Text>
+        </>
+      </Row>
+
+      <Row className={styles.hotkeysRow}>
+        <>
+          <Text {...textStyles}>
+            {t("Common:CreateAIAgent", { aiAgent: t("Common:AIAgent") })}
+          </Text>
+          <Text {...keyTextStyles}>{`Shift + a`}</Text>
         </>
       </Row>
     </>

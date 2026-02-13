@@ -1,5 +1,5 @@
-import { TTranslation } from "@docspace/shared/types";
-import { RoomsType } from "@docspace/shared/enums";
+import { TTranslation } from "../../../types";
+import { RoomsType } from "../../../enums";
 import { getFormFillingConfig } from "./form-filling";
 import type { GuidanceStep } from "../sub-components/Guid.types";
 import { GuidanceConfig } from "./configs.types";

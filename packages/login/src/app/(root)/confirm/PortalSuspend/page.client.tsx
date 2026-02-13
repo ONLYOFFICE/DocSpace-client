@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -37,7 +37,7 @@ import { suspendPortal } from "@docspace/shared/api/portal";
 
 import { TError } from "@/types";
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
-import { ButtonsWrapper } from "@/components/Confirm.styled";
+import styles from "../confirm.module.scss";
 
 type DeactivatePortalProps = {
   siteUrl?: string;
@@ -53,7 +53,7 @@ const DeactivatePortalForm = ({
 
   const [isDeactivate, setIsDeactivate] = useState(false);
 
-  const url = siteUrl ? siteUrl : onlyofficeUrl;
+  const url = siteUrl || onlyofficeUrl;
 
   const onDeactivateClick = async () => {
     try {
@@ -80,47 +80,45 @@ const DeactivatePortalForm = ({
   };
 
   const onCancelClick = () => {
-    location.href = "/";
+    window.location.href = "/";
   };
 
-  return (
+  return isDeactivate ? (
+    <Text>
+      <Trans t={t} i18nKey="SuccessDeactivate" ns="Confirm">
+        Your account has been successfully deactivated. In 10 seconds you will
+        be redirected to the
+        <Link isHovered href={url} dataTestId="redirect_site_link">
+          site
+        </Link>
+      </Trans>
+    </Text>
+  ) : (
     <>
-      {isDeactivate ? (
-        <Text>
-          <Trans t={t} i18nKey="SuccessDeactivate" ns="Confirm">
-            Your account has been successfully deactivated. In 10 seconds you
-            will be redirected to the
-            <Link isHovered href={url}>
-              site
-            </Link>
-          </Trans>
-        </Text>
-      ) : (
-        <>
-          <Text className="subtitle">
-            {t("PortalDeactivateTitle", {
-              productName: t("Common:ProductName"),
-            })}
-          </Text>
-          <ButtonsWrapper>
-            <Button
-              scale
-              primary
-              size={ButtonSize.medium}
-              label={t("Common:Deactivate")}
-              tabIndex={1}
-              onClick={onDeactivateClick}
-            />
-            <Button
-              scale
-              size={ButtonSize.medium}
-              label={t("Common:CancelButton")}
-              tabIndex={1}
-              onClick={onCancelClick}
-            />
-          </ButtonsWrapper>
-        </>
-      )}
+      <Text className="subtitle">
+        {t("PortalDeactivateTitle", {
+          productName: t("Common:ProductName"),
+        })}
+      </Text>
+      <div className={styles.buttonsWrapper}>
+        <Button
+          scale
+          primary
+          size={ButtonSize.medium}
+          label={t("Common:Deactivate")}
+          tabIndex={1}
+          onClick={onDeactivateClick}
+          testId="deactivate_portal_button"
+        />
+        <Button
+          scale
+          size={ButtonSize.medium}
+          label={t("Common:CancelButton")}
+          tabIndex={1}
+          onClick={onCancelClick}
+          testId="cancel_button"
+        />
+      </div>
     </>
   );
 };

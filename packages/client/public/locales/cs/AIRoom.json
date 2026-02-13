@@ -1,0 +1,18 @@
+{
+  "AIAgentAccessRedirectNote": "Budete automaticky přesměrováni do sekce {{sectionName}} za 5 sekund.",
+  "AIChat": "AI-Chat",
+  "AIInstructions": "Pokyny pro AI",
+  "CreateChat": "Vytvořit chat",
+  "EmptyKnowledgeDescriptionActions": "Vyzkoušejte tyto akce pro začátek:",
+  "EmptyKnowledgeTitle": "Ještě nebyly nahrány žádné soubory.",
+  "EmptyResultsTitle": "Ještě žádné výsledky.",
+  "InstructionsDescriptionAgentExample": "Příklad: „Jste AI PR asistent, který pomáhá s psaním a úpravou tiskových zpráv. Udržujte profesionální, sebevědomý a mediálně vstřícný tón. Jasně zdůrazněte klíčové poselství, vyhýbejte se žargonu a udržujte text stručný a poutavý.“",
+  "KnowledgeDescription": "Nahrajte soubory z vašeho počítače nebo z {{productName}}, abyste poskytli lepší kontext pro chat. Upozornění: během konverzace mohou být některé nebo všechny nahrané soubory zobrazeny.",
+  "KnowledgeSelectIn": "Vybrat v {{productName}}",
+  "KnowledgeUnavailable": "Znalostní báze nedostupná",
+  "MCP": "MCP nástroje pro tuto místnost",
+  "ResponseQualityNode": "<1>Poznámka:</1> Kvalita odpovědí se může lišit v závislosti na modelu; pro nejlepší výsledky se doporučují novější modely.",
+  "ResultStorage": "Úložiště výsledků",
+  "UploadFilesDevice": "Nahrajte soubory z vašeho osobního zařízení.",
+  "UploadFilesPortal": "Nahrajte soubory z {{sectionNameFirst}} nebo {{sectionNameSecond}}"
+}

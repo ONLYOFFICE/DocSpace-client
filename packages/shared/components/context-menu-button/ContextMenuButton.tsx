@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -77,6 +77,8 @@ const ContextMenuButtonPure = ({
   zIndex,
   usePortal = true,
   iconName,
+  fixedDirection = false,
+  testId,
 }: ContextMenuButtonProps) => {
   const ref = React.useRef<HTMLDivElement | null>(null);
   const throttledResize = React.useRef<null | DebouncedFunc<() => void>>(null);
@@ -199,14 +201,15 @@ const ContextMenuButtonPure = ({
 
   return (
     <div
-      className={classNames(styles.outer, className, {
+      className={classNames(styles.outer, className, "context-menu-button", {
         [styles.displayIconBorder]: displayIconBorder,
       })}
       id={id}
       style={style}
-      data-testid="context-menu-button"
+      data-testid={testId ?? "context-menu-button"}
       onClick={callNewMenu}
       ref={ref}
+      aria-disabled={isDisabled}
     >
       <IconButton
         className={iconClassName}
@@ -230,6 +233,7 @@ const ContextMenuButtonPure = ({
       {state.displayType === ContextMenuButtonDisplayType.dropdown ? (
         <DropDown
           className={dropDownClassName}
+          fixedDirection={fixedDirection}
           directionX={directionX}
           directionY={directionY}
           open={state.isOpen}
@@ -250,6 +254,7 @@ const ContextMenuButtonPure = ({
                   key={key || index}
                   {...rest}
                   id={item.id}
+                  testId={item?.dataTestId ?? `${key}_item`}
                   label={getLabel(item)}
                   onClick={(
                     e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,

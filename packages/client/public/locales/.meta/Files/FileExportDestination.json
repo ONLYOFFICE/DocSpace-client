@@ -3,7 +3,7 @@
   "content": "<1>{{fileName}}</1> file exported to {{sectionName}}",
   "content_en_sha1_hash": "7d984189a627bf8b057fab0ddda7546b4b6c7397",
   "created_at": "2025-05-19T21:30:55.676Z",
-  "updated_at": "2025-05-20T09:39:44.228Z",
+  "updated_at": "2025-09-02T07:59:28.427Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that a file has been exported to a specific section. It appears in UI elements that show export results or toast notifications, such as when a user exports a file and selects a destination folder or section. The message includes placeholders for the actual file name and section name to provide context.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/helpers/toast-helpers.tsx",
       "line_number": 44,
-      "context": "openOnNewPage: boolean,\n ) => {\n const toastMessage = (\n <Trans\n t={t}\n i18nKey=\"FileExportDestination\"\n ns=\"Files\"\n values={{ fileName, sectionName: t(\"Common:MyFilesSection\") }}\n components={{\n 1: (\n <ColorTheme",
+      "context": "openOnNewPage: boolean,\n ) => {\n const toastMessage = (\n <Trans\n t={t as TFunction}\n i18nKey=\"FileExportDestination\"\n ns=\"Files\"\n values={{ fileName, sectionName: t(\"Common:MyDocuments\") }}\n components={{\n 1: (\n <Link",
       "module": "/packages/client"
     }
   ],
@@ -27,25 +27,49 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Arabic translation uses a space before the opening angle bracket `<` within the `<1>{{fileName}}</1>` tag. This is unconventional and can cause rendering issues. The space should be removed.",
+          "suggestion": "Remove the space before the opening angle bracket: `<1>{{fileName}}</1>` becomes `<1>{{fileName}}</1>`"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The space before 'faylı' is unnecessary and should be removed for better readability and consistency with typical Azerbaijani style.",
+          "suggestion": "<1>{{fileName}} faylı {{sectionName}} bölməsinə ixrac edildi"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The tag <1> and </1> seem to be misplaced and might need review to ensure they correctly delimit the filename.",
+          "suggestion": "Verify the purpose of the tags and ensure their placement is correct relative to the filename.  It's possible they are intended to be within the string, or not included at all."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The non-breaking space character ( ) is used instead of a standard space. This can cause layout issues.",
+          "suggestion": "Replace ' ' with a standard space."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -57,7 +81,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The space after the ellipsis (… or in this case a similar punctuation) before \"εξήχθη\" is missing. While not strictly incorrect, it improves readability in Greek.",
+          "suggestion": "Το αρχείο <1>{{fileName}}</1>  ελήφθη στο {{sectionName}}"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -69,139 +99,302 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tag <1> and </1> are not properly translated, it's unnecessary and breaks the flow.",
+          "suggestion": "Remove the HTML tags. The translation should read: \"Tiedosto {{fileName}} vietiin {{sectionName}}-osioon\"."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"exporté vers\" is not the most natural way to say \"exported to\" in French. A more common and idiomatic translation would be \"exporté à\".",
+          "suggestion": "Fichier <1>{{fileName}}</1> exporté à {{sectionName}}"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word for 'file' in Armenian should be 'ֆայլ'. The translation uses 'ֆայլ', which is correct.",
+          "suggestion": "No change needed. 'ֆայլ' is correct."
+        },
+        {
+          "type": "grammar",
+          "description": "The verb 'արտահանվել է' (artahanvel e) is used correctly to express 'exported'.",
+          "suggestion": "No change needed."
+        },
+        {
+          "type": "formatting",
+          "description": "The XML tags <1> and </1> are consistently applied in both the English and Armenian versions.",
+          "suggestion": "No change needed."
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The angle brackets '<1>' and '</1>' are present in the Italian translation, mirroring the English, but are not typically used in Italian for this context. They seem to be placeholders meant to be removed.",
+          "suggestion": "Remove the angle brackets '<1>' and '</1>'. The translation should be: \"File {{fileName}} esportato in {{sectionName}}\""
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Japanese translation includes 'しました' at the end of the sentence, which is correct for indicating past tense. However, the English uses \"exported to\", suggesting a destination.  The Japanese 'にエクスポートしました' translates more directly to 'exported *to*'. This can be acceptable, but consider if a more appropriate verb construction, like '保存しました' (saved) might be better depending on context.  This is a minor point and depends on intended meaning.",
+          "suggestion": "Consider alternative verb phrases like '保存しました' (saved) to better align with the overall meaning if 'exported' implies saving."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Korean translation includes a space before the opening parenthesis of the section name. This is unnecessary and disrupts the flow.",
+          "suggestion": "<1>{{fileName}}</1> 파일이 {{sectionName}}(으)로 내보내졌습니다"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ໄຟລ໌ສົ່ງອອກສູ່' is a literal translation of 'file exported to'. A more natural Lao phrasing for this context would be something like 'ໄຟລ໌ຖືກສົ່ງອອກສູ່' (file is exported to) or 'ໄຟລ໌ສົ່ງອອກໄປສູ່' (file exports to).",
+          "suggestion": "ໄຟລ໌ຖືກສົ່ງອອກສູ່ {{sectionName}}"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The non-breaking space ( ) after \"Fails\" should be a regular space.",
+          "suggestion": "Fails <1>{{fileName}}</1> eksportēts uz {{sectionName}}"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Dutch translation retains the XML-like tags \"<1>{{fileName}}</1>\" which are unnecessary and likely intended to be removed. This will appear as literal text for the user.",
+          "suggestion": "Remove the tags \"<1>{{fileName}}</1>\" and simply use \"{{fileName}}\"."
+        }
+      ],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The non-breaking space before \"został\" seems unnecessary and disrupts the flow. It might be intended, but it's atypical in Polish.",
+          "suggestion": "Plik <1>{{fileName}}</1> został wyeksportowany do {{sectionName}}"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The space before 'exportado' is unnecessary. It should be directly after the closing tag.",
+          "suggestion": "Arquivo <1>{{fileName}}</1> exportado para {{sectionName}}"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'exported to' is best translated as 'exportado para' in Portuguese. However, the phrasing 'arquivo exportado para {{sectionName}}' can be improved to read more naturally. A more common and idiomatic expression would be 'arquivo exportado em {{sectionName}}' or 'arquivo exportado para a seção {{sectionName}}'.",
+          "suggestion": "arquivo exportado em {{sectionName}}"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The `<1>` and `</1>` tags are present in both the English and Romanian translations, which might not be necessary or desirable in the final output. Consider removing them if they are purely for development/placeholder purposes.",
+          "suggestion": "Review and potentially remove `<1>` and `</1>` tags depending on their intended use."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"exported to\" is better translated as \"в\" (in) for a more natural Russian flow. \"Экспортирован в\" is grammatically correct, but doesn't quite capture the nuance of the English.",
+          "suggestion": "<1>{{fileName}}</1> файл экспортирован в раздел {{sectionName}}"
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation uses the word 'izvožena', which is Serbian/Croatian for 'exported'. Sinhala requires a different verb form indicating export in Sinhala. Also, the wording isn't idiomatic.",
+          "suggestion": "Consider a more natural Sinhala phrasing. For example, something like \"{{fileName}} ගොනුව {{sectionName}} වෙත යවනු ලැබුවා\" ({{fileName}} gonaawa {{sectionName}} wena yavaanu lebuwaa) which translates to 'The {{fileName}} file was sent to {{sectionName}}'."
+        },
+        {
+          "type": "formatting",
+          "description": "The HTML-like tags <1> and </1> are unnecessary and will likely cause rendering issues in Sinhala contexts. They don't have a direct Sinhala equivalent and are not standard practice.",
+          "suggestion": "Remove the <1> and </1> tags entirely. The filename should be directly integrated into the sentence."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The space after the colon in 'Súbor <1>{{fileName}}</1>' is not ideal. It should ideally be more consistent with surrounding spacing.",
+          "suggestion": "Súbor <1>{{fileName}}</1>"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The tag <1> and </1> are not correctly rendered in the Slovenian translation. They are displayed literally instead of being interpreted as placeholders.",
+          "suggestion": "Ensure that the placeholder tags are processed correctly by the rendering engine.  The intended behavior is for them to be understood as delimiters for the variables {{fileName}} and {{sectionName}}."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Датотека <1>{{fileName}}</1> је извезена у {{sectionName}}' translates to 'File <1>{{fileName}}</1> is exported to {{sectionName}}'. The original English states the file *was* exported. 'Извезена' (exported) is correct, but the sentence structure needs improvement to convey a completed action.",
+          "suggestion": "Датотека <1>{{fileName}}</1> је успешно извезена у {{sectionName}}"
+        },
+        {
+          "type": "formatting",
+          "description": "The Cyrillic text uses Cyrillic characters, which is appropriate for Serbian (Cyrillic). However, consistent formatting with angle brackets needs to be checked in the broader context of the application/interface where this text is used.",
+          "suggestion": "Ensure consistent use of angle brackets with other translated content."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The opening tag <1> is present in the Serbian translation, which mirrors the English, but is not needed and can be removed. It's likely intended to indicate a variable placeholder.",
+          "suggestion": "Remove the opening tag <1>. The translated text should be 'Datoteka {{fileName}} je izvezena u {{sectionName}}'."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Turkish translation includes extra spaces after the punctuation mark '.', which is not typical in Turkish writing.",
+          "suggestion": "Remove the extra spaces after the period ('.'). The corrected translation would be: \"<1>{{fileName}}</1> dosyası {{sectionName}} bölümüne aktarıldı\""
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The opening and closing tags <1> and </1> are not consistent with standard markdown or HTML usage and may cause rendering issues.  It's unclear what their intended purpose is.",
+          "suggestion": "Investigate the purpose of the <1> tags and ensure they are implemented consistently with the intended output format. They should be removed if they are unnecessary or replaced with a standard markdown/HTML format if they are intended to have a specific meaning."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The tags <1> and </1> are not translated. They should ideally remain as they are, as they likely represent placeholders or formatting instructions.",
+          "suggestion": "Keep the tags as <1> and </1> in the Vietnamese translation."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While \"đã được xuất sang\" is grammatically correct, a more natural and common phrasing for \"exported to\" in this context might be \"đã xuất ra\".",
+          "suggestion": "Change \"đã được xuất sang\" to \"đã xuất ra\"."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The `<1>` and `</1>` tags are inconsistent. The opening tag is `<1>` while the closing tag is `</1>`. This suggests a potential issue in the translation process where the tags were not properly handled.",
+          "suggestion": "Ensure consistency in the angle bracket characters for both opening and closing tags.  It should be `<1>` and `</1>` throughout the translation, or `<1>` and `</1>`."
+        }
+      ],
       "approved_at": null
     }
   }

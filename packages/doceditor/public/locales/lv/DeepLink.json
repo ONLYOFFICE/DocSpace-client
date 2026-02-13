@@ -1,5 +1,7 @@
 {
+  "DeepLinkOnlyAppText": "Jūs varat atvērt dokumentu tikai mobilajā lietotnē.",
   "DeepLinkText": "Dokumentu var atvērt portālā un mobilajā lietotnē",
+  "DownloadApp": "Lejupielādējiet lietotni",
   "OpenInApp": "Atvērt lietotnē",
   "OpeningDocument": "Notiek dokumenta atvēršana",
   "RememberChoice": "Atceries izvēli nākamreiz atverot dokumentus",

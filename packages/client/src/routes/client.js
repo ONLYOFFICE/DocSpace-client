@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,15 +27,23 @@
 import { Navigate } from "react-router";
 
 import componentLoader from "@docspace/shared/utils/component-loader";
-
 import Error404 from "@docspace/shared/components/errors/Error404";
+import { SHARED_WITH_ME_PATH } from "@docspace/shared/constants";
+
+import { ViewComponent } from "SRC_DIR/pages/Home/View";
+import { publicPreviewLoader } from "SRC_DIR/pages/PublicPreview/PublicPreview.helpers";
+import { DefaultPageRedirect } from "SRC_DIR/pages/Home/DefaultPageRedirect";
+
 import PrivateRoute from "../components/PrivateRouteWrapper";
 import PublicRoute from "../components/PublicRouteWrapper";
 import ErrorBoundary from "../components/ErrorBoundaryWrapper";
 
-import { generalRoutes } from "./general";
-import { contanctsRoutes } from "./contacts";
+import { profileClientRoutes, generalClientRoutes } from "./general";
+import { contactsRoutes } from "./contacts";
 
+/**
+ * @type {import("react-router").RouteObject[]}
+ */
 const ClientRoutes = [
   {
     path: "/",
@@ -68,7 +76,7 @@ const ClientRoutes = [
             index: true,
             element: (
               <PrivateRoute>
-                <Navigate to="/rooms/shared" replace />
+                <DefaultPageRedirect />
               </PrivateRoute>
             ),
           },
@@ -98,348 +106,231 @@ const ClientRoutes = [
           },
           {
             path: "rooms/personal",
-            async lazy() {
-              const { FilesView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Files"),
-              );
-
-              const Component = () => {
-                return (
-                  <PrivateRoute restricted withManager withCollaborator>
-                    <FilesView />
-                  </PrivateRoute>
-                );
-              };
-
-              return { Component };
-            },
+            element: (
+              <PrivateRoute restricted withManager withCollaborator>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
           },
           {
             path: "rooms/personal/filter",
-            async lazy() {
-              const { FilesView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Files"),
-              );
-
-              const Component = () => {
-                return (
-                  <PrivateRoute restricted withManager withCollaborator>
-                    <FilesView />
-                  </PrivateRoute>
-                );
-              };
-
-              return { Component };
-            },
+            element: (
+              <PrivateRoute restricted withManager withCollaborator>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-agents",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-agents/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-agents/:agent/chat",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-agents/:agent",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-agents/:agent/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "recent",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "recent/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: SHARED_WITH_ME_PATH,
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: SHARED_WITH_ME_PATH + "/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
           },
           {
             path: "files/trash",
-            async lazy() {
-              const { FilesView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Files"),
-              );
-
-              const Component = () => {
-                return (
-                  <PrivateRoute>
-                    <FilesView />
-                  </PrivateRoute>
-                );
-              };
-
-              return { Component };
-            },
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
           },
           {
             path: "files/trash/filter",
-            async lazy() {
-              const { FilesView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Files"),
-              );
-
-              const Component = () => {
-                return (
-                  <PrivateRoute>
-                    <FilesView />
-                  </PrivateRoute>
-                );
-              };
-
-              return { Component };
-            },
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "files/favorite",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "files/favorite/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
           },
           {
             path: "rooms/shared",
-            async lazy() {
-              const { FilesView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Files"),
-              );
-
-              const Component = () => {
-                return (
-                  <PrivateRoute>
-                    <FilesView />
-                  </PrivateRoute>
-                );
-              };
-
-              return { Component };
-            },
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
           },
           {
             path: "rooms/shared/filter",
-            async lazy() {
-              const { FilesView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Files"),
-              );
-
-              const Component = () => {
-                return (
-                  <PrivateRoute>
-                    <FilesView />
-                  </PrivateRoute>
-                );
-              };
-
-              return { Component };
-            },
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
           },
           {
             path: "rooms/shared/:room",
-            async lazy() {
-              const { FilesView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Files"),
-              );
-
-              const Component = () => {
-                return (
-                  <PrivateRoute>
-                    <FilesView />
-                  </PrivateRoute>
-                );
-              };
-
-              return { Component };
-            },
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
           },
           {
             path: "rooms/shared/:room/filter",
-            async lazy() {
-              const { FilesView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Files"),
-              );
-
-              const Component = () => {
-                return (
-                  <PrivateRoute>
-                    <FilesView />
-                  </PrivateRoute>
-                );
-              };
-
-              return { Component };
-            },
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
           },
           {
             path: "rooms/archived",
-            async lazy() {
-              const { FilesView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Files"),
-              );
-
-              const Component = () => {
-                return (
-                  <PrivateRoute>
-                    <FilesView />
-                  </PrivateRoute>
-                );
-              };
-
-              return { Component };
-            },
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
           },
           {
             path: "rooms/archived/filter",
-            async lazy() {
-              const { FilesView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Files"),
-              );
-
-              const Component = () => {
-                return (
-                  <PrivateRoute>
-                    <FilesView />
-                  </PrivateRoute>
-                );
-              };
-
-              return { Component };
-            },
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
           },
           {
             path: "rooms/archived/:room",
-            async lazy() {
-              const { FilesView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Files"),
-              );
-
-              const Component = () => {
-                return (
-                  <PrivateRoute>
-                    <FilesView />
-                  </PrivateRoute>
-                );
-              };
-
-              return { Component };
-            },
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
           },
           {
             path: "rooms/archived/:room/filter",
-            async lazy() {
-              const { FilesView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Files"),
-              );
-
-              const Component = () => {
-                return (
-                  <PrivateRoute>
-                    <FilesView />
-                  </PrivateRoute>
-                );
-              };
-
-              return { Component };
-            },
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
           },
           {
             path: "rooms/templates",
 
-            async lazy() {
-              const { FilesView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Files"),
-              );
-
-              const Component = () => {
-                return (
-                  <PrivateRoute>
-                    <FilesView />
-                  </PrivateRoute>
-                );
-              };
-
-              return { Component };
-            },
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
           },
           {
             path: "rooms/templates/filter",
-            async lazy() {
-              const { FilesView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Files"),
-              );
-
-              const Component = () => {
-                return (
-                  <PrivateRoute>
-                    <FilesView />
-                  </PrivateRoute>
-                );
-              };
-
-              return { Component };
-            },
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
           },
           {
             path: "rooms/templates/:room",
-            async lazy() {
-              const { FlowsView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Flows"),
-              );
-
-              const Component = () => {
-                return (
-                  <PrivateRoute>
-                    <FlowsView />
-                  </PrivateRoute>
-                );
-              };
-
-              return { Component };
-            },
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
           },
           {
             path: "rooms/templates/:room/filter",
-            async lazy() {
-              const { FilesView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Files"),
-              );
-
-              const Component = () => {
-                return (
-                  <PrivateRoute>
-                    <FilesView />
-                  </PrivateRoute>
-                );
-              };
-
-              return { Component };
-            },
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
           },
           {
             path: "media/view/:id",
-            async lazy() {
-              const { FilesView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Files"),
-              );
-
-              const Component = () => {
-                return (
-                  <PrivateRoute>
-                    <FilesView />
-                  </PrivateRoute>
-                );
-              };
-
-              return { Component };
-            },
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
           },
-          ...contanctsRoutes,
-          {
-            path: "flows",
-            async lazy() {
-              const { FlowsView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Flows"),
-              );
-
-              const Component = () => {
-                return (
-                  <PrivateRoute>
-                    <FlowsView />
-                  </PrivateRoute>
-                );
-              };
-
-              return { Component };
-            },
-          },
-          {
-            path: "flows/filter",
-            async lazy() {
-              const { FlowsView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Flows"),
-              );
-
-              const Component = () => {
-                return (
-                  <PrivateRoute>
-                    <FlowsView />
-                  </PrivateRoute>
-                );
-              };
-
-              return { Component };
-            },
-          },
+          ...contactsRoutes,
+          ...profileClientRoutes,
         ],
       },
       {
@@ -450,7 +341,7 @@ const ClientRoutes = [
           </PrivateRoute>
         ),
       },
-      ...generalRoutes,
+      ...generalClientRoutes,
     ],
   },
   {
@@ -459,76 +350,23 @@ const ClientRoutes = [
     element: <Navigate to="/rooms/shared/filter" replace />,
   },
   {
-    path: "/form-gallery",
-    async lazy() {
-      const { WrappedComponent } = await componentLoader(
-        () => import("SRC_DIR/pages/FormGallery"),
-      );
-
-      const Component = () => (
-        <PrivateRoute>
-          <ErrorBoundary>
-            <WrappedComponent />
-          </ErrorBoundary>
-        </PrivateRoute>
-      );
-
-      return { Component };
-    },
-  },
-  {
-    path: "/form-gallery/:fromFolderId",
-    async lazy() {
-      const { WrappedComponent } = await componentLoader(
-        () => import("SRC_DIR/pages/FormGallery"),
-      );
-
-      const Component = () => (
-        <PrivateRoute>
-          <ErrorBoundary>
-            <WrappedComponent />
-          </ErrorBoundary>
-        </PrivateRoute>
-      );
-
-      return { Component };
-    },
-  },
-  {
-    path: "/form-gallery/:fromFolderId/filter",
-    async lazy() {
-      const { WrappedComponent } = await componentLoader(
-        () => import("SRC_DIR/pages/FormGallery"),
-      );
-
-      const Component = () => (
-        <PrivateRoute>
-          <ErrorBoundary>
-            <WrappedComponent />
-          </ErrorBoundary>
-        </PrivateRoute>
-      );
-
-      return { Component };
-    },
-  },
-  {
     path: "/share/preview/:id",
     async lazy() {
-      const { WrappedComponent } = await componentLoader(
+      const { PublicPreview } = await componentLoader(
         () => import("SRC_DIR/pages/PublicPreview/PublicPreview"),
       );
 
       const Component = () => (
         <PublicRoute>
           <ErrorBoundary>
-            <WrappedComponent />
+            <PublicPreview />
           </ErrorBoundary>
         </PublicRoute>
       );
 
       return { Component };
     },
+    loader: publicPreviewLoader,
   },
   {
     path: "/rooms/share",
@@ -551,39 +389,19 @@ const ClientRoutes = [
     children: [
       {
         index: true,
-        async lazy() {
-          const { FilesView } = await componentLoader(
-            () => import("SRC_DIR/pages/Home/View/Files"),
-          );
-
-          const Component = () => {
-            return (
-              <PublicRoute restricted withManager withCollaborator>
-                <FilesView />
-              </PublicRoute>
-            );
-          };
-
-          return { Component };
-        },
+        element: (
+          <PublicRoute>
+            <ViewComponent />
+          </PublicRoute>
+        ),
       },
       {
         path: "media/view/:id",
-        async lazy() {
-          const { FilesView } = await componentLoader(
-            () => import("SRC_DIR/pages/Home/View/Files"),
-          );
-
-          const Component = () => {
-            return (
-              <PublicRoute restricted withManager withCollaborator>
-                <FilesView />
-              </PublicRoute>
-            );
-          };
-
-          return { Component };
-        },
+        element: (
+          <PublicRoute>
+            <ViewComponent />
+          </PublicRoute>
+        ),
       },
     ],
   },
@@ -594,6 +412,18 @@ const ClientRoutes = [
   {
     path: "/about",
     async lazy() {
+      const { isDesktop, isTablet } = await import("@docspace/shared/utils");
+
+      // On desktop/tablet we redirect to the home page with a flag to open the modal.
+      if (isDesktop() || isTablet()) {
+        const Component = () => {
+          return <Navigate to="/" replace state={{ openAboutDialog: true }} />;
+        };
+
+        return { Component };
+      }
+
+      // On mobile we show the full page.
       const { About } = await componentLoader(
         () => import("SRC_DIR/pages/About"),
       );

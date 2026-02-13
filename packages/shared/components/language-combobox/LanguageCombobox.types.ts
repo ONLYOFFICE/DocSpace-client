@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -43,4 +43,17 @@ export type ComboboxProps = {
   /** Indicates that component contain border */
   withBorder?: boolean;
   isMobileView?: boolean;
+  /** Direction of dropdown opening (top, bottom, both) */
+  directionY?: "top" | "bottom" | "both";
+  /** Fix dropdown direction regardless of available space */
+  fixedDirection?: boolean;
+  /** Use default mode for dropdown positioning */
+  isDefaultMode?: boolean;
+  /** Manual width for dropdown */
+  manualWidth?: string;
+  dataTestId?: string;
+  usePortalBackdrop?: boolean;
+  withBackdrop?: boolean;
+  shouldShowBackdrop?: boolean;
+  isDisabled?: boolean;
 };

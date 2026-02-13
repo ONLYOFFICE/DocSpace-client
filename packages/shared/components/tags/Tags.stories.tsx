@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -67,10 +67,20 @@ export const TagsWithIcons: Story = {
 };
 
 export const TagsWithDropDown: Story = {
+  render: (args) => (
+    <div style={{ height: "100px", paddingTop: "20px" }}>
+      <Tags {...args} />
+    </div>
+  ),
   args: {
     tags: ["tag1", "tag2", "tag3", "tag4"],
     style: { width: "150px" },
     columnCount: 2,
     onSelectTag: () => {},
+    isDefaultMode: false,
+    directionY: "bottom",
+    fixedDirection: true,
+    manualY: "56px",
+    manualX: "100px",
   },
 };

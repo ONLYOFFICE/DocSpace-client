@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -53,7 +53,6 @@ const BlockHeader = ({
         tag=""
         as="p"
         color=""
-        textAlign=""
       >
         {header}
         {isRequired ? (
@@ -70,7 +69,12 @@ const BlockHeader = ({
         ) : null}
       </Text>
 
-      {helpButtonText ? <HelpButton tooltipContent={helpButtonText} /> : null}
+      {helpButtonText ? (
+        <HelpButton
+          dataTestId="oauth_header_help_button"
+          tooltipContent={helpButtonText}
+        />
+      ) : null}
     </StyledHeaderRow>
   );
 };

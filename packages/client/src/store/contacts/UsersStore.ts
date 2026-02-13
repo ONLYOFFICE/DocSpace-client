@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,22 +28,28 @@ import { makeAutoObservable, runInAction } from "mobx";
 
 import api from "@docspace/shared/api";
 import Filter from "@docspace/shared/api/people/filter";
-import {
-  TFilterSortBy,
-  TSortOrder,
-  TUser,
-} from "@docspace/shared/api/people/types";
+import { TUser } from "@docspace/shared/api/people/types";
 import { TThirdPartyProvider } from "@docspace/shared/api/settings/types";
 
 import {
   EmployeeStatus,
   EmployeeType,
   Events,
+  FolderType,
   RoomSearchArea,
 } from "@docspace/shared/enums";
 import { getUserType } from "@docspace/shared/utils/common";
 import { Nullable } from "@docspace/shared/types";
 import { getCookie, getCorrectDate } from "@docspace/shared/utils";
+import {
+  getUserFilter,
+  setUserFilter,
+} from "@docspace/shared/utils/userFilterUtils";
+import {
+  FILTER_GUESTS,
+  FILTER_INSIDE_GROUPS,
+  FILTER_PEOPLE,
+} from "@docspace/shared/utils/filterConstants";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
@@ -57,6 +63,7 @@ import {
   reassignmentNecessary,
   terminateReassignment,
 } from "@docspace/shared/api/people";
+import type { TGroup } from "@docspace/shared/api/groups/types";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { getPersonalFolderTree } from "@docspace/shared/api/files";
@@ -64,25 +71,25 @@ import { getPersonalFolderTree } from "@docspace/shared/api/files";
 import DefaultUserPhotoSize32PngUrl from "PUBLIC_DIR/images/default_user_photo_size_32-32.png";
 
 import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
+import type {
+  TChangeUserStatusDialogData,
+  TContactsSelected,
+  TContactsTab,
+  TPeopleListItem,
+} from "SRC_DIR/helpers/contacts";
 import {
   getContactsView,
   getUserChecked,
   setContactsUsersFilterUrl,
   TChangeUserTypeDialogData,
 } from "SRC_DIR/helpers/contacts";
-import { GUESTS_TAB_VISITED_NAME } from "SRC_DIR/helpers/contacts/constants";
-import type {
-  TChangeUserStatusDialogData,
-  TContactsSelected,
-  TContactsTab,
-} from "SRC_DIR/helpers/contacts";
 
-import InfoPanelStore from "../InfoPanelStore";
+import { getInfoPanelOpen } from "SRC_DIR/helpers/info-panel";
+
 import AccessRightsStore from "../AccessRightsStore";
 import ClientLoadingStore from "../ClientLoadingStore";
 import TreeFoldersStore from "../TreeFoldersStore";
 
-import TargetUserStore from "./TargetUserStore";
 import GroupsStore from "./GroupsStore";
 import ContactsHotkeysStore from "./ContactsHotkeysStore";
 import DialogStore from "./DialogStore";
@@ -94,13 +101,11 @@ import SelectedFolderStore from "../SelectedFolderStore";
 class UsersStore {
   filter = Filter.getDefault();
 
-  isUsersFetched = false;
-
   users: TUser[] = [];
 
-  selection: ReturnType<typeof this.getPeopleListItem>[] = [];
+  selection: TPeopleListItem[] = [];
 
-  bufferSelection: Nullable<ReturnType<typeof this.getPeopleListItem>> = null;
+  bufferSelection: Nullable<TPeopleListItem> = null;
 
   selectionUsersRights = {
     isVisitor: 0,
@@ -115,23 +120,19 @@ class UsersStore {
 
   isUsersLoading = false;
 
-  abortController = new AbortController();
+  abortController: Nullable<AbortController> = null;
 
   requestRunning = false;
 
   contactsTab: TContactsTab = false;
 
-  guestsTabVisited: boolean = false;
-
   roomParts: string = "";
 
-  activeUsers: TUser[] = [];
+  activeUsers: TPeopleListItem[] = [];
 
   constructor(
     public settingsStore: SettingsStore,
-    public infoPanelStore: InfoPanelStore,
     public userStore: UserStore,
-    public targetUserStore: TargetUserStore,
     public groupsStore: GroupsStore,
     public contactsHotkeysStore: ContactsHotkeysStore,
     public accessRightsStore: AccessRightsStore,
@@ -143,9 +144,7 @@ class UsersStore {
     public selectedFolderStore: SelectedFolderStore,
   ) {
     this.settingsStore = settingsStore;
-    this.infoPanelStore = infoPanelStore;
     this.userStore = userStore;
-    this.targetUserStore = targetUserStore;
     this.groupsStore = groupsStore;
     this.contactsHotkeysStore = contactsHotkeysStore;
     this.accessRightsStore = accessRightsStore;
@@ -192,19 +191,16 @@ class UsersStore {
 
       const user = await api.people.getUserById(data.id);
 
-      const { setInfoPanelSelection, isVisible } = this.infoPanelStore;
-
       runInAction(() => {
         this.users[idx] = user;
-
-        if (isVisible) setInfoPanelSelection(this.getPeopleListItem(user));
       });
+
+      this.updateSelection();
     };
 
     const deleteUser = (id: string) => {
       console.log(`[WS] ${SocketEvents.DeleteUser}, id: ${id}`);
       const idx = this.users.findIndex((x) => x.id === id);
-      const { setInfoPanelSelection, isVisible } = this.infoPanelStore;
 
       if (idx === -1) return;
 
@@ -213,9 +209,9 @@ class UsersStore {
         newUsers.splice(idx, 1);
         this.users = newUsers;
         this.filter.total -= 1;
-
-        if (isVisible) setInfoPanelSelection(null);
       });
+
+      this.updateSelection();
     };
 
     const changeMyType = async (value: {
@@ -233,6 +229,7 @@ class UsersStore {
       const { setReducedRightsData } = this.dialogsStore;
       const { setSecurity, getSelectedFolder } = this.selectedFolderStore;
       const { fetchFiles, filter } = this.filesStore;
+      const { defaultFolderType, setDefaultFolderType } = this.settingsStore;
 
       const { data, id, admin, hasPersonalFolder } = value;
       const { isAdmin, isRoomAdmin, isVisitor, isCollaborator } = data;
@@ -246,6 +243,10 @@ class UsersStore {
 
       if (isVisitor) {
         setReducedRightsData(true, admin);
+
+        if (defaultFolderType === FolderType.USER) {
+          setDefaultFolderType(FolderType.Rooms);
+        }
       }
 
       if (pathname.includes("rooms/personal")) {
@@ -261,20 +262,25 @@ class UsersStore {
         } catch (e) {
           console.error(e);
         }
+
+        return;
       }
 
       if (
         (isCollaborator || isVisitor) &&
-        (pathname.includes("accounts/people") ||
-          pathname.includes("portal-settings"))
+        (pathname.includes("accounts") || pathname.includes("portal-settings"))
       ) {
         window.DocSpace.navigate(
           combineUrl(window.ClientConfig?.proxy?.url, "/"),
         );
+
+        return;
       }
 
-      if ((isAdmin || isRoomAdmin) && pathname.includes("accounts/people")) {
+      if ((isAdmin || isRoomAdmin) && pathname.includes("accounts")) {
         this.getUsersList();
+
+        return;
       }
 
       const isArchive = pathname.includes("rooms/archived");
@@ -289,38 +295,39 @@ class UsersStore {
       }
     };
 
-    SocketHelper.on(SocketEvents.AddUser, addUser);
-    SocketHelper.on(SocketEvents.AddGuest, addUser);
-    SocketHelper.on(SocketEvents.UpdateUser, updateUser);
-    SocketHelper.on(SocketEvents.UpdateGuest, updateUser);
-    SocketHelper.on(SocketEvents.DeleteUser, deleteUser);
-    SocketHelper.on(SocketEvents.DeleteGuest, deleteUser);
-    SocketHelper.on(SocketEvents.ChangeMyType, changeMyType);
+    SocketHelper?.on(SocketEvents.AddUser, addUser);
+    SocketHelper?.on(SocketEvents.AddGuest, addUser);
+    SocketHelper?.on(SocketEvents.UpdateUser, updateUser);
+    SocketHelper?.on(SocketEvents.UpdateGuest, updateUser);
+    SocketHelper?.on(SocketEvents.DeleteUser, deleteUser);
+    SocketHelper?.on(SocketEvents.DeleteGuest, deleteUser);
+    SocketHelper?.on(SocketEvents.ChangeMyType, changeMyType);
 
-    SocketHelper.on(SocketEvents.UpdateGroup, async (value) => {
-      console.log(
-        `[WS] ${SocketEvents.UpdateGroup}: ${value?.id}:${value?.data}`,
-      );
-      const { contactsTab } = this;
+    SocketHelper?.on(
+      SocketEvents.UpdateGroup,
+      async (value: { id: string; data: TGroup }) => {
+        console.log(
+          `[WS] ${SocketEvents.UpdateGroup}: ${value?.id}:${value?.data}`,
+        );
+        const { contactsTab } = this;
 
-      if (contactsTab !== "inside_group") return;
+        if (contactsTab !== "inside_group") return;
 
-      const { id, data } = value;
+        const { id, data } = value;
 
-      if (!data || !id) return;
+        if (!data || !id) return;
 
-      const group = await api.groups.getGroupById(id, true);
+        if (this.groupsStore!.currentGroup?.id !== id) return;
 
-      runInAction(() => {
-        this.users = group.members ?? [];
-        this.filter.total = this.users.length;
-      });
-    });
+        const group = await api.groups.getGroupById(id, true);
+
+        runInAction(() => {
+          this.users = group.members ?? [];
+          this.filter.total = this.users.length;
+        });
+      },
+    );
   }
-
-  setIsUsersFetched = (value: boolean) => {
-    this.isUsersFetched = value;
-  };
 
   setContactsTab = (contactsTab: TContactsTab) => {
     if (contactsTab) {
@@ -332,35 +339,28 @@ class UsersStore {
             : "users";
 
       if (
-        SocketHelper.socketSubscribers.has(this.roomParts) &&
+        SocketHelper?.socketSubscribers.has(this.roomParts) &&
         this.roomParts !== roomParts
       )
-        SocketHelper.emit(SocketCommands.Unsubscribe, {
+        SocketHelper?.emit(SocketCommands.Unsubscribe, {
           roomParts: this.roomParts,
           ...(this.roomParts === "guests" && { individual: true }),
         });
 
       this.roomParts = roomParts;
 
-      if (!SocketHelper.socketSubscribers.has(roomParts))
-        SocketHelper.emit(SocketCommands.Subscribe, {
+      if (!SocketHelper?.socketSubscribers.has(roomParts))
+        SocketHelper?.emit(SocketCommands.Subscribe, {
           roomParts,
           ...(roomParts === "guests" && { individual: true }),
         });
     }
 
-    if (contactsTab !== this.contactsTab) {
-      this.filter = Filter.getDefault();
-    }
+    // if (contactsTab !== this.contactsTab) {
+    //   console.log("set filter here");
+    //   this.filter = Filter.getDefault();
+    // }
     this.contactsTab = contactsTab;
-
-    const guestsTabVisitedStorage = window.localStorage.getItem(
-      `${GUESTS_TAB_VISITED_NAME}-${this.userStore.user!.id}`,
-    );
-
-    if (guestsTabVisitedStorage && !this.guestsTabVisited) {
-      this.guestsTabVisited = true;
-    }
   };
 
   setFilter = (filter: Filter) => {
@@ -368,19 +368,21 @@ class UsersStore {
 
     const key =
       this.contactsTab === "inside_group"
-        ? `InsideGroupFilter=${this.userStore.user?.id}`
+        ? `${FILTER_INSIDE_GROUPS}=${this.userStore.user?.id}`
         : this.contactsTab === "guests"
-          ? `PeopleFilter=${this.userStore.user?.id}`
-          : `GuestsFilter=${this.userStore.user?.id}`;
+          ? `${FILTER_GUESTS}=${this.userStore.user?.id}`
+          : `${FILTER_PEOPLE}=${this.userStore.user?.id}`;
 
-    if (key) {
-      const value = `${filter.sortBy},${filter.pageCount},${filter.sortOrder}`;
+    const value = {
+      sortBy: filter.sortBy,
+      pageCount: filter.pageCount,
+      sortOrder: filter.sortOrder,
+    };
+    setUserFilter(key, value);
 
-      localStorage.setItem(key, value);
-    }
     setContactsUsersFilterUrl(
       filter,
-      this.contactsTab,
+      getContactsView(),
       this.groupsStore.currentGroup?.id,
     );
   };
@@ -420,15 +422,16 @@ class UsersStore {
     filter?: Filter,
     updateFilter = false,
     withFilterLocalStorage = false,
+    contactsTab?: TContactsTab,
   ) => {
     const { currentGroup } = this.groupsStore;
     const filterData = filter ? filter.clone() : Filter.getDefault();
 
-    if (this.requestRunning) {
-      this.abortController.abort();
+    this.abortController?.abort();
 
-      this.abortController = new AbortController();
-    }
+    this.abortController = new AbortController();
+
+    const contactsView = getContactsView(window.location);
 
     if (!(window.DocSpace?.location?.state as { user?: unknown })?.user) {
       this.setSelection([]);
@@ -436,30 +439,26 @@ class UsersStore {
     }
 
     const localStorageKey =
-      this.contactsTab === "inside_group"
-        ? `InsideGroupFilter=${this.userStore.user?.id}`
-        : this.contactsTab === "guests"
-          ? `PeopleFilter=${this.userStore.user?.id}`
-          : `GuestsFilter=${this.userStore.user?.id}`;
+      contactsView === "inside_group"
+        ? `${FILTER_INSIDE_GROUPS}=${this.userStore.user?.id}`
+        : contactsView === "guests"
+          ? `${FILTER_GUESTS}=${this.userStore.user?.id}`
+          : `${FILTER_PEOPLE}=${this.userStore.user?.id}`;
 
-    const guestsTabVisitedStorage = window.localStorage.getItem(
-      `${GUESTS_TAB_VISITED_NAME}-${this.userStore.user!.id}`,
-    );
+    if (withFilterLocalStorage) {
+      const filterObj = getUserFilter(localStorageKey);
 
-    if (guestsTabVisitedStorage && !this.guestsTabVisited) {
-      this.guestsTabVisited = true;
-    }
-    const filterStorageItem = localStorage.getItem(localStorageKey);
-
-    if (filterStorageItem && withFilterLocalStorage) {
-      const splitFilter = filterStorageItem.split(",");
-
-      filterData.sortBy = splitFilter[0] as TFilterSortBy;
-      filterData.pageCount = +splitFilter[1];
-      filterData.sortOrder = splitFilter[2] as TSortOrder;
+      if (filterObj?.sortBy) filterData.sortBy = filterObj.sortBy;
+      if (filterObj?.pageCount) filterData.pageCount = filterObj.pageCount;
+      if (filterObj?.sortOrder) filterData.sortOrder = filterObj.sortOrder;
     }
 
-    if (currentGroup?.id && this.contactsTab === "inside_group") {
+    if (
+      currentGroup?.id &&
+      (contactsTab
+        ? contactsTab === "inside_group"
+        : contactsView === "inside_group")
+    ) {
       filterData.group = currentGroup.id;
     }
 
@@ -467,23 +466,26 @@ class UsersStore {
       filterData.group = null;
     }
 
-    if (!guestsTabVisitedStorage && this.contactsTab === "guests") {
-      filterData.inviterId = null;
-      window.localStorage.setItem(
-        `${GUESTS_TAB_VISITED_NAME}-${this.userStore.user!.id}`,
-        "true",
-      );
-      this.guestsTabVisited = true;
+    if (
+      contactsTab ? contactsTab === "guests" : this.contactsTab === "guests"
+    ) {
+      filterData.area = "guests";
+    } else if (
+      contactsTab ? contactsTab === "people" : contactsView === "people"
+    ) {
+      filterData.area = "people";
     }
 
-    this.requestRunning = true;
+    runInAction(() => {
+      this.requestRunning = true;
+    });
 
     const res = await api.people.getUserList(
       filterData,
       this.abortController.signal,
     );
 
-    this.setIsUsersFetched(true);
+    this.setUsers(res.items);
 
     filterData.total = res.total;
 
@@ -491,10 +493,13 @@ class UsersStore {
       this.setFilter(filterData);
     }
 
-    this.requestRunning = false;
+    runInAction(() => {
+      this.requestRunning = false;
+      this.abortController = null;
+    });
 
-    this.setUsers(res.items);
-
+    this.clientLoadingStore.setIsLoading("body", false);
+    this.clientLoadingStore.setIsLoading("header", false);
     return Promise.resolve(res.items);
   };
 
@@ -518,8 +523,10 @@ class UsersStore {
 
   updateUserStatus = async (status: EmployeeStatus, userIds: string[]) => {
     const updatedUsers = await api.people.updateUserStatus(status, userIds);
+    const isInfoPanelVisible = getInfoPanelOpen();
     if (updatedUsers) {
-      if (!this.needResetUserSelection) {
+      const needReset = this.needResetUserSelection || !isInfoPanelVisible;
+      if (!needReset) {
         this.updateSelection();
       }
     }
@@ -555,7 +562,9 @@ class UsersStore {
       throw new Error(e as string);
     }
 
-    if (updatedUsers && !this.needResetUserSelection) {
+    const needReset = this.needResetUserSelection || !getInfoPanelOpen();
+
+    if (updatedUsers && !needReset) {
       this.updateSelection();
     }
 
@@ -567,7 +576,9 @@ class UsersStore {
 
     const removedGuests = await api.people.deleteGuests(ids);
 
-    if (!!removedGuests && !this.needResetUserSelection) {
+    const needReset = this.needResetUserSelection || !getInfoPanelOpen();
+
+    if (!!removedGuests && !needReset) {
       this.updateSelection();
     }
 
@@ -575,19 +586,15 @@ class UsersStore {
   };
 
   updateProfileInUsers = async (updatedProfile?: TUser) => {
-    const updatedUser = updatedProfile ?? this.targetUserStore.targetUser;
     if (!this.users) {
       return this.getUsersList(this.filter, true);
     }
 
-    if (!updatedUser) return;
+    if (!updatedProfile) return;
 
     const updatedUsers = this.users.map((user) => {
-      if (
-        user.id === updatedUser.id ||
-        user.userName === updatedUser.userName
-      ) {
-        return { ...user, ...updatedUser };
+      if (user.id === updatedProfile.id) {
+        return { ...user, ...updatedProfile };
       }
 
       return user;
@@ -644,7 +651,6 @@ class UsersStore {
         ) {
           if (!isUserLDAP && !isUserSSO) {
             options.push("separator-1");
-
             options.push("change-email");
             options.push("change-password");
 
@@ -781,7 +787,12 @@ class UsersStore {
 
     const newFilter = this.filter.clone();
     newFilter.page += 1;
+
     this.setFilter(newFilter);
+
+    this.abortController?.abort();
+
+    this.abortController = new AbortController();
 
     const res = await api.people.getUserList(
       newFilter,
@@ -792,9 +803,11 @@ class UsersStore {
       this.setUsers([...this.users, ...res.items]);
       this.setIsUsersLoading(false);
     });
+
+    this.abortController = null;
   };
 
-  getPeopleListItem = (user: TUser) => {
+  getPeopleListItem: (user: TUser) => TPeopleListItem = (user: TUser) => {
     const {
       id,
       displayName,
@@ -896,12 +909,7 @@ class UsersStore {
   }
 
   get needResetUserSelection() {
-    const { isVisible: infoPanelVisible } = this.infoPanelStore;
-
-    return (
-      !infoPanelVisible ||
-      (!this.isOneUserSelection && !this.isOnlyBufferSelection)
-    );
+    return !this.isOneUserSelection && !this.isOnlyBufferSelection;
   }
 
   resetUsersRight = () => {
@@ -911,9 +919,7 @@ class UsersStore {
     });
   };
 
-  incrementUsersRights = (
-    selection: ReturnType<typeof this.getPeopleListItem>,
-  ) => {
+  incrementUsersRights = (selection: TPeopleListItem) => {
     Object.keys(this.selectionUsersRights).forEach((key) => {
       if (key in selection && !selection[key as keyof typeof selection]) return;
 
@@ -924,9 +930,7 @@ class UsersStore {
     });
   };
 
-  decrementUsersRights = (
-    selection: ReturnType<typeof this.getPeopleListItem>,
-  ) => {
+  decrementUsersRights = (selection: TPeopleListItem) => {
     Object.keys(this.selectionUsersRights).forEach((key) => {
       if (key in selection && !selection[key as keyof typeof selection]) return;
 
@@ -942,7 +946,7 @@ class UsersStore {
     this.selection.forEach((u) => this.incrementUsersRights(u));
   };
 
-  setSelection = (selection: ReturnType<typeof this.getPeopleListItem>[]) => {
+  setSelection = (selection: TPeopleListItem[]) => {
     this.selection = selection;
 
     if (selection.length === 0) this.resetUsersRight();
@@ -1023,7 +1027,7 @@ class UsersStore {
     this.bufferSelection = bufferSelection;
   };
 
-  selectUser = (user: ReturnType<typeof this.getPeopleListItem>) => {
+  selectUser = (user: TPeopleListItem) => {
     const index = this.selection.findIndex((el) => el.id === user!.id);
 
     const exists = index > -1;
@@ -1036,7 +1040,7 @@ class UsersStore {
     this.incrementUsersRights(user);
   };
 
-  deselectUser = (user: ReturnType<typeof this.getPeopleListItem>) => {
+  deselectUser = (user: TPeopleListItem) => {
     const index = this.selection.findIndex((el) => el.id === user.id);
 
     const exists = index > -1;
@@ -1062,7 +1066,7 @@ class UsersStore {
     return this.setSelection([]);
   };
 
-  selectRow = (item: ReturnType<typeof this.getPeopleListItem>) => {
+  selectRow = (item: TPeopleListItem) => {
     const isItemSelected = !!this.selection.find((s) => s.id === item.id);
     const isSingleSelected = isItemSelected && this.selection.length === 1;
 
@@ -1086,9 +1090,7 @@ class UsersStore {
     this.setBufferSelection(item);
   };
 
-  multipleContextMenuAction = (
-    item: ReturnType<typeof this.getPeopleListItem>,
-  ) => {
+  multipleContextMenuAction = (item: TPeopleListItem) => {
     const isItemSelected = !!this.selection.find((s) => s.id === item.id);
     const isSingleSelected = isItemSelected && this.selection.length === 1;
 
@@ -1111,10 +1113,10 @@ class UsersStore {
   };
 
   getUsersBySelected = (
-    users: ReturnType<typeof this.getPeopleListItem>[],
+    users: TPeopleListItem[],
     selected: TContactsSelected,
   ) => {
-    const newSelection: ReturnType<typeof this.getPeopleListItem>[] = [];
+    const newSelection: TPeopleListItem[] = [];
     users.forEach((user) => {
       const checked = getUserChecked(user as unknown as TUser, selected);
 
@@ -1130,7 +1132,8 @@ class UsersStore {
     this.selected = selected;
 
     setHotkeyCaret(this.selection.at(-1) ?? hotkeyCaret);
-    this.setSelection(this.getUsersBySelected(this.peopleList, selected));
+    const selectedUser = this.getUsersBySelected(this.peopleList, selected);
+    this.setSelection(selectedUser);
 
     if (selected !== "none" && selected !== "close") {
       this.resetUsersRight();
@@ -1249,11 +1252,11 @@ class UsersStore {
   }
 
   get hasOnlyOneUserToRemove() {
-    const { canRemoveOnlyOneUser } = this.accessRightsStore;
+    const { canRemoveUser } = this.accessRightsStore;
 
     if (!this.isOneUserSelection) return false;
 
-    const users = this.selection.filter((x) => canRemoveOnlyOneUser(x));
+    const users = this.selection.filter((x) => canRemoveUser(x));
 
     return users.length === 1;
   }
@@ -1389,7 +1392,7 @@ class UsersStore {
     setChangeUserStatusDialogVisible(true);
   };
 
-  setActiveUsers = (users: TUser[]) => {
+  setActiveUsers = (users: TPeopleListItem[]) => {
     this.activeUsers = users;
   };
 }

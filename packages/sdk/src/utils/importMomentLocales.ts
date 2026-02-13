@@ -1,5 +1,5 @@
 /*
- * (c) Copyright Ascensio System SIA 2009-2025
+ * (c) Copyright Ascensio System SIA 2009-2026
  *
  * This program is a free software product.
  * You can redistribute it and/or modify it under the terms
@@ -42,7 +42,5 @@ function importMomentLocale(locale: string) {
 }
 
 export function importMomentLocales(locales: string[]) {
-  for (const locale of locales) {
-    importMomentLocale(locale);
-  }
+  locales.forEach(importMomentLocale);
 }

@@ -1,0 +1,18 @@
+{
+  "AIAgentAccessRedirectNote": "Zostaniesz automatycznie przekierowany do sekcji {{sectionName}} za 5 sekund.",
+  "AIChat": "AI-Chat",
+  "AIInstructions": "Instrukcje AI",
+  "CreateChat": "Utwórz czat",
+  "EmptyKnowledgeDescriptionActions": "Spróbuj wykonać te czynności, aby zacząć:",
+  "EmptyKnowledgeTitle": "Jeszcze nie przesłano żadnych plików.",
+  "EmptyResultsTitle": "Brak wyników na razie",
+  "InstructionsDescriptionAgentExample": "Przykład: „Jesteś asystentem PR AI, który pomaga w pisaniu i redagowaniu komunikatów prasowych. Zachowuj profesjonalny, pewny siebie i przyjazny mediom ton. Wyraźnie podkreślaj kluczowe przesłania, unikaj żargonu i utrzymuj tekst zwięzły i angażujący.”",
+  "KnowledgeDescription": "Prześlij pliki z komputera lub {{productName}}, aby zapewnić lepszy kontekst dla rozmowy. Zwróć uwagę: część lub całość przesłanych treści może zostać ujawniona podczas rozmowy.",
+  "KnowledgeSelectIn": "Wybierz w {{productName}}",
+  "KnowledgeUnavailable": "Baza wiedzy niedostępna",
+  "MCP": "Narzędzia MCP do tego pomieszczenia",
+  "ResponseQualityNode": "<1>Uwaga:</1> Jakość odpowiedzi może się różnić w zależności od modelu; zaleca się używanie nowszych modeli, aby uzyskać najlepsze wyniki.",
+  "ResultStorage": "Przechowywanie wyników",
+  "UploadFilesDevice": "Wgraj pliki z urządzenia osobistego.",
+  "UploadFilesPortal": "Wgraj pliki z {{sectionNameFirst}} lub {{sectionNameSecond}}"
+}

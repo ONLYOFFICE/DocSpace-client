@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,36 +26,25 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 
-import Share from "./index";
-import i18nextStoryDecorator from "../../.storybook/decorators/i18nextStoryDecorator";
+import {
+  externalLinksHandler,
+  primaryLinkHandler,
+  editExternalLinkHandler,
+} from "../../__mocks__/handlers";
+
+import { ShareRights } from "../../enums";
+
 import type { ShareProps } from "./Share.types";
-
-const meta: Meta<typeof Share> = {
-  title: "Components/Share",
-  component: Share,
-  parameters: {
-    docs: {
-      description: {
-        component: `A component for sharing files and managing shared links.
-
-### Features
-- Display file sharing status and information
-- Create and manage sharing links
-- Control access rights for shared files
-- Support for internal and external sharing`,
-      },
-    },
-  },
-  decorators: [i18nextStoryDecorator],
-} satisfies Meta<typeof Share>;
-
-export default meta;
-type Story = StoryObj<typeof Share>;
-
-const Template = (args: ShareProps) => <Share {...args} />;
+import Share from ".";
 
 const createDefaultProps = (): ShareProps => ({
   selfId: "current-user-id",
+  setEditLinkPanelIsVisible: (value: boolean) => {
+    console.log("Edit link panel visibility:", value);
+  },
+  setLinkParams: (linkParams) => {
+    console.log("Link params set:", linkParams);
+  },
   infoPanelSelection: {
     isFile: false,
     access: 0,
@@ -104,6 +93,7 @@ const createDefaultProps = (): ShareProps => ({
       CreateRoomFrom: false,
       CopyLink: false,
       Embed: false,
+      Vectorization: false,
     },
     shared: true,
     thumbnailStatus: 0,
@@ -131,27 +121,62 @@ const createDefaultProps = (): ShareProps => ({
       WebReview: true,
       WebView: true,
     },
+    availableShareRights: {
+      User: [ShareRights.Read, ShareRights.None],
+      Group: [ShareRights.Read, ShareRights.None],
+      ExternalLink: [ShareRights.Read, ShareRights.None],
+      PrimaryExternalLink: [ShareRights.Read, ShareRights.None],
+    },
     viewUrl: "https://example.com/view",
     webUrl: "https://example.com/web",
+    shortWebUrl: "",
   },
 });
 
+const meta = {
+  title: "Components/Share",
+  component: Share,
+  parameters: {
+    docs: {
+      description: {
+        component: `A component for sharing files and managing shared links.
+
+### Features
+- Display file sharing status and information
+- Create and manage sharing links
+- Control access rights for shared files
+- Support for internal and external sharing`,
+      },
+    },
+  },
+  decorators: [
+    (Story) => {
+      localStorage.setItem(
+        `document-bar-${createDefaultProps().selfId}`,
+        "true",
+      );
+      return <Story />;
+    },
+  ],
+  argTypes: {
+    infoPanelSelection: { table: { disable: true } },
+    selfId: { table: { disable: true } },
+    onlyOneLink: { control: { type: "boolean" } },
+  },
+  args: createDefaultProps(),
+} satisfies Meta<typeof Share>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
 export const Default: Story = {
-  render: (args) => Template({ ...createDefaultProps(), ...args }),
-  args: {},
-};
-
-export const Hidden: Story = {
-  render: (args) => Template({ ...createDefaultProps(), ...args }),
-  args: {},
-};
-
-export const WithSharedInfo: Story = {
-  render: (args) => Template({ ...createDefaultProps(), ...args }),
-  args: {
-    infoPanelSelection: {
-      ...createDefaultProps().infoPanelSelection,
-      shared: true,
+  parameters: {
+    msw: {
+      handlers: [
+        externalLinksHandler(),
+        primaryLinkHandler(),
+        editExternalLinkHandler(),
+      ],
     },
   },
 };

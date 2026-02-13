@@ -3,7 +3,7 @@
   "content": "Application actions",
   "content_en_sha1_hash": "2523dbce8dee56d929a73173849d3d897067464f",
   "created_at": "2025-05-19T21:30:54.990Z",
-  "updated_at": "2025-05-21T10:37:26.714Z",
+  "updated_at": "2025-05-24T10:47:19.289Z",
   "comment": {
     "text": "This translation key is used to display a label for an application actions component. It appears as a sub-header in a panel and indicates that the content below is related to hotkeys for the application.",
     "is_auto": true,
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Handlungen der Anwendung\" is grammatically correct, it's a rather literal and less natural translation of \"Application actions.\" It sounds a bit clunky in German. A more common and idiomatic translation would be \"Anwendungsaktionen\" or \"Aktionen der Anwendung\" (if emphasizing the 'actions' part).",
-          "suggestion": "Consider \"Anwendungsaktionen\" or \"Aktionen der Anwendung\"."
+          "description": "While technically correct, \"Handlungen der Anwendung\" is a very literal and somewhat clunky translation of \"Application actions.\" A more natural German phrasing would be more appropriate for a user interface.",
+          "suggestion": "Anwendungshandlungen"
         }
       ],
       "approved_at": null
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Հավելվածի գործողություններ \" is a literal translation of 'Application actions' but may not be the most natural or idiomatic phrasing in Armenian. A more natural rendering might consider using a term that conveys the 'actions' as being initiated or controlled by the application.",
-          "suggestion": "Consider alternatives like \"Հավելվածի գործողությունները\" or a phrase that more accurately reflects the intended meaning within the UI context. Further context would be needed for a definitively better translation."
+          "description": "The translation \"Հավելվածի գործողություններ \" is a literal translation of \"Application actions\". While technically correct, a more natural Armenian phrasing might be preferable for user interface text. \"Application actions\" typically refers to actions *performed by* the application, not actions *of* the application. A more common phrasing would emphasize the actions *taken* by the application.",
+          "suggestion": "Consider \"Ծրագրի գործողություններ“ (Tsragrami gorzhoghutyuner) - 'Program actions' or “Հավելվածի գործողություններ“ if emphasizing what the application performs.  Further context about where this appears in the UI would help determine the best translation."
         }
       ],
       "approved_at": null
@@ -108,8 +108,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Japanese translation 'アップ理ケーションのアクション' contains a typo and an inaccurate translation. 'アップ理ケーション' appears to be a mistranscription/typo of 'アプリケーション' (application). It should be translated as 'アプリケーションのアクション' which more accurately reflects 'Application actions'.",
+          "description": "The Japanese translation 'アップ理ケーションのアクション' is incorrect. 'アップ理ケーション' appears to be a misspelling or a combination of 'アプリケーション' (application) and '理' (logic/reason).  The correct translation of 'Application actions' should be something along the lines of 'アプリケーションのアクション' or 'アプリのアクション'.",
           "suggestion": "アプリケーションのアクション"
+        },
+        {
+          "type": "spelling",
+          "description": "'アップ理ケーション' appears to be a misspelling.",
+          "suggestion": "アプリケーション"
         }
       ],
       "approved_at": null
@@ -120,8 +125,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"응용 프로그램 작업\" is technically correct but lacks nuance. \"응용 프로그램\" is a very literal translation of \"Application\".  A more natural and commonly used term for \"Application\" in this context would be \"애플리케이션\" (pronounced 'ae-peu-ri-ke-i-se-yeon'). Also, the term '작업' is not as common as '기능' when referring to actions within an application.",
-          "suggestion": "애플리케이션 기능"
+          "description": "The translation '응용 프로그램 작업' is a literal translation of 'Application actions' but doesn't fully capture the nuance. While technically correct, it sounds slightly formal and could be improved for a more natural user experience within a hotkeys panel.",
+          "suggestion": "Consider '애플리케이션 동작' or '애플리케이션 기능' for a more natural-sounding translation within the context of hotkeys and application actions."
         }
       ],
       "approved_at": null
@@ -132,8 +137,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ການປະຕິບັດຄໍາຮ້ອງສະຫມັກ\" (kan prà-tì-bàt kham-rɔ̂ng-sǎ-mák) translates to \"application execution\" or \"application implementation,\" which isn't a direct equivalent of \"Application actions.\" It describes the process rather than the actions themselves.",
-          "suggestion": "A more accurate translation could be \"ການກະທຳຂອງຄໍາຮ້ອງສະຫມັກ\" (kan gà-tăm khɔ̌ng kham-rɔ̂ng-sǎ-mák) which translates to 'Application actions'."
+          "description": "The Lao translation \"ການປະຕິບັດຄໍາຮ້ອງສະຫມັກ\" translates more literally to \"application execution\" or \"application operations\". \"Application actions\" implies a set of actions *related to* an application, which isn't directly conveyed by the current translation. A more appropriate translation might focus on the actions themselves.",
+          "suggestion": "Consider \"ການກະທຳຂອງຄໍາຮ້ອງສະຫມັກ\" (kan ka tham khong kham rong samak) which translates to \"application actions\" or \"actions of the application.\""
         }
       ],
       "approved_at": null
@@ -186,8 +191,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"යෙදුමේ ක්‍රියාමාර්ග\" is understandable, a more accurate and common translation of \"Application actions\" would be something like \"අප්ලිකේෂන් ක්‍රියාමාර්ග\" or \"පෙළිගෘහ ක්‍රියාමාර්ග\". \"යෙදුමේ\" translates to \"of the application,\" which is not the most natural phrasing.",
-          "suggestion": "අප්ලිකේෂන් ක්‍රියාමාර්ග"
+          "description": "While \"යෙදුමේ ක්‍රියාමාර්ග\" is a literal translation of \"Application actions\", it can sound slightly awkward in Sinhala. A more natural phrasing would emphasize the actions *of* the application.",
+          "suggestion": "Consider \"අප්ලිකේෂන් ක්‍රියාකාරීතා\" (Apilikeishan kriyakaaritha) or \"යෙදුම් ක්‍රියාවලියි\" (Yedum kriyavali)."
         }
       ],
       "approved_at": null

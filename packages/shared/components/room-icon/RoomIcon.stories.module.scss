@@ -1,0 +1,18 @@
+.roomTitle {
+  :global {
+    .room-title {
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 37px;
+      user-select: none;
+    }
+  }
+}
+
+.roomBackground {
+  :global {
+    .room-background {
+      background-color: #d9d0db;
+    }
+  }
+}

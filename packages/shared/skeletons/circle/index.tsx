@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,7 +32,7 @@ import { CircleSkeletonProps } from "./Circle.types";
 
 export type { CircleSkeletonProps };
 
-const CircleSkeleton = ({
+export const CircleSkeleton = ({
   title = LOADER_STYLE.title,
   x = "3",
   y = "12",
@@ -64,4 +64,4 @@ const CircleSkeleton = ({
   </ContentLoader>
 );
 
-export { CircleSkeleton };
+

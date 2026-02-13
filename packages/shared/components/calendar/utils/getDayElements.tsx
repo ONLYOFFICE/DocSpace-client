@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,22 +25,30 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import moment from "moment";
 import classNames from "classnames";
+import type { DateTime } from "luxon";
 
 import { getCalendarDays } from "./getCalendarDays";
 import styles from "../Calendar.module.scss";
+import { parseWithFormat, formatDate, now } from "../../../utils/date";
+
+const parseDay = (key: string): DateTime | null => {
+  return parseWithFormat(key, "yyyy-MM-d");
+};
 
 export const getDayElements = (
-  observedDate: moment.Moment,
-  selectedDate: moment.Moment,
-  handleDateChange: (date: moment.Moment) => void,
-  minDate: moment.Moment,
-  maxDate: moment.Moment,
+  observedDate: DateTime,
+  selectedDate: DateTime,
+  handleDateChange: (date: DateTime) => void,
+  minDate: DateTime,
+  maxDate: DateTime,
 ) => {
-  const dateFormat = "YYYY-MM-D";
-
   const calendarDays = getCalendarDays(observedDate);
+
+  const isDisabled = (dayKey: string) => {
+    const dt = parseDay(dayKey);
+    return !dt || dt < minDate || dt > maxDate;
+  };
 
   const monthDays = {
     prevMonthDays: calendarDays.prevMonthDays.map((day) => (
@@ -48,16 +56,14 @@ export const getDayElements = (
         type="button"
         className={classNames(styles.dateItem, "day", {
           [styles.isSecondary]: true,
-          [styles.disabled]:
-            moment(day.key, dateFormat) < minDate ||
-            moment(day.key, dateFormat) > maxDate,
+          [styles.disabled]: isDisabled(day.key),
         })}
         key={day.key}
-        onClick={() => handleDateChange(moment(day.key, dateFormat))}
-        disabled={
-          moment(day.key, dateFormat) < minDate ||
-          moment(day.key, dateFormat) > maxDate
-        }
+        onClick={() => {
+          const dt = parseDay(day.key);
+          if (dt) handleDateChange(dt);
+        }}
+        disabled={isDisabled(day.key)}
       >
         {day.value}
       </button>
@@ -66,16 +72,14 @@ export const getDayElements = (
       <button
         type="button"
         className={classNames(styles.dateItem, "day", {
-          [styles.disabled]:
-            moment(day.key, dateFormat) < minDate ||
-            moment(day.key, dateFormat) > maxDate,
+          [styles.disabled]: isDisabled(day.key),
         })}
         key={day.key}
-        onClick={() => handleDateChange(moment(day.key, dateFormat))}
-        disabled={
-          moment(day.key, dateFormat) < minDate ||
-          moment(day.key, dateFormat) > maxDate
-        }
+        onClick={() => {
+          const dt = parseDay(day.key);
+          if (dt) handleDateChange(dt);
+        }}
+        disabled={isDisabled(day.key)}
       >
         {day.value}
       </button>
@@ -85,25 +89,23 @@ export const getDayElements = (
         type="button"
         className={classNames(styles.dateItem, "day", {
           [styles.isSecondary]: true,
-          [styles.disabled]:
-            moment(day.key, dateFormat) < minDate ||
-            moment(day.key, dateFormat) > maxDate,
+          [styles.disabled]: isDisabled(day.key),
         })}
         key={day.key}
-        onClick={() => handleDateChange(moment(day.key, dateFormat))}
-        disabled={
-          moment(day.key, dateFormat) < minDate ||
-          moment(day.key, dateFormat) > maxDate
-        }
+        onClick={() => {
+          const dt = parseDay(day.key);
+          if (dt) handleDateChange(dt);
+        }}
+        disabled={isDisabled(day.key)}
       >
         {day.value}
       </button>
     )),
   };
 
-  const currentDate = moment().format("YYYY-MM-") + moment().format("D");
-  const selectedDateFormated =
-    moment(selectedDate).format("YYYY-MM-") + moment(selectedDate).format("D");
+  const currentNow = now();
+  const currentDate = `${formatDate(currentNow, "yyyy-MM-")}${currentNow.day}`;
+  const selectedDateFormatted = `${formatDate(selectedDate, "yyyy-MM-")}${selectedDate.day}`;
 
   Object.keys(calendarDays).forEach((key) => {
     if (
@@ -118,36 +120,32 @@ export const getDayElements = (
               type="button"
               className={classNames(styles.dateItem, "day", {
                 [styles.isCurrent]: true,
-                [styles.disabled]:
-                  moment(day.key, dateFormat) < minDate ||
-                  moment(day.key, dateFormat) > maxDate,
+                [styles.disabled]: isDisabled(day.key),
               })}
               key={day.key}
-              onClick={() => handleDateChange(moment(day.key, dateFormat))}
-              disabled={
-                moment(day.key, dateFormat) < minDate ||
-                moment(day.key, dateFormat) > maxDate
-              }
+              onClick={() => {
+                const dt = parseDay(day.key);
+                if (dt) handleDateChange(dt);
+              }}
+              disabled={isDisabled(day.key)}
             >
               {day.value}
             </button>
           );
-        } else if (day.key === selectedDateFormated) {
+        } else if (day.key === selectedDateFormatted) {
           monthDays[key][index] = (
             <button
               type="button"
               className={classNames(styles.dateItem, "day", {
                 [styles.focused]: true,
-                [styles.disabled]:
-                  moment(day.key, dateFormat) < minDate ||
-                  moment(day.key, dateFormat) > maxDate,
+                [styles.disabled]: isDisabled(day.key),
               })}
               key={day.key}
-              onClick={() => handleDateChange(moment(day.key, dateFormat))}
-              disabled={
-                moment(day.key, dateFormat) < minDate ||
-                moment(day.key, dateFormat) > maxDate
-              }
+              onClick={() => {
+                const dt = parseDay(day.key);
+                if (dt) handleDateChange(dt);
+              }}
+              disabled={isDisabled(day.key)}
             >
               {day.value}
             </button>

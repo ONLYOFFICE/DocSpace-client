@@ -3,7 +3,7 @@
   "content": "POST request header",
   "content_en_sha1_hash": "dd2a90902b9d8063cee3aafe29d727b91766a655",
   "created_at": "2025-05-19T21:30:49.798Z",
-  "updated_at": "2025-05-21T01:02:59.528Z",
+  "updated_at": "2025-05-24T02:16:56.322Z",
   "comment": {
     "text": "\"This translation key is used for the label of a form field displaying request post headers, appearing on a UI component for detailing webhook event settings.\"",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'ترويسة' (tarwisa) can mean 'header,' in the context of webhooks and technical documentation, a more precise translation would be 'رأسية' (ra'siya) or 'عنوان' (unwan). 'ترويسة' is more commonly used for letterhead or a decorative header.",
-          "suggestion": "Consider using 'رأسية طلب POST' or 'عنوان طلب POST'."
+          "description": "The translation \"ترويسة طلب POST\" is a literal translation of \"POST request header.\" While understandable, a more natural phrasing in Arabic might be preferable. \"رأس طلب POST\" or \"عنوان رأس طلب POST\" could be considered.",
+          "suggestion": "Consider alternative translations like \"رأس طلب POST\" or \"عنوان رأس طلب POST\" for better flow and readability."
         }
       ],
       "approved_at": null
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'sorğu başlığı' is a literal translation of 'request header', a more natural and common phrasing in Azerbaijani would be 'HTTP sorğusunun başlığı' or 'Sorğu başlığı'. 'POST' being a specific HTTP method, it doesn't strictly need to be included in the translation unless specifically requested for technical accuracy.",
-          "suggestion": "HTTP sorğusunun başlığı"
+          "description": "While \"POST sorğu başlığı\" is understandable, a more accurate and natural translation of \"POST request header\" would be \"POST istəyinin başlığı\" or \"POST tələbinin başlığı\". \"Sorğu\" can refer to a query or investigation, which isn't the intended meaning here. \"İstəyinin\" or \"Tələbinin\" are more precise for 'request'.",
+          "suggestion": "POST istəyinin başlığı"
         }
       ],
       "approved_at": null
@@ -72,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"Κεφαλίδα αίτησης POST\" is a very literal translation and sounds unnatural in Greek. A more common and natural phrasing would emphasize the 'webhook' context.",
-          "suggestion": "Κεφαλίδα POST για Webhooks"
+          "description": "While technically correct, \"Κεφαλίδα αίτησης POST\" is a very literal translation. A more natural and common phrasing in Greek would use a term like 'Επικεφαλίδα' instead of 'Κεφαλίδα' when referring to HTTP headers.  Also, including 'αίτησης' (of request) is redundant and not typically included.",
+          "suggestion": "Επικεφαλίδα POST"
         }
       ],
       "approved_at": null
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"POST հարցման վերնագիր\" is a literal translation but doesn't quite capture the technical meaning of \"POST request header.\" \"Հարցման վերնագիր\" translates to 'request header' but it lacks the 'POST' specificity.",
-          "suggestion": "Consider a more contextually accurate translation like \"POST հարցման գլխավորում\" or \"POST հարցման վերնագրային մաս\" which conveys the 'POST' aspect more clearly."
+          "description": "The translation 'POST հարցման վերնագիր' is a literal translation but doesn't quite convey the meaning of 'request header' in the context of webhooks.  'Հարցման վերնագիր' implies a header *of* a request, rather than the header *for* a POST request.",
+          "suggestion": "Consider 'POST հարցման գլուխադիր' or 'POST հարցման շեփորմաչափ' . 'գլուխադիր' is closer to 'header' in technical contexts, and 'շեփորմաչափ' is a more technical term for 'format'."
         }
       ],
       "approved_at": null
@@ -132,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ສ່ວນຫົວຄຳຮ້ອງຂໍ POST' is technically correct but could be more natural. 'ສ່ວນຫົວ' literally means 'part head'. A more common phrasing would use a term like 'ຫົວຂໍ້' for 'header'.",
-          "suggestion": "ຫົວຂໍ້ POST"
+          "description": "The Lao translation 'ສ່ວນຫົວຄຳຮ້ອງຂໍ POST' is a literal translation and could be improved for naturalness. While technically correct, it sounds somewhat clunky in Lao.",
+          "suggestion": "ຄຸນນະພາບຫົວຂໍ້ POST"
         }
       ],
       "approved_at": null
@@ -171,13 +171,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Antetul solicitării POST\" is understandable, a more natural and accurate translation would be \"Antet de cerere POST\" or \"Antet HTTP pentru cererea POST\". \"Solicitării\" implies a request *to* something, which isn't precisely what a header represents.",
-          "suggestion": "Antet de cerere POST"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -192,13 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'POST ඉල්ලීමේ ශ්‍රීර්ෂකය' is a literal translation of 'POST request header' but isn't the most natural or common way to express it in Sinhala. 'ඉල්ලීම' implies a 'request' being *made* which isn't necessarily the focus. A more accurate and natural translation would focus on the 'header' itself being related to a POST request.",
-          "suggestion": "POST ඉල්ලුමේදී ලැබෙන සිරසාව (POST illumede lebewena sirasawa) - This translates to 'Header received during a POST request'."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While grammatically correct, 'ඉල්ලීමේ' is a somewhat formal construction.  Depending on the target audience, a simpler term might be preferable.",
-          "suggestion": "Consider using a less formal term, depending on the context."
+          "description": "The translation 'POST ඉල්ලීමේ ශ්‍රීර්ෂකය' is a literal translation of 'POST request header'. While understandable, a more natural and idiomatic translation would improve readability. 'ඉල්ලීම' (illaimai) translates to 'request', but in technical contexts, a more direct equivalent or a phrase conveying the purpose might be preferable.",
+          "suggestion": "Consider alternatives like 'POST αίτηση පත්‍රශීර්ෂය' (POST aththana pathra sirushaya) or 'POST පත්‍රශීර්ෂකය' (POST pathra sirushaya) for better clarity and common usage."
         }
       ],
       "approved_at": null
@@ -215,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'POST glava zahteve' is not the most natural or accurate translation of 'POST request header'. 'Glava' translates to 'header' but using it in this context is awkward. A more natural translation would incorporate the term 'naslov'.",
-          "suggestion": "POST zahteva naslov"
+          "description": "The translation 'POST glava zahteve' is not the most natural or accurate rendering of 'POST request header' in Slovenian. 'Glava' translates to 'header' but the phrasing is awkward. A better translation would focus on the functionality rather than a literal translation of each word.",
+          "suggestion": "POST zahtevak (for POST request header) or Glavna zahteva za POST (Header for POST request)"
         }
       ],
       "approved_at": null
@@ -227,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, 'Заглавље POST захтева' is a very literal translation. A more natural Serbian translation for 'POST request header' would be something like 'Назив заголовке POST захтева' or 'Заголовка POST захтева'.",
-          "suggestion": "Назив заголовке POST захтева"
+          "description": "While technically correct, \"Заглавље POST захтева\" is a somewhat literal translation. A more natural and idiomatic Serbian (Cyrillic) translation would be \"Надређено поље POST захтева\" or \"Заглавље POST захтева (захтев по методама HTTP)\".",
+          "suggestion": "Надређено поље POST захтева"
         }
       ],
       "approved_at": null
@@ -236,7 +225,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Zaglavlje POST zahteva\" is understandable, a more natural and common translation of \"POST request header\" in Serbian would be \"HTTP POST zaglavlje\" or \"POST zahtev zaglavlje\". The term 'zahteva' can imply a request for something, rather than the header of a request.",
+          "suggestion": "HTTP POST zaglavlje"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -254,7 +249,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Vietnamese translation \"POST request header\" is identical to the English source content. It doesn't reflect a proper translation to Vietnamese. A more accurate translation would convey the meaning of a header specifically associated with a POST request.",
+          "suggestion": "Tiêu đề yêu cầu POST"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

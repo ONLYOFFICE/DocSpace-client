@@ -1,0 +1,28 @@
+{
+  "key_path": "AgentOwner",
+  "content": "Agent owner",
+  "content_en_sha1_hash": "da658143e67eb58d6fd36ea0dabf552b942dc53c",
+  "created_at": "2025-10-27T16:14:10.214Z",
+  "updated_at": "2025-10-27T16:51:36.964Z",
+  "comment": {
+    "text": "This key displays the label for who owns a room, specifically indicating whether the owner is an agent or a standard user. It appears in the \"Change Room Owner\" component, within a text label that dynamically changes based on the room owner's type. Translators should ensure the translated text accurately reflects the role of the owner.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T16:51:36.964Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/ChangeRoomOwner/index.tsx",
+      "line_number": 70,
+      "context": ");\n \n return (\n <Styled.ChangeRoomOwner>\n <Text className=\"change-owner-label\" fontWeight={600} fontSize=\"13px\">\n {isAgent ? t(\"Common:AgentOwner\") : t(\"Files:RoomOwner\")}\n </Text>\n \n <div className=\"change-owner-display-wrapper\">\n <div className=\"change-owner-display\">\n <Avatar",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

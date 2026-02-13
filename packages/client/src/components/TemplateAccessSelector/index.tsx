@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -79,7 +79,7 @@ const TemplateAccessSelector = ({
     );
   };
 
-  const infoText = getInfoText();
+  const infoText = getInfoText() as unknown as string;
 
   const filter = Filter.getDefault();
   filter.role = [EmployeeType.Admin, EmployeeType.RoomAdmin];
@@ -87,7 +87,7 @@ const TemplateAccessSelector = ({
   return (
     <PeopleSelector
       useAside
-      onClose={onClose}
+      onClose={onClose!}
       onSubmit={onSubmit}
       submitButtonLabel={t("Common:AddButton")}
       disableSubmitButton={false}

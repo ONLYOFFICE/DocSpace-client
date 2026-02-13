@@ -3,7 +3,7 @@
   "content": "Your personal files and folders in the {{sectionName}} section will be <1>deleted</1> since Guests don't have access to this section. Files remain available for viewing and downloading <1>for 30 days</1>.",
   "content_en_sha1_hash": "ffca39de3d5ca19023e9ef716b66c6633b7fc354",
   "created_at": "2025-05-19T21:30:55.950Z",
-  "updated_at": "2025-05-21T11:36:29.273Z",
+  "updated_at": "2025-09-02T07:59:28.390Z",
   "comment": {
     "text": "This translation key is used for a warning message that informs users about the deletion of their personal files and folders in a specific section when they are removed from access. It appears on a dialog component, specifically on a reduced rights confirmation notice.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ReducedRightsDialog/index.tsx",
-      "line_number": 61,
-      "context": "/>\n <StyledText>\n <Trans\n t={t}\n ns=\"Files\"\n i18nKey=\"PersonalContentRemovalNotice\"\n values={{ sectionName: personalUserFolderTitle }}\n components={{ 1: <span style={{ fontWeight: 600 }} /> }}\n />\n </StyledText>\n <StyledText>",
+      "line_number": 60,
+      "context": "/>\n <StyledText>\n <Trans\n t={t}\n ns=\"Files\"\n i18nKey=\"PersonalContentRemovalNotice\"\n values={{ sectionName: t(\"Common:MyDocuments\") }}\n components={{ 1: <span style={{ fontWeight: 600 }} /> }}\n />\n </StyledText>\n <StyledText>",
       "module": "/packages/client"
     }
   ],
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The opening tag <1> is inconsistent with standard practice. It should be more clearly delimited or standardized with surrounding tags.",
-          "suggestion": "Consider using a more standard tag format like <b> or <span> for highlighting, or remove the tags if the emphasis is unnecessary."
+          "description": "The opening tag <1> is used in both English and Arabic. Consistency in formatting should be checked.",
+          "suggestion": "Ensure consistent tag usage across languages. Consider a standardized approach."
         }
       ],
       "approved_at": null
@@ -42,13 +42,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase '<1>30 günlük</1>' is an awkward and inaccurate translation of 'for 30 days'. 'Günlük' means 'daily'.",
-          "suggestion": "30 gün ərzində"
+          "description": "The term \"30 günlük\" is not the correct translation for \"for 30 days\". It literally translates to \"30-day\" and doesn't convey the duration.",
+          "suggestion": "Fayllar 30 gün ərzində görünən və endirilə bilən qalacaq."
         },
         {
           "type": "formatting",
-          "description": "The number tags (<1>...</1>) are inconsistent with the English content. The Azerbaijani translation uses the same tags but they don't need to be there.",
-          "suggestion": "Remove the <1> tags in the Azerbaijani translation."
+          "description": "The formatting tags <1> are not standard and might cause issues when displayed. They need to be handled consistently.",
+          "suggestion": "Ensure consistent use of appropriate formatting tags or remove them if not required."
         }
       ],
       "approved_at": null
@@ -68,7 +68,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The tags <1> and </1> are not correctly formatted in the German translation. They are using HTML-like tags, which may not be the intended format.",
+          "suggestion": "Review the intended formatting of the tags. They may need to be replaced with a different format or removed depending on the system that uses them."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -77,8 +83,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The formatting tags (<1> and </1>) are present in the Greek translation, matching the English content. While not an error, it's important to ensure these are handled correctly by the rendering engine and are consistent with established practices. Verify they are intended and don't require adjustment.",
-          "suggestion": "Confirm intended use and consistency of formatting tags. Potentially remove if not intended for rendering in the Greek context."
+          "description": "The HTML tags <1> and </1> are inconsistent between English and Greek. The English uses <1> and </1> while the Greek uses the same.",
+          "suggestion": "Ensure consistency in HTML tag usage. Consider removing the tags if they are not essential for rendering."
         }
       ],
       "approved_at": null
@@ -101,8 +107,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The content tags <1> and </1> are present in both the English and Finnish translations, indicating they should be removed from the Finnish translation for proper display.",
-          "suggestion": "Remove the tags <1> and </1> from the Finnish translation."
+          "description": "The original English content uses `<1>` tags to mark specific phrases. These tags are also present in the Finnish translation, which is not standard practice.",
+          "suggestion": "Remove the `<1>` tags from the Finnish translation. The tags are not necessary for the meaning and disrupt readability."
         }
       ],
       "approved_at": null
@@ -110,13 +116,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English word 'deleted' is translated as 'supprimés'. While 'supprimés' is a valid translation for 'deleted', in this context, 'effacés' might be a more appropriate term, as it suggests a removal from access rather than a permanent deletion.",
-          "suggestion": "Consider replacing 'supprimés' with 'effacés'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -125,8 +125,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The tag `<1>` is present in both the English and Armenian texts, which is likely a formatting artifact and should be removed for final publication. While not technically an error, it's inconsistent and should be cleaned up.",
-          "suggestion": "Remove the `<1>` tags from the Armenian translation."
+          "description": "The HTML tags `<1>` are not correctly rendered in the Armenian translation. They appear as literal characters.",
+          "suggestion": "Ensure the translation system handles HTML tags appropriately or remove/replace them with equivalent formatting in the Armenian language if possible."
         }
       ],
       "approved_at": null
@@ -143,13 +143,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The first numbered tag <1>deleted</1> in the English content corresponds to the first numbered tag <1>削除されます</1> in the Japanese translation.  The Japanese tag lacks formatting consistency with the English tag. It should probably be marked up with a tag, like `<1>削除されます</1>. ",
-          "suggestion": "Ensure consistent formatting of numbered tags in both languages. For example, if the English uses <1>...</1>, the Japanese should also use <1>削除されます</1>."
-        },
-        {
-          "type": "formatting",
-          "description": "The second numbered tag <1>for 30 days</1> in the English content corresponds to the second numbered tag <1>30日間</1> in the Japanese translation. The Japanese tag lacks formatting consistency with the English tag. It should probably be marked up with a tag, like `<1>30日間</1>. ",
-          "suggestion": "Ensure consistent formatting of numbered tags in both languages. For example, if the English uses <1>...</1>, the Japanese should also use <1>30日間</1>."
+          "description": "The numbering tags (<1> and </1>) are inconsistent between the English and Japanese content. The English uses <1> and </1>, while the Japanese uses a similar structure.",
+          "suggestion": "Ensure consistent formatting tags. Use <1> and </1> in the Japanese translation to match the English."
         }
       ],
       "approved_at": null
@@ -160,13 +155,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'viewing and downloading' is not accurately translated. '확인 및 다운로드할 수 있게 유지됩니다' implies confirmation more than viewing. A better translation would capture the essence of 'viewing' as well.",
-          "suggestion": "게스트가 {{sectionName}} 섹션에 액세스할 수 없으므로 이 섹션의 개인 파일 및 폴더는 <1>삭제</1>됩니다. 파일은 <1>30일</1> 동안 보기 및 다운로드할 수 있게 유지됩니다."
+          "description": "The English word \"deleted\" is translated as \"삭제\" (saghek), which means \"deleted\" but doesn't convey the sense of a process. A more accurate translation, considering the context of files being available for viewing and downloading afterward, might be something like \"제거됩니다\" (jegodoebnida) which means \"removed\".",
+          "suggestion": "게스트가 {{sectionName}} 섹션에 액세스할 수 없으므로 이 섹션의 개인 파일 및 폴더는 <1>제거</1>됩니다."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"for 30 days\" is translated as \"30일\" (30il), which literally means \"30 days\". It is more natural in Korean to say something like \"30일 동안\" (30il dongan) to indicate duration.",
+          "suggestion": "파일은 <1>30일 동안</1> 확인 및 다운로드할 수 있게 유지됩니다."
         },
         {
           "type": "formatting",
-          "description": "The tags <1> and </1> are present in both the English and Korean content, but their purpose isn't clear from the context. It's unclear if these are intended to have special formatting or simply mark important parts of the text. If these tags are intended to be rendered in some fashion, ensure this rendering is handled correctly in the Korean context.",
-          "suggestion": "Review and clarify the purpose of the <1> and </1> tags, and ensure consistent rendering in both English and Korean."
+          "description": "The formatting tags <1>...</1> are consistent in both English and Korean, which is good. However, ensure that this formatting is used correctly in the overall system displaying this content.",
+          "suggestion": "Maintain consistent use of <1>...</1> tags in the entire application."
         }
       ],
       "approved_at": null
@@ -177,8 +177,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The tags <1> and </1> are not correctly rendered in the Lao translation. They are present but should be handled appropriately for the target language's formatting conventions.",
-          "suggestion": "Ensure the tags are correctly rendered based on the platform's formatting requirements. If these tags are meant to indicate emphasis or a specific style, ensure the Lao translation achieves the same effect using appropriate Lao stylistic conventions."
+          "description": "The HTML tags `<1>` and `</1>` are present in both the English and Lao translations. These tags shouldn't be included in the final translated text.",
+          "suggestion": "Remove the HTML tags `<1>` and `</1>` from the Lao translation."
         }
       ],
       "approved_at": null
@@ -189,8 +189,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The formatting tags <1> are present in both the English and Latvian text. These should be reviewed and potentially removed or adjusted based on the platform requirements.",
-          "suggestion": "Review and adjust the formatting tags based on the platform's specific requirements. They may need to be removed or replaced with a different formatting system."
+          "description": "The HTML tags <1> are present in both the English and Latvian content. While technically not an error, it's unusual to include HTML tags in a translated content. It is recommended to remove them or ensure consistency across all localized content.",
+          "suggestion": "Remove or standardize the HTML tags (e.g., <1>). Consider using a variable substitution or other mechanism to mark the positions needing special handling."
         }
       ],
       "approved_at": null
@@ -198,13 +198,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The tags <1> are inconsistent with the English original. The English uses </1> and the Dutch uses <1>.",
-          "suggestion": "Ensure consistent formatting: Change <1> to </1> throughout the Dutch translation to match the English."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -212,9 +206,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "formatting",
+          "description": "The English content uses <1> tags to mark emphasis. These tags are duplicated in the Polish translation, but are unnecessary and don't convey any specific meaning in the Polish context.",
+          "suggestion": "Remove the <1> tags from the Polish translation: 'Twoje pliki osobiste oraz katalogi w sekcji {{sectionName}} zostaną usunięte, ponieważ Goście nie mają dostępu do tej sekcji. Pliki pozostaną dostępne do przeglądania i pobierania przez 30 dni.'"
+        },
+        {
           "type": "incorrect_translation",
-          "description": "The phrase 'for 30 days' is left in English within a Polish sentence. It should be translated.",
-          "suggestion": "Przez 30 dni"
+          "description": "The English uses 'for 30 days'. The Polish translation uses 'przez 30 dni'. While grammatically correct, 'do 30 dni' would be more natural and commonly used to convey the time period until the files are unavailable.",
+          "suggestion": "Change 'przez 30 dni' to 'do 30 dni'."
         }
       ],
       "approved_at": null
@@ -228,7 +227,13 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'Deleted' (English) is translated as 'excluídos' (Portuguese). While 'excluídos' is acceptable, 'apagados' or 'removidos' might be more natural and convey the same meaning in this context, referring to file removal.",
+          "suggestion": "Consider using 'apagados' or 'removidos' instead of 'excluídos'."
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -237,13 +242,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English word 'deleted' is translated as 'șterse'. While technically correct, a more natural and user-friendly translation in this context might be 'eliminate' or 'îndepărtate'.  'Șterse' has a more permanent and forceful connotation.",
-          "suggestion": "Fișierele și dosarele ale dvs personale din secțiunea {{sectionName}} vor fi <1>îndepărtate<1> deoarece Invitați nu au acces la această secțiune."
-        },
-        {
-          "type": "grammar",
-          "description": "The phrase 'ale dvs personale' is slightly awkward. While grammatically correct, it's more common and flowing to simply use 'personale'.",
-          "suggestion": "Fișierele și dosarele personale ale dvs din secțiunea {{sectionName}} vor fi <1>îndepărtate<1> deoarece Invitați nu au acces la această secțiune."
+          "description": "The English word 'deleted' is translated as 'șterse'. While 'șterse' is technically correct, 'eliminate' or 'șterse definitiv' might be more appropriate to convey the finality of file removal, especially in a notification. 'Șterse' can sometimes imply a reversible action.",
+          "suggestion": "Consider using 'eliminate' or 'șterse definitiv' instead of 'șterse'."
         }
       ],
       "approved_at": null
@@ -260,13 +260,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English word \"deleted\" is translated as \"වෙඩි කරනු ලැබේ\" which has connotations of destruction or explosion. A more appropriate translation for \"deleted\" in this context would be something along the lines of \"ඉක්මතු කරනු ලැබේ\" (removed) or \"හෝදකරනු ලැබේ\" (archived).",
-          "suggestion": "Replace \"වෙඩි කරනු ලැබේ\" with \"ඉක්මතු කරනු ලැබේ\" or \"හෝදකරනු ලැබේ\"."
+          "description": "The English word 'deleted' is translated as 'අමුණුවන්ට නොහැකි නිසා' which translates to 'unavailable to guests'. 'Deleted' implies removal, which is more accurately conveyed as something like 'ඉක්මතු කරනු ලැබේ' or 'හැකිවේවා' depending on the desired tone.",
+          "suggestion": "Consider replacing 'අමුණුවන්ට නොහැකි නිසා' with a phrase that more accurately conveys 'deleted', such as 'ඉක්මතු කරනු ලැබේ'."
         },
         {
           "type": "formatting",
-          "description": "The tag `<1>` and `</1>` are present in both the English and Sinhala versions, which is unnecessary. They don't affect the meaning but are technically a formatting issue.",
-          "suggestion": "Remove the `<1>` and `</1>` tags from the Sinhala translation."
+          "description": "The first `<1>` tag in the Sinhala translation corresponds to 'deleted', but the second tag corresponds to '30 days'. The English version uses the same tag for both. This suggests the formatting tags may need to be consistent or re-evaluated for accuracy in the Sinhala context.",
+          "suggestion": "Review and ensure the formatting tags `<1>` are consistently applied and accurately reflect the corresponding content in both languages."
         }
       ],
       "approved_at": null
@@ -274,7 +274,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> were preserved in the Slovak translation. These should be removed as they are likely unnecessary and break the flow of the text.",
+          "suggestion": "Remove the <1> and </1> tags. The translated text should read: \"Vaše osobné súbory a priečinky v časti {{sectionName}} budú vymazané, pretože Hostia nemajú prístup do tejto časti. Súbory zostanú prístupné na prezeranie a sťahovanie po dobu 30 dní.\""
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -283,8 +289,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tags <1> are inconsistent between the English and Slovenian versions. The English version uses <1> while the Slovenian uses <1>.  They should be consistent.",
-          "suggestion": "Ensure consistent use of HTML tags across both versions, e.g., use `<1>` in both."
+          "description": "The `<1>` tags are present in both the source and translation, but need to be reviewed to ensure consistency with the overall implementation. It's assumed they are meant for highlighting or specific formatting, and this should be verified.",
+          "suggestion": "Confirm the purpose and implementation of `<1>` tags and ensure consistency across all translations."
         }
       ],
       "approved_at": null
@@ -295,13 +301,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The opening and closing tags `<1>` and `</1>` are not consistent with the English version's `<1>` and `</1>`. The Serbian translation uses a different closing tag.",
-          "suggestion": "Ensure consistency in the opening and closing tags. Consider using `<1>` and `</1>` for both versions."
+          "description": "The `<1>` tags are inconsistent. The opening tag uses `<1>` while the closing tag uses `<1>`. It should be consistent.",
+          "suggestion": "Change `<1>` to `</1>` consistently."
         },
         {
           "type": "incorrect_translation",
-          "description": "While 'obrisani' translates to 'deleted', a more natural and user-friendly phrasing in Serbian might be 'брисани' (brisani). This subtle change conveys the same meaning but sounds more conversational in the context of a notification.",
-          "suggestion": "Consider changing 'obrisani' to 'брисани'."
+          "description": "The English word 'deleted' is translated as 'обрисани'. While 'обрисани' means deleted, a more appropriate translation in this context, conveying a less permanent action, might be 'брисани' or 'уклоњени'. 'Обрисани' implies a complete and irreversible removal.",
+          "suggestion": "Consider using 'брисани' or 'уклоњени' instead of 'обрисани'."
         }
       ],
       "approved_at": null
@@ -312,8 +318,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The tags <1> are not properly closed. They are consistent, but should be verified for correctness within the larger system using these tags.",
-          "suggestion": "Verify the tag closure within the system's template engine. Ensure the opening and closing tags match the expected syntax."
+          "description": "The HTML tags <1> and </1> are not consistently formatted in both the English and Serbian translations. While present in both, it's best to ensure consistency.",
+          "suggestion": "Ensure consistent formatting of the tags, potentially removing or standardizing them. If they're meant to be preserved for display purposes, double-check the rendering behavior in the target platform."
         }
       ],
       "approved_at": null
@@ -324,8 +330,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The tags <1> and </1> are inconsistent with the English content's formatting.",
-          "suggestion": "Ensure consistency in tag formatting. If the English uses `<1>deleted</1>`, the Turkish should also use `<1>silinecektir</1>` and `<1>30 gün boyunca</1>`."
+          "description": "The tags `<1>` are inconsistent. The English uses `<1>deleted</1>` while the Turkish uses `<1>silinecektir</1>. This suggests the tag usage isn't consistent with the original.",
+          "suggestion": "Ensure the formatting tags are applied consistently with the source text. Check if the tags are needed at all."
         }
       ],
       "approved_at": null
@@ -336,8 +342,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tags <1> and </1> are inconsistent. The English uses <1> and </1>, but the Ukrainian uses the same tag for both opening and closing.",
-          "suggestion": "Ensure consistency in HTML tags. Consider using distinct opening and closing tags or removing the tags altogether if not necessary."
+          "description": "The `<1>` tags are present in the Ukrainian translation, mirroring the English. This suggests they were not removed during translation, which may be unintended and need to be cleaned up.",
+          "suggestion": "Remove the `<1>` tags from the Ukrainian translation."
         }
       ],
       "approved_at": null
@@ -348,8 +354,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The tag <1> is present in both the English and Vietnamese content, but its purpose isn't clear without context. It's important to ensure this tag is handled correctly in the UI or rendering engine.",
-          "suggestion": "Verify the purpose and correct implementation of the <1> tag in the system consuming the content. Ensure it's handled consistently across languages."
+          "description": "The original English content uses tags `<1>` to highlight specific words or phrases. The Vietnamese translation also uses `<1>`, but this isn't standard practice in Vietnamese writing and may confuse users. It's better to remove these tags.",
+          "suggestion": "Remove the `<1>` tags from the Vietnamese translation."
         }
       ],
       "approved_at": null
@@ -359,9 +365,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The English word 'deleted' is translated as '删除' which directly translates to 'delete'. While technically correct, a more nuanced translation might be better. In this context, 'removed' or 'taken down' could be softer and more user-friendly, especially given the 30-day availability mentioned afterwards. '删除' implies a permanent action.",
+          "suggestion": "Consider translating 'deleted' as '移除' (yíqù - remove) or '撤除' (chèchú - withdraw/remove) for a less harsh connotation."
+        },
+        {
           "type": "formatting",
-          "description": "The tags <1> and </1> are present in the Chinese translation, mirroring the English. While technically correct, they are unnecessary and disrupt the readability in Chinese. It's standard practice to remove such formatting tags during translation unless specifically instructed otherwise.",
-          "suggestion": "Remove the <1> and </1> tags from the Chinese translation."
+          "description": "The HTML tags <1> and </1> are present in both the English and Chinese content. It's crucial to confirm if these are required for the application rendering these strings. If not, they should be removed.",
+          "suggestion": "Remove the HTML tags <1> and </1> from both the English and Chinese content if they are not essential for rendering."
         }
       ],
       "approved_at": null

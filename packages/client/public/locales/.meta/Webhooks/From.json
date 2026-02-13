@@ -3,7 +3,7 @@
   "content": "From",
   "content_en_sha1_hash": "3f66052a107eaf9bae7cad0f61fb462f47ec2c47",
   "created_at": "2025-05-19T21:30:49.764Z",
-  "updated_at": "2025-05-21T01:08:09.405Z",
+  "updated_at": "2025-05-24T02:22:13.762Z",
   "comment": {
     "text": "This translation key is used for displaying a time range on the \"Delivery Date\" filter component. It displays the departure and arrival times of a delivery in 12-hour format.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Azerbaijani translation 'Etibarən' doesn't accurately convey the meaning of 'From' in the context of webhooks. 'Etibarən' translates to 'With trust' or 'Relying on'. The appropriate translation would depend on the specific context of how 'From' is being used, but it is not 'Etibarən'.",
-          "suggestion": "Possible alternatives include 'Dən', 'Tərəfən', or a rephrased sentence to clarify the origin of the webhook data."
+          "description": "'Etibarən' doesn't accurately translate 'From' in the context of Webhooks. It carries the meaning of 'With confidence' or 'Reliably,' which is not the intended meaning. 'From' in this context refers to the sender or source.",
+          "suggestion": "Consider using 'Daxil olan' (Incoming), 'Mənşə' (Source), or 'Gəlmə' (Coming from) depending on the precise intended meaning within the Webhooks context."
         }
       ],
       "approved_at": null
@@ -51,7 +51,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Odesilatel' while technically meaning 'sender' may not be the most accurate or commonly used translation for 'From' in the context of webhooks, which typically refers to the source or origin of the webhook event. 'Od' might be a more suitable option, or perhaps a more descriptive phrase depending on the user interface.",
+          "suggestion": "Consider alternatives like 'Od' or a more descriptive phrase relevant to the specific webhook functionality."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -78,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Finnish translation \"Alkaen\" translates to \"Starting from\" or \"Beginning\". It does not accurately convey the meaning of \"From\" in the context of a webhook source or sender. \"From\" in this context refers to the sender of the webhook data, not the starting point.",
-          "suggestion": "The most appropriate translation would depend on the context. Possible alternatives include: 'Lähettäjä' (Sender), 'Lähde' (Source), or 'Perustuu' (Based on)."
+          "description": "The Finnish translation \"Alkaen\" does not accurately reflect the meaning of \"From\" in the context of webhooks. \"Alkaen\" means \"Starting from\" or \"Beginning\".  \"From\" in this context likely refers to the sender or origin of the webhook data.",
+          "suggestion": "Consider alternatives like \"Lähettäjä\" (Sender), \"Lähde\" (Source), or \"Alkuperä\" (Origin), depending on the specific nuance required. Further context is needed for a perfectly accurate translation."
         }
       ],
       "approved_at": null
@@ -96,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Սկսած' generally means 'started' or 'begun.' It doesn't accurately convey the meaning of 'From' in the context of webhooks, which refers to the origin or sender.",
-          "suggestion": "Consider alternatives like 'Ուրցումից' (Urcumic’) which means 'from' in a source/origin sense, or 'Ցուցված' (Cuccvad) meaning 'Shown' or 'Indicated', depending on the specific nuance required."
+          "description": "The Armenian translation \"Սկսած\" (Sksatz) translates to 'started' or 'from the beginning' and doesn't accurately convey the meaning of 'From' in the context of webhooks (indicating the sender).",
+          "suggestion": "A more accurate translation would depend on the specific meaning in context. Options include: Ուրց (Vrc'), Պատճառ (Patčar), Ռամզ (Ramz), or potentially a more descriptive phrase. Without further context, it's difficult to provide a definitive correct translation."
         }
       ],
       "approved_at": null
@@ -120,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'시작' (sijak) translates to 'start' or 'beginning,' which doesn't accurately reflect the meaning of 'From' in the context of Webhooks. 'From' typically indicates the source or originator of a webhook event.",
-          "suggestion": "Consider alternatives like '발신자' (balsinja - sender), '소스' (source), or '제공자' (jegongja - provider) depending on the specific usage."
+          "description": "'시작' translates to 'start' or 'beginning', which does not accurately reflect the meaning of 'From' in the context of webhooks (referring to the sender or originator).",
+          "suggestion": "Consider '발신자' (balsinja - sender) or '보낸 사람' (bonaen saram - sender) as more accurate translations. A more context-dependent option might be '제공자' (jegongja - provider)."
         }
       ],
       "approved_at": null
@@ -165,7 +171,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'From' in the context of webhooks often refers to the sender or origin. 'De la' can have multiple meanings and might not accurately convey the intended meaning of 'From' in this context.  A more appropriate translation might be 'De' or 'Trimis de'.",
+          "suggestion": "Consider 'De' or 'Trimis de' for better accuracy."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -180,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'වෙතින්' doesn't accurately convey the meaning of 'From' in the context of Webhooks. 'වෙතින්' translates to 'by' or 'through'. 'From' in this context likely refers to the sender or origin of the webhook data.",
-          "suggestion": "Possible alternatives include: 'ආශ්‍රිතයෙන්' (aashrayanneyan - from/based on), 'එහි' (ehi - there/origin), or 'එහි සිට' (ehi sitha - from there)."
+          "description": "'වෙතින්' is not the accurate translation of 'From' in the context of Webhooks. It typically implies 'by' or 'through'. A more appropriate translation would depend on the specific context of the webhook functionality.",
+          "suggestion": "Consider alternatives like 'එහි සිට' (ehi sita - from this place), 'ආවේ' (aave - came from), or a more contextually relevant term. Without further context, it's difficult to provide the perfect translation."
         }
       ],
       "approved_at": null
@@ -216,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'İtibaren' generally translates to 'starting from' or 'as of'. While it *can* be used in certain contexts related to timestamps or event beginnings, it's not a direct or accurate translation of 'From' in the context of webhooks. It lacks the meaning of origin or sender.",
-          "suggestion": "Consider 'Kaynaktan' (From the source), 'Gönderenden' (From the sender), or a more context-specific translation if available."
+          "description": "The Turkish translation \"İtibaren\" does not accurately convey the meaning of \"From\" in the context of webhooks. \"İtibaren\" typically means \"starting from\" or \"as of.\" \"From\" in this context likely refers to the sender or origin of the webhook data.",
+          "suggestion": "Consider alternatives like \"Gönderen\" (Sender), \"Kaynak\" (Source), or \"Tarafından\" (By). The best choice depends on the specific technical context."
         }
       ],
       "approved_at": null
@@ -240,8 +252,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'From' in the context of webhooks likely refers to the source or sender. '自' (zì) generally means 'self' or 'from' as in origin, but lacks the specificity required for a webhook context. A more appropriate translation would depend on the precise meaning intended in the webhook documentation.",
-          "suggestion": "Consider translations like '来源' (láiyuán - source), '发送方' (fāsòngfāng - sender), or '发出者' (fāchūzhě - issuer), depending on the intended meaning."
+          "description": "'自' (Zi) while technically meaning 'from' or 'self,' doesn't accurately capture the nuance of 'From' in the context of 'Webhooks:From.' It lacks the direct and unambiguous sense of origin or sender that 'From' implies in this technical context. It could be misinterpreted to mean 'self-generated' rather than 'originating from.'",
+          "suggestion": "考虑使用 '来源' (laiyuan) 或 '发自' (fazhi) 以更准确地表达 'From' 在Webhook上下文中指代发送者的含义。"
         }
       ],
       "approved_at": null

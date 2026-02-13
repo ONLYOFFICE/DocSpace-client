@@ -3,7 +3,7 @@
   "content": "Navigation",
   "content_en_sha1_hash": "cf03cf2e9cdf95a20af09137dfb9071db0c31bf2",
   "created_at": "2025-05-19T21:30:55.067Z",
-  "updated_at": "2025-05-21T10:28:56.142Z",
+  "updated_at": "2025-08-12T19:46:25.978Z",
   "comment": {
     "text": "This translation key is used to display the title \"Navigation\" in a modal dialog. It appears as the header of a panel within the HotkeysPanel component and provides context for the user about what the hotkey navigation features are.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/HotkeysPanel/index.js",
-      "line_number": 92,
+      "line_number": 91,
       "context": ">\n <ModalDialog.Header>{t(\"Common:Hotkeys\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <StyledHotkeysPanel>\n <Heading className=\"hotkeys_sub-header\">\n {t(\"HotkeysNavigation\")}\n </Heading>\n <NavigationBlock\n t={t}\n textStyles={textStyles}\n keyTextStyles={keyTextStyles}",
       "module": "/packages/client"
     }
@@ -36,7 +36,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Keçid' can mean 'transition' or 'passage,' in the context of 'HotkeysNavigation' within a panel, a more appropriate translation would convey the idea of 'navigation' itself, such as 'Navigasiya' or 'İdarəetmə'. 'Keçid' implies movement from one place to another, which isn't the primary meaning here.",
+          "description": "While \"Keçid\" can mean 'transition' or 'passage,' in the context of 'Hotkeys Navigation,' a more accurate and commonly used translation would be \"Navigasiya\". \"Keçid\" implies a movement *to* something, while \"Navigation\" refers to the system itself.",
           "suggestion": "Navigasiya"
         }
       ],
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"යාත්‍රණය\" (yāthranaya) translates to 'journey' or 'voyage' which doesn't accurately convey the meaning of 'Navigation' in the context of hotkeys. It implies movement or travel, not the process of finding your way or guiding something.",
-          "suggestion": "Consider alternatives like \"යාරිත්‍රණය\" (yāriṭhanaya) which can mean 'guidance' or 'direction', or a more descriptive phrase like \"දිශා මග\" (disha maga) which means 'route' or 'path'."
+          "description": "The translation \"යාත්‍රණය\" (yāthrṇaya) does not accurately convey the meaning of \"Navigation\". While it technically means 'journey' or 'voyage,' it's not the standard or appropriate translation for a navigation menu or panel in a software context. It lacks the sense of direction or control implied by 'Navigation'.",
+          "suggestion": "A more accurate translation would be \"ලක්ෂණ්‍යය\" (lakṣaṇya) which conveys the meaning of 'navigation' or 'controls', or a transliteration like \"නාවිකකරණය\" (nāvika karaṇaya) although the former is preferable for clarity."
         }
       ],
       "approved_at": null

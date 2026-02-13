@@ -20,9 +20,5 @@ export const FileTileProvider = ({
     [thumbSize, columnCount],
   );
 
-  return (
-    <FileTileContext.Provider value={value}>
-      {children}
-    </FileTileContext.Provider>
-  );
+  return <FileTileContext value={value}>{children}</FileTileContext>;
 };

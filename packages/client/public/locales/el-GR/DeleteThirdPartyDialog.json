@@ -1,5 +1,0 @@
-{
-  "DisconnectCloudTitle": "Αποσύνδεση cloud",
-  "SuccessDeleteThirdParty": "Η υπηρεσία {{service}} τρίτου μέρους διαγράφηκε",
-  "ThirdPartyDisconnectPrompt": "Είστε βέβαιοι ότι θέλετε να αφαιρέσετε το {{service}}; Αυτό δεν θα επηρεάσει με κανέναν τρόπο τον λογαριασμό σας {{account}}."
-}

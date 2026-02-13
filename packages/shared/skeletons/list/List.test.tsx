@@ -1,6 +1,6 @@
 import React from "react";
+import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import ListLoader from "./index";
 import ListItemLoader from "./List.item";
@@ -70,6 +70,6 @@ describe("ListItemLoader", () => {
     const customStyle = { backgroundColor: "red" };
     render(<ListItemLoader style={customStyle} />);
     const row = screen.getByTestId("list-item-loader");
-    expect(row).toHaveStyle(customStyle);
+    expect(row.style.backgroundColor).toBe("red");
   });
 });

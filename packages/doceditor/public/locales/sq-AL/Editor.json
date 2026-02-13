@@ -1,0 +1,10 @@
+{
+  "DocumentConverted": "Dokumenti u konvertua në {{title}} për të lejuar modifikimin e tij",
+  "DocumentsFileType": "dokumente",
+  "ErrorConnectionLost": "Lidhja është e humbur",
+  "FileLocation": "Hap vendndodhjen e skedarit",
+  "ImageFileType": "imazhet",
+  "MailMergeFileType": "Selektoni skedarin .XLSX",
+  "SelectFilesType": "Zgjidhni llojin e skedarëve: {{fileType}}",
+  "UsersWithoutAccess": "Disa përdorues që dëshironi të përmendni nuk kanë qasje në dhomë: {{users}}"
+}

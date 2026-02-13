@@ -3,7 +3,7 @@
   "content": "PKCE is not a form of client authentication, and PKCE is not a replacement for a client secret or another client authentication type. PKCE is recommended even if a client is using a client secret or another form of client authentication like private_key_jwt.<br/> <strong>Note</strong>: Since PKCE is not a replacement for client authentication, it does not allow treating a public client as confidential one.",
   "content_en_sha1_hash": "496655408d794ecbf08fdb73df854af8a077605c",
   "created_at": "2025-05-19T21:30:53.790Z",
-  "updated_at": "2025-05-21T07:30:10.879Z",
+  "updated_at": "2025-06-30T12:20:31.463Z",
   "comment": {
     "text": "The translation key \"AllowPKCEHelpButton\" is used to display a help message that explains the purpose of Public Key Credentials (PKCE) in OAuth client authentication. The text appears as a button label or help tooltip in UI components related to OAuth settings and client configuration, aiming to clarify PKCE's role and limitations.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/BasicBlock.tsx",
-      "line_number": 125,
-      "context": "img.src = URL.createObjectURL(file);\n }\n };\n \n const pkceHelpButtonText = (\n <Trans t={t} i18nKey=\"AllowPKCEHelpButton\" ns=\"OAuth\" />\n );\n \n const isNameRequiredError = requiredErrorFields.includes(\"name\");\n const isWebsiteRequiredError = requiredErrorFields.includes(\"website_url\");\n const isNameError = errorFields.includes(\"name\");",
+      "line_number": 126,
+      "context": "img.src = URL.createObjectURL(file);\n }\n };\n \n const pkceHelpButtonText = (\n <Trans t={t as TFunction} i18nKey=\"AllowPKCEHelpButton\" ns=\"OAuth\" />\n );\n \n const isNameRequiredError = requiredErrorFields.includes(\"name\");\n const isWebsiteRequiredError = requiredErrorFields.includes(\"website_url\");\n const isNameError = errorFields.includes(\"name\");",
       "module": "/packages/client"
     }
   ],
@@ -36,23 +36,23 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"müstəri identifikasiyası forması\" translates to \"client identification form,\" which doesn't accurately convey the meaning of \"form of client authentication.\" It's implying PKCE *is* a type of identification, when the original text states it isn't.",
+          "description": "The phrase \"müştəri identifikasiyası forması\" is not the most accurate translation of 'form of client authentication'. It translates more literally to 'identification form of client'. A better translation would be something like 'müştəri autentifikasiyası növü' (type of client authentication).",
           "suggestion": "müştəri autentifikasiyası növü"
         },
         {
-          "type": "spelling",
-          "description": "The word \"Private_key_jwt\" is not properly formatted. It should adhere to the casing from the original English text.",
-          "suggestion": "Private_key_jwt"
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence \"PKCE hətta müştəri müştəri sirrini...\" is grammatically awkward. Repeating \"müştəri\" (client) is unnecessary.",
-          "suggestion": "PKCE hətta müştəri sirrini və ya Private_key_jwt kimi müştəri autentifikasiyasının başqa formasını istifadə etsə belə tövsiyə olunur."
+          "type": "incorrect_translation",
+          "description": "The phrase 'hər hansı digər müştəri autentifikasiyasını' is a bit verbose and awkward. A more natural Azerbaijani phrasing would be 'başqa bir müştəri autentifikasiyası'.",
+          "suggestion": "başqa bir müştəri autentifikasiyası"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ictimai müştəriyə gizli müştəri kimi baxmağa imkan vermir\" is a bit clunky. It could be more clearly expressed.",
-          "suggestion": "ictimai müştəriyyə gizli müştəri statusu verməyə imkan vermir"
+          "description": "The repeated use of 'müştəri' (client) is a bit clunky.  While technically correct, it could be made more fluid. Specifically, the phrase 'müştəri müştəri sirrini' could be reworded.",
+          "suggestion": "müştəri sirrini"
+        },
+        {
+          "type": "formatting",
+          "description": "The tag `<strong >Note</strong >` should match the English original.  It's currently capitalized in Azerbaijani, which is unnecessary.",
+          "suggestion": "<strong >Qeyd</strong>"
         }
       ],
       "approved_at": null
@@ -93,13 +93,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Finnish translation includes an extra space before 'client-' in 'client-todennustapaa'.",
-          "suggestion": "Remove the extra space: 'clienttodennustapaa'"
+          "description": "There's an unnecessary space before the period after 'tapaa' in the Finnish translation.",
+          "suggestion": "PKCE:tä suositellaan vaikka client käyttäisi client secretiä tai muuta client-todennustapaa"
         },
         {
-          "type": "spelling",
-          "description": "The word 'client' is repeated unnecessarily in 'client-todennustapaa'. While technically not incorrect, it's stylistically awkward in Finnish.",
-          "suggestion": "Rephrase for better flow: 'clientin todennustapaa' is already acceptable. Consider alternatives if possible depending on the broader context."
+          "type": "incorrect_translation",
+          "description": "The repeated use of 'client' in the Finnish translation feels slightly awkward and could be improved for more natural flow. While technically correct, it can be refined.",
+          "suggestion": "PKCE:tä suositellaan vaikka asiakasohjelma käyttäisi client secretiä tai muuta todennustapaa kuten private_key_jwt."
         }
       ],
       "approved_at": null
@@ -116,8 +116,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Armenian translation uses `<strong` and `</strong` tags which are malformed HTML. They should be `<strong` and `</strong`.",
-          "suggestion": "Correct the tags: `<strong` and `</strong`"
+          "description": "The Armenian translation uses `<br/>` for line breaks, which might not be ideal for all rendering contexts. It's generally preferred to use HTML-safe line breaks or platform-specific line break representations.",
+          "suggestion": "Consider using platform-specific line break characters or HTML-safe line breaks."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'treating a public client as confidential one' is a bit awkward. A more natural rendering in Armenian would convey the meaning of granting confidential treatment to a public client.",
+          "suggestion": "Փոխարինել `դիտարկել որպես կոնֆիդենցիալ` բառերին `դիտարկել կոնֆիդենցիալի պես` կամ `համարել կոնֆիդենցիալի պես`."
         }
       ],
       "approved_at": null
@@ -131,7 +136,18 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The `<br/>` tag is present in both the English and Japanese content, indicating the break should be maintained. However, consider if a standard paragraph break would be more appropriate for the target audience.",
+          "suggestion": "Review and potentially replace `<br/>` with a standard paragraph break for improved readability."
+        },
+        {
+          "type": "spelling",
+          "description": "While technically correct, the repetition of 'クライアント' (client) can make the Japanese text feel slightly repetitive and clunky. There might be ways to rephrase to avoid it.",
+          "suggestion": "Consider rephrasing to use synonyms or implied meaning to reduce repetition of 'クライアント'. For example, consider using 'アプリケーション' (application) in some instances where appropriate."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -145,14 +161,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The phrase \"ດຳເນີນການ PKCE ແມ່ນຖືກແນະນໍາ\" is grammatically awkward. It translates literally to 'Performing PKCE is being recommended.'",
-          "suggestion": "PKCE ຄວນຖືກດຳເນີນການ (PKCE should be performed)"
+          "type": "formatting",
+          "description": "The Lao translation retains the HTML `<strong` tag without closing `</strong>` tag. This is a formatting error.",
+          "suggestion": "Remove the opening `<strong>` tag or ensure it has a closing `</strong>` tag."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The word 'ສາທາລະນະ' when translated as 'public' is not capturing the nuance of 'public client' in the OAuth context. A more accurate translation would convey the idea of a client without a server-side component.",
-          "suggestion": "ຕົວຊິ້ນທີ່ບໍ່ມີສ່ວນຫນ້າຂອງໂອນຂໍ້ມູນ (client without a server-side component)"
+          "type": "grammar",
+          "description": "The phrase 'ດຳເນີນການ PKCE ແມ່ນຖືກແນະນໍາ' is slightly awkward. A more natural phrasing would improve readability.",
+          "suggestion": "Consider rephrasing to something like 'ການນໍາໃຊ້ PKCE ແມ່ນຖືກແນະນໍາ' or 'ການເຮັດ PKCE ແມ່ນຖືກແນະນໍາ'."
         }
       ],
       "approved_at": null
@@ -193,13 +209,13 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrase 'precum și nu' is grammatically awkward. 'Precum și' means 'as well as' and the double negative creates an unclear sentence. It should be rephrased to avoid the redundancy.",
-          "suggestion": "PKCE nu reprezintă modul de autentificare a clientului și nici nu înlocuiește cheia secretă a clientului sau un alt mod de autentificare."
+          "description": "The phrase 'precum și' in \"PKCE nu reprezintă modul de autentificare a clientului, precum și nu înlocuiește...\" is redundant and grammatically awkward. It translates to 'as well as' and isn't necessary.",
+          "suggestion": "PKCE nu reprezintă modul de autentificare a clientului și nu înlocuiește..."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'tratează un client public ca și când este unul confidențial' could be improved for clarity.  'as if it were' is a slightly literal translation that can be made more natural.",
-          "suggestion": "PKCE nu permite tratarea unui client public ca fiind unul confidențial."
+          "type": "grammar",
+          "description": "The repetition of 'sau' (or) in “...cheia secretă sau un alt mod de autentificare...” is a little clunky.  While technically correct, it could be more elegant.",
+          "suggestion": "...cheia secretă sau alt mod de autentificare..."
         }
       ],
       "approved_at": null
@@ -209,14 +225,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The term 'секретный' (secret) is used to describe a 'confidential' client. While technically correct, it might be more accurate to use a term that emphasizes the confidentiality aspect, such as 'доверительный' (trustworthy) or 'закрытый' (closed).",
-          "suggestion": "Consider replacing 'секретный' with 'доверительный' or 'закрытый' to better convey the meaning of 'confidential'."
+          "type": "formatting",
+          "description": "The `<br/>` tag is present in both English and Russian, which is generally acceptable, but the formatting consistency could be improved if the English version uses HTML instead of Markdown.",
+          "suggestion": "Ensure consistent formatting across both versions (either both use Markdown or both use HTML)."
         },
         {
-          "type": "formatting",
-          "description": "The use of `<strong`>Note</strong>` is correct, but ensure that it is consistently formatted across the entire documentation. Confirm that the closing tag is also correctly formatted.",
-          "suggestion": "Verify the closing tag `<strong/>Note</strong>` is properly closed and formatted."
+          "type": "incorrect_translation",
+          "description": "The Russian translation uses 'общедоступный клиента в качестве секретного'.  A more accurate and natural phrasing would be 'общедоступного клиента как конфиденциального'.",
+          "suggestion": "Change 'общедоступный клиента в качестве секретного' to 'общедоступного клиента как конфиденциального'."
         }
       ],
       "approved_at": null
@@ -227,23 +243,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Sinhala translation preserves the <strong/> tags from the English, which may not be desirable.  These tags are likely intended for styling, and the styling may not be appropriate or exist in the Sinhala context.",
-          "suggestion": "Remove the <strong/> tags and rely on the application's styling or apply appropriate Sinhala styling."
+          "description": "The strong tag for 'Note' is not correctly rendered in Sinhala. The Sinhala word 'සටහන' should ideally have the appropriate styling applied, but it's appearing as plain text. This is a visual presentation issue.",
+          "suggestion": "Ensure the strong tag is correctly applied to the Sinhala word 'සටහන' to provide the visual emphasis intended. This likely requires specific formatting instructions or CSS styling to handle Sinhala characters correctly."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'ප්‍රමාණිකරණයේ එක් ආකාරයක් නොවන' (pramaanakarayaney ek aadarayak novena) translates to 'not a type of authentication'. While technically correct, it sounds awkward and could be improved for clarity. It might be better to convey a more direct meaning.",
-          "suggestion": "Consider rephrasing to something like 'සේවාදායක ප්‍රමාණිකරණයට අයත් නොවේ' (sevaadaayak pramaanakarayanata ayatha novē) - 'not belonging to client authentication'."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'ප්‍රමාණිකරණය සඳහා ප්‍රතිස්ථාවරයක් නොවන' (pramaanakarayanay sātha pratiistaavarak novena) directly translates to 'not a replacement for authentication'. While accurate, a more nuanced translation that conveys the same concept in a more natural Sinhala way may improve readability.",
-          "suggestion": "Consider rephrasing to 'ප්‍රමාණිකරණය වෙනුවට බැ නොවේ' (pramaanakarayanay venawata ba novē) - 'is not an alternative to authentication'."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'රහස්‍ය සේවාදායකයක් ලෙස සැලකීමට ඉඩ නොදේ' (rahasya sevaadaayakayak lesa selakiyata ida novē) translates literally to 'does not allow being considered as a confidential client'.  This is a little wordy. ",
-          "suggestion": "Consider a more concise phrasing such as 'රහස්‍ය සේවාදායකයා ලෙස සලකන්නට ඉඩ නොදී' (rahasya sevaadaayakaya lesa salakannaata ida novē) - 'does not allow to be considered as confidential'."
+          "description": "The phrase 'allows treating a public client as confidential one' is a bit awkward in Sinhala. A more natural phrasing would better convey the intended meaning of preventing a public client from being treated as confidential.",
+          "suggestion": "Replace 'එය පොදු සේවාදායකයකට රහස්‍ය සේවාදායකයක් ලෙස සැලකීමට ඉඩ නොදේ' with a clearer phrasing like 'පොදු සේවාදායකයෙක් රහස්‍ය සේවාදායකයෙකු ලෙස සැලකීමේ හැකියාව ලබා නොකරයි' or a similar alternative that emphasizes the restriction."
         }
       ],
       "approved_at": null
@@ -266,8 +272,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The strong tag is improperly closed. It should be `<strong>` not `<strong`.",
-          "suggestion": "Change `<strong` to `<strong>` in both instances."
+          "description": "The Serbian translation retains the `<strong` tag, but the closing tag is incorrect. It should be `</strong>`.",
+          "suggestion": "Change `</strong>` to `</strong>`"
         }
       ],
       "approved_at": null
@@ -275,13 +281,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The strong tag is correctly used for 'Note' in both English and Serbian, but its visual representation might be inconsistent across different rendering engines. While not strictly incorrect, it's worth noting.",
-          "suggestion": "Verify consistent rendering of the `<strong/>` tag across all platforms."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -289,24 +289,19 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The phrase \"PKCE bir istemci kimlik doğrulama biçimi değildir ve PKCE bir istemci sırrının veya başka bir istemci kimlik doğrulama türünün yerini almaz\" is a bit clunky. Repetitive use of 'PKCE' makes it less readable.",
-          "suggestion": "PKCE, bir istemci kimlik doğrulama yöntemi değildir ve bir istemci sırrı veya başka bir kimlik doğrulama türünün yerini tutmaz."
+          "type": "incorrect_translation",
+          "description": "The phrase \"PKCE bir istemci kimlik doğrulama biçimi değildir\" is a bit awkward. A more natural phrasing would be something like \"PKCE bir istemci kimlik doğrulama yöntemi değildir\" or \"PKCE bir istemci kimlik doğrulama şekli değildir\".",
+          "suggestion": "PKCE bir istemci kimlik doğrulama yöntemi değildir"
         },
         {
-          "type": "grammar",
-          "description": "The sentence \"Bir istemci bir istemci sırrı veya private_key_jwt gibi başka bir istemci kimlik doğrulama biçimi kullanıyor olsa bile PKCE önerilir.\" is somewhat awkward. The repetition of 'istemci' is noticeable.",
-          "suggestion": "İstemci, ister bir istemci sırrı, ister private_key_jwt gibi başka bir kimlik doğrulama yöntemi kullansın, PKCE önerilir."
+          "type": "incorrect_translation",
+          "description": "The phrase \"genel bir istemcinin gizli bir istemci olarak ele alınmasına izin vermemektedir\" is convoluted and doesn't directly convey the intended meaning.  It should be clearer about PKCE's inability to elevate the client's security level.",
+          "suggestion": "PKCE, genel bir istemcinin gizli bir istemciymiş gibi değerlendirilmesine olanak tanımamaktadır."
         },
         {
           "type": "formatting",
-          "description": "The tag `<strong >Not</strong >:` is not correctly rendered in Turkish. It should be more accurately rendered as `<strong >Not:</strong>`.",
-          "suggestion": "Replace `<strong >Not</strong >:` with `<strong >Not:</strong>`"
-        },
-        {
-          "type": "grammar",
-          "description": "The final sentence \"PKCE istemci kimlik doğrulamasının yerini almadığından, genel bir istemcinin gizli bir istemci olarak ele alınmasına izin vermemektedir.\" is a bit stiff and uses a negative phrasing that makes it harder to understand. It could be rephrased for better clarity and flow.",
-          "suggestion": "PKCE, istemci kimlik doğrulamasının yerini almadığı için, genel bir istemcinin gizli bir istemciymiş gibi değerlendirilmesine olanak sağlamaz."
+          "description": "While the `<strong>` tag is preserved, consider whether bolding is appropriate within the translated text, given potential nuances in Turkish writing style.",
+          "suggestion": "Evaluate whether to remove or alter the bolding."
         }
       ],
       "approved_at": null
@@ -317,13 +312,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrase 'таку як private_key_jwt' sounds slightly awkward. It could be improved for better flow in Ukrainian.",
-          "suggestion": "такий як private_key_jwt"
-        },
-        {
-          "type": "formatting",
-          "description": "The strong tag is correctly used for 'Note' in English but the Ukrainian translation uses 'Примітка.' While technically correct, a more consistent translation might be 'Зауваження' to align closer to the English word 'Note'.",
-          "suggestion": "Replace 'Примітка' with 'Зауваження'"
+          "description": "The sentence \"PKCE рекомендується, навіть якщо клієнт використовує секрет клієнта або іншу форму аутентифікації клієнта, таку як private_key_jwt.\" could be improved for better flow. The conjunction 'таку як' feels a little abrupt.",
+          "suggestion": "PKCE рекомендується, навіть якщо клієнт використовує секрет клієнта або іншу форму аутентифікації, наприклад private_key_jwt."
         }
       ],
       "approved_at": null
@@ -334,13 +324,23 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'client (khách)' in the final sentence is redundant and slightly awkward. 'client' already implies it's a client.",
-          "suggestion": "PKCE không thay thế cho xác thực client, nên nó không cho phép xử lý một public client như một khách bí mật."
+          "description": "The phrase \"client secret\" is consistently translated as \"client secret\" in Vietnamese. While understandable, it's more natural to use the term \"bí mật ứng dụng\" which is the established Vietnamese translation for 'client secret'. Using the English term directly can feel unnatural.",
+          "suggestion": "Replace all instances of \"client secret\" with \"bí mật ứng dụng\"."
         },
         {
-          "type": "formatting",
-          "description": "The original English uses '<br/>' for line breaks. While the Vietnamese translation also uses '<br/>', it might be better to simply rely on standard paragraph formatting for better visual presentation in the intended context.",
-          "suggestion": "Remove the '<br/>' tags. Allow the text to flow naturally into paragraphs."
+          "type": "incorrect_translation",
+          "description": "The phrase \"client (khách)\" is redundant. The word 'khách' (client) is already present in 'client'.",
+          "suggestion": "Remove \"(khách)\" after \"client\"."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"public client\" is consistently translated without reflecting the established Vietnamese term. It's more natural to use \"ứng dụng công cộng\" instead of a direct translation.",
+          "suggestion": "Replace all instances of \"public client\" with \"ứng dụng công cộng\"."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase “confidental one” translates directly and awkwardly. A better rendering would be “ứng dụng bí mật” which preserves the meaning.",
+          "suggestion": "Replace \"khách bí mật\" with \"ứng dụng bí mật\"."
         }
       ],
       "approved_at": null

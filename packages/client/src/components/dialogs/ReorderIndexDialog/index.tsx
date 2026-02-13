@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -76,7 +76,7 @@ const ReorderIndexDialog = ({
     >
       <ModalDialog.Header>{t("Common:Warning")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text fontSize="13px" fontWeight={400} noSelect>
+        <Text fontSize="13px" fontWeight={400}>
           {t("Files:ReorderIndex")}
         </Text>
       </ModalDialog.Body>

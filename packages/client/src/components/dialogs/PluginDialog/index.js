@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
@@ -34,25 +33,15 @@ import { Portal } from "@docspace/shared/components/portal";
 import WrappedComponent from "SRC_DIR/helpers/plugins/WrappedComponent";
 import { PluginComponents } from "SRC_DIR/helpers/plugins/enums";
 import { messageActions } from "SRC_DIR/helpers/plugins/utils";
-import { injectDefaultTheme } from "@docspace/shared/utils";
-
-const StyledFullScreen = styled.div.attrs(injectDefaultTheme)`
-  position: fixed;
-  top: 0;
-  // doesn't require mirroring for RTL
-  left: 0;
-  z-index: 500;
-  background: ${(props) => props.theme.backgroundColor};
-
-  width: 100%;
-  height: 100%;
-`;
+import styles from "./PluginDialog.module.scss";
 
 const PluginDialog = ({
   isVisible,
   dialogHeader,
   dialogBody,
   dialogFooter,
+  withoutBodyPadding = false,
+  withoutHeaderMargin = false,
   onClose,
   onLoad,
   eventListeners,
@@ -90,54 +79,46 @@ const PluginDialog = ({
     if (modalRequestRunning) return;
     const message = await onClose();
 
-    messageActions(
+    messageActions({
       message,
-      null,
-
       pluginName,
-
       setSettingsPluginDialogVisible,
       setCurrentSettingsDialogPlugin,
       updatePluginStatus,
-      null,
       setPluginDialogVisible,
       setPluginDialogProps,
-
       updateContextMenuItems,
       updateInfoPanelItems,
       updateMainButtonItems,
       updateProfileMenuItems,
       updateEventListenerItems,
       updateFileItems,
-    );
+    });
   };
 
   React.useEffect(() => {
     if (eventListeners) {
       eventListeners.forEach((e) => {
         const onAction = async (evt) => {
+          setModalRequestRunning(true);
           const message = await e.onAction(evt);
+          setModalRequestRunning(false);
 
-          messageActions(
+          messageActions({
             message,
-            null,
-
             pluginName,
-
             setSettingsPluginDialogVisible,
             setCurrentSettingsDialogPlugin,
             updatePluginStatus,
-            null,
             setPluginDialogVisible,
             setPluginDialogProps,
-
             updateContextMenuItems,
             updateInfoPanelItems,
             updateMainButtonItems,
             updateProfileMenuItems,
             updateEventListenerItems,
             updateFileItems,
-          );
+          });
         };
 
         functionsRef.current.push(onAction);
@@ -171,7 +152,7 @@ const PluginDialog = ({
   const rootElement = document.getElementById("root");
 
   const dialog = fullScreen ? (
-    <StyledFullScreen>
+    <div className={styles.fullScreen}>
       <WrappedComponent
         pluginName={pluginName}
         component={{
@@ -179,10 +160,17 @@ const PluginDialog = ({
           props: dialogBodyProps,
         }}
         setModalRequestRunning={setModalRequestRunning}
+        modalRequestRunning={modalRequestRunning}
       />
-    </StyledFullScreen>
+    </div>
   ) : (
-    <ModalDialog visible={isVisible} onClose={onCloseAction} {...rest}>
+    <ModalDialog
+      visible={isVisible}
+      onClose={onCloseAction}
+      withoutPadding={withoutBodyPadding}
+      withoutHeaderMargin={withoutHeaderMargin}
+      {...rest}
+    >
       <ModalDialog.Header>{dialogHeaderProps}</ModalDialog.Header>
       <ModalDialog.Body>
         <WrappedComponent
@@ -192,6 +180,7 @@ const PluginDialog = ({
             props: dialogBodyProps,
           }}
           setModalRequestRunning={setModalRequestRunning}
+          modalRequestRunning={modalRequestRunning}
         />
       </ModalDialog.Body>
       {dialogFooterProps ? (
@@ -203,6 +192,7 @@ const PluginDialog = ({
               props: dialogFooterProps,
             }}
             setModalRequestRunning={setModalRequestRunning}
+            modalRequestRunning={modalRequestRunning}
           />
         </ModalDialog.Footer>
       ) : null}

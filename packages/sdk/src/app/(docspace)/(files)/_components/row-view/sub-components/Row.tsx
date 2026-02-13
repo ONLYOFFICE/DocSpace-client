@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,19 +29,21 @@
 import React from "react";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "styled-components";
 import classNames from "classnames";
 
+import { useTheme } from "@docspace/shared/hooks/useTheme";
 import {
-  StyledWrapper,
-  StyledSimpleFilesRow,
-} from "@docspace/shared/styles/FilesRow.styled";
+  FilesRow,
+  FilesRowWrapper,
+} from "@docspace/shared/components/files-row";
 import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
 import Badges from "@docspace/shared/components/badges";
 
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 
+import useFilesActions from "@/app/(docspace)/_hooks/useFilesActions";
+import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";
 import useContextMenuModel from "../../../../_hooks/useContextMenuModel";
 import { generateFilesItemValue } from "../../../_utils";
 
@@ -49,8 +51,6 @@ import { RowContent } from "./RowContent";
 import { RowProps } from "../RowView.types";
 
 import styles from "../RowView.module.scss";
-import useFilesActions from "@/app/(docspace)/_hooks/useFilesActions";
-import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";
 
 const Row = observer(
   ({
@@ -65,7 +65,7 @@ const Row = observer(
     const { isItemActive } = useActiveItemsStore();
 
     const { t } = useTranslation(["Common"]);
-    const theme = useTheme();
+    const { isBase } = useTheme();
     const { openFile } = useFilesActions({ t });
 
     const { getContextMenuModel } = useContextMenuModel({ item });
@@ -78,12 +78,14 @@ const Row = observer(
       <Badges
         className={styles.badgesComponent}
         t={t}
-        theme={theme}
+        themeIsBase={isBase}
         item={item}
         viewAs="row"
         showNew={false}
         onFilesClick={() => {
-          !item.isFolder && openFile(item);
+          if (!item.isFolder) {
+            openFile(item);
+          }
         }}
       />
     );
@@ -105,7 +107,7 @@ const Row = observer(
     const value = generateFilesItemValue(item, false, index);
 
     return (
-      <StyledWrapper
+      <FilesRowWrapper
         isActive={false}
         isFirstElem={index === 0}
         checked={isChecked}
@@ -121,14 +123,12 @@ const Row = observer(
           className="files-item"
           value={value}
         >
-          <StyledSimpleFilesRow
+          <FilesRow
             key={item.id}
             checked={isChecked}
             mode="modern"
             isIndexEditingMode={false}
-            onChangeIndex={() => {}}
-            sectionWidth={0}
-            folderCategory={null}
+            folderCategory={false}
             isActive={false}
             isIndexUpdated={false}
             isDragging={false}
@@ -152,9 +152,9 @@ const Row = observer(
               displayFileExtension={displayFileExtension}
               badgesComponent={badgesComponent}
             />
-          </StyledSimpleFilesRow>
+          </FilesRow>
         </DragAndDrop>
-      </StyledWrapper>
+      </FilesRowWrapper>
     );
   },
 );

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -105,6 +105,8 @@ export type TFrameEvents = {
   onNotFound?: null | (() => void);
   onSelectCallback?: null | ((e: Event | object) => void);
   onSignOut?: null | (() => void);
+  onEditorOpen?: null | ((e: Event | object) => void);
+  onFileManagerClick?: null | ((e: Event | object) => void);
 };
 
 export type TFrameConfig = {

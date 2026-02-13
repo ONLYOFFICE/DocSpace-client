@@ -1,7 +1,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import { TableBody } from "@docspace/shared/components/table";
+import { TableContainer, TableBody } from "@docspace/shared/components/table";
 import { UserStore } from "@docspace/shared/store/UserStore";
 
 import OAuthStore from "SRC_DIR/store/OAuthStore";
@@ -10,7 +10,7 @@ import Row from "./Row";
 import Header from "./Header";
 
 import { TableViewProps } from "./TableView.types";
-import { TableWrapper } from "./TableView.styled";
+import styles from "../../authorized-apps.module.scss";
 
 const TABLE_VERSION = "1";
 const COLUMNS_SIZE = `consentColumnsSize_ver-${TABLE_VERSION}`;
@@ -64,7 +64,11 @@ const TableView = ({
   );
 
   return (
-    <TableWrapper forwardedRef={tableRef} useReactWindow>
+    <TableContainer
+      className={styles.tableWrapper}
+      forwardedRef={tableRef as React.RefObject<HTMLDivElement>}
+      useReactWindow
+    >
       <Header
         sectionWidth={sectionWidth}
         tableRef={tableRef.current}
@@ -81,7 +85,7 @@ const TableView = ({
         itemCount={itemCount || 0}
         isIndexEditingMode={false}
       >
-        {items.map((item) => (
+        {items.map((item, index) => (
           <Row
             key={item.clientId}
             item={item}
@@ -90,10 +94,11 @@ const TableView = ({
             setSelection={setSelection}
             changeClientStatus={changeClientStatus}
             getContextMenuItems={getContextMenuItems}
+            dataTestId={`auth_row_${index}`}
           />
         ))}
       </TableBody>
-    </TableWrapper>
+    </TableContainer>
   );
 };
 

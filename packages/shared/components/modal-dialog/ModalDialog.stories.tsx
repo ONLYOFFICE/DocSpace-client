@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -130,7 +130,6 @@ const Template = ({ ...args }: ModalDialogProps) => {
           {Array(blocksCount)
             .fill(null)
             .map((_, index) => (
-              // eslint-disable-next-line react/no-array-index-key
               <div key={index}>
                 <h3>Section 1</h3>
                 <p>

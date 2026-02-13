@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,6 +28,7 @@ import { useEffect, useState, useMemo, useRef } from "react";
 import { observer, inject } from "mobx-react";
 import { withTranslation, Trans } from "react-i18next";
 import { useNavigate } from "react-router";
+import { now, addToDate, parseToDateTime, isAfter } from "@docspace/shared/utils/date";
 
 import {
   EmployeeType,
@@ -43,18 +44,33 @@ import api from "@docspace/shared/api";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
-import { checkIfAccessPaid } from "SRC_DIR/helpers";
+import { Link } from "@docspace/shared/components/link";
+import { checkIfAccessPaid } from "@docspace/shared/utils/filterPaidRoleOptions";
 import PeopleSelector from "@docspace/shared/selectors/People";
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
+import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
 import { fixAccess } from "./utils";
 import ExternalLinks from "./sub-components/ExternalLinks";
 import InviteInput from "./sub-components/InviteInput";
 import ItemsList from "./sub-components/ItemsList";
+import LinkSettingsPanel from "../LinkSettingsPanel";
+import { copyShareLink } from "@docspace/shared/utils/copy";
+import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
+import {
+  getInviteLink,
+  createInviteLink,
+  updateInviteLink,
+} from "@docspace/shared/api/portal";
+import { useInterfaceDirection } from "@docspace/shared/hooks/useInterfaceDirection";
+import { getDate } from "@docspace/shared/components/share/Share.helpers";
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { Text } from "@docspace/shared/components/text";
+import styles from "./InvitePanel.module.scss";
+import { Badge } from "@docspace/shared/components/badge";
 
 const InvitePanel = ({
   folders,
@@ -64,11 +80,11 @@ const InvitePanel = ({
   setInviteItems,
   setInvitePanelOptions,
   t,
+  theme,
   isVisible,
   defaultAccess,
   setInfoPanelIsMobileHidden,
   updateInfoPanelMembers,
-  isRoomMembersPanelOpen,
   setInviteLanguage,
   isRoomAdmin,
   setIsNewUserByCurrentUser,
@@ -82,6 +98,8 @@ const InvitePanel = ({
   allowInvitingGuests,
   checkGuests,
   hasGuests,
+  culture,
+  currentUserId,
 }) => {
   const [invitePanelIsLoding, setInvitePanelIsLoading] = useState(
     roomId !== -1,
@@ -93,18 +111,26 @@ const InvitePanel = ({
   const [externalLinksVisible, setExternalLinksVisible] = useState(false);
   const [scrollAllPanelContent, setScrollAllPanelContent] = useState(false);
   const [activeLink, setActiveLink] = useState({});
+  const [accountsLink, setAccountsLink] = useState(false);
   const [addUsersPanelVisible, setAddUsersPanelVisible] = useState(false);
+  const [linkSettingsPanelVisible, setLinkSettingsPanelVisible] =
+    useState(false);
   const [isMobileView, setIsMobileView] = useState(isMobile());
   const [inputValue, setInputValue] = useState("");
   const [usersList, setUsersList] = useState([]);
   const [cultureKey, setCultureKey] = useState();
   const [showGuestsTab, setShowGuestsTab] = useState(true);
+  const [linkSelectedAccess, setLinkSelectedAccess] = useState(null);
+  const [isLinksToggling, setIsLinksToggling] = useState(false);
+  const [requestIsRunning, setRequestIsRunning] = useState(false);
 
   const navigate = useNavigate();
 
   const inputsRef = useRef();
   const invitePanelBodyRef = useRef();
   const loaderRef = useRef();
+
+  const { isRTL } = useInterfaceDirection();
 
   const onClose = () => {
     setInviteLanguage({ key: "", label: "" });
@@ -117,6 +143,10 @@ const InvitePanel = ({
     setInviteItems([]);
   };
 
+  const onBackClick = () => {
+    if (!hideSelector && addUsersPanelVisible) setAddUsersPanelVisible(false);
+  };
+
   const onCheckHeight = () => {
     setScrollAllPanelContent(!isDesktop());
     setIsMobileView(isMobile());
@@ -127,7 +157,6 @@ const InvitePanel = ({
   };
 
   const roomType = selectedRoom ? selectedRoom.roomType : -1;
-  const isPublicRoomType = roomType === RoomsType.PublicRoom;
 
   const onChangeExternalLinksVisible = (visible) => {
     setExternalLinksVisible(visible);
@@ -179,7 +208,14 @@ const InvitePanel = ({
       .then((links) => {
         const link = links && links[0];
         if (link) {
-          const { shareLink, id, title, expirationDate } = link.sharedTo;
+          const {
+            shareLink,
+            id,
+            title,
+            expirationDate,
+            currentUseCount,
+            maxUseCount,
+          } = link.sharedTo;
 
           const newLink = {
             id,
@@ -187,6 +223,8 @@ const InvitePanel = ({
             shareLink,
             expirationDate,
             access: link.access || defaultAccess,
+            currentUseCount,
+            maxUseCount,
           };
 
           onChangeExternalLinksVisible(!!links.length);
@@ -236,7 +274,9 @@ const InvitePanel = ({
     };
 
     const needRemoveGuests = !allowInvitingGuests
-      ? inviteItems.some((item) => item.userType === EmployeeType.Guest)
+      ? inviteItems.some(
+          (item) => item.userType === EmployeeType.Guest && !item.status,
+        )
       : false;
 
     setHasErrors(hasValidationErrors() || needRemoveGuests);
@@ -264,6 +304,41 @@ const InvitePanel = ({
     return () => document.removeEventListener("keyup", onKeyPress);
   });
 
+  const getContactsInviteLink = async () => {
+    if (requestIsRunning) return;
+
+    try {
+      setRequestIsRunning(true);
+
+      const linkData = await getInviteLink(defaultAccess);
+      setRequestIsRunning(false);
+      setAccountsLink(true);
+
+      if (!linkData) {
+        return;
+      }
+
+      onChangeExternalLinksVisible(true);
+
+      const newLinkData = {
+        access: linkData.employeeType,
+        shareLink: linkData.url,
+        expirationDate: linkData.expiration,
+        ...linkData,
+      };
+
+      setActiveLink(newLinkData);
+    } catch (error) {
+      toastr.error(error);
+    }
+  };
+
+  useEffect(() => {
+    if (roomId === -1 && !accountsLink) {
+      getContactsInviteLink();
+    }
+  }, [roomId, getContactsInviteLink, accountsLink]);
+
   const onClickPayments = () => {
     const paymentPageUrl = combineUrl(
       "/portal-settings",
@@ -289,11 +364,11 @@ const InvitePanel = ({
         ns="Common"
         components={{
           1: (
-            <ColorTheme
+            <Link
               tag="a"
-              themeId={ThemeId.Link}
               onClick={onClickPayments}
               target="_blank"
+              color="accent"
             />
           ),
         }}
@@ -352,9 +427,7 @@ const InvitePanel = ({
         toastr.warning(result?.warning);
       }
 
-      if (isRoomMembersPanelOpen) {
-        updateInfoPanelMembers(t);
-      }
+      updateInfoPanelMembers();
     } catch (err) {
       let error = err;
 
@@ -402,6 +475,220 @@ const InvitePanel = ({
     return filtered;
   };
 
+  const onCloseLinkSettingsPanel = () => {
+    setLinkSettingsPanelVisible(false);
+  };
+
+  const copyLink = (link, showToast = true) => {
+    if (!link.shareLink && !link.url) return;
+
+    const expirationDate = link?.expirationDate ?? link.expiration;
+    const isExpired = isAfter(now(), parseToDateTime(expirationDate));
+    const isLimit = link?.currentUseCount >= link?.maxUseCount;
+
+    if (isExpired) {
+      if (!showToast) return;
+      return toastr.error(t("Common:LinkExpired"));
+    }
+    if (isLimit) {
+      if (!showToast) return;
+      return toastr.error(t("Common:LinkNoLongerAvailable"));
+    }
+
+    const date = getDate(expirationDate);
+
+    const toastTranslation = date ? (
+      <Trans
+        t={t}
+        ns="Common"
+        values={{ date }}
+        i18nKey="LinkExpireAfter"
+        components={{ 1: <strong key="strong-expire-after" /> }}
+      />
+    ) : (
+      <Trans
+        t={t}
+        ns="Common"
+        i18nKey="LinkNoExpiration"
+        components={{ 1: <strong key="strong-link-valid" /> }}
+      />
+    );
+
+    toastr.success(toastTranslation, t("Common:LinkCopiedToClipboard"));
+    copyShareLink(link.shareLink ?? link.url);
+  };
+
+  const editLink = async (linkAccess = null, defaultLink) => {
+    const type = getDefaultAccessUser(roomType);
+
+    const expiration = defaultLink
+      ? defaultLink?.expirationDate
+      : addToDate(now(), 7, "days");
+
+    let link = null;
+
+    try {
+      setIsLinksToggling(true);
+      link = await api.rooms.setInvitationLinks(
+        roomId,
+        "Invite",
+        type,
+        undefined,
+        expiration,
+        defaultLink?.maxUseCount,
+      );
+      onChangeExternalLinksVisible(true);
+    } catch (error) {
+      toastr.error(error);
+    } finally {
+      setIsLinksToggling(false);
+    }
+
+    const {
+      shareLink,
+      id,
+      title,
+      expirationDate,
+      currentUseCount,
+      maxUseCount,
+    } = link.sharedTo;
+
+    const newShareLink = {
+      id,
+      title,
+      shareLink,
+      expirationDate,
+      access: linkAccess ?? (link.access || defaultAccess),
+      currentUseCount,
+      maxUseCount,
+    };
+
+    copyLink(newShareLink);
+    setShareLinks([newShareLink]);
+    return setActiveLink(newShareLink);
+  };
+
+  const onSelectAccess = async (access) => {
+    let link = null;
+    const selectedAccess = access.access;
+
+    if (roomId === -1) {
+      try {
+        const linkData = await getInviteLink(selectedAccess);
+        if (!linkData) return setInviteContactsLink({ access: selectedAccess });
+
+        const linkDataObj = {
+          ...linkData,
+          access: linkData.employeeType,
+          shareLink: linkData.url,
+          expirationDate: linkData.expiration,
+        };
+
+        setActiveLink(linkDataObj);
+        copyLink(linkDataObj, false);
+        setExternalLinksVisible(true);
+        return;
+      } catch (error) {
+        toastr.error(error);
+      }
+    } else {
+      try {
+        let linkExpirationDate = parseToDateTime(
+          access.expirationDate ?? activeLink?.expirationDate,
+        );
+        const isExpired = isAfter(now(), linkExpirationDate);
+
+        if (isExpired) {
+          linkExpirationDate = addToDate(now(), 7, "days");
+        }
+
+        if (access.expirationDate === null) {
+          linkExpirationDate = null;
+        }
+
+        const maxUsersCount =
+          access.maxUseCount || access?.maxUseCount === null
+            ? access.maxUseCount
+            : activeLink?.maxUseCount;
+
+        const newLink = await api.rooms.setInvitationLinks(
+          roomId,
+          "Invite",
+          +selectedAccess,
+          shareLinks[0]?.id ?? null,
+          linkExpirationDate,
+          maxUsersCount,
+        );
+
+        const {
+          shareLink,
+          id,
+          title,
+          expirationDate,
+          currentUseCount,
+          maxUseCount,
+        } = newLink.sharedTo;
+
+        const newActiveLink = {
+          id,
+          title,
+          shareLink,
+          expirationDate,
+          access: newLink.access,
+          currentUseCount,
+          maxUseCount,
+        };
+
+        link = newActiveLink;
+
+        setActiveLink(newActiveLink);
+
+        setLinkSelectedAccess(access);
+        copyLink(link, false);
+      } catch (error) {
+        toastr.error(error);
+      }
+    }
+  };
+
+  const setInviteContactsLink = async (defaultLink) => {
+    if (requestIsRunning) return;
+
+    const createNewLink =
+      activeLink?.access != defaultLink?.access || !activeLink?.access;
+
+    setRequestIsRunning(true);
+    try {
+      const requestData = {
+        id: activeLink?.id,
+        employeeType: defaultLink?.access ?? defaultAccess,
+        maxUseCount: defaultLink?.maxUseCount,
+        expiration: defaultLink
+          ? defaultLink.expirationDate
+          : addToDate(now(), 7, "days"),
+      };
+
+      const link = createNewLink
+        ? await createInviteLink(requestData)
+        : await updateInviteLink(requestData);
+
+      const linkData = {
+        ...link,
+        access: link.employeeType,
+        shareLink: link.url,
+        expirationDate: link.expiration,
+      };
+
+      setActiveLink(linkData);
+      copyLink(link);
+      onChangeExternalLinksVisible(true);
+    } catch (error) {
+      toastr.error(error);
+    } finally {
+      setRequestIsRunning(false);
+    }
+  };
+
   const bodyInvitePanel = useMemo(() => {
     return (
       <div style={{ display: "contents" }} ref={invitePanelBodyRef}>
@@ -416,6 +703,13 @@ const InvitePanel = ({
           setActiveLink={setActiveLink}
           activeLink={activeLink}
           isMobileView={isMobileView}
+          setLinkSettingsPanelVisible={setLinkSettingsPanelVisible}
+          onSelectAccess={onSelectAccess}
+          copyLink={copyLink}
+          editLink={editLink}
+          isLinksToggling={isLinksToggling}
+          setIsLinksToggling={setIsLinksToggling}
+          setInviteContactsLink={setInviteContactsLink}
         />
 
         <InviteInput
@@ -424,7 +718,6 @@ const InvitePanel = ({
           setCultureKey={setCultureKey}
           roomType={roomType}
           inputsRef={inputsRef}
-          addUsersPanelVisible={addUsersPanelVisible}
           setAddUsersPanelVisible={setAddUsersPanelVisible}
           isMobileView={isMobileView}
           removeExist={removeExist}
@@ -459,6 +752,7 @@ const InvitePanel = ({
     scrollAllPanelContent,
     hasInvitedUsers,
     invitePanelBodyRef,
+    setInviteContactsLink,
   ]);
 
   const closeUsersPanel = () => {
@@ -468,15 +762,19 @@ const InvitePanel = ({
   const addItems = (users, access) => {
     users.forEach((u) => {
       u.access = access.access;
-      const isAccessPaid = checkIfAccessPaid(u.access);
+      const shouldMakeFreeRole =
+        checkIfAccessPaid(u.access) &&
+        (u.isGroup || u.isVisitor || u.isCollaborator);
+      const shouldMakeViewerRole =
+        roomType === RoomsType.AIRoom &&
+        u.isVisitor &&
+        u.access !== ShareAccessRights.ReadOnly;
 
-      if (isAccessPaid) {
-        if (u.isGroup || u.isVisitor || u.isCollaborator) {
-          u = fixAccess(u, t, roomType);
+      if (shouldMakeFreeRole || shouldMakeViewerRole) {
+        u = fixAccess(u, t, roomType);
 
-          if (isUserTariffLimit) {
-            toastr.error(<PaidQuotaLimitError />);
-          }
+        if (isUserTariffLimit) {
+          toastr.error(<PaidQuotaLimitError />);
         }
       }
     });
@@ -513,15 +811,47 @@ const InvitePanel = ({
 
   const access = defaultAccess ?? ShareAccessRights.ReadOnly;
 
+  const filteredAccesses =
+    roomType === -1 ? accessOptions : filterPaidRoleOptions(accessOptions);
+
+  const onSubmitLinkSettingsPanel = (defaultLink) => {
+    if (roomId === -1) {
+      setInviteContactsLink(defaultLink);
+      return onCloseLinkSettingsPanel();
+    }
+
+    const defaultLinkAccess = (linkSelectedAccess ?? defaultLink).access;
+
+    onCloseLinkSettingsPanel();
+    if (activeLink?.shareLink) {
+      const accessData = linkSelectedAccess ?? defaultLink;
+
+      onSelectAccess({
+        ...accessData,
+        maxUseCount: defaultLink.maxUseCount,
+        expirationDate: defaultLink.expirationDate,
+      });
+    } else editLink(defaultLinkAccess, defaultLink);
+
+    onChangeExternalLinksVisible(true);
+  };
+
+  const currentAccess = accessOptions.find((a) => a.access === defaultAccess);
+
   return (
     <ModalDialog
       visible={isVisible}
       onClose={onClose}
+      onBackClick={onBackClick}
       displayType={ModalDialogType.aside}
-      containerVisible={!hideSelector ? addUsersPanelVisible : null}
+      containerVisible={
+        linkSettingsPanelVisible ||
+        (!hideSelector ? addUsersPanelVisible : null)
+      }
       isLoading={invitePanelIsLoding}
       withBodyScroll
       isInvitePanelLoader
+      id="invite_panel_modal"
     >
       {!hideSelector && addUsersPanelVisible ? (
         <ModalDialog.Container>
@@ -540,11 +870,13 @@ const InvitePanel = ({
             onAccessRightsChange={() => {}}
             isMultiSelect
             disableDisabledUsers
-            withGroups={!isPublicRoomType}
+            withGroups
             roomId={roomId}
+            isAgent={roomType === RoomsType.AIRoom}
             disableInvitedUsers={invitedUsersArray}
             withGuests={showGuestsTab}
             withHeader
+            dataTestId="invite_panel_people_selector"
             headerProps={{
               // Todo: Update groups empty screen texts when they are ready
               headerLabel: t("Common:Contacts"),
@@ -557,11 +889,75 @@ const InvitePanel = ({
                 closeUsersPanel();
               },
             }}
+            currentUserId={currentUserId}
           />
         </ModalDialog.Container>
       ) : null}
 
-      <ModalDialog.Header>{t("Common:Invite")}</ModalDialog.Header>
+      {linkSettingsPanelVisible ? (
+        <ModalDialog.Container>
+          <LinkSettingsPanel
+            culture={culture}
+            isVisible={linkSettingsPanelVisible}
+            onClose={() => {
+              onCloseLinkSettingsPanel();
+              setLinkSelectedAccess(null);
+              onClose();
+            }}
+            onBackClick={onCloseLinkSettingsPanel}
+            onSubmit={onSubmitLinkSettingsPanel}
+            activeLink={activeLink}
+            filteredAccesses={filteredAccesses}
+            linkSelectedAccess={linkSelectedAccess}
+            setLinkSelectedAccess={setLinkSelectedAccess}
+            defaultAccess={defaultAccess ?? ShareAccessRights.ReadOnly}
+            isContacts={roomId === -1}
+          />
+        </ModalDialog.Container>
+      ) : null}
+
+      <ModalDialog.Header>
+        <div className={styles.invitePanelHeader}>
+          {t("Common:Invite")} {roomId === -1 ? currentAccess?.label : ""}
+          {roomId === -1 ? (
+            <HelpButton
+              tooltipMaxWidth="448px"
+              place="bottom-start"
+              tooltipStyle={{
+                transform: isRTL ? "translateX(16px)" : "translateX(-16px)",
+              }}
+              tooltipContent={
+                <div className={styles.tooltipContent}>
+                  <Text
+                    className={styles.tooltipLabel}
+                    fontSize="12px"
+                    fontWeight={600}
+                  >
+                    {currentAccess?.label}
+                    {currentAccess.quota ? (
+                      <Badge
+                        label={currentAccess.quota}
+                        backgroundColor={currentAccess.color}
+                        fontSize="9px"
+                        isPaidBadge
+                        noHover
+                      />
+                    ) : null}
+                  </Text>
+
+                  <Text
+                    fontSize="12px"
+                    fontWeight={400}
+                    className={styles.tooltipDescription}
+                  >
+                    {currentAccess?.description}
+                  </Text>
+                </div>
+              }
+            />
+          ) : null}
+        </div>
+      </ModalDialog.Header>
       <ModalDialog.Body>{bodyInvitePanel}</ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -573,6 +969,7 @@ const InvitePanel = ({
           onClick={onClickSend}
           label={t("SendInvitation")}
           isLoading={isLoading}
+          testId="invite_panel_send_button"
         />
         <Button
           className="cancel-button"
@@ -581,6 +978,7 @@ const InvitePanel = ({
           onClick={onClose}
           label={t("Common:CancelButton")}
           isDisabled={isLoading}
+          testId="invite_panel_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>
@@ -596,6 +994,7 @@ export default inject(
     authStore,
     currentQuotaStore,
     userStore,
+    peopleStore,
   }) => {
     const { theme, standalone, allowInvitingGuests, checkGuests, hasGuests } =
       settingsStore;
@@ -603,7 +1002,6 @@ export default inject(
     const {
       setIsMobileHidden: setInfoPanelIsMobileHidden,
       updateInfoPanelMembers,
-      isRoomMembersPanelOpen,
     } = infoPanelStore;
 
     const {
@@ -622,6 +1020,7 @@ export default inject(
     const { isUserTariffLimit } = currentQuotaStore;
 
     const { isOwner, isAdmin } = userStore.user;
+    const { culture } = settingsStore;
 
     return {
       folders,
@@ -636,7 +1035,6 @@ export default inject(
       getFolderInfo,
       setInfoPanelIsMobileHidden,
       updateInfoPanelMembers,
-      isRoomMembersPanelOpen,
       isRoomAdmin,
 
       setIsNewUserByCurrentUser,
@@ -648,6 +1046,8 @@ export default inject(
       allowInvitingGuests,
       checkGuests,
       hasGuests,
+      culture,
+      currentUserId: userStore.user.id,
     };
   },
 )(

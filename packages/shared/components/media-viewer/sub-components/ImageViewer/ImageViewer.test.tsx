@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,8 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { describe, it, expect, vi } from "vitest";
 import { render, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import { TFile } from "api/files/types";
 
 import { ImageViewer } from ".";
@@ -33,6 +33,7 @@ import { getCustomToolbar } from "../../MediaViewer.helpers";
 import ImageViewerProps from "./ImageViewer.props";
 
 const file: TFile = {
+  shortWebUrl: "",
   isFile: true,
   access: 0,
   canShare: true,
@@ -80,6 +81,7 @@ const file: TFile = {
     CreateRoomFrom: false,
     CopyLink: false,
     Embed: false,
+    Vectorization: false,
   },
   shared: false,
   thumbnailStatus: 1,
@@ -156,7 +158,7 @@ describe("ImageViewer", () => {
   });
 
   it("calls onMask callback when image is clicked", () => {
-    const onMask = jest.fn();
+    const onMask = vi.fn();
     const { getByTestId } = render(
       <ImageViewer {...mockProps} onMask={onMask} />,
     );

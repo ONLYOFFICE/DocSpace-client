@@ -45,6 +45,7 @@ import { MobileDetails } from "../MobileDetails";
 import { DesktopDetails } from "../DesktopDetails";
 import { ViewerPlayer } from "../ViewerPlayer";
 import { PDFViewer } from "../PDFViewer";
+import { ViewerLoader } from "../ViewerLoader";
 
 import type ViewerProps from "./Viewer.props";
 
@@ -66,6 +67,7 @@ export const Viewer = (props: ViewerProps) => {
     headerIcon,
     playlistPos,
     isPublicFile,
+    isDecrypting,
     isPreviewFile,
     currentDeviceType,
     onNextClick,
@@ -279,7 +281,9 @@ export const Viewer = (props: ViewerProps) => {
         </>
       ) : null}
 
-      {isImage ? (
+      {isDecrypting ? (
+        <ViewerLoader isLoading />
+      ) : isImage ? (
         <ImageViewer
           key={targetFile?.id}
           isDecodedImage={isDecodedImage}

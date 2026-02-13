@@ -49,6 +49,7 @@ interface ViewerProps {
   playlistPos: number;
   isPreviewFile?: boolean;
   isPublicFile?: boolean;
+  isDecrypting?: boolean;
 
   currentDeviceType?: DeviceType;
 

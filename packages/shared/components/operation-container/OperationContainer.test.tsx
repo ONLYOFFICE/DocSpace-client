@@ -68,7 +68,7 @@ describe("OperationContainer", () => {
 
   it("renders portal logo", () => {
     render(<OperationContainer {...defaultProps} />);
-    expect(screen.getByTestId("portal-logo")).toBeInTheDocument();
+    expect(screen.getByAltText("portal logo")).toBeInTheDocument();
   });
 
   it("renders operation logo", () => {

@@ -66,7 +66,7 @@ const OperationContainer = (props: OperationContainerProps) => {
       aria-label={title}
       data-testid="operation-container"
     >
-      <PortalLogo isResizable data-testid="portal-logo" />
+      <PortalLogo isResizable />
       {logo}
       <Text className={styles.title}>{title}</Text>
       <Text className={styles.description}>{description}</Text>

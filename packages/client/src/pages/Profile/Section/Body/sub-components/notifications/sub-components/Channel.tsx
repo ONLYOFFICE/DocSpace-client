@@ -38,8 +38,6 @@ import { Link, LinkType, LinkTarget } from "@docspace/ui-kit/components/link";
 import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { THIRD_PARTY_SERVICES_URL } from "@docspace/shared/constants";
 
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import styles from "../Notifications.module.scss";
 

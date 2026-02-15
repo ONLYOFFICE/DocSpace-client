@@ -28,7 +28,7 @@ import { useEffect, useState } from "react";
 import { getSystemTheme } from "@docspace/ui-kit/utils/get-system-theme";
 import { setCookie } from "@docspace/ui-kit/utils/cookie";
 import { ThemeKeys } from "@docspace/ui-kit/enums";
-import { SYSTEM_THEME_KEY } from "@docspace/ui-kit/providers/theme/themes/constants";
+import { SYSTEM_THEME_KEY } from "@docspace/ui-kit/providers/theme";
 
 export const useThemeDetector = () => {
   const isDesktopClient = window.AscDesktopEditor !== undefined;

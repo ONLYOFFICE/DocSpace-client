@@ -57,7 +57,7 @@ import { TUser } from "@docspace/shared/api/people/types";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { TAvatarModel } from "@docspace/ui-kit/components/avatar";
 import { TopLoaderService as TopLoadingIndicator } from "@docspace/ui-kit";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@docspace/ui-kit/context";
 import { useInterfaceDirection } from "@docspace/ui-kit/context/InterfaceDirectionContext";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 

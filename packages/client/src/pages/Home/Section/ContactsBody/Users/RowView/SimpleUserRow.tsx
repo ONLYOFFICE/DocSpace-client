@@ -27,7 +27,7 @@
 import React from "react";
 
 import { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
-import type { TData } from "@docspace/ui-kit/components/rows/row/Row.types";
+import type { TRowData } from "@docspace/ui-kit/components/rows";
 
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
 
@@ -74,7 +74,7 @@ const SimpleUserRow = (props: SimpleUserRowProps) => {
       <div className="user-item user-row-container">
         <StyledSimpleUserRow
           key={item.id}
-          data={item as unknown as TData}
+          data={item as unknown as TRowData}
           element={element}
           onSelect={onContentRowSelect!}
           checked={isChecked}

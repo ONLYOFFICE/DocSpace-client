@@ -30,7 +30,7 @@ import { Toast } from "@docspace/ui-kit/components/toast";
 import { TenantStatus } from "@docspace/shared/enums";
 import { ThemeKeys } from "@docspace/ui-kit/enums";
 import { LANGUAGE } from "@docspace/shared/constants";
-import { SYSTEM_THEME_KEY } from "@docspace/ui-kit/providers/theme/themes/constants";
+import { SYSTEM_THEME_KEY } from "@docspace/ui-kit/providers/theme";
 import {
 	getDirectionByLanguage,
 	getFontFamilyDependingOnLanguage,

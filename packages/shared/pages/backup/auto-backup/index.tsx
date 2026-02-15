@@ -40,7 +40,7 @@ import { OPERATIONS_NAME } from "../../../constants";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { getBackupStorage } from "../../../api/settings";
 import AutoBackupLoader from "../../../skeletons/backup/AutoBackup";
-import StatusMessage from "@docspace/ui-kit/components/status-message";
+import { StatusMessage } from "@docspace/ui-kit/components/status-message";
 import SocketHelper, {
   SocketEvents,
   type TSocketListener,
@@ -48,7 +48,7 @@ import SocketHelper, {
 import { getBackupProgressInfo } from "../../../utils/common";
 import { useStateCallback } from "../../../hooks/useStateCallback";
 import type { Nullable, Option } from "../../../types";
-import OperationsProgressButton from "@docspace/ui-kit/components/operations-progress-button";
+import { OperationsProgressButton } from "@docspace/ui-kit/components/operations-progress-button";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { Text } from "@docspace/ui-kit/components/text";
 import { RadioButton } from "@docspace/ui-kit/components/radio-button";

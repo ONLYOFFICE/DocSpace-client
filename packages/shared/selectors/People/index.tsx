@@ -59,7 +59,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { globalColors } from "@docspace/ui-kit/providers/theme";
 import { isNextImage } from "../../utils/typeGuards";
 import { toastr } from "@docspace/ui-kit/components/toast";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@docspace/ui-kit/context";
 
 import { PeopleSelectorProps } from "./PeopleSelector.types";
 import StyledSendClockIcon from "./components/SendClockIcon";

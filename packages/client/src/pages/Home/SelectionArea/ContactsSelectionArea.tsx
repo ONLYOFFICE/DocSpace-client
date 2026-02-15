@@ -29,7 +29,7 @@ import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
 
 import { SelectionArea as SelectionAreaComponent } from "@docspace/ui-kit/components/selection-area";
-import { TOnMove } from "@docspace/ui-kit/components/selection-area/SelectionArea.types";
+import type { TOnMove } from "@docspace/ui-kit/components/selection-area";
 
 import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
 import ContactsHotkeysStore from "SRC_DIR/store/contacts/ContactsHotkeysStore";

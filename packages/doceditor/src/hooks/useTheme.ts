@@ -39,7 +39,7 @@ import { setCookie } from "@docspace/ui-kit/utils/cookie";
 import { ThemeKeys } from "@docspace/ui-kit/enums";
 import { getAppearanceTheme } from "@docspace/shared/api/settings";
 import { getFontFamilyDependingOnLanguage } from "@docspace/ui-kit/providers/theme/rtl-utils";
-import { SYSTEM_THEME_KEY } from "@docspace/ui-kit/providers/theme/themes/constants";
+import { SYSTEM_THEME_KEY } from "@docspace/ui-kit/providers/theme";
 
 import type { TGetColorTheme } from "@docspace/shared/api/settings/types";
 

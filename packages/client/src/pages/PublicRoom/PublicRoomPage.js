@@ -28,7 +28,7 @@ import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation, Trans } from "react-i18next";
 import { useLocation, Outlet } from "react-router";
-import Section from "@docspace/ui-kit/components/section";
+import { Section } from "@docspace/ui-kit/components/section";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link } from "@docspace/ui-kit/components/link";

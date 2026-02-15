@@ -30,7 +30,7 @@ import classNames from "classnames";
 import { Text } from "@docspace/ui-kit/components/text";
 import { TRoom } from "@docspace/shared/api/rooms/types";
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@docspace/ui-kit/context";
 import { TGroup } from "@docspace/shared/api/groups/types";
 
 import EmptyScreenPersonSvgUrl from "PUBLIC_DIR/images/emptyview/empty.contacts.info.light.svg?url";

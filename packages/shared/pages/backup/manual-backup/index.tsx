@@ -38,13 +38,13 @@ import { RadioButton } from "@docspace/ui-kit/components/radio-button";
 import { startBackup } from "../../../api/portal";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { BackupStorageLocalKey, BackupStorageType } from "../../../enums";
-import StatusMessage from "@docspace/ui-kit/components/status-message";
+import { StatusMessage } from "@docspace/ui-kit/components/status-message";
 import SocketHelper, {
   SocketEvents,
   TSocketListener,
 } from "../../../utils/socket";
 import { OPERATIONS_NAME } from "../../../constants";
-import OperationsProgressButton from "@docspace/ui-kit/components/operations-progress-button";
+import { OperationsProgressButton } from "@docspace/ui-kit/components/operations-progress-button";
 import DataBackupLoader from "../../../skeletons/backup/DataBackup";
 import { getBackupProgressInfo, getErrorInfo } from "../../../utils/common";
 import { getFromLocalStorage } from "../../../utils";

@@ -55,7 +55,7 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/ui-kit/components/modal-dialog";
-import FilterIcon from "@docspace/ui-kit/components/filter/sub-components/FilterIcon";
+import { FilterIcon } from "@docspace/ui-kit/components/filter";
 import { AddButton } from "@docspace/ui-kit/components/add-button";
 import { SelectedItemPure } from "@docspace/ui-kit/components/selected-item";
 import { TSelectorItem } from "@docspace/ui-kit/components/selector";

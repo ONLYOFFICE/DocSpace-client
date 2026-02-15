@@ -41,7 +41,7 @@ import { TValidate } from "@docspace/ui-kit/components/email-input";
 import { InputSize } from "@docspace/ui-kit/components/text-input";
 import { ButtonKeys } from "@docspace/shared/enums";
 import { useCaptcha } from "@docspace/shared/hooks/useCaptcha";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@docspace/ui-kit/context";
 import Captcha from "@docspace/shared/components/captcha";
 
 import { ForgotPasswordModalDialogProps, TError } from "@/types";

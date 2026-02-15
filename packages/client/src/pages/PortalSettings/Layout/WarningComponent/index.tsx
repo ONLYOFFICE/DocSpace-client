@@ -29,7 +29,7 @@ import { inject, observer } from "mobx-react";
 import { useLocation } from "react-router";
 import { Trans, useTranslation } from "react-i18next";
 
-import WarningComponent from "@docspace/ui-kit/components/navigation/sub-components/WarningComponent";
+import { WarningComponent } from "@docspace/ui-kit/components/navigation";
 import { Link } from "@docspace/ui-kit/components/link";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { Text } from "@docspace/ui-kit/components/text";

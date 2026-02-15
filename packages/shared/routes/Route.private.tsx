@@ -26,7 +26,7 @@
 
 import { Navigate, useLocation } from "react-router";
 
-import AppLoader from "@docspace/ui-kit/components/app-loader";
+import { AppLoader } from "@docspace/ui-kit/components/app-loader";
 
 import { TenantStatus } from "../enums";
 import { combineUrl } from "../utils/combineUrl";

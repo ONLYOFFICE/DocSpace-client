@@ -39,7 +39,7 @@ import type {
   TFolderSecurity,
 } from "@docspace/shared/api/files/types";
 import type { TAPIPlugin } from "@docspace/shared/api/plugins/types";
-import type { ModalDialogProps } from "@docspace/ui-kit/components/modal-dialog/ModalDialog.types";
+import type { ModalDialogProps } from "@docspace/ui-kit/components/modal-dialog";
 import type { TTranslation } from "@docspace/shared/types";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { getCookie } from "@docspace/ui-kit/utils/cookie";

@@ -102,6 +102,8 @@ export const Providers = ({
       window.location.replace(redirectURL);
   }, [redirectURL, pathName, shouldRedirect]);
 
+  console.log("PROVIDERS", ThemeProvider, TranslationProvider )
+
   return (
     <TranslationProvider
       settings={value.settings as TTranslationProvider["settings"]}

@@ -39,7 +39,7 @@ import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { frameCallCommand } from "../../../utils/common";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { FormWrapper } from "@docspace/ui-kit/components/form-wrapper";
-import PortalLogo from "@docspace/ui-kit/components/portal-logo/PortalLogo";
+import { PortalLogo } from "@docspace/ui-kit/components/portal-logo";
 import { ValidationStatus } from "../../../enums";
 
 import { validatePublicRoomPassword } from "../../../api/rooms";

@@ -35,7 +35,7 @@ import { FileType, FolderType } from "@docspace/shared/enums";
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
-import PublicRoomBar from "@docspace/ui-kit/components/public-room-bar";
+import { PublicRoomBar } from "@docspace/ui-kit/components/public-room-bar";
 import { TRoom, TRoomLifetime } from "@docspace/shared/api/rooms/types";
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";

@@ -29,7 +29,7 @@
 import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
 
-import FilterComponent from "@docspace/ui-kit/components/filter";
+import { Filter as FilterComponent } from "@docspace/ui-kit/components/filter";
 import renderFilterSelector from "@docspace/shared/utils/renderFilterSelector";
 
 import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";

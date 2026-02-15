@@ -45,7 +45,7 @@ import { FileFillingFormStatus } from "../../enums";
 import { Text } from "@docspace/ui-kit/components/text";
 import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 import { toastr } from "@docspace/ui-kit/components/toast";
-import PublicRoomBar from "@docspace/ui-kit/components/public-room-bar";
+import { PublicRoomBar } from "@docspace/ui-kit/components/public-room-bar";
 import { Heading, HeadingLevel } from "@docspace/ui-kit/components/heading";
 import {
   ModalDialog,

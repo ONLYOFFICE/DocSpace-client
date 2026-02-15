@@ -40,7 +40,7 @@ import {
 } from "@docspace/ui-kit/components/selector";
 import { getServerIcon } from "../../utils";
 import { RowLoader } from "../../skeletons/selector";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@docspace/ui-kit/context";
 
 type MCPServersSelectorProps = {
 	onSubmit: (servers: TSelectorItem[]) => void;

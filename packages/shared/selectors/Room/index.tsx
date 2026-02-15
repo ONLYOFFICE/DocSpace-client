@@ -42,7 +42,7 @@ import {
 import { RowLoader, SearchLoader } from "../../skeletons/selector";
 
 import { TTranslation } from "../../types";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@docspace/ui-kit/context";
 
 import useSocketHelper from "../utils/hooks/useSocketHelper";
 import useRoomsHelper from "../utils/hooks/useRoomsHelper";

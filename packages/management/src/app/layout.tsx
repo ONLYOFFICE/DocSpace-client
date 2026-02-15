@@ -28,7 +28,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
 import { ThemeKeys } from "@docspace/ui-kit/enums";
-import { SYSTEM_THEME_KEY } from "@docspace/ui-kit/providers/theme/themes/constants";
+import { SYSTEM_THEME_KEY } from "@docspace/ui-kit/providers/theme";
 import { LANGUAGE } from "@docspace/shared/constants";
 
 import { Toast } from "@docspace/ui-kit/components/toast";

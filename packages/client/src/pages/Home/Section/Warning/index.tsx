@@ -28,7 +28,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import WarningComponent from "@docspace/ui-kit/components/navigation/sub-components/WarningComponent";
+import { WarningComponent } from "@docspace/ui-kit/components/navigation";
 import { DeviceType } from "@docspace/shared/enums";
 
 type InjectedProps = {

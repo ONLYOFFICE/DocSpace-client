@@ -5,11 +5,21 @@
     "baseUrl": "./",
     "jsx": "react-jsx",
     "paths": {
-      "PUBLIC_DIR/*": ["../../public/*"],
-      "SRC_DIR/*": ["./src/*"],
-      "PACKAGE_FILE": ["./package.json"]
+      "PUBLIC_DIR/*": [
+        "../../public/*"
+      ],
+      "SRC_DIR/*": [
+        "./src/*"
+      ],
+      "PACKAGE_FILE": [
+        "./package.json"
+      ]
     },
-    "target": "esnext"
+    "target": "esnext",
   },
-  "include": ["**/*.ts", "**/*.tsx", "types/**/*.d.ts"]
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "types/**/*.d.ts"
+  ]
 }

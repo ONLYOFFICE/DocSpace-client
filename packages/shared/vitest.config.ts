@@ -111,6 +111,8 @@ export default defineConfig({
       "hex-rgb": path.resolve(__dirname, "./__mocks__/hex-rgb.js"),
       "react-svg": path.resolve(__dirname, "./__mocks__/reactSvgMock.tsx"),
     },
+     // for exports section in @docspace/ui-kit/package.json 
+    conditions: ["source"],
   },
 
   esbuild: {

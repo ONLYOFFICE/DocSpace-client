@@ -94,6 +94,8 @@ module.exports = {
         "@docspace/shared": path.resolve(__dirname, "../shared"),
         "@docspace/ui-kit": path.resolve(__dirname, "../../libs/ui-kit"),
       },
+       // for exports section in @docspace/ui-kit/package.json 
+      conditionNames: ["source", "..."],
     };
 
     config.devtool = isProduction ? "source-map" : false; // TODO: replace to "eval-cheap-module-source-map" if you want to debug in a browser;

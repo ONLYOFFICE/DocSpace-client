@@ -26,18 +26,48 @@
 
 import type { FileEncryptionMetadata } from "../services/encryption/types";
 
-import { IndexedDBHelper } from "./indexedDBHelper";
-
 const DB_NAME = "docspace_encrypted_edit";
 const STORE_NAME = "buffers";
+const DB_VERSION = 1;
 
-const dbHelper = new IndexedDBHelper();
-let initialized = false;
+let db: IDBDatabase | null = null;
 
-async function ensureInit(): Promise<void> {
-  if (initialized && dbHelper.getDB()) return;
-  await dbHelper.init(DB_NAME, [STORE_NAME]);
-  initialized = true;
+function getIDB(): IDBFactory | undefined {
+  return typeof window !== "undefined" ? window.indexedDB : undefined;
+}
+
+async function ensureDB(): Promise<IDBDatabase> {
+  if (db) {
+    try {
+      db.transaction(STORE_NAME, "readonly");
+      return db;
+    } catch {
+      db = null;
+    }
+  }
+
+  const idb = getIDB();
+  if (!idb) throw new Error("IndexedDB is not available");
+
+  return new Promise<IDBDatabase>((resolve, reject) => {
+    const request = idb.open(DB_NAME, DB_VERSION);
+
+    request.onupgradeneeded = () => {
+      const database = request.result;
+      if (!database.objectStoreNames.contains(STORE_NAME)) {
+        database.createObjectStore(STORE_NAME, { keyPath: "id" });
+      }
+    };
+
+    request.onsuccess = () => {
+      db = request.result;
+      resolve(db);
+    };
+
+    request.onerror = () => {
+      reject(request.error ?? new Error("Failed to open IndexedDB"));
+    };
+  });
 }
 
 export type EncryptedEditEntry = {
@@ -59,35 +89,83 @@ export function generateEditSessionId(fileId: number | string): string {
 export async function storeEditBuffer(
   entry: EncryptedEditEntry,
 ): Promise<void> {
-  await ensureInit();
-  await dbHelper.putItem(STORE_NAME, entry);
+  const database = await ensureDB();
+
+  return new Promise<void>((resolve, reject) => {
+    const transaction = database.transaction(STORE_NAME, "readwrite");
+    const store = transaction.objectStore(STORE_NAME);
+    store.put(entry);
+
+    transaction.oncomplete = () => resolve();
+    transaction.onerror = () =>
+      reject(transaction.error ?? new Error("Failed to store edit buffer"));
+    transaction.onabort = () =>
+      reject(transaction.error ?? new Error("Transaction aborted"));
+  });
 }
 
 export async function getEditBuffer(
   sessionId: string,
 ): Promise<EncryptedEditEntry | null> {
-  await ensureInit();
-  const result = await dbHelper.getItem(STORE_NAME, sessionId);
-  return (result as EncryptedEditEntry) ?? null;
+  const database = await ensureDB();
+
+  return new Promise<EncryptedEditEntry | null>((resolve, reject) => {
+    const transaction = database.transaction(STORE_NAME, "readonly");
+    const store = transaction.objectStore(STORE_NAME);
+    const request = store.get(sessionId);
+
+    request.onsuccess = () =>
+      resolve((request.result as EncryptedEditEntry) ?? null);
+    request.onerror = () =>
+      reject(request.error ?? new Error("Failed to read edit buffer"));
+  });
 }
 
 export async function deleteEditBuffer(sessionId: string): Promise<void> {
-  await ensureInit();
-  await dbHelper.deleteItem(STORE_NAME, sessionId);
+  const database = await ensureDB();
+
+  return new Promise<void>((resolve, reject) => {
+    const transaction = database.transaction(STORE_NAME, "readwrite");
+    const store = transaction.objectStore(STORE_NAME);
+    store.delete(sessionId);
+
+    transaction.oncomplete = () => resolve();
+    transaction.onerror = () =>
+      reject(transaction.error ?? new Error("Failed to delete edit buffer"));
+  });
 }
 
 export async function cleanupStaleBuffers(
   maxAgeMs: number = 3600000,
 ): Promise<void> {
-  await ensureInit();
-  const cutoff = Date.now() - maxAgeMs;
-  const items = (await dbHelper.getAllItems(
-    STORE_NAME,
-  )) as EncryptedEditEntry[];
+  const database = await ensureDB();
 
-  for (const entry of items) {
-    if (entry.createdAt < cutoff) {
-      await dbHelper.deleteItem(STORE_NAME, entry.id);
+  const items = await new Promise<EncryptedEditEntry[]>((resolve, reject) => {
+    const transaction = database.transaction(STORE_NAME, "readonly");
+    const store = transaction.objectStore(STORE_NAME);
+    const request = store.getAll();
+
+    request.onsuccess = () =>
+      resolve((request.result as EncryptedEditEntry[]) ?? []);
+    request.onerror = () => reject(request.error);
+  });
+
+  const cutoff = Date.now() - maxAgeMs;
+  const staleIds = items
+    .filter((entry) => entry.createdAt < cutoff)
+    .map((entry) => entry.id);
+
+  if (staleIds.length === 0) return;
+
+  return new Promise<void>((resolve, reject) => {
+    const transaction = database.transaction(STORE_NAME, "readwrite");
+    const store = transaction.objectStore(STORE_NAME);
+
+    for (const id of staleIds) {
+      store.delete(id);
     }
-  }
+
+    transaction.oncomplete = () => resolve();
+    transaction.onerror = () => reject(transaction.error);
+  });
 }

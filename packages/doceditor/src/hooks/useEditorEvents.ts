@@ -930,7 +930,6 @@ const useEditorEvents = ({
 
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
-      deleteEditBuffer(encryptedSessionId).catch(console.error);
     };
   }, [encryptedSessionId]);
 

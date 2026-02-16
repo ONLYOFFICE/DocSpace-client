@@ -27,7 +27,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import ErrorContainer from "@docspace/ui-kit/components/error-container/ErrorContainer";
+import { ErrorContainer } from "@docspace/ui-kit/components/error-container";
 import { Text } from "@docspace/ui-kit/components/text";
 import SocketHelper, { SocketEvents } from "../../utils/socket";
 import { getRestoreProgress } from "../../api/portal";

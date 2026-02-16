@@ -28,7 +28,7 @@ import React from "react";
 
 import { ContentType } from "../../../../../../api/ai/enums";
 
-import StatusMessage from "@docspace/ui-kit/components/status-message";
+import { StatusMessage } from "@docspace/ui-kit/components/status-message";
 
 import { MessageErrorProps } from "../../../../Chat.types";
 

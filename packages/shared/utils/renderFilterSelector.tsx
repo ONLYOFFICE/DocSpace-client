@@ -27,7 +27,7 @@
 import React from "react";
 
 import { FilterSelectorTypes } from "../enums";
-import type { SelectorRenderProps } from "@docspace/ui-kit/components/filter/Filter.types";
+import type { SelectorRenderProps } from "@docspace/ui-kit/components/filter";
 
 import GroupsSelector from "../selectors/Groups";
 import PeopleSelector from "../selectors/People";

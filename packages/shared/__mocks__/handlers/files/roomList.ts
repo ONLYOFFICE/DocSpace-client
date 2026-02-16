@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { http } from "msw";
-import { uuid } from "@docspace/ui-kit/utils";
+import { uuid } from "@docspace/ui-kit/utils/uuid";
 import { ShareAccessRights } from "../../../enums";
 import { TGetRooms, TRoom } from "../../../api/rooms/types";
 import { API_PREFIX, BASE_URL } from "../../e2e/utils";

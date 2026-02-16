@@ -47,7 +47,7 @@ import {
 import { ServerType } from "../../../../api/ai/enums";
 import { getOAuthToken } from "../../../../utils/common";
 import { getServerIcon, isMobile } from "../../../../utils";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@docspace/ui-kit/context";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import {

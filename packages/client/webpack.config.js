@@ -115,6 +115,8 @@ const config = {
       "@docspace/shared": path.resolve(__dirname, "../shared"),
       "@docspace/ui-kit": path.resolve(__dirname, "../../libs/ui-kit"),
     },
+     // for exports section in @docspace/ui-kit/package.json 
+    conditionNames: ["source", "..."],
   },
 
   output: {

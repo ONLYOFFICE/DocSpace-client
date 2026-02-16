@@ -30,7 +30,7 @@ import classNames from "classnames";
 import { RowContainer } from "@docspace/ui-kit/components/rows";
 
 import styles from "./FilesRowContainer.module.scss";
-import type { RowContainerProps } from "@docspace/ui-kit/components/rows/row-container/RowContainer.types";
+import type { RowContainerProps } from "@docspace/ui-kit/components/rows";
 
 export const FilesRowContainer = (props: RowContainerProps) => {
   const { className } = props;

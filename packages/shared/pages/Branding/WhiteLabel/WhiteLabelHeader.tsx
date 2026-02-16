@@ -42,7 +42,7 @@ import {
   InputSize,
 } from "@docspace/ui-kit/components/text-input";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@docspace/ui-kit/context";
 
 import { IHeaderProps } from "./WhiteLabel.types";
 import styles from "./WhiteLabel.module.scss";

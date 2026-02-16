@@ -43,7 +43,7 @@ import type {
 import { RowLoader, SearchLoader } from "../../skeletons/selector";
 
 import type { TTranslation } from "../../types";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@docspace/ui-kit/context";
 
 import useSocketHelper from "../utils/hooks/useSocketHelper";
 import useAgentsHelper from "../utils/hooks/useAgentsHelper";

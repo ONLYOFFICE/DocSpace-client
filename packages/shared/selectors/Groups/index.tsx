@@ -37,7 +37,7 @@ import {
   TSelectorItem,
   TSelectorWithAside,
 } from "@docspace/ui-kit/components/selector";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@docspace/ui-kit/context";
 
 import { GroupsSelectorProps } from "./GroupsSelector.types";
 

@@ -27,8 +27,7 @@
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router";
 
-import Article from "@docspace/ui-kit/components/article";
-import { ArticleProps } from "@docspace/ui-kit/components/article/Article.types";
+import { Article, ArticleProps } from "@docspace/ui-kit/components/article";
 import { getUserType } from "@docspace/shared/utils/common";
 
 const ArticleWrapper = (props: ArticleProps) => {

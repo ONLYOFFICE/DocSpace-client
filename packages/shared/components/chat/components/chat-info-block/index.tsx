@@ -30,36 +30,36 @@ import { useTranslation } from "react-i18next";
 
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
-import PublicRoomBar from "@docspace/ui-kit/components/public-room-bar";
+import { PublicRoomBar } from "@docspace/ui-kit/components/public-room-bar";
 
 import { ChatInfoBlockProps } from "../../Chat.types";
 import styles from "./ChatInfoBlock.module.scss";
 
 export const ChatInfoBlock = ({
-	standalone,
-	isPortalAdmin,
+  standalone,
+  isPortalAdmin,
 }: ChatInfoBlockProps) => {
-	const { t } = useTranslation("Common");
+  const { t } = useTranslation("Common");
 
-	const bodyText = !isPortalAdmin
-		? t("Common:AIDisabledInfoBlockUserDescription", {
-				productName: t("Common:ProductName"),
-			})
-		: standalone
-			? t("Common:AIDisabledInfoBlockAdminStandaloneDescription", {
-					productName: t("Common:ProductName"),
-				})
-			: t("Common:AIDisabledInfoBlockAdminSaasDescription", {
-					productName: t("Common:ProductName"),
-				});
+  const bodyText = !isPortalAdmin
+    ? t("Common:AIDisabledInfoBlockUserDescription", {
+        productName: t("Common:ProductName"),
+      })
+    : standalone
+      ? t("Common:AIDisabledInfoBlockAdminStandaloneDescription", {
+          productName: t("Common:ProductName"),
+        })
+      : t("Common:AIDisabledInfoBlockAdminSaasDescription", {
+          productName: t("Common:ProductName"),
+        });
 
-	return (
-		<PublicRoomBar
-			className={styles.chatInfoBlock}
-			headerText={t("Common:AIFeaturesAreCurrentlyDisabled")}
-			bodyText={bodyText}
-			iconName={InfoIcon}
-			dataTestId="chat-info-block"
-		/>
-	);
+  return (
+    <PublicRoomBar
+      className={styles.chatInfoBlock}
+      headerText={t("Common:AIFeaturesAreCurrentlyDisabled")}
+      bodyText={bodyText}
+      iconName={InfoIcon}
+      dataTestId="chat-info-block"
+    />
+  );
 };

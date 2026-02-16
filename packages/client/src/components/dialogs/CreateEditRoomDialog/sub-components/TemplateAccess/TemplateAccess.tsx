@@ -33,7 +33,7 @@ import {
 import { TCreatedBy, TTranslation } from "@docspace/shared/types";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import PublicRoomBar from "@docspace/ui-kit/components/public-room-bar";
+import { PublicRoomBar } from "@docspace/ui-kit/components/public-room-bar";
 import { TSelectorItem } from "@docspace/ui-kit/components/selector";
 import { ShareAccessRights } from "@docspace/shared/enums";
 import { Encoder } from "@docspace/shared/utils/encoder";

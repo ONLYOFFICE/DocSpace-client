@@ -35,7 +35,7 @@ import { Tabs, TTabItem } from "@docspace/ui-kit/components/tabs";
 import { DeviceType } from "@docspace/shared/enums";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
-import { SECTION_HEADER_HEIGHT } from "@docspace/ui-kit/components/section/Section.constants";
+import { SECTION_HEADER_HEIGHT } from "@docspace/ui-kit/components/section";
 import { TfaStore } from "@docspace/shared/store/TfaStore";
 import { AuthStore } from "@docspace/shared/store/AuthStore";
 

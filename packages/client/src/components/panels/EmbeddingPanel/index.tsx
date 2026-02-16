@@ -38,7 +38,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { Textarea } from "@docspace/ui-kit/components/textarea";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import PublicRoomBar from "@docspace/ui-kit/components/public-room-bar";
+import { PublicRoomBar } from "@docspace/ui-kit/components/public-room-bar";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { ComboBox, TOption } from "@docspace/ui-kit/components/combobox";

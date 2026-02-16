@@ -31,7 +31,7 @@ import { getCorrectDate } from "@docspace/shared/utils";
 import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { LANGUAGE } from "@docspace/shared/constants";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@docspace/ui-kit/context";
 
 import { NewFilesPanelItemDateProps } from "../NewFilesBadge.types";
 

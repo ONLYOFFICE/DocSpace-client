@@ -29,7 +29,7 @@
 import { useTranslation } from "react-i18next";
 
 import type { TServer } from "@docspace/shared/api/ai/types";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@docspace/ui-kit/context";
 import { getServerIcon } from "@docspace/shared/utils";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { Text } from "@docspace/ui-kit/components/text";

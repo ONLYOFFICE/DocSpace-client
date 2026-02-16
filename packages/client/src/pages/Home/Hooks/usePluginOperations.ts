@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect, useMemo, useCallback } from "react";
-import type { Operation } from "@docspace/ui-kit/components/operations-progress-button/OperationsProgressButton.types";
+import type { Operation } from "@docspace/ui-kit/components/operations-progress-button";
 import type { IFloatingOperationsButtonClient } from "SRC_DIR/helpers/plugins/types";
 import type PluginStore from "SRC_DIR/store/PluginStore";
 

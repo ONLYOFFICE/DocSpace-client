@@ -39,7 +39,7 @@ import MailIcon from "PUBLIC_DIR/images/icons/12/mail.svg";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { Text } from "@docspace/ui-kit/components/text";
 import { getBgPattern, getLogoUrl } from "@docspace/shared/utils/common";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@docspace/ui-kit/context";
 
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";

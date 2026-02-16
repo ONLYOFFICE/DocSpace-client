@@ -34,7 +34,7 @@ import a11yLight from "react-syntax-highlighter/dist/cjs/styles/prism/a11y-one-l
 
 import CopyIconUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@docspace/ui-kit/context";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";

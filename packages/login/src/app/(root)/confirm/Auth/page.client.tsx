@@ -35,7 +35,7 @@ import {
   getOAuthJWTSignature,
   setOAuthJWTSignature,
 } from "@docspace/shared/api/oauth";
-import AppLoader from "@docspace/ui-kit/components/app-loader";
+import { AppLoader } from "@docspace/ui-kit/components/app-loader";
 import { frameCallEvent } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { loginWithConfirmKey } from "@docspace/shared/api/user";

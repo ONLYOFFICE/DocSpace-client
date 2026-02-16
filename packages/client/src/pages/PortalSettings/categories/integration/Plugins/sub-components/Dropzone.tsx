@@ -28,7 +28,7 @@ import React from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 
-import DropzoneComponent from "@docspace/ui-kit/components/dropzone";
+import { Dropzone as DropzoneComponent } from "@docspace/ui-kit/components/dropzone";
 
 import { PluginDropzoneProps } from "../Plugins.types";
 

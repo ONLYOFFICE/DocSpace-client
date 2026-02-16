@@ -32,7 +32,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { Link } from "@docspace/ui-kit/components/link";
 import { Button } from "@docspace/ui-kit/components/button";
 import { Loader } from "@docspace/ui-kit/components/loader";
-import Section from "@docspace/ui-kit/components/section";
+import { Section } from "@docspace/ui-kit/components/section";
 import SectionWrapper from "SRC_DIR/components/Section";
 import { injectDefaultTheme, mobile, tablet } from "@docspace/shared/utils";
 import { Trans, withTranslation } from "react-i18next";

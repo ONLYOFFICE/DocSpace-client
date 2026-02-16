@@ -29,7 +29,7 @@ import classNames from "classnames";
 
 import SocketHelper, { SocketCommands } from "../../../../../utils/socket";
 import { Button } from "@docspace/ui-kit/components/button";
-import OperationsProgressButton from "@docspace/ui-kit/components/operations-progress-button";
+import { OperationsProgressButton } from "@docspace/ui-kit/components/operations-progress-button";
 import { OPERATIONS_NAME } from "../../../../../constants";
 import { TenantStatus } from "../../../../../enums";
 import { startRestore } from "../../../../../api/portal";

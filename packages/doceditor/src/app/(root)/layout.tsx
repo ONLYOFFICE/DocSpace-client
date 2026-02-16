@@ -28,7 +28,7 @@ import { headers, cookies } from "next/headers";
 
 import { ThemeKeys } from "@docspace/ui-kit/enums";
 import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
-import { SYSTEM_THEME_KEY } from "@docspace/ui-kit/providers/theme/themes/constants";
+import { SYSTEM_THEME_KEY } from "@docspace/ui-kit/providers/theme";
 
 import "@docspace/shared/styles/theme.scss";
 

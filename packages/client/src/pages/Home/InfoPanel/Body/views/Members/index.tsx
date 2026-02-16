@@ -41,7 +41,7 @@ import { toastr } from "@docspace/ui-kit/components/toast";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import PublicRoomBar from "@docspace/ui-kit/components/public-room-bar";
+import { PublicRoomBar } from "@docspace/ui-kit/components/public-room-bar";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 import { GENERAL_LINK_HEADER_KEY } from "@docspace/shared/constants";
 import { createExternalLink } from "@docspace/shared/api/rooms";

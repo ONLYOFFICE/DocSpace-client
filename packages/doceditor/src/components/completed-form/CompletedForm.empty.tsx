@@ -33,7 +33,7 @@ import classNames from "classnames";
 import CompletedFormDarkIcon from "PUBLIC_DIR/images/completedForm/completed.form.icon.dark.svg?url";
 import CompletedFormLightIcon from "PUBLIC_DIR/images/completedForm/completed.form.icon.light.svg?url";
 
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@docspace/ui-kit/context";
 import { getBgPattern, getLogoUrl } from "@docspace/shared/utils/common";
 import { mobile, mobileMore } from "@docspace/shared/utils";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";

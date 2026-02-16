@@ -34,10 +34,10 @@ import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { FormWrapper } from "@docspace/ui-kit/components/form-wrapper";
 import { getBgPattern } from "@docspace/shared/utils/common";
-import PortalLogo from "@docspace/ui-kit/components/portal-logo/PortalLogo";
+import { PortalLogo } from "@docspace/ui-kit/components/portal-logo";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { DeepLinkType } from "@docspace/shared/enums";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@docspace/ui-kit/context";
 
 import { iconSize32 } from "@docspace/shared/utils/image-helpers";
 import { getDeepLink, redirectToStore } from "./DeepLink.helper";

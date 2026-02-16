@@ -29,7 +29,7 @@ import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
 import { toastr } from "@docspace/ui-kit/components/toast";
-import StatusMessage from "@docspace/ui-kit/components/status-message";
+import { StatusMessage } from "@docspace/ui-kit/components/status-message";
 import { getBackupProgressInfo } from "../../../utils/common";
 import SocketHelper, {
   SocketEvents,

@@ -36,7 +36,7 @@ import EyeIcon from "PUBLIC_DIR/images/eye.react.svg";
 import FormFillIcon from "PUBLIC_DIR/images/form.fill.rect.svg";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@docspace/ui-kit/context";
 import { getBgPattern, getLogoUrl } from "@docspace/shared/utils/common";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import {

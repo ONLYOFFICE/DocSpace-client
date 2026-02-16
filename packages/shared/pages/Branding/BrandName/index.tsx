@@ -41,7 +41,7 @@ import {
   InputType,
   InputSize,
 } from "@docspace/ui-kit/components/text-input";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@docspace/ui-kit/context";
 
 import { NotAvailable } from "../WhiteLabel/NotAvailable";
 import { IWhiteLabelData } from "../WhiteLabel/WhiteLabel.types";

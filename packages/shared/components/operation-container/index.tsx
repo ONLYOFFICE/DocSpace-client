@@ -28,11 +28,11 @@ import React, { useEffect } from "react";
 import DownloadingReactSvg from "PUBLIC_DIR/images/downloading.react.svg";
 import DownloadingDarkReactSvg from "PUBLIC_DIR/images/downloading.dark.react.svg";
 
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { useTheme } from "@docspace/ui-kit/context";
 
 import { OperationContainerProps } from "./OperationContainer.types";
 import { Text } from "@docspace/ui-kit/components/text";
-import PortalLogo from "@docspace/ui-kit/components/portal-logo/PortalLogo";
+import { PortalLogo } from "@docspace/ui-kit/components/portal-logo";
 
 import styles from "./OperationContainer.module.scss";
 
@@ -66,7 +66,7 @@ const OperationContainer = (props: OperationContainerProps) => {
       aria-label={title}
       data-testid="operation-container"
     >
-      <PortalLogo isResizable data-testid="portal-logo" />
+      <PortalLogo isResizable />
       {logo}
       <Text className={styles.title}>{title}</Text>
       <Text className={styles.description}>{description}</Text>

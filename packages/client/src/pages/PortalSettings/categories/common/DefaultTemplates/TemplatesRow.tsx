@@ -61,6 +61,7 @@ type Props = {
   getFilterParam?: TStore["defaultTemplatesStore"]["getFilterParam"];
   openUrl?: TStore["settingsStore"]["openUrl"];
   uploadTemplate?: TStore["defaultTemplatesStore"]["uploadTemplate"];
+  openDocEditor?: TStore["filesStore"]["openDocEditor"];
   culture?: TStore["settingsStore"]["culture"];
   index?: number;
 };
@@ -73,6 +74,7 @@ const TemplatesRow = ({
   resetTemplate,
   openUrl,
   uploadTemplate,
+  openDocEditor,
   culture,
   index,
 }: Props) => {
@@ -115,8 +117,7 @@ const TemplatesRow = ({
         {
           key: "preview",
           label: t("Common:Preview"),
-          onClick: () =>
-            window.open(`/doceditor?fileId=${item.id}&action=view`, "_blank"),
+          onClick: () => openDocEditor?.(item.id, true),
           disabled: false,
           icon: EyeIcon,
         },
@@ -234,12 +235,19 @@ const TemplatesRow = ({
 };
 
 export default inject(
-  ({ filesSettingsStore, defaultTemplatesStore, settingsStore }: TStore) => {
+  ({
+    filesSettingsStore,
+    defaultTemplatesStore,
+    settingsStore,
+    filesStore,
+  }: TStore) => {
     const { getFileIcon } = filesSettingsStore;
     const { setTemplate, getFilterParam, resetTemplate, uploadTemplate } =
       defaultTemplatesStore;
 
     const { openUrl, culture } = settingsStore;
+
+    const { openDocEditor } = filesStore;
 
     return {
       getFileIcon,
@@ -249,6 +257,7 @@ export default inject(
       openUrl,
       uploadTemplate,
       culture,
+      openDocEditor,
     };
   },
 )(observer(TemplatesRow));

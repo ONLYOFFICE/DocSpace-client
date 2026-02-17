@@ -66,8 +66,8 @@ import {
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { StartFillingMode } from "@docspace/shared/enums";
 import { toastr, type TData } from "@docspace/ui-kit/components/toast";
+import { FolderType } from "@docspace/ui-kit/enums";
 import type { Nullable } from "@docspace/shared/types";
-
 import { IS_DESKTOP_EDITOR } from "@/utils/constants";
 
 import { isMobile } from "react-device-detect";
@@ -954,7 +954,11 @@ const useEditorEvents = ({
       onSDKInfo(e);
 
       // Add to recently viewed files in any mode (read or edit)
-      if (successAuth && fileInfo?.id) {
+      if (
+        successAuth &&
+        fileInfo?.id &&
+        fileInfo?.rootFolderType !== FolderType.DefaultTemplates
+      ) {
         addFileToRecentlyViewed(fileInfo.id);
       }
     },

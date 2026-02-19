@@ -1455,6 +1455,14 @@ class FilesStore {
     this.updateFolder(index, folder);
   };
 
+  clearNewRoomBadge = (roomId) => {
+    const index = this.getFolderIndex(roomId);
+    if (index === -1) return;
+
+    this.folders[index] = { ...this.folders[index], isNewRoom: false };
+    this.updateSelection(this.folders[index]);
+  };
+
   getFilesChecked = (file, selected) => {
     if (!file.parentId) {
       if (this.activeFiles.find((elem) => elem.id === file.id)) return false;

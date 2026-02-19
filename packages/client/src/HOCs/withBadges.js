@@ -82,6 +82,11 @@ export default function withBadges(WrappedComponent) {
       }
     };
 
+    onNewRoomBadgeClick = () => {
+      const { item, clearNewRoomBadge } = this.props;
+      clearNewRoomBadge?.(item.id);
+    };
+
     onUnpinClick = (e) => {
       const { disableUnpinClick } = this.state;
       if (disableUnpinClick) return;
@@ -295,6 +300,7 @@ export default function withBadges(WrappedComponent) {
           isRecentFolder={isRecentFolder}
           isPublicRoom={isPublicRoom}
           onClickFavorite={this.onClickFavorite}
+          onNewRoomBadgeClick={this.onNewRoomBadgeClick}
           editorsTooltip={
             <EditorsTooltip item={item} currentUserId={currentUserId} />
           }
@@ -349,7 +355,11 @@ export default function withBadges(WrappedComponent) {
       const { setIsVerHistoryPanel, fetchFileVersions } = versionHistoryStore;
       const { setConvertDialogVisible, setConvertItem, setConvertDialogData } =
         dialogsStore;
-      const { setIsLoading, isMuteCurrentRoomNotifications } = filesStore;
+      const {
+        setIsLoading,
+        isMuteCurrentRoomNotifications,
+        clearNewRoomBadge,
+      } = filesStore;
       const { roomType, mute } = item;
 
       const isRoom = !!roomType;
@@ -390,6 +400,7 @@ export default function withBadges(WrappedComponent) {
         setFavoriteAction,
         isRecentFolder,
         currentUserId: userStore?.user?.id,
+        clearNewRoomBadge,
       };
     },
   )(observer(WithBadges));

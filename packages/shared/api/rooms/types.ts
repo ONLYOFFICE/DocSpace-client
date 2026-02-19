@@ -134,6 +134,7 @@ export type TRoom = {
   isTemplate?: boolean;
   isAvailable?: boolean;
   isRoom?: boolean;
+  isNewRoom?: boolean;
   chatSettings?: TAIRoomChatSettings;
   shareSettings?: TShareSettings;
   availableShareRights?: TAvailableShareRights;

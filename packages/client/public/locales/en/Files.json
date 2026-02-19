@@ -228,5 +228,6 @@
   "UsersJoined": "Users joined:",
   "LinkSettingsUsersLimitToast": "Registration via the link is no longer available since the limit has been exceeded.",
   "LinkSettingsUsersLimitToastDescription": "Adjust the limit in settings or create a new link to enable new user registrations.",
-  "LinkSettingsExpiredToastDescription": "Extend the validity period in the settings or create a new link to enable new user registrations."
+  "LinkSettingsExpiredToastDescription": "Extend the validity period in the settings or create a new link to enable new user registrations.",
+  "StealthModeConfirmation": "When you enable Stealth Mode, users will only see their own files while others remain hidden. Admins will retain full access to all files.\n <1>Please note</1> that any external links previously created will be deactivated, and the files and folders will no longer be accessible through those links. Are you sure you want to proceed with enabling Stealth Mode?"
 }

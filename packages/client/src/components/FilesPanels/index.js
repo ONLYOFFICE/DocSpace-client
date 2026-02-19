@@ -106,6 +106,7 @@ import ShareSelector from "../ShareSelector";
 import TemplateGallery from "../TemplateGallery";
 import InfoPanelTemplateGallery from "../TemplateGallery/InfoPanel";
 import PluginSelector from "../PluginSelector";
+import StealthModeDialog from "../dialogs/StealthModeDialog";
 
 const Panels = (props) => {
   const {
@@ -117,6 +118,7 @@ const Panels = (props) => {
     versionHistoryPanelVisible,
     deleteDialogVisible,
     lifetimeDialogVisible,
+    stealthModeDialogVisible,
     downloadDialogVisible,
     emptyTrashDialogVisible,
     conflictResolveDialogVisible,
@@ -319,6 +321,7 @@ const Panels = (props) => {
     ),
     deleteDialogVisible && <DeleteDialog key="delete-dialog" />,
     lifetimeDialogVisible && <LifetimeDialog key="lifetime-dialog" />,
+    stealthModeDialogVisible && <StealthModeDialog key="stealth-mode-dialog" />,
     emptyTrashDialogVisible && <EmptyTrashDialog key="empty-trash-dialog" />,
     downloadDialogVisible && <DownloadDialog key="download-dialog" />,
 
@@ -552,6 +555,7 @@ export default inject(
       connectDialogVisible,
       deleteDialogVisible,
       lifetimeDialogVisible,
+      stealthModeDialogVisible,
       downloadDialogVisible,
       emptyTrashDialogVisible,
       conflictResolveDialogVisible,
@@ -679,6 +683,7 @@ export default inject(
       versionHistoryPanelVisible,
       deleteDialogVisible,
       lifetimeDialogVisible,
+      stealthModeDialogVisible,
       downloadDialogVisible,
       emptyTrashDialogVisible,
       conflictResolveDialogVisible,

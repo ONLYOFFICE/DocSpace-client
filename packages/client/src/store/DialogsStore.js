@@ -80,11 +80,15 @@ class DialogsStore {
 
   deleteDialogVisible = false;
 
+  stealthModeDialogVisible = false;
+
   lifetimeDialogVisible = false;
 
   reducedRightsData = { visible: false, adminName: "" };
 
   lifetimeDialogCB = null;
+
+  stealthModeDialogCB = null;
 
   downloadDialogVisible = false;
 
@@ -516,6 +520,11 @@ class DialogsStore {
 
   setDeleteDialogVisible = (deleteDialogVisible) => {
     this.deleteDialogVisible = deleteDialogVisible;
+  };
+
+  setStealthModeDialogVisible = (stealthModeDialogVisible, cb) => {
+    this.stealthModeDialogVisible = stealthModeDialogVisible;
+    this.stealthModeDialogCB = cb;
   };
 
   setLifetimeDialogVisible = (lifetimeDialogVisible, cb) => {

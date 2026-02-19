@@ -151,6 +151,7 @@ const SetRoomParams = ({
   createdBy,
   inviteItems,
   setLifetimeDialogVisible,
+  setStealthModeDialogVisible,
   hideConfirmRoomLifetime,
   templateIsAvailable,
   fromTemplate,
@@ -561,6 +562,7 @@ const SetRoomParams = ({
           setRoomParams={setRoomParams}
           isEdit={isEdit}
           setLifetimeDialogVisible={setLifetimeDialogVisible}
+          setStealthModeDialogVisible={setStealthModeDialogVisible}
         />
       ) : null}
 
@@ -650,6 +652,7 @@ export default inject(
       covers,
       setCover,
       setLifetimeDialogVisible,
+      setStealthModeDialogVisible,
     } = dialogsStore;
 
     const { hideConfirmRoomLifetime } = filesSettingsStore;
@@ -686,6 +689,7 @@ export default inject(
       covers,
       setCover,
       setLifetimeDialogVisible,
+      setStealthModeDialogVisible,
       hideConfirmRoomLifetime,
       infoPanelSelection,
     };

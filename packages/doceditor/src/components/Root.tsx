@@ -116,6 +116,8 @@ const Root = ({
 
   deepLinkSettings,
   baseSdkConfig,
+
+  generationToolCallState,
 }: TResponse) => {
   const editorRef = React.useRef<null | HTMLElement>(null);
 
@@ -349,6 +351,7 @@ const Root = ({
           onDownloadAs={onDownloadAs}
           filesSettings={filesSettings}
           shareKey={shareKey}
+          generationToolCallState={generationToolCallState}
           onSDKRequestSharingSettings={onSDKRequestSharingSettings}
           onSDKRequestSaveAs={onSDKRequestSaveAs}
           onSDKRequestInsertImage={onSDKRequestInsertImage}

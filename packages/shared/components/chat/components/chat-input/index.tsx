@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { KeyboardEvent } from "react";
+import React, { type KeyboardEvent } from "react";
 import classNames from "classnames";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";

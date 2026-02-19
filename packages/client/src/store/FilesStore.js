@@ -272,6 +272,10 @@ class FilesStore {
 
   aiRoomStore = null;
 
+  dialogsStore = null;
+
+  arrRoomGroups = [];
+
   constructor(
     authStore,
     selectedFolderStore,
@@ -2403,6 +2407,21 @@ class FilesStore {
             this.setCreatedItem(null);
           }
 
+          // Show room grouping dialog if >= 10 rooms and not shown before
+          const isRoomsFolderByType =
+            data.current.rootFolderType === FolderType.Rooms &&
+            !data.current.parentId;
+          if (
+            isRoomsFolderByType &&
+            data.total >= 10 &&
+            !this.filesSettingsStore.organizeRoomsGrouping &&
+            this.dialogsStore?.setRoomGroupingDialogVisible
+          ) {
+            const dialogShown = localStorage.getItem("roomGroupingDialogShown");
+            if (!dialogShown)
+              this.dialogsStore.setRoomGroupingDialogVisible(true);
+          }
+
           runInAction(() => {
             this.roomsController = null;
           });
@@ -3288,6 +3307,9 @@ class FilesStore {
         "external-link",
         "embedding-settings",
         "room-info",
+        "create-group",
+        "add-to-group",
+        "remove-from-group",
         "pin-room",
         "unpin-room",
         "mute-room",
@@ -3387,6 +3409,29 @@ class FilesStore {
 
       if (!canViewRoomInfo) {
         roomOptions = removeOptions(roomOptions, ["room-info"]);
+      }
+
+      const { organizeRoomsGrouping } = this.filesSettingsStore;
+      const { roomGroups } = this.dialogsStore;
+      const currentGroupId = this.roomsFilter?.groupId;
+      if (
+        !organizeRoomsGrouping ||
+        isArchiveFolder ||
+        item.rootFolderType === FolderType.Archive ||
+        this.treeFoldersStore.isAIAgentsFolder
+      ) {
+        roomOptions = removeOptions(roomOptions, [
+          "create-group",
+          "add-to-group",
+          "remove-from-group",
+        ]);
+      } else if (!roomGroups || roomGroups.length === 0) {
+        roomOptions = removeOptions(roomOptions, [
+          "add-to-group",
+          "remove-from-group",
+        ]);
+      } else if (!currentGroupId) {
+        roomOptions = removeOptions(roomOptions, ["remove-from-group"]);
       }
 
       if (isArchiveFolder || item.rootFolderType === FolderType.Archive) {

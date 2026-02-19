@@ -54,6 +54,9 @@ export type RoomSelectorProps = TSelectorHeader &
     style?: React.CSSProperties;
 
     isMultiSelect: boolean;
+    forceIsMultiSelect?: boolean;
+
+    selectedItems?: TSelectorItem[];
 
     onSubmit: (items: TSelectorItem[]) => void | Promise<void>;
     roomType?: RoomsType | RoomsType[];
@@ -72,4 +75,9 @@ export type RoomSelectorProps = TSelectorHeader &
 
     emptyScreenHeader?: string;
     emptyScreenDescription?: string;
+    disableFirstFetch?: boolean;
+    /** When true, sorts items so that selectedItems appear at the beginning of the list */
+    sortSelectedFirst?: boolean;
+    /** When true, disables submit button until selection changes from initial state (for grouping panel) */
+    disableSubmitUntilChanged?: boolean;
   } & TInitValue;

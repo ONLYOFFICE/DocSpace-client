@@ -211,6 +211,7 @@
   "CreateFileCopy": "Креирај копију датотеке",
   "CreateFolderDescription": "У одредишту ће бити два различита фолдера",
   "CreateFormFillingRoom": "Креирај Просторију за попуњавање формулара",
+  "CreateGroup": "Креирај групу",
   "CreateMasterFormFromFile": "Креирај PDF образац из датотеке",
   "CreatePDFForm": "Креирај PDF формулар",
   "CreateRoom": "Креирај собу",
@@ -387,6 +388,7 @@
   "Exabyte": "ЕБ",
   "Example": "Пример: {{example}}",
   "ExpiredLink": "Истекао линк",
+  "ExternalLink": "Екстерни линк",
   "Favorites": "Омиљени",
   "FeeAppliesToEachBackup": "Напомена: За сваки бекaп се наплаћује накнада",
   "FeedbackAndSupport": "Повратне информације и подршка",
@@ -958,6 +960,8 @@
   "ThisSectionIsEmpty": "Одељак је празан",
   "Title": "Наслов",
   "TitleSelectFile": "Изабери",
+  "TitleShowActions": "Прикажи акције датотека",
+  "TitleShowFolderActions": "Прикажи акциије фолдера",
   "Today": "Данас",
   "ToolCallArg": "Аргументи позива алата:",
   "ToolCallArgCopied": "Аргументи позива алата успешно копирани у привремену меморију",
@@ -1050,8 +1054,5 @@
   "YouHaveUnsavedChanges": "Имате несачуване промене",
   "YourCurrentDomain": "Ваш тренутни домен",
   "YourLogo": "Ваш лого",
-  "YourTurn": "Ваш ред",
-  "ExternalLink": "Екстерни линк",
-  "TitleShowFolderActions": "Прикажи акциије фолдера",
-  "TitleShowActions": "Прикажи акције датотека"
+  "YourTurn": "Ваш ред"
 }

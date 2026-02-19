@@ -211,6 +211,7 @@
   "CreateFileCopy": "Ստեղծել ֆայլի պատճեն",
   "CreateFolderDescription": "Նպատակակետում կլինեն երկու տարբեր թղթապանակներ",
   "CreateFormFillingRoom": "Ստեղծել ձևաթղթերի լրացման սենյակ",
+  "CreateGroup": "Ստեղծել խումբ",
   "CreateMasterFormFromFile": "Ստեղծեք PDF ձև ֆայլից",
   "CreatePDFForm": "Ստեղծել PDF ձև",
   "CreateRoom": "Ստեղծեք սենյակ",
@@ -387,6 +388,7 @@
   "Exabyte": "ԵԲ",
   "Example": "Օրինակ՝ {{example}}",
   "ExpiredLink": "Ժամկետանց հղում",
+  "ExternalLink": "Արտաքին հղում",
   "Favorites": "Նախընտրելիներ",
   "FeeAppliesToEachBackup": "Խնդրում ենք նկատի ունենալ՝ յուրաքանչյուր պահուստավորման համար գանձվում է վճար:",
   "FeedbackAndSupport": "Հետադարձ կապ և աջակցություն",
@@ -958,6 +960,8 @@
   "ThisSectionIsEmpty": "Այս բաժինը դատարկ է",
   "Title": "Վերնագիր",
   "TitleSelectFile": "Ընտրել",
+  "TitleShowActions": "Ցույց տալ ֆայլի գործողությունները",
+  "TitleShowFolderActions": "Ցույց տալ պանակի գործողությունները",
   "Today": "Այսօր",
   "ToolCallArg": "Գործիքի կանչի արգումենտներ՝",
   "ToolCallArgCopied": "Գործիքի կանչի արգումենտները հաջողությամբ պատճենվել են սեղմատախտակին",
@@ -1050,8 +1054,5 @@
   "YouHaveUnsavedChanges": "Դուք չպահված փոփոխություններ ունեք",
   "YourCurrentDomain": "Ձեր ընթացիկ տիրույթը",
   "YourLogo": "Ձեր լոգոն",
-  "YourTurn": "Ձեր հերթն է",
-  "ExternalLink": "Արտաքին հղում",
-  "TitleShowFolderActions": "Ցույց տալ պանակի գործողությունները",
-  "TitleShowActions": "Ցույց տալ ֆայլի գործողությունները"
+  "YourTurn": "Ձեր հերթն է"
 }

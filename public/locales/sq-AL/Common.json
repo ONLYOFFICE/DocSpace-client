@@ -211,6 +211,7 @@
   "CreateFileCopy": "Krijo një kopje të skedarit",
   "CreateFolderDescription": "Do të ketë dy dosje të ndryshme në destinacion",
   "CreateFormFillingRoom": "Krijoni dhomën e plotësimit të formularit",
+  "CreateGroup": "Krijoni grup",
   "CreateMasterFormFromFile": "Krijoni Formularin Model nga skedari",
   "CreatePDFForm": "Krijoni formularin PDF",
   "CreateRoom": "Krijoni dhomë",
@@ -387,6 +388,7 @@
   "Exabyte": "EB",
   "Example": "Shembull: {{example}}",
   "ExpiredLink": "Lidhje e skaduar",
+  "ExternalLink": "Lidhje e jashtme",
   "Favorites": "Të preferuarat",
   "FeeAppliesToEachBackup": "Ju lutem vini re: Një tarifë aplikohet për çdo kopje rezervë",
   "FeedbackAndSupport": "Opinion & Suport",
@@ -958,6 +960,8 @@
   "ThisSectionIsEmpty": "Ky seksion është bosh",
   "Title": "Titulli",
   "TitleSelectFile": "Selektoni",
+  "TitleShowActions": "Shfaqni veprimet e skedarit",
+  "TitleShowFolderActions": "Shfaqni veprimet e dosjeve",
   "Today": "Sot",
   "ToolCallArg": "Argumentet e thirrjes së mjetit:",
   "ToolCallArgCopied": "Argumentet e thirrjes së mjetit u kopjuan me sukses në kujtesën e përkohshme",
@@ -1050,8 +1054,5 @@
   "YouHaveUnsavedChanges": "Ju keni ndryshime të paruajtura",
   "YourCurrentDomain": "Domeni juaj aktual",
   "YourLogo": "Logos juaj",
-  "YourTurn": "Radha jote",
-  "ExternalLink": "Lidhje e jashtme",
-  "TitleShowFolderActions": "Shfaqni veprimet e dosjeve",
-  "TitleShowActions": "Shfaqni veprimet e skedarit"
+  "YourTurn": "Radha jote"
 }

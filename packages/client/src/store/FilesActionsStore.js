@@ -2042,6 +2042,37 @@ class FilesActionStore {
         const canCreateRoom = selection.some((s) => s.security?.CreateRoomFrom);
         return canCreateRoom;
       }
+      case "create-group": {
+        const { organizeRoomsGrouping } = this.filesSettingsStore;
+        const { isRoomsFolder } = this.treeFoldersStore;
+        return organizeRoomsGrouping && isRoomsFolder && hasSelection;
+      }
+      case "add-to-group": {
+        const { organizeRoomsGrouping } = this.filesSettingsStore;
+        const { isRoomsFolder } = this.treeFoldersStore;
+        const { roomGroups } = this.dialogsStore;
+        return (
+          organizeRoomsGrouping &&
+          isRoomsFolder &&
+          hasSelection &&
+          roomGroups &&
+          roomGroups.length > 0
+        );
+      }
+      case "remove-from-group": {
+        const { organizeRoomsGrouping } = this.filesSettingsStore;
+        const { isRoomsFolder } = this.treeFoldersStore;
+        const { roomGroups } = this.dialogsStore;
+        const currentGroupId = this.filesStore.roomsFilter?.groupId;
+        return (
+          organizeRoomsGrouping &&
+          isRoomsFolder &&
+          hasSelection &&
+          roomGroups &&
+          roomGroups.length > 0 &&
+          !!currentGroupId
+        );
+      }
       case "change-quota":
         return hasRoomsToChangeQuota;
       case "change-agent-quota":
@@ -2306,6 +2337,9 @@ class FilesActionStore {
     });
 
     const pin = this.getOption(pinName, t);
+    const createGroup = this.getOption("create-group", t);
+    const addToGroup = this.getOption("add-to-group", t);
+    const removeFromGroup = this.getOption("remove-from-group", t);
     const archive = this.getOption("archive", t);
     const changeQuota = this.getOption("change-quota", t);
     const disableQuota = this.getOption("disable-quota", t);
@@ -2314,6 +2348,11 @@ class FilesActionStore {
 
     itemsCollection
       .set(pinName, pin)
+      .set("create-group", createGroup)
+      .set("add-to-group", addToGroup)
+      .set("remove-from-group", removeFromGroup);
+
+    itemsCollection
       .set("archive", archive)
       .set("change-quota", changeQuota)
       .set("default-quota", defaultQuota)

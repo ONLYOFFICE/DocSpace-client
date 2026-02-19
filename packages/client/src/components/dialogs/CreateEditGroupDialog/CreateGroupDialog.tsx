@@ -28,8 +28,8 @@ import { useState, ChangeEvent } from "react";
 import { useTranslation } from "react-i18next";
 
 import {
-	ModalDialog,
-	ModalDialogType,
+  ModalDialog,
+  ModalDialogType,
 } from "@docspace/ui-kit/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { toastr } from "@docspace/ui-kit/components/toast";
@@ -46,185 +46,183 @@ import SelectGroupManagerPanel from "./sub-components/HeadOfGroupParam/SelectGro
 import { SelectMembersPanel } from "./sub-components/create-components/SelectMembersPanel";
 
 interface CreateGroupDialogProps {
-	visible: boolean;
-	onClose: () => void;
+  visible: boolean;
+  onClose: () => void;
 }
 
 const CreateGroupDialog = ({ visible, onClose }: CreateGroupDialogProps) => {
-	const { t } = useTranslation([
-		"Common",
-		"PeopleTranslations",
-		"InviteDialog",
-	]);
+  const { t } = useTranslation([
+    "Common",
+    "PeopleTranslations",
+    "InviteDialog",
+  ]);
 
-	const [groupParams, setGroupParams] = useState<GroupParams>({
-		groupName: "",
-		groupManager: null,
-		groupMembers: [],
-	});
+  const [groupParams, setGroupParams] = useState<GroupParams>({
+    groupName: "",
+    groupManager: null,
+    groupMembers: [],
+  });
 
-	const [isLoading, setIsLoading] = useState<boolean>(false);
-	const [selectGroupMangerPanelIsVisible, setSelectGroupMangerPanelIsVisible] =
-		useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [selectGroupMangerPanelIsVisible, setSelectGroupMangerPanelIsVisible] =
+    useState<boolean>(false);
 
-	const onChangeGroupName = (e: ChangeEvent<HTMLInputElement>) =>
-		setGroupParams({ ...groupParams, groupName: e.target.value });
+  const onChangeGroupName = (e: ChangeEvent<HTMLInputElement>) =>
+    setGroupParams({ ...groupParams, groupName: e.target.value });
 
-	const onHideSelectGroupManagerPanel = () =>
-		setSelectGroupMangerPanelIsVisible(false);
-	const setGroupManager = (groupManager: TUser | null) => {
-		setGroupParams({ ...groupParams, groupManager });
-		setSelectGroupMangerPanelIsVisible(false);
-	};
-	const setGroupMembers = (groupMembers: TUser[]) =>
-		setGroupParams((prevState) => ({ ...prevState, groupMembers }));
+  const onHideSelectGroupManagerPanel = () =>
+    setSelectGroupMangerPanelIsVisible(false);
+  const setGroupManager = (groupManager: TUser | null) => {
+    setGroupParams({ ...groupParams, groupManager });
+    setSelectGroupMangerPanelIsVisible(false);
+  };
+  const setGroupMembers = (groupMembers: TUser[]) =>
+    setGroupParams((prevState) => ({ ...prevState, groupMembers }));
 
-	const onShowSelectGroupManagerPanel = () =>
-		setSelectGroupMangerPanelIsVisible(true);
+  const onShowSelectGroupManagerPanel = () =>
+    setSelectGroupMangerPanelIsVisible(true);
 
-	const [selectMembersPanelIsVisible, setSelectMembersPanelIsVisible] =
-		useState<boolean>(false);
+  const [selectMembersPanelIsVisible, setSelectMembersPanelIsVisible] =
+    useState<boolean>(false);
 
-	const onShowSelectMembersPanel = () => setSelectMembersPanelIsVisible(true);
-	const onHideSelectMembersPanel = () => setSelectMembersPanelIsVisible(false);
+  const onShowSelectMembersPanel = () => setSelectMembersPanelIsVisible(true);
+  const onHideSelectMembersPanel = () => setSelectMembersPanelIsVisible(false);
 
-	const removeManager = () => {
-		setGroupManager(null);
-		setGroupMembers(
-			groupParams.groupMembers?.filter(
-				(gm) => gm.id !== groupParams.groupManager!.id,
-			) || [],
-		);
-	};
+  const removeManager = () => {
+    setGroupManager(null);
+    setGroupMembers(
+      groupParams.groupMembers?.filter(
+        (gm) => gm.id !== groupParams.groupManager!.id,
+      ) || [],
+    );
+  };
 
-	const addMembers = (newGroupMembers: TUser[]) => {
-		const resultGroupMembers: TUser[] = [...groupParams.groupMembers];
-		let showErrorWasSelected = false;
+  const addMembers = (newGroupMembers: TUser[]) => {
+    const resultGroupMembers: TUser[] = [...groupParams.groupMembers];
+    let showErrorWasSelected = false;
 
-		newGroupMembers.forEach((groupMember) => {
-			if (
-				groupParams.groupMembers.findIndex((gm) => gm.id === groupMember.id) !==
-				-1
-			) {
-				showErrorWasSelected = true;
-				return;
-			}
-			resultGroupMembers.push(groupMember);
-		});
+    newGroupMembers.forEach((groupMember) => {
+      if (
+        groupParams.groupMembers.findIndex((gm) => gm.id === groupMember.id) !==
+        -1
+      ) {
+        showErrorWasSelected = true;
+        return;
+      }
+      resultGroupMembers.push(groupMember);
+    });
 
-		if (showErrorWasSelected) {
-			toastr.warning(t("InviteDialog:UsersAlreadyAdded"));
-		}
+    if (showErrorWasSelected) {
+      toastr.warning(t("InviteDialog:UsersAlreadyAdded"));
+    }
 
-		setGroupMembers(resultGroupMembers);
-		onHideSelectMembersPanel();
-	};
+    setGroupMembers(resultGroupMembers);
+    onHideSelectMembersPanel();
+  };
 
-	const removeMember = (member: TUser) => {
-		const newGroupMembers = groupParams.groupMembers?.filter(
-			(gm) => gm.id !== member.id,
-		);
-		setGroupMembers(newGroupMembers || []);
-	};
+  const removeMember = (member: TUser) => {
+    const newGroupMembers = groupParams.groupMembers?.filter(
+      (gm) => gm.id !== member.id,
+    );
+    setGroupMembers(newGroupMembers || []);
+  };
 
-	const onCreateGroup = async () => {
-		setIsLoading(true);
+  const onCreateGroup = async () => {
+    setIsLoading(true);
 
-		const groupManagerId = groupParams.groupManager?.id || undefined;
-		const groupMembersIds = groupParams.groupMembers.map((gm) => gm.id);
+    const groupManagerId = groupParams.groupManager?.id || undefined;
+    const groupMembersIds = groupParams.groupMembers.map((gm) => gm.id);
 
-		try {
-			await createGroup(groupParams.groupName, groupManagerId, groupMembersIds);
-		} catch (err) {
-			toastr.error((err as Error).message);
-		} finally {
-			setIsLoading(false);
-			onClose();
-		}
-	};
+    try {
+      await createGroup(groupParams.groupName, groupManagerId, groupMembersIds);
+    } catch (err) {
+      toastr.error((err as Error).message);
+    } finally {
+      setIsLoading(false);
+      onClose();
+    }
+  };
 
-	return (
-		<>
-			<ModalDialog
-				displayType={ModalDialogType.aside}
-				withBodyScroll
-				visible={visible}
-				onClose={onClose}
-				//   isScrollLocked={isScrollLocked}
-				//   isOauthWindowOpen={isOauthWindowOpen}
-			>
-				<ModalDialog.Header>
-					{t("PeopleTranslations:CreateGroup")}
-				</ModalDialog.Header>
+  return (
+    <>
+      <ModalDialog
+        displayType={ModalDialogType.aside}
+        withBodyScroll
+        visible={visible}
+        onClose={onClose}
+        //   isScrollLocked={isScrollLocked}
+        //   isOauthWindowOpen={isOauthWindowOpen}
+      >
+        <ModalDialog.Header>{t("Common:CreateGroup")}</ModalDialog.Header>
 
-				<ModalDialog.Body>
-					<StyledBodyContent>
-						<GroupNameParam
-							groupName={groupParams.groupName}
-							onChangeGroupName={onChangeGroupName}
-						/>
-						<HeadOfGroup
-							groupManager={groupParams.groupManager}
-							removeManager={removeManager}
-							onShowSelectGroupManagerPanel={onShowSelectGroupManagerPanel}
-						/>
-						<MembersParam
-							groupManager={groupParams.groupManager}
-							groupMembers={groupParams.groupMembers}
-							removeMember={removeMember}
-							onShowSelectMembersPanel={onShowSelectMembersPanel}
-						/>
-					</StyledBodyContent>
-				</ModalDialog.Body>
+        <ModalDialog.Body>
+          <StyledBodyContent>
+            <GroupNameParam
+              groupName={groupParams.groupName}
+              onChangeGroupName={onChangeGroupName}
+            />
+            <HeadOfGroup
+              groupManager={groupParams.groupManager}
+              removeManager={removeManager}
+              onShowSelectGroupManagerPanel={onShowSelectGroupManagerPanel}
+            />
+            <MembersParam
+              groupManager={groupParams.groupManager}
+              groupMembers={groupParams.groupMembers}
+              removeMember={removeMember}
+              onShowSelectMembersPanel={onShowSelectMembersPanel}
+            />
+          </StyledBodyContent>
+        </ModalDialog.Body>
 
-				<ModalDialog.Footer>
-					<Button
-						id="create-group-modal_submit"
-						testId="create_edit_group_create_button"
-						tabIndex={5}
-						label={t("Common:Create")}
-						size={ButtonSize.normal}
-						primary
-						scale
-						onClick={onCreateGroup}
-						isDisabled={
-							!groupParams.groupName ||
-							(!groupParams.groupManager && !groupParams.groupMembers.length)
-						}
-						isLoading={isLoading}
-					/>
-					<Button
-						id="create-group-modal_cancel"
-						testId="create_edit_group_cancel_button"
-						tabIndex={5}
-						label={t("Common:CancelButton")}
-						size={ButtonSize.normal}
-						scale
-						isDisabled={isLoading}
-						onClick={onClose}
-					/>
-				</ModalDialog.Footer>
-			</ModalDialog>
+        <ModalDialog.Footer>
+          <Button
+            id="create-group-modal_submit"
+            testId="create_edit_group_create_button"
+            tabIndex={5}
+            label={t("Common:Create")}
+            size={ButtonSize.normal}
+            primary
+            scale
+            onClick={onCreateGroup}
+            isDisabled={
+              !groupParams.groupName ||
+              (!groupParams.groupManager && !groupParams.groupMembers.length)
+            }
+            isLoading={isLoading}
+          />
+          <Button
+            id="create-group-modal_cancel"
+            testId="create_edit_group_cancel_button"
+            tabIndex={5}
+            label={t("Common:CancelButton")}
+            size={ButtonSize.normal}
+            scale
+            isDisabled={isLoading}
+            onClick={onClose}
+          />
+        </ModalDialog.Footer>
+      </ModalDialog>
 
-			{selectGroupMangerPanelIsVisible ? (
-				<SelectGroupManagerPanel
-					onClose={onHideSelectGroupManagerPanel}
-					onParentPanelClose={onClose}
-					setGroupManager={setGroupManager}
-				/>
-			) : null}
+      {selectGroupMangerPanelIsVisible ? (
+        <SelectGroupManagerPanel
+          onClose={onHideSelectGroupManagerPanel}
+          onParentPanelClose={onClose}
+          setGroupManager={setGroupManager}
+        />
+      ) : null}
 
-			{selectMembersPanelIsVisible ? (
-				<SelectMembersPanel
-					onClose={onHideSelectMembersPanel}
-					onParentPanelClose={onClose}
-					groupManager={groupParams.groupManager}
-					groupMembers={groupParams.groupMembers}
-					addMembers={addMembers as unknown as TOnSubmit}
-				/>
-			) : null}
-		</>
-	);
+      {selectMembersPanelIsVisible ? (
+        <SelectMembersPanel
+          onClose={onHideSelectMembersPanel}
+          onParentPanelClose={onClose}
+          groupManager={groupParams.groupManager}
+          groupMembers={groupParams.groupMembers}
+          addMembers={addMembers as unknown as TOnSubmit}
+        />
+      ) : null}
+    </>
+  );
 };
 
 export default CreateGroupDialog;

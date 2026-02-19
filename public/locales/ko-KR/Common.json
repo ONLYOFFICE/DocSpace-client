@@ -211,6 +211,7 @@
   "CreateFileCopy": "파일 본사본 생성",
   "CreateFolderDescription": "목표에 두 개의 다른 폴더가 있습니다",
   "CreateFormFillingRoom": "양식 작성 룸 생성 ",
+  "CreateGroup": "그룹 생성",
   "CreateMasterFormFromFile": "파일에서 PDF 양식 만들기",
   "CreatePDFForm": "PDF 양식 생성",
   "CreateRoom": "방 생성",
@@ -387,6 +388,7 @@
   "Exabyte": "EB",
   "Example": "예: {{example}}",
   "ExpiredLink": "만료된 링크입니다",
+  "ExternalLink": "외부 링크",
   "Favorites": "좋아요",
   "FeeAppliesToEachBackup": "참고: 각 백업마다 수수료가 부과됩니다.",
   "FeedbackAndSupport": "피드백 및 지원",
@@ -958,6 +960,8 @@
   "ThisSectionIsEmpty": "이 섹션이 비어 있습니다",
   "Title": "제목",
   "TitleSelectFile": "선택",
+  "TitleShowActions": "파일 동작 표시",
+  "TitleShowFolderActions": "폴더 작업 표시",
   "Today": "오늘",
   "ToolCallArg": "도구 호출 인수:",
   "ToolCallArgCopied": "도구 호출 인수가 클립보드에 성공적으로 복사되었습니다",
@@ -1050,8 +1054,5 @@
   "YouHaveUnsavedChanges": "저장하지 않은 변경 사항이 있습니다",
   "YourCurrentDomain": "내 현재 도메인",
   "YourLogo": "로고",
-  "YourTurn": "고객님의 차례입니다",
-  "ExternalLink": "외부 링크",
-  "TitleShowFolderActions": "폴더 작업 표시",
-  "TitleShowActions": "파일 동작 표시"
+  "YourTurn": "고객님의 차례입니다"
 }

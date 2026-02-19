@@ -211,6 +211,7 @@
   "CreateFileCopy": "Utwórz kopię pliku",
   "CreateFolderDescription": "W lokalizacji docelowej znajdziesz dwa różne katalogi",
   "CreateFormFillingRoom": "Utwórz pokój do wypełniania formularzy",
+  "CreateGroup": "Utwórz grupę",
   "CreateMasterFormFromFile": "Utwórz formularz PDF z pliku",
   "CreatePDFForm": "Utwórz formularz PDF",
   "CreateRoom": "Utwórz pokój",
@@ -387,6 +388,7 @@
   "Exabyte": "EB",
   "Example": "Przykład: {{example}}",
   "ExpiredLink": "Link wygasł",
+  "ExternalLink": "Link zewnętrzny",
   "Favorites": "Ulubione",
   "FeeAppliesToEachBackup": "Uwaga: za każde tworzenie kopii zapasowej pobierana jest opłata.",
   "FeedbackAndSupport": "Opinie i wsparcie",
@@ -958,6 +960,8 @@
   "ThisSectionIsEmpty": "Dana sekcja jest pusta",
   "Title": "Tytuł",
   "TitleSelectFile": "Wybierz",
+  "TitleShowActions": "Działania na plikach",
+  "TitleShowFolderActions": "Działania na folderach",
   "Today": "Dzisiaj",
   "ToolCallArg": "Argumenty wywołania narzędzia:",
   "ToolCallArgCopied": "Pomyślnie skopiowano argumenty wywołania narzędzia do schowka",
@@ -1050,8 +1054,5 @@
   "YouHaveUnsavedChanges": "Masz niezapisane zmiany",
   "YourCurrentDomain": "Twoja obecna domena",
   "YourLogo": "Twoje Logo",
-  "YourTurn": "Twoja kolej",
-  "ExternalLink": "Link zewnętrzny",
-  "TitleShowFolderActions": "Działania na folderach",
-  "TitleShowActions": "Działania na plikach"
+  "YourTurn": "Twoja kolej"
 }

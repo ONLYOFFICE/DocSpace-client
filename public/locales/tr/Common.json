@@ -211,6 +211,7 @@
   "CreateFileCopy": "Dosya kopyası oluştur",
   "CreateFolderDescription": "Hedefte iki farklı klasör olacaktır",
   "CreateFormFillingRoom": "Form doldurma odası oluştur",
+  "CreateGroup": "Grup oluştur",
   "CreateMasterFormFromFile": "Dosyadan PDF formu oluştur",
   "CreatePDFForm": "PDF Formu Oluştur",
   "CreateRoom": "Oda oluştur",
@@ -387,6 +388,7 @@
   "Exabyte": "EB",
   "Example": "Örnek: {{example}}",
   "ExpiredLink": "Süresi dolmuş bağlantı",
+  "ExternalLink": "Harici bağlantı",
   "Favorites": "Favoriler",
   "FeeAppliesToEachBackup": "Lütfen unutmayın: Her yedekleme için bir ücret geçerlidir.",
   "FeedbackAndSupport": "Geri Bildirim & Destek",
@@ -958,6 +960,8 @@
   "ThisSectionIsEmpty": "Bu bölüm boş",
   "Title": "Başlık",
   "TitleSelectFile": "Seç",
+  "TitleShowActions": "Dosya eylemlerini göster",
+  "TitleShowFolderActions": "Klasör eylemlerini göster",
   "Today": "Bugün",
   "ToolCallArg": "Araç çağrısı argümanları:",
   "ToolCallArgCopied": "Araç çağrısı argümanları başarıyla panoya kopyalandı",
@@ -1050,8 +1054,5 @@
   "YouHaveUnsavedChanges": "Kaydedilmemiş değişiklikleriniz var",
   "YourCurrentDomain": "Mevcut alanınız",
   "YourLogo": "Logonuz",
-  "YourTurn": "Sıra sizde",
-  "ExternalLink": "Harici bağlantı",
-  "TitleShowFolderActions": "Klasör eylemlerini göster",
-  "TitleShowActions": "Dosya eylemlerini göster"
+  "YourTurn": "Sıra sizde"
 }

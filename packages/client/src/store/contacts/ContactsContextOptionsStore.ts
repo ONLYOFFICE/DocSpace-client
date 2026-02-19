@@ -698,17 +698,17 @@ class ContactsConextOptionsStore {
 			},
 		];
 
-		const groupsOptions = [
-			{
-				id: "create_group",
-				className: "main-button_drop-down",
-				icon: GroupReactSvgUrl,
-				label: t("PeopleTranslations:CreateGroup"),
-				onClick: createGroup,
-				action: "group",
-				key: "group",
-			},
-		];
+    const groupsOptions = [
+      {
+        id: "create_group",
+        className: "main-button_drop-down",
+        icon: GroupReactSvgUrl,
+        label: t("Common:CreateGroup"),
+        onClick: createGroup,
+        action: "group",
+        key: "group",
+      },
+    ];
 
 		const accountsSectionActions = [
 			{

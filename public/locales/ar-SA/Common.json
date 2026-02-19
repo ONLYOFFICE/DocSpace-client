@@ -211,6 +211,7 @@
   "CreateFileCopy": "انشاء نسخة ملف",
   "CreateFolderDescription": "سيكون هناك مجلدان مختلفان في الوجهة",
   "CreateFormFillingRoom": "إنشاء غرفة تعبئة النماذج",
+  "CreateGroup": "إنشاء مجموعة",
   "CreateMasterFormFromFile": "نشا نموذج PDF من ملف",
   "CreatePDFForm": "إنشاء نموذج PDF",
   "CreateRoom": "إنشاء غرفة",
@@ -387,6 +388,7 @@
   "Exabyte": "البايت",
   "Example": "مثال: {{example}}",
   "ExpiredLink": "رابط منتهي الصلاحية",
+  "ExternalLink": "رابط خارجي",
   "Favorites": "المفضلة",
   "FeeAppliesToEachBackup": "يرجى ملاحظة: يتم تطبيق رسوم على كل نسخة احتياطية",
   "FeedbackAndSupport": "التقييم والدعم",
@@ -958,6 +960,8 @@
   "ThisSectionIsEmpty": "هذا القسم فارغ",
   "Title": "العنوان",
   "TitleSelectFile": "اختر",
+  "TitleShowActions": "عرض إجراءات الملف",
+  "TitleShowFolderActions": "عرض إجراءات المجلد",
   "Today": "اليوم",
   "ToolCallArg": "وسائط استدعاء الأداة:",
   "ToolCallArgCopied": "تم نسخ وسائط استدعاء الأداة بنجاح إلى الحافظة",
@@ -1050,8 +1054,5 @@
   "YouHaveUnsavedChanges": "لقد قمت بعدم حفظ التغييرات",
   "YourCurrentDomain": "النطاق الحالي الخاص بك",
   "YourLogo": "شعاركم",
-  "YourTurn": "دوركم الآن",
-  "ExternalLink": "رابط خارجي",
-  "TitleShowFolderActions": "عرض إجراءات المجلد",
-  "TitleShowActions": "عرض إجراءات الملف"
+  "YourTurn": "دوركم الآن"
 }

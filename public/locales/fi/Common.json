@@ -211,6 +211,7 @@
   "CreateFileCopy": "Luo kopio tiedostosta",
   "CreateFolderDescription": "Kohteeseen tulee kaksi erilaista kansiota",
   "CreateFormFillingRoom": "Luo lomakkeen täyttöhuone",
+  "CreateGroup": "Luo ryhmä",
   "CreateMasterFormFromFile": "Luo PDF-lomake tiedostosta",
   "CreatePDFForm": "Luo PDF-lomake",
   "CreateRoom": "Luo huone",
@@ -387,6 +388,7 @@
   "Exabyte": "EB",
   "Example": "Esimerkki: {{example}}",
   "ExpiredLink": "Vanhentunut linkki",
+  "ExternalLink": "Ulkoinen linkki",
   "Favorites": "Suosikit",
   "FeeAppliesToEachBackup": "Huomioithan: Varmuuskopioista peritään maksu.",
   "FeedbackAndSupport": "Palaute & Tuki",
@@ -958,6 +960,8 @@
   "ThisSectionIsEmpty": "Tämä osio on tyhjä",
   "Title": "Otsikko",
   "TitleSelectFile": "Valitse",
+  "TitleShowActions": "Toimenpiteet",
+  "TitleShowFolderActions": "Kansion toiminnot",
   "Today": "Tänään",
   "ToolCallArg": "Työkalun kutsuargumentit:",
   "ToolCallArgCopied": "Työkalun kutsuargumentit kopioitiin onnistuneesti leikepöydälle",
@@ -1050,8 +1054,5 @@
   "YouHaveUnsavedChanges": "Sinulla on tallentamattomia muutoksia",
   "YourCurrentDomain": "Nykyinen verkkotunnuksesi",
   "YourLogo": "Logosi",
-  "YourTurn": "Sinun vuorosi",
-  "ExternalLink": "Ulkoinen linkki",
-  "TitleShowFolderActions": "Kansion toiminnot",
-  "TitleShowActions": "Toimenpiteet"
+  "YourTurn": "Sinun vuorosi"
 }

@@ -211,6 +211,7 @@
   "CreateFileCopy": "Створення копії файлу",
   "CreateFolderDescription": "У місці призначення буде дві різні папки",
   "CreateFormFillingRoom": "Створити кімнату заповнення форм",
+  "CreateGroup": "Створити групу",
   "CreateMasterFormFromFile": "Створити PDF-форму з файлу",
   "CreatePDFForm": "Створити PDF-форму",
   "CreateRoom": "Створити кімнату",
@@ -387,6 +388,7 @@
   "Exabyte": "ЕБ",
   "Example": "Приклад: {{example}}",
   "ExpiredLink": "Прострочене посилання",
+  "ExternalLink": "Зовнішнє посилання",
   "Favorites": "Улюблені",
   "FeeAppliesToEachBackup": "Будь ласка, зверніть увагу: за кожне резервне копіювання стягується плата.",
   "FeedbackAndSupport": "Відгуки і підтримка",
@@ -958,6 +960,8 @@
   "ThisSectionIsEmpty": "Цей розділ порожній",
   "Title": "Заголовок",
   "TitleSelectFile": "Обрати",
+  "TitleShowActions": "Показати дії з файлами",
+  "TitleShowFolderActions": "Відобразити дії з папками",
   "Today": "Сьогодні",
   "ToolCallArg": "Аргументи виклику інструменту:",
   "ToolCallArgCopied": "Аргументи виклику інструменту успішно скопійовано в буфер обміну",
@@ -1050,8 +1054,5 @@
   "YouHaveUnsavedChanges": "У вас є незбережені зміни",
   "YourCurrentDomain": "Ваш поточний домен",
   "YourLogo": "Ваш логотип",
-  "YourTurn": "Ваша черга",
-  "ExternalLink": "Зовнішнє посилання",
-  "TitleShowFolderActions": "Відобразити дії з папками",
-  "TitleShowActions": "Показати дії з файлами"
+  "YourTurn": "Ваша черга"
 }

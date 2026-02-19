@@ -97,7 +97,7 @@ async function Page(props: { searchParams: Promise<TSearchParams> }) {
     `fileTitle: ${fileTitle}, parentId: ${parentId}, templateId: ${templateId}, open: ${open}, action: ${action}, url: ${hostname} Create new file`,
   );
 
-  let fileId;
+  let fileId = 0;
   let fileError: Error | undefined;
 
   if (!templateId && fromFile) {

@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 // import "@docspace/shared/utils/wdyr";
-import React from "react";
+import React, { useState } from "react";
 import { I18nextProvider } from "react-i18next";
 import { RouterProvider } from "react-router";
 import { Provider as MobxProvider } from "mobx-react";
@@ -46,17 +46,20 @@ import router from "./router";
 
 import i18n from "./i18n";
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-      retry: 1,
-      staleTime: 5 * 60 * 1000,
-    },
-  },
-});
-
 const App = () => {
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            refetchOnWindowFocus: false,
+            retry: 1,
+            staleTime: 5 * 60 * 1000,
+          },
+        },
+      }),
+  );
+
   React.useEffect(() => {
     const regex = /(\/){2,}/g;
     const replaceRegex = /(\/)+/g;

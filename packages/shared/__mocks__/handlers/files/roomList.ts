@@ -36,6 +36,9 @@ export enum TypeRoomList {
   IsFiltered = "isFiltered",
   IsDefault = "isDefault",
   ContextMenu = "contextMenu",
+  IsFiltered = "isFiltered",
+  IsDefault = "isDefault",
+  ContextMenu = "contextMenu",
 }
 
 const current = {

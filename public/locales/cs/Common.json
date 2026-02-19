@@ -211,6 +211,7 @@
   "CreateFileCopy": "Vytvořit kopii souboru",
   "CreateFolderDescription": "V cílovém umístění budou dvě různé složky",
   "CreateFormFillingRoom": "Vytvořit místnost pro vyplnění formuláře",
+  "CreateGroup": "Vytvořit skupinu",
   "CreateMasterFormFromFile": "Vytvořit PDF formulář ze souboru",
   "CreatePDFForm": "Vytvořit PDF formulář ",
   "CreateRoom": "Vytvoření místnosti",
@@ -387,6 +388,7 @@
   "Exabyte": "EB",
   "Example": "Příklad: {{example}}",
   "ExpiredLink": "Vypršela platnost odkazu",
+  "ExternalLink": "Externí odkaz",
   "Favorites": "Oblíbené",
   "FeeAppliesToEachBackup": "Upozornění: Za každou zálohu se platí poplatek.",
   "FeedbackAndSupport": "Zpětná vazba a technická podpora",
@@ -958,6 +960,8 @@
   "ThisSectionIsEmpty": "Tato část je prázdná",
   "Title": "Titulek",
   "TitleSelectFile": "Vybrat",
+  "TitleShowActions": "Zobrazit akce souborů",
+  "TitleShowFolderActions": "Zobrazit akce složek",
   "Today": "Dnes",
   "ToolCallArg": "Argumenty volání nástroje:",
   "ToolCallArgCopied": "Argumenty volání nástroje byly úspěšně zkopírovány do schránky",
@@ -1050,8 +1054,5 @@
   "YouHaveUnsavedChanges": "Máte neuložené změny",
   "YourCurrentDomain": "Vaše aktuální doména",
   "YourLogo": "Vaše logo",
-  "YourTurn": "Jste na řadě",
-  "ExternalLink": "Externí odkaz",
-  "TitleShowFolderActions": "Zobrazit akce složek",
-  "TitleShowActions": "Zobrazit akce souborů"
+  "YourTurn": "Jste na řadě"
 }

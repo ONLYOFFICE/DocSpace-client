@@ -211,6 +211,7 @@
   "CreateFileCopy": "Créer une copie du fichier",
   "CreateFolderDescription": "Il y aura deux dossiers différents dans la destination",
   "CreateFormFillingRoom": "Créer une salle de remplissage de formulaires",
+  "CreateGroup": "Créer un groupe",
   "CreateMasterFormFromFile": "Créer un formulaire PDF à partir d'un fichier",
   "CreatePDFForm": "Créer formulaire PDF",
   "CreateRoom": "Créer une salle",
@@ -387,6 +388,7 @@
   "Exabyte": "Eo",
   "Example": "Exemple : {{example}}",
   "ExpiredLink": "Lien expiré",
+  "ExternalLink": "Lien externe",
   "Favorites": "Favoris",
   "FeeAppliesToEachBackup": "Veuillez noter : des frais s'appliquent à chaque sauvegarde",
   "FeedbackAndSupport": "Commentaires & assistance",
@@ -958,6 +960,8 @@
   "ThisSectionIsEmpty": "Cette section est vide",
   "Title": "Titre",
   "TitleSelectFile": "Sélectionner",
+  "TitleShowActions": "Actions sur le fichier",
+  "TitleShowFolderActions": "Actions sur le dossier",
   "Today": "Aujourd'hui",
   "ToolCallArg": "Arguments de l'appel à l'outil :",
   "ToolCallArgCopied": "Arguments d'appel de l'outil copiés avec succès dans le presse-papiers",
@@ -1050,8 +1054,5 @@
   "YouHaveUnsavedChanges": "Vous avec des modifications non-sauvegardées",
   "YourCurrentDomain": "Votre domaine actuel",
   "YourLogo": "Votre logo",
-  "YourTurn": "Votre tour",
-  "ExternalLink": "Lien externe",
-  "TitleShowFolderActions": "Actions sur le dossier",
-  "TitleShowActions": "Actions sur le fichier"
+  "YourTurn": "Votre tour"
 }

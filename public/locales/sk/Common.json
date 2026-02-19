@@ -211,6 +211,7 @@
   "CreateFileCopy": "Vytvorte kópiu súboru",
   "CreateFolderDescription": "V cieľovej destinácii budú dva rôzne priečinky",
   "CreateFormFillingRoom": "Vytvoriť miestnosť na vypĺňanie formulárov",
+  "CreateGroup": "Vytvoriť skupinu",
   "CreateMasterFormFromFile": "Vytvoriť PDF formulár zo súboru",
   "CreatePDFForm": "Vytvoriť formulár PDF",
   "CreateRoom": "Vytvoriť miestnosť",
@@ -387,6 +388,7 @@
   "Exabyte": "EB",
   "Example": "Príklad: {{example}}",
   "ExpiredLink": "Platnosť odkazu vypršala",
+  "ExternalLink": "Externý odkaz",
   "Favorites": "Obľúbené",
   "FeeAppliesToEachBackup": "Upozornenie: Na každú zálohu sa platí poplatok.",
   "FeedbackAndSupport": "Spätná väzba a Podpora",
@@ -958,6 +960,8 @@
   "ThisSectionIsEmpty": "Táto časť je prázdna",
   "Title": "Názov",
   "TitleSelectFile": "Vybrať",
+  "TitleShowActions": "Zobraziť akcie pre súbor",
+  "TitleShowFolderActions": "Zobraziť akcie pre priečinky",
   "Today": "Dnes",
   "ToolCallArg": "Argumenty volaní nástroja:",
   "ToolCallArgCopied": "Argumenty volania nástroja úspešne skopírované do schránky",
@@ -1050,8 +1054,5 @@
   "YouHaveUnsavedChanges": "Máte neuložené zmeny",
   "YourCurrentDomain": "Vaša aktuálna doména",
   "YourLogo": "Vaše logo",
-  "YourTurn": "Ste na rade",
-  "ExternalLink": "Externý odkaz",
-  "TitleShowFolderActions": "Zobraziť akcie pre priečinky",
-  "TitleShowActions": "Zobraziť akcie pre súbor"
+  "YourTurn": "Ste na rade"
 }

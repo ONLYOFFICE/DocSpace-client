@@ -211,6 +211,7 @@
   "CreateFileCopy": "Faylın sürətini yaratmaq",
   "CreateFolderDescription": "Təyinat yerində iki fərqli qovluq olacaq",
   "CreateFormFillingRoom": "Forma doldurma otağı yaradın",
+  "CreateGroup": "Qrup yaradın",
   "CreateMasterFormFromFile": "Fayldan PDF forması yaradın",
   "CreatePDFForm": "PDF forması yaradın",
   "CreateRoom": "Otaq yaradın",
@@ -387,6 +388,7 @@
   "Exabyte": "EB",
   "Example": "Nümunə: {{example}}",
   "ExpiredLink": "İstifadə müddəti bitmiş keçid",
+  "ExternalLink": "Xarici keçid",
   "Favorites": "Sevimli",
   "FeeAppliesToEachBackup": "Xahiş edirik bildirin ki, hər bir ehtiyat nüsxəsi üçün ödəniş mövcuddur.",
   "FeedbackAndSupport": "Rəy və Dəstək",
@@ -958,6 +960,8 @@
   "ThisSectionIsEmpty": "Bu bölmə boşdur",
   "Title": "Başlıq",
   "TitleSelectFile": "Seçin",
+  "TitleShowActions": "Fayl əyləmlərini göstər",
+  "TitleShowFolderActions": "Qovluq əyləmlərini göstər",
   "Today": "Bu gün",
   "ToolCallArg": "Alət çağırış argumentləri:",
   "ToolCallArgCopied": "Alət çağırışı arqumentləri uğurla panoya kopyalandı",
@@ -1050,8 +1054,5 @@
   "YouHaveUnsavedChanges": "Yadda saxlanmayan dəyişiklikləriniz var",
   "YourCurrentDomain": "Cari domen adınız",
   "YourLogo": "Loqonuz",
-  "YourTurn": "Sizin növbəniz",
-  "ExternalLink": "Xarici keçid",
-  "TitleShowFolderActions": "Qovluq əyləmlərini göstər",
-  "TitleShowActions": "Fayl əyləmlərini göstər"
+  "YourTurn": "Sizin növbəniz"
 }

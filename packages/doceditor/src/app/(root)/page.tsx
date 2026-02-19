@@ -51,6 +51,7 @@ const initialSearchParams: Awaited<RootPageProps["searchParams"]> = {
   action: undefined,
   share: undefined,
   editorType: undefined,
+  withTool: undefined,
 };
 
 async function Page(props: RootPageProps) {
@@ -70,6 +71,7 @@ async function Page(props: RootPageProps) {
     is_file,
     editorGoBack,
     isSDK,
+    withTool,
   } = searchParams ?? initialSearchParams;
 
   const baseSdkConfig: TFrameConfig & { is_file?: boolean; isSDK?: boolean } = {
@@ -122,6 +124,7 @@ async function Page(props: RootPageProps) {
     action,
     share,
     type,
+    withTool,
   );
 
   if (data.error?.status === "access-denied" && share) {

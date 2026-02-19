@@ -28,6 +28,7 @@ import api from "@docspace/shared/api";
 import {
   setFavoritesSetting,
   setRecentSetting,
+  setOrganizeGrouping,
 } from "@docspace/shared/api/files";
 import { RoomsType } from "@docspace/shared/enums";
 import axios from "axios";
@@ -47,6 +48,7 @@ import {
 } from "@docspace/shared/utils/common";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
+import i18n from "../i18n";
 
 class FilesSettingsStore {
   thirdPartyStore;
@@ -153,6 +155,8 @@ class FilesSettingsStore {
   hideConfirmRoomLifetime = false;
 
   hideConfirmCancelOperation = false;
+
+  organizeRoomsGrouping = false;
 
   extsFilesVectorized = [];
 
@@ -300,6 +304,23 @@ class FilesSettingsStore {
       .changeOpenEditorInSameTab(data)
       .then((res) => this.setFilesSetting("openEditorInSameTab", res))
       .catch((e) => toastr.error(e));
+  };
+
+  setOrganizeRoomsGrouping = async (data) => {
+    try {
+      const res = await setOrganizeGrouping(data);
+      this.setFilesSetting("organizeRoomsGrouping", res);
+
+      const message = res
+        ? i18n.t("GroupingRooms:RoomGroupingEnabled")
+        : i18n.t("GroupingRooms:RoomGroupingDisabled");
+      toastr.success(message);
+
+      return res;
+    } catch (e) {
+      toastr.error(e);
+      throw e;
+    }
   };
 
   setEnableThirdParty = async (data, setting) => {

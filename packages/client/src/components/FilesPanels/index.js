@@ -78,6 +78,9 @@ import {
   CancelOperationDialog,
   ReducedRightsDialog,
   SocialAuthWelcomeDialog,
+  EditRoomGroupsDialog,
+  RoomGroupingDialog,
+  AddRoomToGroupDialog,
 } from "../dialogs";
 import ConvertPasswordDialog from "../dialogs/ConvertPasswordDialog";
 import ArchiveDialog from "../dialogs/ArchiveDialog";
@@ -187,6 +190,15 @@ const Panels = (props) => {
     setAiAgentSelectorDialogProps,
     templateGalleryVisible,
     isVisibleInfoPanelTemplateGallery,
+    editRoomGroupsDialogVisible,
+    getCovers,
+    currentColorScheme,
+    covers,
+    setArrRoomGroups,
+    setEditRoomGroupsDialogVisible,
+    arrRoomGroups,
+    roomGroupingDialogVisible,
+    addRoomToGroupDialogVisible,
   } = props;
 
   const navigate = useNavigate();
@@ -479,6 +491,7 @@ const Panels = (props) => {
     isShareFormData.visible && (
       <ShareFormPanel key="share-form-dialog" {...isShareFormData} />
     ),
+
     reducedRightsVisible ? (
       <ReducedRightsDialog key="reduced-rights-dialog" />
     ) : null,
@@ -494,6 +507,23 @@ const Panels = (props) => {
     templateGalleryVisible && <TemplateGallery key="template-gallery" />,
     isVisibleInfoPanelTemplateGallery && (
       <InfoPanelTemplateGallery key="template-gallery-info-panel" />
+    ),
+    editRoomGroupsDialogVisible && (
+      <EditRoomGroupsDialog
+        key="edit-room-groups-dialog"
+        currentColorScheme={currentColorScheme}
+        getCovers={getCovers}
+        covers={covers}
+        setArrRoomGroups={setArrRoomGroups}
+        setEditRoomGroupsDialogVisible={setEditRoomGroupsDialogVisible}
+        arrRoomGroups={arrRoomGroups}
+      />
+    ),
+    roomGroupingDialogVisible && (
+      <RoomGroupingDialog key="room-grouping-dialog" />
+    ),
+    addRoomToGroupDialogVisible && (
+      <AddRoomToGroupDialog key="add-room-to-group-dialog" />
     ),
   ];
 };
@@ -584,9 +614,15 @@ export default inject(
 
       aiAgentSelectorDialogProps,
       setAiAgentSelectorDialogProps,
+      editRoomGroupsDialogVisible,
+      getCovers,
+      covers,
+      setEditRoomGroupsDialogVisible,
+      roomGroupingDialogVisible,
+      addRoomToGroupDialogVisible,
     } = dialogsStore;
 
-    const { viewAs } = filesStore;
+    const { viewAs, setArrRoomGroups, arrRoomGroups } = filesStore;
 
     const { extsFilesVectorized } = filesSettingsStore;
 
@@ -598,7 +634,9 @@ export default inject(
       isVisible: versionHistoryPanelVisible,
       deleteVersionDialogVisible,
     } = versionHistoryStore;
-    const { hotkeyPanelVisible } = settingsStore;
+
+    const { hotkeyPanelVisible, currentColorScheme } = settingsStore;
+
     const { confirmDialogIsLoading } = createEditRoomStore;
     const { isRoomsTariffAlmostLimit, isUserTariffAlmostLimit } =
       currentQuotaStore;
@@ -715,6 +753,15 @@ export default inject(
       setAiAgentSelectorDialogProps,
       templateGalleryVisible,
       isVisibleInfoPanelTemplateGallery,
+      editRoomGroupsDialogVisible,
+      currentColorScheme,
+      getCovers,
+      covers,
+      setArrRoomGroups,
+      setEditRoomGroupsDialogVisible,
+      arrRoomGroups,
+      roomGroupingDialogVisible,
+      addRoomToGroupDialogVisible,
     };
   },
 )(observer(Panels));

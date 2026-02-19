@@ -74,6 +74,14 @@ import {
   filesWithEditorsHandler,
   filesWithManyEditorsHandler,
 } from "./editorsTooltip";
+import {
+  roomGroupsHandler,
+  roomGroupByIdHandler,
+  createRoomGroupHandler,
+  updateRoomGroupHandler,
+  deleteRoomGroupHandler,
+  updateRoomGroupIconHandler,
+} from "./roomGroups";
 
 export { TypeFolder } from "./folder";
 export { TypeRoomList } from "./roomList";
@@ -116,6 +124,12 @@ export {
   defaultTemplatesSetHandler,
   filesWithEditorsHandler,
   filesWithManyEditorsHandler,
+  roomGroupsHandler,
+  roomGroupByIdHandler,
+  createRoomGroupHandler,
+  updateRoomGroupHandler,
+  deleteRoomGroupHandler,
+  updateRoomGroupIconHandler,
 };
 
 // Note: recentHandler, sharedWithMeHandler, favoritesHandler are NOT included here
@@ -149,4 +163,10 @@ export const filesHandlers = (port: string) => [
   validatePublicRoomKeyPasswordHandler(port),
   defaultTemplatesHandler(port),
   defaultTemplatesSetHandler(port),
+  roomGroupsHandler(port, false),
+  updateRoomGroupIconHandler(port),
+  roomGroupByIdHandler(port),
+  createRoomGroupHandler(port),
+  updateRoomGroupHandler(port),
+  deleteRoomGroupHandler(port),
 ];

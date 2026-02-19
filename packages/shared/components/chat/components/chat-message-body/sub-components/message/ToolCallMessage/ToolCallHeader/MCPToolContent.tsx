@@ -26,8 +26,12 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import React from "react";
 import { useTranslation } from "react-i18next";
+import { observer } from "mobx-react";
+
+import WordIcon from "PUBLIC_DIR/images/icons/16/word.svg";
+import FormIcon from "PUBLIC_DIR/images/icons/16/pdf.svg";
+import PresentationIcon from "PUBLIC_DIR/images/icons/16/presentation.svg";
 
 import type { TToolCallContent } from "../../../../../../../../api/ai/types";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
@@ -37,37 +41,61 @@ import { Text } from "@docspace/ui-kit/components/text";
 import styles from "../../../../ChatMessageBody.module.scss";
 import { MCPIcon, MCPIconSize } from "@docspace/ui-kit/components/mcp-icon";
 
-export const MCPToolContent = ({ content }: { content: TToolCallContent }) => {
-  const { t } = useTranslation(["Common"]);
-  const { isBase } = useTheme();
+import { useMessageStore } from "../../../../../../store/messageStore";
 
-  const serverIcon =
-    content.mcpServerInfo?.icon?.icon16 ||
-    getServerIcon(
-      content.mcpServerInfo?.serverType || ServerType.Custom,
-      isBase,
-    ) ||
-    "";
+export const MCPToolContent = observer(
+  ({ content }: { content: TToolCallContent }) => {
+    const {
+      generateDocxToolName,
+      generateFormToolName,
+      generatePresentationToolName,
+    } = useMessageStore();
+    const { t } = useTranslation(["Common"]);
+    const { isBase } = useTheme();
 
-  return (
-    <>
-      <Text fontSize="13px" lineHeight="15px" fontWeight={600}>
-        {t("Common:ToolCallExecuted")}:
-      </Text>
-      <MCPIcon
-        title={content.mcpServerInfo?.serverName || ""}
-        imgSrc={serverIcon}
-        size={MCPIconSize.Small}
-      />
+    const isGenerateDocx = generateDocxToolName === content.name;
+    const isGenerateForm = generateFormToolName === content.name;
+    const isGeneratePresentation =
+      generatePresentationToolName === content.name;
 
-      <Text
-        fontSize="13px"
-        lineHeight="15px"
-        fontWeight={600}
-        className={styles.toolName}
-      >
-        {content.name}
-      </Text>
-    </>
-  );
-};
+    const serverIcon =
+      content.mcpServerInfo?.icon?.icon16 ||
+      getServerIcon(
+        content.mcpServerInfo?.serverType || ServerType.Custom,
+        isBase,
+      ) ||
+      "";
+
+    const icon = isGenerateDocx ? (
+      <WordIcon />
+    ) : isGenerateForm ? (
+      <FormIcon />
+    ) : isGeneratePresentation ? (
+      <PresentationIcon />
+    ) : null;
+
+    return (
+      <>
+        <Text fontSize="13px" lineHeight="15px" fontWeight={600}>
+          {t("Common:ToolCallExecuted")}:
+        </Text>
+        {icon ?? (
+          <MCPIcon
+            title={content.mcpServerInfo?.serverName || ""}
+            imgSrc={serverIcon}
+            size={MCPIconSize.Small}
+          />
+        )}
+
+        <Text
+          fontSize="13px"
+          lineHeight="15px"
+          fontWeight={600}
+          className={styles.toolName}
+        >
+          {content.name}
+        </Text>
+      </>
+    );
+  },
+);

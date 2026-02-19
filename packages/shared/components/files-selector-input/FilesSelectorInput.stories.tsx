@@ -30,226 +30,227 @@ import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
 
 import { FilesSelectorInput } from "./index";
 import {
-	roomListHandler,
-	createRoomHandler,
-	foldersTreeHandler,
-	folderHandler,
-	TypeRoomList,
+  roomListHandler,
+  createRoomHandler,
+  foldersTreeHandler,
+  folderHandler,
+  TypeRoomList,
 } from "../../__mocks__/handlers";
 
 const meta = {
-	title: "Components/FilesSelectorInput",
-	component: FilesSelectorInput,
-	parameters: {
-		docs: {
-			description: {
-				component:
-					"Component for selecting files or folders with a file browser dialog",
-			},
-		},
-		msw: {
-			handlers: [
-				roomListHandler("", TypeRoomList.IsDefault),
-				createRoomHandler(),
-				foldersTreeHandler(""),
-				folderHandler(""),
-			],
-		},
-	},
-	argTypes: {
-		isThirdParty: {
-			description: "Flag indicating if third-party storage is used",
-			control: "boolean",
-		},
-		isRoomsOnly: {
-			description: "Flag indicating if only rooms should be shown",
-			control: "boolean",
-		},
-		withCreate: {
-			description: "Flag indicating if creation of new items is allowed",
-			control: "boolean",
-		},
-		isSelectFolder: {
-			description: "Flag indicating if folder selection is enabled",
-			control: "boolean",
-		},
-		isDisabled: {
-			description: "Flag indicating if the component is disabled",
-			control: "boolean",
-		},
-		isError: {
-			description: "Flag indicating if there is an error state",
-			control: "boolean",
-		},
-		maxWidth: {
-			description: "Maximum width of the component",
-			control: "text",
-		},
-		filterParam: {
-			description: "Filter parameter for file selection",
-			control: "select",
-			options: [
-				"DOCX",
-				"PDF",
-				"IMG",
-				"GZ",
-				"DOCXF",
-				"XLSX",
-				"ALL",
-				"BackupOnly",
-			],
-		},
-		descriptionText: {
-			description: "Description text for the component",
-			control: "text",
-		},
-		currentDeviceType: {
-			description: "Current device type",
-			control: "select",
-			options: Object.values(DeviceType),
-		},
-	},
+  title: "Components/FilesSelectorInput",
+  component: FilesSelectorInput,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "Component for selecting files or folders with a file browser dialog",
+      },
+    },
+    msw: {
+      handlers: [
+        roomListHandler("", TypeRoomList.IsDefault),
+        createRoomHandler(),
+        foldersTreeHandler(""),
+        folderHandler(""),
+      ],
+    },
+  },
+  argTypes: {
+    isThirdParty: {
+      description: "Flag indicating if third-party storage is used",
+      control: "boolean",
+    },
+    isRoomsOnly: {
+      description: "Flag indicating if only rooms should be shown",
+      control: "boolean",
+    },
+    withCreate: {
+      description: "Flag indicating if creation of new items is allowed",
+      control: "boolean",
+    },
+    isSelectFolder: {
+      description: "Flag indicating if folder selection is enabled",
+      control: "boolean",
+    },
+    isDisabled: {
+      description: "Flag indicating if the component is disabled",
+      control: "boolean",
+    },
+    isError: {
+      description: "Flag indicating if there is an error state",
+      control: "boolean",
+    },
+    maxWidth: {
+      description: "Maximum width of the component",
+      control: "text",
+    },
+    filterParam: {
+      description: "Filter parameter for file selection",
+      control: "select",
+      options: [
+        "DOCX",
+        "PDF",
+        "IMG",
+        "GZ",
+        "DOCXF",
+        "XLSX",
+        "ALL",
+        "BackupOnly",
+      ],
+    },
+    descriptionText: {
+      description: "Description text for the component",
+      control: "text",
+    },
+    currentDeviceType: {
+      description: "Current device type",
+      control: "select",
+      options: Object.values(DeviceType),
+    },
+  },
 } satisfies Meta<typeof FilesSelectorInput>;
 
 export default meta;
 type Story = StoryObj<typeof FilesSelectorInput>;
 
 const mockSetBasePath = (folders: TBreadCrumb[]) => {
-	console.log("setBasePath called with:", folders);
+  console.log("setBasePath called with:", folders);
 };
 
 const mockToDefault = () => {
-	console.log("toDefault called");
+  console.log("toDefault called");
 };
 
 const mockSetNewPath = (folders: TBreadCrumb[], fileName?: string) => {
-	console.log("setNewPath called with:", { folders, fileName });
+  console.log("setNewPath called with:", { folders, fileName });
 };
 
 const mockOnSelectFolder = (
-	value: number | string | undefined,
-	breadCrumbs: TBreadCrumb,
+  value: number | string | undefined,
+  breadCrumbs: TBreadCrumb,
 ) => {
-	console.log("onSelectFolder called with:", { value, breadCrumbs });
+  console.log("onSelectFolder called with:", { value, breadCrumbs });
 };
 
 // This is the correct structure for FilesSelectorSettings type
 const mockFilesSelectorSettings = {
-	filesSettings: {
-		canShare: true,
-		canWebEdit: true,
-		canSearch: true,
-		canCreateFiles: true,
-		canUploadFiles: true,
-		canCreateFolders: true,
-		automaticallyCleanUp: {
-			gap: 30,
-			isAutoCleanUp: false,
-		},
-		canSearchByContent: true,
-		chunkUploadSize: 1048576,
-		maxUploadThreadCount: 2,
-		confirmDelete: true,
-		convertNotify: true,
-		defaultOrder: { is_asc: true, property: 0 },
-		defaultSharingAccessRights: [0, 1, 2],
-		downloadTarGz: true,
-		enableThirdParty: true,
-		externalShare: true,
-		externalShareSocialMedia: true,
-		extsArchive: [".zip", ".rar"],
-		extsAudio: [".mp3", ".wav"],
-		extsCoAuthoring: [".docx", ".xlsx"],
-		extsConvertible: { ".docx": [".pdf"] },
-		extsDocument: [".doc", ".docx"],
-		extsDiagram: [".vsdx", ".vsd"],
-		extsImage: [".jpg", ".png"],
-		extsImagePreviewed: [".jpg", ".png"],
-		extsMediaPreviewed: [".mp4", ".mp3"],
-		extsMustConvert: [".doc"],
-		extsPresentation: [".ppt", ".pptx"],
-		extsSpreadsheet: [".xls", ".xlsx"],
-		extsUploadable: [".docx", ".xlsx", ".pdf"],
-		extsVideo: [".mp4", ".avi"],
-		extsWebCommented: [".docx"],
-		extsWebCustomFilterEditing: [".xlsx"],
-		extsWebEdited: [".docx", ".xlsx"],
-		extsWebEncrypt: [".pdf"],
-		extsWebPreviewed: [".docx", ".pdf"],
-		extsWebRestrictedEditing: [".docx"],
-		extsWebReviewed: [".docx"],
-		extsWebTemplate: [".docx"],
-		favoritesSection: true,
-		fileDownloadUrlString: "/download",
-		fileRedirectPreviewUrlString: "/preview",
-		fileThumbnailUrlString: "/thumbnail",
-		fileWebEditorExternalUrlString: "/editor",
-		fileWebEditorUrlString: "/editor",
-		fileWebViewerExternalUrlString: "/viewer",
-		fileWebViewerUrlString: "/viewer",
-		forcesave: true,
-		hideConfirmConvertOpen: false,
-		hideConfirmConvertSave: false,
-		internalFormats: {
-			Document: "docx",
-			Presentation: "pptx",
-			Spreadsheet: "xlsx",
-			Pdf: "pdf",
-		},
-		keepNewFileName: true,
-		masterFormExtension: ".docxf",
-		paramOutType: "type",
-		paramVersion: "version",
-		recentSection: true,
-		storeForcesave: true,
-		storeOriginalFiles: true,
-		templatesSection: true,
-		openEditorInSameTab: true,
-		displayFileExtension: true,
-	},
+  filesSettings: {
+    canShare: true,
+    canWebEdit: true,
+    canSearch: true,
+    canCreateFiles: true,
+    canUploadFiles: true,
+    canCreateFolders: true,
+    automaticallyCleanUp: {
+      gap: 30,
+      isAutoCleanUp: false,
+    },
+    canSearchByContent: true,
+    chunkUploadSize: 1048576,
+    maxUploadThreadCount: 2,
+    confirmDelete: true,
+    convertNotify: true,
+    defaultOrder: { is_asc: true, property: 0 },
+    defaultSharingAccessRights: [0, 1, 2],
+    downloadTarGz: true,
+    enableThirdParty: true,
+    externalShare: true,
+    externalShareSocialMedia: true,
+    extsArchive: [".zip", ".rar"],
+    extsAudio: [".mp3", ".wav"],
+    extsCoAuthoring: [".docx", ".xlsx"],
+    extsConvertible: { ".docx": [".pdf"] },
+    extsDocument: [".doc", ".docx"],
+    extsDiagram: [".vsdx", ".vsd"],
+    extsImage: [".jpg", ".png"],
+    extsImagePreviewed: [".jpg", ".png"],
+    extsMediaPreviewed: [".mp4", ".mp3"],
+    extsMustConvert: [".doc"],
+    extsPresentation: [".ppt", ".pptx"],
+    extsSpreadsheet: [".xls", ".xlsx"],
+    extsUploadable: [".docx", ".xlsx", ".pdf"],
+    extsVideo: [".mp4", ".avi"],
+    extsWebCommented: [".docx"],
+    extsWebCustomFilterEditing: [".xlsx"],
+    extsWebEdited: [".docx", ".xlsx"],
+    extsWebEncrypt: [".pdf"],
+    extsWebPreviewed: [".docx", ".pdf"],
+    extsWebRestrictedEditing: [".docx"],
+    extsWebReviewed: [".docx"],
+    extsWebTemplate: [".docx"],
+    favoritesSection: true,
+    fileDownloadUrlString: "/download",
+    fileRedirectPreviewUrlString: "/preview",
+    fileThumbnailUrlString: "/thumbnail",
+    fileWebEditorExternalUrlString: "/editor",
+    fileWebEditorUrlString: "/editor",
+    fileWebViewerExternalUrlString: "/viewer",
+    fileWebViewerUrlString: "/viewer",
+    forcesave: true,
+    hideConfirmConvertOpen: false,
+    hideConfirmConvertSave: false,
+    internalFormats: {
+      Document: "docx",
+      Presentation: "pptx",
+      Spreadsheet: "xlsx",
+      Pdf: "pdf",
+    },
+    keepNewFileName: true,
+    masterFormExtension: ".docxf",
+    paramOutType: "type",
+    paramVersion: "version",
+    recentSection: true,
+    storeForcesave: true,
+    storeOriginalFiles: true,
+    templatesSection: true,
+    openEditorInSameTab: true,
+    displayFileExtension: true,
+    organizeRoomsGrouping: false,
+  },
 };
 
 const baseArgs = {
-	newPath: "/Rooms",
-	basePath: "/",
-	isErrorPath: false,
-	setBasePath: mockSetBasePath,
-	toDefault: mockToDefault,
-	setNewPath: mockSetNewPath,
-	// Explicitly set filesSelectorSettings to match the expected type
-	filesSelectorSettings: {
-		filesSettings: mockFilesSelectorSettings.filesSettings,
-	},
+  newPath: "/Rooms",
+  basePath: "/",
+  isErrorPath: false,
+  setBasePath: mockSetBasePath,
+  toDefault: mockToDefault,
+  setNewPath: mockSetNewPath,
+  // Explicitly set filesSelectorSettings to match the expected type
+  filesSelectorSettings: {
+    filesSettings: mockFilesSelectorSettings.filesSettings,
+  },
 };
 
 export const Default: Story = {
-	args: {
-		...baseArgs,
-		onSelectFolder: mockOnSelectFolder,
-	},
+  args: {
+    ...baseArgs,
+    onSelectFolder: mockOnSelectFolder,
+  },
 };
 
 export const Disabled: Story = {
-	args: {
-		...baseArgs,
-		isDisabled: true,
-		onSelectFolder: mockOnSelectFolder,
-	},
+  args: {
+    ...baseArgs,
+    isDisabled: true,
+    onSelectFolder: mockOnSelectFolder,
+  },
 };
 
 export const WithError: Story = {
-	args: {
-		...baseArgs,
-		isError: true,
-		isErrorPath: true,
-		onSelectFolder: mockOnSelectFolder,
-	},
+  args: {
+    ...baseArgs,
+    isError: true,
+    isErrorPath: true,
+    onSelectFolder: mockOnSelectFolder,
+  },
 };
 
 export const CustomWidth: Story = {
-	args: {
-		...baseArgs,
-		maxWidth: "500px",
-		onSelectFolder: mockOnSelectFolder,
-	},
+  args: {
+    ...baseArgs,
+    maxWidth: "500px",
+    onSelectFolder: mockOnSelectFolder,
+  },
 };

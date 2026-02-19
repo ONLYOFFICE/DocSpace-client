@@ -68,6 +68,12 @@ export default class MessageStore {
 
   webCrawlingToolName: string = "";
 
+  generateDocxToolName: string = "";
+
+  generatePresentationToolName: string = "";
+
+  generateFormToolName: string = "";
+
   toolsConfirmQueue: string[] = [];
 
   constructor() {
@@ -121,6 +127,18 @@ export default class MessageStore {
 
   setWebCrawlingToolName = (webCrawlingToolName: string) => {
     this.webCrawlingToolName = webCrawlingToolName;
+  };
+
+  setGenerateDocxToolName = (generateDocxToolName: string) => {
+    this.generateDocxToolName = generateDocxToolName;
+  };
+
+  setGeneratePresentationToolName = (generatePresentationToolName: string) => {
+    this.generatePresentationToolName = generatePresentationToolName;
+  };
+
+  setGenerateFormToolName = (generateFormToolName: string) => {
+    this.generateFormToolName = generateFormToolName;
   };
 
   setStartIndex = (startIndex: number) => {
@@ -306,6 +324,34 @@ export default class MessageStore {
     }
   };
 
+  handleGenerateDoc = (content: TToolCallContent) => {
+    const { type } = content;
+
+    if (type !== ContentType.Tool) return;
+
+    const { name, result } = content;
+
+    if (
+      name !== this.generateDocxToolName &&
+      name !== this.generateFormToolName &&
+      name !== this.generatePresentationToolName
+    )
+      return;
+
+    const { data } = result as {
+      data: { extension: string; id: number; title: string };
+    };
+
+    const webSearhParams = new URLSearchParams();
+
+    webSearhParams.append("fileId", `${data.id}`);
+    webSearhParams.append("withTool", "true");
+
+    const url = `${window.location.origin}/doceditor?${webSearhParams.toString()}`;
+
+    window.open(url, "_blank");
+  };
+
   handleToolCall = (jsonData: string) => {
     const { name, arguments: args, callId, ...rest } = JSON.parse(jsonData);
     const lastMessage = this.getLastMessage();
@@ -369,6 +415,8 @@ export default class MessageStore {
     };
 
     this.replaceLastMessage(newMsg);
+
+    this.handleGenerateDoc(content);
   };
 
   handleStreamError = (jsonData: string) => {

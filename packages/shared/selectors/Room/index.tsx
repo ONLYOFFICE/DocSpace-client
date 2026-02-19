@@ -64,6 +64,8 @@ const RoomSelectorComponent = ({
 
   isMultiSelect,
 
+  selectedItems,
+
   submitButtonLabel,
   onSubmit,
 
@@ -99,6 +101,10 @@ const RoomSelectorComponent = ({
   initTotal,
   initHasNextPage,
   initSearchValue,
+  forceIsMultiSelect,
+  disableFirstFetch,
+  sortSelectedFirst,
+  disableSubmitUntilChanged,
 }: RoomSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation(["Common"]);
   const { isBase } = useTheme();
@@ -116,6 +122,43 @@ const RoomSelectorComponent = ({
     null,
   );
 
+  // Track initial selected item IDs for multi-select mode
+  const initialSelectedIdsRef = React.useRef<Set<string | number>>(
+    new Set(
+      selectedItems
+        ?.map((item) => item.id)
+        .filter((id): id is string | number => id !== undefined) || [],
+    ),
+  );
+
+  // Track current selection state for multi-select mode
+  const [currentSelectedIds, setCurrentSelectedIds] = React.useState<
+    Set<string | number>
+  >(
+    () =>
+      new Set(
+        selectedItems
+          ?.map((item) => item.id)
+          .filter((id): id is string | number => id !== undefined) || [],
+      ),
+  );
+
+  // Check if selection has changed from initial state (only when disableSubmitUntilChanged is true)
+  const hasSelectionChanged = React.useMemo(() => {
+    if (!isMultiSelect || !disableSubmitUntilChanged) return true;
+
+    const initial = initialSelectedIdsRef.current;
+    if (initial.size !== currentSelectedIds.size) return true;
+
+    for (const id of currentSelectedIds) {
+      if (!initial.has(id)) return true;
+    }
+    for (const id of initial) {
+      if (!currentSelectedIds.has(id)) return true;
+    }
+    return false;
+  }, [currentSelectedIds, isMultiSelect, disableSubmitUntilChanged]);
+
   const [total, setTotal] = React.useState(() => (withInit ? initTotal : -1));
   const [items, setItems] = React.useState<TSelectorItem[]>(
     withInit
@@ -124,6 +167,27 @@ const RoomSelectorComponent = ({
         )
       : [],
   );
+
+  // Sort items so that selectedItems appear first
+  const sortedItems = React.useMemo(() => {
+    if (!sortSelectedFirst || !selectedItems || selectedItems.length === 0) {
+      return items;
+    }
+
+    const selectedIds = new Set(selectedItems.map((item) => item.id));
+    const selected: TSelectorItem[] = [];
+    const others: TSelectorItem[] = [];
+
+    items.forEach((item) => {
+      if (selectedIds.has(item.id)) {
+        selected.push(item);
+      } else {
+        others.push(item);
+      }
+    });
+
+    return [...selected, ...others];
+  }, [items, selectedItems, sortSelectedFirst]);
 
   const isInitRef = React.useRef<boolean>(!withInit);
   const afterSearch = React.useRef(false);
@@ -142,6 +206,20 @@ const RoomSelectorComponent = ({
 
       return item;
     });
+
+    // Track selection changes for multi-select mode
+    if (isMultiSelect && item.id !== undefined) {
+      setCurrentSelectedIds((prev) => {
+        const newSet = new Set(prev);
+        if (newSet.has(item.id!)) {
+          newSet.delete(item.id!);
+        } else {
+          newSet.add(item.id!);
+        }
+        return newSet;
+      });
+    }
+
     if (isDoubleClick && !isMultiSelect) {
       doubleClickCallback();
     }
@@ -246,10 +324,12 @@ const RoomSelectorComponent = ({
       {...withAside}
       withPadding={withPadding}
       onSelect={onSelect}
-      items={items}
+      items={sortedItems}
+      selectedItems={selectedItems}
       submitButtonLabel={submitButtonLabel || t("Common:SelectAction")}
       onSubmit={onSubmit}
       isMultiSelect={isMultiSelect}
+      forceIsMultiSelect={forceIsMultiSelect}
       emptyScreenImage={
         isBase ? EmptyScreenAltSvgUrl : EmptyScreenAltSvgDarkUrl
       }
@@ -270,8 +350,8 @@ const RoomSelectorComponent = ({
       isNextPageLoading={isNextPageLoading}
       loadNextPage={onLoadNextPage}
       isLoading={isFirstLoad}
-      disableSubmitButton={!selectedItem}
-      alwaysShowFooter={items.length !== 0 || Boolean(searchValue)}
+      disableSubmitButton={isMultiSelect ? !hasSelectionChanged : !selectedItem}
+      alwaysShowFooter={sortedItems.length !== 0 || Boolean(searchValue)}
       rowLoader={
         <RowLoader
           isMultiSelect={isMultiSelect}
@@ -280,6 +360,7 @@ const RoomSelectorComponent = ({
         />
       }
       isSSR={withInit}
+      disableFirstFetch={disableFirstFetch}
       dataTestId="room_selector"
     />
   );

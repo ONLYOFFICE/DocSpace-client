@@ -23,7 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import React from "react";
+import type React from "react";
 
 import type { TContent, TMessage, TToolCallContent } from "../../api/ai/types";
 import type { TGetIcon } from "../../selectors/utils/types";
@@ -32,6 +32,11 @@ import type { TFile } from "../../api/files/types";
 import type useToolsSettings from "./hooks/useToolsSettings";
 import type useInitChats from "./hooks/useInitChats";
 import type useInitMessages from "./hooks/useInitMessages";
+
+export type TGenerateDocStoreProps = {
+  roomId: string | number;
+  children: React.ReactNode;
+};
 
 export type TChatStoreProps = {
   roomId: string | number;
@@ -114,6 +119,7 @@ export type MessageErrorProps = {
 export type MessageFilesProps = {
   files: TContent[];
   getIcon: TGetIcon;
+  reverse?: boolean;
 };
 
 export type MessageMarkdownFieldProps = {

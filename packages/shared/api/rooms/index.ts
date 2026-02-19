@@ -272,8 +272,30 @@ export function createTag(name) {
     return res;
   });
 }
+export async function removeTagRequest(names: string[]) {
+  const data = { names };
+  const options = {
+    method: "delete",
+    url: "/files/tags",
+    data,
+  };
 
-export function addTagsToRoom(id, tagArray) {
+  return request(options).then((res) => {
+    return res;
+  });
+}
+export function updateTagName(oldName: string, newName: string) {
+  const data = { oldName, newName };
+  const options = {
+    method: "PUT",
+    url: "/files/tags",
+    data,
+  };
+
+  return request(options)!;
+}
+
+export function addTagsToRoom(id: string | number, tagArray: string[]) {
   const data = { names: tagArray };
   const options = {
     method: "put",
@@ -282,11 +304,11 @@ export function addTagsToRoom(id, tagArray) {
   };
 
   return request(options).then((res) => {
-    return res;
+    return res as TRoom;
   });
 }
 
-export function removeTagsFromRoom(id, tagArray) {
+export function removeTagsFromRoom(id: string | number, tagArray: string[]) {
   const data = { names: tagArray };
   const options = {
     method: "delete",
@@ -305,9 +327,7 @@ export function getTags() {
     url: "/files/tags",
   };
 
-  return request(options).then((res) => {
-    return res;
-  });
+  return request<string[]>(options);
 }
 
 export function uploadRoomLogo(data) {
@@ -669,6 +689,63 @@ export function hideConfirmRoomLifetime(val: boolean) {
     method: "put",
     url: "/files/hideconfirmroomlifetime",
     data: { set: val },
+  };
+
+  return request(options);
+}
+
+export function createGroupRooms(newGroup) {
+  const options = {
+    method: "post",
+    url: "/files/group",
+    data: newGroup,
+  };
+
+  return request(options);
+}
+
+export function getRoomGroups() {
+  const options = {
+    method: "get",
+    url: "/files/group?includeMembers=false",
+  };
+
+  return request(options);
+}
+
+export function getGroupById(groupId) {
+  const options = {
+    method: "get",
+    url: `/files/group/${groupId}?includeMembers=true`,
+  };
+
+  return request(options);
+}
+
+export function updateGroupIcon(groupId, icon) {
+  const options = {
+    method: "post",
+    url: `/files/group/${groupId}/icon`,
+    data: { icon },
+  };
+
+  return request(options);
+}
+
+export function updateRoomGroup(groupId, data) {
+  const options = {
+    method: "put",
+    url: `/files/group/${groupId}`,
+    data,
+  };
+
+  return request(options);
+}
+
+export function deleteRoomGroup(groupId) {
+  const options = {
+    method: "delete",
+    url: `/files/group/${groupId}`,
   };
 
   return request(options);

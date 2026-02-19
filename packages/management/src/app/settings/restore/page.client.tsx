@@ -32,7 +32,7 @@ import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import isNil from "lodash/isNil";
 
-import { useUnmount } from "@docspace/shared/hooks/useUnmount";
+import { useUnmount } from "@docspace/ui-kit/hooks/useUnmount";
 import { useDidMount } from "@docspace/shared/hooks/useDidMount";
 
 import { RestoreBackup } from "@docspace/shared/pages/backup/restore-backup";

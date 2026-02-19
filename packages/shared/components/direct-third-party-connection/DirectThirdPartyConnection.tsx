@@ -38,18 +38,19 @@ import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?u
 import { Text } from "@docspace/ui-kit/components/text";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { Button } from "@docspace/ui-kit/components/button";
-import { buildDataTestId, getOAuthToken } from "../../utils/common";
 import { ComboBox } from "@docspace/ui-kit/components/combobox";
+import { ContextMenuButton } from "@docspace/ui-kit/components/context-menu-button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { useUnmount } from "@docspace/ui-kit/hooks/useUnmount";
+
+import { buildDataTestId, getOAuthToken } from "../../utils/common";
 import { saveSettingsThirdParty } from "../../api/files";
 import { THIRD_PARTY_SERVICES_URL } from "../../constants";
 import { DropDownItem } from "../drop-down-item";
-import { ContextMenuButton } from "@docspace/ui-kit/components/context-menu-button";
 import { DeleteThirdPartyDialog } from "../../dialogs/delete-third-party";
 import { FilesSelectorInput } from "../files-selector-input";
 import { isNullOrUndefined } from "../../utils/typeGuards";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { useDidMount } from "../../hooks/useDidMount";
-import { useUnmount } from "../../hooks/useUnmount";
 import type { ConnectedThirdPartyAccountType } from "../../types";
 
 import { initialState } from "./DirectThirdPartyConnection.constants";

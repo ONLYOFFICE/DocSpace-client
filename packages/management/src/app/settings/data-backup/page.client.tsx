@@ -29,7 +29,7 @@
 import { useMemo } from "react";
 import { observer } from "mobx-react";
 
-import { useUnmount } from "@docspace/shared/hooks/useUnmount";
+import { useUnmount } from "@docspace/ui-kit/hooks/useUnmount";
 import { useDidMount } from "@docspace/shared/hooks/useDidMount";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 

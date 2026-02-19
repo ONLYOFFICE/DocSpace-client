@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
 import FileActionsOwnerReactSvgUrl from "PUBLIC_DIR/images/file.actions.owner.react.svg?url";
 import HistoryReactSvgUrl from "PUBLIC_DIR/images/history.react.svg?url";
 import HistoryFinalizedReactSvgUrl from "PUBLIC_DIR/images/history-finalized.react.svg?url";
@@ -89,6 +90,8 @@ import DotsHorizontalUrl from "PUBLIC_DIR/images/icons/16/dots-horizontal.react.
 import CreateTemplateSvgUrl from "PUBLIC_DIR/images/template.react.svg?url";
 import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
 import TemplateGalleryReactSvgUrl from "PUBLIC_DIR/images/template.gallery.react.svg?url";
+import CreateGroupReactSvgUrl from "PUBLIC_DIR/images/folder.react.svg?url";
+import AddToGroupReactSvgUrl from "PUBLIC_DIR/images/folder.location.react.svg?url";
 
 import { makeAutoObservable, runInAction } from "mobx";
 import copy from "copy-to-clipboard";
@@ -893,16 +896,22 @@ class ContextOptionsStore {
     let index = 0;
     const last = model.length;
 
+    // Keys that should preserve their items without filtering
+    const preserveItemsKeys = ["add-to-group"];
+
     for (index; index < last; index++) {
       if (filter.includes(model[index].key)) {
         options[index] = model[index];
         if (model[index].items) {
-          options[index].items = model[index].items.filter((item) =>
-            filter.includes(item.key),
-          );
+          // Skip filtering items for keys that need to preserve dynamic items
+          if (!preserveItemsKeys.includes(model[index].key)) {
+            options[index].items = model[index].items.filter((item) =>
+              filter.includes(item.key),
+            );
 
-          if (options[index].items.length === 1) {
-            options[index] = options[index].items[0];
+            if (options[index].items.length === 1) {
+              options[index] = options[index].items[0];
+            }
           }
         }
       }
@@ -1175,6 +1184,76 @@ class ContextOptionsStore {
       setArchiveDialogVisible(true);
     } else {
       setRestoreRoomDialogVisible(true);
+    }
+  };
+
+  onAddRoomsToGroup = async (roomIds, groupId, t, groupName) => {
+    try {
+      await this.dialogsStore.updateRoomGroup(groupId, {
+        roomsToAdd: roomIds,
+      });
+      await this.dialogsStore.getAllRoomGroups();
+      const transProps = {
+        t,
+        values: { groupName },
+        components: { 1: React.createElement("strong") },
+      };
+      const keys = {
+        single: { tKey: "GroupingRooms:RoomAddedToGroup" },
+        multiple: { tKey: "GroupingRooms:RoomsAddedToGroup" },
+      };
+      const i18nKey =
+        roomIds.length === 1 ? keys.single.tKey : keys.multiple.tKey;
+      toastr.success(
+        React.createElement(Trans, {
+          i18nKey,
+          ...transProps,
+        }),
+      );
+    } catch (error) {
+      console.error("Error adding rooms to group:", error);
+      toastr.error(t("Common:Error"));
+    }
+  };
+
+  onRemoveRoomsFromGroup = async (roomIds, t) => {
+    const currentGroupId = this.filesStore.roomsFilter?.groupId;
+    if (!currentGroupId) return;
+
+    const currentGroup = this.dialogsStore.roomGroups?.find(
+      (g) => String(g.id) === String(currentGroupId),
+    );
+    const groupName = currentGroup?.name || "";
+
+    try {
+      await this.dialogsStore.updateRoomGroup(currentGroupId, {
+        roomsToRemove: roomIds,
+      });
+      await this.dialogsStore.getAllRoomGroups();
+
+      // Remove the rooms from the current view
+      this.filesStore.removeFiles(null, roomIds);
+
+      const transProps = {
+        t,
+        values: { groupName },
+        components: { 1: React.createElement("strong") },
+      };
+      const keys = {
+        single: { tKey: "GroupingRooms:RoomRemovedFromGroup" },
+        multiple: { tKey: "GroupingRooms:RoomsRemovedFromGroup" },
+      };
+      const i18nKey =
+        roomIds.length === 1 ? keys.single.tKey : keys.multiple.tKey;
+      toastr.success(
+        React.createElement(Trans, {
+          i18nKey,
+          ...transProps,
+        }),
+      );
+    } catch (error) {
+      console.error("Error removing rooms from group:", error);
+      toastr.error(t("Common:Error"));
     }
   };
 
@@ -2167,6 +2246,41 @@ class ContextOptionsStore {
         disabled: isPublicRoom || Boolean(item.external && item.isLinkExpired),
       },
       {
+        id: "option_create-group",
+        key: "create-group",
+        label: t("GroupingRooms:CreateAGroup"),
+        icon: CreateGroupReactSvgUrl,
+        onClick: () =>
+          this.dialogsStore.setEditRoomGroupsDialogVisible(true, [item.id]),
+        disabled: false,
+      },
+      {
+        id: "option_add-to-group",
+        key: "add-to-group",
+        label: t("GroupingRooms:AddToGroup"),
+        icon: AddToGroupReactSvgUrl,
+        items: this.dialogsStore.roomGroups.map((group) => {
+          let groupIcon = CreateGroupReactSvgUrl;
+          if (typeof group.icon === "string" && group.icon) {
+            groupIcon = group.icon;
+          } else if (
+            typeof group.icon === "object" &&
+            group.icon?.data?.small
+          ) {
+            groupIcon = `data:image/svg+xml;utf8,${encodeURIComponent(group.icon.data.small)}`;
+          }
+          return {
+            id: `option_add-to-group-${group.id}`,
+            key: `add-to-group-${group.id}`,
+            label: group.name,
+            icon: groupIcon,
+            onClick: () =>
+              this.onAddRoomsToGroup([item.id], group.id, t, group.name),
+          };
+        }),
+        disabled: false,
+      },
+      {
         id: "option_export-room-index",
         key: "export-room-index",
         label: t("Files:ExportRoomIndex"),
@@ -2236,6 +2350,14 @@ class ContextOptionsStore {
         icon: ReconnectSvgUrl,
         onClick: this.onChangeRoomOwner,
         disabled: isAIAgent,
+      },
+      {
+        id: "option_remove-from-group",
+        key: "remove-from-group",
+        label: t("GroupingRooms:RemoveFromGroup"),
+        icon: RemoveOutlineSvgUrl,
+        onClick: () => this.onRemoveRoomsFromGroup([item.id], t),
+        disabled: false,
       },
       ...versionActions,
       {
@@ -2546,7 +2668,11 @@ class ContextOptionsStore {
         groupLabel: t("Common:Share"),
         groupIcon: ShareReactSvgUrl,
         itemKeys: [
-          [{ key: "copy-shared-link" }, { key: "manage-links" }],
+          [
+            { key: "link-for-room-members" },
+            { key: "copy-shared-link" },
+            { key: "manage-links" },
+          ],
           [{ key: "create-room" }],
         ],
         needsGrouping: true,
@@ -2596,7 +2722,11 @@ class ContextOptionsStore {
         groupLabel: t("Common:MoreOptions"),
         groupIcon: DotsHorizontalUrl,
         itemKeys: [
-          [{ key: "show-version-history" }, { key: "show-info" }],
+          [
+            { key: "show-version-history" },
+            { key: "show-info" },
+            { key: "embedding-settings" },
+          ],
           pluginItems.map((plug) => {
             return { key: plug.key };
           }),
@@ -2606,7 +2736,7 @@ class ContextOptionsStore {
       });
     }
 
-    let menuGroups = [];
+    const menuGroups = [];
     let keysToRemove = [];
 
     menuGroupsConfig.forEach((configItem) => {
@@ -2625,25 +2755,6 @@ class ContextOptionsStore {
 
     if (downloadOption && downloadAsOption) {
       keysToRemove.push("download-original");
-    }
-
-    const hasCopySharedLink = newOptions.some(
-      (option) => option.key === "copy-shared-link",
-    );
-    const linkForRoomMembers = newOptions.some(
-      (option) => option.key === "link-for-room-members",
-    );
-
-    if (hasCopySharedLink && linkForRoomMembers && menuGroups.length > 0) {
-      menuGroups = menuGroups.map((group) => {
-        if (group.key === "share" && Array.isArray(group.items)) {
-          const items = group.items.filter(
-            (i) => i.key !== "link-for-room-members",
-          );
-          return { ...group, items };
-        }
-        return group;
-      });
     }
 
     const resultOptions = newOptions.filter(
@@ -2688,7 +2799,7 @@ class ContextOptionsStore {
         ? [
             ["select", "open", "mark-read", "open-location"],
             ["share", "move", "copy-to", "download", "rename"],
-            ["mark-as-favorite", "link-for-room-members", "show-info"],
+            ["mark-as-favorite", "show-info"],
             ["restore"],
             ["remove-from-favorites", "remove-shared-folder-or-file", "delete"],
           ]
@@ -2856,6 +2967,59 @@ class ContextOptionsStore {
 
       if (!isArchiveFolder) {
         options.push(pinOption);
+      }
+
+      const { organizeRoomsGrouping } = this.filesSettingsStore;
+      const { setEditRoomGroupsDialogVisible, roomGroups } = this.dialogsStore;
+
+      if (organizeRoomsGrouping && !isArchiveFolder && !isAIAgentsFolder) {
+        const roomIds = selection.map((room) => room.id);
+        options.push({
+          key: "create-group",
+          label: t("GroupingRooms:CreateAGroup"),
+          icon: CreateGroupReactSvgUrl,
+          onClick: () => setEditRoomGroupsDialogVisible(true, roomIds),
+          disabled: false,
+        });
+
+        if (roomGroups && roomGroups.length > 0) {
+          options.push({
+            key: "add-to-group",
+            label: t("GroupingRooms:AddToGroup"),
+            icon: AddToGroupReactSvgUrl,
+            items: roomGroups.map((group) => {
+              let groupIcon = CreateGroupReactSvgUrl;
+              if (typeof group.icon === "string" && group.icon) {
+                groupIcon = group.icon;
+              } else if (
+                typeof group.icon === "object" &&
+                group.icon?.data?.small
+              ) {
+                groupIcon = `data:image/svg+xml;utf8,${encodeURIComponent(group.icon.data.small)}`;
+              }
+              return {
+                id: `option_add-to-group-${group.id}`,
+                key: `add-to-group-${group.id}`,
+                label: group.name,
+                icon: groupIcon,
+                onClick: () =>
+                  this.onAddRoomsToGroup(roomIds, group.id, t, group.name),
+              };
+            }),
+            disabled: false,
+          });
+
+          const currentGroupId = this.filesStore.roomsFilter?.groupId;
+          if (currentGroupId) {
+            options.push({
+              key: "remove-from-group",
+              label: t("GroupingRooms:RemoveFromGroup"),
+              icon: RemoveOutlineSvgUrl,
+              onClick: () => this.onRemoveRoomsFromGroup(roomIds, t),
+              disabled: false,
+            });
+          }
+        }
       }
 
       if ((canArchiveRoom || canDelete) && !isArchiveFolder) {

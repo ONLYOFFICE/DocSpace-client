@@ -211,6 +211,7 @@
   "CreateFileCopy": "ගොනුවේ පිටපතක් සාදන්න",
   "CreateFolderDescription": "ගමනාන්තයේ වෙනස් ෆෝල්ඩර දෙකක් ඇත",
   "CreateFormFillingRoom": "පෝරම පිරවුම් කාමරයක් සාදන්න",
+  "CreateGroup": "සමූහයක් සාදන්න",
   "CreateMasterFormFromFile": "ගොනුවෙන් PDF පෝරමය සාදන්න",
   "CreatePDFForm": "PDF පෝරමය සාදන්න",
   "CreateRoom": "කාමරය සාදන්න",
@@ -387,6 +388,7 @@
   "Exabyte": "එ.බ.",
   "Example": "නිදසුන: {{example}}",
   "ExpiredLink": "ඉකුත් වූ සබැඳියකි",
+  "ExternalLink": "බාහිර සබැඳිය",
   "Favorites": "ප්‍රියතමයන්",
   "FeeAppliesToEachBackup": "කරුණාකර සටහන් කර ගන්න: සෑම උපස්ථයකටම ගාස්තුවක් අදාළ වේ.",
   "FeedbackAndSupport": "ප්‍රතිපෝෂණ හා සහාය",
@@ -958,6 +960,8 @@
   "ThisSectionIsEmpty": "මෙම කොටස හිස්ය.",
   "Title": "සිරැසිය",
   "TitleSelectFile": "තෝරන්න",
+  "TitleShowActions": "ගොනුවේ ක්‍රියාමාර්ග පෙන්වන්න",
+  "TitleShowFolderActions": "බහාලුමේ ක්‍රියාමාර්ග පෙන්වන්න",
   "Today": "අද",
   "ToolCallArg": "මෙවලම් ඇමතුම් තර්ක:",
   "ToolCallArgCopied": "මෙවලම් ඇමතුම් තර්ක සාර්ථකව පසුරු පුවරුවට පිටපත් කරන ලදී",
@@ -1050,8 +1054,5 @@
   "YouHaveUnsavedChanges": "ඔබ සතුව නොසුරැකි වෙනස්කම් ඇත",
   "YourCurrentDomain": "ඔබගේ වත්මන් වසම",
   "YourLogo": "ඔබේ ලාංචනය",
-  "YourTurn": "ඔබේ වාරය.",
-  "ExternalLink": "බාහිර සබැඳිය",
-  "TitleShowFolderActions": "බහාලුමේ ක්‍රියාමාර්ග පෙන්වන්න",
-  "TitleShowActions": "ගොනුවේ ක්‍රියාමාර්ග පෙන්වන්න"
+  "YourTurn": "ඔබේ වාරය."
 }

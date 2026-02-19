@@ -211,6 +211,7 @@
   "CreateFileCopy": "Δημιουργία αντιγράφου αρχείου",
   "CreateFolderDescription": "Θα υπάρχουν δύο διαφορετικοί φάκελοι στον προορισμό",
   "CreateFormFillingRoom": "Δημιουργία δωματίου συμπλήρωσης φορμών ",
+  "CreateGroup": "Δημιουργία ομάδας",
   "CreateMasterFormFromFile": "Δημιουργία φόρμας PDF από αρχείο",
   "CreatePDFForm": "Δημιουργία φόρμας PDF",
   "CreateRoom": "Δημιουργία δωματίου",
@@ -387,6 +388,7 @@
   "Exabyte": "EB",
   "Example": "Παράδειγμα: {{example}}",
   "ExpiredLink": "Ληγμένος σύνδεσμος",
+  "ExternalLink": "Εξωτερικός σύνδεσμος",
   "Favorites": "Αγαπημένα",
   "FeeAppliesToEachBackup": "Παρακαλούμε να σημειώσετε: Χρεώνεται ένα τέλος για κάθε δημιουργία αντιγράφου ασφαλείας.",
   "FeedbackAndSupport": "Ανατροφοδότηση & Υποστήριξη",
@@ -958,6 +960,8 @@
   "ThisSectionIsEmpty": "Αυτή η ενότητα είναι κενή",
   "Title": "Τίτλος",
   "TitleSelectFile": "Επιλογή",
+  "TitleShowActions": "Εμφάνιση ενεργειών αρχείου",
+  "TitleShowFolderActions": "Εμφάνιση Ενεργειών Φακέλου",
   "Today": "Σήμερα",
   "ToolCallArg": "Επιχειρήματα κλήσης εργαλείου:",
   "ToolCallArgCopied": "Επιτυχής αντιγραφή των ορισμάτων κλήσης εργαλείου στον πίνακα",
@@ -1050,8 +1054,5 @@
   "YouHaveUnsavedChanges": "Έχετε μη αποθηκευμένες αλλαγές",
   "YourCurrentDomain": "Το τρέχον όνομα τομέα σας",
   "YourLogo": "Το λογότυπό σας",
-  "YourTurn": "Η σειρά σας",
-  "ExternalLink": "Εξωτερικός σύνδεσμος",
-  "TitleShowFolderActions": "Εμφάνιση Ενεργειών Φακέλου",
-  "TitleShowActions": "Εμφάνιση ενεργειών αρχείου"
+  "YourTurn": "Η σειρά σας"
 }

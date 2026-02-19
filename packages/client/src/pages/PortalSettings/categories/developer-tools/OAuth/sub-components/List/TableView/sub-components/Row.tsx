@@ -164,7 +164,6 @@ const Row = (props: RowProps) => {
           >
             <Tags
               tags={item.scopes}
-              removeTagIcon
               columnCount={tagCount}
               onSelectTag={() => {}}
             />

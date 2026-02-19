@@ -4,6 +4,8 @@ services:
     build:
       context: ../..
       dockerfile: packages/sdk/Dockerfile
+    volumes:
+      - ../../playwright-report/sdk:/app/playwright-report/sdk
   tests-local:
     image: sdk-tests
     ports:

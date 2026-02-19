@@ -211,6 +211,7 @@
   "CreateFileCopy": "Criar cópia do ficheiro",
   "CreateFolderDescription": "Haverá duas pastas diferentes no destino",
   "CreateFormFillingRoom": "Criar sala de preenchimento de formulários",
+  "CreateGroup": "Criar grupo",
   "CreateMasterFormFromFile": "Criar formulário PDF a partir do ficheiro",
   "CreatePDFForm": "Criar formulário PDF",
   "CreateRoom": "Criar sala",
@@ -387,6 +388,7 @@
   "Exabyte": "EB",
   "Example": "Exemplo: {{example}}",
   "ExpiredLink": "Link expirado",
+  "ExternalLink": "Ligação externa",
   "Favorites": "Favoritos",
   "FeeAppliesToEachBackup": "Por favor, note: Uma taxa é aplicada a cada backup.",
   "FeedbackAndSupport": "Feedback e Suporte",
@@ -958,6 +960,8 @@
   "ThisSectionIsEmpty": "Esta secção está vazia",
   "Title": "Título",
   "TitleSelectFile": "Selecionar",
+  "TitleShowActions": "Mostrar ações com ficheiros",
+  "TitleShowFolderActions": "Mostrar ações da pasta",
   "Today": "Hoje",
   "ToolCallArg": "Argumentos de chamada de ferramenta:",
   "ToolCallArgCopied": "Argumentos da chamada da ferramenta copiados com sucesso para a área de transferência",
@@ -1050,8 +1054,5 @@
   "YouHaveUnsavedChanges": "Tem alterações que não foram guardadas",
   "YourCurrentDomain": "O seu domínio atual",
   "YourLogo": "O seu logótipo",
-  "YourTurn": "A sua vez",
-  "ExternalLink": "Ligação externa",
-  "TitleShowFolderActions": "Mostrar ações da pasta",
-  "TitleShowActions": "Mostrar ações com ficheiros"
+  "YourTurn": "A sua vez"
 }

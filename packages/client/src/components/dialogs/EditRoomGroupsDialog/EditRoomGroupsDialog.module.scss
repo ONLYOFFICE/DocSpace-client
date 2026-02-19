@@ -1,0 +1,349 @@
+// (c) Copyright Ascensio System SIA 2009-2025
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+@use "@docspace/ui-kit/styles/mixins";
+@use "@docspace/ui-kit/styles/variables/colors" as *;
+
+.editRoomGroupsDialog {
+  :global {
+    .modal-body {
+      margin-inline-end: 0px !important;
+      padding: 0px !important;
+    }
+  }
+
+  :global(#modal-scroll > .scroll-wrapper > .scroller > .scroll-body) {
+    padding-inline-end: 0px !important;
+  }
+
+  .infoBar {
+    &:global(.public-room-bar) {
+      margin: 16px;
+      margin-bottom: 0;
+      margin: 17px 15px 0 16px;
+
+      path {
+        fill: $light-gray-dark;
+      }
+
+      > div:last-child svg {
+        width: 10px !important;
+        height: 10px !important;
+        padding-top: 3px;
+      }
+
+      :global(.dark) & {
+        path {
+          fill: $dark-gray-dark;
+        }
+      }
+    }
+  }
+
+  .settingRoomGroups {
+    padding: 20px 9px 20px 16px;
+    border-bottom: 1px solid $gray-light-mid;
+  }
+
+  .roomGroups {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .title {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  .description {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    color: $gray;
+  }
+
+  .selectorAddButton {
+    padding: 17px 20px;
+  }
+
+  .roomGroupsToggle {
+    :global {
+      label {
+        position: relative;
+      }
+    }
+  }
+
+  .group {
+    display: flex;
+    justify-content: space-between;
+    padding: 17px 20px 17px 28px;
+
+    &.groupDisabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  }
+
+  .groupDisabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .nameGroup {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .countRooms {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    color: $gray;
+  }
+
+  .titleContainer {
+    overflow: hidden;
+    min-width: 0;
+  }
+
+  .groupData {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    min-width: 0;
+    flex: 1;
+    cursor: pointer;
+  }
+
+  .iconGroup {
+    padding-top: 2px;
+    padding-inline-end: 16px;
+  }
+}
+
+.groupIconDialog {
+  :global {
+    #modal-dialog {
+      width: 422px;
+      height: 498px;
+    }
+
+    .modal-header {
+      line-height: 28px;
+    }
+
+    .modal-body {
+      padding-bottom: 16px !important;
+    }
+
+    .modal-footer {
+      margin-top: 8px;
+    }
+  }
+
+  @include mixins.mobile {
+    :global {
+      #modal-dialog {
+        width: auto;
+        height: calc(100% - 64px);
+      }
+    }
+  }
+
+  .name {
+    margin-top: 18px;
+    margin-bottom: 16px;
+  }
+
+  .nameText {
+    display: inline;
+  }
+
+  .symbol {
+    color: $light-error-status;
+  }
+
+  .nameInput {
+    margin-top: 3px;
+  }
+}
+
+.editGroup {
+  display: flex;
+  gap: 18px;
+  flex-shrink: 0;
+  padding-top: 8px;
+  margin-inline-start: 8px;
+}
+
+.deleteGroupDialog {
+  :global(#modal-dialog) {
+    width: 363px;
+  }
+}
+
+.styledIconContainer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 30px;
+  height: 30px;
+  border-radius: 4px;
+
+  :global {
+    .color-name {
+      padding-bottom: 4px;
+    }
+
+    .cover-icon {
+      overflow: visible;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  svg {
+    path {
+      fill: $light-gray-dark;
+    }
+  }
+
+  :global(.dark) & {
+    svg {
+      path {
+        fill: $dark-gray-dark;
+      }
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+
+    svg {
+      path {
+        fill: var(--icon-hover-color);
+      }
+    }
+  }
+
+  &.isSelected {
+    background-color: var(--icon-selected-bg);
+
+    svg {
+      path {
+        fill: var(--icon-hover-color);
+      }
+    }
+  }
+
+  @include mixins.mobile {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.roomLogoCoverContainer {
+  :global {
+    .room-logo-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 16px;
+      padding-right: 16px;
+    }
+
+    .color-select-container {
+      margin-bottom: 16px;
+    }
+
+    .color-name {
+      font-weight: 600;
+      font-size: 13px;
+      line-height: 20px;
+      padding-bottom: 8px;
+      user-select: none;
+    }
+
+    .colors-container {
+      flex-wrap: nowrap;
+    }
+
+    .colors-container,
+    .cover-icon-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      box-sizing: border-box;
+      width: 390px;
+    }
+
+    .cover-icon-container {
+      user-select: none;
+    }
+  }
+
+  @include mixins.mobile {
+    :global {
+      .cover-icon-container {
+        width: 100%;
+        align-items: center;
+        text-align: center;
+      }
+
+      .color-name {
+        text-align: center;
+      }
+
+      .room-logo-container {
+        padding-right: 0px;
+      }
+
+      .icon-select-container {
+        text-align: center;
+      }
+
+      .colors-container {
+        width: 100%;
+      }
+
+      .colors-container,
+      .cover-icon-container {
+        gap: 16px;
+      }
+    }
+  }
+}

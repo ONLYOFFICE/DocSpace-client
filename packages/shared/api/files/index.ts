@@ -1972,3 +1972,13 @@ export async function uploadTemplateFromDevice(
   });
   return res.items as TDefaultTemplate[];
 }
+
+export async function setOrganizeGrouping(set: boolean) {
+  const res = await request({
+    method: "put",
+    url: "/files/settings/organizegrouping",
+    data: { set },
+  });
+
+  return res as boolean;
+}

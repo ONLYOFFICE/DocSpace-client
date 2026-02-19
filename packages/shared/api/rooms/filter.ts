@@ -62,6 +62,7 @@ const DEFAULT_TAGS: Nullable<string | string[]> = null;
 const DEFAULT_TOTAL = 0;
 const DEFAULT_TYPE: Nullable<string | string[]> = null;
 const DEFAULT_WITHOUT_TAGS: Nullable<string | boolean> = false;
+const DEFAULT_GROUP_ID: Nullable<string> = null;
 
 const EXCLUDE_SUBJECT = "excludeSubject";
 const FILTER_VALUE = "filterValue";
@@ -80,6 +81,7 @@ const SUBJECT_ID = "subjectId";
 const TAGS = "tags";
 const TYPE = "type";
 const WITHOUT_TAGS = "withoutTags";
+const GROUP_ID = "groupId";
 const START_INDEX = "startIndex";
 
 class RoomsFilter {
@@ -118,6 +120,8 @@ class RoomsFilter {
   quotaFilter: Nullable<string>;
 
   storageFilter: Nullable<string>;
+
+  groupId: Nullable<string>;
 
   static getDefault(userId?: string, searchArea: string = DEFAULT_SEARCH_AREA) {
     const defaultFilter = new RoomsFilter(
@@ -178,6 +182,7 @@ class RoomsFilter {
       [WITHOUT_TAGS]: urlWithoutTags,
       [QUOTA_FILTER]: urlQuotaFilter,
       [STORAGE_FILTER]: urlStorageFilter,
+      [GROUP_ID]: urlGroupId,
     } = urlFilter;
 
     const {
@@ -196,6 +201,7 @@ class RoomsFilter {
       withoutTags: defaultWithoutTags,
       quotaFilter: defaultQuotaFilter,
       storageFilter: defaultStorageFilter,
+      groupId: defaultGroupId,
     } = defaultFilter;
 
     const page = (urlPage && +urlPage - 1) || defaultPage;
@@ -217,6 +223,7 @@ class RoomsFilter {
     const withoutTags = (urlWithoutTags as string) || defaultWithoutTags;
     const quotaFilter = (urlQuotaFilter as string) || defaultQuotaFilter;
     const storageFilter = (urlStorageFilter as string) || defaultStorageFilter;
+    const groupId = (urlGroupId as string) || defaultGroupId;
 
     // TODO: remove it if search with subfolders and in content will be available and add it to the urlFilter and the defaultFilter
     // const searchInContent = urlSearchInContent || defaultSearchInContent;
@@ -241,6 +248,7 @@ class RoomsFilter {
       subjectFilter,
       quotaFilter,
       storageFilter,
+      groupId,
     );
 
     return newFilter;
@@ -265,6 +273,7 @@ class RoomsFilter {
     subjectFilter = DEFAULT_SUBJECT_FILTER,
     quotaFilter = DEFAULT_QUOTA_FILTER,
     storageFilter = DEFAULT_STORAGE_FILTER,
+    groupId = DEFAULT_GROUP_ID,
   ) {
     this.page = page;
     this.pageCount = pageCount;
@@ -284,6 +293,7 @@ class RoomsFilter {
     this.subjectFilter = subjectFilter;
     this.quotaFilter = quotaFilter;
     this.storageFilter = storageFilter;
+    this.groupId = groupId;
   }
 
   getStartIndex = () => {
@@ -319,6 +329,7 @@ class RoomsFilter {
       subjectFilter,
       quotaFilter,
       storageFilter,
+      groupId,
       startIndex,
     } = fixedValidObject;
 
@@ -341,6 +352,7 @@ class RoomsFilter {
       [SUBJECT_FILTER]: subjectFilter,
       [QUOTA_FILTER]: quotaFilter,
       [STORAGE_FILTER]: storageFilter,
+      [GROUP_ID]: groupId,
     };
 
     return toUrlParams(dtoFilter, true);
@@ -367,6 +379,7 @@ class RoomsFilter {
       subjectFilter,
       quotaFilter,
       storageFilter,
+      groupId,
     } = fixedValidObject;
 
     const dtoFilter: Record<string, unknown> = {
@@ -385,6 +398,7 @@ class RoomsFilter {
       }),
       ...(quotaFilter && { [QUOTA_FILTER]: quotaFilter }),
       ...(storageFilter && { [STORAGE_FILTER]: storageFilter }),
+      ...(groupId && { [GROUP_ID]: groupId }),
       [PAGE]: page + 1,
       [SORT_BY]: sortBy,
       [SORT_ORDER]: sortOrder,
@@ -481,6 +495,7 @@ class RoomsFilter {
       this.subjectFilter,
       this.quotaFilter,
       this.storageFilter,
+      this.groupId,
     );
   }
 
@@ -507,6 +522,7 @@ class RoomsFilter {
       this.excludeSubject === filter.excludeSubject &&
       this.withoutTags === filter.withoutTags &&
       this.subjectFilter === filter.subjectFilter &&
+      this.groupId === filter.groupId &&
       typeEqual &&
       tagsEqual;
 

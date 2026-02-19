@@ -211,6 +211,7 @@
   "CreateFileCopy": "Creare copia del file",
   "CreateFolderDescription": "Ci saranno due cartelle diverse nella destinazione",
   "CreateFormFillingRoom": "Crea una Stanza di compilazione dei moduli",
+  "CreateGroup": "Crea un gruppo",
   "CreateMasterFormFromFile": "Creare modulo PDF da file",
   "CreatePDFForm": "Crea modulo PDF",
   "CreateRoom": "Crea una stanza",
@@ -387,6 +388,7 @@
   "Exabyte": "EB",
   "Example": "Esempio: {{example}}",
   "ExpiredLink": "Collegamento scaduto",
+  "ExternalLink": "Collegamento esterno",
   "Favorites": "Preferiti",
   "FeeAppliesToEachBackup": "Nota: è prevista una tariffa per ogni backup.",
   "FeedbackAndSupport": "Feedback & Supporto",
@@ -958,6 +960,8 @@
   "ThisSectionIsEmpty": "Questa sezione è vuota",
   "Title": "Titolo",
   "TitleSelectFile": "Seleziona",
+  "TitleShowActions": "Mostra azioni con file",
+  "TitleShowFolderActions": "Mostra azioni con cartelle",
   "Today": "Oggi",
   "ToolCallArg": "Argomenti della chiamata dello strumento:",
   "ToolCallArgCopied": "Gli argomenti della chiamata dello strumento sono stati copiati correttamente negli appunti.",
@@ -1050,8 +1054,5 @@
   "YouHaveUnsavedChanges": "Hai delle modifiche non salvate",
   "YourCurrentDomain": "Il tuo dominio attuale",
   "YourLogo": "Il tuo logo",
-  "YourTurn": "Il tuo turno",
-  "ExternalLink": "Collegamento esterno",
-  "TitleShowFolderActions": "Mostra azioni con cartelle",
-  "TitleShowActions": "Mostra azioni con file"
+  "YourTurn": "Il tuo turno"
 }

@@ -1161,15 +1161,23 @@ const getFilesSettings = (): TFilesSettings => {
     maxUploadThreadCount: 15,
     chunkUploadSize: 10485760,
     openEditorInSameTab: false,
+    organizeRoomsGrouping: false,
   };
 };
 
-export const filesSettingsResolver = (): Response => {
-  return new Response(JSON.stringify({ response: getFilesSettings() }));
+export const filesSettingsResolver = (
+  overrides?: Partial<TFilesSettings>,
+): Response => {
+  return new Response(
+    JSON.stringify({ response: { ...getFilesSettings(), ...overrides } }),
+  );
 };
 
-export const filesSettingsHandler = (port: string) => {
+export const filesSettingsHandler = (
+  port: string,
+  overrides?: Partial<TFilesSettings>,
+) => {
   return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH}`, () => {
-    return filesSettingsResolver();
+    return filesSettingsResolver(overrides);
   });
 };

@@ -72,6 +72,8 @@ const Editor = ({
   isSkipError,
 
   sdkConfig,
+  generationToolCallState,
+
   organizationName = "",
   filesSettings,
 
@@ -89,7 +91,6 @@ const Editor = ({
   openShareFormDialog,
   onStartFilling,
 }: EditorProps) => {
-  console.log("config", config);
   const { t, i18n } = useTranslation(["Common", "Editor", "DeepLink"]);
   const { isBase } = useTheme();
 
@@ -138,6 +139,7 @@ const Editor = ({
     openShareFormDialog,
     onStartFillingVDRPanel,
     shareKey,
+    generationToolCallState,
   });
 
   useInit({

@@ -211,6 +211,7 @@
   "CreateFileCopy": "Kreiraj kopiju datoteke",
   "CreateFolderDescription": "U odredištu će biti dva različita foldera",
   "CreateFormFillingRoom": "Kreiraj Prostoriju za popunjavanje formulara",
+  "CreateGroup": "Kreiraj grupu",
   "CreateMasterFormFromFile": "Kreiraj PDF obrazac iz datoteke",
   "CreatePDFForm": "Kreiraj PDF Formular",
   "CreateRoom": "Kreiraj sobu",
@@ -387,6 +388,7 @@
   "Exabyte": "EB",
   "Example": "Primer: {{example}}",
   "ExpiredLink": "Istekao link",
+  "ExternalLink": "Eksterni link",
   "Favorites": "Omiljeni",
   "FeeAppliesToEachBackup": "Napomena: Za svaki bekap se naplaćuje naknada",
   "FeedbackAndSupport": "Povratne informacije i podrška",
@@ -958,6 +960,8 @@
   "ThisSectionIsEmpty": "Odeljak je prazan",
   "Title": "Naslov",
   "TitleSelectFile": "Izaberi",
+  "TitleShowActions": "Prikaži akcije datoteka",
+  "TitleShowFolderActions": "Prikaži akciije foldera",
   "Today": "Danas",
   "ToolCallArg": "Argumenti poziva alata:",
   "ToolCallArgCopied": "Argumenti poziva alata uspešno kopirani u privremenu memoriju",
@@ -1050,8 +1054,5 @@
   "YouHaveUnsavedChanges": "Imate nesačuvane promene",
   "YourCurrentDomain": "Vaš trenutni domen",
   "YourLogo": "Vaš logo",
-  "YourTurn": "Vaš red",
-  "ExternalLink": "Eksterni link",
-  "TitleShowFolderActions": "Prikaži akciije foldera",
-  "TitleShowActions": "Prikaži akcije datoteka"
+  "YourTurn": "Vaš red"
 }

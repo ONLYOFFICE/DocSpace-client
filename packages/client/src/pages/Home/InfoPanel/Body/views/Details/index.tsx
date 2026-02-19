@@ -69,7 +69,6 @@ type DetailsProps = {
   isVisitor?: boolean;
   isCollaborator?: boolean;
 
-  selectTag?: FilesActionStore["selectTag"];
   onCreateRoomFromTemplate?: FilesActionStore["onCreateRoomFromTemplate"];
 
   isDefaultRoomsQuotaSet?: boolean;
@@ -91,7 +90,6 @@ const Details = ({
   openUser,
   isVisitor,
   isCollaborator,
-  selectTag,
   isArchive,
   isDefaultRoomsQuotaSet,
   isDefaultAIAgentsQuotaSet,
@@ -123,7 +121,6 @@ const Details = ({
     item: selection,
     openUser: openUser!,
     culture: culture!,
-    selectTag: selectTag!,
     isDefaultRoomsQuotaSet: isDefaultRoomsQuotaSet!,
     isDefaultAIAgentsQuotaSet: isDefaultAIAgentsQuotaSet!,
     isAIAgentsFolder: isAIAgentsFolderRoot!,
@@ -326,7 +323,7 @@ export default inject(
     const { culture } = settingsStore;
     const { user } = userStore;
 
-    const { selectTag, onCreateRoomFromTemplate } = filesActionsStore;
+    const { onCreateRoomFromTemplate } = filesActionsStore;
 
     const isVisitor = user?.isVisitor;
     const isCollaborator = user?.isCollaborator;
@@ -342,7 +339,6 @@ export default inject(
       openUser,
       isVisitor,
       isCollaborator,
-      selectTag,
       isDefaultRoomsQuotaSet,
       isDefaultAIAgentsQuotaSet,
       isAIAgentsFolderRoot,

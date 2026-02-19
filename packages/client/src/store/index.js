@@ -215,6 +215,8 @@ const dialogsStore = new DialogsStore(
   infoPanelStore,
 );
 
+filesStore.dialogsStore = dialogsStore;
+
 const profileActionsStore = new ProfileActionsStore(
   authStore,
   filesStore,

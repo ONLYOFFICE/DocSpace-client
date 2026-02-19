@@ -134,79 +134,6 @@
     flex-direction: column;
     align-items: flex-end;
 
-    .filesListWrapperContainer {
-      display: flex;
-
-      height: 48px;
-      width: 100%;
-    }
-
-    .filesListWrapper {
-      width: 100%;
-
-      display: flex;
-
-      flex-wrap: wrap;
-
-      justify-content: end;
-
-      gap: 6px;
-
-      margin-bottom: 8px;
-
-      .filesListItem {
-        width: fit-content;
-        min-width: fit-content;
-        height: 32px;
-        max-width: 300px;
-
-        padding-inline-end: 8px;
-
-        display: flex;
-        align-items: center;
-
-        border: 1px solid var(--chat-message-file-border-color);
-
-        border-radius: 6px;
-
-        cursor: pointer;
-
-        .filesListItemIcon {
-          width: 32px;
-          height: 32px;
-
-          div {
-            width: 32px;
-            height: 32px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-          }
-        }
-      }
-
-      .filesListItemInfo {
-        display: flex;
-        align-items: center;
-
-        gap: 8px;
-
-        max-width: 300px;
-
-        .filesListItemInfoText {
-          max-width: 100%;
-
-          display: flex;
-          flex-direction: row;
-
-          span {
-            color: var(--chat-file-item-exst-color);
-          }
-        }
-      }
-    }
-
     .chatMessageUser {
       padding: 0 12px;
 
@@ -250,6 +177,83 @@
   padding-inline-end: 40px;
 
   padding-top: 4px;
+}
+
+.filesListWrapperContainer {
+  display: flex;
+
+  height: 48px;
+  width: 100%;
+}
+
+.filesListWrapper {
+  width: 100%;
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  justify-content: end;
+
+  &.reverse {
+    justify-content: start;
+  }
+
+  gap: 6px;
+
+  margin-bottom: 8px;
+
+  .filesListItem {
+    width: fit-content;
+    min-width: fit-content;
+    height: 32px;
+    max-width: 300px;
+
+    padding-inline-end: 8px;
+
+    display: flex;
+    align-items: center;
+
+    border: 1px solid var(--chat-message-file-border-color);
+
+    border-radius: 6px;
+
+    cursor: pointer;
+
+    .filesListItemIcon {
+      width: 32px;
+      height: 32px;
+
+      div {
+        width: 32px;
+        height: 32px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
+
+  .filesListItemInfo {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    max-width: 300px;
+
+    .filesListItemInfoText {
+      max-width: 100%;
+
+      display: flex;
+      flex-direction: row;
+
+      span {
+        color: var(--chat-file-item-exst-color);
+      }
+    }
+  }
 }
 
 .codeContainer {

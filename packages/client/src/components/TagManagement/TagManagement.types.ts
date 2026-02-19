@@ -24,17 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect, useRef } from "react";
+import type { TagManagementProps as SharedTagManagementProps } from "@docspace/shared/components/tag-management/TagManagement.types";
 
-export const useUnmount = (func: VoidFunction) => {
-  const funcRef = useRef(func);
+export interface InjectedTagManagementProps {
+  onSelectTag: TStore["filesActionsStore"]["selectTag"];
+  isAdmin: boolean;
+}
 
-  funcRef.current = func;
+export type TagManagementProps = Omit<
+  SharedTagManagementProps,
+  "isAdmin" | "onSelectTag"
+>;
 
-  useEffect(
-    () => () => {
-      funcRef.current();
-    },
-    [],
-  );
-};
+export interface TagManagementWrapperProps
+  extends TagManagementProps,
+    InjectedTagManagementProps {}

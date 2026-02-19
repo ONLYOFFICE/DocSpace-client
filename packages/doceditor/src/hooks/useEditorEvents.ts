@@ -103,6 +103,7 @@ const useEditorEvents = ({
   sdkConfig,
   organizationName,
   shareKey,
+  generationToolCallState,
   setFillingStatusDialogVisible,
   openShareFormDialog,
   onStartFillingVDRPanel,
@@ -336,9 +337,20 @@ const useEditorEvents = ({
                 typeof data === "object" &&
                 "error" in data &&
                 data.error
-              )
+              ) {
                 connector.attachEvent("ai_onInit", sendProviders);
-              else sendProviders();
+              } else {
+                sendProviders();
+              }
+
+              if (generationToolCallState) {
+                connector.sendEvent("ai_onCallTool", {
+                  name: generationToolCallState.toolName,
+                  arguments: {
+                    ...generationToolCallState.parameters,
+                  },
+                });
+              }
             });
 
             connector.attachEvent("ai_onExternalFetch", (e: unknown) =>
@@ -365,6 +377,7 @@ const useEditorEvents = ({
     checkAndRequestRoles,
     t,
     successAuth,
+    generationToolCallState,
   ]);
 
   const onUserActionRequired = React.useCallback(() => {

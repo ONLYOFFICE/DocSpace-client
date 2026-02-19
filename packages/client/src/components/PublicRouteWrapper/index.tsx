@@ -31,7 +31,7 @@ import type { PublicRouteProps } from "@docspace/shared/routes";
 
 const PublicRouteWrapper = ({
   children,
-  isAuthenticated,
+  isAuthenticated = false,
   isPortalDeactivate,
   tenantStatus,
   isFirstLoaded,

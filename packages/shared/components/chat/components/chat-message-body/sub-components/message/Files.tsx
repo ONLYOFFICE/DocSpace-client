@@ -24,26 +24,30 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import { ReactSVG } from "react-svg";
+import classNames from "classnames";
 
 import { ContentType } from "../../../../../../api/ai/enums";
 
 import { Text } from "@docspace/ui-kit/components/text";
 
-import { MessageFilesProps } from "../../../../Chat.types";
+import type { MessageFilesProps } from "../../../../Chat.types";
 
 import { openFile } from "../../../../utils";
 
 import styles from "../../ChatMessageBody.module.scss";
 
-const Files = ({ files, getIcon }: MessageFilesProps) => {
+const Files = ({ files, getIcon, reverse }: MessageFilesProps) => {
   if (!files.length) return null;
 
   return (
-    <div className={styles.filesListWrapper}>
+    <div
+      className={classNames(styles.filesListWrapper, {
+        [styles.reverse]: reverse,
+      })}
+    >
       {files.map((file) => {
-        if (file.type !== ContentType.Files) return;
+        if (file.type !== ContentType.Files) return null;
 
         return (
           <div

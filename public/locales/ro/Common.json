@@ -211,6 +211,7 @@
   "CreateFileCopy": "Crearea copiei fișierului",
   "CreateFolderDescription": "Două foldere separate vor apărea la destinaţie",
   "CreateFormFillingRoom": "Creare Sală Completare formular",
+  "CreateGroup": "Creare grup",
   "CreateMasterFormFromFile": "Crearea unui formular PDF din fișier",
   "CreatePDFForm": "Creare formular PDF",
   "CreateRoom": "Creare sală",
@@ -387,6 +388,7 @@
   "Exabyte": "EO",
   "Example": "Exemplu: {{example}}",
   "ExpiredLink": "Link expirat",
+  "ExternalLink": "Link extern",
   "Favorites": "Favorite",
   "FeeAppliesToEachBackup": "Vă rugăm să rețineți: Taxa de copiere de rezervă se aplică fiecărui copii.",
   "FeedbackAndSupport": "Feedback și asistența",
@@ -958,6 +960,8 @@
   "ThisSectionIsEmpty": "Secțiunea nu conține niciun element",
   "Title": "Titlu",
   "TitleSelectFile": "Selectează",
+  "TitleShowActions": "Afișare acțiuni asupra fișierului",
+  "TitleShowFolderActions": "Afișare acțiuni asupra folderului",
   "Today": "Astăzi",
   "ToolCallArg": "Argumente pentru apelarea instrumentului:",
   "ToolCallArgCopied": "Argumente de apelare a instrumentelor au fost copiate cu succes în clipboard",
@@ -1050,8 +1054,5 @@
   "YouHaveUnsavedChanges": "Nu ați salvat modificările efectuate de dvs",
   "YourCurrentDomain": "Domeniul dvs. actual",
   "YourLogo": "Logo-ul dvs",
-  "YourTurn": "Acum e rândul dvs.",
-  "ExternalLink": "Link extern",
-  "TitleShowFolderActions": "Afișare acțiuni asupra folderului",
-  "TitleShowActions": "Afișare acțiuni asupra fișierului"
+  "YourTurn": "Acum e rândul dvs."
 }

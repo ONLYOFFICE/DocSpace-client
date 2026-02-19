@@ -36,9 +36,6 @@ export enum TypeRoomList {
   IsFiltered = "isFiltered",
   IsDefault = "isDefault",
   ContextMenu = "contextMenu",
-  IsFiltered = "isFiltered",
-  IsDefault = "isDefault",
-  ContextMenu = "contextMenu",
 }
 
 const current = {
@@ -216,10 +213,9 @@ const getRoomList = (filtered: boolean = false) => {
       inRoom: true,
       usedSpace: 0,
       fileEntryType: 1,
-      id: 40,
+      id: 11,
       rootFolderId: 2,
       canShare: true,
-      isNewRoom: true,
       security: {
         Read: true,
         Create: true,
@@ -289,7 +285,7 @@ const getRoomList = (filtered: boolean = false) => {
       inRoom: true,
       usedSpace: 0,
       fileEntryType: 1,
-      id: 41,
+      id: 12,
       rootFolderId: 2,
       canShare: true,
       security: {

@@ -1352,6 +1352,16 @@ class FilesStore {
       });
     }
 
+    // TODO: Remove once backend provides isNewRoom flag.
+    // Temporarily mark the first room as new for development purposes.
+    const firstRoomIndex = folders.findIndex((f) => !!f.roomType);
+    if (
+      firstRoomIndex !== -1 &&
+      folders[firstRoomIndex].isNewRoom === undefined
+    ) {
+      folders[firstRoomIndex] = { ...folders[firstRoomIndex], isNewRoom: true };
+    }
+
     this.folders = folders;
 
     if (roomPartsToSub.length > 0) {

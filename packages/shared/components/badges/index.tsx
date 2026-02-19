@@ -592,16 +592,32 @@ const Badges = ({
           hoverColor="accent"
         />
       ) : null}
-      {isRoom && isNewRoom ? (
-        <BadgeWrapper onClick={onNewRoomBadgeClick} isTile={isTile}>
-          <Badge
-            {...commonBadgeProps}
-            className="badge-version badge-new-room tablet-badge icons-group"
-            label={t("Common:New")}
-            onClick={onNewRoomBadgeClick}
-          />
-        </BadgeWrapper>
+
+      {isRoom && isNewRoom && !isTile ? (
+        <Badge
+          fontSize="11px"
+          fontWeight={600}
+          className="new-items tablet-badge icons-group"
+          label={t("Common:New")}
+          color={globalColors.white}
+          onClick={onNewRoomBadgeClick}
+          isMutedBadge={isMutedBadge}
+        />
       ) : null}
+      {isRoom && isNewRoom && isTile ? (
+        <div className={styles.badgeWrapperNewBadge}>
+          <Badge
+            fontSize="11px"
+            fontWeight={600}
+            className="new-items tablet-badge icons-group"
+            label={t("Common:New")}
+            color={globalColors.white}
+            onClick={onNewRoomBadgeClick}
+            isMutedBadge={isMutedBadge}
+          />
+        </div>
+      ) : null}
+      
       {showNew && !isTile ? newFilesBadge : null}
       {showNew && isTile && isRoom ? (
         <div className={styles.badgeWrapperNewBadge}>{newFilesBadge}</div>

@@ -24,6 +24,7 @@
 
   --text-color: #{$black};
   --text-disable-color: #{$gray};
+  --edit-link-text-color: #{$gray};
 
   --link-color: #{$black};
 
@@ -61,6 +62,7 @@
   // Line heights
   --text-color: #{$white};
   --text-disable-color: #{$gray-dark-text};
+  --edit-link-text-color: #{$gray};
 
   --link-color: #{$white};
 

@@ -33,11 +33,19 @@
   .badgeWrapperNewBadge {
     left: -6px;
   }
+
+  .newRoomBadgeWrapper {
+    left: -9px;
+  }
 }
 
 :global(.ltr) {
   .badgeWrapperNewBadge {
     right: -6px;
+  }
+
+  .newRoomBadgeWrapper {
+    right: -9px;
   }
 }
 
@@ -80,6 +88,23 @@
   }
 }
 
+.newRoomBadge {
+  > div {
+    height: 12px;
+  }
+}
+
+.newRoomBadgeTile {
+  padding: 2px;
+  > div {
+    height: 19px;
+  }
+
+  [data-testid="badge-text"] {
+    padding-top: 1px;
+  }
+}
+
 .customFilterTooltip {
   :global(.custom-filter-tooltip-link) {
     color: var(--files-badges-link-color);
@@ -101,6 +126,20 @@
   position: absolute;
 
   top: -6px;
+
+  padding: 0;
+
+  background: var(--files-badges-bg-color);
+
+  border-radius: 11px;
+  border: var(--files-badges-border);
+}
+
+.newRoomBadgeWrapper {
+  position: absolute;
+
+  top: -9px;
+
   padding: 0;
 
   background: var(--files-badges-bg-color);

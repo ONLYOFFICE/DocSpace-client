@@ -595,9 +595,13 @@ const Badges = ({
 
       {isRoom && isNewRoom && !isTile ? (
         <Badge
-          fontSize="11px"
-          fontWeight={600}
-          className="new-items tablet-badge icons-group"
+          fontSize="9px"
+          fontWeight={700}
+          padding="0 3px"
+          className={classNames(
+            styles.newRoomBadge,
+            "new-items tablet-badge icons-group",
+          )}
           label={t("Common:New")}
           color={globalColors.white}
           onClick={onNewRoomBadgeClick}
@@ -605,11 +609,15 @@ const Badges = ({
         />
       ) : null}
       {isRoom && isNewRoom && isTile ? (
-        <div className={styles.badgeWrapperNewBadge}>
+        <div className={styles.newRoomBadgeWrapper}>
           <Badge
-            fontSize="11px"
-            fontWeight={600}
-            className="new-items tablet-badge icons-group"
+            fontSize="11.25px"
+            fontWeight={700}
+            padding="0 6px"
+            className={classNames(
+              styles.newRoomBadgeTile,
+              "new-items tablet-badge icons-group",
+            )}
             label={t("Common:New")}
             color={globalColors.white}
             onClick={onNewRoomBadgeClick}
@@ -617,7 +625,7 @@ const Badges = ({
           />
         </div>
       ) : null}
-      
+
       {showNew && !isTile ? newFilesBadge : null}
       {showNew && isTile && isRoom ? (
         <div className={styles.badgeWrapperNewBadge}>{newFilesBadge}</div>

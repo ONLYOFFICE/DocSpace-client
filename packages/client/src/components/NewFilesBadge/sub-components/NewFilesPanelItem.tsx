@@ -25,10 +25,19 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import classNames from "classnames";
+import { useTranslation, Trans } from "react-i18next";
+import { inject, observer } from "mobx-react";
 
 import type { TFile } from "@docspace/shared/api/files/types";
+import { Text } from "@docspace/ui-kit/components/text";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 
-import type { NewFilesPanelItemProps } from "../NewFilesBadge.types";
+import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
+
+import type {
+  NewFilesPanelItemProps,
+  NewFilesPanelItemInjectStore,
+} from "../NewFilesBadge.types";
 
 import { NewFilesPanelItemDate } from "./NewFilesPanelItemDate";
 import { NewFilesPanelItemRoom } from "./NewFilesPanelItemRoom";
@@ -36,7 +45,7 @@ import { NewFilesPanelFileList } from "./NewFilesPanelFileList";
 
 import styles from "../new-files-panel.module.scss";
 
-export const NewFilesPanelItem = ({
+const NewFilesPanelItemComponent = function NewFilesPanelItemComponent({
   date,
   items,
   isRooms,
@@ -45,7 +54,10 @@ export const NewFilesPanelItem = ({
   onClose,
 
   culture,
-}: NewFilesPanelItemProps) => {
+  openItemAction,
+}: NewFilesPanelItemProps) {
+  const { t } = useTranslation(["Files"]);
+
   return (
     <div
       className={classNames(styles.item, {
@@ -79,6 +91,42 @@ export const NewFilesPanelItem = ({
                 className="room-items-container"
               >
                 <NewFilesPanelItemRoom {...value} onClose={onClose} />
+                {value.room.isNewRoom && (
+                  <div className={styles.invitedToRoom}>
+                    <div
+                      className="info-container"
+                      onClick={async () => {
+                        openItemAction?.({ ...value.room, isFolder: true });
+                        onClose();
+                      }}
+                    >
+                      <IconButton
+                        iconName={InfoOutlineReactSvgUrl}
+                        size={16}
+                        color="accent"
+                        className="invited-to-room-icon"
+                        isClickable={false}
+                      />
+                      <Text
+                        className="invited-to-room-text"
+                        fontSize="12px"
+                        fontWeight={400}
+                        lineHeight="16px"
+                        noSelect
+                      >
+                        <Trans
+                          t={t}
+                          ns="Files"
+                          i18nKey="InvitedToRoom"
+                          values={{ roomName: value.room.title }}
+                          components={{
+                            1: <strong />,
+                          }}
+                        />
+                      </Text>
+                    </div>
+                  </div>
+                )}
                 <NewFilesPanelFileList
                   items={value.items}
                   isRooms
@@ -100,3 +148,10 @@ export const NewFilesPanelItem = ({
     </div>
   );
 };
+
+export const NewFilesPanelItem = inject(
+  ({ filesActionsStore }: NewFilesPanelItemInjectStore) => {
+    const { openItemAction } = filesActionsStore;
+    return { openItemAction };
+  },
+)(observer(NewFilesPanelItemComponent));

@@ -128,6 +128,7 @@
   "MoveToArchive": "Move to archive",
   "MoveToPublicRoomTitle": "Move to Public room",
   "MovingToTrash": "Moving to trash",
+  "InvitedToRoom": "You have been invited to <1>{{roomName}}</1> room",
   "NewInFolder": "New in folder",
   "NewInRoom": "New in room",
   "NewInRooms": "New in rooms",

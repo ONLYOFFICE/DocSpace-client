@@ -86,6 +86,11 @@ export type NewFilesPanelItemProps = {
   onClose: VoidFunction;
 
   culture?: string;
+  openItemAction?: FilesActionStore["openItemAction"];
+};
+
+export type NewFilesPanelItemInjectStore = {
+  filesActionsStore: FilesActionStore;
 };
 
 export type NewFilesPanelItemDateProps = {

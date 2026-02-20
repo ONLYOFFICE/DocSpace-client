@@ -626,8 +626,8 @@ const Badges = ({
         </div>
       ) : null}
 
-      {showNew && !isTile ? newFilesBadge : null}
-      {showNew && isTile && isRoom ? (
+      {showNew && !isTile && !isNewRoom ? newFilesBadge : null}
+      {showNew && isTile && isRoom && !isNewRoom ? (
         <div className={styles.badgeWrapperNewBadge}>{newFilesBadge}</div>
       ) : null}
       {showNew && isTile && !isRoom ? newFilesBadge : null}

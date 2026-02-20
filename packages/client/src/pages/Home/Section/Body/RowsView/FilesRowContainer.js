@@ -84,7 +84,7 @@ const FilesRowContainer = ({
         isHighlight={
           highlightFile.id == item.id
             ? highlightFile.isExst === !item.fileExst
-            : null
+            : !!item.isNewRoom || null
         }
         isIndexEditingMode={isIndexEditingMode}
         isTutorialEnabled={isTutorialEnabled}

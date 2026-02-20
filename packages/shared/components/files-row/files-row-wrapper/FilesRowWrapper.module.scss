@@ -107,17 +107,79 @@
   }
 
   &.isHighlight {
-    animation: Highlight 2s 1;
-
-    @include marginStyles;
+    animation: Highlight 2s 1 both;
+    position: relative;
 
     @keyframes Highlight {
       0% {
-        background: variables.$light-second-main;
+        background: rgba(variables.$light-second-main, 0.2);
+        margin-inline: -24px;
+        padding-inline: 24px;
+        border-bottom-color: transparent;
+      }
+
+      99.9% {
+        margin-inline: -24px;
+        padding-inline: 24px;
+        border-bottom-color: transparent;
       }
 
       100% {
         background: none;
+        margin-inline: 0;
+        padding-inline: 0;
+        border-bottom-color: var(--files-section-table-view-row-border-color);
+      }
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 24px;
+      right: 24px;
+      height: 1px;
+      background: variables.$light-second-main;
+      animation: HighlightBorder 2s 1 both;
+      pointer-events: none;
+    }
+
+    @keyframes HighlightBorder {
+      0% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0;
+      }
+    }
+
+    @include mixins.tablet-and-below {
+      @keyframes Highlight {
+        0% {
+          background: rgba(variables.$light-second-main, 0.2);
+          margin-inline: -16px;
+          padding-inline: 16px;
+          border-bottom-color: transparent;
+        }
+
+        99.9% {
+          margin-inline: -16px;
+          padding-inline: 16px;
+          border-bottom-color: transparent;
+        }
+
+        100% {
+          background: none;
+          margin-inline: 0;
+          padding-inline: 0;
+          border-bottom-color: var(--files-section-table-view-row-border-color);
+        }
+      }
+
+      &::after {
+        left: 16px;
+        right: 16px;
       }
     }
   }

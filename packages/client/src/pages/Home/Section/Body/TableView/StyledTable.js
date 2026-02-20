@@ -355,28 +355,95 @@ const StyledTableRow = styled(TableRow)`
     props.isHighlight &&
     css`
       .table-container_cell:not(.table-container_element-wrapper) {
-        animation: Highlight 2s 1;
+        border-top-color: transparent;
+      }
 
-        @keyframes Highlight {
+      .table-container_cell:not(.table-container_element-wrapper):not(.table-container_file-name-cell):not(.table-container_index-cell):not(.table-container_row-context-menu-wrapper) {
+        animation: HighlightWithBorder 2s 1 both;
+
+        @keyframes HighlightWithBorder {
           0% {
-            background: ${({ theme }) => theme.filesSection.animationColor};
+            background: ${({ theme }) => `${theme.filesSection.animationColor}33`};
+            box-shadow: inset 0 -1px 0 0 ${({ theme }) => theme.filesSection.animationColor};
           }
 
           100% {
             background: none;
+            box-shadow: inset 0 -1px 0 0 transparent;
           }
         }
       }
 
       .table-container_file-name-cell,
       .table-container_index-cell {
-        margin-inline-start: -24px;
-        padding-inline-start: 24px;
+        animation: HighlightStart 2s 1 both;
+        position: relative;
+        z-index: 1;
       }
       .table-container_row-context-menu-wrapper {
-        margin-inline-end: -20px;
-        padding-inline-end: 20px;
+        animation: HighlightEnd 2s 1 both;
+        position: relative;
+        z-index: 1;
       }
+
+      ${({ theme }) =>
+        theme.interfaceDirection === "rtl"
+          ? css`
+              @keyframes HighlightStart {
+                0% {
+                  background: ${theme.filesSection.animationColor}33;
+                  box-shadow: 24px 0 0 0
+                      ${theme.filesSection.animationColor}33,
+                    inset 0 -1px 0 0 ${theme.filesSection.animationColor};
+                }
+                100% {
+                  background: none;
+                  box-shadow: 24px 0 0 0 transparent,
+                    inset 0 -1px 0 0 transparent;
+                }
+              }
+              @keyframes HighlightEnd {
+                0% {
+                  background: ${theme.filesSection.animationColor}33;
+                  box-shadow: -20px 0 0 0
+                      ${theme.filesSection.animationColor}33,
+                    inset 0 -1px 0 0 ${theme.filesSection.animationColor};
+                }
+                100% {
+                  background: none;
+                  box-shadow: -20px 0 0 0 transparent,
+                    inset 0 -1px 0 0 transparent;
+                }
+              }
+            `
+          : css`
+              @keyframes HighlightStart {
+                0% {
+                  background: ${theme.filesSection.animationColor}33;
+                  box-shadow: -24px 0 0 0
+                      ${theme.filesSection.animationColor}33,
+                    inset 0 -1px 0 0 ${theme.filesSection.animationColor};
+                }
+                100% {
+                  background: none;
+                  box-shadow: -24px 0 0 0 transparent,
+                    inset 0 -1px 0 0 transparent;
+                }
+              }
+              @keyframes HighlightEnd {
+                0% {
+                  background: ${theme.filesSection.animationColor}33;
+                  box-shadow: 20px 0 0 0
+                      ${theme.filesSection.animationColor}33,
+                    inset 0 -1px 0 0 ${theme.filesSection.animationColor};
+                }
+                100% {
+                  background: none;
+                  box-shadow: 20px 0 0 0 transparent,
+                    inset 0 -1px 0 0 transparent;
+                }
+              }
+            `}
     `}
 
   .no-extra-space {

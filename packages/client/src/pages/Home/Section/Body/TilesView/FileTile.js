@@ -339,7 +339,9 @@ export default inject(
     const { setRefMap, deleteRefMap } = guidanceStore;
 
     const isHighlight =
-      highlightFile.id == item?.id && highlightFile.isExst === !item?.fileExst;
+      (highlightFile.id == item?.id &&
+        highlightFile.isExst === !item?.fileExst) ||
+      !!item?.isNewRoom;
 
     const { isRoomsFolder, isArchiveFolder, isTemplatesFolder } =
       treeFoldersStore;

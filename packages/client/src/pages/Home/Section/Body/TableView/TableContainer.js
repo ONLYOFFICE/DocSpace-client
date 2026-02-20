@@ -237,7 +237,7 @@ const Table = ({
         isHighlight={
           highlightFile.id == item.id
             ? highlightFile.isExst === !item.fileExst
-            : null
+            : !!item.isNewRoom || null
         }
         isTutorialEnabled={isTutorialEnabled}
         setRefMap={setRefMap}

@@ -26,6 +26,6 @@
     "ollama": "^0.5.17"
   },
   "devDependencies": {
-    "nodemon": "^3.1.10"
+    "nodemon": "^3.1.14"
   }
 }

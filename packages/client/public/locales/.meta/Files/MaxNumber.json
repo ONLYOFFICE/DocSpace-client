@@ -1,0 +1,28 @@
+{
+  "key_path": "MaxNumber",
+  "content": "Max. number <1>(up to {{usersCount}} users)</1>",
+  "content_en_sha1_hash": "6fd671ab474b7ea8912c0ae2e57251c832f01b66",
+  "created_at": "2026-02-19T13:36:27.548Z",
+  "updated_at": "2026-02-19T13:36:32.537Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/LinkSettingsPanel/index.tsx",
+      "line_number": 91,
+      "context": "? null\n : addToDate(now(), 7, \"days\");\n \n const [userLimitIsChecked, setUserLimitIsChecked] = useState(limitIsChecked);\n const [limitDate, setLimitDate] = useState<DateTime | null>(date);\n const [maxNumber, setMaxNumber] = useState(String(maxUsersNumber));\n const [hasError, setHasError] = useState(false);\n \n const showLimitError = userLimitIsChecked\n ? Number(maxNumber) <= usersNumber\n : false;",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

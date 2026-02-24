@@ -1,0 +1,28 @@
+{
+  "key_path": "GroupIsEmpty",
+  "content": "Group is empty",
+  "content_en_sha1_hash": "52f16be6dcfd6cec2c4f3235798d92d0fb449e39",
+  "created_at": "2026-02-19T13:36:24.878Z",
+  "updated_at": "2026-02-19T13:36:32.239Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/EmptyRoomGroupContainer.tsx",
+      "line_number": 69,
+      "context": "];\n \n return (\n <EmptyView\n icon={icon}\n title={t(\"GroupingRooms:GroupIsEmpty\")}\n description={t(\"GroupingRooms:EmptyGroupDescription\")}\n options={options}\n className={styles.wrapper}\n bodyClassName={styles.body}\n />",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

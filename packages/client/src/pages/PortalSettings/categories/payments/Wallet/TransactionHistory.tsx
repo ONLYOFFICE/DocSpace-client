@@ -60,7 +60,8 @@ import { AddButton } from "@docspace/ui-kit/components/add-button";
 import { SelectedItemPure } from "@docspace/ui-kit/components/selected-item";
 import { TSelectorItem } from "@docspace/ui-kit/components/selector";
 import { TUser } from "@docspace/shared/api/people/types";
-import PeopleSelector from "@docspace/shared/selectors/People";
+import PeopleSelector from "@docspace/ui-kit/selectors/People";
+import type { PeopleFilter } from "@docspace/ui-kit/selectors/People/PeopleSelector.types";
 import Filter from "@docspace/shared/api/people/filter";
 
 import FilterPanel from "./sub-components/FilterPanel";
@@ -651,7 +652,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
         isCloseable: true,
         headerLabel: t("ListContacts"),
       }}
-      filter={filter}
+      filter={filter as unknown as PeopleFilter | (() => PeopleFilter)}
       withInfo
       infoText={t("OnlyPortalAdminsShown", {
         productName: t("Common:ProductName"),

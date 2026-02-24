@@ -1,0 +1,28 @@
+{
+  "key_path": "GroupHasBeenDeleted",
+  "content": "The group has been deleted",
+  "content_en_sha1_hash": "e56d30cf89d2ab0259fd11e88541a451124600a0",
+  "created_at": "2026-02-19T13:36:24.876Z",
+  "updated_at": "2026-02-19T13:36:32.422Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/EditRoomGroupsDialog/sub-components/DeleteGroupDialog.tsx",
+      "line_number": 55,
+      "context": "if (!groupId) return;\n \n setIsDeleting(true);\n try {\n await deleteRoomGroup(groupId);\n toastr.success(t(\"GroupingRooms:GroupHasBeenDeleted\"));\n await getAllRoomGroups();\n \n // If the deleted group was the currently selected filter, navigate to All rooms\n if (\n currentFilterGroupId != null &&",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

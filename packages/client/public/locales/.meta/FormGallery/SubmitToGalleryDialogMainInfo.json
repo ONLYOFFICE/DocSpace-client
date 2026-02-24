@@ -3,7 +3,7 @@
   "content": "Submit your template to the public gallery to let others use it in their work. Once the template passes moderation, you will be notified and rewarded for your contribution.",
   "content_en_sha1_hash": "645c4561d7076e7c7c166c6add10dd927257e1c2",
   "created_at": "2025-12-22T14:24:51.385Z",
-  "updated_at": "2025-12-23T10:43:35.291Z",
+  "updated_at": "2026-02-19T13:36:32.490Z",
   "comment": {
     "text": "This key provides the main informational text within the \"Submit to Gallery\" dialog. It explains to users that submitting a template makes it available to the public, subject to moderation, and rewards contributors. The text appears in the body of the dialog.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/SubmitToFormGallery/index.js",
-      "line_number": 167,
-      "context": "<ModalDialog.Header>\n {t(\"Common:SubmitToTemplateGallery\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <div className=\"info\">\n {t(\"FormGallery:SubmitToGalleryDialogMainInfo\")}\n </div>\n <div className=\"info\">\n <Trans\n t={t}\n i18nKey=\"SubmitToGalleryDialogGuideInfo\"",
+      "line_number": 201,
+      "context": "<ModalDialog.Header>\n {t(\"Common:SubmitToTemplateGallery\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <div className=\"info\">\n {t(\"FormGallery:SubmitToGalleryDialogMainInfo\")}\n </div>\n \n {formItem ? (\n <div className=\"item-wrapper\">\n <ReactSVG className=\"icon\" src={getIcon(24, formItem.fileExst)} />",
       "module": "/packages/client"
     }
   ],

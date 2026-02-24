@@ -1,0 +1,21 @@
+{
+  "key_path": "RoomGroups",
+  "content": "Room groups",
+  "content_en_sha1_hash": "23e8b8d6adb6d989089f0fd3181a1a44f1c6ccb8",
+  "created_at": "2026-02-19T13:36:15.152Z",
+  "updated_at": "2026-02-19T13:36:15.152Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

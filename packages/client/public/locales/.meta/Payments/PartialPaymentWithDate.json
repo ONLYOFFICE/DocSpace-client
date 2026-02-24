@@ -3,7 +3,7 @@
   "content": "Today, you're only paying for the selected amount of {{storageUnit}} for the remaining days until your billing date ({{startDate}} to {{endDate}}).",
   "content_en_sha1_hash": "a8e4956ca35dc7bdbe4ed44ed3e8ee229fba5f1f",
   "created_at": "2025-06-24T16:31:06.797Z",
-  "updated_at": "2025-08-21T14:45:44.124Z",
+  "updated_at": "2026-02-19T13:36:32.943Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that a partial payment will be processed for a specific amount of storage until a certain date. The message appears in a UI component where users view their plan upgrades or settings, providing context about the billing period.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/AdditionalStorage/PlanUpgradePreview.tsx",
       "line_number": 88,
-      "context": "return (\n <>\n <Text as=\"span\">\n {daysUntilStorageExpiry === 0\n ? t(\"PartialPaymentNoDate\", { storageUnit: t(\"Common:Gigabyte\") })\n : t(\"PartialPaymentWithDate\", {\n startDate: moment().tz(window.timezone).format(\"LL\"),\n endDate: storageExpiryDate,\n storageUnit: t(\"Common:Gigabyte\"),\n })}\n </Text>{\" \"}",
+      "context": "return (\n <>\n <Text as=\"span\">\n {daysUntilStorageExpiry === 0\n ? t(\"PartialPaymentNoDate\", { storageUnit: t(\"Common:Gigabyte\") })\n : t(\"PartialPaymentWithDate\", {\n startDate: formatDateLocalized(now().setZone(window.timezone), \"DATE_MED\"),\n endDate: storageExpiryDate,\n storageUnit: t(\"Common:Gigabyte\"),\n })}\n </Text>{\" \"}",
       "module": "/packages/client"
     }
   ],

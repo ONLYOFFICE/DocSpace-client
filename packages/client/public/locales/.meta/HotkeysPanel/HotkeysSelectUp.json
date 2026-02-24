@@ -3,7 +3,7 @@
   "content": "Select next item up",
   "content_en_sha1_hash": "5f64a2463187ada6fc34e1aee18d04b790dc954c",
   "created_at": "2025-05-19T21:30:55.095Z",
-  "updated_at": "2025-05-24T10:31:50.048Z",
+  "updated_at": "2026-02-19T13:36:32.515Z",
   "comment": {
     "text": "This translation key is used to display the label for a \"Select next item up\" hotkey action in the UI. It appears as a button label and is part of the selection block component in the HotkeysPanel.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/panels/HotkeysPanel/SelectionBlock.js",
       "line_number": 48,
-      "context": "<Text {...keyTextStyles}>j {t(\"Common:Or\")} ↓</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysSelectUp\")}</Text>\n <Text {...keyTextStyles}>k {t(\"Common:Or\")} ↑</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>",
+      "context": "<Text {...keyTextStyles}>j {t(\"Common:Or\")} ↓</Text>\n </>\n </Row>\n <Row className={styles.hotkeysRow}>\n <>\n <Text {...textStyles}>{t(\"HotkeysSelectUp\")}</Text>\n <Text {...keyTextStyles}>k {t(\"Common:Or\")} ↑</Text>\n </>\n </Row>\n <Row className={styles.hotkeysRow}>\n <>",
       "module": "/packages/client"
     }
   ],

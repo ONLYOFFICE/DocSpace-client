@@ -1,0 +1,28 @@
+{
+  "key_path": "RoomQuotaLimitWarning",
+  "content": "Room quota limit is about to be reached.",
+  "content_en_sha1_hash": "8b739e72212d58ed16e025fa215df773e54814bf",
+  "created_at": "2026-02-18T14:56:12.055Z",
+  "updated_at": "2026-02-19T13:36:33.045Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/doceditor/src/components/Bar/index.tsx",
+      "line_number": 56,
+      "context": "case \"room\":\n return {\n description: initial\n ? t(\"EditingUnavailable\")\n : t(\"YourFurtherEditsNotSaved\"),\n header: initial ? t(\"RoomQuotaReached\") : t(\"RoomQuotaLimitWarning\"),\n };\n case \"user\":\n return {\n description: initial\n ? t(\"EditingUnavailable\")",
+      "module": "/packages/doceditor"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

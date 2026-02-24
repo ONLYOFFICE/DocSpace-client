@@ -31,286 +31,297 @@ import isUndefined from "lodash/isUndefined";
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
 import { RoomsType } from "@docspace/shared/enums";
-import FilesSelectorWrapper from "@docspace/shared/selectors/Files";
+import FilesSelectorWrapper from "@docspace/ui-kit/selectors/Files";
 
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { useSelectorInfoBar } from "@docspace/shared/hooks/useSelectorInfoBar";
 
 import type {
-	TFileSecurity,
-	TFolder,
-	TFolderSecurity,
+  TFileSecurity,
+  TFolder,
+  TFolderSecurity,
 } from "@docspace/shared/api/files/types";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
-import type { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
+import type {
+  TSelectedFileInfo,
+  SdkFolderType,
+} from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
 import type { TData } from "@docspace/ui-kit/components/toast";
 import type {
-	TBreadCrumb,
-	TInfoBarData,
+  TBreadCrumb,
+  TInfoBarData,
 } from "@docspace/ui-kit/components/selector";
 import type {
-	InjectShareCollectSelectorProps,
-	ShareCollectSelectorProps,
+  InjectShareCollectSelectorProps,
+  ShareCollectSelectorProps,
 } from "./ShareCollectSelector.types";
 
 const ShareCollectSelector = inject<TStore>(
-	({
-		settingsStore,
-		filesSettingsStore,
-		dialogsStore,
-		filesActionsStore,
-		uploadDataStore,
-		infoPanelStore,
-		filesStore,
-	}) => {
-		const { currentDeviceType } = settingsStore;
-		const { conflictResolveDialogVisible, setAssignRolesDialogData } =
-			dialogsStore;
-		const { checkFileConflicts, setConflictDialogData, openFileAction } =
-			filesActionsStore;
-		const { itemOperationToFolder, clearActiveOperations } = uploadDataStore;
-		const { setIsMobileHidden } = infoPanelStore;
+  ({
+    settingsStore,
+    filesSettingsStore,
+    dialogsStore,
+    filesActionsStore,
+    uploadDataStore,
+    infoPanelStore,
+    filesStore,
+  }) => {
+    const { currentDeviceType } = settingsStore;
+    const { conflictResolveDialogVisible, setAssignRolesDialogData } =
+      dialogsStore;
+    const { checkFileConflicts, setConflictDialogData, openFileAction } =
+      filesActionsStore;
+    const { itemOperationToFolder, clearActiveOperations } = uploadDataStore;
+    const { setIsMobileHidden } = infoPanelStore;
 
-		const { setSelected } = filesStore;
+    const { setSelected } = filesStore;
 
-		const { getIcon } = filesSettingsStore;
-		return {
-			currentDeviceType,
-			conflictResolveDialogVisible,
-			getIcon,
-			checkFileConflicts,
-			setConflictDialogData,
-			itemOperationToFolder,
-			clearActiveOperations,
-			setIsMobileHidden,
-			setSelected,
-			openFileAction,
-			setAssignRolesDialogData,
-		};
-	},
+    const { getIcon } = filesSettingsStore;
+    return {
+      currentDeviceType,
+      conflictResolveDialogVisible,
+      getIcon,
+      checkFileConflicts,
+      setConflictDialogData,
+      itemOperationToFolder,
+      clearActiveOperations,
+      setIsMobileHidden,
+      setSelected,
+      openFileAction,
+      setAssignRolesDialogData,
+    };
+  },
 )(
-	observer(
-		({
-			file,
-			visible,
-			currentDeviceType,
-			conflictResolveDialogVisible,
-			getIcon,
-			checkFileConflicts,
-			setConflictDialogData,
-			clearActiveOperations,
-			itemOperationToFolder,
-			setIsMobileHidden,
-			setSelected,
-			openFileAction,
-			createDefineRoomType,
-			headerProps = {},
-			onCloseActionProp,
-			onCancel,
-			setAssignRolesDialogData,
-		}: ShareCollectSelectorProps & InjectShareCollectSelectorProps) => {
-			const { t } = useTranslation(["Common"]);
-			const [withInfoBar, onCloseInfoBar] = useSelectorInfoBar();
+  observer(
+    ({
+      file,
+      visible,
+      currentDeviceType,
+      conflictResolveDialogVisible,
+      getIcon,
+      checkFileConflicts,
+      setConflictDialogData,
+      clearActiveOperations,
+      itemOperationToFolder,
+      setIsMobileHidden,
+      setSelected,
+      openFileAction,
+      createDefineRoomType,
+      headerProps = {},
+      onCloseActionProp,
+      onCancel,
+      setAssignRolesDialogData,
+    }: ShareCollectSelectorProps & InjectShareCollectSelectorProps) => {
+      const { t } = useTranslation(["Common"]);
+      const [withInfoBar, onCloseInfoBar] = useSelectorInfoBar();
 
-			const requestRunning = React.useRef(false);
+      const requestRunning = React.useRef(false);
 
-			const setIsRequestRunning = (arg: boolean) => {
-				requestRunning.current = arg;
-			};
+      const setIsRequestRunning = (arg: boolean) => {
+        requestRunning.current = arg;
+      };
 
-			const onClose = () => {
-				if (onCloseActionProp) {
-					onCloseActionProp();
-				}
-			};
+      const onClose = () => {
+        if (onCloseActionProp) {
+          onCloseActionProp();
+        }
+      };
 
-			const onCloseAction = () => {
-				setIsMobileHidden(false);
+      const onCloseAction = () => {
+        setIsMobileHidden(false);
 
-				onClose();
-			};
+        onClose();
+      };
 
-			const onCloseAndDeselectAction = () => {
-				setSelected("none");
-				onCloseAction();
-			};
+      const onCloseAndDeselectAction = () => {
+        setSelected("none");
+        onCloseAction();
+      };
 
-			const onSubmit = async (
-				selectedItemId: string | number | undefined,
-				folderTitle: string,
-				isPublic: boolean,
-				breadCrumbs: TBreadCrumb[],
-				fileName: string,
-				isChecked: boolean,
-				selectedTreeNode: TFolder,
-				// selectedFileInfo: TSelectedFileInfo,
-			) => {
-				const fileIds = [file.id];
-				const folderIds: number[] = [];
+      const onSubmit = async (
+        selectedItemId: string | number | undefined,
+        folderTitle: string,
+        isPublic: boolean,
+        breadCrumbs: TBreadCrumb[],
+        fileName: string,
+        isChecked: boolean,
+        selectedTreeNode: TFolder,
+        // selectedFileInfo: TSelectedFileInfo,
+      ) => {
+        const fileIds = [file.id];
+        const folderIds: number[] = [];
 
-				const selectedFolder = { ...selectedTreeNode, isFolder: true };
+        const selectedFolder = { ...selectedTreeNode, isFolder: true };
 
-				const operationData = {
-					destFolderId: selectedItemId,
-					destFolderInfo: selectedTreeNode,
-					title: file.title,
-					isFolder: file.isFolder,
-					itemsCount: 1,
-					folderIds,
-					fileIds,
-					deleteAfter: false,
-					isCopy: true,
-					folderTitle,
-					selectedFolder,
-					fromShareCollectSelector: true,
-					createDefineRoomType,
-					toFillOut: createDefineRoomType === RoomsType.VirtualDataRoom,
-				};
+        const operationData = {
+          destFolderId: selectedItemId,
+          destFolderInfo: selectedTreeNode,
+          title: file.title,
+          isFolder: file.isFolder,
+          itemsCount: 1,
+          folderIds,
+          fileIds,
+          deleteAfter: false,
+          isCopy: true,
+          folderTitle,
+          selectedFolder,
+          fromShareCollectSelector: true,
+          createDefineRoomType,
+          toFillOut: createDefineRoomType === RoomsType.VirtualDataRoom,
+        };
 
-				setIsRequestRunning(true);
+        setIsRequestRunning(true);
 
-				try {
-					const conflicts = (await checkFileConflicts(
-						selectedItemId,
-						folderIds,
-						fileIds,
-					)) as [];
+        try {
+          const conflicts = (await checkFileConflicts(
+            selectedItemId,
+            folderIds,
+            fileIds,
+          )) as [];
 
-					if (conflicts.length) {
-						setConflictDialogData(conflicts, operationData);
-						setIsRequestRunning(false);
-					} else {
-						setIsRequestRunning(false);
-						onCloseAndDeselectAction();
+          if (conflicts.length) {
+            setConflictDialogData(conflicts, operationData);
+            setIsRequestRunning(false);
+          } else {
+            setIsRequestRunning(false);
+            onCloseAndDeselectAction();
 
-						openFileAction(selectedFolder, t);
+            openFileAction(selectedFolder, t);
 
-						const result = await itemOperationToFolder(operationData).catch(
-							(error) => {
-								console.error(error);
-							},
-						);
+            const result = await itemOperationToFolder(operationData).catch(
+              (error) => {
+                console.error(error);
+              },
+            );
 
-						if (
-							result &&
-							!isUndefined(result.files) &&
-							result.files.length === 1 &&
-							createDefineRoomType === RoomsType.VirtualDataRoom
-						) {
-							const [resultFile] = result.files;
-							setAssignRolesDialogData(
-								true,
-								selectedTreeNode.title,
-								resultFile,
-							);
-						}
-					}
-				} catch (e: unknown) {
-					toastr.error(e as TData);
-					setIsRequestRunning(false);
-					clearActiveOperations(fileIds, folderIds);
-				}
-			};
+            if (
+              result &&
+              !isUndefined(result.files) &&
+              result.files.length === 1 &&
+              createDefineRoomType === RoomsType.VirtualDataRoom
+            ) {
+              const [resultFile] = result.files;
+              setAssignRolesDialogData(
+                true,
+                selectedTreeNode.title,
+                resultFile,
+              );
+            }
+          }
+        } catch (e: unknown) {
+          toastr.error(e as TData);
+          setIsRequestRunning(false);
+          clearActiveOperations(fileIds, folderIds);
+        }
+      };
 
-			const getIsDisabled = (
-				isFirstLoad: boolean,
-				isSelectedParentFolder: boolean,
-				selectedItemId: string | number | undefined,
-				selectedItemType: "rooms" | "files" | "agents" | undefined,
-				isRoot: boolean,
-				selectedItemSecurity:
-					| TFolderSecurity
-					| TRoomSecurity
-					| TFileSecurity
-					| undefined,
-				selectedFileInfo: TSelectedFileInfo,
-				isDisabledFolder?: boolean,
-				isInsideKnowledge?: boolean,
-				isInsideResultStorage?: boolean,
-			): boolean => {
-				if (selectedItemType === "rooms" || isRoot) return true;
-				if (selectedItemType === "agents" || isInsideResultStorage) return true;
+      const getIsDisabled = (
+        isFirstLoad: boolean,
+        isSelectedParentFolder: boolean,
+        selectedItemId: string | number | undefined,
+        selectedItemType: "rooms" | "files" | "agents" | undefined,
+        isRoot: boolean,
+        selectedItemSecurity:
+          | TFolderSecurity
+          | TRoomSecurity
+          | TFileSecurity
+          | undefined,
+        selectedFileInfo: TSelectedFileInfo,
+        isDisabledFolder?: boolean,
+        isInsideKnowledge?: boolean,
+        isInsideResultStorage?: boolean,
+      ): boolean => {
+        if (selectedItemType === "rooms" || isRoot) return true;
+        if (selectedItemType === "agents" || isInsideResultStorage) return true;
 
-				if (isFirstLoad) return true;
-				if (requestRunning.current) return true;
-				if (selectedFileInfo) return true;
+        if (isFirstLoad) return true;
+        if (requestRunning.current) return true;
+        if (selectedFileInfo) return true;
 
-				if (!selectedItemSecurity) return false;
+        if (!selectedItemSecurity) return false;
 
-				return "CopyTo" in selectedItemSecurity
-					? !selectedItemSecurity?.CopyTo
-					: !selectedItemSecurity.Copy;
-			};
+        return "CopyTo" in selectedItemSecurity
+          ? !selectedItemSecurity?.CopyTo
+          : !selectedItemSecurity.Copy;
+      };
 
-			const getFilesArchiveError = React.useCallback(
-				(name: string) => t("Common:ArchivedRoomAction", { name }),
-				[t],
-			);
+      const getFilesArchiveError = React.useCallback(
+        (name: string) => t("Common:ArchivedRoomAction", { name }),
+        [t],
+      );
 
-			const getIconUrl = (size: number, fileExst: string) => {
-				return getIcon(size, fileExst) ?? "";
-			};
+      const getIconUrl = (size: number, fileExst: string) => {
+        return getIcon(size, fileExst) ?? "";
+      };
 
-			const infoBarData: TInfoBarData = {
-				title: t("Common:SelectorInfoBarTitle"),
-				description:
-					createDefineRoomType === RoomsType.FormRoom
-						? t("Common:SelectorInfoBarDescription")
-						: t("Common:SelectorInfoBarOfVDRDescription"),
-				icon: InfoIcon,
-				onClose: onCloseInfoBar,
-			};
+      const infoBarData: TInfoBarData = {
+        title: t("Common:SelectorInfoBarTitle"),
+        description:
+          createDefineRoomType === RoomsType.FormRoom
+            ? t("Common:SelectorInfoBarDescription")
+            : t("Common:SelectorInfoBarOfVDRDescription"),
+        icon: InfoIcon,
+        onClose: onCloseInfoBar,
+      };
 
-			const createDefineRoomLabels: Partial<Record<RoomsType, string>> = {
-				[RoomsType.VirtualDataRoom]: t("Common:CreateVirtualDataRoom"),
-				[RoomsType.FormRoom]: t("Common:CreateFormFillingRoom"),
-			};
+      const createDefineRoomLabels: Partial<Record<RoomsType, string>> = {
+        [RoomsType.VirtualDataRoom]: t("Common:CreateVirtualDataRoom"),
+        [RoomsType.FormRoom]: t("Common:CreateFormFillingRoom"),
+      };
 
-			return (
-				<FilesSelectorWrapper
-					withCreate
-					withHeader
-					withSearch
-					isRoomsOnly
-					withBreadCrumbs
-					withoutBackButton={false}
-					withCancelButton
-					currentFolderId=""
-					headerProps={{
-						headerLabel: t("Common:ShareAndCollect"),
-						onCloseClick: onClose,
-						...headerProps,
-					}}
-					rootFolderType={file.rootFolderType}
-					createDefineRoomType={createDefineRoomType}
-					isPanelVisible={visible ? !conflictResolveDialogVisible : false}
-					currentDeviceType={currentDeviceType}
-					createDefineRoomLabel={
-						createDefineRoomLabels[createDefineRoomType] ?? ""
-					}
-					submitButtonLabel={t("Common:CopyHere")}
-					cancelButtonLabel={t("Common:CancelButton")}
-					cancelButtonId="share-collect-selector-cancel"
-					onCancel={onCancel}
-					onSubmit={onSubmit}
-					getIsDisabled={getIsDisabled}
-					getFilesArchiveError={getFilesArchiveError}
-					disabledItems={[]}
-					descriptionText=""
-					footerInputHeader=""
-					footerCheckboxLabel=""
-					currentFooterInputValue=""
-					embedded={false}
-					isThirdParty={false}
-					withFooterCheckbox={false}
-					withFooterInput={false}
-					getIcon={getIconUrl}
-					withInfoBar={withInfoBar}
-					infoBarData={infoBarData}
-				/>
-			);
-		},
-	),
+      return (
+        <FilesSelectorWrapper
+          withCreate
+          withHeader
+          withSearch
+          isRoomsOnly
+          withBreadCrumbs
+          withoutBackButton={false}
+          withCancelButton
+          currentFolderId=""
+          headerProps={{
+            headerLabel: t("Common:ShareAndCollect"),
+            onCloseClick: onClose,
+            ...headerProps,
+          }}
+          rootFolderType={file.rootFolderType as unknown as SdkFolderType}
+          createDefineRoomType={createDefineRoomType}
+          isPanelVisible={visible ? !conflictResolveDialogVisible : false}
+          currentDeviceType={currentDeviceType}
+          createDefineRoomLabel={
+            createDefineRoomLabels[createDefineRoomType] ?? ""
+          }
+          submitButtonLabel={t("Common:CopyHere")}
+          cancelButtonLabel={t("Common:CancelButton")}
+          cancelButtonId="share-collect-selector-cancel"
+          onCancel={onCancel}
+          onSubmit={
+            onSubmit as unknown as Parameters<
+              typeof FilesSelectorWrapper
+            >[0]["onSubmit"]
+          }
+          getIsDisabled={
+            getIsDisabled as unknown as Parameters<
+              typeof FilesSelectorWrapper
+            >[0]["getIsDisabled"]
+          }
+          getFilesArchiveError={getFilesArchiveError}
+          disabledItems={[]}
+          descriptionText=""
+          footerInputHeader=""
+          footerCheckboxLabel=""
+          currentFooterInputValue=""
+          embedded={false}
+          isThirdParty={false}
+          withFooterCheckbox={false}
+          withFooterInput={false}
+          getIcon={getIconUrl}
+          withInfoBar={withInfoBar}
+          infoBarData={infoBarData}
+        />
+      );
+    },
+  ),
 ) as unknown as React.FC<ShareCollectSelectorProps>;
 
 export default ShareCollectSelector;

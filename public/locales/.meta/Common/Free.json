@@ -3,7 +3,7 @@
   "content": "Free",
   "content_en_sha1_hash": "75f527181b574f84568f33f67adc3b267a6fef9c",
   "created_at": "2025-05-19T21:30:45.558Z",
-  "updated_at": "2025-12-22T14:25:01.205Z",
+  "updated_at": "2026-02-19T13:36:32.291Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Free\" in various contexts across different platforms. It is commonly found on price labels and informational sections, indicating that a product or service has no cost associated with it.",
     "is_auto": true,
@@ -12,20 +12,20 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/SmartBanner/index.js",
-      "line_number": 78,
+      "line_number": 73,
       "context": "windows: \"\",\n kindle: \"\",\n };\n \n const priceText = {\n ios: t(\"Common:Free\"),\n android: t(\"Common:Free\"),\n windows: \"\",\n kindle: \"\",\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/SmartBanner/index.js",
-      "line_number": 78,
+      "line_number": 73,
       "context": "windows: \"\",\n kindle: \"\",\n };\n \n const priceText = {\n ios: t(\"Common:Free\"),\n android: t(\"Common:Free\"),\n windows: \"\",\n kindle: \"\",\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Gallery/ItemTitle.tsx",
-      "line_number": 108,
-      "context": "<Text className={classNames(styles.select, \"text\")}>\n {gallerySelected?.attributes?.name_form}\n </Text>\n \n <Text color={currentColorScheme?.main?.accent} className=\"free-label\">\n {t(\"Common:Free\")}\n </Text>\n {gallerySelected ? (\n <div\n className={styles.contextOptions}\n data-testid=\"info_panel_gallery_context_options\"",
+      "line_number": 111,
+      "context": "<Text\n color={currentColorScheme?.main?.accent ?? undefined}\n className=\"free-label\"\n >\n {t(\"Common:Free\")}\n </Text>\n {gallerySelected ? (\n <div\n className={styles.contextOptions}\n data-testid=\"info_panel_gallery_context_options\"",
       "module": "/packages/client"
     },
     {

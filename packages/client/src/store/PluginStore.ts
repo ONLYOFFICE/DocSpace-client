@@ -876,10 +876,10 @@ class PluginStore {
         this.dispatchMessage({ message, pluginName: plugin.name });
       };
 
-      const onGroupClick = async (filesId: number[]) => {
+      const onGroupClick: IContextMenuItem["onGroupClick"] = async (items) => {
         if (!value.onGroupClick || !value.isGroupAction || value.items) return;
 
-        const message = await value.onGroupClick(filesId);
+        const message = await value.onGroupClick(items);
 
         this.dispatchMessage({ message, pluginName: plugin.name });
       };

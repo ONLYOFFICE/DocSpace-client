@@ -3,7 +3,7 @@
   "content": "Change pricing plan",
   "content_en_sha1_hash": "45b92d09374c0e5e5e6e57dae357f87761b85ef3",
   "created_at": "2025-05-19T21:30:56.598Z",
-  "updated_at": "2025-05-24T13:10:59.259Z",
+  "updated_at": "2026-02-19T13:36:32.354Z",
   "comment": {
     "text": "The translation key \"ChangePricingPlan\" is used to display the text \"Change pricing plan\" in a dialog. This text is likely part of a button or confirmation prompt within the ChangePricingPlanDialog component, where users can update their pricing plan settings.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangePricingPlanDialog/index.js",
-      "line_number": 50,
-      "context": ".save-or-change {\n margin-top: 16px;\n }\n `;\n \n const ChangePricingPlanDialog = ({\n visible,\n onClose,\n addedManagersCount,\n managersCount,\n allowedStorageSizeByQuota,",
+      "line_number": 37,
+      "context": "import { ModalDialog } from \"@docspace/ui-kit/components/modal-dialog\";\n \n import { inject, observer } from \"mobx-react\";\n import { getConvertedSize } from \"@docspace/shared/utils/common\";\n \n import styles from \"./ChangePricingPlan.module.scss\";\n \n const ChangePricingPlanDialog = ({\n visible,\n onClose,\n addedManagersCount,",
       "module": "/packages/client"
     }
   ],

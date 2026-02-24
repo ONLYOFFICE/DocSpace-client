@@ -1,0 +1,28 @@
+{
+  "key_path": "RemoveTag",
+  "content": "<1>{{tag}}</1> tag removed.",
+  "content_en_sha1_hash": "85ffc4c66876474cb6183593a2d31ad65530a440",
+  "created_at": "2026-02-19T13:36:19.064Z",
+  "updated_at": "2026-02-19T13:36:33.126Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/tag-management/TagManagement.tsx",
+      "line_number": 45,
+      "context": "import type { TagManagementProps } from \"./TagManagement.types\";\n import { EditTagModal, DeleteTagModal } from \"./modals\";\n import {\n useUpdateTagNameMutation,\n useRemoveTagMutation,\n } from \"./hooks/useTagsQuery\";\n import { useEditConfirmation } from \"./hooks/useEditConfirmation\";\n import { useDeleteConfirmation } from \"./hooks/useDeleteConfirmation\";\n import { EDIT_CANCELLED, DELETE_CANCELLED } from \"./TagManagement.constants\";",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

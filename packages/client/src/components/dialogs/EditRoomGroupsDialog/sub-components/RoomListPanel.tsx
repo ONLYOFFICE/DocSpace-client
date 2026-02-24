@@ -28,64 +28,70 @@ import { useTranslation } from "react-i18next";
 
 import { Backdrop } from "@docspace/ui-kit/components/backdrop";
 import { Aside } from "@docspace/ui-kit/components/aside";
-import RoomSelector from "@docspace/shared/selectors/Room";
-import { convertToItems } from "@docspace/shared/selectors/Room/RoomSelector.utils";
+import RoomSelector from "@docspace/ui-kit/selectors/Room";
+import { convertToItems } from "@docspace/ui-kit/selectors/Room/RoomSelector.utils";
 
 import type { RoomListPanelProps } from "../EditRoomGroupsDialog.types";
 
 const RoomListPanel = ({
-  visible,
-  onClose,
-  onSubmit,
-  headerLabel,
-  selectedRooms,
-  withSearch = true,
-  disableSubmitUntilChanged = false,
-  sortSelectedFirst = false,
+	visible,
+	onClose,
+	onSubmit,
+	headerLabel,
+	selectedRooms,
+	withSearch = true,
+	disableSubmitUntilChanged = false,
+	sortSelectedFirst = false,
 }: RoomListPanelProps) => {
-  const { t } = useTranslation(["Common"]);
+	const { t } = useTranslation(["Common"]);
 
-  return (
-    <div>
-      <Backdrop
-        visible={visible}
-        isAside
-        withBackground
-        zIndex={309}
-        onClick={onClose}
-      />
-      <Aside
-        visible={visible}
-        withoutBodyScroll
-        zIndex={310}
-        onClose={onClose}
-        withoutHeader
-      >
-        <RoomSelector
-          onSubmit={onSubmit}
-          withHeader
-          headerProps={{
-            onBackClick: onClose,
-            onCloseClick: onClose,
-            headerLabel,
-            withoutBorder: false,
-            withoutBackButton: false,
-          }}
-          withSearch={withSearch}
-          isMultiSelect
-          forceIsMultiSelect
-          selectedItems={
-            selectedRooms ? convertToItems(selectedRooms) : undefined
-          }
-          withCancelButton
-          cancelButtonLabel={t("Common:CancelButton")}
-          onCancel={onClose}
-          disableSubmitUntilChanged={disableSubmitUntilChanged}
-          sortSelectedFirst={sortSelectedFirst}
-        />
-      </Aside>
-    </div>
-  );
+	return (
+		<div>
+			<Backdrop
+				visible={visible}
+				isAside
+				withBackground
+				zIndex={309}
+				onClick={onClose}
+			/>
+			<Aside
+				visible={visible}
+				withoutBodyScroll
+				zIndex={310}
+				onClose={onClose}
+				withoutHeader
+			>
+				<RoomSelector
+					onSubmit={onSubmit}
+					withHeader
+					headerProps={{
+						onBackClick: onClose,
+						onCloseClick: onClose,
+						headerLabel,
+						withoutBorder: false,
+						withoutBackButton: false,
+					}}
+					withSearch={withSearch}
+					isMultiSelect
+					forceIsMultiSelect
+					selectedItems={
+						selectedRooms
+							? convertToItems(
+									selectedRooms as unknown as Parameters<
+										typeof convertToItems
+									>[0],
+								)
+							: undefined
+					}
+					withCancelButton
+					cancelButtonLabel={t("Common:CancelButton")}
+					onCancel={onClose}
+					disableSubmitUntilChanged={disableSubmitUntilChanged}
+					sortSelectedFirst={sortSelectedFirst}
+				/>
+			</Aside>
+		</div>
+	);
 };
 
 export default RoomListPanel;

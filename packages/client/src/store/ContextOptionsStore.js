@@ -1030,49 +1030,60 @@ class ContextOptionsStore {
 
     if (enablePlugins && this.pluginStore.contextMenuItemsList) {
       this.pluginStore.contextMenuItemsList.forEach((option) => {
-        const processOptionValue = (value) => {
+        const optionItem = option.value;
+
+        const resolveItemType = (item) => {
+          if (isFileUtil(item)) return "file";
+          if (isFolderUtil(item)) return "folder";
+          if (isRoomUtil(item)) return "room";
+        };
+
+        const processOptionItem = (value) => {
           const isEveryItemIncludesOption = items.every(({ contextOptions }) =>
             contextOptions.includes(value.key),
           );
 
-          if (isEveryItemIncludesOption && value.isGroupAction) {
-            const filesIds = items.map(({ id }) => id);
+          if (!isEveryItemIncludesOption || !value.isGroupAction) return;
 
-            const onClick = async () => {
-              if (value.withActiveItem) {
-                const { setActiveFiles } = this.filesStore;
+          const groupItems = items.map((item) => ({
+            id: item.id,
+            itemType: resolveItemType(item),
+          }));
 
-                setActiveFiles(filesIds);
+          const onClick = async () => {
+            if (value.withActiveItem) {
+              const { setActiveFiles } = this.filesStore;
 
-                await value.onGroupClick(filesIds);
+              setActiveFiles(items.map((item) => item.id));
 
-                setActiveFiles([]);
-              } else {
-                value.onGroupClick(filesIds);
-              }
-            };
+              await value.onGroupClick(groupItems);
 
-            const processedOptionValue = {
-              key: value.key,
-              id: value.key,
-              label: value.label,
-              icon: value.icon,
-              disabled: false,
-              onClick,
-            };
+              setActiveFiles([]);
+            } else {
+              value.onGroupClick(groupItems);
+            }
+          };
 
-            return processedOptionValue;
-          }
+          const processedOptionValue = {
+            key: value.key,
+            id: value.key,
+            label: value.label,
+            icon: value.icon,
+            disabled: false,
+            onClick,
+          };
+
+          return processedOptionValue;
         };
 
-        if (option.items && option.items.length > 0) {
-          option.items.forEach((nestedItem) => {
-            const processedItem = processOptionValue(nestedItem);
+        if (optionItem.items && optionItem.items.length > 0) {
+          optionItem.items.forEach((nestedItem) => {
+            const processedItem = processOptionItem(nestedItem);
             processedItem && pluginItems.push(processedItem);
           });
         } else {
-          const value = processOptionValue(option.value);
-          value && pluginItems.push(value);
+          const item = processOptionItem(optionItem);
+          item && pluginItems.push(item);
         }
       });
     }
@@ -1092,49 +1103,49 @@ class ContextOptionsStore {
 
     if (enablePlugins && this.pluginStore.contextMenuItemsList) {
       this.pluginStore.contextMenuItemsList.forEach((option) => {
-        // Helper function to recursively process context menu items
         const processOptionValue = (value) => {
-          if (contextOptions.includes(value.key)) {
-            const onClick = async () => {
-              if (value.withActiveItem) {
-                const { setActiveFiles } = this.filesStore;
+          if (!contextOptions.includes(value.key) || value.isGroupAction)
+            return;
 
-                setActiveFiles([item.id]);
+          const onClick = async () => {
+            if (value.withActiveItem) {
+              const { setActiveFiles } = this.filesStore;
 
-                await value.onClick(item.id);
+              setActiveFiles([item.id]);
 
-                setActiveFiles([]);
-              } else {
-                value.onClick(item.id);
-              }
-            };
+              await value.onClick(item.id);
 
-            const processedOptionValue = {
-              key: value.key,
-              id: value.key,
-              label: value.label,
-              icon: value.icon,
-              onClick,
-            };
-
-            const processedItems = [];
-            // Recursively process nested items if they exist
-            if (value.items && value.items.length > 0) {
-              value.items.forEach((nestedItem) => {
-                const processedItem = processOptionValue(nestedItem);
-                processedItem && processedItems.push(processedItem);
-              });
-
-              if (processedItems.length > 0) {
-                processedOptionValue.items = processedItems;
-              } else {
-                // If we have no processed items, we dont render this option
-                return null;
-              }
+              setActiveFiles([]);
+            } else {
+              value.onClick(item.id);
             }
+          };
 
-            return processedOptionValue;
+          const processedOptionValue = {
+            key: value.key,
+            id: value.key,
+            label: value.label,
+            icon: value.icon,
+            onClick,
+          };
+
+          const processedItems = [];
+          // Recursively process nested items if they exist
+          if (value.items && value.items.length > 0) {
+            value.items.forEach((nestedItem) => {
+              const processedItem = processOptionValue(nestedItem);
+              processedItem && processedItems.push(processedItem);
+            });
+
+            if (processedItems.length > 0) {
+              processedOptionValue.items = processedItems;
+            } else {
+              // If we have no processed items, we dont render this option
+              return null;
+            }
           }
+
+          return processedOptionValue;
         };
 
         const value = processOptionValue(option.value);
@@ -3029,7 +3040,9 @@ class ContextOptionsStore {
         });
       }
 
-      options.push(archiveOptions);
+      const pluginOptions = this.onMultiLoadPlugins(selection);
+
+      options.push(archiveOptions, ...pluginOptions);
 
       /* canDelete &&
         options.push({
@@ -3191,9 +3204,9 @@ class ContextOptionsStore {
       isCollaborator: false,
     };
 
-    const pluginItems = this.onMultiLoadPlugins(selection);
+    const pluginOptions = this.onMultiLoadPlugins(selection);
 
-    options.splice(1, 0, ...pluginItems);
+    options.splice(1, 0, ...pluginOptions);
 
     const newOptions = options.filter(
       (option, index) =>

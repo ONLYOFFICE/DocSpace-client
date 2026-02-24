@@ -3,7 +3,7 @@
   "content": "Copy {{element}}",
   "content_en_sha1_hash": "ed0ee7f92937e2893de3d1552b5c943e15bf62a7",
   "created_at": "2025-05-19T21:30:56.251Z",
-  "updated_at": "2025-05-24T11:18:32.332Z",
+  "updated_at": "2026-02-19T13:36:32.235Z",
   "comment": {
     "text": "This translation key is used to display a tooltip when copying files. The placeholder \"{element}\" should be replaced with a plural form of \"file\" or \"files\", depending on the context. It appears in the UI for file copy operations.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/DragTooltip/DragTooltip.js",
-      "line_number": 126,
+      "line_number": 102,
       "context": "}, [title, iconOfDraggedFile]);\n \n const tooltipLabel = tooltipOptions\n ? operationName === \"copy\"\n ? isSingleItem\n ? t(\"TooltipElementCopyMessage\", { element: filesCount })\n : t(\"TooltipElementsCopyMessage\", { element: filesCount })\n : isSingleItem\n ? renderFileMoveTooltip()\n : t(\"TooltipElementsMoveMessage\", { element: filesCount })\n : t(\"\");",
       "module": "/packages/client"
     }

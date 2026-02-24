@@ -329,6 +329,15 @@ const useEditorEvents = ({
                   },
                 ],
               });
+
+              if (generationToolCallState) {
+                connector.sendEvent("ai_onCallTool", {
+                  name: generationToolCallState.toolName,
+                  arguments: {
+                    ...generationToolCallState.parameters,
+                  },
+                });
+              }
             };
 
             connector.executeMethod("AI", [{ type: "Actions" }], (data) => {
@@ -341,15 +350,6 @@ const useEditorEvents = ({
                 connector.attachEvent("ai_onInit", sendProviders);
               } else {
                 sendProviders();
-              }
-
-              if (generationToolCallState) {
-                connector.sendEvent("ai_onCallTool", {
-                  name: generationToolCallState.toolName,
-                  arguments: {
-                    ...generationToolCallState.parameters,
-                  },
-                });
               }
             });
 

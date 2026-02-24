@@ -3,7 +3,7 @@
   "content": "Get code to insert",
   "content_en_sha1_hash": "78bb34850cca819022ca9a76f7175d1a1540bed2",
   "created_at": "2025-05-19T21:30:54.514Z",
-  "updated_at": "2025-05-24T09:18:25.562Z",
+  "updated_at": "2026-02-19T13:36:32.772Z",
   "comment": {
     "text": "\"Insert code into the specified area, as indicated by 'Get code to insert' on a JavaScript SDK component.\"",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/GetCodeBlock.js",
       "line_number": 28,
-      "context": "// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing\n // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0\n // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode\n import { useState } from \"react\";\n import { Button } from \"@docspace/shared/components/button\";\n import GetCodeDialog from \"./GetCodeDialog\";\n \n import { GetCodeButtonWrapper } from \"../presets/StyledPresets\";\n \n export const GetCodeBlock = ({ t, codeBlock, isDisabled }) => {\n const [isGetCodeDialogOpened, setIsGetCodeDialogOpened] = useState(false);",
+      "context": "// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing\n // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0\n // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode\n import { useState } from \"react\";\n import { Button } from \"@docspace/ui-kit/components/button\";\n import GetCodeDialog from \"./GetCodeDialog\";\n \n import { GetCodeButtonWrapper } from \"../presets/StyledPresets\";\n \n export const GetCodeBlock = ({ t, codeBlock, isDisabled }) => {\n const [isGetCodeDialogOpened, setIsGetCodeDialogOpened] = useState(false);",
       "module": "/packages/client"
     }
   ],

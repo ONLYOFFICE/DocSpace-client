@@ -3,7 +3,7 @@
   "content": "New tariff's limitation is <1>{{storageValue}}</1> of storage, and your current used storage is <1>{{currentStorageValue}}</1>.",
   "content_en_sha1_hash": "5e8d475c4890b9bb2d2969225b61368be000c553",
   "created_at": "2025-05-19T21:30:56.600Z",
-  "updated_at": "2025-05-24T13:10:42.757Z",
+  "updated_at": "2026-02-19T13:36:32.354Z",
   "comment": {
     "text": "This translation key is used to display a message about storage limitations on a pricing plan change dialog. It informs users of the available storage space and their current usage.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangePricingPlanDialog/index.js",
-      "line_number": 81,
+      "line_number": 70,
       "context": "</Text>\n );\n \n const storagePlanLimitations = (\n <Text as=\"span\" fontSize=\"13px\">\n <Trans t={t} i18nKey=\"PlanStorageLimit\" ns=\"DowngradePlanDialog\">\n New tariff's limitation is\n <strong>{{ storageValue: allowedStorageSpace }}</strong> of storage, and\n your current used storage is\n <strong>{{ currentStorageValue: currentStorageSpace }}</strong>.\n </Trans>",
       "module": "/packages/client"
     }

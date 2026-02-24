@@ -3,7 +3,7 @@
   "content": "Open selected item/Confirm action",
   "content_en_sha1_hash": "b8c0bea4ca2d610ff6487bd0c2c17bc9f412f3b5",
   "created_at": "2025-05-19T21:30:55.069Z",
-  "updated_at": "2025-05-24T10:38:29.378Z",
+  "updated_at": "2026-02-19T13:36:32.502Z",
   "comment": {
     "text": "The translation key \"HotkeysOpen\" is used to display the label for a button or action that opens a selected item or confirms an action. In the UI, it appears as part of a hotkey panel. It should be translated to convey the purpose of this action in different languages.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/panels/HotkeysPanel/ActionsBlock.js",
       "line_number": 36,
-      "context": "const ActionsBlock = ({ t, textStyles, keyTextStyles, CtrlKey }) => {\n return (\n <>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysOpen\")}</Text>\n <Text {...keyTextStyles}>Enter</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>",
+      "context": "const ActionsBlock = ({ t, textStyles, keyTextStyles, CtrlKey }) => {\n return (\n <>\n <Row className={styles.hotkeysRow}>\n <>\n <Text {...textStyles}>{t(\"HotkeysOpen\")}</Text>\n <Text {...keyTextStyles}>Enter</Text>\n </>\n </Row>\n <Row className={styles.hotkeysRow}>\n <>",
       "module": "/packages/client"
     }
   ],

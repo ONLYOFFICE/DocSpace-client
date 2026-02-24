@@ -1,0 +1,28 @@
+{
+  "key_path": "RemoveGroupConfirmation",
+  "content": "You are about to delete group of rooms. Are you sure you want to proceed?",
+  "content_en_sha1_hash": "60a7a487a3c026128ad30e11eb402c509ed6a6dc",
+  "created_at": "2026-02-19T13:36:24.881Z",
+  "updated_at": "2026-02-19T13:36:32.423Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/EditRoomGroupsDialog/sub-components/DeleteGroupDialog.tsx",
+      "line_number": 107,
+      "context": "className={styles.deleteGroupDialog}\n >\n <ModalDialog.Header>{t(\"GroupingRooms:RemoveGroup\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text lineHeight=\"20px\">\n {t(\"GroupingRooms:RemoveGroupConfirmation\")}\n </Text>\n <Text style={{ marginTop: \"16px\" }} lineHeight=\"24px\">\n <Trans\n t={t}\n i18nKey=\"GroupingRooms:RemoveGroupInfo\"",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

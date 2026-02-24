@@ -3,7 +3,7 @@
   "content": "Hide",
   "content_en_sha1_hash": "34d8b60fe25332f7b98585e82e753eaf502c3e50",
   "created_at": "2025-05-19T21:30:50.084Z",
-  "updated_at": "2025-08-11T18:11:59.247Z",
+  "updated_at": "2026-02-19T13:36:32.856Z",
   "comment": {
     "text": "This translation key is used as a label for a button that allows users to hide or toggle off Single Sign-On functionality. In the UI, this \"Hide\" button appears in a portal settings page and is likely used by administrators to manage their organization's SSO configuration.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/HideButton.js",
       "line_number": 33,
-      "context": "import { useTranslation } from \"react-i18next\";\n \n import { Link } from \"@docspace/shared/components/link\";\n import { Text } from \"@docspace/shared/components/text\";\n \n const HideButton = (props) => {\n const { t } = useTranslation(\"SingleSignOn\");\n const { text, isAdditionalParameters, value, setIsSettingsShown } = props;\n const marginProp = isAdditionalParameters ? null : \"24px 0 8px 0px\";\n \n const onClick = () => {",
+      "context": "import { useTranslation } from \"react-i18next\";\n \n import { Link } from \"@docspace/ui-kit/components/link\";\n import { Text } from \"@docspace/ui-kit/components/text\";\n \n const HideButton = (props) => {\n const { t } = useTranslation(\"SingleSignOn\");\n const { text, isAdditionalParameters, value, setIsSettingsShown } = props;\n const marginProp = isAdditionalParameters ? null : \"24px 0 8px 0px\";\n \n const onClick = () => {",
       "module": "/packages/client"
     },
     {

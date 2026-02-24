@@ -1,0 +1,28 @@
+{
+  "key_path": "UserLimit",
+  "content": "User limit",
+  "content_en_sha1_hash": "c00c89a60a03540e20fe0675ceb182b9fc1900a0",
+  "created_at": "2026-02-18T14:56:20.525Z",
+  "updated_at": "2026-02-19T13:36:32.536Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/LinkSettingsPanel/index.tsx",
+      "line_number": 189,
+      "context": "<Text\n fontSize=\"16px\"\n fontWeight={700}\n className={styles.linkSettingsText}\n >\n {t(\"Common:UserLimit\")}\n </Text>\n <ToggleButton\n className={styles.linkSettingsToggle}\n isChecked={userLimitIsChecked}\n onChange={() => setUserLimitIsChecked(!userLimitIsChecked)}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

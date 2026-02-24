@@ -35,6 +35,7 @@ export enum TypeSettings {
   PortalDeactivate = "portalDeactivate",
   NoStandalone = "noStandalone",
   Authenticated = "authenticated",
+  AuthenticatedNoStandalone = "authenticatedNoStandalone",
   AuthenticatedWithSocket = "authenticatedWithSocket",
   AuthenticatedWithPlugins = "authenticatedWithPlugins",
   NoAuth = "noAuth",
@@ -470,6 +471,11 @@ export const settingsAuth = {
   response: { ...settingsNoAuth.response, socketUrl: "123" },
 };
 
+export const settingsAuthNoStandalone = {
+  ...settingsAuth,
+  response: { ...settingsAuth.response, standalone: false },
+};
+
 export const settingAuthWithSocket = {
   ...settingsNoAuth,
   response: { ...settingsNoAuth.response, socketUrl: "/socket.io" },
@@ -677,6 +683,8 @@ export const settingsResolver = (
     return new Response(JSON.stringify(settingsNoAuthNoStandalone));
   if (type === TypeSettings.Authenticated)
     return new Response(JSON.stringify(settingsAuth));
+  if (type === TypeSettings.AuthenticatedNoStandalone)
+    return new Response(JSON.stringify(settingsAuthNoStandalone));
   if (type === TypeSettings.AuthenticatedWithSocket)
     return new Response(JSON.stringify(settingAuthWithSocket));
   if (type === TypeSettings.EnabledJoin)

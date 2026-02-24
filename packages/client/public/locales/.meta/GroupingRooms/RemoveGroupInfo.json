@@ -1,0 +1,28 @@
+{
+  "key_path": "RemoveGroupInfo",
+  "content": "The rooms included in group will be displayed in the <strong>All Rooms</strong> section.",
+  "content_en_sha1_hash": "3b90f01308bc168aeaa213c4f963cd2dfa36dbed",
+  "created_at": "2026-02-19T13:36:24.881Z",
+  "updated_at": "2026-02-19T13:36:32.423Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/EditRoomGroupsDialog/sub-components/DeleteGroupDialog.tsx",
+      "line_number": 112,
+      "context": "{t(\"GroupingRooms:RemoveGroupConfirmation\")}\n </Text>\n <Text style={{ marginTop: \"16px\" }} lineHeight=\"24px\">\n <Trans\n t={t}\n i18nKey=\"GroupingRooms:RemoveGroupInfo\"\n components={{ strong: <strong style={{ fontWeight: 700 }} /> }}\n />\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

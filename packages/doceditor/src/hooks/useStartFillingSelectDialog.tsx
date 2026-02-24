@@ -42,7 +42,7 @@ import type {
 } from "@docspace/shared/api/files/types";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
-import type { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
+import type { TSelectedFileInfo } from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
 import type { TData } from "@docspace/ui-kit/components/toast";
 
 import { saveAs } from "@/utils";

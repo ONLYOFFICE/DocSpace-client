@@ -3,7 +3,7 @@
   "content": "Items count on one page",
   "content_en_sha1_hash": "8f75108937ce0addb4bf5b22dc439d961d558a53",
   "created_at": "2025-05-19T21:30:54.538Z",
-  "updated_at": "2025-05-24T09:14:21.095Z",
+  "updated_at": "2026-02-19T13:36:32.773Z",
   "comment": {
     "text": "\"Items count on one page\" is a label used to display the number of items per page in a pagination control. It is typically found on a settings or configuration page, such as the Portal Settings categories, where users can customize their data viewing experience.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/ItemsCountBlock.js",
       "line_number": 36,
-      "context": "import { Label } from \"@docspace/ui-kit/components/label\";\n import { Text } from \"@docspace/shared/components/text\";\n \n import { LabelGroup, ControlsGroup } from \"../presets/StyledPresets\";\n \n export const ItemsCountBlock = ({ t, count, setConfig }) => {\n const [value, setValue] = useState(count);\n \n const debouncedSetConfig = useCallback(\n debounce((newValue) => {\n setConfig((config) => ({",
+      "context": "import { Label } from \"@docspace/ui-kit/components/label\";\n import { Text } from \"@docspace/ui-kit/components/text\";\n \n import { LabelGroup, ControlsGroup } from \"../presets/StyledPresets\";\n \n export const ItemsCountBlock = ({ t, count, setConfig }) => {\n const [value, setValue] = useState(count);\n \n const debouncedSetConfig = useCallback(\n debounce((newValue) => {\n setConfig((config) => ({",
       "module": "/packages/client"
     }
   ],

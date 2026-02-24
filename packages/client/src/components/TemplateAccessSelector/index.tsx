@@ -28,9 +28,12 @@ import { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import Filter from "@docspace/shared/api/people/filter";
 import { EmployeeType } from "@docspace/shared/enums";
-import PeopleSelector from "@docspace/shared/selectors/People";
-import { TOnSubmit } from "@docspace/ui-kit/components/selector";
-import { TUser } from "@docspace/shared/api/people/types";
+import PeopleSelector from "@docspace/ui-kit/selectors/People";
+import type { TOnSubmit } from "@docspace/ui-kit/components/selector";
+import type {
+	PeopleSelectorProps,
+	PeopleFilter,
+} from "@docspace/ui-kit/selectors/People/PeopleSelector.types";
 
 const PEOPLE_TAB_ID = "0";
 
@@ -40,7 +43,7 @@ type TemplateAccessSelectorProps = {
 	onClose?: () => void;
 	onBackClick: () => void;
 	onCloseClick: () => void;
-	checkIfUserInvited?: (user: TUser) => boolean;
+	checkIfUserInvited?: PeopleSelectorProps["checkIfUserInvited"];
 	disableInvitedUsers?: string[];
 };
 
@@ -101,7 +104,7 @@ const TemplateAccessSelector = ({
 			disableInvitedUsers={disableInvitedUsers}
 			checkIfUserInvited={checkIfUserInvited}
 			withHeader
-			filter={filter}
+			filter={filter as unknown as PeopleFilter}
 			headerProps={{
 				headerLabel: t("Common:Contacts"),
 				withoutBackButton: false,

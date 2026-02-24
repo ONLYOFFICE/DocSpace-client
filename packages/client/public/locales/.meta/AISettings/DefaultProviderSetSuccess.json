@@ -1,0 +1,28 @@
+{
+  "key_path": "DefaultProviderSetSuccess",
+  "content": "Default provider successfully set",
+  "content_en_sha1_hash": "da3d99c2cfaa725954e486ee9634d65353564af4",
+  "created_at": "2026-02-19T13:36:29.992Z",
+  "updated_at": "2026-02-19T13:36:33.041Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/portal-settings/AISettingsStore.ts",
+      "line_number": 459,
+      "context": "p.isDefault = true;\n }\n });\n \n this.setDefaultProvider(newDefaultProvider);\n toastr.success(t(\"AISettings:DefaultProviderSetSuccess\"));\n } catch (e) {\n toastr.error(e as string);\n console.error(e);\n }\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -3,7 +3,7 @@
   "content": "Generate",
   "content_en_sha1_hash": "fc45f9b7a9a6e8b48f0e28821ec1981804dd1eb6",
   "created_at": "2025-05-19T21:30:49.766Z",
-  "updated_at": "2025-11-03T12:10:35.228Z",
+  "updated_at": "2026-02-19T13:36:32.748Z",
   "comment": {
     "text": "The translation key \"Generate\" is used to display a button label that enables users to create a new API key or generate a developer token. It appears in various UI components, such as buttons and dialogues, where it prompts users to perform these actions. The exact context can vary between \"EditButton\" (a standard edit action) and \"Generate\" (a specific button for creating an API key).",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/GenerateDeveloperTokenDialog.tsx",
-      "line_number": 252,
+      "line_number": 251,
       "context": "<ModalDialog.Footer>\n <Button\n label={\n token\n ? `${t(\"Common:Copy\")} & ${t(\"Common:CloseButton\")}`\n : t(\"Webhooks:Generate\")\n }\n primary\n scale\n onClick={onGenerate}\n isLoading={requestRunning}",
       "module": "/packages/client"
     },

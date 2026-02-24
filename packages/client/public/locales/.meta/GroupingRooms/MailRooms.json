@@ -1,0 +1,28 @@
+{
+  "key_path": "MailRooms",
+  "content": "Mail rooms",
+  "content_en_sha1_hash": "da96967be4041e3e7f402fef0a385460205e74a2",
+  "created_at": "2026-02-19T13:36:24.879Z",
+  "updated_at": "2026-02-19T13:36:32.448Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/RoomGroupingDialog/index.tsx",
+      "line_number": 143,
+      "context": "<div\n className={classNames(styles.tagName, {\n [styles.tagNameTablet]: !isDesktopView,\n })}\n >\n {t(\"GroupingRooms:MailRooms\")}\n </div>\n </div>\n <div\n className={classNames(styles.tag, {\n [styles.tagTablet]: !isDesktopView,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

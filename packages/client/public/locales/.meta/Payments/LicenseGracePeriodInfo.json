@@ -1,0 +1,28 @@
+{
+  "key_path": "LicenseGracePeriodInfo",
+  "content": "During this time, admins are not able to create new rooms or add new users. Once the grace period ends, {{productName}} will become unavailable until a new license is activated.",
+  "content_en_sha1_hash": "036439c191a76a4b6f284fdec3a7d03bd6c5d9ca",
+  "created_at": "2026-02-18T14:56:32.715Z",
+  "updated_at": "2026-02-19T13:36:32.432Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/index.js",
+      "line_number": 149,
+      "context": ")}\n </Text>\n <br />\n <Text>\n {standalone\n ? t(\"LicenseGracePeriodInfo\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"GracePeriodActivatedDescription\", {\n productName: t(\"Common:ProductName\"),\n })}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

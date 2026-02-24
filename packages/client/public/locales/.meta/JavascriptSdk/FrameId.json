@@ -3,7 +3,7 @@
   "content": "Frame ID",
   "content_en_sha1_hash": "14ac3a6c6cec002a893f352cfac071b72ddb6294",
   "created_at": "2025-05-19T21:30:54.511Z",
-  "updated_at": "2025-05-24T09:18:46.007Z",
+  "updated_at": "2026-02-19T13:36:32.771Z",
   "comment": {
     "text": "The \"Frame ID\" translation key is used to display a field that allows users to input or select a frame ID. This element is part of the FrameIdSetter component in the PortalSettings page and appears as a label for a configuration setting, guiding users to enter a unique identifier for a JavaScript SDK-related functionality.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/FrameIdSetter.js",
       "line_number": 34,
-      "context": "import { TextInput } from \"@docspace/shared/components/text-input\";\n import { Label } from \"@docspace/ui-kit/components/label\";\n \n import { ControlsGroup } from \"../presets/StyledPresets\";\n \n export const FrameIdSetter = (props) => {\n const { t, defaultFrameId, setConfig } = props;\n \n const [frameId, setFrameId] = useState(defaultFrameId);\n \n const debouncedSetConfig = useCallback(",
+      "context": "import { TextInput } from \"@docspace/ui-kit/components/text-input\";\n import { Label } from \"@docspace/ui-kit/components/label\";\n \n import { ControlsGroup } from \"../presets/StyledPresets\";\n \n export const FrameIdSetter = (props) => {\n const { t, defaultFrameId, setConfig } = props;\n \n const [frameId, setFrameId] = useState(defaultFrameId);\n \n const debouncedSetConfig = useCallback(",
       "module": "/packages/client"
     }
   ],

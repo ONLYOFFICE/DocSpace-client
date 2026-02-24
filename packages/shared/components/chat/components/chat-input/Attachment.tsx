@@ -34,7 +34,7 @@ import { isDesktop, isTablet } from "../../../../utils";
 
 import type { TFile } from "../../../../api/files/types";
 
-import FilesSelector from "../../../../selectors/Files";
+import FilesSelector from "@docspace/ui-kit/selectors/Files";
 
 import type { TSelectorItem } from "@docspace/ui-kit/components/selector";
 

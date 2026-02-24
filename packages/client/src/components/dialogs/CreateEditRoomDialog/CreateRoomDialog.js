@@ -33,7 +33,7 @@ import {
 } from "@docspace/shared/utils/rooms";
 import { Button } from "@docspace/ui-kit/components/button";
 import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import RoomSelector from "@docspace/shared/selectors/Room";
+import RoomSelector from "@docspace/ui-kit/selectors/Room";
 import { FolderType } from "@docspace/shared/enums";
 
 import TagHandler from "../../../helpers/TagHandler";

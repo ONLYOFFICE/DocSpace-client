@@ -1,0 +1,28 @@
+{
+  "key_path": "RoomGroupingDisabled",
+  "content": "Room grouping is disabled",
+  "content_en_sha1_hash": "e2755224a1bcc0b618e6adb4dfdb36ac6d435f7b",
+  "created_at": "2026-02-19T13:36:24.886Z",
+  "updated_at": "2026-02-19T13:36:33.019Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/FilesSettingsStore.js",
+      "line_number": 316,
+      "context": "const res = await setOrganizeGrouping(data);\n this.setFilesSetting(\"organizeRoomsGrouping\", res);\n \n const message = res\n ? i18n.t(\"GroupingRooms:RoomGroupingEnabled\")\n : i18n.t(\"GroupingRooms:RoomGroupingDisabled\");\n toastr.success(message);\n \n return res;\n } catch (e) {\n toastr.error(e);",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

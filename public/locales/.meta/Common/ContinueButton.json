@@ -3,7 +3,7 @@
   "content": "Continue",
   "content_en_sha1_hash": "2e02623966f9391facf6eaefc8b079ed5b630bee",
   "created_at": "2025-05-19T21:30:43.691Z",
-  "updated_at": "2025-12-19T13:32:31.612Z",
+  "updated_at": "2026-02-19T13:36:32.365Z",
   "comment": {
     "text": "This translation key is used as a label for a \"Continue\" button that appears in various dialogs and confirms user actions. It provides a clear and consistent text to be translated, allowing users to proceed after completing a task or operation.",
     "is_auto": true,
@@ -18,8 +18,8 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ConvertDialog/index.js",
-      "line_number": 228,
-      "context": ") : null}\n </div>\n <div className=\"convert_dialog_buttons\">\n <Button\n key=\"ContinueButton\"\n label={t(\"Common:ContinueButton\")}\n size=\"normal\"\n primary\n scale\n onClick={onConvert}\n />",
+      "line_number": 211,
+      "context": ") : null}\n </div>\n <div className={styles.convertDialogButtons}>\n <Button\n key=\"ContinueButton\"\n label={t(\"Common:ContinueButton\")}\n size=\"normal\"\n primary\n scale\n onClick={onConvert}\n />",
       "module": "/packages/client"
     },
     {
@@ -30,7 +30,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/PasswordEntryDialog/PasswordEntryDialog.component.tsx",
-      "line_number": 185,
+      "line_number": 181,
       "context": "tabIndex={0}\n type=\"submit\"\n isLoading={isLoading}\n size={ButtonSize.normal}\n onClick={handleSubmit}\n label={t(\"Common:ContinueButton\")}\n />\n <Button\n scale\n tabIndex={0}\n onClick={handleClose}",
       "module": "/packages/client"
     },
@@ -72,13 +72,13 @@
     },
     {
       "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",
-      "line_number": 589,
+      "line_number": 592,
       "context": "<ModalDialog.Footer>\n <Button\n key=\"DownloadButton\"\n label={\n needPassword ? t(\"Common:ContinueButton\") : t(\"Common:Download\")\n }\n size={ButtonSize.normal}\n primary\n onClick={needPassword ? onReDownload : onDownload}\n isDisabled={",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/download-dialog/sub-components/OnePasswordRow.tsx",
-      "line_number": 192,
+      "line_number": 195,
       "context": "/>\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={t(\"Common:ContinueButton\")}\n size={ButtonSize.normal}\n primary\n onClick={onDownloadWithPassword}\n isDisabled={!password.trim().length}\n scale",
       "module": "/packages/shared"
     },

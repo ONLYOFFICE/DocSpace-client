@@ -1,0 +1,28 @@
+{
+  "key_path": "EditTag",
+  "content": "Edit tag",
+  "content_en_sha1_hash": "b50cf28f688294adb0cf472b645f9208a6dbb0b4",
+  "created_at": "2026-02-19T13:36:19.058Z",
+  "updated_at": "2026-02-19T13:36:33.126Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/tag-management/modals/EditTag.modal.tsx",
+      "line_number": 74,
+      "context": "autoMaxHeight\n onClose={onClose}\n id={EDIT_TAG_MODAL_ID}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>{t(\"TagManagement:EditTag\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text className={styles.editTagModalText}>\n {t(\"TagManagement:ChangesToTag\")}\n </Text>\n <Checkbox",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -3,7 +3,7 @@
   "content": "Room owner",
   "content_en_sha1_hash": "6282abf238c9bcb457f0cd3c0cbd37e7971ec3f5",
   "created_at": "2025-05-19T21:30:56.110Z",
-  "updated_at": "2025-10-27T16:14:33.107Z",
+  "updated_at": "2026-02-19T13:36:32.234Z",
   "comment": {
     "text": "The \"RoomOwner\" translation key is used to display the English phrase \"Room owner\" in a specific UI component, likely within a file management or room editing dialog. It appears as a label and is displayed next to an option for changing the room's owner.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/ChangeRoomOwner/index.tsx",
       "line_number": 70,
-      "context": ");\n \n return (\n <Styled.ChangeRoomOwner>\n <Text className=\"change-owner-label\" fontWeight={600} fontSize=\"13px\">\n {isAgent ? t(\"Common:AgentOwner\") : t(\"Files:RoomOwner\")}\n </Text>\n \n <div className=\"change-owner-display-wrapper\">\n <div className=\"change-owner-display\">\n <Avatar",
+      "context": ");\n \n return (\n <div>\n <Text className=\"change-owner-label\" fontWeight={600} fontSize=\"13px\">\n {isAgent ? t(\"Common:AgentOwner\") : t(\"Files:RoomOwner\")}\n </Text>\n \n <div className={styles.changeOwnerDisplayWrapper}>\n <div className={styles.changeOwnerDisplay}>\n <Avatar",
       "module": "/packages/client"
     }
   ],

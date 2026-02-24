@@ -90,7 +90,6 @@ const SortFilter: FC<SortFilterProps> = ({
         visible={isOpen}
         onClick={onToggleCombobox}
         withBackground={false}
-        withoutBlur
       />
 
       <div

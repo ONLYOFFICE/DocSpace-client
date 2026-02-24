@@ -3,7 +3,7 @@
   "content": "Interface elements",
   "content_en_sha1_hash": "664ca787f30b4553416fc2fd6e29813dbe80ffc7",
   "created_at": "2025-05-19T21:30:54.535Z",
-  "updated_at": "2025-10-27T16:14:33.319Z",
+  "updated_at": "2026-02-19T13:36:32.498Z",
   "comment": {
     "text": "This translation key is used to display the label \"Interface elements\" in various contexts throughout the application, including panel headers and checkbox labels. The translation will vary based on the language, providing a consistent user experience across different interfaces.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/panels/EmbeddingPanel/index.tsx",
       "line_number": 513,
-      "context": "<Text\n className=\"embedding-panel_header-text\"\n fontSize=\"15px\"\n fontWeight={600}\n >\n {t(\"JavascriptSdk:InterfaceElements\")}\n </Text>\n \n <div className=\"embedding-panel_checkbox-container\">\n <CheckboxElement\n label={t(\"Common:Title\")}",
+      "context": "<Text\n className={styles.embeddingPanelHeaderText}\n fontSize=\"15px\"\n fontWeight={600}\n >\n {t(\"JavascriptSdk:InterfaceElements\")}\n </Text>\n \n <div className={styles.embeddingPanelCheckboxContainer}>\n <CheckboxElement\n label={t(\"Common:Title\")}",
       "module": "/packages/client"
     },
     {
@@ -42,7 +42,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/SimpleRoom.js",
-      "line_number": 378,
+      "line_number": 375,
       "context": "setConfig={setConfig}\n />\n </ControlsSection>\n \n <ControlsSection>\n <CategorySubHeader>{t(\"InterfaceElements\")}</CategorySubHeader>\n \n <CheckboxGroup>\n <LabelGroup>\n <Checkbox\n className=\"checkbox\"",
       "module": "/packages/client"
     }

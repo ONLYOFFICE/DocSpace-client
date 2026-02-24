@@ -3,7 +3,7 @@
   "content": "<strong>Note:</strong> All users will be required to complete the consent screen again",
   "content_en_sha1_hash": "79de04dd4df6dd917e94f59629ef71056115210d",
   "created_at": "2025-10-27T16:14:28.569Z",
-  "updated_at": "2025-10-27T18:00:09.699Z",
+  "updated_at": "2026-02-19T13:36:32.792Z",
   "comment": {
     "text": "This key displays a note within a dialog informing users that they will need to re-consent after disabling an application. It appears as a helpful reminder to users during the application disabling process. The text clarifies the impact of disabling an OAuth application.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/DisableDialog.tsx",
-      "line_number": 91,
+      "line_number": 90,
       "context": ") : (\n <Trans t={t} i18nKey=\"DisableApplicationDescription\" ns=\"OAuth\" />\n )}\n </Text>\n \n <Trans t={t} i18nKey=\"DisableApplicationNote\" ns=\"OAuth\" />\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"delete-button\"\n key=\"DeletePortalBtn\"",
       "module": "/packages/client"
     }

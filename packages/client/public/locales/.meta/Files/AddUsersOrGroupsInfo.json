@@ -3,7 +3,7 @@
   "content": "Only <1>{{productName}}</1> and <1>Room admins</1> are shown here",
   "content_en_sha1_hash": "d3dc5f5f10409aae79d6e20dfd3e8141a71a122f",
   "created_at": "2025-05-19T21:30:55.239Z",
-  "updated_at": "2025-05-24T12:42:46.275Z",
+  "updated_at": "2026-02-19T13:36:32.300Z",
   "comment": {
     "text": "This translation key is used to display a message indicating which users are shown on a specific template, specifically focusing on administrators of a room. It appears in a UI component where users can select different types of templates.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/TemplateAccessSelector/index.tsx",
-      "line_number": 67,
+      "line_number": 70,
       "context": "const getInfoText = () => {\n return selectedTab === PEOPLE_TAB_ID ? (\n <Trans\n t={t}\n ns=\"Files\"\n i18nKey=\"AddUsersOrGroupsInfo\"\n values={{ productName: t(\"Common:ProductName\") }}\n components={{ 1: <strong /> }}\n />\n ) : (\n <Trans",
       "module": "/packages/client"
     }

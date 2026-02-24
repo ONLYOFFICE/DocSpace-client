@@ -3,7 +3,7 @@
   "content": "From",
   "content_en_sha1_hash": "3f66052a107eaf9bae7cad0f61fb462f47ec2c47",
   "created_at": "2025-05-19T21:30:49.764Z",
-  "updated_at": "2025-05-24T02:22:13.762Z",
+  "updated_at": "2026-02-19T13:36:32.825Z",
   "comment": {
     "text": "This translation key is used for displaying a time range on the \"Delivery Date\" filter component. It displays the departure and arrival times of a delivery in 12-hour format.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/FilterDialog/DeliveryDatePicker.js",
       "line_number": 114,
-      "context": "closeCalendar,\n i18n,\n }) => {\n const formattedTime = isTimeEqual\n ? \"\"\n : ` ${moment(filters.deliveryFrom).tz(window.timezone).format(\"HH:mm\")} - ${moment(\n filters.deliveryTo,\n )\n .tz(window.timezone)\n .format(\"HH:mm\")}`;",
+      "context": "closeCalendar,\n i18n,\n }) => {\n const formattedTime = isTimeEqual\n ? \"\"\n : ` ${formatDate(filters.deliveryFrom.setZone(window.timezone), \"HH:mm\")} - ${formatDate(filters.deliveryTo.setZone(window.timezone), \"HH:mm\")}`;\n \n return (\n <div>\n <SelectedItem\n className=\"selectedItem delete-delivery-date-button\"",
       "module": "/packages/client"
     }
   ],

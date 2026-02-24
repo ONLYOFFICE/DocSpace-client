@@ -46,7 +46,7 @@ import {
 } from "../../components/filling-role-selector";
 
 import { useLocalStorage } from "../../hooks/useLocalStorage";
-import PeopleSelector from "../../selectors/People";
+import PeopleSelector from "@docspace/ui-kit/selectors/People";
 import type {
 	HeaderProps,
 	TAccessRight,
@@ -184,7 +184,7 @@ const StartFillingPanel = ({
 						...role,
 						user: {
 							id: id.toString(),
-							avatar,
+							avatar: typeof avatar === "string" ? avatar : undefined,
 							displayName,
 						},
 					};

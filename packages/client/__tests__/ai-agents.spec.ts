@@ -311,7 +311,7 @@ test.describe("AI agents", () => {
     await expect(page.getByText("Plugin SDK")).toBeVisible();
 
     await page
-      .getByRole("button", { name: "PS Plugin SDK, 10/12/2025 09:" })
+      .getByRole("button", { name: /PS Plugin SDK,.*10\/12\/2025 09:/ })
       .click();
 
     await expect(page.getByText("Pin").first()).toBeVisible();

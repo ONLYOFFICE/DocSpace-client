@@ -83,14 +83,17 @@ async function Page() {
   }
 
   const { logoText, externalResources } = settings;
-  const { helpcenter } = externalResources;
+  const { helpcenter, support } = externalResources;
 
   const docspaceFaqUrl = helpcenter.domain + helpcenter.entries.docspacefaq;
+  const feedbackAndSupportUrl = support.domain;
 
-  const { trial } = quota;
+  const { trial, features } = quota;
   const { enterprise, developer, dueDate, openSource, state, delayDueDate } =
     portalTariff;
   const { salesEmail, buyUrl } = paymentSettings;
+  const isLifetimeLicense =
+    features.find((f) => f.id === "lifetime")?.value === true;
 
   if (openSource) {
     const baseURL = await getBaseUrl();
@@ -111,11 +114,12 @@ async function Page() {
       docspaceFaqUrl={docspaceFaqUrl}
       licenseQuota={licenseQuota}
       filesSettings={filesSettings}
-      isLifetimeLicense={false}
+      isLifetimeLicense={isLifetimeLicense}
       isGracePeriod={state === TariffState.Delay}
       isNotPaidPeriod={state === TariffState.NotPaid}
       gracePeriodEndDate={delayDueDate}
       delayDaysCount={getDaysRemaining(delayDueDate)}
+      feedbackAndSupportUrl={feedbackAndSupportUrl}
     />
   );
 }

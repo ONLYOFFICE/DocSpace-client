@@ -1,0 +1,28 @@
+{
+  "key_path": "OrSelectFromAvailableMatches",
+  "content": "Or select from available matches",
+  "content_en_sha1_hash": "633f60fd49ce09fbe6101a2105a2a42fcd63e968",
+  "created_at": "2026-02-19T13:36:18.693Z",
+  "updated_at": "2026-02-19T13:36:33.125Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/tag-management/TagManagement.filter.tsx",
+      "line_number": 162,
+      "context": "fontSize=\"12px\"\n lineHeight=\"16px\"\n noSelect\n >\n {showCreateTag\n ? t(\"Common:OrSelectFromAvailableMatches\")\n : t(\"Common:SelectAnOptionOrCreateOne\")}\n </Text>\n ) : null}\n </>\n );",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

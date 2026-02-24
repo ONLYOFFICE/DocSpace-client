@@ -52,7 +52,7 @@ trap cleanup SIGINT SIGTERM EXIT
 
 echo "Installing backend dependencies..."
 cd "$BACKEND_DIR"
-npm install
+npm install --legacy-peer-deps
 if [ $? -ne 0 ]; then
     echo "Failed to install backend dependencies."
     exit 1

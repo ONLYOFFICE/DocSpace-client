@@ -38,6 +38,7 @@ import { shareHandlers } from "./share";
 import { apisystemHandlers } from "./apisystem";
 import { editorHandlers } from "./editor";
 import { notificationHandlers } from "./notification";
+import { selfByTypeHandler } from "./people/self";
 
 export * from "./settings";
 export * from "./capabilities";
@@ -69,4 +70,5 @@ export const allHandlers = (port: string) => [
   ...apisystemHandlers(port),
   ...editorHandlers(port),
   ...notificationHandlers(port),
+  selfByTypeHandler(port),
 ];

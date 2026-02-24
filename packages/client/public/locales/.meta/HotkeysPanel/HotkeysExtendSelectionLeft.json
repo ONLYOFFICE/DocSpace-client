@@ -3,7 +3,7 @@
   "content": "Extend selection left",
   "content_en_sha1_hash": "c040981a3b185557e1f6d4a19f1f5dda8f680e5c",
   "created_at": "2025-05-19T21:30:55.051Z",
-  "updated_at": "2025-05-24T10:42:13.230Z",
+  "updated_at": "2026-02-19T13:36:32.518Z",
   "comment": {
     "text": "This translation key is used to display the text \"Extend selection left\" in a keyboard shortcut label within an on-screen interface. It appears as part of hotkey indications in a UI component displaying keyboard shortcuts for interacting with selections.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/panels/HotkeysPanel/SelectionBlock.js",
       "line_number": 78,
-      "context": "<Text {...keyTextStyles}>Shift + ↑</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysExtendSelectionLeft\")}</Text>\n <Text {...keyTextStyles}>Shift + ←</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>",
+      "context": "<Text {...keyTextStyles}>Shift + ↑</Text>\n </>\n </Row>\n <Row className={styles.hotkeysRow}>\n <>\n <Text {...textStyles}>{t(\"HotkeysExtendSelectionLeft\")}</Text>\n <Text {...keyTextStyles}>Shift + ←</Text>\n </>\n </Row>\n <Row className={styles.hotkeysRow}>\n <>",
       "module": "/packages/client"
     }
   ],

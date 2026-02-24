@@ -3,7 +3,7 @@
   "content": "Disable application",
   "content_en_sha1_hash": "7bd824177e5bbe18871af06fd6feb228e9f0c83b",
   "created_at": "2025-05-19T21:30:53.860Z",
-  "updated_at": "2025-05-24T07:33:15.077Z",
+  "updated_at": "2026-02-19T13:36:32.790Z",
   "comment": {
     "text": "This translation key is used to display the text \"Disable application\" or \"Disable Applications\" depending on whether group-level disablement options are being displayed. It appears in a dialog box for portal settings and is likely used as a button label or header text.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/DisableDialog.tsx",
-      "line_number": 80,
+      "line_number": 79,
       "context": "visible={isVisible}\n onClose={onClose}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>\n {isGroup ? t(\"DisableApplications\") : t(\"DisableApplication\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text style={{ marginBottom: \"16px\" }}>\n {isGroup ? (\n <Trans t={t} i18nKey=\"DisableApplicationsDescription\" ns=\"OAuth\" />",
       "module": "/packages/client"
     }

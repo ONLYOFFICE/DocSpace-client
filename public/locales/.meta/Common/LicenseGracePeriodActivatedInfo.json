@@ -1,0 +1,28 @@
+{
+  "key_path": "LicenseGracePeriodActivatedInfo",
+  "content": "The grace period is active <1>from {{fromDate}} to {{byDate}}</1> (days remaining: {{delayDaysCount}}). During this time, admins are not able to create new rooms or add new users. Once the grace period ends, {{productName}} will become unavailable until a new license is activated.",
+  "content_en_sha1_hash": "750cdf996cb8503b0740ac9543a49135856be8ba",
+  "created_at": "2026-02-18T14:56:00.724Z",
+  "updated_at": "2026-02-19T13:36:33.187Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/pages/Payments/Standalone/sub-components/TariffTitleContainer.tsx",
+      "line_number": 195,
+      "context": "const getSubDescription = () => {\n if (!isLifetimeLicense && isGracePeriod) {\n return (\n <Text className={styles.gracePeriodInfo} fontSize=\"14px\">\n <Trans\n i18nKey=\"LicenseGracePeriodActivatedInfo\"\n ns=\"Common\"\n t={t}\n values={{\n fromDate: paymentDate,\n byDate: gracePeriodEndDate,",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

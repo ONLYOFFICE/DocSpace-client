@@ -148,7 +148,7 @@ export const mockProviders: TThirdParties = [
 export const mockFilesSelectorSettings: FilesSelectorSettings = {
   filesSettings: {
     automaticallyCleanUp: {
-      gap: 30,
+      gap: 3,
       isAutoCleanUp: false,
     },
     canSearchByContent: true,
@@ -164,7 +164,6 @@ export const mockFilesSelectorSettings: FilesSelectorSettings = {
     externalShareSocialMedia: true,
     extsArchive: [".zip", ".rar"],
     extsAudio: [".mp3", ".wav"],
-    extsCoAuthoring: [".docx", ".xlsx"],
     extsConvertible: { docx: [".doc", ".docx"] },
     extsDiagram: [".vsdm", ".vsdx", ".vssm", ".vssx", ".vstm", ".vstx"],
     extsDocument: [".doc", ".docx", ".pdf"],

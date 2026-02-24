@@ -140,7 +140,6 @@ const LinkRolesDropdown = ({
                 visible={isOpen}
                 onClick={() => setIsOpen(false)}
                 withBackground
-                withoutBlur={false}
                 isAside
                 zIndex={450}
               />

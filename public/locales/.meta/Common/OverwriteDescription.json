@@ -3,7 +3,7 @@
   "content": "The new file will replace the existing one as a new version.",
   "content_en_sha1_hash": "0d9f5c9f81c7babac9ce4dd02769692be95654fb",
   "created_at": "2025-05-19T21:30:47.186Z",
-  "updated_at": "2025-06-30T12:20:31.192Z",
+  "updated_at": "2026-02-19T13:36:32.370Z",
   "comment": {
     "text": "The translation key \"OverwriteDescription\" is used to display a message when a user chooses to overwrite an existing file. This message informs users that their new file will replace the current one as a new version. It appears in dialog boxes, such as the ConflictResolveDialog, where users can select action options.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ConflictResolveDialog/index.tsx",
-      "line_number": 279,
+      "line_number": 278,
       "context": ": t(\"Common:MergeAndOverwrite\");\n };\n \n const getOverwriteDescription = () => {\n return isFileDialog\n ? t(\"Common:OverwriteDescription\")\n : isFolderDialog\n ? t(\"Common:MergeFoldersDescription\")\n : t(\"Common:MultiplyOverwrite\");\n };",
       "module": "/packages/client"
     },

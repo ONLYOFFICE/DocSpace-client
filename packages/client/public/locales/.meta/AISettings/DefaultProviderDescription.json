@@ -1,0 +1,28 @@
+{
+  "key_path": "DefaultProviderDescription",
+  "content": "Select the default {{aiProvider}} and model for all features across {{productName}} ({{aiAgents}}, document editors, etc.)",
+  "content_en_sha1_hash": "c109f910ea4554e6c57cf82c8ec650e1603a6500",
+  "created_at": "2026-02-19T13:36:29.990Z",
+  "updated_at": "2026-02-19T13:36:32.694Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/DefaultProvider.tsx",
+      "line_number": 219,
+      "context": "fontSize=\"16px\"\n >\n {t(\"AISettings:DefaultProviderTitle\")}\n </Heading>\n <Text className={styles.description} lineHeight=\"20px\">\n {t(\"AISettings:DefaultProviderDescription\", {\n aiProvider: t(\"Common:AIProvider\"),\n aiAgents: t(\"Common:AIAgents\"),\n productName: t(\"Common:ProductName\"),\n })}\n </Text>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

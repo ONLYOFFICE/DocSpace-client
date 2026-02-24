@@ -1,0 +1,34 @@
+{
+  "key_path": "FileCurrentlyEditedBy",
+  "content": "File is currently edited by:",
+  "content_en_sha1_hash": "92b2cc7ef909ac1b88cb53e3754ac541b1861a48",
+  "created_at": "2026-02-18T14:55:55.967Z",
+  "updated_at": "2026-02-19T13:36:32.237Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EditorsTooltip/index.tsx",
+      "line_number": 95,
+      "context": "minWidth: \"200px\",\n }}\n >\n <Scrollbar autoHide={false}>\n <div className={styles.tooltipHeader}>\n {t(\"FileCurrentlyEditedBy\")}\n </div>\n <EditorsList editors={editors} avatarSize={AvatarSize.extraSmall} />\n </Scrollbar>\n </div>\n );",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/EditorsTooltip/sub-components/EditorsTooltipMobile.tsx",
+      "line_number": 61,
+      "context": "style={{ height: `${height}px` }}\n data-testid=\"editors-tooltip-mobile\"\n >\n <Scrollbar autoHide={false}>\n <div className={styles.tooltipHeader}>\n {t(\"FileCurrentlyEditedBy\")}\n </div>\n <EditorsList\n editors={editors}\n avatarSize={AvatarSize.min}\n isMobile={true}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

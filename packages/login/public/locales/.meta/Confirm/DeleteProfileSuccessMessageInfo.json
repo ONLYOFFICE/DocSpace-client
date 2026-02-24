@@ -3,7 +3,7 @@
   "content": "Please check our <1>Privacy policy</1> to learn more about deleting your account and associated data.",
   "content_en_sha1_hash": "e603d0230f23a99f63b6c47c5327b92e6782c099",
   "created_at": "2025-05-19T21:30:57.354Z",
-  "updated_at": "2025-08-21T11:22:39.932Z",
+  "updated_at": "2026-02-19T13:36:33.060Z",
   "comment": {
     "text": "This translation key is used for the success message displayed after deleting a profile, directing users to review the privacy policy for more information about data deletion. It appears in a confirmation dialog related to account removal.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/login/src/app/(root)/confirm/ProfileRemove/page.client.tsx",
       "line_number": 115,
-      "context": "<Text>\n {t(\"DeleteProfileSuccessDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n <br />\n <Trans i18nKey=\"DeleteProfileSuccessMessageInfo\" ns=\"Confirm\" t={t}>\n Please check our\n <Link\n type={LinkType.page}\n href={legalTerms}\n color={currentColorScheme?.main?.accent}",
+      "context": "<Text>\n {t(\"DeleteProfileSuccessDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n <br />\n <Trans i18nKey=\"DeleteProfileSuccessMessageInfo\" ns=\"Confirm\" t={t}>\n Please check our\n <Link\n type={LinkType.page}\n href={legalTerms}\n color={currentColorScheme?.main?.accent ?? undefined}",
       "module": "/packages/login"
     }
   ],

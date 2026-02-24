@@ -26,10 +26,7 @@
 
 import {
   TFile,
-  TFileSecurity,
   TFilesSettings,
-  TFolder,
-  TFolderSecurity,
   TGetReferenceData,
   TGetReferenceDataRequest,
   TSharedUsers,
@@ -37,14 +34,19 @@ import {
 import { TUser } from "@docspace/shared/api/people/types";
 import { TSettings } from "@docspace/shared/api/settings/types";
 import { HeaderProps, TBreadCrumb } from "@docspace/ui-kit/components/selector";
-import { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
+import type {
+  TSelectedFileInfo,
+  FilesSettingsDto,
+  FolderDtoInteger,
+  SdkFolderType,
+  FileEntryDtoIntegerAllOfSecurity,
+} from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
 import type {
   ConflictResolveType,
   FilesSelectorFilterTypes,
   FolderType,
   StartFillingMode,
 } from "@docspace/shared/enums";
-import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import { TTranslation } from "@docspace/shared/types";
 import { TFrameConfig } from "@docspace/shared/types/Frame";
 import type { RoomsType } from "@docspace/ui-kit/enums";
@@ -326,9 +328,7 @@ export interface SelectFolderDialogProps {
     selectedItemType: "rooms" | "files" | "agents" | undefined,
     isRoot: boolean,
     selectedItemSecurity:
-      | TFileSecurity
-      | TFolderSecurity
-      | TRoomSecurity
+      | FileEntryDtoIntegerAllOfSecurity
       | undefined,
     selectedFileInfo: TSelectedFileInfo,
     isDisabledFolder?: boolean,
@@ -343,11 +343,13 @@ export interface SelectFolderDialogProps {
     breadCrumbs: TBreadCrumb[],
     fileName: string,
     isChecked: boolean,
-    selectedTreeNode: TFolder,
+    selectedTreeNode: FolderDtoInteger,
     selectedFileInfo: TSelectedFileInfo,
-  ) => Promise<void>;
+    isInsideKnowledge?: boolean,
+    isInsideResultStorage?: boolean,
+  ) => void | Promise<void>;
   fileInfo: TFile;
-  filesSettings: TFilesSettings;
+  filesSettings: FilesSettingsDto;
   fileSaveAsExtension?: string;
   selectedFolderId?: string | number;
 }
@@ -365,11 +367,12 @@ export interface SelectFileDialogProps {
     selectedItemType: "rooms" | "files" | "agents" | undefined,
     isRoot: boolean,
     selectedItemSecurity:
-      | TFileSecurity
-      | TFolderSecurity
-      | TRoomSecurity
+      | FileEntryDtoIntegerAllOfSecurity
       | undefined,
     selectedFileInfo: TSelectedFileInfo,
+    isDisabledFolder?: boolean,
+    isInsideKnowledge?: boolean,
+    isInsideResultStorage?: boolean,
   ) => boolean;
   isVisible: boolean;
   onClose: () => void;
@@ -380,11 +383,13 @@ export interface SelectFileDialogProps {
     breadCrumbs: TBreadCrumb[],
     fileName: string,
     isChecked: boolean,
-    selectedTreeNode: TFolder,
+    selectedTreeNode: FolderDtoInteger,
     selectedFileInfo: TSelectedFileInfo,
-  ) => Promise<void>;
+    isInsideKnowledge?: boolean,
+    isInsideResultStorage?: boolean,
+  ) => void | Promise<void>;
   fileInfo: TFile;
-  filesSettings: TFilesSettings;
+  filesSettings: FilesSettingsDto;
   selectedFolderId?: string | number;
 }
 
@@ -501,11 +506,12 @@ export type StartFillingSelectorDialogProps = {
     selectedItemType: "rooms" | "files" | "agents" | undefined,
     isRoot: boolean,
     selectedItemSecurity:
-      | TFileSecurity
-      | TFolderSecurity
-      | TRoomSecurity
+      | FileEntryDtoIntegerAllOfSecurity
       | undefined,
     selectedFileInfo: TSelectedFileInfo,
+    isDisabledFolder?: boolean,
+    isInsideKnowledge?: boolean,
+    isInsideResultStorage?: boolean,
   ) => boolean;
 
   onSubmit: (
@@ -515,11 +521,13 @@ export type StartFillingSelectorDialogProps = {
     breadCrumbs: TBreadCrumb[],
     fileName: string,
     isChecked: boolean,
-    selectedTreeNode: TFolder,
+    selectedTreeNode: FolderDtoInteger,
     selectedFileInfo: TSelectedFileInfo,
-  ) => Promise<void>;
+    isInsideKnowledge?: boolean,
+    isInsideResultStorage?: boolean,
+  ) => void | Promise<void>;
 
-  filesSettings: TFilesSettings;
+  filesSettings: FilesSettingsDto;
   createDefineRoomType: RoomsType;
 };
 

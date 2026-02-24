@@ -3,7 +3,7 @@
   "content": "Move {{element}} elements",
   "content_en_sha1_hash": "f9236f0310f2736deb1485bc3643886987b72e2a",
   "created_at": "2025-05-19T21:30:56.261Z",
-  "updated_at": "2025-05-24T11:17:52.107Z",
+  "updated_at": "2026-02-19T13:36:32.236Z",
   "comment": {
     "text": "The \"Move {{element}} elements\" translation key is used to display a tooltip message when moving files in the drag-and-drop interface. It appears on hover or focus of an element being moved and indicates the number of elements being relocated. Translators should provide a generic phrase that conveys the action of moving elements.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/DragTooltip/DragTooltip.js",
-      "line_number": 130,
-      "context": "? isSingleItem\n ? t(\"TooltipElementCopyMessage\", { element: filesCount })\n : t(\"TooltipElementsCopyMessage\", { element: filesCount })\n : isSingleItem\n ? renderFileMoveTooltip()\n : t(\"TooltipElementsMoveMessage\", { element: filesCount })\n : t(\"\");\n \n return <StyledTooltip ref={tooltipRef}>{tooltipLabel}</StyledTooltip>;\n };",
+      "line_number": 106,
+      "context": "? isSingleItem\n ? t(\"TooltipElementCopyMessage\", { element: filesCount })\n : t(\"TooltipElementsCopyMessage\", { element: filesCount })\n : isSingleItem\n ? renderFileMoveTooltip()\n : t(\"TooltipElementsMoveMessage\", { element: filesCount })\n : t(\"\");\n \n return (\n <div className={styles.tooltip} ref={tooltipRef}>\n {tooltipLabel}",
       "module": "/packages/client"
     }
   ],

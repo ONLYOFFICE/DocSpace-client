@@ -3,7 +3,7 @@
   "content": "Bonus",
   "content_en_sha1_hash": "4d963cfab70d8c850b1221649bcc7b4d96d558d3",
   "created_at": "2025-05-19T21:30:43.309Z",
-  "updated_at": "2025-12-15T14:04:23.452Z",
+  "updated_at": "2026-02-19T13:36:32.221Z",
   "comment": {
     "text": "This translation key is used to display the text \"Bonus\" in various parts of the UI, such as article titles and settings pages. It appears in interactive elements like buttons and dialogues, indicating a reward or special feature within the application.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/Body/BonusItem.js",
-      "line_number": 55,
+      "line_number": 56,
       "context": "navigate(bonusUrl);\n toggleArticleOpen();\n }, []);\n \n const title = t(\"Common:Bonus\");\n \n return (\n <ArticleItem\n key=\"bonus\"\n text={title}",
       "module": "/packages/client"
     },
@@ -30,7 +30,7 @@
     },
     {
       "file_path": "/packages/management/src/components/article/index.tsx",
-      "line_number": 134,
+      "line_number": 133,
       "context": "withAnimation\n />\n ) : (\n <ArticleItem\n key=\"bonus\"\n text={t(\"Common:Bonus\")}\n iconNode={<GiftReactSvg />}\n showText={showText}\n onClick={() => onItemClick(\"bonus\")}\n isActive={activePath.includes(\"bonus\")}\n folderId=\"management_catalog-bonus\"",
       "module": "/packages/management"
     },

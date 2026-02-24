@@ -1,0 +1,40 @@
+{
+  "key_path": "YourFurtherEditsNotSaved",
+  "content": "Your further edits may not be saved.",
+  "content_en_sha1_hash": "3dbfb8cd57bf68171c29e8fb98b89ce9f2c8182b",
+  "created_at": "2026-02-18T14:56:21.766Z",
+  "updated_at": "2026-02-19T13:36:33.044Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/doceditor/src/components/Bar/index.tsx",
+      "line_number": 55,
+      "context": "switch (type) {\n case \"room\":\n return {\n description: initial\n ? t(\"EditingUnavailable\")\n : t(\"YourFurtherEditsNotSaved\"),\n header: initial ? t(\"RoomQuotaReached\") : t(\"RoomQuotaLimitWarning\"),\n };\n case \"user\":\n return {\n description: initial",
+      "module": "/packages/doceditor"
+    },
+    {
+      "file_path": "/packages/doceditor/src/components/Bar/index.tsx",
+      "line_number": 55,
+      "context": "switch (type) {\n case \"room\":\n return {\n description: initial\n ? t(\"EditingUnavailable\")\n : t(\"YourFurtherEditsNotSaved\"),\n header: initial ? t(\"RoomQuotaReached\") : t(\"RoomQuotaLimitWarning\"),\n };\n case \"user\":\n return {\n description: initial",
+      "module": "/packages/doceditor"
+    },
+    {
+      "file_path": "/packages/doceditor/src/components/Bar/index.tsx",
+      "line_number": 55,
+      "context": "switch (type) {\n case \"room\":\n return {\n description: initial\n ? t(\"EditingUnavailable\")\n : t(\"YourFurtherEditsNotSaved\"),\n header: initial ? t(\"RoomQuotaReached\") : t(\"RoomQuotaLimitWarning\"),\n };\n case \"user\":\n return {\n description: initial",
+      "module": "/packages/doceditor"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

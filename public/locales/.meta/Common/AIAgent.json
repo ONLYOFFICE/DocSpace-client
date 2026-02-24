@@ -3,7 +3,7 @@
   "content": "AI agent",
   "content_en_sha1_hash": "ab15eb3d82fcf6e76a2ede7896d22471a681f18e",
   "created_at": "2025-12-19T10:16:17.398Z",
-  "updated_at": "2025-12-23T10:35:04.839Z",
+  "updated_at": "2026-02-19T13:36:32.243Z",
   "comment": {
     "text": "This key refers to the term \"AI agent\" and is used to label or describe AI agents within the UI. It appears in instructions for creating or editing agents, empty container views (specifically when access is restricted), and in titles related to AI agent availability. Translators should ensure the term is accurately conveyed in the target language, considering its technical context.",
     "is_auto": true,
@@ -23,6 +23,12 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
+      "line_number": 384,
+      "context": "};\n \n const createAIAgent = {\n title: t(\"EmptyView:CreateAIAgent\"),\n description: t(\"EmptyView:CreateAIAgentDescription\", {\n aiAgent: t(\"Common:AIAgent\"),\n }),\n icon: <CreateAIAgentIcon />,\n key: \"create-ai-agent\",\n onClick: actions.onCreateAIAgent,\n disabled: !security?.Create,",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
       "line_number": 185,
       "context": "};\n \n const getAIAgentsAIEnabledTitle = (t: TTranslation, access: AccessType) => {\n return isUser(access)\n ? t(\"EmptyView:EmptyAIAgentsUserTitle\", {\n aiAgents: t(\"Common:AIAgents\"),\n })\n : t(\"EmptyView:EmptyAIAgentsTitle\", {\n aiAgent: t(\"Common:AIAgent\"),\n });\n };",
@@ -30,8 +36,8 @@
     },
     {
       "file_path": "/packages/client/src/components/panels/HotkeysPanel/CreationBlock.js",
-      "line_number": 80,
-      "context": "</Row>\n \n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>\n {t(\"Common:CreateAIAgent\", { aiAgent: t(\"Common:AIAgent\") })}\n </Text>\n <Text {...keyTextStyles}>{`Shift + a`}</Text>\n </>\n </Row>\n </>",
+      "line_number": 81,
+      "context": "</Row>\n \n <Row className={styles.hotkeysRow}>\n <>\n <Text {...textStyles}>\n {t(\"Common:CreateAIAgent\", { aiAgent: t(\"Common:AIAgent\") })}\n </Text>\n <Text {...keyTextStyles}>{`Shift + a`}</Text>\n </>\n </Row>\n </>",
       "module": "/packages/client"
     },
     {
@@ -42,20 +48,20 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/View/index.tsx",
-      "line_number": 547,
-      "context": "ns=\"AIRoom\"\n i18nKey=\"AgentInViewModeWarning\"\n components={{\n strong: <strong />,\n }}\n values={{ aiAgent: t(\"Common:AIAgent\"), aiChat: t(\"AIRoom:AIChat\") }}\n />,\n );\n }\n }, [isResultTab, canUseChat, showBodyLoader, t]);",
+      "line_number": 557,
+      "context": "ns=\"AIRoom\"\n i18nKey=\"AgentInViewModeWarning\"\n components={{\n strong: <strong />,\n }}\n values={{ aiAgent: t(\"Common:AIAgent\"), aiChat: t(\"AIRoom:AIChat\") }}\n />,\n );\n }\n }, [\n selectedFolderStore.isInsideResultStorage,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/MobileQuotas.js",
       "line_number": 67,
-      "context": "})}\n isDisabled={isDisabled}\n />\n <MobileCategoryWrapper\n title={t(\"QuotaPerAIAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n })}\n onClickLink={onClickLink}\n url=\"/portal-settings/management/disk-space/quota-per-ai-agent\"\n subtitle={t(\"SetDefaultAIAgentQuota\", {\n productName: t(\"Common:ProductName\"),",
+      "context": "})}\n isDisabled={isDisabled}\n />\n <CategoryItem\n title={t(\"QuotaPerAIAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n })}\n onClickLink={onClickLink}\n url=\"/portal-settings/management/disk-space/quota-per-ai-agent\"\n subtitle={t(\"SetDefaultAIAgentQuota\", {\n productName: t(\"Common:ProductName\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/MobileQuotas.js",
       "line_number": 67,
-      "context": "})}\n isDisabled={isDisabled}\n />\n <MobileCategoryWrapper\n title={t(\"QuotaPerAIAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n })}\n onClickLink={onClickLink}\n url=\"/portal-settings/management/disk-space/quota-per-ai-agent\"\n subtitle={t(\"SetDefaultAIAgentQuota\", {\n productName: t(\"Common:ProductName\"),",
+      "context": "})}\n isDisabled={isDisabled}\n />\n <CategoryItem\n title={t(\"QuotaPerAIAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n })}\n onClickLink={onClickLink}\n url=\"/portal-settings/management/disk-space/quota-per-ai-agent\"\n subtitle={t(\"SetDefaultAIAgentQuota\", {\n productName: t(\"Common:ProductName\"),",
       "module": "/packages/client"
     },
     {
@@ -113,32 +119,14 @@
       "module": "/packages/login"
     },
     {
-      "file_path": "/packages/shared/selectors/AIAgent/index.tsx",
-      "line_number": 185,
-      "context": "const { getAgentList: onLoadNextPage } = useAgentsHelper({\n withCreate: true,\n isInit: isInitRef.current,\n setIsInit,\n createDefineLabel: t(\"Common:CreateAIAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n }),\n excludeItems,\n searchValue,\n setHasNextPage,\n setTotal,",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/selectors/AIAgent/index.tsx",
-      "line_number": 185,
-      "context": "const { getAgentList: onLoadNextPage } = useAgentsHelper({\n withCreate: true,\n isInit: isInitRef.current,\n setIsInit,\n createDefineLabel: t(\"Common:CreateAIAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n }),\n excludeItems,\n searchValue,\n setHasNextPage,\n setTotal,",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/selectors/MCPServers/index.tsx",
-      "line_number": 176,
-      "context": "mcpServers: t(\"Common:MCPSettingTitle\"),\n })}\n emptyScreenDescription={t(\"Common:NoMCPServersDescription\", {\n mcpServers: t(\"Common:MCPSettingTitle\"),\n productName: t(\"Common:ProductName\"),\n aiAgent: t(\"Common:AIAgent\"),\n })}\n searchEmptyScreenImage={\n isBase ? EmptyScreenRoomSvgUrl : EmptyScreenRoomDarkSvgUrl\n }\n searchEmptyScreenHeader={t(\"Common:NotFoundTitle\")}",
-      "module": "/packages/shared"
-    },
-    {
       "file_path": "/packages/shared/store/CurrentQuotaStore.ts",
-      "line_number": 528,
+      "line_number": 534,
       "context": "const isEnable = +quota !== -1;\n \n try {\n await setDefaultAIAgentQuota(isEnable, +quota);\n const toastrText = isEnable\n ? t(\"AIAgentQuotaEnabled\", { aiAgent: t(\"Common:AIAgent\") })\n : t(\"AIAgentQuotaDisabled\", { aiAgent: t(\"Common:AIAgent\") });\n \n toastr.success(toastrText);\n } catch (e: unknown) {\n toastr.error(e as TData);",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/store/CurrentQuotaStore.ts",
-      "line_number": 528,
+      "line_number": 534,
       "context": "const isEnable = +quota !== -1;\n \n try {\n await setDefaultAIAgentQuota(isEnable, +quota);\n const toastrText = isEnable\n ? t(\"AIAgentQuotaEnabled\", { aiAgent: t(\"Common:AIAgent\") })\n : t(\"AIAgentQuotaDisabled\", { aiAgent: t(\"Common:AIAgent\") });\n \n toastr.success(toastrText);\n } catch (e: unknown) {\n toastr.error(e as TData);",
       "module": "/packages/shared"
     },

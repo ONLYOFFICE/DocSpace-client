@@ -1,0 +1,28 @@
+{
+  "key_path": "LinkLifetimeExpired",
+  "content": "Access via this link is no longer available since its lifetime has expired.",
+  "content_en_sha1_hash": "1e148609fab17f05e102318e0ee240d61761c7f5",
+  "created_at": "2026-02-18T14:56:01.357Z",
+  "updated_at": "2026-02-19T13:36:33.128Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/dialogs/EditLinkPanel/index.tsx",
+      "line_number": 417,
+      "context": "return \"\";\n }\n \n if (isExpired) {\n return t(\"Common:LinkLifetimeExpired\");\n }\n \n return expirationDate\n ? `${t(\"Common:LinkValidUntil\")}:`\n : t(\"Common:ChooseExpirationDate\");",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "key_path": "BlankForm",
+  "content": "Blank Form",
+  "content_en_sha1_hash": "c551115ab98cf444504f10fc19490ff882e16986",
+  "created_at": "2026-02-18T14:56:25.390Z",
+  "updated_at": "2026-02-19T13:36:33.043Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/portal-settings/DefaultTemplatesStore.ts",
+      "line_number": 74,
+      "context": "case \".xlsx\":\n return i18n.t(\"Settings:BlankSpreadsheet\");\n case \".pptx\":\n return i18n.t(\"Settings:BlankPresentation\");\n case \".pdf\":\n return i18n.t(\"Settings:BlankForm\");\n }\n };\n \n formTemplatesArray = (templates: TDefaultTemplate[]) => {\n const templatesArr = templates.map((item) => ({",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -27,7 +27,7 @@
 import { useMemo } from "react";
 import { inject, observer } from "mobx-react";
 import classNames from "classnames";
-import PeopleSelector from "@docspace/shared/selectors/People";
+import PeopleSelector from "@docspace/ui-kit/selectors/People";
 import { withTranslation } from "react-i18next";
 import Filter from "@docspace/shared/api/people/filter";
 import { EmployeeType, EmployeeStatus } from "@docspace/shared/enums";

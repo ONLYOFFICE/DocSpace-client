@@ -29,9 +29,9 @@ import React from "react";
 import { FilterSelectorTypes } from "../enums";
 import type { SelectorRenderProps } from "@docspace/ui-kit/components/filter/Filter.types";
 
-import GroupsSelector from "../selectors/Groups";
-import PeopleSelector from "../selectors/People";
-import RoomSelector from "../selectors/Room";
+import GroupsSelector from "@docspace/ui-kit/selectors/Groups";
+import PeopleSelector from "@docspace/ui-kit/selectors/People";
+import RoomSelector from "@docspace/ui-kit/selectors/Room";
 
 const renderFilterSelector = ({
   selectorType,

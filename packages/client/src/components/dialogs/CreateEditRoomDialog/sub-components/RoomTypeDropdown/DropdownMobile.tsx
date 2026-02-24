@@ -71,7 +71,6 @@ const DropdownMobile = ({
             visible={open}
             onClick={onClose}
             withBackground
-            withoutBlur={false}
             isAside
             zIndex={450}
           />

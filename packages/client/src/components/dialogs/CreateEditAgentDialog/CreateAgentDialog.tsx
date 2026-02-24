@@ -37,7 +37,7 @@ import {
   type TAgentParams,
   type TAgentTagsParams,
 } from "@docspace/shared/utils/aiAgents";
-import MCPServersSelector from "@docspace/shared/selectors/MCPServers";
+import MCPServersSelector from "@docspace/ui-kit/selectors/MCPServers";
 
 import TagHandler from "../../../helpers/TagHandler";
 import SetAgentParams from "./sub-components/SetAgentParams";

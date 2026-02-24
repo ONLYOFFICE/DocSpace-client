@@ -36,7 +36,7 @@ import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { TRoom } from "@docspace/shared/api/rooms/types";
 import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
 import { TSelectorItem } from "@docspace/ui-kit/components/selector";
-import { TUser } from "@docspace/shared/api/people/types";
+import type { PeopleSelectorProps } from "@docspace/ui-kit/selectors/People/PeopleSelector.types";
 import { TRoomParams, TRoomTagsParams } from "@docspace/shared/utils/rooms";
 
 import TagHandler from "../../../helpers/TagHandler";
@@ -148,7 +148,9 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
     setRoomParams({ ...roomParams, invitations });
   };
 
-  const checkIfUserInvited = (user: TUser) => {
+  const checkIfUserInvited: NonNullable<
+    PeopleSelectorProps["checkIfUserInvited"]
+  > = (user) => {
     return (
       inviteItems.findIndex(
         (x) => x.id === user.id && x.templateAccess !== ShareAccessRights.None,

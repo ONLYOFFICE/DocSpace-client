@@ -3,7 +3,7 @@
   "content": "You wish to downgrade the team to <1>{{usersCount}}</1> admins, and current number of such users in your {{productName}} is <1>{{currentUsersCount}}</1>.",
   "content_en_sha1_hash": "45b989647c55526d7bbbed7c65ba98724bf414a9",
   "created_at": "2025-05-19T21:30:56.601Z",
-  "updated_at": "2025-05-24T13:09:30.702Z",
+  "updated_at": "2026-02-19T13:36:32.354Z",
   "comment": {
     "text": "This translation key is used to display a message prompting users to downgrade their team's admin count. The message is presented in a pricing plan dialog when setting a new plan, and it shows the proposed number of admins compared to the current user count.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangePricingPlanDialog/index.js",
-      "line_number": 69,
+      "line_number": 58,
       "context": "const allowedStorageSpace = getConvertedSize(t, allowedStorageSizeByQuota);\n const currentStorageSpace = getConvertedSize(t, usedTotalStorageSizeCount);\n \n const planUsersLimitations = (\n <Text as=\"span\" fontSize=\"13px\">\n <Trans t={t} i18nKey=\"PlanUsersLimit\" ns=\"DowngradePlanDialog\">\n You wish to downgrade the team to\n <strong>{{ usersCount: managersCount }}</strong>\n admins, and current number of such users in your\n {{ productName: t(\"Common:ProductName\") }} is\n <strong>{{ currentUsersCount: addedManagersCount }}</strong>",
       "module": "/packages/client"
     }

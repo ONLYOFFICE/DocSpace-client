@@ -1,0 +1,28 @@
+{
+  "key_path": "ChangesToTag",
+  "content": "Changes to this tag will affect all rooms where it is used.",
+  "content_en_sha1_hash": "3d048c8b0733811ca8f8d357e3c557bcfe8ae03c",
+  "created_at": "2026-02-19T13:36:19.063Z",
+  "updated_at": "2026-02-19T13:36:33.127Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/tag-management/modals/EditTag.modal.tsx",
+      "line_number": 77,
+      "context": "displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>{t(\"TagManagement:EditTag\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text className={styles.editTagModalText}>\n {t(\"TagManagement:ChangesToTag\")}\n </Text>\n <Checkbox\n key=\"dont-show-again\"\n label={t(\"ConvertDialog:HideMessage\")}\n isChecked={isChecked}",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

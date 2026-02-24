@@ -3,7 +3,7 @@
   "content": "LDAP settings",
   "content_en_sha1_hash": "47aabd81090aebfdaf6d1d37da2399019820296f",
   "created_at": "2025-05-19T21:30:54.273Z",
-  "updated_at": "2025-10-27T16:14:33.453Z",
+  "updated_at": "2026-02-19T13:36:32.688Z",
   "comment": {
     "text": "The translation key \"Ldap:LdapSettings\" is used to display the title of LDAP settings in the portal settings page. It appears as the title of a category and is also set as the document title when loading the LDAP integration.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/LdapMobileView.js",
       "line_number": 51,
-      "context": "};\n \n return (\n <StyledWrapper>\n <MobileCategoryWrapper\n title={t(\"Ldap:LdapSettings\")}\n subtitle={t(\"Ldap:LdapMobileSettingsDescription\")}\n url=\"/portal-settings/integration/ldap/settings\"\n withPaidBadge={!isLDAPAvailable}\n badgeLabel={t(\"Common:Paid\")}\n onClickLink={onClickLink}",
+      "context": "};\n \n return (\n <StyledWrapper>\n <CategoryItem\n title={t(\"Ldap:LdapSettings\")}\n subtitle={t(\"Ldap:LdapMobileSettingsDescription\")}\n url=\"/portal-settings/integration/ldap/settings\"\n withPaidBadge={!isLDAPAvailable}\n badgeLabel={t(\"Common:Paid\")}\n onClickLink={onClickLink}",
       "module": "/packages/client"
     },
     {

@@ -29,10 +29,10 @@ import { useTranslation } from "react-i18next";
 
 import { isFile } from "../../../utils/typeGuards";
 import { EmployeeStatus, ShareAccessRights } from "../../../enums";
-import PeopleSelector from "../../../selectors/People";
+import PeopleSelector from "@docspace/ui-kit/selectors/People";
 import { ShareLinkService } from "../../../services/share-link.service";
 import type { TShareToUser } from "../../../api/files/types";
-import Filter from "../../../api/people/filter";
+
 
 // import { SelectorAccessRightsMode } from "../../selector/Selector.enums";
 import type {
@@ -118,9 +118,9 @@ export const ShareSelector: FC<ShareSelectorProps> = ({
 	const targetEntityType = isFile(item) ? "file" : "folder";
 
 	const filter = useMemo(() => {
-		const temp = Filter.getDefault();
-		temp.employeeStatus = EmployeeStatus.Active;
-		return temp;
+		return {
+			employeeStatus: EmployeeStatus.Active,
+		};
 	}, []);
 
 	return (

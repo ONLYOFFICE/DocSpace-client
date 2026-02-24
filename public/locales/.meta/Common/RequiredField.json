@@ -3,7 +3,7 @@
   "content": "Required field",
   "content_en_sha1_hash": "04148d61b0b7212b69dd8b267c98c74a3ae36942",
   "created_at": "2025-05-19T21:30:47.872Z",
-  "updated_at": "2025-12-17T14:56:19.553Z",
+  "updated_at": "2026-02-19T13:36:32.345Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that a field is required when editing a connection. It appears in a vertical text input field within a connect dialog and is used as an error message if the input value is empty.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeNameDialog/index.js",
-      "line_number": 146,
+      "line_number": 137,
       "context": "onChange: handleNameChange,\n placeholder: t(\"Common:FirstName\"),\n hasError: !isNameValid,\n errorMessage:\n firstName.trim().length === 0\n ? t(\"Common:RequiredField\")\n : t(\"Common:IncorrectFirstName\"),\n className: \"first-name\",\n dataTestId: \"change_name_first_name_field\",\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeNameDialog/index.js",
-      "line_number": 146,
+      "line_number": 137,
       "context": "onChange: handleNameChange,\n placeholder: t(\"Common:FirstName\"),\n hasError: !isNameValid,\n errorMessage:\n firstName.trim().length === 0\n ? t(\"Common:RequiredField\")\n : t(\"Common:IncorrectFirstName\"),\n className: \"first-name\",\n dataTestId: \"change_name_first_name_field\",\n },\n {",
       "module": "/packages/client"
     },
@@ -36,7 +36,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/PasswordEntryDialog/PasswordEntryDialog.component.tsx",
-      "line_number": 82,
+      "line_number": 78,
       "context": "const handleSubmit = async () => {\n if (!item.requestToken) return;\n \n if (password.trim().length === 0) {\n return setErrorMessage(t(\"Common:RequiredField\"));\n }\n \n setIsLoading(true);\n try {\n abortControllerRef.current?.abort();",
       "module": "/packages/client"
     },
@@ -90,13 +90,13 @@
     },
     {
       "file_path": "/packages/login/src/components/LoginForm/index.tsx",
-      "line_number": 524,
+      "line_number": 567,
       "context": "const onChangeLdapLoginCheckbox = () =>\n setIsLdapLoginChecked(!isLdapLoginChecked);\n \n const errorMessage = () => {\n if (!password.trim()) {\n return t(\"Common:RequiredField\");\n }\n if (emailFromInvitation) {\n return errorText || t(\"Common:RequiredField\");\n }\n };",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/components/LoginForm/index.tsx",
-      "line_number": 524,
+      "line_number": 567,
       "context": "const onChangeLdapLoginCheckbox = () =>\n setIsLdapLoginChecked(!isLdapLoginChecked);\n \n const errorMessage = () => {\n if (!password.trim()) {\n return t(\"Common:RequiredField\");\n }\n if (emailFromInvitation) {\n return errorText || t(\"Common:RequiredField\");\n }\n };",
       "module": "/packages/login"
     },
@@ -120,25 +120,25 @@
     },
     {
       "file_path": "/packages/shared/dialogs/connect/ConnectDialog.tsx",
-      "line_number": 315,
+      "line_number": 322,
       "context": "labelVisible\n isRequired\n labelText={t(\"Common:ConnectionUrl\")}\n isVertical\n hasError={!isUrlValid}\n errorMessage={t(\"Common:RequiredField\")}\n >\n <TextInput\n id=\"connection-url-input\"\n isAutoFocussed\n hasError={!isUrlValid}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/connect/ConnectDialog.tsx",
-      "line_number": 315,
+      "line_number": 322,
       "context": "labelVisible\n isRequired\n labelText={t(\"Common:ConnectionUrl\")}\n isVertical\n hasError={!isUrlValid}\n errorMessage={t(\"Common:RequiredField\")}\n >\n <TextInput\n id=\"connection-url-input\"\n isAutoFocussed\n hasError={!isUrlValid}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/connect/ConnectDialog.tsx",
-      "line_number": 315,
+      "line_number": 322,
       "context": "labelVisible\n isRequired\n labelText={t(\"Common:ConnectionUrl\")}\n isVertical\n hasError={!isUrlValid}\n errorMessage={t(\"Common:RequiredField\")}\n >\n <TextInput\n id=\"connection-url-input\"\n isAutoFocussed\n hasError={!isUrlValid}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/connect/ConnectDialog.tsx",
-      "line_number": 315,
+      "line_number": 322,
       "context": "labelVisible\n isRequired\n labelText={t(\"Common:ConnectionUrl\")}\n isVertical\n hasError={!isUrlValid}\n errorMessage={t(\"Common:RequiredField\")}\n >\n <TextInput\n id=\"connection-url-input\"\n isAutoFocussed\n hasError={!isUrlValid}",
       "module": "/packages/shared"
     },
@@ -150,13 +150,13 @@
     },
     {
       "file_path": "/packages/shared/dialogs/recover-access-modal-dialog/RecoverAccessModalDialog.tsx",
-      "line_number": 269,
+      "line_number": 271,
       "context": "labelVisible={false}\n hasError={isShowError ? emailErr : undefined}\n errorMessage={\n emailErrorMessage\n ? t(`Common:${emailErrorMessage}`)\n : t(\"Common:RequiredField\")\n }\n dataTestId=\"recover_access_modal_email_container\"\n >\n <EmailInput\n scale",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/recover-access-modal-dialog/RecoverAccessModalDialog.tsx",
-      "line_number": 269,
+      "line_number": 271,
       "context": "labelVisible={false}\n hasError={isShowError ? emailErr : undefined}\n errorMessage={\n emailErrorMessage\n ? t(`Common:${emailErrorMessage}`)\n : t(\"Common:RequiredField\")\n }\n dataTestId=\"recover_access_modal_email_container\"\n >\n <EmailInput\n scale",
       "module": "/packages/shared"
     },

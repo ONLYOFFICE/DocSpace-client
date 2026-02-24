@@ -34,7 +34,7 @@ import type {
   TGetFolder,
 } from "@docspace/shared/api/files/types";
 import type { TGetRooms, TRoom } from "@docspace/shared/api/rooms/types";
-import { configureFilterByFilterParam } from "@docspace/shared/selectors/Files/FilesSelector.utils";
+import { getFilterParams } from "@docspace/ui-kit/selectors/Files/FilesSelector.utils";
 
 import { getFilesSettings, getFolder, getFoldersTree } from "@/api/files";
 import { getRooms } from "@/api/rooms";
@@ -83,11 +83,13 @@ export default async function Page({
   filter.pageCount = PAGE_COUNT;
 
   if (filter instanceof FilesFilter && baseConfig.filter) {
-    configureFilterByFilterParam(
-      filter,
+    const filterParams = getFilterParams(
       baseConfig.filter,
       filesSettings?.extsWebEdited || [],
     );
+    if (filterParams.filterType !== undefined) filter.filterType = filterParams.filterType as typeof filter.filterType;
+    if (filterParams.extension !== undefined) filter.extension = filterParams.extension;
+    if (filterParams.applyFilterOption !== undefined) filter.applyFilterOption = filterParams.applyFilterOption as unknown as typeof filter.applyFilterOption;
   }
 
   const itemsList = isRoomView

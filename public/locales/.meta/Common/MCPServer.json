@@ -3,7 +3,7 @@
   "content": "MCP server",
   "content_en_sha1_hash": "94cbffb24efcf41d6f46da3b0290c1a446e05376",
   "created_at": "2025-11-21T08:21:51.253Z",
-  "updated_at": "2025-12-23T10:32:25.870Z",
+  "updated_at": "2026-02-19T13:36:32.250Z",
   "comment": {
     "text": "This key displays the label \"MCP server\" within a dialog header, likely referring to a Minecraft server being configured or managed. It appears in the \"Add\" and \"Edit\" dialogs for AI settings related to servers. Translators should understand this refers to a Minecraft server context.",
     "is_auto": true,
@@ -19,25 +19,31 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/dialogs/add/index.tsx",
       "line_number": 122,
-      "context": "visible\n displayType={ModalDialogType.aside}\n onClose={onClose}\n withBodyScroll\n >\n <ModalDialog.Header>{t(\"Common:MCPServer\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <form onSubmit={onSubmitAction} className={styles.bodyContainer}>\n <div className={styles.connectDocspace}>\n <Text className={styles.connectDocspaceDescription}>\n {t(\"AISettings:ConnectProductToYourDataAndTools\", {",
+      "context": "visible\n displayType={ModalDialogType.aside}\n onClose={onClose}\n withBodyScroll\n >\n <ModalDialog.Header>{t(\"Common:MCPServer\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <form\n onSubmit={onSubmitAction}\n className={styles.bodyContainer}\n data-testid=\"add-mcp-form\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/dialogs/edit/index.tsx",
       "line_number": 148,
-      "context": "visible\n displayType={ModalDialogType.aside}\n onClose={onClose}\n withBodyScroll\n >\n <ModalDialog.Header>{t(\"Common:MCPServer\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <form onSubmit={onSubmitAction} className={styles.bodyContainer}>\n <div className={styles.connectDocspace}>\n <Text className={styles.connectDocspaceDescription}>\n {t(\"AISettings:ConnectProductToYourDataAndTools\", {",
+      "context": "visible\n displayType={ModalDialogType.aside}\n onClose={onClose}\n withBodyScroll\n >\n <ModalDialog.Header>{t(\"Common:MCPServer\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <form\n onSubmit={onSubmitAction}\n className={styles.bodyContainer}\n data-testid=\"edit-mcp-form\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/hooks/useBaseParams.tsx",
-      "line_number": 169,
-      "context": "scale\n hasError={!!urlError}\n />\n <Text className={styles.fieldHint}>\n {t(\"AISettings:MCPServerIntegrationURLHint\", {\n mcpServer: t(\"Common:MCPServer\"),\n })}\n </Text>\n </FieldContainer>\n <FieldContainer\n labelText={t(\"Common:Description\")}",
+      "line_number": 171,
+      "context": "hasError={!!urlError}\n testId=\"mcp-url-input\"\n />\n <Text className={styles.fieldHint}>\n {t(\"AISettings:MCPServerIntegrationURLHint\", {\n mcpServer: t(\"Common:MCPServer\"),\n })}\n </Text>\n </FieldContainer>\n <FieldContainer\n labelText={t(\"Common:Description\")}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/index.tsx",
-      "line_number": 258,
-      "context": "onClick={showAddDialog}\n isDisabled={isMCPActionsDisabled}\n tooltipText={\n isMCPActionsDisabled\n ? t(\"AISettings:ToUseAddProvider\", {\n value: t(\"Common:MCPServer\"),\n aiProvider: t(\"Common:AIProvider\"),\n })\n : undefined\n }\n />",
+      "line_number": 251,
+      "context": ") : null}\n <Button\n primary\n size={ButtonSize.small}\n label={t(\"AISettings:AddMCPServer\", {\n mcpServer: t(\"Common:MCPServer\"),\n })}\n scale={false}\n className={styles.addProviderButton}\n onClick={showAddDialog}\n isDisabled={isMCPActionsDisabled}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/index.tsx",
+      "line_number": 251,
+      "context": ") : null}\n <Button\n primary\n size={ButtonSize.small}\n label={t(\"AISettings:AddMCPServer\", {\n mcpServer: t(\"Common:MCPServer\"),\n })}\n scale={false}\n className={styles.addProviderButton}\n onClick={showAddDialog}\n isDisabled={isMCPActionsDisabled}",
       "module": "/packages/client"
     },
     {

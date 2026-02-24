@@ -32,7 +32,8 @@ import React, { useCallback } from "react";
 import { frameCallEvent } from "@docspace/shared/utils/common";
 import { RoomsType } from "@docspace/shared/enums";
 import { getPrimaryLink } from "@docspace/shared/api/rooms";
-import RoomSelector from "@docspace/shared/selectors/Room";
+import RoomSelector from "@docspace/ui-kit/selectors/Room";
+import type { FolderDtoInteger } from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
 import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
 
 import type { TGetRooms } from "@docspace/shared/api/rooms/types";
@@ -157,7 +158,7 @@ export default function RoomSelectorClient({
 			{...roomTypeProps}
 			{...searchProps}
 			initHasNextPage={total > pageCount}
-			initItems={folders}
+			initItems={folders as unknown as FolderDtoInteger[]}
 			initTotal={total}
 			isMultiSelect={false}
 			onSubmit={onSubmit}

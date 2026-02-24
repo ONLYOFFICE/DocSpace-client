@@ -29,92 +29,92 @@ import { type FC } from "react";
 import type { TFileLink } from "../../../api/files/types";
 
 import {
-	ComboBox,
-	ComboBoxSize,
-	type TOption,
+  ComboBox,
+  ComboBoxSize,
+  type TOption,
 } from "@docspace/ui-kit/components/combobox";
 import { AccessRightSelect } from "@docspace/ui-kit/components/access-right-select";
 
 import { IconDisplay } from "./IconDisplay";
 
 export interface AccessRightSelectorProps {
-	isLoaded: boolean;
-	isRoomsLink: boolean;
-	isFolder: boolean;
-	isArchiveFolder: boolean;
-	isMobileViewLink: boolean;
+  isLoaded: boolean;
+  isRoomsLink: boolean;
+  isFolder: boolean;
+  isArchiveFolder: boolean;
+  isMobileViewLink: boolean;
 
-	link: TFileLink;
-	accessOptions: TOption[];
-	roomAccessOptions?: TOption[];
-	selectedAccessOption?: TOption;
-	roomSelectedOptions?: TOption;
+  link: TFileLink;
+  accessOptions: TOption[];
+  roomAccessOptions?: TOption[];
+  selectedAccessOption?: TOption;
+  roomSelectedOptions?: TOption;
 
-	changeAccessOption: (item: TOption, link: TFileLink) => void;
+  changeAccessOption: (item: TOption, link: TFileLink) => void;
 }
 
 export const AccessRightSelector: FC<AccessRightSelectorProps> = ({
-	isLoaded,
-	isRoomsLink,
-	isFolder,
-	isArchiveFolder,
-	isMobileViewLink,
-	link,
-	accessOptions,
-	roomAccessOptions,
-	selectedAccessOption,
-	roomSelectedOptions,
-	changeAccessOption,
+  isLoaded,
+  isRoomsLink,
+  isFolder,
+  isArchiveFolder,
+  isMobileViewLink,
+  link,
+  accessOptions,
+  roomAccessOptions,
+  selectedAccessOption,
+  roomSelectedOptions,
+  changeAccessOption,
 }) => {
-	if (accessOptions.length === 1 || roomAccessOptions?.length === 1) {
-		const option =
-			isRoomsLink || isFolder ? roomSelectedOptions : selectedAccessOption;
+  if (accessOptions.length === 1 || roomAccessOptions?.length === 1) {
+    const option =
+      isRoomsLink || isFolder ? roomSelectedOptions : selectedAccessOption;
 
-		return <IconDisplay option={option ?? ({} as TOption)} />;
-	}
+    return <IconDisplay option={option ?? ({} as TOption)} />;
+  }
 
-	if (isRoomsLink || isFolder) {
-		return (
-			<AccessRightSelect
-				fillIcon
-				modernView
-				topSpace={16}
-				type="onlyIcon"
-				noSelect={false}
-				directionY="both"
-				usePortalBackdrop
-				manualWidth="300px"
-				isAside={isMobileViewLink}
-				withBlur={isMobileViewLink}
-				isMobileView={isMobileViewLink}
-				fixedDirection={isMobileViewLink}
-				shouldShowBackdrop={isMobileViewLink}
-				accessOptions={roomAccessOptions ?? []}
-				onSelect={(item) => changeAccessOption(item, link)}
-				selectedOption={roomSelectedOptions ?? ({} as TOption)}
-				isDisabled={isLoaded || isArchiveFolder}
-			/>
-		);
-	}
+  if (isRoomsLink || isFolder) {
+    return (
+      <AccessRightSelect
+        fillIcon
+        modernView
+        topSpace={16}
+        type="onlyIcon"
+        noSelect={false}
+        directionY="both"
+        usePortalBackdrop
+        manualWidth="300px"
+        isAside={isMobileViewLink}
+        withBlur={isMobileViewLink}
+        isMobileView={isMobileViewLink}
+        fixedDirection={isMobileViewLink}
+        shouldShowBackdrop={isMobileViewLink}
+        accessOptions={roomAccessOptions ?? []}
+        onSelect={(item) => changeAccessOption(item, link)}
+        selectedOption={roomSelectedOptions ?? ({} as TOption)}
+        isDisabled={isLoaded || isArchiveFolder}
+      />
+    );
+  }
 
-	return (
-		<ComboBox
-			fillIcon
-			modernView
-			scaled={false}
-			type="onlyIcon"
-			noSelect={false}
-			directionY="both"
-			showDisabledItems
-			manualWidth="auto"
-			withBackdrop={false}
-			scaledOptions={false}
-			options={accessOptions}
-			size={ComboBoxSize.content}
-			isDisabled={isLoaded}
-			selectedOption={selectedAccessOption ?? ({} as TOption)}
-			onSelect={(item) => changeAccessOption(item, link)}
-			useImageIcon
-		/>
-	);
+  return (
+    <ComboBox
+      fillIcon
+      modernView
+      scaled={false}
+      type="onlyIcon"
+      noSelect={false}
+      directionY="both"
+      showDisabledItems
+      manualWidth="auto"
+      withBackdrop={false}
+      scaledOptions={false}
+      options={accessOptions}
+      size={ComboBoxSize.content}
+      isDisabled={isLoaded}
+      selectedOption={selectedAccessOption ?? ({} as TOption)}
+      onSelect={(item) => changeAccessOption(item, link)}
+      useImageIcon
+    />
+  );
 };

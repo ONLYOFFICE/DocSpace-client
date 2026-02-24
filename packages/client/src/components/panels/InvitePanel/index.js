@@ -28,7 +28,12 @@ import { useEffect, useState, useMemo, useRef } from "react";
 import { observer, inject } from "mobx-react";
 import { withTranslation, Trans } from "react-i18next";
 import { useNavigate } from "react-router";
-import { now, addToDate, parseToDateTime, isAfter } from "@docspace/ui-kit/utils/date";
+import {
+  now,
+  addToDate,
+  parseToDateTime,
+  isAfter,
+} from "@docspace/ui-kit/utils/date";
 
 import {
   EmployeeType,
@@ -50,7 +55,7 @@ import {
 } from "@docspace/ui-kit/components/modal-dialog";
 import { Link } from "@docspace/ui-kit/components/link";
 import { checkIfAccessPaid } from "@docspace/shared/utils/filterPaidRoleOptions";
-import PeopleSelector from "@docspace/shared/selectors/People";
+import PeopleSelector from "@docspace/ui-kit/selectors/People";
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
 import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
 import { fixAccess } from "./utils";

@@ -1,0 +1,28 @@
+{
+  "key_path": "NotModified",
+  "content": "Not modified",
+  "content_en_sha1_hash": "27c5bb55284b632b578c9271b03c51e9f2345d2b",
+  "created_at": "2026-02-18T14:56:28.605Z",
+  "updated_at": "2026-02-19T13:36:32.709Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/DefaultTemplates/TemplatesRow.tsx",
+      "line_number": 163,
+      "context": "const filterParam = getFilterParam?.(item.fileExst);\n \n const locale = getCookie(LANGUAGE) ?? culture ?? \"en\";\n const lastModified = item.lastModified\n ? getCorrectDate(locale, item.lastModified)\n : t(\"Settings:NotModified\");\n \n return (\n <div\n className={styles.templateRow}\n data-testid={`default-template-row-${index}`}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

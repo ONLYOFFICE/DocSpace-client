@@ -1,0 +1,28 @@
+{
+  "key_path": "DisablingRoomGroupsDescription",
+  "content": "Groups will be saved but hidden. Re-enable in Profile, File management.",
+  "content_en_sha1_hash": "2ceef816d8c798e357707dc2a86437ae22b42d10",
+  "created_at": "2026-02-19T13:36:24.873Z",
+  "updated_at": "2026-02-19T13:36:32.422Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/EditRoomGroupsDialog/index.tsx",
+      "line_number": 420,
+      "context": "{t(\"GroupingRooms:DisablingRoomGroups\")}\n </span>\n }\n bodyText={\n <span style={{ display: \"block\", marginTop: \"2px\" }}>\n {t(\"GroupingRooms:DisablingRoomGroupsDescription\")}\n </span>\n }\n iconName={InfoIcon}\n onClose={onDismissTooltip}\n />",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

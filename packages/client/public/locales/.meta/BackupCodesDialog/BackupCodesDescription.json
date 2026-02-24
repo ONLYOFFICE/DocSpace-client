@@ -3,7 +3,7 @@
   "content": "Use backup codes to sign in when you don't have access to your phone.",
   "content_en_sha1_hash": "1a983db387cd4c845ce7fe6768d78174b6e45c37",
   "created_at": "2025-05-19T21:30:57.028Z",
-  "updated_at": "2025-05-24T14:29:49.874Z",
+  "updated_at": "2026-02-19T13:36:32.314Z",
   "comment": {
     "text": "Use backup codes as an alternative signing-in method when phone access is unavailable. This message assists users in understanding their option to sign in securely using pre-generated backup codes. It appears in a ModalDialog component.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/BackupCodesDialog/index.js",
-      "line_number": 107,
-      "context": ">\n <ModalDialog.Header>{t(\"BackupCodesTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <StyledBodyContent id=\"backup-codes-print-content\">\n <Text className=\"backup-codes-description-one\" lineHeight=\"20px\">\n {t(\"BackupCodesDescription\")}\n </Text>\n <Text className=\"backup-codes-description-two\" lineHeight=\"20px\">\n {t(\"BackupCodesSecondDescription\")}\n </Text>",
+      "line_number": 84,
+      "context": ">\n <ModalDialog.Header>{t(\"BackupCodesTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div id=\"backup-codes-print-content\">\n <Text className=\"backup-codes-description-one\" lineHeight=\"20px\">\n {t(\"BackupCodesDescription\")}\n </Text>\n <Text className=\"backup-codes-description-two\" lineHeight=\"20px\">\n {t(\"BackupCodesSecondDescription\")}\n </Text>",
       "module": "/packages/client"
     }
   ],

@@ -22,6 +22,7 @@ describe("StandalonePage", () => {
     acceptPaymentsLicense: vi.fn(),
     isLicenseCorrect: true,
     salesEmail: "sales@example.com",
+    feedbackAndSupportUrl: "https://example.com/support",
     isLicenseDateExpired: false,
     isDeveloper: false,
     buyUrl: "https://example.com/buy",
@@ -83,8 +84,12 @@ describe("StandalonePage", () => {
 
   it("renders ContactContainer with salesEmail", () => {
     render(<StandalonePage {...defaultProps} />);
-    expect(screen.getByText("ContactUs")).toBeInTheDocument();
-    expect(screen.getByText(defaultProps.salesEmail)).toBeInTheDocument();
+    expect(
+      screen.getByText("UpgradeToProBannerInformationPurchase"),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText("UpgradeToProBannerInformationSupport"),
+    ).toBeInTheDocument();
   });
 
   it("passes correct props to TrialContainer when in trial mode", () => {

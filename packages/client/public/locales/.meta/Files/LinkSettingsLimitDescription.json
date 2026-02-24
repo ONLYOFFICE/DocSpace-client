@@ -1,0 +1,28 @@
+{
+  "key_path": "LinkSettingsLimitDescription",
+  "content": "Once this limit is reached, registration via the link will become unavailable",
+  "content_en_sha1_hash": "468b4a2c54f910ee75e453d4d0578511c5f82b2d",
+  "created_at": "2026-02-19T13:36:27.554Z",
+  "updated_at": "2026-02-19T13:36:32.538Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/LinkSettingsPanel/index.tsx",
+      "line_number": 261,
+      "context": "[styles.isError]: showLimitError,\n })}\n >\n {showLimitError\n ? t(\"Files:LinkSettingsLimitExceeded\")\n : t(\"Files:LinkSettingsLimitDescription\")}\n </Text>\n <div className={styles.joinedUsersBlock}>\n <div className={styles.joinedUsersCell}>\n <ReactSVG\n className={styles.joinedUsersIcon}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

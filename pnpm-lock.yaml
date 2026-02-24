@@ -87,6 +87,9 @@ importers:
       '@types/react-text-mask':
         specifier: 5.4.14
         version: 5.4.14
+      axios:
+        specifier: ^1.13.5
+        version: 1.13.5
       classnames:
         specifier: ^2.5.1
         version: 2.5.1
@@ -3613,7 +3616,7 @@ packages:
     version: 3.6.0
 
   '@onlyoffice/docspace-plugin-sdk@file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz':
-    resolution: {integrity: sha512-BK4VnMlr//lsUJ64rLE3uWlIeQTKVnUyT8RI4xPd31Y0FpLHmSnAQwGcA9cUw02XkD0MtYVN6TXLbhTqFdxr0w==, tarball: file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz}
+    resolution: {integrity: sha512-fzfybmD5TisVXhGOh34Or168LPoA01tR3cX7X47phptNWwH7bTdfoOVx/J371SQ9GVTsVwBJiywoNNrTCm5/oQ==, tarball: file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz}
     version: 2.0.0
     hasBin: true
 

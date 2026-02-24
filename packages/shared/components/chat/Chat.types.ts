@@ -26,7 +26,7 @@
 import type React from "react";
 
 import type { TContent, TMessage, TToolCallContent } from "../../api/ai/types";
-import type { TGetIcon } from "../../selectors/utils/types";
+import type { TGetIcon } from "@docspace/ui-kit/selectors/utils/types";
 import type { TFile } from "../../api/files/types";
 
 import type useToolsSettings from "./hooks/useToolsSettings";

@@ -62,6 +62,7 @@ export const LinkTypeSelector: FC<AccessOptionProps> = ({
       type="onlyIcon"
       directionY="both"
       manualWidth="auto"
+      withBackdrop={false}
       scaled={false}
       noSelect={false}
       options={options}

@@ -1,0 +1,28 @@
+{
+  "key_path": "AllRooms",
+  "content": "All rooms",
+  "content_en_sha1_hash": "046a6d7fae6ae6dc9f6f8795ac473032bcddb586",
+  "created_at": "2026-02-19T13:36:04.885Z",
+  "updated_at": "2026-02-19T13:36:32.448Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/RoomGroupingDialog/index.tsx",
+      "line_number": 120,
+      "context": "<div\n className={classNames(styles.tagName, {\n [styles.tagNameTablet]: !isDesktopView,\n })}\n >\n {t(\"Common:AllRooms\")}\n </div>\n </div>\n \n <div\n className={classNames(styles.tag, {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

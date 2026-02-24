@@ -3,7 +3,7 @@
   "content": "Invalid link",
   "content_en_sha1_hash": "3aaeaeb6ec3f8154506ce18b333531c275dcb035",
   "created_at": "2025-05-19T21:30:45.936Z",
-  "updated_at": "2025-12-22T14:25:01.375Z",
+  "updated_at": "2026-02-19T13:36:32.684Z",
   "comment": {
     "text": "This translation key is used to display an error message when a link provided is invalid. It appears as a message shown by the docEditor component, typically in response to user interactions such as clicking on a button or attempting to load content.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/View/index.tsx",
-      "line_number": 213,
+      "line_number": 211,
       "context": "const guestShareLinkInvalid = sessionStorage.getItem(\n \"guestShareLinkInvalid\",\n );\n \n if (guestShareLinkInvalid === \"true\") {\n toastr.error(t(\"Common:InvalidLink\"));\n sessionStorage.removeItem(\"guestShareLinkInvalid\");\n }\n }, []);\n \n const [isLoading, setIsLoading] = React.useState(false);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/doceditor/src/hooks/useEditorEvents.ts",
-      "line_number": 201,
+      "line_number": 213,
       "context": "docEditor = window.DocEditor.instances[EDITOR_ID];\n \n fixSize();\n \n if (errorMessage || isSkipError)\n return docEditor?.showMessage?.(errorMessage || t(\"Common:InvalidLink\"));\n \n console.log(\"ONLYOFFICE Document Editor is ready\", docEditor);\n const url = window.location.href;\n \n const index = url.indexOf(\"#message/\");",
       "module": "/packages/doceditor"
     },
@@ -43,7 +43,7 @@
     {
       "file_path": "/packages/shared/pages/PublicRoom/PublicRoomError/index.tsx",
       "line_number": 40,
-      "context": "import ErrorContainer from \"../../../components/error-container/ErrorContainer\";\n \n const PublicRoomError = ({ isInvalid }: { isInvalid?: boolean }) => {\n const { t, ready } = useTranslation([\"Errors\", \"Common\"]);\n const headerText = isInvalid\n ? t(\"Common:InvalidLink\")\n : t(\"Common:ExpiredLink\");\n const bodyText = isInvalid\n ? t(\"Common:LinkDoesNotExist\")\n : t(\"Common:LinkHasExpired\");",
+      "context": "import ErrorContainer from \"@docspace/ui-kit/components/error-container/ErrorContainer\";\n \n const PublicRoomError = ({ isInvalid }: { isInvalid?: boolean }) => {\n const { t, ready } = useTranslation([\"Errors\", \"Common\"]);\n const headerText = isInvalid\n ? t(\"Common:InvalidLink\")\n : t(\"Common:ExpiredLink\");\n const bodyText = isInvalid\n ? t(\"Common:LinkDoesNotExist\")\n : t(\"Common:LinkHasExpired\");",
       "module": "/packages/shared"
     }
   ],

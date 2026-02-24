@@ -3,7 +3,7 @@
   "content": "Allowed characters",
   "content_en_sha1_hash": "ac77db038821c031371dfa5b23843ccca5ae915f",
   "created_at": "2025-05-19T21:30:42.982Z",
-  "updated_at": "2025-12-17T14:56:20.369Z",
+  "updated_at": "2026-02-19T13:36:32.698Z",
   "comment": {
     "text": "This translation key is used to display a tooltip explaining password complexity requirements. It appears as part of a form or input field and provides users with information about allowed characters in their password, helping them understand the security guidelines.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/hooks/useBaseParams.tsx",
-      "line_number": 145,
+      "line_number": 146,
       "context": "className={classNames(styles.fieldHint, {\n [styles.errorText]: hasError,\n })}\n >\n {hasError\n ? `${t(\"Common:AllowedCharacters\")}: ${ALLOWED_MCP_CHARACTERS}`\n : t(\"AISettings:ProviderNameInputHint\")}\n </Text>\n </FieldContainer>\n <FieldContainer\n labelText={t(\"AISettings:IntegrationURL\")}",
       "module": "/packages/client"
     },

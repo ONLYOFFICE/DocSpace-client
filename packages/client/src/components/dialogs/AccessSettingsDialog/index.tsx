@@ -36,14 +36,11 @@ import {
 } from "@docspace/ui-kit/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 
-import DialogsStore from "SRC_DIR/store/DialogsStore";
-
 import styles from "./AccessSettingsDialog.module.scss";
 
 type AccessSettingsDialogProps = {
-  accessSettingsDialogVisible: DialogsStore["accessSettingsDialogVisible"];
-  setAccessSettingsDialogVisible: DialogsStore["setAccessSettingsDialogVisible"];
-  onSubmit?: () => void;
+  accessSettingsDialogVisible: boolean;
+  setAccessSettingsDialogVisible: (visible: boolean) => void;
 };
 
 const AccessSettingsDialog = ({

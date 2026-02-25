@@ -76,6 +76,7 @@ const CreateEvent = ({
 	openOnNewPage,
 	openEditor,
 	createFile,
+	checkAccessSettingsDialog,
 
 	isFrame,
 	frameConfig,
@@ -142,6 +143,7 @@ const CreateEvent = ({
 
 						clearActiveOperations(null, folderIds);
 						onCloseAction();
+						checkAccessSettingsDialog();
 					});
 			} else {
 				try {
@@ -210,6 +212,7 @@ const CreateEvent = ({
 					toastr.error(error);
 				} finally {
 					onCloseAction();
+					checkAccessSettingsDialog();
 				}
 			}
 		},
@@ -230,6 +233,7 @@ const CreateEvent = ({
 			publicRoomKey,
 			createFile,
 			onCloseAction,
+			checkAccessSettingsDialog,
 		],
 	);
 
@@ -318,6 +322,7 @@ export default inject(
 			setEventDialogVisible,
 			setFormCreationInfo,
 			eventDialogVisible,
+			checkAccessSettingsDialog,
 		} = dialogsStore;
 
 		const { keepNewFileName, openOnNewPage } = filesSettingsStore;
@@ -326,6 +331,7 @@ export default inject(
 			setPortalTariff,
 			setEventDialogVisible,
 			eventDialogVisible,
+			checkAccessSettingsDialog,
 			createFile,
 
 			addActiveItems,

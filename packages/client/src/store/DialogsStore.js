@@ -29,6 +29,7 @@ import {
   FilesSelectorFilterTypes,
   ShareAccessRights,
   Events,
+  RoomsType,
 } from "@docspace/shared/enums";
 import { makeAutoObservable, runInAction } from "mobx";
 
@@ -362,6 +363,8 @@ class DialogsStore {
   roomGroups = [];
 
   accessSettingsDialogVisible = false;
+
+  accessSettingsDialogCB = null;
 
   constructor(
     authStore,
@@ -1002,8 +1005,27 @@ class DialogsStore {
     this.formFillingTipsVisible = visible;
   };
 
-  setAccessSettingsDialogVisible = (visible) => {
+  setAccessSettingsDialogVisible = (visible, cb = null) => {
     this.accessSettingsDialogVisible = visible;
+    this.accessSettingsDialogCB = cb;
+  };
+
+  get isVDRRoomWithStealthMode() {
+    const { roomType, stealthMode } = this.selectedFolderStore;
+    const isVDRRoom =
+      roomType === RoomsType.VirtualDataRoom ||
+      this.treeFoldersStore.isVDRRoomRoot;
+
+    return isVDRRoom && stealthMode;
+  }
+
+  checkAccessSettingsDialog = () => {
+    const hideDialog =
+      localStorage.getItem("hideAccessSettingsDialog") === "true";
+
+    if (this.isVDRRoomWithStealthMode && !hideDialog) {
+      this.setAccessSettingsDialogVisible(true);
+    }
   };
 
   setWelcomeFormFillingTipsVisible = (visible) => {

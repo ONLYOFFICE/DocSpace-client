@@ -1177,6 +1177,8 @@ class UploadDataStore {
     if (countUploadingFiles || countConversionFiles) {
       this.handleUploadConflicts(t, toFolderId, newUploadData);
     }
+
+    this.dialogsStore.checkAccessSettingsDialog();
   };
 
   refreshFiles = async (currentFile) => {

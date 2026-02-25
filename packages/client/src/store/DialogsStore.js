@@ -80,6 +80,8 @@ class DialogsStore {
 
   deleteDialogVisible = false;
 
+  stealthModeDialogIsEnable = false;
+
   stealthModeDialogVisible = false;
 
   lifetimeDialogVisible = false;
@@ -359,6 +361,8 @@ class DialogsStore {
 
   roomGroups = [];
 
+  accessSettingsDialogVisible = false;
+
   constructor(
     authStore,
     treeFoldersStore,
@@ -522,9 +526,14 @@ class DialogsStore {
     this.deleteDialogVisible = deleteDialogVisible;
   };
 
-  setStealthModeDialogVisible = (stealthModeDialogVisible, cb) => {
+  setStealthModeDialogVisible = (
+    stealthModeDialogVisible,
+    cb,
+    isEnable = true,
+  ) => {
     this.stealthModeDialogVisible = stealthModeDialogVisible;
     this.stealthModeDialogCB = cb;
+    this.stealthModeDialogIsEnable = isEnable;
   };
 
   setLifetimeDialogVisible = (lifetimeDialogVisible, cb) => {
@@ -991,6 +1000,10 @@ class DialogsStore {
 
   setFormFillingTipsDialog = (visible) => {
     this.formFillingTipsVisible = visible;
+  };
+
+  setAccessSettingsDialogVisible = (visible) => {
+    this.accessSettingsDialogVisible = visible;
   };
 
   setWelcomeFormFillingTipsVisible = (visible) => {

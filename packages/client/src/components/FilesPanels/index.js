@@ -107,6 +107,7 @@ import TemplateGallery from "../TemplateGallery";
 import InfoPanelTemplateGallery from "../TemplateGallery/InfoPanel";
 import PluginSelector from "../PluginSelector";
 import StealthModeDialog from "../dialogs/StealthModeDialog";
+import AccessSettingsDialog from "../dialogs/AccessSettingsDialog";
 
 const Panels = (props) => {
   const {
@@ -201,6 +202,7 @@ const Panels = (props) => {
     arrRoomGroups,
     roomGroupingDialogVisible,
     addRoomToGroupDialogVisible,
+    accessSettingsDialogVisible,
   } = props;
 
   const navigate = useNavigate();
@@ -322,6 +324,9 @@ const Panels = (props) => {
     deleteDialogVisible && <DeleteDialog key="delete-dialog" />,
     lifetimeDialogVisible && <LifetimeDialog key="lifetime-dialog" />,
     stealthModeDialogVisible && <StealthModeDialog key="stealth-mode-dialog" />,
+    accessSettingsDialogVisible && (
+      <AccessSettingsDialog key="access-settings-dialog" />
+    ),
     emptyTrashDialogVisible && <EmptyTrashDialog key="empty-trash-dialog" />,
     downloadDialogVisible && <DownloadDialog key="download-dialog" />,
 
@@ -624,6 +629,7 @@ export default inject(
       setEditRoomGroupsDialogVisible,
       roomGroupingDialogVisible,
       addRoomToGroupDialogVisible,
+      accessSettingsDialogVisible,
     } = dialogsStore;
 
     const { viewAs, setArrRoomGroups, arrRoomGroups } = filesStore;
@@ -767,6 +773,7 @@ export default inject(
       arrRoomGroups,
       roomGroupingDialogVisible,
       addRoomToGroupDialogVisible,
+      accessSettingsDialogVisible,
     };
   },
 )(observer(Panels));

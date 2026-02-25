@@ -48,6 +48,7 @@ type VirtualDataRoomBlockProps = {
   setStealthModeDialogVisible: (
     visible: boolean,
     callback?: () => void,
+    isEnable?: boolean,
   ) => void;
 };
 
@@ -114,15 +115,19 @@ const VirtualDataRoomBlock = ({
 
   const onChangeStealthMode = () => {
     console.log("onChangeStealthMode", stealthModeChecked, isEdit);
-    if (stealthModeChecked) {
-      setRoomParams({ ...roomParams, stealthMode: undefined });
-      setStealthModeChecked(!stealthModeChecked);
-    } else if (isEdit) {
-      setStealthModeDialogVisible(true, () =>
-        setStealthModeChecked(!stealthModeChecked),
+
+    if (isEdit) {
+      setStealthModeDialogVisible(
+        true,
+        () => setStealthModeChecked(!stealthModeChecked),
+        stealthModeChecked,
       );
     } else {
       setStealthModeChecked(!stealthModeChecked);
+      setRoomParams({
+        ...roomParams,
+        stealthMode: stealthModeChecked ? undefined : true,
+      });
     }
   };
 

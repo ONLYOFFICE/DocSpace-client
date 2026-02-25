@@ -24,96 +24,89 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect } from "react";
-import { Trans, useTranslation } from "react-i18next";
+import React, { useCallback, useState } from "react";
+import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
+
+import { Text } from "@docspace/ui-kit/components/text";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/ui-kit/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { inject, observer } from "mobx-react";
-import { Text } from "@docspace/ui-kit/components";
 
-type StealthModeDialogProps = {
-  visible: boolean;
-  isEnable: boolean;
-  setIsVisible: (visible: boolean) => void;
-  onEnableStealthMode: () => void;
+import DialogsStore from "SRC_DIR/store/DialogsStore";
+
+import styles from "./AccessSettingsDialog.module.scss";
+
+type AccessSettingsDialogProps = {
+  accessSettingsDialogVisible: DialogsStore["accessSettingsDialogVisible"];
+  setAccessSettingsDialogVisible: DialogsStore["setAccessSettingsDialogVisible"];
+  onSubmit?: () => void;
 };
 
-const StealthModeDialog = (props: StealthModeDialogProps) => {
-  const { t, ready } = useTranslation(["Files", "Common"]);
-  const { visible, setIsVisible, isEnable, onEnableStealthMode } = props;
+const AccessSettingsDialog = ({
+  accessSettingsDialogVisible,
+  setAccessSettingsDialogVisible,
+  onSubmit,
+}: AccessSettingsDialogProps) => {
+  const { t } = useTranslation(["Files", "Common"]);
+  const [isChecked, setIsChecked] = useState(false);
+
+  const onChangeCheckbox = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setIsChecked(e.target.checked);
+    },
+    [],
+  );
 
   const onClose = () => {
-    setIsVisible(false);
+    setAccessSettingsDialogVisible(false);
   };
 
-  const onEnable = async () => {
-    onEnableStealthMode();
-    onClose();
+  const handleSubmit = () => {
+    if (isChecked) {
+      localStorage.setItem("hideAccessSettingsDialog", "true");
+    }
+    onSubmit?.();
+    setAccessSettingsDialogVisible(false);
   };
-
-  const onKeyUp = (e: KeyboardEvent) => {
-    if (e.key === "Enter") onEnable();
-    if (e.key === "Esc" || e.key === "Escape") onClose();
-  };
-
-  useEffect(() => {
-    document.addEventListener("keyup", onKeyUp, false);
-
-    return () => {
-      document.removeEventListener("keyup", onKeyUp, false);
-    };
-  }, []);
 
   return (
     <ModalDialog
-      isLoading={!ready}
-      visible={visible}
+      visible={accessSettingsDialogVisible}
+      autoMaxHeight
       onClose={onClose}
       displayType={ModalDialogType.modal}
     >
-      <ModalDialog.Header>{t("Common:Confirmation")}</ModalDialog.Header>
+      <ModalDialog.Header>{t("Files:AccessSettings")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text fontSize="13px" fontWeight={400}>
-          {isEnable ? (
-            t("Files:DisableStealthModeConfirmation")
-          ) : (
-            <Trans
-              t={t}
-              i18nKey="Files:StealthModeConfirmation"
-              components={{
-                1: (
-                  <strong
-                    key="default-provider-warning-strong"
-                    style={{ fontWeight: "600" }}
-                  />
-                ),
-              }}
-            />
-          )}
+        <Text className={styles.description}>
+          {t("Files:StealthModeAccessDescription")}
         </Text>
+        <Checkbox
+          key="dont-show-again"
+          label={t("Common:DontShowMessage")}
+          isChecked={isChecked}
+          onChange={onChangeCheckbox}
+        />
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
-          className="delete-button"
-          key="DeletePortalBtn"
-          label={t("Common:Enable")}
+          className="submit"
+          label={t("Files:AccessSettings")}
           size={ButtonSize.normal}
-          scale
           primary
-          onClick={onEnable}
-          testId="submit_delete_portal_button"
+          scale
+          onClick={handleSubmit}
         />
         <Button
           className="cancel-button"
-          key="CancelDeleteBtn"
           label={t("Common:CancelButton")}
           size={ButtonSize.normal}
           scale
           onClick={onClose}
-          testId="cancel_delete_portal_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>
@@ -121,17 +114,11 @@ const StealthModeDialog = (props: StealthModeDialogProps) => {
 };
 
 export default inject(({ dialogsStore }: TStore) => {
-  const {
-    stealthModeDialogIsEnable: isEnable,
-    stealthModeDialogVisible: visible,
-    setStealthModeDialogVisible: setIsVisible,
-    stealthModeDialogCB: onEnableStealthMode,
-  } = dialogsStore;
+  const { accessSettingsDialogVisible, setAccessSettingsDialogVisible } =
+    dialogsStore;
 
   return {
-    visible,
-    setIsVisible,
-    isEnable,
-    onEnableStealthMode,
+    accessSettingsDialogVisible,
+    setAccessSettingsDialogVisible,
   };
-})(observer(StealthModeDialog));
+})(observer(AccessSettingsDialog));

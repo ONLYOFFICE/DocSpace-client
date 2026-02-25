@@ -41,6 +41,7 @@ import styles from "./AccessSettingsDialog.module.scss";
 type AccessSettingsDialogProps = {
   accessSettingsDialogVisible: boolean;
   setAccessSettingsDialogVisible: (visible: boolean) => void;
+  onSubmit?: () => void;
 };
 
 const AccessSettingsDialog = ({

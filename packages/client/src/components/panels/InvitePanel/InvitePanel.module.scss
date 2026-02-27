@@ -292,14 +292,15 @@
 
   .append {
     display: none;
-
-    &.isShowCross {
-      display: flex;
-    }
-
     align-items: center;
     padding-inline-end: 8px;
     cursor: default;
+  }
+
+  &.isShowCross {
+    .append {
+      display: flex;
+    }
   }
 
   @include mixins.common-input-styles;

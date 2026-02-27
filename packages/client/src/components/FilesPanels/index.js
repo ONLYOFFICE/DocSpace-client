@@ -53,6 +53,7 @@ import {
   EmbeddingPanel,
   ConversionPanel,
   ShareFormPanel,
+  AccessSettingsPanel,
 } from "../panels";
 import {
   ConnectDialog,
@@ -203,6 +204,7 @@ const Panels = (props) => {
     roomGroupingDialogVisible,
     addRoomToGroupDialogVisible,
     accessSettingsDialogVisible,
+    accessSettingsPanelVisible,
   } = props;
 
   const navigate = useNavigate();
@@ -326,6 +328,9 @@ const Panels = (props) => {
     stealthModeDialogVisible && <StealthModeDialog key="stealth-mode-dialog" />,
     accessSettingsDialogVisible && (
       <AccessSettingsDialog key="access-settings-dialog" />
+    ),
+    accessSettingsPanelVisible && (
+      <AccessSettingsPanel key="access-settings-panel" />
     ),
     emptyTrashDialogVisible && <EmptyTrashDialog key="empty-trash-dialog" />,
     downloadDialogVisible && <DownloadDialog key="download-dialog" />,
@@ -630,6 +635,7 @@ export default inject(
       roomGroupingDialogVisible,
       addRoomToGroupDialogVisible,
       accessSettingsDialogVisible,
+      accessSettingsPanelVisible,
     } = dialogsStore;
 
     const { viewAs, setArrRoomGroups, arrRoomGroups } = filesStore;
@@ -774,6 +780,7 @@ export default inject(
       roomGroupingDialogVisible,
       addRoomToGroupDialogVisible,
       accessSettingsDialogVisible,
+      accessSettingsPanelVisible,
     };
   },
 )(observer(Panels));

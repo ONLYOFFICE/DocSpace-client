@@ -806,6 +806,9 @@
   --info-panel-links-color: #{$light-blue-main};
   --info-panel-links-primary-color: #{$gray-text};
   --info-panel-members-create-link: #{$black};
+  --files-panels-sharing-border-bottom: 1px solid #{$gray-light-mid};
+  --create-edit-room-dialog-description-color: #{$gray};
+  --create-edit-group-dialog-icon-fill: #{$gray};
 }
 
 .dark {
@@ -818,6 +821,9 @@
   --info-panel-links-color: #{$light-blue-main};
   --info-panel-links-primary-color: #{$dark-gray-dark};
   --info-panel-members-create-link: #{$gray-dark};
+  --files-panels-sharing-border-bottom: 1px solid #{$gray-dark-strong};
+  --create-edit-room-dialog-description-color: #{$gray-dark};
+  --create-edit-group-dialog-icon-fill: #{$gray-dark};
 }
 
 .light {

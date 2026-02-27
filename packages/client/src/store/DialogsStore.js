@@ -366,6 +366,10 @@ class DialogsStore {
 
   accessSettingsDialogCB = null;
 
+  accessSettingsPanelVisible = true;
+
+  accessSettingsPanelItem = null;
+
   constructor(
     authStore,
     treeFoldersStore,
@@ -1008,6 +1012,11 @@ class DialogsStore {
   setAccessSettingsDialogVisible = (visible, cb = null) => {
     this.accessSettingsDialogVisible = visible;
     this.accessSettingsDialogCB = cb;
+  };
+
+  setAccessSettingsPanelVisible = (visible, item = null) => {
+    this.accessSettingsPanelVisible = visible;
+    this.accessSettingsPanelItem = item ?? this.accessSettingsPanelItem;
   };
 
   get isVDRRoomWithStealthMode() {

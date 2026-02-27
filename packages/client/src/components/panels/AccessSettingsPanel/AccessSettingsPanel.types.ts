@@ -24,26 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import EmbeddingPanel from "./EmbeddingPanel";
-import VersionHistoryPanel from "./VersionHistoryPanel";
-import UploadPanel from "./UploadPanel";
-import HotkeysPanel from "./HotkeysPanel";
-import InvitePanel from "./InvitePanel";
-import EditLinkPanel from "./EditLinkPanel";
-import ConversionPanel from "./ConversionPanel";
-import ShareFormPanel from "./ShareFormPanel";
-import AccessSettingsPanel from "./AccessSettingsPanel";
+import type { TFile, TFolder } from "@docspace/shared/api/files/types";
+import type { TUser } from "@docspace/shared/api/people/types";
 
-export {
-  EmbeddingPanel,
-  VersionHistoryPanel,
-  UploadPanel,
-  HotkeysPanel,
-  InvitePanel,
-  EditLinkPanel,
-  ConversionPanel,
-  ShareFormPanel,
-  AccessSettingsPanel,
+export type AccessSettingsPanelProps = {
+  visible: boolean;
+  item: TFile | TFolder;
+  currentUser?: TUser;
+  setAccessSettingsPanelVisible: (
+    visible: boolean,
+    item?: TFile | TFolder,
+  ) => void;
+  getFileIcon?: (fileExst: string) => string;
+  roomId?: string | number;
 };
-
-export default ConversionPanel;

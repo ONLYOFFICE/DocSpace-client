@@ -28,6 +28,10 @@ import React, { useCallback, useState } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
+import type { TFile, TFolder } from "@docspace/shared/api/files/types";
+import type { TRoom } from "@docspace/shared/api/rooms/types";
+import type { TUser } from "@docspace/shared/api/people/types";
+
 import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import {
@@ -41,13 +45,20 @@ import styles from "./AccessSettingsDialog.module.scss";
 type AccessSettingsDialogProps = {
   accessSettingsDialogVisible: boolean;
   setAccessSettingsDialogVisible: (visible: boolean) => void;
+  setAccessSettingsPanelVisible: (
+    visible: boolean,
+    item?: TFile | TFolder | TRoom | null,
+  ) => void;
   onSubmit?: () => void;
+  item?: TFile | TFolder | TRoom;
 };
 
 const AccessSettingsDialog = ({
   accessSettingsDialogVisible,
   setAccessSettingsDialogVisible,
+  setAccessSettingsPanelVisible,
   onSubmit,
+  item,
 }: AccessSettingsDialogProps) => {
   const { t } = useTranslation(["Files", "Common"]);
   const [isChecked, setIsChecked] = useState(false);
@@ -67,8 +78,9 @@ const AccessSettingsDialog = ({
     if (isChecked) {
       localStorage.setItem("hideAccessSettingsDialog", "true");
     }
-    onSubmit?.();
     setAccessSettingsDialogVisible(false);
+    setAccessSettingsPanelVisible(true, item);
+    onSubmit?.();
   };
 
   return (
@@ -112,11 +124,15 @@ const AccessSettingsDialog = ({
 };
 
 export default inject(({ dialogsStore }: TStore) => {
-  const { accessSettingsDialogVisible, setAccessSettingsDialogVisible } =
-    dialogsStore;
+  const {
+    accessSettingsDialogVisible,
+    setAccessSettingsDialogVisible,
+    setAccessSettingsPanelVisible,
+  } = dialogsStore;
 
   return {
     accessSettingsDialogVisible,
     setAccessSettingsDialogVisible,
+    setAccessSettingsPanelVisible,
   };
 })(observer(AccessSettingsDialog));

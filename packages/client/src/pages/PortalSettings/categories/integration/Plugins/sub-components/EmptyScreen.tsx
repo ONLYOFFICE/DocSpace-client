@@ -27,35 +27,13 @@
 import EmptyScreenPluginsUrl from "PUBLIC_DIR/images/emptyview/empty.plugins.light.svg?url";
 import EmptyScreenPluginsDarkUrl from "PUBLIC_DIR/images/emptyview/empty.plugins.dark.svg?url";
 
-import React from "react";
-import styled from "styled-components";
-
-import { mobile } from "@docspace/shared/utils";
-
 import { EmptyScreenContainer } from "@docspace/ui-kit/components/empty-screen-container";
 
 import { PluginsEmptyScreen } from "../Plugins.types";
+import styles from "../Plugins.module.scss";
 
 import Dropzone from "./Dropzone";
 import UploadDescription from "./UploadDescription";
-
-const StyledEmptyScreen = styled(EmptyScreenContainer)`
-  .ec-buttons {
-    width: 100%;
-  }
-
-  .ec-image {
-    width: 200px;
-    height: 140px;
-  }
-
-  @media ${mobile} {
-    .ec-image {
-      width: 150px;
-      height: 105px;
-    }
-  }
-`;
 
 const EmptyScreen = ({
   t,
@@ -70,7 +48,8 @@ const EmptyScreen = ({
     : EmptyScreenPluginsDarkUrl;
 
   return (
-    <StyledEmptyScreen
+    <EmptyScreenContainer
+      className={styles.emptyScreen}
       headerText={t("NoPlugins")}
       descriptionText={
         withUpload ? (

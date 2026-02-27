@@ -24,22 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import { ReactNode } from "react";
 
-import styles from "../Plugins.module.scss";
-import { ListLoaderProps } from "../Plugins.types";
-
-const ListLoader = ({ withUpload }: ListLoaderProps) => {
-  return (
-    <>
-      {withUpload ? <RectangleSkeleton width="144px" height="32px" /> : null}
-      <div className={styles.pluginListContainer}>
-        <RectangleSkeleton width="340px" height="135px" />
-        <RectangleSkeleton width="340px" height="135px" />
-        <RectangleSkeleton width="340px" height="135px" />
-      </div>
-    </>
-  );
-};
-
-export default ListLoader;
+export interface InfoBarProps {
+  /** Title text displayed in the header */
+  title?: string | ReactNode;
+  /** Description text or content displayed in the body */
+  description?: string | ReactNode;
+  /** Icon to display in the header (default: info icon) */
+  icon?: string;
+  /** Additional CSS class name */
+  className?: string;
+  /** Children elements to render in the body */
+  children?: ReactNode;
+  /** Data test ID for testing */
+  dataTestId?: string;
+}

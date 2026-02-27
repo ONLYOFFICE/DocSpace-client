@@ -24,22 +24,66 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import { useState, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 
-import styles from "../Plugins.module.scss";
-import { ListLoaderProps } from "../Plugins.types";
+import { toastr } from "@docspace/ui-kit/components";
 
-const ListLoader = ({ withUpload }: ListLoaderProps) => {
-  return (
-    <>
-      {withUpload ? <RectangleSkeleton width="144px" height="32px" /> : null}
-      <div className={styles.pluginListContainer}>
-        <RectangleSkeleton width="340px" height="135px" />
-        <RectangleSkeleton width="340px" height="135px" />
-        <RectangleSkeleton width="340px" height="135px" />
-      </div>
-    </>
-  );
+import PluginStore from "SRC_DIR/store/PluginStore";
+
+export type UsePluginUploadProps = {
+  addPlugin: PluginStore["addPlugin"];
 };
 
-export default ListLoader;
+const usePluginUpload = ({ addPlugin }: UsePluginUploadProps) => {
+  const { t } = useTranslation(["WebPlugins", "Common"]);
+  const [showCacheWarning, setShowCacheWarning] = useState(false);
+
+  const handleAddPluginResult = useCallback(
+    (result: Awaited<ReturnType<typeof addPlugin>>) => {
+      if (!result) return;
+
+      const { isPluginCompatible, isPluginInCache } = result;
+
+      if (isPluginInCache) {
+        setShowCacheWarning(true);
+        return;
+      }
+
+      if (!isPluginCompatible) {
+        toastr.error(
+          t("PluginIsNotCompatible", {
+            productName: t("Common:ProductName"),
+          }),
+        );
+      } else {
+        toastr.success(t("PluginLoadedSuccessfully"));
+      }
+    },
+    [t],
+  );
+
+  const onDrop = useCallback(
+    async (files: File[]) => {
+      const formData = new FormData();
+
+      formData.append("file", files[0]);
+
+      const result = await addPlugin(formData);
+      handleAddPluginResult(result);
+    },
+    [addPlugin, handleAddPluginResult],
+  );
+
+  const handleCloseCacheWarning = useCallback(() => {
+    setShowCacheWarning(false);
+  }, []);
+
+  return {
+    onDrop,
+    showCacheWarning,
+    handleCloseCacheWarning,
+  };
+};
+
+export default usePluginUpload;

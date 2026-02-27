@@ -35,6 +35,7 @@ export interface PluginDropzoneProps {
   onDrop: <T extends File>(acceptedFiles: T[]) => void;
   isLoading: boolean;
   isDisabled: boolean;
+  isEmptyList?: boolean;
   dataTestId?: string;
 }
 

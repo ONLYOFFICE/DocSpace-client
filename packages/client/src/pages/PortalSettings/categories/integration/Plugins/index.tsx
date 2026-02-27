@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -39,12 +39,10 @@ import PluginItem from "./sub-components/PluginItem";
 import EmptyScreen from "./sub-components/EmptyScreen";
 import ListLoader from "./sub-components/ListLoader";
 import UploadDescription from "./sub-components/UploadDescription";
+import PluginCacheWarningDialog from "./sub-components/PluginCacheWarningDialog";
+import usePluginUpload from "./hooks/usePluginUpload";
 
-import {
-  PluginListContainer,
-  StyledContainer,
-  StyledEmptyContainer,
-} from "./Plugins.styled";
+import styles from "./Plugins.module.scss";
 import { PluginsProps } from "./Plugins.types";
 
 const PluginPage = ({
@@ -65,70 +63,75 @@ const PluginPage = ({
 }: PluginsProps) => {
   const { t, ready } = useTranslation(["WebPlugins", "Common"]);
 
-  const onDrop = (files: File[]) => {
-    const formData = new FormData();
+  const { onDrop, showCacheWarning, handleCloseCacheWarning } = usePluginUpload(
+    { addPlugin },
+  );
 
-    formData.append("file", files[0]);
-    addPlugin(formData, t);
-  };
-
-  React.useEffect(() => {
+  useEffect(() => {
     setDocumentTitle(t("Common:Plugins"));
   }, [t]);
 
-  return showPortalSettingsLoader ||
-    (!isEmptyList && pluginList.length === 0) ||
-    !ready ? (
-    <StyledContainer>
-      <ListLoader withUpload={withUpload} />
-    </StyledContainer>
-  ) : isEmptyList ? (
-    <StyledEmptyContainer>
-      <EmptyScreen
-        t={t}
-        theme={theme}
-        onDrop={onDrop}
-        withUpload={withUpload}
-        pluginsSdkUrl={pluginsSdkUrl}
-        currentColorScheme={currentColorScheme}
-      />
-    </StyledEmptyContainer>
-  ) : (
-    <StyledContainer>
-      {/* <Header
+  return (
+    <>
+      {showPortalSettingsLoader ||
+      (!isEmptyList && pluginList.length === 0) ||
+      !ready ? (
+        <div className={styles.container}>
+          <ListLoader withUpload={withUpload} />
+        </div>
+      ) : isEmptyList ? (
+        <div className={styles.emptyContainer}>
+          <EmptyScreen
+            t={t}
+            theme={theme}
+            onDrop={onDrop}
+            withUpload={withUpload}
+            pluginsSdkUrl={pluginsSdkUrl}
+            currentColorScheme={currentColorScheme}
+          />
+        </div>
+      ) : (
+        <div className={styles.container}>
+          {/* <Header
             t={t}
             currentColorScheme={currentColorScheme}
            
             withUpload={withUpload}
           /> */}
-      {withUpload ? (
-        <>
-          <UploadDescription
-            t={t}
-            pluginsSdkUrl={pluginsSdkUrl}
-            currentColorScheme={currentColorScheme}
-          />
-          <Dropzone
-            onDrop={onDrop}
-            isDisabled={!withUpload}
-            isLoading={false}
-            dataTestId="upload_plugin_dropzone"
-          />
-        </>
-      ) : null}
-      <PluginListContainer>
-        {pluginList.map((plugin) => (
-          <PluginItem
-            key={`plugin-${plugin.name}-${plugin.version}`}
-            openSettingsDialog={openSettingsDialog}
-            updatePlugin={updatePlugin}
-            theme={theme}
-            dataTestId={`plugin_${plugin.name}`}
-            {...plugin}
-          />
-        ))}
-      </PluginListContainer>
-    </StyledContainer>
+          {withUpload ? (
+            <>
+              <UploadDescription
+                t={t}
+                pluginsSdkUrl={pluginsSdkUrl}
+                currentColorScheme={currentColorScheme}
+              />
+              <Dropzone
+                onDrop={onDrop}
+                isDisabled={!withUpload}
+                isLoading={false}
+                dataTestId="upload_plugin_dropzone"
+              />
+              <PluginCacheWarningDialog
+                visible={showCacheWarning}
+                onClose={handleCloseCacheWarning}
+              />
+            </>
+          ) : null}
+          <div className={styles.pluginListContainer}>
+            {pluginList.map((plugin) => (
+              <PluginItem
+                key={`plugin-${plugin.name}-${plugin.version}`}
+                openSettingsDialog={openSettingsDialog}
+                updatePlugin={updatePlugin}
+                theme={theme}
+                dataTestId={`plugin_${plugin.name}`}
+                {...plugin}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

@@ -24,22 +24,57 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import { Trans, useTranslation } from "react-i18next";
 
-import styles from "../Plugins.module.scss";
-import { ListLoaderProps } from "../Plugins.types";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/ui-kit/components/modal-dialog";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Text } from "@docspace/ui-kit/components/text";
 
-const ListLoader = ({ withUpload }: ListLoaderProps) => {
+interface PluginCacheWarningDialogProps {
+  visible: boolean;
+  onClose: () => void;
+}
+
+const PluginCacheWarningDialog = ({
+  visible,
+  onClose,
+}: PluginCacheWarningDialogProps) => {
+  const { t } = useTranslation(["WebPlugins", "Common"]);
+
   return (
-    <>
-      {withUpload ? <RectangleSkeleton width="144px" height="32px" /> : null}
-      <div className={styles.pluginListContainer}>
-        <RectangleSkeleton width="340px" height="135px" />
-        <RectangleSkeleton width="340px" height="135px" />
-        <RectangleSkeleton width="340px" height="135px" />
-      </div>
-    </>
+    <ModalDialog
+      autoMaxHeight
+      visible={visible}
+      onClose={onClose}
+      displayType={ModalDialogType.modal}
+    >
+      <ModalDialog.Header>{t("Common:Warning")}</ModalDialog.Header>
+      <ModalDialog.Body>
+        <Text>
+          <Trans
+            t={t}
+            i18nKey="PluginCacheWarningDescription"
+            ns="WebPlugins"
+            components={{
+              1: <Text as="span" fontWeight={600} />,
+            }}
+          />
+        </Text>
+      </ModalDialog.Body>
+      <ModalDialog.Footer>
+        <Button
+          label={t("Common:OKButton")}
+          size={ButtonSize.normal}
+          onClick={onClose}
+          scale
+          testId="plugin_cache_warning_ok_button"
+        />
+      </ModalDialog.Footer>
+    </ModalDialog>
   );
 };
 
-export default ListLoader;
+export default PluginCacheWarningDialog;

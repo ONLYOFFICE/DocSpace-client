@@ -24,91 +24,74 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { isMobileOnly } from "react-device-detect";
-
-import { injectDefaultTheme } from "@docspace/shared/utils";
-
-const StyledEmptyContainer = styled.div`
+.emptyContainer {
   width: 100%;
-
   display: flex;
   justify-content: center;
-`;
+}
 
-const StyledUploadDescription = styled.div.attrs(injectDefaultTheme)`
-  .upload-description-text {
+.uploadDescription {
+  .infoBar {
+    margin-top: 16px;
+    text-align: start;
+  }
+
+  .uploadDescriptionText {
     max-width: 700px;
-    color: ${(props) => props.theme.client.settings.common.descriptionColor};
+    color: var(--settings-common-description-color);
     line-height: 20px;
   }
 
-  .link-learn-more {
+  .linkLearnMore {
     display: inline-block;
     font-weight: 600;
     margin-top: 8px;
   }
-`;
+}
 
-const StyledContainer = styled.div`
+.container {
   width: 100%;
   max-width: 700px;
-
   display: flex;
   flex-direction: column;
-
   gap: 20px;
-`;
+}
 
-const PluginListContainer = styled.div`
+.pluginListContainer {
   width: 100%;
-
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(328px, 1fr));
-
   gap: 20px;
-`;
+}
 
-const StyledPluginItem = styled.div.attrs(injectDefaultTheme)<{
-  description?: string;
-}>`
+.pluginItem {
   width: 100%;
-
   height: 135px;
   max-height: 135px;
-
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: 48px 1fr;
-
   gap: 20px;
-
-  border: 1px solid ${(props) => props.theme.plugins.borderColor};
+  border: 1px solid var(--plugins-border-color);
   border-radius: 12px;
-
   padding: 20px;
-
   box-sizing: border-box;
 
-  .plugin-logo {
+  .pluginLogo {
     width: 48px;
     height: 48px;
-
     border-radius: 4px;
   }
 
-  .plugin-info {
+  .pluginInfo {
     width: 100%;
     height: auto;
-
     display: flex;
     flex-direction: column;
-
     gap: 8px;
 
-    .plugin-description {
+    .pluginDescription {
       width: 100%;
-
       display: -webkit-box;
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 2;
@@ -116,47 +99,60 @@ const StyledPluginItem = styled.div.attrs(injectDefaultTheme)<{
     }
   }
 
-  ${(props) => !props.description && isMobileOnly && `max-height: 112px;`}
-`;
+  &.noDescription {
+    @media (max-width: 600px) {
+      max-height: 112px;
+    }
+  }
+}
 
-const StyledPluginHeader = styled.div`
+.pluginHeader {
   width: 100%;
   height: 22px;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  .plugin-name {
+  .pluginName {
     margin: 0;
     padding: 0;
-
     font-weight: 700 !important;
     font-size: 16px !important;
     line-height: 22px;
   }
 
-  .plugin-controls {
+  .pluginControls {
     height: 100%;
-
     display: flex;
     gap: 16px;
-
     align-items: center;
 
-    .plugin-toggle-button {
+    .pluginToggleButton {
       position: relative;
-
       gap: 0;
     }
   }
-`;
+}
 
-export {
-  StyledEmptyContainer,
-  StyledContainer,
-  PluginListContainer,
-  StyledPluginItem,
-  StyledPluginHeader,
-  StyledUploadDescription,
-};
+
+.dropzone {
+    height: 135px;
+}
+
+.emptyScreen {
+  :global {
+    .ec-buttons {
+      width: 100%;
+    }
+
+    .ec-image {
+      width: 200px;
+      height: 140px;
+
+      @media (max-width: 600px) {
+        width: 150px;
+        height: 105px;
+      }
+    }
+  }
+}

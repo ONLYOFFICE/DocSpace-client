@@ -216,6 +216,12 @@
   --empty-view-separator-color: #{$gray};
   --empty-view-action-secondary-color: #{$gray};
 
+  --info-bar-background: #{$gray-light};
+  --info-bar-text-color: #{$black};
+  --info-bar-title: #{$black};
+  --info-bar-description: #{$gray-text};
+  --info-bar-icon-fill: #{$light-status-warning};
+
   --error-container-background: #{$white};
   --error-container-body-text: #{$gray};
   --error-container-link-color: #{$link};
@@ -428,6 +434,12 @@
   --empty-view-description-color: #{$dark-gray-dark};
   --empty-view-separator-color: #{$gray};
   --empty-view-action-secondary-color: #{$gray-dark};
+
+  --info-bar-background: #{$dark-gray-light};
+  --info-bar-text-color: #{$white};
+  --info-bar-title: #{$white};
+  --info-bar-description: #{$dark-gray-dark};
+  --info-bar-icon-fill: #{$dark-status-warning};
 
   --error-container-background: #{$black};
   --error-container-body-text: #{$gray-dark};

@@ -130,7 +130,7 @@ const Item = ({
           </Text>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
-          <Text fontSize="12px" fontWeight={400} color="#A3A9AE">
+          <Text fontSize="12px" fontWeight={400} className={styles.accessLabel}>
             {accessLabel} | {item.email}
           </Text>
         </div>

@@ -37,7 +37,7 @@
   align-items: center;
   gap: 8px;
   padding: 24px 16px;
-  border-bottom: var(--files-panels-sharing-border-bottom, 1px solid #eceef1);
+  border-bottom: var(--files-panels-sharing-border-bottom);
   margin-inline-end: -16px;
 
   img {
@@ -367,6 +367,10 @@
   :focus-within {
     border-color: var(--invite-panel-border-color);
   }
+}
+
+.accessLabel {
+  color: var(--gray-text);
 }
 
 .row {

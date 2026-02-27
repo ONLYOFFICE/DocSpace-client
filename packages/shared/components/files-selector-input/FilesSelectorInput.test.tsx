@@ -48,7 +48,7 @@ const mocks = vi.hoisted(() => ({
 // Mock using the package path as it's imported in FilesSelectorInput.tsx
 vi.mock("@docspace/ui-kit/selectors/Files", () => ({
   __esModule: true,
-  default: mocks.FilesSelectorMock,
+  FilesSelector: mocks.FilesSelectorMock,
 }));
 
 vi.mock("@docspace/ui-kit/components/file-input", () => ({

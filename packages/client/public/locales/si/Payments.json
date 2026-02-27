@@ -97,7 +97,6 @@
   "PriceCalculation": "මිල ගණනය කරන්න",
   "PriceForEach": "{{currency}} ක් {{amount}} ට",
   "ProductNameWallet": "{{productName}} සාචි",
-  "Quantity": "ප්‍රමාණය",
   "RecommendedTopUpAmount": "නිර්දේශිත පුරවන මුදල: {{amount}}",
   "RemainingDays": "ලිඛන චක්‍රයේ ඉතිරි දින: {{count}}",
   "Reminder": "සැලකිරීම:",

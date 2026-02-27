@@ -270,18 +270,10 @@
 
     :global(.property-tag_list) {
       display: flex;
-      flex-wrap: wrap;
-      gap: 4px;
 
-      :global(.property-tag) {
-        max-width: 195px;
-        margin: 0;
-
-        p {
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
+      :global(.tags) {
+        flex-wrap: wrap;
+        row-gap: 4px;
       }
     }
 

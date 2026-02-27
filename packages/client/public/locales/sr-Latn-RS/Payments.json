@@ -97,7 +97,6 @@
   "PriceCalculation": "Izračunaj svoju cenu",
   "PriceForEach": "{{currency}} po {{amount}}",
   "ProductNameWallet": "{{productName}} novčanik",
-  "Quantity": "Količina",
   "RecommendedTopUpAmount": "Preporučeni iznos za dopunu: {{amount}}",
   "RemainingDays": "Preostali dani obračunskog perioda: {{count}}",
   "Reminder": "Podsetnik:",

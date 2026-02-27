@@ -55,7 +55,7 @@ export default function useContextMenuModel({
       return {
         id: "option_open",
         key: "open",
-        label: t("Files:Open"),
+        label: t("Common:Open"),
         icon: FolderReactSvgUrl,
         onClick: () => openFolder(i.id, i.title),
         disabled: false,
@@ -99,7 +99,7 @@ export default function useContextMenuModel({
       return {
         id: "option_open-pdf",
         key: "open-pdf",
-        label: t("Files:Open"),
+        label: t("Common:Open"),
         icon: EyeReactSvgUrl,
         onClick: () => openFile(i, false),
         disabled: false,

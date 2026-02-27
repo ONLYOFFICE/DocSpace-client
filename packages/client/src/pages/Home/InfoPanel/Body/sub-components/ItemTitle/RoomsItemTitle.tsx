@@ -43,7 +43,8 @@ import SearchIconReactSvgUrl from "PUBLIC_DIR/images/search.react.svg?url";
 
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
-import InfoPanelStore, { InfoPanelView } from "SRC_DIR/store/InfoPanelStore";
+import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
+import { InfoPanelView } from "SRC_DIR/helpers/info-panel";
 import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 
 import commonStyles from "../../helpers/Common.module.scss";

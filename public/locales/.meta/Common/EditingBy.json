@@ -1,0 +1,28 @@
+{
+  "key_path": "EditingBy",
+  "content": "It is currently being edited by: {{users}}",
+  "content_en_sha1_hash": "dc917133bd94cbe2b4e484fa91bb9567b28f80c8",
+  "created_at": "2026-02-18T14:55:51.296Z",
+  "updated_at": "2026-02-19T13:36:32.210Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/HOCs/withBadges.js",
+      "line_number": 218,
+      "context": "return user;\n })\n .join(\", \");\n \n return userNames\n ? t(\"Common:EditingBy\", { users: userNames })\n : undefined;\n };\n \n render() {\n const {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

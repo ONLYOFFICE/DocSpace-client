@@ -108,9 +108,9 @@ const useContacts = ({
       return "users";
     };
 
-    const view = await getList();
-
     setContactsTab(contactsView);
+
+    const view = await getList();
 
     scrollToTop();
 

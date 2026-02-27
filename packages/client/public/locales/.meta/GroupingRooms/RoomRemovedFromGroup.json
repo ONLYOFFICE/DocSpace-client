@@ -1,0 +1,34 @@
+{
+  "key_path": "RoomRemovedFromGroup",
+  "content": "The selected room has been removed from <1>{{groupName}}</1>.",
+  "content_en_sha1_hash": "90e5f94c086e96d21f2c87d1635860da00582392",
+  "created_at": "2026-02-19T13:36:24.883Z",
+  "updated_at": "2026-02-19T13:36:32.984Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 1243,
+      "context": "t,\n values: { groupName },\n components: { 1: React.createElement(\"strong\") },\n };\n const keys = {\n single: { tKey: \"GroupingRooms:RoomRemovedFromGroup\" },\n multiple: { tKey: \"GroupingRooms:RoomsRemovedFromGroup\" },\n };\n const i18nKey =\n roomIds.length === 1 ? keys.single.tKey : keys.multiple.tKey;\n toastr.success(",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
+      "line_number": 188,
+      "context": "t: this.t,\n values: { groupName },\n components: { 1: React.createElement(\"strong\") },\n };\n const keys = {\n single: { tKey: \"GroupingRooms:RoomRemovedFromGroup\" },\n multiple: { tKey: \"GroupingRooms:RoomsRemovedFromGroup\" },\n };\n const i18nKey =\n roomIds.length === 1 ? keys.single.tKey : keys.multiple.tKey;\n toastr.success(",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

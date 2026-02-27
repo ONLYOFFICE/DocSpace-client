@@ -31,6 +31,7 @@ import { inject, observer } from "mobx-react";
 import { FileAction, Events } from "@docspace/shared/enums";
 import { getStartRoomParams } from "@docspace/shared/utils/rooms";
 import { getStartAgentParams } from "@docspace/shared/utils/aiAgents";
+import { PDF_FORM_DIALOG_KEY } from "@docspace/shared/constants";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { getFormFillingTipsStorageName } from "@docspace/shared/utils";
@@ -51,522 +52,523 @@ import { CreatedPDFFormDialog } from "../dialogs/CreatedPDFFormDialog";
 import { isAIAgents } from "../../helpers/plugins/utils";
 
 const GlobalEvents = ({
-	enablePlugins,
-	eventListenerItemsList,
-	editRoomDialogProps,
-	setEditRoomDialogProps,
-	createRoomDialogProps,
-	setCreateRoomDialogProps,
-	createAgentDialogProps,
-	setCreateAgentDialogProps,
-	editAgentDialogProps,
-	setEditAgentDialogProps,
-	setCover,
+  enablePlugins,
+  eventListenerItemsList,
+  editRoomDialogProps,
+  setEditRoomDialogProps,
+  createRoomDialogProps,
+  setCreateRoomDialogProps,
+  createAgentDialogProps,
+  setCreateAgentDialogProps,
+  editAgentDialogProps,
+  setEditAgentDialogProps,
+  setCover,
 
-	setCreatePDFFormFile,
-	createPDFFormFileProps,
-	userId,
+  setCreatePDFFormFile,
+  createPDFFormFileProps,
+  userId,
 }) => {
-	const [createDialogProps, setCreateDialogProps] = useState({
-		visible: false,
-		id: null,
-		type: null,
-		extension: null,
-		title: "",
-		templateId: null,
-		fromTemplate: null,
-		onClose: null,
-		toForm: false,
-	});
+  const [createDialogProps, setCreateDialogProps] = useState({
+    visible: false,
+    id: null,
+    type: null,
+    extension: null,
+    title: "",
+    templateId: null,
+    fromTemplate: null,
+    onClose: null,
+    toForm: false,
+  });
 
-	const [renameDialogProps, setRenameDialogProps] = useState({
-		visible: false,
-		item: null,
-		onClose: null,
-	});
+  const [renameDialogProps, setRenameDialogProps] = useState({
+    visible: false,
+    item: null,
+    onClose: null,
+  });
 
-	const [createGroupDialogProps, setCreateGroupDialogProps] = useState({
-		visible: false,
-		onClose: null,
-	});
+  const [createGroupDialogProps, setCreateGroupDialogProps] = useState({
+    visible: false,
+    onClose: null,
+  });
 
-	const [editGroupDialogProps, setEditGroupDialogProps] = useState({
-		visible: false,
-		onClose: null,
-	});
+  const [editGroupDialogProps, setEditGroupDialogProps] = useState({
+    visible: false,
+    onClose: null,
+  });
 
-	const [changeUserTypeDialog, setChangeUserTypeDialogProps] = useState({
-		visible: false,
-		onClose: null,
-	});
-	const [changeQuotaDialog, setChangeQuotaDialogProps] = useState({
-		visible: false,
-		type: null,
-		ids: null,
-		bodyDescription: null,
-		headerTitle: null,
-	});
-	const [createPluginFileDialog, setCreatePluginFileProps] = useState({
-		visible: false,
-		props: null,
-		onClose: null,
-	});
-	const [saveAsTemplateDialog, setSaveAsTemplateDialog] = useState({
-		visible: false,
-		props: null,
-		onClose: null,
-	});
+  const [changeUserTypeDialog, setChangeUserTypeDialogProps] = useState({
+    visible: false,
+    onClose: null,
+  });
+  const [changeQuotaDialog, setChangeQuotaDialogProps] = useState({
+    visible: false,
+    type: null,
+    ids: null,
+    bodyDescription: null,
+    headerTitle: null,
+  });
+  const [createPluginFileDialog, setCreatePluginFileProps] = useState({
+    visible: false,
+    props: null,
+    onClose: null,
+  });
+  const [saveAsTemplateDialog, setSaveAsTemplateDialog] = useState({
+    visible: false,
+    props: null,
+    onClose: null,
+  });
 
-	const eventHandlersList = useRef([]);
+  const eventHandlersList = useRef([]);
 
-	const onCreate = useCallback((e) => {
-		const { payload } = e;
+  const onCreate = useCallback((e) => {
+    const { payload } = e;
 
-		const visible = !!payload.id;
+    const visible = !!payload.id;
 
-		setCreateDialogProps({
-			visible,
-			id: payload.id,
-			type: FileAction.Create,
-			extension: payload.extension,
-			title: payload.title || null,
-			templateId: payload.templateId || null,
-			fromTemplate: payload.fromTemplate || null,
-			withoutDialog: payload.withoutDialog ?? false,
-			preview: payload.preview ?? false,
-			actionEdit: payload.edit ?? false,
-			openEditor: payload.openEditor ?? true,
-			toForm: payload.toForm ?? false,
-			onClose: () => {
-				setCreateDialogProps({
-					visible: false,
-					id: null,
-					type: null,
-					extension: null,
-					title: "",
-					templateId: null,
-					fromTemplate: null,
-					onClose: null,
-					withoutDialog: false,
-					preview: false,
-					actionEdit: false,
-					openEditor: true,
-					toForm: false,
-				});
-			},
-		});
-	}, []);
+    setCreateDialogProps({
+      visible,
+      id: payload.id,
+      type: FileAction.Create,
+      extension: payload.extension,
+      title: payload.title || null,
+      templateId: payload.templateId || null,
+      fromTemplate: payload.fromTemplate || null,
+      withoutDialog: payload.withoutDialog ?? false,
+      preview: payload.preview ?? false,
+      actionEdit: payload.edit ?? false,
+      openEditor: payload.openEditor ?? true,
+      toForm: payload.toForm ?? false,
+      onClose: () => {
+        setCreateDialogProps({
+          visible: false,
+          id: null,
+          type: null,
+          extension: null,
+          title: "",
+          templateId: null,
+          fromTemplate: null,
+          onClose: null,
+          withoutDialog: false,
+          preview: false,
+          actionEdit: false,
+          openEditor: true,
+          toForm: false,
+        });
+      },
+    });
+  }, []);
 
-	const onRename = useCallback((e) => {
-		const visible = !!e.item;
+  const onRename = useCallback((e) => {
+    const visible = !!e.item;
 
-		setRenameDialogProps({
-			visible,
-			type: FileAction.Rename,
-			item: e.item,
-			onClose: () => {
-				setRenameDialogProps({
-					visible: false,
-					type: null,
-					item: null,
-				});
-			},
-		});
-	}, []);
+    setRenameDialogProps({
+      visible,
+      type: FileAction.Rename,
+      item: e.item,
+      onClose: () => {
+        setRenameDialogProps({
+          visible: false,
+          type: null,
+          item: null,
+        });
+      },
+    });
+  }, []);
 
-	const onCreateRoom = useCallback((e) => {
-		const startRoomParams = getStartRoomParams(
-			e?.payload?.startRoomType,
-			e?.title,
-		);
-		setCreateRoomDialogProps({
-			...startRoomParams,
-			item: e.item,
-			visible: true,
-			onClose: () =>
-				setCreateRoomDialogProps({
-					visible: false,
-					onClose: null,
-					startRoomType: undefined,
-				}),
-		});
-	}, []);
+  const onCreateRoom = useCallback((e) => {
+    const startRoomParams = getStartRoomParams(
+      e?.payload?.startRoomType,
+      e?.title,
+    );
+    setCreateRoomDialogProps({
+      ...startRoomParams,
+      item: e.item,
+      visible: true,
+      onClose: () =>
+        setCreateRoomDialogProps({
+          visible: false,
+          onClose: null,
+          startRoomType: undefined,
+        }),
+    });
+  }, []);
 
-	const onEditRoom = useCallback((e) => {
-		const visible = !!e.item;
+  const onEditRoom = useCallback((e) => {
+    const visible = !!e.item;
 
-		setEditRoomDialogProps({
-			visible,
-			item: e.item,
-			onClose: () => {
-				setCover();
-				setEditRoomDialogProps({
-					visible: false,
-					item: null,
-					onClose: null,
-				});
-			},
-		});
-	}, []);
+    setEditRoomDialogProps({
+      visible,
+      item: e.item,
+      onClose: () => {
+        setCover();
+        setEditRoomDialogProps({
+          visible: false,
+          item: null,
+          onClose: null,
+        });
+      },
+    });
+  }, []);
 
-	const onCreateAgent = useCallback((e) => {
-		const startAgentParams = getStartAgentParams();
-		setCreateAgentDialogProps({
-			...startAgentParams,
-			item: e.item,
-			visible: true,
-			onClose: () => {
-				setCreateAgentDialogProps({
-					visible: false,
-					onClose: null,
-				});
-			},
-		});
-	}, []);
+  const onCreateAgent = useCallback((e) => {
+    const startAgentParams = getStartAgentParams();
+    setCreateAgentDialogProps({
+      ...startAgentParams,
+      item: e.item,
+      visible: true,
+      onClose: () => {
+        setCreateAgentDialogProps({
+          visible: false,
+          onClose: null,
+        });
+      },
+    });
+  }, []);
 
-	const onEditAgent = useCallback((e) => {
-		const visible = !!e.item;
+  const onEditAgent = useCallback((e) => {
+    const visible = !!e.item;
 
-		setEditAgentDialogProps({
-			visible,
-			item: e.item,
-			onClose: () => {
-				setCover();
-				setEditAgentDialogProps({
-					visible: false,
-					item: null,
-					onClose: null,
-				});
-			},
-		});
-	}, []);
+    setEditAgentDialogProps({
+      visible,
+      item: e.item,
+      onClose: () => {
+        setCover();
+        setEditAgentDialogProps({
+          visible: false,
+          item: null,
+          onClose: null,
+        });
+      },
+    });
+  }, []);
 
-	const onCreateGroup = useCallback((e) => {
-		setCreateGroupDialogProps({
-			title: e?.title,
-			visible: true,
-			onClose: () =>
-				setCreateGroupDialogProps({ title: "", visible: false, onClose: null }),
-		});
-	}, []);
+  const onCreateGroup = useCallback((e) => {
+    setCreateGroupDialogProps({
+      title: e?.title,
+      visible: true,
+      onClose: () =>
+        setCreateGroupDialogProps({ title: "", visible: false, onClose: null }),
+    });
+  }, []);
 
-	const onEditGroup = useCallback((e) => {
-		const visible = !!e.item;
+  const onEditGroup = useCallback((e) => {
+    const visible = !!e.item;
 
-		setEditGroupDialogProps({
-			visible,
-			item: e.item,
-			onClose: () => {
-				setEditGroupDialogProps({
-					visible: false,
-					item: null,
-					onClose: null,
-				});
-			},
-		});
-	}, []);
+    setEditGroupDialogProps({
+      visible,
+      item: e.item,
+      onClose: () => {
+        setEditGroupDialogProps({
+          visible: false,
+          item: null,
+          onClose: null,
+        });
+      },
+    });
+  }, []);
 
-	const onChangeUserType = useCallback(() => {
-		setChangeUserTypeDialogProps({
-			visible: true,
-			onClose: () => {
-				setChangeUserTypeDialogProps({ visible: false, onClose: null });
-			},
-		});
-	}, []);
+  const onChangeUserType = useCallback(() => {
+    setChangeUserTypeDialogProps({
+      visible: true,
+      onClose: () => {
+        setChangeUserTypeDialogProps({ visible: false, onClose: null });
+      },
+    });
+  }, []);
 
-	const onCreatePluginFileDialog = useCallback(
-		(e) => {
-			if (!enablePlugins) return;
+  const onCreatePluginFileDialog = useCallback(
+    (e) => {
+      if (!enablePlugins) return;
 
-			const { payload } = e;
+      const { payload } = e;
 
-			const onClose = () => {
-				payload.onClose && payload.onClose();
-				setCreatePluginFileProps({
-					visible: false,
-					onClose: null,
-				});
-			};
+      const onClose = () => {
+        payload.onClose && payload.onClose();
+        setCreatePluginFileProps({
+          visible: false,
+          onClose: null,
+        });
+      };
 
-			setCreatePluginFileProps({
-				...payload,
-				visible: true,
-				onClose,
-				updateCreatePluginFileProps: (newProps) => {
-					setCreatePluginFileProps((prevProps) => ({
-						...prevProps,
-						...newProps,
-						onClose,
-					}));
-				},
-			});
-		},
-		[enablePlugins],
-	);
+      setCreatePluginFileProps({
+        ...payload,
+        visible: true,
+        onClose,
+        updateCreatePluginFileProps: (newProps) => {
+          setCreatePluginFileProps((prevProps) => ({
+            ...prevProps,
+            ...newProps,
+            onClose,
+          }));
+        },
+      });
+    },
+    [enablePlugins],
+  );
 
-	const handleCreatePDFFormFile = useCallback(
-		/**
-		 * @typedef {Object} DetailType
-		 * @property {import("@docspace/shared/api/files/types").TFile} file
-		 * @property {boolean} show
-		 * @property {string} localKey
-		 * @param {CustomEvent<DetailType>} event
-		 */
-		(event) => {
-			const { file, show, localKey } = event.detail;
+  const handleCreatePDFFormFile = useCallback(
+    /**
+     * @typedef {Object} DetailType
+     * @property {import("@docspace/shared/api/files/types").TFile} file
+     * @property {boolean} show
+     * @param {CustomEvent<DetailType>} event
+     */
+    (event) => {
+      const { file, show } = event.detail;
 
-			if (!show) {
-				return toastr.success(
-					<Trans
-						ns="PDFFormDialog"
-						i18nKey="PDFFormIsReadyToast"
-						components={{ 1: <strong key="create-pdf-form-file-strong" /> }}
-						values={{ filename: file.title }}
-					/>,
-				);
-			}
+      const localKey = `${PDF_FORM_DIALOG_KEY}-${userId}`;
 
-			const closedFormFillingTips = localStorage.getItem(
-				getFormFillingTipsStorageName(userId),
-			);
+      if (!show) {
+        return toastr.success(
+          <Trans
+            ns="PDFFormDialog"
+            i18nKey="PDFFormIsReadyToast"
+            components={{ 1: <strong key="create-pdf-form-file-strong" /> }}
+            values={{ filename: file.title }}
+          />,
+        );
+      }
 
-			setCreatePDFFormFile({
-				visible: closedFormFillingTips,
-				file,
-				localKey,
-				onClose: () => {
-					setCreatePDFFormFile({
-						visible: false,
-						onClose: null,
-						file: null,
-						localKey: "",
-					});
-				},
-			});
-		},
-		[],
-	);
+      const closedFormFillingTips = localStorage.getItem(
+        getFormFillingTipsStorageName(userId),
+      );
 
-	const onChangeQuota = useCallback((e) => {
-		const { payload } = e;
+      setCreatePDFFormFile({
+        visible: closedFormFillingTips,
+        file,
+        localKey,
+        onClose: () => {
+          setCreatePDFFormFile({
+            visible: false,
+            onClose: null,
+            file: null,
+            localKey: "",
+          });
+        },
+      });
+    },
+    [],
+  );
 
-		setChangeQuotaDialogProps({
-			visible: payload.visible,
-			type: payload.type,
-			ids: payload.ids,
-			bodyDescription: payload.bodyDescriptionKey,
-			headerTitle: payload.headerKey,
-			successCallback: payload.successCallback,
-			abortCallback: payload.abortCallback,
-			onClose: () => {
-				setChangeQuotaDialogProps({
-					visible: false,
-					type: null,
-					ids: null,
-					bodyDescription: null,
-					headerTitle: null,
-					successCallback: null,
-					abortCallback: null,
-					onClose: null,
-				});
-			},
-		});
-	}, []);
+  const onChangeQuota = useCallback((e) => {
+    const { payload } = e;
 
-	const onSaveAsTemplate = (e) => {
-		const visible = !!e.item;
+    setChangeQuotaDialogProps({
+      visible: payload.visible,
+      type: payload.type,
+      ids: payload.ids,
+      bodyDescription: payload.bodyDescriptionKey,
+      headerTitle: payload.headerKey,
+      successCallback: payload.successCallback,
+      abortCallback: payload.abortCallback,
+      onClose: () => {
+        setChangeQuotaDialogProps({
+          visible: false,
+          type: null,
+          ids: null,
+          bodyDescription: null,
+          headerTitle: null,
+          successCallback: null,
+          abortCallback: null,
+          onClose: null,
+        });
+      },
+    });
+  }, []);
 
-		setSaveAsTemplateDialog({
-			visible,
-			item: e.item,
-			onClose: () => {
-				setCover();
-				setSaveAsTemplateDialog({
-					visible: false,
-					item: null,
-				});
-			},
-		});
-	};
+  const onSaveAsTemplate = (e) => {
+    const visible = !!e.item;
 
-	useEffect(() => {
-		window.addEventListener(
-			Events.CREATE_PDF_FORM_FILE,
-			handleCreatePDFFormFile,
-		);
+    setSaveAsTemplateDialog({
+      visible,
+      item: e.item,
+      onClose: () => {
+        setCover();
+        setSaveAsTemplateDialog({
+          visible: false,
+          item: null,
+        });
+      },
+    });
+  };
 
-		return () => {
-			window.removeEventListener(
-				Events.CREATE_PDF_FORM_FILE,
-				handleCreatePDFFormFile,
-			);
-		};
-	}, [handleCreatePDFFormFile]);
+  useEffect(() => {
+    window.addEventListener(
+      Events.CREATE_PDF_FORM_FILE,
+      handleCreatePDFFormFile,
+    );
 
-	useEffect(() => {
-		window.addEventListener(Events.CREATE, onCreate);
-		window.addEventListener(Events.RENAME, onRename);
-		window.addEventListener(Events.ROOM_CREATE, onCreateRoom);
-		window.addEventListener(Events.AGENT_CREATE, onCreateAgent);
-		window.addEventListener(Events.AGENT_EDIT, onEditAgent);
-		window.addEventListener(Events.ROOM_EDIT, onEditRoom);
-		window.addEventListener(Events.CHANGE_USER_TYPE, onChangeUserType);
-		window.addEventListener(Events.GROUP_CREATE, onCreateGroup);
-		window.addEventListener(Events.GROUP_EDIT, onEditGroup);
-		window.addEventListener(Events.CHANGE_QUOTA, onChangeQuota);
-		window.addEventListener(Events.SAVE_AS_TEMPLATE, onSaveAsTemplate);
-		if (!isAIAgents() && enablePlugins) {
-			window.addEventListener(
-				Events.CREATE_PLUGIN_FILE,
-				onCreatePluginFileDialog,
-			);
+    return () => {
+      window.removeEventListener(
+        Events.CREATE_PDF_FORM_FILE,
+        handleCreatePDFFormFile,
+      );
+    };
+  }, [handleCreatePDFFormFile]);
 
-			if (eventListenerItemsList) {
-				eventListenerItemsList.forEach((item) => {
-					const eventHandler = (e) => {
-						item.eventHandler(e);
-					};
+  useEffect(() => {
+    window.addEventListener(Events.CREATE, onCreate);
+    window.addEventListener(Events.RENAME, onRename);
+    window.addEventListener(Events.ROOM_CREATE, onCreateRoom);
+    window.addEventListener(Events.AGENT_CREATE, onCreateAgent);
+    window.addEventListener(Events.AGENT_EDIT, onEditAgent);
+    window.addEventListener(Events.ROOM_EDIT, onEditRoom);
+    window.addEventListener(Events.CHANGE_USER_TYPE, onChangeUserType);
+    window.addEventListener(Events.GROUP_CREATE, onCreateGroup);
+    window.addEventListener(Events.GROUP_EDIT, onEditGroup);
+    window.addEventListener(Events.CHANGE_QUOTA, onChangeQuota);
+    window.addEventListener(Events.SAVE_AS_TEMPLATE, onSaveAsTemplate);
+    if (!isAIAgents() && enablePlugins) {
+      window.addEventListener(
+        Events.CREATE_PLUGIN_FILE,
+        onCreatePluginFileDialog,
+      );
 
-					eventHandlersList.current.push(eventHandler);
+      if (eventListenerItemsList) {
+        eventListenerItemsList.forEach((item) => {
+          const eventHandler = (e) => {
+            item.eventHandler(e);
+          };
 
-					window.addEventListener(item.eventType, eventHandler);
-				});
-			}
-		}
+          eventHandlersList.current.push(eventHandler);
 
-		return () => {
-			window.removeEventListener(Events.CREATE, onCreate);
-			window.removeEventListener(Events.RENAME, onRename);
-			window.removeEventListener(Events.ROOM_CREATE, onCreateRoom);
-			window.removeEventListener(Events.ROOM_EDIT, onEditRoom);
-			window.removeEventListener(Events.AGENT_CREATE, onCreateAgent);
-			window.removeEventListener(Events.AGENT_EDIT, onEditAgent);
-			window.removeEventListener(Events.CHANGE_USER_TYPE, onChangeUserType);
-			window.removeEventListener(Events.GROUP_CREATE, onCreateGroup);
-			window.removeEventListener(Events.GROUP_EDIT, onEditGroup);
-			window.addEventListener(Events.SAVE_AS_TEMPLATE, onSaveAsTemplate);
+          window.addEventListener(item.eventType, eventHandler);
+        });
+      }
+    }
 
-			if (!isAIAgents() && enablePlugins) {
-				window.removeEventListener(
-					Events.CREATE_PLUGIN_FILE,
-					onCreatePluginFileDialog,
-				);
+    return () => {
+      window.removeEventListener(Events.CREATE, onCreate);
+      window.removeEventListener(Events.RENAME, onRename);
+      window.removeEventListener(Events.ROOM_CREATE, onCreateRoom);
+      window.removeEventListener(Events.ROOM_EDIT, onEditRoom);
+      window.removeEventListener(Events.AGENT_CREATE, onCreateAgent);
+      window.removeEventListener(Events.AGENT_EDIT, onEditAgent);
+      window.removeEventListener(Events.CHANGE_USER_TYPE, onChangeUserType);
+      window.removeEventListener(Events.GROUP_CREATE, onCreateGroup);
+      window.removeEventListener(Events.GROUP_EDIT, onEditGroup);
+      window.addEventListener(Events.SAVE_AS_TEMPLATE, onSaveAsTemplate);
 
-				if (eventListenerItemsList) {
-					eventListenerItemsList.forEach((item, index) => {
-						window.removeEventListener(
-							item.eventType,
-							eventHandlersList.current[index],
-						);
-					});
-				}
-			}
-		};
-	}, [
-		onRename,
-		onCreate,
-		onCreateRoom,
-		onCreateAgent,
-		onEditAgent,
-		onEditRoom,
-		onCreateGroup,
-		onEditGroup,
-		onChangeUserType,
-		onCreatePluginFileDialog,
-		enablePlugins,
-	]);
+      if (!isAIAgents() && enablePlugins) {
+        window.removeEventListener(
+          Events.CREATE_PLUGIN_FILE,
+          onCreatePluginFileDialog,
+        );
 
-	return [
-		createDialogProps.visible && (
-			<CreateEvent key={Events.CREATE} {...createDialogProps} />
-		),
-		renameDialogProps.visible && (
-			<RenameEvent key={Events.RENAME} {...renameDialogProps} />
-		),
-		createRoomDialogProps.visible && (
-			<CreateRoomEvent key={Events.ROOM_CREATE} {...createRoomDialogProps} />
-		),
-		editRoomDialogProps.visible && (
-			<EditRoomEvent key={Events.ROOM_EDIT} {...editRoomDialogProps} />
-		),
-		createAgentDialogProps.visible && (
-			<CreateAgentEvent key={Events.AGENT_CREATE} {...createAgentDialogProps} />
-		),
-		editAgentDialogProps.visible && (
-			<EditAgentEvent key={Events.AGENT_EDIT} {...editAgentDialogProps} />
-		),
-		createGroupDialogProps.visible && (
-			<CreateGroupEvent key={Events.GROUP_CREATE} {...createGroupDialogProps} />
-		),
-		editGroupDialogProps.visible && (
-			<EditGroupEvent key={Events.GROUP_EDIT} {...editGroupDialogProps} />
-		),
-		changeUserTypeDialog.visible && (
-			<ChangeUserTypeEvent
-				key={Events.CHANGE_USER_TYPE}
-				{...changeUserTypeDialog}
-			/>
-		),
-		createPluginFileDialog.visible && (
-			<CreatePluginFile
-				key={Events.CREATE_PLUGIN_FILE}
-				{...createPluginFileDialog}
-			/>
-		),
-		saveAsTemplateDialog.visible && (
-			<SaveAsTemplateEvent
-				key={Events.SAVE_AS_TEMPLATE}
-				{...saveAsTemplateDialog}
-			/>
-		),
-		changeQuotaDialog.visible && (
-			<ChangeQuotaEvent key={Events.CHANGE_QUOTA} {...changeQuotaDialog} />
-		),
-		createPDFFormFileProps.visible && !createDialogProps.visible ? (
-			<CreatedPDFFormDialog
-				key="created-pdf-form-dialog"
-				{...createPDFFormFileProps}
-			/>
-		) : null,
-	];
+        if (eventListenerItemsList) {
+          eventListenerItemsList.forEach((item, index) => {
+            window.removeEventListener(
+              item.eventType,
+              eventHandlersList.current[index],
+            );
+          });
+        }
+      }
+    };
+  }, [
+    onRename,
+    onCreate,
+    onCreateRoom,
+    onCreateAgent,
+    onEditAgent,
+    onEditRoom,
+    onCreateGroup,
+    onEditGroup,
+    onChangeUserType,
+    onCreatePluginFileDialog,
+    enablePlugins,
+  ]);
+
+  return [
+    createDialogProps.visible && (
+      <CreateEvent key={Events.CREATE} {...createDialogProps} />
+    ),
+    renameDialogProps.visible && (
+      <RenameEvent key={Events.RENAME} {...renameDialogProps} />
+    ),
+    createRoomDialogProps.visible && (
+      <CreateRoomEvent key={Events.ROOM_CREATE} {...createRoomDialogProps} />
+    ),
+    editRoomDialogProps.visible && (
+      <EditRoomEvent key={Events.ROOM_EDIT} {...editRoomDialogProps} />
+    ),
+    createAgentDialogProps.visible && (
+      <CreateAgentEvent key={Events.AGENT_CREATE} {...createAgentDialogProps} />
+    ),
+    editAgentDialogProps.visible && (
+      <EditAgentEvent key={Events.AGENT_EDIT} {...editAgentDialogProps} />
+    ),
+    createGroupDialogProps.visible && (
+      <CreateGroupEvent key={Events.GROUP_CREATE} {...createGroupDialogProps} />
+    ),
+    editGroupDialogProps.visible && (
+      <EditGroupEvent key={Events.GROUP_EDIT} {...editGroupDialogProps} />
+    ),
+    changeUserTypeDialog.visible && (
+      <ChangeUserTypeEvent
+        key={Events.CHANGE_USER_TYPE}
+        {...changeUserTypeDialog}
+      />
+    ),
+    createPluginFileDialog.visible && (
+      <CreatePluginFile
+        key={Events.CREATE_PLUGIN_FILE}
+        {...createPluginFileDialog}
+      />
+    ),
+    saveAsTemplateDialog.visible && (
+      <SaveAsTemplateEvent
+        key={Events.SAVE_AS_TEMPLATE}
+        {...saveAsTemplateDialog}
+      />
+    ),
+    changeQuotaDialog.visible && (
+      <ChangeQuotaEvent key={Events.CHANGE_QUOTA} {...changeQuotaDialog} />
+    ),
+    createPDFFormFileProps.visible && !createDialogProps.visible ? (
+      <CreatedPDFFormDialog
+        key="created-pdf-form-dialog"
+        {...createPDFFormFileProps}
+      />
+    ) : null,
+  ];
 };
 
 export default inject(
-	({ settingsStore, pluginStore, dialogsStore, userStore }) => {
-		const { enablePlugins } = settingsStore;
+  ({ settingsStore, pluginStore, dialogsStore, userStore }) => {
+    const { enablePlugins } = settingsStore;
 
-		const {
-			editRoomDialogProps,
-			setEditRoomDialogProps,
-			createRoomDialogProps,
-			setCreateRoomDialogProps,
-			createAgentDialogProps,
-			setCreateAgentDialogProps,
-			editAgentDialogProps,
-			setEditAgentDialogProps,
-			setCover,
-			setCreatePDFFormFile,
-			createPDFFormFileProps,
-		} = dialogsStore;
+    const {
+      editRoomDialogProps,
+      setEditRoomDialogProps,
+      createRoomDialogProps,
+      setCreateRoomDialogProps,
+      createAgentDialogProps,
+      setCreateAgentDialogProps,
+      editAgentDialogProps,
+      setEditAgentDialogProps,
+      setCover,
+      setCreatePDFFormFile,
+      createPDFFormFileProps,
+    } = dialogsStore;
 
-		const { eventListenerItemsList } = pluginStore;
+    const { eventListenerItemsList } = pluginStore;
 
-		return {
-			enablePlugins,
-			eventListenerItemsList,
-			editRoomDialogProps,
-			setEditRoomDialogProps,
-			createRoomDialogProps,
-			setCreateRoomDialogProps,
-			createAgentDialogProps,
-			setCreateAgentDialogProps,
-			editAgentDialogProps,
-			setEditAgentDialogProps,
-			setCover,
-			setCreatePDFFormFile,
-			createPDFFormFileProps,
-			userId: userStore?.user?.id,
-		};
-	},
+    return {
+      enablePlugins,
+      eventListenerItemsList,
+      editRoomDialogProps,
+      setEditRoomDialogProps,
+      createRoomDialogProps,
+      setCreateRoomDialogProps,
+      createAgentDialogProps,
+      setCreateAgentDialogProps,
+      editAgentDialogProps,
+      setEditAgentDialogProps,
+      setCover,
+      setCreatePDFFormFile,
+      createPDFFormFileProps,
+      userId: userStore?.user?.id,
+    };
+  },
 )(observer(GlobalEvents));

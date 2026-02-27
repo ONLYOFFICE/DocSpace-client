@@ -1,0 +1,28 @@
+{
+  "key_path": "InviteQuotaErrorCustomizedBody",
+  "content": "You will be redirected to the <1>Login</1> page in 10 seconds",
+  "content_en_sha1_hash": "a36d56ee95d7f3d5383a22934d945b10ac02c5b4",
+  "created_at": "2026-02-19T13:36:31.109Z",
+  "updated_at": "2026-02-19T13:36:33.064Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/login/src/components/InviteLinkError.tsx",
+      "line_number": 61,
+      "context": "bodyText={bodyText}\n >\n <Text fontSize=\"13px\" fontWeight=\"600\">\n <Trans\n t={t}\n i18nKey=\"InviteQuotaErrorCustomizedBody\"\n components={{\n 1: (\n <Link\n type={LinkType.page}\n key=\"link_key\"",
+      "module": "/packages/login"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

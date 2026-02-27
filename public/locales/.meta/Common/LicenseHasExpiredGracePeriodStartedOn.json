@@ -1,0 +1,28 @@
+{
+  "key_path": "LicenseHasExpiredGracePeriodStartedOn",
+  "content": "License has expired. Grace period started on {{date}}",
+  "content_en_sha1_hash": "33259668ffe97b9b321ae743d2ddc6d84947bdb0",
+  "created_at": "2026-02-18T14:56:00.764Z",
+  "updated_at": "2026-02-19T13:36:33.181Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/pages/Payments/Standalone/sub-components/TariffTitleContainer.tsx",
+      "line_number": 99,
+      "context": "<Text\n className={styles.paymentsSubscriptionExpired}\n isBold\n fontSize=\"16px\"\n >\n {t(\"LicenseHasExpiredGracePeriodStartedOn\", {\n date: paymentDate,\n })}\n </Text>\n );\n }",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

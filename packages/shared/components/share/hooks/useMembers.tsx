@@ -36,7 +36,7 @@ import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/person+.react.svg?url";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { MembersSubjectType, ShareAccessRights } from "../../../enums";
 import { isFile, isFolder } from "../../../utils/typeGuards";
-import { useUnmount } from "../../../hooks/useUnmount";
+import { useUnmount } from "@docspace/ui-kit/hooks/useUnmount";
 import { useDidMount } from "../../../hooks/useDidMount";
 import { SHARED_MEMBERS_COUNT } from "../../../constants";
 import { ShareLinkService } from "../../../services/share-link.service";

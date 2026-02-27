@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import classNames from "classnames";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
@@ -37,7 +36,7 @@ import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 
 import { useMessageStore } from "../../store/messageStore";
 
-import { ButtonsProps } from "../../Chat.types";
+import type { ButtonsProps } from "../../Chat.types";
 
 import styles from "./ChatInput.module.scss";
 import ToolsSettings from "./ToolsSettings";

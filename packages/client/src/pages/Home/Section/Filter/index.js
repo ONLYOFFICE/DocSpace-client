@@ -144,6 +144,11 @@ const SectionFilterContent = ({
   filesStore,
   groupsStore,
   usersStore,
+  setEditRoomGroupsDialogVisible,
+  getAllRoomGroups,
+  roomGroups,
+  isRoomsFolder,
+  organizeRoomsGrouping,
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -154,6 +159,30 @@ const SectionFilterContent = ({
   const isContactsInsideGroupPage = contactsTab === "inside_group";
   const isContactsGroupsPage = contactsTab === "groups";
   const isContactsGuestsPage = contactsTab === "guests";
+
+  // Check if any filter or search is active (excluding sorting and groupId)
+  // Room grouping should be hidden when filters/search are active
+  const isFilterOrSearchActive = React.useMemo(() => {
+    if (!isRooms) return false;
+    return !!(
+      roomsFilter.filterValue ||
+      roomsFilter.type ||
+      roomsFilter.subjectId ||
+      roomsFilter.provider ||
+      roomsFilter.quotaFilter ||
+      (roomsFilter.tags && roomsFilter.tags.length > 0) ||
+      roomsFilter.withoutTags
+    );
+  }, [
+    isRooms,
+    roomsFilter.filterValue,
+    roomsFilter.type,
+    roomsFilter.subjectId,
+    roomsFilter.provider,
+    roomsFilter.quotaFilter,
+    roomsFilter.tags,
+    roomsFilter.withoutTags,
+  ]);
 
   const {
     onContactsFilter,
@@ -211,6 +240,8 @@ const SectionFilterContent = ({
         newFilter.page = 0;
         newFilter.provider = providerType || null;
         newFilter.type = type || null;
+        // Clear groupId when filter is applied - grouping doesn't work with filters
+        newFilter.groupId = null;
 
         newFilter.subjectFilter = null;
         newFilter.subjectId = null;
@@ -423,6 +454,8 @@ const SectionFilterContent = ({
 
         newFilter.page = 0;
         newFilter.filterValue = searchValue;
+        // Clear groupId when search is applied - grouping doesn't work with filters
+        newFilter.groupId = null;
 
         const path =
           newFilter.searchArea === RoomSearchArea.Active ||
@@ -1742,6 +1775,20 @@ const SectionFilterContent = ({
     }
   };
 
+  const onFilterByGroup = (groupId) => {
+    if (!isRooms) return;
+
+    setIsLoading(true);
+
+    const newFilter = roomsFilter.clone();
+    newFilter.page = 0;
+    newFilter.groupId = groupId;
+
+    const path = "rooms/shared";
+
+    navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
+  };
+
   if (showFilterLoader) return <FilterLoader />;
 
   return (
@@ -1784,6 +1831,16 @@ const SectionFilterContent = ({
       isContactsGuestsPage={isContactsGuestsPage}
       isRecentFolder={isRecentFolder}
       renderSelector={renderFilterSelector}
+      setEditRoomGroupsDialogVisible={setEditRoomGroupsDialogVisible}
+      getAllRoomGroups={getAllRoomGroups}
+      roomGroups={roomGroups}
+      onFilterByGroup={onFilterByGroup}
+      currentGroupId={(() => {
+        return roomsFilter?.groupId;
+      })()}
+      isRoomsFolder={isRoomsFolder}
+      organizeRoomsGrouping={organizeRoomsGrouping}
+      isFilterOrSearchActive={isFilterOrSearchActive}
     />
   );
 };
@@ -1792,6 +1849,7 @@ export default inject(
   ({
     authStore,
     filesStore,
+    filesSettingsStore,
     treeFoldersStore,
     clientLoadingStore,
     tagsStore,
@@ -1803,6 +1861,7 @@ export default inject(
     currentQuotaStore,
     indexingStore,
     selectedFolderStore,
+    dialogsStore,
   }) => {
     const {
       filter,
@@ -1847,7 +1906,12 @@ export default inject(
     const { isIndexEditingMode } = indexingStore;
     const { isIndexedFolder, getSelectedFolder } = selectedFolderStore;
 
-    const { usersStore, groupsStore, viewAs: contactsViewAs } = peopleStore;
+    const {
+      usersStore,
+      groupsStore,
+
+      viewAs: contactsViewAs,
+    } = peopleStore;
 
     const { groups, groupsFilter, setGroupsFilter } = groupsStore;
 
@@ -1858,6 +1922,11 @@ export default inject(
     } = usersStore;
 
     const { isPublicRoom, publicRoomKey } = publicRoomStore;
+
+    const { setEditRoomGroupsDialogVisible, getAllRoomGroups, roomGroups } =
+      dialogsStore;
+
+    const { organizeRoomsGrouping } = filesSettingsStore;
 
     return {
       isRoomAdmin,
@@ -1924,6 +1993,11 @@ export default inject(
       filesStore,
       groupsStore,
       usersStore,
+      setEditRoomGroupsDialogVisible,
+      getAllRoomGroups,
+      roomGroups,
+      isRoomsFolder,
+      organizeRoomsGrouping,
     };
   },
 )(

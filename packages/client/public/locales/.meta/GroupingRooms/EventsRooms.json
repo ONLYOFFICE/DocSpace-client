@@ -1,0 +1,28 @@
+{
+  "key_path": "EventsRooms",
+  "content": "Events rooms",
+  "content_en_sha1_hash": "eb7e9bc6362bce214cac0e5c51a42b7fd12d9a26",
+  "created_at": "2026-02-19T13:36:24.875Z",
+  "updated_at": "2026-02-19T13:36:32.448Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/RoomGroupingDialog/index.tsx",
+      "line_number": 163,
+      "context": "<div\n className={classNames(styles.tagName, {\n [styles.tagNameTablet]: !isDesktopView,\n })}\n >\n {t(\"GroupingRooms:EventsRooms\")}\n </div>\n </div>\n </div>\n \n {isDesktopView ? (",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -108,6 +108,7 @@ const FilesTableRow = memo((props) => {
   } = props;
 
   const { acceptBackground, background } = theme.dragAndDrop;
+  const [isHovered, setIsHovered] = useState(false);
 
   const rowRef = React.useRef();
 
@@ -258,6 +259,14 @@ const FilesTableRow = memo((props) => {
     [onChangeIndex],
   );
 
+  const onMouseEnter = useEventCallback(() => {
+    setIsHovered(true);
+  });
+
+  const onMouseLeave = useEventCallback(() => {
+    setIsHovered(false);
+  });
+
   return (
     <StyledDragAndDrop
       id={id}
@@ -308,6 +317,8 @@ const FilesTableRow = memo((props) => {
         hideColumns={hideColumns}
         badgeUrl={badgeUrl}
         canDrag={canDrag}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
         {...contextOptionProps}
       >
         {isTemplates ? (
@@ -315,18 +326,21 @@ const FilesTableRow = memo((props) => {
             t={t}
             element={element}
             dragStyles={dragStyles}
+            isHovered={isHovered}
             {...props}
           />
         ) : isRooms ? (
           <RoomsRowDataComponent
             element={element}
             dragStyles={dragStyles}
+            isHovered={isHovered}
             {...props}
           />
         ) : isAIAgentsFolder ? (
           <AIAgentsRowDataComponent
             element={element}
             dragStyles={dragStyles}
+            isHovered={isHovered}
             {...props}
           />
         ) : isTrashFolder ? (

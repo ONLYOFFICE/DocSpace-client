@@ -86,8 +86,14 @@ const externalAIFetch = async (
       let done = false;
 
       while (!done) {
-        const { value, done: readDone } = await reader.read();
-        done = readDone;
+        let value;
+        try {
+          const { value: readerValue, done: readerDone } = await reader.read();
+          value = readerValue;
+          done = readerDone;
+        } catch {
+          // ignore
+        }
 
         if (value) {
           sendEvent(connector, {
@@ -132,4 +138,3 @@ const externalAIFetch = async (
 };
 
 export default externalAIFetch;
-

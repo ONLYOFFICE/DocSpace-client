@@ -29,7 +29,8 @@
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
-import FilesSelectorWrapper from "@docspace/shared/selectors/Files";
+import FilesSelectorWrapper from "@docspace/ui-kit/selectors/Files";
+import type { SdkFolderType } from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
 import { DeviceType, FolderType } from "@docspace/shared/enums";
 
 import { SelectFolderDialogProps } from "@/types";
@@ -84,7 +85,7 @@ const SelectFolderDialog = ({
 			withoutBackButton
 			withCancelButton
 			disabledItems={[]}
-			disabledFolderType={FolderType.ResultStorage}
+			disabledFolderType={FolderType.ResultStorage as SdkFolderType}
 			onSubmit={onSubmit}
 			submitButtonLabel={t("Common:SaveHereButton")}
 			submitButtonId="select-file-modal-submit"
@@ -95,7 +96,7 @@ const SelectFolderDialog = ({
 			isRoomsOnly={false}
 			isThirdParty={false}
 			currentFolderId={selectedFolderId!}
-			rootFolderType={fileInfo.rootFolderType}
+			rootFolderType={fileInfo.rootFolderType as SdkFolderType}
 			embedded={false}
 			withFooterInput
 			withFooterCheckbox={withFooterCheckbox}

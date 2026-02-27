@@ -165,7 +165,11 @@ const useAccountsHotkeys = ({
   };
 
   // Copy selected items to clipboard
-  useHotkeys("Ctrl+Shift+c", copySelectedTextFn, hotkeysFilter);
+  useHotkeys(
+    "Ctrl+Shift+c, command+Shift+c",
+    copySelectedTextFn,
+    hotkeysFilter,
+  );
 
   // Open context menu
   useHotkeys("Shift+c", openContextMenu, {

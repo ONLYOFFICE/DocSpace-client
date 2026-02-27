@@ -3,7 +3,7 @@
   "content": "Presentation",
   "content_en_sha1_hash": "6e875951a6f9aa1374d93572de657c12ded57355",
   "created_at": "2025-05-19T21:30:47.449Z",
-  "updated_at": "2025-12-23T10:30:53.368Z",
+  "updated_at": "2026-02-19T13:36:32.228Z",
   "comment": {
     "text": "The translation key \"Presentation\" is used as a label for buttons related to creating presentations. It appears in various UI elements, such as main buttons and links, where it is displayed alongside an icon and allows users to create new presentations.",
     "is_auto": true,
@@ -12,14 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 599,
+      "line_number": 543,
       "context": "const createNewPresentationPptx = {\n id: \"actions_new-presentation\",\n className: \"main-button_drop-down\",\n icon: ActionsPresentationReactSvgUrl,\n label: t(\"Common:Presentation\"),\n onClick: onCreate,\n action: \"pptx\",\n key: \"pptx\",\n };",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/CommonButtons.js",
-      "line_number": 70,
-      "context": "</div>\n <Link data-format=\"xlsx\" onClick={onCreate} {...linkStyles}>\n {t(\"Spreadsheet\")},\n </Link>\n <Link data-format=\"pptx\" onClick={onCreate} {...linkStyles}>\n {t(\"Presentation\")},\n </Link>\n <Link data-format=\"pdf\" onClick={onCreate} {...linkStyles}>\n {t(\"Translations:NewForm\")}\n </Link>\n </div>",
       "module": "/packages/client"
     },
     {
@@ -36,7 +30,7 @@
     },
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 503,
+      "line_number": 480,
       "context": "<Text\n fontSize=\"15px\"\n fontWeight=\"600\"\n className=\"settings_unavailable\"\n >\n {t(\"LogoForEditors\", { editorName: t(\"Common:Presentation\") })} (\n {logoUrls[10].size.width}x{logoUrls[10].size.height})\n </Text>\n <div className={styles.logosWrapper}>\n <Logo\n name={logoUrls[10].name}",
       "module": "/packages/shared"
     },

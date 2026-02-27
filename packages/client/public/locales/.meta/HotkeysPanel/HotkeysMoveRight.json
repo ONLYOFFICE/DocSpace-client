@@ -3,7 +3,7 @@
   "content": "Move right without changing selection",
   "content_en_sha1_hash": "8ecb0b0db2d492fa704b675c6c279b003a727180",
   "created_at": "2025-05-19T21:30:55.063Z",
-  "updated_at": "2025-05-24T10:39:25.886Z",
+  "updated_at": "2026-02-19T13:36:32.512Z",
   "comment": {
     "text": "This translation key describes the action of moving right without changing the selection in a user interface component. It appears in a hotkey panel, specifically next to the \"→\" arrow key symbol, indicating that this key combination will move focus or selection to the right side of an element or container.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/panels/HotkeysPanel/MoveBlock.js",
       "line_number": 54,
-      "context": "<Text {...keyTextStyles}>{CtrlKey} + ←</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysMoveRight\")}</Text>\n <Text {...keyTextStyles}>{CtrlKey} + →</Text>\n </>\n </Row>\n </>\n );",
+      "context": "<Text {...keyTextStyles}>{CtrlKey} + ←</Text>\n </>\n </Row>\n <Row className={styles.hotkeysRow}>\n <>\n <Text {...textStyles}>{t(\"HotkeysMoveRight\")}</Text>\n <Text {...keyTextStyles}>{CtrlKey} + →</Text>\n </>\n </Row>\n </>\n );",
       "module": "/packages/client"
     }
   ],

@@ -33,7 +33,15 @@ import config from "PACKAGE_FILE";
 import { PluginActions, PluginToastType } from "./enums";
 import { CategoryType } from "@docspace/shared/constants";
 import { getCategoryType } from "@docspace/shared/utils/common";
-import { uuid } from "@docspace/shared/utils";
+import {
+  showInfoPanel,
+  openMembersTab,
+  openShareTab,
+  setView,
+  InfoPanelView,
+  setFileView,
+  setRoomsView,
+} from "../info-panel";
 
 export const messageActions = ({
   message,
@@ -56,6 +64,7 @@ export const messageActions = ({
   updateProfileMenuItems,
   updateEventListenerItems,
   updateFileItems,
+  updateArticleButtonItems,
   updateCreateDialogProps,
   updatePlugin,
 }) => {
@@ -215,6 +224,9 @@ export const messageActions = ({
       case PluginActions.updateInfoPanelItems:
         updateInfoPanelItems?.(pluginName);
 
+      case PluginActions.updateArticleButtonItems:
+        updateArticleButtonItems?.(pluginName);
+
         break;
       case PluginActions.updateMainButtonItems:
         updateMainButtonItems?.(pluginName);
@@ -251,6 +263,38 @@ export const messageActions = ({
       }
       case PluginActions.saveSettings:
         updatePlugin(pluginName, null, message.settings);
+        break;
+
+      case PluginActions.navigate:
+        if (!message.navigatePath) return;
+
+        window.DocSpace.navigate(message.navigatePath);
+
+        break;
+
+      case PluginActions.openInfoPanel:
+        setPluginDialogVisible(false);
+        setSettingsPluginDialogVisible(false);
+        setPluginSelectorVisible(false);
+        showInfoPanel();
+
+        switch (message.infoPanelTab) {
+          case InfoPanelView.infoShare:
+            openShareTab();
+            break;
+          case InfoPanelView.infoMembers:
+            openMembersTab();
+            break;
+          case InfoPanelView.infoDetails:
+          case InfoPanelView.infoHistory:
+            setView(message.infoPanelTab);
+            break;
+          default:
+            setView(`info_plugin-${message.infoPanelTab}`);
+            setFileView(`info_plugin-${message.infoPanelTab}`);
+            setRoomsView(`info_plugin-${message.infoPanelTab}`);
+        }
+
         break;
       default:
         break;

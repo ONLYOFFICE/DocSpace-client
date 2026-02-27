@@ -96,9 +96,15 @@ export const TariffTitleContainer = ({
           isBold
           fontSize="16px"
         >
-          {t("LicenseHasExpiredGracePeriodStartedOn", {
-            date: paymentDate,
-          })}
+          <Trans
+            i18nKey="LicenseHasExpiredGracePeriodStartedOn"
+            ns="Common"
+            t={t}
+            values={{ date: paymentDate }}
+            components={{
+              1: <span data-testid="grace-period-start-date" />,
+            }}
+          />
         </Text>
       );
     }
@@ -202,7 +208,8 @@ export const TariffTitleContainer = ({
               productName: t("ProductName"),
             }}
             components={{
-              1: <Text as="span" isBold />,
+              1: <Text as="span" isBold dataTestId="grace-period-date-range" />,
+              2: <span data-testid="grace-period-days-remaining" />,
             }}
           />
         </Text>

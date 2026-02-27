@@ -1,0 +1,28 @@
+{
+  "key_path": "BlankSpreadsheet",
+  "content": "Blank Spreadsheet",
+  "content_en_sha1_hash": "a5da75f1bb925b30f2f1c319c42d7a11feb6f0e3",
+  "created_at": "2026-02-18T14:56:25.425Z",
+  "updated_at": "2026-02-19T13:36:33.042Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/portal-settings/DefaultTemplatesStore.ts",
+      "line_number": 70,
+      "context": "getTitleByExt = (ext: string) => {\n switch (ext) {\n case \".docx\":\n return i18n.t(\"Settings:BlankDocument\");\n case \".xlsx\":\n return i18n.t(\"Settings:BlankSpreadsheet\");\n case \".pptx\":\n return i18n.t(\"Settings:BlankPresentation\");\n case \".pdf\":\n return i18n.t(\"Settings:BlankForm\");\n }",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

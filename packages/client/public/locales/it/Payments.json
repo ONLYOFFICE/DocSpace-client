@@ -97,7 +97,6 @@
   "PriceCalculation": "Calcola il tuo prezzo",
   "PriceForEach": "{{currency}} per {{amount}}",
   "ProductNameWallet": "Wallet di {{productName}}",
-  "Quantity": "Quantità",
   "RecommendedTopUpAmount": "Importo di ricarica consigliato: {{amount}}",
   "RemainingDays": "Giorni rimanenti del ciclo di fatturazione: {{count}}",
   "Reminder": "Promemoria:",

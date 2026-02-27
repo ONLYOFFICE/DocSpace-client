@@ -3,7 +3,7 @@
   "content": "Move left without changing selection",
   "content_en_sha1_hash": "90a8ae66f3aa3e461e904b9b3fffc63904d4d5f2",
   "created_at": "2025-05-19T21:30:55.061Z",
-  "updated_at": "2025-05-24T10:39:45.094Z",
+  "updated_at": "2026-02-19T13:36:32.511Z",
   "comment": {
     "text": "This translation key is used for the text \"Move left without changing selection\" and appears on a hotkeys panel in the application, providing context for users to understand the action triggered by the keyboard shortcut Ctrl + ←.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/panels/HotkeysPanel/MoveBlock.js",
       "line_number": 48,
-      "context": "<Text {...keyTextStyles}>{CtrlKey} + ↑</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysMoveLeft\")}</Text>\n <Text {...keyTextStyles}>{CtrlKey} + ←</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>",
+      "context": "<Text {...keyTextStyles}>{CtrlKey} + ↑</Text>\n </>\n </Row>\n <Row className={styles.hotkeysRow}>\n <>\n <Text {...textStyles}>{t(\"HotkeysMoveLeft\")}</Text>\n <Text {...keyTextStyles}>{CtrlKey} + ←</Text>\n </>\n </Row>\n <Row className={styles.hotkeysRow}>\n <>",
       "module": "/packages/client"
     }
   ],

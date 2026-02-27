@@ -96,7 +96,7 @@ export const SpacesRow = ({
 
   const contextOptionsProps = [
     {
-      label: t("Files:Open"),
+      label: t("Common:Open"),
       key: "space_open",
       icon: ExternalLinkIcon,
       onClick: () => window.open(`${protocol}//${item.domain}/`, "_blank"),

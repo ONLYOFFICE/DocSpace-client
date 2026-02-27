@@ -3,7 +3,7 @@
   "content": "You cannot change your plan because the used storage volume or the number of admins exceeds the limitations of the selected plan:",
   "content_en_sha1_hash": "4bdb41a36f148f1de76272d60696b987b70a76a0",
   "created_at": "2025-05-19T21:30:56.593Z",
-  "updated_at": "2025-05-24T13:11:19.194Z",
+  "updated_at": "2026-02-19T13:36:32.355Z",
   "comment": {
     "text": "\"This translation key is used for a message that indicates users cannot change their pricing plan due to storage or admin limitations. It appears in a modal dialog header, informing users about the reason for the restriction. Translators should provide an equivalent message that conveys this same limitation.\"",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangePricingPlanDialog/index.js",
-      "line_number": 102,
-      "context": ">\n <ModalDialog.Header>{t(\"ChangePricingPlan\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <StyledBodyContent>\n <Text fontSize=\"13px\" isBold className=\"cannot-downgrade-plan\">\n {t(\"CannotChangePlan\")}\n </Text>\n {planUsersLimitations}\n <br />\n {storagePlanLimitations}",
+      "line_number": 91,
+      "context": ">\n <ModalDialog.Header>{t(\"ChangePricingPlan\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.content}>\n <Text fontSize=\"13px\" isBold className={styles.cannotDowngradePlan}>\n {t(\"CannotChangePlan\")}\n </Text>\n {planUsersLimitations}\n <br />\n {storagePlanLimitations}",
       "module": "/packages/client"
     }
   ],

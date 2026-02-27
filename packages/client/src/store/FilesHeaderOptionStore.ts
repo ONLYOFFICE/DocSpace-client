@@ -24,7 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
 import type { TFunction } from "i18next";
+import { Trans } from "react-i18next";
 import { makeAutoObservable } from "mobx";
 
 import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
@@ -42,10 +44,13 @@ import DisableQuotaReactSvgUrl from "PUBLIC_DIR/images/disable.quota.react.svg?u
 import DefaultQuotaReactSvgUrl from "PUBLIC_DIR/images/default.quota.react.svg?url";
 import RemoveOutlineSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
+import CreateGroupReactSvgUrl from "PUBLIC_DIR/images/folder.react.svg?url";
+import AddToGroupReactSvgUrl from "PUBLIC_DIR/images/folder.location.react.svg?url";
 
 import { isDesktop } from "@docspace/shared/utils";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import type { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
+import type { TRoomGroup } from "@docspace/ui-kit/components/filter/Filter.types";
 
 import { showInfoPanel } from "SRC_DIR/helpers/info-panel";
 
@@ -53,13 +58,21 @@ import type FilesActionsStore from "./FilesActionsStore";
 import type FilesStore from "./FilesStore";
 import type DialogsStore from "./DialogsStore";
 
+type DialogsStoreWithRoomGroups = DialogsStore & {
+  roomGroups?: TRoomGroup[];
+  setEditRoomGroupsDialogVisible: (
+    visible: boolean,
+    roomIds?: number[] | null,
+  ) => void;
+};
+
 export default class FilesHeaderOptionStore {
   private t!: TFunction;
 
   constructor(
     private filesActionsStore: FilesActionsStore,
     private filesStore: FilesStore,
-    private dialogsStore: DialogsStore,
+    private dialogsStore: DialogsStoreWithRoomGroups,
     private currentQuotaStore: CurrentQuotasStore,
   ) {
     makeAutoObservable(this);
@@ -111,6 +124,84 @@ export default class FilesHeaderOptionStore {
     this.filesActionsStore.isAvailableOption(option);
 
   private onClickCreateRoom = () => this.filesActionsStore.onClickCreateRoom();
+
+  private createGroupHandle = () => {
+    const roomIds = this.filesStore.selection.map((room) => room.id as number);
+    this.filesStore.resetSelections();
+    this.dialogsStore.setEditRoomGroupsDialogVisible(true, roomIds);
+  };
+
+  private addToGroupHandle = async (groupId: string, groupName: string) => {
+    const roomIds = this.filesStore.selection.map((room) => room.id);
+    try {
+      await this.dialogsStore.updateRoomGroup(groupId, { roomsToAdd: roomIds });
+      await this.dialogsStore.getAllRoomGroups();
+      const transProps = {
+        t: this.t,
+        values: { groupName },
+        components: { 1: React.createElement("strong") },
+      };
+      const keys = {
+        single: { tKey: "GroupingRooms:RoomAddedToGroup" },
+        multiple: { tKey: "GroupingRooms:RoomsAddedToGroup" },
+      };
+      const i18nKey =
+        roomIds.length === 1 ? keys.single.tKey : keys.multiple.tKey;
+      toastr.success(
+        React.createElement(Trans, {
+          i18nKey,
+          ...transProps,
+        }),
+      );
+      this.filesStore.resetSelections();
+    } catch (error) {
+      console.error("Error adding rooms to group:", error);
+      toastr.error(this.t("Common:Error"));
+    }
+  };
+
+  private removeFromGroupHandle = async () => {
+    const roomIds = this.filesStore.selection.map((room) => room.id);
+    const currentGroupId = this.filesStore.roomsFilter?.groupId;
+    if (!currentGroupId) return;
+
+    const currentGroup = this.dialogsStore.roomGroups?.find(
+      (g) => String(g.id) === String(currentGroupId),
+    );
+    const groupName = currentGroup?.name || "";
+
+    try {
+      await this.dialogsStore.updateRoomGroup(currentGroupId, {
+        roomsToRemove: roomIds,
+      });
+      await this.dialogsStore.getAllRoomGroups();
+
+      // Remove the rooms from the current view
+      this.filesStore.removeFiles(null, roomIds);
+
+      const transProps = {
+        t: this.t,
+        values: { groupName },
+        components: { 1: React.createElement("strong") },
+      };
+      const keys = {
+        single: { tKey: "GroupingRooms:RoomRemovedFromGroup" },
+        multiple: { tKey: "GroupingRooms:RoomsRemovedFromGroup" },
+      };
+      const i18nKey =
+        roomIds.length === 1 ? keys.single.tKey : keys.multiple.tKey;
+      toastr.success(
+        React.createElement(Trans, {
+          i18nKey,
+          ...transProps,
+        }),
+      );
+      this.filesStore.resetSelections();
+    } catch (error) {
+      console.error("Error removing rooms from group:", error);
+      toastr.error(this.t("Common:Error"));
+    }
+  };
 
   private deleteRooms = () => this.filesActionsStore.deleteRooms(this.t);
 
@@ -218,6 +309,55 @@ export default class FilesHeaderOptionStore {
           label: t("Unpin"),
           iconUrl: UnpinReactSvgUrl,
           onClick: this.unpinHandle,
+          disabled: false,
+        };
+      case "create-group":
+        if (!this.isAvailableOption("create-group")) return null;
+        return {
+          id: "menu-create-group",
+          key: "create-group",
+          label: t("GroupingRooms:CreateAGroup"),
+          iconUrl: CreateGroupReactSvgUrl,
+          onClick: this.createGroupHandle,
+          disabled: false,
+        };
+      case "add-to-group":
+        if (!this.isAvailableOption("add-to-group")) return null;
+        return {
+          id: "menu-add-to-group",
+          key: "add-to-group",
+          label: t("GroupingRooms:AddToGroup"),
+          iconUrl: AddToGroupReactSvgUrl,
+          withDropDown: true,
+          fixedDropdownStyles: true,
+          options: this.dialogsStore.roomGroups?.map((group) => {
+            let groupIcon: string = CreateGroupReactSvgUrl;
+            if (typeof group.icon === "string" && group.icon) {
+              groupIcon = group.icon;
+            } else if (
+              typeof group.icon === "object" &&
+              group.icon?.data?.small
+            ) {
+              groupIcon = `data:image/svg+xml;utf8,${encodeURIComponent(group.icon.data.small)}`;
+            }
+            return {
+              id: `menu-add-to-group-${group.id}`,
+              key: `add-to-group-${group.id}`,
+              label: group.name,
+              icon: groupIcon,
+              onClick: () => this.addToGroupHandle(group.id, group.name),
+            };
+          }),
+          disabled: false,
+        };
+      case "remove-from-group":
+        if (!this.isAvailableOption("remove-from-group")) return null;
+        return {
+          id: "menu-remove-from-group",
+          key: "remove-from-group",
+          label: t("GroupingRooms:RemoveFromGroup"),
+          iconUrl: RemoveOutlineSvgUrl,
+          onClick: this.removeFromGroupHandle,
           disabled: false,
         };
       case "archive":

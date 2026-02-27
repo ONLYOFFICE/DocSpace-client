@@ -3,7 +3,7 @@
   "content": "Invitation Settings",
   "content_en_sha1_hash": "8a0e33d62c6b19c6f0e574b7a75348dbf29f66a4",
   "created_at": "2025-05-26T07:15:51.069Z",
-  "updated_at": "2025-09-26T15:21:06.361Z",
+  "updated_at": "2026-02-19T13:36:32.846Z",
   "comment": {
     "text": "The \"InvitationSettings\" translation key is used to display the title of a section within a security settings page, providing access to invitation settings. This title appears on a mobile view screen and can be translated for different languages. It is used as a heading for a category related to security features in an access portal.",
     "is_auto": true,
@@ -19,13 +19,13 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
       "line_number": 41,
-      "context": "import { isDesktop } from \"@docspace/shared/utils/device\";\n import { MainContainer } from \"../StyledSecurity\";\n import { TfaSection } from \"./tfa\";\n import { PasswordStrengthSection } from \"./passwordStrength\";\n import { TrustedMailSection } from \"./trustedMail\";\n import { InvitationSettingsSection } from \"./invitationSettings\";\n import { IpSecuritySection } from \"./ipSecurity\";\n import { AdminMessageSection } from \"./adminMessage\";\n import { SessionLifetimeSection } from \"./sessionLifetime\";\n import { BruteForceProtectionSection } from \"./bruteForceProtection\";\n import { DevToolsAccessSection } from \"./devToolsAccess\";",
+      "context": "import { isDesktop } from \"@docspace/ui-kit/utils/device\";\n import { MainContainer } from \"../StyledSecurity\";\n import { TfaSection } from \"./tfa\";\n import { PasswordStrengthSection } from \"./passwordStrength\";\n import { TrustedMailSection } from \"./trustedMail\";\n import { InvitationSettingsSection } from \"./invitationSettings\";\n import { IpSecuritySection } from \"./ipSecurity\";\n import { AdminMessageSection } from \"./adminMessage\";\n import { SessionLifetimeSection } from \"./sessionLifetime\";\n import { BruteForceProtectionSection } from \"./bruteForceProtection\";\n import { DevToolsAccessSection } from \"./devToolsAccess\";",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/mobileView.js",
       "line_number": 96,
-      "context": "}\n url=\"/portal-settings/security/access-portal/access-dev-tools\"\n onClickLink={onClickLink}\n />\n <MobileCategoryWrapper\n title={t(\"InvitationSettings\")}\n subtitle={\n <Trans\n i18nKey=\"InvitationSettingsMobile\"\n ns=\"Settings\"\n t={t}",
+      "context": "}\n url=\"/portal-settings/security/access-portal/access-dev-tools\"\n onClickLink={onClickLink}\n />\n <CategoryItem\n title={t(\"InvitationSettings\")}\n subtitle={\n <Trans\n i18nKey=\"InvitationSettingsMobile\"\n ns=\"Settings\"\n t={t}",
       "module": "/packages/client"
     },
     {

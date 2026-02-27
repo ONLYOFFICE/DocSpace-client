@@ -4,6 +4,8 @@ services:
     build:
       context: ../..
       dockerfile: packages/client/Dockerfile
+    volumes:
+      - ../../playwright-report/client:/app/playwright-report/client
   tests-local:
     image: client-tests
     ports:

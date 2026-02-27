@@ -3,7 +3,7 @@
   "content": "Unlimited",
   "content_en_sha1_hash": "b8bef37b7153b5665e94cf9b212c8708eb06db1f",
   "created_at": "2025-05-19T21:30:49.415Z",
-  "updated_at": "2025-12-16T07:24:43.756Z",
+  "updated_at": "2026-02-19T13:36:32.293Z",
   "comment": {
     "text": "This translation key is used to display \"Unlimited\" when an account has no quota limit. It appears in various UI elements, such as space quota components and share helpers, where it indicates that there are no restrictions on data storage or sharing.",
     "is_auto": true,
@@ -12,19 +12,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/SpaceQuota/index.js",
-      "line_number": 61,
+      "line_number": 62,
       "context": "{\n id: \"info-account-quota_no-quota\",\n key: \"no-quota\",\n label:\n item?.quotaLimit === -1\n ? t(\"Common:Unlimited\")\n : t(\"Common:DisableQuota\"),\n action: \"no-quota\",\n },\n ];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/SpaceQuota/index.js",
-      "line_number": 61,
+      "line_number": 62,
       "context": "{\n id: \"info-account-quota_no-quota\",\n key: \"no-quota\",\n label:\n item?.quotaLimit === -1\n ? t(\"Common:Unlimited\")\n : t(\"Common:DisableQuota\"),\n action: \"no-quota\",\n },\n ];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 244,
+      "line_number": 252,
       "context": "label: severalDays,\n onClick: () => setSevenDays(),\n },\n {\n key: \"unlimited\",\n label: t(\"Common:Unlimited\"),\n onClick: () => setUnlimited(),\n },\n {\n key: \"custom\",\n label: t(\"Common:Custom\"),",
       "module": "/packages/shared"
     },
@@ -36,7 +36,7 @@
     },
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 753,
+      "line_number": 743,
       "context": "export const getConvertedQuota = (\n t: (key: string) => string,\n bytes: number,\n ) => {\n if (bytes === -1) return t(\"Common:Unlimited\");\n return getConvertedSize(t, bytes);\n };\n \n export const getSpaceQuotaAsText = (\n t: (key: string) => string,",
       "module": "/packages/shared"
     }

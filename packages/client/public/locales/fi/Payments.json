@@ -97,7 +97,6 @@
   "PriceCalculation": "Laske hintasi",
   "PriceForEach": "{{currency}} per {{amount}}",
   "ProductNameWallet": "{{productName}} Lompakko",
-  "Quantity": "Määrä",
   "RecommendedTopUpAmount": "Suositeltu lisäättävä summa: {{amount}}",
   "RemainingDays": "Jäljellä olevat laskutusjakson päivät: {{count}}",
   "Reminder": "Muistutus:",

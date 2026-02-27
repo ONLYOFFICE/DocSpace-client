@@ -29,21 +29,26 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { FilterType, FolderType } from "@docspace/shared/enums";
-import FilesSelector from "@docspace/shared/selectors/Files";
+import FilesSelector from "@docspace/ui-kit/selectors/Files";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import {
-	TFile,
-	TFileSecurity,
-	TFolder,
-	TFolderSecurity,
+  TFile,
+  TFileSecurity,
+  TFolder,
+  TFolderSecurity,
 } from "@docspace/shared/api/files/types";
 import {
-	TBreadCrumb,
-	TSelectorItem,
+  TBreadCrumb,
+  TSelectorItem,
 } from "@docspace/ui-kit/components/selector";
 import { type TData } from "@docspace/ui-kit/components/toast";
-import { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
+import type {
+  TSelectedFileInfo,
+  FolderDtoInteger,
+  SdkFolderType,
+  FilesSettingsDto,
+} from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
 import { TRoom, TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import { TTranslation } from "@docspace/shared/types";
 
@@ -61,637 +66,645 @@ import { getAcceptButtonLabel, getIsDisabled } from "./utils";
 let disabledItems: (string | number)[] = [];
 
 const FilesSelectorWrapper = ({
-	isPanelVisible = false,
-	// withoutImmediatelyClose = false,
-	isThirdParty = false,
-	isRoomsOnly = false,
-	isUserOnly = false,
-	isEditorDialog = false,
-	isSelectFolder = false,
-	rootThirdPartyId,
-	filterParam,
+  isPanelVisible = false,
+  // withoutImmediatelyClose = false,
+  isThirdParty = false,
+  isRoomsOnly = false,
+  isUserOnly = false,
+  isEditorDialog = false,
+  isSelectFolder = false,
+  rootThirdPartyId,
+  filterParam,
 
-	onClose,
+  onClose,
 
-	withSearch = true,
-	withBreadCrumbs = true,
-	withSubtitle = true,
-	withPadding,
+  withSearch = true,
+  withBreadCrumbs = true,
+  withSubtitle = true,
+  withPadding,
 
-	isMove,
-	isCopy,
-	isRestore,
-	isRestoreAll,
-	isSelect,
-	isFormRoom,
+  isMove,
+  isCopy,
+  isRestore,
+  isRestoreAll,
+  isSelect,
+  isFormRoom,
 
-	currentFolderId,
-	fromFolderId,
-	parentId,
-	rootFolderType,
+  currentFolderId,
+  fromFolderId,
+  parentId,
+  rootFolderType,
 
-	treeFolders,
-	withRecentTreeFolder,
-	withFavoritesTreeFolder,
-	withAIAgentsTreeFolder,
+  treeFolders,
+  withRecentTreeFolder,
+  withFavoritesTreeFolder,
+  withAIAgentsTreeFolder,
 
-	selection,
-	// disabledItems,
-	setConflictDialogData,
-	checkFileConflicts,
-	itemOperationToFolder,
-	clearActiveOperations,
-	setSelected,
-	setMoveToPanelVisible,
-	setRestorePanelVisible,
-	setCopyPanelVisible,
-	setRestoreAllPanelVisible,
+  selection,
+  // disabledItems,
+  setConflictDialogData,
+  checkFileConflicts,
+  itemOperationToFolder,
+  clearActiveOperations,
+  setSelected,
+  setMoveToPanelVisible,
+  setRestorePanelVisible,
+  setCopyPanelVisible,
+  setRestoreAllPanelVisible,
 
-	onSelectFolder,
-	onSetBaseFolderPath,
-	// onSetNewFolderPath,
-	setIsDataReady,
-	onSelectTreeNode,
-	onSave,
-	onSelectFile,
+  onSelectFolder,
+  onSetBaseFolderPath,
+  // onSetNewFolderPath,
+  setIsDataReady,
+  onSelectTreeNode,
+  onSave,
+  onSelectFile,
 
-	withFooterInput,
-	withFooterCheckbox,
-	footerInputHeader,
-	currentFooterInputValue,
-	footerCheckboxLabel,
+  withFooterInput,
+  withFooterCheckbox,
+  footerInputHeader,
+  currentFooterInputValue,
+  footerCheckboxLabel,
 
-	descriptionText,
-	setSelectedItems,
+  descriptionText,
+  setSelectedItems,
 
-	includeFolder,
+  includeFolder,
 
-	setMoveToPublicRoomVisible,
-	setBackupToPublicRoomVisible,
-	setInfoPanelIsMobileHidden,
-	currentDeviceType,
+  setMoveToPublicRoomVisible,
+  setBackupToPublicRoomVisible,
+  setInfoPanelIsMobileHidden,
+  currentDeviceType,
 
-	embedded,
-	withHeader = true,
-	withCancelButton = true,
-	cancelButtonLabel,
-	acceptButtonLabel,
-	getIcon,
-	isRoomBackup,
+  embedded,
+  withHeader = true,
+  withCancelButton = true,
+  cancelButtonLabel,
+  acceptButtonLabel,
+  getIcon,
+  isRoomBackup,
 
-	roomsFolderId,
-	openRoot,
+  roomsFolderId,
+  openRoot,
 
-	filesSettings,
-	headerProps,
+  filesSettings,
+  headerProps,
 
-	withCreate,
-	folderIsShared,
-	checkCreating,
-	isMultiSelect,
-	disableBySecurity,
-	isPortalView = false,
-	withoutDescriptionText = false,
+  withCreate,
+  folderIsShared,
+  checkCreating,
+  isMultiSelect,
+  disableBySecurity,
+  isPortalView = false,
+  withoutDescriptionText = false,
 }: FilesSelectorProps) => {
-	const { t }: { t: TTranslation } = useTranslation([
-		"Files",
-		"Common",
-		"Translations",
-	]);
+  const { t }: { t: TTranslation } = useTranslation([
+    "Files",
+    "Common",
+    "Translations",
+  ]);
 
-	const [isRequestRunning, setIsRequestRunning] =
-		React.useState<boolean>(false);
+  const [isRequestRunning, setIsRequestRunning] =
+    React.useState<boolean>(false);
 
-	const [selectedFiles, setSelectedFiles] = React.useState<TSelectorItem[]>([]);
+  const [selectedFiles, setSelectedFiles] = React.useState<TSelectorItem[]>([]);
 
-	const onSelectAction = (file: TSelectorItem) => {
-		if (file.isFolder) return;
+  const onSelectAction = (file: TSelectorItem) => {
+    if (file.isFolder) return;
 
-		if (selectedFiles.find((f) => f.id === file.id)) {
-			setSelectedFiles(selectedFiles.filter((f) => f.id !== file.id));
-		} else {
-			setSelectedFiles((prev) => [...prev, file]);
-		}
-	};
+    if (selectedFiles.find((f) => f.id === file.id)) {
+      setSelectedFiles(selectedFiles.filter((f) => f.id !== file.id));
+    } else {
+      setSelectedFiles((prev) => [...prev, file]);
+    }
+  };
 
-	const onCloseAction = () => {
-		setInfoPanelIsMobileHidden(false);
+  const onCloseAction = () => {
+    setInfoPanelIsMobileHidden(false);
 
-		if (onClose) {
-			onClose();
-			return;
-		}
+    if (onClose) {
+      onClose();
+      return;
+    }
 
-		if (isCopy) {
-			setCopyPanelVisible(false);
-		} else if (isRestoreAll) {
-			setRestoreAllPanelVisible(false);
-		} else if (isRestore) {
-			setRestorePanelVisible(false);
-		} else {
-			setMoveToPanelVisible(false);
-		}
-	};
+    if (isCopy) {
+      setCopyPanelVisible(false);
+    } else if (isRestoreAll) {
+      setRestoreAllPanelVisible(false);
+    } else if (isRestore) {
+      setRestorePanelVisible(false);
+    } else {
+      setMoveToPanelVisible(false);
+    }
+  };
 
-	const onCloseAndDeselectAction = () => {
-		setSelected("none");
-		onCloseAction();
-	};
+  const onCloseAndDeselectAction = () => {
+    setSelected("none");
+    onCloseAction();
+  };
 
-	const getFilesArchiveError = React.useCallback(
-		(name: string) => t("Common:ArchivedRoomAction", { name }),
-		[t],
-	);
+  const getFilesArchiveError = React.useCallback(
+    (name: string) => t("Common:ArchivedRoomAction", { name }),
+    [t],
+  );
 
-	React.useEffect(() => {
-		return () => {
-			disabledItems = [];
-		};
-	}, []);
+  React.useEffect(() => {
+    return () => {
+      disabledItems = [];
+    };
+  }, []);
 
-	const formProps = useMemo(() => {
-		let isRoomFormAccessible = true;
+  const formProps = useMemo(() => {
+    let isRoomFormAccessible = true;
 
-		if (isSelect || isFormRoom) return;
+    if (isSelect || isFormRoom) return;
 
-		if (isCopy || isMove)
-			isRoomFormAccessible = selection.every(
-				(item) => "isPDFForm" in item && item.isPDFForm,
-			);
+    if (isCopy || isMove)
+      isRoomFormAccessible = selection.every(
+        (item) => "isPDFForm" in item && item.isPDFForm,
+      );
 
-		// for backup
-		if (!selection.length) {
-			isRoomFormAccessible = false;
-		}
+    // for backup
+    if (!selection.length) {
+      isRoomFormAccessible = false;
+    }
 
-		const getMessage = () => {
-			const several = selection.length > 1;
+    const getMessage = () => {
+      const several = selection.length > 1;
 
-			// for backup
-			if (!selection.length) return t("Common:BackupNotAllowedInFormRoom");
+      // for backup
+      if (!selection.length) return t("Common:BackupNotAllowedInFormRoom");
 
-			const option = { organizationName: t("Common:OrganizationName") };
+      const option = { organizationName: t("Common:OrganizationName") };
 
-			if (isCopy)
-				return several
-					? t("Files:WarningCopyToFormRoomServal", option)
-					: t("Common:WarningCopyToFormRoom", option);
+      if (isCopy)
+        return several
+          ? t("Files:WarningCopyToFormRoomServal", option)
+          : t("Common:WarningCopyToFormRoom", option);
 
-			if (isMove)
-				return several
-					? t("Files:WarningMoveToFormRoomServal", option)
-					: t("Files:WarningMoveToFormRoom", option);
+      if (isMove)
+        return several
+          ? t("Files:WarningMoveToFormRoomServal", option)
+          : t("Files:WarningMoveToFormRoom", option);
 
-			return "";
-		};
+      return "";
+    };
 
-		const message = getMessage();
+    const message = getMessage();
 
-		return {
-			message,
-			isRoomFormAccessible,
-		};
-	}, [selection, isCopy, isMove, isFormRoom, t]);
+    return {
+      message,
+      isRoomFormAccessible,
+    };
+  }, [selection, isCopy, isMove, isFormRoom, t]);
 
-	const onAccept = async (
-		selectedItemId: string | number | undefined,
-		folderTitle: string,
-		showMoveToPublicDialog: boolean,
-		breadCrumbs: TBreadCrumb[],
-		fileName: string,
-		isChecked: boolean,
-		selectedTreeNode: TFolder,
-		selectedFileInfo: TSelectedFileInfo,
-	) => {
-		if ((isMove || isCopy || isRestore || isRestoreAll) && !isEditorDialog) {
-			const fileIds: number[] = [];
-			const folderIds: number[] = [];
+  const onAccept = async (
+    selectedItemId: string | number | undefined,
+    folderTitle: string,
+    showMoveToPublicDialog: boolean,
+    breadCrumbs: TBreadCrumb[],
+    fileName: string,
+    isChecked: boolean,
+    selectedTreeNode: TFolder,
+    selectedFileInfo: TSelectedFileInfo,
+  ) => {
+    if ((isMove || isCopy || isRestore || isRestoreAll) && !isEditorDialog) {
+      const fileIds: number[] = [];
+      const folderIds: number[] = [];
 
-			for (const item of selection) {
-				if (
-					("fileExst" in item && item.fileExst) ||
-					("contentLength" in item && item.contentLength)
-				) {
-					fileIds.push(item.id);
-				} else if (item.id === selectedItemId) {
-					toastr.error(t("Common:MoveToFolderMessage"));
-				} else {
-					folderIds.push(item.id);
-				}
-			}
+      for (const item of selection) {
+        if (
+          ("fileExst" in item && item.fileExst) ||
+          ("contentLength" in item && item.contentLength)
+        ) {
+          fileIds.push(item.id);
+        } else if (item.id === selectedItemId) {
+          toastr.error(t("Common:MoveToFolderMessage"));
+        } else {
+          folderIds.push(item.id);
+        }
+      }
 
-			if (folderIds.length || fileIds.length) {
-				const operationData = {
-					destFolderId: selectedItemId,
-					destFolderInfo: selectedTreeNode,
-					folderIds,
-					fileIds,
-					deleteAfter: false,
-					isCopy,
-					folderTitle,
-					itemsCount: selection.length,
-					...(selection.length === 1 && {
-						title: selection[0].title,
-						isFolder: selection[0].isFolder,
-					}),
-				};
+      if (folderIds.length || fileIds.length) {
+        const operationData = {
+          destFolderId: selectedItemId,
+          destFolderInfo: selectedTreeNode,
+          folderIds,
+          fileIds,
+          deleteAfter: false,
+          isCopy,
+          folderTitle,
+          itemsCount: selection.length,
+          ...(selection.length === 1 && {
+            title: selection[0].title,
+            isFolder: selection[0].isFolder,
+          }),
+        };
 
-				if (showMoveToPublicDialog) {
-					setMoveToPublicRoomVisible(true, operationData);
-					return;
-				}
+        if (showMoveToPublicDialog) {
+          setMoveToPublicRoomVisible(true, operationData);
+          return;
+        }
 
-				setSelectedItems();
-				try {
-					const conflicts =
-						selectedTreeNode.type === FolderType.Knowledge
-							? []
-							: ((await checkFileConflicts(
-									selectedItemId,
-									folderIds,
-									fileIds,
-								)) as []);
+        setSelectedItems();
+        try {
+          const conflicts =
+            selectedTreeNode.type === FolderType.Knowledge
+              ? []
+              : ((await checkFileConflicts(
+                  selectedItemId,
+                  folderIds,
+                  fileIds,
+                )) as []);
 
-					if (conflicts.length) {
-						setConflictDialogData(conflicts, operationData);
-						setIsRequestRunning(false);
-					} else {
-						setIsRequestRunning(false);
-						onCloseAndDeselectAction();
-						sessionStorage.setItem("filesSelectorPath", `${selectedItemId}`);
+          if (conflicts.length) {
+            setConflictDialogData(conflicts, operationData);
+            setIsRequestRunning(false);
+          } else {
+            setIsRequestRunning(false);
+            onCloseAndDeselectAction();
+            sessionStorage.setItem("filesSelectorPath", `${selectedItemId}`);
 
-						try {
-							await itemOperationToFolder(operationData);
-						} catch (error) {
-							console.error(error);
-						}
-					}
-				} catch (e: unknown) {
-					toastr.error(e as TData);
-					setIsRequestRunning(false);
-					clearActiveOperations(fileIds, folderIds);
-				}
-			} else {
-				toastr.error(t("Common:ErrorEmptyList"));
-			}
-		} else {
-			if (isRoomBackup && showMoveToPublicDialog) {
-				setBackupToPublicRoomVisible(true, {
-					selectedItemId,
-					breadCrumbs,
-					onSelectFolder,
-					onClose,
-				});
+            try {
+              await itemOperationToFolder(operationData);
+            } catch (error) {
+              console.error(error);
+            }
+          }
+        } catch (e: unknown) {
+          toastr.error(e as TData);
+          setIsRequestRunning(false);
+          clearActiveOperations(fileIds, folderIds);
+        }
+      } else {
+        toastr.error(t("Common:ErrorEmptyList"));
+      }
+    } else {
+      if (isRoomBackup && showMoveToPublicDialog) {
+        setBackupToPublicRoomVisible(true, {
+          selectedItemId,
+          breadCrumbs,
+          onSelectFolder,
+          onClose,
+        });
 
-				return;
-			}
+        return;
+      }
 
-			if (onSelectFolder) onSelectFolder(selectedItemId, breadCrumbs);
-			if (onSave && selectedItemId)
-				onSave(null, selectedItemId, fileName, isChecked);
-			if (onSelectTreeNode) onSelectTreeNode(selectedTreeNode);
-			if (onSelectFile && selectedFiles.length && isMultiSelect) {
-				onSelectFile(selectedFiles);
+      if (onSelectFolder) onSelectFolder(selectedItemId, breadCrumbs);
+      if (onSave && selectedItemId)
+        onSave(null, selectedItemId, fileName, isChecked);
+      if (onSelectTreeNode) onSelectTreeNode(selectedTreeNode);
+      if (onSelectFile && selectedFiles.length && isMultiSelect) {
+        onSelectFile(selectedFiles);
 
-				if (!embedded) onCloseAndDeselectAction();
+        if (!embedded) onCloseAndDeselectAction();
 
-				return;
-			}
-			if (onSelectFile && selectedFileInfo)
-				onSelectFile(selectedFileInfo, breadCrumbs);
-			if (!embedded) onCloseAndDeselectAction();
-		}
-	};
+        return;
+      }
+      if (onSelectFile && selectedFileInfo)
+        onSelectFile(selectedFileInfo, breadCrumbs);
+      if (!embedded) onCloseAndDeselectAction();
+    }
+  };
 
-	// const headerLabel = getHeaderLabel(
-	//   t,
-	//   isEditorDialog,
-	//   isCopy,
-	//   isRestoreAll,
-	//   isMove,
-	//   isSelect,
-	//   filterParam,
-	//   isRestore,
-	//   isFormRoom,
-	//   isThirdParty,
-	//   isSelectFolder,
-	// );
+  // const headerLabel = getHeaderLabel(
+  //   t,
+  //   isEditorDialog,
+  //   isCopy,
+  //   isRestoreAll,
+  //   isMove,
+  //   isSelect,
+  //   filterParam,
+  //   isRestore,
+  //   isFormRoom,
+  //   isThirdParty,
+  //   isSelectFolder,
+  // );
 
-	const defaultAcceptButtonLabel = getAcceptButtonLabel(
-		t,
-		isEditorDialog,
-		isCopy,
-		isRestoreAll,
-		isMove,
-		isSelect,
-		filterParam,
-		isRestore,
-		isFormRoom,
-		isSelectFolder,
-	);
+  const defaultAcceptButtonLabel = getAcceptButtonLabel(
+    t,
+    isEditorDialog,
+    isCopy,
+    isRestoreAll,
+    isMove,
+    isSelect,
+    filterParam,
+    isRestore,
+    isFormRoom,
+    isSelectFolder,
+  );
 
-	const getIsDisabledAction = (
-		isFirstLoad: boolean,
-		isSelectedParentFolder: boolean,
-		selectedItemId: string | number | undefined,
-		selectedItemType: "rooms" | "files" | "agents" | undefined,
-		isRoot: boolean,
-		selectedItemSecurity:
-			| TFileSecurity
-			| TFolderSecurity
-			| TRoomSecurity
-			| undefined,
-		selectedFileInfo: TSelectedFileInfo,
-		isDisabledFolder?: boolean,
-		isInsideKnowledge?: boolean,
-		isInsideResultStorage?: boolean,
-	) => {
-		return getIsDisabled(
-			isFirstLoad,
-			isSelectedParentFolder,
-			fromFolderId === Number(selectedItemId),
-			selectedItemType === "rooms",
-			isRoot,
-			isCopy,
-			isMove,
-			isRestoreAll,
-			isRequestRunning,
-			selectedItemSecurity,
-			filterParam,
-			!!selectedFileInfo,
-			includeFolder,
-			isRestore,
-			isDisabledFolder,
-			isInsideKnowledge,
-			isInsideResultStorage,
-			selectedItemType === "agents",
-		);
-	};
+  const getIsDisabledAction = (
+    isFirstLoad: boolean,
+    isSelectedParentFolder: boolean,
+    selectedItemId: string | number | undefined,
+    selectedItemType: "rooms" | "files" | "agents" | undefined,
+    isRoot: boolean,
+    selectedItemSecurity:
+      | TFileSecurity
+      | TFolderSecurity
+      | TRoomSecurity
+      | undefined,
+    selectedFileInfo: TSelectedFileInfo,
+    isDisabledFolder?: boolean,
+    isInsideKnowledge?: boolean,
+    isInsideResultStorage?: boolean,
+  ) => {
+    return getIsDisabled(
+      isFirstLoad,
+      isSelectedParentFolder,
+      fromFolderId === Number(selectedItemId),
+      selectedItemType === "rooms",
+      isRoot,
+      isCopy,
+      isMove,
+      isRestoreAll,
+      isRequestRunning,
+      selectedItemSecurity,
+      filterParam,
+      !!selectedFileInfo,
+      includeFolder,
+      isRestore,
+      isDisabledFolder,
+      isInsideKnowledge,
+      isInsideResultStorage,
+      selectedItemType === "agents",
+    );
+  };
 
-	const openRootVar = openRoot || isRestore || isRestoreAll;
+  const openRootVar = openRoot || isRestore || isRestoreAll;
 
-	return (
-		<FilesSelector
-			openRoot={openRootVar}
-			disabledItems={disabledItems}
-			disabledFolderType={
-				isMove || isCopy || isRestore || isRestoreAll
-					? FolderType.ResultStorage
-					: undefined
-			}
-			filterParam={filterParam}
-			getIcon={getIcon}
-			setIsDataReady={setIsDataReady}
-			treeFolders={treeFolders}
-			withRecentTreeFolder={withRecentTreeFolder}
-			withFavoritesTreeFolder={withFavoritesTreeFolder}
-			withAIAgentsTreeFolder={withAIAgentsTreeFolder}
-			onSetBaseFolderPath={onSetBaseFolderPath}
-			isUserOnly={isUserOnly}
-			isRoomsOnly={isRoomsOnly}
-			isThirdParty={isThirdParty}
-			rootThirdPartyId={rootThirdPartyId}
-			roomsFolderId={roomsFolderId}
-			currentFolderId={isFormRoom && openRootVar ? "" : currentFolderId}
-			parentId={parentId}
-			rootFolderType={rootFolderType || FolderType.Rooms}
-			folderIsShared={folderIsShared}
-			currentDeviceType={currentDeviceType}
-			onCancel={onCloseAction}
-			onSubmit={onAccept}
-			getIsDisabled={getIsDisabledAction}
-			onSelectItem={onSelectAction}
-			withHeader={withHeader}
-			submitButtonLabel={acceptButtonLabel || defaultAcceptButtonLabel}
-			withCancelButton={withCancelButton}
-			isPanelVisible={isPanelVisible}
-			embedded={embedded}
-			withFooterInput={withFooterInput || false}
-			withFooterCheckbox={withFooterCheckbox || false}
-			footerInputHeader={footerInputHeader || ""}
-			currentFooterInputValue={currentFooterInputValue || ""}
-			footerCheckboxLabel={footerCheckboxLabel || ""}
-			withoutBackButton
-			cancelButtonLabel={cancelButtonLabel}
-			withBreadCrumbs={withBreadCrumbs}
-			withSearch={withSearch}
-			withPadding={withPadding}
-			descriptionText={
-				!withSubtitle ||
-				!filterParam ||
-				filterParam === "ALL" ||
-				(filterParam as unknown as FilterType) !== FilterType.DocumentsOnly ||
-				!descriptionText ||
-				withoutDescriptionText
-					? ""
-					: (descriptionText ?? t("Common:SelectDOCXFormat"))
-			}
-			submitButtonId={
-				isMove || isCopy || isRestore ? "select-file-modal-submit" : ""
-			}
-			cancelButtonId={
-				isMove || isCopy || isRestore ? "select-file-modal-cancel" : ""
-			}
-			getFilesArchiveError={getFilesArchiveError}
-			withCreate={
-				(isMove || isCopy || isRestore || isRestoreAll) ?? withCreate ?? false
-			}
-			filesSettings={filesSettings}
-			headerProps={headerProps}
-			formProps={formProps}
-			checkCreating={checkCreating}
-			isMultiSelect={isMultiSelect}
-			disableBySecurity={disableBySecurity}
-			isPortalView={isPortalView}
-		/>
-	);
+  return (
+    <FilesSelector
+      openRoot={openRootVar}
+      disabledItems={disabledItems}
+      disabledFolderType={
+        isMove || isCopy || isRestore || isRestoreAll
+          ? (FolderType.ResultStorage as unknown as SdkFolderType)
+          : undefined
+      }
+      filterParam={filterParam}
+      getIcon={getIcon}
+      setIsDataReady={setIsDataReady}
+      treeFolders={treeFolders as unknown as FolderDtoInteger[]}
+      withRecentTreeFolder={withRecentTreeFolder}
+      withFavoritesTreeFolder={withFavoritesTreeFolder}
+      withAIAgentsTreeFolder={withAIAgentsTreeFolder}
+      onSetBaseFolderPath={onSetBaseFolderPath}
+      isUserOnly={isUserOnly}
+      isRoomsOnly={isRoomsOnly}
+      isThirdParty={isThirdParty}
+      rootThirdPartyId={rootThirdPartyId}
+      roomsFolderId={roomsFolderId}
+      currentFolderId={isFormRoom && openRootVar ? "" : currentFolderId}
+      parentId={parentId}
+      rootFolderType={
+        (rootFolderType || FolderType.Rooms) as unknown as SdkFolderType
+      }
+      folderIsShared={folderIsShared}
+      currentDeviceType={currentDeviceType}
+      onCancel={onCloseAction}
+      onSubmit={
+        onAccept as unknown as Parameters<typeof FilesSelector>[0]["onSubmit"]
+      }
+      getIsDisabled={
+        getIsDisabledAction as unknown as Parameters<
+          typeof FilesSelector
+        >[0]["getIsDisabled"]
+      }
+      onSelectItem={onSelectAction}
+      withHeader={withHeader}
+      submitButtonLabel={acceptButtonLabel || defaultAcceptButtonLabel}
+      withCancelButton={withCancelButton}
+      isPanelVisible={isPanelVisible}
+      embedded={embedded}
+      withFooterInput={withFooterInput || false}
+      withFooterCheckbox={withFooterCheckbox || false}
+      footerInputHeader={footerInputHeader || ""}
+      currentFooterInputValue={currentFooterInputValue || ""}
+      footerCheckboxLabel={footerCheckboxLabel || ""}
+      withoutBackButton
+      cancelButtonLabel={cancelButtonLabel}
+      withBreadCrumbs={withBreadCrumbs}
+      withSearch={withSearch}
+      withPadding={withPadding}
+      descriptionText={
+        !withSubtitle ||
+        !filterParam ||
+        filterParam === "ALL" ||
+        (filterParam as unknown as FilterType) !== FilterType.DocumentsOnly ||
+        !descriptionText ||
+        withoutDescriptionText
+          ? ""
+          : (descriptionText ?? t("Common:SelectDOCXFormat"))
+      }
+      submitButtonId={
+        isMove || isCopy || isRestore ? "select-file-modal-submit" : ""
+      }
+      cancelButtonId={
+        isMove || isCopy || isRestore ? "select-file-modal-cancel" : ""
+      }
+      getFilesArchiveError={getFilesArchiveError}
+      withCreate={
+        (isMove || isCopy || isRestore || isRestoreAll) ?? withCreate ?? false
+      }
+      filesSettings={filesSettings as unknown as FilesSettingsDto}
+      headerProps={headerProps}
+      formProps={formProps}
+      checkCreating={checkCreating}
+      isMultiSelect={isMultiSelect}
+      disableBySecurity={disableBySecurity}
+      isPortalView={isPortalView}
+    />
+  );
 };
 
 export default inject(
-	(
-		{
-			settingsStore,
-			selectedFolderStore,
-			filesActionsStore,
-			uploadDataStore,
-			treeFoldersStore,
-			dialogsStore,
-			filesStore,
-			infoPanelStore,
-		}: {
-			settingsStore: SettingsStore;
-			selectedFolderStore: SelectedFolderStore;
-			filesActionsStore: FilesActionStore;
-			uploadDataStore: UploadDataStore;
-			treeFoldersStore: TreeFoldersStore;
-			dialogsStore: DialogsStore;
-			filesStore: FilesStore;
-			infoPanelStore: InfoPanelStore;
-		},
-		{
-			isCopy,
-			isRestoreAll,
-			isMove,
-			isRestore,
-			isPanelVisible,
-			id,
-			currentFolderId: currentFolderIdProp,
-			isThirdParty,
-			openRoot: openRootProp,
-		}: FilesSelectorProps,
-	) => {
-		const {
-			id: selectedId,
-			parentId,
-			rootFolderType,
-			shared,
-		} = selectedFolderStore;
+  (
+    {
+      settingsStore,
+      selectedFolderStore,
+      filesActionsStore,
+      uploadDataStore,
+      treeFoldersStore,
+      dialogsStore,
+      filesStore,
+      infoPanelStore,
+    }: {
+      settingsStore: SettingsStore;
+      selectedFolderStore: SelectedFolderStore;
+      filesActionsStore: FilesActionStore;
+      uploadDataStore: UploadDataStore;
+      treeFoldersStore: TreeFoldersStore;
+      dialogsStore: DialogsStore;
+      filesStore: FilesStore;
+      infoPanelStore: InfoPanelStore;
+    },
+    {
+      isCopy,
+      isRestoreAll,
+      isMove,
+      isRestore,
+      isPanelVisible,
+      id,
+      currentFolderId: currentFolderIdProp,
+      isThirdParty,
+      openRoot: openRootProp,
+    }: FilesSelectorProps,
+  ) => {
+    const {
+      id: selectedId,
+      parentId,
+      rootFolderType,
+      shared,
+    } = selectedFolderStore;
 
-		const { setConflictDialogData, checkFileConflicts, setSelectedItems } =
-			filesActionsStore;
-		const { itemOperationToFolder, clearActiveOperations } = uploadDataStore;
+    const { setConflictDialogData, checkFileConflicts, setSelectedItems } =
+      filesActionsStore;
+    const { itemOperationToFolder, clearActiveOperations } = uploadDataStore;
 
-		const { treeFolders, roomsFolderId } = treeFoldersStore;
+    const { treeFolders, roomsFolderId } = treeFoldersStore;
 
-		const {
-			restorePanelVisible,
-			setRestorePanelVisible,
-			moveToPanelVisible,
-			setMoveToPanelVisible,
-			copyPanelVisible,
-			setCopyPanelVisible,
-			restoreAllPanelVisible,
-			setRestoreAllPanelVisible,
-			conflictResolveDialogVisible,
-			setMoveToPublicRoomVisible,
-			setBackupToPublicRoomVisible,
-		} = dialogsStore;
+    const {
+      restorePanelVisible,
+      setRestorePanelVisible,
+      moveToPanelVisible,
+      setMoveToPanelVisible,
+      copyPanelVisible,
+      setCopyPanelVisible,
+      restoreAllPanelVisible,
+      setRestoreAllPanelVisible,
+      conflictResolveDialogVisible,
+      setMoveToPublicRoomVisible,
+      setBackupToPublicRoomVisible,
+    } = dialogsStore;
 
-		const { setIsMobileHidden: setInfoPanelIsMobileHidden } = infoPanelStore;
+    const { setIsMobileHidden: setInfoPanelIsMobileHidden } = infoPanelStore;
 
-		const { currentDeviceType } = settingsStore;
+    const { currentDeviceType } = settingsStore;
 
-		const {
-			selection,
-			bufferSelection,
-			filesList,
-			setSelected,
-			filesSettingsStore,
-		} = filesStore;
-		const { getIcon, filesSettings } = filesSettingsStore;
-		const { isVisible: infoPanelIsVisible, infoPanelSelection } =
-			infoPanelStore;
+    const {
+      selection,
+      bufferSelection,
+      filesList,
+      setSelected,
+      filesSettingsStore,
+    } = filesStore;
+    const { getIcon, filesSettings } = filesSettingsStore;
+    const { isVisible: infoPanelIsVisible, infoPanelSelection } =
+      infoPanelStore;
 
-		const selections: (TFile | TFolder | TRoom) & { isEditing: boolean }[] =
-			isMove || isCopy || isRestoreAll || isRestore
-				? isRestoreAll
-					? filesList
-					: selection.length > 0 && selection?.[0] != null
-						? selection
-						: bufferSelection != null
-							? [bufferSelection]
-							: infoPanelIsVisible && infoPanelSelection != null
-								? [infoPanelSelection]
-								: []
-				: [];
+    const selections: (TFile | TFolder | TRoom) & { isEditing: boolean }[] =
+      isMove || isCopy || isRestoreAll || isRestore
+        ? isRestoreAll
+          ? filesList
+          : selection.length > 0 && selection?.[0] != null
+            ? selection
+            : bufferSelection != null
+              ? [bufferSelection]
+              : infoPanelIsVisible && infoPanelSelection != null
+                ? [infoPanelSelection]
+                : []
+        : [];
 
-		// const sessionPath = window.sessionStorage.getItem("filesSelectorPath");
+    // const sessionPath = window.sessionStorage.getItem("filesSelectorPath");
 
-		const selectionsWithoutEditing: (TFile | TFolder | TRoom)[] = isRestoreAll
-			? filesList
-			: isCopy
-				? selections
-				: selections.filter((f) => f && !f?.isEditing);
+    const selectionsWithoutEditing: (TFile | TFolder | TRoom)[] = isRestoreAll
+      ? filesList
+      : isCopy
+        ? selections
+        : selections.filter((f) => f && !f?.isEditing);
 
-		selectionsWithoutEditing.forEach((item: TFile | TFolder | TRoom) => {
-			if (
-				(("isFolder" in item && item?.isFolder) ||
-					("parentId" in item && item?.parentId)) &&
-				item?.id &&
-				!disabledItems.includes(item.id)
-			) {
-				disabledItems.push(item.id);
-			}
-		});
+    selectionsWithoutEditing.forEach((item: TFile | TFolder | TRoom) => {
+      if (
+        (("isFolder" in item && item?.isFolder) ||
+          ("parentId" in item && item?.parentId)) &&
+        item?.id &&
+        !disabledItems.includes(item.id)
+      ) {
+        disabledItems.push(item.id);
+      }
+    });
 
-		const includeFolder =
-			selectionsWithoutEditing.filter((i) => "isFolder" in i && i.isFolder)
-				.length > 0;
+    const includeFolder =
+      selectionsWithoutEditing.filter((i) => "isFolder" in i && i.isFolder)
+        .length > 0;
 
-		const getFolderIdForRecent = () => {
-			// Don't know which folder should be selected. Can be files from different folders
-			if (selectionsWithoutEditing.length !== 1) {
-				return undefined;
-			}
+    const getFolderIdForRecent = () => {
+      // Don't know which folder should be selected. Can be files from different folders
+      if (selectionsWithoutEditing.length !== 1) {
+        return undefined;
+      }
 
-			const [selectedFile] = selectionsWithoutEditing;
+      const [selectedFile] = selectionsWithoutEditing;
 
-			// File is shared via link
-			if ("requestToken" in selectedFile && selectedFile.requestToken) {
-				return undefined;
-			}
+      // File is shared via link
+      if ("requestToken" in selectedFile && selectedFile.requestToken) {
+        return undefined;
+      }
 
-			return "folderId" in selectedFile ? selectedFile?.folderId : undefined;
-		};
+      return "folderId" in selectedFile ? selectedFile?.folderId : undefined;
+    };
 
-		const fromFolderId =
-			id ||
-			(rootFolderType === FolderType.Archive ||
-			rootFolderType === FolderType.TRASH
-				? undefined
-				: rootFolderType === FolderType.Recent
-					? getFolderIdForRecent()
-					: selectedId === selectionsWithoutEditing[0]?.id &&
-							"isFolder" in selectionsWithoutEditing[0] &&
-							selectionsWithoutEditing[0]?.isFolder
-						? parentId
-						: selectedId);
+    const fromFolderId =
+      id ||
+      (rootFolderType === FolderType.Archive ||
+      rootFolderType === FolderType.TRASH
+        ? undefined
+        : rootFolderType === FolderType.Recent
+          ? getFolderIdForRecent()
+          : selectedId === selectionsWithoutEditing[0]?.id &&
+              "isFolder" in selectionsWithoutEditing[0] &&
+              selectionsWithoutEditing[0]?.isFolder
+            ? parentId
+            : selectedId);
 
-		const folderId = fromFolderId;
-		const openRoot =
-			openRootProp || (rootFolderType === FolderType.Recent && !fromFolderId);
+    const folderId = fromFolderId;
+    const openRoot =
+      openRootProp || (rootFolderType === FolderType.Recent && !fromFolderId);
 
-		return {
-			fromFolderId,
-			parentId,
-			rootFolderType,
-			treeFolders,
-			isPanelVisible:
-				isPanelVisible ||
-				((moveToPanelVisible ||
-					copyPanelVisible ||
-					restorePanelVisible ||
-					restoreAllPanelVisible) &&
-					!conflictResolveDialogVisible),
-			setMoveToPanelVisible,
-			setRestorePanelVisible,
+    return {
+      fromFolderId,
+      parentId,
+      rootFolderType,
+      treeFolders,
+      isPanelVisible:
+        isPanelVisible ||
+        ((moveToPanelVisible ||
+          copyPanelVisible ||
+          restorePanelVisible ||
+          restoreAllPanelVisible) &&
+          !conflictResolveDialogVisible),
+      setMoveToPanelVisible,
+      setRestorePanelVisible,
 
-			selection: selectionsWithoutEditing,
-			disabledItems,
-			setConflictDialogData,
-			checkFileConflicts,
-			itemOperationToFolder,
-			clearActiveOperations,
-			setSelected,
-			setCopyPanelVisible,
-			setRestoreAllPanelVisible,
-			setSelectedItems,
-			setInfoPanelIsMobileHidden,
-			includeFolder,
+      selection: selectionsWithoutEditing,
+      disabledItems,
+      setConflictDialogData,
+      checkFileConflicts,
+      itemOperationToFolder,
+      clearActiveOperations,
+      setSelected,
+      setCopyPanelVisible,
+      setRestoreAllPanelVisible,
+      setSelectedItems,
+      setInfoPanelIsMobileHidden,
+      includeFolder,
 
-			setMoveToPublicRoomVisible,
-			setBackupToPublicRoomVisible,
-			currentDeviceType,
-			getIcon,
+      setMoveToPublicRoomVisible,
+      setBackupToPublicRoomVisible,
+      currentDeviceType,
+      getIcon,
 
-			roomsFolderId,
-			currentFolderId:
-				isThirdParty && currentFolderIdProp
-					? currentFolderIdProp
-					: folderId || currentFolderIdProp,
-			filesSettings,
-			folderIsShared: shared,
-			openRoot,
-		};
-	},
+      roomsFolderId,
+      currentFolderId:
+        isThirdParty && currentFolderIdProp
+          ? currentFolderIdProp
+          : folderId || currentFolderIdProp,
+      filesSettings,
+      folderIsShared: shared,
+      openRoot,
+    };
+  },
 )(observer(FilesSelectorWrapper));

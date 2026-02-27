@@ -3,7 +3,7 @@
   "content": "Move up without changing selection",
   "content_en_sha1_hash": "45b548b58c917019a11cd41d3c45956c27bd9bfc",
   "created_at": "2025-05-19T21:30:55.065Z",
-  "updated_at": "2025-05-24T10:39:02.430Z",
+  "updated_at": "2026-02-19T13:36:32.511Z",
   "comment": {
     "text": "The translation key \"HotkeysMoveUp\" is used to display the text for a hotkey shortcut that moves the selection up without changing it. This text appears in a panel within a UI component, indicating the action's purpose and providing context for users.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/panels/HotkeysPanel/MoveBlock.js",
       "line_number": 42,
-      "context": "<Text {...keyTextStyles}>{CtrlKey} + ↓</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysMoveUp\")}</Text>\n <Text {...keyTextStyles}>{CtrlKey} + ↑</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>",
+      "context": "<Text {...keyTextStyles}>{CtrlKey} + ↓</Text>\n </>\n </Row>\n <Row className={styles.hotkeysRow}>\n <>\n <Text {...textStyles}>{t(\"HotkeysMoveUp\")}</Text>\n <Text {...keyTextStyles}>{CtrlKey} + ↑</Text>\n </>\n </Row>\n <Row className={styles.hotkeysRow}>\n <>",
       "module": "/packages/client"
     }
   ],

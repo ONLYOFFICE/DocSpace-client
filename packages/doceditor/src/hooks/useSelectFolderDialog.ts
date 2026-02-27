@@ -35,7 +35,7 @@ import {
 	TFolderSecurity,
 } from "@docspace/shared/api/files/types";
 import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
-import { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
+import { TSelectedFileInfo } from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
 
 import { TEventData } from "@/types";
 import { saveAs } from "@/utils";

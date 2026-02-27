@@ -97,7 +97,6 @@
   "PriceCalculation": "Հաշվարկեք ձեր արժեքը",
   "PriceForEach": "{{currency}} մեկ {{amount}}-ի համար",
   "ProductNameWallet": "{{productName}} Wallet",
-  "Quantity": "Քանակ",
   "RecommendedTopUpAmount": "Առաջարկվող լիցքավորման գումար՝ {{amount}}",
   "RemainingDays": "Հաշվարկային ցիկլի մնացած օրերը՝ {{count}}",
   "Reminder": "Հիշողություն:",

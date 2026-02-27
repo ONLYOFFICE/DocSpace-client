@@ -60,6 +60,7 @@ const StandalonePage = (props) => {
     isNotPaidPeriod,
     gracePeriodEndDate,
     delayDaysCount,
+    feedbackAndSupportUrl,
   } = props;
 
   const { t, ready } = useTranslation("Common");
@@ -77,7 +78,7 @@ const StandalonePage = (props) => {
     showPortalSettingsLoader
   )
     return <PaymentsStandaloneLoader isEnterprise={!isTrial} />;
-  console.log("isGracePeriod", isGracePeriod);
+
   return (
     <StandalonePageComponent
       isTrial={isTrial}
@@ -100,6 +101,7 @@ const StandalonePage = (props) => {
       isNotPaidPeriod={isNotPaidPeriod}
       gracePeriodEndDate={gracePeriodEndDate}
       delayDaysCount={delayDaysCount}
+      feedbackAndSupportUrl={feedbackAndSupportUrl}
     />
   );
 };
@@ -143,7 +145,7 @@ export default inject(
 
     const { showPortalSettingsLoader } = clientLoadingStore;
 
-    const { docspaceFaqUrl, logoText } = settingsStore;
+    const { docspaceFaqUrl, logoText, feedbackAndSupportUrl } = settingsStore;
 
     const { openOnNewPage } = filesSettingsStore;
 
@@ -173,6 +175,7 @@ export default inject(
       isNotPaidPeriod,
       gracePeriodEndDate,
       delayDaysCount,
+      feedbackAndSupportUrl,
     };
   },
 )(observer(StandalonePage));

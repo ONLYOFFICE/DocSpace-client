@@ -1,0 +1,28 @@
+{
+  "key_path": "UserQuotaReached",
+  "content": "User quota limit has been reached.",
+  "content_en_sha1_hash": "6b544004dacc2a403ec5cc12b031fa0dbe0ffd46",
+  "created_at": "2026-02-18T14:56:20.494Z",
+  "updated_at": "2026-02-19T13:36:33.045Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/doceditor/src/components/Bar/index.tsx",
+      "line_number": 63,
+      "context": "case \"user\":\n return {\n description: initial\n ? t(\"EditingUnavailable\")\n : t(\"YourFurtherEditsNotSaved\"),\n header: initial ? t(\"UserQuotaReached\") : t(\"UserQuotaLimitWarning\"),\n };\n case \"tenant\":\n return {\n description: initial\n ? t(\"EditingUnavailable\")",
+      "module": "/packages/doceditor"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

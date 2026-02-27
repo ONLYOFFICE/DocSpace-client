@@ -610,6 +610,16 @@ const PortalSettingsRoutes = {
         ),
     },
     {
+      path: "developer-tools/javascript-sdk/uploader",
+      lazy: () =>
+        componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Uploader"
+            ),
+        ),
+    },
+    {
       path: "developer-tools/plugin-sdk",
       element: <ViewComponent />,
     },

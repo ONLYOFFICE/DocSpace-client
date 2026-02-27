@@ -113,6 +113,8 @@ import {
 } from "@docspace/shared/utils/filterConstants";
 import { isRoom as isRoomUtil } from "@docspace/shared/utils/typeGuards";
 
+import { showCreatedPDFFormDialog } from "SRC_DIR/components/dialogs/CreatedPDFFormDialog";
+
 const { FilesFilter, RoomsFilter } = api;
 const storageViewAs = localStorage.getItem("viewAs");
 
@@ -271,6 +273,10 @@ class FilesStore {
   mainButtonVisible = false;
 
   aiRoomStore = null;
+
+  dialogsStore = null;
+
+  arrRoomGroups = [];
 
   constructor(
     authStore,
@@ -860,19 +866,7 @@ class FilesStore {
 
     if (this.selectedFolderStore.id !== file.folderId) return;
 
-    const localKey = `${PDF_FORM_DIALOG_KEY}-${this.userStore.user.id}`;
-
-    const show = !JSON.parse(localStorage.getItem(localKey) ?? "false");
-
-    const event = new CustomEvent(Events.CREATE_PDF_FORM_FILE, {
-      detail: {
-        file,
-        show,
-        localKey,
-      },
-    });
-
-    window?.dispatchEvent(event);
+    showCreatedPDFFormDialog(file, this.userStore.user.id);
   };
 
   wsChangeFolderAccessRights = (option) => {
@@ -2395,6 +2389,21 @@ class FilesStore {
             this.setCreatedItem(null);
           }
 
+          // Show room grouping dialog if >= 10 rooms and not shown before
+          const isRoomsFolderByType =
+            data.current.rootFolderType === FolderType.Rooms &&
+            !data.current.parentId;
+          if (
+            isRoomsFolderByType &&
+            data.total >= 10 &&
+            !this.filesSettingsStore.organizeRoomsGrouping &&
+            this.dialogsStore?.setRoomGroupingDialogVisible
+          ) {
+            const dialogShown = localStorage.getItem("roomGroupingDialogShown");
+            if (!dialogShown)
+              this.dialogsStore.setRoomGroupingDialogVisible(true);
+          }
+
           runInAction(() => {
             this.roomsController = null;
           });
@@ -3280,6 +3289,9 @@ class FilesStore {
         "external-link",
         "embedding-settings",
         "room-info",
+        "create-group",
+        "add-to-group",
+        "remove-from-group",
         "pin-room",
         "unpin-room",
         "mute-room",
@@ -3379,6 +3391,29 @@ class FilesStore {
 
       if (!canViewRoomInfo) {
         roomOptions = removeOptions(roomOptions, ["room-info"]);
+      }
+
+      const { organizeRoomsGrouping } = this.filesSettingsStore;
+      const { roomGroups } = this.dialogsStore;
+      const currentGroupId = this.roomsFilter?.groupId;
+      if (
+        !organizeRoomsGrouping ||
+        isArchiveFolder ||
+        item.rootFolderType === FolderType.Archive ||
+        this.treeFoldersStore.isAIAgentsFolder
+      ) {
+        roomOptions = removeOptions(roomOptions, [
+          "create-group",
+          "add-to-group",
+          "remove-from-group",
+        ]);
+      } else if (!roomGroups || roomGroups.length === 0) {
+        roomOptions = removeOptions(roomOptions, [
+          "add-to-group",
+          "remove-from-group",
+        ]);
+      } else if (!currentGroupId) {
+        roomOptions = removeOptions(roomOptions, ["remove-from-group"]);
       }
 
       if (isArchiveFolder || item.rootFolderType === FolderType.Archive) {

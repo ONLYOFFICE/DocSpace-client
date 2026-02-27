@@ -25,69 +25,78 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
-import type { FilesSelectorProps } from "../../selectors/Files/FilesSelector.types";
-import type { TGetIcon } from "../../selectors/utils/types";
-import type { TFilesSettings } from "../../api/files/types";
+import type {
+  FilesSelectorProps,
+  FilesSettingsDto,
+} from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
+import type { TGetIcon } from "@docspace/ui-kit/selectors/utils/types";
 import type { DeviceType } from "../../enums";
 import type { BackupToPublicRoomOptionType } from "../../types";
 
 export type FileInfoType = {
-	id: string | number;
-	title: string;
-	path?: string[];
-	fileExst?: string;
-	inPublic?: boolean;
+  id: string | number;
+  title: string;
+  path?: string[];
+  fileExst?: string;
+  inPublic?: boolean;
 };
 
 export type FilesSelectorSettings =
-	| {
-			getIcon: TGetIcon;
-			filesSettings?: TFilesSettings;
-	  }
-	| { getIcon?: never; filesSettings: TFilesSettings };
+  | {
+      getIcon: TGetIcon;
+      filesSettings?: FilesSettingsDto & {
+        organizeRoomsGrouping?: boolean;
+      };
+    }
+  | {
+      getIcon?: never;
+      filesSettings: FilesSettingsDto & {
+        organizeRoomsGrouping?: boolean;
+      };
+    };
 
 export type FilesSelectorInputProps = {
-	newPath: string;
-	basePath: string;
-	isErrorPath: boolean;
+  newPath: string;
+  basePath: string;
+  isErrorPath: boolean;
 
-	currentDeviceType?: DeviceType;
-	openRoot?: boolean;
-	withCreate?: boolean;
-	id?: string | number;
-	isThirdParty?: boolean;
-	isRoomsOnly?: boolean;
-	checkCreating?: boolean;
-	isSelectFolder?: boolean;
-	isDisabled?: boolean;
-	isError?: boolean;
-	maxWidth?: string;
-	className?: string;
-	withoutInitPath?: boolean;
-	rootThirdPartyId?: string;
-	filterParam?: string;
-	descriptionText?: string;
-	isSelect?: boolean;
-	isRoomBackup?: boolean;
-	isDocumentIcon?: boolean;
-	filesSelectorSettings: FilesSelectorSettings;
-	formProps?: FilesSelectorProps["formProps"];
-	dataTestId?: string;
+  currentDeviceType?: DeviceType;
+  openRoot?: boolean;
+  withCreate?: boolean;
+  id?: string | number;
+  isThirdParty?: boolean;
+  isRoomsOnly?: boolean;
+  checkCreating?: boolean;
+  isSelectFolder?: boolean;
+  isDisabled?: boolean;
+  isError?: boolean;
+  maxWidth?: string;
+  className?: string;
+  withoutInitPath?: boolean;
+  rootThirdPartyId?: string;
+  filterParam?: string;
+  descriptionText?: string;
+  isSelect?: boolean;
+  isRoomBackup?: boolean;
+  isDocumentIcon?: boolean;
+  filesSelectorSettings: FilesSelectorSettings;
+  formProps?: FilesSelectorProps["formProps"];
+  dataTestId?: string;
 
-	setBasePath: (folders: TBreadCrumb[]) => void;
-	toDefault: VoidFunction;
-	onSelectFolder?: (
-		value: number | string | undefined,
-		breadCrumbs: TBreadCrumb,
-	) => void;
-	onSelectFile?: (fileInfo: FileInfoType, breadCrumbs?: TBreadCrumb[]) => void;
+  setBasePath: (folders: TBreadCrumb[]) => void;
+  toDefault: VoidFunction;
+  onSelectFolder?: (
+    value: number | string | undefined,
+    breadCrumbs: TBreadCrumb,
+  ) => void;
+  onSelectFile?: (fileInfo: FileInfoType, breadCrumbs?: TBreadCrumb[]) => void;
 
-	setNewPath: (folders: TBreadCrumb[], fileName?: string) => void;
+  setNewPath: (folders: TBreadCrumb[], fileName?: string) => void;
 
-	setBackupToPublicRoomVisible?: (
-		visible: boolean,
-		options: BackupToPublicRoomOptionType,
-	) => void;
+  setBackupToPublicRoomVisible?: (
+    visible: boolean,
+    options: BackupToPublicRoomOptionType,
+  ) => void;
 
-	withAIAgentsTreeFolder?: boolean;
+  withAIAgentsTreeFolder?: boolean;
 };

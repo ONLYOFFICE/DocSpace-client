@@ -29,20 +29,20 @@
 import { useCallback, useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 
-import { RoomsType } from "@docspace/shared/enums";
+import { FormFillingManageAction, RoomsType } from "@docspace/shared/enums";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { CREATED_FORM_KEY, EDITOR_ID } from "@docspace/shared/constants";
-import { getFileInfo } from "@docspace/shared/api/files";
+import { getFileInfo, manageFormFilling } from "@docspace/shared/api/files";
 
 import type {
-	TFile,
-	TFileSecurity,
-	TFolder,
-	TFolderSecurity,
+  TFile,
+  TFileSecurity,
+  TFolder,
+  TFolderSecurity,
 } from "@docspace/shared/api/files/types";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
-import type { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
+import type { TSelectedFileInfo } from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
 import type { TData } from "@docspace/ui-kit/components/toast";
 
 import { saveAs } from "@/utils";
@@ -54,239 +54,241 @@ type FailedResponseType = string;
 type ResponseType = SuccessResponse | FailedResponseType;
 
 type SuccessResponseType = {
-	form: TFile;
-	message: string;
+  form: TFile;
+  message: string;
 };
 
 const DefaultConflictDataDialogState: ConflictStateType = {
-	visible: false,
-	resolve: () => {},
-	reject: () => {},
-	fileName: "",
-	folderName: "",
+  visible: false,
+  resolve: () => {},
+  reject: () => {},
+  fileName: "",
+  folderName: "",
 };
 
 const hasFileUrl = (arg: object): arg is { data: { url: string } } => {
-	return (
-		"data" in arg &&
-		typeof arg.data === "object" &&
-		arg.data !== null &&
-		"url" in arg.data &&
-		typeof arg.data.url === "string"
-	);
+  return (
+    "data" in arg &&
+    typeof arg.data === "object" &&
+    arg.data !== null &&
+    "url" in arg.data &&
+    typeof arg.data.url === "string"
+  );
 };
 
 const isSuccessResponse = (
-	res: ResponseType | undefined,
+  res: ResponseType | undefined,
 ): res is SuccessResponse => {
-	return !!res && res.includes("form");
+  return !!res && res.includes("form");
 };
 
 const useStartFillingSelectDialog = (
-	fileInfo: TFile | undefined,
-	openAssignRolesDialog: (form: TFile, roomName: string) => void,
+  fileInfo: TFile | undefined,
+  openAssignRolesDialog: (form: TFile, roomName: string) => void,
 ) => {
-	const { t } = useTranslation(["Common"]);
-	const resolveRef =
-		useRef<(value: string | PromiseLike<string>) => void>(undefined);
+  const { t } = useTranslation(["Common"]);
+  const resolveRef =
+    useRef<(value: string | PromiseLike<string>) => void>(undefined);
 
-	const [createDefineRoomType, setCreateDefineRoomType] = useState<RoomsType>(
-		RoomsType.FormRoom,
-	);
+  const [createDefineRoomType, setCreateDefineRoomType] = useState<RoomsType>(
+    RoomsType.FormRoom,
+  );
 
-	const [headerLabelSFSDialog, setHeaderLabelSFSDialog] = useState("");
+  const [headerLabelSFSDialog, setHeaderLabelSFSDialog] = useState("");
 
-	const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
-	const requestRunning = useRef(false);
+  const requestRunning = useRef(false);
 
-	const onSDKRequestStartFilling = useCallback(
-		(headerLabel: string, formType: RoomsType = RoomsType.FormRoom) => {
-			setHeaderLabelSFSDialog(headerLabel);
-			setIsVisible(true);
-			setCreateDefineRoomType(formType);
-		},
-		[],
-	);
+  const onSDKRequestStartFilling = useCallback(
+    (headerLabel: string, formType: RoomsType = RoomsType.FormRoom) => {
+      setHeaderLabelSFSDialog(headerLabel);
+      setIsVisible(true);
+      setCreateDefineRoomType(formType);
+    },
+    [],
+  );
 
-	const onClose = useCallback(() => {
-		if (requestRunning.current) return;
-		setIsVisible(false);
-	}, []);
+  const onClose = useCallback(() => {
+    if (requestRunning.current) return;
+    setIsVisible(false);
+  }, []);
 
-	const onDownloadAs = (obj: object) => {
-		if (hasFileUrl(obj)) {
-			resolveRef.current?.(obj.data.url);
-			resolveRef.current = undefined;
-		}
-	};
+  const onDownloadAs = (obj: object) => {
+    if (hasFileUrl(obj)) {
+      resolveRef.current?.(obj.data.url);
+      resolveRef.current = undefined;
+    }
+  };
 
-	const getFileUrl = useCallback(async () => {
-		const docEditor =
-			typeof window !== "undefined" && window.DocEditor?.instances[EDITOR_ID];
+  const getFileUrl = useCallback(async () => {
+    const docEditor =
+      typeof window !== "undefined" && window.DocEditor?.instances[EDITOR_ID];
 
-		docEditor?.downloadAs("pdf");
+    docEditor?.downloadAs("pdf");
 
-		const url = await new Promise<string>((resolve) => {
-			resolveRef.current = resolve;
-		});
+    const url = await new Promise<string>((resolve) => {
+      resolveRef.current = resolve;
+    });
 
-		return url;
-	}, []);
+    return url;
+  }, []);
 
-	const onSubmit = useCallback(
-		async (
-			selectedItemId: string | number | undefined,
-			folderTitle: string,
-			isPublic: boolean,
-			breadCrumbs: TBreadCrumb[],
-			fileName: string,
-			isChecked: boolean,
-			selectedTreeNode: TFolder,
-		) => {
-			if (!fileInfo || !selectedItemId) return;
-			requestRunning.current = true;
+  const onSubmit = useCallback(
+    async (
+      selectedItemId: string | number | undefined,
+      folderTitle: string,
+      isPublic: boolean,
+      breadCrumbs: TBreadCrumb[],
+      fileName: string,
+      isChecked: boolean,
+      selectedTreeNode: TFolder,
+    ) => {
+      if (!fileInfo || !selectedItemId) return;
+      requestRunning.current = true;
 
-			try {
-				const [fileUrl, file] = await Promise.all([
-					getFileUrl(),
-					getFileInfo(fileInfo.id),
-				]);
+      try {
+        const [fileUrl, file] = await Promise.all([
+          getFileUrl(),
+          getFileInfo(fileInfo.id),
+        ]);
 
-				const response = await saveAs(
-					file.title,
-					fileUrl,
-					selectedItemId,
-					false,
-					"createForm",
-				);
+        const response = await saveAs(
+          file.title,
+          fileUrl,
+          selectedItemId,
+          false,
+          "createForm",
+        );
 
-				if (isSuccessResponse(response)) {
-					const res = JSON.parse(response) as SuccessResponseType;
+        if (isSuccessResponse(response)) {
+          const res = JSON.parse(response) as SuccessResponseType;
 
-					const { form } = res;
+          const { form } = res;
 
-					switch (createDefineRoomType) {
-						case RoomsType.FormRoom:
-							{
-								sessionStorage.setItem(CREATED_FORM_KEY, JSON.stringify(form));
+          switch (createDefineRoomType) {
+            case RoomsType.FormRoom:
+              {
+                await manageFormFilling(form.id, FormFillingManageAction.Start);
 
-								const url = new URL(
-									`${window.location.origin}/rooms/shared/filter`,
-								);
-								url.searchParams.set("folder", selectedItemId.toString());
-								window.location.replace(url.toString());
-							}
+                sessionStorage.setItem(CREATED_FORM_KEY, JSON.stringify(form));
 
-							break;
-						case RoomsType.VirtualDataRoom:
-							{
-								const url = new URL(
-									`${window.location.origin}/rooms/shared/filter`,
-								);
-								url.searchParams.set("folder", selectedItemId.toString());
+                const url = new URL(
+                  `${window.location.origin}/rooms/shared/filter`,
+                );
+                url.searchParams.set("folder", selectedItemId.toString());
+                window.location.replace(url.toString());
+              }
 
-								const components = {
-									1: (
-										<Link
-											tag="a"
-											href={url.toString()}
-											target={LinkTarget.blank}
-											textDecoration="underline"
-											color="accent"
-										/>
-									),
-									2: <strong />,
-								};
+              break;
+            case RoomsType.VirtualDataRoom:
+              {
+                const url = new URL(
+                  `${window.location.origin}/rooms/shared/filter`,
+                );
+                url.searchParams.set("folder", selectedItemId.toString());
 
-								const values = {
-									folderName: selectedTreeNode.title,
-									title: form.title,
-								};
+                const components = {
+                  1: (
+                    <Link
+                      tag="a"
+                      href={url.toString()}
+                      target={LinkTarget.blank}
+                      textDecoration="underline"
+                      color="accent"
+                    />
+                  ),
+                  2: <strong />,
+                };
 
-								toastr.success(
-									<Trans
-										t={t}
-										ns="Common"
-										i18nKey="CopyItem"
-										values={values}
-										components={components}
-									/>,
-								);
+                const values = {
+                  folderName: selectedTreeNode.title,
+                  title: form.title,
+                };
 
-								openAssignRolesDialog(form, selectedTreeNode.title);
-							}
-							break;
-						default:
-							break;
-					}
+                toastr.success(
+                  <Trans
+                    t={t}
+                    ns="Common"
+                    i18nKey="CopyItem"
+                    values={values}
+                    components={components}
+                  />,
+                );
 
-					return;
-				}
+                openAssignRolesDialog(form, selectedTreeNode.title);
+              }
+              break;
+            default:
+              break;
+          }
 
-				const [key, value] =
-					typeof response === "string" ? response.split(":") : [];
+          return;
+        }
 
-				if (key === "error") {
-					toastr.error(value);
-				}
-			} catch (e) {
-				toastr.error(e as TData);
-			} finally {
-				onClose();
-				requestRunning.current = false;
-			}
-		},
-		[
-			createDefineRoomType,
-			fileInfo,
-			getFileUrl,
-			onClose,
-			openAssignRolesDialog,
-			t,
-		],
-	);
+        const [key, value] =
+          typeof response === "string" ? response.split(":") : [];
 
-	const getIsDisabled = useCallback(
-		(
-			isFirstLoad: boolean,
-			isSelectedParentFolder: boolean,
-			selectedItemId: string | number | undefined,
-			selectedItemType: "rooms" | "files" | "agents" | undefined,
-			isRoot: boolean,
-			selectedItemSecurity:
-				| TFileSecurity
-				| TFolderSecurity
-				| TRoomSecurity
-				| undefined,
-			selectedFileInfo: TSelectedFileInfo,
-		) => {
-			if (selectedItemType === "rooms" || isRoot) return true;
+        if (key === "error") {
+          toastr.error(value);
+        }
+      } catch (e) {
+        toastr.error(e as TData);
+      } finally {
+        onClose();
+        requestRunning.current = false;
+      }
+    },
+    [
+      createDefineRoomType,
+      fileInfo,
+      getFileUrl,
+      onClose,
+      openAssignRolesDialog,
+      t,
+    ],
+  );
 
-			if (isFirstLoad) return true;
-			if (requestRunning.current) return true;
-			if (selectedFileInfo) return true;
+  const getIsDisabled = useCallback(
+    (
+      isFirstLoad: boolean,
+      isSelectedParentFolder: boolean,
+      selectedItemId: string | number | undefined,
+      selectedItemType: "rooms" | "files" | "agents" | undefined,
+      isRoot: boolean,
+      selectedItemSecurity:
+        | TFileSecurity
+        | TFolderSecurity
+        | TRoomSecurity
+        | undefined,
+      selectedFileInfo: TSelectedFileInfo,
+    ) => {
+      if (selectedItemType === "rooms" || isRoot) return true;
 
-			if (!selectedItemSecurity) return false;
+      if (isFirstLoad) return true;
+      if (requestRunning.current) return true;
+      if (selectedFileInfo) return true;
 
-			return "CopyTo" in selectedItemSecurity
-				? !selectedItemSecurity?.CopyTo
-				: !selectedItemSecurity.Copy;
-		},
-		[],
-	);
+      if (!selectedItemSecurity) return false;
 
-	return {
-		createDefineRoomType,
-		onSDKRequestStartFilling,
-		onSubmitStartFillingSelectDialog: onSubmit,
-		onCloseStartFillingSelectDialog: onClose,
-		getIsDisabledStartFillingSelectDialog: getIsDisabled,
-		onDownloadAs,
-		isVisibleStartFillingSelectDialog: isVisible,
-		conflictDataDialog: DefaultConflictDataDialogState,
-		headerLabelSFSDialog,
-	};
+      return "CopyTo" in selectedItemSecurity
+        ? !selectedItemSecurity?.CopyTo
+        : !selectedItemSecurity.Copy;
+    },
+    [],
+  );
+
+  return {
+    createDefineRoomType,
+    onSDKRequestStartFilling,
+    onSubmitStartFillingSelectDialog: onSubmit,
+    onCloseStartFillingSelectDialog: onClose,
+    getIsDisabledStartFillingSelectDialog: getIsDisabled,
+    onDownloadAs,
+    isVisibleStartFillingSelectDialog: isVisible,
+    conflictDataDialog: DefaultConflictDataDialogState,
+    headerLabelSFSDialog,
+  };
 };
 
 export default useStartFillingSelectDialog;

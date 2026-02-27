@@ -29,8 +29,8 @@ import { useTranslation } from "react-i18next";
 import { DeviceType, FolderType } from "../../../../enums";
 import { isDesktop, isTablet } from "../../../../utils";
 
-import FilesSelector from "../../../../selectors/Files";
-import { TGetIcon } from "../../../../selectors/utils/types";
+import FilesSelector from "@docspace/ui-kit/selectors/Files";
+import { TGetIcon } from "@docspace/ui-kit/selectors/utils/types";
 import { TBreadCrumb } from "@docspace/ui-kit/components/selector";
 
 type ExportSelectorProps = {

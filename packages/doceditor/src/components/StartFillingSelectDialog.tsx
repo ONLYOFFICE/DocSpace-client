@@ -28,7 +28,8 @@ import { useTranslation } from "react-i18next";
 
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
-import FilesSelectorWrapper from "@docspace/shared/selectors/Files";
+import FilesSelectorWrapper from "@docspace/ui-kit/selectors/Files";
+import type { SdkFolderType } from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
 import { RoomsType } from "@docspace/shared/enums";
 import { useSelectorInfoBar } from "@docspace/shared/hooks/useSelectorInfoBar";
 import {
@@ -84,7 +85,7 @@ function StartFillingSelectorDialog({
 			withBreadCrumbs
 			withoutBackButton={false}
 			currentFolderId=""
-			rootFolderType={fileInfo.rootFolderType}
+			rootFolderType={fileInfo.rootFolderType as SdkFolderType}
 			createDefineRoomLabel={createDefineRoomLabels[createDefineRoomType]}
 			createDefineRoomType={createDefineRoomType}
 			isPanelVisible={isVisible}

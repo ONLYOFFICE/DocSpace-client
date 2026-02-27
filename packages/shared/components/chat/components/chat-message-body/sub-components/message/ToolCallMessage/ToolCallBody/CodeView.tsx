@@ -26,8 +26,8 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import React from "react";
 import { useTranslation } from "react-i18next";
+import { observer } from "mobx-react";
 
 import type { TToolCallContent } from "../../../../../../../../api/ai/types";
 import styles from "../../../../ChatMessageBody.module.scss";
@@ -36,71 +36,75 @@ import { formatJsonWithMarkdown } from "../../../../../../utils";
 import { Text } from "@docspace/ui-kit/components/text";
 import type { ToolCallPlacement } from "../ToolCall.enum";
 
-export const CodeView = ({
-  content,
-  placement,
-}: {
-  content: TToolCallContent;
-  placement: ToolCallPlacement;
-}) => {
-  const { t } = useTranslation(["Common"]);
+export const CodeView = observer(
+  ({
+    content,
+    placement,
+  }: {
+    content: TToolCallContent;
+    placement: ToolCallPlacement;
+  }) => {
+    const { t } = useTranslation(["Common"]);
 
-  const getResult = () => {
-    if (content.result && typeof content.result === "string") {
-      return content.result;
+    const getResult = () => {
+      if (content.result && typeof content.result === "string") {
+        return content.result;
+      }
+
+      if (content?.result?.data) return JSON.stringify(content.result.data);
+
+      if (content.result && "content" in content.result) {
+        return (content.result?.content as Record<string, unknown>[])?.[0]
+          .text as string;
+      }
+
+      return "";
+    };
+
+    const result = getResult();
+
+    let isJson = false;
+
+    try {
+      JSON.parse(result);
+      isJson = true;
+    } catch {
+      isJson = false;
     }
 
-    if (content.result && "content" in content.result) {
-      return (content.result?.content as Record<string, unknown>[])?.[0]
-        .text as string;
-    }
+    const showResult = placement === "message" && content.result;
+    const isErrorResult =
+      content.result &&
+      typeof content.result !== "string" &&
+      "isError" in content.result &&
+      content.result?.isError;
 
-    return "";
-  };
-
-  const result = getResult();
-
-  let isJson = false;
-
-  try {
-    JSON.parse(result);
-    isJson = true;
-  } catch {
-    isJson = false;
-  }
-
-  const showResult = placement === "message" && content.result;
-  const isErrorResult =
-    content.result &&
-    typeof content.result !== "string" &&
-    "isError" in content.result &&
-    content.result?.isError;
-
-  return (
-    <>
-      <div className={styles.toolCallCodeViewItem}>
-        <Text fontSize="15px" lineHeight="16px" fontWeight={600}>
-          {t("Common:ToolCallArg")}
-        </Text>
-        <MarkdownField
-          chatMessage={formatJsonWithMarkdown(content.arguments)}
-          successCopyMessage={t("Common:ToolCallArgCopied")}
-        />
-      </div>
-      {showResult ? (
+    return (
+      <>
         <div className={styles.toolCallCodeViewItem}>
           <Text fontSize="15px" lineHeight="16px" fontWeight={600}>
-            {t("Common:ToolCallResult")}
+            {t("Common:ToolCallArg")}
           </Text>
           <MarkdownField
-            chatMessage={formatJsonWithMarkdown(
-              isJson ? JSON.parse(result) : result,
-            )}
-            propLanguage={isErrorResult && !isJson ? "text" : undefined}
-            successCopyMessage={t("Common:ToolCallResultCopied")}
+            chatMessage={formatJsonWithMarkdown(content.arguments)}
+            successCopyMessage={t("Common:ToolCallArgCopied")}
           />
         </div>
-      ) : null}
-    </>
-  );
-};
+        {showResult ? (
+          <div className={styles.toolCallCodeViewItem}>
+            <Text fontSize="15px" lineHeight="16px" fontWeight={600}>
+              {t("Common:ToolCallResult")}
+            </Text>
+            <MarkdownField
+              chatMessage={formatJsonWithMarkdown(
+                isJson ? JSON.parse(result) : result,
+              )}
+              propLanguage={isErrorResult && !isJson ? "text" : undefined}
+              successCopyMessage={t("Common:ToolCallResultCopied")}
+            />
+          </div>
+        ) : null}
+      </>
+    );
+  },
+);

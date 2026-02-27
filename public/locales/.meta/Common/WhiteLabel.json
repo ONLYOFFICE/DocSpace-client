@@ -3,7 +3,7 @@
   "content": "Logo settings",
   "content_en_sha1_hash": "cde0dbbc94f797482701f082adcc8ce183018e62",
   "created_at": "2025-05-26T07:15:49.607Z",
-  "updated_at": "2025-10-13T19:30:25.655Z",
+  "updated_at": "2026-02-19T13:36:32.958Z",
   "comment": {
     "text": "The \"Logo settings\" translation key is used to display a description for a logo-related setting in the portal settings. It appears in the branding section of the portal and might be seen in a header or on a button related to logo customization. Translators should provide a clear and concise text that explains the purpose of logo settings.",
     "is_auto": true,
@@ -17,22 +17,22 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/shared/pages/Branding/MobileView/index.tsx",
-      "line_number": 60,
-      "context": "withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Paid\")}\n onClickLink={onClickLink}\n />\n <MobileCategoryWrapper\n title={t(\"WhiteLabel\")}\n subtitle={t(\"BrandingSubtitleMobile\")}\n url={`${baseUrl}/branding/white-label`}\n withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Paid\")}\n onClickLink={onClickLink}",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/pages/Branding/WhiteLabel/WhiteLabelHeader.tsx",
-      "line_number": 48,
-      "context": "} from \"../../../components/text-input\";\n import { Button, ButtonSize } from \"../../../components/button\";\n import { useTheme } from \"../../../hooks/useTheme\";\n \n import { NotAvailable } from \"./NotAvailable\";\n import { IHeaderProps } from \"./WhiteLabel.types\";\n import styles from \"./WhiteLabel.module.scss\";\n \n export const WhiteLabelHeader = ({\n showNotAvailable,\n isSettingPaid,",
-      "module": "/packages/shared"
-    },
-    {
       "file_path": "/packages/management/src/lib/index.ts",
       "line_number": 61,
       "context": "case \"encrypt-data\":\n return { key: t(\"Common:Settings\"), isSubPage: false };\n case \"payments\":\n return { key: t(\"Common:PaymentsTitle\"), isSubPage: false };\n case \"white-label\":\n return { key: t(\"Common:WhiteLabel\"), isSubPage: true };\n case \"company-info\":\n return { key: t(\"Common:CompanyInfoSettings\"), isSubPage: true };\n case \"additional-resources\":\n return { key: t(\"Common:AdditionalResources\"), isSubPage: true };\n case \"brand-name\":",
       "module": "/packages/management"
+    },
+    {
+      "file_path": "/packages/shared/pages/Branding/MobileView/index.tsx",
+      "line_number": 60,
+      "context": "withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Paid\")}\n onClickLink={onClickLink}\n />\n <CategoryItem\n title={t(\"WhiteLabel\")}\n subtitle={t(\"BrandingSubtitleMobile\")}\n url={`${baseUrl}/branding/white-label`}\n withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Paid\")}\n onClickLink={onClickLink}",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/pages/Branding/WhiteLabel/WhiteLabelHeader.tsx",
+      "line_number": 47,
+      "context": "InputSize,\n } from \"@docspace/ui-kit/components/text-input\";\n import { Button, ButtonSize } from \"@docspace/ui-kit/components/button\";\n import { useTheme } from \"@docspace/ui-kit/context/ThemeContext\";\n \n import { IHeaderProps } from \"./WhiteLabel.types\";\n import styles from \"./WhiteLabel.module.scss\";\n \n export const WhiteLabelHeader = ({\n isSettingPaid,\n standalone,",
+      "module": "/packages/shared"
     }
   ],
   "languages": {

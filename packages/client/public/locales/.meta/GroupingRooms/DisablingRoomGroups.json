@@ -1,0 +1,28 @@
+{
+  "key_path": "DisablingRoomGroups",
+  "content": "Disabling room groups",
+  "content_en_sha1_hash": "2571976b32348a9ca21059b262470bda32152974",
+  "created_at": "2026-02-19T13:36:24.872Z",
+  "updated_at": "2026-02-19T13:36:32.422Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/EditRoomGroupsDialog/index.tsx",
+      "line_number": 415,
+      "context": "fontWeight: 600,\n fontSize: \"12px\",\n lineHeight: \"16px\",\n }}\n >\n {t(\"GroupingRooms:DisablingRoomGroups\")}\n </span>\n }\n bodyText={\n <span style={{ display: \"block\", marginTop: \"2px\" }}>\n {t(\"GroupingRooms:DisablingRoomGroupsDescription\")}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

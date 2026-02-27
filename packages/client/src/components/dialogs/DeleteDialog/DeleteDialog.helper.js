@@ -122,12 +122,23 @@ export const getDialogContent = (
   }
 
   if (isRoomDelete) {
-    return (
+    return isSingle ? (
       <>
         <Trans t={t} i18nKey="DeleteRoom" ns="DeleteDialog">
           The room <strong>\"{{ roomName: selection[0]?.title }}\"</strong>
           will be permanently deleted. All data and user accesses will be lost.
         </Trans>{" "}
+        {t("Common:WantToContinue")}
+      </>
+    ) : (
+      <>
+        <Trans
+          i18nKey="DeleteRooms"
+          ns="DeleteDialog"
+          t={t}
+          values={{ count: selection.length }}
+          components={{ 1: <Text fontWeight={600} as="span" /> }}
+        />{" "}
         {t("Common:WantToContinue")}
       </>
     );

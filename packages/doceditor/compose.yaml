@@ -4,6 +4,8 @@ services:
     build:
       context: ../..
       dockerfile: packages/doceditor/Dockerfile
+    volumes:
+      - ../../playwright-report/doceditor:/app/playwright-report/doceditor
   tests-local:
     image: doceditor-tests
     ports:

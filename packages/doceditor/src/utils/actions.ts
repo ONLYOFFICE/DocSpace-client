@@ -47,6 +47,7 @@ import { logger } from "@/../logger.mjs";
 
 import type {
   ActionType,
+  TGenerationToolCallState,
   IInitialConfig,
   TCatchError,
   TError,
@@ -505,7 +506,9 @@ export async function openEdit(
         config.response.editorUrl = (
           config.response as IInitialConfig
         ).editorUrl.replace(REPLACED_URL_PATH, "");
-        return { ...config.response } as IInitialConfig;
+        return { ...config.response } as IInitialConfig & {
+          generationToolCallState?: TGenerationToolCallState;
+        };
       }
 
       const isAuth = share ? true : await checkIsAuthenticated();
@@ -724,6 +727,7 @@ export async function getData(
   action?: ActionType,
   share?: string,
   editorType?: string,
+  withTool?: string,
 ) {
   const view = action === "view";
 
@@ -755,6 +759,9 @@ export async function getData(
         isSharingAccess: false,
         doc,
         fileId: newFileId !== fileId ? newFileId : fileId,
+        generationToolCallState: withTool
+          ? config.generationToolCallState
+          : undefined,
       };
 
       const successAuth = !!user;

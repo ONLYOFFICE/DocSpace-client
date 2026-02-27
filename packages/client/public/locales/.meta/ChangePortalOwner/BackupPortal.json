@@ -3,7 +3,7 @@
   "content": "Backup {{productName}} data",
   "content_en_sha1_hash": "3db5ded2b0c3e43a4ca0b59ae5c4bed84a35dcab",
   "created_at": "2025-05-19T21:30:56.982Z",
-  "updated_at": "2025-05-24T14:23:35.082Z",
+  "updated_at": "2026-02-19T13:36:32.350Z",
   "comment": {
     "text": "This translation key is used to display a message for backing up data from a portal, with placeholders for the product name. It appears in a UI element that triggers the backup process, likely a button or dialog action, and is tied to the \"BackupPortal\" component.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
-      "line_number": 123,
+      "line_number": 114,
       "context": "t(\"ManagePortal\", { productName: t(\"Common:ProductName\") }),\n t(\"ManageUser\"),\n t(\"ChangePortalOwner:ChangeOwner\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"BackupPortal\", { productName: t(\"Common:ProductName\") }),\n t(\"DeactivateOrDeletePortal\", { productName: t(\"Common:ProductName\") }),\n ];\n \n const filter = React.useMemo(() => {\n const newFilter = new Filter();",
       "module": "/packages/client"
     }

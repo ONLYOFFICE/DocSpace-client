@@ -97,7 +97,6 @@
   "PriceCalculation": "Рассчитайте свою цену",
   "PriceForEach": "{{currency}} за {{amount}}",
   "ProductNameWallet": "Кошелек {{productName}}",
-  "Quantity": "Количество",
   "RecommendedTopUpAmount": "Рекомендуемая сумма пополнения: {{amount}}",
   "RemainingDays": "Оставшиеся дни расчетного периода: {{count}}",
   "Reminder": "Напоминание:",

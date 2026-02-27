@@ -97,7 +97,6 @@
   "PriceCalculation": "Изчислете цената си",
   "PriceForEach": "{{currency}} на {{amount}}",
   "ProductNameWallet": "{{productName}} Портфейл",
-  "Quantity": "Количество",
   "RecommendedTopUpAmount": "Препоръчителна сума за попълване: {{amount}}",
   "RemainingDays": "Останалите дни от цикъла на фактуриране: {{count}}",
   "Reminder": "Напомняне:",

@@ -101,7 +101,6 @@
   "PriceCalculation": "Calculate your price",
   "PriceForEach": "{{currency}} per {{amount}}",
   "ProductNameWallet": "{{productName}} Wallet",
-  "Quantity": "Quantity",
   "RecommendedTopUpAmount": "Recommended top-up amount: {{amount}}",
   "RemainingDays": "The remaining days of the billing cycle: {{count}}",
   "Reminder": "Reminder:",

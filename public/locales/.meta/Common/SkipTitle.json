@@ -3,7 +3,7 @@
   "content": "Skip",
   "content_en_sha1_hash": "3da474537ac378c616d6b301acc1674bc348cecd",
   "created_at": "2025-05-19T21:30:48.925Z",
-  "updated_at": "2025-10-14T05:06:56.376Z",
+  "updated_at": "2026-02-19T13:36:32.375Z",
   "comment": {
     "text": "The translation key \"SkipTitle\" is used to display a label for a \"Skip\" button in various dialogues and forms. It prompts the user to skip or cancel an action, allowing them to move on without making changes.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ConflictResolveDialog/index.tsx",
-      "line_number": 336,
+      "line_number": 335,
       "context": "selectActionText={t(\"Common:ConflictResolveSelectAction\")}\n overwriteTitle={overwriteTitle}\n overwriteDescription={overwriteDescription}\n duplicateTitle={duplicateTitle}\n duplicateDescription={duplicateDescription}\n skipTitle={t(\"Common:SkipTitle\")}\n skipDescription={skipDescription}\n />\n );\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/FormFillingTipsDialog/index.tsx",
-      "line_number": 150,
+      "line_number": 151,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"form-filling_tips_skip\"\n key=\"SkipTitle\"\n label={t(\"Common:SkipTitle\")}\n size={ButtonSize.small}\n onClick={onClose}\n scale\n />\n <Button",
       "module": "/packages/client"
     },

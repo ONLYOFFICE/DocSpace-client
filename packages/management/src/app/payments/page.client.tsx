@@ -58,6 +58,7 @@ const PaymentsPage = ({
   isNotPaidPeriod,
   gracePeriodEndDate,
   delayDaysCount,
+  feedbackAndSupportUrl,
 }: {
   isTrial: boolean;
   salesEmail: string;
@@ -74,6 +75,7 @@ const PaymentsPage = ({
   isNotPaidPeriod: boolean;
   gracePeriodEndDate: Date;
   delayDaysCount: string;
+  feedbackAndSupportUrl: string;
 }) => {
   const { t } = useTranslation("Common");
   const router = useRouter();
@@ -164,6 +166,7 @@ const PaymentsPage = ({
             "DATE_MED",
           )}
           delayDaysCount={delayDaysCount}
+          feedbackAndSupportUrl={feedbackAndSupportUrl}
         />
       </LoaderWrapper>
     </div>

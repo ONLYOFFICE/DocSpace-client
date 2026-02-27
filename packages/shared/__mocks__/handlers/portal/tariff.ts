@@ -26,79 +26,77 @@
 
 import { http } from "msw";
 import { BASE_URL, API_PREFIX } from "../../e2e/utils";
+import { TariffState } from "../../../enums";
 
 export const PATH_TARIFF = "portal/tariff";
 
-export const tariffSuccess = {
-  response: {
-    openSource: false,
-    enterprise: false,
-    developer: true,
-    id: 1,
-    state: 1,
-    dueDate: "2026-06-05T13:03:34.0000000+04:00",
-    delayDueDate: "0001-01-01T00:00:00.0000000Z",
-    licenseDate: "0001-01-01T00:00:00.0000000Z",
-    customerId: "test@gmail.com",
-    quotas: [
+export const TARIFF_DUE_DATE_ACTIVE = "2026-06-05T13:03:34.0000000+04:00";
+export const TARIFF_DUE_DATE_EXPIRED = "2026-01-05T13:03:34.0000000+04:00";
+
+export const tariffSuccess = (
+  openSource: boolean = false,
+  gracePeriod: boolean = false,
+  enterprise: boolean = false,
+  developer: boolean = false,
+  dueDate: string = TARIFF_DUE_DATE_ACTIVE,
+) => {
+  return {
+    response: {
+      openSource,
+      enterprise,
+      developer,
+      id: 1,
+      state: gracePeriod ? TariffState.Delay : TariffState.Paid,
+      dueDate,
+      delayDueDate: gracePeriod
+        ? "2026-01-07T13:03:34.0000000+04:00"
+        : "0001-01-01T00:00:00.0000000Z",
+      licenseDate: "0001-01-01T00:00:00.0000000Z",
+      customerId: "test@gmail.com",
+      quotas: [
+        {
+          id: 1,
+          quantity: 31,
+          wallet: false,
+        },
+      ],
+    },
+    count: 1,
+    links: [
       {
-        id: 1,
-        quantity: 31,
-        wallet: false,
+        href: `${BASE_URL}/${API_PREFIX}/${PATH_TARIFF}`,
+        action: "GET",
       },
     ],
-  },
-  count: 1,
-  links: [
-    {
-      href: `${BASE_URL}/${API_PREFIX}/${PATH_TARIFF}`,
-      action: "GET",
-    },
-  ],
-  status: 0,
-  statusCode: 200,
-  ok: true,
+    status: 0,
+    statusCode: 200,
+    ok: true,
+  };
 };
 
-export const tariffOpenSourceSuccess = {
-  response: {
-    openSource: true,
-    enterprise: false,
-    developer: false,
-    id: 1,
-    state: 1,
-    dueDate: "2026-06-05T13:03:34.0000000+04:00",
-    delayDueDate: "0001-01-01T00:00:00.0000000Z",
-    licenseDate: "0001-01-01T00:00:00.0000000Z",
-    customerId: "test@gmail.com",
-    quotas: [
-      {
-        id: 1,
-        quantity: 31,
-        wallet: false,
-      },
-    ],
-  },
-  count: 1,
-  links: [
-    {
-      href: `${BASE_URL}/${API_PREFIX}/${PATH_TARIFF}`,
-      action: "GET",
-    },
-  ],
-  status: 0,
-  statusCode: 200,
-  ok: true,
-};
-
-export const tariffResolver = (openSource: boolean = false) => {
+export const tariffResolver = (
+  openSource: boolean = false,
+  gracePeriod: boolean = false,
+  enterprise: boolean = false,
+  developer: boolean = false,
+  dueDate: string = TARIFF_DUE_DATE_ACTIVE,
+) => {
   return new Response(
-    JSON.stringify(openSource ? tariffOpenSourceSuccess : tariffSuccess),
+    JSON.stringify(
+      tariffSuccess(openSource, gracePeriod, enterprise, developer, dueDate),
+    ),
   );
 };
 
-export const tariffHandler = (port: string, openSource: boolean = false) => {
+export const tariffHandler = (
+  port: string,
+  openSource: boolean = false,
+  gracePeriod: boolean = false,
+  enterprise: boolean = false,
+  developer: boolean = false,
+  dueDate: string = TARIFF_DUE_DATE_ACTIVE,
+) => {
   return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_TARIFF}`, () => {
-    return tariffResolver(openSource);
+    return tariffResolver(openSource, gracePeriod, enterprise, developer, dueDate);
   });
 };

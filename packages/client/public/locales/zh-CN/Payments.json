@@ -97,7 +97,6 @@
   "PriceCalculation": "计算价格",
   "PriceForEach": "{{currency}}/{{amount}}",
   "ProductNameWallet": "{{productName}}钱包",
-  "Quantity": "数量",
   "RecommendedTopUpAmount": "建议充值金额：{{amount}}",
   "RemainingDays": "当前计费周期剩余天数：{{count}}",
   "Reminder": "提醒：",

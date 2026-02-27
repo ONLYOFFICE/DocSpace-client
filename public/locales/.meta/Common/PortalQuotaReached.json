@@ -1,0 +1,28 @@
+{
+  "key_path": "PortalQuotaReached",
+  "content": "{{productName}} quota limit has been reached.",
+  "content_en_sha1_hash": "12643ac7169dce149394572222dc071c99d91a82",
+  "created_at": "2026-02-18T14:56:07.418Z",
+  "updated_at": "2026-02-19T13:36:33.045Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/doceditor/src/components/Bar/index.tsx",
+      "line_number": 71,
+      "context": "return {\n description: initial\n ? t(\"EditingUnavailable\")\n : t(\"YourFurtherEditsNotSaved\"),\n header: initial\n ? t(\"PortalQuotaReached\", {\n productName: t(\"ProductName\"),\n })\n : t(\"PortalQuotaLimitWarning\", {\n productName: t(\"ProductName\"),\n }),",
+      "module": "/packages/doceditor"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

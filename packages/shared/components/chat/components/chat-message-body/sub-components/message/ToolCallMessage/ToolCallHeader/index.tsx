@@ -26,7 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import React from "react";
+import type React from "react";
 import classNames from "classnames";
 import { ReactSVG } from "react-svg";
 import { observer } from "mobx-react";
@@ -38,11 +38,12 @@ import ArrowRightIcon from "PUBLIC_DIR/images/arrow.right.react.svg?url";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import type { TToolCallContent } from "../../../../../../../../api/ai/types";
 
+import { useMessageStore } from "../../../../../../store/messageStore";
+
 import styles from "../../../../ChatMessageBody.module.scss";
 import { ToolCallPlacement, ToolCallStatus } from "../ToolCall.enum";
 import { SearchToolContent } from "./SearchToolContent";
 import { MCPToolContent } from "./MCPToolContent";
-import { useMessageStore } from "../../../../../../store/messageStore";
 
 type ToolCallHeaderProps = {
 	content: TToolCallContent;

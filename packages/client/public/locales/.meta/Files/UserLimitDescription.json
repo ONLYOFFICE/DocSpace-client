@@ -1,0 +1,28 @@
+{
+  "key_path": "UserLimitDescription",
+  "content": "Define the number of users who can join via this invite link.",
+  "content_en_sha1_hash": "086c1b8ed3b79f32d0c7beecd67d15d20687f99f",
+  "created_at": "2026-02-19T13:36:27.542Z",
+  "updated_at": "2026-02-19T13:36:32.537Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/LinkSettingsPanel/index.tsx",
+      "line_number": 203,
+      "context": "<Text\n fontSize=\"12px\"\n fontWeight={400}\n className={styles.linkSettingsDescriptionText}\n >\n {t(\"Files:UserLimitDescription\")}\n </Text>\n \n {userLimitIsChecked ? (\n <div className={styles.userLimitInputBlock}>\n <div className={styles.userLimitInputBlockText}>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

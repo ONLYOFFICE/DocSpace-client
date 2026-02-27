@@ -3,7 +3,7 @@
   "content": "Enable",
   "content_en_sha1_hash": "20063ad9053289cecaa20ae630ed2dd758282a07",
   "created_at": "2025-05-19T21:30:44.923Z",
-  "updated_at": "2025-12-15T14:04:23.526Z",
+  "updated_at": "2026-02-19T13:36:32.361Z",
   "comment": {
     "text": "This translation key is used to display the label \"Enable\" on a button in a modal dialog, typically found in settings or configuration sections of an application. It appears as the primary action button in a footer section and is used for enabling a feature or functionality.",
     "is_auto": true,
@@ -36,7 +36,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/devToolsAccess.tsx",
-      "line_number": 239,
+      "line_number": 238,
       "context": "value: \"true\",\n dataTestId: \"developer_tools_access_disabled\",\n },\n {\n id: \"dev-tools-access-enable\",\n label: t(\"Common:Enable\"),\n value: \"false\",\n dataTestId: \"developer_tools_access_enabled\",\n },\n ]}\n selected={accessEnabled}",
       "module": "/packages/client"
     },
@@ -60,7 +60,7 @@
     },
     {
       "file_path": "/packages/client/src/store/contacts/HeaderMenuStore.ts",
-      "line_number": 189,
+      "line_number": 188,
       "context": "iconUrl: InviteAgainReactSvgUrl,\n },\n {\n id: \"menu-enable\",\n key: \"enable\",\n label: t(\"Common:Enable\"),\n disabled: !hasUsersToActivate,\n onClick: () =>\n this.contextOptionsStore.onChangeStatus(EmployeeStatus.Active),\n iconUrl: EnableReactSvgUrl,\n },",
       "module": "/packages/client"
     },

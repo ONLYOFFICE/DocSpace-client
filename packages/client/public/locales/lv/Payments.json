@@ -97,7 +97,6 @@
   "PriceCalculation": "Aprēķināt cenu",
   "PriceForEach": "{{currency}} par {{amount}}",
   "ProductNameWallet": "{{productName}} Maja",
-  "Quantity": "Kvantitāte",
   "RecommendedTopUpAmount": "Ieteiktais papildinājuma apjoms: {{amount}}",
   "RemainingDays": "Atlikušie dienu skaits norēķinu periodā: {{count}}",
   "Reminder": "Atgādinājums:",

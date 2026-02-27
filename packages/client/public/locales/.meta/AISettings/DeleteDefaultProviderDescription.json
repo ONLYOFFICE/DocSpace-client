@@ -1,0 +1,28 @@
+{
+  "key_path": "DeleteDefaultProviderDescription",
+  "content": "<1>This {{aiProvider}} is currently set as the default.</1>\n Deleting it will revoke access for all users, and its settings will be permanently erased.\n Another provider will be set as default automatically and can be changed later in settings.",
+  "content_en_sha1_hash": "98c5910b93629e1321b6d5534d33962affed470b",
+  "created_at": "2026-02-19T13:36:29.998Z",
+  "updated_at": "2026-02-19T13:36:32.696Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/delete/index.tsx",
+      "line_number": 88,
+      "context": "};\n \n const bodyText = showDefaultProviderWarning ? (\n <Trans\n t={t}\n i18nKey=\"AISettings:DeleteDefaultProviderDescription\"\n values={{ aiProvider: t(\"Common:AIProvider\") }}\n components={{\n 1: (\n <strong\n key=\"default-provider-warning-strong\"",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

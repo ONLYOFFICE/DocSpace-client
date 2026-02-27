@@ -28,6 +28,7 @@
 
 import equal from "fast-deep-equal";
 import React, { useMemo, useState } from "react";
+import { isMobile as isMobileDevice } from "react-device-detect";
 
 import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
@@ -42,8 +43,7 @@ import CustomFilter16ReactSvgUrl from "PUBLIC_DIR/images/icons/16/custom-filter.
 import LockedIconReactSvg from "PUBLIC_DIR/images/file.actions.locked.react.svg?url";
 import LockedIconReact12Svg from "PUBLIC_DIR/images/icons/12/lock.react.svg?url";
 import FavoriteFillReactSvgUrl from "PUBLIC_DIR/images/favorite.fill.react.svg?url";
-
-import { isMobile as isMobileDevice } from "react-device-detect";
+import FormFillIcon from "PUBLIC_DIR/images/form.fill.rect.svg?url";
 
 import { FILLING_FORM_STATUS_COLORS } from "../../constants";
 
@@ -56,13 +56,13 @@ import { RoomsType, ShareAccessRights, VectorizationStatus } from "../../enums";
 import { globalColors } from "@docspace/ui-kit/providers/theme";
 
 import {
-	classNames,
-	getFillingStatusLabel,
-	getFillingStatusTitle,
-	IconSizeType,
-	isDesktop,
-	isTablet,
-	size,
+  classNames,
+  getFillingStatusLabel,
+  getFillingStatusTitle,
+  IconSizeType,
+  isDesktop,
+  isTablet,
+  size,
 } from "../../utils";
 
 import styles from "./Badges.module.scss";
@@ -71,374 +71,375 @@ import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { FailedVectorizationBadge } from "../failed-vectorization-badge";
 
 const BadgeWrapper = ({
-	onClick,
-	isTile,
-	children: badge,
+  onClick,
+  isTile,
+  children: badge,
 }: BadgeWrapperProps) => {
-	const [isHovered, setIsHovered] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
-	if (!isTile) return badge;
+  if (!isTile) return badge;
 
-	const onMouseEnter = () => {
-		setIsHovered(true);
-	};
+  const onMouseEnter = () => {
+    setIsHovered(true);
+  };
 
-	const onMouseLeave = () => {
-		setIsHovered(false);
-	};
+  const onMouseLeave = () => {
+    setIsHovered(false);
+  };
 
-	const badgeProps = { isHovered };
+  const badgeProps = { isHovered };
 
-	const newBadge = React.cloneElement(badge, badgeProps);
+  const newBadge = React.cloneElement(badge, badgeProps);
 
-	return (
-		<div
-			className={styles.badgeWrapper}
-			onClick={onClick}
-			onMouseEnter={onMouseEnter}
-			onMouseLeave={onMouseLeave}
-		>
-			{newBadge}
-		</div>
-	);
+  return (
+    <div
+      className={styles.badgeWrapper}
+      onClick={onClick}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
+      {newBadge}
+    </div>
+  );
 };
 
 const Badges = ({
-	t,
-	themeIsBase,
-	item,
-	isTrashFolder,
-	showNew,
-	onFilesClick,
-	onShowVersionHistory,
-	onBadgeClick,
-	openLocationFile,
-	setConvertDialogVisible,
-	viewAs,
-	onUnpinClick,
-	onUnmuteClick,
-	isMutedBadge,
-	isArchiveFolderRoot,
-	onCopyPrimaryLink,
-	isArchiveFolder,
-	isTemplatesFolder,
-	onCreateRoom,
-	newFilesBadge,
-	className,
-	isExtsCustomFilter,
-	customFilterExternalLink,
-	onRetryVectorization,
-	onClickLock,
-	onClickFavorite,
-	isPublicRoom,
-	editorsTooltip,
+  t,
+  themeIsBase,
+  item,
+  isTrashFolder,
+  showNew,
+  onFilesClick,
+  onShowVersionHistory,
+  onBadgeClick,
+  openLocationFile,
+  setConvertDialogVisible,
+  viewAs,
+  onUnpinClick,
+  onUnmuteClick,
+  isMutedBadge,
+  isArchiveFolderRoot,
+  onCopyPrimaryLink,
+  isArchiveFolder,
+  isTemplatesFolder,
+  onCreateRoom,
+  newFilesBadge,
+  className,
+  isExtsCustomFilter,
+  customFilterExternalLink,
+  onRetryVectorization,
+  onClickLock,
+  onClickFavorite,
+  isPublicRoom,
+  editorsTooltip,
 }: BadgesProps) => {
-	const {
-		id,
-		versionGroup,
-		fileExst,
-		isEditing,
-		isRoom,
-		pinned,
-		isFolder,
-		mute,
-		rootFolderId,
-		new: newCount,
-		hasDraft,
-		security,
-		vectorizationStatus,
-		lockedBy,
-		locked,
-		isFavorite,
-		isAIAgent,
-		// startFilling,
-	} = item;
+  const {
+    id,
+    versionGroup,
+    fileExst,
+    isEditing,
+    isRoom,
+    pinned,
+    isFolder,
+    mute,
+    rootFolderId,
+    new: newCount,
+    hasDraft,
+    security,
+    vectorizationStatus,
+    lockedBy,
+    locked,
+    isFavorite,
+    isAIAgent,
+    startFilling,
+  } = item;
 
-	const isTile = viewAs === "tile";
+  const isTile = viewAs === "tile";
 
-	const customFilterEnabled = item.customFilterEnabled;
+  const customFilterEnabled = item.customFilterEnabled;
 
-	const countVersions =
-		versionGroup && versionGroup > 999 ? "999+" : versionGroup;
+  const countVersions =
+    versionGroup && versionGroup > 999 ? "999+" : versionGroup;
 
-	const isLargeTabletDevice =
-		isMobileDevice && window.innerWidth >= size.desktop;
+  const isLargeTabletDevice =
+    isMobileDevice && window.innerWidth >= size.desktop;
 
-	const tabletViewBadge = !isTile && (isTablet() || isLargeTabletDevice);
-	const desktopView = !isTile && isDesktop();
+  const tabletViewBadge = !isTile && (isTablet() || isLargeTabletDevice);
+  const desktopView = !isTile && isDesktop();
 
-	const sizeBadge =
-		isTile || tabletViewBadge ? IconSizeType.medium : IconSizeType.small;
+  const sizeBadge =
+    isTile || tabletViewBadge ? IconSizeType.medium : IconSizeType.small;
 
-	const paddingBadge = isTile || tabletViewBadge ? "0 5px" : "0 5px";
+  const paddingBadge = isTile || tabletViewBadge ? "0 5px" : "0 5px";
 
-	const fontSizeBadge = isTile || tabletViewBadge ? "11px" : "9px";
+  const fontSizeBadge = isTile || tabletViewBadge ? "11px" : "9px";
 
-	const iconRefresh = desktopView ? Refresh12ReactSvgUrl : RefreshReactSvgUrl;
-	const iconLock = desktopView ? LockedIconReact12Svg : LockedIconReactSvg;
+  const iconRefresh = desktopView ? Refresh12ReactSvgUrl : RefreshReactSvgUrl;
+  const iconLock = desktopView ? LockedIconReact12Svg : LockedIconReactSvg;
 
-	const iconPin = UnpinReactSvgUrl;
-	const iconMute =
-		sizeBadge === "medium" ? Mute16ReactSvgUrl : Mute12ReactSvgUrl;
-	const iconCustomFilter =
-		sizeBadge === "medium"
-			? CustomFilter16ReactSvgUrl
-			: CustomFilter12ReactSvgUrl;
+  const iconPin = UnpinReactSvgUrl;
+  const iconMute =
+    sizeBadge === "medium" ? Mute16ReactSvgUrl : Mute12ReactSvgUrl;
+  const iconCustomFilter =
+    sizeBadge === "medium"
+      ? CustomFilter16ReactSvgUrl
+      : CustomFilter12ReactSvgUrl;
 
-	const unpinIconProps = {
-		"data-id": id,
-		"data-action": "unpin",
-		"data-isaiagent": isAIAgent,
-	};
+  const unpinIconProps = {
+    "data-id": id,
+    "data-action": "unpin",
+    "data-isaiagent": isAIAgent,
+  };
 
-	const commonBadgeProps = {
-		borderRadius: "11px",
-		fontSize: fontSizeBadge,
-		fontWeight: 800,
-		maxWidth: "50px",
-		padding: paddingBadge,
-		"data-id": id,
-		isMutedBadge,
-	};
+  const commonBadgeProps = {
+    borderRadius: "11px",
+    fontSize: fontSizeBadge,
+    fontWeight: 800,
+    maxWidth: "50px",
+    padding: paddingBadge,
+    "data-id": id,
+    isMutedBadge,
+  };
 
-	const versionBadgeProps = {
-		borderRadius: "50px",
-		color: globalColors.white,
-		fontSize: "9px",
-		fontWeight: 800,
-		maxWidth: "60px",
-		"data-id": id,
-	};
-	const unmuteIconProps = {
-		"data-id": id,
-		"data-rootfolderid": rootFolderId,
-		"data-new": newCount,
-	};
-	const onShowVersionHistoryProp =
-		security && "ReadHistory" in security && security?.ReadHistory
-			? { onClick: onShowVersionHistory }
-			: {};
+  const versionBadgeProps = {
+    borderRadius: "50px",
+    color: globalColors.white,
+    fontSize: "9px",
+    fontWeight: 800,
+    maxWidth: "60px",
+    "data-id": id,
+  };
+  const unmuteIconProps = {
+    "data-id": id,
+    "data-rootfolderid": rootFolderId,
+    "data-new": newCount,
+  };
+  const onShowVersionHistoryProp =
+    security && "ReadHistory" in security && security?.ReadHistory
+      ? { onClick: onShowVersionHistory }
+      : {};
 
-	const isPublicRoomType =
-		item.roomType === RoomsType.PublicRoom ||
-		item.roomType === RoomsType.FormRoom ||
-		item.roomType === RoomsType.CustomRoom;
+  const isPublicRoomType =
+    item.roomType === RoomsType.PublicRoom ||
+    item.roomType === RoomsType.FormRoom ||
+    item.roomType === RoomsType.CustomRoom;
 
-	const haveLinksRight =
-		item?.access === ShareAccessRights.RoomManager ||
-		item?.access === ShareAccessRights.None;
+  const haveLinksRight =
+    item?.access === ShareAccessRights.RoomManager ||
+    item?.access === ShareAccessRights.None;
 
-	const showCopyLinkIcon =
-		isPublicRoomType &&
-		haveLinksRight &&
-		item.shared &&
-		!isArchiveFolder &&
-		!isTile;
+  const showCopyLinkIcon =
+    isPublicRoomType &&
+    haveLinksRight &&
+    item.shared &&
+    !isArchiveFolder &&
+    !isTile;
 
-	const hasRetryVectorizationAccess =
-		security && "Vectorization" in security && security.Vectorization;
-	const lockedByUser = lockedBy ?? "";
+  const hasRetryVectorizationAccess =
+    security && "Vectorization" in security && security.Vectorization;
+  const lockedByUser = lockedBy ?? "";
 
-	const canLock = security && "Lock" in security ? security.Lock : undefined;
+  const canLock = security && "Lock" in security ? security.Lock : undefined;
 
-	const onDraftClick = () => {
-		if (!isTrashFolder) openLocationFile?.();
-	};
+  const onDraftClick = () => {
+    if (!isTrashFolder) openLocationFile?.();
+  };
 
-	const { fillingStatusLabel, fillingStatusTitle } = useMemo(
-		() => ({
-			fillingStatusLabel: getFillingStatusLabel(item.formFillingStatus, t),
-			fillingStatusTitle: getFillingStatusTitle(item.formFillingStatus, t),
-		}),
-		[item.formFillingStatus, t],
-	);
+  const { fillingStatusLabel, fillingStatusTitle } = useMemo(
+    () => ({
+      fillingStatusLabel: getFillingStatusLabel(item.formFillingStatus, t),
+      fillingStatusTitle: getFillingStatusTitle(item.formFillingStatus, t),
+    }),
+    [item.formFillingStatus, t],
+  );
 
-	const getTooltipContent = () => (
-		<>
-			<Text fontSize="12px" fontWeight={400} noSelect>
-				{t("CustomFilterEnableDiscription")}
-			</Text>
-			{customFilterExternalLink ? (
-				<Link
-					type={LinkType.action}
-					target={LinkTarget.blank}
-					className="custom-filter-tooltip-link"
-					fontSize="13px"
-					fontWeight={600}
-					href={customFilterExternalLink}
-					isHovered
-				>
-					{t("Common:LearnMore")}
-				</Link>
-			) : null}
-		</>
-	);
+  const getTooltipContent = () => (
+    <>
+      <Text fontSize="12px" fontWeight={400} noSelect>
+        {t("CustomFilterEnableDiscription")}
+      </Text>
+      {customFilterExternalLink ? (
+        <Link
+          type={LinkType.action}
+          target={LinkTarget.blank}
+          className="custom-filter-tooltip-link"
+          fontSize="13px"
+          fontWeight={600}
+          href={customFilterExternalLink}
+          isHovered
+        >
+          {t("Common:LearnMore")}
+        </Link>
+      ) : null}
+    </>
+  );
 
-	const preparingForAITooltipId = `preparing-for-ai-tooltip-${id}`;
+  const preparingForAITooltipId = `preparing-for-ai-tooltip-${id}`;
 
-	const getPreparingForAITooltipContent = () => {
-		return (
-			<div>
-				<Text fontWeight={600} fontSize="12px" lineHeight="16px">
-					{t("Common:PreparingForAI")}
-				</Text>
-				<Text fontSize="12px" lineHeight="16px">
-					{t("Common:PreparingForAIInfo")}
-				</Text>
-			</div>
-		);
-	};
+  const getPreparingForAITooltipContent = () => {
+    return (
+      <div>
+        <Text fontWeight={600} fontSize="12px" lineHeight="16px">
+          {t("Common:PreparingForAI")}
+        </Text>
+        <Text fontSize="12px" lineHeight="16px">
+          {t("Common:PreparingForAIInfo")}
+        </Text>
+      </div>
+    );
+  };
 
-	const wrapperCommonClasses = classNames(styles.badges, className, "badges", {
-		[styles.tableView]: viewAs === "table",
-		[styles.rowView]: viewAs === "row",
-		[styles.tileView]: viewAs === "tile",
-	});
+  const wrapperCommonClasses = classNames(styles.badges, className, "badges", {
+    [styles.tableView]: viewAs === "table",
+    [styles.rowView]: viewAs === "row",
+    [styles.tileView]: viewAs === "tile",
+  });
 
-	const getLockTooltip = () => {
-		return t("Common:LockedBy", { userName: lockedByUser });
-	};
+  const getLockTooltip = () => {
+    return t("Common:LockedBy", { userName: lockedByUser });
+  };
 
-	const onIconLockClick = () => {
-		if (!canLock) {
-			return;
-		}
+  const onIconLockClick = () => {
+    if (!canLock) {
+      return;
+    }
 
-		if (onClickLock) onClickLock();
-	};
+    if (onClickLock) onClickLock();
+  };
 
-	return fileExst ? (
-		<div
-			data-testid="badges"
-			className={classNames(
-				wrapperCommonClasses,
-				"additional-badges file__badges",
-			)}
-		>
-			{/* {startFilling && (
+  return fileExst ? (
+    <div
+      data-testid="badges"
+      className={classNames(
+        wrapperCommonClasses,
+        "additional-badges file__badges",
+      )}
+    >
+      {startFilling && (
         <IconButton
           size={sizeBadge}
-          iconName={iconForm}
+          iconName={FormFillIcon}
           onClick={onFilesClick}
           title={t("Common:ReadyToFillOut")}
-          hoverColor={accent}
+          color="accent"
+          hoverColor="accent"
           className="badge icons-group is-editing tablet-badge tablet-edit"
         />
-      )} */}
+      )}
 
-			{item.formFillingStatus ? (
-				<BadgeWrapper isTile={isTile}>
-					<Badge
-						noHover
-						isVersionBadge
-						className="badge tablet-badge icons-group"
-						backgroundColor={FILLING_FORM_STATUS_COLORS[item.formFillingStatus]}
-						label={fillingStatusLabel}
-						title={fillingStatusTitle}
-						{...versionBadgeProps}
-						maxWidth="max-content"
-					/>
-				</BadgeWrapper>
-			) : null}
+      {item.formFillingStatus ? (
+        <BadgeWrapper isTile={isTile}>
+          <Badge
+            noHover
+            isVersionBadge
+            className="badge tablet-badge icons-group"
+            backgroundColor={FILLING_FORM_STATUS_COLORS[item.formFillingStatus]}
+            label={fillingStatusLabel}
+            title={fillingStatusTitle}
+            {...versionBadgeProps}
+            maxWidth="max-content"
+          />
+        </BadgeWrapper>
+      ) : null}
 
-			{hasDraft ? (
-				<BadgeWrapper isTile={isTile}>
-					<Badge
-						isVersionBadge
-						className={classNames(
-							styles.versionBadge,
-							"badge-version badge-version-current tablet-badge icons-group",
-						)}
-						backgroundColor={
-							themeIsBase ? globalColors.gray : globalColors.grayDark
-						}
-						label={t("Common:BadgeMyDraftTitle")}
-						title={t("Common:BadgeMyDraftTitle")}
-						{...versionBadgeProps}
-						style={{
-							width: "max-content",
-						}}
-						onClick={onDraftClick}
-					/>
-				</BadgeWrapper>
-			) : null}
+      {hasDraft ? (
+        <BadgeWrapper isTile={isTile}>
+          <Badge
+            isVersionBadge
+            className={classNames(
+              styles.versionBadge,
+              "badge-version badge-version-current tablet-badge icons-group",
+            )}
+            backgroundColor={
+              themeIsBase ? globalColors.gray : globalColors.grayDark
+            }
+            label={t("Common:BadgeMyDraftTitle")}
+            title={t("Common:BadgeMyDraftTitle")}
+            {...versionBadgeProps}
+            style={{
+              width: "max-content",
+            }}
+            onClick={onDraftClick}
+          />
+        </BadgeWrapper>
+      ) : null}
 
-			{isEditing ? <>{editorsTooltip}</> : null}
+      {isEditing ? <>{editorsTooltip}</> : null}
 
-			{locked && !isTile ? (
-				<div
-					data-tooltip-id={
-						lockedByUser && !canLock ? "info-tooltip" : undefined
-					}
-					data-tooltip-content={
-						lockedByUser && !canLock ? getLockTooltip() : undefined
-					}
-					data-tooltip-place="bottom"
-				>
-					<IconButton
-						iconName={iconLock}
-						className={classNames(
-							styles.iconBadge,
-							"badge tablet-badge icons-group",
-						)}
-						data-id={id}
-						data-locked={!!locked}
-						onClick={onIconLockClick}
-						color={themeIsBase ? globalColors.lightIcons : globalColors.white}
-						hoverColor="accent"
-						title={t("Common:UnblockFile")}
-					/>
-				</div>
-			) : null}
+      {locked && !isTile ? (
+        <div
+          data-tooltip-id={
+            lockedByUser && !canLock ? "info-tooltip" : undefined
+          }
+          data-tooltip-content={
+            lockedByUser && !canLock ? getLockTooltip() : undefined
+          }
+          data-tooltip-place="bottom"
+        >
+          <IconButton
+            iconName={iconLock}
+            className={classNames(
+              styles.iconBadge,
+              "badge tablet-badge icons-group",
+            )}
+            data-id={id}
+            data-locked={!!locked}
+            onClick={onIconLockClick}
+            color={themeIsBase ? globalColors.lightIcons : globalColors.white}
+            hoverColor="accent"
+            title={t("Common:UnblockFile")}
+          />
+        </div>
+      ) : null}
 
-			{item.viewAccessibility?.MustConvert &&
-			security &&
-			"Convert" in security &&
-			security?.Convert &&
-			!isTrashFolder &&
-			!isArchiveFolderRoot ? (
-				<IconButton
-					onClick={setConvertDialogVisible}
-					iconName={iconRefresh}
-					className={classNames(
-						styles.iconBadge,
-						"badge tablet-badge icons-group can-convert",
-					)}
-					hoverColor="accent"
-				/>
-			) : null}
-			{versionGroup && versionGroup > 1 ? (
-				<BadgeWrapper {...onShowVersionHistoryProp} isTile={isTile}>
-					<Badge
-						{...versionBadgeProps}
-						className={classNames(
-							styles.versionBadge,
-							"badge-version badge-version-current tablet-badge icons-group",
-						)}
-						backgroundColor={
-							themeIsBase ? globalColors.gray : globalColors.grayDark
-						}
-						label={t("Common:VersionBadge", {
-							version: countVersions as string,
-						})}
-						{...onShowVersionHistoryProp}
-						isVersionBadge
-						title={t("Common:ShowVersionHistory")}
-					/>
-				</BadgeWrapper>
-			) : null}
+      {item.viewAccessibility?.MustConvert &&
+      security &&
+      "Convert" in security &&
+      security?.Convert &&
+      !isTrashFolder &&
+      !isArchiveFolderRoot ? (
+        <IconButton
+          onClick={setConvertDialogVisible}
+          iconName={iconRefresh}
+          className={classNames(
+            styles.iconBadge,
+            "badge tablet-badge icons-group can-convert",
+          )}
+          hoverColor="accent"
+        />
+      ) : null}
+      {versionGroup && versionGroup > 1 ? (
+        <BadgeWrapper {...onShowVersionHistoryProp} isTile={isTile}>
+          <Badge
+            {...versionBadgeProps}
+            className={classNames(
+              styles.versionBadge,
+              "badge-version badge-version-current tablet-badge icons-group",
+            )}
+            backgroundColor={
+              themeIsBase ? globalColors.gray : globalColors.grayDark
+            }
+            label={t("Common:VersionBadge", {
+              version: countVersions as string,
+            })}
+            {...onShowVersionHistoryProp}
+            isVersionBadge
+            title={t("Common:ShowVersionHistory")}
+          />
+        </BadgeWrapper>
+      ) : null}
 
-			{showNew ? (
-				<BadgeWrapper onClick={onBadgeClick} isTile={isTile}>
-					<Badge
-						{...commonBadgeProps}
-						className="badge-version badge-new-version tablet-badge icons-group"
-						label={t("Common:New")}
-						onClick={onBadgeClick}
-					/>
-				</BadgeWrapper>
-			) : null}
-			{/* {isForm  && (
+      {showNew ? (
+        <BadgeWrapper onClick={onBadgeClick} isTile={isTile}>
+          <Badge
+            {...commonBadgeProps}
+            className="badge-version badge-new-version tablet-badge icons-group"
+            label={t("Common:New")}
+            onClick={onBadgeClick}
+          />
+        </BadgeWrapper>
+      ) : null}
+      {/* {isForm  && (
         <BadgeWrapper isTile={isTile}>
           <HelpButton
             place="bottom"
@@ -449,165 +450,165 @@ const Badges = ({
         </BadgeWrapper>
       )} */}
 
-			{customFilterEnabled && !isRoom && isExtsCustomFilter ? (
-				<>
-					<IconButton
-						id="customFilterTooltip"
-						iconName={iconCustomFilter}
-						size={sizeBadge}
-						data-tooltip-id="customFilterTooltip"
-						className="badge is-custom-filter tablet-badge"
-						color={globalColors.mainGreen}
-						hoverColor={globalColors.mainGreen}
-					/>
+      {customFilterEnabled && !isRoom && isExtsCustomFilter ? (
+        <>
+          <IconButton
+            id="customFilterTooltip"
+            iconName={iconCustomFilter}
+            size={sizeBadge}
+            data-tooltip-id="customFilterTooltip"
+            className="badge is-custom-filter tablet-badge"
+            color={globalColors.mainGreen}
+            hoverColor={globalColors.mainGreen}
+          />
 
-					<Tooltip
-						id="customFilterTooltip"
-						place="bottom-start"
-						getContent={getTooltipContent}
-						clickable
-						maxWidth="238px"
-						className={styles.customFilterTooltip}
-						noUserSelect
-					/>
-				</>
-			) : null}
+          <Tooltip
+            id="customFilterTooltip"
+            place="bottom-start"
+            getContent={getTooltipContent}
+            clickable
+            maxWidth="238px"
+            className={styles.customFilterTooltip}
+            noUserSelect
+          />
+        </>
+      ) : null}
 
-			{vectorizationStatus === VectorizationStatus.InProgress ? (
-				<>
-					<BadgeWrapper isTile={isTile}>
-						<Badge
-							noHover
-							isVersionBadge
-							className={classNames(
-								styles.versionBadge,
-								"badge-version badge-version-current tablet-badge icons-group",
-							)}
-							backgroundColor={
-								themeIsBase ? globalColors.gray : globalColors.grayDark
-							}
-							label={t("Common:Preparing")}
-							borderRadius="50px"
-							color={globalColors.white}
-							fontSize="9px"
-							fontWeight={700}
-							data-tooltip-id={preparingForAITooltipId}
-							dataTestId="preparing-for-ai-badge"
-						/>
-					</BadgeWrapper>
-					<Tooltip
-						id={preparingForAITooltipId}
-						className="not-selectable"
-						getContent={getPreparingForAITooltipContent}
-						place="bottom-start"
-						clickable
-						maxWidth="302px"
-						openOnClick={isMobileDevice}
-					/>
-				</>
-			) : null}
+      {vectorizationStatus === VectorizationStatus.InProgress ? (
+        <>
+          <BadgeWrapper isTile={isTile}>
+            <Badge
+              noHover
+              isVersionBadge
+              className={classNames(
+                styles.versionBadge,
+                "badge-version badge-version-current tablet-badge icons-group",
+              )}
+              backgroundColor={
+                themeIsBase ? globalColors.gray : globalColors.grayDark
+              }
+              label={t("Common:Preparing")}
+              borderRadius="50px"
+              color={globalColors.white}
+              fontSize="9px"
+              fontWeight={700}
+              data-tooltip-id={preparingForAITooltipId}
+              dataTestId="preparing-for-ai-badge"
+            />
+          </BadgeWrapper>
+          <Tooltip
+            id={preparingForAITooltipId}
+            className="not-selectable"
+            getContent={getPreparingForAITooltipContent}
+            place="bottom-start"
+            clickable
+            maxWidth="302px"
+            openOnClick={isMobileDevice}
+          />
+        </>
+      ) : null}
 
-			{!isTile && vectorizationStatus === VectorizationStatus.Failed ? (
-				<FailedVectorizationBadge
-					className={classNames(
-						styles.iconBadge,
-						"badge tablet-badge icons-group",
-					)}
-					size={tabletViewBadge ? "medium" : "small"}
-					onRetryVectorization={onRetryVectorization}
-					withRetryVectorization={hasRetryVectorizationAccess}
-				/>
-			) : null}
-		</div>
-	) : (
-		<div
-			data-testid="badges"
-			className={classNames(wrapperCommonClasses, {
-				folder__badges: isFolder && !isRoom,
-				room__badges: isRoom,
-			})}
-		>
-			{showCopyLinkIcon ? (
-				<IconButton
-					iconName={LinkReactSvgUrl}
-					className={classNames(
-						styles.iconBadge,
-						"badge row-copy-link icons-group tablet-badge",
-					)}
-					onClick={onCopyPrimaryLink}
-					title={t("Common:CopySharedLink")}
-					hoverColor="accent"
-				/>
-			) : null}
+      {!isTile && vectorizationStatus === VectorizationStatus.Failed ? (
+        <FailedVectorizationBadge
+          className={classNames(
+            styles.iconBadge,
+            "badge tablet-badge icons-group",
+          )}
+          size={tabletViewBadge ? "medium" : "small"}
+          onRetryVectorization={onRetryVectorization}
+          withRetryVectorization={hasRetryVectorizationAccess}
+        />
+      ) : null}
+    </div>
+  ) : (
+    <div
+      data-testid="badges"
+      className={classNames(wrapperCommonClasses, {
+        folder__badges: isFolder && !isRoom,
+        room__badges: isRoom,
+      })}
+    >
+      {showCopyLinkIcon ? (
+        <IconButton
+          iconName={LinkReactSvgUrl}
+          className={classNames(
+            styles.iconBadge,
+            "badge row-copy-link icons-group tablet-badge",
+          )}
+          onClick={onCopyPrimaryLink}
+          title={t("Common:CopySharedLink")}
+          hoverColor="accent"
+        />
+      ) : null}
 
-			{showCopyLinkIcon ? (
-				<IconButton
-					iconName={TabletLinkReactSvgUrl}
-					className={classNames(
-						styles.iconBadge,
-						"badge tablet-row-copy-link icons-group tablet-badge",
-					)}
-					onClick={onCopyPrimaryLink}
-					title={t("Common:CopySharedLink")}
-					hoverColor="accent"
-				/>
-			) : null}
+      {showCopyLinkIcon ? (
+        <IconButton
+          iconName={TabletLinkReactSvgUrl}
+          className={classNames(
+            styles.iconBadge,
+            "badge tablet-row-copy-link icons-group tablet-badge",
+          )}
+          onClick={onCopyPrimaryLink}
+          title={t("Common:CopySharedLink")}
+          hoverColor="accent"
+        />
+      ) : null}
 
-			{isRoom && mute && !isTile ? (
-				<IconButton
-					onClick={onUnmuteClick}
-					iconName={iconMute}
-					className={classNames(
-						styles.iconBadge,
-						styles.muteBadge,
-						"badge  is-mute tablet-badge",
-					)}
-					{...unmuteIconProps}
-				/>
-			) : null}
-			{isRoom && pinned ? (
-				<IconButton
-					onClick={onUnpinClick}
-					className={classNames(
-						styles.iconBadge,
-						styles.pinBadge,
-						"badge icons-group is-pinned tablet-badge tablet-pinned",
-					)}
-					iconName={iconPin}
-					{...unpinIconProps}
-				/>
-			) : null}
-			{isTemplatesFolder && isTile ? (
-				<IconButton
-					iconName={CreateRoomReactSvgUrl}
-					className={classNames(
-						styles.iconBadge,
-						"badge tablet-row-create-room icons-group  tablet-badge",
-					)}
-					size={IconSizeType.medium}
-					onClick={onCreateRoom}
-					title={t("Common:CreateRoom")}
-					hoverColor="accent"
-				/>
-			) : null}
-			{showNew && !isTile ? newFilesBadge : null}
-			{showNew && isTile && isRoom ? (
-				<div className={styles.badgeWrapperNewBadge}>{newFilesBadge}</div>
-			) : null}
-			{showNew && isTile && !isRoom ? newFilesBadge : null}
+      {isRoom && mute && !isTile ? (
+        <IconButton
+          onClick={onUnmuteClick}
+          iconName={iconMute}
+          className={classNames(
+            styles.iconBadge,
+            styles.muteBadge,
+            "badge  is-mute tablet-badge",
+          )}
+          {...unmuteIconProps}
+        />
+      ) : null}
+      {isRoom && pinned ? (
+        <IconButton
+          onClick={onUnpinClick}
+          className={classNames(
+            styles.iconBadge,
+            styles.pinBadge,
+            "badge icons-group is-pinned tablet-badge tablet-pinned",
+          )}
+          iconName={iconPin}
+          {...unpinIconProps}
+        />
+      ) : null}
+      {isTemplatesFolder && isTile ? (
+        <IconButton
+          iconName={CreateRoomReactSvgUrl}
+          className={classNames(
+            styles.iconBadge,
+            "badge tablet-row-create-room icons-group  tablet-badge",
+          )}
+          size={IconSizeType.medium}
+          onClick={onCreateRoom}
+          title={t("Common:CreateRoom")}
+          hoverColor="accent"
+        />
+      ) : null}
+      {showNew && !isTile ? newFilesBadge : null}
+      {showNew && isTile && isRoom ? (
+        <div className={styles.badgeWrapperNewBadge}>{newFilesBadge}</div>
+      ) : null}
+      {showNew && isTile && !isRoom ? newFilesBadge : null}
 
-			{isFolder && isTile && isFavorite && !isPublicRoom && !isTrashFolder ? (
-				<IconButton
-					iconName={FavoriteFillReactSvgUrl}
-					className={classNames("badge icons-group")}
-					size={IconSizeType.medium}
-					onClick={onClickFavorite}
-					color="accent"
-					title={t("Common:Favorites")}
-				/>
-			) : null}
-		</div>
-	);
+      {isFolder && isTile && isFavorite && !isPublicRoom && !isTrashFolder ? (
+        <IconButton
+          iconName={FavoriteFillReactSvgUrl}
+          className={classNames("badge icons-group")}
+          size={IconSizeType.medium}
+          onClick={onClickFavorite}
+          color="accent"
+          title={t("Common:Favorites")}
+        />
+      ) : null}
+    </div>
+  );
 };
 
 export default React.memo(Badges, equal);

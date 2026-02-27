@@ -42,7 +42,8 @@ import { LoaderWrapper } from "@docspace/ui-kit/components/loader-wrapper";
 import { useEventListener } from "@docspace/ui-kit/hooks/useEventListener";
 import { INFO_PANEL_LOADER_EVENT } from "@docspace/shared/constants";
 
-import InfoPanelStore, { InfoPanelView } from "SRC_DIR/store/InfoPanelStore";
+import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
+import { InfoPanelView } from "SRC_DIR/helpers/info-panel";
 import PublicRoomStore from "SRC_DIR/store/PublicRoomStore";
 
 import ItemTitle from "../../sub-components/ItemTitle";

@@ -3,7 +3,7 @@
   "content": "Recipient role-based filling",
   "content_en_sha1_hash": "ebc4e0839dc0c879f17088af65d2186c9e8179ca",
   "created_at": "2025-10-13T13:22:10.782Z",
-  "updated_at": "2025-10-13T14:24:22.180Z",
+  "updated_at": "2026-02-19T13:36:32.428Z",
   "comment": {
     "text": "This text appears as the title for a button or option, likely in a dialog or panel, and describes the action of filling out a form based on the recipient's role. It allows users to share a form with specific individuals or roles within a room or data room.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/doceditor/src/components/ShareFormDialog.tsx",
-      "line_number": 201,
+      "line_number": 202,
       "context": "onClick: onClickFormRoom,\n icon: <FormDataCollectionIcon />,\n },\n {\n id: \"virtual-data-room\",\n title: t(\"Common:RecipientBasedFilling\"),\n description: t(\"Common:RecipientBasedFillingDescription\"),\n buttonLabel: t(\"Common:ShareInTheRoom\"),\n onClick: onClickVirtualDataRoom,\n icon: <RoleBasedFillingIcon />,\n },",
       "module": "/packages/doceditor"
     }

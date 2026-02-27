@@ -699,7 +699,7 @@ export async function startUploadSession(
   folderId: string | number,
   fileName: string,
   fileSize: number,
-  relativePath: boolean,
+  relativePath: string,
   encrypted: boolean,
   createOn: unknown,
   CreateNewIfExist: boolean,
@@ -1956,6 +1956,18 @@ export async function setDefaultTemplates(
   return res.items as TDefaultTemplate[];
 }
 
+export async function resetDefaultTemplates(fileExtension: string) {
+  const res = await request({
+    method: "delete",
+    url: "/files/settings/defaulttemplate",
+    data: {
+      fileExtension,
+    },
+  });
+
+  return res.items as TDefaultTemplate[];
+}
+
 export async function uploadTemplateFromDevice(
   file: File,
   fileExtension: string,
@@ -1971,4 +1983,14 @@ export async function uploadTemplateFromDevice(
     },
   });
   return res.items as TDefaultTemplate[];
+}
+
+export async function setOrganizeGrouping(set: boolean) {
+  const res = await request({
+    method: "put",
+    url: "/files/settings/organizegrouping",
+    data: { set },
+  });
+
+  return res as boolean;
 }

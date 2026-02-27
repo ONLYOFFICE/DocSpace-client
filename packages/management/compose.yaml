@@ -4,6 +4,8 @@ services:
     build:
       context: ../..
       dockerfile: packages/management/Dockerfile
+    volumes:
+      - ../../playwright-report/management:/app/playwright-report/management
   tests-local:
     image: management-tests
     ports:

@@ -54,6 +54,7 @@ import FilesStore from "SRC_DIR/store/FilesStore";
 import MediaViewerDataStore from "SRC_DIR/store/MediaViewerDataStore";
 import OformsStore from "SRC_DIR/store/OformsStore";
 import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
+import DialogsStore from "SRC_DIR/store/DialogsStore";
 
 export type UseFilesProps = {
   fetchFiles: FilesStore["fetchFiles"];

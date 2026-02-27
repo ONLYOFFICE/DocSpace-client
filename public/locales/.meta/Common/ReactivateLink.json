@@ -1,0 +1,28 @@
+{
+  "key_path": "ReactivateLink",
+  "content": "Reactivate link",
+  "content_en_sha1_hash": "f271b20a28fc605f08783c87c682440e160ccd0f",
+  "created_at": "2026-02-18T14:56:09.264Z",
+  "updated_at": "2026-02-19T13:36:33.121Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/share/sub-components/ExpiredComboBox.tsx",
+      "line_number": 180,
+      "context": "fontSize=\"12px\"\n color={globalColors.lightBlueMain}\n onClick={onReactivate}\n dataTestId=\"expired_combo_box_remove_link\"\n >\n {t(\"Common:ReactivateLink\")}\n </Link>\n </Text>\n ) : (\n <Text\n className={styles.expireText}",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

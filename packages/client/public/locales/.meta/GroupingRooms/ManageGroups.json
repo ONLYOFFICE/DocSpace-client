@@ -1,0 +1,28 @@
+{
+  "key_path": "ManageGroups",
+  "content": "Manage groups",
+  "content_en_sha1_hash": "6dfa1bd335caf9c3ebe6f91b30002645fcc98302",
+  "created_at": "2026-02-19T13:36:24.879Z",
+  "updated_at": "2026-02-19T13:36:32.238Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/EmptyRoomGroupContainer.tsx",
+      "line_number": 59,
+      "context": ");\n \n const options: EmptyViewOptionsType = [\n {\n key: \"manage-groups\",\n title: t(\"GroupingRooms:ManageGroups\"),\n icon: <PencilIcon width={12} height={12} />,\n onClick: onManageGroups,\n type: \"action\",\n },\n ];",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -97,7 +97,6 @@
   "PriceCalculation": "Bereken uw prijs",
   "PriceForEach": "{{currency}} per {{amount}}",
   "ProductNameWallet": "{{productName}} Portemonnee",
-  "Quantity": "Hoeveelheid",
   "RecommendedTopUpAmount": "Aanbevolen opwaardeerbedrag: {{amount}}",
   "RemainingDays": "De resterende dagen van de factuurperiode: {{count}}",
   "Reminder": "Herinnering:",

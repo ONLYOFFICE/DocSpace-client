@@ -3,7 +3,7 @@
   "content": "Select new image",
   "content_en_sha1_hash": "0cfab96c757b48543e5dee1d93361135769c716e",
   "created_at": "2025-05-19T21:30:54.043Z",
-  "updated_at": "2025-10-27T16:14:33.466Z",
+  "updated_at": "2026-02-19T13:36:32.700Z",
   "comment": {
     "text": "This translation key is used to display the label \"Select new image\" on a form element. It is likely part of a select component in a UI field container and appears as a button or option within a larger form. Translators should provide a clear and concise alternative text that reflects this functionality.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/hooks/useIcon.tsx",
-      "line_number": 127,
-      "context": "{t(\"AISettings:DeleteImage\")}\n </Link>\n </>\n ) : (\n <SelectorAddButton\n label={t(\"OAuth:SelectNewImage\")}\n onClick={onClick}\n />\n )}\n </div>\n <input",
+      "line_number": 126,
+      "context": ">\n {t(\"AISettings:DeleteImage\")}\n </Link>\n </>\n ) : (\n <AddButton label={t(\"OAuth:SelectNewImage\")} onClick={onClick} />\n )}\n </div>\n <input\n ref={inputRef}\n id=\"customFileInput\"",
       "module": "/packages/client"
     },
     {

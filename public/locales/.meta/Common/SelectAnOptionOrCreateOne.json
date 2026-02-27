@@ -1,0 +1,28 @@
+{
+  "key_path": "SelectAnOptionOrCreateOne",
+  "content": "Select an option or create one",
+  "content_en_sha1_hash": "2571b4424ae499623b7168722a07d2d539dd56dc",
+  "created_at": "2026-02-19T13:36:18.706Z",
+  "updated_at": "2026-02-19T13:36:33.126Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/tag-management/TagManagement.filter.tsx",
+      "line_number": 163,
+      "context": "lineHeight=\"16px\"\n noSelect\n >\n {showCreateTag\n ? t(\"Common:OrSelectFromAvailableMatches\")\n : t(\"Common:SelectAnOptionOrCreateOne\")}\n </Text>\n ) : null}\n </>\n );\n };",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

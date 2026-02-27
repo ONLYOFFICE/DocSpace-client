@@ -3,7 +3,7 @@
   "content": "Invite",
   "content_en_sha1_hash": "b136609f068403340f94e46a0174da273bfbce30",
   "created_at": "2025-05-19T21:30:45.964Z",
-  "updated_at": "2025-12-22T14:25:00.672Z",
+  "updated_at": "2026-02-19T13:36:32.230Z",
   "comment": {
     "text": "This translation key is used for the label \"Invite\" in UI elements such as buttons and dialogs. It appears on a main button where user actions are displayed, as well as a modal dialog inviting users to join a room. Translators should focus on providing a consistent invite-related message across various contexts.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 794,
+      "line_number": 738,
       "context": "if (!isAccountsPage) return onCreateRoom();\n if (isContactsGroupsPage) return createGroup();\n };\n \n const mainButtonText =\n isRoomAdmin && isAccountsPage ? t(\"Common:Invite\") : t(\"Common:Actions\");\n \n let isDisabled = false;\n \n if (isSettingsPage) {\n isDisabled = isSettingsPage;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
-      "line_number": 576,
-      "context": "currentUserId={currentUserId}\n />\n </ModalDialog.Container>\n ) : null}\n \n <ModalDialog.Header>{t(\"Common:Invite\")}</ModalDialog.Header>\n <ModalDialog.Body>{bodyInvitePanel}</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"send-invitation\"\n scale",
+      "line_number": 926,
+      "context": "</ModalDialog.Container>\n ) : null}\n \n <ModalDialog.Header>\n <div className={styles.invitePanelHeader}>\n {t(\"Common:Invite\")} {roomId === -1 ? currentAccess?.label : \"\"}\n {roomId === -1 ? (\n <HelpButton\n tooltipMaxWidth=\"448px\"\n place=\"bottom-start\"\n tooltipStyle={{",
       "module": "/packages/client"
     },
     {
@@ -30,7 +30,7 @@
     },
     {
       "file_path": "/packages/client/src/store/contacts/HeaderMenuStore.ts",
-      "line_number": 181,
+      "line_number": 180,
       "context": "iconUrl: InfoReactSvgUrl,\n },\n {\n id: \"menu-invite\",\n key: \"invite\",\n label: t(\"Common:Invite\"),\n disabled: !hasUsersToInvite,\n onClick: () => setSendInviteDialogVisible(true),\n iconUrl: InviteAgainReactSvgUrl,\n },\n {",
       "module": "/packages/client"
     }

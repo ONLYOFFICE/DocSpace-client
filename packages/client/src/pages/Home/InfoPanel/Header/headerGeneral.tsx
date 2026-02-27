@@ -35,7 +35,7 @@ import type { TRoom } from "@docspace/shared/api/rooms/types";
 import { isRoom as isRoomUtil } from "@docspace/shared/utils/typeGuards";
 
 import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
-import { InfoPanelView } from "SRC_DIR/store/InfoPanelStore";
+import { InfoPanelView } from "SRC_DIR/helpers/info-panel";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
 import { hideInfoPanel } from "SRC_DIR/helpers/info-panel";
 import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";

@@ -3,7 +3,7 @@
   "content": "MCP servers",
   "content_en_sha1_hash": "8d9a304fd985232ade488e1913e41a3d9a502b09",
   "created_at": "2025-11-21T08:21:51.274Z",
-  "updated_at": "2025-12-23T10:31:51.024Z",
+  "updated_at": "2026-02-19T13:36:32.381Z",
   "comment": {
     "text": "This key displays the name \"MCP servers\" in the UI, often used to refer to the connection to Microsoft Content Platform servers. It appears in dialogs like the CreateEditAgentDialog and on settings pages, likely to provide context or labels related to MCP server configurations. Translators should ensure the translation accurately reflects this connection to MCP servers.",
     "is_auto": true,
@@ -13,49 +13,25 @@
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/MCP.tsx",
       "line_number": 76,
-      "context": "fontWeight={400}\n className=\"set_room_params-info-description\"\n noSelect\n >\n {t(\"MCPDescriptionServers\", {\n mcpServers: t(\"Common:MCPSettingTitle\"),\n })}\n </Text>\n </div>\n <div className=\"ai-mcp-group\">\n <SelectorAddButton onClick={onClickAction} />",
+      "context": "fontWeight={400}\n className=\"set_room_params-info-description\"\n noSelect\n >\n {t(\"MCPDescriptionServers\", {\n mcpServers: t(\"Common:MCPSettingTitle\"),\n })}\n </Text>\n </div>\n <div className=\"ai-mcp-group\">\n <AddButton onClick={onClickAction} />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
-      "line_number": 133,
+      "line_number": 136,
       "context": "? \"Common:AIProvider\"\n : currentTabId === \"search\"\n ? \"Common:WebSearchAI\"\n : currentTabId === \"knowledge\"\n ? \"AIRoom:Knowledge\"\n : \"Common:MCPSettingTitle\";\n setDocumentTitle(t(titleKey));\n }, [t, currentTabId]);\n \n const serversData = [\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/index.tsx",
-      "line_number": 228,
-      "context": "return (\n <div className={styles.mcpServers}>\n <Text className={styles.description}>\n {t(\"AISettings:MCPSettingsDescription\", {\n mcpServers: t(\"Common:MCPSettingTitle\"),\n aiChats: t(\"Common:AIChats\"),\n })}\n </Text>\n {mcpServersSettingsUrl ? (\n <Link",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/index.tsx",
-      "line_number": 228,
+      "line_number": 230,
       "context": "return (\n <div className={styles.mcpServers}>\n <Text className={styles.description}>\n {t(\"AISettings:MCPSettingsDescription\", {\n mcpServers: t(\"Common:MCPSettingTitle\"),\n aiChats: t(\"Common:AIChats\"),\n })}\n </Text>\n {mcpServersSettingsUrl ? (\n <Link",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/chat/components/chat-input/ToolsSettings.tsx",
-      "line_number": 370,
+      "line_number": 393,
       "context": "icon: ManageConnectionsReactSvgUrl,\n disabled: !showManageConnectionItem,\n getTooltipContent: () => (\n <Text>\n {t(\"ConnectMCPServers\", {\n mcpServers: t(\"Common:MCPSettingTitle\"),\n })}\n </Text>\n ),\n },\n ]",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/selectors/MCPServers/index.tsx",
-      "line_number": 171,
-      "context": "items={servers}\n emptyScreenImage={\n isBase ? EmptyScreenRoomSvgUrl : EmptyScreenRoomDarkSvgUrl\n }\n emptyScreenHeader={t(\"Common:NoMCPServers\", {\n mcpServers: t(\"Common:MCPSettingTitle\"),\n })}\n emptyScreenDescription={t(\"Common:NoMCPServersDescription\", {\n mcpServers: t(\"Common:MCPSettingTitle\"),\n productName: t(\"Common:ProductName\"),\n aiAgent: t(\"Common:AIAgent\"),",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/selectors/MCPServers/index.tsx",
-      "line_number": 171,
-      "context": "items={servers}\n emptyScreenImage={\n isBase ? EmptyScreenRoomSvgUrl : EmptyScreenRoomDarkSvgUrl\n }\n emptyScreenHeader={t(\"Common:NoMCPServers\", {\n mcpServers: t(\"Common:MCPSettingTitle\"),\n })}\n emptyScreenDescription={t(\"Common:NoMCPServersDescription\", {\n mcpServers: t(\"Common:MCPSettingTitle\"),\n productName: t(\"Common:ProductName\"),\n aiAgent: t(\"Common:AIAgent\"),",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/selectors/MCPServers/index.tsx",
-      "line_number": 171,
-      "context": "items={servers}\n emptyScreenImage={\n isBase ? EmptyScreenRoomSvgUrl : EmptyScreenRoomDarkSvgUrl\n }\n emptyScreenHeader={t(\"Common:NoMCPServers\", {\n mcpServers: t(\"Common:MCPSettingTitle\"),\n })}\n emptyScreenDescription={t(\"Common:NoMCPServersDescription\", {\n mcpServers: t(\"Common:MCPSettingTitle\"),\n productName: t(\"Common:ProductName\"),\n aiAgent: t(\"Common:AIAgent\"),",
       "module": "/packages/shared"
     }
   ],

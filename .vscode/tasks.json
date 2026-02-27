@@ -3,6 +3,16 @@
   "problemMatcher": [],
   "tasks": [
     {
+      "label": "separator",
+      "type": "shell",
+      "command": "echo",
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared",
+        "close": true
+      }
+    },
+    {
       "label": "Build DocEditor Translations",
       "type": "shell",
       "command": "node ./scripts/buildTranslations.js",
@@ -869,6 +879,21 @@
       }
     },
     {
+      "label": "Test | Test e2e run ui (client)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/client ; pnpm test:e2e:ui",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Test | Test e2e docker build (client)",
       "type": "shell",
       "command": "cd ${workspaceFolder}/packages/client ; pnpm test:e2e:docker:build",
@@ -899,9 +924,39 @@
       }
     },
     {
+      "label": "Test | Test e2e docker update-screenshots (client)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/client ; pnpm test:e2e:docker:update-screenshots",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Test | Test e2e docker clear (client)",
       "type": "shell",
       "command": "cd ${workspaceFolder}/packages/client ; pnpm test:e2e:docker:clear",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e run ui (login)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/login ; pnpm test:e2e:ui",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -944,9 +999,39 @@
       }
     },
     {
+      "label": "Test | Test e2e docker update-screenshots (login)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/login ; pnpm test:e2e:docker:update-screenshots",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Test | Test e2e docker clear (login)",
       "type": "shell",
       "command": "cd ${workspaceFolder}/packages/login ; pnpm test:e2e:docker:clear",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e run ui (SDK)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/sdk ; pnpm test:e2e:ui",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -989,9 +1074,39 @@
       }
     },
     {
+      "label": "Test | Test e2e docker update-screenshots (SDK)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/sdk ; pnpm test:e2e:docker:update-screenshots",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Test | Test e2e docker clear (SDK)",
       "type": "shell",
       "command": "cd ${workspaceFolder}/packages/sdk ; pnpm test:e2e:docker:clear",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e run ui (management)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/management ; pnpm test:e2e:ui",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -1034,9 +1149,39 @@
       }
     },
     {
+      "label": "Test | Test e2e docker update-screenshots (management)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/management ; pnpm test:e2e:docker:update-screenshots",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Test | Test e2e docker clear (management)",
       "type": "shell",
       "command": "cd ${workspaceFolder}/packages/management ; pnpm test:e2e:docker:clear",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e run ui (editor)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/doceditor ; pnpm test:e2e:ui",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -1067,6 +1212,21 @@
       "label": "Test | Test e2e docker start (editor)",
       "type": "shell",
       "command": "cd ${workspaceFolder}/packages/doceditor ; pnpm test:e2e:docker:start ; pnpm exec playwright show-report --port 9324 ${workspaceFolder}/playwright-report/doceditor",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e docker update-screenshots (editor)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/doceditor ; pnpm test:e2e:docker:update-screenshots",
       "group": {
         "kind": "build",
         "isDefault": true

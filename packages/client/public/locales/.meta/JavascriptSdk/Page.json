@@ -3,7 +3,7 @@
   "content": "Display page (number)",
   "content_en_sha1_hash": "e4af37b628f69398388a2c71a6e41b92567591b9",
   "created_at": "2025-05-19T21:30:54.613Z",
-  "updated_at": "2025-05-24T09:03:45.822Z",
+  "updated_at": "2026-02-19T13:36:32.769Z",
   "comment": {
     "text": "This translation key represents the display name of a page number field used to enter and select a specific page in a portal settings interface. It is likely to appear in a dialog or input field, allowing users to navigate to a particular page within the application.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/DisplayPageBlock.js",
       "line_number": 34,
-      "context": "import { TextInput } from \"@docspace/shared/components/text-input\";\n import { Label } from \"@docspace/ui-kit/components/label\";\n \n import { ControlsGroup } from \"../presets/StyledPresets\";\n \n export const DisplayPageBlock = ({ t, config, setConfig }) => {\n const [value, setValue] = useState(config.filter.page);\n \n const debouncedSetConfig = useCallback(\n debounce((newValue) => {\n setConfig((oldConfig) => ({",
+      "context": "import { TextInput } from \"@docspace/ui-kit/components/text-input\";\n import { Label } from \"@docspace/ui-kit/components/label\";\n \n import { ControlsGroup } from \"../presets/StyledPresets\";\n \n export const DisplayPageBlock = ({ t, config, setConfig }) => {\n const [value, setValue] = useState(config.filter.page);\n \n const debouncedSetConfig = useCallback(\n debounce((newValue) => {\n setConfig((oldConfig) => ({",
       "module": "/packages/client"
     }
   ],

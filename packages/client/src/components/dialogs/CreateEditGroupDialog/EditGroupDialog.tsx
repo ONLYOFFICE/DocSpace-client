@@ -37,7 +37,7 @@ import { TGroup } from "@docspace/shared/api/groups/types";
 import {
   MIN_LOADER_TIMER,
   SHOW_LOADER_TIMER,
-} from "@docspace/shared/selectors/utils/constants";
+} from "@docspace/ui-kit/selectors/utils/constants";
 import { TUser } from "@docspace/shared/api/people/types";
 
 import EditGroupStore from "SRC_DIR/store/contacts/EditGroupStore";

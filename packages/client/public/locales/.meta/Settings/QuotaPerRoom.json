@@ -3,7 +3,7 @@
   "content": "Quota per room",
   "content_en_sha1_hash": "c6d44419e178bb95bb2e8d662bb28b6b56efd1ec",
   "created_at": "2025-05-19T21:30:52.338Z",
-  "updated_at": "2025-10-27T16:14:33.632Z",
+  "updated_at": "2026-02-19T13:36:32.953Z",
   "comment": {
     "text": "The translation key \"QuotaPerRoom\" represents the label for a quota setting related to room capacity in a storage management system. It is used as a title on a category page where users can set and manage quotas per room, typically in a portal settings interface.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/MobileQuotas.js",
       "line_number": 47,
-      "context": "};\n \n return (\n <StyledBaseQuotaComponent>\n <MobileCategoryWrapper\n title={t(\"QuotaPerRoom\")}\n onClickLink={onClickLink}\n url=\"portal-settings/management/disk-space/quota-per-room\"\n subtitle={t(\"SetDefaultRoomQuota\", {\n productName: t(\"Common:ProductName\"),\n })}",
+      "context": "};\n \n return (\n <StyledBaseQuotaComponent>\n <CategoryItem\n title={t(\"QuotaPerRoom\")}\n onClickLink={onClickLink}\n url=\"portal-settings/management/disk-space/quota-per-room\"\n subtitle={t(\"SetDefaultRoomQuota\", {\n productName: t(\"Common:ProductName\"),\n })}",
       "module": "/packages/client"
     },
     {

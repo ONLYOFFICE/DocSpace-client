@@ -1,0 +1,28 @@
+{
+  "key_path": "LinkSettingsJoinedUsers",
+  "content": "Users have joined via this link",
+  "content_en_sha1_hash": "8d9cf65833243dcc0964dffcbf523611c2168ab1",
+  "created_at": "2026-02-19T13:36:27.563Z",
+  "updated_at": "2026-02-19T13:36:32.538Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/LinkSettingsPanel/index.tsx",
+      "line_number": 278,
+      "context": "<Text\n fontSize=\"12px\"\n fontWeight={400}\n className={styles.linkSettingsDescriptionText}\n >\n {t(\"Files:LinkSettingsJoinedUsers\")}\n </Text>\n </div>\n </div>\n ) : null}\n </div>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -720,7 +720,7 @@ class OAuthStore {
     const openOption = {
       key: "open",
       icon: ExternalLinkReactSvgUrl,
-      label: t("Files:Open"),
+      label: t("Common:Open"),
       onClick: () => window.open(item.websiteUrl, "_blank"),
       disabled: isInfo,
       dataTestId: "oauth_files_open_option",

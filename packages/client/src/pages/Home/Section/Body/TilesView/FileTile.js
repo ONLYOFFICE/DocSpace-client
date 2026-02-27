@@ -42,6 +42,7 @@ import { TemplateTile } from "@docspace/ui-kit/components/tiles/template-tile";
 
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
+import { TagManagement } from "SRC_DIR/components/TagManagement";
 
 import FilesTileContent from "./FilesTileContent";
 import { FileTileContext } from "./FileTile.provider";
@@ -236,51 +237,55 @@ const FileTile = (props) => {
     badgeUrl,
   };
 
-  const fileTile = (
-    <FileTileComponent
-      {...commonProps}
-      key={item.id}
-      temporaryIcon={temporaryIcon}
-      thumbnail={!providerItem && thumbnailUrl ? thumbnailUrl : ""}
-      thumbSize={thumbSize}
-      contentElement={quickButtonsComponent}
-      thumbnailClick={onFilesClick}
-    />
-  );
-
-  const folderTile = (
-    <FolderTile {...commonProps} temporaryIcon={temporaryIcon} />
-  );
-
-  const roomTile = (
-    <RoomTile
-      {...commonProps}
-      t={t}
-      key={item.id}
-      selectTag={onSelectTag}
-      selectOption={onSelectOption}
-      columnCount={columnCount}
-      thumbnailClick={onFilesClick}
-      getRoomTypeName={getRoomTypeName}
-    />
-  );
-
-  const remplateTile = (
-    <TemplateTile
-      {...commonProps}
-      key={item.id}
-      thumbnailClick={onFilesClick}
-      openUser={onOpenUser}
-      showStorageInfo={showStorageInfo}
-      SpaceQuotaComponent={SpaceQuota}
-    />
-  );
-
   const renderTile = () => {
-    if (item.isTemplate) return remplateTile;
-    if (item.isRoom) return roomTile;
-    if (item.isFolder) return folderTile;
-    return fileTile;
+    if (item.isTemplate)
+      return (
+        <TemplateTile
+          {...commonProps}
+          key={item.id}
+          thumbnailClick={onFilesClick}
+          openUser={onOpenUser}
+          showStorageInfo={showStorageInfo}
+          SpaceQuotaComponent={SpaceQuota}
+        />
+      );
+    if (item.isRoom)
+      return (
+        <RoomTile
+          {...commonProps}
+          t={t}
+          key={item.id}
+          selectTag={onSelectTag}
+          selectOption={onSelectOption}
+          columnCount={columnCount}
+          thumbnailClick={onFilesClick}
+          getRoomTypeName={getRoomTypeName}
+          customBottomContent={(isHovered, tags) => (
+            <TagManagement
+              tags={tags}
+              id={item.id}
+              access={item.access}
+              columnCount={columnCount}
+              onSelectTag={onSelectTag}
+              isActive={isActive || isHovered || checkedProps}
+            />
+          )}
+        />
+      );
+    if (item.isFolder)
+      return <FolderTile {...commonProps} temporaryIcon={temporaryIcon} />;
+
+    return (
+      <FileTileComponent
+        {...commonProps}
+        key={item.id}
+        temporaryIcon={temporaryIcon}
+        thumbnail={!providerItem && thumbnailUrl ? thumbnailUrl : ""}
+        thumbSize={thumbSize}
+        contentElement={quickButtonsComponent}
+        thumbnailClick={onFilesClick}
+      />
+    );
   };
 
   const droppableClassName = isDragging ? "droppable" : "";

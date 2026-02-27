@@ -97,7 +97,6 @@
   "PriceCalculation": "Calculaţi preţul",
   "PriceForEach": "{{currency}} pentru {{amount}}",
   "ProductNameWallet": "Portofel {{productName}}",
-  "Quantity": "Cantitate",
   "RecommendedTopUpAmount": "Suma recomandată la alimentare: {{amount}}",
   "RemainingDays": "Zilele rămase din ciclul de facturare: {{count}}",
   "Reminder": "Memento:",

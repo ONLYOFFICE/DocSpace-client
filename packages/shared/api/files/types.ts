@@ -387,6 +387,7 @@ export type TFilesSettings = {
   updateIfExist?: boolean;
   openEditorInSameTab: boolean;
   displayFileExtension: boolean;
+  organizeRoomsGrouping: boolean;
 };
 
 export type TPresignedUri = {
@@ -587,5 +588,6 @@ export type TDefaultTemplate = {
   fileExtension: string;
   lastModified?: string;
   fileTitle?: string;
+  fileSize?: number;
   viewUrl?: string;
 };

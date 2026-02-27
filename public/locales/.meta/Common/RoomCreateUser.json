@@ -3,7 +3,7 @@
   "content": "Users added.",
   "content_en_sha1_hash": "a878f78eb9713716912f998404ed3dca2a7b8005",
   "created_at": "2025-09-23T07:24:16.863Z",
-  "updated_at": "2025-11-03T12:10:35.115Z",
+  "updated_at": "2026-02-19T13:36:32.644Z",
   "comment": {
     "text": "This key displays a confirmation message when users are added to a room. It appears as a toast notification after a successful room creation or user addition, confirming the action to the user. Translators should ensure the message clearly indicates new users have been added.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/shared/components/share/selector/index.tsx",
-      "line_number": 79,
+      "line_number": 82,
       "context": "try {\n const list = await ShareLinkService.shareItemToUser(share, item);\n \n onSubmit?.(list);\n \n toastr.success(t(\"Common:RoomCreateUser\"));\n } catch (error) {\n toastr.error(error as TData);\n console.error(error);\n } finally {\n onClose();",
       "module": "/packages/shared"
     }

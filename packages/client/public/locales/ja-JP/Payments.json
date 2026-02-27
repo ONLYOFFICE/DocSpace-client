@@ -97,7 +97,6 @@
   "PriceCalculation": "価格を計算する",
   "PriceForEach": "{{currency}}／{{amount}}",
   "ProductNameWallet": "{{productName}} ウォレット",
-  "Quantity": "数量",
   "RecommendedTopUpAmount": "推奨チャージ金額：{{amount}}",
   "RemainingDays": "請求サイクルの残り日数：{{count}}",
   "Reminder": "リマインダー：",

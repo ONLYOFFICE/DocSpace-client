@@ -97,7 +97,6 @@
   "PriceCalculation": "Izračunajte vašo ceno",
   "PriceForEach": "{{currency}} na {{amount}}",
   "ProductNameWallet": "{{productName}} Denarnica",
-  "Quantity": "Količina",
   "RecommendedTopUpAmount": "Priporočeno znesek dopolnitve: {{amount}}",
   "RemainingDays": "Preostali dnevi obračunskega cikla: {{count}}",
   "Reminder": "Opomnik:",

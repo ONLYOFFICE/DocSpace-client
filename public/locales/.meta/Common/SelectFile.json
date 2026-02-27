@@ -3,7 +3,7 @@
   "content": "Select file",
   "content_en_sha1_hash": "63f72dce85635b76fe31d3931ae500471aa30d71",
   "created_at": "2025-05-19T21:30:48.410Z",
-  "updated_at": "2025-12-15T14:04:23.481Z",
+  "updated_at": "2026-02-19T13:36:32.260Z",
   "comment": {
     "text": "This translation key is used to display the label for a file selection action, appearing as \"Select File\" in various UI elements such as buttons or dialogs. It is part of a set of translations related to file management and appears on the FilesSelector component.",
     "is_auto": true,
@@ -20,6 +20,12 @@
       "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
       "line_number": 55,
       "context": "if (isSelectFolder) return t(\"Common:SelectFolder\");\n if (isMove) return t(\"Common:MoveTo\");\n if (isCopy && !isEditorDialog) return t(\"Common:Copy\");\n if (isRestoreAll) return t(\"Common:Restore\");\n if (isSelect) {\n return filterParam ? t(\"Common:SelectFile\") : t(\"Common:SelectAction\");\n }\n \n if (isFormRoom) {\n return t(\"Common:SelectFromPortal\", {\n productName: t(\"Common:ProductName\"),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/PluginSelector/PluginFilesSelector/PluginFilesSelector.tsx",
+      "line_number": 163,
+      "context": "const headerProps: TSelectorHeader = selectorProps.withHeader\n ? {\n withHeader: true,\n headerProps: {\n headerLabel:\n selectorProps.headerProps?.label ?? t(\"Common:SelectFile\"),\n isCloseable: selectorProps.headerProps?.isCloseable,\n onCloseClick: onCancel,\n },\n }\n : {};",
       "module": "/packages/client"
     },
     {
@@ -60,7 +66,7 @@
     },
     {
       "file_path": "/packages/doceditor/src/components/SelectFileDialog.tsx",
-      "line_number": 52,
+      "line_number": 53,
       "context": "const { t } = useTranslation();\n \n // const sessionPath = sessionStorage.getItem(\"filesSelectorPath\");\n \n const headerLabel = fileTypeDetection.filterParam\n ? (t?.(\"Common:SelectFile\") ?? \"\")\n : (t?.(\"Common:SelectAction\") ?? \"\");\n \n const getFileTypeTranslation = React.useCallback(() => {\n switch (fileTypeDetection.filterParam) {\n case FilesSelectorFilterTypes.XLSX:",
       "module": "/packages/doceditor"
     },

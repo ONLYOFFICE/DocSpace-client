@@ -115,7 +115,7 @@ const EmptyScreenGroups = ({
     return [
       {
         key: "create-group-option",
-        title: t("PeopleTranslations:CreateGroup"),
+        title: t("Common:CreateGroup"),
         description: t("EmptyView:EmptyGroupsCreateGroupOptionDescription"),
         icon: <GroupIcon />,
         disabled: isRoomAdmin,

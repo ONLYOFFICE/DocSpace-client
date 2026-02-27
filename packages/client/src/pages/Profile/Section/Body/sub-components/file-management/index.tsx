@@ -57,6 +57,9 @@ type FileManagementProps = {
 
   hideConfirmCancelOperation?: boolean;
   setHideConfirmCancelOperation?: FilesSettingsStore["setHideConfirmCancelOperation"];
+
+  organizeRoomsGrouping?: boolean;
+  setOrganizeRoomsGrouping?: FilesSettingsStore["setOrganizeRoomsGrouping"];
 };
 
 const FileManagement = ({
@@ -79,6 +82,9 @@ const FileManagement = ({
 
   hideConfirmCancelOperation,
   setHideConfirmCancelOperation,
+
+  organizeRoomsGrouping,
+  setOrganizeRoomsGrouping,
 }: FileManagementProps) => {
   const { t } = useTranslation(["FilesSettings", "Common"]);
 
@@ -102,6 +108,10 @@ const FileManagement = ({
   const onChangeCancellationNotification = React.useCallback(() => {
     setHideConfirmCancelOperation?.(!hideConfirmCancelOperation);
   }, [hideConfirmCancelOperation, setHideConfirmCancelOperation]);
+
+  const onChangeRoomGrouping = React.useCallback(async () => {
+    await setOrganizeRoomsGrouping?.(!organizeRoomsGrouping);
+  }, [organizeRoomsGrouping, setOrganizeRoomsGrouping]);
 
   const onChangeOpenEditorInSameTab = React.useCallback(() => {
     setOpenEditorInSameTab?.(!openEditorInSameTab);
@@ -180,13 +190,26 @@ const FileManagement = ({
           />
           <Text>{t("CancellaionNotification")}</Text>
         </div>
+        <div className={styles.toggleBtnWrapper}>
+          <ToggleButton
+            className={classNames("room-grouping", styles.toggleBtn)}
+            onChange={onChangeRoomGrouping}
+            isChecked={organizeRoomsGrouping}
+            dataTestId="room_grouping_toggle_button"
+          />
+          <Text>{t("GroupByRooms")}</Text>
+        </div>
       </div>
     </div>
   );
 };
 
 export default inject(
-  ({ filesSettingsStore, treeFoldersStore, settingsStore }: TStore) => {
+  ({
+    filesSettingsStore,
+    treeFoldersStore,
+    settingsStore,
+  }: TStore) => {
     const {
       storeOriginalFiles,
       confirmDelete,
@@ -208,6 +231,8 @@ export default inject(
       setDisplayFileExtension,
       hideConfirmCancelOperation,
       setHideConfirmCancelOperation,
+      organizeRoomsGrouping,
+      setOrganizeRoomsGrouping,
     } = filesSettingsStore;
     const { logoText } = settingsStore;
 
@@ -238,6 +263,8 @@ export default inject(
       logoText,
       hideConfirmCancelOperation,
       setHideConfirmCancelOperation,
+      organizeRoomsGrouping,
+      setOrganizeRoomsGrouping,
     };
   },
 )(observer(FileManagement));

@@ -3,7 +3,7 @@
   "content": "Paste selected items from the clipboard",
   "content_en_sha1_hash": "9fa447fab1680aa915559441757d74035e810b43",
   "created_at": "2025-05-19T21:30:55.071Z",
-  "updated_at": "2025-05-24T10:37:45.700Z",
+  "updated_at": "2026-02-19T13:36:32.506Z",
   "comment": {
     "text": "This translation key is used to display the text \"Paste selected items from the clipboard\" in various parts of the UI. It appears on a hotkeys panel, indicating the action that can be performed by pressing Ctrl + V.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/panels/HotkeysPanel/ActionsBlock.js",
       "line_number": 66,
-      "context": "<Text {...keyTextStyles}>{`${CtrlKey} + c`}</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysPasteSelected\")}</Text>\n <Text {...keyTextStyles}>{`${CtrlKey} + v`}</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>",
+      "context": "<Text {...keyTextStyles}>{`${CtrlKey} + c`}</Text>\n </>\n </Row>\n <Row className={styles.hotkeysRow}>\n <>\n <Text {...textStyles}>{t(\"HotkeysPasteSelected\")}</Text>\n <Text {...keyTextStyles}>{`${CtrlKey} + v`}</Text>\n </>\n </Row>\n <Row className={styles.hotkeysRow}>\n <>",
       "module": "/packages/client"
     }
   ],

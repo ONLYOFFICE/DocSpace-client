@@ -45,6 +45,7 @@ import {
   getTitleWithoutExtension,
   getUpperCaseExtension,
 } from "@docspace/shared/utils";
+import { getConvertedSize } from "@docspace/shared/utils/common";
 import { LANGUAGE } from "@docspace/shared/constants";
 
 import FilesSelector from "SRC_DIR/components/FilesSelector";
@@ -194,6 +195,9 @@ const TemplatesRow = ({
             truncate
           >
             {lastModified} | {getUpperCaseExtension(item.fileExst)}
+            {item?.fileSize
+              ? " | " + getConvertedSize(t, item?.fileSize)
+              : null}
           </Text>
         </div>
 

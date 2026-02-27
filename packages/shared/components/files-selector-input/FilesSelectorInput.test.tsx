@@ -45,8 +45,8 @@ const mocks = vi.hoisted(() => ({
   )),
 }));
 
-// Mock using relative path as it's imported in FilesSelectorInput.tsx
-vi.mock("../../selectors/Files", () => ({
+// Mock using the package path as it's imported in FilesSelectorInput.tsx
+vi.mock("@docspace/ui-kit/selectors/Files", () => ({
   __esModule: true,
   default: mocks.FilesSelectorMock,
 }));

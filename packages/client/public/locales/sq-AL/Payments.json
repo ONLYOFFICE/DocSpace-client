@@ -97,7 +97,6 @@
   "PriceCalculation": "Llogaritni çmimin tuaj",
   "PriceForEach": "{{currency}} për {{amount}}",
   "ProductNameWallet": "Portofoli {{productName}}",
-  "Quantity": "Sasia",
   "RecommendedTopUpAmount": "Sasia e rekomanduar për rimbushje: {{amount}}",
   "RemainingDays": "Ditët e mbetura të ciklit të faturimit: {{count}}",
   "Reminder": "Kujtesë:",

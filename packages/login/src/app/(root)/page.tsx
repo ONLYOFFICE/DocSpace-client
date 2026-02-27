@@ -112,6 +112,7 @@ async function Page(props: {
             capabilities={capabilities}
             ssoExists={ssoExists}
             oauthDataExists={oauthDataExists}
+            isOauth={!!clientId}
           />
 
           {settings.enableAdmMess ? (

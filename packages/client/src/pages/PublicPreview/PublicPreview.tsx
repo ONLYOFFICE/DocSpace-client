@@ -6,7 +6,8 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import { ValidationStatus } from "@docspace/shared/enums";
 import { PublicRoomPasswordForm } from "@docspace/shared/pages/PublicRoom";
-import useFilesSettings from "@docspace/shared/selectors/utils/hooks/useFilesSettings";
+import useFilesSettings from "@docspace/ui-kit/selectors/utils/hooks/useFilesSettings";
+import type { FilesSettingsDto } from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
 
 import PublicPreviewViewer from "./PublicPreview.viewer";
 import type { PublicPreviewLoaderProps } from "./PublicPreview.types";
@@ -17,7 +18,10 @@ export const PublicPreview = () => {
   const { validateData, key, settings } =
     useLoaderData<PublicPreviewLoaderProps>();
 
-  const { getIcon } = useFilesSettings(undefined, settings);
+  const { getIcon } = useFilesSettings(
+    undefined,
+    settings as unknown as FilesSettingsDto,
+  );
 
   const onSuccessValidation = () => {
     revalidator.revalidate();

@@ -67,6 +67,7 @@ const defaultTemplatesCustomized = {
         fileExtension: ".docx",
         fileTitle: "ONLYOFFICE Document Sample.docx",
         lastModified: "2026-01-21T18:34:37+00:00",
+        fileSize: 408980,
       },
       {
         fileExtension: ".pdf",
@@ -99,6 +100,7 @@ const defaultTemplatesLongTitle = {
         fileTitle:
           "Long long long long long long long long long long long long long long long long long",
         lastModified: "2026-01-21T18:34:37+00:00",
+        fileSize: 408980,
       },
       {
         fileExtension: ".pdf",
@@ -147,6 +149,18 @@ export const defaultTemplatesSetHandler = (
   type?: ResponseType,
 ) => {
   return http.put(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_DEFAULT_TEMPLATES}`,
+    () => {
+      return defaultTemplatesResolver(type);
+    },
+  );
+};
+
+export const defaultTemplatesResetHandler = (
+  port: string,
+  type?: ResponseType,
+) => {
+  return http.delete(
     `${BASE_URL}:${port}/${API_PREFIX}/${PATH_DEFAULT_TEMPLATES}`,
     () => {
       return defaultTemplatesResolver(type);

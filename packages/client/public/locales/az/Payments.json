@@ -97,7 +97,6 @@
   "PriceCalculation": "Qiymətinizi hesablayın",
   "PriceForEach": "{{currency}}-ə {{amount}} pul",
   "ProductNameWallet": "{{productName}} Güzəştəsi",
-  "Quantity": "Miqdar",
   "RecommendedTopUpAmount": "Tövsiyə olunan doldurma məbləği: {{amount}}",
   "RemainingDays": "Ödəniş dövrünün qalan günləri: {{count}}",
   "Reminder": "Xatırlatma:",

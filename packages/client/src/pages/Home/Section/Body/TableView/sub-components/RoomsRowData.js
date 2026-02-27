@@ -140,7 +140,11 @@ const RoomsRowDataComponent = (props) => {
             item={props.item}
             tagCount={props.tagCount}
             onSelectTag={props.onSelectTag}
+            checkedProps={checkedProps}
+            isActive={props.isActive}
+            isHovered={props.isHovered}
             sideColor={theme.filesSection.tableView.row.sideColor}
+            isAdmin={props.isAdmin}
           />
           {lastColumn === "Tags" ? quickButtonsComponentNode : null}
         </TableCell>

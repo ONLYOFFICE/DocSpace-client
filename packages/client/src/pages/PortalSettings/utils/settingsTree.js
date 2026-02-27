@@ -568,6 +568,13 @@ export const settingsTree = [
             link: "docspace",
             tKey: "Common:ProductName",
           },
+          {
+            id: "portal-settings_catalog-javascript-sdk_uploader",
+            key: "8-1-7",
+            icon: "",
+            link: "uploader",
+            tKey: "Common:Uploader",
+          },
         ],
       },
       {

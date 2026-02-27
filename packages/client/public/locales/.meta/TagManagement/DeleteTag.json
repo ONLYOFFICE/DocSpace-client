@@ -1,0 +1,28 @@
+{
+  "key_path": "DeleteTag",
+  "content": "Delete tag",
+  "content_en_sha1_hash": "2cde39d111249b1f09dd97821db5e78d3f071119",
+  "created_at": "2026-02-19T13:36:19.063Z",
+  "updated_at": "2026-02-19T13:36:33.126Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/tag-management/modals/DeleteTag.modal.tsx",
+      "line_number": 76,
+      "context": "autoMaxHeight\n onClose={onClose}\n id={DELETE_TAG_MODAL_ID}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>{t(\"TagManagement:DeleteTag\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text className={styles.deleteTagModalText}>\n {t(\"TagManagement:DeleteTagConfirmation\")}\n </Text>\n <Text className={styles.deleteTagModalText}>",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

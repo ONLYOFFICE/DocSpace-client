@@ -30,7 +30,7 @@ import React from "react";
 import dynamic from "next/dynamic";
 import { useTranslation } from "react-i18next";
 
-import { TResponse } from "@/types";
+import type { TResponse, SelectFolderDialogProps, SelectFileDialogProps, StartFillingSelectorDialogProps } from "@/types";
 
 import useError from "@/hooks/useError";
 import useRootInit from "@/hooks/useRootInit";
@@ -41,7 +41,7 @@ import useSocketHelper from "@/hooks/useSocketHelper";
 import useShareDialog from "@/hooks/useShareDialog";
 import useFilesSettings from "@/hooks/useFilesSettings";
 import useUpdateSearchParamId from "@/hooks/useUpdateSearchParamId";
-import { useStartFillingPanel } from "@/hooks/useStartFillingPanel";
+import { useRoleMappingPanel } from "@/hooks/useRoleMappingPanel";
 import useSDK from "@/hooks/useSDK";
 
 import { calculateAsideHeight } from "@/utils";
@@ -76,9 +76,9 @@ const SharingDialog = dynamic(() => import("./ShareDialog"), {
   ssr: false,
 });
 
-const StartFillingPanel = dynamic(
+const RoleMappingPanel = dynamic(
   async () =>
-    (await import("@docspace/shared/dialogs/start-filling")).StartFillingPanel,
+    (await import("@docspace/shared/dialogs/role-mapping")).RoleMappingPanel,
   {
     ssr: false,
   },
@@ -116,6 +116,8 @@ const Root = ({
 
   deepLinkSettings,
   baseSdkConfig,
+
+  generationToolCallState,
 }: TResponse) => {
   const editorRef = React.useRef<null | HTMLElement>(null);
 
@@ -231,11 +233,11 @@ const Root = ({
     roles,
     onStartFilling,
     inviteUserToRoom,
-    startFillingPanelVisible,
-    setStartFillingPanelVisible,
-    onStartFillingVDRPanel,
-    onSubmitStartFilling,
-  } = useStartFillingPanel(fileInfo, roomId);
+    roleMappingPanelVisible,
+    setRoleMappingPanelVisible,
+    onOpenRoleMappingPanel,
+    onSubmitFormRoleMapping,
+  } = useRoleMappingPanel(fileInfo, roomId);
 
   useUpdateSearchParamId(fileId, hash);
   const {
@@ -273,7 +275,7 @@ const Root = ({
       isSharingDialogVisible ||
       isVisibleSelectFolderDialog ||
       selectFileDialogVisible ||
-      startFillingPanelVisible ||
+      roleMappingPanelVisible ||
       fillingStatusDialogVisible ||
       shareFormDialogVisible
     ) {
@@ -292,7 +294,7 @@ const Root = ({
     isSharingDialogVisible,
     isVisibleSelectFolderDialog,
     selectFileDialogVisible,
-    startFillingPanelVisible,
+    roleMappingPanelVisible,
     fillingStatusDialogVisible,
     shareFormDialogVisible,
   ]);
@@ -349,6 +351,7 @@ const Root = ({
           onDownloadAs={onDownloadAs}
           filesSettings={filesSettings}
           shareKey={shareKey}
+          generationToolCallState={generationToolCallState}
           onSDKRequestSharingSettings={onSDKRequestSharingSettings}
           onSDKRequestSaveAs={onSDKRequestSaveAs}
           onSDKRequestInsertImage={onSDKRequestInsertImage}
@@ -356,7 +359,7 @@ const Root = ({
           onSDKRequestSelectDocument={onSDKRequestSelectDocument}
           onSDKRequestSelectSpreadsheet={onSDKRequestSelectSpreadsheet}
           organizationName={organizationName}
-          onStartFillingVDRPanel={onStartFillingVDRPanel}
+          onOpenRoleMappingPanel={onOpenRoleMappingPanel}
           setFillingStatusDialogVisible={setFillingStatusDialogVisible}
           openShareFormDialog={openShareFormDialog}
           onStartFilling={onStartFilling}
@@ -366,23 +369,23 @@ const Root = ({
       {isVisibleSelectFolderDialog && fileInfo ? (
         <SelectFolderDialog
           isVisible={isVisibleSelectFolderDialog}
-          onSubmit={onSubmitSelectFolderDialog}
+          onSubmit={onSubmitSelectFolderDialog as SelectFolderDialogProps["onSubmit"]}
           onClose={onCloseSelectFolderDialog}
           titleSelectorFolder={titleSelectorFolderDialog}
           fileInfo={fileInfo}
-          getIsDisabled={getIsDisabledSelectFolderDialog}
-          filesSettings={filesSettings}
+          getIsDisabled={getIsDisabledSelectFolderDialog as SelectFolderDialogProps["getIsDisabled"]}
+          filesSettings={filesSettings as SelectFolderDialogProps["filesSettings"]}
           fileSaveAsExtension={extensionSelectorFolderDialog}
           selectedFolderId={selectedFolderId}
         />
       ) : null}
       {selectFileDialogVisible && fileInfo ? (
         <SelectFileDialog
-          filesSettings={filesSettings}
+          filesSettings={filesSettings as SelectFileDialogProps["filesSettings"]}
           isVisible={selectFileDialogVisible}
-          onSubmit={onSubmitSelectFileDialog}
+          onSubmit={onSubmitSelectFileDialog as SelectFileDialogProps["onSubmit"]}
           onClose={onCloseSelectFileDialog}
-          getIsDisabled={getIsDisabledSelectFileDialog}
+          getIsDisabled={getIsDisabledSelectFileDialog as SelectFileDialogProps["getIsDisabled"]}
           fileTypeDetection={selectFileDialogFileTypeDetection}
           fileInfo={fileInfo}
           shareKey={shareKey}
@@ -400,8 +403,8 @@ const Root = ({
         />
       ) : null}
 
-      {user && settings && fileInfo && startFillingPanelVisible && roomId ? (
-        <StartFillingPanel
+      {user && settings && fileInfo && roleMappingPanelVisible && roomId ? (
+        <RoleMappingPanel
           withBorder
           user={user}
           roles={roles}
@@ -409,9 +412,9 @@ const Root = ({
           settings={settings}
           fileId={fileInfo.id}
           canEditRoom={canEditRoom}
-          onSubmit={onSubmitStartFilling}
+          onSubmit={onSubmitFormRoleMapping}
           inviteUserToRoom={inviteUserToRoom}
-          setStartFillingPanelVisible={setStartFillingPanelVisible}
+          setRoleMappingPanelVisible={setRoleMappingPanelVisible}
         />
       ) : null}
       {fillingStatusDialogVisible && fileInfo && user ? (
@@ -436,17 +439,17 @@ const Root = ({
       {shareFormDialogVisible && fileInfo ? (
         <ShareFormDialog
           file={fileInfo}
-          filesSettings={filesSettings}
+          filesSettings={filesSettings as unknown as StartFillingSelectorDialogProps["filesSettings"]}
           createDefineRoomType={createDefineRoomType}
           headerLabelSFSDialog={headerLabelSFSDialog}
           onClose={onCloseShareFormDialog}
           onClickFormRoom={onClickFormRoom}
           onClickVirtualDataRoom={onClickVirtualDataRoom}
           getIsDisabledStartFillingSelectDialog={
-            getIsDisabledStartFillingSelectDialog
+            getIsDisabledStartFillingSelectDialog as unknown as StartFillingSelectorDialogProps["getIsDisabled"]
           }
           onCloseStartFillingSelectDialog={onCloseStartFillingSelectDialog}
-          onSubmitStartFillingSelectDialog={onSubmitStartFillingSelectDialog}
+          onSubmitStartFillingSelectDialog={onSubmitStartFillingSelectDialog as unknown as StartFillingSelectorDialogProps["onSubmit"]}
           isVisibleStartFillingSelectDialog={isVisibleStartFillingSelectDialog}
           openChangeLinkTypeDialog={openChangeLinkTypeDialog}
         />

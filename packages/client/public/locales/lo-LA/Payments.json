@@ -97,7 +97,6 @@
   "PriceCalculation": "ຄິດໄລ້ລາຄາຂອງເຈົ້າ",
   "PriceForEach": "{{currency}} ຕໍ່ {{amount}}",
   "ProductNameWallet": "ກະເງິນ {{productName}}",
-  "Quantity": "ປະລິमाण",
   "RecommendedTopUpAmount": "ຈຳນວນການເຕີມເງິນທີ່ແນະນຳ: {{amount}}",
   "RemainingDays": "ວັນທີ່ເຫຼືອຂອງໄລຍະການຄິດຄ່າບໍລິການ: {{count}}",
   "Reminder": "ເຕືອນໃຈ:",

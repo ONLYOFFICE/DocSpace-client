@@ -3,7 +3,7 @@
   "content": "Calculate your price",
   "content_en_sha1_hash": "3b75a44bbf2e06bbf5d815f40f0da7c6f892ffee",
   "created_at": "2025-05-19T21:30:53.721Z",
-  "updated_at": "2025-05-24T06:44:54.004Z",
+  "updated_at": "2026-02-19T13:36:32.885Z",
   "comment": {
     "text": "Calculate price options for the Portal Settings, possibly appearing as a button or dialog in the /packages/client/src/pages/PortalSettings/categories/payments/SaaS/PriceCalculation.js file.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/PriceCalculation.js",
-      "line_number": 78,
+      "line_number": 79,
       "context": "`;\n \n let timeout = null;\n let controller;\n \n const PriceCalculation = ({\n t,\n theme,\n setIsLoading,\n maxAvailableManagersCount,\n canUpdateTariff,",
       "module": "/packages/client"
     }

@@ -27,6 +27,15 @@
         "{projectRoot}/dist"
       ]
     },
+    "build:deploy": {
+      "cache": true,
+      "outputs": [
+        "{projectRoot}/.next"
+      ]
+    },
+    "deploy": {
+      "cache": false
+    },
     "storybook-build": {
       "cache": true,
       "outputs": [

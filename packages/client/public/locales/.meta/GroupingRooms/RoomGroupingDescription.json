@@ -1,0 +1,28 @@
+{
+  "key_path": "RoomGroupingDescription",
+  "content": "Easily navigate your {{productName}} with the new room grouping option. Organize rooms by specific features to quickly find what you need. You can enable room grouping now or anytime later in your profile settings.",
+  "content_en_sha1_hash": "a53be4c0740a1ef4bb2ec97bb38a6ce8787883f4",
+  "created_at": "2026-02-19T13:36:24.883Z",
+  "updated_at": "2026-02-19T13:36:32.448Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/RoomGroupingDialog/index.tsx",
+      "line_number": 348,
+      "context": "</div>\n )}\n </div>\n \n <div className={styles.description}>\n {t(\"GroupingRooms:RoomGroupingDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

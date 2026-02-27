@@ -97,7 +97,6 @@
   "PriceCalculation": "Tính phí của bạn",
   "PriceForEach": "{{currency}} mỗi {{amount}}",
   "ProductNameWallet": "Ví {{productName}}",
-  "Quantity": "Số lượng",
   "RecommendedTopUpAmount": "Số tiền nạp khuyến nghị: {{amount}}",
   "RemainingDays": "Những ngày còn lại của chu kỳ thanh toán: {{count}}",
   "Reminder": "Nhắc nhở:",

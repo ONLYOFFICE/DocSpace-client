@@ -1,0 +1,34 @@
+{
+  "key_path": "PM",
+  "content": "PM",
+  "content_en_sha1_hash": "0c95dc6163ff0d09e82f44e7c50db7ad6b089bf3",
+  "created_at": "2026-02-18T14:56:07.114Z",
+  "updated_at": "2026-02-19T13:36:32.543Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/LinkSettingsPanel/index.tsx",
+      "line_number": 316,
+      "context": "selectDateText={t(\"Common:SelectDate\")}\n initialDate={limitDate}\n minDate={subtractFromDate(now(), 1, \"days\") ?? undefined}\n maxDate={maxDate}\n useMaxTime={!activeLink.expirationDate}\n translations={{ AM: t(\"Common:AM\"), PM: t(\"Common:PM\") }}\n />\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/dialogs/EditLinkPanel/LimitTimeBlock.tsx",
+      "line_number": 89,
+      "context": "initialDate={expirationDate}\n className=\"public-room_date-picker\"\n selectDateText={t(\"Common:SelectDate\")}\n dataTestId=\"edit_link_panel_date_time_picker\"\n useMaxTime\n translations={{ AM: t(\"Common:AM\"), PM: t(\"Common:PM\") }}\n />\n </ToggleBlock>\n );\n };",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

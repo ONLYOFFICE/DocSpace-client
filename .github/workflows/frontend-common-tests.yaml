@@ -12,7 +12,7 @@ name: Frontend common tests
 
 env:
   NODE_VERSION: 24.x
-  PNPM_VERSION: 10.28.2
+  PNPM_VERSION: 10.30.0
 
 jobs:
   # Detect changes to optimize job execution
@@ -464,20 +464,44 @@ jobs:
           path: "."
           ssh-key: ${{ secrets.DOCSPACEUIKITREACT_SSH_KEY }}
       - name: Cleanup existing containers
-        run: docker ps -a --filter name=client-tests-ci -q | xargs -r docker rm -f
-      - uses: adambirds/docker-compose-action@v1.5.0
+        run: docker rm -f playwright-client-${{ github.run_id }} 2>/dev/null || true
+      - name: Build test image
+        run: docker compose -f packages/client/compose.yaml build tests-ci
+      - name: Run Client e2e tests
+        id: run-tests
+        run: |
+          docker run \
+            --name playwright-client-${{ github.run_id }} \
+            -e CI=true \
+            -e GITHUB_WORKFLOW="${{ github.workflow }}" \
+            -e GITHUB_RUN_ID="${{ github.run_id }}" \
+            -e GITHUB_RUN_NUMBER="${{ github.run_number }}" \
+            client-tests \
+            pnpm exec playwright test --workers=4 --retries=0
+        continue-on-error: true
+      - name: Extract Playwright report
+        if: always()
+        run: |
+          mkdir -p playwright-report/client
+          docker cp playwright-client-${{ github.run_id }}:/app/playwright-report/client/. playwright-report/client/ || echo "Warning: No playwright report found"
+      - name: Cleanup containers
+        if: always()
+        run: docker rm -f playwright-client-${{ github.run_id }} || true
+      - name: Upload Playwright report
+        uses: actions/upload-artifact@v4
+        if: always()
         with:
-          compose-file: packages/client/compose.yaml
-          up-flags: --build --force-recreate --remove-orphans
-          down-flags: --volumes --remove-orphans
-          services: tests-ci
-          test-container: tests-ci
-          test-command: pnpm exec playwright test
-          environment: |
-            CI=true
-            GITHUB_WORKFLOW=${{ github.workflow }}
-            GITHUB_RUN_ID=${{ github.run_id }}
-            GITHUB_RUN_NUMBER=${{ github.run_number }}
+          name: playwright-report-client
+          path: playwright-report/client/
+          retention-days: 7
+          if-no-files-found: ignore
+      - name: Fail job if tests failed
+        if: always()
+        run: |
+          if [ "${{ steps.run-tests.outcome }}" = "failure" ]; then
+            echo "❌ Playwright tests failed"
+            exit 1
+          fi
 
   # Playwright Login tests
   playwright-login:
@@ -499,20 +523,44 @@ jobs:
           path: "."
           ssh-key: ${{ secrets.DOCSPACEUIKITREACT_SSH_KEY }}
       - name: Cleanup existing containers
-        run: docker ps -a --filter name=login-tests-ci -q | xargs -r docker rm -f
-      - uses: adambirds/docker-compose-action@v1.5.0
+        run: docker rm -f playwright-login-${{ github.run_id }} 2>/dev/null || true
+      - name: Build test image
+        run: docker compose -f packages/login/compose.yaml build tests-ci
+      - name: Run Login e2e tests
+        id: run-tests
+        run: |
+          docker run \
+            --name playwright-login-${{ github.run_id }} \
+            -e CI=true \
+            -e GITHUB_WORKFLOW="${{ github.workflow }}" \
+            -e GITHUB_RUN_ID="${{ github.run_id }}" \
+            -e GITHUB_RUN_NUMBER="${{ github.run_number }}" \
+            login-tests \
+            pnpm exec playwright test --workers=4 --retries=0
+        continue-on-error: true
+      - name: Extract Playwright report
+        if: always()
+        run: |
+          mkdir -p playwright-report/login
+          docker cp playwright-login-${{ github.run_id }}:/app/playwright-report/login/. playwright-report/login/ || echo "Warning: No playwright report found"
+      - name: Cleanup containers
+        if: always()
+        run: docker rm -f playwright-login-${{ github.run_id }} || true
+      - name: Upload Playwright report
+        uses: actions/upload-artifact@v4
+        if: always()
         with:
-          compose-file: packages/login/compose.yaml
-          up-flags: --build --force-recreate --remove-orphans
-          down-flags: --volumes --remove-orphans
-          services: tests-ci
-          test-container: tests-ci
-          test-command: pnpm exec playwright test
-          environment: |
-            CI=true
-            GITHUB_WORKFLOW=${{ github.workflow }}
-            GITHUB_RUN_ID=${{ github.run_id }}
-            GITHUB_RUN_NUMBER=${{ github.run_number }}
+          name: playwright-report-login
+          path: playwright-report/login/
+          retention-days: 7
+          if-no-files-found: ignore
+      - name: Fail job if tests failed
+        if: always()
+        run: |
+          if [ "${{ steps.run-tests.outcome }}" = "failure" ]; then
+            echo "❌ Playwright tests failed"
+            exit 1
+          fi
 
   # Playwright Doceditor tests
   playwright-doceditor:
@@ -534,20 +582,44 @@ jobs:
           path: "."
           ssh-key: ${{ secrets.DOCSPACEUIKITREACT_SSH_KEY }}
       - name: Cleanup existing containers
-        run: docker ps -a --filter name=doceditor-tests-ci -q | xargs -r docker rm -f
-      - uses: adambirds/docker-compose-action@v1.5.0
+        run: docker rm -f playwright-doceditor-${{ github.run_id }} 2>/dev/null || true
+      - name: Build test image
+        run: docker compose -f packages/doceditor/compose.yaml build tests-ci
+      - name: Run Doceditor e2e tests
+        id: run-tests
+        run: |
+          docker run \
+            --name playwright-doceditor-${{ github.run_id }} \
+            -e CI=true \
+            -e GITHUB_WORKFLOW="${{ github.workflow }}" \
+            -e GITHUB_RUN_ID="${{ github.run_id }}" \
+            -e GITHUB_RUN_NUMBER="${{ github.run_number }}" \
+            doceditor-tests \
+            pnpm exec playwright test --workers=4 --retries=0
+        continue-on-error: true
+      - name: Extract Playwright report
+        if: always()
+        run: |
+          mkdir -p playwright-report/doceditor
+          docker cp playwright-doceditor-${{ github.run_id }}:/app/playwright-report/doceditor/. playwright-report/doceditor/ || echo "Warning: No playwright report found"
+      - name: Cleanup containers
+        if: always()
+        run: docker rm -f playwright-doceditor-${{ github.run_id }} || true
+      - name: Upload Playwright report
+        uses: actions/upload-artifact@v4
+        if: always()
         with:
-          compose-file: packages/doceditor/compose.yaml
-          up-flags: --build --force-recreate --remove-orphans
-          down-flags: --volumes --remove-orphans
-          services: tests-ci
-          test-container: tests-ci
-          test-command: pnpm exec playwright test
-          environment: |
-            CI=true
-            GITHUB_WORKFLOW=${{ github.workflow }}
-            GITHUB_RUN_ID=${{ github.run_id }}
-            GITHUB_RUN_NUMBER=${{ github.run_number }}
+          name: playwright-report-doceditor
+          path: playwright-report/doceditor/
+          retention-days: 7
+          if-no-files-found: ignore
+      - name: Fail job if tests failed
+        if: always()
+        run: |
+          if [ "${{ steps.run-tests.outcome }}" = "failure" ]; then
+            echo "❌ Playwright tests failed"
+            exit 1
+          fi
 
   # Playwright SDK tests
   playwright-sdk:
@@ -569,20 +641,44 @@ jobs:
           path: "."
           ssh-key: ${{ secrets.DOCSPACEUIKITREACT_SSH_KEY }}
       - name: Cleanup existing containers
-        run: docker ps -a --filter name=sdk-tests-ci -q | xargs -r docker rm -f
-      - uses: adambirds/docker-compose-action@v1.5.0
+        run: docker rm -f playwright-sdk-${{ github.run_id }} 2>/dev/null || true
+      - name: Build test image
+        run: docker compose -f packages/sdk/compose.yaml build tests-ci
+      - name: Run SDK e2e tests
+        id: run-tests
+        run: |
+          docker run \
+            --name playwright-sdk-${{ github.run_id }} \
+            -e CI=true \
+            -e GITHUB_WORKFLOW="${{ github.workflow }}" \
+            -e GITHUB_RUN_ID="${{ github.run_id }}" \
+            -e GITHUB_RUN_NUMBER="${{ github.run_number }}" \
+            sdk-tests \
+            pnpm exec playwright test --workers=4 --retries=0
+        continue-on-error: true
+      - name: Extract Playwright report
+        if: always()
+        run: |
+          mkdir -p playwright-report/sdk
+          docker cp playwright-sdk-${{ github.run_id }}:/app/playwright-report/sdk/. playwright-report/sdk/ || echo "Warning: No playwright report found"
+      - name: Cleanup containers
+        if: always()
+        run: docker rm -f playwright-sdk-${{ github.run_id }} || true
+      - name: Upload Playwright report
+        uses: actions/upload-artifact@v4
+        if: always()
         with:
-          compose-file: packages/sdk/compose.yaml
-          up-flags: --build --force-recreate --remove-orphans
-          down-flags: --volumes --remove-orphans
-          services: tests-ci
-          test-container: tests-ci
-          test-command: pnpm exec playwright test
-          environment: |
-            CI=true
-            GITHUB_WORKFLOW=${{ github.workflow }}
-            GITHUB_RUN_ID=${{ github.run_id }}
-            GITHUB_RUN_NUMBER=${{ github.run_number }}
+          name: playwright-report-sdk
+          path: playwright-report/sdk/
+          retention-days: 7
+          if-no-files-found: ignore
+      - name: Fail job if tests failed
+        if: always()
+        run: |
+          if [ "${{ steps.run-tests.outcome }}" = "failure" ]; then
+            echo "❌ Playwright tests failed"
+            exit 1
+          fi
 
   # Playwright Management tests
   playwright-management:
@@ -604,20 +700,44 @@ jobs:
           path: "."
           ssh-key: ${{ secrets.DOCSPACEUIKITREACT_SSH_KEY }}
       - name: Cleanup existing containers
-        run: docker ps -a --filter name=management-tests-ci -q | xargs -r docker rm -f
-      - uses: adambirds/docker-compose-action@v1.5.0
+        run: docker rm -f playwright-management-${{ github.run_id }} 2>/dev/null || true
+      - name: Build test image
+        run: docker compose -f packages/management/compose.yaml build tests-ci
+      - name: Run Management e2e tests
+        id: run-tests
+        run: |
+          docker run \
+            --name playwright-management-${{ github.run_id }} \
+            -e CI=true \
+            -e GITHUB_WORKFLOW="${{ github.workflow }}" \
+            -e GITHUB_RUN_ID="${{ github.run_id }}" \
+            -e GITHUB_RUN_NUMBER="${{ github.run_number }}" \
+            management-tests \
+            pnpm exec playwright test --workers=4 --retries=0
+        continue-on-error: true
+      - name: Extract Playwright report
+        if: always()
+        run: |
+          mkdir -p playwright-report/management
+          docker cp playwright-management-${{ github.run_id }}:/app/playwright-report/management/. playwright-report/management/ || echo "Warning: No playwright report found"
+      - name: Cleanup containers
+        if: always()
+        run: docker rm -f playwright-management-${{ github.run_id }} || true
+      - name: Upload Playwright report
+        uses: actions/upload-artifact@v4
+        if: always()
         with:
-          compose-file: packages/management/compose.yaml
-          up-flags: --build --force-recreate --remove-orphans
-          down-flags: --volumes --remove-orphans
-          services: tests-ci
-          test-container: tests-ci
-          test-command: pnpm exec playwright test
-          environment: |
-            CI=true
-            GITHUB_WORKFLOW=${{ github.workflow }}
-            GITHUB_RUN_ID=${{ github.run_id }}
-            GITHUB_RUN_NUMBER=${{ github.run_number }}
+          name: playwright-report-management
+          path: playwright-report/management/
+          retention-days: 7
+          if-no-files-found: ignore
+      - name: Fail job if tests failed
+        if: always()
+        run: |
+          if [ "${{ steps.run-tests.outcome }}" = "failure" ]; then
+            echo "❌ Playwright tests failed"
+            exit 1
+          fi
 
   # Summary job to report overall status
   test-summary:

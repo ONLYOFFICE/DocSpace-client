@@ -213,10 +213,36 @@
   /* Empty content variables */
   --empty-view-header-color: #{$black};
   --empty-view-description-color: #{$gray-text};
+  --empty-view-separator-color: #{$gray};
+  --empty-view-action-secondary-color: #{$gray};
 
   --error-container-background: #{$white};
   --error-container-body-text: #{$gray};
   --error-container-link-color: #{$link};
+
+  --filter-button-border: 1px solid #{$gray-strong};
+  --filter-button-hover-border: 1px solid #{$gray};
+
+  --filter-button-open-background: #{$gray};
+  --filter-button-open-fill: #{$white};
+
+  --filter-block-background: #{$white};
+  --filter-block-item-color: #{$gray};
+  --filter-block-selected-item-color: #{$white};
+  --filter-block-selected-backgroud-color: var(
+    --accent-main,
+    #{$light-blue-main}
+  );
+  --filter-block-item-separator-background: #{$gray-light-mid};
+  --filter-block-item-tag-border: 1px solid #{$gray-light-mid};
+  --filter-block-item-tag-active-background: #{$light-blue-main-active};
+  --filter-block-item-tag-active-color: var(--accent-main, #{$light-blue-main});
+
+  --filter-sort-button-background: #{$white};
+  --filter-sort-button-selected-icon: #{$light-gray-selected};
+  --filter-sort-button-unselected-icon: #{$gray};
+  --filter-sort-button-sort-fill: #{$light-gray-dark};
+  --filter-sort-button-selected-background: #{$light-gray-hover};
 
   --floating-button-icon-fill: #{$white};
   --floating-button-background: #{$light-icons};
@@ -400,10 +426,33 @@
 
   --empty-view-header-color: #{$white};
   --empty-view-description-color: #{$dark-gray-dark};
+  --empty-view-separator-color: #{$gray};
+  --empty-view-action-secondary-color: #{$gray-dark};
 
   --error-container-background: #{$black};
   --error-container-body-text: #{$gray-dark};
   --error-container-link-color: #{$dark-link};
+
+  --filter-button-border: 1px solid #{$gray-dark-strong};
+  --filter-button-hover-border: 1px solid #{$gray-dark};
+
+  --filter-button-open-background: #{$gray};
+  --filter-button-open-fill: #{$white};
+
+  --filter-block-background: #{$black};
+  --filter-block-item-color: #{$gray};
+  --filter-block-selected-backgroud-color: #{$white};
+  --filter-block-selected-item-color: #{$black};
+  --filter-block-item-separator-background: #{$gray-dark-strong};
+  --filter-block-item-tag-border: 1px solid #{$gray-dark-strong};
+  --filter-block-item-tag-active-background: #{$light-blue-main-active};
+  --filter-block-item-tag-active-color: #{$light-blue-main};
+
+  --filter-sort-button-background: #{$black};
+  --filter-sort-button-selected-icon: #{$light-gray-selected};
+  --filter-sort-button-unselected-icon: #{$gray-dark};
+  --filter-sort-button-sort-fill: #{$dark-gray-dark};
+  --filter-sort-button-selected-background: #{$gray-dark-strong};
 
   --floating-button-icon-fill: #{$black};
   --floating-button-background: #{$white};
@@ -770,6 +819,24 @@
 }
 
 .light {
+  --disabled-selected-item-color: #{$gray};
+  --filter-input-selected-items-background: #{$gray-light-mid};
+  --filter-input-selected-items-hover-background: #{$light-gray-hover};
+  --room-group-tag-inactive-color: #{$light-gray-dark};
+  --room-group-tag-background: #{$gray-light};
+  --room-group-tag-hover-background: #{$light-gray-hover};
+}
+
+.dark {
+  --disabled-selected-item-color: #{$gray-dark-text};
+  --filter-input-selected-items-background: #{$gray-dark-strong};
+  --filter-input-selected-items-hover-background: #{$dark-gray-light};
+  --room-group-tag-inactive-color: #{$dark-gray-dark};
+  --room-group-tag-background: #{$dark-gray-light};
+  --room-group-tag-hover-background: #{$light-dark-gray-hover};
+}
+
+.light {
   --selector-add-button-background: #{$gray-light-mid};
   --selector-add-button-hover-background: #{$light-gray-selected};
   --selector-add-button-active-background: #{$gray-strong};
@@ -833,6 +900,10 @@
   --tag-text-line-height: 20px;
   --tag-dropdown-text-line-height: 30px;
   --tag-font-size: 13px;
+
+  --tag-advanced-text-color: #{$gray};
+  --tag-advanced-text-color-hover: #{$black};
+  --tag-advanced-text-color-active: #{$gray};
 }
 
 .dark {
@@ -848,6 +919,10 @@
   --tag-disabled-color: #{$gray-dark};
   --tag-disabled-border: 1px dashed #{$gray-dark-strong};
   --tag-border: 1px solid #{$gray-dark-strong};
+
+  --tag-advanced-text-color: #{$gray-dark};
+  --tag-advanced-text-color-hover: #{$white};
+  --tag-advanced-text-color-active: #{$gray-dark};
 }
 
 .dark {
@@ -2489,4 +2564,17 @@
 
 .dark {
   --editors-tooltip-header-color: #{$dark-gray-dark};
+}
+.light {
+  --room-grouping-dialog-tag-text: #{$light-gray-dark};
+  --room-grouping-dialog-tag-icon: #{$light-gray-dark};
+  --room-grouping-dialog-tag-active: #{$light-blue-main};
+  --room-grouping-dialog-fade: #{$white};
+}
+
+.dark {
+  --room-grouping-dialog-tag-text: #{$dark-gray-dark};
+  --room-grouping-dialog-tag-icon: #{$dark-gray-dark};
+  --room-grouping-dialog-tag-active: #{$light-blue-main};
+  --room-grouping-dialog-fade: #{$black};
 }

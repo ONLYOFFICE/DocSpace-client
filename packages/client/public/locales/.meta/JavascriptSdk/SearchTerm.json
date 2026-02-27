@@ -3,7 +3,7 @@
   "content": "Search term",
   "content_en_sha1_hash": "972c8207d026dc3c256eba4e01b67d41c19be089",
   "created_at": "2025-05-19T21:30:54.661Z",
-  "updated_at": "2025-05-24T08:52:40.636Z",
+  "updated_at": "2026-02-19T13:36:32.776Z",
   "comment": {
     "text": "The \"Search term\" translation key is used to display a placeholder for users to input their search query. In the Portal Settings UI, it appears as part of a text input field where users can enter a search term. Translators should replace this placeholder with the actual search term in their respective language.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/SearchTerm.js",
       "line_number": 36,
-      "context": "import { TextInput } from \"@docspace/shared/components/text-input\";\n import { Checkbox } from \"@docspace/shared/components/checkbox\";\n \n import { ColumnContainer } from \"../presets/StyledPresets\";\n \n export const SearchTerm = ({ t, config, setConfig }) => {\n const [value, setValue] = useState(config.filter.filterValue);\n \n const debouncedSetConfig = useCallback(\n debounce((newValue) => {\n setConfig((oldConfig) => ({",
+      "context": "import { TextInput } from \"@docspace/ui-kit/components/text-input\";\n import { Checkbox } from \"@docspace/ui-kit/components/checkbox\";\n \n import { ColumnContainer } from \"../presets/StyledPresets\";\n \n export const SearchTerm = ({ t, config, setConfig }) => {\n const [value, setValue] = useState(config.filter.filterValue);\n \n const debouncedSetConfig = useCallback(\n debounce((newValue) => {\n setConfig((oldConfig) => ({",
       "module": "/packages/client"
     }
   ],

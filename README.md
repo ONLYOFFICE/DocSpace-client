@@ -19,6 +19,7 @@ This repository contains the **frontend** for [ONLYOFFICE DocSpace](https://gith
   - [Prerequisites](#prerequisites)
   - [Quick Start](#quick-start)
   - [Running Individual Applications](#running-individual-applications)
+  - [Preview Mode](#preview-mode)
   - [Development with VSCode](#development-with-vscode)
   - [Clear Aspire Docker Artifacts](#clear-aspire-docker-artifacts)
 - [Browser Support](#browser-support)
@@ -295,6 +296,37 @@ pnpm start:lite
 pnpm start-prod       # All apps
 pnpm start-prod:lite  # Core apps only
 ```
+
+### Preview Mode
+
+Preview mode runs all 4 Next.js applications (login, doceditor, management, sdk) as **pre-built production bundles** instead of development mode. This significantly reduces startup time and memory usage.
+
+**Step 1 — Build and deploy:**
+```bash
+cd client
+pnpm deploy:preview
+```
+
+**Step 2 — Start the client static server:**
+```bash
+cd publish/web/client
+npx serve -s -p 5001
+```
+
+**Step 3 — Start the apps server:**
+```bash
+cd publish/web/apps
+node server.js --app.port=5055 --app.hostname=127.0.0.1
+```
+
+The portal is available at http://localhost:8092 (backend must be running with `frontend-dev` profile).
+
+**Key differences from `pnpm start`:**
+- SSR apps run in production mode (faster, less memory)
+- No hot reload — rebuild with `pnpm deploy:preview` after changes
+- Client app served as static files (via nginx in Docker, or `npx serve` locally)
+
+For detailed architecture and configuration, see the [Preview Mode README](common/scripts/preview/README.md).
 
 ### Development with VSCode
 

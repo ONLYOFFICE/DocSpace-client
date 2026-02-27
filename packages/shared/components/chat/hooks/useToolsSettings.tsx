@@ -26,16 +26,16 @@
 
 import React from "react";
 
-import socket, { SocketEvents, TOptSocket } from "../../../utils/socket";
+import socket, { SocketEvents, type TOptSocket } from "../../../utils/socket";
 
 import {
   getMCPToolsForRoom,
   getServersListForRoom,
   getWebSearchInRoom,
 } from "../../../api/ai";
-import { TAIConfig, TMCPTool, TServer } from "../../../api/ai/types";
-import { TAIRoomChatSettings } from "../../../api/rooms/types";
-import { Nullable } from "../../../types";
+import type { TAIConfig, TMCPTool, TServer } from "../../../api/ai/types";
+import type { TAIRoomChatSettings } from "../../../api/rooms/types";
+import type { Nullable } from "../../../types";
 import { RoomsType } from "../../../enums";
 
 type Props = {
@@ -136,6 +136,9 @@ const useToolsSettings = ({ roomId, aiConfig, chatSettings }: Props) => {
     knowledgeSearchToolName: aiConfig?.knowledgeSearchToolName || "",
     webSearchToolName: aiConfig?.webSearchToolName || "",
     webCrawlingToolName: aiConfig?.webCrawlingToolName || "",
+    generateDocxToolName: aiConfig?.generateDocxToolName || "",
+    generatePresentationToolName: aiConfig?.generatePresentationToolName || "",
+    generateFormToolName: aiConfig?.generateFormToolName || "",
     setServers,
     setMCPTools,
     setWebSearchEnabled,

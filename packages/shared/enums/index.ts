@@ -545,11 +545,13 @@ export enum StartFillingMode {
   None,
   ShareToFillOut,
   StartFilling,
+  StartFillingRoomForm,
 }
 
 export enum FormFillingManageAction {
   Stop,
   Resume,
+  Start,
 }
 
 export enum FormFillingTipsState {

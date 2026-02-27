@@ -80,14 +80,14 @@ const SaaSPage = ({
   return shouldShowLoader && showPortalSettingsLoader ? (
     <PaymentsLoader />
   ) : (
-    <>
+    <div data-testid="saas-page">
       <PaymentContainer t={t} />
       {isShowStorageTariffDeactivatedModal ? (
         <StorageTariffDeactiveted
           visible={isShowStorageTariffDeactivatedModal}
         />
       ) : null}
-    </>
+    </div>
   );
 };
 

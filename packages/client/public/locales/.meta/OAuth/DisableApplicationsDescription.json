@@ -3,7 +3,7 @@
   "content": "If you disable these applications, all active consents and authorization will be revoked. If necessary, you can enable the disabled applications later.",
   "content_en_sha1_hash": "cd6a4dbae87dac1a8d22ee44a05f727d0c971c41",
   "created_at": "2025-05-19T21:30:53.870Z",
-  "updated_at": "2025-05-24T07:31:00.980Z",
+  "updated_at": "2026-02-19T13:36:32.791Z",
   "comment": {
     "text": "This translation key is used for a warning message that explains the consequences of disabling certain applications. It will be displayed in a modal dialog when users try to disable developer tools or OAuth settings. The purpose is to inform users about potential data loss and revocation of active consents.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/DisableDialog.tsx",
-      "line_number": 85,
+      "line_number": 84,
       "context": "{isGroup ? t(\"DisableApplications\") : t(\"DisableApplication\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text style={{ marginBottom: \"16px\" }}>\n {isGroup ? (\n <Trans t={t} i18nKey=\"DisableApplicationsDescription\" ns=\"OAuth\" />\n ) : (\n <Trans t={t} i18nKey=\"DisableApplicationDescription\" ns=\"OAuth\" />\n )}\n </Text>",
       "module": "/packages/client"
     }

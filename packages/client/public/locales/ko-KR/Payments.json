@@ -97,7 +97,6 @@
   "PriceCalculation": "요금 계산",
   "PriceForEach": "{{currency}}당 {{amount}}",
   "ProductNameWallet": "{{productName}} 지갑",
-  "Quantity": "수량",
   "RecommendedTopUpAmount": "권장 충전 금액: {{amount}}",
   "RemainingDays": "청구 주기 남은 일수: {{count}}",
   "Reminder": "알림:",

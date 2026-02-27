@@ -1,0 +1,28 @@
+{
+  "key_path": "LicenseExpired",
+  "content": "Cannot add new users and create new rooms. License has expired.",
+  "content_en_sha1_hash": "0d0302759df9a8da30ac2882fefe7d72fe65ed36",
+  "created_at": "2026-02-18T14:56:32.703Z",
+  "updated_at": "2026-02-19T13:36:32.430Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/index.js",
+      "line_number": 115,
+      "context": "const contentForGracePeriod = (\n <>\n <Text fontWeight={700}>\n {standalone\n ? t(\"LicenseExpired\")\n : t(\"BusinessPlanPaymentOverdue\", {\n planName: currentTariffPlanTitle,\n })}\n </Text>\n <br />",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

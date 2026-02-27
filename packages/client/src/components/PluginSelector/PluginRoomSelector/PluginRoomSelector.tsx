@@ -28,8 +28,8 @@ import { useEffect, useEffectEvent } from "react";
 import { useTranslation } from "react-i18next";
 import { TRoomSelector } from "@onlyoffice/docspace-plugin-sdk";
 
-import RoomSelector from "@docspace/shared/selectors/Room";
-import { RoomSelectorProps } from "@docspace/shared/selectors/Room/RoomSelector.types";
+import RoomSelector from "@docspace/ui-kit/selectors/Room";
+import { RoomSelectorProps } from "@docspace/ui-kit/selectors/Room/RoomSelector.types";
 import {
   HeaderProps,
   THeaderBackButton,

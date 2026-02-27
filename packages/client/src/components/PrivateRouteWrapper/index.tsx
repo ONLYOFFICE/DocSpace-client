@@ -34,7 +34,7 @@ const PrivateRouteWrapper = ({
   children,
   enablePortalRename,
   isAdmin,
-  isAuthenticated,
+  isAuthenticated = false,
   isCommunity,
   isEnterprise,
   isLoaded,

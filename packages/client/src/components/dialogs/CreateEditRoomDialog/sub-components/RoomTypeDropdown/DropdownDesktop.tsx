@@ -41,7 +41,7 @@ const StyledDropdownDesktop = styled.div.attrs(injectDefaultTheme)<{
   max-width: 100%;
   position: relative;
 
-  ${(props) => (!props.isOpen || !props.heightReady) && "visibility: hidden"};
+  ${(props) => (!props.isOpen || !props.heightReady) && "display: none"};
 
   .dropdown-content {
     background: ${(props) =>

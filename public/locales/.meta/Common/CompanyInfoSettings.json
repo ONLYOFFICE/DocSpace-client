@@ -3,7 +3,7 @@
   "content": "Company info settings",
   "content_en_sha1_hash": "192f2a8a9bec6d013a113f97fc1ce9b3cdd0c794",
   "created_at": "2025-05-26T07:15:41.404Z",
-  "updated_at": "2025-08-04T07:30:01.570Z",
+  "updated_at": "2026-02-19T13:36:32.958Z",
   "comment": {
     "text": "This translation key is used for the label \"Company info settings\" that appears on a page, likely in a portal or branding section, and is displayed as a header or button. It provides a brief description of the content users will access when clicking the link or navigating to this setting. The text is typically shown in a dialog or modal context.",
     "is_auto": true,
@@ -17,22 +17,22 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/management/src/lib/index.ts",
+      "line_number": 63,
+      "context": "case \"payments\":\n return { key: t(\"Common:PaymentsTitle\"), isSubPage: false };\n case \"white-label\":\n return { key: t(\"Common:WhiteLabel\"), isSubPage: true };\n case \"company-info\":\n return { key: t(\"Common:CompanyInfoSettings\"), isSubPage: true };\n case \"additional-resources\":\n return { key: t(\"Common:AdditionalResources\"), isSubPage: true };\n case \"brand-name\":\n return { key: t(\"Common:BrandName\"), isSubPage: true };\n case \"bonus\":",
+      "module": "/packages/management"
+    },
+    {
       "file_path": "/packages/shared/pages/Branding/CompanyInfo/index.tsx",
       "line_number": 149,
-      "context": "})}\n </div>\n <div\n className={classNames(styles.header, \"header settings_unavailable\")}\n >\n {t(\"CompanyInfoSettings\")}\n </div>\n <div\n className={classNames(\n styles.description,\n \"description settings_unavailable\",",
+      "context": "{t(\"BrandingSectionDescription\", {\n productName: t(\"ProductName\"),\n })}\n </div>\n <div className={classNames(styles.header, \"header\")}>\n {t(\"CompanyInfoSettings\")}\n </div>\n <div className={classNames(styles.description, \"description\")}>\n {isSettingPaid ? (\n <Trans\n t={t}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/MobileView/index.tsx",
       "line_number": 69,
-      "context": "badgeLabel={t(\"Paid\")}\n onClickLink={onClickLink}\n />\n {displayAbout ? (\n <MobileCategoryWrapper\n title={t(\"CompanyInfoSettings\")}\n subtitle={t(\"BrandingSectionDescription\", {\n productName: t(\"ProductName\"),\n })}\n url={`${baseUrl}/branding/company-info`}\n withPaidBadge={!isSettingPaid}",
+      "context": "badgeLabel={t(\"Paid\")}\n onClickLink={onClickLink}\n />\n {displayAbout ? (\n <CategoryItem\n title={t(\"CompanyInfoSettings\")}\n subtitle={t(\"BrandingSectionDescription\", {\n productName: t(\"ProductName\"),\n })}\n url={`${baseUrl}/branding/company-info`}\n withPaidBadge={!isSettingPaid}",
       "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/management/src/lib/index.ts",
-      "line_number": 63,
-      "context": "case \"payments\":\n return { key: t(\"Common:PaymentsTitle\"), isSubPage: false };\n case \"white-label\":\n return { key: t(\"Common:WhiteLabel\"), isSubPage: true };\n case \"company-info\":\n return { key: t(\"Common:CompanyInfoSettings\"), isSubPage: true };\n case \"additional-resources\":\n return { key: t(\"Common:AdditionalResources\"), isSubPage: true };\n case \"brand-name\":\n return { key: t(\"Common:BrandName\"), isSubPage: true };\n case \"bonus\":",
-      "module": "/packages/management"
     }
   ],
   "languages": {

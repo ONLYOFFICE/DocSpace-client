@@ -3,7 +3,7 @@
   "content": "Select next item to the left",
   "content_en_sha1_hash": "1df13864692a146290ae4d446d444f0c360d1164",
   "created_at": "2025-05-19T21:30:55.091Z",
-  "updated_at": "2025-05-24T10:32:40.942Z",
+  "updated_at": "2026-02-19T13:36:32.515Z",
   "comment": {
     "text": "This translation key is used for the \"Select next item to the left\" button label in the HotkeysPanel component. It appears as a hotkey button that allows users to navigate to the previous item in a list or selection.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/panels/HotkeysPanel/SelectionBlock.js",
       "line_number": 54,
-      "context": "<Text {...keyTextStyles}>k {t(\"Common:Or\")} ↑</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysSelectLeft\")}</Text>\n <Text {...keyTextStyles}>h {t(\"Common:Or\")} ←</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>",
+      "context": "<Text {...keyTextStyles}>k {t(\"Common:Or\")} ↑</Text>\n </>\n </Row>\n <Row className={styles.hotkeysRow}>\n <>\n <Text {...textStyles}>{t(\"HotkeysSelectLeft\")}</Text>\n <Text {...keyTextStyles}>h {t(\"Common:Or\")} ←</Text>\n </>\n </Row>\n <Row className={styles.hotkeysRow}>\n <>",
       "module": "/packages/client"
     }
   ],

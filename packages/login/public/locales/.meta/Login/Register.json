@@ -3,7 +3,7 @@
   "content": "Register",
   "content_en_sha1_hash": "d672995a14650d0e018026b64f297663d8c71c8d",
   "created_at": "2025-05-19T21:30:57.257Z",
-  "updated_at": "2025-12-19T13:32:34.628Z",
+  "updated_at": "2026-02-19T13:36:33.067Z",
   "comment": {
     "text": "The translation key \"Register\" is used as a label on the registration button in the login component. It is displayed to the user when they are prompted to register or sign up for an account. Translators should provide a phrase that accurately conveys this action.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/login/src/components/Register/index.tsx",
       "line_number": 35,
-      "context": "import { useTranslation } from \"react-i18next\";\n \n import { Text } from \"@docspace/shared/components/text\";\n import { toastr } from \"@docspace/shared/components/toast\";\n import { TValidate } from \"@docspace/shared/components/email-input/EmailInput.types\";\n import { sendRegisterRequest } from \"@docspace/shared/api/settings\";\n import { useTheme } from \"@docspace/shared/hooks/useTheme\";\n \n import { RegisterProps } from \"@/types\";\n \n import { LoginDispatchContext } from \"../Login\";",
+      "context": "import { useTranslation } from \"react-i18next\";\n \n import { Text } from \"@docspace/ui-kit/components/text\";\n import { toastr } from \"@docspace/ui-kit/components/toast\";\n import { TValidate } from \"@docspace/ui-kit/components/email-input\";\n import { sendRegisterRequest } from \"@docspace/shared/api/settings\";\n import { useTheme } from \"@docspace/ui-kit/context/ThemeContext\";\n \n import { RegisterProps } from \"@/types\";\n \n import { LoginDispatchContext } from \"../Login\";",
       "module": "/packages/login"
     }
   ],

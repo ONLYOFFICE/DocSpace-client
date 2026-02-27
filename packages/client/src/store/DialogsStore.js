@@ -41,6 +41,12 @@ import {
   getRoomCovers,
   setRoomCover,
   removeLogoFromRoom,
+  createGroupRooms,
+  getRoomGroups,
+  getGroupById,
+  updateGroupIcon,
+  updateRoomGroup,
+  deleteRoomGroup,
 } from "@docspace/shared/api/rooms";
 
 /**
@@ -334,6 +340,27 @@ class DialogsStore {
   connectAccountDialogVisible = false;
 
   disconnectAccountDialogVisible = false;
+
+  editRoomGroupsDialogVisible = false;
+
+  createGroupFromRoomIds = null;
+
+  openInCreateMode = false;
+
+  roomGroupingDialogVisible = false;
+
+  addRoomToGroupDialogVisible = false;
+
+  addRoomToGroupId = null;
+
+  pauseSubmissionsDialogVisible = false;
+
+  /**
+   * @type {(res:boolean)=>void | null}
+   */
+  pauseSubmissionsDialogCallback = null;
+
+  roomGroups = [];
 
   constructor(
     authStore,
@@ -1107,6 +1134,60 @@ class DialogsStore {
 
   setDisconnectAccountDialogVisible = (visible) => {
     this.disconnectAccountDialogVisible = visible;
+  };
+
+  setEditRoomGroupsDialogVisible = (
+    visible,
+    roomIds = null,
+    openInCreateMode = false,
+  ) => {
+    this.editRoomGroupsDialogVisible = visible;
+    this.createGroupFromRoomIds = roomIds;
+    this.openInCreateMode = openInCreateMode;
+  };
+
+  setRoomGroupingDialogVisible = (visible) => {
+    this.roomGroupingDialogVisible = visible;
+  };
+
+  setAddRoomToGroupDialogVisible = (visible, groupId = null) => {
+    this.addRoomToGroupDialogVisible = visible;
+    this.addRoomToGroupId = groupId;
+  };
+
+  setPauseSubmissionsDialogVisible = (visible, callback = null) => {
+    this.pauseSubmissionsDialogVisible = visible;
+    this.pauseSubmissionsDialogCallback = callback;
+  };
+
+  setCreateGroupRooms = async (newGroup) => {
+    await createGroupRooms(newGroup);
+  };
+
+  setRoomGroups = (groups) => {
+    this.roomGroups = groups;
+  };
+
+  getAllRoomGroups = async () => {
+    const response = await getRoomGroups();
+    this.setRoomGroups(response);
+  };
+
+  getGroupById = async (groupId) => {
+    const response = await getGroupById(groupId);
+    return response;
+  };
+
+  updateGroupIcon = async (groupId, icon) => {
+    await updateGroupIcon(groupId, icon);
+  };
+
+  updateRoomGroup = async (groupId, data) => {
+    await updateRoomGroup(groupId, data);
+  };
+
+  deleteRoomGroup = async (groupId) => {
+    await deleteRoomGroup(groupId);
   };
 }
 

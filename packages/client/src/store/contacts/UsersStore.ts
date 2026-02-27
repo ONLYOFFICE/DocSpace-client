@@ -709,7 +709,8 @@ class UsersStore {
       case "pending":
         if (
           isOwner ||
-          (isAdmin &&
+          isAdmin ||
+          (isRoomAdmin &&
             (userRole === EmployeeType.Guest ||
               userRole === EmployeeType.RoomAdmin ||
               userRole === EmployeeType.User))

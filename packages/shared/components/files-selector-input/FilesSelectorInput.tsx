@@ -31,15 +31,15 @@ import classNames from "classnames";
 import { Portal } from "@docspace/ui-kit/components/portal";
 
 import { DeviceType, FolderType } from "../../enums";
-import FilesSelector from "../../selectors/Files";
+import FilesSelector from "@docspace/ui-kit/selectors/Files";
 import { InputSize } from "@docspace/ui-kit/components/text-input";
 import { FileInput } from "@docspace/ui-kit/components/file-input";
 import { Aside } from "@docspace/ui-kit/components/aside";
 import { Backdrop } from "@docspace/ui-kit/components/backdrop";
-import { useUnmount } from "../../hooks/useUnmount";
+import { useUnmount } from "@docspace/ui-kit/hooks/useUnmount";
 
 import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
-import type { FilesSelectorProps } from "../../selectors/Files/FilesSelector.types";
+import type { FilesSelectorProps } from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
 
 import {
   getAcceptButtonLabel,

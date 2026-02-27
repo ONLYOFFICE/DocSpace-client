@@ -97,7 +97,6 @@
   "PriceCalculation": "Υπολογίστε την τιμή σας",
   "PriceForEach": "{{currency}} ανά {{amount}}",
   "ProductNameWallet": "{{productName}} Πορτοφόλι",
-  "Quantity": "Ποσότητα",
   "RecommendedTopUpAmount": "Συνιστώμενη ποσότητα αναπλήρωσης: {{amount}}",
   "RemainingDays": "Οι υπόλοιπες ημέρες του κύκλου χρέωσης: {{count}}",
   "Reminder": "Υπενθύμιση:",

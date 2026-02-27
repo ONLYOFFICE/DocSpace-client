@@ -35,8 +35,8 @@ import {
   TSelectorHeader,
 } from "@docspace/ui-kit/components/selector";
 
-import PeopleSelector from "@docspace/shared/selectors/People";
-import { PeopleSelectorProps } from "@docspace/shared/selectors/People/PeopleSelector.types";
+import PeopleSelector from "@docspace/ui-kit/selectors/People";
+import { PeopleSelectorProps } from "@docspace/ui-kit/selectors/People/PeopleSelector.types";
 
 import PluginStore from "SRC_DIR/store/PluginStore";
 

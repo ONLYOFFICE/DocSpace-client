@@ -48,6 +48,7 @@ export interface IPaymentsProps {
   isNotPaidPeriod: boolean;
   gracePeriodEndDate: string;
   delayDaysCount: string;
+  feedbackAndSupportUrl: string;
 }
 
 export interface ILicenseProps {

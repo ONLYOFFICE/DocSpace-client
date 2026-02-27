@@ -77,6 +77,8 @@ type AIAgentsRowDataComponentProps = {
   createdDate: string;
   lastOpenedDate: string;
   isRecentFolder: boolean;
+  isHovered: boolean;
+  isActive: boolean;
 };
 
 const AIAgentsRowDataComponent = (props: AIAgentsRowDataComponentProps) => {
@@ -142,10 +144,7 @@ const AIAgentsRowDataComponent = (props: AIAgentsRowDataComponentProps) => {
           }
           {...selectionProp}
         >
-          <TagsCell
-            sideColor={theme.filesSection.tableView.row.sideColor}
-            {...props}
-          />
+          <TagsCell {...props} />
           {lastColumn === "Tags" ? quickButtonsComponentNode : null}
         </TableCell>
       ) : (

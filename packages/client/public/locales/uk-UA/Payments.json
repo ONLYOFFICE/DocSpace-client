@@ -97,7 +97,6 @@
   "PriceCalculation": "Розрахуйте вашу ціну",
   "PriceForEach": "{{currency}} за {{amount}}",
   "ProductNameWallet": "{{productName}} Гаманець",
-  "Quantity": "Кількість",
   "RecommendedTopUpAmount": "Рекомендована сума поповнення: {{amount}}",
   "RemainingDays": "Залишилось днів у тарифікаційному циклі: {{count}}",
   "Reminder": "Нагадування:",

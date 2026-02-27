@@ -1,6 +1,7 @@
 {
   "CancellaionNotification": "Don't display cancellation notification again",
   "DisplayFileExtension": "Display file extension next to file name",
+  "GroupByRooms": "Group by rooms",
   "OpenSameTab": "Open {{organizationName}} editor in same tab",
   "OriginalCopy": "Save the file copy in the original format as well",
   "StartPageSettingTitle": "The start section at the entrance",

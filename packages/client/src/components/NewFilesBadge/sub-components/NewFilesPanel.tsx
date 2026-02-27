@@ -226,7 +226,7 @@ export const NewFilesPanelComponent = ({
 				{markAsReadButton}
 			</div>
 			{!isMobile() ? (
-				<Backdrop visible withoutBackground withoutBlur onClick={onClose} />
+				<Backdrop visible withoutBackground  onClick={onClose} />
 			) : null}
 		</>
 	);

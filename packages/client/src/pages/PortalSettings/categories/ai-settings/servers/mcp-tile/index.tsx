@@ -144,7 +144,10 @@ export const MCPTile = ({
       </AiTile.Header>
 
       <AiTile.Body>
-        <Text className={styles.description} title={description}>
+        <Text
+          className={styles.description}
+          title={disableActions ? undefined : description}
+        >
           {description}
         </Text>
       </AiTile.Body>

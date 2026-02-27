@@ -97,7 +97,6 @@
   "PriceCalculation": "Fiyatını hesapla",
   "PriceForEach": "{{currency}} başına {{amount}}",
   "ProductNameWallet": "{{productName}} Cüzdanı",
-  "Quantity": "Miktar",
   "RecommendedTopUpAmount": "Önerilen yükleme miktarı: {{amount}}",
   "RemainingDays": "Fatura döngüsünün kalan günleri: {{count}}",
   "Reminder": "Hatırlatma:",

@@ -1,0 +1,315 @@
+// (c) Copyright Ascensio System SIA 2009-2026
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+.content {
+  padding-left: 4px;
+}
+
+.fadeRight {
+  position: relative;
+}
+
+.fadeRight::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  width: 152px;
+  height: 100%;
+
+  pointer-events: none;
+
+  background-image: linear-gradient(
+    to left,
+    var(--room-grouping-dialog-fade) 0%,
+    transparent 100%
+  );
+}
+
+.searchBarContainer {
+  margin-bottom: 14px;
+  pointer-events: none;
+  padding-top: 7px;
+
+  :global(.input-block-icon) {
+    display: none !important;
+  }
+
+  :global(.search-input-block) {
+    border-right: none;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
+
+.searchBarContainerTablet {
+  padding-top: 12px;
+  margin-bottom: 10px;
+
+  :global(.input-component) {
+    font-size: 8px;
+    line-height: 12px;
+    font-weight: 600;
+    padding: 3px 5px;
+  }
+}
+
+.tagsContainer {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.tagsContainerTablet {
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  height: 32px;
+  padding: 7px 12px;
+  box-sizing: border-box;
+  border-radius: 6px;
+  background: var(--filter-input-selected-items-background);
+  cursor: default;
+  user-select: none;
+}
+
+.tagName {
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--room-grouping-dialog-tag-text);
+  font-weight: 600;
+}
+
+.tagTablet {
+  padding: 5px 8px;
+  gap: 5px;
+  height: 23px;
+}
+
+.tagNameTablet {
+  font-size: 8px;
+  line-height: 13px;
+}
+
+.tagActive {
+  background: var(--filter-block-item-tag-active-background);
+
+  .tagName {
+    color: var(--room-grouping-dialog-tag-active);
+  }
+
+  .tagIcon {
+    path {
+      fill: var(--filter-block-item-tag-active-color);
+    }
+  }
+}
+
+.tagIcon {
+  width: 16px;
+  height: 16px;
+
+  path {
+    fill: var(--room-grouping-dialog-tag-icon);
+  }
+}
+
+.tagIconTablet {
+  width: 11px;
+  height: 11px;
+  padding-bottom: 5px;
+
+  svg {
+    width: 12px;
+  }
+}
+
+.tagIconActive {
+  path {
+    fill: var(--filter-block-item-tag-active-color);
+  }
+}
+
+.tileTag {
+  display: flex;
+  border-top-width: 1px;
+  border-top-style: solid;
+  padding-block: 16px;
+  padding-inline: 16px 0;
+}
+
+.sectionTile {
+  margin-bottom: 18px;
+}
+
+.isDesktopFade {
+  position: relative;
+}
+
+.isDesktopFade::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  background-image: linear-gradient(
+    to top,
+    var(--room-grouping-dialog-fade) 0%,
+    transparent 100%
+  );
+}
+
+.sectionFlexTablet {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tile {
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+
+.tileName {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 15px 4px 15px;
+  height: 30px;
+}
+
+.onlyTileName {
+  border-top-width: 1px;
+  border-inline-width: 1px;
+  border-style: solid;
+  border-bottom: none;
+  border-start-start-radius: 12px;
+  border-start-end-radius: 12px;
+}
+
+.borderColor {
+  border-color: var(--modal-dialog-header-border-color);
+}
+
+.tileContainer {
+  display: flex;
+  align-items: center;
+}
+
+.tileContainerTablet {
+  align-items: normal;
+}
+
+.tileIcon {
+  height: 32px;
+  padding-inline-end: 12px;
+}
+
+.tileIconShort {
+  height: 20px;
+  padding-inline-end: 8px;
+}
+
+.tileTitle {
+  height: 18px;
+  padding-inline-end: 8px;
+}
+
+.tileTitleTablet {
+  height: 11px;
+  padding-inline-end: 5px;
+  padding-top: 3px;
+}
+
+.tileTitleShort {
+  height: 18px;
+}
+
+.tileBadgeDesktop {
+  padding-top: 5px;
+}
+
+.tileBadge {
+  height: 10px;
+  padding-top: 3px;
+}
+
+.actionButton {
+  width: 72px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.tabletTileName {
+  margin-inline-start: 11px;
+  border-inline-end: none !important;
+  border-start-start-radius: 12px !important;
+  border-end-end-radius: 16px !important;
+  padding-right: 0;
+}
+
+.menuButton :global(div) {
+  cursor: auto;
+}
+
+.loadersTheme {
+  background-color: var(--skeleton-background);
+  border-radius: 3px;
+}
+
+.description {
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--text-color);
+}
+
+.tileTablet {
+  border: 1px solid var(--modal-dialog-header-border-color);
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.tileBottom {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  margin-top: 10px;
+}
+
+.sectionTablet {
+  display: flex;
+  gap: 8px;
+}

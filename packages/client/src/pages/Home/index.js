@@ -114,7 +114,9 @@ const PureHome = (props) => {
     showFilter,
     frameConfig,
     isEmptyPage,
+    roomsFilterGroupId,
 
+    contactsTab,
     contactsViewAs,
 
     showFilterLoader,
@@ -277,7 +279,14 @@ const PureHome = (props) => {
 
     if (isContactsPage) return getContactsModel(t, true);
     return getFolderModel(t, true);
-  }, [isFrame, isProfile, isContactsPage, getContactsModel, getFolderModel]);
+  }, [
+    isFrame,
+    isProfile,
+    isContactsPage,
+    getContactsModel,
+    getFolderModel,
+    contactsTab,
+  ]);
 
   const onCancelUpload = useCallback(() => {
     if (pluginShowCancelButton) {
@@ -432,7 +441,8 @@ const PureHome = (props) => {
     !isEmptyPage ||
     welcomeFormFillingTipsVisible ||
     formFillingTipsVisible ||
-    showFilterLoader;
+    showFilterLoader ||
+    roomsFilterGroupId;
 
   const isValidMainContent = hasVisibleContent && !isErrorRoomNotAvailable;
   const isValidContactsContent = !isContactsEmptyView && isContactsPage;
@@ -593,6 +603,7 @@ export const Component = inject(
       refreshFiles,
       setViewAs,
       isEmptyPage,
+      roomsFilter,
 
       disableDrag,
       isErrorRoomNotAvailable,
@@ -666,8 +677,13 @@ export const Component = inject(
       viewAs: contactsViewAs,
     } = peopleStore;
     const { updateProfileCulture } = targetUserStore;
-    const { getUsersList, setContactsTab, isUsersEmptyView, isFiltered } =
-      usersStore;
+    const {
+      getUsersList,
+      setContactsTab,
+      contactsTab,
+      isUsersEmptyView,
+      isFiltered,
+    } = usersStore;
     const { getGroups, updateCurrentGroup, groups, groupsIsFiltered } =
       groupsStore;
 
@@ -761,6 +777,7 @@ export const Component = inject(
       refreshFiles,
       setViewAs,
       isEmptyPage,
+      roomsFilterGroupId: roomsFilter?.groupId,
 
       setSelectedNode,
 
@@ -781,6 +798,7 @@ export const Component = inject(
 
       // contacts store
       setContactsTab,
+      contactsTab,
       contactsViewAs,
       getUsersList,
       getGroups,

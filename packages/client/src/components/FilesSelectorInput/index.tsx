@@ -26,6 +26,7 @@
 import { inject, observer } from "mobx-react";
 
 import { FilesSelectorInput } from "@docspace/shared/components/files-selector-input";
+import type { FilesSettingsDto } from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
 import type {
   ExternalFilesSelectorInputWrapperProps,
   FilesSelectorInputWrapperProps,
@@ -50,7 +51,7 @@ export default inject<
 
   const filesSelectorSettings = {
     getIcon,
-    filesSettings,
+    filesSettings: filesSettings as unknown as FilesSettingsDto,
   };
 
   return {

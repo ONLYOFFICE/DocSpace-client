@@ -26,7 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import React from "react";
+import { observer } from "mobx-react";
 
 import styles from "../../../../ChatMessageBody.module.scss";
 import type { TToolCallContent } from "../../../../../../../../api/ai/types";
@@ -41,30 +41,32 @@ type ToolCallBodyProps = {
   placement: ToolCallPlacement;
 };
 
-export const ToolCallBody = ({ content, placement }: ToolCallBodyProps) => {
-  const { knowledgeSearchToolName, webSearchToolName } = useMessageStore();
+export const ToolCallBody = observer(
+  ({ content, placement }: ToolCallBodyProps) => {
+    const { knowledgeSearchToolName, webSearchToolName } = useMessageStore();
 
-  if (content.result?.error) {
+    if (content.result?.error) {
+      return (
+        <div className={styles.toolCallBody}>
+          <Text fontSize="14px" fontWeight={600} lineHeight="20px">
+            {content.result?.error as string}
+          </Text>
+        </div>
+      );
+    }
+
+    const isSourceView = [knowledgeSearchToolName, webSearchToolName].includes(
+      content.name,
+    );
+
     return (
       <div className={styles.toolCallBody}>
-        <Text fontSize="14px" fontWeight={600} lineHeight="20px">
-          {content.result?.error as string}
-        </Text>
+        {isSourceView ? (
+          <SourceView content={content} />
+        ) : (
+          <CodeView content={content} placement={placement} />
+        )}
       </div>
     );
-  }
-
-  const isSourceView = [knowledgeSearchToolName, webSearchToolName].includes(
-    content.name,
-  );
-
-  return (
-    <div className={styles.toolCallBody}>
-      {isSourceView ? (
-        <SourceView content={content} />
-      ) : (
-        <CodeView content={content} placement={placement} />
-      )}
-    </div>
-  );
-};
+  },
+);

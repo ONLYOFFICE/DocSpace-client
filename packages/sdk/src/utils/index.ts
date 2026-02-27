@@ -26,7 +26,7 @@
 
 import { match, P } from "ts-pattern";
 
-import { TIconContainer } from "@/types";
+import { TIconContainer, TApiErrorShape } from "@/types";
 import { RoomsType, ThemeKeys } from "@docspace/shared/enums";
 import {
   iconSize24,
@@ -116,4 +116,16 @@ export const getThemeClass = (
     .otherwise(() => ThemeKeys.BaseStr);
 
   return calculatedTheme === ThemeKeys.DarkStr ? "dark" : "light";
+};
+
+export const getErrorMessage = (err: unknown) => {
+  if (typeof err === "string") return err;
+  if (err && typeof err === "object") {
+    const e = err as TApiErrorShape;
+    const responseMessage = e.response?.data?.error?.message;
+    if (typeof responseMessage === "string") return responseMessage;
+    if (typeof responseMessage === "number") return String(responseMessage);
+    if (typeof e.message === "string") return e.message;
+  }
+  return "";
 };

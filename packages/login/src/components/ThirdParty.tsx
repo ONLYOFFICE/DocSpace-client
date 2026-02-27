@@ -33,8 +33,8 @@ import { SocialButtonsGroup } from "@docspace/shared/components/social-buttons-g
 import { Text } from "@docspace/ui-kit/components/text";
 import { getOAuthToken, getLoginLink } from "@docspace/shared/utils/common";
 import {
-	TCapabilities,
-	TThirdPartyProvider,
+  TCapabilities,
+  TThirdPartyProvider,
 } from "@docspace/shared/api/settings/types";
 
 import SSOIcon from "PUBLIC_DIR/images/sso.react.svg";
@@ -42,100 +42,108 @@ import SSOIcon from "PUBLIC_DIR/images/sso.react.svg";
 import { LoginDispatchContext, LoginValueContext } from "./Login";
 
 type ThirdPartyProps = {
-	thirdParty?: TThirdPartyProvider[];
-	capabilities?: TCapabilities;
-	ssoExists?: boolean;
-	oauthDataExists?: boolean;
+  thirdParty?: TThirdPartyProvider[];
+  capabilities?: TCapabilities;
+  ssoExists?: boolean;
+  oauthDataExists?: boolean;
+  isOauth?: boolean;
 };
 
 const ThirdParty = ({
-	thirdParty,
-	capabilities,
-	ssoExists,
-	oauthDataExists,
+  thirdParty,
+  capabilities,
+  ssoExists,
+  oauthDataExists,
+  isOauth,
 }: ThirdPartyProps) => {
-	const { isLoading } = useContext(LoginValueContext);
-	const { setIsModalOpen } = useContext(LoginDispatchContext);
+  const { isLoading } = useContext(LoginValueContext);
+  const { setIsModalOpen } = useContext(LoginDispatchContext);
 
-	const { t } = useTranslation(["Login", "Common"]);
+  const { t } = useTranslation(["Login", "Common"]);
 
-	const onSocialButtonClick = useCallback(
-		(e: React.MouseEvent<Element, MouseEvent>) => {
-			const target = e.target as HTMLElement;
-			let targetElement = target;
+  const onSocialButtonClick = useCallback(
+    (e: React.MouseEvent<Element, MouseEvent>) => {
+      const target = e.target as HTMLElement;
+      let targetElement = target;
 
-			if (
-				!(targetElement instanceof HTMLButtonElement) &&
-				target.parentElement
-			) {
-				targetElement = target.parentElement;
-			}
+      if (
+        !(targetElement instanceof HTMLButtonElement) &&
+        target.parentElement
+      ) {
+        targetElement = target.parentElement;
+      }
 
-			const providerName = targetElement.dataset.providername;
-			let url = targetElement.dataset.url || "";
+      const providerName = targetElement.dataset.providername;
+      let url = targetElement.dataset.url || "";
 
-			try {
-				// Lifehack for Twitter
-				if (providerName == "twitter") {
-					url += "authCallback";
-				}
+      try {
+        // Lifehack for Twitter
+        if (providerName == "twitter") {
+          url += "authCallback";
 
-				const tokenGetterWin =
-					window.AscDesktopEditor !== undefined
-						? (window.location.href = url)
-						: window.open(
-								url,
-								"login",
-								"width=800,height=500,status=no,toolbar=no,menubar=no,resizable=yes,scrollbars=no,popup=yes",
-							);
+          if (isOauth) {
+            url += "&pure=true";
+          }
+        }
 
-				getOAuthToken(tokenGetterWin).then((code) => {
-					const token = window.btoa(
-						JSON.stringify({
-							auth: providerName,
-							mode: "popup",
-							callback: "authCallback",
-							pure: "true",
-						}),
-					);
+        const tokenGetterWin =
+          window.AscDesktopEditor !== undefined
+            ? (window.location.href = url)
+            : window.open(
+                url,
+                "login",
+                "width=800,height=500,status=no,toolbar=no,menubar=no,resizable=yes,scrollbars=no,popup=yes",
+              );
 
-					if (tokenGetterWin && typeof tokenGetterWin !== "string")
-						tokenGetterWin.location.href = getLoginLink(token, code);
-				});
-			} catch (err) {
-				console.log(err);
-			}
-		},
-		[],
-	);
+        getOAuthToken(tokenGetterWin).then((code) => {
+          const tokenObj: Record<string, string | undefined> = {
+            auth: providerName,
+            mode: "popup",
+            callback: "authCallback",
+          };
 
-	const ssoProps = ssoExists
-		? {
-				ssoUrl: capabilities?.ssoUrl,
-				ssoLabel: capabilities?.ssoLabel,
-				ssoSVG: SSOIcon as string,
-			}
-		: {};
+          if (isOauth) {
+            tokenObj["pure"] = "true";
+          }
+          const token = window.btoa(JSON.stringify(tokenObj));
 
-	const isVisible = oauthDataExists || ssoExists;
+          if (tokenGetterWin && typeof tokenGetterWin !== "string")
+            tokenGetterWin.location.href = getLoginLink(token, code);
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    [],
+  );
 
-	return (
-		isVisible && (
-			<div style={{ width: "100%", height: "auto" }}>
-				<div className="line">
-					<Text className="or-label">{t("Common:orContinueWith")}</Text>
-				</div>
-				<SocialButtonsGroup
-					providers={thirdParty ?? undefined}
-					onClick={onSocialButtonClick}
-					onMoreAuthToggle={setIsModalOpen}
-					t={t}
-					isDisabled={isLoading}
-					{...ssoProps}
-				/>
-			</div>
-		)
-	);
+  const ssoProps = ssoExists
+    ? {
+        ssoUrl: capabilities?.ssoUrl,
+        ssoLabel: capabilities?.ssoLabel,
+        ssoSVG: SSOIcon as string,
+      }
+    : {};
+
+  const isVisible = oauthDataExists || ssoExists;
+
+  return (
+    isVisible && (
+      <div style={{ width: "100%", height: "auto" }}>
+        <div className="line">
+          <Text className="or-label">{t("Common:orContinueWith")}</Text>
+        </div>
+        <SocialButtonsGroup
+          providers={thirdParty ?? undefined}
+          onClick={onSocialButtonClick}
+          onMoreAuthToggle={setIsModalOpen}
+          t={t}
+          isDisabled={isLoading}
+          {...ssoProps}
+        />
+      </div>
+    )
+  );
 };
 
 export default ThirdParty;

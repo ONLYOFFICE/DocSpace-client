@@ -1,0 +1,28 @@
+{
+  "key_path": "DeleteTagCannotBeUndone",
+  "content": "This action cannot be undone.",
+  "content_en_sha1_hash": "951f495b348745aab3e044e6401d8e5c4afb59b6",
+  "created_at": "2026-02-19T13:36:19.064Z",
+  "updated_at": "2026-02-19T13:36:33.126Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/tag-management/modals/DeleteTag.modal.tsx",
+      "line_number": 82,
+      "context": "<ModalDialog.Body>\n <Text className={styles.deleteTagModalText}>\n {t(\"TagManagement:DeleteTagConfirmation\")}\n </Text>\n <Text className={styles.deleteTagModalText}>\n {t(\"TagManagement:DeleteTagCannotBeUndone\")}\n </Text>\n <Checkbox\n key=\"dont-show-again\"\n label={t(\"ConvertDialog:HideMessage\")}\n isChecked={isChecked}",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

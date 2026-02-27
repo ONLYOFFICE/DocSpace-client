@@ -97,7 +97,6 @@
   "PriceCalculation": "احسب سعرك",
   "PriceForEach": "{{currency}} لكل {{amount}}",
   "ProductNameWallet": "محفظة {{productName}}",
-  "Quantity": "الكمية",
   "RecommendedTopUpAmount": "المبلغ الموصى به لإعادة الشحن: {{amount}}",
   "RemainingDays": "الأيام المتبقية من دورة الفوترة: {{count}}",
   "Reminder": "تذكير:",

@@ -3,7 +3,7 @@
   "content": "Settings have been successfully updated",
   "content_en_sha1_hash": "a3e0f1940499fb1b34253a9a7b050c2136e1f58b",
   "created_at": "2025-05-26T07:15:48.667Z",
-  "updated_at": "2025-12-22T14:25:01.421Z",
+  "updated_at": "2026-02-19T13:36:32.701Z",
   "comment": {
     "text": "The translation key \"SuccessfullySaveSettingsMessage\" is used to display a success message after saving portal settings. It appears in UI elements such as buttons or dialogs that trigger setting updates, providing feedback to the user that changes have been successfully applied.",
     "is_auto": true,
@@ -138,7 +138,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/devToolsAccess.tsx",
-      "line_number": 177,
+      "line_number": 176,
       "context": "await setDevToolsAccessSettings(accessEnabled);\n setAccessEnabled(accessEnabled);\n setShowReminder(false);\n saveToSessionStorage(\"defaultDevToolsAccessSettings\", accessEnabled);\n saveToSessionStorage(\"currentDevToolsAccessSettings\", accessEnabled);\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n } catch (error: unknown) {\n const message = (error as { message: string }).message\n ? ((error as { message: string }).message as TData)\n : (error as string);",
       "module": "/packages/client"
     },
@@ -174,7 +174,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/trustedMail.js",
-      "line_number": 253,
+      "line_number": 252,
       "context": "saveToSessionStorage(\"defaultTrustedMailSettings\", {\n type,\n domains,\n });\n setShowReminder(false);\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error);\n }\n \n setIsSaving(false);",
       "module": "/packages/client"
     },

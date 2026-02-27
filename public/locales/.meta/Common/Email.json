@@ -3,7 +3,7 @@
   "content": "Email",
   "content_en_sha1_hash": "84add5b2952787581cb9a8851eef63d1ec75d22b",
   "created_at": "2025-05-19T21:30:44.776Z",
-  "updated_at": "2025-12-19T13:32:31.919Z",
+  "updated_at": "2026-02-19T13:36:32.485Z",
   "comment": {
     "text": "This translation key represents the label for displaying a user's email address, typically shown alongside their name in a welcome message or profile section. It appears in various UI elements, such as social authentication dialogs and contact filtering interfaces, where users' email addresses need to be displayed. The translated text should correspond to the English content \"Email\".",
     "is_auto": true,
@@ -48,13 +48,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 478,
+      "line_number": 482,
       "context": "/>\n ) : null}\n </div>\n \n <Text as=\"div\" className={styles.label}>\n {t(\"Common:Email\")}\n </Text>\n <div className={styles.emailContainer}>\n <div className={styles.emailEditContainer}>\n <Text\n data-tooltip-id=\"emailTooltip\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 478,
+      "line_number": 482,
       "context": "/>\n ) : null}\n </div>\n \n <Text as=\"div\" className={styles.label}>\n {t(\"Common:Email\")}\n </Text>\n <div className={styles.emailContainer}>\n <div className={styles.emailEditContainer}>\n <Text\n data-tooltip-id=\"emailTooltip\"",
       "module": "/packages/client"
     },
@@ -84,8 +84,8 @@
     },
     {
       "file_path": "/packages/shared/pages/Branding/CompanyInfo/index.tsx",
-      "line_number": 225,
-      "context": "/>\n </FieldContainer>\n <FieldContainer\n id=\"fieldContainerEmail\"\n className=\"field-container-width settings_unavailable\"\n labelText={t(\"Common:Email\")}\n isVertical\n >\n <TextInput\n id=\"textInputContainerEmail\"\n testId=\"company_info_settings_email_input\"",
+      "line_number": 220,
+      "context": "/>\n </FieldContainer>\n <FieldContainer\n id=\"fieldContainerEmail\"\n className=\"field-container-width\"\n labelText={t(\"Common:Email\")}\n isVertical\n >\n <TextInput\n id=\"textInputContainerEmail\"\n testId=\"company_info_settings_email_input\"",
       "module": "/packages/shared"
     }
   ],

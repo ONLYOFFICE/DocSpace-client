@@ -1,0 +1,28 @@
+{
+  "key_path": "RenewTheLicense",
+  "content": "Renew the license",
+  "content_en_sha1_hash": "075111d7857278a9999a7ef8434f55c4e01acb80",
+  "created_at": "2026-02-18T14:56:10.169Z",
+  "updated_at": "2026-02-19T13:36:33.174Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/pages/Payments/Standalone/sub-components/EnterpriseContainer.tsx",
+      "line_number": 65,
+      "context": "return (\n <div className={styles.enterpriseComponent}>\n <Text fontWeight={700} fontSize=\"16px\">\n {!isLifetimeLicense\n ? t(\"RenewTheLicense\")\n : t(\"ActivateRenewSubscriptionHeader\", {\n license: isDeveloper\n ? t(\"Common:DeveloperLicense\")\n : t(\"Common:EnterpriseLicense\"),\n })}",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

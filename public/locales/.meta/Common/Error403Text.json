@@ -3,7 +3,7 @@
   "content": "Sorry, access denied.",
   "content_en_sha1_hash": "23a068696696d114560f0f6f48110a50081a9811",
   "created_at": "2025-05-19T21:30:45.045Z",
-  "updated_at": "2025-05-26T07:57:32.902Z",
+  "updated_at": "2026-02-19T13:36:33.096Z",
   "comment": {
     "text": "The Error403Text translation key is used to display a generic \"access denied\" message when user access is restricted in UI components, such as error dialogs or container headers. It appears on an individual basis depending on the context where it's rendered. Translators should provide alternative translations that convey a similar meaning in their respective languages.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/shared/components/errors/Error403.tsx",
       "line_number": 35,
-      "context": "import ErrorContainer from \"../error-container/ErrorContainer\";\n \n export const Error403 = () => {\n const { t } = useTranslation(\"Common\");\n \n return <ErrorContainer headerText={t(\"Error403Text\")} />;\n };",
+      "context": "import ErrorContainer from \"@docspace/ui-kit/components/error-container/ErrorContainer\";\n \n export const Error403 = () => {\n const { t } = useTranslation(\"Common\");\n \n return <ErrorContainer headerText={t(\"Error403Text\")} />;\n };",
       "module": "/packages/shared"
     }
   ],

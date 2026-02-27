@@ -178,7 +178,7 @@
     font-size: 14px;
     font-weight: 600;
     line-height: 16px;
-    margin: 6px 8px;
+    margin: 6px 0px;
 
     margin-inline-end: 0;
 
@@ -204,13 +204,11 @@
   }
 
   .expireText {
-    margin-inline-start: 8px;
     color: var(--info-panel-links-primary-color);
   }
 
   .linkTimeInfo {
     color: var(--info-panel-links-primary-color);
-    padding-inline-start: 8px;
   }
 
   .linkActions {

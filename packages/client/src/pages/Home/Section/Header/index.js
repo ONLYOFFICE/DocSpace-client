@@ -469,7 +469,7 @@ const SectionHeaderContent = (props) => {
   const getContextOptionsPlus = React.useCallback(() => {
     if (isContactsPage) return getContactsModel(t);
     return getFolderModel(t);
-  }, [isContactsPage, getContactsModel, getFolderModel, t]);
+  }, [isContactsPage, getContactsModel, getFolderModel, t, contactsTab]);
 
   const onNavigationButtonClick = React.useCallback(() => {
     onCreateAndCopySharedLink(selectedFolder, t);

@@ -35,7 +35,7 @@ import { ComboBox } from "@docspace/ui-kit/components/combobox";
 import { ThirdPartyStorages } from "../../../../../enums";
 import { getOptions } from "../../../../../utils/getThirdPartyStoragesOptions";
 import { useDidMount } from "../../../../../hooks/useDidMount";
-import { useUnmount } from "../../../../../hooks/useUnmount";
+import { useUnmount } from "@docspace/ui-kit/hooks/useUnmount";
 import { DropDownItem } from "../../../../../components/drop-down-item";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Text } from "@docspace/ui-kit/components/text";

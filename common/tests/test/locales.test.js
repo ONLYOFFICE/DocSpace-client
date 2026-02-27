@@ -171,7 +171,7 @@ beforeAll(() => {
 	const pattern2 = 'i18nKey="([a-zA-Z0-9_.:-]+)"';
 	const pattern3 = 'tKey:\\s"([a-zA-Z0-9_.:-]+)"';
 	const pattern4 = 'getTitle\\("([a-zA-Z0-9_.:-]+)"\\)';
-	const pattern5 = 'getCommonTranslation\\("([a-zA-Z0-9_.:-]+)"\\)';
+	const pattern5 = 'getCommonTranslation\\(\\s*"([a-zA-Z0-9_.:-]+)"[\\s,)]';
 
 	const regexp = new RegExp(
 		`(${pattern1})|(${pattern2})|(${pattern3})|(${pattern4})|(${pattern5})`,

@@ -49,10 +49,6 @@ test.describe("Bonus", () => {
 
     await expect(page.getByTestId("bonus")).toBeVisible();
 
-    await expectScreenshot(page,[
-      "desktop",
-      "bonus",
-      "bonus-render.png",
-    ]);
+    await expectScreenshot(page, ["desktop", "bonus", "bonus-render.png"]);
   });
 });

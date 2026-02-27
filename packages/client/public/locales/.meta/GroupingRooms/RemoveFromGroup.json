@@ -1,0 +1,40 @@
+{
+  "key_path": "RemoveFromGroup",
+  "content": "Remove from group",
+  "content_en_sha1_hash": "f19f898311aea7517b057ef19ee9cb2370f8ac99",
+  "created_at": "2026-02-19T13:36:24.880Z",
+  "updated_at": "2026-02-19T13:36:33.002Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 2357,
+      "context": "disabled: isAIAgent,\n },\n {\n id: \"option_remove-from-group\",\n key: \"remove-from-group\",\n label: t(\"GroupingRooms:RemoveFromGroup\"),\n icon: RemoveOutlineSvgUrl,\n onClick: () => this.onRemoveRoomsFromGroup([item.id], t),\n disabled: false,\n },\n ...versionActions,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 2357,
+      "context": "disabled: isAIAgent,\n },\n {\n id: \"option_remove-from-group\",\n key: \"remove-from-group\",\n label: t(\"GroupingRooms:RemoveFromGroup\"),\n icon: RemoveOutlineSvgUrl,\n onClick: () => this.onRemoveRoomsFromGroup([item.id], t),\n disabled: false,\n },\n ...versionActions,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
+      "line_number": 358,
+      "context": "case \"remove-from-group\":\n if (!this.isAvailableOption(\"remove-from-group\")) return null;\n return {\n id: \"menu-remove-from-group\",\n key: \"remove-from-group\",\n label: t(\"GroupingRooms:RemoveFromGroup\"),\n iconUrl: RemoveOutlineSvgUrl,\n onClick: this.removeFromGroupHandle,\n disabled: false,\n };\n case \"archive\":",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

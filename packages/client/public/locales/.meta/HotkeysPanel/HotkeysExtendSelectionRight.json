@@ -3,7 +3,7 @@
   "content": "Extend selection right",
   "content_en_sha1_hash": "c3dceee4dbd194cf2440205ab46c372553ef5ed9",
   "created_at": "2025-05-19T21:30:55.052Z",
-  "updated_at": "2025-05-24T10:41:51.499Z",
+  "updated_at": "2026-02-19T13:36:32.518Z",
   "comment": {
     "text": "The translation key \"HotkeysExtendSelectionRight\" is used to display the text \"Extend selection right\" in a UI component. It appears in a hotkey configuration section of an editor or panel, where it explains the function of pressing Shift + →. The key is likely associated with a keyboard shortcut option for extending the selection area to the right.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/panels/HotkeysPanel/SelectionBlock.js",
       "line_number": 84,
-      "context": "<Text {...keyTextStyles}>Shift + ←</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysExtendSelectionRight\")}</Text>\n <Text {...keyTextStyles}>Shift + →</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>",
+      "context": "<Text {...keyTextStyles}>Shift + ←</Text>\n </>\n </Row>\n <Row className={styles.hotkeysRow}>\n <>\n <Text {...textStyles}>{t(\"HotkeysExtendSelectionRight\")}</Text>\n <Text {...keyTextStyles}>Shift + →</Text>\n </>\n </Row>\n <Row className={styles.hotkeysRow}>\n <>",
       "module": "/packages/client"
     }
   ],

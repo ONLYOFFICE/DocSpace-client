@@ -25,52 +25,52 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { TUser } from "@docspace/shared/api/people/types";
-import PeopleSelector from "@docspace/shared/selectors/People";
+import PeopleSelector from "@docspace/ui-kit/selectors/People";
 import { TSelectorItem } from "@docspace/ui-kit/components/selector";
 import { Portal } from "@docspace/ui-kit/components/portal";
 interface SelectGroupManagerPanelProps {
-	onClose: () => void;
-	onParentPanelClose: () => void;
-	setGroupManager: (groupManager: TUser) => void;
+  onClose: () => void;
+  onParentPanelClose: () => void;
+  setGroupManager: (groupManager: TUser) => void;
 }
 
 const SelectGroupManagerPanel = ({
-	onClose,
-	onParentPanelClose,
-	setGroupManager,
+  onClose,
+  onParentPanelClose,
+  setGroupManager,
 }: SelectGroupManagerPanelProps) => {
-	const onSelectGroupManager = (newGroupManager: TSelectorItem[]) => {
-		setGroupManager(newGroupManager[0] as unknown as TUser);
-	};
+  const onSelectGroupManager = (newGroupManager: TSelectorItem[]) => {
+    setGroupManager(newGroupManager[0] as unknown as TUser);
+  };
 
-	return (
-		<Portal
-			element={
-				<PeopleSelector
-					disableDisabledUsers
-					submitButtonLabel=""
-					disableSubmitButton={false}
-					onSubmit={onSelectGroupManager}
-					useAside
-					onClose={() => {
-						onClose();
-						onParentPanelClose();
-					}}
-					withoutBackground
-					withBlur={false}
-					withHeader
-					headerProps={{
-						// Todo: Update groups empty screen texts when they are ready
-						headerLabel: "",
-						withoutBackButton: false,
-						withoutBorder: true,
-						onBackClick: onClose,
-						onCloseClick: onParentPanelClose,
-					}}
-				/>
-			}
-		/>
-	);
+  return (
+    <Portal
+      element={
+        <PeopleSelector
+          disableDisabledUsers
+          submitButtonLabel=""
+          disableSubmitButton={false}
+          onSubmit={onSelectGroupManager}
+          useAside
+          onClose={() => {
+            onClose();
+            onParentPanelClose();
+          }}
+          withoutBackground
+          withBlur={false}
+          withHeader
+          headerProps={{
+            // Todo: Update groups empty screen texts when they are ready
+            headerLabel: "",
+            withoutBackButton: false,
+            withoutBorder: true,
+            onBackClick: onClose,
+            onCloseClick: onParentPanelClose,
+          }}
+        />
+      }
+    />
+  );
 };
 
 export default SelectGroupManagerPanel;

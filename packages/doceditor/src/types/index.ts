@@ -26,10 +26,7 @@
 
 import {
   TFile,
-  TFileSecurity,
   TFilesSettings,
-  TFolder,
-  TFolderSecurity,
   TGetReferenceData,
   TGetReferenceDataRequest,
   TSharedUsers,
@@ -37,14 +34,19 @@ import {
 import { TUser } from "@docspace/shared/api/people/types";
 import { TSettings } from "@docspace/shared/api/settings/types";
 import { HeaderProps, TBreadCrumb } from "@docspace/ui-kit/components/selector";
-import { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
+import type {
+  TSelectedFileInfo,
+  FilesSettingsDto,
+  FolderDtoInteger,
+  SdkFolderType,
+  FileEntryDtoIntegerAllOfSecurity,
+} from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
 import type {
   ConflictResolveType,
   FilesSelectorFilterTypes,
   FolderType,
   StartFillingMode,
 } from "@docspace/shared/enums";
-import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import { TTranslation } from "@docspace/shared/types";
 import { TFrameConfig } from "@docspace/shared/types/Frame";
 import type { RoomsType } from "@docspace/ui-kit/enums";
@@ -71,6 +73,11 @@ export type SdkSearchParams = {
   isSDK?: boolean;
 };
 
+export type TGenerationToolCallState = {
+  toolName: string;
+  parameters: Record<string, string>;
+};
+
 export type RootPageProps = {
   searchParams: Promise<
     Partial<{
@@ -82,6 +89,7 @@ export type RootPageProps = {
       share: string;
       editorType: string;
       error?: string;
+      withTool?: string;
     }> &
       SdkSearchParams
   >;
@@ -236,6 +244,8 @@ export type TResponse =
       shareKey?: string;
       deepLinkSettings?: number;
       baseSdkConfig?: TFrameConfig;
+
+      generationToolCallState?: TGenerationToolCallState;
     }
   | {
       error: TError;
@@ -251,6 +261,8 @@ export type TResponse =
       shareKey?: string;
       deepLinkSettings?: number;
       baseSdkConfig?: TFrameConfig;
+
+      generationToolCallState?: TGenerationToolCallState;
     };
 
 export type EditorProps = {
@@ -268,6 +280,8 @@ export type EditorProps = {
   organizationName?: string;
   shareKey?: string;
 
+  generationToolCallState?: TGenerationToolCallState;
+
   onDownloadAs?: (obj: object) => void;
   openShareFormDialog?: () => void;
   onSDKRequestSharingSettings?: () => void;
@@ -276,7 +290,7 @@ export type EditorProps = {
   onSDKRequestSelectSpreadsheet?: (event: object) => void;
   onSDKRequestSelectDocument?: (event: object) => void;
   onSDKRequestReferenceSource?: (event: object) => void;
-  onStartFillingVDRPanel?: (roles: TFormRole[]) => void;
+  onOpenRoleMappingPanel?: (roles: TFormRole[]) => void;
   setFillingStatusDialogVisible?: React.Dispatch<React.SetStateAction<boolean>>;
   onStartFilling?: VoidFunction;
 };
@@ -314,9 +328,7 @@ export interface SelectFolderDialogProps {
     selectedItemType: "rooms" | "files" | "agents" | undefined,
     isRoot: boolean,
     selectedItemSecurity:
-      | TFileSecurity
-      | TFolderSecurity
-      | TRoomSecurity
+      | FileEntryDtoIntegerAllOfSecurity
       | undefined,
     selectedFileInfo: TSelectedFileInfo,
     isDisabledFolder?: boolean,
@@ -331,11 +343,13 @@ export interface SelectFolderDialogProps {
     breadCrumbs: TBreadCrumb[],
     fileName: string,
     isChecked: boolean,
-    selectedTreeNode: TFolder,
+    selectedTreeNode: FolderDtoInteger,
     selectedFileInfo: TSelectedFileInfo,
-  ) => Promise<void>;
+    isInsideKnowledge?: boolean,
+    isInsideResultStorage?: boolean,
+  ) => void | Promise<void>;
   fileInfo: TFile;
-  filesSettings: TFilesSettings;
+  filesSettings: FilesSettingsDto;
   fileSaveAsExtension?: string;
   selectedFolderId?: string | number;
 }
@@ -353,11 +367,12 @@ export interface SelectFileDialogProps {
     selectedItemType: "rooms" | "files" | "agents" | undefined,
     isRoot: boolean,
     selectedItemSecurity:
-      | TFileSecurity
-      | TFolderSecurity
-      | TRoomSecurity
+      | FileEntryDtoIntegerAllOfSecurity
       | undefined,
     selectedFileInfo: TSelectedFileInfo,
+    isDisabledFolder?: boolean,
+    isInsideKnowledge?: boolean,
+    isInsideResultStorage?: boolean,
   ) => boolean;
   isVisible: boolean;
   onClose: () => void;
@@ -368,11 +383,13 @@ export interface SelectFileDialogProps {
     breadCrumbs: TBreadCrumb[],
     fileName: string,
     isChecked: boolean,
-    selectedTreeNode: TFolder,
+    selectedTreeNode: FolderDtoInteger,
     selectedFileInfo: TSelectedFileInfo,
-  ) => Promise<void>;
+    isInsideKnowledge?: boolean,
+    isInsideResultStorage?: boolean,
+  ) => void | Promise<void>;
   fileInfo: TFile;
-  filesSettings: TFilesSettings;
+  filesSettings: FilesSettingsDto;
   selectedFolderId?: string | number;
 }
 
@@ -399,9 +416,10 @@ export interface UseEventsProps {
   sdkConfig?: TFrameConfig | null;
   organizationName: string;
   shareKey?: string;
+  generationToolCallState?: TGenerationToolCallState;
   setFillingStatusDialogVisible?: React.Dispatch<React.SetStateAction<boolean>>;
   openShareFormDialog?: VoidFunction;
-  onStartFillingVDRPanel?: (roles: TFormRole[]) => void;
+  onOpenRoleMappingPanel?: (roles: TFormRole[]) => void;
 }
 
 export interface UseInitProps {
@@ -414,6 +432,7 @@ export interface UseInitProps {
   setDocTitle: (value: string) => void;
   documentReady: boolean;
   organizationName: string;
+  generationToolCallState?: TGenerationToolCallState;
 }
 
 export type THistoryData =
@@ -487,11 +506,12 @@ export type StartFillingSelectorDialogProps = {
     selectedItemType: "rooms" | "files" | "agents" | undefined,
     isRoot: boolean,
     selectedItemSecurity:
-      | TFileSecurity
-      | TFolderSecurity
-      | TRoomSecurity
+      | FileEntryDtoIntegerAllOfSecurity
       | undefined,
     selectedFileInfo: TSelectedFileInfo,
+    isDisabledFolder?: boolean,
+    isInsideKnowledge?: boolean,
+    isInsideResultStorage?: boolean,
   ) => boolean;
 
   onSubmit: (
@@ -501,11 +521,13 @@ export type StartFillingSelectorDialogProps = {
     breadCrumbs: TBreadCrumb[],
     fileName: string,
     isChecked: boolean,
-    selectedTreeNode: TFolder,
+    selectedTreeNode: FolderDtoInteger,
     selectedFileInfo: TSelectedFileInfo,
-  ) => Promise<void>;
+    isInsideKnowledge?: boolean,
+    isInsideResultStorage?: boolean,
+  ) => void | Promise<void>;
 
-  filesSettings: TFilesSettings;
+  filesSettings: FilesSettingsDto;
   createDefineRoomType: RoomsType;
 };
 

@@ -3,7 +3,7 @@
   "content": "Sales department request",
   "content_en_sha1_hash": "0e3ac6e1bce337108997dca6f6f3b9a728a8e578",
   "created_at": "2025-05-19T21:30:53.281Z",
-  "updated_at": "2025-06-18T17:11:42.381Z",
+  "updated_at": "2026-02-19T13:36:32.454Z",
   "comment": {
     "text": "This translation key is used for the \"Sales department request\" text that appears in a dialogue box, specifically in the SalesDepartmentRequestDialog component where users can submit requests. The text is intended to provide clear context for the user's action.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/SalesDepartmentRequestDialog/index.js",
       "line_number": 44,
-      "context": "ModalDialogType,\n } from \"@docspace/shared/components/modal-dialog\";\n import { EmailInput } from \"@docspace/shared/components/email-input\";\n import { ErrorKeys } from \"@docspace/shared/enums\";\n \n const SalesDepartmentRequestDialog = ({\n visible,\n onClose,\n sendPaymentRequest,\n }) => {\n const { t, ready } = useTranslation([",
+      "context": "ModalDialogType,\n } from \"@docspace/ui-kit/components/modal-dialog\";\n import { EmailInput } from \"@docspace/ui-kit/components/email-input\";\n import { ErrorKeys } from \"@docspace/shared/enums\";\n \n const SalesDepartmentRequestDialog = ({\n visible,\n onClose,\n sendPaymentRequest,\n }) => {\n const { t, ready } = useTranslation([",
       "module": "/packages/client"
     }
   ],

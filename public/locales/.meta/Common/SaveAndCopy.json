@@ -1,0 +1,28 @@
+{
+  "key_path": "SaveAndCopy",
+  "content": "Save & copy",
+  "content_en_sha1_hash": "603fdf838c5744f12c8c5ca87bdd30bbeee7233f",
+  "created_at": "2026-02-18T14:56:12.395Z",
+  "updated_at": "2026-02-19T13:36:32.543Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/LinkSettingsPanel/index.tsx",
+      "line_number": 326,
+      "context": "<Button\n className=\"send-invitation\"\n scale\n size={ButtonSize.normal}\n primary\n label={t(\"Common:SaveAndCopy\")}\n type=\"submit\"\n testId=\"link-settings_modal_save_button\"\n isDisabled={hasError || showLimitError || showExpiredError}\n />\n <Button",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

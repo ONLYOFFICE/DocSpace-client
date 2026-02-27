@@ -82,3 +82,12 @@ declare module "csvjson-json_beautifier" {
     options?: unknown,
   ): string;
 }
+
+declare global {
+  interface Window {
+    DocEditor: {
+      instances: Record<string, any>;
+      version: () => string;
+    };
+  }
+}

@@ -30,7 +30,7 @@ import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
-import DropzoneComponent from "@docspace/ui-kit/components/dropzone";
+import { Dropzone as DropzoneComponent } from "@docspace/ui-kit/components/dropzone";
 import UploadSvgUrl from "PUBLIC_DIR/images/upload.svg?url";
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import { toastr } from "@docspace/ui-kit/components/toast";

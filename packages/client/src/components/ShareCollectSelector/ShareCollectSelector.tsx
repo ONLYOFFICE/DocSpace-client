@@ -31,7 +31,7 @@ import isUndefined from "lodash/isUndefined";
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
 import { RoomsType } from "@docspace/shared/enums";
-import FilesSelectorWrapper from "@docspace/ui-kit/selectors/Files";
+import { FilesSelector } from "@docspace/ui-kit/selectors/Files";
 
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { useSelectorInfoBar } from "@docspace/shared/hooks/useSelectorInfoBar";
@@ -45,7 +45,7 @@ import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import type {
   TSelectedFileInfo,
   SdkFolderType,
-} from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
+} from "@docspace/ui-kit/selectors/Files";
 import type { TData } from "@docspace/ui-kit/components/toast";
 import type {
   TBreadCrumb,
@@ -270,7 +270,7 @@ const ShareCollectSelector = inject<TStore>(
       };
 
       return (
-        <FilesSelectorWrapper
+        <FilesSelector
           withCreate
           withHeader
           withSearch
@@ -297,12 +297,12 @@ const ShareCollectSelector = inject<TStore>(
           onCancel={onCancel}
           onSubmit={
             onSubmit as unknown as Parameters<
-              typeof FilesSelectorWrapper
+              typeof FilesSelector
             >[0]["onSubmit"]
           }
           getIsDisabled={
             getIsDisabled as unknown as Parameters<
-              typeof FilesSelectorWrapper
+              typeof FilesSelector
             >[0]["getIsDisabled"]
           }
           getFilesArchiveError={getFilesArchiveError}

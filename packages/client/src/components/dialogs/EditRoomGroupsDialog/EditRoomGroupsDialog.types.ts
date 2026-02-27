@@ -26,7 +26,7 @@
 
 import { TColorScheme } from "@docspace/ui-kit/providers/theme/themes";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
-import type { TSelectorItem } from "@docspace/ui-kit/components/selector/Selector.types";
+import type { TSelectorItem } from "@docspace/ui-kit/components/selector";
 
 export interface ILogoData {
   small: string;

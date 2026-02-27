@@ -30,8 +30,8 @@ import { useTranslation } from "react-i18next";
 
 import { Backdrop } from "@docspace/ui-kit/components/backdrop";
 import { Aside } from "@docspace/ui-kit/components/aside";
-import RoomSelector from "@docspace/ui-kit/selectors/Room";
-import type { TSelectorItem } from "@docspace/ui-kit/components/selector/Selector.types";
+import { RoomSelector } from "@docspace/ui-kit/selectors/Room";
+import type { TSelectorItem } from "@docspace/ui-kit/components/selector";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 
 type AddRoomToGroupDialogProps = {

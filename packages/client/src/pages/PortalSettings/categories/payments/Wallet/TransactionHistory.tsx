@@ -60,8 +60,8 @@ import { AddButton } from "@docspace/ui-kit/components/add-button";
 import { SelectedItemPure } from "@docspace/ui-kit/components/selected-item";
 import { TSelectorItem } from "@docspace/ui-kit/components/selector";
 import { TUser } from "@docspace/shared/api/people/types";
-import PeopleSelector from "@docspace/ui-kit/selectors/People";
-import type { PeopleFilter } from "@docspace/ui-kit/selectors/People/PeopleSelector.types";
+import { PeopleSelector } from "@docspace/ui-kit/selectors/People";
+import type { PeopleFilter } from "@docspace/ui-kit/selectors/People";
 import Filter from "@docspace/shared/api/people/filter";
 
 import FilterPanel from "./sub-components/FilterPanel";

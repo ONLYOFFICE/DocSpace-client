@@ -36,7 +36,7 @@ import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { TRoom } from "@docspace/shared/api/rooms/types";
 import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
 import { TSelectorItem } from "@docspace/ui-kit/components/selector";
-import type { PeopleSelectorProps } from "@docspace/ui-kit/selectors/People/PeopleSelector.types";
+import type { PeopleSelectorProps } from "@docspace/ui-kit/selectors/People";
 import { TRoomParams, TRoomTagsParams } from "@docspace/shared/utils/rooms";
 
 import TagHandler from "../../../helpers/TagHandler";

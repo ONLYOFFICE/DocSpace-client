@@ -32,8 +32,8 @@ import React, { useCallback } from "react";
 import { frameCallEvent } from "@docspace/shared/utils/common";
 import { RoomsType } from "@docspace/shared/enums";
 import { getPrimaryLink } from "@docspace/shared/api/rooms";
-import RoomSelector from "@docspace/ui-kit/selectors/Room";
-import type { FolderDtoInteger } from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
+import { RoomSelector } from "@docspace/ui-kit/selectors/Room";
+import type { FolderDtoInteger } from "@docspace/ui-kit/selectors/Files";
 import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
 
 import type { TGetRooms } from "@docspace/shared/api/rooms/types";
@@ -45,125 +45,125 @@ import { useSDKConfig } from "@/providers/SDKConfigProvider";
 const IS_TEST = process.env.NEXT_PUBLIC_E2E_TEST;
 
 export type RoomSelectorClientProps = {
-	baseConfig: {
-		acceptLabel?: string;
-		cancel?: boolean;
-		cancelLabel?: string;
-		header?: boolean;
-		roomType?: RoomsType | RoomsType[] | null;
-		search?: boolean;
-	};
-	pageCount: number;
-	roomList: TGetRooms;
+  baseConfig: {
+    acceptLabel?: string;
+    cancel?: boolean;
+    cancelLabel?: string;
+    header?: boolean;
+    roomType?: RoomsType | RoomsType[] | null;
+    search?: boolean;
+  };
+  pageCount: number;
+  roomList: TGetRooms;
 };
 
 export default function RoomSelectorClient({
-	baseConfig,
-	pageCount,
-	roomList,
+  baseConfig,
+  pageCount,
+  roomList,
 }: RoomSelectorClientProps) {
-	useSDKConfig();
+  useSDKConfig();
 
-	useDocumentTitle("RoomSelector");
+  useDocumentTitle("RoomSelector");
 
-	const onSubmit = useCallback(async ([selectedItem]: TSelectorItem[]) => {
-		const enrichedData = {
-			...selectedItem,
-			icon:
-				selectedItem.icon === ""
-					? getRoomsIcon(selectedItem.roomType as RoomsType, false, 32)
-					: selectedItem.iconOriginal,
-		} as TSelectorItem & {
-			requestTokens?: {
-				id: string;
-				primary: boolean;
-				title: string;
-				requestToken: string;
-			}[];
-		};
+  const onSubmit = useCallback(async ([selectedItem]: TSelectorItem[]) => {
+    const enrichedData = {
+      ...selectedItem,
+      icon:
+        selectedItem.icon === ""
+          ? getRoomsIcon(selectedItem.roomType as RoomsType, false, 32)
+          : selectedItem.iconOriginal,
+    } as TSelectorItem & {
+      requestTokens?: {
+        id: string;
+        primary: boolean;
+        title: string;
+        requestToken: string;
+      }[];
+    };
 
-		const isSharedRoom =
-			selectedItem.roomType === RoomsType.PublicRoom ||
-			((selectedItem.roomType === RoomsType.CustomRoom ||
-				selectedItem.roomType === RoomsType.FormRoom) &&
-				selectedItem.shared);
+    const isSharedRoom =
+      selectedItem.roomType === RoomsType.PublicRoom ||
+      ((selectedItem.roomType === RoomsType.CustomRoom ||
+        selectedItem.roomType === RoomsType.FormRoom) &&
+        selectedItem.shared);
 
-		if (isSharedRoom && !isNil(selectedItem.id)) {
-			const response = (await getPrimaryLink(selectedItem.id)) as {
-				sharedTo: {
-					id: string;
-					title: string;
-					requestToken: string;
-					primary: boolean;
-				};
-			};
-			const {
-				sharedTo: { id, title, requestToken, primary },
-			} = response;
-			enrichedData.requestTokens = [{ id, primary, title, requestToken }];
-		}
+    if (isSharedRoom && !isNil(selectedItem.id)) {
+      const response = (await getPrimaryLink(selectedItem.id)) as {
+        sharedTo: {
+          id: string;
+          title: string;
+          requestToken: string;
+          primary: boolean;
+        };
+      };
+      const {
+        sharedTo: { id, title, requestToken, primary },
+      } = response;
+      enrichedData.requestTokens = [{ id, primary, title, requestToken }];
+    }
 
-		frameCallEvent({ event: "onSelectCallback", data: [enrichedData] });
+    frameCallEvent({ event: "onSelectCallback", data: [enrichedData] });
 
-		if (IS_TEST) {
-			// DON`T REMOVE CONSOLE LOG, IT IS REQUIRED FOR TESTING
-			console.log(
-				JSON.stringify({ onSelectCallback: "onSelectCallback", enrichedData }),
-			);
-		}
-	}, []);
+    if (IS_TEST) {
+      // DON`T REMOVE CONSOLE LOG, IT IS REQUIRED FOR TESTING
+      console.log(
+        JSON.stringify({ onSelectCallback: "onSelectCallback", enrichedData }),
+      );
+    }
+  }, []);
 
-	const onClose = useCallback(() => {
-		frameCallEvent({ event: "onCloseCallback" });
+  const onClose = useCallback(() => {
+    frameCallEvent({ event: "onCloseCallback" });
 
-		if (IS_TEST) {
-			// DON`T REMOVE CONSOLE LOG, IT IS REQUIRED FOR TESTING
-			console.log("onCloseCallback");
-		}
-	}, []);
+    if (IS_TEST) {
+      // DON`T REMOVE CONSOLE LOG, IT IS REQUIRED FOR TESTING
+      console.log("onCloseCallback");
+    }
+  }, []);
 
-	const cancelButtonProps = baseConfig?.cancel
-		? {
-				withCancelButton: true as const,
-				cancelButtonLabel: baseConfig?.cancelLabel as string,
-				onCancel: onClose,
-			}
-		: {};
+  const cancelButtonProps = baseConfig?.cancel
+    ? {
+        withCancelButton: true as const,
+        cancelButtonLabel: baseConfig?.cancelLabel as string,
+        onCancel: onClose,
+      }
+    : {};
 
-	const headerProps = baseConfig?.header
-		? {
-				withHeader: true as const,
-				headerProps: {
-					headerLabel: "",
-					isCloseable: false,
-					onCloseClick: onClose,
-				},
-			}
-		: { withPadding: false };
+  const headerProps = baseConfig?.header
+    ? {
+        withHeader: true as const,
+        headerProps: {
+          headerLabel: "",
+          isCloseable: false,
+          onCloseClick: onClose,
+        },
+      }
+    : { withPadding: false };
 
-	const roomTypeProps = baseConfig?.roomType
-		? { roomType: baseConfig.roomType }
-		: {};
+  const roomTypeProps = baseConfig?.roomType
+    ? { roomType: baseConfig.roomType }
+    : {};
 
-	const searchProps = baseConfig?.search
-		? { withSearch: baseConfig?.search }
-		: {};
+  const searchProps = baseConfig?.search
+    ? { withSearch: baseConfig?.search }
+    : {};
 
-	const { folders, total } = roomList;
+  const { folders, total } = roomList;
 
-	return (
-		<RoomSelector
-			{...cancelButtonProps}
-			{...headerProps}
-			{...roomTypeProps}
-			{...searchProps}
-			initHasNextPage={total > pageCount}
-			initItems={folders as unknown as FolderDtoInteger[]}
-			initTotal={total}
-			isMultiSelect={false}
-			onSubmit={onSubmit}
-			submitButtonLabel={baseConfig?.acceptLabel}
-			withInit
-		/>
-	);
+  return (
+    <RoomSelector
+      {...cancelButtonProps}
+      {...headerProps}
+      {...roomTypeProps}
+      {...searchProps}
+      initHasNextPage={total > pageCount}
+      initItems={folders as unknown as FolderDtoInteger[]}
+      initTotal={total}
+      isMultiSelect={false}
+      onSubmit={onSubmit}
+      submitButtonLabel={baseConfig?.acceptLabel}
+      withInit
+    />
+  );
 }

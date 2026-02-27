@@ -34,7 +34,7 @@ import type {
   TGetFolder,
 } from "@docspace/shared/api/files/types";
 import type { TGetRooms, TRoom } from "@docspace/shared/api/rooms/types";
-import { getFilterParams } from "@docspace/ui-kit/selectors/Files/FilesSelector.utils";
+import { getFilterParams } from "@docspace/ui-kit/selectors/Files";
 
 import { getFilesSettings, getFolder, getFoldersTree } from "@/api/files";
 import { getRooms } from "@/api/rooms";

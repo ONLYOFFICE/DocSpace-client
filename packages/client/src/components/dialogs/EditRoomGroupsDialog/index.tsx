@@ -38,7 +38,7 @@ import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { AddButton } from "@docspace/ui-kit/components/add-button";
-import PublicRoomBar from "@docspace/ui-kit/components/public-room-bar";
+import { PublicRoomBar } from "@docspace/ui-kit/components/public-room-bar";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { ButtonKeys } from "@docspace/shared/enums";
 
@@ -51,7 +51,7 @@ import RoomListPanel from "./sub-components/RoomListPanel";
 import GroupItem from "./sub-components/GroupItem";
 import { EditRoomGroupsDialogProps } from "./EditRoomGroupsDialog.types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
-import type { TSelectorItem } from "@docspace/ui-kit/components/selector/Selector.types";
+import type { TSelectorItem } from "@docspace/ui-kit/components/selector";
 
 const TOOLTIP_DISMISSED_KEY = "roomGroupingTooltipDismissed";
 

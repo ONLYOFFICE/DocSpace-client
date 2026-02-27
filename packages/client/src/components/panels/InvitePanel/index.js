@@ -55,7 +55,7 @@ import {
 } from "@docspace/ui-kit/components/modal-dialog";
 import { Link } from "@docspace/ui-kit/components/link";
 import { checkIfAccessPaid } from "@docspace/shared/utils/filterPaidRoleOptions";
-import PeopleSelector from "@docspace/ui-kit/selectors/People";
+import { PeopleSelector } from "@docspace/ui-kit/selectors/People";
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
 import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
 import { fixAccess } from "./utils";

@@ -28,8 +28,7 @@ import { useTranslation } from "react-i18next";
 
 import { Backdrop } from "@docspace/ui-kit/components/backdrop";
 import { Aside } from "@docspace/ui-kit/components/aside";
-import RoomSelector from "@docspace/ui-kit/selectors/Room";
-import { convertToItems } from "@docspace/ui-kit/selectors/Room/RoomSelector.utils";
+import { RoomSelector, convertToItems } from "@docspace/ui-kit/selectors/Room";
 
 import type { RoomListPanelProps } from "../EditRoomGroupsDialog.types";
 

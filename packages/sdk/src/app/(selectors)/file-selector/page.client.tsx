@@ -29,7 +29,7 @@
 import React, { useCallback, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 
-import FilesSelector from "@docspace/ui-kit/selectors/Files";
+import { FilesSelector } from "@docspace/ui-kit/selectors/Files";
 import { frameCallEvent } from "@docspace/shared/utils/common";
 import {
   DeviceType,
@@ -55,7 +55,7 @@ import type {
   FilesSelectorProps,
   FolderDtoInteger,
   SdkFolderType,
-} from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
+} from "@docspace/ui-kit/selectors/Files";
 import { getSelectFormatTranslation } from "@docspace/shared/utils";
 import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
 

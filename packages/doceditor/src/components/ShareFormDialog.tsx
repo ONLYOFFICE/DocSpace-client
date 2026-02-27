@@ -35,7 +35,7 @@ import { ShareFormDialog as ShareFormDialogComponent } from "@docspace/shared/di
 import { ShareSelector } from "@docspace/shared/components/share/selector";
 
 import type { TFile } from "@docspace/shared/api/files/types";
-import type { FilesSettingsDto } from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
+import type { FilesSettingsDto } from "@docspace/ui-kit/selectors/Files";
 import {
   FolderType,
   RoomsType,

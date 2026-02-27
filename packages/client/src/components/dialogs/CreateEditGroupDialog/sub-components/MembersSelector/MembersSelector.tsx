@@ -25,9 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { Portal } from "@docspace/ui-kit/components/portal";
-import PeopleSelector from "@docspace/ui-kit/selectors/People";
+import { PeopleSelector } from "@docspace/ui-kit/selectors/People";
 import { TOnSubmit } from "@docspace/ui-kit/components/selector";
-import type { PeopleSelectorProps } from "@docspace/ui-kit/selectors/People/PeopleSelector.types";
+import type { PeopleSelectorProps } from "@docspace/ui-kit/selectors/People";
 
 type MembersSelectorProps = {
   isVisible: boolean;

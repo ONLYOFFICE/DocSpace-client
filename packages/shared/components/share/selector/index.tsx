@@ -29,7 +29,7 @@ import { useTranslation } from "react-i18next";
 
 import { isFile } from "../../../utils/typeGuards";
 import { EmployeeStatus, ShareAccessRights } from "../../../enums";
-import PeopleSelector from "@docspace/ui-kit/selectors/People";
+import { PeopleSelector } from "@docspace/ui-kit/selectors/People";
 import { ShareLinkService } from "../../../services/share-link.service";
 import type { TShareToUser } from "../../../api/files/types";
 

@@ -2,7 +2,7 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 
 import { TOnSubmit } from "@docspace/ui-kit/components/selector";
-import type { PeopleSelectorProps } from "@docspace/ui-kit/selectors/People/PeopleSelector.types";
+import type { PeopleSelectorProps } from "@docspace/ui-kit/selectors/People";
 
 import EditGroupStore from "SRC_DIR/store/contacts/EditGroupStore";
 

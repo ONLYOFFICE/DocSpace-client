@@ -33,8 +33,8 @@ import {
   TSelectorHeader,
 } from "@docspace/ui-kit/components/selector";
 
-import GroupsSelector from "@docspace/ui-kit/selectors/Groups";
-import { GroupsSelectorProps } from "@docspace/ui-kit/selectors/Groups/GroupsSelector.types";
+import { GroupsSelector } from "@docspace/ui-kit/selectors/Groups";
+import type { GroupsSelectorProps } from "@docspace/ui-kit/selectors/Groups";
 
 import PluginStore from "SRC_DIR/store/PluginStore";
 

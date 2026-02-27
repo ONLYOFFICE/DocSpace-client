@@ -29,8 +29,8 @@
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
-import FilesSelectorWrapper from "@docspace/ui-kit/selectors/Files";
-import type { SdkFolderType } from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
+import { FilesSelector as FilesSelectorWrapper } from "@docspace/ui-kit/selectors/Files";
+import type { SdkFolderType } from "@docspace/ui-kit/selectors/Files";
 import { DeviceType, FolderType } from "@docspace/shared/enums";
 
 import { SelectFolderDialogProps } from "@/types";

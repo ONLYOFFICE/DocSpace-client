@@ -28,12 +28,12 @@ import { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import Filter from "@docspace/shared/api/people/filter";
 import { EmployeeType } from "@docspace/shared/enums";
-import PeopleSelector from "@docspace/ui-kit/selectors/People";
+import { PeopleSelector } from "@docspace/ui-kit/selectors/People";
 import type { TOnSubmit } from "@docspace/ui-kit/components/selector";
 import type {
 	PeopleSelectorProps,
 	PeopleFilter,
-} from "@docspace/ui-kit/selectors/People/PeopleSelector.types";
+} from "@docspace/ui-kit/selectors/People";
 
 const PEOPLE_TAB_ID = "0";
 

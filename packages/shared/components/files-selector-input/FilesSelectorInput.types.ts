@@ -28,8 +28,8 @@ import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
 import type {
   FilesSelectorProps,
   FilesSettingsDto,
-} from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
-import type { TGetIcon } from "@docspace/ui-kit/selectors/utils/types";
+} from "@docspace/ui-kit/selectors/Files";
+import type { TGetIcon } from "@docspace/ui-kit/selectors/utils";
 import type { DeviceType } from "../../enums";
 import type { BackupToPublicRoomOptionType } from "../../types";
 

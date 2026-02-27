@@ -40,7 +40,7 @@ import type {
   FolderDtoInteger,
   SdkFolderType,
   FileEntryDtoIntegerAllOfSecurity,
-} from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
+} from "@docspace/ui-kit/selectors/Files";
 import type {
   ConflictResolveType,
   FilesSelectorFilterTypes,

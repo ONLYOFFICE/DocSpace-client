@@ -39,7 +39,7 @@ import { RestoreBackup } from "@docspace/shared/pages/backup/restore-backup";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import { ButtonSize } from "@docspace/ui-kit/components/button";
-import type { FilesSettingsDto } from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
+import type { FilesSettingsDto } from "@docspace/ui-kit/selectors/Files";
 import { uploadBackup } from "@docspace/shared/api/files";
 
 import type {

@@ -27,7 +27,7 @@
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import PeopleSelector from "@docspace/ui-kit/selectors/People";
+import { PeopleSelector } from "@docspace/ui-kit/selectors/People";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { Backdrop } from "@docspace/ui-kit/components/backdrop";

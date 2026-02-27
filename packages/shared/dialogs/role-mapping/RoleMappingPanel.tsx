@@ -35,8 +35,8 @@ import { useState, useCallback, useMemo, useTransition } from "react";
 import InfoSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
 import { ButtonSize, Button } from "@docspace/ui-kit/components/button";
-import PublicRoomBar from "@docspace/ui-kit/components/public-room-bar";
-import PeopleSelector from "@docspace/ui-kit/selectors/People";
+import { PublicRoomBar } from "@docspace/ui-kit/components/public-room-bar";
+import { PeopleSelector } from "@docspace/ui-kit/selectors/People";
 import type {
   HeaderProps,
   TAccessRight,

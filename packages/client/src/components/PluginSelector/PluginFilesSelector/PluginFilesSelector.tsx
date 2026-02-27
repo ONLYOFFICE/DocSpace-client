@@ -33,12 +33,14 @@ import type {
   TFilesSelector,
 } from "@onlyoffice/docspace-plugin-sdk";
 
-import FilesSelector from "@docspace/ui-kit/selectors/Files";
+import { FilesSelector } from "@docspace/ui-kit/selectors/Files";
 import { TSelectorHeader } from "@docspace/ui-kit/components/selector";
-import { FilesSelectorProps } from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
+import type {
+  FilesSelectorProps,
+  SdkFolderType,
+} from "@docspace/ui-kit/selectors/Files";
 import { isDesktop, isTablet } from "@docspace/shared/utils";
 import { DeviceType, FolderType } from "@docspace/shared/enums";
-import type { SdkFolderType } from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
 
 import PluginStore from "SRC_DIR/store/PluginStore";
 import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";

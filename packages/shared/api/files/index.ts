@@ -78,6 +78,7 @@ import {
   TDefaultTemplate,
 } from "./types";
 import type { TFileConvertId } from "../../dialogs/download-dialog/DownloadDialog.types";
+import { successUserPhoto } from "../../__mocks__/handlers/people/userPhoto";
 
 export async function openEdit(
   fileId: number | string,
@@ -2019,8 +2020,7 @@ export async function getFakeFileSharedUsers(id?: string | number) {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
         displayName: "Nikita Gopienko",
         email: "nikita.gopienko@onlyoffice.com",
-        avatar:
-          "/static/images/default_user_photo_size_82-82.png?hash=1745670707",
+        avatar: successUserPhoto.original,
       },
     },
   ];

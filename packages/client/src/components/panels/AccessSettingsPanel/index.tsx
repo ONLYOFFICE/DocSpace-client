@@ -191,8 +191,8 @@ const AccessSettingsPanel = ({
     getAccessMembers();
   }, []);
 
-  const itemTitle = item.title || "";
-  const fileExst = "fileExst" in item ? item.fileExst : "";
+  const itemTitle = item?.title || "";
+  const fileExst = item &&  "fileExst" in item ? item?.fileExst : "";
   const icon = fileExst ? getFileIcon?.(fileExst) : undefined;
 
   const hasInvitedUsers = !!accessItems.length;

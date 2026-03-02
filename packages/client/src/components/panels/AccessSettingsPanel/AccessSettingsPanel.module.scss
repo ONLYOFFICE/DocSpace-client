@@ -217,12 +217,12 @@
   flex-direction: column;
   overflow: auto;
 
-  .invite-input-item {
+  .inviteInputItem {
     display: flex;
     gap: 4px;
   }
 
-  .invite-input-text_me {
+  .inviteInputTextMe {
     color: var(--text-disable-color);
   }
 }
@@ -370,7 +370,7 @@
 }
 
 .accessLabel {
-  color: var(--gray-text);
+  color: var(--text-disable-color);
 }
 
 .row {

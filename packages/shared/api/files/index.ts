@@ -1982,3 +1982,67 @@ export async function setOrganizeGrouping(set: boolean) {
 
   return res as boolean;
 }
+
+export async function getFakeFilesIsAvailable(id?: number) {
+  const res = await new Promise<boolean>((resolve) => {
+    setTimeout(() => {
+      resolve(false);
+    }, 500);
+  });
+
+  return res;
+}
+
+export async function setFakeFilesIsAvailable(
+  id: number,
+  isAvailable: boolean,
+) {
+  const res = await new Promise((res, rej) => {
+    setTimeout(() => {
+      res(isAvailable);
+    }, 500);
+  });
+
+  return res;
+}
+
+// TODO: Remove after refactoring
+// getFileSharedUsers // getFolderSharedUsers
+export async function getFakeFileSharedUsers(id?: string | number) {
+  const fakeItems = [
+    {
+      access: 1,
+      isOwner: true,
+      sharedTo: {
+        isAdmin: true,
+        isOwner: true,
+        id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
+        displayName: "Nikita Gopienko",
+        email: "nikita.gopienko@onlyoffice.com",
+        avatar:
+          "/static/images/default_user_photo_size_82-82.png?hash=1745670707",
+      },
+    },
+  ];
+
+  const res = await new Promise<{ items: typeof fakeItems }>((resolve) => {
+    setTimeout(() => {
+      resolve({ items: fakeItems });
+    }, 500);
+  });
+
+  return res;
+}
+
+export async function shareFakeFileToUsers(
+  fileId: string | number,
+  share: TShareToUser[],
+) {
+  const res = await new Promise((res, rej) => {
+    setTimeout(() => {
+      res([]);
+    }, 500);
+  });
+
+  return res;
+}

@@ -111,7 +111,7 @@ const Item = ({
         data-testid={`access_settings_avatar_${index ?? id}`}
       />
       <div className={styles.inviteUserBody}>
-        <div className="invite-input-item">
+        <div className={styles.inviteInputItem}>
           <Text
             fontSize="14px"
             fontWeight="600"
@@ -124,7 +124,7 @@ const Item = ({
             fontSize="14px"
             fontWeight="600"
             truncate
-            className="invite-input-text_me"
+            className={styles.inviteInputTextMe}
           >
             {currentUserId === item.id ? `(${t("Common:MeLabel")})` : null}
           </Text>

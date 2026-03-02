@@ -364,9 +364,9 @@ class DialogsStore {
 
   accessSettingsDialogVisible = false;
 
-  accessSettingsDialogCB = null;
+  accessSettingsItems = null;
 
-  accessSettingsPanelVisible = true;
+  accessSettingsPanelVisible = false;
 
   accessSettingsPanelItem = null;
 
@@ -1009,9 +1009,9 @@ class DialogsStore {
     this.formFillingTipsVisible = visible;
   };
 
-  setAccessSettingsDialogVisible = (visible, cb = null) => {
+  setAccessSettingsDialogVisible = (visible, items = null) => {
     this.accessSettingsDialogVisible = visible;
-    this.accessSettingsDialogCB = cb;
+    this.accessSettingsItems = items;
   };
 
   setAccessSettingsPanelVisible = (visible, item = null) => {
@@ -1028,12 +1028,12 @@ class DialogsStore {
     return isVDRRoom && stealthMode;
   }
 
-  checkAccessSettingsDialog = () => {
+  checkAccessSettingsDialog = (items) => {
     const hideDialog =
       localStorage.getItem("hideAccessSettingsDialog") === "true";
 
     if (this.isVDRRoomWithStealthMode && !hideDialog) {
-      this.setAccessSettingsDialogVisible(true);
+      this.setAccessSettingsDialogVisible(true, items);
     }
   };
 

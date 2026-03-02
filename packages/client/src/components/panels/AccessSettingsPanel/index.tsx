@@ -31,7 +31,7 @@ import { ReactSVG } from "react-svg";
 import classNames from "classnames";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { Heading } from "@docspace/ui-kit/components";
+import { Heading, toastr } from "@docspace/ui-kit/components";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { TSelectorItem } from "@docspace/ui-kit/components/selector";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
@@ -49,6 +49,13 @@ import styles from "./AccessSettingsPanel.module.scss";
 import InviteInput from "./sub-components/InviteInput";
 import ItemsList from "./sub-components/ItemsList";
 
+import {
+  getFakeFileSharedUsers,
+  getFakeFilesIsAvailable,
+  setFakeFilesIsAvailable,
+  shareFakeFileToUsers,
+} from "@docspace/shared/api/files";
+
 const AccessSettingsPanel = ({
   visible,
   item,
@@ -63,14 +70,14 @@ const AccessSettingsPanel = ({
 
   const { t } = useTranslation(["Common", "Files"]);
 
-  const fileIsAvailable = false; // TODO: Get from API, see example /api/2.0/files/roomtemplate/:id/public
-
   const [isLoading, setIsLoading] = useState(false);
-  const [isAvailable, setIsAvailable] = useState(fileIsAvailable ?? false);
+  const [modalIsLoading, setModalIsLoading] = useState(false);
   const [addContactsPanelVisible, setAddContactsPanelVisible] = useState(false);
   const [accessItems, setAccessItems] = useState<TSelectorItem[]>([]);
   const [scrollAllPanelContent, setScrollAllPanelContent] = useState(false);
   const [isMobileView, setIsMobileView] = useState(isMobile());
+  const [isAvailable, setIsAvailable] = useState(false);
+  const [prevIsAvailable, setPrevIsAvailable] = useState<boolean>(false);
 
   const onCheckHeight = () => {
     setScrollAllPanelContent(!isDesktop());
@@ -107,21 +114,34 @@ const AccessSettingsPanel = ({
   const handleSave = useCallback(async () => {
     setIsLoading(true);
     try {
-      // TODO: Implement save logic
-      console.log("Saving access settings:", { isAvailable });
+      const requests = [];
+
+      if (accessItems.length) {
+        const shareUsers = accessItems.map((x) => ({
+          access: ShareAccessRights.FullAccess,
+          shareTo: x.id?.toString() ?? "",
+        }));
+        requests.push(shareFakeFileToUsers(item?.id, shareUsers));
+      }
+
+      if (prevIsAvailable !== isAvailable) {
+        requests.push(setFakeFilesIsAvailable?.(item?.id, isAvailable));
+      }
+
+      if (requests.length) {
+        await Promise.all(requests);
+      }
+
+      setIsLoading(false);
+
       handleClose();
     } catch (error) {
       console.error("Failed to save access settings:", error);
+      toastr.error(error as Error);
     } finally {
       setIsLoading(false);
     }
-  }, [handleClose, isAvailable]);
-
-  const fakeItem = {
-    id: 0,
-    title: "File",
-    fileExst: ".pdf",
-  };
+  }, [handleClose, isAvailable, accessItems]);
 
   const checkIfUserInvited: NonNullable<
     PeopleSelectorProps["checkIfUserInvited"]
@@ -133,9 +153,46 @@ const AccessSettingsPanel = ({
     );
   };
 
-  const currentItem = item || fakeItem;
-  const itemTitle = currentItem.title || "";
-  const fileExst = "fileExst" in currentItem ? currentItem.fileExst : "";
+  const getAccessMembers = async () => {
+    if (isLoading) return;
+
+    setModalIsLoading(true);
+    Promise.all([
+      getFakeFileSharedUsers(item?.id),
+      getFakeFilesIsAvailable(item?.id),
+    ])
+      .then(([members, available]) => {
+        if (members?.items?.length) {
+          const convertedItems = members.items.map(
+            ({ access, isOwner, sharedTo }) => {
+              return {
+                templateAccess: access,
+                templateIsOwner: isOwner,
+                ...sharedTo,
+              };
+            },
+          );
+          // console.log("setAccessItems", items);
+          setAccessItems(convertedItems as unknown as TSelectorItem[]);
+        }
+
+        setPrevIsAvailable(available);
+        setIsAvailable(available as boolean);
+      })
+      .catch((error) => {
+        toastr.error(error as Error);
+      })
+      .finally(() => {
+        setModalIsLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    getAccessMembers();
+  }, []);
+
+  const itemTitle = item.title || "";
+  const fileExst = "fileExst" in item ? item.fileExst : "";
   const icon = fileExst ? getFileIcon?.(fileExst) : undefined;
 
   const hasInvitedUsers = !!accessItems.length;
@@ -149,6 +206,7 @@ const AccessSettingsPanel = ({
       isLarge
       withoutPadding
       containerVisible={addContactsPanelVisible}
+      isLoading={modalIsLoading || isLoading}
     >
       <ModalDialog.Container>
         {addContactsPanelVisible ? (

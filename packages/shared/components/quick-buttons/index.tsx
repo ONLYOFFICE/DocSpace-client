@@ -25,7 +25,7 @@
  * content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
-import { memo } from "react";
+import { memo, useState, useRef, useCallback } from "react";
 import isNil from "lodash/isNil";
 import { Trans } from "react-i18next";
 import { isTablet as isTabletDevice } from "react-device-detect";
@@ -41,13 +41,14 @@ import LockedIconReactSvg from "PUBLIC_DIR/images/file.actions.locked.react.svg?
 import LockedIconReact12Svg from "PUBLIC_DIR/images/icons/12/lock.react.svg?url";
 import FavoriteReactSvgUrl from "PUBLIC_DIR/images/favorite.react.svg?url";
 import FavoriteFillReactSvgUrl from "PUBLIC_DIR/images/favorite.fill.react.svg?url";
+import AccessInfoReactSvgUrl from "PUBLIC_DIR/images/access-info.react.svg?url";
 
 import { classNames, IconSizeType, isTablet, isDesktop } from "../../utils";
 import {
-	FolderType,
-	RoomsType,
-	ShareAccessRights,
-	VectorizationStatus,
+  FolderType,
+  RoomsType,
+  ShareAccessRights,
+  VectorizationStatus,
 } from "../../enums";
 import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { Text } from "@docspace/ui-kit/components/text";
@@ -58,329 +59,375 @@ import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 import type { QuickButtonsProps } from "./QuickButtons.types";
 import { FailedVectorizationBadge } from "../failed-vectorization-badge";
+import { AccessInfoPopover } from "./AccessInfoPopover";
 
 export const QuickButtons = memo((props: QuickButtonsProps) => {
-	const {
-		t,
-		item,
-		onClickDownload,
-		onCopyPrimaryLink,
-		isDisabled,
-		viewAs,
-		isPublicRoom,
-		onClickShare,
-		isArchiveFolder,
-		isIndexEditingMode,
-		showLifetimeIcon,
-		expiredDate,
-		roomLifetime,
-		onCreateRoom,
-		isTemplatesFolder,
-		onClickLock,
-		onClickFavorite,
-		onRetryVectorization,
-		isTrashFolder,
-		openShareTab,
-	} = props;
+  const {
+    t,
+    item,
+    onClickDownload,
+    onCopyPrimaryLink,
+    isDisabled,
+    viewAs,
+    isPublicRoom,
+    onClickShare,
+    isArchiveFolder,
+    isIndexEditingMode,
+    showLifetimeIcon,
+    expiredDate,
+    roomLifetime,
+    onCreateRoom,
+    isTemplatesFolder,
+    onClickLock,
+    onClickFavorite,
+    onRetryVectorization,
+    isTrashFolder,
+    openShareTab,
+    onOpenAccessSettings,
+  } = props;
 
-	const { id, shared, security } = item;
+  const [isAccessInfoPopoverOpen, setIsAccessInfoPopoverOpen] = useState(false);
+  const accessInfoIconRef = useRef<HTMLDivElement>(null);
 
-	const isTile = viewAs === "tile";
-	const desktopView = !isTile && isDesktop();
+  const handleAccessInfoIconClick = useCallback(() => {
+    setIsAccessInfoPopoverOpen(true);
+  }, []);
 
-	const lockedBy = "lockedBy" in item ? (item.lockedBy as string) : undefined;
-	const locked = "locked" in item ? item.locked : undefined;
-	const iconLock = desktopView ? LockedIconReact12Svg : LockedIconReactSvg;
-	const canLock = security && "Lock" in security ? security.Lock : undefined;
+  const handleCloseAccessInfoPopover = useCallback(() => {
+    setIsAccessInfoPopoverOpen(false);
+  }, []);
 
-	const showShareIcon = !isNil(item.shareSettings?.PrimaryExternalLink);
+  const handleOpenAccessSettings = useCallback(() => {
+    if (onOpenAccessSettings) {
+      onOpenAccessSettings();
+    }
+  }, [onOpenAccessSettings]);
 
-	const tabletViewQuickButton = isTablet() || isTabletDevice;
+  const { id, shared, security } = item;
 
-	const sizeQuickButton: IconSizeType =
-		isTile || tabletViewQuickButton ? IconSizeType.medium : IconSizeType.small;
+  const isTile = viewAs === "tile";
+  const desktopView = !isTile && isDesktop();
 
-	const isAvailableDownloadFile =
-		isPublicRoom && item.security?.Download && viewAs === "tile";
+  const lockedBy = "lockedBy" in item ? (item.lockedBy as string) : undefined;
+  const locked = "locked" in item ? item.locked : undefined;
+  const iconLock = desktopView ? LockedIconReact12Svg : LockedIconReactSvg;
+  const canLock = security && "Lock" in security ? security.Lock : undefined;
 
-	const isAvailableShareFile = item.canShare && !isRoom(item);
+  const showShareIcon = !isNil(item.shareSettings?.PrimaryExternalLink);
 
-	const isAvailableShareForUser =
-		item.canShare &&
-		!isRoom(item) &&
-		(item.rootFolderType === FolderType.USER ||
-			item.rootFolderType === FolderType.SHARE);
+  const tabletViewQuickButton = isTablet() || isTabletDevice;
 
-	const isPublicRoomType =
-		"roomType" in item &&
-		(item.roomType === RoomsType.PublicRoom ||
-			item.roomType === RoomsType.FormRoom ||
-			item.roomType === RoomsType.CustomRoom);
+  const sizeQuickButton: IconSizeType =
+    isTile || tabletViewQuickButton ? IconSizeType.medium : IconSizeType.small;
 
-	const haveLinksRight =
-		item?.access === ShareAccessRights.RoomManager ||
-		item?.access === ShareAccessRights.None;
+  const isAvailableDownloadFile =
+    isPublicRoom && item.security?.Download && viewAs === "tile";
 
-	const showCopyLinkIcon =
-		isPublicRoomType &&
-		haveLinksRight &&
-		item.shared &&
-		!isArchiveFolder &&
-		!isTile;
+  const isAvailableShareFile = item.canShare && !isRoom(item);
 
-	const showFailedVectorizationBadge =
-		isTile &&
-		"vectorizationStatus" in item &&
-		item.vectorizationStatus === VectorizationStatus.Failed;
+  const isAvailableShareForUser =
+    item.canShare &&
+    !isRoom(item) &&
+    (item.rootFolderType === FolderType.USER ||
+      item.rootFolderType === FolderType.SHARE);
 
-	const hasRetryVectorizationAccess =
-		security && "Vectorization" in security && security.Vectorization;
-	const expirationLinkDate =
-		item && "expirationDate" in item ? item.expirationDate : "";
+  const isPublicRoomType =
+    "roomType" in item &&
+    (item.roomType === RoomsType.PublicRoom ||
+      item.roomType === RoomsType.FormRoom ||
+      item.roomType === RoomsType.CustomRoom);
 
-	const getTooltipContent = () => {
-		const text = roomLifetime?.deletePermanently
-			? t("Common:FileWillBeDeletedPermanently", { date: expiredDate || "" })
-			: t("Common:SectionMoveNotification", {
-					sectionName: t("Common:TrashSection"),
-					date: expiredDate || "",
-				});
-		return text;
-	};
+  const haveLinksRight =
+    item?.access === ShareAccessRights.RoomManager ||
+    item?.access === ShareAccessRights.None;
 
-	const getLockTooltip = () => {
-		return t("Common:LockedBy", { userName: lockedBy || "" });
-	};
+  const showCopyLinkIcon =
+    isPublicRoomType &&
+    haveLinksRight &&
+    item.shared &&
+    !isArchiveFolder &&
+    !isTile;
 
-	const getExpirationLinkDateTooltipContent = () => {
-		if (
-			item.external &&
-			(item.isLinkExpired ||
-				(expirationLinkDate && isExpired(expirationLinkDate)))
-		)
-			return (
-				<Text fontSize="12px" fontWeight={400} noSelect>
-					{t("Common:LinkExpired")}
-				</Text>
-			);
+  const showFailedVectorizationBadge =
+    isTile &&
+    "vectorizationStatus" in item &&
+    item.vectorizationStatus === VectorizationStatus.Failed;
 
-		if (!expirationLinkDate) return null;
+  const hasRetryVectorizationAccess =
+    security && "Vectorization" in security && security.Vectorization;
+  const expirationLinkDate =
+    item && "expirationDate" in item ? item.expirationDate : "";
 
-		const date = getDate(expirationLinkDate);
+  const getTooltipContent = () => {
+    const text = roomLifetime?.deletePermanently
+      ? t("Common:FileWillBeDeletedPermanently", { date: expiredDate || "" })
+      : t("Common:SectionMoveNotification", {
+          sectionName: t("Common:TrashSection"),
+          date: expiredDate || "",
+        });
+    return text;
+  };
 
-		return (
-			<Text fontSize="12px" fontWeight={400} noSelect>
-				<Trans
-					t={t}
-					ns="Common"
-					values={{ date }}
-					i18nKey="LinkExpirationDate"
-					components={{ 1: <strong /> }}
-				/>
-			</Text>
-		);
-	};
+  const getLockTooltip = () => {
+    return t("Common:LockedBy", { userName: lockedBy || "" });
+  };
 
-	const getExpirationLinkDateText = () => {
-		if (
-			item.external &&
-			(item.isLinkExpired ||
-				(expirationLinkDate && isExpired(expirationLinkDate)))
-		) {
-			return t("Common:LinkExpired");
-		}
+  const getExpirationLinkDateTooltipContent = () => {
+    if (
+      item.external &&
+      (item.isLinkExpired ||
+        (expirationLinkDate && isExpired(expirationLinkDate)))
+    )
+      return (
+        <Text fontSize="12px" fontWeight={400} noSelect>
+          {t("Common:LinkExpired")}
+        </Text>
+      );
 
-		if (!expirationLinkDate) return null;
+    if (!expirationLinkDate) return null;
 
-		// For complex content with Trans, we'll use custom Tooltip
-		return null;
-	};
+    const date = getDate(expirationLinkDate);
 
-	const expirationLinkDateText = getExpirationLinkDateText();
-	const hasComplexExpirationContent =
-		expirationLinkDate && !expirationLinkDateText;
+    return (
+      <Text fontSize="12px" fontWeight={400} noSelect>
+        <Trans
+          t={t}
+          ns="Common"
+          values={{ date }}
+          i18nKey="LinkExpirationDate"
+          components={{ 1: <strong /> }}
+        />
+      </Text>
+    );
+  };
 
-	const onIconLockClick = () => {
-		if (!canLock) {
-			return;
-		}
+  const getExpirationLinkDateText = () => {
+    if (
+      item.external &&
+      (item.isLinkExpired ||
+        (expirationLinkDate && isExpired(expirationLinkDate)))
+    ) {
+      return t("Common:LinkExpired");
+    }
 
-		if (onClickLock) onClickLock();
-	};
+    if (!expirationLinkDate) return null;
 
-	const showFavoriteIcon =
-		!isRoom(item) && item?.isFavorite && !isPublicRoom && !isTrashFolder;
+    // For complex content with Trans, we'll use custom Tooltip
+    return null;
+  };
 
-	return (
-		<div className="badges additional-badges badges__quickButtons">
-			{!isIndexEditingMode ? (
-				<>
-					{showLifetimeIcon ? (
-						<div
-							data-tooltip-id="info-tooltip"
-							data-tooltip-content={getTooltipContent()}
-							data-tooltip-place="bottom"
-						>
-							<IconButton
-								iconName={LifetimeReactSvgUrl}
-								className="badge file-lifetime icons-group"
-								size={sizeQuickButton}
-								isClickable
-								isDisabled={isDisabled}
-							/>
-						</div>
-					) : null}
+  const expirationLinkDateText = getExpirationLinkDateText();
+  const hasComplexExpirationContent =
+    expirationLinkDate && !expirationLinkDateText;
 
-					{isAvailableDownloadFile ? (
-						<IconButton
-							iconNode={<FileActionsDownloadReactSvg />}
-							className="badge download-file icons-group"
-							size={sizeQuickButton}
-							onClick={onClickDownload}
-							isDisabled={isDisabled}
-							hoverColor="accent"
-							title={t("Common:Download")}
-						/>
-					) : null}
-					{isTemplatesFolder ? (
-						<IconButton
-							iconName={CreateRoomReactSvgUrl}
-							className="badge create-room icons-group"
-							size={IconSizeType.medium}
-							onClick={onCreateRoom}
-							isDisabled={isDisabled}
-							hoverColor="accent"
-							title={t("Common:CreateRoom")}
-						/>
-					) : null}
-					{showCopyLinkIcon ? (
-						<IconButton
-							iconName={LinkReactSvgUrl}
-							className="badge copy-link icons-group"
-							size={sizeQuickButton}
-							onClick={onCopyPrimaryLink}
-							isDisabled={isDisabled}
-							hoverColor="accent"
-							title={t("Common:CopySharedLink")}
-						/>
-					) : null}
-					{isAvailableShareFile && !isAvailableShareForUser ? (
-						<IconButton
-							iconName={LinkReactSvgUrl}
-							className={classNames("badge copy-link icons-group", {
-								"create-share-link": !item.shared && !showShareIcon,
-								"link-shared": item.shared || showShareIcon,
-							})}
-							size={sizeQuickButton}
-							onClick={onClickShare}
-							color={shared || showShareIcon ? "accent" : undefined}
-							isDisabled={isDisabled}
-							hoverColor="accent"
-							title={t("Common:CopySharedLink")}
-						/>
-					) : null}
-					{isAvailableShareForUser ? (
-						<IconButton
-							iconName={ShareSvgUrl}
-							className={classNames("badge copy-link icons-group", {
-								"create-share-link": !item.sharedForUser && !item.shared,
-								"link-shared": item.sharedForUser || item.shared,
-							})}
-							size={sizeQuickButton}
-							onClick={openShareTab}
-							color={item.sharedForUser || item.shared ? "accent" : undefined}
-							isDisabled={isDisabled}
-							hoverColor="accent"
-						/>
-					) : null}
-					{locked && isTile ? (
-						<div
-							data-tooltip-id={
-								lockedBy && !canLock ? "info-tooltip" : undefined
-							}
-							data-tooltip-content={
-								lockedBy && !canLock ? getLockTooltip() : undefined
-							}
-							data-tooltip-place="bottom"
-						>
-							<IconButton
-								iconName={iconLock}
-								className={classNames("badge lock-file icons-group", {
-									"file-locked": locked,
-								})}
-								size={sizeQuickButton}
-								data-id={id}
-								data-locked={!!locked}
-								onClick={onIconLockClick}
-								color="accent"
-								title={t("Common:UnblockFile")}
-							/>
-						</div>
-					) : null}
+  const onIconLockClick = () => {
+    if (!canLock) {
+      return;
+    }
 
-					{expirationLinkDate ? (
-						<>
-							<div
-								data-tooltip-id={
-									hasComplexExpirationContent ? undefined : "info-tooltip"
-								}
-								data-tooltip-content={
-									!hasComplexExpirationContent
-										? expirationLinkDateText
-										: undefined
-								}
-								data-tooltip-place="bottom"
-							>
-								<IconButton
-									iconName={ExpirationLinkDateReactSvgUrl}
-									className="badge expiration-link-date icons-group"
-									isClickable
-									size={sizeQuickButton}
-									isDisabled={isDisabled}
-									data-tooltip-id={
-										hasComplexExpirationContent
-											? `expirationLinkDateTooltip${item.id}`
-											: undefined
-									}
-									color={globalColors.lightErrorStatus}
-								/>
-							</div>
-							{hasComplexExpirationContent ? (
-								<Tooltip
-									id={`expirationLinkDateTooltip${item.id}`}
-									place="bottom"
-									getContent={getExpirationLinkDateTooltipContent}
-									maxWidth="300px"
-									openOnClick
-								/>
-							) : null}
-						</>
-					) : null}
+    if (onClickLock) onClickLock();
+  };
 
-					{showFavoriteIcon ? (
-						<IconButton
-							iconName={
-								item?.isFavorite ? FavoriteFillReactSvgUrl : FavoriteReactSvgUrl
-							}
-							className={classNames("badge icons-group")}
-							size={sizeQuickButton}
-							onClick={onClickFavorite}
-							color="accent"
-							isDisabled={isDisabled}
-							title={t("Common:Favorites")}
-						/>
-					) : null}
+  const showFavoriteIcon =
+    !isRoom(item) && item?.isFavorite && !isPublicRoom && !isTrashFolder;
 
-					{showFailedVectorizationBadge ? (
-						<FailedVectorizationBadge
-							className={classNames("badge icons-group")}
-							size="medium"
-							onRetryVectorization={onRetryVectorization}
-							withRetryVectorization={hasRetryVectorizationAccess}
-						/>
-					) : null}
-				</>
-			) : null}
-		</div>
-	);
+  const showAccessInfoIcon =
+    item?.access === ShareAccessRights.RoomManager ||
+    item?.access === ShareAccessRights.None;
+
+  return (
+    <div className="badges additional-badges badges__quickButtons">
+      {!isIndexEditingMode ? (
+        <>
+          {showLifetimeIcon ? (
+            <div
+              data-tooltip-id="info-tooltip"
+              data-tooltip-content={getTooltipContent()}
+              data-tooltip-place="bottom"
+            >
+              <IconButton
+                iconName={LifetimeReactSvgUrl}
+                className="badge file-lifetime icons-group"
+                size={sizeQuickButton}
+                isClickable
+                isDisabled={isDisabled}
+              />
+            </div>
+          ) : null}
+
+          {isAvailableDownloadFile ? (
+            <IconButton
+              iconNode={<FileActionsDownloadReactSvg />}
+              className="badge download-file icons-group"
+              size={sizeQuickButton}
+              onClick={onClickDownload}
+              isDisabled={isDisabled}
+              hoverColor="accent"
+              title={t("Common:Download")}
+            />
+          ) : null}
+          {isTemplatesFolder ? (
+            <IconButton
+              iconName={CreateRoomReactSvgUrl}
+              className="badge create-room icons-group"
+              size={IconSizeType.medium}
+              onClick={onCreateRoom}
+              isDisabled={isDisabled}
+              hoverColor="accent"
+              title={t("Common:CreateRoom")}
+            />
+          ) : null}
+          {showCopyLinkIcon ? (
+            <IconButton
+              iconName={LinkReactSvgUrl}
+              className="badge copy-link icons-group"
+              size={sizeQuickButton}
+              onClick={onCopyPrimaryLink}
+              isDisabled={isDisabled}
+              hoverColor="accent"
+              title={t("Common:CopySharedLink")}
+            />
+          ) : null}
+          {isAvailableShareFile && !isAvailableShareForUser ? (
+            <IconButton
+              iconName={LinkReactSvgUrl}
+              className={classNames("badge copy-link icons-group", {
+                "create-share-link": !item.shared && !showShareIcon,
+                "link-shared": item.shared || showShareIcon,
+              })}
+              size={sizeQuickButton}
+              onClick={onClickShare}
+              color={shared || showShareIcon ? "accent" : undefined}
+              isDisabled={isDisabled}
+              hoverColor="accent"
+              title={t("Common:CopySharedLink")}
+            />
+          ) : null}
+          {isAvailableShareForUser ? (
+            <IconButton
+              iconName={ShareSvgUrl}
+              className={classNames("badge copy-link icons-group", {
+                "create-share-link": !item.sharedForUser && !item.shared,
+                "link-shared": item.sharedForUser || item.shared,
+              })}
+              size={sizeQuickButton}
+              onClick={openShareTab}
+              color={item.sharedForUser || item.shared ? "accent" : undefined}
+              isDisabled={isDisabled}
+              hoverColor="accent"
+            />
+          ) : null}
+          {locked && isTile ? (
+            <div
+              data-tooltip-id={
+                lockedBy && !canLock ? "info-tooltip" : undefined
+              }
+              data-tooltip-content={
+                lockedBy && !canLock ? getLockTooltip() : undefined
+              }
+              data-tooltip-place="bottom"
+            >
+              <IconButton
+                iconName={iconLock}
+                className={classNames("badge lock-file icons-group", {
+                  "file-locked": locked,
+                })}
+                size={sizeQuickButton}
+                data-id={id}
+                data-locked={!!locked}
+                onClick={onIconLockClick}
+                color="accent"
+                title={t("Common:UnblockFile")}
+              />
+            </div>
+          ) : null}
+
+          {expirationLinkDate ? (
+            <>
+              <div
+                data-tooltip-id={
+                  hasComplexExpirationContent ? undefined : "info-tooltip"
+                }
+                data-tooltip-content={
+                  !hasComplexExpirationContent
+                    ? expirationLinkDateText
+                    : undefined
+                }
+                data-tooltip-place="bottom"
+              >
+                <IconButton
+                  iconName={ExpirationLinkDateReactSvgUrl}
+                  className="badge expiration-link-date icons-group"
+                  isClickable
+                  size={sizeQuickButton}
+                  isDisabled={isDisabled}
+                  data-tooltip-id={
+                    hasComplexExpirationContent
+                      ? `expirationLinkDateTooltip${item.id}`
+                      : undefined
+                  }
+                  color={globalColors.lightErrorStatus}
+                />
+              </div>
+              {hasComplexExpirationContent ? (
+                <Tooltip
+                  id={`expirationLinkDateTooltip${item.id}`}
+                  place="bottom"
+                  getContent={getExpirationLinkDateTooltipContent}
+                  maxWidth="300px"
+                  openOnClick
+                />
+              ) : null}
+            </>
+          ) : null}
+
+          {showFavoriteIcon ? (
+            <IconButton
+              iconName={
+                item?.isFavorite ? FavoriteFillReactSvgUrl : FavoriteReactSvgUrl
+              }
+              className={classNames("badge icons-group")}
+              size={sizeQuickButton}
+              onClick={onClickFavorite}
+              color="accent"
+              isDisabled={isDisabled}
+              title={t("Common:Favorites")}
+            />
+          ) : null}
+
+          {showFailedVectorizationBadge ? (
+            <FailedVectorizationBadge
+              className={classNames("badge icons-group")}
+              size="medium"
+              onRetryVectorization={onRetryVectorization}
+              withRetryVectorization={hasRetryVectorizationAccess}
+            />
+          ) : null}
+
+          {showAccessInfoIcon ? (
+            <>
+              <div ref={accessInfoIconRef}>
+                <IconButton
+                  iconName={AccessInfoReactSvgUrl}
+                  className="badge access-info-icon icons-group"
+                  size={sizeQuickButton}
+                  isDisabled={isDisabled}
+                  title={t("Common:AccessInfo")}
+                  onClick={handleAccessInfoIconClick}
+                />
+              </div>
+              <AccessInfoPopover
+                t={t}
+                itemId={id}
+                isOpen={isAccessInfoPopoverOpen}
+                anchorRef={accessInfoIconRef}
+                onClose={handleCloseAccessInfoPopover}
+                onOpenAccessSettings={handleOpenAccessSettings}
+              />
+            </>
+          ) : null}
+        </>
+      ) : null}
+    </div>
+  );
 }, equal);

@@ -25,37 +25,42 @@
  * content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
-import { type TFunction } from "i18next";
 
-import type { TViewAs } from "../../types";
-import { type TRoom, TRoomLifetime } from "../../api/rooms/types";
-import { type TFile, type TFolder } from "../../api/files/types";
+.accessInfoPopover {
+  min-width: 250px;
+  padding: 8px 0;
+  border-radius: 6px;
+  box-shadow: 0px 12px 40px rgba(4, 15, 27, 0.12);
+}
 
-type TQuickButtonItem = TFile | TFolder | TRoom;
+.loaderContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
 
-export type QuickButtonsProps = {
-  t: TFunction;
-  item: TQuickButtonItem;
-  viewAs: TViewAs;
-  roomLifetime?: TRoomLifetime;
-  expiredDate?: string | null;
+.userItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  cursor: default;
 
-  isDisabled?: boolean;
-  isPublicRoom?: boolean;
-  isArchiveFolder?: boolean;
-  isTemplatesFolder?: boolean;
-  isIndexEditingMode?: boolean;
-  showLifetimeIcon?: boolean;
-  isRecentFolder?: boolean;
-  isTrashFolder?: boolean;
+  &:hover {
+    background-color: transparent;
+  }
+}
 
-  onClickDownload?: VoidFunction;
-  onCopyPrimaryLink?: VoidFunction;
-  onClickShare?: VoidFunction;
-  onCreateRoom?: VoidFunction;
-  onClickLock?: VoidFunction;
-  onClickFavorite?: VoidFunction;
-  onRetryVectorization?: VoidFunction;
-  openShareTab?: VoidFunction;
-  onOpenAccessSettings?: VoidFunction;
-};
+.userName {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.accessSettingsItem {
+  margin-top: 4px;
+  border-top: 1px solid #eceef1;
+  padding-top: 8px;
+}

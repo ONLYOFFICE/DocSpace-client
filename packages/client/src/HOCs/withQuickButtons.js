@@ -164,6 +164,11 @@ export default function withQuickButtons(WrappedComponent) {
       openShareTab();
     };
 
+    onOpenAccessSettings = () => {
+      const { item, setAccessSettingsPanelVisible } = this.props;
+      setAccessSettingsPanelVisible(true, item);
+    };
+
     render() {
       const {
         t,
@@ -213,6 +218,7 @@ export default function withQuickButtons(WrappedComponent) {
           onRetryVectorization={this.onRetryVectorization}
           isTrashFolder={isTrashFolder}
           openShareTab={this.openShareTab}
+          onOpenAccessSettings={this.onOpenAccessSettings}
         />
       );
 
@@ -256,7 +262,8 @@ export default function withQuickButtons(WrappedComponent) {
 
       const { isIndexEditingMode } = indexingStore;
 
-      const { setSharingPanelVisible } = dialogsStore;
+      const { setSharingPanelVisible, setAccessSettingsPanelVisible } =
+        dialogsStore;
 
       const { isPublicRoom } = publicRoomStore;
 
@@ -292,6 +299,7 @@ export default function withQuickButtons(WrappedComponent) {
         retryVectorization,
         isTrashFolder,
         showForcedInfoPanelLoader,
+        setAccessSettingsPanelVisible,
       };
     },
   )(observer(WithQuickButtons));

@@ -2720,7 +2720,10 @@ class FilesStore {
       isRecentFolder,
       isFavoritesFolder,
     } = this.treeFoldersStore;
-    const { security } = this.selectedFolderStore;
+    const { security, roomType, stealthMode } = this.selectedFolderStore;
+    const { isVDRRoomRoot } = this.treeFoldersStore;
+    const isVDRRoomWithStealthMode =
+      (roomType === RoomsType.VirtualDataRoom || isVDRRoomRoot) && stealthMode;
 
     const { enablePlugins } = this.settingsStore;
 
@@ -2790,6 +2793,7 @@ class FilesStore {
         "separator0",
         "ask-ai",
         "separator6",
+        "access-settings",
         "filling-status",
         "start-filling",
         "reset-and-start-filling",
@@ -2873,6 +2877,10 @@ class FilesStore {
           "mark-as-favorite",
           "remove-from-favorites",
         ]);
+      }
+
+      if (!isVDRRoomWithStealthMode) {
+        fileOptions = removeOptions(fileOptions, ["access-settings"]);
       }
 
       if (!item.security?.FillingStatus) {
@@ -3152,7 +3160,7 @@ class FilesStore {
         "separator0",
         "create-room-from-template",
         "edit-template",
-        "access-settings",
+        "template-access-settings",
         "link-for-room-members",
         "room-info",
         "separator1",

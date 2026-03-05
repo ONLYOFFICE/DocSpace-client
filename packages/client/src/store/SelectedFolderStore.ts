@@ -167,6 +167,8 @@ class SelectedFolderStore {
 
   watermark: TWatermark | null = null;
 
+  stealthMode: boolean | undefined = true;
+
   denyDownload: boolean | undefined;
 
   usedSpace: number | undefined;
@@ -248,6 +250,7 @@ class SelectedFolderStore {
       isCustomQuota: this.isCustomQuota,
       order: this.order,
       watermark: this.watermark,
+      stealthMode: this.stealthMode,
       passwordProtected: this.passwordProtected,
       external: this.external,
       changeDocumentsTabs: this.changeDocumentsTabs,
@@ -317,6 +320,7 @@ class SelectedFolderStore {
     this.isCustomQuota = undefined;
     this.order = null;
     this.watermark = null;
+    this.stealthMode = undefined;
     this.passwordProtected = false;
     this.external = false;
     this.chatSettings = undefined;

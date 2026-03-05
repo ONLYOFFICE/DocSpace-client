@@ -1011,6 +1011,10 @@ class ContextOptionsStore {
     this.dialogsStore.setTemplateAccessSettingsVisible(true);
   };
 
+  onOpenAccessSettingsPanel = (item) => {
+    this.dialogsStore.setAccessSettingsPanelVisible(true, item);
+  };
+
   // onLoadLinks = async (t, item) => {
   //   const promise = new Promise(async (resolve, reject) => {
   //     let linksArray = [];
@@ -2142,6 +2146,14 @@ class ContextOptionsStore {
         disabled: false,
       },
       {
+        id: "option_access-settings",
+        key: "access-settings",
+        label: t("AccessSettings"),
+        icon: SettingsReactSvgUrl,
+        onClick: () => this.onOpenAccessSettingsPanel(item),
+        disabled: false,
+      },
+      {
         id: "option_link-for-room-members",
         key: "link-for-room-members",
         label: t("Common:CopyLink"),
@@ -2243,8 +2255,8 @@ class ContextOptionsStore {
         disabled: !item.security?.Reconnect || !item.security?.EditRoom,
       },
       {
-        id: "option_access-settings",
-        key: "access-settings",
+        id: "option_template-access-settings",
+        key: "template-access-settings",
         label: t("AccessSettings"),
         icon: PersonReactSvgUrl,
         onClick: () => this.onOpenTemplateAccessOptions(),
@@ -2880,7 +2892,15 @@ class ContextOptionsStore {
             ],
             ["filling-status", "reset-and-start-filling"],
             ["ask-ai"],
-            ["share", "move", "copy-to", "download", "edit-index", "rename"],
+            [
+              "access-settings",
+              "share",
+              "move",
+              "copy-to",
+              "download",
+              "edit-index",
+              "rename",
+            ],
             [
               "mark-as-favorite",
               "block-unblock-version",

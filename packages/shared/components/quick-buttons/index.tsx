@@ -42,6 +42,7 @@ import LockedIconReact12Svg from "PUBLIC_DIR/images/icons/12/lock.react.svg?url"
 import FavoriteReactSvgUrl from "PUBLIC_DIR/images/favorite.react.svg?url";
 import FavoriteFillReactSvgUrl from "PUBLIC_DIR/images/favorite.fill.react.svg?url";
 import AccessInfoReactSvgUrl from "PUBLIC_DIR/images/access-info.react.svg?url";
+import AccessInfoEyeReactSvgUrl from "PUBLIC_DIR/images/access-info-eye.react.svg?url";
 
 import { classNames, IconSizeType, isTablet, isDesktop } from "../../utils";
 import {
@@ -235,6 +236,24 @@ export const QuickButtons = memo((props: QuickButtonsProps) => {
     item?.access === ShareAccessRights.RoomManager ||
     item?.access === ShareAccessRights.None;
 
+  const itemWithAccess = item as typeof item & {
+    availableToEveryone?: boolean;
+    partialAccess?: boolean;
+  };
+  const isAvailableToEveryone = itemWithAccess?.availableToEveryone === true;
+  const isPartialAccess = itemWithAccess?.partialAccess === true;
+  const accessInfoType: "everyone" | "partial" | "restricted" =
+    isAvailableToEveryone
+      ? "everyone"
+      : isPartialAccess
+        ? "partial"
+        : "restricted";
+
+  const accessInfoIcon =
+    isAvailableToEveryone || isPartialAccess
+      ? AccessInfoEyeReactSvgUrl
+      : AccessInfoReactSvgUrl;
+
   return (
     <div className="badges additional-badges badges__quickButtons">
       {!isIndexEditingMode ? (
@@ -408,12 +427,13 @@ export const QuickButtons = memo((props: QuickButtonsProps) => {
             <>
               <div ref={accessInfoIconRef}>
                 <IconButton
-                  iconName={AccessInfoReactSvgUrl}
+                  iconName={accessInfoIcon}
                   className="badge access-info-icon icons-group"
                   size={sizeQuickButton}
                   isDisabled={isDisabled}
                   title={t("Common:AccessInfo")}
                   onClick={handleAccessInfoIconClick}
+                  color={isAvailableToEveryone ? "accent" : undefined}
                 />
               </div>
               <AccessInfoPopover
@@ -423,6 +443,7 @@ export const QuickButtons = memo((props: QuickButtonsProps) => {
                 anchorRef={accessInfoIconRef}
                 onClose={handleCloseAccessInfoPopover}
                 onOpenAccessSettings={handleOpenAccessSettings}
+                accessInfoType={accessInfoType}
               />
             </>
           ) : null}

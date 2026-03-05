@@ -5,6 +5,7 @@
   "AboutHeader": "About this program",
   "AccessDenied": "Access denied",
   "AccessInfo": "Access info",
+  "FileAvailableToEveryone": "File available to everyone. All room contacts are able to view this file.",
   "Accesses": "Accesses",
   "AccessibleViaLink": "Accessible via link",
   "AccessPasswordMessage": "This file is protected, please enter the password to access it or download in original format.",

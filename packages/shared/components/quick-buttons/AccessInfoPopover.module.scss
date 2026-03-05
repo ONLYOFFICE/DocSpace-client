@@ -27,7 +27,7 @@
  */
 
 .accessInfoPopover {
-  min-width: 250px;
+  max-width: 230px;
   padding: 8px 0;
   border-radius: 6px;
   box-shadow: 0px 12px 40px rgba(4, 15, 27, 0.12);
@@ -63,4 +63,19 @@
   margin-top: 4px;
   border-top: 1px solid var(--aside-header-border-color);
   padding-top: 8px;
+}
+
+.everyoneContent {
+  padding: 0px 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.everyoneText {
+  line-height: 20px;
+}
+
+.accessSettingsLink {
+  font-size: 13px;
+  font-weight: 600;
 }

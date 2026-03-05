@@ -40,6 +40,7 @@ import {
 } from "@docspace/ui-kit/components/avatar";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
 
 import { getFakeFileSharedUsers } from "../../api/files";
 
@@ -54,6 +55,8 @@ type TSharedUser = {
   isAdmin?: boolean;
 };
 
+type TAccessInfoType = "everyone" | "partial" | "restricted";
+
 type AccessInfoPopoverProps = {
   t: TFunction;
   itemId?: string | number;
@@ -61,6 +64,7 @@ type AccessInfoPopoverProps = {
   anchorRef: React.RefObject<HTMLDivElement | null>;
   onClose: () => void;
   onOpenAccessSettings: () => void;
+  accessInfoType?: TAccessInfoType;
 };
 
 export const AccessInfoPopover = ({
@@ -70,6 +74,7 @@ export const AccessInfoPopover = ({
   anchorRef,
   onClose,
   onOpenAccessSettings,
+  accessInfoType = "restricted",
 }: AccessInfoPopoverProps) => {
   const [users, setUsers] = useState<TSharedUser[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -99,34 +104,55 @@ export const AccessInfoPopover = ({
   }, [itemId]);
 
   useEffect(() => {
-    if (isOpen) {
+    if (isOpen && accessInfoType !== "everyone") {
       fetchUsers();
     }
-  }, [isOpen, fetchUsers]);
+  }, [isOpen, fetchUsers, accessInfoType]);
 
   const handleAccessSettingsClick = () => {
     onClose();
     onOpenAccessSettings();
   };
 
-  const handleClickOutside = useCallback(() => {
-    onClose();
-  }, [onClose]);
-
-  if (!isOpen) return null;
+  const handleClickOutside = useCallback(
+    (e: Event) => {
+      const target = e.target as HTMLElement;
+      if (anchorRef.current?.contains(target)) return;
+      onClose();
+    },
+    [onClose, anchorRef],
+  );
 
   return (
     <DropDown
       open={isOpen}
       forwardedRef={anchorRef}
       clickOutsideAction={handleClickOutside}
-      eventTypes={["click", "mousedown"]}
       directionX="right"
       directionY="bottom"
       withDynamicScrollbar
       className={styles.accessInfoPopover}
+      withBackdrop
     >
-      {isLoading ? (
+      {accessInfoType === "everyone" ? (
+        <div className={styles.everyoneContent}>
+          <Text
+            className={styles.everyoneText}
+            fontSize="12px"
+            fontWeight={400}
+          >
+            {t("Common:FileAvailableToEveryone")}
+          </Text>
+          <Link
+            type={LinkType.action}
+            className={styles.accessSettingsLink}
+            onClick={handleAccessSettingsClick}
+            isHovered
+          >
+            {t("Files:AccessSettings")}
+          </Link>
+        </div>
+      ) : isLoading ? (
         <div className={styles.loaderContainer}>
           <Loader type={LoaderTypes.track} />
         </div>

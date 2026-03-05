@@ -76,6 +76,7 @@ vi.mock("react-device-detect", () => ({
   isTablet: false,
   isMobile: false,
   isMobileOnly: false,
+  isIOS: false,
 }));
 
 const mockT = ((key: string, params?: Record<string, string>) => {

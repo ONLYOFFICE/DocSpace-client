@@ -41,7 +41,7 @@ import useSocketHelper from "@/hooks/useSocketHelper";
 import useShareDialog from "@/hooks/useShareDialog";
 import useFilesSettings from "@/hooks/useFilesSettings";
 import useUpdateSearchParamId from "@/hooks/useUpdateSearchParamId";
-import { useStartFillingPanel } from "@/hooks/useStartFillingPanel";
+import { useRoleMappingPanel } from "@/hooks/useRoleMappingPanel";
 import useSDK from "@/hooks/useSDK";
 
 import { calculateAsideHeight } from "@/utils";
@@ -76,9 +76,9 @@ const SharingDialog = dynamic(() => import("./ShareDialog"), {
   ssr: false,
 });
 
-const StartFillingPanel = dynamic(
+const RoleMappingPanel = dynamic(
   async () =>
-    (await import("@docspace/shared/dialogs/start-filling")).StartFillingPanel,
+    (await import("@docspace/shared/dialogs/role-mapping")).RoleMappingPanel,
   {
     ssr: false,
   },
@@ -233,11 +233,11 @@ const Root = ({
     roles,
     onStartFilling,
     inviteUserToRoom,
-    startFillingPanelVisible,
-    setStartFillingPanelVisible,
-    onStartFillingVDRPanel,
-    onSubmitStartFilling,
-  } = useStartFillingPanel(fileInfo, roomId);
+    roleMappingPanelVisible,
+    setRoleMappingPanelVisible,
+    onOpenRoleMappingPanel,
+    onSubmitFormRoleMapping,
+  } = useRoleMappingPanel(fileInfo, roomId);
 
   useUpdateSearchParamId(fileId, hash);
   const {
@@ -275,7 +275,7 @@ const Root = ({
       isSharingDialogVisible ||
       isVisibleSelectFolderDialog ||
       selectFileDialogVisible ||
-      startFillingPanelVisible ||
+      roleMappingPanelVisible ||
       fillingStatusDialogVisible ||
       shareFormDialogVisible
     ) {
@@ -294,7 +294,7 @@ const Root = ({
     isSharingDialogVisible,
     isVisibleSelectFolderDialog,
     selectFileDialogVisible,
-    startFillingPanelVisible,
+    roleMappingPanelVisible,
     fillingStatusDialogVisible,
     shareFormDialogVisible,
   ]);
@@ -359,7 +359,7 @@ const Root = ({
           onSDKRequestSelectDocument={onSDKRequestSelectDocument}
           onSDKRequestSelectSpreadsheet={onSDKRequestSelectSpreadsheet}
           organizationName={organizationName}
-          onStartFillingVDRPanel={onStartFillingVDRPanel}
+          onOpenRoleMappingPanel={onOpenRoleMappingPanel}
           setFillingStatusDialogVisible={setFillingStatusDialogVisible}
           openShareFormDialog={openShareFormDialog}
           onStartFilling={onStartFilling}
@@ -403,8 +403,8 @@ const Root = ({
         />
       ) : null}
 
-      {user && settings && fileInfo && startFillingPanelVisible && roomId ? (
-        <StartFillingPanel
+      {user && settings && fileInfo && roleMappingPanelVisible && roomId ? (
+        <RoleMappingPanel
           withBorder
           user={user}
           roles={roles}
@@ -412,9 +412,9 @@ const Root = ({
           settings={settings}
           fileId={fileInfo.id}
           canEditRoom={canEditRoom}
-          onSubmit={onSubmitStartFilling}
+          onSubmit={onSubmitFormRoleMapping}
           inviteUserToRoom={inviteUserToRoom}
-          setStartFillingPanelVisible={setStartFillingPanelVisible}
+          setRoleMappingPanelVisible={setRoleMappingPanelVisible}
         />
       ) : null}
       {fillingStatusDialogVisible && fileInfo && user ? (

@@ -31,6 +31,8 @@ import Article from "@docspace/ui-kit/components/article";
 import { ArticleProps } from "@docspace/ui-kit/components/article/Article.types";
 import { getUserType } from "@docspace/shared/utils/common";
 
+import ArticlePluginItems from "./ArticlePluginItems/ArticlePluginItems";
+
 const ArticleWrapper = (props: ArticleProps) => {
   const navigate = useNavigate();
 
@@ -47,6 +49,7 @@ export default inject<TStore>(
     currentQuotaStore,
     settingsStore,
     backup,
+    pluginStore,
   }) => {
     const {
       isLiveChatAvailable,
@@ -104,6 +107,10 @@ export default inject<TStore>(
     const { isGracePeriod, isLicenseDateExpired, trialDaysLeft } =
       currentTariffStatusStore;
 
+    const customSlot = pluginStore?.articleButtonItemsList ? (
+      <ArticlePluginItems items={pluginStore.articleButtonItemsList} />
+    ) : null;
+
     return {
       onProfileClick,
       user,
@@ -155,6 +162,7 @@ export default inject<TStore>(
       officeforiosUrl,
       hideAppsBlock:
         !downloaddesktopUrl && !officeforandroidUrl && !officeforiosUrl,
+      customSlot,
     };
   },
 )(observer(ArticleWrapper));

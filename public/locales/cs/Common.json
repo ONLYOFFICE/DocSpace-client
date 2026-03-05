@@ -148,7 +148,6 @@
   "ChooseAnother": "Vyberte si jiný",
   "ChooseExpirationDate": "Omezte dobu dostupnosti tohoto odkazu nastavením data vypršení platnosti.",
   "ChooseFormatText": "Zvolte formát každého stahovaného souboru",
-  "ChooseFromTemplates": "Výběr ze šablon",
   "Clean": "Vymazat",
   "ClearAll": "Vymazat vše",
   "ClearBackupList": "Odstranit všechny zálohy",
@@ -213,7 +212,6 @@
   "CreateFormFillingRoom": "Vytvořit místnost pro vyplnění formuláře",
   "CreateGroup": "Vytvořit skupinu",
   "CreateMasterFormFromFile": "Vytvořit PDF formulář ze souboru",
-  "CreatePDFForm": "Vytvořit PDF formulář ",
   "CreateRoom": "Vytvoření místnosti",
   "CreateVirtualDataRoom": "Vytvoření virtuální datové místnosti",
   "Culture_ar-SA": "عربي (المملكة العربية السعودية)",
@@ -1054,5 +1052,8 @@
   "YouHaveUnsavedChanges": "Máte neuložené změny",
   "YourCurrentDomain": "Vaše aktuální doména",
   "YourLogo": "Vaše logo",
-  "YourTurn": "Jste na řadě"
+  "YourTurn": "Jste na řadě",
+  "Upload": "Nahrát",
+  "Open": "Otevřít",
+  "Quantity": "Množství"
 }

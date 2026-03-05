@@ -34,3 +34,14 @@ export type TIconContainer = {
   has(key: string): boolean;
   get(key: string): string | undefined;
 };
+
+export type TApiErrorShape = {
+  message?: unknown;
+  response?: {
+    data?: {
+      error?: {
+        message?: unknown;
+      };
+    };
+  };
+};

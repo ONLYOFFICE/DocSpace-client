@@ -69,6 +69,7 @@ import {
 import {
   defaultTemplatesHandler,
   defaultTemplatesSetHandler,
+  defaultTemplatesResetHandler,
 } from "./defaultTemplates";
 import {
   filesWithEditorsHandler,
@@ -122,6 +123,7 @@ export {
   validatePublicRoomKeyPasswordHandler,
   defaultTemplatesHandler,
   defaultTemplatesSetHandler,
+  defaultTemplatesResetHandler,
   filesWithEditorsHandler,
   filesWithManyEditorsHandler,
   roomGroupsHandler,

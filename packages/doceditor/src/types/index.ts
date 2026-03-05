@@ -290,7 +290,7 @@ export type EditorProps = {
   onSDKRequestSelectSpreadsheet?: (event: object) => void;
   onSDKRequestSelectDocument?: (event: object) => void;
   onSDKRequestReferenceSource?: (event: object) => void;
-  onStartFillingVDRPanel?: (roles: TFormRole[]) => void;
+  onOpenRoleMappingPanel?: (roles: TFormRole[]) => void;
   setFillingStatusDialogVisible?: React.Dispatch<React.SetStateAction<boolean>>;
   onStartFilling?: VoidFunction;
 };
@@ -419,7 +419,7 @@ export interface UseEventsProps {
   generationToolCallState?: TGenerationToolCallState;
   setFillingStatusDialogVisible?: React.Dispatch<React.SetStateAction<boolean>>;
   openShareFormDialog?: VoidFunction;
-  onStartFillingVDRPanel?: (roles: TFormRole[]) => void;
+  onOpenRoleMappingPanel?: (roles: TFormRole[]) => void;
 }
 
 export interface UseInitProps {

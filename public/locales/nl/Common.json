@@ -148,7 +148,6 @@
   "ChooseAnother": "Kies een andere",
   "ChooseExpirationDate": "Beperk de beschikbaarheidsperiode voor deze link door een vervaldatum in te stellen.",
   "ChooseFormatText": "Kies het formaat voor elk te downloaden bestand",
-  "ChooseFromTemplates": "Kies uit Sjablonen",
   "Clean": "Reinig",
   "ClearAll": "Alles wissen",
   "ClearBackupList": "Verwijder alle back-ups",
@@ -213,7 +212,6 @@
   "CreateFormFillingRoom": "Maak kamer voor het invullen van formulieren",
   "CreateGroup": "Groep aanmaken",
   "CreateMasterFormFromFile": "Maak PDF-formulier van bestand",
-  "CreatePDFForm": "Maak PDF formulier",
   "CreateRoom": "Maak kamer aan",
   "CreateVirtualDataRoom": "Creëer een virtuele data kamer",
   "Culture_ar-SA": "عربي (المملكة العربية السعودية)",
@@ -1054,5 +1052,8 @@
   "YouHaveUnsavedChanges": "U hebt niet opgeslagen wijzigingen",
   "YourCurrentDomain": "Uw huidige domein",
   "YourLogo": "Uw logo",
-  "YourTurn": "Uw beurt"
+  "YourTurn": "Uw beurt",
+  "Upload": "Uploaden",
+  "Open": "Open",
+  "Quantity": "Hoeveelheid"
 }

@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useCallback } from "react";
+import { match, Pattern } from "ts-pattern";
 import isUndefined from "lodash/isUndefined";
 import { useSearchParams } from "next/navigation";
 
@@ -41,6 +42,7 @@ import {
   sendEditorNotify,
   markAsFavorite,
   removeFromFavorite,
+  manageFormFilling,
 } from "@docspace/shared/api/files";
 import type {
   TEditHistory,
@@ -52,19 +54,25 @@ import {
   getModels,
   getDefaultProvider,
 } from "@docspace/shared/api/ai";
-import { ProviderType } from "@docspace/shared/api/ai/enums";
 import type {
   TAiProvider,
   TDefaultProvider,
 } from "@docspace/shared/api/ai/types";
-import { EDITOR_ID, FILLING_STATUS_ID } from "@docspace/shared/constants";
+import {
+  CREATED_FORM_KEY,
+  EDITOR_ID,
+  FILLING_STATUS_ID,
+} from "@docspace/shared/constants";
 import {
   assign,
   frameCallCommand,
   frameCallEvent,
 } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { StartFillingMode } from "@docspace/shared/enums";
+import {
+  FormFillingManageAction,
+  StartFillingMode,
+} from "@docspace/shared/enums";
 import { toastr, type TData } from "@docspace/ui-kit/components/toast";
 import { FolderType } from "@docspace/ui-kit/enums";
 import type { Nullable } from "@docspace/shared/types";
@@ -106,7 +114,7 @@ const useEditorEvents = ({
   generationToolCallState,
   setFillingStatusDialogVisible,
   openShareFormDialog,
-  onStartFillingVDRPanel,
+  onOpenRoleMappingPanel,
 }: UseEventsProps) => {
   const searchParams = useSearchParams();
 
@@ -280,18 +288,10 @@ const useEditorEvents = ({
             } as TAiProvider;
           } else {
             const providers = await getProviders();
-            const compatibleTypes = [
-              ProviderType.PortalAi,
-              ProviderType.OpenAi,
-              ProviderType.OpenRouter,
-              ProviderType.OpenAiCompatible,
-            ];
 
             provider = providers.find(
               (p: TAiProvider) =>
-                p.id === defaultPortalProvider?.providerId &&
-                compatibleTypes.includes(p.type) &&
-                !p.needReset,
+                p.id === defaultPortalProvider?.providerId && !p.needReset,
             );
 
             if (provider) {
@@ -917,26 +917,31 @@ const useEditorEvents = ({
 
   const onRequestStartFilling = useCallback(
     (event: object) => {
-      switch (config?.startFillingMode) {
-        case StartFillingMode.ShareToFillOut:
-          openShareFormDialog?.();
-          break;
-
-        case StartFillingMode.StartFilling:
+      match(config?.startFillingMode)
+        .with(StartFillingMode.ShareToFillOut, () => openShareFormDialog?.())
+        .with(StartFillingMode.StartFilling, () => {
           if (
             typeof event === "object" &&
             event !== null &&
             "data" in event &&
             isFormRole(event.data)
-          ) {
-            onStartFillingVDRPanel?.(event.data);
-          }
-          break;
-        default:
-          break;
-      }
+          )
+            onOpenRoleMappingPanel?.(event.data);
+        })
+        .with(StartFillingMode.StartFillingRoomForm, async () => {
+          await manageFormFilling(fileInfo!.id, FormFillingManageAction.Start);
+
+          sessionStorage.setItem(CREATED_FORM_KEY, JSON.stringify(fileInfo));
+
+          const url = new URL(`${window.location.origin}/rooms/shared/filter`);
+          url.searchParams.set("folder", fileInfo!.folderId.toString());
+          window.location.replace(url.toString());
+        })
+        .otherwise(() => {
+          console.error("Unknown start filling mode");
+        });
     },
-    [config?.startFillingMode, openShareFormDialog, onStartFillingVDRPanel],
+    [config?.startFillingMode, openShareFormDialog, onOpenRoleMappingPanel],
   );
 
   const onRequestRefreshFile = React.useCallback(async () => {

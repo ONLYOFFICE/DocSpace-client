@@ -148,7 +148,6 @@
   "ChooseAnother": "ເລືອກອີກຄັ້ງ",
   "ChooseExpirationDate": "ຈໍາ​ກັດ​ໄລ​ຍະ​ເວ​ລາ​ທີ່​ມີ​ຢູ່​ສໍາ​ລັບ​ການ​ເຊື່ອມ​ຕໍ່​ນີ້​ໂດຍ​ການ​ກໍາ​ນົດ​ວັນ​ຫມົດ​ອາ​ຍຸ​.",
   "ChooseFormatText": "ເລືອກຮູບແບບສຳລັບແຕ່ລະເອກະສານທີ່ຈະດາວໂຫລດ",
-  "ChooseFromTemplates": "ເລືອກຈາກແມ່ແບບ",
   "Clean": "ສະອາດ",
   "ClearAll": "ລຶບລ້າງທັງໝົດ",
   "ClearBackupList": "ລົບ ທັງໝົດ ສໍາຮອງຂໍ້ມູນ",
@@ -213,7 +212,6 @@
   "CreateFormFillingRoom": "ສ້າງຫ້ອງຕື່ມຂໍ້ມູນແບບຟອມ",
   "CreateGroup": "ສ້າງກຸ່ມ",
   "CreateMasterFormFromFile": "ສ້າງແບບຟອມ PDF ຈາກໄຟລ໌",
-  "CreatePDFForm": "ສ້າງແບບຟອມ PDF",
   "CreateRoom": "ສ້າງຫ້ອງ",
   "CreateVirtualDataRoom": "ສ້າງຫ້ອງຂໍ້ມູນດິຈິຕອນ",
   "Culture_ar-SA": "عربي (المملكة العربية السعودية)",
@@ -1054,5 +1052,8 @@
   "YouHaveUnsavedChanges": "ທ່ານມີການປ່ຽນແປງທີ່ຍັງບໍ່ໄດ້ບັນທຶກ",
   "YourCurrentDomain": "ໂດເມນປັດຈຸບັນຂອງທ່ານ",
   "YourLogo": "ໂລໂກ້ຂອງທ່ານ",
-  "YourTurn": "ເປັນຂອງເຈົ້າແລ້ວ"
+  "YourTurn": "ເປັນຂອງເຈົ້າແລ້ວ",
+  "Upload": "ອັບໂຫລດ",
+  "Open": "ເປີດ",
+  "Quantity": "ປະລິमाण"
 }

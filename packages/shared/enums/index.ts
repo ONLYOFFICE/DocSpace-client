@@ -545,11 +545,13 @@ export enum StartFillingMode {
   None,
   ShareToFillOut,
   StartFilling,
+  StartFillingRoomForm,
 }
 
 export enum FormFillingManageAction {
   Stop,
   Resume,
+  Start,
 }
 
 export enum FormFillingTipsState {
@@ -610,6 +612,9 @@ export enum WebhookTriggers {
   GroupCreated = 16,
   GroupUpdated = 32,
   GroupDeleted = 64,
+  FormSubmit = 268435456,
+  FormFilledOut = 536870912,
+  FormStopped = 1073741824,
   FileCreated = 128,
   FileUploaded = 256,
   FileUpdated = 512,

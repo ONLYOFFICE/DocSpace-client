@@ -29,6 +29,7 @@ import LifetimeRoomIconUrl from "PUBLIC_DIR/images/lifetime-room.react.svg?url";
 import RoundedArrowSvgUrl from "PUBLIC_DIR/images/rounded arrow.react.svg?url";
 import SharedLinkSvgUrl from "PUBLIC_DIR/images/icons/16/shared.link.svg?url";
 import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg?url";
+import WarningQuotaExceededUrl from "PUBLIC_DIR/images/warning.quota-exceeded.react.svg?url";
 
 import React from "react";
 import classnames from "classnames";
@@ -76,6 +77,7 @@ import styles from "@docspace/shared/styles/SectionHeader.module.scss";
 import useProfileHeader from "SRC_DIR/pages/Profile/Section/Header/useProfileHeader";
 
 import { useContactsHeader } from "./useContacts";
+import { getWarningText } from "../getWarningText";
 
 const SectionHeaderContent = (props) => {
   const {
@@ -182,6 +184,9 @@ const SectionHeaderContent = (props) => {
 
     isAIRoom,
     isAIAgent,
+    isRoomStorageQuotaExceeded,
+    roomUsedSpace,
+    roomQuotaLimit,
     isKnowledgeTab,
     currentClientView,
     profile,
@@ -469,7 +474,7 @@ const SectionHeaderContent = (props) => {
   const getContextOptionsPlus = React.useCallback(() => {
     if (isContactsPage) return getContactsModel(t);
     return getFolderModel(t);
-  }, [isContactsPage, getContactsModel, getFolderModel, t]);
+  }, [isContactsPage, getContactsModel, getFolderModel, t, contactsTab]);
 
   const onNavigationButtonClick = React.useCallback(() => {
     onCreateAndCopySharedLink(selectedFolder, t);
@@ -852,13 +857,14 @@ const SectionHeaderContent = (props) => {
 
   const badgeLabel = showTemplateBadge ? t("Files:Template") : "";
 
-  const warningText = isRecycleBinFolder
-    ? t("TrashAutoDeleteWarning", {
-        sectionName: t("Common:TrashSection"),
-      })
-    : isPersonalReadOnly
-      ? t("PersonalFolderErasureWarning")
-      : "";
+  const warningText = getWarningText({
+    t,
+    isRecycleBinFolder,
+    isPersonalReadOnly,
+    isRoomStorageQuotaExceeded,
+    roomUsedSpace,
+    roomQuotaLimit,
+  });
 
   const isContextButtonVisible = React.useMemo(() => {
     if (isProfile) return true;
@@ -976,6 +982,9 @@ const SectionHeaderContent = (props) => {
               isInfoPanelVisible={isProfile ? false : isInfoPanelVisible}
               titles={{
                 warningText,
+                warningIcon: isRoomStorageQuotaExceeded
+                  ? WarningQuotaExceededUrl
+                  : undefined,
                 actions: isRoomsFolder
                   ? t("Common:NewRoom")
                   : t("Common:Actions"),
@@ -1168,6 +1177,9 @@ export default inject(
       shared,
       isAIRoom,
       isAIAgent,
+      isRoomStorageQuotaExceeded,
+      roomUsedSpace,
+      roomQuotaLimit,
     } = selectedFolderStore;
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();
@@ -1392,6 +1404,9 @@ export default inject(
 
       isAIRoom,
       isAIAgent,
+      isRoomStorageQuotaExceeded,
+      roomUsedSpace,
+      roomQuotaLimit,
       isKnowledgeTab,
       contactsTab,
 
@@ -1427,5 +1442,6 @@ export default inject(
     "ChangeUserTypeDialog",
     "Notifications",
     "Profile",
+    "GroupingRooms",
   ])(observer(SectionHeaderContent)),
 );

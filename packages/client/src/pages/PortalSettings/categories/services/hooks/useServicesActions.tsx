@@ -36,7 +36,7 @@ import {
 } from "./resourceUtils";
 
 export const useServicesActions = () => {
-  const { t } = useTranslation(["Payments", "Common"]);
+  const { t } = useTranslation(["Payments", "Common", "Services"]);
 
   const { currentTariffStatusStore, paymentStore } = store;
   const {

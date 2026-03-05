@@ -148,7 +148,6 @@
   "ChooseAnother": "Изберете друг",
   "ChooseExpirationDate": "Ограничете времето на наличност за този линк, като зададете дата на изтичане.",
   "ChooseFormatText": "Избери формат за всеки файл, който ще бъде изтеглен",
-  "ChooseFromTemplates": "Изберете от Шаблони",
   "Clean": "Изчисти",
   "ClearAll": "Изчистване на всичко",
   "ClearBackupList": "Изтриване на всички архиви",
@@ -213,7 +212,6 @@
   "CreateFormFillingRoom": "Създайте стая за Попълване на формуляри",
   "CreateGroup": "Създай група",
   "CreateMasterFormFromFile": "Създай PDF формуляр от файл",
-  "CreatePDFForm": "Създай PDF формуляр",
   "CreateRoom": "Създайте стая",
   "CreateVirtualDataRoom": "Създай виртуална стая за данни",
   "Culture_ar-SA": "عربي (المملكة العربية السعودية)",
@@ -1054,5 +1052,8 @@
   "YouHaveUnsavedChanges": "Имате незапазени промени",
   "YourCurrentDomain": "Вашият текущ домейн",
   "YourLogo": "Вашето лого",
-  "YourTurn": "Ваш ред"
+  "YourTurn": "Ваш ред",
+  "Upload": "Качи",
+  "Open": "Отвори",
+  "Quantity": "Количество"
 }

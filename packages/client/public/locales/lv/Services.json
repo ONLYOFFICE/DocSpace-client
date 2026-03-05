@@ -1,6 +1,5 @@
 {
   "AITools": "MI rīki",
-  "AItoolsConfirm": "Iespējot MI rīku pakalpojums piešķirs visiem {{productName}} lietotājiem piekļuvi MI darbināmiem rīkiem, ja vien portfelī ir pietiekami līdzekļi. Vai esat pārliecināts, ka vēlaties turpināt?",
   "AIToolsEnabled": "MI rīku pakalpojums veiksmīgi aktivizēts.",
   "AndMore": "Un vēl!",
   "AutomaticBackupDescription": "Iestatiet plānotos dublējumus pastāvīgai datu aizsardzībai bez manuālām darbībām.",
@@ -20,7 +19,6 @@
   "FreeBackupsPerMonth": "Bezvērtīgi dubultniekopi: {{value}}/{{maxValue}} par šo mēnesi.",
   "ImageGeneration": "Attēlu ģenerēšana",
   "ImageGenerationDescription": "Izveidojiet oriģinālus attēlus un ilustrācijas, izmantojot AI, saviem dokumentiem.",
-  "NewAIfeatures": "Jaunās AI funkcijas tiek regulāri pievienotas, lai palīdzētu jums strādāt ātrāk, viedāk un ar mazākiem pūliem.",
   "OCR": "OCR",
   "OCRDescription": "Atpazīstiet un izvilciet tekstu no skenētu PDF failu un attēlu.",
   "Summarization": "Kopsavilkums",

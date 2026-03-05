@@ -1,6 +1,5 @@
 {
   "AITools": "AI orodja",
-  "AItoolsConfirm": "Omogočanje storitve AI orodij bo vsem uporabnikom {{productName}} omogočilo dostop do funkcij, ki jih poganja umetna inteligenca, če ima denarnica zadostna sredstva. Ste prepričani, da želite nadaljevati?",
   "AIToolsEnabled": "Orodja umetne inteligence so bila uspešno omogočena.",
   "AndMore": "In več!",
   "AutomaticBackupDescription": "Nastavite urnik rezervnih kopij za stalno zaščito podatkov brez ročnih posegov.",
@@ -20,7 +19,6 @@
   "FreeBackupsPerMonth": "Brezplačni varnostni kopiji: {{value}}/{{maxValue}} za tekoči mesec.",
   "ImageGeneration": "Generiranje slike",
   "ImageGenerationDescription": "Izdelajte izvirne slike in ilustracije z uporabo umetne inteligence za vaše dokumente.",
-  "NewAIfeatures": "Redno dodajamo nove funkcije umetne inteligence, da vam pomagamo delati hitreje, pametneje in z manj truda.",
   "OCR": "OCR",
   "OCRDescription": "Prepoznajte in izvlecite besedilo iz skeniranih PDF-jev in slik.",
   "Summarization": "Povzetek",

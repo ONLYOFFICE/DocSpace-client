@@ -148,7 +148,6 @@
   "ChooseAnother": "Başqasını seçin",
   "ChooseExpirationDate": "İstifadə müddəti təyin etməklə bu keçidin mövcudluğunu məhdudlaşdırın.",
   "ChooseFormatText": "Yüklənəcək hər bir faylın formatını seçin ",
-  "ChooseFromTemplates": "Şablonlardan seçin",
   "Clean": "Təmizləyin",
   "ClearAll": "Hamısını silin",
   "ClearBackupList": "Bütün ehtiyat nüsxələri silin",
@@ -213,7 +212,6 @@
   "CreateFormFillingRoom": "Forma doldurma otağı yaradın",
   "CreateGroup": "Qrup yaradın",
   "CreateMasterFormFromFile": "Fayldan PDF forması yaradın",
-  "CreatePDFForm": "PDF forması yaradın",
   "CreateRoom": "Otaq yaradın",
   "CreateVirtualDataRoom": "Virtual məlumat otağı yaradın",
   "Culture_ar-SA": "عربي (المملكة العربية السعودية)",
@@ -1054,5 +1052,8 @@
   "YouHaveUnsavedChanges": "Yadda saxlanmayan dəyişiklikləriniz var",
   "YourCurrentDomain": "Cari domen adınız",
   "YourLogo": "Loqonuz",
-  "YourTurn": "Sizin növbəniz"
+  "YourTurn": "Sizin növbəniz",
+  "Upload": "Yüklə",
+  "Open": "Açmaq",
+  "Quantity": "Miqdar"
 }

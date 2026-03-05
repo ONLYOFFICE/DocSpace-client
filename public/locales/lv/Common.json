@@ -148,7 +148,6 @@
   "ChooseAnother": "Izvēlēties citu",
   "ChooseExpirationDate": "Ierobežojiet šīs saites pieejamības periodu, iestatot derīguma termiņu.",
   "ChooseFormatText": "Izvēlieties katra lejupielādējamā faila formātu",
-  "ChooseFromTemplates": "Izvēlieties no veidnēm",
   "Clean": "Notīrīt",
   "ClearAll": "Notīrīt visu",
   "ClearBackupList": "Dzēst visus dublējumus",
@@ -213,7 +212,6 @@
   "CreateFormFillingRoom": "Izveidot veidlapu aizpildīšanas telpu",
   "CreateGroup": "Izveidot grupu",
   "CreateMasterFormFromFile": "Izveidojiet PDF veidlapu no faila",
-  "CreatePDFForm": "Izveidot PDF veidlapu",
   "CreateRoom": "Izveidot telpu",
   "CreateVirtualDataRoom": "Izveidot virtuālo datu telpu",
   "Culture_ar-SA": "عربي (المملكة العربية السعودية)",
@@ -1054,5 +1052,8 @@
   "YouHaveUnsavedChanges": "Jums ir nesaglabātas izmaiņas",
   "YourCurrentDomain": "Jūsu pašreizējais domēns",
   "YourLogo": "Jūsu logotips",
-  "YourTurn": "Jūsu kārta"
+  "YourTurn": "Jūsu kārta",
+  "Upload": "Augšupielādēt",
+  "Open": "Atvērt",
+  "Quantity": "Kvantitāte"
 }

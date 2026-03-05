@@ -308,7 +308,9 @@ const ArticleBodyContent = (props) => {
       const title = mapKeys(item.tKey);
       const linkData = getLinkData(item.key);
 
-      const style = { marginTop: `${item.key.includes(9) ? "16px" : "0"}` };
+      const style = {
+        marginTop: `${item.key.includes(standalone ? 9 : 10) ? "16px" : "0"}`,
+      };
 
       items.push(
         <ArticleItem

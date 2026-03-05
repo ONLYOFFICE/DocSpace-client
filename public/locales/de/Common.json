@@ -148,7 +148,6 @@
   "ChooseAnother": "Anderes auswählen",
   "ChooseExpirationDate": "Begrenzen Sie den Verfügbarkeitszeitraum für diesen Link, indem Sie ein Verfallsdatum festlegen.",
   "ChooseFormatText": "Wählen Sie ein Format für das Herunterladen von Dateien aus",
-  "ChooseFromTemplates": "Aus den Vorlagen wählen",
   "Clean": "Löschen",
   "ClearAll": "Alle löschen",
   "ClearBackupList": "Alle Datensicherungen löschen",
@@ -213,7 +212,6 @@
   "CreateFormFillingRoom": "Raum zum Formularausfüllen erstellen",
   "CreateGroup": "Gruppe erstellen",
   "CreateMasterFormFromFile": "PDF-Formular aus Datei erstellen",
-  "CreatePDFForm": "PDF-Formular erstellen",
   "CreateRoom": "Raum erstellen",
   "CreateVirtualDataRoom": "Virtuellen Datenraum erstellen",
   "Culture_ar-SA": "عربي (المملكة العربية السعودية)",
@@ -1054,5 +1052,8 @@
   "YouHaveUnsavedChanges": "Sie haben nicht gespeicherte Änderungen.",
   "YourCurrentDomain": "Ihre aktuelle Domain",
   "YourLogo": "Ihr Logo",
-  "YourTurn": "Jetzt sind Sie dran"
+  "YourTurn": "Jetzt sind Sie dran",
+  "Upload": "Hochladen",
+  "Open": "Öffnen",
+  "Quantity": "Menge"
 }

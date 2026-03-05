@@ -38,7 +38,7 @@ import type {
   TProviderTypeWithUrl,
 } from "@docspace/shared/api/ai/types";
 import { getAvailableProviderUrls } from "@docspace/shared/api/ai";
-import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 
@@ -81,6 +81,7 @@ type AIProviderProps = {
   cancelAvailabilityCheck?: AISettingsStore["cancelAvailabilityCheck"];
   aiProviderSettingsUrl?: SettingsStore["aiProviderSettingsUrl"];
   hasAIProviders?: AISettingsStore["hasAIProviders"];
+  aiConfig?: SettingsStore["aiConfig"];
 };
 
 const AIProviderComponent = ({
@@ -91,6 +92,7 @@ const AIProviderComponent = ({
   cancelAvailabilityCheck,
   aiProviderSettingsUrl,
   hasAIProviders,
+  aiConfig,
 }: AIProviderProps) => {
   const { t } = useTranslation(["Common", "AISettings"]);
   const [addDialogVisible, setaddDialogVisible] = useState(false);
@@ -204,7 +206,7 @@ const AIProviderComponent = ({
         ))}
       </div>
 
-      {hasAIProviders ? <DefaultProvider /> : null}
+      {hasAIProviders ? <DefaultProvider aiConfig={aiConfig} /> : null}
 
       {addDialogVisible ? (
         <AddUpdateProviderDialog
@@ -245,6 +247,7 @@ export const AIProvider = inject(
       isProviderAvailable: aiSettingsStore.isProviderAvailable,
       cancelAvailabilityCheck: aiSettingsStore.cancelAvailabilityCheck,
       aiProviderSettingsUrl: settingsStore.aiProviderSettingsUrl,
+      aiConfig: settingsStore.aiConfig,
       hasAIProviders: aiSettingsStore.hasAIProviders,
     };
   },

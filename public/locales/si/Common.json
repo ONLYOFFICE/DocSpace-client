@@ -148,7 +148,6 @@
   "ChooseAnother": "වෙනත් එකක් තෝරන්න",
   "ChooseExpirationDate": "කල් ඉකුත්වන දිනයක් සැකසීමෙන් මෙම සබැඳිය වලංගු කාලය සීමා කරන්න.",
   "ChooseFormatText": "එක් එක් ගොනුව බාගැනීමට වුවමනා ආකෘතිය තෝරන්න",
-  "ChooseFromTemplates": "සැකිලි වලින් තෝරන්න",
   "Clean": "මකන්න",
   "ClearAll": "සියල්ල හිස් කරන්න",
   "ClearBackupList": "සියළුම උපස්ථ මකන්න",
@@ -213,7 +212,6 @@
   "CreateFormFillingRoom": "පෝරම පිරවුම් කාමරයක් සාදන්න",
   "CreateGroup": "සමූහයක් සාදන්න",
   "CreateMasterFormFromFile": "ගොනුවෙන් PDF පෝරමය සාදන්න",
-  "CreatePDFForm": "PDF පෝරමය සාදන්න",
   "CreateRoom": "කාමරය සාදන්න",
   "CreateVirtualDataRoom": "අතථ්‍ය දත්ත කාමරයක් සාදන්න",
   "Culture_ar-SA": "عربي (المملكة العربية السعودية)",
@@ -1054,5 +1052,8 @@
   "YouHaveUnsavedChanges": "ඔබ සතුව නොසුරැකි වෙනස්කම් ඇත",
   "YourCurrentDomain": "ඔබගේ වත්මන් වසම",
   "YourLogo": "ඔබේ ලාංචනය",
-  "YourTurn": "ඔබේ වාරය."
+  "YourTurn": "ඔබේ වාරය.",
+  "Upload": "උඩුගත",
+  "Open": "අරින්න",
+  "Quantity": "ප්‍රමාණය"
 }

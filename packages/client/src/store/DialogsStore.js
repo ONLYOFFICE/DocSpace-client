@@ -360,6 +360,13 @@ class DialogsStore {
 
   addRoomToGroupId = null;
 
+  pauseSubmissionsDialogVisible = false;
+
+  /**
+   * @type {(res:boolean)=>void | null}
+   */
+  pauseSubmissionsDialogCallback = null;
+
   roomGroups = [];
 
   accessSettingsDialogVisible = false;
@@ -1199,6 +1206,11 @@ class DialogsStore {
   setAddRoomToGroupDialogVisible = (visible, groupId = null) => {
     this.addRoomToGroupDialogVisible = visible;
     this.addRoomToGroupId = groupId;
+  };
+
+  setPauseSubmissionsDialogVisible = (visible, callback = null) => {
+    this.pauseSubmissionsDialogVisible = visible;
+    this.pauseSubmissionsDialogCallback = callback;
   };
 
   setCreateGroupRooms = async (newGroup) => {

@@ -38,7 +38,7 @@ import {
 import { Text } from "@docspace/ui-kit/components/text";
 import { TSelectorItem } from "@docspace/ui-kit/components/selector";
 import { ShareAccessRights } from "@docspace/shared/enums";
-import { Encoder } from "@docspace/shared/utils/encoder";
+import { Encoder } from "@docspace/ui-kit/utils/encoder";
 import { getUserTypeName } from "@docspace/shared/utils/common";
 
 import styles from "../AccessSettingsPanel.module.scss";

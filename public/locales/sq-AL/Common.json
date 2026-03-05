@@ -148,7 +148,6 @@
   "ChooseAnother": "Zgjidhni një tjetër",
   "ChooseExpirationDate": "Kufizoni periudhën e disponueshmërisë për këtë lidhje duke vendosur një datë skadimi.",
   "ChooseFormatText": "Zgjidhni formatin për çdo skedar që do të shkarkohet",
-  "ChooseFromTemplates": "Zgjidhni nga shabllonet",
   "Clean": "Pastroni",
   "ClearAll": "Pastroni të gjithë/a",
   "ClearBackupList": "Fshini të gjitha kopjet rezervë",
@@ -213,7 +212,6 @@
   "CreateFormFillingRoom": "Krijoni dhomën e plotësimit të formularit",
   "CreateGroup": "Krijoni grup",
   "CreateMasterFormFromFile": "Krijoni Formularin Model nga skedari",
-  "CreatePDFForm": "Krijoni formularin PDF",
   "CreateRoom": "Krijoni dhomë",
   "CreateVirtualDataRoom": "Krijoni dhomë virtuale të të dhënave",
   "Culture_ar-SA": "عربي (المملكة العربية السعودية)",
@@ -1054,5 +1052,8 @@
   "YouHaveUnsavedChanges": "Ju keni ndryshime të paruajtura",
   "YourCurrentDomain": "Domeni juaj aktual",
   "YourLogo": "Logos juaj",
-  "YourTurn": "Radha jote"
+  "YourTurn": "Radha jote",
+  "Upload": "Ngarkoni",
+  "Open": "Hapni",
+  "Quantity": "Sasia"
 }

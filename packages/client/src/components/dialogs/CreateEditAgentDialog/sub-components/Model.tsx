@@ -30,7 +30,11 @@ import axios from "axios";
 import classNames from "classnames";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import type { TAiProvider, TModel } from "@docspace/shared/api/ai/types";
+import type {
+  TAIConfig,
+  TAiProvider,
+  TModel,
+} from "@docspace/shared/api/ai/types";
 import { ComboBox, type TOption } from "@docspace/ui-kit/components/combobox";
 import {
   getDefaultProvider,
@@ -47,10 +51,15 @@ import { modelCache } from "./modelCache";
 
 type ModelSettingsProps = {
   agentParams: TAgentParams;
+  modelAliases?: TAIConfig["modelAliases"];
   setAgentParams: (value: Partial<TAgentParams>) => void;
 };
 
-const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
+const ModelSettings = ({
+  agentParams,
+  modelAliases,
+  setAgentParams,
+}: ModelSettingsProps) => {
   const { t } = useTranslation(["AIRoom", "Common"]);
 
   const [providers, setProviders] = React.useState<TAiProvider[]>([]);
@@ -260,22 +269,22 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
     return models.map((model) => ({
       key: model.modelId,
       value: model.modelId,
-      label: model.name ?? model.modelId,
+      label: modelAliases?.[model.modelId] ?? model.modelId,
     }));
-  }, [models]);
+  }, [models, modelAliases]);
 
   const modelSelectedOptions = React.useMemo(() => {
     return selectedModel
       ? {
           key: selectedModel.modelId,
           value: selectedModel.modelId,
-          label: selectedModel.name ?? selectedModel.modelId,
+          label: modelAliases?.[selectedModel.modelId] ?? selectedModel.modelId,
         }
       : {
           key: "empty-selected-option",
           label: t("Common:NoModelsFound"),
         };
-  }, [selectedModel, t]);
+  }, [selectedModel, modelAliases, t]);
 
   const onSelectModel = React.useCallback(
     (option: TOption) => {

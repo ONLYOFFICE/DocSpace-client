@@ -362,7 +362,11 @@ export default inject(
     };
   },
 )(
-  withTranslation(["Files", "InfoPanel", "Notifications", "Common"])(
-    withFileActions(withBadges(withQuickButtons(observer(FileTile)))),
-  ),
+  withTranslation([
+    "Files",
+    "InfoPanel",
+    "Notifications",
+    "Common",
+    "GroupingRooms",
+  ])(withFileActions(withBadges(withQuickButtons(observer(FileTile))))),
 );

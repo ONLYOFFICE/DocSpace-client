@@ -79,6 +79,7 @@ import ResetTemplateDialog from "./ResetTemplateDialog";
 import EditRoomGroupsDialog from "./EditRoomGroupsDialog";
 import RoomGroupingDialog from "./RoomGroupingDialog";
 import AddRoomToGroupDialog from "./AddRoomToGroupDialog";
+import PauseSubmissionsDialog from "./PauseSubmissionsDialog";
 
 export {
   EmptyTrashDialog,
@@ -136,4 +137,5 @@ export {
   EditRoomGroupsDialog,
   RoomGroupingDialog,
   AddRoomToGroupDialog,
+  PauseSubmissionsDialog,
 };

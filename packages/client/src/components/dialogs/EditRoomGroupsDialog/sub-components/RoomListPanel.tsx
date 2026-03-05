@@ -34,64 +34,66 @@ import { convertToItems } from "@docspace/ui-kit/selectors/Room/RoomSelector.uti
 import type { RoomListPanelProps } from "../EditRoomGroupsDialog.types";
 
 const RoomListPanel = ({
-	visible,
-	onClose,
-	onSubmit,
-	headerLabel,
-	selectedRooms,
-	withSearch = true,
-	disableSubmitUntilChanged = false,
-	sortSelectedFirst = false,
+  visible,
+  onClose,
+  onSubmit,
+  headerLabel,
+  selectedRooms,
+  withSearch = true,
+  disableSubmitUntilChanged = false,
+  sortSelectedFirst = false,
+  withoutBackdropBackground = false,
 }: RoomListPanelProps) => {
-	const { t } = useTranslation(["Common"]);
+  const { t } = useTranslation(["Common"]);
 
-	return (
-		<div>
-			<Backdrop
-				visible={visible}
-				isAside
-				withBackground
-				zIndex={309}
-				onClick={onClose}
-			/>
-			<Aside
-				visible={visible}
-				withoutBodyScroll
-				zIndex={310}
-				onClose={onClose}
-				withoutHeader
-			>
-				<RoomSelector
-					onSubmit={onSubmit}
-					withHeader
-					headerProps={{
-						onBackClick: onClose,
-						onCloseClick: onClose,
-						headerLabel,
-						withoutBorder: false,
-						withoutBackButton: false,
-					}}
-					withSearch={withSearch}
-					isMultiSelect
-					forceIsMultiSelect
-					selectedItems={
-						selectedRooms
-							? convertToItems(
-									selectedRooms as unknown as Parameters<
-										typeof convertToItems
-									>[0],
-								)
-							: undefined
-					}
-					withCancelButton
-					cancelButtonLabel={t("Common:CancelButton")}
-					onCancel={onClose}
-					disableSubmitUntilChanged={disableSubmitUntilChanged}
-					sortSelectedFirst={sortSelectedFirst}
-				/>
-			</Aside>
-		</div>
-	);
+  return (
+    <div>
+      <Backdrop
+        visible={visible}
+        isAside
+        withBackground
+        withoutBackground={withoutBackdropBackground}
+        zIndex={309}
+        onClick={onClose}
+      />
+      <Aside
+        visible={visible}
+        withoutBodyScroll
+        zIndex={310}
+        onClose={onClose}
+        withoutHeader
+      >
+        <RoomSelector
+          onSubmit={onSubmit}
+          withHeader
+          headerProps={{
+            onBackClick: onClose,
+            onCloseClick: onClose,
+            headerLabel,
+            withoutBorder: false,
+            withoutBackButton: false,
+          }}
+          withSearch={withSearch}
+          isMultiSelect
+          forceIsMultiSelect
+          selectedItems={
+            selectedRooms
+              ? convertToItems(
+                  selectedRooms as unknown as Parameters<
+                    typeof convertToItems
+                  >[0],
+                )
+              : undefined
+          }
+          withCancelButton
+          cancelButtonLabel={t("Common:CancelButton")}
+          onCancel={onClose}
+          disableSubmitUntilChanged={disableSubmitUntilChanged}
+          sortSelectedFirst={sortSelectedFirst}
+        />
+      </Aside>
+    </div>
+  );
 };
 
 export default RoomListPanel;

@@ -69,12 +69,7 @@
     gap: 4px;
   }
 
-  .balanceAmountContainer {
-    display: flex;
-    align-items: baseline;
-    gap: 0;
-    margin: 12px 0 16px 0;
-  }
+
 
   .integer,
   .group,
@@ -91,35 +86,11 @@
   }
 }
 
-@keyframes circularRotate {
-  0% {
-    transform: rotate(0deg);
-  }
-  40% {
-    transform: rotate(-180deg);
-  }
-  50% {
-    transform: rotate(-180deg);
-  }
-  90% {
-    transform: rotate(-360deg);
-  }
-  100% {
-    transform: rotate(-360deg);
-  }
-}
 
-.refreshIcon {
-  cursor: pointer;
-  margin-left: 4px;
-}
 
-.spinning {
-  svg {
-    animation: circularRotate 2s ease-in-out infinite !important;
-    transform-origin: center;
-  }
-}
+
+
+
 
 .modalContent {
   display: flex;

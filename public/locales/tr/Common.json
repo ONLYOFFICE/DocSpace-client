@@ -148,7 +148,6 @@
   "ChooseAnother": "Başka bir tane seçin",
   "ChooseExpirationDate": "Bir son kullanma tarihi belirleyerek bu bağlantının kullanılabilirlik süresini sınırlandırın.",
   "ChooseFormatText": "İndirilecek her bir dosyanın türünü seçin",
-  "ChooseFromTemplates": "Şablonlar arasından seçim yapın",
   "Clean": "Temizle",
   "ClearAll": "Hepsini temizle",
   "ClearBackupList": "Tüm yedekleri sil",
@@ -213,7 +212,6 @@
   "CreateFormFillingRoom": "Form doldurma odası oluştur",
   "CreateGroup": "Grup oluştur",
   "CreateMasterFormFromFile": "Dosyadan PDF formu oluştur",
-  "CreatePDFForm": "PDF Formu Oluştur",
   "CreateRoom": "Oda oluştur",
   "CreateVirtualDataRoom": "Sanal veri odası oluştur",
   "Culture_ar-SA": "عربي (المملكة العربية السعودية)",
@@ -1054,5 +1052,8 @@
   "YouHaveUnsavedChanges": "Kaydedilmemiş değişiklikleriniz var",
   "YourCurrentDomain": "Mevcut alanınız",
   "YourLogo": "Logonuz",
-  "YourTurn": "Sıra sizde"
+  "YourTurn": "Sıra sizde",
+  "Upload": "Yükle",
+  "Open": "Aç",
+  "Quantity": "Miktar"
 }

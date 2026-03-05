@@ -58,12 +58,12 @@ import { ArticleButtonLoader } from "@docspace/shared/skeletons/article";
 import { isMobile, isTablet } from "react-device-detect";
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import {
-	Events,
-	DeviceType,
-	RoomsType,
-	FilesSelectorFilterTypes,
-	FolderType,
-	FilterType,
+  Events,
+  DeviceType,
+  RoomsType,
+  FilesSelectorFilterTypes,
+  FolderType,
+  FilterType,
 } from "@docspace/shared/enums";
 
 import { getContactsView, createGroup } from "SRC_DIR/helpers/contacts";
@@ -74,953 +74,897 @@ import { encryptionUploadDialog } from "../../../helpers/desktop";
 import styles from "./main-button.module.scss";
 
 const ArticleMainButtonContent = (props) => {
-	const {
-		t,
-		isMobileArticle,
-
-		isPrivacy,
-		encryptedFile,
-		encrypted,
-		startUpload,
-		setAction,
-		setSelectFileDialogVisible,
-		setMainButtonVisible,
-		selectFileDialogVisible,
-		selectFileFormRoomDialogVisible,
-		setSelectFileFormRoomDialogVisible,
-		selectFileAiKnowledgeDialogVisible,
-		setSelectFileAiKnowledgeDialogVisible,
-		showArticleLoader,
-		isFavoritesFolder,
-		isRecentFolder,
-		isRecycleBinFolder,
-
-		currentFolderId,
-		currentRoomType,
-		isRoomsFolder,
-		isAIAgentsFolder,
-		isArchiveFolder,
-
-		setOformFromFolderId,
-
-		enablePlugins,
-		mainButtonItemsList,
-
-		currentColorScheme,
-
-		isOwner,
-		isAdmin,
-		isRoomAdmin,
-
-		mainButtonMobileVisible,
-		versionHistoryPanelVisible,
-		moveToPanelVisible,
-		restorePanelVisible,
-		copyPanelVisible,
-
-		security,
-		setQuotaWarningDialogVisible,
-		currentDeviceType,
-
-		isFrame,
-		disableActionButton,
-
-		parentRoomType,
-		isFolder,
-		createFoldersTree,
-		isWarningRoomsDialog,
-		getContactsModel,
-		contactsCanCreate,
-		setRefMap,
-		setTemplateGalleryVisible,
-		templateGalleryAvailable,
-
-		isChatTab,
-		isResultTab,
-		isKnowledgeTab,
-		isAIRoom,
-		extsFilesVectorized,
-		allowInvitingMembers,
-
-		aiConfig,
-	} = props;
-
-	const location = useLocation();
-
-	const isAccountsPage = location.pathname.includes("/accounts");
-	const isSettingsPage = location.pathname.includes("settings");
-	const contactsView = getContactsView(location);
-	const isContactsGroupsPage = contactsView === "groups";
-
-	const inputFilesElement = React.useRef(null);
-	const inputPDFFilesElement = React.useRef(null);
-	const inputFolderElement = React.useRef(null);
-
-	const [actions, setActions] = React.useState([]);
-	const [uploadActions, setUploadActions] = React.useState([]);
-	const [model, setModel] = React.useState([]);
-	const [isDropdownMainButton, setIsDropdownMainButton] = React.useState(true);
-
-	const onCreate = React.useCallback(
-		(e) => {
-			const format = e.action || null;
-
-			const event = new Event(Events.CREATE);
-
-			const isPDF = format === "pdf";
-
-			if (isPDF && isMobile) {
-				toastr.info(t("Common:MobileEditPdfNotAvailableInfo"));
-				return;
-			}
-
-			const payload = {
-				extension: format,
-				id: -1,
-				edit: isPDF,
-			};
-			event.payload = payload;
-
-			window.dispatchEvent(event);
-		},
-		[setAction],
-	);
-
-	const onCreateRoom = React.useCallback(() => {
-		if (isWarningRoomsDialog) {
-			setQuotaWarningDialogVisible(true);
-			return;
-		}
-
-		const event = new Event(Events.ROOM_CREATE);
-		window.dispatchEvent(event);
-	}, [isWarningRoomsDialog]);
-
-	const onCreateAgent = React.useCallback(
-		() => {
-			// TODO: AI: Add quota if it needed
-
-			// if (isWarningRoomsDialog) {
-			//   setQuotaWarningDialogVisible(true);
-			//   return;
-			// }
-
-			const event = new Event(Events.AGENT_CREATE);
-			window.dispatchEvent(event);
-		},
-		[
-			// isWarningRoomsDialog
-		],
-	);
-
-	const onShowSelectFileDialog = React.useCallback(() => {
-		if (isMobile) {
-			toastr.info(t("Common:MobileEditPdfNotAvailableInfo"));
-			return;
-		}
-		setSelectFileDialogVisible(true);
-	}, [setSelectFileDialogVisible]);
-
-	const onShowFormRoomSelectFileDialog = React.useCallback(
-		(filter = FilesSelectorFilterTypes.DOCX) => {
-			setSelectFileFormRoomDialogVisible(true, filter, true);
-		},
-		[setSelectFileFormRoomDialogVisible],
-	);
-
-	const onShowAiKnowledgeSelectFileDialog = React.useCallback(() => {
-		setSelectFileAiKnowledgeDialogVisible(true);
-	}, [setSelectFileAiKnowledgeDialogVisible]);
-
-	const onFileChange = React.useCallback(
-		async (e) => {
-			const files = await getFilesFromEvent(e);
-
-			createFoldersTree(t, files)
-				.then((f) => {
-					if (f.length > 0) startUpload(f, null, t);
-				})
-				.catch((err) => {
-					toastr.error(err, null, 0, true);
-				});
-		},
-		[startUpload, t],
-	);
-
-	const onUploadFileClick = React.useCallback(() => {
-		if (isPrivacy) {
-			encryptionUploadDialog((f, isEncrypted) => {
-				f.encrypted = isEncrypted;
-				startUpload([f], null, t); // TODO: createFoldersTree
-			});
-		} else {
-			inputFilesElement.current.click();
-		}
-	}, [
-		isPrivacy,
-		encrypted,
-		encryptedFile,
-		encryptionUploadDialog,
-		startUpload,
-	]);
-
-	const onUploadFolderClick = React.useCallback(() => {
-		inputFolderElement.current.click();
-	}, []);
-
-	const onUploadPDFFilesClick = React.useCallback(() => {
-		inputPDFFilesElement.current?.click();
-	}, []);
-
-	const onInputClick = React.useCallback((e) => (e.target.value = null), []);
-
-	const onShowTemplateGallery = () => {
-		setTemplateGalleryVisible(true);
-		setOformFromFolderId(currentFolderId);
-	};
-
-	React.useEffect(() => {
-		const isFolderHiddenDropdown =
-			isArchiveFolder ||
-			isFavoritesFolder ||
-			isRecentFolder ||
-			isRecycleBinFolder ||
-			isSettingsPage;
-
-		if (isFolderHiddenDropdown) {
-			setIsDropdownMainButton(false);
-		} else {
-			setIsDropdownMainButton(true);
-		}
-	}, [
-		isArchiveFolder,
-		isFavoritesFolder,
-		isRecentFolder,
-		isRecycleBinFolder,
-		isSettingsPage,
-	]);
-
-	const createActionsForFormRoom = React.useCallback(
-		(actionList) => {
-			const { formGallery } = actionList;
-
-			const createNewFolder = {
-				id: "actions_new-folder",
-				className: "main-button_drop-down",
-				icon: CatalogFolderReactSvgUrl,
-				label: t("Files:CreateNewFolder"),
-				onClick: onCreate,
-				key: "new-folder",
-			};
-
-			const showSelectorFormRoomDocx = {
-				id: "actions_form-room_template_from-file",
-				className: "main-button_drop-down_sub",
-				icon: FormGalleryReactSvgUrl,
-				label: t("Common:ChooseFromTemplates"),
-				onClick: formGallery.onClick,
-				disabled: isPrivacy,
-				key: "form-file",
-			};
-
-			// const templatePDFForm = {
-			//   id: "actions_template-PDF-form",
-			//   className: "main-button_drop-down",
-			//   icon: FormReactSvgUrl,
-			//   label: t("Common:CreatePDFForm"),
-			//   key: "new-form",
-			//   items: [createTemplateBlankDocxf],
-			// };
-
-			const uploadFromDocSpace = {
-				id: "actions_upload-from-docspace",
-				className: "main-button_drop-down",
-				icon: ActionsUploadReactSvgUrl,
-				label: t("Common:FromPortal", { productName: t("Common:ProductName") }),
-				key: "actions_upload-from-docspace",
-				disabled: false,
-				onClick: () => onShowFormRoomSelectFileDialog(FilterType.PDFForm),
-			};
-
-			const uploadFormDevice = {
-				id: "actions_upload-from-device",
-				className: "main-button_drop-down",
-				icon: ActionsUploadReactSvgUrl,
-				label: t("Common:FromDevice"),
-				key: "actions_upload-from-device",
-				onClick: onUploadPDFFilesClick,
-				disabled: false,
-			};
-
-			const uploadPDFFrom = {
-				id: "actions_upload-ready-Pdf-from",
-				className: "main-button_drop-down_sub",
-				icon: ActionsUploadReactSvgUrl,
-				label: t("Common:UploadPDFForm"),
-				key: "actions_upload-ready-Pdf-from",
-				items: [uploadFromDocSpace, uploadFormDevice],
-			};
-
-			// const moreActions = {
-			//   id: "actions_more-form",
-			//   className: "main-button_drop-down",
-			//   icon: PluginMoreReactSvgUrl,
-			//   label: t("Common:More"),
-			//   disabled: false,
-			//   key: "more-form",
-			//   items: [
-			//     createNewFolder,
-			//     {
-			//       isSeparator: true,
-			//       key: "actions_more-form__separator-1",
-			//     },
-			//     createNewDocumentDocx,
-			//     createNewPresentationPptx,
-			//     createNewSpreadsheetXlsx,
-			//     {
-			//       isSeparator: true,
-			//       key: "actions_more-form__separator-2",
-			//     },
-			//     ...uploadActions,
-			//   ],
-			// };
-
-			// const mobileMoreActions = {
-			//   ...moreActions,
-			//   items: moreActions.items.filter((item) => !item.isSeparator),
-			// };
-
-			const mobileMoreActions = null;
-			const formRoomActions = [
-				// templatePDFForm,
-				uploadPDFFrom,
-				showSelectorFormRoomDocx,
-				{
-					isSeparator: true,
-					key: "separator",
-				},
-				createNewFolder,
-				// {
-				//   isSeparator: true,
-				//   key: "separator-1",
-				// },
-				// moreActions,
-			];
-
-			const mobileFormRoomActions = [
-				// templatePDFForm,
-				uploadPDFFrom,
-				showSelectorFormRoomDocx,
-				createNewFolder,
-			];
-
-			return {
-				formRoomActions,
-				mobileFormRoomActions,
-				mobileMoreActions,
-			};
-		},
-		[onShowFormRoomSelectFileDialog, onUploadPDFFilesClick],
-	);
-
-	React.useEffect(() => {
-		if (isRoomsFolder || isAIAgentsFolder || isSettingsPage) return;
-
-		if (isAccountsPage) {
-			const contactsModel = getContactsModel(t);
-
-			setModel(contactsModel);
-			setActions(contactsModel);
-
-			return;
-		}
-
-		const newUploadActions = [
-			{
-				id: "actions_upload-files",
-				className: "main-button_drop-down",
-				icon: ActionsUploadReactSvgUrl,
-				label: t("UploadFiles"),
-				onClick: onUploadFileClick,
-				key: "upload-files",
-			},
-		];
-
-		if (isAIRoom && isKnowledgeTab) {
-			newUploadActions[0].label = t("EmptyView:UploadDeviceOptionTitle");
-			const uploadFromDocspace = {
-				id: "actions_upload-files-product",
-				className: "main-button_drop-down",
-				icon: MoveReactSvgUrl,
-				label: t("EmptyView:UploadFromPortalTitle", {
-					productName: t("Common:ProductName"),
-				}),
-				onClick: onShowAiKnowledgeSelectFileDialog,
-				key: "upload-files-product",
-			};
-
-			setActions([]);
-			setUploadActions([uploadFromDocspace, ...newUploadActions]);
-			setModel([uploadFromDocspace, ...newUploadActions]);
-
-			return;
-		}
-
-		const pluginItems = [];
-
-		if (mainButtonItemsList && enablePlugins && !isAccountsPage) {
-			mainButtonItemsList.forEach((option) => {
-				pluginItems.push({
-					key: option.key,
-					...option.value,
-				});
-			});
-		}
-
-		const createTemplateBlankDocxf = {
-			id: "actions_template_blank",
-			className: "main-button_drop-down_sub",
-			icon: FormBlankReactSvgUrl,
-			label: t("Translations:SubNewForm"),
-			onClick: onCreate,
-			action: "pdf",
-			key: "pdf",
-		};
-
-		const createNewDocumentDocx = {
-			id: "actions_new-document",
-			className: "main-button_drop-down",
-			icon: ActionsDocumentsReactSvgUrl,
-			label: t("Common:Document"),
-			onClick: onCreate,
-			action: "docx",
-			key: "docx",
-		};
-
-		const createNewSpreadsheetXlsx = {
-			id: "actions_new-spreadsheet",
-			className: "main-button_drop-down",
-			icon: SpreadsheetReactSvgUrl,
-			label: t("Common:Spreadsheet"),
-			onClick: onCreate,
-			action: "xlsx",
-			key: "xlsx",
-		};
-
-		const showSelectorDocx = {
-			id: "actions_template_from-file",
-			className: "main-button_drop-down_sub",
-			icon: FormFileReactSvgUrl,
-			label: t("Translations:SubNewFormFile"),
-			onClick: onShowSelectFileDialog,
-			disabled: isPrivacy,
-			key: "form-file",
-		};
-
-		const createNewFolder = {
-			id: "actions_new-folder",
-			className: "main-button_drop-down",
-			icon: CatalogFolderReactSvgUrl,
-			label: t("Common:Folder"),
-			onClick: onCreate,
-			key: "new-folder",
-		};
-
-		const formGallery = {
-			id: "actions_template_oforms-gallery",
-			className: "main-button_drop-down_sub",
-			icon: FormGalleryReactSvgUrl,
-			label: t("Common:TemplateGallery"),
-			onClick: onShowTemplateGallery,
-			disabled: isPrivacy,
-			key: "form-gallery",
-		};
-
-		const createNewPresentationPptx = {
-			id: "actions_new-presentation",
-			className: "main-button_drop-down",
-			icon: ActionsPresentationReactSvgUrl,
-			label: t("Common:Presentation"),
-			onClick: onCreate,
-			action: "pptx",
-			key: "pptx",
-		};
-
-		if (!(isMobile || isTablet)) {
-			newUploadActions.push({
-				id: "actions_upload-folders",
-				className: "main-button_drop-down",
-				icon: ActionsUploadReactSvgUrl,
-				label: t("UploadFolder"),
-				disabled: isPrivacy,
-				onClick: onUploadFolderClick,
-				key: "upload-folder",
-			});
-		}
-
-		if (
-			currentRoomType === RoomsType.FormRoom ||
-			(parentRoomType === FolderType.FormRoom && isFolder)
-		) {
-			const { formRoomActions, mobileFormRoomActions, mobileMoreActions } =
-				createActionsForFormRoom({
-					formGallery,
-					newUploadActions,
-					// createNewFolder,
-					// createNewDocumentDocx,
-					// createTemplateBlankDocxf,
-					// createNewPresentationPptx,
-					// createNewSpreadsheetXlsx,
-				});
-
-			// for mobile
-			setUploadActions(mobileMoreActions);
-			setActions(mobileFormRoomActions);
-			// for PC
-			setModel(formRoomActions);
-
-			return;
-		}
-
-		const formActions = [
-			{
-				id: "actions_template",
-				className: "main-button_drop-down",
-				icon: FormReactSvgUrl,
-				label: t("Translations:NewForm"),
-				key: "new-form",
-				items: [createTemplateBlankDocxf, showSelectorDocx],
-			},
-		];
-
-		const newActions = [
-			createNewDocumentDocx,
-			createNewSpreadsheetXlsx,
-			createNewPresentationPptx,
-			...formActions,
-			createNewFolder,
-		];
-
-		if (pluginItems.length > 0) {
-			// menuModel.push({
-			//   id: "actions_more-plugins",
-			//   className: "main-button_drop-down",
-			//   icon: PluginMoreReactSvgUrl,
-			//   label: t("Common:More"),
-			//   disabled: false,
-			//   key: "more-plugins",
-			//   items: pluginItems,
-			// });
-
-			newActions.push({
-				id: "actions_more-plugins",
-				className: "main-button_drop-down",
-				icon: PluginMoreReactSvgUrl,
-				label: t("Common:More"),
-				disabled: false,
-				key: "more-plugins",
-				items: pluginItems,
-			});
-		}
-
-		if (templateGalleryAvailable) {
-			if (isDesktop()) {
-				newActions.push({
-					isSeparator: true,
-					key: "separator",
-				});
-			}
-
-			newActions.push({
-				id: "actions_open-template-gallery",
-				className: "main-button_drop-down",
-				icon: TemplateGalleryReactSvgUrl,
-				label: t("Common:TemplateGallery"),
-				onClick: onShowTemplateGallery,
-				key: "template-gallery",
-			});
-		}
-
-		const menuModel = [...newActions];
-
-		menuModel.push({
-			isSeparator: true,
-			key: "separator",
-		});
-
-		menuModel.push(...newUploadActions);
-		setUploadActions(newUploadActions);
-
-		setModel(menuModel);
-		setActions(newActions);
-	}, [
-		t,
-		isPrivacy,
-		currentFolderId,
-		isAccountsPage,
-		isSettingsPage,
-		enablePlugins,
-		mainButtonItemsList,
-		currentRoomType,
-		isRoomsFolder,
-		isAIAgentsFolder,
-		isOwner,
-		isAdmin,
-		isRoomAdmin,
-
-		parentRoomType,
-		isFolder,
-
-		onCreate,
-		onCreateRoom,
-		getContactsModel,
-		onShowSelectFileDialog,
-		onShowFormRoomSelectFileDialog,
-		onShowAiKnowledgeSelectFileDialog,
-		onUploadFileClick,
-		onUploadFolderClick,
-		createActionsForFormRoom,
-		isMobileArticle,
-
-		isAIRoom,
-		isKnowledgeTab,
-	]);
-
-	const isProfile = location.pathname.includes("/profile");
-
-	const getMainButtonVisible = () => {
-		let visibilityValue = true;
-
-		if (currentDeviceType === DeviceType.mobile) {
-			visibilityValue = !(
-				moveToPanelVisible ||
-				restorePanelVisible ||
-				copyPanelVisible ||
-				selectFileDialogVisible ||
-				selectFileFormRoomDialogVisible ||
-				selectFileAiKnowledgeDialogVisible ||
-				versionHistoryPanelVisible
-			);
-		}
-
-		if (
-			isProfile ||
-			(isAccountsPage && !contactsCanCreate) ||
-			(isAccountsPage && !isContactsGroupsPage && !allowInvitingMembers)
-		) {
-			visibilityValue = false;
-		}
-
-		if (!isAccountsPage) visibilityValue = security?.Create;
-
-		if (!isMobileArticle) visibilityValue = false;
-
-		if (isAIRoom && (isChatTab || isResultTab)) visibilityValue = false;
-
-		if (isAIAgentsFolder && aiConfig.aiReadyNeedReset) visibilityValue = false;
-
-		return visibilityValue;
-	};
-
-	const mainButtonVisible = getMainButtonVisible();
-
-	useEffect(() => {
-		setMainButtonVisible(mainButtonVisible);
-	}, [mainButtonVisible]);
-
-	const onMainButtonClick = () => {
-		if (isAIAgentsFolder) return onCreateAgent();
-		if (!isAccountsPage) return onCreateRoom();
-		if (isContactsGroupsPage) return createGroup();
-	};
-
-	const mainButtonText =
-		isRoomAdmin && isAccountsPage ? t("Common:Invite") : t("Common:Actions");
-
-	let isDisabled = false;
-
-	if (isSettingsPage) {
-		isDisabled = isSettingsPage;
-	} else if (isAccountsPage) {
-		isDisabled = (isFrame && disableActionButton) || !contactsCanCreate;
-	} else if ((isChatTab || isResultTab) && isAIRoom) {
-		isDisabled = true;
-	} else {
-		isDisabled = (isFrame && disableActionButton) || !security?.Create;
-	}
-
-	if (showArticleLoader)
-		return isMobileArticle ? null : <ArticleButtonLoader height="32px" />;
-
-	const withMenu = !isRoomsFolder && !isAIAgentsFolder && !isContactsGroupsPage;
-
-	return (
-		<>
-			{isMobileArticle ? (
-				<MobileView
-					t={t}
-					titleProp={t("Upload")}
-					actionOptions={actions}
-					buttonOptions={!isAccountsPage ? uploadActions : null}
-					withoutButton={
-						isRoomsFolder ||
-						isAIAgentsFolder ||
-						isAccountsPage ||
-						isChatTab ||
-						isResultTab
-					}
-					withMenu={withMenu}
-					mainButtonMobileVisible={
-						mainButtonMobileVisible ? mainButtonVisible : null
-					}
-					onMainButtonClick={onMainButtonClick}
-				/>
-			) : isRoomsFolder ? (
-				<Button
-					className={classNames(styles.mainButton, "create-room-button")}
-					id="rooms-shared_create-room-button"
-					label={t("Common:NewRoom")}
-					onClick={onCreateRoom}
-					$currentColorScheme={currentColorScheme}
-					isDisabled={isDisabled}
-					size="small"
-					primary
-					scale
-					title={t("Common:NewRoom")}
-					testId="create_new_room_button"
-				/>
-			) : isAIAgentsFolder ? (
-				<Button
-					className={classNames(styles.mainButton, "create-agent-button")}
-					id="rooms-shared_create-agent-button"
-					label={t("Common:NewAgent")}
-					onClick={onCreateAgent}
-					$currentColorScheme={currentColorScheme}
-					isDisabled={isDisabled || aiConfig.aiReadyNeedReset}
-					size="small"
-					primary
-					scale
-					title={t("Common:NewAgent")}
-					testId="create_new_agent_button"
-				/>
-			) : (
-				<MainButton
-					id={
-						isAccountsPage
-							? "accounts_invite-main-button"
-							: "actions-main-button"
-					}
-					isDisabled={isDisabled}
-					isDropdown={isDropdownMainButton}
-					text={mainButtonText}
-					model={model}
-					title={mainButtonText}
-					setRefMap={setRefMap}
-				/>
-			)}
-
-			<input
-				id="customFileInput"
-				className="custom-file-input custom-file-input-article"
-				multiple
-				type="file"
-				onChange={onFileChange}
-				onClick={onInputClick}
-				ref={inputFilesElement}
-				style={{ display: "none" }}
-				{...(isAIRoom ? { accept: extsFilesVectorized.join(",") } : {})}
-			/>
-			<input
-				id="customPDFInput"
-				className="custom-file-input"
-				multiple
-				type="file"
-				accept=".pdf"
-				onChange={onFileChange}
-				onClick={onInputClick}
-				ref={inputPDFFilesElement}
-				style={{ display: "none" }}
-			/>
-			<input
-				id="customFolderInput"
-				className="custom-file-input"
-				webkitdirectory=""
-				mozdirectory=""
-				type="file"
-				onChange={onFileChange}
-				onClick={onInputClick}
-				ref={inputFolderElement}
-				style={{ display: "none" }}
-			/>
-		</>
-	);
+  const {
+    t,
+    isMobileArticle,
+
+    isPrivacy,
+    encryptedFile,
+    encrypted,
+    startUpload,
+    setAction,
+    setSelectFileDialogVisible,
+    setMainButtonVisible,
+    selectFileDialogVisible,
+    selectFileFormRoomDialogVisible,
+    setSelectFileFormRoomDialogVisible,
+    selectFileAiKnowledgeDialogVisible,
+    setSelectFileAiKnowledgeDialogVisible,
+    showArticleLoader,
+    isFavoritesFolder,
+    isRecentFolder,
+    isRecycleBinFolder,
+
+    currentFolderId,
+    currentRoomType,
+    isRoomsFolder,
+    isAIAgentsFolder,
+    isArchiveFolder,
+
+    setOformFromFolderId,
+
+    enablePlugins,
+    mainButtonItemsList,
+
+    currentColorScheme,
+
+    isOwner,
+    isAdmin,
+    isRoomAdmin,
+
+    mainButtonMobileVisible,
+    versionHistoryPanelVisible,
+    moveToPanelVisible,
+    restorePanelVisible,
+    copyPanelVisible,
+
+    security,
+    setQuotaWarningDialogVisible,
+    currentDeviceType,
+
+    isFrame,
+    disableActionButton,
+
+    parentRoomType,
+    isFolder,
+    createFoldersTree,
+    isWarningRoomsDialog,
+    getContactsModel,
+    contactsCanCreate,
+    contactsTab,
+    setRefMap,
+    setTemplateGalleryVisible,
+    templateGalleryAvailable,
+
+    isChatTab,
+    isResultTab,
+    isKnowledgeTab,
+    isAIRoom,
+    extsFilesVectorized,
+    allowInvitingMembers,
+
+    aiConfig,
+  } = props;
+
+  const location = useLocation();
+
+  const isAccountsPage = location.pathname.includes("/accounts");
+  const isSettingsPage = location.pathname.includes("settings");
+  const contactsView = getContactsView(location);
+  const isContactsGroupsPage = contactsView === "groups";
+
+  const inputFilesElement = React.useRef(null);
+  const inputPDFFilesElement = React.useRef(null);
+  const inputFolderElement = React.useRef(null);
+
+  const [actions, setActions] = React.useState([]);
+  const [uploadActions, setUploadActions] = React.useState([]);
+  const [model, setModel] = React.useState([]);
+  const [isDropdownMainButton, setIsDropdownMainButton] = React.useState(true);
+
+  const onCreate = React.useCallback(
+    (e) => {
+      const format = e.action || null;
+
+      const event = new Event(Events.CREATE);
+
+      const isPDF = format === "pdf";
+
+      if (isPDF && isMobile) {
+        toastr.info(t("Common:MobileEditPdfNotAvailableInfo"));
+        return;
+      }
+
+      const payload = {
+        extension: format,
+        id: -1,
+        edit: isPDF,
+      };
+      event.payload = payload;
+
+      window.dispatchEvent(event);
+    },
+    [setAction],
+  );
+
+  const onCreateRoom = React.useCallback(() => {
+    if (isWarningRoomsDialog) {
+      setQuotaWarningDialogVisible(true);
+      return;
+    }
+
+    const event = new Event(Events.ROOM_CREATE);
+    window.dispatchEvent(event);
+  }, [isWarningRoomsDialog]);
+
+  const onCreateAgent = React.useCallback(
+    () => {
+      // TODO: AI: Add quota if it needed
+
+      // if (isWarningRoomsDialog) {
+      //   setQuotaWarningDialogVisible(true);
+      //   return;
+      // }
+
+      const event = new Event(Events.AGENT_CREATE);
+      window.dispatchEvent(event);
+    },
+    [
+      // isWarningRoomsDialog
+    ],
+  );
+
+  const onShowSelectFileDialog = React.useCallback(() => {
+    if (isMobile) {
+      toastr.info(t("Common:MobileEditPdfNotAvailableInfo"));
+      return;
+    }
+    setSelectFileDialogVisible(true);
+  }, [setSelectFileDialogVisible]);
+
+  const onShowFormRoomSelectFileDialog = React.useCallback(
+    (filter = FilesSelectorFilterTypes.DOCX) => {
+      setSelectFileFormRoomDialogVisible(true, filter, true);
+    },
+    [setSelectFileFormRoomDialogVisible],
+  );
+
+  const onShowAiKnowledgeSelectFileDialog = React.useCallback(() => {
+    setSelectFileAiKnowledgeDialogVisible(true);
+  }, [setSelectFileAiKnowledgeDialogVisible]);
+
+  const onFileChange = React.useCallback(
+    async (e) => {
+      const files = await getFilesFromEvent(e);
+
+      createFoldersTree(t, files)
+        .then((f) => {
+          if (f.length > 0) startUpload(f, null, t);
+        })
+        .catch((err) => {
+          toastr.error(err, null, 0, true);
+        });
+    },
+    [startUpload, t],
+  );
+
+  const onUploadFileClick = React.useCallback(() => {
+    if (isPrivacy) {
+      encryptionUploadDialog((f, isEncrypted) => {
+        f.encrypted = isEncrypted;
+        startUpload([f], null, t); // TODO: createFoldersTree
+      });
+    } else {
+      inputFilesElement.current.click();
+    }
+  }, [
+    isPrivacy,
+    encrypted,
+    encryptedFile,
+    encryptionUploadDialog,
+    startUpload,
+  ]);
+
+  const onUploadFolderClick = React.useCallback(() => {
+    inputFolderElement.current.click();
+  }, []);
+
+  const onUploadPDFFilesClick = React.useCallback(() => {
+    inputPDFFilesElement.current?.click();
+  }, []);
+
+  const onInputClick = React.useCallback((e) => (e.target.value = null), []);
+
+  const onShowTemplateGallery = () => {
+    setTemplateGalleryVisible(true);
+    setOformFromFolderId(currentFolderId);
+  };
+
+  React.useEffect(() => {
+    const isFolderHiddenDropdown =
+      isArchiveFolder ||
+      isFavoritesFolder ||
+      isRecentFolder ||
+      isRecycleBinFolder ||
+      isSettingsPage;
+
+    if (isFolderHiddenDropdown) {
+      setIsDropdownMainButton(false);
+    } else {
+      setIsDropdownMainButton(true);
+    }
+  }, [
+    isArchiveFolder,
+    isFavoritesFolder,
+    isRecentFolder,
+    isRecycleBinFolder,
+    isSettingsPage,
+  ]);
+
+  const createActionsForFormRoom = React.useCallback(
+    (actionList) => {
+      const {
+        formGallery,
+        formActions,
+        createNewFolder,
+        templateGalleryAvailable,
+      } = actionList;
+
+      const uploadFromDocSpace = {
+        id: "actions_upload-from-docspace",
+        className: "main-button_drop-down",
+        icon: ActionsUploadReactSvgUrl,
+        label: t("Common:FromPortal", { productName: t("Common:ProductName") }),
+        key: "actions_upload-from-docspace",
+        disabled: false,
+        onClick: () => onShowFormRoomSelectFileDialog(FilterType.PDFForm),
+      };
+
+      const uploadFormDevice = {
+        id: "actions_upload-from-device",
+        className: "main-button_drop-down",
+        icon: ActionsUploadReactSvgUrl,
+        label: t("Common:FromDevice"),
+        key: "actions_upload-from-device",
+        onClick: onUploadPDFFilesClick,
+        disabled: false,
+      };
+
+      const uploadPDFFrom = {
+        id: "actions_upload-ready-Pdf-from",
+        className: "main-button_drop-down_sub",
+        icon: ActionsUploadReactSvgUrl,
+        label: t("Common:UploadPDFForm"),
+        key: "actions_upload-ready-Pdf-from",
+        items: [uploadFromDocSpace, uploadFormDevice],
+      };
+
+      const uploadPDFFromSeparator = {
+        isSeparator: true,
+        key: "separator",
+      };
+
+      const formGallerySeparator = {
+        isSeparator: true,
+        key: "separator-form-gallery",
+      };
+
+      const formGalleryOption = templateGalleryAvailable
+        ? [formGallerySeparator, formGallery]
+        : [];
+
+      const formRoomActions = [
+        formActions,
+        createNewFolder,
+        ...formGalleryOption,
+        uploadPDFFromSeparator,
+        uploadPDFFrom,
+      ];
+
+      const mobileFormRoomActions = [formActions, createNewFolder];
+
+      if (mobileFormRoomActions) {
+        mobileFormRoomActions.push(formGallery);
+      }
+
+      const mobileMoreActions = [uploadPDFFrom];
+
+      return {
+        formRoomActions,
+        mobileFormRoomActions,
+        mobileMoreActions,
+      };
+    },
+    [onShowFormRoomSelectFileDialog, onUploadPDFFilesClick, onCreate],
+  );
+
+  React.useEffect(() => {
+    if (isRoomsFolder || isAIAgentsFolder || isSettingsPage) return;
+
+    if (isAccountsPage) {
+      const contactsModel = getContactsModel(t);
+
+      setModel(contactsModel);
+      setActions(contactsModel);
+
+      return;
+    }
+
+    const newUploadActions = [
+      {
+        id: "actions_upload-files",
+        className: "main-button_drop-down",
+        icon: ActionsUploadReactSvgUrl,
+        label: t("UploadFiles"),
+        onClick: onUploadFileClick,
+        key: "upload-files",
+      },
+    ];
+
+    if (isAIRoom && isKnowledgeTab) {
+      newUploadActions[0].label = t("EmptyView:UploadDeviceOptionTitle");
+      const uploadFromDocspace = {
+        id: "actions_upload-files-product",
+        className: "main-button_drop-down",
+        icon: MoveReactSvgUrl,
+        label: t("EmptyView:UploadFromPortalTitle", {
+          productName: t("Common:ProductName"),
+        }),
+        onClick: onShowAiKnowledgeSelectFileDialog,
+        key: "upload-files-product",
+      };
+
+      setActions([]);
+      setUploadActions([uploadFromDocspace, ...newUploadActions]);
+      setModel([uploadFromDocspace, ...newUploadActions]);
+
+      return;
+    }
+
+    const pluginItems = [];
+
+    if (mainButtonItemsList && enablePlugins && !isAccountsPage) {
+      mainButtonItemsList.forEach((option) => {
+        pluginItems.push({
+          key: option.key,
+          ...option.value,
+        });
+      });
+    }
+
+    const createTemplateBlankPDF = {
+      id: "actions_template_blank",
+      className: "main-button_drop-down_sub",
+      icon: FormBlankReactSvgUrl,
+      label: t("Translations:SubNewForm"),
+      onClick: onCreate,
+      action: "pdf",
+      key: "pdf",
+    };
+
+    const createNewDocumentDocx = {
+      id: "actions_new-document",
+      className: "main-button_drop-down",
+      icon: ActionsDocumentsReactSvgUrl,
+      label: t("Common:Document"),
+      onClick: onCreate,
+      action: "docx",
+      key: "docx",
+    };
+
+    const createNewSpreadsheetXlsx = {
+      id: "actions_new-spreadsheet",
+      className: "main-button_drop-down",
+      icon: SpreadsheetReactSvgUrl,
+      label: t("Common:Spreadsheet"),
+      onClick: onCreate,
+      action: "xlsx",
+      key: "xlsx",
+    };
+
+    const showSelectorDocx = {
+      id: "actions_template_from-file",
+      className: "main-button_drop-down_sub",
+      icon: FormFileReactSvgUrl,
+      label: t("Translations:SubNewFormFile"),
+      onClick: onShowSelectFileDialog,
+      disabled: isPrivacy,
+      key: "form-file",
+    };
+
+    const createNewFolder = {
+      id: "actions_new-folder",
+      className: "main-button_drop-down",
+      icon: CatalogFolderReactSvgUrl,
+      label: t("Common:Folder"),
+      onClick: onCreate,
+      key: "new-folder",
+    };
+
+    const formGallery = {
+      id: "actions_open-template-gallery",
+      className: "main-button_drop-down",
+      icon: TemplateGalleryReactSvgUrl,
+      label: t("Common:TemplateGallery"),
+      onClick: onShowTemplateGallery,
+      key: "template-gallery",
+    };
+
+    const createNewPresentationPptx = {
+      id: "actions_new-presentation",
+      className: "main-button_drop-down",
+      icon: ActionsPresentationReactSvgUrl,
+      label: t("Common:Presentation"),
+      onClick: onCreate,
+      action: "pptx",
+      key: "pptx",
+    };
+
+    if (!(isMobile || isTablet)) {
+      newUploadActions.push({
+        id: "actions_upload-folders",
+        className: "main-button_drop-down",
+        icon: ActionsUploadReactSvgUrl,
+        label: t("UploadFolder"),
+        disabled: isPrivacy,
+        onClick: onUploadFolderClick,
+        key: "upload-folder",
+      });
+    }
+
+    const formActions = {
+      id: "actions_template",
+      className: "main-button_drop-down",
+      icon: FormReactSvgUrl,
+      label: t("Translations:NewForm"),
+      key: "new-form",
+      items: [createTemplateBlankPDF, showSelectorDocx],
+    };
+
+    if (
+      currentRoomType === RoomsType.FormRoom ||
+      (parentRoomType === FolderType.FormRoom && isFolder)
+    ) {
+      const { formRoomActions, mobileFormRoomActions, mobileMoreActions } =
+        createActionsForFormRoom({
+          formGallery,
+          formActions,
+          createNewFolder,
+          templateGalleryAvailable,
+        });
+
+      // for mobile
+      setUploadActions(mobileMoreActions);
+      setActions(mobileFormRoomActions);
+      // for PC
+      setModel(formRoomActions);
+
+      return;
+    }
+
+    const newActions = [
+      createNewDocumentDocx,
+      createNewSpreadsheetXlsx,
+      createNewPresentationPptx,
+      formActions,
+      createNewFolder,
+    ];
+
+    if (pluginItems.length > 0) {
+      // menuModel.push({
+      //   id: "actions_more-plugins",
+      //   className: "main-button_drop-down",
+      //   icon: PluginMoreReactSvgUrl,
+      //   label: t("Common:More"),
+      //   disabled: false,
+      //   key: "more-plugins",
+      //   items: pluginItems,
+      // });
+
+      newActions.push({
+        id: "actions_more-plugins",
+        className: "main-button_drop-down",
+        icon: PluginMoreReactSvgUrl,
+        label: t("Common:More"),
+        disabled: false,
+        key: "more-plugins",
+        items: pluginItems,
+      });
+    }
+
+    if (templateGalleryAvailable) {
+      if (isDesktop()) {
+        newActions.push({
+          isSeparator: true,
+          key: "separator",
+        });
+      }
+
+      newActions.push(formGallery);
+    }
+
+    const menuModel = [...newActions];
+
+    menuModel.push({
+      isSeparator: true,
+      key: "separator",
+    });
+
+    menuModel.push(...newUploadActions);
+    setUploadActions(newUploadActions);
+
+    setModel(menuModel);
+    setActions(newActions);
+  }, [
+    t,
+    isPrivacy,
+    currentFolderId,
+    isAccountsPage,
+    isSettingsPage,
+    enablePlugins,
+    mainButtonItemsList,
+    currentRoomType,
+    isRoomsFolder,
+    isAIAgentsFolder,
+    isOwner,
+    isAdmin,
+    isRoomAdmin,
+
+    parentRoomType,
+    isFolder,
+
+    onCreate,
+    onCreateRoom,
+    getContactsModel,
+    onShowSelectFileDialog,
+    onShowFormRoomSelectFileDialog,
+    onShowAiKnowledgeSelectFileDialog,
+    onUploadFileClick,
+    onUploadFolderClick,
+    createActionsForFormRoom,
+    isMobileArticle,
+
+    isAIRoom,
+    isKnowledgeTab,
+    contactsTab,
+  ]);
+
+  const isProfile = location.pathname.includes("/profile");
+
+  const getMainButtonVisible = () => {
+    let visibilityValue = true;
+
+    if (currentDeviceType === DeviceType.mobile) {
+      visibilityValue = !(
+        moveToPanelVisible ||
+        restorePanelVisible ||
+        copyPanelVisible ||
+        selectFileDialogVisible ||
+        selectFileFormRoomDialogVisible ||
+        selectFileAiKnowledgeDialogVisible ||
+        versionHistoryPanelVisible
+      );
+    }
+
+    if (
+      isProfile ||
+      (isAccountsPage && !contactsCanCreate) ||
+      (isAccountsPage && !isContactsGroupsPage && !allowInvitingMembers)
+    ) {
+      visibilityValue = false;
+    }
+
+    if (!isAccountsPage) visibilityValue = security?.Create;
+
+    if (!isMobileArticle) visibilityValue = false;
+
+    if (isAIRoom && (isChatTab || isResultTab)) visibilityValue = false;
+
+    if (isAIAgentsFolder && aiConfig.aiReadyNeedReset) visibilityValue = false;
+
+    return visibilityValue;
+  };
+
+  const mainButtonVisible = getMainButtonVisible();
+
+  useEffect(() => {
+    setMainButtonVisible(mainButtonVisible);
+  }, [mainButtonVisible]);
+
+  const onMainButtonClick = () => {
+    if (isAIAgentsFolder) return onCreateAgent();
+    if (!isAccountsPage) return onCreateRoom();
+    if (isContactsGroupsPage) return createGroup();
+  };
+
+  const mainButtonText =
+    isRoomAdmin && isAccountsPage ? t("Common:Invite") : t("Common:Actions");
+
+  let isDisabled = false;
+
+  if (isSettingsPage) {
+    isDisabled = isSettingsPage;
+  } else if (isAccountsPage) {
+    isDisabled = (isFrame && disableActionButton) || !contactsCanCreate;
+  } else if ((isChatTab || isResultTab) && isAIRoom) {
+    isDisabled = true;
+  } else {
+    isDisabled = (isFrame && disableActionButton) || !security?.Create;
+  }
+
+  if (showArticleLoader)
+    return isMobileArticle ? null : <ArticleButtonLoader height="32px" />;
+
+  const withMenu = !isRoomsFolder && !isAIAgentsFolder && !isContactsGroupsPage;
+
+  return (
+    <>
+      {isMobileArticle ? (
+        <MobileView
+          t={t}
+          titleProp={t("Upload")}
+          actionOptions={actions}
+          buttonOptions={!isAccountsPage ? uploadActions : null}
+          withoutButton={
+            isRoomsFolder ||
+            isAIAgentsFolder ||
+            isAccountsPage ||
+            isChatTab ||
+            isResultTab
+          }
+          withMenu={withMenu}
+          mainButtonMobileVisible={
+            mainButtonMobileVisible ? mainButtonVisible : null
+          }
+          onMainButtonClick={onMainButtonClick}
+        />
+      ) : isRoomsFolder ? (
+        <Button
+          className={classNames(styles.mainButton, "create-room-button")}
+          id="rooms-shared_create-room-button"
+          label={t("Common:NewRoom")}
+          onClick={onCreateRoom}
+          $currentColorScheme={currentColorScheme}
+          isDisabled={isDisabled}
+          size="small"
+          primary
+          scale
+          title={t("Common:NewRoom")}
+          testId="create_new_room_button"
+        />
+      ) : isAIAgentsFolder ? (
+        <Button
+          className={classNames(styles.mainButton, "create-agent-button")}
+          id="rooms-shared_create-agent-button"
+          label={t("Common:NewAgent")}
+          onClick={onCreateAgent}
+          $currentColorScheme={currentColorScheme}
+          isDisabled={isDisabled || aiConfig.aiReadyNeedReset}
+          size="small"
+          primary
+          scale
+          title={t("Common:NewAgent")}
+          testId="create_new_agent_button"
+        />
+      ) : (
+        <MainButton
+          id={
+            isAccountsPage
+              ? "accounts_invite-main-button"
+              : "actions-main-button"
+          }
+          isDisabled={isDisabled}
+          isDropdown={isDropdownMainButton}
+          text={mainButtonText}
+          model={model}
+          title={mainButtonText}
+          setRefMap={setRefMap}
+        />
+      )}
+
+      <input
+        id="customFileInput"
+        className="custom-file-input custom-file-input-article"
+        multiple
+        type="file"
+        onChange={onFileChange}
+        onClick={onInputClick}
+        ref={inputFilesElement}
+        style={{ display: "none" }}
+        {...(isAIRoom ? { accept: extsFilesVectorized.join(",") } : {})}
+      />
+      <input
+        id="customPDFInput"
+        className="custom-file-input"
+        multiple
+        type="file"
+        accept=".pdf"
+        onChange={onFileChange}
+        onClick={onInputClick}
+        ref={inputPDFFilesElement}
+        style={{ display: "none" }}
+      />
+      <input
+        id="customFolderInput"
+        className="custom-file-input"
+        webkitdirectory=""
+        mozdirectory=""
+        type="file"
+        onChange={onFileChange}
+        onClick={onInputClick}
+        ref={inputFolderElement}
+        style={{ display: "none" }}
+      />
+    </>
+  );
 };
 
 export default inject(
-	({
-		settingsStore,
-		filesStore,
-		dialogsStore,
-		uploadDataStore,
-		treeFoldersStore,
-		selectedFolderStore,
-		clientLoadingStore,
-		oformsStore,
-		pluginStore,
-		versionHistoryStore,
-		userStore,
-		filesActionsStore,
-		currentQuotaStore,
-		peopleStore,
-		guidanceStore,
-		aiRoomStore,
-		filesSettingsStore,
-	}) => {
-		const { isChatTab, isResultTab, isKnowledgeTab } = aiRoomStore;
-		const { showArticleLoader } = clientLoadingStore;
-		const { setRefMap } = guidanceStore;
-		const {
-			isPrivacyFolder,
-			isFavoritesFolder,
-			isRecentFolder,
-			isRecycleBinFolder,
-			isRoomsFolder,
-			isAIAgentsFolder,
-			isArchiveFolder,
-			selectedTreeNode,
-		} = treeFoldersStore;
-		const { startUpload } = uploadDataStore;
-		const {
-			setSelectFileDialogVisible,
-			setInvitePanelOptions,
-			setQuotaWarningDialogVisible,
-			copyPanelVisible,
-			moveToPanelVisible,
-			restorePanelVisible,
-			selectFileDialogVisible,
-			selectFileFormRoomDialogVisible,
-			setSelectFileFormRoomDialogVisible,
-			selectFileAiKnowledgeDialogVisible,
-			setSelectFileAiKnowledgeDialogVisible,
-		} = dialogsStore;
+  ({
+    settingsStore,
+    filesStore,
+    dialogsStore,
+    uploadDataStore,
+    treeFoldersStore,
+    selectedFolderStore,
+    clientLoadingStore,
+    oformsStore,
+    pluginStore,
+    versionHistoryStore,
+    userStore,
+    filesActionsStore,
+    currentQuotaStore,
+    peopleStore,
+    guidanceStore,
+    aiRoomStore,
+    filesSettingsStore,
+  }) => {
+    const { isChatTab, isResultTab, isKnowledgeTab } = aiRoomStore;
+    const { showArticleLoader } = clientLoadingStore;
+    const { setRefMap } = guidanceStore;
+    const {
+      isPrivacyFolder,
+      isFavoritesFolder,
+      isRecentFolder,
+      isRecycleBinFolder,
+      isRoomsFolder,
+      isAIAgentsFolder,
+      isArchiveFolder,
+      selectedTreeNode,
+    } = treeFoldersStore;
+    const { startUpload } = uploadDataStore;
+    const {
+      setSelectFileDialogVisible,
+      setInvitePanelOptions,
+      setQuotaWarningDialogVisible,
+      copyPanelVisible,
+      moveToPanelVisible,
+      restorePanelVisible,
+      selectFileDialogVisible,
+      selectFileFormRoomDialogVisible,
+      setSelectFileFormRoomDialogVisible,
+      selectFileAiKnowledgeDialogVisible,
+      setSelectFileAiKnowledgeDialogVisible,
+    } = dialogsStore;
 
-		const {
-			enablePlugins,
-			currentColorScheme,
-			currentDeviceType,
-			allowInvitingMembers,
-			aiConfig,
-			templateGalleryAvailable,
-		} = settingsStore;
+    const {
+      enablePlugins,
+      currentColorScheme,
+      currentDeviceType,
+      allowInvitingMembers,
+      aiConfig,
+      templateGalleryAvailable,
+    } = settingsStore;
 
-		const { isVisible: versionHistoryPanelVisible } = versionHistoryStore;
+    const { isVisible: versionHistoryPanelVisible } = versionHistoryStore;
 
-		const { security } = selectedFolderStore;
+    const { security } = selectedFolderStore;
 
-		const { mainButtonMobileVisible, setMainButtonVisible } = filesStore;
+    const { mainButtonMobileVisible, setMainButtonVisible } = filesStore;
 
-		const currentFolderId = selectedFolderStore.id;
-		const currentRoomType = selectedFolderStore.roomType;
-		const { parentRoomType } = selectedFolderStore;
-		const { isFolder } = selectedFolderStore;
+    const currentFolderId = selectedFolderStore.id;
+    const currentRoomType = selectedFolderStore.roomType;
+    const { parentRoomType } = selectedFolderStore;
+    const { isFolder } = selectedFolderStore;
 
-		const { isAdmin, isOwner, isRoomAdmin, isCollaborator } = userStore.user;
+    const { isAdmin, isOwner, isRoomAdmin, isCollaborator } = userStore.user;
 
-		const { showWarningDialog, isWarningRoomsDialog } = currentQuotaStore;
+    const { showWarningDialog, isWarningRoomsDialog } = currentQuotaStore;
 
-		const { setOformFromFolderId, oformsFilter, setTemplateGalleryVisible } =
-			oformsStore;
-		const { mainButtonItemsList } = pluginStore;
+    const { setOformFromFolderId, oformsFilter, setTemplateGalleryVisible } =
+      oformsStore;
+    const { mainButtonItemsList } = pluginStore;
 
-		const { frameConfig, isFrame } = settingsStore;
+    const { frameConfig, isFrame } = settingsStore;
 
-		const { createFoldersTree } = filesActionsStore;
+    const { createFoldersTree } = filesActionsStore;
 
-		return {
-			setQuotaWarningDialogVisible,
-			showText: settingsStore.showText,
-			isMobileArticle: settingsStore.isMobileArticle,
+    return {
+      setQuotaWarningDialogVisible,
+      showText: settingsStore.showText,
+      isMobileArticle: settingsStore.isMobileArticle,
 
-			showArticleLoader,
-			isPrivacy: isPrivacyFolder,
-			isFavoritesFolder,
-			isRecentFolder,
-			isRecycleBinFolder,
+      showArticleLoader,
+      isPrivacy: isPrivacyFolder,
+      isFavoritesFolder,
+      isRecentFolder,
+      isRecycleBinFolder,
 
-			isRoomsFolder,
-			isAIAgentsFolder,
-			isArchiveFolder,
-			selectedTreeNode,
+      isRoomsFolder,
+      isAIAgentsFolder,
+      isArchiveFolder,
+      selectedTreeNode,
 
-			startUpload,
+      startUpload,
 
-			setSelectFileDialogVisible,
-			selectFileDialogVisible,
-			setInvitePanelOptions,
-			setMainButtonVisible,
+      setSelectFileDialogVisible,
+      selectFileDialogVisible,
+      setInvitePanelOptions,
+      setMainButtonVisible,
 
-			currentFolderId,
-			currentRoomType,
+      currentFolderId,
+      currentRoomType,
 
-			setOformFromFolderId,
-			oformsFilter,
+      setOformFromFolderId,
+      oformsFilter,
 
-			enablePlugins,
-			mainButtonItemsList,
+      enablePlugins,
+      mainButtonItemsList,
 
-			currentColorScheme,
+      currentColorScheme,
 
-			isAdmin,
-			isOwner,
-			isRoomAdmin,
-			isCollaborator,
+      isAdmin,
+      isOwner,
+      isRoomAdmin,
+      isCollaborator,
 
-			mainButtonMobileVisible,
-			moveToPanelVisible,
-			restorePanelVisible,
-			copyPanelVisible,
-			versionHistoryPanelVisible,
-			security,
-			currentDeviceType,
+      mainButtonMobileVisible,
+      moveToPanelVisible,
+      restorePanelVisible,
+      copyPanelVisible,
+      versionHistoryPanelVisible,
+      security,
+      currentDeviceType,
 
-			isFrame,
-			disableActionButton: frameConfig?.disableActionButton,
+      isFrame,
+      disableActionButton: frameConfig?.disableActionButton,
 
-			parentRoomType,
-			isFolder,
-			selectFileFormRoomDialogVisible,
-			setSelectFileFormRoomDialogVisible,
-			selectFileAiKnowledgeDialogVisible,
-			setSelectFileAiKnowledgeDialogVisible,
-			createFoldersTree,
+      parentRoomType,
+      isFolder,
+      selectFileFormRoomDialogVisible,
+      setSelectFileFormRoomDialogVisible,
+      selectFileAiKnowledgeDialogVisible,
+      setSelectFileAiKnowledgeDialogVisible,
+      createFoldersTree,
 
-			showWarningDialog,
-			isWarningRoomsDialog,
+      showWarningDialog,
+      isWarningRoomsDialog,
 
-			getContactsModel: peopleStore.contextOptionsStore.getContactsModel,
-			contactsCanCreate: peopleStore.contextOptionsStore.contactsCanCreate,
-			setRefMap,
-			setTemplateGalleryVisible,
-			templateGalleryAvailable,
+      getContactsModel: peopleStore.contextOptionsStore.getContactsModel,
+      contactsCanCreate: peopleStore.contextOptionsStore.contactsCanCreate,
+      contactsTab: peopleStore.usersStore.contactsTab,
+      setRefMap,
+      setTemplateGalleryVisible,
+      templateGalleryAvailable,
 
-			isChatTab,
-			isResultTab,
-			isKnowledgeTab,
-			isAIRoom: selectedFolderStore.isAIRoom,
-			extsFilesVectorized: filesSettingsStore.extsFilesVectorized,
-			allowInvitingMembers,
+      isChatTab,
+      isResultTab,
+      isKnowledgeTab,
+      isAIRoom: selectedFolderStore.isAIRoom,
+      extsFilesVectorized: filesSettingsStore.extsFilesVectorized,
+      allowInvitingMembers,
 
-			aiConfig,
-		};
-	},
+      aiConfig,
+    };
+  },
 )(
-	withTranslation([
-		"Article",
-		"UploadPanel",
-		"Common",
-		"Files",
-		"People",
-		"PeopleTranslations",
-		"EmptyView",
-	])(observer(ArticleMainButtonContent)),
+  withTranslation([
+    "Article",
+    "UploadPanel",
+    "Common",
+    "Files",
+    "People",
+    "PeopleTranslations",
+    "EmptyView",
+  ])(observer(ArticleMainButtonContent)),
 );

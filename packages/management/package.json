@@ -72,7 +72,6 @@
     "cross-env": "^10.1.0",
     "css-loader": "6.11.0",
     "css-minimizer-webpack-plugin": "^7.0.4",
-    "local-web-server": "5.4.0",
     "sass": "1.79.6",
     "sass-loader": "16.0.5",
     "shx": "0.4.0",

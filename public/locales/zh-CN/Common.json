@@ -148,7 +148,6 @@
   "ChooseAnother": "选择另一个",
   "ChooseExpirationDate": "通过设置失效日期，限制此链接的有效期。",
   "ChooseFormatText": "选择要下载的文件格式",
-  "ChooseFromTemplates": "从模板中选择",
   "Clean": "清理",
   "ClearAll": "全部清除",
   "ClearBackupList": "删除所有备份",
@@ -213,7 +212,6 @@
   "CreateFormFillingRoom": "创建填表房间",
   "CreateGroup": "创建群组",
   "CreateMasterFormFromFile": "从文件创建 PDF 表单",
-  "CreatePDFForm": "创建 PDF 表单",
   "CreateRoom": "创建房间",
   "CreateVirtualDataRoom": "创建虚拟数据房间",
   "Culture_ar-SA": "عربي (المملكة العربية السعودية)",
@@ -1054,5 +1052,8 @@
   "YouHaveUnsavedChanges": "您有未保存的变更",
   "YourCurrentDomain": "您当前的域",
   "YourLogo": "您的logo",
-  "YourTurn": "轮到您了"
+  "YourTurn": "轮到您了",
+  "Upload": "上传",
+  "Open": "打开",
+  "Quantity": "数量"
 }

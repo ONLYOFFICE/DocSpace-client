@@ -68,7 +68,7 @@ export function proxy(request: NextRequest) {
 
     const confirmUrl = `${request.nextUrl.origin}/login/confirm/${type}?${queryString}`;
     if (request.nextUrl.toString() == confirmUrl) {
-      return NextResponse.rewrite(confirmUrl, { headers: requestHeaders });
+      return NextResponse.next({ request: { headers: requestHeaders } });
     }
 
     return NextResponse.redirect(

@@ -29,10 +29,8 @@
 import React, { useMemo } from "react";
 import dynamic from "next/dynamic";
 import { useTranslation } from "react-i18next";
-import {
-  DocumentEditor,
-  type IConfig,
-} from "@onlyoffice/document-editor-react";
+
+import { DocumentEditor, type IConfig } from "@docspace/ui-kit/document-editor";
 
 import { ThemeKeys } from "@docspace/shared/enums";
 import { getEditorTheme } from "@docspace/shared/utils";
@@ -86,7 +84,7 @@ const Editor = ({
   onSDKRequestSelectSpreadsheet,
   onSDKRequestSelectDocument,
   onSDKRequestReferenceSource,
-  onStartFillingVDRPanel,
+  onOpenRoleMappingPanel,
   setFillingStatusDialogVisible,
   openShareFormDialog,
   onStartFilling,
@@ -137,7 +135,7 @@ const Editor = ({
     organizationName,
     setFillingStatusDialogVisible,
     openShareFormDialog,
-    onStartFillingVDRPanel,
+    onOpenRoleMappingPanel,
     shareKey,
     generationToolCallState,
   });
@@ -341,7 +339,6 @@ const Editor = ({
         }
         height="100%"
         width="100%"
-        events_onDocumentReady={onDocumentReady}
       />
     </div>
   );

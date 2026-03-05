@@ -441,6 +441,10 @@ const PortalSettingsRoutes = {
       element: <ViewComponent />,
     },
     {
+      path: "ai-services",
+      element: <ViewComponent />,
+    },
+    {
       path: "management/disk-space",
       element: <ViewComponent />,
     },
@@ -606,6 +610,16 @@ const PortalSettingsRoutes = {
           () =>
             import(
               "SRC_DIR/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Viewer"
+            ),
+        ),
+    },
+    {
+      path: "developer-tools/javascript-sdk/uploader",
+      lazy: () =>
+        componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Uploader"
             ),
         ),
     },

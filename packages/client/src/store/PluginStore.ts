@@ -62,8 +62,11 @@ import type {
   IMessage,
   IProfileMenuItem,
   IProfileMenuItemClient,
+  IArticleButtonItem,
+  IArticleButtonItemClient,
   IframeWindow,
   TPlugin,
+  IPostMessageCallbackMessage,
 } from "SRC_DIR/helpers/plugins/types";
 
 import { getPluginUrl, messageActions } from "../helpers/plugins/utils";
@@ -76,8 +79,7 @@ import {
 } from "../helpers/plugins/enums";
 
 import type SelectedFolderStore from "./SelectedFolderStore";
-import { TSelectorProps } from "SRC_DIR/components/PluginSelector/types";
-import type { IFloatingOperationsButton } from "@onlyoffice/docspace-plugin-sdk";
+import type { TSelectorProps } from "SRC_DIR/components/PluginSelector/types";
 
 const { api: apiConf, proxy: proxyConf } = defaultConfig;
 const { origin: apiOrigin, prefix: apiPrefix } = apiConf;
@@ -116,6 +118,8 @@ class PluginStore {
   eventListenerItems: Map<string, IEventListenerItemClient> = new Map();
 
   fileItems: Map<string, IFileItemClient> = new Map();
+
+  articleButtonItems: Map<string, IArticleButtonItemClient> = new Map();
 
   pluginFrame: HTMLIFrameElement | null = null;
 
@@ -181,6 +185,7 @@ class PluginStore {
       updateProfileMenuItems: this.updateProfileMenuItems,
       updateEventListenerItems: this.updateEventListenerItems,
       updateFileItems: this.updateFileItems,
+      updateArticleButtonItems: this.updateArticleButtonItems,
       updateCreateDialogProps: updateCreateDialogProps,
       updatePlugin: this.updatePlugin,
       setPluginSelectorVisible: this.setPluginSelectorVisible,
@@ -292,6 +297,12 @@ class PluginStore {
         if (this.plugins[pluginIdx].scopes.includes(PluginScopes.File)) {
           this.updateFileItems(name);
         }
+
+        if (
+          this.plugins[pluginIdx].scopes.includes(PluginScopes.ArticleButton)
+        ) {
+          this.updateArticleButtonItems(name);
+        }
       }
     }
   };
@@ -370,7 +381,13 @@ class PluginStore {
     return true;
   };
 
-  addPlugin = async (data: FormData, t: TTranslation) => {
+  checkPluginCacheWarning = (plugin: TAPIPlugin) => {
+    return this.plugins.some(
+      (p) => p.name === plugin.name && p.version === plugin.version,
+    );
+  };
+
+  addPlugin = async (data: FormData) => {
     try {
       const plugin = await api.plugins.addPlugin(data);
 
@@ -378,19 +395,16 @@ class PluginStore {
         plugin.minDocSpaceVersion,
       );
 
-      if (!isPluginCompatible) {
-        toastr.error(
-          t("PluginIsNotCompatible", {
-            productName: t("Common:ProductName"),
-          }),
-        );
-      } else {
-        toastr.success(t("PluginLoadedSuccessfully"));
-      }
+      const isPluginInCache = this.checkPluginCacheWarning(plugin);
 
       this.setNeedPageReload(true);
 
       this.initPlugin(plugin);
+
+      return {
+        isPluginCompatible,
+        isPluginInCache,
+      };
     } catch (e) {
       toastr.error(e as TData);
     }
@@ -585,6 +599,14 @@ class PluginStore {
     if (plugin.scopes.includes(PluginScopes.File)) {
       this.updateFileItems(name);
     }
+
+    if (plugin.scopes.includes(PluginScopes.PostMessage)) {
+      this.initPostMessagePlugin(plugin);
+    }
+
+    if (plugin.scopes.includes(PluginScopes.ArticleButton)) {
+      this.updateArticleButtonItems(name);
+    }
   };
 
   updatePlugin = async (
@@ -673,6 +695,10 @@ class PluginStore {
 
     if (plugin.scopes.includes(PluginScopes.File)) {
       this.deactivateFileItems(plugin);
+    }
+
+    if (plugin.scopes.includes(PluginScopes.ArticleButton)) {
+      this.deactivateArticleButtonItems(plugin);
     }
   };
 
@@ -857,7 +883,7 @@ class PluginStore {
     if (!plugin || !plugin.enabled) return;
 
     const items: Map<string, IContextMenuItem> | undefined =
-      plugin.getContextMenuItems && plugin.getContextMenuItems();
+      plugin.getContextMenuItems?.();
 
     if (!items) return;
 
@@ -868,15 +894,26 @@ class PluginStore {
     const processContextMenuItem = (
       value: IContextMenuItem,
     ): IContextMenuItemClient => {
-      const onClick = async (fileId: number) => {
-        if (!value.onClick || value.items) return;
+      const onClick: IContextMenuItemClient["onClick"] = async (fileId) => {
+        // Support both new onItemClick and deprecated onClick for backward compatibility
+        const onClickCallback = value.onItemClick || value.onClick;
 
-        const message = await value.onClick(fileId);
+        if (!onClickCallback || value.items) return;
+
+        let message: IMessage | void;
+
+        if (value.onItemClick) {
+          message = await value.onItemClick(fileId);
+        } else {
+          message = await value.onClick?.(fileId as number);
+        }
 
         this.dispatchMessage({ message, pluginName: plugin.name });
       };
 
-      const onGroupClick: IContextMenuItem["onGroupClick"] = async (items) => {
+      const onGroupClick: IContextMenuItemClient["onGroupClick"] = async (
+        items,
+      ) => {
         if (!value.onGroupClick || !value.isGroupAction || value.items) return;
 
         const message = await value.onGroupClick(items);
@@ -933,7 +970,7 @@ class PluginStore {
     if (!plugin || !plugin.enabled) return;
 
     const items: Map<string, IInfoPanelItem> | undefined =
-      plugin.getInfoPanelItems && plugin.getInfoPanelItems();
+      plugin.getInfoPanelItems?.();
 
     if (!items) return;
 
@@ -974,7 +1011,7 @@ class PluginStore {
     if (!plugin) return;
 
     const items: Map<string, IInfoPanelItem> | undefined =
-      plugin.getInfoPanelItems && plugin.getInfoPanelItems();
+      plugin.getInfoPanelItems?.();
 
     if (!items) return;
 
@@ -1054,7 +1091,7 @@ class PluginStore {
     if (!plugin) return;
 
     const items: Map<string, IMainButtonItem> | undefined =
-      plugin.getMainButtonItems && plugin.getMainButtonItems();
+      plugin.getMainButtonItems?.();
 
     if (!items) return;
 
@@ -1069,7 +1106,7 @@ class PluginStore {
     if (!plugin || !plugin.enabled) return;
 
     const items: Map<string, IProfileMenuItem> | undefined =
-      plugin.getProfileMenuItems && plugin.getProfileMenuItems();
+      plugin.getProfileMenuItems?.();
 
     if (!items) return;
 
@@ -1108,7 +1145,7 @@ class PluginStore {
     if (!plugin) return;
 
     const items: Map<string, IProfileMenuItem> | undefined =
-      plugin.getProfileMenuItems && plugin.getProfileMenuItems();
+      plugin.getProfileMenuItems?.();
 
     if (!items) return;
 
@@ -1123,7 +1160,7 @@ class PluginStore {
     if (!plugin || !plugin.enabled) return;
 
     const items: Map<string, IEventListenerItem> | undefined =
-      plugin.getEventListenerItems && plugin.getEventListenerItems();
+      plugin.getEventListenerItems?.();
 
     if (!items) return;
 
@@ -1160,7 +1197,7 @@ class PluginStore {
     if (!plugin) return;
 
     const items: Map<string, IEventListenerItem> | undefined =
-      plugin.getEventListenerItems && plugin.getEventListenerItems();
+      plugin.getEventListenerItems?.();
 
     if (!items) return;
 
@@ -1174,8 +1211,7 @@ class PluginStore {
 
     if (!plugin || !plugin.enabled) return;
 
-    const items: Map<string, IFileItem> | undefined =
-      plugin.getFileItems && plugin.getFileItems();
+    const items: Map<string, IFileItem> | undefined = plugin.getFileItems?.();
 
     if (!items) return;
 
@@ -1237,13 +1273,64 @@ class PluginStore {
   deactivateFileItems = (plugin: TPlugin) => {
     if (!plugin) return;
 
-    const items: Map<string, IFileItem> | undefined =
-      plugin.getFileItems && plugin.getFileItems();
+    const items: Map<string, IFileItem> | undefined = plugin.getFileItems?.();
 
     if (!items) return;
 
     Array.from(items).forEach(([key]) => {
       this.fileItems.delete(key);
+    });
+  };
+
+  initPostMessagePlugin = (plugin: TPlugin) => {
+    const callback = (message: IPostMessageCallbackMessage) => {
+      this.dispatchMessage({ message, pluginName: plugin.name });
+    };
+
+    plugin.setPostMessageCallback?.(callback);
+  };
+
+  updateArticleButtonItems = async (name: string) => {
+    const plugin = this.plugins.find((p) => p.name === name);
+
+    if (!plugin || !plugin.enabled) return;
+
+    const items: Map<string, IArticleButtonItem> | undefined =
+      plugin.getArticleButtonItems && plugin.getArticleButtonItems();
+
+    if (!items) return;
+
+    const userRole = this.getUserRole();
+    const device = this.getCurrentDevice();
+
+    for (const [key, value] of Array.from(items)) {
+      const correctUserType = value.usersTypes
+        ? value.usersTypes.includes(userRole)
+        : true;
+
+      const correctDevice = value.devices
+        ? value.devices.includes(device)
+        : true;
+
+      if (!correctUserType || !correctDevice) continue;
+
+      this.articleButtonItems.set(key, {
+        ...value,
+        pluginName: plugin.name,
+      });
+    }
+  };
+
+  deactivateArticleButtonItems = (plugin: TPlugin) => {
+    if (!plugin) return;
+
+    const items: Map<string, IArticleButtonItem> | undefined =
+      plugin.getArticleButtonItems && plugin.getArticleButtonItems();
+
+    if (!items) return;
+
+    Array.from(items).forEach(([key]) => {
+      this.articleButtonItems.delete(key);
     });
   };
 
@@ -1341,6 +1428,23 @@ class PluginStore {
 
   get fileItemsList() {
     const items = Array.from(this.fileItems, ([key, value]) => {
+      return {
+        key,
+        value: {
+          ...value,
+        },
+      };
+    });
+
+    if (items.length > 0) {
+      return items;
+    }
+
+    return null;
+  }
+
+  get articleButtonItemsList() {
+    const items = Array.from(this.articleButtonItems, ([key, value]) => {
       return {
         key,
         value: {

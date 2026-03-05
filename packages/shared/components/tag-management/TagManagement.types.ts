@@ -32,7 +32,7 @@ export interface TagManagementPopupProps {
   roomId: string | number;
   onClose: VoidFunction;
   onSelectTag: (tag: TagClickEvent) => void;
-  anchor: React.RefObject<Element | null>;
+  anchor: React.RefObject<HTMLElement | null>;
 
   onEditTag?: (oldLabel: string, newLabel: string) => Promise<void>;
   onDeleteTag?: (label: string) => Promise<void>;

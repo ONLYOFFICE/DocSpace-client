@@ -1,6 +1,5 @@
 {
   "AITools": "Mjetet e inteligjencës artificiale",
-  "AItoolsConfirm": "Aktivizimi i shërbimit të mjeteve të inteligjencës artificiale do t'u japë të gjithë përdoruesve të {{productName}} qasje në veçoritë e mundësuara nga inteligjenca artificiale, me kusht që portofoli të ketë fonde të mjaftueshme. A jeni i sigurt që doni të vazhdoni?",
   "AIToolsEnabled": "Shërbimi i mjeteve të inteligjencës artificiale u aktivizua me sukses.",
   "AndMore": "Dhe më shumë!",
   "AutomaticBackupDescription": "Konfiguroni backup-e të planifikuara për mbrojtje të vazhdueshme të të dhënave, pa veprime manuale.",
@@ -20,7 +19,6 @@
   "FreeBackupsPerMonth": "Backup falas: {{value}}/{{maxValue}} për muajin aktual.",
   "ImageGeneration": "Gjenerimi i imazhit",
   "ImageGenerationDescription": "Dizenjoni imazhe dhe ilustrime origjinale duke përdorur inteligjencën artificiale për dokumentet tuaja.",
-  "NewAIfeatures": "Karakteristika të reja të inteligjencës artificiale shtohen rregullisht për t'ju ndihmuar të punoni më shpejt, më me zgjuarsi dhe me më pak përpjekje.",
   "OCR": "OCR",
   "OCRDescription": "Njoh dhe nxirr tekstin nga PDF-të dhe imazhet e skanuara.",
   "Summarization": "Përmbledhje",

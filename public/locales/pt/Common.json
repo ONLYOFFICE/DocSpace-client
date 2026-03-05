@@ -148,7 +148,6 @@
   "ChooseAnother": "Escolha outro",
   "ChooseExpirationDate": "Limite o período de disponibilidade deste link definindo uma data de expiração.",
   "ChooseFormatText": "Escolha o formato para cada ficheiro a ser transferido",
-  "ChooseFromTemplates": "Escolha entre os modelos",
   "Clean": "Limpar",
   "ClearAll": "Limpar tudo",
   "ClearBackupList": "Eliminar todas as cópias de segurança",
@@ -213,7 +212,6 @@
   "CreateFormFillingRoom": "Criar sala de preenchimento de formulários",
   "CreateGroup": "Criar grupo",
   "CreateMasterFormFromFile": "Criar formulário PDF a partir do ficheiro",
-  "CreatePDFForm": "Criar formulário PDF",
   "CreateRoom": "Criar sala",
   "CreateVirtualDataRoom": "Crie uma sala de dados virtual",
   "Culture_ar-SA": "عربي (المملكة العربية السعودية)",
@@ -1054,5 +1052,8 @@
   "YouHaveUnsavedChanges": "Tem alterações que não foram guardadas",
   "YourCurrentDomain": "O seu domínio atual",
   "YourLogo": "O seu logótipo",
-  "YourTurn": "A sua vez"
+  "YourTurn": "A sua vez",
+  "Upload": "Carregar",
+  "Open": "Abrir",
+  "Quantity": "Quantidade"
 }

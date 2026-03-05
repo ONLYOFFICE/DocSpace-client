@@ -1,6 +1,5 @@
 {
   "AITools": "AIツール",
-  "AItoolsConfirm": "AIツールサービスを有効にすると、ウォレットに十分な資金がある場合に限り、すべての{{productName}}ユーザーがAI搭載機能を利用できるようになります。続行してもよろしいですか？",
   "AIToolsEnabled": "AIツールサービスが正常に有効化されました。",
   "AndMore": "などなど！",
   "AutomaticBackupDescription": "手動操作なしで継続的なデータ保護のために、スケジュールされたバックアップを設定します。",
@@ -20,7 +19,6 @@
   "FreeBackupsPerMonth": "今月の無料バックアップ: {{value}}/{{maxValue}}",
   "ImageGeneration": "画像生成",
   "ImageGenerationDescription": "文書用にAIを活用したオリジナル画像やイラストをデザインする。",
-  "NewAIfeatures": "新しいAI機能が定期的に追加され、より速く、よりスマートに、より少ない労力で作業できるよう支援する。",
   "OCR": "OCR",
   "OCRDescription": "スキャンしたPDFや画像からテキストを認識・抽出する。",
   "Summarization": "要約生成",

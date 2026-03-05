@@ -42,6 +42,7 @@ import styles from "../AISettings.module.scss";
 import { inject, observer } from "mobx-react";
 import AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 import classNames from "classnames";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 type DefaultProviderProps = {
   aiProviders?: AISettingsStore["aiProviders"];
@@ -53,6 +54,7 @@ type DefaultProviderProps = {
   changeDefaultProvider?: AISettingsStore["changeDefaultProvider"];
   defaultProviderModelsError?: AISettingsStore["defaultProviderModelsError"];
   defaultProviderInitied?: AISettingsStore["defaultProviderInitied"];
+  aiConfig?: SettingsStore["aiConfig"];
 };
 
 const getSelectedProviderOption = (
@@ -66,20 +68,8 @@ const getSelectedProviderOption = (
   return { key: provider?.id, label: provider.title };
 };
 
-const getSelectedModelOption = (
-  t: TTranslation,
-  models?: TModel[] | null,
-  selectedModelId?: string | null,
-): TOption => {
-  if (!models || !selectedModelId)
-    return { key: "-2", label: t("Common:NoModelsFound") };
-
-  const model = models.find((m) => m.modelId === selectedModelId) || models[0];
-
-  return { key: model.modelId, label: model.name };
-};
-
 const DefaultProviderComponent = ({
+  aiConfig,
   aiProviders,
   defaultProviderModels,
   defaultProvider,
@@ -89,6 +79,23 @@ const DefaultProviderComponent = ({
   defaultProviderModelsError,
   defaultProviderInitied,
 }: DefaultProviderProps) => {
+  const getSelectedModelOption = (
+    t: TTranslation,
+    models?: TModel[] | null,
+    selectedModelId?: string | null,
+  ): TOption => {
+    if (!models || !selectedModelId)
+      return { key: "-2", label: t("Common:NoModelsFound") };
+
+    const model =
+      models.find((m) => m.modelId === selectedModelId) || models[0];
+
+    return {
+      key: model.modelId,
+      label: aiConfig?.modelAliases?.[model.modelId] || model.modelId,
+    };
+  };
+
   const { t } = useTranslation(["Common", "AISettings"]);
   const [selectedProviderId, setSelectedProviderId] = useState<number | null>(
     defaultProvider?.providerId || null,
@@ -113,8 +120,10 @@ const DefaultProviderComponent = ({
 
   const getModelOptions = () => {
     return (
-      defaultProviderModels?.map((m) => ({ key: m.modelId, label: m.name })) ||
-      []
+      defaultProviderModels?.map((m) => ({
+        key: m.modelId,
+        label: aiConfig?.modelAliases?.[m.modelId] || m.modelId,
+      })) || []
     );
   };
 

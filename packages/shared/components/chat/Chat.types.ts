@@ -25,13 +25,25 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import type React from "react";
 
-import type { TContent, TMessage, TToolCallContent } from "../../api/ai/types";
+import type {
+  TAIConfig,
+  TContent,
+  TMessage,
+  TToolCallContent,
+} from "../../api/ai/types";
 import type { TGetIcon } from "@docspace/ui-kit/selectors/utils/types";
 import type { TFile } from "../../api/files/types";
+import type { TMultimodal } from "../../api/rooms/types";
 
 import type useToolsSettings from "./hooks/useToolsSettings";
 import type useInitChats from "./hooks/useInitChats";
 import type useInitMessages from "./hooks/useInitMessages";
+
+export type TChatPlaylistImage = {
+  fileId: number;
+  title: string;
+  src: string;
+};
 
 export type TGenerateDocStoreProps = {
   roomId: string | number;
@@ -46,11 +58,13 @@ export type TChatStoreProps = {
 export type TMessageStoreProps = {
   roomId: string | number;
   children: React.ReactNode;
+  multimodal?: TMultimodal;
 } & Omit<ReturnType<typeof useInitMessages>, "initMessages">;
 
 export type SelectModelProps = {
   selectedModel: string;
   isLoading?: boolean;
+  modelAliases?: TAIConfig["modelAliases"];
 };
 
 export type SelectChatProps = {
@@ -93,7 +107,7 @@ export type MessageProps = {
   getIcon: TGetIcon;
   getResultStorageId: () => number | null;
   folderFormValidation: RegExp;
-};
+} & Pick<MessageImagesProps, "setAiPlaylistImages" | "setMediaViewerVisible">;
 
 export type MessageButtonsProps = {
   text: string;
@@ -122,6 +136,12 @@ export type MessageFilesProps = {
   reverse?: boolean;
 };
 
+export type MessageImagesProps = {
+  images: TContent[];
+  setAiPlaylistImages?: (value: TChatPlaylistImage[]) => void;
+  setMediaViewerVisible?: (value: boolean) => void;
+};
+
 export type MessageMarkdownFieldProps = {
   chatMessage: string;
   propLanguage?: string;
@@ -144,11 +164,12 @@ export type MessageBodyProps = {
   getIcon: TGetIcon;
   getResultStorageId: () => number | null;
   folderFormValidation: RegExp;
-};
+} & Pick<MessageProps, "setAiPlaylistImages" | "setMediaViewerVisible">;
 
 export type FilesListProps = {
   files: Partial<TFile>[];
   isFixed?: boolean;
+  multimodal?: TMultimodal;
   getIcon: TGetIcon;
   onRemove?: (file: Partial<TFile>) => void;
 };
@@ -172,6 +193,7 @@ export type AttachmentProps = {
   toggleAttachment: VoidFunction;
   getIcon: TGetIcon;
   setSelectedFiles: (files: Partial<TFile>[]) => void;
+  multimodal?: TMultimodal;
 };
 
 export type ChatInputProps = {
@@ -185,6 +207,7 @@ export type ChatInputProps = {
   toolsSettings: ReturnType<typeof useToolsSettings>;
   isPortalAdmin: boolean;
   aiReady: boolean;
+  multimodal?: TMultimodal;
 };
 
 export type ChatInfoBlockProps = {
@@ -224,4 +247,11 @@ export type ChatProps = {
   }) => void;
   setDeleteDialogVisible?: (value: boolean) => void;
   folderFormValidation: RegExp;
+
+  multimodal?: TMultimodal;
+
+  setAiPlaylistImages?: (value: TChatPlaylistImage[]) => void;
+  setMediaViewerVisible?: (value: boolean) => void;
+
+  modelAliases?: TAIConfig["modelAliases"];
 };

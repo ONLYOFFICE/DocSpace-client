@@ -32,7 +32,8 @@ import { Nullable } from "@docspace/shared/types";
 import { TRoom } from "@docspace/shared/api/rooms/types";
 import { InfoPanelEvents } from "@docspace/shared/enums";
 
-import InfoPanelStore, { InfoPanelView } from "SRC_DIR/store/InfoPanelStore";
+import type InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
+import type { InfoPanelView } from "SRC_DIR/helpers/info-panel";
 
 type TInfoPanelActionsProps = {
   setView?: InfoPanelStore["setView"];

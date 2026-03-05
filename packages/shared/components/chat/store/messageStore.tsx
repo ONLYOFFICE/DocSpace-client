@@ -38,6 +38,7 @@ import type {
   TToolCallContent,
 } from "../../../api/ai/types";
 import type { TFile } from "../../../api/files/types";
+import type { TMultimodal } from "../../../api/rooms/types";
 
 import { toastr } from "@docspace/ui-kit/components/toast";
 
@@ -53,6 +54,8 @@ export default class MessageStore {
   currentChatId: string = "";
 
   roomId: number | string = "";
+
+  multimodal?: TMultimodal;
 
   abortController: AbortController = new AbortController();
 
@@ -107,6 +110,10 @@ export default class MessageStore {
 
   setRoomId = (roomId: number | string) => {
     this.roomId = roomId;
+  };
+
+  setMultimodal = (multimodal?: TMultimodal) => {
+    this.multimodal = multimodal;
   };
 
   setCurrentChatId = (chatId: string) => {
@@ -239,14 +246,30 @@ export default class MessageStore {
   };
 
   addUserMessage = (message: string, files: Partial<TFile>[]) => {
-    const filesContent: TContent[] = files.map((f) => {
-      return {
-        type: ContentType.Files,
-        extension: f.fileExst ? f.fileExst : "",
-        title: f.title ? f.title : "",
-        id: f.id ? Number(f.id) : 0,
-      };
-    });
+    const imageFormats = this.multimodal?.image.formats || [];
+
+    const filesContent: TContent[] = files
+      .map((f) => {
+        const isImage =
+          f.fileExst && imageFormats.includes(f.fileExst.toLowerCase());
+
+        if (isImage && f.viewUrl) {
+          return {
+            type: ContentType.Images,
+            id: f.id ? Number(f.id) : 0,
+            url: f.viewUrl,
+            fileType: f.fileType || 0,
+          };
+        }
+
+        return {
+          type: ContentType.Files,
+          extension: f.fileExst ? f.fileExst : "",
+          title: f.title ? f.title : "",
+          id: f.id ? Number(f.id) : 0,
+        };
+      })
+      .filter(Boolean) as TContent[];
 
     const newMsg: TMessage = {
       role: RoleType.UserMessage,
@@ -682,12 +705,17 @@ export const MessageStoreContextProvider = ({
   messages,
   chatId,
   total,
+  multimodal,
 }: TMessageStoreProps) => {
   const store = React.useMemo(() => new MessageStore(), []);
 
   React.useEffect(() => {
     store.setRoomId(roomId);
   }, [store, roomId]);
+
+  React.useEffect(() => {
+    store.setMultimodal(multimodal);
+  }, [store, multimodal]);
 
   React.useEffect(() => {
     if (store.isRequestRunning) return;

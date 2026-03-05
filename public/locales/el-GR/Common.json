@@ -148,7 +148,6 @@
   "ChooseAnother": "Επιλέξτε άλλο",
   "ChooseExpirationDate": "Περιορίστε την περίοδο διαθεσιμότητας για αυτόν τον σύνδεσμο, ορίζοντας μια ημερομηνία λήξης.",
   "ChooseFormatText": "Επιλέξτε τη μορφή για κάθε αρχείο προς λήψη",
-  "ChooseFromTemplates": "Επιλέξτε από τα Πρότυπα",
   "Clean": "Εκκαθάριση",
   "ClearAll": "Εκκαθάριση όλων",
   "ClearBackupList": "Διαγραφή όλων των αντιγράφων ασφαλείας",
@@ -213,7 +212,6 @@
   "CreateFormFillingRoom": "Δημιουργία δωματίου συμπλήρωσης φορμών ",
   "CreateGroup": "Δημιουργία ομάδας",
   "CreateMasterFormFromFile": "Δημιουργία φόρμας PDF από αρχείο",
-  "CreatePDFForm": "Δημιουργία φόρμας PDF",
   "CreateRoom": "Δημιουργία δωματίου",
   "CreateVirtualDataRoom": "Δημιουργία εικονικού χώρου δεδομένων",
   "Culture_ar-SA": "عربي (المملكة العربية السعودية)",
@@ -1054,5 +1052,8 @@
   "YouHaveUnsavedChanges": "Έχετε μη αποθηκευμένες αλλαγές",
   "YourCurrentDomain": "Το τρέχον όνομα τομέα σας",
   "YourLogo": "Το λογότυπό σας",
-  "YourTurn": "Η σειρά σας"
+  "YourTurn": "Η σειρά σας",
+  "Upload": "Μεταφόρτωση",
+  "Open": "Άνοιγμα",
+  "Quantity": "Ποσότητα"
 }

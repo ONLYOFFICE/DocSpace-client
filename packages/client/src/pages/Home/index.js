@@ -116,6 +116,7 @@ const PureHome = (props) => {
     isEmptyPage,
     roomsFilterGroupId,
 
+    contactsTab,
     contactsViewAs,
 
     showFilterLoader,
@@ -278,7 +279,14 @@ const PureHome = (props) => {
 
     if (isContactsPage) return getContactsModel(t, true);
     return getFolderModel(t, true);
-  }, [isFrame, isProfile, isContactsPage, getContactsModel, getFolderModel]);
+  }, [
+    isFrame,
+    isProfile,
+    isContactsPage,
+    getContactsModel,
+    getFolderModel,
+    contactsTab,
+  ]);
 
   const onCancelUpload = useCallback(() => {
     if (pluginShowCancelButton) {
@@ -669,8 +677,13 @@ export const Component = inject(
       viewAs: contactsViewAs,
     } = peopleStore;
     const { updateProfileCulture } = targetUserStore;
-    const { getUsersList, setContactsTab, isUsersEmptyView, isFiltered } =
-      usersStore;
+    const {
+      getUsersList,
+      setContactsTab,
+      contactsTab,
+      isUsersEmptyView,
+      isFiltered,
+    } = usersStore;
     const { getGroups, updateCurrentGroup, groups, groupsIsFiltered } =
       groupsStore;
 
@@ -785,6 +798,7 @@ export const Component = inject(
 
       // contacts store
       setContactsTab,
+      contactsTab,
       contactsViewAs,
       getUsersList,
       getGroups,

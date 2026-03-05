@@ -700,7 +700,7 @@ export async function startUploadSession(
   folderId: string | number,
   fileName: string,
   fileSize: number,
-  relativePath: boolean,
+  relativePath: string,
   encrypted: boolean,
   createOn: unknown,
   CreateNewIfExist: boolean,
@@ -1950,6 +1950,18 @@ export async function setDefaultTemplates(
     url: "/files/settings/defaulttemplate",
     data: {
       selectedFile,
+      fileExtension,
+    },
+  });
+
+  return res.items as TDefaultTemplate[];
+}
+
+export async function resetDefaultTemplates(fileExtension: string) {
+  const res = await request({
+    method: "delete",
+    url: "/files/settings/defaulttemplate",
+    data: {
       fileExtension,
     },
   });

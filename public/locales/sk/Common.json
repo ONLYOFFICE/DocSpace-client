@@ -148,7 +148,6 @@
   "ChooseAnother": "Vyberte si iný",
   "ChooseExpirationDate": "Nastavte dátum vypršania platnosti, aby ste obmedzili obdobie platnosti tohto odkazu.",
   "ChooseFormatText": "Vyberte formát pre každý súbor, ktorý chcete stiahnuť ",
-  "ChooseFromTemplates": "Vyberte si zo Šablón",
   "Clean": "Očistiť",
   "ClearAll": "Vymazať všetko",
   "ClearBackupList": "Odstrániť všetky zálohované údaje",
@@ -213,7 +212,6 @@
   "CreateFormFillingRoom": "Vytvoriť miestnosť na vypĺňanie formulárov",
   "CreateGroup": "Vytvoriť skupinu",
   "CreateMasterFormFromFile": "Vytvoriť PDF formulár zo súboru",
-  "CreatePDFForm": "Vytvoriť formulár PDF",
   "CreateRoom": "Vytvoriť miestnosť",
   "CreateVirtualDataRoom": "Vytvoriť virtuálnu dátovú miestnosť",
   "Culture_ar-SA": "عربي (المملكة العربية السعودية)",
@@ -1054,5 +1052,8 @@
   "YouHaveUnsavedChanges": "Máte neuložené zmeny",
   "YourCurrentDomain": "Vaša aktuálna doména",
   "YourLogo": "Vaše logo",
-  "YourTurn": "Ste na rade"
+  "YourTurn": "Ste na rade",
+  "Upload": "Nahrať",
+  "Open": "Otvoriť",
+  "Quantity": "Množstvo"
 }

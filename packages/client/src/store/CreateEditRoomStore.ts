@@ -433,7 +433,7 @@ class CreateEditRoomStore {
     const quotaLimit = isDefaultRoomsQuotaSet ? quota : null;
 
     const tagsToAddList = tags.map((tag) => tag.name);
-    const isDeleteLogo = !!item.logo.original && !icon.uploadedFile;
+    const isDeleteLogo = !item.logo.original && !icon.uploadedFile;
 
     const roomData = {
       title,

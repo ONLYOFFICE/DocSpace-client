@@ -324,7 +324,7 @@ export const Viewer = (props: ViewerProps) => {
           isFistImage={!isNotFirstElement}
           isOpenContextMenu={isOpenContextMenu}
           thumbnailSrc={playlistFile.thumbnailUrl}
-          canDownload={!!targetFile?.security.Download}
+          canDownload={!!targetFile?.security?.Download}
           onPrev={onPrevClick}
           onNext={onNextClick}
           setIsError={setIsError}

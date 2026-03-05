@@ -27,7 +27,7 @@
 import type { TCreatedBy, TPathParts } from "../../types";
 import type { TFile, TFolder } from "../files/types";
 import type { TRoom } from "../rooms/types";
-import type {
+import {
   ContentType,
   KnowledgeType,
   ProviderType,
@@ -68,7 +68,6 @@ export type TModel = {
   providerId: TAiProvider["id"];
   providerTitle: TAiProvider["title"];
   modelId: string;
-  name?: string;
 };
 
 export type TModelList = TModel[];
@@ -126,6 +125,12 @@ export type TContent =
       id: number;
       title: string;
       extension: string;
+    }
+  | {
+      type: ContentType.Images;
+      id: number;
+      url: string;
+      fileType: number;
     };
 
 export type TMessage = {
@@ -213,6 +218,8 @@ export type TAIConfig = {
   generateDocxToolName?: string;
   generateFormToolName?: string;
   generatePresentationToolName?: string;
+
+  modelAliases: Record<string, string>;
 };
 
 export type TAgent = TRoom;

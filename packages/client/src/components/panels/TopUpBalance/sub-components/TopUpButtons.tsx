@@ -29,88 +29,124 @@ import { useTranslation } from "react-i18next";
 
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { toastr } from "@docspace/ui-kit/components/toast";
-import { saveDeposite } from "@docspace/shared/api/portal";
+
 import { Text } from "@docspace/ui-kit/components/text";
 
 import { useAmountValue } from "../../../../pages/PortalSettings/categories/payments/Wallet/context";
 import styles from "../styles/TopUpModal.module.scss";
+import { AI_TOOLS } from "@docspace/shared/constants";
+import { inject, observer } from "mobx-react";
 
 interface TopUpButtonsProps {
-	currency: string;
-	setIsLoading: (value: boolean) => void;
-	isLoading: boolean;
-	fetchBalance?: () => Promise<void>;
-	fetchTransactionHistory?: () => Promise<void>;
-	onClose: (isTopUp: boolean) => void;
-	walletCustomerEmail?: boolean;
-	walletCustomerStatusNotActive?: boolean;
+  currency: string;
+  setIsLoading: (value: boolean) => void;
+  isLoading: boolean;
+  fetchBalance?: () => Promise<void>;
+  fetchServiceBalance?: () => Promise<void>;
+  fetchTransactionHistory?: () => Promise<void>;
+  onClose: (isTopUp: boolean) => void;
+  walletCustomerEmail?: boolean;
+  walletCustomerStatusNotActive?: boolean;
+  onTopUpBalance: (amount: number, currency: string) => Promise<string>;
+  serviceName?: string;
+  afterTopUp?: () => void;
+  logoText?: string;
+  handleServicesQuotas?: (serviceName: string) => Promise<void>;
 }
 
 const TopUpButtons: React.FC<TopUpButtonsProps> = ({
-	currency,
-	fetchBalance,
-	fetchTransactionHistory,
-	onClose,
-	walletCustomerEmail,
-	setIsLoading,
-	isLoading,
-	walletCustomerStatusNotActive,
+  currency,
+  fetchBalance,
+  fetchServiceBalance,
+  fetchTransactionHistory,
+  onClose,
+  walletCustomerEmail,
+  setIsLoading,
+  isLoading,
+  walletCustomerStatusNotActive,
+  onTopUpBalance,
+  serviceName,
+  afterTopUp,
+  logoText,
+  handleServicesQuotas,
 }) => {
-	const { t } = useTranslation(["Payments", "Common"]);
+  const { t } = useTranslation(["Payments", "Services", "Common"]);
 
-	const { amount } = useAmountValue();
+  const { amount, hasError } = useAmountValue();
 
-	const isButtonDisabled =
-		walletCustomerStatusNotActive || !amount || !walletCustomerEmail;
+  const isButtonDisabled =
+    walletCustomerStatusNotActive ||
+    !amount ||
+    !walletCustomerEmail ||
+    hasError;
 
-	const onTopUp = async () => {
-		try {
-			setIsLoading(true);
+  const onTopUp = async () => {
+    try {
+      setIsLoading(true);
 
-			const res = await saveDeposite(+amount, currency);
+      const res = await onTopUpBalance(+amount, serviceName ?? currency);
 
-			if (!res) {
-				throw new Error(t("Common:UnexpectedError"));
-			}
+      if (!res) {
+        throw new Error(t("Common:UnexpectedError"));
+      }
 
-			await Promise.allSettled([fetchBalance!(), fetchTransactionHistory!()]);
+      const requests = [fetchBalance!(), fetchTransactionHistory!()];
 
-			toastr.success(t("WalletToppedUp"));
-			onClose(true);
-		} catch (e) {
-			toastr.error(e as unknown as string);
-		} finally {
-			setIsLoading(false);
-		}
-	};
+      if (serviceName) {
+        requests.push(fetchServiceBalance!());
+        requests.push(handleServicesQuotas!(AI_TOOLS));
+      }
 
-	return (
-		<div className={styles.buttonContainerWrapper}>
-			{isLoading ? <Text>{t("TopUpTakeSomeTimeToComplete")}</Text> : null}
-			<div className={styles.buttonContainer}>
-				<Button
-					key="OkButton"
-					label={t("TopUp")}
-					size={ButtonSize.normal}
-					primary
-					scale
-					isDisabled={isButtonDisabled}
-					onClick={onTopUp}
-					isLoading={isLoading}
-					testId="top_up_button"
-				/>
-				<Button
-					key="CancelButton"
-					label={t("Common:CancelButton")}
-					size={ButtonSize.normal}
-					scale
-					onClick={() => onClose(false)}
-					isDisabled={isLoading}
-					testId="cancel_top_up_button"
-				/>
-			</div>
-		</div>
-	);
+      await Promise.allSettled(requests);
+
+      const toastMessage =
+        serviceName === AI_TOOLS
+          ? t("Services:AIServiceToppedUp", { organizationName: logoText })
+          : t("WalletToppedUp");
+
+      toastr.success(toastMessage);
+      afterTopUp ? afterTopUp() : onClose(true);
+    } catch (e) {
+      toastr.error(e as unknown as string);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <div className={styles.buttonContainerWrapper}>
+      {isLoading ? <Text>{t("TopUpTakeSomeTimeToComplete")}</Text> : null}
+      <div className={styles.buttonContainer}>
+        <Button
+          key="OkButton"
+          label={t("TopUp")}
+          size={ButtonSize.normal}
+          primary
+          scale
+          isDisabled={isButtonDisabled}
+          onClick={onTopUp}
+          isLoading={isLoading}
+          testId="top_up_button"
+        />
+        <Button
+          key="CancelButton"
+          label={t("Common:CancelButton")}
+          size={ButtonSize.normal}
+          scale
+          onClick={() => onClose(false)}
+          isDisabled={isLoading}
+          testId="cancel_top_up_button"
+        />
+      </div>
+    </div>
+  );
 };
 
-export default TopUpButtons;
+export default inject(({ settingsStore, paymentStore }: TStore) => {
+  const { logoText } = settingsStore;
+  const { handleServicesQuotas } = paymentStore!;
+  return {
+    logoText,
+    handleServicesQuotas,
+  };
+})(observer(TopUpButtons));

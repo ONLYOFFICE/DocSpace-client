@@ -148,7 +148,6 @@
   "ChooseAnother": "اختر أخرى",
   "ChooseExpirationDate": "قم بتقييد فترة الصلاحية لهذا الرابط من خلال تعيين تاريخ لصلاحية هذا الرابط.",
   "ChooseFormatText": "اختر تنسيق كل ملف ليتم تنزيله",
-  "ChooseFromTemplates": "اختر من القوالب",
   "Clean": "تنظيف",
   "ClearAll": "إزالة الكل",
   "ClearBackupList": "احذف جميع النسخ الاحتياطية",
@@ -213,7 +212,6 @@
   "CreateFormFillingRoom": "إنشاء غرفة تعبئة النماذج",
   "CreateGroup": "إنشاء مجموعة",
   "CreateMasterFormFromFile": "نشا نموذج PDF من ملف",
-  "CreatePDFForm": "إنشاء نموذج PDF",
   "CreateRoom": "إنشاء غرفة",
   "CreateVirtualDataRoom": "إنشاء غرفة بيانات افتراضية",
   "Culture_ar-SA": "عربي (المملكة العربية السعودية)",
@@ -1054,5 +1052,8 @@
   "YouHaveUnsavedChanges": "لقد قمت بعدم حفظ التغييرات",
   "YourCurrentDomain": "النطاق الحالي الخاص بك",
   "YourLogo": "شعاركم",
-  "YourTurn": "دوركم الآن"
+  "YourTurn": "دوركم الآن",
+  "Upload": "رفع",
+  "Open": "فتح",
+  "Quantity": "الكمية"
 }

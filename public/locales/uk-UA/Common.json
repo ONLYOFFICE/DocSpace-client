@@ -148,7 +148,6 @@
   "ChooseAnother": "Виберіть інший",
   "ChooseExpirationDate": "Обмежте період доступності для цього посилання, встановивши термін дії.",
   "ChooseFormatText": "Виберіть формат кожного файлу, який буде завантажено",
-  "ChooseFromTemplates": "Вибрати з шаблонів",
   "Clean": "Очистити",
   "ClearAll": "Очистити все",
   "ClearBackupList": "Видалити всі резервні копії",
@@ -213,7 +212,6 @@
   "CreateFormFillingRoom": "Створити кімнату заповнення форм",
   "CreateGroup": "Створити групу",
   "CreateMasterFormFromFile": "Створити PDF-форму з файлу",
-  "CreatePDFForm": "Створити PDF-форму",
   "CreateRoom": "Створити кімнату",
   "CreateVirtualDataRoom": "Створити віртуальну кімнату даних",
   "Culture_ar-SA": "عربي (المملكة العربية السعودية)",
@@ -1054,5 +1052,8 @@
   "YouHaveUnsavedChanges": "У вас є незбережені зміни",
   "YourCurrentDomain": "Ваш поточний домен",
   "YourLogo": "Ваш логотип",
-  "YourTurn": "Ваша черга"
+  "YourTurn": "Ваша черга",
+  "Upload": "Завантажити",
+  "Open": "Відкрити",
+  "Quantity": "Кількість"
 }

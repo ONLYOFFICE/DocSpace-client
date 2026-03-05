@@ -1,6 +1,5 @@
 {
   "AITools": "Narzędzia AI",
-  "AItoolsConfirm": "Włączenie usługi narzędzi AI zapewni wszystkim użytkownikom {{productName}} dostęp do funkcji opartych na sztucznej inteligencji, pod warunkiem, że portfel posiada wystarczające środki. Czy na pewno chcesz kontynuować?",
   "AIToolsEnabled": "Usługa narzędzi AI włączona pomyślnie.",
   "AndMore": "A więcej!",
   "AutomaticBackupDescription": "Skonfiguruj zaplanowane kopie zapasowe w celu zapewnienia ciągłej ochrony danych bez ręcznych działań.",
@@ -20,7 +19,6 @@
   "FreeBackupsPerMonth": "Bezpłatne kopie zapasowe: {{value}}/{{maxValue}} na bieżący miesiąc.",
   "ImageGeneration": "Generowanie obrazów",
   "ImageGenerationDescription": "Projektuj oryginalne obrazy i ilustracje przy użyciu AI do swoich dokumentów.",
-  "NewAIfeatures": "Regularnie dodawane są nowe funkcje AI, aby pomóc Ci pracować szybciej, sprytniej i z mniejszym wysiłkiem.",
   "OCR": "OCR",
   "OCRDescription": "Rozpoznawaj i wyodrębniaj tekst ze skanów PDF i obrazów.",
   "Summarization": "Streszczenie",

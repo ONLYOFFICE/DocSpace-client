@@ -40,6 +40,7 @@ import FileSelectorImg from "PUBLIC_DIR/images/sdk-presets_file-selector.react.s
 import EditorImg from "PUBLIC_DIR/images/sdk-presets_editor.react.svg?url";
 import ViewerImg from "PUBLIC_DIR/images/sdk-presets_viewer.react.svg?url";
 import CustomImg from "PUBLIC_DIR/images/sdk-presets_custom.react.svg?url";
+import UploaderImg from "PUBLIC_DIR/images/sdk-presets_uploader.react.svg?url";
 
 import PortalImgDark from "PUBLIC_DIR/images/sdk-presets_portal_dark.react.svg?url";
 import PublicRoomImgDark from "PUBLIC_DIR/images/sdk-presets_public-room_dark.react.svg?url";
@@ -48,168 +49,177 @@ import FileSelectorImgDark from "PUBLIC_DIR/images/sdk-presets_file-selector_dar
 import EditorImgDark from "PUBLIC_DIR/images/sdk-presets_editor_dark.react.svg?url";
 import ViewerImgDark from "PUBLIC_DIR/images/sdk-presets_viewer_dark.react.svg?url";
 import CustomImgDark from "PUBLIC_DIR/images/sdk-presets_custom_dark.react.svg?url";
+import UploaderImgDark from "PUBLIC_DIR/images/sdk-presets_uploader_dark.react.svg?url";
+
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import Integration from "./sub-components/Integration";
 import PresetTile from "./sub-components/PresetTile";
 import CSPSetting from "./sub-components/csp";
 
 import {
-	SDKContainer,
-	CategoryHeader,
-	CategoryDescription,
-	PresetsContainer,
+  SDKContainer,
+  CategoryHeader,
+  CategoryDescription,
+  PresetsContainer,
 } from "./sub-components/StyledPortalIntegration";
 
 const PortalIntegration = (props) => {
-	const { t, currentColorScheme, sdkLink, theme, tReady } = props;
+  const { t, currentColorScheme, sdkLink, theme, tReady } = props;
 
-	const isSmall = useRef(
-		(() => {
-			const content = document.querySelector(".section-wrapper-content");
-			const rect = content.getBoundingClientRect();
-			return rect.width <= 600;
-		})(),
-	);
+  const isSmall = useRef(
+    (() => {
+      const content = document.querySelector(".section-wrapper-content");
+      const rect = content.getBoundingClientRect();
+      return rect.width <= 600;
+    })(),
+  );
 
-	const [isFlex, setIsFlex] = useState(isSmall.current);
+  const [isFlex, setIsFlex] = useState(isSmall.current);
 
-	const navigate = useNavigate();
+  const navigate = useNavigate();
 
-	const navigateToPortal = () => navigate("docspace");
-	const navigateToPublicRoom = () => navigate("public-room");
-	const navigateToCustom = () => navigate("custom");
-	const navigateToRoomSelector = () => navigate("room-selector");
-	const navigateToFileSelector = () => navigate("file-selector");
-	const navigateToEditor = () => navigate("editor");
-	const navigateToViewer = () => navigate("viewer");
+  const navigateToPortal = () => navigate("docspace");
+  const navigateToPublicRoom = () => navigate("public-room");
+  const navigateToCustom = () => navigate("custom");
+  const navigateToRoomSelector = () => navigate("room-selector");
+  const navigateToFileSelector = () => navigate("file-selector");
+  const navigateToEditor = () => navigate("editor");
+  const navigateToViewer = () => navigate("viewer");
+  const navigateToUploader = () => navigate("uploader");
 
-	const presetsData = [
-		{
-			title: t("Common:ProductName"),
-			description: t("PortalDescription", {
-				productName: t("Common:ProductName"),
-			}),
-			image: theme.isBase ? PortalImg : PortalImgDark,
-			handleOnClick: navigateToPortal,
-		},
-		{
-			title: t("Common:PublicRoom"),
-			description: t("JavascriptSdk:PublicRoomPresetInfo"),
-			image: theme.isBase ? PublicRoomImg : PublicRoomImgDark,
-			handleOnClick: navigateToPublicRoom,
-		},
-		{
-			title: t("Common:Editor"),
-			description: t("EditorDescription"),
-			image: theme.isBase ? EditorImg : EditorImgDark,
-			handleOnClick: navigateToEditor,
-		},
-		{
-			title: t("Viewer"),
-			description: t("ViewerDescription"),
-			image: theme.isBase ? ViewerImg : ViewerImgDark,
-			handleOnClick: navigateToViewer,
-		},
-		{
-			title: t("Common:RoomSelector"),
-			description: t("RoomSelectorDescription"),
-			image: theme.isBase ? RoomSelectorImg : RoomSelectorImgDark,
-			handleOnClick: navigateToRoomSelector,
-		},
-		{
-			title: t("Common:FileSelector"),
-			description: t("FileSelectorDescription"),
-			image: theme.isBase ? FileSelectorImg : FileSelectorImgDark,
-			handleOnClick: navigateToFileSelector,
-		},
-		{
-			title: t("Common:Custom"),
-			description: t("CustomDescription", {
-				productName: t("Common:ProductName"),
-			}),
-			image: theme.isBase ? CustomImg : CustomImgDark,
-			handleOnClick: navigateToCustom,
-		},
-	];
+  const presetsData = [
+    {
+      title: t("Common:ProductName"),
+      description: t("PortalDescription", {
+        productName: t("Common:ProductName"),
+      }),
+      image: theme.isBase ? PortalImg : PortalImgDark,
+      handleOnClick: navigateToPortal,
+    },
+    {
+      title: t("Common:PublicRoom"),
+      description: t("JavascriptSdk:PublicRoomPresetInfo"),
+      image: theme.isBase ? PublicRoomImg : PublicRoomImgDark,
+      handleOnClick: navigateToPublicRoom,
+    },
+    {
+      title: t("Common:Editor"),
+      description: t("EditorDescription"),
+      image: theme.isBase ? EditorImg : EditorImgDark,
+      handleOnClick: navigateToEditor,
+    },
+    {
+      title: t("Viewer"),
+      description: t("ViewerDescription"),
+      image: theme.isBase ? ViewerImg : ViewerImgDark,
+      handleOnClick: navigateToViewer,
+    },
+    {
+      title: t("Common:RoomSelector"),
+      description: t("RoomSelectorDescription"),
+      image: theme.isBase ? RoomSelectorImg : RoomSelectorImgDark,
+      handleOnClick: navigateToRoomSelector,
+    },
+    {
+      title: t("Common:FileSelector"),
+      description: t("FileSelectorDescription"),
+      image: theme.isBase ? FileSelectorImg : FileSelectorImgDark,
+      handleOnClick: navigateToFileSelector,
+    },
+    {
+      title: t("Common:Custom"),
+      description: t("CustomDescription", {
+        productName: t("Common:ProductName"),
+      }),
+      image: theme.isBase ? CustomImg : CustomImgDark,
+      handleOnClick: navigateToCustom,
+    },
+    {
+      title: t("Common:Uploader"),
+      description: t("UploaderDescription"),
+      image: theme.isBase ? UploaderImg : UploaderImgDark,
+      handleOnClick: navigateToUploader,
+    },
+  ];
 
-	useEffect(() => {
-		if (tReady) setDocumentTitle(t("JavascriptSdk"));
-	}, [tReady]);
+  useEffect(() => {
+    if (tReady) setDocumentTitle(t("JavascriptSdk"));
+  }, [tReady]);
 
-	const onResize = (entries) => {
-		const belowThreshold = entries[0].contentRect.width <= 600;
-		if (belowThreshold !== isSmall.current) {
-			isSmall.current = belowThreshold;
-			setIsFlex(belowThreshold);
-		}
-	};
+  const onResize = (entries) => {
+    const belowThreshold = entries[0].contentRect.width <= 600;
+    if (belowThreshold !== isSmall.current) {
+      isSmall.current = belowThreshold;
+      setIsFlex(belowThreshold);
+    }
+  };
 
-	useEffect(() => {
-		const rObserver = new ResizeObserver(onResize);
-		const content = document.querySelector(".section-wrapper-content");
-		rObserver.observe(content);
-		return () => {
-			rObserver.unobserve(content);
-		};
-	}, []);
+  useEffect(() => {
+    const rObserver = new ResizeObserver(onResize);
+    const content = document.querySelector(".section-wrapper-content");
+    rObserver.observe(content);
+    return () => {
+      rObserver.unobserve(content);
+    };
+  }, []);
 
-	return (
-		<SDKContainer>
-			<CategoryDescription theme={theme}>
-				<Text className="sdk-description">
-					{t("SDKDescription", { productName: t("Common:ProductName") })}
-				</Text>
-				<Link
-					color={currentColorScheme?.main?.accent}
-					fontSize="13px"
-					fontWeight="400"
-					dataTestId="sdk_api_library_link"
-					onClick={() => window.open(sdkLink, "_blank")}
-				>
-					{" "}
-					{t("APILink")}.
-				</Link>
-				<CSPSetting t={t} theme={theme} />
-			</CategoryDescription>
-			<CategoryHeader>
-				{t("SelectModeEmbedding", { productName: t("Common:ProductName") })}
-			</CategoryHeader>
-			<Text lineHeight="20px" color={theme.sdkPresets.secondaryColor}>
-				{t("InitializeSDK")}
-			</Text>
-			<PresetsContainer className={`${isFlex ? "presets-flex" : ""}`}>
-				{presetsData.map((data) => (
-					<PresetTile
-						t={t}
-						key={data.title}
-						title={data.title}
-						description={data.description}
-						image={data.image}
-						handleOnClick={data.handleOnClick}
-						dataTestId={`sdk_preset_${data.title}_container`}
-					/>
-				))}
-			</PresetsContainer>
-			<Integration />
-		</SDKContainer>
-	);
+  return (
+    <SDKContainer>
+      <CategoryDescription theme={theme}>
+        <Text className="sdk-description">
+          {t("SDKDescription", { productName: t("Common:ProductName") })}
+        </Text>
+        <Link
+          color={currentColorScheme?.main?.accent}
+          fontSize="13px"
+          fontWeight="400"
+          dataTestId="sdk_api_library_link"
+          onClick={() => window.open(sdkLink, "_blank")}
+        >
+          {" "}
+          {t("APILink")}.
+        </Link>
+        <CSPSetting t={t} theme={theme} />
+      </CategoryDescription>
+      <CategoryHeader>
+        {t("SelectModeEmbedding", { productName: t("Common:ProductName") })}
+      </CategoryHeader>
+      <Text lineHeight="20px" color={theme.sdkPresets.secondaryColor}>
+        {t("InitializeSDK")}
+      </Text>
+      <PresetsContainer className={`${isFlex ? "presets-flex" : ""}`}>
+        {presetsData.map((data) => (
+          <PresetTile
+            t={t}
+            key={data.title}
+            title={data.title}
+            description={data.description}
+            image={data.image}
+            handleOnClick={data.handleOnClick}
+            dataTestId={`sdk_preset_${data.title}_container`}
+          />
+        ))}
+      </PresetsContainer>
+      <Integration />
+    </SDKContainer>
+  );
 };
 
 export default inject(({ settingsStore }) => {
-	const { theme, currentColorScheme, sdkLink } = settingsStore;
+  const { theme, currentColorScheme, sdkLink } = settingsStore;
 
-	return {
-		theme,
-		currentColorScheme,
-		sdkLink,
-	};
+  return {
+    theme,
+    currentColorScheme,
+    sdkLink,
+  };
 })(
-	withTranslation([
-		"JavascriptSdk",
-		"Files",
-		"EmbeddingPanel",
-		"CreateEditRoomDialog",
-		"SharingPanel",
-		"Common",
-	])(observer(PortalIntegration)),
+  withTranslation([
+    "JavascriptSdk",
+    "Files",
+    "EmbeddingPanel",
+    "CreateEditRoomDialog",
+    "SharingPanel",
+    "Common",
+  ])(observer(PortalIntegration)),
 );

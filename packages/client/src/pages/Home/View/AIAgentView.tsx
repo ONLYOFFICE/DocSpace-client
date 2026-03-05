@@ -26,10 +26,10 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import React, { Activity } from "react";
+import { Activity } from "react";
 import { inject, observer } from "mobx-react";
 
-import { TFile } from "@docspace/shared/api/files/types";
+import type { TFile } from "@docspace/shared/api/files/types";
 import type useToolsSettings from "@docspace/shared/components/chat/hooks/useToolsSettings";
 import type useInitChats from "@docspace/shared/components/chat/hooks/useInitChats";
 import type useInitMessages from "@docspace/shared/components/chat/hooks/useInitMessages";
@@ -47,7 +47,9 @@ import type SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
 import type FilesStore from "SRC_DIR/store/FilesStore";
 import type ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 import type DialogsStore from "SRC_DIR/store/DialogsStore";
-import AccessRightsStore from "SRC_DIR/store/AccessRightsStore";
+import type AccessRightsStore from "SRC_DIR/store/AccessRightsStore";
+import MediaViewerDataStore from "SRC_DIR/store/MediaViewerDataStore";
+import AiRoomStore from "SRC_DIR/store/AiRoomStore";
 
 type Props = {
   currentView: string;
@@ -73,6 +75,9 @@ type Props = {
   setDeleteDialogVisible?: DialogsStore["setDeleteDialogVisible"];
   folderFormValidation?: RegExp;
   canUseChat?: AccessRightsStore["canUseChat"];
+
+  setMediaViewerVisible?: MediaViewerDataStore["setMediaViewerVisible"];
+  setAiPlaylistImages?: AiRoomStore["setAiPlaylistImages"];
 };
 
 const AIAgentViewComponent = ({
@@ -98,6 +103,8 @@ const AIAgentViewComponent = ({
   setDeleteDialogVisible,
   folderFormValidation,
   canUseChat,
+  setMediaViewerVisible,
+  setAiPlaylistImages,
 }: Props) => {
   if (
     currentView === "chat" &&
@@ -129,11 +136,15 @@ const AIAgentViewComponent = ({
             messagesSettings={messagesSettings}
             isAdmin={isAdmin}
             aiReady={aiConfig?.aiReady || false}
+            modelAliases={aiConfig?.modelAliases}
             standalone // NOTE: AI SaaS same as AI Standalone in v.4.0
             getResultStorageId={getResultStorageId}
             setIsAIAgentChatDelete={setIsAIAgentChatDelete}
             setDeleteDialogVisible={setDeleteDialogVisible}
             folderFormValidation={folderFormValidation!}
+            multimodal={chatSettings?.multimodal}
+            setMediaViewerVisible={setMediaViewerVisible}
+            setAiPlaylistImages={setAiPlaylistImages}
           />
         </Activity>
       ) : null}
@@ -154,11 +165,15 @@ export const AIAgentView = inject(
     settingsStore,
     dialogsStore,
     accessRightsStore,
+    mediaViewerDataStore,
+    aiRoomStore,
   }: TStore) => {
     const { isErrorAIAgentNotAvailable } = filesStore;
 
     const { showArticleLoader, showHeaderLoader, showBodyLoader } =
       clientLoadingStore;
+
+    const { setMediaViewerVisible } = mediaViewerDataStore;
 
     const { user } = userStore;
 
@@ -174,6 +189,8 @@ export const AIAgentView = inject(
 
     const { canUseChat } = accessRightsStore;
 
+    const { setAiPlaylistImages } = aiRoomStore;
+
     return {
       isErrorAIAgentNotAvailable,
       showArticleLoader,
@@ -188,6 +205,9 @@ export const AIAgentView = inject(
       setDeleteDialogVisible,
       folderFormValidation,
       canUseChat,
+
+      setMediaViewerVisible,
+      setAiPlaylistImages,
     };
   },
 )(observer(AIAgentViewComponent));

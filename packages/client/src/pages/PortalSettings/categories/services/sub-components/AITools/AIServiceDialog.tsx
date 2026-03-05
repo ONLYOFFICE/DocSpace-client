@@ -49,7 +49,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { observer, inject } from "mobx-react";
 
@@ -58,115 +58,68 @@ import {
   ModalDialogType,
 } from "@docspace/ui-kit/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { AI_TOOLS } from "@docspace/shared/constants";
 
-import ServiceToggleSection from "../ServiceToggleSection";
-import ServiceContent from "../ServiceContent";
-import MoreIcon from "PUBLIC_DIR/images/icons/32/more.svg";
-import ListIcon from "PUBLIC_DIR/images/icons/32/list.svg";
-import ImageGenerationIcon from "PUBLIC_DIR/images/icons/32/image.generation.svg";
-import GenerationIcon from "PUBLIC_DIR/images/icons/32/generation.svg";
-import OcrIcon from "PUBLIC_DIR/images/icons/32/ocr.svg";
-import TranslationIcon from "PUBLIC_DIR/images/icons/32/translation.svg";
-import SummarizationIcon from "PUBLIC_DIR/images/icons/32/summarization.svg";
-import ChatIcon from "PUBLIC_DIR/images/icons/32/chat.svg";
-import ToolsIcon from "PUBLIC_DIR/images/icons/32/tools.svg";
 import styles from "../../styles/BackupServiceDialog.module.scss";
+
+import GetStartedBody from "./sub-components/GetStartedBody";
+import PricingBillingBody from "./sub-components/PricingBillingBody";
+import TopUpContainer from "./sub-components/TopUpContainer";
 
 interface AIServiceDialogProps {
   visible: boolean;
   onClose: () => void;
   onToggle: (id: string, enabled: boolean) => void;
   isEnabled?: boolean;
-  aiToolsPrice?: number;
   formatWalletCurrency?: (
     item: number | null,
     fractionDigits: number,
   ) => string;
   logoText?: string;
+  isTopUpVisible?: boolean;
 }
 
-interface ServiceOption {
-  id: string;
-  title: string;
-  icon: React.ReactNode;
-  description: string;
-}
+type DialogView = "get-started" | "pricing" | "top-up";
 
 const AIServiceDialog: React.FC<AIServiceDialogProps> = ({
   visible,
   onClose,
-  onToggle,
-  isEnabled = false,
-  aiToolsPrice,
-  formatWalletCurrency,
   logoText,
+  isTopUpVisible,
 }) => {
   const { t } = useTranslation(["Services", "Common", "Payments"]);
 
-  const handleToggleChange = () => {
-    onToggle(AI_TOOLS, isEnabled);
-    onClose();
+  const [view, setView] = useState<DialogView>(
+    isTopUpVisible ? "top-up" : "get-started",
+  );
+
+  const onTopUpClick = () => {
+    setView("top-up");
   };
 
-  const serviceOptions: ServiceOption[] = [
-    {
-      id: "ai-tools",
-      title: t("Common:AIAgents"),
-      description: t("AIAgentsDescription", {
-        mcpServer: t("Common:MCPServer"),
-      }),
-      icon: <ToolsIcon />,
-    },
-    {
-      id: "chatbot",
-      title: t("ChatBot"),
-      description: t("ChatBotDescription"),
-      icon: <ChatIcon />,
-    },
-    {
-      id: "summarization",
-      title: t("Summarization"),
-      description: t("SummarizationDescription"),
-      icon: <SummarizationIcon />,
-    },
-    {
-      id: "text-translation",
-      title: t("TextTranslation"),
-      description: t("TextTranslationDescription"),
-      icon: <TranslationIcon />,
-    },
-    {
-      id: "ocr",
-      title: t("OCR"),
-      description: t("OCRDescription"),
-      icon: <OcrIcon />,
-    },
-    {
-      id: "text-generation",
-      title: t("TextGeneration"),
-      description: t("TextGenerationDescription"),
-      icon: <GenerationIcon />,
-    },
-    {
-      id: "image-generation",
-      title: t("ImageGeneration"),
-      description: t("ImageGenerationDescription"),
-      icon: <ImageGenerationIcon />,
-    },
-    {
-      id: "error-checking",
-      title: t("ErrorChecking"),
-      description: t("ErrorCheckingDescription"),
-      icon: <ListIcon />,
-    },
-    {
-      id: "and-more",
-      title: t("Services:AndMore"),
-      description: t("NewAIfeatures"),
-      icon: <MoreIcon />,
-    },
-  ];
+  const onGetStartedClick = () => {
+    setView("get-started");
+  };
+
+  const onPricingBillingClick = () => {
+    setView("pricing");
+  };
+
+  const container =
+    view === "top-up" ? (
+      <TopUpContainer
+        visible={view === "top-up"}
+        onCloseTopUpModal={onClose}
+        onBackClick={onGetStartedClick}
+        isTopUpVisible={isTopUpVisible}
+      />
+    ) : view === "pricing" ? (
+      <PricingBillingBody
+        onBack={onGetStartedClick}
+        visible={view === "pricing"}
+        onClose={onClose}
+        onTopUpClick={onTopUpClick}
+      />
+    ) : null;
 
   return (
     <ModalDialog
@@ -174,53 +127,54 @@ const AIServiceDialog: React.FC<AIServiceDialogProps> = ({
       onClose={onClose}
       displayType={ModalDialogType.aside}
       withBodyScroll
+      containerVisible={view !== "get-started"}
     >
-      <ModalDialog.Header>{t("Services:AITools")}</ModalDialog.Header>
+      <ModalDialog.Container>{container}</ModalDialog.Container>
+      <ModalDialog.Header>
+        {t("Services:OrganizationAI", { organizationName: logoText })}
+      </ModalDialog.Header>
       <ModalDialog.Body>
-        <ServiceToggleSection
-          isEnabled={isEnabled}
-          onToggle={handleToggleChange}
-          title={t("Services:EnableAItools", {
-            currency: formatWalletCurrency!(aiToolsPrice!, 4),
-          })}
-          description={t("Services:EnableAItoolsDescription", {
-            organizationName: logoText,
-            productName: t("Common:ProductName"),
-          })}
-          testId="service-ai-toggle-button"
-        />
-        <div className={styles.servicesList}>
-          {serviceOptions.map((service) => (
-            <ServiceContent
-              key={service.id}
-              icon={service.icon}
-              title={service.title}
-              description={service.description}
-            />
-          ))}
+        <div className={styles.dialogBody}>
+          <GetStartedBody
+            onPricingBillingClick={onPricingBillingClick}
+            onTopUpClick={onTopUpClick}
+          />
         </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
-        <Button
-          label={t("Common:CloseButton")}
-          size={ButtonSize.normal}
-          onClick={onClose}
-          scale
-          testId="service-backup-dialog-close-button"
-        />
+        <div className={styles.closeFooter}>
+          <Button
+            key="OkButton"
+            label={t("Payments:TopUp")}
+            size={ButtonSize.normal}
+            primary
+            scale
+            isDisabled={false}
+            onClick={onTopUpClick}
+            isLoading={false}
+            testId="top_up_button"
+          />
+          <Button
+            key="CancelButton"
+            label={t("Common:CancelButton")}
+            size={ButtonSize.normal}
+            scale
+            onClick={onClose}
+            isDisabled={false}
+            testId="cancel_top_up_button"
+          />
+        </div>
       </ModalDialog.Footer>
     </ModalDialog>
   );
 };
 
 export default inject(({ paymentStore, settingsStore }: TStore) => {
-  const { servicesQuotasFeatures, aiToolsPrice, formatWalletCurrency } =
-    paymentStore;
+  const { formatWalletCurrency } = paymentStore;
   const { logoText } = settingsStore;
-  const feature = servicesQuotasFeatures.get(AI_TOOLS);
   return {
-    isEnabled: feature?.value,
-    aiToolsPrice,
+    isEnabled: true,
+
     formatWalletCurrency,
     logoText,
   };

@@ -148,7 +148,6 @@
   "ChooseAnother": "Chọn khác",
   "ChooseExpirationDate": "Giới hạn thời gian còn hiệu lực cho liên kết này bằng cách đặt ngày hết hạn.",
   "ChooseFormatText": "Chọn định dạng cho từng tệp được tải xuống",
-  "ChooseFromTemplates": "Chọn từ Mẫu",
   "Clean": "Xóa",
   "ClearAll": "Xóa tất cả",
   "ClearBackupList": "Xóa tất cả bản sao lưu",
@@ -213,7 +212,6 @@
   "CreateFormFillingRoom": "Tạo phòng Điền biểu mẫu",
   "CreateGroup": "Tạo nhóm",
   "CreateMasterFormFromFile": "Tạo biểu mẫu PDF từ tệp",
-  "CreatePDFForm": "Tạo biểu mẫu PDF",
   "CreateRoom": "Tạo phòng",
   "CreateVirtualDataRoom": "Tạo phòng dữ liệu ảo",
   "Culture_ar-SA": "عربي (المملكة العربية السعودية)",
@@ -1054,5 +1052,8 @@
   "YouHaveUnsavedChanges": "Bạn có các thay đổi chưa được lưu",
   "YourCurrentDomain": "Tên miền hiện tại của bạn",
   "YourLogo": "Logo của bạn",
-  "YourTurn": "Phiên của bạn"
+  "YourTurn": "Phiên của bạn",
+  "Upload": "Tải lên",
+  "Open": "Mở",
+  "Quantity": "Số lượng"
 }

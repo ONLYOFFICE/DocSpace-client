@@ -148,7 +148,6 @@
   "ChooseAnother": "추가 선택",
   "ChooseExpirationDate": "만료 날짜를 설정하여 이 링크의 사용 가능 기간을 제한하세요.",
   "ChooseFormatText": "각 파일의 다운로드 형식을 선택해주세요",
-  "ChooseFromTemplates": "템플릿에서 선택",
   "Clean": "삭제",
   "ClearAll": "모두 삭제",
   "ClearBackupList": "모든 백업 삭제",
@@ -213,7 +212,6 @@
   "CreateFormFillingRoom": "양식 작성 룸 생성 ",
   "CreateGroup": "그룹 생성",
   "CreateMasterFormFromFile": "파일에서 PDF 양식 만들기",
-  "CreatePDFForm": "PDF 양식 생성",
   "CreateRoom": "방 생성",
   "CreateVirtualDataRoom": "가상 데이터 룸 생성",
   "Culture_ar-SA": "عربي (المملكة العربية السعودية)",
@@ -1054,5 +1052,8 @@
   "YouHaveUnsavedChanges": "저장하지 않은 변경 사항이 있습니다",
   "YourCurrentDomain": "내 현재 도메인",
   "YourLogo": "로고",
-  "YourTurn": "고객님의 차례입니다"
+  "YourTurn": "고객님의 차례입니다",
+  "Upload": "업로드",
+  "Open": "열기",
+  "Quantity": "수량"
 }

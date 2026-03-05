@@ -29,6 +29,13 @@ import { BASE_URL, API_PREFIX } from "../../e2e/utils";
 
 export const PATH_AI_CONFIG = "ai/config";
 
+const modelAliases = {
+  "GPT-5.1": "GPT-5.1",
+  "claude-opus-4-5-20251101": "Claude Opus 4.5",
+  "claude-haiku-4-5-20251001": "Claude Haiku 4.5",
+  "claude-sonnet-4-5-20250929": "Claude Sonnet 4.5",
+};
+
 const success = {
   response: {
     webSearchEnabled: true,
@@ -39,6 +46,7 @@ const success = {
     knowledgeSearchToolName: "docspace_knowledge_search",
     webSearchToolName: "docspace_web_search",
     webCrawlingToolName: "docspace_web_crawling",
+    modelAliases,
   },
   count: 1,
   links: [
@@ -61,6 +69,7 @@ const successDisabled = {
     knowledgeSearchToolName: "docspace_knowledge_search",
     webSearchToolName: "docspace_web_search",
     webCrawlingToolName: "docspace_web_crawling",
+    modelAliases,
   },
   count: 1,
   links: [
@@ -83,6 +92,7 @@ const successWebSearchDisabled = {
     knowledgeSearchToolName: "docspace_knowledge_search",
     webSearchToolName: "docspace_web_search",
     webCrawlingToolName: "docspace_web_crawling",
+    modelAliases,
   },
   count: 1,
   links: [
@@ -105,6 +115,7 @@ const successVectorizationDisabled = {
     knowledgeSearchToolName: "docspace_knowledge_search",
     webSearchToolName: "docspace_web_search",
     webCrawlingToolName: "docspace_web_crawling",
+    modelAliases,
   },
   count: 1,
   links: [

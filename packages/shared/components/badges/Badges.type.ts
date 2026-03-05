@@ -29,79 +29,80 @@
 import type { TTranslation, TViewAs } from "../../types";
 import type { TTheme } from "@docspace/ui-kit/providers/theme";
 import {
-	FileFillingFormStatus,
-	type RoomsType,
-	ShareAccessRights,
+  FileFillingFormStatus,
+  type RoomsType,
+  ShareAccessRights,
 } from "../../enums";
 import { TRoomSecurity } from "../../api/rooms/types";
 import type {
-	TFile,
-	TFileSecurity,
-	TFileViewAccessibility,
-	TFolderSecurity,
+  TFile,
+  TFileSecurity,
+  TFileViewAccessibility,
+  TFolderSecurity,
 } from "../../api/files/types";
 
 type ItemData = {
-	id: number;
-	versionGroup?: number;
-	fileExst?: string;
-	isEditing?: boolean;
-	isRoom?: boolean;
-	pinned?: boolean;
-	isFolder: boolean;
-	mute: boolean;
-	rootFolderId: number;
-	new?: number;
-	hasDraft?: boolean;
-	roomType?: RoomsType;
-	access?: ShareAccessRights;
-	security?: TRoomSecurity | TFileSecurity | TFolderSecurity;
-	shared?: boolean;
-	viewAccessibility?: TFileViewAccessibility;
-	formFillingStatus?: FileFillingFormStatus;
-	customFilterEnabled?: boolean;
-	vectorizationStatus?: TFile["vectorizationStatus"];
-	lockedBy?: string;
-	locked?: boolean;
-	isFavorite?: boolean;
-	isAIAgent?: boolean;
+  id: number;
+  versionGroup?: number;
+  fileExst?: string;
+  isEditing?: boolean;
+  isRoom?: boolean;
+  pinned?: boolean;
+  isFolder: boolean;
+  mute: boolean;
+  rootFolderId: number;
+  new?: number;
+  hasDraft?: boolean;
+  roomType?: RoomsType;
+  access?: ShareAccessRights;
+  security?: TRoomSecurity | TFileSecurity | TFolderSecurity;
+  shared?: boolean;
+  viewAccessibility?: TFileViewAccessibility;
+  formFillingStatus?: FileFillingFormStatus;
+  customFilterEnabled?: boolean;
+  vectorizationStatus?: TFile["vectorizationStatus"];
+  lockedBy?: string;
+  locked?: boolean;
+  isFavorite?: boolean;
+  isAIAgent?: boolean;
+  startFilling?: boolean;
 };
 
 export type BadgesProps = {
-	t: TTranslation;
-	item: ItemData;
-	viewAs: TViewAs;
-	showNew: boolean;
-	onFilesClick?: () => void;
-	onShowVersionHistory?: () => void;
-	onBadgeClick?: () => void;
-	openLocationFile?: () => void;
-	setConvertDialogVisible?: () => void;
-	onUnpinClick?: () => void;
-	onUnmuteClick?: () => void;
-	onClickLock?: () => void;
-	isMutedBadge?: boolean;
-	isTrashFolder?: boolean;
-	isArchiveFolderRoot?: boolean;
-	onCopyPrimaryLink?: () => void;
-	isArchiveFolder?: boolean;
-	isRecentFolder?: boolean;
-	canEditing?: boolean;
-	isTemplatesFolder?: boolean;
-	onCreateRoom?: () => void;
-	newFilesBadge?: React.ReactElement;
-	className?: string;
-	isExtsCustomFilter?: boolean;
-	customFilterExternalLink?: string;
-	onRetryVectorization?: () => void;
-	onClickFavorite?: () => void;
-	isPublicRoom?: boolean;
-	themeIsBase?: boolean;
-	editorsTooltip?: React.ReactElement;
+  t: TTranslation;
+  item: ItemData;
+  viewAs: TViewAs;
+  showNew: boolean;
+  onFilesClick?: () => void;
+  onShowVersionHistory?: () => void;
+  onBadgeClick?: () => void;
+  openLocationFile?: () => void;
+  setConvertDialogVisible?: () => void;
+  onUnpinClick?: () => void;
+  onUnmuteClick?: () => void;
+  onClickLock?: () => void;
+  isMutedBadge?: boolean;
+  isTrashFolder?: boolean;
+  isArchiveFolderRoot?: boolean;
+  onCopyPrimaryLink?: () => void;
+  isArchiveFolder?: boolean;
+  isRecentFolder?: boolean;
+  canEditing?: boolean;
+  isTemplatesFolder?: boolean;
+  onCreateRoom?: () => void;
+  newFilesBadge?: React.ReactElement;
+  className?: string;
+  isExtsCustomFilter?: boolean;
+  customFilterExternalLink?: string;
+  onRetryVectorization?: () => void;
+  onClickFavorite?: () => void;
+  isPublicRoom?: boolean;
+  themeIsBase?: boolean;
+  editorsTooltip?: React.ReactElement;
 };
 
 export type BadgeWrapperProps = {
-	onClick?: () => void;
-	isTile?: boolean;
-	children: React.ReactElement;
+  onClick?: () => void;
+  isTile?: boolean;
+  children: React.ReactElement;
 };

@@ -24,7 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { Portal } from "@docspace/ui-kit/components/portal";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { inject, observer } from "mobx-react";
@@ -95,6 +96,7 @@ const EditRoomGroupsDialog = ({
     rooms: TRoom[];
   } | null>(null);
   const [editingGroupId, setEditingGroupId] = useState<string | null>(null);
+  const [groupIconFromRoomList, setGroupIconFromRoomList] = useState(false);
   const [deleteConfirmVisible, setDeleteConfirmVisible] = useState(false);
   const [groupIdToDelete, setGroupIdToDelete] = useState<string | null>(null);
 
@@ -124,18 +126,11 @@ const EditRoomGroupsDialog = ({
     setIsOpenRoomList(true);
   };
 
-  const skipNextCloseRef = useRef(false);
-
   const onCloseRoomList = () => {
-    skipNextCloseRef.current = true;
     setIsOpenRoomList(false);
   };
 
   const onCloseEditRoomGroupsDialog = () => {
-    if (skipNextCloseRef.current) {
-      skipNextCloseRef.current = false;
-      return;
-    }
     setEditRoomGroupsDialogVisible(false);
   };
 
@@ -263,6 +258,8 @@ const EditRoomGroupsDialog = ({
     });
 
     setArrIdsRooms(arrIds);
+    setIsOpenRoomList(false);
+    setGroupIconFromRoomList(true);
     setIsOpenGroupIcon(true);
   };
 
@@ -283,13 +280,13 @@ const EditRoomGroupsDialog = ({
   };
 
   const onCloseGroupRoomList = () => {
-    skipNextCloseRef.current = true;
     setIsOpenRoomList(false);
     setSelectedGroup(null);
   };
 
   const onClickEditIcon = (groupId: string) => {
     setEditingGroupId(groupId);
+    setGroupIconFromRoomList(false);
     setIsOpenGroupIcon(true);
   };
 
@@ -323,56 +320,6 @@ const EditRoomGroupsDialog = ({
   const isOpenedFromContextMenu =
     !!createGroupFromRoomIds && createGroupFromRoomIds.length > 0;
 
-  if (isOpenGroupIcon) {
-    return (
-      <GroupIconDialog
-        currentColorScheme={currentColorScheme}
-        getCovers={getCovers}
-        covers={covers}
-        setIsOpenGroupIcon={setIsOpenGroupIcon}
-        onCloseEditRoomGroupsDialog={onCloseEditRoomGroupsDialog}
-        setCreateGroupRooms={setCreateGroupRooms}
-        getAllRoomGroups={getAllRoomGroups}
-        arrIdsRooms={arrIdsRooms}
-        editingGroupId={editingGroupId}
-        setEditingGroupId={setEditingGroupId}
-        updateGroupIcon={updateGroupIcon}
-        updateRoomGroup={updateRoomGroup}
-        currentGroupIcon={currentEditingGroup?.icon || null}
-        currentGroupName={currentEditingGroup?.name || null}
-        isOpenedFromContextMenu={isOpenedFromContextMenu && !editingGroupId}
-      />
-    );
-  }
-
-  if (isOpenRoomList && selectedGroup) {
-    return (
-      <RoomListPanel
-        visible={isOpenRoomList}
-        onClose={onCloseGroupRoomList}
-        onSubmit={onSubmitRoom}
-        headerLabel={selectedGroup.name}
-        selectedRooms={selectedGroup.rooms || []}
-        withSearch={false}
-        disableSubmitUntilChanged
-        sortSelectedFirst
-      />
-    );
-  }
-
-  if (isOpenRoomList && !selectedGroup) {
-    return (
-      <RoomListPanel
-        visible={isOpenRoomList}
-        onClose={onCloseRoomList}
-        onSubmit={onSubmitRoom}
-        headerLabel={t("Common:RoomList")}
-        withSearch
-        disableSubmitUntilChanged
-      />
-    );
-  }
-
   const renderGroupItems = () => {
     return roomGroups.map((group) => (
       <GroupItem
@@ -389,88 +336,158 @@ const EditRoomGroupsDialog = ({
   };
 
   return (
-    <ModalDialog
-      displayType={ModalDialogType.aside}
-      withBodyScroll
-      visible={true}
-      className={styles.editRoomGroupsDialog}
-      onClose={onCloseEditRoomGroupsDialog}
-    >
-      <ModalDialog.Header>
-        {t("GroupingRooms:EditRoomGroups")}
-      </ModalDialog.Header>
+    <>
+      <ModalDialog
+        displayType={ModalDialogType.aside}
+        withBodyScroll
+        visible={true}
+        zIndex={308}
+        hideContent={isOpenGroupIcon}
+        className={styles.editRoomGroupsDialog}
+        onClose={onCloseEditRoomGroupsDialog}
+      >
+        <ModalDialog.Header>
+          {t("GroupingRooms:EditRoomGroups")}
+        </ModalDialog.Header>
 
-      <ModalDialog.Body>
-        {isTooltipVisible && (
-          <PublicRoomBar
-            className={styles.infoBar}
-            headerText={
-              <span
-                style={{
-                  fontWeight: 600,
-                  fontSize: "12px",
-                  lineHeight: "16px",
-                }}
-              >
-                {t("GroupingRooms:DisablingRoomGroups")}
-              </span>
-            }
-            bodyText={
-              <span style={{ display: "block", marginTop: "2px" }}>
-                {t("GroupingRooms:DisablingRoomGroupsDescription")}
-              </span>
-            }
-            iconName={InfoIcon}
-            onClose={onDismissTooltip}
-          />
-        )}
-
-        <div className={styles.settingRoomGroups}>
-          <div className={styles.roomGroups}>
-            <div className={styles.title}>
-              {t("GroupingRooms:RoomGrouping")}
-            </div>
-            <ToggleButton
-              className={styles.roomGroupsToggle}
-              isChecked={localGroupingEnabled}
-              onChange={onToggleGrouping}
+        <ModalDialog.Body>
+          {isTooltipVisible && (
+            <PublicRoomBar
+              className={styles.infoBar}
+              headerText={
+                <span
+                  style={{
+                    fontWeight: 600,
+                    fontSize: "12px",
+                    lineHeight: "16px",
+                  }}
+                >
+                  {t("GroupingRooms:DisablingRoomGroups")}
+                </span>
+              }
+              bodyText={
+                <span style={{ display: "block", marginTop: "2px" }}>
+                  {t("GroupingRooms:DisablingRoomGroupsDescription")}
+                </span>
+              }
+              iconName={InfoIcon}
+              onClose={onDismissTooltip}
             />
+          )}
+
+          <div className={styles.settingRoomGroups}>
+            <div className={styles.roomGroups}>
+              <div className={styles.title}>
+                {t("GroupingRooms:RoomGrouping")}
+              </div>
+              <ToggleButton
+                className={styles.roomGroupsToggle}
+                isChecked={localGroupingEnabled}
+                onChange={onToggleGrouping}
+              />
+            </div>
+
+            <Text className={styles.description}>
+              {t("GroupingRooms:RoomGroupingSettingDescription")}
+            </Text>
           </div>
+          <AddButton
+            onClick={onClickCreateNewGroup}
+            className={styles.selectorAddButton}
+            label={t("GroupingRooms:CreateNewGroup")}
+            isDisabled={!localGroupingEnabled}
+            tabIndex={localGroupingEnabled ? 0 : -1}
+          />
+          <div className={styles.addedGroups}>{renderGroupItems()}</div>
+        </ModalDialog.Body>
 
-          <Text className={styles.description}>
-            {t("GroupingRooms:RoomGroupingSettingDescription")}
-          </Text>
-        </div>
-        <AddButton
-          onClick={onClickCreateNewGroup}
-          className={styles.selectorAddButton}
-          label={t("GroupingRooms:CreateNewGroup")}
-          isDisabled={!localGroupingEnabled}
-          tabIndex={localGroupingEnabled ? 0 : -1}
+        {hasGroupingChanged ? (
+          <ModalDialog.Footer>
+            <Button
+              label={t("Common:SaveButton")}
+              size={ButtonSize.normal}
+              primary
+              onClick={onSaveGroupingChange}
+              scale
+              isLoading={isSaving}
+              isDisabled={isSaving}
+            />
+            <Button
+              label={t("Common:CancelButton")}
+              size={ButtonSize.normal}
+              onClick={onCancelGroupingChange}
+              scale
+            />
+          </ModalDialog.Footer>
+        ) : null}
+      </ModalDialog>
+
+      {isOpenRoomList && selectedGroup && (
+        <Portal
+          visible={isOpenRoomList}
+          element={
+            <RoomListPanel
+              visible={isOpenRoomList}
+              onClose={onCloseGroupRoomList}
+              onSubmit={onSubmitRoom}
+              headerLabel={selectedGroup.name}
+              selectedRooms={selectedGroup.rooms || []}
+              withSearch={false}
+              disableSubmitUntilChanged
+              sortSelectedFirst
+              withoutBackdropBackground
+            />
+          }
         />
-        <div className={styles.addedGroups}>{renderGroupItems()}</div>
-      </ModalDialog.Body>
+      )}
 
-      {hasGroupingChanged ? (
-        <ModalDialog.Footer>
-          <Button
-            label={t("Common:SaveButton")}
-            size={ButtonSize.normal}
-            primary
-            onClick={onSaveGroupingChange}
-            scale
-            isLoading={isSaving}
-            isDisabled={isSaving}
-          />
-          <Button
-            label={t("Common:CancelButton")}
-            size={ButtonSize.normal}
-            onClick={onCancelGroupingChange}
-            scale
-          />
-        </ModalDialog.Footer>
-      ) : null}
-    </ModalDialog>
+      {isOpenRoomList && !selectedGroup && (
+        <Portal
+          visible={isOpenRoomList}
+          element={
+            <RoomListPanel
+              visible={isOpenRoomList}
+              onClose={onCloseRoomList}
+              onSubmit={onSubmitRoom}
+              headerLabel={t("Common:RoomList")}
+              withSearch
+              disableSubmitUntilChanged
+              withoutBackdropBackground
+            />
+          }
+        />
+      )}
+
+      {isOpenGroupIcon && (
+        <GroupIconDialog
+          currentColorScheme={currentColorScheme}
+          getCovers={getCovers}
+          covers={covers}
+          setIsOpenGroupIcon={(value: boolean) => {
+            setIsOpenGroupIcon(value);
+            if (!value) {
+              if (groupIconFromRoomList) {
+                setIsOpenRoomList(true);
+                setGroupIconFromRoomList(false);
+              } else {
+                setEditRoomGroupsDialogVisible(false);
+              }
+            }
+          }}
+          onCloseEditRoomGroupsDialog={onCloseEditRoomGroupsDialog}
+          setCreateGroupRooms={setCreateGroupRooms}
+          getAllRoomGroups={getAllRoomGroups}
+          arrIdsRooms={arrIdsRooms}
+          editingGroupId={editingGroupId}
+          setEditingGroupId={setEditingGroupId}
+          updateGroupIcon={updateGroupIcon}
+          updateRoomGroup={updateRoomGroup}
+          currentGroupIcon={currentEditingGroup?.icon || null}
+          currentGroupName={currentEditingGroup?.name || null}
+          isOpenedFromContextMenu={isOpenedFromContextMenu && !editingGroupId}
+        />
+      )}
+    </>
   );
 };
 

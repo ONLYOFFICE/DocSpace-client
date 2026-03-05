@@ -59,6 +59,12 @@ const Chat = observer(
     setIsAIAgentChatDelete,
     setDeleteDialogVisible,
     folderFormValidation,
+    multimodal,
+
+    setAiPlaylistImages,
+    setMediaViewerVisible,
+
+    modelAliases,
   }: ChatProps & { isLoadingChat: boolean }) => {
     const { currentChat } = useChatStore();
 
@@ -86,6 +92,7 @@ const Chat = observer(
           setIsAIAgentChatDelete={setIsAIAgentChatDelete}
           setDeleteDialogVisible={setDeleteDialogVisible}
           folderFormValidation={folderFormValidation}
+          modelAliases={modelAliases}
         />
         {showEmptyScreen ? (
           <ChatNoAccessScreen
@@ -101,6 +108,8 @@ const Chat = observer(
               getIcon={getIcon}
               getResultStorageId={getResultStorageId}
               folderFormValidation={folderFormValidation}
+              setAiPlaylistImages={setAiPlaylistImages}
+              setMediaViewerVisible={setMediaViewerVisible}
             />
             <ChatFooter
               attachmentFile={attachmentFile}
@@ -112,6 +121,7 @@ const Chat = observer(
               isPortalAdmin={isAdmin}
               aiReady={aiReady}
               standalone={standalone}
+              multimodal={multimodal}
             />
           </>
         )}
@@ -132,6 +142,7 @@ const ChatWrapper = (props: ChatProps) => {
     isAdmin = false,
     standalone = false,
     aiReady = false,
+    multimodal,
   } = props;
 
   const isLoadingChat = isLoading || !roomId;
@@ -149,7 +160,11 @@ const ChatWrapper = (props: ChatProps) => {
 
   return (
     <ChatStoreContextProvider roomId={roomId} {...initChats}>
-      <MessageStoreContextProvider roomId={roomId} {...messagesSettings}>
+      <MessageStoreContextProvider
+        roomId={roomId}
+        {...messagesSettings}
+        multimodal={multimodal}
+      >
         <ChatContainer isLoadingChat={isLoadingChat}>
           <Chat {...props} isLoadingChat={isLoadingChat} />
         </ChatContainer>

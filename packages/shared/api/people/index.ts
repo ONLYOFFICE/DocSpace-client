@@ -28,7 +28,7 @@
 
 import { AxiosRequestConfig } from "axios";
 
-import { Encoder } from "../../utils/encoder";
+import { Encoder } from "@docspace/ui-kit/utils/encoder";
 import { checkFilterInstance } from "../../utils/common";
 import { TReqOption } from "../../utils/axiosClient";
 import {

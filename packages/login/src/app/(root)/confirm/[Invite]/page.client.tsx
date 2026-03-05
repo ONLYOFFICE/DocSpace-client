@@ -163,7 +163,6 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     async (profile: string) => {
       const signupAccount: { [key: string]: string | undefined } = {
         EmployeeType: linkData.emplType,
-        Email: confirmLinkResult.email,
         Key: linkData.key,
         SerializedProfile: profile,
         culture: currentCultureName,

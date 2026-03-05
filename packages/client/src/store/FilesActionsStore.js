@@ -2026,7 +2026,11 @@ class FilesActionStore {
 
         return canUnArchive;
       }
-      case "delete-room":
+      case "delete-room": {
+        const canDelete = selection.some((s) => s.security?.Delete);
+
+        return canDelete;
+      }
       case "delete-agent": {
         const canRemove =
           selection.length === 1 && selection[0]?.security?.Delete;

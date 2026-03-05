@@ -336,6 +336,29 @@
 
       max-width: 300px;
 
+      .filesListItemImage {
+        height: 32px;
+        width: 32px;
+        margin: 0;
+        padding: 0;
+        border-start-start-radius: 6px;
+        border-end-start-radius: 6px;
+        object-fit:fill;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:has(div) {
+          padding: 6px;
+          box-sizing: border-box;
+        }
+      }
+
+      .loader {
+        height: 20px;
+        margin: 6px;
+      }
+
       .filesListItemInfoText {
         display: flex;
         flex-direction: row;

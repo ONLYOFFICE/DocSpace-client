@@ -148,7 +148,6 @@
   "ChooseAnother": "Выбрать другую",
   "ChooseExpirationDate": "Вы можете выбрать срок действия для этой ссылки.",
   "ChooseFormatText": "Выберите формат для каждого из файлов, которые нужно скачать",
-  "ChooseFromTemplates": "Выбрать из шаблонов",
   "Clean": "Очистить",
   "ClearAll": "Очистить все",
   "ClearBackupList": "Удалить все резервные копии",
@@ -213,7 +212,6 @@
   "CreateFormFillingRoom": "Создать комнату заполнения форм",
   "CreateGroup": "Создать группу",
   "CreateMasterFormFromFile": "Создать PDF-форму из файла",
-  "CreatePDFForm": "Создать PDF-форму",
   "CreateRoom": "Создание комнаты",
   "CreateVirtualDataRoom": "Создать виртуальную комнату данных",
   "Culture_ar-SA": "عربي (المملكة العربية السعودية)",
@@ -1055,5 +1053,8 @@
   "YouHaveUnsavedChanges": "Имеются несохраненные изменения",
   "YourCurrentDomain": "Ваш текущий домен",
   "YourLogo": "Ваш логотип",
-  "YourTurn": "Ваша очередь"
+  "YourTurn": "Ваша очередь",
+  "Upload": "Загрузить",
+  "Open": "Открыть",
+  "Quantity": "Количество"
 }

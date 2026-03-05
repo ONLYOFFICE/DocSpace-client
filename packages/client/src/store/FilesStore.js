@@ -113,6 +113,8 @@ import {
 } from "@docspace/shared/utils/filterConstants";
 import { isRoom as isRoomUtil } from "@docspace/shared/utils/typeGuards";
 
+import { showCreatedPDFFormDialog } from "SRC_DIR/components/dialogs/CreatedPDFFormDialog";
+
 const { FilesFilter, RoomsFilter } = api;
 const storageViewAs = localStorage.getItem("viewAs");
 
@@ -864,19 +866,7 @@ class FilesStore {
 
     if (this.selectedFolderStore.id !== file.folderId) return;
 
-    const localKey = `${PDF_FORM_DIALOG_KEY}-${this.userStore.user.id}`;
-
-    const show = !JSON.parse(localStorage.getItem(localKey) ?? "false");
-
-    const event = new CustomEvent(Events.CREATE_PDF_FORM_FILE, {
-      detail: {
-        file,
-        show,
-        localKey,
-      },
-    });
-
-    window?.dispatchEvent(event);
+    showCreatedPDFFormDialog(file, this.userStore.user.id);
   };
 
   wsChangeFolderAccessRights = (option) => {

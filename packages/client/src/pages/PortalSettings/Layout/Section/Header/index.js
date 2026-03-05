@@ -221,6 +221,18 @@ const SectionHeaderContent = (props) => {
 
     const arrayOfParams = getArrayOfParams();
 
+    const isAiServicesPage = arrayOfParams[0] === "ai-services";
+
+    if (isAiServicesPage) {
+      const header = "Services:OrganizationAI";
+      const isCategoryOrHeader = false;
+
+      header !== state.header && setState((val) => ({ ...val, header }));
+      isCategoryOrHeader !== state.isCategoryOrHeader &&
+        setState((val) => ({ ...val, isCategoryOrHeader }));
+      return;
+    }
+
     const key = getKeyByLink(arrayOfParams, settingsTree);
 
     const keysCollection = key.split("-");
@@ -240,6 +252,7 @@ const SectionHeaderContent = (props) => {
       settingsTree,
       "isHeader",
     );
+
     const isCategoryOrHeader = isCategory || isHeader;
 
     const isNeedPaidIcon = !isAvailableSettings(header);
@@ -364,7 +377,8 @@ const SectionHeaderContent = (props) => {
           {!isCategoryOrHeader &&
           arrayOfParams[0] &&
           (isMobile() ||
-            window.location.href.indexOf("/javascript-sdk/") > -1) ? (
+            window.location.href.indexOf("/javascript-sdk/") > -1 ||
+            window.location.href.indexOf("/ai-services") > -1) ? (
             <IconButton
               iconName={ArrowPathReactSvgUrl}
               size="17"
@@ -496,6 +510,7 @@ export default inject(
       "JavascriptSdk",
       "OAuth",
       "Ldap",
+      "Services",
     ])(observer(SectionHeaderContent)),
   ),
 );

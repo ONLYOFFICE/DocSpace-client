@@ -46,6 +46,7 @@ export const PreviewBlock = ({
   scriptUrl,
   config,
   isDisabled = false,
+  showScriptParamsWithEvents = false,
 }) => {
   const { t, ready } = useTranslation([
     "JavascriptSdk",
@@ -60,7 +61,13 @@ export const PreviewBlock = ({
   const [showPreview, setShowPreview] = useState(
     window.innerWidth > showPreviewThreshold,
   );
-  const params = objectToGetParams(config);
+
+  const params = showScriptParamsWithEvents
+    ? objectToGetParams(config)
+    : objectToGetParams({
+        ...config,
+        events: undefined,
+      });
 
   const codeBlock = `<div id="${frameId}">Fallback text</div>\n<script src="${scriptUrl}${params}"></script>`;
 

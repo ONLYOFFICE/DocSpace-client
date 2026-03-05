@@ -148,7 +148,6 @@
   "ChooseAnother": "Изаберите други",
   "ChooseExpirationDate": "Ограничи период доступности за овај линк постављањем рока употребе.",
   "ChooseFormatText": "Изаберите формат за сваку датотеку коју желите да преузмете",
-  "ChooseFromTemplates": "Изабери из Шаблона",
   "Clean": "Очистити",
   "ClearAll": "Обриши све",
   "ClearBackupList": "Обриши све резервне копије",
@@ -213,7 +212,6 @@
   "CreateFormFillingRoom": "Креирај Просторију за попуњавање формулара",
   "CreateGroup": "Креирај групу",
   "CreateMasterFormFromFile": "Креирај PDF образац из датотеке",
-  "CreatePDFForm": "Креирај PDF формулар",
   "CreateRoom": "Креирај собу",
   "CreateVirtualDataRoom": "Креирајте виртуелну собу за податке",
   "Culture_ar-SA": "عربي (المملكة العربية السعودية)",
@@ -1054,5 +1052,8 @@
   "YouHaveUnsavedChanges": "Имате несачуване промене",
   "YourCurrentDomain": "Ваш тренутни домен",
   "YourLogo": "Ваш лого",
-  "YourTurn": "Ваш ред"
+  "YourTurn": "Ваш ред",
+  "Upload": "Отпреми",
+  "Open": "Отвори",
+  "Quantity": "Колиčina"
 }

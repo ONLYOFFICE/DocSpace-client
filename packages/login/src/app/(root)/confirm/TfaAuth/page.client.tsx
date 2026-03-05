@@ -62,12 +62,13 @@ const TfaAuthForm = () => {
 
   const linkUrlData = searchParams?.get("linkData");
   const isPublicAuth = searchParams?.get("publicAuth");
+  const session = searchParams?.get("session") ? true : false;
 
   const onSubmit = async () => {
     try {
       setIsLoading(true);
 
-      await validateTfaCode(code, confirmHeader);
+      await validateTfaCode(code, confirmHeader, session);
 
       let confirmData = "";
       try {

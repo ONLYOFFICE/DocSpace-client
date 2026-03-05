@@ -260,14 +260,14 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
   }, [onDelete, playlist, playlistPos, targetFile?.security?.Delete]);
 
   const onDownloadMedia = useCallback(() => {
-    if (!targetFile?.security.Download) return;
+    if (!targetFile?.security?.Download) return;
 
     const tempCurrentFileId = playlist.find(
       (file) => file.id === playlistPos,
     )?.fileId;
 
     if (!isNullOrUndefined(tempCurrentFileId)) onDownload?.(tempCurrentFileId);
-  }, [onDownload, playlist, playlistPos, targetFile?.security.Download]);
+  }, [onDownload, playlist, playlistPos, targetFile?.security?.Download]);
 
   const onKeydown = useCallback(
     (event: KeyboardEvent) => {

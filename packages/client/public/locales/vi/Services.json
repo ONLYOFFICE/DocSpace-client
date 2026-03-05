@@ -1,6 +1,5 @@
 {
   "AITools": "Công cụ AI",
-  "AItoolsConfirm": "Kích hoạt dịch vụ công cụ AI sẽ cấp quyền truy cập vào các tính năng hỗ trợ AI cho tất cả người dùng {{productName}}, với điều kiện ví có đủ tiền. Bạn có chắc chắn muốn tiếp tục không?",
   "AIToolsEnabled": "Các công cụ hỗ trợ AI đã được kích hoạt thành công.",
   "AndMore": "Và còn nữa!",
   "AutomaticBackupDescription": "Thiết lập sao lưu theo lịch trình để bảo vệ dữ liệu liên tục mà không cần các thao tác thủ công.",
@@ -20,7 +19,6 @@
   "FreeBackupsPerMonth": "Sao lưu miễn phí: {{value}}/{{maxValue}} mỗi tháng hiện tại.",
   "ImageGeneration": "Tạo ảnh",
   "ImageGenerationDescription": "Thiết kế hình ảnh và minh họa độc đáo bằng AI cho tài liệu của bạn.",
-  "NewAIfeatures": "Các tính năng AI mới được bổ sung thường xuyên để giúp bạn làm việc nhanh hơn, thông minh hơn và với ít nỗ lực hơn.",
   "OCR": "OCR",
   "OCRDescription": "Nhận diện và trích xuất văn bản từ các tệp PDF và hình ảnh đã quét.",
   "Summarization": "Tóm tắt",

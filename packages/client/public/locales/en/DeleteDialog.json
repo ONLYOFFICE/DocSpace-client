@@ -20,6 +20,8 @@
   "DeleteRoom": "The room <strong>\"{{roomName}}\"</strong> will be permanently deleted. All data and user accesses will be lost.",
   "DeleteRoomTitle": "Delete this room?",
   "DeleteRoomWarning": "I understand the consequences and want to delete the room",
+  "DeleteRooms": "The selected <strong>rooms ({{count}})</strong> will be permanently deleted. All data and and user access will be lost.",
+  "DeleteRoomsTitle": "Delete this rooms?",
   "DeleteTemplate": "Do you really want to delete template room <1>«{{templateName}}»</1>? The template cannot be restored.",
   "DeleteTemplates": "Do you really want to delete selected room templates? They cannot be restored.",
   "DeleteTemplateWarning": "I understand the consequences and want to delete the template",

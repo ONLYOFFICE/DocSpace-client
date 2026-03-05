@@ -30,6 +30,7 @@ import { makeAutoObservable } from "mobx";
 import {
   getDefaultTemplates,
   setDefaultTemplates,
+  resetDefaultTemplates,
   uploadTemplateFromDevice,
 } from "@docspace/shared/api/files";
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
@@ -83,6 +84,7 @@ class DefaultTemplatesStore {
       title: item?.fileTitle || this.getTitleByExt(item.fileExtension),
       lastModified: item?.lastModified,
       viewUrl: item?.viewUrl || "",
+      fileSize: item?.fileSize || 0,
     }));
     this.templates = templatesArr;
   };
@@ -108,7 +110,7 @@ class DefaultTemplatesStore {
 
   resetTemplate = async (fileExtension: string) => {
     try {
-      const res = await setDefaultTemplates(null, fileExtension);
+      const res = await resetDefaultTemplates(fileExtension);
       this.formTemplatesArray(res);
       toastr.success(i18n.t("Settings:DefaultTemplateRestored"));
     } catch (e) {

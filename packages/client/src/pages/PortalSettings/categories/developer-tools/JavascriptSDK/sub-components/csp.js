@@ -25,11 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect, useState, useCallback } from "react";
-import { ReactSVG } from "react-svg";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
-
-import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
 import { TextInput } from "@docspace/ui-kit/components/text-input";
 import { HelpButton } from "@docspace/ui-kit/components/help-button";
@@ -37,6 +34,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { Link } from "@docspace/ui-kit/components/link";
 import { AddButton } from "@docspace/ui-kit/components/add-button";
 import { SelectedItem } from "@docspace/ui-kit/components/selected-item";
+import { InfoBar } from "@docspace/shared/components/info-bar";
 import { injectDefaultTheme, tablet } from "@docspace/shared/utils";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
@@ -81,47 +79,6 @@ const ChipsContainer = styled.div`
   margin-top: 8px;
   margin-bottom: 16px;
   flex-wrap: wrap;
-`;
-
-const InfoBar = styled.div`
-  display: flex;
-  background-color: ${(props) => props.theme.infoBar.background};
-  color: ${(props) => props.theme.infoBar.textColor};
-  font-size: 12px;
-  padding: 12px 16px;
-  border-radius: 6px;
-  margin-bottom: 10px;
-  margin: -4px 0px 20px;
-
-  .text-container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .header-body {
-    display: flex;
-    height: fit-content;
-    width: 100%;
-    gap: 8px;
-    font-weight: 600;
-    .header-icon {
-      svg {
-        path {
-          fill: ${(props) => props.theme.infoBar.iconFill};
-        }
-      }
-    }
-
-    &__title {
-      color: ${(props) => props.theme.infoBar.title};
-    }
-  }
-
-  .body-container {
-    color: ${(props) => props.theme.infoBar.description};
-    font-weight: 400;
-  }
 `;
 
 const CSP = ({
@@ -229,21 +186,10 @@ const CSP = ({
         />
       </Container>
       {standalone && window.location.protocol !== "https:" ? (
-        <InfoBar>
-          <div className="text-container">
-            <div className="header-body">
-              <div className="header-icon">
-                <ReactSVG src={InfoIcon} />
-              </div>
-              <Text
-                className="header-body__title"
-                fontSize="12px"
-                fontWeight={600}
-              >
-                {t("CSPInfoBarHeader")}
-              </Text>
-            </div>
-            <div className="body-container">
+        <InfoBar
+          title={t("CSPInfoBarHeader")}
+          description={
+            <>
               {t("CSPInfoBarDescription", {
                 productName: t("Common:ProductName"),
               })}{" "}
@@ -258,9 +204,9 @@ const CSP = ({
                   {t("Common:LearnMore")}
                 </Link>
               ) : null}
-            </div>
-          </div>
-        </InfoBar>
+            </>
+          }
+        />
       ) : null}
       <Container className="input-holder">
         <TextInput

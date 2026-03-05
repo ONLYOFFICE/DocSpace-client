@@ -1,6 +1,5 @@
 {
   "AITools": "AI nástroje",
-  "AItoolsConfirm": "Aktivácia služby nástrojov AI umožní všetkým používateľom {{productName}} prístup k funkciám poháňaným AI, za predpokladu, že peňaženka má dostatok prostriedkov. Ste si istý/á, že chcete pokračovať?",
   "AIToolsEnabled": "Služba nástrojov AI bola úspešne povolená.",
   "AndMore": "A ešte!",
   "AutomaticBackupDescription": "Nastavte si pravidelné zálohy pre nepretržité zabezpečenie dát bez manuálnych zásahov.",
@@ -20,7 +19,6 @@
   "FreeBackupsPerMonth": "Bezplatné zálohy: {{value}}/{{maxValue}} za aktuálny mesiac.",
   "ImageGeneration": "Generovanie obrázkov",
   "ImageGenerationDescription": "Navrhujte originálne obrázky a ilustrácie pomocou AI pre vaše dokumenty.",
-  "NewAIfeatures": "Do umelej inteligencie sa pravidelne pridávajú nové funkcie, ktoré vám pomôžu pracovať rýchlejšie, inteligentnejšie a s menším úsilím.",
   "OCR": "OCR",
   "OCRDescription": "Rozpoznajte a extrahujte text z naskenovaných PDF súborov a obrázkov.",
   "Summarization": "Zhrnutie",

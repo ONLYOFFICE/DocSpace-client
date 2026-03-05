@@ -38,7 +38,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 interface ConfirmationDialogProps {
   visible: boolean;
   onClose: () => void;
-  bodyText: string;
+  bodyText: React.ReactNode | React.ReactNode[];
   title: string;
   onConfirm: () => void;
 }
@@ -52,6 +52,8 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
 }) => {
   const { t } = useTranslation("Common");
 
+  const bodyItems = Array.isArray(bodyText) ? bodyText : [bodyText];
+
   return (
     <ModalDialog
       visible={visible}
@@ -61,7 +63,13 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
     >
       <ModalDialog.Header>{title}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text>{bodyText}</Text>
+        <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+          {bodyItems.map((item, index) => (
+            <Text as="span" key={index}>
+              {item}
+            </Text>
+          ))}
+        </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

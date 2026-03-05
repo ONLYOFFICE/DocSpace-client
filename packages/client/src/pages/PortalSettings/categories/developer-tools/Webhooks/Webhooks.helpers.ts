@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { WebhookTriggers } from "@docspace/shared/enums";
-import { TTranslation } from "@docspace/shared/types";
+import { TTranslation, TUser } from "@docspace/shared/types";
 
 export const getTriggerTranslate = (trigger: number, t: TTranslation) => {
   switch (trigger) {
@@ -85,7 +85,60 @@ export const getTriggerTranslate = (trigger: number, t: TTranslation) => {
       return t("RoomRestored");
     case WebhookTriggers.RoomCopied:
       return t("RoomCopied");
+    case WebhookTriggers.FormFilledOut:
+      return t("FormFilledOut");
+    case WebhookTriggers.FormStopped:
+      return t("FormStopped");
+    case WebhookTriggers.FormSubmit:
+      return t("FormSubmit");
     default:
       return "";
   }
 };
+
+export const getDisabledTriggersForUser = (user?: TUser) => {
+  if (user?.isRoomAdmin) {
+    return [
+      BigInt(WebhookTriggers.UserUpdated),
+      BigInt(WebhookTriggers.UserDeleted),
+      BigInt(WebhookTriggers.GroupCreated),
+      BigInt(WebhookTriggers.GroupUpdated),
+      BigInt(WebhookTriggers.GroupDeleted),
+    ];
+  }
+
+  if (user?.isCollaborator) {
+    return [
+      BigInt(WebhookTriggers.UserCreated),
+      BigInt(WebhookTriggers.UserUpdated),
+      BigInt(WebhookTriggers.UserDeleted),
+      BigInt(WebhookTriggers.GroupCreated),
+      BigInt(WebhookTriggers.GroupUpdated),
+      BigInt(WebhookTriggers.GroupDeleted),
+      BigInt(WebhookTriggers.FormStopped),
+      BigInt(WebhookTriggers.RoomCreated),
+      BigInt(WebhookTriggers.RoomUpdated),
+      BigInt(WebhookTriggers.RoomArchived),
+      BigInt(WebhookTriggers.RoomDeleted),
+      BigInt(WebhookTriggers.RoomRestored),
+      BigInt(WebhookTriggers.RoomCopied),
+    ];
+  }
+
+  return [];
+};
+
+export function validateUrl(url: string) {
+  return URL.canParse(url);
+}
+
+export const isTriggerDisabled = (
+  trigger: bigint,
+  disabledTriggers: bigint[] = [],
+) => {
+  return disabledTriggers.includes(trigger);
+};
+
+export const triggersList = Object.values(WebhookTriggers)
+  .filter((value) => typeof value === "number" && value !== WebhookTriggers.All)
+  .map(BigInt);

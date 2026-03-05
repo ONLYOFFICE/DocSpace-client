@@ -82,6 +82,7 @@ import {
   EditRoomGroupsDialog,
   RoomGroupingDialog,
   AddRoomToGroupDialog,
+  PauseSubmissionsDialog,
 } from "../dialogs";
 import ConvertPasswordDialog from "../dialogs/ConvertPasswordDialog";
 import ArchiveDialog from "../dialogs/ArchiveDialog";
@@ -205,6 +206,7 @@ const Panels = (props) => {
     addRoomToGroupDialogVisible,
     accessSettingsDialogVisible,
     accessSettingsPanelVisible,
+    pauseSubmissionsDialogVisible,
   } = props;
 
   const navigate = useNavigate();
@@ -538,6 +540,9 @@ const Panels = (props) => {
     addRoomToGroupDialogVisible && (
       <AddRoomToGroupDialog key="add-room-to-group-dialog" />
     ),
+    pauseSubmissionsDialogVisible && (
+      <PauseSubmissionsDialog key="pause-submissions-dialog" />
+    ),
   ];
 };
 
@@ -636,6 +641,7 @@ export default inject(
       addRoomToGroupDialogVisible,
       accessSettingsDialogVisible,
       accessSettingsPanelVisible,
+      pauseSubmissionsDialogVisible,
     } = dialogsStore;
 
     const { viewAs, setArrRoomGroups, arrRoomGroups } = filesStore;
@@ -781,6 +787,7 @@ export default inject(
       addRoomToGroupDialogVisible,
       accessSettingsDialogVisible,
       accessSettingsPanelVisible,
+      pauseSubmissionsDialogVisible,
     };
   },
 )(observer(Panels));

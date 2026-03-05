@@ -26,18 +26,18 @@
 
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
-import { PluginListContainer } from "../Plugins.styled";
+import styles from "../Plugins.module.scss";
 import { ListLoaderProps } from "../Plugins.types";
 
 const ListLoader = ({ withUpload }: ListLoaderProps) => {
   return (
     <>
       {withUpload ? <RectangleSkeleton width="144px" height="32px" /> : null}
-      <PluginListContainer>
+      <div className={styles.pluginListContainer}>
         <RectangleSkeleton width="340px" height="135px" />
         <RectangleSkeleton width="340px" height="135px" />
         <RectangleSkeleton width="340px" height="135px" />
-      </PluginListContainer>
+      </div>
     </>
   );
 };

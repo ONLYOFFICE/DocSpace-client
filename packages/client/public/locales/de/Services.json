@@ -1,6 +1,5 @@
 {
   "AITools": "KI-Tools",
-  "AItoolsConfirm": "Durch die Aktivierung der KI-Tools erhalten alle {{productName}}-Nutzer Zugriff auf KI-gestützte Funktionen, sofern ausreichend Guthaben im Wallet vorhanden ist. Möchten Sie fortfahren?",
   "AIToolsEnabled": "KI-Tools erfolgreich aktiviert",
   "AndMore": "Und vieles mehr!",
   "AutomaticBackupDescription": "Richten Sie geplante Backups für kontinuierlichen Datenschutz ohne manuelle Eingriffe ein.",
@@ -20,7 +19,6 @@
   "FreeBackupsPerMonth": "Kostenlose Backups: {{value}}/{{maxValue}} pro Monat.",
   "ImageGeneration": "Bildgenerierung",
   "ImageGenerationDescription": "Entwerfen Sie mithilfe von KI originelle Bilder und Illustrationen für Ihre Dokumente.",
-  "NewAIfeatures": "Es werden regelmäßig neue KI-Funktionen hinzugefügt, die Ihnen helfen, schneller, intelligenter und mit weniger Aufwand zu arbeiten.",
   "OCR": "OCR",
   "OCRDescription": "Erkennen und extrahieren Sie Text aus gescannten PDFs und Bildern.",
   "Summarization": "Zusammenfassung",

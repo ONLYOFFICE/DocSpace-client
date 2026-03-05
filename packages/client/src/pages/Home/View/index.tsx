@@ -64,750 +64,750 @@ import { SectionBodyContent, ContactsSectionBodyContent } from "../Section";
 import ProfileSectionBodyContent from "../../Profile/Section/Body";
 
 import useProfileBody, {
-	type UseProfileBodyProps,
+  type UseProfileBodyProps,
 } from "../../Profile/Section/Body/useProfileBody";
 import useContacts, { type UseContactsProps } from "../Hooks/useContacts";
 import useFiles, { type UseFilesProps } from "../Hooks/useFiles";
 import OformsStore from "SRC_DIR/store/OformsStore";
 
 type ViewProps = UseContactsProps &
-	UseFilesProps &
-	UseProfileBodyProps & {
-		setIsChangePageRequestRunning: ClientLoadingStore["setIsChangePageRequestRunning"];
-		setCurrentClientView: ClientLoadingStore["setCurrentClientView"];
-		setIsSectionHeaderLoading: ClientLoadingStore["setIsSectionHeaderLoading"];
-		showBodyLoader: ClientLoadingStore["showBodyLoader"];
+  UseFilesProps &
+  UseProfileBodyProps & {
+    setIsChangePageRequestRunning: ClientLoadingStore["setIsChangePageRequestRunning"];
+    setCurrentClientView: ClientLoadingStore["setCurrentClientView"];
+    setIsSectionHeaderLoading: ClientLoadingStore["setIsSectionHeaderLoading"];
+    showBodyLoader: ClientLoadingStore["showBodyLoader"];
 
-		clearFiles: FilesStore["clearFiles"];
+    clearFiles: FilesStore["clearFiles"];
 
-		usersAbortController: Nullable<AbortController>;
-		groupsAbortController: Nullable<AbortController>;
+    usersAbortController: Nullable<AbortController>;
+    groupsAbortController: Nullable<AbortController>;
 
-		filesAbortController: Nullable<AbortController>;
-		roomsAbortController: Nullable<AbortController>;
-		aiAgentsAbortController: Nullable<AbortController>;
+    filesAbortController: Nullable<AbortController>;
+    roomsAbortController: Nullable<AbortController>;
+    aiAgentsAbortController: Nullable<AbortController>;
 
-		showHeaderLoader: ClientLoadingStore["showHeaderLoader"];
+    showHeaderLoader: ClientLoadingStore["showHeaderLoader"];
 
-		aiAgentSelectorDialogProps: DialogsStore["aiAgentSelectorDialogProps"];
-		setAiAgentSelectorDialogProps: DialogsStore["setAiAgentSelectorDialogProps"];
+    aiAgentSelectorDialogProps: DialogsStore["aiAgentSelectorDialogProps"];
+    setAiAgentSelectorDialogProps: DialogsStore["setAiAgentSelectorDialogProps"];
 
-		canUseChat: AccessRightsStore["canUseChat"];
+    canUseChat: AccessRightsStore["canUseChat"];
 
-		aiConfig: SettingsStore["aiConfig"];
-		resultId: AiRoomStore["resultId"];
-		setHotkeyCaret: FilesStore["setHotkeyCaret"];
-		setIsErrorAccountNotAvailable: FilesStore["setIsErrorAccountNotAvailable"];
-		currentExtensionGallery: OformsStore["currentExtensionGallery"];
-	};
+    aiConfig: SettingsStore["aiConfig"];
+    resultId: AiRoomStore["resultId"];
+    setHotkeyCaret: FilesStore["setHotkeyCaret"];
+    setIsErrorAccountNotAvailable: FilesStore["setIsErrorAccountNotAvailable"];
+    currentExtensionGallery: OformsStore["currentExtensionGallery"];
+  };
 
 const View = ({
-	scrollToTop,
+  scrollToTop,
 
-	setSelectedNode,
+  setSelectedNode,
 
-	setContactsTab,
-	getUsersList,
+  setContactsTab,
+  getUsersList,
 
-	getGroups,
-	updateCurrentGroup,
+  getGroups,
+  updateCurrentGroup,
 
-	setIsChangePageRequestRunning,
-	setCurrentClientView,
+  setIsChangePageRequestRunning,
+  setCurrentClientView,
 
-	usersAbortController,
-	groupsAbortController,
+  usersAbortController,
+  groupsAbortController,
 
-	filesAbortController,
-	roomsAbortController,
-	aiAgentsAbortController,
+  filesAbortController,
+  roomsAbortController,
+  aiAgentsAbortController,
 
-	fetchFiles,
-	fetchRooms,
-	fetchAgents,
+  fetchFiles,
+  fetchRooms,
+  fetchAgents,
 
-	playlist,
+  playlist,
 
-	getFileInfo,
-	setToPreviewFile,
-	setIsPreview,
+  getFileInfo,
+  setToPreviewFile,
+  setIsPreview,
 
-	setIsUpdatingRowItem,
+  setIsUpdatingRowItem,
 
-	gallerySelected,
-	isVisibleInfoPanelTemplateGallery,
-	currentExtensionGallery,
-	userId,
+  gallerySelected,
+  isVisibleInfoPanelTemplateGallery,
+  currentExtensionGallery,
+  userId,
 
-	selectedFolderStore,
-	wsCreatedPDFForm,
-	setHotkeyCaret,
-	clearFiles,
+  selectedFolderStore,
+  wsCreatedPDFForm,
+  setHotkeyCaret,
+  clearFiles,
 
-	setIsSectionHeaderLoading,
+  setIsSectionHeaderLoading,
 
-	showBodyLoader,
-	showHeaderLoader,
+  showBodyLoader,
+  showHeaderLoader,
 
-	getFilesSettings,
-	setSubscriptions,
-	isFirstSubscriptionsLoad,
-	fetchConsents,
-	fetchScopes,
-	tfaSettings,
-	setBackupCodes,
-	setProviders,
-	getCapabilities,
-	getSessions,
+  getFilesSettings,
+  setSubscriptions,
+  isFirstSubscriptionsLoad,
+  fetchConsents,
+  fetchScopes,
+  tfaSettings,
+  setBackupCodes,
+  setProviders,
+  getCapabilities,
+  getSessions,
 
-	getTfaType,
-	setIsProfileLoaded,
+  getTfaType,
+  setIsProfileLoaded,
 
-	setNotificationChannels,
-	checkTg,
+  setNotificationChannels,
+  checkTg,
 
-	aiAgentSelectorDialogProps,
-	setAiAgentSelectorDialogProps,
+  aiAgentSelectorDialogProps,
+  setAiAgentSelectorDialogProps,
 
-	setIsErrorAccountNotAvailable,
+  setIsErrorAccountNotAvailable,
 
-	canUseChat,
-	aiConfig,
-	resultId,
+  canUseChat,
+  aiConfig,
+  resultId,
 }: ViewProps) => {
-	const location = useLocation();
-	const { t } = useTranslation(["Files", "Common", "AIRoom"]);
-
-	const isContactsPage = location.pathname.includes("accounts");
-	const isProfilePage = location.pathname.includes("profile");
-	const isChatPage =
-		location.pathname.includes("chat") &&
-		location.pathname.includes("ai-agents");
-
-	const [currentView, setCurrentView] = React.useState(() => {
-		const type = getCategoryType(location);
-
-		if (type === CategoryType.Chat) {
-			return "chat";
-		}
-
-		if (type === CategoryType.Accounts) {
-			return "users";
-		}
-
-		if (isProfilePage) {
-			return "profile";
-		}
-
-		return "files";
-	});
-
-	React.useEffect(() => {
-		const guestShareLinkInvalid = sessionStorage.getItem(
-			"guestShareLinkInvalid",
-		);
-
-		if (guestShareLinkInvalid === "true") {
-			toastr.error(t("Common:InvalidLink"));
-			sessionStorage.removeItem("guestShareLinkInvalid");
-		}
-	}, []);
-
-	const [isLoading, setIsLoading] = React.useState(false);
-
-	const prevCurrentViewRef = React.useRef(currentView);
-	const prevCategoryType = React.useRef<number>(getCategoryType(location));
-
-	const { fetchContacts } = useContacts({
-		isContactsPage,
-
-		setContactsTab,
-
-		scrollToTop,
-		setSelectedNode,
-
-		getUsersList,
-		getGroups,
-		updateCurrentGroup,
-	});
-
-	const { getFiles } = useFiles({
-		fetchFiles,
-		fetchRooms,
-		fetchAgents,
-
-		playlist,
-
-		getFileInfo,
-		setToPreviewFile,
-		setIsPreview,
-
-		setIsUpdatingRowItem,
-
-		gallerySelected,
-		isVisibleInfoPanelTemplateGallery,
-		userId,
-
-		selectedFolderStore,
-		wsCreatedPDFForm,
-		currentExtensionGallery,
-	});
-
-	const { getProfileInitialValue } = useProfileBody({
-		getFilesSettings: getFilesSettings!,
-		setSubscriptions: setSubscriptions!,
-		setNotificationChannels: setNotificationChannels!,
-		isFirstSubscriptionsLoad,
-		fetchConsents: fetchConsents!,
-		fetchScopes: fetchScopes!,
-		tfaSettings,
-		setBackupCodes: setBackupCodes!,
-		setProviders: setProviders!,
-		getCapabilities: getCapabilities!,
-		getSessions: getSessions!,
-		setIsProfileLoaded: setIsProfileLoaded!,
-		setIsSectionHeaderLoading: setIsSectionHeaderLoading!,
-		getTfaType: getTfaType!,
-		checkTg: checkTg!,
-	});
-
-	const [roomId, setRoomId] = React.useState(() => {
-		return new URLSearchParams(location.search).get("folder");
-	});
-
-	React.useLayoutEffect(() => {
-		const roomId = new URLSearchParams(location.search).get("folder");
-		setRoomId(roomId);
-	}, [location.search]);
-
-	const toolsSettings = useToolsSettings({
-		roomId: roomId ?? "",
-		aiConfig,
-		chatSettings: selectedFolderStore.chatSettings,
-	});
-
-	const initChats = useInitChats({
-		roomId: roomId ?? "",
-	});
-
-	const { initMessages, ...messagesSettings } = useInitMessages(roomId ?? "");
-
-	const { initTools } = toolsSettings;
-	const { fetchChats } = initChats;
-
-	const getFilesRef = React.useRef(getFiles);
-	const fetchContactsRef = React.useRef(fetchContacts);
-	const initChatsRef = React.useRef(fetchChats);
-	const initToolsRef = React.useRef(initTools);
-	const initMessagesRef = React.useRef(initMessages);
-
-	const animationStartedRef = React.useRef(false);
-
-	const abortControllers = React.useRef({
-		filesAbortController,
-		roomsAbortController,
-		aiAgentsAbortController,
-		usersAbortController,
-		groupsAbortController,
-	});
-
-	React.useLayoutEffect(() => {
-		setIsSectionHeaderLoading(true, false);
-	}, [setIsSectionHeaderLoading]);
-
-	React.useEffect(() => {
-		prevCurrentViewRef.current = currentView;
-	}, [currentView]);
-
-	React.useEffect(() => {
-		getFilesRef.current = getFiles;
-	}, [getFiles]);
-
-	React.useEffect(() => {
-		fetchContactsRef.current = fetchContacts;
-	}, [fetchContacts]);
-
-	React.useEffect(() => {
-		abortControllers.current.filesAbortController = filesAbortController;
-		abortControllers.current.roomsAbortController = roomsAbortController;
-		abortControllers.current.aiAgentsAbortController = aiAgentsAbortController;
-		abortControllers.current.usersAbortController = usersAbortController;
-		abortControllers.current.groupsAbortController = groupsAbortController;
-	}, [
-		filesAbortController,
-		roomsAbortController,
-		aiAgentsAbortController,
-		usersAbortController,
-		groupsAbortController,
-	]);
-
-	React.useEffect(() => {
-		animationStartedRef.current = false;
-
-		const animationStartedAction = () => {
-			animationStartedRef.current = true;
-		};
-
-		window.addEventListener(
-			AnimationEvents.ANIMATION_STARTED,
-			animationStartedAction,
-		);
-
-		return () => {
-			window.removeEventListener(
-				AnimationEvents.ANIMATION_STARTED,
-				animationStartedAction,
-			);
-		};
-	}, []);
-
-	React.useEffect(() => {
-		if (!isLoading) {
-			TopLoadingIndicator.end();
-
-			if (currentView === "profile" && prevCurrentViewRef.current === "profile")
-				return;
-
-			window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION));
-		}
-	}, [isLoading]);
-
-	React.useEffect(() => {
-		animationStartedRef.current = false;
-
-		const animationEndedAction = () => {
-			animationStartedRef.current = false;
-		};
-
-		window.addEventListener(
-			AnimationEvents.ANIMATION_ENDED,
-			animationEndedAction,
-		);
-
-		return () => {
-			window.removeEventListener(
-				AnimationEvents.ANIMATION_ENDED,
-				animationEndedAction,
-			);
-		};
-	}, []);
-
-	React.useEffect(() => {
-		if (showHeaderLoader) return;
-
-		if (isLoading) {
-			if (!animationStartedRef.current) {
-				TopLoadingIndicator.start();
-			}
-		}
-	}, [isLoading, showHeaderLoader]);
-
-	React.useEffect(() => {
-		initChatsRef.current = fetchChats;
-	}, [fetchChats]);
-
-	React.useEffect(() => {
-		initToolsRef.current = initTools;
-	}, [initTools]);
-
-	React.useEffect(() => {
-		initMessagesRef.current = initMessages;
-	}, [initMessages]);
-
-	const showToastAccess = useEventCallback(() => {
-		if (
-			selectedFolderStore.isFolder &&
-			sessionStorage.getItem(TOAST_FOLDER_PUBLIC_KEY) ===
-				selectedFolderStore.id?.toString()
-		) {
-			const access = getAccessLabel(
-				t,
-				selectedFolderStore as unknown as TFolder,
-			);
-
-			toastr.info(
-				<Trans
-					t={t}
-					ns="Files"
-					i18nKey="OpenedViaLink"
-					values={{ access }}
-					components={{
-						strong: <strong />,
-					}}
-				/>,
-			);
-			sessionStorage.removeItem(TOAST_FOLDER_PUBLIC_KEY);
-		}
-	});
-
-	React.useEffect(() => {
-		const getView = async () => {
-			try {
-				abortControllers.current.usersAbortController?.abort();
-				abortControllers.current.groupsAbortController?.abort();
-				abortControllers.current.filesAbortController?.abort();
-				abortControllers.current.roomsAbortController?.abort();
-				abortControllers.current.aiAgentsAbortController?.abort();
-
-				setIsLoading(true);
-				setIsChangePageRequestRunning(true);
-				let view: void | "groups" | "files" | "users" | "profile" | "chat" =
-					await fetchContactsRef.current();
-
-				if (isProfilePage) {
-					await getProfileInitialValue();
-
-					clearFiles();
-					setContactsTab(false);
-
-					view = "profile";
-				} else if (isChatPage) {
-					await Promise.all([
-						getFilesRef.current(),
-						initToolsRef.current(),
-						initChatsRef.current(),
-						initMessagesRef.current(),
-					]);
-
-					view = "chat";
-
-					prevCategoryType.current = getCategoryType(location);
-
-					setContactsTab(false);
-				} else if (!isContactsPage) {
-					await getFilesRef.current();
-
-					prevCategoryType.current = getCategoryType(location);
-
-					view = "files";
-					setContactsTab(false);
-				} else {
-					clearFiles();
-				}
-
-				if (view) {
-					setCurrentView(view);
-					setCurrentClientView(view);
-				}
-
-				setIsChangePageRequestRunning(false);
-				setIsLoading(false);
-
-				clearTextSelection();
-				showToastAccess();
-			} catch (error) {
-				console.log(error);
-				if ((error as Error).message === "canceled") {
-					return;
-				}
-
-				const typedError = error as TError;
-
-				if (
-					typedError?.response?.data?.error?.message === "Access denied" &&
-					isContactsPage
-				) {
-					setIsErrorAccountNotAvailable(true);
-					setIsSectionHeaderLoading(false, false);
-				}
-
-				setIsChangePageRequestRunning(false);
-				setIsLoading(false);
-			}
-		};
-
-		getView();
-	}, [
-		location.pathname,
-		location.search,
-		isContactsPage,
-		isProfilePage,
-		isChatPage,
-		showToastAccess,
-	]);
-
-	React.useEffect(() => {
-		if (isLoading || currentView === "chat") return;
-
-		const scroll = document.getElementsByClassName("section-body");
-
-		if (scroll && scroll[0]) {
-			const firstChild = scroll[0] as HTMLElement;
-			firstChild.focus();
-			setHotkeyCaret(null);
-		}
-
-		scrollToTop();
-	}, [isLoading, currentView, scrollToTop]);
-
-	React.useEffect(() => {
-		if (
-			selectedFolderStore.isInsideResultStorage &&
-			!canUseChat &&
-			!showBodyLoader
-		) {
-			toastr.info(
-				<Trans
-					t={t}
-					ns="AIRoom"
-					i18nKey="AgentInViewModeWarning"
-					components={{
-						strong: <strong />,
-					}}
-					values={{ aiAgent: t("Common:AIAgent"), aiChat: t("AIRoom:AIChat") }}
-				/>,
-			);
-		}
-	}, [
-		selectedFolderStore.isInsideResultStorage,
-		canUseChat,
-		showBodyLoader,
-		t,
-	]);
-
-	const attachmentFile = React.useMemo(
-		() => aiAgentSelectorDialogProps?.file,
-		[aiAgentSelectorDialogProps?.file],
-	);
-
-	const onClearAttachmentFile = React.useCallback(() => {
-		setAiAgentSelectorDialogProps(false, null);
-	}, [setAiAgentSelectorDialogProps]);
-	// console.log("currentView", currentView);
-
-	const getResultStorageId = () => {
-		if (!selectedFolderStore.isAIRoom) return null;
-
-		if (resultId) return resultId;
-
-		return (
-			selectedFolderStore.folders?.find(
-				(folder) => folder.type === FolderType.ResultStorage,
-			)?.id || null
-		);
-	};
-
-	const shouldRedirectToResultStorage =
-		currentView === "chat" &&
-		selectedFolderStore.isAIRoom &&
-		!canUseChat &&
-		!showBodyLoader;
-
-	if (shouldRedirectToResultStorage) {
-		const agentId = selectedFolderStore.id || "";
-
-		const filesFilter = FilesFilter.getDefault();
-		filesFilter.folder = agentId.toString();
-		filesFilter.searchArea = SearchArea.ResultStorage;
-
-		const path = getCategoryUrl(CategoryType.AIAgent, agentId);
-
-		return <Navigate to={`${path}?${filesFilter.toUrlParams()}`} />;
-	}
-
-	return (
-		<LoaderWrapper isLoading={isLoading ? !showHeaderLoader : false}>
-			<Consumer>
-				{(context) =>
-					currentView === "users" || currentView === "groups" ? (
-						<ContactsSectionBodyContent
-							sectionWidth={context.sectionWidth}
-							currentView={currentView}
-						/>
-					) : currentView === "chat" || selectedFolderStore.isAIRoom ? (
-						<AIAgentView
-							currentView={currentView}
-							isViewLoading={isLoading}
-							roomId={roomId}
-							attachmentFile={attachmentFile}
-							onClearAttachmentFile={onClearAttachmentFile}
-							toolsSettings={toolsSettings}
-							initChats={initChats}
-							messagesSettings={messagesSettings}
-							getResultStorageId={getResultStorageId}
-						/>
-					) : currentView === "profile" ? (
-						<ProfileSectionBodyContent />
-					) : (
-						<SectionBodyContent sectionWidth={context.sectionWidth} />
-					)
-				}
-			</Consumer>
-		</LoaderWrapper>
-	);
+  const location = useLocation();
+  const { t } = useTranslation(["Files", "Common", "AIRoom"]);
+
+  const isContactsPage = location.pathname.includes("accounts");
+  const isProfilePage = location.pathname.includes("profile");
+  const isChatPage =
+    location.pathname.includes("chat") &&
+    location.pathname.includes("ai-agents");
+
+  const [currentView, setCurrentView] = React.useState(() => {
+    const type = getCategoryType(location);
+
+    if (type === CategoryType.Chat) {
+      return "chat";
+    }
+
+    if (type === CategoryType.Accounts) {
+      return "users";
+    }
+
+    if (isProfilePage) {
+      return "profile";
+    }
+
+    return "files";
+  });
+
+  React.useEffect(() => {
+    const guestShareLinkInvalid = sessionStorage.getItem(
+      "guestShareLinkInvalid",
+    );
+
+    if (guestShareLinkInvalid === "true") {
+      toastr.error(t("Common:InvalidLink"));
+      sessionStorage.removeItem("guestShareLinkInvalid");
+    }
+  }, []);
+
+  const [isLoading, setIsLoading] = React.useState(false);
+
+  const prevCurrentViewRef = React.useRef(currentView);
+  const prevCategoryType = React.useRef<number>(getCategoryType(location));
+
+  const { fetchContacts } = useContacts({
+    isContactsPage,
+
+    setContactsTab,
+
+    scrollToTop,
+    setSelectedNode,
+
+    getUsersList,
+    getGroups,
+    updateCurrentGroup,
+  });
+
+  const { getFiles } = useFiles({
+    fetchFiles,
+    fetchRooms,
+    fetchAgents,
+
+    playlist,
+
+    getFileInfo,
+    setToPreviewFile,
+    setIsPreview,
+
+    setIsUpdatingRowItem,
+
+    gallerySelected,
+    isVisibleInfoPanelTemplateGallery,
+    userId,
+
+    selectedFolderStore,
+    wsCreatedPDFForm,
+    currentExtensionGallery,
+  });
+
+  const { getProfileInitialValue } = useProfileBody({
+    getFilesSettings: getFilesSettings!,
+    setSubscriptions: setSubscriptions!,
+    setNotificationChannels: setNotificationChannels!,
+    isFirstSubscriptionsLoad,
+    fetchConsents: fetchConsents!,
+    fetchScopes: fetchScopes!,
+    tfaSettings,
+    setBackupCodes: setBackupCodes!,
+    setProviders: setProviders!,
+    getCapabilities: getCapabilities!,
+    getSessions: getSessions!,
+    setIsProfileLoaded: setIsProfileLoaded!,
+    setIsSectionHeaderLoading: setIsSectionHeaderLoading!,
+    getTfaType: getTfaType!,
+    checkTg: checkTg!,
+  });
+
+  const [roomId, setRoomId] = React.useState(() => {
+    return new URLSearchParams(location.search).get("folder");
+  });
+
+  React.useLayoutEffect(() => {
+    const roomId = new URLSearchParams(location.search).get("folder");
+    setRoomId(roomId);
+  }, [location.search]);
+
+  const toolsSettings = useToolsSettings({
+    roomId: roomId ?? "",
+    aiConfig,
+    chatSettings: selectedFolderStore.chatSettings,
+  });
+
+  const initChats = useInitChats({
+    roomId: roomId ?? "",
+  });
+
+  const { initMessages, ...messagesSettings } = useInitMessages(roomId ?? "");
+
+  const { initTools } = toolsSettings;
+  const { fetchChats } = initChats;
+
+  const getFilesRef = React.useRef(getFiles);
+  const fetchContactsRef = React.useRef(fetchContacts);
+  const initChatsRef = React.useRef(fetchChats);
+  const initToolsRef = React.useRef(initTools);
+  const initMessagesRef = React.useRef(initMessages);
+
+  const animationStartedRef = React.useRef(false);
+
+  const abortControllers = React.useRef({
+    filesAbortController,
+    roomsAbortController,
+    aiAgentsAbortController,
+    usersAbortController,
+    groupsAbortController,
+  });
+
+  React.useLayoutEffect(() => {
+    setIsSectionHeaderLoading(true, false);
+  }, [setIsSectionHeaderLoading]);
+
+  React.useEffect(() => {
+    prevCurrentViewRef.current = currentView;
+  }, [currentView]);
+
+  React.useEffect(() => {
+    getFilesRef.current = getFiles;
+  }, [getFiles]);
+
+  React.useEffect(() => {
+    fetchContactsRef.current = fetchContacts;
+  }, [fetchContacts]);
+
+  React.useEffect(() => {
+    abortControllers.current.filesAbortController = filesAbortController;
+    abortControllers.current.roomsAbortController = roomsAbortController;
+    abortControllers.current.aiAgentsAbortController = aiAgentsAbortController;
+    abortControllers.current.usersAbortController = usersAbortController;
+    abortControllers.current.groupsAbortController = groupsAbortController;
+  }, [
+    filesAbortController,
+    roomsAbortController,
+    aiAgentsAbortController,
+    usersAbortController,
+    groupsAbortController,
+  ]);
+
+  React.useEffect(() => {
+    animationStartedRef.current = false;
+
+    const animationStartedAction = () => {
+      animationStartedRef.current = true;
+    };
+
+    window.addEventListener(
+      AnimationEvents.ANIMATION_STARTED,
+      animationStartedAction,
+    );
+
+    return () => {
+      window.removeEventListener(
+        AnimationEvents.ANIMATION_STARTED,
+        animationStartedAction,
+      );
+    };
+  }, []);
+
+  React.useEffect(() => {
+    if (!isLoading) {
+      TopLoadingIndicator.end();
+
+      if (currentView === "profile" && prevCurrentViewRef.current === "profile")
+        return;
+
+      window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION));
+    }
+  }, [isLoading]);
+
+  React.useEffect(() => {
+    animationStartedRef.current = false;
+
+    const animationEndedAction = () => {
+      animationStartedRef.current = false;
+    };
+
+    window.addEventListener(
+      AnimationEvents.ANIMATION_ENDED,
+      animationEndedAction,
+    );
+
+    return () => {
+      window.removeEventListener(
+        AnimationEvents.ANIMATION_ENDED,
+        animationEndedAction,
+      );
+    };
+  }, []);
+
+  React.useEffect(() => {
+    if (showHeaderLoader) return;
+
+    if (isLoading) {
+      if (!animationStartedRef.current) {
+        TopLoadingIndicator.start();
+      }
+    }
+  }, [isLoading, showHeaderLoader]);
+
+  React.useEffect(() => {
+    initChatsRef.current = fetchChats;
+  }, [fetchChats]);
+
+  React.useEffect(() => {
+    initToolsRef.current = initTools;
+  }, [initTools]);
+
+  React.useEffect(() => {
+    initMessagesRef.current = initMessages;
+  }, [initMessages]);
+
+  const showToastAccess = useEventCallback(() => {
+    if (
+      selectedFolderStore.isFolder &&
+      sessionStorage.getItem(TOAST_FOLDER_PUBLIC_KEY) ===
+        selectedFolderStore.id?.toString()
+    ) {
+      const access = getAccessLabel(
+        t,
+        selectedFolderStore as unknown as TFolder,
+      );
+
+      toastr.info(
+        <Trans
+          t={t}
+          ns="Files"
+          i18nKey="OpenedViaLink"
+          values={{ access }}
+          components={{
+            strong: <strong />,
+          }}
+        />,
+      );
+      sessionStorage.removeItem(TOAST_FOLDER_PUBLIC_KEY);
+    }
+  });
+
+  React.useEffect(() => {
+    const getView = async () => {
+      try {
+        abortControllers.current.usersAbortController?.abort();
+        abortControllers.current.groupsAbortController?.abort();
+        abortControllers.current.filesAbortController?.abort();
+        abortControllers.current.roomsAbortController?.abort();
+        abortControllers.current.aiAgentsAbortController?.abort();
+
+        setIsLoading(true);
+        setIsChangePageRequestRunning(true);
+        let view: void | "groups" | "files" | "users" | "profile" | "chat" =
+          await fetchContactsRef.current();
+
+        if (isProfilePage) {
+          await getProfileInitialValue();
+
+          clearFiles();
+          setContactsTab(false);
+
+          view = "profile";
+        } else if (isChatPage) {
+          await Promise.all([
+            getFilesRef.current(),
+            initToolsRef.current(),
+            initChatsRef.current(),
+            initMessagesRef.current(),
+          ]);
+
+          view = "chat";
+
+          prevCategoryType.current = getCategoryType(location);
+
+          setContactsTab(false);
+        } else if (!isContactsPage) {
+          await getFilesRef.current();
+
+          prevCategoryType.current = getCategoryType(location);
+
+          view = "files";
+          setContactsTab(false);
+        } else {
+          clearFiles();
+        }
+
+        if (view) {
+          setCurrentView(view);
+          setCurrentClientView(view);
+        }
+
+        setIsChangePageRequestRunning(false);
+        setIsLoading(false);
+
+        clearTextSelection();
+        showToastAccess();
+      } catch (error) {
+        console.log(error);
+        if ((error as Error).message === "canceled") {
+          return;
+        }
+
+        const typedError = error as TError;
+
+        if (
+          typedError?.response?.data?.error?.message === "Access denied" &&
+          isContactsPage
+        ) {
+          setIsErrorAccountNotAvailable(true);
+          setIsSectionHeaderLoading(false, false);
+        }
+
+        setIsChangePageRequestRunning(false);
+        setIsLoading(false);
+      }
+    };
+
+    getView();
+  }, [
+    location.pathname,
+    location.search,
+    isContactsPage,
+    isProfilePage,
+    isChatPage,
+    showToastAccess,
+  ]);
+
+  React.useEffect(() => {
+    if (isLoading || currentView === "chat") return;
+
+    const scroll = document.getElementsByClassName("section-body");
+
+    if (scroll && scroll[0]) {
+      const firstChild = scroll[0] as HTMLElement;
+      firstChild.focus();
+      setHotkeyCaret(null);
+    }
+
+    scrollToTop();
+  }, [isLoading, currentView, scrollToTop]);
+
+  React.useEffect(() => {
+    if (
+      selectedFolderStore.isInsideResultStorage &&
+      !canUseChat &&
+      !showBodyLoader
+    ) {
+      toastr.info(
+        <Trans
+          t={t}
+          ns="AIRoom"
+          i18nKey="AgentInViewModeWarning"
+          components={{
+            strong: <strong />,
+          }}
+          values={{ aiAgent: t("Common:AIAgent"), aiChat: t("AIRoom:AIChat") }}
+        />,
+      );
+    }
+  }, [
+    selectedFolderStore.isInsideResultStorage,
+    canUseChat,
+    showBodyLoader,
+    t,
+  ]);
+
+  const attachmentFile = React.useMemo(
+    () => aiAgentSelectorDialogProps?.file,
+    [aiAgentSelectorDialogProps?.file],
+  );
+
+  const onClearAttachmentFile = React.useCallback(() => {
+    setAiAgentSelectorDialogProps(false, null);
+  }, [setAiAgentSelectorDialogProps]);
+  // console.log("currentView", currentView);
+
+  const getResultStorageId = () => {
+    if (!selectedFolderStore.isAIRoom) return null;
+
+    if (resultId) return resultId;
+
+    return (
+      selectedFolderStore.folders?.find(
+        (folder) => folder.type === FolderType.ResultStorage,
+      )?.id || null
+    );
+  };
+
+  const shouldRedirectToResultStorage =
+    currentView === "chat" &&
+    selectedFolderStore.isAIRoom &&
+    !canUseChat &&
+    !showBodyLoader;
+
+  if (shouldRedirectToResultStorage) {
+    const agentId = selectedFolderStore.id || "";
+
+    const filesFilter = FilesFilter.getDefault();
+    filesFilter.folder = agentId.toString();
+    filesFilter.searchArea = SearchArea.ResultStorage;
+
+    const path = getCategoryUrl(CategoryType.AIAgent, agentId);
+
+    return <Navigate to={`${path}?${filesFilter.toUrlParams()}`} />;
+  }
+
+  return (
+    <LoaderWrapper isLoading={isLoading ? !showHeaderLoader : false}>
+      <Consumer>
+        {(context) =>
+          currentView === "users" || currentView === "groups" ? (
+            <ContactsSectionBodyContent
+              sectionWidth={context.sectionWidth}
+              currentView={currentView}
+            />
+          ) : currentView === "chat" || selectedFolderStore.isAIRoom ? (
+            <AIAgentView
+              currentView={currentView}
+              isViewLoading={isLoading}
+              roomId={roomId}
+              attachmentFile={attachmentFile}
+              onClearAttachmentFile={onClearAttachmentFile}
+              toolsSettings={toolsSettings}
+              initChats={initChats}
+              messagesSettings={messagesSettings}
+              getResultStorageId={getResultStorageId}
+            />
+          ) : currentView === "profile" ? (
+            <ProfileSectionBodyContent />
+          ) : (
+            <SectionBodyContent sectionWidth={context.sectionWidth} />
+          )
+        }
+      </Consumer>
+    </LoaderWrapper>
+  );
 };
 
 export const ViewComponent = inject(
-	({
-		peopleStore,
-		treeFoldersStore,
+  ({
+    peopleStore,
+    treeFoldersStore,
 
-		filesStore,
-		clientLoadingStore,
-		mediaViewerDataStore,
-		oformsStore,
-		userStore,
-		selectedFolderStore,
-		filesSettingsStore,
-		oauthStore,
-		tfaStore,
-		setup,
-		authStore,
-		telegramStore,
-		dialogsStore,
-		accessRightsStore,
-		settingsStore,
-		aiRoomStore,
-	}: TStore) => {
-		const { resultId } = aiRoomStore;
-		const { aiConfig } = settingsStore;
+    filesStore,
+    clientLoadingStore,
+    mediaViewerDataStore,
+    oformsStore,
+    userStore,
+    selectedFolderStore,
+    filesSettingsStore,
+    oauthStore,
+    tfaStore,
+    setup,
+    authStore,
+    telegramStore,
+    dialogsStore,
+    accessRightsStore,
+    settingsStore,
+    aiRoomStore,
+  }: TStore) => {
+    const { resultId } = aiRoomStore;
+    const { aiConfig } = settingsStore;
 
-		const { canUseChat } = accessRightsStore;
+    const { canUseChat } = accessRightsStore;
 
-		const { usersStore, groupsStore } = peopleStore;
+    const { usersStore, groupsStore } = peopleStore;
 
-		const {
-			getUsersList,
-			setContactsTab,
-			abortController: usersAbortController,
-		} = usersStore;
+    const {
+      getUsersList,
+      setContactsTab,
+      abortController: usersAbortController,
+    } = usersStore;
 
-		const {
-			getGroups,
-			updateCurrentGroup,
-			abortController: groupsAbortController,
-		} = groupsStore!;
+    const {
+      getGroups,
+      updateCurrentGroup,
+      abortController: groupsAbortController,
+    } = groupsStore!;
 
-		const { setSelectedNode } = treeFoldersStore;
+    const { setSelectedNode } = treeFoldersStore;
 
-		const {
-			scrollToTop,
-			fetchFiles,
-			fetchRooms,
-			fetchAgents,
-			getFileInfo,
-			setIsPreview,
-			setIsUpdatingRowItem,
-			wsCreatedPDFForm,
-			setHotkeyCaret,
+    const {
+      scrollToTop,
+      fetchFiles,
+      fetchRooms,
+      fetchAgents,
+      getFileInfo,
+      setIsPreview,
+      setIsUpdatingRowItem,
+      wsCreatedPDFForm,
+      setHotkeyCaret,
 
-			filesController,
-			roomsController,
-			aiAgentsController,
+      filesController,
+      roomsController,
+      aiAgentsController,
 
-			clearFiles,
-			setIsErrorAccountNotAvailable,
-		} = filesStore;
+      clearFiles,
+      setIsErrorAccountNotAvailable,
+    } = filesStore;
 
-		const {
-			setIsChangePageRequestRunning,
-			setCurrentClientView,
-			setIsSectionHeaderLoading,
-			setIsProfileLoaded,
+    const {
+      setIsChangePageRequestRunning,
+      setCurrentClientView,
+      setIsSectionHeaderLoading,
+      setIsProfileLoaded,
 
-			showHeaderLoader,
-		} = clientLoadingStore;
+      showHeaderLoader,
+    } = clientLoadingStore;
 
-		const { playlist, setToPreviewFile } = mediaViewerDataStore;
+    const { playlist, setToPreviewFile } = mediaViewerDataStore;
 
-		const {
-			gallerySelected,
-			isVisibleInfoPanelTemplateGallery,
-			currentExtensionGallery,
-		} = oformsStore;
+    const {
+      gallerySelected,
+      isVisibleInfoPanelTemplateGallery,
+      currentExtensionGallery,
+    } = oformsStore;
 
-		const { getFilesSettings } = filesSettingsStore;
+    const { getFilesSettings } = filesSettingsStore;
 
-		const {
-			setSubscriptions,
-			setNotificationChannels,
-			isFirstSubscriptionsLoad,
-		} = peopleStore.targetUserStore!;
+    const {
+      setSubscriptions,
+      setNotificationChannels,
+      isFirstSubscriptionsLoad,
+    } = peopleStore.targetUserStore!;
 
-		const { fetchConsents, fetchScopes } = oauthStore;
+    const { fetchConsents, fetchScopes } = oauthStore;
 
-		const { tfaSettings, setBackupCodes, getTfaType } = tfaStore;
+    const { tfaSettings, setBackupCodes, getTfaType } = tfaStore;
 
-		const { setProviders } = peopleStore.usersStore;
-		const { getCapabilities } = authStore;
+    const { setProviders } = peopleStore.usersStore;
+    const { getCapabilities } = authStore;
 
-		const { getSessions } = setup;
+    const { getSessions } = setup;
 
-		const { checkTg } = telegramStore;
+    const { checkTg } = telegramStore;
 
-		const { aiAgentSelectorDialogProps, setAiAgentSelectorDialogProps } =
-			dialogsStore;
+    const { aiAgentSelectorDialogProps, setAiAgentSelectorDialogProps } =
+      dialogsStore;
 
-		return {
-			setContactsTab,
-			getUsersList,
-			getGroups,
-			updateCurrentGroup,
+    return {
+      setContactsTab,
+      getUsersList,
+      getGroups,
+      updateCurrentGroup,
 
-			setSelectedNode,
+      setSelectedNode,
 
-			scrollToTop,
-			fetchFiles,
-			fetchRooms,
-			fetchAgents,
-			getFileInfo,
-			setIsPreview,
-			setIsUpdatingRowItem,
-			wsCreatedPDFForm,
-			setHotkeyCaret,
+      scrollToTop,
+      fetchFiles,
+      fetchRooms,
+      fetchAgents,
+      getFileInfo,
+      setIsPreview,
+      setIsUpdatingRowItem,
+      wsCreatedPDFForm,
+      setHotkeyCaret,
 
-			setIsChangePageRequestRunning,
-			setCurrentClientView,
+      setIsChangePageRequestRunning,
+      setCurrentClientView,
 
-			usersAbortController,
-			groupsAbortController,
+      usersAbortController,
+      groupsAbortController,
 
-			filesAbortController: filesController,
-			roomsAbortController: roomsController,
-			aiAgentsAbortController: aiAgentsController,
+      filesAbortController: filesController,
+      roomsAbortController: roomsController,
+      aiAgentsAbortController: aiAgentsController,
 
-			playlist,
-			setToPreviewFile,
+      playlist,
+      setToPreviewFile,
 
-			gallerySelected,
-			isVisibleInfoPanelTemplateGallery,
-			currentExtensionGallery,
+      gallerySelected,
+      isVisibleInfoPanelTemplateGallery,
+      currentExtensionGallery,
 
-			userId: userStore?.user?.id,
+      userId: userStore?.user?.id,
 
-			selectedFolderStore,
+      selectedFolderStore,
 
-			clearFiles,
+      clearFiles,
 
-			setIsSectionHeaderLoading,
+      setIsSectionHeaderLoading,
 
-			showBodyLoader: clientLoadingStore.showBodyLoader,
-			showHeaderLoader,
+      showBodyLoader: clientLoadingStore.showBodyLoader,
+      showHeaderLoader,
 
-			getFilesSettings,
-			setSubscriptions,
-			isFirstSubscriptionsLoad,
-			fetchConsents,
-			fetchScopes,
-			tfaSettings,
-			setBackupCodes,
-			setProviders,
-			getCapabilities,
-			getSessions,
+      getFilesSettings,
+      setSubscriptions,
+      isFirstSubscriptionsLoad,
+      fetchConsents,
+      fetchScopes,
+      tfaSettings,
+      setBackupCodes,
+      setProviders,
+      getCapabilities,
+      getSessions,
 
-			getTfaType,
-			setIsProfileLoaded,
-			setNotificationChannels,
-			checkTg,
+      getTfaType,
+      setIsProfileLoaded,
+      setNotificationChannels,
+      checkTg,
 
-			aiAgentSelectorDialogProps,
-			setAiAgentSelectorDialogProps,
+      aiAgentSelectorDialogProps,
+      setAiAgentSelectorDialogProps,
 
-			setIsErrorAccountNotAvailable,
+      setIsErrorAccountNotAvailable,
 
-			canUseChat,
-			aiConfig,
-			resultId,
-		};
-	},
+      canUseChat,
+      aiConfig,
+      resultId,
+    };
+  },
 )(observer(View));

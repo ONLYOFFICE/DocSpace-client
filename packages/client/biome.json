@@ -27,5 +27,19 @@
         "noFallthroughSwitchClause": "off"
       }
     }
-  }
+  },
+  "overrides": [
+    {
+      "includes": [
+        "__tests__/fixtures/**"
+      ],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "noEmptyPattern": "off"
+          }
+        }
+      }
+    }
+  ]
 }

@@ -40,7 +40,8 @@ import {
   TLicenseQuota,
 } from "./types";
 import { Nullable } from "../../types";
-import { Encoder } from "../../utils/encoder";
+import { Encoder } from "@docspace/ui-kit/utils/encoder";
+import { AI_TOOLS } from "../../constants";
 
 const baseURL = "/apisystem";
 
@@ -300,10 +301,19 @@ export async function getPortalPaymentQuotas(signal?: AbortSignal) {
   return res;
 }
 
-export async function getServicesQuotas(signal?: AbortSignal) {
+export async function getServicesQuotas(
+  serviceName: string,
+  signal?: AbortSignal,
+) {
+  const params = {};
+
+  if (serviceName) {
+    params.service = serviceName;
+  }
   const res = (await request({
     method: "get",
     url: "/portal/payment/walletservices",
+    params,
     signal,
   })) as TPaymentQuota[];
 
@@ -471,6 +481,29 @@ export function getBalance(refresh?: boolean, signal?: AbortSignal) {
   }) as TBalance;
 }
 
+export async function getServiceQuotaBalance(
+  serviceName: string = AI_TOOLS,
+  refresh?: boolean,
+  signal?: AbortSignal,
+) {
+  const params = refresh ? { refresh: true } : {};
+
+  return request({
+    method: "get",
+    url: `/portal/payment/customer/servicequota?serviceName=${serviceName}`,
+    params,
+    signal,
+  }) as TBalance;
+}
+
+export async function getAiPrices(signal?: AbortSignal) {
+  return request({
+    method: "get",
+    url: `/portal/payment/ai-prices`,
+    signal,
+  });
+}
+
 export async function getWalletPayer(refresh?: boolean, signal?: AbortSignal) {
   const params = refresh ? { refresh: true } : {};
 
@@ -512,6 +545,17 @@ export async function saveDeposite(amount: number, currency: string) {
   }) as string;
 }
 
+export async function buyWalletService(quantity: number, serviceName: string) {
+  return request({
+    method: "post",
+    url: "/portal/payment/buywalletservice",
+    data: {
+      quantity,
+      serviceName,
+    },
+  }) as string;
+}
+
 export async function getTransactionHistory(
   startDate: string,
   endDate: string,
@@ -520,6 +564,7 @@ export async function getTransactionHistory(
   participantName: string = "",
   offset: number = 0,
   limit: number = 25,
+  serviceName: string = "",
   signal?: AbortSignal,
 ) {
   const params = {
@@ -533,6 +578,10 @@ export async function getTransactionHistory(
 
   if (participantName) {
     params.participantName = participantName;
+  }
+
+  if (serviceName) {
+    params.serviceName = serviceName;
   }
 
   const options = {
@@ -586,17 +635,29 @@ export async function startTransactionHistoryReport(
   startDate: string,
   endDate: string,
   credit: boolean,
-  withdrawal: boolean,
+  debit: boolean,
+  participantName?: string,
+  serviceName?: string,
 ) {
+  const data = {
+    startDate,
+    endDate,
+    credit,
+    debit,
+  };
+
+  if (participantName) {
+    data.participantName = participantName;
+  }
+
+  if (serviceName) {
+    data.serviceName = serviceName;
+  }
+
   const options = {
     method: "post",
     url: "/portal/payment/customer/operationsreport",
-    data: {
-      startDate,
-      endDate,
-      credit,
-      withdrawal,
-    },
+    data,
   };
   const res = (await request(options)) as TransactionHistoryReport;
 
@@ -685,3 +746,29 @@ export async function updateInviteLink(data) {
   const res = await request(options);
   return res;
 }
+
+export type TAiModelAvailabilitySettingsResponse =
+  | []
+  | {
+      models: string[];
+    };
+
+export const getAiModelRestrictions = async (signal?: AbortSignal) => {
+  return request({
+    method: "get",
+    url: "/portal/payment/ai-model/restrictions",
+    signal,
+  }) as Promise<TAiModelAvailabilitySettingsResponse>;
+};
+
+export const setAiModelRestrictions = async (
+  models: string[],
+  signal?: AbortSignal,
+) => {
+  return request({
+    method: "put",
+    url: "/portal/payment/ai-model/restrictions",
+    data: { models },
+    signal,
+  });
+};

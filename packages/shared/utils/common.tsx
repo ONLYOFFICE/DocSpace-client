@@ -27,7 +27,11 @@
 import type { Location } from "react-router";
 import find from "lodash/find";
 import { findWindows } from "windows-iana";
-import { parseToDateTime, startOf, dateDiffAbs } from "@docspace/ui-kit/utils/date";
+import {
+  parseToDateTime,
+  startOf,
+  dateDiffAbs,
+} from "@docspace/ui-kit/utils/date";
 import { isMobile } from "react-device-detect";
 import type { I18nextProviderProps } from "react-i18next";
 import sjcl from "sjcl";
@@ -93,7 +97,7 @@ import {
 } from "../api/settings/types";
 import { TopLoaderService } from "@docspace/ui-kit/components/top-loading-indicator";
 
-import { Encoder } from "./encoder";
+import { Encoder } from "@docspace/ui-kit/utils/encoder";
 import { combineUrl } from "./combineUrl";
 import { getCookie, setCookie } from "@docspace/ui-kit/utils/cookie";
 import { checkIsSSR } from "@docspace/ui-kit/utils/device";
@@ -710,7 +714,11 @@ export const getSizeFromBytes = (bytes: number, power: number) => {
   return truncateToTwo;
 };
 
-export const getConvertedSize = (t: (key: string) => string, bytes: number) => {
+export const getConvertedSize = (
+  t: (key: string) => string,
+  bytes: number,
+  withoutSizeName: boolean = false,
+) => {
   let power = 0;
   let resultSize = bytes;
 
@@ -731,6 +739,8 @@ export const getConvertedSize = (t: (key: string) => string, bytes: number) => {
     resultSize = getSizeFromBytes(bytes, power);
   }
 
+  if (withoutSizeName) return `${resultSize}`;
+
   return `${resultSize} ${sizeNames[power]}`;
 };
 
@@ -739,9 +749,10 @@ export const getConvertedSize = (t: (key: string) => string, bytes: number) => {
 export const getConvertedQuota = (
   t: (key: string) => string,
   bytes: number,
+  withoutSizeName: boolean = false,
 ) => {
   if (bytes === -1) return t("Common:Unlimited");
-  return getConvertedSize(t, bytes);
+  return getConvertedSize(t, bytes, withoutSizeName);
 };
 
 export const getSpaceQuotaAsText = (

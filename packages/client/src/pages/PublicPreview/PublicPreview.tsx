@@ -27,10 +27,17 @@ export const PublicPreview = () => {
     revalidator.revalidate();
   };
 
+  const getIconString = (size: number, fileExst: string) => {
+    const icon = getIcon(fileExst, size);
+    return typeof icon === "string" ? icon : "";
+  };
+
+  const getIconByExst = (fileExst: string) => getIconString(32, fileExst);
+
   return match(validateData?.status)
     .with(ValidationStatus.Ok, () => (
       <PublicPreviewViewer
-        getIcon={(size: number, fileExst: string) => getIcon(fileExst, size)}
+        getIcon={getIconString}
         extsImagePreviewed={settings.extsImagePreviewed}
       />
     ))
@@ -50,7 +57,7 @@ export const PublicPreview = () => {
       <PublicRoomPasswordForm
         t={t}
         roomKey={key}
-        getIcon={getIcon}
+        getIcon={getIconByExst}
         validationData={validateData}
         onSuccessValidationCallback={onSuccessValidation}
       />

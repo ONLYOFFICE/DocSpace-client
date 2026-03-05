@@ -46,7 +46,10 @@ import { LANGUAGE, SHARED_WITH_ME_PATH } from "@docspace/shared/constants";
 
 import config from "PACKAGE_FILE";
 
-import { showForcedInfoPanelLoader } from "SRC_DIR/helpers/info-panel";
+import {
+  showForcedInfoPanelLoader,
+  InfoPanelView,
+} from "SRC_DIR/helpers/info-panel";
 
 import { getContactsView } from "../helpers/contacts";
 import SelectedFolderStore from "./SelectedFolderStore";
@@ -55,379 +58,372 @@ import FilesStore from "./FilesStore";
 import PeopleStore from "./contacts/PeopleStore";
 import TreeFoldersStore from "./TreeFoldersStore";
 
-export const enum InfoPanelView {
-	infoMembers = "info_members",
-	infoHistory = "info_history",
-	infoDetails = "info_details",
-	infoShare = "info_share",
-}
-
 export type InfoPanelViewType = InfoPanelView | `info_plugin-${string}`;
 
 type TSelection =
-	| Nullable<TRoom | TFolder | TFile>
-	| Array<TRoom | TFolder | TFile>;
+  | Nullable<TRoom | TFolder | TFile>
+  | Array<TRoom | TFolder | TFile>;
 
 class InfoPanelStore {
-	userStore = {} as UserStore;
+  userStore = {} as UserStore;
 
-	isVisible = false;
+  isVisible = false;
 
-	isMobileHidden = false;
+  isMobileHidden = false;
 
-	roomsView: InfoPanelViewType = InfoPanelView.infoMembers;
+  roomsView: InfoPanelViewType = InfoPanelView.infoMembers;
 
-	fileView: InfoPanelViewType = InfoPanelView.infoHistory;
+  fileView: InfoPanelViewType = InfoPanelView.infoHistory;
 
-	isScrollLocked = false;
+  isScrollLocked = false;
 
-	filesSettingsStore = {} as FilesSettingsStore;
+  filesSettingsStore = {} as FilesSettingsStore;
 
-	peopleStore = {} as PeopleStore;
+  peopleStore = {} as PeopleStore;
 
-	filesStore = {} as FilesStore;
+  filesStore = {} as FilesStore;
 
-	selectedFolderStore = {} as SelectedFolderStore;
+  selectedFolderStore = {} as SelectedFolderStore;
 
-	treeFoldersStore = {} as TreeFoldersStore;
+  treeFoldersStore = {} as TreeFoldersStore;
 
-	infoPanelRoom: Nullable<TRoom> = null;
+  infoPanelRoom: Nullable<TRoom> = null;
 
-	templateAvailableToEveryone = false;
+  templateAvailableToEveryone = false;
 
-	isMembersPanelUpdating = false;
+  isMembersPanelUpdating = false;
 
-	shareChanged = false;
+  shareChanged = false;
 
-	constructor(userStore: UserStore) {
-		this.userStore = userStore;
+  constructor(userStore: UserStore) {
+    this.userStore = userStore;
 
-		makeAutoObservable(this);
-	}
+    makeAutoObservable(this);
+  }
 
-	setIsVisible = (visiable: boolean) => {
-		const selectedFolderIsAgentOrFolderInAgent =
-			this.selectedFolderStore?.parentRoomType ||
-			this.selectedFolderStore?.roomType;
+  setIsVisible = (visiable: boolean) => {
+    const selectedFolderIsAgentOrFolderInAgent =
+      this.selectedFolderStore?.parentRoomType ||
+      this.selectedFolderStore?.roomType;
 
-		const selectedFolderIsRoomOrFolderInRoom =
-			this.selectedFolderStore &&
-			!this.selectedFolderStore.isRootFolder &&
-			this.selectedFolderStore?.parentRoomType;
+    const selectedFolderIsRoomOrFolderInRoom =
+      this.selectedFolderStore &&
+      !this.selectedFolderStore.isRootFolder &&
+      this.selectedFolderStore?.parentRoomType;
 
-		const archivedFolderIsRoomOrFolderInRoom =
-			this.selectedFolderStore &&
-			!this.selectedFolderStore.isRootFolder &&
-			this.selectedFolderStore?.rootFolderType === FolderType.Archive;
+    const archivedFolderIsRoomOrFolderInRoom =
+      this.selectedFolderStore &&
+      !this.selectedFolderStore.isRootFolder &&
+      this.selectedFolderStore?.rootFolderType === FolderType.Archive;
 
-		const isFolderOpenedThroughSectionHeader =
-			(this.infoPanelSelection &&
-				!Array.isArray(this.infoPanelSelection) &&
-				this.infoPanelSelection.id === this.selectedFolderStore?.id) ||
-			(this.infoPanelSelection &&
-				Array.isArray(this.infoPanelSelection) &&
-				this.infoPanelSelection.length === 0);
+    const isFolderOpenedThroughSectionHeader =
+      (this.infoPanelSelection &&
+        !Array.isArray(this.infoPanelSelection) &&
+        this.infoPanelSelection.id === this.selectedFolderStore?.id) ||
+      (this.infoPanelSelection &&
+        Array.isArray(this.infoPanelSelection) &&
+        this.infoPanelSelection.length === 0);
 
-		if (
-			(selectedFolderIsRoomOrFolderInRoom ||
-				archivedFolderIsRoomOrFolderInRoom ||
-				selectedFolderIsAgentOrFolderInAgent) &&
-			isFolderOpenedThroughSectionHeader
-		) {
-			this.setView(InfoPanelView.infoMembers);
-		} else {
-			this.setView(InfoPanelView.infoDetails);
-		}
+    if (
+      (selectedFolderIsRoomOrFolderInRoom ||
+        archivedFolderIsRoomOrFolderInRoom ||
+        selectedFolderIsAgentOrFolderInAgent) &&
+      isFolderOpenedThroughSectionHeader
+    ) {
+      this.setView(InfoPanelView.infoMembers);
+    } else {
+      this.setView(InfoPanelView.infoDetails);
+    }
 
-		this.isVisible = visiable;
-		this.isScrollLocked = false;
-	};
+    this.isVisible = visiable;
+    this.isScrollLocked = false;
+  };
 
-	setTemplateAvailableToEveryone = (isAvailable: boolean) => {
-		this.templateAvailableToEveryone = isAvailable;
-	};
+  setTemplateAvailableToEveryone = (isAvailable: boolean) => {
+    this.templateAvailableToEveryone = isAvailable;
+  };
 
-	setIsMembersPanelUpdating = (isMembersPanelUpdating: boolean) => {
-		this.isMembersPanelUpdating = isMembersPanelUpdating;
-	};
+  setIsMembersPanelUpdating = (isMembersPanelUpdating: boolean) => {
+    this.isMembersPanelUpdating = isMembersPanelUpdating;
+  };
 
-	updateInfoPanelMembers = async () => {
-		if (
-			!this.infoPanelRoomSelection ||
-			this.roomsView !== InfoPanelView.infoMembers
-		) {
-			return;
-		}
+  updateInfoPanelMembers = async () => {
+    if (
+      !this.infoPanelRoomSelection ||
+      this.roomsView !== InfoPanelView.infoMembers
+    ) {
+      return;
+    }
 
-		const isTemplate =
-			"isTemplate" in this.infoPanelRoomSelection &&
-			this.infoPanelRoomSelection.isTemplate;
+    const isTemplate =
+      "isTemplate" in this.infoPanelRoomSelection &&
+      this.infoPanelRoomSelection.isTemplate;
 
-		if (isTemplate) {
-			const templateAvailable = await getTemplateAvailable(
-				Number(this.infoPanelRoomSelection.id),
-			);
-			this.setTemplateAvailableToEveryone(templateAvailable);
-		}
+    if (isTemplate) {
+      const templateAvailable = await getTemplateAvailable(
+        Number(this.infoPanelRoomSelection.id),
+      );
+      this.setTemplateAvailableToEveryone(templateAvailable);
+    }
 
-		this.setIsMembersPanelUpdating(true);
-	};
+    this.setIsMembersPanelUpdating(true);
+  };
 
-	openShareTab = () => {
-		this.setView(InfoPanelView.infoShare);
-		this.isVisible = true;
-	};
+  openShareTab = () => {
+    this.setView(InfoPanelView.infoShare);
+    this.isVisible = true;
+  };
 
-	openMembersTab = () => {
-		this.setView(InfoPanelView.infoMembers);
-		this.isVisible = true;
-	};
+  openMembersTab = () => {
+    this.setView(InfoPanelView.infoMembers);
+    this.isVisible = true;
+  };
 
-	setInfoPanelRoom = (infoPanelRoom: Nullable<TRoom>, withCheck?: boolean) => {
-		if (withCheck && infoPanelRoom?.id !== this.infoPanelRoom?.id) return;
+  setInfoPanelRoom = (infoPanelRoom: Nullable<TRoom>, withCheck?: boolean) => {
+    if (withCheck && infoPanelRoom?.id !== this.infoPanelRoom?.id) return;
 
-		this.infoPanelRoom = infoPanelRoom;
-	};
+    this.infoPanelRoom = infoPanelRoom;
+  };
 
-	refreshInfoPanel = () => {
-		const selection = this.infoPanelSelection;
+  refreshInfoPanel = () => {
+    const selection = this.infoPanelSelection;
 
-		if (!selection || Array.isArray(selection)) return;
+    if (!selection || Array.isArray(selection)) return;
 
-		const isRoomSelection = "isRoom" in selection && Boolean(selection.isRoom);
+    const isRoomSelection = "isRoom" in selection && Boolean(selection.isRoom);
 
-		if (isRoomSelection) {
-			if (
-				this.roomsView === InfoPanelView.infoMembers &&
-				this.infoPanelRoomSelection?.id === selection.id
-			) {
-				void this.updateInfoPanelMembers();
-			}
+    if (isRoomSelection) {
+      if (
+        this.roomsView === InfoPanelView.infoMembers &&
+        this.infoPanelRoomSelection?.id === selection.id
+      ) {
+        void this.updateInfoPanelMembers();
+      }
 
-			return;
-		}
+      return;
+    }
 
-		if (this.isShareTabActive) {
-			this.setShareChanged(true);
-		}
-	};
+    if (this.isShareTabActive) {
+      this.setShareChanged(true);
+    }
+  };
 
-	openUser = async (user: TCreatedBy) => {
-		if (user.id === this.userStore?.user?.id) {
-			this.peopleStore.profileActionsStore.onProfileClick();
-			return;
-		}
+  openUser = async (user: TCreatedBy) => {
+    if (user.id === this.userStore?.user?.id) {
+      this.peopleStore.profileActionsStore.onProfileClick();
+      return;
+    }
 
-		const fetchedUser: TUser = await getUserById(user.id);
+    const fetchedUser: TUser = await getUserById(user.id);
 
-		const path = [
-			window.ClientConfig?.proxy?.url,
-			config.homepage,
-			fetchedUser.isVisitor ? "/accounts/guests" : "/accounts/people",
-		];
+    const path = [
+      window.ClientConfig?.proxy?.url,
+      config.homepage,
+      fetchedUser.isVisitor ? "/accounts/guests" : "/accounts/people",
+    ];
 
-		const filter = Filter.getDefault();
-		filter.page = 0;
-		filter.search = fetchedUser.email;
-		filter.selectUserId = fetchedUser.id;
+    const filter = Filter.getDefault();
+    filter.page = 0;
+    filter.search = fetchedUser.email;
+    filter.selectUserId = fetchedUser.id;
 
-		path.push(`filter?${filter.toUrlParams()}`);
+    path.push(`filter?${filter.toUrlParams()}`);
 
-		this.selectedFolderStore.setSelectedFolder(null);
-		this.treeFoldersStore.setSelectedNode(["accounts"]);
-		this.filesStore.resetSelections();
-
-		const locale = getCookie(LANGUAGE) || "en";
-
-		fetchedUser.registrationDate = getCorrectDate(
-			locale,
-			fetchedUser?.registrationDate || "",
-		);
+    this.selectedFolderStore.setSelectedFolder(null);
+    this.treeFoldersStore.setSelectedNode(["accounts"]);
+    this.filesStore.resetSelections();
+
+    const locale = getCookie(LANGUAGE) || "en";
+
+    fetchedUser.registrationDate = getCorrectDate(
+      locale,
+      fetchedUser?.registrationDate || "",
+    );
 
-		const userRole = { role: getUserType(fetchedUser) };
-		const stateUserItem = { ...fetchedUser, ...userRole };
-
-		window.DocSpace.navigate(combineUrl(...path), {
-			state: { user: toJS(stateUserItem) },
-		});
-	};
-
-	getInfoPanelItemIcon = (
-		item: TSelection,
-		size: number,
-	): TLogo | string | undefined => {
-		if (!item) return undefined;
-
-		const isRoom = "isRoom" in item && item.isRoom;
-		const roomType = "roomType" in item && item.roomType;
-
-		const folderType = "type" in item && item.type;
-
-		if ((isRoom || roomType) && "logo" in item)
-			return item.logo?.cover ? item.logo : item.logo?.medium;
-
-		if (isFolder(item))
-			return this.filesSettingsStore.getIconByFolderType(folderType, size);
-
-		const fileExst = "fileExst" in item && item.fileExst;
-
-		return this.filesSettingsStore.getIcon(size, fileExst || ".file");
-	};
-
-	get infoPanelSelection(): TSelection {
-		const selection = this.filesStore.selection.length
-			? this.filesStore.selection.length === 1
-				? this.filesStore.selection[0]
-				: this.filesStore.selection
-			: (this.filesStore.bufferSelection ?? { ...this.selectedFolderStore });
-
-		if (!selection) return null;
-
-		if (Array.isArray(selection) && selection.length > 1) {
-			return selection;
-		}
-
-		const icon = this.getInfoPanelItemIcon(selection, 32);
-
-		return { ...selection, icon };
-	}
-
-	get infoPanelRoomSelection(): Nullable<TRoom> {
-		if (
-			this.infoPanelSelection &&
-			!Array.isArray(this.infoPanelSelection) &&
-			"isRoom" in this.infoPanelSelection &&
-			this.infoPanelSelection.isRoom
-		) {
-			return this.infoPanelSelection;
-		}
-
-		return this.infoPanelRoom;
-	}
-
-	get historyWithFileList(): boolean {
-		if (Array.isArray(this.infoPanelSelection) || !this.infoPanelSelection)
-			return false;
-
-		return (
-			(("isRoom" in this.infoPanelSelection &&
-				(this.infoPanelSelection.isRoom as boolean)) ||
-				("isFolder" in this.infoPanelSelection &&
-					this.infoPanelSelection.isFolder)) ??
-			false
-		);
-	}
-
-	// Setters
-
-	setIsMobileHidden = (mobileHidden: boolean) => {
-		this.isMobileHidden = mobileHidden;
-	};
-
-	resetView = () => {
-		this.roomsView = InfoPanelView.infoMembers;
-		this.fileView = InfoPanelView.infoHistory;
-	};
-
-	setView = (view: InfoPanelViewType) => {
-		this.roomsView =
-			view === InfoPanelView.infoShare ? InfoPanelView.infoMembers : view;
-		this.fileView =
-			view === InfoPanelView.infoMembers ? InfoPanelView.infoShare : view;
-		this.isScrollLocked = false;
-	};
-
-	setIsScrollLocked = (isScrollLocked: boolean) => {
-		this.isScrollLocked = isScrollLocked;
-	};
-
-	// Routing helpers //
-
-	getCanDisplay = () => {
-		const isAIAgent = this.getIsAIAgent();
-		const isFiles = this.getIsFiles();
-		const isRooms = this.getIsRooms();
-		const isAccounts =
-			this.peopleStore.usersStore.contactsTab !== false ||
-			getContactsView(window.location) !== false;
-
-		return isRooms || isFiles || isAccounts || isAIAgent;
-	};
-
-	getIsAIAgent = () => {
-		const pathname = window.location.pathname.toLowerCase();
-		return pathname.indexOf("ai-agent") !== -1;
-	};
-
-	getIsFiles = () => {
-		const pathname = window.location.pathname.toLowerCase();
-		return (
-			pathname.indexOf("files") !== -1 ||
-			pathname.indexOf("personal") !== -1 ||
-			pathname.indexOf("media") !== -1 ||
-			pathname.indexOf("recent") !== -1 ||
-			pathname.indexOf(SHARED_WITH_ME_PATH) !== -1
-		);
-	};
-
-	getIsRooms = () => {
-		const pathname = window.location.pathname.toLowerCase();
-		return (
-			pathname.indexOf("rooms") !== -1 && !(pathname.indexOf("personal") !== -1)
-		);
-	};
-
-	getIsTrash = (givenPathName?: string) => {
-		const pathname = givenPathName || window.location.pathname.toLowerCase();
-		return pathname.indexOf("files/trash") !== -1;
-	};
-
-	// getPrimaryFileLink = async (file: TFile) => {
-	//   if (!isFile(file)) return;
-
-	//   const { getFileInfo } = this.filesStore;
-
-	//   const res = ShareLinkService.getFilePrimaryLink(file);
-
-	//   await getFileInfo(file.id);
-
-	//   return res;
-	// };
-
-	// getPrimaryFolderLink = async (folder: TFolder) => {
-	//   if (!isFolder(folder)) return;
-
-	//   return ShareLinkService.getFolderPrimaryLink(folder);
-	// };
-
-	setShareChanged = (shareChanged: boolean) => {
-		this.shareChanged = shareChanged;
-	};
-
-	showForcedInfoPanelLoader = (id: string | number) => {
-		if (
-			this.isShareTabActive &&
-			!Array.isArray(this.infoPanelSelection) &&
-			this.infoPanelSelection?.id === id
-		) {
-			showForcedInfoPanelLoader();
-		}
-	};
-
-	get isShareTabActive(): boolean {
-		return (
-			this.roomsView === InfoPanelView.infoShare ||
-			this.fileView === InfoPanelView.infoShare
-		);
-	}
-
-	inRoom = (): boolean => {
-		return (
-			this.infoPanelSelection !== null &&
-			"navigationPath" in this.infoPanelSelection &&
-			!!this.infoPanelSelection.navigationPath
-		);
-	};
+    const userRole = { role: getUserType(fetchedUser) };
+    const stateUserItem = { ...fetchedUser, ...userRole };
+
+    window.DocSpace.navigate(combineUrl(...path), {
+      state: { user: toJS(stateUserItem) },
+    });
+  };
+
+  getInfoPanelItemIcon = (
+    item: TSelection,
+    size: number,
+  ): TLogo | string | undefined => {
+    if (!item) return undefined;
+
+    const isRoom = "isRoom" in item && item.isRoom;
+    const roomType = "roomType" in item && item.roomType;
+
+    const folderType = "type" in item && item.type;
+
+    if ((isRoom || roomType) && "logo" in item)
+      return item.logo?.cover ? item.logo : item.logo?.medium;
+
+    if (isFolder(item))
+      return this.filesSettingsStore.getIconByFolderType(folderType, size);
+
+    const fileExst = "fileExst" in item && item.fileExst;
+
+    return this.filesSettingsStore.getIcon(size, fileExst || ".file");
+  };
+
+  get infoPanelSelection(): TSelection {
+    const selection = this.filesStore.selection.length
+      ? this.filesStore.selection.length === 1
+        ? this.filesStore.selection[0]
+        : this.filesStore.selection
+      : (this.filesStore.bufferSelection ?? { ...this.selectedFolderStore });
+
+    if (!selection) return null;
+
+    if (Array.isArray(selection) && selection.length > 1) {
+      return selection;
+    }
+
+    const icon = this.getInfoPanelItemIcon(selection, 32);
+
+    return { ...selection, icon };
+  }
+
+  get infoPanelRoomSelection(): Nullable<TRoom> {
+    if (
+      this.infoPanelSelection &&
+      !Array.isArray(this.infoPanelSelection) &&
+      "isRoom" in this.infoPanelSelection &&
+      this.infoPanelSelection.isRoom
+    ) {
+      return this.infoPanelSelection;
+    }
+
+    return this.infoPanelRoom;
+  }
+
+  get historyWithFileList(): boolean {
+    if (Array.isArray(this.infoPanelSelection) || !this.infoPanelSelection)
+      return false;
+
+    return (
+      (("isRoom" in this.infoPanelSelection &&
+        (this.infoPanelSelection.isRoom as boolean)) ||
+        ("isFolder" in this.infoPanelSelection &&
+          this.infoPanelSelection.isFolder)) ??
+      false
+    );
+  }
+
+  // Setters
+
+  setIsMobileHidden = (mobileHidden: boolean) => {
+    this.isMobileHidden = mobileHidden;
+  };
+
+  resetView = () => {
+    this.roomsView = InfoPanelView.infoMembers;
+    this.fileView = InfoPanelView.infoHistory;
+  };
+
+  setView = (view: InfoPanelViewType) => {
+    this.roomsView =
+      view === InfoPanelView.infoShare ? InfoPanelView.infoMembers : view;
+    this.fileView =
+      view === InfoPanelView.infoMembers ? InfoPanelView.infoShare : view;
+    this.isScrollLocked = false;
+  };
+
+  setIsScrollLocked = (isScrollLocked: boolean) => {
+    this.isScrollLocked = isScrollLocked;
+  };
+
+  // Routing helpers //
+
+  getCanDisplay = () => {
+    const isAIAgent = this.getIsAIAgent();
+    const isFiles = this.getIsFiles();
+    const isRooms = this.getIsRooms();
+    const isAccounts =
+      this.peopleStore.usersStore.contactsTab !== false ||
+      getContactsView(window.location) !== false;
+
+    return isRooms || isFiles || isAccounts || isAIAgent;
+  };
+
+  getIsAIAgent = () => {
+    const pathname = window.location.pathname.toLowerCase();
+    return pathname.indexOf("ai-agent") !== -1;
+  };
+
+  getIsFiles = () => {
+    const pathname = window.location.pathname.toLowerCase();
+    return (
+      pathname.indexOf("files") !== -1 ||
+      pathname.indexOf("personal") !== -1 ||
+      pathname.indexOf("media") !== -1 ||
+      pathname.indexOf("recent") !== -1 ||
+      pathname.indexOf(SHARED_WITH_ME_PATH) !== -1
+    );
+  };
+
+  getIsRooms = () => {
+    const pathname = window.location.pathname.toLowerCase();
+    return (
+      pathname.indexOf("rooms") !== -1 && !(pathname.indexOf("personal") !== -1)
+    );
+  };
+
+  getIsTrash = (givenPathName?: string) => {
+    const pathname = givenPathName || window.location.pathname.toLowerCase();
+    return pathname.indexOf("files/trash") !== -1;
+  };
+
+  // getPrimaryFileLink = async (file: TFile) => {
+  //   if (!isFile(file)) return;
+
+  //   const { getFileInfo } = this.filesStore;
+
+  //   const res = ShareLinkService.getFilePrimaryLink(file);
+
+  //   await getFileInfo(file.id);
+
+  //   return res;
+  // };
+
+  // getPrimaryFolderLink = async (folder: TFolder) => {
+  //   if (!isFolder(folder)) return;
+
+  //   return ShareLinkService.getFolderPrimaryLink(folder);
+  // };
+
+  setShareChanged = (shareChanged: boolean) => {
+    this.shareChanged = shareChanged;
+  };
+
+  showForcedInfoPanelLoader = (id: string | number) => {
+    if (
+      this.isShareTabActive &&
+      !Array.isArray(this.infoPanelSelection) &&
+      this.infoPanelSelection?.id === id
+    ) {
+      showForcedInfoPanelLoader();
+    }
+  };
+
+  get isShareTabActive(): boolean {
+    return (
+      this.roomsView === InfoPanelView.infoShare ||
+      this.fileView === InfoPanelView.infoShare
+    );
+  }
+
+  inRoom = (): boolean => {
+    return (
+      this.infoPanelSelection !== null &&
+      "navigationPath" in this.infoPanelSelection &&
+      !!this.infoPanelSelection.navigationPath
+    );
+  };
 }
 
 export default InfoPanelStore;

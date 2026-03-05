@@ -130,4 +130,5 @@ export interface RoomListPanelProps {
   withSearch?: boolean;
   disableSubmitUntilChanged?: boolean;
   sortSelectedFirst?: boolean;
+  withoutBackdropBackground?: boolean;
 }

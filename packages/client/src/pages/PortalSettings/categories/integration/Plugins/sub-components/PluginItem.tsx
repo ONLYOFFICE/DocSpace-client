@@ -38,8 +38,9 @@ import PluginDefaultLogoUrl from "PUBLIC_DIR/images/plugin.default-logo.png";
 
 import { getPluginUrl } from "SRC_DIR/helpers/plugins/utils";
 
-import { StyledPluginItem, StyledPluginHeader } from "../Plugins.styled";
+import styles from "../Plugins.module.scss";
 import { PluginItemProps } from "../Plugins.types";
+import classNames from "classnames";
 
 const PluginItem = ({
   name,
@@ -96,18 +97,21 @@ const PluginItem = ({
     />
   );
 
+
   return (
-    <StyledPluginItem description={description} data-testid={dataTestId}>
+    <div className={classNames(styles.pluginItem, {
+      [styles.noDescription]: !description,
+    })} data-testid={dataTestId}>
       <img
-        className="plugin-logo"
+        className={styles.pluginLogo}
         src={imgSrc || PluginDefaultLogoUrl}
         alt="Plugin logo"
         data-testid="plugin_logo"
       />
-      <div className="plugin-info">
-        <StyledPluginHeader>
-          <Heading className="plugin-name">{nameLocale}</Heading>
-          <div className="plugin-controls">
+      <div className={styles.pluginInfo}>
+        <div className={styles.pluginHeader}>
+          <Heading className={styles.pluginName}>{nameLocale}</Heading>
+          <div className={styles.pluginControls}>
             <IconButton
               iconName={PluginSettingsIconUrl}
               size={16}
@@ -115,13 +119,13 @@ const PluginItem = ({
               data-testid="open_settings_icon_button"
             />
             <ToggleButton
-              className="plugin-toggle-button"
+              className={styles.pluginToggleButton}
               onChange={onChangeStatus}
               isChecked={enabled}
               dataTestId="enable_plugin_toggle_button"
             />
           </div>
-        </StyledPluginHeader>
+        </div>
 
         {!compatible ? (
           <div
@@ -137,7 +141,7 @@ const PluginItem = ({
 
         {descriptionLocale ? (
           <Text
-            className="plugin-description"
+            className={styles.pluginDescription}
             fontWeight={400}
             lineHeight="20px"
             title={descriptionLocale}
@@ -146,7 +150,7 @@ const PluginItem = ({
           </Text>
         ) : null}
       </div>
-    </StyledPluginItem>
+    </div>
   );
 };
 

@@ -1,0 +1,79 @@
+.rowContainer {
+  width: 100%;
+  margin-top: 12px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  padding: 12px 0px;
+  border-bottom: 1px solid var(--aside-header-border-color);
+  gap: 12px;
+}
+
+.modelIcon {
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--aside-header-border-color);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+
+.iconInner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content {
+  display: flex;
+  min-width: 0;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.titleRow {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  min-width: 0;
+}
+
+.title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.provider {
+  color: var(--text-disable-color);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.prices {
+  color: var(--text-disable-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.toggle {
+  flex: 0 0 auto;
+  margin-inline-start: auto;
+
+  :global(label) {
+    position: static !important;
+  }
+}
+
+.introText{
+  margin: 12px 0 20px 0;
+}

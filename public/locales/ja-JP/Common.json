@@ -148,7 +148,6 @@
   "ChooseAnother": "他のを選択してください",
   "ChooseExpirationDate": "有効期限を設定して、このリンクの利用可能期間を制限します。",
   "ChooseFormatText": "ダウンロードする各ファイルの形式を選択します。",
-  "ChooseFromTemplates": " テンプレートから選択",
   "Clean": "クリア",
   "ClearAll": "すべてクリア",
   "ClearBackupList": "すべてのバックアップを削除",
@@ -213,7 +212,6 @@
   "CreateFormFillingRoom": "フォーム記入ルームを作成",
   "CreateGroup": "グループの作成",
   "CreateMasterFormFromFile": "ファイルからPDFフォームを作成する",
-  "CreatePDFForm": "PDFフォームの作成",
   "CreateRoom": "ルームを作成する",
   "CreateVirtualDataRoom": "バーチャルデータルームを作成する",
   "Culture_ar-SA": "عربي (المملكة العربية السعودية)",
@@ -1054,5 +1052,8 @@
   "YouHaveUnsavedChanges": "未保存変更はあります。",
   "YourCurrentDomain": "現在お使いのドメイン",
   "YourLogo": "あなたのロゴ",
-  "YourTurn": "あなたの番です"
+  "YourTurn": "あなたの番です",
+  "Upload": "アップロード",
+  "Open": "開く",
+  "Quantity": "数量"
 }

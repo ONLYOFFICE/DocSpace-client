@@ -162,7 +162,8 @@ export const useMembers = ({
           setTotal((value) => value - 1);
         } else if (
           "activationStatus" in member &&
-          member.activationStatus === EmployeeActivationStatus.Pending
+          member.activationStatus === EmployeeActivationStatus.Pending &&
+          !room.isTemplate
         ) {
           member.isExpect = true;
           expected.push(member);

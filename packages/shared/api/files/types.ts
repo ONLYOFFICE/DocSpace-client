@@ -588,5 +588,6 @@ export type TDefaultTemplate = {
   fileExtension: string;
   lastModified?: string;
   fileTitle?: string;
+  fileSize?: number;
   viewUrl?: string;
 };

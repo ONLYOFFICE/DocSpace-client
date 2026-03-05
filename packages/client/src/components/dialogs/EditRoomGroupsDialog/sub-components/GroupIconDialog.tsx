@@ -75,6 +75,7 @@ const GroupIconDialog = ({
   >("folder");
 
   const [groupName, setGroupName] = React.useState<string>("");
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
   React.useEffect(() => {
     if (!covers) getCovers();
@@ -116,10 +117,14 @@ const GroupIconDialog = ({
   };
 
   const handleSubmit = async () => {
+    if (isLoading) return;
+
     if (editingGroupId) {
       if (!roomIcon) return;
 
       const iconId = typeof roomIcon === "object" ? roomIcon.id : roomIcon;
+
+      setIsLoading(true);
 
       try {
         const updateData: IUpdateRoomGroup = {};
@@ -158,6 +163,8 @@ const GroupIconDialog = ({
         }
 
         toastr.error(message);
+      } finally {
+        setIsLoading(false);
       }
     } else {
       if (!groupName || !arrIdsRooms?.length || !roomIcon) return;
@@ -167,6 +174,8 @@ const GroupIconDialog = ({
         icon: typeof roomIcon === "object" ? roomIcon.id : roomIcon,
         rooms: arrIdsRooms,
       };
+
+      setIsLoading(true);
 
       try {
         await setCreateGroupRooms(newGroup);
@@ -186,6 +195,8 @@ const GroupIconDialog = ({
         }
 
         toastr.error(message);
+      } finally {
+        setIsLoading(false);
       }
     }
   };
@@ -216,6 +227,7 @@ const GroupIconDialog = ({
       visible
       autoMaxHeight
       withBodyScroll
+      backdropVisible={false}
       displayType={isMobile() ? ModalDialogType.aside : ModalDialogType.modal}
       onClose={onClose}
     >
@@ -265,6 +277,7 @@ const GroupIconDialog = ({
           label={t("Common:Create")}
           onClick={handleSubmit}
           isDisabled={!groupName.trim()}
+          isLoading={isLoading}
         />
         <Button
           scale
@@ -272,6 +285,7 @@ const GroupIconDialog = ({
           onClick={onClose}
           size={ButtonSize.normal}
           label={t("Common:CancelButton")}
+          isDisabled={isLoading}
         />
       </ModalDialog.Footer>
     </ModalDialog>

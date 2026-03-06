@@ -141,6 +141,28 @@ export async function getUserByEmail(
   }
   return user;
 }
+
+export async function checkUserExists(
+  userEmail: string,
+  confirmKey: Nullable<string> = null,
+  culture?: string,
+) {
+  const urlEmail = `/people/exists?email=${userEmail}`;
+
+  const url = culture ? `${urlEmail}&culture=${culture}` : urlEmail;
+
+  const options = {
+    method: "get",
+    url,
+  };
+
+  if (confirmKey) options.headers = { confirm: confirmKey };
+
+  const res = await request(options);
+
+  return res as boolean;
+}
+
 export function getUserFromConfirm(userId, confirmKey = null) {
   const options = {
     method: "get",

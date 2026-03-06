@@ -52,7 +52,7 @@ const AuthHandler = () => {
   const [authorized, setAuthorized] = useState(false);
 
   const { linkData, confirmLinkResult } = useContext(ConfirmRouteContext);
-  const { key = "" } = linkData;
+  const { key = "", first = "" } = linkData;
   const { email = "" } = confirmLinkResult;
 
   const referenceUrl = searchParams?.get("referenceUrl");
@@ -76,6 +76,7 @@ const AuthHandler = () => {
           ConfirmData: {
             Email: email,
             Key: key,
+            First: first,
           },
         });
 

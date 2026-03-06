@@ -515,11 +515,6 @@ class ContextOptionsStore {
 
     const isSystemFolder = systemFolders.includes(item.type);
 
-    if (this.publicRoomStore.isPublicRoom) {
-      copyToBuffer(item.shortWebUrl);
-      return toastr.success(t("Common:LinkCopySuccess"));
-    }
-
     if (isShared && !isArchive && !isSystemFolder && item.canShare) {
       try {
         const itemLink = item.isFolder
@@ -536,6 +531,11 @@ class ContextOptionsStore {
         toastr.error(error);
       }
       return;
+    }
+
+    if (item.shortWebUrl) {
+      copyToBuffer(item.shortWebUrl);
+      return toastr.success(t("Common:LinkCopySuccess"));
     }
 
     if (

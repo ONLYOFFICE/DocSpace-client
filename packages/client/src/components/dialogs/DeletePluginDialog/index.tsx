@@ -34,81 +34,83 @@ import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { TTranslation } from "@docspace/shared/types";
 
 type Props = {
-	isVisible: boolean;
-	onClose?: () => void;
-	onDelete?: (t: TTranslation) => Promise<void>;
+  isVisible: boolean;
+  onClose?: () => void;
+  onDelete?: (t: TTranslation) => Promise<void>;
 };
 
 const DeletePluginDialog = (props: Props) => {
-	const { t, ready } = useTranslation(["WebPlugins", "Common"]);
-	const { isVisible, onClose, onDelete } = props;
+  const { t, ready } = useTranslation(["WebPlugins", "Common"]);
+  const { isVisible, onClose, onDelete } = props;
 
-	const [isRequestRunning, setIsRequestRunning] = React.useState(false);
+  const [isRequestRunning, setIsRequestRunning] = React.useState(false);
 
-	const onDeleteClick = async () => {
-		try {
-			setIsRequestRunning(true);
-			await onDelete?.(t);
+  const onDeleteClick = async () => {
+    try {
+      setIsRequestRunning(true);
+      await onDelete?.(t);
 
-			setIsRequestRunning(true);
-			onClose?.();
-		} catch (error) {
-			toastr.error(error as TData);
-			onClose?.();
-		}
-	};
+      setIsRequestRunning(true);
+      onClose?.();
+    } catch (error) {
+      toastr.error(error as TData);
+      onClose?.();
+    }
+  };
 
-	return (
-		<ModalDialog isLoading={!ready} visible={isVisible} onClose={onClose}>
-			<ModalDialog.Header>{t("DeletePluginTitle")}</ModalDialog.Header>
-			<ModalDialog.Body>
-				{t("DeletePluginDescription", { productName: t("Common:ProductName") })}
-			</ModalDialog.Body>
-			<ModalDialog.Footer>
-				<Button
-					className="delete-button"
-					key="DeletePortalBtn"
-					label={t("Common:OKButton")}
-					size={ButtonSize.normal}
-					scale
-					primary
-					isLoading={isRequestRunning}
-					onClick={onDeleteClick}
-				/>
-				<Button
-					className="cancel-button"
-					key="CancelDeleteBtn"
-					label={t("Common:CancelButton")}
-					size={ButtonSize.normal}
-					scale
-					isDisabled={isRequestRunning}
-					onClick={onClose}
-				/>
-			</ModalDialog.Footer>
-		</ModalDialog>
-	);
+  return (
+    <ModalDialog isLoading={!ready} visible={isVisible} onClose={onClose}>
+      <ModalDialog.Header>{t("DeletePluginTitle")}</ModalDialog.Header>
+      <ModalDialog.Body>
+        {t("DeletePluginDescription", { productName: t("Common:ProductName") })}
+      </ModalDialog.Body>
+      <ModalDialog.Footer>
+        <Button
+          className="delete-button"
+          key="DeletePortalBtn"
+          label={t("Common:OKButton")}
+          size={ButtonSize.normal}
+          scale
+          primary
+          isLoading={isRequestRunning}
+          testId="confirm_delete_plugin_button"
+          onClick={onDeleteClick}
+        />
+        <Button
+          className="cancel-button"
+          key="CancelDeleteBtn"
+          label={t("Common:CancelButton")}
+          size={ButtonSize.normal}
+          scale
+          isDisabled={isRequestRunning}
+          testId="cancel_delete_plugin_button"
+          onClick={onClose}
+        />
+      </ModalDialog.Footer>
+    </ModalDialog>
+  );
 };
 
 export default inject<TStore>(({ pluginStore }) => {
-	const {
-		deletePluginDialogProps,
-		setDeletePluginDialogVisible,
-		setDeletePluginDialogProps,
-		uninstallPlugin,
-	} = pluginStore;
+  const {
+    deletePluginDialogProps,
+    setDeletePluginDialogVisible,
+    setDeletePluginDialogProps,
+    uninstallPlugin,
+  } = pluginStore;
 
-	const onClose = () => {
-		setDeletePluginDialogVisible(false);
-		setDeletePluginDialogProps(null);
-	};
+  const onClose = () => {
+    setDeletePluginDialogVisible(false);
+    setDeletePluginDialogProps(null);
+  };
 
-	const { pluginName } = deletePluginDialogProps || {};
+  const { pluginName } = deletePluginDialogProps || {};
 
-	const onDelete = async (t: TTranslation) => {
-		if (!pluginName) return;
+  const onDelete = async (t: TTranslation) => {
+    if (!pluginName) return;
 
-		await uninstallPlugin(pluginName, t);
-	};
+    await uninstallPlugin(pluginName, t);
+  };
 
-	return { onClose, onDelete };
+  return { onClose, onDelete };
 })(observer(DeletePluginDialog));

@@ -24,17 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 
 import { Dropzone as DropzoneComponent } from "@docspace/ui-kit/components/dropzone";
 
+import styles from "../Plugins.module.scss";
 import { PluginDropzoneProps } from "../Plugins.types";
-
-const StyledDropzoneComponent = styled(DropzoneComponent)`
-  height: 135px;
-`;
 
 const Dropzone = ({
   onDrop,
@@ -45,7 +40,8 @@ const Dropzone = ({
   const { t } = useTranslation(["Common"]);
 
   return (
-    <StyledDropzoneComponent
+    <DropzoneComponent
+      className={styles.dropzone}
       isDisabled={isDisabled}
       isLoading={isLoading}
       onDrop={onDrop}

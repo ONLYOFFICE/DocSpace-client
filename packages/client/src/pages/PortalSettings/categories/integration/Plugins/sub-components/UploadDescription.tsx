@@ -1,6 +1,6 @@
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
-import { StyledUploadDescription } from "../Plugins.styled";
+import styles from "../Plugins.module.scss";
 import { UploadDecsriptionProps } from "../Plugins.types";
 
 const UploadDescription = ({
@@ -9,8 +9,8 @@ const UploadDescription = ({
   t,
 }: UploadDecsriptionProps) => {
   return (
-    <StyledUploadDescription>
-      <Text className="upload-description-text">
+    <div className={styles.uploadDescription}>
+      <Text className={styles.uploadDescriptionText}>
         {t("UploadDescription", { productName: t("Common:ProductName") })}
       </Text>
       {pluginsSdkUrl ? (
@@ -25,7 +25,7 @@ const UploadDescription = ({
           {t("Common:LearnMore")}
         </Link>
       ) : null}
-    </StyledUploadDescription>
+    </div>
   );
 };
 

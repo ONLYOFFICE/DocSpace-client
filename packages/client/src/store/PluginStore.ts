@@ -298,7 +298,9 @@ class PluginStore {
           this.updateFileItems(name);
         }
 
-        if (this.plugins[pluginIdx].scopes.includes(PluginScopes.ArticleButton)) {
+        if (
+          this.plugins[pluginIdx].scopes.includes(PluginScopes.ArticleButton)
+        ) {
           this.updateArticleButtonItems(name);
         }
       }
@@ -379,7 +381,13 @@ class PluginStore {
     return true;
   };
 
-  addPlugin = async (data: FormData, t: TTranslation) => {
+  checkPluginCacheWarning = (plugin: TAPIPlugin) => {
+    return this.plugins.some(
+      (p) => p.name === plugin.name && p.version === plugin.version,
+    );
+  };
+
+  addPlugin = async (data: FormData) => {
     try {
       const plugin = await api.plugins.addPlugin(data);
 
@@ -387,19 +395,16 @@ class PluginStore {
         plugin.minDocSpaceVersion,
       );
 
-      if (!isPluginCompatible) {
-        toastr.error(
-          t("PluginIsNotCompatible", {
-            productName: t("Common:ProductName"),
-          }),
-        );
-      } else {
-        toastr.success(t("PluginLoadedSuccessfully"));
-      }
+      const isPluginInCache = this.checkPluginCacheWarning(plugin);
 
       this.setNeedPageReload(true);
 
       this.initPlugin(plugin);
+
+      return {
+        isPluginCompatible,
+        isPluginInCache,
+      };
     } catch (e) {
       toastr.error(e as TData);
     }

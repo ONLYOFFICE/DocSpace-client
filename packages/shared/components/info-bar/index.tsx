@@ -24,22 +24,5 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
-
-import styles from "../Plugins.module.scss";
-import { ListLoaderProps } from "../Plugins.types";
-
-const ListLoader = ({ withUpload }: ListLoaderProps) => {
-  return (
-    <>
-      {withUpload ? <RectangleSkeleton width="144px" height="32px" /> : null}
-      <div className={styles.pluginListContainer}>
-        <RectangleSkeleton width="340px" height="135px" />
-        <RectangleSkeleton width="340px" height="135px" />
-        <RectangleSkeleton width="340px" height="135px" />
-      </div>
-    </>
-  );
-};
-
-export default ListLoader;
+export { InfoBar } from "./InfoBar";
+export type { InfoBarProps } from "./InfoBar.types";

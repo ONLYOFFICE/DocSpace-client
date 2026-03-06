@@ -24,22 +24,52 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import React from "react";
+import { ReactSVG } from "react-svg";
 
-import styles from "../Plugins.module.scss";
-import { ListLoaderProps } from "../Plugins.types";
+import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
-const ListLoader = ({ withUpload }: ListLoaderProps) => {
+import { Text } from "@docspace/ui-kit/components/text";
+
+import styles from "./InfoBar.module.scss";
+import { InfoBarProps } from "./InfoBar.types";
+import classNames from "classnames";
+
+export const InfoBar = ({
+  title,
+  description,
+  icon = InfoIcon,
+  className,
+  children,
+  dataTestId = "info-bar",
+}: InfoBarProps) => {
   return (
-    <>
-      {withUpload ? <RectangleSkeleton width="144px" height="32px" /> : null}
-      <div className={styles.pluginListContainer}>
-        <RectangleSkeleton width="340px" height="135px" />
-        <RectangleSkeleton width="340px" height="135px" />
-        <RectangleSkeleton width="340px" height="135px" />
+    <div
+      className={classNames(styles.infoBar, className)}
+      data-testid={dataTestId}
+    >
+      <div className={styles.textContainer}>
+        <div className={styles.headerBody}>
+          <div className={styles.headerIcon}>
+            <ReactSVG src={icon} />
+          </div>
+          {title && (
+            <Text
+              className={styles.headerTitle}
+              fontSize="12px"
+              fontWeight={600}
+            >
+              {title}
+            </Text>
+          )}
+        </div>
+        {description && (
+          <div className={styles.bodyContainer}>{description}</div>
+        )}
+        {children}
       </div>
-    </>
+    </div>
   );
 };
 
-export default ListLoader;
+InfoBar.displayName = "InfoBar";

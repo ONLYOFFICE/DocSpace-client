@@ -487,7 +487,7 @@
   "InfoPanel": "Panel de información",
   "InProgress": "En curso",
   "InstanceId": "Escriba el ID de su instancia",
-  "InsufficientFundsWithContact": "Su monedero no tiene fondos suficientes. Por favor, póngase en contacto con el pagador (<1>email@example.com</1>) para recargarlo e intente realizar la compra de nuevo.",
+  "InsufficientFundsWithContact": "Su monedero no tiene fondos suficientes. Por favor, póngase en contacto con el pagador (<1>{{email}}</1>) para recargarlo e intente realizar la compra de nuevo.",
   "InsufficientFundsWithTopUp": "Su monedero no tiene fondos suficientes. Por favor, <1>recargue su monedero</1> e intente realizar la compra de nuevo.",
   "InvalidLink": "Enlace no válido",
   "InvitationToPortal": "<1>{{displayName}}</1> le invita a unirse al {{productName}} <1>{{spaceAddress}}</1> para una colaboración segura en documentos.",

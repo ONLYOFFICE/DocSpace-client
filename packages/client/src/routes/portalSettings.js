@@ -441,6 +441,10 @@ const PortalSettingsRoutes = {
       element: <ViewComponent />,
     },
     {
+      path: "ai-services",
+      element: <ViewComponent />,
+    },
+    {
       path: "management/disk-space",
       element: <ViewComponent />,
     },

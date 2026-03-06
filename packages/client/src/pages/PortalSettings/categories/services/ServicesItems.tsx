@@ -27,6 +27,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import classNames from "classnames";
+import { Trans } from "react-i18next";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import {
@@ -43,6 +44,7 @@ import { DeviceType } from "@docspace/shared/enums";
 
 import CheckIcon from "PUBLIC_DIR/images/icons/16/check.round.react.svg";
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg";
+import PriceIcon from "PUBLIC_DIR/images/icons/16/price.react.svg";
 
 import styles from "./styles/AdditionalStorage.module.scss";
 import { useServicesActions } from "./hooks/useServicesActions";
@@ -83,6 +85,15 @@ type ServicesItemsProps = {
   isTablet?: boolean;
   isMobile?: boolean;
   formatWalletCurrency?: (amount: number, fractionDigits?: number) => string;
+  formatAiServiceCurrency?: (
+    amount?: number,
+    fractionDigits?: number,
+  ) => string;
+  aiServiceBalance?: number;
+  isAiServiceLowBalance?: boolean;
+  walletCustomerInfo?: { displayName?: string } | null;
+  walletCustomerEmail?: string | null;
+  wasFirstAiServiceTopUp?: boolean;
 };
 
 const ServicesItems: React.FC<ServicesItemsProps> = ({
@@ -104,9 +115,28 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
   isTablet,
   isMobile,
   formatWalletCurrency,
+  formatAiServiceCurrency,
+  aiServiceBalance,
+  isAiServiceLowBalance,
+  walletCustomerInfo,
+  walletCustomerEmail,
+  wasFirstAiServiceTopUp,
 }) => {
   const isDisabled = cardLinkedOnFreeTariff || !isFreeTariff ? !isPayer : false;
   const { t } = useServicesActions();
+
+  const permissionTooltipText = (
+    <Trans
+      t={t}
+      i18nKey="InsufficientPermissionsMessage"
+      ns="Services"
+      values={{
+        payerContact:
+          walletCustomerInfo?.displayName || walletCustomerEmail || "",
+      }}
+      components={{ 1: <strong /> }}
+    />
+  );
 
   const handleToggle = (
     e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
@@ -168,9 +198,7 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
           currency: formatWalletCurrency!(priceValue!, 2),
         });
       case AI_TOOLS:
-        return t("PerAITools", {
-          currency: formatWalletCurrency!(priceValue!, 4),
-        });
+        return t("Services:AIPricingBilledPerUsage");
       default:
         return "";
     }
@@ -206,6 +234,60 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
         {Array.from(servicesQuotasFeatures?.values() || []).map((item) => {
           if (!item.title || !item.image) return null;
 
+          if (item.id === AI_TOOLS) {
+            return (
+              <ServiceCard
+                key={item.id}
+                toggleDisabled={isDisabled}
+                cardDisabled={wasFirstAiServiceTopUp ? false : isDisabled}
+                onClick={handleClick}
+                onToggle={handleToggle}
+                serviceTitle={item.title}
+                priceDescription={priceDescription(item.id)}
+                priceTitle={item.priceTitle}
+                id={item.id}
+                image={item.image}
+                isEnabled={item.value}
+                tooltip={isDisabled ? permissionTooltipText : undefined}
+              >
+                {isAiServiceLowBalance ? (
+                  <div
+                    className={classNames(styles.additionalInfo, {
+                      [styles.warningColor]: item.value,
+                      [styles.inactiveColor]: !item.value,
+                    })}
+                    data-tooltip-id="serviceTooltip"
+                  >
+                    <InfoIcon />
+                    <Text fontWeight={600} fontSize="12px">
+                      {t("Services:AIPricingAvailableCreditsLowBalance", {
+                        price: formatAiServiceCurrency!(),
+                      })}
+                    </Text>
+                  </div>
+                ) : null}
+
+                {aiServiceBalance &&
+                aiServiceBalance > 0 &&
+                !isAiServiceLowBalance ? (
+                  <div
+                    className={classNames(styles.additionalInfo, {
+                      [styles.greenColor]: item.value,
+                      [styles.inactiveColor]: !item.value,
+                    })}
+                  >
+                    <PriceIcon />
+                    <Text>
+                      {t("Services:AIPricingAvailableCredits", {
+                        price: formatAiServiceCurrency!(),
+                      })}
+                    </Text>
+                  </div>
+                ) : null}
+              </ServiceCard>
+            );
+          }
+
           if (item.id === TOTAL_SIZE) {
             const eventDisabled =
               isGracePeriod || isDisabled || hasScheduledStorageChange;
@@ -223,10 +305,11 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
                 id={item.id}
                 image={item.image}
                 isEnabled={hasStorageSubscription}
+                tooltip={isDisabled ? permissionTooltipText : undefined}
               >
                 {hasScheduledStorageChange ? (
                   <div
-                    className={classNames(styles.changeShedule, {
+                    className={classNames(styles.additionalInfo, {
                       [styles.warningColor]: true,
                     })}
                     data-tooltip-id="serviceTooltip"
@@ -248,7 +331,7 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
 
                 {!hasScheduledStorageChange && currentStoragePlanSize! > 0 ? (
                   <div
-                    className={classNames(styles.changeShedule, {
+                    className={classNames(styles.additionalInfo, {
                       [styles.greenColor]: true,
                     })}
                   >
@@ -284,6 +367,7 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
               onClick={handleClick}
               onToggle={handleToggle}
               priceDescription={priceDescription(item.id, item.price.value)}
+              tooltip={isDisabled ? permissionTooltipText : undefined}
             />
           );
         })}
@@ -298,6 +382,7 @@ export default inject(
     currentTariffStatusStore,
     currentQuotaStore,
     settingsStore,
+    servicesStore,
   }: TStore) => {
     const {
       cardLinkedOnFreeTariff,
@@ -310,12 +395,20 @@ export default inject(
     } = paymentStore;
 
     const {
+      aiServiceBalance,
+      formatAiServiceCurrency,
+      isAiServiceLowBalance,
+      wasFirstAiServiceTopUp,
+    } = servicesStore;
+    const {
+      isGracePeriod,
+      hasScheduledStorageChange,
+      walletCustomerInfo,
+      walletCustomerEmail,
       currentStoragePlanSize,
       nextStoragePlanSize,
       storageExpiryDate,
       hasStorageSubscription,
-      isGracePeriod,
-      hasScheduledStorageChange,
     } = currentTariffStatusStore;
 
     const { isFreeTariff } = currentQuotaStore;
@@ -329,7 +422,6 @@ export default inject(
       isPayer,
       cardLinkedOnFreeTariff,
       isFreeTariff,
-
       storagePriceIncrement,
       currentStoragePlanSize,
       hasStorageSubscription,
@@ -341,6 +433,12 @@ export default inject(
       isTablet,
       isMobile,
       formatWalletCurrency,
+      formatAiServiceCurrency,
+      aiServiceBalance,
+      isAiServiceLowBalance,
+      walletCustomerInfo,
+      walletCustomerEmail,
+      wasFirstAiServiceTopUp,
     };
   },
 )(observer(ServicesItems));

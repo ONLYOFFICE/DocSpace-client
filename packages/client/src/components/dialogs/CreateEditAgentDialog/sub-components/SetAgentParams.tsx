@@ -46,12 +46,12 @@ import ModelSettings from "../sub-components/Model";
 import InstructionsSettings from "../sub-components/Instructions";
 import MCPSettings from "../sub-components/MCP";
 import {
-	TAgentIconParams,
-	TAgentParams,
+  TAgentIconParams,
+  TAgentParams,
 } from "@docspace/shared/utils/aiAgents";
 import type { TSelectorItem } from "@docspace/ui-kit/components/selector";
 import { Nullable } from "@docspace/shared/types";
-import { TAgent } from "@docspace/shared/api/ai/types";
+import { TAgent, TAIConfig } from "@docspace/shared/api/ai/types";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
@@ -81,8 +81,8 @@ const StyledSetAgentParams = styled.div<{ disableImageRescaling?: boolean }>`
     gap: 16px;
 
     ${(props) =>
-			props.disableImageRescaling &&
-			css`
+      props.disableImageRescaling &&
+      css`
         margin-bottom: 24px;
       `};
   }
@@ -120,513 +120,519 @@ const StyledSetAgentParams = styled.div<{ disableImageRescaling?: boolean }>`
 `;
 
 type TServerCover = {
-	id: string;
-	data: string;
+  id: string;
+  data: string;
 };
 
 type TClientCover = {
-	color: string;
-	cover: string;
+  color: string;
+  cover: string;
 };
 
 type setAgentParamsProps = {
-	agentParams: TAgentParams;
-	setAgentParams: (value: Partial<TAgentParams>) => void;
-	tagHandler: TagHandler;
-	setIsScrollLocked: (value: boolean) => void;
-	isEdit?: boolean;
-	isDisabled: boolean;
-	isValidTitle: boolean;
-	setIsValidTitle: (value: boolean) => void;
-	isWrongTitle: boolean;
-	setIsWrongTitle: (value: boolean) => void;
-	onKeyUp: (e: React.KeyboardEvent<HTMLInputElement>) => void;
-	onOwnerChange?: VoidFunction;
-	portalMcpServerId?: string;
-	onClickAction?: () => void;
-	selectedServers?: TSelectorItem[];
-	setSelectedServers?: React.Dispatch<React.SetStateAction<TSelectorItem[]>>;
+  agentParams: TAgentParams;
+  setAgentParams: (value: Partial<TAgentParams>) => void;
+  tagHandler: TagHandler;
+  setIsScrollLocked: (value: boolean) => void;
+  isEdit?: boolean;
+  isDisabled: boolean;
+  isValidTitle: boolean;
+  setIsValidTitle: (value: boolean) => void;
+  isWrongTitle: boolean;
+  setIsWrongTitle: (value: boolean) => void;
+  onKeyUp: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  onOwnerChange?: VoidFunction;
+  portalMcpServerId?: string;
+  onClickAction?: () => void;
+  selectedServers?: TSelectorItem[];
+  setSelectedServers?: React.Dispatch<React.SetStateAction<TSelectorItem[]>>;
 
-	// Store props
-	folderFormValidation?: SettingsStore["folderFormValidation"];
-	maxImageUploadSize?: SettingsStore["maxImageUploadSize"];
-	selection?: TAgent;
-	getLogoCoverModel?: DialogsStore["getLogoCoverModel"];
-	getInfoPanelItemIcon?: InfoPanelStore["getInfoPanelItemIcon"];
-	uploadFile?: AvatarEditorDialogStore["uploadFile"];
-	clearUploadedFile?: AvatarEditorDialogStore["clearUploadedFile"];
-	avatarEditorDialogVisible?: AvatarEditorDialogStore["avatarEditorDialogVisible"];
-	setAvatarEditorDialogVisible?: AvatarEditorDialogStore["setAvatarEditorDialogVisible"];
-	roomLogoCoverDialogVisible?: DialogsStore["roomLogoCoverDialogVisible"];
-	setRoomCoverDialogProps?: DialogsStore["setRoomCoverDialogProps"];
-	roomCoverDialogProps?: DialogsStore["roomCoverDialogProps"];
-	cover?: Nullable<TClientCover>;
-	covers?: Nullable<TServerCover[]>;
-	setCover?: DialogsStore["setCover"];
-	isDefaultAIAgentsQuotaSet?: CurrentQuotasStore["isDefaultAIAgentsQuotaSet"];
-	infoPanelSelection?: TRoom;
+  // Store props
+  folderFormValidation?: SettingsStore["folderFormValidation"];
+  maxImageUploadSize?: SettingsStore["maxImageUploadSize"];
+  selection?: TAgent;
+  getLogoCoverModel?: DialogsStore["getLogoCoverModel"];
+  getInfoPanelItemIcon?: InfoPanelStore["getInfoPanelItemIcon"];
+  uploadFile?: AvatarEditorDialogStore["uploadFile"];
+  clearUploadedFile?: AvatarEditorDialogStore["clearUploadedFile"];
+  avatarEditorDialogVisible?: AvatarEditorDialogStore["avatarEditorDialogVisible"];
+  setAvatarEditorDialogVisible?: AvatarEditorDialogStore["setAvatarEditorDialogVisible"];
+  roomLogoCoverDialogVisible?: DialogsStore["roomLogoCoverDialogVisible"];
+  setRoomCoverDialogProps?: DialogsStore["setRoomCoverDialogProps"];
+  roomCoverDialogProps?: DialogsStore["roomCoverDialogProps"];
+  cover?: Nullable<TClientCover>;
+  covers?: Nullable<TServerCover[]>;
+  setCover?: DialogsStore["setCover"];
+  isDefaultAIAgentsQuotaSet?: CurrentQuotasStore["isDefaultAIAgentsQuotaSet"];
+  infoPanelSelection?: TRoom;
+  modelAliases?: TAIConfig["modelAliases"];
 };
 
 const setAgentParams = ({
-	agentParams,
-	setAgentParams,
-	tagHandler,
-	setIsScrollLocked,
-	isEdit,
-	isDisabled,
-	isValidTitle,
-	setIsValidTitle,
-	isWrongTitle,
-	setIsWrongTitle,
-	onKeyUp,
-	folderFormValidation,
-	maxImageUploadSize,
-	selection,
-	getLogoCoverModel,
-	getInfoPanelItemIcon,
-	uploadFile,
-	clearUploadedFile,
-	avatarEditorDialogVisible,
-	setAvatarEditorDialogVisible,
-	roomLogoCoverDialogVisible,
-	setRoomCoverDialogProps,
-	roomCoverDialogProps,
-	cover,
-	covers,
-	setCover,
-	onOwnerChange,
-	isDefaultAIAgentsQuotaSet,
-	infoPanelSelection,
-	portalMcpServerId,
-	onClickAction,
-	selectedServers,
-	setSelectedServers,
+  agentParams,
+  setAgentParams,
+  tagHandler,
+  setIsScrollLocked,
+  isEdit,
+  isDisabled,
+  isValidTitle,
+  setIsValidTitle,
+  isWrongTitle,
+  setIsWrongTitle,
+  onKeyUp,
+  folderFormValidation,
+  maxImageUploadSize,
+  selection,
+  getLogoCoverModel,
+  getInfoPanelItemIcon,
+  uploadFile,
+  clearUploadedFile,
+  avatarEditorDialogVisible,
+  setAvatarEditorDialogVisible,
+  roomLogoCoverDialogVisible,
+  setRoomCoverDialogProps,
+  roomCoverDialogProps,
+  cover,
+  covers,
+  setCover,
+  onOwnerChange,
+  isDefaultAIAgentsQuotaSet,
+  infoPanelSelection,
+  portalMcpServerId,
+  onClickAction,
+  selectedServers,
+  setSelectedServers,
+  modelAliases,
 }: setAgentParamsProps) => {
-	const { t } = useTranslation([
-		"CreateEditRoomDialog",
-		"Translations",
-		"Common",
-		"RoomLogoCover",
-	]);
+  const { t } = useTranslation([
+    "CreateEditRoomDialog",
+    "Translations",
+    "Common",
+    "RoomLogoCover",
+  ]);
 
-	const [previewIcon, setPreviewIcon] = useState(agentParams.previewIcon);
-	const [horizontalOrientation, setHorizontalOrientation] = useState(false);
-	const [disableImageRescaling, setDisableImageRescaling] = useState(isEdit);
-	const [previewTitle, setPreviewTitle] = useState(
-		selection?.title || infoPanelSelection?.title || "",
-	);
-	const [createAgentTitle, setCreateAgentTitle] = useState(agentParams.title);
+  const [previewIcon, setPreviewIcon] = useState(agentParams.previewIcon);
+  const [horizontalOrientation, setHorizontalOrientation] = useState(false);
+  const [disableImageRescaling, setDisableImageRescaling] = useState(isEdit);
+  const [previewTitle, setPreviewTitle] = useState(
+    selection?.title || infoPanelSelection?.title || "",
+  );
+  const [createAgentTitle, setCreateAgentTitle] = useState(agentParams.title);
 
-	const originalIconRef = React.useRef({
-		icon: agentParams.icon,
-		previewIcon: agentParams.previewIcon,
-		iconWasUpdated: agentParams.iconWasUpdated,
-	});
+  const originalIconRef = React.useRef({
+    icon: agentParams.icon,
+    previewIcon: agentParams.previewIcon,
+    iconWasUpdated: agentParams.iconWasUpdated,
+  });
 
-	const checkWidth = () => {
-		if (!isMobile()) {
-			setHorizontalOrientation(true);
-		} else {
-			setHorizontalOrientation(false);
-		}
-	};
+  const checkWidth = () => {
+    if (!isMobile()) {
+      setHorizontalOrientation(true);
+    } else {
+      setHorizontalOrientation(false);
+    }
+  };
 
-	React.useEffect(() => {
-		checkWidth();
-		window.addEventListener("resize", checkWidth);
-		return () => window.removeEventListener("resize", checkWidth);
-	}, []);
+  React.useEffect(() => {
+    checkWidth();
+    window.addEventListener("resize", checkWidth);
+    return () => window.removeEventListener("resize", checkWidth);
+  }, []);
 
-	React.useEffect(() => {
-		if (agentParams.previewIcon !== previewIcon) {
-			setAgentParams({
-				...agentParams,
-				previewIcon,
-			});
-		}
-	}, [previewIcon, agentParams.previewIcon]);
+  React.useEffect(() => {
+    if (agentParams.previewIcon !== previewIcon) {
+      setAgentParams({
+        ...agentParams,
+        previewIcon,
+      });
+    }
+  }, [previewIcon, agentParams.previewIcon]);
 
-	const getCoverLogo = () => {
-		if (cover) {
-			setPreviewIcon(null);
-		}
+  const getCoverLogo = () => {
+    if (cover) {
+      setPreviewIcon(null);
+    }
 
-		if (cover && cover.cover) {
-			const currentCoverData = covers?.filter(
-				(item) => item.id === cover.cover,
-			)[0].data;
+    if (cover && cover.cover) {
+      const currentCoverData = covers?.filter(
+        (item) => item.id === cover.cover,
+      )[0].data;
 
-			return { ...cover, data: currentCoverData };
-		}
+      return { ...cover, data: currentCoverData };
+    }
 
-		return null;
-	};
+    return null;
+  };
 
-	const currentCover = React.useMemo(getCoverLogo, [cover]);
+  const currentCover = React.useMemo(getCoverLogo, [cover]);
 
-	React.useEffect(() => {
-		setRoomCoverDialogProps?.({
-			...roomCoverDialogProps,
-			title: previewTitle,
-		});
-	}, []);
+  React.useEffect(() => {
+    setRoomCoverDialogProps?.({
+      ...roomCoverDialogProps,
+      title: previewTitle,
+    });
+  }, []);
 
-	const randomColor = React.useMemo(
-		() =>
-			globalColors.logoColors[
-				Math.floor(Math.random() * globalColors.logoColors.length)
-			].replace("#", ""),
-		[],
-	);
+  const randomColor = React.useMemo(
+    () =>
+      globalColors.logoColors[
+        Math.floor(Math.random() * globalColors.logoColors.length)
+      ].replace("#", ""),
+    [],
+  );
 
-	const currentIcon = selection
-		? selection?.logo?.large
-			? selection?.logo?.large
-			: selection?.logo?.cover
-				? selection?.logo
-				: getInfoPanelItemIcon?.(selection, 96)
-		: infoPanelSelection
-			? infoPanelSelection?.logo?.large
-				? infoPanelSelection?.logo?.large
-				: infoPanelSelection?.logo?.cover
-					? infoPanelSelection?.logo
-					: getInfoPanelItemIcon?.(infoPanelSelection, 96)
-			: undefined;
+  const currentIcon = selection
+    ? selection?.logo?.large
+      ? selection?.logo?.large
+      : selection?.logo?.cover
+        ? selection?.logo
+        : getInfoPanelItemIcon?.(selection, 96)
+    : infoPanelSelection
+      ? infoPanelSelection?.logo?.large
+        ? infoPanelSelection?.logo?.large
+        : infoPanelSelection?.logo?.cover
+          ? infoPanelSelection?.logo
+          : getInfoPanelItemIcon?.(infoPanelSelection, 96)
+      : undefined;
 
-	const onChangeIcon = (icon: TAgentIconParams) => {
-		if (!icon.uploadedFile !== disableImageRescaling)
-			setDisableImageRescaling(!icon.uploadedFile);
+  const onChangeIcon = (icon: TAgentIconParams) => {
+    if (!icon.uploadedFile !== disableImageRescaling)
+      setDisableImageRescaling(!icon.uploadedFile);
 
-		setAgentParams({ ...agentParams, icon, iconWasUpdated: true });
-	};
+    setAgentParams({ ...agentParams, icon, iconWasUpdated: true });
+  };
 
-	const onChangeFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
-		originalIconRef.current = {
-			icon: agentParams.icon,
-			previewIcon: agentParams.previewIcon,
-			iconWasUpdated: agentParams.iconWasUpdated,
-		};
+  const onChangeFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    originalIconRef.current = {
+      icon: agentParams.icon,
+      previewIcon: agentParams.previewIcon,
+      iconWasUpdated: agentParams.iconWasUpdated,
+    };
 
-		const uploadedFile = await uploadFile?.(t, e);
+    const uploadedFile = await uploadFile?.(t, e);
 
-		setAgentParams({
-			...agentParams,
-			icon: { ...agentParams.icon, uploadedFile },
-			iconWasUpdated: true,
-		});
+    setAgentParams({
+      ...agentParams,
+      icon: { ...agentParams.icon, uploadedFile },
+      iconWasUpdated: true,
+    });
 
-		onChangeIcon({ ...agentParams.icon, uploadedFile });
-	};
+    onChangeIcon({ ...agentParams.icon, uploadedFile });
+  };
 
-	const onCloseAvatarEditor = () => {
-		setPreviewIcon(originalIconRef.current.previewIcon);
-		setAvatarEditorDialogVisible?.(false);
+  const onCloseAvatarEditor = () => {
+    setPreviewIcon(originalIconRef.current.previewIcon);
+    setAvatarEditorDialogVisible?.(false);
 
-		clearUploadedFile?.();
+    clearUploadedFile?.();
 
-		setAgentParams({
-			...agentParams,
-			icon: originalIconRef.current.icon,
-			previewIcon: originalIconRef.current.previewIcon,
-			iconWasUpdated: originalIconRef.current.iconWasUpdated,
-		});
-	};
+    setAgentParams({
+      ...agentParams,
+      icon: originalIconRef.current.icon,
+      previewIcon: originalIconRef.current.previewIcon,
+      iconWasUpdated: originalIconRef.current.iconWasUpdated,
+    });
+  };
 
-	const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setIsValidTitle(true);
-		let newValue = e.target.value;
+  const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIsValidTitle(true);
+    let newValue = e.target.value;
 
-		newValue = removeEmojiCharacters(newValue);
+    newValue = removeEmojiCharacters(newValue);
 
-		if (newValue.match(folderFormValidation!)) {
-			setIsWrongTitle(true);
-		} else {
-			setIsWrongTitle(false);
-		}
+    if (newValue.match(folderFormValidation!)) {
+      setIsWrongTitle(true);
+    } else {
+      setIsWrongTitle(false);
+    }
 
-		if (isEdit) {
-			setPreviewTitle(newValue);
-		} else {
-			setCreateAgentTitle(newValue);
-		}
+    if (isEdit) {
+      setPreviewTitle(newValue);
+    } else {
+      setCreateAgentTitle(newValue);
+    }
 
-		setRoomCoverDialogProps?.({
-			...roomCoverDialogProps,
-			title: newValue,
-		});
+    setRoomCoverDialogProps?.({
+      ...roomCoverDialogProps,
+      title: newValue,
+    });
 
-		setAgentParams({
-			...agentParams,
-			title: newValue,
-		});
+    setAgentParams({
+      ...agentParams,
+      title: newValue,
+    });
 
-		if (!cover && !previewIcon && !isEdit) {
-			setCover?.(`#${randomColor}`, "");
-		}
-	};
+    if (!cover && !previewIcon && !isEdit) {
+      setCover?.(`#${randomColor}`, "");
+    }
+  };
 
-	const onSaveAvatar = () => {
-		setAvatarEditorDialogVisible?.(false);
-		setCover?.();
-	};
+  const onSaveAvatar = () => {
+    setAvatarEditorDialogVisible?.(false);
+    setCover?.();
+  };
 
-	const onDeleteAvatar = () => {
-		if (previewIcon) setPreviewIcon(null);
-		else setCover?.(`#${randomColor}`, "");
+  const onDeleteAvatar = () => {
+    if (previewIcon) setPreviewIcon(null);
+    else setCover?.(`#${randomColor}`, "");
 
-		setAgentParams({
-			...agentParams,
-			icon: {
-				uploadedFile: null,
-				tmpFile: "",
-				x: 0.5,
-				y: 0.5,
-				zoom: 1,
-			},
-			iconWasUpdated: false,
-		});
-	};
+    setAgentParams({
+      ...agentParams,
+      icon: {
+        uploadedFile: null,
+        tmpFile: "",
+        x: 0.5,
+        y: 0.5,
+        zoom: 1,
+      },
+      iconWasUpdated: false,
+    });
+  };
 
-	const hasImage = isEdit
-		? !!(
-				agentParams.iconWasUpdated ||
-				(agentParams.icon.uploadedFile &&
-					(selection?.logo?.original || infoPanelSelection?.logo?.original))
-			)
-		: false;
-	const model = getLogoCoverModel?.(t, hasImage);
+  const hasImage = isEdit
+    ? !!(
+        agentParams.iconWasUpdated ||
+        (agentParams.icon.uploadedFile &&
+          (selection?.logo?.original || infoPanelSelection?.logo?.original))
+      )
+    : false;
+  const model = getLogoCoverModel?.(t, hasImage);
 
-	const isEditRoomModel = model?.map((item) =>
-		item.key === "create_edit_room_delete"
-			? { ...item, onClick: onDeleteAvatar }
-			: item,
-	);
+  const isEditRoomModel = model?.map((item) =>
+    item.key === "create_edit_room_delete"
+      ? { ...item, onClick: onDeleteAvatar }
+      : item,
+  );
 
-	const isEmptyIcon =
-		createAgentTitle || cover?.color
-			? false
-			: avatarEditorDialogVisible
-				? true
-				: previewIcon
-					? false
-					: !createAgentTitle;
+  const isEmptyIcon =
+    createAgentTitle || cover?.color
+      ? false
+      : avatarEditorDialogVisible
+        ? true
+        : previewIcon
+          ? false
+          : !createAgentTitle;
 
-	const roomIconLogo = currentCover
-		? { cover: currentCover }
-		: !avatarEditorDialogVisible && previewIcon;
+  const roomIconLogo = currentCover
+    ? { cover: currentCover }
+    : !avatarEditorDialogVisible && previewIcon;
 
-	const itemIconLogo = currentCover
-		? { cover: currentCover }
-		: avatarEditorDialogVisible
-			? currentIcon
-			: previewIcon || currentIcon;
+  const itemIconLogo = currentCover
+    ? { cover: currentCover }
+    : avatarEditorDialogVisible
+      ? currentIcon
+      : previewIcon || currentIcon;
 
-	const showDefault =
-		cover && cover.cover
-			? false
-			: (!previewIcon &&
-					!selection?.logo?.cover &&
-					!selection?.logo?.large &&
-					!infoPanelSelection?.logo?.cover &&
-					!infoPanelSelection?.logo?.large) ||
-				!!cover?.color;
+  const showDefault =
+    cover && cover.cover
+      ? false
+      : (!previewIcon &&
+          !selection?.logo?.cover &&
+          !selection?.logo?.large &&
+          !infoPanelSelection?.logo?.cover &&
+          !infoPanelSelection?.logo?.large) ||
+        !!cover?.color;
 
-	const element = isEdit ? (
-		<ItemIcon
-			isRoom
-			title={previewTitle}
-			className="room-params-icon"
-			logo={itemIconLogo as unknown as TLogo}
-			showDefault={showDefault}
-			color={
-				cover
-					? cover.color
-					: selection?.logo?.color || infoPanelSelection?.logo?.color
-			}
-			size={isMobile() && !horizontalOrientation ? "96px" : "64px"}
-			radius={isMobile() && !horizontalOrientation ? "18px" : "12px"}
-			withEditing
-			model={isEditRoomModel}
-			onChangeFile={onChangeFile}
-			dataTestId="create_edit_agent_icon"
-		/>
-	) : (
-		<RoomIcon
-			title={createAgentTitle}
-			showDefault={
-				cover && cover.cover ? false : !previewIcon || avatarEditorDialogVisible
-			}
-			size={isMobile() && !horizontalOrientation ? "96px" : "64px"}
-			radius={isMobile() && !horizontalOrientation ? "18px" : "12px"}
-			imgClassName="react-svg-icon"
-			model={model}
-			className="room-params-icon"
-			isEmptyIcon={
-				!currentCover || roomLogoCoverDialogVisible ? isEmptyIcon : false
-			}
-			color={cover ? cover.color : randomColor}
-			logo={roomIconLogo as unknown as TLogo}
-			withEditing={
-				(previewIcon && !avatarEditorDialogVisible) ||
-				!!createAgentTitle ||
-				(currentCover && !roomLogoCoverDialogVisible) ||
-				!!cover?.color
-			}
-			onChangeFile={onChangeFile}
-			dataTestId="create_edit_agent_icon"
-		/>
-	);
+  const element = isEdit ? (
+    <ItemIcon
+      isRoom
+      title={previewTitle}
+      className="room-params-icon"
+      logo={itemIconLogo as unknown as TLogo}
+      showDefault={showDefault}
+      color={
+        cover
+          ? cover.color
+          : selection?.logo?.color || infoPanelSelection?.logo?.color
+      }
+      size={isMobile() && !horizontalOrientation ? "96px" : "64px"}
+      radius={isMobile() && !horizontalOrientation ? "18px" : "12px"}
+      withEditing
+      model={isEditRoomModel}
+      onChangeFile={onChangeFile}
+      dataTestId="create_edit_agent_icon"
+    />
+  ) : (
+    <RoomIcon
+      title={createAgentTitle}
+      showDefault={
+        cover && cover.cover ? false : !previewIcon || avatarEditorDialogVisible
+      }
+      size={isMobile() && !horizontalOrientation ? "96px" : "64px"}
+      radius={isMobile() && !horizontalOrientation ? "18px" : "12px"}
+      imgClassName="react-svg-icon"
+      model={model}
+      className="room-params-icon"
+      isEmptyIcon={
+        !currentCover || roomLogoCoverDialogVisible ? isEmptyIcon : false
+      }
+      color={cover ? cover.color : randomColor}
+      logo={roomIconLogo as unknown as TLogo}
+      withEditing={
+        (previewIcon && !avatarEditorDialogVisible) ||
+        !!createAgentTitle ||
+        (currentCover && !roomLogoCoverDialogVisible) ||
+        !!cover?.color
+      }
+      onChangeFile={onChangeFile}
+      dataTestId="create_edit_agent_icon"
+    />
+  );
 
-	const tagsTitle = "";
+  const tagsTitle = "";
 
-	const inputTitle = `${t("Common:AgentName")}:`;
+  const inputTitle = `${t("Common:AgentName")}:`;
 
-	return (
-		<StyledSetAgentParams disableImageRescaling={disableImageRescaling}>
-			<div className="logo-name-container">
-				{element}
-				<InputParam
-					id="shared_agent-name"
-					title={inputTitle}
-					placeholder={t("Common:EnterName")}
-					value={agentParams.title}
-					onChange={onChangeName}
-					isDisabled={isDisabled}
-					isValidTitle={isValidTitle}
-					isWrongTitle={isWrongTitle}
-					errorMessage={
-						isWrongTitle
-							? t("Common:ContainsSpecCharacter")
-							: t("Common:RequiredField")
-					}
-					onKeyUp={onKeyUp}
-					isAutoFocussed
-					dataTestId="create_edit_agent_input"
-				/>
-			</div>
+  return (
+    <StyledSetAgentParams disableImageRescaling={disableImageRescaling}>
+      <div className="logo-name-container">
+        {element}
+        <InputParam
+          id="shared_agent-name"
+          title={inputTitle}
+          placeholder={t("Common:EnterName")}
+          value={agentParams.title}
+          onChange={onChangeName}
+          isDisabled={isDisabled}
+          isValidTitle={isValidTitle}
+          isWrongTitle={isWrongTitle}
+          errorMessage={
+            isWrongTitle
+              ? t("Common:ContainsSpecCharacter")
+              : t("Common:RequiredField")
+          }
+          onKeyUp={onKeyUp}
+          isAutoFocussed
+          dataTestId="create_edit_agent_input"
+        />
+      </div>
 
-			<TagInput
-				t={t}
-				title={tagsTitle}
-				tagHandler={tagHandler}
-				setIsScrollLocked={setIsScrollLocked}
-				isDisabled={isDisabled}
-				dataTestId="create_edit_agent_tags_input"
-			/>
+      <TagInput
+        t={t}
+        title={tagsTitle}
+        tagHandler={tagHandler}
+        setIsScrollLocked={setIsScrollLocked}
+        isDisabled={isDisabled}
+        dataTestId="create_edit_agent_tags_input"
+      />
 
-			{isEdit ? (
-				<ChangeRoomOwner
-					canChangeOwner={agentParams.canChangeAgentOwner!}
-					roomOwner={agentParams.agentOwner!}
-					onOwnerChange={onOwnerChange}
-					isAgent
-				/>
-			) : null}
+      {isEdit ? (
+        <ChangeRoomOwner
+          canChangeOwner={agentParams.canChangeAgentOwner!}
+          roomOwner={agentParams.agentOwner!}
+          onOwnerChange={onOwnerChange}
+          isAgent
+        />
+      ) : null}
 
-			<ModelSettings
-				agentParams={agentParams}
-				setAgentParams={setAgentParams}
-			/>
-			<InstructionsSettings
-				agentParams={agentParams}
-				setAgentParams={setAgentParams}
-			/>
-			{/* <KnowledgeSettings /> */}
-			<MCPSettings
-				setAgentParams={setAgentParams}
-				agentParams={agentParams}
-				portalMcpServerId={portalMcpServerId}
-				onClickAction={onClickAction}
-				selectedServers={selectedServers}
-				setSelectedServers={setSelectedServers}
-			/>
+      <ModelSettings
+        agentParams={agentParams}
+        modelAliases={modelAliases}
+        setAgentParams={setAgentParams}
+      />
+      <InstructionsSettings
+        agentParams={agentParams}
+        setAgentParams={setAgentParams}
+      />
+      {/* <KnowledgeSettings /> */}
+      <MCPSettings
+        setAgentParams={setAgentParams}
+        agentParams={agentParams}
+        portalMcpServerId={portalMcpServerId}
+        onClickAction={onClickAction}
+        selectedServers={selectedServers}
+        setSelectedServers={setSelectedServers}
+      />
 
-			{isDefaultAIAgentsQuotaSet ? (
-				<RoomQuota
-					setRoomParams={setAgentParams}
-					roomParams={agentParams}
-					isEdit={isEdit}
-					isLoading={isDisabled}
-					isAgent
-				/>
-			) : null}
+      {isDefaultAIAgentsQuotaSet ? (
+        <RoomQuota
+          setRoomParams={setAgentParams}
+          roomParams={agentParams}
+          isEdit={isEdit}
+          isLoading={isDisabled}
+          isAgent
+        />
+      ) : null}
 
-			<div>
-				{avatarEditorDialogVisible ? (
-					<AvatarEditorDialog
-						t={t}
-						isDisabled={isDisabled}
-						image={agentParams.icon}
-						setPreview={setPreviewIcon}
-						onChangeImage={onChangeIcon}
-						onClose={onCloseAvatarEditor}
-						onSave={onSaveAvatar}
-						onChangeFile={onChangeFile}
-						classNameWrapperImageCropper="icon-editor"
-						disableImageRescaling={disableImageRescaling}
-						visible={agentParams.icon.uploadedFile}
-						maxImageSize={maxImageUploadSize}
-						dataTestId="create_edit_agent_avatar_editor"
-					/>
-				) : null}
-			</div>
-		</StyledSetAgentParams>
-	);
+      <div>
+        {avatarEditorDialogVisible ? (
+          <AvatarEditorDialog
+            t={t}
+            isDisabled={isDisabled}
+            image={agentParams.icon}
+            setPreview={setPreviewIcon}
+            onChangeImage={onChangeIcon}
+            onClose={onCloseAvatarEditor}
+            onSave={onSaveAvatar}
+            onChangeFile={onChangeFile}
+            classNameWrapperImageCropper="icon-editor"
+            disableImageRescaling={disableImageRescaling}
+            visible={agentParams.icon.uploadedFile}
+            maxImageSize={maxImageUploadSize}
+            dataTestId="create_edit_agent_avatar_editor"
+          />
+        ) : null}
+      </div>
+    </StyledSetAgentParams>
+  );
 };
 
 export default inject(
-	({
-		settingsStore,
-		dialogsStore,
-		filesStore,
-		infoPanelStore,
-		avatarEditorDialogStore,
-		currentQuotaStore,
-	}: TStore) => {
-		const { isDefaultAIAgentsQuotaSet } = currentQuotaStore;
-		const { folderFormValidation, maxImageUploadSize } = settingsStore;
+  ({
+    settingsStore,
+    dialogsStore,
+    filesStore,
+    infoPanelStore,
+    avatarEditorDialogStore,
+    currentQuotaStore,
+  }: TStore) => {
+    const { isDefaultAIAgentsQuotaSet } = currentQuotaStore;
+    const { folderFormValidation, maxImageUploadSize, aiConfig } =
+      settingsStore;
 
-		const { bufferSelection } = filesStore;
-		const { getInfoPanelItemIcon, infoPanelSelection } = infoPanelStore;
+    const { bufferSelection } = filesStore;
+    const { getInfoPanelItemIcon, infoPanelSelection } = infoPanelStore;
 
-		const {
-			uploadFile,
-			clearUploadedFile,
-			avatarEditorDialogVisible,
-			setAvatarEditorDialogVisible,
-		} = avatarEditorDialogStore;
+    const {
+      uploadFile,
+      clearUploadedFile,
+      avatarEditorDialogVisible,
+      setAvatarEditorDialogVisible,
+    } = avatarEditorDialogStore;
 
-		const {
-			roomLogoCoverDialogVisible,
-			getLogoCoverModel,
-			setCoverSelection,
-			setRoomCoverDialogProps,
-			roomCoverDialogProps,
-			cover,
-			covers,
-			setCover,
-		} = dialogsStore;
+    const {
+      roomLogoCoverDialogVisible,
+      getLogoCoverModel,
+      setCoverSelection,
+      setRoomCoverDialogProps,
+      roomCoverDialogProps,
+      cover,
+      covers,
+      setCover,
+    } = dialogsStore;
 
-		setCoverSelection(bufferSelection);
+    setCoverSelection(bufferSelection);
 
-		return {
-			folderFormValidation,
-			maxImageUploadSize,
-			getLogoCoverModel,
-			selection: bufferSelection,
-			getInfoPanelItemIcon,
-			uploadFile,
-			clearUploadedFile,
-			avatarEditorDialogVisible,
-			setAvatarEditorDialogVisible,
-			setRoomCoverDialogProps,
-			roomCoverDialogProps,
-			roomLogoCoverDialogVisible,
-			cover,
-			covers,
-			setCover,
-			isDefaultAIAgentsQuotaSet,
-			infoPanelSelection,
-		};
-	},
+    return {
+      folderFormValidation,
+      maxImageUploadSize,
+      getLogoCoverModel,
+      selection: bufferSelection,
+      getInfoPanelItemIcon,
+      uploadFile,
+      clearUploadedFile,
+      avatarEditorDialogVisible,
+      setAvatarEditorDialogVisible,
+      setRoomCoverDialogProps,
+      roomCoverDialogProps,
+      roomLogoCoverDialogVisible,
+      cover,
+      covers,
+      setCover,
+      isDefaultAIAgentsQuotaSet,
+      infoPanelSelection,
+
+      modelAliases: aiConfig?.modelAliases,
+    };
+  },
 )(observer(setAgentParams));

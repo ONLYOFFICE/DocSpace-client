@@ -494,6 +494,10 @@ const LoginForm = ({
             redirectUrl += `&publicAuth=${isPublicAuth}`;
           }
 
+          if (session) {
+            redirectUrl += `&session=true`;
+          }
+
           window.location.replace(redirectUrl);
         } else window.location.replace("/"); // TODO: save { user, hash } for tfa
       })

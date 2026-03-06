@@ -487,7 +487,7 @@
   "InfoPanel": "Panneau d'information",
   "InProgress": "En cours",
   "InstanceId": "Saisissez votre identifiant d'instance",
-  "InsufficientFundsWithContact": "Votre wallet dispose de fonds insuffisants. Veuillez contacter le payeur (<1>email@example.com</1>) pour le recharger et réessayer l'achat.",
+  "InsufficientFundsWithContact": "Votre wallet dispose de fonds insuffisants. Veuillez contacter le payeur (<1>{{email}}</1>) pour le recharger et réessayer l'achat.",
   "InsufficientFundsWithTopUp": "Votre wallet dispose de fonds insuffisants. Veuillez <1>recharger votre wallet</1> et réessayer l'achat.",
   "InvalidLink": "Lien incorrect",
   "InvitationToPortal": "<1>{{displayName}}</1> vous invite à rejoindre {{productName}} <1>{{spaceAddress}}</1> pour une collaboration documentaire sécurisée.",

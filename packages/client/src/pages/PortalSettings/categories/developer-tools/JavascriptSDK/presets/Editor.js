@@ -70,7 +70,7 @@ const Editor = (props) => {
 
   setDocumentTitle(t("JavascriptSdk"));
 
-  const [version, onSetVersion] = useState(sdkVersion[210]);
+  const [version, onSetVersion] = useState(sdkVersion[220]);
 
   const [source, onSetSource] = useState(sdkSource.Package);
 

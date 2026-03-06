@@ -134,6 +134,145 @@
     flex-direction: column;
     align-items: flex-end;
 
+    .filesListWrapperContainer {
+      display: flex;
+
+      height: 48px;
+      width: 100%;
+    }
+
+    .filesListWrapper {
+      width: 100%;
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      justify-content: end;
+
+      gap: 6px;
+
+      margin-bottom: 8px;
+
+      .filesListItem {
+        width: fit-content;
+        min-width: fit-content;
+        height: 32px;
+        max-width: 300px;
+
+        padding-inline-end: 8px;
+
+        display: flex;
+        align-items: center;
+
+        border: 1px solid var(--chat-message-file-border-color);
+
+        border-radius: 6px;
+
+        cursor: pointer;
+
+        .filesListItemIcon {
+          width: 32px;
+          height: 32px;
+
+          div {
+            width: 32px;
+            height: 32px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+        }
+      }
+
+      .filesListItemInfo {
+        display: flex;
+        align-items: center;
+
+        gap: 8px;
+
+        max-width: 300px;
+
+        .filesListItemImage {
+          height: 32px;
+          width: 32px;
+          margin: 0;
+          padding: 0;
+          border-start-start-radius: 6px;
+          border-end-start-radius: 6px;
+          object-fit: fill;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          &:has(div) {
+            padding: 6px;
+            box-sizing: border-box;
+          }
+        }
+
+        .filesListItemInfoText {
+          max-width: 100%;
+
+          display: flex;
+          flex-direction: row;
+
+          span {
+            color: var(--chat-file-item-exst-color);
+          }
+        }
+      }
+    }
+
+    .imagesListWrapper {
+      width: 100%;
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      justify-content: end;
+
+      gap: 8px;
+
+      margin-bottom: 8px;
+
+      .imagesListItem {
+        width: 80px;
+        height: 80px;
+
+        border: 1px solid var(--chat-message-file-border-color);
+
+        border-radius: 6px;
+
+        overflow: hidden;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .imagesListItemImage {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .loader {
+          height: 20px;
+          margin: 6px;
+        }
+
+        .imagesListItemLoader {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+    }
+
     .chatMessageUser {
       padding: 0 12px;
 

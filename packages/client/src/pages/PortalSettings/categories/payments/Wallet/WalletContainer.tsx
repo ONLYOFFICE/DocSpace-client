@@ -32,44 +32,23 @@ import classNames from "classnames";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { DeviceType } from "@docspace/shared/enums";
 import { Link } from "@docspace/ui-kit/components/link";
 import { TColorScheme } from "@docspace/ui-kit/providers/theme/themes";
 
-import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
+import { finishRefreshingWithMinCycle } from "SRC_DIR/helpers/refreshing";
 
-import TransactionHistory from "./TransactionHistory";
+import TransactionHistory from "../TransactionHistory";
 import TopUpModal from "../../../../../components/panels/TopUpBalance/TopUpModal";
 import WalletRefilledModal from "./WalletRefilledModal";
-import { formattedBalanceTokens } from "./utils";
 import PayerInformation from "../PayerInformation";
 import AutoPaymentInfo from "./sub-components/AutoPaymentInfo";
 import styles from "./styles/Wallet.module.scss";
-
-const RefreshIconButton = ({
-  isRefreshing,
-  onClick,
-}: {
-  isRefreshing: boolean;
-  onClick: () => void;
-}) => {
-  return (
-    <IconButton
-      iconName={RefreshReactSvgUrl}
-      size={16}
-      onClick={onClick}
-      className={classNames(styles.refreshIcon, {
-        [styles.spinning]: isRefreshing,
-      })}
-    />
-  );
-};
+import BalanceAmount from "../BalanceAmount";
 
 type WalletProps = {
   walletBalance: number;
-  language: string;
   walletCodeCurrency: string;
   isVisibleWalletSettings: boolean;
   wasChangeBalance?: boolean;
@@ -88,19 +67,9 @@ type WalletProps = {
   reccomendedAmount?: string;
 };
 
-const typeClassMap: Record<string, string> = {
-  integer: "integer",
-  group: "group",
-  decimal: "decimal",
-  fraction: "fraction",
-  currency: "currency",
-  literal: "literal",
-};
-
 const Wallet = (props: WalletProps) => {
   const {
     walletBalance,
-    language,
     walletCodeCurrency,
     isCardLinkedToPortal,
     isVisibleWalletSettings,
@@ -124,13 +93,6 @@ const Wallet = (props: WalletProps) => {
   const [visible, setVisible] = useState(isVisibleWalletSettings);
   const [isEditAutoPayment, setIsEditAutoPayment] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
-
-  const tokens = formattedBalanceTokens(
-    language,
-    walletBalance,
-    walletCodeCurrency || "",
-    3,
-  );
 
   const onClose = () => {
     setVisible(false);
@@ -158,28 +120,10 @@ const Wallet = (props: WalletProps) => {
     } catch (e) {
       toastr.error(e as Error);
     } finally {
-      const elapsedTime = Date.now() - startTime;
-      const animationCycleTime = 1000;
-
-      if (elapsedTime < animationCycleTime) {
-        const delay = animationCycleTime - elapsedTime;
-
-        setTimeout(() => {
-          setIsRefreshing(false);
-        }, delay);
-      } else {
-        const totalNeededTime =
-          Math.ceil(elapsedTime / animationCycleTime) * animationCycleTime;
-        const remainingTime = totalNeededTime - elapsedTime;
-
-        if (remainingTime > 0) {
-          setTimeout(() => {
-            setIsRefreshing(false);
-          }, remainingTime);
-        } else {
-          setIsRefreshing(false);
-        }
-      }
+      finishRefreshingWithMinCycle({
+        startTime,
+        setRefreshing: setIsRefreshing,
+      });
     }
   };
 
@@ -222,26 +166,14 @@ const Wallet = (props: WalletProps) => {
         />
       ) : null}
       <div className={styles.balanceWrapper}>
-        <div className={styles.headerContainer}>
-          <Text isBold fontSize="18px" className={styles.balanceTitle}>
-            {t("BalanceText")}
-          </Text>
-
-          {!isNotPaidPeriod && isCardLinkedToPortal ? (
-            <RefreshIconButton isRefreshing={isRefreshing} onClick={onClick} />
-          ) : null}
-        </div>
-
-        <div className={styles.balanceAmountContainer}>
-          {tokens.map((token) => (
-            <Text
-              key={`${token.type}-${token.value}`}
-              className={styles[typeClassMap[token.type]] || ""}
-            >
-              {token.value}
-            </Text>
-          ))}
-        </div>
+        <BalanceAmount
+          title={t("BalanceText")}
+          showRefresh={!isNotPaidPeriod && isCardLinkedToPortal}
+          isRefreshing={isRefreshing}
+          onRefresh={onClick}
+          amount={walletBalance}
+          currency={walletCodeCurrency}
+        />
 
         <Button
           size={isMobile ? ButtonSize.normal : ButtonSize.small}
@@ -312,6 +244,7 @@ const Wallet = (props: WalletProps) => {
       {wasChangeBalance ? (
         <WalletRefilledModal visible={wasChangeBalance} />
       ) : null}
+
       <TransactionHistory />
     </div>
   );
@@ -325,7 +258,6 @@ export default inject(
     currentTariffStatusStore,
     settingsStore,
   }: TStore) => {
-    const { language } = authStore;
     const {
       walletBalance,
       cardLinked,
@@ -352,7 +284,6 @@ export default inject(
     return {
       walletBalance,
       walletCodeCurrency,
-      language,
       cardLinked,
       isPayer,
       isFreeTariff,

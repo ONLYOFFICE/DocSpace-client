@@ -1,0 +1,46 @@
+.transferSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.transferBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.transferCard {
+  background: var(--payment-background-color);
+  border-radius: 6px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.transferIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--payment-icon-background);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+
+
+.transferText {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.helperText {
+  margin-top:12px;
+}

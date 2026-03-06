@@ -28,6 +28,7 @@ import React from "react";
 import classNames from "classnames";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { Text } from "@docspace/ui-kit/components/text";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import styles from "../styles/AdditionalStorage.module.scss";
 
 interface ServiceCardProps {
@@ -42,6 +43,7 @@ interface ServiceCardProps {
   toggleDisabled?: boolean;
   cardDisabled?: boolean;
   isEnabled?: boolean;
+  tooltip?: React.ReactNode;
 }
 
 const ServiceCard: React.FC<ServiceCardProps> = ({
@@ -56,7 +58,10 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   image,
   serviceTitle,
   priceDescription,
+  tooltip,
 }) => {
+  const tooltipId = tooltip ? `serviceCardTooltip_${id}` : undefined;
+
   return (
     <div
       key={id}
@@ -82,6 +87,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
           data-id={id}
           data-enabled={isEnabled}
           data-disabled={toggleDisabled}
+          {...(tooltipId ? { "data-tooltip-id": tooltipId } : {})}
         >
           <ToggleButton
             isChecked={isEnabled}
@@ -115,6 +121,16 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
           </div>
         </div>
       </div>
+
+      {tooltip && tooltipId ? (
+        <Tooltip
+          id={tooltipId}
+          place="bottom"
+          maxWidth="300px"
+          float
+          getContent={() => tooltip}
+        />
+      ) : null}
     </div>
   );
 };

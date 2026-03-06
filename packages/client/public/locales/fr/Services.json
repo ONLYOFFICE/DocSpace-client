@@ -1,6 +1,5 @@
 {
   "AITools": "Outils IA",
-  "AItoolsConfirm": "L'activation du service d'outils IA permettra à tous les utilisateurs de {{productName}} d'accéder aux fonctionnalités basées sur l'IA, à condition que le wallet dispose de fonds suffisants. Souhaitez-vous vraiment continuer ?",
   "AIToolsEnabled": "Service d'outils IA activé avec succès.",
   "AndMore": "Et plus encore !",
   "AutomaticBackupDescription": "Configurez des sauvegardes planifiées pour une protection continue des données sans actions manuelles.",
@@ -20,7 +19,6 @@
   "FreeBackupsPerMonth": "Sauvegardes gratuites : {{value}}/{{maxValue}} pour le mois en cours.",
   "ImageGeneration": "Génération d'images",
   "ImageGenerationDescription": "Concevez des images et des illustrations originales à l'aide de l'IA pour vos documents.",
-  "NewAIfeatures": "De nouvelles fonctionnalités d'IA sont régulièrement ajoutées pour vous aider à travailler plus rapidement, plus intelligemment et avec moins d'efforts.",
   "OCR": "OCR",
   "OCRDescription": "Reconnaissez et extrayez du texte à partir de fichiers PDF et d'images numérisés.",
   "Summarization": "Résumé",

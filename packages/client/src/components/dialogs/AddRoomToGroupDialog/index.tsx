@@ -181,6 +181,8 @@ const AddRoomToGroupDialog = ({
           cancelButtonLabel={t("Common:CancelButton")}
           onCancel={onClose}
           forceIsMultiSelect
+          disableSubmitUntilChanged
+          sortSelectedFirst
         />
       </Aside>
     </>

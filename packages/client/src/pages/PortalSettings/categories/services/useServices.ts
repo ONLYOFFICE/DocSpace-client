@@ -32,9 +32,10 @@ import ServicesStore from "SRC_DIR/store/ServicesStore";
 
 export type UseServicesProps = {
   servicesInit?: ServicesStore["servicesInit"];
+  aiServicesinit?: ServicesStore["aiServicesinit"];
 };
 
-const useServices = ({ servicesInit }: UseServicesProps) => {
+const useServices = ({ servicesInit, aiServicesinit }: UseServicesProps) => {
   const { t } = useTranslation(["Payments", "Services", "Common"]);
 
   const getServicesData = useCallback(async () => {
@@ -46,6 +47,15 @@ const useServices = ({ servicesInit }: UseServicesProps) => {
     }
   }, [servicesInit]);
 
+  const getAiServicesData = useCallback(async () => {
+    try {
+      await aiServicesinit?.(t);
+    } catch (error) {
+      console.error(error);
+      toastr.error(t("Common:UnexpectedError"));
+    }
+  }, [aiServicesinit]);
+
   const getServicesInitialValue = React.useCallback(async () => {
     const actions = [];
     if (window.location.pathname.includes("services"))
@@ -54,8 +64,18 @@ const useServices = ({ servicesInit }: UseServicesProps) => {
     await Promise.all(actions);
   }, [getServicesData]);
 
+  const getAiServiceInitialValue = React.useCallback(async () => {
+    const actions = [];
+
+    if (window.location.pathname.includes("ai-services"))
+      actions.push(getAiServicesData());
+
+    await Promise.all(actions);
+  }, [getAiServicesData]);
+
   return {
     getServicesInitialValue,
+    getAiServiceInitialValue,
   };
 };
 

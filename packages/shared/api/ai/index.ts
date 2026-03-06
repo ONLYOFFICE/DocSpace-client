@@ -26,7 +26,6 @@
 
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { getCookie } from "@docspace/ui-kit/utils/cookie";
-import { getAiModelName } from "../../utils/ai";
 import { checkFilterInstance } from "../../utils/common";
 
 import { request } from "../client";
@@ -131,7 +130,6 @@ export const getModels = async (
 
   return res.map((m) => ({
     ...m,
-    name: getAiModelName(m.modelId),
   })) as TModelList;
 };
 

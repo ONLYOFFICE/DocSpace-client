@@ -37,6 +37,7 @@ interface ServiceToggleSectionProps {
   priceText?: string;
   description?: string;
   testId?: string;
+  isDisabled?: boolean;
 }
 
 const ServiceToggleSection: React.FC<ServiceToggleSectionProps> = ({
@@ -46,6 +47,7 @@ const ServiceToggleSection: React.FC<ServiceToggleSectionProps> = ({
   priceText,
   description,
   testId,
+  isDisabled,
 }) => {
   return (
     <div className={styles.serviceToggleSection}>
@@ -54,6 +56,7 @@ const ServiceToggleSection: React.FC<ServiceToggleSectionProps> = ({
           isChecked={isEnabled}
           onChange={onToggle}
           dataTestId={testId}
+          isDisabled={isDisabled}
         />
       </div>
       <div className={styles.textContent}>

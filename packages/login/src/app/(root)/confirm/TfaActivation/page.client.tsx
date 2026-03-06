@@ -80,6 +80,7 @@ const TfaActivationForm = ({ secretKey, qrCode }: TfaActivationFormProps) => {
   const { confirmHeader = null } = linkData;
 
   const linkUrlData = searchParams?.get("linkData");
+  const session = searchParams?.get("session") ? true : false;
 
   const proxyBaseUrl = useRef("");
   useEffect(() => {
@@ -93,7 +94,7 @@ const TfaActivationForm = ({ secretKey, qrCode }: TfaActivationFormProps) => {
     try {
       setIsLoading(true);
 
-      await validateTfaCode(code, confirmHeader);
+      await validateTfaCode(code, confirmHeader, session);
 
       let confirmData = "";
       try {

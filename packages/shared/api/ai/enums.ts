@@ -34,6 +34,7 @@ export enum ContentType {
   Text = 0,
   Tool = 1,
   Files = 2,
+  Images = 3,
 }
 
 export enum ProviderType {

@@ -129,6 +129,8 @@ const ViewerToolbar = ({
     );
   }
 
+  if (toolbar.length === 0) return null;
+
   return (
     <div
       className={`${className || ""} ${styles.toolbarWrapper}`}

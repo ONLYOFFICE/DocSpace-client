@@ -69,6 +69,10 @@ class MediaViewerDataStore {
     this.filesActionsStore = filesActionsStore;
   }
 
+  setMediaViewerVisible = (value) => {
+    this.visible = value;
+  };
+
   setAutoPlay = (value) => {
     this.autoPlay = value;
   };

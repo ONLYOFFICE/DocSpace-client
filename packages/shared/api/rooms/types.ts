@@ -87,11 +87,15 @@ export type TWatermark = {
   isImage?: boolean;
 };
 
+export type TMultimodal = { image: { formats: string[] } };
+
 export type TAIRoomChatSettings = {
   prompt: string;
   providerId: number;
   modelId: string;
   internal: boolean;
+  modelAlias?: string;
+  multimodal?: TMultimodal;
 };
 
 export type TRoom = {

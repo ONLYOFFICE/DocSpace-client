@@ -773,10 +773,6 @@
   --room-type-display-item-description-text: #{$gray-text};
 }
 
-.light {
-
-}
-
 .dark {
   --row-content-side-info-min-width: 160px;
   --row-content-side-info-margin: 0 6px;
@@ -792,7 +788,6 @@
 }
 
 .light {
-
   --row-content-side-info-min-width: 160px;
   --row-content-side-info-margin: 0 6px;
   --row-content-side-info-width: 160px;
@@ -1042,7 +1037,6 @@
   --catalog-profile-background: #{$light-dark-gray-hover};
   --catalog-profile-border-top: 1px solid #{$gray-dark-strong};
 }
-
 
 .light {
   --body-info-border-color: #{$gray-light-mid};
@@ -1524,10 +1518,12 @@
   --payment-devider-color: #{$gray-light-mid};
   --payment-contact-container-text-color: #{$gray};
   --payment-contact-container-link-color: #{$light-gray-dark};
-
+  --payment-inactive-color: #{$gray};
   --warning-color: #{$light-error-status};
   --background-service-color: #{$light-gray-hover};
   --border-service-color: #{$gray-light-mid};
+  --services-additional-info: #{$gray};
+  --services-link-color: #{$gray};
 }
 
 .dark {
@@ -1540,11 +1536,13 @@
   --payment-devider-color: #{$gray-dark-mid};
   --payment-contact-container-text-color: #{$dark-gray-dark};
   --payment-contact-container-link-color: #{$gray-dark};
-
+  --payment-inactive-color: #{$gray-dark};
   --warning-color: #{$dark-error-status};
   --background-service-color: #{$light-dark-gray-hover};
   --border-service-color: #{$gray-dark-strong};
   --modal-dialog-border-color: #{$gray-dark-strong};
+  --services-additional-info: #{$gray-dark};
+  --services-link-color: #{$dark-gray-dark};
 }
 
 .light {
@@ -2489,7 +2487,7 @@
 .dark {
   --invite-panel-dropdown-separator: 1px solid #{$gray-dark-strong};
 
-  --files-panel-border-bottom: 1px solid #{$gray-light-mid};
+  --files-panel-border-bottom: 1px solid #{$gray-dark-strong};
   --files-panel-invite-text-color: #{$gray-dark};
 
   --invite-panel-icon-color: #{$gray-dark};

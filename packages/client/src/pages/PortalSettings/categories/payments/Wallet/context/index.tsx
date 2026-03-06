@@ -29,6 +29,8 @@ import React, { createContext, useContext, useState, useMemo } from "react";
 const AmountContext = createContext<{
   amount: string;
   setAmount: React.Dispatch<React.SetStateAction<string>>;
+  hasError: boolean;
+  setHasError: React.Dispatch<React.SetStateAction<boolean>>;
 } | null>(null);
 
 export const useAmountValue = () => {
@@ -44,7 +46,11 @@ export const AmountProvider: React.FC<{
   initialAmount?: string;
 }> = ({ children, initialAmount = "" }) => {
   const [amount, setAmount] = useState<string>(initialAmount);
-  const value = useMemo(() => ({ amount, setAmount }), [amount]);
+  const [hasError, setHasError] = useState(false);
+  const value = useMemo(
+    () => ({ amount, setAmount, hasError, setHasError }),
+    [amount],
+  );
 
   return (
     <AmountContext.Provider value={value}>{children}</AmountContext.Provider>

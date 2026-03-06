@@ -487,7 +487,7 @@
   "InfoPanel": "Panou informații",
   "InProgress": "În curs de desfășurare",
   "InstanceId": "Tastați ID-ul instanței",
-  "InsufficientFundsWithContact": "Fondurile din portofelul dvs sunt insuficiente. Vă rugăm să contactați plătitorul (<1>email@example.com</1>) pentru a-l alimenta și să încercați din nou.",
+  "InsufficientFundsWithContact": "Fondurile din portofelul dvs sunt insuficiente. Vă rugăm să contactați plătitorul (<1>{{email}}</1>) pentru a-l alimenta și să încercați din nou.",
   "InsufficientFundsWithTopUp": "Fondurile din portofelul dvs sunt insuficiente. Vă rugăm să <1>vă alimentați portofelul</1> și să încercați din nou.",
   "InvalidLink": "Link-ul invalid",
   "InvitationToPortal": "<1>{{displayName}}</1> vă invită să asociați la {{productName}} <1>{{spaceAddress}}</1> pentru colaborarea securizată asupra documentelor.",

@@ -55,19 +55,19 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/ui-kit/components/modal-dialog";
-import { FilterIcon } from "@docspace/ui-kit/components/filter";
+import FilterIcon from "@docspace/ui-kit/components/filter/sub-components/FilterIcon";
 import { AddButton } from "@docspace/ui-kit/components/add-button";
 import { SelectedItemPure } from "@docspace/ui-kit/components/selected-item";
 import { TSelectorItem } from "@docspace/ui-kit/components/selector";
 import { TUser } from "@docspace/shared/api/people/types";
 import { PeopleSelector } from "@docspace/ui-kit/selectors/People";
-import type { PeopleFilter } from "@docspace/ui-kit/selectors/People";
+import type { PeopleFilter } from "@docspace/ui-kit/selectors/People/PeopleSelector.types";
 import Filter from "@docspace/shared/api/people/filter";
 
-import FilterPanel from "./sub-components/FilterPanel";
-import TransactionBody from "./sub-components/TransactionBody";
-import styles from "./styles/TransactionHistory.module.scss";
-import TableLoader from "./sub-components/TableLoader";
+import FilterPanel from "./Wallet/sub-components/FilterPanel";
+import TransactionBody from "./Wallet/sub-components/TransactionBody";
+import styles from "./Wallet/styles/TransactionHistory.module.scss";
+import TableLoader from "./Wallet/sub-components/TableLoader";
 import { Link } from "@docspace/ui-kit/components/link";
 
 type TransactionHistoryReportResponse = {
@@ -80,18 +80,21 @@ type TransactionHistoryProps = {
   getStartTransactionDate?: () => string;
   getEndTransactionDate?: () => string;
   fetchTransactionHistory?: (
-    startDate: DateTime,
-    endDate: DateTime,
-    isCredit: boolean,
-    isDebit: boolean,
+    startDate: DateTime | null,
+    endDate: DateTime | null,
+    credit: boolean,
+    debit: boolean,
     participantName?: string,
   ) => Promise<void>;
   openOnNewPage?: boolean;
+  userId?: string;
   isTransactionHistoryExist?: boolean;
   isMobile?: boolean;
   isTablet?: boolean;
   isNotPaidPeriod?: boolean;
   formatDate?: (date: DateTime) => string;
+  withoutHeader?: boolean;
+  serviceName?: string;
 };
 
 const getTransactionType = (key: string) => {
@@ -101,11 +104,11 @@ const getTransactionType = (key: string) => {
   };
 };
 
-const filter = () => {
+const filter = (): PeopleFilter => {
   const newFilter = Filter.getDefault();
   newFilter.role = [EmployeeType.Admin];
   newFilter.employeeStatus = EmployeeStatus.Active;
-  return newFilter;
+  return newFilter as unknown as PeopleFilter;
 };
 
 let timerId = null;
@@ -149,12 +152,14 @@ const fetchTransactions = async (
     isCredit: boolean,
     isDebit: boolean,
     participantName?: string,
+    serviceName?: string,
   ) => Promise<void>,
   setIsLoading: (loading: boolean) => void,
   selectedType: string,
   startDate: DateTime,
   endDate: DateTime,
   participantName?: string,
+  serviceName?: string,
 ) => {
   timerId = setTimeout(() => setIsLoading(true), 500);
 
@@ -167,6 +172,7 @@ const fetchTransactions = async (
       isCredit,
       isDebit,
       participantName,
+      serviceName,
     );
 
     setIsLoading(false);
@@ -188,6 +194,8 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
     isTablet,
     isNotPaidPeriod,
     formatDate,
+    withoutHeader,
+    serviceName,
   } = props;
 
   const { t } = useTranslation(["Payments", "Settings"]);
@@ -286,6 +294,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
         initialState.startDate,
         initialState.endDate,
         initialState.selectedContact?.id,
+        serviceName,
       );
     }
   };
@@ -325,6 +334,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
         startDate,
         endDate,
         selectedContact?.id,
+        serviceName,
       );
     }
   };
@@ -353,6 +363,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
         date,
         endDate,
         selectedContact?.id,
+        serviceName,
       );
     }
   };
@@ -381,6 +392,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
         startDate,
         date,
         selectedContact?.id,
+        serviceName,
       );
     }
   };
@@ -407,6 +419,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
         startDate,
         endDate,
         contacts[0].id as string,
+        serviceName,
       );
     }
   };
@@ -430,6 +443,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
         selectedType.key as string,
         startDate,
         endDate,
+        serviceName,
       );
     }
   };
@@ -452,6 +466,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
         mobileFilterState.startDate,
         mobileFilterState.endDate,
         mobileFilterState.selectedContact?.id,
+        serviceName,
       );
     }
   };
@@ -468,6 +483,8 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
         formatDate!(endDate),
         isCredit,
         isDebit,
+        selectedContact?.id,
+        serviceName,
       );
 
       const result = await new Promise<TransactionHistoryReportResponse>(
@@ -652,7 +669,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
         isCloseable: true,
         headerLabel: t("ListContacts"),
       }}
-      filter={filter as unknown as PeopleFilter | (() => PeopleFilter)}
+      filter={filter}
       withInfo
       infoText={t("OnlyPortalAdminsShown", {
         productName: t("Common:ProductName"),
@@ -667,9 +684,15 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
   return (
     <>
       <div className={styles.transactionHistoryHeader}>
-        <Text isBold fontSize="16px" className={styles.transactionHistoryTitle}>
-          {t("TransactionHistory")}
-        </Text>
+        {withoutHeader ? null : (
+          <Text
+            isBold
+            fontSize="16px"
+            className={styles.transactionHistoryTitle}
+          >
+            {t("TransactionHistory")}
+          </Text>
+        )}
         {isMobile ? mobileFilter : null}
       </div>
       {!isMobile ? filterCombobox : null}
@@ -756,10 +779,10 @@ export default inject(
     const {
       getStartTransactionDate,
       getEndTransactionDate,
-      fetchTransactionHistory,
       isTransactionHistoryExist,
       currentTariffStatusStore,
       formatDate,
+      fetchTransactionHistory,
     } = paymentStore;
 
     const { openOnNewPage } = filesSettingsStore;
@@ -775,7 +798,6 @@ export default inject(
     return {
       getStartTransactionDate,
       getEndTransactionDate,
-      fetchTransactionHistory,
       openOnNewPage,
       userId,
       isMobile,
@@ -783,6 +805,7 @@ export default inject(
       isTransactionHistoryExist,
       isNotPaidPeriod,
       formatDate,
+      fetchTransactionHistory,
     };
   },
 )(observer(TransactionHistory));

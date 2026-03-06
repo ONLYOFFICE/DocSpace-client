@@ -1,6 +1,5 @@
 {
   "AITools": "AI-työkalut",
-  "AItoolsConfirm": "AI-työkalupalvelun käyttöönotto antaa kaikille {{productName}}-käyttäjille pääsyn tekoälypohjaisiin ominaisuuksiin, edellyttäen että lompakossa on riittävästi varoja. Oletko varma, että haluat jatkaa?",
   "AIToolsEnabled": "AI-työkalupalvelu otettu onnistuneesti käyttöön.",
   "AndMore": "Ja lisää!",
   "AutomaticBackupDescription": "Ota ajoitetut varmuuskopiot käyttöön jatkuvan datan suojauksen takaamiseksi ilman manuaalisia toimia.",
@@ -20,7 +19,6 @@
   "FreeBackupsPerMonth": "Ilmaiset varmuuskopiot: {{value}}/{{maxValue}} nykyisenä kuukautena.",
   "ImageGeneration": "Kuvan generointi",
   "ImageGenerationDescription": "Suunnittele alkuperäisiä kuvia ja kuvituksia tekoälyn avulla asiakirjoihisi.",
-  "NewAIfeatures": "Uusia tekoälyominaisuuksia lisätään säännöllisesti, jotta voit työskennellä nopeammin, älykkäämmin ja pienemmällä vaivalla.",
   "OCR": "OCR",
   "OCRDescription": "Tunnista ja poimi teksti skannatuista PDF-tiedostoista ja kuvista.",
   "Summarization": "Yhteenveto",

@@ -398,4 +398,5 @@ export default withTranslation([
   "Common",
   "InfoPanel",
   "Notifications",
+  "GroupingRooms",
 ])(withFileActions(withContent(withQuickButtons(withBadges(FilesTableRow)))));

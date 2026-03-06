@@ -81,7 +81,10 @@ export const DownloadRow = (props: DownloadRowProps) => {
             isOpen={false}
             dropdownType="alwaysDashed"
             data={dropdownItems}
-            directionY={isMobile() ? "both" : "bottom"}
+            directionY="both"
+            topSpace={16}
+            bottomSpace={80}
+            withDynamicScrollbar
             fontSize="13px"
             fontWeight={600}
             hasScroll={isMobile()}

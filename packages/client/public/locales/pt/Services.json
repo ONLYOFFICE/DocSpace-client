@@ -1,6 +1,5 @@
 {
   "AITools": "Ferramentas de IA",
-  "AItoolsConfirm": "Habilitar o serviço de ferramentas de IA concederá a todos os usuários do {{productName}} acesso a recursos alimentados por IA, desde que a carteira tenha fundos suficientes. Tem certeza de que deseja continuar?",
   "AIToolsEnabled": "Ferramentas de IA ativadas com sucesso.",
   "AndMore": "E mais!",
   "AutomaticBackupDescription": "Configure backups agendados para proteção contínua de dados sem ações manuais.",
@@ -20,7 +19,6 @@
   "FreeBackupsPerMonth": "Backups gratuitos: {{value}}/{{maxValue}} por mês corrente.",
   "ImageGeneration": "Geração de imagens",
   "ImageGenerationDescription": "Crie imagens e ilustrações originais usando IA para seus documentos.",
-  "NewAIfeatures": "Novos recursos de IA são adicionados regularmente para ajudá-lo a trabalhar mais rápido, de forma mais inteligente e com menos esforço.",
   "OCR": "OCR",
   "OCRDescription": "Reconheça e extraia texto de PDFs e imagens digitalizadas.",
   "Summarization": "Sumarização",

@@ -38,6 +38,7 @@ export type TView =
   | "bonus"
   | "services"
   | "ai-settings"
+  | "ai-services"
   | "";
 
 export type ViewProps = {

@@ -132,3 +132,43 @@ export const openFile = (id: string) => {
 
   window.open(url, "_blank");
 };
+
+/**
+ * Downloads an image from a URL and converts it to base64
+ * @param url - The URL of the image to download
+ * @returns A promise that resolves to the base64 encoded string with data URL prefix
+ * @throws Error if the image fails to load or the fetch fails
+ */
+export const downloadImageAsBase64 = async (url: string): Promise<string> => {
+  try {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch image: ${response.statusText}`);
+    }
+
+    const blob = await response.blob();
+
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        if (typeof reader.result === "string") {
+          resolve(reader.result);
+        } else {
+          reject(new Error("Failed to convert image to base64"));
+        }
+      };
+
+      reader.onerror = () => {
+        reject(new Error("Failed to read image blob"));
+      };
+
+      reader.readAsDataURL(blob);
+    });
+  } catch (error) {
+    throw new Error(
+      `Failed to download image: ${error instanceof Error ? error.message : "Unknown error"}`,
+    );
+  }
+};

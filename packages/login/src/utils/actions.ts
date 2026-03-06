@@ -47,7 +47,7 @@ import {
   TVersionBuild,
   TInvitationSettings,
 } from "@docspace/shared/api/settings/types";
-import { Encoder } from "@docspace/shared/utils/encoder";
+import { Encoder } from "@docspace/ui-kit/utils/encoder";
 import {
   TConfirmLinkParams,
   TConfirmLinkResult,

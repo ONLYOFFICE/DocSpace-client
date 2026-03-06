@@ -1,6 +1,5 @@
 {
   "AITools": "Strumenti AI",
-  "AItoolsConfirm": "Abilitando il servizio strumenti AI, tutti gli utenti di {{productName}} avranno accesso alle funzionalità basate su AI, a condizione che il wallet disponga di fondi sufficienti. Sei sicuro di voler continuare?",
   "AIToolsEnabled": "Servizio strumenti AI abilitato con successo.",
   "AndMore": "E altro ancora!",
   "AutomaticBackupDescription": "Imposta backup programmati per la protezione continua dei dati senza interventi manuali.",
@@ -20,7 +19,6 @@
   "FreeBackupsPerMonth": "Backup gratuiti: {{value}}/{{maxValue}} per il mese corrente.",
   "ImageGeneration": "Generazione di immagini",
   "ImageGenerationDescription": "Progetta immagini e illustrazioni originali usando l’AI per i tuoi documenti.",
-  "NewAIfeatures": "Nuove funzionalità AI vengono aggiunte regolarmente per aiutarti a lavorare più velocemente, in modo più intelligente e con meno sforzo.",
   "OCR": "OCR",
   "OCRDescription": "Riconosci ed estrai testo da PDF scansionati e immagini.",
   "Summarization": "Riepilogo",

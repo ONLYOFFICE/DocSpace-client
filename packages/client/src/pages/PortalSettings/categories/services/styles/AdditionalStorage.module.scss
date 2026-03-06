@@ -126,7 +126,7 @@
   margin-bottom: 20px;
 }
 
-.changeShedule {
+.additionalInfo {
   display: flex;
   gap: 4px;
   align-items: center;
@@ -144,6 +144,14 @@
     svg {
       path {
         fill: var(--payment-credit-color);
+      }
+    }
+  }
+  &.inactiveColor {
+    color: var(--payment-inactive-color);
+    svg {
+      path {
+        fill: var(--payment-inactive-color);
       }
     }
   }

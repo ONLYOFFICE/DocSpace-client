@@ -26,8 +26,9 @@
 
 import { makeAutoObservable } from "mobx";
 
-import { Nullable } from "@docspace/shared/types";
+import type { Nullable } from "@docspace/shared/types";
 import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
+import type { TChatPlaylistImage } from "@docspace/shared/components/chat/Chat.types";
 
 class AiRoomStore {
   roomId: Nullable<number> = null;
@@ -37,9 +38,15 @@ class AiRoomStore {
 
   currentTab: "chat" | "knowledge" | "result" = "chat";
 
+  aiPlaylistImages: TChatPlaylistImage[] = [];
+
   constructor() {
     makeAutoObservable(this);
   }
+
+  setAiPlaylistImages = (aiPlaylistImages: TChatPlaylistImage[]) => {
+    this.aiPlaylistImages = aiPlaylistImages;
+  };
 
   setRoomId = (roomId: Nullable<number>) => {
     this.roomId = roomId;

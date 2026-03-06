@@ -24,9 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { inject, observer } from "mobx-react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router";
 
 import { toastr } from "@docspace/ui-kit/components/toast";
@@ -66,6 +66,9 @@ const Services = (props: InjectedProps) => {
     setVisibleWalletSetting,
     showPortalSettingsLoader,
     isFreeTariff,
+    wasFirstAiServiceTopUp,
+    logoText,
+    formatAiServiceCurrency,
   } = props;
   const { t, ready } = useTranslation(["Payments", "Services", "Common"]);
   const [dialogVisibility, setDialogVisibility] = useState({
@@ -75,15 +78,19 @@ const Services = (props: InjectedProps) => {
     [WEB_SEARCH]: false,
   });
 
-  const updateDialogVisibility = (
-    dialogType: keyof typeof dialogVisibility,
-    isVisible: boolean,
-  ) => {
-    setDialogVisibility((prev) => ({
-      ...prev,
-      [dialogType]: isVisible,
-    }));
-  };
+  const updateDialogVisibility = useCallback(
+    (dialogType: keyof typeof dialogVisibility, isVisible: boolean) => {
+      setDialogVisibility((prev) => {
+        if (prev[dialogType] === isVisible) return prev;
+
+        return {
+          ...prev,
+          [dialogType]: isVisible,
+        };
+      });
+    },
+    [],
+  );
 
   const [isConfirmDialogVisible, setIsConfirmDialogVisible] = useState(false);
   const [isCurrentConfirmState, setIsCurrentConfirmState] = useState(false);
@@ -94,6 +101,7 @@ const Services = (props: InjectedProps) => {
 
   const [isTopUpBalanceVisible, setIsTopUpBalanceVisible] = useState(false);
 
+  const [isAiServiceTopUpVisible, setIsAiServiceTopUpVisible] = useState(false);
   const shouldShowLoader = !isInitServicesPage || !ready;
   const location = useLocation();
   const navigate = useNavigate();
@@ -106,6 +114,9 @@ const Services = (props: InjectedProps) => {
 
     if (confirmActionType === TOTAL_SIZE) {
       updateDialogVisibility(TOTAL_SIZE, isVisibleWalletSettings);
+    } else if (confirmActionType === AI_TOOLS) {
+      setIsAiServiceTopUpVisible(true);
+      updateDialogVisibility(AI_TOOLS, isVisibleWalletSettings);
     } else {
       setIsTopUpBalanceVisible(true);
     }
@@ -147,9 +158,38 @@ const Services = (props: InjectedProps) => {
     },
     [AI_TOOLS]: {
       title: t("Common:Confirmation"),
-      body: t("Services:AItoolsConfirm", {
-        productName: t("Common:ProductName"),
-      }),
+      body: isCurrentConfirmState
+        ? [
+            t("Services:DisableAIToolsConfirm", {
+              organizationName: logoText,
+            }),
+            <Trans
+              key="DisableBalance"
+              i18nKey="Services:DisableAIToolsConfirmBalance"
+              t={t}
+              values={{ balance: formatAiServiceCurrency!() }}
+              components={{
+                1: <span style={{ fontWeight: 600 }} />,
+              }}
+            />,
+            t("Services:DisableAIToolsConfirmReEnable"),
+          ]
+        : [
+            t("Services:AIToolsDescription", {
+              productName: t("Common:ProductName"),
+              organizationName: logoText,
+            }),
+            <Trans
+              key="Payments"
+              i18nKey="CurrentBalance"
+              t={t}
+              values={{ balance: formatAiServiceCurrency!() }}
+              components={{
+                1: <span style={{ fontWeight: 600 }} />,
+              }}
+            />,
+            t("Common:WantToContinue"),
+          ],
     },
     [WEB_SEARCH]: {
       title: t("Common:Confirmation"),
@@ -171,6 +211,11 @@ const Services = (props: InjectedProps) => {
 
     if (id === TOTAL_SIZE && isGracePeriod) {
       setIsGracePeriodModalVisible(true);
+      return;
+    }
+
+    if (id === AI_TOOLS && wasFirstAiServiceTopUp) {
+      navigate("/portal-settings/ai-services");
       return;
     }
 
@@ -200,6 +245,11 @@ const Services = (props: InjectedProps) => {
       return;
     }
 
+    if (id === AI_TOOLS && !wasFirstAiServiceTopUp) {
+      updateDialogVisibility(AI_TOOLS, true);
+      return;
+    }
+
     if (!currentEnabled && !isCardLinkedToPortal) {
       setIsTopUpBalanceVisible(true);
       return;
@@ -211,7 +261,7 @@ const Services = (props: InjectedProps) => {
       }
     }
 
-    if (!currentEnabled || id === BACKUP_SERVICE)
+    if (!currentEnabled || id === BACKUP_SERVICE || id === AI_TOOLS)
       setIsConfirmDialogVisible(true);
     else {
       const raw = {
@@ -353,6 +403,7 @@ const Services = (props: InjectedProps) => {
           visible={dialogVisibility[AI_TOOLS]}
           onClose={onCloseAiService}
           onToggle={onToggle}
+          isTopUpVisible={isAiServiceTopUpVisible}
         />
       ) : null}
       {dialogVisibility[WEB_SEARCH] ? (
@@ -387,6 +438,7 @@ const mapStoreToProps = ({
   paymentStore,
   clientLoadingStore,
   currentQuotaStore,
+  settingsStore,
 }: TStore) => {
   const {
     isInitServicesPage,
@@ -395,6 +447,8 @@ const mapStoreToProps = ({
     confirmActionType,
     setIsInitServicesPage,
     setVisibleWalletSetting,
+    wasFirstAiServiceTopUp,
+    formatAiServiceCurrency,
   } = servicesStore;
   const { isGracePeriod, previousStoragePlanSize } = currentTariffStatusStore;
   const { isFreeTariff } = currentQuotaStore;
@@ -405,7 +459,7 @@ const mapStoreToProps = ({
   } = paymentStore;
 
   const { showPortalSettingsLoader } = clientLoadingStore;
-
+  const { logoText } = settingsStore;
   return {
     isInitServicesPage,
     isVisibleWalletSettings,
@@ -420,6 +474,9 @@ const mapStoreToProps = ({
     setVisibleWalletSetting,
     showPortalSettingsLoader,
     isFreeTariff,
+    wasFirstAiServiceTopUp,
+    logoText,
+    formatAiServiceCurrency,
   };
 };
 

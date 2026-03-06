@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-sizing: border-box;
+}
+
+.toggleSection {
+  max-width: 550px;
+}
+
+.balanceGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.lastTopUpRow {
+  display: flex;
+  align-items: center;
+}
+
+.tabsRow {
+  display: flex;
+  gap: 16px;
+}
+
+.filterRow {
+  display: flex;
+  gap: 8px;
+}
+
+.tableHeaderRow {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.tableRow {
+  width: 100%;
+}

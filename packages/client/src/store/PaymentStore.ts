@@ -386,6 +386,7 @@ class PaymentStore {
     return (
       this.previousBalance === 0 &&
       typeof this.balance !== "number" &&
+      !!this.balance &&
       this.balance.subAccounts.length > 0
     );
   }
@@ -436,13 +437,6 @@ class PaymentStore {
     );
   }
 
-  get aiToolsPrice() {
-    return (
-      (this.servicesQuotasFeatures.get(AI_TOOLS) as TServiceFeatureWithPrice)
-        ?.price?.value || 0
-    );
-  }
-
   get webSearchPrice() {
     return (
       (this.servicesQuotasFeatures.get(WEB_SEARCH) as TServiceFeatureWithPrice)
@@ -452,6 +446,10 @@ class PaymentStore {
 
   get isBackupServiceOn() {
     return this.servicesQuotasFeatures.get(BACKUP_SERVICE)?.value;
+  }
+
+  get isAiToolsServiceOn() {
+    return this.servicesQuotasFeatures.get(AI_TOOLS)?.value;
   }
 
   formatWalletCurrency = (
@@ -513,8 +511,15 @@ class PaymentStore {
     return date ? formatDateUtil(date, format) : "";
   };
 
-  formatDate = (date: DateTime) => {
-    return formatDateUtil(date, "yyyy-MM-dd'T'HH:mm:ss", { locale: "en" });
+  formatDate = (date: DateTime, timeType?: "start" | "end") => {
+    if (!timeType) {
+      return formatDateUtil(date, "yyyy-MM-dd'T'HH:mm:ss", { locale: "en" });
+    }
+
+    const dateStr = formatDateUtil(date, "yyyy-MM-dd", { locale: "en" });
+    const timeTypeValue = timeType === "start" ? "00:00:00" : "23:59:59";
+
+    return `${dateStr}T${timeTypeValue}`;
   };
 
   fetchTransactionHistory = async (
@@ -523,19 +528,21 @@ class PaymentStore {
     credit = true,
     debit = true,
     participantName?: string,
+    serviceName?: string,
   ) => {
     const abortController = new AbortController();
     this.settingsStore?.addAbortControllers(abortController);
 
     try {
       const res = await getTransactionHistory(
-        startDate ? this.formatDate(startDate) : "",
-        endDate ? this.formatDate(endDate) : "",
+        startDate ? this.formatDate(startDate, "start") : "",
+        endDate ? this.formatDate(endDate, "end") : "",
         credit,
         debit,
         participantName,
         0,
         25,
+        serviceName,
         abortController.signal,
       );
 
@@ -612,13 +619,13 @@ class PaymentStore {
     this.isVisibleWalletSettings = isVisibleWalletSettings;
   };
 
-  handleServicesQuotas = async () => {
+  handleServicesQuotas = async (serviceName: string = "") => {
     // temporary solution, should be in the service store
 
     const abortController = new AbortController();
     this.settingsStore?.addAbortControllers(abortController);
 
-    const res = await getServicesQuotas(abortController.signal);
+    const res = await getServicesQuotas(serviceName, abortController.signal);
 
     if (!res) return;
 

@@ -64,6 +64,8 @@ export type TNavigationPath = {
   roomType: RoomsType;
   isRootRoom: boolean;
   shared: boolean;
+  quotaLimit?: number;
+  usedSpace?: number;
 };
 
 type ExcludeTypes = SettingsStore | CallableFunction;
@@ -261,6 +263,9 @@ class SelectedFolderStore {
       parentShared: this.parentShared,
       ownedBy: this.ownedBy,
       sharedBy: this.sharedBy,
+      isRoomStorageQuotaExceeded: this.isRoomStorageQuotaExceeded,
+      roomUsedSpace: this.roomUsedSpace,
+      roomQuotaLimit: this.roomQuotaLimit,
     };
   };
 
@@ -509,6 +514,32 @@ class SelectedFolderStore {
 
   get isAIAgent() {
     return this.roomType === RoomsType.AIRoom;
+  }
+
+  get roomQuotaLimit() {
+    const { navigationPath } = this;
+    return navigationPath.length >= 2
+      ? navigationPath[navigationPath.length - 2].quotaLimit
+      : this.quotaLimit;
+  }
+
+  get roomUsedSpace() {
+    const { navigationPath } = this;
+    return navigationPath.length >= 2
+      ? navigationPath[navigationPath.length - 2].usedSpace
+      : this.usedSpace;
+  }
+
+  get isRoomStorageQuotaExceeded() {
+    if (this.rootFolderType !== FolderType.Rooms) return false;
+
+    const { roomQuotaLimit, roomUsedSpace } = this;
+
+    if (roomQuotaLimit === undefined || roomQuotaLimit === -1) return false;
+
+    if (roomUsedSpace === undefined) return false;
+
+    return roomUsedSpace >= roomQuotaLimit;
   }
 
   get isInsideResultStorage() {

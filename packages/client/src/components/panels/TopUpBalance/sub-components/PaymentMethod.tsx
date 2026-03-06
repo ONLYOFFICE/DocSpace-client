@@ -40,130 +40,130 @@ import { AddButton } from "@docspace/ui-kit/components/add-button";
 import styles from "../styles/PaymentMethod.module.scss";
 
 type PaymentMethodProps = {
-	confirmActionType?: string | null;
-	fetchCardLinked?: (url: string) => void;
-	walletCustomerEmail: boolean;
-	cardLinked: string;
-	accountLink: string;
-	isDisabled: boolean;
-	walletCustomerStatusNotActive: boolean;
-	reccomendedAmount?: string;
-	amount?: string;
+  confirmActionType?: string | null;
+  fetchCardLinked?: (url: string) => void;
+  walletCustomerEmail: boolean;
+  cardLinked: string;
+  accountLink: string;
+  isDisabled: boolean;
+  walletCustomerStatusNotActive: boolean;
+  reccomendedAmount?: string;
+  amount?: string;
 };
 
 const PaymentMethod = (props: PaymentMethodProps) => {
-	const {
-		walletCustomerEmail,
-		cardLinked,
-		accountLink,
-		isDisabled,
-		walletCustomerStatusNotActive,
-		confirmActionType,
-		fetchCardLinked,
-		reccomendedAmount,
-		amount,
-	} = props;
+  const {
+    walletCustomerEmail,
+    cardLinked,
+    accountLink,
+    isDisabled,
+    walletCustomerStatusNotActive,
+    confirmActionType,
+    fetchCardLinked,
+    reccomendedAmount,
+    amount,
+  } = props;
 
-	const { t } = useTranslation(["Payments", "Common"]);
+  const { t } = useTranslation(["Payments", "Common"]);
 
-	const [isLoading, setIsLoading] = useState(!walletCustomerEmail);
+  const [isLoading, setIsLoading] = useState(!walletCustomerEmail);
 
-	const updateCardLink = async () => {
-		if (walletCustomerEmail) return;
+  const updateCardLink = async () => {
+    if (walletCustomerEmail) return;
 
-		const basicUrl = `${window.location.href}?complete=true&actionType=${confirmActionType ?? ""}`;
-		let url = basicUrl;
+    const basicUrl = `${window.location.href}?complete=true&actionType=${confirmActionType ?? ""}`;
+    let url = basicUrl;
 
-		if (reccomendedAmount && amount) {
-			url = `${basicUrl}&amount=${amount}&recommendedAmount=${reccomendedAmount}`;
-		}
+    if (reccomendedAmount && amount) {
+      url = `${basicUrl}&amount=${amount}&recommendedAmount=${reccomendedAmount}`;
+    }
 
-		try {
-			await fetchCardLinked!(url);
-		} catch (error) {
-			console.error(error);
-		} finally {
-			setIsLoading(false);
-		}
-	};
+    try {
+      await fetchCardLinked!(url);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-	useEffect(() => {
-		updateCardLink();
-	}, []);
+  useEffect(() => {
+    updateCardLink();
+  }, []);
 
-	const goLinkCard = () => {
-		cardLinked
-			? window.open(cardLinked, "_self")
-			: toastr.error(t("Common:UnexpectedError"));
-	};
+  const goLinkCard = () => {
+    cardLinked
+      ? window.open(cardLinked, "_self")
+      : toastr.error(t("Common:UnexpectedError"));
+  };
 
-	const goStripeAccount = () => {
-		accountLink
-			? window.open(accountLink, "_blank")
-			: toastr.error(t("Common:UnexpectedError"));
-	};
+  const goStripeAccount = () => {
+    accountLink
+      ? window.open(accountLink, "_blank")
+      : toastr.error(t("Common:UnexpectedError"));
+  };
 
-	return (
-		<div className={styles.addPaymentMethod}>
-			<div className={styles.paymentMethodDescription}>
-				<Text isBold fontSize="16px">
-					{t("PaymentMethod")}
-				</Text>
-				{!walletCustomerEmail ? (
-					<Text fontSize="12px" className={styles.noPayment}>
-						{t("YouHaveNotAddedAnyPayment")}
-					</Text>
-				) : null}
-			</div>
-			{walletCustomerEmail ? (
-				<div
-					className={classNames(styles.cardLinked, {
-						[styles.cardLinkDisabled]: isDisabled,
-						[styles.warningColor]: walletCustomerStatusNotActive,
-					})}
-				>
-					<div className={styles.tickedWrapper}>
-						{walletCustomerStatusNotActive ? (
-							<CrossReactSvg />
-						) : (
-							<CheckReactSvg />
-						)}
-						<Text fontWeight={600} fontSize="14px">
-							{walletCustomerStatusNotActive
-								? t("CardUnlinked")
-								: t("CardLinked")}
-						</Text>
-					</div>
-					<Link
-						fontWeight={600}
-						onClick={
-							walletCustomerStatusNotActive ? goLinkCard : goStripeAccount
-						}
-						textDecoration="underline dashed"
-						dataTestId="payment_method_link"
-					>
-						{walletCustomerStatusNotActive
-							? t("AddPaymentMethod")
-							: t("GoToStripe")}
-					</Link>
-				</div>
-			) : (
-				<div className={styles.addPaymentMethodContainer}>
-					<AddButton
-						testId="payment_method_add_button"
-						isLoading={isLoading}
-						isDisabled={isLoading}
-						label={t("AddPaymentMethod")}
-						onClick={goLinkCard}
-					/>
-				</div>
-			)}
-		</div>
-	);
+  return (
+    <div className={styles.addPaymentMethod}>
+      <div className={styles.paymentMethodDescription}>
+        <Text isBold fontSize="16px">
+          {t("PaymentMethod")}
+        </Text>
+        {!walletCustomerEmail ? (
+          <Text fontSize="12px" className={styles.noPayment}>
+            {t("YouHaveNotAddedAnyPayment")}
+          </Text>
+        ) : null}
+      </div>
+      {walletCustomerEmail ? (
+        <div
+          className={classNames(styles.cardLinked, {
+            [styles.cardLinkDisabled]: isDisabled,
+            [styles.warningColor]: walletCustomerStatusNotActive,
+          })}
+        >
+          <div className={styles.tickedWrapper}>
+            {walletCustomerStatusNotActive ? (
+              <CrossReactSvg />
+            ) : (
+              <CheckReactSvg />
+            )}
+            <Text fontWeight={600} fontSize="14px">
+              {walletCustomerStatusNotActive
+                ? t("CardUnlinked")
+                : t("CardLinked")}
+            </Text>
+          </div>
+          <Link
+            fontWeight={600}
+            onClick={
+              walletCustomerStatusNotActive ? goLinkCard : goStripeAccount
+            }
+            textDecoration="underline dashed"
+            dataTestId="payment_method_link"
+          >
+            {walletCustomerStatusNotActive
+              ? t("AddPaymentMethod")
+              : t("GoToStripe")}
+          </Link>
+        </div>
+      ) : (
+        <div className={styles.addPaymentMethodContainer}>
+          <AddButton
+            testId="payment_method_add_button"
+            isLoading={isLoading}
+            isDisabled={isLoading}
+            label={t("AddPaymentMethod")}
+            onClick={goLinkCard}
+          />
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default inject(({ paymentStore, servicesStore }: TStore) => {
-	const { fetchCardLinked } = paymentStore;
-	const { confirmActionType } = servicesStore;
-	return { confirmActionType, fetchCardLinked };
+  const { fetchCardLinked } = paymentStore;
+  const { confirmActionType } = servicesStore;
+  return { confirmActionType, fetchCardLinked };
 })(observer(PaymentMethod));

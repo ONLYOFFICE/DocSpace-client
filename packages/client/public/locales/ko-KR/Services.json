@@ -1,6 +1,5 @@
 {
   "AITools": "AI 도구",
-  "AItoolsConfirm": "AI 도구 서비스 활성화는 {{productName}} 사용자 모두에게 AI 기반 기능을 제공하며, 지갑에 충분한 자금이 있는 경우에 한합니다. 계속 진행하시겠습니까?",
   "AIToolsEnabled": "AI 도구 서비스 활성화되었습니다.",
   "AndMore": "그리고 더!",
   "AutomaticBackupDescription": "지속적인 데이터 보호를 위해 수동 작업 없이 예약 백업을 설정하세요.",
@@ -20,7 +19,6 @@
   "FreeBackupsPerMonth": "무료 백업: {{value}}/{{maxValue}} (이번 달 기준).",
   "ImageGeneration": "이미지 생성",
   "ImageGenerationDescription": "문서에 사용할 AI를 사용하여 독창적인 이미지와 삽화를 디자인하세요.",
-  "NewAIfeatures": "새로운 AI 기능은 작업을 더 빠르고, 더 스마트하게, 그리고 더 적은 노력으로 수행할 수 있도록 정기적으로 추가됩니다.",
   "OCR": "OCR",
   "OCRDescription": "스캔한 PDF 및 이미지에서 텍스트를 인식하고 추출합니다.",
   "Summarization": "요약",

@@ -1,6 +1,5 @@
 {
   "AITools": "Süni İntellekt alətləri",
-  "AItoolsConfirm": "Süni intellekt alətləri xidmətini aktiv etmək, bütün {{productName}} istifadəçilərinə, əgər hesab kifayət qədər vəsaitə malikdirsə, süni intellektlə təmin edilmiş funksiyalara daxil olmağa imkan verəcəkdir. Davam etmək istəyirsinizmi?",
   "AIToolsEnabled": "Süni intellekt alətləri xidməti uğurla aktivləşdirildi.",
   "AndMore": "Və daha çox!",
   "AutomaticBackupDescription": "Kənarlaşdırılmış məlumatların mühafizəsi üçün, əl ilə hərəkət etmədən, planlı ehtiyat nüsxələrini yaradın.",
@@ -20,7 +19,6 @@
   "FreeBackupsPerMonth": "Pulsuz ehtiyat nüsxələr: {{value}}/{{maxValue}} cari ayda.",
   "ImageGeneration": "Şəkillər yaratma",
   "ImageGenerationDescription": "Sənədləriniz üçün süni intellektdən istifadə edərək orijinal şəkillər və illüstrasiyalar hazırlayın.",
-  "NewAIfeatures": "Daha sürətli, daha ağıllı və daha az səylə işləməyinizə kömək etmək üçün yeni süni intellekt xüsusiyyətləri müntəzəm olaraq əlavə olunur.",
   "OCR": "OCR",
   "OCRDescription": "Tərziş edilmiş PDF faylları və şəkllərdən mətnı tanıyın və çıxarın.",
   "Summarization": "Xülasə",

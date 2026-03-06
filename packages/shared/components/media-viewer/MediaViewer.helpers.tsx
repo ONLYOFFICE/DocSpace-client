@@ -176,14 +176,14 @@ export const getMobileMediaContextModel = (
       label: t("Common:Download"),
       icon: DownloadReactSvgUrl,
       onClick: () => onClickDownload?.(targetFile, t),
-      disabled: !targetFile.security.Download,
+      disabled: !targetFile?.security?.Download,
     },
     {
       key: "move-to",
       label: t("Common:MoveTo"),
       icon: MoveReactSvgUrl,
       onClick: onMoveAction,
-      disabled: !targetFile.security.Move || isPublicFile,
+      disabled: !targetFile?.security?.Move || isPublicFile,
     },
     {
       id: "option_copy-to",
@@ -191,7 +191,7 @@ export const getMobileMediaContextModel = (
       label: t("Common:Copy"),
       icon: CopyReactSvgUrl,
       onClick: onCopyAction,
-      disabled: !targetFile.security.Copy || isPublicFile,
+      disabled: !targetFile?.security?.Copy || isPublicFile,
     },
     {
       id: "option_create-copy",
@@ -199,27 +199,27 @@ export const getMobileMediaContextModel = (
       label: t("Common:Duplicate"),
       icon: DuplicateReactSvgUrl,
       onClick: () => onDuplicate?.(targetFile, t),
-      disabled: !targetFile.security.Duplicate || isPublicFile,
+      disabled: !targetFile?.security?.Duplicate || isPublicFile,
     },
     {
       key: "rename",
       label: t("Common:Rename"),
       icon: RenameReactSvgUrl,
       onClick: () => onClickRename?.(targetFile),
-      disabled: !targetFile.security.Rename || isPublicFile,
+      disabled: !targetFile?.security?.Rename || isPublicFile,
     },
 
     {
       key: "separator0",
       isSeparator: true,
-      disabled: !targetFile.security.Delete || isPublicFile,
+      disabled: !targetFile?.security?.Delete || isPublicFile,
     },
     {
       key: "delete",
       label: t("Common:Delete"),
       icon: TrashReactSvgUrl,
       onClick: () => onClickDelete?.(targetFile, t),
-      disabled: !targetFile.security.Delete || isPublicFile,
+      disabled: !targetFile?.security?.Delete || isPublicFile,
     },
   ];
 
@@ -244,7 +244,7 @@ export const getDesktopMediaContextModel = (
       label: t("Common:Download"),
       icon: DownloadReactSvgUrl,
       onClick: () => onClickDownload?.(targetFile, t),
-      disabled: !targetFile.security.Download,
+      disabled: !targetFile?.security?.Download,
     },
     {
       key: "rename",
@@ -258,7 +258,7 @@ export const getDesktopMediaContextModel = (
       label: t("Common:Delete"),
       icon: TrashReactSvgUrl,
       onClick: () => onClickDelete?.(targetFile, t),
-      disabled: archiveRoom || isPublicFile || !targetFile.security.Delete,
+      disabled: archiveRoom || isPublicFile || !targetFile?.security?.Delete,
     },
   ];
 
@@ -322,7 +322,7 @@ export const getCustomToolbar = (
           <ViewerSeparator />
         </div>
       ),
-      disabled: !targetFile.security.Download,
+      disabled: !targetFile?.security?.Download,
     },
     {
       key: "download",
@@ -333,7 +333,7 @@ export const getCustomToolbar = (
         </div>
       ),
       onClick: onDownloadClick,
-      disabled: !targetFile.security.Download,
+      disabled: !targetFile?.security?.Download,
     },
     {
       key: "context-separator",
@@ -360,7 +360,7 @@ export const getCustomToolbar = (
         </div>
       ),
       onClick: onDeleteClick,
-      disabled: !targetFile.security.Delete,
+      disabled: !targetFile?.security?.Delete,
     },
   ];
 };

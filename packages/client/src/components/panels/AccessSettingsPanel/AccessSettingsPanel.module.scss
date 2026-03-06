@@ -120,6 +120,10 @@
     align-items: center;
     gap: 16px;
   }
+
+  &.accessHeader {
+    margin: 21px 0 15px;
+  }
 }
 
 .styledLink {
@@ -371,6 +375,12 @@
 
 .accessLabel {
   color: var(--text-disable-color);
+}
+
+.accessLabelContainer {
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .row {

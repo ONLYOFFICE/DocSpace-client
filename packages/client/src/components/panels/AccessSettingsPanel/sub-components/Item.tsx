@@ -24,9 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { memo, useCallback, useMemo } from "react";
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
-import cloneDeep from "lodash/cloneDeep";
 import { ReactSVG } from "react-svg";
 import { TTranslation } from "@docspace/shared/types";
 
@@ -53,98 +53,126 @@ type ItemProps = {
   currentUserId?: string;
 };
 
-const Item = ({
-  t,
-  item,
-  setInviteItems,
-  inviteItems,
-  isDisabled,
-  index,
-  currentUserId,
-}: ItemProps) => {
-  const { avatar, displayName, email, id, isGroup, name: groupName } = item;
+const Item = memo(
+  ({
+    t,
+    item,
+    setInviteItems,
+    inviteItems,
+    isDisabled,
+    index,
+    currentUserId,
+  }: ItemProps) => {
+    const { avatar, displayName, email, id, isGroup, name: groupName } = item;
 
-  const name = isGroup
-    ? groupName
-    : avatar
-      ? displayName !== ""
-        ? displayName
-        : email
-      : email;
-  const source = avatar || (isGroup ? "" : AtReactSvgUrl);
-
-  const removeItem = () => {
-    const itemIndex = inviteItems.findIndex(
-      (inviteItem) => inviteItem.id === id,
+    const name = useMemo(
+      () =>
+        isGroup
+          ? groupName
+          : avatar
+            ? displayName !== ""
+              ? displayName
+              : email
+            : email,
+      [isGroup, groupName, avatar, displayName, email],
     );
 
-    let newItems = cloneDeep(inviteItems);
+    const source = useMemo(
+      () => avatar || (isGroup ? "" : AtReactSvgUrl),
+      [avatar, isGroup],
+    );
 
-    if (newItems[itemIndex].templateAccess) {
-      // TODO:
-      newItems[itemIndex].templateAccess = ShareAccessRights.None; // TODO:
-    } else {
-      newItems = newItems.filter((inviteItem) => inviteItem.id !== id);
-    }
+    const removeItem = useCallback(() => {
+      const itemIndex = inviteItems.findIndex(
+        (inviteItem) => inviteItem.id === id,
+      );
 
-    setInviteItems(newItems);
-  };
+      if (itemIndex === -1) return;
 
-  const canDelete = !item.templateIsOwner && !isDisabled; // TODO:
-  const accessLabel = getUserTypeName(
-    !!item.isOwner,
-    !!item.isAdmin,
-    !!item.isRoomAdmin,
-    !!item.isCollaborator,
-    t,
-  );
+      const targetItem = inviteItems[itemIndex];
 
-  return (
-    <>
-      <Avatar
-        size={AvatarSize.min}
-        role={AvatarRole.none}
-        source={source}
-        isGroup={isGroup}
-        userName={groupName}
-        className="invite-input-avatar"
-        data-testid={`access_settings_avatar_${index ?? id}`}
-      />
-      <div className={styles.inviteUserBody}>
-        <div className={styles.inviteInputItem}>
-          <Text
-            fontSize="14px"
-            fontWeight="600"
-            truncate
-            className="invite-input-text"
-          >
-            {Encoder.htmlDecode(name ?? "")}
-          </Text>
-          <Text
-            fontSize="14px"
-            fontWeight="600"
-            truncate
-            className={styles.inviteInputTextMe}
-          >
-            {currentUserId === item.id ? `(${t("Common:MeLabel")})` : null}
-          </Text>
-        </div>
-        <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
-          <Text fontSize="12px" fontWeight={400} className={styles.accessLabel}>
-            {accessLabel} | {item.email}
-          </Text>
-        </div>
-      </div>
-      {canDelete ? (
-        <ReactSVG
-          className={styles.removeIcon}
-          src={RemoveReactSvgUrl}
-          onClick={removeItem}
-          data-testid={`access_settings_remove_button_${index ?? id}`}
+      if (targetItem.templateAccess) {
+        // TODO:
+        const newItems = inviteItems.map((inviteItem, i) =>
+          i === itemIndex
+            ? { ...inviteItem, templateAccess: ShareAccessRights.None }
+            : inviteItem,
+        );
+        setInviteItems(newItems);
+      } else {
+        setInviteItems(
+          inviteItems.filter((inviteItem) => inviteItem.id !== id),
+        );
+      }
+    }, [inviteItems, id, setInviteItems]);
+
+    const canDelete = !item.templateIsOwner && !isDisabled; // TODO:
+
+    const accessLabel = useMemo(
+      () =>
+        getUserTypeName(
+          !!item.isOwner,
+          !!item.isAdmin,
+          !!item.isRoomAdmin,
+          !!item.isCollaborator,
+          t,
+        ),
+      [item.isOwner, item.isAdmin, item.isRoomAdmin, item.isCollaborator, t],
+    );
+
+    return (
+      <>
+        <Avatar
+          size={AvatarSize.min}
+          role={AvatarRole.none}
+          source={source}
+          isGroup={isGroup}
+          userName={groupName}
+          className="invite-input-avatar"
+          data-testid={`access_settings_avatar_${index ?? id}`}
         />
-      ) : null}
-    </>
-  );
-};
+        <div className={styles.inviteUserBody}>
+          <div className={styles.inviteInputItem}>
+            <Text
+              fontSize="14px"
+              fontWeight="600"
+              truncate
+              className="invite-input-text"
+            >
+              {Encoder.htmlDecode(name ?? "")}
+            </Text>
+            <Text
+              fontSize="14px"
+              fontWeight="600"
+              truncate
+              className={styles.inviteInputTextMe}
+            >
+              {currentUserId === item.id ? `(${t("Common:MeLabel")})` : null}
+            </Text>
+          </div>
+          <div className={styles.accessLabelContainer}>
+            <Text
+              fontSize="12px"
+              fontWeight={400}
+              className={styles.accessLabel}
+            >
+              {accessLabel} | {item.email}
+            </Text>
+          </div>
+        </div>
+        {canDelete ? (
+          <ReactSVG
+            className={styles.removeIcon}
+            src={RemoveReactSvgUrl}
+            onClick={removeItem}
+            data-testid={`access_settings_remove_button_${index ?? id}`}
+          />
+        ) : null}
+      </>
+    );
+  },
+);
+
+Item.displayName = "Item";
 
 export default Item;

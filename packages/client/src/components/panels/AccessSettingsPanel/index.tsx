@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
@@ -75,14 +75,12 @@ const AccessSettingsPanel = ({
   const [addContactsPanelVisible, setAddContactsPanelVisible] = useState(false);
   const [accessItems, setAccessItems] = useState<TSelectorItem[]>([]);
   const [scrollAllPanelContent, setScrollAllPanelContent] = useState(false);
-  const [isMobileView, setIsMobileView] = useState(isMobile());
   const [isAvailable, setIsAvailable] = useState(false);
   const [prevIsAvailable, setPrevIsAvailable] = useState<boolean>(false);
 
-  const onCheckHeight = () => {
+  const onCheckHeight = useCallback(() => {
     setScrollAllPanelContent(!isDesktop());
-    setIsMobileView(isMobile());
-  };
+  }, []);
 
   useEffect(() => {
     onCheckHeight();
@@ -90,26 +88,23 @@ const AccessSettingsPanel = ({
     return () => {
       window.removeEventListener("resize", onCheckHeight);
     };
-  }, [isMobileView]);
+  }, [onCheckHeight]);
 
-  const onChangeAvailable = () => {
-    setIsAvailable(!isAvailable);
-  };
+  const onChangeAvailable = useCallback(() => {
+    setIsAvailable((prev) => !prev);
+  }, []);
 
-  const onCloseAccessSelector = () => {
+  const onCloseAccessSelector = useCallback(() => {
     setAddContactsPanelVisible(false);
-  };
+  }, []);
 
-  const onSubmitItems = (users: TSelectorItem[]) => {
-    const items = [...accessItems, ...users];
-
-    setAccessItems(items);
-    onCloseAccessSelector();
-  };
-
-  const setAccessItemsAction = (items: TSelectorItem[]) => {
-    setAccessItems(items);
-  };
+  const onSubmitItems = useCallback(
+    (users: TSelectorItem[]) => {
+      setAccessItems((prev) => [...prev, ...users]);
+      onCloseAccessSelector();
+    },
+    [onCloseAccessSelector],
+  );
 
   const handleSave = useCallback(async () => {
     setIsLoading(true);
@@ -141,19 +136,23 @@ const AccessSettingsPanel = ({
     } finally {
       setIsLoading(false);
     }
-  }, [handleClose, isAvailable, accessItems]);
+  }, [handleClose, isAvailable, accessItems, item?.id, prevIsAvailable]);
 
   const checkIfUserInvited: NonNullable<
     PeopleSelectorProps["checkIfUserInvited"]
-  > = (user) => {
-    return (
-      accessItems.findIndex(
-        (x) => x.id === user.id && x.templateAccess !== ShareAccessRights.None, // TODO:
-      ) > -1
-    );
-  };
+  > = useCallback(
+    (user) => {
+      return (
+        accessItems.findIndex(
+          (x) =>
+            x.id === user.id && x.templateAccess !== ShareAccessRights.None, // TODO:
+        ) > -1
+      );
+    },
+    [accessItems],
+  );
 
-  const getAccessMembers = async () => {
+  const getAccessMembers = useCallback(async () => {
     if (isLoading) return;
 
     setModalIsLoading(true);
@@ -172,7 +171,6 @@ const AccessSettingsPanel = ({
               };
             },
           );
-          // console.log("setAccessItems", items);
           setAccessItems(convertedItems as unknown as TSelectorItem[]);
         }
 
@@ -185,17 +183,37 @@ const AccessSettingsPanel = ({
       .finally(() => {
         setModalIsLoading(false);
       });
-  };
+  }, [item?.id, isLoading]);
 
   useEffect(() => {
     getAccessMembers();
-  }, []);
+  }, [getAccessMembers]);
 
   const itemTitle = item?.title || "";
   const fileExst = item && "fileExst" in item ? item?.fileExst : "";
-  const icon = fileExst ? getFileIcon?.(fileExst) : undefined;
+  const icon = useMemo(
+    () => (fileExst ? getFileIcon?.(fileExst) : undefined),
+    [fileExst, getFileIcon],
+  );
 
-  const hasInvitedUsers = !!accessItems.length;
+  const hasInvitedUsers = accessItems.length > 0;
+
+  const disableInvitedUsers = useMemo(
+    () => accessItems.map((accessItem) => String(accessItem.id)),
+    [accessItems],
+  );
+
+  const headerProps = useMemo(
+    () => ({
+      headerLabel: t("Common:Contacts"),
+      withoutBackButton: false as const,
+      withoutBorder: true,
+      isCloseable: true,
+      onBackClick: onCloseAccessSelector,
+      onCloseClick: onCloseAccessSelector,
+    }),
+    [t, onCloseAccessSelector],
+  );
 
   return (
     <ModalDialog
@@ -221,17 +239,10 @@ const AccessSettingsPanel = ({
               disableDisabledUsers
               withGroups
               roomId={roomId}
-              disableInvitedUsers={accessItems.map((item) => String(item.id))}
+              disableInvitedUsers={disableInvitedUsers}
               checkIfUserInvited={checkIfUserInvited}
               withHeader
-              headerProps={{
-                headerLabel: t("Common:Contacts"),
-                withoutBackButton: false,
-                withoutBorder: true,
-                isCloseable: true,
-                onBackClick: onCloseAccessSelector,
-                onCloseClick: onCloseAccessSelector,
-              }}
+              headerProps={headerProps}
             />
           </>
         ) : null}
@@ -269,17 +280,20 @@ const AccessSettingsPanel = ({
         >
           <InviteInput
             inviteItems={accessItems}
-            setInviteItems={setAccessItemsAction}
+            setInviteItems={setAccessItems}
             setAddUsersPanelVisible={setAddContactsPanelVisible}
             isDisabled={isAvailable}
             roomId={roomId}
           />
 
           <Heading
-            className={classNames(styles.subHeader, "invite-input-text")}
-            style={{ margin: "21px 0px 15px" }}
+            className={classNames(
+              styles.subHeader,
+              styles.accessHeader,
+              "invite-input-text",
+            )}
           >
-            {item.isFolder
+            {item?.isFolder
               ? t("Files:AccessToFolder")
               : t("Files:AccessToFile")}
           </Heading>
@@ -287,7 +301,7 @@ const AccessSettingsPanel = ({
             <ItemsList
               t={t}
               inviteItems={accessItems}
-              setInviteItems={setAccessItemsAction}
+              setInviteItems={setAccessItems}
               scrollAllPanelContent={scrollAllPanelContent}
               isDisabled={isAvailable}
               currentUserId={currentUser?.id}

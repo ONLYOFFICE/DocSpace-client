@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect, useRef, memo, useCallback } from "react";
+import { useState, useEffect, useRef, memo, useCallback, useMemo } from "react";
 import { FixedSizeList as List } from "react-window";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import useResizeObserver from "use-resize-observer";
@@ -115,8 +115,10 @@ const ItemsList = ({
   });
   const { interfaceDirection } = useTheme();
 
-  const listItems = [...inviteItems].filter(
-    (l) => l.templateAccess !== ShareAccessRights.None, // TODO:
+  const listItems = useMemo(
+    () =>
+      inviteItems.filter((l) => l.templateAccess !== ShareAccessRights.None),
+    [inviteItems],
   );
 
   const onBodyResize = useCallback(() => {
@@ -151,6 +153,18 @@ const ItemsList = ({
 
   const overflowStyle = scrollAllPanelContent ? "hidden" : "unset";
 
+  const itemData = useMemo(
+    () => ({
+      t,
+      inviteItems,
+      setInviteItems,
+      isDisabled,
+      listItems,
+      currentUserId,
+    }),
+    [t, inviteItems, setInviteItems, isDisabled, listItems, currentUserId],
+  );
+
   return (
     <div
       className={classNames(styles.scrollList, {
@@ -168,14 +182,7 @@ const ItemsList = ({
         width="auto"
         itemCount={listItems.length}
         itemSize={USER_ITEM_HEIGHT}
-        itemData={{
-          t,
-          inviteItems,
-          setInviteItems,
-          isDisabled,
-          listItems,
-          currentUserId,
-        }}
+        itemData={itemData}
         outerElementType={!scrollAllPanelContent ? Scrollbar : undefined}
         data-testid="access_settings_list"
       >

@@ -55,13 +55,13 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/ui-kit/components/modal-dialog";
-import FilterIcon from "@docspace/ui-kit/components/filter/sub-components/FilterIcon";
+import { FilterIcon } from "@docspace/ui-kit/components/filter";
 import { AddButton } from "@docspace/ui-kit/components/add-button";
 import { SelectedItemPure } from "@docspace/ui-kit/components/selected-item";
 import { TSelectorItem } from "@docspace/ui-kit/components/selector";
 import { TUser } from "@docspace/shared/api/people/types";
 import { PeopleSelector } from "@docspace/ui-kit/selectors/People";
-import type { PeopleFilter } from "@docspace/ui-kit/selectors/People/PeopleSelector.types";
+import type { PeopleFilter } from "@docspace/ui-kit/selectors/People";
 import Filter from "@docspace/shared/api/people/filter";
 
 import FilterPanel from "./Wallet/sub-components/FilterPanel";

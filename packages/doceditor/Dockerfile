@@ -27,7 +27,8 @@ COPY public/ ./public/
 COPY libs/ui-kit/ ./libs/ui-kit/
 
 
-# ENV NODE_OPTIONS="--max-old-space-size=8192"
+# ENV NODE_OPTIONS="--max-old-space-size=8192  --conditions=source"
+ENV NODE_OPTIONS="--conditions=source"
 
 # Install dependencies with recursive installation
 RUN pnpm install --frozen-lockfile
@@ -47,4 +48,5 @@ RUN pnpm --filter @docspace/doceditor run build:translations
 WORKDIR /app/packages/doceditor
 
 # Run test:build
-RUN pnpm --filter @docspace/doceditor run test:build
+RUN NODE_OPTIONS="--conditions=source" \
+    pnpm --filter @docspace/doceditor run test:build

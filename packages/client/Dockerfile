@@ -32,7 +32,7 @@ RUN pnpm config set store-dir /root/.local/share/pnpm/store
 # Copy package files first for better layer caching
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
 
-ENV NODE_OPTIONS="--max-old-space-size=8192"
+ENV NODE_OPTIONS="--max-old-space-size=8192 --conditions=source"
 
 # Copy the source code with correct directory structure
 COPY common/tests/package-lock.json ./common/tests/package-lock.json
@@ -69,5 +69,5 @@ RUN pnpm --filter @docspace/client run build:translations
 WORKDIR /app/packages/client
 
 # Run test:build
-RUN NODE_OPTIONS="--max-old-space-size=4096" \
+RUN NODE_OPTIONS="--max-old-space-size=4096 --conditions=source" \
     pnpm --filter @docspace/client run test:build

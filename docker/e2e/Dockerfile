@@ -4,7 +4,7 @@ ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV CI=true
-ENV NODE_OPTIONS="--max-old-space-size=4096"
+ENV NODE_OPTIONS="--max-old-space-size=4096 --conditions=source"
 
 # Install required dependencies and fonts in a single layer
 # Using minimal font set - only what's needed for consistent rendering
@@ -78,7 +78,7 @@ RUN pnpm --filter @docspace/client run build:translations && \
     pnpm --filter @docspace/management run build:translations
 
 # Build test bundles for all packages and clean up in single layer
-RUN NODE_OPTIONS="--max-old-space-size=4096" \
+RUN NODE_OPTIONS="--max-old-space-size=4096 --conditions=source" \
     pnpm --filter @docspace/client run test:build && \
     pnpm --filter @docspace/login run test:build && \
     pnpm --filter @docspace/doceditor run test:build && \

@@ -28,7 +28,7 @@
 import { memo, useState, useRef, useCallback } from "react";
 import isNil from "lodash/isNil";
 import { Trans } from "react-i18next";
-import { isTablet as isTabletDevice } from "react-device-detect";
+import { isMobileOnly, isTablet as isTabletDevice } from "react-device-detect";
 import equal from "fast-deep-equal";
 
 import FileActionsDownloadReactSvg from "PUBLIC_DIR/images/icons/16/download.react.svg";
@@ -91,6 +91,7 @@ export const QuickButtons = memo((props: QuickButtonsProps) => {
   const accessInfoIconRef = useRef<HTMLDivElement>(null);
 
   const handleAccessInfoIconClick = useCallback(() => {
+    if (isMobileOnly) return;
     setIsAccessInfoPopoverOpen(true);
   }, []);
 

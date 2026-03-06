@@ -2,6 +2,7 @@
   "AccessLevel": "Access level",
   "AccessSettings": "Access settings",
   "AccessToTemplate": "Access to template",
+  "AccessToFile": "Access to file",
   "AccessToFolder": "Access to folder",
   "ActionCannotUndone": "This action cannot be undone. Are you sure you want to continue?",
   "AddAdminByNameOrEmail": "Add admin by name or email",

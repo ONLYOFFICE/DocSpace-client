@@ -192,7 +192,7 @@ const AccessSettingsPanel = ({
   }, []);
 
   const itemTitle = item?.title || "";
-  const fileExst = item &&  "fileExst" in item ? item?.fileExst : "";
+  const fileExst = item && "fileExst" in item ? item?.fileExst : "";
   const icon = fileExst ? getFileIcon?.(fileExst) : undefined;
 
   const hasInvitedUsers = !!accessItems.length;
@@ -279,7 +279,9 @@ const AccessSettingsPanel = ({
             className={classNames(styles.subHeader, "invite-input-text")}
             style={{ margin: "21px 0px 15px" }}
           >
-            {t("Files:AccessToFolder")}
+            {item.isFolder
+              ? t("Files:AccessToFolder")
+              : t("Files:AccessToFile")}
           </Heading>
           {hasInvitedUsers ? (
             <ItemsList

@@ -41,6 +41,7 @@ import {
 import { Text } from "@docspace/ui-kit/components/text";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 
 import { getFakeFileSharedUsers } from "../../api/files";
 
@@ -158,24 +159,29 @@ export const AccessInfoPopover = ({
         </div>
       ) : (
         <>
-          {users.map((user) => (
-            <DropDownItem key={user.id} className={styles.userItem} noHover>
-              <Avatar
-                size={AvatarSize.min}
-                role={user.isAdmin ? AvatarRole.admin : AvatarRole.user}
-                source={user.avatar}
-                userName={user.displayName}
-              />
-              <Text
-                className={styles.userName}
-                fontSize="13px"
-                fontWeight={600}
-                truncate
-              >
-                {user.displayName}
-              </Text>
-            </DropDownItem>
-          ))}
+          <Scrollbar
+            translateContentSizesToHolder
+            style={{ maxHeight: "432px" }}
+          >
+            {users.map((user) => (
+              <DropDownItem key={user.id} className={styles.userItem} noHover>
+                <Avatar
+                  size={AvatarSize.min}
+                  role={user.isAdmin ? AvatarRole.admin : AvatarRole.user}
+                  source={user.avatar}
+                  userName={user.displayName}
+                />
+                <Text
+                  className={styles.userName}
+                  fontSize="13px"
+                  fontWeight={600}
+                  truncate
+                >
+                  {user.displayName}
+                </Text>
+              </DropDownItem>
+            ))}
+          </Scrollbar>
           <DropDownItem
             className={styles.accessSettingsItem}
             icon={SettingsIcon}

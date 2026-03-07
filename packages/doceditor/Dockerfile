@@ -28,6 +28,7 @@ COPY libs/ui-kit/ ./libs/ui-kit/
 
 
 # ENV NODE_OPTIONS="--max-old-space-size=8192  --conditions=source"
+# Flag --conditions=source enables Node.js to resolve modules using the `source` export condition from package.json.
 ENV NODE_OPTIONS="--conditions=source"
 
 # Install dependencies with recursive installation

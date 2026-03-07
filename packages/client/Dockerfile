@@ -32,6 +32,7 @@ RUN pnpm config set store-dir /root/.local/share/pnpm/store
 # Copy package files first for better layer caching
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
 
+# Flag --conditions=source enables Node.js to resolve modules using the `source` export condition from package.json.
 ENV NODE_OPTIONS="--max-old-space-size=8192 --conditions=source"
 
 # Copy the source code with correct directory structure

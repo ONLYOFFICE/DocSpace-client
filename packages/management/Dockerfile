@@ -14,6 +14,9 @@ RUN pnpm config set store-dir /root/.local/share/pnpm/store
 
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
 
+# Flag --conditions=source enables Node.js to resolve modules using the `source` export condition from package.json.
+ENV NODE_OPTIONS="--conditions=source"
+
 COPY common/ ./common/
 COPY packages/management/ ./packages/management/
 COPY packages/shared/ ./packages/shared/
@@ -32,4 +35,5 @@ RUN pnpm --filter @docspace/management run build:translations
 
 WORKDIR /app/packages/management
 
-RUN pnpm --filter @docspace/management run test:build
+RUN NODE_OPTIONS="--conditions=source" \
+pnpm --filter @docspace/management run test:build

@@ -160,12 +160,9 @@ export const CompletedForm = ({
               )}
             >
               <PDFIcon />
-              <Heading
-                className="completed-form__filename"
-                level={HeadingLevel.h5}
-              >
+              <Text className="completed-form__filename">
                 {completedForm.title}
-              </Heading>
+              </Text>
               <IconButton
                 size={16}
                 className="completed-form__download"

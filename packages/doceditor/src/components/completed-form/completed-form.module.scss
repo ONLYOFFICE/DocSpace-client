@@ -229,17 +229,19 @@
       flex-shrink: 0;
     }
   }
-
-  :global(.completed-form__filename) {
-    font-size: 14px;
-    line-height: 16px;
-
-    margin: 0px;
-
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-  }
+  
+   :global(.completed-form__filename) {
+      font-size: 14px;
+      line-height: 16px;
+      font-weight: 600;
+  
+      margin: 0px;
+  
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+  
 
   :global(.completed-form__download) {
     cursor: pointer;

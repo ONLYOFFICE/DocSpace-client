@@ -102,6 +102,7 @@ const getPaymentError = (
       t={t}
       ns="Common"
       i18nKey="InsufficientFundsWithContact"
+      values={{ email: walletCustomerEmail }}
       components={{
         1: (
           <Link

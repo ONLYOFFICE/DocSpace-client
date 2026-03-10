@@ -195,6 +195,7 @@ const GroupIconDialog = ({
         }
 
         toastr.error(message);
+        onCloseEditRoomGroupsDialog();
       } finally {
         setIsLoading(false);
       }

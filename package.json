@@ -73,7 +73,10 @@
       "file-loader>schema-utils": "^4.3.3",
       "fast-xml-parser": ">=5.3.6",
       "minimatch": ">=10.2.1",
-      "serialize-javascript": ">=7.0.3"
+      "serialize-javascript": ">=7.0.3",
+      "immutable": ">=5.1.5",
+      "@svgr/plugin-svgo>svgo": "~3.3.3",
+      "postcss-svgo>svgo": ">=4.0.1"
     }
   }
 }

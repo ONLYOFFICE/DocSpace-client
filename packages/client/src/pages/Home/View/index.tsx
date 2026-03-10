@@ -527,7 +527,8 @@ const View = ({
   ]);
 
   React.useEffect(() => {
-    if (isLoading || currentView === "chat") return;
+    if (isLoading || currentView === "chat" || currentView === "profile")
+      return;
 
     const scroll = document.getElementsByClassName("section-body");
 

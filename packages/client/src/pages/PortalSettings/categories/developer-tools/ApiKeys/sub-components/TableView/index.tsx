@@ -66,6 +66,13 @@ const TableWrapper = styled(TableContainer).attrs(injectDefaultTheme)`
         padding-inline-end: 20px;
       }
     }
+
+    &:first-child:hover {
+      .table-container_cell {
+        margin-top: 0;
+        border-top: none;
+      }
+    }
   }
 `;
 

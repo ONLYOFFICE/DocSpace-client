@@ -49,7 +49,7 @@ import {
 
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { parseQuota } from "SRC_DIR/pages/PortalSettings/utils/parseQuota";
-import { getUserByEmail } from "@docspace/shared/api/people";
+import { checkUserExists } from "@docspace/shared/api/people";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 type TUsers = {
@@ -311,33 +311,23 @@ class ImportAccountsStore {
   };
 
   changeEmail = (key: string, email: string) => {
-    getUserByEmail(email)
-      .then((response) => {
-        console.log(`getUserByEmail(email='${email}') user found:`, {
-          response,
-        });
-
+    checkUserExists(email)
+      .then((userExists) => {
         runInAction(() => {
           this.users = {
             ...this.users,
             withoutEmail: this.users.withoutEmail.map((user) =>
-              user.key === key ? { ...user, email, isDuplicate: true } : user,
+              user.key === key
+                ? { ...user, email, isDuplicate: userExists }
+                : user,
             ),
           };
         });
-
-        console.log("changeEmail", {
-          users: this.users,
-          checkedUsers: this.checkedUsers,
-        });
       })
       .catch((error) => {
-        console.log(
-          `getUserByEmail(email='${email}') ${error.response.status !== 404 ? "search user failed" : "user not found"} :`,
-          {
-            error,
-          },
-        );
+        console.log(`checkUserExists(email='${email}') search user failed:`, {
+          error,
+        });
 
         runInAction(() => {
           this.users = {

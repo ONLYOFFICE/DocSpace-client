@@ -487,7 +487,7 @@
   "InfoPanel": "Painel de informações",
   "InProgress": "Em andamento",
   "InstanceId": "Digite seu ID de instância",
-  "InsufficientFundsWithContact": "Sua carteira não tem fundos suficientes. Entre em contato com o pagador (<1>email@example.com</1>) para recarregar e tente comprar novamente.",
+  "InsufficientFundsWithContact": "Sua carteira não tem fundos suficientes. Entre em contato com o pagador (<1>{{email}}</1>) para recarregar e tente comprar novamente.",
   "InsufficientFundsWithTopUp": "Sua carteira não tem fundos suficientes. Por favor, <1>carregue sua carteira</1> e tente comprar novamente.",
   "InvalidLink": "Link inválido",
   "InvitationToPortal": "<1>{{displayName}}</1> convida você para participar do {{productName}} <1>{{spaceAddress}}</1> para colaboração segura de documentos.",

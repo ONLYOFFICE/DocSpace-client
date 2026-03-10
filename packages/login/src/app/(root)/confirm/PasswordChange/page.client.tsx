@@ -26,7 +26,13 @@
 
 "use client";
 
-import { ChangeEvent, KeyboardEvent, useContext, useState } from "react";
+import {
+  ChangeEvent,
+  KeyboardEvent,
+  useCallback,
+  useContext,
+  useState,
+} from "react";
 import { useTranslation } from "react-i18next";
 
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
@@ -78,7 +84,7 @@ const PasswordChangeForm = ({
     setIsPasswordErrorShow(true);
   };
 
-  const onSubmit = async () => {
+  const onSubmit = useCallback(async () => {
     setIsLoading(true);
 
     if (!password.trim()) {
@@ -119,7 +125,7 @@ const PasswordChangeForm = ({
       }
       setIsLoading(false);
     }
-  };
+  }, [password, passwordValid, passwordHash, uid, confirmHeader, t]);
 
   const onKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === ButtonKeys.enter) {

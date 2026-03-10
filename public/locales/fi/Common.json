@@ -487,7 +487,7 @@
   "InfoPanel": "Tietopaneeli",
   "InProgress": "Käynnissä",
   "InstanceId": "Kirjoita esiintymätunnuksesi",
-  "InsufficientFundsWithContact": "Lompakossasi ei ole riittävästi varoja. Ole hyvä ja ota yhteyttä maksajaan (<1>email@example.com</1>) tilin lisäämiseksi ja yritä ostosta uudelleen.",
+  "InsufficientFundsWithContact": "Lompakossasi ei ole riittävästi varoja. Ole hyvä ja ota yhteyttä maksajaan (<1>{{email}}</1>) tilin lisäämiseksi ja yritä ostosta uudelleen.",
   "InsufficientFundsWithTopUp": "Lompakossasi ei ole tarpeeksi varoja. Ole hyvä ja <1>lataa lompakkoosi lisää rahaa</1> ja yritä ostaa uudelleen.",
   "InvalidLink": "Virheellinen linkki",
   "InvitationToPortal": "<1>{{displayName}}</1> kutsuu sinut liittymään {{productName}} <1>{{spaceAddress}}</1> turvallista asiakirjayhteistyötä varten.",

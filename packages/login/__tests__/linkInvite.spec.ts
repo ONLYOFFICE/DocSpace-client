@@ -35,7 +35,7 @@ import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 import { test } from "./fixtures/base";
-import { selfGetByEmailHandler } from "@docspace/shared/__mocks__/handlers/people/self";
+import { userExistsHandler } from "@docspace/shared/__mocks__/handlers/people/self";
 import { loginHandler } from "@docspace/shared/__mocks__/handlers/authentication/login";
 
 const URL = "/login/confirm/LinkInvite";
@@ -100,7 +100,7 @@ test("link invite registration render standalone", async ({
   port,
   clientRequestInterceptor,
 }) => {
-  clientRequestInterceptor.use(selfGetByEmailHandler(port, 404));
+  clientRequestInterceptor.use(userExistsHandler(port, false));
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("email-input-invite").fill("mail@mail.com");
@@ -125,7 +125,7 @@ test("link invite registration render no standalone", async ({
   serverRequestInterceptor,
   baseUrl,
 }) => {
-  clientRequestInterceptor.use(selfGetByEmailHandler(port, 404));
+  clientRequestInterceptor.use(userExistsHandler(port, false));
   serverRequestInterceptor.use(
     settingsHandler(port, TypeSettings.NoStandalone),
   );
@@ -153,7 +153,7 @@ test("link invite email error", async ({
   port,
   clientRequestInterceptor,
 }) => {
-  clientRequestInterceptor.use(selfGetByEmailHandler(port));
+  clientRequestInterceptor.use(userExistsHandler(port, true));
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("email-input-invite").fill("mail.com");
@@ -202,7 +202,7 @@ test("link invite login error", async ({
   clientRequestInterceptor,
 }) => {
   clientRequestInterceptor.use(
-    selfGetByEmailHandler(port),
+    userExistsHandler(port, true),
     loginHandler(port, 404),
   );
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
@@ -231,7 +231,7 @@ test("link invite registration success standalone", async ({
   port,
   clientRequestInterceptor,
 }) => {
-  clientRequestInterceptor.use(selfGetByEmailHandler(port, 404));
+  clientRequestInterceptor.use(userExistsHandler(port, false));
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("email-input-invite").fill("mail@mail.com");
@@ -267,7 +267,7 @@ test("link invite registration success no standalone", async ({
   serverRequestInterceptor,
   baseUrl,
 }) => {
-  clientRequestInterceptor.use(selfGetByEmailHandler(port, 404));
+  clientRequestInterceptor.use(userExistsHandler(port, false));
   serverRequestInterceptor.use(
     settingsHandler(port, TypeSettings.NoStandalone),
   );
@@ -307,7 +307,7 @@ test("link invite registration error standalone", async ({
   port,
   clientRequestInterceptor,
 }) => {
-  clientRequestInterceptor.use(selfGetByEmailHandler(port, 404));
+  clientRequestInterceptor.use(userExistsHandler(port, false));
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("email-input-invite").fill("mail@mail.com");
@@ -331,7 +331,7 @@ test("link invite registration error no standalone", async ({
   serverRequestInterceptor,
   baseUrl,
 }) => {
-  clientRequestInterceptor.use(selfGetByEmailHandler(port, 404));
+  clientRequestInterceptor.use(userExistsHandler(port, false));
   serverRequestInterceptor.use(
     settingsHandler(port, TypeSettings.NoStandalone),
   );

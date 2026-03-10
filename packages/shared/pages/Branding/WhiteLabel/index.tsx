@@ -398,6 +398,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
           <div className={styles.logosWrapper}>
             <Logo
               name={logoUrls[4].name}
+              title={t("LightTheme")}
               src={logoUrls[4].path.light}
               imageClass={classNames(
                 styles.borderImg,
@@ -413,6 +414,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
             />
             <Logo
               name={logoUrls[3].name}
+              title={t("DarkTheme")}
               src={logoUrls[3].path.light}
               imageClass={classNames(
                 styles.borderImg,

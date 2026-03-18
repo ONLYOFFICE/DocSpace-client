@@ -506,6 +506,14 @@ export const enum ExportRoomIndexTaskStatus {
   Failed = 4,
 }
 
+export const enum FileOperationStatus {
+  Created = 0,
+  Running = 1,
+  Completed = 2,
+  Canceled = 3,
+  Failed = 4,
+}
+
 export enum FileExtensions {
   PDF = "pdf",
   DOC = "doc",

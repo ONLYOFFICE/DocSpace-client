@@ -602,6 +602,13 @@ export async function emptyTrash() {
   return res;
 }
 
+export async function terminateOperation(id: string) {
+  await request({
+    method: "put",
+    url: `/files/fileops/terminate/${id}`,
+  });
+}
+
 export async function enableCustomFilter(fileId: number, enabled: boolean) {
   const data = { enabled };
   const res = (await request({

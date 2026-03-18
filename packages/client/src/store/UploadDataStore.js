@@ -56,6 +56,7 @@ import {
 } from "SRC_DIR/helpers/utils";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
+import { FileOperationStatus } from "@docspace/shared/enums";
 import { Link } from "@docspace/ui-kit/components/link";
 
 const removeDuplicate = (items) => {
@@ -2193,30 +2194,93 @@ class UploadDataStore {
       return;
     }
 
+    setSecondaryProgressBarData({
+      operation: pbData.operation,
+      alert: false,
+      operationId: pbData.operationId,
+      serverOperationId: data.id,
+    });
+
     // let progress = data.progress;
 
     let operationItem = data;
     let finished = data.finished;
 
     while (!finished) {
-      const item = await getOperationProgress(
-        data.id,
-        getUnexpectedErrorText(),
-        true,
+      const currentOperation =
+        this.secondaryProgressDataStore.secondaryOperationsArray.find(
+          (op) => op.operation === pbData.operation,
+        );
+      const currentItem = currentOperation?.items.find(
+        (item) => item.operationId === pbData.operationId,
       );
 
-      operationItem = item;
+      if (currentItem?.completed) {
+        return operationItem;
+      }
 
-      // progress = item ? item.progress : 100;
-      finished = item ? item.finished : true;
+      try {
+        const item = await getOperationProgress(
+          data.id,
+          getUnexpectedErrorText(),
+          true,
+        );
 
-      setSecondaryProgressBarData({
-        operation: pbData.operation,
-        //  percent: progress,
-        alert: false,
-        currentFile: item,
-        operationId: pbData.operationId,
-      });
+        if (item?.status === FileOperationStatus.Canceled) {
+          setSecondaryProgressBarData({
+            operation: pbData.operation,
+            operationId: pbData.operationId,
+            completed: true,
+            alert: false,
+          });
+          return { ...item, finished: true, error: "" };
+        }
+
+        operationItem = item;
+
+        // progress = item ? item.progress : 100;
+        finished = item ? item.finished : true;
+
+        setSecondaryProgressBarData({
+          operation: pbData.operation,
+          //  percent: progress,
+          alert: false,
+          currentFile: item,
+          operationId: pbData.operationId,
+          serverOperationId: data.id,
+        });
+      } catch (error) {
+        const updatedOperation =
+          this.secondaryProgressDataStore.secondaryOperationsArray.find(
+            (op) => op.operation === pbData.operation,
+          );
+        const updatedItem = updatedOperation?.items.find(
+          (item) => item.operationId === pbData.operationId,
+        );
+
+        const isOperationCancelled =
+          updatedItem?.completed && updatedItem?.skipToast;
+
+        if (isOperationCancelled) {
+          return operationItem;
+        }
+
+        const hasStatusCanceled =
+          operationItem?.status === FileOperationStatus.Canceled ||
+          error?.status === FileOperationStatus.Canceled;
+
+        if (hasStatusCanceled) {
+          return operationItem;
+        }
+
+        const isOperationNotFound = !updatedOperation || !updatedItem;
+
+        if (isOperationNotFound) {
+          return operationItem;
+        }
+
+        throw error;
+      }
     }
 
     return operationItem;

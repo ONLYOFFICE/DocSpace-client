@@ -141,6 +141,8 @@ const PureHome = (props) => {
     clearSecondaryProgressData,
     primaryOperationsArray,
     cancelUpload,
+    cancelSecondaryOperation,
+    cancelSecondaryOperationById,
     secondaryOperationsAlert,
     clearUploadData,
     clearUploadedFiles,
@@ -294,6 +296,14 @@ const PureHome = (props) => {
       return;
     }
 
+    if (
+      secondaryActiveOperations?.length > 0 &&
+      !primaryOperationsArray?.length
+    ) {
+      cancelSecondaryOperation();
+      return;
+    }
+
     if (hideConfirmCancelOperation) {
       cancelUpload();
       return;
@@ -303,6 +313,9 @@ const PureHome = (props) => {
   }, [
     hideConfirmCancelOperation,
     cancelUpload,
+    cancelSecondaryOperation,
+    secondaryActiveOperations,
+    primaryOperationsArray,
     setOperationCancelVisible,
     handlePluginCancelOperation,
     pluginOperations,
@@ -416,6 +429,7 @@ const PureHome = (props) => {
   sectionProps.secondaryOperationsCompleted = secondaryOperationsCompleted;
   sectionProps.dropTargetPreview = dropTargetPreview;
   sectionProps.clearSecondaryProgressData = onClearSecondaryProgressData;
+  sectionProps.cancelSecondaryOperationById = cancelSecondaryOperationById;
   sectionProps.primaryOperationsArray = primaryOperationsArray;
   sectionProps.clearPrimaryProgressData = clearPrimaryProgressData;
   sectionProps.clearDropPreviewLocation = clearDropPreviewLocation;
@@ -649,6 +663,8 @@ export const Component = inject(
       clearSecondaryProgressData,
       secondaryActiveOperations,
       secondaryOperationsAlert,
+      cancelSecondaryOperation,
+      cancelSecondaryOperationById,
     } = secondaryProgressDataStore;
 
     const { startUpload } = uploadDataStore;
@@ -816,6 +832,8 @@ export const Component = inject(
       primaryOperationsArray,
       primaryOperationsCompleted,
       cancelUpload,
+      cancelSecondaryOperation,
+      cancelSecondaryOperationById,
       clearUploadData,
       clearUploadedFiles,
       mainButtonVisible,

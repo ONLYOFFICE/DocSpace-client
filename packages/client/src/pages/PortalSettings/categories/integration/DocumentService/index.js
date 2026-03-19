@@ -71,6 +71,7 @@ const DocumentService = ({
   const [internalUrlIsValid, setInternalUrlIsValid] = useState(true);
 
   const [isDefaultSettings, setIsDefaultSettings] = useState(false);
+  const [secretKeyVersion, setSecretKeyVersion] = useState(0);
   const [isShowAdvancedSettings, setIsShowAdvancedSettings] = useState(false);
 
   const [initPortalUrl, setInitPortalUrl] = useState("");
@@ -157,13 +158,14 @@ const DocumentService = ({
         setIsDefaultSettings(result?.isDefault || false);
         setPortalUrl(result?.docServicePortalUrl);
         setAuthHeader(result?.docServiceSignatureHeader);
-        setSecretKey(result?.docServiceSignatureSecret);
+        // API omits secret key from response for security; preserve current value
+        setSecretKey(result?.docServiceSignatureSecret ?? secretKey);
         setInternalUrl(result?.docServiceUrlInternal);
         setDocServiceUrl(result?.docServiceUrl);
         setIsDisabledCertificat(!result?.docServiceSslVerification || false);
 
         setInitPortalUrl(result?.docServicePortalUrl);
-        setInitSecretKey(result?.docServiceSignatureSecret);
+        setInitSecretKey(result?.docServiceSignatureSecret ?? secretKey); // keep in sync with secretKey above
         setInitAuthHeader(result?.docServiceSignatureHeader);
         setInitDocServiceUrl(result?.docServiceUrl);
         setInitInternalUrl(result?.docServiceUrlInternal);
@@ -203,6 +205,7 @@ const DocumentService = ({
         );
 
         setIsShowAdvancedSettings(false);
+        setSecretKeyVersion((v) => v + 1);
       })
       .catch((e) => toastr.error(e))
       .finally(() => setResetIsLoading(false));
@@ -297,6 +300,7 @@ const DocumentService = ({
               </Text>
             </div>
             <PasswordInput
+              key={secretKeyVersion}
               id="secretKey"
               type="password"
               simpleView

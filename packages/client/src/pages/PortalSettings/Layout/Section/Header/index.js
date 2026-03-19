@@ -221,10 +221,18 @@ const SectionHeaderContent = (props) => {
 
     const arrayOfParams = getArrayOfParams();
 
-    const isAiServicesPage = arrayOfParams[0] === "ai-services";
+    const serviceSubPageHeaders = {
+      "ai-services": "Services:OrganizationAI",
+      "backup": "Common:Backup",
+      "disk-storage": "Payments:AdditionalDiskStorage",
+    };
 
-    if (isAiServicesPage) {
-      const header = "Services:OrganizationAI";
+    let number = 1;
+    if ( window.location.href.indexOf("disk-storage")) number=2
+    const serviceSubPageHeader = serviceSubPageHeaders[arrayOfParams[number]];
+
+    if (serviceSubPageHeader) {
+      const header = serviceSubPageHeader;
       const isCategoryOrHeader = false;
 
       header !== state.header && setState((val) => ({ ...val, header }));
@@ -276,6 +284,16 @@ const SectionHeaderContent = (props) => {
   ]);
 
   const onBackToParent = () => {
+    const isServicesSubPage =
+      location.pathname.includes("/services/disk-storage") ||
+      location.pathname.includes("/services/backup") ||
+      location.pathname.includes("/services/ai-services");
+
+    if (isServicesSubPage && location.key === "default") {
+      navigate("/portal-settings/payments/services");
+      return;
+    }
+
     navigate(-1);
   };
 
@@ -338,6 +356,10 @@ const SectionHeaderContent = (props) => {
         },
       ];
 
+  const isPaymentPage =
+    window.location.href.includes("portal-settings/payments/") &&
+    !window.location.href.includes("portal-settings/payments/services/");
+
   const translatedHeader =
     header === IMPORT_HEADER_CONST
       ? workspace === "GoogleWorkspace"
@@ -349,7 +371,9 @@ const SectionHeaderContent = (props) => {
                 organizationName: logoText,
               })
             : t("DataImport")
-      : t(header, {
+      : !standalone && isPaymentPage  
+        ? t("Billing") 
+        : t(header, {
           organizationName: logoText,
           license: t("Common:EnterpriseLicense"),
           productName: t("Common:ProductName"),
@@ -378,7 +402,9 @@ const SectionHeaderContent = (props) => {
           arrayOfParams[0] &&
           (isMobile() ||
             window.location.href.indexOf("/javascript-sdk/") > -1 ||
-            window.location.href.indexOf("/ai-services") > -1) ? (
+            window.location.href.indexOf("/ai-services") > -1 ||
+            window.location.href.indexOf("/services/backup") > -1 ||
+            window.location.href.indexOf("disk-storage") > -1) ? (
             <IconButton
               iconName={ArrowPathReactSvgUrl}
               size="17"
@@ -511,6 +537,7 @@ export default inject(
       "OAuth",
       "Ldap",
       "Services",
+      "Payments",
     ])(observer(SectionHeaderContent)),
   ),
 );

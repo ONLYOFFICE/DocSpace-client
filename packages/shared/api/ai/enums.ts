@@ -49,10 +49,12 @@ export enum ToolsPermission {
 export enum WebSearchType {
   None,
   Exa,
+  PortalAi,
 }
 
 export enum KnowledgeType {
   None,
   OpenAi,
   OpenRouter,
+  PortalAi,
 }

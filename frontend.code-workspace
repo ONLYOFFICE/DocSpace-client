@@ -36,35 +36,49 @@
   "settings": {
     "window.zoomLevel": 0,
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "biomejs.biome",
     "VsCodeTaskButtons.tasks": [
       {
         "label": "Server (Aspire)",
         "tasks": [
           {
-            "label": "Aspire : run CE (Community Edition)",
+            "label": "Aspire : run CE (Community Edition) - frontend-dev",
             "task": "Backend | run CE (Aspire)",
             "tooltip": "🛠️ Start the \"backend aspire CE\" task"
           },
           {
-            "label": "Aspire : run EE (Enterprise Edition)",
+            "label": "Aspire : run CE (Community Edition) - development",
+            "task": "Backend | run CE - full (Aspire)",
+            "tooltip": "🛠️ Start the \"backend aspire CE\" task"
+          },
+          {
+            "label": "Aspire : run EE (Enterprise Edition) - frontend-dev",
             "task": "Backend | run EE (Aspire)",
             "tooltip": "🛠️ Start the \"backend aspire EE\" task"
           },
           {
-            "label": "Aspire : run DE (Developer Edition)",
+            "label": "Aspire : run EE (Enterprise Edition) - development",
+            "task": "Backend | run EE - full (Aspire)",
+            "tooltip": "🛠️ Start the \"backend aspire EE\" task"
+          },
+          {
+            "label": "Aspire : run DE (Developer Edition) - frontend-dev",
             "task": "Backend | run DE (Aspire)",
             "tooltip": "🛠️ Start the \"backend aspire DE\" task"
           },
           {
-            "label": "Aspire : run DE (Developer Edition) development",
-            "task": "Backend | run DE development (Aspire)",
+            "label": "Aspire : run DE (Developer Edition) - development",
+            "task": "Backend | run DE - full (Aspire)",
             "tooltip": "🛠️ Start the \"backend aspire DE development profile (SKIP_CLIENT)\" task"
           },
           {
-            "label": "Aspire : run SAAS",
+            "label": "Aspire : run SAAS - frontend-dev",
             "task": "Backend | run SAAS (Aspire)",
             "tooltip": "🛠️ Start the \"backend aspire SAAS\" task"
+          },
+          {
+            "label": "Aspire : run SAAS - development",
+            "task": "Backend | run SAAS - full (Aspire)",
+            "tooltip": "🛠️ Start the \"backend aspire SAAS - full\" task"
           },
           {
             "label": "Aspire : clear Docker artifacts",
@@ -624,10 +638,13 @@
     "javascript.format.enable": true,
     "typescript.format.enable": true,
     "[javascript]": {
-      "editor.defaultFormatter": "biomejs.biome"
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascriptreact]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[typescript]": {
-      "editor.defaultFormatter": "biomejs.biome"
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[typescriptreact]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode"

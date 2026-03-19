@@ -41,11 +41,17 @@ import {
   setAiModelRestrictions,
   getServiceQuotaBalance,
 } from "@docspace/shared/api/portal";
+import { getBackupsCount } from "@docspace/shared/api/backup";
 import { authStore, settingsStore } from "@docspace/shared/store";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
-import { formatterCurrencyWithoutTranction } from "SRC_DIR/pages/PortalSettings/categories/payments/Wallet/utils";
+import { formatterCurrencyWithoutTranction } from "SRC_DIR/pages/PortalSettings/categories/payments/SaaS/wallet/utils";
 import { formatCurrencyValue } from "@docspace/shared/utils/common";
-import { AI_TOOLS } from "@docspace/shared/constants";
+import {
+  AI_ENUM,
+  AI_TOOLS,
+  BACKUP_SERVICE,
+  STORAGE_ENUM,
+} from "@docspace/shared/constants";
 
 type TAiToolsChatPrice = {
   prompt: number;
@@ -103,7 +109,7 @@ class ServicesStore {
 
   isInitServicesPage = false;
 
-  isInitAiPage = false;
+  isInitServicesData = false;
 
   isVisibleWalletSettings = false;
 
@@ -118,6 +124,8 @@ class ServicesStore {
   aiToolsBalance: TBalance = null;
 
   aiToolsPrices: TAiToolsPrices | null = null;
+
+  usedBackupsCount: number = 0;
 
   aiModelAvailabilityMap: Map<string, boolean> = new Map();
 
@@ -260,8 +268,8 @@ class ServicesStore {
     this.isInitServicesPage = isInitServicesPage;
   };
 
-  setIsInitAiPage = (isInitAiPage: boolean) => {
-    this.isInitAiPage = isInitAiPage;
+  setIsInitServiceData = (isInitServicesData: boolean) => {
+    this.isInitServicesData = isInitServicesData;
   };
 
   fetchAiPrices = async () => {
@@ -377,7 +385,7 @@ class ServicesStore {
 
     try {
       const res = await getServiceQuotaBalance(
-        "aitools",
+        AI_TOOLS,
         isRefresh,
         abortController.signal,
       );
@@ -385,6 +393,26 @@ class ServicesStore {
       if (!res) return;
 
       this.aiToolsBalance = res;
+    } catch (error) {
+      if (axios.isCancel(error)) return;
+      console.error(error);
+    }
+  };
+
+  fetchBackupsCount = async () => {
+    const abortController = new AbortController();
+    this.settingsStore?.addAbortControllers(abortController);
+
+    try {
+      const res = await getBackupsCount(
+        undefined,
+        undefined,
+        abortController.signal,
+      );
+
+      if (!res) return;
+
+      this.usedBackupsCount = res;
     } catch (error) {
       if (axios.isCancel(error)) return;
       console.error(error);
@@ -417,33 +445,91 @@ class ServicesStore {
     this.featureCountData = featureCountData;
   };
 
-  aiServicesinit = async (t: TTranslation) => {
+  initServiceData = async (
+    t: TTranslation,
+    serviceName: string,
+    serviceEnum?: string,
+  ) => {
     const isRefresh = window.location.href.includes("complete=true");
 
-    this.setIsInitAiPage(false);
+    this.setIsInitServiceData(false);
+
+    if (!this.paymentStore || !this.currentTariffStatusStore) return;
 
     const {
       fetchTransactionHistory,
       initWalletPayerAndBalance,
-      handleServicesQuotas,
-    } = this.paymentStore!;
+      setServiceQuota,
+      fetchCardLinked,
+    } = this.paymentStore;
+
+    const { fetchPortalTariff, walletCustomerStatusNotActive } =
+      this.currentTariffStatusStore;
 
     try {
+      let resolvedServiceName = serviceName;
+
+      if (serviceEnum === STORAGE_ENUM) {
+        resolvedServiceName =
+          (await setServiceQuota(serviceEnum)) ?? serviceName;
+      }
+
+      const serviceQuotaRequest =
+        serviceEnum !== STORAGE_ENUM
+          ? [setServiceQuota(serviceEnum ?? serviceName)]
+          : [];
+
       const requests = [
-        this.fetchAiPrices(),
-        this.fetchAiServiceBalance(),
-        this.fetchAiModelAvailabilitySettings(),
-        handleServicesQuotas(AI_TOOLS),
-        fetchTransactionHistory(null, null, true, true, "", "aitools"),
+        ...serviceQuotaRequest,
+        fetchTransactionHistory(
+          null,
+          null,
+          true,
+          true,
+          "",
+          resolvedServiceName,
+        ),
         initWalletPayerAndBalance(isRefresh),
+        fetchPortalTariff(isRefresh),
       ];
 
+      if (serviceName === AI_TOOLS) {
+        requests.push(
+          this.fetchAiPrices(),
+          this.fetchAiServiceBalance(),
+          this.fetchAiModelAvailabilitySettings(),
+        );
+      }
+
+      if (serviceName === BACKUP_SERVICE) {
+        requests.push(this.fetchBackupsCount());
+      }
+
       await Promise.all(requests);
+
+      if (this.paymentStore.isAlreadyPaid) {
+        if (this.paymentStore.isStripePortalAvailable) {
+          requests.push(this.paymentStore.setPaymentAccount());
+
+          if (this.paymentStore!.isPayer && walletCustomerStatusNotActive) {
+            requests.push(fetchCardLinked());
+          }
+
+          if (
+            this.paymentStore.isShowStorageTariffDeactivated() &&
+            this.paymentStore.isPayer
+          ) {
+            this.paymentStore.setIsShowTariffDeactivatedModal(true);
+          }
+        }
+
+        requests.push(this.paymentStore.fetchAutoPayments());
+      }
+
+      this.setIsInitServiceData(true);
     } catch (error) {
       console.error(error);
       toastr.error(t("Common:UnexpectedError"));
-    } finally {
-      this.setIsInitAiPage(true);
     }
   };
 
@@ -540,3 +626,4 @@ class ServicesStore {
 }
 
 export default ServicesStore;
+

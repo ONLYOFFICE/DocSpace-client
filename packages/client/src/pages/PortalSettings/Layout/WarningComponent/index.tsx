@@ -59,18 +59,36 @@ const Warning = ({
   isBackupServiceOn,
   isNotPaidPeriod,
 }: InjectedProps) => {
-  const { t, ready } = useTranslation(["Services", "Common"]);
+  const { t, ready } = useTranslation(["Services", "Common", "Payments"]);
   const { pathname } = useLocation();
   const [warningText, setWarningText] = React.useState<React.ReactNode>("");
 
   const onClickServiceUrl = () => {
-    const servicePageUrl = combineUrl("/portal-settings", "/services");
+    const servicePageUrl = combineUrl(
+      "/portal-settings",
+      "payments",
+      "/services",
+    );
+
+    window.DocSpace.navigate(servicePageUrl);
+  };
+
+  const onClickLearnMore = () => {
+    const servicePageUrl = combineUrl(
+      "/portal-settings",
+      "payments",
+      "/payment-method",
+    );
 
     window.DocSpace.navigate(servicePageUrl);
   };
 
   const isBackupRoute =
     typeof pathname === "string" && pathname.includes("portal-settings/backup");
+
+  const isPaymentsServiceRoute =
+    typeof pathname === "string" &&
+    pathname.includes("portal-settings/payments/services/");
 
   React.useEffect(() => {
     if (!isBackupPaid || isNotPaidPeriod) return;
@@ -178,6 +196,30 @@ const Warning = ({
     if (warningText) setWarningText("");
   }, [isBackupRoute]);
 
+  if (isPaymentsServiceRoute && !isPayer) {
+    return (
+      <WarningComponent
+        title={
+          <Trans
+            t={t}
+            i18nKey="OnlyPayerCanManageServices"
+            ns="Payments"
+            components={{
+              1: (
+                <Link
+                  key="learn-more-link"
+                  tag="a"
+                  color="accent"
+                  onClick={onClickLearnMore}
+                />
+              ),
+            }}
+          />
+        }
+      />
+    );
+  }
+
   if (!isBackupPaid || !isBackupRoute || !warningText) return null;
 
   return <WarningComponent title={warningText} />;
@@ -214,3 +256,4 @@ export default inject(
     };
   },
 )(observer(Warning));
+

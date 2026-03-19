@@ -35,9 +35,11 @@ import { isManagement } from "@docspace/shared/utils/common";
 
 import config from "../../../../../package.json";
 import PaymentsEnterprise from "./Standalone";
-import PaymentsSaaS from "./SaaS";
-import Wallet from "./Wallet";
+import PaymentsSaaS from "./SaaS/main-tariff";
+import Wallet from "./SaaS/wallet";
+import PaymentMethod from "./SaaS/payment-method";
 import usePayments from "./usePayments";
+import { Component as Services } from "./SaaS/services";
 
 import { createDefaultHookSettingsProps } from "../../utils/createDefaultHookSettingsProps";
 
@@ -47,30 +49,44 @@ const PaymentsPage = (props) => {
     standalone,
     paymentStore,
     settingsStore,
+    servicesStore,
     clearAbortControllerArr,
   } = props;
   const [currentTabId, setCurrentTabId] = useState();
   const location = useLocation();
   const navigate = useNavigate();
-  const { t } = useTranslation(["Payments"]);
+  const { t } = useTranslation(["Payments", "Settings"]);
 
   const defaultProps = createDefaultHookSettingsProps({
     paymentStore,
     settingsStore,
+    servicesStore,
   });
 
-  const { getWalletData, getPortalPaymentsData } = usePayments(
-    defaultProps.payment,
-  );
+  const {
+    getWalletData,
+    getPortalPaymentsData,
+    getServicesData,
+    getPaymentMethodData,
+  } = usePayments(defaultProps.payment);
 
   const data = [
     {
       id: "portal-payments",
-      name: t("TariffPlan"),
+      name: t("PortalTariffPlan", { productName: t("Common:ProductName") }),
       content: <PaymentsSaaS />,
       onClick: async () => {
         clearAbortControllerArr();
         await getPortalPaymentsData();
+      },
+    },
+    {
+      id: "payment-method",
+      name: t("PaymentMethod"),
+      content: <PaymentMethod />,
+      onClick: async () => {
+        clearAbortControllerArr();
+        await getPaymentMethodData();
       },
     },
     {
@@ -80,6 +96,15 @@ const PaymentsPage = (props) => {
       onClick: async () => {
         clearAbortControllerArr();
         await getWalletData();
+      },
+    },
+    {
+      id: "services",
+      name: t("Settings:Services"),
+      content: <Services />,
+      onClick: async () => {
+        clearAbortControllerArr();
+        await getServicesData();
       },
     },
   ];
@@ -113,15 +138,19 @@ const PaymentsPage = (props) => {
   );
 };
 
-export const Component = inject(({ settingsStore, paymentStore }) => {
-  const { standalone, currentDeviceType, clearAbortControllerArr } =
-    settingsStore;
+export const Component = inject(
+  ({ settingsStore, paymentStore, servicesStore }) => {
+    const { standalone, currentDeviceType, clearAbortControllerArr } =
+      settingsStore;
 
-  return {
-    standalone,
-    currentDeviceType,
-    paymentStore,
-    settingsStore,
-    clearAbortControllerArr,
-  };
-})(observer(PaymentsPage));
+    return {
+      standalone,
+      currentDeviceType,
+      paymentStore,
+      settingsStore,
+      clearAbortControllerArr,
+      servicesStore,
+    };
+  },
+)(observer(PaymentsPage));
+

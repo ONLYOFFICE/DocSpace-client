@@ -1,0 +1,35 @@
+.container {
+  max-width: 660px;
+  width: 100%
+}
+
+
+.header {
+  margin-top:20px;
+}
+
+.description {
+  margin-bottom: 16px;
+  color: var(--payment-text-color)
+}
+
+.payerInfoHeader{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.noPaymentDescription{
+margin-top:4px;
+margin-bottom: 20px;
+}
+
+.buttonWrapper {
+  max-width: 320px;
+}
+
+.reachOutPayer{
+margin-top: -12px;
+color: var(--warning-color)
+}
+

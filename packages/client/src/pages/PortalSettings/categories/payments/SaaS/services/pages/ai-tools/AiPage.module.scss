@@ -1,0 +1,71 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-sizing: border-box;
+}
+
+.toggleSection  {
+  max-width: 660px;
+}
+
+
+
+.balanceSection {
+  width: 100%;
+}
+
+.balanceCard {
+  width: 320px;
+  border: 1px solid var(--aside-header-border-color);
+  border-radius: 6px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.lowBalance{
+  color: var(--warning-color);
+  margin-top:16px;
+}
+
+
+.lastTopUpRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+}
+
+.lastTopUpLabel {
+  color: var(--text-disable-color);
+}
+
+.lastTopUpLabel{
+  color: var(--payment-contact-container-link-color)
+}
+
+.lastTopUpValue{
+  color: var(--text-color)
+}
+
+.lastTopUpValue {
+  color: var(--text-color);
+}
+
+.lastTopUpDate {
+  color: var(--text-disable-color);
+}
+
+.pricingLink {
+  padding: 2px 0;
+}
+
+.tabsWrapper {
+  :global(.tabs-body) {
+    display: block;
+  }
+}
+

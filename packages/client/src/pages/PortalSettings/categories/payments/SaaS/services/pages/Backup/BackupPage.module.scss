@@ -1,0 +1,87 @@
+.container {
+  display: flex;
+  flex-direction: column;
+
+
+}
+
+.walletIcon {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  svg {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+
+.walletBalance {
+
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.backupsCard {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid var(--aside-header-border-color);
+  border-radius: 6px;
+  max-width: 320px;
+  box-sizing: border-box;
+  margin-top:16px;
+}
+.backupPaidInfo{
+  margin-top:12px;
+}
+
+.backupsHeader {
+  display: flex;
+  align-items: center;
+}
+
+.backupsAmountContainer {
+  display: flex;
+  gap: 8px;
+align-items: baseline;
+}
+
+.backupsCount{
+    display: flex;
+    align-items: baseline;
+}
+.freeBackupsAmountContainer {
+  display: flex;
+  gap: 8px;
+align-items: baseline;
+}
+
+.divider {
+  border-bottom: 1px solid var(--aside-header-border-color);
+}
+
+.grayText{
+  color: var(--payment-dialog-text)
+}
+
+.backupsPriceText {
+  padding-bottom: 4px;
+}
+
+.backupButton {
+  margin-top:4px;
+}
+
+.lowBalance{
+  margin-top:16px;
+   color: var(--warning-color);
+}
+
+

@@ -202,11 +202,14 @@ const AIProviderComponent = ({
             isAvailable={
               isProviderAvailable?.(provider.id) && !provider.needReset
             }
+            enabled={aiConfig?.systemAiEnabled}
           />
         ))}
       </div>
 
-      {hasAIProviders ? <DefaultProvider aiConfig={aiConfig} /> : null}
+      {aiProviders && aiProviders.length > 0 ? (
+        <DefaultProvider aiConfig={aiConfig} />
+      ) : null}
 
       {addDialogVisible ? (
         <AddUpdateProviderDialog
@@ -254,3 +257,4 @@ export const AIProvider = inject(
 )(observer(AIProviderComponent));
 
 export { ProvidersLoader };
+

@@ -301,19 +301,10 @@ export async function getPortalPaymentQuotas(signal?: AbortSignal) {
   return res;
 }
 
-export async function getServicesQuotas(
-  serviceName: string,
-  signal?: AbortSignal,
-) {
-  const params = {};
-
-  if (serviceName) {
-    params.service = serviceName;
-  }
+export async function getServicesQuotas(signal?: AbortSignal) {
   const res = (await request({
     method: "get",
     url: "/portal/payment/walletservices",
-    params,
     signal,
   })) as TPaymentQuota[];
 
@@ -567,6 +558,7 @@ export async function getTransactionHistory(
   serviceName: string = "",
   signal?: AbortSignal,
 ) {
+ //debugger
   const params = {
     startDate,
     endDate,
@@ -582,6 +574,9 @@ export async function getTransactionHistory(
 
   if (serviceName) {
     params.serviceName = serviceName;
+  }
+  if (serviceName === AI_TOOLS) {
+    params.writeOffServiceQuota = true;
   }
 
   const options = {

@@ -461,7 +461,7 @@ class ProfileActionsStore {
         !isCommunity && {
           key: "user-menu-payments",
           icon: PaymentsReactSvgUrl,
-          label: t("Common:PaymentsTitle"),
+          label: standalone ? t("Common:PaymentsTitle") : t("Common:Billing"),
           onClick: (obj) => this.onPaymentsClick(obj),
           additionalElement: <TariffBar />,
           url: PAYMENTS_URL,

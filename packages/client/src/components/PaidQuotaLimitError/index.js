@@ -60,7 +60,7 @@ const PaidQuotaLimitError = ({
 			<Text>{t("Common:QuotaPaidUserLimitError")}</Text>
 			{!isRoomAdmin ? (
 				<Link isHovered onClick={onClickPayments} color="accent">
-					{t("Common:PaymentsTitle")}
+					{t("Common:Billing")}
 				</Link>
 			) : null}
 		</>

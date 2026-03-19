@@ -161,13 +161,6 @@ const ArticleBodyContent = (props) => {
         setSelectedKeys(["10-0"]);
       }
 
-      if (
-        location.pathname.includes("services") &&
-        !location.pathname.includes("third-party-services")
-      ) {
-        setSelectedKeys(["11-0"]);
-      }
-
       if (location.pathname.includes("bonus")) {
         setSelectedKeys(["12-0"]);
       }
@@ -222,7 +215,7 @@ const ArticleBodyContent = (props) => {
       case "Backup":
         return t("Common:Backup");
       case "Common:PaymentsTitle":
-        return t("Common:PaymentsTitle");
+        return standalone ? t("Common:PaymentsTitle") : t("Common:Billing");
       case "ManagementCategoryDataManagement":
         return t("ManagementCategoryDataManagement");
       case "LdapSettings":

@@ -71,6 +71,14 @@ export type TModel = {
   providerId: TAiProvider["id"];
   providerTitle: TAiProvider["title"];
   modelId: string;
+  price?: {
+    prompt: number;
+    completion: number;
+  };
+  currency?: {
+    code: string;
+    symbol: string;
+  };
 };
 
 export type TModelList = TModel[];

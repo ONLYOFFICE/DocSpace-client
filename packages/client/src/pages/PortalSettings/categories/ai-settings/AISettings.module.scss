@@ -110,6 +110,16 @@
   margin-top: 15px;
 }
 
+.truncate2Lines {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+}
+
 .tabsLoader {
   width: min(400px, 100%);
   height: 33px;
@@ -119,5 +129,25 @@
 .hasError {
   :global(.combo-button) {
     border-color: var(--input-error-border);
+  }
+}
+
+.modelOption {
+  display: flex;
+  flex-direction: column;
+}
+
+.modelLabel{
+  height: 20px;
+}
+.modelDescription {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--ai-settings-description);
+}
+
+.modelDropdown {
+  :global(.scroll-body) {
+    padding-inline-end: 0 !important;
   }
 }

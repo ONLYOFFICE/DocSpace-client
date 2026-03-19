@@ -108,7 +108,11 @@ const LinkRolesDropdown = ({
   return (
     <div className={styles.linkRolesDropdown} data-testid="link-roles-dropdown">
       <div
-        title={currentAccess?.label}
+        title={
+          typeof currentAccess?.label === "string"
+            ? currentAccess.label
+            : undefined
+        }
         onClick={() => setIsOpen(!isOpen)}
         className={classNames(styles.linkRoles, styles.dropDownButton, {
           [styles.isOpen]: isOpen,

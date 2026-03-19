@@ -1,0 +1,63 @@
+  .balanceAmountContainer {
+    display: flex;
+    align-items: baseline;
+    gap: 0;
+    margin: 12px 0 16px 0;
+
+    &.withoutMargin {
+      margin: 0;
+    }
+  }
+
+ .headerContainer {
+   display: flex;
+   align-items: center;
+   gap: 8px;
+ }
+
+ .balanceTitle {
+   height: 24px;
+ }
+
+ .refreshIcon {
+   cursor: pointer;
+ }
+
+ @keyframes circularRotate {
+   0% {
+     transform: rotate(0deg);
+   }
+   40% {
+     transform: rotate(-180deg);
+   }
+   50% {
+     transform: rotate(-180deg);
+   }
+   90% {
+     transform: rotate(-360deg);
+   }
+   100% {
+     transform: rotate(-360deg);
+   }
+ }
+
+ .spinning {
+   svg {
+     animation: circularRotate 2s ease-in-out infinite !important;
+     transform-origin: center;
+   }
+ }
+
+.integer,
+.group,
+.decimal,
+.literal,
+.currency {
+  font-weight: 700;
+  font-size: var(--balance-main-font-size, 44px);
+}
+
+.fraction {
+  font-weight: 700;
+  font-size: var(--balance-fraction-font-size, 28px);
+}

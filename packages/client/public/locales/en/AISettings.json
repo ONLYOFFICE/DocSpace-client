@@ -61,5 +61,6 @@
   "WebSearchDisabledSuccess": "{{webSearch}} successfully disabled",
   "WebSearchEnabledSuccess": "{{webSearch}} successfully enabled",
   "WebSearchKeyDescription": "Enter the API key obtained from your {{webSearch}} provider",
-  "WebSearchKeyHiddenDescription": "The API key is displayed only once upon saving and is then hidden for security purposes."
+  "WebSearchKeyHiddenDescription": "The API key is displayed only once upon saving and is then hidden for security purposes.",
+  "PortalAiDisabledTooltip": "To use {{productName}} AI provider, make sure to connect an AI service first."
 }

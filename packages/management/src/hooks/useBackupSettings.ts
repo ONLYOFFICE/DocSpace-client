@@ -121,7 +121,7 @@ export const useBackupSettings = ({
           setIsThirdStorageChanged(false);
         }
 
-        const periodLabel = periodObj[period].label!;
+        const periodLabel = periodObj[period].label as string;
         const monthDay =
           period === AutoBackupPeriod.EveryDayType ||
           period === AutoBackupPeriod.EveryWeekType
@@ -166,7 +166,7 @@ export const useBackupSettings = ({
               }
             }
           }
-          const weekdayLabel = weekdayArr[weekDay].label!;
+          const weekdayLabel = weekdayArr[weekDay].label as string;
 
           setDefaults((state: BackupDefaultStateType) => ({
             ...state,
@@ -179,7 +179,7 @@ export const useBackupSettings = ({
             weekdayLabel,
           }));
         } else {
-          const weekdayLabel = weekdayArr[0].label!;
+          const weekdayLabel = weekdayArr[0].label as string;
           const weekday = weekdayArr[0].key.toString();
 
           setDefaults((state: BackupDefaultStateType) => ({
@@ -195,8 +195,8 @@ export const useBackupSettings = ({
           }));
         }
       } else {
-        const periodLabel = periodObj[+defaults.periodNumber].label!;
-        const weekdayLabel = weekdayArr[0].label!;
+        const periodLabel = periodObj[+defaults.periodNumber].label as string;
+        const weekdayLabel = weekdayArr[0].label as string;
         const weekday = weekdayArr[0].key.toString();
 
         setDefaults((state: BackupDefaultStateType) => ({
@@ -244,7 +244,7 @@ export const useBackupSettings = ({
       enableSchedule: false,
       monthDay: "1",
       weekday: weekdayArr[0].key.toString(),
-      weekdayLabel: weekdayArr[0].label!,
+      weekdayLabel: weekdayArr[0].label as string,
     }));
 
     setSelected((state: BackupSelectedStateType) => ({
@@ -260,7 +260,7 @@ export const useBackupSettings = ({
       enableSchedule: false,
       monthDay: "1",
       weekday: weekdayArr[0].key.toString(),
-      weekdayLabel: weekdayArr[0].label!,
+      weekdayLabel: weekdayArr[0].label as string,
     }));
 
     setIsThirdStorageChanged(false);
@@ -275,41 +275,41 @@ export const useBackupSettings = ({
 
   const setPeriod = (options: TOption) => {
     const key = options.key;
-    const label = options.label;
+    const label = options.label as string;
 
     setSelected((state: BackupSelectedStateType) => ({
       ...state,
       periodNumber: `${key}`,
-      periodLabel: label!,
+      periodLabel: label,
     }));
   };
 
   const setWeekday = (options: TOption) => {
     const key = options.key;
-    const label = options.label;
+    const label = options.label as string;
 
     setSelected((state: BackupSelectedStateType) => ({
       ...state,
       weekday: `${key}`,
-      weekdayLabel: label!,
+      weekdayLabel: label,
     }));
   };
 
   const setMonthNumber = (options: TOption) => {
-    const label = options.label;
+    const label = options.label as string;
 
     setSelected((state: BackupSelectedStateType) => ({
       ...state,
-      monthDay: label!,
+      monthDay: label,
     }));
   };
 
   const setTime = (options: TOption) => {
-    const label = options.label;
+    const label = options.label as string;
 
     setSelected((state: BackupSelectedStateType) => ({
       ...state,
-      hour: label!,
+      hour: label,
     }));
   };
 
@@ -463,3 +463,4 @@ export const useBackupSettings = ({
     setIsThirdStorageChanged,
   };
 };
+

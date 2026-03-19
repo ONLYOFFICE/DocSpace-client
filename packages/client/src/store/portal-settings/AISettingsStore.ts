@@ -61,6 +61,7 @@ import {
   updateDefaultProvider,
 } from "@docspace/shared/api/ai";
 import {
+  ProviderType,
   ServerType,
   WebSearchType,
   KnowledgeType,
@@ -68,7 +69,13 @@ import {
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { TTranslation } from "@docspace/shared/types";
 
+type TSettingsStore = {
+  aiConfig?: { systemAiEnabled?: boolean };
+};
+
 class AISettingsStore {
+  settingsStore: TSettingsStore;
+
   isInit = false;
 
   aiProviders: TAiProvider[] = [];
@@ -101,7 +108,8 @@ class AISettingsStore {
 
   defaultProviderInitied = false;
 
-  constructor() {
+  constructor(settingsStore: TSettingsStore) {
+    this.settingsStore = settingsStore;
     makeAutoObservable(this);
   }
 
@@ -483,7 +491,14 @@ class AISettingsStore {
   }
 
   get hasAIProviders() {
-    return this.aiProviders.length > 0;
+    if (this.aiProviders.length === 0) return false;
+
+    const isOnlyDisabledPortalAi =
+      this.aiProviders.length === 1 &&
+      this.aiProviders[0].type === ProviderType.PortalAi &&
+      !this.settingsStore.aiConfig?.systemAiEnabled;
+
+    return !isOnlyDisabledPortalAi;
   }
 }
 

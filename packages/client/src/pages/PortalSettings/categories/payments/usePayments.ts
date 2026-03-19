@@ -29,18 +29,23 @@ import { useTranslation } from "react-i18next";
 
 import PaymentStore from "SRC_DIR/store/PaymentStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import ServicesStore from "SRC_DIR/store/ServicesStore";
 
 export type UsePaymentsProps = {
   initPayments?: PaymentStore["init"];
   initPaymentsStandalone?: PaymentStore["standaloneInit"];
   walletInit?: PaymentStore["walletInit"];
+  servicesInit?: ServicesStore["servicesInit"];
+  paymentMethodInit?: PaymentStore["paymentMethodInit"];
   standalone?: SettingsStore["standalone"];
 };
 
 const usePayments = ({
   initPayments,
   walletInit,
+  servicesInit,
   initPaymentsStandalone,
+  paymentMethodInit,
   standalone,
 }: UsePaymentsProps) => {
   const { t } = useTranslation(["Payments", "Common", "Settings"]);
@@ -57,6 +62,14 @@ const usePayments = ({
     await walletInit?.(t);
   }, [walletInit]);
 
+  const getServicesData = useCallback(async () => {
+    await servicesInit?.(t);
+  }, [servicesInit]);
+
+  const getPaymentMethodData = useCallback(async () => {
+    await paymentMethodInit?.(t);
+  }, [servicesInit]);
+
   const getPaymentsInitialValue = React.useCallback(async () => {
     const actions = [];
     if (window.location.pathname.includes("portal-payments"))
@@ -65,13 +78,21 @@ const usePayments = ({
     if (window.location.pathname.includes("wallet"))
       actions.push(getWalletData());
 
+    if (window.location.pathname.includes("services"))
+      actions.push(getServicesData());
+
+    if (window.location.pathname.includes("payment-method"))
+      actions.push(getPaymentMethodData());
+
     await Promise.all(actions);
-  }, [getPortalPaymentsData, getWalletData]);
+  }, [getPortalPaymentsData, getWalletData, getServicesData]);
 
   return {
     getPortalPaymentsData,
     getWalletData,
+    getServicesData,
     getPaymentsInitialValue,
+    getPaymentMethodData,
   };
 };
 

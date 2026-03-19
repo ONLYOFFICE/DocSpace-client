@@ -71,6 +71,26 @@
       }
     },
     {
+      "label": "Backend | run CE - full (Aspire)",
+      "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; dotnet run --launch-profile development",
+      "options": {
+        "env": {
+          "SKIP_CLIENT": "true"
+        }
+      },
+      "type": "shell",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Backend | build EE",
       "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -e enterprise",
       "type": "shell",
@@ -107,6 +127,27 @@
       "options": {
         "env": {
           "APP_EDITION": "enterprise"
+        }
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Backend | run EE - full (Aspire)",
+      "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; dotnet run --launch-profile development",
+      "type": "shell",
+      "options": {
+        "env": {
+          "APP_EDITION": "enterprise",
+          "SKIP_CLIENT": "true"
         }
       },
       "group": {
@@ -231,7 +272,7 @@
       }
     },
     {
-      "label": "Backend | run DE development (Aspire)",
+      "label": "Backend | run DE - full (Aspire)",
       "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; SKIP_CLIENT=true dotnet run --launch-profile development",
       "type": "shell",
       "options": {
@@ -342,10 +383,30 @@
       }
     },
     {
+      "label": "Backend | run SAAS - full (Aspire)",
+      "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; dotnet run --launch-profile development --APP_HOSTING_STANDALONE false",
+      "type": "shell",
+      "options": {
+        "env": {
+          "SKIP_CLIENT": "true"
+        }
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Backend | clear Aspire (Docker)",
-      "command": "docker ps -a --format '{{.Names}}' | grep -E 'mysql|redis|cache-|rabbitmq|messaging-|opensearch|mailpit|dbgate|redisinsight|onlyoffice-editors|openresty' | xargs -r docker stop && docker ps -a --format '{{.Names}}' | grep -E 'mysql|redis|cache-|rabbitmq|messaging-|opensearch|mailpit|dbgate|redisinsight|onlyoffice-editors|openresty' | xargs -r docker rm && docker volume prune -f && docker network prune -f",
+      "command": "docker ps -a --format '{{.Names}}' | grep -E 'mysql|redis|cache-|rabbitmq|messaging-|opensearch|mailpit|dbgate|redisinsight|onlyoffice-|openresty' | xargs -r docker stop && docker ps -a --format '{{.Names}}' | grep -E 'mysql|redis|cache-|rabbitmq|messaging-|opensearch|mailpit|dbgate|redisinsight|onlyoffice-|openresty' | xargs -r docker rm && docker volume prune -f && docker network prune -f",
       "windows": {
-        "command": "$c = docker ps -a --format '{{.Names}}' | Where-Object { $_ -match 'mysql|redis|cache-|rabbitmq|messaging-|opensearch|mailpit|dbgate|redisinsight|onlyoffice-editors|openresty' }; if ($c) { $c | ForEach-Object { docker stop $_ }; $c | ForEach-Object { docker rm $_ } }; docker volume prune -f; docker network prune -f"
+        "command": "$c = docker ps -a --format '{{.Names}}' | Where-Object { $_ -match 'mysql|redis|cache-|rabbitmq|messaging-|opensearch|mailpit|dbgate|redisinsight|onlyoffice-|openresty' }; if ($c) { $c | ForEach-Object { docker stop $_ }; $c | ForEach-Object { docker rm $_ } }; docker volume prune -f; docker network prune -f"
       },
       "type": "shell",
       "group": {

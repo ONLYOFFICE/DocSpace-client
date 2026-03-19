@@ -111,7 +111,8 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       location.pathname === "/portal-settings/delete-data/deactivation";
 
     const isBonusPage = location.pathname === "/portal-settings/bonus";
-    const isServicesPage = location.pathname === "/portal-settings/services";
+    const isServicesPage =
+      location.pathname === "/portal-settings/payments/services";
 
     const isPortalRenameUrl =
       location.pathname ===

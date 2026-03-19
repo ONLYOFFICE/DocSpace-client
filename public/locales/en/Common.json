@@ -133,6 +133,7 @@
   "BetaBadgeFeedback": "If you have found a bug, please submit it via <1>forum</1> or contact us at <3>{{supportEmail}}</3>.",
   "BetaBadgeTitle": "RTL interface",
   "BetaLabel": "BETA",
+  "Billing": "Billing",
   "BlockFile": "Block",
   "Bonus": "Bonus",
   "BookTraining": "Book a training",
@@ -1093,6 +1094,7 @@
   "Unlimited": "Unlimited",
   "UnsavedChanges": "Unsaved changes",
   "UnsavedChangesDescription": "You have unsaved changes. If you leave now, your updates will be lost. Are you sure you want to leave?",
+  "Update": "Update",
   "UpgradeToProBannerHeader": "Get free access to enterprise-ready office suite for 30 days",
   "UpgradeToProBannerInformationAboutShort": "Learn more about {{license}} Edition on the <1>official website</1>",
   "UpgradeToProBannerInformationDemo": "Request demonstration <1>here</1>",
@@ -1189,5 +1191,7 @@
   "CompletedForms": "Completed forms",
   "EmptyMyForms": "You don't have any forms yet. Create or upload a form to get started.",
   "EmptyInProgressForms": "There are no forms in progress at the moment.",
-  "EmptyCompletedForms": "There are no completed forms yet."
+  "EmptyCompletedForms": "There are no completed forms yet.",
+  "BuiltInAIService": "Built-in AI service",
+  "BuiltInAIServiceDisabled": "Built-in AI service, enabled on the <1>Services</1> page"
 }

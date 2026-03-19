@@ -1450,6 +1450,8 @@
 
   --tile-icon-button-color: #{$gray};
   --tile-icon-button-hover-color: #{$light-blue-main};
+
+  --ai-settings-description:#{$gray};
 }
 
 .dark {
@@ -1482,6 +1484,8 @@
 
   --tile-icon-button-color: #{$gray};
   --tile-icon-button-hover-color: #{$light-blue-main};
+
+  --ai-settings-description: #{$gray-dark};
 }
 
 .rtl {
@@ -1506,6 +1510,7 @@
 
 .light {
   --payment-background-color: #{$gray-light};
+  --payment-backgroud-color-warning: #{$gray-light};
   --payment-text-color: #{$light-gray-dark};
   --payment-credit-color: #{$light-status-positive};
   --payment-icon-background: #{$gray-light-mid};
@@ -1515,6 +1520,7 @@
   --payment-contact-container-text-color: #{$gray};
   --payment-contact-container-link-color: #{$light-gray-dark};
   --payment-inactive-color: #{$gray};
+  --payment-error-color: #{$light-error-status};
   --warning-color: #{$light-error-status};
   --background-service-color: #{$light-gray-hover};
   --border-service-color: #{$gray-light-mid};
@@ -1524,6 +1530,7 @@
 
 .dark {
   --payment-background-color: #{$light-dark-gray-hover};
+  --payment-backgroud-color-warning: #{$dark-gray-light};
   --payment-text-color: #{$dark-gray-dark};
   --payment-credit-color: #{$dark-status-positive};
   --payment-icon-background: #{$gray-dark-mid};
@@ -1533,6 +1540,7 @@
   --payment-contact-container-text-color: #{$dark-gray-dark};
   --payment-contact-container-link-color: #{$gray-dark};
   --payment-inactive-color: #{$gray-dark};
+  --payment-error-color: #{$dark-error-status};
   --warning-color: #{$dark-error-status};
   --background-service-color: #{$light-dark-gray-hover};
   --border-service-color: #{$gray-dark-strong};

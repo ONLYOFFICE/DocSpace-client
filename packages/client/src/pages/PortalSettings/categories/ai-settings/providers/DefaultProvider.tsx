@@ -26,7 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/ui-kit/components/text";
@@ -34,13 +34,17 @@ import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Heading } from "@docspace/ui-kit/components/heading";
 import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { ComboBox, TOption } from "@docspace/ui-kit/components/combobox";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
+import { DropDownItem } from "@docspace/ui-kit/components/drop-down-item";
 
 import { TAiProvider, TModel } from "@docspace/shared/api/ai/types";
+import { ProviderType } from "@docspace/shared/api/ai/enums";
 import { TTranslation } from "@docspace/shared/types";
 
 import styles from "../AISettings.module.scss";
 import { inject, observer } from "mobx-react";
 import AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
+import ServicesStore from "SRC_DIR/store/ServicesStore";
 import classNames from "classnames";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
@@ -55,6 +59,7 @@ type DefaultProviderProps = {
   defaultProviderModelsError?: AISettingsStore["defaultProviderModelsError"];
   defaultProviderInitied?: AISettingsStore["defaultProviderInitied"];
   aiConfig?: SettingsStore["aiConfig"];
+  formatAiModelsCurrency?: ServicesStore["formatAiModelsCurrency"];
 };
 
 const getSelectedProviderOption = (
@@ -78,6 +83,7 @@ const DefaultProviderComponent = ({
   changeDefaultProvider,
   defaultProviderModelsError,
   defaultProviderInitied,
+  formatAiModelsCurrency,
 }: DefaultProviderProps) => {
   const getSelectedModelOption = (
     t: TTranslation,
@@ -96,27 +102,99 @@ const DefaultProviderComponent = ({
     };
   };
 
-  const { t } = useTranslation(["Common", "AISettings"]);
+  const { t } = useTranslation(["Common", "AISettings", "Services"]);
+  const tooltipId = useId();
+
+  const hasSystemProvider = aiProviders?.some(
+    (p) => p.type === ProviderType.PortalAi,
+  );
+  const isOnlySystemProvider =
+    aiProviders?.length === 1 && aiProviders[0].type === ProviderType.PortalAi;
+  const isDisabled = isOnlySystemProvider && !aiConfig?.systemAiEnabled;
+
+  const getTooltipContent = () => (
+    <Text fontSize="12px" lineHeight="16px">
+      {t("AISettings:PortalAiDisabledTooltip", {
+        productName: t("Common:ProductName"),
+      })}
+    </Text>
+  );
+
+  const getInitialProviderId = () => {
+    const providerId = defaultProvider?.providerId || null;
+
+    if (providerId && !aiConfig?.systemAiEnabled && aiProviders) {
+      const current = aiProviders.find((p) => p.id === providerId);
+
+      if (current?.type === ProviderType.PortalAi) {
+        const fallback = aiProviders.find(
+          (p) => p.type !== ProviderType.PortalAi,
+        );
+
+        return fallback?.id || providerId;
+      }
+    }
+
+    return providerId;
+  };
+
+  const initialProviderId = getInitialProviderId();
+  const needsFallback = initialProviderId !== defaultProvider?.providerId;
+
   const [selectedProviderId, setSelectedProviderId] = useState<number | null>(
-    defaultProvider?.providerId || null,
+    initialProviderId,
   );
   const [selectedModelId, setSelectedModelId] = useState<string | null>(
-    defaultProvider?.defaultModel || null,
+    needsFallback ? null : defaultProvider?.defaultModel || null,
   );
   const [isSaveRequestRunning, setIsSaveRequestRunning] = useState(false);
   const prevDefaultProviderInitiedRef = useRef(defaultProviderInitied);
+  const fallbackFetchedRef = useRef(false);
+
+  useEffect(() => {
+    if (needsFallback && initialProviderId && !fallbackFetchedRef.current) {
+      fallbackFetchedRef.current = true;
+      fetchDefaultProviderModels?.(initialProviderId);
+    }
+  }, [needsFallback, initialProviderId, fetchDefaultProviderModels]);
+
+  useEffect(() => {
+    if (needsFallback && !selectedModelId && defaultProviderModels?.length) {
+      setSelectedModelId(defaultProviderModels[0].modelId);
+    }
+  }, [needsFallback, selectedModelId, defaultProviderModels]);
 
   const isProviderChanged = selectedProviderId !== defaultProvider?.providerId;
   const isModelChanged = selectedModelId !== defaultProvider?.defaultModel;
 
   const getProviderOptions = () => {
     return (
-      aiProviders?.map((p) => ({
-        key: p.id,
-        label: p.title,
-      })) || []
+      aiProviders?.map((p) => {
+        const isProviderDisabled =
+          p.type === ProviderType.PortalAi && !aiConfig?.systemAiEnabled;
+
+        return {
+          key: p.id,
+          label: isProviderDisabled
+            ? `${p.title} (${t("Common:ActivationRequired")})`
+            : p.title,
+          disabled: isProviderDisabled,
+          withExternalLink: isProviderDisabled,
+          externalLinkPath: isProviderDisabled
+            ? "/portal-settings/payments/services"
+            : undefined,
+          onExternalLinkClick: isProviderDisabled
+            ? () =>
+                window.DocSpace?.navigate("/portal-settings/payments/services")
+            : undefined,
+        };
+      }) || []
     );
   };
+
+  const isSystemProviderSelected = aiProviders?.some(
+    (p) => p.id === selectedProviderId && p.type === ProviderType.PortalAi,
+  );
 
   const getModelOptions = () => {
     return (
@@ -124,6 +202,44 @@ const DefaultProviderComponent = ({
         key: m.modelId,
         label: aiConfig?.modelAliases?.[m.modelId] || m.modelId,
       })) || []
+    );
+  };
+
+  const getModelAdvancedOptions = () => {
+    if (!defaultProviderModels?.length) return undefined;
+
+    return (
+      <div style={{ display: "contents" }}>
+        {defaultProviderModels.map((m) => {
+          const label = aiConfig?.modelAliases?.[m.modelId] || m.modelId;
+          const isSelected = m.modelId === selectedModelId;
+          const safeFormat = (v: number) =>
+            formatAiModelsCurrency ? formatAiModelsCurrency(v) : String(v);
+          const priceLabel =
+            m.price != null
+              ? t("Services:AIModelPrice", {
+                  inputPrice: safeFormat(m.price.prompt),
+                  outputPrice: safeFormat(m.price.completion),
+                })
+              : null;
+
+          return (
+            <DropDownItem
+              key={m.modelId}
+              isSelected={isSelected}
+              isActive={isSelected}
+              onClick={() => onSelectModel({ key: m.modelId, label })}
+            >
+              <div className={styles.modelOption}>
+                <Text className={styles.modelLabel}>{label}</Text>
+                {priceLabel ? (
+                  <Text className={styles.modelDescription}>{priceLabel}</Text>
+                ) : null}
+              </div>
+            </DropDownItem>
+          );
+        })}
+      </div>
     );
   };
 
@@ -200,8 +316,15 @@ const DefaultProviderComponent = ({
       prevDefaultProviderInitiedRef.current === false;
 
     if (isNewInit) {
-      setSelectedProviderId(defaultProvider?.providerId || null);
-      setSelectedModelId(defaultProvider?.defaultModel || null);
+      const providerId = getInitialProviderId();
+      const isFallback = providerId !== defaultProvider?.providerId;
+
+      setSelectedProviderId(providerId);
+      setSelectedModelId(isFallback ? null : defaultProvider?.defaultModel || null);
+
+      if (isFallback && providerId) {
+        fetchDefaultProviderModels?.(providerId);
+      }
     }
 
     prevDefaultProviderInitiedRef.current = defaultProviderInitied;
@@ -210,110 +333,155 @@ const DefaultProviderComponent = ({
     aiProviders,
     defaultProvider,
     defaultProviderModels,
+    aiConfig?.systemAiEnabled,
     t,
   ]);
 
   return (
-    <div className={styles.defaultProvider}>
-      <Heading
-        className={styles.heading}
-        level={3}
-        fontWeight={700}
-        lineHeight="22px"
-        fontSize="16px"
+    <>
+      <div
+        className={styles.defaultProvider}
+        data-tooltip-id={isDisabled ? tooltipId : undefined}
       >
-        {t("AISettings:DefaultProviderTitle")}
-      </Heading>
-      <Text className={styles.description} lineHeight="20px">
-        {t("AISettings:DefaultProviderDescription", {
-          aiProvider: t("Common:AIProvider"),
-          aiAgents: t("Common:AIAgents"),
-          productName: t("Common:ProductName"),
-        })}
-      </Text>
-
-      <div className={styles.defaultProviderForm}>
-        <FieldContainer
-          labelVisible
-          isVertical
-          labelText={t("AISettings:Provider")}
-          removeMargin
-          hasError={!!defaultProviderModelsError}
-          errorMessage={defaultProviderModelsError || ""}
-          errorMessageWidth="100%"
+        <Heading
+          className={styles.heading}
+          level={3}
+          fontWeight={700}
+          lineHeight="22px"
+          fontSize="16px"
         >
-          <ComboBox
-            className={classNames({
-              [styles.hasError]: !!defaultProviderModelsError,
-            })}
-            options={getProviderOptions()}
-            selectedOption={selectedProviderOption}
-            displayArrow
-            onSelect={onSelectProvider}
-            displaySelectedOption
-            dataTestId="default-provider-combobox"
-            dropDownTestId="default-provider-dropdown"
-            directionY="both"
-            dropDownMaxHeight={300}
-          />
-        </FieldContainer>
-        <FieldContainer
-          labelVisible
-          isVertical
-          labelText={t("AISettings:Model")}
-          removeMargin
-        >
-          <ComboBox
-            options={getModelOptions()}
-            selectedOption={selectedModelOption}
-            displayArrow
-            onSelect={onSelectModel}
-            displaySelectedOption
-            dataTestId="default-model-combobox"
-            dropDownTestId="default-model-dropdown"
-            isLoading={isDefaultProviderModelsLoading}
-            isDisabled={!defaultProviderModels}
-            directionY="both"
-            dropDownMaxHeight={300}
-          />
-        </FieldContainer>
+          {t("AISettings:DefaultProviderTitle")}
+        </Heading>
+        <Text className={styles.description} lineHeight="20px">
+          {t("AISettings:DefaultProviderDescription", {
+            aiProvider: t("Common:AIProvider"),
+            aiAgents: t("Common:AIAgents"),
+            productName: t("Common:ProductName"),
+          })}
+        </Text>
 
-        <div className={styles.defaultProviderFormButtons}>
-          <Button
-            primary
-            size={ButtonSize.small}
-            label={t("Common:SaveButton")}
-            scale={false}
-            onClick={onSave}
-            isLoading={isSaveRequestRunning}
-            isDisabled={isSaveDisabled}
-            testId="default-provider-save-button"
-          />
-          <Button
-            size={ButtonSize.small}
-            label={t("Common:CancelButton")}
-            scale={false}
-            onClick={onCancel}
-            isDisabled={isCancelDisabled}
-            testId="default-provider-cancel-button"
-          />
+        <div className={styles.defaultProviderForm}>
+          <FieldContainer
+            labelVisible
+            isVertical
+            labelText={t("AISettings:Provider")}
+            removeMargin
+            hasError={!!defaultProviderModelsError}
+            errorMessage={defaultProviderModelsError || ""}
+            errorMessageWidth="100%"
+          >
+            <ComboBox
+              className={classNames({
+                [styles.hasError]: !!defaultProviderModelsError,
+              })}
+              options={getProviderOptions()}
+              showDisabledItems
+              scaledOptions={hasSystemProvider}
+              selectedOption={selectedProviderOption}
+              displayArrow
+              onSelect={onSelectProvider}
+              displaySelectedOption
+              isDisabled={isDisabled}
+              dataTestId="default-provider-combobox"
+              dropDownTestId="default-provider-dropdown"
+              directionY="both"
+              dropDownMaxHeight={300}
+            />
+          </FieldContainer>
+          <FieldContainer
+            labelVisible
+            isVertical
+            labelText={t("AISettings:Model")}
+            removeMargin
+          >
+            {isSystemProviderSelected ? (
+              <ComboBox
+                onSelect={() => {}}
+                options={[]}
+                advancedOptions={getModelAdvancedOptions()}
+                advancedOptionsCount={defaultProviderModels?.length ?? 0}
+                selectedOption={selectedModelOption}
+                displayArrow
+                scaledOptions
+                dataTestId="default-model-combobox"
+                dropDownTestId="default-model-dropdown"
+                isLoading={isDefaultProviderModelsLoading}
+                isDisabled={isDisabled || !defaultProviderModels}
+                directionY="both"
+                dropDownMaxHeight={260}
+                isNoFixedHeightOptions
+                displaySelectedOption
+                hideMobileView={false}
+                isDefaultMode
+                dropDownClassName={styles.modelDropdown}
+              />
+            ) : (
+              <ComboBox
+                options={getModelOptions()}
+                selectedOption={selectedModelOption}
+                displayArrow
+                onSelect={onSelectModel}
+                displaySelectedOption
+                dataTestId="default-model-combobox"
+                dropDownTestId="default-model-dropdown"
+                isLoading={isDefaultProviderModelsLoading}
+                isDisabled={isDisabled || !defaultProviderModels}
+                directionY="both"
+                dropDownMaxHeight={300}
+              />
+            )}
+          </FieldContainer>
+
+          <div className={styles.defaultProviderFormButtons}>
+            <Button
+              primary
+              size={ButtonSize.small}
+              label={t("Common:SaveButton")}
+              scale={false}
+              onClick={onSave}
+              isLoading={isSaveRequestRunning}
+              isDisabled={isDisabled || isSaveDisabled}
+              testId="default-provider-save-button"
+            />
+            <Button
+              size={ButtonSize.small}
+              label={t("Common:CancelButton")}
+              scale={false}
+              onClick={onCancel}
+              isDisabled={isDisabled || isCancelDisabled}
+              testId="default-provider-cancel-button"
+            />
+          </div>
         </div>
       </div>
-    </div>
+      {isDisabled ? (
+        <Tooltip
+          id={tooltipId}
+          place="bottom"
+          offset={10}
+          float
+          getContent={getTooltipContent}
+        />
+      ) : null}
+    </>
   );
 };
 
-export const DefaultProvider = inject(({ aiSettingsStore }: TStore) => {
-  return {
-    defaultProviderModels: aiSettingsStore.defaultProviderModels,
-    defaultProvider: aiSettingsStore.defaultProvider,
-    setDefaultProvider: aiSettingsStore.setDefaultProvider,
-    aiProviders: aiSettingsStore.aiProviders,
-    fetchDefaultProviderModels: aiSettingsStore.fetchDefaultProviderModels,
-    isDefaultProviderModelsLoading:
-      aiSettingsStore.isDefaultProviderModelsLoading,
-    changeDefaultProvider: aiSettingsStore.changeDefaultProvider,
-    defaultProviderModelsError: aiSettingsStore.defaultProviderModelsError,
-    defaultProviderInitied: aiSettingsStore.defaultProviderInitied,
-  };
-})(observer(DefaultProviderComponent));
+export const DefaultProvider = inject(
+  ({ aiSettingsStore, servicesStore }: TStore) => {
+    return {
+      defaultProviderModels: aiSettingsStore.defaultProviderModels,
+      defaultProvider: aiSettingsStore.defaultProvider,
+      setDefaultProvider: aiSettingsStore.setDefaultProvider,
+      aiProviders: aiSettingsStore.aiProviders,
+      fetchDefaultProviderModels: aiSettingsStore.fetchDefaultProviderModels,
+      isDefaultProviderModelsLoading:
+        aiSettingsStore.isDefaultProviderModelsLoading,
+      changeDefaultProvider: aiSettingsStore.changeDefaultProvider,
+      defaultProviderModelsError: aiSettingsStore.defaultProviderModelsError,
+      defaultProviderInitied: aiSettingsStore.defaultProviderInitied,
+      formatAiModelsCurrency: servicesStore.formatAiModelsCurrency,
+    };
+  },
+)(observer(DefaultProviderComponent));
+

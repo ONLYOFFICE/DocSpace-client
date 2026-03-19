@@ -1039,6 +1039,7 @@
   "SuccessfulConnectionOfAThirdParty": "Third-party service was successfully connected.",
   "SuccessfullyCompletedOperation": "Operation has been successfully completed.",
   "SuccessfullySaveSettingsMessage": "Settings have been successfully updated",
+  "StoppedOperation": "{{operationName}}: Stopped",
   "SuccessOperation": "{{operationName}}: Done",
   "SuggestFeature": "Suggest a feature",
   "Support": "Support",

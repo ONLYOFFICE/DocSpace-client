@@ -143,6 +143,7 @@ const PureHome = (props) => {
     cancelUpload,
     cancelSecondaryOperation,
     cancelSecondaryOperationById,
+    secondaryOperationsStopped,
     secondaryOperationsAlert,
     clearUploadData,
     clearUploadedFiles,
@@ -435,6 +436,7 @@ const PureHome = (props) => {
   sectionProps.clearDropPreviewLocation = clearDropPreviewLocation;
   sectionProps.primaryOperationsCompleted = primaryOperationsCompleted;
   sectionProps.cancelUpload = onCancelUpload;
+  sectionProps.secondaryOperationsStopped = secondaryOperationsStopped;
   sectionProps.secondaryOperationsAlert = secondaryOperationsAlert;
   sectionProps.primaryOperationsAlert = primaryOperationsAlert;
   sectionProps.needErrorChecking = isErrorChecking;
@@ -662,6 +664,7 @@ export const Component = inject(
       secondaryOperationsCompleted,
       clearSecondaryProgressData,
       secondaryActiveOperations,
+      secondaryOperationsStopped,
       secondaryOperationsAlert,
       cancelSecondaryOperation,
       cancelSecondaryOperationById,
@@ -828,6 +831,7 @@ export const Component = inject(
       secondaryActiveOperations,
       secondaryOperationsCompleted,
       clearSecondaryProgressData,
+      secondaryOperationsStopped,
       secondaryOperationsAlert,
       primaryOperationsArray,
       primaryOperationsCompleted,

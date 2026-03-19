@@ -330,6 +330,7 @@ class SecondaryProgressDataStore {
       this.secondaryOperationsArray[operationIndex] = {
         ...operationObject,
         alert: progressInfo.alert,
+        stopped: progressInfo.stopped || operationObject.stopped,
         items: updatedItems,
         completed: isCompleted,
         percent: progressInfo.percent,
@@ -338,6 +339,7 @@ class SecondaryProgressDataStore {
       const progress = {
         operation,
         alert: progressInfo.alert,
+        stopped: progressInfo.stopped,
         items: [progressInfo],
         label: getOperationsProgressTitle(operation),
         completed: progressInfo.completed,
@@ -448,6 +450,7 @@ class SecondaryProgressDataStore {
         operationId: item.operationId,
         alert: true,
         completed: true,
+        stopped: true,
         skipToast: true,
       });
       return true;
@@ -498,8 +501,12 @@ class SecondaryProgressDataStore {
     }
   };
 
+  get secondaryOperationsStopped() {
+    return this.secondaryOperationsArray.some((op) => op.stopped);
+  }
+
   get secondaryOperationsAlert() {
-    return this.secondaryOperationsArray.some((op) => op.alert);
+    return this.secondaryOperationsArray.some((op) => op.alert && !op.stopped);
   }
 
   get secondaryOperationsCompleted() {

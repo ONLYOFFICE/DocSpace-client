@@ -24,79 +24,77 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
+@use "@docspace/ui-kit/styles/mixins";
 
-import { injectDefaultTheme, mobile } from "@docspace/shared/utils";
-
-export const MainContainer = styled.div.attrs(injectDefaultTheme)`
+.main-container {
   width: 100%;
 
-  .subtitle {
+  :global(.subtitle) {
     margin-bottom: 20px;
-    color: ${(props) => props.theme.client.settings.common.descriptionColor};
+    color: var(--settings-common-description-color);
   }
 
-  .settings_tabs {
+  :global(.settings_tabs) {
     padding-bottom: 16px;
   }
 
-  .page_loader {
+  :global(.page_loader) {
     position: fixed;
     inset-inline-start: 50%;
   }
 
-  .category-item-description {
+  :global(.category-item-description) {
     margin-top: 8px;
     max-width: 700px;
 
-    .link-learn-more {
+    :global(.link-learn-more) {
       display: inline-block;
       margin: 4px 0 16px;
       font-weight: 600;
     }
 
     p {
-      color: ${(props) => props.theme.client.settings.common.descriptionColor};
+      color: var(--settings-common-description-color);
     }
 
-    @media ${mobile} {
+    @include mixins.mobile {
       padding-inline-end: 8px;
     }
-
-    ${(props) =>
-      props.withoutExternalLink &&
-      css`
-        padding-bottom: 16px;
-      `};
   }
-`;
 
-export const StyledCategoryWrapper = styled.div`
+  &.without-external-link {
+    :global(.category-item-description) {
+      padding-bottom: 16px;
+    }
+  }
+}
+
+.category-wrapper {
   display: flex;
   flex-direction: row;
   gap: 4px;
   margin-bottom: 8px;
   align-items: center;
-`;
+}
 
-export const StyledTooltip = styled.div`
-  .subtitle {
+.tooltip {
+  :global(.subtitle) {
     margin-bottom: 10px;
   }
-`;
+}
 
-export const LearnMoreWrapper = styled.div`
+.learn-more-wrapper {
   display: none;
 
-  .link-learn-more {
+  :global(.link-learn-more) {
     font-weight: 600;
   }
 
   p {
-    color: ${(props) => props.theme.client.settings.common.descriptionColor};
+    color: var(--settings-common-description-color);
   }
 
-  @media ${mobile} {
+  @include mixins.mobile {
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
@@ -104,82 +102,79 @@ export const LearnMoreWrapper = styled.div`
     line-height: 20px;
   }
 
-  .page-subtitle {
-    color: ${(props) =>
-      props.theme.client.settings.security.descriptionColor} !important;
+  :global(.page-subtitle) {
+    color: var(--settings-description-color) !important;
   }
 
-  .learn-subtitle {
+  :global(.learn-subtitle) {
     margin-bottom: 10px;
   }
 
-  ${(props) =>
-    props.withoutExternalLink &&
-    css`
-      @media ${mobile} {
-        .learn-subtitle {
-          margin-bottom: 0;
-        }
-
-        .page-subtitle {
-          margin-bottom: 0 !important;
-        }
+  &.without-external-link {
+    @include mixins.mobile {
+      :global(.learn-subtitle) {
+        margin-bottom: 0;
       }
-    `};
-`;
 
-export const StyledBruteForceProtection = styled.div`
+      :global(.page-subtitle) {
+        margin-bottom: 0 !important;
+      }
+    }
+  }
+}
+
+.brute-force-protection {
   width: 100%;
 
-  .brute-force-protection-input {
+  :global(.brute-force-protection-input) {
     width: 100%;
     max-width: 350px;
   }
 
-  .error-label {
+  :global(.error-label) {
     font-size: 10px;
   }
 
-  .save-cancel-buttons {
+  :global(.save-cancel-buttons) {
     margin-top: 24px;
   }
 
-  .input-container {
+  :global(.input-container) {
     margin-bottom: 8px;
     margin-inline-end: 8px;
   }
 
-  .mobile-description {
+  :global(.mobile-description) {
     margin-bottom: 12px;
   }
 
-  .description {
+  :global(.description) {
     max-width: 700px;
     padding-bottom: 19px;
 
-    .page-subtitle {
+    :global(.page-subtitle) {
       line-height: 20px;
       padding-inline-end: 8px;
-      color: ${(props) =>
-        props.theme.client.settings.security.descriptionColor};
+      color: var(--settings-description-color);
       padding-bottom: 7px;
-
-      ${(props) =>
-        props.withoutExternalLink &&
-        css`
-          padding-bottom: 0;
-        `};
     }
 
-    .link {
+    :global(.link) {
       line-height: 15px;
       font-weight: 600;
-
       text-decoration: underline;
     }
 
-    @media ${mobile} {
+    @include mixins.mobile {
       padding-bottom: 20px;
     }
   }
-`;
+
+  &.without-external-link {
+    :global(.description) {
+      :global(.page-subtitle) {
+        padding-bottom: 0;
+      }
+    }
+  }
+}

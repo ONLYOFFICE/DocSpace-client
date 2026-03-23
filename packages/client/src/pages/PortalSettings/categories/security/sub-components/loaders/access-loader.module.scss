@@ -24,28 +24,63 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
+@use "@docspace/ui-kit/styles/mixins";
 
-import styles from "./tfa-loader.module.scss";
+.loader {
+  .header {
+    width: 296px;
+    height: 29px;
+    margin-bottom: 14px;
 
-const TfaLoader = () => {
-  return (
-    <div className={styles.loader}>
-      <RectangleSkeleton className={styles.header} height="37px" />
-      <RectangleSkeleton className={styles.description} height="40px" />
-      <div className={styles.link}>
-        <RectangleSkeleton height="20px" width="57px" />
-      </div>
+    @include mixins.tablet-and-below {
+      width: 184px;
+      height: 37px;
+    }
 
-      <div className={styles.checkboxs}>
-        <RectangleSkeleton height="20px" />
-        <RectangleSkeleton height="20px" />
-        <RectangleSkeleton height="20px" />
-      </div>
+    @include mixins.mobile {
+      width: 273px;
+      height: 37px;
+      margin-bottom: 18px;
+    }
+  }
 
-      <RectangleSkeleton className={styles.buttons} height="40px" />
-    </div>
-  );
-};
+  .submenu {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 22px;
+  }
 
-export default TfaLoader;
+  .owner {
+    width: 700px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 40px;
+
+    @include mixins.mobile {
+      width: 100%;
+    }
+
+    .header {
+      height: 40px;
+
+      @include mixins.tablet-and-below {
+        height: 60px;
+      }
+    }
+  }
+
+  .admins {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    .description {
+      width: 700px;
+
+      @include mixins.tablet-and-below {
+        width: 100%;
+      }
+    }
+  }
+}

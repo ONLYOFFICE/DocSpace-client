@@ -26,35 +26,12 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import styled from "styled-components";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { RowContent } from "@docspace/ui-kit/components/rows";
 import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 
-import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";
-
-const StyledRowContent = styled(RowContent)`
-  padding-bottom: 10px;
-  .user-container-wrapper {
-    p {
-      color: ${(props) =>
-        props.theme.client.settings.security.auditTrail.nameColor};
-    }
-  }
-  .mainIcons {
-    p {
-      color: ${(props) =>
-        props.theme.client.settings.security.auditTrail.sideColor};
-    }
-  }
-  .row-main-container-wrapper {
-    display: flex;
-    justify-content: flex-start;
-  }
-
-  ${(props) => props.isSettingNotPaid && UnavailableStyles}
-`;
+import styles from "./AuditContent.module.scss";
 
 const AuditContent = ({
   sectionWidth,
@@ -65,12 +42,19 @@ const AuditContent = ({
 }) => {
   const dateStr = getCorrectDate(locale, item.date);
 
+  const className = [
+    styles["row-content"],
+    isSettingNotPaid && styles.unavailable,
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
-    <StyledRowContent
+    <RowContent
+      className={className}
       sideColor={theme.client.settings.security.auditTrail.sideColor}
       nameColor={theme.client.settings.security.auditTrail.nameColor}
       sectionWidth={sectionWidth}
-      isSettingNotPaid={isSettingNotPaid}
     >
       <div className="user-container-wrapper">
         <Text fontWeight={600} fontSize="14px" className="settings_unavailable">
@@ -95,7 +79,7 @@ const AuditContent = ({
       >
         {`${item.context ? `${item.context} |` : ""} ${item.action}`}
       </Text>
-    </StyledRowContent>
+    </RowContent>
   );
 };
 

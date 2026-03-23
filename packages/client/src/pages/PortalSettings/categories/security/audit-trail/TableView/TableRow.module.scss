@@ -24,28 +24,44 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
+.people-row {
+  :global(.table-container_cell) {
+    height: 46px;
+    max-height: 46px;
+  }
 
-import styles from "./tfa-loader.module.scss";
+  :global(.table-container_row-checkbox-wrapper) {
+    padding-inline-start: 4px;
+    min-width: 46px;
 
-const TfaLoader = () => {
-  return (
-    <div className={styles.loader}>
-      <RectangleSkeleton className={styles.header} height="37px" />
-      <RectangleSkeleton className={styles.description} height="40px" />
-      <div className={styles.link}>
-        <RectangleSkeleton height="20px" width="57px" />
-      </div>
+    :global(.table-container_row-checkbox) {
+      margin-inline-start: -4px;
+      padding-block: 16px;
+      padding-inline: 12px 0;
+    }
+  }
 
-      <div className={styles.checkboxs}>
-        <RectangleSkeleton height="20px" />
-        <RectangleSkeleton height="20px" />
-        <RectangleSkeleton height="20px" />
-      </div>
+  :global(.link-with-dropdown-group) {
+    margin-inline-end: 12px;
+  }
 
-      <RectangleSkeleton className={styles.buttons} height="40px" />
-    </div>
-  );
-};
+  :global(.table-cell_username) {
+    margin-inline-end: 12px;
+  }
 
-export default TfaLoader;
+  &.unavailable {
+    :global(.settings_unavailable) {
+      color: var(--management-disable-color) !important;
+      pointer-events: none;
+      cursor: default;
+
+      label {
+        color: var(--management-disable-color) !important;
+      }
+
+      path {
+        fill: var(--management-disable-color) !important;
+      }
+    }
+  }
+}

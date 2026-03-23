@@ -24,28 +24,78 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
+@use "@docspace/ui-kit/styles/mixins";
 
-import styles from "./tfa-loader.module.scss";
+.plus-icon {
+  overflow: hidden;
+  vertical-align: middle;
+  width: 12px;
+  min-width: 12px;
+  height: 12px;
+  min-height: 12px;
 
-const TfaLoader = () => {
-  return (
-    <div className={styles.loader}>
-      <RectangleSkeleton className={styles.header} height="37px" />
-      <RectangleSkeleton className={styles.description} height="40px" />
-      <div className={styles.link}>
-        <RectangleSkeleton height="20px" width="57px" />
-      </div>
+  path {
+    fill: var(--text-color);
+  }
+}
 
-      <div className={styles.checkboxs}>
-        <RectangleSkeleton height="20px" />
-        <RectangleSkeleton height="20px" />
-        <RectangleSkeleton height="20px" />
-      </div>
+.trash-icon {
+  overflow: hidden;
+  vertical-align: middle;
+  width: 16px;
+  min-width: 16px;
+  height: 16px;
+  min-height: 16px;
+  cursor: pointer;
 
-      <RectangleSkeleton className={styles.buttons} height="40px" />
-    </div>
-  );
-};
+  path {
+    fill: var(--security-side-color);
+  }
+}
 
-export default TfaLoader;
+.input-wrapper {
+  margin-bottom: 8px;
+  width: 350px;
+
+  :global(.field-container) {
+    width: 100%;
+    margin: 0;
+  }
+
+  :global(.input-wrapper) {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+  }
+
+  :global(.text-input) {
+    width: 100%;
+  }
+
+  @include mixins.mobile {
+    width: 100%;
+  }
+
+  &.hide-delete-icon {
+    width: 324px;
+
+    @include mixins.mobile {
+      width: calc(100% - 26px);
+    }
+  }
+}
+
+.add-wrapper {
+  display: inline-flex;
+  flex-direction: row;
+  gap: 6px;
+  align-items: center;
+  cursor: pointer;
+  margin-top: 0;
+
+  &.has-inputs {
+    margin-top: 8px;
+  }
+}

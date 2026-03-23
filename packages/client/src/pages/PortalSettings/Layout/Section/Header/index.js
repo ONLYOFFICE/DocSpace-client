@@ -57,7 +57,7 @@ import LoaderSectionHeader from "../loaderSectionHeader";
 
 import styles from "./index.module.scss";
 
-export const HeaderContainer = ({ children, className, ...props }) => (
+export const HeaderContainer = ({ children, className = "", ...props }) => (
   <div
     className={[styles.headerContainer, className].filter(Boolean).join(" ")}
     {...props}
@@ -66,7 +66,7 @@ export const HeaderContainer = ({ children, className, ...props }) => (
   </div>
 );
 
-export const StyledContainer = ({ children, className }) => (
+export const StyledContainer = ({ children, className = "" }) => (
   <div className={[styles.styledContainer, className].filter(Boolean).join(" ")}>
     {children}
   </div>

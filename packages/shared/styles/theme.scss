@@ -2600,3 +2600,13 @@
 .dark {
   --portal-unavailable-text-color: #{$gray-dark};
 }
+
+.light {
+  --security-subheader-color: #{$light-gray-dark};
+  --security-side-color: #{$gray};
+}
+
+.dark {
+  --security-subheader-color: #{$dark-gray-dark};
+  --security-side-color: #{$gray-dark};
+}

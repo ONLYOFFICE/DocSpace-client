@@ -26,142 +26,15 @@
 
 import { useEffect, useState } from "react";
 import { Text } from "@docspace/ui-kit/components/text";
-// import { TextInput } from "@docspace/ui-kit/components/text-input";
-// import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
-import styled, { useTheme } from "styled-components";
 import { Button } from "@docspace/ui-kit/components/button";
 import { TwoFactorCampaignBanner } from "@docspace/shared/components/two-factor-campaign";
-// import { toastr } from "@docspace/ui-kit/components/toast";
-import { mobile, tablet } from "@docspace/shared/utils";
+import { useTheme } from "@docspace/ui-kit/providers/theme";
 import { Badge } from "@docspace/ui-kit/components/badge";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
-import { UnavailableStyles } from "../../../utils/commonSettingsStyles";
 
-// const StyledTextInput = styled(TextInput)`
-//   margin-top: 4px;
-//   margin-bottom: 24px;
-//   width: 350px;
-
-//   @media ${mobile} {
-//     width: 100%;
-//   }
-// `;
-
-const MainContainer = styled.div`
-  width: 100%;
-
-  .main-wrapper {
-    max-width: 700px;
-  }
-
-  .paid-badge {
-    cursor: auto;
-    margin-bottom: 8px;
-    margin-inline-start: -2px;
-  }
-
-  .login-history-description {
-    color: ${(props) => props.theme.client.settings.common.descriptionColor};
-    padding-bottom: 24px;
-  }
-
-  .save-cancel {
-    padding: 0;
-    position: static;
-
-    .buttons-flex {
-      padding: 0;
-    }
-  }
-
-  .login-subheader {
-    font-size: 13px;
-    color: ${(props) =>
-      props.theme.client.settings.security.loginHistory.subheaderColor};
-  }
-
-  .latest-text {
-    font-size: 13px;
-    padding: 20px 0 16px;
-  }
-
-  .storage-label {
-    font-weight: 600;
-  }
-
-  .content-wrapper {
-    margin-top: 16px;
-    margin-bottom: 24px;
-    .table-container_header {
-      position: absolute;
-      z-index: 0;
-    }
-
-    .history-row-container {
-      max-width: 700px;
-    }
-  }
-
-  ${(props) => props.isSettingNotPaid && UnavailableStyles}
-`;
-
-const DownLoadWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 12px;
-
-  padding-block: 16px 30px;
-  position: sticky;
-  bottom: 0;
-  margin-top: 32px;
-  background-color: ${({ theme }) => theme.backgroundColor};
-
-  @media ${mobile} {
-    position: fixed;
-    padding-inline: 16px;
-    inset-inline: 0;
-  }
-
-  .download-report_button {
-    width: auto;
-    height: auto;
-    font-size: 13px;
-    line-height: 20px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-
-    @media ${tablet} {
-      font-size: 14px;
-      line-height: 16px;
-      padding-top: 11px;
-      padding-bottom: 11px;
-    }
-
-    @media ${mobile} {
-      width: 100%;
-    }
-  }
-
-  .download-report_description {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 16px;
-
-    height: 16px;
-
-    margin: 0;
-    color: ${(props) =>
-      props.theme.client.settings.security.auditTrail
-        .downloadReportDescriptionColor};
-  }
-
-  @media ${mobile} {
-    flex-direction: column-reverse;
-  }
-`;
+import styles from "./HistoryMainContent.module.scss";
 
 const HistoryMainContent = (props) => {
   const {
@@ -222,7 +95,14 @@ const HistoryMainContent = (props) => {
   };
 
   return (
-    <MainContainer isSettingNotPaid={isSettingNotPaid}>
+    <div
+      className={[
+        styles["main-container"],
+        isSettingNotPaid && styles.unavailable,
+      ]
+        .filter(Boolean)
+        .join(" ")}
+    >
       <TwoFactorCampaignBanner
         tfaEnabled={tfaEnabled}
         currentColorScheme={currentColorScheme}
@@ -306,7 +186,7 @@ const HistoryMainContent = (props) => {
         )} */}
       </div>
       {content}
-      <DownLoadWrapper>
+      <div className={styles["download-wrapper"]}>
         <Button
           className="download-report_button"
           dataTestId={
@@ -325,8 +205,8 @@ const HistoryMainContent = (props) => {
         <span className="download-report_description">
           {downloadReportDescription}
         </span>
-      </DownLoadWrapper>
-    </MainContainer>
+      </div>
+    </div>
   );
 };
 

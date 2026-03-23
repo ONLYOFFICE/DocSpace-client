@@ -24,28 +24,35 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
+.loader {
+  .description {
+    margin-bottom: 12px;
+  }
 
-import styles from "./tfa-loader.module.scss";
+  .setting {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-direction: row;
+    margin-bottom: 4px;
+  }
 
-const TfaLoader = () => {
-  return (
-    <div className={styles.loader}>
-      <RectangleSkeleton className={styles.header} height="37px" />
-      <RectangleSkeleton className={styles.description} height="40px" />
-      <div className={styles.link}>
-        <RectangleSkeleton height="20px" width="57px" />
-      </div>
+  .checkbox {
+    margin-top: 2px;
+  }
 
-      <div className={styles.checkboxs}>
-        <RectangleSkeleton height="20px" />
-        <RectangleSkeleton height="20px" />
-        <RectangleSkeleton height="20px" />
-      </div>
+  .description-setting {
+    margin-left: 24px;
+    width: calc(100% - 24px);
+  }
 
-      <RectangleSkeleton className={styles.buttons} height="40px" />
-    </div>
-  );
-};
+  .setting-container {
+    margin-bottom: 12px;
+  }
 
-export default TfaLoader;
+  .buttons {
+    width: calc(100% - 16px);
+    position: absolute;
+    bottom: 16px;
+  }
+}

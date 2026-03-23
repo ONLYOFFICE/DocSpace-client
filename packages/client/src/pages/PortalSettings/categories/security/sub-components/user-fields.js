@@ -25,12 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useEffect, useRef } from "react";
-import styled from "styled-components";
-import {
-	commonIconsStyles,
-	injectDefaultTheme,
-	mobile,
-} from "@docspace/shared/utils";
 import TrashIcon from "PUBLIC_DIR/images/icons/16/trash.react.svg";
 import PlusIcon from "PUBLIC_DIR/images/plus.react.svg";
 import { Link } from "@docspace/ui-kit/components/link";
@@ -42,56 +36,7 @@ import {
 import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { useTranslation } from "react-i18next";
 
-const StyledPlusIcon = styled(PlusIcon).attrs(injectDefaultTheme)`
-  ${commonIconsStyles}
-
-  path {
-    fill: ${(props) => props.theme.client.settings.iconFill};
-  }
-`;
-
-const StyledTrashIcon = styled(TrashIcon)`
-  ${commonIconsStyles}
-  cursor: pointer;
-  path {
-    fill: ${(props) => props.theme.client.settings.trashIcon};
-  }
-`;
-
-const StyledInputWrapper = styled.div`
-  margin-bottom: 8px;
-  width: ${(props) => (props.hideDeleteIcon ? "324px" : "350px")};
-
-  .field-container {
-    width: 100%;
-    margin: 0;
-  }
-
-  .input-wrapper {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    width: 100%;
-    gap: 10px;
-  }
-
-  .text-input {
-    width: 100%;
-  }
-
-  @media ${mobile} {
-    width: ${(props) => (props.hideDeleteIcon ? "calc(100% - 26px)" : "100%")};
-  }
-`;
-
-const StyledAddWrapper = styled.div`
-  display: inline-flex;
-  flex-direction: row;
-  gap: 6px;
-  align-items: center;
-  cursor: pointer;
-  margin-top: ${(props) => (props.inputsLength > 0 ? "8px" : "0px")};
-`;
+import styles from "./user-fields.module.scss";
 
 const usePrevious = (value) => {
 	const ref = useRef();
@@ -169,9 +114,14 @@ const UserFields = (props) => {
 							: !validateFunc(input) || errorMessages?.[index];
 
 						return (
-							<StyledInputWrapper
+							<div
 								key={`user-input-${inputs.length - index}`}
-								hideDeleteIcon={hideDeleteIcon}
+								className={[
+									styles["input-wrapper"],
+									hideDeleteIcon && styles["hide-delete-icon"],
+								]
+									.filter(Boolean)
+									.join(" ")}
 							>
 								<FieldContainer
 									className="field-container"
@@ -199,31 +149,35 @@ const UserFields = (props) => {
 											testId={inputDataTestId}
 										/>
 										{hideDeleteIcon ? null : (
-											<StyledTrashIcon
-												className={`${classNameAdditional}-delete-icon`}
-												size="medium"
+											<TrashIcon
+												className={`${styles["trash-icon"]} ${classNameAdditional}-delete-icon`}
 												onClick={() => onDelete(index)}
 												data-testid={deleteIconDataTestId}
 											/>
 										)}
 									</div>
 								</FieldContainer>
-							</StyledInputWrapper>
+							</div>
 						);
 					})
 				: null}
 
-			<StyledAddWrapper
-				className={classNameAdditional}
+			<div
+				className={[
+					styles["add-wrapper"],
+					inputs.length > 0 && styles["has-inputs"],
+					classNameAdditional,
+				]
+					.filter(Boolean)
+					.join(" ")}
 				onClick={onClickAdd}
-				inputsLength={inputs.length}
 				data-testid={addButtonDataTestId}
 			>
-				<StyledPlusIcon size="small" />
+				<PlusIcon className={styles["plus-icon"]} />
 				<Link type="action" isHovered fontWeight={600}>
 					{buttonLabel}
 				</Link>
-			</StyledAddWrapper>
+			</div>
 		</div>
 	);
 };

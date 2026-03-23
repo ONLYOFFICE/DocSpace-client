@@ -24,28 +24,43 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
+.row-content {
+  padding-bottom: 10px;
 
-import styles from "./tfa-loader.module.scss";
+  :global(.user-container-wrapper) {
+    p {
+      color: var(--text-color);
+    }
+  }
 
-const TfaLoader = () => {
-  return (
-    <div className={styles.loader}>
-      <RectangleSkeleton className={styles.header} height="37px" />
-      <RectangleSkeleton className={styles.description} height="40px" />
-      <div className={styles.link}>
-        <RectangleSkeleton height="20px" width="57px" />
-      </div>
+  :global(.mainIcons) {
+    p {
+      color: var(--security-side-color);
+    }
+  }
 
-      <div className={styles.checkboxs}>
-        <RectangleSkeleton height="20px" />
-        <RectangleSkeleton height="20px" />
-        <RectangleSkeleton height="20px" />
-      </div>
+  :global(.row-main-container-wrapper) {
+    display: flex;
+    justify-content: flex-start;
+  }
 
-      <RectangleSkeleton className={styles.buttons} height="40px" />
-    </div>
-  );
-};
+  :global(.date-text) {
+    color: var(--security-side-color);
+  }
 
-export default TfaLoader;
+  &.unavailable {
+    :global(.settings_unavailable) {
+      color: var(--management-disable-color) !important;
+      pointer-events: none;
+      cursor: default;
+
+      label {
+        color: var(--management-disable-color) !important;
+      }
+
+      path {
+        fill: var(--management-disable-color) !important;
+      }
+    }
+  }
+}

@@ -24,40 +24,22 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect, useState } from "react";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import { isTablet } from "@docspace/shared/utils";
+@use "@docspace/ui-kit/styles/mixins";
 
-import styles from "./loaderSectionHeader.module.scss";
+.styledLoader {
+  display: flex;
+  align-items: center;
+  padding: 14px 0 0;
 
-const LoaderSectionHeader = () => {
-  const [isTabletView, setIsTabletView] = useState(false);
+  :global(.arrow) {
+    padding-inline-end: 12px;
+  }
 
-  const height = isTabletView ? "28" : "24";
-  const width = isTabletView ? "163" : "140";
+  @include mixins.tablet {
+    padding: 16px 0 17px;
+  }
 
-  const levelSettings = window.location.pathname.split("/").length - 1;
-
-  const checkInnerWidth = () => {
-    setIsTabletView(isTablet());
-  };
-
-  useEffect(() => {
-    checkInnerWidth();
-    window.addEventListener("resize", checkInnerWidth);
-
-    return () => window.removeEventListener("resize", checkInnerWidth);
-  });
-
-  return (
-    <div className={styles.styledLoader}>
-      {levelSettings === 4 ? (
-        <RectangleSkeleton width="17" height="17" className="arrow" />
-      ) : null}
-
-      <RectangleSkeleton width={width} height={height} className="loader" />
-    </div>
-  );
-};
-
-export default LoaderSectionHeader;
+  @include mixins.desktop {
+    padding: 21px 0 23px;
+  }
+}

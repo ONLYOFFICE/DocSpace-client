@@ -30,14 +30,14 @@ import ActionsHeaderTouchReactSvgUrl from "PUBLIC_DIR/images/actions.header.touc
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import styled, { useTheme } from "styled-components";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { useNavigate, useLocation } from "react-router";
 import { withTranslation } from "react-i18next";
 import { Heading } from "@docspace/ui-kit/components/heading";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { TableGroupMenu } from "@docspace/ui-kit/components/table";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-import { mobile, tablet, desktop, isMobile } from "@docspace/shared/utils";
+import { isMobile } from "@docspace/shared/utils";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import { Badge } from "@docspace/ui-kit/components/badge";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
@@ -55,97 +55,22 @@ import {
 } from "../../../utils";
 import LoaderSectionHeader from "../loaderSectionHeader";
 
-export const HeaderContainer = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-  max-width: calc(100vw - 32px);
-  .settings-section_header {
-    display: flex;
-    align-items: center;
-    .settings-section_badge {
-      margin-inline-start: 8px;
-      cursor: auto;
-    }
+import styles from "./index.module.scss";
 
-    .header {
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
-      color: ${(props) => props.theme.client.settings.headerTitleColor};
-    }
-  }
-  .settings-section_warning {
-    margin-inline-start: 16px;
-  }
-  .action-wrapper {
-    flex-grow: 1;
+export const HeaderContainer = ({ children, className, ...props }) => (
+  <div
+    className={[styles.headerContainer, className].filter(Boolean).join(" ")}
+    {...props}
+  >
+    {children}
+  </div>
+);
 
-    .action-button {
-      margin-inline-start: auto;
-    }
-  }
-
-  .arrow-button {
-    flex-shrink: 0;
-    margin-inline-end: 12px;
-
-    svg {
-      ${({ theme }) =>
-        theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
-    }
-  }
-
-  @media ${tablet} {
-    h1 {
-      line-height: 61px;
-      font-size: 21px;
-    }
-  }
-
-  @media ${desktop} {
-    h1 {
-      font-size: 18px;
-      line-height: 59px !important;
-    }
-  }
-
-  @media ${mobile} {
-    h1 {
-      line-height: 53px;
-      font-size: 18px;
-    }
-  }
-
-  .tariff-bar {
-    margin-inline-start: auto;
-  }
-`;
-
-export const StyledContainer = styled.div`
-  .table-container_group-menu {
-    margin-block: 0;
-    margin-inline: -20px 0;
-    -webkit-tap-highlight-color: ${globalColors.tapHighlight};
-
-    width: calc(100% + 40px);
-    height: 68px;
-
-    @media ${tablet} {
-      height: 61px;
-      margin-block: 0;
-      margin-inline: -16px 0;
-      width: calc(100% + 32px);
-    }
-
-    @media ${mobile} {
-      height: 52px !important;
-      margin-block: 0;
-      margin-inline: -16px 0;
-      width: calc(100% + 32px);
-    }
-  }
-`;
+export const StyledContainer = ({ children, className }) => (
+  <div className={[styles.styledContainer, className].filter(Boolean).join(" ")}>
+    {children}
+  </div>
+);
 
 const SectionHeaderContent = (props) => {
   const {
@@ -168,7 +93,7 @@ const SectionHeaderContent = (props) => {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const theme = useTheme();
+  const { isBase } = useTheme();
 
   const isOAuth = location.pathname.includes("oauth");
 
@@ -383,7 +308,7 @@ const SectionHeaderContent = (props) => {
   // console.log(translatedHeader, header);
 
   return (
-    <StyledContainer isHeaderVisible={isHeaderVisible}>
+    <StyledContainer>
       {isHeaderVisible ? (
         <TableGroupMenu
           checkboxOptions={menuItems}
@@ -421,7 +346,7 @@ const SectionHeaderContent = (props) => {
               {isNeedPaidIcon ? (
                 <Badge
                   backgroundColor={
-                    theme.isBase
+                    isBase
                       ? globalColors.favoritesStatus
                       : globalColors.favoriteStatusDark
                   }

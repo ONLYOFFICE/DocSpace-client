@@ -475,13 +475,13 @@ export const PluginComponent = inject(({ pluginStore }) => {
               : undefined;
 
             return (
-                <IconButton
-                  {...rest}
-                  iconName={icon}
-                  iconHoverName={iconHover}
-                  iconClickName={iconClick}
-                  onClick={onClickAction}
-                />
+              <IconButton
+                {...rest}
+                iconName={icon}
+                iconHoverName={iconHover}
+                iconClickName={iconClick}
+                onClick={onClickAction}
+              />
             );
           }
 
@@ -513,12 +513,9 @@ export const PluginComponent = inject(({ pluginStore }) => {
             };
 
             return (
-                <Link 
-                  {...elementProps} 
-                  onClick={onClickAction}
-                >
-                  {elementProps.text}
-                </Link>
+              <Link {...elementProps} onClick={onClickAction}>
+                {elementProps.text}
+              </Link>
             );
           }
 
@@ -588,3 +585,4 @@ const WrappedComponent = ({
 };
 
 export default WrappedComponent;
+

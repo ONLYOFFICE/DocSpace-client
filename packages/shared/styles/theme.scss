@@ -2592,3 +2592,11 @@
   --room-grouping-dialog-tag-active: #{$light-blue-main};
   --room-grouping-dialog-fade: #{$black};
 }
+
+.light {
+  --portal-unavailable-text-color: #{$gray};
+}
+
+.dark {
+  --portal-unavailable-text-color: #{$gray-dark};
+}

@@ -80,7 +80,6 @@
   "PayerDescription": "Questo utente ha accesso ai dettagli di pagamento ed è l’unico utente che può modificare la quota ed effettuare pagamenti. Il proprietario di {{productName}}, così come lo stesso gestore dei pagamenti, può riassegnare il ruolo di responsabile dei pagamenti utilizzando il portale clienti Stripe.",
   "PaymentMethod": "Metodo di pagamento",
   "PerBackup": "{{currency}} per 1 backup",
-  "PerBackupWithBracket": "({{currency}} per 1 backup)",
   "PerStorage": "{{currency}} per {{amount}}/mese",
   "PerStorageWitnMinValue": "{{currency}} a {{amount}}/mese <1>(min {{minValue}}{{storageUnit}})</1>",
   "PlanUpgrade": "Upgrade del piano",

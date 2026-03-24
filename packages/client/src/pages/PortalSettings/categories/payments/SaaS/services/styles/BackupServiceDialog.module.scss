@@ -300,23 +300,34 @@
 }
 
 .pricingRowIconBox {
- display: flex;
+  display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  border: 1px solid var(--aside-header-border-color);
+  border-radius: 4px;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+
+  .iconsContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
 
   rect {
     fill: var(--color-scheme-main-buttons);
-    opacity: 0.1;
   }
 
   path {
     fill: var(--color-scheme-main-buttons);
-    opacity: 1;
   }
 }
-
-
-
 
 .pricingRowPrice {
   font-size: 12px;
@@ -373,10 +384,21 @@
   align-items: center;
   justify-content: center;
   flex: 0 0 auto;
+  border: 1px solid var(--aside-header-border-color);
+  border-radius: 4px;
 
-  svg{
-    rect{
-      stroke: var(--border-service-color)
+  .iconsContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+
+    rect {
+      stroke: var(--border-service-color);
     }
   }
 }

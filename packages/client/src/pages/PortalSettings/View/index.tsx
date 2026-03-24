@@ -61,7 +61,7 @@ import useAiSettings from "../categories/ai-settings/useAiSettings";
 import { createDefaultHookSettingsProps } from "../utils/createDefaultHookSettingsProps";
 import { isMainSectionChange } from "../utils/isMainSectionChange";
 import { TView, ViewProps } from "./View.types";
-import BackupPage from "../categories/payments/SaaS/services/pages/Backup/BackupPage";
+import BackupPage from "../categories/payments/SaaS/services/pages/backup/BackupPage";
 import AdditionalStoragePage from "../categories/payments/SaaS/services/pages/additional-storage/AdditionalStoragePage";
 
 const getViewFromPathname = (pathname: string): TView => {
@@ -256,7 +256,11 @@ const View = ({
         prevPathRef.current = currentPath;
 
         // Only proceed with data loading if it's a main section change or a view change within payments sub-pages
-        if (!isMainSectionChanged && !isSameSectionClick && !isPaymentsSubPageChange) {
+        if (
+          !isMainSectionChanged &&
+          !isSameSectionClick &&
+          !isPaymentsSubPageChange
+        ) {
           if (requestId === activeRequestIdRef.current) {
             setIsLoading(false);
           }
@@ -435,3 +439,4 @@ export const ViewComponent = inject(
     };
   },
 )(observer(View));
+

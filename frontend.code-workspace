@@ -243,6 +243,11 @@
             "tooltip": "🛠️ Start the \"frontend start\" task"
           },
           {
+            "label": "Start:sdk",
+            "task": "Frontend | start:sdk",
+            "tooltip": "🛠️ Start the \"frontend sdk start\" task"
+          },
+          {
             "label": "Start prod",
             "task": "Frontend | start-prod",
             "tooltip": "🛠️ Start the \"frontend start production\" task"
@@ -251,6 +256,11 @@
             "label": "Start prod:lite",
             "task": "Frontend | start-prod:lite",
             "tooltip": "🛠️ Start the \"frontend start production\" task"
+          },
+          {
+            "label": "Start prod:sdk",
+            "task": "Frontend | start-prod:sdk",
+            "tooltip": "🛠️ Start the \"frontend sdk start production\" task"
           },
           {
             "label": "Deploy",

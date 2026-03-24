@@ -26,8 +26,9 @@
 
 .servicesWrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fit, 320px);
+  grid-template-columns: repeat(auto-fill, 320px);
   gap: 16px;
+  max-width: 656px;
 
   &.servicesWrapperMobile {
     grid-template-columns: 1fr;

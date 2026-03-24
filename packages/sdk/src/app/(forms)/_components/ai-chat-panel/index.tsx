@@ -37,6 +37,7 @@ import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import Chat from "@docspace/ui-kit/ai-agent/chat";
 
 import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
+import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
 import useItemIcon from "@/app/(docspace)/_hooks/useItemIcon";
 
@@ -65,6 +66,7 @@ const AiChatPanel = ({ rootRef }: AiChatPanelProps) => {
     setPanelWidth,
   } = aiAgentStore;
   const { filesSettings, hasManagementAccess } = useFormsSettingsStore();
+  const { editingFile } = useFormsNavigationStore();
 
   const panelRef = React.useRef<HTMLDivElement>(null);
 
@@ -144,7 +146,8 @@ const AiChatPanel = ({ rootRef }: AiChatPanelProps) => {
     setPanelPosition(panelPosition === "left" ? "right" : "left");
   }, [panelPosition, setPanelPosition]);
 
-  if (!isPanelVisible || !agentRoomId || !hasManagementAccess) return null;
+  if (!isPanelVisible || !agentRoomId || !hasManagementAccess || editingFile)
+    return null;
 
   return (
     <div

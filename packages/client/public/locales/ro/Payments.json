@@ -80,7 +80,6 @@
   "PayerDescription": "Acest utilizator are acces la detalii de plată şi este singurul utilizator care poate seta cota şi efectua plăţi. Proprietarul {{productName}}, precum şi mesagerul plătitor, pot reatribui rolul de manager plătitor folosind portalul de client Stripe.",
   "PaymentMethod": "Metodă de plată",
   "PerBackup": "{{currency}} pentru o copie de rezervă",
-  "PerBackupWithBracket": "({{currency}} pentru o copie de rezervă)",
   "PerStorage": "{{currency}} pentru {{amount}}/lună",
   "PerStorageWitnMinValue": "{{currency}} {{amount}}/lună <1>(min {{minValue}} {{storageUnit}})</1>",
   "PlanUpgrade": "Upgrade de abonament",

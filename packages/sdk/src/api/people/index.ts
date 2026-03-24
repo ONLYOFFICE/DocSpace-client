@@ -26,7 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { cookies, headers } from "next/headers";
+import { cookies } from "next/headers";
 
 import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
 import type { TUser } from "@docspace/shared/api/people/types";
@@ -38,10 +38,8 @@ export async function getSelf(): Promise<TUser | undefined> {
   try {
     const cookieStore = await cookies();
     const authToken = cookieStore.get("asc_auth_key");
-    const hdrs = await headers();
-    const requestToken = hdrs.get("x-sdk-config-request-token");
 
-    if (!authToken && !requestToken) return;
+    if (!authToken) return;
 
     const [req] = await createRequest([`/people/@self`], [["", ""]], "GET");
     const res = await fetch(req, { next: { revalidate: 300 } });

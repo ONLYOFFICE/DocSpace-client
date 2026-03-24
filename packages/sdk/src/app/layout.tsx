@@ -29,19 +29,15 @@ import type { Metadata } from "next";
 import { ThemeKeys } from "@docspace/ui-kit/enums";
 import { SYSTEM_THEME_KEY } from "@docspace/ui-kit/providers/theme/themes/constants";
 import {
-	getDirectionByLanguage,
-	getFontFamilyDependingOnLanguage,
+  getDirectionByLanguage,
+  getFontFamilyDependingOnLanguage,
 } from "@docspace/ui-kit/providers/theme/rtl-utils";
 
 import "@docspace/shared/styles/theme.scss";
 
 import "@/styles/globals.scss";
 import { getColorTheme, getPortalCultures, getSettings } from "@/api/settings";
-import {
-	LOCALE_HEADER,
-	REQUEST_TOKEN_HEADER,
-	THEME_HEADER,
-} from "@/utils/constants";
+import { LOCALE_HEADER, THEME_HEADER } from "@/utils/constants";
 import Providers from "@/providers";
 import { getSelf } from "@/api/people";
 import Scripts from "@/components/Scripts";
@@ -134,9 +130,7 @@ export default async function RootLayout({
             locale,
             portalCultures,
             authToken:
-              cookieStore.get("asc_auth_key")?.value ||
-              hdrs.get(REQUEST_TOKEN_HEADER) ||
-              undefined,
+              cookieStore.get("asc_auth_key")?.value || undefined,
           }}
         >
           {children}
@@ -146,3 +140,4 @@ export default async function RootLayout({
     </html>
   );
 }
+

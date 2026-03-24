@@ -80,7 +80,6 @@
   "PayerDescription": "Tento uživatel má přístup k platebním údajům a je jediným uživatelem, který může upravovat kvóty a provádět platby. Vlastník {{productName}}, stejně jako samotný správce platby, může roli správce platby přeřadit pomocí zákaznického prostoru Stripe.",
   "PaymentMethod": "Způsob platby",
   "PerBackup": "{{currency}} za 1 zálohu",
-  "PerBackupWithBracket": "({{currency}} za 1 zálohu)",
   "PerStorage": "{{currency}} za {{amount}}/měsíc",
   "PerStorageWitnMinValue": "{{currency}} za {{amount}}/měsíc <1>(min {{minValue}}{{storageUnit}})</1>",
   "PlanUpgrade": "Plán aktualizace",

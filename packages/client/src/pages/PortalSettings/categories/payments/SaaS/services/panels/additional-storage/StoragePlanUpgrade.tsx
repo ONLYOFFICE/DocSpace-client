@@ -39,7 +39,10 @@ import {
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { updateWalletPayment } from "@docspace/shared/api/portal";
 import { calculateTotalPrice } from "@docspace/shared/utils/common";
-import { STORAGE_TARIFF_DEACTIVATED } from "@docspace/shared/constants";
+import {
+  STORAGE_DEACTIVATION_VISITED,
+  STORAGE_TARIFF_DEACTIVATED,
+} from "@docspace/shared/constants";
 import { useNavigate } from "react-router";
 
 import SalesDepartmentRequestDialog from "SRC_DIR/components/dialogs/SalesDepartmentRequestDialog";
@@ -145,11 +148,12 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   const newStorageSizeOnUpgrade =
     isUpgradeStoragePlan && currentStoragePlanSize! > 0;
 
-  const isPaymentBlockedByBalance = isDowngradeStoragePlan
-    ? false
-    : newStorageSizeOnUpgrade
-      ? isWalletBalanceInsufficient(partialUpgradeFee!)
-      : isWalletBalanceInsufficient(totalPrice);
+  const isPaymentBlockedByBalance =
+    isDowngradeStoragePlan || isExceedingStorageLimit
+      ? false
+      : newStorageSizeOnUpgrade
+        ? isWalletBalanceInsufficient(partialUpgradeFee!)
+        : isWalletBalanceInsufficient(totalPrice);
 
   const isPaymentBlocked =
     (!hasScheduledStorageChange && +amount < MIN_VALUE && amount === "") ||
@@ -196,6 +200,10 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
 
     if (localStorage.getItem(STORAGE_TARIFF_DEACTIVATED) !== null) {
       localStorage.removeItem(STORAGE_TARIFF_DEACTIVATED);
+    }
+
+    if (localStorage.getItem(STORAGE_DEACTIVATION_VISITED) !== null) {
+      localStorage.removeItem(STORAGE_DEACTIVATION_VISITED);
     }
 
     setIsLoading(false);
@@ -277,9 +285,12 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
         }
 
         if (isNewSubscription) {
-          navigate(
-            "/portal-settings/payments/services/disk-storage?complete=true",
-          );
+          const targetPath =
+            "/portal-settings/payments/services/disk-storage?complete=true";
+
+          if (!window.location.pathname.includes("/disk-storage")) {
+            navigate(targetPath);
+          }
           return;
         }
 
@@ -449,18 +460,20 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
                   isDowngradeStoragePlan={isDowngradeStoragePlan}
                   reccomendedAmount={reccomendedAmount}
                   hasMinError={hasMinError}
+                  isExceedingStorageLimit={isExceedingStorageLimit}
                 />
               ) : null}
             </div>
             {isDowngradeStoragePlan && debouncedAmount && !hasMinError ? (
               <div className={styles.warningContainer}>
-                <StorageWarning style={{ marginBottom: 16 }} />
+                <StorageWarning />
               </div>
             ) : null}
           </div>
         </ModalDialog.Body>
         <ModalDialog.Footer>
           <ButtonContainer
+            isDowngradeStoragePlan={isDowngradeStoragePlan}
             totalPrice={totalPrice}
             isCurrentStoragePlan={isCurrentStoragePlan}
             isExceedingStorageLimit={isExceedingStorageLimit}

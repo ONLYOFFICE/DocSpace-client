@@ -62,6 +62,7 @@ type OrderSummaryProps = {
   hasMinError?: boolean;
   language?: string;
   hasStorageSubscription?: boolean;
+  isExceedingStorageLimit?: boolean;
 };
 
 const OrderSummary: React.FC<OrderSummaryProps> = ({
@@ -73,7 +74,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
   formatWalletCurrency,
   totalPrice = 0,
   isUpgradeStoragePlan,
-  daysUntilStorageExpiry,
+  daysUntilStorageExpiry = 0,
   setPartialUpgradeFee,
   partialUpgradeFee,
   isDowngradeStoragePlan,
@@ -81,15 +82,13 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
   hasMinError,
   language = "en",
   hasStorageSubscription,
+  isExceedingStorageLimit,
 }) => {
   const { t } = useTranslation(["Services", "Payments", "Common"]);
   const { isRTL } = useInterfaceDirection();
   const { setIsWaitingCalculation } = usePaymentContext();
-  const {
-    calculateDifferenceBetweenPlan,
-    isExceedingPlanLimit,
-    maxStorageLimit,
-  } = useServicesActions();
+  const { calculateDifferenceBetweenPlan, maxStorageLimit } =
+    useServicesActions();
 
   const [isPriceLoading, setIsPriceLoading] = useState(false);
 
@@ -99,6 +98,8 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
   const isNewSubscription = !hasStorageSubscription;
 
   useEffect(() => {
+    if (isExceedingStorageLimit) return;
+
     if (isNewSubscription || isDowngradeStoragePlan) return;
 
     setIsPriceLoading(true);
@@ -139,8 +140,6 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
     };
   }, []);
 
-  const isExceedingStorageLimit = isExceedingPlanLimit(amount);
-
   const tooltipText = () => (
     <>
       <Text as="span">
@@ -168,16 +167,17 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
   const remainingBalance = partialUpgradeFee
     ? walletBalance - partialUpgradeFee
     : walletBalance - totalPrice;
-  const daysDisplay = daysUntilStorageExpiry
-    ? Duration.fromObject(
-        { days: daysUntilStorageExpiry },
-        { locale: language },
-      ).toHuman()
-    : t("Services:LessThanOneDay");
+  const daysDisplay =
+    daysUntilStorageExpiry > 1
+      ? Duration.fromObject(
+          { days: daysUntilStorageExpiry },
+          { locale: language },
+        ).toHuman()
+      : t("Services:LessThanOneDay");
 
   return (
     <div className={styles.orderSummaryWrapper}>
-      <Text fontWeight="700" fontSize="16px" className={styles.sectionTitle}>
+      <Text fontWeight="700" fontSize="16px">
         {t("OrderSummary")}
       </Text>
       <div className={styles.summaryCard}>
@@ -227,6 +227,22 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
               {formatWalletCurrency!(storagePriceIncrement, 2)}
             </Text>
           </div>
+          {isDowngradeStoragePlan &&
+          !isExceedingStorageLimit &&
+          !isNewSubscription ? (
+            <div className={styles.summaryRow}>
+              <Text fontSize="14px" className={styles.rowLabel}>
+                {t("Services:NewMonthlyPrice")}
+              </Text>
+              <Text
+                fontWeight="600"
+                fontSize="14px"
+                className={styles.rowValue}
+              >
+                {formatWalletCurrency!(totalPrice, 2)}
+              </Text>
+            </div>
+          ) : null}
           {!isExceedingStorageLimit && !isNewSubscription ? (
             <div className={styles.summaryRow}>
               <Text fontSize="14px" className={styles.rowLabel}>

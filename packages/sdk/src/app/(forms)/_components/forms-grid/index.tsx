@@ -28,14 +28,17 @@
 
 import React from "react";
 import { observer } from "mobx-react";
+import { usePathname } from "next/navigation";
 
 import type { TFile, TFilesSettings } from "@docspace/shared/api/files/types";
+import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 
 import useItemIcon from "@/app/(docspace)/_hooks/useItemIcon";
 import useItemList from "@/app/(docspace)/_hooks/useItemList";
 
 import { FormsSection } from "@/types/forms";
 
+import { sectionFromPathname } from "../../_utils/sectionFromPathname";
 import { useFormsListStore } from "../../_store/FormsListStore";
 import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 import useFormsContextMenu from "../../_hooks/useFormsContextMenu";
@@ -51,8 +54,9 @@ type FormsGridProps = {
 
 const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
   const { items, folders, hasMore, isLoading } = useFormsListStore();
+  const pathname = usePathname();
+  const activeSection = sectionFromPathname(pathname);
   const {
-    activeSection,
     completedFolder,
     inProgressFolder,
     openCompletedFolder,
@@ -76,8 +80,32 @@ const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
   );
 
   const sentinelRef = React.useRef<HTMLDivElement>(null);
+  const gridRef = React.useRef<HTMLDivElement>(null);
   const fetchMoreRef = React.useRef(fetchMore);
   fetchMoreRef.current = fetchMore;
+
+  const columnsCountRef = React.useRef(4);
+  const [skeletonCount, setSkeletonCount] = React.useState(4);
+
+  React.useEffect(() => {
+    const grid = gridRef.current;
+    if (!grid || !hasMore) return;
+
+    const measure = () => {
+      const raw = getComputedStyle(grid).gridTemplateColumns;
+      const cols = raw && raw !== "none" ? raw.split(" ").length : 4;
+      if (cols === columnsCountRef.current) return;
+      columnsCountRef.current = cols;
+      const rem = items.length % cols;
+      setSkeletonCount(rem === 0 ? cols : cols - rem);
+    };
+
+    measure();
+
+    const ro = new ResizeObserver(measure);
+    ro.observe(grid);
+    return () => ro.disconnect();
+  }, [hasMore, items.length]);
 
   React.useEffect(() => {
     const sentinel = sentinelRef.current;
@@ -103,19 +131,32 @@ const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
     return () => observer.disconnect();
   }, [hasMore, items.length]);
 
-  if (isLoading && items.length === 0 && folders.length === 0) {
-    return null;
+  const hasFolders = folders.length > 0;
+  const hasItems = items.length > 0;
+
+  if (!hasFolders && !hasItems) {
+    if (isLoading) {
+      return (
+        <div className={styles.filesGrid}>
+          {Array.from({ length: columnsCountRef.current * 2 }, (_, i) => (
+            <RectangleSkeleton
+              key={`init_skeleton_${i}`}
+              width="100%"
+              height="220px"
+              borderRadius="12px"
+              animate
+            />
+          ))}
+        </div>
+      );
+    }
+    return <FormsEmpty />;
   }
 
-  if (isFoldersRoot) {
-    if (folders.length === 0) {
-      return <FormsEmpty />;
-    }
-
+  if ((isFoldersRoot || !hasItems) && hasFolders) {
     const onOpenFolder = isCompletedRoot
       ? openCompletedFolder
       : openInProgressFolder;
-
     return (
       <div className={styles.foldersGrid}>
         {folders.map((folder) => (
@@ -124,27 +165,39 @@ const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
             folder={folder}
             getIcon={getIcon}
             onOpenFolder={onOpenFolder}
-            contextOptions={getFolderContextMenuModel(folder)}
+            contextOptions={getFolderContextMenuModel(folder, () =>
+              onOpenFolder(folder),
+            )}
           />
         ))}
       </div>
     );
   }
 
-  if (items.length === 0) {
-    return <FormsEmpty />;
+  if (hasItems) {
+    return (
+      <>
+        <div className={styles.filesGrid} ref={gridRef}>
+          {fileItems.map((item) => (
+            <FormsTile key={`file_${item.id}`} item={item} getIcon={getIcon} />
+          ))}
+          {hasMore &&
+            Array.from({ length: skeletonCount }, (_, i) => (
+              <RectangleSkeleton
+                key={`skeleton_${i}`}
+                width="100%"
+                height="220px"
+                borderRadius="12px"
+                animate
+              />
+            ))}
+        </div>
+        {hasMore && <div ref={sentinelRef} style={{ height: 1 }} />}
+      </>
+    );
   }
 
-  return (
-    <>
-      <div className={styles.filesGrid}>
-        {fileItems.map((item) => (
-          <FormsTile key={`file_${item.id}`} item={item} getIcon={getIcon} />
-        ))}
-      </div>
-      {hasMore && <div ref={sentinelRef} style={{ height: 1 }} />}
-    </>
-  );
+  return isLoading ? null : <FormsEmpty />;
 };
 
 export default observer(FormsGrid);

@@ -31,7 +31,6 @@ import {
   FILTER_HEADER,
   LOCALE_HEADER,
   PATHNAME_HEADER,
-  REQUEST_TOKEN_HEADER,
   ROOM_ID_HEADER,
   SHARE_KEY_HEADER,
   THEME_HEADER,
@@ -83,10 +82,8 @@ export async function proxy(request: NextRequest) {
 
   if (request.nextUrl.pathname.includes("forms")) {
     const roomId = searchParams.get("roomId") ?? "";
-    const requestToken = searchParams.get("requestToken") ?? "";
 
     requestHeaders.set(ROOM_ID_HEADER, roomId);
-    requestHeaders.set(REQUEST_TOKEN_HEADER, requestToken);
     requestHeaders.set(FILTER_HEADER, searchParams.toString());
 
     return NextResponse.next({
@@ -147,5 +144,6 @@ export const config = {
     "/public-room",
     "/public-room/password",
     "/forms",
+    "/forms/:path*",
   ],
 };

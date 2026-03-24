@@ -80,6 +80,7 @@ import {
 
 import type SelectedFolderStore from "./SelectedFolderStore";
 import type { TSelectorProps } from "SRC_DIR/components/PluginSelector/types";
+import { IModalDialog } from "@onlyoffice/docspace-plugin-sdk";
 
 const { api: apiConf, proxy: proxyConf } = defaultConfig;
 const { origin: apiOrigin, prefix: apiPrefix } = apiConf;
@@ -138,7 +139,7 @@ class PluginStore {
     IFloatingOperationsButtonClient
   > = new Map();
 
-  pluginDialogProps: null | ModalDialogProps = null;
+  pluginDialogProps: null | IModalDialog = null;
 
   pluginSelectorProps: null | TSelectorProps = null;
 
@@ -169,12 +170,13 @@ class PluginStore {
     updateCreateDialogProps,
     updatePropsContext,
   }: TDispatchMessage) => {
+    if (!message) return;
+
     messageActions({
       message,
       pluginName,
       setElementProps,
       setSettingsPluginDialogVisible: this.setSettingsPluginDialogVisible,
-      setCurrentSettingsDialogPlugin: this.setCurrentSettingsDialogPlugin,
       updatePluginStatus: this.updatePluginStatus,
       updatePropsContext: updatePropsContext,
       setPluginDialogVisible: this.setPluginDialogVisible,
@@ -185,7 +187,6 @@ class PluginStore {
       updateProfileMenuItems: this.updateProfileMenuItems,
       updateEventListenerItems: this.updateEventListenerItems,
       updateFileItems: this.updateFileItems,
-      updateArticleButtonItems: this.updateArticleButtonItems,
       updateCreateDialogProps: updateCreateDialogProps,
       updatePlugin: this.updatePlugin,
       setPluginSelectorVisible: this.setPluginSelectorVisible,
@@ -226,7 +227,7 @@ class PluginStore {
     this.pluginSelectorProps = value;
   };
 
-  setPluginDialogProps = (value: null | ModalDialogProps) => {
+  setPluginDialogProps = (value: null | IModalDialog) => {
     this.pluginDialogProps = value;
   };
 
@@ -611,13 +612,13 @@ class PluginStore {
 
   updatePlugin = async (
     name: string,
-    status: boolean,
+    status: boolean | null,
     settings: string,
     t?: TTranslation,
   ) => {
     try {
       let currentSettings = settings;
-      let currentStatus = status;
+      let currentStatus = Boolean(status);
 
       const oldPlugin = this.pluginList.find((p) => p.name === name);
 
@@ -1032,7 +1033,7 @@ class PluginStore {
 
     const userRole = this.getUserRole();
     const device = this.getCurrentDevice();
-  
+
     Array.from(items).forEach(([key, value]) => {
       const correctUserType = value.usersType
         ? value.usersType.includes(userRole)
@@ -1088,10 +1089,7 @@ class PluginStore {
         });
       }
 
-      const onClick = createMainButtonClickHandler(
-        value,
-        plugin.name,
-      );
+      const onClick = createMainButtonClickHandler(value, plugin.name);
 
       this.mainButtonItems.set(key, {
         ...value,
@@ -1478,3 +1476,4 @@ class PluginStore {
 }
 
 export default PluginStore;
+

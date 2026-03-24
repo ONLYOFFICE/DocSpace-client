@@ -31,9 +31,10 @@ import { Events } from "@docspace/shared/enums";
 import config from "PACKAGE_FILE";
 
 import { PluginActions, PluginToastType } from "./enums";
-import type { IMessage, IFloatingOperationsButtonClient } from "./types";
 import { CategoryType } from "@docspace/shared/constants";
 import { getCategoryType } from "@docspace/shared/utils/common";
+import { IBox } from "@onlyoffice/docspace-plugin-sdk";
+
 import {
   showInfoPanel,
   openMembersTab,
@@ -43,51 +44,8 @@ import {
   setFileView,
   setRoomsView,
 } from "../info-panel";
-import { IBox } from "@onlyoffice/docspace-plugin-sdk";
 
-export interface TMessageActionsParams {
-  message: IMessage;
-  setElementProps?: (props: NonNullable<IMessage["newProps"]>) => void;
-  pluginName: string;
-  setSettingsPluginDialogVisible?: (value: boolean) => void;
-  updatePluginStatus?: (name: string) => void;
-  updatePropsContext?: (
-    contextProps: NonNullable<IMessage["contextProps"]>,
-  ) => void;
-  setPluginDialogVisible?: (value: boolean) => void;
-  setPluginDialogProps?: (
-    value:
-      | (NonNullable<IMessage["modalDialogProps"]> & { pluginName: string })
-      | null,
-  ) => void;
-  setPluginSelectorVisible?: (value: boolean) => void;
-  setPluginSelectorProps?: (
-    value:
-      | (NonNullable<IMessage["selectorProps"]> & { pluginName: string })
-      | null,
-  ) => void;
-  addPluginFloatingOperations?: (
-    value: IFloatingOperationsButtonClient,
-  ) => void;
-  removePluginFloatingOperations?: (id: string) => void;
-  updatePluginFloatingOperations?: (
-    value: IFloatingOperationsButtonClient,
-  ) => void;
-  updateContextMenuItems?: (pluginName: string) => void;
-  updateInfoPanelItems?: (pluginName: string) => void;
-  updateMainButtonItems?: (pluginName: string) => void;
-  updateProfileMenuItems?: (pluginName: string) => void;
-  updateEventListenerItems?: (pluginName: string) => void;
-  updateFileItems?: (pluginName: string) => void;
-  updateCreateDialogProps?: (
-    props: NonNullable<IMessage["createDialogProps"]>,
-  ) => void;
-  updatePlugin?: (
-    name: string,
-    status: boolean | null,
-    settings: string,
-  ) => void;
-}
+import { TMessageActionsParams } from "./types";
 
 export const messageActions = ({
   message,
@@ -118,7 +76,7 @@ export const messageActions = ({
     switch (action) {
       case PluginActions.updateProps:
         if (message.newProps) {
-          setElementProps?.(message.newProps);
+          setElementProps?.({ ...message.newProps });
         }
 
         break;
@@ -238,7 +196,7 @@ export const messageActions = ({
       case PluginActions.showModal:
         if (message.modalDialogProps) {
           setPluginDialogVisible?.(true);
-          setPluginDialogProps?.({ ...message.modalDialogProps, pluginName });
+          setPluginDialogProps?.({ ...message.modalDialogProps });
         }
         break;
 

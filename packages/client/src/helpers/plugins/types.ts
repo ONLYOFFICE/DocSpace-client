@@ -64,6 +64,8 @@ import type {
   IPostMessagePlugin,
 } from "@onlyoffice/docspace-plugin-sdk";
 
+import PluginStore from "SRC_DIR/store/PluginStore";
+
 import type {
   PluginDevices,
   PluginFileType,
@@ -95,13 +97,14 @@ export type {
 };
 
 //Extended client-side types
-export interface IFloatingOperationsButtonClient
-  extends IFloatingOperationsButton {
+export interface IFloatingOperationsButtonClient extends IFloatingOperationsButton {
   pluginName: string;
 }
 
-export interface IContextMenuItemClient
-  extends Omit<IContextMenuItem, "onClick"> {
+export interface IContextMenuItemClient extends Omit<
+  IContextMenuItem,
+  "onClick"
+> {
   pluginName: string;
   items?: Omit<IContextMenuItemClient, "items">[];
   onClick?: (
@@ -122,8 +125,10 @@ export interface IEventListenerItemClient extends IEventListenerItem {
   pluginName: string;
 }
 
-interface IInfoPanelItemSubMenuClient
-  extends Omit<IInfoPanelSubMenu, "onClick"> {
+interface IInfoPanelItemSubMenuClient extends Omit<
+  IInfoPanelSubMenu,
+  "onClick"
+> {
   onClick: (id: number) => Promise<IMessage | void>;
 }
 
@@ -194,3 +199,32 @@ export type TPlugin = {
   Partial<ISettingsPlugin> &
   Partial<IPostMessagePlugin> &
   Partial<IArticleButtonPlugin>;
+
+export interface TMessageActionsParams {
+  message: IMessage;
+  pluginName: string;
+  setElementProps?: (props: NonNullable<IMessage["newProps"]>) => void;
+  updatePropsContext?: (
+    contextProps: NonNullable<IMessage["contextProps"]>,
+  ) => void;
+  updateCreateDialogProps?: (
+    props: NonNullable<IMessage["createDialogProps"]>,
+  ) => void;
+  setSettingsPluginDialogVisible?: PluginStore["setSettingsPluginDialogVisible"];
+  updatePluginStatus?: PluginStore["updatePluginStatus"];
+  setPluginDialogVisible?: PluginStore["setPluginDialogVisible"];
+  setPluginDialogProps?: PluginStore["setPluginDialogProps"];
+  setPluginSelectorVisible?: PluginStore["setPluginSelectorVisible"];
+  setPluginSelectorProps?: PluginStore["setPluginSelectorProps"];
+  addPluginFloatingOperations?: PluginStore["addPluginFloatingOperations"];
+  removePluginFloatingOperations?: PluginStore["removePluginFloatingOperations"];
+  updatePluginFloatingOperations?: PluginStore["updatePluginFloatingOperations"];
+  updateContextMenuItems?: PluginStore["updateContextMenuItems"];
+  updateInfoPanelItems?: PluginStore["updateInfoPanelItems"];
+  updateMainButtonItems?: PluginStore["updateMainButtonItems"];
+  updateProfileMenuItems?: PluginStore["updateProfileMenuItems"];
+  updateEventListenerItems?: PluginStore["updateEventListenerItems"];
+  updateFileItems?: PluginStore["updateFileItems"];
+  updatePlugin?: PluginStore["updatePlugin"];
+}
+

@@ -44,6 +44,8 @@ export type TPluginStoreInjected = {
   updatePlugin: PluginStore["updatePlugin"];
   setPluginSelectorVisible: PluginStore["setPluginSelectorVisible"];
   setPluginSelectorProps: PluginStore["setPluginSelectorProps"];
+  setPluginMediaViewerVisible: PluginStore["setPluginMediaViewerVisible"];
+  setPluginMediaViewerProps: PluginStore["setPluginMediaViewerProps"];
 };
 
 export type TPluginComponentOwnProps = {
@@ -62,3 +64,4 @@ export type TWrappedComponentProps = {
   setModalRequestRunning?: (value: boolean) => void;
   modalRequestRunning?: boolean;
 };
+

@@ -231,5 +231,7 @@ export interface TMessageActionsParams {
   updateEventListenerItems?: PluginStore["updateEventListenerItems"];
   updateFileItems?: PluginStore["updateFileItems"];
   updatePlugin?: PluginStore["updatePlugin"];
+  setPluginMediaViewerVisible: PluginStore["setPluginMediaViewerVisible"];
+  setPluginMediaViewerProps: PluginStore["setPluginMediaViewerProps"];
 }
 

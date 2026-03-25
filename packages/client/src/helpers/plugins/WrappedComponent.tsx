@@ -94,6 +94,8 @@ export const PluginComponent = inject(
       updatePlugin,
       setPluginSelectorVisible,
       setPluginSelectorProps,
+      setPluginMediaViewerProps,
+      setPluginMediaViewerVisible,
     } = pluginStore;
 
     return {
@@ -111,6 +113,8 @@ export const PluginComponent = inject(
       updatePlugin,
       setPluginSelectorVisible,
       setPluginSelectorProps,
+      setPluginMediaViewerProps,
+      setPluginMediaViewerVisible,
     };
   },
 )(
@@ -132,6 +136,8 @@ export const PluginComponent = inject(
       updatePlugin,
       setPluginSelectorVisible,
       setPluginSelectorProps,
+      setPluginMediaViewerProps,
+      setPluginMediaViewerVisible,
     }: TPluginComponentProps) => {
       const [elementProps, setElementProps] =
         React.useState<TAllComponentProps>(component.props);
@@ -144,9 +150,6 @@ export const PluginComponent = inject(
         setModalRequestRunning,
         modalRequestRunning,
       } = React.use(PropsContext);
-
-      const propsToKey = React.useRef(new WeakMap<object, number>());
-      const keyCounter = React.useRef(0);
 
       React.useEffect(() => {
         if (
@@ -183,6 +186,8 @@ export const PluginComponent = inject(
         updateFileItems,
         setPluginSelectorVisible,
         setPluginSelectorProps,
+        setPluginMediaViewerProps,
+        setPluginMediaViewerVisible,
       };
 
       const getElement = (): React.ReactElement | null | undefined => {
@@ -227,18 +232,10 @@ export const PluginComponent = inject(
               ...(cssLayoutProps as React.CSSProperties),
             };
 
-            const childrenComponents = children?.map((item) => {
-              if (!item.props) return null;
-
-              if (!propsToKey.current.has(item.props)) {
-                propsToKey.current.set(item.props, (keyCounter.current += 1));
-              }
-
-              const stableKey = `${pluginName}-box-${propsToKey.current.get(item.props)}`;
-
+            const childrenComponents = children?.map((item, index) => {
               return (
                 <PluginComponentRecursive
-                  key={stableKey}
+                  key={`${pluginName}-box-${item.component}-${index}`}
                   component={item}
                   pluginName={pluginName}
                 />
@@ -432,11 +429,9 @@ export const PluginComponent = inject(
           }
 
           case PluginComponents.img: {
-            const { alt, ...imageRest } = elementProps as IImage;
             return (
               <img
-                alt={alt}
-                {...(imageRest as React.ImgHTMLAttributes<HTMLImageElement>)}
+                {...(elementProps as React.ImgHTMLAttributes<HTMLImageElement>)}
               />
             );
           }

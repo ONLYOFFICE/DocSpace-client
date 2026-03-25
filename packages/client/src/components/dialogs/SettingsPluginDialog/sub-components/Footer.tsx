@@ -27,11 +27,7 @@
 import React from "react";
 
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import {
-  ButtonSize as PluginButtonSize,
-  Component,
-  IButton,
-} from "@onlyoffice/docspace-plugin-sdk";
+import { Component, IButton } from "@onlyoffice/docspace-plugin-sdk";
 
 import { PluginComponent } from "SRC_DIR/helpers/plugins/WrappedComponent";
 import styles from "../SettingsPluginDialog.module.scss";
@@ -66,7 +62,7 @@ const Footer = ({
               scale: true,
               isSaveButton: true,
               primary: true,
-              size: PluginButtonSize.normal,
+              size: "normal",
               label: t("Common:SaveButton"),
               settingsModalRequestRunning: modalRequestRunning,
               setSettingsModalRequestRunning: setModalRequestRunning,

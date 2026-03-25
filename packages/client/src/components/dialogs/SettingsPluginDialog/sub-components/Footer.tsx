@@ -24,11 +24,25 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
+
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import {
+  ButtonSize as PluginButtonSize,
+  Component,
+  IButton,
+} from "@onlyoffice/docspace-plugin-sdk";
 
 import { PluginComponent } from "SRC_DIR/helpers/plugins/WrappedComponent";
 import styles from "../SettingsPluginDialog.module.scss";
 import { FooterProps } from "../SettingsPluginDialog.types";
+
+const PluginComponentButton =
+  PluginComponent as unknown as React.ComponentType<{
+    component: Component;
+    pluginName: string;
+    updatePlugin: FooterProps["updatePlugin"];
+  }>;
 
 const Footer = ({
   t,
@@ -43,22 +57,24 @@ const Footer = ({
 }: FooterProps) => {
   return (
     <div className={styles.footer}>
-      <PluginComponent
-        component={{
-          ...saveButtonProps,
-          props: {
-            ...saveButtonProps?.props,
-            scale: true,
-            isSaveButton: true,
-            primary: true,
-            size: "normal",
-            label: t("Common:SaveButton"),
-            settingsModalRequestRunning: modalRequestRunning,
-            setSettingsModalRequestRunning: setModalRequestRunning,
-            onCloseAction,
-            testId: "settings_plugin_save_button",
-          },
-        }}
+      <PluginComponentButton
+        component={
+          {
+            ...saveButtonProps,
+            props: {
+              ...saveButtonProps?.props,
+              scale: true,
+              isSaveButton: true,
+              primary: true,
+              size: PluginButtonSize.normal,
+              label: t("Common:SaveButton"),
+              settingsModalRequestRunning: modalRequestRunning,
+              setSettingsModalRequestRunning: setModalRequestRunning,
+              onCloseAction,
+              testId: "settings_plugin_save_button",
+            } as IButton,
+          } as Component
+        }
         pluginName={pluginName}
         updatePlugin={updatePlugin}
       />
@@ -74,3 +90,4 @@ const Footer = ({
 };
 
 export default Footer;
+

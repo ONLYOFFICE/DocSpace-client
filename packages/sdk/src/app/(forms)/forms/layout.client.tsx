@@ -40,6 +40,7 @@ import { useSDKConfig } from "@/providers/SDKConfigProvider";
 import { FormsSection } from "@/types/forms";
 import { sectionFromPathname, sectionToPath } from "../_utils/sectionFromPathname";
 import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
+import { useLibraryNavigationStore } from "../_store/LibraryNavigationStore";
 import { useFormsListStore } from "../_store/FormsListStore";
 import { useFormsSettingsStore } from "../_store/FormsSettingsStore";
 import { useFormsAiAgentStore } from "../_store/FormsAiAgentStore";
@@ -78,6 +79,7 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     goBackToCompletedRoot,
     goBackToInProgressRoot,
   } = useFormsNavigationStore();
+  const libraryNav = useLibraryNavigationStore();
   const aiStore = useFormsAiAgentStore();
   const { user } = useFormsUserStore();
   const formsSettingsStore = useFormsSettingsStore();
@@ -178,6 +180,9 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
       if (prevSection === FormsSection.InProgress) {
         goBackToInProgressRoot();
       }
+      if (prevSection === FormsSection.Library) {
+        libraryNav.reset();
+      }
 
       if (editingFile) {
         pendingEditorClose.current = true;
@@ -240,9 +245,14 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     if (completedFolder && completedFolder !== prev && editingFile) {
       // Form was just completed: completedFolder went from null to non-null while editing
       closeEditor();
-      const roomId = searchParams.get("roomId") ?? "";
+      const params = new URLSearchParams();
+      const rid = searchParams.get("roomId") ?? "";
+      const lid = searchParams.get("libraryId") ?? "";
+      if (rid) params.set("roomId", rid);
+      if (lid) params.set("libraryId", lid);
+      const qs = params.toString();
       router.replace(
-        `${sectionToPath(FormsSection.CompletedForms)}${roomId ? `?roomId=${roomId}` : ""}`,
+        `${sectionToPath(FormsSection.CompletedForms)}${qs ? `?${qs}` : ""}`,
       );
     }
   }, [completedFolder, editingFile, closeEditor, router, searchParams]);

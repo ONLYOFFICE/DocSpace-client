@@ -50,6 +50,8 @@ class MediaViewerDataStore {
 
   filesActionsStore;
 
+  pluginStore;
+
   autoPlay = true;
 
   id = null;
@@ -62,11 +64,12 @@ class MediaViewerDataStore {
 
   prevPostionIndex = 0;
 
-  constructor(filesStore, publicRoomStore, filesActionsStore) {
+  constructor(filesStore, publicRoomStore, filesActionsStore, pluginStore) {
     makeAutoObservable(this);
     this.filesStore = filesStore;
     this.publicRoomStore = publicRoomStore;
     this.filesActionsStore = filesActionsStore;
+    this.pluginStore = pluginStore;
   }
 
   setMediaViewerVisible = (value) => {
@@ -182,17 +185,30 @@ class MediaViewerDataStore {
   };
 
   changeUrl = (id) => {
+    if (this.isPluginViewerActive) return;
+
     const url = this.getUrl(id);
     window.history.pushState("", "", url);
   };
 
-  nextMedia = () => {
+  nextMedia = async () => {
     const { setBufferSelection, files } = this.filesStore;
 
     const postionIndex = (this.currentPostionIndex + 1) % this.playlist.length;
 
     if (postionIndex === 0) {
       return;
+    }
+
+    // Call plugin navigation callback if plugin viewer is active
+    if (this.isPluginViewerActive) {
+      const { pluginMediaViewerProps, dispatchMessage } = this.pluginStore;
+
+      if (pluginMediaViewerProps?.navigation?.onNext) {
+        const pluginName = pluginMediaViewerProps.pluginName;
+        const message = await pluginMediaViewerProps.navigation.onNext();
+        dispatchMessage({ message, pluginName });
+      }
     }
 
     this.setAutoPlay(false);
@@ -204,17 +220,44 @@ class MediaViewerDataStore {
     if (!isNullOrUndefined(targetFile)) setBufferSelection(targetFile);
 
     const fileId = this.playlist[postionIndex].fileId;
+
+    // Call plugin file change callback if plugin viewer is active
+    if (this.isPluginViewerActive) {
+      const { pluginMediaViewerProps, dispatchMessage } = this.pluginStore;
+
+      if (pluginMediaViewerProps?.navigation?.onFileChange) {
+        const pluginName = pluginMediaViewerProps.pluginName;
+        const message = await pluginMediaViewerProps.navigation.onFileChange({
+          fileId,
+        });
+
+        dispatchMessage({ message, pluginName });
+      }
+    }
+
     this.setCurrentId(fileId);
     this.changeUrl(fileId);
   };
 
-  prevMedia = () => {
+  prevMedia = async () => {
     const { setBufferSelection, files } = this.filesStore;
 
     const currentPlaylistPos = this.currentPostionIndex - 1;
 
     if (currentPlaylistPos === -1) {
       return;
+    }
+
+    // Call plugin navigation callback if plugin viewer is active
+    if (this.isPluginViewerActive) {
+      const { pluginMediaViewerProps, dispatchMessage } = this.pluginStore;
+
+      if (pluginMediaViewerProps?.navigation?.onPrevious) {
+        const pluginName = pluginMediaViewerProps.pluginName;
+        const message = await pluginMediaViewerProps.navigation.onPrevious();
+
+        dispatchMessage({ message, pluginName });
+      }
     }
 
     this.setAutoPlay(false);
@@ -226,6 +269,21 @@ class MediaViewerDataStore {
     if (!isNullOrUndefined(targetFile)) setBufferSelection(targetFile);
 
     const fileId = this.playlist[currentPlaylistPos].fileId;
+
+    // Call plugin file change callback if plugin viewer is active
+    if (this.isPluginViewerActive) {
+      const { pluginMediaViewerProps, dispatchMessage } = this.pluginStore;
+
+      if (pluginMediaViewerProps?.navigation?.onFileChange) {
+        const pluginName = pluginMediaViewerProps.pluginName;
+        const message = await pluginMediaViewerProps.navigation.onFileChange({
+          fileId,
+        });
+
+        dispatchMessage({ message, pluginName });
+      }
+    }
+
     this.setCurrentId(fileId);
     this.changeUrl(fileId);
   };
@@ -233,6 +291,62 @@ class MediaViewerDataStore {
   get isViewerOpen() {
     return this.visible && this.playlist.length > 0;
   }
+
+  get isPluginViewerActive() {
+    return (
+      this.pluginStore?.pluginMediaViewerVisible &&
+      !!this.pluginStore?.pluginMediaViewerProps
+    );
+  }
+
+  filterFilesByPluginCriteria = (files) => {
+    if (!this.isPluginViewerActive) return files;
+
+    const { pluginMediaViewerProps, getCurrentDevice, getUserRole } =
+      this.pluginStore;
+
+    const playlistFilter = pluginMediaViewerProps?.playlistFilter;
+
+    if (!playlistFilter) return files;
+
+    const { filesExsts, filesSecurity, usersTypes, devices } = playlistFilter;
+
+    return files.filter((file) => {
+      // Check extension filter
+      if (filesExsts && filesExsts.length > 0) {
+        const normalizedAllowed = filesExsts.map((ext) =>
+          ext.startsWith(".") ? ext.toLowerCase() : `.${ext.toLowerCase()}`,
+        );
+
+        if (!normalizedAllowed.includes(file.fileExst.toLowerCase())) {
+          return false;
+        }
+      }
+
+      // Check security filter
+      if (filesSecurity && filesSecurity.length > 0 && file.security) {
+        if (!filesSecurity.every((key) => file.security[key])) return false;
+      }
+
+      // Check device type
+      if (devices && devices.length > 0) {
+        const currentDevice = getCurrentDevice();
+        if (!devices.includes(currentDevice)) {
+          return false;
+        }
+      }
+
+      // Check user type
+      if (usersTypes && usersTypes.length > 0) {
+        const currentUserType = getUserRole();
+        if (!usersTypes.includes(currentUserType)) {
+          return false;
+        }
+      }
+
+      return true;
+    });
+  };
 
   get currentPostionIndex() {
     if (this.playlist.length === 0) {
@@ -256,6 +370,25 @@ class MediaViewerDataStore {
     const { files } = this.filesStore;
 
     const filesList = [...files];
+
+    // Apply plugin filter if plugin viewer is active
+    if (this.isPluginViewerActive) {
+      const pluginPlaylist = this.filterFilesByPluginCriteria(filesList);
+
+      return pluginPlaylist.map((file, index) => {
+        return {
+          id: index,
+          fileId: file.id,
+          src: file.viewUrl,
+          title: file.title,
+          fileExst: file.fileExst,
+          fileStatus: file.fileStatus,
+          canShare: file.canShare,
+          version: file.version,
+        };
+      });
+    }
+
     const playlist = [];
     const itemsWithoutThumb = [];
     let id = 0;
@@ -340,3 +473,4 @@ class MediaViewerDataStore {
 }
 
 export default MediaViewerDataStore;
+

@@ -29,6 +29,7 @@ import type { NextRequest } from "next/server";
 
 import {
   FILTER_HEADER,
+  LIBRARY_ID_HEADER,
   LOCALE_HEADER,
   PATHNAME_HEADER,
   ROOM_ID_HEADER,
@@ -82,8 +83,10 @@ export async function proxy(request: NextRequest) {
 
   if (request.nextUrl.pathname.includes("forms")) {
     const roomId = searchParams.get("roomId") ?? "";
+    const libraryId = searchParams.get("libraryId") ?? "";
 
     requestHeaders.set(ROOM_ID_HEADER, roomId);
+    requestHeaders.set(LIBRARY_ID_HEADER, libraryId);
     requestHeaders.set(FILTER_HEADER, searchParams.toString());
 
     return NextResponse.next({

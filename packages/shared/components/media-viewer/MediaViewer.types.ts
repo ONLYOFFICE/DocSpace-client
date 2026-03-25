@@ -170,4 +170,10 @@ export type MediaViewerProps = {
   setBufferSelection?: (file?: TFile | null) => void;
   /** Function to set the active files based on their IDs. */
   setActiveFiles?: (files: number[], destId?: number) => void;
+  /** Custom plugin content to render in the media viewer. */
+  pluginViewerContent?: React.ReactNode;
+  /** File ID from plugin props (IMediaViewer.fileId). */
+  pluginFileId?: number | string;
+  /** Title from plugin props (IMediaViewer.title). */
+  pluginTitle?: string;
 };

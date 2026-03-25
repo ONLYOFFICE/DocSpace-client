@@ -192,6 +192,7 @@ const mediaViewerDataStore = new MediaViewerDataStore(
   filesStore,
   publicRoomStore,
   selectedFolderStore,
+  pluginStore,
 );
 
 const oformsStore = new OformsStore(settingsStore, userStore, treeFoldersStore);

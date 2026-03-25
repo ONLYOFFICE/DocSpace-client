@@ -34,7 +34,11 @@ import { getFormsFolder } from "@/api/forms";
 import { getSelf } from "@/api/people";
 import { getDefaultProvider } from "@/api/ai";
 import { getSettings } from "@/api/settings";
-import { ROOM_ID_HEADER, PATHNAME_HEADER } from "@/utils/constants";
+import {
+  LIBRARY_ID_HEADER,
+  ROOM_ID_HEADER,
+  PATHNAME_HEADER,
+} from "@/utils/constants";
 
 import FormsShell from "./layout.client";
 
@@ -47,6 +51,7 @@ export default async function FormsServerLayout({
   const cookieStore = await cookies();
 
   const roomId = hdrs.get(ROOM_ID_HEADER) || "";
+  const libraryId = hdrs.get(LIBRARY_ID_HEADER) || "";
   const authToken = cookieStore.get("asc_auth_key")?.value || "";
   const pathname = hdrs.get(PATHNAME_HEADER) ?? "";
 
@@ -101,6 +106,7 @@ export default async function FormsServerLayout({
     <FormsShell
       commonData={{
         roomId,
+        libraryId,
         authToken,
         socketUrl,
         filesSettings: filesSettings!,

@@ -38,11 +38,13 @@ import type {
 
 type TFormsConfig = {
   roomId: string | number;
+  libraryId?: string | number;
   socketUrl?: string;
 };
 
 class FormsSettingsStore {
   roomId: string | number = "";
+  libraryId: string | number = "";
   socketUrl: string = "";
   filesSettings: TFilesSettings | null = null;
   folderSecurity: TFolderSecurity | null = null;
@@ -55,8 +57,13 @@ class FormsSettingsStore {
 
   setConfig = (config: TFormsConfig) => {
     this.roomId = config.roomId;
+    this.libraryId = config.libraryId ?? "";
     this.socketUrl = config.socketUrl ?? "";
   };
+
+  get hasLibrary(): boolean {
+    return !!this.libraryId;
+  }
 
   setFilesSettings = (settings: TFilesSettings) => {
     this.filesSettings = settings;

@@ -48,6 +48,7 @@ import { useFormsListStore } from "../_store/FormsListStore";
 
 export type CommonData = {
   roomId: string | number;
+  libraryId?: string | number;
   socketUrl: string;
   filesSettings: TFilesSettings;
   user?: TUser;
@@ -83,6 +84,7 @@ export default function useInitCommonStores(commonData: CommonData): boolean {
 
     formsSettingsStore.setConfig({
       roomId: commonData.roomId,
+      libraryId: commonData.libraryId,
       socketUrl: commonData.socketUrl,
     });
     formsSettingsStore.setFilesSettings(commonData.filesSettings);

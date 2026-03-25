@@ -67,6 +67,7 @@ import type {
   IframeWindow,
   TPlugin,
   IPostMessageCallbackMessage,
+  IMediaViewerClient,
 } from "SRC_DIR/helpers/plugins/types";
 
 import { getPluginUrl, messageActions } from "../helpers/plugins/utils";
@@ -151,6 +152,10 @@ class PluginStore {
 
   needPageReload = false;
 
+  pluginMediaViewerVisible = false;
+
+  pluginMediaViewerProps: null | IMediaViewerClient = null;
+
   constructor(
     settingsStore: SettingsStore,
     selectedFolderStore: SelectedFolderStore,
@@ -194,6 +199,8 @@ class PluginStore {
       addPluginFloatingOperations: this.addPluginFloatingOperations,
       removePluginFloatingOperations: this.removePluginFloatingOperations,
       updatePluginFloatingOperations: this.updatePluginFloatingOperations,
+      setPluginMediaViewerVisible: this.setPluginMediaViewerVisible,
+      setPluginMediaViewerProps: this.setPluginMediaViewerProps,
     });
   };
 
@@ -251,6 +258,14 @@ class PluginStore {
 
   removePluginFloatingOperations = (id: string) => {
     this.pluginFloatingOperationsButtons.delete(id);
+  };
+
+  setPluginMediaViewerVisible = (value: boolean) => {
+    this.pluginMediaViewerVisible = value;
+  };
+
+  setPluginMediaViewerProps = (value: null | IMediaViewerClient) => {
+    this.pluginMediaViewerProps = value;
   };
 
   get pluginFloatingOperationsArray(): IFloatingOperationsButtonClient[] {
@@ -780,9 +795,9 @@ class PluginStore {
 
   getContextMenuKeysByType = (
     type: PluginFileType,
-    fileExst: string,
-    security: TRoomSecurity | TFolderSecurity,
-    itemSecurity: TFileSecurity | TRoomSecurity | TFolderSecurity,
+    fileExst?: string,
+    security?: TRoomSecurity | TFolderSecurity,
+    itemSecurity?: TFileSecurity | TRoomSecurity | TFolderSecurity,
   ) => {
     if (this.contextMenuItems.size === 0) return;
 

@@ -26,6 +26,7 @@
 
 export enum FormsSection {
   MyForms = "my-forms",
+  Library = "library",
   InProgress = "in-progress",
   CompletedForms = "completed-forms",
   Settings = "settings",

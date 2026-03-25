@@ -39,6 +39,7 @@ import { FormsSection } from "@/types/forms";
 
 import { sectionFromPathname } from "../../_utils/sectionFromPathname";
 import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
+import { useLibraryNavigationStore } from "../../_store/LibraryNavigationStore";
 import { useFormsListStore } from "../../_store/FormsListStore";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
 import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
@@ -65,11 +66,14 @@ const FormsHeader = ({ onUploadFiles, onCreateBlankForm }: FormsHeaderProps) => 
     goBackToInProgressRoot,
   } = useFormsNavigationStore();
 
+  const libraryNav = useLibraryNavigationStore();
+
   const { items, folders } = useFormsListStore();
   const formsSettingsStore = useFormsSettingsStore();
   const { currentDeviceType } = useDeviceType();
 
   const isMyForms = activeSection === FormsSection.MyForms;
+  const isLibrary = activeSection === FormsSection.Library;
   const canCreateForms = isMyForms && !!formsSettingsStore.folderSecurity?.Create;
   const isSettings = activeSection === FormsSection.Settings;
   const isEditing = Boolean(editingFile);
@@ -77,12 +81,15 @@ const FormsHeader = ({ onUploadFiles, onCreateBlankForm }: FormsHeaderProps) => 
     activeSection === FormsSection.CompletedForms && !!completedFolder;
   const isInsideInProgressFolder =
     activeSection === FormsSection.InProgress && !!inProgressFolder;
+  const isInsideLibrary = isLibrary && libraryNav.depth > 0;
   const activeSubfolder = completedFolder ?? inProgressFolder;
 
   const getSectionTitle = React.useCallback(() => {
     switch (activeSection) {
       case FormsSection.MyForms:
         return t("Common:MyForms");
+      case FormsSection.Library:
+        return t("Common:Library");
       case FormsSection.InProgress:
         return t("Common:InProgress");
       case FormsSection.CompletedForms:
@@ -143,6 +150,37 @@ const FormsHeader = ({ onUploadFiles, onCreateBlankForm }: FormsHeaderProps) => 
       ];
     }
 
+    if (isInsideLibrary) {
+      // Build breadcrumbs: Library > language > ...subfolders (reversed for Navigation component)
+      const crumbs: { id: string | number; title: string; isRootRoom: boolean }[] = [];
+
+      // Skip folderPath[last] — it is the current folder shown as the page
+      // title, not a breadcrumb. Remaining ancestors are added deepest-first
+      // (Navigation component expects this order).
+      for (let i = libraryNav.folderPath.length - 2; i >= 0; i--) {
+        const f = libraryNav.folderPath[i];
+        crumbs.push({ id: f.id, title: f.title, isRootRoom: false });
+      }
+
+      // Language folder
+      if (libraryNav.languageFolder) {
+        crumbs.push({
+          id: libraryNav.languageFolder.id,
+          title: libraryNav.languageFolder.title,
+          isRootRoom: false,
+        });
+      }
+
+      // Library root
+      crumbs.push({
+        id: "library-root",
+        title: t("Common:Library"),
+        isRootRoom: true,
+      });
+
+      return crumbs;
+    }
+
     return [];
   }, [
     isEditing,
@@ -150,6 +188,8 @@ const FormsHeader = ({ onUploadFiles, onCreateBlankForm }: FormsHeaderProps) => 
     activeSubfolder,
     isInsideCompletedFolder,
     isInsideInProgressFolder,
+    isInsideLibrary,
+    libraryNav,
     getSectionTitle,
     t,
   ]);
@@ -212,6 +252,15 @@ const FormsHeader = ({ onUploadFiles, onCreateBlankForm }: FormsHeaderProps) => 
       closeEditor();
     },
     [closeEditor, goBackToCompletedRoot, goBackToInProgressRoot],
+  );
+
+  const handleLibraryBreadcrumbClick = React.useCallback(
+    (itemId?: string | number) => {
+      if (itemId !== undefined) {
+        libraryNav.goToFolder(itemId);
+      }
+    },
+    [libraryNav],
   );
 
   if (isSettings) {
@@ -373,6 +422,55 @@ const FormsHeader = ({ onUploadFiles, onCreateBlankForm }: FormsHeaderProps) => 
             isEmptyPage={items.length === 0}
             isEmptyFilesList={items.length === 0}
             onBackToParentFolder={() => goBackToInProgressRoot()}
+            showRootFolderTitle={false}
+            withLogo=""
+            burgerLogo=""
+            withMenu={false}
+            currentDeviceType={currentDeviceType}
+            titleIcon=""
+            titleIconTooltip=""
+            showNavigationButton={false}
+            isCurrentFolderInfo={false}
+            showTitle
+            isPublicRoom={false}
+            isRoom={false}
+            isInfoPanelVisible={false}
+            toggleInfoPanel={() => {}}
+            onLogoClick={() => {}}
+            hideInfoPanel={() => {}}
+            clearTrash={() => {}}
+            showFolderInfo={() => {}}
+          />
+        </div>
+      </div>
+    );
+  }
+
+  if (isInsideLibrary) {
+    const libraryTitle = libraryNav.currentFolder?.title || "";
+
+    return (
+      <div
+        className={styles.headerRow}
+        style={navDropdownMinWidth ? { "--nav-dropdown-min-width": `${navDropdownMinWidth}px` } as React.CSSProperties : undefined}
+      >
+        <div className={styles.headerNavigation}>
+          <Navigation
+            showText
+            isRootFolder={false}
+            canCreate={false}
+            title={libraryTitle}
+            rootRoomTitle=""
+            isDesktop={currentDeviceType === DeviceType.desktop}
+            isFrame
+            navigationItems={navigationItems}
+            getContextOptionsPlus={() => []}
+            getContextOptionsFolder={() => []}
+            onClickFolder={handleLibraryBreadcrumbClick}
+            isTrashFolder={false}
+            isEmptyPage={items.length === 0 && folders.length === 0}
+            isEmptyFilesList={items.length === 0 && folders.length === 0}
+            onBackToParentFolder={() => libraryNav.goBack()}
             showRootFolderTitle={false}
             withLogo=""
             burgerLogo=""

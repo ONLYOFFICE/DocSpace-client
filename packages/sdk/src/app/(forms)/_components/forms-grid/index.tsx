@@ -41,9 +41,12 @@ import { FormsSection } from "@/types/forms";
 import { sectionFromPathname } from "../../_utils/sectionFromPathname";
 import { useFormsListStore } from "../../_store/FormsListStore";
 import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
+import { useLibraryNavigationStore } from "../../_store/LibraryNavigationStore";
 import useFormsContextMenu from "../../_hooks/useFormsContextMenu";
 import FormsEmpty from "../forms-empty";
 import FormsTile from "./FormsTile";
+import LibraryFolderCard from "./LibraryFolderCard";
+import LibraryTemplateTile from "./LibraryTemplateTile";
 import SubFolderTile from "./SubFolderTile";
 import styles from "./FormsTile.module.scss";
 
@@ -62,6 +65,7 @@ const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
     openCompletedFolder,
     openInProgressFolder,
   } = useFormsNavigationStore();
+  const libraryNav = useLibraryNavigationStore();
   const { getIcon } = useItemIcon({ filesSettings });
   const { convertFileToItem } = useItemList({
     getIcon,
@@ -72,7 +76,10 @@ const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
     activeSection === FormsSection.CompletedForms && !completedFolder;
   const isInProgressRoot =
     activeSection === FormsSection.InProgress && !inProgressFolder;
-  const isFoldersRoot = isCompletedRoot || isInProgressRoot;
+  const isLibrary = activeSection === FormsSection.Library;
+  const isLibraryLanguageLevel = isLibrary && libraryNav.isLanguageLevel;
+  const isLibraryFolderLevel = isLibrary && !libraryNav.isLanguageLevel && folders.length > 0;
+  const isLibraryTemplateLevel = isLibrary && !libraryNav.isLanguageLevel && items.length > 0 && folders.length === 0;
 
   const fileItems = React.useMemo(
     () => items.map((file: TFile) => convertFileToItem(file)),
@@ -153,7 +160,38 @@ const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
     return <FormsEmpty />;
   }
 
-  if ((isFoldersRoot || !hasItems) && hasFolders) {
+  if (isLibraryLanguageLevel && hasFolders) {
+    return (
+      <div className={styles.foldersGrid}>
+        {folders.map((folder) => (
+          <LibraryFolderCard
+            key={`folder_${folder.id}`}
+            folder={folder}
+            getIcon={getIcon}
+            onOpenFolder={libraryNav.openLanguageFolder}
+          />
+        ))}
+      </div>
+    );
+  }
+
+  if (isLibraryFolderLevel && hasFolders) {
+    return (
+      <div className={styles.foldersGrid}>
+        {folders.map((folder) => (
+          <SubFolderTile
+            key={`folder_${folder.id}`}
+            folder={folder}
+            getIcon={getIcon}
+            onOpenFolder={libraryNav.openSubFolder}
+            contextOptions={[]}
+          />
+        ))}
+      </div>
+    );
+  }
+
+  if (((isCompletedRoot || isInProgressRoot) || !hasItems) && hasFolders) {
     const onOpenFolder = isCompletedRoot
       ? openCompletedFolder
       : openInProgressFolder;
@@ -171,6 +209,37 @@ const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
           />
         ))}
       </div>
+    );
+  }
+
+  if (isLibraryTemplateLevel && hasItems) {
+    return (
+      <>
+        <div className={styles.filesGrid} ref={gridRef}>
+          {fileItems.map((item) => {
+            const originalFile = items.find((f) => f.id === item.id);
+            return originalFile ? (
+              <LibraryTemplateTile
+                key={`file_${item.id}`}
+                item={item}
+                file={originalFile}
+                getIcon={getIcon}
+              />
+            ) : null;
+          })}
+          {hasMore &&
+            Array.from({ length: skeletonCount }, (_, i) => (
+              <RectangleSkeleton
+                key={`skeleton_${i}`}
+                width="100%"
+                height="220px"
+                borderRadius="12px"
+                animate
+              />
+            ))}
+        </div>
+        {hasMore && <div ref={sentinelRef} style={{ height: 1 }} />}
+      </>
     );
   }
 

@@ -68,7 +68,7 @@ const Plugin = ({ infoPanelItem, selection }: Props) => {
       data-testid={`info_panel_plugin_${pluginName?.toLowerCase()?.replace(/\s+/g, "_")}`}
     >
       <WrappedComponent
-        pluginName={pluginName}
+        pluginName={pluginName!}
         component={{ component: PluginComponents.box, props: bodyProps }}
         saveButton={undefined}
         setSaveButtonProps={undefined}
@@ -80,3 +80,4 @@ const Plugin = ({ infoPanelItem, selection }: Props) => {
 };
 
 export default observer(Plugin);
+

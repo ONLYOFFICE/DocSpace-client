@@ -35,7 +35,7 @@ class FormsListStore {
   items: TFile[] = [];
   folders: TFolder[] = [];
   total: number = 0;
-  isLoading: boolean = false;
+  isLoading: boolean = true;
 
   constructor() {
     makeAutoObservable(this);
@@ -57,6 +57,13 @@ class FormsListStore {
 
   setIsLoading = (value: boolean) => {
     this.isLoading = value;
+  };
+
+  reset = () => {
+    this.items = [];
+    this.folders = [];
+    this.total = 0;
+    this.isLoading = false;
   };
 
   get hasMore(): boolean {

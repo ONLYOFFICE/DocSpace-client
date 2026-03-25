@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { DISK_STORAGE } from "@docspace/shared/constants";
 import { inject, observer } from "mobx-react";
 
 import TopUpModal from "SRC_DIR/pages/PortalSettings/categories/payments/SaaS/shared/top-up-balance/TopUpModal";
@@ -34,6 +35,7 @@ type TopUpContainerTypes = {
   reccomendedAmount?: number;
   amount?: number;
   initialAmount?: number;
+  storageServiceName?: string;
 };
 
 const TopUpContainer = (props: TopUpContainerTypes) => {
@@ -43,6 +45,7 @@ const TopUpContainer = (props: TopUpContainerTypes) => {
     reccomendedAmount = 0,
     amount,
     initialAmount,
+    storageServiceName,
   } = props;
 
   const reccomended = initialAmount ?? reccomendedAmount;
@@ -60,15 +63,21 @@ const TopUpContainer = (props: TopUpContainerTypes) => {
         reccomendedAmount: reccomended.toString(),
         amount: amount!.toString(),
       })}
+      serviceName={storageServiceName ?? DISK_STORAGE}
     />
   ) : null;
 };
 
-export default inject(({ servicesStore, currentTariffStatusStore }: TStore) => {
-  const { reccomendedAmount } = servicesStore;
-  const { currentStoragePlanSize } = currentTariffStatusStore;
-  return {
-    currentStoragePlanSize,
-    reccomendedAmount,
-  };
-})(observer(TopUpContainer));
+export default inject(
+  ({ paymentStore, servicesStore, currentTariffStatusStore }: TStore) => {
+    const { reccomendedAmount } = servicesStore;
+    const { currentStoragePlanSize } = currentTariffStatusStore;
+    const { storageServiceName } = paymentStore;
+    return {
+      currentStoragePlanSize,
+      reccomendedAmount,
+      storageServiceName,
+    };
+  },
+)(observer(TopUpContainer));
+

@@ -62,6 +62,7 @@ import type {
   IFloatingOperationsButton,
   IPostMessageCallbackMessage,
   IPostMessagePlugin,
+  IMediaViewer,
 } from "@onlyoffice/docspace-plugin-sdk";
 
 import type {
@@ -140,6 +141,10 @@ export interface IFileItemClient extends Omit<IFileItem, "onClick"> {
 }
 
 export interface IArticleButtonItemClient extends IArticleButtonItem {
+  pluginName: string;
+}
+
+export interface IMediaViewerClient extends IMediaViewer {
   pluginName: string;
 }
 

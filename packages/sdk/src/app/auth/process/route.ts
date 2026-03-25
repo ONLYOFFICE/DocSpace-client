@@ -51,30 +51,40 @@ export async function GET(request: NextRequest) {
     }
 
     const data = await res.json();
-    const { userId, docSpaceToken, docSpaceUrl } = data;
+    const { userId, portalToken, portalUrl } = data;
 
-    if (docSpaceUrl && redirectUrl) {
+    if (portalUrl && redirectUrl) {
       const serverOrigin = new URL(redirectUrl).origin;
-      const callbackOrigin = new URL(docSpaceUrl).origin;
+      const callbackOrigin = new URL(portalUrl).origin;
 
       if (serverOrigin !== callbackOrigin) {
         return NextResponse.json(
-          { error: "docSpaceUrl origin mismatch" },
+          { error: "portalUrl origin mismatch" },
           { status: 403 },
         );
       }
     }
 
-    if (!docSpaceToken) {
+    if (!portalToken) {
       return NextResponse.json(
-        { error: "Missing docSpaceToken in callback response" },
+        { error: "Missing portalToken in callback response" },
         { status: 502 },
       );
     }
 
+    if (portalToken === "empty") {
+      const loginUrl = new URL("/login", redirectUrl || request.nextUrl.origin);
+
+      if (redirectUrl) {
+        loginUrl.searchParams.set("referenceUrl", redirectUrl);
+      }
+
+      return NextResponse.redirect(loginUrl);
+    }
+
     const response = NextResponse.json({ userId, redirectUrl });
 
-    response.cookies.set("asc_auth_key", docSpaceToken, {
+    response.cookies.set("asc_auth_key", portalToken, {
       httpOnly: true,
       path: "/",
       maxAge: 60 * 60 * 24 * 365,

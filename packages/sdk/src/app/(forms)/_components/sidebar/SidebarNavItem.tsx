@@ -54,6 +54,7 @@ const SidebarNavItem = ({
       isActive={isActive}
       onClick={onClick}
       linkData={{ path: "", state: {} }}
+      withAnimation
     />
   );
 };

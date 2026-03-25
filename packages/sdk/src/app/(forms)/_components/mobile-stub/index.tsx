@@ -26,6 +26,7 @@
 
 "use client";
 
+import React from "react";
 import { useTranslation } from "react-i18next";
 
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
@@ -38,13 +39,18 @@ import styles from "./MobileStub.module.scss";
 const MobileStub = () => {
   const { t } = useTranslation(["Common"]);
   const { isBase } = useTheme();
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const Icon = isBase ? DefaultFolderLight : DefaultFolderDark;
 
   return (
     <div className={styles.mobileStub}>
       <div className={styles.icon}>
-        <Icon />
+        {mounted ? <Icon /> : <div style={{ width: 200, height: 147 }} />}
       </div>
       <div className={styles.title}>{t("Common:FormsMobileStubTitle")}</div>
       <div className={styles.description}>

@@ -90,8 +90,8 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
         await deleteFile(fileId, false, true);
         const newItems = formsListStore.items.filter((f) => f.id !== fileId);
         formsListStore.setItems(newItems, newItems.length);
-      } catch {
-        toastr.error(t("Common:Error"));
+      } catch (error) {
+        toastr.error(error as string);
       }
     },
     [formsListStore, t],
@@ -117,8 +117,8 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
 
         const url = await poll();
         if (url) window.open(url, "_blank");
-      } catch {
-        toastr.error(t("Common:Error"));
+      } catch (error) {
+        toastr.error(error as string);
       }
     },
     [t],
@@ -132,8 +132,8 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
           (f) => f.id !== folderId,
         );
         formsListStore.setFolders(newFolders);
-      } catch {
-        toastr.error(t("Common:Error"));
+      } catch (error) {
+        toastr.error(error as string);
       }
     },
     [formsListStore, t],
@@ -144,8 +144,8 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
       try {
         await manageFormFilling(file.id, FormFillingManageAction.Start);
         await fetchSection();
-      } catch {
-        toastr.error(t("Common:Error"));
+      } catch (error) {
+        toastr.error(error as string);
       }
     },
     [t, fetchSection],
@@ -156,8 +156,8 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
       try {
         await formRoleMapping({ formId: file.id, roles: [] });
         await fetchSection();
-      } catch {
-        toastr.error(t("Common:Error"));
+      } catch (error) {
+        toastr.error(error as string);
       }
     },
     [t, fetchSection],

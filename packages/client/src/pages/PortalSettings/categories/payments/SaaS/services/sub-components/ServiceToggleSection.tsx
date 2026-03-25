@@ -33,7 +33,7 @@ import styles from "../styles/ServiceComponents.module.scss";
 interface ServiceToggleSectionProps {
   isEnabled: boolean;
   onToggle: () => void;
-  title: string;
+  title: React.ReactNode;
   priceText?: string;
   description?: string;
   testId?: string;

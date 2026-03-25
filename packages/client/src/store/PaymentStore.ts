@@ -69,6 +69,7 @@ import {
   AI_TOOLS,
   BACKUP_SERVICE,
   STORAGE_TARIFF_DEACTIVATED,
+  STORAGE_DEACTIVATION_VISITED,
   WEB_SEARCH,
 } from "@docspace/shared/constants";
 import type { DateTime } from "luxon";
@@ -142,7 +143,7 @@ class PaymentStore {
   isInitWalletPage = false;
 
   isPaymentMethodInit = false;
-  
+
   balance: TBalance = 0;
 
   previousBalance: TBalance = 0;
@@ -175,6 +176,8 @@ class PaymentStore {
   servicesQuotas: TPaymentQuota | null = null; // temporary solution, should be in the service store
 
   isShowStorageTariffDeactivatedModal = false;
+
+  isStorageDeactivationVisited = false;
 
   reccomendedAmount = "";
 
@@ -437,9 +440,8 @@ class PaymentStore {
 
   get storageServiceName() {
     return (
-      (this.servicesQuotasFeatures.get(TOTAL_SIZE) as TServiceFeatureWithPrice)
-        ?.serviceName
-    );
+      this.servicesQuotasFeatures.get(TOTAL_SIZE) as TServiceFeatureWithPrice
+    )?.serviceName;
   }
 
   get backupServicePrice() {
@@ -659,7 +661,6 @@ class PaymentStore {
       };
     });
 
-
     this.servicesQuotasFeatures = new Map(
       quotas.map((feature) => [feature.id, feature]),
     );
@@ -688,6 +689,12 @@ class PaymentStore {
 
   setIsShowTariffDeactivatedModal = (value: boolean) => {
     this.isShowStorageTariffDeactivatedModal = value;
+  };
+
+  setStorageDeactivationVisited = (value: boolean) => {
+    this.isStorageDeactivationVisited = value;
+
+    localStorage.setItem(STORAGE_DEACTIVATION_VISITED, "true");
   };
 
   setPaymentAccount = async () => {
@@ -740,7 +747,10 @@ class PaymentStore {
 
     const existingEntry = Array.from(
       this.servicesQuotasFeatures.entries(),
-    ).find(([, value]) => (value as TServiceFeatureWithPrice).serviceName === service.serviceName);
+    ).find(
+      ([, value]) =>
+        (value as TServiceFeatureWithPrice).serviceName === service.serviceName,
+    );
 
     const key = existingEntry
       ? existingEntry[0]
@@ -1205,3 +1215,4 @@ class PaymentStore {
 }
 
 export default PaymentStore;
+

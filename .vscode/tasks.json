@@ -631,6 +631,21 @@
       }
     },
     {
+      "label": "Frontend | start:sdk",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; pnpm run start:sdk",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Frontend | start-prod",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm run start-prod",
@@ -649,6 +664,21 @@
       "label": "Frontend | start-prod:lite",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm run start-prod:lite",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Frontend | start-prod:sdk",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; pnpm run start-prod:sdk",
       "group": {
         "kind": "build",
         "isDefault": true

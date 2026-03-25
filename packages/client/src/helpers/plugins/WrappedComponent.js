@@ -64,6 +64,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
     updatePlugin,
     setPluginSelectorVisible,
     setPluginSelectorProps,
+    setPluginMediaViewerVisible,
+    setPluginMediaViewerProps,
   } = pluginStore;
 
   return {
@@ -82,6 +84,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
     updatePlugin,
     setPluginSelectorVisible,
     setPluginSelectorProps,
+    setPluginMediaViewerVisible,
+    setPluginMediaViewerProps,
   };
 })(
   observer(
@@ -106,6 +110,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
       updatePlugin,
       setPluginSelectorVisible,
       setPluginSelectorProps,
+      setPluginMediaViewerVisible,
+      setPluginMediaViewerProps,
     }) => {
       const [elementProps, setElementProps] = React.useState(component.props);
 
@@ -164,6 +170,7 @@ export const PluginComponent = inject(({ pluginStore }) => {
           };
         }
 
+
         switch (componentName) {
           case PluginComponents.box: {
             const childrenComponents = elementProps?.children?.map(
@@ -217,6 +224,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
                 updateFileItems,
                 setPluginSelectorVisible,
                 setPluginSelectorProps,
+                setPluginMediaViewerVisible,
+                setPluginMediaViewerProps,
               });
             };
 
@@ -245,6 +254,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
                 updateFileItems,
                 setPluginSelectorVisible,
                 setPluginSelectorProps,
+                setPluginMediaViewerVisible,
+                setPluginMediaViewerProps,
               });
             };
 
@@ -273,6 +284,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
                 updateFileItems,
                 setPluginSelectorVisible,
                 setPluginSelectorProps,
+                setPluginMediaViewerVisible,
+                setPluginMediaViewerProps,
               });
             };
 
@@ -301,6 +314,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
                 updateFileItems,
                 setPluginSelectorVisible,
                 setPluginSelectorProps,
+                setPluginMediaViewerVisible,
+                setPluginMediaViewerProps,
               });
             };
 
@@ -404,6 +419,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
                 updateFileItems,
                 setPluginSelectorVisible,
                 setPluginSelectorProps,
+                setPluginMediaViewerVisible,
+                setPluginMediaViewerProps,
               });
             };
 
@@ -456,6 +473,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
                 updateFileItems,
                 setPluginSelectorVisible,
                 setPluginSelectorProps,
+                setPluginMediaViewerVisible,
+                setPluginMediaViewerProps,
               });
             };
 
@@ -509,6 +528,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
                 updateFileItems,
                 setPluginSelectorVisible,
                 setPluginSelectorProps,
+                setPluginMediaViewerVisible,
+                setPluginMediaViewerProps,
               });
             };
 

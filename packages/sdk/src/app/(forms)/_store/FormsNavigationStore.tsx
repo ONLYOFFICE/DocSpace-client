@@ -31,12 +31,9 @@ import { makeAutoObservable } from "mobx";
 
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 
-import { FormsSection } from "@/types/forms";
-
 export type EditorAction = "view" | "edit" | "fill";
 
 class FormsNavigationStore {
-  activeSection: FormsSection = FormsSection.MyForms;
   editingFile: TFile | null = null;
   editorAction: EditorAction = "fill";
   /** The subfolder currently open inside Completed Forms (null = root level showing folder tiles). */
@@ -47,14 +44,6 @@ class FormsNavigationStore {
   constructor() {
     makeAutoObservable(this);
   }
-
-  setActiveSection = (section: FormsSection) => {
-    this.activeSection = section;
-    this.editingFile = null;
-    this.editorAction = "fill";
-    this.completedFolder = null;
-    this.inProgressFolder = null;
-  };
 
   openCompletedFolder = (folder: TFolder) => {
     this.completedFolder = folder;

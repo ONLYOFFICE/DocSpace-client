@@ -29,6 +29,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
+import { usePathname } from "next/navigation";
 
 import { FileTile } from "@docspace/ui-kit/components/tiles/file-tile";
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
@@ -46,7 +47,7 @@ import { FormsSection } from "@/types/forms";
 import useFormsActions from "../../_hooks/useFormsActions";
 import useFormsContextMenu from "../../_hooks/useFormsContextMenu";
 import { useFormsListStore } from "../../_store/FormsListStore";
-import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
+import { sectionFromPathname } from "../../_utils/sectionFromPathname";
 import FormStatusBadge from "./FormStatusBadge";
 import styles from "./FormsTile.module.scss";
 
@@ -55,6 +56,8 @@ type FormsTileProps = {
   getIcon: TGetIcon;
 };
 
+const thumbnailCache = new Map<string, string>();
+
 const FormsTile = ({ item, getIcon }: FormsTileProps) => {
   const tileRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation("Common");
@@ -62,44 +65,46 @@ const FormsTile = ({ item, getIcon }: FormsTileProps) => {
   const { openForm } = useFormsActions({ t });
   const { getContextMenuModel } = useFormsContextMenu();
   const { items } = useFormsListStore();
-  const { activeSection } = useFormsNavigationStore();
-  const [blobThumbnail, setBlobThumbnail] = useState("");
-  const loadedUrlRef = useRef("");
+  const pathname = usePathname();
+  const activeSection = sectionFromPathname(pathname);
+
+  const thumbUrl = item.thumbnailUrl
+    ? item.thumbnailUrl.replace(/^https?:\/\/[^/]+/, "")
+    : "";
+  const [blobThumbnail, setBlobThumbnail] = useState(
+    () => (thumbUrl && thumbnailCache.get(thumbUrl)) || "",
+  );
 
   useEffect(() => {
-    if (!item.thumbnailUrl || item.providerItem) return;
+    if (!thumbUrl || item.providerItem) return;
 
-    const url = item.thumbnailUrl.replace(/^https?:\/\/[^/]+/, "");
-
-    if (loadedUrlRef.current === url) return;
+    if (thumbnailCache.has(thumbUrl)) {
+      setBlobThumbnail(thumbnailCache.get(thumbUrl)!);
+      return;
+    }
 
     let cancelled = false;
-    fetch(url, { credentials: "include" })
+    fetch(thumbUrl, { credentials: "include" })
       .then((res) => {
         if (!res.ok) throw new Error(`${res.status}`);
         return res.blob();
       })
       .then((blob) => {
         if (cancelled) return;
-        loadedUrlRef.current = url;
-        setBlobThumbnail((prev) => {
-          if (prev) URL.revokeObjectURL(prev);
-          return URL.createObjectURL(blob);
-        });
+        const blobUrl = URL.createObjectURL(blob);
+        thumbnailCache.set(thumbUrl, blobUrl);
+        setBlobThumbnail(blobUrl);
       })
       .catch(() => {});
 
     return () => {
       cancelled = true;
     };
-  }, [item.thumbnailUrl, item.providerItem]);
+  }, [thumbUrl, item.providerItem]);
 
   useEffect(() => {
     return () => {
-      setBlobThumbnail((prev) => {
-        if (prev) URL.revokeObjectURL(prev);
-        return "";
-      });
+      setBlobThumbnail("");
     };
   }, []);
 

@@ -80,7 +80,6 @@
   "PayerDescription": "Данный пользователь осуществляет оплату за тарифный план. Никто, кроме него, не может настраивать и оплачивать квоту. Сменить плательщика может владелец {{productName}}, а также сам плательщик через клиентский портал Stripe.",
   "PaymentMethod": "Способ оплаты",
   "PerBackup": "{{currency}} за 1 резервную копию",
-  "PerBackupWithBracket": "({{currency}} за 1 резервную копию)",
   "PerStorage": "{{currency}} за {{amount}}/месяц",
   "PerStorageWitnMinValue": "{{currency}} за {{amount}}/месяц <1>(минимум {{minValue}}{{storageUnit}})</1>",
   "PlanUpgrade": "Обновление тарифного плана",

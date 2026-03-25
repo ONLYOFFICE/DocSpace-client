@@ -49,6 +49,7 @@ interface ButtonContainerProps {
   totalPrice?: number;
   isDisabled?: boolean;
   currentStoragePlanSize?: number;
+  isDowngradeStoragePlan?: boolean;
 }
 
 const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
@@ -65,6 +66,7 @@ const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
     storageExpiryDate,
     totalPrice = 0,
     formatWalletCurrency,
+    isDowngradeStoragePlan,
     isDisabled,
   } = props;
 
@@ -80,6 +82,7 @@ const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
   return (
     <div className={styles.buttonWrapper}>
       {hasStorageSubscription &&
+      !isDowngradeStoragePlan &&
       !isCurrentStoragePlan &&
       !isPaymentBlocked &&
       !isExceedingStorageLimit &&
@@ -100,11 +103,13 @@ const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
           primary
           scale
           onClick={isExceedingStorageLimit ? onSendRequest : onBuy}
-          isLoading={isLoading || isWaitingCalculation || isDisabled}
+          isLoading={isLoading}
           isDisabled={
             isPaymentBlocked ||
             isPaymentBlockedByBalance ||
-            isCurrentStoragePlan
+            isCurrentStoragePlan ||
+            isDisabled ||
+            isWaitingCalculation
           }
           testId="storage_plan_upgrade_ok_button"
         />

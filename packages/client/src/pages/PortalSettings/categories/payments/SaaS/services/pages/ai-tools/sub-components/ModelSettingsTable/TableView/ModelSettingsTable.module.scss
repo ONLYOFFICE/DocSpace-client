@@ -9,12 +9,23 @@
 .modelIconPlaceholder {
   width: 32px;
   height: 32px;
-  border: 1px solid var(--aside-header-border-color);
-  border-radius: 6px;
+  border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex: 0 0 auto;
+  border: 1px solid var(--aside-header-border-color);
+}
+
+.iconsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
 }
 
 .tableContainer :global(.table-container_header) {

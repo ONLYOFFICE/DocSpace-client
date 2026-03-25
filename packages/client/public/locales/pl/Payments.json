@@ -80,7 +80,6 @@
   "PayerDescription": "Dany użytkownik ma dostęp do szczegółów płatności i jest jedynym użytkownikiem, który może dostosować limit oraz dokonać płatności. Właściciel {{productName}} i sam płacący menedżer mogą przypisać lub przekazać rolę płacącego menedżera za pomocą portalu klienta Stripe.",
   "PaymentMethod": "Metoda płatności",
   "PerBackup": "{{currency}} za 1 kopię zapasową",
-  "PerBackupWithBracket": "({{currency}} za 1 kopię zapasową))",
   "PerStorage": "{{currency}} za {{amount}}/miesiąc",
   "PerStorageWitnMinValue": "{{currency}} za {{amount}}/miesiąc <1>(min {{minValue}}{{storageUnit}})</1>",
   "PlanUpgrade": "Plan aktualizacji",

@@ -24,27 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { redirect } from "next/navigation";
 import { headers } from "next/headers";
+import { ROOM_ID_HEADER } from "@/utils/constants";
 
-import FilesFilter from "@docspace/shared/api/files/filter";
-import { FilterType } from "@docspace/shared/enums";
-import type {
-  TFilesSettings,
-  TGetFolder,
-} from "@docspace/shared/api/files/types";
-import type { TUser } from "@docspace/shared/api/people/types";
-import type { TDefaultProvider } from "@docspace/shared/api/ai/types";
-
-import { getFilesSettings } from "@/api/files";
-import { getFormsFolder } from "@/api/forms";
-import { getSelf } from "@/api/people";
-import { getDefaultProvider } from "@/api/ai";
-import { getSettings } from "@/api/settings";
-import { ROOM_ID_HEADER, PAGE_COUNT } from "@/utils/constants";
-
-import FormsPage from "./page.client";
-
-export default async function Forms({
+export default async function FormsRoot({
   searchParams,
 }: {
   searchParams: Promise<{ [key: string]: string }>;
@@ -53,54 +37,5 @@ export default async function Forms({
   const params = await searchParams;
   const roomId = hdrs.get(ROOM_ID_HEADER) || params.roomId || "";
 
-  const filter = FilesFilter.getDefault();
-  filter.pageCount = PAGE_COUNT;
-  filter.filterType = FilterType.PDFForm;
-
-  let filesSettings: TFilesSettings | undefined;
-  let initialFolderData: TGetFolder | undefined;
-  let user: TUser | undefined;
-  let defaultProvider: TDefaultProvider | undefined;
-  let socketUrl = "";
-
-  if (roomId) {
-    const [fs, fd, u, dp, portalSettings] = await Promise.all([
-      getFilesSettings(),
-      getFormsFolder(roomId, filter),
-      getSelf(),
-      getDefaultProvider(),
-      getSettings().catch(() => undefined),
-    ]);
-    filesSettings = fs;
-    initialFolderData = fd;
-    user = u;
-    defaultProvider = dp;
-    if (portalSettings && typeof portalSettings !== "string") {
-      socketUrl = portalSettings.socketUrl ?? "";
-    }
-  } else {
-    const [fs, u, dp, portalSettings] = await Promise.all([
-      getFilesSettings(),
-      getSelf(),
-      getDefaultProvider(),
-      getSettings().catch(() => undefined),
-    ]);
-    filesSettings = fs;
-    user = u;
-    defaultProvider = dp;
-    if (portalSettings && typeof portalSettings !== "string") {
-      socketUrl = portalSettings.socketUrl ?? "";
-    }
-  }
-
-  return (
-    <FormsPage
-      roomId={roomId}
-      filesSettings={filesSettings!}
-      initialFolderData={initialFolderData}
-      user={user}
-      defaultProvider={defaultProvider}
-      socketUrl={socketUrl}
-    />
-  );
+  redirect(`/forms/my-forms${roomId ? `?roomId=${roomId}` : ""}`);
 }

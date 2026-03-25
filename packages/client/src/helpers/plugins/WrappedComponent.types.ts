@@ -2,7 +2,12 @@
 // WrappedComponent types
 // ---------------------------------------------------------------------------
 
-import { Component, IButton, IMessage } from "@onlyoffice/docspace-plugin-sdk";
+import {
+  ButtonGroup,
+  Component,
+  IButton,
+  IMessage,
+} from "@onlyoffice/docspace-plugin-sdk";
 import { Dispatch, SetStateAction } from "react";
 import { TMessageActionsParams } from "./types";
 import PluginStore from "SRC_DIR/store/PluginStore";
@@ -59,8 +64,8 @@ export type TPluginComponentProps = TPluginComponentOwnProps &
 export type TWrappedComponentProps = {
   pluginName: string;
   component: Component;
-  saveButton?: Component & { contextName?: string };
-  setSaveButtonProps?: Dispatch<SetStateAction<Component | undefined>>;
+  saveButton?: ButtonGroup & { contextName?: string };
+  setSaveButtonProps?: Dispatch<SetStateAction<ButtonGroup | undefined>>;
   setModalRequestRunning?: (value: boolean) => void;
   modalRequestRunning?: boolean;
 };

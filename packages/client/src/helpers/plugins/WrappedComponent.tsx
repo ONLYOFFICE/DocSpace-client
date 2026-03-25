@@ -27,13 +27,13 @@
 import React, { useMemo } from "react";
 import { inject, observer } from "mobx-react";
 import type {
+  ButtonGroup,
   Component,
   IBox,
   ICheckbox,
   IComboBox,
   IFrame,
   IIconButton,
-  IImage,
   IInput,
   ILabel,
   ILink,
@@ -518,7 +518,7 @@ const WrappedComponent = ({
 
     newContextProps.forEach(({ name, props }) => {
       if (saveButton && name === saveButton.contextName) {
-        setSaveButtonProps?.((val) => ({ ...val, props }) as Component);
+        setSaveButtonProps?.((val) => ({ ...val, props }) as ButtonGroup);
       } else {
         newProps[name] = props;
       }

@@ -41,6 +41,7 @@ import Header from "./sub-components/Header";
 import Info from "./sub-components/Info";
 import Footer from "./sub-components/Footer";
 import { SettingsPluginDialogProps } from "./SettingsPluginDialog.types";
+import { BoxGroup } from "@onlyoffice/docspace-plugin-sdk";
 
 const SettingsPluginDialog = ({
   plugin,
@@ -109,17 +110,21 @@ const SettingsPluginDialog = ({
       </ModalDialog.Header>
       <ModalDialog.Body>
         <div style={{ marginTop: "16px" }}>
-          <WrappedComponent
-            pluginName={plugin.name}
-            component={{
-              component: PluginComponents.box,
-              props: customSettingsProps,
-            }}
-            saveButton={saveButtonProps}
-            setSaveButtonProps={setSaveButtonProps}
-            setModalRequestRunning={setModalRequestRunning}
-            modalRequestRunning={modalRequestRunning}
-          />
+          {customSettingsProps ? (
+            <WrappedComponent
+              pluginName={plugin.name}
+              component={
+                {
+                  component: PluginComponents.box,
+                  props: customSettingsProps,
+                } satisfies BoxGroup
+              }
+              saveButton={saveButtonProps}
+              setSaveButtonProps={setSaveButtonProps}
+              setModalRequestRunning={setModalRequestRunning}
+              modalRequestRunning={modalRequestRunning}
+            />
+          ) : null}
           <Info
             t={t}
             plugin={plugin}
@@ -201,3 +206,4 @@ export default inject(({ settingsStore, pluginStore }: TStore) => {
     onDelete,
   };
 })(observer(SettingsPluginDialog));
+

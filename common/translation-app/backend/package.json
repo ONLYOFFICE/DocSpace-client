@@ -17,7 +17,7 @@
     "@vitalets/google-translate-api": "^9.2.0",
     "app-root-path": "^3.1.0",
     "dotenv": "^17.2.2",
-    "fastify": "^4.28.1",
+    "fastify": "^5.8.3",
     "fastify-socket.io": "^5.1.0",
     "fs-extra": "^11.3.1",
     "glob": "^11.0.3",

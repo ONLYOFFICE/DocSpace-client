@@ -65,7 +65,7 @@ import type {
   IMediaViewer,
 } from "@onlyoffice/docspace-plugin-sdk";
 
-import PluginStore from "SRC_DIR/store/PluginStore";
+import type PluginStore from "SRC_DIR/store/PluginStore";
 
 import type {
   PluginDevices,

@@ -213,8 +213,6 @@ export const PluginComponent = inject(
               id,
               className,
               children,
-              // All remaining IBox fields are CSS layout properties
-              // (flexDirection, alignItems, justifyContent, …).
               ...cssLayoutProps
             } = boxProps || {};
 

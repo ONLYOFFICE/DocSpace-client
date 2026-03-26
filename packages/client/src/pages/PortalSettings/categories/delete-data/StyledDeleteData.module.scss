@@ -24,22 +24,46 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
+@use "@docspace/ui-kit/styles/mixins";
 
-import styles from "./DeleteDataLoader.module.scss";
+.mainContainer {
+  max-width: 700px;
+  white-space: pre-line;
 
-const DeleteDataLoader = () => {
-  return (
-    <div className={styles.loader}>
-      <div className={styles.submenu}>
-        <RectangleSkeleton height="28px" width="72px" />
-        <RectangleSkeleton height="28px" width="72px" />
-      </div>
-      <RectangleSkeleton className={styles.header} />
-      <RectangleSkeleton className={styles.subheader} />
-      <RectangleSkeleton className={styles.body} height="100px" />
-    </div>
-  );
-};
+  .description {
+    margin-bottom: 16px;
+    color: var(--settings-common-description-color);
+  }
 
-export default DeleteDataLoader;
+  .helper {
+    line-height: 20px;
+    margin-bottom: 24px;
+    color: var(--settings-common-description-color);
+  }
+}
+
+.buttonWrapper {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+
+  .requestAgainLink {
+    margin-inline-start: 4px;
+  }
+
+  @include mixins.mobile {
+    flex-direction: column-reverse;
+    gap: 16px;
+    position: absolute;
+    bottom: 16px;
+    width: calc(100% - 40px);
+
+    @include mixins.mobile {
+      width: calc(100% - 32px);
+    }
+
+    .button {
+      width: 100%;
+    }
+  }
+}

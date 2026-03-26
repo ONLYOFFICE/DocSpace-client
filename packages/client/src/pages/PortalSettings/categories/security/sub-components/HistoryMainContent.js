@@ -28,7 +28,7 @@ import { useEffect, useState } from "react";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Button } from "@docspace/ui-kit/components/button";
 import { TwoFactorCampaignBanner } from "@docspace/shared/components/two-factor-campaign";
-import { useTheme } from "@docspace/ui-kit/providers/theme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { Badge } from "@docspace/ui-kit/components/badge";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";

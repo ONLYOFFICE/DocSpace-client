@@ -2610,3 +2610,19 @@
   --security-subheader-color: #{$dark-gray-dark};
   --security-side-color: #{$gray-dark};
 }
+
+.light {
+  --settings-storage-management-description-color: #{$light-gray-dark};
+  --settings-storage-management-gray-bg-text: #{$black};
+  --settings-storage-management-divider-color: #{$gray-light-mid};
+  --settings-delete-data-border-top: 1px solid #{$gray-light-mid};
+  --settings-payment-bg-color: #{$gray-light};
+}
+
+.dark {
+  --settings-storage-management-description-color: #{$dark-gray-dark};
+  --settings-storage-management-gray-bg-text: #{$white};
+  --settings-storage-management-divider-color: #{$gray-dark-mid};
+  --settings-delete-data-border-top: 1px solid #{$gray-dark-mid};
+  --settings-payment-bg-color: #{$dark-gray-light};
+}

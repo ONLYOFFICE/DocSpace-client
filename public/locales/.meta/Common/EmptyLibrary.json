@@ -1,0 +1,21 @@
+{
+  "key_path": "EmptyLibrary",
+  "content": "No templates available in this library.",
+  "content_en_sha1_hash": "c21124d568307c62d087c6283dfc4de27e000b8f",
+  "created_at": "2026-03-26T08:26:33.939Z",
+  "updated_at": "2026-03-26T08:26:33.939Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

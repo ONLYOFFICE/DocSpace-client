@@ -76,7 +76,11 @@
       "@svgr/plugin-svgo>svgo": "~3.3.3",
       "postcss-svgo>svgo": ">=4.0.1",
       "file-type": ">=21.3.2",
-      "flatted": ">=3.4.0"
+      "flatted": ">=3.4.0",
+      "picomatch@^2": "^2.3.2",
+      "picomatch@^4": "^4.0.4",
+      "yaml@^1": "^1.10.3",
+      "yaml@^2": "^2.8.3"
     }
   }
 }

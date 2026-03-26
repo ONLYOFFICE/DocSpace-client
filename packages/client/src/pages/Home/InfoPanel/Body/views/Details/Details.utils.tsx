@@ -70,7 +70,12 @@ const link = (txt: React.ReactNode, onClick: () => void) => (
   </Link>
 );
 
-const tagList = (tags: string[], id: number, access: ShareAccessRights) => (
+const tagList = (
+  tags: string[],
+  id: number,
+  access: ShareAccessRights,
+  title: string,
+) => (
   <div className="property-tag_list" data-testid="info_panel_details_tag_list">
     <TagManagement
       id={id}
@@ -79,6 +84,7 @@ const tagList = (tags: string[], id: number, access: ShareAccessRights) => (
       className="tags"
       columnCount={-1}
       access={access}
+      roomName={title}
     />
   </div>
 );
@@ -440,7 +446,12 @@ class DetailsHelper {
 
   getItemTags = () => {
     if ("tags" in this.item)
-      return tagList(this.item.tags, this.item.id, this.item.access);
+      return tagList(
+        this.item.tags,
+        this.item.id,
+        this.item.access,
+        this.item.title,
+      );
   };
 
   getQuotaItem = () => {

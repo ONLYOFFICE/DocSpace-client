@@ -1,0 +1,21 @@
+{
+  "key_path": "CopyingTemplate",
+  "content": "Copying...",
+  "content_en_sha1_hash": "fb01738ac692bf650dd704e2c10cd57e367cedc2",
+  "created_at": "2026-03-26T08:26:31.409Z",
+  "updated_at": "2026-03-26T08:26:31.409Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

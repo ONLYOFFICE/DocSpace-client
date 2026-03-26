@@ -3,7 +3,7 @@
   "content": "{{currency}} per 1 backup",
   "content_en_sha1_hash": "d85e845aa0379da19ebcadd952f30a7ee8e2786f",
   "created_at": "2025-08-21T14:45:39.476Z",
-  "updated_at": "2026-03-20T09:07:45.647Z",
+  "updated_at": "2026-03-26T08:26:58.225Z",
   "comment": {
     "text": "This key displays the price per backup, formatted with the currency symbol. It's used to show the cost of a backup service, likely within a settings or pricing section of the user interface. Translators should ensure the currency symbol integrates correctly with the translated text.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/ServicesItems.tsx",
-      "line_number": 245,
+      "line_number": 243,
       "context": "return t(\"Services:BackupsAvailable\", {\n currency: formatWalletCurrency!(priceValue!, 2),\n });\n }\n \n return t(\"PerBackup\", {\n currency: formatWalletCurrency!(priceValue!, 2),\n });\n \n case AI_ENUM:\n if (isAiServiceLowBalance) {",
       "module": "/packages/client"
     }

@@ -142,6 +142,10 @@ const Shell = ({ page = "home", ...rest }) => {
       roomParts: "QUOTA",
       individual: true,
     });
+
+    SocketHelper?.emit(SocketCommands.Subscribe, {
+      roomParts: "change-web-plugin",
+    });
   }, []);
 
   useEffect(() => {

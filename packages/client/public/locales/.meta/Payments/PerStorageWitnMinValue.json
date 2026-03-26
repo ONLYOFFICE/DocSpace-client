@@ -3,7 +3,7 @@
   "content": "{{currency}} per {{amount}}/month <1>(min {{minValue}}{{storageUnit}})</1>",
   "content_en_sha1_hash": "7d6e997bf41f6d9e4fc04c7db3d80f1f97e482d2",
   "created_at": "2025-06-24T16:31:06.817Z",
-  "updated_at": "2026-03-20T09:07:45.656Z",
+  "updated_at": "2026-03-26T08:26:58.242Z",
   "comment": {
     "text": "This translation key is used for a price display format in a UI component, showing the cost of storage per unit amount. It's likely to appear on a settings page or configuration dialog, displaying pricing information with currency and unit details. The value placeholders ({{currency}}, {{amount}}, {{minValue}}, etc.) should be filled by the application context to provide accurate translations.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/panels/additional-storage/StoragePlanUpgrade.tsx",
-      "line_number": 422,
+      "line_number": 433,
       "context": "{!hasMinError ? (\n <Text className={styles.perStorageInfo} fontSize=\"12px\">\n <Trans\n t={t}\n ns=\"Payments\"\n i18nKey=\"PerStorageWitnMinValue\"\n values={{\n currency: formatWalletCurrency!(\n storagePriceIncrement!,\n 2,\n ),",
       "module": "/packages/client"
     }

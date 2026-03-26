@@ -2149,7 +2149,8 @@ class ContextOptionsStore {
         onClick: () => this.onCopyLink(item, t),
         disabled: item.isTemplate
           ? false
-          : (isPublicRoomType && hasShareLinkRights) ||
+          : (!item.isRoom && item.canShare) ||
+            (isPublicRoomType && hasShareLinkRights) ||
             Boolean(
               item.external && (item.isLinkExpired || item.passwordProtected),
             ),
@@ -2408,7 +2409,7 @@ class ContextOptionsStore {
       {
         id: "option_change-room-owner",
         key: "change-room-owner",
-        label: t("Files:ChangeTheRoomOwner"),
+        label: t("Files:ChangeRoomOwner"),
         icon: ReconnectSvgUrl,
         onClick: this.onChangeRoomOwner,
         disabled: isAIAgent,
@@ -2432,9 +2433,9 @@ class ContextOptionsStore {
         onClick: () => this.onSetUpCustomFilter(item, t),
         disabled: Boolean(
           !isRoomAdmin &&
-            item.customFilterEnabled &&
-            item.customFilterEnabledBy &&
-            item.customFilterEnabledBy !== this.userStore?.user?.displayName,
+          item.customFilterEnabled &&
+          item.customFilterEnabledBy &&
+          item.customFilterEnabledBy !== this.userStore?.user?.displayName,
         ),
       },
       {
@@ -2652,9 +2653,8 @@ class ContextOptionsStore {
     const pluginItems = this.onLoadPlugins(item);
 
     if (pluginItems.length > 0) {
-      if (pluginItems.length === 1) {
-        const plugin = pluginItems[0];
-        options.splice(1, 0, {
+      pluginItems.forEach((plugin) => {
+        options.push({
           id: `option_${plugin.key}`,
           key: plugin.key,
           label: plugin.label,
@@ -2663,16 +2663,7 @@ class ContextOptionsStore {
           onClick: plugin.onClick,
           items: plugin.items,
         });
-      } else {
-        options.splice(1, 0, {
-          id: "option_plugin-actions",
-          key: "plugin_actions",
-          label: t("Common:Actions"),
-          icon: PluginActionsSvgUrl,
-          disabled: false,
-          items: this.onLoadPlugins(item),
-        });
-      }
+      });
     }
 
     const { isCollaborator } = this.userStore?.user || {
@@ -2702,23 +2693,32 @@ class ContextOptionsStore {
       }
     }
 
+    const showInfoOption = newOptions.find(
+      (option) => option.key === "show-info",
+    );
+    const showVersionHistoryOption = newOptions.find(
+      (option) => option.key === "show-version-history",
+    );
+
+    const moreOptionsItemKeys = [
+      [
+        { key: "save-as-template" },
+        { key: "duplicate-room" },
+        { key: "download" },
+        { key: "room-info" },
+        { key: "embedding-settings" },
+        { key: "reconnect-storage" },
+        { key: "export-room-index" },
+      ],
+      [{ key: "change-room-owner" }, { key: "change-agent-owner" }],
+    ];
+
     const menuGroupsConfig = [
       {
         groupKey: "more-options",
         groupLabel: t("Common:MoreOptions"),
         groupIcon: DotsHorizontalUrl,
-        itemKeys: [
-          [
-            { key: "save-as-template" },
-            { key: "duplicate-room" },
-            { key: "download" },
-            { key: "room-info" },
-            { key: "embedding-settings" },
-            { key: "reconnect-storage" },
-            { key: "export-room-index" },
-          ],
-          [{ key: "change-room-owner" }, { key: "change-agent-owner" }],
-        ],
+        itemKeys: moreOptionsItemKeys,
         needsGrouping: true,
         minItemsCount,
       },
@@ -2771,13 +2771,6 @@ class ContextOptionsStore {
       });
     }
 
-    const showInfoOption = newOptions.find(
-      (option) => option.key === "show-info",
-    );
-    const showVersionHistoryOption = newOptions.find(
-      (option) => option.key === "show-version-history",
-    );
-
     if (showInfoOption && showVersionHistoryOption) {
       menuGroupsConfig.push({
         groupKey: "info",
@@ -2789,9 +2782,6 @@ class ContextOptionsStore {
             { key: "show-info" },
             { key: "embedding-settings" },
           ],
-          pluginItems.map((plug) => {
-            return { key: plug.key };
-          }),
         ],
         needsGrouping: true,
         minItemsCount: 1,
@@ -2847,6 +2837,48 @@ class ContextOptionsStore {
             })();
 
       resultOptions.splice(insertIndex, 0, ...menuGroups);
+    }
+
+    if (pluginItems.length > 0) {
+      const pluginKeys = pluginItems.map((p) => p.key);
+      const ungroupedPlugins = resultOptions.filter((o) =>
+        pluginKeys.includes(o.key),
+      );
+
+      if (ungroupedPlugins.length > 0) {
+        for (let i = resultOptions.length - 1; i >= 0; i--) {
+          if (pluginKeys.includes(resultOptions[i].key))
+            resultOptions.splice(i, 1);
+        }
+
+        const moreOptionsGroup =
+          resultOptions.find((o) => o.key === "more-options") ||
+          resultOptions.find((o) => o.key === "info");
+        if (moreOptionsGroup) {
+          moreOptionsGroup.items.push(
+            { key: "separator-before-plugins", isSeparator: true },
+          );
+          ungroupedPlugins.forEach((p) => moreOptionsGroup.items.push(p));
+        } else {
+          const externalLinkIdx = resultOptions.findIndex(
+            (o) => o.key === "external-link",
+          );
+          const roomMembersLinkIdx = resultOptions.findIndex(
+            (o) => o.key === "link-for-room-members",
+          );
+          const menuIdx =
+            externalLinkIdx !== -1 ? externalLinkIdx : roomMembersLinkIdx;
+          const pluginInsertIdx = menuIdx !== -1 ? menuIdx + 1 : 1;
+
+          resultOptions.splice(pluginInsertIdx, 0, {
+            id: "option_more-options",
+            key: "more-options",
+            label: t("Common:MoreOptions"),
+            icon: DotsHorizontalUrl,
+            items: ungroupedPlugins,
+          });
+        }
+      }
     }
 
     const downloadGroupIndex = resultOptions.findIndex(

@@ -43,6 +43,12 @@ import type { ModalDialogProps } from "@docspace/ui-kit/components/modal-dialog/
 import type { TTranslation } from "@docspace/shared/types";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { getCookie } from "@docspace/ui-kit/utils/cookie";
+import SocketHelper, {
+  SocketEvents,
+  TChangeWebPluginData,
+  SocketCommands,
+} from "@docspace/ui-kit/utils/socket";
+import { IModalDialog } from "@onlyoffice/docspace-plugin-sdk";
 
 import defaultConfig from "PUBLIC_DIR/scripts/config.json";
 
@@ -81,7 +87,6 @@ import {
 
 import type SelectedFolderStore from "./SelectedFolderStore";
 import type { TSelectorProps } from "SRC_DIR/components/PluginSelector/types";
-import { IModalDialog } from "@onlyoffice/docspace-plugin-sdk";
 
 const { api: apiConf, proxy: proxyConf } = defaultConfig;
 const { origin: apiOrigin, prefix: apiPrefix } = apiConf;
@@ -166,7 +171,39 @@ class PluginStore {
     this.userStore = userStore;
 
     makeAutoObservable(this);
+
+    // Subscribe to plugin state changes via WebSocket
+    this.wsChangeWebPlugin();
   }
+
+  wsChangeWebPlugin = () => {
+    SocketHelper?.emit(SocketCommands.Subscribe, {
+      roomParts: "change-web-plugin",
+    });
+
+    SocketHelper?.on(
+      SocketEvents.ChangeWebPlugin,
+      this.handlePluginStateChange,
+    );
+  };
+
+  handlePluginStateChange = (data: TChangeWebPluginData) => {
+    const { webPluginName, enabled } = data;
+
+    runInAction(() => {
+      const plugin = this.plugins.find((p) => p.name === webPluginName);
+
+      if (!plugin) return;
+
+      plugin.enabled = enabled;
+
+      if (enabled) {
+        this.activatePlugin(webPluginName);
+      } else {
+        this.deactivatePlugin(webPluginName);
+      }
+    });
+  };
 
   dispatchMessage = ({
     message,

@@ -34,14 +34,14 @@ COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
 COPY common/tests/package-lock.json ./common/tests/package-lock.json
 COPY common/tests/package.json ./common/tests/package.json
 COPY packages/client/package.json ./packages/client/package.json
-COPY packages/client/onlyoffice-docspace-plugin-sdk-*.tgz ./packages/client/
+COPY packages/client/*.tgz ./packages/client/
 COPY packages/login/package.json ./packages/login/package.json
 COPY packages/doceditor/package.json ./packages/doceditor/package.json
 COPY packages/sdk/package.json ./packages/sdk/package.json
 COPY packages/management/package.json ./packages/management/package.json
 COPY packages/shared/package.json ./packages/shared/package.json
 COPY libs/ui-kit/package.json ./libs/ui-kit/package.json
-COPY libs/ui-kit/onlyoffice-docspace-api-sdk-*.tgz ./libs/ui-kit/
+COPY libs/ui-kit/*.tgz ./libs/ui-kit/
 
 # Install dependencies and clean cache in same layer
 RUN pnpm install --frozen-lockfile && \

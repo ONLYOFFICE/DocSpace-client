@@ -3,7 +3,7 @@
   "content": "Ad Management",
   "content_en_sha1_hash": "18c92cf5613e4306b2ab3e01e2c3b8b2c34e9b43",
   "created_at": "2025-07-02T07:49:04.410Z",
-  "updated_at": "2026-02-19T13:36:32.702Z",
+  "updated_at": "2026-03-26T08:26:58.116Z",
   "comment": {
     "text": "The \"AdManagement\" translation key is used for the label displayed on a configuration option page within the portal settings, guiding users to manage ads. This text appears in a mobile category wrapper and may also be referenced in tooltips or other UI elements related to ad management options.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
       "line_number": 93,
-      "context": "{\n id: \"portal-settings_catalog-ad-management\",\n key: \"0-0-5\",\n icon: \"\",\n link: \"ad-management\",\n tKey: \"AdManagement\",\n },\n ],\n },\n {\n id: \"portal-settings_catalog-branding\",",
+      "context": "{\n id: \"portal-settings_catalog-ad-management\",\n key: \"0-0-5\",\n icon: \"\",\n link: \"ad-management\",\n tKey: \"AdManagement\",\n },\n {\n id: \"portal-settings_catalog-ai-services-management\",\n key: \"0-0-6\",\n icon: \"\",",
       "module": "/packages/client"
     }
   ],

@@ -1,0 +1,28 @@
+{
+  "key_path": "BackupTitle",
+  "content": "<1>Backup</1> ({{currency}} per 1 backup)",
+  "content_en_sha1_hash": "5a8caa0e2720859a38f10debda2c806198b8667b",
+  "created_at": "2026-03-26T08:26:50.068Z",
+  "updated_at": "2026-03-26T08:27:40.253Z",
+  "comment": {
+    "text": "This translation key provides the title for a backup service page, displaying the price per backup. The title will appear as \"Backup\" followed by the currency and price, likely within a settings or portal section related to payments. Translators should ensure the currency symbol is handled correctly within the localized string.",
+    "is_auto": true,
+    "updated_at": "2026-03-26T08:27:40.253Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/pages/backup/BackupPage.tsx",
+      "line_number": 148,
+      "context": "title={\n <Text fontSize=\"12px\" fontWeight={400}>\n <Trans\n t={t}\n ns=\"Payments\"\n i18nKey=\"BackupTitle\"\n values={{\n currency: formatWalletCurrency!(backupServicePrice, 2),\n }}\n components={{\n 1: <Text as=\"span\" fontSize=\"13px\" fontWeight={600} />,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

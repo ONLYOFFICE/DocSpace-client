@@ -1,0 +1,28 @@
+{
+  "key_path": "DisableAiServicesBalance",
+  "content": "Your remaining balance (<1>{{balance}}</1>) will stay in your account and will be available for use if you choose to re-enable {{aiServices}} in the future.",
+  "content_en_sha1_hash": "975e966dbc29df3ac68074ce77d8e622fb178233",
+  "created_at": "2026-03-26T08:26:46.870Z",
+  "updated_at": "2026-03-26T08:28:52.031Z",
+  "comment": {
+    "text": "This translation key provides a message displayed within a dialog when a user disables AI services. It explains that their remaining balance will persist and can be used again if they re-enable AI services in the future. The message includes the user's current balance and the name of the AI services being disabled.",
+    "is_auto": true,
+    "updated_at": "2026-03-26T08:28:52.031Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DisableAiServicesDialog/index.js",
+      "line_number": 103,
+      "context": "</Text>\n {isAiToolsServiceOn && (\n <Text fontSize=\"13px\" fontWeight={400} className={styles.balance}>\n <Trans\n t={t}\n i18nKey=\"DisableAiServicesBalance\"\n values={{\n balance: formatAiServiceCurrency(\n aiServiceBalance,\n 3,\n aiServiceCodeCurrency,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

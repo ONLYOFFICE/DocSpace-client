@@ -3,7 +3,7 @@
   "content": "Remaining balance after purchase: {{currency}}",
   "content_en_sha1_hash": "5891a98ce5ca71a2920c4467a35d7d0195859450",
   "created_at": "2026-03-20T09:07:40.798Z",
-  "updated_at": "2026-03-20T10:04:39.095Z",
+  "updated_at": "2026-03-26T08:26:58.240Z",
   "comment": {
     "text": "This key displays the remaining balance a user has after a purchase. It appears in the Order Summary panel, likely within the Portal Settings, to inform the user about their available funds. The `{{currency}}` placeholder should be replaced with the appropriate currency symbol or code.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/panels/additional-storage/OrderSummary.tsx",
-      "line_number": 332,
+      "line_number": 348,
       "context": ">\n {reccomendedAmount\n ? t(\"WalletTopUpRequired\", {\n currency: formatWalletCurrency!(reccomendedAmount, 2),\n })\n : t(\"RemainingBalanceAfterPurchase\", {\n currency: formatWalletCurrency!(remainingBalance, 2),\n })}\n </Text>\n ) : null}\n </div>",
       "module": "/packages/client"
     }

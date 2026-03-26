@@ -1,0 +1,28 @@
+{
+  "key_path": "NewMonthlyPrice",
+  "content": "New monthly price",
+  "content_en_sha1_hash": "c007dd3cca0268a7851dcba7068cfb09a3376a3f",
+  "created_at": "2026-03-26T08:26:49.376Z",
+  "updated_at": "2026-03-26T08:27:49.854Z",
+  "comment": {
+    "text": "This key displays the new monthly price for additional storage within the Order Summary panel of the Portal Settings. It appears as a label alongside the price value, likely related to a change in a storage plan. Translators should ensure the translation accurately conveys the updated cost.",
+    "is_auto": true,
+    "updated_at": "2026-03-26T08:27:49.854Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/panels/additional-storage/OrderSummary.tsx",
+      "line_number": 235,
+      "context": "{isDowngradeStoragePlan &&\n !isExceedingStorageLimit &&\n !isNewSubscription ? (\n <div className={styles.summaryRow}>\n <Text fontSize=\"14px\" className={styles.rowLabel}>\n {t(\"Services:NewMonthlyPrice\")}\n </Text>\n <Text\n fontWeight=\"600\"\n fontSize=\"14px\"\n className={styles.rowValue}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

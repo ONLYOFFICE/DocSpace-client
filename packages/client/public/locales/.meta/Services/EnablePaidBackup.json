@@ -1,0 +1,28 @@
+{
+  "key_path": "EnablePaidBackup",
+  "content": "Enable paid backup",
+  "content_en_sha1_hash": "3a577c2593861332da44dc6a287c02c685f53086",
+  "created_at": "2026-03-26T08:26:49.318Z",
+  "updated_at": "2026-03-26T08:28:00.448Z",
+  "comment": {
+    "text": "This key is for the text displayed on a button that enables paid backup functionality. The button appears on the Backup Page within Portal Settings, and the text changes based on the user's tariff plan (either \"Enable paid backup\" or \"Enable\"). Translators should ensure the meaning of enabling a backup service is conveyed accurately.",
+    "is_auto": true,
+    "updated_at": "2026-03-26T08:28:00.448Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/pages/backup/BackupPage.tsx",
+      "line_number": 214,
+      "context": "<Button\n className={styles.backupButton}\n size={ButtonSize.small}\n label={\n !isFreeTariff\n ? t(\"Services:EnablePaidBackup\")\n : t(\"Common:Enable\")\n }\n onClick={handleToggleChange}\n primary\n scale",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

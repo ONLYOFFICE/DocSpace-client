@@ -3,7 +3,7 @@
   "content": "Remaining period",
   "content_en_sha1_hash": "f5023b8b9e7191d0cd371a3a36ee2dbe6bdf5e2d",
   "created_at": "2026-03-20T09:07:40.799Z",
-  "updated_at": "2026-03-20T10:04:22.301Z",
+  "updated_at": "2026-03-26T08:26:58.239Z",
   "comment": {
     "text": "This key displays the remaining subscription period in the Order Summary panel of the Portal Settings. It appears when the user has not exceeded their storage limit and is not starting a new subscription, indicating the duration of their current plan. Translators should ensure the phrasing accurately reflects the time remaining.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/panels/additional-storage/OrderSummary.tsx",
-      "line_number": 235,
+      "line_number": 251,
       "context": "{!isExceedingStorageLimit && !isNewSubscription ? (\n <div className={styles.summaryRow}>\n <Text fontSize=\"14px\" className={styles.rowLabel}>\n {isDowngradeStoragePlan\n ? t(\"EffectiveDate\")\n : t(\"RemainingPeriod\")}\n </Text>\n <Text\n fontWeight=\"600\"\n fontSize=\"14px\"\n className={styles.rowValue}",
       "module": "/packages/client"
     }

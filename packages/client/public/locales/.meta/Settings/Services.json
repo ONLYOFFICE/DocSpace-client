@@ -3,7 +3,7 @@
   "content": "Services",
   "content_en_sha1_hash": "5cbd584046863bc7b753e57e8681a98a87f36f0f",
   "created_at": "2025-06-03T20:59:25.520Z",
-  "updated_at": "2026-03-20T09:07:45.558Z",
+  "updated_at": "2026-03-26T08:26:58.104Z",
   "comment": {
     "text": "The translation key \"Services\" is used to display the label for a section or category related to services in a UI setting. It appears as part of a settings tree structure and is likely used on a page that allows users to manage or configure their services. The exact location may vary, but it is commonly found on pages related to portal settings or configurations.",
     "is_auto": true,
@@ -18,14 +18,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 239,
-      "context": "return \"Common:FreeAccessToLicensedVersion\";\n case \"DataImport\":\n return t(\"DataImport\");\n case \"StorageManagement\":\n return t(\"StorageManagement\");\n case \"Services\":\n return t(\"Services\");\n case \"AISettings\":\n return t(\"Settings:AISettings\");\n default:\n throw new Error(\"Unexpected translation key\");",
+      "line_number": 63,
+      "context": "isCommunity,\n currentDeviceType,\n isProfileLoading,\n currentColorScheme,\n baseDomain,\n aiServicesEnabled,\n } = props;\n \n const [selectedKeys, setSelectedKeys] = React.useState([]);\n \n const prevLocation = React.useRef(null);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 675,
-      "context": "{\n id: \"portal-settings_catalog-services\",\n key: \"10-3\",\n icon: \"\",\n link: \"services\",\n tKey: \"Services\",\n isCategory: true,\n },\n ],\n },\n {",
+      "line_number": 100,
+      "context": "{\n id: \"portal-settings_catalog-ai-services-management\",\n key: \"0-0-6\",\n icon: \"\",\n link: \"ai-services-management\",\n tKey: \"AiServicesManagement\",\n },\n ],\n },\n {\n id: \"portal-settings_catalog-branding\",",
       "module": "/packages/client"
     }
   ],

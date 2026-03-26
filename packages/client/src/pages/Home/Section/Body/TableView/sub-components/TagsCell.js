@@ -62,6 +62,7 @@ const TagsCell = ({ item, tagCount, isHovered, isActive, checkedProps }) => {
         access={item.access}
         columnCount={tagCount}
         isActive={isHovered || isActive || checkedProps}
+        roomName={item.title}
       />
     </div>
   );

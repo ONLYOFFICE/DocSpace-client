@@ -91,6 +91,12 @@ export const getTriggerTranslate = (trigger: number, t: TTranslation) => {
       return t("FormStopped");
     case WebhookTriggers.FormSubmit:
       return t("FormSubmit");
+    case WebhookTriggers.AgentCreated:
+      return t("AgentCreated");
+    case WebhookTriggers.AgentUpdated:
+      return t("AgentUpdated");
+    case WebhookTriggers.AgentDeleted:
+      return t("AgentDeleted");
     default:
       return "";
   }
@@ -122,6 +128,9 @@ export const getDisabledTriggersForUser = (user?: TUser) => {
       BigInt(WebhookTriggers.RoomDeleted),
       BigInt(WebhookTriggers.RoomRestored),
       BigInt(WebhookTriggers.RoomCopied),
+      BigInt(WebhookTriggers.AgentCreated),
+      BigInt(WebhookTriggers.AgentUpdated),
+      BigInt(WebhookTriggers.AgentDeleted),
     ];
   }
 

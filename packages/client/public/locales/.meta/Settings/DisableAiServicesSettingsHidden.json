@@ -1,0 +1,28 @@
+{
+  "key_path": "DisableAiServicesSettingsHidden",
+  "content": "The {{aiSettings}} section will be removed from {{productName}}.",
+  "content_en_sha1_hash": "ff8f74bd28e7db5c67ccfe94554709171f4f4ab8",
+  "created_at": "2026-03-26T08:26:46.848Z",
+  "updated_at": "2026-03-26T08:28:09.939Z",
+  "comment": {
+    "text": "This key displays a message in a dialog indicating that the AI settings section will be removed from the product. It's used to inform the user about the removal of AI-related features and settings. The message includes placeholders for the AI settings name and product name.",
+    "is_auto": true,
+    "updated_at": "2026-03-26T08:28:09.939Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DisableAiServicesDialog/index.js",
+      "line_number": 58,
+      "context": "aiServices: t(\"Common:AIServices\"),\n aiAgents: t(\"Common:AIAgents\"),\n };\n \n const effects = [\n t(\"DisableAiServicesSettingsHidden\", effectVars),\n t(\"DisableAiServicesServicesDisabled\", effectVars),\n t(\"DisableAiServicesAgentsDisabled\", effectVars),\n ];\n \n return (",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

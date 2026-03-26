@@ -1,0 +1,28 @@
+{
+  "key_path": "DisableAiServicesAgentsDisabled",
+  "content": "{{aiAgents}} will be hidden for all users (interaction history will remain preserved).",
+  "content_en_sha1_hash": "da389baf9ef5fe222c127ac0fefd7b8c6651aec6",
+  "created_at": "2026-03-26T08:26:46.864Z",
+  "updated_at": "2026-03-26T08:29:00.904Z",
+  "comment": {
+    "text": "This key displays a message in a dialog explaining that AI agents will be hidden from all users, although their interaction history will be saved. It appears within the Disable AI Services dialog to inform users about the effects of disabling AI services.",
+    "is_auto": true,
+    "updated_at": "2026-03-26T08:29:00.904Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DisableAiServicesDialog/index.js",
+      "line_number": 60,
+      "context": "};\n \n const effects = [\n t(\"DisableAiServicesSettingsHidden\", effectVars),\n t(\"DisableAiServicesServicesDisabled\", effectVars),\n t(\"DisableAiServicesAgentsDisabled\", effectVars),\n ];\n \n return (\n <ModalDialog\n visible={visible}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

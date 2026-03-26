@@ -52,7 +52,10 @@ import {
 import { aiMessagesExportHandler } from "./messages";
 import { aiProvidersAvailableHandler } from "./providersAvailable";
 import { aiRoomsChatsHandler, aiRoomsChatsStreamHandler } from "./roomsChats";
-import { aiRoomsChatsConfigHandler } from "./roomsChatsConfig";
+import {
+  aiRoomsChatsConfigHandler,
+  aiRoomsChatsConfigPutHandler,
+} from "./roomsChatsConfig";
 import { aiRoomsServersHandler } from "./roomsServers";
 import {
   aiVectorizationGetHandler,
@@ -84,6 +87,7 @@ export {
   aiRoomsChatsHandler,
   aiRoomsChatsStreamHandler,
   aiRoomsChatsConfigHandler,
+  aiRoomsChatsConfigPutHandler,
   aiRoomsServersHandler,
   aiVectorizationGetHandler,
   aiVectorizationPutHandler,

@@ -27,7 +27,7 @@
 @use "@docspace/ui-kit/styles/variables";
 
 .embeddingPanelBody {
-  padding-left: 16px;
+  padding-inline-start: 16px;
 
   .embeddingPanelHeaderLink {
     margin: 10px 0 2px;
@@ -110,5 +110,6 @@
     z-index: 1;
     margin: 8px;
     inset-inline-end: 32px;
+    direction: ltr;
   }
 }

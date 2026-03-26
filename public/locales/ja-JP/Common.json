@@ -47,7 +47,6 @@
   "AgentOwner": "エージェント所有者",
   "AIAgents": "AIエージェント",
   "AICanMakeMistakes": "AIは誤りを犯す可能性があります。回答内容を必ずご確認ください。",
-  "AIChatInput": "AIとチャットする",
   "AIChatOfferHelp": "何かお手伝いできることがありますか？",
   "AIDisabledInfoBlockAdminSaasDescription": "AI機能は現在無効化されています。これにより、このエージェントはチャットやタスクを処理できません。完全な機能を復元するには、{{productName}}の設定でAI機能を有効にしてください。",
   "AIDisabledInfoBlockAdminStandaloneDescription": "AI機能は現在無効化されています。これにより、このエージェントはチャットやタスクを処理できません。{{productName}}の高度な機能を有効にするには、ご自身のAIサービスを接続してください。",

@@ -47,7 +47,6 @@
   "AgentOwner": "Proprietar agent",
   "AIAgents": "Agenți de inteligență artificială",
   "AICanMakeMistakes": "IA poate face greșeli. Verificați cu atenție răspunsurile.",
-  "AIChatInput": "Chat cu IA",
   "AIChatOfferHelp": "Cu ce vă pot ajuta?",
   "AIDisabledInfoBlockAdminSaasDescription": "Capacitățile de IA sunt actualmente dezactivate, ceea ce înseamnă că acest agent nu poate procesa conversații sau sarcini. Pentru a recupera funcționalitatea completă, activați funcțiile de IA în secțiunea cu setările {{productName}}.",
   "AIDisabledInfoBlockAdminStandaloneDescription": "Capacitățile de IA sunt actualmente dezactivate, ceea ce înseamnă că acest agent nu poate procesa conversații sau sarcini. Conectați serviciu de IA propriu pentru a activa caracteristicile avansate în {{productName}}.",

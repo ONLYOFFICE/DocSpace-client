@@ -47,7 +47,6 @@
   "AgentOwner": "Proprietario agente",
   "AIAgents": "Agenti AI",
   "AICanMakeMistakes": "L’AI può commettere errori. Verifica sempre le risposte.",
-  "AIChatInput": "Chatta con l'AI",
   "AIChatOfferHelp": "Come posso aiutare?",
   "AIDisabledInfoBlockAdminSaasDescription": "Le capacità AI sono attualmente disattivate, il che significa che questo agente non può elaborare chat o compiti. Per ripristinare tutte le funzionalità, abilita le funzionalità AI nelle impostazioni di {{productName}}.",
   "AIDisabledInfoBlockAdminStandaloneDescription": "Le capacità AI sono attualmente disattivate, il che significa che questo agente non può elaborare chat o compiti. Collega il tuo servizio AI per sbloccare funzionalità avanzate in {{productName}}.",

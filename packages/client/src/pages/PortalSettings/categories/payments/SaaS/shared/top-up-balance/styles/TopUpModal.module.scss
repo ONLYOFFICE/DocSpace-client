@@ -24,9 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-
-.modalBody{
-  margin-top:20px;
+.modalBody {
+  margin-top: 20px;
 }
 
 .buttonContainerWrapper {
@@ -53,14 +52,14 @@
   position: relative;
 }
 
- .shortView {
-    max-width: 320px;
-  }
+.shortView {
+  max-width: 320px;
+}
 
-  .withoutBackground {
-    background: transparent;
-    border: 1px solid var(--aside-header-border-color);
-  }
+.withoutBackground {
+  background: transparent;
+  border: 1px solid var(--aside-header-border-color);
+}
 
 .walletInfoIcon {
   width: 40px;
@@ -108,7 +107,7 @@
 }
 
 .walletInfoTopUp {
-  margin-left: auto;
+  margin-inline-start: auto;
   color: var(--payment-link-color);
   cursor: pointer;
   font-weight: 600;

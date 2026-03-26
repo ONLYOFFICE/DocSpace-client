@@ -47,7 +47,6 @@
   "AgentOwner": "Majitel agenta",
   "AIAgents": "AI agenti",
   "AICanMakeMistakes": "AI může dělat chyby. Prosím, zkontrolujte odpovědi.",
-  "AIChatInput": "Chat s AI",
   "AIChatOfferHelp": "Jak vám mohu pomoci?",
   "AIDisabledInfoBlockAdminSaasDescription": "Aktuálně jsou vypnuté funkce umělé inteligence, což znamená, že tento agent nemůže zpracovávat chaty ani úkoly. Pro obnovení plné funkčnosti povolte funkce umělé inteligence v nastavení {{productName}}.",
   "AIDisabledInfoBlockAdminStandaloneDescription": "Aktuálně jsou vypnuté funkce umělé inteligence, což znamená, že tento agent nemůže zpracovávat chaty ani úkoly. Pro odemknutí pokročilých funkcí v {{productName}} připojte vlastní službu umělé inteligence.",

@@ -47,7 +47,6 @@
   "AgentOwner": "에이전트 소유자",
   "AIAgents": "AI 에이전트",
   "AICanMakeMistakes": "AI는 실수를 할 수 있습니다. 응답을 다시 확인해 주십시오.",
-  "AIChatInput": "AI와 대화하기",
   "AIChatOfferHelp": "어떻게 도와드릴까요?",
   "AIDisabledInfoBlockAdminSaasDescription": "AI 기능은 현재 꺼져 있어, 이 에이전트는 채팅이나 작업을 처리할 수 없습니다. 모든 기능을 복원하려면 {{productName}} 설정에서 AI 기능을 활성화하세요.",
   "AIDisabledInfoBlockAdminStandaloneDescription": "AI 기능은 현재 꺼져 있어, 이 에이전트는 채팅이나 작업을 처리할 수 없습니다. {{productName}}에서 고급 기능을 사용하려면 AI 서비스를 연결하세요.",

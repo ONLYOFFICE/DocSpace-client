@@ -24,35 +24,36 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styles from "./StyledComponent.module.scss";
+.styledCertificateDialogBody {
+  box-sizing: border-box;
+  max-width: 520px;
 
-const StyledComponent = ({
-  withoutExternalLink,
-  className,
-  style,
-  children,
-  ...rest
-}) => {
-  const classNames = [styles.styledComponent];
-  if (withoutExternalLink) classNames.push(styles.withoutExternalLink);
-  if (className) classNames.push(className);
+  :global(.ldap-settings-crt-confirmation) {
+    box-sizing: border-box;
+    padding-bottom: 16px;
+  }
 
-  return (
-    <div className={classNames.join(" ")} style={style} {...rest}>
-      {children}
-    </div>
-  );
-};
+  :global(.ldap-settings-crt-details) {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background-color: var(--ldap-cert-bg);
+    border: var(--ldap-border);
+    border-radius: 3px;
+    padding: 4px;
+    margin-bottom: 8px;
 
-const ButtonStyledComponent = ({ className, style, children, ...rest }) => {
-  const classNames = [styles.buttonStyledComponent];
-  if (className) classNames.push(className);
+    & > p {
+      color: var(--ldap-text-color);
+    }
+  }
 
-  return (
-    <div className={classNames.join(" ")} style={style} {...rest}>
-      {children}
-    </div>
-  );
-};
+  &.hasError :global(.ldap-settings-crt-details) {
+    border: var(--ldap-error-border);
+  }
 
-export { StyledComponent, ButtonStyledComponent };
+  :global(.ldap-error-text) {
+    color: var(--ldap-error-color);
+  }
+}

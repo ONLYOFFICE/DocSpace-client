@@ -24,45 +24,24 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+import styles from "./StyledCerticateDialog.module.scss";
 
-import { injectDefaultTheme } from "@docspace/shared/utils";
+const StyledCertificateDialogBody = ({
+  hasError,
+  className,
+  style,
+  children,
+  ...rest
+}) => {
+  const classNames = [styles.styledCertificateDialogBody];
+  if (hasError) classNames.push(styles.hasError);
+  if (className) classNames.push(className);
 
-const StyledCertificateDialogBody = styled.div.attrs(injectDefaultTheme)`
-  box-sizing: border-box;
-
-  max-width: 520px;
-
-  .ldap-settings-crt-confirmation {
-    box-sizing: border-box;
-    padding-bottom: 16px;
-  }
-
-  .ldap-settings-crt-details {
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    background-color: ${(props) =>
-      props.theme.client.settings.integration.ldap.certificateBackground};
-    border: ${(props) =>
-      props.hasError
-        ? props.theme.client.settings.integration.ldap.errorBorder
-        : props.theme.client.settings.integration.ldap.border};
-    border-radius: 3px;
-    padding: 4px;
-    margin-bottom: 8px;
-
-    & > p {
-      color: ${(props) =>
-        props.theme.client.settings.integration.ldap.textColor};
-    }
-  }
-
-  .ldap-error-text {
-    color: ${(props) =>
-      props.theme.client.settings.integration.ldap.errorColor};
-  }
-`;
+  return (
+    <div className={classNames.join(" ")} style={style} {...rest}>
+      {children}
+    </div>
+  );
+};
 
 export default StyledCertificateDialogBody;

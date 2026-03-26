@@ -24,35 +24,50 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styles from "./StyledComponent.module.scss";
+@use "@docspace/ui-kit/styles/mixins";
 
-const StyledComponent = ({
-  withoutExternalLink,
-  className,
-  style,
-  children,
-  ...rest
-}) => {
-  const classNames = [styles.styledComponent];
-  if (withoutExternalLink) classNames.push(styles.withoutExternalLink);
-  if (className) classNames.push(className);
+.styledWrapper {
+  display: flex;
+  flex-direction: row;
+  padding: 12px;
+  border-radius: 6px;
+  background: var(--sso-toggle-content-bg);
 
-  return (
-    <div className={classNames.join(" ")} style={style} {...rest}>
-      {children}
-    </div>
-  );
-};
+  @include mixins.mobile {
+    margin-bottom: 24px;
+  }
 
-const ButtonStyledComponent = ({ className, style, children, ...rest }) => {
-  const classNames = [styles.buttonStyledComponent];
-  if (className) classNames.push(className);
+  :global(.toggle) {
+    position: static;
+    margin-top: 1px;
+  }
 
-  return (
-    <div className={classNames.join(" ")} style={style} {...rest}>
-      {children}
-    </div>
-  );
-};
+  :global(.toggle-caption) {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 
-export { StyledComponent, ButtonStyledComponent };
+    :global(.toggle-caption_title) {
+      display: flex;
+
+      :global(.toggle-caption_title_badge) {
+        margin-inline-start: 4px;
+        cursor: auto;
+      }
+    }
+  }
+
+  &.unavailable :global(.settings_unavailable) {
+    color: var(--text-disable-color);
+    pointer-events: none;
+    cursor: default;
+
+    label {
+      color: var(--text-disable-color);
+    }
+
+    path {
+      fill: var(--text-disable-color);
+    }
+  }
+}

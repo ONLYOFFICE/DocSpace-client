@@ -24,35 +24,77 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styles from "./StyledComponent.module.scss";
+@use "@docspace/ui-kit/styles/mixins";
 
-const StyledComponent = ({
-  withoutExternalLink,
-  className,
-  style,
-  children,
-  ...rest
-}) => {
-  const classNames = [styles.styledComponent];
-  if (withoutExternalLink) classNames.push(styles.withoutExternalLink);
-  if (className) classNames.push(className);
+.styledComponent {
+  max-width: 700px;
 
-  return (
-    <div className={classNames.join(" ")} style={style} {...rest}>
-      {children}
-    </div>
-  );
-};
+  :global(.smtp-settings_description) {
+    margin-bottom: 8px;
+    max-width: 700px;
+    color: var(--settings-common-description-color);
+    line-height: 20px;
+  }
 
-const ButtonStyledComponent = ({ className, style, children, ...rest }) => {
-  const classNames = [styles.buttonStyledComponent];
-  if (className) classNames.push(className);
+  &.withoutExternalLink :global(.smtp-settings_description) {
+    margin-bottom: 20px;
+  }
 
-  return (
-    <div className={classNames.join(" ")} style={style} {...rest}>
-      {children}
-    </div>
-  );
-};
+  :global(.smtp-settings_main-title) {
+    :global(.link-learn-more) {
+      display: inline-block;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+  }
 
-export { StyledComponent, ButtonStyledComponent };
+  :global(.smtp-settings_title) {
+    display: flex;
+
+    span {
+      margin-inline-start: 2px;
+    }
+  }
+
+  :global(.smtp-settings_input) {
+    margin-bottom: 16px;
+    margin-top: 4px;
+    max-width: 350px;
+
+    @include mixins.mobile {
+      max-width: 100%;
+    }
+
+    :global(.field-label-icon) {
+      display: none;
+    }
+  }
+
+  :global(.smtp-settings_auth) {
+    margin: 24px 0;
+
+    :global(.smtp-settings_login) {
+      margin-top: 16px;
+    }
+
+    :global(.smtp-settings_toggle) {
+      position: static;
+    }
+  }
+
+  :global(.smtp_settings_checkbox) {
+    width: fit-content;
+  }
+}
+
+.buttonStyledComponent {
+  margin-top: 20px;
+  display: flex;
+  gap: 8px;
+
+  @include mixins.mobile {
+    display: grid;
+    gap: 8px;
+    grid-template-columns: 1fr;
+  }
+}

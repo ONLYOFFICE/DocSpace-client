@@ -2634,3 +2634,21 @@
   --settings-delete-data-border-top: 1px solid #{$gray-dark-mid};
   --settings-payment-bg-color: #{$dark-gray-light};
 }
+
+.light {
+  --ldap-cert-bg: #{$gray-light};
+  --ldap-border: 1px solid #{$gray-light-mid};
+  --ldap-error-border: 1px solid #{$light-error-status};
+  --ldap-text-color: #{$gray};
+  --ldap-error-color: #{$light-error-status};
+  --sso-toggle-content-bg: #{$gray-light};
+}
+
+.dark {
+  --ldap-cert-bg: #{$gray-dark-strong};
+  --ldap-border: 1px solid #{$gray-dark-strong};
+  --ldap-error-border: 1px solid #{$dark-error-status};
+  --ldap-text-color: #{$gray-dark};
+  --ldap-error-color: #{$dark-error-status};
+  --sso-toggle-content-bg: #{$gray-dark-strong};
+}

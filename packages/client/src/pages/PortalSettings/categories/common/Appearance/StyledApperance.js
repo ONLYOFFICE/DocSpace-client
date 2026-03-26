@@ -24,148 +24,63 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { mobile } from "@docspace/shared/utils";
-import PlusThemeSvgUrl from "PUBLIC_DIR/images/plus.theme.svg?url";
-import styled, { css } from "styled-components";
+import styles from "./StyledApperance.module.scss";
 
-const StyledComponent = styled.div`
-  width: 100%;
-  max-width: 575px;
+const StyledComponent = ({
+  colorCheckImg,
+  isShowDeleteButton,
+  className,
+  style,
+  children,
+  ...rest
+}) => {
+  const classNames = [styles.styledComponent];
+  if (isShowDeleteButton) classNames.push(styles.showDeleteButton);
+  if (className) classNames.push(className);
 
-  .header {
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 22px;
-  }
+  const inlineStyle = {
+    "--check-img-color": colorCheckImg,
+    ...style,
+  };
 
-  .preview-header {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    padding-bottom: 20px;
-  }
+  return (
+    <div className={classNames.join(" ")} style={inlineStyle} {...rest}>
+      {children}
+    </div>
+  );
+};
 
-  .theme-standard-container {
-    padding-top: 21px;
-  }
+const StyledTheme = ({
+  colorCheckImgHover,
+  className,
+  style,
+  children,
+  ...rest
+}) => {
+  const classNames = [styles.styledTheme];
+  if (className) classNames.push(className);
 
-  .theme-name {
-    font-size: 15px;
-    line-height: 16px;
-    font-weight: 600;
-  }
+  const inlineStyle = {
+    "--check-hover-color": colorCheckImgHover,
+    ...style,
+  };
 
-  .theme-container {
-    padding: 12px 0 24px;
-    display: flex;
-  }
+  return (
+    <div className={classNames.join(" ")} style={inlineStyle} {...rest}>
+      {children}
+    </div>
+  );
+};
 
-  .custom-themes {
-    display: flex;
-  }
+const StyledBodyContent = ({ className, children, ...rest }) => {
+  const classNames = [styles.styledBodyContent];
+  if (className) classNames.push(className);
 
-  .theme-add {
-    width: 46px;
-    height: 46px;
-    margin-inline-end: 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    background: ${(props) =>
-        props.theme.client.settings.common.appearance.themeAddBackground}
-      url(${PlusThemeSvgUrl}) no-repeat center;
-  }
-
-  .add-theme {
-    background: ${(props) =>
-      props.theme.client.settings.common.appearance.addThemeBackground};
-    padding-top: 16px;
-    padding-inline-start: 16px;
-    box-sizing: border-box;
-  }
-
-  .buttons-container {
-    display: flex;
-    padding-top: 24px;
-
-    .button:not(:last-child) {
-      margin-inline-end: 8px;
-    }
-    @media ${mobile} {
-      .button {
-        width: 100%;
-      }
-    }
-
-    ${({ isShowDeleteButton }) =>
-      isShowDeleteButton &&
-      css`
-        @media ${mobile} {
-          flex-direction: column;
-          gap: 8px;
-          margin: 0;
-
-          .button:not(:last-child) {
-            margin-inline-end: 0px;
-          }
-        }
-      `}
-  }
-
-  .check-img {
-    padding-block: 16px 0;
-    padding-inline: 15px 0;
-    svg path {
-      fill: ${(props) => props.colorCheckImg};
-    }
-  }
-`;
-
-const StyledTheme = styled.div`
-  width: 46px;
-  height: 46px;
-  margin-inline-end: 12px;
-  border-radius: 8px;
-  cursor: pointer;
-
-  .check-hover {
-    visibility: hidden;
-  }
-
-  &:hover {
-    .check-hover {
-      padding-block: 16px 0;
-      padding-inline: 15px 0;
-      visibility: visible;
-      opacity: 0.5;
-      svg path {
-        fill: ${(props) => props.colorCheckImgHover};
-      }
-    }
-  }
-`;
-
-const StyledBodyContent = styled.div`
-  display: contents;
-
-  .hex-color-picker {
-    padding-bottom: 0 !important;
-    width: auto !important;
-
-    .react-colorful__saturation {
-      border-bottom: none;
-
-      .react-colorful__interactive {
-        width: calc(100% - 16px) !important;
-        height: calc(100% - 16px);
-      }
-    }
-
-    .react-colorful__hue {
-      .react-colorful__interactive {
-        width: auto;
-      }
-    }
-  }
-`;
+  return (
+    <div className={classNames.join(" ")} {...rest}>
+      {children}
+    </div>
+  );
+};
 
 export { StyledComponent, StyledTheme, StyledBodyContent };

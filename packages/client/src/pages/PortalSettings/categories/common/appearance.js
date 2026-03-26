@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import CheckWhiteSvgUrl from "PUBLIC_DIR/images/check.white.svg?url";
+import PlusThemeSvgUrl from "PUBLIC_DIR/images/plus.theme.svg?url";
 import LightSvgUrl from "PUBLIC_DIR/images/icons/16/light.svg?url";
 import DarkSvgUrl from "PUBLIC_DIR/images/icons/16/dark.svg?url";
 import { useState, useEffect, useCallback, useMemo } from "react";
@@ -723,6 +724,7 @@ const Appearance = (props) => {
               data-tip="tooltip"
               className="theme-add"
               data-testid="appearance_add_theme"
+              style={{ backgroundImage: `url(${PlusThemeSvgUrl})` }}
               onClick={onAddTheme}
             />
             {!abilityAddTheme ? (

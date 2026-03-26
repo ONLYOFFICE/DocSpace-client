@@ -24,43 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { isMobileOnly } from "react-device-detect";
-import styles from "./StyledSettings.module.scss";
+.wrapper {
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 
-const StyledSettingsComponent = ({
-  hasScroll,
-  withoutExternalLink,
-  standalone,
-  isSettingPaid,
-  className,
-  style,
-  children,
-  ...rest
-}) => {
-  const classNames = [styles.settingsComponent];
-
-  if (hasScroll) classNames.push(styles.hasScroll);
-  if (isMobileOnly) classNames.push(styles.mobileOnlyLandscape);
-  if (withoutExternalLink) classNames.push(styles.withoutExternalLink);
-  if (standalone) classNames.push(styles.standalone);
-  if (!isSettingPaid) classNames.push(styles.unavailable);
-  if (className) classNames.push(className);
-
-  const inlineStyle = { ...style };
-  if (hasScroll) {
-    inlineStyle["--settings-has-scroll-width"] = isMobileOnly
-      ? "100vw"
-      : "calc(100vw - 52px)";
-    inlineStyle["--settings-has-scroll-block-width"] = isMobileOnly
-      ? "calc(100vw - 32px)"
-      : "calc(100vw - 84px)";
+  :global(.radio-button-group) {
+    width: fit-content;
+    margin-top: 8px;
   }
 
-  return (
-    <div className={classNames.join(" ")} style={inlineStyle} {...rest}>
-      {children}
-    </div>
-  );
-};
-
-export { StyledSettingsComponent };
+  :global(.save-cancel-buttons) {
+    margin-top: 16px;
+  }
+}

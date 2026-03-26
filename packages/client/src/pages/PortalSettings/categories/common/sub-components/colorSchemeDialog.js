@@ -29,8 +29,6 @@ import { useEffect } from "react";
 import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { Button } from "@docspace/ui-kit/components/button";
 import { withTranslation } from "react-i18next";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
-
 import styles from "./colorSchemeDialog.module.scss";
 
 const ColorSchemeDialog = (props) => {
@@ -49,15 +47,13 @@ const ColorSchemeDialog = (props) => {
     currentColorButtons,
   } = props;
 
-  const { theme } = useTheme();
-
   const accentBg = currentColorAccent
     ? currentColorAccent
-    : `${theme.client.settings.common.appearance.accentBoxBackground} url(${PlusThemeSvgUrl}) no-repeat center`;
+    : `var(--settings-appearance-theme-add-bg) url(${PlusThemeSvgUrl}) no-repeat center`;
 
   const buttonsBg = currentColorButtons
     ? currentColorButtons
-    : `${theme.client.settings.common.appearance.buttonBoxBackground} url(${PlusThemeSvgUrl}) no-repeat center`;
+    : `var(--settings-appearance-theme-add-bg) url(${PlusThemeSvgUrl}) no-repeat center`;
 
   const onKeyPress = (e) =>
     (e.key === "Esc" || e.key === "Escape") && onClose();

@@ -24,375 +24,249 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
-import {
-  isMobile,
-  mobile,
-  tablet,
-  desktop,
-} from "@docspace/ui-kit/utils/device";
-import { injectDefaultTheme } from "@docspace/shared/utils";
+import { isMobile } from "@docspace/ui-kit/utils/device";
 import { showPreviewThreshold } from "../constants";
+import styles from "./StyledPresets.module.scss";
 
-export const SDKContainer = styled.div`
-  box-sizing: border-box;
-  .integration-examples-bottom {
-    display: none;
-  }
+const cn =
+  (...classes) =>
+  (extra) =>
+    [...classes, extra].filter(Boolean).join(" ");
 
-  @media ${tablet} {
-    width: 100%;
+export const SDKContainer = ({ className, style, children, ...rest }) => (
+  <div
+    className={cn(styles.sdkContainer, isMobile() ? styles.isMobile : "")(
+      className,
+    )}
+    style={{ "--show-preview-threshold": `${showPreviewThreshold}px`, ...style }}
+    {...rest}
+  >
+    {children}
+  </div>
+);
 
-    @media (min-width: ${showPreviewThreshold}px) {
-      .integration-examples-bottom {
-        display: block;
-        margin-top: 40px;
-      }
-    }
-  }
+export const Controls = ({ className, style, children, ...rest }) => (
+  <div
+    className={cn(styles.controls, isMobile() ? styles.isMobile : "")(
+      className,
+    )}
+    style={style}
+    {...rest}
+  >
+    {children}
+  </div>
+);
 
-  ${
-    isMobile() &&
-    css`
-    width: 100%;
-  `
-  }
+export const CategoryHeader = ({ className, style, children, ...rest }) => (
+  <div
+    className={cn(styles.categoryHeader, isMobile() ? styles.isMobile : "")(
+      className,
+    )}
+    style={style}
+    {...rest}
+  >
+    {children}
+  </div>
+);
 
-  .tabs-body {
-    display: block;
-    @media ${desktop} {
-      height: calc(100lvh - 260px);
-    }
-  }
+export const CategorySubHeader = ({
+  className,
+  style,
+  children,
+  ...rest
+}) => (
+  <div
+    className={cn(
+      styles.categorySubHeader,
+      isMobile() ? styles.isMobile : "",
+      className?.includes("copy-window-code") ? styles.copyWindowCode : "",
+    )(className)}
+    style={style}
+    {...rest}
+  >
+    {children}
+  </div>
+);
 
-  .linkHelp {
-    display: inline;
-    color: ${(props) => props.theme.sdkPresets.linkHelpColor};
-  }
-`;
+export const CategoryDescription = ({ className, style, children, ...rest }) => (
+  <div
+    className={cn(styles.categoryDescription)(className)}
+    style={style}
+    {...rest}
+  >
+    {children}
+  </div>
+);
 
-export const Controls = styled.div`
-  box-sizing: border-box;
-  max-width: 350px;
-  min-width: 350px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-  margin-top: 16px;
+export const ControlsGroup = ({ className, style, children, ...rest }) => (
+  <div
+    className={cn(styles.controlsGroup, isMobile() ? styles.isMobile : "")(
+      className,
+    )}
+    style={style}
+    {...rest}
+  >
+    {children}
+  </div>
+);
 
-  @media ${tablet} {
-    min-width: 0;
-  }
+export const CheckboxGroup = ({ className, style, children, ...rest }) => (
+  <div
+    className={cn(styles.checkboxGroup)(className)}
+    style={style}
+    {...rest}
+  >
+    {children}
+  </div>
+);
 
-  ${
-    isMobile() &&
-    css`
-    min-width: 0;
-  `
-  }
+export const LabelGroup = ({ className, style, children, ...rest }) => (
+  <div
+    className={cn(styles.labelGroup)(className)}
+    style={style}
+    {...rest}
+  >
+    {children}
+  </div>
+);
 
-  .label {
-    min-width: fit-content;
-  }
+export const ControlsSection = ({ className, style, children, ...rest }) => (
+  <div
+    className={cn(styles.controlsSection)(className)}
+    style={style}
+    {...rest}
+  >
+    {children}
+  </div>
+);
 
-  .checkbox {
-    max-width: fit-content;
-  }
+export const Frame = ({
+  width,
+  height,
+  targetId,
+  className,
+  style,
+  children,
+  ...rest
+}) => (
+  <div
+    className={cn(
+      styles.frame,
+      isMobile() ? styles.isMobile : "",
+      !width ? styles.noWidth : "",
+      !height ? styles.noHeight : "",
+    )(className)}
+    style={{
+      "--frame-width": width || "100%",
+      "--frame-height": height || "100%",
+      ...style,
+    }}
+    {...rest}
+  >
+    {children}
+  </div>
+);
 
-  .integration-examples {
-    .integration-header {
-      margin-top: 0px;
-    }
-  }
+export const Container = ({ className, style, children, ...rest }) => (
+  <div
+    className={cn(styles.container, isMobile() ? styles.isMobile : "")(
+      className,
+    )}
+    style={style}
+    {...rest}
+  >
+    {children}
+  </div>
+);
 
-  @media ${tablet} {
-    @media (min-width: ${showPreviewThreshold}px) {
-      .integration-examples {
-        display: none;
-      }
-    }
-  }
-`;
+export const RowContainer = ({ combo, className, style, children, ...rest }) => (
+  <div
+    className={cn(styles.rowContainer, combo ? styles.combo : "")(className)}
+    style={style}
+    {...rest}
+  >
+    {children}
+  </div>
+);
 
-export const CategoryHeader = styled.div`
-  margin-top: 24px;
-  margin-bottom: 24px;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 22px;
+export const ColumnContainer = ({ className, style, children, ...rest }) => (
+  <div
+    className={cn(styles.columnContainer, isMobile() ? styles.isMobile : "")(
+      className,
+    )}
+    style={style}
+    {...rest}
+  >
+    {children}
+  </div>
+);
 
-  @media ${tablet} {
-    margin-top: 24px;
-  }
+export const Preview = ({ className, style, children, ...rest }) => (
+  <div
+    className={cn(styles.preview, isMobile() ? styles.isMobile : "")(className)}
+    style={style}
+    {...rest}
+  >
+    {children}
+  </div>
+);
 
-  ${
-    isMobile() &&
-    css`
-    margin-top: 24px;
-  `
-  }
-`;
+export const GetCodeButtonWrapper = ({ className, style, children, ...rest }) => (
+  <div
+    className={cn(styles.getCodeButtonWrapper)(className)}
+    style={style}
+    {...rest}
+  >
+    {children}
+  </div>
+);
 
-export const CategorySubHeader = styled.div`
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 16px;
+export const FilesSelectorInputWrapper = ({
+  className,
+  style,
+  children,
+  ...rest
+}) => (
+  <div
+    className={cn(styles.filesSelectorInputWrapper)(className)}
+    style={style}
+    {...rest}
+  >
+    {children}
+  </div>
+);
 
-  @media ${tablet} {
-    &:not(&.copy-window-code) {
-      margin-bottom: 0;
-    }
-  }
+export const SelectedItemsContainer = ({
+  className,
+  style,
+  children,
+  ...rest
+}) => (
+  <div
+    className={cn(styles.selectedItemsContainer)(className)}
+    style={style}
+    {...rest}
+  >
+    {children}
+  </div>
+);
 
-  ${
-    isMobile() &&
-    css`
-    &:not(&.copy-window-code) {
-      margin-bottom: 0;
-    }
-  `
-  }
+export const PreviewColumn = ({ className, style, children, ...rest }) => (
+  <div
+    className={cn(styles.previewColumn)(className)}
+    style={style}
+    {...rest}
+  >
+    {children}
+  </div>
+);
 
-  @media ${mobile} {
-    &:first-of-type {
-      margin-top: 0;
-    }
-  }
-`;
-
-export const CategoryDescription = styled.div`
-  box-sizing: border-box;
-  max-width: 700px;
-  .sdk-description {
-    line-height: 20px;
-    color: ${(props) => props.theme.client.settings.common.descriptionColor};
-  }
-`;
-
-export const ControlsGroup = styled.div`
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-
-  .toggle {
-    position: relative;
-  }
-
-  @media ${tablet} {
-    gap: 4px;
-  }
-
-  ${
-    isMobile() &&
-    css`
-    gap: 4px;
-  `
-  }
-`;
-
-export const CheckboxGroup = styled.div`
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-`;
-
-export const LabelGroup = styled.div`
-  box-sizing: border-box;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-`;
-
-export const ControlsSection = styled.div`
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-`;
-
-export const Frame = styled.div.attrs(injectDefaultTheme)`
-  box-sizing: border-box;
-  margin-top: 16px;
-  position: relative;
-
-  border-radius: 6px;
-  border: 1px solid ${(props) => props.theme.sdkPresets?.borderColor};
-
-  width: calc(${(props) => (props.width ? props.width : "100%")} + 2px);
-  height: calc(${(props) => (props.height ? props.height : "100%")} + 2px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  @media ${tablet} {
-    margin-top: 4px;
-  }
-
-  ${(props) =>
-    !props.width &&
-    css`
-      max-width: 800px;
-    `}
-
-  ${(props) =>
-    !props.height &&
-    css`
-      min-height: 400px;
-      max-height: 600px;
-
-      @media ${tablet} {
-        height: calc(-260px + 100lvh);
-      }
-    `}
-
-
-  ${(props) =>
-    props.targetId &&
-    `
-    #${props.targetId} {
-      border-radius: 6px;
-    }
-  `}
-
-  ${
-    isMobile() &&
-    css`
-    margin-top: 4px;
-  `
-  }
-
-  .frame-container {
-    height: 100% !important;
-  }
-`;
-
-export const Container = styled.div`
-  box-sizing: border-box;
-  width: 100%;
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: flex-end;
-  gap: 48px;
-
-  @media ${tablet} {
-    flex-direction: column-reverse;
-    gap: 48px;
-  }
-
-  ${
-    isMobile() &&
-    css`
-    flex-direction: column-reverse;
-    gap: 48px;
-  `
-  }
-`;
-
-export const RowContainer = styled.div`
-  box-sizing: border-box;
-  flex-direction: row;
-  display: flex;
-  gap: 8px;
-
-  ${(props) =>
-    props.combo &&
-    `
-      height: 32px;
-      align-items: center;
-    `}
-`;
-
-export const ColumnContainer = styled.div`
-  box-sizing: border-box;
-  flex-direction: column;
-  display: flex;
-  gap: 8px;
-
-  .toggle {
-    position: relative;
-  }
-
-  @media ${tablet} {
-    gap: 4px;
-  }
-
-  ${
-    isMobile() &&
-    css`
-    gap: 4px;
-  `
-  }
-`;
-
-export const Preview = styled.div`
-  box-sizing: border-box;
-  width: 100%;
-  flex-direction: row;
-
-  .preview-description {
-    color: ${(props) => props.theme.sdkPresets.secondaryColor};
-  }
-
-  @media ${tablet} {
-    margin-top: 0;
-    min-width: 0;
-  }
-  ${
-    isMobile() &&
-    css`
-    margin-top: 0;
-    min-width: 0;
-  `
-  }
-`;
-
-export const GetCodeButtonWrapper = styled.div`
-  padding-block: 30px;
-  position: sticky;
-  bottom: 0;
-  margin-top: 32px;
-  background-color: ${({ theme }) => theme.backgroundColor};
-  z-index: 1;
-
-  @media ${mobile} {
-    position: fixed;
-    padding-inline: 16px;
-    inset-inline: 0;
-  }
-`;
-
-export const FilesSelectorInputWrapper = styled.div`
-  & > div {
-    margin: 0;
-  }
-`;
-
-export const SelectedItemsContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-`;
-
-export const PreviewColumn = styled.div`
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-width: 0;
-`;
-
-export const CodeWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-
-  margin-top: 16px;
-
-  width: 100%;
-  max-width: 800px;
-  height: calc(${(props) => (props.height ? props.height : "400px")} + 2px);
-`;
+export const CodeWrapper = ({ height, className, style, children, ...rest }) => (
+  <div
+    className={cn(styles.codeWrapper)(className)}
+    style={{ "--code-wrapper-height": height || "400px", ...style }}
+    {...rest}
+  >
+    {children}
+  </div>
+);

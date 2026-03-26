@@ -24,23 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+import React from "react";
+import styles from "./List.styled.module.scss";
 
-export const StyledContainer = styled.div`
-  width: 100%;
-
-  display: flex;
-  flex-direction: column;
-
-  .description {
-    margin: 0 0 8px;
-    line-height: 20px;
-    color: ${(props) => props.theme.client.settings.common.descriptionColor};
-  }
-
-  .add-button {
-    width: fit-content;
-
-    margin-bottom: 12px;
-  }
-`;
+export const StyledContainer = ({
+  className,
+  style,
+  children,
+  ...rest
+}: React.HTMLAttributes<HTMLDivElement>) =>
+  React.createElement(
+    "div",
+    {
+      className: [styles.styledContainer, className].filter(Boolean).join(" "),
+      style,
+      ...rest,
+    },
+    children,
+  );

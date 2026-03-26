@@ -24,80 +24,25 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+import React from "react";
+import styles from "./StyledCreateApiKeys.module.scss";
 
-const StyledBodyContent = styled.div`
-  .api-key_name {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    margin-top: 16px;
-  }
-
-  .api-key_name-body-container {
-    display: flex;
-    gap: 4px;
-    margin-top: 16px;
-  }
-
-  .api-key_lifetime {
-    display: flex;
-  }
-
-  .api-key_toggle {
-    margin-inline-start: auto;
-    margin-inline-end: 28px;
-  }
-
-  .api-key_lifetime-description {
-    color: ${(props) => props.theme.text.disableColor};
-  }
-
-  .api-key_lifetime-input-block {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .api-key_lifetime-input {
-    max-width: 100px;
-  }
-
-  .sticky-indent {
-    display: none;
-  }
-
-  .api-key_permission-tab {
-    width: 100%;
-  }
-
-  .api-key_permission-container {
-    display: grid;
-    grid-template-columns: 1fr minmax(50px, auto) minmax(50px, auto);
-    gap: 8px 0;
-  }
-
-  .separator {
-    padding: 15px 0px 9px;
-    margin-bottom: 6px;
-    border-bottom: ${(props) => props.theme.oauth.clientForm.headerBorder};
-  }
-
-  .api-key_permission-container-text {
-    display: flex;
-    justify-content: center;
-  }
-
-  .api-key_permission-checkbox {
-    justify-content: center;
-    margin-left: 12px;
-
-    cursor: pointer !important;
-  }
-
-  .api-key_permission-row {
-    margin-bottom: 8px;
-  }
-`;
+const StyledBodyContent = ({
+  className,
+  style,
+  children,
+  ...rest
+}: React.HTMLAttributes<HTMLDivElement>) =>
+  React.createElement(
+    "div",
+    {
+      className: [styles.styledBodyContent, className]
+        .filter(Boolean)
+        .join(" "),
+      style,
+      ...rest,
+    },
+    children,
+  );
 
 export { StyledBodyContent };

@@ -2636,6 +2636,54 @@
 }
 
 .light {
+  --sdk-link-help-color: #{$light-gray-dark};
+  --sdk-secondary-color: #{$light-gray-dark};
+  --sdk-border-color: #{$gray-strong};
+  --webhooks-link-color: #{$light-blue-main};
+  --oauth-preview-border: 1px solid #{$gray-light-mid};
+  --oauth-info-desc-link-color: #{$light-gray-dark};
+  --oauth-info-block-header-color: #{$gray};
+  --oauth-info-separator-color: #{$black};
+  --oauth-list-description-color: #{$gray};
+  --oauth-form-description-color: #{$gray};
+  --oauth-form-header-border: 1px solid #{$gray-strong};
+  --oauth-form-scope-desc: #{$gray};
+  --info-panel-tag-bg: #{$gray-light-mid};
+  --migration-description-color: #{$light-gray-dark};
+  --migration-subtitle-color: #{$black};
+  --migration-workspace-bg: #{$white};
+  --migration-workspace-border: 1px solid #{$gray-strong};
+  --migration-info-block-bg: #{$gray-light};
+  --migration-info-block-text-color: #{$gray-text};
+  --migration-error-text-color: #{$light-error-status};
+  --migration-progress-bar-bg: #{$light-blue-main};
+}
+
+.dark {
+  --sdk-link-help-color: #{$dark-gray-dark};
+  --sdk-secondary-color: #{$dark-gray-dark};
+  --sdk-border-color: #{$gray-dark-strong};
+  --webhooks-link-color: #{$light-blue-main};
+  --oauth-preview-border: 1px solid #{$gray-dark-mid};
+  --oauth-info-desc-link-color: #{$dark-gray-dark};
+  --oauth-info-block-header-color: #{$gray-dark};
+  --oauth-info-separator-color: #{$gray-dark-strong};
+  --oauth-list-description-color: #{$gray-dark};
+  --oauth-form-description-color: #{$gray-dark};
+  --oauth-form-header-border: 1px solid #{$gray-dark-strong};
+  --oauth-form-scope-desc: #{$gray-dark};
+  --info-panel-tag-bg: #{$gray-dark-mid};
+  --migration-description-color: #{$dark-gray-dark};
+  --migration-subtitle-color: #{$white};
+  --migration-workspace-bg: #{$black};
+  --migration-workspace-border: 1px solid #{$gray-dark-strong};
+  --migration-info-block-bg: #{$dark-gray-light};
+  --migration-info-block-text-color: #{$gray-dark};
+  --migration-error-text-color: #{$dark-error-status};
+  --migration-progress-bar-bg: #{$white};
+}
+
+.light {
   --ldap-cert-bg: #{$gray-light};
   --ldap-border: 1px solid #{$gray-light-mid};
   --ldap-error-border: 1px solid #{$light-error-status};

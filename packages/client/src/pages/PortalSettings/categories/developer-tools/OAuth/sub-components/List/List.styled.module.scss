@@ -24,55 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+.styledContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 
-import {
-  TableRow,
-  TableContainer,
-} from "@docspace/ui-kit/components/table";
+  :global(.description) {
+    margin: 0 0 8px;
+    line-height: 20px;
+    color: var(--settings-common-description-color);
+  }
 
-import styles from "./TableView.styled.module.scss";
-
-export const TableWrapper = ({
-  className,
-  children,
-  ...rest
-}: React.ComponentProps<typeof TableContainer>) =>
-  React.createElement(
-    TableContainer,
-    {
-      className: [styles.tableWrapper, className].filter(Boolean).join(" "),
-      ...rest,
-    },
-    children,
-  );
-
-export const StyledRowWrapper = ({
-  className,
-  style,
-  children,
-  ...rest
-}: React.HTMLAttributes<HTMLDivElement>) =>
-  React.createElement(
-    "div",
-    {
-      className: [styles.styledRowWrapper, className].filter(Boolean).join(" "),
-      style,
-      ...rest,
-    },
-    children,
-  );
-
-export const StyledTableRow = ({
-  className,
-  children,
-  ...rest
-}: React.ComponentProps<typeof TableRow>) =>
-  React.createElement(
-    TableRow,
-    {
-      className: [styles.styledTableRow, className].filter(Boolean).join(" "),
-      ...rest,
-    },
-    children,
-  );
+  :global(.add-button) {
+    width: fit-content;
+    margin-bottom: 12px;
+  }
+}

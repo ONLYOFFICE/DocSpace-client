@@ -24,55 +24,75 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+.styledBodyContent {
+  :global(.api-key_name) {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 16px;
+  }
 
-import {
-  TableRow,
-  TableContainer,
-} from "@docspace/ui-kit/components/table";
+  :global(.api-key_name-body-container) {
+    display: flex;
+    gap: 4px;
+    margin-top: 16px;
+  }
 
-import styles from "./TableView.styled.module.scss";
+  :global(.api-key_lifetime) {
+    display: flex;
+  }
 
-export const TableWrapper = ({
-  className,
-  children,
-  ...rest
-}: React.ComponentProps<typeof TableContainer>) =>
-  React.createElement(
-    TableContainer,
-    {
-      className: [styles.tableWrapper, className].filter(Boolean).join(" "),
-      ...rest,
-    },
-    children,
-  );
+  :global(.api-key_toggle) {
+    margin-inline-start: auto;
+    margin-inline-end: 28px;
+  }
 
-export const StyledRowWrapper = ({
-  className,
-  style,
-  children,
-  ...rest
-}: React.HTMLAttributes<HTMLDivElement>) =>
-  React.createElement(
-    "div",
-    {
-      className: [styles.styledRowWrapper, className].filter(Boolean).join(" "),
-      style,
-      ...rest,
-    },
-    children,
-  );
+  :global(.api-key_lifetime-description) {
+    color: var(--text-disable-color);
+  }
 
-export const StyledTableRow = ({
-  className,
-  children,
-  ...rest
-}: React.ComponentProps<typeof TableRow>) =>
-  React.createElement(
-    TableRow,
-    {
-      className: [styles.styledTableRow, className].filter(Boolean).join(" "),
-      ...rest,
-    },
-    children,
-  );
+  :global(.api-key_lifetime-input-block) {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  :global(.api-key_lifetime-input) {
+    max-width: 100px;
+  }
+
+  :global(.sticky-indent) {
+    display: none;
+  }
+
+  :global(.api-key_permission-tab) {
+    width: 100%;
+  }
+
+  :global(.api-key_permission-container) {
+    display: grid;
+    grid-template-columns: 1fr minmax(50px, auto) minmax(50px, auto);
+    gap: 8px 0;
+  }
+
+  :global(.separator) {
+    padding: 15px 0px 9px;
+    margin-bottom: 6px;
+    border-bottom: var(--oauth-form-header-border);
+  }
+
+  :global(.api-key_permission-container-text) {
+    display: flex;
+    justify-content: center;
+  }
+
+  :global(.api-key_permission-checkbox) {
+    justify-content: center;
+    margin-left: 12px;
+    cursor: pointer !important;
+  }
+
+  :global(.api-key_permission-row) {
+    margin-bottom: 8px;
+  }
+}

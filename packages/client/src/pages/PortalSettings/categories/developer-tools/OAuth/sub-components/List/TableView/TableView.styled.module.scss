@@ -24,55 +24,72 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+.tableWrapper {
+  margin-top: 0px;
 
-import {
-  TableRow,
-  TableContainer,
-} from "@docspace/ui-kit/components/table";
+  :global(.header-container-text) {
+    font-size: 12px;
+  }
 
-import styles from "./TableView.styled.module.scss";
+  :global(.table-container_header) {
+    position: absolute;
+  }
+}
 
-export const TableWrapper = ({
-  className,
-  children,
-  ...rest
-}: React.ComponentProps<typeof TableContainer>) =>
-  React.createElement(
-    TableContainer,
-    {
-      className: [styles.tableWrapper, className].filter(Boolean).join(" "),
-      ...rest,
-    },
-    children,
-  );
+.styledRowWrapper {
+  display: contents;
+}
 
-export const StyledRowWrapper = ({
-  className,
-  style,
-  children,
-  ...rest
-}: React.HTMLAttributes<HTMLDivElement>) =>
-  React.createElement(
-    "div",
-    {
-      className: [styles.styledRowWrapper, className].filter(Boolean).join(" "),
-      style,
-      ...rest,
-    },
-    children,
-  );
+.styledTableRow {
+  :global(.table-container_cell) {
+    text-overflow: ellipsis;
+    padding-inline-end: 8px;
+  }
 
-export const StyledTableRow = ({
-  className,
-  children,
-  ...rest
-}: React.ComponentProps<typeof TableRow>) =>
-  React.createElement(
-    TableRow,
-    {
-      className: [styles.styledTableRow, className].filter(Boolean).join(" "),
-      ...rest,
-    },
-    children,
-  );
+  :global(.mr-8) {
+    margin-inline-end: 8px;
+  }
+
+  :global(.textOverflow) {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  :global(.description-text) {
+    color: var(--oauth-list-description-color);
+  }
+
+  :global(.toggleButton) {
+    display: contents;
+
+    input {
+      position: relative;
+      margin-inline-start: -8px;
+    }
+  }
+
+  :global(.table-container_row-loader) {
+    margin-left: 8px;
+    margin-right: 16px;
+  }
+
+  &:hover {
+    :global(.table-container_cell) {
+      cursor: pointer;
+      background: var(--files-section-row-view-checked-background) !important;
+      margin-top: -1px;
+      border-top: 1px solid var(--files-section-table-view-row-border-color);
+    }
+
+    :global(.table-container_file-name-cell) {
+      margin-inline-start: -24px;
+      padding-inline-start: 24px;
+    }
+
+    :global(.table-container_row-context-menu-wrapper) {
+      margin-inline-end: -20px;
+      padding-inline-end: 18px;
+    }
+  }
+}

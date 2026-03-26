@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+@use "@docspace/ui-kit/styles/variables/colors" as colors;
+
 .styledComponent {
   display: inline-flex;
   width: 100%;
@@ -301,7 +303,7 @@
   }
 
   :global(.main-button_text) {
-    color: #fff !important;
+    color: #{colors.$white} !important;
   }
 }
 

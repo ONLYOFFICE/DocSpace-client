@@ -24,42 +24,66 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
+@use "@docspace/ui-kit/styles/mixins";
 
-import styles from "./loaderWhiteLabel.module.scss";
+.bodyContent {
+  margin-top: 20px;
 
-const LoaderWhiteLabel = () => {
-  return (
-    <div className={styles.loader}>
-      <RectangleSkeleton
-        height="22px"
-        width="95px"
-        className={styles.headerLoader}
-      />
-      <RectangleSkeleton height="16px" className={styles.descriptionLoader} />
-      <RectangleSkeleton
-        height="16px"
-        width="200px"
-        className={styles.descriptionLoader}
-      />
+  .flex {
+    display: flex;
+    justify-content: space-between;
 
-      <RectangleSkeleton
-        height="20px"
-        width="151px"
-        className={styles.subtitleLoader}
-      />
-      <RectangleSkeleton
-        height="32px"
-        width="350px"
-        className={styles.textInputLoader}
-      />
-      <RectangleSkeleton
-        height="32px"
-        width="115px"
-        className={styles.buttonsLoader}
-      />
-    </div>
-  );
-};
+    &:not(:last-child) {
+      padding-bottom: 20px;
+    }
 
-export default LoaderWhiteLabel;
+    @include mixins.mobileMore {
+      max-width: 448px;
+    }
+  }
+
+  .nameColor {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  .relative {
+    position: relative;
+  }
+
+  .modalAddTheme {
+    width: 46px;
+    height: 46px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  :global(.drop-down-container-hex) {
+    @include mixins.mobile {
+      width: 100%;
+    }
+  }
+
+  :global(.drop-down-item-hex) {
+    @include mixins.mobile {
+      width: calc(100vw - 32px);
+    }
+
+    &:hover {
+      background-color: unset;
+    }
+
+    @include mixins.mobileMore {
+      max-width: 227px;
+
+      :global(.hex-color-picker) {
+        max-width: 195px;
+      }
+
+      :global(.react-colorful__interactive) {
+        max-width: 183px;
+      }
+    }
+  }
+}

@@ -55,7 +55,7 @@ import {
 } from "../../../utils";
 import LoaderSectionHeader from "../loaderSectionHeader";
 
-import styles from "./index.module.scss";
+import styles from "./Header.module.scss";
 
 export const HeaderContainer = ({ children, className = "", ...props }) => (
   <div

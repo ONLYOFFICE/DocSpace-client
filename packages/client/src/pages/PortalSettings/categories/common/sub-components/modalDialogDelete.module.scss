@@ -24,42 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
+.footerContent {
+  display: contents;
+}
 
-import styles from "./loaderWhiteLabel.module.scss";
-
-const LoaderWhiteLabel = () => {
-  return (
-    <div className={styles.loader}>
-      <RectangleSkeleton
-        height="22px"
-        width="95px"
-        className={styles.headerLoader}
-      />
-      <RectangleSkeleton height="16px" className={styles.descriptionLoader} />
-      <RectangleSkeleton
-        height="16px"
-        width="200px"
-        className={styles.descriptionLoader}
-      />
-
-      <RectangleSkeleton
-        height="20px"
-        width="151px"
-        className={styles.subtitleLoader}
-      />
-      <RectangleSkeleton
-        height="32px"
-        width="350px"
-        className={styles.textInputLoader}
-      />
-      <RectangleSkeleton
-        height="32px"
-        width="115px"
-        className={styles.buttonsLoader}
-      />
-    </div>
-  );
-};
-
-export default LoaderWhiteLabel;
+.buttonModal {
+  width: 50%;
+}

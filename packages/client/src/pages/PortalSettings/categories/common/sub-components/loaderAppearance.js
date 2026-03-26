@@ -24,109 +24,82 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
-const StyledLoader = styled.div`
-  width: 100%;
-
-  .block {
-    display: block;
-  }
-
-  .padding-bottom {
-    padding-bottom: 16px;
-  }
-
-  .flex {
-    display: flex;
-  }
-
-  .padding-right {
-    padding-inline-end: 12px;
-  }
-
-  .preview-title {
-    padding-bottom: 8px;
-  }
-
-  .preview {
-    width: 100%;
-    max-width: 575px;
-    padding-top: 12px;
-    padding-bottom: 32px;
-  }
-`;
+import styles from "./loaderAppearance.module.scss";
 
 const Loader = () => {
   return (
-    <StyledLoader>
+    <div className={styles.loader}>
       <RectangleSkeleton
         height="24px"
         width="93px"
-        className="block padding-bottom"
+        className={`${styles.block} ${styles.paddingBottom}`}
       />
       <RectangleSkeleton
         height="16px"
         width="118px"
-        className="block padding-bottom"
+        className={`${styles.block} ${styles.paddingBottom}`}
       />
-      <div className="flex padding-bottom">
+      <div className={`${styles.flex} ${styles.paddingBottom}`}>
         <RectangleSkeleton
           height="46px"
           width="46px"
-          className="padding-right"
+          className={styles.paddingRight}
         />
         <RectangleSkeleton
           height="46px"
           width="46px"
-          className="padding-right"
+          className={styles.paddingRight}
         />
         <RectangleSkeleton
           height="46px"
           width="46px"
-          className="padding-right"
+          className={styles.paddingRight}
         />
         <RectangleSkeleton
           height="46px"
           width="46px"
-          className="padding-right"
+          className={styles.paddingRight}
         />
         <RectangleSkeleton
           height="46px"
           width="46px"
-          className="padding-right"
+          className={styles.paddingRight}
         />
         <RectangleSkeleton
           height="46px"
           width="46px"
-          className="padding-right"
+          className={styles.paddingRight}
         />
         <RectangleSkeleton
           height="46px"
           width="46px"
-          className="padding-right"
+          className={styles.paddingRight}
         />
       </div>
       <RectangleSkeleton
         height="16px"
         width="118px"
-        className="block padding-bottom"
+        className={`${styles.block} ${styles.paddingBottom}`}
       />
       <RectangleSkeleton
         height="46px"
         width="46px"
-        className="block padding-bottom"
+        className={`${styles.block} ${styles.paddingBottom}`}
       />
       <RectangleSkeleton
         height="24px"
         width="93px"
-        className="block preview-title"
+        className={`${styles.block} ${styles.previewTitle}`}
       />
-      <RectangleSkeleton height="32px" width="211px" className="block" />
-      <RectangleSkeleton height="325px" className="block preview" />
-      <RectangleSkeleton height="32px" width="447px" className="block" />
-    </StyledLoader>
+      <RectangleSkeleton height="32px" width="211px" className={styles.block} />
+      <RectangleSkeleton
+        height="325px"
+        className={`${styles.block} ${styles.preview}`}
+      />
+      <RectangleSkeleton height="32px" width="447px" className={styles.block} />
+    </div>
   );
 };
 

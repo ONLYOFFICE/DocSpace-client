@@ -30,13 +30,17 @@ import React, {
   useState,
   useEffect,
 } from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 
 import PlusIcon from "PUBLIC_DIR/images/icons/12/plus.svg?url";
 
 import { Tag } from "@docspace/ui-kit/components/tag";
 import { Text } from "@docspace/ui-kit/components/text";
-import { InputType, TextInput } from "@docspace/ui-kit/components/text-input";
+import {
+  InputSize,
+  InputType,
+  TextInput,
+} from "@docspace/ui-kit/components/text-input";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { useTagManagement } from "./TagManagement.provider";
@@ -46,6 +50,7 @@ import styles from "./TagManagement.module.scss";
 
 export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
   roomId,
+  roomName,
 }) => {
   const { t } = useTranslation("Common");
   const {
@@ -57,6 +62,7 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
     tags,
     setTags,
     filteredTags,
+    access: { canSearch },
   } = useTagManagement();
   const createTag = useCreateTagMutation(roomId);
 
@@ -97,7 +103,6 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
         toastr.error(error);
       },
     });
-    setTags(updatedTags);
   }, [searchValue, tags, clearSearch, createTag, setTags, showCreateTag]);
 
   const handleKeyDown = useCallback(
@@ -117,21 +122,42 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
     [handleCreateTag, clearSearch],
   );
 
+  if (!canSearch && !showCreateTag) {
+    return (
+      <Text className={styles.text} fontSize="12px" lineHeight="16px" noSelect>
+        <Trans
+          t={t}
+          ns="Common"
+          i18nKey="RoomTags"
+          values={{ roomName }}
+          components={{
+            bold: <strong key="room-name" className={styles.roomName} />,
+          }}
+        />
+      </Text>
+    );
+  }
+
   return (
     <>
-      <TextInput
-        scale
-        autoFocus
-        withBorder={false}
-        value={inputValue}
-        type={InputType.text}
-        className={styles.input}
-        onChange={onChangeSearchValue}
-        placeholder={t("Common:AddTag")}
-        onKeyDown={handleKeyDown}
-        testId="add_tag_input"
-      />
-      <hr className={styles.divider} />
+      {canSearch ? (
+        <>
+          <TextInput
+            scale
+            autoFocus
+            withBorder={false}
+            value={inputValue}
+            size={InputSize.base}
+            type={InputType.search}
+            className={styles.input}
+            onChange={onChangeSearchValue}
+            placeholder={t("Common:AddTag")}
+            onKeyDown={handleKeyDown}
+            testId="add_tag_input"
+          />
+          <hr className={styles.divider} />
+        </>
+      ) : null}
       {showCreateTag ? (
         <Text
           as="div"

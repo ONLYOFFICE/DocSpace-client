@@ -57,6 +57,8 @@ const defaultProps: TagManagementPopupProps = {
   onClose: vi.fn(),
   onSelectTag: vi.fn(),
   anchor: { current: document.createElement("div") },
+  access: { canCreate: false, canSearch: true },
+  roomName: "Test Room",
 };
 
 const renderWithQueryClient = (
@@ -84,7 +86,7 @@ describe("<TagManagementPopup />", () => {
 
     renderWithQueryClient(<TagManagementPopup {...defaultProps} />);
 
-    expect(screen.queryByRole("textbox")).not.toBeInTheDocument();
+    expect(screen.queryByRole("searchbox")).not.toBeInTheDocument();
   });
 
   it("renders content when data is successfully loaded", async () => {
@@ -116,7 +118,7 @@ describe("<TagManagementPopup />", () => {
 
     renderWithQueryClient(<TagManagementPopup {...defaultProps} />);
 
-    expect(screen.queryByRole("textbox")).not.toBeInTheDocument();
+    expect(screen.queryByRole("searchbox")).not.toBeInTheDocument();
     const skeletons = document.querySelectorAll(
       '[class*="rectangle-skeleton"]',
     );
@@ -125,9 +127,8 @@ describe("<TagManagementPopup />", () => {
 
   it("calls onClose when clicking outside", async () => {
     const onClose = vi.fn();
-    const useClickOutside = await import(
-      "@docspace/ui-kit/utils/use-click-outside"
-    );
+    const useClickOutside =
+      await import("@docspace/ui-kit/utils/use-click-outside");
     const mockUseClickOutside = vi.spyOn(useClickOutside, "useClickOutside");
 
     vi.spyOn(useTagsQueryModule, "useTagsQuery").mockReturnValue({
@@ -182,7 +183,7 @@ describe("<TagManagementPopup />", () => {
     );
 
     expect(container.querySelector(".loaderWrapper")).not.toBeInTheDocument();
-    expect(screen.getByRole("textbox")).toBeInTheDocument();
+    expect(screen.getByRole("searchbox")).toBeInTheDocument();
   });
 
   it("handles mobile view correctly", async () => {
@@ -200,7 +201,7 @@ describe("<TagManagementPopup />", () => {
     renderWithQueryClient(<TagManagementPopup {...defaultProps} />);
 
     await waitFor(() => {
-      expect(screen.getByRole("textbox")).toBeInTheDocument();
+      expect(screen.getByRole("searchbox")).toBeInTheDocument();
     });
   });
 
@@ -216,7 +217,7 @@ describe("<TagManagementPopup />", () => {
     renderWithQueryClient(<TagManagementPopup {...defaultProps} />);
 
     await waitFor(() => {
-      const searchInput = screen.getByRole("textbox");
+      const searchInput = screen.getByRole("searchbox");
       expect(searchInput).toBeInTheDocument();
     });
   });
@@ -251,7 +252,7 @@ describe("<TagManagementPopup />", () => {
     renderWithQueryClient(<TagManagementPopup {...defaultProps} />);
 
     await waitFor(() => {
-      const container = screen.getByRole("textbox");
+      const container = screen.getByRole("searchbox");
       expect(container).toBeInTheDocument();
     });
   });

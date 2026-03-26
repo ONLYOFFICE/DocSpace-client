@@ -55,7 +55,13 @@ const createdUpdatedByMock = {
   isAnonim: false,
 };
 
-const getFolderInfo = ({ canUseChat }: { canUseChat: boolean }) => {
+const getFolderInfo = ({
+  canUseChat,
+  thinkingSupported = false,
+}: {
+  canUseChat: boolean;
+  thinkingSupported?: boolean;
+}) => {
   return {
     parentId: 224866,
     filesCount: 0,
@@ -83,6 +89,7 @@ const getFolderInfo = ({ canUseChat }: { canUseChat: boolean }) => {
       providerId: 1,
       modelId: "GPT-5.1",
       prompt: "",
+      thinking: thinkingSupported,
     },
     id: 2,
     rootFolderId: 224866,
@@ -129,7 +136,13 @@ const getFolderInfo = ({ canUseChat }: { canUseChat: boolean }) => {
   };
 };
 
-const getAgentFolderChat = ({ canUseChat }: { canUseChat: boolean }) => {
+const getAgentFolderChat = ({
+  canUseChat,
+  thinkingSupported = false,
+}: {
+  canUseChat: boolean;
+  thinkingSupported?: boolean;
+}) => {
   return {
     files: [],
     folders: [
@@ -247,7 +260,7 @@ const getAgentFolderChat = ({ canUseChat }: { canUseChat: boolean }) => {
         updatedBy: createdUpdatedByMock,
       },
     ],
-    current: getFolderInfo({ canUseChat }),
+    current: getFolderInfo({ canUseChat, thinkingSupported }),
     pathParts: [
       {
         id: 224866,
@@ -666,6 +679,19 @@ const successFolderChatDefault = {
   statusCode: 200,
 };
 
+const successFolderChatWithThinking = {
+  response: getAgentFolderChat({ canUseChat: true, thinkingSupported: true }),
+  count: 1,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/files/2?count=100&sortby=DateAndTime&sortOrder=descending`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
 const successFolderChatCanNotUseChat = {
   response: getAgentFolderChat({ canUseChat: false }),
   count: 1,
@@ -830,11 +856,13 @@ const successFolderInfoCanNotUseChat = {
 };
 
 export const agentFolderChatResolver = (
-  type: "default" | "canNotUseChat" = "default",
+  type: "default" | "canNotUseChat" | "withThinking" = "default",
 ) => {
   switch (type) {
     case "canNotUseChat":
       return new Response(JSON.stringify(successFolderChatCanNotUseChat));
+    case "withThinking":
+      return new Response(JSON.stringify(successFolderChatWithThinking));
     case "default":
       return new Response(JSON.stringify(successFolderChatDefault));
   }
@@ -904,7 +932,7 @@ export const agentFolderInfoResolver = (
 
 export const agentFolderChatHandler = (
   port: string,
-  type: "default" | "canNotUseChat" = "default",
+  type: "default" | "canNotUseChat" | "withThinking" = "default",
 ) => {
   return http.get(
     `${BASE_URL}:${port}/${API_PREFIX}/${PATH_AGENT_FOLDER_CHAT}`,

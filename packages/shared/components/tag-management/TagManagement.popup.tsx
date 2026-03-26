@@ -27,6 +27,7 @@
 import { match } from "ts-pattern";
 import { createPortal } from "react-dom";
 import React, { useLayoutEffect, useRef } from "react";
+import { isTablet } from "react-device-detect";
 import {
   computePosition,
   autoUpdate,
@@ -37,7 +38,6 @@ import {
 
 import { useClickOutside } from "@docspace/ui-kit/utils/use-click-outside";
 import { useEventListener } from "@docspace/ui-kit/hooks/useEventListener";
-import { useCloseOnAnchorCovered } from "@docspace/ui-kit/hooks/useCloseOnAnchorCovered";
 
 import {
   ModalDialog,
@@ -64,28 +64,18 @@ export const TagManagementPopup: React.FC<TagManagementPopupProps> = ({
   anchor,
   onSelectTag,
   tags: roomTags,
-
-  canCreate = false,
-  canRemove = false,
-  canSearch = false,
-  canEdit = false,
-  canBindTag = false,
-
+  access,
   onDeleteTag,
   onEditTag,
+  roomName,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
 
   const isMobile = useIsMobile();
   useClickOutside(isMobile ? modalRef : ref, onClose, EVENT_OPTIONS);
-  useEventListener("resize", onClose);
-
-  useCloseOnAnchorCovered({
-    anchorRef: anchor,
-    popupRef: ref,
-    onClose,
-    enabled: !isMobile,
+  useEventListener("resize", onClose, undefined, {
+    enabled: !isMobile && !isTablet,
   });
 
   const { data: fetchedTags, status } = useTagsQuery();
@@ -133,18 +123,14 @@ export const TagManagementPopup: React.FC<TagManagementPopupProps> = ({
           <TagManagementProvider
             fetchedTags={fetchedTags ?? []}
             roomTags={roomTags}
-            canRemove={canRemove}
-            canCreate={canCreate}
-            canSearch={canSearch}
-            canEdit={canEdit}
-            canBindTag={canBindTag}
+            access={access}
           >
-            <TagManagementFilter roomId={roomId} />
+            <TagManagementFilter roomId={roomId} roomName={roomName} />
             <TagManagementContent
-              onSelectTag={onSelectTag}
               roomId={roomId}
-              onDeleteTag={onDeleteTag}
               onEditTag={onEditTag}
+              onDeleteTag={onDeleteTag}
+              onSelectTag={onSelectTag}
             />
           </TagManagementProvider>
         ))

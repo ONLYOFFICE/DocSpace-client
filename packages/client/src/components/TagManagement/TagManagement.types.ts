@@ -25,17 +25,20 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { TagManagementProps as SharedTagManagementProps } from "@docspace/shared/components/tag-management/TagManagement.types";
+import type { ShareAccessRights } from "@docspace/shared/enums";
 
 export interface InjectedTagManagementProps {
   onSelectTag: TStore["filesActionsStore"]["selectTag"];
+  isArchiveFolder: TStore["treeFoldersStore"]["isArchiveFolder"];
   isAdmin: boolean;
 }
 
-export type TagManagementProps = Omit<
+export interface TagManagementProps extends Omit<
   SharedTagManagementProps,
-  "isAdmin" | "onSelectTag"
->;
+  "onSelectTag" | "access"
+> {
+  access: ShareAccessRights;
+}
 
 export interface TagManagementWrapperProps
-  extends TagManagementProps,
-    InjectedTagManagementProps {}
+  extends TagManagementProps, InjectedTagManagementProps {}

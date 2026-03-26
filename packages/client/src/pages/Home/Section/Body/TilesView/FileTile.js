@@ -265,6 +265,7 @@ const FileTile = (props) => {
               tags={tags}
               id={item.id}
               access={item.access}
+              roomName={item.title}
               columnCount={columnCount}
               onSelectTag={onSelectTag}
               isActive={isActive || isHovered || checkedProps}

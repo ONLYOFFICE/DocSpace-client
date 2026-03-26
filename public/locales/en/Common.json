@@ -1201,5 +1201,6 @@
   "YourCurrentDomain": "Your current domain",
   "YourFurtherEditsNotSaved": "Your further edits may not be saved.",
   "YourLogo": "Your logo",
-  "YourTurn": "Your turn"
+  "YourTurn": "Your turn",
+  "RoomTags": "<bold>{{roomName}}</bold> room tags"
 }

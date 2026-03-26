@@ -31,12 +31,13 @@ import { isMobile as isMobileDevice } from "react-device-detect";
 import { Tags } from "@docspace/ui-kit/components/tags";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { useUnmount } from "@docspace/ui-kit/hooks/useUnmount";
+import { useIsMobile } from "@docspace/ui-kit/hooks/use-is-mobile";
+import { useCloseOnAnchorCovered } from "@docspace/ui-kit/hooks/useCloseOnAnchorCovered";
 
 import { useIsTable } from "../../hooks/useIsTable";
-import { useIsMobile } from "@docspace/ui-kit/hooks/use-is-mobile";
-import { ShareAccessRights } from "../../enums";
 
 import { TagManagementPopup } from "./TagManagement.popup";
+import { EDIT_CANCELLED, DELETE_CANCELLED } from "./TagManagement.constants";
 
 import type { TagManagementProps } from "./TagManagement.types";
 import { EditTagModal, DeleteTagModal } from "./modals";
@@ -46,17 +47,16 @@ import {
 } from "./hooks/useTagsQuery";
 import { useEditConfirmation } from "./hooks/useEditConfirmation";
 import { useDeleteConfirmation } from "./hooks/useDeleteConfirmation";
-import { EDIT_CANCELLED, DELETE_CANCELLED } from "./TagManagement.constants";
 
 export const TagManagement: FC<TagManagementProps> = ({
   id,
   onSelectTag,
-  access,
-  isAdmin,
   tags,
   columnCount,
   isActive,
   className,
+  access,
+  roomName,
 }) => {
   const {
     isModalOpen,
@@ -159,21 +159,17 @@ export const TagManagement: FC<TagManagementProps> = ({
   const isTableView = useIsTable();
   const isMobileView = useIsMobile();
 
+  useCloseOnAnchorCovered({
+    anchorRef,
+    onClose,
+    enabled:
+      !isMobileView && !isDeleteModalOpen && !isModalOpen && showTagManagement,
+  });
+
   const isMobile = isTableView || isMobileView || isMobileDevice;
 
-  const isRoomOwner =
-    access === ShareAccessRights.None ||
-    access === ShareAccessRights.FullAccess;
-
-  const isRoomManager = access === ShareAccessRights.RoomManager;
-
-  const canEdit = isAdmin;
-  const canDelete = isAdmin;
-  const canCreate = isAdmin || isRoomOwner || isRoomManager;
-  const canBindTag = isRoomManager || isAdmin || isRoomOwner;
-
   const canShowCreateTag =
-    (isActive || isMobile || showTagManagement) && canCreate;
+    (isActive || isMobile || showTagManagement) && access.canCreate;
 
   return (
     <>
@@ -191,14 +187,11 @@ export const TagManagement: FC<TagManagementProps> = ({
         <TagManagementPopup
           tags={tags}
           roomId={id}
-          anchor={anchorRef}
+          access={access}
           onClose={onClose}
+          anchor={anchorRef}
+          roomName={roomName}
           onSelectTag={onSelectTag}
-          canCreate={canCreate}
-          canEdit={canEdit}
-          canRemove={canDelete}
-          canBindTag={canBindTag}
-          canSearch
           onEditTag={confirmEditTag}
           onDeleteTag={confirmDeleteTag}
         />
@@ -227,4 +220,3 @@ export const TagManagement: FC<TagManagementProps> = ({
     </>
   );
 };
-

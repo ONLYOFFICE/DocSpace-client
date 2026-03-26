@@ -24,100 +24,32 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
+import styles from "./StyledSsoPageContainer.module.scss";
 
-const StyledSsoPage = styled.div`
-  max-width: 100%;
-  box-sizing: border-box;
-  outline: none;
+const StyledSsoPage = ({
+  withoutExternalLink,
+  hideSettings,
+  hideMetadata,
+  className,
+  style,
+  children,
+  ...rest
+}) => {
+  const classNames = [styles.styledSsoPage];
+  if (withoutExternalLink) classNames.push(styles.withoutExternalLink);
+  if (className) classNames.push(className);
 
-  .intro-text {
-    width: 100%;
-    max-width: 700px;
-    color: ${(props) => props.theme.client.settings.common.descriptionColor};
-    line-height: 20px;
+  const inlineStyle = {
+    "--service-provider-display": hideSettings ? "block" : "none",
+    "--sp-metadata-display": hideMetadata ? "block" : "none",
+    ...style,
+  };
 
-    ${(props) =>
-      props.withoutExternalLink &&
-      css`
-        margin-bottom: 20px;
-      `};
-  }
-
-  .link-learn-more {
-    display: block;
-    margin: 8px 0 20px 0;
-  }
-
-  .field-input {
-    ::placeholder {
-      font-size: 13px;
-      font-weight: 400;
-    }
-  }
-
-  .field-label-icon {
-    align-items: center;
-    margin-bottom: 4px;
-  }
-
-  .xml-input {
-    .field-label-icon {
-      margin-bottom: 8px;
-      max-width: 350px;
-    }
-
-    .field-label {
-      font-weight: 400;
-    }
-  }
-
-  .or-text {
-    margin: 0 24px;
-  }
-
-  .radio-button-group {
-    margin-inline-start: 24px;
-  }
-
-  .combo-button-label {
-    max-width: 100%;
-  }
-
-  .save-button {
-    margin-inline-end: 8px;
-  }
-
-  .download-button {
-    width: fit-content;
-  }
-
-  .service-provider-settings {
-    box-sizing: border-box;
-    display: ${(props) => (!props.hideSettings ? "none" : "block")};
-  }
-
-  .sp-metadata {
-    box-sizing: border-box;
-    display: ${(props) => (!props.hideMetadata ? "none" : "block")};
-  }
-
-  .metadata-field {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    margin-bottom: 16px;
-    max-width: 350px;
-
-    .input {
-      width: 350px;
-    }
-
-    .label > div {
-      display: inline-flex;
-      margin-inline-start: 4px;
-    }
-  }
-`;
+  return (
+    <div className={classNames.join(" ")} style={inlineStyle} {...rest}>
+      {children}
+    </div>
+  );
+};
 
 export default StyledSsoPage;

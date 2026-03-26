@@ -24,27 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
+import styles from "./Hint.module.scss";
 
-export const Hint = styled.div`
-  box-sizing: border-box;
-  padding: 8px 12px;
-  background: ${(props) => props.theme.tooltip.backgroundColor};
-  color: ${(props) => props.theme.tooltip.textColor};
-  border-radius: 6px;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
+export const Hint = ({ isTooltip, className, style, children, ...rest }) => {
+  const classNames = [styles.hint];
+  if (isTooltip) classNames.push(styles.isTooltip);
+  if (className) classNames.push(className);
 
-  position: relative;
-  z-index: 3;
-
-  ${(props) =>
-    props.isTooltip &&
-    css`
-      position: absolute;
-      z-index: 2;
-
-      width: calc(100% - 32px);
-    `}
-`;
+  return (
+    <div className={classNames.join(" ")} style={style} {...rest}>
+      {children}
+    </div>
+  );
+};

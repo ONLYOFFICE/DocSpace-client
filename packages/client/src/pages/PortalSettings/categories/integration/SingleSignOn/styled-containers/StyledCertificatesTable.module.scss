@@ -24,22 +24,56 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styles from "./StyledInputWrapper.module.scss";
+.styledCertificatesTable {
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 12px;
 
-const StyledInputWrapper = ({ maxWidth, className, style, children, ...rest }) => {
-  const classNames = [styles.styledInputWrapper];
-  if (className) classNames.push(className);
+  :global(.header) {
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 40px;
+    border-bottom: var(--sso-border);
 
-  const inlineStyle = {
-    "--input-wrapper-max-width": maxWidth || "520px",
-    ...style,
-  };
+    :global(.header-cell):nth-child(n + 2) {
+      display: flex;
+      align-items: center;
+      border-inline-start: var(--sso-border);
+      height: 13px;
+      padding-inline-start: 8px;
+    }
+  }
 
-  return (
-    <div className={classNames.join(" ")} style={inlineStyle} {...rest}>
-      {children}
-    </div>
-  );
-};
+  :global(.row) {
+    max-width: 520px;
+    width: 100%;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 11px 0 10px;
+    border-bottom: var(--sso-border);
 
-export default StyledInputWrapper;
+    :global(.column) {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+
+      :global(.column-row) {
+        display: flex;
+
+        :global(.description) {
+          color: var(--sso-text-color);
+        }
+
+        :global(.error-description) {
+          color: var(--sso-error-color);
+        }
+      }
+    }
+
+    :global(.context-btn) {
+      justify-self: flex-end;
+    }
+  }
+}

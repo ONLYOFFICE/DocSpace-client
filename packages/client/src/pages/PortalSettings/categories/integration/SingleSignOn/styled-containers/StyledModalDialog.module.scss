@@ -24,22 +24,31 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styles from "./StyledInputWrapper.module.scss";
+@use "@docspace/ui-kit/styles/mixins";
 
-const StyledInputWrapper = ({ maxWidth, className, style, children, ...rest }) => {
-  const classNames = [styles.styledInputWrapper];
-  if (className) classNames.push(className);
+.styledBodyContent {
+  display: contents;
 
-  const inlineStyle = {
-    "--input-wrapper-max-width": maxWidth || "520px",
-    ...style,
-  };
+  :global(.generate) {
+    font-weight: 600;
+  }
 
-  return (
-    <div className={classNames.join(" ")} style={inlineStyle} {...rest}>
-      {children}
-    </div>
-  );
-};
+  :global(.text-area) {
+    width: 488px !important;
+    margin-top: 4px;
 
-export default StyledInputWrapper;
+    @include mixins.mobile {
+      width: 100% !important;
+    }
+  }
+
+  :global(.text-area-label) {
+    font-weight: 600;
+    margin-bottom: 5px;
+    margin-top: 16px;
+  }
+
+  :global(.modal-combo) {
+    margin: 16px 0 0;
+  }
+}

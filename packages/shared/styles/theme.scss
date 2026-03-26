@@ -2642,6 +2642,11 @@
   --ldap-text-color: #{$gray};
   --ldap-error-color: #{$light-error-status};
   --sso-toggle-content-bg: #{$gray-light};
+  --sso-border: 1px solid #{$gray-strong};
+  --sso-text-color: #{$gray};
+  --sso-error-color: #{$light-error-status};
+  --tooltip-bg: #{$gray-light};
+  --tooltip-text: #{$black};
 }
 
 .dark {
@@ -2651,4 +2656,9 @@
   --ldap-text-color: #{$gray-dark};
   --ldap-error-color: #{$dark-error-status};
   --sso-toggle-content-bg: #{$gray-dark-strong};
+  --sso-border: 1px solid #{$gray-dark-strong};
+  --sso-text-color: #{$gray-dark};
+  --sso-error-color: #{$dark-error-status};
+  --tooltip-bg: #{$dark-gray-light};
+  --tooltip-text: #{$white};
 }

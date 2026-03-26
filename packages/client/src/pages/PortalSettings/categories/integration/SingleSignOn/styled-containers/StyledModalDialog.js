@@ -24,36 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { mobile } from "@docspace/shared/utils";
+import styles from "./StyledModalDialog.module.scss";
 
-const StyledBodyContent = styled.div`
-  display: contents;
+const StyledBodyContent = ({ className, style, children, ...rest }) => {
+  const classNames = [styles.styledBodyContent];
+  if (className) classNames.push(className);
 
-  .generate {
-    font-weight: 600;
-  }
-
-  .text-area {
-    width: 488px !important;
-    margin-top: 4px;
-
-    &-label {
-      font-weight: 600;
-      margin-bottom: 5px;
-    }
-
-    @media ${mobile} {
-      width: 100% !important;
-    }
-  }
-  .text-area-label {
-    margin-top: 16px;
-  }
-
-  .modal-combo {
-    margin: 16px 0 0;
-  }
-`;
+  return (
+    <div className={classNames.join(" ")} style={style} {...rest}>
+      {children}
+    </div>
+  );
+};
 
 export default StyledBodyContent;

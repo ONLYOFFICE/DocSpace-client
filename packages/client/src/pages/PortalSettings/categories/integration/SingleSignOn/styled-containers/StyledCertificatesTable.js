@@ -24,66 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+import styles from "./StyledCertificatesTable.module.scss";
 
-const StyledCertificatesTable = styled.div`
-  width: 100%;
-  max-width: 600px;
-  margin-bottom: 12px;
+const StyledCertificatesTable = ({ className, style, children, ...rest }) => {
+  const classNames = [styles.styledCertificatesTable];
+  if (className) classNames.push(className);
 
-  .header {
-    display: grid;
-    align-items: center;
-    grid-template-columns: repeat(3, 1fr);
-    grid-auto-rows: 40px;
-
-    border-bottom: ${(props) =>
-      props.theme.client.settings.integration.sso.border};
-
-    &-cell:nth-child(n + 2) {
-      display: flex;
-      align-items: center;
-
-      border-inline-start: ${(props) =>
-        props.theme.client.settings.integration.sso.border};
-      height: 13px;
-      padding-inline-start: 8px;
-    }
-  }
-
-  .row {
-    max-width: 520px;
-    width: 100%;
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    padding: 11px 0 10px;
-    border-bottom: ${(props) =>
-      props.theme.client.settings.integration.sso.border};
-
-    .column {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-
-      .column-row {
-        display: flex;
-
-        .description {
-          color: ${(props) =>
-            props.theme.client.settings.integration.sso.textColor};
-        }
-        .error-description {
-          color: ${(props) =>
-            props.theme.client.settings.integration.sso.errorColor};
-        }
-      }
-    }
-
-    .context-btn {
-      justify-self: flex-end;
-    }
-  }
-`;
+  return (
+    <div className={classNames.join(" ")} style={style} {...rest}>
+      {children}
+    </div>
+  );
+};
 
 export default StyledCertificatesTable;

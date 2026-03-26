@@ -24,22 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styles from "./StyledInputWrapper.module.scss";
+.hint {
+  box-sizing: border-box;
+  padding: 8px 12px;
+  background: var(--tooltip-bg);
+  color: var(--tooltip-text);
+  border-radius: 6px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  position: relative;
+  z-index: 3;
 
-const StyledInputWrapper = ({ maxWidth, className, style, children, ...rest }) => {
-  const classNames = [styles.styledInputWrapper];
-  if (className) classNames.push(className);
-
-  const inlineStyle = {
-    "--input-wrapper-max-width": maxWidth || "520px",
-    ...style,
-  };
-
-  return (
-    <div className={classNames.join(" ")} style={inlineStyle} {...rest}>
-      {children}
-    </div>
-  );
-};
-
-export default StyledInputWrapper;
+  &.isTooltip {
+    position: absolute;
+    z-index: 2;
+    width: calc(100% - 32px);
+  }
+}

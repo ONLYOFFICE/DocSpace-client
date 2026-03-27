@@ -1118,15 +1118,27 @@ class FilesActionStore {
             operationId,
           });
         })
-        .then(() =>
+        .then(() => {
           toastr.success(
             translations?.successRemoveTemplate
               ? translations.successRemoveTemplate
               : items.length > 1
                 ? translations?.successRemoveRooms
                 : translations?.successRemoveRoom,
-          ),
-        )
+          );
+
+          const currentFolderId = this.selectedFolderStore.id;
+          if (items.includes(currentFolderId)) {
+            const { rootFolderType } = this.selectedFolderStore;
+            const categoryType = getCategoryTypeByFolderType(rootFolderType, 0);
+
+            if (categoryType === CategoryType.AIAgents) {
+              this.moveToAIAgentsPage();
+            } else {
+              this.moveToRoomsPage();
+            }
+          }
+        })
         .finally(() => {
           this.setGroupMenuBlocked(false);
           setSecondaryProgressBarData({

@@ -34,7 +34,7 @@ const mk =
     style,
     children,
     ...rest
-  }: React.HTMLAttributes<HTMLDivElement>) =>
+  }: React.ComponentPropsWithRef<"div">) =>
     React.createElement(
       "div",
       {

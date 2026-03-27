@@ -35,32 +35,26 @@ export const StyledRowContainer = ({
   children,
   ...rest
 }: React.ComponentProps<typeof RowContainer>) =>
-  React.createElement(
-    RowContainer,
-    {
-      className: [styles.styledRowContainer, className]
-        .filter(Boolean)
-        .join(" "),
-      ...rest,
-    },
+  React.createElement(RowContainer, {
+    className: [styles.styledRowContainer, className]
+      .filter(Boolean)
+      .join(" "),
     children,
-  );
+    ...rest,
+  });
 
 export const StyledRowContent = ({
   className,
   children,
   ...rest
 }: React.ComponentProps<typeof RowContent>) =>
-  React.createElement(
-    RowContent,
-    {
-      className: [styles.styledRowContent, className]
-        .filter(Boolean)
-        .join(" "),
-      ...rest,
-    },
+  React.createElement(RowContent, {
+    className: [styles.styledRowContent, className]
+      .filter(Boolean)
+      .join(" "),
     children,
-  );
+    ...rest,
+  });
 
 export const ContentWrapper = ({
   className,

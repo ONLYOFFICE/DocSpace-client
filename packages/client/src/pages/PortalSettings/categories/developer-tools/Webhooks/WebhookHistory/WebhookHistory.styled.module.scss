@@ -180,7 +180,7 @@
   }
 
   &[data-disabled] :global(.combo-button_selected-icon) svg path {
-    fill: #d0d5da;
+    fill: var(--button-color-base-disabled);
   }
 }
 

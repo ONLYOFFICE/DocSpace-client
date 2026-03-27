@@ -67,7 +67,6 @@ const Integration: React.FC<{
   return (
     <IntegrationContainer
       className={className}
-      theme={theme}
       color={currentColorScheme?.main?.accent ?? ""}
     >
       <CategoryHeader className="integration-header">

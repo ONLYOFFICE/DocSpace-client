@@ -68,11 +68,8 @@ export const StyledTableRow = ({
   children,
   ...rest
 }: React.ComponentProps<typeof TableRow>) =>
-  React.createElement(
-    TableRow,
-    {
-      className: [styles.styledTableRow, className].filter(Boolean).join(" "),
-      ...rest,
-    },
+  React.createElement(TableRow, {
+    className: [styles.styledTableRow, className].filter(Boolean).join(" "),
     children,
-  );
+    ...rest,
+  });

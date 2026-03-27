@@ -24,19 +24,29 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
+
 import styles from "./StyledInputWrapper.module.scss";
 
-const StyledInputWrapper = ({ maxWidth, className, style, children, ...rest }) => {
-  const classNames = [styles.styledInputWrapper];
-  if (className) classNames.push(className);
-
-  const inlineStyle = {
-    "--input-wrapper-max-width": maxWidth || "520px",
-    ...style,
-  };
+const StyledInputWrapper = ({
+  maxWidth,
+  className,
+  style,
+  children,
+  ...rest
+}: React.HTMLAttributes<HTMLDivElement> & { maxWidth?: string }) => {
+  const classNames = [styles.styledInputWrapper, className]
+    .filter(Boolean)
+    .join(" ");
 
   return (
-    <div className={classNames.join(" ")} style={inlineStyle} {...rest}>
+    <div
+      className={classNames}
+      style={
+        { "--input-wrapper-max-width": maxWidth ?? "520px", ...style } as React.CSSProperties
+      }
+      {...rest}
+    >
       {children}
     </div>
   );

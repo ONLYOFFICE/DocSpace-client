@@ -24,52 +24,74 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState } from "react";
-import { useTranslation } from "react-i18next";
-import { Button } from "@docspace/ui-kit/components/button";
-import { inject, observer } from "mobx-react";
-import SalesDepartmentRequestDialog from "../../../../../../../components/dialogs/SalesDepartmentRequestDialog";
+.payerContainer {
+  display: flex;
+  background: var(--payment-background-color);
+  min-height: 72px;
+  padding: 16px;
+  box-sizing: border-box;
+  margin-top: 16px;
+  border-radius: 6px;
+  max-width: 660px;
 
-import styles from "../styles/MainTariff.module.scss";
+  .payerInfoAvatar {
+    margin-inline-end: 16px;
+  }
 
-const RequestButtonContainer = ({ isDisabled, isLoading }) => {
-  const [isVisibleDialog, setIsVisibleDialog] = useState(false);
-  const { t } = useTranslation(["Common"]);
+  .payerInfoInlineStart {
+    margin-inline-start: 3px;
+  }
 
-  const toDoRequest = () => {
-    setIsVisibleDialog(true);
-  };
+  .payerInfoInlineEnd {
+    margin-inline-end: 3px;
+  }
 
-  const onClose = () => {
-    isVisibleDialog && setIsVisibleDialog(false);
-  };
+  .payerInfoContainer {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
 
-  return (
-    <div className={styles.buttonBody}>
-      {isVisibleDialog ? (
-        <SalesDepartmentRequestDialog
-          visible={isVisibleDialog}
-          onClose={onClose}
-        />
-      ) : null}
-      <Button
-        className="send-request-button"
-        label={t("Common:SendRequest")}
-        size="medium"
-        primary
-        isDisabled={isLoading || isDisabled}
-        onClick={toDoRequest}
-        isLoading={isLoading}
-        testId="sales_request_button"
-      />
-    </div>
-  );
-};
+    .loaderContainer {
+      .refreshDataLoader {
+        height: 16px;
+      }
+    }
+  }
 
-export default inject(({ paymentStore }) => {
-  const { isLoading } = paymentStore;
+  .payerInfoWrapper {
+    height: max-content;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: max-content max-content;
+    grid-gap: 4px;
 
-  return {
-    isLoading,
-  };
-})(observer(RequestButtonContainer));
+    .payerInfoDescription {
+      display: flex;
+      align-items: center;
+
+      p {
+        margin-inline-end: 4px;
+      }
+
+      div {
+        display: inline-block;
+        margin: auto 0;
+      }
+    }
+
+    .payerInfoAccountLink {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    .payerInfoRefreshData {
+      cursor: pointer;
+
+      &.isDisabled {
+        cursor: default;
+        color: var(--payment-price-disable);
+      }
+    }
+  }
+}

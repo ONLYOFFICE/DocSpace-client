@@ -25,77 +25,37 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled, { css } from "styled-components";
 import { Trans } from "react-i18next";
 import { Text } from "@docspace/ui-kit/components/text";
 import { inject, observer } from "mobx-react";
-import { mobile } from "@docspace/shared/utils";
 
-const StyledBody = styled.div`
-  max-width: 272px;
-  margin: 0 auto;
-  word-break: break-word;
-  text-align: center;
-
-  @media ${mobile} {
-    max-width: 520px;
-  }
-
-  .payment_price_total-price {
-    display: flex;
-    justify-content: center;
-    min-height: 65px;
-    margin-top: 16px;
-    margin-bottom: 16px;
-
-    .lagerFontSize {
-      font-size: 48px;
-    }
-
-    ${(props) =>
-      props.isDisabled &&
-      css`
-        color: ${
-          props.theme.client.settings.payment.priceContainer.disableColor
-        };
-      `};
-
-    .payment_price_price-text,
-    .total-tariff_description {
-    }
-
-    .total-tariff_description {
-      margin: auto;
-    }
-    p {
-      margin-bottom: 0;
-    }
-  }
-
-  button {
-    width: 100%;
-  }
-`;
+import styles from "../styles/MainTariff.module.scss";
 
 const TotalTariffContainer = ({
   t,
   maxAvailableManagersCount,
   isDisabled,
-  theme,
   totalPrice,
   isNeedRequest,
   isYearTariff,
   formatPaymentCurrency,
 }) => {
   return (
-    <StyledBody isDisabled={isDisabled} theme={theme}>
-      <div className="payment_price_total-price">
+    <div className={styles.totalTariffBody}>
+      <div
+        className={[
+          styles.paymentPriceTotalPrice,
+          isDisabled ? styles.isDisabled : "",
+        ]
+          .filter(Boolean)
+          .join(" ")}
+      >
         {isNeedRequest ? (
           <Text
             fontSize="14"
             textAlign="center"
             fontWeight={600}
-            className="total-tariff_description"
+            className={styles.totalTariffDescription}
           >
             <Trans t={t} i18nKey="BusinessRequestDescription" ns="Payments">
               {{ peopleNumber: maxAvailableManagersCount }}
@@ -110,7 +70,7 @@ const TotalTariffContainer = ({
                 ns="Payments"
                 values={{ price: formatPaymentCurrency(totalPrice) }}
                 components={{
-                  2: <span key="large-font-year" className="lagerFontSize" />,
+                  2: <span key="large-font-year" className={styles.lagerFontSize} />,
                   3: <Text fontWeight={600} as="span" key="bold-text-year" />,
                 }}
               />
@@ -121,7 +81,7 @@ const TotalTariffContainer = ({
                 ns="Payments"
                 values={{ price: formatPaymentCurrency(totalPrice) }}
                 components={{
-                  2: <span key="large-font-month" className="lagerFontSize" />,
+                  2: <span key="large-font-month" className={styles.lagerFontSize} />,
                   3: <Text fontWeight={600} as="span" key="bold-text-month" />,
                 }}
               />
@@ -129,12 +89,11 @@ const TotalTariffContainer = ({
           </Text>
         )}
       </div>
-    </StyledBody>
+    </div>
   );
 };
 
-export default inject(({ settingsStore, paymentStore, currentQuotaStore }) => {
-  const { theme } = settingsStore;
+export default inject(({ paymentStore, currentQuotaStore }) => {
   const {
     isLoading,
     totalPrice,
@@ -146,7 +105,6 @@ export default inject(({ settingsStore, paymentStore, currentQuotaStore }) => {
   const { isYearTariff } = currentQuotaStore;
 
   return {
-    theme,
     totalPrice,
     isLoading,
     isNeedRequest,

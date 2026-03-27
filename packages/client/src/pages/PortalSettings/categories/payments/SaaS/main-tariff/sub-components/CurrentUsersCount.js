@@ -26,38 +26,27 @@
 
 import { Text } from "@docspace/ui-kit/components/text";
 import React from "react";
-import styled, { css } from "styled-components";
 import { inject, observer } from "mobx-react";
 import SelectTotalSizeContainer from "./SelectTotalSizeContainer";
 
-const StyledCurrentUsersContainer = styled.div`
-  height: fit-content;
-  .current-admins-number {
-    ${(props) =>
-      props.isDisabled &&
-      css`
-        color: ${
-          props.theme.client.settings.payment.priceContainer.disableColor
-        };
-      `}
-  }
-`;
+import styles from "../styles/MainTariff.module.scss";
 
 const CurrentUsersCountContainer = (props) => {
   const {
     isNeedPlusSign,
     maxCountManagersByQuota,
     isDisabled,
-    theme,
     addedManagersCountTitle,
   } = props;
   return (
-    <StyledCurrentUsersContainer isDisabled={isDisabled} theme={theme}>
+    <div className={styles.currentUsersContainer}>
       <Text
         fontSize="16px"
         fontWeight={600}
         textAlign="center"
-        className="current-admins-number"
+        className={[styles.currentAdminsNumber, isDisabled ? styles.isDisabled : ""]
+          .filter(Boolean)
+          .join(" ")}
       >
         {addedManagersCountTitle}
       </Text>
@@ -65,22 +54,22 @@ const CurrentUsersCountContainer = (props) => {
         fontSize="44px"
         fontWeight={700}
         textAlign="center"
-        className="current-admins-number"
+        className={[styles.currentAdminsNumber, isDisabled ? styles.isDisabled : ""]
+          .filter(Boolean)
+          .join(" ")}
       >
         {maxCountManagersByQuota}
       </Text>
       <SelectTotalSizeContainer isNeedPlusSign={isNeedPlusSign} />
-    </StyledCurrentUsersContainer>
+    </div>
   );
 };
 
 export default inject(
-  ({ settingsStore, currentQuotaStore, paymentQuotasStore }) => {
+  ({ currentQuotaStore, paymentQuotasStore }) => {
     const { maxCountManagersByQuota } = currentQuotaStore;
     const { addedManagersCountTitle } = paymentQuotasStore;
-    const { theme } = settingsStore;
     return {
-      theme,
       maxCountManagersByQuota,
       addedManagersCountTitle,
     };

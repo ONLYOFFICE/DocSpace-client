@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect, useRef } from "react";
-import styled, { css } from "styled-components";
 import { Text } from "@docspace/ui-kit/components/text";
 import { inject, observer } from "mobx-react";
 import { Trans } from "react-i18next";
@@ -34,51 +33,13 @@ import TotalTariffContainer from "./sub-components/TotalTariffContainer";
 import ButtonContainer from "./sub-components/ButtonContainer";
 import CurrentUsersCountContainer from "./sub-components/CurrentUsersCount";
 
-const StyledBody = styled.div`
-  border-radius: 12px;
-  border: ${(props) =>
-    props.theme.client.settings.payment.priceContainer.border};
-  background: ${(props) =>
-    props.theme.client.settings.payment.priceContainer.background};
-  max-width: 320px;
-
-  padding: 23px;
-  box-sizing: border-box;
-
-  .payment_main-title {
-    margin-bottom: 24px;
-    ${(props) =>
-      props.isDisabled &&
-      css`
-        color: ${
-          props.theme.client.settings.payment.priceContainer.disableColor
-        };
-      `}
-  }
-  .payment_price_user {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: ${(props) =>
-      props.theme.client.settings.payment.priceContainer.backgroundText};
-    margin-top: 24px;
-    min-height: 38px;
-    border-radius: 6px;
-
-    p {
-      margin-bottom: 5px;
-      margin-top: 5px;
-      padding-inline: 16px;
-    }
-  }
-`;
+import styles from "./styles/MainTariff.module.scss";
 
 let timeout = null;
 let controller;
 
 const PriceCalculation = ({
   t,
-  theme,
   setIsLoading,
   maxAvailableManagersCount,
   canUpdateTariff,
@@ -129,14 +90,8 @@ const PriceCalculation = ({
   const isDisabled = !canUpdateTariff;
 
   const priceInfoPerManager = (
-    <div className="payment_price_user">
-      <Text
-        color={
-          isDisabled
-            ? theme.client.settings.payment.priceContainer.disablePriceColor
-            : theme.client.settings.payment.priceColor
-        }
-      >
+    <div className={styles.paymentPriceUser}>
+      <Text className={isDisabled ? styles.priceTextDisabled : styles.priceText}>
         {isYearTariff ? (
           <Trans
             t={t}
@@ -165,8 +120,18 @@ const PriceCalculation = ({
   const isNeedPlusSign = managersCount > maxAvailableManagersCount;
 
   return (
-    <StyledBody className="price-calculation-container" isDisabled={isDisabled}>
-      <Text fontSize="16px" fontWeight={600} className="payment_main-title">
+    <div
+      className={["price-calculation-container", styles.priceBody]
+        .filter(Boolean)
+        .join(" ")}
+    >
+      <Text
+        fontSize="16px"
+        fontWeight={600}
+        className={[styles.paymentMainTitle, isDisabled ? styles.isDisabled : ""]
+          .filter(Boolean)
+          .join(" ")}
+      >
         {isGracePeriod || isNotPaidPeriod
           ? t("YourPrice")
           : t("PriceCalculation")}
@@ -188,7 +153,7 @@ const PriceCalculation = ({
 
       <TotalTariffContainer t={t} isDisabled={isDisabled} />
       <ButtonContainer isDisabled={isDisabled} t={t} />
-    </StyledBody>
+    </div>
   );
 };
 
@@ -212,7 +177,6 @@ export default inject(
       canUpdateTariff,
       formatPaymentCurrency,
     } = paymentStore;
-    const { theme } = settingsStore;
 
     const { planCost } = paymentQuotasStore;
     const { isNotPaidPeriod, isGracePeriod } = currentTariffStatusStore;
@@ -225,7 +189,6 @@ export default inject(
 
       setManagersCount,
       tariffsInfo,
-      theme,
       setIsLoading,
       maxAvailableManagersCount,
 

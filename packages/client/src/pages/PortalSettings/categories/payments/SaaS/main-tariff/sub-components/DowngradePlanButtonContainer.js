@@ -27,13 +27,8 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { Button } from "@docspace/ui-kit/components/button";
-import styled from "styled-components";
 
-const StyledBody = styled.div`
-  button {
-    width: 100%;
-  }
-`;
+import styles from "../styles/MainTariff.module.scss";
 
 const DowngradePlanButtonContainer = ({
   isDisabled,
@@ -43,7 +38,7 @@ const DowngradePlanButtonContainer = ({
   buttonLabel,
 }) => {
   return (
-    <StyledBody>
+    <div className={styles.buttonBody}>
       <Button
         label={buttonLabel}
         size="medium"
@@ -53,7 +48,7 @@ const DowngradePlanButtonContainer = ({
         isLoading={isLoading}
         testId="downgrade_plan_button"
       />
-    </StyledBody>
+    </div>
   );
 };
 

@@ -1526,6 +1526,15 @@
   --border-service-color: #{$gray-light-mid};
   --services-additional-info: #{$gray};
   --services-link-color: #{$gray};
+  --payment-tariff-text: #{$gray-text};
+  --payment-benefits-background: #{$gray-light};
+  --payment-main-border: 1px solid #{$gray-light};
+  --payment-price-background-text: #{$light-gray-hover};
+  --payment-price-background: transparent;
+  --payment-price-border: 1px solid #{$gray-strong};
+  --payment-price-disable: #{$gray};
+  --payment-price-disable-price: #{$gray};
+  --payment-storage-size-title: #{$gray};
 }
 
 .dark {
@@ -1547,6 +1556,15 @@
   --modal-dialog-border-color: #{$gray-dark-strong};
   --services-additional-info: #{$gray-dark};
   --services-link-color: #{$dark-gray-dark};
+  --payment-tariff-text: #{$gray-dark-pressed};
+  --payment-benefits-background: #{$black};
+  --payment-main-border: 1px solid #{$gray-dark-strong};
+  --payment-price-background-text: #{$light-dark-gray-hover};
+  --payment-price-background: #{$dark-gray-light};
+  --payment-price-border: 1px solid #{$dark-gray-light};
+  --payment-price-disable: #{$gray-dark};
+  --payment-price-disable-price: #{$gray-dark-text};
+  --payment-storage-size-title: #{$gray};
 }
 
 .light {

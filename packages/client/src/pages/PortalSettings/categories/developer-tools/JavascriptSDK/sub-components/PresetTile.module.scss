@@ -24,23 +24,34 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Text } from "@docspace/ui-kit/components/text";
+.tileContainer {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 342px;
+  padding: 12px 16px;
+  border-radius: 6px;
+  border: 1px solid var(--sdk-border-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+  cursor: pointer;
 
-import styles from "./TooltipContent.module.scss";
+  .tileContent {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
 
-export const TooltipContent = ({ title, description, img }) => {
-  return (
-    <div className={styles.wrapper}>
-      <header className={styles.headerContainer}>
-        <Text fontSize="16px" fontWeight={700} lineHeight="22px">
-          {title}
-        </Text>
-        {/* <XImg /> */}
-      </header>
-      <Text>{description}</Text>
-      <div className={styles.imgWrapper}>
-        <img src={img} alt={title} />
-      </div>
-    </div>
-  );
-};
+  .navigationButton {
+    border: none;
+
+    :global(.button-content) {
+      flex-direction: row-reverse;
+    }
+  }
+}
+
+:global([dir="ltr"]) .tileContainer .navigationButton :global(.icon) {
+  transform: scale(-1, 1);
+}

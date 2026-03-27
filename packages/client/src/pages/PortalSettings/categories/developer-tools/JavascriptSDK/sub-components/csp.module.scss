@@ -24,23 +24,48 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Text } from "@docspace/ui-kit/components/text";
+@use "@docspace/ui-kit/styles/mixins";
 
-import styles from "./TooltipContent.module.scss";
+.categoryHeader {
+  margin-top: 24px;
+  margin-bottom: 16px;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 22px;
+}
 
-export const TooltipContent = ({ title, description, img }) => {
-  return (
-    <div className={styles.wrapper}>
-      <header className={styles.headerContainer}>
-        <Text fontSize="16px" fontWeight={700} lineHeight="22px">
-          {title}
-        </Text>
-        {/* <XImg /> */}
-      </header>
-      <Text>{description}</Text>
-      <div className={styles.imgWrapper}>
-        <img src={img} alt={title} />
-      </div>
-    </div>
-  );
-};
+.container {
+  margin-bottom: 4px;
+}
+
+.descriptionHolder {
+  display: block;
+  color: var(--sdk-secondary-color);
+  margin-bottom: 16px;
+
+  > div {
+    display: inline-block;
+    margin-inline-start: 4px;
+    transform: translateY(1px);
+  }
+}
+
+.inputHolder {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  @include mixins.tablet {
+    margin-bottom: 8px;
+  }
+}
+
+.chipsContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px 4px;
+  margin-top: 8px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}

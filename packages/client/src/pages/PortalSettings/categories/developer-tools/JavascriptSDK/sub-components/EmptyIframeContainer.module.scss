@@ -24,23 +24,22 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Text } from "@docspace/ui-kit/components/text";
+.container {
+  width: var(--iframe-width);
+  height: var(--iframe-height);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--plugins-border-color);
+  border-radius: 6px;
+  overflow: hidden;
+  background-color: var(--sdk-preview-background-color);
 
-import styles from "./TooltipContent.module.scss";
-
-export const TooltipContent = ({ title, description, img }) => {
-  return (
-    <div className={styles.wrapper}>
-      <header className={styles.headerContainer}>
-        <Text fontSize="16px" fontWeight={700} lineHeight="22px">
-          {title}
-        </Text>
-        {/* <XImg /> */}
-      </header>
-      <Text>{description}</Text>
-      <div className={styles.imgWrapper}>
-        <img src={img} alt={title} />
-      </div>
-    </div>
-  );
-};
+  .emptyIframeText {
+    font-size: 44px;
+    font-weight: 700;
+    line-height: 59.92px;
+    color: var(--sdk-muted-text-color);
+    text-align: center;
+  }
+}

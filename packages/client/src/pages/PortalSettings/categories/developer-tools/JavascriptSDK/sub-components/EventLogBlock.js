@@ -25,9 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useRef, useEffect, useState, useMemo } from "react";
-import styled from "styled-components";
-import { injectDefaultTheme, NoUserSelect } from "@docspace/shared/utils";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { Link } from "@docspace/ui-kit/components/link";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg?url";
@@ -36,169 +33,9 @@ import { DropDown } from "@docspace/ui-kit/components/drop-down";
 import { DropDownItem } from "@docspace/ui-kit/components/drop-down-item";
 import copy from "copy-to-clipboard";
 import { toastr } from "@docspace/ui-kit/components/toast";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
-const GUTTER_WIDTH = 62;
-
-const StyledWrapper = styled.div.attrs(injectDefaultTheme)`
-  max-width: 800px;
-  width: 100%;
-  margin-top: 16px;
-  border: 1px solid ${(p) => p.theme.plugins.borderColor};
-  border-radius: 6px;
-  overflow: hidden;
-  background-color: ${(p) =>
-    p.theme.isBase
-      ? p.theme.backgroundColor
-      : p.theme.sdkPresets.previewBackgroundColor};
-  color: ${(p) =>
-    p.theme.isBase ? globalColors.black : globalColors.darkGrayDark};
-  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier,
-    monospace;
-  font-size: 13px;
-  line-height: 20px;
-`;
-
-const Header = styled.div.attrs(injectDefaultTheme)`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px;
-  border-bottom: 1px solid ${(p) => p.theme.plugins.borderColor};
-  background-color: ${(p) =>
-    p.theme.isBase ? globalColors.grayLight : globalColors.grayDarkMid};
-  ${NoUserSelect}
-`;
-
-const HeaderTitle = styled.span.attrs(injectDefaultTheme)`
-  font-size: 13px;
-  font-weight: 600;
-  color: ${(p) =>
-    p.theme.isBase ? globalColors.black : globalColors.darkGrayDark};
-`;
-
-const HeaderActions = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-`;
-
-const FilterButtonWrapper = styled.div`
-  position: relative;
-  display: inline-flex;
-`;
-
-const LogScroller = styled.div.attrs(injectDefaultTheme)`
-  overflow-y: auto;
-  height: 280px;
-  display: flex;
-  flex-direction: column;
-
-  scrollbar-width: thin;
-  scrollbar-color: ${(p) => p.theme.plugins.borderColor} transparent;
-
-  &::-webkit-scrollbar {
-    width: 4px;
-  }
-  &::-webkit-scrollbar-thumb {
-    background: ${(p) => p.theme.plugins.borderColor};
-    border-radius: 4px;
-  }
-`;
-
-const EmptyState = styled.div.attrs(injectDefaultTheme)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex: 1;
-  font-size: 12px;
-  color: ${(p) => (p.theme.isBase ? globalColors.gray : globalColors.grayDark)};
-  font-style: italic;
-  ${NoUserSelect}
-`;
-
-const LogEntry = styled.div.attrs(injectDefaultTheme)`
-  display: flex;
-  align-items: center;
-  min-height: 28px;
-  cursor: ${(p) => (p.$expandable ? "pointer" : "default")};
-
-  &:hover {
-    background-color: ${(p) =>
-      p.theme.isBase
-        ? globalColors.lightGrayHover
-        : globalColors.lightDarkGrayHover};
-  }
-`;
-
-const Gutter = styled.span.attrs(injectDefaultTheme)`
-  flex-shrink: 0;
-  width: ${GUTTER_WIDTH}px;
-  padding: 0 8px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  align-self: stretch;
-  font-size: 12px;
-  color: ${(p) => (p.theme.isBase ? globalColors.gray : globalColors.grayDark)};
-  white-space: nowrap;
-  ${NoUserSelect}
-`;
-
-const Chevron = styled.span`
-  font-size: 9px;
-  line-height: 1;
-  opacity: ${(p) => (p.$visible ? 1 : 0)};
-  transition: transform 0.15s ease;
-  transform: ${(p) => (p.$expanded ? "rotate(90deg)" : "rotate(0deg)")};
-  display: inline-block;
-`;
-
-const EventName = styled.span`
-  flex-shrink: 0;
-  padding: 0 6px 0 10px;
-  font-weight: 600;
-  white-space: nowrap;
-`;
-
-const Arrow = styled.span.attrs(injectDefaultTheme)`
-  flex-shrink: 0;
-  color: ${(p) => (p.theme.isBase ? globalColors.gray : globalColors.grayDark)};
-  padding-right: 6px;
-  ${NoUserSelect}
-`;
-
-const EventData = styled.span.attrs(injectDefaultTheme)`
-  color: ${(p) => p.theme.sdkPresets.secondaryColor};
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  min-width: 0;
-  flex: 1;
-  padding-right: 12px;
-`;
-
-const ExpandedRow = styled.div.attrs(injectDefaultTheme)`
-  position: relative;
-  border-top: 1px solid ${(p) => p.theme.plugins.borderColor};
-`;
-
-const CopyButton = styled.div`
-  position: absolute;
-  top: 8px;
-  right: 8px;
-`;
-
-const ExpandedContent = styled.pre.attrs(injectDefaultTheme)`
-  margin: 0;
-  padding: 6px 8px;
-  padding-right: 28px;
-  font-family: inherit;
-  font-size: 13px;
-  line-height: 20px;
-  color: ${(p) => p.theme.sdkPresets.secondaryColor};
-  white-space: pre-wrap;
-  word-break: break-all;
-`;
+import styles from "./EventLogBlock.module.scss";
 
 const formatTime = (date) => {
   const h = String(date.getHours()).padStart(2, "0");
@@ -274,12 +111,12 @@ export const EventLogBlock = ({ events, onClear, eventTypes, t }) => {
   const hasHidden = hiddenEvents.size > 0;
 
   return (
-    <StyledWrapper>
-      <Header>
-        <HeaderActions>
-          <HeaderTitle>{t("EventLog")}</HeaderTitle>
+    <div className={styles.wrapper}>
+      <div className={styles.header}>
+        <div className={styles.headerActions}>
+          <span className={styles.headerTitle}>{t("EventLog")}</span>
           {hasFilter && (
-            <FilterButtonWrapper ref={filterButtonRef}>
+            <div className={styles.filterButtonWrapper} ref={filterButtonRef}>
               <IconButton
                 size={16}
                 color={hasHidden ? globalColors.lightBlueMain : undefined}
@@ -305,18 +142,18 @@ export const EventLogBlock = ({ events, onClear, eventTypes, t }) => {
                   />
                 ))}
               </DropDown>
-            </FilterButtonWrapper>
+            </div>
           )}
-        </HeaderActions>
+        </div>
         {events.length > 0 && (
           <Link type="action" fontSize="13px" onClick={onClear}>
             {t("Common:ClearAll")}
           </Link>
         )}
-      </Header>
-      <LogScroller ref={scrollerRef}>
+      </div>
+      <div className={styles.logScroller} ref={scrollerRef}>
         {displayedEvents.length === 0 ? (
-          <EmptyState>{t("NoEventsYet")}</EmptyState>
+          <div className={styles.emptyState}>{t("NoEventsYet")}</div>
         ) : (
           displayedEvents.map((entry) => {
             const expandable = isExpandable(entry.data);
@@ -324,26 +161,35 @@ export const EventLogBlock = ({ events, onClear, eventTypes, t }) => {
 
             return (
               <div key={entry.id}>
-                <LogEntry
-                  $expandable={expandable}
+                <div
+                  className={[
+                    styles.logEntry,
+                    expandable ? styles.expandable : "",
+                  ].join(" ")}
                   onClick={expandable ? () => toggle(entry.id) : undefined}
                 >
-                  <Gutter>
-                    <Chevron $visible={expandable} $expanded={expanded}>
+                  <span className={styles.gutter}>
+                    <span
+                      className={[
+                        styles.chevron,
+                        expandable ? styles.visible : "",
+                        expanded ? styles.expanded : "",
+                      ].join(" ")}
+                    >
                       {"\u25B6"}
-                    </Chevron>
+                    </span>
                     <span>{formatTime(entry.timestamp)}</span>
-                  </Gutter>
-                  <EventName>{entry.event}</EventName>
-                  <Arrow>→</Arrow>
-                  <EventData>{formatCompact(entry.data, t("VoidReturn"))}</EventData>
-                </LogEntry>
+                  </span>
+                  <span className={styles.eventName}>{entry.event}</span>
+                  <span className={styles.arrow}>→</span>
+                  <span className={styles.eventData}>{formatCompact(entry.data, t("VoidReturn"))}</span>
+                </div>
                 {expanded && (
-                  <ExpandedRow>
-                    <ExpandedContent>
+                  <div className={styles.expandedRow}>
+                    <pre className={styles.expandedContent}>
                       {formatExpanded(entry.data)}
-                    </ExpandedContent>
-                    <CopyButton>
+                    </pre>
+                    <div className={styles.copyButton}>
                       <IconButton
                         size={16}
                         iconName={CopyReactSvgUrl}
@@ -352,14 +198,14 @@ export const EventLogBlock = ({ events, onClear, eventTypes, t }) => {
                           toastr.success(t("Common:Copy"));
                         }}
                       />
-                    </CopyButton>
-                  </ExpandedRow>
+                    </div>
+                  </div>
                 )}
               </div>
             );
           })
         )}
-      </LogScroller>
-    </StyledWrapper>
+      </div>
+    </div>
   );
 };

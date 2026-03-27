@@ -2269,12 +2269,14 @@
   --plugins-plugin-name-color: #{$gray};
   --plugins-border-color: #{$gray-light-mid};
   --plugins-error-status-color: #{$light-error-status};
+  --plugins-description-color: #{$light-gray-dark};
 }
 
 .dark {
   --plugins-plugin-name-color: #{$gray-dark};
   --plugins-border-color: #{$gray-dark-strong};
   --plugins-error-status-color: #{$dark-error-status};
+  --plugins-description-color: #{$dark-gray-dark};
 }
 
 .light {
@@ -2639,6 +2641,10 @@
   --sdk-link-help-color: #{$light-gray-dark};
   --sdk-secondary-color: #{$light-gray-dark};
   --sdk-border-color: #{$gray-strong};
+  --sdk-preview-background-color: #{$light-gray-hover};
+  --sdk-code-background-color: #{$white};
+  --sdk-code-header-background-color: #{$gray-light};
+  --sdk-muted-text-color: #{$gray};
   --webhooks-link-color: #{$light-blue-main};
   --webhooks-bar-background: #{$gray-light};
   --webhooks-color: #{$gray};
@@ -2684,6 +2690,10 @@
   --sdk-link-help-color: #{$dark-gray-dark};
   --sdk-secondary-color: #{$dark-gray-dark};
   --sdk-border-color: #{$gray-dark-strong};
+  --sdk-preview-background-color: #{$light-dark-gray-hover};
+  --sdk-code-background-color: #{$light-dark-gray-hover};
+  --sdk-code-header-background-color: #{$gray-dark-mid};
+  --sdk-muted-text-color: #{$gray-dark};
   --webhooks-link-color: #{$light-blue-main};
   --webhooks-bar-background: #{$light-dark-gray-hover};
   --webhooks-color: #{$gray-dark};

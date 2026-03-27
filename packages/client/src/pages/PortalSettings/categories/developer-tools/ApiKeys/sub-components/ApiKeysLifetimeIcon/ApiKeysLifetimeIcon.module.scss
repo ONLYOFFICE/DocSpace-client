@@ -24,44 +24,22 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { inject, observer } from "mobx-react";
-import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
-import { RowContainer } from "@docspace/ui-kit/components/rows";
-import { TableViewProps } from "../../types";
-import RowItem from "./RowItem";
-import styles from "./RowView.module.scss";
+@use "@docspace/ui-kit/styles/variables/colors" as *;
 
-const RowView = (props: TableViewProps) => {
-  const { items, viewAs, setViewAs, sectionWidth, currentDeviceType, ...rest } =
-    props;
+.lifetimeIcon {
+  &.notExpired {
+    :global(.api-keys_lifetime) {
+      svg {
+        path,
+        rect {
+          fill: $gray;
+          stroke: $gray;
+        }
 
-  useViewEffect({
-    view: viewAs!,
-    setView: setViewAs!,
-    currentDeviceType: currentDeviceType!,
-  });
-
-  return (
-    <RowContainer className={styles.rowContainer} useReactWindow={false}>
-      {items.map((item) => (
-        <RowItem
-          key={item.id}
-          item={item}
-          sectionWidth={sectionWidth}
-          {...rest}
-        />
-      ))}
-    </RowContainer>
-  );
-};
-
-export default inject(({ setup, settingsStore }: TStore) => {
-  const { currentDeviceType } = settingsStore;
-  const { viewAs, setViewAs } = setup;
-
-  return {
-    viewAs,
-    setViewAs,
-    currentDeviceType,
-  };
-})(observer(RowView));
+        circle {
+          stroke: $gray;
+        }
+      }
+    }
+  }
+}

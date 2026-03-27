@@ -102,7 +102,6 @@ const RoomsItemHeader = ({
     "Common",
     "Translations",
     "InfoPanel",
-    "SharingPanel",
     "RoomLogoCover",
   ]);
 
@@ -319,3 +318,4 @@ export default inject(
     };
   },
 )(observer(RoomsItemHeader));
+

@@ -69,12 +69,7 @@ const LinkRow = (props: LinkRowProps) => {
 
   const availableShareRights = item.availableShareRights;
 
-  const { t } = useTranslation([
-    "SharingPanel",
-    "Files",
-    "Settings",
-    "Translations",
-  ]);
+  const { t } = useTranslation(["Files", "Settings", "Translations"]);
 
   const { password, isExpired } = link.sharedTo;
 
@@ -174,7 +169,8 @@ const LinkRow = (props: LinkRowProps) => {
 
   const editExternalLinkAction = async (newLink: TFileLink) => {
     if (link.sharedTo.isExpired) {
-      newLink.sharedTo.expirationDate = addToDate(now(), 7, "days")?.toISO() ?? null;
+      newLink.sharedTo.expirationDate =
+        addToDate(now(), 7, "days")?.toISO() ?? null;
     }
 
     setLoadingLinks([newLink.sharedTo.id]);
@@ -315,3 +311,4 @@ export default inject<TStore>(
     };
   },
 )(observer(LinkRow));
+

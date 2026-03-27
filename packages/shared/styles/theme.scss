@@ -2640,6 +2640,14 @@
   --sdk-secondary-color: #{$light-gray-dark};
   --sdk-border-color: #{$gray-strong};
   --webhooks-link-color: #{$light-blue-main};
+  --webhooks-bar-background: #{$gray-light};
+  --webhooks-color: #{$gray};
+  --webhooks-border: 1px solid #{$gray-light-mid};
+  --webhooks-background: #{$gray-light};
+  --webhooks-history-row-bg: #{$light-gray-hover};
+  --webhooks-table-cell-bg: #{$light-gray-hover};
+  --webhooks-filter-border: 1px solid #{$gray-strong};
+  --webhooks-span-bg: #{$light-blue-main};
   --oauth-preview-border: 1px solid #{$gray-light-mid};
   --oauth-info-desc-link-color: #{$light-gray-dark};
   --oauth-info-block-header-color: #{$gray};
@@ -2657,6 +2665,19 @@
   --migration-info-block-text-color: #{$gray-text};
   --migration-error-text-color: #{$light-error-status};
   --migration-progress-bar-bg: #{$light-blue-main};
+  --migration-workspace-hover: #{$light-blue-main};
+  --migration-file-input-icon-color: #{$gray};
+  --migration-table-header-text: #{$gray};
+  --migration-table-row-hover: #{$light-gray-hover};
+  --migration-table-row-text-color: #{$gray};
+  --migration-import-section-text-color: #{$gray};
+  --migration-import-item-bg: #{$gray-light};
+  --migration-import-item-disable-bg: #{$gray-light};
+  --migration-import-item-text-color: #{$gray-text};
+  --migration-import-item-disable-text: #{$gray};
+  --migration-import-icon-color: #{$light-gray-dark};
+  --migration-link-color: #{$light-blue-main};
+  --migration-existing-text-color: #{$main-green};
 }
 
 .dark {
@@ -2664,6 +2685,14 @@
   --sdk-secondary-color: #{$dark-gray-dark};
   --sdk-border-color: #{$gray-dark-strong};
   --webhooks-link-color: #{$light-blue-main};
+  --webhooks-bar-background: #{$light-dark-gray-hover};
+  --webhooks-color: #{$gray-dark};
+  --webhooks-border: 1px solid #{$gray-dark-mid};
+  --webhooks-background: #{$dark-gray-light};
+  --webhooks-history-row-bg: #{$light-dark-gray-hover};
+  --webhooks-table-cell-bg: #{$light-gray-hover};
+  --webhooks-filter-border: 1px solid #{$gray-dark-strong};
+  --webhooks-span-bg: #{$light-blue-main};
   --oauth-preview-border: 1px solid #{$gray-dark-mid};
   --oauth-info-desc-link-color: #{$dark-gray-dark};
   --oauth-info-block-header-color: #{$gray-dark};
@@ -2681,6 +2710,19 @@
   --migration-info-block-text-color: #{$gray-dark};
   --migration-error-text-color: #{$dark-error-status};
   --migration-progress-bar-bg: #{$white};
+  --migration-workspace-hover: #{$light-blue-main};
+  --migration-file-input-icon-color: #{$gray-dark-text};
+  --migration-table-header-text: #{$gray-dark};
+  --migration-table-row-hover: #{$light-dark-gray-hover};
+  --migration-table-row-text-color: #{$gray-dark};
+  --migration-import-section-text-color: #{$gray-dark};
+  --migration-import-item-bg: #{$dark-gray-light};
+  --migration-import-item-disable-bg: #{$light-dark-gray-hover};
+  --migration-import-item-text-color: #{$dark-gray-dark};
+  --migration-import-item-disable-text: #{$gray-dark};
+  --migration-import-icon-color: #{$dark-gray-dark};
+  --migration-link-color: #{$light-blue-main};
+  --migration-existing-text-color: #{$dark-status-positive};
 }
 
 .light {

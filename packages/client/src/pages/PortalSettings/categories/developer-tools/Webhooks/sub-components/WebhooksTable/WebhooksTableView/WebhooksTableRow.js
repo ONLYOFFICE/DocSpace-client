@@ -30,7 +30,6 @@ import DeleteIcon from "PUBLIC_DIR/images/delete.react.svg?url";
 import DefaultUserPhotoSize32PngUrl from "PUBLIC_DIR/images/default_user_photo_size_32-32.png";
 
 import React, { useState } from "react";
-import styled from "styled-components";
 import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
@@ -44,33 +43,7 @@ import { Encoder } from "@docspace/ui-kit/utils/encoder";
 
 import StatusBadge from "../../StatusBadge";
 
-const StyledWrapper = styled.div`
-  display: contents;
-`;
-
-const StyledTableRow = styled(TableRow)`
-  .table-container_cell {
-    padding-inline-end: 30px;
-    text-overflow: ellipsis;
-  }
-
-  .mr-8 {
-    margin-inline-end: 8px;
-  }
-
-  .textOverflow {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .author-avatar-cell {
-    width: 16px;
-    min-width: 16px;
-    height: 16px;
-    margin-inline-end: 8px;
-  }
-`;
+import styles from "../WebhooksTable.styled.module.scss";
 
 const WebhooksTableRow = (props) => {
   const {
@@ -160,8 +133,9 @@ const WebhooksTableRow = (props) => {
     : DefaultUserPhotoSize32PngUrl;
 
   return (
-    <StyledWrapper onClick={handleRowClick}>
-      <StyledTableRow
+    <div className={styles.styledWrapper} onClick={handleRowClick}>
+      <TableRow
+        className={styles.styledTableRow}
         contextOptions={contextOptions}
         hideColumns={hideColumns}
         contextMenuTestId="webhook_table_contextmenu"
@@ -216,8 +190,8 @@ const WebhooksTableRow = (props) => {
             isDisabled={isLoading}
           />
         </TableCell>
-      </StyledTableRow>
-    </StyledWrapper>
+      </TableRow>
+    </div>
   );
 };
 

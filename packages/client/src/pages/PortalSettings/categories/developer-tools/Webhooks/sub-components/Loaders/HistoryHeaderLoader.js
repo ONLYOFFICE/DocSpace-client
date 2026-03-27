@@ -24,29 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
-const LoaderWrapper = styled.div`
-  width: 100%;
-  margin-top: 5px;
-  margin-bottom: 17px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  .filterButton,
-  .configName {
-    border-radius: 3px;
-  }
-`;
+import styles from "./Loaders.styled.module.scss";
 
 export const HistoryHeaderLoader = () => {
   return (
-    <LoaderWrapper>
+    <div className={styles.historyHeaderLoaderWrapper}>
       <RectangleSkeleton width="118px" height="22px" className="configName" />
 
       <RectangleSkeleton width="32px" height="22px" className="filterButton" />
-    </LoaderWrapper>
+    </div>
   );
 };

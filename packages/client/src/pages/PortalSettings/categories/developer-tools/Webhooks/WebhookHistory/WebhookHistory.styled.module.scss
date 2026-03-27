@@ -1,0 +1,391 @@
+// (c) Copyright Ascensio System SIA 2009-2026
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+@use "@docspace/ui-kit/styles/mixins";
+
+// index.js
+.webhookWrapper {
+  width: 100%;
+}
+
+// HistoryFilterHeader.js
+.listHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @include mixins.tablet-and-below {
+    margin-top: -5px;
+  }
+
+  @include mixins.mobile {
+    margin-top: 8px;
+  }
+}
+
+.listHeading {
+  line-height: 22px;
+  font-weight: 700;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.filterButton {
+  position: relative;
+  z-index: 201;
+
+  &.groupMenuVisible {
+    z-index: 199;
+  }
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border: var(--webhooks-filter-border);
+  border-radius: 3px;
+  cursor: pointer;
+
+  svg {
+    cursor: pointer;
+  }
+
+  &:hover {
+    border-color: var(--webhooks-color);
+
+    svg path {
+      fill: var(--info-panel-icon-button-hover-color);
+    }
+  }
+
+  span {
+    z-index: 203;
+    width: 8px;
+    height: 8px;
+    background-color: var(--webhooks-span-bg);
+    border-radius: 50%;
+    position: absolute;
+    bottom: -2px;
+    inset-inline-end: -2px;
+  }
+}
+
+// HistoryHeader.js
+.headerContainer {
+  position: sticky;
+  top: 0;
+  background-color: var(--background-color);
+  z-index: 201;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 53px;
+  flex-wrap: wrap;
+
+  @include mixins.mobile {
+    margin-inline: -14px;
+    padding-inline: 14px;
+  }
+
+  :global(.arrow-button) {
+    margin-inline-end: 17px;
+
+    @include mixins.tablet-and-below {
+      padding-block: 8px;
+      padding-inline: 8px 0;
+      margin-inline-start: -8px;
+    }
+
+    @include mixins.mobile {
+      margin-inline-end: 13px;
+    }
+
+    svg {
+      [data-dir="rtl"] & {
+        transform: scaleX(-1);
+      }
+    }
+  }
+
+  :global(.headline) {
+    font-size: 18px;
+    margin-inline-end: 16px;
+
+    @include mixins.tablet-and-below {
+      font-size: 21px;
+    }
+
+    @include mixins.mobile {
+      font-size: 18px;
+    }
+  }
+
+  :global(.table-container_group-menu) {
+    margin-block: 0;
+    margin-inline: -20px 0;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    flex: 0 0 auto;
+    width: calc(100% + 40px);
+    height: 69px;
+
+    :global(.combo-button_selected-icon) {
+      svg path {
+        fill: var(--text-color);
+      }
+    }
+
+    @include mixins.tablet-and-below {
+      height: 60px;
+      margin-block: 0;
+      margin-inline: -16px 0;
+      width: calc(100% + 32px);
+      top: 5px;
+    }
+
+    @include mixins.mobile {
+      position: absolute;
+      height: 48px;
+      margin-block: -9px 0;
+      margin-inline: -15px 0;
+      width: calc(100% + 2px);
+      top: 10px;
+    }
+  }
+
+  &[data-disabled] :global(.combo-button_selected-icon) svg path {
+    fill: #d0d5da;
+  }
+}
+
+// StatusBar.js
+.statusBarWrapper {
+  margin-top: 9px;
+
+  :global(.statusBarItem:last-of-type) {
+    margin-inline-end: 0;
+  }
+
+  :global(.statusActionItem) {
+    margin-inline-start: 12px;
+  }
+}
+
+// FilterDialog/index.js
+.dialogBodyWrapper {
+  margin-top: 16px;
+}
+
+.filterDialogFooter {
+  width: 100%;
+  display: flex;
+
+  :global(button) {
+    width: 100%;
+  }
+
+  :global(button:first-of-type) {
+    margin-inline-end: 10px;
+  }
+}
+
+// FilterDialog/StatusPicker.js
+.roundedButton {
+  box-sizing: border-box;
+  font-size: 13px;
+  font-weight: 400;
+  padding: 13.5px 15px;
+  border-radius: 16px;
+  margin-inline-end: 7px;
+  line-height: 20px;
+}
+
+.statusSelectors {
+  position: relative;
+  margin-top: 8px;
+  margin-bottom: 16px;
+}
+
+// FilterDialog/DeliveryDatePicker.js
+.calendarMobile {
+  position: fixed;
+  bottom: 0;
+  inset-inline-start: 0;
+}
+
+.calendarDesktop {
+  position: absolute;
+}
+
+.deliverySelectors {
+  position: relative;
+  margin-top: 8px;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--info-panel-border-color);
+  height: 32px;
+  display: flex;
+  align-items: center;
+
+  :global(.mr-8) {
+    margin-inline-end: 8px;
+  }
+
+  :global(.selectedItem) {
+    margin-bottom: 0;
+  }
+}
+
+.timePickerCell {
+  margin-inline-start: 8px;
+  display: inline-flex;
+  align-items: center;
+
+  :global(.timePickerItem) {
+    display: inline-flex;
+    align-items: center;
+    margin-inline-end: 16px;
+  }
+}
+
+// HistoryRowView/index.js
+.historyRowContainer {
+  margin-top: 12px;
+
+  :global(.row-list-item) {
+    cursor: pointer;
+    padding-inline-end: 16px;
+  }
+
+  :global(.row-item::after) {
+    bottom: -3px;
+  }
+
+  :global(.row-list-item:has(.selected-row-item)) {
+    background-color: var(--webhooks-history-row-bg);
+  }
+}
+
+// HistoryRowContent.js
+.historyRowContent {
+  display: flex;
+  padding-bottom: 10px;
+
+  :global(.rowMainContainer) {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.historyContentWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+}
+
+.statusHeader {
+  display: flex;
+}
+
+.historyItemId {
+  margin-inline-end: 8px;
+}
+
+// HistoryTableView/index.js
+.historyTableWrapper {
+  margin-top: -2px;
+  grid-template-columns: 300px 100px 400px 24px;
+
+  :global(.table-container_header) {
+    position: absolute;
+  }
+
+  :global(.header-container-text) {
+    font-size: 12px;
+  }
+
+  :global(.checkboxWrapper) {
+    padding: 0;
+    padding-inline-start: 8px;
+  }
+
+  :global(.table-list-item) {
+    cursor: pointer;
+    padding-inline-start: 20px;
+
+    &:hover {
+      background-color: var(--files-section-row-view-checked-background);
+
+      :global(.table-container_cell) {
+        margin-top: -1px;
+        border-top: 1px solid var(--files-section-table-view-row-border-color);
+        margin-inline-start: -24px;
+        padding-inline-start: 24px;
+      }
+
+      :global(.checkboxWrapper) {
+        padding-inline-start: 32px;
+      }
+
+      :global(.table-container_row-context-menu-wrapper) {
+        margin-inline-end: -20px;
+        padding-inline-end: 20px;
+      }
+    }
+  }
+
+  :global(.table-list-item:has(.selected-table-row)) {
+    background-color: var(--files-section-row-view-checked-background);
+  }
+}
+
+// HistoryTableRow.js
+.historyStyledWrapper {
+  display: contents;
+}
+
+.historyTableRow {
+  :global(.textOverflow) {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  :global(.p-menuitem-icon) svg path {
+    fill: red;
+  }
+
+  :global(.p-menuitem-text) {
+    color: red;
+  }
+
+  &[data-highlighted] :global(.table-container_cell) {
+    background-color: var(--webhooks-table-cell-bg);
+  }
+}

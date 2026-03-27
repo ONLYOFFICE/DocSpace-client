@@ -28,7 +28,6 @@ import RetryIcon from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
 import React from "react";
-import styled, { css } from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useNavigate, useParams } from "react-router";
 import { useTranslation } from "react-i18next";
@@ -47,37 +46,7 @@ import { formatFilters } from "SRC_DIR/helpers/webhooks";
 import StatusBadge from "../../../../sub-components/StatusBadge";
 import { getTriggerTranslate } from "../../../../Webhooks.helpers";
 
-const StyledTableRow = styled(TableRow)`
-  .textOverflow {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .p-menuitem-icon {
-    svg {
-      path {
-        fill: red;
-      }
-    }
-  }
-  .p-menuitem-text {
-    color: red;
-  }
-
-  ${(props) =>
-    props.isHighlight &&
-    css`
-      .table-container_cell {
-        background-color: ${({ theme }) =>
-          theme.client.settings.webhooks.tableCellBackground};
-      }
-    `}
-`;
-
-const StyledWrapper = styled.div`
-  display: contents;
-`;
+import styles from "../../../WebhookHistory.styled.module.scss";
 
 const HistoryTableRow = (props) => {
   const {
@@ -149,11 +118,12 @@ const HistoryTableRow = (props) => {
   const webhookTrigger = getTriggerTranslate(item.trigger, t);
 
   return (
-    <StyledWrapper
-      className={isChecked ? "selected-table-row" : ""}
+    <div
+      className={`${styles.historyStyledWrapper}${isChecked ? " selected-table-row" : ""}`}
       onClick={onRowClick}
     >
-      <StyledTableRow
+      <TableRow
+        className={styles.historyTableRow}
         contextOptions={contextOptions}
         checked={isChecked}
         hideColumns={hideColumns}
@@ -182,8 +152,8 @@ const HistoryTableRow = (props) => {
             {formattedDelivery}
           </Text>
         </TableCell>
-      </StyledTableRow>
-    </StyledWrapper>
+      </TableRow>
+    </div>
   );
 };
 

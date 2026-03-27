@@ -24,44 +24,51 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router";
-import { CategoryItem } from "@docspace/ui-kit/components/category-item";
-import styles from "./LdapMobileView.module.scss";
+@use "@docspace/ui-kit/styles/mixins";
 
-const LdapMobileView = ({ isLdapEnabled, isLDAPAvailable }) => {
-  const { t } = useTranslation(["Ldap", "Settings"]);
-  const navigate = useNavigate();
+.styledWrapper {
+  display: flex;
+  flex-direction: row;
+  padding: 12px;
+  margin-top: 20px;
+  border-radius: 6px;
+  background: var(--sso-toggle-content-bg);
 
-  const onClickLink = (e) => {
-    e.preventDefault();
-    navigate(e.target.pathname);
-  };
+  @include mixins.mobile {
+    margin-bottom: 24px;
+  }
 
-  return (
-    <div className={styles.styledWrapper}>
-      <CategoryItem
-        title={t("Ldap:LdapSettings")}
-        subtitle={t("Ldap:LdapMobileSettingsDescription")}
-        url="/portal-settings/integration/ldap/settings"
-        withPaidBadge={!isLDAPAvailable}
-        badgeLabel={t("Common:Paid")}
-        onClickLink={onClickLink}
-        disabled={!isLdapEnabled}
-        dataTestId="ldap_settings"
-      />
-      <CategoryItem
-        title={t("Ldap:LdapSyncTitle")}
-        subtitle={t("LdapMobileSyncDescription")}
-        url="/portal-settings/integration/ldap/sync-data"
-        withPaidBadge={!isLDAPAvailable}
-        badgeLabel={t("Common:Paid")}
-        onClickLink={onClickLink}
-        disabled={!isLdapEnabled}
-        dataTestId="sync_data"
-      />
-    </div>
-  );
-};
+  :global(.toggle) {
+    position: static;
+    margin-top: 1px;
+  }
 
-export default LdapMobileView;
+  :global(.toggle-caption) {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    :global(.toggle-caption_title) {
+      display: flex;
+
+      :global(.toggle-caption_title_badge) {
+        margin-inline-start: 4px;
+        cursor: auto;
+      }
+    }
+  }
+
+  &.unavailable :global(.settings_unavailable) {
+    color: var(--text-disable-color);
+    pointer-events: none;
+    cursor: default;
+
+    label {
+      color: var(--text-disable-color);
+    }
+
+    path {
+      fill: var(--text-disable-color);
+    }
+  }
+}

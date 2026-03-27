@@ -24,44 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router";
-import { CategoryItem } from "@docspace/ui-kit/components/category-item";
-import styles from "./LdapMobileView.module.scss";
-
-const LdapMobileView = ({ isLdapEnabled, isLDAPAvailable }) => {
-  const { t } = useTranslation(["Ldap", "Settings"]);
-  const navigate = useNavigate();
-
-  const onClickLink = (e) => {
-    e.preventDefault();
-    navigate(e.target.pathname);
-  };
-
-  return (
-    <div className={styles.styledWrapper}>
-      <CategoryItem
-        title={t("Ldap:LdapSettings")}
-        subtitle={t("Ldap:LdapMobileSettingsDescription")}
-        url="/portal-settings/integration/ldap/settings"
-        withPaidBadge={!isLDAPAvailable}
-        badgeLabel={t("Common:Paid")}
-        onClickLink={onClickLink}
-        disabled={!isLdapEnabled}
-        dataTestId="ldap_settings"
-      />
-      <CategoryItem
-        title={t("Ldap:LdapSyncTitle")}
-        subtitle={t("LdapMobileSyncDescription")}
-        url="/portal-settings/integration/ldap/sync-data"
-        withPaidBadge={!isLDAPAvailable}
-        badgeLabel={t("Common:Paid")}
-        onClickLink={onClickLink}
-        disabled={!isLdapEnabled}
-        dataTestId="sync_data"
-      />
-    </div>
-  );
-};
-
-export default LdapMobileView;
+.styledWrapper {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}

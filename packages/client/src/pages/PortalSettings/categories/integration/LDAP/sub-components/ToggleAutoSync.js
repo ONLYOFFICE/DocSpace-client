@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -34,42 +33,7 @@ import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { Badge } from "@docspace/ui-kit/components/badge";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
-import { mobile } from "@docspace/shared/utils";
-import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";
-
-const StyledWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  padding: 12px;
-  margin-top: 20px;
-  border-radius: 6px;
-  background: ${(props) =>
-    props.theme.client.settings.integration.sso.toggleContentBackground};
-
-  @media ${mobile} {
-    margin-bottom: 24px;
-  }
-
-  .toggle {
-    position: static;
-    margin-top: 1px;
-  }
-
-  .toggle-caption {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    .toggle-caption_title {
-      display: flex;
-      .toggle-caption_title_badge {
-        margin-inline-start: 4px;
-        cursor: auto;
-      }
-    }
-  }
-
-  ${(props) => !props.isLdapAvailable && UnavailableStyles}
-`;
+import styles from "./ToggleAutoSync.module.scss";
 
 const ToggleAutoSync = ({
   theme,
@@ -97,8 +61,11 @@ const ToggleAutoSync = ({
     [toggleCron],
   );
 
+  const classNames = [styles.styledWrapper];
+  if (!isLdapAvailable) classNames.push(styles.unavailable);
+
   return (
-    <StyledWrapper isLdapAvailable={isLdapAvailable}>
+    <div className={classNames.join(" ")}>
       <ToggleButton
         className="toggle"
         isChecked={isCronEnabled}
@@ -139,7 +106,7 @@ const ToggleAutoSync = ({
           {t("LdapAutoSyncToggleDescription")}
         </Text>
       </div>
-    </StyledWrapper>
+    </div>
   );
 };
 

@@ -27,6 +27,7 @@
 import React from "react";
 
 import { TableContainer } from "@docspace/ui-kit/components/table";
+import { Paging } from "@docspace/ui-kit/components/paging";
 
 import styles from "./StyledDataImport.module.scss";
 
@@ -75,6 +76,269 @@ export const StyledTableContainer = ({
       className: [styles.styledTableContainer, className]
         .filter(Boolean)
         .join(" "),
+      ...rest,
+    },
+    children,
+  );
+
+export const DescriptionWrapper = ({
+  className,
+  style,
+  children,
+  ...rest
+}: React.HTMLAttributes<HTMLDivElement>) =>
+  React.createElement(
+    "div",
+    {
+      className: [styles.descriptionWrapper, className]
+        .filter(Boolean)
+        .join(" "),
+      style,
+      ...rest,
+    },
+    children,
+  );
+
+export const SelectFileLoader = ({
+  className,
+  style,
+  children,
+  ...rest
+}: React.HTMLAttributes<HTMLDivElement>) =>
+  React.createElement(
+    "div",
+    {
+      className: [styles.selectFileLoader, className]
+        .filter(Boolean)
+        .join(" "),
+      style,
+      ...rest,
+    },
+    children,
+  );
+
+export const DataImportLoader = ({
+  className,
+  style,
+  children,
+  ...rest
+}: React.HTMLAttributes<HTMLDivElement>) =>
+  React.createElement(
+    "div",
+    {
+      className: [styles.dataImportLoader, className]
+        .filter(Boolean)
+        .join(" "),
+      style,
+      ...rest,
+    },
+    children,
+  );
+
+export const SectionWrapper = ({
+  isChecked,
+  className,
+  style,
+  children,
+  ...rest
+}: React.HTMLAttributes<HTMLDivElement> & { isChecked: boolean }) =>
+  React.createElement(
+    "div",
+    {
+      className: [
+        styles.sectionWrapper,
+        !isChecked ? styles.sectionWrapperUnchecked : "",
+        className,
+      ]
+        .filter(Boolean)
+        .join(" "),
+      style,
+      ...rest,
+    },
+    children,
+  );
+
+export const FlexContainer = ({
+  className,
+  style,
+  children,
+  ...rest
+}: React.HTMLAttributes<HTMLDivElement>) =>
+  React.createElement(
+    "div",
+    {
+      className: [styles.flexContainer, className].filter(Boolean).join(" "),
+      style,
+      ...rest,
+    },
+    children,
+  );
+
+export const ImportItemWrapper = ({
+  isChecked,
+  className,
+  style,
+  children,
+  ...rest
+}: React.HTMLAttributes<HTMLDivElement> & { isChecked: boolean }) =>
+  React.createElement(
+    "div",
+    {
+      className: [
+        styles.importItemWrapper,
+        !isChecked ? styles.importItemWrapperUnchecked : "",
+        className,
+      ]
+        .filter(Boolean)
+        .join(" "),
+      style,
+      ...rest,
+    },
+    children,
+  );
+
+export const ArrowWrapper = ({
+  className,
+  style,
+  children,
+  ...rest
+}: React.HTMLAttributes<HTMLDivElement>) =>
+  React.createElement(
+    "div",
+    {
+      className: [styles.arrowWrapper, className].filter(Boolean).join(" "),
+      style,
+      ...rest,
+    },
+    children,
+  );
+
+export const MigrationButtonsWrapper = ({
+  className,
+  style,
+  children,
+  ...rest
+}: React.HTMLAttributes<HTMLDivElement>) =>
+  React.createElement(
+    "div",
+    {
+      className: [styles.migrationButtonsWrapper, className]
+        .filter(Boolean)
+        .join(" "),
+      style,
+      ...rest,
+    },
+    children,
+  );
+
+export const CancelMigrationButton = ({
+  className,
+  style,
+  children,
+  ...rest
+}: React.HTMLAttributes<HTMLSpanElement>) =>
+  React.createElement(
+    "span",
+    {
+      className: [styles.cancelMigrationButton, className]
+        .filter(Boolean)
+        .join(" "),
+      style,
+      ...rest,
+    },
+    children,
+  );
+
+export const StyledPaging = ({
+  className,
+  ...rest
+}: React.ComponentProps<typeof Paging>) =>
+  React.createElement(Paging, {
+    className: [styles.styledPaging, className].filter(Boolean).join(" "),
+    ...rest,
+  });
+
+export const SelectFileWrapper = ({
+  className,
+  style,
+  children,
+  ...rest
+}: React.HTMLAttributes<HTMLDivElement>) =>
+  React.createElement(
+    "div",
+    {
+      className: [styles.selectFileWrapper, className]
+        .filter(Boolean)
+        .join(" "),
+      style,
+      ...rest,
+    },
+    children,
+  );
+
+export const FileUploadContainer = ({
+  className,
+  style,
+  children,
+  ...rest
+}: React.HTMLAttributes<HTMLDivElement>) =>
+  React.createElement(
+    "div",
+    {
+      className: [styles.fileUploadContainer, className]
+        .filter(Boolean)
+        .join(" "),
+      style,
+      ...rest,
+    },
+    children,
+  );
+
+export const ErrorBlock = ({
+  className,
+  style,
+  children,
+  ...rest
+}: React.HTMLAttributes<HTMLDivElement>) =>
+  React.createElement(
+    "div",
+    {
+      className: [styles.errorBlock, className].filter(Boolean).join(" "),
+      style,
+      ...rest,
+    },
+    children,
+  );
+
+export const ImportCompleteWrapper = ({
+  className,
+  style,
+  children,
+  ...rest
+}: React.HTMLAttributes<HTMLDivElement>) =>
+  React.createElement(
+    "div",
+    {
+      className: [styles.importCompleteWrapper, className]
+        .filter(Boolean)
+        .join(" "),
+      style,
+      ...rest,
+    },
+    children,
+  );
+
+export const ImportStepWrapper = ({
+  className,
+  style,
+  children,
+  ...rest
+}: React.HTMLAttributes<HTMLDivElement>) =>
+  React.createElement(
+    "div",
+    {
+      className: [styles.importWrapper, className].filter(Boolean).join(" "),
+      style,
       ...rest,
     },
     children,

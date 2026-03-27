@@ -25,18 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState } from "react";
-import styled from "styled-components";
 
-import { Paging } from "@docspace/ui-kit/components/paging";
 import type { TOption } from "@docspace/ui-kit/components/combobox";
 
 import { AccountsPagingProps } from "../types";
-
-const StyledPaging = styled(Paging)`
-  display: flex;
-  margin-bottom: 30px;
-  align-items: center;
-`;
+import { StyledPaging } from "../StyledDataImport";
 
 const AccountsPaging = (props: AccountsPagingProps) => {
   const { t, numberOfItems, setDataPortion, pagesPerPage = 25 } = props;

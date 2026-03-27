@@ -24,57 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import { tablet } from "@docspace/ui-kit/utils/device";
-
-const StyledLoader = styled.div`
-  padding-inline-end: 8px;
-
-  .header {
-    display: flex;
-    flex-direction: column;
-    max-width: 700px;
-
-    @media ${tablet} {
-      max-width: 675px;
-    }
-  }
-
-  .title {
-    margin-bottom: 20px;
-  }
-
-  .subtitle {
-    margin-bottom: 8px;
-    width: 120px;
-  }
-
-  .description {
-    margin-bottom: 16px;
-  }
-
-  .content {
-    display: flex;
-    flex-direction: column;
-    max-width: 350px;
-
-    .item {
-      margin: 4px 0px 16px;
-    }
-  }
-
-  .buttons {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    max-width: 350px;
-
-    .next {
-      margin-inline-end: 8px;
-    }
-  }
-`;
+import { SelectFileLoader as StyledLoader } from "../StyledDataImport";
 
 const SelectFileLoader = () => {
   return (

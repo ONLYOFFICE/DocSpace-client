@@ -25,68 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
-import { mobile } from "@docspace/ui-kit/utils/device";
-
-import styled from "styled-components";
 import { MigrationButtonsProps } from "../types";
-
-const MigrationButtonsWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 12px;
-
-  margin-bottom: 16px;
-
-  @media ${mobile} {
-    margin-bottom: 0;
-
-    width: 100%;
-
-    position: fixed;
-    inset-inline: 0px;
-    bottom: 0px;
-
-    padding-top: 18px;
-
-    background: ${(props) => props.theme.backgroundColor};
-
-    flex-direction: column-reverse;
-    align-items: flex-start;
-    gap: 0;
-  }
-
-  .migration-buttons {
-    width: fit-content;
-    font-family: Open Sans;
-    font-size: 13px;
-    font-weight: 600;
-    line-height: 15px;
-    text-align: left;
-
-    @media ${mobile} {
-      width: 100%;
-      position: relative;
-      padding: 0;
-    }
-  }
-`;
-
-const CancelMigrationButton = styled.span`
-  font-family: Open Sans;
-  font-size: 13px;
-  font-weight: 600;
-  line-height: 15px;
-
-  cursor: pointer;
-
-  text-decoration-line: underline;
-  text-decoration-style: dashed;
-  text-underline-offset: 0.1em;
-
-  @media ${mobile} {
-    padding: 0 16px;
-  }
-`;
+import {
+  MigrationButtonsWrapper,
+  CancelMigrationButton,
+} from "../StyledDataImport";
 
 export const MigrationButtons = ({
   id,

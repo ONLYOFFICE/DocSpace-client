@@ -26,7 +26,6 @@
 
 import { inject, observer } from "mobx-react";
 import { Trans } from "react-i18next";
-import styled from "styled-components";
 
 import SharedOutlineIcon from "PUBLIC_DIR/images/icons/16/catalog.shared.outline.svg?url";
 import GroupsIcon from "PUBLIC_DIR/images/icons/16/departments.react.svg?url";
@@ -48,12 +47,7 @@ import {
   InjectedImportStepProps,
 } from "../types";
 import { MigrationButtons } from "../sub-components/MigrationButtons";
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-`;
+import { ImportStepWrapper as Wrapper } from "../StyledDataImport";
 
 const ImportStep = (props: ImportStepProps) => {
   const {

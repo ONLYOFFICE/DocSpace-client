@@ -26,66 +26,106 @@
 
 @use "@docspace/ui-kit/styles/mixins";
 
-.uploadIconEnabled {
-  path {
-    stroke: var(--settings-integration-sso-icon-button) !important;
-  }
-}
-
-.uploadIconDisabled {
-  path {
-    stroke: var(--settings-integration-sso-icon-button-disabled) !important;
-  }
-}
-
-.styledWrapper {
+.location {
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
 
-  .uploadInput {
-    width: 340px;
-    display: flex;
-    flex-direction: row;
-    gap: 9px;
-
-    @include mixins.mobile {
-      width: 100%;
-
-      .uploadXmlInput {
-        max-width: 100%;
-      }
-    }
+.locationHeader {
+  .main {
+    width: 100%;
+    max-width: 700px;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--settings-common-description-color);
+    line-height: 20px;
+    margin-bottom: 8px;
   }
 
-  .xmlUploadFile {
-    width: auto;
-
-    :global(.text-input) {
-      display: none;
-    }
-
-    :global(.icon) {
-      position: static;
-    }
-
-    @include mixins.mobile {
-      width: 100%;
-
-      button {
-        width: 100%;
-      }
-    }
-  }
-
-  .uploadButton {
-    height: 32px;
-    width: 45px;
-    overflow: inherit;
-  }
-
-  @include mixins.mobile {
-    flex-direction: column;
-    gap: 8px;
+  .thirdPartyLink {
+    display: inline-block;
+    font-weight: 600;
   }
 }
+
+.locationSubheader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 22px;
+}
+
+.locationForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .formInputs {
+    width: 100%;
+    max-width: 350px;
+
+    @include mixins.mobile {
+      max-width: 100%;
+    }
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    .inputWrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+
+      label {
+        line-height: 20px;
+      }
+
+      :global(.icon-button) {
+        display: none;
+      }
+
+      .passwordInput {
+        :global(.icon-button) {
+          background-color: var(--input-bg);
+          display: block;
+          margin: -5px;
+          padding: 5px;
+        }
+      }
+    }
+
+    .checkbox {
+      margin-top: 4px;
+
+      svg {
+        margin-inline-end: 8px;
+      }
+    }
+
+    :global(.password-field-wrapper) {
+      width: 100%;
+    }
+
+    .groupLabel {
+      display: flex;
+      gap: 4px;
+      line-height: 20px;
+    }
+
+    .labelSubtitle {
+      color: var(--settings-common-description-color);
+    }
+
+    .subtitle {
+      color: var(--settings-integration-text-color);
+      font-size: 12px;
+    }
+  }
+}
+

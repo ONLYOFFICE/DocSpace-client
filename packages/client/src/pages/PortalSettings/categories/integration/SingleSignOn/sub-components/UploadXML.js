@@ -27,7 +27,6 @@
 import UploadIcon from "PUBLIC_DIR/images/actions.upload.react.svg";
 
 import React, { useState } from "react";
-import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -36,19 +35,9 @@ import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { Text } from "@docspace/ui-kit/components/text";
 
 import { FileInput } from "@docspace/ui-kit/components/file-input";
-import { injectDefaultTheme } from "@docspace/shared/utils";
 import SsoTextInput from "./SsoTextInput";
 
 import styles from "./UploadXML.module.scss";
-
-const StyledUploadIcon = styled(UploadIcon).attrs(injectDefaultTheme)`
-  path {
-    stroke: ${(props) =>
-      props.disabled
-        ? props.theme.client.settings.integration.sso.iconButtonDisabled
-        : props.theme.client.settings.integration.sso.iconButton} !important;
-  }
-`;
 
 const UploadXML = (props) => {
   const { t } = useTranslation(["SingleSignOn", "Common"]);
@@ -109,7 +98,15 @@ const UploadXML = (props) => {
 
           <Button
             className={styles.uploadButton}
-            icon={<StyledUploadIcon {...isDisabledProp} />}
+            icon={
+              <UploadIcon
+                className={
+                  isDisabledProp.disabled
+                    ? styles.uploadIconDisabled
+                    : styles.uploadIconEnabled
+                }
+              />
+            }
             isDisabled={
               !enableSso ||
               uploadXmlUrl.trim().length === 0 ||

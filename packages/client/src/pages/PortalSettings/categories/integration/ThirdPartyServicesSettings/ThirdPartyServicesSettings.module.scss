@@ -24,29 +24,71 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
+.rootContainer {
+  box-sizing: border-box;
+  max-width: 700px;
+  width: 100%;
 
-import styles from "./thirdPartyLoader.module.scss";
+  .thirdPartyLink {
+    font-weight: 600;
+  }
 
-const ThirdPartyLoader = () => {
-  const rectangles = new Array(6).fill(0);
+  .thirdPartyBox {
+    margin: 8px 0 20px 0;
+  }
 
-  return (
-    <div className={styles.styledLoader}>
-      <RectangleSkeleton className={styles.description} height="87px" />
-      <RectangleSkeleton className={styles.request} height="162px" />
+  .thirdPartyDescription {
+    line-height: 20px;
+    color: var(--settings-common-description-color);
+  }
 
-      <div className={styles.serviceWrapper}>
-        {rectangles.map((_, index) => (
-          <RectangleSkeleton
-            key={`third-party-loader-${index}`}
-            height="120px"
-            borderRadius="6px"
-          />
-        ))}
-      </div>
-    </div>
-  );
-};
+  .paidBadge {
+    cursor: auto;
+  }
 
-export default ThirdPartyLoader;
+  .consumersListContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(293px, 1fr));
+    gap: 20px;
+  }
+
+  .consumerItemWrapper {
+    box-sizing: border-box;
+    border: var(--settings-integration-separator-border);
+    border-radius: 6px;
+    min-height: 116px;
+    padding-block: 12px 8px;
+    padding-inline: 20px 12px;
+
+    .integrationImage {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -o-user-select: none;
+      user-select: none;
+      -ms-user-select: none;
+      -khtml-user-select: none;
+    }
+  }
+
+  .requestBlock {
+    margin-bottom: 20px;
+    padding: 32px 46px;
+    display: flex;
+    gap: 24px;
+    align-items: center;
+
+    @media (max-width: 882px) {
+      flex-direction: column;
+      align-items: baseline;
+    }
+  }
+
+  .businessPlan {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: -4px;
+  }
+}

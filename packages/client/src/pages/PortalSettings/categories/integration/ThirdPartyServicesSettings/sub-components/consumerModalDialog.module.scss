@@ -24,29 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
+@use "@docspace/ui-kit/styles/mixins";
 
-import styles from "./thirdPartyLoader.module.scss";
+.styledBox {
+  box-sizing: border-box;
+  padding: 20px 0 8px;
 
-const ThirdPartyLoader = () => {
-  const rectangles = new Array(6).fill(0);
-
-  return (
-    <div className={styles.styledLoader}>
-      <RectangleSkeleton className={styles.description} height="87px" />
-      <RectangleSkeleton className={styles.request} height="162px" />
-
-      <div className={styles.serviceWrapper}>
-        {rectangles.map((_, index) => (
-          <RectangleSkeleton
-            key={`third-party-loader-${index}`}
-            height="120px"
-            borderRadius="6px"
-          />
-        ))}
-      </div>
-    </div>
-  );
-};
-
-export default ThirdPartyLoader;
+  @include mixins.mobile {
+    padding-top: 0;
+  }
+}

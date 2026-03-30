@@ -1833,6 +1833,22 @@
 }
 
 .light {
+  --settings-integration-text-color: #{$gray};
+  --settings-integration-separator-border: 1px solid #{$gray-strong};
+  --settings-integration-link-color: #{$link};
+  --settings-integration-sso-icon-button: #{$black};
+  --settings-integration-sso-icon-button-disabled: #{$gray};
+}
+
+.dark {
+  --settings-integration-text-color: #{$gray-dark};
+  --settings-integration-separator-border: 1px solid #{$gray-dark-strong};
+  --settings-integration-link-color: #{$dark-link};
+  --settings-integration-sso-icon-button: #{$white};
+  --settings-integration-sso-icon-button-disabled: #{$black};
+}
+
+.light {
   --settings-common-company-info-border: 1px dashed #{$black};
   --settings-common-company-info-color: #{$gray};
   --settings-common-branding-description-color: #{$light-gray-dark};

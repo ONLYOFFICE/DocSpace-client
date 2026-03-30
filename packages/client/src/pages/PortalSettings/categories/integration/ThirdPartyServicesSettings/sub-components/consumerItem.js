@@ -27,100 +27,12 @@
 import React from "react";
 import { ReactSVG } from "react-svg";
 import PropTypes from "prop-types";
-import styled, { css } from "styled-components";
 import { Text } from "@docspace/ui-kit/components/text";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { thirdpartiesLogo } from "@docspace/shared/utils/image-thirdparties";
-import { injectDefaultTheme } from "@docspace/shared/utils";
 import ConsumerToggle from "./consumerToggle";
 import { Heading } from "@docspace/ui-kit/components";
 
-const StyledItem = styled.div.attrs(injectDefaultTheme)`
-  .consumer-description {
-    ${(props) =>
-      !props.isThirdPartyAvailable &&
-      !props.isSet &&
-      css`
-        color: ${({ theme }) => theme.client.settings.integration.textColor};
-      `}
-  }
-
-  .item-box {
-    box-sizing: border-box;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-  }
-`;
-
-const StyledBox = styled.div.attrs(injectDefaultTheme)`
-  box-sizing: border-box;
-
-  .consumer-title {
-    margin-block: 9px;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 22px;
-    letter-spacing: 0px;
-  }
-
-
-  .consumer-icon {
-    ${({ theme, isLinkedIn, isWeixin, isTelegram }) =>
-      !theme.isBase &&
-      css`
-        path {
-          fill: ${globalColors.white};
-          opacity: 1;
-        }
-
-        ${
-          isLinkedIn &&
-          css`
-          path:nth-child(8),
-          path:nth-child(9) {
-            fill: ${globalColors.black};
-            opacity: 1;
-          }
-        `
-        }
-
-        ${
-          isWeixin &&
-          css`
-          path:nth-child(11),
-          path:nth-child(12),
-          path:nth-child(13),
-          path:nth-child(14) {
-            fill: ${globalColors.black};
-            opacity: 1;
-          }
-        `
-        }
-
-        ${
-          isTelegram &&
-          css`
-          path:nth-child(11),
-          path:nth-child(12) {
-            fill: ${globalColors.black};
-            opacity: 1;
-          }
-        `
-        }
-      `}
-
-    ${({ isThirdPartyAvailable, canSet }) =>
-      !isThirdPartyAvailable &&
-      canSet &&
-      css`
-        path {
-          opacity: 0.5;
-        }
-      `}
-  }
-`;
+import styles from "./consumerItem.module.scss";
 
 const ConsumerItem = ({
   consumer,
@@ -136,25 +48,26 @@ const ConsumerItem = ({
   const saveAvailable = !consumer.paid || standalone || isThirdPartyAvailable; // same logic on backend
 
   const header = logo ? (
-    <ReactSVG src={logo} className="consumer-icon" alt={consumer.name} />
+    <ReactSVG src={logo} className={styles.consumerIcon} alt={consumer.name} />
   ) : consumer.title ? (
-    <Heading className="consumer-title" level={3}>
+    <Heading className={styles.consumerTitle} level={3}>
       {consumer.title}
     </Heading>
   ) : null;
 
+  const itemClassNames = [styles.styledItem];
+  if (!saveAvailable && !isSet) itemClassNames.push(styles.descriptionDisabled);
+
+  const boxClassNames = [styles.styledBox];
+  if (!saveAvailable && consumer.canSet) boxClassNames.push(styles.unavailable);
+  if (consumer.name === "linkedin") boxClassNames.push(styles.linkedin);
+  if (consumer.name === "weixin") boxClassNames.push(styles.weixin);
+  if (consumer.name === "telegram") boxClassNames.push(styles.telegram);
+
   return (
-    <StyledItem isThirdPartyAvailable={saveAvailable} isSet={isSet}>
-      <div className="item-box">
-        <StyledBox
-          canSet={consumer.canSet}
-          isLinkedIn={consumer.name === "linkedin"}
-          isWeixin={consumer.name === "weixin"}
-          isTelegram={consumer.name === "telegram"}
-          isThirdPartyAvailable={saveAvailable}
-        >
-          {header}
-        </StyledBox>
+    <div className={itemClassNames.join(" ")}>
+      <div className={styles.itemBox}>
+        <div className={boxClassNames.join(" ")}>{header}</div>
         <div onClick={setConsumer} data-consumer={consumer.name}>
           <ConsumerToggle
             consumer={consumer}
@@ -167,8 +80,8 @@ const ConsumerItem = ({
         </div>
       </div>
 
-      <Text className="consumer-description">{consumer.description}</Text>
-    </StyledItem>
+      <Text className={styles.consumerDescription}>{consumer.description}</Text>
+    </div>
   );
 };
 

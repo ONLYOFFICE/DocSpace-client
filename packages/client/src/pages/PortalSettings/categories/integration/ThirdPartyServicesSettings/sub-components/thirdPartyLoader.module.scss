@@ -24,29 +24,24 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
+.styledLoader {
+  width: 100%;
 
-import styles from "./thirdPartyLoader.module.scss";
+  .description {
+    max-width: 700px;
+    margin-bottom: 20px;
+  }
 
-const ThirdPartyLoader = () => {
-  const rectangles = new Array(6).fill(0);
+  .request {
+    max-width: 700px;
+    margin-bottom: 20px;
+  }
 
-  return (
-    <div className={styles.styledLoader}>
-      <RectangleSkeleton className={styles.description} height="87px" />
-      <RectangleSkeleton className={styles.request} height="162px" />
-
-      <div className={styles.serviceWrapper}>
-        {rectangles.map((_, index) => (
-          <RectangleSkeleton
-            key={`third-party-loader-${index}`}
-            height="120px"
-            borderRadius="6px"
-          />
-        ))}
-      </div>
-    </div>
-  );
-};
-
-export default ThirdPartyLoader;
+  .serviceWrapper {
+    max-width: 700px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(293px, 1fr));
+    gap: 20px;
+  }
+}

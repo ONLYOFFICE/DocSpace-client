@@ -53,7 +53,11 @@ import {
   getFileEncryptionAccess,
 } from "@docspace/shared/api/files";
 import { getFilePublicKeys } from "@docspace/shared/api/privacy";
-import { encryptionService } from "@docspace/shared/services/encryption";
+import {
+  unwrapDEK,
+  wrapDEK,
+  importPublicKey,
+} from "@docspace/shared/services/encryption/keyManagement";
 import { requestUnlock } from "@docspace/shared/services/encryption/secretStorage";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { getOperationProgress } from "@docspace/shared/utils/getOperationProgress";
@@ -230,36 +234,28 @@ class UploadDataStore {
       const privateKey = await requestUnlock();
       if (!privateKey) return;
 
-      const metadata = {
-        encrypted: true,
-        version: 1,
-        encryptionAlgorithm: "AES-256-GCM",
-        keyEncryptionAlgorithm: "RSA-OAEP-SHA256",
-        iv: "",
-        encryptedAt: new Date().toISOString(),
-        encryptedKeys: existingFileKeys.map((k) => ({
-          userId: k.userId,
-          publicKeyId: k.publicKeyId || "",
-          privateKeyEnc: k.privateKeyEnc,
-        })),
-      };
+      // Unwrap the file DEK using current user's wrapped key
+      const myKey = existingFileKeys.find(
+        (k) => String(k.userId) === String(currentUserId),
+      );
+      if (!myKey) return;
+
+      const dek = await unwrapDEK(myKey.privateKeyEnc, privateKey);
 
       const newKeys = [];
 
-      for (const [userId, { publicKey, keyId }] of publicKeyMap) {
+      for (const [userId, { publicKey: pubKeyBase64, keyId }] of publicKeyMap) {
         try {
-          const newKey = await encryptionService.createKeyForRecipient(
-            metadata,
-            privateKey,
-            currentUserId,
-            publicKey,
+          const memberPubKey = await importPublicKey(pubKeyBase64);
+          const wrappedDEK = await wrapDEK(dek, memberPubKey);
+          newKeys.push({
             userId,
-          );
-          newKey.publicKeyId = keyId;
-          newKeys.push(newKey);
+            publicKeyId: keyId,
+            privateKeyEnc: wrappedDEK,
+          });
         } catch (error) {
           console.error(
-            `[ENCRYPTION] Failed to create key for user ${userId}:`,
+            `[ENCRYPTION] Failed to wrap DEK for user ${userId}:`,
             error,
           );
         }
@@ -1479,30 +1475,32 @@ class UploadDataStore {
       });
 
       const currentFileData = this.files[indexOfFile];
-      if (currentFileData?.encrypted && currentFileData?.encryptionMetadata) {
-        const { publicKeyId } = this.getUserEncryptionKeys();
-        if (currentFileData.encryptionMetadata.encryptedKeys) {
-          const serverKeys =
-            currentFileData.encryptionMetadata.encryptedKeys.map((key) => ({
-              userId: key.userId,
-              publicKeyId: publicKeyId || key.publicKeyId || "",
-              privateKeyEnc: key.privateKeyEnc,
-            }));
+      if (currentFileData?.encrypted && currentFileData?.dek) {
+        const { publicKey, userId, publicKeyId } = this.getUserEncryptionKeys();
 
-          setFileEncryptionKeys(fileId, serverKeys)
-            .then(() => {
-              const { userId } = this.getUserEncryptionKeys();
-              if (userId) {
-                return this.encryptKeysForRoomMembers(fileId, userId);
-              }
-            })
-            .catch((error) => {
-              console.error(
-                "[ENCRYPTION] Failed to set file encryption keys:",
-                error,
-              );
-            });
-        }
+        // Wrap DEK for the uploading user and store via API
+        importPublicKey(publicKey)
+          .then((pubKey) => wrapDEK(currentFileData.dek, pubKey))
+          .then((wrappedDEK) =>
+            setFileEncryptionKeys(fileId, [
+              {
+                userId,
+                publicKeyId: publicKeyId || "",
+                privateKeyEnc: wrappedDEK,
+              },
+            ]),
+          )
+          .then(() => {
+            if (userId) {
+              return this.encryptKeysForRoomMembers(fileId, userId);
+            }
+          })
+          .catch((error) => {
+            console.error(
+              "[ENCRYPTION] Failed to set file encryption keys:",
+              error,
+            );
+          });
       }
 
       if (fileInfo.version > 2) {
@@ -1873,7 +1871,7 @@ class UploadDataStore {
 
     const actualFolderId = isAIRoom ? knowledgeId : toFolderId;
 
-    let encryptionMetadata = null;
+    let uploadDEK = null; // raw DEK for wrapping after upload
     let isEncrypted = file.encrypted || false;
 
     const { publicKey, userId } = this.getUserEncryptionKeys();
@@ -1913,10 +1911,10 @@ class UploadDataStore {
             type: "application/octet-stream",
             lastModified: file.lastModified,
           });
-          encryptionMetadata = prepared.encryptionMetadata;
+          uploadDEK = prepared.dek;
           isEncrypted = true;
 
-          this.files[indexOfFile].encryptionMetadata = encryptionMetadata;
+          this.files[indexOfFile].dek = uploadDEK;
           this.files[indexOfFile].encrypted = true;
         }
       } catch (error) {
@@ -1938,7 +1936,6 @@ class UploadDataStore {
       isEncrypted,
       file.lastModifiedDate,
       createNewIfExist,
-      encryptionMetadata,
     )
       .then((res) => {
         const sessionId = res.id;

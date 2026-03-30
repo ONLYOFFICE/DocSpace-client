@@ -1009,22 +1009,6 @@ class FilesActionStore {
         privateKeyEnc: encryptionKeys[0].privateKeyEnc,
       };
 
-      const metadata = {
-        encrypted: true,
-        version: 1,
-        encryptionAlgorithm: "AES-256-GCM",
-        keyEncryptionAlgorithm: "RSA-OAEP-SHA256",
-        encryptedKeys: [
-          {
-            userId: String(userId),
-            publicKeyId: myFileKey.publicKeyId || "",
-            privateKeyEnc: myFileKey.privateKeyEnc,
-          },
-        ],
-        iv: "", // IV is now extracted from file content during decryption
-        encryptedAt: myFileKey.createOn || new Date().toISOString(),
-      };
-
       setSecondaryProgressBarData({
         operation: OPERATIONS_NAME.download,
         percent: 0,
@@ -1033,7 +1017,7 @@ class FilesActionStore {
 
       const result = await downloadAndDecryptFile(
         downloadUrl,
-        metadata,
+        myFileKey.privateKeyEnc,
         file.title,
         file.contentType || "application/octet-stream",
         userKeys,
@@ -1167,25 +1151,9 @@ class FilesActionStore {
             continue;
           }
 
-          const metadata = {
-            encrypted: true,
-            version: 1,
-            encryptionAlgorithm: "AES-256-GCM",
-            keyEncryptionAlgorithm: "RSA-OAEP-SHA256",
-            encryptedKeys: [
-              {
-                userId: String(userId),
-                publicKeyId: myFileKey.publicKeyId || "",
-                privateKeyEnc: myFileKey.privateKeyEnc,
-              },
-            ],
-            iv: "",
-            encryptedAt: myFileKey.createOn || new Date().toISOString(),
-          };
-
           const result = await downloadAndDecryptFileToBuffer(
             file.viewUrl,
-            metadata,
+            myFileKey.privateKeyEnc,
             fileName,
             file.contentType || "application/octet-stream",
             userKeys,

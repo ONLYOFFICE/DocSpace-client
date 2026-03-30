@@ -204,6 +204,11 @@ async function decryptPrivateKeyExtractable(
   const data = new Uint8Array(base64ToArrayBuffer(encryptedKeyBase64));
   const saltEnd = ENCRYPTION_CONSTANTS.SALT_SIZE;
   const ivEnd = saltEnd + ENCRYPTION_CONSTANTS.AES_GCM_IV_SIZE;
+  const minSize = ivEnd + 16;
+
+  if (data.byteLength < minSize) {
+    throw new InvalidFormatError("encrypted key data too short");
+  }
 
   const salt = data.slice(0, saltEnd);
   const iv = data.slice(saltEnd, ivEnd);

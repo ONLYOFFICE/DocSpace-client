@@ -163,10 +163,9 @@ import {
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 import { showCreatedPDFFormDialog } from "SRC_DIR/components/dialogs/CreatedPDFFormDialog";
 import { getFileEncryptionAccess } from "@docspace/shared/api/files";
-import {
-  requestUnlock,
-  encryptionService,
-} from "@docspace/shared/services/encryption";
+import { requestUnlock } from "@docspace/shared/services/encryption/secretStorage";
+import { decryptFile } from "@docspace/shared/services/encryption/encryptionService";
+import { unwrapDEK } from "@docspace/shared/services/encryption/keyManagement";
 import {
   generateEditSessionId,
   storeEditBuffer,
@@ -791,28 +790,9 @@ class ContextOptionsStore {
 
       const encryptedData = await response.arrayBuffer();
 
-      const metadata = {
-        encrypted: true,
-        version: 1,
-        encryptionAlgorithm: "AES-256-GCM",
-        keyEncryptionAlgorithm: "RSA-OAEP-SHA256",
-        encryptedKeys: [
-          {
-            userId: String(userId),
-            publicKeyId: myFileKey.publicKeyId || "",
-            privateKeyEnc: myFileKey.privateKeyEnc,
-          },
-        ],
-        iv: "",
-        encryptedAt: myFileKey.createOn || new Date().toISOString(),
-      };
-
-      const decryptedBlob = await encryptionService.decryptFile(
-        encryptedData,
-        metadata,
-        privateKey,
-        String(userId),
-      );
+      // Unwrap DEK and decrypt the self-describing DSE3 blob
+      const dek = await unwrapDEK(myFileKey.privateKeyEnc, privateKey);
+      const { data: decryptedBlob } = await decryptFile(encryptedData, dek);
 
       const buffer = await decryptedBlob.arrayBuffer();
       const sessionId = generateEditSessionId(item.id);
@@ -824,7 +804,7 @@ class ContextOptionsStore {
         fileName: item.title,
         fileType: item.contentType || "application/octet-stream",
         userPublicKey: encryptionKeys[0].publicKey,
-        encryptionMetadata: metadata,
+        wrappedDEK: myFileKey.privateKeyEnc,
         userId: String(userId),
         createdAt: Date.now(),
       });

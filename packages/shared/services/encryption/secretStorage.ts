@@ -145,22 +145,29 @@ export const SecretStorageService = {
     }
 
     try {
-      const subtle = globalThis.crypto.subtle;
-      const pkcs8 = await subtle.exportKey("pkcs8", privateKey);
-      const nonExtractableKey = await subtle.importKey(
-        "pkcs8",
-        pkcs8,
-        { name: "ECDH", namedCurve: ENCRYPTION_CONSTANTS.ECDH_CURVE },
-        false, // extractable = false — XSS cannot export raw bytes
-        ["deriveKey", "deriveBits"],
-      );
+      // If the key is already non-extractable (the normal path from
+      // decryptPrivateKey), store it directly. If extractable (from
+      // restorePrivateKey or generateKeyPair), re-import as non-extractable
+      // so XSS cannot call exportKey on the cached handle.
+      let keyToStore = privateKey;
 
-      // Best-effort zeroing of raw key material
-      new Uint8Array(pkcs8).fill(0);
+      if (privateKey.extractable) {
+        const subtle = globalThis.crypto.subtle;
+        const pkcs8 = await subtle.exportKey("pkcs8", privateKey);
+        keyToStore = await subtle.importKey(
+          "pkcs8",
+          pkcs8,
+          { name: "ECDH", namedCurve: ENCRYPTION_CONSTANTS.ECDH_CURVE },
+          false,
+          ["deriveKey", "deriveBits"],
+        );
+        // Best-effort zeroing of raw key material
+        new Uint8Array(pkcs8).fill(0);
+      }
 
       const db = await openDB();
       try {
-        await idbPut(db, PRIVATE_KEY_ID, nonExtractableKey);
+        await idbPut(db, PRIVATE_KEY_ID, keyToStore);
         await idbPut(db, TIMESTAMP_KEY, Date.now());
       } finally {
         db.close();

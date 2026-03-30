@@ -32,7 +32,7 @@
 
 import type { RecoveryBackup } from "./types";
 import { ENCRYPTION_CONSTANTS } from "./types";
-import { InvalidPassphraseError } from "./errors";
+import { InvalidPassphraseError, InvalidFormatError } from "./errors";
 import {
   getCrypto,
   getRandomBytes,
@@ -155,7 +155,7 @@ export async function backupPrivateKey(
 
   const passphraseKey = await subtle.importKey(
     "raw",
-    new TextEncoder().encode(mnemonic),
+    new TextEncoder().encode(mnemonic.normalize("NFKD")),
     "PBKDF2",
     false,
     ["deriveKey"],
@@ -196,7 +196,7 @@ export async function restorePrivateKey(
   mnemonic: string,
 ): Promise<CryptoKey> {
   if (backup.version !== 1 || backup.type !== "docspace-recovery-backup") {
-    throw new Error("Invalid recovery backup format");
+    throw new InvalidFormatError("invalid recovery backup format");
   }
 
   const subtle = getCrypto();
@@ -204,6 +204,11 @@ export async function restorePrivateKey(
 
   const saltEnd = C.SALT_SIZE;
   const ivEnd = saltEnd + C.AES_GCM_IV_SIZE;
+  const minSize = ivEnd + 16; // salt + IV + at least GCM tag
+
+  if (raw.byteLength < minSize) {
+    throw new InvalidFormatError("recovery backup data too short");
+  }
 
   const salt = raw.slice(0, saltEnd);
   const iv = raw.slice(saltEnd, ivEnd);
@@ -211,7 +216,7 @@ export async function restorePrivateKey(
 
   const passphraseKey = await subtle.importKey(
     "raw",
-    new TextEncoder().encode(mnemonic),
+    new TextEncoder().encode(mnemonic.normalize("NFKD")),
     "PBKDF2",
     false,
     ["deriveKey"],

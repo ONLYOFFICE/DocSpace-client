@@ -3049,11 +3049,11 @@ class FilesStore {
         fileOptions = removeOptions(fileOptions, [
           "open",
           "link-for-room-members",
-          // "link-for-portal-users",
-          // "external-link",
           "send-by-email",
           "mark-as-favorite",
         ]);
+        fileOptions.push("download-encrypted");
+        fileOptions.push("edit-encrypted");
       }
 
       // if (isFavoritesFolder || isRecentFolder) {

@@ -49,11 +49,6 @@ export type PreparedUpload = {
 
 const ENCRYPTABLE_ROOM_TYPES: RoomsType[] = [RoomsType.CustomRoom];
 
-function obfuscateFileName(name: string): string {
-  const ext = name.includes(".") ? name.slice(name.lastIndexOf(".")) : "";
-  return `${crypto.randomUUID()}${ext}`;
-}
-
 export function isEncryptableRoomType(roomType: RoomsType): boolean {
   return ENCRYPTABLE_ROOM_TYPES.includes(roomType);
 }

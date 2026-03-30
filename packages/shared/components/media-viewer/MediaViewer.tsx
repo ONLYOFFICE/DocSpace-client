@@ -425,8 +425,8 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
 
       try {
         const encryptionInfo = await getFileEncryptionAccess(fileId);
-        const userFileKey = (encryptionInfo as any).fileKeys?.find(
-          (k: any) => k.userId === userId || k.userId === String(userId),
+        const userFileKey = encryptionInfo.fileKeys?.find(
+          (k) => k.userId === userId || k.userId === String(userId),
         );
 
         if (!userFileKey) {

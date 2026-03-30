@@ -28,14 +28,14 @@ import { TCreatedBy } from "../types";
 import { TRoom, TRoomLifetime, TWatermark } from "../api/rooms/types";
 import { TConnectingStorage } from "../api/files/types";
 
-import { RoomsType } from "../enums";
+import { RoomsType, RoomsTypePrivate } from "../enums";
 
 const getStartRoomParams = (startRoomType: RoomsType, title: string) => {
   const startRoomParams = {
     type: startRoomType,
     title: title ?? "",
     tags: [],
-    isPrivate: startRoomType === RoomsType.Private,
+    isPrivate: startRoomType === RoomsTypePrivate,
     storageLocation: {
       isThirdparty: false,
       provider: null,
@@ -138,7 +138,7 @@ const getFetchedRoomParams = (
       providerKey: item.providerKey,
       iconSrc: getThirdPartyIcon(item.providerKey || ""),
     },
-    isPrivate: item.roomType === RoomsType.Private,
+    isPrivate: item.roomType === RoomsTypePrivate,
     icon: {
       uploadedFile: item?.logo?.original,
       tmpFile: "",

@@ -27,10 +27,10 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/shared/components/text";
-import { Badge } from "@docspace/shared/components/badge";
-import { IconButton } from "@docspace/shared/components/icon-button";
-import { globalColors } from "@docspace/shared/themes";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Badge } from "@docspace/ui-kit/components/badge";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";

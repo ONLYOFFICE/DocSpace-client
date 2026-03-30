@@ -33,11 +33,14 @@ import React, {
 } from "react";
 import { useTranslation } from "react-i18next";
 
-import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
-import { Button, ButtonSize } from "../../components/button";
-import { Text } from "../../components/text";
-import { PasswordInput } from "../../components/password-input";
-import { InputSize } from "../../components/text-input";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/ui-kit/components/modal-dialog";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { PasswordInput } from "@docspace/ui-kit/components/password-input";
+import { InputSize } from "@docspace/ui-kit/components/text-input";
 
 import type {
   PassphraseDialogProps,

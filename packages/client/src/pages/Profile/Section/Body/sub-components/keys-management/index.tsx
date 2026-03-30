@@ -28,8 +28,8 @@ import React, { useState, useCallback, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { toastr } from "@docspace/shared/components/toast";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import {
   generateRSAKeyPair,

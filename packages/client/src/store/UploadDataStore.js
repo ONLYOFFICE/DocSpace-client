@@ -1482,26 +1482,26 @@ class UploadDataStore {
       if (currentFileData?.encrypted && currentFileData?.encryptionMetadata) {
         const { publicKeyId } = this.getUserEncryptionKeys();
         if (currentFileData.encryptionMetadata.encryptedKeys) {
-          try {
-            const serverKeys =
-              currentFileData.encryptionMetadata.encryptedKeys.map((key) => ({
-                userId: key.userId,
-                publicKeyId: publicKeyId || key.publicKeyId || "",
-                privateKeyEnc: key.privateKeyEnc,
-              }));
+          const serverKeys =
+            currentFileData.encryptionMetadata.encryptedKeys.map((key) => ({
+              userId: key.userId,
+              publicKeyId: publicKeyId || key.publicKeyId || "",
+              privateKeyEnc: key.privateKeyEnc,
+            }));
 
-            await setFileEncryptionKeys(fileId, serverKeys);
-
-            const { userId } = this.getUserEncryptionKeys();
-            if (userId) {
-              await this.encryptKeysForRoomMembers(fileId, userId);
-            }
-          } catch (error) {
-            console.error(
-              "[ENCRYPTION] Failed to set file encryption keys:",
-              error,
-            );
-          }
+          setFileEncryptionKeys(fileId, serverKeys)
+            .then(() => {
+              const { userId } = this.getUserEncryptionKeys();
+              if (userId) {
+                return this.encryptKeysForRoomMembers(fileId, userId);
+              }
+            })
+            .catch((error) => {
+              console.error(
+                "[ENCRYPTION] Failed to set file encryption keys:",
+                error,
+              );
+            });
         }
       }
 
@@ -1833,7 +1833,7 @@ class UploadDataStore {
     this.parallelUploading(notUploadedFiles, t, createNewIfExist);
   };
 
-  startSessionFunc = (indexOfFile, t, createNewIfExist = true) => {
+  startSessionFunc = async (indexOfFile, t, createNewIfExist = true) => {
     const { isAIRoom } = this.selectedFolderStore;
     const { knowledgeId } = this.aiRoomStore;
     if (!this.uploaded && this.files.length === 0) {

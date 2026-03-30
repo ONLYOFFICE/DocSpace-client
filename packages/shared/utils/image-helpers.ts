@@ -142,6 +142,7 @@ const iconsMap: Record<IconNames, string[]> = {
   [IconNames.PublicRoom]: ["publicRoom"],
   [IconNames.VirtualRoom]: ["virtualRoom"],
   [IconNames.ArchiveRoom]: ["archiveRoom"],
+  [IconNames.PrivateRoom]: ["privateRoom"],
 };
 
 const createIconEntries = (icons: Record<string, string[]>) => {

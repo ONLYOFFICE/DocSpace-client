@@ -24,29 +24,24 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";
+.styledLoader {
+  .submenu {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
 
-import styles from "./ssoLoader.module.scss";
+    .item {
+      width: 72px;
+    }
+  }
 
-const SSOLoader = (props) => {
-  const { isToggleSSO } = props;
-  return (
-    <div className={styles.styledLoader}>
-      {!isToggleSSO ? (
-        <div className={styles.submenu}>
-          <RectangleSkeleton className={styles.item} height="28px" />
-          <RectangleSkeleton className={styles.item} height="28px" />
-        </div>
-      ) : null}
-      <RectangleSkeleton className={styles.description} height="60px" />
-      <RectangleSkeleton height="64px" />
+  .description {
+    max-width: 700px;
+    margin-bottom: 20px;
+  }
 
-      <RectangleSkeleton className={styles.category} height="22px" />
-      <StyledSettingsSeparator />
-      <RectangleSkeleton className={styles.category} height="22px" />
-    </div>
-  );
-};
-
-export default SSOLoader;
+  .category {
+    margin-top: 24px;
+    width: 238px;
+  }
+}

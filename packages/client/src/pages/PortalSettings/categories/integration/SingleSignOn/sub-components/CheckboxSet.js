@@ -24,11 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+
+import styles from "./CheckboxSet.module.scss";
 
 const checkboxesNames = {
 	idp: [
@@ -62,14 +63,6 @@ const checkboxesDataTestId = {
 	},
 };
 
-const StyledWrapper = styled.div`
-  margin: 16px 0;
-  .checkbox-input {
-    margin-block: 10px 6px;
-    margin-inline: 0 8px;
-  }
-`;
-
 const CheckboxSet = (props) => {
 	const { t } = useTranslation("SingleSignOn");
 	const {
@@ -91,14 +84,14 @@ const CheckboxSet = (props) => {
 		prefix === "sp" ? isDisabledSpSigning : isDisabledIdpSigning;
 
 	return (
-		<StyledWrapper>
+		<div className={styles.styledWrapper}>
 			<Checkbox
 				id={
 					prefix === "idp"
 						? "idp-verify-auth-responses-sign"
 						: "sp-sign-auth-requests"
 				}
-				className="checkbox-input"
+				className={styles.checkboxInput}
 				isDisabled={isDisabled}
 				onChange={setCheckbox}
 				label={prefix === "idp" ? t("idpAuthRequest") : t("spAuthRequest")}
@@ -115,7 +108,7 @@ const CheckboxSet = (props) => {
 						? "idp-verify-logout-requests-sign"
 						: "sp-sign-logout-requests"
 				}
-				className="checkbox-input"
+				className={styles.checkboxInput}
 				isDisabled={isDisabled}
 				onChange={setCheckbox}
 				label={
@@ -134,7 +127,7 @@ const CheckboxSet = (props) => {
 						? "idp-verify-logout-responses-sign"
 						: "sp-sign-logout-responses"
 				}
-				className="checkbox-input"
+				className={styles.checkboxInput}
 				isDisabled={isDisabled}
 				onChange={setCheckbox}
 				label={
@@ -155,7 +148,7 @@ const CheckboxSet = (props) => {
 			{prefix === "sp" ? (
 				<Checkbox
 					id="sp-encrypt-assertions"
-					className="checkbox-input"
+					className={styles.checkboxInput}
 					isDisabled={isDisabledSpEncrypt}
 					onChange={setCheckbox}
 					label={t("spDecryptStatements")}
@@ -165,7 +158,7 @@ const CheckboxSet = (props) => {
 					dataTestId={checkboxesDataTestId.encryptAssertionCheckbox[prefix]}
 				/>
 			) : null}
-		</StyledWrapper>
+		</div>
 	);
 };
 

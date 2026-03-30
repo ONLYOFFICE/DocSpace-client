@@ -25,8 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled from "styled-components";
 import { inject, observer } from "mobx-react";
+
+import styles from "./Certificates.module.scss";
 import { useTranslation } from "react-i18next";
 
 import { Button } from "@docspace/ui-kit/components/button";
@@ -45,26 +46,6 @@ import {
   verifyAlgorithmsOptions,
 } from "./sub-components/constants";
 
-const StyledWrapper = styled.div`
-  .icon-button {
-    padding: 0 5px;
-  }
-
-  .certificates-box {
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin: 40px 0 12px 0;
-  }
-
-  .certificates-buttons-box {
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-  }
-`;
 
 const Certificates = (props) => {
   const { t } = useTranslation("SingleSignOn");
@@ -106,8 +87,8 @@ const Certificates = (props) => {
   }
 
   return (
-    <StyledWrapper>
-      <div className="certificates-box">
+    <div className={styles.styledWrapper}>
+      <div className={styles.certificatesBox}>
         <Text as="h2" fontSize="15px" fontWeight={600}>
           {prefix === "idp" ? t("idpCertificates") : t("spCertificates")}
         </Text>
@@ -136,7 +117,7 @@ const Certificates = (props) => {
 
       {certificates.length > 0 ? <CertificatesTable prefix={prefix} /> : null}
 
-      <div className="certificates-buttons-box">
+      <div className={styles.certificatesButtonsBox}>
         {prefix === "idp" ? (
           <>
             <Button
@@ -225,7 +206,7 @@ const Certificates = (props) => {
           ) : null}
         </>
       ) : null}
-    </StyledWrapper>
+    </div>
   );
 };
 

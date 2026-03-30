@@ -24,29 +24,56 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";
+@use "@docspace/ui-kit/styles/mixins";
 
-import styles from "./ssoLoader.module.scss";
+.styledWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 
-const SSOLoader = (props) => {
-  const { isToggleSSO } = props;
-  return (
-    <div className={styles.styledLoader}>
-      {!isToggleSSO ? (
-        <div className={styles.submenu}>
-          <RectangleSkeleton className={styles.item} height="28px" />
-          <RectangleSkeleton className={styles.item} height="28px" />
-        </div>
-      ) : null}
-      <RectangleSkeleton className={styles.description} height="60px" />
-      <RectangleSkeleton height="64px" />
+  .uploadInput {
+    width: 340px;
+    display: flex;
+    flex-direction: row;
+    gap: 9px;
 
-      <RectangleSkeleton className={styles.category} height="22px" />
-      <StyledSettingsSeparator />
-      <RectangleSkeleton className={styles.category} height="22px" />
-    </div>
-  );
-};
+    @include mixins.mobile {
+      width: 100%;
 
-export default SSOLoader;
+      .uploadXmlInput {
+        max-width: 100%;
+      }
+    }
+  }
+
+  .xmlUploadFile {
+    width: auto;
+
+    :global(.text-input) {
+      display: none;
+    }
+
+    :global(.icon) {
+      position: static;
+    }
+
+    @include mixins.mobile {
+      width: 100%;
+
+      button {
+        width: 100%;
+      }
+    }
+  }
+
+  .uploadButton {
+    height: 32px;
+    width: 45px;
+    overflow: inherit;
+  }
+
+  @include mixins.mobile {
+    flex-direction: column;
+    gap: 8px;
+  }
+}

@@ -3,7 +3,7 @@
   "content": "activation required",
   "content_en_sha1_hash": "76f386238b282abadda4b1e1fbd6696b1704ebc9",
   "created_at": "2025-05-26T07:15:40.182Z",
-  "updated_at": "2025-11-03T12:10:34.984Z",
+  "updated_at": "2026-03-26T08:26:58.002Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that activation is required. It appears as an overlay or tooltip when a third-party storage provider is not connected or requires activation. Translators should update this text to match the context of their language.",
     "is_auto": true,
@@ -14,6 +14,24 @@
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/ThirdPartyStorage/ThirdPartyComboBox.tsx",
       "line_number": 296,
       "context": "})\n ?.map((item) => {\n const disabled = !item.isConnected && !isAdmin;\n const itemLabel =\n item.title +\n (item.isConnected ? \"\" : ` (${t(\"Common:ActivationRequired\")})`);\n \n const disabledData = disabled\n ? { \"data-tooltip-id\": \"file-links-tooltip\", \"data-tip\": \"tooltip\" }\n : {};",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/knowledge/index.tsx",
+      "line_number": 178,
+      "context": "if (hasSystemProvider) {\n options.push({\n key: KnowledgeType.PortalAi,\n label: isSystemProviderDisabled\n ? `ONLYOFFICE AI (${t(\"Common:ActivationRequired\")})`\n : \"ONLYOFFICE AI\",\n disabled: isSystemProviderDisabled,\n withExternalLink: isSystemProviderDisabled,\n externalLinkPath: isSystemProviderDisabled\n ? \"/portal-settings/payments/services\"",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/DefaultProvider.tsx",
+      "line_number": 176,
+      "context": "p.type === ProviderType.PortalAi && !aiConfig?.systemAiEnabled;\n \n return {\n key: p.id,\n label: isProviderDisabled\n ? `${p.title} (${t(\"Common:ActivationRequired\")})`\n : p.title,\n disabled: isProviderDisabled,\n withExternalLink: isProviderDisabled,\n externalLinkPath: isProviderDisabled\n ? \"/portal-settings/payments/services\"",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/index.tsx",
+      "line_number": 147,
+      "context": "if (hasSystemProvider) {\n options.push({\n key: WebSearchType.PortalAi,\n label: isSystemProviderDisabled\n ? `ONLYOFFICE AI (${t(\"Common:ActivationRequired\")})`\n : \"ONLYOFFICE AI\",\n disabled: isSystemProviderDisabled,\n withExternalLink: isSystemProviderDisabled,\n externalLinkPath: isSystemProviderDisabled\n ? \"/portal-settings/payments/services\"",
       "module": "/packages/client"
     },
     {

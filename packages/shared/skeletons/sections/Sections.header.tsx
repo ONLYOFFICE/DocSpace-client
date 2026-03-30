@@ -26,64 +26,64 @@
 
 import React from "react";
 
-import { RectangleSkeleton } from "../rectangle";
+import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 
 import styles from "./Sections.module.scss";
 import type { SectionHeaderSkeloton } from "./Sections.types";
 
 export const SectionHeaderSkeleton = ({
-  id,
-  className,
-  style,
-  ...rest
+	id,
+	className,
+	style,
+	...rest
 }: SectionHeaderSkeloton) => {
-  const {
-    title,
-    borderRadius,
-    backgroundColor,
-    foregroundColor,
-    backgroundOpacity,
-    foregroundOpacity,
-    speed,
-    animate,
-  } = rest;
+	const {
+		title,
+		borderRadius,
+		backgroundColor,
+		foregroundColor,
+		backgroundOpacity,
+		foregroundOpacity,
+		speed,
+		animate,
+	} = rest;
 
-  return (
-    <div
-      id={id}
-      className={`${className || ""} ${styles.headerContainer}`}
-      style={style}
-      data-testid="section-header-skeleton"
-    >
-      <div className={styles.headerBox1} data-testid="header-box-1">
-        <RectangleSkeleton
-          title={title}
-          width="100%"
-          height="100%"
-          borderRadius={borderRadius}
-          backgroundColor={backgroundColor}
-          foregroundColor={foregroundColor}
-          backgroundOpacity={backgroundOpacity}
-          foregroundOpacity={foregroundOpacity}
-          speed={speed}
-          animate={animate}
-        />
-      </div>
-      <div className={styles.headerSpacer} data-testid="header-spacer" />
-      <div className={styles.headerBox2} data-testid="header-box-2">
-        <RectangleSkeleton
-          title={title}
-          width="17"
-          height="17"
-          borderRadius={borderRadius}
-          backgroundColor={backgroundColor}
-          foregroundColor={foregroundColor}
-          backgroundOpacity={backgroundOpacity}
-          foregroundOpacity={foregroundOpacity}
-          speed={speed}
-          animate={animate}
-        />
-      </div>
-    </div>
-  );
+	return (
+		<div
+			id={id}
+			className={`${className || ""} ${styles.headerContainer}`}
+			style={style}
+			data-testid="section-header-skeleton"
+		>
+			<div className={styles.headerBox1} data-testid="header-box-1">
+				<RectangleSkeleton
+					title={title}
+					width="100%"
+					height="100%"
+					borderRadius={borderRadius}
+					backgroundColor={backgroundColor}
+					foregroundColor={foregroundColor}
+					backgroundOpacity={backgroundOpacity}
+					foregroundOpacity={foregroundOpacity}
+					speed={speed}
+					animate={animate}
+				/>
+			</div>
+			<div className={styles.headerSpacer} data-testid="header-spacer" />
+			<div className={styles.headerBox2} data-testid="header-box-2">
+				<RectangleSkeleton
+					title={title}
+					width="17"
+					height="17"
+					borderRadius={borderRadius}
+					backgroundColor={backgroundColor}
+					foregroundColor={foregroundColor}
+					backgroundOpacity={backgroundOpacity}
+					foregroundOpacity={foregroundOpacity}
+					speed={speed}
+					animate={animate}
+				/>
+			</div>
+		</div>
+	);
 };

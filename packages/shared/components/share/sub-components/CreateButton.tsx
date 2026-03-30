@@ -29,29 +29,29 @@ import classNames from "classnames";
 
 import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
 
-import { IconButton } from "../../icon-button";
-import { Link } from "../../link";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { Link } from "@docspace/ui-kit/components/link";
 
 import styles from "../Share.module.scss";
 
 interface CreateButtonProps {
-  onClick: () => void;
-  title: string;
+	onClick: () => void;
+	title: string;
 }
 
 export const CreateButton: FC<CreateButtonProps> = ({ onClick, title }) => {
-  return (
-    <div
-      onClick={onClick}
-      className={classNames(styles.linkRow, styles.createButton)}
-      data-testid="info_panel_share_create_and_copy_link"
-    >
-      <div className={styles.square}>
-        <IconButton size={12} iconName={PlusIcon} isDisabled />
-      </div>
-      <Link className={styles.createAndCopyLink} noHover fontWeight={600}>
-        {title}
-      </Link>
-    </div>
-  );
+	return (
+		<div
+			onClick={onClick}
+			className={classNames(styles.linkRow, styles.createButton)}
+			data-testid="info_panel_share_create_and_copy_link"
+		>
+			<div className={styles.square}>
+				<IconButton size={12} iconName={PlusIcon} isDisabled />
+			</div>
+			<Link className={styles.createAndCopyLink} noHover fontWeight={600}>
+				{title}
+			</Link>
+		</div>
+	);
 };

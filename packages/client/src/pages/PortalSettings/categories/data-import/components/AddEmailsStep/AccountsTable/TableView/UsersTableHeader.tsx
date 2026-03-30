@@ -27,7 +27,7 @@
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 
-import { TableHeader, TTableColumn } from "@docspace/shared/components/table";
+import { TableHeader, TTableColumn } from "@docspace/ui-kit/components/table";
 
 import { UsersTableHeaderProps } from "../../../../types";
 

@@ -6,7 +6,8 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import { ValidationStatus } from "@docspace/shared/enums";
 import { PublicRoomPasswordForm } from "@docspace/shared/pages/PublicRoom";
-import useFilesSettings from "@docspace/shared/selectors/utils/hooks/useFilesSettings";
+import useFilesSettings from "@docspace/ui-kit/selectors/utils/hooks/useFilesSettings";
+import type { FilesSettingsDto } from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
 
 import PublicPreviewViewer from "./PublicPreview.viewer";
 import type { PublicPreviewLoaderProps } from "./PublicPreview.types";
@@ -17,16 +18,26 @@ export const PublicPreview = () => {
   const { validateData, key, settings } =
     useLoaderData<PublicPreviewLoaderProps>();
 
-  const { getIcon } = useFilesSettings(undefined, settings);
+  const { getIcon } = useFilesSettings(
+    undefined,
+    settings as unknown as FilesSettingsDto,
+  );
 
   const onSuccessValidation = () => {
     revalidator.revalidate();
   };
 
+  const getIconString = (size: number, fileExst: string) => {
+    const icon = getIcon(fileExst, size);
+    return typeof icon === "string" ? icon : "";
+  };
+
+  const getIconByExst = (fileExst: string) => getIconString(32, fileExst);
+
   return match(validateData?.status)
     .with(ValidationStatus.Ok, () => (
       <PublicPreviewViewer
-        getIcon={(size: number, fileExst: string) => getIcon(fileExst, size)}
+        getIcon={getIconString}
         extsImagePreviewed={settings.extsImagePreviewed}
       />
     ))
@@ -46,7 +57,7 @@ export const PublicPreview = () => {
       <PublicRoomPasswordForm
         t={t}
         roomKey={key}
-        getIcon={getIcon}
+        getIcon={getIconByExst}
         validationData={validateData}
         onSuccessValidationCallback={onSuccessValidation}
       />

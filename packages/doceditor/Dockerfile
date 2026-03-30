@@ -9,7 +9,7 @@ RUN apt-get -y update && \
     apt-get install -yq
     
 # Install PNPM
-RUN npm install -g pnpm@10.28.0
+RUN npm install -g pnpm@10.28.2
 
 WORKDIR /app
 
@@ -24,6 +24,8 @@ COPY common/ ./common/
 COPY packages/doceditor/ ./packages/doceditor/
 COPY packages/shared/ ./packages/shared/
 COPY public/ ./public/
+COPY libs/ui-kit/ ./libs/ui-kit/
+
 
 # ENV NODE_OPTIONS="--max-old-space-size=8192"
 
@@ -35,9 +37,6 @@ RUN npm uninstall -g playwright playwright-core @playwright/test
 
 # Install Playwright browsers directly from the project's dependency
 RUN cd /app/packages/doceditor && pnpm exec playwright install --with-deps chromium
-
-# Run before-build script (packages/runtime.json)
-RUN pnpm run before-build
 
 # Run build:translations
 RUN pnpm --filter @docspace/doceditor run build:translations

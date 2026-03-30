@@ -33,7 +33,10 @@ import { areEqual, FixedSizeList as List } from "react-window";
 import { RowLoader } from "../../../../skeletons/selector";
 import { ASIDE_PADDING_AFTER_LAST_ITEM } from "../../../../constants";
 import { TGroupMemberInvitedInRoom } from "../../../../api/groups/types";
-import { Scrollbar, ScrollbarProps } from "../../../../components/scrollbar";
+import {
+  Scrollbar,
+  ScrollbarProps,
+} from "@docspace/ui-kit/components/scrollbar";
 
 import GroupMember from "../GroupMember";
 
@@ -111,7 +114,7 @@ const GroupMembersList = ({
             <List
               className="list-scroll"
               ref={ref}
-              direction={interfaceDirection}
+              direction={interfaceDirection as "ltr" | "rtl"}
               height={height - SEARCH_WITH_PADDING_HEIGHT}
               width={width}
               itemCount={itemCount}

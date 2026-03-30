@@ -28,8 +28,8 @@ import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
 
 import { DeviceType } from "@docspace/shared/enums";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import useDeviceType from "@/hooks/useDeviceType";
 import { useStores } from "@/hooks/useStores";

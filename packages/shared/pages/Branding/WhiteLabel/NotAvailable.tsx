@@ -30,7 +30,7 @@ import React from "react";
 import { ReactSVG } from "react-svg";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "../../../components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import styles from "./WhiteLabel.module.scss";
 

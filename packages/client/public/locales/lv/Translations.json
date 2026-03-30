@@ -12,7 +12,6 @@
   "FolderTitleSkyDrive": "OneDrive direktorijs",
   "FolderTitleWebDav": "WebDAV direktorijs",
   "FolderTitleYandex": "Yandex direktorijs",
-  "LinkValidTime": "Šī saite ir derīga tikai {{days_count}} dienu (-as).",
   "NewForm": "PDF veidlapa",
   "OwnerChange": "Mainīt īpašnieku",
   "RoleGuestDescriprion": "Viesi var piekļūt telpām, uz kurām viņi ir uzaicināti, kā arī izveidot un rediģēt dokumentus, ja viņiem ir piešķirtas atbilstošas lomas telpā.",
@@ -22,7 +21,5 @@
   "SubNewFormFile": "No teksta faila",
   "ThirdPartyInfo": "Mainīt trešās puses informāciju",
   "ThirdPartyTitle": "Trešo pušu pakalpojumi",
-  "TitleShowActions": "Rādīt failu darbības",
-  "TitleShowFolderActions": "Rādīt mapes darbības",
   "TrashItemsDeleteSuccess": "Izvēlētie elementi veiksmīgi dzēsti no {{sectionName}}"
 }

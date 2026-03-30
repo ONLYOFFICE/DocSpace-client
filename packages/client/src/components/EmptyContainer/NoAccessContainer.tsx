@@ -40,9 +40,9 @@ import { EmptyView } from "@docspace/shared/components/empty-view";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "@docspace/shared/constants";
-import { TTheme } from "@docspace/shared/themes";
+import { TTheme } from "@docspace/ui-kit/providers/theme/themes";
 import { TTranslation } from "@docspace/shared/types";
-import { EmptyViewProps } from "@docspace/shared/components/empty-view/EmptyView.types";
+import { EmptyViewProps } from "@docspace/ui-kit/components/empty-view";
 
 export enum NoAccessContainerType {
   Room,

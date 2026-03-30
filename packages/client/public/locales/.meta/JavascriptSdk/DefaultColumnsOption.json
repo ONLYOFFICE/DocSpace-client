@@ -3,7 +3,7 @@
   "content": "Default (Quantity depends on screen width)",
   "content_en_sha1_hash": "c9cffe920b3fe39998cc9c0a0c4b442c111c6746",
   "created_at": "2025-05-19T21:30:54.447Z",
-  "updated_at": "2025-08-04T07:30:01.393Z",
+  "updated_at": "2026-03-20T09:07:45.593Z",
   "comment": {
     "text": "This translation key is used to display a label for a preset option that controls the quantity of columns displayed based on screen width. It appears in a dropdown menu or button, likely within settings or configuration pages, where users can select from predefined options.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 119,
+      "line_number": 136,
       "context": "];\n \n const columnDisplayOptions = [\n {\n value: \"default\",\n label: t(\"DefaultColumnsOption\"),\n dataTestId: \"default_radio_button\",\n },\n { value: \"custom\", label: t(\"SetItUp\"), dataTestId: \"custom_radio_button\" },\n ];",
       "module": "/packages/client"
     }

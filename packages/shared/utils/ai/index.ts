@@ -27,6 +27,5 @@
  */
 
 export { getAiProviderIcon } from "./getAiProviderIcon";
-export { getServerIcon } from "./getServerIcon";
+export { getServerIconUrl } from "./getServerIconUrl";
 export { getAiProviderLabel } from "./getAiProviderLabel";
-export { getAiModelName } from "./getAiModelName";

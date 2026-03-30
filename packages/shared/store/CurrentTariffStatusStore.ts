@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { makeAutoObservable, runInAction } from "mobx";
-import moment from "moment-timezone";
 import axios from "axios";
 
 import api from "../api";
@@ -36,6 +35,14 @@ import { PaymentMethodStatus, QuotaState, TariffState } from "../enums";
 import { TCustomerInfo, TPortalTariff, TQuotas } from "../api/portal/types";
 import { isValidDate } from "../utils";
 import { getDaysLeft, getDaysRemaining } from "../utils/common";
+import {
+  parseToDateTime,
+  dateDiff,
+  formatDateLocalized,
+  getAppTimezone,
+  isAfter,
+  now,
+} from "@docspace/ui-kit/utils/date";
 import { Nullable } from "../types";
 import { UserStore } from "./UserStore";
 import { SettingsStore } from "./SettingsStore";
@@ -142,17 +149,18 @@ class CurrentTariffStatusStore {
   get storageExpiryDate() {
     if (!this.storageSubscriptionExpiryDate) return "";
 
-    return moment(this.storageSubscriptionExpiryDate)
-      .tz(window.timezone)
-      .format("LL");
+    return formatDateLocalized(this.storageSubscriptionExpiryDate, "DATE_FULL", {
+      locale: this.language,
+      timezone: getAppTimezone(),
+    });
   }
 
   get daysUntilStorageExpiry() {
     if (!this.storageSubscriptionExpiryDate) return 0;
 
-    const today = moment();
-    const dueDate = moment(this.storageSubscriptionExpiryDate);
-    return dueDate.diff(today, "days");
+    return Math.floor(
+      dateDiff(this.storageSubscriptionExpiryDate, now(), "days"),
+    );
   }
 
   get delayDueDate() {
@@ -174,10 +182,12 @@ class CurrentTariffStatusStore {
   }
 
   get paymentDate() {
-    moment.locale(this.language);
     if (this.dueDate === null) return "";
 
-    return moment(this.dueDate).tz(window.timezone).format("LL");
+    return formatDateLocalized(this.dueDate, "DATE_FULL", {
+      locale: this.language,
+      timezone: getAppTimezone(),
+    });
   }
 
   get isPaymentDateValid() {
@@ -188,28 +198,32 @@ class CurrentTariffStatusStore {
   get isLicenseDateExpired() {
     if (!this.isPaymentDateValid) return;
 
-    return moment() > moment(this.dueDate).tz(window.timezone);
+    const dueDateDt = parseToDateTime(this.dueDate);
+    if (!dueDateDt) return;
+
+    return isAfter(now(), dueDateDt.setZone(getAppTimezone()));
   }
 
   get gracePeriodEndDate() {
-    moment.locale(this.language);
     if (this.delayDueDate === null) return "";
 
     const endDate = isValidDate(this.delayDueDate)
       ? this.delayDueDate
       : this.dueDate;
 
-    return moment(endDate).tz(window.timezone).format("LL");
+    return formatDateLocalized(endDate, "DATE_FULL", {
+      locale: this.language,
+      timezone: getAppTimezone(),
+    });
   }
 
   get delayDaysCount() {
-    moment.locale(this.language);
     if (this.delayDueDate === null) return "";
     return getDaysRemaining(this.delayDueDate);
   }
 
   get isLicenseExpiring() {
-    if (!this.dueDate || !this.isEnterprise) return;
+    if (!this.dueDate) return false;
 
     const days = getDaysLeft(this.dueDate);
 

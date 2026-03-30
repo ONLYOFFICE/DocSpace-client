@@ -28,50 +28,50 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { isMobileOnly } from "react-device-detect";
 
-import { Checkbox } from "@docspace/shared/components/checkbox";
-import { HelpButton } from "@docspace/shared/components/help-button";
-import { Text } from "@docspace/shared/components/text";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
+import { Text } from "@docspace/ui-kit/components/text";
 
 interface ILDAPContainer {
-  isLdapLoginChecked: boolean;
-  ldapDomain: string;
-  onChangeLdapLoginCheckbox: VoidFunction;
+	isLdapLoginChecked: boolean;
+	ldapDomain: string;
+	onChangeLdapLoginCheckbox: VoidFunction;
 }
 
 const LDAPContainer = ({
-  isLdapLoginChecked,
-  ldapDomain,
-  onChangeLdapLoginCheckbox,
+	isLdapLoginChecked,
+	ldapDomain,
+	onChangeLdapLoginCheckbox,
 }: ILDAPContainer) => {
-  const { t } = useTranslation(["Login", "Common"]);
+	const { t } = useTranslation(["Login", "Common"]);
 
-  return (
-    <div className="login-forgot-wrapper">
-      <div className="login-checkbox-wrapper">
-        <Checkbox
-          id="login_ldap-checkbox"
-          className="login-checkbox"
-          tabIndex={4}
-          isChecked={isLdapLoginChecked}
-          onChange={onChangeLdapLoginCheckbox}
-          label={t("SignInLDAP", { ldap_domain: ldapDomain })}
-          helpButton={
-            <HelpButton
-              id="login_ldap-hint"
-              className="help-button"
-              offsetRight={0}
-              tooltipContent={
-                <Text fontSize="12px">{t("SignInLdapHelper")}</Text>
-              }
-              tooltipMaxWidth={isMobileOnly ? "240px" : "340px"}
-              dataTestId="ldap_login_help_button"
-            />
-          }
-          dataTestId="ldap_login_checkbox"
-        />
-      </div>
-    </div>
-  );
+	return (
+		<div className="login-forgot-wrapper">
+			<div className="login-checkbox-wrapper">
+				<Checkbox
+					id="login_ldap-checkbox"
+					className="login-checkbox"
+					tabIndex={4}
+					isChecked={isLdapLoginChecked}
+					onChange={onChangeLdapLoginCheckbox}
+					label={t("SignInLDAP", { ldap_domain: ldapDomain })}
+					helpButton={
+						<HelpButton
+							id="login_ldap-hint"
+							className="help-button"
+							offsetRight={0}
+							tooltipContent={
+								<Text fontSize="12px">{t("SignInLdapHelper")}</Text>
+							}
+							tooltipMaxWidth={isMobileOnly ? "240px" : "340px"}
+							dataTestId="ldap_login_help_button"
+						/>
+					}
+					dataTestId="ldap_login_checkbox"
+				/>
+			</div>
+		</div>
+	);
 };
 
 export default LDAPContainer;

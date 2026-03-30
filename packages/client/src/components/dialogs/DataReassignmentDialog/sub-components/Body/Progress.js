@@ -24,15 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Text } from "@docspace/shared/components/text";
-import { Loader } from "@docspace/shared/components/loader";
-import { ProgressBar } from "@docspace/shared/components/progress-bar";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Loader } from "@docspace/ui-kit/components/loader";
+import { ProgressBar } from "@docspace/ui-kit/components/progress-bar";
 import styled from "styled-components";
 
 import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg";
 import InterruptIcon from "PUBLIC_DIR/images/interrupt.icon.react.svg";
 import { commonIconsStyles, injectDefaultTheme } from "@docspace/shared/utils";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { withTranslation, Trans } from "react-i18next";
 
 const StyledCheckIcon = styled(CheckIcon).attrs(injectDefaultTheme)`
@@ -127,122 +127,122 @@ const percentFilesInRoomsReassignment = 90;
 const percentAllReassignment = 100;
 
 const Progress = ({
-  fromUser,
-  toUser,
-  isReassignCurrentUser,
-  percent,
-  isAbortTransfer,
-  noRooms,
-  noRoomFilesToMove,
-  t,
+	fromUser,
+	toUser,
+	isReassignCurrentUser,
+	percent,
+	isAbortTransfer,
+	noRooms,
+	noRoomFilesToMove,
+	t,
 }) => {
-  const inProgressNode = (
-    <div className="in-progress">
-      <Loader className="in-progress-loader" size="20px" type="track" />
-      <Text className="status">{t("Common:InProgress")}</Text>
-    </div>
-  );
+	const inProgressNode = (
+		<div className="in-progress">
+			<Loader className="in-progress-loader" size="20px" type="track" />
+			<Text className="status">{t("Common:InProgress")}</Text>
+		</div>
+	);
 
-  const pendingNode = (
-    <Text className="status status-pending">
-      {t("PeopleTranslations:PendingTitle")}...
-    </Text>
-  );
+	const pendingNode = (
+		<Text className="status status-pending">
+			{t("PeopleTranslations:PendingTitle")}...
+		</Text>
+	);
 
-  const allDataTransferredNode = (
-    <div className="transfer-information">
-      <StyledCheckIcon size="medium" className="status-icon" />
-      <Text className="status">
-        {t("DataReassignmentDialog:AllDataTransferred")}
-      </Text>
-    </div>
-  );
+	const allDataTransferredNode = (
+		<div className="transfer-information">
+			<StyledCheckIcon size="medium" className="status-icon" />
+			<Text className="status">
+				{t("DataReassignmentDialog:AllDataTransferred")}
+			</Text>
+		</div>
+	);
 
-  const interruptedNode = (
-    <div className="transfer-information">
-      <InterruptIcon className="status-icon" />
-      <Text className="status">{t("DataReassignmentDialog:Interrupted")}</Text>
-    </div>
-  );
+	const interruptedNode = (
+		<div className="transfer-information">
+			<InterruptIcon className="status-icon" />
+			<Text className="status">{t("DataReassignmentDialog:Interrupted")}</Text>
+		</div>
+	);
 
-  const you = `${`(${t("Common:You")})`}`;
+	const you = `${`(${t("Common:You")})`}`;
 
-  const reassigningDataStart = isReassignCurrentUser ? (
-    <Trans
-      i18nKey="ReassigningDataToItself"
-      ns="DataReassignmentDialog"
-      t={t}
-      fromUser={fromUser}
-      toUser={toUser}
-      you={you}
-    >
-      <div className="user"> {{ fromUser }}</div>
-      <div className="user"> {{ toUser }}</div>
-      <div className="user"> {{ you }}</div>
-    </Trans>
-  ) : (
-    <Trans
-      i18nKey="ReassigningDataToAnother"
-      ns="DataReassignmentDialog"
-      t={t}
-      fromUser={fromUser}
-      toUser={toUser}
-      you={you}
-    >
-      <div className="user"> {{ fromUser }}</div>
-      <div className="user"> {{ toUser }}</div>
-    </Trans>
-  );
-  return (
-    <StyledProgress>
-      <div className="data-start"> {reassigningDataStart}</div>
-      <div className="progress-container">
-        <div className="progress-section">
-          {!noRooms ? (
-            <Text className="progress-section-text">{t("Common:Rooms")}</Text>
-          ) : null}
-          {noRoomFilesToMove ? null : (
-            <Text className="progress-section-text">
-              {t("Common:Documents")}
-            </Text>
-          )}
-        </div>
+	const reassigningDataStart = isReassignCurrentUser ? (
+		<Trans
+			i18nKey="ReassigningDataToItself"
+			ns="DataReassignmentDialog"
+			t={t}
+			fromUser={fromUser}
+			toUser={toUser}
+			you={you}
+		>
+			<div className="user"> {{ fromUser }}</div>
+			<div className="user"> {{ toUser }}</div>
+			<div className="user"> {{ you }}</div>
+		</Trans>
+	) : (
+		<Trans
+			i18nKey="ReassigningDataToAnother"
+			ns="DataReassignmentDialog"
+			t={t}
+			fromUser={fromUser}
+			toUser={toUser}
+			you={you}
+		>
+			<div className="user"> {{ fromUser }}</div>
+			<div className="user"> {{ toUser }}</div>
+		</Trans>
+	);
+	return (
+		<StyledProgress>
+			<div className="data-start"> {reassigningDataStart}</div>
+			<div className="progress-container">
+				<div className="progress-section">
+					{!noRooms ? (
+						<Text className="progress-section-text">{t("Common:Rooms")}</Text>
+					) : null}
+					{noRoomFilesToMove ? null : (
+						<Text className="progress-section-text">
+							{t("Common:Documents")}
+						</Text>
+					)}
+				</div>
 
-        <div className="progress-status">
-          {!noRooms
-            ? percent < percentRoomReassignment
-              ? isAbortTransfer && percent !== percentAllReassignment
-                ? interruptedNode
-                : inProgressNode
-              : allDataTransferredNode
-            : null}
+				<div className="progress-status">
+					{!noRooms
+						? percent < percentRoomReassignment
+							? isAbortTransfer && percent !== percentAllReassignment
+								? interruptedNode
+								: inProgressNode
+							: allDataTransferredNode
+						: null}
 
-          {noRoomFilesToMove
-            ? null
-            : isAbortTransfer && percent !== percentAllReassignment
-              ? interruptedNode
-              : percent < percentRoomReassignment
-                ? pendingNode
-                : percent < percentFilesInRoomsReassignment
-                  ? inProgressNode
-                  : allDataTransferredNode}
-        </div>
-      </div>
+					{noRoomFilesToMove
+						? null
+						: isAbortTransfer && percent !== percentAllReassignment
+							? interruptedNode
+							: percent < percentRoomReassignment
+								? pendingNode
+								: percent < percentFilesInRoomsReassignment
+									? inProgressNode
+									: allDataTransferredNode}
+				</div>
+			</div>
 
-      <ProgressBar
-        className="progress"
-        percent={isAbortTransfer ? percentAllReassignment : percent}
-      />
+			<ProgressBar
+				className="progress"
+				percent={isAbortTransfer ? percentAllReassignment : percent}
+			/>
 
-      <Text lineHeight="20px" className="description">
-        {t("DataReassignmentDialog:ProcessComplete")}
-      </Text>
-    </StyledProgress>
-  );
+			<Text lineHeight="20px" className="description">
+				{t("DataReassignmentDialog:ProcessComplete")}
+			</Text>
+		</StyledProgress>
+	);
 };
 
 export default withTranslation([
-  "Common",
-  "DataReassignmentDialog",
-  "PeopleTranslations",
+	"Common",
+	"DataReassignmentDialog",
+	"PeopleTranslations",
 ])(Progress);

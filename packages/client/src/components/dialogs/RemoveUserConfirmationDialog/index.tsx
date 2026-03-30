@@ -27,11 +27,11 @@
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Text } from "@docspace/ui-kit/components/text";
 import { useState } from "react";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 type Props = {
   setRemoveUserConfirmation: (
@@ -92,6 +92,7 @@ const RemoveUserConfirmationDialog = ({
           scale
           onClick={onDelete}
           isLoading={isLoading}
+          testId="remove_user_confirmation_dialog_ok_button"
         />
         <Button
           id="delete-file-modal_cancel"
@@ -101,6 +102,7 @@ const RemoveUserConfirmationDialog = ({
           scale
           onClick={onClose}
           isLoading={isLoading}
+          testId="remove_user_confirmation_dialog_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

@@ -26,53 +26,53 @@
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { Text } from "@docspace/shared/components/text";
-import { toastr } from "@docspace/shared/components/toast";
+import { Text } from "@docspace/ui-kit/components/text";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { Link } from "@docspace/shared/components/link";
+import { Link } from "@docspace/ui-kit/components/link";
 
 const PaidQuotaLimitError = ({
-  isRoomAdmin,
-  setInvitePanelOptions,
-  invitePanelVisible,
+	isRoomAdmin,
+	setInvitePanelOptions,
+	invitePanelVisible,
 }) => {
-  const { t } = useTranslation();
+	const { t } = useTranslation();
 
-  const onClickPayments = () => {
-    const paymentPageUrl = combineUrl(
-      "/portal-settings",
-      "/payments/portal-payments",
-    );
+	const onClickPayments = () => {
+		const paymentPageUrl = combineUrl(
+			"/portal-settings",
+			"/payments/portal-payments",
+		);
 
-    toastr.clear();
-    window.DocSpace.navigate(paymentPageUrl);
+		toastr.clear();
+		window.DocSpace.navigate(paymentPageUrl);
 
-    invitePanelVisible &&
-      setInvitePanelOptions({
-        visible: false,
-        hideSelector: false,
-        defaultAccess: 1,
-      });
-  };
+		invitePanelVisible &&
+			setInvitePanelOptions({
+				visible: false,
+				hideSelector: false,
+				defaultAccess: 1,
+			});
+	};
 
-  return (
-    <>
-      <Text>{t("Common:QuotaPaidUserLimitError")}</Text>
-      {!isRoomAdmin ? (
-        <Link isHovered onClick={onClickPayments} color="accent">
-          {t("Common:PaymentsTitle")}
-        </Link>
-      ) : null}
-    </>
-  );
+	return (
+		<>
+			<Text>{t("Common:QuotaPaidUserLimitError")}</Text>
+			{!isRoomAdmin ? (
+				<Link isHovered onClick={onClickPayments} color="accent">
+					{t("Common:Billing")}
+				</Link>
+			) : null}
+		</>
+	);
 };
 
 export default inject(({ authStore, dialogsStore }) => {
-  const { isRoomAdmin } = authStore;
-  const { setInvitePanelOptions, invitePanelOptions } = dialogsStore;
-  return {
-    isRoomAdmin,
-    setInvitePanelOptions,
-    invitePanelVisible: invitePanelOptions.visible,
-  };
+	const { isRoomAdmin } = authStore;
+	const { setInvitePanelOptions, invitePanelOptions } = dialogsStore;
+	return {
+		isRoomAdmin,
+		setInvitePanelOptions,
+		invitePanelVisible: invitePanelOptions.visible,
+	};
 })(observer(PaidQuotaLimitError));

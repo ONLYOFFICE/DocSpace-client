@@ -27,7 +27,7 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { objectToGetParams } from "@docspace/shared/utils/common";
-import { Tabs, TabsTypes } from "@docspace/shared/components/tabs";
+import { Tabs, TabsTypes } from "@docspace/ui-kit/components/tabs";
 
 import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
 import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
@@ -46,6 +46,7 @@ export const PreviewBlock = ({
   scriptUrl,
   config,
   isDisabled = false,
+  showScriptParamsWithEvents = false,
 }) => {
   const { t, ready } = useTranslation([
     "JavascriptSdk",
@@ -53,14 +54,14 @@ export const PreviewBlock = ({
     "EmbeddingPanel",
     "Common",
     "Translations",
-    "SharingPanel",
     "CreateEditRoomDialog",
   ]);
 
   const [showPreview, setShowPreview] = useState(
     window.innerWidth > showPreviewThreshold,
   );
-  const params = objectToGetParams(config);
+  const { events: _, ...configWithoutEvents } = config;
+  const params = objectToGetParams(configWithoutEvents);
 
   const codeBlock = `<div id="${frameId}">Fallback text</div>\n<script src="${scriptUrl}${params}"></script>`;
 
@@ -112,7 +113,7 @@ export const PreviewBlock = ({
         type={TabsTypes.Secondary}
         onSelect={(e) => {
           setSelectedItemId(e.id);
-          loadCurrentFrame(e);
+          if (e.id === "preview") loadCurrentFrame(e);
         }}
         items={dataTabs}
         isLoading={!ready}
@@ -123,3 +124,4 @@ export const PreviewBlock = ({
     <GetCodeBlock t={t} codeBlock={codeBlock} isDisabled={isDisabled} />
   );
 };
+

@@ -25,16 +25,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useEffect, useState } from "react";
-import { Text } from "@docspace/shared/components/text";
-// import { TextInput } from "@docspace/shared/components/text-input";
+import { Text } from "@docspace/ui-kit/components/text";
+// import { TextInput } from "@docspace/ui-kit/components/text-input";
 // import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import styled, { useTheme } from "styled-components";
-import { Button } from "@docspace/shared/components/button";
+import { Button } from "@docspace/ui-kit/components/button";
 import { TwoFactorCampaignBanner } from "@docspace/shared/components/two-factor-campaign";
-// import { toastr } from "@docspace/shared/components/toast";
+// import { toastr } from "@docspace/ui-kit/components/toast";
 import { mobile, tablet } from "@docspace/shared/utils";
-import { Badge } from "@docspace/shared/components/badge";
-import { globalColors } from "@docspace/shared/themes";
+import { Badge } from "@docspace/ui-kit/components/badge";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 import { UnavailableStyles } from "../../../utils/commonSettingsStyles";

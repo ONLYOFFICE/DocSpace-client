@@ -34,7 +34,7 @@ import {
   TSettings,
   TThirdPartyProvider,
 } from "@docspace/shared/api/settings/types";
-import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
+import { TValidate } from "@docspace/ui-kit/components/email-input";
 import { IClientProps } from "@docspace/shared/utils/oauth/types";
 import {
   EmployeeActivationStatus,

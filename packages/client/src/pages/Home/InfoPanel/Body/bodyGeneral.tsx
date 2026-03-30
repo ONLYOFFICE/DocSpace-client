@@ -35,7 +35,7 @@ import {
 } from "@docspace/shared/utils/typeGuards";
 
 import { AvatarEditorDialog } from "SRC_DIR/components/dialogs";
-import { InfoPanelView } from "SRC_DIR/store/InfoPanelStore";
+import { InfoPanelView } from "SRC_DIR/helpers/info-panel";
 
 import { BodyProps } from "./Body.types";
 

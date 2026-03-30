@@ -28,56 +28,56 @@ import React from "react";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow.react.svg?url";
 
-import { AccessRightSelect } from "../../../components/access-right-select";
-import { Text } from "../../../components/text";
+import { AccessRightSelect } from "@docspace/ui-kit/components/access-right-select";
+import { Text } from "@docspace/ui-kit/components/text";
 import { isMobile } from "../../../utils";
 import { DeviceType } from "../../../enums";
-import type { TOption } from "../../../components/combobox";
+import type { TOption } from "@docspace/ui-kit/components/combobox";
 
 import { RoleLinkBlockWrapper } from "./RoleLinkBlock.styled";
 import type { RoleLinkBlockProps } from "./RoleLinkBlock.types";
 
 const RoleLinkBlock = ({
-  t,
-  onSelect,
-  selectedOption,
-  accessOptions = [],
-  currentDeviceType,
+	t,
+	onSelect,
+	selectedOption,
+	accessOptions = [],
+	currentDeviceType,
 }: RoleLinkBlockProps) => {
-  const isMobileView = isMobile() || currentDeviceType === DeviceType.mobile;
+	const isMobileView = isMobile() || currentDeviceType === DeviceType.mobile;
 
-  const directionX = isMobileView ? undefined : "right";
+	const directionX = isMobileView ? undefined : "right";
 
-  const handleSelect = (option: TOption) => {
-    onSelect?.(option);
-  };
+	const handleSelect = (option: TOption) => {
+		onSelect?.(option);
+	};
 
-  return (
-    <RoleLinkBlockWrapper>
-      <Text fontSize="16px" fontWeight={700}>
-        {t("Common:RoleForLink")}
-      </Text>
-      <AccessRightSelect
-        fillIcon
-        scaledOptions
-        fixedDirection
-        directionY="both"
-        manualWidth="auto"
-        type="descriptive"
-        onSelect={handleSelect}
-        directionX={directionX}
-        isDefaultMode={isMobileView}
-        isMobileView={isMobileView}
-        withBlur={isMobileView}
-        isAside={isMobileView}
-        withBackground={!isMobileView}
-        selectedOption={selectedOption}
-        accessOptions={accessOptions}
-        comboIcon={ArrowIcon}
-        dataTestId="edit_link_panel_role_access_select"
-      />
-    </RoleLinkBlockWrapper>
-  );
+	return (
+		<RoleLinkBlockWrapper>
+			<Text fontSize="16px" fontWeight={700}>
+				{t("Common:RoleForLink")}
+			</Text>
+			<AccessRightSelect
+				fillIcon
+				scaledOptions
+				fixedDirection
+				directionY="both"
+				manualWidth="auto"
+				type="descriptive"
+				onSelect={handleSelect}
+				directionX={directionX}
+				isDefaultMode={isMobileView}
+				isMobileView={isMobileView}
+				withBlur={isMobileView}
+				isAside={isMobileView}
+				withBackground={!isMobileView}
+				selectedOption={selectedOption}
+				accessOptions={accessOptions}
+				comboIcon={ArrowIcon}
+				dataTestId="edit_link_panel_role_access_select"
+			/>
+		</RoleLinkBlockWrapper>
+	);
 };
 
 export default RoleLinkBlock;

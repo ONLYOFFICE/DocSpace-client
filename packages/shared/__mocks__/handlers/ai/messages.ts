@@ -48,7 +48,7 @@ export const aiMessagesExportResolver = () => {
 };
 
 export const aiMessagesExportHandler = (port: string) => {
-  return http.get(
+  return http.post(
     `${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_MESSAGES_EXPORT}`,
     () => {
       return aiMessagesExportResolver();

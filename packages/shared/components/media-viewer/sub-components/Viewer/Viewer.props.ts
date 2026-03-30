@@ -64,6 +64,7 @@ interface ViewerProps {
     bottom?: string,
   ) => JSX.Element | null;
   onSetSelectionFile: VoidFunction;
+  pluginViewerContent?: React.ReactNode;
 }
 
 export default ViewerProps;

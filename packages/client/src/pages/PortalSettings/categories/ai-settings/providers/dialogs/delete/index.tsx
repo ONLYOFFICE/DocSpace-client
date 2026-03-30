@@ -27,16 +27,16 @@
  */
 
 import React from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
-import { toastr } from "@docspace/shared/components/toast";
-import { Text } from "@docspace/shared/components/text";
+} from "@docspace/ui-kit/components/modal-dialog";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { Text } from "@docspace/ui-kit/components/text";
 import type { TAiProvider } from "@docspace/shared/api/ai/types";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
@@ -47,6 +47,7 @@ type Props = {
   deleteAIProvider?: AISettingsStore["deleteAIProvider"];
   getAIConfig?: SettingsStore["getAIConfig"];
   onClose: VoidFunction;
+  showDefaultProviderWarning?: boolean;
 };
 
 const DeleteDialogComponent = ({
@@ -54,6 +55,7 @@ const DeleteDialogComponent = ({
   deleteAIProvider,
   onClose,
   getAIConfig,
+  showDefaultProviderWarning,
 }: Props) => {
   const { t } = useTranslation(["Common", "AISettings"]);
 
@@ -61,8 +63,10 @@ const DeleteDialogComponent = ({
 
   const onSubmit = async () => {
     try {
+      setLoading(true);
+
       await deleteAIProvider?.(providerId);
-      await getAIConfig?.();
+      getAIConfig?.();
 
       toastr.success(
         t("AISettings:ProviderRemovedSuccess", {
@@ -78,6 +82,24 @@ const DeleteDialogComponent = ({
     }
   };
 
+  const bodyText = showDefaultProviderWarning ? (
+    <Trans
+      t={t}
+      i18nKey="AISettings:DeleteDefaultProviderDescription"
+      values={{ aiProvider: t("Common:AIProvider") }}
+      components={{
+        1: (
+          <strong
+            key="default-provider-warning-strong"
+            style={{ fontWeight: "600" }}
+          />
+        ),
+      }}
+    />
+  ) : (
+    t("AISettings:DeleteProviderDescription")
+  );
+
   return (
     <ModalDialog visible displayType={ModalDialogType.modal} onClose={onClose}>
       <ModalDialog.Header>
@@ -86,7 +108,7 @@ const DeleteDialogComponent = ({
         })}
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <Text>{t("AISettings:DeleteProviderDescription")}</Text>
+        <Text>{bodyText}</Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

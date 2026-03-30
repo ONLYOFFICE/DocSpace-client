@@ -29,6 +29,7 @@ import {
   filesSettingsHandler,
   fillingStatusHandler,
 } from "@docspace/shared/__mocks__/handlers";
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import { expect, test } from "./fixtures/base";
 
 test.describe("Start filling", () => {
@@ -50,7 +51,7 @@ test.describe("Start filling", () => {
     const form = page.getByTestId("completed_form_vdr_container");
     await expect(form).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page, [
       "start-filling",
       "start-filling-render.png",
     ]);

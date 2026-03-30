@@ -711,6 +711,19 @@ export async function getAuthProviders() {
   return res;
 }
 
+export async function testExternalDbConnection(data: Record<string, unknown>) {
+  const res = await request<{
+    success: boolean;
+    error?: string;
+  }>({
+    method: "post",
+    url: `/settings/authservice/externaldb/test`,
+    data,
+  })!;
+
+  return res;
+}
+
 export function updateConsumerProps(newProps) {
   const options = {
     method: "post",
@@ -785,9 +798,14 @@ export function getTfaSecretKeyAndQR(confirmKey = null) {
   return request(options);
 }
 
-export function validateTfaCode(code, confirmKey: Nullable<string> = null) {
+export function validateTfaCode(
+  code,
+  confirmKey: Nullable<string> = null,
+  session: boolean,
+) {
   const data = {
     code,
+    session,
   };
 
   const options = {
@@ -1042,7 +1060,15 @@ export function createWebhook(name, uri, secretKey, ssl, triggers, targetId) {
   return request({
     method: "post",
     url: `/settings/webhook`,
-    data: { name, uri, secretKey, enabled: true, ssl, triggers, targetId },
+    data: {
+      name,
+      uri,
+      secretKey,
+      enabled: true,
+      ssl,
+      triggers: Number(triggers),
+      targetId,
+    },
   });
 }
 
@@ -1066,7 +1092,16 @@ export function updateWebhook(
   return request({
     method: "put",
     url: `/settings/webhook`,
-    data: { id, name, uri, secretKey, enabled: true, ssl, triggers, targetId },
+    data: {
+      id,
+      name,
+      uri,
+      secretKey,
+      enabled: true,
+      ssl,
+      triggers: Number(triggers),
+      targetId,
+    },
   });
 }
 
@@ -1491,4 +1526,23 @@ export async function setDefaultFolderType(folderType: FolderType) {
   });
 
   return res.defaultFolderType as FolderType;
+}
+
+export async function getAiAccessSettings() {
+	const res = await request({
+		method: "get",
+		url: "/settings/ai-access",
+	});
+
+	return res as { enabled: boolean };
+}
+
+export async function setAiAccessSettings(enabled: boolean) {
+	const res = await request({
+		method: "post",
+		url: "/settings/ai-access",
+		data: { enabled },
+	});
+
+	return res as { enabled: boolean };
 }

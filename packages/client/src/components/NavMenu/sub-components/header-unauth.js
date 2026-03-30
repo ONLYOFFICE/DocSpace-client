@@ -34,7 +34,7 @@ import { getLogoUrl } from "@docspace/shared/utils";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { LanguageCombobox } from "@docspace/shared/components/language-combobox";
 import { setLanguageForUnauthorized } from "@docspace/shared/utils/common";
-import { Button } from "@docspace/shared/components/button";
+import { Button } from "@docspace/ui-kit/components/button";
 
 import PersonDefaultReactSvg from "PUBLIC_DIR/images/person.default.react.svg";
 

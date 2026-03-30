@@ -29,13 +29,13 @@ import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/shared/components/text";
-import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
-import { IconButton } from "@docspace/shared/components/icon-button";
-import { MCPIcon, MCPIconSize } from "@docspace/shared/components/mcp-icon";
+import { Text } from "@docspace/ui-kit/components/text";
+import { AddButton } from "@docspace/ui-kit/components/add-button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { MCPIcon, MCPIconSize } from "@docspace/ui-kit/components/mcp-icon";
 
 import type { TAgentParams } from "@docspace/shared/utils/aiAgents";
-import type { TSelectorItem } from "@docspace/shared/components/selector";
+import type { TSelectorItem } from "@docspace/ui-kit/components/selector";
 
 import { StyledParam } from "../../../CreateEditDialogParams/StyledParam";
 
@@ -78,13 +78,17 @@ const MCPSettings = ({
           </Text>
         </div>
         <div className="ai-mcp-group">
-          <SelectorAddButton onClick={onClickAction} />
+          <AddButton onClick={onClickAction} />
 
           {selectedServers?.map((server) => (
-            <div className="ai-mcp-item" key={server.id}>
+            <div
+              className="ai-mcp-item"
+              key={server.id}
+              data-testid="ai-mcp-item"
+            >
               <MCPIcon
                 title={server.label}
-                imgSrc={server.icon}
+                imgSrc={server.icon as string | undefined}
                 size={MCPIconSize.Small}
               />
               <Text fontSize="12px" fontWeight={600} lineHeight="16px" noSelect>
@@ -104,6 +108,7 @@ const MCPSettings = ({
                     });
                   }
                 }}
+                dataTestId="remove-mcp-button"
               />
             </div>
           ))}

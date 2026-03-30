@@ -29,13 +29,13 @@ import { inject, observer } from "mobx-react";
 
 import { useNavigate, useParams } from "react-router";
 
-import { Row } from "@docspace/shared/components/rows";
+import { Row } from "@docspace/ui-kit/components/rows";
 import { retryWebhook } from "@docspace/shared/api/settings";
 
 import RetryIcon from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { useTranslation } from "react-i18next";
 import { formatFilters } from "SRC_DIR/helpers/webhooks";

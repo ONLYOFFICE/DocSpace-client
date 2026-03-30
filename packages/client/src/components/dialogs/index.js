@@ -75,6 +75,10 @@ import StorageTariffDeactiveted from "./StorageTariffDeactiveted";
 import ConnectAccountDialog from "./ConnectAccountDialog";
 import DisconnectAccountDialog from "./DisconnectAccountDialog";
 import CreateAgentDialog from "./CreateEditAgentDialog/CreateAgentDialog";
+import ResetTemplateDialog from "./ResetTemplateDialog";
+import EditRoomGroupsDialog from "./EditRoomGroupsDialog";
+import AddRoomToGroupDialog from "./AddRoomToGroupDialog";
+import PauseSubmissionsDialog from "./PauseSubmissionsDialog";
 
 export {
   EmptyTrashDialog,
@@ -128,4 +132,8 @@ export {
   ConnectAccountDialog,
   DisconnectAccountDialog,
   CreateAgentDialog,
+  ResetTemplateDialog,
+  EditRoomGroupsDialog,
+  AddRoomToGroupDialog,
+  PauseSubmissionsDialog,
 };

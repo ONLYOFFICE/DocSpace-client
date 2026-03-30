@@ -26,7 +26,7 @@
 
 import styled from "styled-components";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import { tablet } from "@docspace/shared/utils/device";
+import { tablet } from "@docspace/ui-kit/utils/device";
 
 const StyledLoader = styled.div`
   padding-inline-end: 8px;

@@ -29,7 +29,7 @@ import { useTranslation } from "react-i18next";
 import { TUser } from "@docspace/shared/api/people/types";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import { UserStore } from "@docspace/shared/store/UserStore";
-import { useTheme } from "@docspace/shared/hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import TutorialPreview from "PUBLIC_DIR/images/form_filling_tutorial.gif";
 import TutorialPreviewDark from "PUBLIC_DIR/images/form_filling_tutorial_dark.gif";
@@ -39,9 +39,9 @@ import DialogsStore from "SRC_DIR/store/DialogsStore";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
-import { Text } from "@docspace/shared/components/text";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+} from "@docspace/ui-kit/components/modal-dialog";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { getFormFillingTipsStorageName } from "@docspace/shared/utils";
 import styles from "./FormFillingTips.module.scss";
 

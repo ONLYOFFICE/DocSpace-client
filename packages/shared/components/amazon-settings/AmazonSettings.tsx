@@ -31,12 +31,16 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 
 import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
 
-import { Text } from "../text";
-import { Checkbox } from "../checkbox";
-import { ComboBox, TOption } from "../combobox";
-import { InputSize, InputType, TextInput } from "../text-input";
-import { HelpButton } from "../help-button";
-import { RadioButton } from "../radio-button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { RadioButton } from "@docspace/ui-kit/components/radio-button";
+import { ComboBox, TOption } from "@docspace/ui-kit/components/combobox";
+import {
+  InputSize,
+  InputType,
+  TextInput,
+} from "@docspace/ui-kit/components/text-input";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { useDidMount } from "../../hooks/useDidMount";
 
 import {

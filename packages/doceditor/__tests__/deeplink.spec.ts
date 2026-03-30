@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { filesSettingsHandler } from "@docspace/shared/__mocks__/handlers";
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import { expect, test } from "./fixtures/base";
 
 test.describe("DeepLink", () => {
@@ -45,6 +46,6 @@ test.describe("DeepLink", () => {
     const form = page.getByTestId("form-wrapper");
     await expect(form).toBeVisible();
 
-    await expect(page).toHaveScreenshot(["deeplink", "deeplink-render.png"]);
+    await expectScreenshot(page, ["deeplink", "deeplink-render.png"]);
   });
 });

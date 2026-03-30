@@ -3,7 +3,7 @@
   "content": "Type",
   "content_en_sha1_hash": "3deb7456519697ecf4eefc455516c969a3681bae",
   "created_at": "2025-05-19T21:30:49.370Z",
-  "updated_at": "2025-12-19T13:32:32.635Z",
+  "updated_at": "2026-03-26T08:26:58.069Z",
   "comment": {
     "text": "This translation key is used to display a label indicating the type of an item or entity. It appears in various UI elements, such as titles, labels, and field headers, where it provides a brief description of the item's classification (e.g., \"Type\" for a data entry field).",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
-      "line_number": 226,
+      "line_number": 225,
       "context": "return this.t(\"Common:Owner\");\n case \"Location\":\n return this.t(\"Common:Location\");\n \n case \"Type\":\n return this.t(\"Common:Type\");\n case \"Storage Type\":\n return this.t(\"InfoPanel:StorageType\");\n \n case \"File extension\":\n return this.t(\"FileExtension\");",
       "module": "/packages/client"
     },
@@ -78,19 +78,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1034,
+      "line_number": 1068,
       "context": "const typeOptions = isRooms\n ? [\n {\n key: FilterGroups.filterType,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:Type\"),\n isHeader: true,\n isLast: isLastTypeOptionsRooms,\n },\n ...RoomsTypeValues.map((roomType) => {\n switch (roomType) {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1034,
+      "line_number": 1068,
       "context": "const typeOptions = isRooms\n ? [\n {\n key: FilterGroups.filterType,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:Type\"),\n isHeader: true,\n isLast: isLastTypeOptionsRooms,\n },\n ...RoomsTypeValues.map((roomType) => {\n switch (roomType) {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1034,
+      "line_number": 1068,
       "context": "const typeOptions = isRooms\n ? [\n {\n key: FilterGroups.filterType,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:Type\"),\n isHeader: true,\n isLast: isLastTypeOptionsRooms,\n },\n ...RoomsTypeValues.map((roomType) => {\n switch (roomType) {",
       "module": "/packages/client"
     },
@@ -114,13 +114,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 105,
+      "line_number": 122,
       "context": "setDocumentTitle(t(\"JavascriptSdk\"));\n \n const dataSortBy = [\n { key: \"DateAndTime\", label: t(\"Common:LastModifiedDate\"), default: true },\n { key: \"AZ\", label: t(\"Common:Title\") },\n { key: \"Type\", label: t(\"Common:Type\") },\n { key: \"Size\", label: t(\"Common:Size\") },\n { key: \"DateAndTimeCreation\", label: t(\"Files:ByCreation\") },\n { key: \"Author\", label: t(\"Files:ByAuthor\") },\n ];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 105,
+      "line_number": 122,
       "context": "setDocumentTitle(t(\"JavascriptSdk\"));\n \n const dataSortBy = [\n { key: \"DateAndTime\", label: t(\"Common:LastModifiedDate\"), default: true },\n { key: \"AZ\", label: t(\"Common:Title\") },\n { key: \"Type\", label: t(\"Common:Type\") },\n { key: \"Size\", label: t(\"Common:Size\") },\n { key: \"DateAndTimeCreation\", label: t(\"Files:ByCreation\") },\n { key: \"Author\", label: t(\"Files:ByAuthor\") },\n ];",
       "module": "/packages/client"
     },
@@ -137,26 +137,26 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/FilterPanel.tsx",
-      "line_number": 102,
-      "context": "<ModalDialog.Header>{t(\"Filter\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.filterDialogContent}>\n <div className={styles.filterDialogSection}>\n <Text fontWeight={600} fontSize=\"15px\">\n {t(\"Common:Type\")}\n </Text>\n <ComboBox\n options={typeOfHistoty}\n selectedOption={selectedType}\n onSelect={onSelectType}",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/shared/transaction-history/sub-components/FilterPanel.tsx",
+      "line_number": 106,
+      "context": "<div className={styles.filterDialogContent}>\n {!hideTypeFilter ? (\n <>\n <div className={styles.filterDialogSection}>\n <Text fontWeight={600} fontSize=\"15px\">\n {t(\"Common:Type\")}\n </Text>\n <ComboBox\n options={typeOfHistoty}\n selectedOption={selectedType}\n onSelect={onSelectType}",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/TableView/TableHeader.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/shared/transaction-history/sub-components/TableView/TableHeader.tsx",
       "line_number": 56,
       "context": "active: true,\n minWidth: 150,\n },\n {\n key: \"Type\",\n title: t(\"Common:Type\"),\n enable: true,\n resizable: true,\n minWidth: 120,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 596,
+      "line_number": 600,
       "context": "/>\n {isBetaLanguage ? <BetaBadge place=\"bottom-end\" /> : null}\n </div>\n \n <Text as=\"div\" className={styles.label}>\n {t(\"Common:Type\")}\n </Text>\n <div className={styles.userTypeContainer}>\n <Text fontWeight={600} truncate title={profile!.displayName}>\n {getUserTypeName(\n isOwner,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 596,
+      "line_number": 600,
       "context": "/>\n {isBetaLanguage ? <BetaBadge place=\"bottom-end\" /> : null}\n </div>\n \n <Text as=\"div\" className={styles.label}>\n {t(\"Common:Type\")}\n </Text>\n <div className={styles.userTypeContainer}>\n <Text fontWeight={600} truncate title={profile!.displayName}>\n {getUserTypeName(\n isOwner,",
       "module": "/packages/client"
     }

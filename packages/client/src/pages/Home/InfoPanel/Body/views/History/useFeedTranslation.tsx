@@ -26,8 +26,8 @@
 
 import { Trans } from "react-i18next";
 import { TFunction } from "i18next";
-import moment from "moment";
 import { FeedActionKeys } from "@docspace/shared/api/rooms/types";
+import { humanizeDuration, type DurationUnit } from "@docspace/ui-kit/utils/date";
 import { TTranslation } from "@docspace/shared/types";
 
 import { HistoryText } from "./HistoryText";
@@ -292,23 +292,15 @@ export const useFeedTranslation = (
       return t("InfoPanel:RoomIndexingDisabled");
     case FeedActionKeys.RoomLifeTimeSet: {
       const periodLifeTime = feed.data.lifeTime?.period;
-      const value = feed.data.lifeTime?.value;
-      const maxValue = 9999;
-      const period =
+      const value = feed.data.lifeTime?.value ?? 0;
+      const period: DurationUnit =
         periodLifeTime === 0
           ? "days"
           : periodLifeTime === 1
             ? "months"
             : "years";
 
-      const thresholds =
-        periodLifeTime === 0
-          ? { d: maxValue }
-          : periodLifeTime === 1
-            ? { M: maxValue }
-            : { y: maxValue };
-
-      const data = moment.duration(value, period).humanize(false, thresholds);
+      const data = humanizeDuration(value, period);
 
       return (
         <Trans

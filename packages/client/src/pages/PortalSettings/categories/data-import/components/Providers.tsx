@@ -29,7 +29,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import GoogleWorkspaceSvgUrl from "PUBLIC_DIR/images/workspace.google.react.svg?url";
 import NextcloudWorkspaceSvgUrl from "PUBLIC_DIR/images/workspace.nextcloud.react.svg?url";
@@ -38,8 +38,8 @@ import GoogleWorkspaceDarkSvgUrl from "PUBLIC_DIR/images/dark.workspace.google.r
 import NextcloudWorkspaceDarkSvgUrl from "PUBLIC_DIR/images/dark.workspace.nextcloud.react.svg?url";
 import WorkspaceDarkSvgUrl from "PUBLIC_DIR/images/dark.workspace.onlyoffice.react.svg?url";
 
-import { LinkType } from "@docspace/shared/components/link/Link.enums";
-import { Link, LinkTarget } from "@docspace/shared/components/link";
+import { LinkType } from "@docspace/ui-kit/components/link";
+import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { WorkspacesContainer } from "../StyledDataImport";
 import DataImportLoader from "../sub-components/DataImportLoader";
@@ -92,7 +92,7 @@ const Providers = (props: ProvidersProps) => {
         {dataImportUrl ? (
           <Link
             className="link-learn-more"
-            color={currentColorScheme?.main?.accent}
+            color={currentColorScheme?.main?.accent ?? undefined}
             target={LinkTarget.blank}
             isHovered
             href={dataImportUrl}

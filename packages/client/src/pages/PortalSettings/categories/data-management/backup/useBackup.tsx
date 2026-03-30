@@ -33,7 +33,7 @@ import {
   getStorageRegions,
 } from "@docspace/shared/api/settings";
 import { getBackupSchedule } from "@docspace/shared/api/portal";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { useDefaultOptions } from "@docspace/shared/pages/backup/auto-backup/hooks";
 import { isManagement } from "@docspace/shared/utils/common";
 import { getBackupsCount } from "@docspace/shared/api/backup";

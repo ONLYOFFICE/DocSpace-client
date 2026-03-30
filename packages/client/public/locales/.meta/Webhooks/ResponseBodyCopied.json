@@ -3,7 +3,7 @@
   "content": "POST response body successfully copied to clipboard",
   "content_en_sha1_hash": "f5f28000edb21336f906315e981a240dc481c228",
   "created_at": "2025-05-19T21:30:49.805Z",
-  "updated_at": "2025-05-24T02:15:58.537Z",
+  "updated_at": "2026-02-19T13:36:32.824Z",
   "comment": {
     "text": "The translation key \"ResponseBodyCopied\" is used to display a success message when the response body of an API request is copied to the clipboard. It appears in a textarea component within a developer tool, likely as a button label or tooltip.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookEventDetails/sub-components/ResponseDetails.js",
-      "line_number": 157,
+      "line_number": 159,
       "context": "value={responsePayload}\n isJSONField\n enableCopy\n hasNumeration\n isFullHeight\n copyInfoText={t(\"ResponseBodyCopied\")}\n />\n ) : (\n <Textarea\n classNameCopyIcon=\"response-body-copy\"\n value={responsePayload}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookEventDetails/sub-components/ResponseDetails.js",
-      "line_number": 157,
+      "line_number": 159,
       "context": "value={responsePayload}\n isJSONField\n enableCopy\n hasNumeration\n isFullHeight\n copyInfoText={t(\"ResponseBodyCopied\")}\n />\n ) : (\n <Textarea\n classNameCopyIcon=\"response-body-copy\"\n value={responsePayload}",
       "module": "/packages/client"
     }

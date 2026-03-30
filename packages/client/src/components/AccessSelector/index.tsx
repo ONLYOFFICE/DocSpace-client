@@ -28,172 +28,172 @@ import React, { useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
 
 import { isMobile } from "@docspace/shared/utils";
-import { AccessRightSelect } from "@docspace/shared/components/access-right-select";
-import { TOption } from "@docspace/shared/components/combobox";
+import { AccessRightSelect } from "@docspace/ui-kit/components/access-right-select";
+import { TOption } from "@docspace/ui-kit/components/combobox";
 import { TTranslation } from "@docspace/shared/types";
 import { RoomsType } from "@docspace/shared/enums";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
 interface AccessSelectorProps {
-  t: TTranslation;
-  roomType: RoomsType | -1;
-  onSelectAccess: (access: TOption) => void;
-  containerRef?: React.RefObject<HTMLDivElement | null>;
-  defaultAccess: number;
-  isOwner: boolean;
-  isAdmin: boolean;
-  withRemove?: boolean;
-  filteredAccesses?: TOption[];
-  setIsOpenItemAccess?: React.Dispatch<React.SetStateAction<boolean>>;
-  className: string;
-  standalone?: boolean;
-  isMobileView: boolean;
-  noBorder?: boolean;
-  manualWidth?: number;
-  isDisabled?: boolean;
-  directionX?: string;
-  directionY?: string;
-  isSelectionDisabled?: boolean;
-  selectionErrorText?: React.ReactNode;
-  availableAccess?: number[];
-  scaledOptions?: boolean;
-  dataTestId?: string;
+	t: TTranslation;
+	roomType: RoomsType | -1;
+	onSelectAccess: (access: TOption) => void;
+	containerRef?: React.RefObject<HTMLDivElement | null>;
+	defaultAccess: number;
+	isOwner: boolean;
+	isAdmin: boolean;
+	withRemove?: boolean;
+	filteredAccesses?: TOption[];
+	setIsOpenItemAccess?: React.Dispatch<React.SetStateAction<boolean>>;
+	className: string;
+	standalone?: boolean;
+	isMobileView: boolean;
+	noBorder?: boolean;
+	manualWidth?: number;
+	isDisabled?: boolean;
+	directionX?: string;
+	directionY?: string;
+	isSelectionDisabled?: boolean;
+	selectionErrorText?: React.ReactNode;
+	availableAccess?: number[];
+	scaledOptions?: boolean;
+	dataTestId?: string;
 }
 
 const AccessSelector: React.FC<AccessSelectorProps> = ({
-  t,
-  roomType,
-  onSelectAccess,
-  containerRef,
-  defaultAccess,
-  isOwner,
-  isAdmin,
-  withRemove = false,
-  filteredAccesses,
-  setIsOpenItemAccess,
-  className,
-  standalone,
-  isMobileView,
-  noBorder = false,
-  manualWidth,
-  isDisabled,
-  directionX = "left",
-  directionY = "bottom",
-  isSelectionDisabled,
-  selectionErrorText,
-  availableAccess,
-  scaledOptions,
-  dataTestId,
+	t,
+	roomType,
+	onSelectAccess,
+	containerRef,
+	defaultAccess,
+	isOwner,
+	isAdmin,
+	withRemove = false,
+	filteredAccesses,
+	setIsOpenItemAccess,
+	className,
+	standalone,
+	isMobileView,
+	noBorder = false,
+	manualWidth,
+	isDisabled,
+	directionX = "left",
+	directionY = "bottom",
+	isSelectionDisabled,
+	selectionErrorText,
+	availableAccess,
+	scaledOptions,
+	dataTestId,
 }) => {
-  const [horizontalOrientation, setHorizontalOrientation] = useState(false);
-  const [width, setWidth] = useState(manualWidth || 0);
+	const [horizontalOrientation, setHorizontalOrientation] = useState(false);
+	const [width, setWidth] = useState(manualWidth || 0);
 
-  useEffect(() => {
-    const offsetWidth = containerRef?.current?.offsetWidth;
+	useEffect(() => {
+		const offsetWidth = containerRef?.current?.offsetWidth;
 
-    if (typeof offsetWidth !== "number") {
-      return;
-    }
+		if (typeof offsetWidth !== "number") {
+			return;
+		}
 
-    setWidth(offsetWidth - 32);
-  }, [containerRef, containerRef?.current?.offsetWidth]);
+		setWidth(offsetWidth - 32);
+	}, [containerRef, containerRef?.current?.offsetWidth]);
 
-  const accessOptions = getAccessOptions(
-    t,
-    roomType as RoomsType,
-    withRemove,
-    true,
-    isOwner,
-    isAdmin,
-    standalone,
-  );
+	const accessOptions = getAccessOptions(
+		t,
+		roomType as RoomsType,
+		withRemove,
+		true,
+		isOwner,
+		isAdmin,
+		standalone,
+	);
 
-  const selectedOption = accessOptions.filter(
-    (access) => "access" in access && access?.access === +defaultAccess,
-  )[0];
+	const selectedOption = accessOptions.filter(
+		(access) => "access" in access && access?.access === +defaultAccess,
+	)[0];
 
-  const checkWidth = () => {
-    if (!isMobile()) return;
+	const checkWidth = () => {
+		if (!isMobile()) return;
 
-    if (!isMobile()) {
-      setHorizontalOrientation(true);
-    } else {
-      setHorizontalOrientation(false);
-    }
-  };
+		if (!isMobile()) {
+			setHorizontalOrientation(true);
+		} else {
+			setHorizontalOrientation(false);
+		}
+	};
 
-  useEffect(() => {
-    checkWidth();
-    window.addEventListener("resize", checkWidth);
-    return () => window.removeEventListener("resize", checkWidth);
-  }, []);
+	useEffect(() => {
+		checkWidth();
+		window.addEventListener("resize", checkWidth);
+		return () => window.removeEventListener("resize", checkWidth);
+	}, []);
 
-  const isMobileHorizontalOrientation = isMobile() && horizontalOrientation;
+	const isMobileHorizontalOrientation = isMobile() && horizontalOrientation;
 
-  return (
-    <div className="access-selector" style={{ marginInlineEnd: "16px" }}>
-      {!(isMobile() && !isMobileHorizontalOrientation) ? (
-        <AccessRightSelect
-          className={className}
-          selectedOption={selectedOption as unknown as TOption}
-          onSelect={onSelectAccess}
-          accessOptions={
-            (filteredAccesses || accessOptions) as unknown as TOption[]
-          }
-          noBorder={noBorder}
-          directionX={directionX as "right" | "left"}
-          directionY={directionY as "bottom" | "top" | "both" | undefined}
-          fixedDirection
-          manualWidth={`${width}px`}
-          isDefaultMode={false}
-          isAside={false}
-          setIsOpenItemAccess={setIsOpenItemAccess}
-          isDisabled={isDisabled}
-          isSelectionDisabled={isSelectionDisabled}
-          selectionErrorText={selectionErrorText}
-          availableAccess={availableAccess}
-          scaledOptions={scaledOptions}
-          dataTestId={dataTestId}
-          showDisabledItems={true}
-        />
-      ) : null}
+	return (
+		<div className="access-selector" style={{ marginInlineEnd: "16px" }}>
+			{!(isMobile() && !isMobileHorizontalOrientation) ? (
+				<AccessRightSelect
+					className={className}
+					selectedOption={selectedOption as unknown as TOption}
+					onSelect={onSelectAccess}
+					accessOptions={
+						(filteredAccesses || accessOptions) as unknown as TOption[]
+					}
+					noBorder={noBorder}
+					directionX={directionX as "right" | "left"}
+					directionY={directionY as "bottom" | "top" | "both" | undefined}
+					fixedDirection
+					manualWidth={`${width}px`}
+					isDefaultMode={false}
+					isAside={false}
+					setIsOpenItemAccess={setIsOpenItemAccess}
+					isDisabled={isDisabled}
+					isSelectionDisabled={isSelectionDisabled}
+					selectionErrorText={selectionErrorText}
+					availableAccess={availableAccess}
+					scaledOptions={scaledOptions}
+					dataTestId={dataTestId}
+					showDisabledItems={true}
+				/>
+			) : null}
 
-      {isMobile() && !isMobileHorizontalOrientation ? (
-        <AccessRightSelect
-          className={className}
-          selectedOption={selectedOption as unknown as TOption}
-          onSelect={onSelectAccess}
-          accessOptions={
-            (filteredAccesses || accessOptions) as unknown as TOption[]
-          }
-          noBorder={noBorder}
-          directionX="right"
-          directionY="top"
-          fixedDirection
-          manualWidth="auto"
-          isDefaultMode
-          isAside={isMobileView}
-          setIsOpenItemAccess={setIsOpenItemAccess}
-          manualY="0px"
-          withBackground={isMobileView}
-          withBlur={isMobileView}
-          isDisabled={isDisabled}
-          isSelectionDisabled={isSelectionDisabled}
-          selectionErrorText={selectionErrorText}
-          availableAccess={availableAccess}
-          scaledOptions={scaledOptions}
-          dataTestId={dataTestId}
-          showDisabledItems={true}
-        />
-      ) : null}
-    </div>
-  );
+			{isMobile() && !isMobileHorizontalOrientation ? (
+				<AccessRightSelect
+					className={className}
+					selectedOption={selectedOption as unknown as TOption}
+					onSelect={onSelectAccess}
+					accessOptions={
+						(filteredAccesses || accessOptions) as unknown as TOption[]
+					}
+					noBorder={noBorder}
+					directionX="right"
+					directionY="top"
+					fixedDirection
+					manualWidth="auto"
+					isDefaultMode
+					isAside={isMobileView}
+					setIsOpenItemAccess={setIsOpenItemAccess}
+					manualY="0px"
+					withBackground={isMobileView}
+					withBlur={isMobileView}
+					isDisabled={isDisabled}
+					isSelectionDisabled={isSelectionDisabled}
+					selectionErrorText={selectionErrorText}
+					availableAccess={availableAccess}
+					scaledOptions={scaledOptions}
+					dataTestId={dataTestId}
+					showDisabledItems={true}
+				/>
+			) : null}
+		</div>
+	);
 };
 
 export default inject<TStore>(({ settingsStore }) => {
-  const { standalone } = settingsStore;
+	const { standalone } = settingsStore;
 
-  return {
-    standalone,
-  };
+	return {
+		standalone,
+	};
 })(observer(AccessSelector));

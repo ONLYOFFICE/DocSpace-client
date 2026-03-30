@@ -31,13 +31,13 @@ import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import { useTheme } from "@docspace/shared/hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import {
   FilesRow,
   FilesRowWrapper,
 } from "@docspace/shared/components/files-row";
-import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
-import { RoomIcon } from "@docspace/shared/components/room-icon";
+import { DragAndDrop } from "@docspace/ui-kit/components/drag-and-drop";
+import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 import Badges from "@docspace/shared/components/badges";
 
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";

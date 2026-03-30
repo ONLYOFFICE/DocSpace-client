@@ -28,14 +28,15 @@ import React from "react";
 import { decode } from "he";
 import type { TFunction } from "i18next";
 
-import { getCorrectDate } from "@docspace/shared/utils";
-import { Link } from "@docspace/shared/components/link";
-import { Text } from "@docspace/shared/components/text";
-import { Tag } from "@docspace/shared/components/tag";
+import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
+import { Link } from "@docspace/ui-kit/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
+
 import { isRoom } from "@docspace/shared/utils/typeGuards";
 import { getFileTypeName } from "@docspace/shared/utils/getFileType";
 import { getAccessLabel } from "@docspace/shared/components/share/Share.helpers";
 
+import type { ShareAccessRights } from "@docspace/shared/enums";
 import type { TCreatedBy, TTranslation } from "@docspace/shared/types";
 import type { TRoom, TRoomLifetime } from "@docspace/shared/api/rooms/types";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
@@ -44,6 +45,7 @@ import {
   connectedCloudsTypeTitleTranslation as getProviderTranslation,
   getRoomTypeName,
 } from "SRC_DIR/helpers/filesUtils";
+import { TagManagement } from "SRC_DIR/components/TagManagement";
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import { getPropertyClassName } from "SRC_DIR/helpers/infopanel";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
@@ -70,19 +72,20 @@ const link = (txt: React.ReactNode, onClick: () => void) => (
 
 const tagList = (
   tags: string[],
-  selectTag: (tag: { label: string }) => void,
+  id: number,
+  access: ShareAccessRights,
+  title: string,
 ) => (
   <div className="property-tag_list" data-testid="info_panel_details_tag_list">
-    {tags.map((tag, index) => (
-      <Tag
-        key={tag}
-        className="property-tag"
-        label={tag}
-        tag={tag}
-        onClick={() => selectTag({ label: tag })}
-        dataTestId={`info_panel_details_tag_${index}`}
-      />
-    ))}
+    <TagManagement
+      id={id}
+      isActive
+      tags={tags}
+      className="tags"
+      columnCount={-1}
+      access={access}
+      roomName={title}
+    />
   </div>
 );
 
@@ -104,7 +107,6 @@ type DetailsHelperProps = {
   culture: string;
   isVisitor: boolean;
   isCollaborator: boolean;
-  selectTag: (tag: { label: string }) => void;
   isDefaultRoomsQuotaSet: boolean;
   isDefaultAIAgentsQuotaSet: boolean;
   isAIAgentsFolder: boolean;
@@ -124,8 +126,6 @@ class DetailsHelper {
 
   isCollaborator: boolean;
 
-  selectTag: (tag: { label: string }) => void;
-
   isDefaultRoomsQuotaSet: boolean;
 
   isDefaultAIAgentsQuotaSet: boolean;
@@ -141,7 +141,6 @@ class DetailsHelper {
     this.culture = props.culture;
     this.isVisitor = props.isVisitor;
     this.isCollaborator = props.isCollaborator;
-    this.selectTag = props.selectTag;
     this.isDefaultRoomsQuotaSet = props.isDefaultRoomsQuotaSet;
     this.isDefaultAIAgentsQuotaSet = props.isDefaultAIAgentsQuotaSet;
     this.isAIAgentsFolder = props.isAIAgentsFolder;
@@ -446,7 +445,13 @@ class DetailsHelper {
   };
 
   getItemTags = () => {
-    if ("tags" in this.item) return tagList(this.item.tags, this.selectTag);
+    if ("tags" in this.item)
+      return tagList(
+        this.item.tags,
+        this.item.id,
+        this.item.access,
+        this.item.title,
+      );
   };
 
   getQuotaItem = () => {

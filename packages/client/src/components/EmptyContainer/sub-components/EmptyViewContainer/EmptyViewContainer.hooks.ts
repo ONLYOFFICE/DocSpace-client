@@ -28,8 +28,8 @@ import { useMemo, useCallback } from "react";
 import { useNavigate, LinkProps } from "react-router";
 import { isMobile } from "react-device-detect";
 
-import { useTheme } from "@docspace/shared/hooks/useTheme";
-import { toastr } from "@docspace/shared/components/toast";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import {
   Events,
   FileExtensions,
@@ -44,7 +44,7 @@ import type { TTranslation } from "@docspace/shared/types";
 import { CategoryType } from "@docspace/shared/constants";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
-import { InfoPanelView } from "SRC_DIR/store/InfoPanelStore";
+import { InfoPanelView } from "SRC_DIR/helpers/info-panel";
 
 import {
   getDescription,
@@ -230,7 +230,7 @@ export const useOptions = (
   }, [roomsFolder?.rootFolderType, roomsFolder?.title, userId]);
 
   const onGoToServices = useCallback(() => {
-    return navigate("/portal-settings/services");
+    return navigate("/portal-settings/payments/services");
   }, []);
 
   const onGoToAIProviderSettings = useCallback(() => {

@@ -26,7 +26,7 @@
 
 import styled from "styled-components";
 
-import { Scrollbar } from "../../components/scrollbar";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 
 const StyledEditLinkBodyContent = styled.div`
   padding: 20px 0px 0px;

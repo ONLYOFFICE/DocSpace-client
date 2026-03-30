@@ -30,6 +30,20 @@ import React from "react";
 import { vi } from "vitest";
 import "@testing-library/jest-dom/vitest";
 
+import enCommon from "PUBLIC_DIR/locales/en/Common.json";
+
+(
+  window as unknown as {
+    i18n: {
+      t: (key: string) => string;
+      loaded: Record<string, { data: Record<string, string> }>;
+    };
+  }
+).i18n = {
+  t: (key: string) => enCommon[key as keyof typeof enCommon] ?? key,
+  loaded: { "en/Common.json": { data: enCommon } },
+};
+
 class MockDOMRect {
   static fromRect(other?: DOMRectInit): DOMRect {
     const rect = other || { x: 0, y: 0, width: 0, height: 0 };
@@ -111,3 +125,8 @@ vi.mock("../utils/image-helpers", () => ({
 
 global.TextEncoder = TextEncoder;
 global.TextDecoder = TextDecoder;
+
+// @tanem/svg-injector uses SVGSVGElement which jsdom doesn't provide
+if (typeof SVGSVGElement === "undefined") {
+  global.SVGSVGElement = class SVGSVGElement {} as unknown as typeof SVGSVGElement;
+}

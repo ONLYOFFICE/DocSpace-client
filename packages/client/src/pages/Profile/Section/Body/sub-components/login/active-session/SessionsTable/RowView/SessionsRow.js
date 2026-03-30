@@ -27,81 +27,81 @@
 import { inject, observer } from "mobx-react";
 import { isMobile } from "@docspace/shared/utils";
 
-import { Row } from "@docspace/shared/components/rows";
-import { IconButton } from "@docspace/shared/components/icon-button";
+import { Row } from "@docspace/ui-kit/components/rows";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import RemoveSessionSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
 import TickSvgUrl from "PUBLIC_DIR/images/tick.svg?url";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import SessionsRowContent from "./SessionsRowContent";
 
 const SessionsRow = (props) => {
-  const {
-    item,
-    sectionWidth,
-    currentSession,
-    setPlatformModalData,
-    setLogoutDialogVisible,
-  } = props;
+	const {
+		item,
+		sectionWidth,
+		currentSession,
+		setPlatformModalData,
+		setLogoutDialogVisible,
+	} = props;
 
-  const showTickIcon = currentSession === item.id;
+	const showTickIcon = currentSession === item.id;
 
-  const onRemoveClick = () => {
-    setLogoutDialogVisible(true);
-    setPlatformModalData({
-      id: item?.id,
-      platform: item?.platform,
-      browser: item?.browser,
-    });
-  };
+	const onRemoveClick = () => {
+		setLogoutDialogVisible(true);
+		setPlatformModalData({
+			id: item?.id,
+			platform: item?.platform,
+			browser: item?.browser,
+		});
+	};
 
-  const contentElement = showTickIcon ? (
-    !isMobile() && (
-      <IconButton
-        size={16}
-        iconName={TickSvgUrl}
-        color={globalColors.tickColor}
-      />
-    )
-  ) : (
-    <IconButton
-      size={20}
-      iconName={RemoveSessionSvgUrl}
-      isClickable
-      onClick={onRemoveClick}
-      dataTestId="session_remove_icon_button"
-    />
-  );
+	const contentElement = showTickIcon ? (
+		!isMobile() && (
+			<IconButton
+				size={16}
+				iconName={TickSvgUrl}
+				color={globalColors.tickColor}
+			/>
+		)
+	) : (
+		<IconButton
+			size={20}
+			iconName={RemoveSessionSvgUrl}
+			isClickable
+			onClick={onRemoveClick}
+			dataTestId="session_remove_icon_button"
+		/>
+	);
 
-  return (
-    <Row
-      key={item.id}
-      data={item}
-      sectionWidth={sectionWidth}
-      contentElement={contentElement}
-      dataTestId={`session_row_${item.id}`}
-    >
-      <SessionsRowContent
-        id={item.id}
-        platform={item.platform}
-        browser={item.browser}
-        date={item.date}
-        country={item.country}
-        city={item.city}
-        ip={item.ip}
-        sectionWidth={sectionWidth}
-        showTickIcon={showTickIcon}
-      />
-    </Row>
-  );
+	return (
+		<Row
+			key={item.id}
+			data={item}
+			sectionWidth={sectionWidth}
+			contentElement={contentElement}
+			dataTestId={`session_row_${item.id}`}
+		>
+			<SessionsRowContent
+				id={item.id}
+				platform={item.platform}
+				browser={item.browser}
+				date={item.date}
+				country={item.country}
+				city={item.city}
+				ip={item.ip}
+				sectionWidth={sectionWidth}
+				showTickIcon={showTickIcon}
+			/>
+		</Row>
+	);
 };
 
 export default inject(({ setup }) => {
-  const { currentSession, setLogoutDialogVisible, setPlatformModalData } =
-    setup;
+	const { currentSession, setLogoutDialogVisible, setPlatformModalData } =
+		setup;
 
-  return {
-    currentSession,
-    setLogoutDialogVisible,
-    setPlatformModalData,
-  };
+	return {
+		currentSession,
+		setLogoutDialogVisible,
+		setPlatformModalData,
+	};
 })(observer(SessionsRow));

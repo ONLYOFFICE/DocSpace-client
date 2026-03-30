@@ -40,7 +40,8 @@ import {
   TLicenseQuota,
 } from "./types";
 import { Nullable } from "../../types";
-import { Encoder } from "../../utils/encoder";
+import { Encoder } from "@docspace/ui-kit/utils/encoder";
+import { AI_TOOLS } from "../../constants";
 
 const baseURL = "/apisystem";
 
@@ -471,6 +472,29 @@ export function getBalance(refresh?: boolean, signal?: AbortSignal) {
   }) as TBalance;
 }
 
+export async function getServiceQuotaBalance(
+  serviceName: string = AI_TOOLS,
+  refresh?: boolean,
+  signal?: AbortSignal,
+) {
+  const params = refresh ? { refresh: true } : {};
+
+  return request({
+    method: "get",
+    url: `/portal/payment/customer/servicequota?serviceName=${serviceName}`,
+    params,
+    signal,
+  }) as TBalance;
+}
+
+export async function getAiPrices(signal?: AbortSignal) {
+  return request({
+    method: "get",
+    url: `/portal/payment/ai-prices`,
+    signal,
+  });
+}
+
 export async function getWalletPayer(refresh?: boolean, signal?: AbortSignal) {
   const params = refresh ? { refresh: true } : {};
 
@@ -512,6 +536,17 @@ export async function saveDeposite(amount: number, currency: string) {
   }) as string;
 }
 
+export async function buyWalletService(quantity: number, serviceName: string) {
+  return request({
+    method: "post",
+    url: "/portal/payment/buywalletservice",
+    data: {
+      quantity,
+      serviceName,
+    },
+  }) as string;
+}
+
 export async function getTransactionHistory(
   startDate: string,
   endDate: string,
@@ -520,8 +555,10 @@ export async function getTransactionHistory(
   participantName: string = "",
   offset: number = 0,
   limit: number = 25,
+  serviceName: string = "",
   signal?: AbortSignal,
 ) {
+ //debugger
   const params = {
     startDate,
     endDate,
@@ -533,6 +570,13 @@ export async function getTransactionHistory(
 
   if (participantName) {
     params.participantName = participantName;
+  }
+
+  if (serviceName) {
+    params.serviceName = serviceName;
+  }
+  if (serviceName === AI_TOOLS) {
+    params.writeOffServiceQuota = true;
   }
 
   const options = {
@@ -586,17 +630,29 @@ export async function startTransactionHistoryReport(
   startDate: string,
   endDate: string,
   credit: boolean,
-  withdrawal: boolean,
+  debit: boolean,
+  participantName?: string,
+  serviceName?: string,
 ) {
+  const data = {
+    startDate,
+    endDate,
+    credit,
+    debit,
+  };
+
+  if (participantName) {
+    data.participantName = participantName;
+  }
+
+  if (serviceName) {
+    data.serviceName = serviceName;
+  }
+
   const options = {
     method: "post",
     url: "/portal/payment/customer/operationsreport",
-    data: {
-      startDate,
-      endDate,
-      credit,
-      withdrawal,
-    },
+    data,
   };
   const res = (await request(options)) as TransactionHistoryReport;
 
@@ -645,3 +701,69 @@ export async function getLicenseQuota() {
   const res = (await request(options)) as TLicenseQuota;
   return res;
 }
+
+export async function getInviteLink(employeeType) {
+  const options = {
+    method: "get",
+    url: `/portal/users/invitationlink/${employeeType}`,
+  };
+  const res = await request(options);
+  return res;
+}
+
+export async function createInviteLink(data) {
+  const options = {
+    method: "post",
+    url: `/portal/users/invitationlink`,
+    data,
+  };
+  const res = await request(options);
+  return res;
+}
+
+export async function deleteInviteLink(id) {
+  const data = { id };
+  const options = {
+    method: "delete",
+    url: "/portal/users/invitationlink",
+    data,
+  };
+  const res = await request(options);
+  return res;
+}
+
+export async function updateInviteLink(data) {
+  const options = {
+    method: "PUT",
+    url: "/portal/users/invitationlink",
+    data,
+  };
+  const res = await request(options);
+  return res;
+}
+
+export type TAiModelAvailabilitySettingsResponse =
+  | []
+  | {
+      models: string[];
+    };
+
+export const getAiModelRestrictions = async (signal?: AbortSignal) => {
+  return request({
+    method: "get",
+    url: "/portal/payment/ai-model/restrictions",
+    signal,
+  }) as Promise<TAiModelAvailabilitySettingsResponse>;
+};
+
+export const setAiModelRestrictions = async (
+  models: string[],
+  signal?: AbortSignal,
+) => {
+  return request({
+    method: "put",
+    url: "/portal/payment/ai-model/restrictions",
+    data: { models },
+    signal,
+  });
+};

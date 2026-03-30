@@ -52,7 +52,7 @@
 
 "use client";
 
-import { LoaderWrapper } from "@docspace/shared/components/loader-wrapper";
+import { LoaderWrapper } from "@docspace/ui-kit/components/loader-wrapper";
 import { TDomainValidator } from "@docspace/shared/api/settings/types";
 
 import { useEndAnimation } from "@/hooks/useEndAnimation";

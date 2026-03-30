@@ -3,7 +3,7 @@
   "content": "Subtitle",
   "content_en_sha1_hash": "e159d05a124cfbe60229903bf1f8e6a61682bee5",
   "created_at": "2025-05-19T21:30:54.697Z",
-  "updated_at": "2025-05-24T08:45:51.242Z",
+  "updated_at": "2026-03-20T09:07:45.590Z",
   "comment": {
     "text": "\"This is a general subtitle used throughout the application. It will appear as the title of certain settings pages and dialogs, providing context to users navigating developer tools.\"",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
-      "line_number": 48,
+      "line_number": 51,
       "context": "import { setDocumentTitle } from \"SRC_DIR/helpers/utils\";\n import { getManyPDFTitle } from \"@docspace/shared/utils/getPDFTite\";\n \n import SearchUrl from \"PUBLIC_DIR/images/sdk-presets_files-search.react.svg?url\";\n import SearchUrlDark from \"PUBLIC_DIR/images/sdk-presets_files-search_dark.png?url\";\n import SubtitleUrl from \"PUBLIC_DIR/images/sdk-presets_subtitle.react.svg?url\";\n import SubtitleUrlDark from \"PUBLIC_DIR/images/sdk-presets_subtitle_dark.png?url\";\n \n import {\n defaultDimension,\n defaultSize,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
-      "line_number": 48,
+      "line_number": 51,
       "context": "import { setDocumentTitle } from \"SRC_DIR/helpers/utils\";\n import { getManyPDFTitle } from \"@docspace/shared/utils/getPDFTite\";\n \n import SearchUrl from \"PUBLIC_DIR/images/sdk-presets_files-search.react.svg?url\";\n import SearchUrlDark from \"PUBLIC_DIR/images/sdk-presets_files-search_dark.png?url\";\n import SubtitleUrl from \"PUBLIC_DIR/images/sdk-presets_subtitle.react.svg?url\";\n import SubtitleUrlDark from \"PUBLIC_DIR/images/sdk-presets_subtitle_dark.png?url\";\n \n import {\n defaultDimension,\n defaultSize,",
       "module": "/packages/client"
     }

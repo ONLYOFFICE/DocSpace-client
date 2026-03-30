@@ -26,16 +26,25 @@
 
 import { useEffect, useRef, useCallback, use } from "react";
 import { useTranslation } from "react-i18next";
-import moment from "moment";
 
 import { TRoom } from "@docspace/shared/api/rooms/types";
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
-import ScrollbarContext from "@docspace/shared/components/scrollbar/custom-scrollbar/ScrollbarContext";
+import { ScrollbarContext } from "@docspace/ui-kit/components/scrollbar";
 import HistoryItemLoader from "@docspace/shared/skeletons/info-panel/body/views/HistoryItemLoader";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { TTranslation } from "@docspace/shared/types";
-import { getCookie } from "@docspace/shared/utils";
+import { getCookie } from "@docspace/ui-kit/utils/cookie";
+import {
+  parseToDateTime,
+  now as dateNow,
+  subtractFromDate,
+  isAfter,
+  isBetween,
+  formatDate,
+  getWeekdayName,
+  isSameDay,
+} from "@docspace/ui-kit/utils/date";
 
 import { useHistory } from "../FilesView/hooks/useHistory";
 
@@ -47,28 +56,30 @@ import { useSocket } from "./hooks/useSocket";
 import { HistorySelectionProvider } from "./providers/HistorySelection.provider";
 
 export const getRelativeDateDay = (t: TTranslation, date: string) => {
-  moment.locale(getCookie(LANGUAGE));
+  const locale = getCookie(LANGUAGE) || "en";
 
-  const given = moment(date).tz(window.timezone);
+  const given = parseToDateTime(date)?.setZone(window.timezone);
+  if (!given) return "";
 
-  const now = moment();
-  const weekAgo = moment().subtract(1, "week");
-  const halfYearAgo = moment().subtract(6, "month");
+  const currentDate = dateNow();
+  const weekAgo = subtractFromDate(currentDate, 1, "weeks");
+  const halfYearAgo = subtractFromDate(currentDate, 6, "months");
+  const yesterday = subtractFromDate(currentDate, 1, "days");
 
-  if (given.isAfter(weekAgo)) {
-    if (now.weekday() === given.weekday()) return t("Common:Today");
-    if (now.weekday() - 1 === given.weekday()) return t("Common:Yesterday");
+  if (isAfter(given, weekAgo)) {
+    if (isSameDay(currentDate, given)) return t("Common:Today");
+    if (isSameDay(yesterday, given)) return t("Common:Yesterday");
 
-    const weekday = moment.weekdays(given.weekday());
+    const weekday = getWeekdayName(given.weekday, "long", locale);
     return weekday.charAt(0).toUpperCase() + weekday.slice(1);
   }
 
-  if (given.isBetween(halfYearAgo, weekAgo)) {
-    const shortDate = given.format("MMMM D");
+  if (isBetween(given, halfYearAgo, weekAgo)) {
+    const shortDate = formatDate(given, "MMMM d", { locale });
     return shortDate.charAt(0).toUpperCase() + shortDate.slice(1);
   }
 
-  const longDate = given.format("MMMM D, YYYY");
+  const longDate = formatDate(given, "MMMM d, yyyy", { locale });
   return longDate.charAt(0).toUpperCase() + longDate.slice(1);
 };
 
@@ -113,7 +124,7 @@ const History = ({
   });
 
   const onCheckListScroll = () => {
-    if (loading.current) return;
+    if (loading.current || !scrollElement) return;
     const all = scrollElement.scrollHeight;
     const current = scrollElement.scrollTop;
     const more = all - (current + scrollElement.clientHeight) <= 10;

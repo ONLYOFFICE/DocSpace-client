@@ -27,7 +27,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import styled, { useTheme } from "styled-components";
 
-import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
+import { EmptyScreenContainer } from "@docspace/ui-kit/components/empty-screen-container";
 
 import EmptyCanceledLight from "PUBLIC_DIR/images/emptyview/empty.records.light.svg?url";
 import EmptyCanceledDark from "PUBLIC_DIR/images/emptyview/empty.records.dark.svg?url";

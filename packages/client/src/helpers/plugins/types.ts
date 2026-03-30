@@ -41,6 +41,7 @@ import type {
   IInfoPanelSubMenu,
   IMainButtonItem,
   IProfileMenuItem,
+  IArticleButtonItem,
   ISettings,
   IMessage,
   IPostMessage,
@@ -53,10 +54,15 @@ import type {
   IInfoPanelPlugin,
   IMainButtonPlugin,
   IProfileMenuPlugin,
+  IArticleButtonPlugin,
   IPlugin,
   IApiPlugin,
   ISettingsPlugin,
   ButtonGroup,
+  IFloatingOperationsButton,
+  IPostMessageCallbackMessage,
+  IPostMessagePlugin,
+  IMediaViewer,
 } from "@onlyoffice/docspace-plugin-sdk";
 
 import type {
@@ -70,6 +76,7 @@ import type {
 export type {
   ISettings,
   IMessage,
+  IPostMessageCallbackMessage,
   IPostMessage,
   IFrame,
   IImage,
@@ -85,12 +92,22 @@ export type {
   IInfoPanelItem,
   IMainButtonItem,
   IProfileMenuItem,
+  IArticleButtonItem,
 };
 
 //Extended client-side types
-export interface IContextMenuItemClient extends IContextMenuItem {
+export interface IFloatingOperationsButtonClient
+  extends IFloatingOperationsButton {
+  pluginName: string;
+}
+
+export interface IContextMenuItemClient
+  extends Omit<IContextMenuItem, "onClick"> {
   pluginName: string;
   items?: Omit<IContextMenuItemClient, "items">[];
+  onClick?: (
+    id: number | string,
+  ) => Promise<IMessage> | Promise<void> | IMessage | void;
 }
 
 export interface IMainButtonItemClient extends IMainButtonItem {
@@ -120,6 +137,14 @@ export interface IFileItemClient extends Omit<IFileItem, "onClick"> {
   onClick: (item: TFile) => Promise<IMessage> | Promise<void> | void | IMessage;
   fileIcon: string;
   fileIconTile: string;
+  pluginName: string;
+}
+
+export interface IArticleButtonItemClient extends IArticleButtonItem {
+  pluginName: string;
+}
+
+export interface IMediaViewerClient extends IMediaViewer {
   pluginName: string;
 }
 
@@ -158,6 +183,7 @@ export type TPlugin = {
   enabled: boolean;
   system: boolean;
   url: string;
+  cssUrl?: string;
   settings: string;
   iconUrl: string;
   setLanguage?: (locale: string) => void;
@@ -170,4 +196,6 @@ export type TPlugin = {
   Partial<IInfoPanelPlugin> &
   Partial<IMainButtonPlugin> &
   Partial<IProfileMenuPlugin> &
-  Partial<ISettingsPlugin>;
+  Partial<ISettingsPlugin> &
+  Partial<IPostMessagePlugin> &
+  Partial<IArticleButtonPlugin>;

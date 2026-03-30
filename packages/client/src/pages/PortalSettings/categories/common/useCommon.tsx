@@ -28,6 +28,8 @@ import React, { useCallback, useMemo } from "react";
 
 import BrandingStore from "SRC_DIR/store/portal-settings/BrandingStore";
 import CommonStore from "SRC_DIR/store/CommonStore";
+import DefaultTemplatesStore from "SRC_DIR/store/portal-settings/DefaultTemplatesStore";
+
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { mapCulturesToArray } from "@docspace/shared/utils/common";
 import i18n from "SRC_DIR/i18n";
@@ -42,6 +44,8 @@ export type UseCommonProps = {
   isLoaded?: CommonStore["isLoaded"];
 
   cultures?: SettingsStore["cultures"];
+
+  getDefaultTemplates?: DefaultTemplatesStore["getTemplates"];
 };
 
 const useCommon = ({
@@ -55,6 +59,8 @@ const useCommon = ({
   isLoaded,
 
   cultures,
+
+  getDefaultTemplates,
 }: UseCommonProps) => {
   const getCustomizationData = useCallback(
     async (
@@ -63,7 +69,8 @@ const useCommon = ({
         | "dns-settings"
         | "configure-deep-link"
         | "welcome-page-settings"
-        | "ad-management",
+        | "ad-management"
+        | "ai-services-management",
     ) => {
       if (isLoaded) return;
 
@@ -93,6 +100,10 @@ const useCommon = ({
     await Promise.all([getBrandName?.(), initWhiteLabel?.()]);
   }, [getBrandName, initWhiteLabel]);
 
+  const getTemplatesData = useCallback(async () => {
+    await Promise.all([getDefaultTemplates?.()]);
+  }, [getDefaultTemplates]);
+
   const cultureNames = useMemo(
     () => (cultures ? mapCulturesToArray(cultures, true, i18n) : []),
     [cultures],
@@ -112,6 +123,9 @@ const useCommon = ({
     if (window.location.pathname.includes("ad-management"))
       actions.push(getCustomizationData("ad-management"));
 
+    if (window.location.pathname.includes("ai-services-management"))
+      actions.push(getCustomizationData("ai-services-management"));
+
     if (window.location.pathname.includes("dns-settings"))
       actions.push(getCustomizationData("dns-settings"));
 
@@ -127,6 +141,9 @@ const useCommon = ({
     if (!isMobileView && window.location.pathname.includes("branding"))
       actions.push(getBrandingData());
 
+    if (window.location.pathname.includes("default-templates"))
+      actions.push(getTemplatesData());
+
     await Promise.all(actions);
   }, [
     getCustomizationData,
@@ -140,6 +157,7 @@ const useCommon = ({
     getCustomizationData,
     getBrandingData,
     getCommonInitialValue,
+    getTemplatesData,
     cultureNames,
   };
 };

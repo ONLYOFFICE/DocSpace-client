@@ -24,10 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Portal } from "@docspace/shared/components/portal";
-import { TUser } from "@docspace/shared/api/people/types";
-import PeopleSelector from "@docspace/shared/selectors/People";
-import { TOnSubmit } from "@docspace/shared/components/selector/Selector.types";
+import { Portal } from "@docspace/ui-kit/components/portal";
+import PeopleSelector from "@docspace/ui-kit/selectors/People";
+import { TOnSubmit } from "@docspace/ui-kit/components/selector";
+import type { PeopleSelectorProps } from "@docspace/ui-kit/selectors/People/PeopleSelector.types";
 
 type MembersSelectorProps = {
   isVisible: boolean;
@@ -36,7 +36,10 @@ type MembersSelectorProps = {
 
   addMembers: TOnSubmit;
 } & (
-  | { checkIfUserInvited: (user: TUser) => boolean; invitedUsers?: undefined }
+  | {
+      checkIfUserInvited: PeopleSelectorProps["checkIfUserInvited"];
+      invitedUsers?: undefined;
+    }
   | { invitedUsers: string[]; checkIfUserInvited?: undefined }
 );
 

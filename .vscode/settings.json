@@ -1,6 +1,9 @@
 {
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
   "files.exclude": {
     "**/packages": true,
+    // "**/libs": true,
     "**/.nuget": true,
     "**/Data": true,
     "**/i18next": true,
@@ -19,5 +22,10 @@
     "**/LICENSE": true,
     "**/build/install": true
   },
-  "gitlens.remotes": [{ "domain": "git.onlyoffice.com", "type": "Gitea" }]
+  "gitlens.remotes": [
+    {
+      "domain": "git.onlyoffice.com",
+      "type": "Gitea"
+    }
+  ],
 }

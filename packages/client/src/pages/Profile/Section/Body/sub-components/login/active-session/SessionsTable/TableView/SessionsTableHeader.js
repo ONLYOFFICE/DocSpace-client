@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useEffect, useState } from "react";
-import { TableHeader } from "@docspace/shared/components/table";
+import { TableHeader } from "@docspace/ui-kit/components/table";
 
 const TABLE_VERSION = "5";
 const TABLE_COLUMNS = `SessionsColumns_ver-${TABLE_VERSION}`;

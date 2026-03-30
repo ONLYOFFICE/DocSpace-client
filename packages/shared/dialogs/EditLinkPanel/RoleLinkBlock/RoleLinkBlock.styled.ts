@@ -26,7 +26,7 @@
 
 import styled from "styled-components";
 
-import { globalColors } from "../../../themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme";
 
 export const RoleLinkBlockWrapper = styled.div`
   display: flex;

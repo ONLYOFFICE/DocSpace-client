@@ -27,30 +27,30 @@
 import React from "react";
 import { isDesktop as isDesktopUtils } from "../../../utils";
 
-import { RectangleSkeleton } from "../../rectangle";
+import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 
 import styles from "./Header.module.scss";
 
 const InfoPanelHeaderLoader = () => {
-  const isTablet = !isDesktopUtils();
+	const isTablet = !isDesktopUtils();
 
-  return (
-    <div
-      className={styles.header}
-      data-is-tablet={isTablet ? "true" : "false"}
-      data-with-submenu="false"
-      data-testid="info-panel-header-loader"
-    >
-      <div className="main">
-        <RectangleSkeleton width="120px" height="24px" borderRadius="3px" />
-        {!isTablet ? (
-          <div className="info-panel-toggle-bg">
-            <RectangleSkeleton width="32px" height="32px" borderRadius="50%" />
-          </div>
-        ) : null}
-      </div>
-    </div>
-  );
+	return (
+		<div
+			className={styles.header}
+			data-is-tablet={isTablet ? "true" : "false"}
+			data-with-submenu="false"
+			data-testid="info-panel-header-loader"
+		>
+			<div className="main">
+				<RectangleSkeleton width="120px" height="24px" borderRadius="3px" />
+				{!isTablet ? (
+					<div className="info-panel-toggle-bg">
+						<RectangleSkeleton width="32px" height="32px" borderRadius="50%" />
+					</div>
+				) : null}
+			</div>
+		</div>
+	);
 };
 
 export default InfoPanelHeaderLoader;

@@ -27,7 +27,7 @@
 import React from "react";
 import classNames from "classnames";
 
-import { Button, ButtonSize } from "../../../../../../components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import {
   BackupStorageLocalKey,
   ThirdPartyStorages,

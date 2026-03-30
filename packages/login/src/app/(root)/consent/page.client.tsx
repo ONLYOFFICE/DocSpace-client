@@ -31,14 +31,14 @@ import { useTranslation, Trans } from "react-i18next";
 import { useRouter } from "next/navigation";
 
 import { ScopeList } from "@docspace/shared/utils/oauth/scope-list";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
-import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
 import {
   Avatar,
   AvatarRole,
   AvatarSize,
-} from "@docspace/shared/components/avatar";
+} from "@docspace/ui-kit/components/avatar";
 import {
   getOAuthJWTSignature,
   setOAuthJWTSignature,
@@ -47,11 +47,11 @@ import {
   getCookie,
   deleteCookie,
   setCookie,
-} from "@docspace/shared/utils/cookie";
+} from "@docspace/ui-kit/utils/cookie";
 import { IClientProps, TScope } from "@docspace/shared/utils/oauth/types";
 import { TUser } from "@docspace/shared/api/people/types";
 import api from "@docspace/shared/api";
-import { FormWrapper } from "@docspace/shared/components/form-wrapper";
+import { FormWrapper } from "@docspace/ui-kit/components/form-wrapper";
 
 import { getRedirectURL } from "@/utils";
 import OAuthClientInfo from "../../../components/ConsentInfo";

@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import { isMobile as isMobileDevice } from "react-device-detect";
 
-import { isTablet, isMobile } from "./device";
+import { isTablet, isMobile } from "@docspace/ui-kit/utils/device";
 import { DeviceType, FolderType, RoomsType } from "../enums";
 import type { Nullable } from "../types";
 

@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useRef } from "react";
-import { Row } from "@docspace/shared/components/rows";
+import { Row } from "@docspace/ui-kit/components/rows";
 import UsersRowContent from "./UsersRowContent";
 import { TypeSelectUsersRowProps } from "../../../../types";
 

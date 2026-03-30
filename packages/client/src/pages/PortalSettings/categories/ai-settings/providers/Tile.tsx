@@ -28,23 +28,30 @@
 
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/shared/components/text";
-import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { ContextMenuButton } from "@docspace/ui-kit/components/context-menu-button";
 import type { TAiProvider } from "@docspace/shared/api/ai/types";
-import { getAiProviderIcon, getAiProviderLabel } from "@docspace/shared/utils";
+import { ProviderType } from "@docspace/shared/api/ai/enums";
+import {
+  getAiProviderIcon,
+  getAiProviderLabel,
+  getLogoUrl,
+} from "@docspace/shared/utils";
 
 import SettingsIcon from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
 
 import { AiTile } from "../sub-components/ai-tile";
-
-import styles from "./../AISettings.module.scss";
+import styles from "../AISettings.module.scss";
+import { WhiteLabelLogoType } from "@docspace/ui-kit/enums";
+import { useTheme } from "@docspace/ui-kit/context";
 
 type AiProviderTileProps = {
   item: TAiProvider;
   onDeleteClick: (id: TAiProvider["id"]) => void;
   onSettingsClick: (provider: TAiProvider) => void;
   isAvailable?: boolean;
+  enabled?: boolean;
   dataTestId?: string;
 };
 
@@ -53,12 +60,13 @@ export const AiProviderTile = ({
   onDeleteClick,
   onSettingsClick,
   isAvailable = true,
+  enabled = true,
   dataTestId = "ai-provider-tile",
 }: AiProviderTileProps) => {
   const { t } = useTranslation(["Common", "AISettings"]);
 
   const icon = getAiProviderIcon(item.type) ?? "";
-  const companyLabel = getAiProviderLabel(item.type);
+  const companyLabel = getAiProviderLabel(item.type, t, enabled);
 
   const getContextOptions = () => {
     return [
@@ -94,22 +102,25 @@ export const AiProviderTile = ({
         hasError={!isAvailable}
         getErrorTooltipContent={getErrorTooltipContent}
       >
-        <ContextMenuButton
-          directionX="right"
-          directionY="both"
-          getData={getContextOptions}
-          dropDownClassName={styles.aiContextMenuDropDown}
-        />
+        {item.type !== ProviderType.PortalAi ? (
+          <ContextMenuButton
+            directionX="right"
+            directionY="both"
+            getData={getContextOptions}
+            dropDownClassName={styles.aiContextMenuDropDown}
+          />
+        ) : null}
       </AiTile.Header>
 
       <AiTile.Body>
-        <Text lineHeight="20px" truncate>
+        <Text lineHeight="20px" className={styles.truncate2Lines}>
           {companyLabel}
         </Text>
-        <Text lineHeight="20px" truncate>
+        <Text lineHeight="20px" className={styles.truncate2Lines}>
           {item.url}
         </Text>
       </AiTile.Body>
     </AiTile>
   );
 };
+

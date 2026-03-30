@@ -24,13 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import {
+import type { ThemeKeys } from "@docspace/ui-kit/enums";
+import type {
   EmployeeActivationStatus,
   EmployeeStatus,
   EmployeeType,
-  ThemeKeys,
 } from "../../enums";
-import { TCreatedBy } from "../../types";
+import type { TCreatedBy } from "../../types";
 
 export type TFilterSortBy =
   | "AZ"

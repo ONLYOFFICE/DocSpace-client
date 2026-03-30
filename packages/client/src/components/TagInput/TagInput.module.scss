@@ -24,7 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@use "@docspace/shared/styles/mixins";
+@use "@docspace/ui-kit/styles/mixins";
+@use "@docspace/ui-kit/styles/variables/colors" as *;
 
 .tagList {
   margin-top: 12px;
@@ -69,7 +70,7 @@
   padding: 6px 0;
   background: var(--create-edit-dropdown-bg);
   border: 1px solid var(--create-edit-dropdown-border);
-  box-shadow: 0px 12px 40px var(--popup-shadow);
+  box-shadow: 0px 12px 40px #{$popup-shadow};
   border-radius: 3px;
   overflow: hidden;
   width: 446px;

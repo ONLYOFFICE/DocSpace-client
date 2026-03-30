@@ -27,7 +27,6 @@
 import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import moment from "moment";
 
 import { SettingsStorageManagementSkeleton } from "@docspace/shared/skeletons/settings";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
@@ -42,15 +41,12 @@ import StyledSettingsSeparator from "../../StyledSettingsSeparator";
 
 const StorageManagementWrapper = (props) => {
   const {
-    language,
     clearIntervalCheckRecalculate,
     standalone,
     showPortalSettingsLoader,
   } = props;
 
   useEffect(() => {
-    moment.locale(language);
-
     return () => {
       clearIntervalCheckRecalculate();
     };
@@ -79,14 +75,12 @@ const StorageManagementWrapper = (props) => {
 };
 
 export const Component = inject(
-  ({ authStore, storageManagement, settingsStore, clientLoadingStore }) => {
-    const { language } = authStore;
+  ({ storageManagement, settingsStore, clientLoadingStore }) => {
     const { clearIntervalCheckRecalculate } = storageManagement;
     const { standalone } = settingsStore;
     const { showPortalSettingsLoader } = clientLoadingStore;
 
     return {
-      language,
       clearIntervalCheckRecalculate,
       standalone,
       showPortalSettingsLoader,

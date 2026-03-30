@@ -25,50 +25,53 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { RectangleSkeleton, RectangleSkeletonProps } from "../rectangle";
+import {
+	RectangleSkeleton,
+	RectangleSkeletonProps,
+} from "@docspace/ui-kit/components/rectangle";
 import styles from "./BreadCrumbs.module.scss";
 
 interface BreadCrumbsProps extends RectangleSkeletonProps {
-  id?: string;
-  className?: string;
-  style?: React.CSSProperties;
+	id?: string;
+	className?: string;
+	style?: React.CSSProperties;
 }
 
 const BreadCrumbsLoader = ({ style, ...rest }: BreadCrumbsProps) => {
-  return (
-    <div className={styles.container} data-testid="bread-crumbs-loader">
-      <RectangleSkeleton
-        width="80px"
-        height="22px"
-        style={{ ...style }}
-        {...rest}
-      />
-      <RectangleSkeleton
-        width="12px"
-        height="12px"
-        style={{ ...style }}
-        {...rest}
-      />
-      <RectangleSkeleton
-        width="80px"
-        height="22px"
-        style={{ ...style }}
-        {...rest}
-      />
-      <RectangleSkeleton
-        width="12px"
-        height="12px"
-        style={{ ...style }}
-        {...rest}
-      />
-      <RectangleSkeleton
-        width="80px"
-        height="22px"
-        style={{ ...style }}
-        {...rest}
-      />
-    </div>
-  );
+	return (
+		<div className={styles.container} data-testid="bread-crumbs-loader">
+			<RectangleSkeleton
+				width="80px"
+				height="22px"
+				style={{ ...style }}
+				{...rest}
+			/>
+			<RectangleSkeleton
+				width="12px"
+				height="12px"
+				style={{ ...style }}
+				{...rest}
+			/>
+			<RectangleSkeleton
+				width="80px"
+				height="22px"
+				style={{ ...style }}
+				{...rest}
+			/>
+			<RectangleSkeleton
+				width="12px"
+				height="12px"
+				style={{ ...style }}
+				{...rest}
+			/>
+			<RectangleSkeleton
+				width="80px"
+				height="22px"
+				style={{ ...style }}
+				{...rest}
+			/>
+		</div>
+	);
 };
 
 export default BreadCrumbsLoader;

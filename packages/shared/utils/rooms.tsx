@@ -52,6 +52,8 @@ const getStartRoomParams = (startRoomType: RoomsType, title: string) => {
     },
     withCover: false,
     previewIcon: null,
+    saveFormAsXLSX: true,
+    sendFormToExternalDB: false,
   };
 
   return startRoomParams;
@@ -112,6 +114,8 @@ export type TRoomParams = {
   modelId?: string;
   mcpServers?: string[];
   mcpServersInitial?: string[];
+  saveFormAsXLSX?: boolean;
+  sendFormToExternalDB?: boolean;
 };
 
 const getFetchedRoomParams = (
@@ -153,6 +157,8 @@ const getFetchedRoomParams = (
     prompt: item.chatSettings?.prompt,
     providerId: item.chatSettings?.providerId,
     modelId: item.chatSettings?.modelId,
+    saveFormAsXLSX: item.saveFormAsXLSX,
+    sendFormToExternalDB: item.sendFormToExternalDB,
     ...(isDefaultRoomsQuotaSet && {
       quota: item.quotaLimit,
     }),

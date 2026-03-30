@@ -29,7 +29,7 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
 import { TFilterSortBy } from "@docspace/shared/api/people/types";
-import { TableHeader, TTableColumn } from "@docspace/shared/components/table";
+import { TableHeader, TTableColumn } from "@docspace/ui-kit/components/table";
 
 import { Events, SortByFieldName } from "@docspace/shared/enums";
 
@@ -157,85 +157,7 @@ class PeopleTableHeader extends React.Component<
     const resetColumnsSize =
       (splitColumns && splitColumns.length !== columns.length) || !splitColumns;
 
-    const tableColumns = columns.map((c) => c.enable && c.key);
-    this.setTableColumns(tableColumns as string[]);
-
     this.state = { columns, resetColumnsSize };
-  }
-
-  componentDidUpdate(prevProps: Readonly<TableHeaderProps>) {
-    const {
-      isRoomAdmin,
-      contactsTab,
-      t,
-      inviterColumnIsEnabled,
-      invitedDateColumnIsEnabled,
-      storageColumnIsEnabled,
-      isDefaultUsersQuotaSet,
-    } = this.props;
-    if (prevProps.isRoomAdmin !== isRoomAdmin) {
-      if (contactsTab === "guests") {
-        if (!isRoomAdmin)
-          this.setState((prev) => ({
-            columns: [
-              ...prev.columns,
-              {
-                key: "Inviter",
-                title: t!("Common:Inviter"),
-                enable: inviterColumnIsEnabled,
-                resizable: true,
-                sortBy: "createdby",
-                onChange: this.onColumnChange,
-                onClick: this.onFilter,
-              },
-
-              {
-                key: "InvitedDate",
-                title: t!("PeopleTranslations:RegistrationDate"),
-                enable: invitedDateColumnIsEnabled,
-                resizable: true,
-                sortBy: "registrationDate",
-                onChange: this.onColumnChange,
-                onClick: this.onFilter,
-              },
-            ],
-            resetColumnsSize: true,
-          }));
-        else
-          this.setState((prev) => ({
-            columns: [...prev.columns].filter(
-              (c) => c.key !== "Inviter" && c.key !== "InvitedDate",
-            ),
-            resetColumnsSize: true,
-          }));
-      }
-
-      if (contactsTab === "people") {
-        if (isRoomAdmin)
-          this.setState((prev) => ({
-            columns: [...prev.columns].filter((c) => c.key !== "Storage"),
-            resetColumnsSize: true,
-          }));
-        else
-          this.setState((prev) => ({
-            columns: [
-              ...prev.columns,
-              {
-                key: "Storage",
-                title: isDefaultUsersQuotaSet
-                  ? t!("Common:StorageAndQuota")
-                  : t!("Common:Storage"),
-                enable: storageColumnIsEnabled,
-                sortBy: SortByFieldName.UsedSpace,
-                resizable: true,
-                onChange: this.onColumnChange,
-                onClick: this.onFilter,
-              },
-            ],
-            resetColumnsSize: true,
-          }));
-      }
-    }
   }
 
   onColumnChange = (key: string) => {

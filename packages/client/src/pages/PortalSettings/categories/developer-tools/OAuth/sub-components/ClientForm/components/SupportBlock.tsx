@@ -29,6 +29,7 @@ import React from "react";
 import { TTranslation } from "@docspace/shared/types";
 import { IClientReqDTO } from "@docspace/shared/utils/oauth/types";
 
+import { getOAuthValidationCodeTranslation } from "../ClientForm.utils";
 import { StyledBlock, StyledInputBlock } from "../ClientForm.styled";
 
 import BlockHeader from "./BlockHeader";
@@ -44,6 +45,7 @@ interface SupportBlockProps {
 
   isEdit: boolean;
   errorFields: string[];
+  serverFieldErrors?: Record<string, string>;
   onBlur?: (name: string) => void;
   requiredErrorFields: string[];
 }
@@ -57,6 +59,7 @@ const SupportBlock = ({
 
   isEdit,
   errorFields,
+  serverFieldErrors,
   onBlur,
   requiredErrorFields,
 }: SupportBlockProps) => {
@@ -82,7 +85,10 @@ const SupportBlock = ({
           value={policyUrlValue}
           error={
             policyError
-              ? `${t("ErrorWrongURL")}: ${window.location.origin}`
+              ? getOAuthValidationCodeTranslation(
+                  t,
+                  serverFieldErrors?.["policy_url"] ?? "ErrorWrongURL",
+                )
               : t("ThisRequiredField")
           }
           onChange={onChange}
@@ -100,7 +106,10 @@ const SupportBlock = ({
           value={termsUrlValue}
           error={
             termsError
-              ? `${t("ErrorWrongURL")}: ${window.location.origin}`
+              ? getOAuthValidationCodeTranslation(
+                  t,
+                  serverFieldErrors?.["terms_url"] ?? "ErrorWrongURL",
+                )
               : t("ThisRequiredField")
           }
           onChange={onChange}

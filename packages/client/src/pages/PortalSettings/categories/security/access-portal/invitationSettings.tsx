@@ -29,14 +29,14 @@ import { useNavigate, useLocation } from "react-router";
 import { inject, observer } from "mobx-react";
 import isEqual from "lodash/isEqual";
 import { TTranslation } from "@docspace/shared/types";
-import { Link, LinkTarget } from "@docspace/shared/components/link";
-import { toastr } from "@docspace/shared/components/toast";
-import { TColorScheme } from "@docspace/shared/themes";
-import { Checkbox } from "@docspace/shared/components/checkbox";
-import { Text } from "@docspace/shared/components/text";
+import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { TColorScheme } from "@docspace/ui-kit/providers/theme/themes";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { Text } from "@docspace/ui-kit/components/text";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { size, isMobileDevice } from "@docspace/shared/utils";
-import { TData } from "@docspace/shared/components/toast/Toast.type";
+import { type TData } from "@docspace/ui-kit/components/toast";
 import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 import { DeviceType } from "@docspace/shared/enums";
@@ -258,7 +258,7 @@ const InvitationSettings = ({
           <Link
             className="link-learn-more"
             dataTestId="invitation_settings_learn_more"
-            color={currentColorScheme.main?.accent}
+            color={currentColorScheme?.main?.accent ?? undefined}
             target={LinkTarget.blank}
             isHovered
             href={invitationSettingsUrl}

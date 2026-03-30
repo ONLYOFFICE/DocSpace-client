@@ -24,13 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
+import { useEventLog } from "../sub-components/useEventLog";
 import { withTranslation } from "react-i18next";
-import { Label } from "@docspace/shared/components/label";
+import { Label } from "@docspace/ui-kit/components/label";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
 import { inject, observer } from "mobx-react";
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import SDK from "@onlyoffice/docspace-sdk-js";
+import { EventLogBlock } from "../sub-components/EventLogBlock";
 
 import { loadScript, getSdkScriptUrl } from "@docspace/shared/utils/common";
 
@@ -65,12 +67,23 @@ import {
   FilesSelectorInputWrapper,
 } from "./StyledPresets";
 
+const EDITOR_EVENT_TYPES = [
+  "onAppReady",
+  "onAppError",
+  "onAuthSuccess",
+  "onSignOut",
+  "onNoAccess",
+  "onNotFound",
+  "onContentReady",
+  "onEditorCloseCallback",
+];
+
 const Editor = (props) => {
   const { t, theme } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
 
-  const [version, onSetVersion] = useState(sdkVersion[210]);
+  const [version, onSetVersion] = useState(sdkVersion[220]);
 
   const [source, onSetSource] = useState(sdkSource.Package);
 
@@ -81,13 +94,28 @@ const Editor = (props) => {
     height: `${defaultSize.height}${defaultDimension.label}`,
     frameId: "ds-frame",
     init: false,
+    events: {
+      onAppReady: () => {},
+      onAppError: () => {},
+      onAuthSuccess: () => {},
+      onSignOut: () => {},
+      onNoAccess: () => {},
+      onNotFound: () => {},
+      onContentReady: () => {},
+      onEditorCloseCallback: () => {},
+    },
   });
+
+  const [eventLog, onClearEventLog] = useEventLog(config.frameId);
 
   const fromPackage = source === sdkSource.Package;
 
   const sdkScriptUrl = getSdkScriptUrl(version);
 
-  const sdk = fromPackage ? new SDK() : window.DocSpace.SDK;
+  const sdk = useMemo(
+    () => (fromPackage ? new SDK() : window.DocSpace.SDK),
+    [fromPackage],
+  );
 
   const destroyFrame = () => {
     sdk?.frames[config.frameId]?.destroyFrame();
@@ -121,7 +149,7 @@ const Editor = (props) => {
     return () => {
       destroyFrame();
     };
-  });
+  }, [config]);
 
   useEffect(() => {
     const scroll = document.getElementsByClassName("section-scroll")[0];
@@ -150,29 +178,37 @@ const Editor = (props) => {
   };
 
   const preview = (
-    <Frame
-      width={
-        config.id !== undefined && config.width.includes("px")
-          ? config.width
-          : undefined
-      }
-      height={
-        config.id !== undefined && config.height.includes("px")
-          ? config.height
-          : undefined
-      }
-      targetId={config.frameId}
-    >
-      {config.id !== undefined ? (
-        <div id={config.frameId} />
-      ) : (
-        <EmptyIframeContainer
-          text={t("FilePreview")}
-          width="100%"
-          height="100%"
-        />
-      )}
-    </Frame>
+    <>
+      <Frame
+        width={
+          config.id !== undefined && config.width.includes("px")
+            ? config.width
+            : undefined
+        }
+        height={
+          config.id !== undefined && config.height.includes("px")
+            ? config.height
+            : undefined
+        }
+        targetId={config.frameId}
+      >
+        {config.id !== undefined ? (
+          <div id={config.frameId} />
+        ) : (
+          <EmptyIframeContainer
+            text={t("FilePreview")}
+            width="100%"
+            height="100%"
+          />
+        )}
+      </Frame>
+      <EventLogBlock
+        t={t}
+        events={eventLog}
+        onClear={onClearEventLog}
+        eventTypes={EDITOR_EVENT_TYPES}
+      />
+    </>
   );
 
   return (

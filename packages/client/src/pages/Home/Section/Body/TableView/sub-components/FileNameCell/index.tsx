@@ -25,10 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { ChangeEvent, memo, useCallback, useMemo } from "react";
-import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { classNames } from "@docspace/shared/utils";
-import { TableCell } from "@docspace/shared/components/table";
-import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
+import { TableCell } from "@docspace/ui-kit/components/table";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import { createPluginFileHandlers } from "@docspace/shared/utils/plugin-file-utils";
 
 import { FileName } from "./FileNameCell.helpers";

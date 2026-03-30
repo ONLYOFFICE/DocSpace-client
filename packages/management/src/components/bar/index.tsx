@@ -26,7 +26,7 @@
 
 import React from "react";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import styles from "./bar.module.scss";
 

@@ -1,0 +1,28 @@
+{
+  "key_path": "AIServiceToppedUp",
+  "content": "{{organizationName}} AI service successfully enabled.",
+  "content_en_sha1_hash": "6d9b84bc8398817d9663776a20d8c407ab725922",
+  "created_at": "2026-03-20T09:07:40.696Z",
+  "updated_at": "2026-03-20T10:16:42.368Z",
+  "comment": {
+    "text": "This key displays a success message to the user confirming that the AI service has been enabled. It appears as a toast notification after a successful top-up of the AI service balance. The `organizationName` variable is dynamically inserted to personalize the message.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T10:16:42.368Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/shared/top-up-balance/sub-components/TopUpButtons.tsx",
+      "line_number": 116,
+      "context": "await Promise.allSettled(requests);\n \n const toastMessage =\n serviceName === AI_TOOLS\n ? t(\"Services:AIServiceToppedUp\", { organizationName: logoText })\n : t(\"WalletToppedUp\");\n \n toastr.success(toastMessage);\n afterTopUp ? afterTopUp() : onClose(true);\n } catch (e) {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

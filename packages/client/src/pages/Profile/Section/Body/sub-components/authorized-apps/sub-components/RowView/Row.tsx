@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 
-import { Row } from "@docspace/shared/components/rows";
+import { Row } from "@docspace/ui-kit/components/rows";
 
 import { RowContent } from "./RowContent";
 import { RowProps } from "./RowView.types";

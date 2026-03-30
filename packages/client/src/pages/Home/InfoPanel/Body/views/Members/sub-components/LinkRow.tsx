@@ -24,12 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import moment from "moment";
 import { useState } from "react";
 import copy from "copy-to-clipboard";
 import type { TFunction } from "i18next";
+import type { DateTime } from "luxon";
 import { observer, inject } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import { addToDate, now } from "@docspace/ui-kit/utils/date";
 
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
@@ -38,7 +39,7 @@ import OutlineReactSvgUrl from "PUBLIC_DIR/images/outline-true.react.svg?url";
 import LockedReactSvgUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { ShareAccessRights } from "@docspace/shared/enums";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 import { copyShareLink } from "@docspace/shared/components/share/Share.helpers";
@@ -46,7 +47,7 @@ import LinkRowComponent from "@docspace/shared/components/share/sub-components/L
 
 import type { TFileLink } from "@docspace/shared/api/files/types";
 
-import type { TOption } from "@docspace/shared/components/combobox";
+import type { TOption } from "@docspace/ui-kit/components/combobox";
 
 import { LinkRowProps } from "../Members.types";
 
@@ -68,12 +69,7 @@ const LinkRow = (props: LinkRowProps) => {
 
   const availableShareRights = item.availableShareRights;
 
-  const { t } = useTranslation([
-    "SharingPanel",
-    "Files",
-    "Settings",
-    "Translations",
-  ]);
+  const { t } = useTranslation(["Files", "Settings", "Translations"]);
 
   const { password, isExpired } = link.sharedTo;
 
@@ -172,6 +168,11 @@ const LinkRow = (props: LinkRowProps) => {
   };
 
   const editExternalLinkAction = async (newLink: TFileLink) => {
+    if (link.sharedTo.isExpired) {
+      newLink.sharedTo.expirationDate =
+        addToDate(now(), 7, "days")?.toISO() ?? null;
+    }
+
     setLoadingLinks([newLink.sharedTo.id]);
 
     const startLoaderTime = new Date();
@@ -204,18 +205,26 @@ const LinkRow = (props: LinkRowProps) => {
       }
     }
   };
-  const removedExpiredLink = async (removeLink: TFileLink) => {
-    setLoadingLinks([removeLink.sharedTo.id]);
+  const removedExpiredLink = async (
+    link: TFileLink,
+    isReactivate: boolean = false,
+  ) => {
+    setLoadingLinks([link.sharedTo.id]);
 
     try {
       await ShareLinkService.editLink(item, {
-        ...removeLink,
-        access: ShareAccessRights.None,
+        ...link,
+        access: isReactivate ? link.access : ShareAccessRights.None,
+        sharedTo: {
+          ...link.sharedTo,
+          expirationDate: addToDate(now(), 7, "days")?.toISO() ?? null,
+        },
       });
 
-      deleteExternalLink!(null, removeLink.sharedTo.id);
-
-      toastr.success(t("Files:LinkDeletedSuccessfully"));
+      if (!isReactivate) {
+        deleteExternalLink!(null, link.sharedTo.id);
+        toastr.success(t("Files:LinkDeletedSuccessfully"));
+      }
     } catch (err: unknown) {
       console.log(err);
       toastr.error((err as Error)?.message);
@@ -232,11 +241,11 @@ const LinkRow = (props: LinkRowProps) => {
 
   const changeExpirationOption = async (
     _linkData: TFileLink,
-    expirationDate: moment.Moment | null,
+    expirationDate: DateTime | null,
   ) => {
     const newLink = { ...link };
     newLink.sharedTo.expirationDate = expirationDate
-      ? moment(expirationDate).toISOString()
+      ? expirationDate.toISO()
       : null;
     editExternalLinkAction(newLink);
   };
@@ -302,3 +311,4 @@ export default inject<TStore>(
     };
   },
 )(observer(LinkRow));
+

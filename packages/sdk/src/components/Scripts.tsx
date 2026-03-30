@@ -26,49 +26,24 @@
 
 import Script from "next/script";
 
-interface RuntimeConfig {
-  date: number;
-  checksums: Record<string, string>;
-}
+import { getStaticHash } from "@docspace/shared/utils/static-hash";
 
-const getRuntimeConfig = (): {
-  runtime: Partial<RuntimeConfig>;
-  hashDate: number;
-} => {
-  let runtime: Partial<RuntimeConfig> = {};
-  const fallbackDate = new Date().getTime();
-
-  try {
-    runtime = require("../../../runtime.json");
-  } catch (e) {
-    console.warn("Failed to load runtime.json:", e);
-  }
-
-  return {
-    runtime,
-    hashDate: runtime.date || fallbackDate,
-  };
-};
-
-const { runtime, hashDate } = getRuntimeConfig();
+const browserDetectorHash = getStaticHash("browserDetector.js");
+const configHash = getStaticHash("config.json");
 
 const Scripts = () => {
-  const getResourceHash = (resource: string): string => {
-    return runtime.checksums?.[resource] || String(hashDate);
-  };
-
   return (
     <>
       <Script
         id="browser-detector"
-        src={`/static/scripts/browserDetector.js?hash=${getResourceHash("browserDetector.js")}`}
+        src={`/static/scripts/browserDetector.js?hash=${browserDetectorHash}`}
         strategy="beforeInteractive"
       />
 
       <Script id="portal-config" strategy="beforeInteractive">
         {`
           console.log("It's SDK INIT");
-          fetch("/static/scripts/config.json?hash=${getResourceHash("config.json")}")
+          fetch("/static/scripts/config.json?hash=${configHash}")
             .then((response) => {
               if (!response.ok) {
                 throw new Error("HTTP error " + response.status);
@@ -77,11 +52,13 @@ const Scripts = () => {
             })
             .then((config) => {
               window.ClientConfig = {
+                ...window.ClientConfig,
                 ...config,
               };
             })
             .catch((e) => {
               window.ClientConfig = {
+                ...window.ClientConfig,
                 errorOnLoad: e,
               };
               console.error("Failed to load config:", e);

@@ -28,14 +28,14 @@
 
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Text } from "@docspace/shared/components/text";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
-import { toastr } from "@docspace/shared/components/toast";
-import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
+} from "@docspace/ui-kit/components/modal-dialog";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import SocketHelper, { SocketCommands } from "@docspace/ui-kit/utils/socket";
 
 import { EncryptionStatus } from "@docspace/shared/enums";
 

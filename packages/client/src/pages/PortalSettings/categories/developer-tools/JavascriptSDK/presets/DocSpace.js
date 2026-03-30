@@ -24,10 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
+import { useEventLog } from "../sub-components/useEventLog";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import SDK from "@onlyoffice/docspace-sdk-js";
+
+import { EventLogBlock } from "../sub-components/EventLogBlock";
 
 import { loadScript, getSdkScriptUrl } from "@docspace/shared/utils/common";
 
@@ -56,12 +59,26 @@ import {
   ControlsSection,
 } from "./StyledPresets";
 
+const DOCSPACE_EVENT_TYPES = [
+  "onAppReady",
+  "onAppError",
+  "onAuthSuccess",
+  "onSignOut",
+  "onNoAccess",
+  "onNotFound",
+  "onContentReady",
+  "onEditorCloseCallback",
+  "onEditorOpen",
+  "onDownload",
+  "onFileManagerClick",
+];
+
 const DocSpace = (props) => {
   const { t, theme, currentColorScheme } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
 
-  const [version, onSetVersion] = useState(sdkVersion[210]);
+  const [version, onSetVersion] = useState(sdkVersion[220]);
 
   const [source, onSetSource] = useState(sdkSource.Package);
 
@@ -86,13 +103,31 @@ const DocSpace = (props) => {
       search: "",
       withSubfolders: false,
     },
+    events: {
+      onAppReady: () => {},
+      onAppError: () => {},
+      onAuthSuccess: () => {},
+      onSignOut: () => {},
+      onNoAccess: () => {},
+      onNotFound: () => {},
+      onContentReady: () => {},
+      onEditorCloseCallback: () => {},
+      onEditorOpen: () => {},
+      onDownload: () => {},
+      onFileManagerClick: () => {},
+    },
   });
+
+  const [eventLog, onClearEventLog] = useEventLog(config.frameId);
 
   const fromPackage = source === sdkSource.Package;
 
   const sdkScriptUrl = getSdkScriptUrl(version);
 
-  const sdk = fromPackage ? new SDK() : window.DocSpace.SDK;
+  const sdk = useMemo(
+    () => (fromPackage ? new SDK() : window.DocSpace.SDK),
+    [fromPackage],
+  );
 
   const destroyFrame = () => {
     sdk?.frames[config.frameId]?.destroyFrame();
@@ -126,7 +161,7 @@ const DocSpace = (props) => {
     return () => {
       destroyFrame();
     };
-  });
+  }, [config]);
 
   useEffect(() => {
     const scroll = document.getElementsByClassName("section-scroll")[0];
@@ -136,13 +171,21 @@ const DocSpace = (props) => {
   }, []);
 
   const preview = (
-    <Frame
-      width={config.width.includes("px") ? config.width : undefined}
-      height={config.height.includes("px") ? config.height : undefined}
-      targetId={config.frameId}
-    >
-      <div id={config.frameId} />
-    </Frame>
+    <>
+      <Frame
+        width={config.width.includes("px") ? config.width : undefined}
+        height={config.height.includes("px") ? config.height : undefined}
+        targetId={config.frameId}
+      >
+        <div id={config.frameId} />
+      </Frame>
+      <EventLogBlock
+        t={t}
+        events={eventLog}
+        onClear={onClearEventLog}
+        eventTypes={DOCSPACE_EVENT_TYPES}
+      />
+    </>
   );
 
   return (
@@ -217,6 +260,6 @@ export const Component = inject(({ settingsStore }) => {
     "Common",
     "Files",
     "Translations",
-    "SharingPanel",
   ])(observer(DocSpace)),
 );
+

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en" translate="no">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#000000" />
+    <meta name="google" content="notranslate" />
+    <link
+      id="favicon"
+      rel="icon"
+      type="image/x-icon"
+      href="/logo.ashx?logotype=3"
+    />
+    <link rel="mask-icon" href="/logo.ashx?logotype=3" />
+    <link rel="apple-touch-icon" sizes="32x32" href="/logo.ashx?logotype=3" />
+
+    <link rel="stylesheet" href="/static/css/fonts.css?hash=%DOCSPACE_FONTS_CSS_HASH%" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <meta name="react-apple-itunes-app" content="app-id=944896972" />
+    <meta
+      name="react-google-play-app"
+      content="app-id=com.onlyoffice.documents"
+    />
+
+    <style type="text/css">
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        font-family:
+          "Open Sans",
+          -apple-system,
+          "Segoe UI",
+          sans-serif,
+          Arial;
+        font-size: 13px;
+        -webkit-font-smoothing: antialiased;
+      }
+    </style>
+    <title>ONLYOFFICE</title>
+  </head>
+  <body ondragstart="return false">
+    <noscript> You need to enable JavaScript to run this app. </noscript>
+
+    <div id="root"></div>
+
+    <script src="/static/scripts/browserDetector.js?hash=%DOCSPACE_BROWSER_DETECTOR_HASH%"></script>
+    <script>
+      console.log("It's WEB CLIENT INIT");
+      fetch("/static/scripts/config.json?hash=%DOCSPACE_CONFIG_HASH%")
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("HTTP error " + response.status);
+          }
+          return response.json();
+        })
+        .then((config) => {
+          window.ClientConfig = {
+            ...config,
+          };
+
+          if (
+            window.navigator.userAgent.includes("ZoomWebKit") ||
+            window.navigator.userAgent.includes("ZoomApps")
+          ) {
+            window.ClientConfig.editor = {
+              requestClose: true,
+            };
+          }
+        })
+        .catch((e) => {
+          console.error(e);
+          window.ClientConfig = {
+            errorOnLoad: e,
+          };
+        });
+    </script>
+    <script type="module" src="/src/bootstrap.js"></script>
+  </body>
+</html>

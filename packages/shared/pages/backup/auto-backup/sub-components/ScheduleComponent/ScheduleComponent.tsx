@@ -30,10 +30,10 @@ import classNames from "classnames";
 
 import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
 
-import { Text } from "../../../../../components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { AutoBackupPeriod } from "../../../../../enums";
-import { ComboBox } from "../../../../../components/combobox";
-import { HelpButton } from "../../../../../components/help-button";
+import { ComboBox } from "@docspace/ui-kit/components/combobox";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
 
 import type { ScheduleComponentProps } from "./ScheduleComponent.types";
 import styles from "./ScheduleComponent.module.scss";

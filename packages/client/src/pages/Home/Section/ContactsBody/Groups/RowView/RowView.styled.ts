@@ -31,9 +31,9 @@ import {
   RowContainer,
   Row,
   RowContent,
-} from "@docspace/shared/components/rows";
-import { globalColors } from "@docspace/shared/themes";
-import { tablet } from "@docspace/shared/utils/device";
+} from "@docspace/ui-kit/components/rows";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { tablet } from "@docspace/ui-kit/utils/device";
 
 const marginStyles = css`
   margin-inline: -24px;
@@ -102,12 +102,14 @@ export const GroupsRowWrapper = styled.div<{
     ${(props) =>
       (props.isChecked || props.isActive) && marginStylesGroupRowContainer};
 
-    ${!isMobile &&
-    css`
+    ${
+      !isMobile &&
+      css`
       :hover {
         ${marginStylesGroupRowContainer}
       }
-    `}
+    `
+    }
   }
 `;
 
@@ -126,12 +128,14 @@ export const GroupsRow = styled(Row)<{ checked?: boolean; isActive?: boolean }>`
   &.group-row {
     ${({ checked, isActive }) => (checked || isActive) && checkedStyle};
 
-    ${!isMobile &&
-    css`
+    ${
+      !isMobile &&
+      css`
       &:hover {
         ${checkedStyle}
       }
-    `}
+    `
+    }
 
     .row_content {
       height: 58px;
@@ -179,12 +183,14 @@ export const GroupsRowContent = styled(RowContent)`
     justify-content: center;
     gap: 2px;
 
-    ${isTablet &&
-    css`
+    ${
+      isTablet &&
+      css`
       .row-main-container-wrapper {
         align-self: start;
       }
-    `}
+    `
+    }
 
     @media ${tablet} {
       .row-main-container-wrapper {

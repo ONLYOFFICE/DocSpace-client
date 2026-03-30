@@ -25,14 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useEffect, useState } from "react";
-import { Tabs } from "@docspace/shared/components/tabs";
+import { Tabs } from "@docspace/ui-kit/components/tabs";
 import { useNavigate } from "react-router";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
 
-import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
+import { SECTION_HEADER_HEIGHT } from "@docspace/ui-kit/components/section/Section.constants";
 
 import SsoSettings from "./SingleSignOn";
 import LdapSettings from "./LDAP";

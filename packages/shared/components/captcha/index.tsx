@@ -32,7 +32,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 
 import { RecaptchaType } from "../../enums";
-import { Text } from "../text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import styles from "./Captcha.module.scss";
 

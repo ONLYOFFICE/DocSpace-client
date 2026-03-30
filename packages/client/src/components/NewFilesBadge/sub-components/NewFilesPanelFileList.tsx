@@ -27,8 +27,8 @@
 import React from "react";
 import { useTranslation, Trans } from "react-i18next";
 
-import { Link, LinkType } from "@docspace/shared/components/link";
-import { Text } from "@docspace/shared/components/text";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import { NewFilesPanelItemFile } from "./NewFilesPanelItemFile";
 import { NewFilesPanelFileListProps } from "../NewFilesBadge.types";

@@ -26,14 +26,15 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import React, { Activity } from "react";
+import { Activity, useCallback } from "react";
 import { inject, observer } from "mobx-react";
+import { useNavigate } from "react-router";
 
-import { TFile } from "@docspace/shared/api/files/types";
-import type useToolsSettings from "@docspace/shared/components/chat/hooks/useToolsSettings";
-import type useInitChats from "@docspace/shared/components/chat/hooks/useInitChats";
-import type useInitMessages from "@docspace/shared/components/chat/hooks/useInitMessages";
-import Chat from "@docspace/shared/components/chat";
+import type { TFile } from "@docspace/ui-kit/types";
+import type useToolsSettings from "@docspace/ui-kit/ai-agent/chat/hooks/useToolsSettings";
+import type useInitChats from "@docspace/ui-kit/ai-agent/chat/hooks/useInitChats";
+import type useInitMessages from "@docspace/ui-kit/ai-agent/chat/hooks/useInitMessages";
+import Chat from "@docspace/ui-kit/ai-agent/chat";
 import type { AuthStore } from "@docspace/shared/store/AuthStore";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import type { TUser } from "@docspace/shared/api/people/types";
@@ -46,8 +47,11 @@ import type FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 import type SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
 import type FilesStore from "SRC_DIR/store/FilesStore";
 import type ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
-import type DialogsStore from "SRC_DIR/store/DialogsStore";
-import AccessRightsStore from "SRC_DIR/store/AccessRightsStore";
+import type AccessRightsStore from "SRC_DIR/store/AccessRightsStore";
+import MediaViewerDataStore from "SRC_DIR/store/MediaViewerDataStore";
+import AiRoomStore from "SRC_DIR/store/AiRoomStore";
+import { useScroll } from "./useScroll";
+import styles from "./AIAgentView.module.scss";
 
 type Props = {
   currentView: string;
@@ -69,10 +73,10 @@ type Props = {
   chatSettings?: SelectedFolderStore["chatSettings"];
   isAdmin?: AuthStore["isAdmin"];
   aiConfig?: SettingsStore["aiConfig"];
-  setIsAIAgentChatDelete?: DialogsStore["setIsAIAgentChatDelete"];
-  setDeleteDialogVisible?: DialogsStore["setDeleteDialogVisible"];
-  folderFormValidation?: RegExp;
   canUseChat?: AccessRightsStore["canUseChat"];
+
+  setMediaViewerVisible?: MediaViewerDataStore["setMediaViewerVisible"];
+  setAiPlaylistImages?: AiRoomStore["setAiPlaylistImages"];
 };
 
 const AIAgentViewComponent = ({
@@ -94,11 +98,21 @@ const AIAgentViewComponent = ({
   isAdmin,
   aiConfig,
   getResultStorageId,
-  setIsAIAgentChatDelete,
-  setDeleteDialogVisible,
-  folderFormValidation,
   canUseChat,
+  setMediaViewerVisible,
+  setAiPlaylistImages,
 }: Props) => {
+  const navigate = useNavigate();
+  const scrollRef = useScroll();
+
+  const goToWebSearchSettings = useCallback(() => {
+    navigate("/portal-settings/ai-settings/search");
+  }, [navigate]);
+
+  const goToAISettings = useCallback(() => {
+    navigate("/portal-settings/ai-settings/providers");
+  }, [navigate]);
+
   if (
     currentView === "chat" &&
     isErrorAIAgentNotAvailable &&
@@ -117,8 +131,12 @@ const AIAgentViewComponent = ({
       {shouldRenderChat ? (
         <Activity mode={currentView === "chat" ? "visible" : "hidden"}>
           <Chat
+            className={styles.aiAgentChat}
+            useExternalScroll={true}
+            externalScrollRef={scrollRef}
+            internalInit={false}
             userAvatar={userAvatar!}
-            roomId={isViewLoading && !showHeaderLoader ? "-1" : roomId!}
+            agentId={isViewLoading && !showHeaderLoader ? "-1" : roomId!}
             getIcon={getIcon!}
             selectedModel={chatSettings?.modelId ?? ""}
             isLoading={showBodyLoader}
@@ -129,11 +147,18 @@ const AIAgentViewComponent = ({
             messagesSettings={messagesSettings}
             isAdmin={isAdmin}
             aiReady={aiConfig?.aiReady || false}
+            modelAliases={aiConfig?.modelAliases}
             standalone // NOTE: AI SaaS same as AI Standalone in v.4.0
             getResultStorageId={getResultStorageId}
-            setIsAIAgentChatDelete={setIsAIAgentChatDelete}
-            setDeleteDialogVisible={setDeleteDialogVisible}
-            folderFormValidation={folderFormValidation!}
+            multimodal={chatSettings?.multimodal}
+            setMediaViewerVisible={setMediaViewerVisible}
+            setAiPlaylistImages={setAiPlaylistImages}
+            goToWebSearchSettings={goToWebSearchSettings}
+            goToAISettings={goToAISettings}
+            allowAttachFiles
+            allowManageTools
+            allowSelectChat
+            persistDraft
           />
         </Activity>
       ) : null}
@@ -154,11 +179,15 @@ export const AIAgentView = inject(
     settingsStore,
     dialogsStore,
     accessRightsStore,
+    mediaViewerDataStore,
+    aiRoomStore,
   }: TStore) => {
     const { isErrorAIAgentNotAvailable } = filesStore;
 
     const { showArticleLoader, showHeaderLoader, showBodyLoader } =
       clientLoadingStore;
+
+    const { setMediaViewerVisible } = mediaViewerDataStore;
 
     const { user } = userStore;
 
@@ -168,11 +197,11 @@ export const AIAgentView = inject(
 
     const { isAdmin } = authStore;
 
-    const { aiConfig, folderFormValidation } = settingsStore;
-
-    const { setIsAIAgentChatDelete, setDeleteDialogVisible } = dialogsStore;
+    const { aiConfig } = settingsStore;
 
     const { canUseChat } = accessRightsStore;
+
+    const { setAiPlaylistImages } = aiRoomStore;
 
     return {
       isErrorAIAgentNotAvailable,
@@ -184,10 +213,10 @@ export const AIAgentView = inject(
       chatSettings,
       isAdmin,
       aiConfig,
-      setIsAIAgentChatDelete,
-      setDeleteDialogVisible,
-      folderFormValidation,
       canUseChat,
+
+      setMediaViewerVisible,
+      setAiPlaylistImages,
     };
   },
 )(observer(AIAgentViewComponent));

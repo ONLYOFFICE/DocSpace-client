@@ -25,15 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Heading } from "@docspace/shared/components/heading";
-import { TextInput } from "@docspace/shared/components/text-input";
-import { ComboBox } from "@docspace/shared/components/combobox";
-import { DropDown } from "@docspace/shared/components/drop-down";
-import { Text } from "@docspace/shared/components/text";
-import { Button } from "@docspace/shared/components/button";
-import { HelpButton } from "@docspace/shared/components/help-button";
-import { Link } from "@docspace/shared/components/link";
-import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { Heading } from "@docspace/ui-kit/components/heading";
+import { TextInput } from "@docspace/ui-kit/components/text-input";
+import { ComboBox } from "@docspace/ui-kit/components/combobox";
+import { DropDown } from "@docspace/ui-kit/components/drop-down";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Button } from "@docspace/ui-kit/components/button";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
+import { Link } from "@docspace/ui-kit/components/link";
+import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import {
   mobile,
   commonIconsStyles,
@@ -44,7 +44,7 @@ import {
 import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg";
 import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 import DeleteIcon from "PUBLIC_DIR/images/mobile.actions.remove.react.svg";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
 
 const fillAvailableWidth = css`

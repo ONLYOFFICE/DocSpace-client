@@ -25,9 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import {
-  ShareAccessRights,
-  EmployeeType,
-  RoomsType,
+	ShareAccessRights,
+	EmployeeType,
+	RoomsType,
 } from "@docspace/shared/enums";
 
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
@@ -35,77 +35,77 @@ import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 import { checkIfAccessPaid } from "@docspace/shared/utils/filterPaidRoleOptions";
 
 export const getTopFreeRole = (t, roomType) => {
-  const accesses = getAccessOptions(t, roomType);
-  const freeAccesses = accesses.filter(
-    (item) => !checkIfAccessPaid(item.access) && item.key !== "s1",
-  );
-  return freeAccesses[0];
+	const accesses = getAccessOptions(t, roomType);
+	const freeAccesses = accesses.filter(
+		(item) => !checkIfAccessPaid(item.access) && item.key !== "s1",
+	);
+	return freeAccesses[0];
 };
 
 export const getViewerRole = (t, roomType) => {
-  const accesses = getAccessOptions(t, roomType);
+	const accesses = getAccessOptions(t, roomType);
 
-  return accesses.find((item) => item.key === "viewer");
+	return accesses.find((item) => item.key === "viewer");
 };
 
 export const isPaidUserRole = (selectedAccess) => {
-  return (
-    selectedAccess === ShareAccessRights.FullAccess ||
-    selectedAccess === ShareAccessRights.RoomManager
-  );
+	return (
+		selectedAccess === ShareAccessRights.FullAccess ||
+		selectedAccess === ShareAccessRights.RoomManager
+	);
 };
 
 export const getFreeUsersTypeArray = () => {
-  return [EmployeeType.User];
+	return [EmployeeType.User];
 };
 
 export const getFreeUsersRoleArray = () => {
-  return [
-    ShareAccessRights.Comment,
-    ShareAccessRights.Editing,
-    ShareAccessRights.FormFilling,
-    ShareAccessRights.ReadOnly,
-    ShareAccessRights.Review,
-    ShareAccessRights.Collaborator,
-  ];
+	return [
+		ShareAccessRights.Comment,
+		ShareAccessRights.Editing,
+		ShareAccessRights.FormFilling,
+		ShareAccessRights.ReadOnly,
+		ShareAccessRights.Review,
+		ShareAccessRights.Collaborator,
+	];
 };
 
 export const makeFreeRole = (item, t, freeRole) => {
-  if (!freeRole) return item;
+	if (!freeRole) return item;
 
-  item.access = freeRole.access;
-  item.warning = item.isGroup
-    ? t("GroupMaxAvailableRoleWarning", {
-        roleName: freeRole.label,
-      })
-    : t("UserMaxAvailableRoleWarning", {
-        productName: t("Common:ProductName"),
-      });
-  return item;
+	item.access = freeRole.access;
+	item.warning = item.isGroup
+		? t("GroupMaxAvailableRoleWarning", {
+				roleName: freeRole.label,
+			})
+		: t("UserMaxAvailableRoleWarning", {
+				productName: t("Common:ProductName"),
+			});
+	return item;
 };
 
 export const makeViewerRole = (item, t, viewerRole) => {
-  if (!viewerRole) return item;
+	if (!viewerRole) return item;
 
-  item.warning =
-    item.access === ShareAccessRights.RoomManager
-      ? t("UserAgentMaxAvailableRoleWarning", {
-          productName: t("Common:ProductName"),
-        })
-      : t("GuestAgentMaxAvailableRoleWarning", {
-          productName: t("Common:ProductName"),
-        });
-  item.access = viewerRole.access;
+	item.warning =
+		item.access === ShareAccessRights.RoomManager
+			? t("UserAgentMaxAvailableRoleWarning", {
+					productName: t("Common:ProductName"),
+				})
+			: t("GuestAgentMaxAvailableRoleWarning", {
+					productName: t("Common:ProductName"),
+				});
+	item.access = viewerRole.access;
 
-  return item;
+	return item;
 };
 
 export const fixAccess = (item, t, roomType) => {
-  if (item.isVisitor && roomType === RoomsType.AIRoom) {
-    const viewerRole = getViewerRole(t, roomType);
-    return makeViewerRole(item, t, viewerRole);
-  } else {
-    const topFreeRole = getTopFreeRole(t, roomType);
-    return makeFreeRole(item, t, topFreeRole);
-  }
+	if (item.isVisitor && roomType === RoomsType.AIRoom) {
+		const viewerRole = getViewerRole(t, roomType);
+		return makeViewerRole(item, t, viewerRole);
+	} else {
+		const topFreeRole = getTopFreeRole(t, roomType);
+		return makeFreeRole(item, t, topFreeRole);
+	}
 };

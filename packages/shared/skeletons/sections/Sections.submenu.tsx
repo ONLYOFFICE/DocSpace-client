@@ -26,25 +26,25 @@
 
 import React from "react";
 
-import { RectangleSkeleton } from "../rectangle";
+import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 import styles from "./Sections.module.scss";
 import type { SectionSubmenuSkeletonProps } from "./Sections.types";
 
 export const SectionSubmenuSkeleton = ({
-  id,
-  style,
-  title,
-  className,
+	id,
+	style,
+	title,
+	className,
 }: SectionSubmenuSkeletonProps) => {
-  return (
-    <div
-      id={id}
-      className={`${styles.submenu} ${className || ""}`}
-      style={style}
-      data-testid="section-submenu-skeleton"
-    >
-      <RectangleSkeleton title={title} width="80" height="32" />
-      <RectangleSkeleton title={title} width="115" height="32" />
-    </div>
-  );
+	return (
+		<div
+			id={id}
+			className={`${styles.submenu} ${className || ""}`}
+			style={style}
+			data-testid="section-submenu-skeleton"
+		>
+			<RectangleSkeleton title={title} width="80" height="32" />
+			<RectangleSkeleton title={title} width="115" height="32" />
+		</div>
+	);
 };

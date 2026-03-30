@@ -42,6 +42,7 @@ import {
   tokenHandler,
   TypeSettings,
 } from "@docspace/shared/__mocks__/handlers";
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import { expect, test, TEST_PORT } from "./fixtures/base";
 
 test.describe("Profile", () => {
@@ -59,7 +60,7 @@ test.describe("Profile", () => {
     const mainProfile = page.getByTestId("main-profile");
     await expect(mainProfile).toBeVisible();
 
-    await expect(page).toHaveScreenshot(["desktop", "profile", "profile.png"]);
+    await expectScreenshot(page,["desktop", "profile", "profile.png"]);
   });
 
   //  test("should change language", async ({ page, mockRequest, baseUrl }) => {
@@ -77,7 +78,7 @@ test.describe("Profile", () => {
   //   const language = page.getByTestId("drop_down_item_fr").first();
   //   await language.click();
 
-  //   await expect(page).toHaveScreenshot([
+  //   await expectScreenshot(page,[
   //     "desktop",
   //     "profile",
   //     "profile-fr.png",
@@ -96,7 +97,7 @@ test.describe("Profile", () => {
     const socialNetworks = page.getByTestId("profile-social-networks");
     await expect(socialNetworks).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "profile",
       "profile-social-networks.png",
@@ -118,7 +119,7 @@ test.describe("Profile", () => {
     const tfa = page.getByTestId("profile-tfa");
     await expect(tfa).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "profile",
       "profile-tfa.png",
@@ -144,7 +145,7 @@ test.describe("Profile", () => {
     await expect(backupCodesButton).toBeVisible();
     await backupCodesButton.click();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "profile",
       "profile-backup-codes-dialog.png",
@@ -170,7 +171,7 @@ test.describe("Profile", () => {
     await expect(resetAppButton).toBeVisible();
     await resetAppButton.click();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "profile",
       "profile-reset-app-dialog.png",
@@ -196,7 +197,7 @@ test.describe("Profile", () => {
     const notifications = page.getByTestId("profile-notifications");
     await expect(notifications).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "profile",
       "profile-notifications.png",
@@ -222,7 +223,7 @@ test.describe("Profile", () => {
     const notifications = page.getByTestId("profile-notifications");
     await expect(notifications).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "profile",
       "profile-notifications-telegram-configured.png",
@@ -253,7 +254,7 @@ test.describe("Profile", () => {
     await expect(telegramConnect).toBeVisible();
     await telegramConnect.click();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "profile",
       "profile-notifications-telegram-connect-dialog.png",
@@ -279,7 +280,7 @@ test.describe("Profile", () => {
     const notifications = page.getByTestId("profile-notifications");
     await expect(notifications).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "profile",
       "profile-notifications-telegram-connected.png",
@@ -295,7 +296,7 @@ test.describe("Profile", () => {
     const fileManagement = page.getByTestId("profile-file-management");
     await expect(fileManagement).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "profile",
       "profile-file-management.png",
@@ -311,7 +312,7 @@ test.describe("Profile", () => {
     const interfaceTheme = page.getByTestId("profile-interface-theme");
     await expect(interfaceTheme).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "profile",
       "profile-interface-theme.png",
@@ -340,7 +341,7 @@ test.describe("Profile", () => {
       });
     });
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "profile",
       "profile-interface-theme-dark.png",
@@ -364,7 +365,7 @@ test.describe("Profile", () => {
     const authorizedApps = page.getByTestId("profile-authorized-apps");
     await expect(authorizedApps).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "profile",
       "profile-authorized-apps-empty.png",
@@ -388,7 +389,7 @@ test.describe("Profile", () => {
     const authorizedApps = page.getByTestId("profile-authorized-apps");
     await expect(authorizedApps).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "profile",
       "profile-authorized-apps.png",

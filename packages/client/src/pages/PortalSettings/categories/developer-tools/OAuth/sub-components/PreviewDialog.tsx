@@ -30,13 +30,13 @@ import { useTheme } from "styled-components";
 import { useTranslation, Trans } from "react-i18next";
 
 import { IClientProps } from "@docspace/shared/utils/oauth/types";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { ModalDialogType } from "@docspace/shared/components/modal-dialog/ModalDialog.enums";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { ModalDialogType } from "@docspace/ui-kit/components/modal-dialog/ModalDialog.enums";
 import { SocialButton } from "@docspace/shared/components/social-button";
-import { Text } from "@docspace/shared/components/text";
-import { Textarea } from "@docspace/shared/components/textarea";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { globalColors } from "@docspace/shared/themes";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Textarea } from "@docspace/ui-kit/components/textarea";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { generatePKCEPair } from "@docspace/shared/utils/oauth";
 import { AuthenticationMethod } from "@docspace/shared/enums";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
@@ -46,9 +46,9 @@ import OnlyofficeDark from "PUBLIC_DIR/images/onlyoffice.dark.react.svg";
 
 import OAuthStore from "SRC_DIR/store/OAuthStore";
 import {
-  StyledContainer,
-  StyledPreviewContainer,
-  StyledBlocksContainer,
+	StyledContainer,
+	StyledPreviewContainer,
+	StyledBlocksContainer,
 } from "../OAuth.styled";
 
 const htmlBlock = `<body>
@@ -115,64 +115,64 @@ const styleBlock = `<style>
 </style>`;
 
 const linkParams =
-  "width=800,height=800,status='no',toolbar='no',menubar='no',resizable='yes',scrollbars='no'";
+	"width=800,height=800,status='no',toolbar='no',menubar='no',resizable='yes',scrollbars='no'";
 
 interface PreviewDialogProps {
-  visible: boolean;
+	visible: boolean;
 
-  setPreviewDialogVisible?: (value: boolean) => void;
-  client?: IClientProps;
+	setPreviewDialogVisible?: (value: boolean) => void;
+	client?: IClientProps;
 }
 
 const PreviewDialog = ({
-  visible,
-  setPreviewDialogVisible,
-  client,
+	visible,
+	setPreviewDialogVisible,
+	client,
 }: PreviewDialogProps) => {
-  const { t } = useTranslation(["OAuth", "Common", "Webhooks"]);
-  const theme = useTheme();
+	const { t } = useTranslation(["OAuth", "Common", "Webhooks"]);
+	const theme = useTheme();
 
-  const [codeVerifier, setCodeVerifier] = React.useState("");
-  const [codeChallenge, setCodeChallenge] = React.useState("");
+	const [codeVerifier, setCodeVerifier] = React.useState("");
+	const [codeChallenge, setCodeChallenge] = React.useState("");
 
-  const onClose = () => setPreviewDialogVisible?.(false);
+	const onClose = () => setPreviewDialogVisible?.(false);
 
-  const icon = theme.isBase ? OnlyofficeLight : OnlyofficeDark;
+	const icon = theme.isBase ? OnlyofficeLight : OnlyofficeDark;
 
-  const scopesString = client?.scopes.join(" ");
+	const scopesString = client?.scopes.join(" ");
 
-  const isClientSecretPost = !client?.authenticationMethods.includes(
-    AuthenticationMethod.none,
-  );
+	const isClientSecretPost = !client?.authenticationMethods.includes(
+		AuthenticationMethod.none,
+	);
 
-  const encodingScopes = encodeURI(scopesString || "");
+	const encodingScopes = encodeURI(scopesString || "");
 
-  React.useEffect(() => {
-    const getData = () => {
-      const { verifier, challenge } = generatePKCEPair();
+	React.useEffect(() => {
+		const getData = () => {
+			const { verifier, challenge } = generatePKCEPair();
 
-      setCodeVerifier(verifier);
-      setCodeChallenge(challenge);
-    };
+			setCodeVerifier(verifier);
+			setCodeChallenge(challenge);
+		};
 
-    getData();
-  }, []);
+		getData();
+	}, []);
 
-  const getLink = () => {
-    return `${
-      window?.ClientConfig?.oauth2.origin || window.location.origin
-    }/oauth2/authorize?response_type=code&client_id=${client?.clientId}&redirect_uri=${
-      client?.redirectUris[0]
-    }&scope=${encodingScopes}${
-      isClientSecretPost
-        ? ""
-        : `&code_challenge_method=S256&code_challenge=${codeChallenge}`
-    }`;
-  };
+	const getLink = () => {
+		return `${
+			window?.ClientConfig?.oauth2.origin || window.location.origin
+		}/oauth2/authorize?response_type=code&client_id=${client?.clientId}&redirect_uri=${
+			client?.redirectUris[0]
+		}&scope=${encodingScopes}${
+			isClientSecretPost
+				? ""
+				: `&code_challenge_method=S256&code_challenge=${codeChallenge}`
+		}`;
+	};
 
-  const link = getLink();
+	const link = getLink();
 
-  const scriptBlock = `<script>
+	const scriptBlock = `<script>
     const button = document.getElementById('docspace-button')
 
     function openOAuthPage() {
@@ -186,126 +186,126 @@ const PreviewDialog = ({
     button.addEventListener('click', openOAuthPage)
 </script>`;
 
-  return (
-    <ModalDialog
-      visible={visible}
-      displayType={ModalDialogType.aside}
-      onClose={onClose}
-      withBodyScroll
-    >
-      <ModalDialog.Header>{t("OAuth:AuthButton")}</ModalDialog.Header>
-      <ModalDialog.Body>
-        <StyledContainer>
-          <StyledPreviewContainer>
-            <SocialButton
-              className="social-button"
-              label={
-                <Trans
-                  t={t}
-                  ns="OAuth"
-                  i18nKey="SignIn"
-                  values={{ productName: t("Common:ProductName") }}
-                />
-              }
-              IconComponent={icon}
-              onClick={() => {
-                window.open(link, "login", linkParams);
-              }}
-              dataTestId="social_OAuth_button"
-            />
-          </StyledPreviewContainer>
-          <StyledBlocksContainer>
-            <div className="block-container">
-              <Text fontWeight={600} lineHeight="20px" fontSize="13px">
-                HTML
-              </Text>
-              <Textarea
-                heightTextArea={64}
-                enableCopy
-                isReadOnly
-                value={htmlBlock}
-                dataTestId="html_block_textarea"
-              />
-            </div>
-            <div className="block-container">
-              <Text fontWeight={600} lineHeight="20px" fontSize="13px">
-                CSS
-              </Text>
-              <Textarea
-                heightTextArea={64}
-                enableCopy
-                isReadOnly
-                value={styleBlock}
-                dataTestId="style_block_textarea"
-              />
-            </div>
-            <div className="block-container">
-              <Text fontWeight={600} lineHeight="20px" fontSize="13px">
-                JavaScript
-              </Text>
-              <Textarea
-                heightTextArea={64}
-                enableCopy
-                isReadOnly
-                value={scriptBlock}
-                dataTestId="script_block_textarea"
-              />
-            </div>
-            <div className="block-container">
-              <Text fontWeight={600} lineHeight="20px" fontSize="13px">
-                {t("OAuth:AuthorizeLink")}
-              </Text>
-              <Textarea
-                heightTextArea={64}
-                enableCopy
-                isReadOnly
-                value={link}
-                dataTestId="authorize_link_textarea"
-              />
-            </div>
+	return (
+		<ModalDialog
+			visible={visible}
+			displayType={ModalDialogType.aside}
+			onClose={onClose}
+			withBodyScroll
+		>
+			<ModalDialog.Header>{t("OAuth:AuthButton")}</ModalDialog.Header>
+			<ModalDialog.Body>
+				<StyledContainer>
+					<StyledPreviewContainer>
+						<SocialButton
+							className="social-button"
+							label={
+								<Trans
+									t={t}
+									ns="OAuth"
+									i18nKey="SignIn"
+									values={{ productName: t("Common:ProductName") }}
+								/>
+							}
+							IconComponent={icon}
+							onClick={() => {
+								window.open(link, "login", linkParams);
+							}}
+							dataTestId="social_OAuth_button"
+						/>
+					</StyledPreviewContainer>
+					<StyledBlocksContainer>
+						<div className="block-container">
+							<Text fontWeight={600} lineHeight="20px" fontSize="13px">
+								HTML
+							</Text>
+							<Textarea
+								heightTextArea={64}
+								enableCopy
+								isReadOnly
+								value={htmlBlock}
+								dataTestId="html_block_textarea"
+							/>
+						</div>
+						<div className="block-container">
+							<Text fontWeight={600} lineHeight="20px" fontSize="13px">
+								CSS
+							</Text>
+							<Textarea
+								heightTextArea={64}
+								enableCopy
+								isReadOnly
+								value={styleBlock}
+								dataTestId="style_block_textarea"
+							/>
+						</div>
+						<div className="block-container">
+							<Text fontWeight={600} lineHeight="20px" fontSize="13px">
+								JavaScript
+							</Text>
+							<Textarea
+								heightTextArea={64}
+								enableCopy
+								isReadOnly
+								value={scriptBlock}
+								dataTestId="script_block_textarea"
+							/>
+						</div>
+						<div className="block-container">
+							<Text fontWeight={600} lineHeight="20px" fontSize="13px">
+								{t("OAuth:AuthorizeLink")}
+							</Text>
+							<Textarea
+								heightTextArea={64}
+								enableCopy
+								isReadOnly
+								value={link}
+								dataTestId="authorize_link_textarea"
+							/>
+						</div>
 
-            {!isClientSecretPost ? (
-              <div className="block-container">
-                <Text fontWeight={600} lineHeight="20px" fontSize="13px">
-                  {t("OAuth:CodeVerifier")}
-                </Text>
-                <Textarea
-                  heightTextArea={64}
-                  enableCopy
-                  isReadOnly
-                  value={codeVerifier}
-                  dataTestId="code_verifier_textarea"
-                />
-              </div>
-            ) : null}
-          </StyledBlocksContainer>
-        </StyledContainer>
-      </ModalDialog.Body>
-      <ModalDialog.Footer>
-        <Button
-          size={ButtonSize.normal}
-          scale
-          label={t("Common:OKButton")}
-          onClick={onClose}
-          testId="preview_dialog_ok_button"
-        />
-      </ModalDialog.Footer>
-    </ModalDialog>
-  );
+						{!isClientSecretPost ? (
+							<div className="block-container">
+								<Text fontWeight={600} lineHeight="20px" fontSize="13px">
+									{t("OAuth:CodeVerifier")}
+								</Text>
+								<Textarea
+									heightTextArea={64}
+									enableCopy
+									isReadOnly
+									value={codeVerifier}
+									dataTestId="code_verifier_textarea"
+								/>
+							</div>
+						) : null}
+					</StyledBlocksContainer>
+				</StyledContainer>
+			</ModalDialog.Body>
+			<ModalDialog.Footer>
+				<Button
+					size={ButtonSize.normal}
+					scale
+					label={t("Common:OKButton")}
+					onClick={onClose}
+					testId="preview_dialog_ok_button"
+				/>
+			</ModalDialog.Footer>
+		</ModalDialog>
+	);
 };
 
 export default inject(
-  ({
-    oauthStore,
-  }: {
-    settingsStore: SettingsStore;
-    oauthStore: OAuthStore;
-  }) => {
-    const { setPreviewDialogVisible, bufferSelection } = oauthStore;
+	({
+		oauthStore,
+	}: {
+		settingsStore: SettingsStore;
+		oauthStore: OAuthStore;
+	}) => {
+		const { setPreviewDialogVisible, bufferSelection } = oauthStore;
 
-    return {
-      setPreviewDialogVisible,
-      client: bufferSelection,
-    };
-  },
+		return {
+			setPreviewDialogVisible,
+			client: bufferSelection,
+		};
+	},
 )(observer(PreviewDialog));

@@ -29,7 +29,7 @@ import { Trans, useTranslation } from "react-i18next";
 
 import { buildDataTestId } from "../../utils/common";
 import { InfoBadge } from "../info-badge";
-import { Link, LinkTarget } from "../link";
+import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 import { DeviceType } from "../../enums";
 
 import { type BetaBadgeProps } from "./BetaBadge.types";
@@ -66,14 +66,14 @@ const BetaBadge = ({
               <Link
                 href={forumLinkUrl}
                 target={LinkTarget.blank}
-                color={currentColorScheme?.main?.accent}
+                color={currentColorScheme?.main?.accent ?? undefined}
                 dataTestId={buildDataTestId(dataTestId, "forum_link")}
               />
             ),
             3: (
               <Link
                 href={`mailto:${documentationEmail}`}
-                color={currentColorScheme?.main?.accent}
+                color={currentColorScheme?.main?.accent ?? undefined}
                 dataTestId={buildDataTestId(
                   dataTestId,
                   "documentation_email_link",

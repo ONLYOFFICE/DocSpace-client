@@ -27,14 +27,14 @@
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
 
-import { Link } from "@docspace/shared/components/link";
+import { Link } from "@docspace/ui-kit/components/link";
 
 import InfoReactSvgUrl from "PUBLIC_DIR/images/info.react.svg?url";
 
-import { HelpButton } from "@docspace/shared/components/help-button";
-import { Text } from "@docspace/shared/components/text";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
+import { Text } from "@docspace/ui-kit/components/text";
 
-import { PasswordInput } from "@docspace/shared/components/password-input";
+import { PasswordInput } from "@docspace/ui-kit/components/password-input";
 import { inject, observer } from "mobx-react";
 
 import { useTranslation } from "react-i18next";

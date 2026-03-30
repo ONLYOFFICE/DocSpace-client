@@ -26,59 +26,59 @@
 
 import React from "react";
 
-import { Text } from "@docspace/shared/components/text";
-import { Textarea } from "@docspace/shared/components/textarea";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Textarea } from "@docspace/ui-kit/components/textarea";
 
 import { StyledInputGroup } from "../ClientForm.styled";
 
 interface TextAreaProps {
-  label: string;
-  name: string;
-  value: string;
-  placeholder: string;
-  increaseHeight: boolean;
-  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  dataTestId?: string;
+	label: string;
+	name: string;
+	value: string;
+	placeholder: string;
+	increaseHeight: boolean;
+	onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+	dataTestId?: string;
 }
 
 const TextAreaGroup = ({
-  label,
+	label,
 
-  name,
-  value,
-  placeholder,
-  increaseHeight,
+	name,
+	value,
+	placeholder,
+	increaseHeight,
 
-  onChange,
-  dataTestId,
+	onChange,
+	dataTestId,
 }: TextAreaProps) => {
-  return (
-    <StyledInputGroup>
-      <div className="label">
-        <Text
-          fontSize="13px"
-          fontWeight={600}
-          lineHeight="20px"
-          title={label}
-          tag=""
-          as="p"
-          color=""
-        >
-          {label}
-        </Text>
-      </div>
-      <Textarea
-        name={name}
-        value={value}
-        placeholder={placeholder}
-        onChange={onChange}
-        tabIndex={0}
-        heightTextArea={increaseHeight ? 81 : 60}
-        maxLength={255}
-        dataTestId={dataTestId}
-      />
-    </StyledInputGroup>
-  );
+	return (
+		<StyledInputGroup>
+			<div className="label">
+				<Text
+					fontSize="13px"
+					fontWeight={600}
+					lineHeight="20px"
+					title={label}
+					tag=""
+					as="p"
+					color=""
+				>
+					{label}
+				</Text>
+			</div>
+			<Textarea
+				name={name}
+				value={value}
+				placeholder={placeholder}
+				onChange={onChange}
+				tabIndex={0}
+				heightTextArea={increaseHeight ? 81 : 60}
+				maxLength={255}
+				dataTestId={dataTestId}
+			/>
+		</StyledInputGroup>
+	);
 };
 
 export default TextAreaGroup;

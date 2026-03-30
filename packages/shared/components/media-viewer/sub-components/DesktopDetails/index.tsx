@@ -29,48 +29,48 @@ import classNames from "classnames";
 
 import ViewerMediaCloseSvgUrl from "PUBLIC_DIR/images/viewer.media.close.svg?url";
 
-import { Text } from "../../../text";
-import { IconButton } from "../../../icon-button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 
 import type { DesktopDetailsProps } from "./DesktopDetails.type";
 import styles from "./DesktopDetails.module.scss";
-import { globalColors } from "../../../../themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 export const DesktopDetails = ({
-  onMaskClick,
-  title,
-  className,
-  showCloseButton,
+	onMaskClick,
+	title,
+	className,
+	showCloseButton,
 }: DesktopDetailsProps) => {
-  return (
-    <div
-      className={classNames(styles.container, className)}
-      data-testid="desktop-details"
-      role="dialog"
-      aria-labelledby="media-viewer-title"
-    >
-      <Text
-        id="media-viewer-title"
-        className={styles.title}
-        data-testid="desktop-details-title"
-      >
-        {title}
-      </Text>
+	return (
+		<div
+			className={classNames(styles.container, className)}
+			data-testid="desktop-details"
+			role="dialog"
+			aria-labelledby="media-viewer-title"
+		>
+			<Text
+				id="media-viewer-title"
+				className={styles.title}
+				data-testid="desktop-details-title"
+			>
+				{title}
+			</Text>
 
-      {showCloseButton ? (
-        <div
-          className={styles.controlBtn}
-          onClick={onMaskClick}
-          data-testid="desktop-details-close"
-        >
-          <IconButton
-            color={globalColors.white}
-            iconName={ViewerMediaCloseSvgUrl}
-            size={28}
-            isClickable
-          />
-        </div>
-      ) : null}
-    </div>
-  );
+			{showCloseButton ? (
+				<div
+					className={styles.controlBtn}
+					onClick={onMaskClick}
+					data-testid="desktop-details-close"
+				>
+					<IconButton
+						color={globalColors.white}
+						iconName={ViewerMediaCloseSvgUrl}
+						size={28}
+						isClickable
+					/>
+				</div>
+			) : null}
+		</div>
+	);
 };

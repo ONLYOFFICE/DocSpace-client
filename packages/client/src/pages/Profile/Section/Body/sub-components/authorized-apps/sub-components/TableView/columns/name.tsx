@@ -1,10 +1,10 @@
 import React from "react";
 import classNames from "classnames";
 
-import { Text } from "@docspace/shared/components/text";
-import { Checkbox } from "@docspace/shared/components/checkbox";
-import { TableCell } from "@docspace/shared/components/table";
-import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { TableCell } from "@docspace/ui-kit/components/table";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import styles from "../../../authorized-apps.module.scss";
 
 interface NameCellProps {

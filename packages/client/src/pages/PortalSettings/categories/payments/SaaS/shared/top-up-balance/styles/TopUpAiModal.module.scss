@@ -1,0 +1,64 @@
+.transferSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;;
+}
+
+.transferBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.transferCard {
+  background: var(--payment-background-color);
+  border-radius: 6px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.transferIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--payment-icon-background);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+
+
+.transferText {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.helperText{
+  margin-top:-12px;
+}
+
+.pricingBillingLink {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 2px;
+  padding: 2px 0;
+  color: var(--color-scheme-main-buttons);
+  font-size: 13px;
+  line-height: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  width: fit-content;
+  margin-top:12px;
+}
+

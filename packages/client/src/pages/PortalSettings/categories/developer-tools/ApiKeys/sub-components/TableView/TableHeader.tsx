@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState } from "react";
-import { TableHeader as TableHeaderComponent } from "@docspace/shared/components/table";
+import { TableHeader as TableHeaderComponent } from "@docspace/ui-kit/components/table";
 
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";

@@ -27,10 +27,10 @@
 import { useTranslation, Trans } from "react-i18next";
 
 import { IClientProps } from "@docspace/shared/utils/oauth/types";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { DeviceType } from "@docspace/shared/enums";
-import { Consumer } from "@docspace/shared/utils/context";
-import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
+import { Consumer } from "@docspace/ui-kit/utils/context";
+import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
 
 import { ViewAsType } from "SRC_DIR/store/OAuthStore";
 import { EmptyServerErrorContainer } from "SRC_DIR/components/EmptyContainer/EmptyServerErrorContainer";

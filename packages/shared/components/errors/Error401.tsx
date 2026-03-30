@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useTranslation } from "react-i18next";
-import ErrorContainer from "../error-container/ErrorContainer";
+import ErrorContainer from "@docspace/ui-kit/components/error-container/ErrorContainer";
 
 export const Error401 = () => {
   const { t } = useTranslation("Common");

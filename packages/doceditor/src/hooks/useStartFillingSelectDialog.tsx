@@ -29,10 +29,10 @@
 import { useCallback, useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 
-import { RoomsType } from "@docspace/shared/enums";
-import { toastr } from "@docspace/shared/components/toast";
+import { FormFillingManageAction, RoomsType } from "@docspace/shared/enums";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { CREATED_FORM_KEY, EDITOR_ID } from "@docspace/shared/constants";
-import { getFileInfo } from "@docspace/shared/api/files";
+import { getFileInfo, manageFormFilling } from "@docspace/shared/api/files";
 
 import type {
   TFile,
@@ -41,13 +41,13 @@ import type {
   TFolderSecurity,
 } from "@docspace/shared/api/files/types";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
-import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
-import type { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
-import type { TData } from "@docspace/shared/components/toast/Toast.type";
+import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
+import type { TSelectedFileInfo } from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
+import type { TData } from "@docspace/ui-kit/components/toast";
 
 import { saveAs } from "@/utils";
 import type { ConflictStateType } from "@/types";
-import { Link, LinkTarget } from "@docspace/shared/components/link";
+import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 
 type SuccessResponse = `${string}form:${string}`;
 type FailedResponseType = string;
@@ -169,6 +169,8 @@ const useStartFillingSelectDialog = (
           switch (createDefineRoomType) {
             case RoomsType.FormRoom:
               {
+                await manageFormFilling(form.id, FormFillingManageAction.Start);
+
                 sessionStorage.setItem(CREATED_FORM_KEY, JSON.stringify(form));
 
                 const url = new URL(

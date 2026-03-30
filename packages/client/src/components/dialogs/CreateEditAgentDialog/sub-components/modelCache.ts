@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TAiProvider, TModel } from "@docspace/shared/api/ai/types";
+import type {TAiProvider, TDefaultProvider, TModel} from "@docspace/shared/api/ai/types";
 
 /**
  * Global cache for providers and models AI
@@ -33,6 +33,7 @@ import type { TAiProvider, TModel } from "@docspace/shared/api/ai/types";
 class ModelCache {
   private providers: TAiProvider[] | null = null;
   private modelsByProvider: Map<number, TModel[]> = new Map();
+  private defaultProvider: TDefaultProvider | null = null;
 
   getProviders(): TAiProvider[] | null {
     return this.providers;
@@ -50,9 +51,18 @@ class ModelCache {
     this.modelsByProvider.set(providerId, models);
   }
 
+  setDefaultProvider(defaultProvider: TDefaultProvider): void {
+    this.defaultProvider = defaultProvider;
+  }
+
+  getDefaultProvider(): TDefaultProvider | null {
+    return this.defaultProvider;
+  }
+
   clear(): void {
     this.providers = null;
     this.modelsByProvider.clear();
+    this.defaultProvider = null;
   }
 }
 

@@ -29,7 +29,7 @@ import { initReactI18next } from "react-i18next";
 import Backend from "@docspace/shared/utils/i18next-http-backend";
 import config from "PACKAGE_FILE";
 import { LANGUAGE } from "@docspace/shared/constants";
-import { getCookie } from "@docspace/shared/utils";
+import { getCookie } from "@docspace/ui-kit/utils/cookie";
 
 import { loadLanguagePath } from "./helpers/language-helpers";
 
@@ -42,6 +42,13 @@ const userLng = window.navigator
   : "en";
 
 const lng = getCookie(LANGUAGE) || userLng;
+
+if (!window.i18n) {
+  window.i18n = { inLoad: [], loaded: {} };
+}
+
+window.i18n.instance = newInstance;
+window.i18n.t = newInstance.t.bind(newInstance);
 
 newInstance
   .use(Backend)
@@ -77,6 +84,7 @@ newInstance
       "Errors",
       "Translations",
       "FormFillingTipsDialog",
+      "Settings",
     ],
 
     backend: {
@@ -88,6 +96,10 @@ newInstance
     react: {
       useSuspense: false,
     },
+  })
+  .then(() => {
+    window.i18n.t = newInstance.t.bind(newInstance);
+    window.i18n.instance = newInstance;
   });
 
 export default newInstance;

@@ -30,54 +30,54 @@ import classNames from "classnames";
 import CopyIcon from "PUBLIC_DIR/images/icons/12/copy.svg?url";
 import EmptyIcon from "PUBLIC_DIR/images/empty.svg?url";
 
-import { Text } from "../../text";
-import { IconButton } from "../../icon-button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 
 import styles from "../Share.module.scss";
 import type { LinkTitleProps } from "../Share.types";
 
 const LinkTitle: FC<LinkTitleProps> = ({
-  t,
-  isLoaded,
-  linkTitle,
-  disabledCopy,
-  isExpiredLink,
-  shareLink,
-  onCopyLink,
+	t,
+	isLoaded,
+	linkTitle,
+	disabledCopy,
+	isExpiredLink,
+	shareLink,
+	onCopyLink,
 }) => {
-  return (
-    <div className={styles.linkTitleContainer} onClick={onCopyLink}>
-      <Text
-        className={classNames(
-          styles.linkOptionsTitle,
-          styles.linkOptionsTitleRoom,
-          {
-            [styles.isExpired]: isExpiredLink,
-          },
-        )}
-        title={linkTitle}
-        truncate
-      >
-        {linkTitle}
-      </Text>
-      {!disabledCopy ? (
-        <div className={styles.linkActionsCopyIconContainer}>
-          <img
-            className={styles.linkActionsCopyImgIcon}
-            src={EmptyIcon}
-            alt={shareLink}
-          />
-          <IconButton
-            title={t("Common:CopySharedLink")}
-            className={styles.linkActionsCopyIcon}
-            size={12}
-            iconName={CopyIcon}
-            isDisabled={isExpiredLink || isLoaded}
-          />
-        </div>
-      ) : null}
-    </div>
-  );
+	return (
+		<div className={styles.linkTitleContainer} onClick={onCopyLink}>
+			<Text
+				className={classNames(
+					styles.linkOptionsTitle,
+					styles.linkOptionsTitleRoom,
+					{
+						[styles.isExpired]: isExpiredLink,
+					},
+				)}
+				title={linkTitle}
+				truncate
+			>
+				{linkTitle}
+			</Text>
+			{!disabledCopy ? (
+				<div className={styles.linkActionsCopyIconContainer}>
+					<img
+						className={styles.linkActionsCopyImgIcon}
+						src={EmptyIcon}
+						alt={shareLink}
+					/>
+					<IconButton
+						title={t("Common:CopySharedLink")}
+						className={styles.linkActionsCopyIcon}
+						size={12}
+						iconName={CopyIcon}
+						isDisabled={isExpiredLink || isLoaded}
+					/>
+				</div>
+			) : null}
+		</div>
+	);
 };
 
 export default LinkTitle;

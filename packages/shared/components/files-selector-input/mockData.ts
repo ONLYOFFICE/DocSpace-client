@@ -35,7 +35,7 @@ export const mockOnSelectFolder = vi.fn();
 export const mockFilesSelectorSettings: FilesSelectorSettings = {
   filesSettings: {
     automaticallyCleanUp: {
-      gap: 30,
+      gap: 3,
       isAutoCleanUp: false,
     },
     canSearchByContent: true,
@@ -51,7 +51,6 @@ export const mockFilesSelectorSettings: FilesSelectorSettings = {
     externalShareSocialMedia: true,
     extsArchive: [".zip", ".rar"],
     extsAudio: [".mp3", ".wav"],
-    extsCoAuthoring: [".docx", ".xlsx"],
     extsConvertible: { ".docx": [".pdf"] },
     extsDocument: [".doc", ".docx"],
     extsImage: [".jpg", ".png"],
@@ -98,6 +97,7 @@ export const mockFilesSelectorSettings: FilesSelectorSettings = {
     templatesSection: true,
     openEditorInSameTab: true,
     displayFileExtension: true,
+    organizeRoomsGrouping: false,
   },
 };
 

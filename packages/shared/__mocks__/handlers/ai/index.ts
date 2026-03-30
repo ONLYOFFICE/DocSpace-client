@@ -44,7 +44,7 @@ import {
   aiServersDeleteHandler,
   aiServersAvailableHandler,
 } from "./servers";
-import { aiChatHandler, aiChatPutHandler } from "./chat";
+import { aiChatHandler, aiChatPutHandler, aiChatDeleteHandler } from "./chat";
 import {
   aiChatMessagesExportHandler,
   aiChatMessagesHandler,
@@ -52,13 +52,17 @@ import {
 import { aiMessagesExportHandler } from "./messages";
 import { aiProvidersAvailableHandler } from "./providersAvailable";
 import { aiRoomsChatsHandler, aiRoomsChatsStreamHandler } from "./roomsChats";
-import { aiRoomsChatsConfigHandler } from "./roomsChatsConfig";
+import {
+  aiRoomsChatsConfigHandler,
+  aiRoomsChatsConfigPutHandler,
+} from "./roomsChatsConfig";
 import { aiRoomsServersHandler } from "./roomsServers";
 import {
   aiVectorizationGetHandler,
   aiVectorizationPutHandler,
 } from "./vectorization";
 import { aiWebSearchGetHandler, aiWebSearchPutHandler } from "./webSearch";
+import { aiProvidersDefaultHandler } from "./providersDefault";
 
 export {
   aiAgentsHandler,
@@ -75,6 +79,7 @@ export {
   aiServersAvailableHandler,
   aiChatHandler,
   aiChatPutHandler,
+  aiChatDeleteHandler,
   aiChatMessagesExportHandler,
   aiChatMessagesHandler,
   aiMessagesExportHandler,
@@ -82,6 +87,7 @@ export {
   aiRoomsChatsHandler,
   aiRoomsChatsStreamHandler,
   aiRoomsChatsConfigHandler,
+  aiRoomsChatsConfigPutHandler,
   aiRoomsServersHandler,
   aiVectorizationGetHandler,
   aiVectorizationPutHandler,
@@ -89,6 +95,7 @@ export {
   aiWebSearchPutHandler,
   aiServerPutHandler,
   aiServerStatusPutHandler,
+  aiProvidersDefaultHandler,
 };
 
 export const aiHandlers = (port: string) => [
@@ -108,6 +115,7 @@ export const aiHandlers = (port: string) => [
   aiChatMessagesHandler(port),
   aiChatHandler(port),
   aiChatPutHandler(port),
+  aiChatDeleteHandler(port),
   aiMessagesExportHandler(port),
   aiProvidersAvailableHandler(port),
   aiRoomsChatsHandler(port),

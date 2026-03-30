@@ -25,14 +25,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useEffect, useState } from "react";
-import { getSystemTheme } from "../utils";
-import { setCookie } from "../utils/cookie";
-import { ThemeKeys } from "../enums";
-import { SYSTEM_THEME_KEY } from "../constants";
+import { getSystemTheme } from "@docspace/ui-kit/utils/get-system-theme";
+import { setCookie } from "@docspace/ui-kit/utils/cookie";
+import { ThemeKeys } from "@docspace/ui-kit/enums";
+import { SYSTEM_THEME_KEY } from "@docspace/ui-kit/providers/theme/themes/constants";
 
 export const useThemeDetector = () => {
   const isDesktopClient = window.AscDesktopEditor !== undefined;
-  const [systemTheme, setSystemTheme] = useState(getSystemTheme());
+  const [systemTheme, setSystemTheme] = useState<
+    ThemeKeys.BaseStr | ThemeKeys.DarkStr
+  >(getSystemTheme());
 
   const systemThemeListener = (e: MediaQueryListEvent) => {
     setSystemTheme(e.matches ? ThemeKeys.DarkStr : ThemeKeys.BaseStr);

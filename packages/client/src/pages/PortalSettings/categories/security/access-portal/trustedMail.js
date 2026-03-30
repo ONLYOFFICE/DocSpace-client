@@ -25,14 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
 import { useLocation, useNavigate } from "react-router";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
-import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
-import { toastr } from "@docspace/shared/components/toast";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link } from "@docspace/ui-kit/components/link";
+import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { size } from "@docspace/shared/utils";
 import isEqual from "lodash/isEqual";
@@ -45,18 +44,7 @@ import { isValidDomainName } from "@docspace/shared/utils/email";
 import TrustedMailLoader from "../sub-components/loaders/trusted-mail-loader";
 import UserFields from "../sub-components/user-fields";
 import { LearnMoreWrapper } from "../StyledSecurity";
-
-const MainContainer = styled.div`
-  width: 100%;
-
-  .box {
-    margin-bottom: 11px;
-  }
-
-  .save-cancel-buttons {
-    margin-top: 24px;
-  }
-`;
+import styles from "./trustedMail.module.scss";
 
 const TrustedMail = (props) => {
   const {
@@ -175,7 +163,7 @@ const TrustedMail = (props) => {
     setErrorMessages((prev) => [...prev, null]);
   };
 
-  const checkDuplicate = (domains,input, index) => {
+  const checkDuplicate = (domains, input, index) => {
     const firstIndex = domains.findIndex((d) => d === input && d !== "");
     return firstIndex !== -1 && firstIndex !== index;
   };
@@ -187,18 +175,17 @@ const TrustedMail = (props) => {
   };
 
   const getErrorMessage = (domain, index, domainsArray = domains) => {
-    
     const isDuplicate = checkDuplicate(domainsArray, domain, index);
     const isValidFormat = isValidDomainName(domain) && domain !== "";
-    
+
     if (isDuplicate) return t("Common:DomainAlreadyAdded");
     if (!isValidFormat) return t("Common:IncorrectDomain");
     return null;
   };
 
   const validateAllDomains = (domainsArray) => {
-    return domainsArray.map((domain, index) => 
-      getErrorMessage(domain, index, domainsArray)
+    return domainsArray.map((domain, index) =>
+      getErrorMessage(domain, index, domainsArray),
     );
   };
 
@@ -206,13 +193,13 @@ const TrustedMail = (props) => {
     const newInputs = Array.from(domains);
     newInputs.splice(index, 1);
     setDomains(newInputs);
-    
+
     setErrorMessages(validateAllDomains(newInputs));
   };
 
   const onCheckValid = (domain, index) => {
     const errorMessage = getErrorMessage(domain, index);
-    
+
     setErrorMessages((prev) => {
       const newErrors = [...prev];
       newErrors[index] = errorMessage;
@@ -272,7 +259,7 @@ const TrustedMail = (props) => {
   }
 
   return (
-    <MainContainer>
+    <div className={styles.container}>
       <LearnMoreWrapper withoutExternalLink={!trustedMailDomainSettingsUrl}>
         <Text fontSize="13px" fontWeight="400">
           {t("TrustedMailSettingDescription")}
@@ -295,7 +282,7 @@ const TrustedMail = (props) => {
       </LearnMoreWrapper>
 
       <RadioButtonGroup
-        className="box"
+        className={styles.box}
         fontSize="13px"
         fontWeight="400"
         name="group"
@@ -344,7 +331,7 @@ const TrustedMail = (props) => {
       ) : null}
 
       <SaveCancelButtons
-        className="save-cancel-buttons"
+        className={styles.saveCancelButtons}
         onSaveClick={onSaveClick}
         onCancelClick={onCancelClick}
         showReminder={showReminder}
@@ -359,7 +346,7 @@ const TrustedMail = (props) => {
         cancelButtonDataTestId="trusted_mail_cancel_button"
         saveButtonDataTestId="trusted_mail_save_button"
       />
-    </MainContainer>
+    </div>
   );
 };
 

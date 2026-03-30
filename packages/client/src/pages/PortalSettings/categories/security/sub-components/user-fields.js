@@ -27,19 +27,19 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import {
-  commonIconsStyles,
-  injectDefaultTheme,
-  mobile,
+	commonIconsStyles,
+	injectDefaultTheme,
+	mobile,
 } from "@docspace/shared/utils";
 import TrashIcon from "PUBLIC_DIR/images/icons/16/trash.react.svg";
 import PlusIcon from "PUBLIC_DIR/images/plus.react.svg";
-import { Link } from "@docspace/shared/components/link";
+import { Link } from "@docspace/ui-kit/components/link";
 import {
-  TextInput,
-  InputSize,
-  InputType,
-} from "@docspace/shared/components/text-input";
-import { FieldContainer } from "@docspace/shared/components/field-container";
+	TextInput,
+	InputSize,
+	InputType,
+} from "@docspace/ui-kit/components/text-input";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { useTranslation } from "react-i18next";
 
 const StyledPlusIcon = styled(PlusIcon).attrs(injectDefaultTheme)`
@@ -94,138 +94,138 @@ const StyledAddWrapper = styled.div`
 `;
 
 const usePrevious = (value) => {
-  const ref = useRef();
-  useEffect(() => {
-    ref.current = value;
-  }, [value]);
-  return ref.current;
+	const ref = useRef();
+	useEffect(() => {
+		ref.current = value;
+	}, [value]);
+	return ref.current;
 };
 
 const UserFields = (props) => {
-  const {
-    className,
-    buttonLabel,
-    onChangeInput,
-    onDeleteInput,
-    onBlurAction,
-    onClickAdd,
-    inputs,
-    validateFunc,
-    classNameAdditional,
-    isAutoFocussed = false,
-    inputDataTestId,
-    deleteIconDataTestId,
-    addButtonDataTestId,
-    hideDeleteIcon = false,
-    errorMessages,
-  } = props;
+	const {
+		className,
+		buttonLabel,
+		onChangeInput,
+		onDeleteInput,
+		onBlurAction,
+		onClickAdd,
+		inputs,
+		validateFunc,
+		classNameAdditional,
+		isAutoFocussed = false,
+		inputDataTestId,
+		deleteIconDataTestId,
+		addButtonDataTestId,
+		hideDeleteIcon = false,
+		errorMessages,
+	} = props;
 
-  const [errors, setErrors] = useState(new Array(inputs.length).fill(false));
-  const prevInputsCount = usePrevious(inputs.length);
+	const [errors, setErrors] = useState(new Array(inputs.length).fill(false));
+	const prevInputsCount = usePrevious(inputs.length);
 
-  useEffect(() => {
-    if (inputs.length > prevInputsCount) setErrors([...errors, false]);
-  }, [inputs]);
+	useEffect(() => {
+		if (inputs.length > prevInputsCount) setErrors([...errors, false]);
+	}, [inputs]);
 
-  const onBlur = (index) => {
-    const newErrors = Array.from(errors);
-    newErrors[index] = true;
-    setErrors(newErrors);
+	const onBlur = (index) => {
+		const newErrors = Array.from(errors);
+		newErrors[index] = true;
+		setErrors(newErrors);
 
-    onBlurAction?.(index);
-  };
+		onBlurAction?.(index);
+	};
 
-  const onFocus = (index) => {
-    const newErrors = Array.from(errors);
-    newErrors[index] = false;
-    setErrors(newErrors);
-  };
+	const onFocus = (index) => {
+		const newErrors = Array.from(errors);
+		newErrors[index] = false;
+		setErrors(newErrors);
+	};
 
-  const onDelete = (index) => {
-    const newErrors = Array.from(errors);
-    newErrors.splice(index, 1);
-    setErrors(newErrors);
+	const onDelete = (index) => {
+		const newErrors = Array.from(errors);
+		newErrors.splice(index, 1);
+		setErrors(newErrors);
 
-    onDeleteInput(index);
-  };
+		onDeleteInput(index);
+	};
 
-  return (
-    <div className={className}>
-      {inputs
-        ? inputs.map((input, index) => {
-            let newInput1;
-            let newInput2;
+	return (
+		<div className={className}>
+			{inputs
+				? inputs.map((input, index) => {
+						let newInput1;
+						let newInput2;
 
-            if (input?.includes("-")) {
-              newInput1 = input.split("-")[0];
-              newInput2 = input.split("-")[1];
-            }
+						if (input?.includes("-")) {
+							newInput1 = input.split("-")[0];
+							newInput2 = input.split("-")[1];
+						}
 
-            const error = newInput2
-              ? (input && input.split("-").length - 1 > 1) ||
-                !validateFunc(newInput1) ||
-                !validateFunc(newInput2) ||
-                errorMessages?.[index]
-              : !validateFunc(input) || errorMessages?.[index];
+						const error = newInput2
+							? (input && input.split("-").length - 1 > 1) ||
+								!validateFunc(newInput1) ||
+								!validateFunc(newInput2) ||
+								errorMessages?.[index]
+							: !validateFunc(input) || errorMessages?.[index];
 
-            return (
-              <StyledInputWrapper
-                key={`user-input-${inputs.length - index}`}
-                hideDeleteIcon={hideDeleteIcon}
-              >
-                <FieldContainer
-                  className="field-container"
-                  isVertical
-                  labelVisible={false}
-                  hasError={error}
-                  errorMessage={errorMessages?.[index]}
-                >
-                  <div className="input-wrapper">
-                    <TextInput
-                      type={InputType.text}
-                      size={InputSize.base}
-                      tabIndex={index}
-                      className={`${classNameAdditional}-input text-input`}
-                      id={`user-input-${input}`}
-                      isAutoFocussed={isAutoFocussed}
-                      keepCharPositions
-                      value={input}
-                      onChange={(e) => onChangeInput(e, index)}
-                      onBlur={() => onBlur(index)}
-                      onFocus={() => onFocus(index)}
-                      hasError={
-                        errors[index] || errorMessages?.[index] ? error : null
-                      }
-                      testId={inputDataTestId}
-                    />
-                    {hideDeleteIcon ? null : (
-                      <StyledTrashIcon
-                        className={`${classNameAdditional}-delete-icon`}
-                        size="medium"
-                        onClick={() => onDelete(index)}
-                        data-testid={deleteIconDataTestId}
-                      />
-                    )}
-                  </div>
-                </FieldContainer>
-              </StyledInputWrapper>
-            );
-          })
-        : null}
+						return (
+							<StyledInputWrapper
+								key={`user-input-${inputs.length - index}`}
+								hideDeleteIcon={hideDeleteIcon}
+							>
+								<FieldContainer
+									className="field-container"
+									isVertical
+									labelVisible={false}
+									hasError={error}
+									errorMessage={errorMessages?.[index]}
+								>
+									<div className="input-wrapper">
+										<TextInput
+											type={InputType.text}
+											size={InputSize.base}
+											tabIndex={index}
+											className={`${classNameAdditional}-input text-input`}
+											id={`user-input-${input}`}
+											isAutoFocussed={isAutoFocussed}
+											keepCharPositions
+											value={input}
+											onChange={(e) => onChangeInput(e, index)}
+											onBlur={() => onBlur(index)}
+											onFocus={() => onFocus(index)}
+											hasError={
+												errors[index] || errorMessages?.[index] ? error : null
+											}
+											testId={inputDataTestId}
+										/>
+										{hideDeleteIcon ? null : (
+											<StyledTrashIcon
+												className={`${classNameAdditional}-delete-icon`}
+												size="medium"
+												onClick={() => onDelete(index)}
+												data-testid={deleteIconDataTestId}
+											/>
+										)}
+									</div>
+								</FieldContainer>
+							</StyledInputWrapper>
+						);
+					})
+				: null}
 
-      <StyledAddWrapper
-        className={classNameAdditional}
-        onClick={onClickAdd}
-        inputsLength={inputs.length}
-        data-testid={addButtonDataTestId}
-      >
-        <StyledPlusIcon size="small" />
-        <Link type="action" isHovered fontWeight={600}>
-          {buttonLabel}
-        </Link>
-      </StyledAddWrapper>
-    </div>
-  );
+			<StyledAddWrapper
+				className={classNameAdditional}
+				onClick={onClickAdd}
+				inputsLength={inputs.length}
+				data-testid={addButtonDataTestId}
+			>
+				<StyledPlusIcon size="small" />
+				<Link type="action" isHovered fontWeight={600}>
+					{buttonLabel}
+				</Link>
+			</StyledAddWrapper>
+		</div>
+	);
 };
 
 export default UserFields;

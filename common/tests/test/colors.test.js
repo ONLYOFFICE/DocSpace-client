@@ -56,18 +56,19 @@ beforeAll(() => {
     "node_modules",
     ".meta",
     "coverage",
-    "vitest"
+    "vitest",
+    "storybook-helpers",
   ];
 
   const excludePatterns = [
     "themes",
     ".test.",
     ".stories.",
-    path.normalize("packages/shared/utils/encoder.ts"),
+    path.normalize("libs/ui-kit/utils/encoder/index.ts"),
     path.normalize(
-      "packages/shared/components/error-container/ErrorContainer.tsx"
+      "libs/ui-kit/components/error-container/ErrorContainer.tsx"
     ),
-    path.normalize("packages/shared/styles/variables/_colors.scss"),
+    path.normalize("libs/ui-kit/styles/variables/_colors.scss"),
     path.normalize("packages/client/src/components/SmartBanner/main.css"),
   ];
 

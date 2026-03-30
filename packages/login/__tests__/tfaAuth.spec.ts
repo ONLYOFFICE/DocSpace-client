@@ -28,7 +28,8 @@ import {
   tfaAppValidateHandler,
   selfHandler,
 } from "@docspace/shared/__mocks__/handlers";
-import { expect, test } from "./fixtures/base";
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
+import { test } from "./fixtures/base";
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 
 const URL = "/login/confirm/TfaAuth";
@@ -64,7 +65,7 @@ const URL_WITH_LINK_DATA_PARAMS = getUrlWithQueryParams(
 test("tfa auth render", async ({ page, baseUrl }) => {
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "tfa-auth",
     "tfa-auth-render.png",
@@ -76,7 +77,7 @@ test("tfa auth success", async ({ page, baseUrl }) => {
 
   await page.getByTestId("app_code_input").fill("123456");
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "tfa-auth",
     "tfa-auth-success.png",
@@ -86,7 +87,7 @@ test("tfa auth success", async ({ page, baseUrl }) => {
 
   await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "tfa-auth",
     "tfa-auth-success-redirect.png",
@@ -108,7 +109,7 @@ test("tfa auth error not validated", async ({
 
   await page.getByTestId("app_code_continue_button").click();
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "tfa-auth",
     "tfa-auth-error-not-validated.png",
@@ -130,7 +131,7 @@ test("tfa auth redirects to room after successful submission", async ({
 
   await page.waitForURL(`${baseUrl}/rooms/shared/1`);
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "tfa-auth",
     "tfa-auth-room-redirect.png",

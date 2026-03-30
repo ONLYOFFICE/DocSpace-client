@@ -24,50 +24,50 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Checkbox } from "@docspace/shared/components/checkbox";
-import { HelpButton } from "@docspace/shared/components/help-button";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { TooltipContent } from "../../../../pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/TooltipContent";
 import styles from "../EmbeddingPanel.module.scss";
 
 type CheckboxElementProps = {
-  img: string;
-  label: string;
-  title: string;
-  description: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  isChecked: boolean;
-  dataTestId?: string;
+	img: string;
+	label: string;
+	title: string;
+	description: string;
+	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	isChecked: boolean;
+	dataTestId?: string;
 };
 
 const CheckboxElement = ({
-  img,
-  label,
-  title,
-  description,
-  onChange,
-  isChecked,
-  dataTestId,
+	img,
+	label,
+	title,
+	description,
+	onChange,
+	isChecked,
+	dataTestId,
 }: CheckboxElementProps) => {
-  return (
-    <div className={styles.embeddingPanelCheckboxElement}>
-      <Checkbox
-        className="checkbox"
-        label={label}
-        onChange={onChange}
-        isChecked={isChecked}
-        dataTestId={`${dataTestId}_embedding_panel_checkbox`}
-      />
-      <HelpButton
-        place="right"
-        offsetRight={4}
-        size={12}
-        dataTestId={`${dataTestId}_embedding_panel_help_button`}
-        tooltipContent={
-          <TooltipContent img={img} title={title} description={description} />
-        }
-      />
-    </div>
-  );
+	return (
+		<div className={styles.embeddingPanelCheckboxElement}>
+			<Checkbox
+				className="checkbox"
+				label={label}
+				onChange={onChange}
+				isChecked={isChecked}
+				dataTestId={`${dataTestId}_embedding_panel_checkbox`}
+			/>
+			<HelpButton
+				place="right"
+				offsetRight={4}
+				size={12}
+				dataTestId={`${dataTestId}_embedding_panel_help_button`}
+				tooltipContent={
+					<TooltipContent img={img} title={title} description={description} />
+				}
+			/>
+		</div>
+	);
 };
 
 export { CheckboxElement };

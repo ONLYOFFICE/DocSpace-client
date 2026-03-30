@@ -1,0 +1,28 @@
+{
+  "key_path": "AllRooms",
+  "content": "All rooms",
+  "content_en_sha1_hash": "046a6d7fae6ae6dc9f6f8795ac473032bcddb586",
+  "created_at": "2026-02-19T13:36:04.885Z",
+  "updated_at": "2026-03-20T09:25:27.122Z",
+  "comment": {
+    "text": "This key displays the text \"All rooms\" within a dialog, likely a room grouping or selection dialog. It's used as a label for a section or option representing all available rooms. The label appears within a visually styled container.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T09:25:27.122Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/RoomGroupingDialog/index.tsx",
+      "line_number": 120,
+      "context": "<div\n className={classNames(styles.tagName, {\n [styles.tagNameTablet]: !isDesktopView,\n })}\n >\n {t(\"Common:AllRooms\")}\n </div>\n </div>\n \n <div\n className={classNames(styles.tag, {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

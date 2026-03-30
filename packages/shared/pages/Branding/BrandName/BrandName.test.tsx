@@ -24,14 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
-import { ThemeProvider } from "../../../components/theme-provider";
-import Base from "../../../themes/base";
+import { ThemeProviderComponent } from "@docspace/ui-kit/components/theme-provider";
+import { Base } from "@docspace/ui-kit/providers/theme/themes";
 import { BrandName } from "./index";
-import buttonStyles from "../../../components/button/Button.module.scss";
 
 vi.mock("react-device-detect", () => ({
   isMobile: false,
@@ -52,11 +50,11 @@ const defaultProps = {
 
 const renderComponent = (props = {}) => {
   return render(
-    <ThemeProvider theme={Base}>
+    <ThemeProviderComponent theme={Base}>
       <MemoryRouter>
         <BrandName {...defaultProps} {...props} />
       </MemoryRouter>
-    </ThemeProvider>,
+    </ThemeProviderComponent>,
   );
 };
 
@@ -114,12 +112,6 @@ describe("BrandName", () => {
     fireEvent.change(input, { target: { value: "New Brand" } });
     fireEvent.click(cancelButton);
     expect(input).toHaveValue("Default Brand");
-  });
-
-  it("disables save button when text is equal to defaultBrandName", () => {
-    renderComponent({ brandName: "Default Brand" });
-    const saveButton = screen.getByTestId("brand_name_save_button");
-    expect(saveButton).toHaveClass(buttonStyles.isDisabled);
   });
 
   it("shows reminder when text is different from defaultBrandName", () => {

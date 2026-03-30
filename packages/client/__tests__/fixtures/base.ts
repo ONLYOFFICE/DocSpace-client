@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { http, passthrough } from "msw";
 import { test as base, Page } from "@playwright/test";
 import {
   PlaywrightWebSocketMock,
@@ -55,9 +56,14 @@ export const test = base.extend<
   ],
   mockRequest: [
     async ({ page }, use) => {
+      const localePassthrough = http.get(
+        /(\/client)?\/locales\/.*\.json(\?.*)?$/,
+        () => passthrough(),
+      );
+
       const worker = new WorkerFixture({
         page,
-        initialHandlers: allHandlers(TEST_PORT),
+        initialHandlers: [...allHandlers(TEST_PORT), localePassthrough],
       });
 
       await worker.start();

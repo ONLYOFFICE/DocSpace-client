@@ -24,50 +24,50 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Link } from "@docspace/shared/components/link";
-import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/ui-kit/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
 
 export const SharedLinkHint = ({
-  t,
-  linkSettings,
-  redirectToSelectedRoom,
-  currentColorScheme,
+	t,
+	linkSettings,
+	redirectToSelectedRoom,
+	currentColorScheme,
 }) => {
-  const settingsTranslations = {
-    password: t("Common:Password").toLowerCase(),
-    denyDownload: t("FileContentCopy").toLowerCase(),
-    expirationDate: t("LimitByTime").toLowerCase(),
-  };
+	const settingsTranslations = {
+		password: t("Common:Password").toLowerCase(),
+		denyDownload: t("FileContentCopy").toLowerCase(),
+		expirationDate: t("LimitByTime").toLowerCase(),
+	};
 
-  return (
-    linkSettings.length > 0 && (
-      <div>
-        <Text className="linkHelp" fontSize="12px" lineHeight="16px">
-          {linkSettings.length === 2
-            ? t("LinkSetDescription2", {
-                parameter1: settingsTranslations[linkSettings[0]],
-                parameter2: settingsTranslations[linkSettings[1]],
-              })
-            : linkSettings.length === 3
-              ? t("LinkSetDescription3", {
-                  parameter1: settingsTranslations[linkSettings[0]],
-                  parameter2: settingsTranslations[linkSettings[1]],
-                  parameter3: settingsTranslations[linkSettings[2]],
-                })
-              : t("LinkSetDescription", {
-                  parameter: settingsTranslations[linkSettings[0]],
-                })}
-        </Text>
-        <Link
-          color={currentColorScheme?.main?.accent}
-          fontSize="12px"
-          lineHeight="16px"
-          onClick={redirectToSelectedRoom}
-        >
-          {" "}
-          {t("Common:GoToRoom")}.
-        </Link>
-      </div>
-    )
-  );
+	return (
+		linkSettings.length > 0 && (
+			<div>
+				<Text className="linkHelp" fontSize="12px" lineHeight="16px">
+					{linkSettings.length === 2
+						? t("LinkSetDescription2", {
+								parameter1: settingsTranslations[linkSettings[0]],
+								parameter2: settingsTranslations[linkSettings[1]],
+							})
+						: linkSettings.length === 3
+							? t("LinkSetDescription3", {
+									parameter1: settingsTranslations[linkSettings[0]],
+									parameter2: settingsTranslations[linkSettings[1]],
+									parameter3: settingsTranslations[linkSettings[2]],
+								})
+							: t("LinkSetDescription", {
+									parameter: settingsTranslations[linkSettings[0]],
+								})}
+				</Text>
+				<Link
+					color={currentColorScheme?.main?.accent}
+					fontSize="12px"
+					lineHeight="16px"
+					onClick={redirectToSelectedRoom}
+				>
+					{" "}
+					{t("Common:GoToRoom")}.
+				</Link>
+			</div>
+		)
+	);
 };

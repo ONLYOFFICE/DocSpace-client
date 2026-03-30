@@ -29,11 +29,11 @@
 import React, { useCallback, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/shared/components/text";
-import { toastr } from "@docspace/shared/components/toast";
-import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
+import { Text } from "@docspace/ui-kit/components/text";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { TValidate } from "@docspace/ui-kit/components/email-input";
 import { sendRegisterRequest } from "@docspace/shared/api/settings";
-import { useTheme } from "@docspace/shared/hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import { RegisterProps } from "@/types";
 
@@ -134,7 +134,7 @@ const Register = (props: RegisterProps) => {
       >
         <Text
           as="span"
-          color={currentColorScheme?.main?.accent}
+          color={currentColorScheme?.main?.accent ?? undefined}
           lineHeight="20px"
         >
           {t("Register")}

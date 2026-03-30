@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import { expect, test, TEST_PORT } from "./fixtures/base";
 import {
   settingsHandler,
@@ -68,7 +69,7 @@ test.describe("Context menu DocAdmin", () => {
       await contextMenuMoveOptions.hover();
       await expect(contextMenuMoveOptions).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "context-menu",
         "doc-admin-manager_custom-room.png",
@@ -104,7 +105,7 @@ test.describe("Context menu DocAdmin", () => {
       await publicContextMenuMoveOptions.hover();
       await expect(publicContextMenuMoveOptions).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "context-menu",
         "doc-admin-manager_public-room.png",
@@ -125,7 +126,7 @@ test.describe("Context menu DocAdmin", () => {
       await formContextMenuMoveOptions.hover();
       await expect(formContextMenuMoveOptions).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "context-menu",
         "doc-admin-manager_form-room.png",
@@ -146,7 +147,7 @@ test.describe("Context menu DocAdmin", () => {
       await contextMenuMoveOptions.hover();
       await expect(contextMenuMoveOptions).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "context-menu",
         "doc-admin-manager_custom-shared-room.png",
@@ -178,7 +179,7 @@ test.describe("Context menu DocAdmin", () => {
       await contextMenuMoveOptions.hover();
       await expect(contextMenuMoveOptions).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "context-menu",
         "doc-admin-manager_third-party-room.png",
@@ -209,7 +210,7 @@ test.describe("Context menu DocAdmin", () => {
       await contextMenuMoveOptions.hover();
       await expect(contextMenuMoveOptions).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "context-menu",
         "doc-admin-manager_collaboration-room.png",
@@ -240,7 +241,7 @@ test.describe("Context menu DocAdmin", () => {
       await contextMenuMoveOptions.hover();
       await expect(contextMenuMoveOptions).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "context-menu",
         "doc-admin-manager_vdr-room.png",
@@ -273,7 +274,7 @@ test.describe("Context menu DocAdmin", () => {
       await contextMenuMoveOptions.hover();
       await expect(contextMenuMoveOptions).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "context-menu",
         "doc-admin-content-creator_custom-room.png",
@@ -309,7 +310,7 @@ test.describe("Context menu DocAdmin", () => {
       await publicContextMenuMoveOptions.hover();
       await expect(publicContextMenuMoveOptions).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "context-menu",
         "doc-admin-content-creator_public-room.png",
@@ -330,7 +331,7 @@ test.describe("Context menu DocAdmin", () => {
       await formContextMenuMoveOptions.hover();
       await expect(formContextMenuMoveOptions).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "context-menu",
         "doc-admin-content-creator_form-room.png",
@@ -351,7 +352,7 @@ test.describe("Context menu DocAdmin", () => {
       await contextMenuMoveOptions.hover();
       await expect(contextMenuMoveOptions).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "context-menu",
         "doc-admin-content-creator_custom-room-shared.png",
@@ -378,7 +379,7 @@ test.describe("Context menu DocAdmin", () => {
 
       await contextMenuButton.click();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "context-menu",
         "doc-admin-content-creator_public-third-party-room.png",
@@ -409,7 +410,7 @@ test.describe("Context menu DocAdmin", () => {
       await contextMenuMoveOptions.hover();
       await expect(contextMenuMoveOptions).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "context-menu",
         "doc-admin-content-creator_collaboration-room.png",
@@ -437,7 +438,7 @@ test.describe("Context menu DocAdmin", () => {
     //   await contextMenuMoveOptions.hover();
     //   await expect(contextMenuMoveOptions).toBeVisible();
 
-    //   await expect(page).toHaveScreenshot([
+    //   await expectScreenshot(page,[
     //     "desktop",
     //     "context-menu",
     //     "doc-admin-content-creator_vdr-room.png",
@@ -471,7 +472,7 @@ test.describe("Context menu DocAdmin", () => {
       await contextMenuMoveOptions.hover();
       await expect(contextMenuMoveOptions).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "context-menu",
         "doc-admin-not-in-room_custom-room.png",
@@ -508,7 +509,7 @@ test.describe("Context menu DocAdmin", () => {
       await publicContextMenuMoveOptions.hover();
       await expect(publicContextMenuMoveOptions).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "context-menu",
         "doc-admin-not-in-room_public-room.png",
@@ -529,7 +530,7 @@ test.describe("Context menu DocAdmin", () => {
       await formContextMenuMoveOptions.hover();
       await expect(formContextMenuMoveOptions).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "context-menu",
         "doc-admin-not-in-room_form-room.png",
@@ -550,7 +551,7 @@ test.describe("Context menu DocAdmin", () => {
       await contextMenuMoveOptions.hover();
       await expect(contextMenuMoveOptions).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "context-menu",
         "doc-admin-not-in-room_custom-room-shared.png",
@@ -578,7 +579,7 @@ test.describe("Context menu DocAdmin", () => {
 
       await contextMenuButton.click();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "context-menu",
         "doc-admin-not-in-room_public-third-party-room.png",
@@ -610,7 +611,7 @@ test.describe("Context menu DocAdmin", () => {
       await contextMenuMoveOptions.hover();
       await expect(contextMenuMoveOptions).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "context-menu",
         "doc-admin-not-in-room_collaboration-room.png",
@@ -642,7 +643,7 @@ test.describe("Context menu DocAdmin", () => {
       await contextMenuMoveOptions.hover();
       await expect(contextMenuMoveOptions).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "context-menu",
         "doc-admin-not-in-room_vdr-room.png",
@@ -686,7 +687,7 @@ test.describe("Context menu Room admin", () => {
       await contextMenuMoveOptions.hover();
       await expect(contextMenuMoveOptions).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "context-menu",
         "room-admin-room-owner_custom-room.png",
@@ -723,7 +724,7 @@ test.describe("Context menu Room admin", () => {
       await publicContextMenuMoveOptions.hover();
       await expect(publicContextMenuMoveOptions).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "context-menu",
         "room-admin-room-owner_public-room.png",
@@ -744,7 +745,7 @@ test.describe("Context menu Room admin", () => {
       await formContextMenuMoveOptions.hover();
       await expect(formContextMenuMoveOptions).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "context-menu",
         "room-admin-room-owner_form-room.png",
@@ -765,7 +766,7 @@ test.describe("Context menu Room admin", () => {
       await contextMenuMoveOptions.hover();
       await expect(contextMenuMoveOptions).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "context-menu",
         "room-admin-room-owner_custom-shared-room.png",
@@ -797,7 +798,7 @@ test.describe("Context menu Room admin", () => {
       await contextMenuMoveOptions.hover();
       await expect(contextMenuMoveOptions).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "context-menu",
         "room-admin-room-owner_third-party-room.png",
@@ -829,7 +830,7 @@ test.describe("Context menu Room admin", () => {
       await contextMenuMoveOptions.hover();
       await expect(contextMenuMoveOptions).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "context-menu",
         "room-admin-room-owner_collaboration-room.png",
@@ -861,7 +862,7 @@ test.describe("Context menu Room admin", () => {
       await contextMenuMoveOptions.hover();
       await expect(contextMenuMoveOptions).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "context-menu",
         "room-admin-room-owner_vdr-room.png",
@@ -895,7 +896,7 @@ test.describe("Context menu Room admin", () => {
       await contextMenuMoveOptions.hover();
       await expect(contextMenuMoveOptions).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "context-menu",
         "room-admin-room-manager_custom-room.png",
@@ -932,7 +933,7 @@ test.describe("Context menu Room admin", () => {
       await publicContextMenuMoveOptions.hover();
       await expect(publicContextMenuMoveOptions).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "context-menu",
         "room-admin-room-manager_public-room.png",
@@ -953,7 +954,7 @@ test.describe("Context menu Room admin", () => {
       await formContextMenuMoveOptions.hover();
       await expect(formContextMenuMoveOptions).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "context-menu",
         "room-admin-room-manager_form-room.png",
@@ -974,7 +975,7 @@ test.describe("Context menu Room admin", () => {
       await contextMenuMoveOptions.hover();
       await expect(contextMenuMoveOptions).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "context-menu",
         "room-admin-room-manager_custom-shared-room.png",
@@ -1006,7 +1007,7 @@ test.describe("Context menu Room admin", () => {
       await contextMenuMoveOptions.hover();
       await expect(contextMenuMoveOptions).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "context-menu",
         "room-admin-room-manager_third-party-room.png",
@@ -1038,7 +1039,7 @@ test.describe("Context menu Room admin", () => {
       await contextMenuMoveOptions.hover();
       await expect(contextMenuMoveOptions).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "context-menu",
         "room-admin-room-manager_collaboration-room.png",
@@ -1070,7 +1071,7 @@ test.describe("Context menu Room admin", () => {
       await contextMenuMoveOptions.hover();
       await expect(contextMenuMoveOptions).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "context-menu",
         "room-admin-room-manager_vdr-room.png",
@@ -1100,7 +1101,7 @@ test.describe("Context menu Room admin", () => {
 
       await contextMenuButton.click();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "context-menu",
         "room-admin-content-creator_custom-room.png",
@@ -1133,7 +1134,7 @@ test.describe("Context menu Room admin", () => {
 
       await publicContextMenuButton.click();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "context-menu",
         "room-admin-content-creator_public-room.png",
@@ -1150,7 +1151,7 @@ test.describe("Context menu Room admin", () => {
 
       await formContextMenuButton.click();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "context-menu",
         "room-admin-content-creator_form-room.png",
@@ -1167,7 +1168,7 @@ test.describe("Context menu Room admin", () => {
 
       await contextMenuButton.click();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "context-menu",
         "room-admin-content-creator_custom-shared-room.png",
@@ -1195,7 +1196,7 @@ test.describe("Context menu Room admin", () => {
 
       await contextMenuButton.click();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "context-menu",
         "room-admin-content-creator_third-party-room.png",
@@ -1223,7 +1224,7 @@ test.describe("Context menu Room admin", () => {
 
       await contextMenuButton.click();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "context-menu",
         "room-admin-content-creator_collaboration-room.png",
@@ -1251,7 +1252,7 @@ test.describe("Context menu Room admin", () => {
 
       await contextMenuButton.click();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "context-menu",
         "room-admin-content-creator_vdr-room.png",

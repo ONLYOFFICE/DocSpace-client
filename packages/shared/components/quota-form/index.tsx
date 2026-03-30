@@ -39,11 +39,15 @@ import {
   getPowerFromBytes,
   getSizeFromBytes,
 } from "../../utils/common";
-import { TextInput, InputType } from "../text-input";
-import { ComboBox, ComboBoxSize, TOption } from "../combobox";
+import { TextInput, InputType } from "@docspace/ui-kit/components/text-input";
+import {
+  ComboBox,
+  ComboBoxSize,
+  TOption,
+} from "@docspace/ui-kit/components/combobox";
 import { SaveCancelButtons } from "../save-cancel-buttons";
-import { Text } from "../text";
-import { Checkbox } from "../checkbox";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { TTranslation } from "../../types";
 
 import { QuotaFormProps } from "./QuotaForm.types";
@@ -247,7 +251,7 @@ export const QuotaForm = forwardRef<{ focus: () => void }, QuotaFormProps>(
             isDisabled={isDisable}
             onKeyDown={onKeyDownInput}
             hasError={isError || hasError}
-            pattern="^\d+(?:\.\d{0,2})?"
+            pattern="^(?!^0(?:\.\d{0,2})?$)\d+(?:\.\d{0,2})?$"
             scale
             withBorder
             tabIndex={tabIndex}

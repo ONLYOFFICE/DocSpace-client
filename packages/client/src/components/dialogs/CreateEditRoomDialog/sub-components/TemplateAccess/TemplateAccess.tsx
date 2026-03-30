@@ -26,174 +26,174 @@
 
 import { withTranslation } from "react-i18next";
 import {
-  Avatar,
-  AvatarRole,
-  AvatarSize,
-} from "@docspace/shared/components/avatar";
+	Avatar,
+	AvatarRole,
+	AvatarSize,
+} from "@docspace/ui-kit/components/avatar";
 import { TCreatedBy, TTranslation } from "@docspace/shared/types";
-import { Text } from "@docspace/shared/components/text";
-import { Link, LinkType } from "@docspace/shared/components/link";
-import PublicRoomBar from "@docspace/shared/components/public-room-bar";
-import { TSelectorItem } from "@docspace/shared/components/selector";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
+import PublicRoomBar from "@docspace/ui-kit/components/public-room-bar";
+import { TSelectorItem } from "@docspace/ui-kit/components/selector";
 import { ShareAccessRights } from "@docspace/shared/enums";
-import { Encoder } from "@docspace/shared/utils/encoder";
+import { Encoder } from "@docspace/ui-kit/utils/encoder";
 import styles from "./TemplateAccess.module.scss";
 
 const MAX_AVATARS_COUNT = 3;
 
 type TemplateAccessType = {
-  t: TTranslation;
-  roomOwner: TCreatedBy;
-  inviteItems: TSelectorItem[];
-  onOpenAccessSettings: VoidFunction;
-  isAvailable: boolean;
+	t: TTranslation;
+	roomOwner: TCreatedBy;
+	inviteItems: TSelectorItem[];
+	onOpenAccessSettings: VoidFunction;
+	isAvailable: boolean;
 };
 
 const TemplateAccess = ({
-  t,
-  roomOwner,
-  inviteItems: listItems,
-  onOpenAccessSettings,
-  isAvailable = false,
+	t,
+	roomOwner,
+	inviteItems: listItems,
+	onOpenAccessSettings,
+	isAvailable = false,
 }: TemplateAccessType) => {
-  const inviteItems = [...listItems].filter(
-    (l) => l.templateAccess !== ShareAccessRights.None,
-  );
+	const inviteItems = [...listItems].filter(
+		(l) => l.templateAccess !== ShareAccessRights.None,
+	);
 
-  const userName = Encoder.htmlDecode(roomOwner.displayName ?? "");
+	const userName = Encoder.htmlDecode(roomOwner.displayName ?? "");
 
-  const usersList = inviteItems.filter((i) => !i.isGroup && !i.templateIsOwner);
+	const usersList = inviteItems.filter((i) => !i.isGroup && !i.templateIsOwner);
 
-  const groupsList = inviteItems.filter((i) => i.isGroup);
+	const groupsList = inviteItems.filter((i) => i.isGroup);
 
-  const avatarList = [];
+	const avatarList = [];
 
-  const itemsLength = inviteItems.length;
+	const itemsLength = inviteItems.length;
 
-  const getItemAvatarSource = (item: TSelectorItem | TCreatedBy) =>
-    item?.hasAvatar
-      ? item.avatar
-      : ("avatarSmall" in item && item?.avatarSmall) || "";
+	const getItemAvatarSource = (item: TSelectorItem | TCreatedBy) =>
+		item?.hasAvatar
+			? item.avatar
+			: ("avatarSmall" in item && item?.avatarSmall) || "";
 
-  const maxAvatarsCount =
-    itemsLength >= MAX_AVATARS_COUNT ? MAX_AVATARS_COUNT : itemsLength;
+	const maxAvatarsCount =
+		itemsLength >= MAX_AVATARS_COUNT ? MAX_AVATARS_COUNT : itemsLength;
 
-  let index = 0;
-  while (avatarList.length !== maxAvatarsCount) {
-    const item = inviteItems[index];
+	let index = 0;
+	while (avatarList.length !== maxAvatarsCount) {
+		const item = inviteItems[index];
 
-    avatarList.push(
-      <Avatar
-        className={styles.templateAccessAvatar}
-        size={AvatarSize.min}
-        role={AvatarRole.none}
-        isDefaultSource={roomOwner.hasAvatar}
-        source={getItemAvatarSource(item)}
-        isGroup={item?.isGroup}
-        userName={(("userName" in item && item?.userName) || item.name) ?? ""}
-        key={index}
-      />,
-    );
-    index++;
-  }
+		avatarList.push(
+			<Avatar
+				className={styles.templateAccessAvatar}
+				size={AvatarSize.min}
+				role={AvatarRole.none}
+				isDefaultSource={roomOwner.hasAvatar}
+				source={getItemAvatarSource(item)}
+				isGroup={item?.isGroup}
+				userName={(("userName" in item && item?.userName) || item.name) ?? ""}
+				key={index}
+			/>,
+		);
+		index++;
+	}
 
-  const getAccessLabel = () => {
-    if (usersList.length) {
-      if (groupsList.length) {
-        return t("Files:MeAndMembersAndGroups", {
-          membersCount: `${usersList.length}`,
-          groupsCount: `${groupsList.length}`,
-        });
-      }
-      return t("Files:MeAndMembers", { membersCount: `${usersList.length}` });
-    }
-    if (groupsList.length) {
-      return t("Files:MeAndGroups", { groupsCount: `${groupsList.length}` });
-    }
+	const getAccessLabel = () => {
+		if (usersList.length) {
+			if (groupsList.length) {
+				return t("Files:MeAndMembersAndGroups", {
+					membersCount: `${usersList.length}`,
+					groupsCount: `${groupsList.length}`,
+				});
+			}
+			return t("Files:MeAndMembers", { membersCount: `${usersList.length}` });
+		}
+		if (groupsList.length) {
+			return t("Files:MeAndGroups", { groupsCount: `${groupsList.length}` });
+		}
 
-    return "";
-  };
+		return "";
+	};
 
-  const accessLabel = getAccessLabel();
+	const accessLabel = getAccessLabel();
 
-  return (
-    <div className={styles.templateAccess}>
-      <Text
-        className={styles.templateAccessLabel}
-        fontWeight={600}
-        fontSize="13px"
-      >
-        {`${t("Files:AccessToTemplate")}:`}
-      </Text>
+	return (
+		<div className={styles.templateAccess}>
+			<Text
+				className={styles.templateAccessLabel}
+				fontWeight={600}
+				fontSize="13px"
+			>
+				{`${t("Files:AccessToTemplate")}:`}
+			</Text>
 
-      {isAvailable ? (
-        <PublicRoomBar
-          headerText={t("Files:TemplateAvailable")}
-          bodyText={
-            <>
-              <div className={styles.templateAccessDescription}>
-                {t("Files:TemplateAvailableDescription", {
-                  productName: t("Common:ProductName"),
-                })}
-              </div>
-              <Link
-                className="template-access_link"
-                isHovered
-                type={LinkType.action}
-                fontWeight={600}
-                fontSize="13px"
-                onClick={onOpenAccessSettings}
-              >
-                {t("Files:AccessSettings")}
-              </Link>
-            </>
-          }
-        />
-      ) : (
-        <div className={styles.templateAccessWrapper}>
-          <div className={styles.templateAccessAvatarContainer}>
-            {itemsLength === 1 ? (
-              <>
-                <Avatar
-                  size={AvatarSize.min}
-                  role={AvatarRole.none}
-                  isDefaultSource={roomOwner.hasAvatar}
-                  source={getItemAvatarSource(roomOwner)}
-                  userName={userName}
-                />
-                <div className={styles.templateAccessDisplayName}>
-                  <Text fontWeight={600} fontSize="13px">
-                    {userName}
-                  </Text>
-                  <Text className={styles.meLabel}>
-                    ({t("Common:MeLabel")})
-                  </Text>
-                </div>
-              </>
-            ) : (
-              <>
-                <div className={styles.accessAvatarContainer}>{avatarList}</div>
-                <Text fontWeight={600} fontSize="14px">
-                  {accessLabel}
-                </Text>
-              </>
-            )}
-          </div>
+			{isAvailable ? (
+				<PublicRoomBar
+					headerText={t("Files:TemplateAvailable")}
+					bodyText={
+						<>
+							<div className={styles.templateAccessDescription}>
+								{t("Files:TemplateAvailableDescription", {
+									productName: t("Common:ProductName"),
+								})}
+							</div>
+							<Link
+								className="template-access_link"
+								isHovered
+								type={LinkType.action}
+								fontWeight={600}
+								fontSize="13px"
+								onClick={onOpenAccessSettings}
+							>
+								{t("Files:AccessSettings")}
+							</Link>
+						</>
+					}
+				/>
+			) : (
+				<div className={styles.templateAccessWrapper}>
+					<div className={styles.templateAccessAvatarContainer}>
+						{itemsLength === 1 ? (
+							<>
+								<Avatar
+									size={AvatarSize.min}
+									role={AvatarRole.none}
+									isDefaultSource={roomOwner.hasAvatar}
+									source={getItemAvatarSource(roomOwner)}
+									userName={userName}
+								/>
+								<div className={styles.templateAccessDisplayName}>
+									<Text fontWeight={600} fontSize="13px">
+										{userName}
+									</Text>
+									<Text className={styles.meLabel}>
+										({t("Common:MeLabel")})
+									</Text>
+								</div>
+							</>
+						) : (
+							<>
+								<div className={styles.accessAvatarContainer}>{avatarList}</div>
+								<Text fontWeight={600} fontSize="14px">
+									{accessLabel}
+								</Text>
+							</>
+						)}
+					</div>
 
-          <Link
-            className={styles.templateAccessLink}
-            isHovered
-            type={LinkType.action}
-            fontWeight={600}
-            fontSize="13px"
-            onClick={onOpenAccessSettings}
-          >
-            {t("Files:AccessSettings")}
-          </Link>
-        </div>
-      )}
-    </div>
-  );
+					<Link
+						className={styles.templateAccessLink}
+						isHovered
+						type={LinkType.action}
+						fontWeight={600}
+						fontSize="13px"
+						onClick={onOpenAccessSettings}
+					>
+						{t("Files:AccessSettings")}
+					</Link>
+				</div>
+			)}
+		</div>
+	);
 };
 
 export default withTranslation(["Common", "Files"])(TemplateAccess);

@@ -28,8 +28,12 @@ import type { FC } from "react";
 import LockedReactSvg from "PUBLIC_DIR/images/icons/12/locked.react.svg";
 
 import styles from "../Share.module.scss";
-import { Loader, LoaderTypes } from "../../loader";
-import { Avatar, AvatarSize, AvatarRole } from "../../avatar";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
+import {
+  Avatar,
+  AvatarSize,
+  AvatarRole,
+} from "@docspace/ui-kit/components/avatar";
 
 export interface AccessTypeIconProps {
   isLoaded: boolean;

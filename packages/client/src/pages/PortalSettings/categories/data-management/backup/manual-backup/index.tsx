@@ -210,7 +210,6 @@ export default inject(
     const backupCount = backupsCount ?? 0;
     const isFreeBackupsLimitReached =
       maxFreeBackups > 0 ? backupCount >= maxFreeBackups : true;
-
     return {
       // backup
       accounts,

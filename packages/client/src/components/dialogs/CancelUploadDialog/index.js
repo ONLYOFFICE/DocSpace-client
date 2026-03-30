@@ -26,8 +26,8 @@
 
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Button } from "@docspace/shared/components/button";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { Button } from "@docspace/ui-kit/components/button";
 
 const CancelUploadDialog = ({
   isFifthStep,

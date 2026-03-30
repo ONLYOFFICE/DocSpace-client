@@ -1,0 +1,40 @@
+@use "@docspace/ui-kit/styles/mixins";
+
+.editorWrapper {
+	position: relative;
+	flex: 1;
+	min-height: 0;
+	margin-block: -19px -16px;
+	margin-inline: calc(-20px - 20px) 0;
+	width: calc(100% + 20px + 3px);
+
+	@include mixins.tablet-and-below {
+		margin-block: 0 -16px;
+		margin-inline: calc(-16px - 24px) 0;
+		width: calc(100% + 24px);
+	}
+
+	@include mixins.mobile {
+		margin-inline: calc(-16px - 24px) 0;
+		width: calc(100% + 24px + 8px);
+	}
+}
+
+.loaderOverlay {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	inset: 0;
+}
+
+.editorIframe {
+	width: 100%;
+	height: 100%;
+	border: none;
+}
+
+.editorIframeHidden {
+	composes: editorIframe;
+	opacity: 0;
+}

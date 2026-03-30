@@ -28,14 +28,14 @@ import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { useNavigate, useLocation } from "react-router";
 import { TFunction } from "i18next";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 import { ProfileViewLoader } from "@docspace/shared/skeletons/profile";
-import { Tabs, TTabItem } from "@docspace/shared/components/tabs";
+import { Tabs, TTabItem } from "@docspace/ui-kit/components/tabs";
 import { DeviceType } from "@docspace/shared/enums";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
-import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
+import { SECTION_HEADER_HEIGHT } from "@docspace/ui-kit/components/section/Section.constants";
 import { TfaStore } from "@docspace/shared/store/TfaStore";
 import { AuthStore } from "@docspace/shared/store/AuthStore";
 import { UserStore } from "@docspace/shared/store/UserStore";
@@ -113,6 +113,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
+  const tabsRef = useRef<HTMLDivElement>(null);
 
   const checkEmailChangeParam = () => {
     const search = window.location.search;
@@ -226,6 +227,12 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     navigate(`${path}/${e.id}`, {
       state: { disableScrollToTop: true, fromUrl: location?.state?.fromUrl },
     });
+
+    if (tabsRef.current && currentDeviceType === DeviceType.mobile) {
+      setTimeout(() => {
+        tabsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+    }
   };
 
   if (showProfileLoader) return <ProfileViewLoader />;
@@ -233,13 +240,15 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
   return (
     <div className={styles.wrapper}>
       <MainProfile />
-      <Tabs
-        items={data}
-        selectedItemId={currentTabId}
-        onSelect={onSelect}
-        stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType as DeviceType]}
-        withAnimation
-      />
+      <div ref={tabsRef}>
+        <Tabs
+          items={data}
+          selectedItemId={currentTabId}
+          onSelect={onSelect}
+          stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType as DeviceType]}
+          withAnimation
+        />
+      </div>
     </div>
   );
 };

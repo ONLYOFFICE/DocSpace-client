@@ -24,13 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
+import { useEventLog } from "../sub-components/useEventLog";
 import { useNavigate } from "react-router";
 
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import SDK from "@onlyoffice/docspace-sdk-js";
+
+import { EventLogBlock } from "../sub-components/EventLogBlock";
 
 import LeftMenuUrl from "PUBLIC_DIR/images/sdk-presets_left-menu.react.svg?url";
 import TitleUrl from "PUBLIC_DIR/images/sdk-presets_title.react.svg?url";
@@ -46,13 +49,13 @@ import SearchDarkUrl from "PUBLIC_DIR/images/sdk-presets_search_dark.png?url";
 import HeaderDarkUrl from "PUBLIC_DIR/images/sdk-presets_header_dark.png?url";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
-import { Label } from "@docspace/shared/components/label";
-import { Text } from "@docspace/shared/components/text";
-import { Checkbox } from "@docspace/shared/components/checkbox";
-import { ComboBox } from "@docspace/shared/components/combobox";
-import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
-import { SelectedItem } from "@docspace/shared/components/selected-item";
-import { HelpButton } from "@docspace/shared/components/help-button";
+import { Label } from "@docspace/ui-kit/components/label";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { ComboBox } from "@docspace/ui-kit/components/combobox";
+import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
+import { SelectedItem } from "@docspace/ui-kit/components/selected-item";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { loadScript, getSdkScriptUrl } from "@docspace/shared/utils/common";
 
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
@@ -93,6 +96,20 @@ import {
   CheckboxGroup,
 } from "./StyledPresets";
 
+const MANAGER_EVENT_TYPES = [
+  "onAppReady",
+  "onAppError",
+  "onAuthSuccess",
+  "onSignOut",
+  "onNoAccess",
+  "onNotFound",
+  "onContentReady",
+  "onEditorCloseCallback",
+  "onEditorOpen",
+  "onDownload",
+  "onFileManagerClick",
+];
+
 const Manager = (props) => {
   const { t, fetchExternalLinks, theme, currentColorScheme } = props;
   const navigate = useNavigate();
@@ -127,7 +144,7 @@ const Manager = (props) => {
     { key: "Activity", label: t("Files:LastActivity") },
   ]);
 
-  const [version, onSetVersion] = useState(sdkVersion[210]);
+  const [version, onSetVersion] = useState(sdkVersion[220]);
 
   const [source, onSetSource] = useState(sdkSource.Package);
 
@@ -168,13 +185,31 @@ const Manager = (props) => {
       search: "",
       withSubfolders: false,
     },
+    events: {
+      onAppReady: () => {},
+      onAppError: () => {},
+      onAuthSuccess: () => {},
+      onSignOut: () => {},
+      onNoAccess: () => {},
+      onNotFound: () => {},
+      onContentReady: () => {},
+      onEditorCloseCallback: () => {},
+      onEditorOpen: () => {},
+      onDownload: () => {},
+      onFileManagerClick: () => {},
+    },
   });
+
+  const [eventLog, onClearEventLog] = useEventLog(config.frameId);
 
   const fromPackage = source === sdkSource.Package;
 
   const sdkScriptUrl = getSdkScriptUrl(version);
 
-  const sdk = fromPackage ? new SDK() : window.DocSpace.SDK;
+  const sdk = useMemo(
+    () => (fromPackage ? new SDK() : window.DocSpace.SDK),
+    [fromPackage],
+  );
 
   const destroyFrame = () => {
     sdk?.frames[config.frameId]?.destroyFrame();
@@ -208,7 +243,7 @@ const Manager = (props) => {
     return () => {
       destroyFrame();
     };
-  });
+  }, [config]);
 
   useEffect(() => {
     const scroll = document.getElementsByClassName("section-scroll")[0];
@@ -382,13 +417,21 @@ const Manager = (props) => {
   const redirectToSelectedRoom = () => navigateRoom(config.id);
 
   const preview = (
-    <Frame
-      width={config.width.includes("px") ? config.width : undefined}
-      height={config.height.includes("px") ? config.height : undefined}
-      targetId={config.frameId}
-    >
-      <div id={config.frameId} />
-    </Frame>
+    <>
+      <Frame
+        width={config.width.includes("px") ? config.width : undefined}
+        height={config.height.includes("px") ? config.height : undefined}
+        targetId={config.frameId}
+      >
+        <div id={config.frameId} />
+      </Frame>
+      <EventLogBlock
+        t={t}
+        events={eventLog}
+        onClear={onClearEventLog}
+        eventTypes={MANAGER_EVENT_TYPES}
+      />
+    </>
   );
 
   return (
@@ -602,10 +645,7 @@ const Manager = (props) => {
             {sharedLinks ? (
               <ControlsGroup>
                 <LabelGroup>
-                  <Label
-                    className="label"
-                    text={t("SharingPanel:ExternalLink")}
-                  />
+                  <Label className="label" text={t("Common:ExternalLink")} />
                   <HelpButton
                     offsetRight={0}
                     size={12}
@@ -750,6 +790,5 @@ export const Component = inject(({ settingsStore, publicRoomStore }) => {
     "Common",
     "Files",
     "Translations",
-    "SharingPanel",
   ])(observer(Manager)),
 );

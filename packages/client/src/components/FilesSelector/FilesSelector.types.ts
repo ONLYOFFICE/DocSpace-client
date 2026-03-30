@@ -25,145 +25,145 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import {
-  TFile,
-  TFilesSettings,
-  TFolder,
+	TFile,
+	TFilesSettings,
+	TFolder,
 } from "@docspace/shared/api/files/types";
 import {
-  TBreadCrumb,
-  TSelectorHeader,
-  TSelectorItem,
-} from "@docspace/shared/components/selector/Selector.types";
+	TBreadCrumb,
+	TSelectorHeader,
+	TSelectorItem,
+} from "@docspace/ui-kit/components/selector";
 import { DeviceType, FolderType } from "@docspace/shared/enums";
-import { TTheme } from "@docspace/shared/themes";
+import { TTheme } from "@docspace/ui-kit/providers/theme/themes";
 
 export type FilesSelectorProps = TSelectorHeader & {
-  isPanelVisible: boolean;
-  // withoutImmediatelyClose: boolean;
-  isThirdParty: boolean;
-  isSelectFolder: boolean;
-  rootThirdPartyId?: string;
-  isRoomsOnly: boolean;
-  isUserOnly: boolean;
-  isRoomBackup: boolean;
-  isEditorDialog: boolean;
-  currentDeviceType: DeviceType;
-  setMoveToPublicRoomVisible: (visible: boolean, operationData: object) => void;
-  setBackupToPublicRoomVisible: (visible: boolean, data: object) => void;
-  getIcon: (size: number, fileExst: string) => string;
+	isPanelVisible: boolean;
+	// withoutImmediatelyClose: boolean;
+	isThirdParty: boolean;
+	isSelectFolder: boolean;
+	rootThirdPartyId?: string;
+	isRoomsOnly: boolean;
+	isUserOnly: boolean;
+	isRoomBackup: boolean;
+	isEditorDialog: boolean;
+	currentDeviceType: DeviceType;
+	setMoveToPublicRoomVisible: (visible: boolean, operationData: object) => void;
+	setBackupToPublicRoomVisible: (visible: boolean, data: object) => void;
+	getIcon: (size: number, fileExst: string) => string;
 
-  onClose?: () => void;
+	onClose?: () => void;
 
-  id?: string | number;
-  withSearch: boolean;
-  withBreadCrumbs: boolean;
-  withSubtitle: boolean;
-  withPadding?: boolean;
+	id?: string | number;
+	withSearch: boolean;
+	withBreadCrumbs: boolean;
+	withSubtitle: boolean;
+	withPadding?: boolean;
 
-  isMove?: boolean;
-  isCopy?: boolean;
-  isRestore: boolean;
-  isTemplate: boolean;
-  isRestoreAll?: boolean;
-  isSelect?: boolean;
-  isFormRoom?: boolean;
+	isMove?: boolean;
+	isCopy?: boolean;
+	isRestore: boolean;
+	isTemplate: boolean;
+	isRestoreAll?: boolean;
+	isSelect?: boolean;
+	isFormRoom?: boolean;
 
-  filterParam?: string;
+	filterParam?: string;
 
-  currentFolderId: number | string;
-  fromFolderId?: number;
-  parentId: number;
-  rootFolderType: number;
-  folderIsShared?: boolean;
+	currentFolderId: number | string;
+	fromFolderId?: number;
+	parentId: number;
+	rootFolderType: number;
+	folderIsShared?: boolean;
 
-  treeFolders?: TFolder[];
-  withRecentTreeFolder?: boolean;
-  withFavoritesTreeFolder?: boolean;
-  withAIAgentsTreeFolder?: boolean;
+	treeFolders?: TFolder[];
+	withRecentTreeFolder?: boolean;
+	withFavoritesTreeFolder?: boolean;
+	withAIAgentsTreeFolder?: boolean;
 
-  theme: TTheme;
+	theme: TTheme;
 
-  selection: (TFolder | TFile)[];
-  disabledItems: string[] | number[];
-  disabledFolderType?: FolderType;
-  setMoveToPanelVisible: (value: boolean) => void;
-  setRestorePanelVisible: (value: boolean) => void;
-  setCopyPanelVisible: (value: boolean) => void;
-  setRestoreAllPanelVisible: (value: boolean) => void;
-  setIsDataReady?: (value: boolean) => void;
-  setSelected: (selected: "close" | "none", clearBuffer?: boolean) => void;
-  setConflictDialogData: (conflicts: unknown, operationData: unknown) => void;
-  itemOperationToFolder: (operationData: unknown) => Promise<void>;
-  clearActiveOperations: (
-    folderIds: string[] | number[],
-    fileIds: string[] | number[],
-  ) => void;
-  checkFileConflicts: (
-    selectedItemId: string | number | undefined,
-    folderIds: string[] | number[],
-    fileIds: string[] | number[],
-  ) => Promise<unknown>;
+	selection: (TFolder | TFile)[];
+	disabledItems: string[] | number[];
+	disabledFolderType?: FolderType;
+	setMoveToPanelVisible: (value: boolean) => void;
+	setRestorePanelVisible: (value: boolean) => void;
+	setCopyPanelVisible: (value: boolean) => void;
+	setRestoreAllPanelVisible: (value: boolean) => void;
+	setIsDataReady?: (value: boolean) => void;
+	setSelected: (selected: "close" | "none", clearBuffer?: boolean) => void;
+	setConflictDialogData: (conflicts: unknown, operationData: unknown) => void;
+	itemOperationToFolder: (operationData: unknown) => Promise<void>;
+	clearActiveOperations: (
+		folderIds: string[] | number[],
+		fileIds: string[] | number[],
+	) => void;
+	checkFileConflicts: (
+		selectedItemId: string | number | undefined,
+		folderIds: string[] | number[],
+		fileIds: string[] | number[],
+	) => Promise<unknown>;
 
-  onSetBaseFolderPath?: (
-    value: number | string | undefined | TBreadCrumb[],
-  ) => void;
-  onSetNewFolderPath?: (value: number | string | undefined) => void;
-  onSelectFolder?: (
-    value: number | string | undefined,
-    breadCrumbs: TBreadCrumb[],
-  ) => void;
-  onSelectTreeNode?: (treeNode: TFolder) => void;
-  onSave?: (
-    e: unknown,
-    folderId: string | number,
-    fileTitle: string,
-    openNewTab: boolean,
-  ) => void;
-  onSelectFile?: (
-    fileInfo:
-      | {
-          id: string | number;
-          title: string;
-          path?: string[];
-          fileExst?: string;
-          inPublic?: boolean;
-        }
-      | TSelectorItem[],
-    breadCrumbs?: TBreadCrumb[],
-  ) => void;
+	onSetBaseFolderPath?: (
+		value: number | string | undefined | TBreadCrumb[],
+	) => void;
+	onSetNewFolderPath?: (value: number | string | undefined) => void;
+	onSelectFolder?: (
+		value: number | string | undefined,
+		breadCrumbs: TBreadCrumb[],
+	) => void;
+	onSelectTreeNode?: (treeNode: TFolder) => void;
+	onSave?: (
+		e: unknown,
+		folderId: string | number,
+		fileTitle: string,
+		openNewTab: boolean,
+	) => void;
+	onSelectFile?: (
+		fileInfo:
+			| {
+					id: string | number;
+					title: string;
+					path?: string[];
+					fileExst?: string;
+					inPublic?: boolean;
+			  }
+			| TSelectorItem[],
+		breadCrumbs?: TBreadCrumb[],
+	) => void;
 
-  setInfoPanelIsMobileHidden: (arg: boolean) => void;
+	setInfoPanelIsMobileHidden: (arg: boolean) => void;
 
-  withFooterInput: boolean;
-  withFooterCheckbox: boolean;
-  footerInputHeader?: string;
-  currentFooterInputValue?: string;
-  footerCheckboxLabel?: string;
+	withFooterInput: boolean;
+	withFooterCheckbox: boolean;
+	footerInputHeader?: string;
+	currentFooterInputValue?: string;
+	footerCheckboxLabel?: string;
 
-  descriptionText?: string;
-  setSelectedItems: () => void;
+	descriptionText?: string;
+	setSelectedItems: () => void;
 
-  includeFolder?: boolean;
+	includeFolder?: boolean;
 
-  embedded: boolean;
-  withHeader: boolean;
-  withCancelButton: boolean;
-  cancelButtonLabel: string;
-  acceptButtonLabel: string;
-  settings: unknown;
+	embedded: boolean;
+	withHeader: boolean;
+	withCancelButton: boolean;
+	cancelButtonLabel: string;
+	acceptButtonLabel: string;
+	settings: unknown;
 
-  roomsFolderId?: number;
-  openRoot?: boolean;
+	roomsFolderId?: number;
+	openRoot?: boolean;
 
-  filesSettings: TFilesSettings;
+	filesSettings: TFilesSettings;
 
-  withCreate?: boolean;
-  checkCreating?: boolean;
-  isPortalView?: boolean;
-  withoutDescriptionText?: boolean;
+	withCreate?: boolean;
+	checkCreating?: boolean;
+	isPortalView?: boolean;
+	withoutDescriptionText?: boolean;
 
-  isMultiSelect?: boolean;
-  maxSelectedItems?: number;
+	isMultiSelect?: boolean;
+	maxSelectedItems?: number;
 
-  disableBySecurity?: string;
+	disableBySecurity?: string;
 };

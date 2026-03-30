@@ -36,7 +36,7 @@ import { Nullable } from "@docspace/shared/types";
 import {
   MIN_LOADER_TIMER,
   SHOW_LOADER_TIMER,
-} from "@docspace/shared/selectors/utils/constants";
+} from "@docspace/ui-kit/selectors/utils/constants";
 
 import GroupMember from "./GroupMember";
 

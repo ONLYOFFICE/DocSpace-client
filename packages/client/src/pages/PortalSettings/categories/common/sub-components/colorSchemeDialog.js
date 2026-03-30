@@ -26,9 +26,9 @@
 
 import PlusThemeSvgUrl from "PUBLIC_DIR/images/plus.theme.svg?url";
 import { useEffect } from "react";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import styled, { css } from "styled-components";
-import { Button } from "@docspace/shared/components/button";
+import { Button } from "@docspace/ui-kit/components/button";
 import { withTranslation } from "react-i18next";
 import { isMobileOnly } from "react-device-detect";
 import { isMobile } from "@docspace/shared/utils";
@@ -44,10 +44,12 @@ const StyledBodyContent = styled.div`
       padding-bottom: 20px;
     }
 
-    ${!isMobile() &&
-    css`
+    ${
+      !isMobile() &&
+      css`
       max-width: 448px;
-    `}
+    `
+    }
   }
 
   .name-color {
@@ -82,24 +84,29 @@ const StyledBodyContent = styled.div`
   }
 
   .drop-down-container-hex {
-    ${isMobileOnly &&
-    css`
+    ${
+      isMobileOnly &&
+      css`
       width: 100%;
-    `}
+    `
+    }
   }
 
   .drop-down-item-hex {
-    ${isMobileOnly &&
-    css`
+    ${
+      isMobileOnly &&
+      css`
       width: calc(100vw - 32px);
-    `}
+    `
+    }
 
     :hover {
       background-color: unset;
     }
 
-    ${!isMobile() &&
-    css`
+    ${
+      !isMobile() &&
+      css`
       max-width: 227px;
 
       .hex-color-picker {
@@ -109,7 +116,8 @@ const StyledBodyContent = styled.div`
       .react-colorful__interactive {
         max-width: 183px;
       }
-    `}
+    `
+    }
   }
 `;
 

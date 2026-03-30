@@ -24,9 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
-import { Link } from "@docspace/shared/components/link";
+import { Link } from "@docspace/ui-kit/components/link";
 
 import { makeAutoObservable } from "mobx";
 import { Trans } from "react-i18next";
@@ -371,12 +371,32 @@ class SecondaryProgressDataStore {
         (item) => item.operationId === operationId,
       );
       if (itemIndex === -1) return;
-      operationObject.items.splice(itemIndex, 1);
-      if (operationObject.items.length === 0) {
-        this.secondaryOperationsArray.splice(operationIndex, 1);
+
+      const newItems = operationObject.items.filter(
+        (item) => item.operationId !== operationId,
+      );
+
+      if (newItems.length === 0) {
+        const newSecondaryOperationsArray =
+          this.secondaryOperationsArray.filter(
+            (_, index) => index !== operationIndex,
+          );
+
+        this.secondaryOperationsArray = [...newSecondaryOperationsArray];
+      } else {
+        const newSecondaryOperationsArray = this.secondaryOperationsArray.map(
+          (item, index) =>
+            index === operationIndex ? { ...item, items: newItems } : item,
+        );
+
+        this.secondaryOperationsArray = [...newSecondaryOperationsArray];
       }
     } else {
-      this.secondaryOperationsArray.splice(operationIndex, 1);
+      const newSecondaryOperationsArray = this.secondaryOperationsArray.filter(
+        (_, index) => index !== operationIndex,
+      );
+
+      this.secondaryOperationsArray = [...newSecondaryOperationsArray];
     }
     console.log("clearSecondaryProgressData", this.secondaryOperationsArray);
   };

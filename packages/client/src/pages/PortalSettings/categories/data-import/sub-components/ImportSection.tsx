@@ -27,12 +27,12 @@
 import { ReactSVG } from "react-svg";
 import styled from "styled-components";
 
-import { Text } from "@docspace/shared/components/text";
-import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import ArrowSvg from "PUBLIC_DIR/images/arrow2.react.svg?url";
 import { ImportItemProps, ImportSectionProps } from "../types";
 import { tablet } from "@docspace/shared/utils";
-import { Tooltip } from "@docspace/shared/components/tooltip";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 
 const SectionWrapper = styled.div<{ isChecked: boolean }>`
   max-width: 700px;

@@ -27,7 +27,7 @@
 import React, { useState, useLayoutEffect, useMemo, useCallback } from "react";
 import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
-import { SelectionArea as SelectionAreaComponent } from "@docspace/shared/components/selection-area";
+import { SelectionArea as SelectionAreaComponent } from "@docspace/ui-kit/components/selection-area";
 import { getCountTilesInRow } from "@docspace/shared/utils";
 
 const getCountOfMissingFilesTiles = (itemsLength, countTilesInRow) => {

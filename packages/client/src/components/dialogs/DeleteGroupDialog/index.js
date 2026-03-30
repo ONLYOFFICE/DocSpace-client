@@ -27,113 +27,113 @@
 import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Button } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
-import { toastr } from "@docspace/shared/components/toast";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { Button } from "@docspace/ui-kit/components/button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 const DeleteGroupDialog = (props) => {
-  const {
-    t,
-    visible,
-    onClose,
-    selection,
-    bufferSelection,
-    groupName,
-    onDeleteGroup,
-    onDeleteAllGroups,
-    isLoading,
-  } = props;
+	const {
+		t,
+		visible,
+		onClose,
+		selection,
+		bufferSelection,
+		groupName,
+		onDeleteGroup,
+		onDeleteAllGroups,
+		isLoading,
+	} = props;
 
-  const hasMoreGroups = selection.length > 1;
+	const hasMoreGroups = selection.length > 1;
 
-  const onDeleteAction = () => {
-    try {
-      if (hasMoreGroups) {
-        onDeleteAllGroups(t);
-      } else {
-        onDeleteGroup(t, bufferSelection?.id || selection[0]?.id);
-      }
-    } catch (err) {
-      toastr.error(err.message);
-      console.error(err);
-    }
-  };
+	const onDeleteAction = () => {
+		try {
+			if (hasMoreGroups) {
+				onDeleteAllGroups(t);
+			} else {
+				onDeleteGroup(t, bufferSelection?.id || selection[0]?.id);
+			}
+		} catch (err) {
+			toastr.error(err.message);
+			console.error(err);
+		}
+	};
 
-  const onKeyUp = (e) => {
-    if (e.keyCode === 27) onClose();
-    if (e.keyCode === 13 || e.which === 13) onDeleteAction();
-  };
+	const onKeyUp = (e) => {
+		if (e.keyCode === 27) onClose();
+		if (e.keyCode === 13 || e.which === 13) onDeleteAction();
+	};
 
-  useEffect(() => {
-    document.addEventListener("keyup", onKeyUp, false);
+	useEffect(() => {
+		document.addEventListener("keyup", onKeyUp, false);
 
-    return () => {
-      document.removeEventListener("keyup", onKeyUp, false);
-    };
-  }, []);
+		return () => {
+			document.removeEventListener("keyup", onKeyUp, false);
+		};
+	}, []);
 
-  return (
-    <ModalDialog visible={visible} onClose={onClose} displayType="modal">
-      <ModalDialog.Header>
-        {hasMoreGroups
-          ? t("DeleteDialog:DeleteAllGroupsTitle")
-          : t("DeleteDialog:DeleteGroupTitle")}
-      </ModalDialog.Header>
-      <ModalDialog.Body>
-        <Text>
-          {hasMoreGroups
-            ? t("DeleteDialog:DeleteAllGroupDescription", {
-                productName: t("Common:ProductName"),
-              })
-            : t("DeleteDialog:DeleteGroupDescription", {
-                productName: t("Common:ProductName"),
-                groupName,
-              })}
-        </Text>
-      </ModalDialog.Body>
-      <ModalDialog.Footer>
-        <Button
-          id="group-modal_delete"
-          key="Delete"
-          label={t("Common:Delete")}
-          size="normal"
-          primary
-          scale
-          onClick={onDeleteAction}
-          isLoading={isLoading}
-          testId="delete_group_dialog_confirm"
-        />
-        <Button
-          id="group-modal_cancel"
-          key="CancelButton"
-          label={t("Common:CancelButton")}
-          size="normal"
-          scale
-          onClick={onClose}
-          testId="delete_group_dialog_cancel"
-        />
-      </ModalDialog.Footer>
-    </ModalDialog>
-  );
+	return (
+		<ModalDialog visible={visible} onClose={onClose} displayType="modal">
+			<ModalDialog.Header>
+				{hasMoreGroups
+					? t("DeleteDialog:DeleteAllGroupsTitle")
+					: t("DeleteDialog:DeleteGroupTitle")}
+			</ModalDialog.Header>
+			<ModalDialog.Body>
+				<Text>
+					{hasMoreGroups
+						? t("DeleteDialog:DeleteAllGroupDescription", {
+								productName: t("Common:ProductName"),
+							})
+						: t("DeleteDialog:DeleteGroupDescription", {
+								productName: t("Common:ProductName"),
+								groupName,
+							})}
+				</Text>
+			</ModalDialog.Body>
+			<ModalDialog.Footer>
+				<Button
+					id="group-modal_delete"
+					key="Delete"
+					label={t("Common:Delete")}
+					size="normal"
+					primary
+					scale
+					onClick={onDeleteAction}
+					isLoading={isLoading}
+					testId="delete_group_dialog_confirm"
+				/>
+				<Button
+					id="group-modal_cancel"
+					key="CancelButton"
+					label={t("Common:CancelButton")}
+					size="normal"
+					scale
+					onClick={onClose}
+					testId="delete_group_dialog_cancel"
+				/>
+			</ModalDialog.Footer>
+		</ModalDialog>
+	);
 };
 
 export default inject(({ peopleStore }) => {
-  const {
-    selection,
-    bufferSelection,
-    groupName,
-    onDeleteGroup,
-    onDeleteAllGroups,
-    isLoading,
-  } = peopleStore.groupsStore;
+	const {
+		selection,
+		bufferSelection,
+		groupName,
+		onDeleteGroup,
+		onDeleteAllGroups,
+		isLoading,
+	} = peopleStore.groupsStore;
 
-  return {
-    selection,
-    bufferSelection,
-    groupName,
-    onDeleteGroup,
-    onDeleteAllGroups,
-    isLoading,
-  };
+	return {
+		selection,
+		bufferSelection,
+		groupName,
+		onDeleteGroup,
+		onDeleteAllGroups,
+		isLoading,
+	};
 })(withTranslation(["Common", "DeleteDialog"])(observer(DeleteGroupDialog)));

@@ -26,6 +26,7 @@
 
 import { EditorProps, TGoBack } from "@/types";
 import { useTranslation } from "react-i18next";
+import { FolderType } from "@docspace/ui-kit/enums";
 
 const useGoBackAndClose = (
   fileInfo: EditorProps["fileInfo"],
@@ -76,6 +77,10 @@ const useGoBackAndClose = (
         goBack.url = goBackUrl;
       }
     }
+  }
+
+  if (fileInfo?.rootFolderType === FolderType.DefaultTemplates) {
+    goBack.url = "/portal-settings/customization/default-templates";
   }
 
   let showClose =

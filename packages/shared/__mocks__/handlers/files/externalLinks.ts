@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { http, HttpResponse } from "msw";
-import { v4 as uuidv4 } from "uuid";
-import moment from "moment/moment";
+import type { DateTime } from "luxon";
+import { uuid } from "@docspace/ui-kit/utils/uuid";
 
 import { TFileLink } from "../../../api/files/types";
 import { API_PREFIX, BASE_URL } from "../../e2e/utils";
@@ -35,7 +35,7 @@ export const PATH_LINK = "files/file/:fileId/link";
 export const PATH_LINKS = "files/file/:fileId/links";
 
 const generateFileLink = ({
-  id = uuidv4(),
+  id = uuid(),
   title = "New link",
   access = 2,
   primary = false,
@@ -48,7 +48,7 @@ const generateFileLink = ({
   access?: number;
   primary?: boolean;
   internal?: boolean;
-  expirationDate?: moment.Moment;
+  expirationDate?: DateTime | string;
   isExpired?: boolean;
 } = {}): TFileLink => {
   return {
@@ -66,7 +66,10 @@ const generateFileLink = ({
       primary,
       internal,
       requestToken: "",
-      expirationDate: expirationDate?.toISOString(),
+      expirationDate:
+        typeof expirationDate === "string"
+          ? expirationDate
+          : (expirationDate?.toISO() ?? undefined),
     },
     canEditDenyDownload: false,
     isLocked: false,
@@ -138,7 +141,7 @@ export const editExternalLinkHandler = (port?: string) => {
         access: number;
         primary: boolean;
         internal: boolean;
-        expirationDate?: moment.Moment;
+        expirationDate?: DateTime | string;
       };
 
       const response = generateFileLink({

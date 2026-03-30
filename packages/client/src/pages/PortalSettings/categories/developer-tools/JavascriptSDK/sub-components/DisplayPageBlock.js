@@ -26,41 +26,41 @@
 
 import { useState, useCallback } from "react";
 import debounce from "lodash.debounce";
-import { TextInput } from "@docspace/shared/components/text-input";
-import { Label } from "@docspace/shared/components/label";
+import { TextInput } from "@docspace/ui-kit/components/text-input";
+import { Label } from "@docspace/ui-kit/components/label";
 
 import { ControlsGroup } from "../presets/StyledPresets";
 
 export const DisplayPageBlock = ({ t, config, setConfig }) => {
-  const [value, setValue] = useState(config.filter.page);
+	const [value, setValue] = useState(config.filter.page);
 
-  const debouncedSetConfig = useCallback(
-    debounce((newValue) => {
-      setConfig((oldConfig) => ({
-        ...oldConfig,
-        filter: { ...oldConfig.filter, page: newValue },
-      }));
-    }, 500),
-    [setConfig],
-  );
+	const debouncedSetConfig = useCallback(
+		debounce((newValue) => {
+			setConfig((oldConfig) => ({
+				...oldConfig,
+				filter: { ...oldConfig.filter, page: newValue },
+			}));
+		}, 500),
+		[setConfig],
+	);
 
-  const onChangePage = (e) => {
-    setValue(e.target.value);
-    debouncedSetConfig(e.target.page);
-  };
+	const onChangePage = (e) => {
+		setValue(e.target.value);
+		debouncedSetConfig(e.target.page);
+	};
 
-  return (
-    <ControlsGroup>
-      <Label className="label" text={t("Page")} />
-      <TextInput
-        scale
-        onChange={onChangePage}
-        placeholder={t("EnterPage")}
-        value={value}
-        isDisabled={!config.filter.count}
-        tabIndex={7}
-        testId="display_page_text_input"
-      />
-    </ControlsGroup>
-  );
+	return (
+		<ControlsGroup>
+			<Label className="label" text={t("Page")} />
+			<TextInput
+				scale
+				onChange={onChangePage}
+				placeholder={t("EnterPage")}
+				value={value}
+				isDisabled={!config.filter.count}
+				tabIndex={7}
+				testId="display_page_text_input"
+			/>
+		</ControlsGroup>
+	);
 };

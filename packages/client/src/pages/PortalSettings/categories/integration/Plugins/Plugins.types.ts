@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import { TFunction } from "i18next";
 
-import { TColorScheme, TTheme } from "@docspace/shared/themes";
+import { TColorScheme, TTheme } from "@docspace/ui-kit/providers/theme/themes";
 import { TTranslation } from "@docspace/shared/types";
 
 import { TPlugin } from "SRC_DIR/helpers/plugins/types";
@@ -35,6 +35,7 @@ export interface PluginDropzoneProps {
   onDrop: <T extends File>(acceptedFiles: T[]) => void;
   isLoading: boolean;
   isDisabled: boolean;
+  isEmptyList?: boolean;
   dataTestId?: string;
 }
 

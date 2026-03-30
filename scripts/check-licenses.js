@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 
 // Allowed licenses regex
-const allowedLicenses = /\b(mit|apache-2\.0|bsd|0BSD|CC0-1\.0|CC-BY-4\.0|Public Domain|Python-2\.0|bsd-2-clause|bsd-3-clause|isc|unlicense|unknown|LGPL-3\.0-or-later)\b/i;
+const allowedLicenses = /\b(mit|apache-2\.0|bsd|0BSD|CC0-1\.0|CC-BY-4\.0|Public Domain|Python-2\.0|bsd-2-clause|bsd-3-clause|isc|unlicense|unknown|LGPL-3\.0-or-later|Unicode-DFS-2016|MPL-2\.0)\b/i;
 
 // Get all workspace packages
 const packagesDir = path.join(__dirname, '../packages');

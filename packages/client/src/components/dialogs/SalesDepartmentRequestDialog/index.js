@@ -29,16 +29,16 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { FieldContainer } from "@docspace/shared/components/field-container";
-import { Button } from "@docspace/shared/components/button";
-import { TextInput } from "@docspace/shared/components/text-input";
-import { Text } from "@docspace/shared/components/text";
-import { Textarea } from "@docspace/shared/components/textarea";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
+import { Button } from "@docspace/ui-kit/components/button";
+import { TextInput } from "@docspace/ui-kit/components/text-input";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Textarea } from "@docspace/ui-kit/components/textarea";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
-import { EmailInput } from "@docspace/shared/components/email-input";
+} from "@docspace/ui-kit/components/modal-dialog";
+import { EmailInput } from "@docspace/ui-kit/components/email-input";
 import { ErrorKeys } from "@docspace/shared/enums";
 
 const SalesDepartmentRequestDialog = ({
@@ -211,7 +211,7 @@ const SalesDepartmentRequestDialog = ({
             onValidateInput={onValidateEmailInput}
             hasError={!isValidEmail}
             placeholder={t("SMTPSettings:EnterEmail")}
-            testId="request_email_input"
+            dataTestId="request_email_input"
           />
         </FieldContainer>
 

@@ -26,22 +26,22 @@
 
 import React from "react";
 import styles from "./CreateEditRoom.module.scss";
-import { RectangleSkeleton } from "../rectangle";
+import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 
 const SetRoomParamsLoader = () => {
-  return (
-    <div
-      className={styles.setRoomParamsLoader}
-      data-testid="set-room-params-loader"
-    >
-      <RectangleSkeleton width="100%" height="86" borderRadius="6" />
-      <RectangleSkeleton width="100%" height="53.6" borderRadius="6" />
-      <div className={styles.tag_input}>
-        <RectangleSkeleton width="100%" height="53.6" borderRadius="6" />
-        <RectangleSkeleton width="84" height="32" borderRadius="3" />
-      </div>
-      <RectangleSkeleton width="100%" height="146" borderRadius="4" />
-    </div>
-  );
+	return (
+		<div
+			className={styles.setRoomParamsLoader}
+			data-testid="set-room-params-loader"
+		>
+			<RectangleSkeleton width="100%" height="86" borderRadius="6" />
+			<RectangleSkeleton width="100%" height="53.6" borderRadius="6" />
+			<div className={styles.tag_input}>
+				<RectangleSkeleton width="100%" height="53.6" borderRadius="6" />
+				<RectangleSkeleton width="84" height="32" borderRadius="3" />
+			</div>
+			<RectangleSkeleton width="100%" height="146" borderRadius="4" />
+		</div>
+	);
 };
 export default SetRoomParamsLoader;

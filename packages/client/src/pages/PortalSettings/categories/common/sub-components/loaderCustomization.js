@@ -39,7 +39,7 @@ const tabletStyles = css`
           ? "201px"
           : props.portalRenaming
             ? "150px"
-            : props.deepLink || props.adManagement
+            : props.deepLink || props.adManagement || props.aiServicesManagement
               ? "250px"
               : 0};
     padding-bottom: 16px;
@@ -180,6 +180,7 @@ const LoaderCustomization = (props) => {
     dnsSettings,
     deepLink,
     adManagement,
+    aiServicesManagement,
   } = props;
   const [isMobileView, setIsMobileView] = useState(false);
   const [isDesktopView, setIsDesktopView] = useState(false);
@@ -216,6 +217,7 @@ const LoaderCustomization = (props) => {
       dnsSettings={dnsSettings}
       deepLink={deepLink}
       adManagement={adManagement}
+      aiServicesManagement={aiServicesManagement}
       className="category-item-wrapper"
     >
       <RectangleSkeleton height="22px" className="header" />
@@ -240,14 +242,14 @@ const LoaderCustomization = (props) => {
           </div>
           <RectangleSkeleton className="dns-field" />
         </>
-      ) : !deepLink && !adManagement ? (
+      ) : !deepLink && !adManagement && !aiServicesManagement ? (
         <>
           <RectangleSkeleton height="20px" className="title" />
           <RectangleSkeleton height="32px" className="combo-box" />
         </>
       ) : null}
 
-      {deepLink || adManagement ? (
+      {deepLink || adManagement || aiServicesManagement ? (
         <>
           <RectangleSkeleton className="description" />
           <div className="checkboxs">

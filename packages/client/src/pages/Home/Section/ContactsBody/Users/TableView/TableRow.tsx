@@ -29,19 +29,19 @@ import { useTheme } from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { TableCell } from "@docspace/shared/components/table";
-import { Link, LinkType } from "@docspace/shared/components/link";
-import { Text } from "@docspace/shared/components/text";
-import { Checkbox } from "@docspace/shared/components/checkbox";
+import { TableCell } from "@docspace/ui-kit/components/table";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { EmployeeType } from "@docspace/shared/enums";
 import {
   ComboBox,
   ComboBoxSize,
   TOption,
-} from "@docspace/shared/components/combobox";
-import { ContextMenuModel } from "@docspace/shared/components/context-menu";
+} from "@docspace/ui-kit/components/combobox";
+import { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
 import { getUserTypeTranslation } from "@docspace/shared/utils/common";
-import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";

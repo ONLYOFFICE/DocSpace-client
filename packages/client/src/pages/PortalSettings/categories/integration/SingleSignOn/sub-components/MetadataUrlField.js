@@ -30,10 +30,10 @@ import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import copy from "copy-to-clipboard";
 
-import { Text } from "@docspace/shared/components/text";
-import { HelpButton } from "@docspace/shared/components/help-button";
-import { InputBlock } from "@docspace/shared/components/input-block";
-import { toastr } from "@docspace/shared/components/toast";
+import { Text } from "@docspace/ui-kit/components/text";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
+import { InputBlock } from "@docspace/ui-kit/components/input-block";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { mobile } from "@docspace/shared/utils";
 

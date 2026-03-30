@@ -29,11 +29,10 @@ import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { Text } from "@docspace/shared/components/text";
-import { RowContent } from "@docspace/shared/components/rows";
+import { Text } from "@docspace/ui-kit/components/text";
+import { RowContent } from "@docspace/ui-kit/components/rows";
 
-import { EmailInput } from "@docspace/shared/components/email-input";
-import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
+import { EmailInput, TValidate } from "@docspace/ui-kit/components/email-input";
 
 import { isMobile } from "@docspace/shared/utils";
 
@@ -41,13 +40,13 @@ import EditSvg from "PUBLIC_DIR/images/access.edit.react.svg";
 import CrossSvgUrl from "PUBLIC_DIR/images/cross.edit.react.svg?url";
 import CheckSvgUrl from "PUBLIC_DIR/images/check.edit.react.svg?url";
 
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 import EmailChangeDialog from "SRC_DIR/components/dialogs/EmailChangeDialog";
-import { IconButton } from "@docspace/shared/components/icon-button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import {
-  AddEmailRowContentProps,
-  InjectedAddEmailRowContentProps,
+	AddEmailRowContentProps,
+	InjectedAddEmailRowContentProps,
 } from "../../../../types";
 
 const EmailInputWrapper = styled.div`
@@ -107,7 +106,7 @@ const StyledRowContent = styled(RowContent)`
     font-size: 12px;
     font-weight: 600;
     color: ${(props) =>
-      props.theme.client.settings.migration.tableRowTextColor};
+			props.theme.client.settings.migration.tableRowTextColor};
 
     path {
       fill: ${(props) => props.theme.client.settings.migration.tableHeaderText};
@@ -125,161 +124,161 @@ const StyledRowContent = styled(RowContent)`
 `;
 
 const UsersRowContent = (props: AddEmailRowContentProps) => {
-  const {
-    id,
-    sectionWidth,
-    displayName,
-    email,
-    emailInputRef,
-    emailTextRef,
-    isChecked,
-    isEmailOpen,
-    setOpenedEmailKey,
-    toggleAccount,
+	const {
+		id,
+		sectionWidth,
+		displayName,
+		email,
+		emailInputRef,
+		emailTextRef,
+		isChecked,
+		isEmailOpen,
+		setOpenedEmailKey,
+		toggleAccount,
 
-    changeEmail,
-    setIsPrevEmailValid,
-  } = props as InjectedAddEmailRowContentProps;
-  const { t, ready } = useTranslation(["SMTPSettings", "Settings", "Common"]);
+		changeEmail,
+		setIsPrevEmailValid,
+	} = props as InjectedAddEmailRowContentProps;
+	const { t, ready } = useTranslation(["SMTPSettings", "Settings", "Common"]);
 
-  const [prevEmail, setPrevEmail] = useState(email);
-  const [tempEmail, setTempEmail] = useState(email);
-  const [isEmailValid, setIsEmailValid] = useState(email.length > 0);
+	const [prevEmail, setPrevEmail] = useState(email);
+	const [tempEmail, setTempEmail] = useState(email);
+	const [isEmailValid, setIsEmailValid] = useState(email.length > 0);
 
-  const [hasError, setHasError] = useState(false);
+	const [hasError, setHasError] = useState(false);
 
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTempEmail(e.target.value);
-    if (hasError) {
-      setHasError(false);
-    }
-  };
+	const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setTempEmail(e.target.value);
+		if (hasError) {
+			setHasError(false);
+		}
+	};
 
-  const clearEmail = () => {
-    setTempEmail(prevEmail);
-    setOpenedEmailKey("");
-    setHasError(false);
-  };
+	const clearEmail = () => {
+		setTempEmail(prevEmail);
+		setOpenedEmailKey("");
+		setHasError(false);
+	};
 
-  const openEmail = () => setOpenedEmailKey(id);
+	const openEmail = () => setOpenedEmailKey(id);
 
-  const handleSaveEmail = () => {
-    setPrevEmail(tempEmail);
-    changeEmail(id, tempEmail);
-    setOpenedEmailKey("");
-    setIsPrevEmailValid(true);
-    if (!isChecked) {
-      toggleAccount();
-    }
-  };
+	const handleSaveEmail = () => {
+		setPrevEmail(tempEmail);
+		changeEmail(id, tempEmail);
+		setOpenedEmailKey("");
+		setIsPrevEmailValid(true);
+		if (!isChecked) {
+			toggleAccount();
+		}
+	};
 
-  const onValidateEmail = (res: TValidate) => {
-    setIsEmailValid(res.isValid);
-    return { isValid: res.isValid, errors: res.errors || [] };
-  };
+	const onValidateEmail = (res: TValidate) => {
+		setIsEmailValid(res.isValid);
+		return { isValid: res.isValid, errors: res.errors || [] };
+	};
 
-  const handleSaveClick = () => {
-    if (isEmailValid) {
-      handleSaveEmail();
-    } else {
-      setHasError(true);
-    }
-  };
+	const handleSaveClick = () => {
+		if (isEmailValid) {
+			handleSaveEmail();
+		} else {
+			setHasError(true);
+		}
+	};
 
-  const checkEmailValidity = () => {
-    if (!isEmailValid) {
-      setHasError(true);
-    }
-  };
+	const checkEmailValidity = () => {
+		if (!isEmailValid) {
+			setHasError(true);
+		}
+	};
 
-  useEffect(() => {
-    if (!isEmailOpen && prevEmail !== tempEmail) {
-      setTempEmail(prevEmail);
-      setHasError(false);
-    }
-  }, [isEmailOpen, prevEmail, tempEmail]);
+	useEffect(() => {
+		if (!isEmailOpen && prevEmail !== tempEmail) {
+			setTempEmail(prevEmail);
+			setHasError(false);
+		}
+	}, [isEmailOpen, prevEmail, tempEmail]);
 
-  if (!ready) return;
+	if (!ready) return;
 
-  return (
-    <StyledRowContent sectionWidth={sectionWidth}>
-      <div className="import-accounts-name">
-        <Text fontWeight={600} fontSize="14px">
-          {displayName}
-        </Text>
-        <Text
-          className="user-email"
-          fontWeight={600}
-          fontSize="12px"
-          color={globalColors.gray}
-        >
-          {prevEmail === "" ? t("Settings:NoEmail") : prevEmail}
-        </Text>
-      </div>
-      {isEmailOpen ? (
-        isMobile() ? (
-          <EmailChangeDialog
-            visible={isEmailOpen}
-            onClose={clearEmail}
-            tempEmail={tempEmail}
-            handleEmailChange={handleEmailChange}
-            onValidateEmail={onValidateEmail}
-            hasError={hasError}
-            checkEmailValidity={checkEmailValidity}
-            handleSave={handleSaveClick}
-            displayName={displayName}
-          />
-        ) : (
-          <EmailInputWrapper ref={emailInputRef}>
-            <EmailInput
-              placeholder={t("SMTPSettings:EnterEmail")}
-              className="import-email-input"
-              value={tempEmail}
-              onChange={handleEmailChange}
-              onValidateInput={onValidateEmail}
-              hasError={hasError}
-              onBlur={checkEmailValidity}
-              isAutoFocussed
-              dataTestId="change_email_input"
-            />
+	return (
+		<StyledRowContent sectionWidth={sectionWidth}>
+			<div className="import-accounts-name">
+				<Text fontWeight={600} fontSize="14px">
+					{displayName}
+				</Text>
+				<Text
+					className="user-email"
+					fontWeight={600}
+					fontSize="12px"
+					color={globalColors.gray}
+				>
+					{prevEmail === "" ? t("Settings:NoEmail") : prevEmail}
+				</Text>
+			</div>
+			{isEmailOpen ? (
+				isMobile() ? (
+					<EmailChangeDialog
+						visible={isEmailOpen}
+						onClose={clearEmail}
+						tempEmail={tempEmail}
+						handleEmailChange={handleEmailChange}
+						onValidateEmail={onValidateEmail}
+						hasError={hasError}
+						checkEmailValidity={checkEmailValidity}
+						handleSave={handleSaveClick}
+						displayName={displayName}
+					/>
+				) : (
+					<EmailInputWrapper ref={emailInputRef}>
+						<EmailInput
+							placeholder={t("SMTPSettings:EnterEmail")}
+							className="import-email-input"
+							value={tempEmail}
+							onChange={handleEmailChange}
+							onValidateInput={onValidateEmail}
+							hasError={hasError}
+							onBlur={checkEmailValidity}
+							isAutoFocussed
+							dataTestId="change_email_input"
+						/>
 
-            <IconButtonWrapper onClick={handleSaveClick}>
-              <IconButton
-                className="import-check-container-button"
-                size={16}
-                iconName={CheckSvgUrl}
-                dataTestId="change_email_save_button"
-              />
-            </IconButtonWrapper>
+						<IconButtonWrapper onClick={handleSaveClick}>
+							<IconButton
+								className="import-check-container-button"
+								size={16}
+								iconName={CheckSvgUrl}
+								dataTestId="change_email_save_button"
+							/>
+						</IconButtonWrapper>
 
-            <IconButtonWrapper onClick={clearEmail}>
-              <IconButton
-                className="import-clear-container-button"
-                size={16}
-                iconName={CrossSvgUrl}
-                dataTestId="change_email_clear_button"
-              />
-            </IconButtonWrapper>
-          </EmailInputWrapper>
-        )
-      ) : (
-        <span
-          onClick={openEmail}
-          className="user-email"
-          ref={emailTextRef}
-          data-testid="open_email_button"
-        >
-          <EditSvg />
-        </span>
-      )}
-    </StyledRowContent>
-  );
+						<IconButtonWrapper onClick={clearEmail}>
+							<IconButton
+								className="import-clear-container-button"
+								size={16}
+								iconName={CrossSvgUrl}
+								dataTestId="change_email_clear_button"
+							/>
+						</IconButtonWrapper>
+					</EmailInputWrapper>
+				)
+			) : (
+				<span
+					onClick={openEmail}
+					className="user-email"
+					ref={emailTextRef}
+					data-testid="open_email_button"
+				>
+					<EditSvg />
+				</span>
+			)}
+		</StyledRowContent>
+	);
 };
 
 export default inject<TStore>(({ importAccountsStore }) => {
-  const { changeEmail } = importAccountsStore;
+	const { changeEmail } = importAccountsStore;
 
-  return {
-    changeEmail,
-  };
+	return {
+		changeEmail,
+	};
 })(observer(UsersRowContent));

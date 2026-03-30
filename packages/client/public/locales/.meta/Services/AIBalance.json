@@ -1,0 +1,28 @@
+{
+  "key_path": "AIBalance",
+  "content": "AI balance",
+  "content_en_sha1_hash": "c96f5be7ba541dec486eafdc64864179ef481ad4",
+  "created_at": "2026-03-20T09:07:40.641Z",
+  "updated_at": "2026-03-20T10:25:52.928Z",
+  "comment": {
+    "text": "This translation key displays the text \"AI balance\" as a label within a section of the user interface, likely indicating a balance or amount related to AI services. It appears within a panel on the \"Portal Settings\" page under the \"Payments\" category, specifically within the AI service section. Translators should ensure the translation accurately reflects this context of a balance or credit associated with AI usage.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T10:25:52.928Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/panels/ai-service/GetStartedBody.tsx",
+      "line_number": 177,
+      "context": "<div className={styles.item}>\n <div className={styles.icon}>\n <AiSvg />\n </div>\n <Text fontWeight={600} fontSize={\"12px\"}>\n {t(\"AIBalance\")}\n </Text>\n </div>\n </div>\n </div>\n </div>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

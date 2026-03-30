@@ -27,52 +27,52 @@
 import { useNavigate, useLocation } from "react-router";
 import { useTranslation } from "react-i18next";
 
-import { Heading } from "@docspace/shared/components/heading";
-import { IconButton } from "@docspace/shared/components/icon-button";
+import { Heading } from "@docspace/ui-kit/components/heading";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import LoaderSectionHeader from "SRC_DIR/pages/PortalSettings/Layout/Section/loaderSectionHeader";
 
 import {
-  StyledContainer,
-  HeaderContainer,
+	StyledContainer,
+	HeaderContainer,
 } from "../../../../Layout/Section/Header";
 
 const OAuthSectionHeader = ({ isEdit }: { isEdit: boolean }) => {
-  const { t, ready } = useTranslation(["OAuth"]);
+	const { t, ready } = useTranslation(["OAuth"]);
 
-  const navigate = useNavigate();
-  const location = useLocation();
+	const navigate = useNavigate();
+	const location = useLocation();
 
-  const onBack = () => {
-    const path = location.pathname.includes("/portal-settings")
-      ? "/portal-settings"
-      : "";
-    navigate(`${path}/developer-tools/oauth`);
-  };
+	const onBack = () => {
+		const path = location.pathname.includes("/portal-settings")
+			? "/portal-settings"
+			: "";
+		navigate(`${path}/developer-tools/oauth`);
+	};
 
-  if (!ready) return <LoaderSectionHeader />;
+	if (!ready) return <LoaderSectionHeader />;
 
-  return (
-    <StyledContainer>
-      <HeaderContainer>
-        <Heading type="content" truncate>
-          <div className="settings-section_header">
-            <IconButton
-              iconName={ArrowPathReactSvgUrl}
-              size={17}
-              isFill
-              onClick={onBack}
-              className="arrow-button"
-              dataTestId="arrow_back_button"
-            />
+	return (
+		<StyledContainer>
+			<HeaderContainer>
+				<Heading type="content" truncate>
+					<div className="settings-section_header">
+						<IconButton
+							iconName={ArrowPathReactSvgUrl}
+							size={17}
+							isFill
+							onClick={onBack}
+							className="arrow-button"
+							dataTestId="arrow_back_button"
+						/>
 
-            {isEdit ? t("EditApp") : t("NewApp")}
-          </div>
-        </Heading>
-      </HeaderContainer>
-    </StyledContainer>
-  );
+						{isEdit ? t("EditApp") : t("NewApp")}
+					</div>
+				</Heading>
+			</HeaderContainer>
+		</StyledContainer>
+	);
 };
 
 export default OAuthSectionHeader;

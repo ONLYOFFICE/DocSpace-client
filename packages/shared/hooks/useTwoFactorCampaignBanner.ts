@@ -28,60 +28,60 @@ import { useMemo, useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router";
 import { getLoginHistoryConfig } from "../components/campaigns-banner/campaign/LoginHistoryCampaign";
-import { TColorScheme } from "../themes";
+import { TColorScheme } from "@docspace/ui-kit/providers/theme";
 import { size } from "../utils";
 
 export const useTwoFactorCampaignBanner = (
-  isBaseTheme: boolean,
-  currentColorScheme: TColorScheme,
+	isBaseTheme: boolean,
+	currentColorScheme: TColorScheme,
 ) => {
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= size.mobile);
-  const { t } = useTranslation(["Settings", "Common"]);
+	const [isMobile, setIsMobile] = useState(window.innerWidth <= size.mobile);
+	const { t } = useTranslation(["Settings", "Common"]);
 
-  const navigate = useNavigate();
-  const location = useLocation();
+	const navigate = useNavigate();
+	const location = useLocation();
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= size.mobile);
-    };
+	useEffect(() => {
+		const handleResize = () => {
+			setIsMobile(window.innerWidth <= size.mobile);
+		};
 
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+		window.addEventListener("resize", handleResize);
+		return () => window.removeEventListener("resize", handleResize);
+	}, []);
 
-  const loginHistoryTranslates = useMemo(
-    () => ({
-      Header: t("LoginHistoryCampaignHeader", {
-        productName: t("Common:ProductName"),
-      }),
-      SubHeader: t("LoginHistoryCampaignTitle"),
-      Text: t("LoginHistoryCampaignText"),
-      Link: isMobile
-        ? "/portal-settings/security/access-portal/tfa"
-        : "/portal-settings/security/access-portal",
-    }),
-    [t, isMobile],
-  );
+	const loginHistoryTranslates = useMemo(
+		() => ({
+			Header: t("LoginHistoryCampaignHeader", {
+				productName: t("Common:ProductName"),
+			}),
+			SubHeader: t("LoginHistoryCampaignTitle"),
+			Text: t("LoginHistoryCampaignText"),
+			Link: isMobile
+				? "/portal-settings/security/access-portal/tfa"
+				: "/portal-settings/security/access-portal",
+		}),
+		[t, isMobile],
+	);
 
-  const navigateTo2FA = () => {
-    const targetUrl = `${loginHistoryTranslates.Link}#tfa-section`;
-    if (location.pathname === "/portal-settings/security/login-history") {
-      navigate(targetUrl);
-      return;
-    }
-    window.location.href = targetUrl;
-  };
+	const navigateTo2FA = () => {
+		const targetUrl = `${loginHistoryTranslates.Link}#tfa-section`;
+		if (location.pathname === "/portal-settings/security/login-history") {
+			navigate(targetUrl);
+			return;
+		}
+		window.location.href = targetUrl;
+	};
 
-  const loginHistoryConfig = useMemo(
-    () => getLoginHistoryConfig(isBaseTheme, isMobile, currentColorScheme),
-    [isBaseTheme, isMobile, currentColorScheme],
-  );
+	const loginHistoryConfig = useMemo(
+		() => getLoginHistoryConfig(isBaseTheme, isMobile, currentColorScheme),
+		[isBaseTheme, isMobile, currentColorScheme],
+	);
 
-  return {
-    navigateTo2FA,
-    loginHistoryTranslates,
-    loginHistoryConfig,
-    isMobile,
-  };
+	return {
+		navigateTo2FA,
+		loginHistoryTranslates,
+		loginHistoryConfig,
+		isMobile,
+	};
 };

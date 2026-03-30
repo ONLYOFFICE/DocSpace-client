@@ -28,10 +28,10 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { Button } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Button } from "@docspace/ui-kit/components/button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 
 import { getDialogContent } from "./DeleteDialog.helper";
 import styles from "./DeleteDialog.module.scss";
@@ -51,10 +51,8 @@ const DeleteDialogComponent = (props) => {
     isPrivacyFolder,
     isRecycleBinFolder,
     isRoomDelete,
-    isAIAgentChatDelete,
 
     setIsRoomDelete,
-    setIsAIAgentChatDelete,
     deleteRoomsAction,
     isPersonalRoom,
     isSharedWithMeFolderRoot,
@@ -90,11 +88,6 @@ const DeleteDialogComponent = (props) => {
     setBufferSelection(null);
     setRemoveMediaItem(null);
     setIsRoomDelete(false);
-    setIsAIAgentChatDelete({
-      visible: false,
-      itemName: "",
-      onDeleteAction: null,
-    });
     setDeleteDialogVisible(false);
     setUnsubscribe(false);
   };
@@ -147,17 +140,7 @@ const DeleteDialogComponent = (props) => {
     await deleteRoomsAction(itemsIdDeleteHaveRights, translations);
   };
 
-  const onDeleteAIAgentChat = () => {
-    isAIAgentChatDelete.onDeleteAction();
-    onClose();
-  };
-
   const onDeleteAction = useCallback(() => {
-    if (isAIAgentChatDelete.visible) {
-      onDeleteAIAgentChat();
-      return;
-    }
-
     if (isRoomDelete || isTemplate || isAIAgent) {
       if (!isChecked) return;
       onDeleteRoom();
@@ -206,8 +189,8 @@ const DeleteDialogComponent = (props) => {
       return t("Common:DeletePermanently");
     }
 
-    if (isRecycleBinFolder || isAIAgentChatDelete.visible)
-      return t("EmptyTrashDialog:DeleteForeverButton");
+    if (isRecycleBinFolder)
+      return t("Common:DeleteForeverButton");
 
     if (isPrivacyFolder || selection[0]?.providerKey)
       return t("Common:OKButton");
@@ -218,10 +201,6 @@ const DeleteDialogComponent = (props) => {
   };
 
   const getDialogTitle = () => {
-    if (isAIAgentChatDelete.visible) {
-      return t("DeleteDialog:DeleteAIAgentChatTitle");
-    }
-
     if (isAIAgent) {
       return t("DeleteDialog:DeleteAIAgentTitle");
     }
@@ -231,6 +210,7 @@ const DeleteDialogComponent = (props) => {
     }
 
     if (isRoomDelete) {
+      if (selection.length > 1) return t("DeleteRoomsTitle");
       return t("DeleteRoomTitle");
     }
 
@@ -259,7 +239,6 @@ const DeleteDialogComponent = (props) => {
     isAIAgent,
     isAIAgentsFolderRoot,
     unsubscribe,
-    isAIAgentChatDelete,
   );
 
   const title = getDialogTitle();
@@ -289,6 +268,7 @@ const DeleteDialogComponent = (props) => {
                   ? t("DeleteTemplateWarning")
                   : t("DeleteRoomWarning")
             }
+            dataTestId="delete_warning_checkbox"
             isChecked={isChecked}
             onChange={() => setIsChecked(!isChecked)}
           />
@@ -365,8 +345,6 @@ export default inject(
       isRoomDelete,
       setIsRoomDelete,
       setUnsubscribe,
-      isAIAgentChatDelete,
-      setIsAIAgentChatDelete,
     } = dialogsStore;
 
     const { onRemoveSharedFilesOrFolder } = contextOptionsStore;
@@ -400,8 +378,6 @@ export default inject(
       onRemoveSharedFilesOrFolder,
       setUnsubscribe,
       isAIAgentsFolderRoot,
-      isAIAgentChatDelete,
-      setIsAIAgentChatDelete,
     };
   },
 )(observer(DeleteDialog));

@@ -27,17 +27,17 @@
 import React, { useCallback } from "react";
 
 import {
-  TFileSecurity,
-  TFolder,
-  TFolderSecurity,
-  TGetReferenceDataRequest,
-  TPresignedUri,
+	TFileSecurity,
+	TFolder,
+	TFolderSecurity,
+	TGetReferenceDataRequest,
+	TPresignedUri,
 } from "@docspace/shared/api/files/types";
 import { getPresignedUri, getReferenceData } from "@docspace/shared/api/files";
 import { EDITOR_ID } from "@docspace/shared/constants";
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
-import { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
-import { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
+import { TSelectedFileInfo } from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
+import { TBreadCrumb } from "@docspace/ui-kit/components/selector";
 import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 
 import { TEvent, UseSelectFileDialogProps } from "@/types";
@@ -48,235 +48,235 @@ export const compareFilesAction = "documentsFileType";
 export const setReferenceSourceAction = "referenceSourceType";
 
 const useSelectFileDialog = ({ instanceId }: UseSelectFileDialogProps) => {
-  const [isVisible, setIsVisible] = React.useState(false);
-  const [actionEvent, setActionEvent] = React.useState<TEvent>({} as TEvent);
-  const [filesType, setFilesType] = React.useState("");
-  const [fileTypeDetection, setFileTypeDetection] = React.useState({
-    isSelect: true,
-    filterParam: FilesSelectorFilterTypes.IMG,
-  });
+	const [isVisible, setIsVisible] = React.useState(false);
+	const [actionEvent, setActionEvent] = React.useState<TEvent>({} as TEvent);
+	const [filesType, setFilesType] = React.useState("");
+	const [fileTypeDetection, setFileTypeDetection] = React.useState({
+		isSelect: true,
+		filterParam: FilesSelectorFilterTypes.IMG,
+	});
 
-  const requestRunning = React.useRef(false);
+	const requestRunning = React.useRef(false);
 
-  const onSDKRequestSelectDocument = useCallback((event: object) => {
-    // console.log("onSDKRequestSelectDocument", { event });
-    setActionEvent(event as TEvent);
-    setFilesType(compareFilesAction);
-    setIsVisible(true);
-  }, []);
+	const onSDKRequestSelectDocument = useCallback((event: object) => {
+		// console.log("onSDKRequestSelectDocument", { event });
+		setActionEvent(event as TEvent);
+		setFilesType(compareFilesAction);
+		setIsVisible(true);
+	}, []);
 
-  const onSDKRequestSelectSpreadsheet = useCallback((event: object) => {
-    // console.log("onSDKRequestSelectSpreadsheet", { event });
-    setActionEvent(event as TEvent);
-    setFilesType(mailMergeAction);
-    setIsVisible(true);
-  }, []);
+	const onSDKRequestSelectSpreadsheet = useCallback((event: object) => {
+		// console.log("onSDKRequestSelectSpreadsheet", { event });
+		setActionEvent(event as TEvent);
+		setFilesType(mailMergeAction);
+		setIsVisible(true);
+	}, []);
 
-  const onSDKRequestInsertImage = useCallback((event: object) => {
-    // console.log("onSDKRequestInsertImage", { event });
-    setActionEvent(event as TEvent);
-    setFilesType(insertImageAction);
-    setIsVisible(true);
-  }, []);
+	const onSDKRequestInsertImage = useCallback((event: object) => {
+		// console.log("onSDKRequestInsertImage", { event });
+		setActionEvent(event as TEvent);
+		setFilesType(insertImageAction);
+		setIsVisible(true);
+	}, []);
 
-  const onSDKRequestReferenceSource = useCallback((event: object) => {
-    // console.log("onSDKRequestReferenceSource", { event });
-    setActionEvent(event as TEvent);
-    setFilesType(setReferenceSourceAction);
-    setIsVisible(true);
-  }, []);
+	const onSDKRequestReferenceSource = useCallback((event: object) => {
+		// console.log("onSDKRequestReferenceSource", { event });
+		setActionEvent(event as TEvent);
+		setFilesType(setReferenceSourceAction);
+		setIsVisible(true);
+	}, []);
 
-  const insertImage = useCallback(
-    (link: TPresignedUri) => {
-      const token = link.token;
+	const insertImage = useCallback(
+		(link: TPresignedUri) => {
+			const token = link.token;
 
-      const docEditor =
-        typeof window !== "undefined" && window.DocEditor?.instances[EDITOR_ID];
+			const docEditor =
+				typeof window !== "undefined" && window.DocEditor?.instances[EDITOR_ID];
 
-      docEditor?.insertImage({
-        ...actionEvent.data,
-        fileType: link.filetype,
-        ...(token && { token }),
-        url: link.url,
-      });
-    },
-    [actionEvent],
-  );
+			docEditor?.insertImage({
+				...actionEvent.data,
+				fileType: link.filetype,
+				...(token && { token }),
+				url: link.url,
+			});
+		},
+		[actionEvent],
+	);
 
-  const mailMerge = useCallback(
-    (link: TPresignedUri) => {
-      const token = link.token;
+	const mailMerge = useCallback(
+		(link: TPresignedUri) => {
+			const token = link.token;
 
-      const docEditor =
-        typeof window !== "undefined" && window.DocEditor?.instances[EDITOR_ID];
+			const docEditor =
+				typeof window !== "undefined" && window.DocEditor?.instances[EDITOR_ID];
 
-      docEditor?.setRequestedSpreadsheet({
-        ...actionEvent.data,
-        fileType: link.filetype,
-        ...(token && { token }),
-        url: link.url,
-      });
-    },
-    [actionEvent],
-  );
+			docEditor?.setRequestedSpreadsheet({
+				...actionEvent.data,
+				fileType: link.filetype,
+				...(token && { token }),
+				url: link.url,
+			});
+		},
+		[actionEvent],
+	);
 
-  const compareFiles = useCallback(
-    (link: TPresignedUri) => {
-      const token = link.token;
+	const compareFiles = useCallback(
+		(link: TPresignedUri) => {
+			const token = link.token;
 
-      const docEditor =
-        typeof window !== "undefined" && window.DocEditor?.instances[EDITOR_ID];
+			const docEditor =
+				typeof window !== "undefined" && window.DocEditor?.instances[EDITOR_ID];
 
-      docEditor?.setRequestedDocument({
-        ...actionEvent.data,
-        fileType: link.filetype,
-        ...(token && { token }),
-        url: link.url,
-      });
-    },
-    [actionEvent],
-  );
+			docEditor?.setRequestedDocument({
+				...actionEvent.data,
+				fileType: link.filetype,
+				...(token && { token }),
+				url: link.url,
+			});
+		},
+		[actionEvent],
+	);
 
-  const setReferenceSource = useCallback((data: TGetReferenceDataRequest) => {
-    const docEditor =
-      typeof window !== "undefined" && window.DocEditor?.instances[EDITOR_ID];
+	const setReferenceSource = useCallback((data: TGetReferenceDataRequest) => {
+		const docEditor =
+			typeof window !== "undefined" && window.DocEditor?.instances[EDITOR_ID];
 
-    docEditor?.setReferenceSource(data);
-  }, []);
+		docEditor?.setReferenceSource(data);
+	}, []);
 
-  const onSelectFile = useCallback(
-    async (file: TSelectedFileInfo) => {
-      try {
-        if (!file) return;
+	const onSelectFile = useCallback(
+		async (file: TSelectedFileInfo) => {
+			try {
+				if (!file) return;
 
-        if (filesType === setReferenceSourceAction) {
-          const data = await getReferenceData({
-            fileKey: file.id,
-            instanceId,
-          });
+				if (filesType === setReferenceSourceAction) {
+					const data = await getReferenceData({
+						fileKey: file.id,
+						instanceId,
+					});
 
-          setReferenceSource(data);
-        } else {
-          const link = await getPresignedUri(file.id);
+					setReferenceSource(data);
+				} else {
+					const link = await getPresignedUri(file.id);
 
-          if (filesType === insertImageAction) insertImage(link);
-          if (filesType === mailMergeAction) mailMerge(link);
-          if (filesType === compareFilesAction) compareFiles(link);
-        }
-      } catch (e) {
-        console.error(e);
-      }
-    },
-    [
-      filesType,
-      instanceId,
-      setReferenceSource,
-      insertImage,
-      mailMerge,
-      compareFiles,
-    ],
-  );
+					if (filesType === insertImageAction) insertImage(link);
+					if (filesType === mailMergeAction) mailMerge(link);
+					if (filesType === compareFilesAction) compareFiles(link);
+				}
+			} catch (e) {
+				console.error(e);
+			}
+		},
+		[
+			filesType,
+			instanceId,
+			setReferenceSource,
+			insertImage,
+			mailMerge,
+			compareFiles,
+		],
+	);
 
-  const getFileTypeDetection = React.useCallback(() => {
-    if (filesType === insertImageAction) {
-      return {
-        isSelect: true,
-        filterParam: FilesSelectorFilterTypes.IMG,
-      };
-    }
-    if (
-      filesType === mailMergeAction ||
-      filesType === setReferenceSourceAction
-    ) {
-      return {
-        isSelect: true,
-        filterParam: FilesSelectorFilterTypes.XLSX,
-      };
-    }
-    if (filesType === compareFilesAction) {
-      return {
-        isSelect: true,
-        filterParam: FilesSelectorFilterTypes.DOCX,
-      };
-    }
+	const getFileTypeDetection = React.useCallback(() => {
+		if (filesType === insertImageAction) {
+			return {
+				isSelect: true,
+				filterParam: FilesSelectorFilterTypes.IMG,
+			};
+		}
+		if (
+			filesType === mailMergeAction ||
+			filesType === setReferenceSourceAction
+		) {
+			return {
+				isSelect: true,
+				filterParam: FilesSelectorFilterTypes.XLSX,
+			};
+		}
+		if (filesType === compareFilesAction) {
+			return {
+				isSelect: true,
+				filterParam: FilesSelectorFilterTypes.DOCX,
+			};
+		}
 
-    return {
-      isSelect: true,
-      filterParam: FilesSelectorFilterTypes.DOCX,
-    };
-  }, [filesType]);
+		return {
+			isSelect: true,
+			filterParam: FilesSelectorFilterTypes.DOCX,
+		};
+	}, [filesType]);
 
-  React.useEffect(() => {
-    if (!filesType) return;
+	React.useEffect(() => {
+		if (!filesType) return;
 
-    const typeDet = getFileTypeDetection();
+		const typeDet = getFileTypeDetection();
 
-    setFileTypeDetection(typeDet);
-  }, [filesType, getFileTypeDetection]);
+		setFileTypeDetection(typeDet);
+	}, [filesType, getFileTypeDetection]);
 
-  const onClose = useCallback(() => {
-    if (requestRunning.current) return;
-    setIsVisible(false);
-    setActionEvent({} as TEvent);
-  }, []);
+	const onClose = useCallback(() => {
+		if (requestRunning.current) return;
+		setIsVisible(false);
+		setActionEvent({} as TEvent);
+	}, []);
 
-  const onSubmit = useCallback(
-    async (
-      selectedItemId: string | number | undefined,
-      folderTitle: string,
-      isPublic: boolean,
-      breadCrumbs: TBreadCrumb[],
-      fileName: string,
-      isChecked: boolean,
-      selectedTreeNode: TFolder,
-      selectedFileInfo: TSelectedFileInfo,
-    ) => {
-      requestRunning.current = true;
-      await onSelectFile(selectedFileInfo);
-      requestRunning.current = false;
-      onClose();
-    },
-    [onClose, onSelectFile],
-  );
+	const onSubmit = useCallback(
+		async (
+			selectedItemId: string | number | undefined,
+			folderTitle: string,
+			isPublic: boolean,
+			breadCrumbs: TBreadCrumb[],
+			fileName: string,
+			isChecked: boolean,
+			selectedTreeNode: TFolder,
+			selectedFileInfo: TSelectedFileInfo,
+		) => {
+			requestRunning.current = true;
+			await onSelectFile(selectedFileInfo);
+			requestRunning.current = false;
+			onClose();
+		},
+		[onClose, onSelectFile],
+	);
 
-  const getIsDisabled = useCallback(
-    (
-      isFirstLoad: boolean,
-      isSelectedParentFolder: boolean,
-      selectedItemId: string | number | undefined,
-      selectedItemType: "rooms" | "files" | "agents" | undefined,
-      isRoot: boolean,
-      selectedItemSecurity:
-        | TFileSecurity
-        | TFolderSecurity
-        | TRoomSecurity
-        | undefined,
-      selectedFileInfo: TSelectedFileInfo,
-    ) => {
-      if (isFirstLoad) return true;
-      if (requestRunning.current) return true;
-      if (!selectedFileInfo) return true;
+	const getIsDisabled = useCallback(
+		(
+			isFirstLoad: boolean,
+			isSelectedParentFolder: boolean,
+			selectedItemId: string | number | undefined,
+			selectedItemType: "rooms" | "files" | "agents" | undefined,
+			isRoot: boolean,
+			selectedItemSecurity:
+				| TFileSecurity
+				| TFolderSecurity
+				| TRoomSecurity
+				| undefined,
+			selectedFileInfo: TSelectedFileInfo,
+		) => {
+			if (isFirstLoad) return true;
+			if (requestRunning.current) return true;
+			if (!selectedFileInfo) return true;
 
-      return false;
-    },
-    [],
-  );
+			return false;
+		},
+		[],
+	);
 
-  return {
-    onSDKRequestSelectDocument,
-    onSDKRequestInsertImage,
-    onSDKRequestReferenceSource,
-    onSDKRequestSelectSpreadsheet,
+	return {
+		onSDKRequestSelectDocument,
+		onSDKRequestInsertImage,
+		onSDKRequestReferenceSource,
+		onSDKRequestSelectSpreadsheet,
 
-    onSubmitSelectFileDialog: onSubmit,
-    onCloseSelectFileDialog: onClose,
+		onSubmitSelectFileDialog: onSubmit,
+		onCloseSelectFileDialog: onClose,
 
-    getIsDisabledSelectFileDialog: getIsDisabled,
+		getIsDisabledSelectFileDialog: getIsDisabled,
 
-    selectFileDialogVisible: isVisible,
+		selectFileDialogVisible: isVisible,
 
-    selectFileDialogFileTypeDetection: fileTypeDetection,
-  };
+		selectFileDialogFileTypeDetection: fileTypeDetection,
+	};
 };
 
 export default useSelectFileDialog;

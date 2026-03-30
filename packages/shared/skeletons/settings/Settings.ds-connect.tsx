@@ -27,151 +27,151 @@
 import React from "react";
 import { LOADER_STYLE } from "../../constants";
 
-import { RectangleSkeleton } from "../rectangle";
+import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 
 import styles from "./Settings.module.scss";
 
 const speed = 2;
 
 export const SettingsDSConnectSkeleton = () => {
-  const fieldComponent = (
-    <div className="rectangle-loader_field-wrapper">
-      <RectangleSkeleton
-        height="20"
-        width="215"
-        backgroundColor={LOADER_STYLE.backgroundColor}
-        foregroundColor={LOADER_STYLE.foregroundColor}
-        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
-        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
-        speed={speed}
-        animate
-      />
+	const fieldComponent = (
+		<div className="rectangle-loader_field-wrapper">
+			<RectangleSkeleton
+				height="20"
+				width="215"
+				backgroundColor={LOADER_STYLE.backgroundColor}
+				foregroundColor={LOADER_STYLE.foregroundColor}
+				backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+				foregroundOpacity={LOADER_STYLE.foregroundOpacity}
+				speed={speed}
+				animate
+			/>
 
-      <RectangleSkeleton
-        height="32"
-        className="rectangle-loader_input"
-        backgroundColor={LOADER_STYLE.backgroundColor}
-        foregroundColor={LOADER_STYLE.foregroundColor}
-        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
-        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
-        speed={speed}
-        animate
-      />
+			<RectangleSkeleton
+				height="32"
+				className="rectangle-loader_input"
+				backgroundColor={LOADER_STYLE.backgroundColor}
+				foregroundColor={LOADER_STYLE.foregroundColor}
+				backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+				foregroundOpacity={LOADER_STYLE.foregroundOpacity}
+				speed={speed}
+				animate
+			/>
 
-      <RectangleSkeleton
-        height="15"
-        width="150"
-        backgroundColor={LOADER_STYLE.backgroundColor}
-        foregroundColor={LOADER_STYLE.foregroundColor}
-        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
-        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
-        speed={speed}
-        animate
-      />
-    </div>
-  );
+			<RectangleSkeleton
+				height="15"
+				width="150"
+				backgroundColor={LOADER_STYLE.backgroundColor}
+				foregroundColor={LOADER_STYLE.foregroundColor}
+				backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+				foregroundOpacity={LOADER_STYLE.foregroundOpacity}
+				speed={speed}
+				animate
+			/>
+		</div>
+	);
 
-  const descriptionComponents = (
-    <div className="rectangle-loader_description">
-      <RectangleSkeleton
-        height="16"
-        backgroundColor={LOADER_STYLE.backgroundColor}
-        foregroundColor={LOADER_STYLE.foregroundColor}
-        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
-        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
-        speed={speed}
-        animate
-      />
-      <RectangleSkeleton
-        height="16"
-        backgroundColor={LOADER_STYLE.backgroundColor}
-        foregroundColor={LOADER_STYLE.foregroundColor}
-        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
-        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
-        speed={speed}
-        animate
-      />
-      <RectangleSkeleton
-        height="16"
-        width="300"
-        backgroundColor={LOADER_STYLE.backgroundColor}
-        foregroundColor={LOADER_STYLE.foregroundColor}
-        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
-        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
-        speed={speed}
-        animate
-      />
-    </div>
-  );
+	const descriptionComponents = (
+		<div className="rectangle-loader_description">
+			<RectangleSkeleton
+				height="16"
+				backgroundColor={LOADER_STYLE.backgroundColor}
+				foregroundColor={LOADER_STYLE.foregroundColor}
+				backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+				foregroundOpacity={LOADER_STYLE.foregroundOpacity}
+				speed={speed}
+				animate
+			/>
+			<RectangleSkeleton
+				height="16"
+				backgroundColor={LOADER_STYLE.backgroundColor}
+				foregroundColor={LOADER_STYLE.foregroundColor}
+				backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+				foregroundOpacity={LOADER_STYLE.foregroundOpacity}
+				speed={speed}
+				animate
+			/>
+			<RectangleSkeleton
+				height="16"
+				width="300"
+				backgroundColor={LOADER_STYLE.backgroundColor}
+				foregroundColor={LOADER_STYLE.foregroundColor}
+				backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+				foregroundOpacity={LOADER_STYLE.foregroundOpacity}
+				speed={speed}
+				animate
+			/>
+		</div>
+	);
 
-  const buttonsComponent = (
-    <div className="rectangle-loader_buttons">
-      <RectangleSkeleton
-        height="32"
-        backgroundColor={LOADER_STYLE.backgroundColor}
-        foregroundColor={LOADER_STYLE.foregroundColor}
-        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
-        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
-        speed={speed}
-        animate
-      />
-      <RectangleSkeleton
-        height="32"
-        backgroundColor={LOADER_STYLE.backgroundColor}
-        foregroundColor={LOADER_STYLE.foregroundColor}
-        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
-        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
-        speed={speed}
-        animate
-      />
-    </div>
-  );
+	const buttonsComponent = (
+		<div className="rectangle-loader_buttons">
+			<RectangleSkeleton
+				height="32"
+				backgroundColor={LOADER_STYLE.backgroundColor}
+				foregroundColor={LOADER_STYLE.foregroundColor}
+				backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+				foregroundOpacity={LOADER_STYLE.foregroundOpacity}
+				speed={speed}
+				animate
+			/>
+			<RectangleSkeleton
+				height="32"
+				backgroundColor={LOADER_STYLE.backgroundColor}
+				foregroundColor={LOADER_STYLE.foregroundColor}
+				backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+				foregroundOpacity={LOADER_STYLE.foregroundOpacity}
+				speed={speed}
+				animate
+			/>
+		</div>
+	);
 
-  return (
-    <div className={styles.dsConnect}>
-      {descriptionComponents}
+	return (
+		<div className={styles.dsConnect}>
+			{descriptionComponents}
 
-      <RectangleSkeleton
-        className="rectangle-loader_link"
-        height="20"
-        width="75"
-        backgroundColor={LOADER_STYLE.backgroundColor}
-        foregroundColor={LOADER_STYLE.foregroundColor}
-        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
-        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
-        speed={speed}
-        animate
-      />
+			<RectangleSkeleton
+				className="rectangle-loader_link"
+				height="20"
+				width="75"
+				backgroundColor={LOADER_STYLE.backgroundColor}
+				foregroundColor={LOADER_STYLE.foregroundColor}
+				backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+				foregroundOpacity={LOADER_STYLE.foregroundOpacity}
+				speed={speed}
+				animate
+			/>
 
-      {fieldComponent}
+			{fieldComponent}
 
-      <RectangleSkeleton
-        className="rectangle-loader_checkbox"
-        height="20"
-        width="270"
-        backgroundColor={LOADER_STYLE.backgroundColor}
-        foregroundColor={LOADER_STYLE.foregroundColor}
-        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
-        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
-        speed={speed}
-        animate
-      />
+			<RectangleSkeleton
+				className="rectangle-loader_checkbox"
+				height="20"
+				width="270"
+				backgroundColor={LOADER_STYLE.backgroundColor}
+				foregroundColor={LOADER_STYLE.foregroundColor}
+				backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+				foregroundOpacity={LOADER_STYLE.foregroundOpacity}
+				speed={speed}
+				animate
+			/>
 
-      {fieldComponent}
+			{fieldComponent}
 
-      <RectangleSkeleton
-        className="rectangle-loader_title"
-        height="22"
-        width="250"
-        backgroundColor={LOADER_STYLE.backgroundColor}
-        foregroundColor={LOADER_STYLE.foregroundColor}
-        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
-        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
-        speed={speed}
-        animate
-      />
+			<RectangleSkeleton
+				className="rectangle-loader_title"
+				height="22"
+				width="250"
+				backgroundColor={LOADER_STYLE.backgroundColor}
+				foregroundColor={LOADER_STYLE.foregroundColor}
+				backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+				foregroundOpacity={LOADER_STYLE.foregroundOpacity}
+				speed={speed}
+				animate
+			/>
 
-      {buttonsComponent}
-    </div>
-  );
+			{buttonsComponent}
+		</div>
+	);
 };

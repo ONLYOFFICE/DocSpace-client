@@ -50,9 +50,9 @@ import { withTranslation } from "react-i18next";
 import { useLocation } from "react-router";
 import classNames from "classnames";
 
-import { MainButton } from "@docspace/shared/components/main-button";
-import { toastr } from "@docspace/shared/components/toast";
-import { Button } from "@docspace/shared/components/button";
+import { MainButton } from "@docspace/ui-kit/components/main-button";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { Button } from "@docspace/ui-kit/components/button";
 import { isDesktop } from "@docspace/shared/utils";
 import { ArticleButtonLoader } from "@docspace/shared/skeletons/article";
 import { isMobile, isTablet } from "react-device-detect";
@@ -78,10 +78,9 @@ const ArticleMainButtonContent = (props) => {
     t,
     isMobileArticle,
 
-    isPrivateRoom,
-    isDesktopClient,
-    isEncryptionSupport,
-
+    isPrivacy,
+    encryptedFile,
+    encrypted,
     startUpload,
     setAction,
     setSelectFileDialogVisible,
@@ -132,6 +131,7 @@ const ArticleMainButtonContent = (props) => {
     isWarningRoomsDialog,
     getContactsModel,
     contactsCanCreate,
+    contactsTab,
     setRefMap,
     setTemplateGalleryVisible,
     templateGalleryAvailable,
@@ -249,7 +249,7 @@ const ArticleMainButtonContent = (props) => {
   );
 
   const onUploadFileClick = React.useCallback(() => {
-    if (isPrivateRoom && isDesktopClient) {
+    if (isPrivacy) {
       encryptionUploadDialog((f, isEncrypted) => {
         f.encrypted = isEncrypted;
         startUpload([f], null, t); // TODO: createFoldersTree
@@ -257,7 +257,13 @@ const ArticleMainButtonContent = (props) => {
     } else {
       inputFilesElement.current.click();
     }
-  }, [isPrivateRoom, isDesktopClient, startUpload, t]);
+  }, [
+    isPrivacy,
+    encrypted,
+    encryptedFile,
+    encryptionUploadDialog,
+    startUpload,
+  ]);
 
   const onUploadFolderClick = React.useCallback(() => {
     inputFolderElement.current.click();
@@ -297,35 +303,12 @@ const ArticleMainButtonContent = (props) => {
 
   const createActionsForFormRoom = React.useCallback(
     (actionList) => {
-      const { formGallery } = actionList;
-
-      const createNewFolder = {
-        id: "actions_new-folder",
-        className: "main-button_drop-down",
-        icon: CatalogFolderReactSvgUrl,
-        label: t("Files:CreateNewFolder"),
-        onClick: onCreate,
-        key: "new-folder",
-      };
-
-      const showSelectorFormRoomDocx = {
-        id: "actions_form-room_template_from-file",
-        className: "main-button_drop-down_sub",
-        icon: FormGalleryReactSvgUrl,
-        label: t("Common:ChooseFromTemplates"),
-        onClick: formGallery.onClick,
-        disabled: isPrivateRoom,
-        key: "form-file",
-      };
-
-      // const templatePDFForm = {
-      //   id: "actions_template-PDF-form",
-      //   className: "main-button_drop-down",
-      //   icon: FormReactSvgUrl,
-      //   label: t("Common:CreatePDFForm"),
-      //   key: "new-form",
-      //   items: [createTemplateBlankDocxf],
-      // };
+      const {
+        formGallery,
+        formActions,
+        createNewFolder,
+        templateGalleryAvailable,
+      } = actionList;
 
       const uploadFromDocSpace = {
         id: "actions_upload-from-docspace",
@@ -356,58 +339,35 @@ const ArticleMainButtonContent = (props) => {
         items: [uploadFromDocSpace, uploadFormDevice],
       };
 
-      // const moreActions = {
-      //   id: "actions_more-form",
-      //   className: "main-button_drop-down",
-      //   icon: PluginMoreReactSvgUrl,
-      //   label: t("Common:More"),
-      //   disabled: false,
-      //   key: "more-form",
-      //   items: [
-      //     createNewFolder,
-      //     {
-      //       isSeparator: true,
-      //       key: "actions_more-form__separator-1",
-      //     },
-      //     createNewDocumentDocx,
-      //     createNewPresentationPptx,
-      //     createNewSpreadsheetXlsx,
-      //     {
-      //       isSeparator: true,
-      //       key: "actions_more-form__separator-2",
-      //     },
-      //     ...uploadActions,
-      //   ],
-      // };
+      const uploadPDFFromSeparator = {
+        isSeparator: true,
+        key: "separator",
+      };
 
-      // const mobileMoreActions = {
-      //   ...moreActions,
-      //   items: moreActions.items.filter((item) => !item.isSeparator),
-      // };
+      const formGallerySeparator = {
+        isSeparator: true,
+        key: "separator-form-gallery",
+      };
 
-      const mobileMoreActions = null;
+      const formGalleryOption = templateGalleryAvailable
+        ? [formGallerySeparator, formGallery]
+        : [];
+
       const formRoomActions = [
-        // templatePDFForm,
-        uploadPDFFrom,
-        showSelectorFormRoomDocx,
-        {
-          isSeparator: true,
-          key: "separator",
-        },
+        formActions,
         createNewFolder,
-        // {
-        //   isSeparator: true,
-        //   key: "separator-1",
-        // },
-        // moreActions,
+        ...formGalleryOption,
+        uploadPDFFromSeparator,
+        uploadPDFFrom,
       ];
 
-      const mobileFormRoomActions = [
-        // templatePDFForm,
-        uploadPDFFrom,
-        showSelectorFormRoomDocx,
-        createNewFolder,
-      ];
+      const mobileFormRoomActions = [formActions, createNewFolder];
+
+      if (mobileFormRoomActions) {
+        mobileFormRoomActions.push(formGallery);
+      }
+
+      const mobileMoreActions = [uploadPDFFrom];
 
       return {
         formRoomActions,
@@ -415,7 +375,7 @@ const ArticleMainButtonContent = (props) => {
         mobileMoreActions,
       };
     },
-    [onShowFormRoomSelectFileDialog, onUploadPDFFilesClick, isPrivateRoom],
+    [onShowFormRoomSelectFileDialog, onUploadPDFFilesClick, onCreate],
   );
 
   React.useEffect(() => {
@@ -472,7 +432,7 @@ const ArticleMainButtonContent = (props) => {
       });
     }
 
-    const createTemplateBlankDocxf = {
+    const createTemplateBlankPDF = {
       id: "actions_template_blank",
       className: "main-button_drop-down_sub",
       icon: FormBlankReactSvgUrl,
@@ -508,6 +468,7 @@ const ArticleMainButtonContent = (props) => {
       icon: FormFileReactSvgUrl,
       label: t("Translations:SubNewFormFile"),
       onClick: onShowSelectFileDialog,
+      disabled: isPrivacy,
       key: "form-file",
     };
 
@@ -521,12 +482,12 @@ const ArticleMainButtonContent = (props) => {
     };
 
     const formGallery = {
-      id: "actions_template_oforms-gallery",
-      className: "main-button_drop-down_sub",
-      icon: FormGalleryReactSvgUrl,
+      id: "actions_open-template-gallery",
+      className: "main-button_drop-down",
+      icon: TemplateGalleryReactSvgUrl,
       label: t("Common:TemplateGallery"),
       onClick: onShowTemplateGallery,
-      key: "form-gallery",
+      key: "template-gallery",
     };
 
     const createNewPresentationPptx = {
@@ -545,11 +506,20 @@ const ArticleMainButtonContent = (props) => {
         className: "main-button_drop-down",
         icon: ActionsUploadReactSvgUrl,
         label: t("UploadFolder"),
-        disabled: isPrivateRoom,
+        disabled: isPrivacy,
         onClick: onUploadFolderClick,
         key: "upload-folder",
       });
     }
+
+    const formActions = {
+      id: "actions_template",
+      className: "main-button_drop-down",
+      icon: FormReactSvgUrl,
+      label: t("Translations:NewForm"),
+      key: "new-form",
+      items: [createTemplateBlankPDF, showSelectorDocx],
+    };
 
     if (
       currentRoomType === RoomsType.FormRoom ||
@@ -558,12 +528,9 @@ const ArticleMainButtonContent = (props) => {
       const { formRoomActions, mobileFormRoomActions, mobileMoreActions } =
         createActionsForFormRoom({
           formGallery,
-          newUploadActions,
-          // createNewFolder,
-          // createNewDocumentDocx,
-          // createTemplateBlankDocxf,
-          // createNewPresentationPptx,
-          // createNewSpreadsheetXlsx,
+          formActions,
+          createNewFolder,
+          templateGalleryAvailable,
         });
 
       // for mobile
@@ -575,26 +542,15 @@ const ArticleMainButtonContent = (props) => {
       return;
     }
 
-    const formActions = [
-      {
-        id: "actions_template",
-        className: "main-button_drop-down",
-        icon: FormReactSvgUrl,
-        label: t("Translations:NewForm"),
-        key: "new-form",
-        items: [createTemplateBlankDocxf, showSelectorDocx],
-      },
-    ];
-
     const newActions = [
       createNewDocumentDocx,
       createNewSpreadsheetXlsx,
       createNewPresentationPptx,
-      ...formActions,
+      formActions,
       createNewFolder,
     ];
 
-    if (pluginItems.length > 0 && !isPrivateRoom) {
+    if (pluginItems.length > 0) {
       // menuModel.push({
       //   id: "actions_more-plugins",
       //   className: "main-button_drop-down",
@@ -624,14 +580,7 @@ const ArticleMainButtonContent = (props) => {
         });
       }
 
-      newActions.push({
-        id: "actions_open-template-gallery",
-        className: "main-button_drop-down",
-        icon: TemplateGalleryReactSvgUrl,
-        label: t("Common:TemplateGallery"),
-        onClick: onShowTemplateGallery,
-        key: "template-gallery",
-      });
+      newActions.push(formGallery);
     }
 
     const menuModel = [...newActions];
@@ -648,7 +597,7 @@ const ArticleMainButtonContent = (props) => {
     setActions(newActions);
   }, [
     t,
-    isPrivateRoom,
+    isPrivacy,
     currentFolderId,
     isAccountsPage,
     isSettingsPage,
@@ -677,6 +626,7 @@ const ArticleMainButtonContent = (props) => {
 
     isAIRoom,
     isKnowledgeTab,
+    contactsTab,
   ]);
 
   const isProfile = location.pathname.includes("/profile");
@@ -730,9 +680,6 @@ const ArticleMainButtonContent = (props) => {
   const mainButtonText =
     isRoomAdmin && isAccountsPage ? t("Common:Invite") : t("Common:Actions");
 
-  const canCreateEncrypted =
-    isDesktopClient && isEncryptionSupport && security?.Create;
-
   let isDisabled = false;
 
   if (isSettingsPage) {
@@ -741,8 +688,6 @@ const ArticleMainButtonContent = (props) => {
     isDisabled = (isFrame && disableActionButton) || !contactsCanCreate;
   } else if ((isChatTab || isResultTab) && isAIRoom) {
     isDisabled = true;
-  } else if (isPrivateRoom) {
-    isDisabled = !canCreateEncrypted;
   } else {
     isDisabled = (isFrame && disableActionButton) || !security?.Create;
   }
@@ -909,10 +854,6 @@ export default inject(
       allowInvitingMembers,
       aiConfig,
       templateGalleryAvailable,
-      isDesktopClient,
-      isEncryptionSupport,
-      frameConfig,
-      isFrame,
     } = settingsStore;
 
     const { isVisible: versionHistoryPanelVisible } = versionHistoryStore;
@@ -934,6 +875,8 @@ export default inject(
       oformsStore;
     const { mainButtonItemsList } = pluginStore;
 
+    const { frameConfig, isFrame } = settingsStore;
+
     const { createFoldersTree } = filesActionsStore;
 
     return {
@@ -942,9 +885,7 @@ export default inject(
       isMobileArticle: settingsStore.isMobileArticle,
 
       showArticleLoader,
-      isPrivateRoom: isPrivacyFolder,
-      isDesktopClient,
-      isEncryptionSupport,
+      isPrivacy: isPrivacyFolder,
       isFavoritesFolder,
       isRecentFolder,
       isRecycleBinFolder,
@@ -1001,6 +942,7 @@ export default inject(
 
       getContactsModel: peopleStore.contextOptionsStore.getContactsModel,
       contactsCanCreate: peopleStore.contextOptionsStore.contactsCanCreate,
+      contactsTab: peopleStore.usersStore.contactsTab,
       setRefMap,
       setTemplateGalleryVisible,
       templateGalleryAvailable,

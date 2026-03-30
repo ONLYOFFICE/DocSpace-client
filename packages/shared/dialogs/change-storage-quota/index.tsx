@@ -27,10 +27,13 @@
 import { useTranslation } from "react-i18next";
 import { useState, useEffect, useCallback } from "react";
 
-import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
-import { Button, ButtonSize } from "../../components/button";
-import { Text } from "../../components/text";
-import { toastr } from "../../components/toast";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/ui-kit/components/modal-dialog";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { QuotaForm } from "../../components/quota-form";
 import { setTenantQuotaSettings } from "../../api/settings";
 

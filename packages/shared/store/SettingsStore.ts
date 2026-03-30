@@ -26,6 +26,22 @@
 
 import axios from "axios";
 import { makeAutoObservable, runInAction } from "mobx";
+
+import SocketHelper, {
+  SocketCommands,
+  SocketCommandsRoomParts,
+  SocketEvents,
+} from "@docspace/ui-kit/utils/socket";
+import { toastr, type TData } from "@docspace/ui-kit/components/toast";
+import {
+  Base,
+  Dark,
+  type TColorScheme,
+} from "@docspace/ui-kit/providers/theme";
+import { ThemeKeys } from "@docspace/ui-kit/enums";
+import { getCookie, setCookie } from "@docspace/ui-kit/utils/cookie";
+import { getSystemTheme } from "@docspace/ui-kit/utils/get-system-theme";
+
 import api from "../api";
 import type { TAIConfig } from "../api/ai/types";
 import type { TApiKey } from "../api/api-keys/types";
@@ -50,31 +66,23 @@ import type {
   TTimeZone,
   TVersionBuild,
 } from "../api/settings/types";
-import type { TPrivacyRoomRequest } from "../api/privacy/types";
-import { toastr } from "../components/toast";
-import type { TData } from "../components/toast/Toast.type";
+
 import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "../constants";
 import {
   DeepLinkType,
   type RecaptchaType,
   TenantStatus,
-  ThemeKeys,
-  type UrlActionType,
   FolderType,
+  UrlActionType,
 } from "../enums";
 import { version } from "../package.json";
 import type { ILogo } from "../pages/Branding/WhiteLabel/WhiteLabel.types";
-import { Base, Dark, type TColorScheme } from "../themes";
+
 import type { Nullable } from "../types";
 import type { TFrameConfig } from "../types/Frame";
-import {
-  size as deviceSize,
-  getDeviceTypeByWidth,
-  getSystemTheme,
-  isTablet,
-} from "../utils";
+
+import { size as deviceSize, getDeviceTypeByWidth, isTablet } from "../utils";
 import { isRequestAborted } from "../utils/axios/isRequestAborted";
-import { combineUrl } from "../utils/combineUrl";
 import {
   frameCallEvent,
   getShowText,
@@ -83,9 +91,7 @@ import {
   isPublicRoom,
   openUrl,
 } from "../utils/common";
-import { getCookie, setCookie } from "../utils/cookie";
 import FirebaseHelper from "../utils/firebase";
-import SocketHelper from "../utils/socket";
 
 const themes = {
   Dark,
@@ -185,7 +191,7 @@ class SettingsStore {
   // isDesktopEncryption: desktopEncryption;
   isEncryptionSupport = false;
 
-  encryptionKeys: { [key: string]: string | boolean }[] = [];
+  encryptionKeys: { [key: string]: string | boolean } = {};
 
   roomsMode = false;
 
@@ -336,6 +342,9 @@ class SettingsStore {
 
   displayBanners: boolean = false;
 
+
+  aiServicesEnabled: boolean = true;
+
   apiKeys: TApiKey[] = [];
 
   permissions: string[] = [];
@@ -346,9 +355,21 @@ class SettingsStore {
 
   aiConfig: Nullable<TAIConfig> = null;
 
+  externalDbEnabled: boolean = false;
+
   constructor() {
     makeAutoObservable(this);
+
+    this.wsExternalDbSettings();
   }
+
+  wsExternalDbSettings = () => {
+    SocketHelper?.emit(SocketCommands.Subscribe, {
+      roomParts: SocketCommandsRoomParts.ExternalDbSettings,
+    });
+
+    SocketHelper?.on(SocketEvents.ExternalDbSettings, this.setSettings);
+  };
 
   clearAbortControllerArr = () => {
     this.abortControllerArr.forEach((controller) => {
@@ -395,6 +416,12 @@ class SettingsStore {
 
   get helpCenterEntries() {
     return this.externalResources?.helpcenter?.entries;
+  }
+
+  get aiServicesManagementUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.aiservicesmanagement
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.aiservicesmanagement}`
+      : this.helpCenterDomain;
   }
 
   get apiDomain() {
@@ -944,16 +971,12 @@ class SettingsStore {
 
   setCulture = (culture: string) => (this.culture = culture);
 
-  getSettings = async () => {
-    const settings: Nullable<TSettings> = await api.settings.getSettings(true);
-
-    if (!settings) return;
-
+  setSettings = (settings: Partial<TSettings>) => {
     Object.keys(settings).forEach((forEachKey) => {
       const key = forEachKey as keyof TSettings;
 
       if (key in this && settings) {
-        if (key === "socketUrl") {
+        if (key === "socketUrl" && settings[key]) {
           this.setSocketUrl(settings[key]);
           return;
         }
@@ -964,7 +987,7 @@ class SettingsStore {
           if (settings?.wizardToken) return;
           const language = getCookie(LANGUAGE);
           if (!language || language === "undefined") {
-            setCookie(LANGUAGE, settings[key], {
+            setCookie(LANGUAGE, settings[key]!, {
               "max-age": COOKIE_EXPIRATION_YEAR,
             });
           }
@@ -973,8 +996,20 @@ class SettingsStore {
         this.setValue("hashSettings", settings[key]);
       }
     });
+  };
+
+  getSettings = async () => {
+    const settings: Nullable<TSettings> = await api.settings.getSettings(true);
+
+    if (!settings) return;
+
+    this.setSettings(settings);
 
     this.setGreetingSettings(settings.greetingSettings);
+
+    if (settings.aiEnabled !== undefined) {
+      this.aiServicesEnabled = settings.aiEnabled;
+    }
 
     return settings;
   };
@@ -1144,26 +1179,15 @@ class SettingsStore {
     this.setIsEncryptionSupport(isEncryptionSupport);
   };
 
-  updateInStoreEncryptionKeys = (
-    keys: { [key: string]: string | boolean }[],
-  ) => {
-    this.encryptionKeys = keys ?? [];
+  updateEncryptionKeys = (encryptionKeys: {
+    [key: string]: string | boolean;
+  }) => {
+    this.encryptionKeys = encryptionKeys ?? {};
   };
 
-  setEncryptionKeys = async (keys: TPrivacyRoomRequest) => {
-    await api.privacy.setEncryptionKeys(keys);
-    this.updateInStoreEncryptionKeys([keys]);
-  };
-
-  updateEncryptionKeys = async (keys: TPrivacyRoomRequest) => {
-    await api.privacy.updateEncryptionKeys(keys);
-    this.updateInStoreEncryptionKeys([keys]);
-  };
-
-  getEncryptionKeys = async () => {
-    const encryptionKeys = await api.privacy.getEncryptionKeys();
-
-    this.updateInStoreEncryptionKeys(encryptionKeys);
+  setEncryptionKeys = async (keys: { [key: string]: string | boolean }) => {
+    await api.files.setEncryptionKeys(keys);
+    this.updateEncryptionKeys(keys);
   };
 
   setCompanyInfoSettingsData = (data: TCompanyInfo) => {
@@ -1231,6 +1255,11 @@ class SettingsStore {
 
   getPortals = async () => {
     await this.getAllPortals();
+  };
+
+  getEncryptionKeys = async () => {
+    const encryptionKeys = await api.files.getEncryptionKeys();
+    this.updateEncryptionKeys(encryptionKeys);
   };
 
   setModuleInfo = (homepage: string, productId: string) => {
@@ -1425,7 +1454,7 @@ class SettingsStore {
   };
 
   setTheme = (key: ThemeKeys) => {
-    let theme: null | ThemeKeys.BaseStr | ThemeKeys.DarkStr = null;
+    let theme: ThemeKeys.BaseStr | ThemeKeys.DarkStr = ThemeKeys.BaseStr;
     switch (key) {
       case ThemeKeys.Base:
       case ThemeKeys.BaseStr:
@@ -1438,11 +1467,6 @@ class SettingsStore {
       case ThemeKeys.System:
       case ThemeKeys.SystemStr:
       default:
-        theme =
-          window.matchMedia &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches
-            ? ThemeKeys.DarkStr
-            : ThemeKeys.BaseStr;
         theme = getSystemTheme();
     }
 
@@ -1770,6 +1794,10 @@ class SettingsStore {
 
   setDisplayBanners = (displayBanners: boolean) => {
     this.displayBanners = displayBanners;
+  };
+
+  setAiServicesEnabled = (aiServicesEnabled: boolean) => {
+    this.aiServicesEnabled = aiServicesEnabled;
   };
 
   updateDefaultFolderType = async (folderType: FolderType) => {

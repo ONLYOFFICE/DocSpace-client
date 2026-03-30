@@ -28,13 +28,13 @@
 
 import { useTranslation } from "react-i18next";
 
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import {
   InputSize,
   InputType,
   TextInput,
-} from "@docspace/shared/components/text-input";
-import { Text } from "@docspace/shared/components/text";
+} from "@docspace/ui-kit/components/text-input";
+import { Text } from "@docspace/ui-kit/components/text";
 
 const currentNumber = "+00000000000";
 

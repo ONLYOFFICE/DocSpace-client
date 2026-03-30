@@ -32,14 +32,14 @@ import { useState } from "react";
 import { inject, observer } from "mobx-react";
 import styled, { useTheme } from "styled-components";
 
-import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
-import { IconButton } from "@docspace/shared/components/icon-button";
-import { Link, LinkType } from "@docspace/shared/components/link";
-import { RowContainer, Row } from "@docspace/shared/components/rows";
-import { Text } from "@docspace/shared/components/text";
+import { EmptyScreenContainer } from "@docspace/ui-kit/components/empty-screen-container";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
+import { RowContainer, Row } from "@docspace/ui-kit/components/rows";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import { TEnhancedMigrationUser } from "@docspace/shared/api/settings/types";
-import { tablet } from "@docspace/shared/utils/device";
+import { tablet } from "@docspace/ui-kit/utils/device";
 
 import UsersRow from "./UsersRow";
 import { AddEmailRowProps, RowViewProps } from "../../../../types";

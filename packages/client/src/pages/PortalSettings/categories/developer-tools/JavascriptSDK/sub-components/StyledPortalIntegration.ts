@@ -26,10 +26,10 @@
 
 import styled, { css } from "styled-components";
 
-import { mobile, tablet } from "@docspace/shared/utils/device";
+import { mobile, tablet } from "@docspace/ui-kit/utils/device";
 import { isMobile } from "react-device-detect";
 
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 const SDKContainer = styled.div`
   box-sizing: border-box;
@@ -37,10 +37,12 @@ const SDKContainer = styled.div`
     width: 100%;
   }
 
-  ${isMobile &&
-  css`
+  ${
+    isMobile &&
+    css`
     width: 100%;
-  `}
+  `
+  }
 
   .presets-flex {
     display: flex;
@@ -60,10 +62,12 @@ const CategoryHeader = styled.div`
     margin-top: 24px;
   }
 
-  ${isMobile &&
-  css`
+  ${
+    isMobile &&
+    css`
     margin-top: 24px;
-  `}
+  `
+  }
 `;
 
 const CategoryDescription = styled.div`

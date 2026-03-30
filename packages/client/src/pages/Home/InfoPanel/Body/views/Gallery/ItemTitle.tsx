@@ -31,15 +31,15 @@ import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router";
 import classNames from "classnames";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import {
   ContextMenu,
   ContextMenuRefType,
-} from "@docspace/shared/components/context-menu";
+} from "@docspace/ui-kit/components/context-menu";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
-} from "@docspace/shared/components/context-menu-button";
+} from "@docspace/ui-kit/components/context-menu-button";
 
 import OformsStore from "SRC_DIR/store/OformsStore";
 import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
@@ -104,7 +104,10 @@ const ItemTitle = ({
         {gallerySelected?.attributes?.name_form}
       </Text>
 
-      <Text color={currentColorScheme?.main?.accent} className="free-label">
+      <Text
+        color={currentColorScheme?.main?.accent ?? undefined}
+        className="free-label"
+      >
         {t("Common:Free")}
       </Text>
       {gallerySelected ? (
@@ -122,7 +125,7 @@ const ItemTitle = ({
           <ContextMenuButton
             id="info-options"
             className="expandButton"
-            title={t("Translations:TitleShowActions")}
+            title={t("Common:TitleShowActions")}
             onClick={onClickContextMenu}
             getData={onGetContextOptions}
             directionX="right"

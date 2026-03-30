@@ -28,91 +28,91 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Button } from "@docspace/shared/components/button";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Text } from "@docspace/shared/components/text";
-import { Textarea } from "@docspace/shared/components/textarea";
+import { Button } from "@docspace/ui-kit/components/button";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Textarea } from "@docspace/ui-kit/components/textarea";
 import StyledBodyContent from "../styled-containers/StyledModalDialog";
 
 const AddIdpCertificateModal = (props) => {
-  const { t } = useTranslation(["SingleSignOn", "Common"]);
-  const {
-    closeIdpModal,
-    addIdpCertificate,
-    idpIsModalVisible,
-    setInput,
-    idpCertificate,
-    isCertificateLoading,
-  } = props;
+	const { t } = useTranslation(["SingleSignOn", "Common"]);
+	const {
+		closeIdpModal,
+		addIdpCertificate,
+		idpIsModalVisible,
+		setInput,
+		idpCertificate,
+		isCertificateLoading,
+	} = props;
 
-  return (
-    <ModalDialog
-      autoMaxHeight
-      autoMaxWidth
-      displayType="modal"
-      onClose={closeIdpModal}
-      visible={idpIsModalVisible}
-    >
-      <ModalDialog.Header>{t("NewCertificate")}</ModalDialog.Header>
+	return (
+		<ModalDialog
+			autoMaxHeight
+			autoMaxWidth
+			displayType="modal"
+			onClose={closeIdpModal}
+			visible={idpIsModalVisible}
+		>
+			<ModalDialog.Header>{t("NewCertificate")}</ModalDialog.Header>
 
-      <ModalDialog.Body>
-        <StyledBodyContent>
-          <Text isBold className="text-area-label">
-            {t("OpenCertificate")}
-          </Text>
+			<ModalDialog.Body>
+				<StyledBodyContent>
+					<Text isBold className="text-area-label">
+						{t("OpenCertificate")}
+					</Text>
 
-          <Textarea
-            className="text-area"
-            id="idp-certificate"
-            name="idpCertificate"
-            onChange={setInput}
-            value={idpCertificate}
-            placeholder={t("PlaceholderCert")}
-            heightTextArea="72px"
-          />
-        </StyledBodyContent>
-      </ModalDialog.Body>
+					<Textarea
+						className="text-area"
+						id="idp-certificate"
+						name="idpCertificate"
+						onChange={setInput}
+						value={idpCertificate}
+						placeholder={t("PlaceholderCert")}
+						heightTextArea="72px"
+					/>
+				</StyledBodyContent>
+			</ModalDialog.Body>
 
-      <ModalDialog.Footer>
-        <Button
-          id="ok-button"
-          label={t("Common:OKButton")}
-          onClick={() => addIdpCertificate(t)}
-          primary
-          scale
-          isLoading={isCertificateLoading}
-          isDisabled={!idpCertificate}
-          size="normal"
-        />
-        <Button
-          id="cancel-button"
-          label={t("Common:CancelButton")}
-          onClick={closeIdpModal}
-          size="normal"
-          scale
-          isDisabled={isCertificateLoading}
-        />
-      </ModalDialog.Footer>
-    </ModalDialog>
-  );
+			<ModalDialog.Footer>
+				<Button
+					id="ok-button"
+					label={t("Common:OKButton")}
+					onClick={() => addIdpCertificate(t)}
+					primary
+					scale
+					isLoading={isCertificateLoading}
+					isDisabled={!idpCertificate}
+					size="normal"
+				/>
+				<Button
+					id="cancel-button"
+					label={t("Common:CancelButton")}
+					onClick={closeIdpModal}
+					size="normal"
+					scale
+					isDisabled={isCertificateLoading}
+				/>
+			</ModalDialog.Footer>
+		</ModalDialog>
+	);
 };
 
 export default inject(({ ssoStore }) => {
-  const {
-    closeIdpModal,
-    addIdpCertificate,
-    idpIsModalVisible,
-    setInput,
-    idpCertificate,
-    isCertificateLoading,
-  } = ssoStore;
+	const {
+		closeIdpModal,
+		addIdpCertificate,
+		idpIsModalVisible,
+		setInput,
+		idpCertificate,
+		isCertificateLoading,
+	} = ssoStore;
 
-  return {
-    closeIdpModal,
-    addIdpCertificate,
-    idpIsModalVisible,
-    setInput,
-    idpCertificate,
-    isCertificateLoading,
-  };
+	return {
+		closeIdpModal,
+		addIdpCertificate,
+		idpIsModalVisible,
+		setInput,
+		idpCertificate,
+		isCertificateLoading,
+	};
 })(observer(AddIdpCertificateModal));

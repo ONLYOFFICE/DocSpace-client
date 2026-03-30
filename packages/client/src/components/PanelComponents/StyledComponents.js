@@ -25,10 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css, keyframes } from "styled-components";
-import { Row } from "@docspace/shared/components/rows";
+import { Row } from "@docspace/ui-kit/components/rows";
 import { isMobile } from "react-device-detect";
 import { NoUserSelect } from "@docspace/shared/utils";
-import { IconButton } from "@docspace/shared/components/icon-button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 
 import LoadErrorIcon from "PUBLIC_DIR/images/load.error.react.svg";
 
@@ -82,8 +82,8 @@ export const StyledFileRow = styled(Row)`
   .styled-element,
   .row_content {
     ${(props) =>
-      props.showPasswordInput &&
-      css`
+			props.showPasswordInput &&
+			css`
         margin-top: -36px;
       `}
   }
@@ -110,8 +110,8 @@ export const StyledFileRow = styled(Row)`
     position: absolute;
     top: 37px;
     ${(props) =>
-      props.showPasswordInput &&
-      css`
+			props.showPasswordInput &&
+			css`
         top: 48px;
       `}
     inset-inline: 0;
@@ -164,8 +164,8 @@ export const StyledFileRow = styled(Row)`
 
   .upload-panel_file-row-link {
     ${(props) =>
-      !props.isMediaActive &&
-      css`
+			!props.isMediaActive &&
+			css`
         cursor: default;
       `}
     :hover {
@@ -175,8 +175,8 @@ export const StyledFileRow = styled(Row)`
 
   .upload-panel-file-error_text {
     ${(props) =>
-      props.isError &&
-      css`
+			props.isError &&
+			css`
         color: ${props.theme.filesPanels.upload.color};
       `}
   }

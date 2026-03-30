@@ -31,7 +31,7 @@ RUN apt-get -y update && \
     apt-get install -yq
     
 # Install PNPM
-RUN npm install -g pnpm@10.28.0
+RUN npm install -g pnpm@10.28.2
 
 WORKDIR /app
 
@@ -45,6 +45,7 @@ COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY ../common/ ./common/
 COPY ../packages/ ./packages/
 COPY ../public/ ./public/
+COPY ../libs/ ./libs/
 
 # ENV NODE_OPTIONS="--max-old-space-size=8192"
 

@@ -25,13 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect } from "react";
-import moment from "moment-timezone";
+import { formatDate } from "@docspace/ui-kit/utils/date";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 
-import { SelectedItem } from "@docspace/shared/components/selected-item";
-import { Link } from "@docspace/shared/components/link";
-import { globalColors } from "@docspace/shared/themes";
+import { SelectedItem } from "@docspace/ui-kit/components/selected-item";
+import { Link } from "@docspace/ui-kit/components/link";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { formatFilters } from "SRC_DIR/helpers/webhooks";
 
 const StatusBarWrapper = styled.div`
@@ -49,13 +49,7 @@ const StatusBarWrapper = styled.div`
 const SelectedDateTime = ({ historyFilters, clearDate }) => {
   return (
     <SelectedItem
-      label={`${moment(historyFilters.deliveryDate)
-        .tz(window.timezone)
-        .format("DD MMM YYYY")} ${moment(historyFilters.deliveryFrom)
-        .tz(window.timezone)
-        .format("HH:mm")} - ${moment(historyFilters.deliveryTo)
-        .tz(window.timezone)
-        .format("HH:mm")}`}
+      label={`${formatDate(historyFilters.deliveryDate.setZone(window.timezone), "dd MMM yyyy")} ${formatDate(historyFilters.deliveryFrom.setZone(window.timezone), "HH:mm")} - ${formatDate(historyFilters.deliveryTo.setZone(window.timezone), "HH:mm")}`}
       onClose={clearDate}
       onClick={clearDate}
     />
@@ -64,7 +58,7 @@ const SelectedDateTime = ({ historyFilters, clearDate }) => {
 
 const SelectedDate = ({ historyFilters, clearDate }) => (
   <SelectedItem
-    label={moment(historyFilters.deliveryDate).format("DD MMM YYYY")}
+    label={formatDate(historyFilters.deliveryDate, "dd MMM yyyy")}
     onClose={clearDate}
     onClick={clearDate}
   />
@@ -100,8 +94,8 @@ const StatusBar = (props) => {
 
   const isEqualDates = (firstDate, secondDate) => {
     return (
-      firstDate.format("YYYY-MM-D HH:mm") ===
-      secondDate.format("YYYY-MM-D HH:mm")
+      formatDate(firstDate, "yyyy-MM-d HH:mm") ===
+      formatDate(secondDate, "yyyy-MM-d HH:mm")
     );
   };
 
@@ -123,11 +117,11 @@ const StatusBar = (props) => {
       {historyFilters.deliveryDate !== null ? (
         !isEqualDates(
           historyFilters.deliveryFrom,
-          historyFilters.deliveryFrom.clone().startOf("day"),
+          historyFilters.deliveryFrom.startOf("day"),
         ) ||
         !isEqualDates(
           historyFilters.deliveryTo,
-          historyFilters.deliveryTo.clone().endOf("day"),
+          historyFilters.deliveryTo.endOf("day"),
         ) ? (
           <SelectedDateTime
             historyFilters={historyFilters}

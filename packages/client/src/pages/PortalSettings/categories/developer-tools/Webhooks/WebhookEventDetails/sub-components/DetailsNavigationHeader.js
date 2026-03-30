@@ -29,15 +29,15 @@ import { observer } from "mobx-react";
 
 import { retryWebhook } from "@docspace/shared/api/settings";
 
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { useNavigate, useParams, useLocation } from "react-router";
 
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import RetryIcon from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 
-import { Heading } from "@docspace/shared/components/heading";
-import { IconButton } from "@docspace/shared/components/icon-button";
+import { Heading } from "@docspace/ui-kit/components/heading";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 
 import { tablet, mobile } from "@docspace/shared/utils";
 import { useTranslation } from "react-i18next";

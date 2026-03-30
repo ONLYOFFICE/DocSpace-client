@@ -37,7 +37,7 @@ import { getGroupById } from "@docspace/shared/api/groups";
 import {
   TGroupItem,
   TItem,
-} from "@docspace/shared/components/filter/Filter.types";
+} from "@docspace/ui-kit/components/filter/Filter.types";
 import {
   AccountLoginType,
   EmployeeStatus,

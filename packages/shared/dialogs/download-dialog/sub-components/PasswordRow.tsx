@@ -35,11 +35,11 @@ import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/16/vertical-dots.re
 import DownloadAsReactSvgUrl from "PUBLIC_DIR/images/download-as.react.svg?url";
 import ProtectedReactSvgUrl from "PUBLIC_DIR/images/icons/16/protected.react.svg?url";
 
-import type { ContextMenuModel } from "../../../components/context-menu";
-import { Text } from "../../../components/text";
-import { Button, ButtonSize } from "../../../components/button";
-import { IconButton } from "../../../components/icon-button";
-import { ContextMenuButton } from "../../../components/context-menu-button";
+import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { ContextMenuButton } from "@docspace/ui-kit/components/context-menu-button";
 import { SimulatePassword } from "../../../components/simulate-password";
 
 import { isFile, type PasswordRowProps } from "../DownloadDialog.types";

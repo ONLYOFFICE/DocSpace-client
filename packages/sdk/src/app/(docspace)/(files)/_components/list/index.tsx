@@ -95,40 +95,58 @@ const List = ({
 
   const requestRunning = React.useRef(false);
   const isInit = React.useRef(false);
+  const fetchMoreAbortRef = React.useRef<AbortController | null>(null);
+
+  React.useEffect(() => {
+    return () => {
+      fetchMoreAbortRef.current?.abort();
+    };
+  }, []);
 
   const fetchMoreFiles = React.useCallback(async () => {
     if (!hasNextPage || requestRunning.current) return;
     requestRunning.current = true;
 
+    fetchMoreAbortRef.current?.abort();
+    const controller = new AbortController();
+    fetchMoreAbortRef.current = controller;
+
     filter.page += 1;
     filter.pageCount = PAGE_COUNT;
 
-    const res = await api.files.getFolder(
-      filter.folder,
-      filter,
-      new AbortController().signal,
-      shareKey,
-    );
+    try {
+      const res = await api.files.getFolder(
+        filter.folder,
+        filter,
+        controller.signal,
+        shareKey,
+      );
 
-    const { files: newFiles, folders: newFolders, total: newTotal } = res;
+      if (controller.signal.aborted) return;
 
-    const newItems = [
-      ...newFolders.map(convertFolderToItem),
-      ...newFiles.map(convertFileToItem),
-    ];
+      const { files: newFiles, folders: newFolders, total: newTotal } = res;
 
-    let hasNext = false;
-    setFilesList((val) => {
-      const newVal = [...val, ...newItems];
+      const newItems = [
+        ...newFolders.map(convertFolderToItem),
+        ...newFiles.map(convertFileToItem),
+      ];
 
-      hasNext = newTotal > newVal.length;
+      let hasNext = false;
+      setFilesList((val) => {
+        const newVal = [...val, ...newItems];
 
-      return newVal;
-    });
-    setTotal(newTotal);
-    setHasNextPage(hasNext);
-    setFilter(filter);
-    requestRunning.current = false;
+        hasNext = newTotal > newVal.length;
+
+        return newVal;
+      });
+      setTotal(newTotal);
+      setHasNextPage(hasNext);
+      setFilter(filter);
+    } catch (e) {
+      if (!controller.signal.aborted) throw e;
+    } finally {
+      requestRunning.current = false;
+    }
   }, [filter, shareKey, hasNextPage, convertFolderToItem, convertFileToItem]);
 
   React.useEffect(() => {
@@ -138,6 +156,8 @@ const List = ({
       return;
     }
 
+    const controller = new AbortController();
+
     const fetchFolder = async () => {
       requestRunning.current = true;
       const newFilter = FilesFilter.getFilter(window.location)!;
@@ -145,30 +165,41 @@ const List = ({
       newFilter.page = 0;
       newFilter.pageCount = PAGE_COUNT;
 
-      const res = await api.files.getFolder(
-        newFilter.folder,
-        newFilter,
-        new AbortController().signal,
-        shareKey,
-      );
+      try {
+        const res = await api.files.getFolder(
+          newFilter.folder,
+          newFilter,
+          controller.signal,
+          shareKey,
+        );
 
-      const { files: newFiles, folders: newFolders, total: newTotal } = res;
+        if (controller.signal.aborted) return;
 
-      const newItems = [
-        ...newFolders.map(convertFolderToItem),
-        ...newFiles.map(convertFileToItem),
-      ];
+        const { files: newFiles, folders: newFolders, total: newTotal } = res;
 
-      setIsEmptyList(newItems.length === 0);
+        const newItems = [
+          ...newFolders.map(convertFolderToItem),
+          ...newFiles.map(convertFileToItem),
+        ];
 
-      setFilesList(newItems);
-      setTotal(newTotal);
-      setHasNextPage(newTotal > newItems.length);
-      setFilter(newFilter);
-      requestRunning.current = false;
+        setIsEmptyList(newItems.length === 0);
+
+        setFilesList(newItems);
+        setTotal(newTotal);
+        setHasNextPage(newTotal > newItems.length);
+        setFilter(newFilter);
+      } catch (e) {
+        if (!controller.signal.aborted) throw e;
+      } finally {
+        requestRunning.current = false;
+      }
     };
 
     fetchFolder();
+
+    return () => {
+      controller.abort();
+    };
   }, [
     searchParams,
     shareKey,

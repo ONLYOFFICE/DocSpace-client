@@ -50,7 +50,7 @@ import {
   LIVE_CHAT_LOCAL_STORAGE_KEY,
   CategoryType,
 } from "@docspace/shared/constants";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { isDesktop, isTablet } from "@docspace/shared/utils";
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 import AccountsFilter from "@docspace/shared/api/people/filter";
@@ -59,6 +59,7 @@ import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import TariffBar from "SRC_DIR/components/TariffBar";
 import { PEOPLE_ROUTE_WITH_FILTER } from "SRC_DIR/helpers/contacts";
 import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
+import i18n from "SRC_DIR/i18n";
 
 const PROXY_HOMEPAGE_URL = combineUrl(window.ClientConfig?.proxy?.url, "/");
 const PROFILE_SELF_URL = combineUrl(PROXY_HOMEPAGE_URL, "/profile/login");
@@ -283,7 +284,7 @@ class ProfileActionsStore {
     this.setIsDebugDialogVisible(true);
   };
 
-  getActions = (t) => {
+  getActions = (t = i18n.t.bind(i18n)) => {
     const {
       enablePlugins,
       standalone,
@@ -460,7 +461,7 @@ class ProfileActionsStore {
         !isCommunity && {
           key: "user-menu-payments",
           icon: PaymentsReactSvgUrl,
-          label: t("Common:PaymentsTitle"),
+          label: standalone ? t("Common:PaymentsTitle") : t("Common:Billing"),
           onClick: (obj) => this.onPaymentsClick(obj),
           additionalElement: <TariffBar />,
           url: PAYMENTS_URL,

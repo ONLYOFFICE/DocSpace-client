@@ -27,7 +27,7 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Tabs } from "@docspace/shared/components/tabs";
+import { Tabs } from "@docspace/ui-kit/components/tabs";
 import { SectionSubmenuSkeleton } from "@docspace/shared/skeletons/sections";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { getObjectByLocation } from "@docspace/shared/utils/common";

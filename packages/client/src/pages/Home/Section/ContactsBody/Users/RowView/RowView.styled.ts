@@ -31,9 +31,9 @@ import {
   RowContainer,
   Row,
   RowContent,
-} from "@docspace/shared/components/rows";
-import { mobile, tablet } from "@docspace/shared/utils/device";
-import { globalColors } from "@docspace/shared/themes";
+} from "@docspace/ui-kit/components/rows";
+import { mobile, tablet } from "@docspace/ui-kit/utils/device";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 const marginStyles = css`
   margin-inline: -24px;

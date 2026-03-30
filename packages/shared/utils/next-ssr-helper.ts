@@ -74,7 +74,9 @@ export const createRequest = async (
 
   const authToken = cookieStore.get("asc_auth_key")?.value;
 
-  if (authToken) hdrs.set("Authorization", authToken);
+  if (authToken) {
+    hdrs.set("Authorization", authToken);
+  }
 
   cookieStore
     .getAll()

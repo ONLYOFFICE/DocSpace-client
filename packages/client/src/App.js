@@ -25,26 +25,51 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 // import "@docspace/shared/utils/wdyr";
-import React from "react";
+import React, { useState } from "react";
 import { I18nextProvider } from "react-i18next";
 import { RouterProvider } from "react-router";
 import { Provider as MobxProvider } from "mobx-react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+import "@docspace/ui-kit/components/theme-provider/ThemeProvider.scss";
+import { ApiProvider } from "@docspace/ui-kit/providers/api";
+import { getCookie } from "@docspace/ui-kit/utils/cookie";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import store from "SRC_DIR/store";
 
 import "@docspace/shared/polyfills/broadcastchannel";
 
-import "@docspace/shared/styles/custom.scss";
+import "./custom.scss";
 
 import ThemeProvider from "./components/ThemeProviderWrapper";
 import ErrorBoundary from "./components/ErrorBoundaryWrapper";
-import EncryptionProviderWrapper from "./components/EncryptionProviderWrapper";
 
 import router from "./router";
 
 import i18n from "./i18n";
 
+const getApiUrl = () => {
+  const origin = window.ClientConfig?.api?.origin || window.location.origin;
+  const proxy = window.ClientConfig?.proxy?.url || "";
+
+  return combineUrl(origin, proxy);
+};
+
 const App = () => {
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            refetchOnWindowFocus: false,
+            retry: 1,
+            staleTime: 5 * 60 * 1000,
+          },
+        },
+      }),
+  );
+
   React.useEffect(() => {
     const regex = /(\/){2,}/g;
     const replaceRegex = /(\/)+/g;
@@ -54,18 +79,23 @@ const App = () => {
       window.location.replace(pathname.replace(replaceRegex, "$1"));
   }, []);
 
+  const apiUrl = getApiUrl();
+  const apiKey = getCookie("asc_auth_key") || "";
+
   return (
-    <MobxProvider {...store}>
-      <I18nextProvider i18n={i18n}>
-        <ThemeProvider>
-          <ErrorBoundary>
-            <EncryptionProviderWrapper>
-              <RouterProvider router={router} />
-            </EncryptionProviderWrapper>
-          </ErrorBoundary>
-        </ThemeProvider>
-      </I18nextProvider>
-    </MobxProvider>
+    <QueryClientProvider client={queryClient}>
+      <MobxProvider {...store}>
+        <ApiProvider url={apiUrl} apiKey={apiKey} initSocket={false}>
+          <I18nextProvider i18n={i18n}>
+            <ThemeProvider>
+              <ErrorBoundary>
+                <RouterProvider router={router} />
+              </ErrorBoundary>
+            </ThemeProvider>
+          </I18nextProvider>
+        </ApiProvider>
+      </MobxProvider>
+    </QueryClientProvider>
   );
 };
 

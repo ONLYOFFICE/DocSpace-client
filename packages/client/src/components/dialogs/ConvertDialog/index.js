@@ -29,11 +29,11 @@ import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import classNames from "classnames";
 
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Button } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
-import { Checkbox } from "@docspace/shared/components/checkbox";
-import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { Button } from "@docspace/ui-kit/components/button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
 
 import styles from "./ConvertDialog.module.scss";
 
@@ -167,6 +167,7 @@ const ConvertDialogComponent = (props) => {
               onClick={onChangeRadioButton}
               spacing="12px"
               style={{ marginTop: "12px" }}
+              dataTestId="convert_dialog_file_type_radio"
             />
           </div>
         ) : null}
@@ -179,6 +180,7 @@ const ConvertDialogComponent = (props) => {
               label={t("SaveOriginalFormatMessage")}
               isChecked={storeOriginalFiles}
               onChange={onChangeFormat}
+              dataTestId="convert_dialog_save_original_checkbox"
             />
             {convertSingleFile && sortedFolder ? (
               <div
@@ -202,6 +204,7 @@ const ConvertDialogComponent = (props) => {
                 label={t("HideMessage")}
                 isChecked={hideMessage}
                 onChange={onChangeMessageVisible}
+                dataTestId="convert_dialog_hide_message_checkbox"
               />
             ) : null}
           </div>
@@ -213,6 +216,7 @@ const ConvertDialogComponent = (props) => {
               primary
               scale
               onClick={onConvert}
+              testId="convert_dialog_continue_button"
             />
             <Button
               key="CloseButton"
@@ -220,6 +224,7 @@ const ConvertDialogComponent = (props) => {
               size="normal"
               scale
               onClick={onCloseDialog}
+              testId="convert_dialog_close_button"
             />
           </div>
         </div>

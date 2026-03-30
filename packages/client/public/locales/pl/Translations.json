@@ -12,7 +12,6 @@
   "FolderTitleSkyDrive": "Katalog OneDrive",
   "FolderTitleWebDav": "Katalog WebDAV",
   "FolderTitleYandex": "Katalog Yandex",
-  "LinkValidTime": "Link jest ważny tylko przez {{days_count}} dni.",
   "NewForm": "Formularz PDF",
   "OwnerChange": "Zmień właściciela",
   "RoleGuestDescriprion": "Goście mają dostęp do pokoi, do których zostali zaproszeni i mogą tworzyć oraz edytować dokumenty, jeśli przypisano im odpowiednie role w pokoju.",
@@ -22,7 +21,5 @@
   "SubNewFormFile": "Z pliku tekstowego",
   "ThirdPartyInfo": "Zmień dane podmiotu trzeciego",
   "ThirdPartyTitle": "Usługi podmiotów trzecich",
-  "TitleShowActions": "Działania na plikach",
-  "TitleShowFolderActions": "Działania na folderach",
   "TrashItemsDeleteSuccess": "Wybrane elementy zostały pomyślnie usunięte z {{sectionName}}"
 }

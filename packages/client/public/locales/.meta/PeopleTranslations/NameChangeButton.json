@@ -3,7 +3,7 @@
   "content": "Change name",
   "content_en_sha1_hash": "e46692e648f154006587c9c0afcf732e4e650982",
   "created_at": "2025-05-19T21:30:53.484Z",
-  "updated_at": "2025-11-06T18:29:15.635Z",
+  "updated_at": "2026-02-19T13:36:32.344Z",
   "comment": {
     "text": "The \"NameChangeButton\" translation key is used to display the text \"Change name\" on a button in a modal dialog. This button triggers a change name action and is related to editing contact information. The text appears on the header of a modal dialog component.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeNameDialog/index.js",
-      "line_number": 131,
-      "context": "visible={visible}\n onClose={onCloseAction}\n displayType=\"modal\"\n >\n <ModalDialog.Header>\n {t(\"PeopleTranslations:NameChangeButton\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <StyledBodyContent>\n {(() => {\n const fields = [",
+      "line_number": 122,
+      "context": "visible={visible}\n onClose={onCloseAction}\n displayType=\"modal\"\n >\n <ModalDialog.Header>\n {t(\"PeopleTranslations:NameChangeButton\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.content}>\n {(() => {\n const fields = [",
       "module": "/packages/client"
     },
     {

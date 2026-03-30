@@ -25,80 +25,80 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { RectangleSkeleton } from "../rectangle";
+import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 import styles from "./Notifications.module.scss";
 import { NotificationsLoaderProps } from "./Notifications.types";
 
 const NotificationsLoader = ({
-  title,
-  borderRadius,
-  backgroundColor,
-  foregroundColor,
-  backgroundOpacity,
-  foregroundOpacity,
-  speed,
-  count = 1,
+	title,
+	borderRadius,
+	backgroundColor,
+	foregroundColor,
+	backgroundOpacity,
+	foregroundOpacity,
+	speed,
+	count = 1,
 }: NotificationsLoaderProps) => {
-  const items = [];
+	const items = [];
 
-  const contentItem = (
-    <>
-      <div>
-        <RectangleSkeleton
-          className="notifications_title-loader"
-          title={title}
-          width="100%"
-          height="16px"
-          borderRadius={borderRadius}
-          backgroundColor={backgroundColor}
-          foregroundColor={foregroundColor}
-          backgroundOpacity={backgroundOpacity}
-          foregroundOpacity={foregroundOpacity}
-          speed={speed}
-          animate
-        />
-        <RectangleSkeleton
-          className="notifications_content-loader"
-          title={title}
-          width="100%"
-          height="16px"
-          borderRadius={borderRadius}
-          backgroundColor={backgroundColor}
-          foregroundColor={foregroundColor}
-          backgroundOpacity={backgroundOpacity}
-          foregroundOpacity={foregroundOpacity}
-          speed={speed}
-          animate
-        />
-      </div>
-      <RectangleSkeleton
-        className="notifications_content-loader"
-        title={title}
-        width="24px"
-        height="16px"
-        borderRadius={borderRadius}
-        backgroundColor={backgroundColor}
-        foregroundColor={foregroundColor}
-        backgroundOpacity={backgroundOpacity}
-        foregroundOpacity={foregroundOpacity}
-        speed={speed}
-        animate
-      />
-    </>
-  );
+	const contentItem = (
+		<>
+			<div>
+				<RectangleSkeleton
+					className="notifications_title-loader"
+					title={title}
+					width="100%"
+					height="16px"
+					borderRadius={borderRadius}
+					backgroundColor={backgroundColor}
+					foregroundColor={foregroundColor}
+					backgroundOpacity={backgroundOpacity}
+					foregroundOpacity={foregroundOpacity}
+					speed={speed}
+					animate
+				/>
+				<RectangleSkeleton
+					className="notifications_content-loader"
+					title={title}
+					width="100%"
+					height="16px"
+					borderRadius={borderRadius}
+					backgroundColor={backgroundColor}
+					foregroundColor={foregroundColor}
+					backgroundOpacity={backgroundOpacity}
+					foregroundOpacity={foregroundOpacity}
+					speed={speed}
+					animate
+				/>
+			</div>
+			<RectangleSkeleton
+				className="notifications_content-loader"
+				title={title}
+				width="24px"
+				height="16px"
+				borderRadius={borderRadius}
+				backgroundColor={backgroundColor}
+				foregroundColor={foregroundColor}
+				backgroundOpacity={backgroundOpacity}
+				foregroundOpacity={foregroundOpacity}
+				speed={speed}
+				animate
+			/>
+		</>
+	);
 
-  for (let i = 0; i < count; i += 1) {
-    items.push(
-      <div
-        key={`notification_loader_${i}`}
-        className={styles.notification}
-        data-testid="notification-loader"
-      >
-        {contentItem}
-      </div>,
-    );
-  }
-  return items;
+	for (let i = 0; i < count; i += 1) {
+		items.push(
+			<div
+				key={`notification_loader_${i}`}
+				className={styles.notification}
+				data-testid="notification-loader"
+			>
+				{contentItem}
+			</div>,
+		);
+	}
+	return items;
 };
 
 export default NotificationsLoader;

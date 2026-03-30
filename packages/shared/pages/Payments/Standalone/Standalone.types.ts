@@ -43,6 +43,12 @@ export interface IPaymentsProps {
   docspaceFaqUrl: string;
   licenseQuota: TLicenseQuota;
   openOnNewPage: boolean;
+  isLifetimeLicense: boolean;
+  isGracePeriod: boolean;
+  isNotPaidPeriod: boolean;
+  gracePeriodEndDate: string;
+  delayDaysCount: string;
+  feedbackAndSupportUrl: string;
 }
 
 export interface ILicenseProps {

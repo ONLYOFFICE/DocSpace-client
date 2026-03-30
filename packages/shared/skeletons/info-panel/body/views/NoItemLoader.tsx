@@ -26,16 +26,16 @@
 
 import React from "react";
 
-import { RectangleSkeleton } from "../../../rectangle";
+import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 import styles from "../Body.module.scss";
 
 const NoItemLoader = () => {
-  return (
-    <div className={styles.noItemLoader} data-testid="no-item-loader">
-      <RectangleSkeleton width="96px" height="96px" borderRadius="6px" />
-      <RectangleSkeleton width="150px" height="16px" borderRadius="3px" />
-    </div>
-  );
+	return (
+		<div className={styles.noItemLoader} data-testid="no-item-loader">
+			<RectangleSkeleton width="96px" height="96px" borderRadius="6px" />
+			<RectangleSkeleton width="150px" height="16px" borderRadius="3px" />
+		</div>
+	);
 };
 
 export default NoItemLoader;

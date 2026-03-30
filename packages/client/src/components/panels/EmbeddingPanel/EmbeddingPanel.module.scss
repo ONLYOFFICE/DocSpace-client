@@ -24,10 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@use "@docspace/shared/styles/variables";
+@use "@docspace/ui-kit/styles/variables";
 
 .embeddingPanelBody {
-  padding-left: 16px;
+  padding-inline-start: 16px;
 
   .embeddingPanelHeaderLink {
     margin: 10px 0 2px;
@@ -110,5 +110,6 @@
     z-index: 1;
     margin: 8px;
     inset-inline-end: 32px;
+    direction: ltr;
   }
 }

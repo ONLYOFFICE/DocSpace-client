@@ -27,103 +27,103 @@ import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import type { TFile } from "@docspace/shared/api/files/types";
-import { Tooltip } from "@docspace/shared/components/tooltip";
-import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
-import { globalColors } from "@docspace/shared/themes";
-import { Text } from "@docspace/shared/components/text";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { Text } from "@docspace/ui-kit/components/text";
 import { getFolderPath } from "@docspace/shared/api/files";
 
 import { StyledText } from "./CellStyles";
 
 type TPath = {
-  id: number;
-  title: string;
+	id: number;
+	title: string;
 };
 
 type LocationCellProps = {
-  sideColor?: string;
-  item: TFile;
+	sideColor?: string;
+	item: TFile;
 };
 
 const LocationCell = ({ sideColor, item }: LocationCellProps) => {
-  const {
-    originRoomTitle,
-    originId: originFolderId,
-    originRoomId,
-    originTitle,
-    id,
-  } = item;
+	const {
+		originRoomTitle,
+		originId: originFolderId,
+		originRoomId,
+		originTitle,
+		id,
+	} = item;
 
-  const { t } = useTranslation("Common");
-  const [path, setPath] = useState<TPath[]>([]);
-  const [isPathLoading, setIsPathLoading] = useState(false);
+	const { t } = useTranslation("Common");
+	const [path, setPath] = useState<TPath[]>([]);
+	const [isPathLoading, setIsPathLoading] = useState(false);
 
-  const title = item.requestToken
-    ? t("Common:ViaLink")
-    : originRoomTitle || originTitle;
-  const originId = originFolderId || originRoomId;
-  const withTooltip = item.requestToken ? false : !!title;
+	const title = item.requestToken
+		? t("Common:ViaLink")
+		: originRoomTitle || originTitle;
+	const originId = originFolderId || originRoomId;
+	const withTooltip = item.requestToken ? false : !!title;
 
-  const getPath = useCallback(async () => {
-    if (path.length || !originId || !title) return;
+	const getPath = useCallback(async () => {
+		if (path.length || !originId || !title) return;
 
-    setIsPathLoading(true);
-    try {
-      const folderPath = await getFolderPath(originId);
-      setPath(folderPath);
-    } catch (e) {
-      console.error(e);
-      setPath([{ id: 0, title }]);
-    } finally {
-      setIsPathLoading(false);
-    }
-  }, [path, originId, title]);
+		setIsPathLoading(true);
+		try {
+			const folderPath = await getFolderPath(originId);
+			setPath(folderPath);
+		} catch (e) {
+			console.error(e);
+			setPath([{ id: 0, title }]);
+		} finally {
+			setIsPathLoading(false);
+		}
+	}, [path, originId, title]);
 
-  return [
-    <StyledText
-      key="cell"
-      fontSize="12px"
-      fontWeight={600}
-      color={sideColor}
-      className="row_update-text"
-      truncate
-      data-tooltip-id={`${id}`}
-      data-tip=""
-    >
-      {title || "—"}
-    </StyledText>,
+	return [
+		<StyledText
+			key="cell"
+			fontSize="12px"
+			fontWeight={600}
+			color={sideColor}
+			className="row_update-text"
+			truncate
+			data-tooltip-id={`${id}`}
+			data-tip=""
+		>
+			{title || "—"}
+		</StyledText>,
 
-    withTooltip ? (
-      <Tooltip
-        place="bottom"
-        key="tooltip"
-        id={`${id}`}
-        afterShow={getPath}
-        getContent={() => (
-          <span>
-            {isPathLoading ? (
-              <Loader
-                color={globalColors.black}
-                size="12px"
-                type={LoaderTypes.track}
-              />
-            ) : (
-              path.map((pathPart, i) => (
-                <Text
-                  key={pathPart.id}
-                  isBold={i === 0}
-                  isInline
-                  fontSize="12px"
-                >
-                  {i === 0 ? pathPart.title : `/${pathPart.title}`}
-                </Text>
-              ))
-            )}
-          </span>
-        )}
-      />
-    ) : null,
-  ];
+		withTooltip ? (
+			<Tooltip
+				place="bottom"
+				key="tooltip"
+				id={`${id}`}
+				afterShow={getPath}
+				getContent={() => (
+					<span>
+						{isPathLoading ? (
+							<Loader
+								color={globalColors.black}
+								size="12px"
+								type={LoaderTypes.track}
+							/>
+						) : (
+							path.map((pathPart, i) => (
+								<Text
+									key={pathPart.id}
+									isBold={i === 0}
+									isInline
+									fontSize="12px"
+								>
+									{i === 0 ? pathPart.title : `/${pathPart.title}`}
+								</Text>
+							))
+						)}
+					</span>
+				)}
+			/>
+		) : null,
+	];
 };
 
 export default LocationCell;

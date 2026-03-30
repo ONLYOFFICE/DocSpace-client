@@ -22,9 +22,14 @@ export const SDKConfigProvider: React.FC<{ children: React.ReactNode }> = ({
   const [sdkConfig, setSdkConfig] = useState<TFrameConfig | null>(null);
 
   const handleMessage = useCallback((e: MessageEvent) => {
-    const eventData = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
+    let eventData;
+    try {
+      eventData = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
+    } catch {
+      return;
+    }
 
-    if (eventData.data) {
+    if (eventData?.data) {
       const { data, methodName } = eventData.data;
 
       if (!methodName) return;

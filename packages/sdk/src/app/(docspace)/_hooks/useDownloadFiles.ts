@@ -33,7 +33,7 @@ import type { TFileConvertId } from "@docspace/shared/dialogs/download-dialog/Do
 import { downloadFiles as downloadFilesApi } from "@docspace/shared/api/files";
 import { openUrl } from "@docspace/shared/utils/common";
 import { UrlActionType } from "@docspace/shared/enums";
-import { TData, toastr } from "@docspace/shared/components/toast";
+import { TData, toastr } from "@docspace/ui-kit/components/toast";
 import { getDownloadPasswordError } from "@/app/(docspace)/_utils/getDownloadPasswordError";
 import { useTranslation } from "react-i18next";
 import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";

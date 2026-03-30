@@ -30,7 +30,7 @@ import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 
 import { SectionSubmenuSkeleton } from "@docspace/shared/skeletons/sections";
-import { Tabs, TTabItem } from "@docspace/shared/components/tabs";
+import { Tabs, TTabItem } from "@docspace/ui-kit/components/tabs";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { SearchArea } from "@docspace/shared/enums";
 

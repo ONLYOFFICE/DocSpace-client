@@ -26,13 +26,14 @@
 
 import { capabilitiesHandler } from "@docspace/shared/__mocks__/handlers";
 
-import { expect, test } from "./fixtures/base";
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
+import { test } from "./fixtures/base";
 import { successClient } from "@docspace/shared/__mocks__/handlers/oauth/client";
 
 test("oauth2 login render", async ({ page, baseUrl }) => {
   await page.goto(`${baseUrl}/login?client_id=${successClient.client_id}`);
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "oauth",
     "oauth2-login-render.png",
@@ -57,7 +58,7 @@ test("oauth2 with list render", async ({
     waitUntil: "load",
   });
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "oauth",
     "oauth2-list-render.png",
@@ -90,7 +91,7 @@ test("oauth2 back button after list render", async ({
     },
   );
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "oauth",
     "oauth2-back-login-render.png",
@@ -111,7 +112,7 @@ test("oauth2 back button after list render", async ({
 //     waitUntil: "load",
 //   });
 
-//   await expect(page).toHaveScreenshot([
+//   await expectScreenshot(page,[
 //     "desktop",
 //     "oauth",
 //     "oauth2-consent-render.png",
@@ -143,7 +144,7 @@ test("oauth2 back button after list render", async ({
 //     },
 //   );
 
-//   await expect(page).toHaveScreenshot([
+//   await expectScreenshot(page,[
 //     "desktop",
 //     "oauth",
 //     "oauth2-consent-change-user.png",

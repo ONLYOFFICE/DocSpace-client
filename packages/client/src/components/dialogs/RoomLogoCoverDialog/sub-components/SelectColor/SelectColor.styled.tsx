@@ -26,8 +26,8 @@
 import styled, { css } from "styled-components";
 
 import { tablet } from "@docspace/shared/utils";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { globalColors } from "@docspace/shared/themes";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import type { ColorItemProps } from "./SelecColor.types";
 
 const StyledModalDialog = styled(ModalDialog)`

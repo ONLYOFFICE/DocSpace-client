@@ -24,13 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import moment from "moment";
-
 import PDFIcon from "PUBLIC_DIR/images/icons/32/pdf.svg?url";
 
 import { getIconPathByFolderType } from "./common";
 import { iconSize32 } from "./image-helpers";
 import { FolderType } from "../enums";
+import { now, formatDate } from "@docspace/ui-kit/utils/date";
 
 const fakeCreatedBy = {
   id: "id",
@@ -49,7 +48,7 @@ export const fakeFormFillingList = [
   {
     title: "In process",
     type: 26,
-    updated: moment().format(),
+    updated: formatDate(now(), "yyyy-MM-dd'T'HH:mm:ssZZZ"),
     isFolder: true,
     icon: iconSize32.get(getIconPathByFolderType(FolderType.InProgress)),
     contextOptions: ["select"],
@@ -58,7 +57,7 @@ export const fakeFormFillingList = [
   {
     title: "Complete",
     type: 25,
-    updated: moment().format(),
+    updated: formatDate(now(), "yyyy-MM-dd'T'HH:mm:ssZZZ"),
     isFolder: true,
     icon: iconSize32.get(getIconPathByFolderType(FolderType.Done)),
     contextOptions: ["select"],
@@ -66,7 +65,7 @@ export const fakeFormFillingList = [
   },
   {
     title: "ONLYOFFICE Sample PDF form",
-    updated: moment().format(),
+    updated: formatDate(now(), "yyyy-MM-dd'T'HH:mm:ssZZZ"),
     icon: PDFIcon,
     isFolder: false,
     isPDF: true,

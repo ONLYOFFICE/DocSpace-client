@@ -29,6 +29,7 @@ import { observer, inject } from "mobx-react";
 
 import { CampaignsBanner } from "@docspace/shared/components/campaigns-banner";
 import { ADS_TIMEOUT } from "SRC_DIR/helpers/filesConstants";
+import { isDesktop } from "@docspace/shared/utils";
 
 const Banner = ({
   setSubmitToGalleryDialogVisible,
@@ -39,6 +40,7 @@ const Banner = ({
   campaignTranslate,
   campaignConfig,
   currentCampaign,
+  hasCustomSlot,
 }) => {
   const [isVisible, setIsVisible] = React.useState(true);
   const updateBanner = async () => {
@@ -77,7 +79,9 @@ const Banner = ({
   if (!isVisible) return null;
 
   return (
-    <div style={{ marginBottom: "16px" }}>
+    <div
+      style={{ marginBottom: hasCustomSlot && !isDesktop() ? "12px" : "16px" }}
+    >
       {campaignBackground &&
       campaignTranslate &&
       campaignConfig &&

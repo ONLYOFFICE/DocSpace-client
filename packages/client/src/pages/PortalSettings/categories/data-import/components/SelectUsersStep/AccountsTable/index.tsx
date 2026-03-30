@@ -27,7 +27,7 @@
 import { inject, observer } from "mobx-react";
 import { TFunction } from "i18next";
 
-import { Consumer } from "@docspace/shared/utils/context";
+import { Consumer } from "@docspace/ui-kit/utils/context";
 
 import TableView from "./TableView";
 import RowView from "./RowView";

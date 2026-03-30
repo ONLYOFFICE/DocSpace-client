@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { mobile } from "@docspace/shared/utils";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 
 export const StyledModalDialog = styled(ModalDialog)`
   #modal-dialog {
@@ -71,7 +71,7 @@ export const StyledBodyContent = styled.div`
 
   .change-domain_link,
   .change-profile_link {
-    color: ${(props) => props.theme.currentColorScheme?.main.accent};
+    color: ${(props) => props.theme.currentColorScheme?.main?.accent};
   }
 
   @media ${mobile} {

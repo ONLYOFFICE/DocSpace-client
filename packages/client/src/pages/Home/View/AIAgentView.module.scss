@@ -1,0 +1,21 @@
+@use "@docspace/ui-kit/styles/mixins";
+
+.aiAgentChat {
+  --chat-header-top: calc(var(--section-header-height) + var(--section-submenu-height));
+
+  @include mixins.tablet-and-below {
+    --chat-header-top: calc(var(--section-header-height-tablet) + var(--section-submenu-height));
+  }
+
+  @include mixins.mobile {
+    --chat-header-top: calc(var(--section-header-height-mobile) + var(--section-submenu-height));
+  }
+
+  :global(.chat-message-body) {
+    margin: 0 -20px;
+
+    @include mixins.tablet-and-below {
+      margin: 0 -16px;
+    }
+  }
+}

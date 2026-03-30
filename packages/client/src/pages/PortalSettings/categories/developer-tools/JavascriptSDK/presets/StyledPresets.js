@@ -30,7 +30,7 @@ import {
   mobile,
   tablet,
   desktop,
-} from "@docspace/shared/utils/device";
+} from "@docspace/ui-kit/utils/device";
 import { injectDefaultTheme } from "@docspace/shared/utils";
 import { showPreviewThreshold } from "../constants";
 
@@ -51,10 +51,12 @@ export const SDKContainer = styled.div`
     }
   }
 
-  ${isMobile() &&
-  css`
+  ${
+    isMobile() &&
+    css`
     width: 100%;
-  `}
+  `
+  }
 
   .tabs-body {
     display: block;
@@ -83,10 +85,12 @@ export const Controls = styled.div`
     min-width: 0;
   }
 
-  ${isMobile() &&
-  css`
+  ${
+    isMobile() &&
+    css`
     min-width: 0;
-  `}
+  `
+  }
 
   .label {
     min-width: fit-content;
@@ -123,10 +127,12 @@ export const CategoryHeader = styled.div`
     margin-top: 24px;
   }
 
-  ${isMobile() &&
-  css`
+  ${
+    isMobile() &&
+    css`
     margin-top: 24px;
-  `}
+  `
+  }
 `;
 
 export const CategorySubHeader = styled.div`
@@ -141,12 +147,14 @@ export const CategorySubHeader = styled.div`
     }
   }
 
-  ${isMobile() &&
-  css`
+  ${
+    isMobile() &&
+    css`
     &:not(&.copy-window-code) {
       margin-bottom: 0;
     }
-  `}
+  `
+  }
 
   @media ${mobile} {
     &:first-of-type {
@@ -178,10 +186,12 @@ export const ControlsGroup = styled.div`
     gap: 4px;
   }
 
-  ${isMobile() &&
-  css`
+  ${
+    isMobile() &&
+    css`
     gap: 4px;
-  `}
+  `
+  }
 `;
 
 export const CheckboxGroup = styled.div`
@@ -249,10 +259,12 @@ export const Frame = styled.div.attrs(injectDefaultTheme)`
     }
   `}
 
-  ${isMobile() &&
-  css`
+  ${
+    isMobile() &&
+    css`
     margin-top: 4px;
-  `}
+  `
+  }
 
   .frame-container {
     height: 100% !important;
@@ -272,11 +284,13 @@ export const Container = styled.div`
     gap: 48px;
   }
 
-  ${isMobile() &&
-  css`
+  ${
+    isMobile() &&
+    css`
     flex-direction: column-reverse;
     gap: 48px;
-  `}
+  `
+  }
 `;
 
 export const RowContainer = styled.div`
@@ -307,10 +321,12 @@ export const ColumnContainer = styled.div`
     gap: 4px;
   }
 
-  ${isMobile() &&
-  css`
+  ${
+    isMobile() &&
+    css`
     gap: 4px;
-  `}
+  `
+  }
 `;
 
 export const Preview = styled.div`
@@ -326,11 +342,13 @@ export const Preview = styled.div`
     margin-top: 0;
     min-width: 0;
   }
-  ${isMobile() &&
-  css`
+  ${
+    isMobile() &&
+    css`
     margin-top: 0;
     min-width: 0;
-  `}
+  `
+  }
 `;
 
 export const GetCodeButtonWrapper = styled.div`
@@ -357,6 +375,14 @@ export const FilesSelectorInputWrapper = styled.div`
 export const SelectedItemsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
+`;
+
+export const PreviewColumn = styled.div`
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
 `;
 
 export const CodeWrapper = styled.div`

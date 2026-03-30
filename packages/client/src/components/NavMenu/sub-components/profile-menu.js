@@ -31,10 +31,10 @@ import PropTypes from "prop-types";
 import { inject, observer } from "mobx-react";
 import classNames from "classnames";
 
-import { Avatar } from "@docspace/shared/components/avatar";
-import { DropDown } from "@docspace/shared/components/drop-down";
+import { Avatar } from "@docspace/ui-kit/components/avatar";
+import { DropDown } from "@docspace/ui-kit/components/drop-down";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-import { Portal } from "@docspace/shared/components/portal";
+import { Portal } from "@docspace/ui-kit/components/portal";
 
 import styles from "../nav.module.scss";
 

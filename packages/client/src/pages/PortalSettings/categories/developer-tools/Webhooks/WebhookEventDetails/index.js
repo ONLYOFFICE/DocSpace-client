@@ -30,7 +30,7 @@ import styled from "styled-components";
 import { useParams } from "react-router";
 import { inject, observer } from "mobx-react";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import DetailsBar from "./sub-components/DetailsBar";
 import MessagesDetails from "./sub-components/MessagesDetails";

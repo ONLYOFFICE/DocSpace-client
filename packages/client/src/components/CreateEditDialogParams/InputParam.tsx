@@ -27,11 +27,11 @@
 import React from "react";
 import styled from "styled-components";
 
-import { FieldContainer } from "@docspace/shared/components/field-container";
-import { Label } from "@docspace/shared/components/label";
-import { InputType, TextInput } from "@docspace/shared/components/text-input";
-import { HelpButton } from "@docspace/shared/components/help-button";
-import { Text } from "@docspace/shared/components/text";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
+import { Label } from "@docspace/ui-kit/components/label";
+import { InputType, TextInput } from "@docspace/ui-kit/components/text-input";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import { StyledParam } from "./StyledParam";
 
@@ -52,98 +52,98 @@ const StyledInputParam = styled(StyledParam)`
 `;
 
 type InputParamProps = {
-  ref?: React.RefObject<HTMLInputElement | null>;
-  id: string;
-  title: string;
-  placeholder: string;
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
-  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
-  isDisabled?: boolean;
-  isValidTitle?: boolean;
-  isWrongTitle?: boolean;
-  errorMessage?: string;
-  isAutoFocussed?: boolean;
-  onKeyUp?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
-  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
-  name?: string;
-  tooltipLabel?: string;
-  dataTestId?: string;
+	ref?: React.RefObject<HTMLInputElement | null>;
+	id: string;
+	title: string;
+	placeholder: string;
+	value: string;
+	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
+	onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+	isDisabled?: boolean;
+	isValidTitle?: boolean;
+	isWrongTitle?: boolean;
+	errorMessage?: string;
+	isAutoFocussed?: boolean;
+	onKeyUp?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+	onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+	name?: string;
+	tooltipLabel?: string;
+	dataTestId?: string;
 };
 
 const InputParam = ({
-  ref,
-  id,
-  title,
-  placeholder,
-  value,
-  onChange,
-  onFocus,
-  onBlur,
-  isDisabled,
-  isValidTitle = true,
-  isWrongTitle,
-  errorMessage,
-  isAutoFocussed,
-  onKeyUp,
-  onKeyDown,
-  name,
-  tooltipLabel,
-  dataTestId,
+	ref,
+	id,
+	title,
+	placeholder,
+	value,
+	onChange,
+	onFocus,
+	onBlur,
+	isDisabled,
+	isValidTitle = true,
+	isWrongTitle,
+	errorMessage,
+	isAutoFocussed,
+	onKeyUp,
+	onKeyDown,
+	name,
+	tooltipLabel,
+	dataTestId,
 }: InputParamProps) => {
-  return (
-    <StyledInputParam>
-      <div className="input-label-wrapper">
-        <Label
-          title={title}
-          className="input-label"
-          display="display"
-          htmlFor={id}
-          text={title}
-        />
-        {tooltipLabel ? (
-          <HelpButton
-            place="right"
-            tooltipContent={
-              <Text fontSize="12px" fontWeight={400}>
-                {tooltipLabel}
-              </Text>
-            }
-          />
-        ) : null}
-      </div>
+	return (
+		<StyledInputParam>
+			<div className="input-label-wrapper">
+				<Label
+					title={title}
+					className="input-label"
+					display="display"
+					htmlFor={id}
+					text={title}
+				/>
+				{tooltipLabel ? (
+					<HelpButton
+						place="right"
+						tooltipContent={
+							<Text fontSize="12px" fontWeight={400}>
+								{tooltipLabel}
+							</Text>
+						}
+					/>
+				) : null}
+			</div>
 
-      <FieldContainer
-        isVertical
-        labelVisible={false}
-        hasError={!isValidTitle || isWrongTitle}
-        errorMessage={errorMessage}
-        errorMessageWidth="100%"
-      >
-        <TextInput
-          forwardedRef={ref}
-          id={id}
-          value={value}
-          onChange={onChange}
-          onFocus={onFocus}
-          onBlur={onBlur}
-          scale
-          placeholder={placeholder}
-          tabIndex={2}
-          isDisabled={isDisabled}
-          hasError={!isValidTitle}
-          isAutoFocussed={isAutoFocussed}
-          onKeyUp={onKeyUp}
-          onKeyDown={onKeyDown}
-          maxLength={170}
-          name={name}
-          type={InputType.text}
-          testId={dataTestId}
-        />
-      </FieldContainer>
-    </StyledInputParam>
-  );
+			<FieldContainer
+				isVertical
+				labelVisible={false}
+				hasError={!isValidTitle || isWrongTitle}
+				errorMessage={errorMessage}
+				errorMessageWidth="100%"
+			>
+				<TextInput
+					forwardedRef={ref}
+					id={id}
+					value={value}
+					onChange={onChange}
+					onFocus={onFocus}
+					onBlur={onBlur}
+					scale
+					placeholder={placeholder}
+					tabIndex={2}
+					isDisabled={isDisabled}
+					hasError={!isValidTitle}
+					isAutoFocussed={isAutoFocussed}
+					onKeyUp={onKeyUp}
+					onKeyDown={onKeyDown}
+					maxLength={170}
+					name={name}
+					type={InputType.text}
+					testId={dataTestId}
+				/>
+			</FieldContainer>
+		</StyledInputParam>
+	);
 };
 
 InputParam.displayName = "InputParam";

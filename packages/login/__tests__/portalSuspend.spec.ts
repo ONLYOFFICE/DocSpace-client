@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
+
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 import { expect, test } from "./fixtures/base";
 import {
@@ -53,7 +55,7 @@ const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
 test("portal suspend render", async ({ page, baseUrl }) => {
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "portal-suspend",
     "portal-suspend-render.png",
@@ -68,7 +70,7 @@ test("portal suspend deactivate", async ({ page, baseUrl }) => {
 
   await deactivateButton.waitFor({ state: "detached" });
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "portal-suspend",
     "portal-suspend-deactivate.png",
@@ -94,7 +96,7 @@ test("portal suspend cancel", async ({ page, baseUrl }) => {
 
   await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "portal-suspend",
     "portal-suspend-cancel.png",
@@ -116,7 +118,7 @@ test("render after deactivate portal", async ({
     waitUntil: "load",
   });
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "portal-suspend",
     "render-after-deactivate-portal.png",

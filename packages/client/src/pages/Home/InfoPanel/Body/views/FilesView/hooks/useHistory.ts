@@ -25,10 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import moment from "moment";
 import axios from "axios";
 
 import api from "@docspace/shared/api";
+import { formatDate, parseToDateTime } from "@docspace/ui-kit/utils/date";
 import { RoomsType } from "@docspace/shared/enums";
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
 import {
@@ -50,7 +50,11 @@ const PAGE_COUNT = 100;
 const addLinksToHistory = (fetchedHistory: TFeed, links: RoomMember[]) => {
   const historyWithLinks: TFeedAction<TFeedData | RoomMember>[] =
     fetchedHistory.items.map((feed) => {
-      const { actionType, targetType } = getFeedInfo(feed);
+      const feedInfo = getFeedInfo(feed);
+
+      if (!feedInfo) return feed;
+
+      const { actionType, targetType } = feedInfo;
 
       if (
         targetType !== "roomExternalLink" ||
@@ -73,7 +77,8 @@ const parseHistory = (feedActions: TFeedAction<TFeedData | RoomMember>[]) => {
   const parsedFeeds: TSelectionHistory[] = [];
 
   feedActions.forEach((feed) => {
-    const feedDay = moment(feed.date).format("YYYY-MM-DD");
+    const dt = parseToDateTime(feed.date);
+    const feedDay = dt ? formatDate(dt, "yyyy-MM-dd") : "";
 
     if (parsedFeeds.length && parsedFeeds.at(-1)?.day === feedDay) {
       parsedFeeds.at(-1)?.feeds.push({ ...feed });

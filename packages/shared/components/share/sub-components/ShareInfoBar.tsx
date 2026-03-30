@@ -32,7 +32,7 @@ import FolderIcon from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url"
 
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
 
-import PublicRoomBar from "../../public-room-bar";
+import PublicRoomBar from "@docspace/ui-kit/components/public-room-bar";
 
 import type { TShareBarProps } from "../Share.types";
 import styles from "../Share.module.scss";

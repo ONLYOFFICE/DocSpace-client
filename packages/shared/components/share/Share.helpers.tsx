@@ -23,7 +23,6 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import moment from "moment";
 import { match, P } from "ts-pattern";
 import { Trans } from "react-i18next";
 import type { TFunction } from "i18next";
@@ -40,7 +39,7 @@ import UniverseIcon from "PUBLIC_DIR/images/universe.react.svg?url";
 // import EyeOffReactSvgUrl from "PUBLIC_DIR/images/eye.off.react.svg?url";
 // import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 
-import { globalColors } from "../../themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme";
 import {
   EmployeeActivationStatus,
   FileType,
@@ -55,6 +54,15 @@ import {
   isFolderOrRoom,
   isRoom,
 } from "../../utils/typeGuards";
+import {
+  parseToDateTime,
+  dateDiff,
+  now,
+  humanizeDuration,
+} from "@docspace/ui-kit/utils/date";
+
+import { getCookie } from "@docspace/ui-kit/utils/cookie";
+import { LANGUAGE } from "../../constants";
 
 import type { RoomMember, TRoom } from "../../api/rooms/types";
 import type {
@@ -65,8 +73,8 @@ import type {
 } from "../../types";
 import type { TFile, TFileLink, TFolder } from "../../api/files/types";
 
-import { Link } from "../link";
-import { toastr } from "../toast";
+import { Link } from "@docspace/ui-kit/components/link";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import {
   TCopyShareLinkOptions,
   TShare,
@@ -255,24 +263,46 @@ export const getExpiredOptions = (
 export const getDate = (expirationDate: string) => {
   if (!expirationDate) return "";
 
-  const currentDare = moment(new Date());
-  const expDate = moment(new Date(expirationDate));
-  const calculatedDate = expDate.diff(currentDare, "days");
+  const currentDate = now();
+  const expDate = parseToDateTime(expirationDate);
 
-  if (calculatedDate < 1) {
-    return moment
-      .duration(expDate.diff(currentDare, "hours") + 1, "hours")
-      .humanize();
+  if (!expDate) return "";
+
+  const calculatedDays = Math.floor(dateDiff(expDate, currentDate, "days"));
+  const calculatedHours = Math.floor(dateDiff(expDate, currentDate, "hours"));
+  const calculatedMinutes = Math.floor(
+    dateDiff(expDate, currentDate, "minutes"),
+  );
+
+  const locale = getCookie(LANGUAGE) ?? "en";
+
+  if (calculatedHours < 1) {
+    return humanizeDuration(calculatedMinutes + 1, "minutes", {
+      locale,
+      addSuffix: true,
+    });
   }
 
-  return moment.duration(calculatedDate + 1, "days").humanize();
+  if (calculatedDays < 1) {
+    return humanizeDuration(calculatedHours + 1, "hours", {
+      addSuffix: true,
+      locale,
+    });
+  }
+
+  return humanizeDuration(calculatedDays + 1, "days", {
+    addSuffix: true,
+    locale,
+  });
 };
 
 export const isExpired = (expirationDate: string | Date) => {
-  const currentDare = moment(new Date());
-  const expDate = moment(new Date(expirationDate));
+  const currentDate = now();
+  const expDate = parseToDateTime(expirationDate);
 
-  return currentDare.unix() - expDate.unix() > 0;
+  if (!expDate) return true;
+
+  return currentDate.toMillis() - expDate.toMillis() > 0;
 };
 
 export const getPasswordDescription = (t: TFunction, link: TFileLink) => {

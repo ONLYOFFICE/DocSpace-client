@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@use "@docspace/shared/styles/mixins";
+@use "@docspace/ui-kit/styles/mixins";
 
 .wrapper {
   display: flex;
@@ -55,10 +55,10 @@
 
 .rowContainer {
   @include mixins.desktop {
-    max-width: 620px;
+    max-width: 620px !important;
 
     :global(.row_content) {
-      max-width: 508px;
+      max-width: 508px !important;
     }
   }
 

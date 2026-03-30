@@ -30,13 +30,11 @@ import { render } from "@testing-library/react";
 
 import { Bookmarks } from ".";
 
-// Mock the CustomScrollbarsVirtualList component
-vi.mock("../../../../../scrollbar", () => ({
-  CustomScrollbarsVirtualList: ({
-    children,
-  }: {
-    children: React.ReactNode;
-  }) => <div data-testid="custom-scrollbar">{children}</div>,
+// Mock the Scrollbar component
+vi.mock("@docspace/ui-kit/components/scrollbar", () => ({
+  Scrollbar: ({ children }: { children: React.ReactNode }) => (
+    <div data-testid="scrollbar">{children}</div>
+  ),
 }));
 
 describe("Bookmarks component", () => {
@@ -72,12 +70,12 @@ describe("Bookmarks component", () => {
     expect(list.children).toHaveLength(0);
   });
 
-  it("renders inside CustomScrollbarsVirtualList", () => {
+  it("renders inside Scrollbar", () => {
     const { getByTestId } = render(
       <Bookmarks bookmarks={mockBookmarks} navigate={mockNavigate} />,
     );
 
-    expect(getByTestId("custom-scrollbar")).toBeInTheDocument();
+    expect(getByTestId("scrollbar")).toBeInTheDocument();
   });
 
   it("renders bookmark items with correct data-testid attributes", () => {

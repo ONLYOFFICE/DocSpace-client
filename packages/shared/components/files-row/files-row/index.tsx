@@ -27,7 +27,7 @@
 import React, { type PropsWithChildren } from "react";
 import classNames from "classnames";
 
-import { Row } from "../../rows";
+import { Row } from "@docspace/ui-kit/components/rows";
 
 import { FilesRowProps } from "./FilesRow.types";
 import styles from "./FilesRow.module.scss";

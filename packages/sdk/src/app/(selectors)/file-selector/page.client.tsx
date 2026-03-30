@@ -29,8 +29,8 @@
 import React, { useCallback, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 
-import FilesSelector from "@docspace/shared/selectors/Files";
-import { frameCallEvent } from "@docspace/shared/utils/common";
+import FilesSelector from "@docspace/ui-kit/selectors/Files";
+import { frameCallEvent, getFrameId } from "@docspace/shared/utils/common";
 import {
   DeviceType,
   FolderType,
@@ -39,9 +39,9 @@ import {
 } from "@docspace/shared/enums";
 import { getFileLink } from "@docspace/shared/api/files";
 import type { TRoom, TRoomSecurity } from "@docspace/shared/api/rooms/types";
-import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
+import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
 import type { Nullable } from "@docspace/shared/types";
-import SocketHelper from "@docspace/shared/utils/socket";
+import SocketHelper from "@docspace/ui-kit/utils/socket";
 import type {
   TFile,
   TFilesSettings,
@@ -52,7 +52,10 @@ import type {
 import type {
   TFilesSelectorInit,
   TSelectedFileInfo,
-} from "@docspace/shared/selectors/Files/FilesSelector.types";
+  FilesSelectorProps,
+  FolderDtoInteger,
+  SdkFolderType,
+} from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
 import { getSelectFormatTranslation } from "@docspace/shared/utils";
 import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
 
@@ -114,6 +117,10 @@ export default function FilesSelectorClient({
   const isInit = useRef(false);
 
   useDocumentTitle("FileSelector");
+
+  useEffect(() => {
+    frameCallEvent({ event: "onAppReady", data: { frameId: getFrameId() } });
+  }, []);
 
   const convertToEditorType = (type: FileType) => {
     switch (type) {
@@ -227,7 +234,7 @@ export default function FilesSelectorClient({
   const initProps: TFilesSelectorInit = {
     initBreadCrumbs: breadCrumbs,
     initHasNextPage: hasNextPage,
-    initItems: items,
+    initItems: items as unknown as NonNullable<TFilesSelectorInit["initItems"]>,
     initSearchValue: searchValue,
     initSelectedItemId: selectedItemId,
     initSelectedItemType: selectedItemType,
@@ -276,7 +283,9 @@ export default function FilesSelectorClient({
         : getSelectFormatTranslation(t, filter, logoText),
     disabledItems: [],
     embedded: true,
-    filesSettings,
+    filesSettings: filesSettings as unknown as NonNullable<
+      FilesSelectorProps["filesSettings"]
+    >,
     footerCheckboxLabel: "",
     footerInputHeader: "",
     getFilesArchiveError,
@@ -286,9 +295,9 @@ export default function FilesSelectorClient({
     isUserOnly: selectorType === "userFolderOnly",
     openRoot: selectorOpenRoot,
     roomsFolderId,
-    rootFolderType,
+    rootFolderType: rootFolderType as SdkFolderType,
     submitButtonLabel: acceptLabel || t("SelectAction"),
-    treeFolders: foldersTree,
+    treeFolders: foldersTree as unknown as FolderDtoInteger[],
     withBreadCrumbs: showBreadCrumbs as boolean,
     withCancelButton: cancel as boolean,
     withCreate: false,
@@ -309,9 +318,9 @@ export default function FilesSelectorClient({
   return (
     <FilesSelector
       {...newProps}
-      getIsDisabled={getIsDisabled}
+      getIsDisabled={getIsDisabled as FilesSelectorProps["getIsDisabled"]}
       onCancel={onCancel}
-      onSubmit={onSubmit}
+      onSubmit={onSubmit as FilesSelectorProps["onSubmit"]}
     />
   );
 }

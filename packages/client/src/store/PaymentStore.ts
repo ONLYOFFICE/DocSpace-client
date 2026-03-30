@@ -26,7 +26,6 @@
 
 import axios from "axios";
 import { makeAutoObservable } from "mobx";
-import moment from "moment";
 
 import {
   getPaymentSettings,
@@ -45,7 +44,7 @@ import {
   getLicenseQuota,
 } from "@docspace/shared/api/portal";
 import api from "@docspace/shared/api";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { authStore, settingsStore } from "@docspace/shared/store";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { UserStore } from "@docspace/shared/store/UserStore";
@@ -54,7 +53,7 @@ import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { PaymentQuotasStore } from "@docspace/shared/store/PaymentQuotasStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { TTranslation } from "@docspace/shared/types";
-import { TData } from "@docspace/shared/components/toast/Toast.type";
+import { type TData } from "@docspace/ui-kit/components/toast";
 import {
   TBalance,
   TAutoTopUpSettings,
@@ -66,11 +65,19 @@ import {
 } from "@docspace/shared/api/portal/types";
 import { formatCurrencyValue } from "@docspace/shared/utils/common";
 import {
+  AI_ENUM,
   AI_TOOLS,
   BACKUP_SERVICE,
   STORAGE_TARIFF_DEACTIVATED,
+  STORAGE_DEACTIVATION_VISITED,
   WEB_SEARCH,
 } from "@docspace/shared/constants";
+import type { DateTime } from "luxon";
+import {
+  now,
+  subtractFromDate,
+  formatDate as formatDateUtil,
+} from "@docspace/ui-kit/utils/date";
 
 // Constants for feature identifiers
 export const TOTAL_SIZE = "total_size";
@@ -80,6 +87,7 @@ type TServiceFeatureWithPrice = TNumericPaymentFeature & {
     value: number;
     currencySymbol?: string;
   };
+  serviceName?: string;
 };
 
 class PaymentStore {
@@ -134,6 +142,8 @@ class PaymentStore {
 
   isInitWalletPage = false;
 
+  isPaymentMethodInit = false;
+
   balance: TBalance = 0;
 
   previousBalance: TBalance = 0;
@@ -166,6 +176,8 @@ class PaymentStore {
   servicesQuotas: TPaymentQuota | null = null; // temporary solution, should be in the service store
 
   isShowStorageTariffDeactivatedModal = false;
+
+  isStorageDeactivationVisited = false;
 
   reccomendedAmount = "";
 
@@ -355,6 +367,10 @@ class PaymentStore {
     this.isInitWalletPage = value;
   };
 
+  setPaymentMethodInit = (value: boolean) => {
+    this.isPaymentMethodInit = value;
+  };
+
   get isAutoPaymentExist() {
     return this.autoPayments?.enabled;
   }
@@ -381,6 +397,7 @@ class PaymentStore {
     return (
       this.previousBalance === 0 &&
       typeof this.balance !== "number" &&
+      !!this.balance &&
       this.balance.subAccounts.length > 0
     );
   }
@@ -421,6 +438,12 @@ class PaymentStore {
     );
   }
 
+  get storageServiceName() {
+    return (
+      this.servicesQuotasFeatures.get(TOTAL_SIZE) as TServiceFeatureWithPrice
+    )?.serviceName;
+  }
+
   get backupServicePrice() {
     return (
       (
@@ -428,13 +451,6 @@ class PaymentStore {
           BACKUP_SERVICE,
         ) as TServiceFeatureWithPrice
       )?.price?.value || 0
-    );
-  }
-
-  get aiToolsPrice() {
-    return (
-      (this.servicesQuotasFeatures.get(AI_TOOLS) as TServiceFeatureWithPrice)
-        ?.price?.value || 0
     );
   }
 
@@ -447,6 +463,16 @@ class PaymentStore {
 
   get isBackupServiceOn() {
     return this.servicesQuotasFeatures.get(BACKUP_SERVICE)?.value;
+  }
+
+  get isAiToolsServiceOn() {
+    return this.servicesQuotasFeatures.get(AI_ENUM)?.value;
+  }
+
+  get availableBackupsCount() {
+    if (this.backupServicePrice === 0) return 0;
+    if (this.walletBalance === 0) return 0;
+    return Math.floor(this.walletBalance / this.backupServicePrice);
   }
 
   formatWalletCurrency = (
@@ -499,37 +525,47 @@ class PaymentStore {
     }
   };
 
-  getEndTransactionDate = (format = "YYYY-MM-DDTHH:mm:ss") => {
-    return moment().format(format);
+  getEndTransactionDate = (format = "yyyy-MM-dd'T'HH:mm:ss") => {
+    return formatDateUtil(now(), format);
   };
 
-  getStartTransactionDate = (format = "YYYY-MM-DDTHH:mm:ss") => {
-    return moment().subtract(4, "weeks").format(format);
+  getStartTransactionDate = (format = "yyyy-MM-dd'T'HH:mm:ss") => {
+    const date = subtractFromDate(now(), 4, "weeks");
+    return date ? formatDateUtil(date, format) : "";
   };
 
-  formatDate = (date: moment.Moment) => {
-    return date.clone().locale("en").format("YYYY-MM-DDTHH:mm:ss");
+  formatDate = (date: DateTime, timeType?: "start" | "end") => {
+    if (!timeType) {
+      return formatDateUtil(date, "yyyy-MM-dd'T'HH:mm:ss", { locale: "en" });
+    }
+
+    const dateStr = formatDateUtil(date, "yyyy-MM-dd", { locale: "en" });
+    const timeTypeValue = timeType === "start" ? "00:00:00" : "23:59:59";
+
+    return `${dateStr}T${timeTypeValue}`;
   };
 
   fetchTransactionHistory = async (
-    startDate = moment().subtract(4, "weeks"),
-    endDate = moment(),
+    startDate: DateTime | null = subtractFromDate(now(), 4, "weeks"),
+    endDate: DateTime | null = now(),
     credit = true,
     debit = true,
     participantName?: string,
+    serviceName?: string,
   ) => {
     const abortController = new AbortController();
     this.settingsStore?.addAbortControllers(abortController);
 
     try {
       const res = await getTransactionHistory(
-        this.formatDate(startDate),
-        this.formatDate(endDate),
+        startDate ? this.formatDate(startDate, "start") : "",
+        endDate ? this.formatDate(endDate, "end") : "",
         credit,
         debit,
         participantName,
         0,
         25,
+        serviceName,
         abortController.signal,
       );
 
@@ -621,6 +657,7 @@ class PaymentStore {
       return {
         ...feature,
         price: service.price,
+        serviceName: service.serviceName,
       };
     });
 
@@ -652,6 +689,12 @@ class PaymentStore {
 
   setIsShowTariffDeactivatedModal = (value: boolean) => {
     this.isShowStorageTariffDeactivatedModal = value;
+  };
+
+  setStorageDeactivationVisited = (value: boolean) => {
+    this.isStorageDeactivationVisited = value;
+
+    localStorage.setItem(STORAGE_DEACTIVATION_VISITED, "true");
   };
 
   setPaymentAccount = async () => {
@@ -699,9 +742,61 @@ class PaymentStore {
     const featureWithPrice = {
       ...feature,
       price: service.price,
+      serviceName: service.serviceName,
     } as TServiceFeatureWithPrice;
 
-    this.servicesQuotasFeatures.set(feature.id, featureWithPrice);
+    const existingEntry = Array.from(
+      this.servicesQuotasFeatures.entries(),
+    ).find(
+      ([, value]) =>
+        (value as TServiceFeatureWithPrice).serviceName === service.serviceName,
+    );
+
+    const key = existingEntry
+      ? existingEntry[0]
+      : service.features[0].id.toString();
+
+    this.servicesQuotasFeatures.set(key, featureWithPrice);
+
+    return service.serviceName;
+  };
+
+  paymentMethodInit = async (t: TTranslation) => {
+    const isRefresh = window.location.href.includes("complete=true");
+    try {
+      const requests = [];
+
+      this.setPaymentMethodInit(false);
+
+      await this.initWalletPayerAndBalance(isRefresh);
+
+      if (this.isAlreadyPaid) {
+        if (this.isStripePortalAvailable) {
+          requests.push(this.setPaymentAccount());
+
+          if (
+            this.isPayer &&
+            this.currentTariffStatusStore?.walletCustomerStatusNotActive
+          ) {
+            requests.push(this.fetchCardLinked());
+          }
+        }
+      } else {
+        requests.push(this.fetchCardLinked());
+      }
+
+      if (this.isShowStorageTariffDeactivated() && this.isPayer) {
+        this.setIsShowTariffDeactivatedModal(true);
+        requests.push(this.handleServicesQuotas());
+      }
+
+      await Promise.all(requests);
+
+      this.setPaymentMethodInit(true);
+    } catch (error) {
+      toastr.error(t("Common:UnexpectedError"));
+      console.error(error);
+    }
   };
 
   walletInit = async (t: TTranslation) => {
@@ -1120,3 +1215,4 @@ class PaymentStore {
 }
 
 export default PaymentStore;
+

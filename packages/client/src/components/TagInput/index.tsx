@@ -31,6 +31,7 @@ import TagList from "./TagList";
 
 import InputParam from "SRC_DIR/components/CreateEditDialogParams/InputParam";
 import TagHandler from "SRC_DIR/helpers/TagHandler";
+import { removeEmojiCharacters } from "SRC_DIR/helpers/utils";
 
 import TagDropdown from "./TagDropdown";
 import styles from "./TagInput.module.scss";
@@ -76,7 +77,7 @@ const TagInput = ({
   };
 
   const onTagInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const text = e.target.value;
+    const text = removeEmojiCharacters(e.target.value);
 
     if (text.trim().length > 0 && !isDropdownOpen) {
       openDropdown();

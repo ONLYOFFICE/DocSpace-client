@@ -36,24 +36,24 @@ import DownloadIconUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
 import LinkIconUrl from "PUBLIC_DIR/images/tablet-link.react.svg?url";
 import MailIcon from "PUBLIC_DIR/images/icons/12/mail.svg";
 
-import { toastr } from "@docspace/shared/components/toast";
-import { Text } from "@docspace/shared/components/text";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { Text } from "@docspace/ui-kit/components/text";
 import { getBgPattern, getLogoUrl } from "@docspace/shared/utils/common";
-import { useTheme } from "@docspace/shared/hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { classNames, mobile, mobileMore } from "@docspace/shared/utils";
-import { Heading, HeadingLevel } from "@docspace/shared/components/heading";
-import { IconButton } from "@docspace/shared/components/icon-button";
+import { Heading, HeadingLevel } from "@docspace/ui-kit/components/heading";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { copyShareLink } from "@docspace/shared/utils/copy";
-import { Scrollbar } from "@docspace/shared/components/scrollbar";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 
 import {
   Avatar,
   AvatarRole,
   AvatarSize,
-} from "@docspace/shared/components/avatar";
+} from "@docspace/ui-kit/components/avatar";
 
 import useUpdateSearchParamId from "@/hooks/useUpdateSearchParamId";
 
@@ -130,7 +130,11 @@ export const CompletedForm = ({
   } as React.CSSProperties;
 
   return (
-    <section className={styles.container} style={bgBlockStyle} data-testid="completed_form_container">
+    <section
+      className={styles.container}
+      style={bgBlockStyle}
+      data-testid="completed_form_container"
+    >
       <Scrollbar fixedSize>
         <div className={styles.completedFormLayout}>
           <picture className="completed-form__logo">

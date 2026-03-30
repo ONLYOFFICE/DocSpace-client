@@ -24,17 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@use "@docspace/shared/styles/mixins";
-@use "@docspace/shared/styles/variables/colors";
+@use "@docspace/ui-kit/styles/mixins";
 
 .iconWrapper {
-  position: relative;
-
   :global(.react-svg-icon) {
     @include mixins.no-user-select;
   }
 
   &.isRoom {
+    position: relative;
     border-radius: 6px;
 
     &::before {
@@ -65,31 +63,13 @@
 }
 
 .encryptedFileIcon {
-  height: 14px;
-  width: 12px;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-size: 16px 16px;
+  background-color: transparent;
+  height: 16px;
+  width: 16px;
   position: absolute;
-  bottom: 0;
-  inset-inline-end: 0;
-
-  :global(.security-shield) {
-    fill: colors.$light-status-positive;
-    stroke: white;
-    stroke-width: 1px;
-  }
-
-  :global(.security-check) {
-    fill: white;
-  }
-}
-
-:global(.theme-dark) {
-  .encryptedFileIcon {
-    :global(.security-shield) {
-      stroke: black;
-    }
-
-    :global(.security-check) {
-      fill: black;
-    }
-  }
+  margin-top: 14px;
+  margin-inline-start: 12px;
 }

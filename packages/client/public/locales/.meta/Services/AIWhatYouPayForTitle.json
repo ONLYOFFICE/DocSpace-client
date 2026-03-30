@@ -1,0 +1,34 @@
+{
+  "key_path": "AIWhatYouPayForTitle",
+  "content": "What you pay for",
+  "content_en_sha1_hash": "e4313617a5d4166271df301f77a962eb370517d7",
+  "created_at": "2026-03-20T09:07:40.702Z",
+  "updated_at": "2026-03-20T10:16:08.999Z",
+  "comment": {
+    "text": "This text labels a section explaining what the user is paying for, specifically related to AI services. It appears in both the \"Get Started\" and \"Pricing & Billing\" sections of the AI service settings, likely as a heading for a list of features or services included in the payment. Translators should ensure the meaning accurately conveys what the user is receiving for their payment.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T10:16:08.999Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/panels/ai-service/GetStartedBody.tsx",
+      "line_number": 232,
+      "context": "</div>\n \n <div className={styles.stepConnectorDashed}>\n <div className={styles.payForSection}>\n <Text fontSize=\"12px\" fontWeight={700}>\n {t(\"AIWhatYouPayForTitle\")}\n </Text>\n \n <div className={styles.payForList}>\n <div className={styles.payForItem}>\n <div className={styles.featureTileIcon}>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/panels/ai-service/PricingBillingBody.tsx",
+      "line_number": 69,
+      "context": "<ModalDialog.Body>\n <div className={styles.pricingBody}>\n <Text fontSize=\"12px\">{t(\"AIPricingIntro\")}</Text>\n \n <Text fontSize=\"16px\" fontWeight=\"700\">\n {t(\"AIWhatYouPayForTitle\")}\n </Text>\n \n <div className={styles.pricingSection}>\n <div className={styles.pricingSectionHeader}>\n <Text fontSize=\"14px\" fontWeight=\"700\">",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

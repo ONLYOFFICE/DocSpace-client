@@ -32,7 +32,7 @@ import {
   Avatar,
   AvatarRole,
   AvatarSize,
-} from "@docspace/shared/components/avatar";
+} from "@docspace/ui-kit/components/avatar";
 
 import { StyledText, StyledAuthorCell } from "./CellStyles";
 import { TFile, TFolder } from "@docspace/shared/api/files/types";

@@ -26,7 +26,7 @@
 
 import styled from "styled-components";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { LayoutProps } from "../types";
 
 const DescriptionWrapper = styled.div`

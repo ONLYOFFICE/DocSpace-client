@@ -34,17 +34,22 @@ import { getTemplateAvailable } from "@docspace/shared/api/rooms";
 
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { TUser } from "@docspace/shared/api/people/types";
-import { TLogo, TRoom } from "@docspace/shared/api/rooms/types";
+import { TRoom } from "@docspace/shared/api/rooms/types";
+import type { TLogo } from "@docspace/ui-kit/types";
 import { Nullable, TCreatedBy } from "@docspace/shared/types";
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
 import { isFolder } from "@docspace/shared/utils/typeGuards";
-import { getCookie, getCorrectDate } from "@docspace/shared/utils";
+import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
+import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import { getUserType } from "@docspace/shared/utils/common";
 import { LANGUAGE, SHARED_WITH_ME_PATH } from "@docspace/shared/constants";
 
 import config from "PACKAGE_FILE";
 
-import { showForcedInfoPanelLoader } from "SRC_DIR/helpers/info-panel";
+import {
+  showForcedInfoPanelLoader,
+  InfoPanelView,
+} from "SRC_DIR/helpers/info-panel";
 
 import { getContactsView } from "../helpers/contacts";
 import SelectedFolderStore from "./SelectedFolderStore";
@@ -52,13 +57,6 @@ import FilesSettingsStore from "./FilesSettingsStore";
 import FilesStore from "./FilesStore";
 import PeopleStore from "./contacts/PeopleStore";
 import TreeFoldersStore from "./TreeFoldersStore";
-
-export const enum InfoPanelView {
-  infoMembers = "info_members",
-  infoHistory = "info_history",
-  infoDetails = "info_details",
-  infoShare = "info_share",
-}
 
 export type InfoPanelViewType = InfoPanelView | `info_plugin-${string}`;
 

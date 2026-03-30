@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { RecaptchaType, TenantStatus, EncryptionStatus } from "../../enums";
-import { TColorScheme } from "../../themes";
+import { TColorScheme } from "@docspace/ui-kit/providers/theme";
 
 export type TTfaType = "sms" | "app" | "none";
 
@@ -75,8 +75,8 @@ export type TDomainValidator = {
 };
 
 export type TPasswordHash = {
-  size: boolean;
-  iterations: boolean;
+  size: number;
+  iterations: number;
   salt: string;
 };
 
@@ -130,7 +130,9 @@ export type TSettings = {
   logoText: string;
   displayAbout: boolean;
   externalResources: TExternalResources;
+  externalDbEnabled: boolean;
   licenseAgreementsUrl?: string;
+	aiEnabled?: boolean;
 };
 
 export type TCustomSchema = {
@@ -234,6 +236,7 @@ export type THelpCenterEntries = {
   mcpserverssettings: string;
   websearchsettings: string;
   knowledgesettings: string;
+  aiservicesmanagement: string;
   documentService: string;
 };
 
@@ -535,4 +538,8 @@ export type TTelegramCheck = {
 export type TNotificationChannel = {
   name: string;
   isEnabled: boolean;
+};
+
+export type TAiServicesSettings = {
+	enabled: boolean;
 };

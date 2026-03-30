@@ -29,10 +29,10 @@ import { useTranslation } from "react-i18next";
 
 import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/person+.react.svg?url";
 
-import { Text } from "@docspace/shared/components/text";
-import { RoomIcon } from "@docspace/shared/components/room-icon";
+import { Text } from "@docspace/ui-kit/components/text";
+import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 import { useItemIcon } from "@docspace/shared/hooks/useItemIcon";
-import { IconButton } from "@docspace/shared/components/icon-button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 
 import styles from "./ShareDialog.module.scss";
 import type { ShareDialogHeaderProps } from "./ShareDialog.types";

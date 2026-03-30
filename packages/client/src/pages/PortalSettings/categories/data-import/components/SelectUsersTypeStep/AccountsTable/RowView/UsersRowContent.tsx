@@ -27,13 +27,13 @@
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
-import { Text } from "@docspace/shared/components/text";
-import { RowContent } from "@docspace/shared/components/rows";
+import { Text } from "@docspace/ui-kit/components/text";
+import { RowContent } from "@docspace/ui-kit/components/rows";
 import {
   ComboBox,
   ComboBoxSize,
   TOption,
-} from "@docspace/shared/components/combobox";
+} from "@docspace/ui-kit/components/combobox";
 import {
   TypeSelectRowContentProps,
   InjectedTypeSelectRowContentProps,

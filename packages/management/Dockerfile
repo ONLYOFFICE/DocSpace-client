@@ -6,7 +6,7 @@ ENV NEXT_TELEMETRY_DISABLED=1
 
 RUN apt-get -y update && apt-get install -yq
 
-RUN npm install -g pnpm@10.28.0
+RUN npm install -g pnpm@10.28.2
 
 WORKDIR /app
 
@@ -18,14 +18,13 @@ COPY common/ ./common/
 COPY packages/management/ ./packages/management/
 COPY packages/shared/ ./packages/shared/
 COPY public/ ./public/
+COPY libs/ui-kit/ ./libs/ui-kit/
 
 RUN pnpm install --frozen-lockfile
 
 RUN npm uninstall -g playwright playwright-core @playwright/test
 
 RUN cd /app/packages/management && pnpm exec playwright install chromium --with-deps
-
-RUN pnpm run before-build
 
 RUN pnpm --filter @docspace/management run build:translations
 

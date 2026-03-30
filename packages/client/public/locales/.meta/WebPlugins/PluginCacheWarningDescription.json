@@ -1,0 +1,28 @@
+{
+  "key_path": "PluginCacheWarningDescription",
+  "content": "Plugins are cached based on their version number. To ensure your changes are applied, please increment the version number in your <1>package.json</1> file before uploading. The system will not update a plugin if the version remains the same",
+  "content_en_sha1_hash": "944c88e6d8553b6978e3434b2c1d5f8841a6f519",
+  "created_at": "2026-03-20T09:07:38.976Z",
+  "updated_at": "2026-03-20T10:30:46.646Z",
+  "comment": {
+    "text": "This translation key provides a warning message displayed in a dialog to inform users that plugin changes require an incremented version number in the package.json file to be applied. It explains why the plugin might not be updating and guides users on how to resolve this. This message helps users understand plugin update behavior.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T10:30:46.646Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/Plugins/sub-components/PluginCacheWarningDialog.tsx",
+      "line_number": 59,
+      "context": "<ModalDialog.Header>{t(\"Common:Warning\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>\n <Trans\n t={t}\n i18nKey=\"PluginCacheWarningDescription\"\n ns=\"WebPlugins\"\n components={{\n 1: <Text as=\"span\" fontWeight={600} />,\n }}\n />",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

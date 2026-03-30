@@ -2,6 +2,17 @@
 
 # Translation App Runner for Mac/Linux
 # This script runs both the backend and frontend of the translation app
+# Usage: ./run.translation-app.sh [--skip-meta]
+
+SKIP_META=false
+for arg in "$@"; do
+    case $arg in
+        --skip-meta)
+            SKIP_META=true
+            shift
+            ;;
+    esac
+done
 
 echo "Starting Translation App..."
 echo
@@ -52,7 +63,7 @@ trap cleanup SIGINT SIGTERM EXIT
 
 echo "Installing backend dependencies..."
 cd "$BACKEND_DIR"
-npm install
+npm install --legacy-peer-deps
 if [ $? -ne 0 ]; then
     echo "Failed to install backend dependencies."
     exit 1
@@ -66,24 +77,28 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-echo "Running scripts..."
-cd "$BACKEND_DIR"
-npm run generate-metadata
-if [ $? -ne 0 ]; then
-    echo "Failed to run generate-metadata."
-    exit 1
-fi
+if [ "$SKIP_META" = false ]; then
+    echo "Running scripts..."
+    cd "$BACKEND_DIR"
+    npm run generate-metadata
+    if [ $? -ne 0 ]; then
+        echo "Failed to run generate-metadata."
+        exit 1
+    fi
 
-npm run save-meta-keys-usage
-if [ $? -ne 0 ]; then
-    echo "Failed to run save-meta-keys-usage."
-    exit 1
-fi
+    npm run save-meta-keys-usage
+    if [ $? -ne 0 ]; then
+        echo "Failed to run save-meta-keys-usage."
+        exit 1
+    fi
 
-npm run generate-auto-comments-metadata
-if [ $? -ne 0 ]; then
-    echo "Failed to run generate-auto-comments-metadata"
-    exit 1
+    npm run generate-auto-comments-metadata
+    if [ $? -ne 0 ]; then
+        echo "Failed to run generate-auto-comments-metadata"
+        exit 1
+    fi
+else
+    echo "Skipping .meta files generation (--skip-meta)"
 fi
 
 echo

@@ -24,20 +24,20 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { RectangleSkeletonProps } from "../rectangle";
+import { RectangleSkeletonProps } from "@docspace/ui-kit/components/rectangle";
 
 export type TilesSkeletonProps = RectangleSkeletonProps & {
-  foldersCount?: number;
-  filesCount?: number;
-  withTitle?: boolean;
-  isRooms?: boolean;
+	foldersCount?: number;
+	filesCount?: number;
+	withTitle?: boolean;
+	isRooms?: boolean;
 };
 
 export type StyledBottomProps = {
-  isFolder?: boolean;
+	isFolder?: boolean;
 };
 
 export type TileSkeletonProps = RectangleSkeletonProps & {
-  isFolder?: boolean;
-  isRoom?: boolean;
+	isFolder?: boolean;
+	isRoom?: boolean;
 };

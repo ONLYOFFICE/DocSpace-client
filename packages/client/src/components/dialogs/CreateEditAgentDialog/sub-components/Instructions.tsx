@@ -27,65 +27,66 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/shared/components/text";
-import { Textarea } from "@docspace/shared/components/textarea";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Textarea } from "@docspace/ui-kit/components/textarea";
 import type { TAgentParams } from "@docspace/shared/utils/aiAgents";
 
 import { StyledParam } from "../../../CreateEditDialogParams/StyledParam";
 
 type InstructionsSettingsProps = {
-  agentParams: TAgentParams;
-  setAgentParams: (value: Partial<TAgentParams>) => void;
+	agentParams: TAgentParams;
+	setAgentParams: (value: Partial<TAgentParams>) => void;
 };
 
 const InstructionsSettings = ({
-  agentParams,
-  setAgentParams,
+	agentParams,
+	setAgentParams,
 }: InstructionsSettingsProps) => {
-  const { t } = useTranslation(["AIRoom", "Common"]);
-  const [value, setValue] = React.useState(agentParams.prompt || "");
+	const { t } = useTranslation(["AIRoom", "Common"]);
+	const [value, setValue] = React.useState(agentParams.prompt || "");
 
-  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setValue(e.target.value);
-  };
+	const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+		setValue(e.target.value);
+	};
 
-  React.useEffect(() => {
-    if (agentParams.prompt === value) return;
+	React.useEffect(() => {
+		if (agentParams.prompt === value) return;
 
-    setAgentParams({
-      prompt: value,
-    });
-  }, [value, agentParams.prompt, setAgentParams]);
+		setAgentParams({
+			prompt: value,
+		});
+	}, [value, agentParams.prompt, setAgentParams]);
 
-  return (
-    <StyledParam increaseGap>
-      <div className=" set_room_params-info">
-        <div>
-          <Text fontSize="13px" lineHeight="20px" fontWeight={600} noSelect>
-            {t("AIInstructions")}
-          </Text>
-          <Text
-            fontSize="12px"
-            lineHeight="16px"
-            fontWeight={400}
-            className="set_room_params-info-description"
-            noSelect
-          >
-            {t("InstructionsDescriptionAgent", {
-              aiAgent: t("Common:AIAgent"),
-            })}
-          </Text>
-        </div>
-        <Textarea
-          value={value}
-          onChange={handleChange}
-          heightTextArea={144}
-          placeholder={t("InstructionsDescriptionAgentExample")}
-          tabIndex={2}
-        />
-      </div>
-    </StyledParam>
-  );
+	return (
+		<StyledParam increaseGap>
+			<div className=" set_room_params-info">
+				<div>
+					<Text fontSize="13px" lineHeight="20px" fontWeight={600} noSelect>
+						{t("AIInstructions")}
+					</Text>
+					<Text
+						fontSize="12px"
+						lineHeight="16px"
+						fontWeight={400}
+						className="set_room_params-info-description"
+						noSelect
+					>
+						{t("InstructionsDescriptionAgent", {
+							aiAgent: t("Common:AIAgent"),
+						})}
+					</Text>
+				</div>
+				<Textarea
+					value={value}
+					onChange={handleChange}
+					heightTextArea={144}
+					placeholder={t("InstructionsDescriptionAgentExample")}
+					tabIndex={2}
+					dataTestId="create_agent_instructions_textarea"
+				/>
+			</div>
+		</StyledParam>
+	);
 };
 
 export default InstructionsSettings;

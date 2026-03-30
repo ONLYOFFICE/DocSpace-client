@@ -26,14 +26,14 @@
 
 import React from "react";
 
-import { CustomScrollbarsVirtualList } from "../../../../../scrollbar";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 
 import BookmarksProps from "./Bookmarks.props";
 import styles from "./Bookmarks.module.scss";
 
 export const Bookmarks = ({ bookmarks, navigate }: BookmarksProps) => {
   return (
-    <CustomScrollbarsVirtualList>
+    <Scrollbar>
       <ul
         className={styles.list}
         aria-label="PDF bookmarks"
@@ -59,6 +59,6 @@ export const Bookmarks = ({ bookmarks, navigate }: BookmarksProps) => {
           );
         })}
       </ul>
-    </CustomScrollbarsVirtualList>
+    </Scrollbar>
   );
 };

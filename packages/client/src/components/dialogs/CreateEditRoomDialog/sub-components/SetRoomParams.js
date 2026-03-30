@@ -30,11 +30,11 @@ import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { RoomsType } from "@docspace/shared/enums";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { isMobile, mobile } from "@docspace/shared/utils";
 
 import RoomType from "@docspace/shared/components/room-type";
-import { RoomIcon } from "@docspace/shared/components/room-icon";
+import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 import SetRoomParamsLoader from "@docspace/shared/skeletons/create-edit-room/SetRoomParams";
 
 import { removeEmojiCharacters } from "SRC_DIR/helpers/utils";
@@ -43,6 +43,7 @@ import withLoader from "../../../../HOCs/withLoader";
 import AvatarEditorDialog from "../../AvatarEditorDialog";
 
 import VirtualDataRoomBlock from "./VirtualDataRoomBlock";
+import FormRoomBlock from "./FormRoomBlock";
 
 import TagInput from "../../../TagInput";
 import RoomQuota from "../../../RoomQuota";
@@ -155,6 +156,8 @@ const SetRoomParams = ({
   templateIsAvailable,
   fromTemplate,
   infoPanelSelection,
+  isRoomAdmin,
+  externalDbEnabled,
 }) => {
   const [previewIcon, setPreviewIcon] = useState(roomParams.previewIcon);
   const [createNewFolderIsChecked, setCreateNewFolderIsChecked] =
@@ -181,11 +184,17 @@ const SetRoomParams = ({
 
   const isPublicRoom = roomParams.type === RoomsType.PublicRoom && !isTemplate;
 
+  const isFormRoom = roomParams.type === RoomsType.FormRoom && !isTemplate;
+
   const filesCount = selection
     ? selection.filesCount + selection.foldersCount
     : 0;
 
   const showLifetimeDialog = !hideConfirmRoomLifetime && filesCount > 0;
+
+  const hasDatabaseConnection = externalDbEnabled;
+  const showFormRoomBlock =
+    isFormRoom && !(isRoomAdmin && !hasDatabaseConnection);
 
   const checkWidth = () => {
     if (!isMobile()) {
@@ -553,6 +562,16 @@ const SetRoomParams = ({
         />
       ) : null}
 
+      {showFormRoomBlock ? (
+        <FormRoomBlock
+          t={t}
+          roomParams={roomParams}
+          setRoomParams={setRoomParams}
+          isDisabled={isDisabled}
+          hasDatabaseConnection={hasDatabaseConnection}
+        />
+      ) : null}
+
       {isVDRRoom ? (
         <VirtualDataRoomBlock
           t={t}
@@ -621,12 +640,19 @@ export default inject(
       infoPanelStore,
       avatarEditorDialogStore,
       filesSettingsStore,
+      authStore,
     },
     { templateItem },
   ) => {
     const { isDefaultRoomsQuotaSet } = currentQuotaStore;
-    const { folderFormValidation, maxImageUploadSize, currentColorScheme } =
-      settingsStore;
+    const {
+      folderFormValidation,
+      maxImageUploadSize,
+      currentColorScheme,
+      externalDbEnabled,
+    } = settingsStore;
+
+    const isRoomAdmin = authStore.isRoomAdmin;
 
     const { bufferSelection } = filesStore;
     const { getInfoPanelItemIcon, infoPanelSelection } = infoPanelStore;
@@ -688,6 +714,8 @@ export default inject(
       setLifetimeDialogVisible,
       hideConfirmRoomLifetime,
       infoPanelSelection,
+      isRoomAdmin,
+      externalDbEnabled,
     };
   },
 )(

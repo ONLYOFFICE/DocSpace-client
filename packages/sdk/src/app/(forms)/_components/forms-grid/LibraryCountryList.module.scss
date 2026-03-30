@@ -1,0 +1,93 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding-block-start: 32px;
+}
+
+.mapImage {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  margin-block-end: 32px;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.25;
+}
+
+.title {
+  margin: 0;
+  font-size: 23px;
+  font-weight: 700;
+  line-height: 30px;
+  color: var(--color-text-primary);
+  text-align: center;
+}
+
+.description {
+  margin: 12px 0 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px 16px;
+  width: 100%;
+  max-width: 960px;
+  margin-block-start: 40px;
+}
+
+.countryItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  min-width: 0;
+
+  &:hover {
+    background-color: var(--color-background-hover);
+  }
+}
+
+.flagIcon {
+  width: 32px;
+  height: 24px;
+  border-radius: 3px;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+.countryName {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 22px;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 1023.9px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 767.9px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .mapImage {
+    max-width: 400px;
+  }
+}

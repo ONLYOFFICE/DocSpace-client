@@ -27,57 +27,57 @@
 import { useState, useCallback } from "react";
 import debounce from "lodash.debounce";
 
-import { Label } from "@docspace/shared/components/label";
-import { TextInput } from "@docspace/shared/components/text-input";
-import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Label } from "@docspace/ui-kit/components/label";
+import { TextInput } from "@docspace/ui-kit/components/text-input";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 
 import { ColumnContainer } from "../presets/StyledPresets";
 
 export const SearchTerm = ({ t, config, setConfig }) => {
-  const [value, setValue] = useState(config.filter.filterValue);
+	const [value, setValue] = useState(config.filter.filterValue);
 
-  const debouncedSetConfig = useCallback(
-    debounce((newValue) => {
-      setConfig((oldConfig) => ({
-        ...oldConfig,
-        filter: { ...oldConfig.filter, filterValue: newValue },
-      }));
-    }, 500),
-    [setConfig],
-  );
+	const debouncedSetConfig = useCallback(
+		debounce((newValue) => {
+			setConfig((oldConfig) => ({
+				...oldConfig,
+				filter: { ...oldConfig.filter, filterValue: newValue },
+			}));
+		}, 500),
+		[setConfig],
+	);
 
-  const onChangeSearch = (e) => {
-    setValue(e.target.value);
-    debouncedSetConfig(e.target.value);
-  };
+	const onChangeSearch = (e) => {
+		setValue(e.target.value);
+		debouncedSetConfig(e.target.value);
+	};
 
-  const onChangeWithSubfolders = () => {
-    setConfig((oldConfig) => ({
-      ...oldConfig,
-      withSubfolders: !config.withSubfolders,
-    }));
-  };
+	const onChangeWithSubfolders = () => {
+		setConfig((oldConfig) => ({
+			...oldConfig,
+			withSubfolders: !config.withSubfolders,
+		}));
+	};
 
-  return (
-    <>
-      <Label className="label" text={t("SearchTerm")} />
-      <ColumnContainer>
-        <TextInput
-          scale
-          onChange={onChangeSearch}
-          placeholder={t("Common:Search")}
-          value={value}
-          tabIndex={5}
-          testId="search_term_text_input"
-        />
-        <Checkbox
-          className="checkbox"
-          label={t("Common:WithSubfolders")}
-          onChange={onChangeWithSubfolders}
-          isChecked={config.withSubfolders}
-          dataTestId="with_subfolders_checkbox"
-        />
-      </ColumnContainer>
-    </>
-  );
+	return (
+		<>
+			<Label className="label" text={t("SearchTerm")} />
+			<ColumnContainer>
+				<TextInput
+					scale
+					onChange={onChangeSearch}
+					placeholder={t("Common:Search")}
+					value={value}
+					tabIndex={5}
+					testId="search_term_text_input"
+				/>
+				<Checkbox
+					className="checkbox"
+					label={t("Common:WithSubfolders")}
+					onChange={onChangeWithSubfolders}
+					isChecked={config.withSubfolders}
+					dataTestId="with_subfolders_checkbox"
+				/>
+			</ColumnContainer>
+		</>
+	);
 };

@@ -27,9 +27,8 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Portal } from "@docspace/shared/components/portal";
-
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { Portal } from "@docspace/ui-kit/components/portal";
 import WrappedComponent from "SRC_DIR/helpers/plugins/WrappedComponent";
 import { PluginComponents } from "SRC_DIR/helpers/plugins/enums";
 import { messageActions } from "SRC_DIR/helpers/plugins/utils";

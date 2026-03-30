@@ -25,7 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { selfActivationStatusHandler } from "@docspace/shared/__mocks__/handlers";
-import { expect, test } from "./fixtures/base";
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
+import { test } from "./fixtures/base";
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 
 const URL = "/login/confirm/EmailActivation";
@@ -64,7 +65,7 @@ test("email activation success", async ({
     waitUntil: "load",
   });
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "email-activation",
     "email-activation-success.png",
@@ -80,7 +81,7 @@ test("email activation error", async ({
   clientRequestInterceptor.use(selfActivationStatusHandler(port, 400));
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "email-activation",
     "email-activation-error.png",

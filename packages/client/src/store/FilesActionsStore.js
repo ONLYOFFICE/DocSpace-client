@@ -64,7 +64,7 @@ import {
 } from "@docspace/shared/enums";
 import { makeAutoObservable, runInAction } from "mobx";
 
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { TIMEOUT } from "SRC_DIR/helpers/filesConstants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { isDesktop, isLockedSharedRoom } from "@docspace/shared/utils";
@@ -108,7 +108,7 @@ import FilesFilter from "@docspace/shared/api/files/filter";
 import { createLoader } from "@docspace/shared/utils/createLoader";
 
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
-import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
+import SocketHelper, { SocketCommands } from "@docspace/ui-kit/utils/socket";
 import {
   getEmptyPersonalProgress,
   startEmptyPersonal,
@@ -1461,15 +1461,27 @@ class FilesActionStore {
             operationId,
           });
         })
-        .then(() =>
+        .then(() => {
           toastr.success(
             translations?.successRemoveTemplate
               ? translations.successRemoveTemplate
               : items.length > 1
                 ? translations?.successRemoveRooms
                 : translations?.successRemoveRoom,
-          ),
-        )
+          );
+
+          const currentFolderId = this.selectedFolderStore.id;
+          if (items.includes(currentFolderId)) {
+            const { rootFolderType } = this.selectedFolderStore;
+            const categoryType = getCategoryTypeByFolderType(rootFolderType, 0);
+
+            if (categoryType === CategoryType.AIAgents) {
+              this.moveToAIAgentsPage();
+            } else {
+              this.moveToRoomsPage();
+            }
+          }
+        })
         .finally(() => {
           this.setGroupMenuBlocked(false);
           setSecondaryProgressBarData({
@@ -2369,7 +2381,11 @@ class FilesActionStore {
 
         return canUnArchive;
       }
-      case "delete-room":
+      case "delete-room": {
+        const canDelete = selection.some((s) => s.security?.Delete);
+
+        return canDelete;
+      }
       case "delete-agent": {
         const canRemove =
           selection.length === 1 && selection[0]?.security?.Delete;
@@ -2384,6 +2400,37 @@ class FilesActionStore {
       case "create-room": {
         const canCreateRoom = selection.some((s) => s.security?.CreateRoomFrom);
         return canCreateRoom;
+      }
+      case "create-group": {
+        const { organizeRoomsGrouping } = this.filesSettingsStore;
+        const { isRoomsFolder } = this.treeFoldersStore;
+        return organizeRoomsGrouping && isRoomsFolder && hasSelection;
+      }
+      case "add-to-group": {
+        const { organizeRoomsGrouping } = this.filesSettingsStore;
+        const { isRoomsFolder } = this.treeFoldersStore;
+        const { roomGroups } = this.dialogsStore;
+        return (
+          organizeRoomsGrouping &&
+          isRoomsFolder &&
+          hasSelection &&
+          roomGroups &&
+          roomGroups.length > 0
+        );
+      }
+      case "remove-from-group": {
+        const { organizeRoomsGrouping } = this.filesSettingsStore;
+        const { isRoomsFolder } = this.treeFoldersStore;
+        const { roomGroups } = this.dialogsStore;
+        const currentGroupId = this.filesStore.roomsFilter?.groupId;
+        return (
+          organizeRoomsGrouping &&
+          isRoomsFolder &&
+          hasSelection &&
+          roomGroups &&
+          roomGroups.length > 0 &&
+          !!currentGroupId
+        );
       }
       case "change-quota":
         return hasRoomsToChangeQuota;
@@ -2649,6 +2696,9 @@ class FilesActionStore {
     });
 
     const pin = this.getOption(pinName, t);
+    const createGroup = this.getOption("create-group", t);
+    const addToGroup = this.getOption("add-to-group", t);
+    const removeFromGroup = this.getOption("remove-from-group", t);
     const archive = this.getOption("archive", t);
     const changeQuota = this.getOption("change-quota", t);
     const disableQuota = this.getOption("disable-quota", t);
@@ -2657,6 +2707,11 @@ class FilesActionStore {
 
     itemsCollection
       .set(pinName, pin)
+      .set("create-group", createGroup)
+      .set("add-to-group", addToGroup)
+      .set("remove-from-group", removeFromGroup);
+
+    itemsCollection
       .set("archive", archive)
       .set("change-quota", changeQuota)
       .set("default-quota", defaultQuota)

@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useCallback } from "react";
+import { match, Pattern } from "ts-pattern";
 import isUndefined from "lodash/isUndefined";
 import { useSearchParams } from "next/navigation";
 
@@ -41,31 +42,40 @@ import {
   sendEditorNotify,
   markAsFavorite,
   removeFromFavorite,
-  updateFileStream,
+  manageFormFilling,
 } from "@docspace/shared/api/files";
-import { encryptionService } from "@docspace/shared/services/encryption";
-import {
-  getEditBuffer,
-  deleteEditBuffer,
-  cleanupStaleBuffers,
-} from "@docspace/shared/utils/encryptedEditBuffer";
-import {
+import type {
   TEditHistory,
   TGetReferenceData,
   TSharedUsers,
 } from "@docspace/shared/api/files/types";
-import { EDITOR_ID, FILLING_STATUS_ID } from "@docspace/shared/constants";
+import {
+  getProviders,
+  getModels,
+  getDefaultProvider,
+} from "@docspace/shared/api/ai";
+import type {
+  TAiProvider,
+  TDefaultProvider,
+} from "@docspace/shared/api/ai/types";
+import {
+  CREATED_FORM_KEY,
+  EDITOR_ID,
+  FILLING_STATUS_ID,
+} from "@docspace/shared/constants";
 import {
   assign,
   frameCallCommand,
   frameCallEvent,
 } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { StartFillingMode } from "@docspace/shared/enums";
-import { toastr } from "@docspace/shared/components/toast";
-import { TData } from "@docspace/shared/components/toast/Toast.type";
-import { Nullable } from "@docspace/shared/types";
-
+import {
+  FormFillingManageAction,
+  StartFillingMode,
+} from "@docspace/shared/enums";
+import { toastr, type TData } from "@docspace/ui-kit/components/toast";
+import { FolderType } from "@docspace/ui-kit/enums";
+import type { Nullable } from "@docspace/shared/types";
 import { IS_DESKTOP_EDITOR } from "@/utils/constants";
 
 import { isMobile } from "react-device-detect";
@@ -76,14 +86,16 @@ import {
   setDocumentTitle,
 } from "@/utils";
 
-import {
+import type {
   TCatchError,
   TDocEditor,
   TEvent,
   THistoryData,
   UseEventsProps,
+  TEditorAIEvent,
 } from "@/types";
 import { onSDKInfo } from "@/utils/events";
+import externalAIFetch from "@/utils/aiProxy";
 
 let docEditor: TDocEditor | null = null;
 
@@ -99,10 +111,11 @@ const useEditorEvents = ({
   sdkConfig,
   organizationName,
   shareKey,
-  encryptedSessionId,
+  generationToolCallState,
   setFillingStatusDialogVisible,
   openShareFormDialog,
-  onStartFillingVDRPanel,
+  onOpenRoleMappingPanel,
+  disconnectUsers,
 }: UseEventsProps) => {
   const searchParams = useSearchParams();
 
@@ -200,28 +213,13 @@ const useEditorEvents = ({
     }
   }, []);
 
-  const onSDKAppReady = React.useCallback(async () => {
+  const onSDKAppReady = React.useCallback(() => {
     docEditor = window.DocEditor.instances[EDITOR_ID];
 
     fixSize();
 
     if (errorMessage || isSkipError)
       return docEditor?.showMessage?.(errorMessage || t("Common:InvalidLink"));
-
-    if (encryptedSessionId) {
-      try {
-        const entry = await getEditBuffer(encryptedSessionId);
-        if (entry) {
-          docEditor?.openDocument?.(new Uint8Array(entry.buffer));
-        } else {
-          docEditor?.showMessage?.(t("Common:EncryptionEditSessionExpired"));
-        }
-      } catch (e) {
-        console.error("[DocEditor] Failed to load encrypted buffer:", e);
-        docEditor?.showMessage?.(t("Common:EncryptionLoadFileFailed"));
-      }
-      return;
-    }
 
     console.log("ONLYOFFICE Document Editor is ready", docEditor);
     const url = window.location.href;
@@ -255,13 +253,13 @@ const useEditorEvents = ({
 
       window.history.pushState({}, "", `/doceditor${search}`);
     }
-  }, [config?.Error, errorMessage, isSkipError, searchParams, t, fixSize, encryptedSessionId]);
+  }, [config?.Error, errorMessage, isSkipError, searchParams, t, fixSize]);
 
-  const onDocumentReady = React.useCallback(() => {
-    // console.log("onDocumentReady", { docEditor });
+  const onDocumentReady = React.useCallback(async () => {
     setDocumentReady(true);
 
     frameCallCommand("setIsLoaded");
+
     checkAndRequestRoles();
 
     frameCallEvent({
@@ -271,19 +269,117 @@ const useEditorEvents = ({
 
     if (config?.errorMessage) docEditor?.showMessage?.(config.errorMessage);
 
-    // if (config?.file?.canShare) {
-    //   loadUsersRightsList(docEditor);
-    // }
+    const connector = docEditor?.createConnector?.();
 
+    if (connector && successAuth) {
+      try {
+        const defaultPortalProvider = (await getDefaultProvider()) as
+          | TDefaultProvider
+          | undefined;
+
+        if (defaultPortalProvider) {
+          const DEFAULT_MODEL = "gpt-5.2";
+          let provider: TAiProvider | undefined;
+          let model = defaultPortalProvider.defaultModel || DEFAULT_MODEL;
+
+          if (defaultPortalProvider.providerId === -1) {
+            provider = {
+              id: defaultPortalProvider.providerId,
+              title: defaultPortalProvider.providerTitle,
+            } as TAiProvider;
+          } else {
+            const providers = await getProviders();
+
+            provider = providers.find(
+              (p: TAiProvider) =>
+                p.id === defaultPortalProvider?.providerId && !p.needReset,
+            );
+
+            if (provider) {
+              const models = await getModels(provider.id);
+              provider.title = `${t("Common:ProductName")} [${provider.title}]`;
+              model = models[0]?.modelId || model;
+            }
+          }
+
+          if (provider) {
+            const providerTitle = provider.title;
+            const modelName = `${providerTitle} [${model}]`;
+            const providerId = provider.id;
+
+            const sendProviders = () => {
+              connector.sendEvent("ai_onCustomProviders", [
+                { name: providerTitle },
+              ]);
+
+              connector.sendEvent("ai_onCustomInit", {
+                settingsLock: undefined,
+                actionsOverride: true,
+                actions: {
+                  Chat: { model },
+                  Summarization: { model },
+                  Translation: { model },
+                  TextAnalyze: { model },
+                },
+                models: [
+                  {
+                    capabilities: 255,
+                    provider: providerTitle,
+                    name: modelName,
+                    id: model,
+                  },
+                ],
+              });
+
+              if (generationToolCallState) {
+                connector.sendEvent("ai_onCallTool", {
+                  name: generationToolCallState.toolName,
+                  arguments: {
+                    ...generationToolCallState.parameters,
+                  },
+                });
+              }
+            };
+
+            connector.executeMethod("AI", [{ type: "Actions" }], (data) => {
+              if (
+                data &&
+                typeof data === "object" &&
+                "error" in data &&
+                data.error
+              ) {
+                connector.attachEvent("ai_onInit", sendProviders);
+              } else {
+                sendProviders();
+              }
+            });
+
+            connector.attachEvent("ai_onExternalFetch", (e: unknown) =>
+              externalAIFetch(connector, e as TEditorAIEvent, providerId),
+            );
+          }
+        }
+      } catch (error) {
+        console.error("Failed to initialize AI provider:", error);
+      }
+    }
+
+    // Do not remove: it's for Back button on Mobile App
     if (docEditor) {
-      // console.log("call assign for asc files editor doceditor");
       assign(
         window as unknown as { [key: string]: object },
         ["ASC", "Files", "Editor", "docEditor"],
         docEditor,
-      ); // Do not remove: it's for Back button on Mobile App
+      );
     }
-  }, [config?.errorMessage, sdkConfig?.frameId, checkAndRequestRoles]);
+  }, [
+    config?.errorMessage,
+    sdkConfig?.frameId,
+    checkAndRequestRoles,
+    t,
+    successAuth,
+    generationToolCallState,
+  ]);
 
   const onUserActionRequired = React.useCallback(() => {
     frameCallCommand("setIsLoaded");
@@ -822,26 +918,33 @@ const useEditorEvents = ({
 
   const onRequestStartFilling = useCallback(
     (event: object) => {
-      switch (config?.startFillingMode) {
-        case StartFillingMode.ShareToFillOut:
-          openShareFormDialog?.();
-          break;
-
-        case StartFillingMode.StartFilling:
+      match(config?.startFillingMode)
+        .with(StartFillingMode.ShareToFillOut, () => openShareFormDialog?.())
+        .with(StartFillingMode.StartFilling, () => {
           if (
             typeof event === "object" &&
             event !== null &&
             "data" in event &&
             isFormRole(event.data)
-          ) {
-            onStartFillingVDRPanel?.(event.data);
-          }
-          break;
-        default:
-          break;
-      }
+          )
+            onOpenRoleMappingPanel?.(event.data);
+        })
+        .with(StartFillingMode.StartFillingRoomForm, async () => {
+          await manageFormFilling(fileInfo!.id, FormFillingManageAction.Start);
+
+          await disconnectUsers?.();
+
+          sessionStorage.setItem(CREATED_FORM_KEY, JSON.stringify(fileInfo));
+
+          const url = new URL(`${window.location.origin}/rooms/shared/filter`);
+          url.searchParams.set("folder", fileInfo!.folderId.toString());
+          window.location.replace(url.toString());
+        })
+        .otherwise(() => {
+          console.error("Unknown start filling mode");
+        });
     },
-    [config?.startFillingMode, openShareFormDialog, onStartFillingVDRPanel],
+    [config?.startFillingMode, openShareFormDialog, onOpenRoleMappingPanel],
   );
 
   const onRequestRefreshFile = React.useCallback(async () => {
@@ -872,66 +975,16 @@ const useEditorEvents = ({
       onSDKInfo(e);
 
       // Add to recently viewed files in any mode (read or edit)
-      if (successAuth && fileInfo?.id) {
+      if (
+        successAuth &&
+        fileInfo?.id &&
+        fileInfo?.rootFolderType !== FolderType.DefaultTemplates
+      ) {
         addFileToRecentlyViewed(fileInfo.id);
       }
     },
     [onSDKInfo, successAuth, fileInfo?.id],
   );
-
-  const onSaveEncryptedDocument = React.useCallback(
-    async (event: object) => {
-      if (!encryptedSessionId) return;
-
-      try {
-        const editedBuffer = (event as { data: ArrayBuffer }).data;
-        const entry = await getEditBuffer(encryptedSessionId);
-        if (!entry) {
-          toastr.error(t("Common:EncryptionEditSessionExpired"));
-          return;
-        }
-
-        const plainFile = new File([editedBuffer], entry.fileName, {
-          type: entry.fileType,
-        });
-        const { encryptedBlob } = await encryptionService.encryptFile(
-          plainFile,
-          entry.userPublicKey,
-          entry.userId,
-        );
-
-        const encFile = new File([encryptedBlob], entry.fileName, {
-          type: "application/octet-stream",
-        });
-        await updateFileStream(entry.fileId, encFile, true, false);
-
-        toastr.success(t("Common:EncryptionFileSaved"));
-      } catch (e) {
-        console.error("[DocEditor] Failed to save encrypted file:", e);
-        toastr.error(
-          (e as { message?: string })?.message ||
-            t("Common:EncryptionSaveFileFailed"),
-        );
-      }
-    },
-    [encryptedSessionId, t],
-  );
-
-  React.useEffect(() => {
-    if (!encryptedSessionId) return;
-
-    cleanupStaleBuffers().catch(console.error);
-
-    const handleBeforeUnload = () => {
-      deleteEditBuffer(encryptedSessionId).catch(console.error);
-    };
-
-    window.addEventListener("beforeunload", handleBeforeUnload);
-
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  }, [encryptedSessionId]);
 
   return {
     createUrl,
@@ -960,7 +1013,6 @@ const useEditorEvents = ({
     onRequestStartFilling,
     onRequestRefreshFile,
     onInfo,
-    onSaveEncryptedDocument,
   };
 };
 

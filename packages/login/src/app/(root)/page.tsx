@@ -40,7 +40,7 @@ import RecoverAccess from "@/components/RecoverAccess";
 import Register from "@/components/Register";
 import { GreetingLoginContainer } from "@/components/GreetingContainer";
 import { LoginContainer } from "@/components/LoginContainer";
-import { FormWrapper } from "@docspace/shared/components/form-wrapper";
+import { FormWrapper } from "@docspace/ui-kit/components/form-wrapper";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -88,51 +88,50 @@ async function Page(props: {
 
   return settings && typeof settings !== "string" ? (
     <LoginContainer isRegisterContainerVisible={isRegisterContainerVisible}>
-      <>
-        <GreetingLoginContainer
-          greetingSettings={settings.greetingSettings}
-          culture={culture}
-        />
+      <GreetingLoginContainer
+        greetingSettings={settings.greetingSettings}
+        culture={culture}
+      />
 
-        <FormWrapper id="login-form">
-          <Login>
-            <LoginForm
-              hashSettings={settings?.passwordHash}
-              cookieSettingsEnabled={settings?.cookieSettingsEnabled}
-              clientId={clientId}
-              client={oauthData?.client}
+      <FormWrapper id="login-form">
+        <Login>
+          <LoginForm
+            hashSettings={settings?.passwordHash}
+            cookieSettingsEnabled={settings?.cookieSettingsEnabled}
+            clientId={clientId}
+            client={oauthData?.client}
+            reCaptchaPublicKey={settings?.recaptchaPublicKey}
+            reCaptchaType={settings?.recaptchaType}
+            ldapDomain={capabilities?.ldapDomain}
+            ldapEnabled={capabilities?.ldapEnabled || false}
+            baseDomain={settings?.baseDomain}
+          />
+
+          <ThirdParty
+            thirdParty={thirdParty}
+            capabilities={capabilities}
+            ssoExists={ssoExists}
+            oauthDataExists={oauthDataExists}
+            isOauth={!!clientId}
+          />
+
+          {settings.enableAdmMess ? (
+            <RecoverAccess
               reCaptchaPublicKey={settings?.recaptchaPublicKey}
               reCaptchaType={settings?.recaptchaType}
-              ldapDomain={capabilities?.ldapDomain}
-              ldapEnabled={capabilities?.ldapEnabled || false}
-              baseDomain={settings?.baseDomain}
             />
-            {!clientId ? (
-              <ThirdParty
-                thirdParty={thirdParty}
-                capabilities={capabilities}
-                ssoExists={ssoExists}
-                oauthDataExists={oauthDataExists}
-              />
-            ) : null}
-            {settings.enableAdmMess ? (
-              <RecoverAccess
-                reCaptchaPublicKey={settings?.recaptchaPublicKey}
-                reCaptchaType={settings?.recaptchaType}
-              />
-            ) : null}
-            {settings.enabledJoin ? (
-              <Register
-                id="login_register"
-                enabledJoin
-                trustedDomains={settings.trustedDomains}
-                trustedDomainsType={settings.trustedDomainsType}
-                isAuthenticated={false}
-              />
-            ) : null}
-          </Login>
-        </FormWrapper>
-      </>
+          ) : null}
+          {settings.enabledJoin ? (
+            <Register
+              id="login_register"
+              enabledJoin
+              trustedDomains={settings.trustedDomains}
+              trustedDomainsType={settings.trustedDomainsType}
+              isAuthenticated={false}
+            />
+          ) : null}
+        </Login>
+      </FormWrapper>
     </LoginContainer>
   ) : null;
 }

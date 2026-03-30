@@ -27,67 +27,68 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Button } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
-import { toastr } from "@docspace/shared/components/toast";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { Button } from "@docspace/ui-kit/components/button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { withTranslation } from "react-i18next";
 
 class ChangePhoneDialogComponent extends React.Component {
-  constructor(props) {
-    super(props);
+	constructor(props) {
+		super(props);
 
-    this.state = {
-      isRequestRunning: false,
-    };
-  }
+		this.state = {
+			isRequestRunning: false,
+		};
+	}
 
-  // TODO: add real api request for executing change phone
-  onChangePhone = () => {
-    const { onClose, t } = this.props;
-    this.setState({ isRequestRunning: true }, () => {
-      toastr.success(t("ChangePhoneInstructionSent"));
-      this.setState({ isRequestRunning: false }, () => onClose());
-    });
-  };
+	// TODO: add real api request for executing change phone
+	onChangePhone = () => {
+		const { onClose, t } = this.props;
+		this.setState({ isRequestRunning: true }, () => {
+			toastr.success(t("ChangePhoneInstructionSent"));
+			this.setState({ isRequestRunning: false }, () => onClose());
+		});
+	};
 
-  render() {
-    // console.log("ChangePhoneDialog render");
+	render() {
+		// console.log("ChangePhoneDialog render");
 
-    const { t, tReady, visible, onClose } = this.props;
-    const { isRequestRunning } = this.state;
+		const { t, tReady, visible, onClose } = this.props;
+		const { isRequestRunning } = this.state;
 
-    return (
-      <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>
-        <ModalDialog.Header>{t("MobilePhoneChangeTitle")}</ModalDialog.Header>
-        <ModalDialog.Body>
-          <Text>{t("MobilePhoneEraseDescription")}</Text>
-        </ModalDialog.Body>
-        <ModalDialog.Footer>
-          <Button
-            key="ChangePhoneSendBtn"
-            label={t("Common:SendButton")}
-            size="normal"
-            scale
-            primary
-            onClick={this.onChangePhone}
-            isLoading={isRequestRunning}
-          />
-        </ModalDialog.Footer>
-      </ModalDialog>
-    );
-  }
+		return (
+			<ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>
+				<ModalDialog.Header>{t("MobilePhoneChangeTitle")}</ModalDialog.Header>
+				<ModalDialog.Body>
+					<Text>{t("MobilePhoneEraseDescription")}</Text>
+				</ModalDialog.Body>
+				<ModalDialog.Footer>
+					<Button
+						key="ChangePhoneSendBtn"
+						label={t("Common:SendButton")}
+						size="normal"
+						scale
+						primary
+						onClick={this.onChangePhone}
+						isLoading={isRequestRunning}
+						testId="change_phone_send_button"
+					/>
+				</ModalDialog.Footer>
+			</ModalDialog>
+		);
+	}
 }
 
 const ChangePhoneDialog = withTranslation(["ChangePhoneDialog", "Common"])(
-  ChangePhoneDialogComponent,
+	ChangePhoneDialogComponent,
 );
 
 ChangePhoneDialog.propTypes = {
-  visible: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired,
+	visible: PropTypes.bool.isRequired,
+	onClose: PropTypes.func.isRequired,
+	user: PropTypes.object.isRequired,
 };
 
 export default ChangePhoneDialog;

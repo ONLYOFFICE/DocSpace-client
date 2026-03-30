@@ -3,13 +3,19 @@
   "content": "Role for link",
   "content_en_sha1_hash": "69c2c795dae8fa5a3e6f70b13ed8b5690d284d62",
   "created_at": "2025-08-26T11:15:03.689Z",
-  "updated_at": "2025-08-26T11:17:27.556Z",
+  "updated_at": "2026-02-19T13:36:32.535Z",
   "comment": {
     "text": "Label for a dropdown or selection field within an Edit Link Panel, indicating the role or permission associated with the link. This text helps users specify who can access the link. It appears in the RoleLinkBlock component.",
     "is_auto": true,
     "updated_at": "2025-08-26T11:17:27.556Z"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/LinkSettingsPanel/index.tsx",
+      "line_number": 172,
+      "context": "<Text\n fontSize=\"16px\"\n fontWeight={700}\n className={styles.linkSettingsText}\n >\n {t(\"Common:RoleForLink\")}\n </Text>\n <LinkRolesDropdown\n currentAccess={currentAccess}\n accesses={filteredAccesses}\n linkSelectedAccess={linkSelectedAccess}",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/shared/dialogs/EditLinkPanel/RoleLinkBlock/RoleLinkBlock.tsx",
       "line_number": 58,

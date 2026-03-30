@@ -29,7 +29,8 @@ import {
   settingsHandler,
   TypeSettings,
 } from "@docspace/shared/__mocks__/handlers";
-import { expect, test } from "./fixtures/base";
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
+import { test } from "./fixtures/base";
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 
 const URL = "/login/confirm/EmailChange";
@@ -62,7 +63,7 @@ const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
 test("email change without auth", async ({ page, baseUrl }) => {
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "email-change",
     "email-change-without-auth.png",
@@ -84,7 +85,7 @@ test("email change success", async ({
     waitUntil: "load",
   });
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "email-change",
     "email-change-success.png",
@@ -104,7 +105,7 @@ test("email change error", async ({
   clientRequestInterceptor.use(selfChangeAuthDataHandler(port, 400));
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "email-change",
     "email-change-error.png",

@@ -28,19 +28,19 @@ import { useTranslation } from "react-i18next";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import classNames from "classnames";
 
-import { Button, ButtonSize } from "../../../../../components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { getFromLocalStorage } from "../../../../../utils";
 import { BackupStorageType, DeviceType } from "../../../../../enums";
 import { FilesSelectorInput } from "../../../../../components/files-selector-input";
 import { isNullOrUndefined } from "../../../../../utils/typeGuards";
 import BackupToPublicRoom from "../../../../../dialogs/backup-to-public-room-dialog";
-import { toastr } from "../../../../../components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
-import type { TBreadCrumb } from "../../../../../components/selector/Selector.types";
+import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
 import type { FilesSelectorSettings } from "../../../../../components/files-selector-input";
 import type {
-  BackupToPublicRoomOptionType,
-  Nullable,
+	BackupToPublicRoomOptionType,
+	Nullable,
 } from "../../../../../types";
 
 import styles from "../../ManualBackup.module.scss";
@@ -49,177 +49,177 @@ import NoteComponent from "../../../sub-components/NoteComponent";
 const Documents = "Documents";
 
 export interface RoomsModuleProps {
-  onMakeCopy: (
-    selectedFolder: string | number,
-    moduleName: string,
-    moduleType: string,
-    selectedStorageId?: string,
-    selectedStorageTitle?: string,
-  ) => Promise<void>;
-  buttonSize?: ButtonSize;
-  maxWidth?: string;
-  isMaxProgress: boolean;
+	onMakeCopy: (
+		selectedFolder: string | number,
+		moduleName: string,
+		moduleType: string,
+		selectedStorageId?: string,
+		selectedStorageTitle?: string,
+	) => Promise<void>;
+	buttonSize?: ButtonSize;
+	maxWidth?: string;
+	isMaxProgress: boolean;
 
-  newPath: string;
-  basePath: string;
-  isErrorPath: boolean;
-  currentDeviceType?: DeviceType;
+	newPath: string;
+	basePath: string;
+	isErrorPath: boolean;
+	currentDeviceType?: DeviceType;
 
-  isBackupPaid?: boolean;
-  isFreeBackupsLimitReached?: boolean;
+	isBackupPaid?: boolean;
+	isFreeBackupsLimitReached?: boolean;
 
-  toDefault: VoidFunction;
-  setBasePath: (folders: TBreadCrumb[]) => void;
-  setNewPath: (folders: TBreadCrumb[], fileName?: string) => void;
-  settingsFileSelector: FilesSelectorSettings;
+	toDefault: VoidFunction;
+	setBasePath: (folders: TBreadCrumb[]) => void;
+	setNewPath: (folders: TBreadCrumb[], fileName?: string) => void;
+	settingsFileSelector: FilesSelectorSettings;
 }
 
 const defaultState = {
-  visible: false,
-  data: null,
+	visible: false,
+	data: null,
 };
 
 const RoomsModule = ({
-  onMakeCopy,
-  buttonSize,
-  isMaxProgress,
-  basePath,
-  isErrorPath,
-  newPath,
-  maxWidth,
-  setBasePath,
-  setNewPath,
-  toDefault,
-  currentDeviceType,
-  settingsFileSelector,
-  isBackupPaid,
-  isFreeBackupsLimitReached,
+	onMakeCopy,
+	buttonSize,
+	isMaxProgress,
+	basePath,
+	isErrorPath,
+	newPath,
+	maxWidth,
+	setBasePath,
+	setNewPath,
+	toDefault,
+	currentDeviceType,
+	settingsFileSelector,
+	isBackupPaid,
+	isFreeBackupsLimitReached,
 }: RoomsModuleProps) => {
-  const { t } = useTranslation(["Common"]);
+	const { t } = useTranslation(["Common"]);
 
-  const [backupToPublicRoomDialog, setBackupToPublicRoom] = useState<{
-    visible: boolean;
-    data: Nullable<BackupToPublicRoomOptionType>;
-  }>(defaultState);
+	const [backupToPublicRoomDialog, setBackupToPublicRoom] = useState<{
+		visible: boolean;
+		data: Nullable<BackupToPublicRoomOptionType>;
+	}>(defaultState);
 
-  const setBackupToPublicRoomVisible = (
-    visible: boolean,
-    data: Nullable<BackupToPublicRoomOptionType> = null,
-  ) => {
-    setBackupToPublicRoom({
-      visible,
-      data,
-    });
-  };
+	const setBackupToPublicRoomVisible = (
+		visible: boolean,
+		data: Nullable<BackupToPublicRoomOptionType> = null,
+	) => {
+		setBackupToPublicRoom({
+			visible,
+			data,
+		});
+	};
 
-  const folderRef = useRef("");
-  const isMountRef = useRef(false);
+	const folderRef = useRef("");
+	const isMountRef = useRef(false);
 
-  const [isStartCopy, setIsStartCopy] = useState(false);
-  const [selectedFolder, setSelectedFolder] = useState<string | number>(() => {
-    folderRef.current = getFromLocalStorage("LocalCopyFolder") ?? "";
-    const moduleType = getFromLocalStorage("LocalCopyStorageType");
+	const [isStartCopy, setIsStartCopy] = useState(false);
+	const [selectedFolder, setSelectedFolder] = useState<string | number>(() => {
+		folderRef.current = getFromLocalStorage("LocalCopyFolder") ?? "";
+		const moduleType = getFromLocalStorage("LocalCopyStorageType");
 
-    return moduleType === Documents ? folderRef.current : "";
-  });
+		return moduleType === Documents ? folderRef.current : "";
+	});
 
-  useEffect(() => {
-    isMountRef.current = true;
-    return () => {
-      isMountRef.current = false;
-    };
-  }, []);
+	useEffect(() => {
+		isMountRef.current = true;
+		return () => {
+			isMountRef.current = false;
+		};
+	}, []);
 
-  const onSelectFolder = (folderId: string | number | undefined) => {
-    if (isMountRef.current && !isNullOrUndefined(folderId))
-      setSelectedFolder(folderId);
-  };
+	const onSelectFolder = (folderId: string | number | undefined) => {
+		if (isMountRef.current && !isNullOrUndefined(folderId))
+			setSelectedFolder(folderId);
+	};
 
-  const handleMakeCopy = async () => {
-    try {
-      setIsStartCopy(true);
-      await onMakeCopy(
-        selectedFolder,
-        Documents,
-        `${BackupStorageType.DocumentModuleType}`,
-      );
-    } catch (error) {
-      console.error(error);
-      toastr.error(error as Error);
-    } finally {
-      setIsStartCopy(false);
-    }
-  };
+	const handleMakeCopy = async () => {
+		try {
+			setIsStartCopy(true);
+			await onMakeCopy(
+				selectedFolder,
+				Documents,
+				`${BackupStorageType.DocumentModuleType}`,
+			);
+		} catch (error) {
+			console.error(error);
+			toastr.error(error as Error);
+		} finally {
+			setIsStartCopy(false);
+		}
+	};
 
-  const isModuleDisabled = !isMaxProgress || isStartCopy;
+	const isModuleDisabled = !isMaxProgress || isStartCopy;
 
-  const formProps = useMemo(
-    () => ({
-      isRoomFormAccessible: false,
-      message: t("Common:BackupNotAllowedInFormRoom"),
-    }),
-    [t],
-  );
+	const formProps = useMemo(
+		() => ({
+			isRoomFormAccessible: false,
+			message: t("Common:BackupNotAllowedInFormRoom"),
+		}),
+		[t],
+	);
 
-  return (
-    <div data-testid="rooms-module">
-      <div
-        className={classNames(
-          styles.manualBackupFolderInput,
-          "manual-backup_folder-input",
-        )}
-      >
-        <FilesSelectorInput
-          withCreate
-          isRoomBackup
-          isSelectFolder
-          newPath={newPath}
-          basePath={basePath}
-          maxWidth={maxWidth}
-          toDefault={toDefault}
-          formProps={formProps}
-          setNewPath={setNewPath}
-          isErrorPath={isErrorPath}
-          setBasePath={setBasePath}
-          isDisabled={isModuleDisabled}
-          onSelectFolder={onSelectFolder}
-          withoutInitPath={!selectedFolder}
-          currentDeviceType={currentDeviceType}
-          filesSelectorSettings={settingsFileSelector}
-          setBackupToPublicRoomVisible={setBackupToPublicRoomVisible}
-          {...(selectedFolder ? { id: selectedFolder } : { openRoot: true })}
-        />
-      </div>
+	return (
+		<div data-testid="rooms-module">
+			<div
+				className={classNames(
+					styles.manualBackupFolderInput,
+					"manual-backup_folder-input",
+				)}
+			>
+				<FilesSelectorInput
+					withCreate
+					isRoomBackup
+					isSelectFolder
+					newPath={newPath}
+					basePath={basePath}
+					maxWidth={maxWidth}
+					toDefault={toDefault}
+					formProps={formProps}
+					setNewPath={setNewPath}
+					isErrorPath={isErrorPath}
+					setBasePath={setBasePath}
+					isDisabled={isModuleDisabled}
+					onSelectFolder={onSelectFolder}
+					withoutInitPath={!selectedFolder}
+					currentDeviceType={currentDeviceType}
+					filesSelectorSettings={settingsFileSelector}
+					setBackupToPublicRoomVisible={setBackupToPublicRoomVisible}
+					{...(selectedFolder ? { id: selectedFolder } : { openRoot: true })}
+				/>
+			</div>
 
-      {backupToPublicRoomDialog.visible && backupToPublicRoomDialog.data ? (
-        <BackupToPublicRoom
-          key="backup-to-public-room-panel"
-          visible={backupToPublicRoomDialog.visible}
-          backupToPublicRoomData={backupToPublicRoomDialog.data}
-          setIsVisible={setBackupToPublicRoomVisible}
-        />
-      ) : null}
-      <div
-        className={classNames(
-          styles.manualBackupButtons,
-          "manual-backup_buttons",
-        )}
-      >
-        <Button
-          primary
-          id="create-copy"
-          size={buttonSize}
-          onClick={handleMakeCopy}
-          label={t("Common:CreateCopy")}
-          isDisabled={isModuleDisabled || !selectedFolder}
-          testId="create_backup_room_button"
-        />
-      </div>
-      <NoteComponent
-        isVisible={Boolean(isBackupPaid && isFreeBackupsLimitReached)}
-      />
-    </div>
-  );
+			{backupToPublicRoomDialog.visible && backupToPublicRoomDialog.data ? (
+				<BackupToPublicRoom
+					key="backup-to-public-room-panel"
+					visible={backupToPublicRoomDialog.visible}
+					backupToPublicRoomData={backupToPublicRoomDialog.data}
+					setIsVisible={setBackupToPublicRoomVisible}
+				/>
+			) : null}
+			<div
+				className={classNames(
+					styles.manualBackupButtons,
+					"manual-backup_buttons",
+				)}
+			>
+				<Button
+					primary
+					id="create-copy"
+					size={buttonSize}
+					onClick={handleMakeCopy}
+					label={t("Common:CreateCopy")}
+					isDisabled={isModuleDisabled || !selectedFolder}
+					testId="create_backup_room_button"
+				/>
+			</div>
+			<NoteComponent
+				isVisible={Boolean(isBackupPaid && isFreeBackupsLimitReached)}
+			/>
+		</div>
+	);
 };
 
 export default RoomsModule;

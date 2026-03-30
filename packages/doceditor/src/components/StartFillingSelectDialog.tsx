@@ -28,86 +28,87 @@ import { useTranslation } from "react-i18next";
 
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
-import FilesSelectorWrapper from "@docspace/shared/selectors/Files";
+import FilesSelectorWrapper from "@docspace/ui-kit/selectors/Files";
+import type { SdkFolderType } from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
 import { RoomsType } from "@docspace/shared/enums";
 import { useSelectorInfoBar } from "@docspace/shared/hooks/useSelectorInfoBar";
 import {
-  TInfoBarData,
-  TSelectorCancelButton,
-} from "@docspace/shared/components/selector/Selector.types";
+	TInfoBarData,
+	TSelectorCancelButton,
+} from "@docspace/ui-kit/components/selector";
 
 import { StartFillingSelectorDialogProps } from "@/types";
 import useDeviceType from "@/hooks/useDeviceType";
 
 function StartFillingSelectorDialog({
-  fileInfo,
-  getIsDisabled,
-  isVisible,
-  onClose,
-  onSubmit,
-  filesSettings,
-  header,
-  createDefineRoomType,
+	fileInfo,
+	getIsDisabled,
+	isVisible,
+	onClose,
+	onSubmit,
+	filesSettings,
+	header,
+	createDefineRoomType,
 }: StartFillingSelectorDialogProps) {
-  const { t } = useTranslation(["Common", "Editor"]);
-  const [withInfoBar, onCloseInfoBar] = useSelectorInfoBar();
-  const { currentDeviceType } = useDeviceType();
+	const { t } = useTranslation(["Common", "Editor"]);
+	const [withInfoBar, onCloseInfoBar] = useSelectorInfoBar();
+	const { currentDeviceType } = useDeviceType();
 
-  const cancelButtonProps: TSelectorCancelButton = {
-    withCancelButton: true,
-    onCancel: onClose,
-    cancelButtonLabel: t("Common:CancelButton"),
-    cancelButtonId: "select-file-modal-cancel",
-  };
-  const infoBarData: TInfoBarData = {
-    title: t("Common:SelectorInfoBarTitle"),
-    description:
-      createDefineRoomType === RoomsType.FormRoom
-        ? t("Common:SelectorInfoBarDescription")
-        : t("Common:SelectorInfoBarOfVDRDescription"),
-    icon: InfoIcon,
-    onClose: onCloseInfoBar,
-  };
+	const cancelButtonProps: TSelectorCancelButton = {
+		withCancelButton: true,
+		onCancel: onClose,
+		cancelButtonLabel: t("Common:CancelButton"),
+		cancelButtonId: "select-file-modal-cancel",
+	};
+	const infoBarData: TInfoBarData = {
+		title: t("Common:SelectorInfoBarTitle"),
+		description:
+			createDefineRoomType === RoomsType.FormRoom
+				? t("Common:SelectorInfoBarDescription")
+				: t("Common:SelectorInfoBarOfVDRDescription"),
+		icon: InfoIcon,
+		onClose: onCloseInfoBar,
+	};
 
-  const createDefineRoomLabels: Partial<Record<RoomsType, string>> = {
-    [RoomsType.VirtualDataRoom]: t("Common:CreateVirtualDataRoom"),
-    [RoomsType.FormRoom]: t("Common:CreateFormFillingRoom"),
-  };
+	const createDefineRoomLabels: Partial<Record<RoomsType, string>> = {
+		[RoomsType.VirtualDataRoom]: t("Common:CreateVirtualDataRoom"),
+		[RoomsType.FormRoom]: t("Common:CreateFormFillingRoom"),
+	};
 
-  return (
-    <FilesSelectorWrapper
-      withCreate
-      withHeader
-      headerProps={header}
-      withSearch
-      isRoomsOnly
-      withBreadCrumbs
-      withoutBackButton={false}
-      currentFolderId=""
-      rootFolderType={fileInfo.rootFolderType}
-      createDefineRoomLabel={createDefineRoomLabels[createDefineRoomType]}
-      createDefineRoomType={createDefineRoomType}
-      isPanelVisible={isVisible}
-      filesSettings={filesSettings}
-      currentDeviceType={currentDeviceType}
-      submitButtonLabel={t("Common:CopyHere")}
-      onSubmit={onSubmit}
-      getIsDisabled={getIsDisabled}
-      {...cancelButtonProps}
-      disabledItems={[]}
-      descriptionText=""
-      footerInputHeader=""
-      footerCheckboxLabel=""
-      currentFooterInputValue=""
-      getFilesArchiveError={() => ""}
-      embedded={false}
-      isThirdParty={false}
-      withFooterCheckbox={false}
-      withFooterInput={false}
-      withInfoBar={withInfoBar}
-      infoBarData={infoBarData}
-    />
-  );
+	return (
+		<FilesSelectorWrapper
+			withCreate
+			withHeader
+			headerProps={header}
+			withSearch
+			isRoomsOnly
+			withBreadCrumbs
+			withoutBackButton={false}
+			currentFolderId=""
+			rootFolderType={fileInfo.rootFolderType as SdkFolderType}
+			createDefineRoomLabel={createDefineRoomLabels[createDefineRoomType]}
+			createDefineRoomType={createDefineRoomType}
+			isPanelVisible={isVisible}
+			filesSettings={filesSettings}
+			currentDeviceType={currentDeviceType}
+			submitButtonLabel={t("Common:CopyHere")}
+			onSubmit={onSubmit}
+			getIsDisabled={getIsDisabled}
+			{...cancelButtonProps}
+			disabledItems={[]}
+			descriptionText=""
+			footerInputHeader=""
+			footerCheckboxLabel=""
+			currentFooterInputValue=""
+			getFilesArchiveError={() => ""}
+			embedded={false}
+			isThirdParty={false}
+			withFooterCheckbox={false}
+			withFooterInput={false}
+			withInfoBar={withInfoBar}
+			infoBarData={infoBarData}
+		/>
+	);
 }
 
 export default StartFillingSelectorDialog;

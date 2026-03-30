@@ -1,17 +1,16 @@
 import { TError } from "@/types";
 import { addGuest } from "@docspace/shared/api/people";
 import Filter from "@docspace/shared/api/people/filter";
-import { toastr } from "@docspace/shared/components/toast";
-import {  useState } from "react";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { useState } from "react";
 
 export const useGuestShareLink = () => {
+  const [isLoading, setIsLoading] = useState(false);
 
-    const [isLoading, setIsLoading] = useState(false);
-    
-    const onGuestsShareLinkInvalid = () => {
-        sessionStorage.setItem("guestShareLinkInvalid", "true");
-        window.location.replace("/");
-    };
+  const onGuestsShareLinkInvalid = () => {
+    sessionStorage.setItem("guestShareLinkInvalid", "true");
+    window.location.replace("/");
+  };
 
   const onApproveInvite = async (email: string, confirmHeader: string) => {
     setIsLoading(true);
@@ -55,11 +54,10 @@ export const useGuestShareLink = () => {
     window.location.replace("/");
   };
 
-
-    return {
-        onGuestsShareLinkInvalid,
-        onApproveInvite,
-        onDenyInvite,
-        isLoading,
-    }
-}
+  return {
+    onGuestsShareLinkInvalid,
+    onApproveInvite,
+    onDenyInvite,
+    isLoading,
+  };
+};

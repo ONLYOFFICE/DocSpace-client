@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Modal from "./Modal";
+import TranslationHighlighter from "./TranslationHighlighter";
 import * as api from "../lib/api";
 
 interface SpellCheckIssue {
@@ -101,7 +102,11 @@ const TranslationTableCell: React.FC<TranslationTableCellProps> = ({
                 )
               }
             >
-              {currentEntry?.translations[lang] || "Not translated"}
+              {currentEntry?.translations[lang] ? (
+                <TranslationHighlighter text={currentEntry.translations[lang]} />
+              ) : (
+                "Not translated"
+              )}
             </div>
             {hasSpellCheckIssues && !isApproved(lang) && (
               <button

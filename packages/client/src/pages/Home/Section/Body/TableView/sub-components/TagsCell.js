@@ -24,13 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useMemo } from "react";
 
-import { Tags } from "@docspace/shared/components/tags";
+import { TagManagement } from "SRC_DIR/components/TagManagement";
 
-import { Text } from "@docspace/shared/components/text";
-
-const TagsCell = ({ item, tagCount, onSelectTag, sideColor }) => {
+const TagsCell = ({ item, tagCount, isHovered, isActive, checkedProps }) => {
   const styleTagsCell = {
     width: "100%",
     overflow: "hidden",
@@ -38,65 +36,34 @@ const TagsCell = ({ item, tagCount, onSelectTag, sideColor }) => {
     marginInlineEnd: "8px",
   };
 
-  const tags = [];
+  const tags = useMemo(() => {
+    const thirdPartyTag = item.providerType
+      ? [
+          {
+            isDefault: true,
+            isThirdParty: true,
+            label: item.providerKey,
+            icon: item.thirdPartyIcon,
+            providerType: item.providerType,
+          },
+        ]
+      : [];
 
-  if (item.providerType) {
-    tags.push({
-      isThirdParty: true,
-      icon: item.thirdPartyIcon,
-      label: item.providerKey,
-      providerType: item.providerType,
-      // onClick: () =>
-      //   onSelectOption({
-      //     option: "typeProvider",
-      //     value: item.providerType,
-      //   }),
-    });
-  }
+    const itemTags = item?.tags?.length > 0 ? item.tags : [];
 
-  if (item?.tags?.length > 0) {
-    tags.push(...item.tags);
-  }
+    return [...thirdPartyTag, ...itemTags];
+  }, [item.providerType, item.providerKey, item.thirdPartyIcon, item.tags]);
 
   return (
     <div style={styleTagsCell}>
-      {tags.length === 0 ? (
-        <Text color={sideColor} />
-      ) : (
-        <Tags tags={tags} columnCount={tagCount} onSelectTag={onSelectTag} />
-      )}
-
-      {/* {item.providerType && (
-        <Tag
-          icon={item.thirdPartyIcon}
-          label={item.providerKey}
-          onClick={() =>
-            onSelectOption({
-              option: "typeProvider",
-              value: item.providerType,
-            })
-          }
-        />
-      )}
-
-      {item.tags.length > 0 ? (
-        <Tags
-          tags={item.tags}
-          columnCount={tagCount}
-          onSelectTag={onSelectTag}
-        />
-      ) : (
-        <Tag
-          isDefault
-          label={getRoomTypeName(item.roomType, t)}
-          onClick={() =>
-            onSelectOption({
-              option: "defaultTypeRoom",
-              value: item.roomType,
-            })
-          }
-        />
-      )} */}
+      <TagManagement
+        tags={tags}
+        id={item.id}
+        access={item.access}
+        columnCount={tagCount}
+        isActive={isHovered || isActive || checkedProps}
+        roomName={item.title}
+      />
     </div>
   );
 };

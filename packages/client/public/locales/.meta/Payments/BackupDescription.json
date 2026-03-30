@@ -1,0 +1,28 @@
+{
+  "key_path": "BackupDescription",
+  "content": "Create backup files to protect your data. Backups can be created manually or automatically.",
+  "content_en_sha1_hash": "1e890139a464f97bc0630b9929cd1deb2bad3287",
+  "created_at": "2026-03-20T09:07:41.121Z",
+  "updated_at": "2026-03-26T08:26:58.233Z",
+  "comment": {
+    "text": "This text describes the purpose of data backups, explaining that they protect data and can be created manually or automatically. It appears as a description within a backup service toggle section in the Portal Settings. Translators should convey the importance of data protection.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T09:59:45.562Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/pages/backup/BackupPage.tsx",
+      "line_number": 158,
+      "context": "1: <Text as=\"span\" fontSize=\"13px\" fontWeight={600} />,\n }}\n />\n </Text>\n }\n description={t(\"Payments:BackupDescription\")}\n isDisabled={isLoading}\n />\n <WalletInfo\n shortView\n withoutBackground",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

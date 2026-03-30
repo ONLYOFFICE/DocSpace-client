@@ -31,20 +31,20 @@ import { Trans, useTranslation } from "react-i18next";
 import classNames from "classnames";
 import { TFunction } from "i18next";
 
-import { Text } from "../../../components/text";
-import { Button } from "../../../components/button";
-import { Link, LinkTarget } from "../../../components/link";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Button } from "@docspace/ui-kit/components/button";
+import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
+import { RadioButton } from "@docspace/ui-kit/components/radio-button";
 import { startBackup } from "../../../api/portal";
-import { RadioButton } from "../../../components/radio-button";
-import { toastr } from "../../../components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { BackupStorageLocalKey, BackupStorageType } from "../../../enums";
-import StatusMessage from "../../../components/status-message";
+import StatusMessage from "@docspace/ui-kit/components/status-message";
 import SocketHelper, {
   SocketEvents,
   TSocketListener,
-} from "../../../utils/socket";
+} from "@docspace/ui-kit/utils/socket";
 import { OPERATIONS_NAME } from "../../../constants";
-import OperationsProgressButton from "../../../components/operations-progress-button";
+import OperationsProgressButton from "@docspace/ui-kit/components/operations-progress-button";
 import DataBackupLoader from "../../../skeletons/backup/DataBackup";
 import { getBackupProgressInfo, getErrorInfo } from "../../../utils/common";
 import { getFromLocalStorage } from "../../../utils";
@@ -64,6 +64,7 @@ import {
 import styles from "./ManualBackup.module.scss";
 import { combineUrl } from "../../../utils/combineUrl";
 import NoteComponent from "../sub-components/NoteComponent";
+import { cancelBackup } from "../../../api/backup";
 
 const getPaymentError = (
   t: TFunction,
@@ -101,6 +102,7 @@ const getPaymentError = (
       t={t}
       ns="Common"
       i18nKey="InsufficientFundsWithContact"
+      values={{ email: walletCustomerEmail }}
       components={{
         1: (
           <Link
@@ -195,6 +197,9 @@ const ManualBackup = ({
     "",
   );
 
+  const [showCancelOperation, setShowCancelOperation] = useState(false);
+  const [isCancelOperation, setIsCancelOperation] = useState(false);
+
   const isCheckedTemporaryStorage = storageType === TEMPORARY_STORAGE;
   const isCheckedDocuments = storageType === DOCUMENTS;
   const isCheckedThirdParty = storageType === THIRD_PARTY_RESOURCE;
@@ -222,6 +227,8 @@ const ManualBackup = ({
         t,
         setDownloadingProgress,
         setTemporaryLink,
+        setShowCancelOperation,
+        showCancelOperation,
       );
 
       if (!options) return;
@@ -256,14 +263,17 @@ const ManualBackup = ({
   const onMakeTemporaryBackup = async () => {
     setErrorMessage("");
     setBackupProgressError("");
+    setBackupProgressWarning("");
     clearLocalStorage();
     localStorage.setItem(
       BackupStorageLocalKey.StorageType,
       JSON.stringify(TEMPORARY_STORAGE),
     );
 
-    setDownloadingProgress(1);
+    setDownloadingProgress(0);
     setIsBackupProgressVisible(true);
+    setIsCancelOperation(false);
+    setShowCancelOperation(false);
 
     try {
       await startBackup(
@@ -272,6 +282,7 @@ const ManualBackup = ({
         false,
         isManagement,
       );
+      setShowCancelOperation(true);
     } catch (err) {
       let customText;
 
@@ -323,6 +334,8 @@ const ManualBackup = ({
 
     setErrorMessage("");
     setBackupProgressError("");
+    setBackupProgressWarning("");
+    
     const storageParams = getStorageParams(
       isCheckedThirdPartyStorage,
       selectedFolder,
@@ -340,12 +353,15 @@ const ManualBackup = ({
       selectedStorageTitle,
     );
 
-    setDownloadingProgress(1);
+    setDownloadingProgress(0);
     setIsBackupProgressVisible(true);
+    setIsCancelOperation(false);
+    setShowCancelOperation(false);
 
     try {
       await startBackup(moduleType, storageParams, false, isManagement);
 
+      setShowCancelOperation(true);
       setTemporaryLink("");
     } catch (err) {
       let customText;
@@ -389,6 +405,16 @@ const ManualBackup = ({
     buttonSize,
   };
 
+  const onCancelOperation = async () => {
+    setShowCancelOperation(false);
+    setIsCancelOperation(true);
+    const res = await cancelBackup();
+
+    if (!res) {
+      setShowCancelOperation(true);
+    }
+  };
+
   if (isEmptyContentBeforeLoader && !isInitialLoading) return null;
 
   if (isInitialLoading) return <DataBackupLoader />;
@@ -426,7 +452,7 @@ const ManualBackup = ({
             href={dataBackupUrl}
             target={LinkTarget.blank}
             fontSize="13px"
-            color={currentColorScheme?.main?.accent}
+            color={currentColorScheme?.main?.accent ?? undefined}
             isHovered
             dataTestId="creating_backup_learn_link"
           >
@@ -665,6 +691,8 @@ const ManualBackup = ({
               completed: false,
             },
           ]}
+          cancelUpload={onCancelOperation}
+          showCancelButton={!isCancelOperation && showCancelOperation}
           clearOperationsData={() => setIsBackupProgressVisible(false)}
         />
       ) : null}

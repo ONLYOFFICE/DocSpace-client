@@ -26,13 +26,13 @@
 import React from "react";
 import { Trans, useTranslation } from "react-i18next";
 
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
-import { toastr } from "@docspace/shared/components/toast";
-import { Text } from "@docspace/shared/components/text";
+} from "@docspace/ui-kit/components/modal-dialog";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { Text } from "@docspace/ui-kit/components/text";
 import type { TServer } from "@docspace/shared/api/ai/types";
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 import { inject, observer } from "mobx-react";

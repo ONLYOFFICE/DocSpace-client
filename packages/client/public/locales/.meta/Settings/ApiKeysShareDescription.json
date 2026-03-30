@@ -3,7 +3,7 @@
   "content": "Do not share your API key with others or expose it in the browser or other client-side code.",
   "content_en_sha1_hash": "0f6d896cc685ae0a76c5eb9007fc9fc99f03c8da",
   "created_at": "2025-05-19T21:30:50.552Z",
-  "updated_at": "2025-09-17T13:43:01.770Z",
+  "updated_at": "2026-02-19T13:36:32.741Z",
   "comment": {
     "text": "This translation key is used to display a warning message reminding users not to share their API keys. It appears in the PortalSettings page, specifically on an API Keys-related setting or button.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/index.tsx",
-      "line_number": 161,
-      "context": "{t(\"Settings:ApiKeysDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <Text className=\"api-keys_text api-keys_description-text\">\n {t(\"Settings:ApiKeysShareDescription\")}\n </Text>\n \n <Text className=\"api-keys_text api-keys_usage-text\">\n {t(\"Settings:ApiKeyViewUsage\")}\n </Text>",
+      "line_number": 166,
+      "context": "className={classNames(\n styles.apiKeysText,\n styles.apiKeysDescriptionText,\n )}\n >\n {t(\"Settings:ApiKeysShareDescription\")}\n </Text>\n \n <Text\n className={classNames(styles.apiKeysText, styles.apiKeysUsageText)}\n >",
       "module": "/packages/client"
     }
   ],

@@ -31,7 +31,7 @@ import { withTranslation } from "react-i18next";
 
 import { FolderType } from "@docspace/shared/enums";
 import { EMPTY_OBJECT } from "@docspace/shared/constants";
-import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
+import { DragAndDrop } from "@docspace/ui-kit/components/drag-and-drop";
 import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 import { isMobile as isMobileUtile, classNames } from "@docspace/shared/utils";
 import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
@@ -319,4 +319,5 @@ export default withTranslation([
   "Translations",
   "InfoPanel",
   "Notifications",
+  "GroupingRooms",
 ])(withFileActions(withQuickButtons(withBadges(SimpleFilesRow))));

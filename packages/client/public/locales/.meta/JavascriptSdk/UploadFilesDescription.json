@@ -1,0 +1,28 @@
+{
+  "key_path": "UploadFilesDescription",
+  "content": "Users can upload individual files.",
+  "content_en_sha1_hash": "10ee1aed29fd7229724149985f21fceef8d8c6ed",
+  "created_at": "2026-03-20T09:07:42.369Z",
+  "updated_at": "2026-03-20T09:43:46.843Z",
+  "comment": {
+    "text": "This text explains that users have the ability to upload individual files. It appears as a tooltip on a help button near a file upload component. Translators should ensure the wording accurately conveys the file upload functionality.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T09:43:46.843Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Uploader.js",
+      "line_number": 139,
+      "context": "<HelpButton\n offsetRight={0}\n size={12}\n place=\"right\"\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"UploadFilesDescription\")}</Text>\n }\n dataTestId=\"upload_files_help_button\"\n />\n </LabelGroup>\n ),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

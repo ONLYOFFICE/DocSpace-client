@@ -27,8 +27,8 @@
 import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 
-import { Row } from "@docspace/shared/components/rows";
-import { toastr } from "@docspace/shared/components/toast";
+import { Row } from "@docspace/ui-kit/components/rows";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { RowContent } from "./RowContent";
 import { RowProps } from "./RowView.types";

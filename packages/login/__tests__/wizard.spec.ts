@@ -31,7 +31,8 @@ import {
   TypeSettings,
 } from "@docspace/shared/__mocks__/handlers";
 
-import { expect, test } from "./fixtures/base";
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
+import { test } from "./fixtures/base";
 
 const URL = "/login/wizard";
 
@@ -45,7 +46,7 @@ test("wizard render", async ({
 
   await page.goto(`${baseUrl}${URL}`);
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "wizard",
     "wizard-render.png",
@@ -68,7 +69,7 @@ test("wizard success", async ({
     .fill("qwerty123");
   await page.getByTestId("agree_terms_checkbox").click();
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "wizard",
     "wizard-success.png",
@@ -78,7 +79,7 @@ test("wizard success", async ({
   await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
   await page.waitForTimeout(1000);
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "wizard",
     "wizard-success-redirect.png",
@@ -103,7 +104,7 @@ test("wizard error", async ({
 
   await page.getByTestId("wizard_continue_button").click();
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "wizard",
     "wizard-error.png",
@@ -134,7 +135,7 @@ test("wizard with license success", async ({
 
   await page.getByTestId("agree_terms_checkbox").click();
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "wizard",
     "wizard-with-license-success.png",
@@ -146,7 +147,7 @@ test("wizard with license success", async ({
   await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
   await page.waitForTimeout(1000);
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "wizard",
     "wizard-with-license-success-redirect.png",
@@ -172,7 +173,7 @@ test("wizard with license error", async ({
 
   await page.getByTestId("wizard_continue_button").click();
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "wizard",
     "wizard-with-license-error.png",
@@ -191,7 +192,7 @@ test("wizard with ami render", async ({
 
   await page.goto(`${baseUrl}${URL}`);
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "wizard",
     "wizard-with-ami-render.png",
@@ -212,7 +213,7 @@ test("wizard with ami error", async ({
 
   await page.getByTestId("wizard_continue_button").click();
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "wizard",
     "wizard-with-ami-error.png",

@@ -30,7 +30,7 @@ import ArticleShowMenuReactSvg from "PUBLIC_DIR/images/article-show-menu.react.s
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import { useStores } from "@/hooks/useStores";
 

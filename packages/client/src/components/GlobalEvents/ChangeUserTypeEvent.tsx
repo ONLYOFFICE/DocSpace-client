@@ -28,7 +28,7 @@ import { useEffect, useCallback, useState } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { ButtonKeys, EmployeeType } from "@docspace/shared/enums";
 import { getUserTypeTranslation } from "@docspace/shared/utils/common";
 import { downgradeUserType } from "@docspace/shared/api/people";
@@ -41,165 +41,165 @@ import { ChangeUserTypeDialog } from "../dialogs";
 import PaidQuotaLimitError from "../PaidQuotaLimitError";
 
 type ChangeUserTypeEventProps = {
-  updateUserType: UsersStore["updateUserType"];
-  setSelected: UsersStore["setSelected"];
-  getPeopleListItem: UsersStore["getPeopleListItem"];
-  needResetUserSelection: UsersStore["needResetUserSelection"];
+	updateUserType: UsersStore["updateUserType"];
+	setSelected: UsersStore["setSelected"];
+	getPeopleListItem: UsersStore["getPeopleListItem"];
+	needResetUserSelection: UsersStore["needResetUserSelection"];
 
-  dialogData: TChangeUserTypeDialogData;
+	dialogData: TChangeUserTypeDialogData;
 
-  onClose: VoidFunction;
+	onClose: VoidFunction;
 };
 
 const ChangeUserTypeEvent = ({
-  dialogData,
-  needResetUserSelection,
+	dialogData,
+	needResetUserSelection,
 
-  updateUserType,
-  setSelected,
-  getPeopleListItem,
+	updateUserType,
+	setSelected,
+	getPeopleListItem,
 
-  onClose,
+	onClose,
 }: ChangeUserTypeEventProps) => {
-  const { t } = useTranslation(["ChangeUserTypeDialog", "Common", "Payments"]);
+	const { t } = useTranslation(["ChangeUserTypeDialog", "Common", "Payments"]);
 
-  const [isRequestRunning, setIsRequestRunning] = useState(false);
+	const [isRequestRunning, setIsRequestRunning] = useState(false);
 
-  const { toType, fromType, userIDs, successCallback, abortCallback } =
-    dialogData;
+	const { toType, fromType, userIDs, successCallback, abortCallback } =
+		dialogData;
 
-  const isGuestsDialog = fromType[0] === EmployeeType.Guest;
+	const isGuestsDialog = fromType[0] === EmployeeType.Guest;
 
-  const isDowngradeType =
-    (toType === EmployeeType.Guest || toType === EmployeeType.User) &&
-    fromType[0] !== EmployeeType.Guest;
-  const isDowngradeToUser = toType === EmployeeType.User;
+	const isDowngradeType =
+		(toType === EmployeeType.Guest || toType === EmployeeType.User) &&
+		fromType[0] !== EmployeeType.Guest;
+	const isDowngradeToUser = toType === EmployeeType.User;
 
-  const onCloseAction = useCallback(() => {
-    if (isRequestRunning) return;
-    abortCallback?.();
-    onClose();
-  }, [abortCallback, isRequestRunning, onClose]);
+	const onCloseAction = useCallback(() => {
+		if (isRequestRunning) return;
+		abortCallback?.();
+		onClose();
+	}, [abortCallback, isRequestRunning, onClose]);
 
-  const onChangeUserType = useCallback(() => {
-    if (isRequestRunning) return;
+	const onChangeUserType = useCallback(() => {
+		if (isRequestRunning) return;
 
-    setIsRequestRunning(true);
+		setIsRequestRunning(true);
 
-    const updatePromise = isDowngradeType
-      ? downgradeUserType(toType, userIDs[0])
-      : updateUserType(toType, userIDs);
+		const updatePromise = isDowngradeType
+			? downgradeUserType(toType, userIDs[0])
+			: updateUserType(toType, userIDs);
 
-    updatePromise
-      .then((users) => {
-        toastr.success(
-          isGuestsDialog
-            ? t("SuccessChangeGuestType")
-            : t("SuccessChangeUserType"),
-        );
+		updatePromise
+			.then((users) => {
+				toastr.success(
+					isGuestsDialog
+						? t("SuccessChangeGuestType")
+						: t("SuccessChangeUserType"),
+				);
 
-        successCallback?.(users as TUser[]);
-      })
-      .catch(() => {
-        toastr.error(
-          <PaidQuotaLimitError
-            isRoomAdmin={undefined}
-            setInvitePanelOptions={undefined}
-            invitePanelVisible={undefined}
-          />,
-          "",
-          0,
-          true,
-          true,
-        );
+				successCallback?.(users as TUser[]);
+			})
+			.catch(() => {
+				toastr.error(
+					<PaidQuotaLimitError
+						isRoomAdmin={undefined}
+						setInvitePanelOptions={undefined}
+						invitePanelVisible={undefined}
+					/>,
+					"",
+					0,
+					true,
+					true,
+				);
 
-        abortCallback?.();
-      })
-      .finally(() => {
-        if (needResetUserSelection) setSelected("close");
-        setIsRequestRunning(false);
-        onClose();
-      });
-  }, [
-    abortCallback,
-    getPeopleListItem,
-    isGuestsDialog,
-    isRequestRunning,
-    needResetUserSelection,
-    onClose,
-    setSelected,
-    successCallback,
-    t,
-    toType,
-    updateUserType,
-    userIDs,
-  ]);
+				abortCallback?.();
+			})
+			.finally(() => {
+				if (needResetUserSelection) setSelected("close");
+				setIsRequestRunning(false);
+				onClose();
+			});
+	}, [
+		abortCallback,
+		getPeopleListItem,
+		isGuestsDialog,
+		isRequestRunning,
+		needResetUserSelection,
+		onClose,
+		setSelected,
+		successCallback,
+		t,
+		toType,
+		updateUserType,
+		userIDs,
+	]);
 
-  const onKeyUpHandler = useCallback(
-    (e: KeyboardEvent) => {
-      if (e.key === ButtonKeys.esc) onCloseAction();
-      if (e.key === ButtonKeys.enter) onChangeUserType();
-    },
-    [onChangeUserType, onCloseAction],
-  );
+	const onKeyUpHandler = useCallback(
+		(e: KeyboardEvent) => {
+			if (e.key === ButtonKeys.esc) onCloseAction();
+			if (e.key === ButtonKeys.enter) onChangeUserType();
+		},
+		[onChangeUserType, onCloseAction],
+	);
 
-  useEffect(() => {
-    document.addEventListener("keyup", onKeyUpHandler, false);
+	useEffect(() => {
+		document.addEventListener("keyup", onKeyUpHandler, false);
 
-    return () => {
-      document.removeEventListener("keyup", onKeyUpHandler, false);
-    };
-  }, [onKeyUpHandler]);
+		return () => {
+			document.removeEventListener("keyup", onKeyUpHandler, false);
+		};
+	}, [onKeyUpHandler]);
 
-  useEffect(() => {
-    if (!toType) return onClose();
+	useEffect(() => {
+		if (!toType) return onClose();
 
-    return () => {
-      onClose();
-    };
-  }, [onClose, toType]);
+		return () => {
+			onClose();
+		};
+	}, [onClose, toType]);
 
-  const firstType =
-    fromType?.length === 1 && fromType[0]
-      ? getUserTypeTranslation(fromType[0], t)
-      : null;
-  const secondType = getUserTypeTranslation(toType, t);
+	const firstType =
+		fromType?.length === 1 && fromType[0]
+			? getUserTypeTranslation(fromType[0], t)
+			: null;
+	const secondType = getUserTypeTranslation(toType, t);
 
-  return (
-    <ChangeUserTypeDialog
-      visible
-      isGuestsDialog={isGuestsDialog}
-      firstType={firstType ?? ""}
-      secondType={secondType}
-      onClose={onCloseAction}
-      onChangeUserType={onChangeUserType}
-      isRequestRunning={isRequestRunning}
-      isDowngradeType={isDowngradeType}
-      isDowngradeToUser={isDowngradeToUser}
-    />
-  );
+	return (
+		<ChangeUserTypeDialog
+			visible
+			isGuestsDialog={isGuestsDialog}
+			firstType={firstType ?? ""}
+			secondType={secondType}
+			onClose={onCloseAction}
+			onChangeUserType={onChangeUserType}
+			isRequestRunning={isRequestRunning}
+			isDowngradeType={isDowngradeType}
+			isDowngradeToUser={isDowngradeToUser}
+		/>
+	);
 };
 
 export default inject(({ peopleStore, infoPanelStore }: TStore) => {
-  const { dialogStore, usersStore } = peopleStore;
+	const { dialogStore, usersStore } = peopleStore;
 
-  const { data: dialogData } = dialogStore!;
+	const { data: dialogData } = dialogStore!;
 
-  const {
-    updateUserType,
-    getPeopleListItem,
-    needResetUserSelection,
-    setSelected,
-  } = usersStore!;
-  const { isVisible: infoPanelVisible } = infoPanelStore;
+	const {
+		updateUserType,
+		getPeopleListItem,
+		needResetUserSelection,
+		setSelected,
+	} = usersStore!;
+	const { isVisible: infoPanelVisible } = infoPanelStore;
 
-  return {
-    needResetUserSelection: !infoPanelVisible || needResetUserSelection,
+	return {
+		needResetUserSelection: !infoPanelVisible || needResetUserSelection,
 
-    getPeopleListItem,
+		getPeopleListItem,
 
-    dialogData,
-    updateUserType,
-    setSelected,
-  };
+		dialogData,
+		updateUserType,
+		setSelected,
+	};
 })(observer(ChangeUserTypeEvent));

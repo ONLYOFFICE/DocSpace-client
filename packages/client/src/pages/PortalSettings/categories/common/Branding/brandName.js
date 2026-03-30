@@ -29,7 +29,7 @@ import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { BrandName as BrandNamePage } from "@docspace/shared/pages/Branding/BrandName";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { isManagement } from "@docspace/shared/utils/common";
 import { BRAND_NAME_REGEX } from "@docspace/shared/constants";
 import { DeviceType } from "@docspace/shared/enums";

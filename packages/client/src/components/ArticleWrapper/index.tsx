@@ -25,13 +25,18 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
+import { useNavigate } from "react-router";
 
-import Article from "@docspace/shared/components/article";
-import { ArticleProps } from "@docspace/shared/components/article/Article.types";
+import Article from "@docspace/ui-kit/components/article";
+import { ArticleProps } from "@docspace/ui-kit/components/article/Article.types";
 import { getUserType } from "@docspace/shared/utils/common";
 
+import ArticlePluginItems from "./ArticlePluginItems/ArticlePluginItems";
+
 const ArticleWrapper = (props: ArticleProps) => {
-  return <Article {...props} />;
+  const navigate = useNavigate();
+
+  return <Article {...props} navigate={navigate} />;
 };
 
 export default inject<TStore>(
@@ -44,6 +49,7 @@ export default inject<TStore>(
     currentQuotaStore,
     settingsStore,
     backup,
+    pluginStore,
   }) => {
     const {
       isLiveChatAvailable,
@@ -98,12 +104,12 @@ export default inject<TStore>(
 
     const { isFreeTariff, isNonProfit, isTrial, currentTariffPlanTitle } =
       currentQuotaStore;
-    const {
-      isGracePeriod,
-      isLicenseExpiring,
-      isLicenseDateExpired,
-      trialDaysLeft,
-    } = currentTariffStatusStore;
+    const { isGracePeriod, isLicenseDateExpired, trialDaysLeft } =
+      currentTariffStatusStore;
+
+    const customSlot = pluginStore?.articleButtonItemsList ? (
+      <ArticlePluginItems items={pluginStore.articleButtonItemsList} />
+    ) : null;
 
     return {
       onProfileClick,
@@ -132,7 +138,6 @@ export default inject<TStore>(
       isGracePeriod,
       isFreeTariff,
       isPaymentPageAvailable,
-      isLicenseExpiring,
 
       standalone,
 
@@ -157,6 +162,7 @@ export default inject<TStore>(
       officeforiosUrl,
       hideAppsBlock:
         !downloaddesktopUrl && !officeforandroidUrl && !officeforiosUrl,
+      customSlot,
     };
   },
 )(observer(ArticleWrapper));

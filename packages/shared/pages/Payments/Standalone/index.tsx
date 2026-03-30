@@ -27,7 +27,7 @@
 import React from "react";
 
 import { LicenseContainer } from "./sub-components/LicenseContainer";
-import { ContactContainer } from "./sub-components/ContactContainer";
+import { ContactContainer } from "../common/ContactContainer";
 import { EnterpriseContainer } from "./sub-components/EnterpriseContainer";
 import { TrialContainer } from "./sub-components/TrialContainer";
 
@@ -50,6 +50,12 @@ export const StandalonePage = ({
   docspaceFaqUrl,
   licenseQuota,
   openOnNewPage,
+  isLifetimeLicense,
+  isGracePeriod,
+  isNotPaidPeriod,
+  gracePeriodEndDate,
+  delayDaysCount,
+  feedbackAndSupportUrl,
 }: IPaymentsProps) => {
   return (
     <div data-testid="standalone-page" className={styles.pageWrapper}>
@@ -81,6 +87,11 @@ export const StandalonePage = ({
           docspaceFaqUrl={docspaceFaqUrl}
           licenseQuota={licenseQuota}
           openOnNewPage={openOnNewPage}
+          isLifetimeLicense={isLifetimeLicense}
+          isGracePeriod={isGracePeriod}
+          isNotPaidPeriod={isNotPaidPeriod}
+          gracePeriodEndDate={gracePeriodEndDate}
+          delayDaysCount={delayDaysCount}
         />
       )}
       <LicenseContainer
@@ -89,7 +100,10 @@ export const StandalonePage = ({
         isLicenseCorrect={isLicenseCorrect}
         isTrial={isTrial}
       />
-      <ContactContainer salesEmail={salesEmail} />
+      <ContactContainer
+        salesEmail={salesEmail}
+        feedbackAndSupportUrl={feedbackAndSupportUrl}
+      />
     </div>
   );
 };

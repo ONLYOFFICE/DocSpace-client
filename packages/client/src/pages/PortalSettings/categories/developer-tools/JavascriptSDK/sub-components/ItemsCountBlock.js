@@ -26,52 +26,52 @@
 
 import { useState, useCallback } from "react";
 import debounce from "lodash.debounce";
-import { TextInput } from "@docspace/shared/components/text-input";
-import { HelpButton } from "@docspace/shared/components/help-button";
-import { Label } from "@docspace/shared/components/label";
-import { Text } from "@docspace/shared/components/text";
+import { TextInput } from "@docspace/ui-kit/components/text-input";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
+import { Label } from "@docspace/ui-kit/components/label";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import { LabelGroup, ControlsGroup } from "../presets/StyledPresets";
 
 export const ItemsCountBlock = ({ t, count, setConfig }) => {
-  const [value, setValue] = useState(count);
+	const [value, setValue] = useState(count);
 
-  const debouncedSetConfig = useCallback(
-    debounce((newValue) => {
-      setConfig((config) => ({
-        ...config,
-        filter: { ...config.filter, count: newValue },
-      }));
-    }, 500),
-    [setConfig],
-  );
+	const debouncedSetConfig = useCallback(
+		debounce((newValue) => {
+			setConfig((config) => ({
+				...config,
+				filter: { ...config.filter, count: newValue },
+			}));
+		}, 500),
+		[setConfig],
+	);
 
-  const onChangeCount = (e) => {
-    debouncedSetConfig(e.target.value);
-    setValue(e.target.value);
-  };
+	const onChangeCount = (e) => {
+		debouncedSetConfig(e.target.value);
+		setValue(e.target.value);
+	};
 
-  return (
-    <ControlsGroup>
-      <LabelGroup>
-        <Label className="label" text={t("ItemsCount")} />
-        <HelpButton
-          offsetRight={0}
-          size={12}
-          tooltipContent={
-            <Text fontSize="12px">{t("ItemsCountDescription")}</Text>
-          }
-          dataTestId="items_count_help_button"
-        />
-      </LabelGroup>
-      <TextInput
-        scale
-        onChange={onChangeCount}
-        placeholder={t("EnterCount")}
-        value={value}
-        tabIndex={6}
-        testId="items_count_input"
-      />
-    </ControlsGroup>
-  );
+	return (
+		<ControlsGroup>
+			<LabelGroup>
+				<Label className="label" text={t("ItemsCount")} />
+				<HelpButton
+					offsetRight={0}
+					size={12}
+					tooltipContent={
+						<Text fontSize="12px">{t("ItemsCountDescription")}</Text>
+					}
+					dataTestId="items_count_help_button"
+				/>
+			</LabelGroup>
+			<TextInput
+				scale
+				onChange={onChangeCount}
+				placeholder={t("EnterCount")}
+				value={value}
+				tabIndex={6}
+				testId="items_count_input"
+			/>
+		</ControlsGroup>
+	);
 };

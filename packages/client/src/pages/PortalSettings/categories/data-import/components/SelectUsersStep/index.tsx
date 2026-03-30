@@ -28,10 +28,10 @@ import { useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
 import { TFunction } from "i18next";
 
-import { SearchInput } from "@docspace/shared/components/search-input";
-import { Text } from "@docspace/shared/components/text";
+import { SearchInput } from "@docspace/ui-kit/components/search-input";
+import { Text } from "@docspace/ui-kit/components/text";
 
-import { InputSize } from "@docspace/shared/components/text-input";
+import { InputSize } from "@docspace/ui-kit/components/text-input";
 import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
 import { searchMigrationUsers } from "SRC_DIR/pages/PortalSettings/utils/importUtils";
 import AccountsTable from "./AccountsTable";
@@ -40,8 +40,8 @@ import AccountsPaging from "../../sub-components/AccountsPaging";
 import { Wrapper } from "../../StyledDataImport";
 
 import {
-  SelectUsersStepProps,
-  InjectedSelectUsersStepProps,
+	SelectUsersStepProps,
+	InjectedSelectUsersStepProps,
 } from "../../types";
 import { MigrationButtons } from "../../sub-components/MigrationButtons";
 import UsersInfoBlock from "../../sub-components/UsersInfoBlock";
@@ -51,195 +51,195 @@ const REFRESH_TIMEOUT = 100;
 const PAGE_SIZE = 25;
 
 const SelectUsersStep = (props: SelectUsersStepProps) => {
-  const {
-    canDisable,
-    shouldSetUsers,
+	const {
+		canDisable,
+		shouldSetUsers,
 
-    t,
-    incrementStep,
-    decrementStep,
-    withEmailUsers,
-    withoutEmailUsers,
-    searchValue,
-    setSearchValue,
-    areCheckedUsersEmpty,
-    setResultUsers,
-    cancelMigration,
-    clearCheckedAccounts,
-    setStep,
-    setWorkspace,
-    setMigratingWorkspace,
-    setMigrationPhase,
+		t,
+		incrementStep,
+		decrementStep,
+		withEmailUsers,
+		withoutEmailUsers,
+		searchValue,
+		setSearchValue,
+		areCheckedUsersEmpty,
+		setResultUsers,
+		cancelMigration,
+		clearCheckedAccounts,
+		setStep,
+		setWorkspace,
+		setMigratingWorkspace,
+		setMigrationPhase,
 
-    cancelUploadDialogVisible,
-    setCancelUploadDialogVisible,
-    selectedWithEmail,
-  } = props as InjectedSelectUsersStepProps;
+		cancelUploadDialogVisible,
+		setCancelUploadDialogVisible,
+		selectedWithEmail,
+	} = props as InjectedSelectUsersStepProps;
 
-  const [dataPortion, setDataPortion] = useState(
-    withEmailUsers.slice(0, PAGE_SIZE),
-  );
+	const [dataPortion, setDataPortion] = useState(
+		withEmailUsers.slice(0, PAGE_SIZE),
+	);
 
-  useEffect(() => {
-    setSearchValue("");
-  }, [setSearchValue]);
+	useEffect(() => {
+		setSearchValue("");
+	}, [setSearchValue]);
 
-  const handleDataChange = (leftBoundary: number, rightBoundary: number) => {
-    setDataPortion(withEmailUsers.slice(leftBoundary, rightBoundary));
-  };
+	const handleDataChange = (leftBoundary: number, rightBoundary: number) => {
+		setDataPortion(withEmailUsers.slice(leftBoundary, rightBoundary));
+	};
 
-  const onChangeInput = (value: string) => {
-    setSearchValue(value);
-  };
+	const onChangeInput = (value: string) => {
+		setSearchValue(value);
+	};
 
-  const onClearSearchInput = () => {
-    setSearchValue("");
-  };
+	const onClearSearchInput = () => {
+		setSearchValue("");
+	};
 
-  const filteredAccounts = searchMigrationUsers(dataPortion, searchValue);
+	const filteredAccounts = searchMigrationUsers(dataPortion, searchValue);
 
-  const handleStepIncrement = shouldSetUsers
-    ? () => {
-        setResultUsers();
-        incrementStep();
-      }
-    : incrementStep;
+	const handleStepIncrement = shouldSetUsers
+		? () => {
+				setResultUsers();
+				incrementStep();
+			}
+		: incrementStep;
 
-  const onCancelMigration = () => {
-    cancelMigration();
-    clearCheckedAccounts();
-    setStep(1);
-    setWorkspace("");
-    setMigratingWorkspace("");
-    setMigrationPhase("");
-  };
+	const onCancelMigration = () => {
+		cancelMigration();
+		clearCheckedAccounts();
+		setStep(1);
+		setWorkspace("");
+		setMigratingWorkspace("");
+		setMigrationPhase("");
+	};
 
-  const showCancelDialog = () => setCancelUploadDialogVisible(true);
-  const hideCancelDialog = () => setCancelUploadDialogVisible(false);
+	const showCancelDialog = () => setCancelUploadDialogVisible(true);
+	const hideCancelDialog = () => setCancelUploadDialogVisible(false);
 
-  const Buttons = (
-    <MigrationButtons
-      className="save-cancel-buttons"
-      onSaveClick={handleStepIncrement}
-      onCancelClick={decrementStep}
-      saveButtonLabel={t("Settings:NextStep")}
-      cancelButtonLabel={t("Common:Back")}
-      showReminder
-      displaySettings
-      saveButtonDisabled={canDisable ? areCheckedUsersEmpty : false}
-      migrationCancelLabel={t("Settings:CancelImport")}
-      onMigrationCancelClick={showCancelDialog}
-    />
-  );
+	const Buttons = (
+		<MigrationButtons
+			className="save-cancel-buttons"
+			onSaveClick={handleStepIncrement}
+			onCancelClick={decrementStep}
+			saveButtonLabel={t("Settings:NextStep")}
+			cancelButtonLabel={t("Common:Back")}
+			showReminder
+			displaySettings
+			saveButtonDisabled={canDisable ? areCheckedUsersEmpty : false}
+			migrationCancelLabel={t("Settings:CancelImport")}
+			onMigrationCancelClick={showCancelDialog}
+		/>
+	);
 
-  return (
-    <Wrapper>
-      {withoutEmailUsers.length > 0 ? (
-        <NoEmailUsersBlock
-          t={t as TFunction}
-          users={withoutEmailUsers.length}
-          isSelectUsersStep
-        />
-      ) : null}
-      {withEmailUsers.length > 0 ? (
-        <>
-          {Buttons}
+	return (
+		<Wrapper>
+			{withoutEmailUsers.length > 0 ? (
+				<NoEmailUsersBlock
+					t={t as TFunction}
+					users={withoutEmailUsers.length}
+					isSelectUsersStep
+				/>
+			) : null}
+			{withEmailUsers.length > 0 ? (
+				<>
+					{Buttons}
 
-          <UsersInfoBlock
-            selectedUsers={selectedWithEmail}
-            totalUsers={withEmailUsers.length}
-          />
+					<UsersInfoBlock
+						selectedUsers={selectedWithEmail}
+						totalUsers={withEmailUsers.length}
+					/>
 
-          <SearchInput
-            id="search-users-input"
-            placeholder={t("Common:Search")}
-            value={searchValue}
-            onChange={onChangeInput}
-            refreshTimeout={REFRESH_TIMEOUT}
-            onClearSearch={onClearSearchInput}
-            size={InputSize.base}
-            dataTestId="search_users_input"
-          />
+					<SearchInput
+						id="search-users-input"
+						placeholder={t("Common:Search")}
+						value={searchValue}
+						onChange={onChangeInput}
+						refreshTimeout={REFRESH_TIMEOUT}
+						onClearSearch={onClearSearchInput}
+						size={InputSize.base}
+						dataTestId="search_users_input"
+					/>
 
-          <AccountsTable t={t as TFunction} accountsData={filteredAccounts} />
+					<AccountsTable t={t as TFunction} accountsData={filteredAccounts} />
 
-          {withEmailUsers.length > PAGE_SIZE && filteredAccounts.length > 0 ? (
-            <AccountsPaging
-              t={t as TFunction}
-              numberOfItems={withEmailUsers.length}
-              setDataPortion={handleDataChange}
-              pagesPerPage={PAGE_SIZE}
-            />
-          ) : null}
+					{withEmailUsers.length > PAGE_SIZE && filteredAccounts.length > 0 ? (
+						<AccountsPaging
+							t={t as TFunction}
+							numberOfItems={withEmailUsers.length}
+							setDataPortion={handleDataChange}
+							pagesPerPage={PAGE_SIZE}
+						/>
+					) : null}
 
-          {filteredAccounts.length > 0 ? Buttons : null}
-        </>
-      ) : (
-        <>
-          <Text fontWeight={600} lineHeight="20px" className="mb-17">
-            {t("Settings:AddEmailsWarning")}
-          </Text>
-          {Buttons}
-        </>
-      )}
+					{filteredAccounts.length > 0 ? Buttons : null}
+				</>
+			) : (
+				<>
+					<Text fontWeight={600} lineHeight="20px" className="mb-17">
+						{t("Settings:AddEmailsWarning")}
+					</Text>
+					{Buttons}
+				</>
+			)}
 
-      {cancelUploadDialogVisible ? (
-        <CancelUploadDialog
-          visible={cancelUploadDialogVisible}
-          onClose={hideCancelDialog}
-          cancelMigration={onCancelMigration}
-          loading={false}
-          isFifthStep={false}
-          isSixthStep={false}
-        />
-      ) : null}
-    </Wrapper>
-  );
+			{cancelUploadDialogVisible ? (
+				<CancelUploadDialog
+					visible={cancelUploadDialogVisible}
+					onClose={hideCancelDialog}
+					cancelMigration={onCancelMigration}
+					loading={false}
+					isFifthStep={false}
+					isSixthStep={false}
+				/>
+			) : null}
+		</Wrapper>
+	);
 };
 
 export default inject<TStore>(({ importAccountsStore, dialogsStore }) => {
-  const {
-    incrementStep,
-    decrementStep,
-    users,
-    withEmailUsers,
-    withoutEmailUsers,
-    searchValue,
-    setSearchValue,
-    cancelMigration,
-    checkedUsers,
-    areCheckedUsersEmpty,
-    setResultUsers,
-    clearCheckedAccounts,
-    setStep,
-    setWorkspace,
-    setMigratingWorkspace,
-    setMigrationPhase,
-    selectedWithEmail,
-  } = importAccountsStore;
-  const { cancelUploadDialogVisible, setCancelUploadDialogVisible } =
-    dialogsStore;
+	const {
+		incrementStep,
+		decrementStep,
+		users,
+		withEmailUsers,
+		withoutEmailUsers,
+		searchValue,
+		setSearchValue,
+		cancelMigration,
+		checkedUsers,
+		areCheckedUsersEmpty,
+		setResultUsers,
+		clearCheckedAccounts,
+		setStep,
+		setWorkspace,
+		setMigratingWorkspace,
+		setMigrationPhase,
+		selectedWithEmail,
+	} = importAccountsStore;
+	const { cancelUploadDialogVisible, setCancelUploadDialogVisible } =
+		dialogsStore;
 
-  return {
-    incrementStep,
-    decrementStep,
-    users,
-    withEmailUsers,
-    withoutEmailUsers,
-    searchValue,
-    setSearchValue,
-    cancelMigration,
-    checkedUsers,
-    areCheckedUsersEmpty,
-    setResultUsers,
-    clearCheckedAccounts,
-    setStep,
-    setWorkspace,
-    setMigratingWorkspace,
-    setMigrationPhase,
+	return {
+		incrementStep,
+		decrementStep,
+		users,
+		withEmailUsers,
+		withoutEmailUsers,
+		searchValue,
+		setSearchValue,
+		cancelMigration,
+		checkedUsers,
+		areCheckedUsersEmpty,
+		setResultUsers,
+		clearCheckedAccounts,
+		setStep,
+		setWorkspace,
+		setMigratingWorkspace,
+		setMigrationPhase,
 
-    cancelUploadDialogVisible,
-    setCancelUploadDialogVisible,
-    selectedWithEmail,
-  };
+		cancelUploadDialogVisible,
+		setCancelUploadDialogVisible,
+		selectedWithEmail,
+	};
 })(observer(SelectUsersStep));

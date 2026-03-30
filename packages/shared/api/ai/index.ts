@@ -24,12 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { toastr } from "../../components/toast";
-import { getCookie } from "../../utils";
-import { getAiModelName } from "../../utils/ai";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import { checkFilterInstance } from "../../utils/common";
 
-import { request } from "../client";
+import { request, getAuthToken } from "../client";
 import type { TFile } from "../files/types";
 import type { KnowledgeType, ToolsPermission, WebSearchType } from "./enums";
 import RoomsFilter from "../rooms/filter";
@@ -55,6 +54,8 @@ import type {
   TCreateAgentData,
   TEditAgentData,
   TGetAgents,
+  TDefaultProvider,
+  TUpdateDefaultProviderData,
 } from "./types";
 
 const baseUrl = "/ai";
@@ -129,7 +130,6 @@ export const getModels = async (
 
   return res.map((m) => ({
     ...m,
-    name: getAiModelName(m.modelId),
   })) as TModelList;
 };
 
@@ -148,19 +148,38 @@ export const getProviderAvailabilityStatus = async (
     }));
 };
 
+const getAuthHeaders = (): Record<string, string> => {
+  if (typeof window === "undefined") return {};
+
+  const cookie = getCookie("asc_auth_key");
+  if (cookie) return { Authorization: cookie };
+
+  const token = getAuthToken();
+  if (token) return { Authorization: token };
+
+  const publicRoomKey =
+    new URLSearchParams(window.location.search).get("share");
+
+  if (publicRoomKey)
+    return {
+      Authorization: `Bearer ${publicRoomKey}`,
+      "Request-Token": publicRoomKey,
+    };
+
+  return {};
+};
+
 export const startNewChat = async (
   roomId: number | string,
   message: string,
   files: string[],
   abortController?: AbortController,
 ) => {
-  const authHeader = getCookie("asc_auth_key")!;
-
   const response = await fetch(`/api/2.0${baseUrl}/rooms/${roomId}/chats`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: authHeader,
+      ...getAuthHeaders(),
     },
     signal: abortController?.signal,
     body: JSON.stringify({ message, files }),
@@ -175,13 +194,11 @@ export const sendMessageToChat = async (
   files: string[],
   abortController?: AbortController,
 ) => {
-  const authHeader = getCookie("asc_auth_key")!;
-
   const response = await fetch(`/api/2.0${baseUrl}/chats/${chatId}/messages`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: authHeader,
+      ...getAuthHeaders(),
     },
     signal: abortController?.signal,
     body: JSON.stringify({ message, files }),
@@ -625,7 +642,7 @@ export const getAIAgents = async (
 };
 
 export const deleteAIAgent = async (id: TAgent["id"]) => {
-  await request({ method: "DELETE", url: `${baseUrl}/agents/${id}` });
+  await request({ method: "DELETE", url: `${baseUrl}/agents/${id}`, data: {} });
 };
 
 export const resetAIAgentQuota = async (roomIds: TAgent["id"]) => {
@@ -665,4 +682,30 @@ export const getMCPServerById = async (id: string) => {
   const res = await request(options);
 
   return res as TServer;
+};
+
+export const getDefaultProvider = async () => {
+  const options = {
+    method: "get",
+    url: `${baseUrl}/providers/default`,
+  };
+
+  const res = await request(options);
+
+  return res as TDefaultProvider;
+};
+
+export const updateDefaultProvider = async ({
+  providerId,
+  defaultModel,
+}: TUpdateDefaultProviderData) => {
+  const options = {
+    method: "put",
+    url: `${baseUrl}/providers/default`,
+    data: { providerId, defaultModel },
+  };
+
+  const res = await request(options);
+
+  return res as TDefaultProvider;
 };

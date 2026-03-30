@@ -26,9 +26,9 @@
 
 import React from "react";
 
-import { Text } from "@docspace/shared/components/text";
-import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
-import { globalColors } from "@docspace/shared/themes";
+import { Text } from "@docspace/ui-kit/components/text";
+import { AddButton } from "@docspace/ui-kit/components/add-button";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 import { StyledInputGroup } from "../ClientForm.styled";
 
@@ -94,7 +94,7 @@ const SelectGroup = ({
           alt="img"
           src={value}
         />
-        <SelectorAddButton onClick={onClick} label={selectLabel} />
+        <AddButton onClick={onClick} label={selectLabel} />
       </div>
       <Text
         fontSize="12px"

@@ -155,7 +155,7 @@ const createIconEntries = (icons: Record<string, string[]>) => {
 const { all, nonRoom } = createIconEntries(iconsMap);
 
 const getUrlByName = (size: number, name: string): string =>
-    require(`PUBLIC_DIR/images/icons/${size}/${name}?url`);
+  `/static/images/icons/${size}/${name}`;
 
 const generateMapForSize = (
   size: number,

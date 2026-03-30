@@ -28,10 +28,10 @@
 
 import equal from "fast-deep-equal";
 import React, { useMemo, useState } from "react";
+import { isMobile as isMobileDevice } from "react-device-detect";
 
 import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
-import FileActionsConvertEditDocReactSvg from "PUBLIC_DIR/images/file.actions.convert.edit.doc.react.svg";
 import LinkReactSvgUrl from "PUBLIC_DIR/images/link.react.svg?url";
 import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.react.svg?url";
 import Refresh12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/refresh.react.svg?url";
@@ -43,18 +43,17 @@ import CustomFilter16ReactSvgUrl from "PUBLIC_DIR/images/icons/16/custom-filter.
 import LockedIconReactSvg from "PUBLIC_DIR/images/file.actions.locked.react.svg?url";
 import LockedIconReact12Svg from "PUBLIC_DIR/images/icons/12/lock.react.svg?url";
 import FavoriteFillReactSvgUrl from "PUBLIC_DIR/images/favorite.fill.react.svg?url";
-
-import { isMobile as isMobileDevice } from "react-device-detect";
+import FormFillIcon from "PUBLIC_DIR/images/form.fill.rect.svg?url";
 
 import { FILLING_FORM_STATUS_COLORS } from "../../constants";
 
-import { Tooltip } from "../tooltip";
-import { Text } from "../text";
-import { Link, LinkTarget, LinkType } from "../link";
-import { Badge } from "../badge";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
+import { Badge } from "@docspace/ui-kit/components/badge";
 
 import { RoomsType, ShareAccessRights, VectorizationStatus } from "../../enums";
-import { globalColors } from "../../themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme";
 
 import {
   classNames,
@@ -68,7 +67,7 @@ import {
 
 import styles from "./Badges.module.scss";
 import type { BadgesProps, BadgeWrapperProps } from "./Badges.type";
-import { IconButton } from "../icon-button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { FailedVectorizationBadge } from "../failed-vectorization-badge";
 
 const BadgeWrapper = ({
@@ -132,6 +131,7 @@ const Badges = ({
   onClickLock,
   onClickFavorite,
   isPublicRoom,
+  editorsTooltip,
 }: BadgesProps) => {
   const {
     id,
@@ -151,7 +151,7 @@ const Badges = ({
     locked,
     isFavorite,
     isAIAgent,
-    // startFilling,
+    startFilling,
   } = item;
 
   const isTile = viewAs === "tile";
@@ -173,8 +173,6 @@ const Badges = ({
   const paddingBadge = isTile || tabletViewBadge ? "0 5px" : "0 5px";
 
   const fontSizeBadge = isTile || tabletViewBadge ? "11px" : "9px";
-
-  const iconEdit = <FileActionsConvertEditDocReactSvg />;
 
   const iconRefresh = desktopView ? Refresh12ReactSvgUrl : RefreshReactSvgUrl;
   const iconLock = desktopView ? LockedIconReact12Svg : LockedIconReactSvg;
@@ -317,18 +315,39 @@ const Badges = ({
         "additional-badges file__badges",
       )}
     >
-      {/* {startFilling && (
+      {startFilling && (
         <IconButton
           size={sizeBadge}
-          iconName={iconForm}
+          iconName={FormFillIcon}
           onClick={onFilesClick}
           title={t("Common:ReadyToFillOut")}
-          hoverColor={accent}
+          color="accent"
+          hoverColor="accent"
           className="badge icons-group is-editing tablet-badge tablet-edit"
         />
-      )} */}
+      )}
 
-      {item.formFillingStatus ? (
+      {item.isFillingPreparing ? (
+        <BadgeWrapper isTile={isTile}>
+          <Badge
+            noHover
+            isVersionBadge
+            className={classNames(
+              styles.versionBadge,
+              "badge-version badge-version-current tablet-badge icons-group",
+            )}
+            backgroundColor={
+              themeIsBase ? globalColors.gray : globalColors.grayDark
+            }
+            label={t("Common:Preparing")}
+            title={t("Common:Preparing")}
+            {...versionBadgeProps}
+            style={{ width: "max-content" }}
+          />
+        </BadgeWrapper>
+      ) : null}
+
+      {item.formFillingStatus && !item.isFillingPreparing ? (
         <BadgeWrapper isTile={isTile}>
           <Badge
             noHover
@@ -365,19 +384,7 @@ const Badges = ({
         </BadgeWrapper>
       ) : null}
 
-      {isEditing ? (
-        <IconButton
-          iconNode={iconEdit}
-          className={classNames(
-            styles.iconBadge,
-            "badge icons-group is-editing tablet-badge tablet-edit",
-          )}
-          onClick={onFilesClick}
-          color="accent"
-          hoverColor="accent"
-          title={t("Common:EditButton")}
-        />
-      ) : null}
+      {isEditing ? <>{editorsTooltip}</> : null}
 
       {locked && !isTile ? (
         <div

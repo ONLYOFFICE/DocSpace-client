@@ -34,8 +34,8 @@ $font-family-base:
   Arial;
 
 @use "../../../../public/css/fonts.css";
-@use "../../../shared/styles/variables/colors";
-@use "../../../shared/styles/theme.scss";
+@use "@docspace/ui-kit/styles/variables/colors";
+@use "@docspace/shared/styles/theme.scss";
 
 html,
 body {

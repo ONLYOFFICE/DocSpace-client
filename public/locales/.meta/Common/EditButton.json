@@ -3,7 +3,7 @@
   "content": "Edit",
   "content_en_sha1_hash": "5301648dcf6b53cefc9ed52999aaa92d4603cae0",
   "created_at": "2025-05-19T21:30:44.738Z",
-  "updated_at": "2025-12-23T10:05:43.411Z",
+  "updated_at": "2026-03-26T08:26:58.030Z",
   "comment": {
     "text": "The translation key \"EditButton\" is used to display the label \"Edit\" in various UI elements such as buttons and toggle switches. It is intended to be used in situations where users need to make changes or edits, typically in contexts related to commenting, theme editing, or API key management.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/panels/TopUpBalance/sub-components/AutoPayments.tsx",
-      "line_number": 324,
-      "context": "autoPayments={autoPayments!}\n formatWalletCurrency={formatWalletCurrency}\n />\n <Button\n key=\"EditButton\"\n label={t(\"Common:EditButton\")}\n size={ButtonSize.small}\n onClick={onEditClick}\n isDisabled={isDisabled}\n testId=\"edit_auto_payment_button\"\n />",
+      "file_path": "/packages/client/src/components/dialogs/PauseSubmissionsDialog/index.tsx",
+      "line_number": 96,
+      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"pause-submissions-dialog_edit\"\n key=\"EditButton\"\n label={t(\"Common:EditButton\")}\n size={ButtonSize.normal}\n primary\n onClick={handleEdit}\n isLoading={isLoading}\n isDisabled={isLoading}",
       "module": "/packages/client"
     },
     {
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
-      "line_number": 833,
+      "line_number": 801,
       "context": "testId=\"appearance_save_button\"\n />\n \n <Button\n className=\"edit-current-theme button\"\n label={t(\"Common:EditButton\")}\n onClick={onClickEdit}\n size={buttonSize}\n isDisabled={isDisabledEditButton}\n testId=\"appearance_edit_button\"\n />",
       "module": "/packages/client"
     },
@@ -47,20 +47,26 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/AutoPaymentInfo.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/shared/top-up-balance/sub-components/AutoPayments.tsx",
+      "line_number": 324,
+      "context": "autoPayments={autoPayments!}\n formatWalletCurrency={formatWalletCurrency}\n />\n <Button\n key=\"EditButton\"\n label={t(\"Common:EditButton\")}\n size={ButtonSize.small}\n onClick={onEditClick}\n isDisabled={isDisabled}\n testId=\"edit_auto_payment_button\"\n />",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/wallet/sub-components/AutoPaymentInfo.tsx",
       "line_number": 85,
       "context": "<Link\n onClick={onOpen}\n textDecoration=\"underline\"\n dataTestId=\"auto_edit_button\"\n >\n {t(\"Common:EditButton\")}\n </Link>\n ) : null}\n </Text>\n </div>\n </div>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1893,
+      "line_number": 2034,
       "context": "disabled: false,\n },\n {\n id: \"option_edit-pdf\",\n key: \"edit-pdf\",\n label: t(\"Common:EditButton\"),\n icon: AccessEditReactSvgUrl,\n onClick: () => {\n if (isMobile) {\n toastr.info(t(\"Common:MobileEditPdfNotAvailableInfo\"));\n return;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1893,
+      "line_number": 2034,
       "context": "disabled: false,\n },\n {\n id: \"option_edit-pdf\",\n key: \"edit-pdf\",\n label: t(\"Common:EditButton\"),\n icon: AccessEditReactSvgUrl,\n onClick: () => {\n if (isMobile) {\n toastr.info(t(\"Common:MobileEditPdfNotAvailableInfo\"));\n return;",
       "module": "/packages/client"
     },
@@ -77,12 +83,6 @@
       "module": "/packages/management"
     },
     {
-      "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 376,
-      "context": "\"badge icons-group is-editing tablet-badge tablet-edit\",\n )}\n onClick={onFilesClick}\n color=\"accent\"\n hoverColor=\"accent\"\n title={t(\"Common:EditButton\")}\n />\n ) : null}\n \n {locked && !isTile ? (\n <div",
-      "module": "/packages/shared"
-    },
-    {
       "file_path": "/packages/shared/components/media-viewer/MediaViewer.helpers.tsx",
       "line_number": 62,
       "context": ") => {\n const options: ContextMenuModel[] = [\n {\n id: \"option_edit\",\n key: \"edit\",\n label: t(\"Common:EditButton\"),\n icon: AccessEditReactSvgUrl,\n onClick: () => funcs.onClickLinkEdit?.(item),\n disabled: !item.viewAccessibility.WebEdit,\n },\n {",
@@ -90,13 +90,13 @@
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 300,
+      "line_number": 330,
       "context": "};\n \n export const getNameAccess = (access: ShareAccessRights, t: TTranslation) => {\n switch (access) {\n case ShareAccessRights.Editing:\n return t(\"Common:EditButton\");\n case ShareAccessRights.CustomFilter:\n return t(\"Common:UseCustomFilter\");\n case ShareAccessRights.Review:\n return t(\"Common:Review\");\n case ShareAccessRights.Comment:",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 300,
+      "line_number": 330,
       "context": "};\n \n export const getNameAccess = (access: ShareAccessRights, t: TTranslation) => {\n switch (access) {\n case ShareAccessRights.Editing:\n return t(\"Common:EditButton\");\n case ShareAccessRights.CustomFilter:\n return t(\"Common:UseCustomFilter\");\n case ShareAccessRights.Review:\n return t(\"Common:Review\");\n case ShareAccessRights.Comment:",
       "module": "/packages/shared"
     }

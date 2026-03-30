@@ -36,7 +36,7 @@ import {
   uploadXmlMetadata,
   validateCerts,
 } from "@docspace/shared/api/settings";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { EmployeeType } from "@docspace/shared/enums";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
 import {

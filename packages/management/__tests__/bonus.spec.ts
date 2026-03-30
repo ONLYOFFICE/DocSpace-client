@@ -28,6 +28,7 @@ import {
   colorThemeHandler,
   tariffHandler,
 } from "@docspace/shared/__mocks__/handlers";
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import { expect, test } from "./fixtures/base";
 
 test.describe("Bonus", () => {
@@ -48,10 +49,6 @@ test.describe("Bonus", () => {
 
     await expect(page.getByTestId("bonus")).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "bonus",
-      "bonus-render.png",
-    ]);
+    await expectScreenshot(page, ["desktop", "bonus", "bonus-render.png"]);
   });
 });

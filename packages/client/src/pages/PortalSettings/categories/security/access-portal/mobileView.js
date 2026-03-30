@@ -28,7 +28,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { Trans } from "react-i18next";
 
-import { MobileCategoryWrapper } from "@docspace/shared/components/mobile-category-wrapper";
+import { CategoryItem } from "@docspace/ui-kit/components/category-item";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
@@ -52,7 +52,7 @@ const MobileView = (props) => {
 
   return (
     <MainContainer withoutExternalLink={withoutExternalLink}>
-      <MobileCategoryWrapper
+      <CategoryItem
         title={t("SettingPasswordTittle")}
         subtitle={
           <Trans
@@ -64,7 +64,7 @@ const MobileView = (props) => {
         url="/portal-settings/security/access-portal/password"
         onClickLink={onClickLink}
       />
-      <MobileCategoryWrapper
+      <CategoryItem
         title={t("TwoFactorAuth")}
         subtitle={
           <Trans i18nKey="TwoFactorAuthMobileDescription" ns="Settings" t={t} />
@@ -72,7 +72,7 @@ const MobileView = (props) => {
         url="/portal-settings/security/access-portal/tfa"
         onClickLink={onClickLink}
       />
-      <MobileCategoryWrapper
+      <CategoryItem
         title={t("TrustedMail")}
         subtitle={
           <Trans i18nKey="TrustedMailMobileDescription" ns="Settings" t={t} />
@@ -80,7 +80,7 @@ const MobileView = (props) => {
         url="/portal-settings/security/access-portal/trusted-mail"
         onClickLink={onClickLink}
       />
-      <MobileCategoryWrapper
+      <CategoryItem
         title={t("DeveloperToolsAccess")}
         subtitle={
           <Trans
@@ -92,7 +92,7 @@ const MobileView = (props) => {
         url="/portal-settings/security/access-portal/access-dev-tools"
         onClickLink={onClickLink}
       />
-      <MobileCategoryWrapper
+      <CategoryItem
         title={t("InvitationSettings")}
         subtitle={
           <Trans
@@ -105,7 +105,7 @@ const MobileView = (props) => {
         url="/portal-settings/security/access-portal/invitation-settings"
         onClickLink={onClickLink}
       />
-      <MobileCategoryWrapper
+      <CategoryItem
         title={t("IPSecurity")}
         subtitle={
           <Trans i18nKey="IPSecurityMobileDescription" ns="Settings" t={t} />
@@ -113,13 +113,13 @@ const MobileView = (props) => {
         url="/portal-settings/security/access-portal/ip"
         onClickLink={onClickLink}
       />
-      <MobileCategoryWrapper
+      <CategoryItem
         title={t("BruteForceProtection")}
         subtitle={t("BruteForceProtectionDescriptionMobile")}
         url="/portal-settings/security/access-portal/brute-force-protection"
         onClickLink={onClickLink}
       />
-      <MobileCategoryWrapper
+      <CategoryItem
         title={t("AdminsMessage")}
         subtitle={
           <Trans i18nKey="AdminsMessageMobileDescription" ns="Settings" t={t} />
@@ -127,7 +127,7 @@ const MobileView = (props) => {
         url="/portal-settings/security/access-portal/admin-message"
         onClickLink={onClickLink}
       />
-      <MobileCategoryWrapper
+      <CategoryItem
         title={t("SessionLifetime")}
         subtitle={t("SessionLifetimeMobileDescription", {
           productName: t("Common:ProductName"),

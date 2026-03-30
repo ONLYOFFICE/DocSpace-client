@@ -116,7 +116,7 @@ describe("ConflictResolve", () => {
     render(<ConflictResolve {...defaultProps} isLoading />);
 
     // Check that the loading indicator is present
-    const modal = screen.getByTestId("modal");
+    const modal = screen.getByTestId("conflict_resolve_dialog");
     const loaderElements = modal.getElementsByClassName("dialog-loader-header");
     expect(loaderElements.length).toBeGreaterThan(0);
   });

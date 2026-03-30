@@ -30,18 +30,18 @@ import { ChangeEvent, KeyboardEvent, useContext } from "react";
 import { Trans, useTranslation } from "react-i18next";
 
 import { TPasswordSettings } from "@docspace/shared/api/settings/types";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { FieldContainer } from "@docspace/shared/components/field-container";
-import { PasswordInput } from "@docspace/shared/components/password-input";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
+import { PasswordInput } from "@docspace/ui-kit/components/password-input";
 import {
   InputSize,
   InputType,
   TextInput,
-} from "@docspace/shared/components/text-input";
+} from "@docspace/ui-kit/components/text-input";
 import { ALLOWED_PASSWORD_CHARACTERS } from "@docspace/shared/constants";
-import { Link, LinkTarget } from "@docspace/shared/components/link";
-import { Text } from "@docspace/shared/components/text";
-import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 import { GreetingUserContainer } from "@/components/GreetingContainer";

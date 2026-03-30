@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useCallback, useRef } from "react";
-import { CustomScrollbarsVirtualListWithAutoFocus } from "@docspace/shared/components/scrollbar";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import AutoSizer from "react-virtualized-auto-sizer";
 import { VariableSizeList as List } from "react-window";
 import { inject, observer } from "mobx-react";
@@ -36,71 +36,72 @@ const rowHeight = 52;
 const rowIncreasedHeight = 88;
 
 const VirtualScroll = (props) => (
-  <CustomScrollbarsVirtualListWithAutoFocus
-    {...props}
-    paddingAfterLastItem={ASIDE_PADDING_AFTER_LAST_ITEM}
-  />
+	<Scrollbar
+		{...props}
+		paddingAfterLastItem={ASIDE_PADDING_AFTER_LAST_ITEM}
+		autoFocus
+	/>
 );
 
 const FileList = ({ uploadDataFiles }) => {
-  const [rowSizes, setRowSizes] = useState({});
-  const listRef = useRef(null);
+	const [rowSizes, setRowSizes] = useState({});
+	const listRef = useRef(null);
 
-  const onUpdateHeight = (i, showInput) => {
-    const updatedHiaght = showInput ? rowIncreasedHeight : rowHeight;
+	const onUpdateHeight = (i, showInput) => {
+		const updatedHiaght = showInput ? rowIncreasedHeight : rowHeight;
 
-    if (listRef.current) {
-      listRef.current.resetAfterIndex(i, false);
-    }
+		if (listRef.current) {
+			listRef.current.resetAfterIndex(i, false);
+		}
 
-    const updatedValues = {
-      [i]: updatedHiaght,
-    };
+		const updatedValues = {
+			[i]: updatedHiaght,
+		};
 
-    setRowSizes((prevState) => ({
-      ...prevState,
-      ...updatedValues,
-    }));
-  };
+		setRowSizes((prevState) => ({
+			...prevState,
+			...updatedValues,
+		}));
+	};
 
-  const getSize = (i) => {
-    return rowSizes[i] ? rowSizes[i] : rowHeight;
-  };
+	const getSize = (i) => {
+		return rowSizes[i] ? rowSizes[i] : rowHeight;
+	};
 
-  const renderRow = useCallback(({ data, index, style }) => {
-    const item = data[index];
+	const renderRow = useCallback(({ data, index, style }) => {
+		const item = data[index];
 
-    return (
-      <div style={style}>
-        <FileRow item={item} updateRowsHeight={onUpdateHeight} index={index} />
-      </div>
-    );
-  }, []);
+		return (
+			<div style={style}>
+				<FileRow item={item} updateRowsHeight={onUpdateHeight} index={index} />
+			</div>
+		);
+	}, []);
 
-  const renderList = ({ height, width }) => {
-    return (
-      <List
-        ref={listRef}
-        className="List"
-        height={height}
-        width={width}
-        itemSize={getSize}
-        itemCount={uploadDataFiles.length}
-        itemData={uploadDataFiles}
-        outerElementType={VirtualScroll}
-      >
-        {renderRow}
-      </List>
-    );
-  };
+	const renderList = ({ height, width }) => {
+		return (
+			<List
+				ref={listRef}
+				className="List"
+				height={height}
+				width={width}
+				itemSize={getSize}
+				itemCount={uploadDataFiles.length}
+				itemData={uploadDataFiles}
+				outerElementType={VirtualScroll}
+			>
+				{renderRow}
+			</List>
+		);
+	};
 
-  return <AutoSizer>{renderList}</AutoSizer>;
+	return <AutoSizer>{renderList}</AutoSizer>;
 };
 
 export default inject(({ uploadDataStore }) => {
-  const { uploadedFilesHistory } = uploadDataStore;
+	const { uploadedFilesHistory } = uploadDataStore;
 
-  return {
-    uploadDataFiles: uploadedFilesHistory,
-  };
+	return {
+		uploadDataFiles: uploadedFilesHistory,
+	};
 })(observer(FileList));

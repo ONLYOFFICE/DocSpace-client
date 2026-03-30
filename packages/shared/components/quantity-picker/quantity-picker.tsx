@@ -30,11 +30,11 @@ import classNames from "classnames";
 import PlusIcon from "PUBLIC_DIR/images/payment.plus.react.svg";
 import MinusIcon from "PUBLIC_DIR/images/minus.react.svg";
 
-import { Text } from "../text";
-import { Slider } from "../slider";
-import { TextInput } from "../text-input";
-import { InputType } from "../text-input/TextInput.enums";
-import { TabItem } from "../tab-item";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Slider } from "@docspace/ui-kit/components/slider";
+import { TextInput } from "@docspace/ui-kit/components/text-input";
+import { InputType } from "@docspace/ui-kit/components/text-input";
+import { TabItem } from "@docspace/ui-kit/components/tab-item";
 
 import styles from "./quantity-picker.module.scss";
 

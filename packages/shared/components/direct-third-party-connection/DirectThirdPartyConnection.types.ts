@@ -25,83 +25,83 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type {
-  Nullable,
-  ThirdPartyAccountType,
-  ConnectedThirdPartyAccountType,
-  TTranslation,
+	Nullable,
+	ThirdPartyAccountType,
+	ConnectedThirdPartyAccountType,
+	TTranslation,
 } from "../../types";
-import type { ButtonSize } from "../button";
+import type { ButtonSize } from "@docspace/ui-kit/components/button";
 import type {
-  FileInfoType,
-  FilesSelectorSettings,
+	FileInfoType,
+	FilesSelectorSettings,
 } from "../files-selector-input/FilesSelectorInput.types";
 import type { TThirdParties } from "../../api/files/types";
-import type { TBreadCrumb } from "../selector/Selector.types";
+import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
 
 export type DirectThirdPartyConnectionState = {
-  // folderList: {};
-  isLoading: boolean;
-  isInitialLoading: boolean;
-  isUpdatingInfo: boolean;
+	// folderList: {};
+	isLoading: boolean;
+	isInitialLoading: boolean;
+	isUpdatingInfo: boolean;
 };
 
 export interface DirectThirdPartyConnectionProps {
-  className?: string;
-  openConnectWindow: (
-    serviceName: string,
-    modal: Window | null,
-  ) => Promise<Window | null>;
+	className?: string;
+	openConnectWindow: (
+		serviceName: string,
+		modal: Window | null,
+	) => Promise<Window | null>;
 
-  connectDialogVisible: boolean;
-  deleteThirdPartyDialogVisible: boolean;
-  connectedThirdPartyAccount: Nullable<ConnectedThirdPartyAccountType>;
-  setConnectDialogVisible: (visible: boolean) => void;
-  setDeleteThirdPartyDialogVisible: (visible: boolean) => void;
-  clearLocalStorage: VoidFunction;
-  setSelectedThirdPartyAccount: (
-    elem: Nullable<Partial<ThirdPartyAccountType>>,
-  ) => void;
-  isTheSameThirdPartyAccount: boolean;
-  selectedThirdPartyAccount: Nullable<ThirdPartyAccountType>;
-  accounts: ThirdPartyAccountType[];
-  setThirdPartyAccountsInfo: (t: TTranslation) => Promise<void>;
+	connectDialogVisible: boolean;
+	deleteThirdPartyDialogVisible: boolean;
+	connectedThirdPartyAccount: Nullable<ConnectedThirdPartyAccountType>;
+	setConnectDialogVisible: (visible: boolean) => void;
+	setDeleteThirdPartyDialogVisible: (visible: boolean) => void;
+	clearLocalStorage: VoidFunction;
+	setSelectedThirdPartyAccount: (
+		elem: Nullable<Partial<ThirdPartyAccountType>>,
+	) => void;
+	isTheSameThirdPartyAccount: boolean;
+	selectedThirdPartyAccount: Nullable<ThirdPartyAccountType>;
+	accounts: ThirdPartyAccountType[];
+	setThirdPartyAccountsInfo: (t: TTranslation) => Promise<void>;
 
-  // DeleteThirdPartyDialog
-  deleteThirdParty: (id: string) => Promise<void>;
-  setConnectedThirdPartyAccount: (
-    account: Nullable<ConnectedThirdPartyAccountType>,
-  ) => void;
-  setThirdPartyProviders: (providers: TThirdParties) => void;
+	// DeleteThirdPartyDialog
+	deleteThirdParty: (id: string) => Promise<void>;
+	setConnectedThirdPartyAccount: (
+		account: Nullable<ConnectedThirdPartyAccountType>,
+	) => void;
+	setThirdPartyProviders: (providers: TThirdParties) => void;
 
-  providers: TThirdParties;
-  removeItem: ThirdPartyAccountType;
-  // FilesSelectorInput
-  newPath: string;
-  basePath: string;
-  isErrorPath: boolean;
-  filesSelectorSettings: FilesSelectorSettings;
-  setBasePath: (folders: TBreadCrumb[]) => void;
-  toDefault: VoidFunction;
-  setNewPath: (folders: TBreadCrumb[], fileName?: string) => void;
+	providers: TThirdParties;
+	removeItem: ThirdPartyAccountType;
+	// FilesSelectorInput
+	newPath: string;
+	basePath: string;
+	isErrorPath: boolean;
+	filesSelectorSettings: FilesSelectorSettings;
+	setBasePath: (folders: TBreadCrumb[]) => void;
+	toDefault: VoidFunction;
+	setNewPath: (folders: TBreadCrumb[], fileName?: string) => void;
 
-  setDefaultFolderId?: (id: string | number | null) => void;
-  // other
+	setDefaultFolderId?: (id: string | number | null) => void;
+	// other
 
-  isError?: boolean;
-  isSelect?: boolean;
-  id?: string | number;
-  isDisabled?: boolean;
-  filterParam?: string;
-  isMobileScale?: boolean;
-  buttonSize?: ButtonSize;
-  isSelectFolder?: boolean;
-  descriptionText?: string;
-  withoutInitPath?: boolean;
-  onSelectFolder?: (
-    value: number | string | undefined,
-    breadCrumbs?: TBreadCrumb,
-  ) => void;
-  onSelectFile?: (fileInfo: FileInfoType, breadCrumbs?: TBreadCrumb[]) => void;
-  checkCreating?: boolean;
-  dataTestId?: string;
+	isError?: boolean;
+	isSelect?: boolean;
+	id?: string | number;
+	isDisabled?: boolean;
+	filterParam?: string;
+	isMobileScale?: boolean;
+	buttonSize?: ButtonSize;
+	isSelectFolder?: boolean;
+	descriptionText?: string;
+	withoutInitPath?: boolean;
+	onSelectFolder?: (
+		value: number | string | undefined,
+		breadCrumbs?: TBreadCrumb,
+	) => void;
+	onSelectFile?: (fileInfo: FileInfoType, breadCrumbs?: TBreadCrumb[]) => void;
+	checkCreating?: boolean;
+	dataTestId?: string;
 }

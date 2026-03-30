@@ -29,22 +29,22 @@
 import { useContext, useState, KeyboardEvent, ChangeEvent } from "react";
 import { useTranslation } from "react-i18next";
 
-import { FieldContainer } from "@docspace/shared/components/field-container";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import {
   InputSize,
   InputType,
   TextInput,
-} from "@docspace/shared/components/text-input";
-import { toastr } from "@docspace/shared/components/toast";
+} from "@docspace/ui-kit/components/text-input";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { ButtonKeys, EmployeeActivationStatus } from "@docspace/shared/enums";
 import {
   TPasswordHash,
   TPasswordSettings,
 } from "@docspace/shared/api/settings/types";
 import { createPasswordHash } from "@docspace/shared/utils/common";
-import { PasswordInput } from "@docspace/shared/components/password-input";
+import { PasswordInput } from "@docspace/ui-kit/components/password-input";
 import { ALLOWED_PASSWORD_CHARACTERS } from "@docspace/shared/constants";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { login } from "@docspace/shared/utils/loginUtils";
 import {
   changePassword,
@@ -301,3 +301,4 @@ const ActivateUserForm = ({
 };
 
 export default ActivateUserForm;
+

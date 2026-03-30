@@ -27,40 +27,40 @@
 import { type DeviceType } from "../../../../../enums";
 import { type FilesSelectorSettings } from "../../../../../components/files-selector-input";
 import type {
-  BackupToPublicRoomOptionType,
-  Nullable,
+	BackupToPublicRoomOptionType,
+	Nullable,
 } from "../../../../../types";
-import type { TBreadCrumb } from "../../../../../components/selector/Selector.types";
+import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
 
 import { type ScheduleComponentProps } from "../ScheduleComponent";
 
 export interface RoomsModuleProps extends ScheduleComponentProps {
-  isBackupPaid?: boolean;
-  isFreeBackupsLimitReached?: boolean;
+	isBackupPaid?: boolean;
+	isFreeBackupsLimitReached?: boolean;
 
-  isError: boolean;
-  isLoadingData: boolean;
-  settingsFileSelector: FilesSelectorSettings;
-  currentDeviceType?: DeviceType;
-  setIsError: (error: boolean) => void;
+	isError: boolean;
+	isLoadingData: boolean;
+	settingsFileSelector: FilesSelectorSettings;
+	currentDeviceType?: DeviceType;
+	setIsError: (error: boolean) => void;
 
-  // filesSelectorInput
-  basePath: string;
-  newPath: string;
-  toDefault: VoidFunction;
-  isErrorPath: boolean;
-  setBasePath: (folders: TBreadCrumb[]) => void;
-  setNewPath: (folders: TBreadCrumb[], fileName?: string) => void;
-  // end filesSelectorInput
+	// filesSelectorInput
+	basePath: string;
+	newPath: string;
+	toDefault: VoidFunction;
+	isErrorPath: boolean;
+	setBasePath: (folders: TBreadCrumb[]) => void;
+	setNewPath: (folders: TBreadCrumb[], fileName?: string) => void;
+	// end filesSelectorInput
 
-  // backup store
-  defaultStorageType: Nullable<string>;
-  setSelectedFolder: (id: string) => void;
-  defaultFolderId: Nullable<string>;
-  // end back store
+	// backup store
+	defaultStorageType: Nullable<string>;
+	setSelectedFolder: (id: string) => void;
+	defaultFolderId: Nullable<string>;
+	// end back store
 }
 
 export interface BackupToPublicRoomDialogState {
-  visible: boolean;
-  data: Nullable<BackupToPublicRoomOptionType>;
+	visible: boolean;
+	data: Nullable<BackupToPublicRoomOptionType>;
 }

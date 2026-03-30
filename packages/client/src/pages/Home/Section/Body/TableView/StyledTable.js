@@ -25,9 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { globalColors } from "@docspace/shared/themes";
-import { TableRow } from "@docspace/shared/components/table";
-import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { TableRow } from "@docspace/ui-kit/components/table";
+import { DragAndDrop } from "@docspace/ui-kit/components/drag-and-drop";
 import CursorPalmSvgUrl from "PUBLIC_DIR/images/cursor.palm.react.svg?url";
 import { injectDefaultTheme } from "@docspace/shared/utils";
 
@@ -83,8 +83,9 @@ const indexHoverStyles = css`
 
 const StyledTableRow = styled(TableRow)`
   .table-container_cell:not(.table-container_element-wrapper) {
-    border-top: ${(props) =>
-      `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
+    border-top: ${(props) => {
+      return `1px solid ${props.theme.filesSection.tableView.row.borderColor}`;
+    }};
     margin-top: -1px;
     border-inline: 0; //for Safari
   }
@@ -148,8 +149,8 @@ const StyledTableRow = styled(TableRow)`
     `}
 
     ${(props) =>
-    props.isIndexUpdated &&
-    css`
+      props.isIndexUpdated &&
+      css`
       .table-container_cell {
         cursor: pointer;
         background: ${({ theme, isIndexEditingMode }) =>

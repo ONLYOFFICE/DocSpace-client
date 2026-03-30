@@ -28,7 +28,7 @@ import React, { useCallback, useEffect, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import { useInterfaceDirection } from "@docspace/shared/hooks/useInterfaceDirection";
+import { useInterfaceDirection } from "@docspace/ui-kit/context/InterfaceDirectionContext";
 
 import styles from "./drag-tooltip.module.scss";
 

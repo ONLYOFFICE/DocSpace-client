@@ -28,12 +28,12 @@ import React, { useState, useCallback, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { isMobile, isIOS } from "react-device-detect";
 
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { TextInput } from "@docspace/shared/components/text-input";
-import { Button } from "@docspace/shared/components/button";
-import { ComboBox } from "@docspace/shared/components/combobox";
-import { Checkbox } from "@docspace/shared/components/checkbox";
-import { FieldContainer } from "@docspace/shared/components/field-container";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { TextInput } from "@docspace/ui-kit/components/text-input";
+import { Button } from "@docspace/ui-kit/components/button";
+import { ComboBox } from "@docspace/ui-kit/components/combobox";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 
 import { removeEmojiCharacters } from "SRC_DIR/helpers/utils";
 

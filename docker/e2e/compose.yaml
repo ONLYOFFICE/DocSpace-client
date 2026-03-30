@@ -18,6 +18,7 @@ services:
       - GITHUB_WORKFLOW=${GITHUB_WORKFLOW:-}
       - GITHUB_RUN_ID=${GITHUB_RUN_ID:-}
       - GITHUB_RUN_NUMBER=${GITHUB_RUN_NUMBER:-}
+      - WORKERS=${WORKERS:-}
 
   # Local development services with volume mounts for live reloading
   e2e-tests-local:

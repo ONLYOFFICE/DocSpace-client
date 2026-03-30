@@ -32,13 +32,14 @@ import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import isNil from "lodash/isNil";
 
-import { useUnmount } from "@docspace/shared/hooks/useUnmount";
+import { useUnmount } from "@docspace/ui-kit/hooks/useUnmount";
 import { useDidMount } from "@docspace/shared/hooks/useDidMount";
 
 import { RestoreBackup } from "@docspace/shared/pages/backup/restore-backup";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
-import { ButtonSize } from "@docspace/shared/components/button";
+import { ButtonSize } from "@docspace/ui-kit/components/button";
+import type { FilesSettingsDto } from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
 import { uploadBackup } from "@docspace/shared/api/files";
 
 import type {
@@ -58,7 +59,7 @@ import type { TPortals } from "@docspace/shared/api/management/types";
 
 import { useBackup } from "@/hooks/useBackup";
 import useAppState from "@/hooks/useAppState";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { useStores } from "@/hooks/useStores";
 import { useFilesSelectorInput } from "@/hooks/useFilesSelectorInput";
 
@@ -254,7 +255,7 @@ const Restore = ({
       isEnableRestore={isEnableRestore}
       navigate={navigate}
       settingsFileSelector={{
-        filesSettings,
+        filesSettings: filesSettings as unknown as FilesSettingsDto,
       }}
       standalone={Boolean(settings?.standalone)}
       setTenantStatus={() => {}}

@@ -45,6 +45,22 @@
   }
 }
 
+.comboBox.withLanguageName {
+  width: fit-content !important;
+
+  :global {
+    .combo-button {
+      padding-inline: 8px 12px !important;
+      line-height: 20px;
+    }
+
+    .combo-button_selected-icon-container {
+      margin-inline-end: 8px;
+      margin-bottom: 1px;
+    }
+  }
+}
+
 .withoutBorder {
   :global {
     .combo-button {

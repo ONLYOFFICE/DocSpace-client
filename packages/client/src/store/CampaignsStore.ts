@@ -31,7 +31,8 @@ import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { UserStore } from "@docspace/shared/store/UserStore";
 
 import { LANGUAGE } from "@docspace/shared/constants";
-import { getLanguage, getCookie } from "@docspace/shared/utils";
+import { getLanguage } from "@docspace/shared/utils";
+import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import {
   getCampaignsLs,
   getImage,

@@ -29,6 +29,7 @@ import {
   openEditHandler,
   validatePublicRoomKeyPasswordHandler,
 } from "@docspace/shared/__mocks__/handlers";
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import { expect, test } from "./fixtures/base";
 
 test.describe("Password form", () => {
@@ -48,7 +49,7 @@ test.describe("Password form", () => {
     const form = page.getByTestId("form-wrapper");
     await expect(form).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page, [
       "password-form",
       "password-form-render.png",
     ]);

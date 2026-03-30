@@ -31,7 +31,7 @@ import {
   NO_COMPRESSION_RATIO,
 } from "@docspace/shared/constants";
 
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 
 import resizeImage from "resize-image";

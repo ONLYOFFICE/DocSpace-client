@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/login/src/app/(root)/wizard/page.client.tsx",
       "line_number": 37,
-      "context": "import {\n createPasswordHash,\n getSelectZone,\n mapCulturesToArray,\n mapTimezonesToArray,\n setLanguageForUnauthorized,\n setTimezoneForUnauthorized,\n } from \"@docspace/shared/utils/common\";\n import { Text } from \"@docspace/shared/components/text\";\n import { FieldContainer } from \"@docspace/shared/components/field-container\";",
+      "context": "import {\n createPasswordHash,\n getSelectZone,\n mapCulturesToArray,\n mapTimezonesToArray,\n setLanguageForUnauthorized,\n setTimezoneForUnauthorized,\n } from \"@docspace/shared/utils/common\";\n import { Text } from \"@docspace/ui-kit/components/text\";\n import { FieldContainer } from \"@docspace/ui-kit/components/field-container\";",
       "module": "/packages/login"
     }
   ],

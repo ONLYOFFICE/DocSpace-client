@@ -3,7 +3,7 @@
   "content": "Phone",
   "content_en_sha1_hash": "77064d5265236e0ac252f3fc4a5ba7b274b6a583",
   "created_at": "2025-05-19T21:30:47.371Z",
-  "updated_at": "2025-08-11T18:11:59.256Z",
+  "updated_at": "2026-02-19T13:36:32.867Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Phone\" in various UI elements. It is commonly seen as a label or prompt in forms and fields, typically asking users to input their phone number. This key appears in multiple places across the application, including contact information pages and profile settings.",
     "is_auto": true,
@@ -24,8 +24,8 @@
     },
     {
       "file_path": "/packages/shared/pages/Branding/CompanyInfo/index.tsx",
-      "line_number": 244,
-      "context": "/>\n </FieldContainer>\n <FieldContainer\n id=\"fieldContainerPhone\"\n className=\"field-container-width settings_unavailable\"\n labelText={t(\"Common:Phone\")}\n isVertical\n >\n <TextInput\n id=\"textInputContainerPhone\"\n testId=\"company_info_settings_phone_input\"",
+      "line_number": 239,
+      "context": "/>\n </FieldContainer>\n <FieldContainer\n id=\"fieldContainerPhone\"\n className=\"field-container-width\"\n labelText={t(\"Common:Phone\")}\n isVertical\n >\n <TextInput\n id=\"textInputContainerPhone\"\n testId=\"company_info_settings_phone_input\"",
       "module": "/packages/shared"
     }
   ],

@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { isMobile } from "react-device-detect";
 
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import CheckBoxReactSvgUrl from "PUBLIC_DIR/images/check-box.react.svg?url";
 import FolderReactSvgUrl from "PUBLIC_DIR/images/folder.react.svg?url";
@@ -55,7 +55,7 @@ export default function useContextMenuModel({
       return {
         id: "option_open",
         key: "open",
-        label: t("Files:Open"),
+        label: t("Common:Open"),
         icon: FolderReactSvgUrl,
         onClick: () => openFolder(i.id, i.title),
         disabled: false,
@@ -99,7 +99,7 @@ export default function useContextMenuModel({
       return {
         id: "option_open-pdf",
         key: "open-pdf",
-        label: t("Files:Open"),
+        label: t("Common:Open"),
         icon: EyeReactSvgUrl,
         onClick: () => openFile(i, false),
         disabled: false,

@@ -30,19 +30,19 @@ import classNames from "classnames";
 
 import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 
-import { globalColors } from "../../../themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme";
 
-import { Text } from "../../../components/text";
-import { Badge } from "../../../components/badge";
-import { HelpButton } from "../../../components/help-button";
-import { FieldContainer } from "../../../components/field-container";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Badge } from "@docspace/ui-kit/components/badge";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import {
   TextInput,
   InputType,
   InputSize,
-} from "../../../components/text-input";
-import { Button, ButtonSize } from "../../../components/button";
-import { useTheme } from "../../../hooks/useTheme";
+} from "@docspace/ui-kit/components/text-input";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import { IHeaderProps } from "./WhiteLabel.types";
 import styles from "./WhiteLabel.module.scss";

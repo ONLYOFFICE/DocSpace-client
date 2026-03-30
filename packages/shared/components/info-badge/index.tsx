@@ -29,93 +29,93 @@ import type { TooltipRefProps } from "react-tooltip";
 
 import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg?url";
 
-import { Badge } from "../badge";
-import { IconButton } from "../icon-button";
-import { Tooltip } from "../tooltip";
+import { Badge } from "@docspace/ui-kit/components/badge";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 
 import styles from "./InfoBadge.module.scss";
 import type InfoBadgeProps from "./InfoBadge.types";
-import { globalColors } from "../../themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme";
 
 const InfoBadge: FC<InfoBadgeProps> = ({
-  label,
-  offset,
-  place = "bottom",
-  tooltipDescription,
-  tooltipTitle,
-  dataTestId,
+	label,
+	offset,
+	place = "bottom",
+	tooltipDescription,
+	tooltipTitle,
+	dataTestId,
 }) => {
-  const id = useId();
+	const id = useId();
 
-  const tooltipRef = useRef<TooltipRefProps>(null);
+	const tooltipRef = useRef<TooltipRefProps>(null);
 
-  const onClose = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation();
-    tooltipRef.current?.close();
-  }, []);
+	const onClose = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+		e.stopPropagation();
+		tooltipRef.current?.close();
+	}, []);
 
-  const isSimpleContent =
-    typeof tooltipTitle === "string" && typeof tooltipDescription === "string";
+	const isSimpleContent =
+		typeof tooltipTitle === "string" && typeof tooltipDescription === "string";
 
-  const tooltipHtmlContent = isSimpleContent
-    ? `<div style="max-width: 300px;">
+	const tooltipHtmlContent = isSimpleContent
+		? `<div style="max-width: 300px;">
          <div style="font-weight: 600; margin-bottom: 8px;">${tooltipTitle}</div>
          <div>${tooltipDescription}</div>
        </div>`
-    : null;
+		: null;
 
-  return (
-    <div data-testid={dataTestId ?? "info-badge"}>
-      <Badge
-        noHover
-        fontSize="9px"
-        isHovered={false}
-        borderRadius="50px"
-        label={label}
-        data-tooltip-id={isSimpleContent ? "info-tooltip" : id}
-        {...(isSimpleContent && tooltipHtmlContent
-          ? {
-              "data-tooltip-html": tooltipHtmlContent,
-              "data-tooltip-place": place,
-            }
-          : {})}
-        backgroundColor={globalColors.mainPurple}
-      />
+	return (
+		<div data-testid={dataTestId ?? "info-badge"}>
+			<Badge
+				noHover
+				fontSize="9px"
+				isHovered={false}
+				borderRadius="50px"
+				label={label}
+				data-tooltip-id={isSimpleContent ? "info-tooltip" : id}
+				{...(isSimpleContent && tooltipHtmlContent
+					? {
+							"data-tooltip-html": tooltipHtmlContent,
+							"data-tooltip-place": place,
+						}
+					: {})}
+				backgroundColor={globalColors.mainPurple}
+			/>
 
-      {!isSimpleContent && tooltipDescription && tooltipTitle ? (
-        <Tooltip
-          id={id}
-          ref={tooltipRef}
-          place={place}
-          offset={offset || 10}
-          clickable
-          openOnClick
-          className={styles.tooltip}
-          aria-labelledby={id}
-          data-testid="info-tooltip"
-        >
-          <div className={styles.content}>
-            <div className={styles.header}>
-              <h3 className={styles.title} data-testid="tooltip-title">
-                {tooltipTitle}
-              </h3>
-              <IconButton
-                data-testid="close-tooltip-button"
-                isFill
-                size={16}
-                onClick={onClose}
-                iconName={CrossIcon}
-                className={styles.close}
-              />
-            </div>
-            <p className={styles.description} data-testid="tooltip-description">
-              {tooltipDescription}
-            </p>
-          </div>
-        </Tooltip>
-      ) : null}
-    </div>
-  );
+			{!isSimpleContent && tooltipDescription && tooltipTitle ? (
+				<Tooltip
+					id={id}
+					ref={tooltipRef}
+					place={place}
+					offset={offset || 10}
+					clickable
+					openOnClick
+					className={styles.tooltip}
+					aria-labelledby={id}
+					data-testid="info-tooltip"
+				>
+					<div className={styles.content}>
+						<div className={styles.header}>
+							<h3 className={styles.title} data-testid="tooltip-title">
+								{tooltipTitle}
+							</h3>
+							<IconButton
+								data-testid="close-tooltip-button"
+								isFill
+								size={16}
+								onClick={onClose}
+								iconName={CrossIcon}
+								className={styles.close}
+							/>
+						</div>
+						<p className={styles.description} data-testid="tooltip-description">
+							{tooltipDescription}
+						</p>
+					</div>
+				</Tooltip>
+			) : null}
+		</div>
+	);
 };
 
 InfoBadge.displayName = "InfoBadge";

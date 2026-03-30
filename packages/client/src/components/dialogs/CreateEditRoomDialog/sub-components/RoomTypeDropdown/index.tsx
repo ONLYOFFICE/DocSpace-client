@@ -103,7 +103,11 @@ const RoomTypeDropdown = ({
           forceHideDropdown={forceHideDropdown}
         />
       ) : (
-        <DropdownDesktop open={isOpen} chooseRoomType={chooseRoomType} />
+        <DropdownDesktop
+          open={isOpen}
+          chooseRoomType={chooseRoomType}
+          onClose={toggleDropdown}
+        />
       )}
     </StyledRoomTypeDropdown>
   );

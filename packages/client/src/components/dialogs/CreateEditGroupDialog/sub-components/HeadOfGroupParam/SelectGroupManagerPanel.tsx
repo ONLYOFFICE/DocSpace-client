@@ -25,10 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { TUser } from "@docspace/shared/api/people/types";
-import PeopleSelector from "@docspace/shared/selectors/People";
-import { TSelectorItem } from "@docspace/shared/components/selector";
-import { Portal } from "@docspace/shared/components/portal";
-
+import PeopleSelector from "@docspace/ui-kit/selectors/People";
+import { TSelectorItem } from "@docspace/ui-kit/components/selector";
+import { Portal } from "@docspace/ui-kit/components/portal";
 interface SelectGroupManagerPanelProps {
   onClose: () => void;
   onParentPanelClose: () => void;

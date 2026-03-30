@@ -32,14 +32,14 @@ import { TFunction } from "i18next";
 import classNames from "classnames";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 
-import { Text } from "../../../components/text";
-import { PasswordInput } from "../../../components/password-input";
-import { Button, ButtonSize } from "../../../components/button";
-import { FieldContainer } from "../../../components/field-container";
+import { Text } from "@docspace/ui-kit/components/text";
+import { PasswordInput } from "@docspace/ui-kit/components/password-input";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { frameCallCommand } from "../../../utils/common";
-import { toastr } from "../../../components/toast";
-import { FormWrapper } from "../../../components/form-wrapper";
-import PortalLogo from "../../../components/portal-logo/PortalLogo";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { FormWrapper } from "@docspace/ui-kit/components/form-wrapper";
+import PortalLogo from "@docspace/ui-kit/components/portal-logo/PortalLogo";
 import { ValidationStatus } from "../../../enums";
 
 import { validatePublicRoomPassword } from "../../../api/rooms";
@@ -47,8 +47,8 @@ import {
   getLogo,
   getPasswordDescription,
 } from "./PublicRoomPasswordForm.helper";
-import { InputSize } from "../../../components/text-input";
-import { RoomIcon } from "../../../components/room-icon";
+import { InputSize } from "@docspace/ui-kit/components/text-input";
+import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 import type {
   TPublicRoomPassword,
   TValidateShareRoom,

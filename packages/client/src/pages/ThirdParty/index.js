@@ -27,8 +27,8 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { getObjectByLocation } from "@docspace/shared/utils/common";
-import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
-import Section from "@docspace/shared/components/section";
+import ErrorContainer from "@docspace/ui-kit/components/error-container/ErrorContainer";
+import Section from "@docspace/ui-kit/components/section";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import SectionWrapper from "SRC_DIR/components/Section";

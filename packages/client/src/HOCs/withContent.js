@@ -33,11 +33,9 @@ import {
   ShareAccessRights,
 } from "@docspace/shared/enums";
 // import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import {
-  getCorrectDate,
-  getCookie,
-  getTitleWithoutExtension,
-} from "@docspace/shared/utils";
+import { getTitleWithoutExtension } from "@docspace/shared/utils";
+import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
+import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import { LANGUAGE } from "@docspace/shared/constants";
 import config from "PACKAGE_FILE";
 
@@ -86,8 +84,6 @@ export default function withContent(WrappedContent) {
         t,
         viewer,
         titleWithoutExt,
-        isPublicRoom,
-        publicRoomKey,
         culture,
       } = this.props;
       const locale = getCookie(LANGUAGE) || culture;
@@ -112,9 +108,7 @@ export default function withContent(WrappedContent) {
         : { onClick: onFilesClick };
 
       if (!isDesktop && !isTrashFolder && !isArchiveFolder) {
-        linkStyles.href = isPublicRoom
-          ? `${href}&share=${publicRoomKey}`
-          : href;
+        linkStyles.href = href;
       }
 
       const newItems =
@@ -149,7 +143,6 @@ export default function withContent(WrappedContent) {
         settingsStore,
         dialogsStore,
         uploadDataStore,
-        publicRoomStore,
         userStore,
         filesSettingsStore,
       },
@@ -169,7 +162,6 @@ export default function withContent(WrappedContent) {
         setCreatedItem,
       } = filesStore;
 
-      const { isPublicRoom, publicRoomKey } = publicRoomStore;
       const { displayFileExtension } = filesSettingsStore;
 
       const { clearActiveOperations, fileCopyAs } = uploadDataStore;
@@ -216,8 +208,6 @@ export default function withContent(WrappedContent) {
         titleWithoutExt,
 
         setCreatedItem,
-        isPublicRoom,
-        publicRoomKey,
         displayFileExtension,
       };
     },

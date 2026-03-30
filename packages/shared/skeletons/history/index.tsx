@@ -26,122 +26,122 @@
 
 import React from "react";
 
-import { RectangleSkeleton } from "../rectangle";
+import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 
 import styles from "./History.module.scss";
 
 import type { HistoryProps } from "./History.types";
 
 const History = ({ id, className, style, ...rest }: HistoryProps) => {
-  const {
-    title,
-    borderRadius,
-    backgroundColor,
-    foregroundColor,
-    backgroundOpacity,
-    foregroundOpacity,
-    speed,
-    animate,
-  } = rest;
+	const {
+		title,
+		borderRadius,
+		backgroundColor,
+		foregroundColor,
+		backgroundOpacity,
+		foregroundOpacity,
+		speed,
+		animate,
+	} = rest;
 
-  return (
-    <div
-      id={id}
-      className={`${className || ""} ${styles.row}`}
-      style={style}
-      data-testid="history-row"
-    >
-      <RectangleSkeleton
-        className="history-loader-file-link"
-        title={title}
-        width="100%"
-        height="18"
-        borderRadius={borderRadius}
-        backgroundColor={backgroundColor}
-        foregroundColor={foregroundColor}
-        backgroundOpacity={backgroundOpacity}
-        foregroundOpacity={foregroundOpacity}
-        speed={speed}
-        animate={animate}
-      />
-      <RectangleSkeleton
-        className="history-loader-file-date"
-        title={title}
-        width="100%"
-        height="18"
-        borderRadius={borderRadius}
-        backgroundColor={backgroundColor}
-        foregroundColor={foregroundColor}
-        backgroundOpacity={backgroundOpacity}
-        foregroundOpacity={foregroundOpacity}
-        speed={speed}
-        animate={animate}
-      />
-      <RectangleSkeleton
-        className="history-loader-options"
-        title={title}
-        width="100%"
-        height="18"
-        borderRadius={borderRadius}
-        backgroundColor={backgroundColor}
-        foregroundColor={foregroundColor}
-        backgroundOpacity={backgroundOpacity}
-        foregroundOpacity={foregroundOpacity}
-        speed={speed}
-        animate={animate}
-      />
+	return (
+		<div
+			id={id}
+			className={`${className || ""} ${styles.row}`}
+			style={style}
+			data-testid="history-row"
+		>
+			<RectangleSkeleton
+				className="history-loader-file-link"
+				title={title}
+				width="100%"
+				height="18"
+				borderRadius={borderRadius}
+				backgroundColor={backgroundColor}
+				foregroundColor={foregroundColor}
+				backgroundOpacity={backgroundOpacity}
+				foregroundOpacity={foregroundOpacity}
+				speed={speed}
+				animate={animate}
+			/>
+			<RectangleSkeleton
+				className="history-loader-file-date"
+				title={title}
+				width="100%"
+				height="18"
+				borderRadius={borderRadius}
+				backgroundColor={backgroundColor}
+				foregroundColor={foregroundColor}
+				backgroundOpacity={backgroundOpacity}
+				foregroundOpacity={foregroundOpacity}
+				speed={speed}
+				animate={animate}
+			/>
+			<RectangleSkeleton
+				className="history-loader-options"
+				title={title}
+				width="100%"
+				height="18"
+				borderRadius={borderRadius}
+				backgroundColor={backgroundColor}
+				foregroundColor={foregroundColor}
+				backgroundOpacity={backgroundOpacity}
+				foregroundOpacity={foregroundOpacity}
+				speed={speed}
+				animate={animate}
+			/>
 
-      <RectangleSkeleton
-        className="history-loader-comment"
-        title={title}
-        width="100%"
-        height="18"
-        borderRadius={borderRadius}
-        backgroundColor={backgroundColor}
-        foregroundColor={foregroundColor}
-        backgroundOpacity={backgroundOpacity}
-        foregroundOpacity={foregroundOpacity}
-        speed={speed}
-        animate={animate}
-      />
-      <RectangleSkeleton
-        className="history-loader-restore-btn"
-        title={title}
-        width="100%"
-        height="18"
-        borderRadius={borderRadius}
-        backgroundColor={backgroundColor}
-        foregroundColor={foregroundColor}
-        backgroundOpacity={backgroundOpacity}
-        foregroundOpacity={foregroundOpacity}
-        speed={speed}
-        animate={animate}
-      />
-      <RectangleSkeleton
-        className="history-loader-download-btn"
-        title={title}
-        width="100%"
-        height="18"
-        borderRadius={borderRadius}
-        backgroundColor={backgroundColor}
-        foregroundColor={foregroundColor}
-        backgroundOpacity={backgroundOpacity}
-        foregroundOpacity={foregroundOpacity}
-        speed={speed}
-        animate={animate}
-      />
-    </div>
-  );
+			<RectangleSkeleton
+				className="history-loader-comment"
+				title={title}
+				width="100%"
+				height="18"
+				borderRadius={borderRadius}
+				backgroundColor={backgroundColor}
+				foregroundColor={foregroundColor}
+				backgroundOpacity={backgroundOpacity}
+				foregroundOpacity={foregroundOpacity}
+				speed={speed}
+				animate={animate}
+			/>
+			<RectangleSkeleton
+				className="history-loader-restore-btn"
+				title={title}
+				width="100%"
+				height="18"
+				borderRadius={borderRadius}
+				backgroundColor={backgroundColor}
+				foregroundColor={foregroundColor}
+				backgroundOpacity={backgroundOpacity}
+				foregroundOpacity={foregroundOpacity}
+				speed={speed}
+				animate={animate}
+			/>
+			<RectangleSkeleton
+				className="history-loader-download-btn"
+				title={title}
+				width="100%"
+				height="18"
+				borderRadius={borderRadius}
+				backgroundColor={backgroundColor}
+				foregroundColor={foregroundColor}
+				backgroundOpacity={backgroundOpacity}
+				foregroundOpacity={foregroundOpacity}
+				speed={speed}
+				animate={animate}
+			/>
+		</div>
+	);
 };
 const HistoryRowsSkeleton = (props: HistoryProps) => {
-  return (
-    <>
-      <History {...props} />
-      <History {...props} />
-      <History {...props} />
-      <History {...props} />
-    </>
-  );
+	return (
+		<>
+			<History {...props} />
+			<History {...props} />
+			<History {...props} />
+			<History {...props} />
+		</>
+	);
 };
 
 export default HistoryRowsSkeleton;

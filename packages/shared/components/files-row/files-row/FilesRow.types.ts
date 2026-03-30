@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { RowProps } from "../../rows/row/Row.types";
+import { RowProps } from "@docspace/ui-kit/components/rows/row/Row.types";
 
 export type FilesRowProps = RowProps & {
   isThirdPartyFolder?: boolean;

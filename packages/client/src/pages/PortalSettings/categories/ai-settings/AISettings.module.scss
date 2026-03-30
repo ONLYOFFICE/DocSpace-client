@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@use "@docspace/shared/styles/mixins";
+@use "@docspace/ui-kit/styles/mixins";
 
 .aiSettingsContainer {
   width: 100%;
@@ -55,6 +55,23 @@
   margin-bottom: 8px;
 }
 
+.defaultProviderDescription {
+  margin-bottom: 16px;
+}
+
+.defaultProviderForm {
+  max-width: 340px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.defaultProviderFormButtons {
+  display: flex;
+  gap: 8px;
+}
+
 .learnMoreLink {
   margin-bottom: 16px;
 }
@@ -76,6 +93,10 @@
   }
 }
 
+.providerList {
+  margin-bottom: 20px;
+}
+
 .mcpHeading {
   margin-bottom: 20px;
 }
@@ -89,8 +110,44 @@
   margin-top: 15px;
 }
 
+.truncate2Lines {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+}
+
 .tabsLoader {
   width: min(400px, 100%);
   height: 33px;
   margin-bottom: 20px;
+}
+
+.hasError {
+  :global(.combo-button) {
+    border-color: var(--input-error-border);
+  }
+}
+
+.modelOption {
+  display: flex;
+  flex-direction: column;
+}
+
+.modelLabel{
+  height: 20px;
+}
+.modelDescription {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--ai-settings-description);
+}
+
+.modelDropdown {
+  :global(.scroll-body) {
+    padding-inline-end: 0 !important;
+  }
 }

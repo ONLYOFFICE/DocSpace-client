@@ -27,7 +27,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { ModalDialog, ModalDialogType } from "../modal-dialog";
+import { ModalDialog, ModalDialogType } from "@docspace/ui-kit/components/modal-dialog";
 
 import { AboutContent } from "./About.content";
 import { IDialogProps } from "./About.types";

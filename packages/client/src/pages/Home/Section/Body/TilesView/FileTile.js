@@ -31,19 +31,18 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
-import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
+import { DragAndDrop } from "@docspace/ui-kit/components/drag-and-drop";
 import { FolderType } from "@docspace/shared/enums";
 import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
 
-import {
-  FileTile as FileTileComponent,
-  FolderTile,
-  RoomTile,
-  TemplateTile,
-} from "@docspace/shared/components/tiles";
+import { FileTile as FileTileComponent } from "@docspace/ui-kit/components/tiles/file-tile";
+import { FolderTile } from "@docspace/ui-kit/components/tiles/folder-tile";
+import { RoomTile } from "@docspace/ui-kit/components/tiles/room-tile";
+import { TemplateTile } from "@docspace/ui-kit/components/tiles/template-tile";
 
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
+import { TagManagement } from "SRC_DIR/components/TagManagement";
 
 import FilesTileContent from "./FilesTileContent";
 import { FileTileContext } from "./FileTile.provider";
@@ -239,50 +238,56 @@ const FileTile = (props) => {
     badgeUrl,
   };
 
-  const fileTile = (
-    <FileTileComponent
-      {...commonProps}
-      key={item.id}
-      temporaryIcon={temporaryIcon}
-      thumbnail={!providerItem && thumbnailUrl ? thumbnailUrl : ""}
-      thumbSize={thumbSize}
-      contentElement={quickButtonsComponent}
-      thumbnailClick={onFilesClick}
-    />
-  );
-
-  const folderTile = (
-    <FolderTile {...commonProps} temporaryIcon={temporaryIcon} />
-  );
-
-  const roomTile = (
-    <RoomTile
-      {...commonProps}
-      key={item.id}
-      selectTag={onSelectTag}
-      selectOption={onSelectOption}
-      columnCount={columnCount}
-      thumbnailClick={onFilesClick}
-      getRoomTypeName={getRoomTypeName}
-    />
-  );
-
-  const remplateTile = (
-    <TemplateTile
-      {...commonProps}
-      key={item.id}
-      thumbnailClick={onFilesClick}
-      openUser={onOpenUser}
-      showStorageInfo={showStorageInfo}
-      SpaceQuotaComponent={SpaceQuota}
-    />
-  );
-
   const renderTile = () => {
-    if (item.isTemplate) return remplateTile;
-    if (item.isRoom) return roomTile;
-    if (item.isFolder) return folderTile;
-    return fileTile;
+    if (item.isTemplate)
+      return (
+        <TemplateTile
+          {...commonProps}
+          key={item.id}
+          thumbnailClick={onFilesClick}
+          openUser={onOpenUser}
+          showStorageInfo={showStorageInfo}
+          SpaceQuotaComponent={SpaceQuota}
+        />
+      );
+    if (item.isRoom)
+      return (
+        <RoomTile
+          {...commonProps}
+          t={t}
+          key={item.id}
+          selectTag={onSelectTag}
+          selectOption={onSelectOption}
+          columnCount={columnCount}
+          thumbnailClick={onFilesClick}
+          getRoomTypeName={getRoomTypeName}
+          customBottomContent={(isHovered, tags) => (
+            <TagManagement
+              tags={tags}
+              id={item.id}
+              access={item.access}
+              roomName={item.title}
+              columnCount={columnCount}
+              onSelectTag={onSelectTag}
+              isActive={isActive || isHovered || checkedProps}
+            />
+          )}
+        />
+      );
+    if (item.isFolder)
+      return <FolderTile {...commonProps} temporaryIcon={temporaryIcon} />;
+
+    return (
+      <FileTileComponent
+        {...commonProps}
+        key={item.id}
+        temporaryIcon={temporaryIcon}
+        thumbnail={!providerItem && thumbnailUrl ? thumbnailUrl : ""}
+        thumbSize={thumbSize}
+        contentElement={quickButtonsComponent}
+        thumbnailClick={onFilesClick}
+      />
+    );
   };
 
   const droppableClassName = isDragging ? "droppable" : "";
@@ -359,7 +364,11 @@ export default inject(
     };
   },
 )(
-  withTranslation(["Files", "InfoPanel", "Notifications"])(
-    withFileActions(withBadges(withQuickButtons(observer(FileTile)))),
-  ),
+  withTranslation([
+    "Files",
+    "InfoPanel",
+    "Notifications",
+    "Common",
+    "GroupingRooms",
+  ])(withFileActions(withBadges(withQuickButtons(observer(FileTile))))),
 );

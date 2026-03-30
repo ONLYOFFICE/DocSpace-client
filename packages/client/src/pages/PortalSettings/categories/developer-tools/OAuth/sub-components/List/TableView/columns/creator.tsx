@@ -26,13 +26,13 @@
 
 import styled from "styled-components";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import {
-  Avatar,
-  AvatarRole,
-  AvatarSize,
-} from "@docspace/shared/components/avatar";
-import { RectangleSkeleton } from "@docspace/shared/skeletons/rectangle";
+	Avatar,
+	AvatarRole,
+	AvatarSize,
+} from "@docspace/ui-kit/components/avatar";
+import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 
 const StyledAvatar = styled(Avatar)`
   width: 16px !important;
@@ -44,31 +44,31 @@ const StyledAvatar = styled(Avatar)`
 `;
 
 interface CreatorCellProps {
-  avatar: string;
-  displayName: string;
+	avatar: string;
+	displayName: string;
 }
 
 const CreatorCell = ({ avatar, displayName }: CreatorCellProps) => {
-  if (!displayName) return <RectangleSkeleton width="70px" height="16px" />;
+	if (!displayName) return <RectangleSkeleton width="70px" height="16px" />;
 
-  return (
-    <>
-      <StyledAvatar
-        source={avatar}
-        size={AvatarSize.small}
-        role={AvatarRole.user}
-        className="textOverflow"
-      />
+	return (
+		<>
+			<StyledAvatar
+				source={avatar}
+				size={AvatarSize.small}
+				role={AvatarRole.user}
+				className="textOverflow"
+			/>
 
-      <Text
-        className="description-text textOverflow"
-        fontWeight="600"
-        fontSize="13px"
-      >
-        {displayName}
-      </Text>
-    </>
-  );
+			<Text
+				className="description-text textOverflow"
+				fontWeight="600"
+				fontSize="13px"
+			>
+				{displayName}
+			</Text>
+		</>
+	);
 };
 
 export default CreatorCell;

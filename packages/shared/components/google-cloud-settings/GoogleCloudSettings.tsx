@@ -26,79 +26,83 @@
 
 import React from "react";
 
-import { InputSize, InputType, TextInput } from "../text-input";
+import {
+	InputSize,
+	InputType,
+	TextInput,
+} from "@docspace/ui-kit/components/text-input";
 import { useDidMount } from "../../hooks/useDidMount";
 
 import { BUCKET, FILE_PATH } from "./GoogleCloudSettings.constants";
 import type { GoogleCloudSettingsProps } from "./GoogleCloudSettings.types";
 
 const GoogleCloudSettings = ({
-  t,
-  setIsThirdStorageChanged,
-  setRequiredFormSettings,
-  addValueInFormSettings,
-  isNeedFilePath,
-  selectedStorage,
-  errorsFieldsBeforeSafe: isError,
-  formSettings,
-  isLoading,
-  isLoadingData,
+	t,
+	setIsThirdStorageChanged,
+	setRequiredFormSettings,
+	addValueInFormSettings,
+	isNeedFilePath,
+	selectedStorage,
+	errorsFieldsBeforeSafe: isError,
+	formSettings,
+	isLoading,
+	isLoadingData,
 }: GoogleCloudSettingsProps) => {
-  useDidMount(() => {
-    const filePathField = isNeedFilePath ? [FILE_PATH] : [];
-    setRequiredFormSettings([BUCKET, ...filePathField]);
-    setIsThirdStorageChanged(false);
-  });
+	useDidMount(() => {
+		const filePathField = isNeedFilePath ? [FILE_PATH] : [];
+		setRequiredFormSettings([BUCKET, ...filePathField]);
+		setIsThirdStorageChanged(false);
+	});
 
-  const isDisabled = selectedStorage && !selectedStorage.isSet;
-  const bucketPlaceholder =
-    selectedStorage && selectedStorage.properties[0].title;
+	const isDisabled = selectedStorage && !selectedStorage.isSet;
+	const bucketPlaceholder =
+		selectedStorage && selectedStorage.properties[0].title;
 
-  const onChangeText = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { target } = event;
-    const value = target.value;
-    const name = target.name;
+	const onChangeText = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const { target } = event;
+		const value = target.value;
+		const name = target.name;
 
-    addValueInFormSettings(name, value);
-  };
+		addValueInFormSettings(name, value);
+	};
 
-  return (
-    <>
-      <TextInput
-        scale
-        tabIndex={1}
-        name={BUCKET}
-        id="bucket-input"
-        onChange={onChangeText}
-        className="backup_text-input"
-        value={formSettings[BUCKET]}
-        hasError={isError[BUCKET]}
-        isDisabled={isLoadingData || isLoading || isDisabled}
-        placeholder={bucketPlaceholder || ""}
-        type={InputType.text}
-        size={InputSize.base}
-        testId="google_cloud_bucket_input"
-      />
+	return (
+		<>
+			<TextInput
+				scale
+				tabIndex={1}
+				name={BUCKET}
+				id="bucket-input"
+				onChange={onChangeText}
+				className="backup_text-input"
+				value={formSettings[BUCKET]}
+				hasError={isError[BUCKET]}
+				isDisabled={isLoadingData || isLoading || isDisabled}
+				placeholder={bucketPlaceholder || ""}
+				type={InputType.text}
+				size={InputSize.base}
+				testId="google_cloud_bucket_input"
+			/>
 
-      {isNeedFilePath ? (
-        <TextInput
-          scale
-          tabIndex={2}
-          type={InputType.text}
-          size={InputSize.base}
-          name={FILE_PATH}
-          id="file-path-input"
-          placeholder={t("Common:Path")}
-          onChange={onChangeText}
-          className="backup_text-input"
-          hasError={isError[FILE_PATH]}
-          value={formSettings[FILE_PATH]}
-          isDisabled={isLoadingData || isLoading || isDisabled}
-          testId="google_cloud_file_path_input"
-        />
-      ) : null}
-    </>
-  );
+			{isNeedFilePath ? (
+				<TextInput
+					scale
+					tabIndex={2}
+					type={InputType.text}
+					size={InputSize.base}
+					name={FILE_PATH}
+					id="file-path-input"
+					placeholder={t("Common:Path")}
+					onChange={onChangeText}
+					className="backup_text-input"
+					hasError={isError[FILE_PATH]}
+					value={formSettings[FILE_PATH]}
+					isDisabled={isLoadingData || isLoading || isDisabled}
+					testId="google_cloud_file_path_input"
+				/>
+			) : null}
+		</>
+	);
 };
 
 export default GoogleCloudSettings;

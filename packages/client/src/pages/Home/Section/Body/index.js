@@ -35,6 +35,7 @@ import {
   isTablet,
   onEdgeScrolling,
 } from "@docspace/shared/utils";
+
 import { isElementInViewport } from "@docspace/shared/utils/common";
 import { EMPTY_ARRAY } from "@docspace/shared/constants";
 import {
@@ -47,6 +48,7 @@ import FilesTileContainer from "./TilesView/FilesTileContainer";
 import { NoAccessContainerType } from "../../../../components/EmptyContainer/NoAccessContainer";
 import KnowledgeDisabledContainer from "../../../../components/EmptyContainer/KnowledgeDisabledContainer";
 import EmptyContainer from "../../../../components/EmptyContainer";
+import EmptyRoomGroupContainer from "../../../../components/EmptyContainer/EmptyRoomGroupContainer";
 import withLoader from "../../../../HOCs/withLoader";
 import TableView from "./TableView/TableContainer";
 import withHotkeys from "../../../../HOCs/withHotkeys";
@@ -106,6 +108,11 @@ const SectionBodyContent = (props) => {
     aiConfig,
     isInsideKnowledge,
     isErrorAIAgentNotAvailable,
+    selectedFolderChatSettings,
+    roomsFilterGroupId,
+    setEditRoomGroupsDialogVisible,
+    isFilterOrSearchActive,
+    isRoomsFolder,
   } = props;
 
   useEffect(() => {
@@ -473,15 +480,27 @@ const SectionBodyContent = (props) => {
   if (isErrorRoomNotAvailable)
     return <NoAccessContainer type={NoAccessContainerType.Room} />;
 
-  if (isInsideKnowledge && !aiConfig?.vectorizationEnabled)
+  if (
+    isInsideKnowledge &&
+    !aiConfig?.vectorizationEnabled &&
+    !selectedFolderChatSettings?.internal
+  )
     return <KnowledgeDisabledContainer />;
 
   if (
     isEmptyFilesList &&
     !welcomeFormFillingTipsVisible &&
     !formFillingTipsVisible
-  )
+  ) {
+    if (roomsFilterGroupId && !isFilterOrSearchActive && isRoomsFolder) {
+      const onManageGroups = () => {
+        setEditRoomGroupsDialogVisible?.(true);
+      };
+
+      return <EmptyRoomGroupContainer onManageGroups={onManageGroups} />;
+    }
     return <EmptyContainer isEmptyPage={isEmptyPage} />;
+  }
 
   const FileViewComponent = fileViews[viewAs] ?? FilesRowContainer;
 
@@ -523,8 +542,13 @@ export default inject(
       isErrorAIAgentNotAvailable,
     } = filesStore;
 
-    const { welcomeFormFillingTipsVisible, formFillingTipsVisible } =
-      dialogsStore;
+    const {
+      welcomeFormFillingTipsVisible,
+      formFillingTipsVisible,
+      setEditRoomGroupsDialogVisible,
+    } = dialogsStore;
+
+    const { roomsFilter } = filesStore;
 
     const { onEnableFormFillingGuid } = contextOptionsStore;
     const { primaryProgressDataStore, uploaded } = uploadDataStore;
@@ -539,9 +563,11 @@ export default inject(
       setDragging,
       folderId: selectedFolderStore.id,
       roomType: selectedFolderStore.roomType,
+      selectedFolderChatSettings: selectedFolderStore.chatSettings,
       setTooltipPosition,
       isRecycleBinFolder: treeFoldersStore.isRecycleBinFolder,
       isArchiveFolderRoot: treeFoldersStore.isArchiveFolderRoot,
+      isRoomsFolder: treeFoldersStore.isRoomsFolder,
       moveDragItems: filesActionsStore.moveDragItems,
       changeIndex: filesActionsStore.changeIndex,
       viewAs,
@@ -569,6 +595,19 @@ export default inject(
       userId: userStore?.user?.id,
       onEnableFormFillingGuid,
       setDropTargetPreview,
+      roomsFilterGroupId: roomsFilter?.groupId,
+      setEditRoomGroupsDialogVisible,
+      // Check if any filter or search is active (excluding sorting and groupId)
+      isFilterOrSearchActive: !!(
+        roomsFilter?.filterValue ||
+        roomsFilter?.type ||
+        roomsFilter?.subjectId ||
+        roomsFilter?.subjectOwnerId ||
+        roomsFilter?.provider ||
+        roomsFilter?.quotaFilter ||
+        (roomsFilter?.tags && roomsFilter?.tags.length > 0) ||
+        roomsFilter?.withoutTags
+      ),
     };
   },
 )(

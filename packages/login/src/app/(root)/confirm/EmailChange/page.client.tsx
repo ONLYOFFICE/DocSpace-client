@@ -28,7 +28,7 @@
 
 import { useContext, useEffect, useState } from "react";
 
-import AppLoader from "@docspace/shared/components/app-loader";
+import AppLoader from "@docspace/ui-kit/components/app-loader";
 import { changeEmail } from "@docspace/shared/api/people";
 
 import { TError } from "@/types";
@@ -38,7 +38,13 @@ const EmailChangeHandler = () => {
   const [error, setError] = useState<string>();
 
   const { linkData, confirmLinkResult } = useContext(ConfirmRouteContext);
-  const { uid = "", key = "", encemail = "", redirected = "" } = linkData;
+  const {
+    uid = "",
+    key = "",
+    encemail = "",
+    redirected = "",
+    confirmHeader = "",
+  } = linkData;
   const { email = "" } = confirmLinkResult;
 
   useEffect(() => {
@@ -47,7 +53,7 @@ const EmailChangeHandler = () => {
         return;
       }
       try {
-        await changeEmail(uid, email, encemail, key);
+        await changeEmail(uid, email, encemail, confirmHeader);
         window.location.replace(`/profile/login?email_change=success`);
       } catch (e) {
         const knownError = e as TError;

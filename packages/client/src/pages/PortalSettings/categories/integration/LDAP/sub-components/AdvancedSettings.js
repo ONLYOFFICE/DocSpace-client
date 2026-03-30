@@ -27,81 +27,81 @@
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Checkbox } from "@docspace/shared/components/checkbox";
-import { Text } from "@docspace/shared/components/text";
-import { HelpButton } from "@docspace/shared/components/help-button";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { Text } from "@docspace/ui-kit/components/text";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
 
 const AdvancedSettings = ({
-  isLdapEnabled,
-  isUIDisabled,
-  isSendWelcomeEmail,
-  setIsSendWelcomeEmail,
-  disableEmailVerification,
-  setDisableEmailVerification,
+	isLdapEnabled,
+	isUIDisabled,
+	isSendWelcomeEmail,
+	setIsSendWelcomeEmail,
+	disableEmailVerification,
+	setDisableEmailVerification,
 }) => {
-  const { t } = useTranslation("Ldap");
+	const { t } = useTranslation("Ldap");
 
-  const onChangeSendWelcomeEmail = (e) => {
-    const checked = e.target.checked;
-    setIsSendWelcomeEmail(checked);
-  };
+	const onChangeSendWelcomeEmail = (e) => {
+		const checked = e.target.checked;
+		setIsSendWelcomeEmail(checked);
+	};
 
-  const onChangeDisableEmailVerification = (e) => {
-    const checked = e.target.checked;
-    setDisableEmailVerification(checked);
-  };
+	const onChangeDisableEmailVerification = (e) => {
+		const checked = e.target.checked;
+		setDisableEmailVerification(checked);
+	};
 
-  return (
-    <div className="ldap_advanced-settings">
-      <Text fontWeight={600} fontSize="14px">
-        {t("LdapAdvancedSettings")}
-      </Text>
+	return (
+		<div className="ldap_advanced-settings">
+			<Text fontWeight={600} fontSize="14px">
+				{t("LdapAdvancedSettings")}
+			</Text>
 
-      <div className="ldap_advanced-settings-header">
-        <Checkbox
-          className="ldap_checkbox-send-welcome-email"
-          label={t("LdapSendWelcomeLetter")}
-          isChecked={isSendWelcomeEmail}
-          onChange={onChangeSendWelcomeEmail}
-          isDisabled={!isLdapEnabled || isUIDisabled}
-        />
-        <HelpButton tooltipContent={t("LdapSendWelcomeLetterTooltip")} />
-      </div>
+			<div className="ldap_advanced-settings-header">
+				<Checkbox
+					className="ldap_checkbox-send-welcome-email"
+					label={t("LdapSendWelcomeLetter")}
+					isChecked={isSendWelcomeEmail}
+					onChange={onChangeSendWelcomeEmail}
+					isDisabled={!isLdapEnabled || isUIDisabled}
+				/>
+				<HelpButton tooltipContent={t("LdapSendWelcomeLetterTooltip")} />
+			</div>
 
-      <div className="ldap_advanced-settings-header">
-        <Checkbox
-          className="ldap_checkbox-disable-email-verification"
-          label={t("Settings:DisableEmailVerification")}
-          isChecked={disableEmailVerification}
-          onChange={onChangeDisableEmailVerification}
-          isDisabled={!isLdapEnabled || isUIDisabled}
-        />
-        <HelpButton
-          tooltipContent={t("Settings:DisableEmailDescription", {
-            sectionName: t("Common:LDAP"),
-            productName: t("Common:ProductName"),
-          })}
-        />
-      </div>
-    </div>
-  );
+			<div className="ldap_advanced-settings-header">
+				<Checkbox
+					className="ldap_checkbox-disable-email-verification"
+					label={t("Settings:DisableEmailVerification")}
+					isChecked={disableEmailVerification}
+					onChange={onChangeDisableEmailVerification}
+					isDisabled={!isLdapEnabled || isUIDisabled}
+				/>
+				<HelpButton
+					tooltipContent={t("Settings:DisableEmailDescription", {
+						sectionName: t("Common:LDAP"),
+						productName: t("Common:ProductName"),
+					})}
+				/>
+			</div>
+		</div>
+	);
 };
 
 export default inject(({ ldapStore }) => {
-  const {
-    disableEmailVerification,
-    setDisableEmailVerification,
-    isLdapEnabled,
-    isUIDisabled,
-    setIsSendWelcomeEmail,
-    isSendWelcomeEmail,
-  } = ldapStore;
-  return {
-    isLdapEnabled,
-    isUIDisabled,
-    setIsSendWelcomeEmail,
-    isSendWelcomeEmail,
-    disableEmailVerification,
-    setDisableEmailVerification,
-  };
+	const {
+		disableEmailVerification,
+		setDisableEmailVerification,
+		isLdapEnabled,
+		isUIDisabled,
+		setIsSendWelcomeEmail,
+		isSendWelcomeEmail,
+	} = ldapStore;
+	return {
+		isLdapEnabled,
+		isUIDisabled,
+		setIsSendWelcomeEmail,
+		isSendWelcomeEmail,
+		disableEmailVerification,
+		setDisableEmailVerification,
+	};
 })(observer(AdvancedSettings));

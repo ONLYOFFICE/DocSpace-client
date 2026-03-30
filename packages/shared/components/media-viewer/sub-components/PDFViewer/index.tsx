@@ -43,7 +43,7 @@ import type {
   ToolbarItemType,
 } from "../ViewerToolbar/ViewerToolbar.props";
 import { ViewerLoader } from "../ViewerLoader";
-import { useInterfaceDirection } from "../../../../hooks/useInterfaceDirection";
+import { useInterfaceDirection } from "@docspace/ui-kit/context/InterfaceDirectionContext";
 import PDFViewerProps, { BookMarkType } from "./PDFViewer.props";
 
 import { Sidebar } from "./ui/SideBar";

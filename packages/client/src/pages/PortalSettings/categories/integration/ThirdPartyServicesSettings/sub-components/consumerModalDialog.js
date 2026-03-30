@@ -29,12 +29,12 @@ import PropTypes from "prop-types";
 import { Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { format } from "react-string-format";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Text } from "@docspace/shared/components/text";
-import { Button } from "@docspace/shared/components/button";
-import { TextInput } from "@docspace/shared/components/text-input";
-import { Link } from "@docspace/shared/components/link";
-import { toastr } from "@docspace/shared/components/toast";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Button } from "@docspace/ui-kit/components/button";
+import { TextInput } from "@docspace/ui-kit/components/text-input";
+import { Link } from "@docspace/ui-kit/components/link";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { showLoader, hideLoader } from "@docspace/shared/utils/common";
 import { mobile } from "@docspace/shared/utils";
 import styled from "styled-components";
@@ -126,7 +126,7 @@ class ConsumerModalDialog extends React.Component {
 
   onChangeHandler = (e) => {
     this.setState({
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value.replace(/\s/g, ""),
     });
   };
 
@@ -149,7 +149,7 @@ class ConsumerModalDialog extends React.Component {
     for (i = 0; i < stateLength; i++) {
       prop.push({
         name: Object.keys(state)[i],
-        value: Object.values(state)[i],
+        value: Object.values(state)[i].replace(/\s/g, ""),
       });
     }
     const data = {

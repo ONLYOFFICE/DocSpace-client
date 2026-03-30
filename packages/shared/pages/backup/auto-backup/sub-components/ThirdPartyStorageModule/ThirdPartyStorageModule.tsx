@@ -31,14 +31,14 @@ import classNames from "classnames";
 
 import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?url";
 
-import { ComboBox } from "../../../../../components/combobox";
+import { ComboBox } from "@docspace/ui-kit/components/combobox";
 import { ThirdPartyStorages } from "../../../../../enums";
 import { getOptions } from "../../../../../utils/getThirdPartyStoragesOptions";
 import { useDidMount } from "../../../../../hooks/useDidMount";
-import { useUnmount } from "../../../../../hooks/useUnmount";
+import { useUnmount } from "@docspace/ui-kit/hooks/useUnmount";
 import { DropDownItem } from "../../../../../components/drop-down-item";
-import { IconButton } from "../../../../../components/icon-button";
-import { Text } from "../../../../../components/text";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { Text } from "@docspace/ui-kit/components/text";
 import { THIRD_PARTY_SERVICES_URL } from "../../../../../constants";
 
 import { GoogleCloudStorage } from "../storages/GoogleCloudStorage";

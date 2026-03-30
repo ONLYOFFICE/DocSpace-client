@@ -27,7 +27,7 @@
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { FieldContainer } from "@docspace/shared/components/field-container";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import LdapFieldComponent from "./LdapFieldComponent";
 
 const USER_DN = "userDN";

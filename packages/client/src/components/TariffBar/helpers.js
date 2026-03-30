@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 const ORANGE = globalColors.mainOrange;
 const RED = globalColors.mainRed;
@@ -46,16 +46,18 @@ export const getSaasBar = (
 export const getEnterpriseBar = (
   t,
   isPaymentPageAvailable,
-  isEnterprise,
   isTrial,
   isLicenseExpiring,
   isLicenseDateExpired,
   trialDaysLeft,
   paymentDate,
+  isGracePeriod,
+  isLifetimeLicense,
+  isCommunity,
 ) => {
   if (
     isPaymentPageAvailable &&
-    isEnterprise &&
+    !isCommunity &&
     (isTrial || isLicenseExpiring || isLicenseDateExpired)
   ) {
     if (isTrial) {
@@ -66,11 +68,25 @@ export const getEnterpriseBar = (
         color: ORANGE,
       };
     }
+
+    if (!isLifetimeLicense && isLicenseExpiring)
+      return {
+        label: t("Common:LicenseExpiresOn", { date: paymentDate }),
+        color: ORANGE,
+      };
+
+    if (!isLifetimeLicense && isGracePeriod)
+      return {
+        label: t("Common:LicenseExpired", { date: paymentDate }),
+        color: RED,
+      };
+
     if (isLicenseDateExpired)
       return {
         label: t("Common:SubscriptionExpiredTitle"),
         color: RED,
       };
+
     return {
       label: t("Common:SubscriptionIsExpiring", { date: paymentDate }),
       color: ORANGE,

@@ -27,7 +27,10 @@
 import isNil from "lodash/isNil";
 import { makeAutoObservable, runInAction } from "mobx";
 
-import SocketHelper, { SocketEvents, TOptSocket } from "../utils/socket";
+import SocketHelper, {
+  SocketEvents,
+  TOptSocket,
+} from "@docspace/ui-kit/utils/socket";
 
 import api from "../api";
 import { setWithCredentialsStatus } from "../api/client";
@@ -43,8 +46,7 @@ import {
   isPublicPreview,
 } from "../utils/common";
 import { isRequestAborted } from "../utils/axios/isRequestAborted";
-import { SecretStorageService } from "../services/encryption/secretStorage";
-import { getCookie, setCookie } from "../utils/cookie";
+import { getCookie, setCookie } from "@docspace/ui-kit/utils/cookie";
 import { TenantStatus } from "../enums";
 import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "../constants";
 import { Nullable, TI18n } from "../types";
@@ -56,14 +58,6 @@ import { CurrentQuotasStore } from "./CurrentQuotaStore";
 import { SettingsStore } from "./SettingsStore";
 
 class AuthStore {
-  private userStore: UserStore | null = null;
-
-  private currentQuotaStore: CurrentQuotasStore | null = null;
-
-  private currentTariffStatusStore: CurrentTariffStatusStore | null = null;
-
-  settingsStore: SettingsStore | null = null;
-
   isLoading = false;
 
   version: string = "";
@@ -87,16 +81,11 @@ class AuthStore {
   isPortalInfoLoaded = false;
 
   constructor(
-    userStoreConst: UserStore,
-    currentTariffStatusStoreConst: CurrentTariffStatusStore,
-    currentQuotaStoreConst: CurrentQuotasStore,
-    settingsStore: SettingsStore,
+    private userStore: UserStore,
+    private currentTariffStatusStore: CurrentTariffStatusStore,
+    private currentQuotaStore: CurrentQuotasStore,
+    public settingsStore: SettingsStore,
   ) {
-    this.userStore = userStoreConst;
-    this.currentTariffStatusStore = currentTariffStatusStoreConst;
-    this.currentQuotaStore = currentQuotaStoreConst;
-    this.settingsStore = settingsStore;
-
     makeAutoObservable(this);
 
     SocketHelper?.on(
@@ -150,8 +139,7 @@ class AuthStore {
             return;
           }
 
-          // biome-ignore lint/correctness/noUnusedVariables: TODO fix
-          const { customQuotaFeature, ...updatableObject } = options;
+          const { customQuotaFeature: _, ...updatableObject } = options;
 
           this.currentQuotaStore?.updateTenantCustomQuota(updatableObject);
         });
@@ -272,7 +260,8 @@ class AuthStore {
     if (
       window.location.search === "?complete=true" &&
       !window.location.href.includes("wallet") &&
-      !window.location.href.includes("services")
+      !window.location.href.includes("services") &&
+      !window.location.href.includes("payment-method")
     ) {
       window.history.replaceState({}, document.title, window.location.pathname);
       refresh = true;
@@ -475,8 +464,6 @@ class AuthStore {
   };
 
   logout = async (reset = true) => {
-    SecretStorageService.clearCache();
-
     if (typeof window !== "undefined") {
       const w = window as unknown as { __redirectToLogin?: boolean };
       w.__redirectToLogin = true;
@@ -544,3 +531,4 @@ class AuthStore {
 }
 
 export { AuthStore };
+

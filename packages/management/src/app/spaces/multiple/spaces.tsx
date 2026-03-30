@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { RowContainer } from "@docspace/shared/components/rows";
+import { RowContainer } from "@docspace/ui-kit/components/rows";
 import type { TPortals } from "@docspace/shared/api/management/types";
 
 import { SpacesRow } from "./spaces-row";

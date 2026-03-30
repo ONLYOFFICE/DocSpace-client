@@ -401,8 +401,8 @@ const getFoldersTree = (): TGetRootFolder[] => {
         indexing: false,
         denyDownload: false,
         fileEntryType: 1,
-        id: 1,
-        rootFolderId: 1,
+        id: 2,
+        rootFolderId: 2,
         canShare: false,
         security: {
           Read: true,
@@ -471,7 +471,7 @@ const getFoldersTree = (): TGetRootFolder[] => {
       },
       pathParts: [
         {
-          id: 1,
+          id: 2,
           title: "Rooms",
         },
       ],

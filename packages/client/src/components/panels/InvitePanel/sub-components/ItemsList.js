@@ -24,208 +24,211 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect, useRef, memo, useCallback } from "react";
+import { useState, useEffect, useRef, memo, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { FixedSizeList as List } from "react-window";
-import { CustomScrollbarsVirtualList } from "@docspace/shared/components/scrollbar";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import useResizeObserver from "use-resize-observer";
 import { useTheme } from "styled-components";
 import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
+import classNames from "classnames";
 import Item from "./Item";
-
-import { ScrollList } from "../StyledInvitePanel";
+import styles from "../InvitePanel.module.scss";
 
 const USER_ITEM_HEIGHT = 48;
 
 const VirtualScroll = ({ ref, ...props }) => (
-  <CustomScrollbarsVirtualList
-    {...props}
-    ref={ref}
-    paddingAfterLastItem={ASIDE_PADDING_AFTER_LAST_ITEM}
-  />
+	<Scrollbar
+		{...props}
+		ref={ref}
+		paddingAfterLastItem={ASIDE_PADDING_AFTER_LAST_ITEM}
+	/>
 );
 
 VirtualScroll.displayName = "VirtualScroll";
 
 const Row = memo(({ data, index, style }) => {
-  const {
-    inviteItems,
-    setInviteItems,
-    changeInviteItem,
-    t,
-    setHasErrors,
-    roomType,
-    isOwner,
-    isAdmin,
-    inputsRef,
-    setIsOpenItemAccess,
-    isMobileView,
-    standalone,
-    allowInvitingGuests,
-  } = data;
+	const {
+		inviteItems,
+		setInviteItems,
+		changeInviteItem,
+		t,
+		setHasErrors,
+		roomType,
+		isOwner,
+		isAdmin,
+		inputsRef,
+		setIsOpenItemAccess,
+		isMobileView,
+		standalone,
+		allowInvitingGuests,
+	} = data;
 
-  const theme = useTheme();
+	const theme = useTheme();
 
-  if (inviteItems === undefined) return;
+	if (inviteItems === undefined) return;
 
-  const item = inviteItems[index];
+	const item = inviteItems[index];
 
-  return (
-    <Item
-      t={t}
-      item={item}
-      index={index}
-      key={item.id}
-      style={style}
-      theme={theme}
-      setInviteItems={setInviteItems}
-      changeInviteItem={changeInviteItem}
-      inviteItems={inviteItems}
-      setHasErrors={setHasErrors}
-      roomType={roomType}
-      isOwner={isOwner}
-      isAdmin={isAdmin}
-      inputsRef={inputsRef}
-      setIsOpenItemAccess={setIsOpenItemAccess}
-      isMobileView={isMobileView}
-      standalone={standalone}
-      allowInvitingGuests={allowInvitingGuests}
-    />
-  );
+	return (
+		<Item
+			t={t}
+			item={item}
+			index={index}
+			key={item.id}
+			style={style}
+			theme={theme}
+			setInviteItems={setInviteItems}
+			changeInviteItem={changeInviteItem}
+			inviteItems={inviteItems}
+			setHasErrors={setHasErrors}
+			roomType={roomType}
+			isOwner={isOwner}
+			isAdmin={isAdmin}
+			inputsRef={inputsRef}
+			setIsOpenItemAccess={setIsOpenItemAccess}
+			isMobileView={isMobileView}
+			standalone={standalone}
+			allowInvitingGuests={allowInvitingGuests}
+		/>
+	);
 });
 
 Row.displayName = "Row";
 
 const ItemsList = ({
-  t,
-  setInviteItems,
-  inviteItems,
-  changeInviteItem,
-  setHasErrors,
-  roomType,
-  isOwner,
-  isAdmin,
-  externalLinksVisible,
-  scrollAllPanelContent,
-  inputsRef,
-  invitePanelBodyRef,
-  isMobileView,
-  standalone,
-  allowInvitingGuests,
+	t,
+	setInviteItems,
+	inviteItems,
+	changeInviteItem,
+	setHasErrors,
+	roomType,
+	isOwner,
+	isAdmin,
+	externalLinksVisible,
+	scrollAllPanelContent,
+	inputsRef,
+	invitePanelBodyRef,
+	isMobileView,
+	standalone,
+	allowInvitingGuests,
 }) => {
-  const [bodyHeight, setBodyHeight] = useState(0);
-  const [offsetTop, setOffsetTop] = useState(0);
-  const [isTotalListHeight, setIsTotalListHeight] = useState(false);
-  const [isOpenItemAccess, setIsOpenItemAccess] = useState(false);
-  const bodyRef = useRef();
-  const { height } = useResizeObserver({ ref: bodyRef });
-  const { interfaceDirection } = useTheme();
+	const [bodyHeight, setBodyHeight] = useState(0);
+	const [offsetTop, setOffsetTop] = useState(0);
+	const [isTotalListHeight, setIsTotalListHeight] = useState(false);
+	const [isOpenItemAccess, setIsOpenItemAccess] = useState(false);
+	const bodyRef = useRef();
+	const { height } = useResizeObserver({ ref: bodyRef });
+	const { interfaceDirection } = useTheme();
 
-  const onBodyResize = useCallback(() => {
-    const scrollHeight = bodyRef?.current?.firstChild.scrollHeight;
-    const heightList = height || bodyRef.current.offsetHeight;
-    const totalHeightItems = inviteItems.length * USER_ITEM_HEIGHT;
-    const listAreaHeight = heightList;
-    const heightBody = invitePanelBodyRef?.current?.clientHeight;
-    const fullHeightList = heightBody - bodyRef.current.offsetTop;
-    const heightWitchOpenItemAccess = Math.max(scrollHeight, fullHeightList);
+	const onBodyResize = useCallback(() => {
+		const scrollHeight = bodyRef?.current?.firstChild.scrollHeight;
+		const heightList = height || bodyRef.current.offsetHeight;
+		const totalHeightItems = inviteItems.length * USER_ITEM_HEIGHT;
+		const listAreaHeight = heightList;
+		const heightBody = invitePanelBodyRef?.current?.clientHeight;
+		const fullHeightList = heightBody - bodyRef.current.offsetTop;
+		const heightWitchOpenItemAccess = Math.max(scrollHeight, fullHeightList);
 
-    const calculatedHeight = scrollAllPanelContent
-      ? Math.max(
-          totalHeightItems,
-          listAreaHeight,
-          isOpenItemAccess ? heightWitchOpenItemAccess : 0,
-        )
-      : heightList;
+		const calculatedHeight = scrollAllPanelContent
+			? Math.max(
+					totalHeightItems,
+					listAreaHeight,
+					isOpenItemAccess ? heightWitchOpenItemAccess : 0,
+				)
+			: heightList;
 
-    const finalHeight = scrollAllPanelContent
-      ? isOpenItemAccess
-        ? calculatedHeight
-        : totalHeightItems
-      : calculatedHeight;
+		const finalHeight = scrollAllPanelContent
+			? isOpenItemAccess
+				? calculatedHeight
+				: totalHeightItems
+			: calculatedHeight;
 
-    setBodyHeight(finalHeight);
-    setOffsetTop(bodyRef.current.offsetTop);
+		setBodyHeight(finalHeight);
+		setOffsetTop(bodyRef.current.offsetTop);
 
-    if (scrollAllPanelContent && totalHeightItems && listAreaHeight)
-      setIsTotalListHeight(
-        totalHeightItems >= listAreaHeight && totalHeightItems >= scrollHeight,
-      );
-  }, [
-    height,
-    bodyRef?.current?.offsetHeight,
-    inviteItems.length,
-    scrollAllPanelContent,
-    isOpenItemAccess,
-  ]);
+		if (scrollAllPanelContent && totalHeightItems && listAreaHeight)
+			setIsTotalListHeight(
+				totalHeightItems >= listAreaHeight && totalHeightItems >= scrollHeight,
+			);
+	}, [
+		height,
+		bodyRef?.current?.offsetHeight,
+		inviteItems.length,
+		scrollAllPanelContent,
+		isOpenItemAccess,
+	]);
 
-  useEffect(() => {
-    onBodyResize();
-  }, [
-    bodyRef.current,
-    externalLinksVisible,
-    height,
-    inviteItems.length,
-    scrollAllPanelContent,
-    isOpenItemAccess,
-  ]);
+	useEffect(() => {
+		onBodyResize();
+	}, [
+		bodyRef.current,
+		externalLinksVisible,
+		height,
+		inviteItems.length,
+		scrollAllPanelContent,
+		isOpenItemAccess,
+	]);
 
-  const overflowStyle = scrollAllPanelContent ? "hidden" : "scroll";
+	const overflowStyle = scrollAllPanelContent ? "hidden" : "unset";
 
-  const willChangeStyle =
-    isMobileView && isOpenItemAccess ? "auto" : "transform";
+	const willChangeStyle =
+		isMobileView && isOpenItemAccess ? "auto" : "transform";
 
-  return (
-    <ScrollList
-      offsetTop={offsetTop}
-      ref={bodyRef}
-      scrollAllPanelContent={scrollAllPanelContent}
-      isTotalListHeight={isTotalListHeight}
-      dataTestId="invite_panel_items_scroll_list"
-    >
-      <List
-        style={{ overflow: overflowStyle, willChange: willChangeStyle }}
-        direction={interfaceDirection}
-        height={bodyHeight}
-        width="auto"
-        itemCount={inviteItems.length}
-        itemSize={USER_ITEM_HEIGHT}
-        itemData={{
-          inviteItems,
-          setInviteItems,
-          changeInviteItem,
-          setHasErrors,
-          roomType,
-          isOwner,
-          isAdmin,
-          inputsRef,
-          setIsOpenItemAccess,
-          isMobileView,
-          t,
-          standalone,
-          allowInvitingGuests,
-        }}
-        outerElementType={!scrollAllPanelContent ? VirtualScroll : null}
-        data-testid="invite_panel_items_list"
-      >
-        {Row}
-      </List>
-    </ScrollList>
-  );
+	return (
+		<div
+			className={classNames(styles.scrollList, {
+				[styles.isAutoHeight]: scrollAllPanelContent && isTotalListHeight,
+				[styles.withOffset]: !!offsetTop,
+			})}
+			offsetTop={offsetTop}
+			ref={bodyRef}
+			data-testid="invite_panel_items_scroll_list"
+			style={{ "--offset-top": `${offsetTop}px` }}
+		>
+			<List
+				style={{ overflow: overflowStyle, willChange: willChangeStyle }}
+				direction={interfaceDirection}
+				height={bodyHeight}
+				width="auto"
+				itemCount={inviteItems.length}
+				itemSize={USER_ITEM_HEIGHT}
+				itemData={{
+					inviteItems,
+					setInviteItems,
+					changeInviteItem,
+					setHasErrors,
+					roomType,
+					isOwner,
+					isAdmin,
+					inputsRef,
+					setIsOpenItemAccess,
+					isMobileView,
+					t,
+					standalone,
+					allowInvitingGuests,
+				}}
+				outerElementType={!scrollAllPanelContent ? VirtualScroll : null}
+				data-testid="invite_panel_items_list"
+			>
+				{Row}
+			</List>
+		</div>
+	);
 };
 
 export default inject(({ userStore, dialogsStore, settingsStore }) => {
-  const { setInviteItems, inviteItems, changeInviteItem } = dialogsStore;
-  const { isOwner, isAdmin } = userStore.user;
-  const { standalone, allowInvitingGuests } = settingsStore;
+	const { setInviteItems, inviteItems, changeInviteItem } = dialogsStore;
+	const { isOwner, isAdmin } = userStore.user;
+	const { standalone, allowInvitingGuests } = settingsStore;
 
-  return {
-    setInviteItems,
-    inviteItems,
-    changeInviteItem,
-    isOwner,
-    isAdmin,
-    standalone,
-    allowInvitingGuests,
-  };
+	return {
+		setInviteItems,
+		inviteItems,
+		changeInviteItem,
+		isOwner,
+		isAdmin,
+		standalone,
+		allowInvitingGuests,
+	};
 })(observer(ItemsList));

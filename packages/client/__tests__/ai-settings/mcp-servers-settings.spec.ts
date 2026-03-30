@@ -26,6 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import { expect, test, TEST_PORT } from "../fixtures/base";
 import type { TServer } from "@docspace/shared/api/ai/types";
 import { ServerType } from "@docspace/shared/api/ai/enums";
@@ -64,7 +65,7 @@ test.describe("MCP servers", () => {
     await expect(page.getByTestId("custom-mcp-list")).toBeVisible();
     await expect(page.getByTestId("system-mcp-list")).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "mcp-servers-settings",
       "mcp-servers.png",
@@ -100,7 +101,7 @@ test.describe("MCP servers", () => {
 
     await addMcpButton.hover();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "mcp-servers-settings",
       "mcp-servers-no-providers.png",
@@ -134,7 +135,7 @@ test.describe("MCP servers", () => {
       }
     }
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "mcp-servers-settings",
       "mcp-servers-has-providers.png",
@@ -216,7 +217,7 @@ test.describe("MCP servers", () => {
 
     await expect(customMcpTiles).toHaveCount(2);
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "mcp-servers-settings",
       "mcp-servers-after-add.png",
@@ -275,7 +276,7 @@ test.describe("MCP servers", () => {
 
     await expect(customMcpTiles).toHaveCount(0);
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "mcp-servers-settings",
       "mcp-servers-after-delete.png",
@@ -375,7 +376,7 @@ test.describe("MCP servers", () => {
       updateIcon: true,
     });
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "mcp-servers-settings",
       "mcp-servers-after-update.png",
@@ -433,7 +434,7 @@ test.describe("MCP servers", () => {
 
     await expect(toggleButton).toHaveAttribute("aria-checked", "false");
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "mcp-servers-settings",
       "mcp-servers-after-disable-custom-server.png",
@@ -485,7 +486,7 @@ test.describe("MCP servers", () => {
 
     await expect(toggleButton).toHaveAttribute("aria-checked", "true");
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "mcp-servers-settings",
       "mcp-servers-after-enable-custom-server.png",
@@ -516,7 +517,7 @@ test.describe("MCP servers", () => {
     const toggle = firstCustomMcpTile.getByTestId("toggle-button-input");
     await expect(toggle).toBeDisabled();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "mcp-servers-settings",
       "mcp-servers-tile-need-reset.png",
@@ -545,7 +546,7 @@ test.describe("MCP servers", () => {
     await expect(mcpHeaderValueInput).toBeVisible();
     await expect(mcpHeaderValueInput).toHaveAttribute("data-error", "true");
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "mcp-servers-settings",
       "mcp-servers-update-dialog-need-reset.png",

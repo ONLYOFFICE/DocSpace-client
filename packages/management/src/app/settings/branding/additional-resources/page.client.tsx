@@ -35,7 +35,7 @@ import {
   restoreAdditionalResources,
   getAdditionalResources,
 } from "@docspace/shared/api/settings";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { useResponsiveNavigation } from "@docspace/shared/hooks/useResponsiveSSRNavigation";
 import { AdditionalResources } from "@docspace/shared/pages/Branding/AdditionalResources";
 import type { TAdditionalResources } from "@docspace/shared/api/settings/types";

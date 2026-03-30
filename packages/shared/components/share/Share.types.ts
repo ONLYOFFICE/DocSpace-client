@@ -25,21 +25,21 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import moment from "moment";
 import type { TFunction } from "i18next";
+import type { DateTime } from "luxon";
 import type { IndexRange } from "react-virtualized";
 
 import type { TFile, TFileLink, TFolder } from "../../api/files/types";
 import type { LinkParamsType, TAvailableShareRights } from "../../types";
 import type { ShareAccessRights } from "../../enums";
 
-import type { TOption } from "../combobox";
+import type { TOption } from "@docspace/ui-kit/components/combobox";
 import type { TUser } from "../../api/people/types";
 import type { TGroup } from "../../api/groups/types";
 import type { RoomMember } from "../../api/rooms/types";
 
 export type ShareCalendarProps = {
-  onDateSet: (formattedDate: moment.Moment) => void;
+  onDateSet: (formattedDate: DateTime) => void;
   closeCalendar: () => void;
   calendarRef: React.RefObject<HTMLDivElement | null>;
   locale: string;
@@ -65,7 +65,7 @@ export type LinkRowProps = {
 
   changeExpirationOption: (
     link: TFileLink,
-    expirationDate: moment.Moment | null,
+    expirationDate: DateTime | null,
   ) => Promise<void>;
 
   removedExpiredLink: (link: TFileLink) => void;
@@ -99,10 +99,10 @@ export type ExpiredComboBoxProps = {
   link: TFileLink;
   changeExpirationOption: (
     link: TFileLink,
-    expirationDate: moment.Moment | null,
+    expirationDate: DateTime | null,
   ) => Promise<void>;
   isDisabled?: boolean;
-  removedExpiredLink: (link: TFileLink) => void;
+  removedExpiredLink: (link: TFileLink, isReactivate: boolean) => void;
 };
 
 export type ShareProps = {

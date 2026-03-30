@@ -28,16 +28,16 @@ import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
+} from "@docspace/ui-kit/components/modal-dialog";
 import { TGroup } from "@docspace/shared/api/groups/types";
 import {
   MIN_LOADER_TIMER,
   SHOW_LOADER_TIMER,
-} from "@docspace/shared/selectors/utils/constants";
+} from "@docspace/ui-kit/selectors/utils/constants";
 import { TUser } from "@docspace/shared/api/people/types";
 
 import EditGroupStore from "SRC_DIR/store/contacts/EditGroupStore";

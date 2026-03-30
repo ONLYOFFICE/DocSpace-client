@@ -1,0 +1,94 @@
+.root {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+
+  @media (max-width: 767.9px) {
+    > :not(:first-child) {
+      display: none;
+    }
+  }
+}
+
+.headerEditing {
+  flex: 0 1 auto;
+}
+
+.headerRow {
+  flex: 0 1 auto;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.headerNavigation {
+  flex: 1;
+  min-width: 0;
+}
+
+.root :global([class*="Navigation_item"]:not([class*="itemWrapper"])) {
+  column-gap: 10px;
+}
+
+.root :global(.articleItemText) {
+  font-weight: 600;
+}
+
+.sectionArea {
+  position: relative;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: var(--min-section-width, 400px);
+  overflow: hidden;
+
+  :global(.section-sticky-container) {
+    margin-inline-end: 0;
+  }
+
+  :global([class*="Navigation_box"]) {
+    min-width: var(--nav-dropdown-min-width, auto);
+  }
+
+  @media (max-width: 1023.9px) {
+    min-width: 280px;
+  }
+
+  @media (max-width: 600px) {
+    min-width: 0;
+  }
+}
+
+.root[data-resizing="true"] {
+  user-select: none;
+
+  .sectionArea iframe {
+    pointer-events: none;
+  }
+}
+
+.root[data-resizing="true"] [data-position] {
+  transition: none;
+}
+
+.loaderOverlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contentFadeIn {
+  opacity: 1;
+}
+
+.contentHidden {
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}

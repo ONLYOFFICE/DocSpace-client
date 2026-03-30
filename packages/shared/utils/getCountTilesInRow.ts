@@ -26,7 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { isDesktop, isMobile } from "./device";
+import { isDesktop, isMobile } from "@docspace/ui-kit/utils/device";
 
 function getTileWidth(
   min: number,

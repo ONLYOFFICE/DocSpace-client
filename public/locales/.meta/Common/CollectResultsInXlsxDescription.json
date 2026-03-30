@@ -1,0 +1,28 @@
+{
+  "key_path": "CollectResultsInXlsxDescription",
+  "content": "Automatic collection of form results into spreadsheets. Spreadsheets are created in the same folder where filled form copies are stored. A separate XLSX file is generated for each form. Each row represents a single filled form, and columns correspond to form fields.",
+  "content_en_sha1_hash": "4bb02cceb171f7eb039d48f9e80a983b55c65ca8",
+  "created_at": "2026-03-20T09:07:28.003Z",
+  "updated_at": "2026-03-20T09:24:07.307Z",
+  "comment": {
+    "text": "This text describes the feature that automatically saves form responses into individual XLSX spreadsheets. The spreadsheets are created alongside the form copies, with each row representing a single submission and columns matching form fields. This description appears within a dialog to explain an option for saving form data.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T09:24:07.307Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/FormRoomBlock/FormRoomBlock.tsx",
+      "line_number": 73,
+      "context": "return (\n <div className={styles.formRoomBlock}>\n <ToggleParam\n id=\"save-form-as-xlsx\"\n title={t(\"Common:CollectResultsInXlsx\")}\n description={t(\"Common:CollectResultsInXlsxDescription\")}\n isChecked={roomParams.saveFormAsXLSX || false}\n onCheckedChange={onSaveFormAsXLSXChange}\n isDisabled={isDisabled}\n />",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

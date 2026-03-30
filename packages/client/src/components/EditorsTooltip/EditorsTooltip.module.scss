@@ -1,0 +1,67 @@
+.editorsList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.editorItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 24px;
+  
+  &.mobile {
+    height: 32px;
+  }
+}
+
+.editorAvatar {
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  
+  width: 24px;
+  height: 24px;
+  
+  &.mobile {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+.editorName {
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 16px;
+  font-size: 12px;
+}
+
+.tooltipHeader {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--editors-tooltip-header-color) !important;
+  margin-bottom: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mobileContainer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 310;
+  
+  width: calc(100% - 12px);
+  
+  background: var(--context-menu-background);
+  border: var(--context-menu-border);
+  border-radius: 6px 6px 0 0;
+  box-shadow: var(--context-menu-box-shadow);
+  
+  padding: 12px;
+  padding-inline-end: 0px;
+}

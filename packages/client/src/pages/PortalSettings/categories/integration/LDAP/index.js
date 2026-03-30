@@ -29,10 +29,10 @@ import { isDesktop } from "react-device-detect";
 import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router";
-import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link } from "@docspace/ui-kit/components/link";
 import { DeviceType } from "@docspace/shared/enums";
-import { isMobile } from "@docspace/shared/utils/device";
+import { isMobile } from "@docspace/ui-kit/utils/device";
 
 import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
@@ -45,132 +45,132 @@ import { SettingsContainerSection } from "./sub-components/SettingsContainer";
 import LdapLoader from "./sub-components/LdapLoader";
 
 const LDAP = ({
-  ldapSettingsUrl,
-  currentColorScheme,
-  isLdapAvailable,
-  load,
-  isMobileView,
-  isLdapEnabled,
-  setScrollToSettings,
-  showPortalSettingsLoader,
+	ldapSettingsUrl,
+	currentColorScheme,
+	isLdapAvailable,
+	load,
+	isMobileView,
+	isLdapEnabled,
+	setScrollToSettings,
+	showPortalSettingsLoader,
 }) => {
-  const { t, ready } = useTranslation(["Ldap", "Settings", "Common"]);
-  const [isSmallWindow, setIsSmallWindow] = useState(false);
-  const navigate = useNavigate();
+	const { t, ready } = useTranslation(["Ldap", "Settings", "Common"]);
+	const [isSmallWindow, setIsSmallWindow] = useState(false);
+	const navigate = useNavigate();
 
-  const onCheckView = () => {
-    if (isDesktop && window.innerWidth < 795) {
-      setIsSmallWindow(true);
-    } else {
-      setIsSmallWindow(false);
-    }
-  };
+	const onCheckView = () => {
+		if (isDesktop && window.innerWidth < 795) {
+			setIsSmallWindow(true);
+		} else {
+			setIsSmallWindow(false);
+		}
+	};
 
-  const onGoToInvitationSettings = () => {
-    if (!isMobile()) setScrollToSettings(true);
-    navigate(`/portal-settings/security/access-portal/invitation-settings`);
-  };
+	const onGoToInvitationSettings = () => {
+		if (!isMobile()) setScrollToSettings(true);
+		navigate(`/portal-settings/security/access-portal/invitation-settings`);
+	};
 
-  useEffect(() => {
-    onCheckView();
-    if (ready) setDocumentTitle(t("Ldap:LdapSettings"));
-    window.addEventListener("resize", onCheckView);
+	useEffect(() => {
+		onCheckView();
+		if (ready) setDocumentTitle(t("Ldap:LdapSettings"));
+		window.addEventListener("resize", onCheckView);
 
-    return () => window.removeEventListener("resize", onCheckView);
-  }, [isLdapAvailable, load, t, ready]);
+		return () => window.removeEventListener("resize", onCheckView);
+	}, [isLdapAvailable, load, t, ready]);
 
-  if ((showPortalSettingsLoader && isLdapAvailable) || !ready)
-    return <LdapLoader />;
+	if ((showPortalSettingsLoader && isLdapAvailable) || !ready)
+		return <LdapLoader />;
 
-  const link = `${`${t("Settings:ManagementCategorySecurity")} > ${t("Settings:InvitationSettings")}.`}`;
+	const link = `${`${t("Settings:ManagementCategorySecurity")} > ${t("Settings:InvitationSettings")}.`}`;
 
-  return (
-    <StyledLdapPage isSmallWindow={isSmallWindow}>
-      <Text className="intro-text settings_unavailable">
-        <Trans
-          t={t}
-          i18nKey="LdapIntegrationDescription"
-          ns="Ldap"
-          values={{
-            productName: t("Common:ProductName"),
-            sectionName: t("Common:Contacts"),
-            link,
-          }}
-          components={{
-            1: (
-              <Link
-                fontSize="13px"
-                fontWeight="600"
-                lineHeight="20px"
-                color={currentColorScheme?.main?.accent}
-                isHovered
-                onClick={onGoToInvitationSettings}
-                dataTestId="invitation_settings_link"
-              />
-            ),
-          }}
-        />
-      </Text>
-      <div className="settings_unavailable-box">
-        {ldapSettingsUrl ? (
-          <Link
-            color={currentColorScheme.main.accent}
-            isHovered
-            target="_blank"
-            href={ldapSettingsUrl}
-            dataTestId="ldap_settings_link"
-            fontWeight={600}
-          >
-            {t("Common:LearnMore")}
-          </Link>
-        ) : null}
-      </div>
+	return (
+		<StyledLdapPage isSmallWindow={isSmallWindow}>
+			<Text className="intro-text settings_unavailable">
+				<Trans
+					t={t}
+					i18nKey="LdapIntegrationDescription"
+					ns="Ldap"
+					values={{
+						productName: t("Common:ProductName"),
+						sectionName: t("Common:Contacts"),
+						link,
+					}}
+					components={{
+						1: (
+							<Link
+								fontSize="13px"
+								fontWeight="600"
+								lineHeight="20px"
+								color={currentColorScheme?.main?.accent}
+								isHovered
+								onClick={onGoToInvitationSettings}
+								dataTestId="invitation_settings_link"
+							/>
+						),
+					}}
+				/>
+			</Text>
+			<div className="settings_unavailable-box">
+				{ldapSettingsUrl ? (
+					<Link
+						color={currentColorScheme.main.accent}
+						isHovered
+						target="_blank"
+						href={ldapSettingsUrl}
+						dataTestId="ldap_settings_link"
+						fontWeight={600}
+					>
+						{t("Common:LearnMore")}
+					</Link>
+				) : null}
+			</div>
 
-      {isMobileView ? (
-        <LdapMobileView
-          isLdapEnabled={isLdapEnabled}
-          isLDAPAvailable={isLdapAvailable}
-        />
-      ) : (
-        <>
-          <ToggleLDAP />
+			{isMobileView ? (
+				<LdapMobileView
+					isLdapEnabled={isLdapEnabled}
+					isLDAPAvailable={isLdapAvailable}
+				/>
+			) : (
+				<>
+					<ToggleLDAP />
 
-          <SettingsContainerSection />
+					<SettingsContainerSection />
 
-          <StyledSettingsSeparator />
+					<StyledSettingsSeparator />
 
-          <SyncContainerSection />
-        </>
-      )}
-    </StyledLdapPage>
-  );
+					<SyncContainerSection />
+				</>
+			)}
+		</StyledLdapPage>
+	);
 };
 
 export default inject(
-  ({ ldapStore, settingsStore, currentQuotaStore, clientLoadingStore }) => {
-    const { isLdapAvailable } = currentQuotaStore;
-    const {
-      ldapSettingsUrl,
-      currentColorScheme,
-      currentDeviceType,
-      setScrollToSettings,
-    } = settingsStore;
-    const { load, isLdapEnabled, isLoaded } = ldapStore;
+	({ ldapStore, settingsStore, currentQuotaStore, clientLoadingStore }) => {
+		const { isLdapAvailable } = currentQuotaStore;
+		const {
+			ldapSettingsUrl,
+			currentColorScheme,
+			currentDeviceType,
+			setScrollToSettings,
+		} = settingsStore;
+		const { load, isLdapEnabled, isLoaded } = ldapStore;
 
-    const { showPortalSettingsLoader } = clientLoadingStore;
+		const { showPortalSettingsLoader } = clientLoadingStore;
 
-    const isMobileView = currentDeviceType === DeviceType.mobile;
+		const isMobileView = currentDeviceType === DeviceType.mobile;
 
-    return {
-      ldapSettingsUrl,
-      currentColorScheme,
-      isLdapAvailable,
-      load,
-      isMobileView,
-      isLdapEnabled,
-      isLoaded,
-      setScrollToSettings,
-      showPortalSettingsLoader,
-    };
-  },
+		return {
+			ldapSettingsUrl,
+			currentColorScheme,
+			isLdapAvailable,
+			load,
+			isMobileView,
+			isLdapEnabled,
+			isLoaded,
+			setScrollToSettings,
+			showPortalSettingsLoader,
+		};
+	},
 )(observer(LDAP));

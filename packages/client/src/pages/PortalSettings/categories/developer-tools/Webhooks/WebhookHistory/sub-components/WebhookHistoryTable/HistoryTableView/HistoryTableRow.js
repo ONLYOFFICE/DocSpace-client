@@ -35,12 +35,12 @@ import { useTranslation } from "react-i18next";
 
 import { retryWebhook } from "@docspace/shared/api/settings";
 
-import { TableRow, TableCell } from "@docspace/shared/components/table";
-import { Text } from "@docspace/shared/components/text";
-import { Checkbox } from "@docspace/shared/components/checkbox";
-import { toastr } from "@docspace/shared/components/toast";
+import { TableRow, TableCell } from "@docspace/ui-kit/components/table";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
-import { getCorrectDate } from "@docspace/shared/utils";
+import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 
 import { formatFilters } from "SRC_DIR/helpers/webhooks";
 

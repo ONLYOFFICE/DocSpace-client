@@ -33,14 +33,14 @@ import { inject, observer } from "mobx-react";
 import styled, { useTheme } from "styled-components";
 import { useNavigate, useLocation } from "react-router";
 import { withTranslation } from "react-i18next";
-import { Heading } from "@docspace/shared/components/heading";
-import { IconButton } from "@docspace/shared/components/icon-button";
-import { TableGroupMenu } from "@docspace/shared/components/table";
+import { Heading } from "@docspace/ui-kit/components/heading";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { TableGroupMenu } from "@docspace/ui-kit/components/table";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { mobile, tablet, desktop, isMobile } from "@docspace/shared/utils";
 import withLoading from "SRC_DIR/HOCs/withLoading";
-import { Badge } from "@docspace/shared/components/badge";
-import { globalColors } from "@docspace/shared/themes";
+import { Badge } from "@docspace/ui-kit/components/badge";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { DeviceType } from "@docspace/shared/enums";
 
 import TariffBar from "SRC_DIR/components/TariffBar";
@@ -221,6 +221,26 @@ const SectionHeaderContent = (props) => {
 
     const arrayOfParams = getArrayOfParams();
 
+    const serviceSubPageHeaders = {
+      "ai-services": "Services:OrganizationAI",
+      "backup": "Common:Backup",
+      "disk-storage": "Payments:AdditionalDiskStorage",
+    };
+
+    let number = 1;
+    if ( window.location.href.indexOf("disk-storage")) number=2
+    const serviceSubPageHeader = serviceSubPageHeaders[arrayOfParams[number]];
+
+    if (serviceSubPageHeader) {
+      const header = serviceSubPageHeader;
+      const isCategoryOrHeader = false;
+
+      header !== state.header && setState((val) => ({ ...val, header }));
+      isCategoryOrHeader !== state.isCategoryOrHeader &&
+        setState((val) => ({ ...val, isCategoryOrHeader }));
+      return;
+    }
+
     const key = getKeyByLink(arrayOfParams, settingsTree);
 
     const keysCollection = key.split("-");
@@ -240,6 +260,7 @@ const SectionHeaderContent = (props) => {
       settingsTree,
       "isHeader",
     );
+
     const isCategoryOrHeader = isCategory || isHeader;
 
     const isNeedPaidIcon = !isAvailableSettings(header);
@@ -263,6 +284,16 @@ const SectionHeaderContent = (props) => {
   ]);
 
   const onBackToParent = () => {
+    const isServicesSubPage =
+      location.pathname.includes("/services/disk-storage") ||
+      location.pathname.includes("/services/backup") ||
+      location.pathname.includes("/services/ai-services");
+
+    if (isServicesSubPage && location.key === "default") {
+      navigate("/portal-settings/payments/services");
+      return;
+    }
+
     navigate(-1);
   };
 
@@ -325,6 +356,10 @@ const SectionHeaderContent = (props) => {
         },
       ];
 
+  const isPaymentPage =
+    window.location.href.includes("portal-settings/payments/") &&
+    !window.location.href.includes("portal-settings/payments/services/");
+
   const translatedHeader =
     header === IMPORT_HEADER_CONST
       ? workspace === "GoogleWorkspace"
@@ -336,10 +371,13 @@ const SectionHeaderContent = (props) => {
                 organizationName: logoText,
               })
             : t("DataImport")
-      : t(header, {
+      : !standalone && isPaymentPage  
+        ? t("Billing") 
+        : t(header, {
           organizationName: logoText,
           license: t("Common:EnterpriseLicense"),
           productName: t("Common:ProductName"),
+          aiServices: t("Common:AIServices"),
         });
 
   // console.log(translatedHeader, header);
@@ -364,7 +402,10 @@ const SectionHeaderContent = (props) => {
           {!isCategoryOrHeader &&
           arrayOfParams[0] &&
           (isMobile() ||
-            window.location.href.indexOf("/javascript-sdk/") > -1) ? (
+            window.location.href.indexOf("/javascript-sdk/") > -1 ||
+            window.location.href.indexOf("/ai-services") > -1 ||
+            window.location.href.indexOf("/services/backup") > -1 ||
+            window.location.href.indexOf("disk-storage") > -1) ? (
             <IconButton
               iconName={ArrowPathReactSvgUrl}
               size="17"
@@ -496,6 +537,8 @@ export default inject(
       "JavascriptSdk",
       "OAuth",
       "Ldap",
+      "Services",
+      "Payments",
     ])(observer(SectionHeaderContent)),
   ),
 );

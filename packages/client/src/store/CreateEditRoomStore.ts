@@ -30,7 +30,7 @@ import isEqual from "lodash/isEqual";
 import { TFunction } from "i18next";
 
 import api from "@docspace/shared/api";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { isDesktop } from "@docspace/shared/utils";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { FolderType, RoomsType } from "@docspace/shared/enums";
@@ -272,6 +272,8 @@ class CreateEditRoomStore {
       prompt,
       providerId,
       modelId,
+      sendFormToExternalDB,
+      saveFormAsXLSX,
     } = newParams;
 
     const quotaLimit = quota || room.quotaLimit;
@@ -282,6 +284,9 @@ class CreateEditRoomStore {
     const isLifetimeChanged = !isEqual(lifetime, room.lifetime);
     const isOwnerChanged = roomOwner && roomOwner.id !== room.createdBy.id;
     const isWatermarkChanged = !isEqual(watermark, room.watermark);
+    const isSendFormToExternalDBChanged =
+      sendFormToExternalDB !== room.sendFormToExternalDB;
+    const isSaveFormAsXLSXChanged = saveFormAsXLSX !== room.saveFormAsXLSX;
 
     const tags = newParams.tags.map((tag) => tag.name);
     const prevTags = room.tags.sort();
@@ -289,6 +294,12 @@ class CreateEditRoomStore {
     const isTagsChanged = !isEqual(prevTags, currTags);
 
     const editRoomParams = {
+      ...(isSendFormToExternalDBChanged && {
+        sendFormToExternalDB,
+      }),
+      ...(isSaveFormAsXLSXChanged && {
+        saveFormAsXLSX,
+      }),
       ...(isTitleChanged && {
         title: title || t("Common:NewRoom"),
       }),
@@ -433,7 +444,7 @@ class CreateEditRoomStore {
     const quotaLimit = isDefaultRoomsQuotaSet ? quota : null;
 
     const tagsToAddList = tags.map((tag) => tag.name);
-    const isDeleteLogo = !!item.logo.original && !icon.uploadedFile;
+    const isDeleteLogo = !item.logo.original && !icon.uploadedFile;
 
     const roomData = {
       title,

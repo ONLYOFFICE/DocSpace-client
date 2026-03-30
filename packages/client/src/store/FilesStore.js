@@ -45,7 +45,7 @@ import {
 import SocketHelper, {
   SocketCommands,
   SocketEvents,
-} from "@docspace/shared/utils/socket";
+} from "@docspace/ui-kit/utils/socket";
 
 import {
   isLockedSharedRoom,
@@ -66,7 +66,7 @@ import {
   getCategoryType,
 } from "@docspace/shared/utils/common";
 
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import config from "PACKAGE_FILE";
 import {
   LOADER_TIMEOUT,
@@ -112,6 +112,8 @@ import {
   FILTER_TRASH,
 } from "@docspace/shared/utils/filterConstants";
 import { isRoom as isRoomUtil } from "@docspace/shared/utils/typeGuards";
+
+import { showCreatedPDFFormDialog } from "SRC_DIR/components/dialogs/CreatedPDFFormDialog";
 
 const { FilesFilter, RoomsFilter } = api;
 const storageViewAs = localStorage.getItem("viewAs");
@@ -272,6 +274,10 @@ class FilesStore {
 
   aiRoomStore = null;
 
+  dialogsStore = null;
+
+  arrRoomGroups = [];
+
   constructor(
     authStore,
     selectedFolderStore,
@@ -413,19 +419,26 @@ class FilesStore {
     });
 
     // WAIT FOR RESPONSES OF EDITING FILE
-    SocketHelper?.on(SocketEvents.StartEditFile, (id) => {
+    SocketHelper?.on(SocketEvents.StartEditFile, (data) => {
+      const fileId = typeof data === "object" ? data.fileId : data;
+      const editingBy = typeof data === "object" ? data.editingBy : undefined;
+
       const { socketSubscribers } = SocketHelper;
-      const pathParts = `FILE-${id}`;
+      const pathParts = `FILE-${fileId}`;
 
       if (!socketSubscribers.has(pathParts)) return;
 
-      const foundIndex = this.files.findIndex((x) => x.id === id);
+      const foundIndex = this.files.findIndex((x) => x.id === fileId);
       if (foundIndex == -1) return;
 
-      console.log(`[WS] s:start-edit-file`, id, this.files[foundIndex].title);
+      console.log(
+        `[WS] s:start-edit-file`,
+        fileId,
+        this.files[foundIndex].title,
+      );
 
       this.updateSelectionStatus(
-        id,
+        fileId,
         this.files[foundIndex].fileStatus | FileStatus.IsEditing,
         true,
       );
@@ -434,6 +447,8 @@ class FilesStore {
         foundIndex,
         this.files[foundIndex].fileStatus | FileStatus.IsEditing,
       );
+
+      this.updateFileLiveEditingBy(foundIndex, editingBy);
     });
 
     SocketHelper?.on(SocketEvents.ModifyRoom, (option) => {
@@ -451,20 +466,23 @@ class FilesStore {
       this.wsChangeFolderAccessRights(option);
     });
 
-    SocketHelper?.on(SocketEvents.StopEditFile, (id) => {
+    SocketHelper?.on(SocketEvents.StopEditFile, (data) => {
+      const fileId = typeof data === "object" ? data.fileId : data;
+
       const { socketSubscribers } = SocketHelper;
-      const pathParts = `FILE-${id}`;
+      const pathParts = `FILE-${fileId}`;
 
       if (!socketSubscribers.has(pathParts)) return;
 
-      const foundIndex = this.files.findIndex((x) => x.id === id);
+      const foundIndex = this.files.findIndex((x) => x.id === fileId);
+
       if (foundIndex == -1) return;
       const foundFile = this.files[foundIndex];
 
-      console.log(`[WS] s:stop-edit-file`, id, foundFile.title);
+      console.log(`[WS] s:stop-edit-file`, fileId, foundFile.title);
 
       this.updateSelectionStatus(
-        id,
+        fileId,
         foundFile.fileStatus & ~FileStatus.IsEditing,
         false,
       );
@@ -474,7 +492,9 @@ class FilesStore {
         foundFile.fileStatus & ~FileStatus.IsEditing,
       );
 
-      this.getFileInfo(id, foundFile.requestToken);
+      this.updateFileLiveEditingBy(foundIndex, undefined);
+
+      this.getFileInfo(fileId, foundFile.requestToken);
       this.createThumbnail(foundFile);
     });
 
@@ -846,19 +866,7 @@ class FilesStore {
 
     if (this.selectedFolderStore.id !== file.folderId) return;
 
-    const localKey = `${PDF_FORM_DIALOG_KEY}-${this.userStore.user.id}`;
-
-    const show = !JSON.parse(localStorage.getItem(localKey) ?? "false");
-
-    const event = new CustomEvent(Events.CREATE_PDF_FORM_FILE, {
-      detail: {
-        file,
-        show,
-        localKey,
-      },
-    });
-
-    window?.dispatchEvent(event);
+    showCreatedPDFFormDialog(file, this.userStore.user.id);
   };
 
   wsChangeFolderAccessRights = (option) => {
@@ -1232,10 +1240,8 @@ class FilesStore {
       );
 
       if (isDesktopClient) {
-        requests.push(getIsEncryptionSupport());
+        requests.push(getIsEncryptionSupport(), getEncryptionKeys());
       }
-      requests.push(getEncryptionKeys());
-      requests.push(this.userStore.getEncryptionKeys());
     }
     requests.push(getFilesSettings());
 
@@ -1357,12 +1363,10 @@ class FilesStore {
     this.files[index].fileStatus = status;
   };
 
-  updatePrivateFile = (id) => {
-    const index = this.getFileIndex(id);
-
+  updateFileLiveEditingBy = (index, activeEditors) => {
     if (index < 0) return;
 
-    this.files[index].encrypted = true;
+    this.files[index].activeEditors = activeEditors;
   };
 
   updateFileVectorizationStatus = (fileId, status) => {
@@ -1569,9 +1573,13 @@ class FilesStore {
 
       if (fileType === "file") {
         if (this.activeFiles.findIndex((f) => f.id == id) === -1) {
-          newSelections.push(
-            this.filesList.find((f) => f.id == id && !f.isFolder),
+          const selectableFile = this.filesList.find(
+            (f) => f.id == id && !f.isFolder,
           );
+
+          if (selectableFile) {
+            newSelections.push(selectableFile);
+          }
         }
       } else if (this.activeFolders.findIndex((f) => f.id == id) === -1) {
         const selectableFolder = this.filesList.find(
@@ -2761,7 +2769,6 @@ class FilesStore {
         "select",
         "fill-form",
         "edit",
-        "edit-encrypted",
         "open-pdf",
         "vectorization",
         "preview",
@@ -2802,7 +2809,6 @@ class FilesStore {
         "mark-as-favorite",
         "remove-from-favorites",
         "download",
-        "download-encrypted",
         "download-as",
         "convert",
         "move", // category
@@ -2884,10 +2890,6 @@ class FilesStore {
         fileOptions = removeOptions(fileOptions, ["download"]);
       }
 
-      if (!canDownload || !isEncrypted) {
-        fileOptions = removeOptions(fileOptions, ["download-encrypted"]);
-      }
-
       if (
         !isPdf ||
         (shouldFillForm && canFillForm) ||
@@ -2935,10 +2937,6 @@ class FilesStore {
 
       if (canOpenPlayer || !canEditFile) {
         fileOptions = removeOptions(fileOptions, ["edit"]);
-      }
-
-      if (!isEncrypted || !item.viewAccessibility?.WebEdit || !item.security?.Edit) {
-        fileOptions = removeOptions(fileOptions, ["edit-encrypted"]);
       }
 
       if (!(shouldFillForm && canFillForm) || !item.isForm) {
@@ -3280,6 +3278,9 @@ class FilesStore {
         "external-link",
         "embedding-settings",
         "room-info",
+        "create-group",
+        "add-to-group",
+        "remove-from-group",
         "pin-room",
         "unpin-room",
         "mute-room",
@@ -3379,6 +3380,29 @@ class FilesStore {
 
       if (!canViewRoomInfo) {
         roomOptions = removeOptions(roomOptions, ["room-info"]);
+      }
+
+      const { organizeRoomsGrouping } = this.filesSettingsStore;
+      const { roomGroups } = this.dialogsStore;
+      const currentGroupId = this.roomsFilter?.groupId;
+      if (
+        !organizeRoomsGrouping ||
+        isArchiveFolder ||
+        item.rootFolderType === FolderType.Archive ||
+        this.treeFoldersStore.isAIAgentsFolder
+      ) {
+        roomOptions = removeOptions(roomOptions, [
+          "create-group",
+          "add-to-group",
+          "remove-from-group",
+        ]);
+      } else if (!roomGroups || roomGroups.length === 0) {
+        roomOptions = removeOptions(roomOptions, [
+          "add-to-group",
+          "remove-from-group",
+        ]);
+      } else if (!currentGroupId) {
+        roomOptions = removeOptions(roomOptions, ["remove-from-group"]);
       }
 
       if (isArchiveFolder || item.rootFolderType === FolderType.Archive) {

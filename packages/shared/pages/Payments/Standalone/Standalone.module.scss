@@ -26,9 +26,10 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-@use "@docspace/shared/styles/mixins";
+@use "@docspace/ui-kit/styles/mixins";
 
 .pageWrapper {
+  max-width: 660px;
   .paymentsFileInput {
     max-width: 350px;
     margin: 16px 0;
@@ -67,13 +68,17 @@
   }
 }
 
+.gracePeriodInfo {
+  margin-top: 12px;
+}
+
 .titleComponent {
   .paymentsSubscription {
     max-width: 660px;
     margin-top: 8px;
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 20px;
     align-items: baseline;
 
     .title {
@@ -83,11 +88,18 @@
 
   .paymentsSubscriptionExpired {
     max-width: fit-content;
-    border: 1px solid var(--settings-payment-color);
-    border-radius: 3px;
     color: var(--settings-payment-color);
-    padding: 2px 8px;
     height: fit-content;
+
+    &.isTrial {
+      border: 1px solid var(--settings-payment-color);
+      border-radius: 3px;
+      padding: 4px 8px;
+    }
+
+    &.isLicenseDateExpired {
+      border: 1px solid var(--settings-payment-warning-color);
+    }
   }
 
   &.limitedWidth {
@@ -102,7 +114,6 @@
     }
 
     .paymentsSubscriptionExpired {
-      border: 1px solid var(--settings-payment-warning-color);
       color: var(--settings-payment-warning-color);
     }
   }

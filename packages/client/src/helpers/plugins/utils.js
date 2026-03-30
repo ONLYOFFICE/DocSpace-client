@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { Events } from "@docspace/shared/enums";
 
 import config from "PACKAGE_FILE";
@@ -33,6 +33,15 @@ import config from "PACKAGE_FILE";
 import { PluginActions, PluginToastType } from "./enums";
 import { CategoryType } from "@docspace/shared/constants";
 import { getCategoryType } from "@docspace/shared/utils/common";
+import {
+  showInfoPanel,
+  openMembersTab,
+  openShareTab,
+  setView,
+  InfoPanelView,
+  setFileView,
+  setRoomsView,
+} from "../info-panel";
 
 export const messageActions = ({
   message,
@@ -44,21 +53,29 @@ export const messageActions = ({
   updatePropsContext,
   setPluginDialogVisible,
   setPluginDialogProps,
+  setPluginSelectorVisible,
+  setPluginSelectorProps,
+  addPluginFloatingOperations,
+  removePluginFloatingOperations,
+  updatePluginFloatingOperations,
   updateContextMenuItems,
   updateInfoPanelItems,
   updateMainButtonItems,
   updateProfileMenuItems,
   updateEventListenerItems,
   updateFileItems,
+  updateArticleButtonItems,
   updateCreateDialogProps,
   updatePlugin,
+  setPluginMediaViewerVisible,
+  setPluginMediaViewerProps,
 }) => {
   if (!message || !message.actions || message.actions.length === 0) return;
 
   message.actions.forEach((action) => {
     switch (action) {
       case PluginActions.updateProps:
-        setElementProps && setElementProps({ ...message.newProps });
+        setElementProps?.({ ...message.newProps });
 
         break;
 
@@ -69,7 +86,7 @@ export const messageActions = ({
         break;
 
       case PluginActions.updateStatus:
-        updatePluginStatus && updatePluginStatus(pluginName);
+        updatePluginStatus?.(pluginName);
 
         break;
 
@@ -96,21 +113,75 @@ export const messageActions = ({
         }
 
         break;
+      case PluginActions.showSelector:
+        {
+          if (!message.selectorProps) return;
+
+          setPluginSelectorVisible?.(true);
+          setPluginSelectorProps?.({
+            ...message.selectorProps,
+            pluginName,
+          });
+        }
+        break;
+
+      case PluginActions.closeSelector:
+        setPluginSelectorVisible?.(false);
+        setPluginSelectorProps?.(null);
+        break;
+
+      case PluginActions.updateSelector:
+        {
+          if (!message.selectorProps) return;
+
+          setPluginSelectorProps?.({
+            ...message.selectorProps,
+            pluginName,
+          });
+        }
+        break;
+
+      case PluginActions.addFloatingOperationsButton:
+        {
+          if (!message.floatingOperationsButtonProps) return;
+          addPluginFloatingOperations?.({
+            ...message.floatingOperationsButtonProps,
+            pluginName,
+          });
+        }
+        break;
+
+      case PluginActions.removeFloatingOperationsButton: {
+        if (!message.floatingOperationsButtonPropsId) return;
+        removePluginFloatingOperations?.(
+          message.floatingOperationsButtonPropsId,
+        );
+        break;
+      }
+
+      case PluginActions.updateFloatingOperationsButton:
+        {
+          if (!message.floatingOperationsButtonProps) return;
+
+          updatePluginFloatingOperations?.({
+            ...message.floatingOperationsButtonProps,
+            pluginName,
+          });
+        }
+        break;
 
       case PluginActions.showSettingsModal:
         if (pluginName) {
-          setSettingsPluginDialogVisible &&
-            setSettingsPluginDialogVisible(true);
-          setCurrentSettingsDialogPlugin &&
-            setCurrentSettingsDialogPlugin({
-              pluginName,
-            });
+          setSettingsPluginDialogVisible?.(true);
+          setCurrentSettingsDialogPlugin?.({
+            pluginName,
+          });
         }
         break;
 
       case PluginActions.closeSettingsModal:
-        setSettingsPluginDialogVisible && setSettingsPluginDialogVisible(false);
-        setCurrentSettingsDialogPlugin && setCurrentSettingsDialogPlugin(null);
+        setSettingsPluginDialogVisible?.(false);
+        setCurrentSettingsDialogPlugin?.(null);
 
         break;
 
@@ -132,47 +203,47 @@ export const messageActions = ({
 
       case PluginActions.updateCreateDialogModal:
         if (message.createDialogProps) {
-          updateCreateDialogProps &&
-            updateCreateDialogProps(message.createDialogProps);
+          updateCreateDialogProps?.(message.createDialogProps);
         }
         break;
 
       case PluginActions.showModal:
         if (message.modalDialogProps) {
-          setPluginDialogVisible && setPluginDialogVisible(true);
-          setPluginDialogProps &&
-            setPluginDialogProps({ ...message.modalDialogProps, pluginName });
+          setPluginDialogVisible?.(true);
+          setPluginDialogProps?.({ ...message.modalDialogProps, pluginName });
         }
-
         break;
 
       case PluginActions.closeModal:
-        setPluginDialogVisible && setPluginDialogVisible(false);
-        setPluginDialogProps && setPluginDialogProps(null);
+        setPluginDialogVisible?.(false);
+        setPluginDialogProps?.(null);
         break;
 
       case PluginActions.updateContextMenuItems:
-        updateContextMenuItems && updateContextMenuItems(pluginName);
+        updateContextMenuItems?.(pluginName);
 
         break;
       case PluginActions.updateInfoPanelItems:
-        updateInfoPanelItems && updateInfoPanelItems(pluginName);
+        updateInfoPanelItems?.(pluginName);
+
+      case PluginActions.updateArticleButtonItems:
+        updateArticleButtonItems?.(pluginName);
 
         break;
       case PluginActions.updateMainButtonItems:
-        updateMainButtonItems && updateMainButtonItems(pluginName);
+        updateMainButtonItems?.(pluginName);
 
         break;
       case PluginActions.updateProfileMenuItems:
-        updateProfileMenuItems && updateProfileMenuItems(pluginName);
+        updateProfileMenuItems?.(pluginName);
 
         break;
       case PluginActions.updateEventListenerItems:
-        updateEventListenerItems && updateEventListenerItems(pluginName);
+        updateEventListenerItems?.(pluginName);
 
         break;
       case PluginActions.updateFileItems:
-        updateFileItems && updateFileItems(pluginName);
+        updateFileItems?.(pluginName);
 
         break;
 
@@ -194,6 +265,62 @@ export const messageActions = ({
       }
       case PluginActions.saveSettings:
         updatePlugin(pluginName, null, message.settings);
+        break;
+
+      case PluginActions.navigate:
+        if (!message.navigatePath) return;
+
+        window.DocSpace.navigate(message.navigatePath);
+
+        break;
+
+      case PluginActions.openInfoPanel:
+        setPluginDialogVisible(false);
+        setSettingsPluginDialogVisible(false);
+        setPluginSelectorVisible(false);
+        showInfoPanel();
+
+        switch (message.infoPanelTab) {
+          case InfoPanelView.infoShare:
+            openShareTab();
+            break;
+          case InfoPanelView.infoMembers:
+            openMembersTab();
+            break;
+          case InfoPanelView.infoDetails:
+          case InfoPanelView.infoHistory:
+            setView(message.infoPanelTab);
+            break;
+          default:
+            setView(`info_plugin-${message.infoPanelTab}`);
+            setFileView(`info_plugin-${message.infoPanelTab}`);
+            setRoomsView(`info_plugin-${message.infoPanelTab}`);
+        }
+
+        break;
+
+      case PluginActions.showMediaViewer:
+        if (message.mediaViewerProps) {
+          setPluginMediaViewerVisible?.(true);
+          setPluginMediaViewerProps?.({
+            ...message.mediaViewerProps,
+            pluginName,
+          });
+        }
+        break;
+
+      case PluginActions.closeMediaViewer:
+        setPluginMediaViewerVisible?.(false);
+        setPluginMediaViewerProps?.(null);
+        break;
+
+      case PluginActions.updateMediaViewer:
+        if (message.mediaViewerProps) {
+          setPluginMediaViewerProps?.({
+            ...message.mediaViewerProps,
+            pluginName,
+          });
+        }
         break;
       default:
         break;
@@ -237,3 +364,4 @@ export function borderToStyle(border = {}) {
     ...(radius ? { borderRadius: radius } : {}),
   };
 }
+

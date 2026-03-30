@@ -3,7 +3,7 @@
   "content": "Continue",
   "content_en_sha1_hash": "2e02623966f9391facf6eaefc8b079ed5b630bee",
   "created_at": "2025-05-19T21:30:43.691Z",
-  "updated_at": "2025-12-19T13:32:31.612Z",
+  "updated_at": "2026-03-26T08:26:57.987Z",
   "comment": {
     "text": "This translation key is used as a label for a \"Continue\" button that appears in various dialogs and confirms user actions. It provides a clear and consistent text to be translated, allowing users to proceed after completing a task or operation.",
     "is_auto": true,
@@ -13,13 +13,13 @@
     {
       "file_path": "/packages/client/src/components/dialogs/CloseEditIndexDialog/index.tsx",
       "line_number": 83,
-      "context": "{t(\"Files:ExitWithoutSavingDescription\")}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={t(\"Common:ContinueButton\")}\n size={ButtonSize.normal}\n scale\n primary\n onClick={onClickContinue}\n />",
+      "context": "{t(\"Files:ExitWithoutSavingDescription\")}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={t(\"Common:ContinueButton\")}\n size={ButtonSize.normal}\n scale\n primary\n onClick={onClickContinue}\n testId=\"close_edit_index_dialog_continue\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ConvertDialog/index.js",
-      "line_number": 228,
-      "context": ") : null}\n </div>\n <div className=\"convert_dialog_buttons\">\n <Button\n key=\"ContinueButton\"\n label={t(\"Common:ContinueButton\")}\n size=\"normal\"\n primary\n scale\n onClick={onConvert}\n />",
+      "line_number": 214,
+      "context": ") : null}\n </div>\n <div className={styles.convertDialogButtons}>\n <Button\n key=\"ContinueButton\"\n label={t(\"Common:ContinueButton\")}\n size=\"normal\"\n primary\n scale\n onClick={onConvert}\n testId=\"convert_dialog_continue_button\"",
       "module": "/packages/client"
     },
     {
@@ -29,8 +29,14 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/components/dialogs/DisableAiServicesDialog/index.js",
+      "line_number": 132,
+      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n primary\n size=\"normal\"\n label={t(\"Common:ContinueButton\")}\n scale\n onClick={onContinue}\n isLoading={isLoading}\n testId=\"disable_ai_services_continue_button\"\n />",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/components/dialogs/PasswordEntryDialog/PasswordEntryDialog.component.tsx",
-      "line_number": 185,
+      "line_number": 181,
       "context": "tabIndex={0}\n type=\"submit\"\n isLoading={isLoading}\n size={ButtonSize.normal}\n onClick={handleSubmit}\n label={t(\"Common:ContinueButton\")}\n />\n <Button\n scale\n tabIndex={0}\n onClick={handleClose}",
       "module": "/packages/client"
     },
@@ -47,9 +53,9 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/ConfirmationDialog.tsx",
-      "line_number": 68,
-      "context": "<ModalDialog.Body>\n <Text>{bodyText}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={t(\"Common:ContinueButton\")}\n size={ButtonSize.normal}\n onClick={onConfirm}\n primary\n scale\n testId=\"service-confirmation-dialog-continue-button\"",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/sub-components/ConfirmationDialog.tsx",
+      "line_number": 76,
+      "context": "))}\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={t(\"Common:ContinueButton\")}\n size={ButtonSize.normal}\n onClick={onConfirm}\n primary\n scale\n testId=\"service-confirmation-dialog-continue-button\"",
       "module": "/packages/client"
     },
     {
@@ -60,7 +66,7 @@
     },
     {
       "file_path": "/packages/login/src/app/(root)/confirm/TfaAuth/page.client.tsx",
-      "line_number": 173,
+      "line_number": 174,
       "context": "size={ButtonSize.medium}\n tabIndex={3}\n label={\n isLoading\n ? t(\"Common:LoadingProcessing\")\n : t(\"Common:ContinueButton\")\n }\n isDisabled={!code.length || isLoading}\n isLoading={isLoading}\n onClick={onSubmit}\n testId=\"app_code_continue_button\"",
       "module": "/packages/login"
     },
@@ -72,13 +78,13 @@
     },
     {
       "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",
-      "line_number": 589,
+      "line_number": 592,
       "context": "<ModalDialog.Footer>\n <Button\n key=\"DownloadButton\"\n label={\n needPassword ? t(\"Common:ContinueButton\") : t(\"Common:Download\")\n }\n size={ButtonSize.normal}\n primary\n onClick={needPassword ? onReDownload : onDownload}\n isDisabled={",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/download-dialog/sub-components/OnePasswordRow.tsx",
-      "line_number": 192,
+      "line_number": 195,
       "context": "/>\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={t(\"Common:ContinueButton\")}\n size={ButtonSize.normal}\n primary\n onClick={onDownloadWithPassword}\n isDisabled={!password.trim().length}\n scale",
       "module": "/packages/shared"
     },

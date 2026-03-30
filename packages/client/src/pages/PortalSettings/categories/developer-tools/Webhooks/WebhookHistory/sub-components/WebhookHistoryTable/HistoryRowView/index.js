@@ -30,7 +30,7 @@ import { inject, observer } from "mobx-react";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import { injectDefaultTheme } from "@docspace/shared/utils";
-import { RowContainer } from "@docspace/shared/components/rows";
+import { RowContainer } from "@docspace/ui-kit/components/rows";
 
 import { formatFilters } from "SRC_DIR/helpers/webhooks";
 import HistoryRow from "./HistoryRow";

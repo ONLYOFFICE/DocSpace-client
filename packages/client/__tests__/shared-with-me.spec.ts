@@ -26,6 +26,7 @@
 
 import { ShareAccessRights } from "@docspace/shared/enums";
 
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import { expect, test, TEST_PORT } from "./fixtures/base";
 import {
   rootHandler,
@@ -83,7 +84,7 @@ test.describe("Shared with me", () => {
 
     // Should not have any table list items
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "shared-with-me",
       "shared-with-me-empty.png",

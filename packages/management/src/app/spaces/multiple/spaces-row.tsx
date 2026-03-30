@@ -38,9 +38,9 @@ import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 
-import { Row } from "@docspace/shared/components/rows";
+import { Row } from "@docspace/ui-kit/components/rows";
 import { ChangeStorageQuotaDialog } from "@docspace/shared/dialogs/change-storage-quota";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import type { TPortals } from "@docspace/shared/api/management/types";
 
@@ -96,7 +96,7 @@ export const SpacesRow = ({
 
   const contextOptionsProps = [
     {
-      label: t("Files:Open"),
+      label: t("Common:Open"),
       key: "space_open",
       icon: ExternalLinkIcon,
       onClick: () => window.open(`${protocol}//${item.domain}/`, "_blank"),

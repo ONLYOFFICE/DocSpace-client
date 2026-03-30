@@ -30,3 +30,4 @@ export { default as useOperations } from "./useOperations";
 export { default as useContacts } from "./useContacts";
 export { default as usePublic } from "./usePublic";
 export { default as useAccountsHotkeys } from "./useAccountsHotkeys";
+export { default as usePluginOperations } from "./usePluginOperations";

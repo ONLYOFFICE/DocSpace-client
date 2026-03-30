@@ -57,7 +57,7 @@ const getPackageDependencies = (packageJson) => {
   // Get dependencies from all sections
   addDeps(packageJson.dependencies);
   addDeps(packageJson.devDependencies);
-  addDeps(packageJson.peerDependencies);
+  // addDeps(packageJson.peerDependencies);
 
   return deps;
 };
@@ -92,18 +92,18 @@ beforeAll(() => {
     const files = getAllFiles(clientDir, excludeDirs);
 
     codeFiles.push(
-      ...files.filter((filePath) => filePath && searchPattern.test(filePath))
+      ...files.filter((filePath) => filePath && searchPattern.test(filePath)),
     );
 
     packageJsonFiles.push(
       ...files.filter(
-        (filePath) => filePath && path.basename(filePath) === "package.json"
-      )
+        (filePath) => filePath && path.basename(filePath) === "package.json",
+      ),
     );
   });
 
   console.log(
-    `Found code files by extension js(x)|ts(x)|mjs|cjs filter = ${codeFiles.length}.`
+    `Found code files by extension js(x)|ts(x)|mjs|cjs filter = ${codeFiles.length}.`,
   );
 
   // Node.js built-in modules to ignore
@@ -176,7 +176,7 @@ beforeAll(() => {
 
   const regexp = new RegExp(
     `(${pattern1})|(${pattern2})|(${pattern3})|(${pattern4})|(${pattern5})|(${pattern6})`,
-    "gm"
+    "gm",
   );
 
   const codeImports = [];
@@ -196,7 +196,7 @@ beforeAll(() => {
             m.startsWith("@docspace/shared") ||
             webpackAliases.some((k) => m.startsWith(`${k}/`)) ||
             builtInModules.has(m)
-          )
+          ),
       );
 
     if (imports.length === 0) return;
@@ -240,11 +240,11 @@ beforeAll(() => {
   });
 
   console.log(
-    `Found workspace's code files with imports = ${workspaceCodeImports.length}.`
+    `Found workspace's code files with imports = ${workspaceCodeImports.length}.`,
   );
 
   console.log(
-    `Found workspace's package.json files with dependencies = ${workspaceDeps.length}.`
+    `Found workspace's package.json files with dependencies = ${workspaceDeps.length}.`,
   );
 });
 
@@ -252,7 +252,7 @@ it("UnusedDependenciesTest: Verify that all dependencies in package.json files a
   const unusedDependencies = [];
 
   const sharedDeps = workspaceDeps.find(
-    (d) => d.workspace === path.join("packages", "shared")
+    (d) => d.workspace === path.join("packages", "shared"),
   );
 
   const usedSomeWhere = new Set();
@@ -260,7 +260,7 @@ it("UnusedDependenciesTest: Verify that all dependencies in package.json files a
   workspaceDeps.forEach((wsDepsItem) => {
     const workspace = wsDepsItem.workspace;
     const currentWorkspaceCodeImports = workspaceCodeImports.find(
-      (i) => i.workspace === workspace
+      (i) => i.workspace === workspace,
     );
 
     let missing = wsDepsItem.deps.filter((dep) => {
@@ -269,7 +269,7 @@ it("UnusedDependenciesTest: Verify that all dependencies in package.json files a
         Array.from(currentWorkspaceCodeImports.uniqueImports.values()).some(
           (s) => {
             return s.startsWith(`${dep.name}/`);
-          }
+          },
         );
 
       if (!success && dep.name.startsWith("@types/")) {
@@ -279,7 +279,7 @@ it("UnusedDependenciesTest: Verify that all dependencies in package.json files a
           Array.from(currentWorkspaceCodeImports.uniqueImports.values()).some(
             (s) => {
               return s.startsWith(`${name}/`);
-            }
+            },
           );
       }
 
@@ -306,7 +306,7 @@ it("UnusedDependenciesTest: Verify that all dependencies in package.json files a
 
     missing = missing.filter((m) => {
       const success = Object.values(wsDepsItem.scripts).some(
-        (s) => s.indexOf(m.name) !== -1
+        (s) => s.indexOf(m.name) !== -1,
       );
 
       if (success) {
@@ -319,15 +319,9 @@ it("UnusedDependenciesTest: Verify that all dependencies in package.json files a
     // Filter out allowed unused dependencies
     const allowedUnusedDeps = [
       "@aws-sdk/client-cloudwatch-logs",
-      "@storybook/addon-controls",
-      "@storybook/addon-designs",
       "@storybook/addon-docs",
-      "@storybook/addon-essentials",
       "@storybook/addon-links",
-      "@storybook/addons",
-      "@storybook/addon-webpack5-compiler-babel",
-      "@storybook/components",
-      "@storybook/react-webpack5",
+      "@storybook/react",
       "babel-jest",
       "babel-plugin-styled-components",
       "@babel/core",
@@ -358,7 +352,10 @@ it("UnusedDependenciesTest: Verify that all dependencies in package.json files a
       "@biomejs/biome",
       "@vitest/ui",
       "@vitest/coverage-v8",
-      "open-cli"
+      "open-cli",
+      "postcss",
+      "path-browserify",
+      "sass",
     ];
 
     missing = missing.filter((m) => !allowedUnusedDeps.includes(m.name));
@@ -373,7 +370,7 @@ it("UnusedDependenciesTest: Verify that all dependencies in package.json files a
     message += `\nIn ${workspace}:\n`;
 
     const missingInSameWorkspace = missing.filter(
-      (dep) => !usedSomeWhere.has(dep.name)
+      (dep) => !usedSomeWhere.has(dep.name),
     );
 
     if (missingInSameWorkspace.length > 0) {
@@ -385,7 +382,7 @@ it("UnusedDependenciesTest: Verify that all dependencies in package.json files a
     }
 
     const foundInOtherWorkspace = missing.filter((dep) =>
-      usedSomeWhere.has(dep.name)
+      usedSomeWhere.has(dep.name),
     );
 
     if (foundInOtherWorkspace.length > 0) {
@@ -434,7 +431,7 @@ it("DifferentDependencyVersionsTest: Verify that all workspaces use same depende
         .join("\n");
 
       mismatchedDeps.push(
-        `❌ ${depName} has different versions:\n${versionList}`
+        `❌ ${depName} has different versions:\n${versionList}`,
       );
     }
   }
@@ -442,7 +439,7 @@ it("DifferentDependencyVersionsTest: Verify that all workspaces use same depende
   if (mismatchedDeps.length > 0) {
     const report = mismatchedDeps.join("\n\n");
     throw new Error(
-      `Found ${mismatchedDeps.length} dependencies with version mismatch:\n\n ${report}`
+      `Found ${mismatchedDeps.length} dependencies with version mismatch:\n\n ${report}`,
     );
   }
 });

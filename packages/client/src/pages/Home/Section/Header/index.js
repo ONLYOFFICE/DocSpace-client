@@ -30,6 +30,7 @@ import EncryptedRoomIconUrl from "PUBLIC_DIR/images/icons/16/security.react.svg?
 import RoundedArrowSvgUrl from "PUBLIC_DIR/images/rounded arrow.react.svg?url";
 import SharedLinkSvgUrl from "PUBLIC_DIR/images/icons/16/shared.link.svg?url";
 import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg?url";
+import WarningQuotaExceededUrl from "PUBLIC_DIR/images/warning.quota-exceeded.react.svg?url";
 
 import React from "react";
 import classnames from "classnames";
@@ -39,16 +40,16 @@ import { withTranslation } from "react-i18next";
 import { useLocation } from "react-router";
 
 import { SectionHeaderSkeleton } from "@docspace/shared/skeletons/sections";
-import Navigation from "@docspace/shared/components/navigation";
+import Navigation from "@docspace/ui-kit/components/navigation";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import {
-  Context,
   getLogoUrl,
   getCheckboxItemId,
   getCheckboxItemLabel,
 } from "@docspace/shared/utils";
-import { TableGroupMenu } from "@docspace/shared/components/table";
+import { Context } from "@docspace/ui-kit/utils/context";
+import { TableGroupMenu } from "@docspace/ui-kit/components/table";
 import {
   RoomsType,
   DeviceType,
@@ -71,12 +72,13 @@ import TariffBar from "SRC_DIR/components/TariffBar";
 import { getLifetimePeriodTranslation } from "@docspace/shared/utils/common";
 import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
-import { toastr } from "@docspace/shared/components/toast";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import styles from "@docspace/shared/styles/SectionHeader.module.scss";
 import useProfileHeader from "SRC_DIR/pages/Profile/Section/Header/useProfileHeader";
 
 import { useContactsHeader } from "./useContacts";
+import { getWarningText } from "../getWarningText";
 
 const SectionHeaderContent = (props) => {
   const {
@@ -183,6 +185,9 @@ const SectionHeaderContent = (props) => {
 
     isAIRoom,
     isAIAgent,
+    isRoomStorageQuotaExceeded,
+    roomUsedSpace,
+    roomQuotaLimit,
     isKnowledgeTab,
     currentClientView,
     profile,
@@ -369,6 +374,7 @@ const SectionHeaderContent = (props) => {
               label={label}
               data-key={key}
               onClick={onSelect}
+              truncateText
             />
           );
         })}
@@ -470,7 +476,7 @@ const SectionHeaderContent = (props) => {
   const getContextOptionsPlus = React.useCallback(() => {
     if (isContactsPage) return getContactsModel(t);
     return getFolderModel(t);
-  }, [isContactsPage, getContactsModel, getFolderModel, t]);
+  }, [isContactsPage, getContactsModel, getFolderModel, t, contactsTab]);
 
   const onNavigationButtonClick = React.useCallback(() => {
     onCreateAndCopySharedLink(selectedFolder, t);
@@ -862,13 +868,14 @@ const SectionHeaderContent = (props) => {
 
   const badgeLabel = showTemplateBadge ? t("Files:Template") : "";
 
-  const warningText = isRecycleBinFolder
-    ? t("TrashAutoDeleteWarning", {
-        sectionName: t("Common:TrashSection"),
-      })
-    : isPersonalReadOnly
-      ? t("PersonalFolderErasureWarning")
-      : "";
+  const warningText = getWarningText({
+    t,
+    isRecycleBinFolder,
+    isPersonalReadOnly,
+    isRoomStorageQuotaExceeded,
+    roomUsedSpace,
+    roomQuotaLimit,
+  });
 
   const isContextButtonVisible = React.useMemo(() => {
     if (isProfile) return true;
@@ -986,10 +993,13 @@ const SectionHeaderContent = (props) => {
               isInfoPanelVisible={isProfile ? false : isInfoPanelVisible}
               titles={{
                 warningText,
+                warningIcon: isRoomStorageQuotaExceeded
+                  ? WarningQuotaExceededUrl
+                  : undefined,
                 actions: isRoomsFolder
                   ? t("Common:NewRoom")
                   : t("Common:Actions"),
-                contextMenu: t("Translations:TitleShowFolderActions"),
+                contextMenu: t("Common:TitleShowFolderActions"),
                 infoPanel: t("Common:InfoPanel"),
               }}
               withMenu={withMenu}
@@ -1178,6 +1188,9 @@ export default inject(
       shared,
       isAIRoom,
       isAIAgent,
+      isRoomStorageQuotaExceeded,
+      roomUsedSpace,
+      roomQuotaLimit,
     } = selectedFolderStore;
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();
@@ -1402,6 +1415,9 @@ export default inject(
 
       isAIRoom,
       isAIAgent,
+      isRoomStorageQuotaExceeded,
+      roomUsedSpace,
+      roomQuotaLimit,
       isKnowledgeTab,
       contactsTab,
 
@@ -1430,12 +1446,13 @@ export default inject(
     "Common",
     "Translations",
     "InfoPanel",
-    "SharingPanel",
     "Article",
     "People",
     "PeopleTranslations",
     "ChangeUserTypeDialog",
     "Notifications",
     "Profile",
+    "GroupingRooms",
   ])(observer(SectionHeaderContent)),
 );
+

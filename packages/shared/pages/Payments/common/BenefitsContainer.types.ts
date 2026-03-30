@@ -28,4 +28,5 @@ export type TBenefitsContainerProps = {
   isTrial?: boolean;
   isEnterprise?: boolean;
   isDeveloper?: boolean;
+  isLifetimeLicense?: boolean;
 };

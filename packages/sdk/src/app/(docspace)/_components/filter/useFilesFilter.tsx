@@ -5,9 +5,9 @@ import { usePathname, useSearchParams } from "next/navigation";
 import {
   TItem,
   TOnFilter,
-} from "@docspace/shared/components/filter/Filter.types";
+} from "@docspace/ui-kit/components/filter/Filter.types";
 import FilesFilter from "@docspace/shared/api/files/filter";
-import { getFilterType } from "@docspace/shared/components/filter/Filter.utils";
+import { getFilterType } from "@docspace/ui-kit/components/filter/Filter.utils";
 import {
   FilterGroups,
   FilterType,

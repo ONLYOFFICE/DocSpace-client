@@ -1,0 +1,83 @@
+.tableWrapper {
+  width: 100%;
+}
+
+.tableContainer {
+  margin-top: 12px !important;
+}
+
+.modelIconPlaceholder {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  border: 1px solid var(--aside-header-border-color);
+}
+
+.iconsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.tableContainer :global(.table-container_header) {
+  position: static !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+}
+
+.tableContainer :global([class*="emptyTableContainer"]) {
+  height: 0 !important;
+}
+
+.tableBody {
+  width: 100%;
+}
+
+.modelCell {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.introText{
+  margin: 20px 0;
+}
+
+.modelTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+}
+
+.modelTitle {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.modelProvider {
+  color: var(--text-disable-color);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.priceCell {
+  white-space: nowrap;
+}
+
+.toggleCell {
+  display: flex;
+  justify-content: flex-end;
+}

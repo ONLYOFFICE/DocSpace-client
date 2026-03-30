@@ -28,8 +28,8 @@ import React, { useCallback, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { isMobile } from "@docspace/shared/utils";
-import { Backdrop } from "@docspace/shared/components/backdrop";
-import { Aside } from "@docspace/shared/components/aside";
+import { Backdrop } from "@docspace/ui-kit/components/backdrop";
+import { Aside } from "@docspace/ui-kit/components/aside";
 
 import { withTranslation } from "react-i18next";
 import { useLocation } from "react-router";
@@ -91,7 +91,11 @@ const NavMenu = (props) => {
 
     const isNearBottom = scrollHeight - (currentScrollTop + clientHeight) < 100;
 
-    if (scrollShift > 0 && !isNearBottom) {
+    const isAtTop = currentScrollTop < 20;
+
+    if (isAtTop) {
+      setIsFixed(false);
+    } else if (scrollShift > 0 && !isNearBottom) {
       setIsFixed(true);
     } else if (scrollShift <= 0) {
       setIsFixed(false);

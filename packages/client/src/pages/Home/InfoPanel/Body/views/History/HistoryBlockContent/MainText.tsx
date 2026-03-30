@@ -29,7 +29,7 @@ import { inject, observer } from "mobx-react";
 import { decode } from "he";
 import classNames from "classnames";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import {
   TFeedAction,
   TFeedData,

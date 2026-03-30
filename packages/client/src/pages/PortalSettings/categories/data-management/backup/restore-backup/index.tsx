@@ -33,7 +33,7 @@ import config from "PACKAGE_FILE";
 
 import { DeviceType } from "@docspace/shared/enums";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { ButtonSize } from "@docspace/shared/components/button";
+import { ButtonSize } from "@docspace/ui-kit/components/button";
 import { RestoreBackup } from "@docspace/shared/pages/backup/restore-backup";
 import type { ThirdPartyAccountType } from "@docspace/shared/types";
 

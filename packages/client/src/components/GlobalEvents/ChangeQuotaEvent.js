@@ -28,124 +28,124 @@ import { useCallback, useState } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import api from "@docspace/shared/api";
 
 import { ChangeQuotaDialog } from "../dialogs";
 
 let timerId = null;
 const ChangeQuotaEvent = (props) => {
-  const {
-    visible,
-    type,
-    ids,
-    bodyDescription,
-    headerTitle,
-    onClose,
-    setCustomRoomQuota,
-    setCustomAIAgentQuota,
-    successCallback,
-    abortCallback,
+	const {
+		visible,
+		type,
+		ids,
+		bodyDescription,
+		headerTitle,
+		onClose,
+		setCustomRoomQuota,
+		setCustomAIAgentQuota,
+		successCallback,
+		abortCallback,
 
-    inRoom,
-  } = props;
+		inRoom,
+	} = props;
 
-  const { t } = useTranslation("Common");
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const [size, setSize] = useState();
+	const { t } = useTranslation("Common");
+	const [isLoading, setIsLoading] = useState(false);
+	const [isError, setIsError] = useState(false);
+	const [size, setSize] = useState();
 
-  const onSetQuotaBytesSize = (value) => {
-    setSize(value);
-  };
+	const onSetQuotaBytesSize = (value) => {
+		setSize(value);
+	};
 
-  const updateFunction = () => {
-    return type === "user"
-      ? api.people.setCustomUserQuota(ids, size)
-      : type === "agent"
-        ? setCustomAIAgentQuota(ids, size, inRoom)
-        : setCustomRoomQuota(ids, size, inRoom);
-  };
+	const updateFunction = () => {
+		return type === "user"
+			? api.people.setCustomUserQuota(ids, size)
+			: type === "agent"
+				? setCustomAIAgentQuota(ids, size, inRoom)
+				: setCustomRoomQuota(ids, size, inRoom);
+	};
 
-  const onSaveClick = async () => {
-    if (!size || size.trim() === "") {
-      setIsError(true);
-      return;
-    }
+	const onSaveClick = async () => {
+		if (!size || size.trim() === "") {
+			setIsError(true);
+			return;
+		}
 
-    timerId = setTimeout(() => setIsLoading(true), 200);
-    let items;
+		timerId = setTimeout(() => setIsLoading(true), 200);
+		let items;
 
-    try {
-      items = await updateFunction(size);
-      toastr.success(t("Common:StorageQuotaSet"));
+		try {
+			items = await updateFunction(size);
+			toastr.success(t("Common:StorageQuotaSet"));
 
-      successCallback && successCallback(items);
-    } catch (e) {
-      toastr.error(e);
+			successCallback && successCallback(items);
+		} catch (e) {
+			toastr.error(e);
 
-      abortCallback && abortCallback();
-    }
+			abortCallback && abortCallback();
+		}
 
-    timerId && clearTimeout(timerId);
-    timerId = null;
+		timerId && clearTimeout(timerId);
+		timerId = null;
 
-    setIsLoading(false);
-    setIsError(false);
+		setIsLoading(false);
+		setIsError(false);
 
-    onClose && onClose();
-  };
+		onClose && onClose();
+	};
 
-  const onCloseClick = useCallback(() => {
-    timerId && clearTimeout(timerId);
-    timerId = null;
+	const onCloseClick = useCallback(() => {
+		timerId && clearTimeout(timerId);
+		timerId = null;
 
-    abortCallback && abortCallback();
-    onClose && onClose();
-  }, [onClose, abortCallback]);
+		abortCallback && abortCallback();
+		onClose && onClose();
+	}, [onClose, abortCallback]);
 
-  return (
-    <ChangeQuotaDialog
-      visible={visible}
-      onSaveClick={onSaveClick}
-      onCloseClick={onCloseClick}
-      onSetQuotaBytesSize={onSetQuotaBytesSize}
-      bodyDescription={bodyDescription}
-      headerTitle={headerTitle}
-      isError={isError}
-      isLoading={isLoading}
-      size={size}
-    />
-  );
+	return (
+		<ChangeQuotaDialog
+			visible={visible}
+			onSaveClick={onSaveClick}
+			onCloseClick={onCloseClick}
+			onSetQuotaBytesSize={onSetQuotaBytesSize}
+			bodyDescription={bodyDescription}
+			headerTitle={headerTitle}
+			isError={isError}
+			isLoading={isLoading}
+			size={size}
+		/>
+	);
 };
 
 export default inject(
-  (
-    { peopleStore, filesStore, infoPanelStore, selectedFolderStore },
-    { type },
-  ) => {
-    const { usersStore } = peopleStore;
-    const { getPeopleListItem, needResetUserSelection } = usersStore;
-    const {
-      setCustomRoomQuota,
-      setCustomAIAgentQuota,
-      needResetFilesSelection,
-    } = filesStore;
+	(
+		{ peopleStore, filesStore, infoPanelStore, selectedFolderStore },
+		{ type },
+	) => {
+		const { usersStore } = peopleStore;
+		const { getPeopleListItem, needResetUserSelection } = usersStore;
+		const {
+			setCustomRoomQuota,
+			setCustomAIAgentQuota,
+			needResetFilesSelection,
+		} = filesStore;
 
-    const { isVisible: infoPanelVisible } = infoPanelStore;
+		const { isVisible: infoPanelVisible } = infoPanelStore;
 
-    const inRoom = !!selectedFolderStore?.navigationPath;
-    const needResetSelection =
-      type === "user"
-        ? !infoPanelVisible || needResetUserSelection
-        : needResetFilesSelection;
+		const inRoom = !!selectedFolderStore?.navigationPath;
+		const needResetSelection =
+			type === "user"
+				? !infoPanelVisible || needResetUserSelection
+				: needResetFilesSelection;
 
-    return {
-      setCustomRoomQuota,
-      setCustomAIAgentQuota,
-      inRoom,
-      getPeopleListItem,
-      needResetSelection,
-    };
-  },
+		return {
+			setCustomRoomQuota,
+			setCustomAIAgentQuota,
+			inRoom,
+			getPeopleListItem,
+			needResetSelection,
+		};
+	},
 )(observer(ChangeQuotaEvent));

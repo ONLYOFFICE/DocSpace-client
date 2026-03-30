@@ -1,15 +1,21 @@
 {
   "extends": "../shared/tsconfig.json",
   "compilerOptions": {
-    "rootDir": "./",
+    "rootDir": "../../",
     "baseUrl": "./",
     "jsx": "react-jsx",
     "paths": {
       "PUBLIC_DIR/*": ["../../public/*"],
+      "ASSETS_DIR/*": ["./public/*"],
       "SRC_DIR/*": ["./src/*"],
-      "PACKAGE_FILE": ["./package.json"]
+      "PACKAGE_FILE": ["./package.json"],
+      "COMMON_DIR/*": ["../common/*"],
+      "@docspace/shared/*": ["../shared/*"],
+      "@docspace/ui-kit/*": ["../../libs/ui-kit/*"]
     },
-    "target": "esnext"
+    "target": "esnext",
+    "types": ["vite/client"]
   },
-  "include": ["**/*.ts", "**/*.tsx", "types/**/*.d.ts"]
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules", "dist"]
 }

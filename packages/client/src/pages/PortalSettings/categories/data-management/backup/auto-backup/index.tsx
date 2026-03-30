@@ -29,11 +29,10 @@ import { observer, inject } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import AutomaticBackup from "@docspace/shared/pages/backup/auto-backup";
-
-import { useUnmount } from "@docspace/shared/hooks/useUnmount";
-
 import type { ThirdPartyAccountType } from "@docspace/shared/types";
-import type { TColorScheme } from "@docspace/shared/themes";
+
+import { useUnmount } from "@docspace/ui-kit/hooks/useUnmount";
+import type { TColorScheme } from "@docspace/ui-kit/providers/theme/themes";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import type {

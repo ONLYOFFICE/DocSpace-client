@@ -27,160 +27,160 @@
 import React from "react";
 import { Trans, useTranslation } from "react-i18next";
 
-import { EmailInput } from "@docspace/shared/components/email-input";
-import { FieldContainer } from "@docspace/shared/components/field-container";
-import { Text } from "@docspace/shared/components/text";
-import { Link, LinkType } from "@docspace/shared/components/link";
-import { IconButton } from "@docspace/shared/components/icon-button";
+import { EmailInput } from "@docspace/ui-kit/components/email-input";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import {
-  InputSize,
-  InputType,
-  TextInput,
-} from "@docspace/shared/components/text-input";
-import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
+	InputSize,
+	InputType,
+	TextInput,
+} from "@docspace/ui-kit/components/text-input";
+import { TValidate } from "@docspace/ui-kit/components/email-input";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow.left.react.svg?url";
 
 import { DEFAULT_EMAIL_TEXT } from "@/utils/constants";
 
 interface IEmailContainer {
-  emailFromInvitation?: string;
-  isEmailErrorShow: boolean;
-  errorText?: string;
-  identifier: string;
-  isLoading: boolean;
+	emailFromInvitation?: string;
+	isEmailErrorShow: boolean;
+	errorText?: string;
+	identifier: string;
+	isLoading: boolean;
 
-  onChangeLogin: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlurEmail: () => void;
-  handleAnimationStart: (e: React.AnimationEvent<HTMLInputElement>) => void;
-  onValidateEmail: (res: TValidate) => undefined;
-  isLdapLogin: boolean;
-  ldapDomain?: string;
+	onChangeLogin: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	onBlurEmail: () => void;
+	handleAnimationStart: (e: React.AnimationEvent<HTMLInputElement>) => void;
+	onValidateEmail: (res: TValidate) => undefined;
+	isLdapLogin: boolean;
+	ldapDomain?: string;
 }
 
 const EmailContainer = ({
-  emailFromInvitation,
-  isEmailErrorShow,
-  errorText,
-  identifier,
-  isLoading,
+	emailFromInvitation,
+	isEmailErrorShow,
+	errorText,
+	identifier,
+	isLoading,
 
-  onChangeLogin,
-  onBlurEmail,
-  onValidateEmail,
-  isLdapLogin,
-  ldapDomain,
-  handleAnimationStart,
+	onChangeLogin,
+	onBlurEmail,
+	onValidateEmail,
+	isLdapLogin,
+	ldapDomain,
+	handleAnimationStart,
 }: IEmailContainer) => {
-  const { t } = useTranslation(["Login", "Common"]);
+	const { t } = useTranslation(["Login", "Common"]);
 
-  if (emailFromInvitation) {
-    const onClickBack = () => {
-      window.history.go(-1);
-    };
+	if (emailFromInvitation) {
+		const onClickBack = () => {
+			window.history.go(-1);
+		};
 
-    return (
-      <div className="invitation-info-container">
-        <div className="sign-in-container">
-          <div className="back-title">
-            <IconButton
-              size={16}
-              iconName={ArrowIcon}
-              onClick={onClickBack}
-              dataTestId="email_invitation_back_button"
-            />
-            <Text
-              fontWeight={600}
-              onClick={onClickBack}
-              dataTestId="email_invitation_back_text"
-            >
-              {t("Common:Back")}
-            </Text>
-          </div>
-          <Text fontWeight={600} fontSize="16px">
-            {t("Common:LoginButton")}
-          </Text>
-        </div>
-        <Text>
-          <Trans
-            t={t}
-            i18nKey="UserIsAlreadyRegistered"
-            ns="Login"
-            defaults={DEFAULT_EMAIL_TEXT}
-            values={{
-              email: emailFromInvitation,
-              productName: t("Common:ProductName"),
-            }}
-            components={{
-              1: (
-                <Link
-                  key="component_key"
-                  fontWeight={600}
-                  className="login-link"
-                  type={LinkType.page}
-                  isHovered={false}
-                />
-              ),
-            }}
-          />
-        </Text>
-      </div>
-    );
-  }
+		return (
+			<div className="invitation-info-container">
+				<div className="sign-in-container">
+					<div className="back-title">
+						<IconButton
+							size={16}
+							iconName={ArrowIcon}
+							onClick={onClickBack}
+							dataTestId="email_invitation_back_button"
+						/>
+						<Text
+							fontWeight={600}
+							onClick={onClickBack}
+							dataTestId="email_invitation_back_text"
+						>
+							{t("Common:Back")}
+						</Text>
+					</div>
+					<Text fontWeight={600} fontSize="16px">
+						{t("Common:LoginButton")}
+					</Text>
+				</div>
+				<Text>
+					<Trans
+						t={t}
+						i18nKey="UserIsAlreadyRegistered"
+						ns="Login"
+						defaults={DEFAULT_EMAIL_TEXT}
+						values={{
+							email: emailFromInvitation,
+							productName: t("Common:ProductName"),
+						}}
+						components={{
+							1: (
+								<Link
+									key="component_key"
+									fontWeight={600}
+									className="login-link"
+									type={LinkType.page}
+									isHovered={false}
+								/>
+							),
+						}}
+					/>
+				</Text>
+			</div>
+		);
+	}
 
-  return (
-    <FieldContainer
-      isVertical
-      labelVisible={false}
-      hasError={isEmailErrorShow}
-      errorMessage={
-        errorText
-          ? t(`Common:${errorText}`, errorText)
-          : t("Common:RequiredField")
-      } // TODO: Add wrong login server error
-      dataTestId="email_field"
-    >
-      {isLdapLogin ? (
-        <TextInput
-          id="login_username"
-          name="login"
-          type={InputType.text}
-          hasError={isEmailErrorShow}
-          value={identifier}
-          placeholder={t("LDAPUsernamePlaceholder", {
-            ldap_domain: ldapDomain,
-          })}
-          size={InputSize.large}
-          scale
-          isAutoFocussed
-          tabIndex={1}
-          isDisabled={isLoading}
-          autoComplete="off"
-          onChange={onChangeLogin}
-          onBlur={onBlurEmail}
-          testId="ldap_username_input"
-        />
-      ) : (
-        <EmailInput
-          id="login_username"
-          name="login"
-          hasError={isEmailErrorShow}
-          value={identifier}
-          placeholder={t("RegistrationEmailWatermark")}
-          size={InputSize.large}
-          scale
-          isAutoFocussed
-          tabIndex={1}
-          isDisabled={isLoading}
-          autoComplete="username"
-          onChange={onChangeLogin}
-          onBlur={onBlurEmail}
-          onValidateInput={onValidateEmail}
-          handleAnimationStart={handleAnimationStart}
-        />
-      )}
-    </FieldContainer>
-  );
+	return (
+		<FieldContainer
+			isVertical
+			labelVisible={false}
+			hasError={isEmailErrorShow}
+			errorMessage={
+				errorText
+					? t(`Common:${errorText}`, errorText)
+					: t("Common:RequiredField")
+			} // TODO: Add wrong login server error
+			dataTestId="email_field"
+		>
+			{isLdapLogin ? (
+				<TextInput
+					id="login_username"
+					name="login"
+					type={InputType.text}
+					hasError={isEmailErrorShow}
+					value={identifier}
+					placeholder={t("LDAPUsernamePlaceholder", {
+						ldap_domain: ldapDomain,
+					})}
+					size={InputSize.large}
+					scale
+					isAutoFocussed
+					tabIndex={1}
+					isDisabled={isLoading}
+					autoComplete="off"
+					onChange={onChangeLogin}
+					onBlur={onBlurEmail}
+					testId="ldap_username_input"
+				/>
+			) : (
+				<EmailInput
+					id="login_username"
+					name="login"
+					hasError={isEmailErrorShow}
+					value={identifier}
+					placeholder={t("RegistrationEmailWatermark")}
+					size={InputSize.large}
+					scale
+					isAutoFocussed
+					tabIndex={1}
+					isDisabled={isLoading}
+					autoComplete="username"
+					onChange={onChangeLogin}
+					onBlur={onBlurEmail}
+					onValidateInput={onValidateEmail}
+					handleAnimationStart={handleAnimationStart}
+				/>
+			)}
+		</FieldContainer>
+	);
 };
 
 export default EmailContainer;

@@ -1,0 +1,28 @@
+{
+  "key_path": "DeleteRoomsTitle",
+  "content": "Delete this rooms?",
+  "content_en_sha1_hash": "a4008acbf16ec22b3cfe717a17fe44cadf40cff1",
+  "created_at": "2026-03-20T09:07:44.007Z",
+  "updated_at": "2026-03-20T09:29:38.200Z",
+  "comment": {
+    "text": "This key displays a confirmation prompt in a dialog when multiple rooms are selected for deletion. It asks the user \"Delete this rooms?\" to confirm the action. It appears within a DeleteDialog component.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T09:29:38.200Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
+      "line_number": 213,
+      "context": "if (isTemplate) {\n return `${t(\"Files:DeleteTemplate\")}?`;\n }\n \n if (isRoomDelete) {\n if (selection.length > 1) return t(\"DeleteRoomsTitle\");\n return t(\"DeleteRoomTitle\");\n }\n \n if (isRecycleBinFolder) return t(\"EmptyTrashDialog:DeleteForeverTitle\");",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

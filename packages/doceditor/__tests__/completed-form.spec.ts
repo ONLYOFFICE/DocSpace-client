@@ -29,6 +29,7 @@ import {
   filesSettingsHandler,
   fillingSessionHandler,
 } from "@docspace/shared/__mocks__/handlers";
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import { expect, test } from "./fixtures/base";
 
 test.describe("Completed form", () => {
@@ -47,7 +48,7 @@ test.describe("Completed form", () => {
     const form = page.getByTestId("completed_form_container");
     await expect(form).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page, [
       "completed-form",
       "completed-form-render.png",
     ]);
@@ -65,7 +66,7 @@ test.describe("Completed form", () => {
     const form = page.getByTestId("completed_form_empty_container");
     await expect(form).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page, [
       "completed-form",
       "completed-form-empty-render.png",
     ]);
@@ -88,7 +89,7 @@ test.describe("Completed form", () => {
     const form = page.getByTestId("completed_form_vdr_container");
     await expect(form).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page, [
       "completed-form",
       "completed-form-vdr-render.png",
     ]);

@@ -31,9 +31,9 @@ import isUndefined from "lodash/isUndefined";
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
 import { RoomsType } from "@docspace/shared/enums";
-import FilesSelectorWrapper from "@docspace/shared/selectors/Files";
+import FilesSelectorWrapper from "@docspace/ui-kit/selectors/Files";
 
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { useSelectorInfoBar } from "@docspace/shared/hooks/useSelectorInfoBar";
 
 import type {
@@ -42,13 +42,15 @@ import type {
   TFolderSecurity,
 } from "@docspace/shared/api/files/types";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
-import type { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
-import type { TData } from "@docspace/shared/components/toast/Toast.type";
+import type {
+  TSelectedFileInfo,
+  SdkFolderType,
+} from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
+import type { TData } from "@docspace/ui-kit/components/toast";
 import type {
   TBreadCrumb,
   TInfoBarData,
-} from "@docspace/shared/components/selector/Selector.types";
-
+} from "@docspace/ui-kit/components/selector";
 import type {
   InjectShareCollectSelectorProps,
   ShareCollectSelectorProps,
@@ -282,7 +284,7 @@ const ShareCollectSelector = inject<TStore>(
             onCloseClick: onClose,
             ...headerProps,
           }}
-          rootFolderType={file.rootFolderType}
+          rootFolderType={file.rootFolderType as unknown as SdkFolderType}
           createDefineRoomType={createDefineRoomType}
           isPanelVisible={visible ? !conflictResolveDialogVisible : false}
           currentDeviceType={currentDeviceType}
@@ -293,8 +295,16 @@ const ShareCollectSelector = inject<TStore>(
           cancelButtonLabel={t("Common:CancelButton")}
           cancelButtonId="share-collect-selector-cancel"
           onCancel={onCancel}
-          onSubmit={onSubmit}
-          getIsDisabled={getIsDisabled}
+          onSubmit={
+            onSubmit as unknown as Parameters<
+              typeof FilesSelectorWrapper
+            >[0]["onSubmit"]
+          }
+          getIsDisabled={
+            getIsDisabled as unknown as Parameters<
+              typeof FilesSelectorWrapper
+            >[0]["getIsDisabled"]
+          }
           getFilesArchiveError={getFilesArchiveError}
           disabledItems={[]}
           descriptionText=""

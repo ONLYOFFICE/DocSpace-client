@@ -24,7 +24,7 @@
     /* Modules */
     "module": "ESNext" /* Specify what module code is generated. */,
     "rootDir": "./" /* Specify the root folder within your source files. */,
-    "moduleResolution": "node" /* Specify how TypeScript looks up a file from a given module specifier. */,
+    "moduleResolution": "bundler" /* Specify how TypeScript looks up a file from a given module specifier. */,
     "baseUrl": "./" /* Specify the base directory to resolve non-relative module names. */,
     "paths": {
       "PUBLIC_DIR/*": [
@@ -115,7 +115,6 @@
     "types/**/*.d.ts"
   ],
   "exclude": [
-    "**/*.stories.tsx",
-    "**/*.stories.ts"
+    "vitest.config.ts"
   ]
 }

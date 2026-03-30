@@ -34,7 +34,7 @@ import {
   SelectionArea as SelectionAreaComponent,
   type TArrayTypes,
   type TOnMove,
-} from "@docspace/shared/components/selection-area";
+} from "@docspace/ui-kit/components/selection-area";
 import { checkIsSSR, getCountTilesInRow } from "@docspace/shared/utils";
 import useFilesSelection from "@/app/(docspace)/_hooks/useFilesSelection";
 import { useLayoutEffect, useMemo, useState } from "react";

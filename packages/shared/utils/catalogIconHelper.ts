@@ -79,7 +79,7 @@ import CatalogSettingsStorageManagement20ReactSvgUrl from "PUBLIC_DIR/images/ico
 import CatalogSettingsServices20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-services.svg?url";
 
 import { FolderType, PageType } from "../enums";
-import { isMobile, isTablet } from "./device";
+import { isMobile, isTablet } from "@docspace/ui-kit/utils/device";
 
 type FolderUnionType = (typeof FolderType)[keyof typeof FolderType];
 type SettingsPageUnionType = (typeof PageType)[keyof typeof PageType];

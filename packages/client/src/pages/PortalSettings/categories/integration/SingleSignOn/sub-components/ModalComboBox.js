@@ -28,8 +28,8 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { ComboBox } from "@docspace/shared/components/combobox";
-import { FieldContainer } from "@docspace/shared/components/field-container";
+import { ComboBox } from "@docspace/ui-kit/components/combobox";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 
 const ModalComboBox = (props) => {
   const { t } = useTranslation("SingleSignOn");

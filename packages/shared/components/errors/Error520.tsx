@@ -30,9 +30,9 @@ import { I18nextProvider, useTranslation } from "react-i18next";
 
 import { getCrashReport } from "../../utils/crashReport";
 
-import { Link, LinkType } from "../link";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import ReportDialog from "../report-dialog";
-import ErrorContainer from "../error-container/ErrorContainer";
+import ErrorContainer from "@docspace/ui-kit/components/error-container/ErrorContainer";
 import { zendeskAPI } from "../zendesk/Zendesk.utils";
 
 import styles from "./Errors.module.scss";
@@ -108,7 +108,7 @@ const Error520 = ({
           fontWeight={600}
           type={LinkType.action}
           onClick={onReloadClick}
-          color={currentColorScheme?.main?.accent}
+          color={currentColorScheme?.main?.accent ?? undefined}
         >
           {t("ReloadPage")}
         </Link>

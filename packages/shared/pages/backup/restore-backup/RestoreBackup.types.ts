@@ -26,100 +26,100 @@
 
 import type { AxiosResponse } from "axios";
 import type {
-  ConnectedThirdPartyAccountType,
-  Nullable,
-  Option,
-  SelectedStorageType,
-  StorageRegionsType,
-  ThirdPartyAccountType,
-  TTranslation,
+	ConnectedThirdPartyAccountType,
+	Nullable,
+	Option,
+	SelectedStorageType,
+	StorageRegionsType,
+	ThirdPartyAccountType,
+	TTranslation,
 } from "../../../types";
-import type { ButtonSize } from "../../../components/button";
+import type { ButtonSize } from "@docspace/ui-kit/components/button";
 import type { TenantStatus } from "../../../enums";
 import type { FilesSelectorSettings } from "../../../components/files-selector-input";
-import type { TBreadCrumb } from "../../../components/selector/Selector.types";
+import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
 import type { TThirdParties, TUploadBackup } from "../../../api/files/types";
 
 export interface RestoreBackupProps {
-  removeItem: ThirdPartyAccountType;
-  buttonSize: ButtonSize;
-  isEnableRestore: boolean;
-  navigate: (path: string) => void;
-  settingsFileSelector: FilesSelectorSettings;
-  isInitialLoading: boolean;
-  // settingsStore
-  standalone: boolean;
-  setTenantStatus: (tenantStatus: TenantStatus) => void;
+	removeItem: ThirdPartyAccountType;
+	buttonSize: ButtonSize;
+	isEnableRestore: boolean;
+	navigate: (path: string) => void;
+	settingsFileSelector: FilesSelectorSettings;
+	isInitialLoading: boolean;
+	// settingsStore
+	standalone: boolean;
+	setTenantStatus: (tenantStatus: TenantStatus) => void;
 
-  // backup
-  errorInformation: string;
-  isBackupProgressVisible: boolean;
-  restoreResource: Nullable<File | number | string>;
-  formSettings: Record<string, string>;
-  errorsFieldsBeforeSafe: Record<string, boolean>;
-  thirdPartyStorage: SelectedStorageType[];
-  storageRegions: StorageRegionsType[];
-  defaultRegion: string; // defaultFormSettings.region;
-  accounts: ThirdPartyAccountType[];
-  selectedThirdPartyAccount: Nullable<ThirdPartyAccountType>;
-  isTheSameThirdPartyAccount: boolean;
-  downloadingProgress: number;
-  connectedThirdPartyAccount: Nullable<ConnectedThirdPartyAccountType>;
-  setErrorInformation: (error: unknown, t?: TTranslation) => void;
-  setTemporaryLink: (link: string) => void;
-  setDownloadingProgress: (progress: number) => void;
-  setConnectedThirdPartyAccount: (
-    account: Nullable<ConnectedThirdPartyAccountType>,
-  ) => void;
-  setRestoreResource: (resource: Nullable<File | string | number>) => void;
-  clearLocalStorage: VoidFunction;
-  setSelectedThirdPartyAccount: (
-    elem: Nullable<Partial<ThirdPartyAccountType>>,
-  ) => void;
-  setThirdPartyAccountsInfo: (t: TTranslation) => Promise<void>;
-  setCompletedFormFields: (
-    values: Record<string, string>,
-    module?: string,
-  ) => void;
-  addValueInFormSettings: (name: string, value: string) => void;
-  setRequiredFormSettings: (arr: string[]) => void;
-  deleteValueFormSetting: (key: string) => void;
-  setIsThirdStorageChanged: (changed: boolean) => void;
-  isFormReady: () => boolean;
-  getStorageParams: (
-    isCheckedThirdPartyStorage: boolean,
-    selectedFolderId: Nullable<string | number>,
-    selectedStorageId?: Nullable<string>,
-  ) => Option[];
-  uploadLocalFile: () => Promise<
-    false | AxiosResponse<TUploadBackup> | undefined | null
-  >;
+	// backup
+	errorInformation: string;
+	isBackupProgressVisible: boolean;
+	restoreResource: Nullable<File | number | string>;
+	formSettings: Record<string, string>;
+	errorsFieldsBeforeSafe: Record<string, boolean>;
+	thirdPartyStorage: SelectedStorageType[];
+	storageRegions: StorageRegionsType[];
+	defaultRegion: string; // defaultFormSettings.region;
+	accounts: ThirdPartyAccountType[];
+	selectedThirdPartyAccount: Nullable<ThirdPartyAccountType>;
+	isTheSameThirdPartyAccount: boolean;
+	downloadingProgress: number;
+	connectedThirdPartyAccount: Nullable<ConnectedThirdPartyAccountType>;
+	setErrorInformation: (error: unknown, t?: TTranslation) => void;
+	setTemporaryLink: (link: string) => void;
+	setDownloadingProgress: (progress: number) => void;
+	setConnectedThirdPartyAccount: (
+		account: Nullable<ConnectedThirdPartyAccountType>,
+	) => void;
+	setRestoreResource: (resource: Nullable<File | string | number>) => void;
+	clearLocalStorage: VoidFunction;
+	setSelectedThirdPartyAccount: (
+		elem: Nullable<Partial<ThirdPartyAccountType>>,
+	) => void;
+	setThirdPartyAccountsInfo: (t: TTranslation) => Promise<void>;
+	setCompletedFormFields: (
+		values: Record<string, string>,
+		module?: string,
+	) => void;
+	addValueInFormSettings: (name: string, value: string) => void;
+	setRequiredFormSettings: (arr: string[]) => void;
+	deleteValueFormSetting: (key: string) => void;
+	setIsThirdStorageChanged: (changed: boolean) => void;
+	isFormReady: () => boolean;
+	getStorageParams: (
+		isCheckedThirdPartyStorage: boolean,
+		selectedFolderId: Nullable<string | number>,
+		selectedStorageId?: Nullable<string>,
+	) => Option[];
+	uploadLocalFile: () => Promise<
+		false | AxiosResponse<TUploadBackup> | undefined | null
+	>;
 
-  // filesSelectorInput store
-  basePath: string;
-  newPath: string;
-  isErrorPath: boolean;
-  toDefault: VoidFunction;
-  setBasePath: (folders: TBreadCrumb[]) => void;
-  setNewPath: (folders: TBreadCrumb[], fileName?: string) => void;
+	// filesSelectorInput store
+	basePath: string;
+	newPath: string;
+	isErrorPath: boolean;
+	toDefault: VoidFunction;
+	setBasePath: (folders: TBreadCrumb[]) => void;
+	setNewPath: (folders: TBreadCrumb[], fileName?: string) => void;
 
-  // filesSettingsStore.thirdPartyStore;
-  providers: TThirdParties;
-  deleteThirdParty: (id: string) => Promise<void>;
-  openConnectWindow: (
-    serviceName: string,
-    modal: Window | null,
-  ) => Promise<Window | null>;
-  setThirdPartyProviders: (providers: TThirdParties) => void;
+	// filesSettingsStore.thirdPartyStore;
+	providers: TThirdParties;
+	deleteThirdParty: (id: string) => Promise<void>;
+	openConnectWindow: (
+		serviceName: string,
+		modal: Window | null,
+	) => Promise<Window | null>;
+	setThirdPartyProviders: (providers: TThirdParties) => void;
 
-  // dialogsStore
-  connectDialogVisible: boolean;
-  setConnectDialogVisible: (visible: boolean) => void;
-  deleteThirdPartyDialogVisible: boolean;
-  setDeleteThirdPartyDialogVisible: (visible: boolean) => void;
+	// dialogsStore
+	connectDialogVisible: boolean;
+	setConnectDialogVisible: (visible: boolean) => void;
+	deleteThirdPartyDialogVisible: boolean;
+	setDeleteThirdPartyDialogVisible: (visible: boolean) => void;
 
-  setIsBackupProgressVisible: (visible: boolean) => void;
+	setIsBackupProgressVisible: (visible: boolean) => void;
 
-  backupProgressError: string;
-  setBackupProgressError: (error: string) => void;
+	backupProgressError: string;
+	setBackupProgressError: (error: string) => void;
 }

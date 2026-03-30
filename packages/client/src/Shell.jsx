@@ -24,8 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import moment from "moment-timezone";
 import React, { useEffect } from "react";
+import { now, parseToDateTime, formatDate, formatDateLocalized, isBefore, isAfter } from "@docspace/ui-kit/utils/date";
 import { Outlet, useLocation } from "react-router";
 import { useTheme } from "styled-components";
 import { inject, observer } from "mobx-react";
@@ -36,19 +36,18 @@ import { toast as toastify } from "react-toastify";
 import SocketHelper, {
   SocketEvents,
   SocketCommands,
-} from "@docspace/shared/utils/socket";
-import { Portal } from "@docspace/shared/components/portal";
-import { SnackBar } from "@docspace/shared/components/snackbar";
-import { Toast, toastr } from "@docspace/shared/components/toast";
-import { RootTooltip } from "@docspace/shared/components/tooltip/rootTooltip";
-import { ToastType } from "@docspace/shared/components/toast/Toast.enums";
+} from "@docspace/ui-kit/utils/socket";
+import { Portal } from "@docspace/ui-kit/components/portal";
+import { SnackBar } from "@docspace/ui-kit/components/snackbar";
+import { Toast, toastr, ToastType } from "@docspace/ui-kit/components/toast";
+import { RootTooltip } from "@docspace/ui-kit/components/tooltip";
 import { updateTempContent } from "@docspace/shared/utils/common";
 import { DeviceType, IndexedDBStores } from "@docspace/shared/enums";
 import indexedDbHelper from "@docspace/shared/utils/indexedDBHelper";
 import { useThemeDetector } from "@docspace/shared/hooks/useThemeDetector";
 import { sendToastReport } from "@docspace/shared/utils/crashReport";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { getCookie, deleteCookie } from "@docspace/shared/utils/cookie";
+import { getCookie, deleteCookie } from "@docspace/ui-kit/utils/cookie";
 import { handleCopy } from "@docspace/shared/utils/copy";
 
 import "@docspace/shared/styles/theme.scss";
@@ -122,20 +121,7 @@ const Shell = ({ page = "home", ...rest }) => {
     }
   }, []);
 
-  useEffect(() => {
-    moment.updateLocale("ar-sa", {
-      longDateFormat: {
-        LT: "h:mm a",
-        LTS: "h:mm:ss a",
-        L: "YYYY/MM/DD",
-        LL: "YYYY MMMM D",
-        LLL: "h:mm a YYYY MMMM D",
-        LLLL: "h:mm a YYYY MMMM D dddd",
-      },
-    });
-
-    moment.locale(language);
-  }, []);
+  // Locale is handled by Luxon date utilities - no global locale setup needed
 
   useEffect(() => {
     SocketHelper?.emit(SocketCommands.Subscribe, {
@@ -155,6 +141,10 @@ const Shell = ({ page = "home", ...rest }) => {
     SocketHelper?.emit(SocketCommands.Subscribe, {
       roomParts: "QUOTA",
       individual: true,
+    });
+
+    SocketHelper?.emit(SocketCommands.Subscribe, {
+      roomParts: "change-web-plugin",
     });
   }, []);
 
@@ -247,7 +237,7 @@ const Shell = ({ page = "home", ...rest }) => {
   let fbInterval = null;
   // let lastCampaignStr = null;
   const LS_CAMPAIGN_DATE = "maintenance_to_date";
-  const DATE_FORMAT = "YYYY-MM-DD";
+  const DATE_FORMAT = "yyyy-MM-dd";
   const SNACKBAR_TIMEOUT = 10000;
 
   const clearSnackBarTimer = () => {
@@ -279,29 +269,29 @@ const Shell = ({ page = "home", ...rest }) => {
       skipMaintenance = true;
     }
 
-    const to = moment(toDate).local();
+    const to = parseToDateTime(toDate)?.toLocal();
 
     const watchedCampaignDateStr = localStorage.getItem(LS_CAMPAIGN_DATE);
 
-    const campaignDateStr = to.format(DATE_FORMAT);
+    const campaignDateStr = to ? formatDate(to, DATE_FORMAT) : null;
     if (campaignDateStr == watchedCampaignDateStr) {
       console.log("Skip snackBar by already watched");
       skipMaintenance = true;
     }
 
-    const from = moment(fromDate).local();
-    const now = moment();
+    const from = parseToDateTime(fromDate)?.toLocal();
+    const currentTime = now();
 
-    if (now.isBefore(from)) {
+    if (from && isBefore(currentTime, from)) {
       setSnackBarTimer(campaign);
 
       SnackBar.close();
-      console.log(`Show snackBar has been delayed for 1 minute`, now);
+      console.log(`Show snackBar has been delayed for 1 minute`, currentTime);
       skipMaintenance = true;
     }
 
-    if (now.isAfter(to)) {
-      console.log("Skip snackBar by current date", now);
+    if (to && isAfter(currentTime, to)) {
+      console.log("Skip snackBar by current date", currentTime);
       SnackBar.close();
       skipMaintenance = true;
     }
@@ -330,7 +320,7 @@ const Shell = ({ page = "home", ...rest }) => {
 
     // lastCampaignStr = campaignStr;
 
-    const targetDate = to.locale(language).format("LL");
+    const targetDate = to ? formatDateLocalized(to, "DATE_MED", { locale: language }) : "";
 
     const barConfig = {
       parentElementId: "main-bar",
@@ -344,7 +334,7 @@ const Shell = ({ page = "home", ...rest }) => {
         setMaintenanceExist(false);
         setSnackbarExist(false);
         SnackBar.close();
-        localStorage.setItem(LS_CAMPAIGN_DATE, to.format(DATE_FORMAT));
+        localStorage.setItem(LS_CAMPAIGN_DATE, to ? formatDate(to, DATE_FORMAT) : "");
       },
       opacity: 1,
       onLoad: () => {

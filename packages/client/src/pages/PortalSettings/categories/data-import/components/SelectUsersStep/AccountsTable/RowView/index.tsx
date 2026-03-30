@@ -29,15 +29,15 @@ import EmptyScreenPersonSvgDarkUrl from "PUBLIC_DIR/images/emptyFilter/empty.fil
 import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
 
 import { inject, observer } from "mobx-react";
-import { tablet } from "@docspace/shared/utils/device";
+import { tablet } from "@docspace/ui-kit/utils/device";
 import styled, { useTheme } from "styled-components";
 
-import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
-import { IconButton } from "@docspace/shared/components/icon-button";
-import { Link, LinkType } from "@docspace/shared/components/link";
-import { Checkbox } from "@docspace/shared/components/checkbox";
-import { RowContainer, Row } from "@docspace/shared/components/rows";
-import { globalColors } from "@docspace/shared/themes";
+import { EmptyScreenContainer } from "@docspace/ui-kit/components/empty-screen-container";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { RowContainer, Row } from "@docspace/ui-kit/components/rows";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { TEnhancedMigrationUser } from "@docspace/shared/api/settings/types";
 
 import UsersRow from "./UsersRow";

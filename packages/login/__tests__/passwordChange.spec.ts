@@ -24,8 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
+
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
-import { expect, test } from "./fixtures/base";
+import { test } from "./fixtures/base";
 import {
   confirmHandler,
   ErrorConfirm,
@@ -57,7 +59,7 @@ const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
 test("password change render", async ({ page, baseUrl }) => {
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "password-change",
     "password-change-render.png",
@@ -69,7 +71,7 @@ test("password change success", async ({ page, baseUrl }) => {
 
   await page.fill("[name='password']", "qwerty123");
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "password-change",
     "password-change-success.png",
@@ -81,7 +83,7 @@ test("password change success", async ({ page, baseUrl }) => {
     waitUntil: "load",
   });
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "password-change",
     "password-change-success-redirect.png",
@@ -94,7 +96,7 @@ test("password change error", async ({ page, baseUrl }) => {
   await page.fill("[name='password']", "123");
   await page.getByTestId("create_password_button").click();
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "password-change",
     "password-change-error.png",
@@ -111,7 +113,7 @@ test("password change error invalid", async ({
 
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "password-change",
     "password-change-error-invalid.png",
@@ -128,7 +130,7 @@ test("password change error expired", async ({
 
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "password-change",
     "password-change-error-expired.png",
@@ -146,7 +148,7 @@ test("password change error user excluded", async ({
   // Expected to go to default page
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "password-change",
     "password-change-error-user-excluded.png",

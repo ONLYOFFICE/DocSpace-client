@@ -3,7 +3,7 @@
   "content": "File lifetime",
   "content_en_sha1_hash": "e1b2d394f418f665ad835c3f5314147d2185703a",
   "created_at": "2025-05-19T21:30:56.797Z",
-  "updated_at": "2025-05-24T13:51:36.336Z",
+  "updated_at": "2026-02-19T13:36:32.397Z",
   "comment": {
     "text": "The translation key \"FileLifetime\" refers to the lifetime of a file. It is used as a placeholder in the UI component \"VirtualDataRoomBlock.js\", likely displayed in a dialog or settings area where users can configure file retention and deletion policies.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/VirtualDataRoomBlock.js",
       "line_number": 8,
-      "context": "import styled from \"styled-components\";\n \n import { Text } from \"@docspace/shared/components/text\";\n import { ToggleButton } from \"@docspace/shared/components/toggle-button\";\n \n import FileLifetime from \"./FileLifetime\";\n import Watermarks from \"./Watermarks\";\n \n const StyledVirtualDataRoomBlock = styled.div`\n .virtual-data-room-block {\n :not(:last-child) {",
+      "context": "import styled from \"styled-components\";\n \n import { Text } from \"@docspace/ui-kit/components/text\";\n import { ToggleButton } from \"@docspace/ui-kit/components/toggle-button\";\n \n import FileLifetime from \"./FileLifetime\";\n import Watermarks from \"./Watermarks\";\n \n const StyledVirtualDataRoomBlock = styled.div`\n .virtual-data-room-block {\n :not(:last-child) {",
       "module": "/packages/client"
     }
   ],

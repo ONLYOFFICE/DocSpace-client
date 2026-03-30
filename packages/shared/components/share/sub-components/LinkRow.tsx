@@ -31,11 +31,15 @@ import { useTranslation } from "react-i18next";
 import LinkIcon from "PUBLIC_DIR/images/tablet-link.react.svg?url";
 
 import { RowSkeleton } from "../../../skeletons/share";
-import { useIsMobile } from "../../../hooks/useIsMobile";
+import { useIsMobile } from "@docspace/ui-kit/hooks/use-is-mobile";
 import type { TFileLink } from "../../../api/files/types";
 
-import type { TOption } from "../../combobox";
-import { ContextMenuButton } from "../../context-menu-button";
+import type { TOption } from "@docspace/ui-kit/components/combobox";
+import {
+  ContextMenuButton,
+  ContextMenuButtonDisplayType,
+} from "@docspace/ui-kit/components/context-menu-button";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import {
   getAccessTypeOptions,
@@ -138,7 +142,11 @@ const LinkRow = ({
             shareLink={shareLink}
             isExpiredLink={isExpiredLink}
             disabledCopy={isArchiveFolder}
-            onCopyLink={() => onCopyLink(link)}
+            onCopyLink={() =>
+              isExpiredLink
+                ? toastr.error(t("Common:LinkExpired"))
+                : onCopyLink(link)
+            }
           />
           <LinkExpiration
             t={t}
@@ -153,7 +161,6 @@ const LinkRow = ({
           <LinkTypeSelector
             isLoaded={isLoaded}
             canEditInternal={canEditInternal}
-            isExpiredLink={isExpiredLink}
             onSelect={(item) => changeShareOption(item, link)}
             selectedOption={shareOption}
             options={shareOptions}
@@ -163,7 +170,6 @@ const LinkRow = ({
             isFolder={isFolder}
             isLoaded={isLoaded}
             isRoomsLink={isRoomsLink}
-            isExpiredLink={isExpiredLink}
             accessOptions={accessOptions}
             selectedAccessOption={selectedAccessOption}
             isArchiveFolder={isArchiveFolder}
@@ -179,7 +185,7 @@ const LinkRow = ({
               onClick={onOpenContextMenu}
               onClose={onCloseContextMenu}
               title={t("Files:ShowLinkActions")}
-              isDisabled={isExpiredLink || isLoaded}
+              isDisabled={isLoaded}
             />
           ) : null}
         </div>

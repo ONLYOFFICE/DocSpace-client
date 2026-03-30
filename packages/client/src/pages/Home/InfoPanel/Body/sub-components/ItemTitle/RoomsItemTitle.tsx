@@ -29,10 +29,10 @@ import { inject, observer } from "mobx-react";
 import classNames from "classnames";
 
 import { getTitleWithoutExtension } from "@docspace/shared/utils";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
-import { IconButton } from "@docspace/shared/components/icon-button";
-import { RoomIcon } from "@docspace/shared/components/room-icon";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
 import { FolderType, RoomsType } from "@docspace/shared/enums";
 import { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
@@ -43,7 +43,8 @@ import SearchIconReactSvgUrl from "PUBLIC_DIR/images/search.react.svg?url";
 
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
-import InfoPanelStore, { InfoPanelView } from "SRC_DIR/store/InfoPanelStore";
+import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
+import { InfoPanelView } from "SRC_DIR/helpers/info-panel";
 import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 
 import commonStyles from "../../helpers/Common.module.scss";
@@ -101,7 +102,6 @@ const RoomsItemHeader = ({
     "Common",
     "Translations",
     "InfoPanel",
-    "SharingPanel",
     "RoomLogoCover",
   ]);
 
@@ -318,3 +318,4 @@ export default inject(
     };
   },
 )(observer(RoomsItemHeader));
+

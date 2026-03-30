@@ -1,0 +1,72 @@
+.resizeHandle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 8px;
+  cursor: col-resize;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: none;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--info-panel-border);
+    transition: width 0.15s, background-color 0.15s;
+  }
+
+  &:hover::after,
+  &:active::after {
+    width: 3px;
+    background-color: var(--text-secondary);
+    border-radius: 2px;
+  }
+
+  &:focus-visible {
+    outline: none;
+
+    &::after {
+      width: 3px;
+      background-color: var(--text-secondary);
+      border-radius: 2px;
+    }
+  }
+
+  .gripDots {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    opacity: 0;
+    transition: opacity 0.15s;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .gripDot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--text-secondary);
+  }
+
+  &:hover .gripDots,
+  &:active .gripDots,
+  &:focus-visible .gripDots {
+    opacity: 1;
+  }
+}
+
+.positionRight {
+  left: -4px;
+}
+
+.positionLeft {
+  right: -4px;
+}

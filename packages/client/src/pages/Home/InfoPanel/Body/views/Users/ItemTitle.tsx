@@ -29,20 +29,20 @@ import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
 import { decode } from "he";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import {
-  ContextMenuButton,
-  ContextMenuButtonDisplayType,
-} from "@docspace/shared/components/context-menu-button";
+	ContextMenuButton,
+	ContextMenuButtonDisplayType,
+} from "@docspace/ui-kit/components/context-menu-button";
 import {
-  ContextMenu,
-  ContextMenuRefType,
-} from "@docspace/shared/components/context-menu";
-import { HeaderType } from "@docspace/shared/components/context-menu/ContextMenu.types";
-import { Avatar, AvatarSize } from "@docspace/shared/components/avatar";
-import { Badge } from "@docspace/shared/components/badge";
+	ContextMenu,
+	ContextMenuRefType,
+	HeaderType,
+} from "@docspace/ui-kit/components";
+import { Avatar, AvatarSize } from "@docspace/ui-kit/components/avatar";
+import { Badge } from "@docspace/ui-kit/components/badge";
 import { getUserAvatarRoleByType } from "@docspace/shared/utils/common";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { UserStore } from "@docspace/shared/store/UserStore";
 
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
@@ -54,189 +54,189 @@ import { TPeopleListItem } from "SRC_DIR/helpers/contacts";
 import styles from "./Users.module.scss";
 
 type ItemTitleProps = {
-  userSelection: TPeopleListItem;
-  getUserContextOptions: ContactsConextOptionsStore["getUserContextOptions"];
-  isMe: UserStore["isMe"];
+	userSelection: TPeopleListItem;
+	getUserContextOptions: ContactsConextOptionsStore["getUserContextOptions"];
+	isMe: UserStore["isMe"];
 };
 
 const ItemTitle = ({
-  userSelection,
-  getUserContextOptions,
-  isMe,
+	userSelection,
+	getUserContextOptions,
+	isMe,
 }: ItemTitleProps) => {
-  const { t } = useTranslation([
-    "People",
-    "PeopleTranslations",
-    "InfoPanel",
-    "Common",
-    "Translations",
-    "DeleteProfileEverDialog",
-  ]);
+	const { t } = useTranslation([
+		"People",
+		"PeopleTranslations",
+		"InfoPanel",
+		"Common",
+		"Translations",
+		"DeleteProfileEverDialog",
+	]);
 
-  const theme = useTheme();
+	const theme = useTheme();
 
-  const itemTitleRef = useRef<HTMLDivElement | null>(null);
-  const contextMenuRef = useRef<ContextMenuRefType>(null);
+	const itemTitleRef = useRef<HTMLDivElement | null>(null);
+	const contextMenuRef = useRef<ContextMenuRefType>(null);
 
-  const onClickContextMenu = (e: React.MouseEvent) => {
-    if (contextMenuRef.current && !contextMenuRef.current.menuRef.current) {
-      itemTitleRef.current?.click();
-    }
-    if (contextMenuRef.current) contextMenuRef.current.show(e);
-  };
+	const onClickContextMenu = (e: React.MouseEvent) => {
+		if (contextMenuRef.current && !contextMenuRef.current.menuRef.current) {
+			itemTitleRef.current?.click();
+		}
+		if (contextMenuRef.current) contextMenuRef.current.show(e);
+	};
 
-  const isPending =
-    userSelection.statusType === "pending" ||
-    userSelection.statusType === "disabled";
+	const isPending =
+		userSelection.statusType === "pending" ||
+		userSelection.statusType === "disabled";
 
-  const getData = () => {
-    const newOptions = userSelection.options?.filter(
-      (option) => option !== "details",
-    );
-    return getUserContextOptions(
-      t,
-      newOptions || [],
-      userSelection,
-    ) as unknown as ContextMenuModel[];
-  };
+	const getData = () => {
+		const newOptions = userSelection.options?.filter(
+			(option) => option !== "details",
+		);
+		return getUserContextOptions(
+			t,
+			newOptions || [],
+			userSelection,
+		) as unknown as ContextMenuModel[];
+	};
 
-  const contextOptions = getData();
+	const contextOptions = getData();
 
-  const userAvatar = userSelection.hasAvatar
-    ? userSelection.avatarMax
-    : DefaultUserPhoto;
-  const isSSO = userSelection.isSSO || false;
-  const isLDAP = userSelection.isLDAP || false;
-  const displayName = userSelection.displayName
-    ? decode(userSelection.displayName).trim()
-    : "";
+	const userAvatar = userSelection.hasAvatar
+		? userSelection.avatarMax
+		: DefaultUserPhoto;
+	const isSSO = userSelection.isSSO || false;
+	const isLDAP = userSelection.isLDAP || false;
+	const displayName = userSelection.displayName
+		? decode(userSelection.displayName).trim()
+		: "";
 
-  const role = getUserAvatarRoleByType(userSelection.role);
+	const role = getUserAvatarRoleByType(userSelection.role);
 
-  const contextMenuHeader = useMemo((): HeaderType | undefined => {
-    if (!userSelection) return undefined;
+	const contextMenuHeader = useMemo((): HeaderType | undefined => {
+		if (!userSelection) return undefined;
 
-    return {
-      title: displayName || userSelection.email || "",
-      avatar: userAvatar || DefaultUserPhoto,
-      logo: "",
-      icon: "",
-    };
-  }, [userSelection, displayName, userAvatar]);
+		return {
+			title: displayName || userSelection.email || "",
+			avatar: userAvatar || DefaultUserPhoto,
+			logo: "",
+			icon: "",
+		};
+	}, [userSelection, displayName, userAvatar]);
 
-  return (
-    <div className={styles.userTitle} ref={itemTitleRef}>
-      <Avatar
-        className={styles.avatar}
-        role={role}
-        size={AvatarSize.big}
-        source={userAvatar}
-        noClick
-        dataTestId="info_panel_contacts_user_avatar"
-      />
-      <div className={styles.infoText}>
-        <div className={styles.infoWrapper}>
-          <Text
-            tooltipFitToContent
-            className={styles.infoTextName}
-            title={displayName}
-            truncate
-            fontSize="16px"
-            fontWeight={700}
-            lineHeight="22px"
-          >
-            {isPending || !displayName ? userSelection.email : displayName}
-          </Text>
-          {isMe?.(userSelection.id) ? (
-            <Text
-              className={styles.isMeLabel}
-              fontWeight={700}
-              fontSize="16px"
-              lineHeight="22px"
-            >
-              ({t("Common:MeLabel")})
-            </Text>
-          ) : null}
-          {isPending ? (
-            <Badges withoutPaid statusType={userSelection.statusType} />
-          ) : null}
-        </div>
-        {!isPending && !!displayName ? (
-          <Text
-            tooltipFitToContent
-            className={styles.infoTextEmail}
-            title={userSelection.email}
-            fontSize="13px"
-            fontWeight={600}
-            lineHeight="20px"
-          >
-            {userSelection.email}
-          </Text>
-        ) : null}
-        {isSSO ? (
-          <div
-            data-tooltip-id="system-tooltip"
-            data-tooltip-content={t("PeopleTranslations:SSOAccountTooltip")}
-            data-tooltip-place="bottom"
-          >
-            <Badge
-              className={styles.ssoBadge}
-              label={t("Common:SSO")}
-              color={globalColors.white}
-              backgroundColor={
-                theme.isBase
-                  ? globalColors.secondGreen
-                  : globalColors.secondGreenDark
-              }
-              fontSize="9px"
-              fontWeight={800}
-              noHover
-            />
-          </div>
-        ) : null}
+	return (
+		<div className={styles.userTitle} ref={itemTitleRef}>
+			<Avatar
+				className={styles.avatar}
+				role={role}
+				size={AvatarSize.big}
+				source={userAvatar}
+				noClick
+				dataTestId="info_panel_contacts_user_avatar"
+			/>
+			<div className={styles.infoText}>
+				<div className={styles.infoWrapper}>
+					<Text
+						tooltipFitToContent
+						className={styles.infoTextName}
+						title={displayName}
+						truncate
+						fontSize="16px"
+						fontWeight={700}
+						lineHeight="22px"
+					>
+						{isPending || !displayName ? userSelection.email : displayName}
+					</Text>
+					{isMe?.(userSelection.id) ? (
+						<Text
+							className={styles.isMeLabel}
+							fontWeight={700}
+							fontSize="16px"
+							lineHeight="22px"
+						>
+							({t("Common:MeLabel")})
+						</Text>
+					) : null}
+					{isPending ? (
+						<Badges withoutPaid statusType={userSelection.statusType} />
+					) : null}
+				</div>
+				{!isPending && !!displayName ? (
+					<Text
+						tooltipFitToContent
+						className={styles.infoTextEmail}
+						title={userSelection.email}
+						fontSize="13px"
+						fontWeight={600}
+						lineHeight="20px"
+					>
+						{userSelection.email}
+					</Text>
+				) : null}
+				{isSSO ? (
+					<div
+						data-tooltip-id="system-tooltip"
+						data-tooltip-content={t("PeopleTranslations:SSOAccountTooltip")}
+						data-tooltip-place="bottom"
+					>
+						<Badge
+							className={styles.ssoBadge}
+							label={t("Common:SSO")}
+							color={globalColors.white}
+							backgroundColor={
+								theme.isBase
+									? globalColors.secondGreen
+									: globalColors.secondGreenDark
+							}
+							fontSize="9px"
+							fontWeight={800}
+							noHover
+						/>
+					</div>
+				) : null}
 
-        {isLDAP ? (
-          <div
-            data-tooltip-id="system-tooltip"
-            data-tooltip-content={t("PeopleTranslations:LDAPAccountTooltip")}
-            data-tooltip-place="bottom"
-          >
-            <Badge
-              className={styles.ldapBadge}
-              label={t("Common:LDAP")}
-              color={globalColors.white}
-              backgroundColor={
-                theme.isBase
-                  ? globalColors.secondPurple
-                  : globalColors.secondPurpleDark
-              }
-              fontSize="9px"
-              fontWeight={800}
-              noHover
-            />
-          </div>
-        ) : null}
-      </div>
+				{isLDAP ? (
+					<div
+						data-tooltip-id="system-tooltip"
+						data-tooltip-content={t("PeopleTranslations:LDAPAccountTooltip")}
+						data-tooltip-place="bottom"
+					>
+						<Badge
+							className={styles.ldapBadge}
+							label={t("Common:LDAP")}
+							color={globalColors.white}
+							backgroundColor={
+								theme.isBase
+									? globalColors.secondPurple
+									: globalColors.secondPurpleDark
+							}
+							fontSize="9px"
+							fontWeight={800}
+							noHover
+						/>
+					</div>
+				) : null}
+			</div>
 
-      <ContextMenu
-        ref={contextMenuRef}
-        model={contextOptions || []}
-        getContextModel={getData}
-        withBackdrop
-        baseZIndex={310}
-        header={contextMenuHeader}
-      />
-      {contextOptions.length ? (
-        <ContextMenuButton
-          id="info-accounts-options"
-          className={styles.contextButton}
-          onClick={onClickContextMenu}
-          getData={getData}
-          displayType={ContextMenuButtonDisplayType.toggle}
-        />
-      ) : null}
-    </div>
-  );
+			<ContextMenu
+				ref={contextMenuRef}
+				model={contextOptions || []}
+				getContextModel={getData}
+				withBackdrop
+				baseZIndex={310}
+				header={contextMenuHeader}
+			/>
+			{contextOptions.length ? (
+				<ContextMenuButton
+					id="info-accounts-options"
+					className={styles.contextButton}
+					onClick={onClickContextMenu}
+					getData={getData}
+					displayType={ContextMenuButtonDisplayType.toggle}
+				/>
+			) : null}
+		</div>
+	);
 };
 
 export default ItemTitle;

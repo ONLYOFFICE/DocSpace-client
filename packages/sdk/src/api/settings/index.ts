@@ -48,7 +48,7 @@ export async function getSettings(
       "GET",
     );
 
-    const res = await fetch(req, { next: { revalidate: 300 } });
+    const res = await fetch(req, { next: { revalidate: 900 } });
 
     if (res.status === 403) {
       logger.error(
@@ -89,7 +89,7 @@ export async function getColorTheme(): Promise<TGetColorTheme | undefined> {
       "GET",
     );
 
-    const res = await fetch(req, { next: { revalidate: 300 } });
+    const res = await fetch(req, { next: { revalidate: 900 } });
 
     if (!res.ok) {
       logger.error(`GET /settings/colortheme failed: ${res.status}`);
@@ -114,7 +114,7 @@ export async function getBuildInfo() {
       "GET",
     );
 
-    const res = await fetch(req, { next: { revalidate: 300 } });
+    const res = await fetch(req, { next: { revalidate: 900 } });
 
     if (!res.ok) {
       logger.error(`GET /settings/version/build failed: ${res.status}`);
@@ -135,7 +135,7 @@ export async function getCapabilities() {
   try {
     const [req] = await createRequest([`/capabilities`], [["", ""]], "GET");
 
-    const res = await fetch(req, { next: { revalidate: 300 } });
+    const res = await fetch(req, { next: { revalidate: 900 } });
 
     if (!res.ok) {
       logger.error(`GET /capabilities failed: ${res.status}`);
@@ -161,7 +161,7 @@ export async function getPortalCultures(): Promise<TPortalCultures> {
     );
 
     const res = await fetch(getPortalCulturesRes, {
-      next: { revalidate: 300 },
+      next: { revalidate: 900 },
     });
 
     if (!res.ok) {

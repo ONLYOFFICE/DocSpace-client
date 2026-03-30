@@ -30,78 +30,78 @@ import { isMobile as isMobileDevice } from "react-device-detect";
 import React, { useId } from "react";
 import { useTranslation } from "react-i18next";
 
-import { IconButton } from "../icon-button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { classNames } from "../../utils";
-import { Tooltip } from "../tooltip";
-import { Link, LinkType } from "../link";
-import { Text } from "../text";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
 import ButtonAlertIconSvgUrl from "PUBLIC_DIR/images/button.alert.react.svg?url";
 import LoadErrorIconSvgUrl from "PUBLIC_DIR/images/load.error.react.svg?url";
 
 import styles from "./FailedVectorizationBadge.module.scss";
 
 type Props = {
-  className?: string;
-  size?: "small" | "medium";
+	className?: string;
+	size?: "small" | "medium";
 
-  withRetryVectorization?: boolean;
-  onRetryVectorization?: () => void;
+	withRetryVectorization?: boolean;
+	onRetryVectorization?: () => void;
 };
 
 export const FailedVectorizationBadge = ({
-  size = "small",
-  onRetryVectorization,
-  className,
-  withRetryVectorization,
+	size = "small",
+	onRetryVectorization,
+	className,
+	withRetryVectorization,
 }: Props) => {
-  const { t } = useTranslation("Common");
-  const tooltipId = useId();
+	const { t } = useTranslation("Common");
+	const tooltipId = useId();
 
-  const iconAlert =
-    size === "small" ? ButtonAlertIconSvgUrl : LoadErrorIconSvgUrl;
+	const iconAlert =
+		size === "small" ? ButtonAlertIconSvgUrl : LoadErrorIconSvgUrl;
 
-  const getAlertTooltipContent = () => {
-    return (
-      <div>
-        <Text fontWeight={600} fontSize="12px" lineHeight="16px">
-          {t("Common:PreparationForAIFailed")}
-        </Text>
-        <Text fontSize="12px" lineHeight="16px">
-          {t("Common:PreparationForAIFailedInfo")}
-        </Text>
-        {withRetryVectorization ? (
-          <Link
-            type={LinkType.action}
-            fontWeight={600}
-            onClick={onRetryVectorization}
-          >
-            {t("Common:TryAgain")}
-          </Link>
-        ) : null}
-      </div>
-    );
-  };
+	const getAlertTooltipContent = () => {
+		return (
+			<div>
+				<Text fontWeight={600} fontSize="12px" lineHeight="16px">
+					{t("Common:PreparationForAIFailed")}
+				</Text>
+				<Text fontSize="12px" lineHeight="16px">
+					{t("Common:PreparationForAIFailedInfo")}
+				</Text>
+				{withRetryVectorization ? (
+					<Link
+						type={LinkType.action}
+						fontWeight={600}
+						onClick={onRetryVectorization}
+					>
+						{t("Common:TryAgain")}
+					</Link>
+				) : null}
+			</div>
+		);
+	};
 
-  return (
-    <>
-      <IconButton
-        data-tooltip-id={tooltipId}
-        iconName={iconAlert}
-        className={classNames(styles.badge, className, {
-          [styles.small]: size === "small",
-          [styles.medium]: size === "medium",
-        })}
-        dataTestId="failed-vectorization-badge"
-      />
-      <Tooltip
-        id={tooltipId}
-        className="not-selectable"
-        getContent={getAlertTooltipContent}
-        place="bottom-start"
-        clickable
-        maxWidth="302px"
-        openOnClick={isMobileDevice}
-      />
-    </>
-  );
+	return (
+		<>
+			<IconButton
+				data-tooltip-id={tooltipId}
+				iconName={iconAlert}
+				className={classNames(styles.badge, className, {
+					[styles.small]: size === "small",
+					[styles.medium]: size === "medium",
+				})}
+				dataTestId="failed-vectorization-badge"
+			/>
+			<Tooltip
+				id={tooltipId}
+				className="not-selectable"
+				getContent={getAlertTooltipContent}
+				place="bottom-start"
+				clickable
+				maxWidth="302px"
+				openOnClick={isMobileDevice}
+			/>
+		</>
+	);
 };

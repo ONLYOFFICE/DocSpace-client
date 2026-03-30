@@ -37,7 +37,7 @@ import {
 } from "@docspace/shared/enums";
 import api from "@docspace/shared/api";
 import { Nullable } from "@docspace/shared/types";
-import { TOption } from "@docspace/shared/components/combobox";
+import { TOption } from "@docspace/ui-kit/components/combobox";
 
 import type {
   TInfoPanelMember,
@@ -162,7 +162,8 @@ export const useMembers = ({
           setTotal((value) => value - 1);
         } else if (
           "activationStatus" in member &&
-          member.activationStatus === EmployeeActivationStatus.Pending
+          member.activationStatus === EmployeeActivationStatus.Pending &&
+          !room.isTemplate
         ) {
           member.isExpect = true;
           expected.push(member);

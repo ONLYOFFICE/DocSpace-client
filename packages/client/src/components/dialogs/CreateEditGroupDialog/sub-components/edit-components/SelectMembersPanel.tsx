@@ -1,8 +1,8 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import { TUser } from "@docspace/shared/api/people/types";
-import { TOnSubmit } from "@docspace/shared/components/selector/Selector.types";
+import { TOnSubmit } from "@docspace/ui-kit/components/selector";
+import type { PeopleSelectorProps } from "@docspace/ui-kit/selectors/People/PeopleSelector.types";
 
 import EditGroupStore from "SRC_DIR/store/contacts/EditGroupStore";
 
@@ -30,7 +30,11 @@ const Panel = ({
 }: SelectMembersPanelProps) => {
   const { addedMembersMap, removedMembersMap, group } = injectedProps!;
 
-  const checkIfUserInvited = (user: TUser) => {
+  const checkIfUserInvited: NonNullable<
+    PeopleSelectorProps["checkIfUserInvited"]
+  > = (user) => {
+    if (!user.id) return false;
+
     if (removedMembersMap.has(user.id)) {
       return false;
     }

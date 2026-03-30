@@ -47,7 +47,7 @@ import {
   TVersionBuild,
   TInvitationSettings,
 } from "@docspace/shared/api/settings/types";
-import { Encoder } from "@docspace/shared/utils/encoder";
+import { Encoder } from "@docspace/ui-kit/utils/encoder";
 import {
   TConfirmLinkParams,
   TConfirmLinkResult,
@@ -552,7 +552,7 @@ export async function getUserFromConfirm(
 
     const user = await res.json();
 
-    if (user.response && user.response.displayName) {
+    if (user.response?.displayName) {
       user.response.displayName = Encoder.htmlDecode(user.response.displayName);
     }
 
@@ -717,10 +717,11 @@ export async function checkConfirmLink(data: TConfirmLinkParams) {
 }
 
 export async function getAvailablePortals(data: {
-  Email: string;
-  PasswordHash: string;
+  Email?: string;
+  PasswordHash?: string;
   recaptchaResponse?: string | null | undefined;
   recaptchaType?: unknown | undefined;
+  ThirdPartyProfile?: string;
 }) {
   logger.debug(`Start POST /portal/signin`);
 

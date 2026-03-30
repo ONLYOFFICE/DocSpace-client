@@ -24,8 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Text } from "../../../components/text";
-import { Link, LinkType } from "../../../components/link";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { getLogoFromPath, isMobile } from "../../../utils";
 
 import { ILogoProps } from "./WhiteLabel.types";

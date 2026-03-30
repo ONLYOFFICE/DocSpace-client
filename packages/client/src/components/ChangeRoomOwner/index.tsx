@@ -32,9 +32,9 @@ import {
   Avatar,
   AvatarRole,
   AvatarSize,
-} from "@docspace/shared/components/avatar";
-import { Text } from "@docspace/shared/components/text";
-import { Link, LinkType } from "@docspace/shared/components/link";
+} from "@docspace/ui-kit/components/avatar";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { TCreatedBy } from "@docspace/shared/types";
 
@@ -99,7 +99,7 @@ const ChangeRoomOwner = ({
             type={LinkType.action}
             fontWeight={600}
             fontSize="13px"
-            color={currentColorScheme?.main?.accent}
+            color={currentColorScheme?.main?.accent ?? undefined}
             onClick={onOwnerChange}
           >
             {t("Common:ChangeButton")}

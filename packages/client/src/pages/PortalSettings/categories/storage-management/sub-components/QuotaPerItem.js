@@ -27,8 +27,8 @@
 import { useState, useRef, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 
-import { Text } from "@docspace/shared/components/text";
-import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { QuotaForm } from "@docspace/shared/components/quota-form";
 
 import { StyledBaseQuotaComponent } from "../StyledComponent";

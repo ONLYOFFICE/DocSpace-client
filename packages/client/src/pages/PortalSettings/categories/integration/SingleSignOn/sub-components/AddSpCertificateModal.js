@@ -27,136 +27,136 @@
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Button } from "@docspace/shared/components/button";
-import { Link } from "@docspace/shared/components/link";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Text } from "@docspace/shared/components/text";
-import { Textarea } from "@docspace/shared/components/textarea";
+import { Button } from "@docspace/ui-kit/components/button";
+import { Link } from "@docspace/ui-kit/components/link";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Textarea } from "@docspace/ui-kit/components/textarea";
 
 import ModalComboBox from "./ModalComboBox";
 import StyledBodyContent from "../styled-containers/StyledModalDialog";
 
 const AddSpCertificateModal = (props) => {
-  const { t, ready } = useTranslation(["SingleSignOn", "Common"]);
-  const {
-    closeSpModal,
-    addSpCertificate,
-    spIsModalVisible,
-    generateCertificate,
-    setInput,
-    spCertificate,
-    spPrivateKey,
-    isGeneratedCertificate,
-    isCertificateLoading,
-  } = props;
+	const { t, ready } = useTranslation(["SingleSignOn", "Common"]);
+	const {
+		closeSpModal,
+		addSpCertificate,
+		spIsModalVisible,
+		generateCertificate,
+		setInput,
+		spCertificate,
+		spPrivateKey,
+		isGeneratedCertificate,
+		isCertificateLoading,
+	} = props;
 
-  const onGenerate = () => {
-    if (isGeneratedCertificate) return;
-    generateCertificate();
-  };
+	const onGenerate = () => {
+		if (isGeneratedCertificate) return;
+		generateCertificate();
+	};
 
-  return (
-    <ModalDialog
-      zIndex={310}
-      isLoading={!ready}
-      autoMaxHeight
-      autoMaxWidth
-      onClose={closeSpModal}
-      visible={spIsModalVisible}
-    >
-      <ModalDialog.Header>{t("NewCertificate")}</ModalDialog.Header>
+	return (
+		<ModalDialog
+			zIndex={310}
+			isLoading={!ready}
+			autoMaxHeight
+			autoMaxWidth
+			onClose={closeSpModal}
+			visible={spIsModalVisible}
+		>
+			<ModalDialog.Header>{t("NewCertificate")}</ModalDialog.Header>
 
-      <ModalDialog.Body>
-        <StyledBodyContent>
-          <Link
-            className="generate"
-            isHovered
-            onClick={onGenerate}
-            type="action"
-          >
-            {t("GenerateCertificate")}
-          </Link>
-          <Text isBold className="text-area-label">
-            {t("OpenCertificate")}
-          </Text>
+			<ModalDialog.Body>
+				<StyledBodyContent>
+					<Link
+						className="generate"
+						isHovered
+						onClick={onGenerate}
+						type="action"
+					>
+						{t("GenerateCertificate")}
+					</Link>
+					<Text isBold className="text-area-label">
+						{t("OpenCertificate")}
+					</Text>
 
-          <Textarea
-            id="sp-certificate"
-            className="text-area"
-            name="spCertificate"
-            onChange={setInput}
-            value={spCertificate}
-            isDisabled={isGeneratedCertificate}
-            placeholder={t("PlaceholderCert")}
-            heightTextArea="72px"
-          />
+					<Textarea
+						id="sp-certificate"
+						className="text-area"
+						name="spCertificate"
+						onChange={setInput}
+						value={spCertificate}
+						isDisabled={isGeneratedCertificate}
+						placeholder={t("PlaceholderCert")}
+						heightTextArea="72px"
+					/>
 
-          <Text isBold className="text-area-label">
-            {t("PrivateKey")}
-          </Text>
+					<Text isBold className="text-area-label">
+						{t("PrivateKey")}
+					</Text>
 
-          <Textarea
-            id="sp-privateKey"
-            className="text-area"
-            name="spPrivateKey"
-            onChange={setInput}
-            value={spPrivateKey}
-            isDisabled={isGeneratedCertificate}
-            placeholder={t("PlaceholderCert")}
-            heightTextArea="72px"
-          />
+					<Textarea
+						id="sp-privateKey"
+						className="text-area"
+						name="spPrivateKey"
+						onChange={setInput}
+						value={spPrivateKey}
+						isDisabled={isGeneratedCertificate}
+						placeholder={t("PlaceholderCert")}
+						heightTextArea="72px"
+					/>
 
-          <ModalComboBox
-            className="modal-combo"
-            isDisabled={isGeneratedCertificate}
-          />
-        </StyledBodyContent>
-      </ModalDialog.Body>
+					<ModalComboBox
+						className="modal-combo"
+						isDisabled={isGeneratedCertificate}
+					/>
+				</StyledBodyContent>
+			</ModalDialog.Body>
 
-      <ModalDialog.Footer>
-        <Button
-          id="ok-button"
-          label={t("Common:OKButton")}
-          onClick={() => addSpCertificate(t)}
-          primary
-          size="normal"
-          isLoading={isCertificateLoading}
-          isDisabled={isGeneratedCertificate || !spCertificate || !spPrivateKey}
-        />
-        <Button
-          id="cancel-button"
-          label={t("Common:CancelButton")}
-          onClick={closeSpModal}
-          size="normal"
-          isDisabled={isGeneratedCertificate || isCertificateLoading}
-        />
-      </ModalDialog.Footer>
-    </ModalDialog>
-  );
+			<ModalDialog.Footer>
+				<Button
+					id="ok-button"
+					label={t("Common:OKButton")}
+					onClick={() => addSpCertificate(t)}
+					primary
+					size="normal"
+					isLoading={isCertificateLoading}
+					isDisabled={isGeneratedCertificate || !spCertificate || !spPrivateKey}
+				/>
+				<Button
+					id="cancel-button"
+					label={t("Common:CancelButton")}
+					onClick={closeSpModal}
+					size="normal"
+					isDisabled={isGeneratedCertificate || isCertificateLoading}
+				/>
+			</ModalDialog.Footer>
+		</ModalDialog>
+	);
 };
 
 export default inject(({ ssoStore }) => {
-  const {
-    closeSpModal,
-    addSpCertificate,
-    spIsModalVisible,
-    generateCertificate,
-    setInput,
-    spCertificate,
-    spPrivateKey,
-    isGeneratedCertificate,
-    isCertificateLoading,
-  } = ssoStore;
+	const {
+		closeSpModal,
+		addSpCertificate,
+		spIsModalVisible,
+		generateCertificate,
+		setInput,
+		spCertificate,
+		spPrivateKey,
+		isGeneratedCertificate,
+		isCertificateLoading,
+	} = ssoStore;
 
-  return {
-    closeSpModal,
-    addSpCertificate,
-    spIsModalVisible,
-    generateCertificate,
-    setInput,
-    spCertificate,
-    spPrivateKey,
-    isGeneratedCertificate,
-    isCertificateLoading,
-  };
+	return {
+		closeSpModal,
+		addSpCertificate,
+		spIsModalVisible,
+		generateCertificate,
+		setInput,
+		spCertificate,
+		spPrivateKey,
+		isGeneratedCertificate,
+		isCertificateLoading,
+	};
 })(observer(AddSpCertificateModal));

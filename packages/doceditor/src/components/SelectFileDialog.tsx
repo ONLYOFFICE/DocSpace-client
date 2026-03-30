@@ -27,7 +27,8 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import FilesSelectorWrapper from "@docspace/shared/selectors/Files";
+import FilesSelectorWrapper from "@docspace/ui-kit/selectors/Files";
+import type { SdkFolderType } from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
 
 import { DeviceType, FilesSelectorFilterTypes } from "@docspace/shared/enums";
 
@@ -91,7 +92,7 @@ const SelectFileDialog = ({
       isRoomsOnly={false}
       isThirdParty={false}
       currentFolderId={openRoot ? "" : selectedFolderId!}
-      rootFolderType={fileInfo.rootFolderType}
+      rootFolderType={fileInfo.rootFolderType as SdkFolderType}
       withHeader
       headerProps={{ headerLabel, onCloseClick: onClose }}
       embedded={false}

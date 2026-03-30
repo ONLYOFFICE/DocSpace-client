@@ -26,8 +26,8 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import { RoomIcon } from "@docspace/shared/components/room-icon";
-import { Text } from "@docspace/shared/components/text";
+import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import type { NewFilesPanelItemRoomProps } from "../NewFilesBadge.types";
 

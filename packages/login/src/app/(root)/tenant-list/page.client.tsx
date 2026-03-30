@@ -29,8 +29,8 @@
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/shared/components/text";
-import { Button } from "@docspace/shared/components/button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Button } from "@docspace/ui-kit/components/button";
 
 import { TPortal } from "@/types";
 

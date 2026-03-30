@@ -28,7 +28,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
-import { MobileCategoryWrapper } from "@docspace/shared/components/mobile-category-wrapper";
+import { CategoryItem } from "@docspace/ui-kit/components/category-item";
 
 import { StyledBaseQuotaComponent } from "../StyledComponent";
 
@@ -43,7 +43,7 @@ const MobileQuotasComponent = ({ isDisabled }) => {
 
   return (
     <StyledBaseQuotaComponent>
-      <MobileCategoryWrapper
+      <CategoryItem
         title={t("QuotaPerRoom")}
         onClickLink={onClickLink}
         url="portal-settings/management/disk-space/quota-per-room"
@@ -52,7 +52,7 @@ const MobileQuotasComponent = ({ isDisabled }) => {
         })}
         isDisabled={isDisabled}
       />
-      <MobileCategoryWrapper
+      <CategoryItem
         title={t("QuotaPerUser")}
         onClickLink={onClickLink}
         url="/portal-settings/management/disk-space/quota-per-user"
@@ -62,7 +62,7 @@ const MobileQuotasComponent = ({ isDisabled }) => {
         })}
         isDisabled={isDisabled}
       />
-      <MobileCategoryWrapper
+      <CategoryItem
         title={t("QuotaPerAIAgent", {
           aiAgent: t("Common:AIAgent"),
         })}

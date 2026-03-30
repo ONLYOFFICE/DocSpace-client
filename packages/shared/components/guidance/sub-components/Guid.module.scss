@@ -1,8 +1,25 @@
-@use "../../../styles/variables";
-@use "../../../styles/variables/colors";
-@use "../../../styles/mixins";
+@use "@docspace/ui-kit/styles/variables";
+@use "@docspace/ui-kit/styles/variables/colors";
+@use "@docspace/ui-kit/styles/mixins";
+
+:global(.dark) {
+  .content {
+    --modal-dialog-bg-color: #{colors.$black};
+    --modal-dialog-text-color: #{colors.$white};
+    --modal-dialog-backdrop-bg-color: #{colors.$blur-dark};
+    --modal-dialog-header-border-color: #{colors.$gray-dark-strong};
+    --modal-dialog-link-underline-color: #{colors.$dark-gray-dark};
+    --modal-dialog-border-color: #{colors.$gray-light-mid};
+  }
+}
 
 .content {
+  --modal-dialog-bg-color: #{colors.$white};
+  --modal-dialog-text-color: #{colors.$black};
+  --modal-dialog-backdrop-bg-color: #{colors.$blur-light};
+  --modal-dialog-header-border-color: #{colors.$gray-light-mid};
+  --modal-dialog-link-underline-color: #{colors.$light-gray-dark};
+  --modal-dialog-border-color: #{colors.$gray-dark-strong};
   box-sizing: border-box;
   position: relative;
 

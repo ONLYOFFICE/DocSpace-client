@@ -30,7 +30,7 @@ import { describe, it, expect, beforeEach, vi } from "vitest";
 import { fireEvent, render, screen, act } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import { ButtonSize } from "../button";
+import { ButtonSize } from "@docspace/ui-kit/components/button";
 
 import DirectThirdPartyConnection from "./DirectThirdPartyConnection";
 import {
@@ -55,7 +55,7 @@ vi.mock("../../utils/common", async () => {
   };
 });
 
-vi.mock("../toast", () => ({
+vi.mock("@docspace/ui-kit/components/toast", () => ({
   toastr: {
     error: vi.fn(),
     success: vi.fn(),

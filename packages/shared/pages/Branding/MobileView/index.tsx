@@ -27,7 +27,7 @@
 import React, { MouseEvent } from "react";
 import { useTranslation } from "react-i18next";
 
-import { MobileCategoryWrapper } from "../../../components/mobile-category-wrapper";
+import { CategoryItem } from "@docspace/ui-kit/components/category-item";
 
 import styles from "./MobileView.module.scss";
 
@@ -48,7 +48,7 @@ export const MobileView = ({
 
   return (
     <div className={styles.mobileView}>
-      <MobileCategoryWrapper
+      <CategoryItem
         title={t("BrandName")}
         subtitle={t("BrandNameSubtitleMobile")}
         url={`${baseUrl}/branding/brand-name`}
@@ -56,7 +56,7 @@ export const MobileView = ({
         badgeLabel={t("Paid")}
         onClickLink={onClickLink}
       />
-      <MobileCategoryWrapper
+      <CategoryItem
         title={t("WhiteLabel")}
         subtitle={t("BrandingSubtitleMobile")}
         url={`${baseUrl}/branding/white-label`}
@@ -65,7 +65,7 @@ export const MobileView = ({
         onClickLink={onClickLink}
       />
       {displayAbout ? (
-        <MobileCategoryWrapper
+        <CategoryItem
           title={t("CompanyInfoSettings")}
           subtitle={t("BrandingSectionDescription", {
             productName: t("ProductName"),
@@ -77,7 +77,7 @@ export const MobileView = ({
         />
       ) : null}
       {displayAdditional ? (
-        <MobileCategoryWrapper
+        <CategoryItem
           title={t("AdditionalResources")}
           subtitle={t("AdditionalResourcesSubtitle")}
           url={`${baseUrl}/branding/additional-resources`}

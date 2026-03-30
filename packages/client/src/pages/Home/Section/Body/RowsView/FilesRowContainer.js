@@ -29,7 +29,7 @@ import { inject, observer } from "mobx-react";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
-import { Context } from "@docspace/shared/utils";
+import { Context } from "@docspace/ui-kit/utils/context";
 import { FilesRowContainer as RowContainer } from "@docspace/shared/components/files-row";
 
 import withContainer from "../../../../../HOCs/withContainer";

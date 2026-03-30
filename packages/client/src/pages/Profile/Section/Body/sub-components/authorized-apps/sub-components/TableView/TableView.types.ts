@@ -1,5 +1,5 @@
 import { IClientProps } from "@docspace/shared/utils/oauth/types";
-import { ContextMenuModel } from "@docspace/shared/components/context-menu";
+import { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
 import { TTranslation } from "@docspace/shared/types";
 
 export interface TableViewProps {

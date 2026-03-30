@@ -28,7 +28,7 @@ import React from "react";
 
 import styled from "styled-components";
 
-import { HelpButton } from "@docspace/shared/components/help-button";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
 
 import InfoReactSvgUrl from "PUBLIC_DIR/images/info.react.svg?url";
 

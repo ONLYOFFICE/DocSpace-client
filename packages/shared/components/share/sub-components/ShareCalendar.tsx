@@ -24,13 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import moment from "moment";
+import { now, addToDate } from "@docspace/ui-kit/utils/date";
 
-import { useIsMobile } from "../../../hooks/useIsMobile";
+import { useIsMobile } from "@docspace/ui-kit/hooks/use-is-mobile";
 
-import { Calendar } from "../../calendar";
-import { DropDown } from "../../drop-down";
-import { Scrollbar } from "../../scrollbar";
+import { Calendar } from "@docspace/ui-kit/components/calendar";
+import { DropDown } from "@docspace/ui-kit/components/drop-down";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 
 import type { ShareCalendarProps } from "../Share.types";
 import styles from "../Share.module.scss";
@@ -45,8 +45,8 @@ const ShareCalendar = ({
   locale,
   bodyRef,
 }: ShareCalendarProps) => {
-  const selectedDate = moment();
-  const maxDate = moment().add(10, "years");
+  const selectedDate = now();
+  const maxDate = addToDate(now(), 10, "years")!;
 
   const isMobileView = useIsMobile();
 

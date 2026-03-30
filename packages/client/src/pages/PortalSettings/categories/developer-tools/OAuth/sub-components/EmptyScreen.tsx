@@ -28,9 +28,9 @@ import { useTranslation, Trans } from "react-i18next";
 import { useTheme } from "styled-components";
 
 import { EmptyView } from "@docspace/shared/components/empty-view";
-import { Text } from "@docspace/shared/components/text";
-import { globalColors } from "@docspace/shared/themes";
-import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
 
 import EmptyScreenOauthLightSvg from "PUBLIC_DIR/images/emptyview/empty.oauth2.light.svg";
 import EmptyScreenOauthDarkSvg from "PUBLIC_DIR/images/emptyview/empty.oauth2.dark.svg";

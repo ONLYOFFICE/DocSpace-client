@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { Page, WebSocketRoute } from "@playwright/test";
-import { ExportChatEventData, TOptSocket } from "../../utils/socket";
+import { ExportChatEventData, TOptSocket } from "@docspace/ui-kit/utils/socket";
 
 type ServerMessage =
   | string

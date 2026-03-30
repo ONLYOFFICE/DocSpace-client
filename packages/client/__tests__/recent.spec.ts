@@ -32,6 +32,7 @@ import {
   TypeSettings,
   filesSettingsHandler,
 } from "@docspace/shared/__mocks__/handlers";
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import { expect, test, TEST_PORT } from "./fixtures/base";
 
 test.describe("Recent", () => {
@@ -58,7 +59,7 @@ test.describe("Recent", () => {
 
     const emptyView = page.getByTestId("empty-view");
     await expect(emptyView).toBeVisible();
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "recent",
       "recent-empty.png",
@@ -76,7 +77,7 @@ test.describe("Recent", () => {
     await expect(title).toBeVisible();
     await expect(title).toHaveText("Spreadsheet via link");
 
-    await expect(page).toHaveScreenshot(["desktop", "recent", "recent.png"]);
+    await expectScreenshot(page,["desktop", "recent", "recent.png"]);
   });
 
   test("should context menu for recent file via link", async ({
@@ -90,7 +91,7 @@ test.describe("Recent", () => {
 
     const cell = page.locator('[data-testid="recent-cell-name-0"]');
     await cell.locator('[data-testid="link"]').click({ button: "right" });
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "recent",
       "recent-file-via-link-context-menu.png",
@@ -108,7 +109,7 @@ test.describe("Recent", () => {
 
     const cell = page.locator('[data-testid="recent-cell-name-1"]');
     await cell.locator('[data-testid="link"]').click({ button: "right" });
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "recent",
       "recent-file-from-room-context-menu.png",
@@ -126,7 +127,7 @@ test.describe("Recent", () => {
 
     const cell = page.locator('[data-testid="recent-cell-name-2"]');
     await cell.locator('[data-testid="link"]').click({ button: "right" });
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "recent",
       "recent-file-shared-with-me-context-menu.png",
@@ -141,7 +142,7 @@ test.describe("Recent", () => {
 
     const cell = page.locator('[data-testid="recent-cell-name-3"]');
     await cell.locator('[data-testid="link"]').click({ button: "right" });
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "recent",
       "recent-archive-context-menu.png",
@@ -156,7 +157,7 @@ test.describe("Recent", () => {
 
     const cell = page.locator('[data-testid="recent-cell-name-4"]');
     await cell.locator('[data-testid="link"]').click({ button: "right" });
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "recent",
       "recent-image-context-menu.png",
@@ -171,7 +172,7 @@ test.describe("Recent", () => {
 
     const cell = page.locator('[data-testid="recent-cell-name-5"]');
     await cell.locator('[data-testid="link"]').click({ button: "right" });
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "recent",
       "recent-file-context-menu.png",

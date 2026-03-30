@@ -24,10 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TBreadCrumb } from "../selector/Selector.types";
-import type { FilesSelectorProps } from "../../selectors/Files/FilesSelector.types";
-import type { TGetIcon } from "../../selectors/utils/types";
-import type { TFilesSettings } from "../../api/files/types";
+import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
+import type {
+  FilesSelectorProps,
+  FilesSettingsDto,
+} from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
+import type { TGetIcon } from "@docspace/ui-kit/selectors/utils/types";
 import type { DeviceType } from "../../enums";
 import type { BackupToPublicRoomOptionType } from "../../types";
 
@@ -42,9 +44,16 @@ export type FileInfoType = {
 export type FilesSelectorSettings =
   | {
       getIcon: TGetIcon;
-      filesSettings?: TFilesSettings;
+      filesSettings?: FilesSettingsDto & {
+        organizeRoomsGrouping?: boolean;
+      };
     }
-  | { getIcon?: never; filesSettings: TFilesSettings };
+  | {
+      getIcon?: never;
+      filesSettings: FilesSettingsDto & {
+        organizeRoomsGrouping?: boolean;
+      };
+    };
 
 export type FilesSelectorInputProps = {
   newPath: string;

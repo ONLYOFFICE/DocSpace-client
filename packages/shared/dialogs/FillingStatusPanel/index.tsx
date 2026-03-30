@@ -42,14 +42,17 @@ import { FILLING_FORM_STATUS_COLORS } from "../../constants";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { FileFillingFormStatus } from "../../enums";
 
-import { Text } from "../../components/text";
-import { TooltipContainer } from "../../components/tooltip";
-import { toastr } from "../../components/toast";
-import PublicRoomBar from "../../components/public-room-bar";
-import { Heading, HeadingLevel } from "../../components/heading";
-import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
+import { Text } from "@docspace/ui-kit/components/text";
+import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import PublicRoomBar from "@docspace/ui-kit/components/public-room-bar";
+import { Heading, HeadingLevel } from "@docspace/ui-kit/components/heading";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/ui-kit/components/modal-dialog";
 import { FillingRoleProcess } from "../../components/filling-role-process";
-import { Button, ButtonSize } from "../../components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { getFormFillingStatus as getFormFillingStatusApi } from "../../api/files";
 import type { TFileFillingFormStatus } from "../../api/files/types";
 import { createLoader } from "../../utils/createLoader";

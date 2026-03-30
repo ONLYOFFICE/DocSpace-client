@@ -28,7 +28,8 @@ import {
   confirmHandler,
   loginHandler,
 } from "@docspace/shared/__mocks__/handlers";
-import { expect, test } from "./fixtures/base";
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
+import { test } from "./fixtures/base";
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 
 const URL = "/login/confirm/Auth";
@@ -90,7 +91,7 @@ test("auth success", async ({
 
   await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
 
-  await expect(page).toHaveScreenshot(["desktop", "auth", "auth-success.png"]);
+  await expectScreenshot(page,["desktop", "auth", "auth-success.png"]);
 });
 
 test("auth with reference url success", async ({
@@ -108,7 +109,7 @@ test("auth with reference url success", async ({
     waitUntil: "load",
   });
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "auth",
     "auth-with-reference-url-success.png",
@@ -134,7 +135,7 @@ test("auth with file handler success", async ({
     waitUntil: "load",
   });
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "auth",
     "auth-with-file-handler-success-redirect.png",
@@ -159,7 +160,7 @@ test("auth with tfa success", async ({
     { waitUntil: "load" },
   );
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "auth",
     "auth-with-tfa-success.png",

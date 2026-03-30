@@ -31,6 +31,7 @@ import {
   selfByTypeHandler,
   aiAgentsHandler,
 } from "@docspace/shared/__mocks__/handlers";
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import { expect, test, TEST_PORT } from "./fixtures/base";
 import { ShareAccessRights } from "@docspace/shared/enums";
 
@@ -65,7 +66,7 @@ test.describe("DocAdmin context menu", () => {
     await contextMenuMoreOptions.hover();
     await expect(contextMenuMoreOptions).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "context-menu",
       "ai-room_doc-admin-manager.png",
@@ -90,7 +91,7 @@ test.describe("DocAdmin context menu", () => {
     await expect(contextMenuButton).toBeVisible();
     await contextMenuButton.click();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "context-menu",
       "ai-room_doc-admin-creator.png",
@@ -116,7 +117,7 @@ test.describe("DocAdmin context menu", () => {
     await expect(contextMenuButton).toBeVisible();
     await contextMenuButton.click();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "context-menu",
       "ai-room_doc-admin-out-of-room.png",
@@ -154,7 +155,7 @@ test.describe("RoomAdmin context menu", () => {
     await contextMenuMoreOptions.hover();
     await expect(contextMenuMoreOptions).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "context-menu",
       "ai-room_agent-owner.png",
@@ -182,7 +183,7 @@ test.describe("RoomAdmin context menu", () => {
     await contextMenuMoreOptions.hover();
     await expect(contextMenuMoreOptions).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "context-menu",
       "ai-room_agent-manager.png",
@@ -206,7 +207,7 @@ test.describe("RoomAdmin context menu", () => {
     await expect(contextMenuButton).toBeVisible();
     await contextMenuButton.click();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "context-menu",
       "ai-room_creator.png",

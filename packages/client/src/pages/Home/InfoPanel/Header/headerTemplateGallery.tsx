@@ -28,8 +28,8 @@ import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import { AsideHeader } from "@docspace/shared/components/aside-header";
-import { useEventListener } from "@docspace/shared/hooks/useEventListener";
+import { AsideHeader } from "@docspace/ui-kit/components/aside";
+import { useEventListener } from "@docspace/ui-kit/hooks/useEventListener";
 
 import styles from "./Header.module.scss";
 
@@ -63,8 +63,9 @@ const InfoPanelHeaderTemplateGallery = ({
       if (e.key === "Escape") {
         e.preventDefault();
         e.stopPropagation();
-        (e as unknown as { stopImmediatePropagation?: () => void })
-          .stopImmediatePropagation?.();
+        (
+          e as unknown as { stopImmediatePropagation?: () => void }
+        ).stopImmediatePropagation?.();
         onClose?.();
       }
     },

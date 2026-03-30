@@ -1,12 +1,12 @@
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
-import { TableCell, TableRow } from "@docspace/shared/components/table";
-import { Text } from "@docspace/shared/components/text";
+import { TableCell, TableRow } from "@docspace/ui-kit/components/table";
+import { Text } from "@docspace/ui-kit/components/text";
 
-import getCorrectDate from "@docspace/shared/utils/getCorrectDate";
+import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 
-import { getCookie } from "@docspace/shared/utils/cookie";
-import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
+import { getCookie } from "@docspace/ui-kit/utils/cookie";
+import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
 
 import NameCell from "./columns/name";
 

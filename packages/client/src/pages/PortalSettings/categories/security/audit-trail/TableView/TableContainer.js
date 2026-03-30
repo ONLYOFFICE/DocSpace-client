@@ -29,7 +29,7 @@ import { inject, observer } from "mobx-react";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
-import { TableContainer, TableBody } from "@docspace/shared/components/table";
+import { TableContainer, TableBody } from "@docspace/ui-kit/components/table";
 
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";

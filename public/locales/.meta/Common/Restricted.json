@@ -3,7 +3,7 @@
   "content": "Restricted",
   "content_en_sha1_hash": "aa2a08d2afa23e5f0a3fbe6e6ed494979fd09160",
   "created_at": "2025-05-19T21:30:47.929Z",
-  "updated_at": "2025-11-03T12:10:35.217Z",
+  "updated_at": "2026-02-19T13:36:32.745Z",
   "comment": {
     "text": "This translation key is used to display the label \"Restricted\" in the API Key settings. It appears as a tab title within the Create API Key Dialog and represents a permission level that restricts access to certain API scopes.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/utils.ts",
-      "line_number": 120,
+      "line_number": 121,
       "context": "case \"all\":\n return t(\"Common:All\");\n case \"readonly\":\n return t(\"Common:ReadOnly\");\n case \"restricted\":\n return t(\"Common:Restricted\");\n \n default:\n return t(\"Common:All\");\n }\n };",
       "module": "/packages/client"
     }

@@ -36,16 +36,15 @@ import { IClientProps } from "@docspace/shared/utils/oauth/types";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
-import { toastr } from "@docspace/shared/components/toast";
-import { TData } from "@docspace/shared/components/toast/Toast.type";
-import { InputBlock } from "@docspace/shared/components/input-block";
-import { InputSize, InputType } from "@docspace/shared/components/text-input";
+} from "@docspace/ui-kit/components/modal-dialog";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { toastr, type TData } from "@docspace/ui-kit/components/toast";
+import { InputBlock } from "@docspace/ui-kit/components/input-block";
+import { InputSize, InputType } from "@docspace/ui-kit/components/text-input";
 import { UserStore } from "@docspace/shared/store/UserStore";
-import { Link } from "@docspace/shared/components/link";
-import { getCorrectDate } from "@docspace/shared/utils";
+import { Link } from "@docspace/ui-kit/components/link";
+import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 
 import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
@@ -212,7 +211,7 @@ const GenerateDeveloperTokenDialog = ({
                     1: (
                       <Link
                         href={`mailto:${email}`}
-                        color={theme?.currentColorScheme?.main?.accent}
+                        color={theme?.currentColorScheme?.main?.accent ?? undefined}
                         dataTestId="generate_token_email_link"
                       />
                     ),

@@ -24,37 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Text } from "../text";
-import styles from "./EmptyView.module.scss";
-import EmptyViewOption from "./sub-components/EmptyView.option";
-import type { EmptyViewProps } from "./EmptyView.types";
+import { Link } from "react-router";
 
-const EmptyView = ({ description, icon, options, title }: EmptyViewProps) => {
-  return (
-    <div className={styles.wrapper} data-testid="empty-view">
-      <div className={styles.header}>
-        {icon}
-        <Text
-          as="h3"
-          fontWeight="700"
-          lineHeight="22px"
-          className={styles.headerTitle}
-        >
-          {title}
-        </Text>
-        <Text as="p" fontSize="12px" className={styles.subheading}>
-          {description}
-        </Text>
-      </div>
-      {options ? (
-        <div className={styles.body} data-testid="empty-view-body">
-          {options.map((option) => (
-            <EmptyViewOption key={option.key} option={option} />
-          ))}
-        </div>
-      ) : null}
-    </div>
-  );
+import {
+  EmptyView as EmptyViewBase,
+  type EmptyViewProps as EmptyViewBaseProps,
+} from "@docspace/ui-kit/components/empty-view";
+
+type EmptyViewProps = Omit<EmptyViewBaseProps, "LinkRouter">;
+
+const EmptyView = (props: EmptyViewProps) => {
+  return <EmptyViewBase {...props} LinkRouter={Link} />;
 };
 
 export { EmptyView };
@@ -62,4 +42,5 @@ export type {
   EmptyViewItemType,
   EmptyViewLinkType,
   EmptyViewOptionsType,
-} from "./EmptyView.types";
+  EmptyViewButtonType,
+} from "@docspace/ui-kit/components/empty-view";

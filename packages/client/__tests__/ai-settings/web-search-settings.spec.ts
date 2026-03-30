@@ -28,6 +28,7 @@
 
 import { settingsHandler, TypeSettings, selfActivationStatusHandler, aiProvidersHandler } from "@docspace/shared/__mocks__/handlers";
 import { aiWebSearchGetHandler, aiWebSearchPutHandler, PATH_AI_CONFIG_WEB_SEARCH } from "@docspace/shared/__mocks__/handlers/ai/webSearch";
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import { expect, test, TEST_PORT } from "../fixtures/base";
 
 test.describe("Web Search", () => {
@@ -67,7 +68,7 @@ test.describe("Web Search", () => {
 
     await saveButton.hover();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "web-search-settings",
       "web-search-no-providers.png",
@@ -92,7 +93,7 @@ test.describe("Web Search", () => {
     const engineCombobox = page.getByTestId("web-search-engine-combobox");
     await expect(engineCombobox.getByRole("button")).toBeEnabled();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "web-search-settings",
       "web-search-has-providers.png",
@@ -165,7 +166,7 @@ test.describe("Web Search", () => {
 
     await expect(resetButton).toBeEnabled();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "web-search-settings",
       "web-search-after-setup.png",
@@ -229,7 +230,7 @@ test.describe("Web Search", () => {
 
     await expect(resetButton).toBeDisabled();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "web-search-settings",
       "web-search-after-reset.png",
@@ -266,7 +267,7 @@ test.describe("Web Search", () => {
     const saveButton = page.getByTestId("web-search-save-button");
     await expect(saveButton).toBeDisabled();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "web-search-settings",
       "web-search-need-reset.png",

@@ -24,21 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { CircleSkeleton, CircleSkeletonProps } from "./circle";
-import { RectangleSkeleton, RectangleSkeletonProps } from "./rectangle";
 import { ContextMenuSkeleton } from "./context-menu";
-import { DialogSkeleton, DialogAsideSkeleton } from "./dialog";
-import { RowsSkeleton } from "./rows";
+import { RowsSkeleton } from "@docspace/ui-kit/components/rows";
 import { TableSkeleton } from "./table";
 
-export type { CircleSkeletonProps, RectangleSkeletonProps };
+export * from "@docspace/ui-kit/components/rectangle";
+export * from "@docspace/ui-kit/components/circle";
 
-export {
-  RectangleSkeleton,
-  CircleSkeleton,
-  ContextMenuSkeleton,
-  DialogSkeleton,
-  DialogAsideSkeleton,
-  RowsSkeleton,
-  TableSkeleton,
-};
+export { ContextMenuSkeleton, RowsSkeleton, TableSkeleton };

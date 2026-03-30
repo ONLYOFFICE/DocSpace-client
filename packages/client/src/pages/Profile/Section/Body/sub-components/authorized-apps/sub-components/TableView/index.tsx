@@ -1,7 +1,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import { TableContainer, TableBody } from "@docspace/shared/components/table";
+import { TableContainer, TableBody } from "@docspace/ui-kit/components/table";
 import { UserStore } from "@docspace/shared/store/UserStore";
 
 import OAuthStore from "SRC_DIR/store/OAuthStore";

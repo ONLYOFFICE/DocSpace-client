@@ -42,7 +42,7 @@ vi.mock("PUBLIC_DIR/images/downloading.dark.react.svg", () => ({
 }));
 
 // Mock portal logo component
-vi.mock("../portal-logo/PortalLogo", () => ({
+vi.mock("@docspace/ui-kit/components/portal-logo/PortalLogo", () => ({
   default: () => {
     return <div data-testid="portal-logo" />;
   },

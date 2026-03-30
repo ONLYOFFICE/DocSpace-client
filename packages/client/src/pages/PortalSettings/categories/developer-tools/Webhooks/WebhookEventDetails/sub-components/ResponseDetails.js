@@ -30,12 +30,12 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import json_beautifier from "csvjson-json_beautifier";
 
-import { Textarea } from "@docspace/shared/components/textarea";
-import { Button } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
+import { Textarea } from "@docspace/ui-kit/components/textarea";
+import { Button } from "@docspace/ui-kit/components/button";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import { isMobile } from "@docspace/shared/utils";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { isJSON } from "@docspace/shared/utils/json";
 
 const DetailsWrapper = styled.div`
@@ -74,104 +74,106 @@ const LargePayloadStub = styled.div`
   border: ${(props) => props.theme.client.settings.webhooks.border};
   border-radius: 3px;
 
-  ${isMobile() &&
-  css`
+  ${
+		isMobile() &&
+		css`
     justify-content: flex-start;
     flex-wrap: wrap;
     row-gap: 16px;
-  `}
+  `
+	}
 `;
 
 const ResponseDetails = ({ eventDetails }) => {
-  const responsePayload = eventDetails.responsePayload?.trim();
-  const { t } = useTranslation(["Webhooks"]);
+	const responsePayload = eventDetails.responsePayload?.trim();
+	const { t } = useTranslation(["Webhooks"]);
 
-  const beautifiedJSON = isJSON(responsePayload)
-    ? json_beautifier(JSON.parse(responsePayload), {
-        inlineShortArrays: true,
-      })
-    : responsePayload;
+	const beautifiedJSON = isJSON(responsePayload)
+		? json_beautifier(JSON.parse(responsePayload), {
+				inlineShortArrays: true,
+			})
+		: responsePayload;
 
-  const numberOfLines = isJSON(responsePayload)
-    ? beautifiedJSON.split("\n").length
-    : responsePayload.split("\n").length;
+	const numberOfLines = isJSON(responsePayload)
+		? beautifiedJSON.split("\n").length
+		: responsePayload.split("\n").length;
 
-  const openRawPayload = () => {
-    const rawPayload = window.open("");
-    isJSON(responsePayload)
-      ? rawPayload.document.write(
-          beautifiedJSON.replace(/(?:\r\n|\r|\n)/g, "<br/>"),
-        )
-      : rawPayload.document.write(responsePayload);
-    rawPayload.focus();
-  };
+	const openRawPayload = () => {
+		const rawPayload = window.open("");
+		isJSON(responsePayload)
+			? rawPayload.document.write(
+					beautifiedJSON.replace(/(?:\r\n|\r|\n)/g, "<br/>"),
+				)
+			: rawPayload.document.write(responsePayload);
+		rawPayload.focus();
+	};
 
-  return (
-    <DetailsWrapper>
-      <Text as="h3" fontWeight={600} className="mb-4 mt-7">
-        {t("ResponsePostHeader")}
-      </Text>
-      {isJSON(eventDetails.responseHeaders) ? (
-        <Textarea
-          classNameCopyIcon="response-header-copy"
-          value={eventDetails.responseHeaders}
-          enableCopy
-          hasNumeration
-          isFullHeight
-          isJSONField
-          copyInfoText={t("ResponseHeaderCopied")}
-        />
-      ) : (
-        <Textarea
-          value={eventDetails.responseHeaders}
-          heightScale
-          className="textareaBody"
-        />
-      )}
-      <Text as="h3" fontWeight={600} className="mb-4 mt-16">
-        {t("ResponsePostBody")}
-      </Text>
-      {responsePayload.length > 4000 || numberOfLines > 100 ? (
-        <LargePayloadStub>
-          <Text fontWeight={600} color={globalColors.lightGrayDark}>
-            {t("PayloadIsTooLarge")}
-          </Text>
-          <Button
-            className="view-raw-payload"
-            size="small"
-            onClick={openRawPayload}
-            label={t("ViewRawPayload")}
-            scale={isMobile()}
-          />
-        </LargePayloadStub>
-      ) : responsePayload === "" ? (
-        <Textarea isDisabled />
-      ) : isJSON(responsePayload) ? (
-        <Textarea
-          classNameCopyIcon="response-body-copy"
-          value={responsePayload}
-          isJSONField
-          enableCopy
-          hasNumeration
-          isFullHeight
-          copyInfoText={t("ResponseBodyCopied")}
-        />
-      ) : (
-        <Textarea
-          classNameCopyIcon="response-body-copy"
-          value={responsePayload}
-          enableCopy
-          heightScale
-          className="textareaBody"
-          copyInfoText={t("ResponseBodyCopied")}
-        />
-      )}
-    </DetailsWrapper>
-  );
+	return (
+		<DetailsWrapper>
+			<Text as="h3" fontWeight={600} className="mb-4 mt-7">
+				{t("ResponsePostHeader")}
+			</Text>
+			{isJSON(eventDetails.responseHeaders) ? (
+				<Textarea
+					classNameCopyIcon="response-header-copy"
+					value={eventDetails.responseHeaders}
+					enableCopy
+					hasNumeration
+					isFullHeight
+					isJSONField
+					copyInfoText={t("ResponseHeaderCopied")}
+				/>
+			) : (
+				<Textarea
+					value={eventDetails.responseHeaders}
+					heightScale
+					className="textareaBody"
+				/>
+			)}
+			<Text as="h3" fontWeight={600} className="mb-4 mt-16">
+				{t("ResponsePostBody")}
+			</Text>
+			{responsePayload.length > 4000 || numberOfLines > 100 ? (
+				<LargePayloadStub>
+					<Text fontWeight={600} color={globalColors.lightGrayDark}>
+						{t("PayloadIsTooLarge")}
+					</Text>
+					<Button
+						className="view-raw-payload"
+						size="small"
+						onClick={openRawPayload}
+						label={t("ViewRawPayload")}
+						scale={isMobile()}
+					/>
+				</LargePayloadStub>
+			) : responsePayload === "" ? (
+				<Textarea isDisabled />
+			) : isJSON(responsePayload) ? (
+				<Textarea
+					classNameCopyIcon="response-body-copy"
+					value={responsePayload}
+					isJSONField
+					enableCopy
+					hasNumeration
+					isFullHeight
+					copyInfoText={t("ResponseBodyCopied")}
+				/>
+			) : (
+				<Textarea
+					classNameCopyIcon="response-body-copy"
+					value={responsePayload}
+					enableCopy
+					heightScale
+					className="textareaBody"
+					copyInfoText={t("ResponseBodyCopied")}
+				/>
+			)}
+		</DetailsWrapper>
+	);
 };
 
 export default inject(({ webhooksStore }) => {
-  const { eventDetails } = webhooksStore;
+	const { eventDetails } = webhooksStore;
 
-  return { eventDetails };
+	return { eventDetails };
 })(observer(ResponseDetails));

@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import moment from "moment";
 import { useTranslation } from "react-i18next";
 import React, {
   useState,
@@ -36,13 +35,17 @@ import React, {
   useDeferredValue,
 } from "react";
 
+import { Portal } from "@docspace/ui-kit/components/portal";
+
 import FillFormsReactSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
 
-import { Button, ButtonSize } from "../../components/button";
-import { toastr } from "../../components/toast";
-import { Portal } from "../../components/portal";
-import { useEventListener } from "../../hooks/useEventListener";
-import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { useEventListener } from "@docspace/ui-kit/hooks/useEventListener";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/ui-kit/components/modal-dialog";
 import {
   getLinkAccessRightOptions,
   getRoomLinkAccessOptions,
@@ -56,11 +59,12 @@ import {
   isFolderOrRoom,
   isRoom,
 } from "../../utils/typeGuards";
+import { parseToDateTime } from "@docspace/ui-kit/utils/date";
 
 import { ShareLinkService } from "../../services/share-link.service";
 import type { TFileLink } from "../../api/files/types";
 import type { TError } from "../../utils/axiosClient";
-import type { TOption } from "../../components/combobox";
+import type { TOption } from "@docspace/ui-kit/components/combobox";
 
 import UnsavedChangesDialog from "../unsaved-changes-dialog";
 
@@ -374,7 +378,10 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
 
   useEffect(() => {
     const isSameDateCheck =
-      date || expirationDate ? moment(date).isSame(expirationDate) : true;
+      date || expirationDate
+        ? parseToDateTime(date)?.toMillis() ===
+          parseToDateTime(expirationDate)?.toMillis()
+        : true;
     setIsSameDate(isSameDateCheck);
   }, [date, expirationDate]);
 
@@ -407,7 +414,7 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
     }
 
     if (isExpired) {
-      return t("Common:LinkHasExpiredAndHasBeenDisabled");
+      return t("Common:LinkLifetimeExpired");
     }
 
     return expirationDate

@@ -29,15 +29,13 @@
 import React, { useMemo } from "react";
 import dynamic from "next/dynamic";
 import { useTranslation } from "react-i18next";
-import {
-  DocumentEditor,
-  type IConfig,
-} from "@onlyoffice/document-editor-react";
+
+import { DocumentEditor, type IConfig } from "@docspace/ui-kit/document-editor";
 
 import { ThemeKeys } from "@docspace/shared/enums";
 import { getEditorTheme } from "@docspace/shared/utils";
 import { EDITOR_ID } from "@docspace/shared/constants";
-import { useTheme } from "@docspace/shared/hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import UserAvatarBaseSvgUrl from "PUBLIC_DIR/images/avatar.editor.base.svg?url";
 import UserAvatarDarkSvgUrl from "PUBLIC_DIR/images/avatar.editor.dark.svg?url";
@@ -57,6 +55,8 @@ import useEditorEvents from "@/hooks/useEditorEvents";
 import useGoBackAndClose from "@/hooks/useGoBackAndClose";
 import { isPDFDocument } from "@/utils";
 
+import Bar from "./Bar";
+
 const Editor = ({
   config,
   successAuth,
@@ -70,6 +70,8 @@ const Editor = ({
   isSkipError,
 
   sdkConfig,
+  generationToolCallState,
+
   organizationName = "",
   filesSettings,
 
@@ -82,11 +84,11 @@ const Editor = ({
   onSDKRequestSelectSpreadsheet,
   onSDKRequestSelectDocument,
   onSDKRequestReferenceSource,
-  onStartFillingVDRPanel,
+  onOpenRoleMappingPanel,
   setFillingStatusDialogVisible,
   openShareFormDialog,
+  disconnectUsers,
   onStartFilling,
-  encryptedSessionId,
 }: EditorProps) => {
   const { t, i18n } = useTranslation(["Common", "Editor", "DeepLink"]);
   const { isBase } = useTheme();
@@ -120,7 +122,6 @@ const Editor = ({
 
     onRequestRefreshFile,
     onInfo,
-    onSaveEncryptedDocument,
   } = useEditorEvents({
     user,
     successAuth,
@@ -135,9 +136,10 @@ const Editor = ({
     organizationName,
     setFillingStatusDialogVisible,
     openShareFormDialog,
-    onStartFillingVDRPanel,
+    onOpenRoleMappingPanel,
     shareKey,
-    encryptedSessionId,
+    generationToolCallState,
+    disconnectUsers,
   });
 
   useInit({
@@ -163,22 +165,16 @@ const Editor = ({
   );
 
   const newConfig: IConfig = useMemo(() => {
-    if (!config) return {};
-
-    const cfg: IConfig = {
-      document: { ...config.document },
-      documentType: config.documentType,
-      token: config.token,
-      type: config.type,
-      editorConfig: { ...config.editorConfig },
-    };
-
-    if (encryptedSessionId && cfg.document) {
-      cfg.document.url = "__data__";
-    }
-
-    return cfg;
-  }, [config, encryptedSessionId]);
+    return config
+      ? {
+          document: config.document,
+          documentType: config.documentType,
+          token: config.token,
+          type: config.type,
+          editorConfig: { ...config.editorConfig },
+        }
+      : {};
+  }, [config]);
 
   // if (config) newConfig.editorConfig = { ...config.editorConfig };
 
@@ -319,31 +315,34 @@ const Editor = ({
     newConfig.events.onRequestFillingStatus = onRequestFillingStatus;
   }
 
-  if (encryptedSessionId && newConfig.events) {
-    (newConfig.events as Record<string, unknown>).onSaveDocument =
-      onSaveEncryptedDocument;
-    delete newConfig.events.onRequestHistory;
-    delete newConfig.events.onRequestRestore;
-    delete newConfig.events.onRequestHistoryData;
-  }
-
   return (
-    <DocumentEditor
-      id={EDITOR_ID}
-      documentServerUrl={documentServerUrl}
-      config={
-        errorMessage || isSkipError
-          ? {
-              events: {
-                onAppReady: onSDKAppReady,
-              },
-            }
-          : newConfig
-      }
-      height="100%"
-      width="100%"
-      events_onDocumentReady={onDocumentReady}
-    />
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        width: "100%",
+      }}
+    >
+      <div style={{ height: "auto", overflow: "visible" }}>
+        <Bar quotaExceededScope={config?.quotaExceededScope} />
+      </div>
+      <DocumentEditor
+        id={EDITOR_ID}
+        documentServerUrl={documentServerUrl}
+        config={
+          errorMessage || isSkipError
+            ? {
+                events: {
+                  onAppReady: onSDKAppReady,
+                },
+              }
+            : newConfig
+        }
+        height="100%"
+        width="100%"
+      />
+    </div>
   );
 };
 

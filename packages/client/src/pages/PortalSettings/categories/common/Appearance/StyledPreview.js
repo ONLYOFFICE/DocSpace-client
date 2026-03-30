@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { injectDefaultTheme, NoUserSelect } from "@docspace/shared/utils";
 
 const StyledComponent = styled.div.attrs(injectDefaultTheme)`
@@ -177,10 +177,7 @@ const StyledComponent = styled.div.attrs(injectDefaultTheme)`
   }
 
   .color-badge rect {
-    fill: ${(props) =>
-      props.themePreview === "Dark" && props.selectThemeId === 7
-        ? globalColors.white
-        : props.colorPreview} !important;
+    fill: ${(props) => props.colorPreview} !important;
   }
 
   .color-loaders rect {
@@ -404,10 +401,7 @@ const StyledMobilePreview = styled.div`
   }
 
   .color-badge rect {
-    fill: ${(props) =>
-      props.themePreview === "Dark" && props.selectThemeId === 7
-        ? globalColors.white
-        : props.colorPreview} !important;
+    fill: ${(props) => props.colorPreview} !important;
   }
 
   .color-loaders rect {
@@ -567,10 +561,7 @@ const StyledMobilePreview = styled.div`
   }
 
   .color-badge rect {
-    fill: ${({ themePreview, selectThemeId, colorPreview }) =>
-      themePreview === "Dark" && selectThemeId === 7
-        ? globalColors.white
-        : colorPreview} !important;
+    fill: ${({ colorPreview }) => colorPreview} !important;
   }
   .section-badge {
     padding-inline-end: 12px;

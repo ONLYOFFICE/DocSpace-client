@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import AppLoader from "@docspace/shared/components/app-loader";
+import AppLoader from "@docspace/ui-kit/components/app-loader";
 
 export default async function Loading() {
   // You can add any UI inside Loading, including a Skeleton.

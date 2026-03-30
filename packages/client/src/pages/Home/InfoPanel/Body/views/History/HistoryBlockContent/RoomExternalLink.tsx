@@ -29,9 +29,9 @@ import type { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { Link } from "@docspace/shared/components/link";
-import { toastr } from "@docspace/shared/components/toast";
-import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/ui-kit/components/link";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { Text } from "@docspace/ui-kit/components/text";
 import { TFeedData } from "@docspace/shared/api/rooms/types";
 import { isRoom, isSharedLink } from "@docspace/shared/utils/typeGuards";
 

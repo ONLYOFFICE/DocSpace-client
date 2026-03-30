@@ -31,7 +31,8 @@ import { inject, observer } from "mobx-react";
 import { FileAction, Events } from "@docspace/shared/enums";
 import { getStartRoomParams } from "@docspace/shared/utils/rooms";
 import { getStartAgentParams } from "@docspace/shared/utils/aiAgents";
-import { toastr } from "@docspace/shared/components/toast";
+import { PDF_FORM_DIALOG_KEY } from "@docspace/shared/constants";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { getFormFillingTipsStorageName } from "@docspace/shared/utils";
 
@@ -310,11 +311,12 @@ const GlobalEvents = ({
      * @typedef {Object} DetailType
      * @property {import("@docspace/shared/api/files/types").TFile} file
      * @property {boolean} show
-     * @property {string} localKey
      * @param {CustomEvent<DetailType>} event
      */
     (event) => {
-      const { file, show, localKey } = event.detail;
+      const { file, show } = event.detail;
+
+      const localKey = `${PDF_FORM_DIALOG_KEY}-${userId}`;
 
       if (!show) {
         return toastr.success(

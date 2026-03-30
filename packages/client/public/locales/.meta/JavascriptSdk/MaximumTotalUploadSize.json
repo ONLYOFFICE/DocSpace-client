@@ -1,0 +1,28 @@
+{
+  "key_path": "MaximumTotalUploadSize",
+  "content": "Maximum total upload size",
+  "content_en_sha1_hash": "3aee15f81fedfe76b45e945ee7e72718d7299746",
+  "created_at": "2026-03-20T09:07:42.414Z",
+  "updated_at": "2026-03-20T09:47:33.652Z",
+  "comment": {
+    "text": "This key displays the label for a setting that defines the maximum total size allowed for file uploads. It appears in the Portal Settings, specifically within the developer tools section, likely as part of a size limit configuration. Translators should ensure the description accurately reflects the restriction on the total upload size.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T09:47:33.652Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Uploader.js",
+      "line_number": 522,
+      "context": "onSizeChange={setPerFileSize}\n />\n \n {config.isMultipleUpload && (\n <SizeLimitSetter\n labelText={t(\"MaximumTotalUploadSize\")}\n tooltipText={t(\"MaximumTotalUploadSizeDescription\")}\n configKey=\"maxTotalUploadSize\"\n defaultValue=\"100\"\n sizeUnits={fileSizeUnits}\n defaultUnit={defaultSizeUnit}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

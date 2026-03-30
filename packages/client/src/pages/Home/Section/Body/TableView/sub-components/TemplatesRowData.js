@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
-import { TableCell } from "@docspace/shared/components/table";
+import { TableCell } from "@docspace/ui-kit/components/table";
 import { classNames, getLastColumn } from "@docspace/shared/utils";
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import FileNameCell from "./FileNameCell";

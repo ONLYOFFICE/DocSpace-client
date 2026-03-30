@@ -30,19 +30,20 @@ import { useTranslation } from "react-i18next";
 
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
 import { TRoom } from "@docspace/shared/api/rooms/types";
-import ScrollbarContext from "@docspace/shared/components/scrollbar/custom-scrollbar/ScrollbarContext";
-import { AnimationEvents } from "@docspace/shared/hooks/useAnimation";
+import { ScrollbarContext } from "@docspace/ui-kit/components/scrollbar";
+import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 import ShareLoader from "@docspace/shared/skeletons/share";
 import { isFolder, isRoom } from "@docspace/shared/utils/typeGuards";
 import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 import { FolderType } from "@docspace/shared/enums";
-import { LoaderWrapper } from "@docspace/shared/components/loader-wrapper";
-import { useEventListener } from "@docspace/shared/hooks/useEventListener";
+import { LoaderWrapper } from "@docspace/ui-kit/components/loader-wrapper";
+import { useEventListener } from "@docspace/ui-kit/hooks/useEventListener";
 import { INFO_PANEL_LOADER_EVENT } from "@docspace/shared/constants";
 
-import InfoPanelStore, { InfoPanelView } from "SRC_DIR/store/InfoPanelStore";
+import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
+import { InfoPanelView } from "SRC_DIR/helpers/info-panel";
 import PublicRoomStore from "SRC_DIR/store/PublicRoomStore";
 
 import ItemTitle from "../../sub-components/ItemTitle";

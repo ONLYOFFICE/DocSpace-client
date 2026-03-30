@@ -33,8 +33,8 @@ import { inject, observer } from "mobx-react";
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import RetryIcon from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 
-import { Heading } from "@docspace/shared/components/heading";
-import { IconButton } from "@docspace/shared/components/icon-button";
+import { Heading } from "@docspace/ui-kit/components/heading";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 // import { Hint } from "../../styled-components";
 
 import {
@@ -44,15 +44,15 @@ import {
   injectDefaultTheme,
 } from "@docspace/shared/utils";
 
-import { TableGroupMenu } from "@docspace/shared/components/table";
+import { TableGroupMenu } from "@docspace/ui-kit/components/table";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { useTranslation } from "react-i18next";
 
-import { FloatingButton } from "@docspace/shared/components/floating-button";
+import { FloatingButton } from "@docspace/ui-kit/components/floating-button";
 
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 import { retryWebhooks } from "@docspace/shared/api/settings";
 import { formatFilters } from "SRC_DIR/helpers/webhooks";

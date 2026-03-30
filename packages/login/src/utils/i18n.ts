@@ -61,5 +61,13 @@ export const getI18NInstance = (portalLng: string) => {
 
   i18n.changeLanguage(portalLng);
 
+  if (typeof window !== "undefined") {
+    if (!window.i18n) {
+      window.i18n = { inLoad: [], loaded: {} };
+    }
+    window.i18n.t = i18n.t.bind(i18n);
+    window.i18n.instance = i18n;
+  }
+
   return i18n;
 };

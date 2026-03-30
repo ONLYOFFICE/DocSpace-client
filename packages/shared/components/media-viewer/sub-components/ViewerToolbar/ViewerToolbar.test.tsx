@@ -26,7 +26,7 @@
 
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import { ContextMenu } from "../../../context-menu/ContextMenu";
+import { ContextMenu } from "@docspace/ui-kit/components/context-menu";
 import { ToolbarActionType } from "../../MediaViewer.enums";
 import { ViewerToolbar } from "./index";
 import type { ToolbarItemType } from "./ViewerToolbar.props";
@@ -34,7 +34,7 @@ import type { ToolbarItemType } from "./ViewerToolbar.props";
 const DotsIcon = () => <div data-testid="dots-icon">Dots</div>;
 
 // Mock useClickOutside hook
-vi.mock("../../../../utils/useClickOutside", () => ({
+vi.mock("../../../../utils", () => ({
   useClickOutside: (ref: HTMLElement, callback: () => void) => {
     // Mock implementation that just stores the callback
 

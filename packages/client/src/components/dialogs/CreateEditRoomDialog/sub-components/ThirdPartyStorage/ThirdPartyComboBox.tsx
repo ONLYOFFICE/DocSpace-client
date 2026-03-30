@@ -30,18 +30,18 @@ import { ReactSVG } from "react-svg";
 import { isMobileOnly, isMobile } from "react-device-detect";
 import { TFunction } from "i18next";
 
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-import { Text } from "@docspace/shared/components/text";
-import { Tooltip } from "@docspace/shared/components/tooltip";
-import { toastr } from "@docspace/shared/components/toast";
-import { ComboBox } from "@docspace/shared/components/combobox";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { ComboBox } from "@docspace/ui-kit/components/combobox";
 import { TConnectingStorage } from "@docspace/shared/api/files/types";
-import { getOAuthToken } from "@docspace/shared/utils/common";
+import { getOAuthToken } from "@docspace/ui-kit/utils/get-oauth-token";
 
 import {
-  THIRD_PARTY_SERVICES_URL,
-  ThirdPartyServicesUrlName,
+	THIRD_PARTY_SERVICES_URL,
+	ThirdPartyServicesUrlName,
 } from "@docspace/shared/constants";
 import { injectDefaultTheme, isDesktop } from "@docspace/shared/utils";
 import api from "@docspace/shared/api";
@@ -62,7 +62,7 @@ const StyledStorageLocation = styled.div.attrs(injectDefaultTheme)`
 
     .dropdown-container {
       border: ${(props) =>
-        `1px solid ${props.theme.createEditRoomDialog.thirdpartyStorage.combobox.dropdownBorderColor}`};
+				`1px solid ${props.theme.createEditRoomDialog.thirdpartyStorage.combobox.dropdownBorderColor}`};
     }
 
     .combo-button {
@@ -110,7 +110,7 @@ const StyledComboBoxItem = styled.div<{ isDisabled?: boolean }>`
 
   .drop-down-item_text {
     color: ${({ theme, isDisabled }) =>
-      isDisabled ? theme.dropDownItem.disableColor : theme.dropDownItem.color};
+			isDisabled ? theme.dropDownItem.disableColor : theme.dropDownItem.color};
   }
   .drop-down-item_icon {
     display: flex;
@@ -130,252 +130,252 @@ const StyledComboBoxItem = styled.div<{ isDisabled?: boolean }>`
 `;
 
 type ThirdPartyComboBoxProps = {
-  t: TFunction;
+	t: TFunction;
 
-  storageLocation: TRoomStorageLocation;
-  onChangeStorageLocation: (value: TRoomStorageLocation) => void;
-  onChangeProvider: (value: TConnectingStorage) => void;
-  setConnectDialogVisible: (value: boolean) => void;
-  setRoomCreation: (value: boolean) => void;
+	storageLocation: TRoomStorageLocation;
+	onChangeStorageLocation: (value: TRoomStorageLocation) => void;
+	onChangeProvider: (value: TConnectingStorage) => void;
+	setConnectDialogVisible: (value: boolean) => void;
+	setRoomCreation: (value: boolean) => void;
 
-  saveThirdpartyResponse: DialogsStore["saveThirdpartyResponse"];
+	saveThirdpartyResponse: DialogsStore["saveThirdpartyResponse"];
 
-  setSaveThirdpartyResponse: DialogsStore["setSaveThirdpartyResponse"];
-  setConnectItem: DialogsStore["setConnectItem"];
+	setSaveThirdpartyResponse: DialogsStore["setSaveThirdpartyResponse"];
+	setConnectItem: DialogsStore["setConnectItem"];
 
-  setIsOauthWindowOpen: (value: boolean) => void;
+	setIsOauthWindowOpen: (value: boolean) => void;
 
-  openConnectWindow: ThirdPartyStore["openConnectWindow"];
-  connectItems: ThirdPartyStore["connectingStorages"];
+	openConnectWindow: ThirdPartyStore["openConnectWindow"];
+	connectItems: ThirdPartyStore["connectingStorages"];
 
-  isDisabled: boolean;
-  isAdmin: boolean;
+	isDisabled: boolean;
+	isAdmin: boolean;
 };
 
 const ThirdPartyComboBox = ({
-  t,
+	t,
 
-  storageLocation,
-  onChangeStorageLocation,
-  onChangeProvider,
+	storageLocation,
+	onChangeStorageLocation,
+	onChangeProvider,
 
-  connectItems,
-  setConnectDialogVisible,
-  setRoomCreation,
+	connectItems,
+	setConnectDialogVisible,
+	setRoomCreation,
 
-  saveThirdpartyResponse,
-  setSaveThirdpartyResponse,
-  openConnectWindow,
-  setConnectItem,
+	saveThirdpartyResponse,
+	setSaveThirdpartyResponse,
+	openConnectWindow,
+	setConnectItem,
 
-  setIsOauthWindowOpen,
+	setIsOauthWindowOpen,
 
-  isDisabled,
-  isAdmin,
+	isDisabled,
+	isAdmin,
 }: ThirdPartyComboBoxProps) => {
-  const defaultSelectedItem = {
-    key: "length",
-    label:
-      storageLocation?.provider?.title ||
-      t("ThirdPartyStorageComboBoxPlaceholder"),
-  };
+	const defaultSelectedItem = {
+		key: "length",
+		label:
+			storageLocation?.provider?.title ||
+			t("ThirdPartyStorageComboBoxPlaceholder"),
+	};
 
-  const [selectedItem, setSelectedItem] = useState(defaultSelectedItem);
+	const [selectedItem, setSelectedItem] = useState(defaultSelectedItem);
 
-  const thirdparties = connectItems.map((item) => ({
-    ...item,
-    title: ProviderKeyTranslation(item.providerKey, t),
-  }));
+	const thirdparties = connectItems.map((item) => ({
+		...item,
+		title: ProviderKeyTranslation(item.providerKey, t),
+	}));
 
-  const setStorageLocaiton = (
-    thirparty: TConnectingStorage,
-    isConnected?: boolean,
-  ) => {
-    if (!isConnected) {
-      window.open(
-        `${THIRD_PARTY_SERVICES_URL}${ThirdPartyServicesUrlName[thirparty.id! as keyof typeof ThirdPartyServicesUrlName]}`,
-        "_blank",
-      );
-      return;
-    }
-    onChangeProvider(thirparty);
-  };
+	const setStorageLocaiton = (
+		thirparty: TConnectingStorage,
+		isConnected?: boolean,
+	) => {
+		if (!isConnected) {
+			window.open(
+				`${THIRD_PARTY_SERVICES_URL}${ThirdPartyServicesUrlName[thirparty.id! as keyof typeof ThirdPartyServicesUrlName]}`,
+				"_blank",
+			);
+			return;
+		}
+		onChangeProvider(thirparty);
+	};
 
-  const onShowService = async () => {
-    setRoomCreation(true);
-    const provider = storageLocation.provider;
+	const onShowService = async () => {
+		setRoomCreation(true);
+		const provider = storageLocation.provider;
 
-    if (storageLocation.provider?.isOauth) {
-      setIsOauthWindowOpen(true);
-      const authModal = window.open(
-        "",
-        t("Common:Authorization"),
-        "height=600, width=1020",
-      );
-      openConnectWindow(provider!.providerKey!, authModal).then((modal) =>
-        getOAuthToken(modal)
-          .then((token) =>
-            api.files
-              .saveThirdParty(
-                provider!.oauthHref!,
-                "",
-                "",
-                token,
-                false,
-                ProviderKeyTranslation(provider!.providerKey, t),
-                provider!.providerKey!,
-                "",
-                true,
-              )
-              .then((res: unknown) => setSaveThirdpartyResponse(res)),
-          )
-          .catch((e) => {
-            if (!e) return;
-            toastr.error(e);
-            console.error(e);
-          })
-          .finally(() => {
-            authModal?.close();
-            setIsOauthWindowOpen(false);
-          }),
-      );
-    } else {
-      const providerTitle = ProviderKeyTranslation(provider!.providerKey, t);
-      setConnectItem({
-        title: providerTitle,
-        customer_title: providerTitle,
-        provider_key: provider!.providerKey,
-      });
-      setConnectDialogVisible(true);
-    }
-  };
+		if (storageLocation.provider?.isOauth) {
+			setIsOauthWindowOpen(true);
+			const authModal = window.open(
+				"",
+				t("Common:Authorization"),
+				"height=600, width=1020",
+			);
+			openConnectWindow(provider!.providerKey!, authModal).then((modal) =>
+				getOAuthToken(modal)
+					.then((token) =>
+						api.files
+							.saveThirdParty(
+								provider!.oauthHref!,
+								"",
+								"",
+								token,
+								false,
+								ProviderKeyTranslation(provider!.providerKey, t),
+								provider!.providerKey!,
+								"",
+								true,
+							)
+							.then((res: unknown) => setSaveThirdpartyResponse(res)),
+					)
+					.catch((e) => {
+						if (!e) return;
+						toastr.error(e);
+						console.error(e);
+					})
+					.finally(() => {
+						authModal?.close();
+						setIsOauthWindowOpen(false);
+					}),
+			);
+		} else {
+			const providerTitle = ProviderKeyTranslation(provider!.providerKey, t);
+			setConnectItem({
+				title: providerTitle,
+				customer_title: providerTitle,
+				provider_key: provider!.providerKey,
+			});
+			setConnectDialogVisible(true);
+		}
+	};
 
-  useEffect(() => {
-    if (!(saveThirdpartyResponse as unknown as { id: string })?.id) return;
-    onChangeStorageLocation({
-      ...storageLocation,
-      thirdpartyAccount: saveThirdpartyResponse,
-      storageFolderId: (saveThirdpartyResponse as unknown as { id: string }).id,
-    });
-    setSaveThirdpartyResponse(null);
-  }, [saveThirdpartyResponse]);
+	useEffect(() => {
+		if (!(saveThirdpartyResponse as unknown as { id: string })?.id) return;
+		onChangeStorageLocation({
+			...storageLocation,
+			thirdpartyAccount: saveThirdpartyResponse,
+			storageFolderId: (saveThirdpartyResponse as unknown as { id: string }).id,
+		});
+		setSaveThirdpartyResponse(null);
+	}, [saveThirdpartyResponse]);
 
-  const onSelect = (
-    event: React.MouseEvent<HTMLElement> | React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    const data = event.currentTarget.dataset;
+	const onSelect = (
+		event: React.MouseEvent<HTMLElement> | React.ChangeEvent<HTMLInputElement>,
+	) => {
+		const data = event.currentTarget.dataset;
 
-    const thirdparty = thirdparties.find((elm) => {
-      return elm.id === data.thirdPartyId;
-    });
+		const thirdparty = thirdparties.find((elm) => {
+			return elm.id === data.thirdPartyId;
+		});
 
-    thirdparty && setStorageLocaiton(thirdparty, thirdparty?.isConnected);
-    thirdparty?.isConnected
-      ? setSelectedItem({ key: thirdparty.id!, label: thirdparty.title })
-      : setSelectedItem({ ...defaultSelectedItem });
-  };
+		thirdparty && setStorageLocaiton(thirdparty, thirdparty?.isConnected);
+		thirdparty?.isConnected
+			? setSelectedItem({ key: thirdparty.id!, label: thirdparty.title })
+			: setSelectedItem({ ...defaultSelectedItem });
+	};
 
-  const getTextTooltip = () => {
-    return (
-      <Text fontSize="12px" noSelect>
-        {t("Common:EnableThirdPartyIntegration", {
-          productName: t("Common:ProductName"),
-        })}
-      </Text>
-    );
-  };
+	const getTextTooltip = () => {
+		return (
+			<Text fontSize="12px" noSelect>
+				{t("Common:EnableThirdPartyIntegration", {
+					productName: t("Common:ProductName"),
+				})}
+			</Text>
+		);
+	};
 
-  const advancedOptions = thirdparties
-    .sort((storage) => {
-      return storage.isConnected ? -1 : 1;
-    })
-    ?.map((item) => {
-      const disabled = !item.isConnected && !isAdmin;
-      const itemLabel =
-        item.title +
-        (item.isConnected ? "" : ` (${t("Common:ActivationRequired")})`);
+	const advancedOptions = thirdparties
+		.sort((storage) => {
+			return storage.isConnected ? -1 : 1;
+		})
+		?.map((item) => {
+			const disabled = !item.isConnected && !isAdmin;
+			const itemLabel =
+				item.title +
+				(item.isConnected ? "" : ` (${t("Common:ActivationRequired")})`);
 
-      const disabledData = disabled
-        ? { "data-tooltip-id": "file-links-tooltip", "data-tip": "tooltip" }
-        : {};
+			const disabledData = disabled
+				? { "data-tooltip-id": "file-links-tooltip", "data-tip": "tooltip" }
+				: {};
 
-      return (
-        <StyledComboBoxItem isDisabled={disabled} key={item.id}>
-          <DropDownItem
-            onClick={onSelect}
-            data-third-party-id={item.id}
-            disabled={disabled}
-            testId={`drop_down_item_${item.id}`}
-            {...disabledData}
-          >
-            <Text className="drop-down-item_text" fontWeight={600}>
-              {itemLabel}
-            </Text>
+			return (
+				<StyledComboBoxItem isDisabled={disabled} key={item.id}>
+					<DropDownItem
+						onClick={onSelect}
+						data-third-party-id={item.id}
+						disabled={disabled}
+						testId={`drop_down_item_${item.id}`}
+						{...disabledData}
+					>
+						<Text className="drop-down-item_text" fontWeight={600}>
+							{itemLabel}
+						</Text>
 
-            {!disabled && !item.isConnected ? (
-              <ReactSVG
-                src={ExternalLinkReactSvgUrl}
-                className="drop-down-item_icon"
-              />
-            ) : null}
-          </DropDownItem>
-          {disabled ? (
-            <Tooltip
-              float={isDesktop()}
-              id="file-links-tooltip"
-              getContent={getTextTooltip}
-              place="bottom"
-            />
-          ) : null}
-        </StyledComboBoxItem>
-      );
-    });
+						{!disabled && !item.isConnected ? (
+							<ReactSVG
+								src={ExternalLinkReactSvgUrl}
+								className="drop-down-item_icon"
+							/>
+						) : null}
+					</DropDownItem>
+					{disabled ? (
+						<Tooltip
+							float={isDesktop()}
+							id="file-links-tooltip"
+							getContent={getTextTooltip}
+							place="bottom"
+						/>
+					) : null}
+				</StyledComboBoxItem>
+			);
+		});
 
-  return (
-    <StyledStorageLocation>
-      <div className="set_room_params-thirdparty">
-        <ComboBox
-          className="thirdparty-combobox"
-          selectedOption={selectedItem}
-          options={[]}
-          advancedOptions={
-            <>
-              {advancedOptions}
-              <div />
-            </>
-          }
-          scaled
-          withBackdrop={isMobile}
-          size="content"
-          manualWidth="auto"
-          isMobileView={isMobileOnly}
-          directionY="both"
-          displaySelectedOption
-          noBorder={false}
-          isDefaultMode
-          hideMobileView={false}
-          forceCloseClickOutside
-          scaledOptions
-          showDisabledItems
-          displayArrow
-          dataTestId="create_edit_room_thirdparty_combobox"
-        />
-        <Button
-          id="shared_third-party-storage_connect"
-          isDisabled={
-            !storageLocation?.provider ||
-            !!storageLocation?.thirdpartyAccount ||
-            isDisabled
-          }
-          className="set_room_params-thirdparty-connect"
-          size={ButtonSize.small}
-          label={t("Common:Connect")}
-          onClick={onShowService}
-          testId="create_edit_room_thirdparty_connect"
-        />
-      </div>
-    </StyledStorageLocation>
-  );
+	return (
+		<StyledStorageLocation>
+			<div className="set_room_params-thirdparty">
+				<ComboBox
+					className="thirdparty-combobox"
+					selectedOption={selectedItem}
+					options={[]}
+					advancedOptions={
+						<>
+							{advancedOptions}
+							<div />
+						</>
+					}
+					scaled
+					withBackdrop={isMobile}
+					size="content"
+					manualWidth="auto"
+					isMobileView={isMobileOnly}
+					directionY="both"
+					displaySelectedOption
+					noBorder={false}
+					isDefaultMode
+					hideMobileView={false}
+					forceCloseClickOutside
+					scaledOptions
+					showDisabledItems
+					displayArrow
+					dataTestId="create_edit_room_thirdparty_combobox"
+				/>
+				<Button
+					id="shared_third-party-storage_connect"
+					isDisabled={
+						!storageLocation?.provider ||
+						!!storageLocation?.thirdpartyAccount ||
+						isDisabled
+					}
+					className="set_room_params-thirdparty-connect"
+					size={ButtonSize.small}
+					label={t("Common:Connect")}
+					onClick={onShowService}
+					testId="create_edit_room_thirdparty_connect"
+				/>
+			</div>
+		</StyledStorageLocation>
+	);
 };
 
 export default ThirdPartyComboBox;

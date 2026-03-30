@@ -28,7 +28,7 @@ import { Trans } from "react-i18next";
 
 import { EmployeeStatus } from "@docspace/shared/enums";
 
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 export const getUserStatus = (user) => {
   switch (user.status) {

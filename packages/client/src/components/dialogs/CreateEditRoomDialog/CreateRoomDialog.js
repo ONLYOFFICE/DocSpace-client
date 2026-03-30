@@ -31,10 +31,10 @@ import {
   getRoomCreationAdditionalParams,
   getStartRoomParams,
 } from "@docspace/shared/utils/rooms";
-import { Button } from "@docspace/shared/components/button";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import RoomSelector from "@docspace/shared/selectors/Room";
-import { FolderType, RoomsType } from "@docspace/shared/enums";
+import { Button } from "@docspace/ui-kit/components/button";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import RoomSelector from "@docspace/ui-kit/selectors/Room";
+import { FolderType } from "@docspace/shared/enums";
 
 import TagHandler from "../../../helpers/TagHandler";
 import SetRoomParams from "./sub-components/SetRoomParams";
@@ -113,7 +113,6 @@ const CreateRoomDialog = ({
     setRoomParams((prev) => ({
       ...prev,
       type: newRoomType,
-      isPrivate: newRoomType === RoomsType.Private,
       storageLocation: {
         isThirdparty: false,
       },
@@ -129,12 +128,7 @@ const CreateRoomDialog = ({
       return;
     }
 
-    const type = roomParams.isPrivate ? RoomsType.CustomRoom : roomParams.type;
-
-    await onCreate({
-      ...roomParams,
-      type: type,
-    });
+    await onCreate({ ...roomParams });
     if (isMountRef.current) {
       setRoomParams(startRoomParams);
     }

@@ -26,8 +26,8 @@
 
 import React from "react";
 
-import { Text } from "@docspace/shared/components/text";
-import { useInterfaceDirection } from "@docspace/shared/hooks/useInterfaceDirection";
+import { Text } from "@docspace/ui-kit/components/text";
+import { useInterfaceDirection } from "@docspace/ui-kit/context/InterfaceDirectionContext";
 
 import { StyledLoadErrorIcon } from "./StyledComponents";
 

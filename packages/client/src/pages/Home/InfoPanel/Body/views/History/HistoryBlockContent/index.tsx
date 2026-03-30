@@ -50,7 +50,11 @@ const HistoryBlockContent = ({
   feed,
   historyWithFileList,
 }: HistoryBlockContentProps) => {
-  const { actionType, targetType } = getFeedInfo(feed);
+  const feedInfo = getFeedInfo(feed);
+
+  if (!feedInfo) return null;
+
+  const { actionType, targetType } = feedInfo;
 
   return (
     <div className="info-panel_history-block">

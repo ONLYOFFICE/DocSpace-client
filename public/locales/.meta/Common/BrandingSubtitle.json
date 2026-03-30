@@ -3,7 +3,7 @@
   "content": "Use this option to provide on-brand experience to users.",
   "content_en_sha1_hash": "af0e4b897992b3cd3dfa107a17d4b8837acdc69d",
   "created_at": "2025-05-26T07:15:40.986Z",
-  "updated_at": "2025-05-26T08:06:47.767Z",
+  "updated_at": "2026-02-19T13:36:32.715Z",
   "comment": {
     "text": "This translation key provides an on-brand experience for users, describing the functionality of a specific category. It is displayed on the Portal Settings page and appears below the Brand Name component. Translators should focus on conveying this information in a way that maintains the brand's tone and style.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/branding.js",
-      "line_number": 132,
-      "context": "<StyledComponent isSettingPaid={isSettingPaid}>\n {!isWhiteLabelLoaded && !isBrandNameLoaded ? (\n <LoaderBrandingSubtitle />\n ) : (\n <div className=\"category-description\">\n {t(\"Common:BrandingSubtitle\")}\n </div>\n )}\n <BrandName />\n <hr />\n <WhiteLabel />",
+      "line_number": 101,
+      "context": ">\n {!isWhiteLabelLoaded && !isBrandNameLoaded ? (\n <LoaderBrandingSubtitle />\n ) : (\n <div className=\"category-description\">\n {t(\"Common:BrandingSubtitle\")}\n </div>\n )}\n <BrandName />\n <hr />\n <WhiteLabel />",
       "module": "/packages/client"
     }
   ],

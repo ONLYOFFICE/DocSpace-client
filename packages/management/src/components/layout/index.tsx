@@ -28,7 +28,7 @@
 
 import React, { useEffect } from "react";
 
-import SocketHelper from "@docspace/shared/utils/socket";
+import SocketHelper from "@docspace/ui-kit/utils/socket";
 
 import type { TGetAllPortals } from "@docspace/shared/api/management/types";
 import useAppState from "@/hooks/useAppState";

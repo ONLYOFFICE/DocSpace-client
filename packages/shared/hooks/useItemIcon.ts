@@ -27,7 +27,7 @@
 import { useCallback } from "react";
 
 import { HTML_EXST, EBOOK_EXST } from "../constants";
-import { presentInArray } from "../utils";
+import { presentInArray } from "../utils/presentInArray";
 import { TFilesSettings } from "../api/files/types";
 import {
   iconSize24,

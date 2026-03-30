@@ -30,18 +30,18 @@ import { isMobile } from "react-device-detect";
 import classNames from "classnames";
 import { Nullable } from "../../../types";
 
-import { globalColors } from "../../../themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme";
 
 import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
-import { Text } from "../../../components/text";
-import { Badge } from "../../../components/badge";
-import { FieldContainer } from "../../../components/field-container";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Badge } from "@docspace/ui-kit/components/badge";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import {
   TextInput,
   InputType,
   InputSize,
-} from "../../../components/text-input";
-import { useTheme } from "../../../hooks/useTheme";
+} from "@docspace/ui-kit/components/text-input";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import { NotAvailable } from "../WhiteLabel/NotAvailable";
 import { IWhiteLabelData } from "../WhiteLabel/WhiteLabel.types";

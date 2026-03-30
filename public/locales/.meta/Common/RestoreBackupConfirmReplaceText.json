@@ -1,0 +1,28 @@
+{
+  "key_path": "RestoreBackupConfirmReplaceText",
+  "content": "This process will completely replace all current data, including the owner, users, and settings.",
+  "content_en_sha1_hash": "c6263da24285c043bb8eb202193dd683bb5453ef",
+  "created_at": "2026-03-20T09:07:35.044Z",
+  "updated_at": "2026-03-20T09:12:27.280Z",
+  "comment": {
+    "text": "This text appears within a restore backup confirmation dialog. It explains that restoring a backup will overwrite all existing data, including user accounts, settings, and the product owner. Translators should ensure the tone conveys the seriousness of this action.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T09:12:27.280Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/pages/backup/restore-backup/sub-components/restore-confirm-modal/index.tsx",
+      "line_number": 87,
+      "context": "{t(\"Common:RestoreBackupConfirmBoldText\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <Text as=\"p\" className={styles.restoreBackupConfirmText}>\n {t(\"Common:RestoreBackupConfirmReplaceText\")}\n </Text>\n <Text as=\"p\" className={styles.restoreBackupConfirmText}>\n {t(\"Common:RestoreBackupConfirmAccessText\")}\n </Text>",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

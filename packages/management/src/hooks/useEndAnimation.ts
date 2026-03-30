@@ -26,7 +26,7 @@
 
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { AnimationEvents } from "@docspace/shared/hooks/useAnimation";
+import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 
 const useEndAnimation = () => {
   const pathname = usePathname();

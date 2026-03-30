@@ -12,7 +12,6 @@
   "FolderTitleSkyDrive": "ໄດເລກະທໍລີ OneDrive",
   "FolderTitleWebDav": "ໄດເລກະທໍລີ WebDAV",
   "FolderTitleYandex": "ໄດເລກະທໍລີ Yandex",
-  "LinkValidTime": "ລິ້ງນີ້ໃຊ້ໄດ້ເປັນເວລາ {{days_count}} ມື້ເທົ່ານັ້ນ.",
   "NewForm": "ແບບຟອມ PDF",
   "OwnerChange": "ປ່ຽນເຈົ້າຂອງ",
   "RoleGuestDescriprion": "ແຂກສາມາດເຂົ້າເຖິງຫ້ອງທີ່ຖືກເຊີນເຂົ້າໄດ້, ນອກຈາກນັ້ນຍັງສາມາດສ້າງ ແລະ ແກ້ໄຂເອກະສານໄດ້ຖ້າຖືກມອບບົດບາດທີ່ເຫມາະສົມໃນຫ້ອງນັ້ນໆ.",
@@ -22,7 +21,5 @@
   "SubNewFormFile": "ຟອມທີ່ມີຂໍ້ມູນ",
   "ThirdPartyInfo": "ປ່ຽນຂໍ້ມູນພາກສ່ວນທີສາມ",
   "ThirdPartyTitle": "ການບໍລິການພາກສ່ວນທີສາມ",
-  "TitleShowActions": "ສະແດງ ໄຟລ໌ ການ​ປະ​ຕິ​ບັດ",
-  "TitleShowFolderActions": "ສະແດງ ໂຟນເດີ ການ​ປະ​ຕິ​ບັດ",
   "TrashItemsDeleteSuccess": "ອົງປະກອບທີ່ເລືອກຖືກລຶບອອກຈາກ {{sectionName}} ສຳເລັດແລ້ວ"
 }

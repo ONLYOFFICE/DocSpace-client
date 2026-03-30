@@ -1,0 +1,28 @@
+{
+  "key_path": "MaximumFilesSizeDescription",
+  "content": "Files larger than this size won't be uploaded.",
+  "content_en_sha1_hash": "c2d7e8a497bd6c39f056d6fb8f2dcf494a39dd32",
+  "created_at": "2026-03-20T09:07:42.421Z",
+  "updated_at": "2026-03-20T09:48:58.842Z",
+  "comment": {
+    "text": "This text appears as a tooltip on the file upload interface. It informs users that files exceeding this size limit cannot be uploaded. Translators should ensure the wording accurately conveys the size restriction for individual files.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T09:48:58.842Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Uploader.js",
+      "line_number": 505,
+      "context": "}\n tooltipText={\n config.isMultipleUpload\n ? config.isFolderUpload\n ? t(\"MaximumFoldersSizeDescription\")\n : t(\"MaximumFilesSizeDescription\")\n : config.isFolderUpload\n ? t(\"MaximumFolderSizeDescription\")\n : t(\"MaximumFileSizeDescription\")\n }\n configKey=\"maxPerUploadSize\"",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

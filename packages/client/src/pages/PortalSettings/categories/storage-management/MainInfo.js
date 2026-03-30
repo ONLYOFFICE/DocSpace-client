@@ -25,10 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
-import moment from "moment";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
+import {
+  parseToDateTime,
+  formatDateLocalized,
+} from "@docspace/ui-kit/utils/date";
 
 import { StyledMainInfo } from "./StyledComponent";
 
@@ -36,7 +39,10 @@ const MainInfoComponent = (props) => {
   const { portalInfo, activeUsersCount } = props;
   const { t } = useTranslation("Settings");
 
-  const creationDate = moment(portalInfo.creationDateTime).format("L");
+  const creationDate = formatDateLocalized(
+    parseToDateTime(portalInfo.creationDateTime),
+    "DATE_SHORT",
+  );
 
   return (
     <StyledMainInfo>

@@ -28,9 +28,9 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
-import { Text } from "@docspace/shared/components/text";
-import { RowContent } from "@docspace/shared/components/rows";
-import getCorrectDate from "@docspace/shared/utils/getCorrectDate";
+import { Text } from "@docspace/ui-kit/components/text";
+import { RowContent } from "@docspace/ui-kit/components/rows";
+import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 
 import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";
 

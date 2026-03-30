@@ -29,7 +29,7 @@ import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import { injectDefaultTheme } from "@docspace/shared/utils";
-import { TableBody, TableContainer } from "@docspace/shared/components/table";
+import { TableBody, TableContainer } from "@docspace/ui-kit/components/table";
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";
 import { TableViewProps } from "../../types";
@@ -64,6 +64,13 @@ const TableWrapper = styled(TableContainer).attrs(injectDefaultTheme)`
       .table-container_row-context-menu-wrapper {
         margin-inline-end: -20px;
         padding-inline-end: 20px;
+      }
+    }
+
+    &:first-child:hover {
+      .table-container_cell {
+        margin-top: 0;
+        border-top: none;
       }
     }
   }

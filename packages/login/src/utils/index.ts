@@ -28,7 +28,7 @@ import { thirdPartyLogin } from "@docspace/shared/utils/loginUtils";
 import { Nullable, TTranslation } from "@docspace/shared/types";
 
 import { parseURL } from "@docspace/shared/utils/common";
-import { getCookie } from "@docspace/shared/utils";
+import { getCookie } from "@docspace/ui-kit/utils/cookie";
 
 import { getAvailablePortals as getAvailablePortalsServer } from "./actions";
 
@@ -221,10 +221,11 @@ export const encodeParams = (str: string) => {
 };
 
 export async function getAvailablePortals(data: {
-  Email: string;
-  PasswordHash: string;
+  Email?: string;
+  PasswordHash?: string;
   recaptchaResponse?: string | null | undefined;
   recaptchaType?: unknown | undefined;
+  ThirdPartyProfile?: string;
 }) {
   const config = window.ClientConfig;
 

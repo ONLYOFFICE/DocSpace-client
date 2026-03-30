@@ -27,80 +27,80 @@
 "use client";
 
 import { useCallback, useState } from "react";
-import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
+import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
 
 export const useFilesSelectorInput = () => {
-  const [newPath, setNewPathState] = useState("");
-  const [basePath, setBasePathState] = useState("");
-  const [isErrorPath, setIsErrorPath] = useState(false);
+	const [newPath, setNewPathState] = useState("");
+	const [basePath, setBasePathState] = useState("");
+	const [isErrorPath, setIsErrorPath] = useState(false);
 
-  const resetNewFolderPath = useCallback(() => {
-    setNewPathState(basePath);
-  }, [basePath]);
+	const resetNewFolderPath = useCallback(() => {
+		setNewPathState(basePath);
+	}, [basePath]);
 
-  const updateBaseFolderPath = useCallback(() => {
-    setBasePathState(newPath);
-  }, [newPath]);
+	const updateBaseFolderPath = useCallback(() => {
+		setBasePathState(newPath);
+	}, [newPath]);
 
-  const toDefaultFileSelector = useCallback(() => {
-    setNewPathState("");
-    setBasePathState("");
-    setIsErrorPath(false);
-  }, []);
+	const toDefaultFileSelector = useCallback(() => {
+		setNewPathState("");
+		setBasePathState("");
+		setIsErrorPath(false);
+	}, []);
 
-  const convertPath = useCallback(
-    (foldersArray: TBreadCrumb[], fileName?: string) => {
-      let path = "";
+	const convertPath = useCallback(
+		(foldersArray: TBreadCrumb[], fileName?: string) => {
+			let path = "";
 
-      if (foldersArray.length === 0) {
-        setIsErrorPath(true);
+			if (foldersArray.length === 0) {
+				setIsErrorPath(true);
 
-        return path;
-      }
+				return path;
+			}
 
-      if (foldersArray.length > 1) {
-        foldersArray.forEach((item) => {
-          if (!path) {
-            path += `${item.label}`;
-          } else path = `${path} / ${item.label}`;
-        });
-      } else {
-        foldersArray.forEach((item) => {
-          path = `${item.label}`;
-        });
-      }
+			if (foldersArray.length > 1) {
+				foldersArray.forEach((item) => {
+					if (!path) {
+						path += `${item.label}`;
+					} else path = `${path} / ${item.label}`;
+				});
+			} else {
+				foldersArray.forEach((item) => {
+					path = `${item.label}`;
+				});
+			}
 
-      if (fileName) path = `${path}/${fileName}`;
+			if (fileName) path = `${path}/${fileName}`;
 
-      return path;
-    },
-    [],
-  );
+			return path;
+		},
+		[],
+	);
 
-  const setBasePath = useCallback(
-    (folders: TBreadCrumb[]) => {
-      setBasePathState(convertPath(folders));
-    },
-    [convertPath],
-  );
+	const setBasePath = useCallback(
+		(folders: TBreadCrumb[]) => {
+			setBasePathState(convertPath(folders));
+		},
+		[convertPath],
+	);
 
-  const setNewPath = useCallback(
-    (folders: TBreadCrumb[], fileName?: string) => {
-      setNewPathState(convertPath(folders, fileName));
+	const setNewPath = useCallback(
+		(folders: TBreadCrumb[], fileName?: string) => {
+			setNewPathState(convertPath(folders, fileName));
 
-      setIsErrorPath(false);
-    },
-    [convertPath],
-  );
+			setIsErrorPath(false);
+		},
+		[convertPath],
+	);
 
-  return {
-    newPath,
-    basePath,
-    isErrorPath,
-    setBasePath,
-    setNewPath,
-    toDefaultFileSelector,
-    resetNewFolderPath,
-    updateBaseFolderPath,
-  };
+	return {
+		newPath,
+		basePath,
+		isErrorPath,
+		setBasePath,
+		setNewPath,
+		toDefaultFileSelector,
+		resetNewFolderPath,
+		updateBaseFolderPath,
+	};
 };

@@ -27,167 +27,167 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { getTitleWithoutExtension } from "@docspace/shared/utils";
 import Dialog from "./sub-components/Dialog";
 
 const RenameEvent = ({
-  type,
-  item,
-  onClose,
+	type,
+	item,
+	onClose,
 
-  addActiveItems,
+	addActiveItems,
 
-  updateFile,
-  renameFolder,
+	updateFile,
+	renameFolder,
 
-  completeAction,
-  clearActiveOperations,
+	completeAction,
+	clearActiveOperations,
 
-  setEventDialogVisible,
-  eventDialogVisible,
+	setEventDialogVisible,
+	eventDialogVisible,
 }) => {
-  const [startValue, setStartValue] = React.useState("");
+	const [startValue, setStartValue] = React.useState("");
 
-  const { t } = useTranslation(["Files"]);
+	const { t } = useTranslation(["Files"]);
 
-  const onCancel = React.useCallback(
-    (e) => {
-      onClose && onClose(e);
-      setEventDialogVisible(false);
-    },
-    [onClose, setEventDialogVisible],
-  );
+	const onCancel = React.useCallback(
+		(e) => {
+			onClose && onClose(e);
+			setEventDialogVisible(false);
+		},
+		[onClose, setEventDialogVisible],
+	);
 
-  React.useEffect(() => {
-    setStartValue(getTitleWithoutExtension(item, false));
+	React.useEffect(() => {
+		setStartValue(getTitleWithoutExtension(item, false));
 
-    setEventDialogVisible(true);
-  }, [item]);
+		setEventDialogVisible(true);
+	}, [item]);
 
-  const onUpdate = React.useCallback(
-    async (e, value) => {
-      const originalTitle = getTitleWithoutExtension(item);
+	const onUpdate = React.useCallback(
+		async (e, value) => {
+			const originalTitle = getTitleWithoutExtension(item);
 
-      let timerId;
+			let timerId;
 
-      const isSameTitle =
-        originalTitle.trim() === value.trim() || value.trim() === "";
+			const isSameTitle =
+				originalTitle.trim() === value.trim() || value.trim() === "";
 
-      const isFile = item.fileExst || item.contentLength;
+			const isFile = item.fileExst || item.contentLength;
 
-      if (isSameTitle) {
-        setStartValue(originalTitle);
+			if (isSameTitle) {
+				setStartValue(originalTitle);
 
-        onCancel();
+				onCancel();
 
-        return completeAction(item, type);
-      }
-      timerId = setTimeout(() => {
-        isFile ? addActiveItems([item.id]) : addActiveItems(null, [item.id]);
-      }, 500);
+				return completeAction(item, type);
+			}
+			timerId = setTimeout(() => {
+				isFile ? addActiveItems([item.id]) : addActiveItems(null, [item.id]);
+			}, 500);
 
-      isFile
-        ? await updateFile(item.id, value)
-            .then(() => completeAction(item, type))
-            .then(() =>
-              toastr.success(
-                t("FileRenamed", {
-                  oldTitle: item.title,
-                  newTitle: value + item.fileExst,
-                }),
-              ),
-            )
-            .catch((err) => {
-              toastr.error(err);
-              completeAction(item, type);
-            })
-            .finally(() => {
-              clearTimeout(timerId);
-              timerId = null;
-              clearActiveOperations([item.id]);
+			isFile
+				? await updateFile(item.id, value)
+						.then(() => completeAction(item, type))
+						.then(() =>
+							toastr.success(
+								t("FileRenamed", {
+									oldTitle: item.title,
+									newTitle: value + item.fileExst,
+								}),
+							),
+						)
+						.catch((err) => {
+							toastr.error(err);
+							completeAction(item, type);
+						})
+						.finally(() => {
+							clearTimeout(timerId);
+							timerId = null;
+							clearActiveOperations([item.id]);
 
-              onCancel();
-            })
-        : await renameFolder(item.id, value)
-            .then(() => completeAction(item, type))
-            .then(() => {
-              toastr.success(
-                t("FolderRenamed", {
-                  folderTitle: item.title,
-                  newFoldedTitle: value,
-                }),
-              );
-            })
-            .catch((err) => {
-              toastr.error(err);
-              completeAction(item, type);
-            })
-            .finally(() => {
-              clearTimeout(timerId);
-              timerId = null;
-              clearActiveOperations(null, [item.id]);
+							onCancel();
+						})
+				: await renameFolder(item.id, value)
+						.then(() => completeAction(item, type))
+						.then(() => {
+							toastr.success(
+								t("FolderRenamed", {
+									folderTitle: item.title,
+									newFoldedTitle: value,
+								}),
+							);
+						})
+						.catch((err) => {
+							toastr.error(err);
+							completeAction(item, type);
+						})
+						.finally(() => {
+							clearTimeout(timerId);
+							timerId = null;
+							clearActiveOperations(null, [item.id]);
 
-              onCancel();
-            });
-    },
-    [
-      onCancel,
-      addActiveItems,
-      clearActiveOperations,
-      completeAction,
-      item,
-      t,
-      type,
-      updateFile,
-      renameFolder,
-    ],
-  );
+							onCancel();
+						});
+		},
+		[
+			onCancel,
+			addActiveItems,
+			clearActiveOperations,
+			completeAction,
+			item,
+			t,
+			type,
+			updateFile,
+			renameFolder,
+		],
+	);
 
-  return (
-    <Dialog
-      t={t}
-      visible={eventDialogVisible}
-      title={t("Common:Rename")}
-      startValue={startValue}
-      onSave={onUpdate}
-      onCancel={onCancel}
-      onClose={onCancel}
-    />
-  );
+	return (
+		<Dialog
+			t={t}
+			visible={eventDialogVisible}
+			title={t("Common:Rename")}
+			startValue={startValue}
+			onSave={onUpdate}
+			onCancel={onCancel}
+			onClose={onCancel}
+		/>
+	);
 };
 
 export default inject(
-  ({
-    filesStore,
-    filesActionsStore,
-    selectedFolderStore,
-    uploadDataStore,
-    dialogsStore,
-  }) => {
-    const { addActiveItems, updateFile, renameFolder } = filesStore;
+	({
+		filesStore,
+		filesActionsStore,
+		selectedFolderStore,
+		uploadDataStore,
+		dialogsStore,
+	}) => {
+		const { addActiveItems, updateFile, renameFolder } = filesStore;
 
-    const { id, setSelectedFolder } = selectedFolderStore;
+		const { id, setSelectedFolder } = selectedFolderStore;
 
-    const { completeAction } = filesActionsStore;
+		const { completeAction } = filesActionsStore;
 
-    const { clearActiveOperations } = uploadDataStore;
-    const { setEventDialogVisible, eventDialogVisible } = dialogsStore;
+		const { clearActiveOperations } = uploadDataStore;
+		const { setEventDialogVisible, eventDialogVisible } = dialogsStore;
 
-    return {
-      addActiveItems,
-      updateFile,
-      renameFolder,
+		return {
+			addActiveItems,
+			updateFile,
+			renameFolder,
 
-      completeAction,
+			completeAction,
 
-      clearActiveOperations,
-      setEventDialogVisible,
-      eventDialogVisible,
+			clearActiveOperations,
+			setEventDialogVisible,
+			eventDialogVisible,
 
-      selectedFolderId: id,
+			selectedFolderId: id,
 
-      setSelectedFolder,
-    };
-  },
+			setSelectedFolder,
+		};
+	},
 )(observer(RenameEvent));

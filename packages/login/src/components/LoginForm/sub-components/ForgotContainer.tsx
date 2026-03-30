@@ -28,10 +28,10 @@ import React, { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { isMobileOnly } from "react-device-detect";
 
-import { Checkbox } from "@docspace/shared/components/checkbox";
-import { HelpButton } from "@docspace/shared/components/help-button";
-import { Link, LinkType } from "@docspace/shared/components/link";
-import { Text } from "@docspace/shared/components/text";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
 import { RecaptchaType } from "@docspace/shared/enums";
 
 import { LoginDispatchContext } from "@/components/Login";
@@ -39,90 +39,90 @@ import { LoginDispatchContext } from "@/components/Login";
 import ForgotPasswordModalDialog from "./ForgotPasswordModalDialog";
 
 interface IForgotContainer {
-  cookieSettingsEnabled: boolean;
-  isChecked: boolean;
-  identifier: string;
-  onChangeCheckbox: VoidFunction;
-  reCaptchaPublicKey?: string;
-  reCaptchaType?: RecaptchaType;
+	cookieSettingsEnabled: boolean;
+	isChecked: boolean;
+	identifier: string;
+	onChangeCheckbox: VoidFunction;
+	reCaptchaPublicKey?: string;
+	reCaptchaType?: RecaptchaType;
 }
 
 const ForgotContainer = ({
-  cookieSettingsEnabled,
-  isChecked,
-  identifier,
-  onChangeCheckbox,
-  reCaptchaPublicKey,
-  reCaptchaType,
+	cookieSettingsEnabled,
+	isChecked,
+	identifier,
+	onChangeCheckbox,
+	reCaptchaPublicKey,
+	reCaptchaType,
 }: IForgotContainer) => {
-  const { setIsModalOpen } = useContext(LoginDispatchContext);
-  const { t } = useTranslation(["Login", "Common"]);
+	const { setIsModalOpen } = useContext(LoginDispatchContext);
+	const { t } = useTranslation(["Login", "Common"]);
 
-  const [isDialogVisible, setIsDialogVisible] = useState(false);
+	const [isDialogVisible, setIsDialogVisible] = useState(false);
 
-  const onClick = () => {
-    setIsDialogVisible(true);
-    setIsModalOpen(true);
-  };
+	const onClick = () => {
+		setIsDialogVisible(true);
+		setIsModalOpen(true);
+	};
 
-  const onDialogClose = () => {
-    setIsDialogVisible(false);
-    setIsModalOpen(false);
-  };
+	const onDialogClose = () => {
+		setIsDialogVisible(false);
+		setIsModalOpen(false);
+	};
 
-  return (
-    <div className="login-forgot-wrapper">
-      <div className="login-checkbox-wrapper">
-        <div className="remember-wrapper">
-          {!cookieSettingsEnabled ? (
-            <Checkbox
-              id="login_remember"
-              className="login-checkbox"
-              tabIndex={3}
-              isChecked={isChecked}
-              onChange={onChangeCheckbox}
-              label={t("Common:Remember")}
-              helpButton={
-                <HelpButton
-                  id="login_remember-hint"
-                  className="help-button"
-                  offsetRight={0}
-                  tooltipContent={
-                    <Text fontSize="12px">{t("RememberHelper")}</Text>
-                  }
-                  tooltipMaxWidth={isMobileOnly ? "240px" : "340px"}
-                  dataTestId="remember_help_button"
-                />
-              }
-              dataTestId="remember_checkbox"
-            />
-          ) : null}
-        </div>
+	return (
+		<div className="login-forgot-wrapper">
+			<div className="login-checkbox-wrapper">
+				<div className="remember-wrapper">
+					{!cookieSettingsEnabled ? (
+						<Checkbox
+							id="login_remember"
+							className="login-checkbox"
+							tabIndex={3}
+							isChecked={isChecked}
+							onChange={onChangeCheckbox}
+							label={t("Common:Remember")}
+							helpButton={
+								<HelpButton
+									id="login_remember-hint"
+									className="help-button"
+									offsetRight={0}
+									tooltipContent={
+										<Text fontSize="12px">{t("RememberHelper")}</Text>
+									}
+									tooltipMaxWidth={isMobileOnly ? "240px" : "340px"}
+									dataTestId="remember_help_button"
+								/>
+							}
+							dataTestId="remember_checkbox"
+						/>
+					) : null}
+				</div>
 
-        <Link
-          fontSize="13px"
-          className="login-link"
-          type={LinkType.page}
-          isHovered={false}
-          onClick={onClick}
-          id="login_forgot-password-link"
-          dataTestId="forgot_password_link"
-        >
-          {t("ForgotPassword")}
-        </Link>
-      </div>
+				<Link
+					fontSize="13px"
+					className="login-link"
+					type={LinkType.page}
+					isHovered={false}
+					onClick={onClick}
+					id="login_forgot-password-link"
+					dataTestId="forgot_password_link"
+				>
+					{t("ForgotPassword")}
+				</Link>
+			</div>
 
-      {isDialogVisible ? (
-        <ForgotPasswordModalDialog
-          isVisible={isDialogVisible}
-          userEmail={identifier}
-          onDialogClose={onDialogClose}
-          reCaptchaPublicKey={reCaptchaPublicKey}
-          reCaptchaType={reCaptchaType}
-        />
-      ) : null}
-    </div>
-  );
+			{isDialogVisible ? (
+				<ForgotPasswordModalDialog
+					isVisible={isDialogVisible}
+					userEmail={identifier}
+					onDialogClose={onDialogClose}
+					reCaptchaPublicKey={reCaptchaPublicKey}
+					reCaptchaType={reCaptchaType}
+				/>
+			) : null}
+		</div>
+	);
 };
 
 export default ForgotContainer;

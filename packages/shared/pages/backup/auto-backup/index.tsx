@@ -37,22 +37,22 @@ import {
 } from "../../../api/portal";
 import { BackupStorageType, AutoBackupPeriod } from "../../../enums";
 import { OPERATIONS_NAME } from "../../../constants";
-import { ToggleButton } from "../../../components/toggle-button";
+import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { getBackupStorage } from "../../../api/settings";
 import AutoBackupLoader from "../../../skeletons/backup/AutoBackup";
-import StatusMessage from "../../../components/status-message";
+import StatusMessage from "@docspace/ui-kit/components/status-message";
 import SocketHelper, {
   SocketEvents,
   type TSocketListener,
-} from "../../../utils/socket";
+} from "@docspace/ui-kit/utils/socket";
 import { getBackupProgressInfo } from "../../../utils/common";
 import { useStateCallback } from "../../../hooks/useStateCallback";
 import type { Nullable, Option } from "../../../types";
-import OperationsProgressButton from "../../../components/operations-progress-button";
-import { toastr } from "../../../components/toast";
-import { Text } from "../../../components/text";
-import { RadioButton } from "../../../components/radio-button";
-import { Link, LinkTarget } from "../../../components/link";
+import OperationsProgressButton from "@docspace/ui-kit/components/operations-progress-button";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { Text } from "@docspace/ui-kit/components/text";
+import { RadioButton } from "@docspace/ui-kit/components/radio-button";
+import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
 
 import { ThirdPartyModule } from "./sub-components/ThirdPartyModule";
@@ -428,7 +428,7 @@ const AutomaticBackup = ({
             href={automaticBackupUrl}
             target={LinkTarget.blank}
             fontSize="13px"
-            color={currentColorScheme?.main?.accent}
+            color={currentColorScheme?.main?.accent ?? undefined}
             isHovered
             dataTestId="automatic_backup_learn_link"
           >

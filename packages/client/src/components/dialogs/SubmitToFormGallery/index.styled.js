@@ -26,7 +26,7 @@
 
 import styled from "styled-components";
 import { injectDefaultTheme } from "@docspace/shared/utils";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 
 export const ModalDialogStyled = styled(ModalDialog).attrs(injectDefaultTheme)`
   .info {

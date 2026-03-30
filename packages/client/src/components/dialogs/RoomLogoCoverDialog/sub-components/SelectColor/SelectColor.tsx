@@ -27,19 +27,19 @@
 import React, { useState, useRef } from "react";
 
 import { isMobile } from "@docspace/shared/utils";
-import { useClickOutside } from "@docspace/shared/utils/useClickOutside";
+import { useClickOutside } from "@docspace/shared/utils";
 
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
-import { IconButton } from "@docspace/shared/components/icon-button";
+} from "@docspace/ui-kit/components/modal-dialog";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 
 import PlusSvgUrl from "PUBLIC_DIR/images/icons/16/button.plus.react.svg?url";
 import PencilSvgUrl from "PUBLIC_DIR/images/pencil.outline.react.svg?url";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-import { DropDown } from "@docspace/shared/components/drop-down";
-import { ColorPicker } from "@docspace/shared/components/color-picker";
+import { DropDown } from "@docspace/ui-kit/components/drop-down";
+import { ColorPicker } from "@docspace/ui-kit/components/color-picker";
 import { SelectColorProps } from "../../RoomLogoCoverDialog.types";
 
 import {

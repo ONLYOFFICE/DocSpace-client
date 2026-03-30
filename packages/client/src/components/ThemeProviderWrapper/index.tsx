@@ -27,9 +27,9 @@
 import React, { PropsWithChildren, useMemo } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { ThemeProvider } from "@docspace/shared/components/theme-provider";
-import type { ThemeProviderProps } from "@docspace/shared/components/theme-provider/ThemeProvider.types";
-import { getFontFamilyDependingOnLanguage } from "@docspace/shared/utils/rtlUtils";
+import { ThemeProviderComponent } from "@docspace/ui-kit/components/theme-provider";
+import type { ThemeProviderProps } from "@docspace/ui-kit/components/theme-provider";
+import { getFontFamilyDependingOnLanguage } from "@docspace/ui-kit/providers/theme/rtl-utils";
 
 const ThemeProviderWrapper = ({
   children,
@@ -51,9 +51,12 @@ const ThemeProviderWrapper = ({
   }, [theme, interfaceDirection, fontFamily]);
 
   return (
-    <ThemeProvider theme={themeWrapper} currentColorScheme={currentColorScheme}>
+    <ThemeProviderComponent
+      theme={themeWrapper}
+      currentColorScheme={currentColorScheme}
+    >
       {children}
-    </ThemeProvider>
+    </ThemeProviderComponent>
   );
 };
 

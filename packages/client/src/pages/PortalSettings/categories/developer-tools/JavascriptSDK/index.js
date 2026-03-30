@@ -30,8 +30,8 @@ import { useNavigate } from "react-router";
 
 import { inject, observer } from "mobx-react";
 
-import { Link } from "@docspace/shared/components/link";
-import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/ui-kit/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import PortalImg from "PUBLIC_DIR/images/sdk-presets_portal.react.svg?url";
 import PublicRoomImg from "PUBLIC_DIR/images/sdk-presets_public-room.react.svg?url";
@@ -40,6 +40,7 @@ import FileSelectorImg from "PUBLIC_DIR/images/sdk-presets_file-selector.react.s
 import EditorImg from "PUBLIC_DIR/images/sdk-presets_editor.react.svg?url";
 import ViewerImg from "PUBLIC_DIR/images/sdk-presets_viewer.react.svg?url";
 import CustomImg from "PUBLIC_DIR/images/sdk-presets_custom.react.svg?url";
+import UploaderImg from "PUBLIC_DIR/images/sdk-presets_uploader.react.svg?url";
 
 import PortalImgDark from "PUBLIC_DIR/images/sdk-presets_portal_dark.react.svg?url";
 import PublicRoomImgDark from "PUBLIC_DIR/images/sdk-presets_public-room_dark.react.svg?url";
@@ -48,6 +49,8 @@ import FileSelectorImgDark from "PUBLIC_DIR/images/sdk-presets_file-selector_dar
 import EditorImgDark from "PUBLIC_DIR/images/sdk-presets_editor_dark.react.svg?url";
 import ViewerImgDark from "PUBLIC_DIR/images/sdk-presets_viewer_dark.react.svg?url";
 import CustomImgDark from "PUBLIC_DIR/images/sdk-presets_custom_dark.react.svg?url";
+import UploaderImgDark from "PUBLIC_DIR/images/sdk-presets_uploader_dark.react.svg?url";
+
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import Integration from "./sub-components/Integration";
 import PresetTile from "./sub-components/PresetTile";
@@ -82,6 +85,7 @@ const PortalIntegration = (props) => {
   const navigateToFileSelector = () => navigate("file-selector");
   const navigateToEditor = () => navigate("editor");
   const navigateToViewer = () => navigate("viewer");
+  const navigateToUploader = () => navigate("uploader");
 
   const presetsData = [
     {
@@ -129,6 +133,12 @@ const PortalIntegration = (props) => {
       }),
       image: theme.isBase ? CustomImg : CustomImgDark,
       handleOnClick: navigateToCustom,
+    },
+    {
+      title: t("Common:Uploader"),
+      description: t("UploaderDescription"),
+      image: theme.isBase ? UploaderImg : UploaderImgDark,
+      handleOnClick: navigateToUploader,
     },
   ];
 
@@ -209,7 +219,7 @@ export default inject(({ settingsStore }) => {
     "Files",
     "EmbeddingPanel",
     "CreateEditRoomDialog",
-    "SharingPanel",
     "Common",
   ])(observer(PortalIntegration)),
 );
+

@@ -36,22 +36,19 @@ import classNames from "classnames";
 import TrashIcon from "PUBLIC_DIR/images/delete.react.svg";
 import FileArchive32SvgUrl from "PUBLIC_DIR/images/icons/32/archive.svg?url";
 
-import { Text } from "../../../../../components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import {
-  CustomScrollbarsVirtualList,
-  type CustomScrollbarsVirtualListProps,
-} from "../../../../../components/scrollbar";
-import { RadioButton } from "../../../../../components/radio-button";
+  type ScrollbarProps,
+  Scrollbar,
+} from "@docspace/ui-kit/components/scrollbar";
+import { RadioButton } from "@docspace/ui-kit/components/radio-button";
 import { ASIDE_PADDING_AFTER_LAST_ITEM } from "../../../../../constants";
 
 import type { BackupListBodyProps } from "./BackupList.types";
 import styles from "../../RestoreBackup.module.scss";
 
-const VirtualScroll = (props: CustomScrollbarsVirtualListProps) => (
-  <CustomScrollbarsVirtualList
-    {...props}
-    paddingAfterLastItem={ASIDE_PADDING_AFTER_LAST_ITEM}
-  />
+const VirtualScroll = (props: ScrollbarProps) => (
+  <Scrollbar {...props} paddingAfterLastItem={ASIDE_PADDING_AFTER_LAST_ITEM} />
 );
 
 VirtualScroll.displayName = "VirtualScroll";

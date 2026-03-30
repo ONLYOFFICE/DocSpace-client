@@ -32,16 +32,16 @@ import classNames from "classnames";
 
 import LockedReactSvg from "PUBLIC_DIR/images/icons/16/locked.react.svg";
 
-import { Text } from "../../../../../components/text";
-import { ComboBox } from "../../../../../components/combobox";
+import { Text } from "@docspace/ui-kit/components/text";
+import { ComboBox } from "@docspace/ui-kit/components/combobox";
 import { DropDownItem } from "../../../../../components/drop-down-item";
 import { BackupStorageType, ThirdPartyStorages } from "../../../../../enums";
 import { getOptions } from "../../../../../utils/getThirdPartyStoragesOptions";
 import { getFromLocalStorage } from "../../../../../utils";
-import { IconButton } from "../../../../../components/icon-button";
-import { toastr } from "../../../../../components/toast";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { THIRD_PARTY_SERVICES_URL } from "../../../../../constants";
-import type { ButtonSize } from "../../../../../components/button";
+import type { ButtonSize } from "@docspace/ui-kit/components/button";
 import type {
   SelectedStorageType,
   StorageRegionsType,

@@ -29,7 +29,8 @@ import {
   settingsHandler,
   TypeSettings,
 } from "@docspace/shared/__mocks__/handlers";
-import { expect, test } from "./fixtures/base";
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
+import { test } from "./fixtures/base";
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 
 const URL = "/login/confirm/EmpInvite";
@@ -64,7 +65,7 @@ test("emp invite render standalone", async ({
   serverRequestInterceptor.use(confirmHandler(port, undefined, true));
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "emp-invite",
     "emp-invite-render-standalone.png",
@@ -83,7 +84,7 @@ test("emp invite render no standalone", async ({
   );
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "emp-invite",
     "emp-invite-render-no-standalone.png",
@@ -104,7 +105,7 @@ test("emp invite success standalone", async ({
   await page.fill("[name='password']", "qwerty123");
   await page.getByTestId("password_input_eye_off_icon").click();
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "emp-invite",
     "emp-invite-success-standalone.png",
@@ -113,7 +114,7 @@ test("emp invite success standalone", async ({
   await page.getByTestId("signup_button").click();
   await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "emp-invite",
     "emp-invite-success-redirect-standalone.png",
@@ -141,7 +142,7 @@ test("emp invite success no standalone", async ({
 
   await page.getByTestId("password_input_eye_off_icon").click();
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "emp-invite",
     "emp-invite-success-no-standalone.png",
@@ -150,7 +151,7 @@ test("emp invite success no standalone", async ({
   await page.getByTestId("signup_button").click();
   await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "emp-invite",
     "emp-invite-success-redirect-no-standalone.png",
@@ -171,7 +172,7 @@ test("emp invite error standalone", async ({
 
   await page.getByTestId("signup_button").click();
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "emp-invite",
     "emp-invite-error-standalone.png",
@@ -196,7 +197,7 @@ test("emp invite error no standalone", async ({
 
   await page.getByTestId("signup_button").click();
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "emp-invite",
     "emp-invite-error-no-standalone.png",

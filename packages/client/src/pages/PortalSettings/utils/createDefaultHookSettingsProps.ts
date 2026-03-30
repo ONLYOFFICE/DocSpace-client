@@ -43,6 +43,7 @@ import { AuthStore } from "@docspace/shared/store/AuthStore";
 import PaymentStore from "SRC_DIR/store/PaymentStore";
 import ServicesStore from "SRC_DIR/store/ServicesStore";
 import { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
+import DefaultTemplatesStore from "SRC_DIR/store/portal-settings/DefaultTemplatesStore";
 
 export interface DefaultHookSettingsPropsParams {
   loadBaseInfo?: (page: string) => Promise<void>;
@@ -65,6 +66,7 @@ export interface DefaultHookSettingsPropsParams {
   paymentStore?: PaymentStore;
   servicesStore?: ServicesStore;
   currentTariffStatusStore?: CurrentTariffStatusStore;
+  defaultTemplatesStore?: DefaultTemplatesStore;
 }
 
 export const createDefaultHookSettingsProps = ({
@@ -88,6 +90,7 @@ export const createDefaultHookSettingsProps = ({
   paymentStore,
   servicesStore,
   currentTariffStatusStore,
+  defaultTemplatesStore,
 }: DefaultHookSettingsPropsParams) => ({
   common: {
     loadBaseInfo,
@@ -99,6 +102,7 @@ export const createDefaultHookSettingsProps = ({
     isLoaded: common?.isLoaded,
     cultures: settingsStore?.cultures,
     getPortalCultures: settingsStore?.getPortalCultures,
+    getDefaultTemplates: defaultTemplatesStore?.getTemplates,
   },
   security: {
     getPortalPasswordSettings: settingsStore?.getPortalPasswordSettings,
@@ -188,8 +192,11 @@ export const createDefaultHookSettingsProps = ({
     walletInit: paymentStore?.walletInit,
     initPaymentsStandalone: paymentStore?.standaloneInit,
     standalone: settingsStore?.standalone,
+    servicesInit: servicesStore?.servicesInit,
+    paymentMethodInit: paymentStore?.paymentMethodInit,
   },
   services: {
     servicesInit: servicesStore?.servicesInit,
+    initServiceData: servicesStore?.initServiceData,
   },
 });

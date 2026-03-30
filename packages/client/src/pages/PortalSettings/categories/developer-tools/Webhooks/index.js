@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Button } from "@docspace/shared/components/button";
+import { Button } from "@docspace/ui-kit/components/button";
 import { useState } from "react";
 
 import { inject, observer } from "mobx-react";
@@ -35,7 +35,7 @@ import { injectDefaultTheme, isMobile } from "@docspace/shared/utils";
 
 import { useTranslation } from "react-i18next";
 
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { EmptyServerErrorContainer } from "SRC_DIR/components/EmptyContainer/EmptyServerErrorContainer";
 import { DeleteWebhookDialog } from "./sub-components/DeleteWebhookDialog";

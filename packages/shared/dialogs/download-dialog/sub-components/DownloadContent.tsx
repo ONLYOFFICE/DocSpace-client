@@ -31,11 +31,10 @@ import classNames from "classnames";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow.react.svg";
 
-import { Text } from "../../../components/text";
-import { Checkbox } from "../../../components/checkbox";
-import { LinkWithDropdown } from "../../../components/link-with-dropdown";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { LinkWithDropdown } from "@docspace/ui-kit/components/link-with-dropdown";
 import { isMobile } from "../../../utils";
-
 import styles from "../DownloadDialog.module.scss";
 import {
   type DownloadContentProps,
@@ -178,7 +177,10 @@ export const DownloadContent = (props: DownloadContentProps) => {
                 className={styles.downloadDialogLink}
                 dropDownClassName="download-dialog-dropDown"
                 data={titleData}
-                directionY="bottom"
+                directionY="both"
+                topSpace={16}
+                bottomSpace={80}
+                withDynamicScrollbar
                 dropdownType="alwaysDashed"
                 fontSize="13px"
                 fontWeight={600}

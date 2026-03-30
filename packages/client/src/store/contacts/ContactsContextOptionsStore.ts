@@ -35,7 +35,7 @@ import {
 } from "@docspace/shared/enums";
 import { TTranslation } from "@docspace/shared/types";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
-import { TContextMenuValueTypeOnClick } from "@docspace/shared/components/context-menu/ContextMenu.types";
+import type { TContextMenuValueTypeOnClick } from "@docspace/ui-kit/components/context-menu";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { TfaStore } from "@docspace/shared/store/TfaStore";
 import { UserStore } from "@docspace/shared/store/UserStore";
@@ -664,28 +664,38 @@ class ContactsConextOptionsStore {
       return null;
 
     const accountsUserOptions = [
-      isOwner && {
-        id: "accounts-add_administrator",
-        className: "main-button_drop-down",
-        icon: PersonAdminReactSvgUrl,
-        label: t("Common:PortalAdmin", {
-          productName: t("Common:ProductName"),
-        }),
-        onClick: () => this.inviteUser(EmployeeType.Admin),
-        "data-type": EmployeeType.Admin,
-        action: EmployeeType.Admin,
-        key: "administrator",
-      },
-      isAdmin && {
-        id: "accounts-add_manager",
-        className: "main-button_drop-down",
-        icon: PersonManagerReactSvgUrl,
-        label: t("Common:RoomAdmin"),
-        onClick: () => this.inviteUser(EmployeeType.RoomAdmin),
-        "data-type": EmployeeType.RoomAdmin,
-        action: EmployeeType.RoomAdmin,
-        key: "manager",
-      },
+      ...(isOwner
+        ? [
+            {
+              id: "accounts-add_administrator",
+              className: "main-button_drop-down",
+              icon: PersonAdminReactSvgUrl,
+              label: t("Common:PortalAdmin", {
+                productName: t("Common:ProductName"),
+              }),
+              onClick: () => this.inviteUser(EmployeeType.Admin),
+              "data-type": EmployeeType.Admin,
+              action: EmployeeType.Admin,
+              key: "administrator",
+            },
+          ]
+        : []),
+
+      ...(isAdmin
+        ? [
+            {
+              id: "accounts-add_manager",
+              className: "main-button_drop-down",
+              icon: PersonManagerReactSvgUrl,
+              label: t("Common:RoomAdmin"),
+              onClick: () => this.inviteUser(EmployeeType.RoomAdmin),
+              "data-type": EmployeeType.RoomAdmin,
+              action: EmployeeType.RoomAdmin,
+              key: "manager",
+            },
+          ]
+        : []),
+
       {
         id: "accounts-add_collaborator",
         className: "main-button_drop-down",
@@ -703,7 +713,7 @@ class ContactsConextOptionsStore {
         id: "create_group",
         className: "main-button_drop-down",
         icon: GroupReactSvgUrl,
-        label: t("PeopleTranslations:CreateGroup"),
+        label: t("Common:CreateGroup"),
         onClick: createGroup,
         action: "group",
         key: "group",

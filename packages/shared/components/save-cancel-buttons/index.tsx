@@ -28,8 +28,8 @@ import React from "react";
 import classNames from "classnames";
 import { ButtonKeys } from "../../enums";
 import { isMobile } from "../../utils";
-import { Button } from "../button";
-import { Text } from "../text";
+import { Button } from "@docspace/ui-kit/components/button";
+import { Text } from "@docspace/ui-kit/components/text";
 import { SaveCancelButtonProps } from "./SaveCancelButton.types";
 import styles from "./SaveCancelButtons.module.scss";
 

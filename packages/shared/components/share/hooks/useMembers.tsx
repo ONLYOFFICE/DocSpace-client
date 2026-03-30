@@ -33,19 +33,19 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/person+.react.svg?url";
 
-import { IconButton } from "../../icon-button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { MembersSubjectType, ShareAccessRights } from "../../../enums";
 import { isFile, isFolder } from "../../../utils/typeGuards";
-import { useUnmount } from "../../../hooks/useUnmount";
+import { useUnmount } from "@docspace/ui-kit/hooks/useUnmount";
 import { useDidMount } from "../../../hooks/useDidMount";
 import { SHARED_MEMBERS_COUNT } from "../../../constants";
 import { ShareLinkService } from "../../../services/share-link.service";
-import { useEventListener } from "../../../hooks/useEventListener";
+import { useEventListener } from "@docspace/ui-kit/hooks/useEventListener";
 import type { RoomMember } from "../../../api/rooms/types";
-import SocketHelper, { SocketEvents } from "../../../utils/socket";
+import SocketHelper, { SocketEvents } from "@docspace/ui-kit/utils/socket";
 
-import type { TOption } from "../../combobox";
-import { TData, toastr } from "../../toast";
+import type { TOption } from "@docspace/ui-kit/components/combobox";
+import { TData, toastr } from "@docspace/ui-kit/components/toast";
 
 import type {
   Filter,

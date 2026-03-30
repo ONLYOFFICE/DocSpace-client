@@ -27,13 +27,67 @@
     {
       "name": "📦 @docspace/shared",
       "path": "packages/shared"
+    },
+    {
+      "name": "📦 @docspace/ui-kit",
+      "path": "libs/ui-kit"
     }
   ],
   "settings": {
     "window.zoomLevel": 0,
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "biomejs.biome",
     "VsCodeTaskButtons.tasks": [
+      {
+        "label": "Server (Aspire)",
+        "tasks": [
+          {
+            "label": "Aspire : run CE (Community Edition) - frontend-dev",
+            "task": "Backend | run CE (Aspire)",
+            "tooltip": "🛠️ Start the \"backend aspire CE\" task"
+          },
+          {
+            "label": "Aspire : run CE (Community Edition) - development",
+            "task": "Backend | run CE - full (Aspire)",
+            "tooltip": "🛠️ Start the \"backend aspire CE\" task"
+          },
+          {
+            "label": "Aspire : run EE (Enterprise Edition) - frontend-dev",
+            "task": "Backend | run EE (Aspire)",
+            "tooltip": "🛠️ Start the \"backend aspire EE\" task"
+          },
+          {
+            "label": "Aspire : run EE (Enterprise Edition) - development",
+            "task": "Backend | run EE - full (Aspire)",
+            "tooltip": "🛠️ Start the \"backend aspire EE\" task"
+          },
+          {
+            "label": "Aspire : run DE (Developer Edition) - frontend-dev",
+            "task": "Backend | run DE (Aspire)",
+            "tooltip": "🛠️ Start the \"backend aspire DE\" task"
+          },
+          {
+            "label": "Aspire : run DE (Developer Edition) - development",
+            "task": "Backend | run DE - full (Aspire)",
+            "tooltip": "🛠️ Start the \"backend aspire DE development profile (SKIP_CLIENT)\" task"
+          },
+          {
+            "label": "Aspire : run SAAS - frontend-dev",
+            "task": "Backend | run SAAS (Aspire)",
+            "tooltip": "🛠️ Start the \"backend aspire SAAS\" task"
+          },
+          {
+            "label": "Aspire : run SAAS - development",
+            "task": "Backend | run SAAS - full (Aspire)",
+            "tooltip": "🛠️ Start the \"backend aspire SAAS - full\" task"
+          },
+          {
+            "label": "Aspire : clear Docker artifacts",
+            "task": "Backend | clear Aspire (Docker)",
+            "tooltip": "🛠️ Start the \"backend aspire clear Docker\" task"
+          }
+        ],
+        "tooltip": "🛠️ Server tasks (Aspire)"
+      },
       {
         "label": "Server",
         "tasks": [
@@ -189,6 +243,11 @@
             "tooltip": "🛠️ Start the \"frontend start\" task"
           },
           {
+            "label": "Start:sdk",
+            "task": "Frontend | start:sdk",
+            "tooltip": "🛠️ Start the \"frontend sdk start\" task"
+          },
+          {
             "label": "Start prod",
             "task": "Frontend | start-prod",
             "tooltip": "🛠️ Start the \"frontend start production\" task"
@@ -197,6 +256,11 @@
             "label": "Start prod:lite",
             "task": "Frontend | start-prod:lite",
             "tooltip": "🛠️ Start the \"frontend start production\" task"
+          },
+          {
+            "label": "Start prod:sdk",
+            "task": "Frontend | start-prod:sdk",
+            "tooltip": "🛠️ Start the \"frontend sdk start production\" task"
           },
           {
             "label": "Deploy",
@@ -285,12 +349,223 @@
             "tooltip": "🛠️ Start the \"Test | Jest:unit\" task"
           },
           {
-            "label": "Test All E2E - Build",
+            "label": "Test unit:ui-kit",
+            "task": "Test | Jest:unit:ui-kit",
+            "tooltip": "🛠️ Start the \"Test | Jest:unit:ui-kit\" task"
+          }
+        ],
+        "tooltip": "🛠️ Client tests tasks"
+      },
+      {
+        "label": "E2E",
+        "tasks": [
+          {
+            "label": "Client E2E run UI",
+            "task": "Test | Test e2e run ui (client)",
+            "tooltip": "🛠️ Start the \"test run UI (client)\" task"
+          },
+          {
+            "label": "Client E2E build docker",
+            "task": "Test | Test e2e docker build (client)",
+            "tooltip": "🛠️ Start the \"test build in docker\" task"
+          },
+          {
+            "label": "Client E2E start docker",
+            "task": "Test | Test e2e docker start (client)",
+            "tooltip": "🛠️ Start the \"local frontend e2e tests in docker\" task"
+          },
+          {
+            "label": "Client E2E update screenshots",
+            "task": "Test | Test e2e docker update-screenshots (client)",
+            "tooltip": "🛠️ Start the \"update e2e screenshots (client)\" task"
+          },
+          {
+            "label": "Client E2E dev docker",
+            "task": "Test | Test e2e docker dev (client)",
+            "tooltip": "🛠️ Start the \"dev e2e tests in docker (rebuild from sources)\" task"
+          },
+          {
+            "label": "Client E2E dev update screenshots",
+            "task": "Test | Test e2e docker dev update-screenshots (client)",
+            "tooltip": "🛠️ Start the \"dev update e2e screenshots (client)\" task"
+          },
+          {
+            "label": "Client E2E clear docker",
+            "task": "Test | Test e2e docker clear (client)",
+            "tooltip": "🛠️ Start the \"remove image for running e2e tests\" task"
+          },
+          {
+            "label": "──────── Login ────────",
+            "task": "separator",
+            "tooltip": ""
+          },
+          {
+            "label": "Login E2E run UI",
+            "task": "Test | Test e2e run ui (login)",
+            "tooltip": "🛠️ Start the \"test run UI (login)\" task"
+          },
+          {
+            "label": "Login E2E build docker",
+            "task": "Test | Test e2e docker build (login)",
+            "tooltip": "🛠️ Start the \"test build in docker\" task"
+          },
+          {
+            "label": "Login E2E start docker",
+            "task": "Test | Test e2e docker start (login)",
+            "tooltip": "🛠️ Start the \"local frontend e2e tests in docker\" task"
+          },
+          {
+            "label": "Login E2E update screenshots",
+            "task": "Test | Test e2e docker update-screenshots (login)",
+            "tooltip": "🛠️ Start the \"update e2e screenshots (login)\" task"
+          },
+          {
+            "label": "Login E2E dev docker",
+            "task": "Test | Test e2e docker dev (login)",
+            "tooltip": "🛠️ Start the \"dev e2e tests in docker (rebuild from sources)\" task"
+          },
+          {
+            "label": "Login E2E dev update screenshots",
+            "task": "Test | Test e2e docker dev update-screenshots (login)",
+            "tooltip": "🛠️ Start the \"dev update e2e screenshots (login)\" task"
+          },
+          {
+            "label": "Login E2E clear docker",
+            "task": "Test | Test e2e docker clear (login)",
+            "tooltip": "🛠️ Start the \"remove image for running e2e tests\" task"
+          },
+          {
+            "label": "──────── SDK ──────────",
+            "task": "separator",
+            "tooltip": ""
+          },
+          {
+            "label": "SDK E2E run UI",
+            "task": "Test | Test e2e run ui (SDK)",
+            "tooltip": "🛠️ Start the \"test run UI (SDK)\" task"
+          },
+          {
+            "label": "SDK E2E build docker",
+            "task": "Test | Test e2e docker build (SDK)",
+            "tooltip": "🛠️ Start the \"test build in docker\" task"
+          },
+          {
+            "label": "SDK E2E start docker",
+            "task": "Test | Test e2e docker start (SDK)",
+            "tooltip": "🛠️ Start the \"local frontend e2e tests in docker\" task"
+          },
+          {
+            "label": "SDK E2E update screenshots",
+            "task": "Test | Test e2e docker update-screenshots (SDK)",
+            "tooltip": "🛠️ Start the \"update e2e screenshots (SDK)\" task"
+          },
+          {
+            "label": "SDK E2E dev docker",
+            "task": "Test | Test e2e docker dev (SDK)",
+            "tooltip": "🛠️ Start the \"dev e2e tests in docker (rebuild from sources)\" task"
+          },
+          {
+            "label": "SDK E2E dev update screenshots",
+            "task": "Test | Test e2e docker dev update-screenshots (SDK)",
+            "tooltip": "🛠️ Start the \"dev update e2e screenshots (SDK)\" task"
+          },
+          {
+            "label": "SDK E2E clear docker",
+            "task": "Test | Test e2e docker clear (SDK)",
+            "tooltip": "🛠️ Start the \"remove image for running e2e tests\" task"
+          },
+          {
+            "label": "────── Management ─────",
+            "task": "separator",
+            "tooltip": ""
+          },
+          {
+            "label": "Management E2E run UI",
+            "task": "Test | Test e2e run ui (management)",
+            "tooltip": "🛠️ Start the \"test run UI (management)\" task"
+          },
+          {
+            "label": "Management E2E build docker",
+            "task": "Test | Test e2e docker build (management)",
+            "tooltip": "🛠️ Start the \"test build in docker\" task"
+          },
+          {
+            "label": "Management E2E start docker",
+            "task": "Test | Test e2e docker start (management)",
+            "tooltip": "🛠️ Start the \"local frontend e2e tests in docker\" task"
+          },
+          {
+            "label": "Management E2E update screenshots",
+            "task": "Test | Test e2e docker update-screenshots (management)",
+            "tooltip": "🛠️ Start the \"update e2e screenshots (management)\" task"
+          },
+          {
+            "label": "Management E2E dev docker",
+            "task": "Test | Test e2e docker dev (management)",
+            "tooltip": "🛠️ Start the \"dev e2e tests in docker (rebuild from sources)\" task"
+          },
+          {
+            "label": "Management E2E dev update screenshots",
+            "task": "Test | Test e2e docker dev update-screenshots (management)",
+            "tooltip": "🛠️ Start the \"dev update e2e screenshots (management)\" task"
+          },
+          {
+            "label": "Management E2E clear docker",
+            "task": "Test | Test e2e docker clear (management)",
+            "tooltip": "🛠️ Start the \"remove image for running e2e tests\" task"
+          },
+          {
+            "label": "──────── Editor ───────",
+            "task": "separator",
+            "tooltip": ""
+          },
+          {
+            "label": "Editor E2E run UI",
+            "task": "Test | Test e2e run ui (editor)",
+            "tooltip": "🛠️ Start the \"test run UI (editor)\" task"
+          },
+          {
+            "label": "Editor E2E build docker",
+            "task": "Test | Test e2e docker build (editor)",
+            "tooltip": "🛠️ Start the \"test build in docker\" task"
+          },
+          {
+            "label": "Editor E2E start docker",
+            "task": "Test | Test e2e docker start (editor)",
+            "tooltip": "🛠️ Start the \"local frontend e2e tests in docker\" task"
+          },
+          {
+            "label": "Editor E2E update screenshots",
+            "task": "Test | Test e2e docker update-screenshots (editor)",
+            "tooltip": "🛠️ Start the \"update e2e screenshots (editor)\" task"
+          },
+          {
+            "label": "Editor E2E dev docker",
+            "task": "Test | Test e2e docker dev (editor)",
+            "tooltip": "🛠️ Start the \"dev e2e tests in docker (rebuild from sources)\" task"
+          },
+          {
+            "label": "Editor E2E dev update screenshots",
+            "task": "Test | Test e2e docker dev update-screenshots (editor)",
+            "tooltip": "🛠️ Start the \"dev update e2e screenshots (editor)\" task"
+          },
+          {
+            "label": "Editor E2E clear docker",
+            "task": "Test | Test e2e docker clear (editor)",
+            "tooltip": "🛠️ Start the \"remove image for running e2e tests\" task"
+          },
+          {
+            "label": "──────── All ─────────",
+            "task": "separator",
+            "tooltip": ""
+          },
+          {
+            "label": "Test All E2E - Build docker",
             "task": "Test | E2E All - Build",
             "tooltip": "🛠️ Build unified E2E Docker image for all packages"
           },
           {
-            "label": "Test All E2E - Run",
+            "label": "Test All E2E - Run docker",
             "task": "Test | E2E All - Run",
             "tooltip": "🛠️ Run all E2E tests (client, login, doceditor, sdk, management)"
           },
@@ -320,87 +595,11 @@
             "tooltip": "🛠️ Open Management Playwright report (port 9329)"
           },
           {
-            "label": "Test All E2E - Clear",
+            "label": "Test All E2E - Clear docker",
             "task": "Test | E2E All - Clear",
             "tooltip": "🛠️ Remove unified E2E Docker image and volumes"
           },
-          {
-            "label": "Test Client E2E build docker",
-            "task": "Test | Test e2e docker build (client)",
-            "tooltip": "🛠️ Start the \"test build in docker\" task"
-          },
-          {
-            "label": "Test Client E2E start docker",
-            "task": "Test | Test e2e docker start (client)",
-            "tooltip": "🛠️ Start the \"local frontend e2e tests in docker\" task"
-          },
-          {
-            "label": "Test Client E2E clear docker",
-            "task": "Test | Test e2e docker clear (client)",
-            "tooltip": "🛠️ Start the \"remove image for running e2e tests\" task"
-          },
-          {
-            "label": "Test Login E2E build docker",
-            "task": "Test | Test e2e docker build (login)",
-            "tooltip": "🛠️ Start the \"test build in docker\" task"
-          },
-          {
-            "label": "Test Login E2E start docker",
-            "task": "Test | Test e2e docker start (login)",
-            "tooltip": "🛠️ Start the \"local frontend e2e tests in docker\" task"
-          },
-          {
-            "label": "Test Login E2E clear docker",
-            "task": "Test | Test e2e docker clear (login)",
-            "tooltip": "🛠️ Start the \"remove image for running e2e tests\" task"
-          },
-          {
-            "label": "Test SDK E2E build docker",
-            "task": "Test | Test e2e docker build (SDK)",
-            "tooltip": "🛠️ Start the \"test build in docker\" task"
-          },
-          {
-            "label": "Test SDK E2E start docker",
-            "task": "Test | Test e2e docker start (SDK)",
-            "tooltip": "🛠️ Start the \"local frontend e2e tests in docker\" task"
-          },
-          {
-            "label": "Test SDK E2E clear docker",
-            "task": "Test | Test e2e docker clear (SDK)",
-            "tooltip": "🛠️ Start the \"remove image for running e2e tests\" task"
-          },
-          {
-            "label": "Test Management E2E build docker",
-            "task": "Test | Test e2e docker build (management)",
-            "tooltip": "🛠️ Start the \"test build in docker\" task"
-          },
-          {
-            "label": "Test Management E2E start docker",
-            "task": "Test | Test e2e docker start (management)",
-            "tooltip": "🛠️ Start the \"local frontend e2e tests in docker\" task"
-          },
-          {
-            "label": "Test Management E2E clear docker",
-            "task": "Test | Test e2e docker clear (management)",
-            "tooltip": "🛠️ Start the \"remove image for running e2e tests\" task"
-          },
-          {
-            "label": "Test Editor E2E build docker",
-            "task": "Test | Test e2e docker build (editor)",
-            "tooltip": "🛠️ Start the \"test build in docker\" task"
-          },
-          {
-            "label": "Test Editor E2E start docker",
-            "task": "Test | Test e2e docker start (editor)",
-            "tooltip": "🛠️ Start the \"local frontend e2e tests in docker\" task"
-          },
-          {
-            "label": "Test Editor E2E clear docker",
-            "task": "Test | Test e2e docker clear (editor)",
-            "tooltip": "🛠️ Start the \"remove image for running e2e tests\" task"
-          }
-        ],
-        "tooltip": "🛠️ Client tests tasks"
+        ]
       }
     ],
     "licenser.author": "Ascensio System SIA",
@@ -454,13 +653,16 @@
     "javascript.format.enable": true,
     "typescript.format.enable": true,
     "[javascript]": {
-      "editor.defaultFormatter": "biomejs.biome"
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascriptreact]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[typescript]": {
-      "editor.defaultFormatter": "biomejs.biome"
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[typescriptreact]": {
-      "editor.defaultFormatter": "biomejs.biome"
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "editor.codeActionsOnSave": {
       "source.organizeImports.biome": "never",

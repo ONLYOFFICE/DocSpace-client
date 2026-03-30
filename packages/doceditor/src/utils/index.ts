@@ -31,7 +31,7 @@ import { convertFile } from "@docspace/shared/api/files";
 import { TEditHistory, TFile } from "@docspace/shared/api/files/types";
 import { TTranslation } from "@docspace/shared/types";
 import { TFormRole } from "@/types";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 export const convertDocumentUrl = async (fileId: number | string) => {
   const convert = await convertFile(fileId, null, null, true);

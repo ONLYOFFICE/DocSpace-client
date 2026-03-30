@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import moment from "moment-timezone";
+import { parseToDateTime, now, formatDateLocalized, dateDiff } from "@docspace/ui-kit/utils/date";
 
 import { TTranslation } from "@docspace/shared/types";
 import type { TPaymentQuota } from "@docspace/shared/api/portal/types";
@@ -95,7 +95,8 @@ export const getIsDefaultWhiteLabel = (
 };
 
 export const isValidDate = (date: string | Date, timezone: string) => {
-  return moment(date).tz(timezone)?.year() !== 9999;
+  const dt = parseToDateTime(date)?.setZone(timezone);
+  return dt?.year !== 9999;
 };
 
 export const getIsLicenseDateExpired = (
@@ -103,15 +104,19 @@ export const getIsLicenseDateExpired = (
   timezone: string,
 ) => {
   if (!isValidDate(dueDate, timezone)) return true;
-  return moment() > moment(dueDate).tz(timezone);
+  const dueDateDt = parseToDateTime(dueDate)?.setZone(timezone);
+  return dueDateDt ? now() > dueDateDt : true;
 };
 
 export const getPaymentDate = (dueDate: string | Date, timezone: string) => {
-  return moment(dueDate).tz(timezone)?.format("LL");
+  const dt = parseToDateTime(dueDate)?.setZone(timezone);
+  return dt ? formatDateLocalized(dt, "DATE_MED") : "";
 };
 
 export const getDaysLeft = (dueDate: string | Date) => {
-  return moment(dueDate).startOf("day").diff(moment().startOf("day"), "days");
+  const dueDateDt = parseToDateTime(dueDate)?.startOf("day");
+  const todayDt = now().startOf("day");
+  return dueDateDt && todayDt ? dateDiff(dueDateDt, todayDt, "days") : 0;
 };
 
 export const getAutomaticBackupUrl = (settings?: TSettings): string => {

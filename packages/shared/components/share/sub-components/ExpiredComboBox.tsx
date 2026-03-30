@@ -26,13 +26,14 @@
 
 import { useState, useRef, useEffect } from "react";
 import { useTranslation, Trans } from "react-i18next";
+import type { DateTime } from "luxon";
 
-import moment from "moment";
+import { now, addToDate } from "@docspace/ui-kit/utils/date";
 
-import { Text } from "../../text";
-import { Link, LinkType } from "../../link";
-import { globalColors } from "../../../themes";
-import { LinkWithDropdown } from "../../link-with-dropdown";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
+import { LinkWithDropdown } from "@docspace/ui-kit/components/link-with-dropdown";
+import { globalColors } from "@docspace/ui-kit/providers/theme";
 
 import { getDate, getExpiredOptions } from "../Share.helpers";
 import { ExpiredComboBoxProps } from "../Share.types";
@@ -63,17 +64,17 @@ const ExpiredComboBox = ({
   };
 
   const setTwelveHours = () => {
-    const currentDate = moment().add(12, "hour");
+    const currentDate = addToDate(now(), 12, "hours");
     changeExpirationOption(link, currentDate);
   };
 
   const setOneDay = () => {
-    const currentDate = moment().add(1, "days");
+    const currentDate = addToDate(now(), 1, "days");
     changeExpirationOption(link, currentDate);
   };
 
   const setSevenDays = () => {
-    const currentDate = moment().add(7, "days");
+    const currentDate = addToDate(now(), 7, "days");
     changeExpirationOption(link, currentDate);
   };
 
@@ -89,13 +90,12 @@ const ExpiredComboBox = ({
     setShowCalendar(false);
   };
 
-  const setDateFromCalendar = (e: moment.Moment) => {
-    const currentDate = moment(e);
-    changeExpirationOption(link, currentDate);
+  const setDateFromCalendar = (e: DateTime) => {
+    changeExpirationOption(link, e);
   };
 
-  const onRemoveLink = () => {
-    removedExpiredLink(link);
+  const onReactivate = () => {
+    removedExpiredLink(link, true);
   };
 
   useEffect(() => {
@@ -120,7 +120,7 @@ const ExpiredComboBox = ({
 
       return (
         <Trans t={t} i18nKey="LinkExpireAfter" ns="Common">
-          The link will expire after
+          The link will expire
           <LinkWithDropdown
             className={styles.expiredOptions}
             color={globalColors.lightBlueMain}
@@ -130,6 +130,7 @@ const ExpiredComboBox = ({
             fontWeight={400}
             isDisabled={isDisabled}
             directionY="both"
+            withoutBackground
           >
             {/* @ts-expect-error pass object as children for correct work link component */}
             {{ date }}
@@ -151,6 +152,7 @@ const ExpiredComboBox = ({
           fontWeight={400}
           isDisabled={isDisabled}
           directionY="both"
+          withoutBackground
         >
           {/* @ts-expect-error pass object as children for correct work link component */}
           {{ date }}
@@ -174,10 +176,10 @@ const ExpiredComboBox = ({
             fontWeight={400}
             fontSize="12px"
             color={globalColors.lightBlueMain}
-            onClick={onRemoveLink}
+            onClick={onReactivate}
             dataTestId="expired_combo_box_remove_link"
           >
-            {t("Common:RemoveLink")}
+            {t("Common:ReactivateLink")}
           </Link>
         </Text>
       ) : (

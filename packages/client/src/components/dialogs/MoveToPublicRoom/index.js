@@ -25,9 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useEffect, useState } from "react";
-import { Button } from "@docspace/shared/components/button";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Text } from "@docspace/shared/components/text";
+import { Button } from "@docspace/ui-kit/components/button";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { Text } from "@docspace/ui-kit/components/text";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -138,6 +138,7 @@ const MoveToPublicRoomComponent = (props) => {
           scale
           onClick={onMoveTo}
           isLoading={isLoading}
+          testId="move_to_public_room_button"
         />
         <Button
           id="delete-file-modal_cancel"
@@ -147,6 +148,7 @@ const MoveToPublicRoomComponent = (props) => {
           scale
           onClick={onClose}
           isLoading={isLoading}
+          testId="move_to_public_room_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

@@ -31,14 +31,14 @@ import {
   InputSize,
   InputType,
   TextInput,
-} from "@docspace/shared/components/text-input";
-import { PasswordInput } from "@docspace/shared/components/password-input";
-import { Text } from "@docspace/shared/components/text";
-import { ToggleButton } from "@docspace/shared/components/toggle-button";
-import { Checkbox } from "@docspace/shared/components/checkbox";
-import { FieldContainer } from "@docspace/shared/components/field-container";
+} from "@docspace/ui-kit/components/text-input";
+import { PasswordInput } from "@docspace/ui-kit/components/password-input";
+import { Text } from "@docspace/ui-kit/components/text";
+import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 
-import { EmailInput } from "@docspace/shared/components/email-input";
+import { EmailInput } from "@docspace/ui-kit/components/email-input";
 import { StyledComponent } from "../StyledComponent";
 import { SMTPSettingsFields } from "../constants";
 import ButtonContainer from "./ButtonContainer";
@@ -158,6 +158,7 @@ const CustomSettings = (props) => {
         inputType={InputType.password}
         size={InputSize.base}
         testId="smtp_host_password_input"
+        sanitizeValue={(v) => v.replace(/\s/g, "")}
       />
 
       <Checkbox

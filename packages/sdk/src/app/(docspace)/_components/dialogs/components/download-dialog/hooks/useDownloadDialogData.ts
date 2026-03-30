@@ -29,7 +29,7 @@
 import { useCallback } from "react";
 
 import type { TOperation } from "@docspace/shared/api/files/types";
-import { TData, toastr } from "@docspace/shared/components/toast";
+import { TData, toastr } from "@docspace/ui-kit/components/toast";
 import type {
   TFileConvertId,
   TTranslationsForDownload,

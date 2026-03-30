@@ -27,7 +27,7 @@
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
-import { MobileCategoryWrapper } from "@docspace/shared/components/mobile-category-wrapper";
+import { CategoryItem } from "@docspace/ui-kit/components/category-item";
 
 const StyledWrapper = styled.div`
   margin-top: 24px;
@@ -47,7 +47,7 @@ const LdapMobileView = ({ isLdapEnabled, isLDAPAvailable }) => {
 
   return (
     <StyledWrapper>
-      <MobileCategoryWrapper
+      <CategoryItem
         title={t("Ldap:LdapSettings")}
         subtitle={t("Ldap:LdapMobileSettingsDescription")}
         url="/portal-settings/integration/ldap/settings"
@@ -57,7 +57,7 @@ const LdapMobileView = ({ isLdapEnabled, isLDAPAvailable }) => {
         disabled={!isLdapEnabled}
         dataTestId="ldap_settings"
       />
-      <MobileCategoryWrapper
+      <CategoryItem
         title={t("Ldap:LdapSyncTitle")}
         subtitle={t("LdapMobileSyncDescription")}
         url="/portal-settings/integration/ldap/sync-data"

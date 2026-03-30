@@ -1,0 +1,21 @@
+{
+  "key_path": "ExtendedThinkingIncreasedCosts",
+  "content": "This model uses advanced reasoning, which may increase costs",
+  "content_en_sha1_hash": "501d146f9c9f86da83fc294b01d1fa3cb6048e7b",
+  "created_at": "2026-03-26T08:26:34.738Z",
+  "updated_at": "2026-03-26T08:26:34.738Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

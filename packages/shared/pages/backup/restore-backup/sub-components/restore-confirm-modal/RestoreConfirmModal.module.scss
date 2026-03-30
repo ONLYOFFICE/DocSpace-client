@@ -1,0 +1,74 @@
+@use "@docspace/ui-kit/styles/mixins";
+
+.restoreBackupConfirmDialog {
+  :global(#modal-dialog) {
+    width: 520px;
+    height: 346px !important;
+    min-height: 346px;
+    max-height: 346px !important;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+  }
+
+  :global(.modal-body) {
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+
+  :global(.modal-footer) {
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  @include mixins.mobile {
+    :global(#modal-dialog) {
+      width: 100% !important;
+      max-width: 100% !important;
+      height: auto !important;
+      min-height: auto;
+      max-height: none !important;
+    }
+
+    :global(.modal-footer) {
+      flex-direction: row;
+      align-items: center;
+    }
+
+    :global(.modal-footer) > * {
+      flex: 1 1 0;
+      width: 0;
+    }
+  }
+}
+
+.restoreBackupConfirmModalBody {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.restoreBackupConfirmText {
+  margin: 0;
+  font-size: 13px;
+  line-height: 20px;
+
+  & + & {
+    margin-top: 16px;
+  }
+}
+
+.restoreBackupConfirmCheckbox {
+  margin-top: 24px;
+  align-items: flex-start;
+
+  svg {
+    margin-inline-end: 8px !important;
+    flex-shrink: 0;
+  }
+
+  :global(.checkbox-text) {
+    white-space: normal;
+    font-size: 14px;
+  }
+}

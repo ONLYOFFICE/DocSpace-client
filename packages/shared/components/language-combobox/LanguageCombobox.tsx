@@ -27,7 +27,11 @@
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
-import { TOption, ComboBoxSize, ComboBox } from "../combobox";
+import {
+  TOption,
+  ComboBoxSize,
+  ComboBox,
+} from "@docspace/ui-kit/components/combobox";
 import { mapCulturesToArray } from "../../utils/common";
 import { TCulture, ComboboxProps } from "./LanguageCombobox.types";
 import styles from "./LanguageCombobox.module.scss";
@@ -49,10 +53,11 @@ const LanguageCombobox = (props: ComboboxProps) => {
     withBackdrop = false,
     shouldShowBackdrop = false,
     isDisabled = false,
+    showLanguageName = false,
   } = props;
 
   const { i18n } = useTranslation(["Common"]);
-  const withLabel = isMobileView ? i18n : undefined;
+  const withLabel = isMobileView || showLanguageName ? i18n : undefined;
 
   const cultureNames = useMemo(() => {
     return mapCulturesToArray(cultures, false, withLabel);
@@ -78,6 +83,7 @@ const LanguageCombobox = (props: ComboboxProps) => {
         {
           [styles.withBorder]: withBorder,
           [styles.withoutBorder]: !withBorder,
+          [styles.withLanguageName]: showLanguageName,
         },
         className,
         "language-combo-box",
@@ -96,20 +102,22 @@ const LanguageCombobox = (props: ComboboxProps) => {
       dropDownMaxHeight={300}
       fillIcon={false}
       displaySelectedOption
-      manualWidth={manualWidth}
+      manualWidth={
+        showLanguageName && manualWidth === "42px" ? "280px" : manualWidth
+      }
       noBorder={false}
-      type="onlyIcon"
+      type={showLanguageName ? undefined : "onlyIcon"}
       optionStyle={{ padding: "0 8px" }}
       isMobileView={isMobileView}
       withBlur={isMobileView}
       withLabel={!!withLabel}
+      modernView={showLanguageName}
       usePortalBackdrop={usePortalBackdrop}
       withBackdrop={withBackdrop}
       shouldShowBackdrop={shouldShowBackdrop}
       dataTestId={dataTestId ?? "language-combobox"}
       role="combobox"
       aria-label="Select language"
-      aria-expanded="false"
       aria-haspopup="listbox"
       aria-controls="language-options"
     />

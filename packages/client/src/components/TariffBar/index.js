@@ -30,7 +30,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import { getSaasBar, getEnterpriseBar, checkBar } from "./helpers";
 import styles from "./tariff-bar.module.scss";
@@ -41,7 +41,6 @@ const PROXY_BASE_URL = combineUrl(
 );
 
 const TariffBar = ({
-  isEnterprise,
   isNonProfit,
   isGracePeriod,
   isFreeTariff,
@@ -53,6 +52,8 @@ const TariffBar = ({
   paymentDate,
   trialDaysLeft,
   title,
+  isLifetimeLicense,
+  isCommunity,
 }) => {
   const navigate = useNavigate();
   const { t } = useTranslation("Common");
@@ -84,12 +85,14 @@ const TariffBar = ({
     : getEnterpriseBar(
         t,
         isPaymentPageAvailable,
-        isEnterprise,
         isTrial,
         isLicenseExpiring,
         isLicenseDateExpired,
         trialDaysLeft,
         paymentDate,
+        isGracePeriod,
+        isLifetimeLicense,
+        isCommunity,
       );
 
   if (!tariffBar) return null;
@@ -121,19 +124,20 @@ export default inject(
     currentTariffStatusStore,
   }) => {
     const { isPaymentPageAvailable } = authStore;
-    const { isFreeTariff, isNonProfit, isTrial } = currentQuotaStore;
+    const { isFreeTariff, isNonProfit, isTrial, isLifetimeLicense } =
+      currentQuotaStore;
     const {
       isGracePeriod,
       isLicenseExpiring,
       isLicenseDateExpired,
       paymentDate,
       trialDaysLeft,
-      isEnterprise,
+
+      isCommunity,
     } = currentTariffStatusStore;
     const { standalone } = settingsStore;
 
     return {
-      isEnterprise,
       isNonProfit,
       isGracePeriod,
       isFreeTariff,
@@ -144,6 +148,8 @@ export default inject(
       standalone,
       paymentDate,
       trialDaysLeft,
+      isLifetimeLicense,
+      isCommunity,
     };
   },
 )(observer(TariffBar));

@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { RadioButton } from "@docspace/shared/components/radio-button";
+import { RadioButton } from "@docspace/ui-kit/components/radio-button";
 
 import Preview from "SRC_DIR/pages/PortalSettings/categories/common/Appearance/preview";
 

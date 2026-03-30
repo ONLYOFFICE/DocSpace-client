@@ -26,33 +26,33 @@
 
 import React from "react";
 
-import { RectangleSkeleton } from "../../../rectangle";
+import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 import styles from "../Body.module.scss";
 
 const GroupsLoader = () => {
-  return (
-    <div className={styles.groupsLoader} data-testid="groups-loader">
-      {[...Array(5).keys()].map((i) => (
-        <div key={i} className={styles.groupMemberLoader}>
-          <RectangleSkeleton
-            className="avatar"
-            width="32px"
-            height="32px"
-            borderRadius="50%"
-          />
-          <div className={styles.userInfo}>
-            <RectangleSkeleton width="128px" height="12px" borderRadius="3px" />
-            <RectangleSkeleton
-              className="role-selector"
-              width="96px"
-              height="8px"
-              borderRadius="3px"
-            />
-          </div>
-        </div>
-      ))}
-    </div>
-  );
+	return (
+		<div className={styles.groupsLoader} data-testid="groups-loader">
+			{[...Array(5).keys()].map((i) => (
+				<div key={i} className={styles.groupMemberLoader}>
+					<RectangleSkeleton
+						className="avatar"
+						width="32px"
+						height="32px"
+						borderRadius="50%"
+					/>
+					<div className={styles.userInfo}>
+						<RectangleSkeleton width="128px" height="12px" borderRadius="3px" />
+						<RectangleSkeleton
+							className="role-selector"
+							width="96px"
+							height="8px"
+							borderRadius="3px"
+						/>
+					</div>
+				</div>
+			))}
+		</div>
+	);
 };
 
 export default GroupsLoader;

@@ -28,11 +28,12 @@
 
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { parseToDateTime, formatDateLocalized } from "@docspace/ui-kit/utils/date";
 import { useRouter } from "next/navigation";
 
-import { LoaderWrapper } from "@docspace/shared/components/loader-wrapper";
+import { LoaderWrapper } from "@docspace/ui-kit/components/loader-wrapper";
 import { StandalonePage } from "@docspace/shared/pages/Payments/Standalone";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { setLicense, acceptLicense } from "@docspace/shared/api/settings";
 
 import { useEndAnimation } from "@/hooks/useEndAnimation";
@@ -52,6 +53,12 @@ const PaymentsPage = ({
   docspaceFaqUrl,
   licenseQuota,
   filesSettings,
+  isLifetimeLicense,
+  isGracePeriod,
+  isNotPaidPeriod,
+  gracePeriodEndDate,
+  delayDaysCount,
+  feedbackAndSupportUrl,
 }: {
   isTrial: boolean;
   salesEmail: string;
@@ -63,6 +70,12 @@ const PaymentsPage = ({
   docspaceFaqUrl: string;
   licenseQuota: TLicenseQuota;
   filesSettings: TFilesSettings;
+  isLifetimeLicense: boolean;
+  isGracePeriod: boolean;
+  isNotPaidPeriod: boolean;
+  gracePeriodEndDate: Date;
+  delayDaysCount: string;
+  feedbackAndSupportUrl: string;
 }) => {
   const { t } = useTranslation("Common");
   const router = useRouter();
@@ -74,7 +87,8 @@ const PaymentsPage = ({
   const [isLicenseCorrect, setIsLicenseCorrect] = useState(false);
 
   const shouldOpenEditorInNewTab = () => {
-    if (typeof window === "undefined") return !filesSettings.openEditorInSameTab;
+    if (typeof window === "undefined")
+      return !filesSettings.openEditorInSameTab;
 
     if (
       window.navigator.userAgent.includes("ZoomWebKit") ||
@@ -144,6 +158,15 @@ const PaymentsPage = ({
           docspaceFaqUrl={docspaceFaqUrl}
           licenseQuota={licenseQuota}
           openOnNewPage={shouldOpenEditorInNewTab()}
+          isLifetimeLicense={isLifetimeLicense}
+          isGracePeriod={isGracePeriod}
+          isNotPaidPeriod={isNotPaidPeriod}
+          gracePeriodEndDate={formatDateLocalized(
+            parseToDateTime(gracePeriodEndDate)?.setZone(window.timezone),
+            "DATE_MED",
+          )}
+          delayDaysCount={delayDaysCount}
+          feedbackAndSupportUrl={feedbackAndSupportUrl}
         />
       </LoaderWrapper>
     </div>

@@ -26,7 +26,7 @@
 
 import { headers } from "next/headers";
 
-import { FormWrapper } from "@docspace/shared/components/form-wrapper";
+import { FormWrapper } from "@docspace/ui-kit/components/form-wrapper";
 import { getPortalPasswordSettings, getSettings } from "@/utils/actions";
 import { GreetingCreateUserContainer } from "@/components/GreetingContainer";
 import { getStringFromSearchParams } from "@/utils";

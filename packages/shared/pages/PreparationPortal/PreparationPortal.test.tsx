@@ -29,7 +29,7 @@ import { describe, it, expect, beforeEach, vi } from "vitest";
 import { screen, waitFor, act, render } from "@testing-library/react";
 
 import { PreparationPortal } from "./index";
-import SocketHelper, { SocketEvents } from "../../utils/socket";
+import SocketHelper, { SocketEvents } from "@docspace/ui-kit/utils/socket";
 import { getRestoreProgress } from "../../api/portal";
 
 // Mock the i18next library
@@ -46,7 +46,7 @@ vi.mock("../../api/portal", () => ({
 }));
 
 // Mock the socket helper
-vi.mock("../../utils/socket", () => ({
+vi.mock("@docspace/ui-kit/utils/socket", () => ({
   __esModule: true,
   default: {
     on: vi.fn().mockReturnThis(),

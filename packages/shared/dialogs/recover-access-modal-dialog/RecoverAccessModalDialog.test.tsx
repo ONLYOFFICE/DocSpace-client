@@ -30,7 +30,7 @@ import userEvent from "@testing-library/user-event";
 
 import RecoverAccessModalDialog from "./RecoverAccessModalDialog";
 import { sendRecoverRequest } from "../../api/settings";
-import { toastr } from "../../components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 vi.mock("react-i18next", () => ({
   useTranslation: () => ({
@@ -43,7 +43,7 @@ vi.mock("../../api/settings", () => ({
   sendRecoverRequest: vi.fn(),
 }));
 
-vi.mock("../../components/toast", () => ({
+vi.mock("@docspace/ui-kit/components/toast", () => ({
   toastr: {
     success: vi.fn(),
     error: vi.fn(),

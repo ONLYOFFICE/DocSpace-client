@@ -28,8 +28,8 @@ import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Link } from "@docspace/shared/components/link";
-import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/ui-kit/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -43,58 +43,58 @@ const StyledWrapper = styled.div`
 `;
 
 const HideButton = (props) => {
-  const { t } = useTranslation("SingleSignOn");
-  const {
-    text,
-    label,
-    isAdditionalParameters,
-    value,
-    setHideLabel,
-    id,
-    dataTestId,
-  } = props;
+	const { t } = useTranslation("SingleSignOn");
+	const {
+		text,
+		label,
+		isAdditionalParameters,
+		value,
+		setHideLabel,
+		id,
+		dataTestId,
+	} = props;
 
-  const onClick = () => {
-    setHideLabel(label);
-  };
+	const onClick = () => {
+		setHideLabel(label);
+	};
 
-  return (
-    <StyledWrapper isAdditionalParameters={isAdditionalParameters}>
-      {!isAdditionalParameters ? (
-        <Text
-          as="h2"
-          fontSize="16px"
-          fontWeight={700}
-          className="settings_unavailable"
-        >
-          {text}
-        </Text>
-      ) : null}
+	return (
+		<StyledWrapper isAdditionalParameters={isAdditionalParameters}>
+			{!isAdditionalParameters ? (
+				<Text
+					as="h2"
+					fontSize="16px"
+					fontWeight={700}
+					className="settings_unavailable"
+				>
+					{text}
+				</Text>
+			) : null}
 
-      <Link
-        id={id}
-        className="hide-button settings_unavailable"
-        isHovered
-        onClick={onClick}
-        type="action"
-        dataTestId={dataTestId}
-      >
-        {value
-          ? isAdditionalParameters
-            ? t("HideAdditionalParameters")
-            : t("Hide")
-          : isAdditionalParameters
-            ? t("ShowAdditionalParameters")
-            : t("Show")}
-      </Link>
-    </StyledWrapper>
-  );
+			<Link
+				id={id}
+				className="hide-button settings_unavailable"
+				isHovered
+				onClick={onClick}
+				type="action"
+				dataTestId={dataTestId}
+			>
+				{value
+					? isAdditionalParameters
+						? t("HideAdditionalParameters")
+						: t("Hide")
+					: isAdditionalParameters
+						? t("ShowAdditionalParameters")
+						: t("Show")}
+			</Link>
+		</StyledWrapper>
+	);
 };
 
 export default inject(({ ssoStore }) => {
-  const { setHideLabel } = ssoStore;
+	const { setHideLabel } = ssoStore;
 
-  return {
-    setHideLabel,
-  };
+	return {
+		setHideLabel,
+	};
 })(observer(HideButton));

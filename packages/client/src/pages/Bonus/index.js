@@ -77,7 +77,7 @@ export const Component = inject(
     settingsStore,
     clientLoadingStore,
   }) => {
-    const { isInitPaymentPage } = paymentStore;
+    const { isInitPaymentPage, salesEmail } = paymentStore;
     const { isCommunity, isEnterprise, isDeveloper } = currentTariffStatusStore;
     const { isTrial } = currentQuotaStore;
     const {
@@ -86,7 +86,6 @@ export const Component = inject(
       enterpriseInstallScriptUrl,
       enterpriseInstallWindowsUrl,
       feedbackAndSupportUrl,
-      salesEmail,
       forEnterprisesUrl,
       demoOrderUrl,
     } = settingsStore;

@@ -29,7 +29,7 @@
 import { request } from "../client";
 
 import { transformToClientProps } from "../../utils/oauth";
-import { getCookie, setCookie } from "../../utils/cookie";
+import { getCookie, setCookie } from "@docspace/ui-kit/utils/cookie";
 
 import {
   IClientProps,

@@ -28,7 +28,8 @@ import {
   tfaAppValidateHandler,
   selfHandler,
 } from "@docspace/shared/__mocks__/handlers";
-import { expect, test } from "./fixtures/base";
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
+import { test } from "./fixtures/base";
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 
 const URL = "/login/confirm/TfaActivation";
@@ -64,7 +65,7 @@ const URL_WITH_LINK_DATA_PARAMS = getUrlWithQueryParams(
 test("tfa activation render", async ({ page, baseUrl }) => {
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "tfa-activation",
     "tfa-activation-render.png",
@@ -76,7 +77,7 @@ test("tfa activation success", async ({ page, baseUrl }) => {
 
   await page.getByTestId("app_code_input").fill("123456");
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "tfa-activation",
     "tfa-activation-success.png",
@@ -88,7 +89,7 @@ test("tfa activation success", async ({ page, baseUrl }) => {
     waitUntil: "load",
   });
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "tfa-activation",
     "tfa-activation-success-redirect.png",
@@ -110,7 +111,7 @@ test("tfa activation success with link data", async ({
     waitUntil: "load",
   });
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "tfa-activation",
     "tfa-activation-with-link-data-success.png",
@@ -132,7 +133,7 @@ test("tfa activation error not validated", async ({
 
   await page.getByTestId("app_connect_button").click();
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "tfa-activation",
     "tfa-activation-error-not-validated.png",

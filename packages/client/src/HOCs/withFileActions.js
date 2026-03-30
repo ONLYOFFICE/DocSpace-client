@@ -28,7 +28,7 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 
 import { DeviceType } from "@docspace/shared/enums";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
 import { isMobile } from "react-device-detect";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";

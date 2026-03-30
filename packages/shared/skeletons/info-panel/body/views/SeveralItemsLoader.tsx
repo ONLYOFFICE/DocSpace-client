@@ -26,18 +26,18 @@
 
 import React from "react";
 
-import { RectangleSkeleton } from "../../../rectangle";
+import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 import styles from "../Body.module.scss";
 
 const SeveralItemsLoader = () => {
-  return (
-    <div
-      className={styles.severalItemsLoader}
-      data-testid="several-items-loader"
-    >
-      <RectangleSkeleton width="96px" height="96px" borderRadius="6px" />
-    </div>
-  );
+	return (
+		<div
+			className={styles.severalItemsLoader}
+			data-testid="several-items-loader"
+		>
+			<RectangleSkeleton width="96px" height="96px" borderRadius="6px" />
+		</div>
+	);
 };
 
 export default SeveralItemsLoader;

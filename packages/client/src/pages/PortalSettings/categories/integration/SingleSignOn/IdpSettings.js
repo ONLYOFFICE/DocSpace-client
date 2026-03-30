@@ -28,8 +28,8 @@ import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
-import { Text } from "@docspace/shared/components/text";
+import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import SsoComboBox from "./sub-components/SsoComboBox";
 import SsoFormField from "./sub-components/SsoFormField";

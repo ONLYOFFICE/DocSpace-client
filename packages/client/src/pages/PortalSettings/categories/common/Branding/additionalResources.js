@@ -32,7 +32,7 @@ import {
   setAdditionalResources,
   restoreAdditionalResources,
 } from "@docspace/shared/api/settings";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { useResponsiveNavigation } from "@docspace/shared/hooks/useResponsiveNavigation";
 import { AdditionalResources as AdditionalResourcesPage } from "@docspace/shared/pages/Branding/AdditionalResources";
 

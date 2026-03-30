@@ -28,8 +28,12 @@ import { type FC } from "react";
 
 import type { TFileLink } from "../../../api/files/types";
 
-import { ComboBox, ComboBoxSize, type TOption } from "../../combobox";
-import { AccessRightSelect } from "../../access-right-select";
+import {
+  ComboBox,
+  ComboBoxSize,
+  type TOption,
+} from "@docspace/ui-kit/components/combobox";
+import { AccessRightSelect } from "@docspace/ui-kit/components/access-right-select";
 
 import { IconDisplay } from "./IconDisplay";
 
@@ -37,7 +41,6 @@ export interface AccessRightSelectorProps {
   isLoaded: boolean;
   isRoomsLink: boolean;
   isFolder: boolean;
-  isExpiredLink: boolean;
   isArchiveFolder: boolean;
   isMobileViewLink: boolean;
 
@@ -54,7 +57,6 @@ export const AccessRightSelector: FC<AccessRightSelectorProps> = ({
   isLoaded,
   isRoomsLink,
   isFolder,
-  isExpiredLink,
   isArchiveFolder,
   isMobileViewLink,
   link,
@@ -90,7 +92,7 @@ export const AccessRightSelector: FC<AccessRightSelectorProps> = ({
         accessOptions={roomAccessOptions ?? []}
         onSelect={(item) => changeAccessOption(item, link)}
         selectedOption={roomSelectedOptions ?? ({} as TOption)}
-        isDisabled={isExpiredLink || isLoaded || isArchiveFolder}
+        isDisabled={isLoaded || isArchiveFolder}
       />
     );
   }
@@ -109,7 +111,7 @@ export const AccessRightSelector: FC<AccessRightSelectorProps> = ({
       scaledOptions={false}
       options={accessOptions}
       size={ComboBoxSize.content}
-      isDisabled={isExpiredLink || isLoaded}
+      isDisabled={isLoaded}
       selectedOption={selectedAccessOption ?? ({} as TOption)}
       onSelect={(item) => changeAccessOption(item, link)}
       useImageIcon

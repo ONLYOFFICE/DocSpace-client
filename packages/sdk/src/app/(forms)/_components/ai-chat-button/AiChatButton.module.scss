@@ -1,0 +1,51 @@
+.floatingButton {
+  position: absolute;
+  bottom: 24px;
+  z-index: 100;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background: var(--color-scheme-main-buttons);
+  color: var(--color-scheme-text-buttons);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+
+  &:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.28);
+  }
+
+  &:active {
+    transform: scale(0.96);
+  }
+
+  &[data-position="left"] {
+    left: 24px;
+  }
+
+  &[data-position="right"] {
+    right: 24px;
+  }
+
+  .icon {
+    width: 20px;
+    height: 20px;
+    display: flex;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    path {
+      fill: var(--color-scheme-text-buttons);
+    }
+  }
+}

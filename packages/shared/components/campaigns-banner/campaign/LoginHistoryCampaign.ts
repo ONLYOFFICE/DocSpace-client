@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { globalColors } from "../../../themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme";
 
 /**
  * Configuration for the Login History campaign banner
@@ -32,7 +32,9 @@ import { globalColors } from "../../../themes";
 export const getLoginHistoryConfig = (
   isBaseTheme: boolean,
   isMobile: boolean = false,
-  currentColorScheme?: { main?: { accent?: string; buttons?: string } } | null,
+  currentColorScheme?: {
+    main?: { accent?: string | null; buttons?: string | null };
+  } | null,
 ) => {
   const accentColor =
     currentColorScheme?.main?.accent || globalColors.lightBlueMain;

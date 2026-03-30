@@ -26,7 +26,7 @@
 
 import { logger } from "logger.mjs";
 
-import { FormWrapper } from "@docspace/shared/components/form-wrapper";
+import { FormWrapper } from "@docspace/ui-kit/components/form-wrapper";
 
 import { GreetingContainer } from "@/components/GreetingContainer";
 

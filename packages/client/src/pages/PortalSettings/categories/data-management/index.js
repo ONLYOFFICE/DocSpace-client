@@ -32,19 +32,19 @@ import { useTheme } from "styled-components";
 
 import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
 
-import { Tabs } from "@docspace/shared/components/tabs";
-import { Link } from "@docspace/shared/components/link";
-import { Text } from "@docspace/shared/components/text";
-import { HelpButton } from "@docspace/shared/components/help-button";
+import { Tabs } from "@docspace/ui-kit/components/tabs";
+import { Link } from "@docspace/ui-kit/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
 
 import { DeviceType } from "@docspace/shared/enums";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { isManagement } from "@docspace/shared/utils/common";
-import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
+import { SECTION_HEADER_HEIGHT } from "@docspace/ui-kit/components/section/Section.constants";
 import SocketHelper, {
   SocketCommands,
   SocketEvents,
-} from "@docspace/shared/utils/socket";
+} from "@docspace/ui-kit/utils/socket";
 
 import config from "../../../../../package.json";
 

@@ -29,7 +29,8 @@
 import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
 
-import FilterComponent from "@docspace/shared/components/filter";
+import FilterComponent from "@docspace/ui-kit/components/filter";
+import renderFilterSelector from "@docspace/shared/utils/renderFilterSelector";
 
 import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
 
@@ -107,6 +108,7 @@ export const Filter = observer(({ filesFilter, shareKey }: FilterProps) => {
       isIndexing={false}
       initSearchValue={initSearchValue}
       initSelectedFilterData={initSelectedFilterData}
+      renderSelector={renderFilterSelector}
     />
   );
 });

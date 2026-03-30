@@ -12,6 +12,7 @@
     "ms-python.python",
     "wix.vscode-import-cost",
     "chavyleung.vscode-pnpm-verlens",
-    "biomejs.biome"
+    "biomejs.biome",
+    "esbenp.prettier-vscode"
   ]
 }

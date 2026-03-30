@@ -29,37 +29,42 @@ import { BASE_URL, API_PREFIX } from "../../e2e/utils";
 
 export const PATH_PAYMENT_SETTINGS = "settings/payment";
 
-export const paymentSettingsSuccess = {
-  response: {
-    salesEmail: "sales@onlyoffice.com",
-    buyUrl: "https://www.onlyoffice.com/post.ashx?type=buydocspaceenterprise",
-    standalone: true,
-    currentLicense: {
-      trial: false,
-      dueDate: "9999-12-31T00:00:00",
+export const paymentSettingsSuccess = (standalone: boolean = true) => {
+  return {
+    response: {
+      salesEmail: "sales@onlyoffice.com",
+      buyUrl: "https://www.onlyoffice.com/post.ashx?type=buydocspaceenterprise",
+      standalone,
+      currentLicense: {
+        trial: false,
+        dueDate: "9999-12-31T00:00:00",
+      },
+      max: 999,
     },
-    max: 999,
-  },
-  count: 1,
-  links: [
-    {
-      href: `${BASE_URL}/${API_PREFIX}/${PATH_PAYMENT_SETTINGS}`,
-      action: "GET",
-    },
-  ],
-  status: 0,
-  statusCode: 200,
+    count: 1,
+    links: [
+      {
+        href: `${BASE_URL}/${API_PREFIX}/${PATH_PAYMENT_SETTINGS}`,
+        action: "GET",
+      },
+    ],
+    status: 0,
+    statusCode: 200,
+  };
 };
 
-export const paymentSettingsResolver = () => {
-  return new Response(JSON.stringify(paymentSettingsSuccess));
+export const paymentSettingsResolver = (standalone: boolean = true) => {
+  return new Response(JSON.stringify(paymentSettingsSuccess(standalone)));
 };
 
-export const paymentSettingsHandler = (port: string) => {
+export const paymentSettingsHandler = (
+  port: string,
+  standalone: boolean = true,
+) => {
   return http.get(
     `${BASE_URL}:${port}/${API_PREFIX}/${PATH_PAYMENT_SETTINGS}`,
     () => {
-      return paymentSettingsResolver();
+      return paymentSettingsResolver(standalone);
     },
   );
 };

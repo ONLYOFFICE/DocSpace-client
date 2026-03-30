@@ -30,9 +30,9 @@ import { notFound, useSearchParams } from "next/navigation";
 import React, { createContext, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { getCookie } from "@docspace/shared/utils";
+import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import { LANGUAGE } from "@docspace/shared/constants";
-import AppLoader from "@docspace/shared/components/app-loader";
+import AppLoader from "@docspace/ui-kit/components/app-loader";
 
 import { ValidationResult } from "@/utils/enums";
 import { ConfirmRouteProps, TConfirmRouteContext } from "@/types";
@@ -132,7 +132,12 @@ function ConfirmRoute(props: ConfirmRouteProps) {
           confirmLinkParams,
           validationResult: confirmLinkResult.result,
         });
-        throw new Error(t("Common:LinkExpired"));
+        if (confirmLinkParams.type === "LinkInvite") {
+          window.location.href = "/login/error/link-expired";
+        } else {
+          throw new Error(t("Common:LinkExpired"));
+        }
+        return;
       case ValidationResult.TariffLimit:
         console.error("tariff limit", {
           confirmLinkParams,
@@ -144,7 +149,12 @@ function ConfirmRoute(props: ConfirmRouteProps) {
           confirmLinkParams,
           validationResult: confirmLinkResult.result,
         });
-        throw new Error(t("Common:Error"));
+        if (confirmLinkParams.type === "LinkInvite") {
+          window.location.href = "/login/error/link-quota";
+        } else {
+          throw new Error(t("Common:Error"));
+        }
+        return;
       default:
         console.error("unknown link", {
           confirmLinkParams,

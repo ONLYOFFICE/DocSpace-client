@@ -27,7 +27,7 @@
 import { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
 
-import { TableContainer, TableBody } from "@docspace/shared/components/table";
+import { TableContainer, TableBody } from "@docspace/ui-kit/components/table";
 import SessionsTableRow from "./SessionsTableRow";
 import SessionsTableHeader from "./SessionsTableHeader";
 import styles from "../../active-sessions.module.scss";

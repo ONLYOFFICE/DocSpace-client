@@ -1,0 +1,28 @@
+{
+  "key_path": "CancelSubscription",
+  "content": "Cancel subscription",
+  "content_en_sha1_hash": "6d7f058cd1f99c995a4abcfe95675dbae4a10815",
+  "created_at": "2026-03-20T09:07:40.722Z",
+  "updated_at": "2026-03-26T08:26:58.230Z",
+  "comment": {
+    "text": "This key provides the text for a button that allows users to cancel their subscription. It appears on a page related to additional storage services, likely within a dialog or confirmation prompt. The translators should ensure the wording is clear and encourages user understanding of the cancellation process.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T10:12:58.340Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/pages/additional-storage/AdditionalStoragePage.tsx",
+      "line_number": 211,
+      "context": "icon: PencilIcon,\n onClick: openUpgradeDialog,\n },\n {\n key: \"cancel\",\n label: t(\"Services:CancelSubscription\"),\n icon: RemoveSessionIcon,\n onClick: openCancelDialog,\n },\n ];",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

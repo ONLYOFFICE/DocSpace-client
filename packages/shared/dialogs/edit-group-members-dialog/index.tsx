@@ -27,22 +27,22 @@
 import { useEffect, useState, useDeferredValue } from "react";
 import { useTranslation } from "react-i18next";
 
-import { InputSize } from "../../components/text-input";
+import { InputSize } from "@docspace/ui-kit/components/text-input";
 import {
-  getGroupMembersInRoom,
-  getGroupMembersShareFile,
+	getGroupMembersInRoom,
+	getGroupMembersShareFile,
 } from "../../api/groups";
-import { SearchInput } from "../../components/search-input";
-import { MIN_LOADER_TIMER } from "../../selectors/utils/constants";
-import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
+import { SearchInput } from "@docspace/ui-kit/components/search-input";
+import { MIN_LOADER_TIMER } from "@docspace/ui-kit/selectors/utils/constants";
+import { ModalDialog, ModalDialogType } from "@docspace/ui-kit/components/modal-dialog";
 import { isFile } from "../../utils/typeGuards";
 
 import type { TGroupMemberInvitedInRoom } from "../../api/groups/types";
 
 import EmptyContainer from "./EmptyContainer";
 import {
-  StyledBodyContent,
-  StyledHeaderText,
+	StyledBodyContent,
+	StyledHeaderText,
 } from "./EditGroupMembersDialog.styled";
 
 import GroupMembersList from "./sub-components/GroupMembersList/GroupMembersList";
@@ -51,138 +51,138 @@ import EditGroupMembersDialogProvider from "./EditGroupMembersDialog.provider";
 import type { EditGroupMembersProps } from "./EditGroupMembersDialog.types";
 
 export const EditGroupMembers = ({
-  infoPanelSelection,
-  group,
-  visible,
-  standalone = false,
-  setVisible,
-  onBackClick,
-  onClose,
+	infoPanelSelection,
+	group,
+	visible,
+	standalone = false,
+	setVisible,
+	onBackClick,
+	onClose,
 }: EditGroupMembersProps) => {
-  const { t } = useTranslation(["Common"]);
+	const { t } = useTranslation(["Common"]);
 
-  const [searchValue, setSearchValue] = useState<string>("");
+	const [searchValue, setSearchValue] = useState<string>("");
 
-  const searchValueDeferred = useDeferredValue(searchValue);
+	const searchValueDeferred = useDeferredValue(searchValue);
 
-  const [total, setTotal] = useState(0);
-  const [groupMembers, setGroupMembers] = useState<
-    TGroupMemberInvitedInRoom[] | null
-  >(null);
-  const [isSearchResultLoading, setIsSearchResultLoading] = useState(false);
-  const [isNextPageLoading, setIsNextPageLoading] = useState(false);
+	const [total, setTotal] = useState(0);
+	const [groupMembers, setGroupMembers] = useState<
+		TGroupMemberInvitedInRoom[] | null
+	>(null);
+	const [isSearchResultLoading, setIsSearchResultLoading] = useState(false);
+	const [isNextPageLoading, setIsNextPageLoading] = useState(false);
 
-  const onChangeSearchValue = (value: string) => {
-    setIsSearchResultLoading(true);
-    setSearchValue(value.trim());
-  };
+	const onChangeSearchValue = (value: string) => {
+		setIsSearchResultLoading(true);
+		setSearchValue(value.trim());
+	};
 
-  const onClearSearch = () => onChangeSearchValue("");
+	const onClearSearch = () => onChangeSearchValue("");
 
-  const onClosePanel = () => {
-    setVisible(false);
-    onClose?.();
-  };
+	const onClosePanel = () => {
+		setVisible(false);
+		onClose?.();
+	};
 
-  const loadNextPage = async (startIndex: number) => {
-    if (!infoPanelSelection) {
-      return;
-    }
+	const loadNextPage = async (startIndex: number) => {
+		if (!infoPanelSelection) {
+			return;
+		}
 
-    const startLoadingTime = new Date();
+		const startLoadingTime = new Date();
 
-    try {
-      setIsNextPageLoading(true);
-      const filter = {
-        startIndex,
-        count: 100,
-        filterValue: searchValueDeferred,
-      };
+		try {
+			setIsNextPageLoading(true);
+			const filter = {
+				startIndex,
+				count: 100,
+				filterValue: searchValueDeferred,
+			};
 
-      const api = isFile(infoPanelSelection)
-        ? getGroupMembersShareFile
-        : getGroupMembersInRoom;
+			const api = isFile(infoPanelSelection)
+				? getGroupMembersShareFile
+				: getGroupMembersInRoom;
 
-      const data = await api(infoPanelSelection.id, group.id, filter);
+			const data = await api(infoPanelSelection.id, group.id, filter);
 
-      setTotal(data.total);
-      if (startIndex === 0 || !groupMembers) {
-        setGroupMembers(data.items);
-      } else {
-        setGroupMembers([...groupMembers, ...data.items]);
-      }
-    } catch (e) {
-      console.error(e);
-    } finally {
-      const nowDate = new Date();
-      const diff = Math.abs(nowDate.getTime() - startLoadingTime.getTime());
+			setTotal(data.total);
+			if (startIndex === 0 || !groupMembers) {
+				setGroupMembers(data.items);
+			} else {
+				setGroupMembers([...groupMembers, ...data.items]);
+			}
+		} catch (e) {
+			console.error(e);
+		} finally {
+			const nowDate = new Date();
+			const diff = Math.abs(nowDate.getTime() - startLoadingTime.getTime());
 
-      if (diff < MIN_LOADER_TIMER) {
-        setTimeout(() => {
-          setIsSearchResultLoading(false);
-        }, MIN_LOADER_TIMER - diff);
-      } else {
-        setIsSearchResultLoading(false);
-      }
-      setIsNextPageLoading(false);
-      // setIsSearchResultLoading(false);
-    }
-  };
+			if (diff < MIN_LOADER_TIMER) {
+				setTimeout(() => {
+					setIsSearchResultLoading(false);
+				}, MIN_LOADER_TIMER - diff);
+			} else {
+				setIsSearchResultLoading(false);
+			}
+			setIsNextPageLoading(false);
+			// setIsSearchResultLoading(false);
+		}
+	};
 
-  useEffect(() => {
-    loadNextPage(0);
-  }, [searchValueDeferred]);
+	useEffect(() => {
+		loadNextPage(0);
+	}, [searchValueDeferred]);
 
-  return (
-    <ModalDialog
-      visible={visible}
-      onClose={onClosePanel}
-      displayType={ModalDialogType.aside}
-      onBackClick={onBackClick}
-      isBackButton={!!onBackClick}
-      withoutPadding
-    >
-      <ModalDialog.Header>
-        <StyledHeaderText fontSize="21px" fontWeight={700} dir="auto" truncate>
-          {group.name}
-        </StyledHeaderText>
-      </ModalDialog.Header>
+	return (
+		<ModalDialog
+			visible={visible}
+			onClose={onClosePanel}
+			displayType={ModalDialogType.aside}
+			onBackClick={onBackClick}
+			isBackButton={!!onBackClick}
+			withoutPadding
+		>
+			<ModalDialog.Header>
+				<StyledHeaderText fontSize="21px" fontWeight={700} dir="auto" truncate>
+					{group.name}
+				</StyledHeaderText>
+			</ModalDialog.Header>
 
-      <ModalDialog.Body>
-        <StyledBodyContent>
-          {!groupMembers ? (
-            <ModalBodyLoader withSearch />
-          ) : (
-            <EditGroupMembersDialogProvider
-              infoPanelSelection={infoPanelSelection}
-              standalone={standalone}
-            >
-              <SearchInput
-                className="search-input"
-                placeholder={t("Common:SearchByGroupMembers")}
-                value={searchValue}
-                onChange={onChangeSearchValue}
-                onClearSearch={onClearSearch}
-                size={InputSize.base}
-              />
+			<ModalDialog.Body>
+				<StyledBodyContent>
+					{!groupMembers ? (
+						<ModalBodyLoader withSearch />
+					) : (
+						<EditGroupMembersDialogProvider
+							infoPanelSelection={infoPanelSelection}
+							standalone={standalone}
+						>
+							<SearchInput
+								className="search-input"
+								placeholder={t("Common:SearchByGroupMembers")}
+								value={searchValue}
+								onChange={onChangeSearchValue}
+								onClearSearch={onClearSearch}
+								size={InputSize.base}
+							/>
 
-              {isSearchResultLoading ? (
-                <ModalBodyLoader withSearch={false} />
-              ) : !groupMembers.length ? (
-                <EmptyContainer />
-              ) : (
-                <GroupMembersList
-                  members={groupMembers}
-                  loadNextPage={loadNextPage}
-                  hasNextPage={groupMembers.length < total}
-                  total={total}
-                  isNextPageLoading={isNextPageLoading}
-                />
-              )}
-            </EditGroupMembersDialogProvider>
-          )}
-        </StyledBodyContent>
-      </ModalDialog.Body>
-    </ModalDialog>
-  );
+							{isSearchResultLoading ? (
+								<ModalBodyLoader withSearch={false} />
+							) : !groupMembers.length ? (
+								<EmptyContainer />
+							) : (
+								<GroupMembersList
+									members={groupMembers}
+									loadNextPage={loadNextPage}
+									hasNextPage={groupMembers.length < total}
+									total={total}
+									isNextPageLoading={isNextPageLoading}
+								/>
+							)}
+						</EditGroupMembersDialogProvider>
+					)}
+				</StyledBodyContent>
+			</ModalDialog.Body>
+		</ModalDialog>
+	);
 };

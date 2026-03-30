@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React from "react";
 
-import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
+import SocketHelper, { SocketEvents } from "@docspace/ui-kit/utils/socket";
 
 import { useHistory } from "../../FilesView/hooks/useHistory";
 

@@ -27,104 +27,108 @@
 import React from "react";
 
 import { useDidMount } from "../../hooks/useDidMount";
-import { InputSize, InputType, TextInput } from "../text-input";
+import {
+	InputSize,
+	InputType,
+	TextInput,
+} from "@docspace/ui-kit/components/text-input";
 
 import {
-  FILE_PATH,
-  PRIVATE_CONTAINER,
-  PUBLIC_CONTAINER,
+	FILE_PATH,
+	PRIVATE_CONTAINER,
+	PUBLIC_CONTAINER,
 } from "./SelectelSettings.constants";
 import type { SelectelSettingsProps } from "./SelectelSettings.types";
 
 const SelectelSettings = ({
-  isLoading,
-  formSettings,
-  isLoadingData,
-  isNeedFilePath,
-  selectedStorage,
-  errorsFieldsBeforeSafe: isError,
-  t,
-  setIsThirdStorageChanged,
-  setRequiredFormSettings,
-  addValueInFormSettings,
+	isLoading,
+	formSettings,
+	isLoadingData,
+	isNeedFilePath,
+	selectedStorage,
+	errorsFieldsBeforeSafe: isError,
+	t,
+	setIsThirdStorageChanged,
+	setRequiredFormSettings,
+	addValueInFormSettings,
 }: SelectelSettingsProps) => {
-  const isDisabled = selectedStorage && !selectedStorage.isSet;
-  const privatePlaceholder =
-    selectedStorage && selectedStorage.properties[0].title;
+	const isDisabled = selectedStorage && !selectedStorage.isSet;
+	const privatePlaceholder =
+		selectedStorage && selectedStorage.properties[0].title;
 
-  const publicPlaceholder =
-    selectedStorage && selectedStorage.properties[1].title;
+	const publicPlaceholder =
+		selectedStorage && selectedStorage.properties[1].title;
 
-  useDidMount(() => {
-    const filePathField = isNeedFilePath ? [FILE_PATH] : [];
-    setIsThirdStorageChanged(false);
-    setRequiredFormSettings([
-      PUBLIC_CONTAINER,
-      PRIVATE_CONTAINER,
-      ...filePathField,
-    ]);
-  });
+	useDidMount(() => {
+		const filePathField = isNeedFilePath ? [FILE_PATH] : [];
+		setIsThirdStorageChanged(false);
+		setRequiredFormSettings([
+			PUBLIC_CONTAINER,
+			PRIVATE_CONTAINER,
+			...filePathField,
+		]);
+	});
 
-  const onChangeText = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { target } = event;
-    const value = target.value;
-    const name = target.name;
+	const onChangeText = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const { target } = event;
+		const value = target.value;
+		const name = target.name;
 
-    addValueInFormSettings(name, value);
-  };
+		addValueInFormSettings(name, value);
+	};
 
-  return (
-    <>
-      <TextInput
-        id="private-container-input"
-        name={PRIVATE_CONTAINER}
-        className="backup_text-input"
-        scale
-        value={formSettings[PRIVATE_CONTAINER]}
-        hasError={isError[PRIVATE_CONTAINER]}
-        onChange={onChangeText}
-        isDisabled={isLoadingData || isLoading || isDisabled}
-        placeholder={privatePlaceholder || ""}
-        tabIndex={1}
-        type={InputType.text}
-        size={InputSize.base}
-        testId="selectel_private_container_input"
-      />
-      <TextInput
-        scale
-        id="public-container-input"
-        name={PUBLIC_CONTAINER}
-        className="backup_text-input"
-        value={formSettings[PUBLIC_CONTAINER]}
-        hasError={isError[PUBLIC_CONTAINER]}
-        onChange={onChangeText}
-        isDisabled={isLoadingData || isLoading || isDisabled}
-        placeholder={publicPlaceholder || ""}
-        tabIndex={2}
-        type={InputType.text}
-        size={InputSize.base}
-        testId="selectel_public_container_input"
-      />
+	return (
+		<>
+			<TextInput
+				id="private-container-input"
+				name={PRIVATE_CONTAINER}
+				className="backup_text-input"
+				scale
+				value={formSettings[PRIVATE_CONTAINER]}
+				hasError={isError[PRIVATE_CONTAINER]}
+				onChange={onChangeText}
+				isDisabled={isLoadingData || isLoading || isDisabled}
+				placeholder={privatePlaceholder || ""}
+				tabIndex={1}
+				type={InputType.text}
+				size={InputSize.base}
+				testId="selectel_private_container_input"
+			/>
+			<TextInput
+				scale
+				id="public-container-input"
+				name={PUBLIC_CONTAINER}
+				className="backup_text-input"
+				value={formSettings[PUBLIC_CONTAINER]}
+				hasError={isError[PUBLIC_CONTAINER]}
+				onChange={onChangeText}
+				isDisabled={isLoadingData || isLoading || isDisabled}
+				placeholder={publicPlaceholder || ""}
+				tabIndex={2}
+				type={InputType.text}
+				size={InputSize.base}
+				testId="selectel_public_container_input"
+			/>
 
-      {isNeedFilePath ? (
-        <TextInput
-          id="file-path-input"
-          name={FILE_PATH}
-          className="backup_text-input"
-          scale
-          value={formSettings[FILE_PATH]}
-          onChange={onChangeText}
-          isDisabled={isLoadingData || isLoading || isDisabled}
-          placeholder={t("Common:Path")}
-          tabIndex={3}
-          hasError={isError[FILE_PATH]}
-          type={InputType.text}
-          size={InputSize.base}
-          testId="selectel_file_path_input"
-        />
-      ) : null}
-    </>
-  );
+			{isNeedFilePath ? (
+				<TextInput
+					id="file-path-input"
+					name={FILE_PATH}
+					className="backup_text-input"
+					scale
+					value={formSettings[FILE_PATH]}
+					onChange={onChangeText}
+					isDisabled={isLoadingData || isLoading || isDisabled}
+					placeholder={t("Common:Path")}
+					tabIndex={3}
+					hasError={isError[FILE_PATH]}
+					type={InputType.text}
+					size={InputSize.base}
+					testId="selectel_file_path_input"
+				/>
+			) : null}
+		</>
+	);
 };
 
 export default SelectelSettings;

@@ -25,38 +25,38 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState, useCallback } from "react";
-import { Label } from "@docspace/shared/components/label";
-import { TextInput } from "@docspace/shared/components/text-input";
+import { Label } from "@docspace/ui-kit/components/label";
+import { TextInput } from "@docspace/ui-kit/components/text-input";
 import debounce from "lodash.debounce";
 
 export const SelectTextInput = ({ t, config, setConfig }) => {
-  const [value, setValue] = useState(config.acceptButtonLabel);
+	const [value, setValue] = useState(config.acceptButtonLabel);
 
-  const debouncedSetConfig = useCallback(
-    debounce((newValue) => {
-      setConfig((oldConfig) => {
-        return { ...oldConfig, acceptButtonLabel: newValue };
-      });
-    }, 500),
-    [setConfig],
-  );
+	const debouncedSetConfig = useCallback(
+		debounce((newValue) => {
+			setConfig((oldConfig) => {
+				return { ...oldConfig, acceptButtonLabel: newValue };
+			});
+		}, 500),
+		[setConfig],
+	);
 
-  const onChangeAcceptLabel = (e) => {
-    setValue(e.target.value);
-    debouncedSetConfig(e.target.value);
-  };
+	const onChangeAcceptLabel = (e) => {
+		setValue(e.target.value);
+		debouncedSetConfig(e.target.value);
+	};
 
-  return (
-    <>
-      <Label className="label" text={t("SelectButtonText")} />
-      <TextInput
-        scale
-        onChange={onChangeAcceptLabel}
-        placeholder={t("Common:SelectAction")}
-        value={value}
-        tabIndex={7}
-        testId="select_text_input"
-      />
-    </>
-  );
+	return (
+		<>
+			<Label className="label" text={t("SelectButtonText")} />
+			<TextInput
+				scale
+				onChange={onChangeAcceptLabel}
+				placeholder={t("Common:SelectAction")}
+				value={value}
+				tabIndex={7}
+				testId="select_text_input"
+			/>
+		</>
+	);
 };

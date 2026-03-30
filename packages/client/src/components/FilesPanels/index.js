@@ -38,7 +38,7 @@ import {
 import { StopFillingDialog } from "@docspace/shared/dialogs/stop-filling";
 import { Guidance } from "@docspace/shared/components/guidance";
 import { getFormFillingTipsStorageName } from "@docspace/shared/utils";
-import AIAgentsSelector from "@docspace/shared/selectors/AIAgent";
+import AIAgentsSelector from "@docspace/ui-kit/selectors/AIAgent";
 import FilesFilter from "@docspace/shared/api/files/filter";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
@@ -78,6 +78,9 @@ import {
   CancelOperationDialog,
   ReducedRightsDialog,
   SocialAuthWelcomeDialog,
+  EditRoomGroupsDialog,
+  AddRoomToGroupDialog,
+  PauseSubmissionsDialog,
 } from "../dialogs";
 import ConvertPasswordDialog from "../dialogs/ConvertPasswordDialog";
 import ArchiveDialog from "../dialogs/ArchiveDialog";
@@ -102,6 +105,7 @@ import ShareSelector from "../ShareSelector";
 
 import TemplateGallery from "../TemplateGallery";
 import InfoPanelTemplateGallery from "../TemplateGallery/InfoPanel";
+import PluginSelector from "../PluginSelector";
 
 const Panels = (props) => {
   const {
@@ -146,6 +150,7 @@ const Panels = (props) => {
     moveToPublicRoomVisible,
     settingsPluginDialogVisible,
     pluginDialogVisible,
+    pluginSelectorVisible,
     leaveRoomDialogVisible,
     changeRoomOwnerIsVisible,
     deletePluginDialogVisible,
@@ -185,6 +190,15 @@ const Panels = (props) => {
     setAiAgentSelectorDialogProps,
     templateGalleryVisible,
     isVisibleInfoPanelTemplateGallery,
+    editRoomGroupsDialogVisible,
+    getCovers,
+    currentColorScheme,
+    covers,
+    setArrRoomGroups,
+    setEditRoomGroupsDialogVisible,
+    arrRoomGroups,
+    addRoomToGroupDialogVisible,
+    pauseSubmissionsDialogVisible,
   } = props;
 
   const navigate = useNavigate();
@@ -282,6 +296,7 @@ const Panels = (props) => {
     pluginDialogVisible && (
       <PluginDialog isVisible={pluginDialogVisible} key="plugin-dialog" />
     ),
+    pluginSelectorVisible && <PluginSelector key="plugin-selector" />,
     uploadPanelVisible && <UploadPanel key="upload-panel" />,
     conversionVisible && <ConversionPanel key="conversion-panel" />,
     (moveToPanelVisible ||
@@ -306,13 +321,10 @@ const Panels = (props) => {
     lifetimeDialogVisible && <LifetimeDialog key="lifetime-dialog" />,
     emptyTrashDialogVisible && <EmptyTrashDialog key="empty-trash-dialog" />,
     downloadDialogVisible && <DownloadDialog key="download-dialog" />,
-
     conflictResolveDialogVisible && (
       <ConflictResolveDialog key="conflict-resolve-dialog" />
     ),
     convertDialogVisible && <ConvertDialog key="convert-dialog" />,
-
-    // createRoomDialogVisible && <CreateRoomDialog key="create-room-dialog" />,
     (createRoomConfirmDialogVisible || confirmDialogIsLoading) && (
       <CreateRoomConfirmDialog key="create-room-confirm-dialog" />
     ),
@@ -328,7 +340,6 @@ const Panels = (props) => {
         withAIAgentsTreeFolder
       />
     ),
-
     selectFileFormRoomDialogVisible && (
       <FilesSelector
         isFormRoom
@@ -344,7 +355,6 @@ const Panels = (props) => {
         withAIAgentsTreeFolder
       />
     ),
-
     selectFileAiKnowledgeDialogVisible && (
       <FilesSelector
         isFormRoom
@@ -361,7 +371,6 @@ const Panels = (props) => {
         withAIAgentsTreeFolder
       />
     ),
-
     aiAgentSelectorDialogProps.visible && (
       <AIAgentsSelector
         key="ai-agents-selector"
@@ -383,7 +392,6 @@ const Panels = (props) => {
         }}
       />
     ),
-
     hotkeyPanelVisible && <HotkeysPanel key="hotkey-panel" />,
     invitePanelVisible && <InvitePanel key="invite-panel" />,
     convertPasswordDialogVisible && (
@@ -405,13 +413,11 @@ const Panels = (props) => {
     ),
     changeQuotaDialogVisible && <ChangeQuotaDialog key="change-quota-dialog" />,
     editLinkPanelIsVisible && <EditLinkPanel key="edit-link-panel" />,
-
     deleteLinkDialogVisible && <DeleteLinkDialog key="delete-link-dialog" />,
     embeddingPanelData.visible && <EmbeddingPanel key="embedding-panel" />,
     moveToPublicRoomVisible && (
       <MoveToPublicRoom key="move-to-public-room-panel" />
     ),
-
     leaveRoomDialogVisible && <LeaveRoomDialog key="leave-room-dialog" />,
     changeRoomOwnerIsVisible && (
       <ChangeRoomOwnerPanel key="change-room-owner" />
@@ -447,7 +453,6 @@ const Panels = (props) => {
     deleteVersionDialogVisible && (
       <DeleteVersionDialog key="delete-version-dialog" />
     ),
-
     stopFillingDialogData.visible && (
       <StopFillingDialog
         key="stop-filling-dialog"
@@ -462,7 +467,6 @@ const Panels = (props) => {
     welcomeFormFillingTipsVisible ? (
       <FormFillingTipsDialog key="form-filling_tips_dialog" />
     ) : null,
-
     formFillingTipsVisible ? (
       <Guidance
         key="form-filling-tips-guidance"
@@ -472,14 +476,12 @@ const Panels = (props) => {
         config={config}
       />
     ) : null,
-
     isShareFormData.visible && (
       <ShareFormPanel key="share-form-dialog" {...isShareFormData} />
     ),
     reducedRightsVisible ? (
       <ReducedRightsDialog key="reduced-rights-dialog" />
     ) : null,
-
     removeUserConfirmation && (
       <RemoveUserConfirmationDialog key="remove-user-confirmation-dialog" />
     ),
@@ -491,6 +493,23 @@ const Panels = (props) => {
     templateGalleryVisible && <TemplateGallery key="template-gallery" />,
     isVisibleInfoPanelTemplateGallery && (
       <InfoPanelTemplateGallery key="template-gallery-info-panel" />
+    ),
+    editRoomGroupsDialogVisible && (
+      <EditRoomGroupsDialog
+        key="edit-room-groups-dialog"
+        currentColorScheme={currentColorScheme}
+        getCovers={getCovers}
+        covers={covers}
+        setArrRoomGroups={setArrRoomGroups}
+        setEditRoomGroupsDialogVisible={setEditRoomGroupsDialogVisible}
+        arrRoomGroups={arrRoomGroups}
+      />
+    ),
+    addRoomToGroupDialogVisible && (
+      <AddRoomToGroupDialog key="add-room-to-group-dialog" />
+    ),
+    pauseSubmissionsDialogVisible && (
+      <PauseSubmissionsDialog key="pause-submissions-dialog" />
     ),
   ];
 };
@@ -526,7 +545,7 @@ export default inject(
       createRoomDialogVisible,
       createRoomConfirmDialogVisible,
       convertPasswordDialogVisible,
-      connectItem, // TODO:
+      connectItem,
       restoreAllPanelVisible,
       archiveDialogVisible,
       restoreRoomDialogVisible,
@@ -581,9 +600,15 @@ export default inject(
 
       aiAgentSelectorDialogProps,
       setAiAgentSelectorDialogProps,
+      editRoomGroupsDialogVisible,
+      getCovers,
+      covers,
+      setEditRoomGroupsDialogVisible,
+      addRoomToGroupDialogVisible,
+      pauseSubmissionsDialogVisible,
     } = dialogsStore;
 
-    const { viewAs } = filesStore;
+    const { viewAs, setArrRoomGroups, arrRoomGroups } = filesStore;
 
     const { extsFilesVectorized } = filesSettingsStore;
 
@@ -595,7 +620,9 @@ export default inject(
       isVisible: versionHistoryPanelVisible,
       deleteVersionDialogVisible,
     } = versionHistoryStore;
-    const { hotkeyPanelVisible } = settingsStore;
+
+    const { hotkeyPanelVisible, currentColorScheme } = settingsStore;
+
     const { confirmDialogIsLoading } = createEditRoomStore;
     const { isRoomsTariffAlmostLimit, isUserTariffAlmostLimit } =
       currentQuotaStore;
@@ -604,6 +631,7 @@ export default inject(
       settingsPluginDialogVisible,
       deletePluginDialogVisible,
       pluginDialogVisible,
+      pluginSelectorVisible,
     } = pluginStore;
 
     const { getRefElement, config } = guidanceStore;
@@ -633,7 +661,7 @@ export default inject(
       copyPanelVisible,
       moveToPanelVisible,
       restorePanelVisible,
-      connectDialogVisible: connectDialogVisible || !!connectItem, // TODO:
+      connectDialogVisible: connectDialogVisible || !!connectItem,
       versionHistoryPanelVisible,
       deleteDialogVisible,
       lifetimeDialogVisible,
@@ -670,6 +698,7 @@ export default inject(
       moveToPublicRoomVisible,
       settingsPluginDialogVisible,
       pluginDialogVisible,
+      pluginSelectorVisible,
       leaveRoomDialogVisible,
       changeRoomOwnerIsVisible,
       deletePluginDialogVisible,
@@ -710,6 +739,15 @@ export default inject(
       setAiAgentSelectorDialogProps,
       templateGalleryVisible,
       isVisibleInfoPanelTemplateGallery,
+      editRoomGroupsDialogVisible,
+      currentColorScheme,
+      getCovers,
+      covers,
+      setArrRoomGroups,
+      setEditRoomGroupsDialogVisible,
+      arrRoomGroups,
+      addRoomToGroupDialogVisible,
+      pauseSubmissionsDialogVisible,
     };
   },
 )(observer(Panels));

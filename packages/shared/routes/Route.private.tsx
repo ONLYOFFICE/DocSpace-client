@@ -26,7 +26,7 @@
 
 import { Navigate, useLocation } from "react-router";
 
-import AppLoader from "../components/app-loader";
+import AppLoader from "@docspace/ui-kit/components/app-loader";
 
 import { TenantStatus } from "../enums";
 import { combineUrl } from "../utils/combineUrl";
@@ -60,6 +60,8 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
 
     limitedAccessDevToolsForUsers,
     standalone,
+    requireAIServices,
+    aiServicesEnabled,
   } = props;
 
   const location = useLocation();
@@ -111,7 +113,8 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       location.pathname === "/portal-settings/delete-data/deactivation";
 
     const isBonusPage = location.pathname === "/portal-settings/bonus";
-    const isServicesPage = location.pathname === "/portal-settings/services";
+    const isServicesPage =
+      location.pathname === "/portal-settings/payments/services";
 
     const isPortalRenameUrl =
       location.pathname ===
@@ -307,6 +310,10 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     if (isDeveloperToolsPage) {
       if (user?.isVisitor || (limitedAccessDevToolsForUsers && !user?.isAdmin))
         return <Navigate replace to="/error/403" />;
+    }
+
+    if (requireAIServices && !aiServicesEnabled) {
+      return <Navigate replace to="/error/404" />;
     }
 
     if (isAccountsPage) {

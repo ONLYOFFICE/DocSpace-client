@@ -30,8 +30,8 @@ import { inject, observer } from "mobx-react";
 import { useParams } from "react-router";
 
 import FilterReactSvrUrl from "PUBLIC_DIR/images/filter.react.svg?url";
-import { IconButton } from "@docspace/shared/components/icon-button";
-import { Text } from "@docspace/shared/components/text";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import { tablet, mobile, injectDefaultTheme } from "@docspace/shared/utils";
 import FilterDialog from "./FilterDialog";
@@ -100,7 +100,7 @@ const FilterButton = styled.div.attrs(injectDefaultTheme)`
     width: 8px;
     height: 8px;
     background-color: ${(props) =>
-      props.theme.client.settings.webhooks.spanBackground};
+			props.theme.client.settings.webhooks.spanBackground};
     border-radius: 50%;
     position: absolute;
     bottom: -2px;
@@ -109,82 +109,82 @@ const FilterButton = styled.div.attrs(injectDefaultTheme)`
 `;
 
 const HistoryFilterHeader = (props) => {
-  const {
-    applyFilters,
-    historyFilters,
-    isGroupMenuVisible,
-    fetchConfigName,
-    configName,
-    clearConfigName,
-  } = props;
+	const {
+		applyFilters,
+		historyFilters,
+		isGroupMenuVisible,
+		fetchConfigName,
+		configName,
+		clearConfigName,
+	} = props;
 
-  const [isFiltersVisible, setIsFiltersVisible] = useState(false);
-  const [, startTransition] = useTransition();
-  const { id } = useParams();
+	const [isFiltersVisible, setIsFiltersVisible] = useState(false);
+	const [, startTransition] = useTransition();
+	const { id } = useParams();
 
-  const openFiltersModal = () => {
-    setIsFiltersVisible(true);
-  };
+	const openFiltersModal = () => {
+		setIsFiltersVisible(true);
+	};
 
-  const closeFiltersModal = () => {
-    setIsFiltersVisible(false);
-  };
+	const closeFiltersModal = () => {
+		setIsFiltersVisible(false);
+	};
 
-  const handleConfigFetch = async () => {
-    await fetchConfigName({
-      configId: id,
-    });
-  };
+	const handleConfigFetch = async () => {
+		await fetchConfigName({
+			configId: id,
+		});
+	};
 
-  useEffect(() => {
-    startTransition(handleConfigFetch);
-    return clearConfigName;
-  }, []);
+	useEffect(() => {
+		startTransition(handleConfigFetch);
+		return clearConfigName;
+	}, []);
 
-  return (
-    <div>
-      <Suspense fallback={<HistoryHeaderLoader />}>
-        <ListHeader>
-          <ListHeading title={configName} fontWeight={700} fontSize="16px">
-            {configName}
-          </ListHeading>
+	return (
+		<div>
+			<Suspense fallback={<HistoryHeaderLoader />}>
+				<ListHeader>
+					<ListHeading title={configName} fontWeight={700} fontSize="16px">
+						{configName}
+					</ListHeading>
 
-          <FilterButton
-            id="filter-button"
-            onClick={openFiltersModal}
-            isGroupMenuVisible={isGroupMenuVisible}
-            data-testid="webhook_filter_button"
-          >
-            <IconButton iconName={FilterReactSvrUrl} size={16} />
-            <span hidden={historyFilters === null} />
-          </FilterButton>
-        </ListHeader>
-      </Suspense>
-      {historyFilters !== null ? (
-        <StatusBar applyFilters={applyFilters} />
-      ) : null}
-      <FilterDialog
-        visible={isFiltersVisible}
-        closeModal={closeFiltersModal}
-        applyFilters={applyFilters}
-      />
-    </div>
-  );
+					<FilterButton
+						id="filter-button"
+						onClick={openFiltersModal}
+						isGroupMenuVisible={isGroupMenuVisible}
+						data-testid="webhook_filter_button"
+					>
+						<IconButton iconName={FilterReactSvrUrl} size={16} />
+						<span hidden={historyFilters === null} />
+					</FilterButton>
+				</ListHeader>
+			</Suspense>
+			{historyFilters !== null ? (
+				<StatusBar applyFilters={applyFilters} />
+			) : null}
+			<FilterDialog
+				visible={isFiltersVisible}
+				closeModal={closeFiltersModal}
+				applyFilters={applyFilters}
+			/>
+		</div>
+	);
 };
 
 export default inject(({ webhooksStore }) => {
-  const {
-    historyFilters,
-    isGroupMenuVisible,
-    fetchConfigName,
-    configName,
-    clearConfigName,
-  } = webhooksStore;
-  return {
-    historyFilters,
-    isGroupMenuVisible,
-    fetchConfigName,
-    configName,
-    clearConfigName,
-  };
+	const {
+		historyFilters,
+		isGroupMenuVisible,
+		fetchConfigName,
+		configName,
+		clearConfigName,
+	} = webhooksStore;
+	return {
+		historyFilters,
+		isGroupMenuVisible,
+		fetchConfigName,
+		configName,
+		clearConfigName,
+	};
 })(observer(HistoryFilterHeader));

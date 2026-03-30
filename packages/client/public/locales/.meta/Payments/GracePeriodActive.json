@@ -1,0 +1,28 @@
+{
+  "key_path": "GracePeriodActive",
+  "content": "The grace period is active from {{fromDate}} to {{byDate}}</1> (days remaining: {{delayDaysCount}}).",
+  "content_en_sha1_hash": "adec9d51e32d8362573ea3497004adba87aa2355",
+  "created_at": "2026-02-18T14:56:32.648Z",
+  "updated_at": "2026-03-20T09:58:31.060Z",
+  "comment": {
+    "text": "This key displays a message indicating an active grace period, showing the start and end dates, and the remaining days. It appears within an Invite Quota Warning Dialog, informing users about the time remaining within the grace period. Translators should ensure date formats and number formatting are appropriate for the target locale.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T09:58:31.060Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/index.js",
+      "line_number": 124,
+      "context": "</Text>\n <br />\n <Text as=\"div\">\n {standalone ? (\n <Trans\n i18nKey=\"GracePeriodActive\"\n ns=\"Payments\"\n t={t}\n values={{\n fromDate,\n byDate,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

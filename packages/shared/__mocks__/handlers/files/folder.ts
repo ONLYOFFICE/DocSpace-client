@@ -485,7 +485,7 @@ export const files: TFile[] = [
       EditForm: false,
       Vectorization: false,
     },
-    title: "ONLYOFFICE Sample Document - Copy (3).docx",
+    title: "ONLYOFFICE Sample Document.docx",
     access: 0,
     shared: false,
     created: "2025-01-20T12:23:50.0000000+01:00",

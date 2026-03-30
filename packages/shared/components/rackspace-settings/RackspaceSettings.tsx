@@ -25,121 +25,125 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { InputSize, InputType, TextInput } from "../text-input";
+import {
+	InputSize,
+	InputType,
+	TextInput,
+} from "@docspace/ui-kit/components/text-input";
 import { useDidMount } from "../../hooks/useDidMount";
 import { RackspaceSettingsProps } from "./RackspaceSettings.types";
 import {
-  FILE_PATH,
-  PRIVATE_CONTAINER,
-  PUBLIC_CONTAINER,
-  REGION,
+	FILE_PATH,
+	PRIVATE_CONTAINER,
+	PUBLIC_CONTAINER,
+	REGION,
 } from "./RackspaceSettings.constants";
 
 const RackspaceSettings = ({
-  isLoading,
-  formSettings,
-  isLoadingData,
-  selectedStorage,
-  isNeedFilePath,
-  errorsFieldsBeforeSafe: isError,
-  t,
-  setIsThirdStorageChanged,
-  setRequiredFormSettings,
-  addValueInFormSettings,
+	isLoading,
+	formSettings,
+	isLoadingData,
+	selectedStorage,
+	isNeedFilePath,
+	errorsFieldsBeforeSafe: isError,
+	t,
+	setIsThirdStorageChanged,
+	setRequiredFormSettings,
+	addValueInFormSettings,
 }: RackspaceSettingsProps) => {
-  const isDisabled = selectedStorage && !selectedStorage.isSet;
-  const privatePlaceholder =
-    selectedStorage && selectedStorage.properties[0].title;
-  const publicPlaceholder =
-    selectedStorage && selectedStorage.properties[1].title;
-  const regionPlaceholder =
-    selectedStorage && selectedStorage.properties[2].title;
+	const isDisabled = selectedStorage && !selectedStorage.isSet;
+	const privatePlaceholder =
+		selectedStorage && selectedStorage.properties[0].title;
+	const publicPlaceholder =
+		selectedStorage && selectedStorage.properties[1].title;
+	const regionPlaceholder =
+		selectedStorage && selectedStorage.properties[2].title;
 
-  useDidMount(() => {
-    setIsThirdStorageChanged(false);
-    const filePathField = isNeedFilePath ? [FILE_PATH] : [];
-    setRequiredFormSettings([
-      REGION,
-      PUBLIC_CONTAINER,
-      PRIVATE_CONTAINER,
-      ...filePathField,
-    ]);
-  });
+	useDidMount(() => {
+		setIsThirdStorageChanged(false);
+		const filePathField = isNeedFilePath ? [FILE_PATH] : [];
+		setRequiredFormSettings([
+			REGION,
+			PUBLIC_CONTAINER,
+			PRIVATE_CONTAINER,
+			...filePathField,
+		]);
+	});
 
-  const onChangeText = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { target } = event;
-    const value = target.value;
-    const name = target.name;
+	const onChangeText = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const { target } = event;
+		const value = target.value;
+		const name = target.name;
 
-    addValueInFormSettings(name, value);
-  };
+		addValueInFormSettings(name, value);
+	};
 
-  return (
-    <>
-      <TextInput
-        id="private-container-input"
-        name={PRIVATE_CONTAINER}
-        className="backup_text-input"
-        scale
-        value={formSettings[PRIVATE_CONTAINER]}
-        hasError={isError[PRIVATE_CONTAINER]}
-        onChange={onChangeText}
-        isDisabled={isLoadingData || isLoading || isDisabled}
-        placeholder={privatePlaceholder || ""}
-        tabIndex={1}
-        type={InputType.text}
-        size={InputSize.base}
-        testId="rackspace_private_container_input"
-      />
-      <TextInput
-        id="public-container-input"
-        name={PUBLIC_CONTAINER}
-        className="backup_text-input"
-        scale
-        value={formSettings[PUBLIC_CONTAINER]}
-        hasError={isError[PUBLIC_CONTAINER]}
-        onChange={onChangeText}
-        isDisabled={isLoadingData || isLoading || isDisabled}
-        placeholder={publicPlaceholder || ""}
-        tabIndex={2}
-        type={InputType.text}
-        size={InputSize.base}
-        testId="rackspace_public_container_input"
-      />
-      <TextInput
-        id="region-input"
-        name={REGION}
-        className="backup_text-input"
-        scale
-        value={formSettings[REGION]}
-        hasError={isError[REGION]}
-        onChange={onChangeText}
-        isDisabled={isLoadingData || isLoading || isDisabled}
-        placeholder={regionPlaceholder || ""}
-        tabIndex={3}
-        type={InputType.text}
-        size={InputSize.base}
-        testId="rackspace_region_input"
-      />
-      {isNeedFilePath ? (
-        <TextInput
-          id="file-path-input"
-          name={FILE_PATH}
-          className="backup_text-input"
-          scale
-          value={formSettings[FILE_PATH]}
-          onChange={onChangeText}
-          isDisabled={isLoadingData || isLoading || isDisabled}
-          placeholder={t("Common:Path")}
-          tabIndex={4}
-          hasError={isError[FILE_PATH]}
-          type={InputType.text}
-          size={InputSize.base}
-          testId="rackspace_file_path_input"
-        />
-      ) : null}
-    </>
-  );
+	return (
+		<>
+			<TextInput
+				id="private-container-input"
+				name={PRIVATE_CONTAINER}
+				className="backup_text-input"
+				scale
+				value={formSettings[PRIVATE_CONTAINER]}
+				hasError={isError[PRIVATE_CONTAINER]}
+				onChange={onChangeText}
+				isDisabled={isLoadingData || isLoading || isDisabled}
+				placeholder={privatePlaceholder || ""}
+				tabIndex={1}
+				type={InputType.text}
+				size={InputSize.base}
+				testId="rackspace_private_container_input"
+			/>
+			<TextInput
+				id="public-container-input"
+				name={PUBLIC_CONTAINER}
+				className="backup_text-input"
+				scale
+				value={formSettings[PUBLIC_CONTAINER]}
+				hasError={isError[PUBLIC_CONTAINER]}
+				onChange={onChangeText}
+				isDisabled={isLoadingData || isLoading || isDisabled}
+				placeholder={publicPlaceholder || ""}
+				tabIndex={2}
+				type={InputType.text}
+				size={InputSize.base}
+				testId="rackspace_public_container_input"
+			/>
+			<TextInput
+				id="region-input"
+				name={REGION}
+				className="backup_text-input"
+				scale
+				value={formSettings[REGION]}
+				hasError={isError[REGION]}
+				onChange={onChangeText}
+				isDisabled={isLoadingData || isLoading || isDisabled}
+				placeholder={regionPlaceholder || ""}
+				tabIndex={3}
+				type={InputType.text}
+				size={InputSize.base}
+				testId="rackspace_region_input"
+			/>
+			{isNeedFilePath ? (
+				<TextInput
+					id="file-path-input"
+					name={FILE_PATH}
+					className="backup_text-input"
+					scale
+					value={formSettings[FILE_PATH]}
+					onChange={onChangeText}
+					isDisabled={isLoadingData || isLoading || isDisabled}
+					placeholder={t("Common:Path")}
+					tabIndex={4}
+					hasError={isError[FILE_PATH]}
+					type={InputType.text}
+					size={InputSize.base}
+					testId="rackspace_file_path_input"
+				/>
+			) : null}
+		</>
+	);
 };
 
 export default RackspaceSettings;

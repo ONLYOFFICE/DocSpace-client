@@ -1,10 +1,11 @@
 import IconCalendar from "PUBLIC_DIR/images/calendar.info.panel.react.svg?url";
 import { useState, useEffect, useRef } from "react";
 import styled, { css } from "styled-components";
-import moment from "moment";
-import { Calendar } from "@docspace/shared/components/calendar";
+import type { DateTime } from "luxon";
+import { Calendar } from "@docspace/ui-kit/components/calendar";
 import { isMobile } from "@docspace/shared/utils";
 import { ReactSVG } from "react-svg";
+import { now, formatDate, parseToDateTime } from "@docspace/ui-kit/utils/date";
 
 const heightCalendar = 376;
 const heightCalendarMobile = 420;
@@ -57,7 +58,7 @@ const CalendarComponent = ({
   locale,
 }: CalendarProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedDate, setSelectedDate] = useState<moment.Moment>();
+  const [selectedDate, setSelectedDate] = useState<DateTime | undefined>();
 
   const [height, setHeight] = useState(heightCalendar);
 
@@ -111,16 +112,17 @@ const CalendarComponent = ({
 
   const toggleCalendar = () => setIsOpen((open) => !open);
 
-  const onDateSet = (date: moment.Moment) => {
+  const onDateSet = (date: DateTime) => {
     if (!date) return;
-    const formattedDate = moment(date.format("YYYY-MM-DD"));
     setSelectedDate(date);
-    setCalendarDay(formattedDate.format("YYYY-MM-DD"));
+    setCalendarDay(formatDate(date, "yyyy-MM-dd"));
     setIsOpen(false);
   };
 
-  const formattedRoomCreationDate =
-    moment(roomCreationDate).format("YYYY-MM-DD");
+  const formattedRoomCreationDate = formatDate(
+    parseToDateTime(roomCreationDate),
+    "yyyy-MM-dd",
+  );
 
   return (
     <StyledCalendarComponent>
@@ -136,7 +138,7 @@ const CalendarComponent = ({
         <StyledCalendar
           height={height}
           setSelectedDate={onDateSet}
-          selectedDate={selectedDate ?? moment()}
+          selectedDate={selectedDate ?? now()}
           minDate={new Date(formattedRoomCreationDate)}
           maxDate={new Date()}
           forwardedRef={calendarRef}

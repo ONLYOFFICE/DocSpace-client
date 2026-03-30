@@ -30,16 +30,15 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
+import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Text } from "@docspace/ui-kit/components/text";
 import type {
   TAiProvider,
   TProviderTypeWithUrl,
 } from "@docspace/shared/api/ai/types";
 import { getAvailableProviderUrls } from "@docspace/shared/api/ai";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 
@@ -50,15 +49,18 @@ import { DeleteAIProviderDialog } from "./dialogs/delete";
 
 import { AiProviderTile } from "./Tile";
 import { ProvidersLoader } from "./ProvidersLoader";
+import { DefaultProvider } from "./DefaultProvider";
 
 type TDeleteDialogData =
   | {
       visible: false;
       providerId: null;
+      showDefaultProviderWarning?: false;
     }
   | {
       visible: true;
       providerId: TAiProvider["id"];
+      showDefaultProviderWarning?: boolean;
     };
 
 type TUpdateDialogData =
@@ -78,6 +80,8 @@ type AIProviderProps = {
   isProviderAvailable?: AISettingsStore["isProviderAvailable"];
   cancelAvailabilityCheck?: AISettingsStore["cancelAvailabilityCheck"];
   aiProviderSettingsUrl?: SettingsStore["aiProviderSettingsUrl"];
+  hasAIProviders?: AISettingsStore["hasAIProviders"];
+  aiConfig?: SettingsStore["aiConfig"];
 };
 
 const AIProviderComponent = ({
@@ -87,6 +91,8 @@ const AIProviderComponent = ({
   isProviderAvailable,
   cancelAvailabilityCheck,
   aiProviderSettingsUrl,
+  hasAIProviders,
+  aiConfig,
 }: AIProviderProps) => {
   const { t } = useTranslation(["Common", "AISettings"]);
   const [addDialogVisible, setaddDialogVisible] = useState(false);
@@ -112,7 +118,14 @@ const AIProviderComponent = ({
     setDeleteDialogData({ visible: false, providerId: null });
 
   const onDeleteAIProvider = async (id: TAiProvider["id"]) => {
-    setDeleteDialogData({ visible: true, providerId: id });
+    const isDefaultProvider = aiProviders?.find((p) => p.id === id)?.isDefault;
+    const isLastProvider = aiProviders && aiProviders.length === 1;
+
+    setDeleteDialogData({
+      visible: true,
+      providerId: id,
+      showDefaultProviderWarning: isDefaultProvider && !isLastProvider,
+    });
   };
 
   const onUpdateAIProvider = async (provider: TAiProvider) => {
@@ -189,9 +202,14 @@ const AIProviderComponent = ({
             isAvailable={
               isProviderAvailable?.(provider.id) && !provider.needReset
             }
+            enabled={aiConfig?.systemAiEnabled}
           />
         ))}
       </div>
+
+      {aiProviders && aiProviders.length > 0 ? (
+        <DefaultProvider aiConfig={aiConfig} />
+      ) : null}
 
       {addDialogVisible ? (
         <AddUpdateProviderDialog
@@ -214,6 +232,9 @@ const AIProviderComponent = ({
         <DeleteAIProviderDialog
           onClose={hideDeleteProviderDialog}
           providerId={deleteDialogData.providerId}
+          showDefaultProviderWarning={
+            deleteDialogData.showDefaultProviderWarning
+          }
         />
       ) : null}
     </div>
@@ -229,8 +250,11 @@ export const AIProvider = inject(
       isProviderAvailable: aiSettingsStore.isProviderAvailable,
       cancelAvailabilityCheck: aiSettingsStore.cancelAvailabilityCheck,
       aiProviderSettingsUrl: settingsStore.aiProviderSettingsUrl,
+      aiConfig: settingsStore.aiConfig,
+      hasAIProviders: aiSettingsStore.hasAIProviders,
     };
   },
 )(observer(AIProviderComponent));
 
 export { ProvidersLoader };
+

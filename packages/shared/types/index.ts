@@ -24,17 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+export * from "@docspace/ui-kit/types";
+
 import type { TFile, TFileLink, TFolder } from "../api/files/types";
-import type { TBreadCrumb } from "../components/selector/Selector.types";
+import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
 import type {
   FolderType,
   RoomsType,
   ShareAccessRights,
   ShareRights,
 } from "../enums";
-import type { TTheme, TColorScheme } from "../themes";
+import type { TTheme, TColorScheme } from "@docspace/ui-kit/providers/theme";
 import type FirebaseHelper from "../utils/firebase";
 import type { TRoom } from "../api/rooms/types";
+
+export type { TDirectionX, TDirectionY } from "@docspace/ui-kit/types";
 
 export type Option = {
   key: string;
@@ -43,9 +47,6 @@ export type Option = {
 };
 
 export type TWeekdaysLabel = Pick<Option, "key" | "label">;
-
-export type TDirectionX = "left" | "right";
-export type TDirectionY = "bottom" | "top" | "both";
 
 export type TViewAs =
   | "tile"
@@ -244,10 +245,14 @@ declare global {
     zE: {
       apply: (...args: unknown[]) => void;
     };
-    i18n: {
-      loaded: {
-        [key: string]: { data: { [key: string]: string }; namespaces: string };
-      };
+    i18n?: {
+      t?: (key: string, options?: Record<string, string | number>) => string;
+      inLoad: { url: string; callbacks: Function[] }[];
+      loaded: Record<
+        string,
+        { data: Record<string, string>; namespaces: string }
+      >;
+      instance?: import("i18next").i18n;
     };
     timezone: string;
     snackbar?: object;
@@ -298,7 +303,7 @@ declare global {
         loaderTime: number;
       };
     };
-    AscDesktopEditor: {
+    AscDesktopEditor?: {
       execCommand: (key: string, value: string) => void;
       cloudCryptoCommand: (
         key: string,
@@ -322,7 +327,7 @@ declare global {
       opMessage?: string;
       opType: number;
     }) => void;
-    RendererProcessVariable: {
+    RendererProcessVariable?: {
       theme?: { id: string; system: string; type: string; addlocal: string };
     };
     Tiff: new (
@@ -336,8 +341,18 @@ declare global {
   }
 
   export type ContextMenuModel =
-    import("../components/context-menu/ContextMenu.types").ContextMenuModel;
+    import("@docspace/ui-kit/components/context-menu").ContextMenuModel;
 
   export type SeparatorType =
-    import("../components/context-menu/ContextMenu.types").SeparatorType;
+    import("@docspace/ui-kit/components/context-menu").SeparatorType;
 }
+
+export type TDefaultTemplateItem = {
+  id: number | null;
+  title?: string;
+  isModified?: boolean;
+  lastModified?: string;
+  fileExst: string;
+  fileSize: number;
+  viewUrl: string;
+};

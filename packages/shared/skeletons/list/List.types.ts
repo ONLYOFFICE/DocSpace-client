@@ -24,16 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { RectangleSkeletonProps } from "../rectangle";
+import type { RectangleSkeletonProps } from "@docspace/ui-kit/components/rectangle";
 
 export type ListItemLoaderProps = RectangleSkeletonProps & {
-  id?: string;
-  className?: string;
-  style?: React.CSSProperties;
-  withoutFirstRectangle?: boolean;
-  withoutLastRectangle?: boolean;
+	id?: string;
+	className?: string;
+	style?: React.CSSProperties;
+	withoutFirstRectangle?: boolean;
+	withoutLastRectangle?: boolean;
 };
 
 export type ListLoaderProps = ListItemLoaderProps & {
-  count: number;
+	count: number;
 };

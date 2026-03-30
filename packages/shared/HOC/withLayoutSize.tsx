@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { Consumer } from "../utils";
+import { Consumer } from "@docspace/ui-kit/utils";
 
 export function withLayoutSize(Component: React.JSX.ElementType) {
   return function LayoutSizeComponent(props: object) {

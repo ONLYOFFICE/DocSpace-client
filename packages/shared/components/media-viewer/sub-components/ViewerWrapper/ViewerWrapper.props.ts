@@ -59,6 +59,7 @@ interface ViewerWrapperProps {
 
   onSetSelectionFile: VoidFunction;
   contextModel: (isError?: boolean) => ContextMenuModel[];
+  pluginViewerContent?: React.ReactNode;
 }
 
 export default ViewerWrapperProps;

@@ -29,10 +29,10 @@ import isEqual from "lodash/isEqual";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import { Text } from "../../../components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
 import { WhiteLabelLogoType } from "../../../enums";
-import { globalColors } from "../../../themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme";
 
 import { Logo } from "./Logo";
 import { IWhiteLabel, IWhiteLabelData } from "./WhiteLabel.types";
@@ -398,6 +398,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
           <div className={styles.logosWrapper}>
             <Logo
               name={logoUrls[4].name}
+              title={t("LightTheme")}
               src={logoUrls[4].path.light}
               imageClass={classNames(
                 styles.borderImg,
@@ -413,6 +414,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
             />
             <Logo
               name={logoUrls[3].name}
+              title={t("DarkTheme")}
               src={logoUrls[3].path.light}
               imageClass={classNames(
                 styles.borderImg,

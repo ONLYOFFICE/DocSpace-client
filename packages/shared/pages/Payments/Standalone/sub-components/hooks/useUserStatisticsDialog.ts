@@ -27,7 +27,7 @@
 import { useState } from "react";
 import { TLicenseQuota } from "../../../../../api/portal/types";
 import { createLicenseQuotaReport } from "../../../../../api/management";
-import { toastr } from "../../../../../components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 type TUserStatisticsDialogProps = {
   openOnNewPage?: boolean;

@@ -1,0 +1,97 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.subscriptionCard {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid var(--border-service-color);
+  border-radius: 6px;
+box-sizing: border-box;
+  max-width: 320px;
+  margin: 16px 0 12px 0 ;
+}
+
+.subscriptionHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.settingsIcon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  cursor: pointer;
+
+  svg {
+    width: 16px;
+    height: 16px;
+
+  path {
+    fill: var(--payment-dialog-text)
+    }
+  }
+}
+
+.priceContainer {
+  display: flex;
+  align-items: baseline;
+}
+
+.sizeText {
+  color: var(--payment-dialog-text);
+}
+
+.priceText {
+
+  font-weight: 700;
+
+  .mainPrice {
+    font-size: 28px;
+    line-height: normal;
+  }
+
+  .perMonth {
+    font-size: 20px;
+    line-height: normal;
+  }
+
+  .storage {
+    font-size: 20px;
+    line-height: normal;
+
+    font-weight: 400;
+  }
+}
+
+.increaseButton {
+  width: 100%;
+  margin-top:4px;
+}
+
+.renewalText {
+
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+
+
+  .renewalDate {
+    font-weight: 600;
+  }
+}
+
+.transactionSection {
+  margin-top: 8px;
+}

@@ -83,7 +83,11 @@ if (process.env.DEPLOY) {
   nextConfig.output = "standalone";
 }
 
-module.exports = {
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
+});
+
+module.exports = withBundleAnalyzer({
   webpack(config) {
     const isProduction = config.mode === "production";
     // Add resolve configuration for shared package
@@ -92,6 +96,7 @@ module.exports = {
       alias: {
         ...config.resolve?.alias,
         "@docspace/shared": path.resolve(__dirname, "../shared"),
+        "@docspace/ui-kit": path.resolve(__dirname, "../../libs/ui-kit"),
       },
     };
 
@@ -200,4 +205,4 @@ module.exports = {
     return config;
   },
   ...nextConfig,
-};
+});

@@ -28,8 +28,8 @@ import React from "react";
 import { Trans, useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import { Link } from "../../../../components/link";
-import { Text } from "../../../../components/text";
+import { Link } from "@docspace/ui-kit/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import { getTwoDotsReplacing } from "../Standalone.helpers";
 import { IPaymentsProps } from "../Standalone.types";
@@ -47,6 +47,11 @@ export const TariffTitleContainer = ({
   docspaceFaqUrl,
   licenseQuota,
   openOnNewPage,
+  isLifetimeLicense,
+  isGracePeriod,
+  isNotPaidPeriod,
+  gracePeriodEndDate,
+  delayDaysCount,
 }: Partial<IPaymentsProps>) => {
   const { t } = useTranslation("Common");
 
@@ -62,7 +67,10 @@ export const TariffTitleContainer = ({
     if (isTrial) {
       return isLicenseDateExpired ? (
         <Text
-          className={styles.paymentsSubscriptionExpired}
+          className={classNames(styles.paymentsSubscriptionExpired, {
+            [styles.isTrial]: isTrial,
+            [styles.isLicenseDateExpired]: isLicenseDateExpired,
+          })}
           fontWeight={600}
           fontSize="14px"
         >
@@ -70,11 +78,47 @@ export const TariffTitleContainer = ({
         </Text>
       ) : (
         <Text
-          className={styles.paymentsSubscriptionExpired}
+          className={classNames(styles.paymentsSubscriptionExpired, {
+            [styles.isTrial]: isTrial,
+          })}
           fontWeight={600}
           fontSize="14px"
         >
           {t("FreeDaysLeft", { count: Number(trialDaysLeft) })}
+        </Text>
+      );
+    }
+
+    if (!isLifetimeLicense && isGracePeriod) {
+      return (
+        <Text
+          className={styles.paymentsSubscriptionExpired}
+          isBold
+          fontSize="16px"
+        >
+          <Trans
+            i18nKey="LicenseHasExpiredGracePeriodStartedOn"
+            ns="Common"
+            t={t}
+            values={{ date: paymentDate }}
+            components={{
+              1: <span data-testid="grace-period-start-date" />,
+            }}
+          />
+        </Text>
+      );
+    }
+
+    if (!isLifetimeLicense && isNotPaidPeriod) {
+      return (
+        <Text
+          className={styles.paymentsSubscriptionExpired}
+          isBold
+          fontSize="16px"
+        >
+          {t("ActivateTariffLicenseExpired", {
+            date: paymentDate,
+          })}
         </Text>
       );
     }
@@ -108,63 +152,102 @@ export const TariffTitleContainer = ({
     );
   };
 
+  const getDescription = () => {
+    return (
+      <Text fontWeight={600} fontSize="13px" as="span">
+        {usersStatistics ? (
+          <Trans
+            i18nKey="ActivateTariffDescrUsers"
+            values={{
+              productName: t("Common:ProductName"),
+              organizationName: logoText,
+              license: isDeveloper
+                ? t("Common:DeveloperLicense")
+                : t("Common:EnterpriseLicense"),
+              editingCount: usersStatistics.totalUsers ?? 0,
+              limit: usersStatistics.limitUsers ?? 0,
+            }}
+            t={t}
+            ns="Common"
+            components={{
+              1: (
+                <Link
+                  color="accent"
+                  onClick={openUserStatistics}
+                  fontWeight="600"
+                  dataTestId="open_user_statistics_link"
+                />
+              ),
+            }}
+          />
+        ) : (
+          t("ActivateTariffDescrConnections", {
+            productName: t("Common:ProductName"),
+            organizationName: logoText,
+            license: isDeveloper
+              ? t("Common:DeveloperLicense")
+              : t("Common:EnterpriseLicense"),
+          })
+        )}
+      </Text>
+    );
+  };
+
+  const getSubDescription = () => {
+    if (!isLifetimeLicense && isGracePeriod) {
+      return (
+        <Text className={styles.gracePeriodInfo} fontSize="14px">
+          <Trans
+            i18nKey="LicenseGracePeriodActivatedInfo"
+            ns="Common"
+            t={t}
+            values={{
+              fromDate: paymentDate,
+              byDate: gracePeriodEndDate,
+              delayDaysCount,
+              productName: t("ProductName"),
+            }}
+            components={{
+              1: <Text as="span" isBold dataTestId="grace-period-date-range" />,
+              2: <span data-testid="grace-period-days-remaining" />,
+            }}
+          />
+        </Text>
+      );
+    }
+
+    return null;
+  };
+
   return (
     <div
       className={classNames(styles.titleComponent, {
-        [styles.limitedWidth]: isTrial ? true : isLicenseDateExpired,
+        [styles.limitedWidth]: isTrial,
         [styles.isLicenseDateExpired]: isLicenseDateExpired,
       })}
     >
       <div className={styles.paymentsSubscription}>
-        <div className={styles.title}>
-          <Text fontWeight={600} fontSize="13px" as="span">
-            {usersStatistics ? (
-              <Trans
-                i18nKey="ActivateTariffDescrUsers"
-                values={{
-                  productName: t("Common:ProductName"),
-                  organizationName: logoText,
-                  license: isDeveloper
-                    ? t("Common:DeveloperLicense")
-                    : t("Common:EnterpriseLicense"),
-                  editingCount: usersStatistics.totalUsers ?? 0,
-                  limit: usersStatistics.limitUsers ?? 0,
-                }}
-                t={t}
-                ns="Common"
-                components={{
-                  1: (
-                    <Link
-                      color="accent"
-                      onClick={openUserStatistics}
-                      fontWeight="600"
-                      dataTestId="open_user_statistics_link"
-                    />
-                  ),
-                }}
-              />
-            ) : (
-              t("ActivateTariffDescrConnections", {
-                productName: t("Common:ProductName"),
-                organizationName: logoText,
-                license: isDeveloper
-                  ? t("Common:DeveloperLicense")
-                  : t("Common:EnterpriseLicense"),
-              })
-            )}
-          </Text>{" "}
-          {!isLicenseDateExpired ? (
-            <Text
-              fontSize="13px"
-              as="span"
-              dataTestId="license_expires_date_text"
-            >
-              {expiresDate()}
-            </Text>
-          ) : null}
-        </div>
+        {isLifetimeLicense ||
+        isGracePeriod ||
+        isTrial ||
+        !isLicenseDateExpired ? (
+          <div className={styles.title}>
+            {getDescription()}
+
+            {!isLicenseDateExpired ? (
+              <Text
+                fontSize="13px"
+                as="span"
+                dataTestId="license_expires_date_text"
+              >
+                {expiresDate()}
+              </Text>
+            ) : null}
+          </div>
+        ) : null}
         {alertComponent()}
       </div>
+      {getSubDescription()}
       <UserStatisticsDialog
         docspaceFaqUrl={docspaceFaqUrl}
         isVisible={isUserStatisticsVisible}

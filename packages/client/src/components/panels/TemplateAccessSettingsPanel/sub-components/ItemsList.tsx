@@ -26,11 +26,11 @@
 
 import { useState, useEffect, useRef, memo, useCallback } from "react";
 import { FixedSizeList as List } from "react-window";
-import { CustomScrollbarsVirtualList } from "@docspace/shared/components/scrollbar";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import useResizeObserver from "use-resize-observer";
 import { useTheme } from "styled-components";
 import { TTranslation } from "@docspace/shared/types";
-import { TSelectorItem } from "@docspace/shared/components/selector";
+import { TSelectorItem } from "@docspace/ui-kit/components/selector";
 import { ShareAccessRights } from "@docspace/shared/enums";
 import Item from "./Item";
 import { StyledRow, ScrollList } from "../StyledInvitePanel";
@@ -38,138 +38,136 @@ import { StyledRow, ScrollList } from "../StyledInvitePanel";
 const USER_ITEM_HEIGHT = 48;
 
 type ItemsListProps = {
-  t: TTranslation;
-  setInviteItems: (items: TSelectorItem[]) => void;
-  inviteItems: TSelectorItem[];
-  scrollAllPanelContent: boolean;
-  isDisabled: boolean;
+	t: TTranslation;
+	setInviteItems: (items: TSelectorItem[]) => void;
+	inviteItems: TSelectorItem[];
+	scrollAllPanelContent: boolean;
+	isDisabled: boolean;
 };
 
 type RowData = {
-  t: TTranslation;
-  inviteItems: TSelectorItem[];
-  listItems: TSelectorItem[];
-  setInviteItems: (items: TSelectorItem[]) => void;
-  isDisabled: boolean;
+	t: TTranslation;
+	inviteItems: TSelectorItem[];
+	listItems: TSelectorItem[];
+	setInviteItems: (items: TSelectorItem[]) => void;
+	isDisabled: boolean;
 };
 
 type RowProps = {
-  data: RowData;
-  index: number;
-  style: React.CSSProperties;
+	data: RowData;
+	index: number;
+	style: React.CSSProperties;
 };
 
 const Row = memo(({ data, index, style }: RowProps) => {
-  const { t, inviteItems, setInviteItems, isDisabled, listItems } = data;
+	const { t, inviteItems, setInviteItems, isDisabled, listItems } = data;
 
-  if (listItems === undefined) return;
+	if (listItems === undefined) return;
 
-  const item = listItems[index];
+	const item = listItems[index];
 
-  return (
-    <StyledRow
-      key={item.id}
-      style={style}
-      className="row-item"
-      data-testid={`template_access_settings_row_${index}`}
-    >
-      <Item
-        t={t}
-        item={item}
-        setInviteItems={setInviteItems}
-        inviteItems={inviteItems}
-        isDisabled={isDisabled}
-        index={index}
-      />
-    </StyledRow>
-  );
+	return (
+		<StyledRow
+			key={item.id}
+			style={style}
+			className="row-item"
+			data-testid={`template_access_settings_row_${index}`}
+		>
+			<Item
+				t={t}
+				item={item}
+				setInviteItems={setInviteItems}
+				inviteItems={inviteItems}
+				isDisabled={isDisabled}
+				index={index}
+			/>
+		</StyledRow>
+	);
 });
 
 Row.displayName = "Row";
 
 const ItemsList = ({
-  t,
-  setInviteItems,
-  inviteItems,
-  scrollAllPanelContent,
-  isDisabled,
+	t,
+	setInviteItems,
+	inviteItems,
+	scrollAllPanelContent,
+	isDisabled,
 }: ItemsListProps) => {
-  const [bodyHeight, setBodyHeight] = useState(0);
-  const [offsetTop, setOffsetTop] = useState(0);
-  const [isTotalListHeight, setIsTotalListHeight] = useState(false);
-  const bodyRef = useRef<HTMLDivElement>(null);
-  const { height } = useResizeObserver({
-    ref: bodyRef as React.RefObject<HTMLDivElement>,
-  });
-  const { interfaceDirection } = useTheme();
+	const [bodyHeight, setBodyHeight] = useState(0);
+	const [offsetTop, setOffsetTop] = useState(0);
+	const [isTotalListHeight, setIsTotalListHeight] = useState(false);
+	const bodyRef = useRef<HTMLDivElement>(null);
+	const { height } = useResizeObserver({
+		ref: bodyRef as React.RefObject<HTMLDivElement>,
+	});
+	const { interfaceDirection } = useTheme();
 
-  const listItems = [...inviteItems].filter(
-    (l) => l.templateAccess !== ShareAccessRights.None,
-  );
+	const listItems = [...inviteItems].filter(
+		(l) => l.templateAccess !== ShareAccessRights.None,
+	);
 
-  const onBodyResize = useCallback(() => {
-    const bodyElem = bodyRef?.current?.firstChild as HTMLDivElement;
-    const scrollHeight = bodyElem?.scrollHeight;
-    const heightList = height ?? bodyRef?.current?.offsetHeight;
-    const totalHeightItems = listItems.length * USER_ITEM_HEIGHT;
-    const listAreaHeight = heightList ?? 0;
+	const onBodyResize = useCallback(() => {
+		const bodyElem = bodyRef?.current?.firstChild as HTMLDivElement;
+		const scrollHeight = bodyElem?.scrollHeight;
+		const heightList = height ?? bodyRef?.current?.offsetHeight;
+		const totalHeightItems = listItems.length * USER_ITEM_HEIGHT;
+		const listAreaHeight = heightList ?? 0;
 
-    const calculatedHeight = scrollAllPanelContent
-      ? Math.max(totalHeightItems, listAreaHeight)
-      : heightList;
+		const calculatedHeight = scrollAllPanelContent
+			? Math.max(totalHeightItems, listAreaHeight)
+			: heightList;
 
-    const finalHeight = scrollAllPanelContent
-      ? totalHeightItems
-      : calculatedHeight;
+		const finalHeight = scrollAllPanelContent
+			? totalHeightItems
+			: calculatedHeight;
 
-    const bodyRefOffsetTop = bodyRef?.current?.offsetTop ?? 0;
+		const bodyRefOffsetTop = bodyRef?.current?.offsetTop ?? 0;
 
-    setBodyHeight(finalHeight ?? 0);
-    setOffsetTop(bodyRefOffsetTop);
+		setBodyHeight(finalHeight ?? 0);
+		setOffsetTop(bodyRefOffsetTop);
 
-    if (scrollAllPanelContent && totalHeightItems && listAreaHeight)
-      setIsTotalListHeight(
-        totalHeightItems >= listAreaHeight && totalHeightItems >= scrollHeight,
-      );
-  }, [height, listItems.length, scrollAllPanelContent]);
+		if (scrollAllPanelContent && totalHeightItems && listAreaHeight)
+			setIsTotalListHeight(
+				totalHeightItems >= listAreaHeight && totalHeightItems >= scrollHeight,
+			);
+	}, [height, listItems.length, scrollAllPanelContent]);
 
-  useEffect(() => {
-    onBodyResize();
-  }, [height, listItems.length, scrollAllPanelContent, onBodyResize]);
+	useEffect(() => {
+		onBodyResize();
+	}, [height, listItems.length, scrollAllPanelContent, onBodyResize]);
 
-  const overflowStyle = scrollAllPanelContent ? "hidden" : "scroll";
+	const overflowStyle = scrollAllPanelContent ? "hidden" : "unset";
 
-  return (
-    <ScrollList
-      offsetTop={offsetTop}
-      ref={bodyRef}
-      scrollAllPanelContent={scrollAllPanelContent}
-      isTotalListHeight={isTotalListHeight}
-      data-testid="template_access_settings_scroll_list"
-    >
-      <List
-        style={{ overflow: overflowStyle, willChange: "transform" }}
-        direction={interfaceDirection}
-        height={bodyHeight}
-        width="auto"
-        itemCount={listItems.length}
-        itemSize={USER_ITEM_HEIGHT}
-        itemData={{
-          t,
-          inviteItems,
-          setInviteItems,
-          isDisabled,
-          listItems,
-        }}
-        outerElementType={
-          !scrollAllPanelContent ? CustomScrollbarsVirtualList : undefined
-        }
-        data-testid="template_access_settings_list"
-      >
-        {Row}
-      </List>
-    </ScrollList>
-  );
+	return (
+		<ScrollList
+			offsetTop={offsetTop}
+			ref={bodyRef}
+			scrollAllPanelContent={scrollAllPanelContent}
+			isTotalListHeight={isTotalListHeight}
+			data-testid="template_access_settings_scroll_list"
+		>
+			<List
+				style={{ overflow: overflowStyle, willChange: "transform" }}
+				direction={interfaceDirection as "ltr" | "rtl"}
+				height={bodyHeight}
+				width="auto"
+				itemCount={listItems.length}
+				itemSize={USER_ITEM_HEIGHT}
+				itemData={{
+					t,
+					inviteItems,
+					setInviteItems,
+					isDisabled,
+					listItems,
+				}}
+				outerElementType={!scrollAllPanelContent ? Scrollbar : undefined}
+				data-testid="template_access_settings_list"
+			>
+				{Row}
+			</List>
+		</ScrollList>
+	);
 };
 
 export default ItemsList;

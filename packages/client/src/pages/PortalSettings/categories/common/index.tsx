@@ -29,8 +29,8 @@ import { inject, observer } from "mobx-react";
 import { useLocation, useNavigate } from "react-router";
 import { withTranslation } from "react-i18next";
 
-import { Tabs } from "@docspace/shared/components/tabs";
-import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
+import { Tabs } from "@docspace/ui-kit/components/tabs";
+import { SECTION_HEADER_HEIGHT } from "@docspace/ui-kit/components/section/Section.constants";
 import { DeviceType } from "@docspace/shared/enums";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
@@ -40,10 +40,13 @@ import config from "PACKAGE_FILE";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import BrandingStore from "SRC_DIR/store/portal-settings/BrandingStore";
 import CommonStore from "SRC_DIR/store/CommonStore";
+import DefaultTemplatesStore from "SRC_DIR/store/portal-settings/DefaultTemplatesStore";
 
 import Customization from "./customization";
 import Branding from "./branding";
 import Appearance from "./appearance";
+import DefaultTemplates from "./DefaultTemplates";
+
 import LoaderTabs from "./sub-components/loaderTabs";
 import useCommon from "./useCommon";
 import { resetSessionStorage } from "../../utils";
@@ -61,6 +64,7 @@ type TabsCommonProps = {
   brandingStore: BrandingStore;
   settingsStore: SettingsStore;
   common: CommonStore;
+  defaultTemplatesStore: DefaultTemplatesStore;
   clearAbortControllerArr: SettingsStore["clearAbortControllerArr"];
 };
 
@@ -77,6 +81,7 @@ const TabsCommon = (props: TabsCommonProps) => {
     brandingStore,
     settingsStore,
     common,
+    defaultTemplatesStore,
     clearAbortControllerArr,
   } = props;
   const location = useLocation();
@@ -90,9 +95,10 @@ const TabsCommon = (props: TabsCommonProps) => {
     settingsStore,
     brandingStore,
     common,
+    defaultTemplatesStore,
   });
 
-  const { getCustomizationData, getBrandingData } = useCommon(
+  const { getCustomizationData, getBrandingData, getTemplatesData } = useCommon(
     defaultProps.common,
   );
 
@@ -111,6 +117,15 @@ const TabsCommon = (props: TabsCommonProps) => {
       name: t("Appearance"),
       content: <Appearance />,
       onClick: () => {},
+    },
+    {
+      id: "default-templates",
+      name: t("DefaultTemplates"),
+      content: <DefaultTemplates />,
+      onClick: async () => {
+        clearAbortControllerArr();
+        await getTemplatesData();
+      },
     },
   ];
 
@@ -171,6 +186,7 @@ export const Component = inject(
     common,
     currentTariffStatusStore,
     brandingStore,
+    defaultTemplatesStore,
   }: TStore) => {
     const { setIsLoadedSubmenu, initSettings, isLoadedSubmenu } = common;
     const { clearAbortControllerArr } = settingsStore;
@@ -192,6 +208,7 @@ export const Component = inject(
       settingsStore,
       common,
       clearAbortControllerArr,
+      defaultTemplatesStore,
     };
   },
 )(withLoading(withTranslation("Settings")(observer(TabsCommon))));

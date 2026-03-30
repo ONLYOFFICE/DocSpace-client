@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { TableHeader } from "@docspace/shared/components/table";
+import { TableHeader } from "@docspace/ui-kit/components/table";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { Events, SortByFieldName } from "@docspace/shared/enums";
@@ -627,7 +627,7 @@ class FilesTableHeader extends React.Component {
       authorTrashColumnIsEnabled,
       createdTrashColumnIsEnabled,
       erasureColumnIsEnabled,
-      enable: sizeTrashColumnIsEnabled,
+      sizeTrashColumnIsEnabled,
       typeTrashColumnIsEnabled,
     } = this.props;
 

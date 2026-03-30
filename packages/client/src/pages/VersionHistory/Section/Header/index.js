@@ -26,8 +26,8 @@
 
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import styled from "styled-components";
-import { Heading } from "@docspace/shared/components/heading";
-import { IconButton } from "@docspace/shared/components/icon-button";
+import { Heading } from "@docspace/ui-kit/components/heading";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { desktop, tablet } from "@docspace/shared/utils";
 
 const StyledContainer = styled.div`
@@ -41,7 +41,7 @@ const StyledContainer = styled.div`
 
     svg {
       ${({ theme }) =>
-        theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
+				theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
     }
 
     @media ${tablet} {
@@ -59,23 +59,23 @@ const StyledContainer = styled.div`
 `;
 
 const SectionHeaderContent = (props) => {
-  const { title, onClickBack } = props;
+	const { title, onClickBack } = props;
 
-  return (
-    <StyledContainer>
-      <IconButton
-        iconName={ArrowPathReactSvgUrl}
-        size="17"
-        isFill
-        onClick={onClickBack}
-        className="arrow-button"
-      />
+	return (
+		<StyledContainer>
+			<IconButton
+				iconName={ArrowPathReactSvgUrl}
+				size="17"
+				isFill
+				onClick={onClickBack}
+				className="arrow-button"
+			/>
 
-      <Heading className="headline-header" type="content" truncate>
-        {title}
-      </Heading>
-    </StyledContainer>
-  );
+			<Heading className="headline-header" type="content" truncate>
+				{title}
+			</Heading>
+		</StyledContainer>
+	);
 };
 
 export default SectionHeaderContent;

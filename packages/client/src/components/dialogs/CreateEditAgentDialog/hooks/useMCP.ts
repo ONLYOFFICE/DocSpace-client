@@ -27,15 +27,15 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { useTheme } from "@docspace/shared/hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import {
 	getMCPServerById,
 	getServersListForRoom,
 } from "@docspace/shared/api/ai";
-import { getServerIcon } from "@docspace/shared/utils";
+import { getServerIconUrl } from "@docspace/shared/utils";
 import type { TAgentParams } from "@docspace/shared/utils/aiAgents";
-import type { TSelectorItem } from "@docspace/shared/components/selector";
+import type { TSelectorItem } from "@docspace/ui-kit/components/selector";
 import { ServerType } from "@docspace/shared/api/ai/enums";
 
 export const useMCP = ({
@@ -90,7 +90,7 @@ export const useMCP = ({
 							id: item.id,
 							label: name,
 							icon:
-								(item.icon?.icon24 || getServerIcon(item.serverType, isBase)) ??
+								(item.icon?.icon24 || getServerIconUrl(item.serverType, isBase)) ??
 								"",
 							isInputItem: false,
 							onAcceptInput: () => {},
@@ -142,7 +142,7 @@ export const useMCP = ({
 					label: name,
 					icon:
 						(portalMcpServer.icon?.icon24 ||
-							getServerIcon(portalMcpServer.serverType, isBase)) ??
+							getServerIconUrl(portalMcpServer.serverType, isBase)) ??
 						"",
 					isInputItem: false,
 					onAcceptInput: () => {},

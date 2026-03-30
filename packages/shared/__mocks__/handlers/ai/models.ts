@@ -196,7 +196,9 @@ export const aiModelsResolver = (
   }
 
   if (isError) {
-    return new Response(JSON.stringify(errorRes));
+    return new Response(JSON.stringify(errorRes), {
+      status: errorRes.statusCode,
+    });
   }
 
   return new Response(JSON.stringify(providerOpenAI));

@@ -29,12 +29,12 @@ import PropTypes from "prop-types";
 import { inject, observer } from "mobx-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Text } from "@docspace/shared/components/text";
-import { Scrollbar } from "@docspace/shared/components/scrollbar";
-import { Loader } from "@docspace/shared/components/loader";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
+import { Loader } from "@docspace/ui-kit/components/loader";
 import styled from "styled-components";
-import { Link } from "@docspace/shared/components/link";
+import { Link } from "@docspace/ui-kit/components/link";
 
 const StyledBodyContent = styled.div`
   display: contents;
@@ -88,77 +88,77 @@ const StyledFooterContent = styled.div`
 `;
 
 const MarkdownLink = ({ href, children }) => (
-  <Link fontWeight="600" target="_blank" tag="a" href={href} color="accent">
-    {children}
-  </Link>
+	<Link fontWeight="600" target="_blank" tag="a" href={href} color="accent">
+		{children}
+	</Link>
 );
 
 const DebugInfoDialog = (props) => {
-  const { visible, onClose, user, debugInfoData, getDebugInfo } = props;
+	const { visible, onClose, user, debugInfoData, getDebugInfo } = props;
 
-  useEffect(() => {
-    getDebugInfo();
-  }, []);
+	useEffect(() => {
+		getDebugInfo();
+	}, []);
 
-  return (
-    <ModalDialog
-      withFooterBorder
-      visible={visible}
-      onClose={onClose}
-      displayType="modal"
-      autoMaxHeight
-      autoMaxWidth
-      isHuge
-    >
-      <ModalDialog.Header>Debug Info</ModalDialog.Header>
-      <ModalDialog.Body className="debug-info-body">
-        <StyledBodyContent>
-          {/* <Text>{`# Build version: ${BUILD_VERSION}`}</Text> */}
-          <Text>
-            # Version: <span className="version">{VERSION}</span>
-          </Text>
-          <Text>{`# Build date: ${BUILD_AT}`}</Text>
-          {user ? (
-            <Text>{`# Current User: ${user?.displayName} (id:${user?.id})`}</Text>
-          ) : null}
-          <Text>{`# User Agent: ${navigator.userAgent}`}</Text>
-        </StyledBodyContent>
-      </ModalDialog.Body>
-      <ModalDialog.Footer className="debug-info-footer">
-        <StyledFooterContent>
-          <div className="markdown-wrapper">
-            <Scrollbar>
-              {!debugInfoData ? <Loader size="20px" type="track" /> : null}
-              {debugInfoData ? (
-                <ReactMarkdown
-                  remarkPlugins={[remarkGfm]}
-                  components={{
-                    a: MarkdownLink,
-                  }}
-                >
-                  {debugInfoData}
-                </ReactMarkdown>
-              ) : null}
-            </Scrollbar>
-          </div>
-        </StyledFooterContent>
-      </ModalDialog.Footer>
-    </ModalDialog>
-  );
+	return (
+		<ModalDialog
+			withFooterBorder
+			visible={visible}
+			onClose={onClose}
+			displayType="modal"
+			autoMaxHeight
+			autoMaxWidth
+			isHuge
+		>
+			<ModalDialog.Header>Debug Info</ModalDialog.Header>
+			<ModalDialog.Body className="debug-info-body">
+				<StyledBodyContent>
+					{/* <Text>{`# Build version: ${BUILD_VERSION}`}</Text> */}
+					<Text>
+						# Version: <span className="version">{VERSION}</span>
+					</Text>
+					<Text>{`# Build date: ${BUILD_AT}`}</Text>
+					{user ? (
+						<Text>{`# Current User: ${user?.displayName} (id:${user?.id})`}</Text>
+					) : null}
+					<Text>{`# User Agent: ${navigator.userAgent}`}</Text>
+				</StyledBodyContent>
+			</ModalDialog.Body>
+			<ModalDialog.Footer className="debug-info-footer">
+				<StyledFooterContent>
+					<div className="markdown-wrapper">
+						<Scrollbar>
+							{!debugInfoData ? <Loader size="20px" type="track" /> : null}
+							{debugInfoData ? (
+								<ReactMarkdown
+									remarkPlugins={[remarkGfm]}
+									components={{
+										a: MarkdownLink,
+									}}
+								>
+									{debugInfoData}
+								</ReactMarkdown>
+							) : null}
+						</Scrollbar>
+					</div>
+				</StyledFooterContent>
+			</ModalDialog.Footer>
+		</ModalDialog>
+	);
 };
 
 DebugInfoDialog.propTypes = {
-  visible: PropTypes.bool,
-  onClose: PropTypes.func,
+	visible: PropTypes.bool,
+	onClose: PropTypes.func,
 };
 
 export default inject(({ userStore, settingsStore }) => {
-  const { user } = userStore;
-  const { debugInfoData, getDebugInfo } = settingsStore;
+	const { user } = userStore;
+	const { debugInfoData, getDebugInfo } = settingsStore;
 
-  return {
-    user,
-    debugInfoData,
-    getDebugInfo,
-  };
+	return {
+		user,
+		debugInfoData,
+		getDebugInfo,
+	};
 })(observer(DebugInfoDialog));

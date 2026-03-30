@@ -33,7 +33,7 @@ import { isSeparator } from "../../../../utils/typeGuards";
 import { Viewer } from "../Viewer";
 import { getCustomToolbar, getPDFToolbar } from "../../MediaViewer.helpers";
 import styles from "./ViewerWrapper.module.scss";
-import { DropDown } from "../../../drop-down";
+import { DropDown } from "@docspace/ui-kit/components/drop-down";
 import { DropDownItem } from "../../../drop-down-item";
 import type ViewerWrapperProps from "./ViewerWrapper.props";
 
@@ -67,6 +67,7 @@ const ViewerWrapper = memo(
       onDeleteClick,
       onDownloadClick,
       onSetSelectionFile,
+      pluginViewerContent,
     } = props;
 
     // const { interfaceDirection } = useTheme();
@@ -194,6 +195,7 @@ const ViewerWrapper = memo(
         onDownloadClick={onDownloadClick}
         onSetSelectionFile={onSetSelectionFile}
         generateContextMenu={generateContextMenu}
+        pluginViewerContent={pluginViewerContent}
       />
     );
   },
@@ -203,3 +205,4 @@ const ViewerWrapper = memo(
 ViewerWrapper.displayName = "ViewerWrapper";
 
 export { ViewerWrapper };
+

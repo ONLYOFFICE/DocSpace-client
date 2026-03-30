@@ -27,144 +27,150 @@
 import isEmpty from "lodash/isEmpty";
 import omit from "lodash/omit";
 
-import { toastr } from "../components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import type { Nullable, TTranslation } from "../types";
 import type { TUser } from "../api/people/types";
-import type { TPrivacyRoomRequest } from "../api/privacy/types";
-import { ThemeKeys } from "../enums";
+import { ThemeKeys } from "@docspace/ui-kit/enums";
 
 import { desktopConstants, getEditorTheme } from "./common";
-import { checkIsSSR } from "./device";
+import { checkIsSSR } from "@docspace/ui-kit/utils/device";
 
 const isSSR = checkIsSSR();
-
-type TEncryptionKeys = {
-  cryptoEngineId: string;
-  privateKeyEnc?: string;
-  publicKey?: string;
-};
-
-type TLoginData = {
-  displayName: string | undefined;
-  email: string | undefined;
-  domain: string | boolean;
-  provider: string;
-  userId: string;
-  uiTheme: string;
-  encryptionKeys?: TEncryptionKeys;
-};
-
-type TSharingKeys = Array<{ userId: string; publicKey: string }>;
-
-type TGetSharingKeysResult = {
-  keys: TSharingKeys;
-  error?: string;
-};
-
-type TGetSharingKeysCallback = (result: TGetSharingKeysResult) => void;
 
 export function regDesktop(
   user: TUser,
   isEncryption: boolean,
   keys?: { [key: string]: string | boolean },
-  setEncryptionKeys?: (value: TPrivacyRoomRequest) => void,
-  updateEncryptionKeys?: (value: TPrivacyRoomRequest) => void,
+  setEncryptionKeys?: (value: { [key: string]: string | boolean }) => void,
   isEditor?: boolean,
-  getEncryptionAccess?: (callback?: TGetSharingKeysCallback) => void,
+  getEncryptionAccess?: (
+    callback?: (data: { keys: { [key: string]: string | boolean } }) => void,
+  ) => void,
   t?: Nullable<TTranslation>,
-): void {
-  if (isSSR) return;
+) {
+  if (!isSSR) {
+    const data = {
+      displayName: user.displayName,
+      email: user.email,
+      domain: desktopConstants.domain,
+      provider: desktopConstants.provider,
+      userId: user.id,
+      uiTheme: getEditorTheme(user.theme),
+    };
 
-  if (isEncryption) {
-    window.cloudCryptoCommand = (type, params, callback) => {
-      switch (type) {
-        case "encryptionKeys":
-          setEncryptionKeys?.(params as TPrivacyRoomRequest);
-          break;
-        case "updateEncryptionKeys":
-          updateEncryptionKeys?.(params as TPrivacyRoomRequest);
-          break;
-        case "relogin":
-          toastr.info(t?.("Common:EncryptionKeysReload"));
-          reLogin();
-          break;
-        case "getsharingkeys":
-          if (isEditor && getEncryptionAccess) {
-            getEncryptionAccess(callback as TGetSharingKeysCallback);
-          } else {
-            callback?.({ keys: [] });
+    let extendedData;
+
+    if (isEncryption) {
+      extendedData = {
+        ...data,
+        encryptionKeys: {
+          cryptoEngineId: desktopConstants.cryptoEngineId,
+        },
+      };
+
+      if (!isEmpty(keys)) {
+        const filteredKeys = omit(keys, ["userId"]);
+        extendedData = {
+          ...extendedData,
+          encryptionKeys: { ...extendedData.encryptionKeys, ...filteredKeys },
+        };
+      }
+    } else {
+      extendedData = { ...data };
+    }
+
+    window.AscDesktopEditor?.execCommand(
+      "portal:login",
+      JSON.stringify(extendedData),
+    );
+
+    if (isEncryption) {
+      window.cloudCryptoCommand = (type, params, callback) => {
+        switch (type) {
+          case "encryptionKeys": {
+            setEncryptionKeys?.(params);
+            break;
           }
+          case "updateEncryptionKeys": {
+            setEncryptionKeys?.(params);
+            break;
+          }
+          case "relogin": {
+            // toastr.info(t("Common:EncryptionKeysReload"));
+            // relogin();
+            break;
+          }
+          case "getsharingkeys":
+            if (!isEditor || typeof getEncryptionAccess !== "function") {
+              callback({});
+              return;
+            }
+            getEncryptionAccess(callback);
+            break;
+          default:
+            break;
+        }
+      };
+    }
+
+    window.onSystemMessage = (e) => {
+      let message = e.opMessage;
+      switch (e.type) {
+        case "operation":
+          if (!message) {
+            switch (e.opType) {
+              case 0:
+                message = t?.("Common:EncryptionFilePreparing");
+                break;
+              case 1:
+                message = t?.("Common:EncryptingFile");
+                break;
+              default:
+                message = t?.("Common:LoadingProcessing");
+            }
+          }
+          toastr.info(message);
+          break;
+        default:
           break;
       }
     };
   }
-
-  window.onSystemMessage = (e) => {
-    if (e.type !== "operation") return;
-
-    const message =
-      e.opMessage ||
-      (e.opType === 0 && t?.("Common:EncryptionFilePreparing")) ||
-      (e.opType === 1 && t?.("Common:EncryptingFile")) ||
-      t?.("Common:LoadingProcessing");
-
-    toastr.info(message);
-  };
-
-  const loginData: TLoginData = {
-    displayName: user.displayName,
-    email: user.email,
-    domain: desktopConstants.domain,
-    provider: desktopConstants.provider,
-    userId: user.id,
-    uiTheme: getEditorTheme(user.theme || ThemeKeys.BaseStr),
-  };
-
-  if (isEncryption) {
-    loginData.encryptionKeys = {
-      cryptoEngineId: desktopConstants.cryptoEngineId,
-      ...(!isEmpty(keys) && omit(keys, ["userId"])),
-    };
-  }
-
-  window.AscDesktopEditor?.execCommand(
-    "portal:login",
-    JSON.stringify(loginData),
-  );
 }
 
-export function reLogin(): void {
-  if (isSSR) return;
-
-  setTimeout(() => {
-    window.AscDesktopEditor?.execCommand(
-      "portal:logout",
-      JSON.stringify({
+export function relogin() {
+  if (!isSSR)
+    setTimeout(() => {
+      const data = {
         domain: desktopConstants.domain,
         onsuccess: "reload",
-      }),
-    );
-  }, 1000);
+      };
+      window.AscDesktopEditor?.execCommand(
+        "portal:logout",
+        JSON.stringify(data),
+      );
+    }, 1000);
 }
 
-export function checkPwd(): void {
-  if (isSSR) return;
-
-  window.AscDesktopEditor?.execCommand(
-    "portal:checkpwd",
-    JSON.stringify({
+export function checkPwd() {
+  if (!isSSR) {
+    const data = {
       domain: desktopConstants.domain,
-      emailInput: "login_username",
-      pwdInput: "login_password",
-    }),
-  );
+      emailInput: "login",
+      pwdInput: "password",
+    };
+    window.AscDesktopEditor?.execCommand(
+      "portal:checkpwd",
+      JSON.stringify(data),
+    );
+  }
 }
 
-export function logout(): void {
-  if (isSSR) return;
-
-  window.AscDesktopEditor?.execCommand(
-    "portal:logout",
-    JSON.stringify({ domain: desktopConstants.domain }),
-  );
+export function logout() {
+  if (!isSSR) {
+    const data = {
+      domain: desktopConstants.domain,
+    };
+    window.AscDesktopEditor?.execCommand("portal:logout", JSON.stringify(data));
+  }
 }

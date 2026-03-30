@@ -26,9 +26,8 @@
 
 import React from "react";
 
-import { getCookie } from "@docspace/shared/utils";
+import { getCookie, setCookie } from "@docspace/ui-kit/utils/cookie";
 import { isRetina } from "@docspace/shared/utils/common";
-import { setCookie } from "@docspace/shared/utils/cookie";
 
 import SlideIcoUrl from "PUBLIC_DIR/images/slide.ico?url";
 import CellIcoUrl from "PUBLIC_DIR/images/cell.ico?url";

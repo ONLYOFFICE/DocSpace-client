@@ -26,9 +26,9 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { LinkWithDropdown } from "../../../components/link-with-dropdown";
-import { Text } from "../../../components/text";
-import { Checkbox } from "../../../components/checkbox";
+import { LinkWithDropdown } from "@docspace/ui-kit/components/link-with-dropdown";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { isMobile } from "../../../utils";
 
 import { type DownloadRowProps, isFile } from "../DownloadDialog.types";
@@ -81,7 +81,10 @@ export const DownloadRow = (props: DownloadRowProps) => {
             isOpen={false}
             dropdownType="alwaysDashed"
             data={dropdownItems}
-            directionY={isMobile() ? "both" : "bottom"}
+            directionY="both"
+            topSpace={16}
+            bottomSpace={80}
+            withDynamicScrollbar
             fontSize="13px"
             fontWeight={600}
             hasScroll={isMobile()}

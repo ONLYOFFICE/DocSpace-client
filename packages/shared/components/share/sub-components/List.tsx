@@ -43,11 +43,11 @@ import classNames from "classnames";
 
 import { RowLoader } from "../../../skeletons/selector";
 import { GENERAL_LINK_HEADER_KEY } from "../../../constants";
-import { useEventListener } from "../../../hooks/useEventListener";
+import { useEventListener } from "@docspace/ui-kit/hooks/useEventListener";
 import type { TUser } from "../../../api/people/types";
 
-import { Text } from "../../text";
-import ScrollbarContext from "../../scrollbar/custom-scrollbar/ScrollbarContext";
+import { Text } from "@docspace/ui-kit/components/text";
+import { ScrollbarContext } from "@docspace/ui-kit/components/scrollbar";
 
 import styles from "../Share.module.scss";
 import { ListProps } from "../Share.types";
@@ -71,7 +71,7 @@ const List: FC<ListProps> = (props) => {
   const scrollContext = use(ScrollbarContext);
   const scrollElement = scrollContext.parentScrollbar?.scrollerElement;
 
-  const scrollRef = useRef<HTMLDivElement>(scrollElement);
+  const scrollRef = useRef<HTMLDivElement | null>(scrollElement ?? null);
 
   const list = useMemo(() => {
     const temp: React.ReactElement<{

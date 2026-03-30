@@ -29,11 +29,11 @@ import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/shared/components/text";
-import { ToggleButton } from "@docspace/shared/components/toggle-button";
-import { Badge } from "@docspace/shared/components/badge";
-import { toastr } from "@docspace/shared/components/toast";
-import { globalColors } from "@docspace/shared/themes";
+import { Text } from "@docspace/ui-kit/components/text";
+import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
+import { Badge } from "@docspace/ui-kit/components/badge";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { mobile } from "@docspace/shared/utils";
 import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";
 

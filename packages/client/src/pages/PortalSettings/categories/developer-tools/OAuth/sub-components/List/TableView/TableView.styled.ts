@@ -26,7 +26,7 @@
 
 import styled, { css } from "styled-components";
 
-import { TableRow, TableContainer } from "@docspace/shared/components/table";
+import { TableRow, TableContainer } from "@docspace/ui-kit/components/table";
 import { injectDefaultTheme } from "@docspace/shared/utils";
 
 export const TableWrapper = styled(TableContainer)`

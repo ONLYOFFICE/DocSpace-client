@@ -27,100 +27,100 @@
 import React from "react";
 import classNames from "classnames";
 
-import { RectangleSkeleton } from "../rectangle";
+import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 import { ListItemLoaderProps } from "./List.types";
 import styles from "./List.module.scss";
 
 const ListItemLoader = ({
-  id,
-  className,
-  style,
-  withoutFirstRectangle = false,
-  withoutLastRectangle = false,
-  ...rest
+	id,
+	className,
+	style,
+	withoutFirstRectangle = false,
+	withoutLastRectangle = false,
+	...rest
 }: ListItemLoaderProps) => {
-  const {
-    title,
-    borderRadius,
-    backgroundColor,
-    foregroundColor,
-    backgroundOpacity,
-    foregroundOpacity,
-    speed,
-    animate,
-  } = rest;
+	const {
+		title,
+		borderRadius,
+		backgroundColor,
+		foregroundColor,
+		backgroundOpacity,
+		foregroundOpacity,
+		speed,
+		animate,
+	} = rest;
 
-  const rowClassName = classNames(styles.row, className, {
-    [styles.withoutFirstRectangle]: withoutFirstRectangle,
-    [styles.withoutLastRectangle]: withoutLastRectangle,
-  });
+	const rowClassName = classNames(styles.row, className, {
+		[styles.withoutFirstRectangle]: withoutFirstRectangle,
+		[styles.withoutLastRectangle]: withoutLastRectangle,
+	});
 
-  return (
-    <div
-      id={id}
-      className={rowClassName}
-      style={style}
-      data-testid="list-item-loader"
-    >
-      {!withoutFirstRectangle ? (
-        <RectangleSkeleton
-          title={title}
-          width="16"
-          height="16"
-          borderRadius={borderRadius}
-          backgroundColor={backgroundColor}
-          foregroundColor={foregroundColor}
-          backgroundOpacity={backgroundOpacity}
-          foregroundOpacity={foregroundOpacity}
-          speed={speed}
-          animate={animate}
-          className="list-loader_rectangle"
-        />
-      ) : null}
+	return (
+		<div
+			id={id}
+			className={rowClassName}
+			style={style}
+			data-testid="list-item-loader"
+		>
+			{!withoutFirstRectangle ? (
+				<RectangleSkeleton
+					title={title}
+					width="16"
+					height="16"
+					borderRadius={borderRadius}
+					backgroundColor={backgroundColor}
+					foregroundColor={foregroundColor}
+					backgroundOpacity={backgroundOpacity}
+					foregroundOpacity={foregroundOpacity}
+					speed={speed}
+					animate={animate}
+					className="list-loader_rectangle"
+				/>
+			) : null}
 
-      <RectangleSkeleton
-        className="list-loader_rectangle-content"
-        title={title}
-        width="100%"
-        height="100%"
-        borderRadius={borderRadius}
-        backgroundColor={backgroundColor}
-        foregroundColor={foregroundColor}
-        backgroundOpacity={backgroundOpacity}
-        foregroundOpacity={foregroundOpacity}
-        speed={speed}
-        animate={animate}
-      />
+			<RectangleSkeleton
+				className="list-loader_rectangle-content"
+				title={title}
+				width="100%"
+				height="100%"
+				borderRadius={borderRadius}
+				backgroundColor={backgroundColor}
+				foregroundColor={foregroundColor}
+				backgroundOpacity={backgroundOpacity}
+				foregroundOpacity={foregroundOpacity}
+				speed={speed}
+				animate={animate}
+			/>
 
-      <RectangleSkeleton
-        className="list-loader_rectangle-row"
-        title={title}
-        height="16px"
-        borderRadius={borderRadius}
-        backgroundColor={backgroundColor}
-        foregroundColor={foregroundColor}
-        backgroundOpacity={backgroundOpacity}
-        foregroundOpacity={foregroundOpacity}
-        speed={speed}
-        animate={animate}
-      />
+			<RectangleSkeleton
+				className="list-loader_rectangle-row"
+				title={title}
+				height="16px"
+				borderRadius={borderRadius}
+				backgroundColor={backgroundColor}
+				foregroundColor={foregroundColor}
+				backgroundOpacity={backgroundOpacity}
+				foregroundOpacity={foregroundOpacity}
+				speed={speed}
+				animate={animate}
+			/>
 
-      {!withoutLastRectangle ? (
-        <RectangleSkeleton
-          title={title}
-          width="16"
-          height="16"
-          borderRadius={borderRadius}
-          backgroundColor={backgroundColor}
-          foregroundColor={foregroundColor}
-          backgroundOpacity={backgroundOpacity}
-          foregroundOpacity={foregroundOpacity}
-          speed={speed}
-          animate={animate}
-        />
-      ) : null}
-    </div>
-  );
+			{!withoutLastRectangle ? (
+				<RectangleSkeleton
+					title={title}
+					width="16"
+					height="16"
+					borderRadius={borderRadius}
+					backgroundColor={backgroundColor}
+					foregroundColor={foregroundColor}
+					backgroundOpacity={backgroundOpacity}
+					foregroundOpacity={foregroundOpacity}
+					speed={speed}
+					animate={animate}
+				/>
+			) : null}
+		</div>
+	);
 };
 
 export default ListItemLoader;

@@ -29,7 +29,7 @@ import { useHotkeys } from "react-hotkeys-hook";
 import { observer, inject } from "mobx-react";
 import { useNavigate } from "react-router";
 import { Events, FolderType, RoomsType } from "@docspace/shared/enums";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { copySelectedText } from "@docspace/shared/utils/copy";
 

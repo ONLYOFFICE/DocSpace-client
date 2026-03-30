@@ -35,7 +35,7 @@ import { getLogoUrl } from "@docspace/shared/utils";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { frameCallCommand } from "@docspace/shared/utils/common";
 import PublicRoomPassword from "@docspace/shared/pages/PublicRoom/PublicRoomPasswordForm";
-import { useTheme } from "@docspace/shared/hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import type { FilePasswordProps } from "./FilePassword.types";
 import styles from "./file-password.module.scss";

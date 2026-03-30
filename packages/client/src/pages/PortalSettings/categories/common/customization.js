@@ -38,6 +38,7 @@ import { PortalRenaming } from "./Customization/portal-renaming";
 import { DNSSettings } from "./Customization/dns-settings";
 import { ConfigureDeepLink } from "./Customization/configure-deep-link";
 import { AdManagement } from "./Customization/ad-management";
+import { AiServicesManagement } from "./Customization/ai-services-management";
 import CustomizationNavbar from "./customization-navbar";
 import LoaderDescriptionCustomization from "./sub-components/loaderDescriptionCustomization";
 
@@ -150,6 +151,8 @@ const Customization = (props) => {
           <AdManagement />
         </>
       ) : null}
+      <StyledSettingsSeparator />
+      <AiServicesManagement />
     </StyledComponent>
   );
 };

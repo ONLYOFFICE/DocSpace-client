@@ -29,7 +29,7 @@ import { ReactSVG } from "react-svg";
 import { inject, observer } from "mobx-react";
 import EnUSReactSvgUrl from "PUBLIC_DIR/images/flags/en-US.react.svg?url";
 import DeReactSvgUrl from "PUBLIC_DIR/images/flags/de.react.svg?url";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import styles from "./Region.module.scss";
 
 export type RegionProps = {

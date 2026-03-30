@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Button } from "@docspace/shared/components/button";
-import { Checkbox } from "@docspace/shared/components/checkbox";
-import { Text } from "@docspace/shared/components/text";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { Button } from "@docspace/ui-kit/components/button";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { Text } from "@docspace/ui-kit/components/text";
 import styles from "./LifetimeDialog.module.scss";
 
 const LifetimeDialogComponent = (props) => {
@@ -76,6 +76,7 @@ const LifetimeDialogComponent = (props) => {
             label={t("ConvertDialog:HideMessage")}
             isChecked={isChecked}
             onChange={onChange}
+            dataTestId="lifetime_dialog_hide_message_checkbox"
           />
           <div className={styles.lifetimeButtons}>
             <Button
@@ -86,6 +87,7 @@ const LifetimeDialogComponent = (props) => {
               primary
               scale
               onClick={onAcceptClick}
+              testId="lifetime_dialog_ok_button"
             />
             <Button
               id="delete-file-modal_cancel"
@@ -94,6 +96,7 @@ const LifetimeDialogComponent = (props) => {
               size="normal"
               scale
               onClick={onClose}
+              testId="lifetime_dialog_cancel_button"
             />
           </div>
         </div>

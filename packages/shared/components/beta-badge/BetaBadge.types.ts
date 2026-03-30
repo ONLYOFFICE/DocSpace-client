@@ -25,18 +25,18 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { PlacesType } from "react-tooltip";
-import type { TColorScheme } from "../../themes";
+import type { TColorScheme } from "@docspace/ui-kit/providers/theme";
 
 export type BetaBadgeProps = {
-  forumLinkUrl?: string;
-  documentationEmail?: string;
-  currentColorScheme?: TColorScheme;
-  currentDeviceType?: "desktop" | "tablet" | "mobile";
+	forumLinkUrl?: string;
+	documentationEmail?: string;
+	currentColorScheme?: TColorScheme;
+	currentDeviceType?: "desktop" | "tablet" | "mobile";
 
-  place: PlacesType;
-  mobilePlace?: PlacesType;
-  withOutFeedbackLink?: boolean;
+	place: PlacesType;
+	mobilePlace?: PlacesType;
+	withOutFeedbackLink?: boolean;
 
-  withoutTooltip?: boolean;
-  dataTestId?: string;
+	withoutTooltip?: boolean;
+	dataTestId?: string;
 };

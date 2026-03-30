@@ -28,7 +28,7 @@ import { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { TFunction } from "i18next";
 
-import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
+import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
 import { TWatermark } from "@docspace/shared/api/rooms/types";
 import { TRoomParams } from "@docspace/shared/utils/rooms";
 

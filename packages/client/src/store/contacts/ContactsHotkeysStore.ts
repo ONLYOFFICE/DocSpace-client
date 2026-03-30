@@ -29,7 +29,7 @@ import { isMobile } from "@docspace/shared/utils";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { clearTextSelection } from "@docspace/shared/utils/copy";
 import { TGroup } from "@docspace/shared/api/groups/types";
-import { TABLE_HEADER_HEIGHT } from "@docspace/shared/components/table/Table.constants";
+import { TABLE_HEADER_HEIGHT } from "@docspace/ui-kit/components/table/Table.constants";
 import GroupsStore from "./GroupsStore";
 
 type UsersStore = TStore["peopleStore"]["usersStore"];

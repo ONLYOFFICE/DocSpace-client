@@ -29,7 +29,7 @@ import { useParams } from "react-router";
 import { inject, observer } from "mobx-react";
 import { useState, useRef } from "react";
 
-import { TableBody, TableContainer } from "@docspace/shared/components/table";
+import { TableBody, TableContainer } from "@docspace/ui-kit/components/table";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import { injectDefaultTheme } from "@docspace/shared/utils";

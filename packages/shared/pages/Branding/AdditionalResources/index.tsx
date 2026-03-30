@@ -28,106 +28,106 @@ import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import { Checkbox } from "../../../components/checkbox";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
 
 import { IAdditionalResources } from "./AdditionalResources.types";
 import styles from "./AdditionalResources.module.scss";
 
 export const AdditionalResources = ({
-  isSettingPaid,
-  feedbackAndSupportEnabled,
-  helpCenterEnabled,
-  onSave,
-  onRestore,
-  isLoading,
-  additionalResourcesIsDefault,
+	isSettingPaid,
+	feedbackAndSupportEnabled,
+	helpCenterEnabled,
+	onSave,
+	onRestore,
+	isLoading,
+	additionalResourcesIsDefault,
 }: IAdditionalResources) => {
-  const { t } = useTranslation("Common");
-  const [feedbackEnabled, setFeedbackEnabled] = useState(
-    feedbackAndSupportEnabled,
-  );
-  const [helpEnabled, setHelpEnabled] = useState(helpCenterEnabled);
-  const [hasChanges, setHasChanges] = useState(false);
+	const { t } = useTranslation("Common");
+	const [feedbackEnabled, setFeedbackEnabled] = useState(
+		feedbackAndSupportEnabled,
+	);
+	const [helpEnabled, setHelpEnabled] = useState(helpCenterEnabled);
+	const [hasChanges, setHasChanges] = useState(false);
 
-  useEffect(() => {
-    if (
-      feedbackAndSupportEnabled === feedbackEnabled &&
-      helpCenterEnabled === helpEnabled
-    ) {
-      setHasChanges(false);
-    } else {
-      setHasChanges(true);
-    }
-  }, [
-    feedbackEnabled,
-    helpEnabled,
-    feedbackAndSupportEnabled,
-    helpCenterEnabled,
-  ]);
+	useEffect(() => {
+		if (
+			feedbackAndSupportEnabled === feedbackEnabled &&
+			helpCenterEnabled === helpEnabled
+		) {
+			setHasChanges(false);
+		} else {
+			setHasChanges(true);
+		}
+	}, [
+		feedbackEnabled,
+		helpEnabled,
+		feedbackAndSupportEnabled,
+		helpCenterEnabled,
+	]);
 
-  useEffect(() => {
-    setFeedbackEnabled(feedbackAndSupportEnabled);
-    setHelpEnabled(helpCenterEnabled);
-  }, [feedbackAndSupportEnabled, helpCenterEnabled]);
+	useEffect(() => {
+		setFeedbackEnabled(feedbackAndSupportEnabled);
+		setHelpEnabled(helpCenterEnabled);
+	}, [feedbackAndSupportEnabled, helpCenterEnabled]);
 
-  const onSaveAction = () => {
-    onSave(feedbackEnabled, helpEnabled);
-  };
+	const onSaveAction = () => {
+		onSave(feedbackEnabled, helpEnabled);
+	};
 
-  return (
-    <div
-      className={classNames(styles.additionalResources, {
-        ["isEnableBranding"]: !isSettingPaid,
-        ["settings_unavailable"]: !isSettingPaid,
-      })}
-    >
-      <div className={classNames(styles.header, "header")}>
-        <div className={styles.additionalHeader}>
-          {t("Common:AdditionalResources")}
-        </div>
-      </div>
-      <div className={styles.additionalDescription}>
-        {t("Common:AdditionalResourcesDescription", {
-          productName: t("Common:ProductName"),
-        })}
-      </div>
-      <div className={classNames(styles.brandingCheckbox)}>
-        <Checkbox
-          data-testid="show-feedback-support"
-          className={classNames(
-            styles.checkbox,
-            "show-feedback-support checkbox",
-          )}
-          isDisabled={!isSettingPaid}
-          label={t("ShowFeedbackAndSupport")}
-          isChecked={feedbackEnabled}
-          onChange={() => setFeedbackEnabled(!feedbackEnabled)}
-        />
+	return (
+		<div
+			className={classNames(styles.additionalResources, {
+				["isEnableBranding"]: !isSettingPaid,
+				["settings_unavailable"]: !isSettingPaid,
+			})}
+		>
+			<div className={classNames(styles.header, "header")}>
+				<div className={styles.additionalHeader}>
+					{t("Common:AdditionalResources")}
+				</div>
+			</div>
+			<div className={styles.additionalDescription}>
+				{t("Common:AdditionalResourcesDescription", {
+					productName: t("Common:ProductName"),
+				})}
+			</div>
+			<div className={classNames(styles.brandingCheckbox)}>
+				<Checkbox
+					data-testid="show-feedback-support"
+					className={classNames(
+						styles.checkbox,
+						"show-feedback-support checkbox",
+					)}
+					isDisabled={!isSettingPaid}
+					label={t("ShowFeedbackAndSupport")}
+					isChecked={feedbackEnabled}
+					onChange={() => setFeedbackEnabled(!feedbackEnabled)}
+				/>
 
-        <Checkbox
-          data-testid="show-help-center"
-          className={classNames(styles.checkbox)}
-          isDisabled={!isSettingPaid}
-          label={t("ShowHelpCenter")}
-          isChecked={helpEnabled}
-          onChange={() => setHelpEnabled(!helpEnabled)}
-        />
-      </div>
-      <SaveCancelButtons
-        onSaveClick={onSaveAction}
-        onCancelClick={onRestore}
-        saveButtonLabel={t("Common:SaveButton")}
-        cancelButtonLabel={t("Common:Restore")}
-        displaySettings
-        reminderText={t("Common:YouHaveUnsavedChanges")}
-        showReminder={(isSettingPaid && hasChanges) || isLoading}
-        disableRestoreToDefault={additionalResourcesIsDefault || isLoading}
-        additionalClassSaveButton="additional-resources-save"
-        additionalClassCancelButton="additional-resources-cancel"
-        saveButtonDataTestId="additional-resources-save-button"
-        cancelButtonDataTestId="additional-resources-cancel-button"
-      />
-    </div>
-  );
+				<Checkbox
+					data-testid="show-help-center"
+					className={classNames(styles.checkbox)}
+					isDisabled={!isSettingPaid}
+					label={t("ShowHelpCenter")}
+					isChecked={helpEnabled}
+					onChange={() => setHelpEnabled(!helpEnabled)}
+				/>
+			</div>
+			<SaveCancelButtons
+				onSaveClick={onSaveAction}
+				onCancelClick={onRestore}
+				saveButtonLabel={t("Common:SaveButton")}
+				cancelButtonLabel={t("Common:Restore")}
+				displaySettings
+				reminderText={t("Common:YouHaveUnsavedChanges")}
+				showReminder={(isSettingPaid && hasChanges) || isLoading}
+				disableRestoreToDefault={additionalResourcesIsDefault || isLoading}
+				additionalClassSaveButton="additional-resources-save"
+				additionalClassCancelButton="additional-resources-cancel"
+				saveButtonDataTestId="additional-resources-save-button"
+				cancelButtonDataTestId="additional-resources-cancel-button"
+			/>
+		</div>
+	);
 };

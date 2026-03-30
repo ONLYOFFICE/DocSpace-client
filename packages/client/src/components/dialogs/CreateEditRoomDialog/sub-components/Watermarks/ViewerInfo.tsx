@@ -28,11 +28,11 @@ import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { TFunction } from "i18next";
 
-import { InputType, TextInput } from "@docspace/shared/components/text-input";
-import { Text } from "@docspace/shared/components/text";
-import { ComboBox, TOption } from "@docspace/shared/components/combobox";
+import { InputType, TextInput } from "@docspace/ui-kit/components/text-input";
+import { Text } from "@docspace/ui-kit/components/text";
+import { ComboBox, TOption } from "@docspace/ui-kit/components/combobox";
 import { WatermarkAdditions } from "@docspace/shared/enums";
-import { TabItem } from "@docspace/shared/components/tab-item";
+import { TabItem } from "@docspace/ui-kit/components/tab-item";
 import { TWatermark } from "@docspace/shared/api/rooms/types";
 import { TRoomParams } from "@docspace/shared/utils/rooms";
 

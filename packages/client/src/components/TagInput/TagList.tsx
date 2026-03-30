@@ -26,7 +26,7 @@
 
 import classNames from "classnames";
 
-import { Tag } from "@docspace/shared/components/tag";
+import { Tag } from "@docspace/ui-kit/components/tag";
 
 import styles from "./TagInput.module.scss";
 import { TagListProps } from "./TagInput.types";

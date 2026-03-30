@@ -32,7 +32,7 @@ import {
   getFetchedRoomParams,
   TRoomParams,
 } from "@docspace/shared/utils/rooms";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { RoomsType } from "@docspace/shared/enums";
 import { TFolder } from "@docspace/shared/api/files/types";

@@ -18,8 +18,7 @@ import {
   IClientProps,
   TScope,
 } from "@docspace/shared/utils/oauth/types";
-import { toastr } from "@docspace/shared/components/toast";
-import { TData } from "@docspace/shared/components/toast/Toast.type";
+import { toastr, type TData } from "@docspace/ui-kit/components/toast";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { Nullable, TTranslation } from "@docspace/shared/types";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
@@ -721,7 +720,7 @@ class OAuthStore {
     const openOption = {
       key: "open",
       icon: ExternalLinkReactSvgUrl,
-      label: t("Files:Open"),
+      label: t("Common:Open"),
       onClick: () => window.open(item.websiteUrl, "_blank"),
       disabled: isInfo,
       dataTestId: "oauth_files_open_option",

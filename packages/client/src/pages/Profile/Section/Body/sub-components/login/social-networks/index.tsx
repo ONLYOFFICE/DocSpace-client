@@ -28,17 +28,17 @@ import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { SocialButton } from "@docspace/shared/components/social-button";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { getAuthProviders } from "@docspace/shared/api/settings";
 import { unlinkOAuth, linkOAuth } from "@docspace/shared/api/people";
 import {
   getProviderTranslation,
-  getOAuthToken,
   getLoginLink,
 } from "@docspace/shared/utils/common";
+import { getOAuthToken } from "@docspace/ui-kit/utils/get-oauth-token";
 import { PROVIDERS_DATA } from "@docspace/shared/constants";
 import { AuthStore } from "@docspace/shared/store/AuthStore";
 
@@ -163,7 +163,10 @@ const SocialNetworks = (props: SocialNetworksProps) => {
   if (providers?.length === 0) return null;
 
   return (
-    <div className={styles.socialNetworksWrapper} data-testid="profile-social-networks">
+    <div
+      className={styles.socialNetworksWrapper}
+      data-testid="profile-social-networks"
+    >
       <Text fontSize="16px" fontWeight={700} lineHeight="22px">
         {t("ConnectSocialNetworks")}
       </Text>

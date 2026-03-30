@@ -31,7 +31,7 @@ import { FC, useCallback, useEffect, useMemo, useState } from "react";
 
 import { getFileInfo } from "@docspace/shared/api/files";
 import { UrlActionType } from "@docspace/shared/enums";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import type { TFile } from "@docspace/shared/api/files/types";
 import type {
   NumberOrString,

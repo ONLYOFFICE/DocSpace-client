@@ -34,7 +34,8 @@ import ShareSvg from "PUBLIC_DIR/images/icons/32/share.svg";
 import { ShareFormDialog as ShareFormDialogComponent } from "@docspace/shared/dialogs/share-form-dialog";
 import { ShareSelector } from "@docspace/shared/components/share/selector";
 
-import type { TFile, TFilesSettings } from "@docspace/shared/api/files/types";
+import type { TFile } from "@docspace/shared/api/files/types";
+import type { FilesSettingsDto } from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
 import {
   FolderType,
   RoomsType,
@@ -43,7 +44,7 @@ import {
 
 import { addExternalLink, getExternalLinks } from "@docspace/shared/api/files";
 import { copyShareLink } from "@docspace/shared/components/share/Share.helpers";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { Nullable, TResolver } from "@docspace/shared/types";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 
@@ -56,7 +57,7 @@ type SubmitFn = StartFillingSelectorDialogProps["onSubmit"];
 type ShareFormDialogProps = {
   file: TFile;
   createDefineRoomType: RoomsType;
-  filesSettings: TFilesSettings;
+  filesSettings: FilesSettingsDto;
   isVisibleStartFillingSelectDialog: boolean;
   onClose: () => void;
   onClickFormRoom: () => void;
@@ -223,7 +224,7 @@ const ShareFormDialog = ({
               isVisible
               fileInfo={file}
               onSubmit={onSubmit}
-              filesSettings={filesSettings}
+              filesSettings={filesSettings as StartFillingSelectorDialogProps["filesSettings"]}
               header={{
                 withoutBorder: false,
                 onCloseClick: handleClose,

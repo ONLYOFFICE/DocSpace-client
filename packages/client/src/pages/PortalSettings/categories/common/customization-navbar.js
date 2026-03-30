@@ -31,7 +31,7 @@ import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 
 import { injectDefaultTheme } from "@docspace/shared/utils";
-import { MobileCategoryWrapper } from "@docspace/shared/components/mobile-category-wrapper";
+import { CategoryItem } from "@docspace/ui-kit/components/category-item";
 
 import LoaderCustomizationNavbar from "./sub-components/loaderCustomizationNavbar";
 
@@ -66,19 +66,19 @@ const CustomizationNavbar = ({
     <LoaderCustomizationNavbar />
   ) : (
     <StyledComponent>
-      <MobileCategoryWrapper
+      <CategoryItem
         title={t("StudioTimeLanguageSettings")}
         subtitle={t("LanguageAndTimeZoneSettingsNavDescription")}
         url="/portal-settings/customization/general/language-and-time-zone"
         onClickLink={onClickLink}
       />
-      <MobileCategoryWrapper
+      <CategoryItem
         title={t("CustomTitlesWelcome")}
         subtitle={t("CustomTitlesSettingsNavDescription")}
         url="/portal-settings/customization/general/welcome-page-settings"
         onClickLink={onClickLink}
       />
-      <MobileCategoryWrapper
+      <CategoryItem
         title={t("DNSSettings")}
         subtitle={t("DNSSettingsNavDescription")}
         url="/portal-settings/customization/general/dns-settings"
@@ -87,7 +87,7 @@ const CustomizationNavbar = ({
         badgeLabel={t("Common:Paid")}
       />
       {enablePortalRename ? (
-        <MobileCategoryWrapper
+        <CategoryItem
           title={t("PortalRenaming", { productName: t("Common:ProductName") })}
           subtitle={t("PortalRenamingNavDescription")}
           url="/portal-settings/customization/general/portal-renaming"
@@ -96,14 +96,14 @@ const CustomizationNavbar = ({
           badgeLabel={t("Common:Paid")}
         />
       ) : null}
-      <MobileCategoryWrapper
+      <CategoryItem
         title={t("ConfigureDeepLink")}
         subtitle={t("ConfigureDeepLinkDescription")}
         url="/portal-settings/customization/general/configure-deep-link"
         onClickLink={onClickLink}
       />
       {isEnterprise ? (
-        <MobileCategoryWrapper
+        <CategoryItem
           title={t("AdManagement")}
           subtitle={t("AdManagementDescription", {
             productName: t("Common:ProductName"),
@@ -112,6 +112,20 @@ const CustomizationNavbar = ({
           onClickLink={onClickLink}
         />
       ) : null}
+      <CategoryItem
+        title={t("AiServicesManagement", {
+          aiServices: t("Common:AIServices"),
+        })}
+        subtitle={t("AiServicesManagementDescription", {
+          productName: t("Common:ProductName"),
+          organizationName: t("Common:OrganizationName"),
+          aiSettings: t("AISettings"),
+          aiAgents: t("Common:AIAgents"),
+          aiServices: t("Common:AIServices"),
+        })}
+        url="/portal-settings/customization/general/ai-services-management"
+        onClickLink={onClickLink}
+      />
     </StyledComponent>
   );
 };

@@ -28,15 +28,15 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import equal from "fast-deep-equal/react";
 
-import { FieldContainer } from "@docspace/shared/components/field-container";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import {
   InputSize,
   InputType,
   TextInput,
-} from "@docspace/shared/components/text-input";
-import { Text } from "@docspace/shared/components/text";
-import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
-import { Link, LinkType } from "@docspace/shared/components/link";
+} from "@docspace/ui-kit/components/text-input";
+import { Text } from "@docspace/ui-kit/components/text";
+import { AddButton } from "@docspace/ui-kit/components/add-button";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
 
 import addEditStyles from "../styles/AddEditDialog.module.scss";
 import baseParamsStyles from "./useBaseParams.module.scss";
@@ -174,7 +174,7 @@ export const useAdvancedSettings = (
               </React.Fragment>
             ))}
           </div>
-          <SelectorAddButton
+          <AddButton
             label={t("AISettings:AddMoreHeaders")}
             onClick={onAddNewHeader}
           />

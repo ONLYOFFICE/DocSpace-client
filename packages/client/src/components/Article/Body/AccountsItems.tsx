@@ -27,11 +27,12 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router";
 
 import { PageType } from "@docspace/shared/enums";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 
-import { ArticleItem } from "@docspace/shared/components/article-item/ArticleItemWrapper";
+import { ArticleItem } from "@docspace/ui-kit/components/article/item";
 
 interface IAccountsItem {
   showText: boolean;
@@ -67,6 +68,7 @@ const AccountsItems = ({
         onClick={onClickAction}
         isActive={activeItemId === "accounts"}
         folderId="accounts_catalog-members"
+        LinkRouter={Link}
         withAnimation
       />
       <ArticleItem
@@ -79,6 +81,7 @@ const AccountsItems = ({
         onClick={onClickAction}
         isActive={activeItemId === "groups"}
         folderId="accounts_catalog-groups"
+        LinkRouter={Link}
         withAnimation
       />
 
@@ -92,6 +95,7 @@ const AccountsItems = ({
         onClick={onClickAction}
         isActive={activeItemId === "guests"}
         folderId="accounts_catalog-guests"
+        LinkRouter={Link}
         withAnimation
         isEndOfBlock
       />

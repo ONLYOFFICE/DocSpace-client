@@ -3,7 +3,7 @@
   "content": "Move down without changing selection",
   "content_en_sha1_hash": "eb7330108f5f4a9d439335e9a783a5e7d608cf06",
   "created_at": "2025-05-19T21:30:55.060Z",
-  "updated_at": "2025-05-24T10:40:10.783Z",
+  "updated_at": "2026-02-19T13:36:32.511Z",
   "comment": {
     "text": "\"Used in a hotkeys panel to display the 'Move down' action without changing selection, appearing alongside the keyboard shortcut Ctrl + ↓.\"",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/panels/HotkeysPanel/MoveBlock.js",
       "line_number": 36,
-      "context": "const MoveBlock = ({ t, textStyles, keyTextStyles, CtrlKey }) => {\n return (\n <>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysMoveDown\")}</Text>\n <Text {...keyTextStyles}>{CtrlKey} + ↓</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>",
+      "context": "const MoveBlock = ({ t, textStyles, keyTextStyles, CtrlKey }) => {\n return (\n <>\n <Row className={styles.hotkeysRow}>\n <>\n <Text {...textStyles}>{t(\"HotkeysMoveDown\")}</Text>\n <Text {...keyTextStyles}>{CtrlKey} + ↓</Text>\n </>\n </Row>\n <Row className={styles.hotkeysRow}>\n <>",
       "module": "/packages/client"
     }
   ],

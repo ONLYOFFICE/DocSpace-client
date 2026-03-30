@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useEffect } from "react";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Button } from "@docspace/shared/components/button";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { Button } from "@docspace/ui-kit/components/button";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 
@@ -80,7 +80,7 @@ export const DeleteWebhookDialog = ({
         <Footer>
           <Button
             id="delete-forever-button"
-            label={t("EmptyTrashDialog:DeleteForeverButton")}
+            label={t("Common:DeleteForeverButton")}
             size="normal"
             primary
             onClick={handleDeleteClick}

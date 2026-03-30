@@ -26,11 +26,12 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/shared/components/text";
-import { getCookie, getCorrectDate } from "@docspace/shared/utils";
-import { globalColors } from "@docspace/shared/themes";
+import { Text } from "@docspace/ui-kit/components/text";
+import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
+import { getCookie } from "@docspace/ui-kit/utils/cookie";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { LANGUAGE } from "@docspace/shared/constants";
-import { useTheme } from "@docspace/shared/hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import { NewFilesPanelItemDateProps } from "../NewFilesBadge.types";
 

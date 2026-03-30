@@ -27,20 +27,20 @@
 import React from "react";
 
 import styles from "./CreateEditRoom.module.scss";
-import { RectangleSkeleton } from "../rectangle";
+import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 
 const RoomTypeListLoader = () => {
-  return (
-    <div className={styles.roomTypeListLoader}>
-      {[...Array(5).keys()].map((key) => (
-        <RectangleSkeleton
-          key={key}
-          width="100%"
-          height="86"
-          borderRadius="6"
-        />
-      ))}
-    </div>
-  );
+	return (
+		<div className={styles.roomTypeListLoader}>
+			{[...Array(5).keys()].map((key) => (
+				<RectangleSkeleton
+					key={key}
+					width="100%"
+					height="86"
+					borderRadius="6"
+				/>
+			))}
+		</div>
+	);
 };
 export default RoomTypeListLoader;

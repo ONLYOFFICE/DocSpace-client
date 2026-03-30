@@ -33,6 +33,7 @@ import {
   aiVectorizationGetHandler,
   aiVectorizationPutHandler, 
  } from "@docspace/shared/__mocks__/handlers";
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import { expect, test, TEST_PORT } from "../fixtures/base";
 import {PATH_AI_CONFIG_VECTORIZATION } from "@docspace/shared/__mocks__/handlers/ai/vectorization";
 
@@ -75,7 +76,7 @@ test.describe("Knowledge base", () => {
 
     await saveButton.hover();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "knowledge-base-settings",
       "knowledge-base-no-providers.png",
@@ -99,7 +100,7 @@ test.describe("Knowledge base", () => {
     const providerCombobox = page.getByTestId("knowledge-provider-combobox");
     await expect(providerCombobox.getByRole("button")).toBeEnabled();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "knowledge-base-settings",
       "knowledge-base-has-providers.png",
@@ -169,7 +170,7 @@ test.describe("Knowledge base", () => {
 
     await expect(resetButton).toBeEnabled();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "knowledge-base-settings",
       "knowledge-base-after-setup.png",
@@ -230,7 +231,7 @@ test.describe("Knowledge base", () => {
 
     await expect(resetButton).toBeDisabled();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "knowledge-base-settings",
       "knowledge-base-after-reset.png",
@@ -263,7 +264,7 @@ test.describe("Knowledge base", () => {
     const saveButton = page.getByTestId("knowledge-save-button");
     await expect(saveButton).toBeDisabled();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page,[
       "desktop",
       "knowledge-base-settings",
       "knowledge-base-need-reset.png",

@@ -123,7 +123,7 @@ const ClientRoutes = [
           {
             path: "ai-agents",
             element: (
-              <PrivateRoute>
+              <PrivateRoute requireAIServices>
                 <ViewComponent />
               </PrivateRoute>
             ),
@@ -131,7 +131,7 @@ const ClientRoutes = [
           {
             path: "ai-agents/filter",
             element: (
-              <PrivateRoute>
+              <PrivateRoute requireAIServices>
                 <ViewComponent />
               </PrivateRoute>
             ),
@@ -139,7 +139,7 @@ const ClientRoutes = [
           {
             path: "ai-agents/:agent/chat",
             element: (
-              <PrivateRoute>
+              <PrivateRoute requireAIServices>
                 <ViewComponent />
               </PrivateRoute>
             ),
@@ -147,7 +147,7 @@ const ClientRoutes = [
           {
             path: "ai-agents/:agent",
             element: (
-              <PrivateRoute>
+              <PrivateRoute requireAIServices>
                 <ViewComponent />
               </PrivateRoute>
             ),
@@ -155,7 +155,7 @@ const ClientRoutes = [
           {
             path: "ai-agents/:agent/filter",
             element: (
-              <PrivateRoute>
+              <PrivateRoute requireAIServices>
                 <ViewComponent />
               </PrivateRoute>
             ),

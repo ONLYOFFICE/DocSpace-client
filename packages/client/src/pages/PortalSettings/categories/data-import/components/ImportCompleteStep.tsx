@@ -29,13 +29,13 @@ import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
-import { Text } from "@docspace/shared/components/text";
-import { Checkbox } from "@docspace/shared/components/checkbox";
-import { HelpButton } from "@docspace/shared/components/help-button";
-import { toastr } from "@docspace/shared/components/toast";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import {
-  ImportCompleteStepProps,
-  InjectedImportCompleteStepProps,
+	ImportCompleteStepProps,
+	InjectedImportCompleteStepProps,
 } from "../types";
 
 const Wrapper = styled.div`
@@ -61,154 +61,154 @@ const ErrorText = styled(Text)`
 `;
 
 const ImportCompleteStep = (props: ImportCompleteStepProps) => {
-  const {
-    t,
+	const {
+		t,
 
-    getMigrationLog,
-    clearCheckedAccounts,
-    sendWelcomeLetter,
-    clearMigration,
-    getMigrationStatus,
-    setStep,
-    setWorkspace,
-    setMigratingWorkspace,
-    setMigrationPhase,
-  } = props as InjectedImportCompleteStepProps;
+		getMigrationLog,
+		clearCheckedAccounts,
+		sendWelcomeLetter,
+		clearMigration,
+		getMigrationStatus,
+		setStep,
+		setWorkspace,
+		setMigratingWorkspace,
+		setMigrationPhase,
+	} = props as InjectedImportCompleteStepProps;
 
-  const [isChecked, setIsChecked] = useState(false);
-  const [importResult, setImportResult] = useState<{
-    succeedUsers: number;
-    failedUsers: number;
-    errors: string[];
-  }>({
-    succeedUsers: 0,
-    failedUsers: 0,
-    errors: [],
-  });
+	const [isChecked, setIsChecked] = useState(false);
+	const [importResult, setImportResult] = useState<{
+		succeedUsers: number;
+		failedUsers: number;
+		errors: string[];
+	}>({
+		succeedUsers: 0,
+		failedUsers: 0,
+		errors: [],
+	});
 
-  const onDownloadLog = async () => {
-    try {
-      await getMigrationLog()
-        .then((response) => new Blob([response as BlobPart]))
-        .then((blob) => {
-          const a = document.createElement("a");
-          const url = window.URL.createObjectURL(blob);
-          a.href = url;
-          a.download = "migration.log";
-          a.click();
-          window.URL.revokeObjectURL(url);
-        });
-    } catch (error) {
-      toastr.error(error || t("Common:SomethingWentWrong"));
-    }
-  };
+	const onDownloadLog = async () => {
+		try {
+			await getMigrationLog()
+				.then((response) => new Blob([response as BlobPart]))
+				.then((blob) => {
+					const a = document.createElement("a");
+					const url = window.URL.createObjectURL(blob);
+					a.href = url;
+					a.download = "migration.log";
+					a.click();
+					window.URL.revokeObjectURL(url);
+				});
+		} catch (error) {
+			toastr.error(error || t("Common:SomethingWentWrong"));
+		}
+	};
 
-  const onChangeCheckbox = () => {
-    setIsChecked((prev) => !prev);
-  };
+	const onChangeCheckbox = () => {
+		setIsChecked((prev) => !prev);
+	};
 
-  const onFinishClick = () => {
-    if (isChecked) {
-      sendWelcomeLetter({ isSendWelcomeEmail: true });
-    }
-    clearCheckedAccounts();
-    clearMigration();
-    setStep(1);
-    setWorkspace("");
-    setMigratingWorkspace("");
-    setMigrationPhase("");
-  };
+	const onFinishClick = () => {
+		if (isChecked) {
+			sendWelcomeLetter({ isSendWelcomeEmail: true });
+		}
+		clearCheckedAccounts();
+		clearMigration();
+		setStep(1);
+		setWorkspace("");
+		setMigratingWorkspace("");
+		setMigrationPhase("");
+	};
 
-  useEffect(() => {
-    try {
-      getMigrationStatus()?.then((res) =>
-        setImportResult({
-          succeedUsers: res?.parseResult.successedUsers || 0,
-          failedUsers: res?.parseResult.failedUsers || 0,
-          errors: res?.parseResult.errors || [],
-        }),
-      );
-    } catch (error) {
-      toastr.error(error || t("Common:SomethingWentWrong"));
-    }
-  }, [getMigrationStatus, t]);
+	useEffect(() => {
+		try {
+			getMigrationStatus()?.then((res) =>
+				setImportResult({
+					succeedUsers: res?.parseResult.successedUsers || 0,
+					failedUsers: res?.parseResult.failedUsers || 0,
+					errors: res?.parseResult.errors || [],
+				}),
+			);
+		} catch (error) {
+			toastr.error(error || t("Common:SomethingWentWrong"));
+		}
+	}, [getMigrationStatus, t]);
 
-  return (
-    <>
-      <InfoText>
-        {t("Settings:ImportedUsers", {
-          selectedUsers: importResult.succeedUsers,
-          importedUsers: importResult.succeedUsers + importResult.failedUsers,
-        })}
-      </InfoText>
+	return (
+		<>
+			<InfoText>
+				{t("Settings:ImportedUsers", {
+					selectedUsers: importResult.succeedUsers,
+					importedUsers: importResult.succeedUsers + importResult.failedUsers,
+				})}
+			</InfoText>
 
-      {importResult.failedUsers > 0 ? (
-        <ErrorText>
-          {t("Settings:ErrorsWereFound", {
-            errors: importResult.failedUsers,
-          })}
-        </ErrorText>
-      ) : null}
+			{importResult.failedUsers > 0 ? (
+				<ErrorText>
+					{t("Settings:ErrorsWereFound", {
+						errors: importResult.failedUsers,
+					})}
+				</ErrorText>
+			) : null}
 
-      {importResult.errors?.length > 0 ? (
-        <ErrorText>{t("Settings:ErrorOccuredDownloadLog")}</ErrorText>
-      ) : null}
+			{importResult.errors?.length > 0 ? (
+				<ErrorText>{t("Settings:ErrorOccuredDownloadLog")}</ErrorText>
+			) : null}
 
-      <Wrapper>
-        <Checkbox
-          label={t("Settings:SendInviteLetter")}
-          isChecked={isChecked}
-          onChange={onChangeCheckbox}
-          dataTestId="send_invite_letter_checkbox"
-        />
-        <HelpButton
-          place="right"
-          offsetRight={0}
-          style={{ margin: "0px 5px" }}
-          tooltipContent={
-            <Text fontSize="12px">{t("Settings:InviteLetterTooltip")}</Text>
-          }
-          dataTestId="invite_letter_help_button"
-        />
-      </Wrapper>
+			<Wrapper>
+				<Checkbox
+					label={t("Settings:SendInviteLetter")}
+					isChecked={isChecked}
+					onChange={onChangeCheckbox}
+					dataTestId="send_invite_letter_checkbox"
+				/>
+				<HelpButton
+					place="right"
+					offsetRight={0}
+					style={{ margin: "0px 5px" }}
+					tooltipContent={
+						<Text fontSize="12px">{t("Settings:InviteLetterTooltip")}</Text>
+					}
+					dataTestId="invite_letter_help_button"
+				/>
+			</Wrapper>
 
-      <SaveCancelButtons
-        className="save-cancel-buttons"
-        onSaveClick={onFinishClick}
-        onCancelClick={onDownloadLog}
-        saveButtonLabel={t("Common:Finish")}
-        cancelButtonLabel={t("Settings:DownloadLog")}
-        displaySettings
-        showReminder
-        saveButtonDataTestId="finish_import_button"
-        cancelButtonDataTestId="download_log_button"
-      />
-    </>
-  );
+			<SaveCancelButtons
+				className="save-cancel-buttons"
+				onSaveClick={onFinishClick}
+				onCancelClick={onDownloadLog}
+				saveButtonLabel={t("Common:Finish")}
+				cancelButtonLabel={t("Settings:DownloadLog")}
+				displaySettings
+				showReminder
+				saveButtonDataTestId="finish_import_button"
+				cancelButtonDataTestId="download_log_button"
+			/>
+		</>
+	);
 };
 
 export default inject<TStore>(({ importAccountsStore }) => {
-  const {
-    getMigrationLog,
-    clearCheckedAccounts,
-    sendWelcomeLetter,
-    clearMigration,
-    getMigrationStatus,
-    setStep,
-    setWorkspace,
-    setMigratingWorkspace,
-    setMigrationPhase,
-  } = importAccountsStore;
+	const {
+		getMigrationLog,
+		clearCheckedAccounts,
+		sendWelcomeLetter,
+		clearMigration,
+		getMigrationStatus,
+		setStep,
+		setWorkspace,
+		setMigratingWorkspace,
+		setMigrationPhase,
+	} = importAccountsStore;
 
-  return {
-    getMigrationLog,
-    clearCheckedAccounts,
-    sendWelcomeLetter,
-    clearMigration,
-    getMigrationStatus,
-    setStep,
-    setWorkspace,
-    setMigratingWorkspace,
-    setMigrationPhase,
-  };
+	return {
+		getMigrationLog,
+		clearCheckedAccounts,
+		sendWelcomeLetter,
+		clearMigration,
+		getMigrationStatus,
+		setStep,
+		setWorkspace,
+		setMigratingWorkspace,
+		setMigrationPhase,
+	};
 })(observer(ImportCompleteStep));

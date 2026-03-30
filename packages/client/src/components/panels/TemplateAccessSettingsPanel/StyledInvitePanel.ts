@@ -25,11 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Heading } from "@docspace/shared/components/heading";
-import { DropDown } from "@docspace/shared/components/drop-down";
-import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
-import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { Heading } from "@docspace/ui-kit/components/heading";
+import { DropDown } from "@docspace/ui-kit/components/drop-down";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link } from "@docspace/ui-kit/components/link";
+import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import {
   commonIconsStyles,
   mobile,

@@ -1,0 +1,28 @@
+{
+  "key_path": "PricePerGB",
+  "content": "Price per GB",
+  "content_en_sha1_hash": "f4dec55c03402f56571dd35aa4ebca31e6bf33d8",
+  "created_at": "2026-03-20T09:07:40.794Z",
+  "updated_at": "2026-03-20T10:05:08.543Z",
+  "comment": {
+    "text": "This key displays the price per gigabyte of storage in the order summary section of the Portal Settings. It appears as a label next to the formatted storage price value, helping users understand the cost of additional storage. Translators should ensure the translated text accurately reflects a price unit.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T10:05:08.543Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/panels/additional-storage/OrderSummary.tsx",
+      "line_number": 224,
+      "context": "</Text>\n </div>\n ) : null}\n <div className={styles.summaryRow}>\n <Text fontSize=\"14px\" className={styles.rowLabel}>\n {t(\"PricePerGB\")}\n </Text>\n <Text fontWeight=\"600\" fontSize=\"14px\" className={styles.rowValue}>\n {formatWalletCurrency!(storagePriceIncrement, 2)}\n </Text>\n </div>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

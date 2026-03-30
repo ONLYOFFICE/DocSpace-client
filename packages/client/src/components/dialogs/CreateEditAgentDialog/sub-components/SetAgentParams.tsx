@@ -29,10 +29,10 @@ import styled, { css } from "styled-components";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { isMobile, mobile } from "@docspace/shared/utils";
 
-import { RoomIcon } from "@docspace/shared/components/room-icon";
+import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 
 import { removeEmojiCharacters } from "SRC_DIR/helpers/utils";
 import TagHandler from "SRC_DIR/helpers/TagHandler";
@@ -49,13 +49,13 @@ import {
   TAgentIconParams,
   TAgentParams,
 } from "@docspace/shared/utils/aiAgents";
-import type { TSelectorItem } from "@docspace/shared/components/selector";
+import type { TSelectorItem } from "@docspace/ui-kit/components/selector";
 import { Nullable } from "@docspace/shared/types";
-import { TAgent } from "@docspace/shared/api/ai/types";
+import { TAgent, TAIConfig } from "@docspace/shared/api/ai/types";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
-import { TLogo } from "@docspace/shared/api/rooms/types";
+import { TLogo } from "@docspace/ui-kit/types";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import ChangeRoomOwner from "SRC_DIR/components/ChangeRoomOwner";
 import RoomQuota from "SRC_DIR/components/RoomQuota";
@@ -165,6 +165,7 @@ type setAgentParamsProps = {
   setCover?: DialogsStore["setCover"];
   isDefaultAIAgentsQuotaSet?: CurrentQuotasStore["isDefaultAIAgentsQuotaSet"];
   infoPanelSelection?: TRoom;
+  modelAliases?: TAIConfig["modelAliases"];
 };
 
 const setAgentParams = ({
@@ -201,6 +202,7 @@ const setAgentParams = ({
   onClickAction,
   selectedServers,
   setSelectedServers,
+  modelAliases,
 }: setAgentParamsProps) => {
   const { t } = useTranslation([
     "CreateEditRoomDialog",
@@ -525,6 +527,7 @@ const setAgentParams = ({
 
       <ModelSettings
         agentParams={agentParams}
+        modelAliases={modelAliases}
         setAgentParams={setAgentParams}
       />
       <InstructionsSettings
@@ -584,7 +587,8 @@ export default inject(
     currentQuotaStore,
   }: TStore) => {
     const { isDefaultAIAgentsQuotaSet } = currentQuotaStore;
-    const { folderFormValidation, maxImageUploadSize } = settingsStore;
+    const { folderFormValidation, maxImageUploadSize, aiConfig } =
+      settingsStore;
 
     const { bufferSelection } = filesStore;
     const { getInfoPanelItemIcon, infoPanelSelection } = infoPanelStore;
@@ -627,6 +631,8 @@ export default inject(
       setCover,
       isDefaultAIAgentsQuotaSet,
       infoPanelSelection,
+
+      modelAliases: aiConfig?.modelAliases,
     };
   },
 )(observer(setAgentParams));

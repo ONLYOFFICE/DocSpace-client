@@ -27,8 +27,8 @@
 import React from "react";
 import { Trans, useTranslation } from "react-i18next";
 
-import { Text } from "../../../../components/text";
-import { Link, LinkTarget } from "../../../../components/link";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 
 import styles from "../Bonus.module.scss";
 

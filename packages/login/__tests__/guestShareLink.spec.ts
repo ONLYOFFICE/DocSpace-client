@@ -30,8 +30,10 @@ import {
   TypeSettings,
 } from "@docspace/shared/__mocks__/handlers";
 
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
+
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
-import { expect, test } from "./fixtures/base";
+import { test } from "./fixtures/base";
 
 const URL = "/login/confirm/GuestShareLink";
 const QUERY_PARAMS = [
@@ -68,7 +70,7 @@ test("guest share link render", async ({
 
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "guest-share-link",
     "guest-share-link-render.png",
@@ -93,7 +95,7 @@ test("guest share link approve", async ({
     waitUntil: "load",
   });
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "guest-share-link",
     "guest-share-link-approve.png",
@@ -116,7 +118,7 @@ test("guest share link deny", async ({
 
   await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "guest-share-link",
     "guest-share-link-deny.png",

@@ -30,14 +30,14 @@ import { useState } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
-import { toastr } from "@docspace/shared/components/toast";
-import { HelpButton } from "@docspace/shared/components/help-button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link } from "@docspace/ui-kit/components/link";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
 
 import {
-  LogoutSessionDialog,
-  LogoutAllSessionDialog,
+	LogoutSessionDialog,
+	LogoutAllSessionDialog,
 } from "SRC_DIR/components/dialogs";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
@@ -45,169 +45,169 @@ import SessionsTable from "./SessionsTable";
 import styles from "./active-sessions.module.scss";
 
 const ActiveSessions = ({
-  t,
-  getAllSessions,
-  removeAllSessions,
-  removeSession,
-  logoutDialogVisible,
-  setLogoutDialogVisible,
-  logoutAllDialogVisible,
-  setLogoutAllDialogVisible,
-  removeAllExecptThis,
-  sessions,
-  viewAs,
-  setViewAs,
-  currentDeviceType,
-  setSessions,
-  platformModalData,
+	t,
+	getAllSessions,
+	removeAllSessions,
+	removeSession,
+	logoutDialogVisible,
+	setLogoutDialogVisible,
+	logoutAllDialogVisible,
+	setLogoutAllDialogVisible,
+	removeAllExecptThis,
+	sessions,
+	viewAs,
+	setViewAs,
+	currentDeviceType,
+	setSessions,
+	platformModalData,
 }) => {
-  const [isLoading, setIsLoading] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 
-  useViewEffect({
-    view: viewAs,
-    setView: setViewAs,
-    currentDeviceType,
-  });
+	useViewEffect({
+		view: viewAs,
+		setView: setViewAs,
+		currentDeviceType,
+	});
 
-  const onClickRemoveAllSessions = async () => {
-    try {
-      setIsLoading(true);
-      await removeAllSessions().then((res) => window.location.replace(res));
-    } catch (error) {
-      toastr.error(error);
-    } finally {
-      setIsLoading(false);
-      setLogoutAllDialogVisible(false);
-    }
-  };
+	const onClickRemoveAllSessions = async () => {
+		try {
+			setIsLoading(true);
+			await removeAllSessions().then((res) => window.location.replace(res));
+		} catch (error) {
+			toastr.error(error);
+		} finally {
+			setIsLoading(false);
+			setLogoutAllDialogVisible(false);
+		}
+	};
 
-  const onClickRemoveAllExceptThis = async () => {
-    try {
-      setIsLoading(true);
-      await removeAllExecptThis().then(() =>
-        getAllSessions().then((res) => setSessions(res.items)),
-      );
-    } catch (error) {
-      toastr.error(error);
-    } finally {
-      setIsLoading(false);
-      setLogoutAllDialogVisible(false);
-    }
-  };
+	const onClickRemoveAllExceptThis = async () => {
+		try {
+			setIsLoading(true);
+			await removeAllExecptThis().then(() =>
+				getAllSessions().then((res) => setSessions(res.items)),
+			);
+		} catch (error) {
+			toastr.error(error);
+		} finally {
+			setIsLoading(false);
+			setLogoutAllDialogVisible(false);
+		}
+	};
 
-  const onClickRemoveSession = async (id) => {
-    const foundSession = sessions.find((s) => s.id === id);
-    try {
-      setIsLoading(true);
-      await removeSession(foundSession.id).then(() =>
-        getAllSessions().then((res) => setSessions(res.items)),
-      );
-      toastr.success(
-        t("Profile:SuccessLogout", {
-          platform: foundSession.platform,
-          browser: foundSession.browser,
-        }),
-      );
-    } catch (error) {
-      toastr.error(error);
-    } finally {
-      setIsLoading(false);
-      setLogoutDialogVisible(false);
-    }
-  };
+	const onClickRemoveSession = async (id) => {
+		const foundSession = sessions.find((s) => s.id === id);
+		try {
+			setIsLoading(true);
+			await removeSession(foundSession.id).then(() =>
+				getAllSessions().then((res) => setSessions(res.items)),
+			);
+			toastr.success(
+				t("Profile:SuccessLogout", {
+					platform: foundSession.platform,
+					browser: foundSession.browser,
+				}),
+			);
+		} catch (error) {
+			toastr.error(error);
+		} finally {
+			setIsLoading(false);
+			setLogoutDialogVisible(false);
+		}
+	};
 
-  const tooltipContent = (
-    <Text fontSize="12px">
-      {t("Profile:LogoutAllActiveSessionsDescription")}
-    </Text>
-  );
+	const tooltipContent = (
+		<Text fontSize="12px">
+			{t("Profile:LogoutAllActiveSessionsDescription")}
+		</Text>
+	);
 
-  return (
-    <div>
-      <Text fontSize="16px" fontWeight={700} lineHeight="22px">
-        {t("Profile:ActiveSessions")}
-      </Text>
+	return (
+		<div>
+			<Text fontSize="16px" fontWeight={700} lineHeight="22px">
+				{t("Profile:ActiveSessions")}
+			</Text>
 
-      {/* TODO: Uncomment after fix on backend */}
-      {/* <Text className={styles.autoDeleteTitle}>{t("Profile:AutoDeleteTitle")}</Text> */}
+			{/* TODO: Uncomment after fix on backend */}
+			{/* <Text className={styles.autoDeleteTitle}>{t("Profile:AutoDeleteTitle")}</Text> */}
 
-      <div className={styles.terminateSessionContainer}>
-        <Link
-          className={styles.terminateAllSessions}
-          type="action"
-          isHovered
-          onClick={() => setLogoutAllDialogVisible(true)}
-          dataTestId="terminate_all_sessions_link"
-        >
-          {t("Profile:TerminateAllSessions")}
-        </Link>
-        <HelpButton
-          offsetRight={0}
-          iconName={InfoReactSvgUrl}
-          tooltipContent={tooltipContent}
-          dataTestId="terminate_all_sessions_help_button"
-        />
-      </div>
+			<div className={styles.terminateSessionContainer}>
+				<Link
+					className={styles.terminateAllSessions}
+					type="action"
+					isHovered
+					onClick={() => setLogoutAllDialogVisible(true)}
+					dataTestId="terminate_all_sessions_link"
+				>
+					{t("Profile:TerminateAllSessions")}
+				</Link>
+				<HelpButton
+					offsetRight={0}
+					iconName={InfoReactSvgUrl}
+					tooltipContent={tooltipContent}
+					dataTestId="terminate_all_sessions_help_button"
+				/>
+			</div>
 
-      <SessionsTable t={t} sessionsData={sessions} viewAs={viewAs} />
+			<SessionsTable t={t} sessionsData={sessions} viewAs={viewAs} />
 
-      {logoutDialogVisible ? (
-        <LogoutSessionDialog
-          t={t}
-          visible={logoutDialogVisible}
-          data={platformModalData}
-          isLoading={isLoading}
-          onClose={() => setLogoutDialogVisible(false)}
-          onRemoveSession={onClickRemoveSession}
-        />
-      ) : null}
+			{logoutDialogVisible ? (
+				<LogoutSessionDialog
+					t={t}
+					visible={logoutDialogVisible}
+					data={platformModalData}
+					isLoading={isLoading}
+					onClose={() => setLogoutDialogVisible(false)}
+					onRemoveSession={onClickRemoveSession}
+				/>
+			) : null}
 
-      {logoutAllDialogVisible ? (
-        <LogoutAllSessionDialog
-          t={t}
-          visible={logoutAllDialogVisible}
-          isLoading={isLoading}
-          onClose={() => setLogoutAllDialogVisible(false)}
-          onRemoveAllSessions={onClickRemoveAllSessions}
-          onRemoveAllExceptThis={onClickRemoveAllExceptThis}
-        />
-      ) : null}
-    </div>
-  );
+			{logoutAllDialogVisible ? (
+				<LogoutAllSessionDialog
+					t={t}
+					visible={logoutAllDialogVisible}
+					isLoading={isLoading}
+					onClose={() => setLogoutAllDialogVisible(false)}
+					onRemoveAllSessions={onClickRemoveAllSessions}
+					onRemoveAllExceptThis={onClickRemoveAllExceptThis}
+				/>
+			) : null}
+		</div>
+	);
 };
 
 export default inject(({ settingsStore, setup }) => {
-  const { currentDeviceType } = settingsStore;
+	const { currentDeviceType } = settingsStore;
 
-  const {
-    getAllSessions,
-    removeAllSessions,
-    removeSession,
-    logoutDialogVisible,
-    setLogoutDialogVisible,
-    logoutAllDialogVisible,
-    setLogoutAllDialogVisible,
-    removeAllExecptThis,
-    sessions,
-    viewAs,
-    setViewAs,
-    setSessions,
-    platformModalData,
-  } = setup;
-  return {
-    getAllSessions,
-    removeAllSessions,
-    removeSession,
-    logoutDialogVisible,
-    setLogoutDialogVisible,
-    logoutAllDialogVisible,
-    setLogoutAllDialogVisible,
-    removeAllExecptThis,
-    sessions,
-    viewAs,
-    setViewAs,
-    setSessions,
-    currentDeviceType,
-    platformModalData,
-  };
+	const {
+		getAllSessions,
+		removeAllSessions,
+		removeSession,
+		logoutDialogVisible,
+		setLogoutDialogVisible,
+		logoutAllDialogVisible,
+		setLogoutAllDialogVisible,
+		removeAllExecptThis,
+		sessions,
+		viewAs,
+		setViewAs,
+		setSessions,
+		platformModalData,
+	} = setup;
+	return {
+		getAllSessions,
+		removeAllSessions,
+		removeSession,
+		logoutDialogVisible,
+		setLogoutDialogVisible,
+		logoutAllDialogVisible,
+		setLogoutAllDialogVisible,
+		removeAllExecptThis,
+		sessions,
+		viewAs,
+		setViewAs,
+		setSessions,
+		currentDeviceType,
+		platformModalData,
+	};
 })(observer(withTranslation(["Profile", "Common"])(ActiveSessions)));

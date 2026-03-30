@@ -29,19 +29,17 @@ import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
-import { TableRow, TableCell } from "@docspace/shared/components/table";
+import { TableRow, TableCell } from "@docspace/ui-kit/components/table";
 
-import { Text } from "@docspace/shared/components/text";
-import { Checkbox } from "@docspace/shared/components/checkbox";
-import { EmailInput } from "@docspace/shared/components/email-input";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { EmailInput, TValidate } from "@docspace/ui-kit/components/email-input";
 
 import EditSvg from "PUBLIC_DIR/images/access.edit.react.svg";
 import CrossSvgUrl from "PUBLIC_DIR/images/cross.edit.react.svg?url";
 import CheckSvgUrl from "PUBLIC_DIR/images/check.edit.react.svg?url";
-import { IconButton } from "@docspace/shared/components/icon-button";
-import { globalColors } from "@docspace/shared/themes";
-
-import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import {
   AddEmailTableRowProps,
   InjectedAddEmailTableRowProps,

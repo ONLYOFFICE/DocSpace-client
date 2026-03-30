@@ -25,10 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState } from "react";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Checkbox } from "@docspace/shared/components/checkbox";
-import { Button } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { Button } from "@docspace/ui-kit/components/button";
+import { Text } from "@docspace/ui-kit/components/text";
 
 const LogoutAllSessionDialog = ({
   t,
@@ -73,7 +73,7 @@ const LogoutAllSessionDialog = ({
             isChecked={isChecked}
             onChange={onChangeCheckbox}
             label={t("Profile:ChangePasswordAfterLoggingOut")}
-            testId="dialog_change_password_checkbox"
+            dataTestId="dialog_change_password_checkbox"
           />
         </div>
       </ModalDialog.Body>

@@ -32,7 +32,7 @@ import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { Nullable, TTranslation } from "@docspace/shared/types";
-import { ContextMenuModel } from "@docspace/shared/components/context-menu";
+import { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
 
 import AccessRightsStore from "SRC_DIR/store/AccessRightsStore";
 import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";

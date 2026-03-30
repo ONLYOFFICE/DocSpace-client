@@ -28,7 +28,7 @@
 
 import { AxiosRequestConfig } from "axios";
 
-import { Encoder } from "../../utils/encoder";
+import { Encoder } from "@docspace/ui-kit/utils/encoder";
 import { checkFilterInstance } from "../../utils/common";
 import { TReqOption } from "../../utils/axiosClient";
 import {
@@ -141,6 +141,28 @@ export async function getUserByEmail(
   }
   return user;
 }
+
+export async function checkUserExists(
+  userEmail: string,
+  confirmKey: Nullable<string> = null,
+  culture?: string,
+) {
+  const urlEmail = `/people/exists?email=${userEmail}`;
+
+  const url = culture ? `${urlEmail}&culture=${culture}` : urlEmail;
+
+  const options = {
+    method: "get",
+    url,
+  };
+
+  if (confirmKey) options.headers = { confirm: confirmKey };
+
+  const res = await request(options);
+
+  return res as boolean;
+}
+
 export function getUserFromConfirm(userId, confirmKey = null) {
   const options = {
     method: "get",
@@ -224,15 +246,15 @@ export async function changeEmail(
   userId: string,
   email: string,
   encemail: string,
-  key: string,
+  confirmKey: string,
 ) {
   const data = encemail ? { encemail } : { email };
 
   const res = (await request({
     method: "put",
-    url: `/people/${userId}/password`,
+    url: `/people/${userId}/email`,
     data,
-    headers: { confirm: key },
+    headers: { confirm: confirmKey },
   })) as TUser;
 
   return res;

@@ -27,16 +27,17 @@
 "use client";
 
 import isNil from "lodash/isNil";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 
-import { frameCallEvent } from "@docspace/shared/utils/common";
+import { frameCallEvent, getFrameId } from "@docspace/shared/utils/common";
 import { RoomsType } from "@docspace/shared/enums";
 import { getPrimaryLink } from "@docspace/shared/api/rooms";
-import RoomSelector from "@docspace/shared/selectors/Room";
+import RoomSelector from "@docspace/ui-kit/selectors/Room";
+import type { FolderDtoInteger } from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
 import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
 
 import type { TGetRooms } from "@docspace/shared/api/rooms/types";
-import type { TSelectorItem } from "@docspace/shared/components/selector";
+import type { TSelectorItem } from "@docspace/ui-kit/components/selector";
 
 import { getRoomsIcon } from "@/utils";
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
@@ -44,125 +45,129 @@ import { useSDKConfig } from "@/providers/SDKConfigProvider";
 const IS_TEST = process.env.NEXT_PUBLIC_E2E_TEST;
 
 export type RoomSelectorClientProps = {
-  baseConfig: {
-    acceptLabel?: string;
-    cancel?: boolean;
-    cancelLabel?: string;
-    header?: boolean;
-    roomType?: RoomsType | RoomsType[] | null;
-    search?: boolean;
-  };
-  pageCount: number;
-  roomList: TGetRooms;
+	baseConfig: {
+		acceptLabel?: string;
+		cancel?: boolean;
+		cancelLabel?: string;
+		header?: boolean;
+		roomType?: RoomsType | RoomsType[] | null;
+		search?: boolean;
+	};
+	pageCount: number;
+	roomList: TGetRooms;
 };
 
 export default function RoomSelectorClient({
-  baseConfig,
-  pageCount,
-  roomList,
+	baseConfig,
+	pageCount,
+	roomList,
 }: RoomSelectorClientProps) {
-  useSDKConfig();
+	useSDKConfig();
 
-  useDocumentTitle("RoomSelector");
+	useDocumentTitle("RoomSelector");
 
-  const onSubmit = useCallback(async ([selectedItem]: TSelectorItem[]) => {
-    const enrichedData = {
-      ...selectedItem,
-      icon:
-        selectedItem.icon === ""
-          ? getRoomsIcon(selectedItem.roomType as RoomsType, false, 32)
-          : selectedItem.iconOriginal,
-    } as TSelectorItem & {
-      requestTokens?: {
-        id: string;
-        primary: boolean;
-        title: string;
-        requestToken: string;
-      }[];
-    };
+	useEffect(() => {
+		frameCallEvent({ event: "onAppReady", data: { frameId: getFrameId() } });
+	}, []);
 
-    const isSharedRoom =
-      selectedItem.roomType === RoomsType.PublicRoom ||
-      ((selectedItem.roomType === RoomsType.CustomRoom ||
-        selectedItem.roomType === RoomsType.FormRoom) &&
-        selectedItem.shared);
+	const onSubmit = useCallback(async ([selectedItem]: TSelectorItem[]) => {
+		const enrichedData = {
+			...selectedItem,
+			icon:
+				selectedItem.icon === ""
+					? getRoomsIcon(selectedItem.roomType as RoomsType, false, 32)
+					: selectedItem.iconOriginal,
+		} as TSelectorItem & {
+			requestTokens?: {
+				id: string;
+				primary: boolean;
+				title: string;
+				requestToken: string;
+			}[];
+		};
 
-    if (isSharedRoom && !isNil(selectedItem.id)) {
-      const response = (await getPrimaryLink(selectedItem.id)) as {
-        sharedTo: {
-          id: string;
-          title: string;
-          requestToken: string;
-          primary: boolean;
-        };
-      };
-      const {
-        sharedTo: { id, title, requestToken, primary },
-      } = response;
-      enrichedData.requestTokens = [{ id, primary, title, requestToken }];
-    }
+		const isSharedRoom =
+			selectedItem.roomType === RoomsType.PublicRoom ||
+			((selectedItem.roomType === RoomsType.CustomRoom ||
+				selectedItem.roomType === RoomsType.FormRoom) &&
+				selectedItem.shared);
 
-    frameCallEvent({ event: "onSelectCallback", data: [enrichedData] });
+		if (isSharedRoom && !isNil(selectedItem.id)) {
+			const response = (await getPrimaryLink(selectedItem.id)) as {
+				sharedTo: {
+					id: string;
+					title: string;
+					requestToken: string;
+					primary: boolean;
+				};
+			};
+			const {
+				sharedTo: { id, title, requestToken, primary },
+			} = response;
+			enrichedData.requestTokens = [{ id, primary, title, requestToken }];
+		}
 
-    if (IS_TEST) {
-      // DON`T REMOVE CONSOLE LOG, IT IS REQUIRED FOR TESTING
-      console.log(
-        JSON.stringify({ onSelectCallback: "onSelectCallback", enrichedData }),
-      );
-    }
-  }, []);
+		frameCallEvent({ event: "onSelectCallback", data: [enrichedData] });
 
-  const onClose = useCallback(() => {
-    frameCallEvent({ event: "onCloseCallback" });
+		if (IS_TEST) {
+			// DON`T REMOVE CONSOLE LOG, IT IS REQUIRED FOR TESTING
+			console.log(
+				JSON.stringify({ onSelectCallback: "onSelectCallback", enrichedData }),
+			);
+		}
+	}, []);
 
-    if (IS_TEST) {
-      // DON`T REMOVE CONSOLE LOG, IT IS REQUIRED FOR TESTING
-      console.log("onCloseCallback");
-    }
-  }, []);
+	const onClose = useCallback(() => {
+		frameCallEvent({ event: "onCloseCallback" });
 
-  const cancelButtonProps = baseConfig?.cancel
-    ? {
-        withCancelButton: true as const,
-        cancelButtonLabel: baseConfig?.cancelLabel as string,
-        onCancel: onClose,
-      }
-    : {};
+		if (IS_TEST) {
+			// DON`T REMOVE CONSOLE LOG, IT IS REQUIRED FOR TESTING
+			console.log("onCloseCallback");
+		}
+	}, []);
 
-  const headerProps = baseConfig?.header
-    ? {
-        withHeader: true as const,
-        headerProps: {
-          headerLabel: "",
-          isCloseable: false,
-          onCloseClick: onClose,
-        },
-      }
-    : { withPadding: false };
+	const cancelButtonProps = baseConfig?.cancel
+		? {
+				withCancelButton: true as const,
+				cancelButtonLabel: baseConfig?.cancelLabel as string,
+				onCancel: onClose,
+			}
+		: {};
 
-  const roomTypeProps = baseConfig?.roomType
-    ? { roomType: baseConfig.roomType }
-    : {};
+	const headerProps = baseConfig?.header
+		? {
+				withHeader: true as const,
+				headerProps: {
+					headerLabel: "",
+					isCloseable: false,
+					onCloseClick: onClose,
+				},
+			}
+		: { withPadding: false };
 
-  const searchProps = baseConfig?.search
-    ? { withSearch: baseConfig?.search }
-    : {};
+	const roomTypeProps = baseConfig?.roomType
+		? { roomType: baseConfig.roomType }
+		: {};
 
-  const { folders, total } = roomList;
+	const searchProps = baseConfig?.search
+		? { withSearch: baseConfig?.search }
+		: {};
 
-  return (
-    <RoomSelector
-      {...cancelButtonProps}
-      {...headerProps}
-      {...roomTypeProps}
-      {...searchProps}
-      initHasNextPage={total > pageCount}
-      initItems={folders}
-      initTotal={total}
-      isMultiSelect={false}
-      onSubmit={onSubmit}
-      submitButtonLabel={baseConfig?.acceptLabel}
-      withInit
-    />
-  );
+	const { folders, total } = roomList;
+
+	return (
+		<RoomSelector
+			{...cancelButtonProps}
+			{...headerProps}
+			{...roomTypeProps}
+			{...searchProps}
+			initHasNextPage={total > pageCount}
+			initItems={folders as unknown as FolderDtoInteger[]}
+			initTotal={total}
+			isMultiSelect={false}
+			onSubmit={onSubmit}
+			submitButtonLabel={baseConfig?.acceptLabel}
+			withInit
+		/>
+	);
 }

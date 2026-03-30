@@ -25,31 +25,31 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import type { TFile } from "@docspace/shared/api/files/types";
 import type { RoomsType } from "@docspace/shared/enums";
-import { HeaderProps } from "@docspace/shared/components/selector/Selector.types";
+import { HeaderProps } from "@docspace/ui-kit/components/selector";
 
 export interface ShareCollectSelectorProps {
-  visible: boolean;
-  file: TFile;
-  createDefineRoomType: RoomsType;
-  onCloseActionProp?: () => void;
-  headerProps?: HeaderProps | object;
-  onCancel: VoidFunction;
+	visible: boolean;
+	file: TFile;
+	createDefineRoomType: RoomsType;
+	onCloseActionProp?: () => void;
+	headerProps?: HeaderProps | object;
+	onCancel: VoidFunction;
 }
 
 export interface InjectShareCollectSelectorProps
-  extends Pick<TStore["settingsStore"], "currentDeviceType">,
-    Pick<TStore["filesSettingsStore"], "getIcon">,
-    Pick<
-      TStore["dialogsStore"],
-      "conflictResolveDialogVisible" | "setAssignRolesDialogData"
-    >,
-    Pick<TStore["infoPanelStore"], "setIsMobileHidden">,
-    Pick<TStore["filesStore"], "setSelected">,
-    Pick<
-      TStore["uploadDataStore"],
-      "itemOperationToFolder" | "clearActiveOperations"
-    >,
-    Pick<
-      TStore["filesActionsStore"],
-      "setConflictDialogData" | "checkFileConflicts" | "openFileAction"
-    > {}
+	extends Pick<TStore["settingsStore"], "currentDeviceType">,
+		Pick<TStore["filesSettingsStore"], "getIcon">,
+		Pick<
+			TStore["dialogsStore"],
+			"conflictResolveDialogVisible" | "setAssignRolesDialogData"
+		>,
+		Pick<TStore["infoPanelStore"], "setIsMobileHidden">,
+		Pick<TStore["filesStore"], "setSelected">,
+		Pick<
+			TStore["uploadDataStore"],
+			"itemOperationToFolder" | "clearActiveOperations"
+		>,
+		Pick<
+			TStore["filesActionsStore"],
+			"setConflictDialogData" | "checkFileConflicts" | "openFileAction"
+		> {}

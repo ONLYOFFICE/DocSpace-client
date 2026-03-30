@@ -27,9 +27,9 @@
 import PropTypes from "prop-types";
 import { useTranslation, Trans } from "react-i18next";
 
-import { Button } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Button } from "@docspace/ui-kit/components/button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 
 import { inject, observer } from "mobx-react";
 import { getConvertedSize } from "@docspace/shared/utils/common";
@@ -37,95 +37,95 @@ import { getConvertedSize } from "@docspace/shared/utils/common";
 import styles from "./ChangePricingPlan.module.scss";
 
 const ChangePricingPlanDialog = ({
-  visible,
-  onClose,
-  addedManagersCount,
-  managersCount,
-  allowedStorageSizeByQuota,
-  usedTotalStorageSizeCount,
+	visible,
+	onClose,
+	addedManagersCount,
+	managersCount,
+	allowedStorageSizeByQuota,
+	usedTotalStorageSizeCount,
 }) => {
-  const { t, ready } = useTranslation(["DowngradePlanDialog", "Common"]);
+	const { t, ready } = useTranslation(["DowngradePlanDialog", "Common"]);
 
-  const onCloseModal = () => {
-    onClose && onClose();
-  };
+	const onCloseModal = () => {
+		onClose && onClose();
+	};
 
-  const allowedStorageSpace = getConvertedSize(t, allowedStorageSizeByQuota);
-  const currentStorageSpace = getConvertedSize(t, usedTotalStorageSizeCount);
+	const allowedStorageSpace = getConvertedSize(t, allowedStorageSizeByQuota);
+	const currentStorageSpace = getConvertedSize(t, usedTotalStorageSizeCount);
 
-  const planUsersLimitations = (
-    <Text as="span" fontSize="13px">
-      <Trans t={t} i18nKey="PlanUsersLimit" ns="DowngradePlanDialog">
-        You wish to downgrade the team to
-        <strong>{{ usersCount: managersCount }}</strong>
-        admins, and current number of such users in your
-        {{ productName: t("Common:ProductName") }} is
-        <strong>{{ currentUsersCount: addedManagersCount }}</strong>
-      </Trans>
-    </Text>
-  );
+	const planUsersLimitations = (
+		<Text as="span" fontSize="13px">
+			<Trans t={t} i18nKey="PlanUsersLimit" ns="DowngradePlanDialog">
+				You wish to downgrade the team to
+				<strong>{{ usersCount: managersCount }}</strong>
+				admins, and current number of such users in your
+				{{ productName: t("Common:ProductName") }} is
+				<strong>{{ currentUsersCount: addedManagersCount }}</strong>
+			</Trans>
+		</Text>
+	);
 
-  const storagePlanLimitations = (
-    <Text as="span" fontSize="13px">
-      <Trans t={t} i18nKey="PlanStorageLimit" ns="DowngradePlanDialog">
-        New tariff's limitation is
-        <strong>{{ storageValue: allowedStorageSpace }}</strong> of storage, and
-        your current used storage is
-        <strong>{{ currentStorageValue: currentStorageSpace }}</strong>.
-      </Trans>
-    </Text>
-  );
+	const storagePlanLimitations = (
+		<Text as="span" fontSize="13px">
+			<Trans t={t} i18nKey="PlanStorageLimit" ns="DowngradePlanDialog">
+				New tariff's limitation is
+				<strong>{{ storageValue: allowedStorageSpace }}</strong> of storage, and
+				your current used storage is
+				<strong>{{ currentStorageValue: currentStorageSpace }}</strong>.
+			</Trans>
+		</Text>
+	);
 
-  return (
-    <ModalDialog
-      visible={visible}
-      onClose={onCloseModal}
-      autoMaxHeight
-      isLarge
-      isLoading={!ready}
-    >
-      <ModalDialog.Header>{t("ChangePricingPlan")}</ModalDialog.Header>
-      <ModalDialog.Body>
-        <div className={styles.content}>
-          <Text fontSize="13px" isBold className={styles.cannotDowngradePlan}>
-            {t("CannotChangePlan")}
-          </Text>
-          {planUsersLimitations}
-          <br />
-          {storagePlanLimitations}
+	return (
+		<ModalDialog
+			visible={visible}
+			onClose={onCloseModal}
+			autoMaxHeight
+			isLarge
+			isLoading={!ready}
+		>
+			<ModalDialog.Header>{t("ChangePricingPlan")}</ModalDialog.Header>
+			<ModalDialog.Body>
+				<div className={styles.content}>
+					<Text fontSize="13px" isBold className={styles.cannotDowngradePlan}>
+						{t("CannotChangePlan")}
+					</Text>
+					{planUsersLimitations}
+					<br />
+					{storagePlanLimitations}
 
-          <Text fontSize="13px" className={styles.saveOrChange}>
-            {t("SaveOrChange")}
-          </Text>
-        </div>
-      </ModalDialog.Body>
-      <ModalDialog.Footer>
-        <Button
-          className="ok-button"
-          label={t("Common:OKButton")}
-          size="normal"
-          primary
-          onClick={onCloseModal}
-          tabIndex={3}
-        />
-      </ModalDialog.Footer>
-    </ModalDialog>
-  );
+					<Text fontSize="13px" className={styles.saveOrChange}>
+						{t("SaveOrChange")}
+					</Text>
+				</div>
+			</ModalDialog.Body>
+			<ModalDialog.Footer>
+				<Button
+					className="ok-button"
+					label={t("Common:OKButton")}
+					size="normal"
+					primary
+					onClick={onCloseModal}
+					tabIndex={3}
+				/>
+			</ModalDialog.Footer>
+		</ModalDialog>
+	);
 };
 
 ChangePricingPlanDialog.propTypes = {
-  visible: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
+	visible: PropTypes.bool.isRequired,
+	onClose: PropTypes.func.isRequired,
 };
 
 export default inject(({ paymentStore, currentQuotaStore }) => {
-  const { managersCount, allowedStorageSizeByQuota } = paymentStore;
+	const { managersCount, allowedStorageSizeByQuota } = paymentStore;
 
-  const { addedManagersCount, usedTotalStorageSizeCount } = currentQuotaStore;
-  return {
-    managersCount,
-    addedManagersCount,
-    allowedStorageSizeByQuota,
-    usedTotalStorageSizeCount,
-  };
+	const { addedManagersCount, usedTotalStorageSizeCount } = currentQuotaStore;
+	return {
+		managersCount,
+		addedManagersCount,
+		allowedStorageSizeByQuota,
+		usedTotalStorageSizeCount,
+	};
 })(observer(ChangePricingPlanDialog));

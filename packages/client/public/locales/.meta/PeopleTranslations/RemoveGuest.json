@@ -3,7 +3,7 @@
   "content": "Remove guest",
   "content_en_sha1_hash": "f4c08fab02f6f28372817ad4c2797960ec7e89d6",
   "created_at": "2025-05-19T21:30:53.496Z",
-  "updated_at": "2025-05-24T06:27:53.628Z",
+  "updated_at": "2026-02-19T13:36:32.444Z",
   "comment": {
     "text": "The translation key \"RemoveGuest\" is used to display the text that will be shown when removing a selected guest from a contact. This text appears in a remove dialog and should convey the action being performed.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/RemoveGuest/index.tsx",
       "line_number": 42,
-      "context": "import { ButtonKeys } from \"@docspace/shared/enums\";\n import { toastr } from \"@docspace/shared/components/toast\";\n \n import UsersStore from \"SRC_DIR/store/contacts/UsersStore\";\n \n type RemoveGuestDialogProps = {\n visible: boolean;\n onClose: VoidFunction;\n \n guests: UsersStore[\"selection\"];\n removeGuests: UsersStore[\"removeGuests\"];",
+      "context": "import { ButtonKeys } from \"@docspace/shared/enums\";\n import { toastr } from \"@docspace/ui-kit/components/toast\";\n \n import UsersStore from \"SRC_DIR/store/contacts/UsersStore\";\n \n type RemoveGuestDialogProps = {\n visible: boolean;\n onClose: VoidFunction;\n \n guests: UsersStore[\"selection\"];\n removeGuests: UsersStore[\"removeGuests\"];",
       "module": "/packages/client"
     }
   ],

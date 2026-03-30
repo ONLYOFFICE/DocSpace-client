@@ -109,6 +109,10 @@ export const aiChatPutResolver = () => {
   return new Response(JSON.stringify(successUpdate));
 };
 
+export const aiChatDeleteResolver = () => {
+  return new Response(null, { status: 204 });
+};
+
 export const aiChatHandler = (port: string) => {
   return http.get(
     `http://localhost:${port}/${API_PREFIX}/${PATH_AI_CHAT}`,
@@ -122,4 +126,13 @@ export const aiChatPutHandler = (port: string) => {
   return http.put(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_CHAT}`, () => {
     return aiChatPutResolver();
   });
+};
+
+export const aiChatDeleteHandler = (port: string) => {
+  return http.delete(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_CHAT}`,
+    () => {
+      return aiChatDeleteResolver();
+    },
+  );
 };

@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
+import { ModalDialog, ModalDialogType } from "@docspace/ui-kit/components/modal-dialog";
 
 import ShareFormCard from "./share-form-card";
 import type { ShareFormDialogProps } from "./share-form-dialog.types";

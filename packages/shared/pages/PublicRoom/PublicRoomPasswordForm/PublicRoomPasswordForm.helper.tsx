@@ -30,7 +30,7 @@ import { match, P } from "ts-pattern";
 
 import PublicRoomIconURL from "PUBLIC_DIR/images/icons/32/room/public.svg?url";
 
-import { Text } from "../../../components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { LinkSharingEntityType } from "../../../enums";
 import { iconSize32 } from "../../../utils/image-helpers";
 import type { TValidateShareRoom } from "../../../api/rooms/types";

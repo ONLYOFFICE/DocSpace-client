@@ -32,8 +32,8 @@ import classNames from "classnames";
 
 import InfoSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
-import { Text } from "../../../components/text";
-import PublicRoomBar from "../../../components/public-room-bar";
+import { Text } from "@docspace/ui-kit/components/text";
+import PublicRoomBar from "@docspace/ui-kit/components/public-room-bar";
 
 import styles from "../DownloadDialog.module.scss";
 import { ProtectedFileCategoryType } from "../DownloadDialog.enums";

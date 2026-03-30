@@ -30,12 +30,12 @@ import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
 import { isMobile } from "@docspace/shared/utils";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { FileType, FolderType } from "@docspace/shared/enums";
-import { RoomIcon } from "@docspace/shared/components/room-icon";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
-import PublicRoomBar from "@docspace/shared/components/public-room-bar";
+import PublicRoomBar from "@docspace/ui-kit/components/public-room-bar";
 import { TRoom, TRoomLifetime } from "@docspace/shared/api/rooms/types";
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
@@ -69,7 +69,6 @@ type DetailsProps = {
   isVisitor?: boolean;
   isCollaborator?: boolean;
 
-  selectTag?: FilesActionStore["selectTag"];
   onCreateRoomFromTemplate?: FilesActionStore["onCreateRoomFromTemplate"];
 
   isDefaultRoomsQuotaSet?: boolean;
@@ -91,7 +90,6 @@ const Details = ({
   openUser,
   isVisitor,
   isCollaborator,
-  selectTag,
   isArchive,
   isDefaultRoomsQuotaSet,
   isDefaultAIAgentsQuotaSet,
@@ -123,7 +121,6 @@ const Details = ({
     item: selection,
     openUser: openUser!,
     culture: culture!,
-    selectTag: selectTag!,
     isDefaultRoomsQuotaSet: isDefaultRoomsQuotaSet!,
     isDefaultAIAgentsQuotaSet: isDefaultAIAgentsQuotaSet!,
     isAIAgentsFolder: isAIAgentsFolderRoot!,
@@ -278,7 +275,11 @@ const Details = ({
             badgeUrl={badgeUrl ?? undefined}
             tooltipContent={tooltipContent ?? undefined}
             tooltipId="info-panel-details_icon-tooltip"
-            withEditing={"isRoom" in selection ? selection.isRoom : false}
+            withEditing={
+              "isRoom" in selection && selection.isRoom
+                ? selection.security.EditRoom
+                : false
+            }
             dataTestId="info_panel_details_room_icon"
           />
         </div>
@@ -326,7 +327,7 @@ export default inject(
     const { culture } = settingsStore;
     const { user } = userStore;
 
-    const { selectTag, onCreateRoomFromTemplate } = filesActionsStore;
+    const { onCreateRoomFromTemplate } = filesActionsStore;
 
     const isVisitor = user?.isVisitor;
     const isCollaborator = user?.isCollaborator;
@@ -342,7 +343,6 @@ export default inject(
       openUser,
       isVisitor,
       isCollaborator,
-      selectTag,
       isDefaultRoomsQuotaSet,
       isDefaultAIAgentsQuotaSet,
       isAIAgentsFolderRoot,

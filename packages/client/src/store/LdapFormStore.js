@@ -11,7 +11,7 @@ import { EmployeeType, LDAPOperation } from "@docspace/shared/enums";
 import { makeAutoObservable, runInAction } from "mobx";
 import isEqual from "lodash/isEqual";
 import delay from "lodash/delay";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 const constants = {
   SSL_LDAP_PORT: 636,

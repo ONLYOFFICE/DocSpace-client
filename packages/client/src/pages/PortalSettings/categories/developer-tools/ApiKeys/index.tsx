@@ -39,10 +39,10 @@ import {
   TApiKeyParamsRequest,
 } from "@docspace/shared/api/api-keys/types";
 import { isMobile } from "@docspace/shared/utils";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
-import { toastr } from "@docspace/shared/components/toast";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link } from "@docspace/ui-kit/components/link";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import CreateApiKeyDialog from "./sub-components/CreateApiKeyDialog";
 import DeleteApiKeyDialog from "./sub-components/DeleteApiKeyDialog";
 import ApiKeysView from "./sub-components";
@@ -174,7 +174,7 @@ const ApiKeys = (props: ApiKeysProps) => {
         {apiKeysUrl ? (
           <Link
             isHovered
-            color={currentColorScheme?.main?.accent}
+            color={currentColorScheme?.main?.accent ?? undefined}
             fontSize="13px"
             fontWeight={600}
             onClick={() => window.open(apiKeysUrl, "_blank")}

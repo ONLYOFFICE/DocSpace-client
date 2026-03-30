@@ -28,17 +28,16 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import { DeviceType, FolderType } from "../../enums";
-import FilesSelector from "../../selectors/Files";
-import { InputSize } from "../text-input";
-import { FileInput } from "../file-input";
-import { Portal } from "../portal";
-import { Aside } from "../aside";
-import { Backdrop } from "../backdrop";
-import { useUnmount } from "../../hooks/useUnmount";
+import { Portal } from "@docspace/ui-kit/components/portal";
 
-import type { TBreadCrumb } from "../selector/Selector.types";
-import type { FilesSelectorProps } from "../../selectors/Files/FilesSelector.types";
+import { DeviceType, FolderType } from "../../enums";
+import FilesSelector from "@docspace/ui-kit/selectors/Files";
+import { InputSize } from "@docspace/ui-kit/components/text-input";
+import { FileInput } from "@docspace/ui-kit/components/file-input";
+import { useUnmount } from "@docspace/ui-kit/hooks/useUnmount";
+
+import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
+import type { FilesSelectorProps } from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
 
 import {
   getAcceptButtonLabel,
@@ -192,63 +191,45 @@ const FilesSelectorInput = ({
   };
 
   const selectorComponent = (
-    <>
-      <Backdrop
-        visible={isPanelVisible}
-        isAside
-        withBackground
-        zIndex={309}
-        onClick={onClose}
-      />
-      <Aside
-        visible={isPanelVisible}
-        withoutBodyScroll
-        zIndex={310}
-        onClose={onClose}
-        withoutHeader
-      >
-        <FilesSelector
-          withSearch
-          withBreadCrumbs
-          withoutBackButton
-          withCancelButton
-          openRoot={openRoot}
-          isRoomsOnly={isRoomsOnly}
-          currentFolderId={id ?? ""}
-          filterParam={filterParam}
-          checkCreating={checkCreating}
-          isThirdParty={isThirdParty}
-          isPanelVisible={isPanelVisible}
-          rootThirdPartyId={rootThirdPartyId}
-          submitButtonLabel={acceptButtonLabel}
-          descriptionText={descriptionText ?? ""}
-          cancelButtonId="select-file-modal-cancel"
-          cancelButtonLabel={t("Common:CancelButton")}
-          onCancel={onClose}
-          onSubmit={onSubmit}
-          onSetBaseFolderPath={onSetBasePath}
-          getIsDisabled={getIsDisabledAction}
-          withCreate={withCreate}
-          formProps={formProps}
-          // default
-          parentId={0}
-          disabledItems={[]}
-          embedded={false}
-          withFooterInput={false}
-          withFooterCheckbox={false}
-          footerInputHeader=""
-          footerCheckboxLabel=""
-          currentFooterInputValue=""
-          getFilesArchiveError={() => ""}
-          rootFolderType={FolderType.Rooms}
-          currentDeviceType={currentDeviceType ?? DeviceType.desktop}
-          {...filesSelectorSettings}
-          withRecentTreeFolder={isFilesSelection}
-          withFavoritesTreeFolder={isFilesSelection}
-          withAIAgentsTreeFolder={withAIAgentsTreeFolder}
-        />
-      </Aside>
-    </>
+    <FilesSelector
+      withSearch
+      withBreadCrumbs
+      withoutBackButton
+      withCancelButton
+      openRoot={openRoot}
+      isRoomsOnly={isRoomsOnly}
+      currentFolderId={id ?? ""}
+      filterParam={filterParam}
+      checkCreating={checkCreating}
+      isThirdParty={isThirdParty}
+      isPanelVisible={isPanelVisible}
+      rootThirdPartyId={rootThirdPartyId}
+      submitButtonLabel={acceptButtonLabel}
+      descriptionText={descriptionText ?? ""}
+      cancelButtonId="select-file-modal-cancel"
+      cancelButtonLabel={t("Common:CancelButton")}
+      onCancel={onClose}
+      onSubmit={onSubmit}
+      onSetBaseFolderPath={onSetBasePath}
+      getIsDisabled={getIsDisabledAction}
+      withCreate={withCreate}
+      formProps={formProps}
+      // default
+      parentId={0}
+      disabledItems={[]}
+      embedded={false}
+      withFooterInput={false}
+      withFooterCheckbox={false}
+      footerInputHeader=""
+      footerCheckboxLabel=""
+      currentFooterInputValue=""
+      getFilesArchiveError={() => ""}
+      rootFolderType={FolderType.Rooms}
+      currentDeviceType={currentDeviceType ?? DeviceType.desktop}
+      {...filesSelectorSettings}
+      withFavoritesTreeFolder={isFilesSelection}
+      withAIAgentsTreeFolder={withAIAgentsTreeFolder}
+    />
   );
 
   return (

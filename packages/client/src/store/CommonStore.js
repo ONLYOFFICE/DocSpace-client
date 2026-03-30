@@ -29,7 +29,7 @@ import axios from "axios";
 
 import api from "@docspace/shared/api";
 import { setDNSSettings } from "@docspace/shared/api/settings";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { DeviceType } from "@docspace/shared/enums";
 
 class CommonStore {
@@ -67,6 +67,8 @@ class CommonStore {
   isLoadedAdManagement = false;
 
   isLoadedConfigureDeepLink = false;
+
+  isLoadedAiServicesManagement = false;
 
   greetingSettingsIsDefault = true;
 
@@ -251,6 +253,10 @@ class CommonStore {
 
   setIsLoadedConfigureDeepLink = (isLoadedConfigureDeepLink) => {
     this.isLoadedConfigureDeepLink = isLoadedConfigureDeepLink;
+  };
+
+  setIsLoadedAiServicesManagement = (isLoadedAiServicesManagement) => {
+    this.isLoadedAiServicesManagement = isLoadedAiServicesManagement;
   };
 
   setIsLoadedCustomization = (isLoadedCustomization) => {

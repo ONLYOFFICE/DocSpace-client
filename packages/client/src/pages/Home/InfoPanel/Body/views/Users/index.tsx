@@ -31,14 +31,14 @@ import { useNavigate } from "react-router";
 import classNames from "classnames";
 
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
-import { Link } from "@docspace/shared/components/link";
-import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/ui-kit/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
 import {
-  ComboBox,
-  ComboBoxSize,
-  TOption,
-} from "@docspace/shared/components/combobox";
-import { TContextMenuValueTypeOnClick } from "@docspace/shared/components/context-menu/ContextMenu.types";
+	ComboBox,
+	ComboBoxSize,
+	TOption,
+} from "@docspace/ui-kit/components/combobox";
+import { TContextMenuValueTypeOnClick } from "@docspace/ui-kit/components/context-menu";
 import { getUserTypeTranslation } from "@docspace/shared/utils/common";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
@@ -61,376 +61,376 @@ import ItemTitle from "./ItemTitle";
 import styles from "./Users.module.scss";
 
 type UsersProps = {
-  canChangeUserType?: AccessRightsStore["canChangeUserType"];
+	canChangeUserType?: AccessRightsStore["canChangeUserType"];
 
-  setUsersSelection?: UsersStore["setSelection"];
-  setUsersBufferSelection?: UsersStore["setBufferSelection"];
+	setUsersSelection?: UsersStore["setSelection"];
+	setUsersBufferSelection?: UsersStore["setBufferSelection"];
 
-  getUsersChangeTypeOptions?: ContactsConextOptionsStore["getUsersChangeTypeOptions"];
-  getUserContextOptions?: ContactsConextOptionsStore["getUserContextOptions"];
+	getUsersChangeTypeOptions?: ContactsConextOptionsStore["getUsersChangeTypeOptions"];
+	getUserContextOptions?: ContactsConextOptionsStore["getUserContextOptions"];
 
-  showStorageInfo?: CurrentQuotasStore["showStorageInfo"];
+	showStorageInfo?: CurrentQuotasStore["showStorageInfo"];
 
-  standalone?: SettingsStore["standalone"];
+	standalone?: SettingsStore["standalone"];
 
-  userSelection?: TPeopleListItem[] | Nullable<TPeopleListItem>;
+	userSelection?: TPeopleListItem[] | Nullable<TPeopleListItem>;
 
-  isGuests?: boolean;
+	isGuests?: boolean;
 
-  isMe?: UserStore["isMe"];
+	isMe?: UserStore["isMe"];
 };
 
 const Users = ({
-  canChangeUserType,
+	canChangeUserType,
 
-  setUsersSelection,
-  setUsersBufferSelection,
+	setUsersSelection,
+	setUsersBufferSelection,
 
-  getUsersChangeTypeOptions,
-  getUserContextOptions,
+	getUsersChangeTypeOptions,
+	getUserContextOptions,
 
-  showStorageInfo,
-  standalone,
-  userSelection,
-  isGuests,
-  isMe,
+	showStorageInfo,
+	standalone,
+	userSelection,
+	isGuests,
+	isMe,
 }: UsersProps) => {
-  const { t, ready } = useTranslation([
-    "People",
-    "InfoPanel",
-    "ConnectDialog",
-    "Common",
-    "PeopleTranslations",
-    "People",
-    "Settings",
-    "SmartBanner",
-    "DeleteProfileEverDialog",
-    "Translations",
-  ]);
+	const { t, ready } = useTranslation([
+		"People",
+		"InfoPanel",
+		"ConnectDialog",
+		"Common",
+		"PeopleTranslations",
+		"People",
+		"Settings",
+		"SmartBanner",
+		"DeleteProfileEverDialog",
+		"Translations",
+	]);
 
-  const navigate = useNavigate();
+	const navigate = useNavigate();
 
-  const [statusLabel, setStatusLabel] = React.useState("");
-  const [isLoading, setIsLoading] = React.useState(false);
+	const [statusLabel, setStatusLabel] = React.useState("");
+	const [isLoading, setIsLoading] = React.useState(false);
 
-  const getStatusLabel = React.useCallback(() => {
-    if (!userSelection || Array.isArray(userSelection)) return;
+	const getStatusLabel = React.useCallback(() => {
+		if (!userSelection || Array.isArray(userSelection)) return;
 
-    let label = "";
+		let label = "";
 
-    switch (userSelection.status) {
-      case EmployeeStatus.Pending:
-        label = t("PeopleTranslations:PendingInviteTitle");
-        break;
+		switch (userSelection.status) {
+			case EmployeeStatus.Pending:
+				label = t("PeopleTranslations:PendingInviteTitle");
+				break;
 
-      case EmployeeStatus.Disabled:
-        label = t("PeopleTranslations:DisabledEmployeeStatus");
-        break;
+			case EmployeeStatus.Disabled:
+				label = t("PeopleTranslations:DisabledEmployeeStatus");
+				break;
 
-      case EmployeeStatus.Active:
-      default:
-        label = t("Common:Active");
-        break;
-    }
+			case EmployeeStatus.Active:
+			default:
+				label = t("Common:Active");
+				break;
+		}
 
-    setStatusLabel(label);
-  }, [userSelection, t]);
+		setStatusLabel(label);
+	}, [userSelection, t]);
 
-  React.useEffect(() => {
-    getStatusLabel();
-  }, [userSelection, getStatusLabel]);
+	React.useEffect(() => {
+		getStatusLabel();
+	}, [userSelection, getStatusLabel]);
 
-  const onAbort = () => {
-    setIsLoading(false);
-  };
+	const onAbort = () => {
+		setIsLoading(false);
+	};
 
-  const onGroupClick = (groupId: string) => {
-    const url = getContactsUrl("inside_group", groupId);
-    navigate(url);
-    setUsersSelection!([]);
-    setUsersBufferSelection!(null);
-  };
+	const onGroupClick = (groupId: string) => {
+		const url = getContactsUrl("inside_group", groupId);
+		navigate(url);
+		setUsersSelection!([]);
+		setUsersBufferSelection!(null);
+	};
 
-  const renderTypeData = () => {
-    if (!userSelection || Array.isArray(userSelection)) return;
-    const { role } = userSelection;
+	const renderTypeData = () => {
+		if (!userSelection || Array.isArray(userSelection)) return;
+		const { role } = userSelection;
 
-    const typesOptions = getUsersChangeTypeOptions!(t, userSelection);
+		const typesOptions = getUsersChangeTypeOptions!(t, userSelection);
 
-    const typeLabel = getUserTypeTranslation(role, t);
+		const typeLabel = getUserTypeTranslation(role, t);
 
-    const selectedOption = typesOptions.find((option) => option.key === role);
+		const selectedOption = typesOptions.find((option) => option.key === role);
 
-    const text = (
-      <Text
-        tooltipFitToContent
-        title={typeLabel}
-        fontSize="13px"
-        fontWeight={600}
-        truncate
-      >
-        {typeLabel}
-      </Text>
-    );
+		const text = (
+			<Text
+				tooltipFitToContent
+				title={typeLabel}
+				fontSize="13px"
+				fontWeight={600}
+				truncate
+			>
+				{typeLabel}
+			</Text>
+		);
 
-    const status = getUserStatus(userSelection);
+		const status = getUserStatus(userSelection);
 
-    const canChange = canChangeUserType!({
-      ...userSelection,
-      statusType: status,
-    });
+		const canChange = canChangeUserType!({
+			...userSelection,
+			statusType: status,
+		});
 
-    if (!canChange || isGuests || !selectedOption) return text;
+		if (!canChange || isGuests || !selectedOption) return text;
 
-    const onSelect = (option: TOption) => {
-      if (option.onClick)
-        option.onClick(option as unknown as TContextMenuValueTypeOnClick);
-    };
+		const onSelect = (option: TOption) => {
+			if (option.onClick)
+				option.onClick(option as unknown as TContextMenuValueTypeOnClick);
+		};
 
-    const combobox = (
-      <ComboBox
-        id="info-account-type-select"
-        className={styles.typeCombobox}
-        selectedOption={selectedOption}
-        onSelect={onSelect}
-        options={typesOptions}
-        scaled={false}
-        size={ComboBoxSize.content}
-        displaySelectedOption
-        modernView
-        manualWidth="auto"
-        isLoading={isLoading}
-      />
-    );
+		const combobox = (
+			<ComboBox
+				id="info-account-type-select"
+				className={styles.typeCombobox}
+				selectedOption={selectedOption}
+				onSelect={onSelect}
+				options={typesOptions}
+				scaled={false}
+				size={ComboBoxSize.content}
+				displaySelectedOption
+				modernView
+				manualWidth="auto"
+				isLoading={isLoading}
+			/>
+		);
 
-    return combobox;
-  };
+		return combobox;
+	};
 
-  if (
-    !userSelection ||
-    (Array.isArray(userSelection) && userSelection.length === 0)
-  )
-    return <NoItem isGuests={isGuests!} isUsers={!isGuests} />;
+	if (
+		!userSelection ||
+		(Array.isArray(userSelection) && userSelection.length === 0)
+	)
+		return <NoItem isGuests={isGuests!} isUsers={!isGuests} />;
 
-  if (Array.isArray(userSelection))
-    return (
-      <SeveralItems isUsers isGroups={false} selectedItems={userSelection} />
-    );
+	if (Array.isArray(userSelection))
+		return (
+			<SeveralItems isUsers isGroups={false} selectedItems={userSelection} />
+		);
 
-  const typeData = renderTypeData();
+	const typeData = renderTypeData();
 
-  const { isVisitor, isCollaborator } = userSelection;
+	const { isVisitor, isCollaborator } = userSelection;
 
-  const statusText =
-    isVisitor || isCollaborator ? t("Common:Free") : t("Common:Paid");
+	const statusText =
+		isVisitor || isCollaborator ? t("Common:Free") : t("Common:Paid");
 
-  if (!ready) return <InfoPanelViewLoader view="users" />;
+	if (!ready) return <InfoPanelViewLoader view="users" />;
 
-  return (
-    <>
-      <ItemTitle
-        userSelection={userSelection}
-        getUserContextOptions={getUserContextOptions!}
-        isMe={isMe!}
-      />
-      <div className={styles.userContent}>
-        <div className={styles.header}>
-          <Text
-            tooltipFitToContent
-            title={t("Data")}
-            fontSize="14px"
-            fontWeight={600}
-            lineHeight="16px"
-          >
-            {t("InfoPanel:Data")}
-          </Text>
-        </div>
-        <div className={styles.body}>
-          <Text
-            tooltipFitToContent
-            className={classNames(styles.infoField, styles.firstRow)}
-            title={t("Data")}
-          >
-            {t("Common:Account")}
-          </Text>
-          <Text
-            tooltipFitToContent
-            className={classNames(styles.infoData, styles.firstRow)}
-            fontSize="13px"
-            fontWeight={600}
-            title={statusLabel}
-          >
-            {statusLabel}
-          </Text>
+	return (
+		<>
+			<ItemTitle
+				userSelection={userSelection}
+				getUserContextOptions={getUserContextOptions!}
+				isMe={isMe!}
+			/>
+			<div className={styles.userContent}>
+				<div className={styles.header}>
+					<Text
+						tooltipFitToContent
+						title={t("Data")}
+						fontSize="14px"
+						fontWeight={600}
+						lineHeight="16px"
+					>
+						{t("InfoPanel:Data")}
+					</Text>
+				</div>
+				<div className={styles.body}>
+					<Text
+						tooltipFitToContent
+						className={classNames(styles.infoField, styles.firstRow)}
+						title={t("Data")}
+					>
+						{t("Common:Account")}
+					</Text>
+					<Text
+						tooltipFitToContent
+						className={classNames(styles.infoData, styles.firstRow)}
+						fontSize="13px"
+						fontWeight={600}
+						title={statusLabel}
+					>
+						{statusLabel}
+					</Text>
 
-          <Text
-            tooltipFitToContent
-            className={styles.infoField}
-            title={t("Common:Type")}
-          >
-            {t("Common:Type")}
-          </Text>
-          {typeData}
+					<Text
+						tooltipFitToContent
+						className={styles.infoField}
+						title={t("Common:Type")}
+					>
+						{t("Common:Type")}
+					</Text>
+					{typeData}
 
-          {isGuests && userSelection.createdBy?.displayName ? (
-            <>
-              <Text
-                tooltipFitToContent
-                className={styles.infoField}
-                title={t("Common:Inviter")}
-              >
-                {t("Common:Inviter")}
-              </Text>
-              <Text
-                tooltipFitToContent
-                fontSize="13px"
-                fontWeight={600}
-                title={statusLabel}
-              >
-                {userSelection.createdBy.displayName}
-              </Text>
-            </>
-          ) : null}
+					{isGuests && userSelection.createdBy?.displayName ? (
+						<>
+							<Text
+								tooltipFitToContent
+								className={styles.infoField}
+								title={t("Common:Inviter")}
+							>
+								{t("Common:Inviter")}
+							</Text>
+							<Text
+								tooltipFitToContent
+								fontSize="13px"
+								fontWeight={600}
+								title={statusLabel}
+							>
+								{userSelection.createdBy.displayName}
+							</Text>
+						</>
+					) : null}
 
-          {userSelection.status === EmployeeStatus.Active ? (
-            <>
-              <Text
-                tooltipFitToContent
-                className={styles.infoField}
-                title={t("PeopleTranslations:RegistrationDate")}
-              >
-                {t("PeopleTranslations:RegistrationDate")}
-              </Text>
-              <Text
-                tooltipFitToContent
-                fontSize="13px"
-                fontWeight={600}
-                title={userSelection.registrationDate}
-              >
-                {userSelection.registrationDate}
-              </Text>
-            </>
-          ) : null}
-          {!standalone ? (
-            <>
-              <Text
-                tooltipFitToContent
-                className={styles.infoField}
-                title={t("UserStatus")}
-              >
-                {t("UserStatus")}
-              </Text>
-              <Text
-                tooltipFitToContent
-                fontSize="13px"
-                fontWeight={600}
-                title={statusLabel}
-              >
-                {statusText}
-              </Text>
-            </>
-          ) : null}
-          {showStorageInfo && !isGuests ? (
-            <>
-              <Text
-                tooltipFitToContent
-                className={styles.infoField}
-                title={t("Common:Storage")}
-              >
-                {t("Common:Storage")}
-              </Text>
-              <SpaceQuota
-                type="user"
-                item={userSelection}
-                className={styles.typeCombobox}
-                onAbort={onAbort}
-                dataTestId="info_panel_contacts_user_space_quota"
-              />
-            </>
-          ) : null}
+					{userSelection.status === EmployeeStatus.Active ? (
+						<>
+							<Text
+								tooltipFitToContent
+								className={styles.infoField}
+								title={t("PeopleTranslations:RegistrationDate")}
+							>
+								{t("PeopleTranslations:RegistrationDate")}
+							</Text>
+							<Text
+								tooltipFitToContent
+								fontSize="13px"
+								fontWeight={600}
+								title={userSelection.registrationDate}
+							>
+								{userSelection.registrationDate}
+							</Text>
+						</>
+					) : null}
+					{!standalone ? (
+						<>
+							<Text
+								tooltipFitToContent
+								className={styles.infoField}
+								title={t("UserStatus")}
+							>
+								{t("UserStatus")}
+							</Text>
+							<Text
+								tooltipFitToContent
+								fontSize="13px"
+								fontWeight={600}
+								title={statusLabel}
+							>
+								{statusText}
+							</Text>
+						</>
+					) : null}
+					{showStorageInfo && !isGuests ? (
+						<>
+							<Text
+								tooltipFitToContent
+								className={styles.infoField}
+								title={t("Common:Storage")}
+							>
+								{t("Common:Storage")}
+							</Text>
+							<SpaceQuota
+								type="user"
+								item={userSelection}
+								className={styles.typeCombobox}
+								onAbort={onAbort}
+								dataTestId="info_panel_contacts_user_space_quota"
+							/>
+						</>
+					) : null}
 
-          {userSelection?.groups?.length && !isGuests ? (
-            <>
-              <Text
-                tooltipFitToContent
-                className={styles.infoFieldGroups}
-                title={t("Common:Group")}
-              >
-                {t("Common:Group")}
-              </Text>
+					{userSelection?.groups?.length && !isGuests ? (
+						<>
+							<Text
+								tooltipFitToContent
+								className={styles.infoFieldGroups}
+								title={t("Common:Group")}
+							>
+								{t("Common:Group")}
+							</Text>
 
-              <div className={styles.groups}>
-                {userSelection.groups.map((group, index) => (
-                  <Link
-                    tooltipFitToContent
-                    key={group.id}
-                    isHovered
-                    fontSize="13px"
-                    lineHeight="20px"
-                    fontWeight={600}
-                    title={group.name}
-                    onClick={() => onGroupClick(group.id)}
-                    isTextOverflow
-                    dataTestId={`info_panel_contacts_user_group_link_${index}`}
-                  >
-                    {group.name}
-                  </Link>
-                ))}
-              </div>
-            </>
-          ) : null}
-        </div>
-      </div>
-    </>
-  );
+							<div className={styles.groups}>
+								{userSelection.groups.map((group, index) => (
+									<Link
+										tooltipFitToContent
+										key={group.id}
+										isHovered
+										fontSize="13px"
+										lineHeight="20px"
+										fontWeight={600}
+										title={group.name}
+										onClick={() => onGroupClick(group.id)}
+										isTextOverflow
+										dataTestId={`info_panel_contacts_user_group_link_${index}`}
+									>
+										{group.name}
+									</Link>
+								))}
+							</div>
+						</>
+					) : null}
+				</div>
+			</div>
+		</>
+	);
 };
 
 export default inject(
-  ({
-    peopleStore,
-    accessRightsStore,
-    currentQuotaStore,
-    settingsStore,
-    userStore,
-  }: TStore) => {
-    const { usersStore, contextOptionsStore } = peopleStore;
+	({
+		peopleStore,
+		accessRightsStore,
+		currentQuotaStore,
+		settingsStore,
+		userStore,
+	}: TStore) => {
+		const { usersStore, contextOptionsStore } = peopleStore;
 
-    const { canChangeUserType } = accessRightsStore;
+		const { canChangeUserType } = accessRightsStore;
 
-    const {
-      setSelection: setUsersSelection,
-      setBufferSelection: setUsersBufferSelection,
+		const {
+			setSelection: setUsersSelection,
+			setBufferSelection: setUsersBufferSelection,
 
-      selection,
-      bufferSelection,
-    } = usersStore!;
+			selection,
+			bufferSelection,
+		} = usersStore!;
 
-    const { getUsersChangeTypeOptions, getUserContextOptions } =
-      contextOptionsStore!;
+		const { getUsersChangeTypeOptions, getUserContextOptions } =
+			contextOptionsStore!;
 
-    const { showStorageInfo } = currentQuotaStore;
-    const { standalone } = settingsStore;
+		const { showStorageInfo } = currentQuotaStore;
+		const { standalone } = settingsStore;
 
-    const userSelection = selection.length
-      ? selection.length > 1
-        ? selection
-        : selection[0]
-      : bufferSelection;
+		const userSelection = selection.length
+			? selection.length > 1
+				? selection
+				: selection[0]
+			: bufferSelection;
 
-    return {
-      canChangeUserType,
+		return {
+			canChangeUserType,
 
-      setUsersSelection,
-      setUsersBufferSelection,
+			setUsersSelection,
+			setUsersBufferSelection,
 
-      getUserContextOptions,
-      getUsersChangeTypeOptions,
+			getUserContextOptions,
+			getUsersChangeTypeOptions,
 
-      showStorageInfo,
-      standalone,
+			showStorageInfo,
+			standalone,
 
-      userSelection,
-      isMe: userStore!.isMe,
-    };
-  },
+			userSelection,
+			isMe: userStore!.isMe,
+		};
+	},
 )(observer(Users));

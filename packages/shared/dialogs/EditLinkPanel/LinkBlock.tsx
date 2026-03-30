@@ -26,38 +26,42 @@
 
 import type { FC, ChangeEvent } from "react";
 
-import { Text } from "../../components/text";
-import { InputSize, InputType, TextInput } from "../../components/text-input";
+import { Text } from "@docspace/ui-kit/components/text";
+import {
+	InputSize,
+	InputType,
+	TextInput,
+} from "@docspace/ui-kit/components/text-input";
 
 import type { LinkBlockProps } from "./EditLinkPanel.types";
 
 const LinkBlock: FC<LinkBlockProps> = (props) => {
-  const { t, isLoading, linkNameValue, setLinkNameValue } = props;
+	const { t, isLoading, linkNameValue, setLinkNameValue } = props;
 
-  const onChangeLinkName = (e: ChangeEvent<HTMLInputElement>) => {
-    setLinkNameValue(e.target.value);
-  };
+	const onChangeLinkName = (e: ChangeEvent<HTMLInputElement>) => {
+		setLinkNameValue(e.target.value);
+	};
 
-  return (
-    <div className="edit-link_link-block">
-      <Text className="edit-link-text" fontSize="16px" fontWeight={600}>
-        {t("Common:LinkName")}
-      </Text>
-      <TextInput
-        scale
-        withBorder
-        isAutoFocussed
-        size={InputSize.base}
-        type={InputType.text}
-        value={linkNameValue}
-        isDisabled={isLoading}
-        onChange={onChangeLinkName}
-        placeholder={t("Common:LinkName")}
-        className="edit-link_name-input"
-        testId="edit_link_panel_name_input"
-      />
-    </div>
-  );
+	return (
+		<div className="edit-link_link-block">
+			<Text className="edit-link-text" fontSize="16px" fontWeight={600}>
+				{t("Common:LinkName")}
+			</Text>
+			<TextInput
+				scale
+				withBorder
+				isAutoFocussed
+				size={InputSize.base}
+				type={InputType.text}
+				value={linkNameValue}
+				isDisabled={isLoading}
+				onChange={onChangeLinkName}
+				placeholder={t("Common:LinkName")}
+				className="edit-link_name-input"
+				testId="edit_link_panel_name_input"
+			/>
+		</div>
+	);
 };
 
 export default LinkBlock;

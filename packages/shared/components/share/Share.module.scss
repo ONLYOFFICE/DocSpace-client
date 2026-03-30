@@ -24,8 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@use "../../styles/mixins";
-@use "../../styles/variables";
+@use "@docspace/ui-kit/styles/mixins";
+@use "@docspace/ui-kit/styles/variables";
 
 @mixin icon {
   position: absolute;
@@ -178,7 +178,7 @@
     font-size: 14px;
     font-weight: 600;
     line-height: 16px;
-    margin: 6px 8px;
+    margin: 6px 0px;
 
     margin-inline-end: 0;
 
@@ -204,13 +204,11 @@
   }
 
   .expireText {
-    margin-inline-start: 8px;
     color: var(--info-panel-links-primary-color);
   }
 
   .linkTimeInfo {
     color: var(--info-panel-links-primary-color);
-    padding-inline-start: 8px;
   }
 
   .linkActions {

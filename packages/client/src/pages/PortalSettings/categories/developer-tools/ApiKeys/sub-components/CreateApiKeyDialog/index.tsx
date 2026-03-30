@@ -33,20 +33,20 @@ import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 import { Trans, withTranslation } from "react-i18next";
 import { createApiKey, getApiKeys } from "@docspace/shared/api/api-keys";
 import { TApiKey, TApiKeyRequest } from "@docspace/shared/api/api-keys/types";
-import { Text } from "@docspace/shared/components/text";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
-import { InputType, TextInput } from "@docspace/shared/components/text-input";
-import { InputBlock } from "@docspace/shared/components/input-block";
-import { ToggleButton } from "@docspace/shared/components/toggle-button";
-import { Tabs, TabsTypes, TTabItem } from "@docspace/shared/components/tabs";
-import { Checkbox } from "@docspace/shared/components/checkbox";
-import { Tooltip } from "@docspace/shared/components/tooltip";
-import { toastr } from "@docspace/shared/components/toast";
-import { globalColors } from "@docspace/shared/themes";
+} from "@docspace/ui-kit/components/modal-dialog";
+import { InputType, TextInput } from "@docspace/ui-kit/components/text-input";
+import { InputBlock } from "@docspace/ui-kit/components/input-block";
+import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
+import { Tabs, TabsTypes, TTabItem } from "@docspace/ui-kit/components/tabs";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { CreateApiKeyDialogProps, TPermissionsList } from "../../types";
 import {
   getCategoryTranslation,

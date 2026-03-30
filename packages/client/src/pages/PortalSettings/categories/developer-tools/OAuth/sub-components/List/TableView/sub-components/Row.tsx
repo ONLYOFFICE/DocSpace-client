@@ -27,13 +27,13 @@
 import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 
-import { TableCell } from "@docspace/shared/components/table";
-import { Tags } from "@docspace/shared/components/tags";
-import { Text } from "@docspace/shared/components/text";
-import { ToggleButton } from "@docspace/shared/components/toggle-button";
-import getCorrectDate from "@docspace/shared/utils/getCorrectDate";
-import { getCookie } from "@docspace/shared/utils/cookie";
-import { toastr } from "@docspace/shared/components/toast";
+import { TableCell } from "@docspace/ui-kit/components/table";
+import { Tags } from "@docspace/ui-kit/components/tags";
+import { Text } from "@docspace/ui-kit/components/text";
+import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
+import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
+import { getCookie } from "@docspace/ui-kit/utils/cookie";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import NameCell from "../columns/name";
 import CreatorCell from "../columns/creator";
@@ -164,7 +164,6 @@ const Row = (props: RowProps) => {
           >
             <Tags
               tags={item.scopes}
-              removeTagIcon
               columnCount={tagCount}
               onSelectTag={() => {}}
             />

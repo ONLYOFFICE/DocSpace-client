@@ -28,7 +28,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import api from "@docspace/shared/api";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import {
   FolderType,
   RoomSecurityError,
@@ -36,7 +36,7 @@ import {
 } from "@docspace/shared/enums";
 import { User as ShareUser } from "@docspace/shared/components/share/sub-components/User";
 
-import type { TOption } from "@docspace/shared/components/combobox";
+import type { TOption } from "@docspace/ui-kit/components/combobox";
 import type { TGroup } from "@docspace/shared/api/groups/types";
 
 import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";

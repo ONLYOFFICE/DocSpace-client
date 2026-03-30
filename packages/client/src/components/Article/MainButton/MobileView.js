@@ -27,7 +27,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import { MainButtonMobile } from "@docspace/shared/components/main-button-mobile";
+import { MainButtonMobile } from "@docspace/ui-kit/components/main-button-mobile";
 import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
 
 import styles from "./main-button.module.scss";

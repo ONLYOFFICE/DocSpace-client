@@ -56,3 +56,10 @@ export async function getServiceState() {
 
   return res;
 }
+
+export function cancelBackup() {
+  return request({
+    method: "post",
+    url: "backup/cancelbackup",
+  });
+}

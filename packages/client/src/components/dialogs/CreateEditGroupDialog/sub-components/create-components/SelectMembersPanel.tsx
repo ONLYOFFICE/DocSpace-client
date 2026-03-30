@@ -27,39 +27,39 @@
 import React from "react";
 
 import { TUser } from "@docspace/shared/api/people/types";
-import { TOnSubmit } from "@docspace/shared/components/selector/Selector.types";
+import { TOnSubmit } from "@docspace/ui-kit/components/selector";
 
 import { MembersSelector } from "../MembersSelector/MembersSelector";
 
 type SelectMembersPanelProps = {
-  onClose: () => void;
-  onParentPanelClose: () => void;
-  groupManager: TUser | null;
-  groupMembers: TUser[];
-  addMembers: TOnSubmit;
+	onClose: () => void;
+	onParentPanelClose: () => void;
+	groupManager: TUser | null;
+	groupMembers: TUser[];
+	addMembers: TOnSubmit;
 };
 
 export const SelectMembersPanel = ({
-  onClose,
-  onParentPanelClose,
-  groupManager,
-  groupMembers,
-  addMembers,
+	onClose,
+	onParentPanelClose,
+	groupManager,
+	groupMembers,
+	addMembers,
 }: SelectMembersPanelProps) => {
-  const invitedUsers = React.useMemo(
-    () => [...groupMembers].map((g) => g?.id),
-    [groupMembers],
-  );
+	const invitedUsers = React.useMemo(
+		() => [...groupMembers].map((g) => g?.id),
+		[groupMembers],
+	);
 
-  if (groupManager) invitedUsers.push(groupManager.id);
+	if (groupManager) invitedUsers.push(groupManager.id);
 
-  return (
-    <MembersSelector
-      onClose={onClose}
-      onParentPanelClose={onParentPanelClose}
-      isVisible
-      addMembers={addMembers}
-      invitedUsers={invitedUsers}
-    />
-  );
+	return (
+		<MembersSelector
+			onClose={onClose}
+			onParentPanelClose={onParentPanelClose}
+			isVisible
+			addMembers={addMembers}
+			invitedUsers={invitedUsers}
+		/>
+	);
 };

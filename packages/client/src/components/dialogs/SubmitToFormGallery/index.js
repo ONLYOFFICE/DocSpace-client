@@ -24,258 +24,258 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Link } from "@docspace/shared/components/link";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Button } from "@docspace/shared/components/button";
+import { Link } from "@docspace/ui-kit/components/link";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { Button } from "@docspace/ui-kit/components/button";
 import { useState, useRef, useEffect } from "react";
 import { observer, inject } from "mobx-react";
 import { Trans, withTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 import FilesSelector from "SRC_DIR/components/FilesSelector";
-import { toastr } from "@docspace/shared/components/toast";
-import { useEventListener } from "@docspace/shared/hooks/useEventListener";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { useEventListener } from "@docspace/ui-kit/hooks/useEventListener";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import * as Styled from "./index.styled";
 
 const SubmitToFormGallery = ({
-  t,
-  visible,
-  setVisible,
-  formItem,
-  setFormItem,
-  getIcon,
-  canSubmitToFormGallery,
-  submitToFormGallery,
+	t,
+	visible,
+	setVisible,
+	formItem,
+	setFormItem,
+	getIcon,
+	canSubmitToFormGallery,
+	submitToFormGallery,
 }) => {
-  const [isSubmitting, setIsSubmitting] = useState(false);
+	const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const abortControllerRef = useRef(new AbortController());
+	const abortControllerRef = useRef(new AbortController());
 
-  const keydownOptionsRef = useRef({ capture: true, passive: false });
+	const keydownOptionsRef = useRef({ capture: true, passive: false });
 
-  let formItemIsSet = !!formItem;
+	let formItemIsSet = !!formItem;
 
-  const [isSelectingForm, setIsSelectingForm] = useState(false);
+	const [isSelectingForm, setIsSelectingForm] = useState(false);
 
-  const onClose = () => {
-    abortControllerRef.current?.abort();
-    setIsSubmitting(false);
-    setFormItem(null);
-    setIsSelectingForm(false);
-    setVisible(false);
-  };
+	const onClose = () => {
+		abortControllerRef.current?.abort();
+		setIsSubmitting(false);
+		setFormItem(null);
+		setIsSelectingForm(false);
+		setVisible(false);
+	};
 
-  const onError = (err) => {
-    if (!err.message === "canceled") {
-      console.error(err);
-      toastr.error(err);
-    }
-    onClose();
-  };
+	const onError = (err) => {
+		if (!err.message === "canceled") {
+			console.error(err);
+			toastr.error(err);
+		}
+		onClose();
+	};
 
-  const onOpenFormSelector = () => setIsSelectingForm(true);
-  const onCloseFormSelector = () => {
-    if (!formItemIsSet) onClose();
-    else setIsSelectingForm(false);
-  };
+	const onOpenFormSelector = () => setIsSelectingForm(true);
+	const onCloseFormSelector = () => {
+		if (!formItemIsSet) onClose();
+		else setIsSelectingForm(false);
+	};
 
-  const onSelectForm = (data) => {
-    formItemIsSet = true;
-    setFormItem(data);
-  };
+	const onSelectForm = (data) => {
+		formItemIsSet = true;
+		setFormItem(data);
+	};
 
-  const onSubmitToGallery = async () => {
-    if (!formItem) return;
+	const onSubmitToGallery = async () => {
+		if (!formItem) return;
 
-    setIsSubmitting(true);
+		setIsSubmitting(true);
 
-    const origin = combineUrl(window.ClientConfig?.proxy?.url);
+		const origin = combineUrl(window.ClientConfig?.proxy?.url);
 
-    const fileSrc = `${origin}/filehandler.ashx?action=download&fileid=${formItem.id}`;
+		const fileSrc = `${origin}/filehandler.ashx?action=download&fileid=${formItem.id}`;
 
-    const file = await fetch(fileSrc)
-      .then((res) => {
-        if (!res.ok) throw new Error(res.statusText);
-        return res.arrayBuffer();
-      })
-      .then(async (arrayBuffer) => {
-        return new File([arrayBuffer], formItem.title, {
-          type: "application/octet-stream",
-        });
-      })
-      .catch((err) => onError(err));
+		const file = await fetch(fileSrc)
+			.then((res) => {
+				if (!res.ok) throw new Error(res.statusText);
+				return res.arrayBuffer();
+			})
+			.then(async (arrayBuffer) => {
+				return new File([arrayBuffer], formItem.title, {
+					type: "application/octet-stream",
+				});
+			})
+			.catch((err) => onError(err));
 
-    await submitToFormGallery(
-      file,
-      formItem.title,
-      "en",
-      abortControllerRef.current?.signal,
-    )
-      .then((res) => {
-        if (!res.data) throw new Error(res.statusText);
-        toastr.success(t("Common:Done"));
-        window.location.replace(res.data);
-      })
-      .catch(() => {
-        toastr.error(t("Common:SomethingWentWrong"));
-        onClose();
-      })
-      .finally(() => onClose());
-  };
+		await submitToFormGallery(
+			file,
+			formItem.title,
+			"en",
+			abortControllerRef.current?.signal,
+		)
+			.then((res) => {
+				if (!res.data) throw new Error(res.statusText);
+				toastr.success(t("Common:Done"));
+				window.location.replace(res.data);
+			})
+			.catch(() => {
+				toastr.error(t("Common:SomethingWentWrong"));
+				onClose();
+			})
+			.finally(() => onClose());
+	};
 
-  useEventListener(
-    "keydown",
-    (e) => {
-      if (!visible) return;
-      if (isSelectingForm) return;
+	useEventListener(
+		"keydown",
+		(e) => {
+			if (!visible) return;
+			if (isSelectingForm) return;
 
-      const target = e.target;
-      const tagName = target?.tagName;
-      const isEditable =
-        tagName === "INPUT" ||
-        tagName === "TEXTAREA" ||
-        Boolean(target?.isContentEditable);
+			const target = e.target;
+			const tagName = target?.tagName;
+			const isEditable =
+				tagName === "INPUT" ||
+				tagName === "TEXTAREA" ||
+				Boolean(target?.isContentEditable);
 
-      if (isEditable) return;
+			if (isEditable) return;
 
-      if (e.key === "Escape") {
-        e.preventDefault();
-        e.stopPropagation();
-        onClose();
-        return;
-      }
+			if (e.key === "Escape") {
+				e.preventDefault();
+				e.stopPropagation();
+				onClose();
+				return;
+			}
 
-      if (e.key === "Enter") {
-        if (e.repeat) return;
+			if (e.key === "Enter") {
+				if (e.repeat) return;
 
-        e.preventDefault();
-        e.stopPropagation();
+				e.preventDefault();
+				e.stopPropagation();
 
-        if (!formItem) {
-          onOpenFormSelector();
-          return;
-        }
+				if (!formItem) {
+					onOpenFormSelector();
+					return;
+				}
 
-        if (!isSubmitting) {
-          void onSubmitToGallery();
-        }
-      }
-    },
-    undefined,
-    keydownOptionsRef.current,
-  );
+				if (!isSubmitting) {
+					void onSubmitToGallery();
+				}
+			}
+		},
+		undefined,
+		keydownOptionsRef.current,
+	);
 
-  if (!canSubmitToFormGallery()) return null;
+	if (!canSubmitToFormGallery()) return null;
 
-  if (isSelectingForm)
-    return (
-      <FilesSelector
-        key="select-file-dialog"
-        filterParam="TemplateGalleryTypes"
-        isPanelVisible
-        onSelectFile={onSelectForm}
-        onClose={onCloseFormSelector}
-        withRecentTreeFolder
-        withFavoritesTreeFolder
-        withAIAgentsTreeFolder
-        isSelect
-        isPortalView
-        withoutDescriptionText
-      />
-    );
+	if (isSelectingForm)
+		return (
+			<FilesSelector
+				key="select-file-dialog"
+				filterParam="TemplateGalleryTypes"
+				isPanelVisible
+				onSelectFile={onSelectForm}
+				onClose={onCloseFormSelector}
+				withRecentTreeFolder
+				withFavoritesTreeFolder
+				withAIAgentsTreeFolder
+				isSelect
+				isPortalView
+				withoutDescriptionText
+			/>
+		);
 
-  return (
-    <Styled.ModalDialogStyled
-      visible={visible}
-      onClose={onClose}
-      isLarge={formItem}
-      autoMaxHeight
-    >
-      <ModalDialog.Header>
-        {t("Common:SubmitToTemplateGallery")}
-      </ModalDialog.Header>
-      <ModalDialog.Body>
-        <div className="info">
-          {t("FormGallery:SubmitToGalleryDialogMainInfo")}
-        </div>
+	return (
+		<Styled.ModalDialogStyled
+			visible={visible}
+			onClose={onClose}
+			isLarge={formItem}
+			autoMaxHeight
+		>
+			<ModalDialog.Header>
+				{t("Common:SubmitToTemplateGallery")}
+			</ModalDialog.Header>
+			<ModalDialog.Body>
+				<div className="info">
+					{t("FormGallery:SubmitToGalleryDialogMainInfo")}
+				</div>
 
-        {formItem ? (
-          <div className="item-wrapper">
-            <ReactSVG className="icon" src={getIcon(24, formItem.fileExst)} />
-            <div className="item-title">
-              {formItem?.title ? (
-                <>
-                  <span className="name" key="name">
-                    {formItem.title}
-                  </span>
-                  {formItem.fileExst ? (
-                    <span className="exst" key="exst">
-                      {formItem.fileExst}
-                    </span>
-                  ) : null}
-                </>
-              ) : (
-                <span className="name">{`${formItem.fileExst}`}</span>
-              )}
-            </div>
-          </div>
-        ) : null}
-      </ModalDialog.Body>
-      <ModalDialog.Footer>
-        {!formItem ? (
-          <Button
-            primary
-            size="normal"
-            label={t("FormGallery:SelectTemplate")}
-            onClick={onOpenFormSelector}
-            scale
-            testId="submit_to_gallery_select_form_button"
-          />
-        ) : (
-          <Button
-            primary
-            size="normal"
-            label={t("Settings:Submit")}
-            onClick={onSubmitToGallery}
-            isLoading={isSubmitting}
-            testId="submit_to_gallery_apply_button"
-          />
-        )}
-        <Button
-          size="normal"
-          label={t("Common:CancelButton")}
-          onClick={onClose}
-          scale={!formItem}
-          testId="submit_to_gallery_cancel_button"
-        />
-      </ModalDialog.Footer>
-    </Styled.ModalDialogStyled>
-  );
+				{formItem ? (
+					<div className="item-wrapper">
+						<ReactSVG className="icon" src={getIcon(24, formItem.fileExst)} />
+						<div className="item-title">
+							{formItem?.title ? (
+								<>
+									<span className="name" key="name">
+										{formItem.title}
+									</span>
+									{formItem.fileExst ? (
+										<span className="exst" key="exst">
+											{formItem.fileExst}
+										</span>
+									) : null}
+								</>
+							) : (
+								<span className="name">{`${formItem.fileExst}`}</span>
+							)}
+						</div>
+					</div>
+				) : null}
+			</ModalDialog.Body>
+			<ModalDialog.Footer>
+				{!formItem ? (
+					<Button
+						primary
+						size="normal"
+						label={t("FormGallery:SelectTemplate")}
+						onClick={onOpenFormSelector}
+						scale
+						testId="submit_to_gallery_select_form_button"
+					/>
+				) : (
+					<Button
+						primary
+						size="normal"
+						label={t("Settings:Submit")}
+						onClick={onSubmitToGallery}
+						isLoading={isSubmitting}
+						testId="submit_to_gallery_apply_button"
+					/>
+				)}
+				<Button
+					size="normal"
+					label={t("Common:CancelButton")}
+					onClick={onClose}
+					scale={!formItem}
+					testId="submit_to_gallery_cancel_button"
+				/>
+			</ModalDialog.Footer>
+		</Styled.ModalDialogStyled>
+	);
 };
 
 export default inject(
-  ({
-    accessRightsStore,
-    dialogsStore,
-    settingsStore,
-    filesSettingsStore,
-    oformsStore,
-  }) => ({
-    visible: dialogsStore.submitToGalleryDialogVisible,
-    setVisible: dialogsStore.setSubmitToGalleryDialogVisible,
-    formItem: dialogsStore.formItem,
-    setFormItem: dialogsStore.setFormItem,
-    getIcon: filesSettingsStore.getIcon,
-    currentColorScheme: settingsStore.currentColorScheme,
-    canSubmitToFormGallery: accessRightsStore.canSubmitToFormGallery,
-    submitToFormGallery: oformsStore.submitToFormGallery,
-  }),
+	({
+		accessRightsStore,
+		dialogsStore,
+		settingsStore,
+		filesSettingsStore,
+		oformsStore,
+	}) => ({
+		visible: dialogsStore.submitToGalleryDialogVisible,
+		setVisible: dialogsStore.setSubmitToGalleryDialogVisible,
+		formItem: dialogsStore.formItem,
+		setFormItem: dialogsStore.setFormItem,
+		getIcon: filesSettingsStore.getIcon,
+		currentColorScheme: settingsStore.currentColorScheme,
+		canSubmitToFormGallery: accessRightsStore.canSubmitToFormGallery,
+		submitToFormGallery: oformsStore.submitToFormGallery,
+	}),
 )(
-  withTranslation(
-    "Common",
-    "FormGallery",
-    "Settings",
-  )(observer(SubmitToFormGallery)),
+	withTranslation(
+		"Common",
+		"FormGallery",
+		"Settings",
+	)(observer(SubmitToFormGallery)),
 );

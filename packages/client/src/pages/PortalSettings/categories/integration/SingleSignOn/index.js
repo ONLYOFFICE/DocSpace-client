@@ -28,8 +28,8 @@ import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link } from "@docspace/ui-kit/components/link";
 
 import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";
 import { DeviceType } from "@docspace/shared/enums";
@@ -47,106 +47,106 @@ const SERVICE_PROVIDER_SETTINGS = "serviceProviderSettings";
 const SP_METADATA = "spMetadata";
 
 const SingleSignOn = (props) => {
-  const {
-    serviceProviderSettings,
-    spMetadata,
-    isSSOAvailable,
-    currentDeviceType,
-    logoText,
-    showPortalSettingsLoader,
-    singleSignOnUrl,
-    currentColorScheme,
-  } = props;
-  const { t, ready } = useTranslation(["SingleSignOn", "Settings"]);
-  const isMobileView = currentDeviceType === DeviceType.mobile;
+	const {
+		serviceProviderSettings,
+		spMetadata,
+		isSSOAvailable,
+		currentDeviceType,
+		logoText,
+		showPortalSettingsLoader,
+		singleSignOnUrl,
+		currentColorScheme,
+	} = props;
+	const { t, ready } = useTranslation(["SingleSignOn", "Settings"]);
+	const isMobileView = currentDeviceType === DeviceType.mobile;
 
-  useEffect(() => {
-    if (ready) setDocumentTitle(t("Settings:SingleSignOn"));
-  }, [ready]);
+	useEffect(() => {
+		if (ready) setDocumentTitle(t("Settings:SingleSignOn"));
+	}, [ready]);
 
-  if ((showPortalSettingsLoader && !isMobileView && isSSOAvailable) || !ready)
-    return <SSOLoader />;
+	if ((showPortalSettingsLoader && !isMobileView && isSSOAvailable) || !ready)
+		return <SSOLoader />;
 
-  return (
-    <StyledSsoPage
-      hideSettings={serviceProviderSettings}
-      hideMetadata={spMetadata}
-      withoutExternalLink={!singleSignOnUrl}
-    >
-      <Text className="intro-text settings_unavailable">{t("SsoIntro")}</Text>
+	return (
+		<StyledSsoPage
+			hideSettings={serviceProviderSettings}
+			hideMetadata={spMetadata}
+			withoutExternalLink={!singleSignOnUrl}
+		>
+			<Text className="intro-text settings_unavailable">{t("SsoIntro")}</Text>
 
-      {singleSignOnUrl ? (
-        <Link
-          className="link-learn-more"
-          color={currentColorScheme.main?.accent}
-          target="_blank"
-          isHovered
-          href={singleSignOnUrl}
-          fontWeight={600}
-        >
-          {t("Common:LearnMore")}
-        </Link>
-      ) : null}
+			{singleSignOnUrl ? (
+				<Link
+					className="link-learn-more"
+					color={currentColorScheme.main?.accent}
+					target="_blank"
+					isHovered
+					href={singleSignOnUrl}
+					fontWeight={600}
+				>
+					{t("Common:LearnMore")}
+				</Link>
+			) : null}
 
-      {isMobileView ? (
-        <MobileView isSSOAvailable={isSSOAvailable} logoText={logoText} />
-      ) : (
-        <>
-          <ToggleSSO />
+			{isMobileView ? (
+				<MobileView isSSOAvailable={isSSOAvailable} logoText={logoText} />
+			) : (
+				<>
+					<ToggleSSO />
 
-          <HideButton
-            id="sp-settings-hide-button"
-            text={t("ServiceProviderSettings", {
-              organizationName: logoText,
-            })}
-            label={SERVICE_PROVIDER_SETTINGS}
-            value={serviceProviderSettings}
-            dataTestId="sp_settings_hide_button"
-            // isDisabled={!isSSOAvailable}
-          />
+					<HideButton
+						id="sp-settings-hide-button"
+						text={t("ServiceProviderSettings", {
+							organizationName: logoText,
+						})}
+						label={SERVICE_PROVIDER_SETTINGS}
+						value={serviceProviderSettings}
+						dataTestId="sp_settings_hide_button"
+						// isDisabled={!isSSOAvailable}
+					/>
 
-          <SPSettingsSection />
-          <StyledSettingsSeparator />
+					<SPSettingsSection />
+					<StyledSettingsSeparator />
 
-          <HideButton
-            id="sp-metadata-hide-button"
-            text={t("SpMetadata", {
-              organizationName: logoText,
-            })}
-            label={SP_METADATA}
-            value={spMetadata}
-            dataTestId="sp_metadata_hide_button"
-            // isDisabled={!isSSOAvailable}
-          />
+					<HideButton
+						id="sp-metadata-hide-button"
+						text={t("SpMetadata", {
+							organizationName: logoText,
+						})}
+						label={SP_METADATA}
+						value={spMetadata}
+						dataTestId="sp_metadata_hide_button"
+						// isDisabled={!isSSOAvailable}
+					/>
 
-          <div className="sp-metadata">
-            <ProviderMetadataSection />
-          </div>
-        </>
-      )}
-    </StyledSsoPage>
-  );
+					<div className="sp-metadata">
+						<ProviderMetadataSection />
+					</div>
+				</>
+			)}
+		</StyledSsoPage>
+	);
 };
 
 export default inject(
-  ({ settingsStore, ssoStore, currentQuotaStore, clientLoadingStore }) => {
-    const { isSSOAvailable } = currentQuotaStore;
-    const { currentDeviceType, logoText, singleSignOnUrl, currentColorScheme } =
-      settingsStore;
+	({ settingsStore, ssoStore, currentQuotaStore, clientLoadingStore }) => {
+		const { isSSOAvailable } = currentQuotaStore;
+		const { currentDeviceType, logoText, singleSignOnUrl, currentColorScheme } =
+			settingsStore;
 
-    const { serviceProviderSettings, spMetadata } = ssoStore;
+		const { serviceProviderSettings, spMetadata } = ssoStore;
 
-    const { showPortalSettingsLoader } = clientLoadingStore;
+		const { showPortalSettingsLoader } = clientLoadingStore;
 
-    return {
-      serviceProviderSettings,
-      spMetadata,
-      isSSOAvailable,
-      currentDeviceType,
-      logoText,
-      showPortalSettingsLoader,
-      singleSignOnUrl,
-      currentColorScheme,
-    };
-  },
+		return {
+			serviceProviderSettings,
+			spMetadata,
+			isSSOAvailable,
+			currentDeviceType,
+			logoText,
+			showPortalSettingsLoader,
+			singleSignOnUrl,
+			currentColorScheme,
+		};
+	},
 )(observer(SingleSignOn));

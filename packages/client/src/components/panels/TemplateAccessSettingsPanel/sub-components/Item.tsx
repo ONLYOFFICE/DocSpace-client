@@ -28,95 +28,95 @@ import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 import { ReactSVG } from "react-svg";
 import {
-  Avatar,
-  AvatarRole,
-  AvatarSize,
-} from "@docspace/shared/components/avatar";
-import { Text } from "@docspace/shared/components/text";
+	Avatar,
+	AvatarRole,
+	AvatarSize,
+} from "@docspace/ui-kit/components/avatar";
+import { Text } from "@docspace/ui-kit/components/text";
 import cloneDeep from "lodash/cloneDeep";
 import { TTranslation } from "@docspace/shared/types";
-import { TSelectorItem } from "@docspace/shared/components/selector";
+import { TSelectorItem } from "@docspace/ui-kit/components/selector";
 import { ShareAccessRights } from "@docspace/shared/enums";
-import { Encoder } from "@docspace/shared/utils/encoder";
+import { Encoder } from "@docspace/ui-kit/utils/encoder";
 import { StyledInviteUserBody } from "../StyledInvitePanel";
 
 type ItemProps = {
-  t: TTranslation;
-  item: TSelectorItem;
-  setInviteItems: (items: TSelectorItem[]) => void;
-  inviteItems: TSelectorItem[];
-  isDisabled: boolean;
-  index?: number;
+	t: TTranslation;
+	item: TSelectorItem;
+	setInviteItems: (items: TSelectorItem[]) => void;
+	inviteItems: TSelectorItem[];
+	isDisabled: boolean;
+	index?: number;
 };
 
 const Item = ({
-  t,
-  item,
-  setInviteItems,
-  inviteItems,
-  isDisabled,
-  index,
+	t,
+	item,
+	setInviteItems,
+	inviteItems,
+	isDisabled,
+	index,
 }: ItemProps) => {
-  const { avatar, displayName, email, id, isGroup, name: groupName } = item;
+	const { avatar, displayName, email, id, isGroup, name: groupName } = item;
 
-  const name = isGroup
-    ? groupName
-    : avatar
-      ? displayName !== ""
-        ? displayName
-        : email
-      : email;
-  const source = avatar || (isGroup ? "" : AtReactSvgUrl);
+	const name = isGroup
+		? groupName
+		: avatar
+			? displayName !== ""
+				? displayName
+				: email
+			: email;
+	const source = avatar || (isGroup ? "" : AtReactSvgUrl);
 
-  const removeItem = () => {
-    const itemIndex = inviteItems.findIndex(
-      (inviteItem) => inviteItem.id === id,
-    );
+	const removeItem = () => {
+		const itemIndex = inviteItems.findIndex(
+			(inviteItem) => inviteItem.id === id,
+		);
 
-    let newItems = cloneDeep(inviteItems);
+		let newItems = cloneDeep(inviteItems);
 
-    if (newItems[itemIndex].templateAccess) {
-      newItems[itemIndex].templateAccess = ShareAccessRights.None;
-    } else {
-      newItems = newItems.filter((inviteItem) => inviteItem.id !== id);
-    }
+		if (newItems[itemIndex].templateAccess) {
+			newItems[itemIndex].templateAccess = ShareAccessRights.None;
+		} else {
+			newItems = newItems.filter((inviteItem) => inviteItem.id !== id);
+		}
 
-    setInviteItems(newItems);
-  };
+		setInviteItems(newItems);
+	};
 
-  const canDelete = !item.templateIsOwner && !isDisabled;
+	const canDelete = !item.templateIsOwner && !isDisabled;
 
-  return (
-    <>
-      <Avatar
-        size={AvatarSize.min}
-        role={AvatarRole.none}
-        source={source}
-        isGroup={isGroup}
-        userName={groupName}
-        className="invite-input-avatar"
-        data-testid={`template_access_settings_avatar_${index ?? id}`}
-      />
-      <StyledInviteUserBody>
-        <div className="invite-input-item">
-          <Text truncate className="invite-input-text">
-            {Encoder.htmlDecode(name ?? "")}
-          </Text>
-          <Text truncate className="invite-input-text_me">
-            {item.isOwner ? `(${t("Common:MeLabel")})` : null}
-          </Text>
-        </div>
-      </StyledInviteUserBody>
-      {canDelete ? (
-        <ReactSVG
-          className="remove-icon"
-          src={RemoveReactSvgUrl}
-          onClick={removeItem}
-          data-testid={`template_access_settings_remove_button_${index ?? id}`}
-        />
-      ) : null}
-    </>
-  );
+	return (
+		<>
+			<Avatar
+				size={AvatarSize.min}
+				role={AvatarRole.none}
+				source={source}
+				isGroup={isGroup}
+				userName={groupName}
+				className="invite-input-avatar"
+				data-testid={`template_access_settings_avatar_${index ?? id}`}
+			/>
+			<StyledInviteUserBody>
+				<div className="invite-input-item">
+					<Text truncate className="invite-input-text">
+						{Encoder.htmlDecode(name ?? "")}
+					</Text>
+					<Text truncate className="invite-input-text_me">
+						{item.isOwner ? `(${t("Common:MeLabel")})` : null}
+					</Text>
+				</div>
+			</StyledInviteUserBody>
+			{canDelete ? (
+				<ReactSVG
+					className="remove-icon"
+					src={RemoveReactSvgUrl}
+					onClick={removeItem}
+					data-testid={`template_access_settings_remove_button_${index ?? id}`}
+				/>
+			) : null}
+		</>
+	);
 };
 
 export default Item;

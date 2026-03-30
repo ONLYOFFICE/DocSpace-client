@@ -88,6 +88,7 @@ const ArticleBodyContent = (props) => {
     sharedWithMeFolderId,
     isRoomAdmin,
     isAccountsArticle,
+    hasCustomSlot,
   } = props;
 
   const location = useLocation();
@@ -459,7 +460,7 @@ const ArticleBodyContent = (props) => {
       !isFrame &&
       displayBanners &&
       !isAccountsArticle ? (
-        <Banner />
+        <Banner hasCustomSlot={hasCustomSlot} />
       ) : null}
     </>
   );

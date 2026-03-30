@@ -20,6 +20,8 @@
   "GetCode": "Получить код",
   "GetSuitableApp": "Загрузите подходящее приложение",
   "GetSuitableAppDescription": "Используйте совместимое приложение, например, Google Authenticator для <1>Android</1> и <4>iOS</4> или Authenticator для <8>Windows Phone</8>.",
+  "InviteLinkQuotaErrorBody": "Регистрация по ссылке больше недоступна, поскольку превышен лимит.",
+  "InviteQuotaErrorCustomizedBody": "Вы будете перенаправлены на страницу <1>Входа</1> через 10 секунд",
   "LoginRegistryButton": "Присоединиться",
   "Newsletter": "Я хочу подписаться на рассылку {{organizationName}}",
   "PassworResetTitle": "Теперь вы можете создать новый пароль.",

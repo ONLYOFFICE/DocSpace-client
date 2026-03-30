@@ -37,7 +37,7 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
 import { isDesktop } from "@docspace/shared/utils";
 import { DeviceType } from "@docspace/shared/enums";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import SelectionStore from "./SelectionStore";
 
 const { Filter } = api;

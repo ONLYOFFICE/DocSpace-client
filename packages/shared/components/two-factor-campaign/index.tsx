@@ -27,57 +27,57 @@
 import React from "react";
 import { useTheme } from "styled-components";
 import NextStepReactSvg from "PUBLIC_DIR/images/arrow.right.react.svg?url";
-import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
+import { useInterfaceDirection } from "@docspace/ui-kit/context/InterfaceDirectionContext";
 import { useTwoFactorCampaignBanner } from "../../hooks/useTwoFactorCampaignBanner";
 import { CampaignsBanner } from "../campaigns-banner";
-import { TColorScheme } from "../../themes";
+import { TColorScheme } from "@docspace/ui-kit/providers/theme";
 import styles from "./TwoFactorCampaignBanner.module.scss";
 
 export interface TwoFactorCampaignBannerProps {
-  /** Whether TFA is enabled */
-  tfaEnabled: boolean;
-  /** Current color scheme */
-  currentColorScheme: TColorScheme;
-  /** Whether to show campaign banner */
-  withCampaign?: boolean;
-  /** Additional styles */
-  style?: React.CSSProperties;
+	/** Whether TFA is enabled */
+	tfaEnabled: boolean;
+	/** Current color scheme */
+	currentColorScheme: TColorScheme;
+	/** Whether to show campaign banner */
+	withCampaign?: boolean;
+	/** Additional styles */
+	style?: React.CSSProperties;
 }
 
 export const TwoFactorCampaignBanner: React.FC<
-  TwoFactorCampaignBannerProps
+	TwoFactorCampaignBannerProps
 > = ({ tfaEnabled, currentColorScheme, withCampaign = false, style }) => {
-  const { isRTL } = useInterfaceDirection();
-  const theme = useTheme();
-  const isBaseTheme = theme.isBase;
+	const { isRTL } = useInterfaceDirection();
+	const theme = useTheme();
+	const isBaseTheme = theme.isBase;
 
-  const { navigateTo2FA, loginHistoryTranslates, loginHistoryConfig } =
-    useTwoFactorCampaignBanner(isBaseTheme, currentColorScheme);
+	const { navigateTo2FA, loginHistoryTranslates, loginHistoryConfig } =
+		useTwoFactorCampaignBanner(isBaseTheme, currentColorScheme);
 
-  if (tfaEnabled || !withCampaign) {
-    return null;
-  }
+	if (tfaEnabled || !withCampaign) {
+		return null;
+	}
 
-  const wrapperClassName = `${styles.bannerWrapper} ${isRTL ? styles.rtl : ""}`;
+	const wrapperClassName = `${styles.bannerWrapper} ${isRTL ? styles.rtl : ""}`;
 
-  return (
-    <div className={wrapperClassName} onClick={navigateTo2FA} style={style}>
-      <CampaignsBanner
-        campaignBackground=""
-        campaignIcon=""
-        campaignConfig={loginHistoryConfig}
-        campaignTranslate={loginHistoryTranslates}
-        disableFitText
-        actionIcon={NextStepReactSvg}
-        onAction={(type) => {
-          if (type === "2fa-settings") {
-            navigateTo2FA();
-          }
-        }}
-        onClose={() => {
-          navigateTo2FA();
-        }}
-      />
-    </div>
-  );
+	return (
+		<div className={wrapperClassName} onClick={navigateTo2FA} style={style}>
+			<CampaignsBanner
+				campaignBackground=""
+				campaignIcon=""
+				campaignConfig={loginHistoryConfig}
+				campaignTranslate={loginHistoryTranslates}
+				disableFitText
+				actionIcon={NextStepReactSvg}
+				onAction={(type) => {
+					if (type === "2fa-settings") {
+						navigateTo2FA();
+					}
+				}}
+				onClose={() => {
+					navigateTo2FA();
+				}}
+			/>
+		</div>
+	);
 };

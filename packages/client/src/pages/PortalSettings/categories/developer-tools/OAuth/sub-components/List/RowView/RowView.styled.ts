@@ -26,8 +26,8 @@
 
 import styled from "styled-components";
 
-import { RowContainer, RowContent } from "@docspace/shared/components/rows";
-import { tablet } from "@docspace/shared/utils/device";
+import { RowContainer, RowContent } from "@docspace/ui-kit/components/rows";
+import { tablet } from "@docspace/ui-kit/utils/device";
 
 export const StyledRowContainer = styled(RowContainer)`
   margin-top: 0px;

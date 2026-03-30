@@ -25,38 +25,38 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState, useCallback } from "react";
-import { Label } from "@docspace/shared/components/label";
-import { TextInput } from "@docspace/shared/components/text-input";
+import { Label } from "@docspace/ui-kit/components/label";
+import { TextInput } from "@docspace/ui-kit/components/text-input";
 import debounce from "lodash.debounce";
 
 export const CancelTextInput = ({ t, config, setConfig }) => {
-  const [value, setValue] = useState(config.cancelButtonLabel);
+	const [value, setValue] = useState(config.cancelButtonLabel);
 
-  const debouncedSetConfig = useCallback(
-    debounce((newValue) => {
-      setConfig((oldConfig) => {
-        return { ...oldConfig, cancelButtonLabel: newValue };
-      });
-    }, 500),
-    [setConfig],
-  );
+	const debouncedSetConfig = useCallback(
+		debounce((newValue) => {
+			setConfig((oldConfig) => {
+				return { ...oldConfig, cancelButtonLabel: newValue };
+			});
+		}, 500),
+		[setConfig],
+	);
 
-  const onChangeCancelLabel = (e) => {
-    setValue(e.target.value);
-    debouncedSetConfig(e.target.value);
-  };
+	const onChangeCancelLabel = (e) => {
+		setValue(e.target.value);
+		debouncedSetConfig(e.target.value);
+	};
 
-  return (
-    <>
-      <Label className="label" text={t("CancelButtonText")} />
-      <TextInput
-        scale
-        onChange={onChangeCancelLabel}
-        placeholder={t("Common:CancelButton")}
-        value={value}
-        tabIndex={8}
-        testId="cancel_text_input"
-      />
-    </>
-  );
+	return (
+		<>
+			<Label className="label" text={t("CancelButtonText")} />
+			<TextInput
+				scale
+				onChange={onChangeCancelLabel}
+				placeholder={t("Common:CancelButton")}
+				value={value}
+				tabIndex={8}
+				testId="cancel_text_input"
+			/>
+		</>
+	);
 };

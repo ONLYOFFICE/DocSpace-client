@@ -29,12 +29,12 @@ import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import {
   mobile,
   injectDefaultTheme,
-  getCorrectDate,
 } from "@docspace/shared/utils";
+import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 
 import StatusBadge from "../../sub-components/StatusBadge";
 import { getTriggerTranslate } from "../../Webhooks.helpers";

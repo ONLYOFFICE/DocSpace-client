@@ -31,10 +31,10 @@ import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow.react.svg?url";
 
 import { RoomsType } from "../../enums";
 
-import { RoomLogo } from "../room-logo";
-import { IconButton } from "../icon-button";
-import { Text } from "../text";
-import { TooltipContainer } from "../tooltip";
+import { RoomLogo } from "@docspace/ui-kit/components/room-logo";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 
 import {
   getRoomTypeDescriptionTranslation,

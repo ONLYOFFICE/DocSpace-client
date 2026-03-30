@@ -28,7 +28,7 @@ import React from "react";
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 
-import type { ContextMenuModel } from "../../../context-menu/ContextMenu.types";
+import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
 
 import { MessageError } from ".";
 

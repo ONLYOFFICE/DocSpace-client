@@ -26,22 +26,22 @@
 
 import type { TUser } from "../../api/people/types";
 import type FirebaseHelper from "../../utils/firebase";
-import type { TColorScheme } from "../../themes";
+import type { TColorScheme } from "@docspace/ui-kit/providers/theme";
 import type { DeviceType } from "../../enums";
 
 export type ErrorUnavailableProps = Record<string, never>;
 
 export type Error520Props = {
-  /** Error object containing details about the error that occurred */
-  errorLog: Error;
-  /** Current user information */
-  user: TUser;
-  /** Current version of the application */
-  version: string;
-  /** Firebase helper instance for crash reporting */
-  firebaseHelper: FirebaseHelper;
-  /** Optional color scheme for theming */
-  currentColorScheme?: TColorScheme;
-  /** Current device type (desktop, mobile, etc.) */
-  currentDeviceType: DeviceType;
+	/** Error object containing details about the error that occurred */
+	errorLog: Error;
+	/** Current user information */
+	user: TUser;
+	/** Current version of the application */
+	version: string;
+	/** Firebase helper instance for crash reporting */
+	firebaseHelper: FirebaseHelper;
+	/** Optional color scheme for theming */
+	currentColorScheme?: TColorScheme;
+	/** Current device type (desktop, mobile, etc.) */
+	currentDeviceType: DeviceType;
 };

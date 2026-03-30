@@ -29,66 +29,66 @@ import TickSvgUrl from "PUBLIC_DIR/images/tick.svg?url";
 import { inject, observer } from "mobx-react";
 
 import { isMobile } from "@docspace/shared/utils";
-import getCorrectDate from "@docspace/shared/utils/getCorrectDate";
-import { Text } from "@docspace/shared/components/text";
-import { RowContent } from "@docspace/shared/components/rows";
-import { IconButton } from "@docspace/shared/components/icon-button";
-import { globalColors } from "@docspace/shared/themes";
+import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
+import { Text } from "@docspace/ui-kit/components/text";
+import { RowContent } from "@docspace/ui-kit/components/rows";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 import styles from "../../active-sessions.module.scss";
 
 const SessionsRowContent = ({
-  id,
-  platform,
-  browser,
-  date,
-  country,
-  city,
-  ip,
-  sectionWidth,
-  showTickIcon,
-  theme,
-  locale,
+	id,
+	platform,
+	browser,
+	date,
+	country,
+	city,
+	ip,
+	sectionWidth,
+	showTickIcon,
+	theme,
+	locale,
 }) => {
-  return (
-    <RowContent
-      className={styles.rowContent}
-      key={id}
-      sectionWidth={sectionWidth}
-      sideColor={theme.profile.activeSessions.tableCellColor}
-    >
-      <Text fontSize="14px" fontWeight="600" dataTestId="session_platform">
-        {platform}{" "}
-        <span className={styles.sessionBrowser}>{`(${browser})`}</span>
-      </Text>
-      {isMobile() && showTickIcon ? (
-        <IconButton
-          size={12}
-          iconName={TickSvgUrl}
-          color={globalColors.tickColor}
-        />
-      ) : null}
-      <Text truncate dataTestId="session_date">
-        {getCorrectDate(locale, date)}
-      </Text>
-      {country || city ? (
-        <Text fontSize="12px" fontWeight="600" dataTestId="session_location">
-          {country}
-          {country && city ? ` ${city}` : null}
-        </Text>
-      ) : null}
-      <Text truncate containerWidth="160px" dataTestId="session_ip">
-        {ip}
-      </Text>
-    </RowContent>
-  );
+	return (
+		<RowContent
+			className={styles.rowContent}
+			key={id}
+			sectionWidth={sectionWidth}
+			sideColor={theme.profile.activeSessions.tableCellColor}
+		>
+			<Text fontSize="14px" fontWeight="600" dataTestId="session_platform">
+				{platform}{" "}
+				<span className={styles.sessionBrowser}>{`(${browser})`}</span>
+			</Text>
+			{isMobile() && showTickIcon ? (
+				<IconButton
+					size={12}
+					iconName={TickSvgUrl}
+					color={globalColors.tickColor}
+				/>
+			) : null}
+			<Text truncate dataTestId="session_date">
+				{getCorrectDate(locale, date)}
+			</Text>
+			{country || city ? (
+				<Text fontSize="12px" fontWeight="600" dataTestId="session_location">
+					{country}
+					{country && city ? ` ${city}` : null}
+				</Text>
+			) : null}
+			<Text truncate containerWidth="160px" dataTestId="session_ip">
+				{ip}
+			</Text>
+		</RowContent>
+	);
 };
 
 export default inject(({ settingsStore, userStore }) => {
-  const { theme, culture } = settingsStore;
+	const { theme, culture } = settingsStore;
 
-  const { user } = userStore;
-  const locale = (user && user.cultureName) || culture || "en";
+	const { user } = userStore;
+	const locale = (user && user.cultureName) || culture || "en";
 
-  return { theme, locale };
+	return { theme, locale };
 })(observer(SessionsRowContent));

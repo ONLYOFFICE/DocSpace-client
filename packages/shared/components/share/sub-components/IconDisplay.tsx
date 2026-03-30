@@ -28,9 +28,9 @@ import { type FC } from "react";
 import { ReactSVG } from "react-svg";
 
 import EmptyIcon from "PUBLIC_DIR/images/empty.svg?url";
-import { TooltipContainer } from "../../tooltip";
+import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 
-import { type TOption } from "../../combobox";
+import { type TOption } from "@docspace/ui-kit/components/combobox";
 
 import styles from "../Share.module.scss";
 
@@ -43,13 +43,19 @@ export const IconDisplay: FC<IconDisplayProps> = ({ option }) => {
     <TooltipContainer
       as="div"
       className={styles.iconContainer}
-      title={option.title || option.label}
+      title={
+        option.title ||
+        (typeof option.label === "string" ? option.label : undefined)
+      }
     >
       <div className={styles.wrapper}>
         <img
           src={EmptyIcon}
           className={styles.iconImg}
-          alt={option.title || option.label}
+          alt={
+            option.title ||
+            (typeof option.label === "string" ? option.label : undefined)
+          }
         />
         <ReactSVG className={styles.icon} src={option.icon as string} />
       </div>

@@ -25,7 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { type FC } from "react";
-import { ComboBox, ComboBoxSize, type TOption } from "../../combobox";
+import {
+  ComboBox,
+  ComboBoxSize,
+  type TOption,
+} from "@docspace/ui-kit/components/combobox";
 
 import { IconDisplay } from "./IconDisplay";
 
@@ -34,7 +38,6 @@ import styles from "../Share.module.scss";
 export interface AccessOptionProps {
   isLoaded: boolean;
   canEditInternal: boolean;
-  isExpiredLink: boolean;
 
   options: TOption[];
   selectedOption: TOption;
@@ -45,7 +48,6 @@ export const LinkTypeSelector: FC<AccessOptionProps> = ({
   options,
   isLoaded,
   onSelect,
-  isExpiredLink,
   selectedOption,
   canEditInternal,
 }) => {
@@ -60,6 +62,7 @@ export const LinkTypeSelector: FC<AccessOptionProps> = ({
       type="onlyIcon"
       directionY="both"
       manualWidth="auto"
+      withBackdrop={false}
       scaled={false}
       noSelect={false}
       options={options}
@@ -69,7 +72,7 @@ export const LinkTypeSelector: FC<AccessOptionProps> = ({
       selectedOption={selectedOption}
       onSelect={onSelect}
       showDisabledItems
-      isDisabled={isLoaded || isExpiredLink}
+      isDisabled={isLoaded}
       useImageIcon
     />
   );

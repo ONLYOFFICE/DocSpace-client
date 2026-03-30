@@ -44,7 +44,8 @@ export type AiChatMessagesType =
   | "webCrawlingError"
   | "knowledgeSearch"
   | "knowledgeSearchError"
-  | "mcpTool";
+  | "mcpTool"
+  | "thinkBlock";
 
 const defaultTextContent =
   "## Hi\n\nI’m here and ready to help inside DocSpace.\n\n## What you can do next\n- Ask about **rooms, folders, files, users, and permissions**\n- Describe a collaboration task (e.g., “set up a room for project X with view-only access for guests”), and I’ll guide you step by step";
@@ -655,6 +656,43 @@ const successMcpTool = {
   statusCode: 200,
 };
 
+const successThinkBlock = {
+  response: [
+    {
+      id: 111,
+      role: 1,
+      contents: [
+        {
+          type: 0,
+          text: "<think>\nLet me think about this carefully.\n\nFirst, I need to consider the main aspects of the question. The user is asking about something that requires deep analysis.\n\nAfter careful consideration, I believe the best approach is to provide a clear and structured answer.\n</think>\nTest ai message with extended thinking",
+        },
+      ],
+      createdOn: "2025-12-24T16:54:36.0000000+01:00",
+    },
+    {
+      id: 110,
+      role: 0,
+      contents: [
+        {
+          type: 0,
+          text: "Test message",
+        },
+      ],
+      createdOn: "2025-12-24T16:54:34.0000000+01:00",
+    },
+  ],
+  count: 2,
+  total: 2,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_CHAT_MESSAGES}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
 const successMany = {
   response: [
     {
@@ -774,6 +812,8 @@ export const aiChatMessagesResolver = (
   type: AiChatMessagesType = "default",
 ) => {
   switch (type) {
+    case "thinkBlock":
+      return new Response(JSON.stringify(successThinkBlock));
     case "mcpTool":
       return new Response(JSON.stringify(successMcpTool));
     case "knowledgeSearchError":

@@ -3,7 +3,7 @@
   "content": "To use manage connection, you need to connect {{mcpServers}} inside room settings",
   "content_en_sha1_hash": "8b74de859fa41700ee1ba0cad31c4cff054d2a67",
   "created_at": "2025-12-18T11:15:07.721Z",
-  "updated_at": "2025-12-22T09:45:27.052Z",
+  "updated_at": "2026-02-19T13:36:33.088Z",
   "comment": {
     "text": "This text appears as a tooltip on a button within room settings. It instructs users to connect Minecraft server instances (MCP servers) to manage connections. The `{{mcpServers}}` placeholder will be replaced with a label for MCP settings.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/chat/components/chat-input/ToolsSettings.tsx",
-      "line_number": 369,
+      "line_number": 392,
       "context": "},\n icon: ManageConnectionsReactSvgUrl,\n disabled: !showManageConnectionItem,\n getTooltipContent: () => (\n <Text>\n {t(\"ConnectMCPServers\", {\n mcpServers: t(\"Common:MCPSettingTitle\"),\n })}\n </Text>\n ),\n },",
       "module": "/packages/shared"
     }

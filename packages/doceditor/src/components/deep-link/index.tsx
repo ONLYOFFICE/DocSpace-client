@@ -28,16 +28,16 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import Image from "next/image";
 
-import { Text } from "@docspace/shared/components/text";
-import { Checkbox } from "@docspace/shared/components/checkbox";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { Link, LinkType } from "@docspace/shared/components/link";
-import { FormWrapper } from "@docspace/shared/components/form-wrapper";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
+import { FormWrapper } from "@docspace/ui-kit/components/form-wrapper";
 import { getBgPattern } from "@docspace/shared/utils/common";
-import PortalLogo from "@docspace/shared/components/portal-logo/PortalLogo";
-import { Scrollbar } from "@docspace/shared/components/scrollbar";
+import PortalLogo from "@docspace/ui-kit/components/portal-logo/PortalLogo";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { DeepLinkType } from "@docspace/shared/enums";
-import { useTheme } from "@docspace/shared/hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import { iconSize32 } from "@docspace/shared/utils/image-helpers";
 import { getDeepLink, redirectToStore } from "./DeepLink.helper";
@@ -163,7 +163,7 @@ const DeepLink = ({
                     fontSize="13px"
                     fontWeight="600"
                     isHovered
-                    color={currentColorScheme?.main?.accent}
+                    color={currentColorScheme?.main?.accent ?? undefined}
                     onClick={onStayBrowserClick}
                   >
                     {t("DeepLink:StayInBrowser")}

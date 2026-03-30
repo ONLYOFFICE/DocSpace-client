@@ -24,14 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 import hexRgb from "hex-rgb";
 import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg?url";
-import { globalColors } from "@docspace/shared/themes";
-import { useTheme } from "@docspace/shared/hooks/useTheme";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import classNames from "classnames";
 import styles from "./SubmitToGalleryTile.module.scss";
 import type { FC } from "react";

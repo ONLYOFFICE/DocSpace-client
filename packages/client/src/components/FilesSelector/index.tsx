@@ -29,8 +29,8 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { FilterType, FolderType } from "@docspace/shared/enums";
-import FilesSelector from "@docspace/shared/selectors/Files";
-import { toastr } from "@docspace/shared/components/toast";
+import FilesSelector from "@docspace/ui-kit/selectors/Files";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import {
   TFile,
@@ -41,9 +41,14 @@ import {
 import {
   TBreadCrumb,
   TSelectorItem,
-} from "@docspace/shared/components/selector/Selector.types";
-import { TData } from "@docspace/shared/components/toast/Toast.type";
-import { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
+} from "@docspace/ui-kit/components/selector";
+import { type TData } from "@docspace/ui-kit/components/toast";
+import type {
+  TSelectedFileInfo,
+  FolderDtoInteger,
+  SdkFolderType,
+  FilesSettingsDto,
+} from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
 import { TRoom, TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import { TTranslation } from "@docspace/shared/types";
 
@@ -436,13 +441,13 @@ const FilesSelectorWrapper = ({
       disabledItems={disabledItems}
       disabledFolderType={
         isMove || isCopy || isRestore || isRestoreAll
-          ? FolderType.ResultStorage
+          ? (FolderType.ResultStorage as unknown as SdkFolderType)
           : undefined
       }
       filterParam={filterParam}
       getIcon={getIcon}
       setIsDataReady={setIsDataReady}
-      treeFolders={treeFolders}
+      treeFolders={treeFolders as unknown as FolderDtoInteger[]}
       withRecentTreeFolder={withRecentTreeFolder}
       withFavoritesTreeFolder={withFavoritesTreeFolder}
       withAIAgentsTreeFolder={withAIAgentsTreeFolder}
@@ -454,12 +459,20 @@ const FilesSelectorWrapper = ({
       roomsFolderId={roomsFolderId}
       currentFolderId={isFormRoom && openRootVar ? "" : currentFolderId}
       parentId={parentId}
-      rootFolderType={rootFolderType || FolderType.Rooms}
+      rootFolderType={
+        (rootFolderType || FolderType.Rooms) as unknown as SdkFolderType
+      }
       folderIsShared={folderIsShared}
       currentDeviceType={currentDeviceType}
       onCancel={onCloseAction}
-      onSubmit={onAccept}
-      getIsDisabled={getIsDisabledAction}
+      onSubmit={
+        onAccept as unknown as Parameters<typeof FilesSelector>[0]["onSubmit"]
+      }
+      getIsDisabled={
+        getIsDisabledAction as unknown as Parameters<
+          typeof FilesSelector
+        >[0]["getIsDisabled"]
+      }
       onSelectItem={onSelectAction}
       withHeader={withHeader}
       submitButtonLabel={acceptButtonLabel || defaultAcceptButtonLabel}
@@ -496,7 +509,7 @@ const FilesSelectorWrapper = ({
       withCreate={
         (isMove || isCopy || isRestore || isRestoreAll) ?? withCreate ?? false
       }
-      filesSettings={filesSettings}
+      filesSettings={filesSettings as unknown as FilesSettingsDto}
       headerProps={headerProps}
       formProps={formProps}
       checkCreating={checkCreating}

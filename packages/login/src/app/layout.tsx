@@ -26,11 +26,15 @@
 
 import { cookies, headers } from "next/headers";
 
-import { Toast } from "@docspace/shared/components/toast";
-import { TenantStatus, ThemeKeys } from "@docspace/shared/enums";
-import { LANGUAGE, SYSTEM_THEME_KEY } from "@docspace/shared/constants";
-import { getDirectionByLanguage } from "@docspace/shared/utils/common";
-import { getFontFamilyDependingOnLanguage } from "@docspace/shared/utils/rtlUtils";
+import { Toast } from "@docspace/ui-kit/components/toast";
+import { TenantStatus } from "@docspace/shared/enums";
+import { ThemeKeys } from "@docspace/ui-kit/enums";
+import { LANGUAGE } from "@docspace/shared/constants";
+import { SYSTEM_THEME_KEY } from "@docspace/ui-kit/providers/theme/themes/constants";
+import {
+	getDirectionByLanguage,
+	getFontFamilyDependingOnLanguage,
+} from "@docspace/ui-kit/providers/theme/rtl-utils";
 
 import { Providers } from "@/providers";
 import {
@@ -146,10 +150,10 @@ export default async function RootLayout({
   );
 
   const styles = {
-    "--color-scheme-main-accent": currentColorScheme?.main.accent,
-    "--color-scheme-text-accent": currentColorScheme?.text.accent,
-    "--color-scheme-main-buttons": currentColorScheme?.main.buttons,
-    "--color-scheme-text-buttons": currentColorScheme?.text.buttons,
+    "--color-scheme-main-accent": currentColorScheme?.main?.accent,
+    "--color-scheme-text-accent": currentColorScheme?.text?.accent,
+    "--color-scheme-main-buttons": currentColorScheme?.main?.buttons,
+    "--color-scheme-text-buttons": currentColorScheme?.text?.buttons,
 
     "--interface-direction": dirClass,
 

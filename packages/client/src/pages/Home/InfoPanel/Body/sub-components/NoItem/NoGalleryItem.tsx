@@ -30,7 +30,7 @@ import FormGalleryEmptyInfoReactSvgDarkUrl from "PUBLIC_DIR/images/emptyview/emp
 import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import styles from "./NoItem.module.scss";
 

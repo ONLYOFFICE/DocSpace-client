@@ -27,9 +27,12 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { toastr } from "../../components/toast";
-import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
-import { Button, ButtonSize } from "../../components/button";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/ui-kit/components/modal-dialog";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 
 // import { inject, observer } from "mobx-react";
 

@@ -28,117 +28,117 @@ import { useEffect, useState } from "react";
 
 import { isDesktop } from "../../utils";
 
-import { RowsSkeleton } from "../rows";
-import { RectangleSkeleton } from "../rectangle";
+import { RowsSkeleton } from "@docspace/ui-kit/components/rows";
+import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 
 import styles from "./Profile.module.scss";
 import { ProfileFooterLoaderProps } from "./Profile.types";
 
 export const ProfileFooterLoader = ({
-  id,
-  className,
-  style,
-  ...rest
+	id,
+	className,
+	style,
+	...rest
 }: ProfileFooterLoaderProps) => {
-  const {
-    title,
-    borderRadius,
-    backgroundColor,
-    foregroundColor,
-    backgroundOpacity,
-    foregroundOpacity,
-    speed,
-    animate,
-  } = rest;
+	const {
+		title,
+		borderRadius,
+		backgroundColor,
+		foregroundColor,
+		backgroundOpacity,
+		foregroundOpacity,
+		speed,
+		animate,
+	} = rest;
 
-  const [isDesktopView, setIsDesktopView] = useState(false);
+	const [isDesktopView, setIsDesktopView] = useState(false);
 
-  const checkWidth = () => {
-    setIsDesktopView(isDesktop());
-  };
+	const checkWidth = () => {
+		setIsDesktopView(isDesktop());
+	};
 
-  useEffect(() => {
-    checkWidth();
-    window.addEventListener("resize", checkWidth);
-    return () => window.removeEventListener("resize", checkWidth);
-  }, []);
+	useEffect(() => {
+		checkWidth();
+		window.addEventListener("resize", checkWidth);
+		return () => window.removeEventListener("resize", checkWidth);
+	}, []);
 
-  return (
-    <div id={id} className={className} style={style}>
-      <div className={styles.footerBlock} data-testid="profile-footer">
-        <div className="header">
-          <RectangleSkeleton
-            title={title}
-            width="129"
-            height="22"
-            borderRadius={borderRadius}
-            backgroundColor={backgroundColor}
-            foregroundColor={foregroundColor}
-            backgroundOpacity={backgroundOpacity}
-            foregroundOpacity={foregroundOpacity}
-            speed={speed}
-            animate={animate}
-          />
+	return (
+		<div id={id} className={className} style={style}>
+			<div className={styles.footerBlock} data-testid="profile-footer">
+				<div className="header">
+					<RectangleSkeleton
+						title={title}
+						width="129"
+						height="22"
+						borderRadius={borderRadius}
+						backgroundColor={backgroundColor}
+						foregroundColor={foregroundColor}
+						backgroundOpacity={backgroundOpacity}
+						foregroundOpacity={foregroundOpacity}
+						speed={speed}
+						animate={animate}
+					/>
 
-          <RectangleSkeleton
-            title={title}
-            width="213"
-            height="20"
-            borderRadius={borderRadius}
-            backgroundColor={backgroundColor}
-            foregroundColor={foregroundColor}
-            backgroundOpacity={backgroundOpacity}
-            foregroundOpacity={foregroundOpacity}
-            speed={speed}
-            animate={animate}
-          />
-        </div>
+					<RectangleSkeleton
+						title={title}
+						width="213"
+						height="20"
+						borderRadius={borderRadius}
+						backgroundColor={backgroundColor}
+						foregroundColor={foregroundColor}
+						backgroundOpacity={backgroundOpacity}
+						foregroundOpacity={foregroundOpacity}
+						speed={speed}
+						animate={animate}
+					/>
+				</div>
 
-        {isDesktopView ? (
-          <div className="table-header">
-            <RectangleSkeleton
-              title={title}
-              width="51"
-              height="16"
-              borderRadius={borderRadius}
-              backgroundColor={backgroundColor}
-              foregroundColor={foregroundColor}
-              backgroundOpacity={backgroundOpacity}
-              foregroundOpacity={foregroundOpacity}
-              speed={speed}
-              animate={animate}
-            />
+				{isDesktopView ? (
+					<div className="table-header">
+						<RectangleSkeleton
+							title={title}
+							width="51"
+							height="16"
+							borderRadius={borderRadius}
+							backgroundColor={backgroundColor}
+							foregroundColor={foregroundColor}
+							backgroundOpacity={backgroundOpacity}
+							foregroundOpacity={foregroundOpacity}
+							speed={speed}
+							animate={animate}
+						/>
 
-            <RectangleSkeleton
-              title={title}
-              width="60"
-              height="16"
-              borderRadius={borderRadius}
-              backgroundColor={backgroundColor}
-              foregroundColor={foregroundColor}
-              backgroundOpacity={backgroundOpacity}
-              foregroundOpacity={foregroundOpacity}
-              speed={speed}
-              animate={animate}
-            />
+						<RectangleSkeleton
+							title={title}
+							width="60"
+							height="16"
+							borderRadius={borderRadius}
+							backgroundColor={backgroundColor}
+							foregroundColor={foregroundColor}
+							backgroundOpacity={backgroundOpacity}
+							foregroundOpacity={foregroundOpacity}
+							speed={speed}
+							animate={animate}
+						/>
 
-            <RectangleSkeleton
-              title={title}
-              width="62"
-              height="16"
-              borderRadius={borderRadius}
-              backgroundColor={backgroundColor}
-              foregroundColor={foregroundColor}
-              backgroundOpacity={backgroundOpacity}
-              foregroundOpacity={foregroundOpacity}
-              speed={speed}
-              animate={animate}
-            />
-          </div>
-        ) : null}
+						<RectangleSkeleton
+							title={title}
+							width="62"
+							height="16"
+							borderRadius={borderRadius}
+							backgroundColor={backgroundColor}
+							foregroundColor={foregroundColor}
+							backgroundOpacity={backgroundOpacity}
+							foregroundOpacity={foregroundOpacity}
+							speed={speed}
+							animate={animate}
+						/>
+					</div>
+				) : null}
 
-        <RowsSkeleton count={3} />
-      </div>
-    </div>
-  );
+				<RowsSkeleton count={3} />
+			</div>
+		</div>
+	);
 };

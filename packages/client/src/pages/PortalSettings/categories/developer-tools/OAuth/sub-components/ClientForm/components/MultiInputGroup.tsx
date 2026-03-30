@@ -26,11 +26,11 @@
 
 import React from "react";
 
-import { InputBlock } from "@docspace/shared/components/input-block";
-import { Text } from "@docspace/shared/components/text";
-import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
-import { SelectedItem } from "@docspace/shared/components/selected-item";
-import { InputSize, InputType } from "@docspace/shared/components/text-input";
+import { InputBlock } from "@docspace/ui-kit/components/input-block";
+import { Text } from "@docspace/ui-kit/components/text";
+import { AddButton } from "@docspace/ui-kit/components/add-button";
+import { SelectedItem } from "@docspace/ui-kit/components/selected-item";
+import { InputSize, InputType } from "@docspace/ui-kit/components/text-input";
 import { TTranslation } from "@docspace/shared/types";
 import { IClientReqDTO } from "@docspace/shared/utils/oauth/types";
 
@@ -222,7 +222,7 @@ const MultiInputGroup = ({
               <ArrowIcon />
             </div>
           </StyledInputAddBlock>
-          <SelectorAddButton
+          <AddButton
             onClick={onAddAction}
             isDisabled={isDisabled || isError}
             testId={

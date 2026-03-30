@@ -28,8 +28,8 @@ import { useState, useEffect, useCallback } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { useParams } from "react-router";
-import AppLoader from "@docspace/shared/components/app-loader";
-import RoomSelector from "@docspace/shared/selectors/Room";
+import AppLoader from "@docspace/ui-kit/components/app-loader";
+import RoomSelector from "@docspace/ui-kit/selectors/Room";
 import {
   frameCallEvent,
   frameCallbackData,

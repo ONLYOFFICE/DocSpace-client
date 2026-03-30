@@ -31,9 +31,9 @@ import classNames from "classnames";
 import EyeOffReactSvgUrl from "PUBLIC_DIR/images/eye.off.react.svg?url";
 import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
 
-import { globalColors } from "../../themes";
-import { InputBlock } from "../input-block";
-import { InputType } from "../text-input";
+import { globalColors } from "@docspace/ui-kit/providers/theme";
+import { InputBlock } from "@docspace/ui-kit/components/input-block";
+import { InputType } from "@docspace/ui-kit/components/text-input";
 
 import styles from "./SimulatePassword.module.scss";
 import type { SimulatePasswordProps } from "./SimulatePassword.types";
@@ -43,135 +43,135 @@ const iconColor = globalColors.gray;
 const bulletsFont = "•";
 
 export const SimulatePassword = memo(
-  ({
-    onChange,
-    onKeyDown,
-    inputMaxWidth,
-    isDisabled = false,
-    hasError = false,
-    forwardedRef,
-    inputValue,
-  }: SimulatePasswordProps) => {
-    const [password, setPassword] = useState(inputValue ?? "");
-    const [caretPosition, setCaretPosition] = useState(0);
-    const [inputType, setInputType] = useState("password");
+	({
+		onChange,
+		onKeyDown,
+		inputMaxWidth,
+		isDisabled = false,
+		hasError = false,
+		forwardedRef,
+		inputValue,
+	}: SimulatePasswordProps) => {
+		const [password, setPassword] = useState(inputValue ?? "");
+		const [caretPosition, setCaretPosition] = useState(0);
+		const [inputType, setInputType] = useState("password");
 
-    const { t } = useTranslation("Common");
+		const { t } = useTranslation("Common");
 
-    const setPasswordSettings = (newPassword: string) => {
-      const oldPassword = password;
-      const oldPasswordLength = oldPassword.length;
-      const position = forwardedRef.current?.selectionStart ?? 0;
+		const setPasswordSettings = (newPassword: string) => {
+			const oldPassword = password;
+			const oldPasswordLength = oldPassword.length;
+			const position = forwardedRef.current?.selectionStart ?? 0;
 
-      setCaretPosition(position);
-      const newCharactersUntilCaret = newPassword.substring(0, position);
+			setCaretPosition(position);
+			const newCharactersUntilCaret = newPassword.substring(0, position);
 
-      const unchangedStartCharacters = newCharactersUntilCaret
-        .split("")
-        .filter((el) => el === bulletsFont).length;
+			const unchangedStartCharacters = newCharactersUntilCaret
+				.split("")
+				.filter((el) => el === bulletsFont).length;
 
-      const unchangedEndingCharacters = newPassword.substring(position).length;
-      const addedCharacters = newCharactersUntilCaret.substring(
-        unchangedStartCharacters,
-      );
+			const unchangedEndingCharacters = newPassword.substring(position).length;
+			const addedCharacters = newCharactersUntilCaret.substring(
+				unchangedStartCharacters,
+			);
 
-      const startingPartOldPassword = oldPassword.substring(
-        0,
-        unchangedStartCharacters,
-      );
-      const countOfCharacters = oldPasswordLength - unchangedEndingCharacters;
-      const endingPartOldPassword = oldPassword.substring(countOfCharacters);
+			const startingPartOldPassword = oldPassword.substring(
+				0,
+				unchangedStartCharacters,
+			);
+			const countOfCharacters = oldPasswordLength - unchangedEndingCharacters;
+			const endingPartOldPassword = oldPassword.substring(countOfCharacters);
 
-      let newValue = startingPartOldPassword + addedCharacters;
+			let newValue = startingPartOldPassword + addedCharacters;
 
-      if (unchangedEndingCharacters) {
-        newValue += endingPartOldPassword;
-      }
+			if (unchangedEndingCharacters) {
+				newValue += endingPartOldPassword;
+			}
 
-      setPassword(newValue);
-      return newValue;
-    };
+			setPassword(newValue);
+			return newValue;
+		};
 
-    const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const newPassword = e.target.value;
+		const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+			const newPassword = e.target.value;
 
-      if (inputType === "password") {
-        const updatedPassword = setPasswordSettings(newPassword);
-        onChange?.(updatedPassword);
-      } else {
-        setPassword(newPassword);
-        onChange?.(newPassword);
-      }
-    };
+			if (inputType === "password") {
+				const updatedPassword = setPasswordSettings(newPassword);
+				onChange?.(updatedPassword);
+			} else {
+				setPassword(newPassword);
+				onChange?.(newPassword);
+			}
+		};
 
-    const onKeyDownAction = (e: React.KeyboardEvent<HTMLInputElement>) => {
-      if (e.key === "Enter") {
-        onKeyDown?.(e);
-      }
-    };
+		const onKeyDownAction = (e: React.KeyboardEvent<HTMLInputElement>) => {
+			if (e.key === "Enter") {
+				onKeyDown?.(e);
+			}
+		};
 
-    const onChangeInputType = () => {
-      setInputType(inputType === "password" ? "text" : "password");
-    };
+		const onChangeInputType = () => {
+			setInputType(inputType === "password" ? "text" : "password");
+		};
 
-    const copyPassword = password;
-    const bullets = copyPassword.replace(/(.)/g, bulletsFont);
+		const copyPassword = password;
+		const bullets = copyPassword.replace(/(.)/g, bulletsFont);
 
-    const iconName =
-      inputType === "password" ? EyeOffReactSvgUrl : EyeReactSvgUrl;
+		const iconName =
+			inputType === "password" ? EyeOffReactSvgUrl : EyeReactSvgUrl;
 
-    useEffect(() => {
-      if (caretPosition && inputType === "password") {
-        forwardedRef.current?.setSelectionRange(caretPosition, caretPosition);
-      }
-    }, [caretPosition, forwardedRef, inputType]);
+		useEffect(() => {
+			if (caretPosition && inputType === "password") {
+				forwardedRef.current?.setSelectionRange(caretPosition, caretPosition);
+			}
+		}, [caretPosition, forwardedRef, inputType]);
 
-    useEffect(() => {
-      if (isDisabled && inputType !== "password") {
-        setInputType("password");
-      }
-    }, [inputType, isDisabled]);
+		useEffect(() => {
+			if (isDisabled && inputType !== "password") {
+				setInputType("password");
+			}
+		}, [inputType, isDisabled]);
 
-    useEffect(() => {
-      if (inputValue !== undefined && inputValue !== password) {
-        setPassword(inputValue);
-      }
-    }, [inputValue, password]);
+		useEffect(() => {
+			if (inputValue !== undefined && inputValue !== password) {
+				setPassword(inputValue);
+			}
+		}, [inputValue, password]);
 
-    const inputBlockStyle = inputMaxWidth
-      ? ({ maxWidth: inputMaxWidth } as React.CSSProperties)
-      : undefined;
+		const inputBlockStyle = inputMaxWidth
+			? ({ maxWidth: inputMaxWidth } as React.CSSProperties)
+			: undefined;
 
-    return (
-      <div
-        className={classNames(
-          styles.simulatePassword,
-          "conversation-password-wrapper",
-        )}
-      >
-        <InputBlock
-          id="conversion-password"
-          className={classNames(styles.conversionInput)}
-          type={InputType.text}
-          hasError={hasError}
-          isDisabled={isDisabled}
-          iconName={iconName}
-          value={inputType === "password" ? bullets : password}
-          onIconClick={onChangeInputType}
-          onChange={onChangePassword}
-          onKeyDown={onKeyDownAction}
-          scale
-          iconSize={16}
-          iconColor={iconColor}
-          hoverColor={iconColor}
-          placeholder={t("Common:EnterPassword")}
-          forwardedRef={forwardedRef}
-          isAutoFocussed
-          style={inputBlockStyle}
-        />
-      </div>
-    );
-  },
+		return (
+			<div
+				className={classNames(
+					styles.simulatePassword,
+					"conversation-password-wrapper",
+				)}
+			>
+				<InputBlock
+					id="conversion-password"
+					className={classNames(styles.conversionInput)}
+					type={InputType.text}
+					hasError={hasError}
+					isDisabled={isDisabled}
+					iconName={iconName}
+					value={inputType === "password" ? bullets : password}
+					onIconClick={onChangeInputType}
+					onChange={onChangePassword}
+					onKeyDown={onKeyDownAction}
+					scale
+					iconSize={16}
+					iconColor={iconColor}
+					hoverColor={iconColor}
+					placeholder={t("Common:EnterPassword")}
+					forwardedRef={forwardedRef}
+					isAutoFocussed
+					style={inputBlockStyle}
+				/>
+			</div>
+		);
+	},
 );
 
 SimulatePassword.displayName = "SimulatePassword";

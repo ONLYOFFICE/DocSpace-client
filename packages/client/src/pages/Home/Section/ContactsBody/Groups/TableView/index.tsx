@@ -28,7 +28,7 @@ import React, { useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { useNavigate, useLocation } from "react-router";
 
-import { TableBody } from "@docspace/shared/components/table";
+import { TableBody } from "@docspace/ui-kit/components/table";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";

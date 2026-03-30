@@ -28,10 +28,10 @@ import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import classNames from "classnames";
 
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Button } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
-import { toastr } from "@docspace/shared/components/toast";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { Button } from "@docspace/ui-kit/components/button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { RoomsType } from "@docspace/shared/enums";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
@@ -143,6 +143,7 @@ const DeleteLinkDialogComponent = (props) => {
           scale
           onClick={onDelete}
           isLoading={isLoading}
+          testId="delete_link_dialog_ok_button"
         />
         <Button
           id="delete-file-modal_cancel"
@@ -152,6 +153,7 @@ const DeleteLinkDialogComponent = (props) => {
           scale
           onClick={onClose}
           isDisabled={isLoading}
+          testId="delete_link_dialog_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { Trans } from "react-i18next";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { isFile, isFolder } from "@docspace/shared/utils/typeGuards";
 
 const separateItems = (selection) => {
@@ -48,7 +48,6 @@ export const getDialogContent = (
   isAIAgent,
   isAIAgentsFolderRoot,
   unsubscribe,
-  isAIAgentChatDelete,
 ) => {
   if (!selection) return null;
 
@@ -90,23 +89,6 @@ export const getDialogContent = (
     );
   }
 
-  if (isAIAgentChatDelete.visible) {
-    return (
-      <>
-        <Trans
-          t={t}
-          i18nKey="DeleteAIChatDescription"
-          ns="DeleteDialog"
-          values={{ chatName: isAIAgentChatDelete.itemName }}
-          components={{
-            1: <Text key="chat-title" fontWeight={400} as="span" />,
-          }}
-        ></Trans>{" "}
-        {t("Common:WantToContinue")}
-      </>
-    );
-  }
-
   if (isTemplate) {
     return isSingle ? (
       <Trans
@@ -122,12 +104,23 @@ export const getDialogContent = (
   }
 
   if (isRoomDelete) {
-    return (
+    return isSingle ? (
       <>
         <Trans t={t} i18nKey="DeleteRoom" ns="DeleteDialog">
           The room <strong>\"{{ roomName: selection[0]?.title }}\"</strong>
           will be permanently deleted. All data and user accesses will be lost.
         </Trans>{" "}
+        {t("Common:WantToContinue")}
+      </>
+    ) : (
+      <>
+        <Trans
+          i18nKey="DeleteRooms"
+          ns="DeleteDialog"
+          t={t}
+          values={{ count: selection.length }}
+          components={{ 1: <Text fontWeight={600} as="span" /> }}
+        />{" "}
         {t("Common:WantToContinue")}
       </>
     );

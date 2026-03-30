@@ -27,7 +27,7 @@
 import { notFound, redirect } from "next/navigation";
 import { cookies, headers } from "next/headers";
 
-import { FormWrapper } from "@docspace/shared/components/form-wrapper";
+import { FormWrapper } from "@docspace/ui-kit/components/form-wrapper";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { EmployeeType } from "@docspace/shared/enums";
 

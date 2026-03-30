@@ -30,22 +30,21 @@ import { useTranslation } from "react-i18next";
 
 import api from "@docspace/shared/api";
 import { introspectDeveloperToken } from "@docspace/shared/api/oauth";
-import { FieldContainer } from "@docspace/shared/components/field-container";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { IClientProps } from "@docspace/shared/utils/oauth/types";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
-import { toastr } from "@docspace/shared/components/toast";
-import { TData } from "@docspace/shared/components/toast/Toast.type";
+} from "@docspace/ui-kit/components/modal-dialog";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { toastr, type TData } from "@docspace/ui-kit/components/toast";
 
 import {
   InputSize,
   InputType,
   TextInput,
-} from "@docspace/shared/components/text-input";
+} from "@docspace/ui-kit/components/text-input";
 import { UserStore } from "@docspace/shared/store/UserStore";
 
 import OAuthStore from "SRC_DIR/store/OAuthStore";

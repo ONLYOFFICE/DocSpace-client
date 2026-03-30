@@ -30,7 +30,7 @@ import { TFunction } from "i18next";
 import * as groupsApi from "@docspace/shared/api/groups";
 import GroupsFilter from "@docspace/shared/api/groups/filter";
 import { TGroup } from "@docspace/shared/api/groups/types";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
@@ -40,7 +40,7 @@ import {
   setUserFilter,
 } from "@docspace/shared/utils/userFilterUtils";
 import { FILTER_GROUPS } from "@docspace/shared/utils/filterConstants";
-import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
+import SocketHelper, { SocketEvents } from "@docspace/ui-kit/utils/socket";
 
 import api from "@docspace/shared/api";
 
@@ -103,7 +103,7 @@ class GroupsStore {
 
     SocketHelper?.on(
       SocketEvents.AddGroup,
-      async (value: { id: string; data: TGroup }) => {
+      async (value) => {
         const { contactsTab } = this.peopleStore.usersStore;
 
         if (contactsTab !== "groups") return;
@@ -133,7 +133,7 @@ class GroupsStore {
 
     SocketHelper?.on(
       SocketEvents.UpdateGroup,
-      async (value: { id: string; data: TGroup }) => {
+      async (value) => {
         const { contactsTab } = this.peopleStore.usersStore;
 
         const { id, data } = value;

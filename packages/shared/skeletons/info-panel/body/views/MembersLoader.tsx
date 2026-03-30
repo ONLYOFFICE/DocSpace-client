@@ -26,51 +26,51 @@
 
 import React from "react";
 
-import { RectangleSkeleton } from "../../../rectangle";
+import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 import styles from "../Body.module.scss";
 
 export const MemberLoader = ({ count = 1 }: { count?: number }) => {
-  return (
-    <>
-      {[...Array(count).keys()].map((i) => (
-        <div className={styles.styledMemberLoader} key={i}>
-          <RectangleSkeleton
-            className="avatar"
-            width="32px"
-            height="32px"
-            borderRadius="50%"
-          />
-          <RectangleSkeleton width="212px" height="16px" borderRadius="3px" />
-          <RectangleSkeleton
-            className="role-selector"
-            width="64px"
-            height="20px"
-            borderRadius="3px"
-          />
-        </div>
-      ))}
-    </>
-  );
+	return (
+		<>
+			{[...Array(count).keys()].map((i) => (
+				<div className={styles.styledMemberLoader} key={i}>
+					<RectangleSkeleton
+						className="avatar"
+						width="32px"
+						height="32px"
+						borderRadius="50%"
+					/>
+					<RectangleSkeleton width="212px" height="16px" borderRadius="3px" />
+					<RectangleSkeleton
+						className="role-selector"
+						width="64px"
+						height="20px"
+						borderRadius="3px"
+					/>
+				</div>
+			))}
+		</>
+	);
 };
 
 const MembersLoader = () => {
-  return (
-    <div className={styles.memberLoader} data-testid="members-loader">
-      <div className={styles.memberSubtitleLoader}>
-        <RectangleSkeleton width="111px" height="16px" borderRadius="3px" />
-        <RectangleSkeleton width="16px" height="16px" borderRadius="3px" />
-      </div>
+	return (
+		<div className={styles.memberLoader} data-testid="members-loader">
+			<div className={styles.memberSubtitleLoader}>
+				<RectangleSkeleton width="111px" height="16px" borderRadius="3px" />
+				<RectangleSkeleton width="16px" height="16px" borderRadius="3px" />
+			</div>
 
-      <MemberLoader count={4} />
+			<MemberLoader count={4} />
 
-      <div className={`${styles.memberSubtitleLoader} pending_users`}>
-        <RectangleSkeleton width="111px" height="16px" borderRadius="3px" />
-        <RectangleSkeleton width="16px" height="16px" borderRadius="3px" />
-      </div>
+			<div className={`${styles.memberSubtitleLoader} pending_users`}>
+				<RectangleSkeleton width="111px" height="16px" borderRadius="3px" />
+				<RectangleSkeleton width="16px" height="16px" borderRadius="3px" />
+			</div>
 
-      <MemberLoader count={4} />
-    </div>
-  );
+			<MemberLoader count={4} />
+		</div>
+	);
 };
 
 export default MembersLoader;

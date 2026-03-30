@@ -45,5 +45,6 @@
   "HotkeysUploadFile": "Загрузить файл",
   "HotkeysUploadingObjects": "Загрузка объектов",
   "HotkeysZoomIn": "Увеличить",
-  "HotkeysZoomOut": "Уменьшить"
+  "HotkeysZoomOut": "Уменьшить",
+  "OpenContextMenu": "Открыть контекстное меню"
 }

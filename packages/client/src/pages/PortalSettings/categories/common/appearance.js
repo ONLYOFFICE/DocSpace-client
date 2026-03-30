@@ -29,26 +29,25 @@ import LightSvgUrl from "PUBLIC_DIR/images/icons/16/light.svg?url";
 import DarkSvgUrl from "PUBLIC_DIR/images/icons/16/dark.svg?url";
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { withTranslation } from "react-i18next";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { inject, observer } from "mobx-react";
-import { Button } from "@docspace/shared/components/button";
-import { Tooltip } from "@docspace/shared/components/tooltip";
-import { Text } from "@docspace/shared/components/text";
-import { Tabs, TabsTypes } from "@docspace/shared/components/tabs";
+import { Button } from "@docspace/ui-kit/components/button";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Tabs, TabsTypes } from "@docspace/ui-kit/components/tabs";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-import { DropDown } from "@docspace/shared/components/drop-down";
-import { HelpButton } from "@docspace/shared/components/help-button";
-import { Link } from "@docspace/shared/components/link";
+import { DropDown } from "@docspace/ui-kit/components/drop-down";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
+import { Link } from "@docspace/ui-kit/components/link";
 
 import api from "@docspace/shared/api";
 
 import { ReactSVG } from "react-svg";
 import { isMobile, getTextColor } from "@docspace/shared/utils";
 import { DeviceType } from "@docspace/shared/enums";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { ColorPicker } from "@docspace/shared/components/color-picker";
-import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { ColorPicker } from "@docspace/ui-kit/components/color-picker";
 
 import ModalDialogDelete from "./sub-components/modalDialogDelete";
 import {
@@ -150,7 +149,6 @@ const Appearance = (props) => {
         name: t("Common:LightTheme"),
         content: (
           <Preview
-            appliedColorAccent={appliedColorAccent}
             previewAccent={previewAccent}
             selectThemeId={selectThemeId}
             colorCheckImg={colorCheckImg}
@@ -164,7 +162,6 @@ const Appearance = (props) => {
         name: t("Common:DarkTheme"),
         content: (
           <Preview
-            appliedColorAccent={appliedColorAccent}
             previewAccent={previewAccent}
             selectThemeId={selectThemeId}
             colorCheckImg={colorCheckImg}
@@ -179,25 +176,9 @@ const Appearance = (props) => {
 
   const [selectedItemId, setSelectedItemId] = useState(arrayItems[0].id);
 
-  // const getSettings = () => {
-  //   const selectColorId = getFromSessionStorage("selectColorId");
-  //   const defaultColorId = selectedThemeId;
-  //   saveToSessionStorage("defaultColorId", defaultColorId);
-  //   if (selectColorId) {
-  //     setSelectThemeId(selectColorId);
-  //   } else {
-  //     setSelectThemeId(defaultColorId);
-  //   }
-  // };
-
   useEffect(() => {
-    // getSettings();
     setDocumentTitle(t("Settings:Appearance"));
   }, []);
-
-  useEffect(() => {
-    saveToSessionStorage("selectColorId", selectThemeId);
-  }, [selectThemeId]);
 
   useEffect(() => {
     return () => {
@@ -333,8 +314,6 @@ const Appearance = (props) => {
 
       setPreviewAccent(accent);
       setSelectThemeId(id);
-      saveToSessionStorage("selectColorId", id);
-      saveToSessionStorage("selectColorAccent", accent);
     },
     [appearanceTheme, setPreviewAccent, setSelectThemeId],
   );
@@ -351,10 +330,6 @@ const Appearance = (props) => {
     } catch (error) {
       toastr.error(error);
     }
-    saveToSessionStorage("selectColorId", selectThemeId);
-    saveToSessionStorage("defaultColorId", selectThemeId);
-    saveToSessionStorage("selectColorAccent", previewAccent);
-    saveToSessionStorage("defaultColorAccent", previewAccent);
   }, [selectThemeId, setIsDisabledSaveButton, getAppearanceTheme]);
 
   // Open HexColorPicker
@@ -386,12 +361,6 @@ const Appearance = (props) => {
         setSelectThemeId(appearanceTheme[0].id);
         setPreviewAccent(appearanceTheme[0].main?.accent);
       }
-
-      saveToSessionStorage("selectColorId", appearanceTheme[0].id);
-      saveToSessionStorage(
-        "selectColorAccent",
-        appearanceTheme[0].main?.accent,
-      );
 
       onCloseDialogDelete();
 
@@ -475,7 +444,6 @@ const Appearance = (props) => {
       }
 
       setCurrentColorAccent(color);
-      saveToSessionStorage("selectColorAccent", color);
 
       setOpenHexColorPickerAccent(false);
     },

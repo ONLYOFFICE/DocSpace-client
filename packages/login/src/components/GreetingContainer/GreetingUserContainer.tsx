@@ -28,78 +28,78 @@
 
 import { useTranslation, Trans } from "react-i18next";
 
-import { IconButton } from "@docspace/shared/components/icon-button";
-import { Text } from "@docspace/shared/components/text";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow.left.react.svg?url";
-import { Link } from "@docspace/shared/components/link";
+import { Link } from "@docspace/ui-kit/components/link";
 
 const DEFAULT_CREATION_TEXT =
-  "A {{productName}} account will be created for {{email}}. Please, complete your registration:";
+	"A {{productName}} account will be created for {{email}}. Please, complete your registration:";
 
 type GreetingUserContainerProps = {
-  email: string;
-  emailFromLink: string;
-  type?: string;
-  onClickBack?(): void;
+	email: string;
+	emailFromLink: string;
+	type?: string;
+	onClickBack?(): void;
 };
 
 export const GreetingUserContainer = ({
-  email,
-  onClickBack,
-  emailFromLink,
-  type,
+	email,
+	onClickBack,
+	emailFromLink,
+	type,
 }: GreetingUserContainerProps) => {
-  const { t } = useTranslation(["Confirm", "Common"]);
+	const { t } = useTranslation(["Confirm", "Common"]);
 
-  return (
-    <div className="invitation-info-container">
-      <div className="sign-in-container">
-        {type === "LinkInvite" && !emailFromLink ? (
-          <div className="back-title">
-            <IconButton
-              size={16}
-              iconName={ArrowIcon}
-              onClick={onClickBack}
-              dataTestId="greeting_back_icon_button"
-            />
-            <Text
-              fontWeight={600}
-              onClick={onClickBack}
-              dataTestId="greeting_back_text"
-            >
-              {t("Common:Back")}
-            </Text>
-          </div>
-        ) : null}
+	return (
+		<div className="invitation-info-container">
+			<div className="sign-in-container">
+				{type === "LinkInvite" && !emailFromLink ? (
+					<div className="back-title">
+						<IconButton
+							size={16}
+							iconName={ArrowIcon}
+							onClick={onClickBack}
+							dataTestId="greeting_back_icon_button"
+						/>
+						<Text
+							fontWeight={600}
+							onClick={onClickBack}
+							dataTestId="greeting_back_text"
+						>
+							{t("Common:Back")}
+						</Text>
+					</div>
+				) : null}
 
-        <Text fontWeight={600} fontSize="16px">
-          {t("SignUp")}
-        </Text>
-      </div>
-      <Text>
-        <Trans
-          t={t}
-          i18nKey="AccountWillBeCreated"
-          ns="Confirm"
-          defaults={DEFAULT_CREATION_TEXT}
-          values={{
-            email,
-            productName: t("Common:ProductName"),
-          }}
-          components={{
-            1: (
-              <Link
-                key="component_key"
-                tag="a"
-                isHovered={false}
-                color="accent"
-                dataTestId="confirm_registration_link"
-              />
-            ),
-          }}
-        />
-      </Text>
-    </div>
-  );
+				<Text fontWeight={600} fontSize="16px">
+					{t("SignUp")}
+				</Text>
+			</div>
+			<Text>
+				<Trans
+					t={t}
+					i18nKey="AccountWillBeCreated"
+					ns="Confirm"
+					defaults={DEFAULT_CREATION_TEXT}
+					values={{
+						email,
+						productName: t("Common:ProductName"),
+					}}
+					components={{
+						1: (
+							<Link
+								key="component_key"
+								tag="a"
+								isHovered={false}
+								color="accent"
+								dataTestId="confirm_registration_link"
+							/>
+						),
+					}}
+				/>
+			</Text>
+		</div>
+	);
 };

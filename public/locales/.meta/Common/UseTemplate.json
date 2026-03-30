@@ -1,0 +1,21 @@
+{
+  "key_path": "UseTemplate",
+  "content": "Use this template",
+  "content_en_sha1_hash": "258ae8d23f548949eee3089f152e1a1894e245a5",
+  "created_at": "2026-03-26T08:26:45.136Z",
+  "updated_at": "2026-03-26T08:26:45.136Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

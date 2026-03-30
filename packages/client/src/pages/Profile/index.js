@@ -29,7 +29,7 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
-import Section from "@docspace/shared/components/section";
+import Section from "@docspace/ui-kit/components/section";
 
 import SectionWrapper from "SRC_DIR/components/Section";
 import PrivateRoute from "SRC_DIR/components/PrivateRouteWrapper";

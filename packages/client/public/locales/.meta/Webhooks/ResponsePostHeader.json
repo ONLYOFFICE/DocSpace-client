@@ -3,7 +3,7 @@
   "content": "POST response header",
   "content_en_sha1_hash": "7f2adfe37c167c810ce7ffd4e55249c87d28d23e",
   "created_at": "2025-05-19T21:30:49.812Z",
-  "updated_at": "2025-05-24T02:14:23.443Z",
+  "updated_at": "2026-02-19T13:36:32.821Z",
   "comment": {
     "text": "This translation key is used to display the label \"Response Post Header\" in a UI component, specifically in the details section of webhook event details. It appears as an h3 header element and helps to identify the response headers of a POST request.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookEventDetails/sub-components/ResponseDetails.js",
-      "line_number": 112,
+      "line_number": 114,
       "context": "};\n \n return (\n <DetailsWrapper>\n <Text as=\"h3\" fontWeight={600} className=\"mb-4 mt-7\">\n {t(\"ResponsePostHeader\")}\n </Text>\n {isJSON(eventDetails.responseHeaders) ? (\n <Textarea\n classNameCopyIcon=\"response-header-copy\"\n value={eventDetails.responseHeaders}",
       "module": "/packages/client"
     }

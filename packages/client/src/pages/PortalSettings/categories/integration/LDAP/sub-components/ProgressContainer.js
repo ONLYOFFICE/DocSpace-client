@@ -26,7 +26,7 @@
 
 import { inject, observer } from "mobx-react";
 
-import { ProgressBar } from "@docspace/shared/components/progress-bar";
+import { ProgressBar } from "@docspace/ui-kit/components/progress-bar";
 
 const ProgressContainer = ({ inProgress, percents, error, source, status }) => {
   let progressStatus = status || source ? `${percents}%` : "";

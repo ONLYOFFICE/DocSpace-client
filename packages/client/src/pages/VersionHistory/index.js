@@ -26,7 +26,7 @@
 
 import React from "react";
 
-import Section from "@docspace/shared/components/section";
+import Section from "@docspace/ui-kit/components/section";
 import { SectionHeaderSkeleton } from "@docspace/shared/skeletons/sections";
 import { withTranslation } from "react-i18next";
 

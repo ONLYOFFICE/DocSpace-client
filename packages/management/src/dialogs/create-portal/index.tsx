@@ -32,18 +32,18 @@ import { observer } from "mobx-react";
 import { useRouter } from "next/navigation";
 import toLower from "lodash/toLower";
 
-import { Text } from "@docspace/shared/components/text";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
+} from "@docspace/ui-kit/components/modal-dialog";
 import {
   TextInput,
   InputType,
   InputSize,
-} from "@docspace/shared/components/text-input";
-import { Checkbox } from "@docspace/shared/components/checkbox";
+} from "@docspace/ui-kit/components/text-input";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { validatePortalName } from "@docspace/shared/utils/common";
 
 import type { TDomainValidator } from "@docspace/shared/api/settings/types";

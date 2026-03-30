@@ -55,6 +55,12 @@ const StandalonePage = (props) => {
     licenseQuota,
     openOnNewPage,
     logoText,
+    isLifetimeLicense,
+    isGracePeriod,
+    isNotPaidPeriod,
+    gracePeriodEndDate,
+    delayDaysCount,
+    feedbackAndSupportUrl,
   } = props;
 
   const { t, ready } = useTranslation("Common");
@@ -90,6 +96,12 @@ const StandalonePage = (props) => {
       licenseQuota={licenseQuota}
       openOnNewPage={openOnNewPage}
       logoText={logoText}
+      isLifetimeLicense={isLifetimeLicense}
+      isGracePeriod={isGracePeriod}
+      isNotPaidPeriod={isNotPaidPeriod}
+      gracePeriodEndDate={gracePeriodEndDate}
+      delayDaysCount={delayDaysCount}
+      feedbackAndSupportUrl={feedbackAndSupportUrl}
     />
   );
 };
@@ -113,19 +125,27 @@ export default inject(
       salesEmail,
       licenseQuota,
     } = paymentStore;
-    const { isLoaded: isLoadedCurrentQuota, isTrial } = currentQuotaStore;
+    const {
+      isLoaded: isLoadedCurrentQuota,
+      isTrial,
+      isLifetimeLicense,
+    } = currentQuotaStore;
     const {
       isLoaded: isLoadedTariffStatus,
       trialDaysLeft,
       paymentDate,
       isLicenseDateExpired,
       isDeveloper,
+      isGracePeriod,
       isEnterprise,
+      isNotPaidPeriod,
+      gracePeriodEndDate,
+      delayDaysCount,
     } = currentTariffStatusStore;
 
     const { showPortalSettingsLoader } = clientLoadingStore;
 
-    const { docspaceFaqUrl, logoText } = settingsStore;
+    const { docspaceFaqUrl, logoText, feedbackAndSupportUrl } = settingsStore;
 
     const { openOnNewPage } = filesSettingsStore;
 
@@ -150,6 +170,12 @@ export default inject(
       licenseQuota,
       openOnNewPage,
       logoText,
+      isLifetimeLicense,
+      isGracePeriod,
+      isNotPaidPeriod,
+      gracePeriodEndDate,
+      delayDaysCount,
+      feedbackAndSupportUrl,
     };
   },
 )(observer(StandalonePage));

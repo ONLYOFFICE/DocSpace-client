@@ -28,8 +28,8 @@ import React, { useEffect } from "react";
 import { observer, inject } from "mobx-react";
 import { useNavigate, useLocation, useSearchParams } from "react-router";
 
-import Section from "@docspace/shared/components/section";
-import { Loader } from "@docspace/shared/components/loader";
+import Section from "@docspace/ui-kit/components/section";
+import { Loader } from "@docspace/ui-kit/components/loader";
 import { ValidationStatus } from "@docspace/shared/enums";
 import SectionWrapper from "SRC_DIR/components/Section";
 import FilesFilter from "@docspace/shared/api/files/filter";

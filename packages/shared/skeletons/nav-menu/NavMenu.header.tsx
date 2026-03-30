@@ -27,56 +27,56 @@
 import React from "react";
 import classNames from "classnames";
 
-import { CircleSkeleton } from "../circle";
-import { RectangleSkeleton } from "../rectangle";
+import { CircleSkeleton } from "@docspace/ui-kit/components/circle";
+import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 
 import type { NavMenuHeaderLoaderProps } from "./NavMenu.types";
-import { globalColors } from "../../themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme";
 import styles from "./NavMenu.module.scss";
 
 export const NavMenuHeaderLoader = ({
-  id,
-  className,
-  style,
-  ...rest
+	id,
+	className,
+	style,
+	...rest
 }: NavMenuHeaderLoaderProps) => {
-  const {
-    title,
-    borderRadius,
-    backgroundColor = globalColors.white,
-    foregroundColor = globalColors.white,
-    backgroundOpacity = 0.25,
-    foregroundOpacity = 0.2,
-    speed,
-    animate,
-  } = rest;
+	const {
+		title,
+		borderRadius,
+		backgroundColor = globalColors.white,
+		foregroundColor = globalColors.white,
+		backgroundOpacity = 0.25,
+		foregroundOpacity = 0.2,
+		speed,
+		animate,
+	} = rest;
 
-  return (
-    <div id={id} className={classNames(styles.header, className)} style={style}>
-      <RectangleSkeleton
-        title={title}
-        width="208"
-        height="24"
-        borderRadius={borderRadius}
-        backgroundColor={backgroundColor}
-        foregroundColor={foregroundColor}
-        backgroundOpacity={backgroundOpacity}
-        foregroundOpacity={foregroundOpacity}
-        speed={speed}
-        animate={animate}
-      />
-      <div />
-      <CircleSkeleton
-        x="18"
-        y="18"
-        radius="18"
-        width="36"
-        height="36"
-        backgroundColor={backgroundColor}
-        foregroundColor={foregroundColor}
-        backgroundOpacity={backgroundOpacity}
-        foregroundOpacity={foregroundOpacity}
-      />
-    </div>
-  );
+	return (
+		<div id={id} className={classNames(styles.header, className)} style={style}>
+			<RectangleSkeleton
+				title={title}
+				width="208"
+				height="24"
+				borderRadius={borderRadius}
+				backgroundColor={backgroundColor}
+				foregroundColor={foregroundColor}
+				backgroundOpacity={backgroundOpacity}
+				foregroundOpacity={foregroundOpacity}
+				speed={speed}
+				animate={animate}
+			/>
+			<div />
+			<CircleSkeleton
+				x="18"
+				y="18"
+				radius="18"
+				width="36"
+				height="36"
+				backgroundColor={backgroundColor}
+				foregroundColor={foregroundColor}
+				backgroundOpacity={backgroundOpacity}
+				foregroundOpacity={foregroundOpacity}
+			/>
+		</div>
+	);
 };

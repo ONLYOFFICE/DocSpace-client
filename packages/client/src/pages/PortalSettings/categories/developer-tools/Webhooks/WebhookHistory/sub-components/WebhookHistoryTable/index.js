@@ -26,7 +26,7 @@
 
 import React from "react";
 
-import { Consumer } from "@docspace/shared/utils";
+import { Consumer } from "@docspace/ui-kit/utils";
 
 import { inject, observer } from "mobx-react";
 import HistoryTableView from "./HistoryTableView";

@@ -32,7 +32,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
 
-import Section from "@docspace/shared/components/section";
+import Section from "@docspace/ui-kit/components/section";
 
 import useDeviceType from "@/hooks/useDeviceType";
 import { useSettingsStore } from "../../_store/SettingsStore";

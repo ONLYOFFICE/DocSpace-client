@@ -26,8 +26,8 @@
 
 import { Trans } from "react-i18next";
 
-import { Text } from "@docspace/shared/components/text";
-import { HelpButton } from "@docspace/shared/components/help-button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
 
 import UserSolidIcon from "PUBLIC_DIR/images/icons/16/catalog.user.solid.react.svg?url";
 import SharedIcon from "PUBLIC_DIR/images/icons/16/catalog.shared.react.svg?url";

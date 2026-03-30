@@ -3,7 +3,7 @@
   "content": "Response",
   "content_en_sha1_hash": "6e617e4fc9da3de9693eac5990613543b86c63f9",
   "created_at": "2025-05-19T21:30:49.803Z",
-  "updated_at": "2025-05-24T02:16:03.121Z",
+  "updated_at": "2026-02-19T13:36:32.819Z",
   "comment": {
     "text": "The translation key \"Response\" is used to display a message related to responses or answers. It likely appears in a UI component, such as a button or dialog, where users can view or interact with response data.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookEventDetails/sub-components/MessagesDetails.js",
       "line_number": 34,
-      "context": "import { Tabs } from \"@docspace/shared/components/tabs\";\n \n import { useTranslation } from \"react-i18next\";\n import { isMobile } from \"@docspace/shared/utils\";\n import { inject, observer } from \"mobx-react\";\n import ResponseDetails from \"./ResponseDetails\";\n import RequestDetails from \"./RequestDetails\";\n \n const TabsWrapper = styled.div`\n .sticky {\n z-index: 3;",
+      "context": "import { Tabs } from \"@docspace/ui-kit/components/tabs\";\n \n import { useTranslation } from \"react-i18next\";\n import { isMobile } from \"@docspace/shared/utils\";\n import { inject, observer } from \"mobx-react\";\n import ResponseDetails from \"./ResponseDetails\";\n import RequestDetails from \"./RequestDetails\";\n \n const TabsWrapper = styled.div`\n .sticky {\n z-index: 3;",
       "module": "/packages/client"
     }
   ],

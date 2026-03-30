@@ -47,7 +47,7 @@ import {
   TThirdPartyProvider,
   TInvitationSettings,
 } from "@docspace/shared/api/settings/types";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import {
   COOKIE_EXPIRATION_YEAR,
   LANGUAGE,
@@ -56,26 +56,26 @@ import {
 import {
   createPasswordHash,
   getLoginLink,
-  getOAuthToken,
   toUrlParams,
 } from "@docspace/shared/utils/common";
-import { setCookie } from "@docspace/shared/utils/cookie";
+import { getOAuthToken } from "@docspace/ui-kit/utils/get-oauth-token";
+import { setCookie } from "@docspace/ui-kit/utils/cookie";
 import { ButtonKeys } from "@docspace/shared/enums";
-import { TValidate } from "@docspace/shared/components/email-input";
+import { TValidate } from "@docspace/ui-kit/components/email-input";
 import { TCreateUserData, TError } from "@/types";
 import { SocialButtonsGroup } from "@docspace/shared/components/social-buttons-group";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { login, thirdPartyLogin } from "@docspace/shared/api/user";
 import {
   createUser,
-  getUserByEmail,
+  checkUserExists,
   signupOAuth,
 } from "@docspace/shared/api/people";
 
 import SsoReactSvg from "PUBLIC_DIR/images/sso.react.svg";
 
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import EmailInputForm from "./_sub-components/EmailInputForm";
 import RegistrationForm from "./_sub-components/RegistrationForm";
 
@@ -163,7 +163,6 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     async (profile: string) => {
       const signupAccount: { [key: string]: string | undefined } = {
         EmployeeType: linkData.emplType,
-        Email: confirmLinkResult.email,
         Key: linkData.key,
         SerializedProfile: profile,
         culture: currentCultureName,
@@ -259,7 +258,13 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     const headerKey = linkData?.confirmHeader ?? null;
 
     try {
-      await getUserByEmail(email, headerKey, currentCultureName);
+      const userExists = await checkUserExists(email, headerKey);
+
+      if (!userExists) {
+        setRegistrationForm(true);
+        setIsLoading(false);
+        return;
+      }
 
       setCookie(LANGUAGE, currentCultureName, {
         "max-age": COOKIE_EXPIRATION_YEAR,
@@ -296,9 +301,6 @@ const CreateUserForm = (props: CreateUserFormProps) => {
       router.push(url);
     } catch (error) {
       const knownError = error as TError;
-      const status =
-        typeof knownError === "object" ? knownError?.response?.status : "";
-      const isNotExistUser = status === 404;
 
       const forbiddenInviteUsersPortal = roomData.roomId
         ? !invitationSettings?.allowInvitingGuests
@@ -312,8 +314,6 @@ const CreateUserForm = (props: CreateUserFormProps) => {
             ? knownError?.response?.data?.error?.message
             : "";
         setEmailErrorText(errorInvite);
-      } else if (isNotExistUser) {
-        setRegistrationForm(true);
       }
     }
 
@@ -641,3 +641,4 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 };
 
 export default CreateUserForm;
+

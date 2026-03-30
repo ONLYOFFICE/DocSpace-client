@@ -26,8 +26,8 @@
 
 import styled from "styled-components";
 
-import { Text } from "@docspace/shared/components/text";
-import { TooltipContainer } from "@docspace/shared/components/tooltip";
+import { Text } from "@docspace/ui-kit/components/text";
+import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 
 const StyledHistoryText = styled(TooltipContainer)`
   overflow: hidden;

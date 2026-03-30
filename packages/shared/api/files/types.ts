@@ -77,6 +77,9 @@ export type TFileSecurity = {
   SubmitToFormGallery: boolean;
   StopFilling?: boolean;
   ResetFilling?: boolean;
+  StartFilling?: boolean;
+  FillingStatus?: boolean;
+  OpenForm?: boolean;
   EditForm: boolean;
   Comment: boolean;
   CreateRoomFrom: boolean;
@@ -142,6 +145,7 @@ export type TFile = {
   isFolder?: boolean;
   formFillingStatus?: FileFillingFormStatus;
   startFilling?: boolean;
+  isFillingPreparing?: boolean;
   fileEntryType: number;
   hasDraft?: boolean;
   order?: string;
@@ -158,7 +162,8 @@ export type TFile = {
   external?: boolean;
   isLinkExpired?: boolean;
   dimensions?: TDimensions;
-  encrypted?: boolean;
+  editingBy?: Record<string, string>;
+  activeEditors?: Record<string, string>;
 };
 
 export type TOpenEditRequest = {
@@ -386,6 +391,7 @@ export type TFilesSettings = {
   updateIfExist?: boolean;
   openEditorInSameTab: boolean;
   displayFileExtension: boolean;
+  organizeRoomsGrouping: boolean;
 };
 
 export type TPresignedUri = {
@@ -581,21 +587,11 @@ export type TShareToUser = {
   access: ShareAccessRights;
 };
 
-export type TFileEncryptionInfo = {
-  userKeys: Array<{
-    id: string;
-    userId: string;
-    publicKey: string;
-    privateKeyEnc: string;
-    date: string;
-    cryptoEngineId: string;
-  }>;
-  fileKeys: Array<{
-    userId: string;
-    publicKeyId: string;
-    privateKeyEnc: string;
-    tenantId?: number;
-    fileId?: number;
-    createOn?: string;
-  }>;
+export type TDefaultTemplate = {
+  selectedFile?: number;
+  fileExtension: string;
+  lastModified?: string;
+  fileTitle?: string;
+  fileSize?: number;
+  viewUrl?: string;
 };

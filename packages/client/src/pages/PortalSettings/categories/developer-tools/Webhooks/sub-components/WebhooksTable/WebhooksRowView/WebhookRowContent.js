@@ -27,12 +27,12 @@
 import React from "react";
 import styled from "styled-components";
 
-import { Text } from "@docspace/shared/components/text";
-import { RowContent } from "@docspace/shared/components/rows";
-import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { RowContent } from "@docspace/ui-kit/components/rows";
+import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 
 import { isMobile, tablet } from "@docspace/shared/utils";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import StatusBadge from "../../StatusBadge";
 
 const StyledRowContent = styled(RowContent)`

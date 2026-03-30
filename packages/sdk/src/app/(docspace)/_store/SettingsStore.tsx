@@ -30,7 +30,7 @@ import React from "react";
 import { makeAutoObservable } from "mobx";
 
 import { TViewAs } from "@docspace/shared/types";
-import { setCookie } from "@docspace/shared/utils/cookie";
+import { setCookie } from "@docspace/ui-kit/utils/cookie";
 import { DeviceType } from "@docspace/shared/enums";
 import { getDeviceTypeByWidth } from "@docspace/shared/utils";
 
@@ -93,7 +93,7 @@ class SettingsStore {
 }
 
 export const SettingsStoreContext = React.createContext<SettingsStore>(
-  new SettingsStore(),
+  null as unknown as SettingsStore,
 );
 
 export const SettingsStoreContextProvider = ({
@@ -103,11 +103,8 @@ export const SettingsStoreContextProvider = ({
   children: React.ReactNode;
   initData: TSettingsStoreInitData;
 }) => {
-  return (
-    <SettingsStoreContext value={new SettingsStore(initData)}>
-      {children}
-    </SettingsStoreContext>
-  );
+  const store = React.useMemo(() => new SettingsStore(initData), [initData]);
+  return <SettingsStoreContext value={store}>{children}</SettingsStoreContext>;
 };
 
 export const useSettingsStore = () => {

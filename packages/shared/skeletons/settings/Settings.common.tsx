@@ -27,11 +27,11 @@
 import React from "react";
 import { LOADER_STYLE } from "../../constants";
 
-import { RectangleSkeleton } from "../rectangle";
+import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 import {
-  SectionTitleProps,
-  SettingProps,
-  SettingsSectionProps,
+	SectionTitleProps,
+	SettingProps,
+	SettingsSectionProps,
 } from "./Settings.types";
 
 const speed = 2;
@@ -41,61 +41,61 @@ const sectionGap = "12px";
 const sectionsGap = "12px";
 
 const Setting = ({ width = "280px" }: SettingProps) => (
-  <div
-    style={{
-      boxSizing: "border-box",
-      display: "grid",
-      gridGap: "8px",
-      gridTemplateColumns: `28px ${width}`,
-      alignItems: "center",
-    }}
-  >
-    <RectangleSkeleton
-      height={heightRadio}
-      backgroundColor={LOADER_STYLE.backgroundColor}
-      foregroundColor={LOADER_STYLE.foregroundColor}
-      backgroundOpacity={LOADER_STYLE.backgroundOpacity}
-      foregroundOpacity={LOADER_STYLE.foregroundOpacity}
-      speed={speed}
-      animate
-    />
-    <RectangleSkeleton
-      height={heightText}
-      backgroundColor={LOADER_STYLE.backgroundColor}
-      foregroundColor={LOADER_STYLE.foregroundColor}
-      backgroundOpacity={LOADER_STYLE.backgroundOpacity}
-      foregroundOpacity={LOADER_STYLE.foregroundOpacity}
-      speed={speed}
-      animate
-    />
-  </div>
+	<div
+		style={{
+			boxSizing: "border-box",
+			display: "grid",
+			gridGap: "8px",
+			gridTemplateColumns: `28px ${width}`,
+			alignItems: "center",
+		}}
+	>
+		<RectangleSkeleton
+			height={heightRadio}
+			backgroundColor={LOADER_STYLE.backgroundColor}
+			foregroundColor={LOADER_STYLE.foregroundColor}
+			backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+			foregroundOpacity={LOADER_STYLE.foregroundOpacity}
+			speed={speed}
+			animate
+		/>
+		<RectangleSkeleton
+			height={heightText}
+			backgroundColor={LOADER_STYLE.backgroundColor}
+			foregroundColor={LOADER_STYLE.foregroundColor}
+			backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+			foregroundOpacity={LOADER_STYLE.foregroundOpacity}
+			speed={speed}
+			animate
+		/>
+	</div>
 );
 
 const SectionTitle = ({ height = "16", width = "62" }: SectionTitleProps) => (
-  <RectangleSkeleton
-    height={height}
-    width={width}
-    backgroundColor={LOADER_STYLE.backgroundColor}
-    foregroundColor={LOADER_STYLE.foregroundColor}
-    backgroundOpacity={LOADER_STYLE.backgroundOpacity}
-    foregroundOpacity={LOADER_STYLE.foregroundOpacity}
-    speed={speed}
-    animate
-  />
+	<RectangleSkeleton
+		height={height}
+		width={width}
+		backgroundColor={LOADER_STYLE.backgroundColor}
+		foregroundColor={LOADER_STYLE.foregroundColor}
+		backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+		foregroundOpacity={LOADER_STYLE.foregroundOpacity}
+		speed={speed}
+		animate
+	/>
 );
 
 const SettingsSection = ({
-  width1,
-  width2,
-  withTitle = true,
+	width1,
+	width2,
+	withTitle = true,
 }: SettingsSectionProps) => (
-  <div
-    style={{ boxSizing: "border-box", display: "grid", gridGap: sectionGap }}
-  >
-    {withTitle ? <SectionTitle /> : null}
-    <Setting width={width1} />
-    <Setting width={width2} />
-  </div>
+	<div
+		style={{ boxSizing: "border-box", display: "grid", gridGap: sectionGap }}
+	>
+		{withTitle ? <SectionTitle /> : null}
+		<Setting width={width1} />
+		<Setting width={width2} />
+	</div>
 );
 
 // const SettingsTabs = () => (
@@ -128,16 +128,16 @@ const SettingsSection = ({
 // );
 
 export const SettingsCommonSkeleton = () => (
-  <div
-    style={{
-      boxSizing: "border-box",
-      display: "grid",
-      width: "100%",
-      height: "100%",
-      gridGap: sectionsGap,
-    }}
-  >
-    <SettingsSection width1="225px" width2="281px" withTitle={false} />
-    <SettingsSection width1="324px" width2="351px" withTitle={false} />
-  </div>
+	<div
+		style={{
+			boxSizing: "border-box",
+			display: "grid",
+			width: "100%",
+			height: "100%",
+			gridGap: sectionsGap,
+		}}
+	>
+		<SettingsSection width1="225px" width2="281px" withTitle={false} />
+		<SettingsSection width1="324px" width2="351px" withTitle={false} />
+	</div>
 );

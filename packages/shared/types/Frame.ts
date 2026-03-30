@@ -34,7 +34,8 @@ export type TFrameMode =
   | "viewer"
   | "room-selector"
   | "file-selector"
-  | "system";
+  | "system"
+  | "forms";
 
 export type TFrameSelectorType =
   | "roomsOnly"
@@ -149,6 +150,7 @@ export type TFrameConfig = {
   theme?: TFrameTheme | string;
   type?: TFrameType;
   viewAs?: TFrameViewAs;
+  libraryId?: string | number;
   viewTableColumns?: string;
   waiting?: boolean;
   width?: string;

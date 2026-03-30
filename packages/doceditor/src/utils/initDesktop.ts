@@ -24,26 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { IInitialConfig } from "@/types";
-import { getEncryptionAccess } from "@docspace/shared/api/files";
+import { IInitialConfig } from "@/types";
 import {
   setEncryptionKeys,
-  updateEncryptionKeys,
-} from "@docspace/shared/api/privacy";
-import type { TPrivacyRoomRequest } from "@docspace/shared/api/privacy/types";
-import type { TUser } from "@docspace/shared/api/people/types";
-import { toastr } from "@docspace/shared/components/toast";
-import type { Nullable, TTranslation } from "@docspace/shared/types";
+  getEncryptionAccess,
+} from "@docspace/shared/api/files";
+import { TUser } from "@docspace/shared/api/people/types";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { Nullable, TTranslation } from "@docspace/shared/types";
 import { regDesktop } from "@docspace/shared/utils/desktop";
-
-type TSharingKeys = Array<{ userId: string; publicKey: string }>;
-
-type TGetSharingKeysResult = {
-  keys: TSharingKeys;
-  error?: string;
-};
-
-type TGetSharingKeysCallback = (result: TGetSharingKeysResult) => void;
 
 const initDesktop = (
   cfg: IInitialConfig,
@@ -52,40 +41,32 @@ const initDesktop = (
   t: Nullable<TTranslation>,
 ) => {
   const encryptionKeys = cfg?.editorConfig?.encryptionKeys;
-  const isEncryption = !!encryptionKeys;
-
-  const getAccess = (callback?: TGetSharingKeysCallback) => {
-    getEncryptionAccess(fileId)
-      .then((data) => {
-        const keys: TSharingKeys = data.userKeys
-          ? data.userKeys.map((k) => ({
-              userId: k.userId,
-              publicKey: k.publicKey,
-            }))
-          : [];
-
-        callback?.({ keys });
-      })
-      .catch((error) => {
-        const errorMessage = typeof error === "string" ? error : error.message;
-
-        toastr.error(errorMessage);
-        callback?.({ keys: [] });
-      });
-  };
-
   regDesktop(
     user,
-    isEncryption,
+    !!encryptionKeys,
     encryptionKeys,
-    (keys: TPrivacyRoomRequest) => {
+    (keys) => {
       setEncryptionKeys(keys);
     },
-    (keys: TPrivacyRoomRequest) => {
-      updateEncryptionKeys(keys);
-    },
     true,
-    getAccess,
+    (callback) => {
+      getEncryptionAccess?.(fileId)
+        ?.then((keys) => {
+          const data = {
+            keys,
+          };
+
+          callback?.(data);
+        })
+        .catch((error) => {
+          toastr.error(
+            typeof error === "string" ? error : error.message,
+            "",
+            0,
+            true,
+          );
+        });
+    },
     t,
   );
 };

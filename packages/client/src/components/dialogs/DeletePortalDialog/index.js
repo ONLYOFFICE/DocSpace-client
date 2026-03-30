@@ -25,79 +25,79 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { Trans, useTranslation } from "react-i18next";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Button } from "@docspace/shared/components/button";
-import { toastr } from "@docspace/shared/components/toast";
-import { Link } from "@docspace/shared/components/link";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { Button } from "@docspace/ui-kit/components/button";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { Link } from "@docspace/ui-kit/components/link";
 import { sendDeletePortalEmail } from "@docspace/shared/api/portal";
 
 const DeletePortalDialog = (props) => {
-  const { t, ready } = useTranslation("Settings", "Common");
-  const { visible, onClose, owner, stripeUrl } = props;
+	const { t, ready } = useTranslation("Settings", "Common");
+	const { visible, onClose, owner, stripeUrl } = props;
 
-  const onDeleteClick = async () => {
-    try {
-      await sendDeletePortalEmail();
-      toastr.success(
-        t("PortalDeletionEmailSended", { ownerEmail: owner.email }),
-      );
-      onClose();
-    } catch (error) {
-      toastr.error(error);
-    }
-  };
+	const onDeleteClick = async () => {
+		try {
+			await sendDeletePortalEmail();
+			toastr.success(
+				t("PortalDeletionEmailSended", { ownerEmail: owner.email }),
+			);
+			onClose();
+		} catch (error) {
+			toastr.error(error);
+		}
+	};
 
-  return (
-    <ModalDialog
-      isLoading={!ready}
-      visible={visible}
-      onClose={onClose}
-      displayType="modal"
-    >
-      <ModalDialog.Header>
-        {t("Common:DeletePortal", { productName: t("Common:ProductName") })}
-      </ModalDialog.Header>
-      <ModalDialog.Body>
-        <Trans t={t} i18nKey="DeletePortalInfo" ns="Settings">
-          Before you delete the portal, please make sure that automatic billing
-          is turned off. You may check the status of automatic billing in
-          <Link
-            className="stripe-url-link"
-            tag="a"
-            fontSize="13px"
-            fontWeight="600"
-            href={stripeUrl}
-            target="_blank"
-            color="accent"
-            dataTestId="stripe_url_link"
-          >
-            on your Stripe customer portal.
-          </Link>
-        </Trans>
-      </ModalDialog.Body>
-      <ModalDialog.Footer>
-        <Button
-          className="delete-button"
-          key="DeletePortalBtn"
-          label={t("Common:Delete")}
-          size="normal"
-          scale
-          primary
-          onClick={onDeleteClick}
-          testId="submit_delete_portal_button"
-        />
-        <Button
-          className="cancel-button"
-          key="CancelDeleteBtn"
-          label={t("Common:CancelButton")}
-          size="normal"
-          scale
-          onClick={onClose}
-          testId="cancel_delete_portal_button"
-        />
-      </ModalDialog.Footer>
-    </ModalDialog>
-  );
+	return (
+		<ModalDialog
+			isLoading={!ready}
+			visible={visible}
+			onClose={onClose}
+			displayType="modal"
+		>
+			<ModalDialog.Header>
+				{t("Common:DeletePortal", { productName: t("Common:ProductName") })}
+			</ModalDialog.Header>
+			<ModalDialog.Body>
+				<Trans t={t} i18nKey="DeletePortalInfo" ns="Settings">
+					Before you delete the portal, please make sure that automatic billing
+					is turned off. You may check the status of automatic billing in
+					<Link
+						className="stripe-url-link"
+						tag="a"
+						fontSize="13px"
+						fontWeight="600"
+						href={stripeUrl}
+						target="_blank"
+						color="accent"
+						dataTestId="stripe_url_link"
+					>
+						on your Stripe customer portal.
+					</Link>
+				</Trans>
+			</ModalDialog.Body>
+			<ModalDialog.Footer>
+				<Button
+					className="delete-button"
+					key="DeletePortalBtn"
+					label={t("Common:Delete")}
+					size="normal"
+					scale
+					primary
+					onClick={onDeleteClick}
+					testId="submit_delete_portal_button"
+				/>
+				<Button
+					className="cancel-button"
+					key="CancelDeleteBtn"
+					label={t("Common:CancelButton")}
+					size="normal"
+					scale
+					onClick={onClose}
+					testId="cancel_delete_portal_button"
+				/>
+			</ModalDialog.Footer>
+		</ModalDialog>
+	);
 };
 
 export default DeletePortalDialog;

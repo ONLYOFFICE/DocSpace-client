@@ -33,144 +33,145 @@ import { TGetAllPortals, TGetDomainName, TRemovedPortal } from "./types";
 const baseURL = "/apisystem";
 
 export const deletePortal = async (data) => {
-  const options = {
-    baseURL,
-    method: "delete",
-    url: `/portal/remove`,
-    params: data,
-  };
+	const options = {
+		baseURL,
+		method: "delete",
+		url: `/portal/remove`,
+		params: data,
+	};
 
-  const res = await request(options);
+	const res = await request(options);
 
-  return res as TRemovedPortal;
+	return res as TRemovedPortal;
 };
 
 export const getPortalName = async () => {
-  const res = await request({
-    baseURL,
-    method: "get",
-    url: `/settings/get?tenantId=-1&key=portalName`,
-  });
+	const res = await request({
+		baseURL,
+		method: "get",
+		url: `/settings/get?tenantId=-1&key=portalName`,
+	});
 
-  return res;
+	return res;
 };
 
 export const getDomainName = async () => {
-  const options: AxiosRequestConfig = {
-    baseURL,
-    method: "get",
-    url: `/settings/get?tenantId=-1&key=baseDomain`,
-  };
-  const res = (await request(options)) as TGetDomainName;
+	const options: AxiosRequestConfig = {
+		baseURL,
+		method: "get",
+		url: `/settings/get?tenantId=-1&key=baseDomain`,
+	};
+	const res = (await request(options)) as TGetDomainName;
 
-  return res;
+	return res;
 };
 
 export const setDomainName = async (domainName) => {
-  const data = {
-    key: "BaseDomain",
-    tenantId: -1,
-    value: domainName,
-  };
+	const data = {
+		key: "BaseDomain",
+		tenantId: -1,
+		value: domainName,
+	};
 
-  const res = await request({
-    baseURL,
-    method: "post",
-    url: `/settings/save`,
-    data,
-  });
+	const res = await request({
+		baseURL,
+		method: "post",
+		url: `/settings/save`,
+		data,
+	});
 
-  return res;
+	return res;
 };
 
 export const setPortalName = async (portalName) => {
-  const data = {
-    Alias: portalName,
-  };
+	const data = {
+		Alias: portalName,
+	};
 
-  const res = await request({
-    method: "put",
-    url: `portal/portalrename`,
-    data,
-  });
+	const res = await request({
+		method: "put",
+		url: `portal/portalrename`,
+		data,
+	});
 
-  return res;
+	return res;
 };
 
 export const getPortalStatus = async (portalName) => {
-  const data = {
-    portalName,
-  };
+	const data = {
+		portalName,
+	};
 
-  const res = await request({
-    baseURL,
-    method: "put",
-    url: `/portal/status`,
-    data,
-  });
+	const res = await request({
+		baseURL,
+		method: "put",
+		url: `/portal/status`,
+		data,
+	});
 
-  return res;
+	return res;
 };
 
 export const createNewPortal = async (data) => {
-  const res = await request({
-    baseURL,
-    method: "post",
-    url: `/portal/register`,
-    data,
-  });
+	const res = await request({
+		baseURL,
+		method: "post",
+		url: `/portal/register`,
+		data,
+	});
 
-  return res;
+	return res;
 };
 
 export const getAllPortals = async () => {
-  const res = (await request({
-    baseURL,
-    method: "get",
-    url: `/portal/get?statistics=true`,
-  })) as TGetAllPortals;
-  return res;
+	const res = (await request({
+		baseURL,
+		method: "get",
+		url: `/portal/get?statistics=true`,
+	})) as TGetAllPortals;
+	return res;
 };
 
 export const checkDomain = async (domain: string) => {
-  const data = {
-    HostName: domain,
-  };
-  const res = await request({
-    baseURL,
-    method: "post",
-    url: `/settings/checkdomain`,
-    data,
-  });
-  return res;
+	const data = {
+		HostName: domain,
+	};
+	const res = await request({
+		baseURL,
+		method: "post",
+		url: `/settings/checkdomain`,
+		data,
+	});
+	return res;
 };
 
 export const getAvailablePortals = async (data: {
-  Email: string;
-  PasswordHash: string;
-  recaptchaResponse?: string | null;
-  recaptchaType?: number;
+	Email?: string;
+	PasswordHash?: string;
+	recaptchaResponse?: string | null;
+	recaptchaType?: number;
+	ThirdPartyProfile?: string;
 }) => {
-  const res = (await request({
-    baseURL,
-    method: "post",
-    url: `/portal/signin`,
-    data,
-    skipUnauthorized: true,
-  })) as { tenants: { portalLink: string; portalName: string }[] };
+	const res = (await request({
+		baseURL,
+		method: "post",
+		url: `/portal/signin`,
+		data,
+		skipUnauthorized: true,
+	})) as { tenants: { portalLink: string; portalName: string }[] };
 
-  return res.tenants;
+	return res.tenants;
 };
 
 export async function createLicenseQuotaReport() {
-  const res = (await request({
-    baseURL,
-    method: "post",
-    url: "/portal/licensequota/report",
-    params: {
-      useCache: false,
-    },
-  })) as { result: string };
+	const res = (await request({
+		baseURL,
+		method: "post",
+		url: "/portal/licensequota/report",
+		params: {
+			useCache: false,
+		},
+	})) as { result: string };
 
-  return res.result;
+	return res.result;
 }

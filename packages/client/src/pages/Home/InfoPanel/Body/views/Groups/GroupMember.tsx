@@ -28,13 +28,13 @@ import { useTranslation } from "react-i18next";
 
 import { EmployeeStatus } from "@docspace/shared/enums";
 import { TUser } from "@docspace/shared/api/people/types";
-import { TooltipContainer } from "@docspace/shared/components/tooltip";
+import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 
 import {
   Avatar,
   AvatarRole,
   AvatarSize,
-} from "@docspace/shared/components/avatar";
+} from "@docspace/ui-kit/components/avatar";
 
 import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
 

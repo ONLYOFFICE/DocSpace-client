@@ -28,9 +28,9 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
 
-import { Text } from "@docspace/shared/components/text";
-import { Badge } from "@docspace/shared/components/badge";
-import { globalColors } from "@docspace/shared/themes";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Badge } from "@docspace/ui-kit/components/badge";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 import ItemIcon from "SRC_DIR/components/ItemIcon";
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";

@@ -24,15 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import moment from "moment";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { recalculateQuota } from "@docspace/shared/api/settings";
-import { toastr } from "@docspace/shared/components/toast";
+import {
+  parseToDateTime,
+  formatDateLocalized,
+} from "@docspace/ui-kit/utils/date";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
-import { Text } from "@docspace/shared/components/text";
-import { Button } from "@docspace/shared/components/button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Button } from "@docspace/ui-kit/components/button";
 
 const RecalculateButton = (props) => {
   const { t } = useTranslation("Settings");
@@ -76,7 +79,10 @@ const RecalculateButton = (props) => {
             dataTestId="last_recalculate_date"
           >
             {t("LastUpdate", {
-              date: moment(lastRecalculateDate).format("L LT"),
+              date: formatDateLocalized(
+                parseToDateTime(lastRecalculateDate),
+                "DATETIME_SHORT",
+              ),
             })}
           </Text>
         ) : null}

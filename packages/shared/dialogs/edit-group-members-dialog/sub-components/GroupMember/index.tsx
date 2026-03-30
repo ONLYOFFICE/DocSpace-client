@@ -32,29 +32,32 @@ import { isMobile, isMobileOnly } from "react-device-detect";
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import DefaultUserPhotoUrl from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 
-import { Text } from "../../../../components/text";
-import { toastr } from "../../../../components/toast";
-import { HelpButton } from "../../../../components/help-button";
-import { Avatar, AvatarSize } from "../../../../components/avatar";
-import { ComboBoxSize, type TOption } from "../../../../components/combobox";
-import { AccessRightSelect } from "../../../../components/access-right-select";
+import { Text } from "@docspace/ui-kit/components/text";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
+import { Avatar, AvatarSize } from "@docspace/ui-kit/components/avatar";
+import {
+	ComboBoxSize,
+	type TOption,
+} from "@docspace/ui-kit/components/combobox";
+import { AccessRightSelect } from "@docspace/ui-kit/components/access-right-select";
 import { getShareAccessRightOptions } from "../../../../components/share/Share.helpers";
 
 import {
-  updateFileMemberAccess,
-  updateRoomMemberRole,
+	updateFileMemberAccess,
+	updateRoomMemberRole,
 } from "../../../../api/rooms";
 
 import { EmployeeStatus, ShareAccessRights } from "../../../../enums";
 import {
-  isFile,
-  isNextImage,
-  isRoom as isRoomCheck,
+	isFile,
+	isNextImage,
+	isRoom as isRoomCheck,
 } from "../../../../utils/typeGuards";
 import {
-  getUserAvatarRoleByType,
-  getUserType,
-  getUserTypeTranslation,
+	getUserAvatarRoleByType,
+	getUserType,
+	getUserTypeTranslation,
 } from "../../../../utils/common";
 
 import type { TGroupMemberInvitedInRoom } from "../../../../api/groups/types";
@@ -68,188 +71,188 @@ import { EditGroupMembersDialogContext } from "../../EditGroupMembersDialog.prov
 import * as Styled from "./index.styled";
 
 interface GroupMemberProps {
-  member: TGroupMemberInvitedInRoom;
+	member: TGroupMemberInvitedInRoom;
 }
 
 const GroupMember = ({ member }: GroupMemberProps) => {
-  const { user } = member;
-  const isExpect = user.status === EmployeeStatus.Pending;
+	const { user } = member;
+	const isExpect = user.status === EmployeeStatus.Pending;
 
-  const [isLoading, setIsLoading] = useState(false);
-  const { t } = useTranslation("Common");
+	const [isLoading, setIsLoading] = useState(false);
+	const { t } = useTranslation("Common");
 
-  const { infoPanelSelection, standalone } = use(EditGroupMembersDialogContext);
+	const { infoPanelSelection, standalone } = use(EditGroupMembersDialogContext);
 
-  const isRoom = isRoomCheck(infoPanelSelection);
+	const isRoom = isRoomCheck(infoPanelSelection);
 
-  const roomType = isRoom ? infoPanelSelection.roomType : undefined;
+	const roomType = isRoom ? infoPanelSelection.roomType : undefined;
 
-  const options = useMemo(() => {
-    if (isRoom) {
-      const accessOptions = getAccessOptions(
-        t,
-        roomType,
-        false,
-        false,
-        member.owner,
-        user.isAdmin,
-        standalone,
-      );
+	const options = useMemo(() => {
+		if (isRoom) {
+			const accessOptions = getAccessOptions(
+				t,
+				roomType,
+				false,
+				false,
+				member.owner,
+				user.isAdmin,
+				standalone,
+			);
 
-      return user.isAdmin || user.isOwner || user.isRoomAdmin
-        ? accessOptions
-        : filterPaidRoleOptions(
-            accessOptions as {
-              access: ShareAccessRights;
-              key: string;
-              label: string;
-            }[],
-          );
-    }
+			return user.isAdmin || user.isOwner || user.isRoomAdmin
+				? accessOptions
+				: filterPaidRoleOptions(
+						accessOptions as {
+							access: ShareAccessRights;
+							key: string;
+							label: string;
+						}[],
+					);
+		}
 
-    if (!infoPanelSelection) return [];
+		if (!infoPanelSelection) return [];
 
-    return getShareAccessRightOptions(t, infoPanelSelection, false, false);
-  }, [isRoom, roomType, member.owner, user.isAdmin, standalone]);
+		return getShareAccessRightOptions(t, infoPanelSelection, false, false);
+	}, [isRoom, roomType, member.owner, user.isAdmin, standalone]);
 
-  const selectedAccessRight = useMemo(() => {
-    return member.owner
-      ? getUserRoleOptions(t).portalAdmin
-      : options.find(
-          (option) =>
-            "access" in option &&
-            option.access === (member.userAccess || member.groupAccess),
-        );
-  }, [options, member.userAccess, member.groupAccess, isRoom]);
+	const selectedAccessRight = useMemo(() => {
+		return member.owner
+			? getUserRoleOptions(t).portalAdmin
+			: options.find(
+					(option) =>
+						"access" in option &&
+						option.access === (member.userAccess || member.groupAccess),
+				);
+	}, [options, member.userAccess, member.groupAccess, isRoom]);
 
-  const hasIndividualRightsInRoom =
-    member.owner ||
-    (member.userAccess && member.userAccess !== member.groupAccess);
+	const hasIndividualRightsInRoom =
+		member.owner ||
+		(member.userAccess && member.userAccess !== member.groupAccess);
 
-  const type = getUserType(user);
+	const type = getUserType(user);
 
-  const avatarRole = getUserAvatarRoleByType(type);
+	const avatarRole = getUserAvatarRoleByType(type);
 
-  const typeLabel = getUserTypeTranslation(type, t);
+	const typeLabel = getUserTypeTranslation(type, t);
 
-  const manualWidth = isRoom ? "auto" : "400px";
+	const manualWidth = isRoom ? "auto" : "400px";
 
-  const defaultAvatar = isNextImage(DefaultUserPhotoUrl)
-    ? DefaultUserPhotoUrl.src
-    : DefaultUserPhotoUrl;
+	const defaultAvatar = isNextImage(DefaultUserPhotoUrl)
+		? DefaultUserPhotoUrl.src
+		: DefaultUserPhotoUrl;
 
-  const onChangeRole = async (userRoleOption: TOption) => {
-    setIsLoading(true);
+	const onChangeRole = async (userRoleOption: TOption) => {
+		setIsLoading(true);
 
-    const response = isFile(infoPanelSelection)
-      ? updateFileMemberAccess(infoPanelSelection?.id, {
-          share: [{ shareTo: user.id, access: userRoleOption.access }],
-          notify: false,
-          sharingMessage: "",
-        })
-      : updateRoomMemberRole(infoPanelSelection?.id, {
-          invitations: [{ id: user.id, access: userRoleOption.access }],
-          notify: false,
-          sharingMessage: "",
-        });
+		const response = isFile(infoPanelSelection)
+			? updateFileMemberAccess(infoPanelSelection?.id, {
+					share: [{ shareTo: user.id, access: userRoleOption.access }],
+					notify: false,
+					sharingMessage: "",
+				})
+			: updateRoomMemberRole(infoPanelSelection?.id, {
+					invitations: [{ id: user.id, access: userRoleOption.access }],
+					notify: false,
+					sharingMessage: "",
+				});
 
-    response
-      .then(() => {
-        if (userRoleOption.access) {
-          member.userAccess = userRoleOption.access;
-        }
-      })
-      .catch((err) => toastr.error(err))
-      .finally(() => setIsLoading(false));
-  };
+		response
+			.then(() => {
+				if (userRoleOption.access) {
+					member.userAccess = userRoleOption.access;
+				}
+			})
+			.catch((err) => toastr.error(err))
+			.finally(() => setIsLoading(false));
+	};
 
-  return (
-    <Styled.GroupMember isExpect={isExpect} key={user.id}>
-      <Avatar
-        role={avatarRole}
-        className="avatar"
-        size={AvatarSize.min}
-        userName={isExpect ? "" : user.displayName}
-        source={
-          isExpect
-            ? AtReactSvgUrl
-            : user.hasAvatar
-              ? user.avatar
-              : defaultAvatar
-        }
-      />
+	return (
+		<Styled.GroupMember isExpect={isExpect} key={user.id}>
+			<Avatar
+				role={avatarRole}
+				className="avatar"
+				size={AvatarSize.min}
+				userName={isExpect ? "" : user.displayName}
+				source={
+					isExpect
+						? AtReactSvgUrl
+						: user.hasAvatar
+							? user.avatar
+							: defaultAvatar
+				}
+			/>
 
-      <div className="user_body-wrapper">
-        <div className="info">
-          <div className="info-box">
-            <Text
-              className="name"
-              data-tooltip-id={`userTooltip_${Math.random()}`}
-              noSelect
-            >
-              {decode(user.displayName)}
-            </Text>
-            {isExpect ? <Styled.StyledSendClockIcon /> : null}
-          </div>
-          <Text className="email" noSelect>
-            <span dir="auto">{typeLabel}</span> |{" "}
-            <span dir="ltr">{user.email}</span>
-          </Text>
-        </div>
-      </div>
+			<div className="user_body-wrapper">
+				<div className="info">
+					<div className="info-box">
+						<Text
+							className="name"
+							data-tooltip-id={`userTooltip_${Math.random()}`}
+							noSelect
+						>
+							{decode(user.displayName)}
+						</Text>
+						{isExpect ? <Styled.StyledSendClockIcon /> : null}
+					</div>
+					<Text className="email" noSelect>
+						<span dir="auto">{typeLabel}</span> |{" "}
+						<span dir="ltr">{user.email}</span>
+					</Text>
+				</div>
+			</div>
 
-      <div className="individual-rights-tooltip">
-        {hasIndividualRightsInRoom ? (
-          <HelpButton
-            place="left"
-            offsetRight={0}
-            openOnClick={false}
-            tooltipContent={
-              <Text fontSize="12px" fontWeight={600}>
-                {isRoom
-                  ? t("Common:IndividualRights")
-                  : t("Common:IndividualRightsShare")}
-              </Text>
-            }
-          />
-        ) : null}
-      </div>
+			<div className="individual-rights-tooltip">
+				{hasIndividualRightsInRoom ? (
+					<HelpButton
+						place="left"
+						offsetRight={0}
+						openOnClick={false}
+						tooltipContent={
+							<Text fontSize="12px" fontWeight={600}>
+								{isRoom
+									? t("Common:IndividualRights")
+									: t("Common:IndividualRightsShare")}
+							</Text>
+						}
+					/>
+				) : null}
+			</div>
 
-      {selectedAccessRight && options ? (
-        <div className="role-wrapper">
-          {member.canEditAccess ? (
-            <AccessRightSelect
-              className="role-combobox"
-              selectedOption={selectedAccessRight as TOption}
-              accessOptions={options as TOption[]}
-              scaled={false}
-              withBackdrop={isMobile}
-              size={ComboBoxSize.content}
-              modernView
-              title={t("Common:Role")}
-              manualWidth={manualWidth}
-              isMobileView={isMobileOnly}
-              directionY="both"
-              displaySelectedOption
-              onSelect={onChangeRole}
-              isLoading={isLoading}
-            />
-          ) : (
-            <Text
-              className="disabled-role-combobox"
-              title={t("Common:Role")}
-              fontWeight={600}
-              noSelect
-            >
-              {"label" in selectedAccessRight
-                ? selectedAccessRight.label
-                : false}
-            </Text>
-          )}
-        </div>
-      ) : null}
-    </Styled.GroupMember>
-  );
+			{selectedAccessRight && options ? (
+				<div className="role-wrapper">
+					{member.canEditAccess ? (
+						<AccessRightSelect
+							className="role-combobox"
+							selectedOption={selectedAccessRight as TOption}
+							accessOptions={options as TOption[]}
+							scaled={false}
+							withBackdrop={isMobile}
+							size={ComboBoxSize.content}
+							modernView
+							title={t("Common:Role")}
+							manualWidth={manualWidth}
+							isMobileView={isMobileOnly}
+							directionY="both"
+							displaySelectedOption
+							onSelect={onChangeRole}
+							isLoading={isLoading}
+						/>
+					) : (
+						<Text
+							className="disabled-role-combobox"
+							title={t("Common:Role")}
+							fontWeight={600}
+							noSelect
+						>
+							{"label" in selectedAccessRight
+								? selectedAccessRight.label
+								: false}
+						</Text>
+					)}
+				</div>
+			) : null}
+		</Styled.GroupMember>
+	);
 };
 
 export default GroupMember;

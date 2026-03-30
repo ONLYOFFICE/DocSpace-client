@@ -24,8 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
+
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
-import { expect, test } from "./fixtures/base";
+import { test } from "./fixtures/base";
 import {
   confirmHandler,
   ErrorConfirm,
@@ -72,7 +74,7 @@ test("activation render", async ({
 
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "activation",
     "activation-render.png",
@@ -91,7 +93,7 @@ test("activation success", async ({
   await page.fill("[name='password']", "qwerty123");
   await page.getByTestId("password_input_eye_off_icon").click();
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "activation",
     "activation-success.png",
@@ -101,7 +103,7 @@ test("activation success", async ({
 
   await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "activation",
     "activation-success-redirect.png",
@@ -123,7 +125,7 @@ test("activation error", async ({
 
   await page.getByTestId("signup_button").click();
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "activation",
     "activation-error.png",
@@ -140,7 +142,7 @@ test("activation error tariffic limit", async ({
 
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "activation",
     "activation-error-tariffic-limit.png",
@@ -157,7 +159,7 @@ test("activation error user existed", async ({
 
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "activation",
     "activation-user-existed.png",
@@ -174,7 +176,7 @@ test("activation error quota failed", async ({
 
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "activation",
     "activation-error-quota-failed.png",

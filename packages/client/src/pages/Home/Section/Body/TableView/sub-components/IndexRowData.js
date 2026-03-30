@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
-import { TableCell } from "@docspace/shared/components/table";
-import { IndexIconButtons } from "@docspace/shared/components/index-icon-buttons";
+import { TableCell } from "@docspace/ui-kit/components/table";
+import { IndexIconButtons } from "@docspace/ui-kit/components/rows";
 import { classNames, getLastColumn } from "@docspace/shared/utils";
 import { VDRIndexingAction } from "@docspace/shared/enums";
 import FileNameCell from "./FileNameCell";

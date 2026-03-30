@@ -27,10 +27,10 @@
 import { inject, observer } from "mobx-react";
 import { TFunction } from "i18next";
 
-import { Text } from "@docspace/shared/components/text";
-import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { NotificationsType } from "@docspace/shared/enums";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import TargetUserStore from "SRC_DIR/store/contacts/TargetUserStore";
 import styles from "../Notifications.module.scss";

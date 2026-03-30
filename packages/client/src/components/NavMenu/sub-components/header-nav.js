@@ -26,9 +26,9 @@
 
 import { useMemo } from "react";
 import PropTypes from "prop-types";
-import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 
 import ProfileActions from "./profile-actions";
 
@@ -64,6 +64,10 @@ HeaderNav.displayName = "HeaderNav";
 HeaderNav.propTypes = {
   user: PropTypes.object,
   isAuthenticated: PropTypes.bool,
+  userIsUpdate: PropTypes.bool,
+  setUserIsUpdate: PropTypes.func,
+  getActions: PropTypes.func,
+  hideProfileMenu: PropTypes.bool,
 };
 
 export default inject(({ authStore, profileActionsStore, userStore }) => {

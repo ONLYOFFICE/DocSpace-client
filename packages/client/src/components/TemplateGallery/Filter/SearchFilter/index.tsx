@@ -27,67 +27,67 @@
 import { observer } from "mobx-react";
 import { useState, useRef, useEffect, FC } from "react";
 import { withTranslation } from "react-i18next";
-import { InputSize } from "@docspace/shared/components/text-input";
-import { SearchInput } from "@docspace/shared/components/search-input";
+import { InputSize } from "@docspace/ui-kit/components/text-input";
+import { SearchInput } from "@docspace/ui-kit/components/search-input";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import { SearchFilterProps } from "./SearchFilter.types";
 
 const SearchFilter: FC<SearchFilterProps> = ({
-  t,
-  oformsFilter,
-  filterOformsBySearch,
-  filterOformsByLocaleIsLoading,
-  categoryFilterLoaded,
-  languageFilterLoaded,
-  isShowInitSkeleton,
-  isLanguageFilterChange,
+	t,
+	oformsFilter,
+	filterOformsBySearch,
+	filterOformsByLocaleIsLoading,
+	categoryFilterLoaded,
+	languageFilterLoaded,
+	isShowInitSkeleton,
+	isLanguageFilterChange,
 }) => {
-  const [value, setValue] = useState(oformsFilter.search);
-  const onChangeValue = (val: string) => {
-    setValue(val);
-    filterOformsBySearch(val);
-  };
-  const onClear = () => onChangeValue("");
+	const [value, setValue] = useState(oformsFilter.search);
+	const onChangeValue = (val: string) => {
+		setValue(val);
+		filterOformsBySearch(val);
+	};
+	const onClear = () => onChangeValue("");
 
-  useEffect(() => {
-    if (value !== oformsFilter.search) setValue(oformsFilter.search);
-  }, [oformsFilter.search, value]);
+	useEffect(() => {
+		if (value !== oformsFilter.search) setValue(oformsFilter.search);
+	}, [oformsFilter.search, value]);
 
-  const ref = useRef<HTMLInputElement>(null);
-  const onInputClick = () => ref?.current?.focus();
-  const onInputOutsideClick = (e: MouseEvent) => {
-    if (ref?.current && !ref?.current?.contains(e.target as Node)) {
-      ref.current.blur();
-    }
-  };
-  useEffect(() => {
-    document.addEventListener("mousedown", onInputOutsideClick);
-    return () => document.removeEventListener("mousedown", onInputOutsideClick);
-  }, [ref]);
+	const ref = useRef<HTMLInputElement>(null);
+	const onInputClick = () => ref?.current?.focus();
+	const onInputOutsideClick = (e: MouseEvent) => {
+		if (ref?.current && !ref?.current?.contains(e.target as Node)) {
+			ref.current.blur();
+		}
+	};
+	useEffect(() => {
+		document.addEventListener("mousedown", onInputOutsideClick);
+		return () => document.removeEventListener("mousedown", onInputOutsideClick);
+	}, [ref]);
 
-  if (
-    (isShowInitSkeleton ||
-      filterOformsByLocaleIsLoading ||
-      !(categoryFilterLoaded && languageFilterLoaded)) &&
-    !isLanguageFilterChange
-  )
-    return <RectangleSkeleton height="32px" />;
+	if (
+		(isShowInitSkeleton ||
+			filterOformsByLocaleIsLoading ||
+			!(categoryFilterLoaded && languageFilterLoaded)) &&
+		!isLanguageFilterChange
+	)
+		return <RectangleSkeleton height="32px" />;
 
-  return (
-    <SearchInput
-      forwardedRef={ref}
-      scale
-      size={InputSize.base}
-      placeholder={t("Common:Search")}
-      value={value}
-      onChange={onChangeValue}
-      onClick={onInputClick}
-      onClearSearch={onClear}
-      isDisabled={isLanguageFilterChange}
-    />
-  );
+	return (
+		<SearchInput
+			forwardedRef={ref}
+			scale
+			size={InputSize.base}
+			placeholder={t("Common:Search")}
+			value={value}
+			onChange={onChangeValue}
+			onClick={onInputClick}
+			onClearSearch={onClear}
+			isDisabled={isLanguageFilterChange}
+		/>
+	);
 };
 
 export default observer(
-  withTranslation(["FormGallery", "Common"])(SearchFilter),
+	withTranslation(["FormGallery", "Common"])(SearchFilter),
 );

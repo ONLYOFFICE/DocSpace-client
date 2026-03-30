@@ -32,7 +32,7 @@ import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import MediaViewer from "@docspace/shared/components/media-viewer/MediaViewer";
-import { Portal } from "@docspace/shared/components/portal";
+import { Portal } from "@docspace/ui-kit/components/portal";
 import { TFilesSettings } from "@docspace/shared/api/files/types";
 
 import { useMediaViewer } from "@/app/(docspace)/_components/FilesMediaViewer/hooks/useMediaViewer";

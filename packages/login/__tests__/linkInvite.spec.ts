@@ -25,13 +25,17 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import {
+  confirmHandler,
+  ErrorConfirm,
   settingsHandler,
   TypeSettings,
 } from "@docspace/shared/__mocks__/handlers";
 
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
+
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
-import { expect, test } from "./fixtures/base";
-import { selfGetByEmailHandler } from "@docspace/shared/__mocks__/handlers/people/self";
+import { test } from "./fixtures/base";
+import { userExistsHandler } from "@docspace/shared/__mocks__/handlers/people/self";
 import { loginHandler } from "@docspace/shared/__mocks__/handlers/authentication/login";
 
 const URL = "/login/confirm/LinkInvite";
@@ -66,7 +70,7 @@ test.beforeEach(async ({ page }) => {
 test("link invite email render", async ({ page, baseUrl }) => {
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "link-invite",
     "link-invite-email-render.png",
@@ -83,7 +87,7 @@ test("link invite login render", async ({ page, baseUrl }) => {
     waitUntil: "load",
   });
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "link-invite",
     "link-invite-login-render.png",
@@ -96,7 +100,7 @@ test("link invite registration render standalone", async ({
   port,
   clientRequestInterceptor,
 }) => {
-  clientRequestInterceptor.use(selfGetByEmailHandler(port, 404));
+  clientRequestInterceptor.use(userExistsHandler(port, false));
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("email-input-invite").fill("mail@mail.com");
@@ -107,7 +111,7 @@ test("link invite registration render standalone", async ({
     .filter({ hasText: "Sign up" })
     .waitFor({ state: "attached" });
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "link-invite",
     "link-invite-registration-render-standalone.png",
@@ -121,7 +125,7 @@ test("link invite registration render no standalone", async ({
   serverRequestInterceptor,
   baseUrl,
 }) => {
-  clientRequestInterceptor.use(selfGetByEmailHandler(port, 404));
+  clientRequestInterceptor.use(userExistsHandler(port, false));
   serverRequestInterceptor.use(
     settingsHandler(port, TypeSettings.NoStandalone),
   );
@@ -136,7 +140,7 @@ test("link invite registration render no standalone", async ({
     .filter({ hasText: "Sign up" })
     .waitFor({ state: "attached" });
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "link-invite",
     "link-invite-registration-render-no-standalone.png",
@@ -149,13 +153,13 @@ test("link invite email error", async ({
   port,
   clientRequestInterceptor,
 }) => {
-  clientRequestInterceptor.use(selfGetByEmailHandler(port));
+  clientRequestInterceptor.use(userExistsHandler(port, true));
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("email-input-invite").fill("mail.com");
   await page.getByTestId("email_continue_button").click();
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "link-invite",
     "link-invite-email-error.png",
@@ -175,7 +179,7 @@ test("link invite login success", async ({ page, baseUrl }) => {
   await page.fill("[name='password']", "qwerty123");
   await page.getByTestId("password_input_eye_off_icon").click();
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "link-invite",
     "link-invite-login-success.png",
@@ -184,7 +188,7 @@ test("link invite login success", async ({ page, baseUrl }) => {
   await page.getByTestId("login_button").click();
   await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "link-invite",
     "link-invite-login-success-redirect.png",
@@ -198,7 +202,7 @@ test("link invite login error", async ({
   clientRequestInterceptor,
 }) => {
   clientRequestInterceptor.use(
-    selfGetByEmailHandler(port),
+    userExistsHandler(port, true),
     loginHandler(port, 404),
   );
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
@@ -214,7 +218,7 @@ test("link invite login error", async ({
 
   await page.getByTestId("login_button").click();
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "link-invite",
     "link-invite-login-error.png",
@@ -227,7 +231,7 @@ test("link invite registration success standalone", async ({
   port,
   clientRequestInterceptor,
 }) => {
-  clientRequestInterceptor.use(selfGetByEmailHandler(port, 404));
+  clientRequestInterceptor.use(userExistsHandler(port, false));
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("email-input-invite").fill("mail@mail.com");
@@ -238,7 +242,7 @@ test("link invite registration success standalone", async ({
   await page.fill("[name='password']", "qwerty123");
   await page.getByTestId("password_input_eye_off_icon").click();
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "link-invite",
     "link-invite-registration-success-standalone.png",
@@ -249,7 +253,7 @@ test("link invite registration success standalone", async ({
     waitUntil: "load",
   });
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "link-invite",
     "link-invite-registration-success-redirect-standalone.png",
@@ -263,7 +267,7 @@ test("link invite registration success no standalone", async ({
   serverRequestInterceptor,
   baseUrl,
 }) => {
-  clientRequestInterceptor.use(selfGetByEmailHandler(port, 404));
+  clientRequestInterceptor.use(userExistsHandler(port, false));
   serverRequestInterceptor.use(
     settingsHandler(port, TypeSettings.NoStandalone),
   );
@@ -281,7 +285,7 @@ test("link invite registration success no standalone", async ({
 
   await page.getByTestId("password_input_eye_off_icon").click();
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "link-invite",
     "link-invite-registration-success-no-standalone.png",
@@ -290,7 +294,7 @@ test("link invite registration success no standalone", async ({
   await page.getByTestId("signup_button").click();
   await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "link-invite",
     "link-invite-registration-success-redirect-no-standalone.png",
@@ -303,7 +307,7 @@ test("link invite registration error standalone", async ({
   port,
   clientRequestInterceptor,
 }) => {
-  clientRequestInterceptor.use(selfGetByEmailHandler(port, 404));
+  clientRequestInterceptor.use(userExistsHandler(port, false));
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("email-input-invite").fill("mail@mail.com");
@@ -314,7 +318,7 @@ test("link invite registration error standalone", async ({
 
   await page.getByTestId("signup_button").click();
 
-  await expect(page).toHaveScreenshot(
+  await expectScreenshot(page,
     ["desktop", "link-invite", "link-invite-registration-error-standalone.png"],
     { fullPage: true },
   );
@@ -327,7 +331,7 @@ test("link invite registration error no standalone", async ({
   serverRequestInterceptor,
   baseUrl,
 }) => {
-  clientRequestInterceptor.use(selfGetByEmailHandler(port, 404));
+  clientRequestInterceptor.use(userExistsHandler(port, false));
   serverRequestInterceptor.use(
     settingsHandler(port, TypeSettings.NoStandalone),
   );
@@ -343,7 +347,7 @@ test("link invite registration error no standalone", async ({
 
   await page.getByTestId("signup_button").click();
 
-  await expect(page).toHaveScreenshot(
+  await expectScreenshot(page,
     [
       "desktop",
       "link-invite",
@@ -351,4 +355,36 @@ test("link invite registration error no standalone", async ({
     ],
     { fullPage: true },
   );
+});
+
+test("link invite quota failed", async ({
+  page,
+  port,
+  serverRequestInterceptor,
+  baseUrl,
+}) => {
+  serverRequestInterceptor.use(confirmHandler(port, ErrorConfirm.QuotaFailed));
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
+
+  await expectScreenshot(page,[
+    "desktop",
+    "link-invite",
+    "link-invite-quota-failed.png",
+  ]);
+});
+
+test("link invite expired", async ({
+  page,
+  port,
+  serverRequestInterceptor,
+  baseUrl,
+}) => {
+  serverRequestInterceptor.use(confirmHandler(port, ErrorConfirm.Expired));
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
+
+  await expectScreenshot(page,[
+    "desktop",
+    "link-invite",
+    "link-invite-expired.png",
+  ]);
 });

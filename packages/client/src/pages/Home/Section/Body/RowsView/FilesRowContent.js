@@ -28,8 +28,8 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { isTablet } from "@docspace/shared/utils";
 
-import { Link } from "@docspace/shared/components/link";
-import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/ui-kit/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
 import { FilesRowContent as SimpleFilesRowContent } from "@docspace/shared/components/files-row";
 import { getSpaceQuotaAsText } from "@docspace/shared/utils/common";
 import { getFileTypeName } from "@docspace/shared/utils/getFileType";
@@ -39,194 +39,194 @@ import { SortByFieldName } from "@docspace/shared/enums";
 import withContent from "../../../../../HOCs/withContent";
 
 import {
-  connectedCloudsTypeTitleTranslation,
-  getRoomTypeName,
+	connectedCloudsTypeTitleTranslation,
+	getRoomTypeName,
 } from "../../../../../helpers/filesUtils";
 
 const FilesRowContent = ({
-  t,
-  item,
-  sectionWidth,
-  titleWithoutExt,
-  updatedDate,
-  linkStyles,
-  badgesComponent,
-  quickButtons,
-  theme,
-  isRooms,
-  isAIAgentsFolder,
-  isTrashFolder,
-  filterSortBy,
-  createdDate,
-  fileOwner,
-  isDefaultRoomsQuotaSet,
-  isIndexing,
-  displayFileExtension,
-  isPersonalReadOnly,
+	t,
+	item,
+	sectionWidth,
+	titleWithoutExt,
+	updatedDate,
+	linkStyles,
+	badgesComponent,
+	quickButtons,
+	theme,
+	isRooms,
+	isAIAgentsFolder,
+	isTrashFolder,
+	filterSortBy,
+	createdDate,
+	fileOwner,
+	isDefaultRoomsQuotaSet,
+	isIndexing,
+	displayFileExtension,
+	isPersonalReadOnly,
 }) => {
-  const {
-    contentLength,
-    fileExst,
-    providerKey,
-    title,
-    isRoom,
-    daysRemaining,
-    fileType,
-    tags,
-    quotaLimit,
-    usedSpace,
-    order,
-    roomType,
-  } = item;
+	const {
+		contentLength,
+		fileExst,
+		providerKey,
+		title,
+		isRoom,
+		daysRemaining,
+		fileType,
+		tags,
+		quotaLimit,
+		usedSpace,
+		order,
+		roomType,
+	} = item;
 
-  const contentComponent = () => {
-    switch (filterSortBy) {
-      case SortByFieldName.Size:
-        if (!contentLength) return "";
-        return contentLength;
+	const contentComponent = () => {
+		switch (filterSortBy) {
+			case SortByFieldName.Size:
+				if (!contentLength) return "";
+				return contentLength;
 
-      case SortByFieldName.CreationDate:
-        return createdDate;
+			case SortByFieldName.CreationDate:
+				return createdDate;
 
-      case SortByFieldName.Author:
-        return fileOwner;
+			case SortByFieldName.Author:
+				return fileOwner;
 
-      case SortByFieldName.Type:
-        return getFileTypeName(fileType, t);
+			case SortByFieldName.Type:
+				return getFileTypeName(fileType, t);
 
-      case SortByFieldName.RoomType:
-        return getRoomTypeName(roomType, t);
+			case SortByFieldName.RoomType:
+				return getRoomTypeName(roomType, t);
 
-      case SortByFieldName.Tags:
-        if (tags?.length === 0) return "";
-        return tags?.map((elem) => {
-          return elem;
-        });
+			case SortByFieldName.Tags:
+				if (tags?.length === 0) return "";
+				return tags?.map((elem) => {
+					return elem;
+				});
 
-      case SortByFieldName.UsedSpace:
-        if (providerKey)
-          return connectedCloudsTypeTitleTranslation(providerKey, t);
-        if (usedSpace === undefined) return "";
+			case SortByFieldName.UsedSpace:
+				if (providerKey)
+					return connectedCloudsTypeTitleTranslation(providerKey, t);
+				if (usedSpace === undefined) return "";
 
-        return getSpaceQuotaAsText(
-          t,
-          usedSpace,
-          quotaLimit,
-          isDefaultRoomsQuotaSet,
-        );
+				return getSpaceQuotaAsText(
+					t,
+					usedSpace,
+					quotaLimit,
+					isDefaultRoomsQuotaSet,
+				);
 
-      default:
-        if (isTrashFolder || isPersonalReadOnly)
-          return t("Files:DaysRemaining", {
-            daysRemaining,
-          });
+			default:
+				if (isTrashFolder || isPersonalReadOnly)
+					return t("Files:DaysRemaining", {
+						daysRemaining,
+					});
 
-        return updatedDate;
-    }
-  };
+				return updatedDate;
+		}
+	};
 
-  const mainInfo = contentComponent();
+	const mainInfo = contentComponent();
 
-  let linkProps = { ...linkStyles };
+	let linkProps = { ...linkStyles };
 
-  if (item?.isPlugin) {
-    linkProps = createPluginFileHandlers(item, linkProps);
-  }
+	if (item?.isPlugin) {
+		linkProps = createPluginFileHandlers(item, linkProps);
+	}
 
-  return (
-    <SimpleFilesRowContent
-      sectionWidth={sectionWidth}
-      isMobile={!isTablet()}
-      isFile={fileExst || contentLength}
-      sideColor={theme.filesSection.rowView.sideColor}
-    >
-      <Link
-        className="row-content-link"
-        containerWidth="55%"
-        type="page"
-        title={title}
-        fontWeight="600"
-        fontSize="15px"
-        target="_blank"
-        {...linkProps}
-        isTextOverflow
-        dir="auto"
-        truncate
-      >
-        {titleWithoutExt}
-        {displayFileExtension ? (
-          <span className="item-file-exst">{fileExst}</span>
-        ) : null}
-      </Link>
-      <div className="badges">
-        {badgesComponent}
-        {!isRoom && !isRooms && !isAIAgentsFolder ? quickButtons : null}
-      </div>
+	return (
+		<SimpleFilesRowContent
+			sectionWidth={sectionWidth}
+			isMobile={!isTablet()}
+			isFile={fileExst || contentLength}
+			sideColor={theme.filesSection.rowView.sideColor}
+		>
+			<Link
+				className="row-content-link"
+				containerWidth="55%"
+				type="page"
+				title={title}
+				fontWeight="600"
+				fontSize="15px"
+				target="_blank"
+				{...linkProps}
+				isTextOverflow
+				dir="auto"
+				truncate
+			>
+				{titleWithoutExt}
+				{displayFileExtension ? (
+					<span className="item-file-exst">{fileExst}</span>
+				) : null}
+			</Link>
+			<div className="badges">
+				{badgesComponent}
+				{!isRoom && !isRooms && !isAIAgentsFolder ? quickButtons : null}
+			</div>
 
-      {isIndexing ? (
-        <Text
-          containerMinWidth="200px"
-          containerWidth="15%"
-          fontSize="12px"
-          fontWeight={400}
-          className="row_update-text"
-        >
-          {`${t("Files:Index")} ${order}`}
-        </Text>
-      ) : null}
-      {mainInfo ? (
-        <Text
-          containerMinWidth="200px"
-          containerWidth="15%"
-          fontSize="12px"
-          fontWeight={400}
-          className="row_update-text"
-        >
-          {mainInfo}
-        </Text>
-      ) : null}
-    </SimpleFilesRowContent>
-  );
+			{isIndexing ? (
+				<Text
+					containerMinWidth="200px"
+					containerWidth="15%"
+					fontSize="12px"
+					fontWeight={400}
+					className="row_update-text"
+				>
+					{`${t("Files:Index")} ${order}`}
+				</Text>
+			) : null}
+			{mainInfo ? (
+				<Text
+					containerMinWidth="200px"
+					containerWidth="15%"
+					fontSize="12px"
+					fontWeight={400}
+					className="row_update-text"
+				>
+					{mainInfo}
+				</Text>
+			) : null}
+		</SimpleFilesRowContent>
+	);
 };
 
 export default inject(
-  ({
-    currentQuotaStore,
-    settingsStore,
-    treeFoldersStore,
-    filesStore,
-    selectedFolderStore,
-  }) => {
-    const { filter, roomsFilter } = filesStore;
-    const {
-      isRecycleBinFolder,
-      isRoomsFolder,
-      isArchiveFolder,
-      isTemplatesFolder,
-      isPersonalReadOnly,
-      isAIAgentsFolder,
-    } = treeFoldersStore;
-    const { isIndexedFolder } = selectedFolderStore;
+	({
+		currentQuotaStore,
+		settingsStore,
+		treeFoldersStore,
+		filesStore,
+		selectedFolderStore,
+	}) => {
+		const { filter, roomsFilter } = filesStore;
+		const {
+			isRecycleBinFolder,
+			isRoomsFolder,
+			isArchiveFolder,
+			isTemplatesFolder,
+			isPersonalReadOnly,
+			isAIAgentsFolder,
+		} = treeFoldersStore;
+		const { isIndexedFolder } = selectedFolderStore;
 
-    const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
-    const filterSortBy =
-      isRooms || isAIAgentsFolder ? roomsFilter.sortBy : filter.sortBy;
+		const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
+		const filterSortBy =
+			isRooms || isAIAgentsFolder ? roomsFilter.sortBy : filter.sortBy;
 
-    const { isDefaultRoomsQuotaSet } = currentQuotaStore;
+		const { isDefaultRoomsQuotaSet } = currentQuotaStore;
 
-    return {
-      filterSortBy,
-      theme: settingsStore.theme,
-      isTrashFolder: isRecycleBinFolder,
-      isDefaultRoomsQuotaSet,
-      isIndexing: isIndexedFolder,
-      isPersonalReadOnly,
-    };
-  },
+		return {
+			filterSortBy,
+			theme: settingsStore.theme,
+			isTrashFolder: isRecycleBinFolder,
+			isDefaultRoomsQuotaSet,
+			isIndexing: isIndexedFolder,
+			isPersonalReadOnly,
+		};
+	},
 )(
-  observer(
-    withTranslation(["Files", "Translations", "Notifications", "Common"])(
-      withContent(FilesRowContent),
-    ),
-  ),
+	observer(
+		withTranslation(["Files", "Translations", "Notifications", "Common"])(
+			withContent(FilesRowContent),
+		),
+	),
 );

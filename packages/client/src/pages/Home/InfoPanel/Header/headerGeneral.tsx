@@ -28,14 +28,14 @@ import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
 import { FolderType } from "@docspace/shared/enums";
-import { AsideHeader } from "@docspace/shared/components/aside-header";
-import { Tabs } from "@docspace/shared/components/tabs";
+import { AsideHeader } from "@docspace/ui-kit/components/aside";
+import { Tabs } from "@docspace/ui-kit/components/tabs";
 import { isLockedSharedRoom } from "@docspace/shared/utils";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 import { isRoom as isRoomUtil } from "@docspace/shared/utils/typeGuards";
 
 import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
-import { InfoPanelView } from "SRC_DIR/store/InfoPanelStore";
+import { InfoPanelView } from "SRC_DIR/helpers/info-panel";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
 import { hideInfoPanel } from "SRC_DIR/helpers/info-panel";
 import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";

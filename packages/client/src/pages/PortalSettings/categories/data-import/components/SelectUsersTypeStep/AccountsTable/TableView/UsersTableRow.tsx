@@ -28,15 +28,15 @@ import { useRef } from "react";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
-import { TableRow, TableCell } from "@docspace/shared/components/table";
+import { TableRow, TableCell } from "@docspace/ui-kit/components/table";
 
-import { Text } from "@docspace/shared/components/text";
-import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import {
   ComboBox,
   ComboBoxSize,
   TOption,
-} from "@docspace/shared/components/combobox";
+} from "@docspace/ui-kit/components/combobox";
 import {
   InjectedTypeSelectTableRowProps,
   TypeSelectTableRowProps,

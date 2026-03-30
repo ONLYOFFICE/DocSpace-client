@@ -25,10 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-import { tablet, mobile } from "@docspace/shared/utils/device";
+import { tablet, mobile } from "@docspace/ui-kit/utils/device";
 
-import { TableContainer } from "@docspace/shared/components/table";
-import { globalColors } from "@docspace/shared/themes";
+import { TableContainer } from "@docspace/ui-kit/components/table";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { injectDefaultTheme } from "@docspace/shared/utils";
 
 export const WorkspacesContainer = styled.div`

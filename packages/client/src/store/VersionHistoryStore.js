@@ -27,8 +27,8 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import api from "@docspace/shared/api";
 import { FileStatus, FileAction } from "@docspace/shared/enums";
-import { toastr } from "@docspace/shared/components/toast";
-import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import SocketHelper, { SocketEvents } from "@docspace/ui-kit/utils/socket";
 
 class VersionHistoryStore {
   isVisible = false;
@@ -61,17 +61,19 @@ class VersionHistoryStore {
     if (this.versions) {
       // TODO: Files store in not initialized on versionHistory page. Need socket.
 
-      SocketHelper?.on(SocketEvents.StartEditFile, (id) => {
-        // console.log(`VERSION STORE Call s:start-edit-file (id=${id})`);
-        const verIndex = this.versions.findIndex((x) => x.id == id);
+      SocketHelper?.on(SocketEvents.StartEditFile, (data) => {
+        const fileId = typeof data === "object" ? data.fileId : data;
+        // console.log(`VERSION STORE Call s:start-edit-file (id=${fileId})`);
+        const verIndex = this.versions.findIndex((x) => x.id == fileId);
         if (verIndex == -1) return;
 
         runInAction(() => (this.isEditing = true));
       });
 
-      SocketHelper?.on(SocketEvents.StopEditFile, (id) => {
-        // console.log(`VERSION STORE Call s:stop-edit-file (id=${id})`);
-        const verIndex = this.files.findIndex((x) => x.id === id);
+      SocketHelper?.on(SocketEvents.StopEditFile, (data) => {
+        const fileId = typeof data === "object" ? data.fileId : data;
+        // console.log(`VERSION STORE Call s:stop-edit-file (id=${fileId})`);
+        const verIndex = this.files.findIndex((x) => x.id === fileId);
         if (verIndex == -1) return;
 
         runInAction(() => (this.isEditing = false));

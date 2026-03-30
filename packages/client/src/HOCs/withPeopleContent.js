@@ -28,7 +28,7 @@ import { useCallback, useMemo } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Avatar } from "@docspace/shared/components/avatar";
+import { Avatar } from "@docspace/ui-kit/components/avatar";
 import { getUserAvatarRoleByType } from "@docspace/shared/utils/common";
 
 export default function withContent(WrappedContent) {

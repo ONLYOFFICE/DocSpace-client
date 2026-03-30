@@ -1,0 +1,21 @@
+{
+  "key_path": "KnowledgeBaseNotConfigured",
+  "content": "Knowledge Base is not configured on this portal. Please enable it in the portal AI settings for the agent to analyze completed forms.",
+  "content_en_sha1_hash": "1e3cc1110fe37bac63928694ab3d2b15ec1fbadf",
+  "created_at": "2026-03-20T09:07:26.721Z",
+  "updated_at": "2026-03-20T09:07:26.721Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

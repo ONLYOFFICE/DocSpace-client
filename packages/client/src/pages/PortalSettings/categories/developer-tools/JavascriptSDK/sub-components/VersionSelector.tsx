@@ -25,10 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState, useCallback, ReactNode, useEffect } from "react";
-import { Label } from "@docspace/shared/components/label";
-import { ComboBox, TOption } from "@docspace/shared/components/combobox";
-import { HelpButton } from "@docspace/shared/components/help-button";
-import { Text } from "@docspace/shared/components/text";
+import { Label } from "@docspace/ui-kit/components/label";
+import { ComboBox, TOption } from "@docspace/ui-kit/components/combobox";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import { ControlsGroup, LabelGroup } from "../presets/StyledPresets";
 

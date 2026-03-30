@@ -52,6 +52,7 @@ const SimpleNav = ({
         <LanguageComboboxWrapper
           className={styles.mobileComboBox}
           initialCultures={initialCultures}
+          isMobileView
         />
       ) : null}
     </div>

@@ -9,283 +9,283 @@ import { ErrorOfflineContainer } from "./ErrorOffline";
 import ErrorUnavailable from "./ErrorUnavailable";
 import { AccessRestricted } from "./AccessRestricted";
 import FirebaseHelper from "../../utils/firebase";
-import type { TColorScheme } from "../../themes";
+import type { TColorScheme } from "@docspace/ui-kit/providers/theme";
 import { DeviceType } from "../../enums";
 
 // Mock react-svg
 vi.mock("react-svg", () => ({
-  ReactSVG: ({ src }: { src: string }) => (
-    <div data-testid="mock-svg">{src}</div>
-  ),
+	ReactSVG: ({ src }: { src: string }) => (
+		<div data-testid="mock-svg">{src}</div>
+	),
 }));
 
 // Mock toast components
 vi.mock("../toast/sub-components/Toastr", () => ({
-  Check: () => <div data-test-id="check-toast">Check Toast</div>,
-  Danger: () => <div data-test-id="danger-toast">Danger Toast</div>,
-  Info: () => <div data-test-id="info-toast">Info Toast</div>,
+	Check: () => <div data-test-id="check-toast">Check Toast</div>,
+	Danger: () => <div data-test-id="danger-toast">Danger Toast</div>,
+	Info: () => <div data-test-id="info-toast">Info Toast</div>,
 }));
 
 // Mock translations
 vi.mock("react-i18next", () => ({
-  useTranslation: () => ({
-    t: (str: string) => str,
-    ready: true,
-  }),
-  I18nextProvider: ({ children }: { children: React.ReactNode }) => children,
+	useTranslation: () => ({
+		t: (str: string) => str,
+		ready: true,
+	}),
+	I18nextProvider: ({ children }: { children: React.ReactNode }) => children,
 }));
 
 // Mock loader components
-vi.mock("../loader", () => ({
-  default: () => <div>Loading...</div>,
+vi.mock("@docspace/ui-kit/components/loader", () => ({
+	default: () => <div>Loading...</div>,
 }));
 
 // Mock FirebaseHelper
 vi.mock("../../utils/firebase", () => {
-  const MockFirebaseHelper = vi.fn().mockImplementation(function (
-    this: Record<string, unknown>,
-  ) {
-    this.remoteConfig = null;
-    this.firebaseConfig = null;
-    this.firebaseStorage = null;
-    this.firebaseDB = null;
-    this.isEnabledDB = true;
-    this.sendCrashReport = vi.fn();
-    this.config = null;
-    this.isEnabled = true;
-  });
+	const MockFirebaseHelper = vi.fn().mockImplementation(function (
+		this: Record<string, unknown>,
+	) {
+		this.remoteConfig = null;
+		this.firebaseConfig = null;
+		this.firebaseStorage = null;
+		this.firebaseDB = null;
+		this.isEnabledDB = true;
+		this.sendCrashReport = vi.fn();
+		this.config = null;
+		this.isEnabled = true;
+	});
 
-  return {
-    default: MockFirebaseHelper,
-  };
+	return {
+		default: MockFirebaseHelper,
+	};
 });
 
 // Mock getCrashReport and getCurrentDate
 vi.mock("../../utils/crashReport", () => ({
-  getCrashReport: vi.fn().mockReturnValue({ description: "Test crash report" }),
-  getCurrentDate: vi.fn().mockReturnValue("2023-01-01"),
+	getCrashReport: vi.fn().mockReturnValue({ description: "Test crash report" }),
+	getCurrentDate: vi.fn().mockReturnValue("2023-01-01"),
 }));
 
 // Mock zendeskAPI
 vi.mock("../zendesk/Zendesk.utils", () => ({
-  zendeskAPI: {
-    addChanges: vi.fn(),
-  },
+	zendeskAPI: {
+		addChanges: vi.fn(),
+	},
 }));
 
 // Mock sessionStorage
 const mockSessionStorage = {
-  getItem: vi.fn(),
-  setItem: vi.fn(),
-  removeItem: vi.fn(),
-  clear: vi.fn(),
-  key: vi.fn(),
-  length: 0,
+	getItem: vi.fn(),
+	setItem: vi.fn(),
+	removeItem: vi.fn(),
+	clear: vi.fn(),
+	key: vi.fn(),
+	length: 0,
 };
 
 Object.defineProperty(window, "sessionStorage", {
-  value: mockSessionStorage,
+	value: mockSessionStorage,
 });
 
 // Test wrapper with providers if needed
 const renderWithProviders = (ui: React.ReactElement) => {
-  return render(ui);
+	return render(ui);
 };
 
 describe("Error Components", () => {
-  beforeEach(() => {
-    vi.clearAllMocks();
-    mockSessionStorage.getItem.mockReset();
-    mockSessionStorage.setItem.mockReset();
-    mockSessionStorage.removeItem.mockReset();
-  });
+	beforeEach(() => {
+		vi.clearAllMocks();
+		mockSessionStorage.getItem.mockReset();
+		mockSessionStorage.setItem.mockReset();
+		mockSessionStorage.removeItem.mockReset();
+	});
 
-  describe("Error401", () => {
-    it("renders without crashing", () => {
-      renderWithProviders(<Error401 />);
-      expect(screen.getByRole("heading")).toBeInTheDocument();
-    });
+	describe("Error401", () => {
+		it("renders without crashing", () => {
+			renderWithProviders(<Error401 />);
+			expect(screen.getByRole("heading")).toBeInTheDocument();
+		});
 
-    it("displays correct error message", () => {
-      renderWithProviders(<Error401 />);
-      expect(screen.getByText(/401/i)).toBeInTheDocument();
-    });
-  });
+		it("displays correct error message", () => {
+			renderWithProviders(<Error401 />);
+			expect(screen.getByText(/401/i)).toBeInTheDocument();
+		});
+	});
 
-  describe("Error403", () => {
-    it("renders without crashing", () => {
-      renderWithProviders(<Error403 />);
-      expect(screen.getByRole("heading")).toBeInTheDocument();
-    });
+	describe("Error403", () => {
+		it("renders without crashing", () => {
+			renderWithProviders(<Error403 />);
+			expect(screen.getByRole("heading")).toBeInTheDocument();
+		});
 
-    it("displays correct error message", () => {
-      renderWithProviders(<Error403 />);
-      expect(screen.getByText(/403/i)).toBeInTheDocument();
-    });
-  });
+		it("displays correct error message", () => {
+			renderWithProviders(<Error403 />);
+			expect(screen.getByText(/403/i)).toBeInTheDocument();
+		});
+	});
 
-  describe("Error404", () => {
-    it("renders without crashing", () => {
-      renderWithProviders(<Error404 />);
-      expect(screen.getByRole("heading")).toBeInTheDocument();
-    });
+	describe("Error404", () => {
+		it("renders without crashing", () => {
+			renderWithProviders(<Error404 />);
+			expect(screen.getByRole("heading")).toBeInTheDocument();
+		});
 
-    it("displays correct error message", () => {
-      renderWithProviders(<Error404 />);
-      expect(screen.getByText(/404/i)).toBeInTheDocument();
-    });
-  });
+		it("displays correct error message", () => {
+			renderWithProviders(<Error404 />);
+			expect(screen.getByText(/404/i)).toBeInTheDocument();
+		});
+	});
 
-  describe("ErrorOffline", () => {
-    it("renders without crashing", () => {
-      renderWithProviders(<ErrorOfflineContainer />);
-      expect(screen.getByRole("heading")).toBeInTheDocument();
-    });
+	describe("ErrorOffline", () => {
+		it("renders without crashing", () => {
+			renderWithProviders(<ErrorOfflineContainer />);
+			expect(screen.getByRole("heading")).toBeInTheDocument();
+		});
 
-    it("displays offline message", () => {
-      renderWithProviders(<ErrorOfflineContainer />);
-      expect(screen.getByRole("heading")).toHaveTextContent(/offline/i);
-    });
-  });
+		it("displays offline message", () => {
+			renderWithProviders(<ErrorOfflineContainer />);
+			expect(screen.getByRole("heading")).toHaveTextContent(/offline/i);
+		});
+	});
 
-  describe("ErrorUnavailable", () => {
-    it("renders without crashing", () => {
-      renderWithProviders(<ErrorUnavailable />);
-      expect(screen.getByRole("heading")).toBeInTheDocument();
-    });
+	describe("ErrorUnavailable", () => {
+		it("renders without crashing", () => {
+			renderWithProviders(<ErrorUnavailable />);
+			expect(screen.getByRole("heading")).toBeInTheDocument();
+		});
 
-    it("displays unavailable message", () => {
-      renderWithProviders(<ErrorUnavailable />);
-      expect(screen.getByText(/ErrorDeactivatedText/i)).toBeInTheDocument();
-    });
-  });
+		it("displays unavailable message", () => {
+			renderWithProviders(<ErrorUnavailable />);
+			expect(screen.getByText(/ErrorDeactivatedText/i)).toBeInTheDocument();
+		});
+	});
 
-  describe("AccessRestricted", () => {
-    it("renders without crashing", () => {
-      renderWithProviders(<AccessRestricted />);
-      expect(screen.getByRole("heading")).toBeInTheDocument();
-    });
+	describe("AccessRestricted", () => {
+		it("renders without crashing", () => {
+			renderWithProviders(<AccessRestricted />);
+			expect(screen.getByRole("heading")).toBeInTheDocument();
+		});
 
-    it("displays access restricted message", () => {
-      renderWithProviders(<AccessRestricted />);
-      expect(screen.getByText(/AccessDenied/i)).toBeInTheDocument();
-    });
-  });
+		it("displays access restricted message", () => {
+			renderWithProviders(<AccessRestricted />);
+			expect(screen.getByText(/AccessDenied/i)).toBeInTheDocument();
+		});
+	});
 
-  describe("Error520", () => {
-    const mockUser = {
-      id: "test-user",
-      access: 1,
-      firstName: "Test",
-      lastName: "User",
-      userName: "testuser",
-      email: "test@example.com",
-      status: 1,
-      activationStatus: 1,
-      department: "",
-      workFrom: "",
-      avatarMax: "",
-      avatarMedium: "",
-      avatarOriginal: "",
-      avatar: "",
-      isAdmin: false,
-      isRoomAdmin: false,
-      isLDAP: false,
-      listAdminModules: [],
-      isOwner: false,
-      isVisitor: false,
-      isCollaborator: false,
-      mobilePhoneActivationStatus: 0,
-      isSSO: false,
-      displayName: "Test User",
-      avatarSmall: "",
-      profileUrl: "",
-      hasAvatar: false,
-      cultureName: "en",
-      isAnonim: false,
-    };
+	describe("Error520", () => {
+		const mockUser = {
+			id: "test-user",
+			access: 1,
+			firstName: "Test",
+			lastName: "User",
+			userName: "testuser",
+			email: "test@example.com",
+			status: 1,
+			activationStatus: 1,
+			department: "",
+			workFrom: "",
+			avatarMax: "",
+			avatarMedium: "",
+			avatarOriginal: "",
+			avatar: "",
+			isAdmin: false,
+			isRoomAdmin: false,
+			isLDAP: false,
+			listAdminModules: [],
+			isOwner: false,
+			isVisitor: false,
+			isCollaborator: false,
+			mobilePhoneActivationStatus: 0,
+			isSSO: false,
+			displayName: "Test User",
+			avatarSmall: "",
+			profileUrl: "",
+			hasAvatar: false,
+			cultureName: "en",
+			isAnonim: false,
+		};
 
-    const mockColorScheme: TColorScheme = {
-      id: 1,
-      name: "Light",
-      main: {
-        accent: "#333333",
-        buttons: "#333333",
-      },
-      text: {
-        accent: "#333333",
-        buttons: "#FFFFFF",
-      },
-    };
+		const mockColorScheme: TColorScheme = {
+			id: 1,
+			name: "Light",
+			main: {
+				accent: "#333333",
+				buttons: "#333333",
+			},
+			text: {
+				accent: "#333333",
+				buttons: "#FFFFFF",
+			},
+		};
 
-    const mockFirebaseHelper = new FirebaseHelper({
-      apiKey: "test-key",
-      authDomain: "test-domain",
-      projectId: "test-project",
-      storageBucket: "test-bucket",
-      messagingSenderId: "test-id",
-      appId: "test-app-id",
-      measurementId: "test-measurement-id",
-      databaseURL: "test-url",
-    });
+		const mockFirebaseHelper = new FirebaseHelper({
+			apiKey: "test-key",
+			authDomain: "test-domain",
+			projectId: "test-project",
+			storageBucket: "test-bucket",
+			messagingSenderId: "test-id",
+			appId: "test-app-id",
+			measurementId: "test-measurement-id",
+			databaseURL: "test-url",
+		});
 
-    const mockProps = {
-      user: mockUser,
-      version: "1.0.0",
-      errorLog: new Error("Test error message"),
-      firebaseHelper: mockFirebaseHelper,
-      currentDeviceType: DeviceType.desktop,
-      currentColorScheme: mockColorScheme,
-    };
+		const mockProps = {
+			user: mockUser,
+			version: "1.0.0",
+			errorLog: new Error("Test error message"),
+			firebaseHelper: mockFirebaseHelper,
+			currentDeviceType: DeviceType.desktop,
+			currentColorScheme: mockColorScheme,
+		};
 
-    it("renders without crashing", () => {
-      renderWithProviders(<Error520 {...mockProps} />);
-      expect(screen.getByTestId("ErrorContainer")).toBeInTheDocument();
-    });
+		it("renders without crashing", () => {
+			renderWithProviders(<Error520 {...mockProps} />);
+			expect(screen.getByTestId("ErrorContainer")).toBeInTheDocument();
+		});
 
-    it("displays error message when firebase is disabled", () => {
-      const disabledFirebaseHelper = new FirebaseHelper({
-        apiKey: "test-key",
-        authDomain: "test-domain",
-        projectId: "test-project",
-        storageBucket: "test-bucket",
-        messagingSenderId: "test-id",
-        appId: "test-app-id",
-        measurementId: "test-measurement-id",
-        databaseURL: "test-url",
-      });
-      Object.defineProperty(disabledFirebaseHelper, "isEnabledDB", {
-        get: () => false,
-      });
+		it("displays error message when firebase is disabled", () => {
+			const disabledFirebaseHelper = new FirebaseHelper({
+				apiKey: "test-key",
+				authDomain: "test-domain",
+				projectId: "test-project",
+				storageBucket: "test-bucket",
+				messagingSenderId: "test-id",
+				appId: "test-app-id",
+				measurementId: "test-measurement-id",
+				databaseURL: "test-url",
+			});
+			Object.defineProperty(disabledFirebaseHelper, "isEnabledDB", {
+				get: () => false,
+			});
 
-      const propsWithDisabledFirebase = {
-        ...mockProps,
-        firebaseHelper: disabledFirebaseHelper,
-      };
+			const propsWithDisabledFirebase = {
+				...mockProps,
+				firebaseHelper: disabledFirebaseHelper,
+			};
 
-      renderWithProviders(<Error520 {...propsWithDisabledFirebase} />);
-      expect(screen.getByText("SomethingWentWrong")).toBeInTheDocument();
-      expect(screen.getByText("Test error message")).toBeInTheDocument();
-    });
+			renderWithProviders(<Error520 {...propsWithDisabledFirebase} />);
+			expect(screen.getByText("SomethingWentWrong")).toBeInTheDocument();
+			expect(screen.getByText("Test error message")).toBeInTheDocument();
+		});
 
-    it("displays custom error message from session storage", () => {
-      const customError = new Error("Custom session storage error");
-      mockSessionStorage.getItem.mockReturnValue(JSON.stringify(customError));
+		it("displays custom error message from session storage", () => {
+			const customError = new Error("Custom session storage error");
+			mockSessionStorage.getItem.mockReturnValue(JSON.stringify(customError));
 
-      renderWithProviders(<Error520 {...mockProps} />);
-      expect(screen.getByText("Test error message")).toBeInTheDocument();
-    });
+			renderWithProviders(<Error520 {...mockProps} />);
+			expect(screen.getByText("Test error message")).toBeInTheDocument();
+		});
 
-    it("auto sends crash report when firebase is enabled", () => {
-      const sendCrashReportSpy = vi.spyOn(
-        mockFirebaseHelper,
-        "sendCrashReport",
-      );
+		it("auto sends crash report when firebase is enabled", () => {
+			const sendCrashReportSpy = vi.spyOn(
+				mockFirebaseHelper,
+				"sendCrashReport",
+			);
 
-      renderWithProviders(<Error520 {...mockProps} />);
-      expect(sendCrashReportSpy).toHaveBeenCalled();
+			renderWithProviders(<Error520 {...mockProps} />);
+			expect(sendCrashReportSpy).toHaveBeenCalled();
 
-      sendCrashReportSpy.mockRestore();
-    });
-  });
+			sendCrashReportSpy.mockRestore();
+		});
+	});
 });

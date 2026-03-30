@@ -28,12 +28,12 @@ import { useEffect } from "react";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { isMacOs } from "react-device-detect";
-import { Heading } from "@docspace/shared/components/heading";
+import { Heading } from "@docspace/ui-kit/components/heading";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
-import Base from "@docspace/shared/themes/base";
+} from "@docspace/ui-kit/components/modal-dialog";
+import Base from "@docspace/ui-kit/providers/theme/themes/base";
 import styles from "./HotkeysPanel.module.scss";
 import SelectionBlock from "./SelectionBlock";
 import MoveBlock from "./MoveBlock";

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
-import { TColorScheme } from "@docspace/shared/themes";
+import { TColorScheme } from "@docspace/ui-kit/providers/theme/themes";
 import { TwoFactorCampaignBanner } from "@docspace/shared/components/two-factor-campaign";
 import { isTablet } from "@docspace/shared/utils";
 

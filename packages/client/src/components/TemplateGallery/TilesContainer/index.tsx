@@ -34,12 +34,14 @@ import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url
 import { IconSizeType } from "@docspace/shared/utils";
 import { TTranslation } from "@docspace/shared/types";
 
-import { useTheme } from "@docspace/shared/hooks/useTheme";
-import { Scrollbar } from "@docspace/shared/components/scrollbar";
-import { Scrollbar as CustomScrollbar } from "@docspace/shared/components/scrollbar/custom-scrollbar";
-import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
-import { Link, LinkType } from "@docspace/shared/components/link";
-import { IconButton } from "@docspace/shared/components/icon-button";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import {
+  Scrollbar,
+  ScrollbarType,
+} from "@docspace/ui-kit/components/scrollbar";
+import { EmptyScreenContainer } from "@docspace/ui-kit/components/empty-screen-container";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import type OformsFilter from "@docspace/shared/api/oforms/filter";
 import type { Category } from "../Filter/CategoryFilter/CategoryFilter.types";
 import styles from "../TemplateGallery.module.scss";
@@ -97,7 +99,7 @@ const TilesContainer: FC<TilesContainerProps> = (props) => {
   const isMobileView = useMobileDetection();
 
   const [isShowOneTile, setShowOneTile] = useState(false);
-  const scrollRef = useRef<CustomScrollbar>(null);
+  const scrollRef = useRef<ScrollbarType>(null);
 
   useEffect(() => {
     scrollRef.current?.scrollToTop();

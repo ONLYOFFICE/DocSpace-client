@@ -26,7 +26,7 @@
 
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Tabs } from "@docspace/shared/components/tabs";
+import { Tabs } from "@docspace/ui-kit/components/tabs";
 
 import { useTranslation } from "react-i18next";
 import { isMobile } from "@docspace/shared/utils";

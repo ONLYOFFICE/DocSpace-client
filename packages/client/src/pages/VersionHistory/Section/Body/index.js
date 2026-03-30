@@ -30,16 +30,16 @@ import { inject, observer } from "mobx-react";
 import { VariableSizeList as List } from "react-window";
 import AutoSizer from "react-virtualized-auto-sizer";
 import HistoryRowsSkeleton from "@docspace/shared/skeletons/history";
-import { CustomScrollbarsVirtualListWithAutoFocus } from "@docspace/shared/components/scrollbar";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
 import VersionRow from "./VersionRow";
 import { StyledBody, StyledVersionList } from "./StyledVersionHistory";
 
-const VirtualScroll = ({ ref, ...props }) => (
-  <CustomScrollbarsVirtualListWithAutoFocus
+const VirtualScroll = (props) => (
+  <Scrollbar
     {...props}
-    ref={ref}
     paddingAfterLastItem={ASIDE_PADDING_AFTER_LAST_ITEM}
+    autoFocus
   />
 );
 VirtualScroll.displayName = "VirtualScroll";

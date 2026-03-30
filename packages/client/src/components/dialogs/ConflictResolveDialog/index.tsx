@@ -29,8 +29,7 @@ import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import ConflictResolve from "@docspace/shared/dialogs/conflict-resolve";
-import { toastr } from "@docspace/shared/components/toast";
-import { TData } from "@docspace/shared/components/toast/Toast.type";
+import { toastr, type TData } from "@docspace/ui-kit/components/toast";
 import { ConflictResolveType, RoomsType } from "@docspace/shared/enums";
 import type { TFile } from "@docspace/shared/api/files/types";
 

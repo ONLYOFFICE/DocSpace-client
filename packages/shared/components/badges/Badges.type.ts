@@ -27,7 +27,7 @@
  */
 
 import type { TTranslation, TViewAs } from "../../types";
-import type { TTheme } from "../../themes";
+import type { TTheme } from "@docspace/ui-kit/providers/theme";
 import {
   FileFillingFormStatus,
   type RoomsType,
@@ -65,7 +65,8 @@ type ItemData = {
   locked?: boolean;
   isFavorite?: boolean;
   isAIAgent?: boolean;
-  encrypted?: boolean;
+  startFilling?: boolean;
+  isFillingPreparing?: boolean;
 };
 
 export type BadgesProps = {
@@ -98,6 +99,7 @@ export type BadgesProps = {
   onClickFavorite?: () => void;
   isPublicRoom?: boolean;
   themeIsBase?: boolean;
+  editorsTooltip?: React.ReactElement;
 };
 
 export type BadgeWrapperProps = {

@@ -3,7 +3,7 @@ import React, { useMemo } from "react";
 import { TUser } from "@docspace/shared/api/people/types";
 import FirebaseHelper from "@docspace/shared/utils/firebase";
 import { Error520SSR } from "@docspace/shared/components/errors/Error520";
-import { ThemeProvider } from "@docspace/shared/components/theme-provider";
+import { ThemeProviderComponent } from "@docspace/ui-kit/components/theme-provider";
 import type { TFirebaseSettings } from "@docspace/shared/api/settings/types";
 
 import useI18N from "@/hooks/useI18N";
@@ -25,7 +25,7 @@ const Error = ({ settings, user, error }: ErrorProps) => {
   }, [settings.firebase]);
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProviderComponent theme={theme}>
       <Error520SSR
         i18nProp={i18n}
         errorLog={error}
@@ -34,7 +34,7 @@ const Error = ({ settings, user, error }: ErrorProps) => {
         firebaseHelper={firebaseHelper}
         currentDeviceType={currentDeviceType}
       />
-    </ThemeProvider>
+    </ThemeProviderComponent>
   );
 };
 

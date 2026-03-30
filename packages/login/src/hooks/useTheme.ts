@@ -26,16 +26,24 @@
 
 import React from "react";
 
-import { Base, Dark, TColorScheme, TTheme } from "@docspace/shared/themes";
-import { getEditorTheme, getSystemTheme } from "@docspace/shared/utils";
-import { ThemeKeys } from "@docspace/shared/enums";
+import {
+	Base,
+	Dark,
+	type TColorScheme,
+	type TTheme,
+} from "@docspace/ui-kit/providers/theme/themes";
+import { getEditorTheme } from "@docspace/shared/utils/common";
+import { getSystemTheme } from "@docspace/ui-kit/utils/get-system-theme";
+import { ThemeKeys } from "@docspace/ui-kit/enums";
 import { getAppearanceTheme } from "@docspace/shared/api/settings";
-import { TGetColorTheme } from "@docspace/shared/api/settings/types";
-import { setCookie } from "@docspace/shared/utils/cookie";
-import { SYSTEM_THEME_KEY } from "@docspace/shared/constants";
-import { TUser } from "@docspace/shared/api/people/types";
-import { getDirectionByLanguage } from "@docspace/shared/utils/common";
-import { getFontFamilyDependingOnLanguage } from "@docspace/shared/utils/rtlUtils";
+import type { TGetColorTheme } from "@docspace/shared/api/settings/types";
+import { setCookie } from "@docspace/ui-kit/utils/cookie";
+import { SYSTEM_THEME_KEY } from "@docspace/ui-kit/providers/theme/themes/constants";
+import type { TUser } from "@docspace/shared/api/people/types";
+import {
+	getDirectionByLanguage,
+	getFontFamilyDependingOnLanguage,
+} from "@docspace/ui-kit/providers/theme/rtl-utils";
 
 export interface UseThemeProps {
   user?: TUser;

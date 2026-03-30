@@ -32,10 +32,10 @@ import { useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { useTheme } from "styled-components";
 
-import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
-import { IconButton } from "@docspace/shared/components/icon-button";
-import { Link, LinkType } from "@docspace/shared/components/link";
-import { TableBody } from "@docspace/shared/components/table";
+import { EmptyScreenContainer } from "@docspace/ui-kit/components/empty-screen-container";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
+import { TableBody } from "@docspace/ui-kit/components/table";
 import { TEnhancedMigrationUser } from "@docspace/shared/api/settings/types";
 
 import UsersTableRow from "./UsersTableRow";

@@ -28,12 +28,12 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import { Text } from "../text";
-import { Link, LinkTarget } from "../link";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 
 import { getLogoUrl } from "../../utils";
 import { WhiteLabelLogoType } from "../../enums";
-import { useTheme } from "../../hooks/useTheme";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import { IContentProps } from "./About.types";
 import styles from "./About.module.scss";

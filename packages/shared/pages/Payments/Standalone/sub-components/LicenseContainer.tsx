@@ -27,10 +27,10 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "../../../../components/text";
-import { FileInput } from "../../../../components/file-input";
-import { InputSize } from "../../../../components/text-input";
-import { Button, ButtonSize } from "../../../../components/button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { FileInput } from "@docspace/ui-kit/components/file-input";
+import { InputSize } from "@docspace/ui-kit/components/text-input";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 
 import { ILicenseProps } from "../Standalone.types";
 import styles from "../Standalone.module.scss";

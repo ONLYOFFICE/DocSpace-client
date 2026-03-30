@@ -50,7 +50,6 @@ declare module "*.svg" {
   export default SVG;
 }
 
-declare module "external-remotes-plugin" {}
 declare module "csvjson-json_beautifier" {
   export default function jsonBeautifier(
     json: string,

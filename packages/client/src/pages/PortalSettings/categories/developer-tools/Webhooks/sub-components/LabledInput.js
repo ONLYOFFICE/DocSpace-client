@@ -27,9 +27,9 @@
 import React from "react";
 import styled from "styled-components";
 
-import { TextInput } from "@docspace/shared/components/text-input";
+import { TextInput } from "@docspace/ui-kit/components/text-input";
 
-import { Label } from "@docspace/shared/components/label";
+import { Label } from "@docspace/ui-kit/components/label";
 
 const StyledLabel = styled(Label)`
   display: block;
@@ -43,37 +43,37 @@ const StyledLabel = styled(Label)`
 `;
 
 export const LabledInput = ({
-  label,
-  placeholder,
-  value,
-  onChange,
-  name,
-  mask,
-  hasError,
-  className,
-  required = false,
-  id,
-  isDisabled,
-  maxLength = 255,
-  dataTestId,
+	label,
+	placeholder,
+	value,
+	onChange,
+	name,
+	mask,
+	hasError,
+	className,
+	required = false,
+	id,
+	isDisabled,
+	maxLength = 255,
+	dataTestId,
 }) => {
-  return (
-    <StyledLabel text={label} className={className}>
-      <TextInput
-        id={id}
-        name={name}
-        placeholder={placeholder}
-        tabIndex={1}
-        value={value}
-        onChange={onChange}
-        required={required}
-        hasError={hasError}
-        isDisabled={isDisabled}
-        maxLength={maxLength}
-        scale
-        {...(mask ? { mask } : {})}
-        testId={dataTestId}
-      />
-    </StyledLabel>
-  );
+	return (
+		<StyledLabel text={label} className={className}>
+			<TextInput
+				id={id}
+				name={name}
+				placeholder={placeholder}
+				tabIndex={1}
+				value={value}
+				onChange={onChange}
+				required={required}
+				hasError={hasError}
+				isDisabled={isDisabled}
+				maxLength={maxLength}
+				scale
+				{...(mask ? { mask } : {})}
+				testId={dataTestId}
+			/>
+		</StyledLabel>
+	);
 };

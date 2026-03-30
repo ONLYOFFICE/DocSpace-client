@@ -43,224 +43,231 @@ import { isNextImage } from "../../../utils/typeGuards";
 import type { StaticImageData } from "../../../types";
 import { createLoader } from "../../../utils/createLoader";
 
-import { Avatar, AvatarRole, AvatarSize } from "../../avatar";
-import { ComboBoxSize, type TOption } from "../../combobox";
-import { AccessRightSelect } from "../../access-right-select";
+import {
+	Avatar,
+	AvatarRole,
+	AvatarSize,
+} from "@docspace/ui-kit/components/avatar";
+import {
+	ComboBoxSize,
+	type TOption,
+} from "@docspace/ui-kit/components/combobox";
+import { AccessRightSelect } from "@docspace/ui-kit/components/access-right-select";
 
-import { Text } from "../../text";
-import { IconButton } from "../../icon-button";
-import { Link, LinkType } from "../../link";
-import { TooltipContainer } from "../../tooltip";
+import { Text } from "@docspace/ui-kit/components/text";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
+import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 
 import styles from "../Share.module.scss";
 import type { UserProps } from "../Share.types";
 
 export const User = ({
-  user,
-  currentUser,
+	user,
+	currentUser,
 
-  showInviteIcon,
-  onRepeatInvitation,
+	showInviteIcon,
+	onRepeatInvitation,
 
-  onClickGroup,
+	onClickGroup,
 
-  options,
-  hideCombobox,
-  selectedOption,
-  onSelectOption,
+	options,
+	hideCombobox,
+	selectedOption,
+	onSelectOption,
 }: UserProps) => {
-  const id = useId();
-  const theme = useTheme();
-  const { t } = useTranslation(["Common"]);
+	const id = useId();
+	const theme = useTheme();
+	const { t } = useTranslation(["Common"]);
 
-  const [isLoading, setIsLoading] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 
-  const handleSelectOption = async (option: TOption) => {
-    if (!onSelectOption) return;
+	const handleSelectOption = async (option: TOption) => {
+		if (!onSelectOption) return;
 
-    const { endLoader, startLoader } = createLoader();
+		const { endLoader, startLoader } = createLoader();
 
-    startLoader(() => {
-      setIsLoading(true);
-    });
+		startLoader(() => {
+			setIsLoading(true);
+		});
 
-    onSelectOption(option).finally(() => {
-      endLoader(() => {
-        setIsLoading(false);
-      });
-    });
-  };
+		onSelectOption(option).finally(() => {
+			endLoader(() => {
+				setIsLoading(false);
+			});
+		});
+	};
 
-  if (
-    "displayName" in user &&
-    !user.displayName &&
-    "name" in user &&
-    !user.name &&
-    "email" in user &&
-    !user.email
-  )
-    return null;
+	if (
+		"displayName" in user &&
+		!user.displayName &&
+		"name" in user &&
+		!user.name &&
+		"email" in user &&
+		!user.email
+	)
+		return null;
 
-  const isExpect = user.isExpect;
-  const isSystem = "isSystem" in user && user.isSystem;
-  const canChangeUserRole = "canEditAccess" in user && user.canEditAccess;
+	const isExpect = user.isExpect;
+	const isSystem = "isSystem" in user && user.isSystem;
+	const canChangeUserRole = "canEditAccess" in user && user.canEditAccess;
 
-  const type = getUserType(user as unknown as TUser);
-  const typeLabel = getUserTypeTranslation(type, t);
+	const type = getUserType(user as unknown as TUser);
+	const typeLabel = getUserTypeTranslation(type, t);
 
-  const userPhotoUrl = isNextImage(DefaultUserPhotoUrl)
-    ? (DefaultUserPhotoUrl as StaticImageData).src
-    : DefaultUserPhotoUrl;
+	const userPhotoUrl = isNextImage(DefaultUserPhotoUrl)
+		? (DefaultUserPhotoUrl as StaticImageData).src
+		: DefaultUserPhotoUrl;
 
-  const userAvatar =
-    "hasAvatar" in user && user.hasAvatar
-      ? user.avatar
-      : "isGroup" in user && user.isGroup
-        ? ""
-        : userPhotoUrl;
+	const userAvatar =
+		"hasAvatar" in user && user.hasAvatar
+			? user.avatar
+			: "isGroup" in user && user.isGroup
+				? ""
+				: userPhotoUrl;
 
-  const withTooltip = "isOwner" in user && (user.isOwner || user.isAdmin);
+	const withTooltip = "isOwner" in user && (user.isOwner || user.isAdmin);
 
-  const uniqueTooltipId = `userTooltip_${id}`;
+	const uniqueTooltipId = `userTooltip_${id}`;
 
-  const tooltipContent = `${
-    "isOwner" in user && user.isOwner
-      ? t("Common:PortalOwner", { productName: t("Common:ProductName") })
-      : t("Common:PortalAdmin", { productName: t("Common:ProductName") })
-  }. ${t("Common:HasFullAccess")}`;
+	const tooltipContent = `${
+		"isOwner" in user && user.isOwner
+			? t("Common:PortalOwner", { productName: t("Common:ProductName") })
+			: t("Common:PortalAdmin", { productName: t("Common:ProductName") })
+	}. ${t("Common:HasFullAccess")}`;
 
-  const itemAvatar = isSystem
-    ? EveryoneIconUrl
-    : isExpect
-      ? AtReactSvgUrl
-      : userAvatar || "";
+	const itemAvatar = isSystem
+		? EveryoneIconUrl
+		: isExpect
+			? AtReactSvgUrl
+			: userAvatar || "";
 
-  if ("isTitle" in user && user.isTitle) {
-    return (
-      <div
-        className={classNames(styles.userTypeHeader, {
-          [styles.isExpect]: isExpect,
-        })}
-        data-testid="info_panel_members_user_type_header"
-      >
-        <Text className="title">
-          {"displayName" in user ? user.displayName : ""}
-        </Text>
+	if ("isTitle" in user && user.isTitle) {
+		return (
+			<div
+				className={classNames(styles.userTypeHeader, {
+					[styles.isExpect]: isExpect,
+				})}
+				data-testid="info_panel_members_user_type_header"
+			>
+				<Text className="title">
+					{"displayName" in user ? user.displayName : ""}
+				</Text>
 
-        {showInviteIcon ? (
-          <IconButton
-            className="icon"
-            title={t("Common:RepeatInvitation")}
-            iconName={EmailPlusReactSvgUrl}
-            isFill
-            onClick={onRepeatInvitation}
-            size={16}
-            data-testid="info_panel_members_repeat_invitation_button"
-          />
-        ) : null}
-      </div>
-    );
-  }
+				{showInviteIcon ? (
+					<IconButton
+						className="icon"
+						title={t("Common:RepeatInvitation")}
+						iconName={EmailPlusReactSvgUrl}
+						isFill
+						onClick={onRepeatInvitation}
+						size={16}
+						data-testid="info_panel_members_repeat_invitation_button"
+					/>
+				) : null}
+			</div>
+		);
+	}
 
-  return (
-    <div
-      className={classNames(styles.user, {
-        [styles.isExpect]: isExpect,
-        [styles.isSystem]: isSystem,
-      })}
-      key={user.id}
-      data-testid="info_panel_members_user"
-    >
-      <Avatar
-        role={type as unknown as AvatarRole}
-        className="avatar"
-        size={AvatarSize.min}
-        source={itemAvatar}
-        userName={
-          isExpect ? "" : "displayName" in user ? user.displayName : user.name
-        }
-        withTooltip={withTooltip}
-        tooltipContent={tooltipContent}
-        hideRoleIcon={!withTooltip}
-        isGroup={"isGroup" in user ? user.isGroup : false}
-        dataTestId="info_panel_members_user_avatar"
-      />
-      <div className="user_body-wrapper">
-        <div className="name-wrapper">
-          {"isGroup" in user && user.isGroup ? (
-            <Link
-              className="name"
-              type={LinkType.action}
-              onClick={() => onClickGroup?.(user)}
-              title={decode(user.name)}
-              noHover={isSystem}
-              dataTestId="info_panel_members_user_group_link"
-            >
-              {decode(user.name)}
-            </Link>
-          ) : (
-            <Text className="name" data-tooltip-id={uniqueTooltipId}>
-              {"displayName" in user && user.displayName
-                ? decode(user.displayName)
-                : null}
-            </Text>
-          )}
+	return (
+		<div
+			className={classNames(styles.user, {
+				[styles.isExpect]: isExpect,
+				[styles.isSystem]: isSystem,
+			})}
+			key={user.id}
+			data-testid="info_panel_members_user"
+		>
+			<Avatar
+				role={type as unknown as AvatarRole}
+				className="avatar"
+				size={AvatarSize.min}
+				source={itemAvatar}
+				userName={
+					isExpect ? "" : "displayName" in user ? user.displayName : user.name
+				}
+				withTooltip={withTooltip}
+				tooltipContent={tooltipContent}
+				hideRoleIcon={!withTooltip}
+				isGroup={"isGroup" in user ? user.isGroup : false}
+				dataTestId="info_panel_members_user_avatar"
+			/>
+			<div className="user_body-wrapper">
+				<div className="name-wrapper">
+					{"isGroup" in user && user.isGroup ? (
+						<Link
+							className="name"
+							type={LinkType.action}
+							onClick={() => onClickGroup?.(user)}
+							title={decode(user.name)}
+							noHover={isSystem}
+							dataTestId="info_panel_members_user_group_link"
+						>
+							{decode(user.name)}
+						</Link>
+					) : (
+						<Text className="name" data-tooltip-id={uniqueTooltipId}>
+							{"displayName" in user && user.displayName
+								? decode(user.displayName)
+								: null}
+						</Text>
+					)}
 
-          {currentUser?.id === user.id ? (
-            <div className="me-label">&nbsp;{`(${t("Common:MeLabel")})`}</div>
-          ) : null}
-        </div>
-        {!("isGroup" in user && user.isGroup) ? (
-          <div className="role-email" style={{ display: "flex" }}>
-            <Text
-              className="label"
-              fontWeight={400}
-              fontSize="12px"
-              truncate
-              color={theme.infoPanel.members.subtitleColor}
-              dir="auto"
-            >
-              {`${typeLabel} | ${(user as TUser).email}`}
-            </Text>
-          </div>
-        ) : null}
-      </div>
+					{currentUser?.id === user.id ? (
+						<div className="me-label">&nbsp;{`(${t("Common:MeLabel")})`}</div>
+					) : null}
+				</div>
+				{!("isGroup" in user && user.isGroup) ? (
+					<div className="role-email" style={{ display: "flex" }}>
+						<Text
+							className="label"
+							fontWeight={400}
+							fontSize="12px"
+							truncate
+							color={theme.infoPanel.members.subtitleColor}
+							dir="auto"
+						>
+							{`${typeLabel} | ${(user as TUser).email}`}
+						</Text>
+					</div>
+				) : null}
+			</div>
 
-      {selectedOption && options && !hideCombobox ? (
-        <div className="role-wrapper">
-          {canChangeUserRole ? (
-            <AccessRightSelect
-              modernView
-              className="role-combobox"
-              selectedOption={selectedOption}
-              usePortalBackdrop
-              onSelect={handleSelectOption}
-              accessOptions={options}
-              noSelect={false}
-              manualWidth="300px"
-              directionY="both"
-              size={ComboBoxSize.content}
-              scaled={false}
-              scaledOptions={false}
-              isAside={isMobile}
-              withBlur={isMobile}
-              isLoading={isLoading}
-              isMobileView={isMobileOnly}
-              // fixedDirection={isMobile}
-              shouldShowBackdrop={isMobile}
-              dataTestId="info_panel_members_user_role_combobox"
-            />
-          ) : (
-            <TooltipContainer
-              as="div"
-              className="disabled-role-combobox"
-              title={t("Common:Role")}
-            >
-              {selectedOption.label}
-            </TooltipContainer>
-          )}
-        </div>
-      ) : null}
-    </div>
-  );
+			{selectedOption && options && !hideCombobox ? (
+				<div className="role-wrapper">
+					{canChangeUserRole ? (
+						<AccessRightSelect
+							modernView
+							className="role-combobox"
+							selectedOption={selectedOption}
+							usePortalBackdrop
+							onSelect={handleSelectOption}
+							accessOptions={options}
+							noSelect={false}
+							manualWidth="300px"
+							directionY="both"
+							size={ComboBoxSize.content}
+							scaled={false}
+							scaledOptions={false}
+							isAside={isMobile}
+							withBlur={isMobile}
+							isLoading={isLoading}
+							isMobileView={isMobileOnly}
+							// fixedDirection={isMobile}
+							shouldShowBackdrop={isMobile}
+							dataTestId="info_panel_members_user_role_combobox"
+						/>
+					) : (
+						<TooltipContainer
+							as="div"
+							className="disabled-role-combobox"
+							title={t("Common:Role")}
+						>
+							{selectedOption.label}
+						</TooltipContainer>
+					)}
+				</div>
+			) : null}
+		</div>
+	);
 };

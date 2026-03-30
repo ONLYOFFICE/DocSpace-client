@@ -34,8 +34,8 @@ import classNames from "classnames";
 
 import SortDesc from "PUBLIC_DIR/images/sort.desc.react.svg";
 
-import { Link } from "@docspace/shared/components/link";
-import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/ui-kit/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
 import { TUser } from "@docspace/shared/api/people/types";
 
 import {

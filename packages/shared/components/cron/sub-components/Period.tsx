@@ -26,7 +26,11 @@
 
 import React, { useMemo, memo } from "react";
 
-import { ComboBox, ComboBoxSize, TOption } from "../../combobox";
+import {
+  ComboBox,
+  ComboBoxSize,
+  TOption,
+} from "@docspace/ui-kit/components/combobox";
 
 import { getLabel, getOptions } from "../Cron.utils";
 import type { PeriodProps, PeriodType } from "../Cron.types";

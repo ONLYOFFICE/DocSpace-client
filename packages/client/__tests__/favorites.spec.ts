@@ -36,6 +36,7 @@ import {
   getFileInfoHandler,
   filesSettingsHandler,
 } from "@docspace/shared/__mocks__/handlers";
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import { expect, test, TEST_PORT } from "./fixtures/base";
 
 test.describe("Favorites", () => {
@@ -63,11 +64,7 @@ test.describe("Favorites", () => {
     await expect(title).toBeVisible();
     await expect(title).toHaveText("New document");
 
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "favorites",
-      "favorites.png",
-    ]);
+    await expectScreenshot(page, ["desktop", "favorites", "favorites.png"]);
   });
 
   test("should handle empty favorites list", async ({
@@ -85,7 +82,7 @@ test.describe("Favorites", () => {
     const emptyView = page.getByTestId("empty-view");
     await expect(emptyView).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page, [
       "desktop",
       "favorites",
       "favorites-empty.png",
@@ -120,7 +117,7 @@ test.describe("Favorites", () => {
     const removeFromFavorites = page.getByTestId("remove-from-favorites");
     await expect(removeFromFavorites).toBeVisible();
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page, [
       "desktop",
       "favorites",
       "favorites-context-menu.png",
@@ -164,7 +161,7 @@ test.describe("Favorites", () => {
 
     const cell = page.locator('[data-testid="favorites-cell-name-0"]');
     await cell.locator('[data-testid="link"]').click({ button: "right" });
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page, [
       "desktop",
       "favorites",
       "favorites-folder-context-menu.png",
@@ -189,7 +186,7 @@ test.describe("Favorites", () => {
 
     const cell = page.locator('[data-testid="favorites-cell-name-1"]');
     await cell.locator('[data-testid="link"]').click({ button: "right" });
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page, [
       "desktop",
       "favorites",
       "favorites-file-via-link-context-menu.png",
@@ -214,7 +211,7 @@ test.describe("Favorites", () => {
 
     const cell = page.locator('[data-testid="favorites-cell-name-2"]');
     await cell.locator('[data-testid="link"]').click({ button: "right" });
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page, [
       "desktop",
       "favorites",
       "favorites-file-from-room-context-menu.png",
@@ -239,7 +236,7 @@ test.describe("Favorites", () => {
 
     const cell = page.locator('[data-testid="favorites-cell-name-3"]');
     await cell.locator('[data-testid="link"]').click({ button: "right" });
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page, [
       "desktop",
       "favorites",
       "favorites-file-shared-context-menu.png",
@@ -264,7 +261,7 @@ test.describe("Favorites", () => {
 
     const cell = page.locator('[data-testid="favorites-cell-name-4"]');
     await cell.locator('[data-testid="link"]').click({ button: "right" });
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page, [
       "desktop",
       "favorites",
       "favorites-archive-context-menu.png",
@@ -289,7 +286,14 @@ test.describe("Favorites", () => {
 
     const cell = page.locator('[data-testid="favorites-cell-name-5"]');
     await cell.locator('[data-testid="link"]').click({ button: "right" });
-    await expect(page).toHaveScreenshot([
+    await page.addStyleTag({
+      content: `
+        .react-tooltip {
+          display: none !important;
+        }
+      `,
+    });
+    await expectScreenshot(page, [
       "desktop",
       "favorites",
       "favorites-image-context-menu.png",

@@ -27,20 +27,22 @@
 import React, { useState } from "react";
 import classNames from "classnames";
 
-import SocketHelper, { SocketCommands } from "../../../../../utils/socket";
-import { Button } from "../../../../../components/button";
-import OperationsProgressButton from "../../../../../components/operations-progress-button";
+import SocketHelper, { SocketCommands } from "@docspace/ui-kit/utils/socket";
+import { Button } from "@docspace/ui-kit/components/button";
+import OperationsProgressButton from "@docspace/ui-kit/components/operations-progress-button";
 import { OPERATIONS_NAME } from "../../../../../constants";
 import { TenantStatus } from "../../../../../enums";
 import { startRestore } from "../../../../../api/portal";
-import { toastr } from "../../../../../components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { isManagement } from "../../../../../utils/common";
 
 import type { ButtonContainerProps } from "./ButtonContainer.types";
+import RestoreConfirmModal from "../restore-confirm-modal";
 import styles from "../../RestoreBackup.module.scss";
 
 const ButtonContainer = (props: ButtonContainerProps) => {
   const {
+    standalone,
     isConfirmed,
     navigate,
     downloadingProgress,
@@ -64,13 +66,25 @@ const ButtonContainer = (props: ButtonContainerProps) => {
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
+  const [isVisibleRestoreConfirmModal, setIsVisibleRestoreConfirmModal] =
+    useState(false);
+  const [isRestoreAcknowledged, setIsRestoreAcknowledged] = useState(false);
   const isMaxProgress = downloadingProgress === 100;
 
-  const onRestoreClick = async () => {
-    if (isCheckedThirdPartyStorage) {
-      const requiredFieldsFilled = isFormReady();
-      if (!requiredFieldsFilled) return;
-    }
+  const onCloseRestoreConfirmModal = () => {
+    if (isLoading) return;
+
+    setIsVisibleRestoreConfirmModal(false);
+    setIsRestoreAcknowledged(false);
+  };
+
+  const onChangeRestoreAcknowledged = (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    setIsRestoreAcknowledged(e.target.checked);
+  };
+
+  const restorePortal = async () => {
     setIsLoading(true);
 
     let storageParams = [];
@@ -136,58 +150,87 @@ const ButtonContainer = (props: ButtonContainerProps) => {
     }
   };
 
+  const onRestoreClick = () => {
+    if (isCheckedThirdPartyStorage) {
+      const requiredFieldsFilled = isFormReady();
+      if (!requiredFieldsFilled) return;
+    }
+
+    if (standalone) {
+      setIsRestoreAcknowledged(false);
+      setIsVisibleRestoreConfirmModal(true);
+      return;
+    }
+
+    void restorePortal();
+  };
+
   const isButtonDisabled =
     isLoading ||
     !isMaxProgress ||
-    !isConfirmed ||
+    (!standalone && !isConfirmed) ||
     !isEnableRestore ||
     !restoreResource;
   const isLoadingButton = isLoading;
 
   return (
-    <div
-      className={classNames(
-        styles.restoreBackupButtonContainer,
-        "restore-backup_button-container",
-      )}
-    >
-      <Button
+    <>
+      <div
         className={classNames(
-          styles.restoreBackupButton,
-          "restore-backup_button",
+          styles.restoreBackupButtonContainer,
+          "restore-backup_button-container",
         )}
-        label={t("Common:Restore")}
-        onClick={onRestoreClick}
-        primary
-        isDisabled={isButtonDisabled}
-        isLoading={isLoadingButton}
-        size={buttonSize}
-        tabIndex={10}
-        testId="restore_backup_button"
-      />
+      >
+        <Button
+          className={classNames(
+            styles.restoreBackupButton,
+            "restore-backup_button",
+          )}
+          label={t("Common:Restore")}
+          onClick={onRestoreClick}
+          primary
+          isDisabled={isButtonDisabled}
+          isLoading={isLoadingButton}
+          size={buttonSize}
+          tabIndex={10}
+          testId="restore_backup_button"
+        />
 
-      {isBackupProgressVisible ? (
-        <OperationsProgressButton
-          operationsAlert={operationsAlert}
-          operationsCompleted={downloadingProgress === 100}
-          operations={[
-            {
-              label:
-                downloadingProgress === 100
-                  ? t("Backup")
-                  : downloadingProgress === 0
-                    ? t("PreparingBackup")
-                    : t("BackupProgress", { progress: downloadingProgress }),
-              percent: downloadingProgress,
-              operation: OPERATIONS_NAME.backup,
-              alert: false,
-              completed: false,
-            },
-          ]}
-          clearOperationsData={() => setIsBackupProgressVisible(false)}
+        {isBackupProgressVisible ? (
+          <OperationsProgressButton
+            operationsAlert={operationsAlert}
+            operationsCompleted={downloadingProgress === 100}
+            operations={[
+              {
+                label:
+                  downloadingProgress === 100
+                    ? t("Backup")
+                    : downloadingProgress === 0
+                      ? t("PreparingBackup")
+                      : t("BackupProgress", { progress: downloadingProgress }),
+                percent: downloadingProgress,
+                operation: OPERATIONS_NAME.backup,
+                alert: false,
+                completed: false,
+              },
+            ]}
+            clearOperationsData={() => setIsBackupProgressVisible(false)}
+          />
+        ) : null}
+      </div>
+
+      {standalone ? (
+        <RestoreConfirmModal
+          visible={isVisibleRestoreConfirmModal}
+          isLoading={isLoading}
+          isRestoreAcknowledged={isRestoreAcknowledged}
+          onClose={onCloseRestoreConfirmModal}
+          onChangeRestoreAcknowledged={onChangeRestoreAcknowledged}
+          onConfirm={() => void restorePortal()}
+          t={t}
         />
       ) : null}
-    </div>
+    </>
   );
 };
 

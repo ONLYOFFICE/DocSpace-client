@@ -28,7 +28,7 @@ import React from "react";
 
 import styled, { css } from "styled-components";
 import { tablet } from "@docspace/shared/utils";
-import { TColorScheme } from "@docspace/shared/themes";
+import { TColorScheme } from "@docspace/ui-kit/providers/theme/themes";
 import hexRgb from "hex-rgb";
 import { SelectIconProps, ILogo } from "../RoomLogoCoverDialog.types";
 
@@ -115,15 +115,16 @@ const StyledIconContainer = styled.div<{
   ${(props) =>
     props.isSelected &&
     props.$currentColorScheme &&
+    props.$currentColorScheme.main?.accent &&
     css`
-      background-color: ${hexRgb(props.$currentColorScheme.main?.accent, {
+      background-color: ${hexRgb(props.$currentColorScheme.main.accent, {
         alpha: 0.2,
         format: "css",
       })};
 
       svg {
         path {
-          fill: ${props.$currentColorScheme.main?.accent};
+          fill: ${props.$currentColorScheme.main.accent};
         }
       }
     `}

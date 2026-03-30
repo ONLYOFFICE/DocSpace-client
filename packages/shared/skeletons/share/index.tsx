@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { Text } from "../../components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { TTranslation } from "../../types";
 import { RectangleSkeleton, CircleSkeleton } from "../index";
 import styles from "./Share.module.scss";

@@ -26,7 +26,7 @@
 
 import classNames from "classnames";
 
-import { RowContainer } from "@docspace/shared/components/rows";
+import { RowContainer } from "@docspace/ui-kit/components/rows";
 
 import SessionsRow from "./SessionsRow";
 import styles from "../../active-sessions.module.scss";

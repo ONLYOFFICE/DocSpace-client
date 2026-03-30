@@ -27,68 +27,70 @@
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Button } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { Button } from "@docspace/ui-kit/components/button";
+import { Text } from "@docspace/ui-kit/components/text";
 import { QuotaForm } from "@docspace/shared/components/quota-form";
 
 import styles from "./ChangeQuota.module.scss";
 
 const ChangeQuotaDialog = (props) => {
-  const {
-    visible,
-    onSaveClick,
-    onCloseClick,
-    onSetQuotaBytesSize,
-    isError,
-    isLoading,
-    initialSize,
-    size,
-  } = props;
-  const { t } = useTranslation("Common");
-  return (
-    <ModalDialog visible={visible} onClose={onCloseClick}>
-      <ModalDialog.Header>{t("Common:ChangeQuota")}</ModalDialog.Header>
-      <ModalDialog.Body>
-        <div className={styles.content}>
-          <Text>{t("Common:SetQuotaStorageLimit")}</Text>
-          <QuotaForm
-            onSetQuotaBytesSize={onSetQuotaBytesSize}
-            isLoading={isLoading}
-            isError={isError}
-            initialSize={initialSize}
-            isAutoFocussed
-          />
-        </div>
-      </ModalDialog.Body>
-      <ModalDialog.Footer>
-        <Button
-          label={t("Common:OKButton")}
-          size="normal"
-          primary
-          onClick={onSaveClick}
-          isLoading={isLoading}
-          isDisabled={initialSize == size || size.trim() === ""}
-          scale
-        />
-        <Button
-          label={t("Common:CancelButton")}
-          size="normal"
-          onClick={onCloseClick}
-          isDisabled={isLoading}
-          scale
-        />
-      </ModalDialog.Footer>
-    </ModalDialog>
-  );
+	const {
+		visible,
+		onSaveClick,
+		onCloseClick,
+		onSetQuotaBytesSize,
+		isError,
+		isLoading,
+		initialSize,
+		size,
+	} = props;
+	const { t } = useTranslation("Common");
+	return (
+		<ModalDialog visible={visible} onClose={onCloseClick}>
+			<ModalDialog.Header>{t("Common:ChangeQuota")}</ModalDialog.Header>
+			<ModalDialog.Body>
+				<div className={styles.content}>
+					<Text>{t("Common:SetQuotaStorageLimit")}</Text>
+					<QuotaForm
+						onSetQuotaBytesSize={onSetQuotaBytesSize}
+						isLoading={isLoading}
+						isError={isError}
+						initialSize={initialSize}
+						isAutoFocussed
+					/>
+				</div>
+			</ModalDialog.Body>
+			<ModalDialog.Footer>
+				<Button
+					label={t("Common:OKButton")}
+					size="normal"
+					primary
+					onClick={onSaveClick}
+					isLoading={isLoading}
+					isDisabled={initialSize == size || size.trim() === ""}
+					scale
+					testId="change_quota_dialog_submit"
+				/>
+				<Button
+					label={t("Common:CancelButton")}
+					size="normal"
+					onClick={onCloseClick}
+					isDisabled={isLoading}
+					scale
+					testId="change_quota_dialog_cancel"
+				/>
+			</ModalDialog.Footer>
+		</ModalDialog>
+	);
 };
 
 export default inject(({ dialogsStore }) => {
-  const { changeQuotaDialogVisible, setChangeQuotaDialogVisible } =
-    dialogsStore;
+	const { changeQuotaDialogVisible, setChangeQuotaDialogVisible } =
+		dialogsStore;
 
-  return {
-    changeQuotaDialogVisible,
-    setChangeQuotaDialogVisible,
-  };
+	return {
+		changeQuotaDialogVisible,
+		setChangeQuotaDialogVisible,
+	};
 })(observer(ChangeQuotaDialog));

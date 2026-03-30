@@ -25,51 +25,51 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type {
-  FileInfoType,
-  FilesSelectorSettings,
+	FileInfoType,
+	FilesSelectorSettings,
 } from "@docspace/shared/components/files-selector-input/FilesSelectorInput.types";
-import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
+import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
 
 export interface InjectedFilesSelectorInputWrapperProps
-  extends Pick<TStore["settingsStore"], "currentDeviceType">,
-    Pick<TStore["dialogsStore"], "setBackupToPublicRoomVisible">,
-    Pick<
-      TStore["filesSelectorInput"],
-      | "basePath"
-      | "newPath"
-      | "setNewPath"
-      | "setBasePath"
-      | "toDefault"
-      | "isErrorPath"
-    > {
-  filesSelectorSettings: FilesSelectorSettings;
+	extends Pick<TStore["settingsStore"], "currentDeviceType">,
+		Pick<TStore["dialogsStore"], "setBackupToPublicRoomVisible">,
+		Pick<
+			TStore["filesSelectorInput"],
+			| "basePath"
+			| "newPath"
+			| "setNewPath"
+			| "setBasePath"
+			| "toDefault"
+			| "isErrorPath"
+		> {
+	filesSelectorSettings: FilesSelectorSettings;
 }
 
 export interface ExternalFilesSelectorInputWrapperProps {
-  id?: string | number;
-  isThirdParty?: boolean;
-  isRoomsOnly?: boolean;
-  isSelectFolder?: boolean;
-  onSelectFolder?: (
-    value: number | string | undefined,
-    breadCrumbs: TBreadCrumb,
-  ) => void;
-  onSelectFile?: (fileInfo: FileInfoType, breadCrumbs?: TBreadCrumb[]) => void;
-  isDisabled?: boolean;
-  isError?: boolean;
-  maxWidth?: string;
-  withoutInitPath?: boolean;
-  rootThirdPartyId?: string;
-  filterParam?: string;
-  descriptionText?: string;
-  className?: string;
-  isSelect?: boolean;
-  isRoomBackup?: boolean;
-  isDocumentIcon?: boolean;
-  withCreate?: boolean;
-  withAIAgentsTreeFolder?: boolean;
+	id?: string | number;
+	isThirdParty?: boolean;
+	isRoomsOnly?: boolean;
+	isSelectFolder?: boolean;
+	onSelectFolder?: (
+		value: number | string | undefined,
+		breadCrumbs: TBreadCrumb,
+	) => void;
+	onSelectFile?: (fileInfo: FileInfoType, breadCrumbs?: TBreadCrumb[]) => void;
+	isDisabled?: boolean;
+	isError?: boolean;
+	maxWidth?: string;
+	withoutInitPath?: boolean;
+	rootThirdPartyId?: string;
+	filterParam?: string;
+	descriptionText?: string;
+	className?: string;
+	isSelect?: boolean;
+	isRoomBackup?: boolean;
+	isDocumentIcon?: boolean;
+	withCreate?: boolean;
+	withAIAgentsTreeFolder?: boolean;
 }
 
 export interface FilesSelectorInputWrapperProps
-  extends InjectedFilesSelectorInputWrapperProps,
-    ExternalFilesSelectorInputWrapperProps {}
+	extends InjectedFilesSelectorInputWrapperProps,
+		ExternalFilesSelectorInputWrapperProps {}

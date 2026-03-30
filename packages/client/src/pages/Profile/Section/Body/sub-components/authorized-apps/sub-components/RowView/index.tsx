@@ -1,7 +1,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import { RowContainer } from "@docspace/shared/components/rows";
+import { RowContainer } from "@docspace/ui-kit/components/rows";
 
 import OAuthStore from "SRC_DIR/store/OAuthStore";
 

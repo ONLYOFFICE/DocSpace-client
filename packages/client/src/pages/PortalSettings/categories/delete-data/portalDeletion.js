@@ -27,12 +27,12 @@
 import React, { useEffect, useState } from "react";
 import { withTranslation } from "react-i18next";
 import { inject } from "mobx-react";
-import { Text } from "@docspace/shared/components/text";
-import { Button } from "@docspace/shared/components/button";
-import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Button } from "@docspace/ui-kit/components/button";
+import { Link } from "@docspace/ui-kit/components/link";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { DeletePortalDialog } from "SRC_DIR/components/dialogs";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { sendDeletePortalEmail } from "@docspace/shared/api/portal";
 import { isDesktop } from "@docspace/shared/utils";
 import { EmployeeActivationStatus } from "@docspace/shared/enums";

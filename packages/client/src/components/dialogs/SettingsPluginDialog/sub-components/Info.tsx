@@ -26,9 +26,11 @@
 
 import { LANGUAGE } from "@docspace/shared/constants";
 
-import { Text } from "@docspace/shared/components/text";
-import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
-import { getCorrectDate, getCookie, classNames } from "@docspace/shared/utils";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
+import { classNames } from "@docspace/shared/utils";
+import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
+import { getCookie } from "@docspace/ui-kit/utils/cookie";
 
 import PluginIncompatibleSvg from "PUBLIC_DIR/images/plugin.incompatible.react.svg";
 import { PluginStatus } from "SRC_DIR/helpers/plugins/enums";

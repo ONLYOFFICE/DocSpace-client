@@ -92,6 +92,13 @@ export const settingsTree = [
             link: "ad-management",
             tKey: "AdManagement",
           },
+          {
+            id: "portal-settings_catalog-ai-services-management",
+            key: "0-0-6",
+            icon: "",
+            link: "ai-services-management",
+            tKey: "AiServicesManagement",
+          },
         ],
       },
       {
@@ -568,6 +575,13 @@ export const settingsTree = [
             link: "docspace",
             tKey: "Common:ProductName",
           },
+          {
+            id: "portal-settings_catalog-javascript-sdk_uploader",
+            key: "8-1-7",
+            icon: "",
+            link: "uploader",
+            tKey: "Common:Uploader",
+          },
         ],
       },
       {
@@ -645,28 +659,26 @@ export const settingsTree = [
         isCategory: true,
       },
       {
-        id: "portal-settings_catalog-wallet",
+        id: "portal-settings_catalog-payment-method",
         key: "10-1",
+        icon: "",
+        link: "payment-method",
+        tKey: "PaymentMethod",
+        isCategory: true,
+      },
+      {
+        id: "portal-settings_catalog-wallet",
+        key: "10-2",
         icon: "",
         link: "wallet",
         tKey: "Wallet",
         isCategory: true,
       },
-    ],
-  },
-  {
-    id: "portal-settings_catalog-services",
-    key: "11",
-    type: PageType.services,
-    link: "services",
-    tKey: "Services",
-    isHeader: true,
-    children: [
       {
         id: "portal-settings_catalog-services",
-        key: "11-0",
+        key: "10-3",
         icon: "",
-        link: "",
+        link: "services",
         tKey: "Services",
         isCategory: true,
       },
@@ -674,7 +686,7 @@ export const settingsTree = [
   },
   {
     id: "portal-settings_catalog-bonus",
-    key: "12",
+    key: "11",
     type: PageType.bonus,
     link: "bonus",
     tKey: "Common:Bonus",
@@ -682,7 +694,7 @@ export const settingsTree = [
     children: [
       {
         id: "portal-settings_catalog-portal-bonus",
-        key: "12-0",
+        key: "11-0",
         icon: "",
         link: "",
         tKey: "Common:FreeAccessToLicensedVersion",
@@ -816,3 +828,4 @@ export const settingsTreeFull = [
     link: "statistics",
   },
 ];
+

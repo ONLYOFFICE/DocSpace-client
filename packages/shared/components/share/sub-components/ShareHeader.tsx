@@ -27,7 +27,7 @@
 import React, { FC, ReactNode } from "react";
 import classNames from "classnames";
 
-import { Text } from "../../text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import styles from "../Share.module.scss";
 

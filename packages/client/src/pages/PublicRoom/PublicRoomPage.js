@@ -28,10 +28,10 @@ import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation, Trans } from "react-i18next";
 import { useLocation, Outlet } from "react-router";
-import Section from "@docspace/shared/components/section";
-import { toastr } from "@docspace/shared/components/toast";
-import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
+import Section from "@docspace/ui-kit/components/section";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link } from "@docspace/ui-kit/components/link";
 import { ShareAccessRights } from "@docspace/shared/enums";
 import { isPublicRoom } from "@docspace/shared/utils/common";
 
@@ -42,7 +42,7 @@ import FilesPanels from "../../components/FilesPanels";
 import SelectionArea from "../Home/SelectionArea/FilesSelectionArea";
 import MediaViewer from "../Home/MediaViewer";
 import { usePublic, useSDK } from "../Home/Hooks";
-import { StyledToast } from "./StyledPublicRoom";
+import styles from "./PublicRoom.module.scss";
 
 const PUBLIC_SIGN_IN_TOAST = "showPublicSignInToast";
 
@@ -133,7 +133,7 @@ const PublicRoomPage = (props) => {
     );
 
     const toastText = (
-      <StyledToast>
+      <div className={styles.toast}>
         <Text fontSize="12px" fontWeight={400}>
           {content}
         </Text>
@@ -145,7 +145,7 @@ const PublicRoomPage = (props) => {
         >
           {t("Common:LoginButton")}
         </Link>
-      </StyledToast>
+      </div>
     );
 
     toastr.info(toastText);

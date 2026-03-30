@@ -30,12 +30,12 @@ import { useTranslation } from "react-i18next";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { toastr } from "@docspace/shared/components/toast";
+} from "@docspace/ui-kit/components/modal-dialog";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { createGroup } from "@docspace/shared/api/groups";
 import { TUser } from "@docspace/shared/api/people/types";
-import { TOnSubmit } from "@docspace/shared/components/selector/Selector.types";
+import { TOnSubmit } from "@docspace/ui-kit/components/selector";
 
 import { StyledBodyContent } from "./CreateEditGroupDialog.styled";
 import { GroupParams } from "./types";
@@ -153,9 +153,7 @@ const CreateGroupDialog = ({ visible, onClose }: CreateGroupDialogProps) => {
         //   isScrollLocked={isScrollLocked}
         //   isOauthWindowOpen={isOauthWindowOpen}
       >
-        <ModalDialog.Header>
-          {t("PeopleTranslations:CreateGroup")}
-        </ModalDialog.Header>
+        <ModalDialog.Header>{t("Common:CreateGroup")}</ModalDialog.Header>
 
         <ModalDialog.Body>
           <StyledBodyContent>

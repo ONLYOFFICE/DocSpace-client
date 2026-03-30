@@ -29,75 +29,75 @@ import debounce from "lodash/debounce";
 
 import XIconReactSvgUrl from "PUBLIC_DIR/images/x.react.svg?url";
 import {
-  InputSize,
-  InputType,
-  TextInput,
-} from "@docspace/shared/components/text-input";
-import { IconButton } from "@docspace/shared/components/icon-button";
+	InputSize,
+	InputType,
+	TextInput,
+} from "@docspace/ui-kit/components/text-input";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 
 import commonStyles from "../helpers/Common.module.scss";
 
 export type SearchProps = {
-  setSearchValue: (value: string) => void;
-  resetSearch: VoidFunction;
+	setSearchValue: (value: string) => void;
+	resetSearch: VoidFunction;
 };
 
 const Search = ({ setSearchValue, resetSearch }: SearchProps) => {
-  const [value, setValue] = useState("");
+	const [value, setValue] = useState("");
 
-  const onClose = () => {
-    resetSearch?.();
-  };
+	const onClose = () => {
+		resetSearch?.();
+	};
 
-  const onEscapeUp = (e: KeyboardEvent) => {
-    if (e.key === "Esc" || e.key === "Escape") {
-      e.stopPropagation();
-      onClose();
-    }
-  };
+	const onEscapeUp = (e: KeyboardEvent) => {
+		if (e.key === "Esc" || e.key === "Escape") {
+			e.stopPropagation();
+			onClose();
+		}
+	};
 
-  const debouncedSearch = useCallback(
-    debounce((debouncedValue: string) => setSearchValue?.(debouncedValue), 300),
-    [],
-  );
+	const debouncedSearch = useCallback(
+		debounce((debouncedValue: string) => setSearchValue?.(debouncedValue), 300),
+		[],
+	);
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.currentTarget.value;
-    setValue(newValue);
+	const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+		const newValue = e.currentTarget.value;
+		setValue(newValue);
 
-    debouncedSearch(newValue.trim());
-  };
+		debouncedSearch(newValue.trim());
+	};
 
-  useEffect(() => {
-    window.addEventListener("keyup", onEscapeUp);
+	useEffect(() => {
+		window.addEventListener("keyup", onEscapeUp);
 
-    return () => window.removeEventListener("keyup", onEscapeUp);
-  }, []);
+		return () => window.removeEventListener("keyup", onEscapeUp);
+	}, []);
 
-  useEffect(() => {
-    return () => debouncedSearch.cancel();
-  }, [debouncedSearch]);
+	useEffect(() => {
+		return () => debouncedSearch.cancel();
+	}, [debouncedSearch]);
 
-  return (
-    <div className={commonStyles.searchContainer}>
-      <TextInput
-        id="info_panel_search_input"
-        type={InputType.text}
-        size={InputSize.base}
-        scale
-        onChange={onChange}
-        value={value}
-        isAutoFocussed
-      />
-      <IconButton
-        id="search_close"
-        iconName={XIconReactSvgUrl}
-        size={16}
-        onClick={onClose}
-        isClickable
-      />
-    </div>
-  );
+	return (
+		<div className={commonStyles.searchContainer}>
+			<TextInput
+				id="info_panel_search_input"
+				type={InputType.text}
+				size={InputSize.base}
+				scale
+				onChange={onChange}
+				value={value}
+				isAutoFocussed
+			/>
+			<IconButton
+				id="search_close"
+				iconName={XIconReactSvgUrl}
+				size={16}
+				onClick={onClose}
+				isClickable
+			/>
+		</div>
+	);
 };
 
 export default Search;

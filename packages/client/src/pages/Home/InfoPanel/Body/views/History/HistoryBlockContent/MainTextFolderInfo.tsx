@@ -30,7 +30,7 @@ import classNames from "classnames";
 import { TTranslation } from "@docspace/shared/types";
 import { FolderType } from "@docspace/shared/enums";
 import { FeedAction } from "@docspace/shared/api/rooms/types";
-import { TooltipContainer } from "@docspace/shared/components/tooltip";
+import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 
 import { Feed } from "./HistoryBlockContent.types";
 import styles from "../History.module.scss";

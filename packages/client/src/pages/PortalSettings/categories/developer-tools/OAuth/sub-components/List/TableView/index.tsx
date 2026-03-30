@@ -29,7 +29,7 @@ import { inject, observer } from "mobx-react";
 import elementResizeDetectorMaker from "element-resize-detector";
 
 import { UserStore } from "@docspace/shared/store/UserStore";
-import { TableBody } from "@docspace/shared/components/table";
+import { TableBody } from "@docspace/ui-kit/components/table";
 
 import OAuthStore from "SRC_DIR/store/OAuthStore";
 

@@ -26,17 +26,17 @@
 
 import React from "react";
 import { withTranslation } from "react-i18next";
-import { FieldContainer } from "@docspace/shared/components/field-container";
-import { toastr } from "@docspace/shared/components/toast";
-import { TextInput } from "@docspace/shared/components/text-input";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { TextInput } from "@docspace/ui-kit/components/text-input";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router";
 import { isMobileDevice } from "@docspace/shared/utils";
 import withLoading from "SRC_DIR/HOCs/withLoading";
-import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link } from "@docspace/ui-kit/components/link";
 import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 import { DeviceType } from "@docspace/shared/enums";

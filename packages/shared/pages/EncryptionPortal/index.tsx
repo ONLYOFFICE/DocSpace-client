@@ -29,9 +29,9 @@ import { useTranslation } from "react-i18next";
 
 import classNames from "classnames";
 
-import { Text } from "../../components/text";
-import { PreparationPortalProgress } from "../../components/preparation-portal-progress";
-import ErrorContainer from "../../components/error-container/ErrorContainer";
+import { Text } from "@docspace/ui-kit/components/text";
+import { PreparationPortalProgress } from "@docspace/ui-kit/components/progress-bar";
+import ErrorContainer from "@docspace/ui-kit/components/error-container/ErrorContainer";
 import PreparationPortalLoader from "../../skeletons/preparation-portal";
 
 import { EncryptionStatus } from "../../enums";
@@ -41,7 +41,7 @@ import {
   getEncryptionSettings,
 } from "../../api/settings";
 
-import SocketHelper, { SocketEvents } from "../../utils/socket";
+import SocketHelper, { SocketEvents } from "@docspace/ui-kit/utils/socket";
 import { returnToPortal } from "./EncryptionPortal.utils";
 import { EncryptionPortalProps } from "./EncryptionPortal.types";
 

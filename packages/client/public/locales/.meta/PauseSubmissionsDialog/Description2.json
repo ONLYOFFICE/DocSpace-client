@@ -1,0 +1,28 @@
+{
+  "key_path": "Description2",
+  "content": "You can resume it later to continue collecting responses.",
+  "content_en_sha1_hash": "cb96551fcc74b4c7b2ae7d592140c4146c3cc0de",
+  "created_at": "2026-03-20T09:07:41.570Z",
+  "updated_at": "2026-03-20T09:52:20.983Z",
+  "comment": {
+    "text": "This text appears within a dialog that allows users to pause submissions. It explains that a paused collection of responses can be resumed at a later time. The key provides clarifying information following a previous description within the same dialog.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T09:52:20.983Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/PauseSubmissionsDialog/index.tsx",
+      "line_number": 89,
+      "context": "<ModalDialog.Body>\n <Text fontSize=\"13px\" fontWeight={400}>\n {t(\"PauseSubmissionsDialog:Description1\")}\n </Text>\n <Text fontSize=\"13px\" fontWeight={400} style={{ marginTop: \"8px\" }}>\n {t(\"PauseSubmissionsDialog:Description2\")}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"pause-submissions-dialog_edit\"",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

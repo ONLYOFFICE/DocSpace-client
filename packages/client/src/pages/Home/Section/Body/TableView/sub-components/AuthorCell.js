@@ -30,7 +30,7 @@ import { useTranslation } from "react-i18next";
 
 import DefaultUserPhotoSize32PngUrl from "PUBLIC_DIR/images/default_user_photo_size_32-32.png";
 
-import { Avatar } from "@docspace/shared/components/avatar";
+import { Avatar } from "@docspace/ui-kit/components/avatar";
 
 import { StyledText, StyledAuthorCell } from "./CellStyles";
 

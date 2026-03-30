@@ -26,49 +26,49 @@
 
 import React from "react";
 
-import { RectangleSkeleton } from "../../../rectangle";
+import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 import styles from "../Body.module.scss";
 
 const HistoryLoader = () => {
-  return (
-    <div className={styles.historyLoader} data-testid="history-loader">
-      <div className={styles.historySubtitleLoader}>
-        <RectangleSkeleton width="111px" height="16px" borderRadius="3px" />
-        <RectangleSkeleton width="16px" height="16px" borderRadius="3px" />
-      </div>
+	return (
+		<div className={styles.historyLoader} data-testid="history-loader">
+			<div className={styles.historySubtitleLoader}>
+				<RectangleSkeleton width="111px" height="16px" borderRadius="3px" />
+				<RectangleSkeleton width="16px" height="16px" borderRadius="3px" />
+			</div>
 
-      {[...Array(5).keys()].map((i) => (
-        <div className={styles.historyBlockLoader} key={i}>
-          <div className="content">
-            <RectangleSkeleton
-              className="avatar"
-              width="32px"
-              height="32px"
-              borderRadius="50%"
-            />
-            <div className="message">
-              <RectangleSkeleton
-                width="107px"
-                height="16px"
-                borderRadius="3px"
-              />
-              <RectangleSkeleton
-                width="176px"
-                height="16px"
-                borderRadius="3px"
-              />
-            </div>
-            <RectangleSkeleton
-              className="date"
-              width="107px"
-              height="16px"
-              borderRadius="3px"
-            />
-          </div>
-        </div>
-      ))}
-    </div>
-  );
+			{[...Array(5).keys()].map((i) => (
+				<div className={styles.historyBlockLoader} key={i}>
+					<div className="content">
+						<RectangleSkeleton
+							className="avatar"
+							width="32px"
+							height="32px"
+							borderRadius="50%"
+						/>
+						<div className="message">
+							<RectangleSkeleton
+								width="107px"
+								height="16px"
+								borderRadius="3px"
+							/>
+							<RectangleSkeleton
+								width="176px"
+								height="16px"
+								borderRadius="3px"
+							/>
+						</div>
+						<RectangleSkeleton
+							className="date"
+							width="107px"
+							height="16px"
+							borderRadius="3px"
+						/>
+					</div>
+				</div>
+			))}
+		</div>
+	);
 };
 
 export default HistoryLoader;

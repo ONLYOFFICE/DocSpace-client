@@ -28,13 +28,14 @@ import { http } from "msw";
 import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 export const PATH = "people/:userId";
-export const PATH_CHANGE_AUTH_DATA = "people/*/password";
+export const PATH_CHANGE_AUTH_DATA = "people/*/email";
 export const PATH_ACTIVATION_STATUS = "people/activationstatus*";
 export const PATH_UPDATE_USER = "people/*";
 export const PATH_DELETE_USER = "people/@self";
 export const PATH_USER_BY_EMAIL = "people/email*";
 export const PATH_ADD_GUEST = "people/guests/share/approve";
 export const PATH_UPDATE_USER_CULTURE = "people/*/culture";
+export const PATH_USER_EXISTS = "people/exists*";
 
 export type UserType = "owner" | "admin" | "roomAdmin" | "visitor" | "regular";
 
@@ -233,6 +234,10 @@ export const updateUserCultureResolver = (culture: string) => {
   return new Response(JSON.stringify({ response: data }));
 };
 
+export const userExistsResolver = (isUserExist: boolean): Response => {
+  return new Response(JSON.stringify({ response: isUserExist }));
+};
+
 export const selfHandler = (
   port: string,
   errorStatus: 400 | 404 | null = null,
@@ -375,4 +380,13 @@ export const selfHandlerWithCulture = (port: string, culture: string) => {
     };
     return new Response(JSON.stringify({ response: data }));
   });
+};
+
+export const userExistsHandler = (port: string, isUserExist = false) => {
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_USER_EXISTS}`,
+    () => {
+      return userExistsResolver(isUserExist);
+    },
+  );
 };

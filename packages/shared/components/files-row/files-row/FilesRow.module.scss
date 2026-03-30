@@ -26,8 +26,8 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-@use "../../../styles/variables";
-@use "../../../styles/mixins";
+@use "@docspace/ui-kit/styles/variables";
+@use "@docspace/ui-kit/styles/mixins";
 
 .filesRow {
   height: 56px;
@@ -37,7 +37,7 @@
 
   &.palmCursor {
     cursor:
-      url(~PUBLIC_DIR/images/cursor.palm.react.svg?url) 8 0,
+      url(/static/images/cursor.palm.react.svg) 8 0,
       auto;
   }
 

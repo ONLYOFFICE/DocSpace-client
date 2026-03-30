@@ -28,7 +28,7 @@
 
 import { useTranslation } from "react-i18next";
 
-import { Link, LinkType } from "@docspace/shared/components/link";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import RecoverAccessModalDialog from "@docspace/shared/dialogs/recover-access-modal-dialog/RecoverAccessModalDialog";
 import { RecaptchaType } from "@docspace/shared/enums";
 

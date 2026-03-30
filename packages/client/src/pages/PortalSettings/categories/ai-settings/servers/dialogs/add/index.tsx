@@ -28,14 +28,14 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import type { TAddNewServer } from "@docspace/shared/api/ai/types";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
-import { type TData, toastr } from "@docspace/shared/components/toast";
-import { Text } from "@docspace/shared/components/text";
-import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
+} from "@docspace/ui-kit/components/modal-dialog";
+import { type TData, toastr } from "@docspace/ui-kit/components/toast";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";

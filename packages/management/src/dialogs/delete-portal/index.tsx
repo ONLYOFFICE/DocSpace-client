@@ -31,13 +31,13 @@ import { useTranslation, Trans } from "react-i18next";
 import { observer } from "mobx-react";
 import { useRouter } from "next/navigation";
 
-import { Text } from "@docspace/shared/components/text";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
-import { toastr } from "@docspace/shared/components/toast";
+} from "@docspace/ui-kit/components/modal-dialog";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { deletePortal } from "@docspace/shared/api/management";
 
@@ -77,6 +77,7 @@ export const DeletePortalDialog = observer(() => {
         toastr.success(
           <Trans
             i18nKey="DeleteRequestSuccess"
+            ns="Management"
             values={{
               productName: t("Common:ProductName"),
               email,
@@ -117,6 +118,7 @@ export const DeletePortalDialog = observer(() => {
             </Text>
             <Trans
               i18nKey="DeleteSetupPortalText"
+              ns="Management"
               values={{
                 productName: t("Common:ProductName"),
                 domain,
@@ -130,6 +132,7 @@ export const DeletePortalDialog = observer(() => {
         ) : (
           <Trans
             i18nKey="DeleteEmptyPortalText"
+            ns="Management"
             values={{
               domain,
             }}

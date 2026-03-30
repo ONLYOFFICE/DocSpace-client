@@ -26,8 +26,8 @@
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow-left.react.svg";
 
-import { Button, ButtonSize } from "../../components/button";
-import { Text } from "../../components/text";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Text } from "@docspace/ui-kit/components/text";
 import type { PanelCard } from "./share-form-dialog.types";
 import styles from "./share-form-dialog.module.scss";
 

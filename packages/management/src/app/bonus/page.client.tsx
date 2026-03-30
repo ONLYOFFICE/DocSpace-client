@@ -26,7 +26,7 @@
 
 "use client";
 
-import { LoaderWrapper } from "@docspace/shared/components/loader-wrapper";
+import { LoaderWrapper } from "@docspace/ui-kit/components/loader-wrapper";
 import { Bonus } from "@docspace/shared/pages/Payments/Bonus";
 import { IBonusProps } from "@docspace/shared/pages/Payments/Bonus/Bonus.types";
 

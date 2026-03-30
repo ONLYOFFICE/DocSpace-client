@@ -26,7 +26,7 @@
 
 import { inject, observer } from "mobx-react";
 
-import { Consumer } from "@docspace/shared/utils/context";
+import { Consumer } from "@docspace/ui-kit/utils/context";
 
 import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
 import { TContactsViewAs } from "SRC_DIR/helpers/contacts";

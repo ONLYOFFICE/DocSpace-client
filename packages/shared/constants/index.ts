@@ -32,22 +32,10 @@ import ShareLinkedinReactSvg from "PUBLIC_DIR/images/share.linkedin.react.svg";
 import ShareMicrosoftReactSvg from "PUBLIC_DIR/images/share.microsoft.react.svg";
 import ShareZoomReactSvg from "PUBLIC_DIR/images/share.zoom.react.svg";
 import ShareWeixinReactSvg from "PUBLIC_DIR/images/share.weixin.react.svg";
-import { globalColors } from "../themes/globalColors";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { FileFillingFormStatus } from "../enums";
 
-export const LOADER_STYLE = Object.freeze({
-  title: "",
-  width: "100%",
-  height: "32",
-  backgroundColor: globalColors.darkBlack,
-  foregroundColor: globalColors.darkBlack,
-  backgroundOpacity: 0.1,
-  foregroundOpacity: 0.15,
-  borderRadius: "3",
-  radius: "3",
-  speed: 2,
-  animate: true,
-});
+export { LOADER_STYLE } from "@docspace/ui-kit/constants";
 
 export const TOAST_FOLDER_PUBLIC_KEY = "toast_folder_public_key";
 export const MANAGER = "manager";
@@ -58,7 +46,10 @@ export const USERS = "users";
 export const USERS_IN_ROOM = "usersInRoom";
 export const YEAR_KEY = "year";
 export const BACKUP_SERVICE = "backup";
-export const AI_TOOLS = "aitools";
+export const AI_TOOLS = "ai-tools";
+export const AI_ENUM = "aitools";
+export const STORAGE_ENUM = "storage";
+export const DISK_STORAGE = "disk-storage";
 export const WEB_SEARCH = "websearch";
 export const FREE_BACKUP = "free_backup";
 export const PDF_FORM_DIALOG_KEY = "pdf_form_dialog";
@@ -71,7 +62,6 @@ export const OPEN_BACKUP_CODES_DIALOG = "openBackupCodesDialog";
 export const COUNT_FOR_SHOWING_BAR = 2;
 export const PERCENTAGE_FOR_SHOWING_BAR = 90;
 
-export const LANGUAGE = "asc_language";
 export const TIMEZONE = "timezone";
 
 export const MOBILE_FOOTER_HEIGHT = "64px";
@@ -165,38 +155,17 @@ export const FILLING_STATUS_ID = "fillingStatusDialog" as const;
 export const MEDIA_VIEW_URL = "/media/view/";
 export const PUBLIC_MEDIA_VIEW_URL = "/rooms/share/media/view";
 
-export const RTL_LANGUAGES = Object.freeze([
-  "ar",
-  "arc",
-  "dv",
-  "fa",
-  "ha",
-  "he",
-  "khw",
-  "ks",
-  "ku",
-  "ps",
-  "ur",
-  "yi",
-]);
-
 export const DEFAULT_FONT_FAMILY = "Open Sans, sans-serif, Arial";
 
 export const ONE_MEGABYTE = 1024 * 1024;
 export const COMPRESSION_RATIO = 2;
 export const NO_COMPRESSION_RATIO = 1;
 
-// Contains system fonts used in mac, ios, windows, android and linux
-export const SYSTEM_FONT_FAMILY =
-  "-apple-system, system-ui, BlinkMacSystemFont, Segoe UI, Arial, sans-serif, Roboto, Noto Sans Arabic, Geeza Pro, Traditional Arabic, Noto Sans";
-
 export const HTML_EXST = [".htm", ".mht", ".html", ".mhtml"];
 
 export const EBOOK_EXST = [".fb2", ".pb2", ".ibk", ".prc", ".epub", ".djvu"];
 
-export const SYSTEM_THEME_KEY = "system_theme";
-
-const SDK_VERSION = "2.1.0";
+const SDK_VERSION = "2.2.0";
 
 export const SDK_SCRIPT_URL =
   typeof window !== "undefined"
@@ -259,6 +228,7 @@ export const THIRD_PARTY_SERVICES_URL =
   "/portal-settings/integration/third-party-services?service=";
 
 export const STORAGE_TARIFF_DEACTIVATED = "storageTariffDeactivated";
+export const STORAGE_DEACTIVATION_VISITED = "storageDeactivationVisited";
 
 // any unicode letters are allowed, characters are prohibited
 export const BRAND_NAME_REGEX =
@@ -288,17 +258,6 @@ export const CategoryType = Object.freeze({
   AIAgent: 16,
 });
 
-export const AVATAR_ACTION_KEYS = {
-  PROFILE_AVATAR_UPLOAD: "profile_avatar_upload",
-  PROFILE_AVATAR_DELETE: "profile_avatar_delete",
-} as const;
-
-export const ROOM_ACTION_KEYS = {
-  CREATE_EDIT_ROOM_UPLOAD: "create_edit_room_upload",
-  CREATE_EDIT_ROOM_DELETE: "create_edit_room_delete",
-  CREATE_EDIT_ROOM_CUSTOMIZE_COVER: "create_edit_room_customize_cover",
-} as const;
-
 export const SHARED_MEMBERS_COUNT = 100;
 export const SHARED_WITH_ME_PATH = "shared-with-me";
 
@@ -307,3 +266,5 @@ export const EMPTY_OBJECT = Object.freeze({});
 export const FUNCTION_EMPTY = (): void => {};
 
 export const TEMPLATE_GALLERY_FORMATS = [".docx", ".xlsx", ".pptx", ".pdf"];
+
+export * from "@docspace/ui-kit/constants";

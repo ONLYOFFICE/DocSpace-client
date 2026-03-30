@@ -30,8 +30,8 @@ import { TFunction } from "i18next";
 
 import FolderReactSvgUrl from "PUBLIC_DIR/images/folder.react.svg?url";
 
-import { IconButton } from "@docspace/shared/components/icon-button";
-import { TooltipContainer } from "@docspace/shared/components/tooltip";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 import { TFolder } from "@docspace/shared/api/files/types";
 import { injectDefaultTheme } from "@docspace/shared/utils";
 
@@ -58,16 +58,16 @@ const StyledFolderInput = styled.div.attrs(injectDefaultTheme)`
   .icon-wrapper {
     border: 1px solid
       ${(props) =>
-        props.theme.createEditRoomDialog.thirdpartyStorage.folderInput
-          .borderColor};
+				props.theme.createEditRoomDialog.thirdpartyStorage.folderInput
+					.borderColor};
   }
 
   &:hover,
   &:hover > .icon-wrapper {
     border: 1px solid
       ${(props) =>
-        props.theme.createEditRoomDialog.thirdpartyStorage.folderInput
-          .hoverBorderColor};
+				props.theme.createEditRoomDialog.thirdpartyStorage.folderInput
+					.hoverBorderColor};
   }
 
   .root_label,
@@ -82,11 +82,11 @@ const StyledFolderInput = styled.div.attrs(injectDefaultTheme)`
   .root_label {
     padding-inline-start: 8px;
     /* background-color: ${(props) =>
-      props.theme.createEditRoomDialog.thirdpartyStorage.folderInput
-        .background}; */
+			props.theme.createEditRoomDialog.thirdpartyStorage.folderInput
+				.background}; */
     color: ${(props) =>
-      props.theme.createEditRoomDialog.thirdpartyStorage.folderInput
-        .rootLabelColor};
+			props.theme.createEditRoomDialog.thirdpartyStorage.folderInput
+				.rootLabelColor};
   }
 
   .path {
@@ -105,8 +105,8 @@ const StyledFolderInput = styled.div.attrs(injectDefaultTheme)`
   .icon-wrapper {
     margin-inline-start: auto;
     background-color: ${(props) =>
-      props.theme.createEditRoomDialog.thirdpartyStorage.folderInput
-        .background};
+			props.theme.createEditRoomDialog.thirdpartyStorage.folderInput
+				.background};
     height: 100%;
     box-sizing: border-box;
     width: 31px;
@@ -122,116 +122,116 @@ const StyledFolderInput = styled.div.attrs(injectDefaultTheme)`
     &:hover {
       path {
         fill: ${(props) =>
-          props.theme.createEditRoomDialog.thirdpartyStorage.folderInput
-            .iconFill};
+					props.theme.createEditRoomDialog.thirdpartyStorage.folderInput
+						.iconFill};
       }
     }
   }
 `;
 
 type FolderInputProps = {
-  t: TFunction;
-  roomTitle: string;
-  thirdpartyAccount: Record<string, unknown>;
-  onChangeStorageFolderId: (storageFolderId: string) => void;
-  isDisabled: boolean;
-  createNewFolderIsChecked: boolean;
+	t: TFunction;
+	roomTitle: string;
+	thirdpartyAccount: Record<string, unknown>;
+	onChangeStorageFolderId: (storageFolderId: string) => void;
+	isDisabled: boolean;
+	createNewFolderIsChecked: boolean;
 };
 
 const FolderInput = ({
-  t,
-  roomTitle,
-  thirdpartyAccount,
-  onChangeStorageFolderId,
-  isDisabled,
-  createNewFolderIsChecked,
+	t,
+	roomTitle,
+	thirdpartyAccount,
+	onChangeStorageFolderId,
+	isDisabled,
+	createNewFolderIsChecked,
 }: FolderInputProps) => {
-  const [treeNode, setTreeNode] = useState<TFolder | null>(null);
-  const [path, setPath] = useState("");
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+	const [treeNode, setTreeNode] = useState<TFolder | null>(null);
+	const [path, setPath] = useState("");
+	const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  const onOpen = () => {
-    if (isDisabled) return;
-    setIsDialogOpen(true);
-  };
-  const onClose = () => {
-    setIsDialogOpen(false);
-  };
+	const onOpen = () => {
+		if (isDisabled) return;
+		setIsDialogOpen(true);
+	};
+	const onClose = () => {
+		setIsDialogOpen(false);
+	};
 
-  const getPathValue = () => {
-    if (!treeNode) return;
+	const getPathValue = () => {
+		if (!treeNode) return;
 
-    let currentPath = treeNode.path;
-    currentPath = currentPath?.slice(1);
+		let currentPath = treeNode.path;
+		currentPath = currentPath?.slice(1);
 
-    let result = "";
-    currentPath?.map(
-      (node, i) =>
-        (result += node.title + (i !== currentPath.length - 1 ? "/" : "")),
-    );
+		let result = "";
+		currentPath?.map(
+			(node, i) =>
+				(result += node.title + (i !== currentPath.length - 1 ? "/" : "")),
+		);
 
-    setPath(result);
-  };
+		setPath(result);
+	};
 
-  useEffect(() => {
-    if (!treeNode) return;
-    onChangeStorageFolderId(treeNode?.id?.toString() || "");
-    getPathValue();
-  }, [treeNode]);
+	useEffect(() => {
+		if (!treeNode) return;
+		onChangeStorageFolderId(treeNode?.id?.toString() || "");
+		getPathValue();
+	}, [treeNode]);
 
-  if (!thirdpartyAccount.id) return null;
+	if (!thirdpartyAccount.id) return null;
 
-  let title = createNewFolderIsChecked || path ? "/" : t("RootFolderLabel");
-  title += path;
-  if (createNewFolderIsChecked) {
-    title += path ? "/" : "";
-    title += roomTitle || t("Common:NewRoom");
-  }
+	let title = createNewFolderIsChecked || path ? "/" : t("RootFolderLabel");
+	title += path;
+	if (createNewFolderIsChecked) {
+		title += path ? "/" : "";
+		title += roomTitle || t("Common:NewRoom");
+	}
 
-  return (
-    <>
-      <StyledFolderInput onClick={onOpen}>
-        <TooltipContainer
-          as="div"
-          className="folder-path-wrapper"
-          title={title}
-        >
-          <span className="root_label">
-            {createNewFolderIsChecked || path ? "/" : t("RootFolderLabel")}
-          </span>
-          <span className="path">{path}</span>
-          {createNewFolderIsChecked ? (
-            <span className="room_title">
-              {(path ? "/" : "") + (roomTitle || t("Common:NewRoom"))}
-            </span>
-          ) : null}
-        </TooltipContainer>
-        <TooltipContainer
-          as="div"
-          title={t("Common:SelectFolder")}
-          className="icon-wrapper"
-        >
-          <IconButton size={16} iconName={FolderReactSvgUrl} isClickable />
-        </TooltipContainer>
-      </StyledFolderInput>
+	return (
+		<>
+			<StyledFolderInput onClick={onOpen}>
+				<TooltipContainer
+					as="div"
+					className="folder-path-wrapper"
+					title={title}
+				>
+					<span className="root_label">
+						{createNewFolderIsChecked || path ? "/" : t("RootFolderLabel")}
+					</span>
+					<span className="path">{path}</span>
+					{createNewFolderIsChecked ? (
+						<span className="room_title">
+							{(path ? "/" : "") + (roomTitle || t("Common:NewRoom"))}
+						</span>
+					) : null}
+				</TooltipContainer>
+				<TooltipContainer
+					as="div"
+					title={t("Common:SelectFolder")}
+					className="icon-wrapper"
+				>
+					<IconButton size={16} iconName={FolderReactSvgUrl} isClickable />
+				</TooltipContainer>
+			</StyledFolderInput>
 
-      {isDialogOpen ? (
-        // @ts-expect-error need pass all props
-        <FilesSelector
-          isPanelVisible={isDialogOpen}
-          onClose={onClose}
-          isThirdParty
-          isSelectFolder
-          onSelectTreeNode={setTreeNode}
-          currentFolderId={
-            treeNode
-              ? treeNode.id
-              : ((thirdpartyAccount as Record<string, unknown>).id as string)
-          }
-        />
-      ) : null}
-    </>
-  );
+			{isDialogOpen ? (
+				// @ts-expect-error need pass all props
+				<FilesSelector
+					isPanelVisible={isDialogOpen}
+					onClose={onClose}
+					isThirdParty
+					isSelectFolder
+					onSelectTreeNode={setTreeNode}
+					currentFolderId={
+						treeNode
+							? treeNode.id
+							: ((thirdpartyAccount as Record<string, unknown>).id as string)
+					}
+				/>
+			) : null}
+		</>
+	);
 };
 
 export default FolderInput;

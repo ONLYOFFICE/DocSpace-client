@@ -30,7 +30,7 @@ import { TUser } from "@docspace/shared/api/people/types";
 import { DeviceType } from "@docspace/shared/enums";
 import FirebaseHelper from "@docspace/shared/utils/firebase";
 
-import Section from "@docspace/shared/components/section";
+import Section from "@docspace/ui-kit/components/section";
 
 import PrivateRoute from "SRC_DIR/components/PrivateRouteWrapper";
 import ErrorBoundary from "SRC_DIR/components/ErrorBoundaryWrapper";

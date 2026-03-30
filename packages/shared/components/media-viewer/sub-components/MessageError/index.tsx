@@ -28,7 +28,7 @@ import React from "react";
 import { ReactSVG } from "react-svg";
 
 import classNames from "classnames";
-import { Text } from "../../../text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { isSeparator } from "../../../../utils/typeGuards";
 
 import styles from "./MessageError.module.scss";

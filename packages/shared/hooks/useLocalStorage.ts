@@ -27,7 +27,7 @@ import { useCallback, useEffect, useState } from "react";
 
 import type { Dispatch, SetStateAction } from "react";
 
-import { useEventListener } from "./useEventListener";
+import { useEventListener } from "@docspace/ui-kit/hooks/useEventListener";
 import { useEventCallback } from "./useEventCallback";
 
 declare global {

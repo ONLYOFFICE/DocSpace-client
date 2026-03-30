@@ -29,10 +29,10 @@ import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 import { TFunction } from "i18next";
 
-import { Text } from "@docspace/shared/components/text";
-import { toastr } from "@docspace/shared/components/toast";
-import { Link, LinkType } from "@docspace/shared/components/link";
-import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Text } from "@docspace/ui-kit/components/text";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
@@ -56,221 +56,221 @@ const StyledThirdPartyStorage = styled(StyledParam)`
 `;
 
 type ThirdPartyStorageProps = {
-  t: TFunction;
-  roomTitle: string;
+	t: TFunction;
+	roomTitle: string;
 
-  storageLocation: TRoomStorageLocation;
-  onChangeStorageLocation: (value: TRoomStorageLocation) => void;
+	storageLocation: TRoomStorageLocation;
+	onChangeStorageLocation: (value: TRoomStorageLocation) => void;
 
-  setIsOauthWindowOpen: (value: boolean) => void;
+	setIsOauthWindowOpen: (value: boolean) => void;
 
-  createNewFolderIsChecked: boolean;
-  onCreateFolderChange: (value: React.ChangeEvent<HTMLInputElement>) => void;
+	createNewFolderIsChecked: boolean;
+	onCreateFolderChange: (value: React.ChangeEvent<HTMLInputElement>) => void;
 
-  isDisabled: boolean;
-  isRoomAdmin?: boolean;
-  isAdmin?: boolean;
+	isDisabled: boolean;
+	isRoomAdmin?: boolean;
+	isAdmin?: boolean;
 
-  currentColorScheme?: SettingsStore["currentColorScheme"];
+	currentColorScheme?: SettingsStore["currentColorScheme"];
 
-  setRoomCreation?: DialogsStore["setRoomCreation"];
-  setConnectItem?: DialogsStore["setConnectItem"];
-  setConnectDialogVisible?: DialogsStore["setConnectDialogVisible"];
-  setSaveThirdpartyResponse?: DialogsStore["setSaveThirdpartyResponse"];
-  saveThirdpartyResponse?: DialogsStore["saveThirdpartyResponse"];
+	setRoomCreation?: DialogsStore["setRoomCreation"];
+	setConnectItem?: DialogsStore["setConnectItem"];
+	setConnectDialogVisible?: DialogsStore["setConnectDialogVisible"];
+	setSaveThirdpartyResponse?: DialogsStore["setSaveThirdpartyResponse"];
+	saveThirdpartyResponse?: DialogsStore["saveThirdpartyResponse"];
 
-  openConnectWindow?: ThirdPartyStore["openConnectWindow"];
-  deleteThirdParty?: ThirdPartyStore["deleteThirdParty"];
-  fetchConnectingStorages?: ThirdPartyStore["fetchConnectingStorages"];
-  connectItems?: ThirdPartyStore["connectingStorages"];
+	openConnectWindow?: ThirdPartyStore["openConnectWindow"];
+	deleteThirdParty?: ThirdPartyStore["deleteThirdParty"];
+	fetchConnectingStorages?: ThirdPartyStore["fetchConnectingStorages"];
+	connectItems?: ThirdPartyStore["connectingStorages"];
 };
 
 const ThirdPartyStorage = ({
-  t,
+	t,
 
-  roomTitle,
-  storageLocation,
-  onChangeStorageLocation,
+	roomTitle,
+	storageLocation,
+	onChangeStorageLocation,
 
-  setIsOauthWindowOpen,
+	setIsOauthWindowOpen,
 
-  connectItems,
-  setConnectDialogVisible,
-  setRoomCreation,
-  saveThirdpartyResponse,
-  setSaveThirdpartyResponse,
-  deleteThirdParty,
-  openConnectWindow,
-  setConnectItem,
+	connectItems,
+	setConnectDialogVisible,
+	setRoomCreation,
+	saveThirdpartyResponse,
+	setSaveThirdpartyResponse,
+	deleteThirdParty,
+	openConnectWindow,
+	setConnectItem,
 
-  isDisabled,
-  currentColorScheme,
-  isRoomAdmin,
-  isAdmin,
-  createNewFolderIsChecked,
-  onCreateFolderChange,
+	isDisabled,
+	currentColorScheme,
+	isRoomAdmin,
+	isAdmin,
+	createNewFolderIsChecked,
+	onCreateFolderChange,
 
-  fetchConnectingStorages,
+	fetchConnectingStorages,
 }: ThirdPartyStorageProps) => {
-  const channel = useRef(new BroadcastChannel("thirdpartyActivation"));
-  channel.current.onmessage = (shouldRender) => {
-    shouldRender && fetchConnectingStorages!();
-  };
+	const channel = useRef(new BroadcastChannel("thirdpartyActivation"));
+	channel.current.onmessage = (shouldRender) => {
+		shouldRender && fetchConnectingStorages!();
+	};
 
-  const onChangeIsThirdparty = () => {
-    if (isDisabled) return;
+	const onChangeIsThirdparty = () => {
+		if (isDisabled) return;
 
-    if (!connectItems?.length) {
-      const data = isRoomAdmin ? (
-        <Text as="p">
-          {t("ThirdPartyStorageRoomAdminNoStorageAlert", {
-            productName: t("Common:ProductName"),
-          })}
-        </Text>
-      ) : (
-        <Text as="p">
-          {t("ThirdPartyStorageNoStorageAlert")}{" "}
-          <Link
-            href="/portal-settings/integration/third-party-services"
-            type={LinkType.page}
-            noHover
-            color={currentColorScheme?.main?.accent}
-          >
-            {t("Translations:ThirdPartyTitle")}
-          </Link>
-        </Text>
-      );
+		if (!connectItems?.length) {
+			const data = isRoomAdmin ? (
+				<Text as="p">
+					{t("ThirdPartyStorageRoomAdminNoStorageAlert", {
+						productName: t("Common:ProductName"),
+					})}
+				</Text>
+			) : (
+				<Text as="p">
+					{t("ThirdPartyStorageNoStorageAlert")}{" "}
+					<Link
+						href="/portal-settings/integration/third-party-services"
+						type={LinkType.page}
+						noHover
+						color={currentColorScheme?.main?.accent ?? undefined}
+					>
+						{t("Translations:ThirdPartyTitle")}
+					</Link>
+				</Text>
+			);
 
-      toastr.warning(data, "", 5000, true, false);
+			toastr.warning(data, "", 5000, true, false);
 
-      return;
-    }
+			return;
+		}
 
-    onChangeStorageLocation({
-      ...storageLocation,
-      isThirdparty: !storageLocation.isThirdparty,
-    });
-  };
+		onChangeStorageLocation({
+			...storageLocation,
+			isThirdparty: !storageLocation.isThirdparty,
+		});
+	};
 
-  const onChangeProvider = async (provider: TConnectingStorage) => {
-    if (storageLocation.thirdpartyAccount) {
-      onChangeStorageLocation({
-        ...storageLocation,
-        provider,
-        thirdpartyAccount: null,
-      });
-      await deleteThirdParty!(
-        (storageLocation.thirdpartyAccount as { providerId: string })
-          .providerId,
-      );
-      return;
-    }
+	const onChangeProvider = async (provider: TConnectingStorage) => {
+		if (storageLocation.thirdpartyAccount) {
+			onChangeStorageLocation({
+				...storageLocation,
+				provider,
+				thirdpartyAccount: null,
+			});
+			await deleteThirdParty!(
+				(storageLocation.thirdpartyAccount as { providerId: string })
+					.providerId,
+			);
+			return;
+		}
 
-    onChangeStorageLocation({ ...storageLocation, provider });
-  };
+		onChangeStorageLocation({ ...storageLocation, provider });
+	};
 
-  const onChangeStorageFolderId = (storageFolderId: string) =>
-    onChangeStorageLocation({
-      ...storageLocation,
-      storageFolderId,
-    });
+	const onChangeStorageFolderId = (storageFolderId: string) =>
+		onChangeStorageLocation({
+			...storageLocation,
+			storageFolderId,
+		});
 
-  useEffect(() => {
-    fetchConnectingStorages!();
-  }, []);
+	useEffect(() => {
+		fetchConnectingStorages!();
+	}, []);
 
-  return (
-    <StyledThirdPartyStorage>
-      <ToggleParam
-        id="shared_third-party-storage-toggle"
-        title={t("Common:ThirdPartyStorage")}
-        description={t("Common:ThirdPartyStorageDescription")}
-        isChecked={storageLocation.isThirdparty ?? false}
-        onCheckedChange={onChangeIsThirdparty}
-      />
+	return (
+		<StyledThirdPartyStorage>
+			<ToggleParam
+				id="shared_third-party-storage-toggle"
+				title={t("Common:ThirdPartyStorage")}
+				description={t("Common:ThirdPartyStorageDescription")}
+				isChecked={storageLocation.isThirdparty ?? false}
+				onCheckedChange={onChangeIsThirdparty}
+			/>
 
-      {storageLocation.isThirdparty ? (
-        <ThirdPartyComboBox
-          t={t}
-          storageLocation={storageLocation}
-          onChangeStorageLocation={onChangeStorageLocation}
-          onChangeProvider={onChangeProvider}
-          connectItems={connectItems!}
-          setConnectDialogVisible={setConnectDialogVisible!}
-          setRoomCreation={setRoomCreation!}
-          saveThirdpartyResponse={saveThirdpartyResponse!}
-          setSaveThirdpartyResponse={setSaveThirdpartyResponse!}
-          openConnectWindow={openConnectWindow!}
-          setConnectItem={setConnectItem!}
-          setIsOauthWindowOpen={setIsOauthWindowOpen}
-          isDisabled={isDisabled}
-          isAdmin={isAdmin!}
-        />
-      ) : null}
+			{storageLocation.isThirdparty ? (
+				<ThirdPartyComboBox
+					t={t}
+					storageLocation={storageLocation}
+					onChangeStorageLocation={onChangeStorageLocation}
+					onChangeProvider={onChangeProvider}
+					connectItems={connectItems!}
+					setConnectDialogVisible={setConnectDialogVisible!}
+					setRoomCreation={setRoomCreation!}
+					saveThirdpartyResponse={saveThirdpartyResponse!}
+					setSaveThirdpartyResponse={setSaveThirdpartyResponse!}
+					openConnectWindow={openConnectWindow!}
+					setConnectItem={setConnectItem!}
+					setIsOauthWindowOpen={setIsOauthWindowOpen}
+					isDisabled={isDisabled}
+					isAdmin={isAdmin!}
+				/>
+			) : null}
 
-      {storageLocation.isThirdparty && storageLocation.thirdpartyAccount ? (
-        <>
-          <FolderInput
-            t={t}
-            roomTitle={roomTitle}
-            thirdpartyAccount={
-              storageLocation.thirdpartyAccount as Record<string, unknown>
-            }
-            onChangeStorageFolderId={onChangeStorageFolderId}
-            isDisabled={isDisabled}
-            createNewFolderIsChecked={createNewFolderIsChecked}
-          />
+			{storageLocation.isThirdparty && storageLocation.thirdpartyAccount ? (
+				<>
+					<FolderInput
+						t={t}
+						roomTitle={roomTitle}
+						thirdpartyAccount={
+							storageLocation.thirdpartyAccount as Record<string, unknown>
+						}
+						onChangeStorageFolderId={onChangeStorageFolderId}
+						isDisabled={isDisabled}
+						createNewFolderIsChecked={createNewFolderIsChecked}
+					/>
 
-          <Checkbox
-            className="create-new-folder_checkbox"
-            label={t("Files:CreateNewFolderInStorage")}
-            isChecked={createNewFolderIsChecked}
-            onChange={onCreateFolderChange}
-          />
-        </>
-      ) : null}
-    </StyledThirdPartyStorage>
-  );
+					<Checkbox
+						className="create-new-folder_checkbox"
+						label={t("Files:CreateNewFolderInStorage")}
+						isChecked={createNewFolderIsChecked}
+						onChange={onCreateFolderChange}
+					/>
+				</>
+			) : null}
+		</StyledThirdPartyStorage>
+	);
 };
 
 export default inject(
-  ({ authStore, settingsStore, filesSettingsStore, dialogsStore }: TStore) => {
-    const { currentColorScheme } = settingsStore;
+	({ authStore, settingsStore, filesSettingsStore, dialogsStore }: TStore) => {
+		const { currentColorScheme } = settingsStore;
 
-    const {
-      openConnectWindow,
-      deleteThirdParty,
-      connectingStorages: connectItems,
-      fetchConnectingStorages,
-    } = filesSettingsStore.thirdPartyStore;
+		const {
+			openConnectWindow,
+			deleteThirdParty,
+			connectingStorages: connectItems,
+			fetchConnectingStorages,
+		} = filesSettingsStore.thirdPartyStore;
 
-    const {
-      setConnectItem,
-      setConnectDialogVisible,
-      setRoomCreation,
-      setSaveThirdpartyResponse,
-      saveThirdpartyResponse,
-    } = dialogsStore;
+		const {
+			setConnectItem,
+			setConnectDialogVisible,
+			setRoomCreation,
+			setSaveThirdpartyResponse,
+			saveThirdpartyResponse,
+		} = dialogsStore;
 
-    const { isRoomAdmin, isAdmin } = authStore;
+		const { isRoomAdmin, isAdmin } = authStore;
 
-    return {
-      connectItems,
+		return {
+			connectItems,
 
-      setConnectDialogVisible,
-      setRoomCreation,
+			setConnectDialogVisible,
+			setRoomCreation,
 
-      deleteThirdParty,
+			deleteThirdParty,
 
-      saveThirdpartyResponse,
-      setSaveThirdpartyResponse,
+			saveThirdpartyResponse,
+			setSaveThirdpartyResponse,
 
-      openConnectWindow,
-      setConnectItem,
-      currentColorScheme,
-      isRoomAdmin,
-      isAdmin,
-      fetchConnectingStorages,
-    };
-  },
+			openConnectWindow,
+			setConnectItem,
+			currentColorScheme,
+			isRoomAdmin,
+			isAdmin,
+			fetchConnectingStorages,
+		};
+	},
 )(observer(ThirdPartyStorage));

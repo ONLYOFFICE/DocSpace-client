@@ -35,12 +35,12 @@ import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
 import {
   ContextMenu,
   ContextMenuRefType,
-} from "@docspace/shared/components/context-menu";
-import { HeaderType } from "@docspace/shared/components/context-menu/ContextMenu.types";
+  HeaderType,
+} from "@docspace/ui-kit/components/context-menu";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
-} from "@docspace/shared/components/context-menu-button";
+} from "@docspace/ui-kit/components/context-menu-button";
 
 import ContextOptionsStore from "SRC_DIR/store/ContextOptionsStore";
 import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
@@ -68,7 +68,6 @@ const RoomsContextBtn = ({
     "Common",
     "Translations",
     "InfoPanel",
-    "SharingPanel",
   ]);
   const contextMenuRef = useRef<ContextMenuRefType>(null);
 
@@ -135,8 +134,8 @@ const RoomsContextBtn = ({
         className="expandButton"
         title={
           "isFolder" in selection && selection.isFolder
-            ? t("Translations:TitleShowFolderActions")
-            : t("Translations:TitleShowActions")
+            ? t("Common:TitleShowFolderActions")
+            : t("Common:TitleShowActions")
         }
         onClick={onContextMenu}
         getData={getData}
@@ -165,3 +164,4 @@ export default inject(
     getIcon: filesSettingsStore.getIcon,
   }),
 )(observer(RoomsContextBtn));
+

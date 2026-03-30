@@ -40,6 +40,7 @@ const successList = {
       createdOn: "2025-11-18T11:45:49.0000000+03:00",
       modifiedOn: "2025-11-18T11:46:00.0000000+03:00",
       needReset: false,
+      isDefault: true,
     },
     {
       id: 2,
@@ -169,8 +170,8 @@ const successUpdate = {
   response: {
     id: 1,
     title: "updated provider",
-    type: 1,
-    url: "https://api.openai.com/v1",
+    type: 4,
+    url: "https://api.anthropic.com/v1",
     createdOn: "2025-11-18T11:45:49.0000000+03:00",
     modifiedOn: "2025-11-18T11:46:00.0000000+03:00",
   },

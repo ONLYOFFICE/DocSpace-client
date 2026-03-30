@@ -26,7 +26,7 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import { TableCell } from "@docspace/shared/components/table";
+import { TableCell } from "@docspace/ui-kit/components/table";
 import { classNames, getLastColumn } from "@docspace/shared/utils";
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import FileNameCell from "./FileNameCell";
@@ -37,7 +37,7 @@ import {
   StyledBadgesContainer,
   StyledQuickButtonsContainer,
 } from "../StyledTable";
-import { TTheme } from "@docspace/shared/themes";
+import { TTheme } from "@docspace/ui-kit/providers/theme/themes";
 import { TAgent } from "@docspace/shared/api/ai/types";
 import { TTranslation } from "@docspace/shared/types";
 
@@ -77,6 +77,8 @@ type AIAgentsRowDataComponentProps = {
   createdDate: string;
   lastOpenedDate: string;
   isRecentFolder: boolean;
+  isHovered: boolean;
+  isActive: boolean;
 };
 
 const AIAgentsRowDataComponent = (props: AIAgentsRowDataComponentProps) => {
@@ -142,10 +144,7 @@ const AIAgentsRowDataComponent = (props: AIAgentsRowDataComponentProps) => {
           }
           {...selectionProp}
         >
-          <TagsCell
-            sideColor={theme.filesSection.tableView.row.sideColor}
-            {...props}
-          />
+          <TagsCell {...props} />
           {lastColumn === "Tags" ? quickButtonsComponentNode : null}
         </TableCell>
       ) : (

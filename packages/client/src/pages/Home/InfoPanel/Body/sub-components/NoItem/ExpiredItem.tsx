@@ -55,13 +55,13 @@ import { useTranslation } from "react-i18next";
 import CanceledLightIconURL from "PUBLIC_DIR/images/emptyview/empty.access.rights.light.svg?url";
 import CanceledDarkIconURL from "PUBLIC_DIR/images/emptyview/empty.access.rights.dark.svg?url";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import {
   Heading,
   HeadingLevel,
   HeadingSize,
-} from "@docspace/shared/components/heading";
-import { useTheme } from "@docspace/shared/hooks/useTheme";
+} from "@docspace/ui-kit/components/heading";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { isFile, isFolder } from "@docspace/shared/utils/typeGuards";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";

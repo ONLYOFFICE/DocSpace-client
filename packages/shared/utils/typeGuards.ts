@@ -30,7 +30,7 @@ import type { TFile, TFileLink, TFolder } from "../api/files/types";
 import type {
   ContextMenuModel,
   SeparatorType,
-} from "../components/context-menu";
+} from "@docspace/ui-kit/components/context-menu";
 import type { TRoom } from "../api/rooms/types";
 
 export const isNumber = (value: unknown): value is number => {

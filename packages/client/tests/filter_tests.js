@@ -86,7 +86,7 @@ Scenario("Filter block ", ({ I }) => {
   }
   if (deviceType === "desktop") {
     // open author selector
-    I.click({ react: "SelectorAddButton" });
+    I.click({ react: "AddButton" });
 
     I.saveScreenshot(`filter.author-selector.png`);
     if (!isModel) {

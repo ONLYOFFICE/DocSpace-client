@@ -28,10 +28,11 @@ import { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 
 import RoomType from "@docspace/shared/components/room-type";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { RoomsTypeValues } from "@docspace/shared/utils/common";
 import { injectDefaultTheme } from "@docspace/shared/utils";
-import { Scrollbar } from "@docspace/shared/components/scrollbar";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
+import { Backdrop } from "@docspace/ui-kit/components";
 import { RoomsType } from "@docspace/shared/enums";
 
 const StyledDropdownDesktop = styled.div.attrs(injectDefaultTheme)<{
@@ -41,7 +42,7 @@ const StyledDropdownDesktop = styled.div.attrs(injectDefaultTheme)<{
   max-width: 100%;
   position: relative;
 
-  ${(props) => (!props.isOpen || !props.heightReady) && "visibility: hidden"};
+  ${(props) => (!props.isOpen || !props.heightReady) && "display: none"};
 
   .dropdown-content {
     background: ${(props) =>
@@ -69,9 +70,14 @@ const StyledDropdownDesktop = styled.div.attrs(injectDefaultTheme)<{
 type DropdownDesktopProps = {
   open: boolean;
   chooseRoomType: (roomType: RoomsType) => void;
+  onClose: () => void;
 };
 
-const DropdownDesktop = ({ open, chooseRoomType }: DropdownDesktopProps) => {
+const DropdownDesktop = ({
+  open,
+  chooseRoomType,
+  onClose,
+}: DropdownDesktopProps) => {
   const [heightList, setHeightList] = useState<number | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -138,15 +144,25 @@ const DropdownDesktop = ({ open, chooseRoomType }: DropdownDesktopProps) => {
   );
 
   return (
-    <StyledDropdownDesktop
-      className="dropdown-content-wrapper"
-      isOpen={open}
-      heightReady={typeof heightList === "number"}
-    >
-      <div className="dropdown-content" ref={dropdownRef}>
-        {content}
-      </div>
-    </StyledDropdownDesktop>
+    <>
+      <Backdrop
+        visible={open}
+        onClick={onClose}
+        withBackground={false}
+        withoutBackground
+        isAside
+        zIndex={400}
+      />
+      <StyledDropdownDesktop
+        className="dropdown-content-wrapper"
+        isOpen={open}
+        heightReady={typeof heightList === "number"}
+      >
+        <div className="dropdown-content" ref={dropdownRef}>
+          {content}
+        </div>
+      </StyledDropdownDesktop>
+    </>
   );
 };
 

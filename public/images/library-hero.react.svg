@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 360" fill="none">
+  <!-- Back paper (offset) -->
+  <rect x="60" y="12" width="220" height="290" rx="6" fill="#f4f4f7" stroke="#dcdce2" stroke-width="0.8"/>
+  <!-- Front paper -->
+  <rect x="40" y="28" width="220" height="290" rx="6" fill="#ffffff" stroke="#dcdce2" stroke-width="0.8"/>
+
+  <!-- Text lines on front paper -->
+  <rect x="68" y="58" width="160" height="5" rx="2.5" fill="#d8d8e0"/>
+  <rect x="68" y="74" width="140" height="5" rx="2.5" fill="#d8d8e0"/>
+  <rect x="68" y="90" width="165" height="5" rx="2.5" fill="#d8d8e0"/>
+  <rect x="68" y="106" width="125" height="5" rx="2.5" fill="#d8d8e0"/>
+  <rect x="68" y="122" width="155" height="5" rx="2.5" fill="#d8d8e0"/>
+  <rect x="68" y="138" width="110" height="5" rx="2.5" fill="#d8d8e0"/>
+  <rect x="68" y="154" width="150" height="5" rx="2.5" fill="#d8d8e0"/>
+  <rect x="68" y="170" width="135" height="5" rx="2.5" fill="#d8d8e0"/>
+
+  <!-- Pen (large, diagonal, from upper-right to center) -->
+  <g transform="translate(175, 178) rotate(35)">
+    <!-- Pen cap top -->
+    <rect x="-8" y="-130" width="16" height="12" rx="4" fill="#1E3564"/>
+    <!-- Pen clip -->
+    <rect x="5" y="-128" width="3.5" height="50" rx="1.5" fill="#16294E"/>
+    <!-- Pen barrel upper -->
+    <rect x="-8" y="-118" width="16" height="120" rx="2" fill="#2D4B8E"/>
+    <!-- Pen barrel highlight -->
+    <rect x="-3" y="-118" width="4" height="120" rx="1" fill="#3A5FA8" opacity="0.5"/>
+    <!-- Pen grip ring -->
+    <rect x="-8.5" y="0" width="17" height="4" rx="1" fill="#C0C0C8"/>
+    <!-- Pen lower barrel -->
+    <rect x="-7" y="4" width="14" height="28" rx="2" fill="#f0f0f2" stroke="#c8c8d0" stroke-width="0.5"/>
+    <!-- Pen tip cone -->
+    <polygon points="-5,32 5,32 0,52" fill="#B0B0B8"/>
+    <!-- Pen tip point -->
+    <polygon points="-1.5,46 1.5,46 0,54" fill="#444"/>
+  </g>
+
+  <!-- Signature (bottom-left of paper) — traced from reference -->
+  <g transform="translate(52,238) scale(1.15)">
+    <!-- Upper elongated loop + letter forms -->
+    <path d="M38,28
+             C34,20 24,8 18,10
+             C10,13 14,18 24,20
+             C36,22 56,18 64,16
+             C70,14 58,20 50,22
+             C44,24 40,26 38,28
+             C36,32 38,30 40,26
+             C41,24 42,28 44,26
+             C45,24 46,28 50,24"
+          stroke="#2D4B8E" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Long diagonal crossing stroke -->
+    <path d="M4,44
+             C14,40 30,32 50,24
+             C66,18 82,12 98,8"
+          stroke="#2D4B8E" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+    <!-- Downward loop/tail -->
+    <path d="M50,24
+             C48,30 44,40 40,46
+             C36,52 32,54 30,50
+             C28,46 34,36 42,30"
+          stroke="#2D4B8E" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Seal (bottom-right of paper) -->
+  <circle cx="208" cy="272" r="22" fill="none" stroke="#D4941E" stroke-width="3"/>
+  <circle cx="208" cy="272" r="16" fill="none" stroke="#D4941E" stroke-width="2"/>
+  <circle cx="208" cy="272" r="6" fill="#D4941E"/>
+
+  <!-- Small initials near seal -->
+  <path d="M182,294
+           C180,288 178,282 182,280
+           C186,278 190,286 192,288
+           C194,290 192,282 196,280
+           C198,279 200,284 200,286"
+        stroke="#2D4B8E" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

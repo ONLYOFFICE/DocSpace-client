@@ -27,8 +27,9 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router";
 
-import { ArticleItem } from "@docspace/shared/components/article-item/ArticleItemWrapper";
+import { ArticleItem } from "@docspace/ui-kit/components/article/item";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { useNavigate } from "react-router";
 import GiftReactSvgUrl from "PUBLIC_DIR/images/gift.react.svg?url";
@@ -65,6 +66,7 @@ const BonusItem = ({ showText, toggleArticleOpen, currentColorScheme }) => {
       folderId="document_catalog-bonus"
       style={{ marginBottom: "16px" }}
       linkData={{ path: bonusUrl }}
+      LinkRouter={Link}
       $currentColorScheme={currentColorScheme}
     />
   );

@@ -25,16 +25,17 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useTranslation } from "react-i18next";
-import moment from "moment";
 
-import { Text } from "@docspace/shared/components/text";
-import { classNames, getCookie } from "@docspace/shared/utils";
+import { Text } from "@docspace/ui-kit/components/text";
+import { classNames } from "@docspace/shared/utils";
+import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import {
   TFeedAction,
   TFeedData,
   RoomMember,
 } from "@docspace/shared/api/rooms/types";
 import { LANGUAGE } from "@docspace/shared/constants";
+import { formatDateLocalized, parseToDateTime } from "@docspace/ui-kit/utils/date";
 
 import { useFeedTranslation } from "../hooks/useFeedTranslation";
 
@@ -45,10 +46,10 @@ import HistoryRoomExternalLink from "./RoomExternalLink";
 import HistoryMainTextFolderInfo from "./MainTextFolderInfo";
 
 const getDateTime = (date: Date | string) => {
-  moment.locale(getCookie(LANGUAGE));
-
-  const given = moment(date);
-  return given.format("LT");
+  const locale = getCookie(LANGUAGE) || "en";
+  const dt = parseToDateTime(date);
+  if (!dt) return "";
+  return formatDateLocalized(dt, "TIME_SIMPLE", { locale });
 };
 
 const HistoryTitleBlock = ({
@@ -58,11 +59,15 @@ const HistoryTitleBlock = ({
 }) => {
   const { t } = useTranslation(["InfoPanel", "Common", "Translations"]);
 
-  const { actionType, targetType } = getFeedInfo(feed);
-
   const hasRelatedItems = feed.related.length > 0;
 
   const { getFeedTranslation } = useFeedTranslation(feed, hasRelatedItems);
+
+  const feedInfo = getFeedInfo(feed);
+
+  if (!feedInfo) return null;
+
+  const { actionType, targetType } = feedInfo;
 
   const isDisplayFolderInfo =
     ((targetType === "file" || targetType === "folder") &&

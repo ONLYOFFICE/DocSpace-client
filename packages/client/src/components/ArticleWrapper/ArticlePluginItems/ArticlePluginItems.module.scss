@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+}
+
+.item {
+  width: 32px;
+  min-width: 32px;
+  min-height: 32px;
+  height: 32px;
+  overflow: hidden;
+}

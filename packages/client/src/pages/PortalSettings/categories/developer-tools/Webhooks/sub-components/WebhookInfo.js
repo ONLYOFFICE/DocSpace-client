@@ -30,10 +30,10 @@ import { inject, observer } from "mobx-react";
 
 import { injectDefaultTheme } from "@docspace/shared/utils";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import { useTranslation } from "react-i18next";
-import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
+import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
 
 const InfoText = styled(Text).attrs(injectDefaultTheme)`
   max-width: 660px;
@@ -44,41 +44,41 @@ const InfoText = styled(Text).attrs(injectDefaultTheme)`
 `;
 
 const WebhookInfo = (props) => {
-  const { t } = useTranslation(["Webhooks"]);
-  const { webhooksGuideUrl, logoText } = props;
+	const { t } = useTranslation(["Webhooks"]);
+	const { webhooksGuideUrl, logoText } = props;
 
-  return (
-    <div>
-      <InfoText as="p">
-        {t("WebhooksInfo", {
-          productName: t("Common:ProductName"),
-          organizationName: logoText,
-        })}
-      </InfoText>
-      {webhooksGuideUrl ? (
-        <Link
-          id="webhooks-info-link"
-          tag="a"
-          fontWeight={600}
-          href={webhooksGuideUrl}
-          target={LinkTarget.blank}
-          type={LinkType.page}
-          isHovered
-          color="accent"
-          dataTestId="webhooks_info_link"
-        >
-          {t("WebhooksGuide")}
-        </Link>
-      ) : null}
-    </div>
-  );
+	return (
+		<div>
+			<InfoText as="p">
+				{t("WebhooksInfo", {
+					productName: t("Common:ProductName"),
+					organizationName: logoText,
+				})}
+			</InfoText>
+			{webhooksGuideUrl ? (
+				<Link
+					id="webhooks-info-link"
+					tag="a"
+					fontWeight={600}
+					href={webhooksGuideUrl}
+					target={LinkTarget.blank}
+					type={LinkType.page}
+					isHovered
+					color="accent"
+					dataTestId="webhooks_info_link"
+				>
+					{t("WebhooksGuide")}
+				</Link>
+			) : null}
+		</div>
+	);
 };
 
 export default inject(({ settingsStore }) => {
-  const { webhooksGuideUrl, logoText } = settingsStore;
+	const { webhooksGuideUrl, logoText } = settingsStore;
 
-  return {
-    webhooksGuideUrl,
-    logoText,
-  };
+	return {
+		webhooksGuideUrl,
+		logoText,
+	};
 })(observer(WebhookInfo));

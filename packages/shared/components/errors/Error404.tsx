@@ -30,7 +30,7 @@ import React from "react";
 
 import { useTranslation } from "react-i18next";
 
-import ErrorContainer from "../error-container/ErrorContainer";
+import ErrorContainer from "@docspace/ui-kit/components/error-container/ErrorContainer";
 
 const Error404 = () => {
   const { t, ready } = useTranslation(["Common"]);

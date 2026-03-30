@@ -58,7 +58,7 @@ pnpm check-circular
 
 ```
 packages/
-├── client/      # Main web application (Webpack 5)
+├── client/      # Main web application (Vite 6)
 ├── login/       # Authentication application
 ├── doceditor/   # Document editor application
 ├── management/  # Admin management panel
@@ -102,10 +102,15 @@ MobX stores in `packages/shared/store/` are injected via React context. Main sto
 
 ### Build Pipeline
 
-1. `before-build.js` runs pre-build scripts
-2. `build:translations` generates i18n files
-3. Webpack builds client package; other packages have their own build configs
-4. Nx orchestrates parallel builds with caching
+1. `build:translations` generates i18n files
+2. Vite builds client package; Next.js builds login, doceditor, management, sdk
+3. Nx orchestrates parallel builds with caching
+4. Static file hashes (browserDetector.js, config.json) are computed on-demand via `packages/shared/utils/static-hash.ts`
+
+### Dev Server
+
+- Client (Vite): `http://localhost:5001` — served behind nginx proxy at port 8092
+- Static assets (images, fonts, scripts): served by nginx from `/var/www/public/` at `/static/` prefix
 
 ## Code Quality
 

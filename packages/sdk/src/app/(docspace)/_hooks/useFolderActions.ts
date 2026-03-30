@@ -3,7 +3,7 @@ import React from "react";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import api from "@docspace/shared/api";
 import { copyShareLink } from "@docspace/shared/utils/copy";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { TTranslation } from "@docspace/shared/types";
 
 import { useNavigationStore } from "../_store/NavigationStore";

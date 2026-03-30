@@ -15,6 +15,7 @@ import TranslationTableCell from "./TranslationTableCell";
 import TranslationTablePagination from "./TranslationTablePagination";
 import TranslationTableKeyHeader from "./TranslationTableKeyHeader";
 import KeyUsageDetails from "./KeyUsageDetails";
+import VariablesPanel from "./VariablesPanel";
 
 import { ToastContainer, toast, Id } from "react-toastify";
 
@@ -903,38 +904,53 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
                 namespace={namespace}
               />
 
-              <div className="border border-gray-200 dark:border-gray-700 rounded overflow-hidden">
-                {/* Fixed-height scrollable container */}
-                <div className="max-h-[490px] overflow-y-auto">
-                  <table className="w-full border-collapse">
-                    <thead className="bg-gray-50 dark:bg-gray-800 sticky top-0 z-10">
-                      <tr>
-                        <th className="w-[100px] px-2 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-400 border-b dark:border-gray-700">
-                          Language
-                        </th>
-                        <th className="w-auto px-4 py-2 text-left text-sm font-medium text-gray-500 dark:text-gray-400 border-b dark:border-gray-700">
-                          Translation
-                        </th>
-                      </tr>
-                    </thead>
-                    <TranslationTableRow
-                      currentEntry={currentEntry}
-                      languages={languages}
-                      baseLanguage={baseLanguage}
-                      editingCell={editingCell}
-                      editValue={editValue}
-                      setEditValue={setEditValue}
-                      handleEditStart={handleEditStart}
-                      handleEditSave={handleEditSave}
-                      handleEditCancel={handleEditCancel}
-                      translating={translating}
-                      savingTranslation={savingTranslation}
-                      handleTranslate={handleTranslate}
-                      isTranslating={isTranslating}
-                      ollamaConnected={ollamaConnected}
-                      metadata={currentMetadata}
-                    />
-                  </table>
+              <div className="flex gap-4">
+                {/* Translation table */}
+                <div className="flex-1 min-w-0 border border-gray-200 dark:border-gray-700 rounded overflow-hidden">
+                  {/* Fixed-height scrollable container */}
+                  <div className="max-h-[490px] overflow-y-auto">
+                    <table className="w-full border-collapse">
+                      <thead className="bg-gray-50 dark:bg-gray-800 sticky top-0 z-10">
+                        <tr>
+                          <th className="w-[100px] px-2 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-400 border-b dark:border-gray-700">
+                            Language
+                          </th>
+                          <th className="w-auto px-4 py-2 text-left text-sm font-medium text-gray-500 dark:text-gray-400 border-b dark:border-gray-700">
+                            Translation
+                          </th>
+                        </tr>
+                      </thead>
+                      <TranslationTableRow
+                        currentEntry={currentEntry}
+                        languages={languages}
+                        baseLanguage={baseLanguage}
+                        editingCell={editingCell}
+                        editValue={editValue}
+                        setEditValue={setEditValue}
+                        handleEditStart={handleEditStart}
+                        handleEditSave={handleEditSave}
+                        handleEditCancel={handleEditCancel}
+                        translating={translating}
+                        savingTranslation={savingTranslation}
+                        handleTranslate={handleTranslate}
+                        isTranslating={isTranslating}
+                        ollamaConnected={ollamaConnected}
+                        metadata={currentMetadata}
+                      />
+                    </table>
+                  </div>
+                </div>
+
+                {/* Variables & Tags panel */}
+                <div className="w-[220px] shrink-0 border border-gray-200 dark:border-gray-700 rounded overflow-hidden self-start">
+                  <div className="bg-gray-50 dark:bg-gray-800 px-3 py-2 border-b dark:border-gray-700">
+                    <h3 className="text-xs font-medium text-gray-500 dark:text-gray-400">
+                      Variables & Tags
+                    </h3>
+                  </div>
+                  <VariablesPanel
+                    baseText={currentEntry?.translations[baseLanguage] || ""}
+                  />
                 </div>
               </div>
             </div>

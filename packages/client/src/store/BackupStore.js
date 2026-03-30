@@ -27,7 +27,7 @@
 import { getBackupProgress } from "@docspace/shared/api/portal";
 import { makeAutoObservable } from "mobx";
 import axios from "axios";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { AutoBackupPeriod } from "@docspace/shared/enums";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";

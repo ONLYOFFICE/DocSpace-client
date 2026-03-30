@@ -30,14 +30,14 @@ import DefaultUserPhotoSize32PngUrl from "PUBLIC_DIR/images/default_user_photo_s
 import {
   TableRow as TableRowComponent,
   TableCell,
-} from "@docspace/shared/components/table";
-import { Text } from "@docspace/shared/components/text";
-import { ToggleButton } from "@docspace/shared/components/toggle-button";
+} from "@docspace/ui-kit/components/table";
+import { Text } from "@docspace/ui-kit/components/text";
+import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import {
   Avatar,
   AvatarRole,
   AvatarSize,
-} from "@docspace/shared/components/avatar";
+} from "@docspace/ui-kit/components/avatar";
 import { TableRowProps } from "../../types";
 import {
   getItemPermissions,

@@ -26,7 +26,7 @@
 
 import { useState, useEffect } from "react";
 
-import { TableHeader, TTableColumn } from "@docspace/shared/components/table";
+import { TableHeader, TTableColumn } from "@docspace/ui-kit/components/table";
 import { UsersTableHeaderProps } from "../../../../types";
 
 const TABLE_VERSION = "6";

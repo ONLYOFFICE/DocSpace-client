@@ -28,6 +28,7 @@ import PropTypes from "prop-types";
 import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
+import { Link } from "react-router";
 
 import {
   FolderType,
@@ -37,11 +38,11 @@ import {
 import { FOLDER_NAMES } from "@docspace/shared/constants";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 
-import { ArticleItem } from "@docspace/shared/components/article-item/ArticleItemWrapper";
-import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
+import { ArticleItem } from "@docspace/ui-kit/components/article/item";
+import { DragAndDrop } from "@docspace/ui-kit/components/drag-and-drop";
 
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import NewFilesBadge from "SRC_DIR/components/NewFilesBadge";
 import BonusItem from "./BonusItem";
@@ -220,6 +221,7 @@ const Item = ({
         linkData={linkData}
         $currentColorScheme={currentColorScheme}
         dataTooltipId={`aiAgentsTooltip${item.id}`}
+        LinkRouter={Link}
       />
     </DragAndDrop>
   );
@@ -396,29 +398,36 @@ const Items = ({
         (f) => f.rootFolderType === FolderType.USER,
       );
 
-      const agentsDividerIndex = 1;
-      let roomsDividerIndex = 4;
-      let recentDividerIndex = 8;
+      const hasAIAgents = elm.some(
+        (f) => f.rootFolderType === FolderType.AIAgents,
+      );
+
+      let dividerAfterAgents = hasAIAgents ? 1 : 0;
+      let dividerAfterRooms = hasAIAgents ? 4 : 2;
+      let dividerAfterRecent = hasAIAgents ? 8 : 6;
 
       if (!hasMyDocuments) {
-        roomsDividerIndex = 3;
-        recentDividerIndex = 7;
+        dividerAfterAgents = hasAIAgents ? 1 : 0;
+        dividerAfterRooms = hasAIAgents ? 3 : 1;
+        dividerAfterRecent = hasAIAgents ? 7 : 5;
+      }
+
+      if (hasAIAgents) {
+        items.splice(
+          dividerAfterAgents,
+          0,
+          <CatalogDivider key="ai-agents-divider" />,
+        );
       }
 
       items.splice(
-        agentsDividerIndex,
-        0,
-        <CatalogDivider key="ai-agents-divider" />,
-      );
-
-      items.splice(
-        roomsDividerIndex,
+        dividerAfterRooms,
         0,
         <CatalogDivider key="rooms-divider" />,
       );
 
       items.splice(
-        recentDividerIndex,
+        dividerAfterRecent,
         0,
         <CatalogDivider key="recent-divider" />,
       );

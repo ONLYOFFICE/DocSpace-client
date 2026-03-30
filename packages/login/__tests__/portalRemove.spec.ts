@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
+
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 import { expect, test } from "./fixtures/base";
 
@@ -49,7 +51,7 @@ const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
 test("portal remove render", async ({ page, baseUrl }) => {
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "portal-remove",
     "portal-remove-render.png",
@@ -64,7 +66,7 @@ test("portal remove delete", async ({ page, baseUrl }) => {
 
   await deleteButton.waitFor({ state: "detached" });
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "portal-remove",
     "portal-remove-delete.png",
@@ -90,7 +92,7 @@ test("portal remove cancel", async ({ page, baseUrl }) => {
 
   await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "portal-remove",
     "portal-remove-cancel.png",

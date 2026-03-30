@@ -26,9 +26,9 @@
 
 import { useState, useCallback } from "react";
 import debounce from "lodash.debounce";
-import { TextInput } from "@docspace/shared/components/text-input";
-import { Label } from "@docspace/shared/components/label";
-import { ComboBox } from "@docspace/shared/components/combobox";
+import { TextInput } from "@docspace/ui-kit/components/text-input";
+import { Label } from "@docspace/ui-kit/components/label";
+import { ComboBox } from "@docspace/ui-kit/components/combobox";
 
 import { ControlsGroup, RowContainer } from "../presets/StyledPresets";
 

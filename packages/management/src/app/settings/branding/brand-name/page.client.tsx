@@ -29,7 +29,7 @@
 import { useRouter, usePathname } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { BrandName } from "@docspace/shared/pages/Branding/BrandName";
 import { IWhiteLabelData } from "@docspace/shared/pages/Branding/WhiteLabel/WhiteLabel.types";

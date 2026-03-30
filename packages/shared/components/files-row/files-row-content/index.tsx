@@ -27,10 +27,10 @@
 import React from "react";
 import classNames from "classnames";
 
-import { RowContent } from "../../rows";
+import { RowContent } from "@docspace/ui-kit/components/rows";
 
 import styles from "./FilesRowContent.module.scss";
-import { RowContentProps } from "../../rows/row-content/RowContent.types";
+import { RowContentProps } from "@docspace/ui-kit/components/rows/row-content/RowContent.types";
 
 export const FilesRowContent = (props: RowContentProps) => {
   const { className } = props;

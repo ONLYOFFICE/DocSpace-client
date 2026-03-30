@@ -28,8 +28,8 @@ import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
-import { Heading } from "@docspace/shared/components/heading";
-import { IconButton } from "@docspace/shared/components/icon-button";
+import { Heading } from "@docspace/ui-kit/components/heading";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { tablet } from "@docspace/shared/utils";
 
 const HeaderContainer = styled.div`
@@ -49,34 +49,34 @@ const HeaderContainer = styled.div`
 
     svg {
       ${({ theme }) =>
-        theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
+				theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
     }
   }
 `;
 
 const AboutHeader = () => {
-  const { t, ready } = useTranslation("Common");
+	const { t, ready } = useTranslation("Common");
 
-  const navigate = useNavigate();
+	const navigate = useNavigate();
 
-  const onBack = () => {
-    navigate(-1);
-  };
+	const onBack = () => {
+		navigate(-1);
+	};
 
-  return (
-    <HeaderContainer>
-      <IconButton
-        iconName={ArrowPathReactSvgUrl}
-        size="17"
-        isFill
-        onClick={onBack}
-        className="arrow-button"
-      />
-      <Heading type="content" truncate>
-        {!ready ? "" : t("AboutHeader")}
-      </Heading>
-    </HeaderContainer>
-  );
+	return (
+		<HeaderContainer>
+			<IconButton
+				iconName={ArrowPathReactSvgUrl}
+				size="17"
+				isFill
+				onClick={onBack}
+				className="arrow-button"
+			/>
+			<Heading type="content" truncate>
+				{!ready ? "" : t("AboutHeader")}
+			</Heading>
+		</HeaderContainer>
+	);
 };
 
 export default AboutHeader;

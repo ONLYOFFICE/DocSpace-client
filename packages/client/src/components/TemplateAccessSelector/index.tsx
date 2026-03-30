@@ -28,91 +28,94 @@ import { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import Filter from "@docspace/shared/api/people/filter";
 import { EmployeeType } from "@docspace/shared/enums";
-import PeopleSelector from "@docspace/shared/selectors/People";
-import { TOnSubmit } from "@docspace/shared/components/selector/Selector.types";
-import { TUser } from "@docspace/shared/api/people/types";
+import PeopleSelector from "@docspace/ui-kit/selectors/People";
+import type { TOnSubmit } from "@docspace/ui-kit/components/selector";
+import type {
+	PeopleSelectorProps,
+	PeopleFilter,
+} from "@docspace/ui-kit/selectors/People/PeopleSelector.types";
 
 const PEOPLE_TAB_ID = "0";
 
 type TemplateAccessSelectorProps = {
-  roomId: string | number;
-  onSubmit: TOnSubmit;
-  onClose?: () => void;
-  onBackClick: () => void;
-  onCloseClick: () => void;
-  checkIfUserInvited?: (user: TUser) => boolean;
-  disableInvitedUsers?: string[];
+	roomId: string | number;
+	onSubmit: TOnSubmit;
+	onClose?: () => void;
+	onBackClick: () => void;
+	onCloseClick: () => void;
+	checkIfUserInvited?: PeopleSelectorProps["checkIfUserInvited"];
+	disableInvitedUsers?: string[];
 };
 
 const TemplateAccessSelector = ({
-  roomId,
-  onSubmit,
-  onClose,
-  onBackClick,
-  onCloseClick,
-  checkIfUserInvited,
-  disableInvitedUsers,
+	roomId,
+	onSubmit,
+	onClose,
+	onBackClick,
+	onCloseClick,
+	checkIfUserInvited,
+	disableInvitedUsers,
 }: TemplateAccessSelectorProps) => {
-  const [selectedTab, setSelectedTab] = useState(PEOPLE_TAB_ID);
+	const [selectedTab, setSelectedTab] = useState(PEOPLE_TAB_ID);
 
-  const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
+	const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
 
-  const getSelectedTab = (id: string) => setSelectedTab(id);
+	const getSelectedTab = (id: string) => setSelectedTab(id);
 
-  const getInfoText = () => {
-    return selectedTab === PEOPLE_TAB_ID ? (
-      <Trans
-        t={t}
-        ns="Files"
-        i18nKey="AddUsersOrGroupsInfo"
-        values={{ productName: t("Common:ProductName") }}
-        components={{ 1: <strong /> }}
-      />
-    ) : (
-      <Trans
-        t={t}
-        ns="Files"
-        i18nKey="AddUsersOrGroupsInfoGroups"
-        values={{ productName: t("Common:ProductName") }}
-        components={{ 1: <strong /> }}
-      />
-    );
-  };
+	const getInfoText = () => {
+		return selectedTab === PEOPLE_TAB_ID ? (
+			<Trans
+				t={t}
+				ns="Files"
+				i18nKey="AddUsersOrGroupsInfo"
+				values={{ productName: t("Common:ProductName") }}
+				components={{ 1: <strong /> }}
+			/>
+		) : (
+			<Trans
+				t={t}
+				ns="Files"
+				i18nKey="AddUsersOrGroupsInfoGroups"
+				values={{ productName: t("Common:ProductName") }}
+				components={{ 1: <strong /> }}
+			/>
+		);
+	};
 
-  const infoText = getInfoText() as unknown as string;
+	const infoText = getInfoText() as unknown as string;
 
-  const filter = Filter.getDefault();
-  filter.role = [EmployeeType.Admin, EmployeeType.RoomAdmin];
+	const filter = Filter.getDefault();
+	filter.role = [EmployeeType.Admin, EmployeeType.RoomAdmin];
 
-  return (
-    <PeopleSelector
-      useAside
-      onClose={onClose!}
-      onSubmit={onSubmit}
-      submitButtonLabel={t("Common:AddButton")}
-      disableSubmitButton={false}
-      isMultiSelect
-      disableDisabledUsers
-      withGroups
-      withInfo
-      infoText={infoText}
-      withInfoBadge
-      roomId={roomId}
-      disableInvitedUsers={disableInvitedUsers}
-      checkIfUserInvited={checkIfUserInvited}
-      withHeader
-      filter={filter}
-      headerProps={{
-        headerLabel: t("Common:Contacts"),
-        withoutBackButton: false,
-        withoutBorder: true,
-        isCloseable: true,
-        onBackClick,
-        onCloseClick,
-      }}
-      setActiveTab={getSelectedTab}
-    />
-  );
+	return (
+		<PeopleSelector
+			useAside
+			onClose={onClose!}
+			onSubmit={onSubmit}
+			submitButtonLabel={t("Common:AddButton")}
+			disableSubmitButton={false}
+			isMultiSelect
+			disableDisabledUsers
+			withGroups
+			withInfo
+			infoText={infoText}
+			withInfoBadge
+			roomId={roomId}
+			disableInvitedUsers={disableInvitedUsers}
+			checkIfUserInvited={checkIfUserInvited}
+			withHeader
+			filter={filter as unknown as PeopleFilter}
+			headerProps={{
+				headerLabel: t("Common:Contacts"),
+				withoutBackButton: false,
+				withoutBorder: true,
+				isCloseable: true,
+				onBackClick,
+				onCloseClick,
+			}}
+			setActiveTab={getSelectedTab}
+		/>
+	);
 };
 
 export default TemplateAccessSelector;

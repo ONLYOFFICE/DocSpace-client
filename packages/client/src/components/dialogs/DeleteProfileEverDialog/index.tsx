@@ -28,12 +28,12 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { toastr } from "@docspace/shared/components/toast";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import {
-  ModalDialog,
-  ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
+	ModalDialog,
+	ModalDialogType,
+} from "@docspace/ui-kit/components/modal-dialog";
 import api from "@docspace/shared/api";
 import { ButtonKeys } from "@docspace/shared/enums";
 
@@ -45,335 +45,335 @@ import BodyComponent from "./sub-components/BodyComponent";
 import { StyledBodyContent } from "./DeleteProfileEverDialog.styled";
 
 export type DeleteProfileEvenerDialogComponentsProps = {
-  userIds: UsersStore["getUsersToRemoveIds"];
-  usersToDelete: UsersStore["selection"];
-  filter: UsersStore["filter"];
-  contactsTab: UsersStore["contactsTab"];
-  removeUsers: UsersStore["removeUsers"];
-  setSelected: UsersStore["setSelected"];
+	userIds: UsersStore["getUsersToRemoveIds"];
+	usersToDelete: UsersStore["selection"];
+	filter: UsersStore["filter"];
+	contactsTab: UsersStore["contactsTab"];
+	removeUsers: UsersStore["removeUsers"];
+	setSelected: UsersStore["setSelected"];
 
-  setDataReassignmentDialogVisible: DialogStore["setDataReassignmentDialogVisible"];
-  setDeleteProfileDialogVisible: DialogStore["setDeleteProfileDialogVisible"];
-  setDataReassignmentDeleteProfile: DialogStore["setDataReassignmentDeleteProfile"];
+	setDataReassignmentDialogVisible: DialogStore["setDataReassignmentDialogVisible"];
+	setDeleteProfileDialogVisible: DialogStore["setDeleteProfileDialogVisible"];
+	setDataReassignmentDeleteProfile: DialogStore["setDataReassignmentDeleteProfile"];
 
-  setDialogData: DialogStore["setDialogData"];
+	setDialogData: DialogStore["setDialogData"];
 
-  updateCurrentGroup: GroupsStore["updateCurrentGroup"];
+	updateCurrentGroup: GroupsStore["updateCurrentGroup"];
 
-  visible: boolean;
-  onClose: VoidFunction;
+	visible: boolean;
+	onClose: VoidFunction;
 
-  deleteWithoutReassign: boolean;
-  onlyOneUser: boolean;
-  dataReassignment?: boolean;
-  dataReassignmentProgress?: boolean;
-  dataReassignmentTerminate?: boolean;
+	deleteWithoutReassign: boolean;
+	onlyOneUser: boolean;
+	dataReassignment?: boolean;
+	dataReassignmentProgress?: boolean;
+	dataReassignmentTerminate?: boolean;
 };
 
 const DeleteProfileEverDialogComponent = ({
-  usersToDelete,
-  userIds,
-  filter,
-  contactsTab,
-  removeUsers,
-  setSelected,
+	usersToDelete,
+	userIds,
+	filter,
+	contactsTab,
+	removeUsers,
+	setSelected,
 
-  visible,
-  onClose,
+	visible,
+	onClose,
 
-  setDataReassignmentDialogVisible,
-  setDeleteProfileDialogVisible,
-  setDataReassignmentDeleteProfile,
+	setDataReassignmentDialogVisible,
+	setDeleteProfileDialogVisible,
+	setDataReassignmentDeleteProfile,
 
-  setDialogData,
-  updateCurrentGroup,
+	setDialogData,
+	updateCurrentGroup,
 
-  deleteWithoutReassign,
-  onlyOneUser,
-  dataReassignment,
-  dataReassignmentProgress,
-  dataReassignmentTerminate,
+	deleteWithoutReassign,
+	onlyOneUser,
+	dataReassignment,
+	dataReassignmentProgress,
+	dataReassignmentTerminate,
 }: DeleteProfileEvenerDialogComponentsProps) => {
-  const { t } = useTranslation([
-    "DeleteProfileEverDialog",
-    "Common",
-    "PeopleTranslations",
-  ]);
+	const { t } = useTranslation([
+		"DeleteProfileEverDialog",
+		"Common",
+		"PeopleTranslations",
+	]);
 
-  const [isRequestRunning, setIsRequestRunning] = React.useState(false);
+	const [isRequestRunning, setIsRequestRunning] = React.useState(false);
 
-  const isInsideGroup = contactsTab === "inside_group";
-  const isGuests = contactsTab === "guests";
+	const isInsideGroup = contactsTab === "inside_group";
+	const isGuests = contactsTab === "guests";
 
-  // const needReassignData =
-  //   onlyOneUser &&
-  //   (usersToDelete[0].isRoomAdmin ||
-  //     usersToDelete[0].isOwner ||
-  //     usersToDelete[0].isAdmin);
+	// const needReassignData =
+	//   onlyOneUser &&
+	//   (usersToDelete[0].isRoomAdmin ||
+	//     usersToDelete[0].isOwner ||
+	//     usersToDelete[0].isAdmin);
 
-  const needReassignData = true;
+	const needReassignData = true;
 
-  const onlyGuests = usersToDelete.every((user) => user.isVisitor);
+	const onlyGuests = usersToDelete.every((user) => user.isVisitor);
 
-  const onDeleteUser = React.useCallback(
-    (id: string) => {
-      if (isRequestRunning) return;
+	const onDeleteUser = React.useCallback(
+		(id: string) => {
+			if (isRequestRunning) return;
 
-      setIsRequestRunning(true);
+			setIsRequestRunning(true);
 
-      api.people
-        .deleteUser(id)
-        .then(async () => {
-          const actions: Promise<unknown>[] = [];
+			api.people
+				.deleteUser(id)
+				.then(async () => {
+					const actions: Promise<unknown>[] = [];
 
-          if (isInsideGroup && filter.group)
-            actions.push(updateCurrentGroup(filter.group));
+					if (isInsideGroup && filter.group)
+						actions.push(updateCurrentGroup(filter.group));
 
-          await Promise.all(actions);
-        })
-        .then(() => {
-          toastr.success(
-            isGuests
-              ? t("SuccessfullyDeleteGuestInfoMessage")
-              : t("SuccessfullyDeleteUserInfoMessage"),
-          );
-        })
-        .catch((error) => toastr.error(error))
-        .finally(() => {
-          setIsRequestRunning(false);
-          setSelected("close");
-          onClose();
-        });
-    },
-    [
-      filter,
-      isGuests,
-      isInsideGroup,
-      isRequestRunning,
-      onClose,
-      setSelected,
-      t,
-      updateCurrentGroup,
-    ],
-  );
+					await Promise.all(actions);
+				})
+				.then(() => {
+					toastr.success(
+						isGuests
+							? t("SuccessfullyDeleteGuestInfoMessage")
+							: t("SuccessfullyDeleteUserInfoMessage"),
+					);
+				})
+				.catch((error) => toastr.error(error))
+				.finally(() => {
+					setIsRequestRunning(false);
+					setSelected("close");
+					onClose();
+				});
+		},
+		[
+			filter,
+			isGuests,
+			isInsideGroup,
+			isRequestRunning,
+			onClose,
+			setSelected,
+			t,
+			updateCurrentGroup,
+		],
+	);
 
-  const onDeleteUsers = React.useCallback(
-    (ids: string[]) => {
-      if (isRequestRunning) return;
-      setIsRequestRunning(true);
-      removeUsers(ids)
-        .then(() => {
-          toastr.success(
-            isGuests
-              ? t("DeleteGroupGuestsSuccessMessage")
-              : t("DeleteGroupUsersSuccessMessage"),
-          );
-        })
-        .catch((error) => toastr.error(error))
-        .finally(() => {
-          onClose();
-          setIsRequestRunning(false);
-          setSelected("close");
-        });
-    },
-    [isGuests, isRequestRunning, onClose, removeUsers, setSelected, t],
-  );
+	const onDeleteUsers = React.useCallback(
+		(ids: string[]) => {
+			if (isRequestRunning) return;
+			setIsRequestRunning(true);
+			removeUsers(ids)
+				.then(() => {
+					toastr.success(
+						isGuests
+							? t("DeleteGroupGuestsSuccessMessage")
+							: t("DeleteGroupUsersSuccessMessage"),
+					);
+				})
+				.catch((error) => toastr.error(error))
+				.finally(() => {
+					onClose();
+					setIsRequestRunning(false);
+					setSelected("close");
+				});
+		},
+		[isGuests, isRequestRunning, onClose, removeUsers, setSelected, t],
+	);
 
-  const onDeleteProfileEver = React.useCallback(() => {
-    if (deleteWithoutReassign || isGuests) {
-      if (onlyOneUser) onDeleteUser(usersToDelete[0].id);
-      else onDeleteUsers(userIds);
+	const onDeleteProfileEver = React.useCallback(() => {
+		if (deleteWithoutReassign || isGuests) {
+			if (onlyOneUser) onDeleteUser(usersToDelete[0].id);
+			else onDeleteUsers(userIds);
 
-      return;
-    }
+			return;
+		}
 
-    if (!needReassignData) {
-      if (onlyOneUser) {
-        onDeleteUser(usersToDelete[0].id);
+		if (!needReassignData) {
+			if (onlyOneUser) {
+				onDeleteUser(usersToDelete[0].id);
 
-        return;
-      }
+				return;
+			}
 
-      onDeleteUsers(userIds);
-      return;
-    }
+			onDeleteUsers(userIds);
+			return;
+		}
 
-    setDialogData({
-      user: usersToDelete[0],
-      reassignUserData: dataReassignment,
-      getReassignmentProgress: dataReassignmentProgress,
-      cancelReassignment: dataReassignmentTerminate,
-      currentUserAsDefault: true,
-    });
+		setDialogData({
+			user: usersToDelete[0],
+			reassignUserData: dataReassignment,
+			getReassignmentProgress: dataReassignmentProgress,
+			cancelReassignment: dataReassignmentTerminate,
+			currentUserAsDefault: true,
+		});
 
-    setDataReassignmentDialogVisible(true);
-    setDataReassignmentDeleteProfile(true);
-    setDeleteProfileDialogVisible(false);
-  }, [
-    deleteWithoutReassign,
-    isGuests,
-    needReassignData,
-    onDeleteUser,
-    onDeleteUsers,
-    onlyOneUser,
-    setDataReassignmentDeleteProfile,
-    setDataReassignmentDialogVisible,
-    setDeleteProfileDialogVisible,
-    setDialogData,
-    userIds,
-    usersToDelete,
-  ]);
+		setDataReassignmentDialogVisible(true);
+		setDataReassignmentDeleteProfile(true);
+		setDeleteProfileDialogVisible(false);
+	}, [
+		deleteWithoutReassign,
+		isGuests,
+		needReassignData,
+		onDeleteUser,
+		onDeleteUsers,
+		onlyOneUser,
+		setDataReassignmentDeleteProfile,
+		setDataReassignmentDialogVisible,
+		setDeleteProfileDialogVisible,
+		setDialogData,
+		userIds,
+		usersToDelete,
+	]);
 
-  const onClickReassignData = () => {
-    setDialogData({
-      user: usersToDelete[0],
-      reassignUserData: dataReassignment,
-      getReassignmentProgress: dataReassignmentProgress,
-      cancelReassignment: dataReassignmentTerminate,
-      showDeleteProfileCheckbox: true,
-    });
+	const onClickReassignData = () => {
+		setDialogData({
+			user: usersToDelete[0],
+			reassignUserData: dataReassignment,
+			getReassignmentProgress: dataReassignmentProgress,
+			cancelReassignment: dataReassignmentTerminate,
+			showDeleteProfileCheckbox: true,
+		});
 
-    setDataReassignmentDialogVisible(true);
-    setDataReassignmentDeleteProfile(true);
-    setDeleteProfileDialogVisible(false);
-  };
+		setDataReassignmentDialogVisible(true);
+		setDataReassignmentDeleteProfile(true);
+		setDeleteProfileDialogVisible(false);
+	};
 
-  const onKeyUpHandler = React.useCallback(
-    (e: KeyboardEvent) => {
-      if (e.key === ButtonKeys.esc) onClose();
-      if (e.key === ButtonKeys.enter) onDeleteProfileEver();
-    },
-    [onClose, onDeleteProfileEver],
-  );
+	const onKeyUpHandler = React.useCallback(
+		(e: KeyboardEvent) => {
+			if (e.key === ButtonKeys.esc) onClose();
+			if (e.key === ButtonKeys.enter) onDeleteProfileEver();
+		},
+		[onClose, onDeleteProfileEver],
+	);
 
-  React.useEffect(() => {
-    document.addEventListener("keyup", onKeyUpHandler, false);
+	React.useEffect(() => {
+		document.addEventListener("keyup", onKeyUpHandler, false);
 
-    return () => {
-      document.removeEventListener("keyup", onKeyUpHandler, false);
-    };
-  }, [onKeyUpHandler]);
+		return () => {
+			document.removeEventListener("keyup", onKeyUpHandler, false);
+		};
+	}, [onKeyUpHandler]);
 
-  return (
-    <ModalDialog
-      visible={visible}
-      onClose={onClose}
-      displayType={ModalDialogType.modal}
-      isLarge
-      autoMaxHeight
-    >
-      <ModalDialog.Header>
-        {onlyOneUser
-          ? isGuests
-            ? t("DeleteGuest")
-            : t("DeleteUser")
-          : isGuests
-            ? t("DeleteGuests")
-            : t("DeletingUsers")}
-      </ModalDialog.Header>
-      <ModalDialog.Body>
-        <StyledBodyContent needReassignData={needReassignData}>
-          <BodyComponent
-            needReassignData={needReassignData}
-            onClickReassignData={onClickReassignData}
-            deleteWithoutReassign={deleteWithoutReassign}
-            users={usersToDelete}
-            onlyOneUser={onlyOneUser}
-            onlyGuests={onlyGuests}
-            t={t}
-          />
-        </StyledBodyContent>
-      </ModalDialog.Body>
-      <ModalDialog.Footer>
-        <Button
-          className="delete-button"
-          key="OKBtn"
-          label={t("Common:Delete")}
-          size={ButtonSize.normal}
-          primary
-          scale
-          onClick={onDeleteProfileEver}
-          isLoading={isRequestRunning}
-          testId="dialog_delete_profile_button"
-        />
-        <Button
-          className="cancel-button"
-          label={t("Common:CancelButton")}
-          size={ButtonSize.normal}
-          scale
-          isDisabled={isRequestRunning}
-          onClick={onClose}
-          testId="dialog_delete_profile_cancel_button"
-        />
-      </ModalDialog.Footer>
-    </ModalDialog>
-  );
+	return (
+		<ModalDialog
+			visible={visible}
+			onClose={onClose}
+			displayType={ModalDialogType.modal}
+			isLarge
+			autoMaxHeight
+		>
+			<ModalDialog.Header>
+				{onlyOneUser
+					? isGuests
+						? t("DeleteGuest")
+						: t("DeleteUser")
+					: isGuests
+						? t("DeleteGuests")
+						: t("DeletingUsers")}
+			</ModalDialog.Header>
+			<ModalDialog.Body>
+				<StyledBodyContent needReassignData={needReassignData}>
+					<BodyComponent
+						needReassignData={needReassignData}
+						onClickReassignData={onClickReassignData}
+						deleteWithoutReassign={deleteWithoutReassign}
+						users={usersToDelete}
+						onlyOneUser={onlyOneUser}
+						onlyGuests={onlyGuests}
+						t={t}
+					/>
+				</StyledBodyContent>
+			</ModalDialog.Body>
+			<ModalDialog.Footer>
+				<Button
+					className="delete-button"
+					key="OKBtn"
+					label={t("Common:Delete")}
+					size={ButtonSize.normal}
+					primary
+					scale
+					onClick={onDeleteProfileEver}
+					isLoading={isRequestRunning}
+					testId="dialog_delete_profile_button"
+				/>
+				<Button
+					className="cancel-button"
+					label={t("Common:CancelButton")}
+					size={ButtonSize.normal}
+					scale
+					isDisabled={isRequestRunning}
+					onClick={onClose}
+					testId="dialog_delete_profile_cancel_button"
+				/>
+			</ModalDialog.Footer>
+		</ModalDialog>
+	);
 };
 
 export default inject(
-  (
-    { peopleStore, setup, infoPanelStore }: TStore,
-    { users }: { users: UsersStore["selection"] },
-  ) => {
-    const { dialogStore, usersStore, groupsStore } = peopleStore;
+	(
+		{ peopleStore, setup, infoPanelStore }: TStore,
+		{ users }: { users: UsersStore["selection"] },
+	) => {
+		const { dialogStore, usersStore, groupsStore } = peopleStore;
 
-    const { updateCurrentGroup } = groupsStore!;
+		const { updateCurrentGroup } = groupsStore!;
 
-    const {
-      needResetUserSelection,
-      filter,
-      removeUsers,
-      getUsersToRemoveIds: userIds,
-      setSelected,
-      selection,
-      contactsTab,
-    } = usersStore!;
+		const {
+			needResetUserSelection,
+			filter,
+			removeUsers,
+			getUsersToRemoveIds: userIds,
+			setSelected,
+			selection,
+			contactsTab,
+		} = usersStore!;
 
-    const { isVisible: infoPanelVisible } = infoPanelStore;
+		const { isVisible: infoPanelVisible } = infoPanelStore;
 
-    const {
-      setDataReassignmentDialogVisible,
-      setDeleteProfileDialogVisible,
-      setDataReassignmentDeleteProfile,
+		const {
+			setDataReassignmentDialogVisible,
+			setDeleteProfileDialogVisible,
+			setDataReassignmentDeleteProfile,
 
-      setDialogData,
-    } = dialogStore!;
+			setDialogData,
+		} = dialogStore!;
 
-    const {
-      dataReassignment,
-      dataReassignmentProgress,
-      dataReassignmentTerminate,
-    } = setup;
+		const {
+			dataReassignment,
+			dataReassignmentProgress,
+			dataReassignmentTerminate,
+		} = setup;
 
-    const usersToDelete = users.length ? users : selection;
+		const usersToDelete = users.length ? users : selection;
 
-    // const onlyGuests = usersToDelete.every(
-    //   (el) => el.role === EmployeeType.Guest,
-    // );
+		// const onlyGuests = usersToDelete.every(
+		//   (el) => el.role === EmployeeType.Guest,
+		// );
 
-    // const deleteWithoutReassign = usersToDelete.length > 1 && !onlyGuests;
-    const deleteWithoutReassign = false;
-    const onlyOneUser = usersToDelete.length === 1;
+		// const deleteWithoutReassign = usersToDelete.length > 1 && !onlyGuests;
+		const deleteWithoutReassign = false;
+		const onlyOneUser = usersToDelete.length === 1;
 
-    return {
-      setDataReassignmentDialogVisible,
-      setDeleteProfileDialogVisible,
-      setDataReassignmentDeleteProfile,
+		return {
+			setDataReassignmentDialogVisible,
+			setDeleteProfileDialogVisible,
+			setDataReassignmentDeleteProfile,
 
-      setDialogData,
-      setSelected,
-      removeUsers,
-      needResetUserSelection: !infoPanelVisible || needResetUserSelection,
-      filter,
-      updateCurrentGroup,
-      deleteWithoutReassign,
-      onlyOneUser,
-      userIds,
-      usersToDelete,
-      contactsTab,
-      dataReassignment,
-      dataReassignmentProgress,
-      dataReassignmentTerminate,
-    };
-  },
+			setDialogData,
+			setSelected,
+			removeUsers,
+			needResetUserSelection: !infoPanelVisible || needResetUserSelection,
+			filter,
+			updateCurrentGroup,
+			deleteWithoutReassign,
+			onlyOneUser,
+			userIds,
+			usersToDelete,
+			contactsTab,
+			dataReassignment,
+			dataReassignmentProgress,
+			dataReassignmentTerminate,
+		};
+	},
 )(observer(DeleteProfileEverDialogComponent));

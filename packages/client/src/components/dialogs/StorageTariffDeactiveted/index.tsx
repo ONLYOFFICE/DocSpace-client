@@ -28,13 +28,13 @@ import { useTranslation, Trans } from "react-i18next";
 import { useNavigate } from "react-router";
 import { inject, observer } from "mobx-react";
 
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Text } from "@docspace/ui-kit/components/text";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
+} from "@docspace/ui-kit/components/modal-dialog";
+
 import {
   calculateTotalPrice,
   getConvertedSize,
@@ -46,6 +46,7 @@ import styles from "./StorageTariff.module.scss";
 type StorageTariffDeactivetedProps = {
   visible: boolean;
   onClose?: () => void;
+  onOpenPanel?: () => void;
   totalPrice?: number;
   previousStoragePlanSize?: number;
   usedTotalStorageSizeCount?: number;
@@ -58,6 +59,7 @@ type StorageTariffDeactivetedProps = {
 const StorageTariffDeactiveted: React.FC<StorageTariffDeactivetedProps> = ({
   visible,
   onClose,
+  onOpenPanel,
   totalPrice,
   previousStoragePlanSize,
   usedTotalStorageSizeCount,
@@ -66,7 +68,7 @@ const StorageTariffDeactiveted: React.FC<StorageTariffDeactivetedProps> = ({
   formatWalletCurrency,
   setIsShowTariffDeactivatedModal,
 }) => {
-  const { t, ready } = useTranslation(["Payments", "Common"]);
+  const { t, ready } = useTranslation(["Payments", "Services", "Common"]);
   const navigate = useNavigate();
 
   const onCloseModal = () => {
@@ -78,11 +80,13 @@ const StorageTariffDeactiveted: React.FC<StorageTariffDeactivetedProps> = ({
   };
 
   const onClick = () => {
-    const servicesUrl = combineUrl("/portal-settings", "/services");
-
-    navigate(servicesUrl, {
-      state: { openDialog: true },
-    });
+    if (onOpenPanel) {
+      onOpenPanel();
+    } else {
+      navigate("/portal-settings/payments/services", {
+        state: { openDialog: true },
+      });
+    }
 
     onCloseModal();
   };
@@ -154,7 +158,7 @@ const StorageTariffDeactiveted: React.FC<StorageTariffDeactivetedProps> = ({
       <ModalDialog.Footer>
         <Button
           className="send-button"
-          label={t("GoToService")}
+          label={onOpenPanel ? t("Services:BuyStorage") : t("GoToService")}
           size={ButtonSize.normal}
           primary
           onClick={onClick}
@@ -215,3 +219,4 @@ export default inject(
     };
   },
 )(observer(StorageTariffDeactiveted));
+

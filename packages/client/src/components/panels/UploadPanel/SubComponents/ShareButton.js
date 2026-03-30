@@ -26,51 +26,51 @@
 
 import CatalogSharedReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.shared.react.svg?url";
 import React from "react";
-import { IconButton } from "@docspace/shared/components/icon-button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { inject, observer } from "mobx-react";
 
 const ShareButton = (props) => {
-  // console.log("Share button render");
-  const { uploadedFile, theme } = props;
-  const isShared = uploadedFile[0].fileInfo
-    ? uploadedFile[0].fileInfo.shared
-    : false;
-  let color = theme.filesPanels.upload.shareButton.color;
-  if (isShared) color = theme.filesPanels.upload.shareButton.sharedColor;
+	// console.log("Share button render");
+	const { uploadedFile, theme } = props;
+	const isShared = uploadedFile[0].fileInfo
+		? uploadedFile[0].fileInfo.shared
+		: false;
+	let color = theme.filesPanels.upload.shareButton.color;
+	if (isShared) color = theme.filesPanels.upload.shareButton.sharedColor;
 
-  const onOpenSharingPanel = () => {
-    const { setSharingPanelVisible, selectUploadedFile } = props;
+	const onOpenSharingPanel = () => {
+		const { setSharingPanelVisible, selectUploadedFile } = props;
 
-    const file = uploadedFile[0].fileInfo;
-    selectUploadedFile([file]);
-    setSharingPanelVisible(true);
-  };
+		const file = uploadedFile[0].fileInfo;
+		selectUploadedFile([file]);
+		setSharingPanelVisible(true);
+	};
 
-  return (
-    <IconButton
-      iconName={CatalogSharedReactSvgUrl}
-      className="upload_panel-icon"
-      color={color}
-      isClickable
-      onClick={onOpenSharingPanel}
-    />
-  );
+	return (
+		<IconButton
+			iconName={CatalogSharedReactSvgUrl}
+			className="upload_panel-icon"
+			color={color}
+			isClickable
+			onClick={onOpenSharingPanel}
+		/>
+	);
 };
 
 export default inject(
-  ({ settingsStore, dialogsStore, uploadDataStore }, { uniqueId }) => {
-    const { setSharingPanelVisible } = dialogsStore;
-    const { selectUploadedFile, getUploadedFile } = uploadDataStore;
+	({ settingsStore, dialogsStore, uploadDataStore }, { uniqueId }) => {
+		const { setSharingPanelVisible } = dialogsStore;
+		const { selectUploadedFile, getUploadedFile } = uploadDataStore;
 
-    const uploadedFile = getUploadedFile(uniqueId);
+		const uploadedFile = getUploadedFile(uniqueId);
 
-    return {
-      uploadedFile,
+		return {
+			uploadedFile,
 
-      theme: settingsStore.theme,
+			theme: settingsStore.theme,
 
-      setSharingPanelVisible,
-      selectUploadedFile,
-    };
-  },
+			setSharingPanelVisible,
+			selectUploadedFile,
+		};
+	},
 )(observer(ShareButton));

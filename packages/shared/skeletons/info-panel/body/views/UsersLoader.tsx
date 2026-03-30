@@ -26,37 +26,37 @@
 
 import React from "react";
 
-import { RectangleSkeleton } from "../../../rectangle";
+import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 import styles from "../Body.module.scss";
 import { propertyDimensions } from "../body.constant";
 
 const AccountsLoader = () => {
-  return (
-    <div className={styles.usersLoader} data-testid="users-loader">
-      <div className={styles.subtitleLoader}>
-        <RectangleSkeleton width="71px" height="16px" borderRadius="3px" />
-      </div>
+	return (
+		<div className={styles.usersLoader} data-testid="users-loader">
+			<div className={styles.subtitleLoader}>
+				<RectangleSkeleton width="71px" height="16px" borderRadius="3px" />
+			</div>
 
-      <div className={styles.property}>
-        {propertyDimensions.map((property) => [
-          <RectangleSkeleton
-            key={property.titleKey}
-            className="property-title"
-            width={property.propertyTitle}
-            height="20px"
-            borderRadius="3px"
-          />,
-          <RectangleSkeleton
-            key={property.contentKey}
-            className="property-content"
-            width={property.propertyContent}
-            height="20px"
-            borderRadius="3px"
-          />,
-        ])}
-      </div>
-    </div>
-  );
+			<div className={styles.property}>
+				{propertyDimensions.map((property) => [
+					<RectangleSkeleton
+						key={property.titleKey}
+						className="property-title"
+						width={property.propertyTitle}
+						height="20px"
+						borderRadius="3px"
+					/>,
+					<RectangleSkeleton
+						key={property.contentKey}
+						className="property-content"
+						width={property.propertyContent}
+						height="20px"
+						borderRadius="3px"
+					/>,
+				])}
+			</div>
+		</div>
+	);
 };
 
 export default AccountsLoader;

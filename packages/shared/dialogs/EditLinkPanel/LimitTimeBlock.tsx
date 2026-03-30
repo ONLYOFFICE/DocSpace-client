@@ -25,11 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { type FC, useId } from "react";
-import moment from "moment";
 import { useTranslation } from "react-i18next";
+import type { DateTime } from "luxon";
 
-import { DateTimePicker } from "../../components/date-time-picker";
-import type { Nullable } from "../../types";
+import { DateTimePicker } from "@docspace/ui-kit/components/date-time-picker";
+import { subtractFromDate, now } from "@docspace/ui-kit/utils/date";
 
 import ToggleBlock from "./ToggleBlock";
 import type { LimitTimeBlockProps } from "./EditLinkPanel.types";
@@ -50,12 +50,12 @@ const LimitTimeBlock: FC<LimitTimeBlockProps> = (props) => {
 
   const { t } = useTranslation(["Common"]);
 
-  const onChange = (date: Nullable<moment.Moment>) => {
+  const onChange = (date: DateTime | null) => {
     const expired = date
-      ? moment(date).toDate().getTime() <= new Date().getTime()
+      ? date.toJSDate().getTime() <= new Date().getTime()
       : false;
 
-    setExpirationDate(date?.toDate().toISOString() ?? null);
+    setExpirationDate(date?.toJSDate().toISOString() ?? null);
     setIsExpired(expired);
   };
 
@@ -65,14 +65,12 @@ const LimitTimeBlock: FC<LimitTimeBlockProps> = (props) => {
         withToggle={false}
         bodyText={bodyText}
         headerText={headerText}
+        isExpired={isExpired}
       />
     );
   }
 
-  // const minDate = new Date(new Date().getTime());
-  // minDate.setDate(new Date().getDate() - 1);
-  // minDate.setTime(minDate.getTime() + 60 * 60 * 1000);
-  const minDate = new Date();
+  const minDate = subtractFromDate(now(), 1, "days")!;
 
   return (
     <ToggleBlock {...props} withToggle={false}>
@@ -80,13 +78,15 @@ const LimitTimeBlock: FC<LimitTimeBlockProps> = (props) => {
         id={id}
         locale={language}
         minDate={minDate}
-        hasError={isExpired}
+        hasError={false}
         onChange={onChange}
         openDate={new Date()}
         initialDate={expirationDate}
         className="public-room_date-picker"
         selectDateText={t("Common:SelectDate")}
         dataTestId="edit_link_panel_date_time_picker"
+        useMaxTime
+        translations={{ AM: t("Common:AM"), PM: t("Common:PM") }}
       />
     </ToggleBlock>
   );

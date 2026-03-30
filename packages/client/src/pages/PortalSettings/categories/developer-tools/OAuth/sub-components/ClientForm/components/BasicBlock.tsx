@@ -30,16 +30,17 @@ import { Trans } from "react-i18next";
 import resizeImage from "resize-image";
 
 import { TTranslation } from "@docspace/shared/types";
-import { HelpButton } from "@docspace/shared/components/help-button";
-import { FieldContainer } from "@docspace/shared/components/field-container";
-import { Checkbox } from "@docspace/shared/components/checkbox";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { IClientReqDTO } from "@docspace/shared/utils/oauth/types";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { ONE_MEGABYTE } from "@docspace/shared/constants";
 
-// import { ToggleButton } from "@docspace/shared/components/toggle-button";
-// import { Text } from "@docspace/shared/components/text";
+// import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
+// import { Text } from "@docspace/ui-kit/components/text";
 
+import { getOAuthValidationCodeTranslation } from "../ClientForm.utils";
 import { StyledBlock, StyledInputBlock } from "../ClientForm.styled";
 
 import BlockHeader from "./BlockHeader";
@@ -65,6 +66,7 @@ interface BasicBlockProps {
 
   isEdit: boolean;
   errorFields: string[];
+  serverFieldErrors?: Record<string, string>;
   requiredErrorFields: string[];
   onBlur: (name: string) => void;
 }
@@ -80,6 +82,7 @@ const BasicBlock = ({
 
   isEdit,
   errorFields,
+  serverFieldErrors,
   requiredErrorFields,
   onBlur,
 }: BasicBlockProps) => {
@@ -141,7 +144,14 @@ const BasicBlock = ({
           name="name"
           placeholder={t("Common:EnterName")}
           value={nameValue}
-          error={isNameError ? `${t("ErrorName")} 3` : t("ThisRequiredField")}
+          error={
+            isNameError
+              ? getOAuthValidationCodeTranslation(
+                  t,
+                  serverFieldErrors?.["name"] ?? "ErrorName",
+                )
+              : t("ThisRequiredField")
+          }
           onChange={onChange}
           isRequired
           isError={isNameRequiredError || isNameError}
@@ -155,7 +165,10 @@ const BasicBlock = ({
           value={websiteUrlValue}
           error={
             isWebsiteError
-              ? `${t("ErrorWrongURL")}: ${window.location.origin}`
+              ? getOAuthValidationCodeTranslation(
+                  t,
+                  serverFieldErrors?.["website_url"] ?? "ErrorWrongURL",
+                )
               : t("ThisRequiredField")
           }
           onChange={onChange}

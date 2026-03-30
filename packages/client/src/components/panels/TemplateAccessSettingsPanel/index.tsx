@@ -32,514 +32,514 @@ import { TTranslation } from "@docspace/shared/types";
 import { EmployeeType, ShareAccessRights } from "@docspace/shared/enums";
 import Filter from "@docspace/shared/api/people/filter";
 import { isDesktop, isMobile } from "@docspace/shared/utils";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { toastr } from "@docspace/shared/components/toast";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import {
-  ModalDialog,
-  ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
-import { Text } from "@docspace/shared/components/text";
-import { IconButton } from "@docspace/shared/components/icon-button";
-import { Scrollbar } from "@docspace/shared/components/scrollbar";
-import { TSelectorItem } from "@docspace/shared/components/selector";
+	ModalDialog,
+	ModalDialogType,
+} from "@docspace/ui-kit/components/modal-dialog";
+import { Text } from "@docspace/ui-kit/components/text";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
+import { TSelectorItem } from "@docspace/ui-kit/components/selector";
 import {
-  getRoomMembers,
-  getTemplateAvailable,
-  setTemplateAvailable,
-  updateRoomMemberRole,
+	getRoomMembers,
+	getTemplateAvailable,
+	setTemplateAvailable,
+	updateRoomMemberRole,
 } from "@docspace/shared/api/rooms";
 import { TRoom } from "@docspace/shared/api/rooms/types";
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
 
 import {
-  StyledBlock,
-  StyledSubHeader,
-  StyledToggleButton,
-  StyledDescription,
-  StyledBody,
-  StyledTemplateAccessSettingsContainer,
-  StyledTemplateAccessSettingsHeader,
-  StyledTemplateAccessSettingsBody,
-  StyledTemplateAccessSettingsFooter,
+	StyledBlock,
+	StyledSubHeader,
+	StyledToggleButton,
+	StyledDescription,
+	StyledBody,
+	StyledTemplateAccessSettingsContainer,
+	StyledTemplateAccessSettingsHeader,
+	StyledTemplateAccessSettingsBody,
+	StyledTemplateAccessSettingsFooter,
 } from "./StyledInvitePanel";
 import TemplateAccessSelector from "../../TemplateAccessSelector";
 import ItemsList from "./sub-components/ItemsList";
 import InviteInput from "./sub-components/InviteInput";
 
 type TemplateAccessSettingsContainer =
-  | {
-      isContainer: true;
-      setUsersPanelIsVisible: (visible: boolean) => void;
-      onClosePanels: VoidFunction;
-      onCloseAccessSettings: VoidFunction;
-      onSetAccessSettings: VoidFunction;
-      inviteItems: TSelectorItem[];
-      setInviteItems: (inviteItems: TSelectorItem[]) => void;
-      updateInfoPanelMembers: undefined;
-      templateIsAvailable: boolean;
-      setTemplateIsAvailable: (isAvailable: boolean) => void;
-    }
-  | {
-      isContainer?: undefined;
-      setUsersPanelIsVisible?: undefined;
-      onClosePanels?: undefined;
-      onCloseAccessSettings?: undefined;
-      onSetAccessSettings?: undefined;
-      inviteItems?: undefined;
-      setInviteItems?: undefined;
-      updateInfoPanelMembers: () => void;
-      templateIsAvailable: undefined;
-      setTemplateIsAvailable: undefined;
-    };
+	| {
+			isContainer: true;
+			setUsersPanelIsVisible: (visible: boolean) => void;
+			onClosePanels: VoidFunction;
+			onCloseAccessSettings: VoidFunction;
+			onSetAccessSettings: VoidFunction;
+			inviteItems: TSelectorItem[];
+			setInviteItems: (inviteItems: TSelectorItem[]) => void;
+			updateInfoPanelMembers: undefined;
+			templateIsAvailable: boolean;
+			setTemplateIsAvailable: (isAvailable: boolean) => void;
+	  }
+	| {
+			isContainer?: undefined;
+			setUsersPanelIsVisible?: undefined;
+			onClosePanels?: undefined;
+			onCloseAccessSettings?: undefined;
+			onSetAccessSettings?: undefined;
+			inviteItems?: undefined;
+			setInviteItems?: undefined;
+			updateInfoPanelMembers: () => void;
+			templateIsAvailable: undefined;
+			setTemplateIsAvailable: undefined;
+	  };
 
 type TemplateAccessSettingsPanelProps = {
-  t: TTranslation;
-  tReady: boolean;
-  visible: boolean;
-  setIsVisible: (visible: boolean) => void;
-  templateItem: TRoom;
-  setInfoPanelIsMobileHidden?: (visible: boolean) => void;
+	t: TTranslation;
+	tReady: boolean;
+	visible: boolean;
+	setIsVisible: (visible: boolean) => void;
+	templateItem: TRoom;
+	setInfoPanelIsMobileHidden?: (visible: boolean) => void;
 } & TemplateAccessSettingsContainer;
 
 const TemplateAccessSettingsPanel = ({
-  t,
-  tReady,
-  visible,
-  setIsVisible,
-  templateItem,
-  setInfoPanelIsMobileHidden,
-  isContainer,
-  setUsersPanelIsVisible,
-  onClosePanels,
-  onCloseAccessSettings,
-  inviteItems,
-  setInviteItems,
-  onSetAccessSettings,
-  updateInfoPanelMembers,
-  templateIsAvailable,
-  setTemplateIsAvailable,
+	t,
+	tReady,
+	visible,
+	setIsVisible,
+	templateItem,
+	setInfoPanelIsMobileHidden,
+	isContainer,
+	setUsersPanelIsVisible,
+	onClosePanels,
+	onCloseAccessSettings,
+	inviteItems,
+	setInviteItems,
+	onSetAccessSettings,
+	updateInfoPanelMembers,
+	templateIsAvailable,
+	setTemplateIsAvailable,
 }: TemplateAccessSettingsPanelProps) => {
-  const [accessItems, setAccessItems] = useState<TSelectorItem[]>([]);
+	const [accessItems, setAccessItems] = useState<TSelectorItem[]>([]);
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [modalIsLoading, setModalIsLoading] = useState(false);
-  const [isAvailable, setIsAvailable] = useState(templateIsAvailable ?? false);
+	const [isLoading, setIsLoading] = useState(false);
+	const [modalIsLoading, setModalIsLoading] = useState(false);
+	const [isAvailable, setIsAvailable] = useState(templateIsAvailable ?? false);
 
-  const [scrollAllPanelContent, setScrollAllPanelContent] = useState(false);
-  const [addUsersPanelVisible, setAddUsersPanelVisible] = useState(false);
-  const [isMobileView, setIsMobileView] = useState(isMobile());
+	const [scrollAllPanelContent, setScrollAllPanelContent] = useState(false);
+	const [addUsersPanelVisible, setAddUsersPanelVisible] = useState(false);
+	const [isMobileView, setIsMobileView] = useState(isMobile());
 
-  const templateId = templateItem?.id;
+	const templateId = templateItem?.id;
 
-  const prevIsAvailable = useRef<boolean>(undefined);
+	const prevIsAvailable = useRef<boolean>(undefined);
 
-  const setAccessItemsAction = (items: TSelectorItem[]) => {
-    if (isContainer) setInviteItems(items);
-    else setAccessItems(items);
-  };
+	const setAccessItemsAction = (items: TSelectorItem[]) => {
+		if (isContainer) setInviteItems(items);
+		else setAccessItems(items);
+	};
 
-  const onCheckHeight = () => {
-    setScrollAllPanelContent(!isDesktop());
-    setIsMobileView(isMobile());
-  };
+	const onCheckHeight = () => {
+		setScrollAllPanelContent(!isDesktop());
+		setIsMobileView(isMobile());
+	};
 
-  const onAvailableChange = () => {
-    if (isContainer) setTemplateIsAvailable(!templateIsAvailable);
-    setIsAvailable(!isAvailable);
-  };
+	const onAvailableChange = () => {
+		if (isContainer) setTemplateIsAvailable(!templateIsAvailable);
+		setIsAvailable(!isAvailable);
+	};
 
-  const onClose = useCallback(() => {
-    if (setInfoPanelIsMobileHidden) {
-      setInfoPanelIsMobileHidden(false);
-    }
+	const onClose = useCallback(() => {
+		if (setInfoPanelIsMobileHidden) {
+			setInfoPanelIsMobileHidden(false);
+		}
 
-    setIsVisible(false);
-  }, [setInfoPanelIsMobileHidden, setIsVisible]);
+		setIsVisible(false);
+	}, [setInfoPanelIsMobileHidden, setIsVisible]);
 
-  const onBackClick = () => {
-    if (addUsersPanelVisible) setAddUsersPanelVisible(false);
-  };
+	const onBackClick = () => {
+		if (addUsersPanelVisible) setAddUsersPanelVisible(false);
+	};
 
-  const onCloseUsersPanel = () => {
-    if (isContainer) setUsersPanelIsVisible(false);
-    else setAddUsersPanelVisible(false);
-  };
+	const onCloseUsersPanel = () => {
+		if (isContainer) setUsersPanelIsVisible(false);
+		else setAddUsersPanelVisible(false);
+	};
 
-  const setPanelVisible = (isVisible: boolean) => {
-    if (isContainer) setUsersPanelIsVisible(isVisible);
-    else setAddUsersPanelVisible(isVisible);
-  };
+	const setPanelVisible = (isVisible: boolean) => {
+		if (isContainer) setUsersPanelIsVisible(isVisible);
+		else setAddUsersPanelVisible(isVisible);
+	};
 
-  const onMouseDown = useCallback(
-    (e: MouseEvent) => {
-      const target = e.target as HTMLTextAreaElement;
+	const onMouseDown = useCallback(
+		(e: MouseEvent) => {
+			const target = e.target as HTMLTextAreaElement;
 
-      if (target?.id === "InvitePanelWrapper") onClose();
-    },
-    [onClose],
-  );
+			if (target?.id === "InvitePanelWrapper") onClose();
+		},
+		[onClose],
+	);
 
-  useEffect(() => {
-    onCheckHeight();
-    window.addEventListener("resize", onCheckHeight);
-    if (isMobileView) window.addEventListener("mousedown", onMouseDown);
-    return () => {
-      window.removeEventListener("resize", onCheckHeight);
-      window.removeEventListener("mousedown", onMouseDown);
-    };
-  }, [isMobileView, onMouseDown]);
+	useEffect(() => {
+		onCheckHeight();
+		window.addEventListener("resize", onCheckHeight);
+		if (isMobileView) window.addEventListener("mousedown", onMouseDown);
+		return () => {
+			window.removeEventListener("resize", onCheckHeight);
+			window.removeEventListener("mousedown", onMouseDown);
+		};
+	}, [isMobileView, onMouseDown]);
 
-  const onKeyPress = (e: KeyboardEvent) => {
-    if (e.key === "Esc" || e.key === "Escape") onClose();
-    if (
-      e.key === "Backspace" &&
-      e.target instanceof HTMLElement &&
-      e.target.nodeName !== "INPUT" &&
-      e.target.nodeName !== "TEXTAREA"
-    )
-      onCloseAccessSettings?.();
-  };
+	const onKeyPress = (e: KeyboardEvent) => {
+		if (e.key === "Esc" || e.key === "Escape") onClose();
+		if (
+			e.key === "Backspace" &&
+			e.target instanceof HTMLElement &&
+			e.target.nodeName !== "INPUT" &&
+			e.target.nodeName !== "TEXTAREA"
+		)
+			onCloseAccessSettings?.();
+	};
 
-  useEffect(() => {
-    document.addEventListener("keyup", onKeyPress);
-    return () => document.removeEventListener("keyup", onKeyPress);
-  });
+	useEffect(() => {
+		document.addEventListener("keyup", onKeyPress);
+		return () => document.removeEventListener("keyup", onKeyPress);
+	});
 
-  const getTemplateMembers = async () => {
-    if (isLoading) return;
+	const getTemplateMembers = async () => {
+		if (isLoading) return;
 
-    setModalIsLoading(true);
-    Promise.all([
-      getRoomMembers(templateId, {}),
-      getTemplateAvailable(templateId),
-    ])
-      .then(([members, available]) => {
-        if (members?.items?.length) {
-          const convertedItems = members.items.map(
-            ({ access, isOwner, sharedTo }) => {
-              return {
-                templateAccess: access,
-                templateIsOwner: isOwner,
-                ...sharedTo,
-              };
-            },
-          );
-          setAccessItems(convertedItems as unknown as TSelectorItem[]);
-        }
+		setModalIsLoading(true);
+		Promise.all([
+			getRoomMembers(templateId, {}),
+			getTemplateAvailable(templateId),
+		])
+			.then(([members, available]) => {
+				if (members?.items?.length) {
+					const convertedItems = members.items.map(
+						({ access, isOwner, sharedTo }) => {
+							return {
+								templateAccess: access,
+								templateIsOwner: isOwner,
+								...sharedTo,
+							};
+						},
+					);
+					setAccessItems(convertedItems as unknown as TSelectorItem[]);
+				}
 
-        prevIsAvailable.current = available as boolean;
-        setIsAvailable(available as boolean);
-      })
-      .catch((error) => {
-        toastr.error(error as Error);
-      })
-      .finally(() => {
-        setModalIsLoading(false);
-      });
-  };
+				prevIsAvailable.current = available as boolean;
+				setIsAvailable(available as boolean);
+			})
+			.catch((error) => {
+				toastr.error(error as Error);
+			})
+			.finally(() => {
+				setModalIsLoading(false);
+			});
+	};
 
-  useEffect(() => {
-    if (!isContainer) getTemplateMembers();
-  }, [isContainer]);
+	useEffect(() => {
+		if (!isContainer) getTemplateMembers();
+	}, [isContainer]);
 
-  useEffect(() => {
-    if (isContainer) {
-      setAccessItems(inviteItems);
-    }
-  }, [isContainer, inviteItems]);
+	useEffect(() => {
+		if (isContainer) {
+			setAccessItems(inviteItems);
+		}
+	}, [isContainer, inviteItems]);
 
-  const onSubmit = () => {
-    if (isContainer) {
-      onSetAccessSettings();
-      return;
-    }
+	const onSubmit = () => {
+		if (isContainer) {
+			onSetAccessSettings();
+			return;
+		}
 
-    setIsLoading(true);
+		setIsLoading(true);
 
-    if (prevIsAvailable.current !== isAvailable) {
-      setTemplateAvailable?.(templateId, isAvailable)
-        ?.then(() => updateInfoPanelMembers())
-        .finally(() => {
-          setIsLoading(false);
-          onClose();
-        });
+		if (prevIsAvailable.current !== isAvailable) {
+			setTemplateAvailable?.(templateId, isAvailable)
+				?.then(() => updateInfoPanelMembers())
+				.finally(() => {
+					setIsLoading(false);
+					onClose();
+				});
 
-      return;
-    }
+			return;
+		}
 
-    const invitations = accessItems
-      .filter((i) => !i.templateIsOwner)
-      .map((inviteItem) => {
-        return {
-          id: inviteItem.id,
-          access: inviteItem.templateAccess ?? ShareAccessRights.ReadOnly,
-        };
-      });
+		const invitations = accessItems
+			.filter((i) => !i.templateIsOwner)
+			.map((inviteItem) => {
+				return {
+					id: inviteItem.id,
+					access: inviteItem.templateAccess ?? ShareAccessRights.ReadOnly,
+				};
+			});
 
-    updateRoomMemberRole(templateId, {
-      invitations,
-      notify: false,
-      sharingMessage: "",
-    })
-      .then(() => updateInfoPanelMembers())
-      .catch((err) => toastr.error(err))
-      .finally(() => {
-        setIsLoading(false);
-        onClose();
-      });
-  };
+		updateRoomMemberRole(templateId, {
+			invitations,
+			notify: false,
+			sharingMessage: "",
+		})
+			.then(() => updateInfoPanelMembers())
+			.catch((err) => toastr.error(err))
+			.finally(() => {
+				setIsLoading(false);
+				onClose();
+			});
+	};
 
-  const onSubmitItems = (users: TSelectorItem[]) => {
-    const items = [...accessItems, ...users];
+	const onSubmitItems = (users: TSelectorItem[]) => {
+		const items = [...accessItems, ...users];
 
-    setAccessItemsAction(items);
-    onCloseUsersPanel();
-  };
+		setAccessItemsAction(items);
+		onCloseUsersPanel();
+	};
 
-  const onCloseClick = () => {
-    if (isContainer) onClosePanels();
-    else onClose();
-  };
+	const onCloseClick = () => {
+		if (isContainer) onClosePanels();
+		else onClose();
+	};
 
-  const hasInvitedUsers = !!accessItems.length;
+	const hasInvitedUsers = !!accessItems.length;
 
-  const filter = Filter.getDefault();
-  filter.role = [EmployeeType.Admin, EmployeeType.RoomAdmin];
+	const filter = Filter.getDefault();
+	filter.role = [EmployeeType.Admin, EmployeeType.RoomAdmin];
 
-  const invitedUsers = useMemo(
-    () => accessItems.map((item) => item.id),
-    [accessItems],
-  );
+	const invitedUsers = useMemo(
+		() => accessItems.map((item) => item.id),
+		[accessItems],
+	);
 
-  const TemplateAccessSettingsContent = (
-    <StyledTemplateAccessSettingsContainer>
-      <StyledTemplateAccessSettingsHeader>
-        <IconButton
-          className="arrow-button"
-          iconName={ArrowPathReactSvgUrl}
-          size={17}
-          onClick={onCloseAccessSettings}
-          isFill
-          isClickable
-          dataTestId="template_access_settings_back_button"
-        />
-        <Text fontSize="21px" fontWeight={700} className="header-component">
-          {t("Files:AccessSettings")}
-        </Text>
-        <IconButton
-          size={17}
-          className="close-button"
-          iconName={CrossReactSvgUrl}
-          onClick={onClosePanels}
-          isClickable
-          isStroke
-          dataTestId="template_access_settings_close_button"
-        />
-      </StyledTemplateAccessSettingsHeader>
-      <Scrollbar>
-        <StyledTemplateAccessSettingsBody>
-          <StyledBlock>
-            <StyledSubHeader $inline>
-              {t("Files:TemplateAvailable")}
+	const TemplateAccessSettingsContent = (
+		<StyledTemplateAccessSettingsContainer>
+			<StyledTemplateAccessSettingsHeader>
+				<IconButton
+					className="arrow-button"
+					iconName={ArrowPathReactSvgUrl}
+					size={17}
+					onClick={onCloseAccessSettings}
+					isFill
+					isClickable
+					dataTestId="template_access_settings_back_button"
+				/>
+				<Text fontSize="21px" fontWeight={700} className="header-component">
+					{t("Files:AccessSettings")}
+				</Text>
+				<IconButton
+					size={17}
+					className="close-button"
+					iconName={CrossReactSvgUrl}
+					onClick={onClosePanels}
+					isClickable
+					isStroke
+					dataTestId="template_access_settings_close_button"
+				/>
+			</StyledTemplateAccessSettingsHeader>
+			<Scrollbar>
+				<StyledTemplateAccessSettingsBody>
+					<StyledBlock>
+						<StyledSubHeader $inline>
+							{t("Files:TemplateAvailable")}
 
-              <StyledToggleButton
-                className="invite-via-link"
-                isChecked={isAvailable}
-                onChange={onAvailableChange}
-                dataTestId="template_access_settings_available"
-              />
-            </StyledSubHeader>
-            <StyledDescription>
-              {t("Files:TemplateAvailableDescription", {
-                productName: t("Common:ProductName"),
-              })}
-            </StyledDescription>
-          </StyledBlock>
-          <StyledBody isDisabled={isAvailable}>
-            <InviteInput
-              inviteItems={accessItems}
-              setInviteItems={setAccessItemsAction}
-              setAddUsersPanelVisible={setPanelVisible}
-              isDisabled={isAvailable}
-              roomId={templateId}
-            />
+							<StyledToggleButton
+								className="invite-via-link"
+								isChecked={isAvailable}
+								onChange={onAvailableChange}
+								dataTestId="template_access_settings_available"
+							/>
+						</StyledSubHeader>
+						<StyledDescription>
+							{t("Files:TemplateAvailableDescription", {
+								productName: t("Common:ProductName"),
+							})}
+						</StyledDescription>
+					</StyledBlock>
+					<StyledBody isDisabled={isAvailable}>
+						<InviteInput
+							inviteItems={accessItems}
+							setInviteItems={setAccessItemsAction}
+							setAddUsersPanelVisible={setPanelVisible}
+							isDisabled={isAvailable}
+							roomId={templateId}
+						/>
 
-            <StyledSubHeader className="invite-input-text">
-              {t("Files:AccessToTemplate")}
-            </StyledSubHeader>
-            {hasInvitedUsers ? (
-              <ItemsList
-                t={t}
-                inviteItems={accessItems}
-                setInviteItems={setAccessItemsAction}
-                scrollAllPanelContent={scrollAllPanelContent}
-                isDisabled={isAvailable}
-              />
-            ) : null}
-          </StyledBody>
-        </StyledTemplateAccessSettingsBody>
-      </Scrollbar>
+						<StyledSubHeader className="invite-input-text">
+							{t("Files:AccessToTemplate")}
+						</StyledSubHeader>
+						{hasInvitedUsers ? (
+							<ItemsList
+								t={t}
+								inviteItems={accessItems}
+								setInviteItems={setAccessItemsAction}
+								scrollAllPanelContent={scrollAllPanelContent}
+								isDisabled={isAvailable}
+							/>
+						) : null}
+					</StyledBody>
+				</StyledTemplateAccessSettingsBody>
+			</Scrollbar>
 
-      <StyledTemplateAccessSettingsFooter>
-        <Button
-          className="send-invitation"
-          scale
-          size={ButtonSize.normal}
-          isDisabled={!hasInvitedUsers || isLoading}
-          primary
-          label={t("Common:SaveButton")}
-          onClick={onSubmit}
-          testId="template_access_settings_save_button"
-        />
-        <Button
-          className="cancel-button"
-          scale
-          size={ButtonSize.normal}
-          isDisabled={isLoading}
-          onClick={onCloseAccessSettings}
-          label={t("Common:CancelButton")}
-          testId="template_access_settings_footer_cancel_button"
-        />
-      </StyledTemplateAccessSettingsFooter>
-    </StyledTemplateAccessSettingsContainer>
-  );
+			<StyledTemplateAccessSettingsFooter>
+				<Button
+					className="send-invitation"
+					scale
+					size={ButtonSize.normal}
+					isDisabled={!hasInvitedUsers || isLoading}
+					primary
+					label={t("Common:SaveButton")}
+					onClick={onSubmit}
+					testId="template_access_settings_save_button"
+				/>
+				<Button
+					className="cancel-button"
+					scale
+					size={ButtonSize.normal}
+					isDisabled={isLoading}
+					onClick={onCloseAccessSettings}
+					label={t("Common:CancelButton")}
+					testId="template_access_settings_footer_cancel_button"
+				/>
+			</StyledTemplateAccessSettingsFooter>
+		</StyledTemplateAccessSettingsContainer>
+	);
 
-  return !isContainer ? (
-    <ModalDialog
-      visible={visible}
-      displayType={ModalDialogType.aside}
-      onClose={onClose}
-      onBackClick={onBackClick}
-      withBodyScroll
-      isLoading={!tReady || modalIsLoading}
-      onSubmit={onSubmit}
-      withForm
-      withoutPadding
-      containerVisible={addUsersPanelVisible}
-    >
-      <ModalDialog.Container>
-        {addUsersPanelVisible ? (
-          <TemplateAccessSelector
-            roomId={templateId}
-            onSubmit={onSubmitItems}
-            onClose={onClosePanels}
-            onCloseClick={onCloseClick}
-            onBackClick={onCloseUsersPanel}
-            disableInvitedUsers={invitedUsers as string[]}
-          />
-        ) : null}
-      </ModalDialog.Container>
+	return !isContainer ? (
+		<ModalDialog
+			visible={visible}
+			displayType={ModalDialogType.aside}
+			onClose={onClose}
+			onBackClick={onBackClick}
+			withBodyScroll
+			isLoading={!tReady || modalIsLoading}
+			onSubmit={onSubmit}
+			withForm
+			withoutPadding
+			containerVisible={addUsersPanelVisible}
+		>
+			<ModalDialog.Container>
+				{addUsersPanelVisible ? (
+					<TemplateAccessSelector
+						roomId={templateId}
+						onSubmit={onSubmitItems}
+						onClose={onClosePanels}
+						onCloseClick={onCloseClick}
+						onBackClick={onCloseUsersPanel}
+						disableInvitedUsers={invitedUsers as string[]}
+					/>
+				) : null}
+			</ModalDialog.Container>
 
-      <ModalDialog.Header>{t("Files:AccessSettings")}</ModalDialog.Header>
-      <ModalDialog.Body>
-        <>
-          <StyledBlock>
-            <StyledSubHeader $inline>
-              {t("Files:TemplateAvailable")}
+			<ModalDialog.Header>{t("Files:AccessSettings")}</ModalDialog.Header>
+			<ModalDialog.Body>
+				<>
+					<StyledBlock>
+						<StyledSubHeader $inline>
+							{t("Files:TemplateAvailable")}
 
-              <StyledToggleButton
-                className="invite-via-link"
-                isChecked={isAvailable}
-                onChange={onAvailableChange}
-                dataTestId="template_access_settings_modal_available"
-              />
-            </StyledSubHeader>
-            <StyledDescription>
-              {t("Files:TemplateAvailableDescription", {
-                productName: t("Common:ProductName"),
-              })}
-            </StyledDescription>
-          </StyledBlock>
-          <StyledBody isDisabled={isAvailable}>
-            <InviteInput
-              inviteItems={accessItems}
-              setInviteItems={setAccessItemsAction}
-              setAddUsersPanelVisible={setAddUsersPanelVisible}
-              isDisabled={isAvailable}
-              roomId={templateId}
-            />
-            <StyledSubHeader className="invite-input-text">
-              {t("Files:AccessToTemplate")}
-            </StyledSubHeader>
-            {hasInvitedUsers ? (
-              <ItemsList
-                t={t}
-                inviteItems={accessItems}
-                setInviteItems={setAccessItemsAction}
-                scrollAllPanelContent={scrollAllPanelContent}
-                isDisabled={isAvailable}
-              />
-            ) : null}
-          </StyledBody>
-        </>
-      </ModalDialog.Body>
-      <ModalDialog.Footer>
-        <Button
-          className="send-invitation"
-          scale
-          size={ButtonSize.normal}
-          isLoading={isLoading}
-          isDisabled={!hasInvitedUsers || isLoading}
-          primary
-          label={t("Common:SaveButton")}
-          type="submit"
-          testId="template_access_settings_modal_save_button"
-        />
-        <Button
-          className="cancel-button"
-          scale
-          size={ButtonSize.normal}
-          isDisabled={isLoading}
-          onClick={onClose}
-          label={t("Common:CancelButton")}
-          testId="template_access_settings_modal_cancel_button"
-        />
-      </ModalDialog.Footer>
-    </ModalDialog>
-  ) : (
-    TemplateAccessSettingsContent
-  );
+							<StyledToggleButton
+								className="invite-via-link"
+								isChecked={isAvailable}
+								onChange={onAvailableChange}
+								dataTestId="template_access_settings_modal_available"
+							/>
+						</StyledSubHeader>
+						<StyledDescription>
+							{t("Files:TemplateAvailableDescription", {
+								productName: t("Common:ProductName"),
+							})}
+						</StyledDescription>
+					</StyledBlock>
+					<StyledBody isDisabled={isAvailable}>
+						<InviteInput
+							inviteItems={accessItems}
+							setInviteItems={setAccessItemsAction}
+							setAddUsersPanelVisible={setAddUsersPanelVisible}
+							isDisabled={isAvailable}
+							roomId={templateId}
+						/>
+						<StyledSubHeader className="invite-input-text">
+							{t("Files:AccessToTemplate")}
+						</StyledSubHeader>
+						{hasInvitedUsers ? (
+							<ItemsList
+								t={t}
+								inviteItems={accessItems}
+								setInviteItems={setAccessItemsAction}
+								scrollAllPanelContent={scrollAllPanelContent}
+								isDisabled={isAvailable}
+							/>
+						) : null}
+					</StyledBody>
+				</>
+			</ModalDialog.Body>
+			<ModalDialog.Footer>
+				<Button
+					className="send-invitation"
+					scale
+					size={ButtonSize.normal}
+					isLoading={isLoading}
+					isDisabled={!hasInvitedUsers || isLoading}
+					primary
+					label={t("Common:SaveButton")}
+					type="submit"
+					testId="template_access_settings_modal_save_button"
+				/>
+				<Button
+					className="cancel-button"
+					scale
+					size={ButtonSize.normal}
+					isDisabled={isLoading}
+					onClick={onClose}
+					label={t("Common:CancelButton")}
+					testId="template_access_settings_modal_cancel_button"
+				/>
+			</ModalDialog.Footer>
+		</ModalDialog>
+	) : (
+		TemplateAccessSettingsContent
+	);
 };
 
 export default inject(
-  (
-    { dialogsStore, infoPanelStore, filesStore }: TStore,
-    {
-      isContainer = false,
-      setIsVisible,
-    }: {
-      isContainer: boolean;
-      setIsVisible: (visible: boolean) => void;
-    },
-  ) => {
-    const {
-      setIsMobileHidden: setInfoPanelIsMobileHidden,
-      updateInfoPanelMembers,
-      infoPanelSelection,
-    } = infoPanelStore;
-    const { selection, bufferSelection } = filesStore;
-    const {
-      templateAccessSettingsVisible,
-      setTemplateAccessSettingsVisible,
-      templateEventVisible,
-    } = dialogsStore;
+	(
+		{ dialogsStore, infoPanelStore, filesStore }: TStore,
+		{
+			isContainer = false,
+			setIsVisible,
+		}: {
+			isContainer: boolean;
+			setIsVisible: (visible: boolean) => void;
+		},
+	) => {
+		const {
+			setIsMobileHidden: setInfoPanelIsMobileHidden,
+			updateInfoPanelMembers,
+			infoPanelSelection,
+		} = infoPanelStore;
+		const { selection, bufferSelection } = filesStore;
+		const {
+			templateAccessSettingsVisible,
+			setTemplateAccessSettingsVisible,
+			templateEventVisible,
+		} = dialogsStore;
 
-    return {
-      setInfoPanelIsMobileHidden,
-      templateItem: selection.length
-        ? selection[0]
-        : (bufferSelection ?? infoPanelSelection),
-      templateEventVisible,
-      visible: isContainer ? false : templateAccessSettingsVisible,
-      setIsVisible: isContainer
-        ? setIsVisible
-        : setTemplateAccessSettingsVisible,
-      updateInfoPanelMembers,
-    };
-  },
+		return {
+			setInfoPanelIsMobileHidden,
+			templateItem: selection.length
+				? selection[0]
+				: (bufferSelection ?? infoPanelSelection),
+			templateEventVisible,
+			visible: isContainer ? false : templateAccessSettingsVisible,
+			setIsVisible: isContainer
+				? setIsVisible
+				: setTemplateAccessSettingsVisible,
+			updateInfoPanelMembers,
+		};
+	},
 )(
-  withTranslation(["Files", "Common", "InfoPanel"])(
-    observer(TemplateAccessSettingsPanel),
-  ),
+	withTranslation(["Files", "Common", "InfoPanel"])(
+		observer(TemplateAccessSettingsPanel),
+	),
 );

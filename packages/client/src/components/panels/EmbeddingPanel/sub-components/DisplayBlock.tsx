@@ -24,17 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import {
   ComboBox,
   ComboBoxSize,
   TOption,
-} from "@docspace/shared/components/combobox";
+} from "@docspace/ui-kit/components/combobox";
 import {
   InputSize,
   InputType,
   TextInput,
-} from "@docspace/shared/components/text-input";
+} from "@docspace/ui-kit/components/text-input";
 import { dimensionsModel } from "../../../../pages/PortalSettings/categories/developer-tools/JavascriptSDK/constants";
 import styles from "../EmbeddingPanel.module.scss";
 

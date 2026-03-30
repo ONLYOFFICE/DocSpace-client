@@ -31,12 +31,12 @@ import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 import classnames from "classnames";
 
-import { RowContent as RowContentComponents } from "@docspace/shared/components/rows";
-import { Text } from "@docspace/shared/components/text";
+import { RowContent as RowContentComponents } from "@docspace/ui-kit/components/rows";
+import { Text } from "@docspace/ui-kit/components/text";
 import { getConvertedSize } from "@docspace/shared/utils/common";
 import { DeviceType } from "@docspace/shared/enums";
-import { useTheme } from "@docspace/shared/hooks/useTheme";
-import { globalColors } from "@docspace/shared/themes/globalColors";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import type { TPortals } from "@docspace/shared/api/management/types";
 
 import useDeviceType from "@/hooks/useDeviceType";

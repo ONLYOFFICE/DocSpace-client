@@ -27,7 +27,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import { TableCell } from "@docspace/shared/components/table";
+import { TableCell } from "@docspace/ui-kit/components/table";
 import { classNames, getLastColumn } from "@docspace/shared/utils";
 
 import {

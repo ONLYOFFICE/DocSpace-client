@@ -29,125 +29,128 @@ import { useTranslation } from "react-i18next";
 
 import { isFile } from "../../../utils/typeGuards";
 import { EmployeeStatus, ShareAccessRights } from "../../../enums";
-import PeopleSelector from "../../../selectors/People";
+import PeopleSelector from "@docspace/ui-kit/selectors/People";
 import { ShareLinkService } from "../../../services/share-link.service";
 import type { TShareToUser } from "../../../api/files/types";
-import Filter from "../../../api/people/filter";
+
 
 // import { SelectorAccessRightsMode } from "../../selector/Selector.enums";
-import type { TAccessRight, TOnSubmit } from "../../selector/Selector.types";
+import type {
+	TAccessRight,
+	TOnSubmit,
+} from "@docspace/ui-kit/components/selector";
 
 import { getShareAccessRightOptions } from "../Share.helpers";
-import { toastr, TData } from "../../toast";
+import { toastr, TData } from "@docspace/ui-kit/components/toast";
 
 import type { ShareSelectorProps } from "./Selector.types";
 
 export const ShareSelector: FC<ShareSelectorProps> = ({
-  item,
-  onClose,
-  onBackClick,
-  onCloseClick,
-  onSubmit,
-  withAccessRights,
+	item,
+	onClose,
+	onBackClick,
+	onCloseClick,
+	onSubmit,
+	withAccessRights,
 }) => {
-  const { t } = useTranslation("Common");
+	const { t } = useTranslation("Common");
 
-  const getDefaultAccessRight = () => {
-    const isForm = isFile(item) && item.isForm;
+	const getDefaultAccessRight = () => {
+		const isForm = isFile(item) && item.isForm;
 
-    const accessDefault = isForm
-      ? ShareAccessRights.FormFilling
-      : ShareAccessRights.ReadOnly;
+		const accessDefault = isForm
+			? ShareAccessRights.FormFilling
+			: ShareAccessRights.ReadOnly;
 
-    return accessDefault;
-  };
+		return accessDefault;
+	};
 
-  const handleSubmit: TOnSubmit = async (selectedItems, accessRight) => {
-    const share: TShareToUser[] = selectedItems.map((selectedItem) => {
-      return {
-        shareTo: selectedItem.id!.toString(),
-        access:
-          (accessRight?.access as ShareAccessRights) ?? getDefaultAccessRight(),
-      };
-    });
+	const handleSubmit: TOnSubmit = async (selectedItems, accessRight) => {
+		const share: TShareToUser[] = selectedItems.map((selectedItem) => {
+			return {
+				shareTo: selectedItem.id!.toString(),
+				access:
+					(accessRight?.access as ShareAccessRights) ?? getDefaultAccessRight(),
+			};
+		});
 
-    try {
-      const list = await ShareLinkService.shareItemToUser(share, item);
+		try {
+			const list = await ShareLinkService.shareItemToUser(share, item);
 
-      onSubmit?.(list);
+			onSubmit?.(list);
 
-      toastr.success(t("Common:RoomCreateUser"));
-    } catch (error) {
-      toastr.error(error as TData);
-      console.error(error);
-    } finally {
-      onClose();
-    }
-  };
+			toastr.success(t("Common:RoomCreateUser"));
+		} catch (error) {
+			toastr.error(error as TData);
+			console.error(error);
+		} finally {
+			onClose();
+		}
+	};
 
-  const accessOptions = useMemo(
-    () => getShareAccessRightOptions(t, item, false) as TAccessRight[],
-    [t, item],
-  );
+	const accessOptions = useMemo(
+		() => getShareAccessRightOptions(t, item, false) as TAccessRight[],
+		[t, item],
+	);
 
-  const selectedAccessRight = useMemo(() => {
-    const isForm = isFile(item) && item.isForm;
+	const selectedAccessRight = useMemo(() => {
+		const isForm = isFile(item) && item.isForm;
 
-    const accessDefault = isForm
-      ? ShareAccessRights.FormFilling
-      : ShareAccessRights.ReadOnly;
+		const accessDefault = isForm
+			? ShareAccessRights.FormFilling
+			: ShareAccessRights.ReadOnly;
 
-    return accessOptions.find((a) => a.access === accessDefault) || null;
-  }, [accessOptions]);
+		return accessOptions.find((a) => a.access === accessDefault) || null;
+	}, [accessOptions]);
 
-  const accessRightsProps = withAccessRights
-    ? ({
-        withAccessRights: true,
-        accessRights: accessOptions,
-        selectedAccessRight,
-        onAccessRightsChange: () => {},
-        // accessRightsMode: isFile(item)
-        //   ? SelectorAccessRightsMode.Compact
-        //   : SelectorAccessRightsMode.Detailed,
-      } as const)
-    : {};
+	const accessRightsProps = withAccessRights
+		? ({
+				withAccessRights: true,
+				accessRights: accessOptions,
+				selectedAccessRight,
+				onAccessRightsChange: () => {},
+				// accessRightsMode: isFile(item)
+				//   ? SelectorAccessRightsMode.Compact
+				//   : SelectorAccessRightsMode.Detailed,
+			} as const)
+		: {};
 
-  const targetEntityType = isFile(item) ? "file" : "folder";
+	const targetEntityType = isFile(item) ? "file" : "folder";
 
-  const filter = useMemo(() => {
-    const temp = Filter.getDefault();
-    temp.employeeStatus = EmployeeStatus.Active;
-    return temp;
-  }, []);
+	const filter = useMemo(() => {
+		return {
+			employeeStatus: EmployeeStatus.Active,
+		};
+	}, []);
 
-  return (
-    <PeopleSelector
-      withHeader
-      withGuests
-      withGroups
-      isMultiSelect
-      disableDisabledUsers
-      useAside
-      filter={filter}
-      withBlur={false}
-      roomId={item.id}
-      withoutBackground={false}
-      onClose={onClose}
-      submitButtonLabel={t("Common:SelectAction")}
-      disableSubmitButton={false}
-      onSubmit={handleSubmit}
-      targetEntityType={targetEntityType}
-      data-test-id="share_to_people_selector"
-      disabledInvitedText={t("Common:Shared")}
-      {...accessRightsProps}
-      headerProps={{
-        headerLabel: t("Common:Contacts"),
-        withoutBackButton: false,
-        withoutBorder: true,
-        isCloseable: true,
-        onBackClick,
-        onCloseClick,
-      }}
-    />
-  );
+	return (
+		<PeopleSelector
+			withHeader
+			withGuests
+			withGroups
+			isMultiSelect
+			disableDisabledUsers
+			useAside
+			filter={filter}
+			withBlur={false}
+			roomId={item.id}
+			withoutBackground={false}
+			onClose={onClose}
+			submitButtonLabel={t("Common:SelectAction")}
+			disableSubmitButton={false}
+			onSubmit={handleSubmit}
+			targetEntityType={targetEntityType}
+			data-test-id="share_to_people_selector"
+			disabledInvitedText={t("Common:Shared")}
+			{...accessRightsProps}
+			headerProps={{
+				headerLabel: t("Common:Contacts"),
+				withoutBackButton: false,
+				withoutBorder: true,
+				isCloseable: true,
+				onBackClick,
+				onCloseClick,
+			}}
+		/>
+	);
 };

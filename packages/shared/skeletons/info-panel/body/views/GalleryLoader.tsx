@@ -26,44 +26,44 @@
 
 import React from "react";
 
-import { RectangleSkeleton } from "../../../rectangle";
+import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 import { propertyGalleryDimensions } from "../body.constant";
 import styles from "../Body.module.scss";
 
 const GalleryLoader = () => {
-  return (
-    <div className={styles.galleryLoader} data-testid="gallery-loader">
-      <RectangleSkeleton
-        className="thumbnail"
-        width="360.2px"
-        height="346px"
-        borderRadius="3px"
-      />
+	return (
+		<div className={styles.galleryLoader} data-testid="gallery-loader">
+			<RectangleSkeleton
+				className="thumbnail"
+				width="360.2px"
+				height="346px"
+				borderRadius="3px"
+			/>
 
-      <div className={styles.gallerySubtitleLoader}>
-        <RectangleSkeleton width="71px" height="16px" borderRadius="3px" />
-      </div>
+			<div className={styles.gallerySubtitleLoader}>
+				<RectangleSkeleton width="71px" height="16px" borderRadius="3px" />
+			</div>
 
-      <div className={styles.galleryProperty}>
-        {propertyGalleryDimensions.map((property) => (
-          <React.Fragment key={property.propertyTitle}>
-            <RectangleSkeleton
-              className="property-title"
-              width={property.propertyTitle}
-              height="20px"
-              borderRadius="3px"
-            />
-            <RectangleSkeleton
-              className="property-content"
-              width={property.propertyContent}
-              height="20px"
-              borderRadius="3px"
-            />
-          </React.Fragment>
-        ))}
-      </div>
-    </div>
-  );
+			<div className={styles.galleryProperty}>
+				{propertyGalleryDimensions.map((property) => (
+					<React.Fragment key={property.propertyTitle}>
+						<RectangleSkeleton
+							className="property-title"
+							width={property.propertyTitle}
+							height="20px"
+							borderRadius="3px"
+						/>
+						<RectangleSkeleton
+							className="property-content"
+							width={property.propertyContent}
+							height="20px"
+							borderRadius="3px"
+						/>
+					</React.Fragment>
+				))}
+			</div>
+		</div>
+	);
 };
 
 export default GalleryLoader;

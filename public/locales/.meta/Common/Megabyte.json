@@ -3,7 +3,7 @@
   "content": "MB",
   "content_en_sha1_hash": "6e979f426b676955f4896002085eb834b93326b1",
   "created_at": "2025-05-19T21:30:46.418Z",
-  "updated_at": "2025-12-16T07:24:44.118Z",
+  "updated_at": "2026-03-26T08:26:58.155Z",
   "comment": {
     "text": "The translation key \"MB\" represents the unit of measurement \"Megabyte\". It is used as a label in a dropdown menu within a quota form component to select file size units.",
     "is_auto": true,
@@ -11,14 +11,20 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Uploader.js",
+      "line_number": 103,
+      "context": "const [uploadQuantity, setUploadQuantity] = useState(\"single\");\n const [perFileSize, setPerFileSize] = useState({ value: \"25\", unit: \"mb\" });\n const [totalSize, setTotalSize] = useState({ value: \"100\", unit: \"mb\" });\n const fileSizeUnits = [\n { key: \"kb\", label: t(\"Common:Kilobyte\") },\n { key: \"mb\", label: t(\"Common:Megabyte\") },\n { key: \"gb\", label: t(\"Common:Gigabyte\") },\n ];\n \n const defaultSizeUnit = fileSizeUnits[1];",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/shared/components/quota-form/index.tsx",
-      "line_number": 86,
+      "line_number": 90,
       "context": "};\n \n const getOptions = (t: TTranslation) => [\n { key: 0, label: t(\"Common:Bytes\") },\n { key: 1, label: t(\"Common:Kilobyte\") },\n { key: 2, label: t(\"Common:Megabyte\") },\n { key: 3, label: t(\"Common:Gigabyte\") },\n { key: 4, label: t(\"Common:Terabyte\") },\n ];\n \n const getConvertedSize = (value: string, power: number) => {",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 730,
+      "line_number": 707,
       "context": "let resultSize = bytes;\n \n const sizeNames = [\n t(\"Common:Bytes\"),\n t(\"Common:Kilobyte\"),\n t(\"Common:Megabyte\"),\n t(\"Common:Gigabyte\"),\n t(\"Common:Terabyte\"),\n t(\"Common:Petabyte\"),\n t(\"Common:Exabyte\"),\n ];",
       "module": "/packages/shared"
     }

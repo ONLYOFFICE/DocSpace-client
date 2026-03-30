@@ -25,10 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { RectangleSkeleton } from "../rectangle";
+import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 
 const CreateEditRoomDilogHeaderLoader = () => {
-  return <RectangleSkeleton width="250" height="21" borderRadius="3" />;
+	return <RectangleSkeleton width="250" height="21" borderRadius="3" />;
 };
 
 export default CreateEditRoomDilogHeaderLoader;

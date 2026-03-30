@@ -27,7 +27,7 @@
 import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 
 import { DeviceType } from "@docspace/shared/enums";
 

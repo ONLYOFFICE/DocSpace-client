@@ -29,21 +29,21 @@ import { inject, observer } from "mobx-react";
 import { Trans, useTranslation } from "react-i18next";
 import { Navigate, useLocation } from "react-router";
 
-import useToolsSettings from "@docspace/shared/components/chat/hooks/useToolsSettings";
-import useInitChats from "@docspace/shared/components/chat/hooks/useInitChats";
-import useInitMessages from "@docspace/shared/components/chat/hooks/useInitMessages";
+import useToolsSettings from "@docspace/ui-kit/ai-agent/chat/hooks/useToolsSettings";
+import useInitChats from "@docspace/ui-kit/ai-agent/chat/hooks/useInitChats";
+import useInitMessages from "@docspace/ui-kit/ai-agent/chat/hooks/useInitMessages";
 
 import { getCategoryType } from "@docspace/shared/utils/common";
 import { CategoryType } from "@docspace/shared/constants";
-import { Consumer } from "@docspace/shared/utils";
+import { Consumer } from "@docspace/ui-kit/utils";
 import type { Nullable } from "@docspace/shared/types";
 import type { TError } from "@docspace/shared/utils/axiosClient";
 
-import { AnimationEvents } from "@docspace/shared/hooks/useAnimation";
+import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 import { clearTextSelection } from "@docspace/shared/utils/copy";
-import TopLoadingIndicator from "@docspace/shared/components/top-loading-indicator";
-import { LoaderWrapper } from "@docspace/shared/components/loader-wrapper";
-import { toastr } from "@docspace/shared/components/toast";
+import { TopLoaderService as TopLoadingIndicator } from "@docspace/ui-kit/components";
+import { LoaderWrapper } from "@docspace/ui-kit/components/loader-wrapper";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { TOAST_FOLDER_PUBLIC_KEY } from "@docspace/shared/constants";
 import type { TFolder } from "@docspace/shared/api/files/types";
 import { getAccessLabel } from "@docspace/shared/components/share/Share.helpers";
@@ -97,7 +97,6 @@ type ViewProps = UseContactsProps &
     canUseChat: AccessRightsStore["canUseChat"];
 
     aiConfig: SettingsStore["aiConfig"];
-    isResultTab: AiRoomStore["isResultTab"];
     resultId: AiRoomStore["resultId"];
     setHotkeyCaret: FilesStore["setHotkeyCaret"];
     setIsErrorAccountNotAvailable: FilesStore["setIsErrorAccountNotAvailable"];
@@ -177,7 +176,6 @@ const View = ({
 
   canUseChat,
   aiConfig,
-  isResultTab,
   resultId,
 }: ViewProps) => {
   const location = useLocation();
@@ -287,12 +285,13 @@ const View = ({
   }, [location.search]);
 
   const toolsSettings = useToolsSettings({
-    roomId: roomId ?? "",
+    agentId: roomId ?? "",
     aiConfig,
+    chatSettings: selectedFolderStore.chatSettings,
   });
 
   const initChats = useInitChats({
-    roomId: roomId ?? "",
+    agentId: roomId ?? "",
   });
 
   const { initMessages, ...messagesSettings } = useInitMessages(roomId ?? "");
@@ -522,10 +521,18 @@ const View = ({
     };
 
     getView();
-  }, [location, isContactsPage, isProfilePage, isChatPage, showToastAccess]);
+  }, [
+    location.pathname,
+    location.search,
+    isContactsPage,
+    isProfilePage,
+    isChatPage,
+    showToastAccess,
+  ]);
 
   React.useEffect(() => {
-    if (isLoading || currentView === "chat") return;
+    if (isLoading || currentView === "chat" || currentView === "profile")
+      return;
 
     const scroll = document.getElementsByClassName("section-body");
 
@@ -539,7 +546,11 @@ const View = ({
   }, [isLoading, currentView, scrollToTop]);
 
   React.useEffect(() => {
-    if (isResultTab && !canUseChat && !showBodyLoader) {
+    if (
+      selectedFolderStore.isInsideResultStorage &&
+      !canUseChat &&
+      !showBodyLoader
+    ) {
       toastr.info(
         <Trans
           t={t}
@@ -552,7 +563,12 @@ const View = ({
         />,
       );
     }
-  }, [isResultTab, canUseChat, showBodyLoader, t]);
+  }, [
+    selectedFolderStore.isInsideResultStorage,
+    canUseChat,
+    showBodyLoader,
+    t,
+  ]);
 
   const attachmentFile = React.useMemo(
     () => aiAgentSelectorDialogProps?.file,
@@ -598,8 +614,7 @@ const View = ({
     <LoaderWrapper isLoading={isLoading ? !showHeaderLoader : false}>
       <Consumer>
         {(context) =>
-          context.sectionWidth &&
-          (currentView === "users" || currentView === "groups" ? (
+          currentView === "users" || currentView === "groups" ? (
             <ContactsSectionBodyContent
               sectionWidth={context.sectionWidth}
               currentView={currentView}
@@ -620,7 +635,7 @@ const View = ({
             <ProfileSectionBodyContent />
           ) : (
             <SectionBodyContent sectionWidth={context.sectionWidth} />
-          ))
+          )
         }
       </Consumer>
     </LoaderWrapper>
@@ -649,7 +664,7 @@ export const ViewComponent = inject(
     settingsStore,
     aiRoomStore,
   }: TStore) => {
-    const { isResultTab, resultId } = aiRoomStore;
+    const { resultId } = aiRoomStore;
     const { aiConfig } = settingsStore;
 
     const { canUseChat } = accessRightsStore;
@@ -798,7 +813,6 @@ export const ViewComponent = inject(
 
       canUseChat,
       aiConfig,
-      isResultTab,
       resultId,
     };
   },

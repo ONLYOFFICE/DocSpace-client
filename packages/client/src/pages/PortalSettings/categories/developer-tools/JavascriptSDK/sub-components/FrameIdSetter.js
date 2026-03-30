@@ -26,41 +26,41 @@
 
 import { useState, useCallback } from "react";
 import debounce from "lodash.debounce";
-import { TextInput } from "@docspace/shared/components/text-input";
-import { Label } from "@docspace/shared/components/label";
+import { TextInput } from "@docspace/ui-kit/components/text-input";
+import { Label } from "@docspace/ui-kit/components/label";
 
 import { ControlsGroup } from "../presets/StyledPresets";
 
 export const FrameIdSetter = (props) => {
-  const { t, defaultFrameId, setConfig } = props;
+	const { t, defaultFrameId, setConfig } = props;
 
-  const [frameId, setFrameId] = useState(defaultFrameId);
+	const [frameId, setFrameId] = useState(defaultFrameId);
 
-  const debouncedSetConfig = useCallback(
-    debounce((newFrameId) => {
-      setConfig((oldConfig) => {
-        return { ...oldConfig, frameId: newFrameId };
-      });
-    }, 500),
-    [setConfig],
-  );
+	const debouncedSetConfig = useCallback(
+		debounce((newFrameId) => {
+			setConfig((oldConfig) => {
+				return { ...oldConfig, frameId: newFrameId };
+			});
+		}, 500),
+		[setConfig],
+	);
 
-  const onChangeFrameId = (e) => {
-    setFrameId(e.target.value);
-    debouncedSetConfig(e.target.value);
-  };
+	const onChangeFrameId = (e) => {
+		setFrameId(e.target.value);
+		debouncedSetConfig(e.target.value);
+	};
 
-  return (
-    <ControlsGroup>
-      <Label className="label" text={t("FrameId")} />
-      <TextInput
-        scale
-        value={frameId}
-        onChange={onChangeFrameId}
-        placeholder={t("EnterId")}
-        tabIndex={4}
-        testId="frame_id_input"
-      />
-    </ControlsGroup>
-  );
+	return (
+		<ControlsGroup>
+			<Label className="label" text={t("FrameId")} />
+			<TextInput
+				scale
+				value={frameId}
+				onChange={onChangeFrameId}
+				placeholder={t("EnterId")}
+				tabIndex={4}
+				testId="frame_id_input"
+			/>
+		</ControlsGroup>
+	);
 };

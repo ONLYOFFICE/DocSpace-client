@@ -28,18 +28,18 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router";
 import { inject, observer } from "mobx-react";
 import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
-import { isMobile, isTablet, mobile } from "@docspace/shared/utils/device";
+import { isMobile, isTablet, mobile } from "@docspace/ui-kit/utils/device";
 import styled from "styled-components";
 
 import { WarningQuotaDialog } from "SRC_DIR/components/dialogs/WarningQuotaDialog";
-import { Text } from "@docspace/shared/components/text";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { FileInput } from "@docspace/shared/components/file-input";
-import { ProgressBar } from "@docspace/shared/components/progress-bar";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { FileInput } from "@docspace/ui-kit/components/file-input";
+import { ProgressBar } from "@docspace/ui-kit/components/progress-bar";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
-import { Link, LinkType } from "@docspace/shared/components/link";
-import { toastr } from "@docspace/shared/components/toast";
-import { InputSize } from "@docspace/shared/components/text-input";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { InputSize } from "@docspace/ui-kit/components/text-input";
 import { InjectedSelectFileStepProps, SelectFileStepProps } from "../types";
 import { TMigrationStatusResult } from "@docspace/shared/api/settings/types";
 

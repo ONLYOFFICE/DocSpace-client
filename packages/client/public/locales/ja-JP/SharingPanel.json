@@ -1,5 +1,0 @@
-{
-  "ExternalLink": "外部リンク",
-  "ShareEmailBody": "あなたは{{itemName}}ドキュメントへのアクセスを許可されています。以下のリンクをクリックして、今すぐドキュメントを開いてください。{{shareLink}}をクリックしてください。",
-  "ShareEmailSubject": "あなたは{{itemName}}ドキュメントへのアクセスを許可されています。"
-}

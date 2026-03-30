@@ -28,12 +28,15 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 import { manageFormFilling } from "../../api/files";
-import { Button, ButtonSize } from "../../components/button";
-import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/ui-kit/components/modal-dialog";
 import { FormFillingManageAction } from "../../enums";
 
 import type { StopFillingDialogProps } from "./StopFillingDialog.types";
-import { toastr } from "../../components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 const StopFillingDialog = ({
   onClose,

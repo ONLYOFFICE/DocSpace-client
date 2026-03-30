@@ -50,38 +50,38 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React from "react";
 
-import { RectangleSkeleton } from "../rectangle";
+import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 
 import styles from "./PreparationPortal.module.scss";
 
 const PreparationPortalLoader = () => {
-  return (
-    <div
-      className={styles.preparationPortal}
-      data-testid="preparation-portal-loader"
-    >
-      <RectangleSkeleton
-        className={styles.rectangleSkeleton1}
-        width="100%"
-        height="28"
-      />
-      <RectangleSkeleton
-        className={styles.rectangleSkeleton2}
-        width="100%"
-        height="24"
-      />
-      <RectangleSkeleton
-        className={styles.rectangleSkeleton3}
-        width="100%"
-        height="20"
-      />
-      <RectangleSkeleton
-        className={styles.rectangleSkeleton4}
-        width="100%"
-        height="20"
-      />
-    </div>
-  );
+	return (
+		<div
+			className={styles.preparationPortal}
+			data-testid="preparation-portal-loader"
+		>
+			<RectangleSkeleton
+				className={styles.rectangleSkeleton1}
+				width="100%"
+				height="28"
+			/>
+			<RectangleSkeleton
+				className={styles.rectangleSkeleton2}
+				width="100%"
+				height="24"
+			/>
+			<RectangleSkeleton
+				className={styles.rectangleSkeleton3}
+				width="100%"
+				height="20"
+			/>
+			<RectangleSkeleton
+				className={styles.rectangleSkeleton4}
+				width="100%"
+				height="20"
+			/>
+		</div>
+	);
 };
 
 export default PreparationPortalLoader;

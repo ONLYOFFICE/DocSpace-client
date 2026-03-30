@@ -25,67 +25,67 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import PropTypes from "prop-types";
-import { Button } from "@docspace/shared/components/button";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { toastr } from "@docspace/shared/components/toast";
-import { Text } from "@docspace/shared/components/text";
+import { Button } from "@docspace/ui-kit/components/button";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { Text } from "@docspace/ui-kit/components/text";
 import { withTranslation } from "react-i18next";
 
 const ResetApplicationDialogComponent = (props) => {
-  const { t, resetTfaApp, id, onClose, tReady, visible } = props;
+	const { t, resetTfaApp, id, onClose, tReady, visible } = props;
 
-  const resetApp = async () => {
-    onClose && onClose();
-    try {
-      const res = await resetTfaApp(id);
-      toastr.success(t("SuccessResetApplication"));
+	const resetApp = async () => {
+		onClose && onClose();
+		try {
+			const res = await resetTfaApp(id);
+			toastr.success(t("SuccessResetApplication"));
 
-      if (res) window.location.replace(res);
-    } catch (e) {
-      toastr.error(e);
-    }
-  };
+			if (res) window.location.replace(res);
+		} catch (e) {
+			toastr.error(e);
+		}
+	};
 
-  return (
-    <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>
-      <ModalDialog.Header>{t("ResetApplicationTitle")}</ModalDialog.Header>
-      <ModalDialog.Body>
-        <Text>{t("ResetApplicationDescription")}</Text>
-      </ModalDialog.Body>
-      <ModalDialog.Footer>
-        <Button
-          key="ResetSendBtn"
-          label={t("Common:ResetApplication")}
-          size="normal"
-          scale
-          primary
-          onClick={resetApp}
-          testId="dialog_reset_app_button"
-        />
-        <Button
-          key="CloseBtn"
-          label={t("Common:CancelButton")}
-          size="normal"
-          scale
-          primary={false}
-          onClick={onClose}
-          testId="dialog_reset_app_cancel_button"
-        />
-      </ModalDialog.Footer>
-    </ModalDialog>
-  );
+	return (
+		<ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>
+			<ModalDialog.Header>{t("ResetApplicationTitle")}</ModalDialog.Header>
+			<ModalDialog.Body>
+				<Text>{t("ResetApplicationDescription")}</Text>
+			</ModalDialog.Body>
+			<ModalDialog.Footer>
+				<Button
+					key="ResetSendBtn"
+					label={t("Common:ResetApplication")}
+					size="normal"
+					scale
+					primary
+					onClick={resetApp}
+					testId="dialog_reset_app_button"
+				/>
+				<Button
+					key="CloseBtn"
+					label={t("Common:CancelButton")}
+					size="normal"
+					scale
+					primary={false}
+					onClick={onClose}
+					testId="dialog_reset_app_cancel_button"
+				/>
+			</ModalDialog.Footer>
+		</ModalDialog>
+	);
 };
 
 const ResetApplicationDialog = withTranslation([
-  "ResetApplicationDialog",
-  "Common",
+	"ResetApplicationDialog",
+	"Common",
 ])(ResetApplicationDialogComponent);
 
 ResetApplicationDialog.propTypes = {
-  visible: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-  resetTfaApp: PropTypes.func.isRequired,
-  id: PropTypes.string.isRequired,
+	visible: PropTypes.bool.isRequired,
+	onClose: PropTypes.func.isRequired,
+	resetTfaApp: PropTypes.func.isRequired,
+	id: PropTypes.string.isRequired,
 };
 
 export default ResetApplicationDialog;

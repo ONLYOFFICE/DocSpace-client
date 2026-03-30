@@ -27,14 +27,14 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { useLocation } from "react-router";
+import { useLocation, Link } from "react-router";
 
 import { DeviceType } from "@docspace/shared/enums";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
 
-import { ArticleItem } from "@docspace/shared/components/article-item/ArticleItemWrapper";
+import { ArticleItem } from "@docspace/ui-kit/components/article/item";
 import { ArticleFolderLoader } from "@docspace/shared/skeletons/article";
 import {
   // getKeyByLink,
@@ -60,6 +60,7 @@ const ArticleBodyContent = (props) => {
     isProfileLoading,
     currentColorScheme,
     baseDomain,
+    aiServicesEnabled,
   } = props;
 
   const [selectedKeys, setSelectedKeys] = React.useState([]);
@@ -161,15 +162,8 @@ const ArticleBodyContent = (props) => {
         setSelectedKeys(["10-0"]);
       }
 
-      if (
-        location.pathname.includes("services") &&
-        !location.pathname.includes("third-party-services")
-      ) {
-        setSelectedKeys(["11-0"]);
-      }
-
       if (location.pathname.includes("bonus")) {
-        setSelectedKeys(["12-0"]);
+        setSelectedKeys(["11-0"]);
       }
     }
   }, [
@@ -222,7 +216,7 @@ const ArticleBodyContent = (props) => {
       case "Backup":
         return t("Common:Backup");
       case "Common:PaymentsTitle":
-        return t("Common:PaymentsTitle");
+        return standalone ? t("Common:PaymentsTitle") : t("Common:Billing");
       case "ManagementCategoryDataManagement":
         return t("ManagementCategoryDataManagement");
       case "LdapSettings":
@@ -257,8 +251,12 @@ const ArticleBodyContent = (props) => {
 
     let resultTree = [...settingsTree];
 
+    if (!aiServicesEnabled) {
+      resultTree = resultTree.filter((e) => e.tKey !== "AISettings");
+    }
+
     if (isNotPaidPeriod) {
-      resultTree = [...settingsTree].filter((e) => {
+      resultTree = resultTree.filter((e) => {
         return (
           e.tKey === "Backup" ||
           e.tKey === "Common:PaymentsTitle" ||
@@ -308,7 +306,9 @@ const ArticleBodyContent = (props) => {
       const title = mapKeys(item.tKey);
       const linkData = getLinkData(item.key);
 
-      const style = { marginTop: `${item.key.includes(9) ? "16px" : "0"}` };
+      const style = {
+        marginTop: `${item.key.includes(standalone ? 9 : 10) ? "16px" : "0"}`,
+      };
 
       items.push(
         <ArticleItem
@@ -327,6 +327,7 @@ const ArticleBodyContent = (props) => {
           $currentColorScheme={currentColorScheme}
           withAnimation={!isMobileView}
           isEndOfBlock={isLastIndex}
+          LinkRouter={Link}
         />,
       );
     });
@@ -364,6 +365,7 @@ export default inject(
       limitedAccessSpace,
       currentColorScheme,
       baseDomain,
+      aiServicesEnabled,
     } = settingsStore;
 
     const isProfileLoading =
@@ -386,6 +388,7 @@ export default inject(
       limitedAccessSpace,
       currentColorScheme,
       baseDomain,
+      aiServicesEnabled,
     };
   },
 )(
@@ -395,3 +398,4 @@ export default inject(
     ),
   ),
 );
+

@@ -29,10 +29,9 @@ import styled from "styled-components";
 
 import RoomType from "@docspace/shared/components/room-type";
 import { RoomsTypeValues } from "@docspace/shared/utils/common";
-import { Backdrop } from "@docspace/shared/components/backdrop";
-import { Portal } from "@docspace/shared/components/portal";
-
-import { globalColors } from "@docspace/shared/themes";
+import { Backdrop } from "@docspace/ui-kit/components/backdrop";
+import { Portal } from "@docspace/ui-kit/components/portal";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { injectDefaultTheme } from "@docspace/shared/utils";
 import { RoomsType } from "@docspace/shared/enums";
 
@@ -72,7 +71,6 @@ const DropdownMobile = ({
             visible={open}
             onClick={onClose}
             withBackground
-            withoutBlur={false}
             isAside
             zIndex={450}
           />

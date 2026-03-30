@@ -90,6 +90,7 @@ export type TPaymentQuota = {
   nonProfit: boolean;
   free: boolean;
   trial: boolean;
+  serviceName?: string;
   features: TPaymentFeature[];
   usersQuota: {
     defaultQuota: number;
@@ -231,9 +232,17 @@ export type TCustomerInfo = {
 export type TBalance =
   | {
       accountNumber?: number;
-      subAccounts: [{ currency: string; amount: number }];
+      accountCurrency?: string;
+      subAccountNumber?: number;
+      subAccounts: { currency: string; amount: number }[];
+      lastCredit?: {
+        date: string;
+        currency: string;
+        amount: number;
+      };
     }
-  | 0;
+  | 0
+  | null;
 
 export type TTransactionCollection = {
   date: string;

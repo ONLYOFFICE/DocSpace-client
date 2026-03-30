@@ -29,9 +29,9 @@ import { useTranslation } from "react-i18next";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
+} from "@docspace/ui-kit/components/modal-dialog";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Text } from "@docspace/ui-kit/components/text";
 
 import IndexingStore from "SRC_DIR/store/IndexingStore";
 import FilesActionsStore from "SRC_DIR/store/FilesActionsStore";
@@ -85,12 +85,14 @@ const CloseEditIndexDialog = ({
           scale
           primary
           onClick={onClickContinue}
+          testId="close_edit_index_dialog_continue"
         />
         <Button
           label={t("Common:CancelButton")}
           size={ButtonSize.normal}
           scale
           onClick={onClose}
+          testId="close_edit_index_dialog_cancel"
         />
       </ModalDialog.Footer>
     </ModalDialog>

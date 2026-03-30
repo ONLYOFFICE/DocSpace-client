@@ -26,14 +26,14 @@
 
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 
-import { Button } from "@docspace/shared/components/button";
+import { Button } from "@docspace/ui-kit/components/button";
 import RecoverAccessModalDialog from "@docspace/shared/dialogs/recover-access-modal-dialog/RecoverAccessModalDialog";
-import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
-import { Link } from "@docspace/shared/components/link";
+import ErrorContainer from "@docspace/ui-kit/components/error-container/ErrorContainer";
+import { Link } from "@docspace/ui-kit/components/link";
 
 const StyledBodyContent = styled.div`
   max-width: 480px;

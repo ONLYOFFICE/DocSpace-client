@@ -28,72 +28,72 @@ import { observer, inject } from "mobx-react";
 import React, { useEffect, useMemo } from "react";
 import { withTranslation } from "react-i18next";
 
-import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import { mapCulturesToArray } from "@docspace/shared/utils/common";
 import i18n from "../i18n";
 
 interface ComponentWithCultureNamesProps {
-  tReady?: boolean;
-  cultures?: string[];
-  isAuthenticated?: boolean;
-  getPortalCultures?: () => Promise<void>;
+	tReady?: boolean;
+	cultures?: string[];
+	isAuthenticated?: boolean;
+	getPortalCultures?: () => Promise<void>;
 }
 
 interface WrappedComponentProps extends ComponentWithCultureNamesProps {
-  cultureNames?: {
-    key: string;
-    label: string;
-    icon: string;
-    isBeta: boolean;
-    index?: number;
-  }[];
+	cultureNames?: {
+		key: string;
+		label: string;
+		icon: string;
+		isBeta: boolean;
+		index?: number;
+	}[];
 }
 
 export default function withCultureNames<
-  T extends WrappedComponentProps = WrappedComponentProps,
+	T extends WrappedComponentProps = WrappedComponentProps,
 >(WrappedComponent: React.ComponentType<T>) {
-  const displayName =
-    WrappedComponent.displayName || WrappedComponent.name || "Component";
+	const displayName =
+		WrappedComponent.displayName || WrappedComponent.name || "Component";
 
-  const ComponentWithCultureNames = (
-    props: Omit<T, keyof WrappedComponentProps> &
-      ComponentWithCultureNamesProps,
-  ) => {
-    const { tReady, cultures, getPortalCultures, isAuthenticated } = props;
+	const ComponentWithCultureNames = (
+		props: Omit<T, keyof WrappedComponentProps> &
+			ComponentWithCultureNamesProps,
+	) => {
+		const { tReady, cultures, getPortalCultures, isAuthenticated } = props;
 
-    useEffect(() => {
-      if (cultures && cultures.length > 0) return;
+		useEffect(() => {
+			if (cultures && cultures.length > 0) return;
 
-      getPortalCultures?.();
-    }, []);
+			getPortalCultures?.();
+		}, []);
 
-    const cultureNames = useMemo(
-      () => (cultures ? mapCulturesToArray(cultures, true, i18n) : []),
-      [cultures, isAuthenticated],
-    );
+		const cultureNames = useMemo(
+			() => (cultures ? mapCulturesToArray(cultures, true, i18n) : []),
+			[cultures, isAuthenticated],
+		);
 
-    return cultures && cultures.length > 0 && tReady ? (
-      <WrappedComponent {...(props as T)} cultureNames={cultureNames} />
-    ) : (
-      <Loader className="pageLoader" type={LoaderTypes.rombs} size="40px" />
-    );
-  };
+		return cultures && cultures.length > 0 && tReady ? (
+			<WrappedComponent {...(props as T)} cultureNames={cultureNames} />
+		) : (
+			<Loader className="pageLoader" type={LoaderTypes.rombs} size="40px" />
+		);
+	};
 
-  const Injected = inject<TStore>(({ authStore, settingsStore }) => {
-    const { cultures, getPortalCultures } = settingsStore;
-    const { isAuthenticated } = authStore;
-    return {
-      cultures,
-      getPortalCultures,
-      isAuthenticated,
-    };
-  })(
-    observer(withTranslation("Common")(ComponentWithCultureNames)),
-  ) as React.FC<
-    Omit<T, keyof (WrappedComponentProps & ComponentWithCultureNamesProps)>
-  >;
+	const Injected = inject<TStore>(({ authStore, settingsStore }) => {
+		const { cultures, getPortalCultures } = settingsStore;
+		const { isAuthenticated } = authStore;
+		return {
+			cultures,
+			getPortalCultures,
+			isAuthenticated,
+		};
+	})(
+		observer(withTranslation("Common")(ComponentWithCultureNames)),
+	) as React.FC<
+		Omit<T, keyof (WrappedComponentProps & ComponentWithCultureNamesProps)>
+	>;
 
-  Injected.displayName = `withCultureNames(${displayName})`;
+	Injected.displayName = `withCultureNames(${displayName})`;
 
-  return Injected;
+	return Injected;
 }

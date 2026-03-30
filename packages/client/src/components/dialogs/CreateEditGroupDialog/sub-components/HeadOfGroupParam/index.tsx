@@ -26,7 +26,7 @@
 
 import { useTranslation } from "react-i18next";
 
-import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
+import { AddButton } from "@docspace/ui-kit/components/add-button";
 import { TUser } from "@docspace/shared/api/people/types";
 import PlusSvgUrl from "PUBLIC_DIR/images/icons/16/button.plus.react.svg?url";
 
@@ -52,7 +52,7 @@ const HeadOfGroup = ({
 
       {!groupManager ? (
         <Styled.SelectGroupManager onClick={onShowSelectGroupManagerPanel}>
-          <SelectorAddButton
+          <AddButton
             iconName={PlusSvgUrl}
             label={t("Common:SelectAction")}
             testId="select_group_manager"

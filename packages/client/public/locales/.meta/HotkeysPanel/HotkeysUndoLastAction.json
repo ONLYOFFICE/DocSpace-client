@@ -3,7 +3,7 @@
   "content": "Undo the last action",
   "content_en_sha1_hash": "a3d3ea26f243caecc9bb50b4df97676274dd58f5",
   "created_at": "2025-05-19T21:30:55.098Z",
-  "updated_at": "2025-05-24T10:30:27.405Z",
+  "updated_at": "2026-02-19T13:36:32.504Z",
   "comment": {
     "text": "This translation key describes the text that appears next to a keyboard shortcut (# Ctrl + z) on a HotkeysPanel component in the actions block section, instructing users to undo their last action.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/panels/HotkeysPanel/ActionsBlock.js",
       "line_number": 48,
-      "context": "<Text {...keyTextStyles}>{`# ${t(\"Common:Or\")} Delete`}</Text>\n </>\n </Row>\n {/* <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysUndoLastAction\")}</Text>\n <Text {...keyTextStyles}>{CtrlKey}+z</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>",
+      "context": "<Text {...keyTextStyles}>{`# ${t(\"Common:Or\")} Delete`}</Text>\n </>\n </Row>\n {/* <Row className={styles.hotkeysRow}>\n <>\n <Text {...textStyles}>{t(\"HotkeysUndoLastAction\")}</Text>\n <Text {...keyTextStyles}>{CtrlKey}+z</Text>\n </>\n </Row>\n <Row className={styles.hotkeysRow}>\n <>",
       "module": "/packages/client"
     }
   ],

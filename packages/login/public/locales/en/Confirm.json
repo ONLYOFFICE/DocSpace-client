@@ -20,6 +20,8 @@
   "GetCode": "Get code",
   "GetSuitableApp": "Get a suitable app",
   "GetSuitableAppDescription": "Use a compatible app such as Google Authenticator for <1>Android</1> and <4>iOS</4>, or Authenticator for <8>Windows Phone</8>.",
+  "InviteLinkQuotaErrorBody": "Registration via the link is no longer available since the limit has been exceeded.",
+  "InviteQuotaErrorCustomizedBody": "You will be redirected to the <1>Login</1> page in 10 seconds",
   "LoginRegistryButton": "Join",
   "Newsletter": "I want to subscribe to the {{organizationName}} newsletter",
   "PassworResetTitle": "Now you can create a new password.",

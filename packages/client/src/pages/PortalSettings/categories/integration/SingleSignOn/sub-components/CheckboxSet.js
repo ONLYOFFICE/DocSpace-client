@@ -28,38 +28,38 @@ import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 
 const checkboxesNames = {
-  idp: [
-    "idpVerifyAuthResponsesSign",
-    "idpVerifyLogoutRequestsSign",
-    "idpVerifyLogoutResponsesSign",
-  ],
-  sp: [
-    "spSignAuthRequests",
-    "spSignLogoutRequests",
-    "spSignLogoutResponses",
-    "spEncryptAssertions",
-  ],
+	idp: [
+		"idpVerifyAuthResponsesSign",
+		"idpVerifyLogoutRequestsSign",
+		"idpVerifyLogoutResponsesSign",
+	],
+	sp: [
+		"spSignAuthRequests",
+		"spSignLogoutRequests",
+		"spSignLogoutResponses",
+		"spEncryptAssertions",
+	],
 };
 
 const checkboxesDataTestId = {
-  authRequestCheckbox: {
-    idp: "idp_verify_auth_responses_sign_checkbox",
-    sp: "sp_sign_auth_requests_checkbox",
-  },
-  logoutRequestCheckbox: {
-    idp: "idp_verify_logout_requests_sign_checkbox",
-    sp: "sp_sign_logout_requests_checkbox",
-  },
-  logoutResponseCheckbox: {
-    idp: "idp_verify_logout_responses_sign_checkbox",
-    sp: "sp_sign_logout_responses_checkbox",
-  },
-  encryptAssertionCheckbox: {
-    sp: "sp_encrypt_assertions_checkbox",
-  },
+	authRequestCheckbox: {
+		idp: "idp_verify_auth_responses_sign_checkbox",
+		sp: "sp_sign_auth_requests_checkbox",
+	},
+	logoutRequestCheckbox: {
+		idp: "idp_verify_logout_requests_sign_checkbox",
+		sp: "sp_sign_logout_requests_checkbox",
+	},
+	logoutResponseCheckbox: {
+		idp: "idp_verify_logout_responses_sign_checkbox",
+		sp: "sp_sign_logout_responses_checkbox",
+	},
+	encryptAssertionCheckbox: {
+		sp: "sp_encrypt_assertions_checkbox",
+	},
 };
 
 const StyledWrapper = styled.div`
@@ -71,130 +71,130 @@ const StyledWrapper = styled.div`
 `;
 
 const CheckboxSet = (props) => {
-  const { t } = useTranslation("SingleSignOn");
-  const {
-    prefix,
-    idpVerifyAuthResponsesSign,
-    idpVerifyLogoutRequestsSign,
-    idpVerifyLogoutResponsesSign,
-    spSignAuthRequests,
-    spSignLogoutRequests,
-    spSignLogoutResponses,
-    spEncryptAssertions,
-    setCheckbox,
-    isDisabledSpSigning,
-    isDisabledSpEncrypt,
-    isDisabledIdpSigning,
-  } = props;
+	const { t } = useTranslation("SingleSignOn");
+	const {
+		prefix,
+		idpVerifyAuthResponsesSign,
+		idpVerifyLogoutRequestsSign,
+		idpVerifyLogoutResponsesSign,
+		spSignAuthRequests,
+		spSignLogoutRequests,
+		spSignLogoutResponses,
+		spEncryptAssertions,
+		setCheckbox,
+		isDisabledSpSigning,
+		isDisabledSpEncrypt,
+		isDisabledIdpSigning,
+	} = props;
 
-  const isDisabled =
-    prefix === "sp" ? isDisabledSpSigning : isDisabledIdpSigning;
+	const isDisabled =
+		prefix === "sp" ? isDisabledSpSigning : isDisabledIdpSigning;
 
-  return (
-    <StyledWrapper>
-      <Checkbox
-        id={
-          prefix === "idp"
-            ? "idp-verify-auth-responses-sign"
-            : "sp-sign-auth-requests"
-        }
-        className="checkbox-input"
-        isDisabled={isDisabled}
-        onChange={setCheckbox}
-        label={prefix === "idp" ? t("idpAuthRequest") : t("spAuthRequest")}
-        name={checkboxesNames[prefix][0]}
-        tabIndex={10}
-        isChecked={
-          prefix === "idp" ? idpVerifyAuthResponsesSign : spSignAuthRequests
-        }
-        dataTestId={checkboxesDataTestId.authRequestCheckbox[prefix]}
-      />
-      <Checkbox
-        id={
-          prefix === "idp"
-            ? "idp-verify-logout-requests-sign"
-            : "sp-sign-logout-requests"
-        }
-        className="checkbox-input"
-        isDisabled={isDisabled}
-        onChange={setCheckbox}
-        label={
-          prefix === "idp" ? t("idpSignExitRequest") : t("spSignExitRequest")
-        }
-        name={checkboxesNames[prefix][1]}
-        tabIndex={11}
-        isChecked={
-          prefix === "idp" ? idpVerifyLogoutRequestsSign : spSignLogoutRequests
-        }
-        dataTestId={checkboxesDataTestId.logoutRequestCheckbox[prefix]}
-      />
-      <Checkbox
-        id={
-          prefix === "idp"
-            ? "idp-verify-logout-responses-sign"
-            : "sp-sign-logout-responses"
-        }
-        className="checkbox-input"
-        isDisabled={isDisabled}
-        onChange={setCheckbox}
-        label={
-          prefix === "idp"
-            ? t("idpSignResponseRequest")
-            : t("spSignResponseRequest")
-        }
-        name={checkboxesNames[prefix][2]}
-        tabIndex={12}
-        isChecked={
-          prefix === "idp"
-            ? idpVerifyLogoutResponsesSign
-            : spSignLogoutResponses
-        }
-        dataTestId={checkboxesDataTestId.logoutResponseCheckbox[prefix]}
-      />
+	return (
+		<StyledWrapper>
+			<Checkbox
+				id={
+					prefix === "idp"
+						? "idp-verify-auth-responses-sign"
+						: "sp-sign-auth-requests"
+				}
+				className="checkbox-input"
+				isDisabled={isDisabled}
+				onChange={setCheckbox}
+				label={prefix === "idp" ? t("idpAuthRequest") : t("spAuthRequest")}
+				name={checkboxesNames[prefix][0]}
+				tabIndex={10}
+				isChecked={
+					prefix === "idp" ? idpVerifyAuthResponsesSign : spSignAuthRequests
+				}
+				dataTestId={checkboxesDataTestId.authRequestCheckbox[prefix]}
+			/>
+			<Checkbox
+				id={
+					prefix === "idp"
+						? "idp-verify-logout-requests-sign"
+						: "sp-sign-logout-requests"
+				}
+				className="checkbox-input"
+				isDisabled={isDisabled}
+				onChange={setCheckbox}
+				label={
+					prefix === "idp" ? t("idpSignExitRequest") : t("spSignExitRequest")
+				}
+				name={checkboxesNames[prefix][1]}
+				tabIndex={11}
+				isChecked={
+					prefix === "idp" ? idpVerifyLogoutRequestsSign : spSignLogoutRequests
+				}
+				dataTestId={checkboxesDataTestId.logoutRequestCheckbox[prefix]}
+			/>
+			<Checkbox
+				id={
+					prefix === "idp"
+						? "idp-verify-logout-responses-sign"
+						: "sp-sign-logout-responses"
+				}
+				className="checkbox-input"
+				isDisabled={isDisabled}
+				onChange={setCheckbox}
+				label={
+					prefix === "idp"
+						? t("idpSignResponseRequest")
+						: t("spSignResponseRequest")
+				}
+				name={checkboxesNames[prefix][2]}
+				tabIndex={12}
+				isChecked={
+					prefix === "idp"
+						? idpVerifyLogoutResponsesSign
+						: spSignLogoutResponses
+				}
+				dataTestId={checkboxesDataTestId.logoutResponseCheckbox[prefix]}
+			/>
 
-      {prefix === "sp" ? (
-        <Checkbox
-          id="sp-encrypt-assertions"
-          className="checkbox-input"
-          isDisabled={isDisabledSpEncrypt}
-          onChange={setCheckbox}
-          label={t("spDecryptStatements")}
-          name={checkboxesNames[prefix][3]}
-          tabIndex={13}
-          isChecked={spEncryptAssertions}
-          dataTestId={checkboxesDataTestId.encryptAssertionCheckbox[prefix]}
-        />
-      ) : null}
-    </StyledWrapper>
-  );
+			{prefix === "sp" ? (
+				<Checkbox
+					id="sp-encrypt-assertions"
+					className="checkbox-input"
+					isDisabled={isDisabledSpEncrypt}
+					onChange={setCheckbox}
+					label={t("spDecryptStatements")}
+					name={checkboxesNames[prefix][3]}
+					tabIndex={13}
+					isChecked={spEncryptAssertions}
+					dataTestId={checkboxesDataTestId.encryptAssertionCheckbox[prefix]}
+				/>
+			) : null}
+		</StyledWrapper>
+	);
 };
 
 export default inject(({ ssoStore }) => {
-  const {
-    idpVerifyAuthResponsesSign,
-    idpVerifyLogoutRequestsSign,
-    idpVerifyLogoutResponsesSign,
-    spSignAuthRequests,
-    spSignLogoutRequests,
-    spSignLogoutResponses,
-    spEncryptAssertions,
-    setCheckbox,
-    isDisabledSpSigning,
-    isDisabledSpEncrypt,
-    isDisabledIdpSigning,
-  } = ssoStore;
+	const {
+		idpVerifyAuthResponsesSign,
+		idpVerifyLogoutRequestsSign,
+		idpVerifyLogoutResponsesSign,
+		spSignAuthRequests,
+		spSignLogoutRequests,
+		spSignLogoutResponses,
+		spEncryptAssertions,
+		setCheckbox,
+		isDisabledSpSigning,
+		isDisabledSpEncrypt,
+		isDisabledIdpSigning,
+	} = ssoStore;
 
-  return {
-    idpVerifyAuthResponsesSign,
-    idpVerifyLogoutRequestsSign,
-    idpVerifyLogoutResponsesSign,
-    spSignAuthRequests,
-    spSignLogoutRequests,
-    spSignLogoutResponses,
-    spEncryptAssertions,
-    setCheckbox,
-    isDisabledSpSigning,
-    isDisabledSpEncrypt,
-    isDisabledIdpSigning,
-  };
+	return {
+		idpVerifyAuthResponsesSign,
+		idpVerifyLogoutRequestsSign,
+		idpVerifyLogoutResponsesSign,
+		spSignAuthRequests,
+		spSignLogoutRequests,
+		spSignLogoutResponses,
+		spEncryptAssertions,
+		setCheckbox,
+		isDisabledSpSigning,
+		isDisabledSpEncrypt,
+		isDisabledIdpSigning,
+	};
 })(observer(CheckboxSet));

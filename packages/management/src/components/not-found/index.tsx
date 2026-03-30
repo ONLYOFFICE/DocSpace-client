@@ -29,7 +29,7 @@
 import React from "react";
 import dynamic from "next/dynamic";
 
-import AppLoader from "@docspace/shared/components/app-loader";
+import AppLoader from "@docspace/ui-kit/components/app-loader";
 
 const Error404 = dynamic(
   () => import("@docspace/shared/components/errors/Error404"),

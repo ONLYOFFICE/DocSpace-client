@@ -26,12 +26,17 @@
 
 import type { Location } from "react-router";
 import find from "lodash/find";
-import moment from "moment-timezone";
 import { findWindows } from "windows-iana";
+import {
+  parseToDateTime,
+  startOf,
+  dateDiffAbs,
+} from "@docspace/ui-kit/utils/date";
 import { isMobile } from "react-device-detect";
-import { I18nextProviderProps } from "react-i18next";
-import sjcl from "sjcl";
+import type { I18nextProviderProps } from "react-i18next";
 import resizeImage from "resize-image";
+import { pbkdf2 } from "@noble/hashes/pbkdf2.js";
+import { sha256 } from "@noble/hashes/sha2.js";
 
 import LoginPageSvgUrl from "PUBLIC_DIR/images/logo/loginpage.svg?url";
 import DarkLoginPageSvgUrl from "PUBLIC_DIR/images/logo/dark_loginpage.svg?url";
@@ -58,7 +63,8 @@ import BackgroundPatternPurpleReactSvgUrl from "PUBLIC_DIR/images/background.pat
 import BackgroundPatternLightBlueReactSvgUrl from "PUBLIC_DIR/images/background.pattern.lightBlue.react.svg?url";
 import BackgroundPatternBlackReactSvgUrl from "PUBLIC_DIR/images/background.pattern.black.react.svg?url";
 
-import { AvatarRole } from "../components/avatar/Avatar.enums";
+import { AvatarRole } from "@docspace/ui-kit/components/avatar";
+import { ThemeKeys } from "@docspace/ui-kit/enums";
 
 import { flagsIcons } from "./image-flags";
 
@@ -67,7 +73,6 @@ import { parseAddress } from "./email";
 import {
   FolderType,
   RoomsType,
-  ThemeKeys,
   ErrorKeys,
   WhiteLabelLogoType,
   EmployeeType,
@@ -79,7 +84,6 @@ import {
   COOKIE_EXPIRATION_YEAR,
   LANGUAGE,
   PUBLIC_MEDIA_VIEW_URL,
-  RTL_LANGUAGES,
   TIMEZONE,
 } from "../constants";
 
@@ -92,17 +96,19 @@ import {
   TPasswordHash,
   TTimeZone,
 } from "../api/settings/types";
-import TopLoaderService from "../components/top-loading-indicator";
+import { TopLoaderService } from "@docspace/ui-kit/components/top-loading-indicator";
 
-import { Encoder } from "./encoder";
+import { Encoder } from "@docspace/ui-kit/utils/encoder";
 import { combineUrl } from "./combineUrl";
-import { getCookie, setCookie } from "./cookie";
-import { checkIsSSR } from "./device";
+import { getCookie, setCookie } from "@docspace/ui-kit/utils/cookie";
+import { checkIsSSR } from "@docspace/ui-kit/utils/device";
 
 import { hasOwnProperty } from "./object";
 import { TFrameConfig } from "../types/Frame";
 import { isFile, isFolder } from "./typeGuards";
 import { getUserTypeDescriptionClient } from "./getUserTypeDescription";
+import { getSystemTheme } from "@docspace/ui-kit/utils/get-system-theme";
+import { isLanguageRtl } from "@docspace/ui-kit/providers/theme";
 
 export const desktopConstants = Object.freeze({
   domain: !checkIsSSR() && window.location.origin,
@@ -141,11 +147,15 @@ export function createPasswordHash(
 
   const { size, iterations, salt } = hashSettings;
 
-  let bits = sjcl.misc.pbkdf2(password, salt, iterations);
-  bits = bits.slice(0, size / 32);
-  const hash = sjcl.codec.hex.fromBits(bits);
+  const enc = new TextEncoder();
+  const derivedBytes = pbkdf2(sha256, enc.encode(password), enc.encode(salt), {
+    c: iterations,
+    dkLen: size / 8,
+  });
 
-  return hash;
+  return Array.from(derivedBytes)
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("");
 }
 
 export const isPublicRoom = () => {
@@ -497,17 +507,6 @@ export const getLifetimePeriodTranslation = (
   }
 };
 
-export const isLanguageRtl = (lng: string) => {
-  if (!lng) return;
-
-  const splittedLng = lng.split("-");
-  return RTL_LANGUAGES.includes(splittedLng[0]);
-};
-
-export const getDirectionByLanguage = (lng: string) => {
-  return isLanguageRtl(lng) ? "rtl" : "ltr";
-};
-
 // temporary function needed to replace rtl language in Editor to ltr
 export const getLtrLanguageForEditor = (
   userLng: string | undefined,
@@ -562,7 +561,7 @@ export function isRetina() {
       (min-resolution: 1.5dppx),\
       (min-device-pixel-ratio: 1.5)";
 
-  if (window.matchMedia && window.matchMedia(mediaQuery).matches) return true;
+  if (window.matchMedia?.(mediaQuery).matches) return true;
   return false;
 }
 
@@ -630,32 +629,6 @@ export function assign(
   obj[keyPath[lastKeyIndex]] = value;
 }
 
-export function getOAuthToken(
-  tokenGetterWin: Window | string | null,
-): Promise<string> {
-  return new Promise((resolve, reject) => {
-    localStorage.removeItem("code");
-    const interval: ReturnType<typeof setInterval> = setInterval(() => {
-      try {
-        const code = localStorage.getItem("code");
-        if (typeof tokenGetterWin !== "string") {
-          if (code) {
-            localStorage.removeItem("code");
-            clearInterval(interval);
-            resolve(code);
-          } else if (tokenGetterWin && tokenGetterWin.closed) {
-            clearInterval(interval);
-            reject();
-          }
-        }
-      } catch (e) {
-        clearInterval(interval);
-        reject(e);
-      }
-    }, 500);
-  });
-}
-
 export function getLoginLink(token: string, code: string) {
   return combineUrl(
     window.ClientConfig?.proxy?.url,
@@ -665,7 +638,7 @@ export function getLoginLink(token: string, code: string) {
 
 const FRAME_NAME = "frameDocSpace";
 
-const getFrameId = () => {
+export const getFrameId = () => {
   return window.self.name.replace(`${FRAME_NAME}__#`, "");
 };
 
@@ -720,7 +693,11 @@ export const getSizeFromBytes = (bytes: number, power: number) => {
   return truncateToTwo;
 };
 
-export const getConvertedSize = (t: (key: string) => string, bytes: number) => {
+export const getConvertedSize = (
+  t: (key: string) => string,
+  bytes: number,
+  withoutSizeName: boolean = false,
+) => {
   let power = 0;
   let resultSize = bytes;
 
@@ -741,6 +718,8 @@ export const getConvertedSize = (t: (key: string) => string, bytes: number) => {
     resultSize = getSizeFromBytes(bytes, power);
   }
 
+  if (withoutSizeName) return `${resultSize}`;
+
   return `${resultSize} ${sizeNames[power]}`;
 };
 
@@ -749,9 +728,10 @@ export const getConvertedSize = (t: (key: string) => string, bytes: number) => {
 export const getConvertedQuota = (
   t: (key: string) => string,
   bytes: number,
+  withoutSizeName: boolean = false,
 ) => {
   if (bytes === -1) return t("Common:Unlimited");
-  return getConvertedSize(t, bytes);
+  return getConvertedSize(t, bytes, withoutSizeName);
 };
 
 export const getSpaceQuotaAsText = (
@@ -799,7 +779,9 @@ export const getBgPattern = (colorSchemeId: number | undefined) => {
 };
 
 export const getDaysLeft = (date: Date) => {
-  return moment(date).startOf("day").diff(moment().startOf("day"), "days");
+  const targetDate = startOf(parseToDateTime(date)!, "day")!;
+  const currentDate = startOf(parseToDateTime(new Date())!, "day")!;
+  return dateDiffAbs(targetDate, currentDate, "days");
 };
 
 export const getDaysRemaining = (autoDelete: Date) => {
@@ -1072,35 +1054,19 @@ export const RoomsTypes = RoomsTypeValues.reduce<Record<number, number>>(
   {},
 );
 
-export const getSystemTheme = () => {
-  if (typeof window !== "undefined") {
-    const isDesktopClient = window?.AscDesktopEditor !== undefined;
-    const desktopClientTheme = window?.RendererProcessVariable?.theme;
-    const isDark = desktopClientTheme?.type === "dark";
-
-    return isDesktopClient
-      ? isDark
-        ? ThemeKeys.DarkStr
-        : ThemeKeys.BaseStr
-      : window.matchMedia &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? ThemeKeys.DarkStr
-        : ThemeKeys.BaseStr;
-  }
-
-  return ThemeKeys.BaseStr;
-};
-
 export const getEditorTheme = (theme?: ThemeKeys) => {
   const systemTheme =
     getSystemTheme() === ThemeKeys.DarkStr ? "theme-night" : "theme-white";
 
   switch (theme) {
     case ThemeKeys.BaseStr:
+    case ThemeKeys.Base:
       return "theme-white";
     case ThemeKeys.DarkStr:
+    case ThemeKeys.Dark:
       return "theme-night";
     case ThemeKeys.SystemStr:
+    case ThemeKeys.System:
       return "theme-system";
     default:
       return systemTheme;
@@ -1267,15 +1233,15 @@ export const getSelectZone = (
 
   if (isWindowsZones) {
     const windowsZoneKey = findWindows(userTimezone);
-    return (
-      zones.filter((zone) => zone.key === windowsZoneKey[0]) ||
-      zones.filter((zone) => zone.key === defaultTimezone)
-    );
+    const result = zones.filter((zone) => zone.key === windowsZoneKey[0]);
+    return result.length
+      ? result
+      : zones.filter((zone) => zone.key === defaultTimezone);
   }
-  return (
-    zones.filter((zone) => zone.key === userTimezone) ||
-    zones.filter((zone) => zone.key === defaultTimezone)
-  );
+  const userTimezoneResult = zones.filter((zone) => zone.key === userTimezone);
+  return userTimezoneResult.length
+    ? userTimezoneResult
+    : zones.filter((zone) => zone.key === defaultTimezone);
 };
 
 export function getLogoUrl(
@@ -1433,15 +1399,23 @@ export const getBackupProgressInfo = (
   t: TTranslation,
   setBackupProgress: (progress: number) => void,
   setLink: (link: string) => void,
+  setShowCancelOperation?: (show: boolean) => void,
+  showCancelOperation?: boolean,
 ) => {
   const { isCompleted, link, error, progress, warning } = opt;
 
   if (progress !== 100) {
     setBackupProgress(progress);
+    if (!isCompleted && !showCancelOperation) setShowCancelOperation?.(true);
+  }
+
+  if (progress === 100 && !isCompleted) {
+    setShowCancelOperation?.(false);
   }
 
   if (isCompleted) {
     setBackupProgress(100);
+    if (showCancelOperation) setShowCancelOperation?.(false);
 
     if (link && link.slice(0, 1) === "/") {
       setLink(link);

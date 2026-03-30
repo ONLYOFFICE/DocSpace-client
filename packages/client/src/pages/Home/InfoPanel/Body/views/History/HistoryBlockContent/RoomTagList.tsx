@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Tag } from "@docspace/shared/components/tag";
+import { Tag } from "@docspace/ui-kit/components/tag";
 
 import {
   FeedAction,

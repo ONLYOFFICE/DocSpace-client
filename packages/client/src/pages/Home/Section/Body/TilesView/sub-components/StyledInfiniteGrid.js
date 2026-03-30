@@ -26,7 +26,7 @@
 
 import styled, { css } from "styled-components";
 import { desktop, tablet } from "@docspace/shared/utils";
-import { InfiniteLoaderComponent } from "@docspace/shared/components/infinite-loader";
+import { InfiniteLoaderComponent } from "@docspace/ui-kit/components/infinite-loader";
 
 const paddingCss = css`
   @media ${desktop} {

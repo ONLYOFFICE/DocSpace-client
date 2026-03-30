@@ -55,7 +55,13 @@ const createdUpdatedByMock = {
   isAnonim: false,
 };
 
-const getFolderInfo = ({ canUseChat }: { canUseChat: boolean }) => {
+const getFolderInfo = ({
+  canUseChat,
+  thinkingSupported = false,
+}: {
+  canUseChat: boolean;
+  thinkingSupported?: boolean;
+}) => {
   return {
     parentId: 224866,
     filesCount: 0,
@@ -83,6 +89,7 @@ const getFolderInfo = ({ canUseChat }: { canUseChat: boolean }) => {
       providerId: 1,
       modelId: "GPT-5.1",
       prompt: "",
+      thinking: thinkingSupported,
     },
     id: 2,
     rootFolderId: 224866,
@@ -129,7 +136,13 @@ const getFolderInfo = ({ canUseChat }: { canUseChat: boolean }) => {
   };
 };
 
-const getAgentFolderChat = ({ canUseChat }: { canUseChat: boolean }) => {
+const getAgentFolderChat = ({
+  canUseChat,
+  thinkingSupported = false,
+}: {
+  canUseChat: boolean;
+  thinkingSupported?: boolean;
+}) => {
   return {
     files: [],
     folders: [
@@ -247,7 +260,7 @@ const getAgentFolderChat = ({ canUseChat }: { canUseChat: boolean }) => {
         updatedBy: createdUpdatedByMock,
       },
     ],
-    current: getFolderInfo({ canUseChat }),
+    current: getFolderInfo({ canUseChat, thinkingSupported }),
     pathParts: [
       {
         id: 224866,
@@ -268,7 +281,7 @@ const getAgentFolderChat = ({ canUseChat }: { canUseChat: boolean }) => {
   };
 };
 
-const getMockKnowledgeFiles = (
+const getMockFiles = (
   vectorizationStatus: VectorizationStatus = VectorizationStatus.Completed,
   canRetryVectorization: boolean = true,
 ) => {
@@ -472,7 +485,7 @@ const getAgentFolderKnowledge = (
 
   const files = isEmpty
     ? []
-    : getMockKnowledgeFiles(vectorizationStatus, canRetryVectorization);
+    : getMockFiles(vectorizationStatus, canRetryVectorization);
 
   return {
     files,
@@ -564,8 +577,10 @@ const getAgentFolderResultStorage = ({
   canUseChat: boolean;
   isEmpty: boolean;
 }) => {
+  const files = isEmpty ? [] : getMockFiles();
+
   return {
-    files: [],
+    files: files,
     folders: [],
     current: {
       parentId: 2,
@@ -653,6 +668,19 @@ const getAgentFolderResultStorage = ({
 
 const successFolderChatDefault = {
   response: getAgentFolderChat({ canUseChat: true }),
+  count: 1,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/files/2?count=100&sortby=DateAndTime&sortOrder=descending`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+const successFolderChatWithThinking = {
+  response: getAgentFolderChat({ canUseChat: true, thinkingSupported: true }),
   count: 1,
   links: [
     {
@@ -763,6 +791,19 @@ const successFolderKnowledgeVectorizationFailedNoRetry = {
 };
 
 const successFolderResultStorageDefault = {
+  response: getAgentFolderResultStorage({ canUseChat: true, isEmpty: false }),
+  count: 1,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/files/2?count=100&sortby=DateAndTime&sortOrder=descending`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+const successFolderResultStorageEmpty = {
   response: getAgentFolderResultStorage({ canUseChat: true, isEmpty: true }),
   count: 1,
   links: [
@@ -815,24 +856,28 @@ const successFolderInfoCanNotUseChat = {
 };
 
 export const agentFolderChatResolver = (
-  type: "default" | "canNotUseChat" = "default",
+  type: "default" | "canNotUseChat" | "withThinking" = "default",
 ) => {
   switch (type) {
     case "canNotUseChat":
       return new Response(JSON.stringify(successFolderChatCanNotUseChat));
+    case "withThinking":
+      return new Response(JSON.stringify(successFolderChatWithThinking));
     case "default":
       return new Response(JSON.stringify(successFolderChatDefault));
   }
 };
 
 export const agentFolderResultStorageResolver = (
-  type: "default" | "canNotUseChat" = "default",
+  type: "default" | "empty" | "canNotUseChat" = "default",
 ) => {
   switch (type) {
     case "canNotUseChat":
       return new Response(
         JSON.stringify(successFolderResultStorageCanNotUseChat),
       );
+    case "empty":
+      return new Response(JSON.stringify(successFolderResultStorageEmpty));
     case "default":
       return new Response(JSON.stringify(successFolderResultStorageDefault));
   }
@@ -887,7 +932,7 @@ export const agentFolderInfoResolver = (
 
 export const agentFolderChatHandler = (
   port: string,
-  type: "default" | "canNotUseChat" = "default",
+  type: "default" | "canNotUseChat" | "withThinking" = "default",
 ) => {
   return http.get(
     `${BASE_URL}:${port}/${API_PREFIX}/${PATH_AGENT_FOLDER_CHAT}`,
@@ -908,7 +953,7 @@ export const agentFolderChatHandler = (
 
 export const agentFolderResultStorageHandler = (
   port: string,
-  type: "default" | "canNotUseChat" = "default",
+  type: "default" | "canNotUseChat" | "empty" = "default",
 ) => {
   return http.get(
     `${BASE_URL}:${port}/${API_PREFIX}/${PATH_AGENT_FOLDER_RESULT_STORAGE}`,

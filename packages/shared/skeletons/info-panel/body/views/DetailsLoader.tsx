@@ -26,40 +26,40 @@
 
 import React from "react";
 
-import { RectangleSkeleton } from "../../../rectangle";
+import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 import { propertyDetailsDimensions } from "../body.constant";
 import styles from "../Body.module.scss";
 
 const DetailsLoader = () => {
-  return (
-    <div className={styles.detailsLoader} data-testid="details-loader">
-      <div className={styles.detailsSubtitleLoader}>
-        <RectangleSkeleton width="71px" height="16px" borderRadius="3px" />
-      </div>
+	return (
+		<div className={styles.detailsLoader} data-testid="details-loader">
+			<div className={styles.detailsSubtitleLoader}>
+				<RectangleSkeleton width="71px" height="16px" borderRadius="3px" />
+			</div>
 
-      <div className={styles.detailsProperty}>
-        {propertyDetailsDimensions.map((property) => (
-          <React.Fragment
-            key={`${property.propertyTitle}_${property.propertyContent}`}
-          >
-            <RectangleSkeleton
-              className="property-title"
-              width={property.propertyTitle}
-              height="20px"
-              borderRadius="3px"
-            />
-            <RectangleSkeleton
-              key={property.propertyContent}
-              className="property-content"
-              width={property.propertyContent}
-              height="20px"
-              borderRadius="3px"
-            />
-          </React.Fragment>
-        ))}
-      </div>
-    </div>
-  );
+			<div className={styles.detailsProperty}>
+				{propertyDetailsDimensions.map((property) => (
+					<React.Fragment
+						key={`${property.propertyTitle}_${property.propertyContent}`}
+					>
+						<RectangleSkeleton
+							className="property-title"
+							width={property.propertyTitle}
+							height="20px"
+							borderRadius="3px"
+						/>
+						<RectangleSkeleton
+							key={property.propertyContent}
+							className="property-content"
+							width={property.propertyContent}
+							height="20px"
+							borderRadius="3px"
+						/>
+					</React.Fragment>
+				))}
+			</div>
+		</div>
+	);
 };
 
 export default DetailsLoader;

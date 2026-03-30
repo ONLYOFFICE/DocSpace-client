@@ -44,5 +44,6 @@ export type TAPIPlugin = {
   enabled: boolean;
   system: boolean;
   url: string;
+  cssUrl?: string;
   settings: string;
 };

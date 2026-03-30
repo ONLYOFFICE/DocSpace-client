@@ -35,9 +35,9 @@ import {
   FileActions,
 } from "SRC_DIR/components/PanelComponents";
 
-import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
-import { Button } from "@docspace/shared/components/button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link } from "@docspace/ui-kit/components/link";
+import { Button } from "@docspace/ui-kit/components/button";
 import { SimulatePassword } from "@docspace/shared/components/simulate-password";
 
 const FileRow = observer(

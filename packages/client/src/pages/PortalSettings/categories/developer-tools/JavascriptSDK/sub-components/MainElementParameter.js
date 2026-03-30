@@ -27,14 +27,14 @@
 import { useState, useCallback } from "react";
 import debounce from "lodash.debounce";
 
-import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
-import { ColorInput } from "@docspace/shared/components/color-input";
-import { TextInput } from "@docspace/shared/components/text-input";
-import { Label } from "@docspace/shared/components/label";
-import { Text } from "@docspace/shared/components/text";
-import { Checkbox } from "@docspace/shared/components/checkbox";
+import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
+import { ColorInput } from "@docspace/ui-kit/components/color-input";
+import { TextInput } from "@docspace/ui-kit/components/text-input";
+import { Label } from "@docspace/ui-kit/components/label";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import {
   CategorySubHeader,
   ControlsGroup,

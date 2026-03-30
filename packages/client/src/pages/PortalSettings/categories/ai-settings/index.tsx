@@ -29,9 +29,9 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
-import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
+import { SECTION_HEADER_HEIGHT } from "@docspace/ui-kit/components/section/Section.constants";
 
-import { Tabs, TTabItem } from "@docspace/shared/components/tabs";
+import { Tabs, TTabItem } from "@docspace/ui-kit/components/tabs";
 
 import { DeviceType } from "@docspace/shared/enums";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
@@ -80,6 +80,7 @@ type TAiSettingsProps = {
   fetchAIProviders?: AISettingsStore["fetchAIProviders"];
   fetchMCPServers?: AISettingsStore["fetchMCPServers"];
   fetchWebSearch?: AISettingsStore["fetchWebSearch"];
+  initDefaultProvider?: AISettingsStore["initDefaultProvider"];
 
   showPortalSettingsLoader?: ClientLoadingStore["showPortalSettingsLoader"];
 };
@@ -92,6 +93,7 @@ const AiSettings = ({
   fetchAIProviders,
   fetchMCPServers,
   fetchWebSearch,
+  initDefaultProvider,
   showPortalSettingsLoader,
 }: TAiSettingsProps) => {
   const { t, ready } = useTranslation(["Common", "AISettings", "AIRoom"]);
@@ -102,6 +104,7 @@ const AiSettings = ({
       fetchMCPServers,
       fetchWebSearch,
       fetchKnowledge,
+      initDefaultProvider,
       standalone,
     });
 
@@ -196,6 +199,7 @@ export const Component = inject(
       fetchMCPServers,
       fetchWebSearch,
       fetchKnowledge,
+      initDefaultProvider,
     } = aiSettingsStore;
 
     const { showPortalSettingsLoader } = clientLoadingStore;
@@ -206,6 +210,7 @@ export const Component = inject(
       fetchMCPServers,
       fetchWebSearch,
       fetchKnowledge,
+      initDefaultProvider,
       showPortalSettingsLoader,
     };
   },

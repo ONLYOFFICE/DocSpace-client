@@ -1,0 +1,28 @@
+{
+  "key_path": "UploadMode",
+  "content": "Upload mode",
+  "content_en_sha1_hash": "5a7fa2cc70723e1f180cd4c2c73e0685205d0218",
+  "created_at": "2026-03-20T09:07:42.366Z",
+  "updated_at": "2026-03-20T09:43:00.518Z",
+  "comment": {
+    "text": "This key displays the current upload mode setting within the developer tools section of the portal settings. It likely refers to the method used to upload files (e.g., \"files\" vs. other options) and appears as part of a configuration or selection interface. Translators should consider the technical context when choosing an equivalent term.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T09:43:00.518Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Uploader.js",
+      "line_number": 97,
+      "context": "setDocumentTitle(t(\"JavascriptSdk\"));\n \n const [version, onSetVersion] = useState(sdkVersion[220]);\n const [source, onSetSource] = useState(sdkSource.Package);\n const [uploadMode, setUploadMode] = useState(\"files\");\n const [uploadQuantity, setUploadQuantity] = useState(\"single\");\n const [perFileSize, setPerFileSize] = useState({ value: \"25\", unit: \"mb\" });\n const [totalSize, setTotalSize] = useState({ value: \"100\", unit: \"mb\" });\n const fileSizeUnits = [\n { key: \"kb\", label: t(\"Common:Kilobyte\") },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

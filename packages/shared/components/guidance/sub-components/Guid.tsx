@@ -34,14 +34,14 @@ import React, {
 
 import { isIOS } from "react-device-detect";
 
-import { Button, ButtonSize } from "../../button";
-import { Text } from "../../text";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Text } from "@docspace/ui-kit/components/text";
 import { isMobile, classNames } from "../../../utils";
-import { AsideHeader } from "../../aside-header";
-import { useTheme } from "../../../hooks/useTheme";
+import { AsideHeader } from "@docspace/ui-kit/components/aside";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import styles from "./Guid.module.scss";
-import modalStyles from "../../modal-dialog/ModalDialog.module.scss";
+import modalStyles from "@docspace/ui-kit/components/modal-dialog/ModalDialog.module.scss";
 import { getDynamicPlacement } from "./Guid.utils";
 import {
   GuidProps,

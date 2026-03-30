@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
-import { mobile } from "@docspace/shared/utils/device";
+import { mobile } from "@docspace/ui-kit/utils/device";
 
 import styled from "styled-components";
 import { MigrationButtonsProps } from "../types";

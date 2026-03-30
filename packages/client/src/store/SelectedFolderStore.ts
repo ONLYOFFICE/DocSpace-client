@@ -27,7 +27,7 @@
 import { makeAutoObservable } from "mobx";
 
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
-import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
+import SocketHelper, { SocketCommands } from "@docspace/ui-kit/utils/socket";
 import {
   FolderType,
   RoomsType,
@@ -48,11 +48,12 @@ import {
   TShareSettings,
 } from "@docspace/shared/api/files/types";
 import {
-  TLogo,
+  TAIRoomChatSettings,
   TRoomLifetime,
   TRoomSecurity,
   TWatermark,
 } from "@docspace/shared/api/rooms/types";
+import type { TLogo } from "@docspace/ui-kit/types";
 
 import { setDocumentTitle } from "../helpers/utils";
 
@@ -63,6 +64,8 @@ export type TNavigationPath = {
   roomType: RoomsType;
   isRootRoom: boolean;
   shared: boolean;
+  quotaLimit?: number;
+  usedSpace?: number;
 };
 
 type ExcludeTypes = SettingsStore | CallableFunction;
@@ -180,9 +183,7 @@ class SelectedFolderStore {
 
   passwordProtected: boolean = false;
 
-  chatSettings:
-    | { modelId: string; providerId: number; prompt: string }
-    | undefined;
+  chatSettings: TAIRoomChatSettings | undefined;
 
   rootRoomType: Nullable<RoomsType> = null;
 
@@ -193,6 +194,9 @@ class SelectedFolderStore {
   availableShareRights: Nullable<TAvailableShareRights> = null;
 
   parentShared: boolean = false;
+
+  sendFormToExternalDB: boolean = false;
+  saveFormAsXLSX: boolean = false;
 
   constructor(settingsStore: SettingsStore) {
     makeAutoObservable(this);
@@ -262,6 +266,11 @@ class SelectedFolderStore {
       parentShared: this.parentShared,
       ownedBy: this.ownedBy,
       sharedBy: this.sharedBy,
+      isRoomStorageQuotaExceeded: this.isRoomStorageQuotaExceeded,
+      roomUsedSpace: this.roomUsedSpace,
+      roomQuotaLimit: this.roomQuotaLimit,
+      sendFormToExternalDB: this.sendFormToExternalDB,
+      saveFormAsXLSX: this.saveFormAsXLSX,
     };
   };
 
@@ -323,6 +332,8 @@ class SelectedFolderStore {
     this.parentShared = false;
     this.ownedBy = null;
     this.sharedBy = null;
+    this.sendFormToExternalDB = false;
+    this.saveFormAsXLSX = false;
   };
 
   setFilesCount = (filesCount: number) => {
@@ -510,6 +521,32 @@ class SelectedFolderStore {
 
   get isAIAgent() {
     return this.roomType === RoomsType.AIRoom;
+  }
+
+  get roomQuotaLimit() {
+    const { navigationPath } = this;
+    return navigationPath.length >= 2
+      ? navigationPath[navigationPath.length - 2].quotaLimit
+      : this.quotaLimit;
+  }
+
+  get roomUsedSpace() {
+    const { navigationPath } = this;
+    return navigationPath.length >= 2
+      ? navigationPath[navigationPath.length - 2].usedSpace
+      : this.usedSpace;
+  }
+
+  get isRoomStorageQuotaExceeded() {
+    if (this.rootFolderType !== FolderType.Rooms) return false;
+
+    const { roomQuotaLimit, roomUsedSpace } = this;
+
+    if (roomQuotaLimit === undefined || roomQuotaLimit === -1) return false;
+
+    if (roomUsedSpace === undefined) return false;
+
+    return roomUsedSpace >= roomQuotaLimit;
   }
 
   get isInsideResultStorage() {

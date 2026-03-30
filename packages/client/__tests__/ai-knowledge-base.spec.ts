@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import { expect, test, TEST_PORT } from "./fixtures/base";
 import {
   settingsHandler,
@@ -70,7 +71,7 @@ test.describe("AI knowledge base", () => {
 
       await expect(emptyView).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "ai-knowledge",
         "ai-knowledge-vectorization-disabled-empty-admin.png",
@@ -93,7 +94,7 @@ test.describe("AI knowledge base", () => {
 
       await expect(emptyView).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "ai-knowledge",
         "ai-knowledge-empty.png",
@@ -116,7 +117,7 @@ test.describe("AI knowledge base", () => {
 
       await expect(tableRows).toHaveCount(3);
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "ai-knowledge",
         "ai-knowledge-vectorization-completed.png",
@@ -143,7 +144,7 @@ test.describe("AI knowledge base", () => {
 
       await preparingForAIBadge.last().hover();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "ai-knowledge",
         "ai-knowledge-vectorization-in-progress.png",
@@ -172,7 +173,7 @@ test.describe("AI knowledge base", () => {
 
       await failedVectorizationBadge.last().hover();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "ai-knowledge",
         "ai-knowledge-vectorization-failed-can-retry.png",
@@ -182,7 +183,7 @@ test.describe("AI knowledge base", () => {
 
       await contextBtn.click();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "ai-knowledge",
         "ai-knowledge-vectorization-failed-context-menu-can-retry.png",
@@ -211,7 +212,7 @@ test.describe("AI knowledge base", () => {
 
       await failedVectorizationBadge.last().hover();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "ai-knowledge",
         "ai-knowledge-vectorization-failed-no-retry.png",
@@ -221,7 +222,7 @@ test.describe("AI knowledge base", () => {
 
       await contextBtn.click();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "ai-knowledge",
         "ai-knowledge-vectorization-failed-context-menu-no-retry.png",
@@ -252,7 +253,7 @@ test.describe("AI knowledge base", () => {
 
       await expect(emptyView).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page,[
         "desktop",
         "ai-knowledge",
         "ai-knowledge-vectorization-disabled-empty-user.png",

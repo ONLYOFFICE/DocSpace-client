@@ -28,90 +28,92 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import {
-  ModalDialog,
-  ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
-import { toastr } from "@docspace/shared/components/toast";
+	ModalDialog,
+	ModalDialogType,
+} from "@docspace/ui-kit/components/modal-dialog";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 
 type DisconnectAccountDialogProps = {
-  disconnectAccountDialogVisible?: DialogsStore["disconnectAccountDialogVisible"];
-  setDisconnectAccountDialogVisible?: DialogsStore["setDisconnectAccountDialogVisible"];
-  deleteTgLink?: TStore["telegramStore"]["deleteTgLink"];
-  username?: TStore["telegramStore"]["username"];
+	disconnectAccountDialogVisible?: DialogsStore["disconnectAccountDialogVisible"];
+	setDisconnectAccountDialogVisible?: DialogsStore["setDisconnectAccountDialogVisible"];
+	deleteTgLink?: TStore["telegramStore"]["deleteTgLink"];
+	username?: TStore["telegramStore"]["username"];
 };
 
 const DisconnectAccountDialog = ({
-  disconnectAccountDialogVisible,
-  setDisconnectAccountDialogVisible,
-  deleteTgLink,
-  username,
+	disconnectAccountDialogVisible,
+	setDisconnectAccountDialogVisible,
+	deleteTgLink,
+	username,
 }: DisconnectAccountDialogProps) => {
-  const { t } = useTranslation(["Profile", "Notifications", "Common"]);
+	const { t } = useTranslation(["Profile", "Notifications", "Common"]);
 
-  const onClickDisconnect = () => {
-    deleteTgLink?.();
-    setDisconnectAccountDialogVisible?.(false);
-    toastr.success(
-      t("Notifications:SuccessDisconnected", {
-        serviceName: t("Common:ProviderTelegram"),
-      }),
-    );
-  };
+	const onClickDisconnect = () => {
+		deleteTgLink?.();
+		setDisconnectAccountDialogVisible?.(false);
+		toastr.success(
+			t("Notifications:SuccessDisconnected", {
+				serviceName: t("Common:ProviderTelegram"),
+			}),
+		);
+	};
 
-  const onClose = () => {
-    setDisconnectAccountDialogVisible?.(false);
-  };
+	const onClose = () => {
+		setDisconnectAccountDialogVisible?.(false);
+	};
 
-  return (
-    <ModalDialog
-      visible={disconnectAccountDialogVisible}
-      onClose={onClose}
-      displayType={ModalDialogType.modal}
-      autoMaxHeight
-    >
-      <ModalDialog.Header>
-        {t("Profile:TelegramAccountDisconnect")}
-      </ModalDialog.Header>
-      <ModalDialog.Body>
-        <Text fontSize="13px" fontWeight={400}>
-          {t("Profile:TelegramAccountDisconnectDescription", {
-            username,
-          })}
-        </Text>
-      </ModalDialog.Body>
-      <ModalDialog.Footer>
-        <Button
-          label={t("Common:Disconnect")}
-          size={ButtonSize.normal}
-          scale
-          primary
-          onClick={onClickDisconnect}
-        />
-        <Button
-          label={t("Common:CancelButton")}
-          size={ButtonSize.normal}
-          scale
-          onClick={onClose}
-        />
-      </ModalDialog.Footer>
-    </ModalDialog>
-  );
+	return (
+		<ModalDialog
+			visible={disconnectAccountDialogVisible}
+			onClose={onClose}
+			displayType={ModalDialogType.modal}
+			autoMaxHeight
+		>
+			<ModalDialog.Header>
+				{t("Profile:TelegramAccountDisconnect")}
+			</ModalDialog.Header>
+			<ModalDialog.Body>
+				<Text fontSize="13px" fontWeight={400}>
+					{t("Profile:TelegramAccountDisconnectDescription", {
+						username,
+					})}
+				</Text>
+			</ModalDialog.Body>
+			<ModalDialog.Footer>
+				<Button
+					label={t("Common:Disconnect")}
+					size={ButtonSize.normal}
+					scale
+					primary
+					onClick={onClickDisconnect}
+					testId="disconnect_account_dialog_submit"
+				/>
+				<Button
+					label={t("Common:CancelButton")}
+					size={ButtonSize.normal}
+					scale
+					onClick={onClose}
+					testId="disconnect_account_dialog_cancel"
+				/>
+			</ModalDialog.Footer>
+		</ModalDialog>
+	);
 };
 
 export default inject(({ dialogsStore, telegramStore }: TStore) => {
-  const { disconnectAccountDialogVisible, setDisconnectAccountDialogVisible } =
-    dialogsStore;
+	const { disconnectAccountDialogVisible, setDisconnectAccountDialogVisible } =
+		dialogsStore;
 
-  const { deleteTgLink, username } = telegramStore;
+	const { deleteTgLink, username } = telegramStore;
 
-  return {
-    disconnectAccountDialogVisible,
-    setDisconnectAccountDialogVisible,
-    deleteTgLink,
-    username,
-  };
+	return {
+		disconnectAccountDialogVisible,
+		setDisconnectAccountDialogVisible,
+		deleteTgLink,
+		username,
+	};
 })(observer(DisconnectAccountDialog));

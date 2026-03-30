@@ -27,7 +27,7 @@
 // @ts-nocheck
 
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-import moment from "moment";
+import type { DateTime } from "luxon";
 
 import {
   ConflictResolveType,
@@ -75,7 +75,7 @@ import {
   TFormRoleMappingRequest,
   TFileFillingFormStatus,
   TShareToUser,
-  TFileEncryptionInfo,
+  TDefaultTemplate,
 } from "./types";
 import type { TFileConvertId } from "../../dialogs/download-dialog/DownloadDialog.types";
 
@@ -699,7 +699,7 @@ export async function startUploadSession(
   folderId: string | number,
   fileName: string,
   fileSize: number,
-  relativePath: boolean,
+  relativePath: string,
   encrypted: boolean,
   createOn: unknown,
   CreateNewIfExist: boolean,
@@ -1266,56 +1266,53 @@ export async function getIsEncryptionSupport() {
   return res;
 }
 
-export async function getFileEncryptionAccess(fileId: number | string) {
+// TODO: Need update res type
+export function setEncryptionKeys(keys: { [key: string]: string | boolean }) {
+  const data = {
+    publicKey: keys.publicKey,
+    privateKeyEnc: keys.privateKeyEnc,
+    enable: keys.enable,
+    update: keys.update,
+  };
+  return request({
+    method: "put",
+    url: "privacyroom/keys",
+    data,
+  });
+}
+
+export async function getEncryptionKeys() {
   const res = (await request({
     method: "get",
-    url: `files/${fileId}/access`,
-  })) as TFileEncryptionInfo;
+    url: "privacyroom/keys",
+  })) as { [key: string]: string | boolean };
 
   return res;
 }
 
-export async function setFileEncryptionKeys(
-  fileId: number | string,
-  keys: Array<{
-    userId: string;
-    publicKeyId: string;
-    privateKeyEnc: string;
-  }>,
-) {
-  const res = await request({
-    method: "put",
-    url: `files/${fileId}/access`,
-    data: keys,
-  });
-
-  return res;
-}
-
+// TODO: Need update res type
 export async function getEncryptionAccess(fileId: number | string) {
-  return getFileEncryptionAccess(fileId);
-}
-
-export async function updateFileStream(
-  fileId: number | string,
-  file: File,
-  encrypted: boolean,
-  forcesave: boolean,
-) {
-  const fd = new FormData();
-
-  fd.append("file", file);
-  fd.append("encrypted", String(encrypted));
-  fd.append("forcesave", String(forcesave));
-
-  const res = await request({
-    method: "put",
-    url: `/files/${fileId}/update`,
-    data: fd,
-  });
+  const res = (await request({
+    method: "get",
+    url: `privacyroom/access/${fileId}`,
+    data: fileId,
+  })) as { [key: string]: string | boolean };
 
   return res;
 }
+
+// export function updateFileStream(file, fileId, encrypted, forcesave) {
+//   let fd = new FormData();
+//   fd.append("file", file);
+//   fd.append("encrypted", encrypted);
+//   fd.append("forcesave", forcesave);
+
+//   return request({
+//     method: "put",
+//     url: `/files/${fileId}/update`,
+//     data: fd,
+//   });
+// }
 
 export async function setFavoritesSetting(set: boolean) {
   const res = (await request({
@@ -1598,7 +1595,7 @@ export async function getPrimaryLinkIfNotExistCreate(
   fileId: number | string,
   access: ShareAccessRights,
   internal: boolean,
-  expirationDate: moment.Moment | null,
+  expirationDate: DateTime | string | null,
 ) {
   const res = (await request(
     {
@@ -1615,7 +1612,7 @@ export async function getOrCreatePrimaryFolderLink(
   folderId: number | string,
   access?: ShareAccessRights,
   internal?: boolean,
-  expirationDate?: moment.Moment | null,
+  expirationDate?: DateTime | string | null,
 ) {
   const res = (await request(
     {
@@ -1644,7 +1641,7 @@ export async function editExternalLink(
   access: ShareAccessRights,
   primary: boolean,
   internal: boolean,
-  expirationDate: moment.Moment | string | null,
+  expirationDate: DateTime | string | string | null,
   title: string,
   password?: string,
   denyDownload?: boolean,
@@ -1672,7 +1669,7 @@ export async function editExternalFolderLink(
   access: ShareAccessRights,
   primary: boolean,
   internal: boolean,
-  expirationDate: moment.Moment | string | null,
+  expirationDate: DateTime | string | string | null,
   title: string,
   password?: string,
   denyDownload?: boolean,
@@ -1700,7 +1697,7 @@ export async function addExternalLink(
   access: ShareAccessRights,
   primary: boolean,
   internal: boolean,
-  expirationDate?: moment.Moment | null,
+  expirationDate?: DateTime | string | null,
 ) {
   const res = (await request({
     method: "put",
@@ -1715,7 +1712,7 @@ export async function addExternalFolderLink(
   access: ShareAccessRights,
   primary: boolean,
   internal: boolean,
-  expirationDate?: moment.Moment | null,
+  expirationDate?: DateTime | string | null,
 ) {
   const res = (await request({
     method: "put",
@@ -1932,4 +1929,68 @@ export async function shareFileToUsers(
   })) as RoomMember[];
 
   return res;
+}
+
+export async function getDefaultTemplates() {
+  const res = await request({
+    method: "get",
+    url: "/files/settings/defaulttemplate",
+  });
+
+  return res.items as TDefaultTemplate[];
+}
+
+export async function setDefaultTemplates(
+  selectedFile: number | null,
+  fileExtension: string,
+) {
+  const res = await request({
+    method: "put",
+    url: "/files/settings/defaulttemplate",
+    data: {
+      selectedFile,
+      fileExtension,
+    },
+  });
+
+  return res.items as TDefaultTemplate[];
+}
+
+export async function resetDefaultTemplates(fileExtension: string) {
+  const res = await request({
+    method: "delete",
+    url: "/files/settings/defaulttemplate",
+    data: {
+      fileExtension,
+    },
+  });
+
+  return res.items as TDefaultTemplate[];
+}
+
+export async function uploadTemplateFromDevice(
+  file: File,
+  fileExtension: string,
+) {
+  const formData = new FormData();
+  formData.append("File", file);
+  const res = await request({
+    method: "post",
+    url: `/files/settings/defaulttemplate?FileExtension=${encodeURIComponent(fileExtension)}`,
+    data: formData,
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+  return res.items as TDefaultTemplate[];
+}
+
+export async function setOrganizeGrouping(set: boolean) {
+  const res = await request({
+    method: "put",
+    url: "/files/settings/organizegrouping",
+    data: { set },
+  });
+
+  return res as boolean;
 }

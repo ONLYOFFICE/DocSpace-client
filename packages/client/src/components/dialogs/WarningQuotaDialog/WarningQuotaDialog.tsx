@@ -27,11 +27,11 @@
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
+} from "@docspace/ui-kit/components/modal-dialog";
 
 import { getConvertedSize } from "@docspace/shared/utils/common";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Text } from "@docspace/ui-kit/components/text";
 import { WarningQuotaDialogProps } from "./WarningQuotaDialog.types";
 
 export const WarningQuotaDialog = ({

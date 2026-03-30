@@ -28,16 +28,23 @@ import React from "react";
 import { i18n as i18nType } from "i18next";
 import { match, P } from "ts-pattern";
 
-import { Base, Dark, TColorScheme, TTheme } from "@docspace/shared/themes";
-import { getSystemTheme } from "@docspace/shared/utils";
-import { setCookie } from "@docspace/shared/utils/cookie";
-import { ThemeKeys } from "@docspace/shared/enums";
+import {
+	Base,
+	Dark,
+	type TColorScheme,
+	type TTheme,
+} from "@docspace/ui-kit/providers/theme/themes";
+import { getSystemTheme } from "@docspace/ui-kit/utils/get-system-theme";
+import { setCookie } from "@docspace/ui-kit/utils/cookie";
+import { ThemeKeys } from "@docspace/ui-kit/enums";
 import { getAppearanceTheme } from "@docspace/shared/api/settings";
-import { getFontFamilyDependingOnLanguage } from "@docspace/shared/utils/rtlUtils";
-import { SYSTEM_THEME_KEY } from "@docspace/shared/constants";
+import {
+	getFontFamilyDependingOnLanguage,
+	getDirectionByLanguage,
+} from "@docspace/ui-kit/providers/theme/rtl-utils";
+import { SYSTEM_THEME_KEY } from "@docspace/ui-kit/providers/theme/themes/constants";
 
 import type { TGetColorTheme } from "@docspace/shared/api/settings/types";
-import { getDirectionByLanguage } from "@docspace/shared/utils/common";
 
 type MatchType = [ThemeKeys | undefined, ThemeKeys | undefined];
 

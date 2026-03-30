@@ -29,15 +29,15 @@ import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { decode } from "he";
 
-import { Text } from "@docspace/shared/components/text";
-import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { ContextMenuButton } from "@docspace/ui-kit/components/context-menu-button";
 import {
   Avatar,
   AvatarRole,
   AvatarSize,
-} from "@docspace/shared/components/avatar";
-import { Badge } from "@docspace/shared/components/badge";
-import { globalColors } from "@docspace/shared/themes";
+} from "@docspace/ui-kit/components/avatar";
+import { Badge } from "@docspace/ui-kit/components/badge";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { TGroup } from "@docspace/shared/api/groups/types";
 
 import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";

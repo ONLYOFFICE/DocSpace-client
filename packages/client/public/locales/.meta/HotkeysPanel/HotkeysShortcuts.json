@@ -3,7 +3,7 @@
   "content": "Display keyboard hotkeys list",
   "content_en_sha1_hash": "d746272ad6b80ffced97e2fad978a577b415f8db",
   "created_at": "2025-05-19T21:30:55.096Z",
-  "updated_at": "2025-05-24T10:30:58.696Z",
+  "updated_at": "2026-02-19T13:36:32.508Z",
   "comment": {
     "text": "This translation key is used to display keyboard hotkeys and shortcuts. It will be displayed in a UI component as part of an \"Applications\" block, likely on a settings or preferences page, allowing users to view the associated hotkey for a specific action.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/panels/HotkeysPanel/ApplicationActionsBlock.js",
       "line_number": 35,
-      "context": "const ApplicationActionsBlock = ({ t, textStyles, keyTextStyles, CtrlKey }) => {\n return (\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysShortcuts\")}</Text>\n <Text {...keyTextStyles}>\n {CtrlKey} + / {t(\"Common:Or\")} ?\n </Text>\n </>\n </Row>",
+      "context": "const ApplicationActionsBlock = ({ t, textStyles, keyTextStyles, CtrlKey }) => {\n return (\n <Row className={styles.hotkeysRow}>\n <>\n <Text {...textStyles}>{t(\"HotkeysShortcuts\")}</Text>\n <Text {...keyTextStyles}>\n {CtrlKey} + / {t(\"Common:Or\")} ?\n </Text>\n </>\n </Row>",
       "module": "/packages/client"
     }
   ],

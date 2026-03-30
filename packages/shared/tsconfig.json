@@ -115,6 +115,7 @@
     "types/**/*.d.ts"
   ],
   "exclude": [
-    "vitest.config.ts"
+    "vitest.config.ts",
+    "services/encryption/vite.lib.config.ts"
   ]
 }

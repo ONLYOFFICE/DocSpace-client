@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ONLYOFFICE Crypto Bundle - Integration Test</title>
+  <style>
+    body { font-family: monospace; padding: 20px; background: #1a1a2e; color: #e0e0e0; }
+    .pass { color: #4caf50; } .fail { color: #f44336; } .info { color: #64b5f6; }
+    h1 { color: #fff; } pre { background: #0d0d1a; padding: 10px; border-radius: 4px; overflow-x: auto; }
+  </style>
+</head>
+<body>
+<h1>ONLYOFFICE Crypto Bundle Test</h1>
+<pre id="log"></pre>
+<script src="onlyoffice-crypto.js"></script>
+<script>
+const Crypto = window.OnlyofficeCrypto;
+
+const log = document.getElementById('log');
+let passed = 0, failed = 0;
+
+function ok(name) { log.innerHTML += `<span class="pass">PASS</span> ${name}\n`; passed++; }
+function fail(name, err) { log.innerHTML += `<span class="fail">FAIL</span> ${name}: ${err}\n`; failed++; }
+function info(msg) { log.innerHTML += `<span class="info">INFO</span> ${msg}\n`; }
+
+async function run() {
+  info('Bundle exports: ' + Object.keys(Crypto).length + ' symbols');
+  info('---');
+
+  // 1. ENCRYPTION_CONSTANTS
+  try {
+    const C = Crypto.ENCRYPTION_CONSTANTS;
+    if (C.KDF_ITERATIONS !== 600000) throw new Error('KDF_ITERATIONS=' + C.KDF_ITERATIONS);
+    if (C.AES_KEY_SIZE !== 256) throw new Error('AES_KEY_SIZE=' + C.AES_KEY_SIZE);
+    if (C.AES_GCM_IV_SIZE !== 12) throw new Error('AES_GCM_IV_SIZE=' + C.AES_GCM_IV_SIZE);
+    if (C.FILE_NONCE_SIZE !== 16) throw new Error('FILE_NONCE_SIZE=' + C.FILE_NONCE_SIZE);
+    ok('ENCRYPTION_CONSTANTS values correct');
+  } catch(e) { fail('ENCRYPTION_CONSTANTS', e.message); }
+
+  // 2. generateKeyPair
+  let keyPair;
+  try {
+    keyPair = await Crypto.generateKeyPair();
+    if (keyPair.publicKey.algorithm.name !== 'ECDH') throw new Error('not ECDH');
+    if (keyPair.publicKey.algorithm.namedCurve !== 'P-256') throw new Error('not P-256');
+    ok('generateKeyPair() -> ECDH P-256');
+  } catch(e) { fail('generateKeyPair', e.message); }
+
+  // 3. exportPublicKey / importPublicKey roundtrip
+  try {
+    const exported = await Crypto.exportPublicKey(keyPair.publicKey);
+    if (typeof exported !== 'string' || exported.length < 10) throw new Error('bad export');
+    const imported = await Crypto.importPublicKey(exported);
+    if (imported.algorithm.name !== 'ECDH') throw new Error('re-import failed');
+    ok('exportPublicKey/importPublicKey roundtrip');
+  } catch(e) { fail('publicKey roundtrip', e.message); }
+
+  // 4. encryptPrivateKey / decryptPrivateKey
+  try {
+    const encrypted = await Crypto.encryptPrivateKey(keyPair.privateKey, 'test-passphrase-123');
+    if (typeof encrypted !== 'string') throw new Error('not string');
+    const decrypted = await Crypto.decryptPrivateKey(encrypted, 'test-passphrase-123');
+    if (decrypted.algorithm.name !== 'ECDH') throw new Error('decrypted key not ECDH');
+    ok('encryptPrivateKey/decryptPrivateKey roundtrip (PBKDF2 600k + AES-GCM)');
+  } catch(e) { fail('privateKey encrypt/decrypt', e.message); }
+
+  // 5. Wrong passphrase -> InvalidPassphraseError
+  try {
+    const encrypted = await Crypto.encryptPrivateKey(keyPair.privateKey, 'correct');
+    try {
+      await Crypto.decryptPrivateKey(encrypted, 'wrong');
+      fail('wrong passphrase', 'should have thrown');
+    } catch(e) {
+      if (e instanceof Crypto.InvalidPassphraseError) ok('Wrong passphrase -> InvalidPassphraseError');
+      else fail('wrong passphrase', 'wrong error type: ' + e.constructor.name);
+    }
+  } catch(e) { fail('wrong passphrase setup', e.message); }
+
+  // 6. generateDEK
+  try {
+    const dek = Crypto.generateDEK();
+    if (dek.byteLength !== 32) throw new Error('not 32 bytes');
+    const dek2 = Crypto.generateDEK();
+    if (dek.every((v,i) => v === dek2[i])) throw new Error('not random');
+    ok('generateDEK() -> 32 random bytes');
+  } catch(e) { fail('generateDEK', e.message); }
+
+  // 7. wrapDEK / unwrapDEK roundtrip (ECDH + HKDF + AES-KW)
+  try {
+    const dek = Crypto.generateDEK();
+    const wrapped = await Crypto.wrapDEK(dek, keyPair.publicKey);
+    if (typeof wrapped !== 'string') throw new Error('not string');
+    // Need non-extractable private key for unwrap - decrypt one
+    const enc = await Crypto.encryptPrivateKey(keyPair.privateKey, 'pw');
+    const privKey = await Crypto.decryptPrivateKey(enc, 'pw');
+    const unwrapped = await Crypto.unwrapDEK(wrapped, privKey);
+    if (unwrapped.byteLength !== 32) throw new Error('unwrapped not 32 bytes');
+    if (!dek.every((v,i) => v === unwrapped[i])) throw new Error('DEK mismatch');
+    ok('wrapDEK/unwrapDEK roundtrip (ECDH ephemeral + HKDF + AES-KW)');
+  } catch(e) { fail('wrapDEK/unwrapDEK', e.message); }
+
+  // 8. encryptFile / decryptFile roundtrip (DSE3 format)
+  try {
+    const plaintext = new TextEncoder().encode('Hello, ONLYOFFICE Encryption!');
+    const { encryptedBlob, dek } = await Crypto.encryptFile(plaintext, { fileName: 'test.txt' });
+    if (encryptedBlob.size <= plaintext.byteLength) throw new Error('blob not larger');
+    const encBytes = new Uint8Array(await encryptedBlob.arrayBuffer());
+    if (!Crypto.isDSE3Format(encBytes)) throw new Error('not DSE3 format');
+    const { data, fileName } = await Crypto.decryptFile(encBytes, dek);
+    const decrypted = new Uint8Array(await data.arrayBuffer());
+    const original = new TextDecoder().decode(decrypted);
+    if (original !== 'Hello, ONLYOFFICE Encryption!') throw new Error('content mismatch');
+    if (fileName !== 'test.txt') throw new Error('fileName mismatch: ' + fileName);
+    ok('encryptFile/decryptFile roundtrip + fileName recovery (DSE3)');
+  } catch(e) { fail('encryptFile/decryptFile', e.message); }
+
+  // 9. Wrong DEK -> DecryptionError
+  try {
+    const { encryptedBlob } = await Crypto.encryptFile(new Uint8Array([1,2,3]));
+    const wrongDek = Crypto.generateDEK();
+    const encBytes = new Uint8Array(await encryptedBlob.arrayBuffer());
+    try {
+      await Crypto.decryptFile(encBytes, wrongDek);
+      fail('wrong DEK', 'should have thrown');
+    } catch(e) {
+      if (e instanceof Crypto.DecryptionError) ok('Wrong DEK -> DecryptionError');
+      else fail('wrong DEK', 'wrong error type: ' + e.constructor.name);
+    }
+  } catch(e) { fail('wrong DEK setup', e.message); }
+
+  // 10. encryptFileName / decryptFileName
+  try {
+    const dek = Crypto.generateDEK();
+    const enc = await Crypto.encryptFileName('Confidential Report.pdf', dek);
+    if (typeof enc !== 'string') throw new Error('not string');
+    const dec = await Crypto.decryptFileName(enc, dek);
+    if (dec !== 'Confidential Report.pdf') throw new Error('name mismatch');
+    ok('encryptFileName/decryptFileName roundtrip');
+  } catch(e) { fail('fileName encrypt/decrypt', e.message); }
+
+  // 11. getPublicKeyFingerprint
+  try {
+    const pub = await Crypto.exportPublicKey(keyPair.publicKey);
+    const fp = await Crypto.getPublicKeyFingerprint(pub);
+    if (typeof fp !== 'string' || fp.length !== 64) throw new Error('bad fingerprint: ' + fp);
+    if (!/^[0-9A-F]+$/.test(fp)) throw new Error('not hex');
+    const fp2 = await Crypto.getPublicKeyFingerprint(pub);
+    if (fp !== fp2) throw new Error('not deterministic');
+    ok('getPublicKeyFingerprint -> 64-char hex, deterministic');
+  } catch(e) { fail('fingerprint', e.message); }
+
+  // 12. serializeKeyPair
+  try {
+    const ser = await Crypto.serializeKeyPair(keyPair, 'mypass');
+    if (!ser.publicKey || !ser.privateKeyEnc) throw new Error('missing fields');
+    ok('serializeKeyPair -> { publicKey, privateKeyEnc }');
+  } catch(e) { fail('serializeKeyPair', e.message); }
+
+  // 13. DSE3 header parsing
+  try {
+    const { encryptedBlob } = await Crypto.encryptFile(new Uint8Array(100));
+    const bytes = new Uint8Array(await encryptedBlob.arrayBuffer());
+    const header = Crypto.parseDSE3Header(bytes);
+    if (header.version !== 1) throw new Error('version=' + header.version);
+    if (header.cipher !== Crypto.DSE3_CIPHER_AES_256_GCM) throw new Error('cipher=' + header.cipher);
+    if (header.fileNonce.byteLength !== 16) throw new Error('nonce size=' + header.fileNonce.byteLength);
+    ok('parseDSE3Header -> version=1, cipher=AES-256-GCM, nonce=16B');
+  } catch(e) { fail('DSE3 header', e.message); }
+
+  // 14. estimateEncryptedSize
+  try {
+    const est = Crypto.estimateEncryptedSize(1000000);
+    if (est <= 1000000) throw new Error('estimate not larger');
+    ok('estimateEncryptedSize(1MB) = ' + est + ' bytes');
+  } catch(e) { fail('estimateEncryptedSize', e.message); }
+
+  // 15. Recovery mnemonic
+  try {
+    const mnemonic = await Crypto.generateRecoveryMnemonic();
+    const words = mnemonic.split(' ');
+    if (words.length !== 24) throw new Error(words.length + ' words');
+    ok('generateRecoveryMnemonic -> 24 words');
+  } catch(e) { fail('generateRecoveryMnemonic', e.message); }
+
+  // 16. validateMnemonic
+  try {
+    const valid = await Crypto.validateMnemonic(
+      'abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon art'
+    );
+    if (!valid) throw new Error('should be valid');
+    const invalid = await Crypto.validateMnemonic('not a valid mnemonic phrase at all');
+    if (invalid) throw new Error('should be invalid');
+    ok('validateMnemonic -> true/false correctly');
+  } catch(e) { fail('validateMnemonic', e.message); }
+
+  // 17. backupPrivateKey / restorePrivateKey
+  try {
+    const mnemonic = await Crypto.generateRecoveryMnemonic();
+    const backup = await Crypto.backupPrivateKey(keyPair.privateKey, mnemonic);
+    if (backup.version !== 1) throw new Error('bad version');
+    if (backup.type !== 'docspace-recovery-backup') throw new Error('bad type');
+    const restored = await Crypto.restorePrivateKey(backup, mnemonic);
+    if (restored.algorithm.name !== 'ECDH') throw new Error('not ECDH');
+    ok('backupPrivateKey/restorePrivateKey roundtrip');
+  } catch(e) { fail('recovery backup/restore', e.message); }
+
+  // 18. Error classes exported
+  try {
+    const errors = [
+      Crypto.CryptoError, Crypto.InvalidPassphraseError, Crypto.DecryptionError,
+      Crypto.NoAccessError, Crypto.InvalidFormatError, Crypto.WebCryptoUnavailableError,
+      Crypto.KeyNotFoundError,
+    ];
+    for (const E of errors) {
+      if (typeof E !== 'function') throw new Error(E + ' not a function');
+    }
+    ok('All 7 error classes exported');
+  } catch(e) { fail('error classes', e.message); }
+
+  // 19. base64 utils
+  try {
+    const data = new Uint8Array([72, 101, 108, 108, 111]);
+    const b64 = Crypto.arrayBufferToBase64(data.buffer);
+    const back = new Uint8Array(Crypto.base64ToArrayBuffer(b64));
+    if (!data.every((v,i) => v === back[i])) throw new Error('roundtrip failed');
+    ok('arrayBufferToBase64/base64ToArrayBuffer roundtrip');
+  } catch(e) { fail('base64 utils', e.message); }
+
+  // 20. Full editor workflow simulation
+  try {
+    info('--- Full editor workflow ---');
+    // Step 1: User generates keys
+    const userA = await Crypto.generateKeyPair();
+    const userASerialized = await Crypto.serializeKeyPair(userA, 'passA');
+    info('1. User A generated keys');
+
+    // Step 2: Encrypt a file
+    const fileContent = new TextEncoder().encode('Document content for encryption test');
+    const { encryptedBlob, dek } = await Crypto.encryptFile(fileContent, { fileName: 'report.docx' });
+    info('2. File encrypted (' + encryptedBlob.size + ' bytes DSE3)');
+
+    // Step 3: Wrap DEK for user A
+    const wrappedForA = await Crypto.wrapDEK(dek, userA.publicKey);
+    info('3. DEK wrapped for User A');
+
+    // Step 4: User A decrypts private key with passphrase
+    const userAPrivateKey = await Crypto.decryptPrivateKey(userASerialized.privateKeyEnc, 'passA');
+    info('4. User A unlocked private key');
+
+    // Step 5: User A unwraps DEK
+    const unwrappedDek = await Crypto.unwrapDEK(wrappedForA, userAPrivateKey);
+    info('5. User A unwrapped DEK');
+
+    // Step 6: Decrypt file
+    const encBytes = new Uint8Array(await encryptedBlob.arrayBuffer());
+    const { data, fileName } = await Crypto.decryptFile(encBytes, unwrappedDek);
+    const decryptedContent = new TextDecoder().decode(new Uint8Array(await data.arrayBuffer()));
+    if (decryptedContent !== 'Document content for encryption test') throw new Error('content mismatch');
+    if (fileName !== 'report.docx') throw new Error('fileName mismatch');
+    info('6. File decrypted: "' + decryptedContent.slice(0, 30) + '..." fileName=' + fileName);
+
+    // Step 7: Share with user B
+    const userB = await Crypto.generateKeyPair();
+    const wrappedForB = await Crypto.wrapDEK(dek, userB.publicKey);
+    info('7. DEK wrapped for User B (sharing)');
+
+    // Step 8: User B decrypts
+    const userBEnc = await Crypto.encryptPrivateKey(userB.privateKey, 'passB');
+    const userBPriv = await Crypto.decryptPrivateKey(userBEnc, 'passB');
+    const dekForB = await Crypto.unwrapDEK(wrappedForB, userBPriv);
+    const { data: dataB } = await Crypto.decryptFile(encBytes, dekForB);
+    const contentB = new TextDecoder().decode(new Uint8Array(await dataB.arrayBuffer()));
+    if (contentB !== 'Document content for encryption test') throw new Error('B content mismatch');
+    info('8. User B decrypted successfully');
+
+    ok('Full editor workflow: keygen -> encrypt -> wrap -> unwrap -> decrypt -> share');
+  } catch(e) { fail('full editor workflow', e.message); }
+
+  // Summary
+  info('---');
+  info(`TOTAL: ${passed + failed} tests, ${passed} passed, ${failed} failed`);
+  if (failed === 0) info('ALL TESTS PASSED');
+}
+
+run().catch(e => { log.innerHTML += '<span class="fail">FATAL: ' + e.message + '\n' + e.stack + '</span>'; });
+</script>
+</body>
+</html>

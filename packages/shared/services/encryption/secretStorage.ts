@@ -105,16 +105,6 @@ function idbGet<T>(db: IDBDatabase, key: string): Promise<T | undefined> {
   });
 }
 
-function idbDelete(db: IDBDatabase, key: string): Promise<void> {
-  return new Promise((resolve, reject) => {
-    const tx = db.transaction(STORE_NAME, "readwrite");
-    const store = tx.objectStore(STORE_NAME);
-    const req = store.delete(key);
-    req.onsuccess = () => resolve();
-    req.onerror = () => reject(req.error);
-  });
-}
-
 function idbClear(db: IDBDatabase): Promise<void> {
   return new Promise((resolve, reject) => {
     const tx = db.transaction(STORE_NAME, "readwrite");

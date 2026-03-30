@@ -45,18 +45,22 @@ export default defineConfig({
 
     // Target modern browsers that natively support the Web Crypto API.
     target: "esnext",
+    minify: false,
 
     lib: {
       entry: resolve(__dirname, "lib-entry.ts"),
       name: "OnlyofficeCrypto",
-      fileName: "onlyoffice-crypto",
-      formats: ["es", "umd"],
+      fileName: () => "onlyoffice-crypto.js",
+      formats: ["iife"],
     },
 
     rollupOptions: {
-      // No external dependencies — everything is bundled into a single file
-      // per format so consumers can drop it in without a bundler.
       external: [],
+      output: {
+        // Single IIFE file — <script src="onlyoffice-crypto.iife.js">
+        // All exports available via window.OnlyofficeCrypto
+        inlineDynamicImports: true,
+      },
     },
   },
 });

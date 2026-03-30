@@ -76,7 +76,22 @@ export { arrayBufferToBase64, base64ToArrayBuffer } from "./utils";
 // ============================================================================
 // Key management
 // ============================================================================
-export * from "./keyManagement";
+export {
+  generateKeyPair,
+  exportPublicKey,
+  importPublicKey,
+  encryptPrivateKey,
+  decryptPrivateKey,
+  reEncryptPrivateKey,
+  serializeKeyPair,
+  exportKeyToFile,
+  importKeyFromFile,
+  generateDEK,
+  wrapDEK,
+  unwrapDEK,
+  getPublicKeyFingerprint,
+  getKeyStatus,
+} from "./keyManagement";
 
 // ============================================================================
 // File encryption / decryption
@@ -91,4 +106,9 @@ export { isDSE3Format, parseDSE3Header, estimateEncryptedSize } from "./streamin
 // ============================================================================
 // Recovery
 // ============================================================================
-export * from "./recovery";
+export {
+  generateRecoveryMnemonic,
+  validateMnemonic,
+  backupPrivateKey,
+  restorePrivateKey,
+} from "./recovery";

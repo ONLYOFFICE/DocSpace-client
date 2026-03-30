@@ -60,7 +60,6 @@ export async function decryptDownloadedFile(
     originalFileName,
     originalFileType,
     userKeys,
-    userId,
     onPassphraseRequired,
     onProgress,
   } = config;

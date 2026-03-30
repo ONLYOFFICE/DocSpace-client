@@ -1862,7 +1862,7 @@ class UploadDataStore {
 
     const { file, toFolderId /* , action */ } = item;
     let fileToUpload = file;
-    let fileName = file.name;
+    const fileName = file.name;
 
     const actualFolderId = isAIRoom ? knowledgeId : toFolderId;
 

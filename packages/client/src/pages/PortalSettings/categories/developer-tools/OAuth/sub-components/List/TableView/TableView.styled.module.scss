@@ -24,6 +24,29 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+.rowCheckbox {
+  margin-inline-start: -8px;
+  width: 16px;
+  padding-block: 16px;
+  padding-inline-start: 16px;
+  padding-inline-end: 8px;
+}
+
+.nameImage {
+  width: 32px;
+  height: 32px;
+  border-radius: 3px;
+  object-fit: cover;
+}
+
+.creatorAvatar {
+  width: 16px !important;
+  margin-inline-end: 4px;
+  max-width: 16px !important;
+  height: 16px !important;
+  min-width: unset !important;
+}
+
 .tableWrapper {
   margin-top: 0px;
 

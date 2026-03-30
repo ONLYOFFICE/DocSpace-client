@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useTheme } from "styled-components";
 
 import {
 	IClientReqDTO,
@@ -41,6 +40,7 @@ import { TTranslation } from "@docspace/shared/types";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import BlockHeader from "./BlockHeader";
 
@@ -67,6 +67,7 @@ const ScopesBlock = ({
 	isEdit,
 	requiredErrorFields,
 }: TScopesBlockProps) => {
+	const { isBase } = useTheme();
 	const [checkedScopes, setCheckedScopes] = React.useState<string[]>([]);
 	const [filteredScopes, setFilteredScopes] = React.useState<TFilteredScopes>(
 		filterScopeByGroup(selectedScopes, scopes, t),
@@ -227,8 +228,6 @@ const ScopesBlock = ({
 
 	const list = getRenderedScopeList();
 
-	const theme = useTheme();
-
 	const isRequiredError = requiredErrorFields.includes("scopes");
 
 	return (
@@ -265,7 +264,7 @@ const ScopesBlock = ({
 						fontSize="12px"
 						lineHeight="16px"
 						color={
-							theme.isBase
+							isBase
 								? globalColors.lightErrorStatus
 								: globalColors.darkErrorStatus
 						}

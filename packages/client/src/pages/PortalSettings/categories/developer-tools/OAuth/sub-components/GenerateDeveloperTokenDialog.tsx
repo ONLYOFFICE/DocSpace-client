@@ -26,7 +26,6 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import { useTheme } from "styled-components";
 import { i18n } from "i18next";
 import { useTranslation, Trans } from "react-i18next";
 import copy from "copy-to-clipboard";
@@ -43,6 +42,7 @@ import { toastr, type TData } from "@docspace/ui-kit/components/toast";
 import { InputBlock } from "@docspace/ui-kit/components/input-block";
 import { InputSize, InputType } from "@docspace/ui-kit/components/text-input";
 import { UserStore } from "@docspace/shared/store/UserStore";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { Link } from "@docspace/ui-kit/components/link";
 import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 import { copyShareLink } from "@docspace/shared/utils/copy";
@@ -77,7 +77,7 @@ const GenerateDeveloperTokenDialog = ({
     "Webhooks",
     "Files",
   ]);
-  const theme = useTheme();
+  const { currentColorScheme } = useTheme();
 
   const [token, setToken] = React.useState("");
   const [dates, setDates] = React.useState({
@@ -211,7 +211,7 @@ const GenerateDeveloperTokenDialog = ({
                     1: (
                       <Link
                         href={`mailto:${email}`}
-                        color={theme?.currentColorScheme?.main?.accent ?? undefined}
+                        color={currentColorScheme?.main?.accent ?? undefined}
                         dataTestId="generate_token_email_link"
                       />
                     ),

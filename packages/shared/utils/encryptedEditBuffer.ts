@@ -24,8 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { FileEncryptionMetadata } from "../services/encryption/types";
-
 const DB_NAME = "docspace_encrypted_edit";
 const STORE_NAME = "buffers";
 const DB_VERSION = 1;
@@ -77,7 +75,7 @@ export type EncryptedEditEntry = {
   fileName: string;
   fileType: string;
   userPublicKey: string;
-  encryptionMetadata: FileEncryptionMetadata;
+  wrappedDEK: string; // base64 wrapped DEK for re-encryption after edit
   userId: string;
   createdAt: number;
 };

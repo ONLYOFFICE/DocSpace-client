@@ -24,16 +24,20 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { getCrypto } from "./keyManagement";
+import { ENCRYPTION_CONSTANTS } from "./types";
 
-const ENCRYPTION_KEY_CACHE = "docspace_encryption_private_key";
-const DECRYPTION_ATTEMPTED = "docspace_decryption_attempted";
-const CACHE_TIMESTAMP = "docspace_encryption_cache_time";
+const DB_NAME = "docspace_encryption";
+const STORE_NAME = "keys";
+const DB_VERSION = 1;
+const PRIVATE_KEY_ID = "user_private_key";
+const TIMESTAMP_KEY = "cache_timestamp";
 
 type UnlockRequestCallback = () => Promise<CryptoKey | null>;
 let globalUnlockRequestHandler: UnlockRequestCallback | null = null;
 
-export function registerUnlockHandler(handler: UnlockRequestCallback): void {
+export function registerUnlockHandler(
+  handler: UnlockRequestCallback,
+): void {
   globalUnlockRequestHandler = handler;
 }
 
@@ -43,13 +47,11 @@ export function unregisterUnlockHandler(): void {
 
 export async function requestUnlock(): Promise<CryptoKey | null> {
   const cachedKey = await SecretStorageService.getCachedKey();
-  if (cachedKey) {
-    return cachedKey;
-  }
+  if (cachedKey) return cachedKey;
 
   if (!globalUnlockRequestHandler) {
     console.warn(
-      "[SecretStorageService] No unlock handler registered. " +
+      "[SecretStorage] No unlock handler registered. " +
         "Ensure EncryptionProvider is mounted.",
     );
     return null;
@@ -58,144 +60,183 @@ export async function requestUnlock(): Promise<CryptoKey | null> {
   return globalUnlockRequestHandler();
 }
 
-function arrayBufferToBase64(buffer: ArrayBuffer): string {
-  const bytes = new Uint8Array(buffer);
-  let binary = "";
-  for (let i = 0; i < bytes.byteLength; i++) {
-    binary += String.fromCharCode(bytes[i]);
-  }
-  return btoa(binary);
+// ============================================================================
+// IndexedDB helpers
+// ============================================================================
+
+function openDB(): Promise<IDBDatabase> {
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open(DB_NAME, DB_VERSION);
+
+    request.onupgradeneeded = () => {
+      const db = request.result;
+      if (!db.objectStoreNames.contains(STORE_NAME)) {
+        db.createObjectStore(STORE_NAME);
+      }
+    };
+
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  });
 }
 
-function base64ToArrayBuffer(base64: string): ArrayBuffer {
-  const binary = atob(base64);
-  const bytes = new Uint8Array(binary.length);
-  for (let i = 0; i < binary.length; i++) {
-    bytes[i] = binary.charCodeAt(i);
-  }
-  return bytes.buffer as ArrayBuffer;
+function idbPut(
+  db: IDBDatabase,
+  key: string,
+  value: unknown,
+): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(STORE_NAME, "readwrite");
+    const store = tx.objectStore(STORE_NAME);
+    const req = store.put(value, key);
+    req.onsuccess = () => resolve();
+    req.onerror = () => reject(req.error);
+  });
 }
 
-function isSessionStorageAvailable(): boolean {
-  if (typeof sessionStorage === "undefined") return false;
-  try {
-    const testKey = "__test_storage__";
-    sessionStorage.setItem(testKey, testKey);
-    sessionStorage.removeItem(testKey);
-    return true;
-  } catch {
-    return false;
-  }
+function idbGet<T>(db: IDBDatabase, key: string): Promise<T | undefined> {
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(STORE_NAME, "readonly");
+    const store = tx.objectStore(STORE_NAME);
+    const req = store.get(key);
+    req.onsuccess = () => resolve(req.result as T | undefined);
+    req.onerror = () => reject(req.error);
+  });
 }
+
+function idbDelete(db: IDBDatabase, key: string): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(STORE_NAME, "readwrite");
+    const store = tx.objectStore(STORE_NAME);
+    const req = store.delete(key);
+    req.onsuccess = () => resolve();
+    req.onerror = () => reject(req.error);
+  });
+}
+
+function idbClear(db: IDBDatabase): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(STORE_NAME, "readwrite");
+    const store = tx.objectStore(STORE_NAME);
+    const req = store.clear();
+    req.onsuccess = () => resolve();
+    req.onerror = () => reject(req.error);
+  });
+}
+
+function isIndexedDBAvailable(): boolean {
+  return typeof indexedDB !== "undefined";
+}
+
+// ============================================================================
+// SecretStorageService
+//
+// Stores CryptoKey objects in IndexedDB with extractable=false.
+// The raw key material is never accessible to JavaScript — even if XSS
+// reads IndexedDB, the attacker gets an opaque CryptoKey handle that
+// cannot be exported.
+// ============================================================================
 
 export const SecretStorageService = {
   async cacheDecryptedKey(privateKey: CryptoKey): Promise<void> {
-    if (!isSessionStorageAvailable()) {
-      console.warn("sessionStorage not available - key will not be cached");
+    if (!isIndexedDBAvailable()) {
+      console.warn("IndexedDB not available — key will not be cached");
       return;
     }
 
     try {
-      const subtle = getCrypto();
+      const subtle = globalThis.crypto.subtle;
       const pkcs8 = await subtle.exportKey("pkcs8", privateKey);
-      const encoded = arrayBufferToBase64(pkcs8);
+      const nonExtractableKey = await subtle.importKey(
+        "pkcs8",
+        pkcs8,
+        { name: "ECDH", namedCurve: ENCRYPTION_CONSTANTS.ECDH_CURVE },
+        false, // extractable = false — XSS cannot export raw bytes
+        ["deriveKey", "deriveBits"],
+      );
 
-      sessionStorage.setItem(ENCRYPTION_KEY_CACHE, encoded);
-      sessionStorage.setItem(DECRYPTION_ATTEMPTED, "true");
-      sessionStorage.setItem(CACHE_TIMESTAMP, Date.now().toString());
+      // Best-effort zeroing of raw key material
+      new Uint8Array(pkcs8).fill(0);
+
+      const db = await openDB();
+      try {
+        await idbPut(db, PRIVATE_KEY_ID, nonExtractableKey);
+        await idbPut(db, TIMESTAMP_KEY, Date.now());
+      } finally {
+        db.close();
+      }
     } catch (error) {
       console.warn("Failed to cache encryption key:", error);
     }
   },
 
   async getCachedKey(): Promise<CryptoKey | null> {
-    if (!isSessionStorageAvailable()) return null;
+    if (!isIndexedDBAvailable()) return null;
 
     try {
-      const encoded = sessionStorage.getItem(ENCRYPTION_KEY_CACHE);
-      if (!encoded) return null;
+      const db = await openDB();
+      try {
+        const timestamp = await idbGet<number>(db, TIMESTAMP_KEY);
+        if (
+          !timestamp ||
+          Date.now() - timestamp >
+            ENCRYPTION_CONSTANTS.SESSION_CACHE_DURATION_MS
+        ) {
+          await idbClear(db);
+          return null;
+        }
 
-      const subtle = getCrypto();
-      const pkcs8Bytes = base64ToArrayBuffer(encoded);
-
-      return await subtle.importKey(
-        "pkcs8",
-        pkcs8Bytes,
-        { name: "RSA-OAEP", hash: "SHA-256" },
-        false,
-        ["decrypt", "unwrapKey"],
-      );
+        const key = await idbGet<CryptoKey>(db, PRIVATE_KEY_ID);
+        return key ?? null;
+      } finally {
+        db.close();
+      }
     } catch (error) {
       console.warn("Failed to retrieve cached key:", error);
-      this.clearCache();
       return null;
     }
   },
 
-  hasDecryptedKey(): boolean {
-    if (!isSessionStorageAvailable()) return false;
-    return sessionStorage.getItem(ENCRYPTION_KEY_CACHE) !== null;
-  },
-
-  hasAttemptedDecryption(): boolean {
-    if (!isSessionStorageAvailable()) return false;
-    return sessionStorage.getItem(DECRYPTION_ATTEMPTED) === "true";
-  },
-
-  getCacheTimestamp(): number | null {
-    if (!isSessionStorageAvailable()) return null;
-    const timestamp = sessionStorage.getItem(CACHE_TIMESTAMP);
-    return timestamp ? parseInt(timestamp, 10) : null;
-  },
-
-  isCacheExpired(maxAgeMs: number = 30 * 60 * 1000): boolean {
-    const timestamp = this.getCacheTimestamp();
-    if (timestamp === null) return true;
-    return Date.now() - timestamp > maxAgeMs;
-  },
-
-  markDecryptionAttempted(): void {
-    if (!isSessionStorageAvailable()) return;
-    sessionStorage.setItem(DECRYPTION_ATTEMPTED, "true");
-  },
-
-  clearCache(): void {
-    if (!isSessionStorageAvailable()) return;
-
-    const encoded = sessionStorage.getItem(ENCRYPTION_KEY_CACHE);
-    if (encoded) {
+  async hasDecryptedKey(): Promise<boolean> {
+    if (!isIndexedDBAvailable()) return false;
+    try {
+      const db = await openDB();
       try {
-        sessionStorage.setItem(
-          ENCRYPTION_KEY_CACHE,
-          "0".repeat(encoded.length),
-        );
-      } catch {
-        // Ignore errors during cleanup
+        // Check TTL — consistent with getCachedKey behavior
+        const timestamp = await idbGet<number>(db, TIMESTAMP_KEY);
+        if (
+          !timestamp ||
+          Date.now() - timestamp >
+            ENCRYPTION_CONSTANTS.SESSION_CACHE_DURATION_MS
+        ) {
+          return false;
+        }
+        const key = await idbGet<CryptoKey>(db, PRIVATE_KEY_ID);
+        return key !== undefined;
+      } finally {
+        db.close();
       }
+    } catch {
+      return false;
     }
-
-    sessionStorage.removeItem(ENCRYPTION_KEY_CACHE);
-    sessionStorage.removeItem(DECRYPTION_ATTEMPTED);
-    sessionStorage.removeItem(CACHE_TIMESTAMP);
   },
 
-  lockEncryption(): void {
-    if (!isSessionStorageAvailable()) return;
-
-    const encoded = sessionStorage.getItem(ENCRYPTION_KEY_CACHE);
-    if (encoded) {
+  async clearCache(): Promise<void> {
+    if (!isIndexedDBAvailable()) return;
+    try {
+      const db = await openDB();
       try {
-        sessionStorage.setItem(
-          ENCRYPTION_KEY_CACHE,
-          "0".repeat(encoded.length),
-        );
-      } catch {
-        // Ignore
+        await idbClear(db);
+      } finally {
+        db.close();
       }
+    } catch {
+      // Ignore errors during cleanup
     }
+  },
 
-    sessionStorage.removeItem(ENCRYPTION_KEY_CACHE);
-    sessionStorage.removeItem(CACHE_TIMESTAMP);
+  async lockEncryption(): Promise<void> {
+    await this.clearCache();
   },
 };
 

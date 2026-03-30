@@ -76,9 +76,7 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
   PassphraseDialog,
 }) => {
   // State
-  const [isUnlocked, setIsUnlocked] = useState(
-    SecretStorageService.hasDecryptedKey(),
-  );
+  const [isUnlocked, setIsUnlocked] = useState(false);
   const [isUnlocking, setIsUnlocking] = useState(false);
   const [unlockError, setUnlockError] = useState<string | null>(null);
   const [showPassphraseDialog, setShowPassphraseDialog] = useState(false);
@@ -87,6 +85,13 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
   >(null);
 
   const hasConfiguredKey = !!userKeys?.publicKey && !!userKeys?.privateKeyEnc;
+
+  // Check if key is already cached on mount
+  useEffect(() => {
+    SecretStorageService.hasDecryptedKey().then((has) => {
+      if (has) setIsUnlocked(true);
+    });
+  }, []);
 
   // Clear error when dialog is closed
   useEffect(() => {
@@ -117,7 +122,6 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
 
         return true;
       } catch (error) {
-        SecretStorageService.markDecryptionAttempted();
         const errorMessage =
           error instanceof Error ? error.message : "Decryption failed";
         setUnlockError(errorMessage);
@@ -130,8 +134,8 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
     [userKeys],
   );
 
-  const lock = useCallback(() => {
-    SecretStorageService.lockEncryption();
+  const lock = useCallback(async () => {
+    await SecretStorageService.lockEncryption();
     setIsUnlocked(false);
   }, []);
 
@@ -187,7 +191,6 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
   );
 
   const handlePassphraseCancel = useCallback(() => {
-    SecretStorageService.markDecryptionAttempted();
     pendingResolve?.(null);
     setShowPassphraseDialog(false);
     setPendingResolve(null);

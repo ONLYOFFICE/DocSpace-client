@@ -24,12 +24,69 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export * from "./types";
-export * from "./errors";
-export * from "./utils";
-export * from "./keyManagement";
-export * from "./secretStorage";
-export * from "./encryptionService";
-export * from "./streamingEncryption";
-export * from "./keyRotation";
-export * from "./recovery";
+export class CryptoError extends Error {
+  constructor(
+    message: string,
+    public readonly code: string,
+  ) {
+    super(message);
+    this.name = "CryptoError";
+  }
+}
+
+export class InvalidPassphraseError extends CryptoError {
+  constructor() {
+    super("Invalid passphrase", "INVALID_PASSPHRASE");
+    this.name = "InvalidPassphraseError";
+  }
+}
+
+export class DecryptionError extends CryptoError {
+  constructor(detail?: string) {
+    super(
+      `Decryption failed${detail ? `: ${detail}` : ""}`,
+      "DECRYPTION_FAILED",
+    );
+    this.name = "DecryptionError";
+  }
+}
+
+export class NoAccessError extends CryptoError {
+  constructor(userId?: string) {
+    super(
+      `No decryption access${userId ? ` for user ${userId}` : ""}`,
+      "NO_ACCESS",
+    );
+    this.name = "NoAccessError";
+  }
+}
+
+export class InvalidFormatError extends CryptoError {
+  constructor(detail?: string) {
+    super(
+      `Invalid encrypted format${detail ? `: ${detail}` : ""}`,
+      "INVALID_FORMAT",
+    );
+    this.name = "InvalidFormatError";
+  }
+}
+
+export class WebCryptoUnavailableError extends CryptoError {
+  constructor() {
+    super(
+      "Web Crypto API not available — requires a secure context (HTTPS)",
+      "NO_WEBCRYPTO",
+    );
+    this.name = "WebCryptoUnavailableError";
+  }
+}
+
+export class KeyNotFoundError extends CryptoError {
+  constructor(keyId?: string) {
+    super(
+      `Key not found${keyId ? `: ${keyId}` : ""}`,
+      "KEY_NOT_FOUND",
+    );
+    this.name = "KeyNotFoundError";
+  }
+}

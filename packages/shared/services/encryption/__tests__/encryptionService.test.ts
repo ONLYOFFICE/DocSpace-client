@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2026
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,559 +24,270 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { describe, it, expect, beforeAll, beforeEach, vi } from "vitest";
+import { describe, it, expect } from "vitest";
 
-import { EncryptionService, encryptionService } from "../encryptionService";
-import { generateRSAKeyPair, exportPublicKey } from "../keyManagement";
-import type { FileEncryptionMetadata } from "../types";
+import {
+  encryptFile,
+  decryptFile,
+  encryptFileName,
+  decryptFileName,
+} from "../encryptionService";
+import { generateDEK } from "../keyManagement";
+import { DecryptionError } from "../errors";
 
-// Test helpers
-const createMockFile = (
-  content: string | Uint8Array,
-  name: string,
-  type = "text/plain",
-): File => {
-  const data =
-    typeof content === "string" ? new TextEncoder().encode(content) : content;
-  // Convert Uint8Array to ArrayBuffer for proper BlobPart typing
-  const buffer = data.buffer.slice(
-    data.byteOffset,
-    data.byteOffset + data.byteLength,
-  ) as ArrayBuffer;
-  const file = new File([new Blob([buffer], { type })], name, { type });
-  const mockFile = file as unknown as {
-    arrayBuffer: () => Promise<ArrayBuffer>;
-    text: () => Promise<string>;
-  };
-  mockFile.arrayBuffer = () =>
-    Promise.resolve(
-      data.buffer.slice(
-        data.byteOffset,
-        data.byteOffset + data.byteLength,
-      ) as ArrayBuffer,
-    );
-  mockFile.text = () =>
-    Promise.resolve(
-      typeof content === "string" ? content : new TextDecoder().decode(content),
-    );
-  return file;
-};
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
 
-const blobToArrayBuffer = (blob: Blob): Promise<ArrayBuffer> =>
-  new Promise((resolve, reject) => {
+/**
+ * Read a Blob's contents as a Uint8Array.
+ * Uses FileReader because jsdom's Blob does not implement .arrayBuffer().
+ */
+function blobToUint8Array(blob: Blob): Promise<Uint8Array> {
+  return new Promise((resolve, reject) => {
     const reader = new FileReader();
-    reader.onload = () => resolve(reader.result as ArrayBuffer);
+    reader.onload = () =>
+      resolve(new Uint8Array(reader.result as ArrayBuffer));
     reader.onerror = () => reject(reader.error);
     reader.readAsArrayBuffer(blob);
   });
+}
 
-const blobToText = (blob: Blob): Promise<string> =>
-  new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result as string);
-    reader.onerror = () => reject(reader.error);
-    reader.readAsText(blob);
-  });
-
-const createRandomBytes = (size: number): Uint8Array => {
-  const result = new Uint8Array(size);
-  for (let i = 0; i < size; i += 65536) {
-    crypto.getRandomValues(result.subarray(i, Math.min(i + 65536, size)));
+/** Compare two byte arrays for equality. */
+function bytesEqual(a: Uint8Array, b: Uint8Array): boolean {
+  if (a.byteLength !== b.byteLength) return false;
+  for (let i = 0; i < a.byteLength; i++) {
+    if (a[i] !== b[i]) return false;
   }
-  return result;
-};
+  return true;
+}
 
-const createNonEncryptedMetadata = (): FileEncryptionMetadata => ({
-  encrypted: false,
-  version: 1,
-  encryptionAlgorithm: "AES-256-GCM",
-  keyEncryptionAlgorithm: "RSA-OAEP-SHA256",
-  encryptedKeys: [],
-  iv: "",
-  encryptedAt: new Date().toISOString(),
-});
+/**
+ * Fill a Uint8Array with pseudo-random bytes, working around jsdom's
+ * 65536-byte limit on crypto.getRandomValues by iterating in 64 KB chunks.
+ */
+function fillRandom(bytes: Uint8Array): Uint8Array {
+  const CHUNK = 65536;
+  for (let offset = 0; offset < bytes.byteLength; offset += CHUNK) {
+    const slice = bytes.subarray(
+      offset,
+      Math.min(offset + CHUNK, bytes.byteLength),
+    );
+    globalThis.crypto.getRandomValues(slice);
+  }
+  return bytes;
+}
 
-describe("EncryptionService", () => {
-  let service: EncryptionService;
-  let keyPair: CryptoKeyPair;
-  let publicKey: string;
+// NOTE: encryptFile accepts File | Blob | ArrayBuffer | Uint8Array.
+// jsdom's Blob.slice() does not implement .arrayBuffer(), so we pass
+// Uint8Array directly in all tests to exercise the Uint8Array code path
+// and avoid hitting that jsdom limitation.
 
-  beforeAll(async () => {
-    keyPair = await generateRSAKeyPair();
-    publicKey = await exportPublicKey(keyPair.publicKey);
-  });
+// ---------------------------------------------------------------------------
+// Tests
+// ---------------------------------------------------------------------------
 
-  beforeEach(() => {
-    service = new EncryptionService();
-    vi.spyOn(console, "log").mockImplementation(() => {});
-  });
+describe("encryptionService", () => {
+  // -------------------------------------------------------------------------
+  // encryptFile / decryptFile — round-trips
+  // -------------------------------------------------------------------------
 
-  describe("encryptFile", () => {
-    it("should encrypt file with correct metadata", async () => {
-      const file = createMockFile("Hello, World!", "test.txt");
-      const { encryptedBlob, metadata } = await service.encryptFile(
-        file,
-        publicKey,
-        "user1",
-      );
+  describe("encryptFile / decryptFile", () => {
+    it("round-trips a small file (100 bytes)", async () => {
+      const plaintext = globalThis.crypto.getRandomValues(new Uint8Array(100));
+      const dek = generateDEK();
 
-      expect(encryptedBlob.size).toBeGreaterThan(file.size);
-      expect(metadata.encrypted).toBe(true);
-      expect(metadata.version).toBe(1);
-      expect(metadata.encryptionAlgorithm).toBe("AES-256-GCM");
-      expect(metadata.keyEncryptionAlgorithm).toBe("RSA-OAEP-SHA256");
-      expect(metadata.encryptedKeys).toHaveLength(1);
-      expect(metadata.encryptedKeys[0].userId).toBe("user1");
-      expect(metadata.iv).toBeDefined();
+      const { encryptedBlob } = await encryptFile(plaintext, { dek });
+      const encryptedBytes = await blobToUint8Array(encryptedBlob);
+      const { data } = await decryptFile(encryptedBytes, dek);
+      const decryptedBytes = await blobToUint8Array(data);
+
+      expect(bytesEqual(decryptedBytes, plaintext)).toBe(true);
     });
 
-    it("should produce different ciphertext for same file (random IV)", async () => {
-      const file = createMockFile("Same content", "test.txt");
-      const r1 = await service.encryptFile(file, publicKey, "user");
-      const r2 = await service.encryptFile(file, publicKey, "user");
+    it("encrypted blob is larger than the original plaintext", async () => {
+      const plaintext = new Uint8Array(100).fill(0xab);
+      const dek = generateDEK();
 
-      const d1 = new Uint8Array(await blobToArrayBuffer(r1.encryptedBlob));
-      const d2 = new Uint8Array(await blobToArrayBuffer(r2.encryptedBlob));
-      expect(d1).not.toEqual(d2);
-      expect(r1.metadata.iv).not.toBe(r2.metadata.iv);
+      const { encryptedBlob } = await encryptFile(plaintext, { dek });
+      expect(encryptedBlob.size).toBeGreaterThan(plaintext.byteLength);
     });
 
-    it.each([
-      ["empty", "", "text/plain"],
-      [
-        "binary",
-        new Uint8Array([0, 127, 128, 255]),
-        "application/octet-stream",
-      ],
-      ["large", createRandomBytes(50 * 1024), "application/octet-stream"],
-    ])("should handle %s file", async (_name, content, type) => {
-      const file = createMockFile(content, "test.bin", type);
-      const { metadata } = await service.encryptFile(file, publicKey, "user");
-      expect(metadata.encrypted).toBe(true);
-    });
-  });
+    it("round-trips a larger file (2 MB — spans multiple 1 MB chunks)", async () => {
+      const plaintext = fillRandom(new Uint8Array(2 * 1024 * 1024));
+      const dek = generateDEK();
 
-  describe("encryptFileForRecipients", () => {
-    it("should encrypt for multiple recipients who can all decrypt", async () => {
-      const kp1 = await generateRSAKeyPair();
-      const kp2 = await generateRSAKeyPair();
-      const recipients = [
-        {
-          userId: "user1",
-          publicKeyBase64: await exportPublicKey(kp1.publicKey),
-        },
-        {
-          userId: "user2",
-          publicKeyBase64: await exportPublicKey(kp2.publicKey),
-        },
-      ];
+      const { encryptedBlob } = await encryptFile(plaintext, { dek });
+      const encryptedBytes = await blobToUint8Array(encryptedBlob);
+      const { data } = await decryptFile(encryptedBytes, dek);
+      const decryptedBytes = await blobToUint8Array(data);
 
-      const originalContent = "Shared secret";
-      const file = createMockFile(originalContent, "shared.txt");
-      const { encryptedBlob, metadata } =
-        await service.encryptFileForRecipients(file, recipients);
-
-      expect(metadata.encryptedKeys).toHaveLength(2);
-      const encryptedData = await blobToArrayBuffer(encryptedBlob);
-
-      // Both users can decrypt
-      const d1 = await service.decryptFile(
-        encryptedData,
-        metadata,
-        kp1.privateKey,
-        "user1",
-      );
-      const d2 = await service.decryptFile(
-        encryptedData,
-        metadata,
-        kp2.privateKey,
-        "user2",
-      );
-      expect(await blobToText(d1)).toBe(originalContent);
-      expect(await blobToText(d2)).toBe(originalContent);
+      expect(bytesEqual(decryptedBytes, plaintext)).toBe(true);
     });
 
-    it("should throw for empty recipients", async () => {
-      const file = createMockFile("Test", "test.txt");
-      await expect(service.encryptFileForRecipients(file, [])).rejects.toThrow(
-        "At least one recipient is required",
-      );
-    });
-  });
+    it("encryptFile with fileName option — decryptFile recovers the file name", async () => {
+      const dek = generateDEK();
+      const plaintext = new Uint8Array(50).fill(0x01);
 
-  describe("decryptFile", () => {
-    it("should decrypt encrypted file correctly", async () => {
-      const originalContent = "Secret message!";
-      const file = createMockFile(originalContent, "secret.txt");
-      const { encryptedBlob, metadata } = await service.encryptFile(
-        file,
-        publicKey,
-        "user",
-      );
+      const { encryptedBlob } = await encryptFile(plaintext, {
+        dek,
+        fileName: "document.pdf",
+      });
+      const encryptedBytes = await blobToUint8Array(encryptedBlob);
+      const { fileName } = await decryptFile(encryptedBytes, dek);
 
-      const decrypted = await service.decryptFile(
-        await blobToArrayBuffer(encryptedBlob),
-        metadata,
-        keyPair.privateKey,
-        "user",
-      );
-      expect(await blobToText(decrypted)).toBe(originalContent);
+      expect(fileName).toBe("document.pdf");
     });
 
-    it("should decrypt binary data correctly", async () => {
-      const originalData = new Uint8Array([0, 1, 2, 255, 254, 128, 127]);
-      const file = createMockFile(
-        originalData,
-        "binary.bin",
-        "application/octet-stream",
-      );
-      const { encryptedBlob, metadata } = await service.encryptFile(
-        file,
-        publicKey,
-        "user",
-      );
+    it("encryptFile without fileName option — decryptFile returns null fileName", async () => {
+      const dek = generateDEK();
+      const plaintext = new Uint8Array(50).fill(0x02);
 
-      const decrypted = await service.decryptFile(
-        await blobToArrayBuffer(encryptedBlob),
-        metadata,
-        keyPair.privateKey,
-        "user",
-      );
-      expect(new Uint8Array(await blobToArrayBuffer(decrypted))).toEqual(
-        originalData,
+      const { encryptedBlob } = await encryptFile(plaintext, { dek });
+      const encryptedBytes = await blobToUint8Array(encryptedBlob);
+      const { fileName } = await decryptFile(encryptedBytes, dek);
+
+      expect(fileName).toBeNull();
+    });
+
+    it("decryptFile with the wrong DEK throws DecryptionError", async () => {
+      const dek = generateDEK();
+      const wrongDek = generateDEK();
+      const plaintext = new Uint8Array(100).fill(0x03);
+
+      const { encryptedBlob } = await encryptFile(plaintext, { dek });
+      const encryptedBytes = await blobToUint8Array(encryptedBlob);
+
+      await expect(decryptFile(encryptedBytes, wrongDek)).rejects.toThrow(
+        DecryptionError,
       );
     });
 
-    it.each([
-      [
-        "non-encrypted file",
-        createNonEncryptedMetadata(),
-        "File is not encrypted",
-      ],
-      [
-        "no access",
-        { ...createNonEncryptedMetadata(), encrypted: true },
-        "You do not have access",
-      ],
-    ])("should throw for %s", async (_name, meta, errorMsg) => {
-      await expect(
-        service.decryptFile(
-          new ArrayBuffer(100),
-          meta,
-          keyPair.privateKey,
-          "user",
-        ),
-      ).rejects.toThrow(errorMsg);
+    it("round-trips an empty file (0 bytes)", async () => {
+      const dek = generateDEK();
+      const plaintext = new Uint8Array(0);
+
+      const { encryptedBlob } = await encryptFile(plaintext, { dek });
+      const encryptedBytes = await blobToUint8Array(encryptedBlob);
+      const { data } = await decryptFile(encryptedBytes, dek);
+      const decryptedBytes = await blobToUint8Array(data);
+
+      expect(decryptedBytes.byteLength).toBe(0);
     });
 
-    it("should throw with wrong private key", async () => {
-      const file = createMockFile("Secret", "test.txt");
-      const { encryptedBlob, metadata } = await service.encryptFile(
-        file,
-        publicKey,
-        "user",
-      );
-      const wrongKp = await generateRSAKeyPair();
+    it("decryptFile rejects data that does not start with DSE3 magic", async () => {
+      const dek = generateDEK();
+      // Guaranteed not-DSE3: first byte is 0x00, not 0x44 ('D')
+      const notDse3 = new Uint8Array(200).fill(0xaa);
+      notDse3[0] = 0x00;
 
-      await expect(
-        service.decryptFile(
-          await blobToArrayBuffer(encryptedBlob),
-          metadata,
-          wrongKp.privateKey,
-          "user",
-        ),
-      ).rejects.toThrow("Failed to decrypt file key");
+      await expect(decryptFile(notDse3, dek)).rejects.toThrow(DecryptionError);
+    });
+
+    it("generates a fresh DEK when none is supplied via options", async () => {
+      const plaintext = new Uint8Array(64).fill(0xcc);
+
+      const r1 = await encryptFile(plaintext);
+      const r2 = await encryptFile(plaintext);
+
+      // Two independent DEKs must differ
+      expect(Array.from(r1.dek)).not.toEqual(Array.from(r2.dek));
+    });
+
+    it("returns the same DEK that was passed in via options", async () => {
+      const dek = generateDEK();
+      const plaintext = new Uint8Array(32).fill(0x01);
+
+      const { dek: returnedDek } = await encryptFile(plaintext, { dek });
+
+      expect(Array.from(returnedDek)).toEqual(Array.from(dek));
+    });
+
+    it("progress callback receives values that reach 1.0 in monotone order", async () => {
+      const dek = generateDEK();
+      // 2.5 MB — spans 3 chunks (1 MB each), so progress fires 3 times
+      const plaintext = fillRandom(
+        new Uint8Array(Math.floor(2.5 * 1024 * 1024)),
+      );
+      const progressValues: number[] = [];
+
+      const { encryptedBlob } = await encryptFile(plaintext, {
+        dek,
+        onProgress: (p) => progressValues.push(p),
+      });
+
+      expect(progressValues.length).toBeGreaterThan(0);
+      expect(progressValues[progressValues.length - 1]).toBe(1);
+      for (let i = 1; i < progressValues.length; i++) {
+        expect(progressValues[i]).toBeGreaterThanOrEqual(progressValues[i - 1]);
+      }
+
+      // Sanity check: decryption still recovers original data
+      const encryptedBytes = await blobToUint8Array(encryptedBlob);
+      const { data } = await decryptFile(encryptedBytes, dek);
+      const decryptedBytes = await blobToUint8Array(data);
+      expect(bytesEqual(decryptedBytes, plaintext)).toBe(true);
     });
   });
 
-  describe("decryptFileAnyKey", () => {
-    it("should try all keys until one works", async () => {
-      const kp1 = await generateRSAKeyPair();
-      const kp2 = await generateRSAKeyPair();
-      const recipients = [
-        {
-          userId: "user1",
-          publicKeyBase64: await exportPublicKey(kp1.publicKey),
-        },
-        {
-          userId: "user2",
-          publicKeyBase64: await exportPublicKey(kp2.publicKey),
-        },
-      ];
+  // -------------------------------------------------------------------------
+  // encryptFileName / decryptFileName
+  // -------------------------------------------------------------------------
 
-      const originalContent = "Shared content";
-      const file = createMockFile(originalContent, "shared.txt");
-      const { encryptedBlob, metadata } =
-        await service.encryptFileForRecipients(file, recipients);
+  describe("encryptFileName / decryptFileName", () => {
+    it("round-trips a typical file name", async () => {
+      const dek = generateDEK();
+      const name = "quarterly-report-2025.xlsx";
 
-      const decrypted = await service.decryptFileAnyKey(
-        await blobToArrayBuffer(encryptedBlob),
-        metadata,
-        kp2.privateKey,
+      const enc = await encryptFileName(name, dek);
+      const dec = await decryptFileName(enc, dek);
+
+      expect(dec).toBe(name);
+    });
+
+    it("round-trips a file name with unicode characters", async () => {
+      const dek = generateDEK();
+      const name = "отчёт-Q4-документ.docx";
+
+      const enc = await encryptFileName(name, dek);
+      const dec = await decryptFileName(enc, dek);
+
+      expect(dec).toBe(name);
+    });
+
+    it("round-trips an empty file name string", async () => {
+      const dek = generateDEK();
+
+      const enc = await encryptFileName("", dek);
+      const dec = await decryptFileName(enc, dek);
+
+      expect(dec).toBe("");
+    });
+
+    it("produces a base64 string (no whitespace, valid alphabet)", async () => {
+      const dek = generateDEK();
+      const enc = await encryptFileName("test.txt", dek);
+
+      // Standard base64: A-Z, a-z, 0-9, +, /, optional = padding
+      expect(enc).toMatch(/^[A-Za-z0-9+/]+=*$/);
+    });
+
+    it("produces different ciphertext on each call due to random IV", async () => {
+      const dek = generateDEK();
+      const enc1 = await encryptFileName("same.txt", dek);
+      const enc2 = await encryptFileName("same.txt", dek);
+      expect(enc1).not.toBe(enc2);
+    });
+
+    it("decryptFileName with the wrong DEK throws DecryptionError", async () => {
+      const dek = generateDEK();
+      const wrongDek = generateDEK();
+
+      const enc = await encryptFileName("secret.txt", dek);
+
+      await expect(decryptFileName(enc, wrongDek)).rejects.toThrow(
+        DecryptionError,
       );
-      expect(await blobToText(decrypted)).toBe(originalContent);
-    });
-
-    it("should throw when no key matches", async () => {
-      const file = createMockFile("Secret", "test.txt");
-      const { encryptedBlob, metadata } = await service.encryptFile(
-        file,
-        publicKey,
-        "user",
-      );
-      const wrongKp = await generateRSAKeyPair();
-
-      await expect(
-        service.decryptFileAnyKey(
-          await blobToArrayBuffer(encryptedBlob),
-          metadata,
-          wrongKp.privateKey,
-        ),
-      ).rejects.toThrow("Failed to decrypt file - no valid key found");
-    });
-  });
-
-  describe("createKeyForRecipient", () => {
-    it("should allow new recipient to decrypt file", async () => {
-      const newUserKp = await generateRSAKeyPair();
-      const originalContent = "Share with new user";
-      const file = createMockFile(originalContent, "file.txt");
-      const { encryptedBlob, metadata } = await service.encryptFile(
-        file,
-        publicKey,
-        "owner",
-      );
-
-      const newKey = await service.createKeyForRecipient(
-        metadata,
-        keyPair.privateKey,
-        "owner",
-        await exportPublicKey(newUserKp.publicKey),
-        "newuser",
-      );
-
-      const updatedMetadata = {
-        ...metadata,
-        encryptedKeys: [...metadata.encryptedKeys, newKey],
-      };
-      const decrypted = await service.decryptFile(
-        await blobToArrayBuffer(encryptedBlob),
-        updatedMetadata,
-        newUserKp.privateKey,
-        "newuser",
-      );
-      expect(await blobToText(decrypted)).toBe(originalContent);
-    });
-
-    it("should throw if current user has no access", async () => {
-      const kp2 = await generateRSAKeyPair();
-      const file = createMockFile("Data", "file.txt");
-      const { metadata } = await service.encryptFile(file, publicKey, "user1");
-
-      await expect(
-        service.createKeyForRecipient(
-          metadata,
-          kp2.privateKey,
-          "user2",
-          await exportPublicKey(kp2.publicKey),
-          "new",
-        ),
-      ).rejects.toThrow("You do not have access");
-    });
-  });
-
-  describe("canUserDecrypt", () => {
-    it("should return correct access status", async () => {
-      const file = createMockFile("Data", "test.txt");
-      const { metadata } = await service.encryptFile(file, publicKey, "user1");
-
-      expect(service.canUserDecrypt(metadata, "user1")).toBe(true);
-      expect(service.canUserDecrypt(metadata, "user2")).toBe(false);
-      expect(
-        service.canUserDecrypt(createNonEncryptedMetadata(), "anyone"),
-      ).toBe(true);
-    });
-  });
-
-  describe("getAuthorizedUsers", () => {
-    it("should return list of authorized users", async () => {
-      const kp1 = await generateRSAKeyPair();
-      const kp2 = await generateRSAKeyPair();
-      const recipients = [
-        {
-          userId: "alice",
-          publicKeyBase64: await exportPublicKey(kp1.publicKey),
-        },
-        {
-          userId: "bob",
-          publicKeyBase64: await exportPublicKey(kp2.publicKey),
-        },
-      ];
-
-      const file = createMockFile("Data", "test.txt");
-      const { metadata } = await service.encryptFileForRecipients(
-        file,
-        recipients,
-      );
-
-      const users = service.getAuthorizedUsers(metadata);
-      expect(users).toHaveLength(2);
-      expect(users).toContain("alice");
-      expect(users).toContain("bob");
-    });
-
-    it("should return empty array for non-encrypted files", () => {
-      expect(service.getAuthorizedUsers(createNonEncryptedMetadata())).toEqual(
-        [],
-      );
-    });
-  });
-
-  describe("isValidMetadata", () => {
-    it("should return true for valid metadata", async () => {
-      const file = createMockFile("Data", "test.txt");
-      const { metadata } = await service.encryptFile(file, publicKey, "user");
-      expect(service.isValidMetadata(metadata)).toBe(true);
-    });
-
-    it.each([
-      [null, "null"],
-      [undefined, "undefined"],
-      ["string", "string"],
-      [{}, "empty object"],
-      [{ encrypted: true }, "missing fields"],
-      [
-        {
-          encrypted: "true",
-          version: 1,
-          encryptionAlgorithm: "AES-256-GCM",
-          keyEncryptionAlgorithm: "RSA-OAEP-SHA256",
-          encryptedKeys: [],
-          iv: "",
-          encryptedAt: "",
-        },
-        "wrong type",
-      ],
-    ])("should return false for %s", (input, _description) => {
-      expect(service.isValidMetadata(input)).toBe(false);
-    });
-  });
-
-  describe("getKeyFingerprint", () => {
-    it("should return 16-char hex fingerprint", async () => {
-      const fingerprint = await service.getKeyFingerprint(publicKey);
-      expect(fingerprint).toMatch(/^[0-9A-F]{16}$/);
-    });
-  });
-
-  describe("singleton export", () => {
-    it("should export singleton instance", () => {
-      expect(encryptionService).toBeInstanceOf(EncryptionService);
-    });
-  });
-
-  describe("integration", () => {
-    it("should handle complete workflow with recipient management", async () => {
-      const ownerKp = await generateRSAKeyPair();
-      const user1Kp = await generateRSAKeyPair();
-      const user2Kp = await generateRSAKeyPair();
-
-      const recipients = [
-        {
-          userId: "owner",
-          publicKeyBase64: await exportPublicKey(ownerKp.publicKey),
-        },
-        {
-          userId: "user1",
-          publicKeyBase64: await exportPublicKey(user1Kp.publicKey),
-        },
-      ];
-
-      const originalContent = "Important document!";
-      const file = createMockFile(originalContent, "doc.txt");
-      let { encryptedBlob, metadata } = await service.encryptFileForRecipients(
-        file,
-        recipients,
-      );
-      const encryptedData = await blobToArrayBuffer(encryptedBlob);
-
-      // Owner and user1 can decrypt
-      expect(
-        await blobToText(
-          await service.decryptFile(
-            encryptedData,
-            metadata,
-            ownerKp.privateKey,
-            "owner",
-          ),
-        ),
-      ).toBe(originalContent);
-      expect(
-        await blobToText(
-          await service.decryptFile(
-            encryptedData,
-            metadata,
-            user1Kp.privateKey,
-            "user1",
-          ),
-        ),
-      ).toBe(originalContent);
-
-      // Add user2
-      const user2Key = await service.createKeyForRecipient(
-        metadata,
-        ownerKp.privateKey,
-        "owner",
-        await exportPublicKey(user2Kp.publicKey),
-        "user2",
-      );
-      metadata = {
-        ...metadata,
-        encryptedKeys: [...metadata.encryptedKeys, user2Key],
-      };
-
-      // Now user2 can decrypt
-      expect(
-        await blobToText(
-          await service.decryptFile(
-            encryptedData,
-            metadata,
-            user2Kp.privateKey,
-            "user2",
-          ),
-        ),
-      ).toBe(originalContent);
-      expect(service.getAuthorizedUsers(metadata)).toHaveLength(3);
-    });
-
-    it.each([
-      { name: "empty.txt", content: new Uint8Array([]), type: "text/plain" },
-      {
-        name: "text.txt",
-        content: new TextEncoder().encode("Hello"),
-        type: "text/plain",
-      },
-      {
-        name: "binary.bin",
-        content: new Uint8Array([0, 127, 128, 255]),
-        type: "application/octet-stream",
-      },
-    ])("should round-trip $name", async ({ content, name, type }) => {
-      const file = createMockFile(content, name, type);
-      const { encryptedBlob, metadata } = await service.encryptFile(
-        file,
-        publicKey,
-        "user",
-      );
-      const decrypted = await service.decryptFile(
-        await blobToArrayBuffer(encryptedBlob),
-        metadata,
-        keyPair.privateKey,
-        "user",
-      );
-      expect(
-        Array.from(new Uint8Array(await blobToArrayBuffer(decrypted))),
-      ).toEqual(Array.from(content));
     });
   });
 });

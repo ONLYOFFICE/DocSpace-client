@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2026
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,334 +27,341 @@
 import { describe, it, expect, beforeAll } from "vitest";
 
 import {
-  generateRSAKeyPair,
+  generateKeyPair,
   exportPublicKey,
   importPublicKey,
-  exportPrivateKeyRaw,
-  importPrivateKeyRaw,
   encryptPrivateKey,
   decryptPrivateKey,
+  reEncryptPrivateKey,
   serializeKeyPair,
+  generateDEK,
+  wrapDEK,
+  unwrapDEK,
   getPublicKeyFingerprint,
-  getKeyStatus,
-  exportKeyToFile,
-  importKeyFromFile,
-  encryptAESKeyWithRSA,
-  decryptAESKeyWithRSA,
-  generateAESKey,
-  getCrypto,
 } from "../keyManagement";
+import { InvalidPassphraseError, InvalidFormatError } from "../errors";
+import type { ECDHKeyPair } from "../types";
+import { arrayBufferToBase64 } from "../utils";
 
-// Test helpers
-const createMockFile = (
-  content: string,
-  name: string,
-  type = "text/plain",
-): File => {
-  const file = new File([new Blob([content], { type })], name, { type });
-  (file as unknown as { text: () => Promise<string> }).text = () =>
-    Promise.resolve(content);
-  return file;
-};
-
-const blobToText = (blob: Blob): Promise<string> =>
-  new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result as string);
-    reader.onerror = () => reject(reader.error);
-    reader.readAsText(blob);
-  });
+// ---------------------------------------------------------------------------
+// Shared fixtures — ECDH key generation is fast but we still hoist it to
+// beforeAll to avoid redundant work across tests in the same suite.
+// ---------------------------------------------------------------------------
 
 describe("keyManagement", () => {
-  // Shared fixtures - RSA key generation is expensive
-  let keyPair: CryptoKeyPair;
-  let exportedPublicKey: string;
-  let exportedPrivateKey: string;
+  let keyPair: ECDHKeyPair;
+  let publicKeyBase64: string;
 
   beforeAll(async () => {
-    keyPair = await generateRSAKeyPair();
-    exportedPublicKey = await exportPublicKey(keyPair.publicKey);
-    exportedPrivateKey = await exportPrivateKeyRaw(keyPair.privateKey);
+    keyPair = await generateKeyPair();
+    publicKeyBase64 = await exportPublicKey(keyPair.publicKey);
   });
 
-  describe("getCrypto", () => {
-    it("should return SubtleCrypto instance with required methods", () => {
-      const subtle = getCrypto();
-      expect(subtle).toBeDefined();
-      expect(subtle.generateKey).toBeDefined();
-      expect(subtle.encrypt).toBeDefined();
-      expect(subtle.decrypt).toBeDefined();
+  // -------------------------------------------------------------------------
+  // generateKeyPair
+  // -------------------------------------------------------------------------
+
+  describe("generateKeyPair", () => {
+    it("produces a CryptoKey pair with ECDH P-256 algorithm", async () => {
+      const kp = await generateKeyPair();
+
+      expect(kp.publicKey.algorithm.name).toBe("ECDH");
+      expect(kp.privateKey.algorithm.name).toBe("ECDH");
+      expect((kp.publicKey.algorithm as EcKeyAlgorithm).namedCurve).toBe(
+        "P-256",
+      );
+      expect((kp.privateKey.algorithm as EcKeyAlgorithm).namedCurve).toBe(
+        "P-256",
+      );
     });
-  });
 
-  describe("generateRSAKeyPair", () => {
-    it("should generate valid RSA-2048 key pair with correct properties", async () => {
-      const kp = await generateRSAKeyPair();
-
-      expect(kp.publicKey.algorithm.name).toBe("RSA-OAEP");
-      expect(kp.privateKey.algorithm.name).toBe("RSA-OAEP");
+    it("marks public key as extractable and private key as extractable (needed for wrapping)", async () => {
+      const kp = await generateKeyPair();
       expect(kp.publicKey.extractable).toBe(true);
       expect(kp.privateKey.extractable).toBe(true);
-      expect(kp.publicKey.usages).toContain("encrypt");
-      expect(kp.privateKey.usages).toContain("decrypt");
     });
 
-    it("should generate unique key pairs", async () => {
-      const kp1 = await generateRSAKeyPair();
-      const kp2 = await generateRSAKeyPair();
-      expect(await exportPublicKey(kp1.publicKey)).not.toBe(
-        await exportPublicKey(kp2.publicKey),
-      );
+    it("assigns correct key usages", async () => {
+      const kp = await generateKeyPair();
+      expect(kp.publicKey.usages).toEqual([]);
+      expect(kp.privateKey.usages).toContain("deriveKey");
+      expect(kp.privateKey.usages).toContain("deriveBits");
+    });
+
+    it("generates unique key pairs on each call", async () => {
+      const kp1 = await generateKeyPair();
+      const kp2 = await generateKeyPair();
+      const pub1 = await exportPublicKey(kp1.publicKey);
+      const pub2 = await exportPublicKey(kp2.publicKey);
+      expect(pub1).not.toBe(pub2);
     });
   });
+
+  // -------------------------------------------------------------------------
+  // exportPublicKey / importPublicKey
+  // -------------------------------------------------------------------------
 
   describe("exportPublicKey / importPublicKey", () => {
-    it("should round-trip and preserve encryption capability", async () => {
-      const imported = await importPublicKey(exportedPublicKey);
-      expect(imported.algorithm.name).toBe("RSA-OAEP");
-      expect(imported.type).toBe("public");
-
-      // Verify encryption works
-      const testData = new Uint8Array([1, 2, 3, 4, 5]);
-      const subtle = getCrypto();
-      const encrypted = await subtle.encrypt(
-        { name: "RSA-OAEP" },
-        imported,
-        testData,
-      );
-      const decrypted = await subtle.decrypt(
-        { name: "RSA-OAEP" },
-        keyPair.privateKey,
-        encrypted,
-      );
-      expect(new Uint8Array(decrypted)).toEqual(testData);
+    it("round-trips a public key through base64 SPKI", async () => {
+      const reimported = await importPublicKey(publicKeyBase64);
+      expect(reimported.type).toBe("public");
+      expect(reimported.algorithm.name).toBe("ECDH");
     });
 
-    it("should throw on invalid base64 input", async () => {
-      await expect(importPublicKey("not-valid-base64!@#$")).rejects.toThrow();
+    it("imported key is extractable and produces the same base64", async () => {
+      const reimported = await importPublicKey(publicKeyBase64);
+      const reexported = await exportPublicKey(reimported);
+      expect(reexported).toBe(publicKeyBase64);
+    });
+
+    it("throws InvalidFormatError for invalid base64 input", async () => {
+      await expect(importPublicKey("!!!not-base64!!!")).rejects.toThrow(
+        InvalidFormatError,
+      );
     });
   });
 
-  describe("exportPrivateKeyRaw / importPrivateKeyRaw", () => {
-    it("should round-trip and preserve decryption capability", async () => {
-      const imported = await importPrivateKeyRaw(exportedPrivateKey);
-      expect(imported.algorithm.name).toBe("RSA-OAEP");
-      expect(imported.type).toBe("private");
-
-      // Verify decryption works
-      const testData = new Uint8Array([10, 20, 30]);
-      const subtle = getCrypto();
-      const encrypted = await subtle.encrypt(
-        { name: "RSA-OAEP" },
-        keyPair.publicKey,
-        testData,
-      );
-      const decrypted = await subtle.decrypt(
-        { name: "RSA-OAEP" },
-        imported,
-        encrypted,
-      );
-      expect(new Uint8Array(decrypted)).toEqual(testData);
-    });
-  });
+  // -------------------------------------------------------------------------
+  // encryptPrivateKey / decryptPrivateKey
+  // -------------------------------------------------------------------------
 
   describe("encryptPrivateKey / decryptPrivateKey", () => {
-    it("should encrypt and decrypt with passphrase", async () => {
-      const encrypted = await encryptPrivateKey(
-        keyPair.privateKey,
-        "test-pass",
-      );
-      const decrypted = await decryptPrivateKey(encrypted, "test-pass");
-      expect(decrypted.type).toBe("private");
-    });
+    it(
+      "round-trips the private key with the correct passphrase",
+      async () => {
+        const enc = await encryptPrivateKey(keyPair.privateKey, "pass-123");
+        const dec = await decryptPrivateKey(enc, "pass-123");
 
-    it("should produce different ciphertext each time (random salt)", async () => {
-      const pass = "same-pass";
-      const enc1 = await encryptPrivateKey(keyPair.privateKey, pass);
-      const enc2 = await encryptPrivateKey(keyPair.privateKey, pass);
-      expect(enc1).not.toBe(enc2);
-    });
+        expect(dec.type).toBe("private");
+        expect(dec.algorithm.name).toBe("ECDH");
+      },
+      30_000,
+    );
 
-    it("should fail with wrong passphrase", async () => {
-      const encrypted = await encryptPrivateKey(keyPair.privateKey, "correct");
-      await expect(decryptPrivateKey(encrypted, "wrong")).rejects.toThrow(
-        "Invalid passphrase",
-      );
-    });
+    it(
+      "throws InvalidPassphraseError when the passphrase is wrong",
+      async () => {
+        const enc = await encryptPrivateKey(keyPair.privateKey, "correct");
+        await expect(decryptPrivateKey(enc, "wrong")).rejects.toThrow(
+          InvalidPassphraseError,
+        );
+      },
+      30_000,
+    );
 
-    it.each([
-      "",
-      "пароль-🔐",
-      "a".repeat(100),
-    ])("should handle passphrase: %s", async (pass) => {
-      const encrypted = await encryptPrivateKey(keyPair.privateKey, pass);
-      const decrypted = await decryptPrivateKey(encrypted, pass);
-      expect(decrypted.type).toBe("private");
-    });
+    it(
+      "produces non-extractable key — exportKey throws after decryption",
+      async () => {
+        const enc = await encryptPrivateKey(keyPair.privateKey, "pass");
+        const dec = await decryptPrivateKey(enc, "pass");
+
+        // non-extractable — the Web Crypto spec mandates this throws
+        await expect(
+          globalThis.crypto.subtle.exportKey("pkcs8", dec),
+        ).rejects.toThrow();
+      },
+      30_000,
+    );
+
+    it(
+      "uses random salt — produces different ciphertext each time",
+      async () => {
+        const enc1 = await encryptPrivateKey(keyPair.privateKey, "same");
+        const enc2 = await encryptPrivateKey(keyPair.privateKey, "same");
+        expect(enc1).not.toBe(enc2);
+      },
+      30_000,
+    );
+
+    it(
+      "throws InvalidFormatError when ciphertext is too short",
+      async () => {
+        // Only 4 bytes — shorter than salt(16) + iv(12) + tag(16)
+        const tooShort = arrayBufferToBase64(new Uint8Array(4).buffer);
+        await expect(decryptPrivateKey(tooShort, "any")).rejects.toThrow(
+          InvalidFormatError,
+        );
+      },
+      30_000,
+    );
   });
+
+  // -------------------------------------------------------------------------
+  // serializeKeyPair
+  // -------------------------------------------------------------------------
 
   describe("serializeKeyPair", () => {
-    it("should serialize and allow deserialization", async () => {
-      const serialized = await serializeKeyPair(keyPair, "pass");
-      expect(serialized.publicKey).toBeDefined();
-      expect(serialized.privateKeyEnc).toBeDefined();
+    it(
+      "produces a SerializedKeyPair with base64 strings",
+      async () => {
+        const serialized = await serializeKeyPair(keyPair, "p@ss");
 
-      const pubKey = await importPublicKey(serialized.publicKey);
-      const privKey = await decryptPrivateKey(serialized.privateKeyEnc, "pass");
-      expect(pubKey.type).toBe("public");
-      expect(privKey.type).toBe("private");
+        // Both fields must be non-empty strings
+        expect(typeof serialized.publicKey).toBe("string");
+        expect(serialized.publicKey.length).toBeGreaterThan(0);
+        expect(typeof serialized.privateKeyEnc).toBe("string");
+        expect(serialized.privateKeyEnc.length).toBeGreaterThan(0);
+      },
+      30_000,
+    );
+
+    it(
+      "serialized publicKey round-trips back to the same CryptoKey material",
+      async () => {
+        const serialized = await serializeKeyPair(keyPair, "p@ss");
+        const reimported = await importPublicKey(serialized.publicKey);
+        const reexported = await exportPublicKey(reimported);
+        expect(reexported).toBe(publicKeyBase64);
+      },
+      30_000,
+    );
+
+    it(
+      "serialized privateKeyEnc can be decrypted with the same passphrase",
+      async () => {
+        const serialized = await serializeKeyPair(keyPair, "my-pass");
+        const dec = await decryptPrivateKey(serialized.privateKeyEnc, "my-pass");
+        expect(dec.type).toBe("private");
+      },
+      30_000,
+    );
+  });
+
+  // -------------------------------------------------------------------------
+  // generateDEK
+  // -------------------------------------------------------------------------
+
+  describe("generateDEK", () => {
+    it("produces exactly 32 bytes (AES-256)", () => {
+      const dek = generateDEK();
+      expect(dek).toBeInstanceOf(Uint8Array);
+      expect(dek.byteLength).toBe(32);
+    });
+
+    it("generates a different DEK on every call", () => {
+      const deks = Array.from({ length: 8 }, () => generateDEK());
+      const unique = new Set(deks.map((d) => Array.from(d).join(",")));
+      expect(unique.size).toBe(8);
     });
   });
 
+  // -------------------------------------------------------------------------
+  // wrapDEK / unwrapDEK
+  // -------------------------------------------------------------------------
+
+  describe("wrapDEK / unwrapDEK", () => {
+    it("round-trips the DEK — unwrapped bytes equal original", async () => {
+      const dek = generateDEK();
+      const wrapped = await wrapDEK(dek, keyPair.publicKey);
+      const unwrapped = await unwrapDEK(wrapped, keyPair.privateKey);
+
+      expect(unwrapped).toBeInstanceOf(Uint8Array);
+      expect(unwrapped.byteLength).toBe(32);
+      expect(Array.from(unwrapped)).toEqual(Array.from(dek));
+    });
+
+    it("produces different ciphertext on each wrap (ephemeral ECDH)", async () => {
+      const dek = generateDEK();
+      const w1 = await wrapDEK(dek, keyPair.publicKey);
+      const w2 = await wrapDEK(dek, keyPair.publicKey);
+      expect(w1).not.toBe(w2);
+    });
+
+    it("throws when unwrapping with the wrong private key", async () => {
+      const dek = generateDEK();
+      const wrapped = await wrapDEK(dek, keyPair.publicKey);
+
+      const otherKp = await generateKeyPair();
+      await expect(unwrapDEK(wrapped, otherKp.privateKey)).rejects.toThrow();
+    });
+
+    it("throws InvalidFormatError when wrapped data is truncated", async () => {
+      // 20 bytes is well below ephemeralPub(65) + wrappedDEK(40) minimum
+      const tooShort = arrayBufferToBase64(new Uint8Array(20).buffer);
+      await expect(
+        unwrapDEK(tooShort, keyPair.privateKey),
+      ).rejects.toThrow(InvalidFormatError);
+    });
+  });
+
+  // -------------------------------------------------------------------------
+  // getPublicKeyFingerprint
+  // -------------------------------------------------------------------------
+
   describe("getPublicKeyFingerprint", () => {
-    it("should return deterministic 16-char hex fingerprint", async () => {
-      const fp1 = await getPublicKeyFingerprint(exportedPublicKey);
-      const fp2 = await getPublicKeyFingerprint(exportedPublicKey);
-      expect(fp1).toMatch(/^[0-9A-F]{16}$/);
+    it("returns a hex string", async () => {
+      const fp = await getPublicKeyFingerprint(publicKeyBase64);
+      expect(fp).toMatch(/^[0-9A-F]+$/);
+    });
+
+    it("returns a 64-character string (full SHA-256 → 32 bytes × 2 hex chars)", async () => {
+      const fp = await getPublicKeyFingerprint(publicKeyBase64);
+      expect(fp).toHaveLength(64);
+    });
+
+    it("is deterministic — same key always produces the same fingerprint", async () => {
+      const fp1 = await getPublicKeyFingerprint(publicKeyBase64);
+      const fp2 = await getPublicKeyFingerprint(publicKeyBase64);
       expect(fp1).toBe(fp2);
     });
 
-    it("should produce different fingerprints for different keys", async () => {
-      const kp2 = await generateRSAKeyPair();
-      const fp1 = await getPublicKeyFingerprint(exportedPublicKey);
-      const fp2 = await getPublicKeyFingerprint(
-        await exportPublicKey(kp2.publicKey),
-      );
+    it("produces different fingerprints for different keys", async () => {
+      const otherKp = await generateKeyPair();
+      const otherPub = await exportPublicKey(otherKp.publicKey);
+      const fp1 = await getPublicKeyFingerprint(publicKeyBase64);
+      const fp2 = await getPublicKeyFingerprint(otherPub);
       expect(fp1).not.toBe(fp2);
     });
   });
 
-  describe("getKeyStatus", () => {
-    it.each([
-      [null, false],
-      [{ publicKey: "", privateKeyEnc: "data" }, false],
-    ])("should return hasKey: %s for %o", async (input, expected) => {
-      const status = await getKeyStatus(
-        input as Parameters<typeof getKeyStatus>[0],
-      );
-      expect(status.hasKey).toBe(expected);
-    });
+  // -------------------------------------------------------------------------
+  // reEncryptPrivateKey
+  // -------------------------------------------------------------------------
 
-    it("should return valid status for serialized key", async () => {
-      const serialized = await serializeKeyPair(keyPair, "pass");
-      const status = await getKeyStatus(serialized);
-      expect(status.hasKey).toBe(true);
-      expect(status.publicKeyFingerprint).toMatch(/^[0-9A-F]{16}$/);
-      expect(status.algorithm).toBe("RSA-2048");
-    });
-  });
+  describe("reEncryptPrivateKey", () => {
+    it(
+      "re-encrypts under a new passphrase — old passphrase no longer works",
+      async () => {
+        const enc = await encryptPrivateKey(keyPair.privateKey, "old-pass");
+        const reenc = await reEncryptPrivateKey(enc, "old-pass", "new-pass");
 
-  describe("exportKeyToFile / importKeyFromFile", () => {
-    it("should round-trip key through file", async () => {
-      const serialized = await serializeKeyPair(keyPair, "pass");
-      const blob = exportKeyToFile(serialized);
-      expect(blob.type).toBe("application/json");
+        // New passphrase works
+        const dec = await decryptPrivateKey(reenc, "new-pass");
+        expect(dec.type).toBe("private");
+      },
+      60_000,
+    );
 
-      const content = await blobToText(blob);
-      const file = createMockFile(content, "key.json", "application/json");
-      const imported = await importKeyFromFile(file);
-      expect(imported.publicKey).toBe(serialized.publicKey);
-    });
+    it(
+      "re-encrypted key wraps the same underlying key material",
+      async () => {
+        // We derive bits from the original private key and from the
+        // re-encrypted one using the same ephemeral public key to prove
+        // they are cryptographically identical.
+        const enc = await encryptPrivateKey(keyPair.privateKey, "pass-a");
+        const reenc = await reEncryptPrivateKey(enc, "pass-a", "pass-b");
+        const restored = await decryptPrivateKey(reenc, "pass-b");
 
-    it.each([
-      ["not-json-content", "Invalid JSON in key file"],
-      [
-        JSON.stringify({ type: "wrong", version: 1, data: {} }),
-        "Invalid key file format",
-      ],
-      [
-        JSON.stringify({
-          type: "docspace-encryption-key",
-          version: 99,
-          data: {},
-        }),
-        "Unsupported key file version",
-      ],
-      [
-        JSON.stringify({
-          type: "docspace-encryption-key",
-          version: 1,
-          data: { publicKey: "x" },
-        }),
-        "missing required fields",
-      ],
-    ])("should reject invalid file: %s", async (content, errorMsg) => {
-      const file = createMockFile(content, "test.json");
-      await expect(importKeyFromFile(file)).rejects.toThrow(errorMsg);
-    });
-  });
+        // Both keys should be able to unwrap the same DEK
+        const dek = generateDEK();
+        const wrapped = await wrapDEK(dek, keyPair.publicKey);
 
-  describe("generateAESKey", () => {
-    it("should generate unique 32-byte keys", () => {
-      const keys = Array.from({ length: 5 }, () => generateAESKey());
-      expect(keys[0].length).toBe(32);
-      const unique = new Set(keys.map((k) => Array.from(k).join(",")));
-      expect(unique.size).toBe(5);
-    });
-  });
+        // restored is non-extractable, but it should still unwrap the DEK
+        const unwrapped = await unwrapDEK(wrapped, restored);
+        expect(Array.from(unwrapped)).toEqual(Array.from(dek));
+      },
+      60_000,
+    );
 
-  describe("encryptAESKeyWithRSA / decryptAESKeyWithRSA", () => {
-    it("should encrypt and decrypt AES key", async () => {
-      const aesKey = generateAESKey();
-      const encrypted = await encryptAESKeyWithRSA(aesKey, keyPair.publicKey);
-      const decrypted = await decryptAESKeyWithRSA(
-        encrypted,
-        keyPair.privateKey,
-      );
-      expect(decrypted).toEqual(aesKey);
-    });
-
-    it("should produce different ciphertext due to OAEP padding", async () => {
-      const aesKey = generateAESKey();
-      const enc1 = await encryptAESKeyWithRSA(aesKey, keyPair.publicKey);
-      const enc2 = await encryptAESKeyWithRSA(aesKey, keyPair.publicKey);
-      expect(enc1).not.toBe(enc2);
-    });
-
-    it("should fail with wrong private key", async () => {
-      const kp2 = await generateRSAKeyPair();
-      const encrypted = await encryptAESKeyWithRSA(
-        generateAESKey(),
-        keyPair.publicKey,
-      );
-      await expect(
-        decryptAESKeyWithRSA(encrypted, kp2.privateKey),
-      ).rejects.toThrow();
-    });
-
-    it.each([16, 24, 32])("should handle %d-byte key", async (size) => {
-      const key = crypto.getRandomValues(new Uint8Array(size));
-      const encrypted = await encryptAESKeyWithRSA(key, keyPair.publicKey);
-      const decrypted = await decryptAESKeyWithRSA(
-        encrypted,
-        keyPair.privateKey,
-      );
-      expect(decrypted).toEqual(key);
-    });
-  });
-
-  describe("integration", () => {
-    it("should work end-to-end: generate, serialize, file export/import, encrypt/decrypt", async () => {
-      const kp = await generateRSAKeyPair();
-      const serialized = await serializeKeyPair(kp, "pass");
-
-      // File round-trip
-      const blob = exportKeyToFile(serialized);
-      const file = createMockFile(
-        await blobToText(blob),
-        "k.json",
-        "application/json",
-      );
-      const reimported = await importKeyFromFile(file);
-
-      // Restore and use keys
-      const pubKey = await importPublicKey(reimported.publicKey);
-      const privKey = await decryptPrivateKey(reimported.privateKeyEnc, "pass");
-
-      const aesKey = generateAESKey();
-      const encrypted = await encryptAESKeyWithRSA(aesKey, pubKey);
-      const decrypted = await decryptAESKeyWithRSA(encrypted, privKey);
-      expect(decrypted).toEqual(aesKey);
-    });
+    it(
+      "throws InvalidPassphraseError when the old passphrase is wrong",
+      async () => {
+        const enc = await encryptPrivateKey(keyPair.privateKey, "correct-old");
+        await expect(
+          reEncryptPrivateKey(enc, "wrong-old", "new-pass"),
+        ).rejects.toThrow(InvalidPassphraseError);
+      },
+      30_000,
+    );
   });
 });

@@ -24,36 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { decryptPrivateKey, encryptPrivateKey } from "./keyManagement";
-import { deleteEncryptionKey, setEncryptionKeys } from "../../api/privacy";
-import { SecretStorageService } from "./secretStorage";
+// Pure crypto — no API dependencies. The caller (client helpers) handles
+// server API calls (deleteEncryptionKey, setEncryptionKeys, etc.).
 
-export async function rotateUserKey(
-  oldPassphrase: string,
-  newPassphrase: string,
-  currentEncryptedPrivateKey: string,
-  publicKey: string,
-  keyId: string,
-): Promise<{ newEncryptedPrivateKey: string }> {
-  const privateKey = await decryptPrivateKey(
-    currentEncryptedPrivateKey,
-    oldPassphrase,
-  );
-
-  const newEncryptedPrivateKey = await encryptPrivateKey(
-    privateKey,
-    newPassphrase,
-  );
-
-  await deleteEncryptionKey(keyId);
-
-  await setEncryptionKeys({
-    publicKey,
-    privateKeyEnc: newEncryptedPrivateKey,
-  });
-
-  SecretStorageService.clearCache();
-  await SecretStorageService.cacheDecryptedKey(privateKey);
-
-  return { newEncryptedPrivateKey };
-}
+export { reEncryptPrivateKey } from "./keyManagement";

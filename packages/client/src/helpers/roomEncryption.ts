@@ -30,15 +30,16 @@ import {
   setFileEncryptionKeys,
 } from "@docspace/shared/api/files";
 import { getUserById } from "@docspace/shared/api/people";
-import { encryptionService } from "@docspace/shared/services/encryption";
+import {
+  unwrapDEK,
+  wrapDEK,
+  importPublicKey,
+} from "@docspace/shared/services/encryption/keyManagement";
 import { requestUnlock } from "@docspace/shared/services/encryption/secretStorage";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import type { TFile } from "@docspace/shared/api/files/types";
 import type { TUser } from "@docspace/shared/api/people/types";
-import type {
-  FileEncryptionMetadata,
-  ServerAccessRequestKeyDto,
-} from "@docspace/shared/services/encryption/types";
+import type { ServerAccessKeyDto } from "@docspace/shared/services/encryption/types";
 
 export interface NewRoomMember {
   id: string;
@@ -52,9 +53,7 @@ export interface FileKeyReEncryptionResult {
 }
 
 export interface RoomEncryptionOptions {
-  /** Current user's ID */
   currentUserId: string;
-  /** Progress callback: called with (processed, total) after each file */
   onProgress?: (processed: number, total: number) => void;
 }
 
@@ -96,28 +95,6 @@ async function getUserPublicKey(userId: string): Promise<string | null> {
   }
 }
 
-function createMetadataFromKeys(
-  fileKeys: Array<{
-    userId: string;
-    publicKeyId?: string;
-    privateKeyEnc: string;
-  }>,
-): FileEncryptionMetadata {
-  return {
-    encrypted: true,
-    version: 1,
-    encryptionAlgorithm: "AES-256-GCM",
-    keyEncryptionAlgorithm: "RSA-OAEP-SHA256",
-    iv: "", // IV is embedded in the encrypted file content
-    encryptedAt: new Date().toISOString(),
-    encryptedKeys: fileKeys.map((key) => ({
-      userId: key.userId,
-      publicKeyId: key.publicKeyId || "",
-      privateKeyEnc: key.privateKeyEnc,
-    })),
-  };
-}
-
 export async function reEncryptRoomKeysForNewMembers(
   roomId: number,
   newMembers: NewRoomMember[],
@@ -127,26 +104,19 @@ export async function reEncryptRoomKeysForNewMembers(
   const { currentUserId, onProgress } = options;
 
   const validMembers = newMembers.filter((m) => m.id);
-
-  if (validMembers.length === 0) {
-    return results;
-  }
+  if (validMembers.length === 0) return results;
 
   const encryptedFiles = await getEncryptedFilesInRoom(roomId);
-
-  if (encryptedFiles.length === 0) {
-    return results;
-  }
+  if (encryptedFiles.length === 0) return results;
 
   onProgress?.(0, encryptedFiles.length);
 
   const privateKey = await requestUnlock();
-
   if (!privateKey) {
-    throw new Error("Failed to unlock private key - cannot re-encrypt files");
+    throw new Error("Failed to unlock private key — cannot re-encrypt files");
   }
 
-  // Cache public keys resolved per member to avoid redundant lookups
+  // Cache public keys to avoid redundant lookups
   const publicKeyCache = new Map<string, string | null>();
   for (const member of validMembers) {
     if (member.publicKey) {
@@ -169,58 +139,67 @@ export async function reEncryptRoomKeysForNewMembers(
         continue;
       }
 
-      const metadata = createMetadataFromKeys(existingKeys);
+      // Find current user's wrapped DEK and unwrap it
+      const myKey = existingKeys.find((k) => k.userId === currentUserId);
+      if (!myKey) {
+        results.push({
+          fileId: file.id,
+          success: false,
+          error: "Current user has no access to this file",
+        });
+        continue;
+      }
 
-      const newKeys: ServerAccessRequestKeyDto[] = [];
+      const dek = await unwrapDEK(myKey.privateKeyEnc, privateKey);
+
+      const newKeys: ServerAccessKeyDto[] = [];
 
       for (const member of validMembers) {
         const alreadyHasAccess = existingKeys.some(
           (k) => k.userId === member.id,
         );
-        if (alreadyHasAccess) {
-          continue;
-        }
+        if (alreadyHasAccess) continue;
 
-        // Resolve public key: cache → encryptionInfo.userKeys → user profile
-        let publicKey = publicKeyCache.get(member.id);
-        if (publicKey === undefined) {
+        // Resolve public key
+        let publicKeyBase64 = publicKeyCache.get(member.id);
+        if (publicKeyBase64 === undefined) {
           const userKeyEntry = encryptionInfo.userKeys?.find(
             (uk) => uk.userId === member.id,
           );
-          publicKey = userKeyEntry?.publicKey || null;
+          publicKeyBase64 = userKeyEntry?.publicKey || null;
 
-          if (!publicKey) {
-            publicKey = await getUserPublicKey(member.id);
+          if (!publicKeyBase64) {
+            publicKeyBase64 = await getUserPublicKey(member.id);
           }
-          publicKeyCache.set(member.id, publicKey);
+          publicKeyCache.set(member.id, publicKeyBase64);
         }
 
-        if (!publicKey) {
+        if (!publicKeyBase64) {
           console.warn(
-            `User ${member.id} does not have encryption keys set up - they will not be able to access encrypted files`,
+            `User ${member.id} has no encryption keys — skipping`,
           );
           continue;
         }
 
         try {
-          const newKey = await encryptionService.createKeyForRecipient(
-            metadata,
-            privateKey,
-            currentUserId,
-            publicKey,
-            member.id,
-          );
-          newKeys.push(newKey);
+          const memberPubKey = await importPublicKey(publicKeyBase64);
+          const wrappedDEK = await wrapDEK(dek, memberPubKey);
+
+          newKeys.push({
+            userId: member.id,
+            publicKeyId: "",
+            privateKeyEnc: wrappedDEK,
+          });
         } catch (error) {
           console.error(
-            `Failed to create key for user ${member.id} for file ${file.id}:`,
+            `Failed to wrap DEK for user ${member.id}, file ${file.id}:`,
             error,
           );
         }
       }
 
       if (newKeys.length > 0) {
-        const allKeys = [
+        const allKeys: ServerAccessKeyDto[] = [
           ...existingKeys.map((k) => ({
             userId: k.userId,
             publicKeyId: k.publicKeyId || "",
@@ -231,10 +210,7 @@ export async function reEncryptRoomKeysForNewMembers(
         await setFileEncryptionKeys(file.id, allKeys);
       }
 
-      results.push({
-        fileId: file.id,
-        success: true,
-      });
+      results.push({ fileId: file.id, success: true });
     } catch (error) {
       results.push({
         fileId: file.id,
@@ -257,15 +233,10 @@ export async function roomHasEncryptedFiles(roomId: number): Promise<boolean> {
   try {
     const folderData = await getFolder(roomId, filter);
 
-    const hasEncryptedFiles = folderData.files.some((file) => file.encrypted);
-    if (hasEncryptedFiles) {
-      return true;
-    }
+    if (folderData.files.some((file) => file.encrypted)) return true;
 
     for (const subfolder of folderData.folders) {
-      if (await roomHasEncryptedFiles(subfolder.id)) {
-        return true;
-      }
+      if (await roomHasEncryptedFiles(subfolder.id)) return true;
     }
 
     return false;

@@ -24,441 +24,183 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type {
-  FileEncryptionMetadata,
-  ServerAccessRequestKeyDto,
-} from "./types";
+import type { EncryptFileResult, DecryptFileResult, ProgressCallback } from "./types";
 import { ENCRYPTION_CONSTANTS } from "./types";
+import { DecryptionError } from "./errors";
+import { getCrypto, getRandomBytes, arrayBufferToBase64, base64ToArrayBuffer } from "./utils";
+import { generateDEK } from "./keyManagement";
 import {
-  importPublicKey,
-  generateAESKey,
-  encryptAESKeyWithRSA,
-  decryptAESKeyWithRSA,
-  getPublicKeyFingerprint,
-  getCrypto,
-} from "./keyManagement";
-import {
-  isChunkedFormat,
-  encryptFileChunked,
+  encryptChunked,
   decryptChunked,
-  shouldUseChunkedEncryption,
+  isDSE3Format,
+  parseDSE3Header,
+  getDSE3HeaderSize,
 } from "./streamingEncryption";
 
-function arrayBufferToBase64(buffer: ArrayBuffer): string {
-  const bytes = new Uint8Array(buffer);
-  let binary = "";
-  for (let i = 0; i < bytes.byteLength; i++) {
-    binary += String.fromCharCode(bytes[i]);
+const C = ENCRYPTION_CONSTANTS;
+
+// ============================================================================
+// File Encryption
+//
+// Produces a self-describing DSE3 blob. All info needed for decryption
+// (except the DEK) is in the file header. The DEK is wrapped separately
+// per-recipient and stored on the server via files_file_keys API.
+// ============================================================================
+
+export async function encryptFile(
+  data: File | Blob | ArrayBuffer | Uint8Array,
+  options?: {
+    dek?: Uint8Array;
+    fileName?: string;
+    onProgress?: ProgressCallback;
+  },
+): Promise<EncryptFileResult> {
+  const dek = options?.dek ?? generateDEK();
+
+  // Encrypt file name if provided
+  let encryptedName: Uint8Array | null = null;
+  if (options?.fileName) {
+    encryptedName = await encryptFileNameRaw(options.fileName, dek);
   }
-  return btoa(binary);
+
+  const encryptedBlob = await encryptChunked(
+    data,
+    dek,
+    encryptedName,
+    options?.onProgress,
+  );
+
+  return { encryptedBlob, dek };
 }
 
-function base64ToUint8Array(base64: string): Uint8Array {
-  const binary = atob(base64);
-  const bytes = new Uint8Array(binary.length);
-  for (let i = 0; i < binary.length; i++) {
-    bytes[i] = binary.charCodeAt(i);
+// ============================================================================
+// File Decryption
+//
+// Reads DSE3 header from the blob, decrypts all chunks, optionally
+// decrypts the file name from the header.
+// ============================================================================
+
+export async function decryptFile(
+  encryptedData: ArrayBuffer | Uint8Array,
+  dek: Uint8Array,
+  options?: {
+    onProgress?: ProgressCallback;
+  },
+): Promise<DecryptFileResult> {
+  const bytes =
+    encryptedData instanceof Uint8Array
+      ? encryptedData
+      : new Uint8Array(encryptedData);
+
+  if (!isDSE3Format(bytes)) {
+    throw new DecryptionError("not a DSE3 file");
   }
-  return bytes;
+
+  const header = parseDSE3Header(bytes);
+  const headerSize = getDSE3HeaderSize(header);
+
+  // Decrypt file name if present in header
+  let fileName: string | null = null;
+  if (header.encryptedName) {
+    fileName = await decryptFileNameRaw(header.encryptedName, dek);
+  }
+
+  const data = await decryptChunked(
+    bytes,
+    dek,
+    header,
+    headerSize,
+    options?.onProgress,
+  );
+
+  return { data, fileName };
 }
 
-export type EncryptFileResult = {
-  encryptedBlob: Blob;
-  metadata: FileEncryptionMetadata;
-};
+// ============================================================================
+// File Name Encryption (AES-256-GCM with the file's DEK)
+// ============================================================================
 
-export type EncryptionProgressCallback = (progress: number) => void;
+async function encryptFileNameRaw(
+  name: string,
+  dek: Uint8Array,
+): Promise<Uint8Array> {
+  const subtle = getCrypto();
+  const aesKey = await subtle.importKey(
+    "raw",
+    dek as BufferSource,
+    { name: "AES-GCM", length: C.AES_KEY_SIZE },
+    false,
+    ["encrypt"],
+  );
 
-export class EncryptionService {
-  async encryptFile(
-    file: File,
-    recipientPublicKeyBase64: string,
-    recipientUserId: string,
-    onProgress?: EncryptionProgressCallback,
-  ): Promise<EncryptFileResult> {
-    const recipientPublicKey = await importPublicKey(recipientPublicKeyBase64);
-    const aesKeyRaw = generateAESKey();
+  const iv = getRandomBytes(C.AES_GCM_IV_SIZE);
+  const plaintext = new TextEncoder().encode(name);
 
-    let encryptedBlob: Blob;
-    let version: number;
-    let iv: Uint8Array;
+  const FILENAME_AAD = new TextEncoder().encode("docspace-filename-v1");
+  const ciphertext = await subtle.encrypt(
+    {
+      name: "AES-GCM",
+      iv: iv as BufferSource,
+      additionalData: FILENAME_AAD as BufferSource,
+      tagLength: C.AES_GCM_TAG_BITS,
+    },
+    aesKey,
+    plaintext as BufferSource,
+  );
 
-    if (shouldUseChunkedEncryption(file.size)) {
-      encryptedBlob = await encryptFileChunked(file, aesKeyRaw, onProgress);
-      version = 2;
-      iv = new Uint8Array(0);
-    } else {
-      const subtle = getCrypto();
-      const fileBuffer = await file.arrayBuffer();
+  // Format: [iv 12B][ciphertext + tag]
+  const result = new Uint8Array(iv.length + ciphertext.byteLength);
+  result.set(iv, 0);
+  result.set(new Uint8Array(ciphertext), iv.length);
+  return result;
+}
 
-      const aesKey = await subtle.importKey(
-        "raw",
-        aesKeyRaw as BufferSource,
-        { name: "AES-GCM", length: ENCRYPTION_CONSTANTS.AES_KEY_SIZE },
-        false,
-        ["encrypt"],
-      );
+async function decryptFileNameRaw(
+  encrypted: Uint8Array,
+  dek: Uint8Array,
+): Promise<string> {
+  const subtle = getCrypto();
+  const aesKey = await subtle.importKey(
+    "raw",
+    dek as BufferSource,
+    { name: "AES-GCM", length: C.AES_KEY_SIZE },
+    false,
+    ["decrypt"],
+  );
 
-      iv = crypto.getRandomValues(
-        new Uint8Array(ENCRYPTION_CONSTANTS.AES_GCM_IV_SIZE),
-      );
+  const iv = encrypted.slice(0, C.AES_GCM_IV_SIZE);
+  const ciphertext = encrypted.slice(C.AES_GCM_IV_SIZE);
 
-      const encryptedContent = await subtle.encrypt(
-        { name: "AES-GCM", iv: iv as BufferSource },
-        aesKey,
-        fileBuffer,
-      );
-
-      const encryptedWithIV = new Uint8Array(
-        iv.length + encryptedContent.byteLength,
-      );
-      encryptedWithIV.set(iv, 0);
-      encryptedWithIV.set(new Uint8Array(encryptedContent), iv.length);
-
-      encryptedBlob = new Blob([encryptedWithIV], {
-        type: "application/octet-stream",
-      });
-      version = 1;
-
-      onProgress?.(1);
-    }
-
-    const encryptedAESKey = await encryptAESKeyWithRSA(
-      aesKeyRaw,
-      recipientPublicKey,
-    );
-
-    const metadata: FileEncryptionMetadata = {
-      encrypted: true,
-      version,
-      encryptionAlgorithm: "AES-256-GCM",
-      keyEncryptionAlgorithm: "RSA-OAEP-SHA256",
-      encryptedKeys: [
-        {
-          userId: recipientUserId,
-          publicKeyId: "",
-          privateKeyEnc: encryptedAESKey,
-        },
-      ],
-      iv: arrayBufferToBase64(iv.buffer as ArrayBuffer),
-      encryptedAt: new Date().toISOString(),
-    };
-
-    return { encryptedBlob, metadata };
-  }
-
-  async encryptFileForRecipients(
-    file: File,
-    recipients: Array<{ userId: string; publicKeyBase64: string }>,
-  ): Promise<EncryptFileResult> {
-    if (recipients.length === 0) {
-      throw new Error("At least one recipient is required");
-    }
-
-    const subtle = getCrypto();
-    const fileBuffer = await file.arrayBuffer();
-    const aesKeyRaw = generateAESKey();
-
-    const aesKey = await subtle.importKey(
-      "raw",
-      aesKeyRaw as BufferSource,
-      { name: "AES-GCM", length: ENCRYPTION_CONSTANTS.AES_KEY_SIZE },
-      false,
-      ["encrypt"],
-    );
-
-    const iv = crypto.getRandomValues(
-      new Uint8Array(ENCRYPTION_CONSTANTS.AES_GCM_IV_SIZE),
-    );
-
-    const encryptedContent = await subtle.encrypt(
-      { name: "AES-GCM", iv: iv as BufferSource },
+  try {
+    const FILENAME_AAD = new TextEncoder().encode("docspace-filename-v1");
+    const plaintext = await subtle.decrypt(
+      {
+        name: "AES-GCM",
+        iv: iv as BufferSource,
+        additionalData: FILENAME_AAD as BufferSource,
+        tagLength: C.AES_GCM_TAG_BITS,
+      },
       aesKey,
-      fileBuffer,
+      ciphertext as BufferSource,
     );
-
-    const encryptedKeys = await Promise.all(
-      recipients.map(async (recipient) => {
-        const publicKey = await importPublicKey(recipient.publicKeyBase64);
-        const encryptedAESKey = await encryptAESKeyWithRSA(
-          aesKeyRaw,
-          publicKey,
-        );
-        return {
-          userId: recipient.userId,
-          publicKeyId: "",
-          privateKeyEnc: encryptedAESKey,
-        };
-      }),
-    );
-
-    const encryptedWithIV = new Uint8Array(
-      iv.length + encryptedContent.byteLength,
-    );
-    encryptedWithIV.set(iv, 0);
-    encryptedWithIV.set(new Uint8Array(encryptedContent), iv.length);
-
-    const encryptedBlob = new Blob([encryptedWithIV], {
-      type: "application/octet-stream",
-    });
-
-    const metadata: FileEncryptionMetadata = {
-      encrypted: true,
-      version: 1,
-      encryptionAlgorithm: "AES-256-GCM",
-      keyEncryptionAlgorithm: "RSA-OAEP-SHA256",
-      encryptedKeys,
-      iv: arrayBufferToBase64(iv.buffer as ArrayBuffer),
-      encryptedAt: new Date().toISOString(),
-    };
-
-    return { encryptedBlob, metadata };
-  }
-
-  async decryptFile(
-    encryptedData: ArrayBuffer,
-    metadata: FileEncryptionMetadata,
-    privateKey: CryptoKey,
-    userId: string,
-    onProgress?: EncryptionProgressCallback,
-  ): Promise<Blob> {
-    if (!metadata.encrypted) {
-      throw new Error("File is not encrypted");
-    }
-
-    const userKey = metadata.encryptedKeys.find((k) => k.userId === userId);
-    if (!userKey) {
-      throw new Error("You do not have access to decrypt this file");
-    }
-
-    let aesKeyRaw: Uint8Array;
-    try {
-      aesKeyRaw = await decryptAESKeyWithRSA(userKey.privateKeyEnc, privateKey);
-    } catch {
-      throw new Error(
-        "Failed to decrypt file key - you may not have access to this file",
-      );
-    }
-
-    if (isChunkedFormat(encryptedData)) {
-      return decryptChunked(encryptedData, aesKeyRaw, onProgress);
-    }
-
-    const encryptedArray = new Uint8Array(encryptedData);
-    const ivSize = ENCRYPTION_CONSTANTS.AES_GCM_IV_SIZE;
-
-    if (encryptedArray.length < ivSize) {
-      throw new Error("Invalid encrypted data - too short to contain IV");
-    }
-
-    const iv = encryptedArray.slice(0, ivSize);
-    const ciphertext = encryptedArray.slice(ivSize);
-
-    const subtle = getCrypto();
-    const aesKey = await subtle.importKey(
-      "raw",
-      aesKeyRaw as BufferSource,
-      { name: "AES-GCM", length: ENCRYPTION_CONSTANTS.AES_KEY_SIZE },
-      false,
-      ["decrypt"],
-    );
-
-    let decryptedContent: ArrayBuffer;
-    try {
-      decryptedContent = await subtle.decrypt(
-        { name: "AES-GCM", iv: iv as BufferSource },
-        aesKey,
-        ciphertext,
-      );
-    } catch {
-      throw new Error("Failed to decrypt file content - data may be corrupted");
-    }
-
-    onProgress?.(1);
-    return new Blob([decryptedContent]);
-  }
-
-  async decryptFileAnyKey(
-    encryptedData: ArrayBuffer,
-    metadata: FileEncryptionMetadata,
-    privateKey: CryptoKey,
-    onProgress?: EncryptionProgressCallback,
-  ): Promise<Blob> {
-    if (!metadata.encrypted) {
-      throw new Error("File is not encrypted");
-    }
-
-    const chunked = isChunkedFormat(encryptedData);
-
-    if (chunked) {
-      for (const encryptedKey of metadata.encryptedKeys) {
-        try {
-          const aesKeyRaw = await decryptAESKeyWithRSA(
-            encryptedKey.privateKeyEnc,
-            privateKey,
-          );
-          return await decryptChunked(encryptedData, aesKeyRaw, onProgress);
-        } catch {
-          continue;
-        }
-      }
-      throw new Error("Failed to decrypt file - no valid key found");
-    }
-
-    // Legacy v1 format: [12-byte IV][encrypted content with auth tag]
-    const encryptedArray = new Uint8Array(encryptedData);
-    const ivSize = ENCRYPTION_CONSTANTS.AES_GCM_IV_SIZE;
-
-    if (encryptedArray.length < ivSize) {
-      throw new Error("Invalid encrypted data - too short to contain IV");
-    }
-
-    const iv = encryptedArray.slice(0, ivSize);
-    const ciphertext = encryptedArray.slice(ivSize);
-    const subtle = getCrypto();
-
-    for (const encryptedKey of metadata.encryptedKeys) {
-      try {
-        const aesKeyRaw = await decryptAESKeyWithRSA(
-          encryptedKey.privateKeyEnc,
-          privateKey,
-        );
-
-        const aesKey = await subtle.importKey(
-          "raw",
-          aesKeyRaw as BufferSource,
-          { name: "AES-GCM", length: ENCRYPTION_CONSTANTS.AES_KEY_SIZE },
-          false,
-          ["decrypt"],
-        );
-
-        const decryptedContent = await subtle.decrypt(
-          { name: "AES-GCM", iv: iv as BufferSource },
-          aesKey,
-          ciphertext,
-        );
-
-        onProgress?.(1);
-        return new Blob([decryptedContent]);
-      } catch {
-        continue;
-      }
-    }
-
-    throw new Error("Failed to decrypt file - no valid key found");
-  }
-
-  async createKeyForRecipient(
-    metadata: FileEncryptionMetadata,
-    privateKey: CryptoKey,
-    currentUserId: string,
-    newRecipientPublicKeyBase64: string,
-    newRecipientUserId: string,
-  ): Promise<ServerAccessRequestKeyDto> {
-    const currentUserKey = metadata.encryptedKeys.find(
-      (k) => k.userId === currentUserId,
-    );
-    if (!currentUserKey) {
-      throw new Error("You do not have access to this file");
-    }
-
-    const aesKeyRaw = await decryptAESKeyWithRSA(
-      currentUserKey.privateKeyEnc,
-      privateKey,
-    );
-
-    const newRecipientPublicKey = await importPublicKey(
-      newRecipientPublicKeyBase64,
-    );
-
-    const encryptedAESKey = await encryptAESKeyWithRSA(
-      aesKeyRaw,
-      newRecipientPublicKey,
-    );
-
-    // Generate fingerprint for publicKeyId instead of storing full key
-    const publicKeyFingerprint = await getPublicKeyFingerprint(
-      newRecipientPublicKeyBase64,
-    );
-
-    return {
-      userId: newRecipientUserId,
-      publicKeyId: publicKeyFingerprint,
-      privateKeyEnc: encryptedAESKey,
-    };
-  }
-
-  async decryptWithServerKey(
-    encryptedData: ArrayBuffer,
-    ivBase64: string,
-    encryptedSymmetricKey: string,
-    privateKey: CryptoKey,
-  ): Promise<Blob> {
-    const iv = base64ToUint8Array(ivBase64);
-
-    let aesKeyRaw: Uint8Array;
-    try {
-      aesKeyRaw = await decryptAESKeyWithRSA(encryptedSymmetricKey, privateKey);
-    } catch {
-      throw new Error(
-        "Failed to decrypt file key - you may not have access to this file",
-      );
-    }
-
-    const subtle = getCrypto();
-    const aesKey = await subtle.importKey(
-      "raw",
-      aesKeyRaw as BufferSource,
-      { name: "AES-GCM", length: ENCRYPTION_CONSTANTS.AES_KEY_SIZE },
-      false,
-      ["decrypt"],
-    );
-
-    let decryptedContent: ArrayBuffer;
-    try {
-      decryptedContent = await subtle.decrypt(
-        { name: "AES-GCM", iv: iv as BufferSource },
-        aesKey,
-        encryptedData,
-      );
-    } catch {
-      throw new Error("Failed to decrypt file content - data may be corrupted");
-    }
-
-    return new Blob([decryptedContent]);
-  }
-
-  canUserDecrypt(metadata: FileEncryptionMetadata, userId: string): boolean {
-    if (!metadata.encrypted) return true;
-    return metadata.encryptedKeys.some((k) => k.userId === userId);
-  }
-
-  getAuthorizedUsers(metadata: FileEncryptionMetadata): string[] {
-    if (!metadata.encrypted) return [];
-    return metadata.encryptedKeys.map((k) => k.userId);
-  }
-
-  isValidMetadata(metadata: unknown): metadata is FileEncryptionMetadata {
-    if (!metadata || typeof metadata !== "object") return false;
-
-    const m = metadata as Record<string, unknown>;
-
-    return (
-      typeof m.encrypted === "boolean" &&
-      typeof m.version === "number" &&
-      m.encryptionAlgorithm === "AES-256-GCM" &&
-      m.keyEncryptionAlgorithm === "RSA-OAEP-SHA256" &&
-      Array.isArray(m.encryptedKeys) &&
-      typeof m.iv === "string" &&
-      typeof m.encryptedAt === "string"
-    );
-  }
-
-  async getKeyFingerprint(publicKeyBase64: string): Promise<string> {
-    return getPublicKeyFingerprint(publicKeyBase64);
+    return new TextDecoder().decode(plaintext);
+  } catch {
+    throw new DecryptionError("file name decryption failed");
   }
 }
 
-export const encryptionService = new EncryptionService();
+export async function encryptFileName(
+  name: string,
+  dek: Uint8Array,
+): Promise<string> {
+  const encrypted = await encryptFileNameRaw(name, dek);
+  return arrayBufferToBase64(encrypted.buffer as ArrayBuffer);
+}
 
-export default encryptionService;
+export async function decryptFileName(
+  encryptedBase64: string,
+  dek: Uint8Array,
+): Promise<string> {
+  const encrypted = new Uint8Array(base64ToArrayBuffer(encryptedBase64));
+  return decryptFileNameRaw(encrypted, dek);
+}

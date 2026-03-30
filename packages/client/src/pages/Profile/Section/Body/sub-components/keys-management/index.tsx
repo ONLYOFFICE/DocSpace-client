@@ -32,14 +32,14 @@ import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
 import {
-  generateRSAKeyPair,
+  generateKeyPair,
   serializeKeyPair,
   exportKeyToFile,
   importKeyFromFile,
   getPublicKeyFingerprint,
+  reEncryptPrivateKey,
 } from "@docspace/shared/services/encryption/keyManagement";
 import { SecretStorageService } from "@docspace/shared/services/encryption/secretStorage";
-import { rotateUserKey } from "@docspace/shared/services/encryption/keyRotation";
 import type { SerializedKeyPair } from "@docspace/shared/services/encryption/types";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 import {
@@ -97,7 +97,7 @@ const KeysManagement = ({
     async (passphrase: string) => {
       setIsGenerating(true);
       try {
-        const keyPair = await generateRSAKeyPair();
+        const keyPair = await generateKeyPair();
         const serialized = await serializeKeyPair(keyPair, passphrase);
 
         // Use PUT when replacing existing keys, POST for new keys
@@ -290,13 +290,18 @@ const KeysManagement = ({
       setRotationError(null);
 
       try {
-        const { newEncryptedPrivateKey } = await rotateUserKey(
+        const newEncryptedPrivateKey = await reEncryptPrivateKey(
+          rotatingKey.privateKeyEnc,
           oldPassphrase,
           newPassphrase,
-          rotatingKey.privateKeyEnc,
-          rotatingKey.publicKey,
-          rotatingKey.id,
         );
+
+        await deleteEncryptionKey(rotatingKey.id);
+        await setEncryptionKeys({
+          publicKey: rotatingKey.publicKey,
+          privateKeyEnc: newEncryptedPrivateKey,
+        });
+        await SecretStorageService.clearCache();
 
         const updatedKey: TEncryptionKeyPair = {
           id: crypto.randomUUID(),

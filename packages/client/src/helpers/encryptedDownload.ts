@@ -26,17 +26,17 @@
 
 import { Zip, ZipPassThrough } from "fflate";
 
-import { encryptionService } from "@docspace/shared/services/encryption/encryptionService";
+import { decryptFile } from "@docspace/shared/services/encryption/encryptionService";
 import { SecretStorageService } from "@docspace/shared/services/encryption/secretStorage";
-import { decryptPrivateKey } from "@docspace/shared/services/encryption/keyManagement";
-import type {
-  FileEncryptionMetadata,
-  SerializedKeyPair,
-} from "@docspace/shared/services/encryption/types";
+import {
+  decryptPrivateKey,
+  unwrapDEK,
+} from "@docspace/shared/services/encryption/keyManagement";
+import type { SerializedKeyPair } from "@docspace/shared/services/encryption/types";
 
 export type DecryptConfig = {
   encryptedData: ArrayBuffer;
-  metadata: FileEncryptionMetadata;
+  wrappedDEK: string; // base64 wrapped DEK from server's files_file_keys
   originalFileName: string;
   originalFileType: string;
   userKeys: SerializedKeyPair;
@@ -56,7 +56,7 @@ export async function decryptDownloadedFile(
 ): Promise<DecryptResult> {
   const {
     encryptedData,
-    metadata,
+    wrappedDEK,
     originalFileName,
     originalFileType,
     userKeys,
@@ -64,13 +64,6 @@ export async function decryptDownloadedFile(
     onPassphraseRequired,
     onProgress,
   } = config;
-
-  if (!metadata.encrypted) {
-    return {
-      success: false,
-      error: "File is not encrypted",
-    };
-  }
 
   let privateKey = await SecretStorageService.getCachedKey();
 
@@ -101,7 +94,6 @@ export async function decryptDownloadedFile(
 
         await SecretStorageService.cacheDecryptedKey(privateKey);
       } catch {
-        SecretStorageService.markDecryptionAttempted();
         return {
           success: false,
           error: "Invalid passphrase",
@@ -111,13 +103,11 @@ export async function decryptDownloadedFile(
   }
 
   try {
-    const decryptedBlob = await encryptionService.decryptFile(
-      encryptedData,
-      metadata,
-      privateKey,
-      userId,
+    // Unwrap the file DEK and decrypt the self-describing DSE3 blob
+    const dek = await unwrapDEK(wrappedDEK, privateKey);
+    const { data: decryptedBlob } = await decryptFile(encryptedData, dek, {
       onProgress,
-    );
+    });
 
     const decryptedFile = new File([decryptedBlob], originalFileName, {
       type: originalFileType || "application/octet-stream",
@@ -152,7 +142,7 @@ export async function createDecryptedPreviewUrl(
 
 export async function downloadAndDecryptFile(
   downloadUrl: string,
-  metadata: FileEncryptionMetadata,
+  wrappedDEK: string,
   originalFileName: string,
   originalFileType: string,
   userKeys: SerializedKeyPair,
@@ -207,7 +197,7 @@ export async function downloadAndDecryptFile(
 
     return await decryptDownloadedFile({
       encryptedData: encryptedData.buffer,
-      metadata,
+      wrappedDEK,
       originalFileName,
       originalFileType,
       userKeys,
@@ -252,7 +242,7 @@ export type BatchDecryptResult = {
 
 export async function downloadAndDecryptFileToBuffer(
   downloadUrl: string,
-  metadata: FileEncryptionMetadata,
+  wrappedDEK: string,
   originalFileName: string,
   originalFileType: string,
   userKeys: SerializedKeyPair,
@@ -263,7 +253,7 @@ export async function downloadAndDecryptFileToBuffer(
 ): Promise<BatchDecryptResult> {
   const decryptResult = await downloadAndDecryptFile(
     downloadUrl,
-    metadata,
+    wrappedDEK,
     originalFileName,
     originalFileType,
     userKeys,
@@ -346,19 +336,19 @@ export function deduplicateFileNames(names: string[]): string[] {
 }
 
 export function canUserDecrypt(
-  metadata: FileEncryptionMetadata | null | undefined,
+  fileKeys: Array<{ userId: string }> | null | undefined,
   userId: string | null | undefined,
 ): boolean {
-  if (!metadata?.encrypted) return true;
+  if (!fileKeys || fileKeys.length === 0) return true;
   if (!userId) return false;
 
-  return metadata.encryptedKeys?.some((key) => key.userId === userId) ?? false;
+  return fileKeys.some((key) => key.userId === userId);
 }
 
-export function getUserEncryptedKey(
-  metadata: FileEncryptionMetadata,
+export function getUserWrappedDEK(
+  fileKeys: Array<{ userId: string; privateKeyEnc: string }>,
   userId: string,
 ): string | null {
-  const userKey = metadata.encryptedKeys?.find((key) => key.userId === userId);
+  const userKey = fileKeys.find((key) => key.userId === userId);
   return userKey?.privateKeyEnc ?? null;
 }

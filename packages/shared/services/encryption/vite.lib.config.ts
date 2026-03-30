@@ -24,12 +24,39 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export * from "./types";
-export * from "./errors";
-export * from "./utils";
-export * from "./keyManagement";
-export * from "./secretStorage";
-export * from "./encryptionService";
-export * from "./streamingEncryption";
-export * from "./keyRotation";
-export * from "./recovery";
+// Vite library-mode build config for the standalone onlyoffice-crypto bundle.
+//
+// Outputs:
+//   dist/crypto/onlyoffice-crypto.js      — ES module
+//   dist/crypto/onlyoffice-crypto.umd.js  — UMD (global: OnlyofficeCrypto)
+//
+// All dependencies are bundled; the library has no runtime npm requirements.
+// Web Crypto API is a browser/Node built-in — no polyfill is included.
+
+import { resolve } from "path";
+import { defineConfig } from "vite";
+
+export default defineConfig({
+  build: {
+    // Write into a subdirectory so this build never clobbers the shared
+    // package's regular TypeScript declaration output.
+    outDir: resolve(__dirname, "../../dist/crypto"),
+    emptyOutDir: false,
+
+    // Target modern browsers that natively support the Web Crypto API.
+    target: "esnext",
+
+    lib: {
+      entry: resolve(__dirname, "lib-entry.ts"),
+      name: "OnlyofficeCrypto",
+      fileName: "onlyoffice-crypto",
+      formats: ["es", "umd"],
+    },
+
+    rollupOptions: {
+      // No external dependencies — everything is bundled into a single file
+      // per format so consumers can drop it in without a bundler.
+      external: [],
+    },
+  },
+});

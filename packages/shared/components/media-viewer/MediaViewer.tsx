@@ -42,9 +42,9 @@ import { isNullOrUndefined } from "../../utils/typeGuards";
 import { ViewerWrapper } from "./sub-components/ViewerWrapper";
 
 import { getFileEncryptionAccess } from "../../api/files";
-import { encryptionService } from "../../services/encryption/encryptionService";
+import { decryptFile } from "../../services/encryption/encryptionService";
+import { unwrapDEK } from "../../services/encryption/keyManagement";
 import { requestUnlock } from "../../services/encryption/secretStorage";
-import type { FileEncryptionMetadata } from "../../services/encryption/types";
 
 import { mapSupplied, mediaTypes } from "./MediaViewer.constants";
 import type { MediaViewerProps } from "./MediaViewer.types";
@@ -101,13 +101,27 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
   const lastRemovedFileIdRefRef = useRef<number>(undefined);
 
   const [title, setTitle] = useState<string>("");
-  const [fileUrl, setFileUrl] = useState<string | undefined>(() => {
+  const prevBlobUrlRef = useRef<string | null>(null);
+
+  const setFileUrl_ = useCallback((url: string | undefined) => {
+    // Revoke previous blob URL to prevent memory leaks
+    if (prevBlobUrlRef.current && prevBlobUrlRef.current.startsWith("blob:")) {
+      URL.revokeObjectURL(prevBlobUrlRef.current);
+    }
+    prevBlobUrlRef.current =
+      url && url.startsWith("blob:") ? url : null;
+    setFileUrlRaw(url);
+  }, []);
+
+  const [fileUrlRaw, setFileUrlRaw] = useState<string | undefined>(() => {
     if (!currentFileId || !playlist.length) return undefined;
     const item = playlist.find(
       (file) => file.fileId?.toString() === currentFileId?.toString(),
     );
     return item?.src;
   });
+  const fileUrl = fileUrlRaw;
+  const setFileUrl = setFileUrl_;
 
   const [isDecrypting, setIsDecrypting] = useState(false);
 
@@ -448,28 +462,11 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
 
         const encryptedData = await response.arrayBuffer();
 
-        const metadata: FileEncryptionMetadata = {
-          encrypted: true,
-          version: 1,
-          encryptionAlgorithm: "AES-256-GCM",
-          keyEncryptionAlgorithm: "RSA-OAEP-SHA256",
-          encryptedKeys: [
-            {
-              userId,
-              publicKeyId: userFileKey.publicKeyId,
-              privateKeyEnc: userFileKey.privateKeyEnc,
-            },
-          ],
-          iv: "",
-          encryptedAt: "",
-        };
+        // Unwrap the file DEK using our private key
+        const dek = await unwrapDEK(userFileKey.privateKeyEnc, privateKey);
 
-        const decryptedBlob = await encryptionService.decryptFile(
-          encryptedData,
-          metadata,
-          privateKey,
-          userId,
-        );
+        // Decrypt file (DSE3 format is self-describing)
+        const { data: decryptedBlob } = await decryptFile(encryptedData, dek);
 
         const ext = getFileExtension(title).toLowerCase();
         const mimeTypes: Record<string, string> = {

@@ -25,12 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { RoomsType } from "@docspace/shared/enums";
-import { encryptionService } from "@docspace/shared/services/encryption/encryptionService";
-import type { FileEncryptionMetadata } from "@docspace/shared/services/encryption/types";
-import {
-  estimateChunkedEncryptedSize,
-  shouldUseChunkedEncryption,
-} from "@docspace/shared/services/encryption/streamingEncryption";
+import { encryptFile } from "@docspace/shared/services/encryption/encryptionService";
+import { estimateEncryptedSize } from "@docspace/shared/services/encryption/streamingEncryption";
 
 export type UploadConfig = {
   file: File;
@@ -45,7 +41,7 @@ export type UploadConfig = {
 export type PreparedUpload = {
   data: Blob;
   encrypted: boolean;
-  encryptionMetadata: FileEncryptionMetadata | null;
+  dek: Uint8Array | null; // raw DEK — caller wraps for recipients after upload
   originalFileName: string;
   originalFileType: string;
   originalFileSize: number;
@@ -91,24 +87,24 @@ export async function prepareEncryptedUpload(
     return {
       data: file,
       encrypted: false,
-      encryptionMetadata: null,
+      dek: null,
       originalFileName: file.name,
       originalFileType: file.type || "application/octet-stream",
       originalFileSize: file.size,
     };
   }
 
-  const { encryptedBlob, metadata } = await encryptionService.encryptFile(
-    file,
-    userPublicKey,
-    userId,
+  // Encrypt file — produces a self-describing DSE3 blob
+  // The DEK is returned raw; caller wraps it for recipients via wrapDEK()
+  const { encryptedBlob, dek } = await encryptFile(file, {
+    fileName: file.name,
     onProgress,
-  );
+  });
 
   return {
     data: encryptedBlob,
     encrypted: true,
-    encryptionMetadata: metadata,
+    dek,
     originalFileName: file.name,
     originalFileType: file.type || "application/octet-stream",
     originalFileSize: file.size,
@@ -121,15 +117,10 @@ export function createEncryptedFormData(
 ): FormData {
   const formData = new FormData();
 
-  // Add the file data with the original filename
   formData.append("file", preparedUpload.data, preparedUpload.originalFileName);
 
-  if (preparedUpload.encrypted && preparedUpload.encryptionMetadata) {
+  if (preparedUpload.encrypted) {
     formData.append("encrypted", "true");
-    formData.append(
-      "encryptionMetadata",
-      JSON.stringify(preparedUpload.encryptionMetadata),
-    );
     formData.append("originalFileName", preparedUpload.originalFileName);
     formData.append("originalFileType", preparedUpload.originalFileType);
     formData.append(
@@ -172,12 +163,8 @@ export async function prepareMultipleEncryptedUploads(
   return results;
 }
 
-export function estimateEncryptedSize(files: File[]): number {
-  const LEGACY_OVERHEAD_PER_FILE = 256 + 12 + 16;
+export function estimateEncryptedUploadSize(files: File[]): number {
   return files.reduce((total, file) => {
-    if (shouldUseChunkedEncryption(file.size)) {
-      return total + estimateChunkedEncryptedSize(file.size);
-    }
-    return total + file.size + LEGACY_OVERHEAD_PER_FILE;
+    return total + estimateEncryptedSize(file.size);
   }, 0);
 }

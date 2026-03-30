@@ -47,7 +47,6 @@
   "AgentOwner": "Besitzer des Agenten",
   "AIAgents": "KI-Agenten",
   "AICanMakeMistakes": "Die KI kann Fehler machen. Bitte überprüfen Sie die Antworten.",
-  "AIChatInput": "Mit KI chatten",
   "AIChatOfferHelp": "Wie kann ich helfen?",
   "AIDisabledInfoBlockAdminSaasDescription": "Die KI-Funktionen sind derzeit deaktiviert, daher kann dieser Agent weder Chats noch Aufgaben bearbeiten. Um den vollen Funktionsumfang wiederherzustellen, aktivieren Sie die KI-Funktionen in den Einstellungen von {{productName}}.",
   "AIDisabledInfoBlockAdminStandaloneDescription": "Die KI-Funktionen sind derzeit deaktiviert, daher kann dieser Agent weder Chats noch Aufgaben bearbeiten. Verbinden Sie Ihren eigenen KI-Dienst, um erweiterte Funktionen in {{productName}} freizuschalten.",

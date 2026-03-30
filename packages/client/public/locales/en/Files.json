@@ -35,6 +35,7 @@
   "ChangeAgentOwnerSelectorInfo": "Only a room admin or a {{productName}} admin can become the owner of the agent",
   "ChangeTheAgentOwner": "Change the agent owner",
   "ChangeTheRoomOwner": "Change the Room Owner",
+  "ChangeRoomOwner": "Change Room Owner",
   "Conversion": "Conversion",
   "Converting": "Converting",
   "CopyFolderItem": "The folder <2>{{title}}</2> successfully copied to <1>{{folderName}}</1>",

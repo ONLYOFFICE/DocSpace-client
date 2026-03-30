@@ -1,3 +1,5 @@
+@use "@docspace/ui-kit/styles/mixins";
+
 .servicesList {
   display: flex;
   flex-direction: column;
@@ -60,23 +62,20 @@
   font-size: 14px;
   line-height: 16px;
   font-weight: 700;
-
 }
-
-
 
 .stepConnectorSolid,
 .stepConnectorDashed {
   position: relative;
 
-  padding-left: 18px;
+  padding-inline-start: 18px;
 }
 
 .stepConnectorSolid::before,
 .stepConnectorDashed::before {
   content: "";
   position: absolute;
-  left: 18px;
+  inset-inline-start: 18px;
   top: 0;
   bottom: 0;
   width: 2px;
@@ -87,12 +86,12 @@
 }
 
 .stepConnectorDashed::before {
-  border-left: 2px dashed var(--color-scheme-main-buttons);
+  border-inline-start: 2px dashed var(--color-scheme-main-buttons);
   width: 0;
 }
 
 .stepConnectorContent {
-  padding-left: 32px;
+  padding-inline-start: 32px;
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -103,7 +102,6 @@
   font-size: 12px;
   line-height: 16px;
   font-weight: 700;
-
 }
 
 .balanceAmount {
@@ -125,7 +123,7 @@
 }
 
 .featureTilesGrid {
-  padding-left: 32px;
+  padding-inline-start: 32px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
@@ -146,23 +144,20 @@
   justify-content: center;
   flex: 0 0 auto;
   rect {
-      fill: var(--color-scheme-main-buttons);
-    }
+    fill: var(--color-scheme-main-buttons);
+  }
 
-    path {
-      fill: var(--color-scheme-main-buttons);
-    }
+  path {
+    fill: var(--color-scheme-main-buttons);
+  }
 }
 
-
 .payForSection {
-  padding-left: 32px;
+  padding-inline-start: 32px;
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
-
-
 
 .payForList {
   display: flex;
@@ -177,9 +172,6 @@
   gap: 12px;
   width: 100%;
 }
-
-
-
 
 .payForItemTextMuted {
   color: var(--services-additional-info);
@@ -236,10 +228,6 @@
   cursor: pointer;
 }
 
-
-
-
-
 .pricingSection {
   display: flex;
   flex-direction: column;
@@ -252,7 +240,6 @@
   align-items: self-end;
   gap: 8px;
   width: 100%;
-  
 }
 
 .pricingSectionTitle {
@@ -337,8 +324,6 @@
   flex: 0 0 auto;
 }
 
-
-
 .modelListSection {
   display: flex;
   flex-direction: column;
@@ -409,7 +394,7 @@
   gap: 0;
 }
 
-.modelNameWrapper{
+.modelNameWrapper {
   display: flex;
   gap: 4px;
 }
@@ -419,7 +404,6 @@
   font-weight: 600;
   color: var(--text-color);
 }
-
 
 .billingSection {
   display: flex;
@@ -566,9 +550,7 @@
   width: 100%;
   display: flex;
   gap: 8px;
-
 }
-
 
 .transfer {
   display: grid;
@@ -580,7 +562,6 @@
 
 .label {
   font-size: 14px;
-
 }
 
 .from {
@@ -606,15 +587,12 @@
   align-items: center;
   justify-content: center;
 
-
-    rect {
+  rect {
     fill: var(--color-scheme-main-buttons);
-
   }
 
   path {
     fill: var(--color-scheme-main-buttons);
-
   }
 }
 
@@ -634,10 +612,14 @@
 .arrow {
   display: flex;
   justify-content: center;
+
+  svg {
+    @include mixins.flip-in-rtl;
+  }
 }
 
-.stepDescription{
-  color: var(--payment-text-color)
+.stepDescription {
+  color: var(--payment-text-color);
 }
 
 @media (max-width: 420px) {

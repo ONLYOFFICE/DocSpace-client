@@ -42,7 +42,7 @@ export async function getSelf(): Promise<TUser | undefined> {
     if (!authToken) return;
 
     const [req] = await createRequest([`/people/@self`], [["", ""]], "GET");
-    const res = await fetch(req, { next: { revalidate: 300 } });
+    const res = await fetch(req, { next: { revalidate: 900 } });
 
     if (res.status === 401 || !res.ok) {
       logger.error(`GET /people/@self failed: ${res.status}`);

@@ -1,0 +1,206 @@
+// (c) Copyright Ascensio System SIA 2009-2026
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+"use client";
+
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useRouter } from "next/navigation";
+
+import { SearchInput } from "@docspace/ui-kit/components/search-input";
+import { InputSize } from "@docspace/ui-kit/components/text-input";
+import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
+
+import useLibrarySearch, {
+  type SearchResult,
+} from "../../_hooks/useLibrarySearch";
+import { libraryUrl } from "../../_utils/libraryUrl";
+import styles from "./LibraryLanding.module.scss";
+
+function escapeRegex(str: string) {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function highlightMatch(text: string, query: string): React.ReactNode[] {
+  if (!query.trim()) return [text];
+  const regex = new RegExp(`(${escapeRegex(query)})`, "gi");
+  const parts = text.split(regex);
+  // split with capturing group produces alternating: non-match, match, non-match, match...
+  // odd indices are always the captured (matched) group
+  return parts.map((part, i) =>
+    i % 2 === 1 ? (
+      <strong key={i} className={styles.searchResultHighlight}>
+        {part}
+      </strong>
+    ) : (
+      <React.Fragment key={i}>{part}</React.Fragment>
+    ),
+  );
+}
+
+type HeroSearchBarProps = {
+  langId: number | null;
+  roomId?: string;
+  libraryId?: string;
+};
+
+const HeroSearchBar = ({ langId, roomId, libraryId }: HeroSearchBarProps) => {
+  const { t } = useTranslation("Common");
+  const router = useRouter();
+  const { results, isLoading, hasMore, query, search, clear } =
+    useLibrarySearch(langId);
+  const [inputValue, setInputValue] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  // Debounced search triggered by SearchInput
+  const handleChange = useCallback(
+    (value: string) => {
+      setInputValue(value);
+      search(value);
+    },
+    [search],
+  );
+
+  const handleClear = useCallback(() => {
+    setInputValue("");
+    clear();
+    setIsOpen(false);
+  }, [clear]);
+
+  // Open dropdown when we have results or are loading
+  useEffect(() => {
+    if (inputValue.trim() && (results.length > 0 || isLoading)) {
+      setIsOpen(true);
+    } else if (!inputValue.trim()) {
+      setIsOpen(false);
+    }
+  }, [inputValue, results.length, isLoading]);
+
+  // Click outside to close
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        wrapperRef.current &&
+        !wrapperRef.current.contains(e.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const handleSelectResult = useCallback(
+    (result: SearchResult) => {
+      setIsOpen(false);
+      setInputValue("");
+      clear();
+
+      if (result.type === "file") {
+        router.push(
+          libraryUrl({
+            langId: langId ?? undefined,
+            categoryId: result.folderId,
+            templateId: result.id,
+            templateType: "file",
+            roomId: roomId || undefined,
+            libraryId: libraryId || undefined,
+          }),
+        );
+      } else {
+        const url = libraryUrl({
+          langId: langId ?? undefined,
+          categoryId: result.folderId || result.id,
+          roomId: roomId || undefined,
+          libraryId: libraryId || undefined,
+        });
+        router.push(`${url}${url.includes("?") ? "&" : "?"}autoOpen=1`);
+      }
+    },
+    [langId, roomId, libraryId, router, clear],
+  );
+
+  return (
+    <div className={styles.heroSearchWrapper} ref={wrapperRef}>
+      <SearchInput
+        size={InputSize.large}
+        scale
+        placeholder={t("Common:Search")}
+        value={inputValue}
+        onChange={handleChange}
+        onClearSearch={handleClear}
+        refreshTimeout={400}
+      />
+
+      {isOpen && (
+        <div className={styles.searchDropdown}>
+          {isLoading ? (
+            <div className={styles.searchLoading}>
+              {Array.from({ length: 3 }, (_, i) => (
+                <RectangleSkeleton
+                  key={i}
+                  width="80%"
+                  height="16px"
+                  borderRadius="4px"
+                  animate
+                />
+              ))}
+            </div>
+          ) : results.length === 0 ? (
+            <div className={styles.searchNoResults}>
+              {t("Common:NotFoundTitle")}
+            </div>
+          ) : (
+            <>
+              {results.map((result) => (
+                <div
+                  key={`${result.type}_${result.id}`}
+                  className={styles.searchResultItem}
+                  onClick={() => handleSelectResult(result)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") handleSelectResult(result);
+                  }}
+                >
+                  {highlightMatch(result.title, query)}
+                </div>
+              ))}
+              {hasMore && (
+                <div className={styles.searchMoreResults}>
+                  {t("Common:ShowMore")}
+                </div>
+              )}
+            </>
+          )}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default HeroSearchBar;

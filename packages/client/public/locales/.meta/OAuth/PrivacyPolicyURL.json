@@ -3,7 +3,7 @@
   "content": "Privacy policy URL",
   "content_en_sha1_hash": "52c701499a67f70c0e4d1871ad9613018818b5a8",
   "created_at": "2025-05-19T21:30:53.972Z",
-  "updated_at": "2025-05-24T07:20:45.628Z",
+  "updated_at": "2026-03-26T08:26:58.172Z",
   "comment": {
     "text": "This translation key is used to display the URL of a privacy policy. It is displayed as a label in an input field on a form, prompting users to enter their organization's privacy policy URL.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/SupportBlock.tsx",
-      "line_number": 79,
+      "line_number": 82,
       "context": "return (\n <StyledBlock>\n <BlockHeader header={t(\"SupportAndLegalInfo\")} />\n <StyledInputBlock>\n <InputGroup\n label={t(\"PrivacyPolicyURL\")}\n name=\"policy_url\"\n placeholder={t(\"EnterURL\")}\n value={policyUrlValue}\n error={\n policyError",
       "module": "/packages/client"
     }

@@ -60,7 +60,6 @@ import ukUA from "PUBLIC_DIR/images/flags/uk-UA.react.svg?url";
 import vi from "PUBLIC_DIR/images/flags/vi.react.svg?url";
 import zhCN from "PUBLIC_DIR/images/flags/zh-CN.react.svg?url";
 
-/** Lookup by locale code */
 const FLAGS_MAP: Record<string, string> = {
   "ar-SA": arSA,
   az,
@@ -99,7 +98,6 @@ const FLAGS_MAP: Record<string, string> = {
   "zh-CN": zhCN,
 };
 
-/** Lookup by language name (case-insensitive) → locale code */
 const LANGUAGE_NAME_MAP: Record<string, string> = {
   arabic: "ar-SA",
   azerbaijani: "az",
@@ -133,13 +131,7 @@ const LANGUAGE_NAME_MAP: Record<string, string> = {
   chinese: "zh-CN",
 };
 
-/**
- * Looks up a flag SVG URL by locale code (e.g. "en-US", "fr")
- * or language name (e.g. "German", "English").
- * Returns undefined if no matching flag is found.
- */
 export function getFlagUrl(key: string): string | undefined {
-  // Direct locale code match
   const direct = FLAGS_MAP[key];
   if (direct) return direct;
 

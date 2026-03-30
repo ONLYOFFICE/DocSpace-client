@@ -3,7 +3,7 @@
   "content": "Adjust the storage to the exact amount you require",
   "content_en_sha1_hash": "02f0d7dc67a720d514f48f1a93d966c14032a411",
   "created_at": "2026-03-20T09:07:41.088Z",
-  "updated_at": "2026-03-20T10:00:19.429Z",
+  "updated_at": "2026-03-26T08:26:58.230Z",
   "comment": {
     "text": "This text describes the ability to customize storage needs. It appears as a description in the UI, likely accompanying a setting or option that allows users to specify a precise storage amount. Translators should convey the idea of flexibility and control over storage allocation.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/pages/additional-storage/AdditionalStoragePage.tsx",
-      "line_number": 226,
+      "line_number": 234,
       "context": "title={t(\"Payments:AdditionalDiskStorage\")}\n priceText={t(\"PerStorage\", {\n currency: formatWalletCurrency!(storagePriceIncrement!, 2),\n amount: getConvertedSize(t, storageSizeIncrement || 0),\n })}\n description={t(\"Payments:AdjustStorageToExactAmount\")}\n />\n \n <WalletInfo shortView withoutBackground balance={balance} />\n \n {isScheduled ? (",
       "module": "/packages/client"
     }

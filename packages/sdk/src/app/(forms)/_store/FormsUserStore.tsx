@@ -43,9 +43,8 @@ class FormsUserStore {
   };
 }
 
-export const FormsUserStoreContext = React.createContext<FormsUserStore>(
-  new FormsUserStore(),
-);
+export const FormsUserStoreContext =
+  React.createContext<FormsUserStore | null>(null);
 
 export const FormsUserStoreContextProvider = ({
   children,
@@ -61,5 +60,10 @@ export const FormsUserStoreContextProvider = ({
 };
 
 export const useFormsUserStore = () => {
-  return React.useContext(FormsUserStoreContext);
+  const store = React.useContext(FormsUserStoreContext);
+  if (!store)
+    throw new Error(
+      "useFormsUserStore must be used within FormsUserStoreContextProvider",
+    );
+  return store;
 };

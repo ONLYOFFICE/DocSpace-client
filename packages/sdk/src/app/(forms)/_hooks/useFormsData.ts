@@ -46,6 +46,7 @@ import { useFormsAiAgentStore } from "../_store/FormsAiAgentStore";
 import { sectionFromPathname } from "../_utils/sectionFromPathname";
 
 const FORMS_PAGE_COUNT = 25;
+const MAX_FETCH_MORE_ITERATIONS = 5;
 
 const requestThumbnails = (files: TFile[]) => {
   const ids = files
@@ -126,7 +127,6 @@ export default function useFormsData() {
       const roomId = formsSettingsStore.roomId;
       if (!roomId) return;
 
-      // Use cached virtual folder IDs when available to skip room fetch
       const cachedId =
         virtualFolderType === FolderType.Done
           ? aiStore.doneFolderId
@@ -221,15 +221,19 @@ export default function useFormsData() {
 
   const fetchSection = useCallback(
     async (section?: FormsSection) => {
+      const sec = section ?? activeSection;
+
+      if (sec === FormsSection.Library || sec === FormsSection.Settings)
+        return;
+
       abortRef.current?.abort();
       fetchMoreAbortRef.current?.abort();
       const controller = new AbortController();
       abortRef.current = controller;
 
+      formsListStore.setSection(sec);
       formsListStore.setIsLoading(true);
       apiExhausted.current = false;
-
-      const sec = section ?? activeSection;
 
       try {
         if (sec === FormsSection.CompletedForms) {
@@ -326,8 +330,10 @@ export default function useFormsData() {
 
     try {
       let fetched: TFile[] = [];
+      let iterations = 0;
 
-      while (!apiExhausted.current && fetched.length === 0) {
+      while (!apiExhausted.current && fetched.length === 0 && iterations < MAX_FETCH_MORE_ITERATIONS) {
+        iterations += 1;
         currentPage.current += 1;
 
         const filter = FilesFilter.getDefault();
@@ -354,8 +360,10 @@ export default function useFormsData() {
         : formsListStore.items.length + fetched.length + 1;
       formsListStore.appendItems(fetched, total);
       requestThumbnails(fetched);
-    } catch {
-      // aborted or network error — ignore
+    } catch (error) {
+      if (!controller.signal.aborted && error instanceof Error) {
+        console.error("Forms fetchMore failed:", error.message);
+      }
     }
   }, [getFolderId, formsListStore]);
 

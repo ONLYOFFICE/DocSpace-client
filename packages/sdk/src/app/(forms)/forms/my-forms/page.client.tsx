@@ -33,19 +33,24 @@ import { FormsSection } from "@/types/forms";
 
 import { useFormsListStore } from "../../_store/FormsListStore";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
-import useFormsData from "../../_hooks/useFormsData";
+import { useFormsDataContext } from "../../_context/FormsDataContext";
 import FormsGrid from "../../_components/forms-grid";
 
 const MyFormsPage = () => {
   const formsListStore = useFormsListStore();
   const formsSettingsStore = useFormsSettingsStore();
-  const { fetchSection, fetchMore } = useFormsData();
+  const { fetchSection, fetchMore } = useFormsDataContext();
 
   const fetchSectionRef = React.useRef(fetchSection);
   fetchSectionRef.current = fetchSection;
 
   React.useEffect(() => {
-    if (formsListStore.items.length > 0 && !formsListStore.isLoading) return;
+    if (
+      formsListStore.section === FormsSection.MyForms &&
+      formsListStore.items.length > 0 &&
+      !formsListStore.isLoading
+    )
+      return;
     fetchSectionRef.current(FormsSection.MyForms);
   }, [formsListStore]);
 

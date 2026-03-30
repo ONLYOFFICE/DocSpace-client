@@ -3,7 +3,7 @@
   "content": "Moving forward, the full amount will be charged once per billing cycle on your regular billing date.",
   "content_en_sha1_hash": "8272e205979563b0204392645bbba49aa27ed6c4",
   "created_at": "2025-06-24T16:31:06.790Z",
-  "updated_at": "2026-03-20T09:07:45.653Z",
+  "updated_at": "2026-03-26T08:26:58.237Z",
   "comment": {
     "text": "This translation key is used to describe a partial payment schedule, indicating that future full payments will be made on a regular billing date. It appears in a UI element previewing plan upgrades and is intended to inform users about the upcoming payment structure. The context of \"PartialPaymentWithDate\" suggests it's part of a specific UI component or dialog.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/panels/additional-storage/OrderSummary.tsx",
-      "line_number": 160,
+      "line_number": 159,
       "context": "),\n endDate: storageExpiryDate,\n storageUnit: t(\"Common:Gigabyte\"),\n })}\n </Text>{\" \"}\n <Text as=\"span\">{t(\"Payments:PartialPaymentDescription\")}</Text>\n </>\n );\n \n const additionalStorage = calculateDifference(\n amount,",
       "module": "/packages/client"
     },

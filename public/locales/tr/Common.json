@@ -47,7 +47,6 @@
   "AgentOwner": "Acente sahibi",
   "AIAgents": "Yapay zeka ajanları",
   "AICanMakeMistakes": "Yapay zeka hatalar yapabilir. Lütfen yanıtları iki kez kontrol edin.",
-  "AIChatInput": "AI ile sohbet edin",
   "AIChatOfferHelp": "Size nasıl yardımcı olabilirim?",
   "AIDisabledInfoBlockAdminSaasDescription": "AI yetenekleri şu anda kapalı durumda, bu da bu aracın sohbetleri veya görevleri işleyemediği anlamına gelir. Tam işlevselliği geri yüklemek için {{productName}} ayarlarında AI özelliklerini etkinleştirin.",
   "AIDisabledInfoBlockAdminStandaloneDescription": "AI yetenekleri şu anda kapalı durumda, bu da bu aracın sohbetleri veya görevleri işleyemediği anlamına gelir. Gelişmiş özellikleri açmak için kendi AI hizmetinizi {{productName}} ile bağlayın.",

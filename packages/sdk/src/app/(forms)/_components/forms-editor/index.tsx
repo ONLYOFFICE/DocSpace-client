@@ -69,6 +69,7 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
   const iframeRef = React.useRef<HTMLIFrameElement>(null);
   const [isIframeLoaded, setIsIframeLoaded] = React.useState(false);
   const [isCompleting, setIsCompleting] = React.useState(false);
+  const completionStarted = React.useRef(false);
 
   const editorOrigin = React.useMemo(
     () =>
@@ -90,12 +91,15 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
   }, [editingFile, editorAction, editorOrigin]);
 
   const handleFormCompleted = React.useCallback(async () => {
+    if (completionStarted.current) return;
+    completionStarted.current = true;
+
     const formTitle = editingFile?.title?.replace(/\.pdf$/i, "");
 
-    // Hide iframe and show loader while we wait for the completed folder
     setIsCompleting(true);
 
     if (!roomId || !formTitle) {
+      closeEditor();
       router.replace(
         sectionToPath(FormsSection.CompletedForms) +
           (roomIdRef.current ? `?roomId=${roomIdRef.current}` : ""),
@@ -120,9 +124,6 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
           continue;
         }
 
-        // Persist doneFolderId immediately so socket subscriptions and the AI
-        // store are wired up even when the SSR page couldn't find the Done
-        // folder at request time (EC9: virtualFolderId was undefined).
         aiStore.setDoneFolderId(doneFolder.id);
 
         const doneRes = await api.files.getFolder(doneFolder.id, filter);
@@ -134,12 +135,9 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
           runInAction(() => {
             formsListStore.setItems([], 0);
             formsListStore.setFolders([]);
+            formsListStore.setIsLoading(true);
             openCompletedFolder(subfolder);
           });
-          // Layout's form-completion effect detects completedFolder going
-          // from null → non-null while editing, and handles closeEditor +
-          // router.replace — no race condition with component unmount.
-          setIsCompleting(false);
           return;
         }
 
@@ -150,6 +148,7 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
     }
 
     // Fallback: navigate to CompletedForms root
+    closeEditor();
     router.replace(
       sectionToPath(FormsSection.CompletedForms) +
         (roomIdRef.current ? `?roomId=${roomIdRef.current}` : ""),
@@ -191,6 +190,7 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
 
   React.useEffect(() => {
     setIsIframeLoaded(false);
+    completionStarted.current = false;
   }, [editingFile?.id]);
 
   React.useEffect(() => {

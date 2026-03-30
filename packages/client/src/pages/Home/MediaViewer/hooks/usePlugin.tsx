@@ -47,6 +47,10 @@ interface UsePluginProps {
   getContextMenuKeysByType: PluginStore["getContextMenuKeysByType"];
   currentMediaFileId: NumberOrString;
   playlist: PlaylistType[];
+  setMediaViewerData: (data: {
+    visible: boolean;
+    id: NumberOrString | null;
+  }) => void;
 }
 
 export const usePlugin = ({
@@ -57,6 +61,7 @@ export const usePlugin = ({
   getContextMenuKeysByType,
   currentMediaFileId,
   playlist,
+  setMediaViewerData,
 }: UsePluginProps) => {
   const isLoaded = useRef(false);
 
@@ -71,18 +76,21 @@ export const usePlugin = ({
     dispatchMessage({ message, pluginName });
   }, [pluginMediaViewerProps, pluginMediaViewerVisible, dispatchMessage]);
 
-  const onLoad = useCallback(async () => {
-    if (pluginMediaViewerProps?.onLoad && currentMediaFileId) {
-      const message = await pluginMediaViewerProps.onLoad({
-        fileId: currentMediaFileId,
-      });
+  const onLoad = useCallback(
+    async (fileId: NumberOrString) => {
+      if (pluginMediaViewerProps?.onLoad) {
+        const message = await pluginMediaViewerProps.onLoad({
+          fileId: fileId,
+        });
 
-      dispatchMessage({
-        message,
-        pluginName: pluginMediaViewerProps.pluginName,
-      });
-    }
-  }, [pluginMediaViewerProps, currentMediaFileId, dispatchMessage]);
+        dispatchMessage({
+          message,
+          pluginName: pluginMediaViewerProps.pluginName,
+        });
+      }
+    },
+    [pluginMediaViewerProps, dispatchMessage, setMediaViewerData],
+  );
 
   useEffect(() => {
     if (!pluginMediaViewerVisible) {
@@ -90,15 +98,19 @@ export const usePlugin = ({
       return;
     }
 
-    if (
-      !isLoaded.current &&
-      pluginMediaViewerProps?.onLoad &&
-      currentMediaFileId
-    ) {
+    const fileId = pluginMediaViewerProps?.fileId || currentMediaFileId;
+
+    if (!isLoaded.current && fileId) {
       isLoaded.current = true;
-      onLoad();
+      setMediaViewerData({ visible: true, id: fileId });
+      onLoad?.(fileId);
     }
-  }, [pluginMediaViewerVisible, onLoad]);
+  }, [
+    pluginMediaViewerVisible,
+    onLoad,
+    pluginMediaViewerProps,
+    currentMediaFileId,
+  ]);
 
   // Get plugin viewer content component
   const pluginContent = useMemo(() => {

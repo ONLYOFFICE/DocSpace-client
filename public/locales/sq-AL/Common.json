@@ -47,7 +47,6 @@
   "AgentOwner": "Pronari i agjentit",
   "AIAgents": "Agjentë AI",
   "AICanMakeMistakes": "AI mund të bëjë gabime. Ju lutemi kontrolloni përgjigjet.",
-  "AIChatInput": "Bisedo me IA-në",
   "AIChatOfferHelp": "Si mund të ju ndihmoj?",
   "AIDisabledInfoBlockAdminSaasDescription": "Aftësitë e inteligjencës artificiale janë aktualisht të çaktivizuara, që do të thotë se ky agjent nuk mund të përpunojë biseda ose detyra. Për të rivendosur funksionalitetin e plotë, aktivizoni veçoritë e inteligjencës artificiale në cilësimet e {{productName}}.",
   "AIDisabledInfoBlockAdminStandaloneDescription": "Aftësitë e inteligjencës artificiale janë aktualisht të çaktivizuara, që do të thotë se ky agjent nuk mund të përpunojë biseda ose detyra. Lidh shërbimin tënd të inteligjencës artificiale për të zhbllokuar veçori të përparuara në {{productName}}.",

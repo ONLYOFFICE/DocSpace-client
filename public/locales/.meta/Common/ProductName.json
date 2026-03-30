@@ -3,7 +3,7 @@
   "content": "DocSpace",
   "content_en_sha1_hash": "ce0b96eab5006b875f6c4a6c31ad73c3c86edcf5",
   "created_at": "2025-05-19T21:30:47.504Z",
-  "updated_at": "2026-03-20T09:07:45.426Z",
+  "updated_at": "2026-03-26T08:26:57.934Z",
   "comment": {
     "text": "This translation key is used for the \"From Portal\" button label, which indicates that a document can be uploaded from DocSpace. It appears in a dropdown menu on a main button in a shell interface. Translators should provide a translated version of \"From Portal\" with the product name inserted.",
     "is_auto": true,
@@ -248,6 +248,12 @@
       "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
       "line_number": 113,
       "context": "return (\n <>\n <Text className=\"user-delete\">\n {onlyGuests\n ? t(\"ActionCannotBeUndoneGuests\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"ActionCannotBeUndone\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/DisableAiServicesDialog/index.js",
+      "line_number": 51,
+      "context": "formatAiServiceCurrency = (amount) => `${amount}`,\n }) => {\n const { t } = useTranslation([\"Settings\", \"Common\"]);\n \n const effectVars = {\n productName: t(\"Common:ProductName\"),\n aiSettings: t(\"AISettings\"),\n aiServices: t(\"Common:AIServices\"),\n aiAgents: t(\"Common:AIAgents\"),\n };",
       "module": "/packages/client"
     },
     {
@@ -630,13 +636,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/DefaultProvider.tsx",
-      "line_number": 118,
+      "line_number": 115,
       "context": "const isDisabled = isOnlySystemProvider && !aiConfig?.systemAiEnabled;\n \n const getTooltipContent = () => (\n <Text fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"AISettings:PortalAiDisabledTooltip\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n );\n \n const getInitialProviderId = () => {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/DefaultProvider.tsx",
-      "line_number": 118,
+      "line_number": 115,
       "context": "const isDisabled = isOnlySystemProvider && !aiConfig?.systemAiEnabled;\n \n const getTooltipContent = () => (\n <Text fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"AISettings:PortalAiDisabledTooltip\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n );\n \n const getInitialProviderId = () => {",
       "module": "/packages/client"
     },
@@ -689,9 +695,21 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/customization-navbar.js",
+      "line_number": 91,
+      "context": "withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Common:Paid\")}\n />\n {enablePortalRename ? (\n <CategoryItem\n title={t(\"PortalRenaming\", { productName: t(\"Common:ProductName\") })}\n subtitle={t(\"PortalRenamingNavDescription\")}\n url=\"/portal-settings/customization/general/portal-renaming\"\n onClickLink={onClickLink}\n withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Common:Paid\")}",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ad-management.tsx",
       "line_number": 177,
       "context": "<Text fontSize=\"16px\" fontWeight={700}>\n {t(\"AdManagement\")}\n </Text>\n ) : null}\n <Text>\n {t(\"AdManagementDescription\", { productName: t(\"Common:ProductName\") })}\n </Text>\n <RadioButtonGroup\n className={styles.radioButtonGroup}\n fontSize=\"13px\"\n fontWeight={400}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ai-services-management.tsx",
+      "line_number": 228,
+      "context": "})}\n </Text>\n ) : null}\n <Text className=\"category-item-description\" fontSize=\"13px\">\n {t(\"AiServicesManagementDescription\", {\n productName: t(\"Common:ProductName\"),\n aiAgents: t(\"Common:AIAgents\"),\n aiSettings: t(\"AISettings\"),\n aiServices: t(\"Common:AIServices\"),\n organizationName: t(\"Common:OrganizationName\"),\n })}",
       "module": "/packages/client"
     },
     {
@@ -1247,19 +1265,19 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/pages/Backup/BackupPage.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/pages/backup/BackupPage.tsx",
       "line_number": 113,
       "context": "const confirmationDialogContent = {\n title: t(\"Common:Confirmation\"),\n \n body: !isBackupServiceOn\n ? t(\"Services:EnableBackupConfirm\", {\n productName: t(\"Common:ProductName\"),\n })\n : isFreeTariff\n ? t(\"Services:DisableBackupConfirmWithoutQuota\", {\n productName: t(\"Common:ProductName\"),\n })",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/pages/Backup/BackupPage.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/pages/backup/BackupPage.tsx",
       "line_number": 113,
       "context": "const confirmationDialogContent = {\n title: t(\"Common:Confirmation\"),\n \n body: !isBackupServiceOn\n ? t(\"Services:EnableBackupConfirm\", {\n productName: t(\"Common:ProductName\"),\n })\n : isFreeTariff\n ? t(\"Services:DisableBackupConfirmWithoutQuota\", {\n productName: t(\"Common:ProductName\"),\n })",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/pages/Backup/BackupPage.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/pages/backup/BackupPage.tsx",
       "line_number": 113,
       "context": "const confirmationDialogContent = {\n title: t(\"Common:Confirmation\"),\n \n body: !isBackupServiceOn\n ? t(\"Services:EnableBackupConfirm\", {\n productName: t(\"Common:ProductName\"),\n })\n : isFreeTariff\n ? t(\"Services:DisableBackupConfirmWithoutQuota\", {\n productName: t(\"Common:ProductName\"),\n })",
       "module": "/packages/client"
@@ -1326,14 +1344,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/adminMessage.js",
-      "line_number": 169,
-      "context": "return (\n <MainContainer>\n <LearnMoreWrapper withoutExternalLink={!administratorMessageSettingsUrl}>\n <Text>\n {t(\"AdminsMessageSettingDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <Text fontSize=\"13px\" fontWeight=\"400\" className=\"learn-subtitle\">\n <Trans t={t} i18nKey=\"SaveToApply\" />\n </Text>",
+      "line_number": 157,
+      "context": "return (\n <div className={styles.container}>\n <LearnMoreWrapper withoutExternalLink={!administratorMessageSettingsUrl}>\n <Text>\n {t(\"AdminsMessageSettingDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <Text fontSize=\"13px\" fontWeight=\"400\" className=\"learn-subtitle\">\n <Trans t={t} i18nKey=\"SaveToApply\" />\n </Text>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/devToolsAccess.tsx",
-      "line_number": 204,
-      "context": "return (\n <MainContainer>\n <LearnMoreWrapper>\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"DeveloperToolsAccessDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n {limitedDevToolsBlockHelpUrl ? (\n <Link\n className=\"link-learn-more\"",
+      "line_number": 196,
+      "context": "return (\n <div className={styles.container}>\n <LearnMoreWrapper>\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"DeveloperToolsAccessDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n {limitedDevToolsBlockHelpUrl ? (\n <Link\n className=\"link-learn-more\"",
       "module": "/packages/client"
     },
     {
@@ -1410,8 +1428,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/tfa.js",
-      "line_number": 247,
-      "context": "return (\n <MainContainer id=\"tfa-section\" ref={targetRef}>\n <LearnMoreWrapper withoutExternalLink={!tfaSettingsUrl}>\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"TwoFactorAuthEnableDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n {tfaSettingsUrl ? (\n <Link\n className=\"link-learn-more\"",
+      "line_number": 239,
+      "context": "return (\n <div id=\"tfa-section\" ref={targetRef} className={styles.container}>\n <LearnMoreWrapper withoutExternalLink={!tfaSettingsUrl}>\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"TwoFactorAuthEnableDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n {tfaSettingsUrl ? (\n <Link\n className=\"link-learn-more\"",
       "module": "/packages/client"
     },
     {
@@ -1476,20 +1494,20 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 206,
+      "line_number": 207,
       "context": "case \"CustomTitlesWelcome\":\n return t(\"CustomTitlesWelcome\");\n case \"ManagementCategorySecurity\":\n return t(\"ManagementCategorySecurity\");\n case \"PortalAccess\":\n return t(\"PortalAccess\", { productName: t(\"Common:ProductName\") });\n case \"TwoFactorAuth\":\n return t(\"TwoFactorAuth\");\n case \"ManagementCategoryIntegration\":\n return t(\"ManagementCategoryIntegration\");\n case \"ThirdPartyAuthorization\":",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 206,
+      "line_number": 207,
       "context": "case \"CustomTitlesWelcome\":\n return t(\"CustomTitlesWelcome\");\n case \"ManagementCategorySecurity\":\n return t(\"ManagementCategorySecurity\");\n case \"PortalAccess\":\n return t(\"PortalAccess\", { productName: t(\"Common:ProductName\") });\n case \"TwoFactorAuth\":\n return t(\"TwoFactorAuth\");\n case \"ManagementCategoryIntegration\":\n return t(\"ManagementCategoryIntegration\");\n case \"ThirdPartyAuthorization\":",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Section/Header/index.js",
       "line_number": 379,
-      "context": ": !standalone && isPaymentPage\n ? t(\"Billing\")\n : t(header, {\n organizationName: logoText,\n license: t(\"Common:EnterpriseLicense\"),\n productName: t(\"Common:ProductName\"),\n });\n \n // console.log(translatedHeader, header);\n \n return (",
+      "context": ": !standalone && isPaymentPage\n ? t(\"Billing\")\n : t(header, {\n organizationName: logoText,\n license: t(\"Common:EnterpriseLicense\"),\n productName: t(\"Common:ProductName\"),\n aiServices: t(\"Common:AIServices\"),\n });\n \n // console.log(translatedHeader, header);",
       "module": "/packages/client"
     },
     {
@@ -1554,7 +1572,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 569,
+      "line_number": 576,
       "context": "{\n id: \"portal-settings_catalog-javascript-sdk_portal\",\n key: \"8-1-6\",\n icon: \"\",\n link: \"docspace\",\n tKey: \"Common:ProductName\",\n },\n {\n id: \"portal-settings_catalog-javascript-sdk_uploader\",\n key: \"8-1-7\",\n icon: \"\",",
       "module": "/packages/client"
     },
@@ -2046,13 +2064,13 @@
     },
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 359,
+      "line_number": 353,
       "context": "switch (type) {\n case EmployeeType.Owner:\n return t(\"Common:Owner\");\n case EmployeeType.Admin:\n return t(\"Common:PortalAdmin\", {\n productName: t(\"Common:ProductName\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoomAdmin\");\n case EmployeeType.User:\n return t(\"Common:User\");",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 359,
+      "line_number": 353,
       "context": "switch (type) {\n case EmployeeType.Owner:\n return t(\"Common:Owner\");\n case EmployeeType.Admin:\n return t(\"Common:PortalAdmin\", {\n productName: t(\"Common:ProductName\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoomAdmin\");\n case EmployeeType.User:\n return t(\"Common:User\");",
       "module": "/packages/shared"
     },

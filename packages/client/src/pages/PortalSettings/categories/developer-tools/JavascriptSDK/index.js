@@ -219,7 +219,7 @@ export default inject(({ settingsStore }) => {
     "Files",
     "EmbeddingPanel",
     "CreateEditRoomDialog",
-    "SharingPanel",
     "Common",
   ])(observer(PortalIntegration)),
 );
+

@@ -47,7 +47,6 @@
   "AgentOwner": "Propietario del agente",
   "AIAgents": "Agentes de IA",
   "AICanMakeMistakes": "La IA puede cometer errores. Por favor, compruebe las respuestas debidamente. ",
-  "AIChatInput": "Chatear con la IA",
   "AIChatOfferHelp": "¿En qué puedo ayudarle? ",
   "AIDisabledInfoBlockAdminSaasDescription": "Las capacidades de IA están actualmente desactivadas, lo que significa que este agente no puede procesar chats ni tareas. Para restaurar la funcionalidad completa, active las funciones de IA en los ajustes de {{productName}}.",
   "AIDisabledInfoBlockAdminStandaloneDescription": "Las capacidades de IA están actualmente desactivadas, lo que significa que este agente no puede procesar chats ni tareas. Conecte su propio servicio de IA para desbloquear funciones avanzadas en {{productName}}.",

@@ -47,7 +47,6 @@
   "AgentOwner": "Agent eigenaar",
   "AIAgents": "AI-agenten",
   "AICanMakeMistakes": "AI kan fouten maken. Controleer antwoorden alsjeblieft nogmaals.",
-  "AIChatInput": "Chat met AI",
   "AIChatOfferHelp": "Hoe kan ik helpen?",
   "AIDisabledInfoBlockAdminSaasDescription": "AI-mogelijkheden zijn momenteel uitgeschakeld, wat betekent dat deze agent geen chats of taken kan verwerken. Om de volledige functionaliteit te herstellen, schakel AI-functies in de {{productName}}-instellingen in.",
   "AIDisabledInfoBlockAdminStandaloneDescription": "AI-mogelijkheden zijn momenteel uitgeschakeld, wat betekent dat deze agent geen chats of taken kan verwerken. Verbind uw eigen AI-dienst om geavanceerde functies te ontgrendelen in {{productName}}.",

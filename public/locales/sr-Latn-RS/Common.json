@@ -47,7 +47,6 @@
   "AgentOwner": "Vlasink agenata",
   "AIAgents": "AI agenti",
   "AICanMakeMistakes": "AI može da greši. Molimo vas da dodatno proverite odgovore.",
-  "AIChatInput": "Razgovatajte sa AI",
   "AIChatOfferHelp": "Kako mogu da pomognem?",
   "AIDisabledInfoBlockAdminSaasDescription": "AI funkcionalnosti su trenutno isključene, što znači da ovaj agent ne može obrađivati razgovore ni zadatke. Da biste vratili punu funkcionalnost, omogućite AI funkcije u podešavanjima {{productName}}.",
   "AIDisabledInfoBlockAdminStandaloneDescription": "AI funkcionalnosti su trenutno isključene, što znači da ovaj agent ne može obrađivati razgovore ni zadatke. Povežite sopstveni AI servis da biste otključali napredne funkcije u {{productName}}.",

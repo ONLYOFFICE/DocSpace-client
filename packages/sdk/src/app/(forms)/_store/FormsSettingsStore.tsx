@@ -97,9 +97,7 @@ class FormsSettingsStore {
 }
 
 export const FormsSettingsStoreContext =
-  React.createContext<FormsSettingsStore>(
-    null as unknown as FormsSettingsStore,
-  );
+  React.createContext<FormsSettingsStore | null>(null);
 
 export const FormsSettingsStoreContextProvider = ({
   children,
@@ -115,5 +113,10 @@ export const FormsSettingsStoreContextProvider = ({
 };
 
 export const useFormsSettingsStore = () => {
-  return React.useContext(FormsSettingsStoreContext);
+  const store = React.useContext(FormsSettingsStoreContext);
+  if (!store)
+    throw new Error(
+      "useFormsSettingsStore must be used within FormsSettingsStoreContextProvider",
+    );
+  return store;
 };

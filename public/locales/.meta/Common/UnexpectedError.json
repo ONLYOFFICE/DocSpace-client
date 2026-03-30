@@ -3,7 +3,7 @@
   "content": "An unexpected error occurred. Try again later or contact support.",
   "content_en_sha1_hash": "25ad5a8afd50db67da636bee026c36dbe54b15d6",
   "created_at": "2025-05-19T21:30:49.388Z",
-  "updated_at": "2026-03-20T09:07:45.528Z",
+  "updated_at": "2026-03-26T08:26:58.061Z",
   "comment": {
     "text": "This translation key is used to display an error message when an unexpected issue occurs while performing a specific action, such as opening a link or sending a test email. It appears in a notification dialog, typically triggered by user interaction, and informs the user that they should try again later or contact support for assistance.",
     "is_auto": true,
@@ -60,7 +60,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/pages/additional-storage/AdditionalStoragePage.tsx",
-      "line_number": 163,
+      "line_number": 171,
       "context": "const handleCancelChange = async () => {\n setIsCancelLoading(true);\n try {\n const res = await updateWalletPayment(null, 0);\n if (res === false) throw new Error(t(\"Common:UnexpectedError\"));\n await Promise.all([\n fetchPortalTariff?.(),\n fetchBalance?.(),\n fetchTransactionHistory?.(null, null, true, true, \"\", DISK_STORAGE),\n ]);",
       "module": "/packages/client"
     },
@@ -77,14 +77,14 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/pages/Backup/BackupPage.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/pages/backup/BackupPage.tsx",
       "line_number": 101,
       "context": "try {\n await setServiceState!(raw);\n } catch (error) {\n console.error(error);\n toastr.error(t(\"Common:UnexpectedError\"));\n changeServiceState!(BACKUP_SERVICE);\n } finally {\n setIsLoading(false);\n }\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/panels/additional-storage/OrderSummary.tsx",
-      "line_number": 122,
+      "line_number": 123,
       "context": "1,\n controllerRef.current.signal,\n );\n \n if (!result) {\n toastr.error(t(\"Common:UnexpectedError\"));\n return;\n }\n \n setPartialUpgradeFee!(result.amount);\n setIsPriceLoading(false);",
       "module": "/packages/client"
     },
@@ -102,8 +102,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/panels/additional-storage/StoragePlanUpgrade.tsx",
-      "line_number": 276,
-      "context": "try {\n const res = await updateWalletPayment(value, productType);\n \n if (res === false) {\n throw new Error(t(\"Common:UnexpectedError\"));\n }\n \n if (isNewSubscription) {\n navigate(\n \"/portal-settings/payments/services/disk-storage?complete=true\",",
+      "line_number": 284,
+      "context": "try {\n const res = await updateWalletPayment(value, productType);\n \n if (res === false) {\n throw new Error(t(\"Common:UnexpectedError\"));\n }\n \n if (isNewSubscription) {\n const targetPath =\n \"/portal-settings/payments/services/disk-storage?complete=true\";",
       "module": "/packages/client"
     },
     {
@@ -180,37 +180,37 @@
     },
     {
       "file_path": "/packages/client/src/store/PaymentStore.ts",
-      "line_number": 356,
+      "line_number": 359,
       "context": "try {\n await Promise.all(requests);\n this.setBasicTariffContainer();\n } catch (error) {\n // toastr.error(t(\"Common:UnexpectedError\"));\n console.error(error);\n }\n \n this.setIsUpdatingBasicSettings(false);\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/PaymentStore.ts",
-      "line_number": 356,
+      "line_number": 359,
       "context": "try {\n await Promise.all(requests);\n this.setBasicTariffContainer();\n } catch (error) {\n // toastr.error(t(\"Common:UnexpectedError\"));\n console.error(error);\n }\n \n this.setIsUpdatingBasicSettings(false);\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/PaymentStore.ts",
-      "line_number": 356,
+      "line_number": 359,
       "context": "try {\n await Promise.all(requests);\n this.setBasicTariffContainer();\n } catch (error) {\n // toastr.error(t(\"Common:UnexpectedError\"));\n console.error(error);\n }\n \n this.setIsUpdatingBasicSettings(false);\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/PaymentStore.ts",
-      "line_number": 356,
+      "line_number": 359,
       "context": "try {\n await Promise.all(requests);\n this.setBasicTariffContainer();\n } catch (error) {\n // toastr.error(t(\"Common:UnexpectedError\"));\n console.error(error);\n }\n \n this.setIsUpdatingBasicSettings(false);\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/PaymentStore.ts",
-      "line_number": 356,
+      "line_number": 359,
       "context": "try {\n await Promise.all(requests);\n this.setBasicTariffContainer();\n } catch (error) {\n // toastr.error(t(\"Common:UnexpectedError\"));\n console.error(error);\n }\n \n this.setIsUpdatingBasicSettings(false);\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/PaymentStore.ts",
-      "line_number": 356,
+      "line_number": 359,
       "context": "try {\n await Promise.all(requests);\n this.setBasicTariffContainer();\n } catch (error) {\n // toastr.error(t(\"Common:UnexpectedError\"));\n console.error(error);\n }\n \n this.setIsUpdatingBasicSettings(false);\n };",
       "module": "/packages/client"
     },
@@ -234,13 +234,13 @@
     },
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 1576,
+      "line_number": 1570,
       "context": "(\"message\" in knownError && knownError.message) ||\n \"\";\n }\n \n if (knownError?.response?.status === 502)\n message = t(\"Common:UnexpectedError\");\n \n return message ?? t(\"Common:UnexpectedError\");\n };\n \n export const getCategoryType = (location: { pathname: string }) => {",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 1576,
+      "line_number": 1570,
       "context": "(\"message\" in knownError && knownError.message) ||\n \"\";\n }\n \n if (knownError?.response?.status === 502)\n message = t(\"Common:UnexpectedError\");\n \n return message ?? t(\"Common:UnexpectedError\");\n };\n \n export const getCategoryType = (location: { pathname: string }) => {",
       "module": "/packages/shared"
     }

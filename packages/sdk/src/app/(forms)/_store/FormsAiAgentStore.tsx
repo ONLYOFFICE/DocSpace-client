@@ -103,7 +103,10 @@ class FormsAiAgentStore {
   private _folderVersion = 0;
   private _roomId: string | number = "";
   private _userKey: string | undefined = undefined;
-  private _pendingCreations = new Set<number>();
+  private _pendingCreations = new Map<
+    number,
+    Promise<FolderAgentEntry | null>
+  >();
 
   constructor() {
     makeAutoObservable(this, {
@@ -112,6 +115,8 @@ class FormsAiAgentStore {
       _roomId: false,
       _userKey: false,
       _pendingCreations: false,
+      _savePanelWidthTimer: false,
+      _createAgentForFolderImpl: false,
     } as Record<string, false>);
   }
 
@@ -213,10 +218,16 @@ class FormsAiAgentStore {
     savePanelPosition(position, this._userKey);
   };
 
+  private _savePanelWidthTimer: ReturnType<typeof setTimeout> | null = null;
+
   setPanelWidth = (width: number) => {
     this.panelWidth = width;
     if (this._roomId) {
-      savePanelWidth(this._roomId, width, this._userKey);
+      if (this._savePanelWidthTimer) clearTimeout(this._savePanelWidthTimer);
+      this._savePanelWidthTimer = setTimeout(() => {
+        savePanelWidth(this._roomId, width, this._userKey);
+        this._savePanelWidthTimer = null;
+      }, 300);
     }
   };
 
@@ -360,71 +371,82 @@ class FormsAiAgentStore {
     }
   };
 
-  createAgentForFolder = async (
+  createAgentForFolder = (
     folder: { id: number; title: string },
     files: { id: number; title: string }[],
   ): Promise<FolderAgentEntry | null> => {
-    if (this.folderAgentsMap[folder.id]) return this.folderAgentsMap[folder.id];
-    if (this._pendingCreations.has(folder.id)) return null;
-    this._pendingCreations.add(folder.id);
+    if (this.folderAgentsMap[folder.id]) return Promise.resolve(this.folderAgentsMap[folder.id]);
 
-    try {
-      let agent;
-      try {
-        agent = await createAIAgent({
-          title: folder.title,
-          attachDefaultTools: true,
-          ...(this.defaultProvider && {
-            chatSettings: {
-              providerId: this.defaultProvider.providerId,
-              modelId: this.defaultProvider.defaultModel,
-            },
-          }),
-        });
-      } catch {
-        return null;
-      }
+    const pending = this._pendingCreations.get(folder.id);
+    if (pending) return pending;
 
-      const kbFolderId = await getKnowledgeFolderId(agent.id).catch(() => null);
+    const promise = this._createAgentForFolderImpl(folder, files);
+    this._pendingCreations.set(folder.id, promise);
 
-      const entry: FolderAgentEntry = {
-        agentId: agent.id,
-        knowledgeFolderId: kbFolderId,
-      };
-
-      runInAction(() => {
-        this.folderAgentsMap = {
-          ...this.folderAgentsMap,
-          [folder.id]: entry,
-        };
-        this.persistMap();
-      });
-
-      // Sync room members → agent members + copy files to KB in parallel
-      const tasks: Promise<unknown>[] = [this.syncAgentMembers(agent.id)];
-
-      if (kbFolderId && files.length > 0) {
-        tasks.push(
-          copyFilesToAgentRoom(
-            kbFolderId,
-            files.map((f) => f.id),
-          )
-            .then(() => getKnowledgeFiles(kbFolderId))
-            .then((kbFiles) => {
-              if (kbFiles.length > 0) {
-                return vectorizeFiles(kbFiles.map((f) => f.id));
-              }
-            })
-            .catch(() => {}),
-        );
-      }
-
-      await Promise.allSettled(tasks);
-
-      return entry;
-    } finally {
+    promise.finally(() => {
       this._pendingCreations.delete(folder.id);
+    });
+
+    return promise;
+  };
+
+  private _createAgentForFolderImpl = async (
+    folder: { id: number; title: string },
+    files: { id: number; title: string }[],
+  ): Promise<FolderAgentEntry | null> => {
+    let agent;
+    try {
+      agent = await createAIAgent({
+        title: folder.title,
+        attachDefaultTools: true,
+        ...(this.defaultProvider && {
+          chatSettings: {
+            providerId: this.defaultProvider.providerId,
+            modelId: this.defaultProvider.defaultModel,
+          },
+        }),
+      });
+    } catch {
+      return null;
     }
+
+    const kbFolderId = await getKnowledgeFolderId(agent.id).catch(() => null);
+
+    const entry: FolderAgentEntry = {
+      agentId: agent.id,
+      knowledgeFolderId: kbFolderId,
+    };
+
+    runInAction(() => {
+      this.folderAgentsMap = {
+        ...this.folderAgentsMap,
+        [folder.id]: entry,
+      };
+      this.persistMap();
+    });
+
+    // Sync room members → agent members + copy files to KB in parallel
+    const tasks: Promise<unknown>[] = [this.syncAgentMembers(agent.id)];
+
+    if (kbFolderId && files.length > 0) {
+      tasks.push(
+        copyFilesToAgentRoom(
+          kbFolderId,
+          files.map((f) => f.id),
+        )
+          .then(() => getKnowledgeFiles(kbFolderId))
+          .then((kbFiles) => {
+            if (kbFiles.length > 0) {
+              return vectorizeFiles(kbFiles.map((f) => f.id));
+            }
+          })
+          .catch(() => {}),
+      );
+    }
+
+    await Promise.allSettled(tasks);
+
+    return entry;
   };
 
   private validateAgent = async (agentId: number): Promise<boolean> => {
@@ -772,9 +794,8 @@ class FormsAiAgentStore {
   };
 }
 
-export const FormsAiAgentStoreContext = React.createContext<FormsAiAgentStore>(
-  new FormsAiAgentStore(),
-);
+export const FormsAiAgentStoreContext =
+  React.createContext<FormsAiAgentStore | null>(null);
 
 export const FormsAiAgentStoreContextProvider = ({
   children,
@@ -790,5 +811,10 @@ export const FormsAiAgentStoreContextProvider = ({
 };
 
 export const useFormsAiAgentStore = () => {
-  return React.useContext(FormsAiAgentStoreContext);
+  const store = React.useContext(FormsAiAgentStoreContext);
+  if (!store)
+    throw new Error(
+      "useFormsAiAgentStore must be used within FormsAiAgentStoreContextProvider",
+    );
+  return store;
 };

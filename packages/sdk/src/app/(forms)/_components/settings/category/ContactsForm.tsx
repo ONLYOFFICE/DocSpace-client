@@ -126,22 +126,26 @@ const ContactsForm = ({
     async (userId: string, isAdmin?: boolean) => {
       if (!roomId) return;
 
-      const promises: Promise<unknown>[] = [
-        updateRoomMemberRole(roomId, {
-          invitations: [{ id: userId, access: 0 }],
-          notify: false,
-          force: false,
-          sharingMessage: "",
-        }),
-      ];
+      try {
+        const promises: Promise<unknown>[] = [
+          updateRoomMemberRole(roomId, {
+            invitations: [{ id: userId, access: 0 }],
+            notify: false,
+            force: false,
+            sharingMessage: "",
+          }),
+        ];
 
-      if (isAdmin) {
-        promises.push(updateUserType(EmployeeType.RoomAdmin, [userId]));
+        if (isAdmin) {
+          promises.push(updateUserType(EmployeeType.RoomAdmin, [userId]));
+        }
+
+        await Promise.all(promises);
+
+        onMembersChange?.();
+      } catch {
+        // silently ignore — member list will refresh on next open
       }
-
-      await Promise.all(promises);
-
-      onMembersChange?.();
     },
     [roomId, onMembersChange],
   );
@@ -150,33 +154,37 @@ const ContactsForm = ({
     async (selectedItems: TSelectorItem[]) => {
       if (!roomId || selectedItems.length === 0) return;
 
-      const isAdmin = selectorTarget === "admin";
-      const access = ShareAccessRights.RoomManager;
+      try {
+        const isAdmin = selectorTarget === "admin";
+        const access = ShareAccessRights.RoomManager;
 
-      const promises: Promise<unknown>[] = [
-        updateRoomMemberRole(roomId, {
-          invitations: selectedItems.map((item) => ({
-            id: item.id,
-            access,
-          })),
-          notify: true,
-          message: "Invitation message",
-        }),
-      ];
+        const promises: Promise<unknown>[] = [
+          updateRoomMemberRole(roomId, {
+            invitations: selectedItems.map((item) => ({
+              id: item.id,
+              access,
+            })),
+            notify: true,
+            message: t("Common:InvitationMessage"),
+          }),
+        ];
 
-      promises.push(
-        updateUserType(
-          isAdmin ? EmployeeType.Admin : EmployeeType.RoomAdmin,
-          selectedItems.map((item) => String(item.id)),
-        ),
-      );
+        promises.push(
+          updateUserType(
+            isAdmin ? EmployeeType.Admin : EmployeeType.RoomAdmin,
+            selectedItems.map((item) => String(item.id)),
+          ),
+        );
 
-      await Promise.all(promises);
+        await Promise.all(promises);
 
-      onMembersChange?.();
-      setSelectorTarget(null);
+        onMembersChange?.();
+        setSelectorTarget(null);
+      } catch {
+        // silently ignore — member list will refresh on next open
+      }
     },
-    [selectorTarget, roomId, onMembersChange],
+    [selectorTarget, roomId, onMembersChange, t],
   );
 
   return (

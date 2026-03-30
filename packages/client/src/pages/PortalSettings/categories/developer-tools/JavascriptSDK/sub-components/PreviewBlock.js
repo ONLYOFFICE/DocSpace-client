@@ -54,7 +54,6 @@ export const PreviewBlock = ({
     "EmbeddingPanel",
     "Common",
     "Translations",
-    "SharingPanel",
     "CreateEditRoomDialog",
   ]);
 
@@ -125,3 +124,4 @@ export const PreviewBlock = ({
     <GetCodeBlock t={t} codeBlock={codeBlock} isDisabled={isDisabled} />
   );
 };
+

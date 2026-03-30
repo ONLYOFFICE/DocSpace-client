@@ -1,0 +1,28 @@
+{
+  "key_path": "RoomTags",
+  "content": "<bold>{{roomName}}</bold> room tags",
+  "content_en_sha1_hash": "15f8c4482aed922ca46775cdbea247d4cbc50f77",
+  "created_at": "2026-03-26T08:26:45.756Z",
+  "updated_at": "2026-03-26T08:27:07.351Z",
+  "comment": {
+    "text": "This key displays a label indicating room tags, highlighting the room name. It appears within the tag management interface to provide context for the associated tags. Translators should ensure the translation maintains the emphasis on the room name.",
+    "is_auto": true,
+    "updated_at": "2026-03-26T08:27:07.351Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/tag-management/TagManagement.filter.tsx",
+      "line_number": 131,
+      "context": "return (\n <Text className={styles.text} fontSize=\"12px\" lineHeight=\"16px\" noSelect>\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"RoomTags\"\n values={{ roomName }}\n components={{\n bold: <strong key=\"room-name\" className={styles.roomName} />,\n }}\n />",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

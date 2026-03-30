@@ -53,14 +53,16 @@ const Settings = () => {
   const fetchMembers = React.useCallback(() => {
     if (!roomId) return;
 
-    getRoomMembers(roomId, {}).then((res) => {
-      setMembers(res.items);
+    getRoomMembers(roomId, {})
+      .then((res) => {
+        setMembers(res.items);
 
-      // Sync agent members when access list changes
-      if (aiStore.aiAgentEnabled) {
-        aiStore.syncAllAgentMembers();
-      }
-    });
+        // Sync agent members when access list changes
+        if (aiStore.aiAgentEnabled) {
+          aiStore.syncAllAgentMembers();
+        }
+      })
+      .catch(() => {});
   }, [roomId, aiStore]);
 
   React.useEffect(() => {
@@ -83,7 +85,7 @@ const Settings = () => {
     () => [
       {
         id: "payments",
-        name: "Billing",
+        name: t("Common:Billing"),
         content: <BillingForm />,
       },
       {

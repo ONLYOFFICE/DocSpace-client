@@ -118,7 +118,7 @@ export default function useFormsContextMenu() {
               model.push({
                 id: "option_ask-from-db",
                 key: "ask-from-db",
-                label: "Ask from DB",
+                label: t("Common:AskFromDB"),
                 icon: AiAgentsReactSvgUrl,
                 onClick: () => openPanelWithAgent(askFromDBAgentId, file),
                 disabled: false,

@@ -64,8 +64,9 @@
   }
 
   .settingRoomGroups {
-    padding: 20px 9px 20px 16px;
     border-bottom: 1px solid $gray-light-mid;
+
+    @include mixins.logical-padding(20px, 9px, 20px, 16px);
   }
 
   .roomGroups {
@@ -102,7 +103,8 @@
   .group {
     display: flex;
     justify-content: space-between;
-    padding: 17px 20px 17px 28px;
+
+    @include mixins.logical-padding(17px, 20px, 17px, 28px);
 
     &.groupDisabled {
       opacity: 0.5;

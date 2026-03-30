@@ -29,10 +29,7 @@
   flex-direction: column;
   gap: 16px;
   padding-bottom: 20px;
-
 }
-
-
 
 .summaryCard {
   display: flex;
@@ -73,7 +70,7 @@
 
 .divider {
   height: 1px;
-  background:  var(--aside-header-border-color);
+  background: var(--aside-header-border-color);
   width: 100%;
 }
 
@@ -86,12 +83,9 @@
 
 .balanceInfo {
   color: var(--payment-dialog-text);
-    margin-right: 0;
-    margin-left: auto;
+  margin-inline: auto 0;
 
-     &.warningColor {
+  &.warningColor {
     color: var(--warning-color);
   }
 }
-
-

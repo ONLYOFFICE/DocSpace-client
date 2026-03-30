@@ -31,11 +31,15 @@ import { makeAutoObservable } from "mobx";
 
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 
+import type { FormsSection } from "@/types/forms";
+
 class FormsListStore {
   items: TFile[] = [];
   folders: TFolder[] = [];
   total: number = 0;
   isLoading: boolean = true;
+
+  section: FormsSection | null = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -59,11 +63,16 @@ class FormsListStore {
     this.isLoading = value;
   };
 
+  setSection = (section: FormsSection | null) => {
+    this.section = section;
+  };
+
   reset = () => {
     this.items = [];
     this.folders = [];
     this.total = 0;
     this.isLoading = false;
+    this.section = null;
   };
 
   get hasMore(): boolean {
@@ -71,9 +80,8 @@ class FormsListStore {
   }
 }
 
-export const FormsListStoreContext = React.createContext<FormsListStore>(
-  new FormsListStore(),
-);
+export const FormsListStoreContext =
+  React.createContext<FormsListStore | null>(null);
 
 export const FormsListStoreContextProvider = ({
   children,
@@ -89,5 +97,10 @@ export const FormsListStoreContextProvider = ({
 };
 
 export const useFormsListStore = () => {
-  return React.useContext(FormsListStoreContext);
+  const store = React.useContext(FormsListStoreContext);
+  if (!store)
+    throw new Error(
+      "useFormsListStore must be used within FormsListStoreContextProvider",
+    );
+  return store;
 };

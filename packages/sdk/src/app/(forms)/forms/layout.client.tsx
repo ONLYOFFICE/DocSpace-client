@@ -40,17 +40,17 @@ import { useSDKConfig } from "@/providers/SDKConfigProvider";
 import { FormsSection } from "@/types/forms";
 import { sectionFromPathname, sectionToPath } from "../_utils/sectionFromPathname";
 import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
-import { useLibraryNavigationStore } from "../_store/LibraryNavigationStore";
+// LibraryNavigationStore removed — library uses URL routing now
 import { useFormsListStore } from "../_store/FormsListStore";
 import { useFormsSettingsStore } from "../_store/FormsSettingsStore";
 import { useFormsAiAgentStore } from "../_store/FormsAiAgentStore";
 import { useFormsUserStore } from "../_store/FormsUserStore";
 import useInitCommonStores, { type CommonData } from "../_hooks/useInitCommonStores";
 import useFormsData from "../_hooks/useFormsData";
+import { FormsDataProvider } from "../_context/FormsDataContext";
 import useFolderActions from "../_hooks/useFolderActions";
 import useFormsSocket from "../_hooks/useFormsSocket";
 import useFormEventHooks from "../_hooks/useFormEventHooks";
-// useUrlSync removed — FormsEditor.handleFormCompleted handles navigation directly
 import useEditorGuard from "../_hooks/useEditorGuard";
 import { MIN_SECTION_WIDTH } from "../_api/aiAgentSettings";
 import FormsSidebar from "../_components/sidebar";
@@ -79,7 +79,7 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     goBackToCompletedRoot,
     goBackToInProgressRoot,
   } = useFormsNavigationStore();
-  const libraryNav = useLibraryNavigationStore();
+  // libraryNav removed — library uses URL routing now
   const aiStore = useFormsAiAgentStore();
   const { user } = useFormsUserStore();
   const formsSettingsStore = useFormsSettingsStore();
@@ -126,11 +126,11 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     [items],
   );
 
-  const { fetchSection } = useFormsData();
+  const formsData = useFormsData();
+  const { fetchSection, fetchMore, fetchSubfolder } = formsData;
 
   useFormsSocket(socketUrl, socketFolderIds, socketFileIds, fetchSection);
   useFormEventHooks(hasManagementAccess ? aiStore : null, socketUrl);
-  // useUrlSync removed — navigation handled directly by FormsEditor
 
   const isEditing = Boolean(editingFile);
 
@@ -149,7 +149,6 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     prevIsLoading.current = isLoading;
   }, [isLoading, closeEditor]);
 
-  // AI agent init for room
   React.useEffect(() => {
     if (roomId && user?.id && hasManagementAccess) {
       aiStore.initForRoom(roomId, user.id);
@@ -157,7 +156,6 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     }
   }, [roomId, user?.id, aiStore, hasManagementAccess]);
 
-  // AI store cleanup on section/folder navigation
   const prevPathname = React.useRef(pathname);
   const prevCompletedFolderShell = React.useRef(completedFolder);
   const prevInProgressFolderShell = React.useRef(inProgressFolder);
@@ -173,32 +171,41 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     prevInProgressFolderShell.current = inProgressFolder;
 
     if (sectionChanged) {
-      // Reset subfolder state of the section we're LEAVING, not entering
       if (prevSection === FormsSection.CompletedForms) {
         goBackToCompletedRoot();
       }
       if (prevSection === FormsSection.InProgress) {
         goBackToInProgressRoot();
       }
-      if (prevSection === FormsSection.Library) {
-        libraryNav.reset();
-      }
+      // Library navigation state is now URL-based — no reset needed
 
       if (editingFile) {
+        // Clear stale data so skeletons show while new section loads
+        formsListStore.setItems([], 0);
+        formsListStore.setFolders([]);
+        formsListStore.setIsLoading(true);
         pendingEditorClose.current = true;
       } else {
         closeEditor();
       }
 
-      if (activeSection === FormsSection.Settings) {
+      if (
+        activeSection === FormsSection.Settings ||
+        activeSection === FormsSection.Library
+      ) {
         pendingEditorClose.current = false;
         closeEditor();
+        formsListStore.setIsLoading(false);
         setTimeout(() => {
           window.dispatchEvent(
             new CustomEvent(AnimationEvents.END_ANIMATION),
           );
         }, 0);
-      } else {
+      }
+
+      if (prevSection === FormsSection.Settings) {
+        formsListStore.setItems([], 0);
+        formsListStore.setFolders([]);
         formsListStore.setIsLoading(true);
       }
     }
@@ -212,9 +219,6 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
         aiStore.closePanel();
       }
 
-      // Only reset AI folder context on actual section changes, not on
-      // intermediate folder changes (e.g., form completion sets completedFolder
-      // while still on my-forms — the router hasn't navigated yet).
       if (
         sectionChanged &&
         activeSection !== FormsSection.CompletedForms &&
@@ -225,7 +229,6 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     }
   }, [pathname, completedFolder, inProgressFolder, activeSection, hasManagementAccess, aiStore, formsListStore]);
 
-  // Refresh list after manual editor close (not form completion)
   const prevEditingFile = React.useRef(editingFile);
   React.useEffect(() => {
     if (prevEditingFile.current && !editingFile && !completedFolder) {
@@ -234,16 +237,12 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     prevEditingFile.current = editingFile;
   }, [editingFile, fetchSection, completedFolder]);
 
-  // Form completion: when completedFolder is set while editor is still open,
-  // close the editor and navigate to completed-forms FROM the layout
-  // (avoids race condition of closeEditor unmounting FormsEditor before router.replace)
   const prevCompletedForFormCompletion = React.useRef(completedFolder);
   React.useEffect(() => {
     const prev = prevCompletedForFormCompletion.current;
     prevCompletedForFormCompletion.current = completedFolder;
 
     if (completedFolder && completedFolder !== prev && editingFile) {
-      // Form was just completed: completedFolder went from null to non-null while editing
       closeEditor();
       const params = new URLSearchParams();
       const rid = searchParams.get("roomId") ?? "";
@@ -265,6 +264,11 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     onCloseCreateFormDialog,
     onSaveCreateForm,
   } = useFolderActions();
+
+  const formsDataValue = React.useMemo(
+    () => ({ fetchSection, fetchMore, fetchSubfolder }),
+    [fetchSection, fetchMore, fetchSubfolder],
+  );
 
   const handleEditorNavigatedAway = React.useCallback(() => {
     closeEditor();
@@ -321,9 +325,11 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
             {isEditing && (
               <FormsEditor onNavigatedAway={handleEditorNavigatedAway} />
             )}
-            <div style={{ display: isEditing ? "none" : undefined }}>
-              {children}
-            </div>
+            <FormsDataProvider value={formsDataValue}>
+              <div style={{ display: isEditing ? "none" : undefined }}>
+                {children}
+              </div>
+            </FormsDataProvider>
           </Section.SectionBody>
         </Section>
         <AiChatButton />

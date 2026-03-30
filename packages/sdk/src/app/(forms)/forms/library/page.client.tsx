@@ -26,68 +26,82 @@
 
 "use client";
 
-import React from "react";
-import { observer } from "mobx-react";
+import React, { useCallback, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+
+import api from "@docspace/shared/api";
+import FilesFilter from "@docspace/shared/api/files/filter";
+import type { TFolder } from "@docspace/shared/api/files/types";
+import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
-import { useLibraryNavigationStore } from "../../_store/LibraryNavigationStore";
-import useLibraryData from "../../_hooks/useLibraryData";
-import FormsGrid from "../../_components/forms-grid";
+import { libraryUrl } from "../../_utils/libraryUrl";
+import LibraryCountryList from "../../_components/forms-grid/LibraryCountryList";
 
 const LibraryPage = () => {
-  const formsSettingsStore = useFormsSettingsStore();
-  const libraryNav = useLibraryNavigationStore();
-  const { fetchLibrarySection, fetchMore } = useLibraryData();
+  const router = useRouter();
+  const { libraryId, roomId } = useFormsSettingsStore();
+  const [folders, setFolders] = useState<TFolder[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // Fetch when navigation changes (language selected, subfolder opened/closed)
-  const fetchRef = React.useRef(fetchLibrarySection);
-  fetchRef.current = fetchLibrarySection;
-  React.useEffect(() => {
-    fetchRef.current();
-  }, [libraryNav.languageFolder, libraryNav.folderPath.length]);
-
-  // Back button trap: intercept browser Back to navigate up folder levels.
-  // Push a single history entry when entering depth > 0, then re-push on
-  // each popstate to keep the trap active. No extra entries are added on
-  // deeper navigation — the single sentinel is reused.
-  // Back button trap: intercept browser Back to navigate up folder levels.
-  // Push a single sentinel history entry on 0→1 transition. The popstate
-  // handler re-pushes it while depth > 1 and consumes it on 1→0.
-  const prevDepthRef = React.useRef(0);
-  React.useEffect(() => {
-    const depth = libraryNav.depth;
-    const prevDepth = prevDepthRef.current;
-    prevDepthRef.current = depth;
-
-    // Entered a subfolder from root — push one sentinel entry
-    if (depth > 0 && prevDepth === 0) {
-      history.pushState({ libraryTrap: true }, "", window.location.href);
+  useEffect(() => {
+    if (!libraryId) {
+      setIsLoading(false);
+      return;
     }
 
-    if (depth === 0) return;
+    const controller = new AbortController();
+    setIsLoading(true);
 
-    const handlePopState = () => {
-      // Going from depth 2+ → still inside subfolders, keep the trap
-      if (libraryNav.depth > 1) {
-        history.pushState({ libraryTrap: true }, "", window.location.href);
-      }
-      // depth 1 → 0: sentinel is consumed by this popstate, no re-push needed
-      libraryNav.goBack();
-    };
+    const filter = FilesFilter.getDefault();
+    filter.page = 0;
+    filter.pageCount = 100;
 
-    window.addEventListener("popstate", handlePopState);
+    api.files
+      .getFolder(libraryId, filter, controller.signal)
+      .then((res) => {
+        if (!controller.signal.aborted) {
+          setFolders(res.folders);
+          setIsLoading(false);
+        }
+      })
+      .catch(() => {
+        if (!controller.signal.aborted) {
+          setFolders([]);
+          setIsLoading(false);
+        }
+      });
 
-    return () => {
-      window.removeEventListener("popstate", handlePopState);
-    };
-  }, [libraryNav.depth, libraryNav]);
+    return () => controller.abort();
+  }, [libraryId]);
+
+  const handleOpenFolder = useCallback(
+    (folder: TFolder) => {
+      router.push(
+        libraryUrl({
+          langId: folder.id,
+          roomId: roomId || undefined,
+          libraryId: libraryId || undefined,
+        }),
+      );
+    },
+    [roomId, libraryId, router],
+  );
+
+  if (isLoading) {
+    return (
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 16, paddingTop: 32 }}>
+        <RectangleSkeleton width="320px" height="200px" borderRadius="8px" animate />
+        <RectangleSkeleton width="240px" height="24px" borderRadius="4px" animate />
+      </div>
+    );
+  }
+
+  if (folders.length === 0) return null;
 
   return (
-    <FormsGrid
-      filesSettings={formsSettingsStore.filesSettings!}
-      fetchMore={fetchMore}
-    />
+    <LibraryCountryList folders={folders} onOpenFolder={handleOpenFolder} />
   );
 };
 
-export default observer(LibraryPage);
+export default LibraryPage;

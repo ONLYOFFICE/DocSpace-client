@@ -46,7 +46,7 @@ const BillingForm = () => {
   return (
     <div className={styles.billingWrapper}>
       <Text fontSize="22px" fontWeight={600}>
-        Work in progress
+        {t("Common:WorkInProgress")}
       </Text>
       <Button
         primary

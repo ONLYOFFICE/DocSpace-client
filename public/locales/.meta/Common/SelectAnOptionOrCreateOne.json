@@ -3,7 +3,7 @@
   "content": "Select an option or create one",
   "content_en_sha1_hash": "2571b4424ae499623b7168722a07d2d539dd56dc",
   "created_at": "2026-02-19T13:36:18.706Z",
-  "updated_at": "2026-03-20T09:10:49.174Z",
+  "updated_at": "2026-03-26T08:26:58.348Z",
   "comment": {
     "text": "This text appears within a UI element, likely a button or label, offering the user two choices: select an existing option or create a new one. It's used to guide the user when they need to choose or add a tag. Translators should ensure the phrasing accurately conveys this dual action.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/tag-management/TagManagement.filter.tsx",
-      "line_number": 165,
+      "line_number": 191,
       "context": "lineHeight=\"16px\"\n noSelect\n >\n {showCreateTag\n ? t(\"Common:OrSelectFromAvailableMatches\")\n : t(\"Common:SelectAnOptionOrCreateOne\")}\n </Text>\n ) : null}\n </>\n );\n };",
       "module": "/packages/shared"
     }

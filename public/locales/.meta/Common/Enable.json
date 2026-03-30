@@ -3,7 +3,7 @@
   "content": "Enable",
   "content_en_sha1_hash": "20063ad9053289cecaa20ae630ed2dd758282a07",
   "created_at": "2025-05-19T21:30:44.923Z",
-  "updated_at": "2026-03-20T09:07:45.471Z",
+  "updated_at": "2026-03-26T08:26:57.985Z",
   "comment": {
     "text": "This translation key is used to display the label \"Enable\" on a button in a modal dialog, typically found in settings or configuration sections of an application. It appears as the primary action button in a footer section and is used for enabling a feature or functionality.",
     "is_auto": true,
@@ -23,6 +23,12 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ai-services-management.tsx",
+      "line_number": 258,
+      "context": "spacing=\"8px\"\n dataTestId=\"ai_services_management_radio_button_group\"\n options={[\n {\n id: \"enable\",\n label: t(\"Common:Enable\"),\n value: \"true\",\n dataTestId: \"ai_services_management_enable\",\n },\n {\n id: \"disabled\",",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/ThirdPartyServicesSettings/sub-components/consumerModalDialog.js",
       "line_number": 319,
       "context": "<ModalDialog.Footer>\n <Button\n primary\n size=\"normal\"\n id=\"enable-button\"\n label={isLoading ? t(\"Common:Sending\") : t(\"Common:Enable\")}\n isLoading={isLoading}\n isDisabled={isLoading || isDisabled}\n scale\n onClick={updateConsumerValues}\n testId=\"consumer_dialog_enable_button\"",
@@ -35,32 +41,32 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/pages/Backup/BackupPage.tsx",
-      "line_number": 198,
-      "context": "</>\n ) : (\n <Button\n className={styles.backupButton}\n size={ButtonSize.small}\n label={t(\"Common:Enable\")}\n onClick={handleToggleChange}\n primary\n scale\n />\n )}",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/pages/backup/BackupPage.tsx",
+      "line_number": 215,
+      "context": "className={styles.backupButton}\n size={ButtonSize.small}\n label={\n !isFreeTariff\n ? t(\"Services:EnablePaidBackup\")\n : t(\"Common:Enable\")\n }\n onClick={handleToggleChange}\n primary\n scale\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/adminMessage.js",
-      "line_number": 207,
+      "line_number": 195,
       "context": "value: \"disabled\",\n dataTestId: \"administrator_message_disabled\",\n },\n {\n id: \"admin-message-enable\",\n label: t(\"Common:Enable\"),\n value: \"enable\",\n dataTestId: \"administrator_message_enabled\",\n },\n ]}\n selected={type}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/devToolsAccess.tsx",
-      "line_number": 238,
+      "line_number": 230,
       "context": "value: \"true\",\n dataTestId: \"developer_tools_access_disabled\",\n },\n {\n id: \"dev-tools-access-enable\",\n label: t(\"Common:Enable\"),\n value: \"false\",\n dataTestId: \"developer_tools_access_enabled\",\n },\n ]}\n selected={accessEnabled}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/ipSecurity.js",
-      "line_number": 324,
+      "line_number": 295,
       "context": "value: \"disabled\",\n dataTestId: \"ip_security_disabled\",\n },\n {\n id: \"ip-security-enable\",\n label: t(\"Common:Enable\"),\n value: \"enable\",\n dataTestId: \"ip_security_enabled\",\n },\n ]}\n selected={enable ? \"enable\" : \"disabled\"}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/sessionLifetime.js",
-      "line_number": 295,
+      "line_number": 277,
       "context": "value: \"disabled\",\n dataTestId: \"session_lifetime_disabled\",\n },\n {\n id: \"session-lifetime-enable\",\n label: t(\"Common:Enable\"),\n value: \"enable\",\n dataTestId: \"session_lifetime_enabled\",\n },\n ]}\n selected={type ? \"enable\" : \"disabled\"}",
       "module": "/packages/client"
     },

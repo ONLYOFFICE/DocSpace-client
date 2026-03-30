@@ -107,32 +107,40 @@ const AiChatPanel = ({ rootRef }: AiChatPanelProps) => {
   const emptyScreenText = React.useMemo(() => {
     if (!pendingAttachmentFile?.title) return undefined;
     const name = pendingAttachmentFile.title.replace(/\.[^.]+$/, "");
-    return `Ask anything about "${name}" using the submitted data`;
-  }, [pendingAttachmentFile?.title]);
+    return t("Common:AskAboutFormData", { name });
+  }, [pendingAttachmentFile?.title, t]);
 
   const askFromDBSamples = React.useMemo(
     () =>
       pendingAttachmentFile?.title
         ? [
             {
-              title: "Total submissions",
-              prompt: `How many times has the form "${pendingAttachmentFile.title}" been submitted?`,
+              title: t("Common:TotalSubmissions"),
+              prompt: t("Common:TotalSubmissionsPrompt", {
+                formName: pendingAttachmentFile.title,
+              }),
             },
             {
-              title: "Recent responses",
-              prompt: `Show me the most recent submissions for "${pendingAttachmentFile.title}"`,
+              title: t("Common:RecentResponses"),
+              prompt: t("Common:RecentResponsesPrompt", {
+                formName: pendingAttachmentFile.title,
+              }),
             },
             {
-              title: "Who filled it out",
-              prompt: `List all people who have filled out the form "${pendingAttachmentFile.title}"`,
+              title: t("Common:WhoFilledItOut"),
+              prompt: t("Common:WhoFilledItOutPrompt", {
+                formName: pendingAttachmentFile.title,
+              }),
             },
             {
-              title: "Summary",
-              prompt: `Give me a brief summary of all collected data from "${pendingAttachmentFile.title}"`,
+              title: t("Common:Summary"),
+              prompt: t("Common:SummaryPrompt", {
+                formName: pendingAttachmentFile.title,
+              }),
             },
           ]
         : undefined,
-    [pendingAttachmentFile?.title],
+    [pendingAttachmentFile?.title, t],
   );
 
   const handleResizeEnd = React.useCallback(

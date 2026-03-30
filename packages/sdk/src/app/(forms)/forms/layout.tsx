@@ -42,6 +42,8 @@ import {
 
 import FormsShell from "./layout.client";
 
+export const dynamic = "force-dynamic";
+
 export default async function FormsServerLayout({
   children,
 }: {
@@ -55,8 +57,6 @@ export default async function FormsServerLayout({
   const authToken = cookieStore.get("asc_auth_key")?.value || "";
   const pathname = hdrs.get(PATHNAME_HEADER) ?? "";
 
-  // Room data (security, access, virtual folders) is always needed.
-  // File list is only useful for my-forms initial hydration.
   const isMyFormsRoute =
     pathname.endsWith("/my-forms") ||
     pathname.endsWith("/forms") ||
@@ -97,8 +97,6 @@ export default async function FormsServerLayout({
     (f) => f.type === FolderType.InProgress,
   )?.id;
 
-  // Initial my-forms files for first-mount hydration (avoids extra client fetch).
-  // Only pass files for my-forms route — other sections don't use them.
   const initialFiles = isMyFormsRoute ? roomData?.files : undefined;
   const initialTotal = isMyFormsRoute ? roomData?.total : undefined;
 

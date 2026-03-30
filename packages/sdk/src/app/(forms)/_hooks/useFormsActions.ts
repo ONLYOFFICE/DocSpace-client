@@ -26,7 +26,7 @@
 
 "use client";
 
-import { useCallback } from "react";
+import { useCallback, useRef } from "react";
 
 import {
   deleteFile,
@@ -97,8 +97,14 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
     [formsListStore, t],
   );
 
+  const downloadAbortRef = useRef<AbortController | null>(null);
+
   const downloadFolder = useCallback(
     async (folderId: number) => {
+      downloadAbortRef.current?.abort();
+      const controller = new AbortController();
+      downloadAbortRef.current = controller;
+
       try {
         const ops = await downloadFiles([], [folderId], "");
         const opId = ops[0]?.id;
@@ -106,8 +112,10 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
 
         const poll = async (): Promise<string | null> => {
           for (let i = 0; i < 60; i++) {
+            if (controller.signal.aborted) return null;
             const progress = await getProgress(opId);
             const op = progress[0];
+            if (controller.signal.aborted) return null;
             if (op?.error) throw new Error(op.error);
             if (op?.finished && op?.url) return op.url;
             await new Promise((r) => setTimeout(r, 1000));
@@ -116,9 +124,11 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
         };
 
         const url = await poll();
-        if (url) window.open(url, "_blank");
+        if (url && !controller.signal.aborted) window.open(url, "_blank");
       } catch (error) {
-        toastr.error(error as string);
+        if (!controller.signal.aborted) {
+          toastr.error(error as string);
+        }
       }
     },
     [t],

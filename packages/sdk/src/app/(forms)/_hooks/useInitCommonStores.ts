@@ -36,6 +36,7 @@ import type {
 import type { TUser } from "@docspace/shared/api/people/types";
 import type { TDefaultProvider } from "@docspace/shared/api/ai/types";
 import { ShareAccessRights } from "@docspace/ui-kit/enums";
+import { FormsSection } from "@/types/forms";
 
 import { useFilesSettingsStore } from "@/app/(docspace)/_store/FilesSettingsStore";
 import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
@@ -74,10 +75,6 @@ export default function useInitCommonStores(commonData: CommonData): boolean {
   const [isReady, setIsReady] = useState(false);
   const initialised = useRef(false);
 
-  // useLayoutEffect runs synchronously BEFORE child useEffects, guaranteeing
-  // that MobX stores are populated before page components check them.
-  // This is critical: React fires child effects before parent effects,
-  // so a regular useEffect here would run AFTER MyFormsPage's mount effect.
   useLayoutEffect(() => {
     if (initialised.current) return;
     initialised.current = true;
@@ -108,7 +105,6 @@ export default function useInitCommonStores(commonData: CommonData): boolean {
       formsAiAgentStore.setDefaultProvider(commonData.defaultProvider);
     }
 
-    // Pre-cache virtual folder IDs so pages don't need extra SSR fetches
     if (commonData.doneFolderId) {
       formsAiAgentStore.setDoneFolderId(commonData.doneFolderId);
     }
@@ -116,12 +112,12 @@ export default function useInitCommonStores(commonData: CommonData): boolean {
       formsSettingsStore.setInProgressFolderId(commonData.inProgressFolderId);
     }
 
-    // Hydrate initial my-forms file list from layout SSR (first load only)
     if (commonData.initialFiles) {
       const roomId = Number(commonData.roomId);
       const files = roomId
         ? commonData.initialFiles.filter((f) => f.folderId === roomId)
         : commonData.initialFiles;
+      formsListStore.setSection(FormsSection.MyForms);
       formsListStore.setItems(files, commonData.initialTotal ?? files.length);
       formsListStore.setFolders([]);
       formsListStore.setIsLoading(false);

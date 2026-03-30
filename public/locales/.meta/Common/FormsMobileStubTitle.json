@@ -1,0 +1,21 @@
+{
+  "key_path": "FormsMobileStubTitle",
+  "content": "Screen size too small",
+  "content_en_sha1_hash": "675f88a767ab483f9a8075f8a9928ec30a6fe448",
+  "created_at": "2026-03-26T08:26:35.506Z",
+  "updated_at": "2026-03-26T08:26:35.506Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

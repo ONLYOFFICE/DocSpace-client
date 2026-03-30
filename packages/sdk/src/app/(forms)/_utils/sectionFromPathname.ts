@@ -38,12 +38,6 @@ const SECTION_MAP: Record<string, FormsSection> = {
   [FormsSection.Settings]: FormsSection.Settings,
 };
 
-/**
- * Maps a URL pathname to the corresponding FormsSection enum value.
- *
- * usePathname() in Next.js App Router returns the path without basePath,
- * so "/sdk" prefix stripping is not needed.
- */
 export function sectionFromPathname(pathname: string): FormsSection {
   const formsIndex = pathname.indexOf(FORMS_PREFIX);
 
@@ -54,12 +48,6 @@ export function sectionFromPathname(pathname: string): FormsSection {
   return SECTION_MAP[segment] ?? FormsSection.MyForms;
 }
 
-/**
- * Returns the path segment for a given FormsSection, without a basePath
- * prefix (Next.js adds the configured basePath automatically).
- *
- * Example: FormsSection.MyForms → "/forms/my-forms"
- */
 export function sectionToPath(section: FormsSection): string {
   return `${FORMS_PREFIX.slice(0, -1)}/${section}`;
 }

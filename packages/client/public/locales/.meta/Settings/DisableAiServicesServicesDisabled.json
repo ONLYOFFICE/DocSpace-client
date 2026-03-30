@@ -1,0 +1,28 @@
+{
+  "key_path": "DisableAiServicesServicesDisabled",
+  "content": "The paid {{aiServices}} will be deactivated.",
+  "content_en_sha1_hash": "643e1bbcdfeeb50d81382ef8e043be2d9fa556ea",
+  "created_at": "2026-03-26T08:26:46.857Z",
+  "updated_at": "2026-03-26T08:28:20.146Z",
+  "comment": {
+    "text": "This key displays a message within a dialog informing the user that paid AI services are being deactivated. It's used to explain the consequence of disabling AI services, likely in a settings or configuration dialog. The `{{aiServices}}` variable should be replaced with the specific name of the AI service.",
+    "is_auto": true,
+    "updated_at": "2026-03-26T08:28:20.146Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DisableAiServicesDialog/index.js",
+      "line_number": 59,
+      "context": "aiAgents: t(\"Common:AIAgents\"),\n };\n \n const effects = [\n t(\"DisableAiServicesSettingsHidden\", effectVars),\n t(\"DisableAiServicesServicesDisabled\", effectVars),\n t(\"DisableAiServicesAgentsDisabled\", effectVars),\n ];\n \n return (\n <ModalDialog",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

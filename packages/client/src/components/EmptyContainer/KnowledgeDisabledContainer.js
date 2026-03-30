@@ -94,4 +94,5 @@ export default inject(({ settingsStore, userStore, aiRoomStore }) => {
     setKnowledgeId: aiRoomStore.setKnowledgeId,
     setCurrentTab: aiRoomStore.setCurrentTab,
   };
-})(withTranslation(["Commom", "AIRoom"])(observer(KnowledgeDisabledContainer)));
+})(withTranslation(["Common", "AIRoom"])(observer(KnowledgeDisabledContainer)));
+

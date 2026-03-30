@@ -115,6 +115,7 @@ const FilesMediaViewer = (props) => {
       currentMediaFileId,
       playlist,
       dispatchMessage,
+      setMediaViewerData,
     });
 
   useEffect(() => {
@@ -237,6 +238,13 @@ const FilesMediaViewer = (props) => {
     if (pluginMediaViewerVisible) {
       await handlePluginClose();
       setMediaViewerData({ visible: false, id: null });
+
+      const targetFile = files.find((item) => item.id === currentMediaFileId);
+
+      if (targetFile) {
+        setBufferSelection(targetFile);
+        setScrollToItem({ id: targetFile.id, type: "file" });
+      }
       return;
     }
 

@@ -34,7 +34,10 @@ import type {
 } from "@onlyoffice/docspace-plugin-sdk";
 
 import FilesSelector from "@docspace/ui-kit/selectors/Files";
-import { TSelectorHeader } from "@docspace/ui-kit/components/selector";
+import {
+  THeaderBackButton,
+  TSelectorHeader,
+} from "@docspace/ui-kit/components/selector";
 import { FilesSelectorProps } from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
 import { isDesktop, isTablet } from "@docspace/shared/utils";
 import { DeviceType, FolderType } from "@docspace/shared/enums";
@@ -81,6 +84,7 @@ const PluginFilesSelector = ({
     submitButtonLabel,
     isRoomsOnly,
     isMultiSelect,
+    filterParam,
   } = selectorProps;
 
   const onLoadEvent = useEffectEvent(async () => {
@@ -155,14 +159,39 @@ const PluginFilesSelector = ({
     return isDisabled;
   };
 
+  const {
+    onBackClick: onBackClickCb,
+    withBackButton,
+    label,
+    isCloseable,
+  } = selectorProps.headerProps || {};
+
+  const onBackClick: THeaderBackButton["onBackClick"] = async () => {
+    if (!onBackClickCb) return;
+    const message = await onBackClickCb();
+    dispatchMessage({ message, pluginName });
+  };
+
+  const headerBackButtonProps: THeaderBackButton = withBackButton
+    ? {
+        withoutBackButton: false,
+        onBackClick,
+        withoutBorder: false,
+      }
+    : {
+        withoutBackButton: undefined,
+        onBackClick: undefined,
+        withoutBorder: undefined,
+      };
+
   const headerProps: TSelectorHeader = selectorProps.withHeader
     ? {
         withHeader: true,
         headerProps: {
-          headerLabel:
-            selectorProps.headerProps?.label ?? t("Common:SelectFile"),
-          isCloseable: selectorProps.headerProps?.isCloseable,
+          headerLabel: label ?? t("Common:SelectFile"),
+          isCloseable: isCloseable,
           onCloseClick: onCancel,
+          ...headerBackButtonProps,
         },
       }
     : {};
@@ -178,7 +207,6 @@ const PluginFilesSelector = ({
       getIcon={getIcon!}
       withSearch={!!withSearch}
       withBreadCrumbs={!!withBreadCrumbs}
-      withoutBackButton
       withCancelButton={!!withCancelButton}
       cancelButtonLabel={cancelButtonLabel ?? t("Common:CancelButton")}
       submitButtonLabel={submitButtonLabel ?? t("Common:AddButton")}
@@ -207,6 +235,8 @@ const PluginFilesSelector = ({
       isMultiSelect={!!isMultiSelect}
       renderInPortal
       {...headerProps}
+      withoutBackButton={false}
+      filterParam={filterParam}
     />
   );
 };

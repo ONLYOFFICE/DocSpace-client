@@ -260,6 +260,6 @@ export const Component = inject(({ settingsStore }) => {
     "Common",
     "Files",
     "Translations",
-    "SharingPanel",
   ])(observer(DocSpace)),
 );
+

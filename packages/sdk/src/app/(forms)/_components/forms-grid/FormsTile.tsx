@@ -48,6 +48,7 @@ import useFormsActions from "../../_hooks/useFormsActions";
 import useFormsContextMenu from "../../_hooks/useFormsContextMenu";
 import { useFormsListStore } from "../../_store/FormsListStore";
 import { sectionFromPathname } from "../../_utils/sectionFromPathname";
+import { getThumbnail, setThumbnail } from "../../_utils/thumbnailCache";
 import FormStatusBadge from "./FormStatusBadge";
 import styles from "./FormsTile.module.scss";
 
@@ -55,8 +56,6 @@ type FormsTileProps = {
   item: TFileItem;
   getIcon: TGetIcon;
 };
-
-const thumbnailCache = new Map<string, string>();
 
 const FormsTile = ({ item, getIcon }: FormsTileProps) => {
   const tileRef = useRef<HTMLDivElement>(null);
@@ -72,14 +71,15 @@ const FormsTile = ({ item, getIcon }: FormsTileProps) => {
     ? item.thumbnailUrl.replace(/^https?:\/\/[^/]+/, "")
     : "";
   const [blobThumbnail, setBlobThumbnail] = useState(
-    () => (thumbUrl && thumbnailCache.get(thumbUrl)) || "",
+    () => (thumbUrl && getThumbnail(thumbUrl)) || "",
   );
 
   useEffect(() => {
     if (!thumbUrl || item.providerItem) return;
 
-    if (thumbnailCache.has(thumbUrl)) {
-      setBlobThumbnail(thumbnailCache.get(thumbUrl)!);
+    const cached = getThumbnail(thumbUrl);
+    if (cached) {
+      setBlobThumbnail(cached);
       return;
     }
 
@@ -92,7 +92,7 @@ const FormsTile = ({ item, getIcon }: FormsTileProps) => {
       .then((blob) => {
         if (cancelled) return;
         const blobUrl = URL.createObjectURL(blob);
-        thumbnailCache.set(thumbUrl, blobUrl);
+        setThumbnail(thumbUrl, blobUrl);
         setBlobThumbnail(blobUrl);
       })
       .catch(() => {});

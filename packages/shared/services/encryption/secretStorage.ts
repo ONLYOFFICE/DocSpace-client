@@ -31,6 +31,7 @@ const STORE_NAME = "keys";
 const DB_VERSION = 1;
 const PRIVATE_KEY_ID = "user_private_key";
 const TIMESTAMP_KEY = "cache_timestamp";
+const USER_ID_KEY = "cache_user_id";
 
 type UnlockRequestCallback = () => Promise<CryptoKey | null>;
 let globalUnlockRequestHandler: UnlockRequestCallback | null = null;
@@ -138,17 +139,16 @@ function isIndexedDBAvailable(): boolean {
 // ============================================================================
 
 export const SecretStorageService = {
-  async cacheDecryptedKey(privateKey: CryptoKey): Promise<void> {
+  async cacheDecryptedKey(
+    privateKey: CryptoKey,
+    userId?: string,
+  ): Promise<void> {
     if (!isIndexedDBAvailable()) {
       console.warn("IndexedDB not available — key will not be cached");
       return;
     }
 
     try {
-      // If the key is already non-extractable (the normal path from
-      // decryptPrivateKey), store it directly. If extractable (from
-      // restorePrivateKey or generateKeyPair), re-import as non-extractable
-      // so XSS cannot call exportKey on the cached handle.
       let keyToStore = privateKey;
 
       if (privateKey.extractable) {
@@ -161,7 +161,6 @@ export const SecretStorageService = {
           false,
           ["deriveKey", "deriveBits"],
         );
-        // Best-effort zeroing of raw key material
         new Uint8Array(pkcs8).fill(0);
       }
 
@@ -169,6 +168,9 @@ export const SecretStorageService = {
       try {
         await idbPut(db, PRIVATE_KEY_ID, keyToStore);
         await idbPut(db, TIMESTAMP_KEY, Date.now());
+        if (userId) {
+          await idbPut(db, USER_ID_KEY, userId);
+        }
       } finally {
         db.close();
       }
@@ -177,7 +179,7 @@ export const SecretStorageService = {
     }
   },
 
-  async getCachedKey(): Promise<CryptoKey | null> {
+  async getCachedKey(userId?: string): Promise<CryptoKey | null> {
     if (!isIndexedDBAvailable()) return null;
 
     try {
@@ -193,6 +195,15 @@ export const SecretStorageService = {
           return null;
         }
 
+        // If userId provided, verify the cached key belongs to this user
+        if (userId) {
+          const cachedUserId = await idbGet<string>(db, USER_ID_KEY);
+          if (cachedUserId && cachedUserId !== userId) {
+            await idbClear(db);
+            return null;
+          }
+        }
+
         const key = await idbGet<CryptoKey>(db, PRIVATE_KEY_ID);
         return key ?? null;
       } finally {
@@ -204,12 +215,11 @@ export const SecretStorageService = {
     }
   },
 
-  async hasDecryptedKey(): Promise<boolean> {
+  async hasDecryptedKey(userId?: string): Promise<boolean> {
     if (!isIndexedDBAvailable()) return false;
     try {
       const db = await openDB();
       try {
-        // Check TTL — consistent with getCachedKey behavior
         const timestamp = await idbGet<number>(db, TIMESTAMP_KEY);
         if (
           !timestamp ||
@@ -218,6 +228,15 @@ export const SecretStorageService = {
         ) {
           return false;
         }
+
+        // If userId provided, verify ownership
+        if (userId) {
+          const cachedUserId = await idbGet<string>(db, USER_ID_KEY);
+          if (cachedUserId && cachedUserId !== userId) {
+            return false;
+          }
+        }
+
         const key = await idbGet<CryptoKey>(db, PRIVATE_KEY_ID);
         return key !== undefined;
       } finally {

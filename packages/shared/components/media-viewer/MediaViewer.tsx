@@ -428,16 +428,14 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
 
   const fetchAndDecryptFile = useCallback(
     async (src: string, fileId: number, title: string) => {
-      if (!userId) {
-        onDecryptionError?.("User ID not available for decryption");
-        return;
-      }
-
       EncryptedAbortSignalRef.current?.abort();
       EncryptedAbortSignalRef.current = new AbortController();
       setIsDecrypting(true);
 
       try {
+        if (!userId) {
+          throw new Error("User ID not available for decryption");
+        }
         const encryptionInfo = await getFileEncryptionAccess(fileId);
         const userFileKey = encryptionInfo.fileKeys?.find(
           (k) => k.userId === userId || k.userId === String(userId),

@@ -254,6 +254,16 @@ const PassphraseDialog: React.FC<PassphraseDialogProps> = ({
 
   const isDisabled = !isValid || isLoading;
 
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (e.key === "Enter" && !isDisabled) {
+        e.preventDefault();
+        handleSubmit();
+      }
+    },
+    [isDisabled, handleSubmit],
+  );
+
   return (
     <ModalDialog
       zIndex={1010}
@@ -266,7 +276,7 @@ const PassphraseDialog: React.FC<PassphraseDialogProps> = ({
       <ModalDialog.Header>{dialogTitle}</ModalDialog.Header>
 
       <ModalDialog.Body>
-        <div className={styles.container}>
+        <div className={styles.container} onKeyDown={handleKeyDown}>
           <Text className={styles.description}>{dialogDescription}</Text>
 
           {errorMessage && (

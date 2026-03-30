@@ -281,23 +281,18 @@ class UploadDataStore {
   };
 
   getUserEncryptionKeys = () => {
-    let keys = this.userStore?.encryptionKeys;
-
-    if (!keys || keys.length === 0) {
-      keys = this.settingsStore?.encryptionKeys;
-    }
-
+    const keys = this.userStore?.encryptionKeys;
     const userId = this.userStore?.user?.id;
 
-    if (!keys || keys.length === 0 || !userId) {
+    if (!Array.isArray(keys) || keys.length === 0 || !userId) {
       return { publicKey: null, userId: null, publicKeyId: null };
     }
 
     const primaryKey = keys[0];
     return {
-      publicKey: primaryKey.publicKey || null,
+      publicKey: primaryKey?.publicKey || null,
       userId: String(userId),
-      publicKeyId: primaryKey.id || null,
+      publicKeyId: primaryKey?.id || null,
     };
   };
 
@@ -1907,9 +1902,7 @@ class UploadDataStore {
         );
 
         if (prepared.encrypted) {
-          // Server receives obfuscated UUID name; real name is inside DSE3 header
-          fileName = prepared.uploadFileName;
-          fileToUpload = new File([prepared.data], fileName, {
+          fileToUpload = new File([prepared.data], file.name, {
             type: "application/octet-stream",
             lastModified: file.lastModified,
           });

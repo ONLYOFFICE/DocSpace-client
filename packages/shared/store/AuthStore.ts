@@ -229,6 +229,15 @@ class AuthStore {
           insertDataLayer(user.id);
         }
 
+        // Load encryption keys for the authenticated user (needed for private rooms)
+        if (user?.id && this.isAuthenticated) {
+          requests.push(
+            this.userStore?.getEncryptionKeys().catch(() => {
+              // Encryption keys not available — not critical for app init
+            }),
+          );
+        }
+
         if (this.isAuthenticated && !skipRequest) {
           if (!this.settingsStore?.passwordSettings) {
             if (!isPortalRestore && !isPortalDeactivated) {
@@ -476,6 +485,17 @@ class AuthStore {
     }
 
     this.isLogout = true;
+
+    // Clear encryption state: MobX store + IndexedDB cache
+    this.userStore?.clearEncryptionKeys();
+    try {
+      const { SecretStorageService } = await import(
+        "../services/encryption/secretStorage"
+      );
+      await SecretStorageService.lockEncryption();
+    } catch {
+      // Encryption module may not be loaded — safe to ignore
+    }
 
     const isDesktop = this.settingsStore?.isDesktopClient;
     const isFrame = this.settingsStore?.isFrame;

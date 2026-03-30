@@ -86,12 +86,20 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
 
   const hasConfiguredKey = !!userKeys?.publicKey && !!userKeys?.privateKeyEnc;
 
-  // Check if key is already cached on mount
+  // Check cached key on mount AND when userKeys changes (login/logout/user switch)
   useEffect(() => {
-    SecretStorageService.hasDecryptedKey().then((has) => {
-      if (has) setIsUnlocked(true);
+    if (!hasConfiguredKey) {
+      setIsUnlocked(false);
+      setShowPassphraseDialog(false);
+      setPendingResolve(null);
+      return;
+    }
+
+    // Pass userId so IndexedDB can verify the cached key belongs to this user
+    SecretStorageService.hasDecryptedKey(userKeys?.userId).then((has) => {
+      setIsUnlocked(has);
     });
-  }, []);
+  }, [hasConfiguredKey, userKeys?.publicKey, userKeys?.userId]);
 
   // Clear error when dialog is closed
   useEffect(() => {
@@ -117,7 +125,7 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
           passphrase,
         );
 
-        await SecretStorageService.cacheDecryptedKey(privateKey);
+        await SecretStorageService.cacheDecryptedKey(privateKey, userKeys.userId);
         setIsUnlocked(true);
 
         return true;
@@ -147,27 +155,33 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
     return SecretStorageService.getCachedKey();
   }, []);
 
-  const requireUnlock = useCallback((): Promise<CryptoKey | null> => {
-    if (isUnlocked) {
-      return SecretStorageService.getCachedKey();
-    }
+  const requireUnlock = useCallback(async (): Promise<CryptoKey | null> => {
+    // Try cached key first (even if isUnlocked — it may have expired)
+    const cachedKey = await SecretStorageService.getCachedKey(
+      userKeys?.userId,
+    );
+    if (cachedKey) return cachedKey;
 
+    // No cached key — need to prompt for passphrase
     if (!hasConfiguredKey) {
-      return Promise.resolve(null);
+      return null;
     }
 
     if (!PassphraseDialog) {
       console.warn(
         "Cannot prompt for passphrase: no PassphraseDialog component provided",
       );
-      return Promise.resolve(null);
+      return null;
     }
+
+    // Reset unlock state since cache is empty
+    setIsUnlocked(false);
 
     return new Promise((resolve) => {
       setPendingResolve(() => resolve);
       setShowPassphraseDialog(true);
     });
-  }, [isUnlocked, hasConfiguredKey, PassphraseDialog]);
+  }, [hasConfiguredKey, PassphraseDialog, userKeys?.userId]);
 
   useEffect(() => {
     registerUnlockHandler(requireUnlock);

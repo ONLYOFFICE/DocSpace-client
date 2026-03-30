@@ -1259,6 +1259,7 @@
   "EncryptionDecryptAccessDenied": "You don't have access to decrypt this file",
   "EncryptionError": "An error occurred during the encryption operation",
   "EncryptionFetchFileFailed": "Failed to fetch file: {{status}}",
+  "EncryptionKeysNotConfigured": "Encryption keys are not configured. Set up your keys in Profile settings to work with encrypted files.",
   "EncryptionKeyDeleted": "Encryption key deleted successfully",
   "EncryptionKeyExported": "Encryption key exported successfully",
   "EncryptionKeyGenerated": "Encryption key generated successfully",

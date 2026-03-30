@@ -33,7 +33,7 @@ import api from "@docspace/shared/api";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { isDesktop } from "@docspace/shared/utils";
 import FilesFilter from "@docspace/shared/api/files/filter";
-import { FolderType, RoomsType } from "@docspace/shared/enums";
+import { FolderType, RoomsType, RoomsTypePrivate } from "@docspace/shared/enums";
 import { CategoryType } from "@docspace/shared/constants";
 import {
   createTemplate,
@@ -611,12 +611,13 @@ class CreateEditRoomStore {
 
     // RoomsTypePrivate (13) is a client-only virtual type for UI.
     // Server expects CustomRoom (5) with private: true flag.
-    const serverRoomType = isPrivate ? RoomsType.CustomRoom : type;
+    const isPrivateRoom = isPrivate || type === RoomsTypePrivate;
+    const serverRoomType = isPrivateRoom ? RoomsType.CustomRoom : type;
 
     const createRoomData = {
       roomId,
       roomType: serverRoomType,
-      private: isPrivate,
+      private: isPrivateRoom,
       title: title || t("Common:NewRoom"),
       ...(isThirdPartyRoom && {
         createAsNewFolder: createAsNewFolder ?? true,

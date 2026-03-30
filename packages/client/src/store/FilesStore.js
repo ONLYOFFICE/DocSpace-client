@@ -67,6 +67,7 @@ import {
 } from "@docspace/shared/utils/common";
 
 import { toastr } from "@docspace/ui-kit/components/toast";
+import { getI18n } from "react-i18next";
 import config from "PACKAGE_FILE";
 import {
   LOADER_TIMEOUT,
@@ -1242,6 +1243,13 @@ class FilesStore {
       if (isDesktopClient) {
         requests.push(getIsEncryptionSupport(), getEncryptionKeys());
       }
+
+      // Load user encryption keys for private rooms (web and desktop)
+      if (this.userStore?.getEncryptionKeys) {
+        requests.push(
+          this.userStore.getEncryptionKeys().catch(() => {}),
+        );
+      }
     }
     requests.push(getFilesSettings());
 
@@ -1836,6 +1844,16 @@ class FilesStore {
           !this.publicRoomStore.isPublicRoom
         ) {
           await this.publicRoomStore.getExternalLinks(data.current.id);
+        }
+
+        // Warn if entering a private room without encryption keys configured
+        if (data.current.private) {
+          const keys = this.userStore?.encryptionKeys;
+          if (!Array.isArray(keys) || keys.length === 0) {
+            toastr.warning(
+              getI18n().t("Common:EncryptionKeysNotConfigured"),
+            );
+          }
         }
 
         if (

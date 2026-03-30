@@ -99,8 +99,9 @@ export async function prepareEncryptedUpload(
     };
   }
 
-  // Encrypt file — real name goes inside DSE3 header (encrypted).
-  // Server receives only an obfuscated UUID-based name.
+  // Encrypt file — real name is also stored encrypted inside DSE3 header.
+  // Server receives the real name for display in file list (name obfuscation
+  // will be added when batch header decryption API is available).
   const { encryptedBlob, dek } = await encryptFile(file, {
     fileName: file.name,
     onProgress,
@@ -110,8 +111,8 @@ export async function prepareEncryptedUpload(
     data: encryptedBlob,
     encrypted: true,
     dek,
-    uploadFileName: obfuscateFileName(file.name),
-    originalFileType: "application/octet-stream",
+    uploadFileName: file.name,
+    originalFileType: file.type || "application/octet-stream",
     originalFileSize: file.size,
   };
 }
@@ -122,8 +123,6 @@ export function createEncryptedFormData(
 ): FormData {
   const formData = new FormData();
 
-  // For encrypted files, the server receives only the obfuscated UUID name.
-  // The real file name is encrypted inside the DSE3 blob header.
   formData.append("file", preparedUpload.data, preparedUpload.uploadFileName);
 
   if (preparedUpload.encrypted) {

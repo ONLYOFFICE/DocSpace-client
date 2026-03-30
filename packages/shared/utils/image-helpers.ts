@@ -54,6 +54,7 @@ enum IconNames {
   VirtualRoom = "room/virtual-data.svg",
   ArchiveRoom = "room/archive.svg",
   AIRoom = "room/ai.svg",
+  PrivateRoom = "room/private.svg",
 }
 
 const iconsMap: Record<IconNames, string[]> = {

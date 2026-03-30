@@ -792,16 +792,20 @@ class ContextOptionsStore {
 
       // Unwrap DEK and decrypt the self-describing DSE3 blob
       const dek = await unwrapDEK(myFileKey.privateKeyEnc, privateKey);
-      const { data: decryptedBlob } = await decryptFile(encryptedData, dek);
+      const { data: decryptedBlob, fileName: decryptedName } =
+        await decryptFile(encryptedData, dek);
 
       const buffer = await decryptedBlob.arrayBuffer();
       const sessionId = generateEditSessionId(item.id);
+
+      // Use decrypted name from DSE3 header (server only has obfuscated UUID name)
+      const realFileName = decryptedName || item.title;
 
       await storeEditBuffer({
         id: sessionId,
         fileId: item.id,
         buffer,
-        fileName: item.title,
+        fileName: realFileName,
         fileType: item.contentType || "application/octet-stream",
         userPublicKey: encryptionKeys[0].publicKey,
         wrappedDEK: myFileKey.privateKeyEnc,

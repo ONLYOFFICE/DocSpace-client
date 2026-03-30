@@ -138,7 +138,7 @@ const getFetchedRoomParams = (
       providerKey: item.providerKey,
       iconSrc: getThirdPartyIcon(item.providerKey || ""),
     },
-    isPrivate: item.roomType === RoomsTypePrivate,
+    isPrivate: !!item.private,
     icon: {
       uploadedFile: item?.logo?.original,
       tmpFile: "",

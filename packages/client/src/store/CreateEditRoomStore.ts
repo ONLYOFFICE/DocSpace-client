@@ -609,9 +609,13 @@ class CreateEditRoomStore {
           }
         : null;
 
+    // RoomsTypePrivate (13) is a client-only virtual type for UI.
+    // Server expects CustomRoom (5) with private: true flag.
+    const serverRoomType = isPrivate ? RoomsType.CustomRoom : type;
+
     const createRoomData = {
       roomId,
-      roomType: type,
+      roomType: serverRoomType,
       private: isPrivate,
       title: title || t("Common:NewRoom"),
       ...(isThirdPartyRoom && {

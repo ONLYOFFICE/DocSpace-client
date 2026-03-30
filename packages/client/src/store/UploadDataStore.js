@@ -1867,7 +1867,7 @@ class UploadDataStore {
 
     const { file, toFolderId /* , action */ } = item;
     let fileToUpload = file;
-    const fileName = file.name;
+    let fileName = file.name;
 
     const actualFolderId = isAIRoom ? knowledgeId : toFolderId;
 
@@ -1907,7 +1907,9 @@ class UploadDataStore {
         );
 
         if (prepared.encrypted) {
-          fileToUpload = new File([prepared.data], file.name, {
+          // Server receives obfuscated UUID name; real name is inside DSE3 header
+          fileName = prepared.uploadFileName;
+          fileToUpload = new File([prepared.data], fileName, {
             type: "application/octet-stream",
             lastModified: file.lastModified,
           });

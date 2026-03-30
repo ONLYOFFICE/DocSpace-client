@@ -466,9 +466,12 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
         const dek = await unwrapDEK(userFileKey.privateKeyEnc, privateKey);
 
         // Decrypt file (DSE3 format is self-describing)
-        const { data: decryptedBlob } = await decryptFile(encryptedData, dek);
+        const { data: decryptedBlob, fileName: decryptedName } =
+          await decryptFile(encryptedData, dek);
 
-        const ext = getFileExtension(title).toLowerCase();
+        // Use decrypted name from DSE3 header for extension detection
+        const displayName = decryptedName || title;
+        const ext = getFileExtension(displayName).toLowerCase();
         const mimeTypes: Record<string, string> = {
           jpg: "image/jpeg",
           jpeg: "image/jpeg",

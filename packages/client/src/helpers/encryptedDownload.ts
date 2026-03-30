@@ -105,11 +105,15 @@ export async function decryptDownloadedFile(
   try {
     // Unwrap the file DEK and decrypt the self-describing DSE3 blob
     const dek = await unwrapDEK(wrappedDEK, privateKey);
-    const { data: decryptedBlob } = await decryptFile(encryptedData, dek, {
-      onProgress,
-    });
+    const { data: decryptedBlob, fileName: decryptedName } = await decryptFile(
+      encryptedData,
+      dek,
+      { onProgress },
+    );
 
-    const decryptedFile = new File([decryptedBlob], originalFileName, {
+    // Use decrypted name from DSE3 header if available, fall back to server name
+    const finalName = decryptedName || originalFileName;
+    const decryptedFile = new File([decryptedBlob], finalName, {
       type: originalFileType || "application/octet-stream",
     });
 

@@ -42,12 +42,17 @@ export type PreparedUpload = {
   data: Blob;
   encrypted: boolean;
   dek: Uint8Array | null; // raw DEK — caller wraps for recipients after upload
-  originalFileName: string;
+  uploadFileName: string; // obfuscated name for server (UUID.ext) or real name if not encrypted
   originalFileType: string;
   originalFileSize: number;
 };
 
 const ENCRYPTABLE_ROOM_TYPES: RoomsType[] = [RoomsType.CustomRoom];
+
+function obfuscateFileName(name: string): string {
+  const ext = name.includes(".") ? name.slice(name.lastIndexOf(".")) : "";
+  return `${crypto.randomUUID()}${ext}`;
+}
 
 export function isEncryptableRoomType(roomType: RoomsType): boolean {
   return ENCRYPTABLE_ROOM_TYPES.includes(roomType);
@@ -88,14 +93,14 @@ export async function prepareEncryptedUpload(
       data: file,
       encrypted: false,
       dek: null,
-      originalFileName: file.name,
+      uploadFileName: file.name,
       originalFileType: file.type || "application/octet-stream",
       originalFileSize: file.size,
     };
   }
 
-  // Encrypt file — produces a self-describing DSE3 blob
-  // The DEK is returned raw; caller wraps it for recipients via wrapDEK()
+  // Encrypt file — real name goes inside DSE3 header (encrypted).
+  // Server receives only an obfuscated UUID-based name.
   const { encryptedBlob, dek } = await encryptFile(file, {
     fileName: file.name,
     onProgress,
@@ -105,8 +110,8 @@ export async function prepareEncryptedUpload(
     data: encryptedBlob,
     encrypted: true,
     dek,
-    originalFileName: file.name,
-    originalFileType: file.type || "application/octet-stream",
+    uploadFileName: obfuscateFileName(file.name),
+    originalFileType: "application/octet-stream",
     originalFileSize: file.size,
   };
 }
@@ -117,16 +122,12 @@ export function createEncryptedFormData(
 ): FormData {
   const formData = new FormData();
 
-  formData.append("file", preparedUpload.data, preparedUpload.originalFileName);
+  // For encrypted files, the server receives only the obfuscated UUID name.
+  // The real file name is encrypted inside the DSE3 blob header.
+  formData.append("file", preparedUpload.data, preparedUpload.uploadFileName);
 
   if (preparedUpload.encrypted) {
     formData.append("encrypted", "true");
-    formData.append("originalFileName", preparedUpload.originalFileName);
-    formData.append("originalFileType", preparedUpload.originalFileType);
-    formData.append(
-      "originalFileSize",
-      String(preparedUpload.originalFileSize),
-    );
   }
 
   for (const [key, value] of Object.entries(additionalFields)) {

@@ -703,8 +703,9 @@ export async function startUploadSession(
   encrypted: boolean,
   createOn: unknown,
   CreateNewIfExist: boolean,
+  encryptionMetadata?: unknown,
 ) {
-  const data = {
+  const data: Record<string, unknown> = {
     fileName,
     fileSize,
     relativePath,
@@ -712,6 +713,10 @@ export async function startUploadSession(
     createOn,
     CreateNewIfExist,
   };
+
+  if (encryptionMetadata) {
+    data.encryptionMetadata = encryptionMetadata;
+  }
 
   return request({
     method: "post",
@@ -1297,6 +1302,53 @@ export async function getEncryptionAccess(fileId: number | string) {
     url: `privacyroom/access/${fileId}`,
     data: fileId,
   })) as { [key: string]: string | boolean };
+
+  return res;
+}
+
+export async function getFileEncryptionAccess(fileId: number | string) {
+  const res = await request({
+    method: "get",
+    url: `files/${fileId}/access`,
+  });
+
+  return res as import("./types").TFileEncryptionInfo;
+}
+
+export async function setFileEncryptionKeys(
+  fileId: number | string,
+  keys: Array<{
+    userId: string;
+    publicKeyId: string;
+    privateKeyEnc: string;
+  }>,
+) {
+  const res = await request({
+    method: "put",
+    url: `files/${fileId}/access`,
+    data: keys,
+  });
+
+  return res;
+}
+
+export async function updateFileStream(
+  fileId: number | string,
+  file: File,
+  encrypted: boolean,
+  forcesave: boolean,
+) {
+  const fd = new FormData();
+
+  fd.append("file", file);
+  fd.append("encrypted", String(encrypted));
+  fd.append("forcesave", String(forcesave));
+
+  const res = await request({
+    method: "put",
+    url: `/files/${fileId}/update`,
+    data: fd,
+  });
 
   return res;
 }

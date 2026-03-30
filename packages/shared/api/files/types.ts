@@ -164,6 +164,26 @@ export type TFile = {
   dimensions?: TDimensions;
   editingBy?: Record<string, string>;
   activeEditors?: Record<string, string>;
+  encrypted?: boolean;
+};
+
+export type TFileEncryptionInfo = {
+  userKeys: Array<{
+    id: string;
+    userId: string;
+    publicKey: string;
+    privateKeyEnc: string;
+    date: string;
+    cryptoEngineId: string;
+  }>;
+  fileKeys: Array<{
+    userId: string;
+    publicKeyId: string;
+    privateKeyEnc: string;
+    tenantId?: number;
+    fileId?: number;
+    createOn?: string;
+  }>;
 };
 
 export type TOpenEditRequest = {

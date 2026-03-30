@@ -162,6 +162,16 @@ import {
 } from "SRC_DIR/helpers/info-panel";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 import { showCreatedPDFFormDialog } from "SRC_DIR/components/dialogs/CreatedPDFFormDialog";
+import { getFileEncryptionAccess } from "@docspace/shared/api/files";
+import {
+  requestUnlock,
+  encryptionService,
+} from "@docspace/shared/services/encryption";
+import {
+  generateEditSessionId,
+  storeEditBuffer,
+} from "@docspace/shared/utils/encryptedEditBuffer";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 const LOADER_TIMER = 500;
 let loadingTime;
@@ -713,17 +723,128 @@ class ContextOptionsStore {
   };
 
   onClickDownload = (item, t) => {
-    const { viewUrl, isFolder } = item;
+    const { viewUrl, isFolder, encrypted } = item;
     const isFile = !isFolder;
 
     const { openUrl } = this.settingsStore;
     const { downloadAction } = this.filesActionsStore;
 
-    isFile
-      ? openUrl(viewUrl, UrlActionType.Download)
-      : downloadAction(t("Common:ArchivingData"), item).catch((err) =>
-          toastr.error(err),
+    if (isFile && encrypted) {
+      downloadAction("", item).catch((err) => toastr.error(err));
+    } else if (isFile) {
+      openUrl(viewUrl, UrlActionType.Download);
+    } else {
+      downloadAction(t("Common:ArchivingData"), item).catch((err) =>
+        toastr.error(err),
+      );
+    }
+  };
+
+  onClickDownloadEncrypted = (item) => {
+    const { openUrl } = this.settingsStore;
+    openUrl(item.viewUrl, UrlActionType.Download);
+  };
+
+  onClickEditEncrypted = async (item, t) => {
+    const { encryptionKeys, user } = this.userStore;
+
+    if (!encryptionKeys || encryptionKeys.length === 0) {
+      toastr.error(t("Common:EncryptionKeysRequired"));
+      return;
+    }
+
+    const userId = user?.id;
+    if (!userId) return;
+
+    try {
+      const encryptionInfo = await getFileEncryptionAccess(item.id);
+
+      if (!encryptionInfo || !encryptionInfo.fileKeys) {
+        toastr.error(t("Common:EncryptionAccessNotAvailable"));
+        return;
+      }
+
+      const myFileKey = encryptionInfo.fileKeys.find(
+        (k) => k.userId === userId || k.userId === String(userId),
+      );
+
+      if (!myFileKey) {
+        toastr.error(t("Common:EncryptionDecryptAccessDenied"));
+        return;
+      }
+
+      const privateKey = await requestUnlock();
+      if (!privateKey) {
+        toastr.error(t("Common:EncryptionKeyNotAvailable"));
+        return;
+      }
+
+      const response = await fetch(item.viewUrl);
+      if (!response.ok) {
+        toastr.error(
+          t("Common:EncryptionFetchFileFailed", {
+            status: response.status,
+          }),
         );
+        return;
+      }
+
+      const encryptedData = await response.arrayBuffer();
+
+      const metadata = {
+        encrypted: true,
+        version: 1,
+        encryptionAlgorithm: "AES-256-GCM",
+        keyEncryptionAlgorithm: "RSA-OAEP-SHA256",
+        encryptedKeys: [
+          {
+            userId: String(userId),
+            publicKeyId: myFileKey.publicKeyId || "",
+            privateKeyEnc: myFileKey.privateKeyEnc,
+          },
+        ],
+        iv: "",
+        encryptedAt: myFileKey.createOn || new Date().toISOString(),
+      };
+
+      const decryptedBlob = await encryptionService.decryptFile(
+        encryptedData,
+        metadata,
+        privateKey,
+        String(userId),
+      );
+
+      const buffer = await decryptedBlob.arrayBuffer();
+      const sessionId = generateEditSessionId(item.id);
+
+      await storeEditBuffer({
+        id: sessionId,
+        fileId: item.id,
+        buffer,
+        fileName: item.title,
+        fileType: item.contentType || "application/octet-stream",
+        userPublicKey: encryptionKeys[0].publicKey,
+        encryptionMetadata: metadata,
+        userId: String(userId),
+        createdAt: Date.now(),
+      });
+
+      const searchParams = new URLSearchParams();
+      searchParams.append("fileId", String(item.id));
+      searchParams.append("encrypted", sessionId);
+
+      const url = combineUrl(
+        window.ClientConfig?.proxy?.url,
+        `/doceditor?${searchParams.toString()}`,
+      );
+
+      const { openOnNewPage } = this.filesSettingsStore;
+      window.open(url, openOnNewPage ? "_blank" : "_self");
+    } catch (error) {
+      toastr.error(
+        error.message || "An error occurred while opening the encrypted file.",
+      );
+    }
   };
 
   onClickDownloadAs = () => {
@@ -2078,6 +2199,14 @@ class ContextOptionsStore {
         disabled: false,
       },
       {
+        id: "option_edit-encrypted",
+        key: "edit-encrypted",
+        label: t("Common:EditEncryptedFile"),
+        icon: AccessEditReactSvgUrl,
+        onClick: () => this.onClickEditEncrypted(item, t),
+        disabled: !item.security?.Edit,
+      },
+      {
         id: "option_vectorization",
         key: "vectorization",
         label: t("Files:Vectorization"),
@@ -2318,6 +2447,14 @@ class ContextOptionsStore {
         disabled:
           (!item.security?.Download && !isLockedSharedRoom(item)) ||
           Boolean(item.external && item.isLinkExpired),
+      },
+      {
+        id: "option_download-encrypted",
+        key: "download-encrypted",
+        label: t("Common:DownloadWithoutDecryption"),
+        icon: DownloadReactSvgUrl,
+        onClick: () => this.onClickDownloadEncrypted(item),
+        disabled: !item.security?.Download,
       },
       {
         id: "option_room-info",
@@ -2768,7 +2905,11 @@ class ContextOptionsStore {
       (option) => option.key === "download-as",
     );
 
-    if (downloadOption && downloadAsOption) {
+    const downloadEncryptedOption = newOptions.find(
+      (option) => option.key === "download-encrypted",
+    );
+
+    if (downloadOption && (downloadAsOption || downloadEncryptedOption)) {
       const originalDownloadOption = {
         ...downloadOption,
         key: "download-original",
@@ -2780,11 +2921,15 @@ class ContextOptionsStore {
         originalDownloadOption,
       ];
 
+      const downloadItemKeys = ["download-original"];
+      if (downloadEncryptedOption) downloadItemKeys.push("download-encrypted");
+      if (downloadAsOption) downloadItemKeys.push("download-as");
+
       menuGroupsConfig.push({
         groupKey: "download",
         groupLabel: downloadOption.label,
         groupIcon: downloadOption.icon,
-        itemKeys: ["download-original", "download-as"],
+        itemKeys: downloadItemKeys,
         needsGrouping: false,
         minItemsCount: 1,
       });
@@ -2824,7 +2969,7 @@ class ContextOptionsStore {
       }
     });
 
-    if (downloadOption && downloadAsOption) {
+    if (downloadOption && (downloadAsOption || downloadEncryptedOption)) {
       keysToRemove.push("download-original");
     }
 
@@ -2925,6 +3070,7 @@ class ContextOptionsStore {
               "open-pdf",
               "fill-form",
               "edit",
+              "edit-encrypted",
               "start-filling",
               "vectorization",
               "preview",

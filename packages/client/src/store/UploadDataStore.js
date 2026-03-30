@@ -29,8 +29,12 @@ import { getI18n, Trans } from "react-i18next";
 import { TIMEOUT } from "SRC_DIR/helpers/filesConstants";
 import uniqueid from "lodash/uniqueId";
 import sumBy from "lodash/sumBy";
-import { ConflictResolveType } from "@docspace/shared/enums";
+import { ConflictResolveType, RoomsType } from "@docspace/shared/enums";
 import SocketHelper, { SocketCommands } from "@docspace/ui-kit/utils/socket";
+import {
+  prepareEncryptedUpload,
+  shouldEncryptUpload,
+} from "SRC_DIR/helpers/encryptedUpload";
 import {
   getFileInfo,
   getFolderInfo,
@@ -45,7 +49,12 @@ import {
   moveToFolder,
   fileCopyAs,
   checkIsFileExist,
+  setFileEncryptionKeys,
+  getFileEncryptionAccess,
 } from "@docspace/shared/api/files";
+import { getFilePublicKeys } from "@docspace/shared/api/privacy";
+import { encryptionService } from "@docspace/shared/services/encryption";
+import { requestUnlock } from "@docspace/shared/services/encryption/secretStorage";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { getOperationProgress } from "@docspace/shared/utils/getOperationProgress";
 
@@ -103,6 +112,10 @@ class UploadDataStore {
   filesSettingsStore;
 
   aiRoomStore;
+
+  userStore;
+
+  encryptionEnabled = false;
 
   files = [];
 
@@ -168,6 +181,7 @@ class UploadDataStore {
     dialogsStore,
     filesSettingsStore,
     aiRoomStore,
+    userStore,
   ) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -179,7 +193,139 @@ class UploadDataStore {
     this.dialogsStore = dialogsStore;
     this.filesSettingsStore = filesSettingsStore;
     this.aiRoomStore = aiRoomStore;
+    this.userStore = userStore;
   }
+
+  setEncryptionEnabled = (enabled) => {
+    this.encryptionEnabled = enabled;
+  };
+
+  encryptKeysForRoomMembers = async (fileId, currentUserId) => {
+    try {
+      const [publicKeys, encryptionInfo] = await Promise.all([
+        getFilePublicKeys(fileId),
+        getFileEncryptionAccess(fileId),
+      ]);
+
+      const existingFileKeys = encryptionInfo.fileKeys;
+      if (!existingFileKeys || existingFileKeys.length === 0) return;
+
+      const existingKeyUserIds = new Set(
+        existingFileKeys.map((k) => String(k.userId)),
+      );
+
+      const publicKeyMap = new Map();
+      if (Array.isArray(publicKeys)) {
+        for (const pk of publicKeys) {
+          if (!pk.publicKey || !pk.userId) continue;
+          const uid = String(pk.userId);
+          if (uid === String(currentUserId)) continue;
+          if (existingKeyUserIds.has(uid)) continue;
+          publicKeyMap.set(uid, { publicKey: pk.publicKey, keyId: pk.id || "" });
+        }
+      }
+
+      if (publicKeyMap.size === 0) return;
+
+      const privateKey = await requestUnlock();
+      if (!privateKey) return;
+
+      const metadata = {
+        encrypted: true,
+        version: 1,
+        encryptionAlgorithm: "AES-256-GCM",
+        keyEncryptionAlgorithm: "RSA-OAEP-SHA256",
+        iv: "",
+        encryptedAt: new Date().toISOString(),
+        encryptedKeys: existingFileKeys.map((k) => ({
+          userId: k.userId,
+          publicKeyId: k.publicKeyId || "",
+          privateKeyEnc: k.privateKeyEnc,
+        })),
+      };
+
+      const newKeys = [];
+
+      for (const [userId, { publicKey, keyId }] of publicKeyMap) {
+        try {
+          const newKey = await encryptionService.createKeyForRecipient(
+            metadata,
+            privateKey,
+            currentUserId,
+            publicKey,
+            userId,
+          );
+          newKey.publicKeyId = keyId;
+          newKeys.push(newKey);
+        } catch (error) {
+          console.error(
+            `[ENCRYPTION] Failed to create key for user ${userId}:`,
+            error,
+          );
+        }
+      }
+
+      if (newKeys.length > 0) {
+        const allKeys = [
+          ...existingFileKeys.map((k) => ({
+            userId: k.userId,
+            publicKeyId: k.publicKeyId || "",
+            privateKeyEnc: k.privateKeyEnc,
+          })),
+          ...newKeys,
+        ];
+        await setFileEncryptionKeys(fileId, allKeys);
+      }
+    } catch (error) {
+      console.error(
+        "[ENCRYPTION] Failed to encrypt keys for room members:",
+        error,
+      );
+    }
+  };
+
+  getUserEncryptionKeys = () => {
+    let keys = this.userStore?.encryptionKeys;
+
+    if (!keys || keys.length === 0) {
+      keys = this.settingsStore?.encryptionKeys;
+    }
+
+    const userId = this.userStore?.user?.id;
+
+    if (!keys || keys.length === 0 || !userId) {
+      return { publicKey: null, userId: null, publicKeyId: null };
+    }
+
+    const primaryKey = keys[0];
+    return {
+      publicKey: primaryKey.publicKey || null,
+      userId: String(userId),
+      publicKeyId: primaryKey.id || null,
+    };
+  };
+
+  shouldEncryptCurrentUpload = () => {
+    const { roomType, private: isPrivate } = this.selectedFolderStore;
+    const { publicKey, userId } = this.getUserEncryptionKeys();
+
+    return shouldEncryptUpload(roomType, publicKey, userId, isPrivate);
+  };
+
+  prepareFileForEncryptedUpload = async (file, folderId, onProgress) => {
+    const { roomType, private: isPrivate } = this.selectedFolderStore;
+    const { publicKey, userId } = this.getUserEncryptionKeys();
+
+    return prepareEncryptedUpload({
+      file,
+      folderId,
+      roomType: roomType || RoomsType.CustomRoom,
+      isPrivate: isPrivate || false,
+      userPublicKey: publicKey,
+      userId,
+      onProgress,
+    });
+  };
 
   removeFiles = (fileIds) => {
     fileIds.forEach((id) => {
@@ -1332,6 +1478,33 @@ class UploadDataStore {
         }
       });
 
+      const currentFileData = this.files[indexOfFile];
+      if (currentFileData?.encrypted && currentFileData?.encryptionMetadata) {
+        const { publicKeyId } = this.getUserEncryptionKeys();
+        if (currentFileData.encryptionMetadata.encryptedKeys) {
+          try {
+            const serverKeys =
+              currentFileData.encryptionMetadata.encryptedKeys.map((key) => ({
+                userId: key.userId,
+                publicKeyId: publicKeyId || key.publicKeyId || "",
+                privateKeyEnc: key.privateKeyEnc,
+              }));
+
+            await setFileEncryptionKeys(fileId, serverKeys);
+
+            const { userId } = this.getUserEncryptionKeys();
+            if (userId) {
+              await this.encryptKeysForRoomMembers(fileId, userId);
+            }
+          } catch (error) {
+            console.error(
+              "[ENCRYPTION] Failed to set file encryption keys:",
+              error,
+            );
+          }
+        }
+      }
+
       if (fileInfo.version > 2) {
         this.filesStore.setHighlightFile({
           highlightFileId: fileInfo.id,
@@ -1692,25 +1865,80 @@ class UploadDataStore {
     }
 
     const { chunkUploadSize } = this.filesSettingsStore;
+    const { roomType, private: isPrivate } = this.selectedFolderStore;
 
     const { file, toFolderId /* , action */ } = item;
-    const chunks =
-      file.size === 0
-        ? 1
-        : Math.ceil(file.size / chunkUploadSize, chunkUploadSize);
+    let fileToUpload = file;
     const fileName = file.name;
-    const fileSize = file.size;
 
     const actualFolderId = isAIRoom ? knowledgeId : toFolderId;
+
+    let encryptionMetadata = null;
+    let isEncrypted = file.encrypted || false;
+
+    const { publicKey, userId } = this.getUserEncryptionKeys();
+    const shouldEncrypt = shouldEncryptUpload(
+      roomType,
+      publicKey,
+      userId,
+      isPrivate,
+    );
+
+    if (shouldEncrypt && !isEncrypted) {
+      try {
+        const prepared = await this.prepareFileForEncryptedUpload(
+          file,
+          toFolderId,
+          (progress) => {
+            const fileIndex = this.uploadedFilesHistory.findIndex(
+              (f) => f.uniqueId === this.files[indexOfFile].uniqueId,
+            );
+            if (fileIndex > -1) {
+              this.uploadedFilesHistory[fileIndex].percent = Math.floor(
+                progress * 20,
+              );
+            }
+            const newPercent = this.getFilesPercent();
+            this.percent = newPercent;
+            this.primaryProgressDataStore.setPrimaryProgressBarData({
+              operation: OPERATIONS_NAME.upload,
+              percent: newPercent,
+              label: getI18n().t("Files:Encrypting"),
+            });
+          },
+        );
+
+        if (prepared.encrypted) {
+          fileToUpload = new File([prepared.data], file.name, {
+            type: "application/octet-stream",
+            lastModified: file.lastModified,
+          });
+          encryptionMetadata = prepared.encryptionMetadata;
+          isEncrypted = true;
+
+          this.files[indexOfFile].encryptionMetadata = encryptionMetadata;
+          this.files[indexOfFile].encrypted = true;
+        }
+      } catch (error) {
+        console.error("Encryption failed:", error);
+      }
+    }
+
+    const fileSize = fileToUpload.size;
+    const chunks =
+      fileSize === 0
+        ? 1
+        : Math.ceil(fileSize / chunkUploadSize, chunkUploadSize);
 
     return startUploadSession(
       actualFolderId,
       fileName,
       fileSize,
       "", // relativePath,
-      file.encrypted,
+      isEncrypted,
       file.lastModifiedDate,
       createNewIfExist,
+      encryptionMetadata,
     )
       .then((res) => {
         const sessionId = res.id;
@@ -1723,7 +1951,7 @@ class UploadDataStore {
         while (chunk < chunks) {
           const offset = chunk * chunkUploadSize;
           const formData = new FormData();
-          formData.append("file", file.slice(offset, offset + chunkUploadSize));
+          formData.append("file", fileToUpload.slice(offset, offset + chunkUploadSize));
           requestsDataArray.push(formData);
           chunk++;
         }

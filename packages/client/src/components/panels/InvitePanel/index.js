@@ -40,7 +40,9 @@ import {
   ShareAccessRights,
   RoomsType,
 } from "@docspace/shared/enums";
-import { LOADER_TIMEOUT } from "@docspace/shared/constants";
+import { LOADER_TIMEOUT, OPERATIONS_NAME } from "@docspace/shared/constants";
+import uniqueid from "lodash/uniqueId";
+import { reEncryptRoomKeysForNewMembers } from "SRC_DIR/helpers/roomEncryption";
 
 import { Button } from "@docspace/ui-kit/components/button";
 import { toastr } from "@docspace/ui-kit/components/toast";
@@ -105,6 +107,7 @@ const InvitePanel = ({
   hasGuests,
   culture,
   currentUserId,
+  setSecondaryProgressBarData,
 }) => {
   const [invitePanelIsLoding, setInvitePanelIsLoading] = useState(
     roomId !== -1,
@@ -430,6 +433,56 @@ const InvitePanel = ({
 
       if (result?.warning) {
         toastr.warning(result?.warning);
+      }
+
+      if (isRooms && selectedRoom?.private) {
+        const newMemberIds = inviteItems
+          .filter((item) => item.id && !item.isGroup)
+          .map((item) => ({ id: item.id }));
+
+        if (newMemberIds.length > 0) {
+          const operationId = uniqueid("operation_");
+
+          setSecondaryProgressBarData({
+            operation: OPERATIONS_NAME.roomReencryption,
+            percent: 0,
+            operationId,
+          });
+
+          reEncryptRoomKeysForNewMembers(roomId, newMemberIds, {
+            currentUserId,
+            onProgress: (processed, total) => {
+              const percent = Math.floor((processed / total) * 100);
+              setSecondaryProgressBarData({
+                operation: OPERATIONS_NAME.roomReencryption,
+                percent,
+                operationId,
+              });
+            },
+          })
+            .then(() => {
+              setSecondaryProgressBarData({
+                operation: OPERATIONS_NAME.roomReencryption,
+                percent: 100,
+                completed: true,
+                alert: false,
+                operationId,
+              });
+            })
+            .catch((error) => {
+              console.error(
+                "Failed to re-encrypt file keys for new members:",
+                error,
+              );
+              setSecondaryProgressBarData({
+                operation: OPERATIONS_NAME.roomReencryption,
+                percent: 100,
+                completed: true,
+                alert: true,
+                operationId,
+              });
+            });
+        }
       }
 
       updateInfoPanelMembers();
@@ -1000,6 +1053,7 @@ export default inject(
     currentQuotaStore,
     userStore,
     peopleStore,
+    uploadDataStore,
   }) => {
     const { theme, standalone, allowInvitingGuests, checkGuests, hasGuests } =
       settingsStore;
@@ -1053,6 +1107,8 @@ export default inject(
       hasGuests,
       culture,
       currentUserId: userStore.user.id,
+      setSecondaryProgressBarData:
+        uploadDataStore.secondaryProgressDataStore.setSecondaryProgressBarData,
     };
   },
 )(

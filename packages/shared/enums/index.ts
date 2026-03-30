@@ -26,6 +26,17 @@
 
 export * from "@docspace/ui-kit/enums";
 
+// Override RoomsType from ui-kit to add Private room type
+export enum RoomsType {
+  AIRoom = 9,
+  PublicRoom = 6,
+  FormRoom = 1,
+  EditingRoom = 2,
+  VirtualDataRoom = 8,
+  CustomRoom = 5,
+  Private = 13,
+}
+
 export const enum ScopeType {
   read = "read",
   write = "write",

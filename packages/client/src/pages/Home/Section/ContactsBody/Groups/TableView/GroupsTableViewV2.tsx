@@ -318,23 +318,21 @@ const GroupsTableViewV2 = ({
 
       return (
         <>
-          {/* Name cell: avatar OR checkbox + link */}
-          <div
-            className="table-container_cell table-container_group-title-cell"
-            style={{ display: "flex", alignItems: "center", overflow: "hidden", paddingInlineStart: "12px" }}
-          >
-            <div className="table-container_element" style={{ flexShrink: 0, marginInlineEnd: "8px" }}>
-              <Avatar
-                className="avatar"
-                size={AvatarSize.min}
-                userName={item.name}
-                isGroup
-                role={AvatarRole.user}
-                source=""
-              />
-            </div>
-            <div className="table-container_row-checkbox" style={{ flexShrink: 0, marginInlineEnd: "8px" }}>
+          {/* Name cell — matches OLD structure exactly */}
+          <div className="table-container_cell table-container_group-title-cell">
+            <div className="table-container_row-checkbox-wrapper" style={{ display: "flex", minWidth: "48px", paddingInlineEnd: "0" }}>
+              <div className="table-container_element">
+                <Avatar
+                  className="avatar"
+                  size={AvatarSize.min}
+                  userName={item.name}
+                  isGroup
+                  role={AvatarRole.user}
+                  source=""
+                />
+              </div>
               <Checkbox
+                className="table-container_row-checkbox"
                 onChange={() => changeGroupSelection?.(item, isChecked)}
                 isChecked={isChecked}
               />
@@ -345,8 +343,8 @@ const GroupsTableViewV2 = ({
               fontWeight="600"
               fontSize="13px"
               isTextOverflow
+              className="table-cell_group-title"
               truncate
-              style={{ marginInlineEnd: "12px" }}
             >
               {item.name}
             </Link>
@@ -392,7 +390,7 @@ const GroupsTableViewV2 = ({
           {/* Context menu button */}
           <div
             className="table-container_row-context-menu-wrapper"
-            style={{ height: "100%", boxSizing: "border-box" }}
+            style={{ height: "49px", boxSizing: "border-box" }}
           >
             <ContextMenuButton
               className="expandButton"

@@ -51,3 +51,5 @@ test-results
 
 common/screenshot-comparison-app/.env
 common/screenshot-comparison-app/images/*.png
+.playwright-mcp/
+*.png

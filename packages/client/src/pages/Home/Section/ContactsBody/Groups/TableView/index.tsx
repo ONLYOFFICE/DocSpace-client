@@ -45,6 +45,12 @@ import { GroupsTableContainer } from "./TableView.styled";
 
 import GroupsTableItem from "./TableItem";
 import GroupsTableHeader from "./TableHeader";
+import GroupsTableViewV2 from "./GroupsTableViewV2";
+
+// Feature flag: set to true to use TanStack Table implementation
+const USE_TANSTACK_TABLE =
+  typeof window !== "undefined" &&
+  localStorage.getItem("USE_TANSTACK_TABLE") === "true";
 
 type GroupsTableViewProps = {
   groups?: GroupsStore["groups"];
@@ -106,6 +112,10 @@ const GroupsTableView = ({
     },
     currentDeviceType: currentDeviceType!,
   });
+
+  if (USE_TANSTACK_TABLE) {
+    return <GroupsTableViewV2 sectionWidth={sectionWidth} />;
+  }
 
   return groups?.length ? (
     <GroupsTableContainer

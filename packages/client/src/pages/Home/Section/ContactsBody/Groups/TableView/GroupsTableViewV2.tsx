@@ -42,7 +42,6 @@ import {
   TanStackTableBody,
 } from "@docspace/ui-kit/components/tanstack-table";
 import { TableSettings } from "@docspace/ui-kit/components/table/sub-components/table-settings";
-import { TableCell } from "@docspace/ui-kit/components/table";
 import { Link } from "@docspace/ui-kit/components/link";
 import { Text } from "@docspace/ui-kit/components/text";
 import {
@@ -322,9 +321,9 @@ const GroupsTableViewV2 = ({
           {/* Name cell: avatar OR checkbox + link */}
           <div
             className="table-container_cell table-container_group-title-cell"
-            style={{ display: "flex", alignItems: "center", gap: "8px", overflow: "hidden" }}
+            style={{ display: "flex", alignItems: "center", overflow: "hidden", paddingInlineStart: "12px" }}
           >
-            <div className="table-container_element">
+            <div className="table-container_element" style={{ flexShrink: 0, marginInlineEnd: "8px" }}>
               <Avatar
                 className="avatar"
                 size={AvatarSize.min}
@@ -334,11 +333,12 @@ const GroupsTableViewV2 = ({
                 source=""
               />
             </div>
-            <Checkbox
-              className="table-container_row-checkbox"
-              onChange={() => changeGroupSelection?.(item, isChecked)}
-              isChecked={isChecked}
-            />
+            <div className="table-container_row-checkbox" style={{ flexShrink: 0, marginInlineEnd: "8px" }}>
+              <Checkbox
+                onChange={() => changeGroupSelection?.(item, isChecked)}
+                isChecked={isChecked}
+              />
+            </div>
             <Link
               onClick={onOpenGroup}
               title={item.name}
@@ -390,9 +390,13 @@ const GroupsTableViewV2 = ({
           </div>
 
           {/* Context menu button */}
-          <TableCell className="table-container_row-context-menu-wrapper">
+          <div
+            className="table-container_row-context-menu-wrapper"
+            style={{ height: "100%", boxSizing: "border-box" }}
+          >
             <ContextMenuButton
               className="expandButton"
+              isFill
               getData={() => {
                 changeGroupContextSelection?.(item, false);
                 return (
@@ -408,7 +412,7 @@ const GroupsTableViewV2 = ({
                 contextMenuRef.current?.show(e);
               }}
             />
-          </TableCell>
+          </div>
         </>
       );
     },

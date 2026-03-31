@@ -24,12 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { withTranslation } from "react-i18next";
-import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 
-import { mobile } from "@docspace/shared/utils";
 import { Button } from "@docspace/ui-kit/components/button";
 import { EmptyScreenContainer } from "@docspace/ui-kit/components/empty-screen-container";
 import ConfirmWrapper from "SRC_DIR/components/ConfirmWrapper";
@@ -40,26 +38,7 @@ import { DeviceType } from "@docspace/shared/enums";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
-const EmptyContainer = styled(EmptyScreenContainer)`
-  .ec-header {
-    font-size: 23px !important;
-  }
-
-  .ec-image {
-    margin-inline-end: 22px;
-    margin-top: 22px;
-
-    @media ${mobile} {
-      margin-bottom: 22px;
-    }
-  }
-
-  .ec-desc {
-    font-size: 13px !important;
-    margin-top: 12px;
-    margin-bottom: 22px;
-  }
-`;
+import styles from "./Api.module.scss";
 
 const Api = (props) => {
   const {
@@ -82,7 +61,8 @@ const Api = (props) => {
 
   return (
     <ConfirmWrapper height="100%">
-      <EmptyContainer
+      <EmptyScreenContainer
+        className={styles.emptyContainer}
         buttons={
           <Button
             label={t("Common:LearnMore")}

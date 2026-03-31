@@ -1833,6 +1833,14 @@
 }
 
 .light {
+  --settings-separator-border: 1px solid #{$gray-light-mid};
+}
+
+.dark {
+  --settings-separator-border: 1px solid #{$gray-dark-strong};
+}
+
+.light {
   --settings-integration-text-color: #{$gray};
   --settings-integration-separator-border: 1px solid #{$gray-strong};
   --settings-integration-link-color: #{$link};

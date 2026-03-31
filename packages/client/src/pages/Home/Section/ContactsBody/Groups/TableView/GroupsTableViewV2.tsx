@@ -449,6 +449,8 @@ const GroupsTableViewV2 = ({
     >
       <TanStackTableHeader
         showSettings
+        activeSortBy={groupsFilter?.sortBy}
+        activeSortOrder={groupsFilter?.sortOrder as "ascending" | "descending"}
         renderSettings={() => (
           <TableSettings
             columns={[

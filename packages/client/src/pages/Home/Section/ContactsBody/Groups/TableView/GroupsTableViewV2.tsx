@@ -41,6 +41,7 @@ import {
   TanStackTableHeader,
   TanStackTableBody,
 } from "@docspace/ui-kit/components/tanstack-table";
+import { TableSettings } from "@docspace/ui-kit/components/table/sub-components/table-settings";
 import { Link } from "@docspace/ui-kit/components/link";
 import { Text } from "@docspace/ui-kit/components/text";
 import {
@@ -298,19 +299,21 @@ const GroupsTableViewV2 = ({
 
       return (
         <>
-          {/* Name cell */}
+          {/* Name cell: avatar OR checkbox + link */}
           <div
             className="table-container_cell table-container_group-title-cell"
             style={{ display: "flex", alignItems: "center", gap: "8px", overflow: "hidden" }}
           >
-            <Avatar
-              className="avatar"
-              size={AvatarSize.min}
-              userName={item.name}
-              isGroup
-              role={AvatarRole.user}
-              source=""
-            />
+            <div className="table-container_element">
+              <Avatar
+                className="avatar"
+                size={AvatarSize.min}
+                userName={item.name}
+                isGroup
+                role={AvatarRole.user}
+                source=""
+              />
+            </div>
             <Checkbox
               className="table-container_row-checkbox"
               onChange={() => changeGroupSelection?.(item, isChecked)}
@@ -323,6 +326,7 @@ const GroupsTableViewV2 = ({
               fontSize="13px"
               isTextOverflow
               truncate
+              style={{ marginInlineEnd: "12px" }}
             >
               {item.name}
             </Link>
@@ -365,8 +369,15 @@ const GroupsTableViewV2 = ({
             ) : null}
           </div>
 
-          {/* Context menu spacer (24px settings column) */}
-          <div className="table-container_row-context-menu-wrapper" />
+          {/* Context menu (⋮) */}
+          <div className="table-container_row-context-menu-wrapper">
+            <div
+              style={{ cursor: "pointer", padding: "8px" }}
+              data-testid={`contacts_groups_context_btn_${rowIndex}`}
+            >
+              &#8942;
+            </div>
+          </div>
         </>
       );
     },
@@ -397,7 +408,29 @@ const GroupsTableViewV2 = ({
       columnResizeDirection="ltr"
       forwardedRef={containerRef}
     >
-      <TanStackTableHeader showSettings />
+      <TanStackTableHeader
+        showSettings
+        renderSettings={() => (
+          <TableSettings
+            columns={[
+              {
+                key: "People",
+                title: t("Common:Members"),
+                enable: peopleGroupsColumnIsEnabled ?? true,
+                sortBy: "membersCount",
+                onChange: () => setColumnEnable?.("People"),
+              },
+              {
+                key: "Head of Group",
+                title: t("Common:HeadOfGroup"),
+                enable: managerGroupsColumnIsEnabled ?? true,
+                sortBy: "manager",
+                onChange: () => setColumnEnable?.("Head of Group"),
+              },
+            ]}
+          />
+        )}
+      />
       <TanStackTableBody
         itemHeight={48}
         hasMore={hasMoreGroups}

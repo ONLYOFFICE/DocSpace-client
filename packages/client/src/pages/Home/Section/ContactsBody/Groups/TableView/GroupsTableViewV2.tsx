@@ -42,6 +42,7 @@ import {
   TanStackTableBody,
 } from "@docspace/ui-kit/components/tanstack-table";
 import { TableSettings } from "@docspace/ui-kit/components/table/sub-components/table-settings";
+import { TableCell } from "@docspace/ui-kit/components/table";
 import { Link } from "@docspace/ui-kit/components/link";
 import { Text } from "@docspace/ui-kit/components/text";
 import {
@@ -50,6 +51,14 @@ import {
   AvatarSize,
 } from "@docspace/ui-kit/components/avatar";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import {
+  ContextMenu,
+  type ContextMenuRefType,
+} from "@docspace/ui-kit/components/context-menu";
+import {
+  ContextMenuButton,
+  ContextMenuButtonDisplayType,
+} from "@docspace/ui-kit/components/context-menu-button";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { TGroup } from "@docspace/shared/api/groups/types";
@@ -133,6 +142,10 @@ const GroupsTableViewV2 = ({
   const navigate = useNavigate();
   const location = useLocation();
   const containerRef = useRef<HTMLDivElement>(null);
+  const contextMenuRef = useRef<ContextMenuRefType>(null);
+  const [contextMenuModel, setContextMenuModel] = useState<ContextMenuModel[]>(
+    [],
+  );
 
   useViewEffect({
     view: viewAs!,
@@ -275,15 +288,22 @@ const GroupsTableViewV2 = ({
             target?.tagName === "A" ||
             target.closest(".checkbox") ||
             target.closest(".table-container_row-checkbox") ||
+            target.closest(".expandButton") ||
             e.detail === 0
           )
             return;
           selectRow?.(item);
         },
+        onContextMenu: (e: React.MouseEvent) => {
+          changeGroupContextSelection?.(item, true);
+          const model = getModel?.(t, item) ?? [];
+          setContextMenuModel(model);
+          contextMenuRef.current?.show(e);
+        },
         "data-testid": `contacts_groups_row_${rowIndex}`,
       };
     },
-    [groups, selection, bufferSelection, withContentSelection, selectRow],
+    [groups, selection, bufferSelection, withContentSelection, selectRow, changeGroupContextSelection, getModel, t],
   );
 
   // Row cell renderer — returns cells as direct grid children (no wrapper div)
@@ -369,15 +389,26 @@ const GroupsTableViewV2 = ({
             ) : null}
           </div>
 
-          {/* Context menu (⋮) */}
-          <div className="table-container_row-context-menu-wrapper">
-            <div
-              style={{ cursor: "pointer", padding: "8px" }}
-              data-testid={`contacts_groups_context_btn_${rowIndex}`}
-            >
-              &#8942;
-            </div>
-          </div>
+          {/* Context menu button */}
+          <TableCell className="table-container_row-context-menu-wrapper">
+            <ContextMenuButton
+              className="expandButton"
+              getData={() => {
+                changeGroupContextSelection?.(item, false);
+                return (
+                  getGroupContextOptions?.(t, item) ?? []
+                ) as ContextMenuModel[];
+              }}
+              directionX="right"
+              displayType={ContextMenuButtonDisplayType.toggle}
+              onClick={(e: React.MouseEvent) => {
+                changeGroupContextSelection?.(item, false);
+                const model = getModel?.(t, item) ?? [];
+                setContextMenuModel(model);
+                contextMenuRef.current?.show(e);
+              }}
+            />
+          </TableCell>
         </>
       );
     },
@@ -392,6 +423,10 @@ const GroupsTableViewV2 = ({
       peopleGroupsColumnIsEnabled,
       managerGroupsColumnIsEnabled,
       theme,
+      t,
+      changeGroupContextSelection,
+      getGroupContextOptions,
+      getModel,
     ],
   );
 
@@ -438,6 +473,12 @@ const GroupsTableViewV2 = ({
         renderRow={renderRow}
         getRowContainerProps={getRowContainerProps}
         totalCount={groupsFilterTotal}
+      />
+      {/* Shared context menu — positioned by ContextMenu component */}
+      <ContextMenu
+        ref={contextMenuRef}
+        model={contextMenuModel}
+        withBackdrop
       />
     </TanStackTableContainer>
   );

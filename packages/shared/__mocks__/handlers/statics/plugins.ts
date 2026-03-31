@@ -28,7 +28,13 @@ import { http } from "msw";
 import * as fs from "fs";
 import * as path from "path";
 
-// Mock plugin JavaScript content
+// Path to test plugins directory
+const PLUGINS_DIR = path.resolve(
+  __dirname,
+  "../../../../client/__tests__/plugins/test-plugins",
+);
+
+// Mock plugin JavaScript content (fallback when plugin file not found)
 const mockPluginJs = `
 (function() {
   // Mock plugin script
@@ -43,13 +49,28 @@ const mockPluginCss = `
 `;
 
 export const pluginJsHandler = () => {
-  return http.get("*/plugins/*/plugin.js", () => {
-    return new Response(mockPluginJs, {
-      headers: {
-        "Content-Type": "application/javascript",
-      },
-    });
-  });
+  return http.get(
+    "*/plugins/:pluginName/plugin.js",
+    ({ params }) => {
+      const { pluginName } = params;
+      const pluginPath = path.join(
+        PLUGINS_DIR,
+        String(pluginName),
+        "plugin.js",
+      );
+
+      try {
+        const content = fs.readFileSync(pluginPath, "utf-8");
+        return new Response(content, {
+          headers: { "Content-Type": "application/javascript" },
+        });
+      } catch {
+        return new Response(mockPluginJs, {
+          headers: { "Content-Type": "application/javascript" },
+        });
+      }
+    },
+  );
 };
 
 export const pluginCssHandler = () => {
@@ -61,12 +82,6 @@ export const pluginCssHandler = () => {
     });
   });
 };
-
-// Path to test plugins directory
-const PLUGINS_DIR = path.resolve(
-  __dirname,
-  "../../../../client/__tests__/plugins",
-);
 
 export const pluginAssetsHandler = () => {
   return http.get("*/plugins/:pluginName/assets/:assetName", ({ params }) => {
@@ -98,3 +113,4 @@ export const pluginAssetsHandler = () => {
     }
   });
 };
+

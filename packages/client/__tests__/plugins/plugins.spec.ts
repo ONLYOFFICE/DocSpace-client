@@ -36,7 +36,7 @@ import {
   webPluginsUpdateHandler,
 } from "@docspace/shared/__mocks__/handlers";
 import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
-import { expect, test, TEST_PORT } from "./fixtures/base";
+import { expect, test, TEST_PORT } from "../fixtures/base";
 
 test.describe("Plugins", () => {
   test.beforeEach(async ({ mockRequest }) => {
@@ -283,7 +283,7 @@ test.describe("Plugins", () => {
     // Set LANGUAGE cookie to az for plugin localization
     await page.context().addCookies([
       {
-        name: "language",
+        name: "asc_language",
         value: "az",
         domain: "localhost",
         path: "/",
@@ -368,7 +368,7 @@ test.describe("Plugins", () => {
     // Set LANGUAGE cookie to lv for plugin localization (should fallback to en)
     await page.context().addCookies([
       {
-        name: "language",
+        name: "asc_language",
         value: "lv",
         domain: "localhost",
         path: "/",
@@ -408,3 +408,4 @@ test.describe("Plugins", () => {
     ]);
   });
 });
+

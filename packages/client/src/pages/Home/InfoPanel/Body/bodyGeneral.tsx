@@ -36,6 +36,7 @@ import {
 
 import { AvatarEditorDialog } from "SRC_DIR/components/dialogs";
 import { InfoPanelView } from "SRC_DIR/helpers/info-panel";
+import { usePlugin } from "SRC_DIR/pages/Home/InfoPanel/hooks/usePlugin";
 
 import { BodyProps } from "./Body.types";
 
@@ -120,6 +121,12 @@ const InfoPanelBodyGeneral = ({
 
   const deferredCurrentView = React.useDeferredValue(currentView);
 
+  const { isCurrentPluginApplicable } = usePlugin(
+    currentView,
+    infoPanelItemsList,
+    selection,
+  );
+
   useEffect(() => {
     if (
       fileView === InfoPanelView.infoShare &&
@@ -136,15 +143,12 @@ const InfoPanelBodyGeneral = ({
   useEffect(() => {
     if (!currentView.startsWith("info_plugin-")) return;
 
-    const itemKey = currentView.replace("info_plugin-", "");
-    const item = infoPanelItemsList.find((item) => item.key === itemKey);
-
     if (isAgent) {
       setView(InfoPanelView.infoMembers);
-    } else if (!item || isTrash || isTemplatesRoom) {
+    } else if (isTrash || isTemplatesRoom || !isCurrentPluginApplicable) {
       setView(InfoPanelView.infoDetails);
     }
-  }, [currentView, isAgent, isTrash, isTemplatesRoom, infoPanelItemsList]);
+  }, [currentView, isAgent, isTrash, isTemplatesRoom, isCurrentPluginApplicable]);
 
   const isExpiredLink = useEventCallback(() =>
     checkIsExpiredLinkAsync(selection),

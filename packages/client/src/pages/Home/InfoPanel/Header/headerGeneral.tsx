@@ -34,8 +34,8 @@ import { isLockedSharedRoom } from "@docspace/shared/utils";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 import { isRoom as isRoomUtil } from "@docspace/shared/utils/typeGuards";
 
-import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
 import { InfoPanelView } from "SRC_DIR/helpers/info-panel";
+import { usePlugin } from "SRC_DIR/pages/Home/InfoPanel/hooks/usePlugin";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
 import { hideInfoPanel } from "SRC_DIR/helpers/info-panel";
 import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
@@ -57,6 +57,8 @@ const InfoPanelHeaderGeneral = ({
   isRecentFolder,
 }: HeaderProps) => {
   const { t } = useTranslation(["Common", "InfoPanel"]);
+
+  const { applicablePluginTabs } = usePlugin(null, infoPanelItemsList, selection);
 
   const isContacts = getContactsView();
   const isTrash = getIsTrash();
@@ -157,48 +159,14 @@ const InfoPanelHeaderGeneral = ({
     });
   }
 
-  if (!isAIAgents() && enablePlugins && infoPanelItemsList.length > 0) {
-    const isRoom = selection && "roomType" in selection && selection.roomType;
-    const isFile = selection && "fileExst" in selection && selection.fileExst;
-
-    infoPanelItemsList.forEach((item) => {
-      const onClick = async () => {
-        setView(`info_plugin-${item.key}`);
-      };
-
-      const tabsItem = {
+  if (!isAIAgents() && enablePlugins && applicablePluginTabs.length > 0) {
+    applicablePluginTabs.forEach((item) => {
+      tabsData.push({
         id: `info_plugin-${item.key}`,
         name: item.value.subMenu.name,
-        onClick,
+        onClick: async () => setView(`info_plugin-${item.key}`),
         content: null,
-      };
-
-      if (!item.value.filesType) {
-        tabsData.push(tabsItem);
-        return;
-      }
-
-      if (isRoom && item.value.filesType.includes(PluginFileType.room)) {
-        tabsData.push(tabsItem);
-        return;
-      }
-
-      if (isFile && item.value.filesType.includes(PluginFileType.file)) {
-        if (
-          item.value.filesExsts &&
-          !item.value.filesExsts.includes(selection?.fileExst)
-        ) {
-          return;
-        }
-
-        tabsData.push(tabsItem);
-
-        return;
-      }
-
-      if (item.value.filesType.includes(PluginFileType.folder)) {
-        tabsData.push(tabsItem);
-      }
+      });
     });
   }
 

@@ -56,7 +56,7 @@ import Share from "../Share";
 import Plugin from "../Plugin";
 
 import { useHistory } from "./hooks/useHistory";
-import { usePlugin } from "./hooks/usePlugin";
+import { usePlugin } from "SRC_DIR/pages/Home/InfoPanel/hooks/usePlugin";
 import { useMembers } from "./hooks/useMembers";
 import { useShare } from "./hooks/useShare";
 import PluginStore from "SRC_DIR/store/PluginStore";
@@ -362,7 +362,13 @@ const FilesView = ({
     }
 
     if (isPlugin)
-      return <Plugin selection={selection} infoPanelItem={infoPanelItem} />;
+      return (
+        <Plugin
+          key={infoPanelItem?.key}
+          selection={selection}
+          infoPanelItem={infoPanelItem}
+        />
+      );
 
     return value;
   };
@@ -456,3 +462,4 @@ export default inject(
     };
   },
 )(observer(FilesView));
+

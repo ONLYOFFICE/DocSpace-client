@@ -24,11 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { useMemo } from "react";
+
 import PluginStore from "SRC_DIR/store/PluginStore";
+import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
+import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
 
 export const usePlugin = (
   view: string | null,
   infoPanelItemsList?: PluginStore["infoPanelItemsList"],
+  selection?: InfoPanelStore["infoPanelSelection"],
 ) => {
   const isPlugin = view ? view.indexOf("info_plugin") > -1 : false;
   const infoPanelItemKey = view ? view.replace("info_plugin-", "") : "";
@@ -40,9 +45,44 @@ export const usePlugin = (
   const isPluginHeaderVisible =
     !!infoPanelItem && infoPanelItem.isHeaderVisible;
 
+  const applicablePluginTabs = useMemo(() => {
+    if (!infoPanelItemsList || !selection || Array.isArray(selection))
+      return [];
+
+    const isRoom = "roomType" in selection && selection.roomType;
+    const isFile = "fileExst" in selection && selection.fileExst;
+
+    return infoPanelItemsList.filter((item) => {
+      if (!item.value.filesType) return true;
+
+      if (isRoom && item.value.filesType.includes(PluginFileType.room))
+        return true;
+
+      if (isFile && item.value.filesType.includes(PluginFileType.file)) {
+        if (
+          item.value.filesExsts &&
+          !item.value.filesExsts.includes(selection.fileExst)
+        )
+          return false;
+        return true;
+      }
+
+      if (item.value.filesType.includes(PluginFileType.folder)) return true;
+
+      return false;
+    });
+  }, [infoPanelItemsList, selection]);
+
+  const isCurrentPluginApplicable =
+    isPlugin &&
+    !!infoPanelItem &&
+    applicablePluginTabs.some((item) => item.key === infoPanelItemKey);
+
   return {
     isPlugin,
     isPluginHeaderVisible,
     infoPanelItem,
+    applicablePluginTabs,
+    isCurrentPluginApplicable,
   };
 };

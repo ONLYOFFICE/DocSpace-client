@@ -254,60 +254,68 @@ const GroupsTableViewV2 = ({
     [columnStorageName, columnInfoPanelStorageName, infoPanelVisible],
   );
 
-  // Row renderer for TanStackTableBody
+  // Props for the virtual row container (className, onClick, data-testid)
+  const getRowContainerProps = useCallback(
+    (rowIndex: number): Record<string, unknown> => {
+      if (!groups || rowIndex >= groups.length) return {};
+      const item = groups[rowIndex];
+      const isChecked = selection?.includes(item) ?? false;
+      const isActive = bufferSelection?.id === item.id;
+
+      return {
+        className: `group-item table-row ${
+          isChecked || isActive ? "table-row-selected" : ""
+        }`,
+        onClick: (e: React.MouseEvent) => {
+          if (withContentSelection) return;
+          const target = e.target as Element;
+          if (
+            target?.tagName === "SPAN" ||
+            target?.tagName === "A" ||
+            target.closest(".checkbox") ||
+            target.closest(".table-container_row-checkbox") ||
+            e.detail === 0
+          )
+            return;
+          selectRow?.(item);
+        },
+        "data-testid": `contacts_groups_row_${rowIndex}`,
+      };
+    },
+    [groups, selection, bufferSelection, withContentSelection, selectRow],
+  );
+
+  // Row cell renderer — returns cells as direct grid children (no wrapper div)
   const renderRow = useCallback(
     (rowIndex: number) => {
       if (!groups || rowIndex >= groups.length) return null;
       const item = groups[rowIndex];
       const isChecked = selection?.includes(item) ?? false;
-      const isActive = bufferSelection?.id === item.id;
-
-      const onRowClick = (e: React.MouseEvent) => {
-        if (withContentSelection) return;
-        const target = e.target as Element;
-        if (
-          target?.tagName === "SPAN" ||
-          target?.tagName === "A" ||
-          target.closest(".checkbox") ||
-          target.closest(".table-container_row-checkbox") ||
-          e.detail === 0
-        )
-          return;
-        selectRow?.(item);
-      };
 
       const onOpenGroup = (e: React.MouseEvent) => {
         openGroupAction?.(item.id, true, item.name, e);
       };
 
       return (
-        <div
-          key={item.id}
-          className={`group-item table-row ${
-            isChecked || isActive ? "table-row-selected" : ""
-          }`}
-          onClick={onRowClick}
-          data-testid={`contacts_groups_row_${rowIndex}`}
-        >
+        <>
           {/* Name cell */}
-          <div className="table-container_cell table-container_group-title-cell">
-            <div className="table-container_row-checkbox-wrapper">
-              <div className="table-container_element">
-                <Avatar
-                  className="avatar"
-                  size={AvatarSize.min}
-                  userName={item.name}
-                  isGroup
-                  role={AvatarRole.user}
-                  source=""
-                />
-              </div>
-              <Checkbox
-                className="table-container_row-checkbox"
-                onChange={() => changeGroupSelection?.(item, isChecked)}
-                isChecked={isChecked}
-              />
-            </div>
+          <div
+            className="table-container_cell table-container_group-title-cell"
+            style={{ display: "flex", alignItems: "center", gap: "8px", overflow: "hidden" }}
+          >
+            <Avatar
+              className="avatar"
+              size={AvatarSize.min}
+              userName={item.name}
+              isGroup
+              role={AvatarRole.user}
+              source=""
+            />
+            <Checkbox
+              className="table-container_row-checkbox"
+              onChange={() => changeGroupSelection?.(item, isChecked)}
+              isChecked={isChecked}
+            />
             <Link
               onClick={onOpenGroup}
               title={item.name}
@@ -322,8 +330,11 @@ const GroupsTableViewV2 = ({
           </div>
 
           {/* Members cell */}
-          {peopleGroupsColumnIsEnabled ? (
-            <div className="table-container_cell">
+          <div
+            className="table-container_cell"
+            style={{ display: "flex", alignItems: "center" }}
+          >
+            {peopleGroupsColumnIsEnabled ? (
               <Text
                 title={item.membersCount.toString()}
                 fontWeight="600"
@@ -332,14 +343,15 @@ const GroupsTableViewV2 = ({
               >
                 {item.membersCount}
               </Text>
-            </div>
-          ) : (
-            <div />
-          )}
+            ) : null}
+          </div>
 
           {/* Manager cell */}
-          {managerGroupsColumnIsEnabled ? (
-            <div className="table-container_cell">
+          <div
+            className="table-container_cell"
+            style={{ display: "flex", alignItems: "center", overflow: "hidden" }}
+          >
+            {managerGroupsColumnIsEnabled ? (
               <Text
                 title={item.manager?.displayName}
                 fontWeight="600"
@@ -350,14 +362,12 @@ const GroupsTableViewV2 = ({
               >
                 {item.manager?.displayName}
               </Text>
-            </div>
-          ) : (
-            <div />
-          )}
+            ) : null}
+          </div>
 
           {/* Context menu spacer (24px settings column) */}
           <div className="table-container_row-context-menu-wrapper" />
-        </div>
+        </>
       );
     },
     [
@@ -393,6 +403,7 @@ const GroupsTableViewV2 = ({
         hasMore={hasMoreGroups}
         fetchMore={fetchMoreGroups}
         renderRow={renderRow}
+        getRowContainerProps={getRowContainerProps}
         totalCount={groupsFilterTotal}
       />
     </TanStackTableContainer>

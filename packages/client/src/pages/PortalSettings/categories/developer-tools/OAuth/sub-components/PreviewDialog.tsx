@@ -45,11 +45,7 @@ import OnlyofficeLight from "PUBLIC_DIR/images/onlyoffice.light.react.svg";
 import OnlyofficeDark from "PUBLIC_DIR/images/onlyoffice.dark.react.svg";
 
 import OAuthStore from "SRC_DIR/store/OAuthStore";
-import {
-	StyledContainer,
-	StyledPreviewContainer,
-	StyledBlocksContainer,
-} from "../OAuth.styled";
+import styles from "../OAuth.styled.module.scss";
 
 const htmlBlock = `<body>
     <button id="docspace-button" class="docspace-button">
@@ -195,8 +191,8 @@ const PreviewDialog = ({
 		>
 			<ModalDialog.Header>{t("OAuth:AuthButton")}</ModalDialog.Header>
 			<ModalDialog.Body>
-				<StyledContainer>
-					<StyledPreviewContainer>
+				<div className={styles.styledContainer}>
+					<div className={styles.styledPreviewContainer}>
 						<SocialButton
 							className="social-button"
 							label={
@@ -213,8 +209,8 @@ const PreviewDialog = ({
 							}}
 							dataTestId="social_OAuth_button"
 						/>
-					</StyledPreviewContainer>
-					<StyledBlocksContainer>
+					</div>
+					<div className={styles.styledBlocksContainer}>
 						<div className="block-container">
 							<Text fontWeight={600} lineHeight="20px" fontSize="13px">
 								HTML
@@ -278,8 +274,8 @@ const PreviewDialog = ({
 								/>
 							</div>
 						) : null}
-					</StyledBlocksContainer>
-				</StyledContainer>
+					</div>
+				</div>
 			</ModalDialog.Body>
 			<ModalDialog.Footer>
 				<Button

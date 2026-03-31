@@ -28,7 +28,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
-import { StyledHeaderRow } from "../ClientForm.styled";
+import styles from "../ClientForm.styled.module.scss";
 
 interface BlockHeaderProps {
   header: string;
@@ -44,7 +44,7 @@ const BlockHeader = ({
   isRequired,
 }: BlockHeaderProps) => {
   return (
-    <StyledHeaderRow className={className}>
+    <div className={[styles.styledHeaderRow, className].filter(Boolean).join(" ")}>
       <Text
         fontSize="16px"
         fontWeight={700}
@@ -75,7 +75,7 @@ const BlockHeader = ({
           tooltipContent={helpButtonText}
         />
       ) : null}
-    </StyledHeaderRow>
+    </div>
   );
 };
 

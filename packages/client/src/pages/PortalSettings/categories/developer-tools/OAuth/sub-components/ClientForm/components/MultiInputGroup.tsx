@@ -36,12 +36,7 @@ import { IClientReqDTO } from "@docspace/shared/utils/oauth/types";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 
-import {
-  StyledChipsContainer,
-  StyledInputAddBlock,
-  StyledInputGroup,
-  StyledInputRow,
-} from "../ClientForm.styled";
+import styles from "../ClientForm.styled.module.scss";
 import { isValidUrl } from "../ClientForm.utils";
 
 import InputGroup from "./InputGroup";
@@ -170,7 +165,7 @@ const MultiInputGroup = ({
   }, [isAddVisible]);
 
   return (
-    <StyledInputGroup className={`multi-input-group-${label}`}>
+    <div className={[styles.styledInputGroup, `multi-input-group-${label}`].join(" ")}>
       <InputGroup
         label={label}
         helpButtonText={helpButtonText}
@@ -187,7 +182,7 @@ const MultiInputGroup = ({
         isError={isError || hasError}
         dataTestId={dataTestId ? `${dataTestId}_input_group` : undefined}
       >
-        <StyledInputRow>
+        <div className={styles.styledInputRow}>
           <InputBlock
             name={name}
             value={value}
@@ -205,7 +200,7 @@ const MultiInputGroup = ({
             noIcon
             testId={`${dataTestId}_input`}
           />
-          <StyledInputAddBlock ref={addRef} onClick={onAddAction}>
+          <div ref={addRef} className={styles.styledInputAddBlock} onClick={onAddAction}>
             <Text fontSize="13px" fontWeight={600} lineHeight="20px" truncate>
               {value}
             </Text>
@@ -221,7 +216,7 @@ const MultiInputGroup = ({
               </Text>
               <ArrowIcon />
             </div>
-          </StyledInputAddBlock>
+          </div>
           <AddButton
             onClick={onAddAction}
             isDisabled={isDisabled || isError}
@@ -229,10 +224,10 @@ const MultiInputGroup = ({
               dataTestId ? `${dataTestId}_selector_add_button` : undefined
             }
           />
-        </StyledInputRow>
+        </div>
       </InputGroup>
 
-      <StyledChipsContainer>
+      <div className={styles.styledChipsContainer}>
         {currentValue.map((v, i) => (
           <SelectedItem
             key={`${v}`}
@@ -249,8 +244,8 @@ const MultiInputGroup = ({
             }
           />
         ))}
-      </StyledChipsContainer>
-    </StyledInputGroup>
+      </div>
+    </div>
   );
 };
 

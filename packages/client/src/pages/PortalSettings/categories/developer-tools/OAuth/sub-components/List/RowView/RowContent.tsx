@@ -28,12 +28,9 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
-import {
-  StyledRowContent,
-  ContentWrapper,
-  FlexWrapper,
-  ToggleButtonWrapper,
-} from "./RowView.styled";
+import { RowContent as UIRowContent } from "@docspace/ui-kit/components/rows";
+
+import styles from "./RowView.styled.module.scss";
 import { RowContentProps } from "./RowView.types";
 
 export const RowContent = ({
@@ -43,9 +40,9 @@ export const RowContent = ({
   handleToggleEnabled,
 }: RowContentProps) => {
   return (
-    <StyledRowContent sectionWidth={sectionWidth}>
-      <ContentWrapper>
-        <FlexWrapper>
+    <UIRowContent className={styles.styledRowContent} sectionWidth={sectionWidth}>
+      <div className={styles.contentWrapper}>
+        <div className={styles.flexWrapper}>
           <Text
             fontWeight={600}
             fontSize="14px"
@@ -53,14 +50,14 @@ export const RowContent = ({
           >
             {item.name}
           </Text>
-        </FlexWrapper>
+        </div>
 
         <Text fontWeight={600} fontSize="12px" color={globalColors.gray}>
           {item.description}
         </Text>
-      </ContentWrapper>
+      </div>
 
-      <ToggleButtonWrapper>
+      <div className={styles.toggleButtonWrapper}>
         <ToggleButton
           className="toggle toggleButton"
           id="toggle id"
@@ -68,7 +65,7 @@ export const RowContent = ({
           onChange={handleToggleEnabled}
           dataTestId={`${item.name}_toggle_button`}
         />
-      </ToggleButtonWrapper>
-    </StyledRowContent>
+      </div>
+    </UIRowContent>
   );
 };

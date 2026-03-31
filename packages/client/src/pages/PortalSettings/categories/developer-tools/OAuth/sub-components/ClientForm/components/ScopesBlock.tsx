@@ -44,11 +44,7 @@ import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import BlockHeader from "./BlockHeader";
 
-import {
-	StyledScopesCheckbox,
-	StyledScopesContainer,
-	StyledScopesName,
-} from "../ClientForm.styled";
+import styles from "../ClientForm.styled.module.scss";
 
 interface TScopesBlockProps {
 	scopes: TScope[];
@@ -137,7 +133,7 @@ const ScopesBlock = ({
 
 			const row = (
 				<React.Fragment key={name}>
-					<StyledScopesName>
+					<div className={styles.styledScopesName}>
 						<Text
 							className="scope-name"
 							fontSize="14px"
@@ -185,8 +181,8 @@ const ScopesBlock = ({
 								— {t(`${value.write?.tKey}`)}
 							</Text>
 						) : null}
-					</StyledScopesName>
-					<StyledScopesCheckbox>
+					</div>
+					<div className={styles.styledScopesCheckbox}>
 						<Checkbox
 							className="checkbox-read"
 							isChecked={isReadChecked}
@@ -200,8 +196,8 @@ const ScopesBlock = ({
 							}
 							dataTestId={`${key}_read_checkbox`}
 						/>
-					</StyledScopesCheckbox>
-					<StyledScopesCheckbox>
+					</div>
+					<div className={styles.styledScopesCheckbox}>
 						{value.write?.name ? (
 							<Checkbox
 								isChecked={isReadDisabled}
@@ -216,7 +212,7 @@ const ScopesBlock = ({
 								dataTestId={`${key}_write_checkbox`}
 							/>
 						) : null}
-					</StyledScopesCheckbox>
+					</div>
 				</React.Fragment>
 			);
 
@@ -231,7 +227,7 @@ const ScopesBlock = ({
 	const isRequiredError = requiredErrorFields.includes("scopes");
 
 	return (
-		<StyledScopesContainer isRequiredError={isRequiredError}>
+		<div className={[styles.styledScopesContainer, isRequiredError ? styles.requiredError : ""].filter(Boolean).join(" ")}>
 			<BlockHeader
 				className="header"
 				header={t("ScopesHeader")}
@@ -276,7 +272,7 @@ const ScopesBlock = ({
 				</>
 			) : null}
 			{list.map((item) => item)}
-		</StyledScopesContainer>
+		</div>
 	);
 };
 

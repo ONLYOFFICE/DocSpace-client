@@ -50,7 +50,7 @@ import { copyShareLink } from "@docspace/shared/utils/copy";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 
 import OAuthStore from "SRC_DIR/store/OAuthStore";
-import { StyledGenerateDevelopTokenContainer } from "../OAuth.styled";
+import styles from "../OAuth.styled.module.scss";
 
 type GenerateDeveloperTokenDialogProps = {
   client?: IClientProps;
@@ -184,7 +184,7 @@ const GenerateDeveloperTokenDialog = ({
         {token ? t("Token") : t("GenerateToken")}
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <StyledGenerateDevelopTokenContainer>
+        <div className={styles.styledGenerateDevelopTokenContainer}>
           {!token ? (
             <>
               <Text style={{ marginBottom: "16px" }}>
@@ -241,7 +241,7 @@ const GenerateDeveloperTokenDialog = ({
               </Text>
             </>
           )}
-        </StyledGenerateDevelopTokenContainer>
+        </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

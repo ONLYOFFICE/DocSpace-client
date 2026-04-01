@@ -320,7 +320,7 @@ const GroupsTableViewV2 = ({
         <>
           {/* Name cell — matches OLD structure exactly */}
           <div className="table-container_cell table-container_group-title-cell">
-            <div className="table-container_row-checkbox-wrapper" style={{ display: "flex", minWidth: "48px", paddingInlineEnd: "0" }}>
+            <div className={`table-container_row-checkbox-wrapper${isChecked ? " checked" : ""}`}>
               <div className="table-container_element">
                 <Avatar
                   className="avatar"

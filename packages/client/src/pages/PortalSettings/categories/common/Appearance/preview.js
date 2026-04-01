@@ -118,7 +118,7 @@ const Preview = (props) => {
     return () => {
       window.removeEventListener("resize", onCheckView);
     };
-  });
+  }, []);
 
   return isSmallWindow || isMobile() ? (
     <div

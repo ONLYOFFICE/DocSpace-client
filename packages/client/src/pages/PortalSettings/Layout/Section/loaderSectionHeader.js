@@ -47,7 +47,7 @@ const LoaderSectionHeader = () => {
     window.addEventListener("resize", checkInnerWidth);
 
     return () => window.removeEventListener("resize", checkInnerWidth);
-  });
+  }, []);
 
   return (
     <div className={styles.styledLoader}>

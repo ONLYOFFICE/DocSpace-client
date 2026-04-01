@@ -31,25 +31,67 @@ import { ContextMenuButton } from "@docspace/ui-kit/components/context-menu-butt
 
 import ButtonPlusIcon from "PUBLIC_DIR/images/actions.button.plus.react.svg";
 
+import classnames from "classnames";
+
 import { isMobile, isTablet } from "@docspace/shared/utils";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
-import {
-  StyledComponent,
-  StyledFloatingButton,
-  IconBox,
-  StyledMobilePreview,
-} from "./StyledPreview";
+import { useInterfaceDirection } from "@docspace/ui-kit/context/InterfaceDirectionContext";
+import previewStyles from "./StyledPreview.module.scss";
+
+const buildPreviewVars = (themePreview, colorPreview, isViewTablet) => {
+  const isLight = themePreview === "Light";
+
+  return {
+    "--preview-color": colorPreview,
+    "--preview-menu-bg": isLight
+      ? globalColors.grayLight
+      : globalColors.darkGrayLight,
+    "--preview-menu-width": isViewTablet ? "61px" : "251px",
+    "--preview-menu-padding": isViewTablet ? "15px 0 0" : "21px 0 17px",
+    "--preview-line-bg": isLight
+      ? globalColors.grayLightMid
+      : globalColors.grayDarkStrong,
+    "--preview-notice-stroke": isLight ? "none" : globalColors.darkGrayLight,
+    "--preview-section-bg": isLight ? globalColors.white : globalColors.black,
+    "--preview-section-width": isViewTablet ? "100%" : "56%",
+    "--preview-section-flex-tablet-display": isViewTablet ? "flex" : "initial",
+    "--preview-section-flex-tablet-justify": isViewTablet
+      ? "space-between"
+      : "initial",
+    "--preview-section-tile-padding-inline": isViewTablet ? "20px 0" : "20px",
+    "--preview-loaders-theme-bg": isLight
+      ? globalColors.white
+      : globalColors.grayDark,
+    "--preview-select-bg": isLight ? globalColors.white : globalColors.black,
+    "--preview-border-color": isLight
+      ? globalColors.grayStrong
+      : globalColors.grayDarkStrong,
+    "--preview-tile-width": isViewTablet ? "64%" : "auto",
+    "--preview-background": isLight
+      ? globalColors.white
+      : globalColors.darkGrayLight,
+    "--preview-only-tile-name-width": isViewTablet ? "66%" : "auto",
+    "--preview-color-loaders-fill": isLight ? colorPreview : globalColors.white,
+    "--preview-pin-fill": isLight ? colorPreview : globalColors.white,
+    "--preview-tile-text-bg": isLight
+      ? globalColors.grayStrong
+      : globalColors.grayDark,
+    "--preview-mobile-border": isLight
+      ? `1px solid ${globalColors.grayStrong}`
+      : `1px solid ${globalColors.grayDarkStrong}`,
+  };
+};
 
 const Preview = (props) => {
   const {
     previewAccent,
     themePreview,
-    selectThemeId,
     withBorder = true,
     withTileActions = true,
     floatingButtonClass,
     colorCheckImg,
   } = props;
+  const { isRTL } = useInterfaceDirection();
   const [colorPreview, setColorPreview] = useState(previewAccent);
   const [isViewTablet, setIsViewTablet] = useState(false);
   const [isSmallWindow, setIsSmallWindow] = useState(false);
@@ -79,10 +121,9 @@ const Preview = (props) => {
   });
 
   return isSmallWindow || isMobile() ? (
-    <StyledMobilePreview
-      selectThemeId={selectThemeId}
-      themePreview={themePreview}
-      colorPreview={colorPreview}
+    <div
+      className={previewStyles.styledMobilePreview}
+      style={buildPreviewVars(themePreview, colorPreview)}
     >
       <div className="preview_mobile-header">
         <RectangleSkeleton
@@ -180,33 +221,28 @@ const Preview = (props) => {
           />
         </div>
       </div>
-      <StyledFloatingButton
-        className={
-          floatingButtonClass
-            ? `${floatingButtonClass} floating-button`
-            : "floating-button"
-        }
-        colorPreview={colorPreview}
-        themePreview={themePreview}
-        selectThemeId={selectThemeId}
+      <div
+        className={classnames(
+          previewStyles.styledFloatingButton,
+          floatingButtonClass ? `${floatingButtonClass} floating-button` : "floating-button",
+        )}
+        style={{ "--preview-color": colorPreview }}
       >
-        <IconBox
-          colorPreview={colorPreview}
-          themePreview={themePreview}
-          selectThemeId={selectThemeId}
-          colorCheckImg={colorCheckImg}
+        <div
+          className={previewStyles.iconBox}
+          style={{ "--check-img-color": colorCheckImg }}
         >
           <ButtonPlusIcon />
-        </IconBox>
-      </StyledFloatingButton>
-    </StyledMobilePreview>
+        </div>
+      </div>
+    </div>
   ) : (
-    <StyledComponent
-      colorPreview={colorPreview}
-      themePreview={themePreview}
-      selectThemeId={selectThemeId}
-      isViewTablet={isViewTablet}
-      withBorder={withBorder}
+    <div
+      className={classnames(previewStyles.styledComponent, {
+        [previewStyles.withBorder]: withBorder,
+        [previewStyles.rtl]: isRTL,
+      })}
+      style={buildPreviewVars(themePreview, colorPreview, isViewTablet)}
     >
       <div className="menu border-color">
         {!isViewTablet ? (
@@ -577,24 +613,20 @@ const Preview = (props) => {
         </div>
 
         {isViewTablet ? (
-          <StyledFloatingButton
-            className={floatingButtonClass}
-            colorPreview={colorPreview}
-            themePreview={themePreview}
-            selectThemeId={selectThemeId}
+          <div
+            className={classnames(previewStyles.styledFloatingButton, floatingButtonClass)}
+            style={{ "--preview-color": colorPreview }}
           >
-            <IconBox
-              colorPreview={colorPreview}
-              themePreview={themePreview}
-              selectThemeId={selectThemeId}
-              colorCheckImg={colorCheckImg}
+            <div
+              className={previewStyles.iconBox}
+              style={{ "--check-img-color": colorCheckImg }}
             >
               <ButtonPlusIcon />
-            </IconBox>
-          </StyledFloatingButton>
+            </div>
+          </div>
         ) : null}
       </div>
-    </StyledComponent>
+    </div>
   );
 };
 

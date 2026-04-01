@@ -34,8 +34,10 @@ import {
 import { Button } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
 
+import classnames from "classnames";
+
 import { LDAPCertificateProblem } from "@docspace/shared/enums";
-import StyledCertificateDialogBody from "../styled-components/StyledCerticateDialog";
+import styles from "../styled-containers/StyledCerticateDialog.module.scss";
 
 const CertificateDialog = ({
   setCertificateDialogVisible,
@@ -108,7 +110,7 @@ const CertificateDialog = ({
     >
       <ModalDialog.Header>{t("LdapCertificateConfirm")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <StyledCertificateDialogBody hasError={hasError}>
+        <div className={classnames(styles.styledCertificateDialogBody, { [styles.hasError]: hasError })}>
           <div className="ldap-settings-crt-confirmation">
             <Text lineHeight="20px" fontSize="13px" fontWeight="400">
               {t("LdapAddCertificateToStoreConfirmation")}
@@ -148,7 +150,7 @@ const CertificateDialog = ({
               ))}
             </div>
           ) : null}
-        </StyledCertificateDialogBody>
+        </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

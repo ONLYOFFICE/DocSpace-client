@@ -33,6 +33,7 @@ import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { Badge } from "@docspace/ui-kit/components/badge";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import classnames from "classnames";
 import styles from "./ToggleAutoSync.module.scss";
 
 const ToggleAutoSync = ({
@@ -61,11 +62,8 @@ const ToggleAutoSync = ({
     [toggleCron],
   );
 
-  const classNames = [styles.styledWrapper];
-  if (!isLdapAvailable) classNames.push(styles.unavailable);
-
   return (
-    <div className={classNames.join(" ")}>
+    <div className={classnames(styles.styledWrapper, { [styles.unavailable]: !isLdapAvailable })}>
       <ToggleButton
         className="toggle"
         isChecked={isCronEnabled}

@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { isMobileOnly } from "react-device-detect";
+import classnames from "classnames";
 import styles from "./StyledSettings.module.scss";
 
 const StyledSettingsComponent = ({
@@ -37,27 +37,21 @@ const StyledSettingsComponent = ({
   children,
   ...rest
 }) => {
-  const classNames = [styles.settingsComponent];
-
-  if (hasScroll) classNames.push(styles.hasScroll);
-  if (isMobileOnly) classNames.push(styles.mobileOnlyLandscape);
-  if (withoutExternalLink) classNames.push(styles.withoutExternalLink);
-  if (standalone) classNames.push(styles.standalone);
-  if (!isSettingPaid) classNames.push(styles.unavailable);
-  if (className) classNames.push(className);
-
-  const inlineStyle = { ...style };
-  if (hasScroll) {
-    inlineStyle["--settings-has-scroll-width"] = isMobileOnly
-      ? "100vw"
-      : "calc(100vw - 52px)";
-    inlineStyle["--settings-has-scroll-block-width"] = isMobileOnly
-      ? "calc(100vw - 32px)"
-      : "calc(100vw - 84px)";
-  }
-
   return (
-    <div className={classNames.join(" ")} style={inlineStyle} {...rest}>
+    <div
+      className={classnames(
+        styles.settingsComponent,
+        {
+          [styles.hasScroll]: hasScroll,
+          [styles.withoutExternalLink]: withoutExternalLink,
+          [styles.standalone]: standalone,
+          [styles.unavailable]: !isSettingPaid,
+        },
+        className,
+      )}
+      style={style}
+      {...rest}
+    >
       {children}
     </div>
   );

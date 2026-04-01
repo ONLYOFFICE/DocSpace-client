@@ -24,17 +24,30 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styles from "./StyledCertificatesTable.module.scss";
+import classnames from "classnames";
+import styles from "./StyledLdapPage.module.scss";
 
-const StyledCertificatesTable = ({ className, style, children, ...rest }) => {
-  const classNames = [styles.styledCertificatesTable];
-  if (className) classNames.push(className);
-
+const StyledLdapPage = ({
+  isSmallWindow,
+  isMobileView,
+  className,
+  style,
+  children,
+  ...rest
+}) => {
   return (
-    <div className={classNames.join(" ")} style={style} {...rest}>
+    <div
+      className={classnames(
+        styles.styledLdapPage,
+        { [styles.smallWindow]: isSmallWindow, [styles.mobileView]: isMobileView },
+        className,
+      )}
+      style={style}
+      {...rest}
+    >
       {children}
     </div>
   );
 };
 
-export default StyledCertificatesTable;
+export default StyledLdapPage;

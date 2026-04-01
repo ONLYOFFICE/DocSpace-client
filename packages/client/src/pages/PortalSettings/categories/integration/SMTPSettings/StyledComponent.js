@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import classnames from "classnames";
 import styles from "./StyledComponent.module.scss";
 
 const StyledComponent = ({
@@ -33,23 +34,24 @@ const StyledComponent = ({
   children,
   ...rest
 }) => {
-  const classNames = [styles.styledComponent];
-  if (withoutExternalLink) classNames.push(styles.withoutExternalLink);
-  if (className) classNames.push(className);
-
   return (
-    <div className={classNames.join(" ")} style={style} {...rest}>
+    <div
+      className={classnames(
+        styles.styledComponent,
+        { [styles.withoutExternalLink]: withoutExternalLink },
+        className,
+      )}
+      style={style}
+      {...rest}
+    >
       {children}
     </div>
   );
 };
 
 const ButtonStyledComponent = ({ className, style, children, ...rest }) => {
-  const classNames = [styles.buttonStyledComponent];
-  if (className) classNames.push(className);
-
   return (
-    <div className={classNames.join(" ")} style={style} {...rest}>
+    <div className={classnames(styles.buttonStyledComponent, className)} style={style} {...rest}>
       {children}
     </div>
   );

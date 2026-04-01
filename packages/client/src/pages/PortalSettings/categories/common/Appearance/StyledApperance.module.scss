@@ -30,39 +30,39 @@
   width: 100%;
   max-width: 575px;
 
-  :global(.header) {
+  .header {
     font-weight: 700;
     font-size: 16px;
     line-height: 22px;
   }
 
-  :global(.preview-header) {
+  .previewHeader {
     display: flex;
     align-items: center;
     gap: 4px;
     padding-bottom: 20px;
   }
 
-  :global(.theme-standard-container) {
+  .themeStandardContainer {
     padding-top: 21px;
   }
 
-  :global(.theme-name) {
+  .themeName {
     font-size: 15px;
     line-height: 16px;
     font-weight: 600;
   }
 
-  :global(.theme-container) {
+  .themeContainer {
     padding: 12px 0 24px;
     display: flex;
   }
 
-  :global(.custom-themes) {
+  .customThemes {
     display: flex;
   }
 
-  :global(.theme-add) {
+  .themeAdd {
     width: 46px;
     height: 46px;
     margin-inline-end: 12px;
@@ -80,7 +80,7 @@
     box-sizing: border-box;
   }
 
-  :global(.buttons-container) {
+  .buttonsContainer {
     display: flex;
     padding-top: 24px;
 
@@ -95,7 +95,7 @@
     }
   }
 
-  :global(.check-img) {
+  .checkImg {
     padding-block: 16px 0;
     padding-inline: 15px 0;
 
@@ -106,7 +106,7 @@
 }
 
 .showDeleteButton {
-  :global(.buttons-container) {
+  .buttonsContainer {
     @include mixins.mobile {
       flex-direction: column;
       gap: 8px;
@@ -126,12 +126,12 @@
   border-radius: 8px;
   cursor: pointer;
 
-  :global(.check-hover) {
+  .checkHover {
     visibility: hidden;
   }
 
   &:hover {
-    :global(.check-hover) {
+    .checkHover {
       padding-block: 16px 0;
       padding-inline: 15px 0;
       visibility: visible;

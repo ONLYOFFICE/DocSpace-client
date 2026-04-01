@@ -32,6 +32,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { Badge } from "@docspace/ui-kit/components/badge";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import classnames from "classnames";
 import styles from "./ToggleSSO.module.scss";
 
 const ToggleSSO = ({ enableSso, ssoToggle, isSSOAvailable }) => {
@@ -42,11 +43,8 @@ const ToggleSSO = ({ enableSso, ssoToggle, isSSOAvailable }) => {
     ssoToggle(t);
   }, [ssoToggle, t]);
 
-  const classNames = [styles.styledWrapper];
-  if (!isSSOAvailable) classNames.push(styles.unavailable);
-
   return (
-    <div className={classNames.join(" ")}>
+    <div className={classnames(styles.styledWrapper, { [styles.unavailable]: !isSSOAvailable })}>
       <ToggleButton
         className="enable-sso toggle"
         isChecked={enableSso}

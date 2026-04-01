@@ -24,14 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import classnames from "classnames";
 import styles from "./StyledModalDialog.module.scss";
 
 const StyledBodyContent = ({ className, style, children, ...rest }) => {
-  const classNames = [styles.styledBodyContent];
-  if (className) classNames.push(className);
-
   return (
-    <div className={classNames.join(" ")} style={style} {...rest}>
+    <div className={classnames(styles.styledBodyContent, className)} style={style} {...rest}>
       {children}
     </div>
   );

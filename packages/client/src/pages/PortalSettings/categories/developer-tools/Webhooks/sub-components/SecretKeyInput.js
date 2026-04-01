@@ -37,9 +37,9 @@ import { PasswordInput } from "@docspace/ui-kit/components/password-input";
 import { inject, observer } from "mobx-react";
 
 import { useTranslation } from "react-i18next";
-import { Hint } from "../styled-components";
 
 import styles from "../Webhooks.styled.module.scss";
+import hintStyles from "../Hint.module.scss";
 
 const SecretKeyInput = (props) => {
   const {
@@ -118,7 +118,7 @@ const SecretKeyInput = (props) => {
         />
       </h4>
       {isResetVisible ? (
-        <Hint>
+        <div className={hintStyles.hint}>
           {t("SecretKeyWarning")} <br />
           <Link
             id="reset-key-link"
@@ -131,7 +131,7 @@ const SecretKeyInput = (props) => {
           >
             {t("ResetKey")}
           </Link>
-        </Hint>
+        </div>
       ) : null}
       <div hidden={isResetVisible}>
         <PasswordInput

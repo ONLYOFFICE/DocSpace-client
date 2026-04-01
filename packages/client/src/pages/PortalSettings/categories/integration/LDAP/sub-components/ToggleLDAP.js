@@ -32,6 +32,7 @@ import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { Badge } from "@docspace/ui-kit/components/badge";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { toastr } from "@docspace/ui-kit/components/toast";
+import classnames from "classnames";
 import styles from "./ToggleLDAP.module.scss";
 
 const ToggleLDAP = ({
@@ -56,11 +57,8 @@ const ToggleLDAP = ({
     [toggleLdap, t, save, isLdapEnabledOnServer],
   );
 
-  const classNames = [styles.styledWrapper];
-  if (!isLdapAvailable) classNames.push(styles.unavailable);
-
   return (
-    <div className={classNames.join(" ")}>
+    <div className={classnames(styles.styledWrapper, { [styles.unavailable]: !isLdapAvailable })}>
       <ToggleButton
         className="toggle"
         isChecked={isLdapEnabled}

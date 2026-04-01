@@ -159,6 +159,14 @@
 }
 
 .hasScroll {
+  --settings-has-scroll-width: calc(100vw - 52px);
+  --settings-has-scroll-block-width: calc(100vw - 84px);
+
+  @media (max-width: 428px) {
+    --settings-has-scroll-width: 100vw;
+    --settings-has-scroll-block-width: calc(100vw - 32px);
+  }
+
   @include mixins.mobile {
     width: var(--settings-has-scroll-width);
     inset-inline-start: -16px;
@@ -168,14 +176,6 @@
       width: var(--settings-has-scroll-block-width);
       max-width: none;
       padding-inline-start: 16px;
-    }
-  }
-}
-
-.mobileOnlyLandscape {
-  @media (orientation: landscape) and (max-width: 767px) {
-    :global(.settings-block) {
-      height: auto;
     }
   }
 }

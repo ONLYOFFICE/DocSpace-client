@@ -36,7 +36,7 @@
   @include mixins.tablet {
     width: 100%;
 
-    @media (min-width: var(--show-preview-threshold, 1024px)) {
+    @media (min-width: 720px) {
       :global(.integration-examples-bottom) {
         display: block;
         margin-top: 40px;
@@ -95,7 +95,7 @@
   }
 
   @include mixins.tablet {
-    @media (min-width: var(--show-preview-threshold, 1024px)) {
+    @media (min-width: 720px) {
       :global(.integration-examples) {
         display: none;
       }

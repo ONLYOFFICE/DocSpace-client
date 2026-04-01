@@ -28,7 +28,6 @@ import React from "react";
 import classNames from "classnames";
 
 import { isMobile } from "@docspace/ui-kit/utils/device";
-import { showPreviewThreshold } from "../constants";
 import styles from "./StyledPresets.module.scss";
 
 export const SDKContainer = ({
@@ -39,7 +38,7 @@ export const SDKContainer = ({
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
     className={classNames(styles.sdkContainer, { [styles.isMobile]: isMobile() }, className)}
-    style={{ "--show-preview-threshold": `${showPreviewThreshold}px`, ...style } as React.CSSProperties}
+    style={style}
     {...rest}
   >
     {children}

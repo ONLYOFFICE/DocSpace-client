@@ -58,7 +58,7 @@ const InfoPanelHeaderGeneral = ({
 }: HeaderProps) => {
   const { t } = useTranslation(["Common", "InfoPanel"]);
 
-  const { applicablePluginTabs } = usePlugin(null, infoPanelItemsList, selection);
+  const { pluginTabs } = usePlugin(null, infoPanelItemsList, selection);
 
   const isContacts = getContactsView();
   const isTrash = getIsTrash();
@@ -159,8 +159,8 @@ const InfoPanelHeaderGeneral = ({
     });
   }
 
-  if (!isAIAgents() && enablePlugins && applicablePluginTabs.length > 0) {
-    applicablePluginTabs.forEach((item) => {
+  if (!isAIAgents() && enablePlugins && pluginTabs.length > 0) {
+    pluginTabs.forEach((item) => {
       tabsData.push({
         id: `info_plugin-${item.key}`,
         name: item.value.subMenu.name,

@@ -121,7 +121,7 @@ const InfoPanelBodyGeneral = ({
 
   const deferredCurrentView = React.useDeferredValue(currentView);
 
-  const { isCurrentPluginApplicable } = usePlugin(
+  const { isCurrentPluginTab } = usePlugin(
     currentView,
     infoPanelItemsList,
     selection,
@@ -145,10 +145,10 @@ const InfoPanelBodyGeneral = ({
 
     if (isAgent) {
       setView(InfoPanelView.infoMembers);
-    } else if (isTrash || isTemplatesRoom || !isCurrentPluginApplicable) {
+    } else if (isTrash || isTemplatesRoom || !isCurrentPluginTab) {
       setView(InfoPanelView.infoDetails);
     }
-  }, [currentView, isAgent, isTrash, isTemplatesRoom, isCurrentPluginApplicable]);
+  }, [currentView, isAgent, isTrash, isTemplatesRoom, isCurrentPluginTab]);
 
   const isExpiredLink = useEventCallback(() =>
     checkIsExpiredLinkAsync(selection),

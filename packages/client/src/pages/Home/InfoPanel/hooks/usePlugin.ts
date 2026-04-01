@@ -45,17 +45,35 @@ export const usePlugin = (
   const isPluginHeaderVisible =
     !!infoPanelItem && infoPanelItem.isHeaderVisible;
 
-  const applicablePluginTabs = useMemo(() => {
+  const pluginTabs = useMemo(() => {
     if (!infoPanelItemsList || !selection || Array.isArray(selection))
       return [];
 
     const isRoom = "roomType" in selection && selection.roomType;
     const isFile = "fileExst" in selection && selection.fileExst;
 
+    const isImage =
+      isFile &&
+      "viewAccessibility" in selection &&
+      !selection.viewAccessibility.MediaView &&
+      selection.viewAccessibility.ImageView;
+
+    const isVideo =
+      isFile &&
+      "viewAccessibility" in selection &&
+      selection.viewAccessibility.MediaView &&
+      !selection.viewAccessibility.ImageView;
+
     return infoPanelItemsList.filter((item) => {
       if (!item.value.filesType) return true;
 
       if (isRoom && item.value.filesType.includes(PluginFileType.room))
+        return true;
+
+      if (isImage && item.value.filesType.includes(PluginFileType.image))
+        return true;
+
+      if (isVideo && item.value.filesType.includes(PluginFileType.video))
         return true;
 
       if (isFile && item.value.filesType.includes(PluginFileType.file)) {
@@ -67,22 +85,24 @@ export const usePlugin = (
         return true;
       }
 
-      if (item.value.filesType.includes(PluginFileType.folder)) return true;
+      if (!isFile && item.value.filesType.includes(PluginFileType.folder))
+        return true;
 
       return false;
     });
   }, [infoPanelItemsList, selection]);
 
-  const isCurrentPluginApplicable =
+  const isCurrentPluginTab =
     isPlugin &&
     !!infoPanelItem &&
-    applicablePluginTabs.some((item) => item.key === infoPanelItemKey);
+    pluginTabs.some((item) => item.key === infoPanelItemKey);
 
   return {
     isPlugin,
     isPluginHeaderVisible,
     infoPanelItem,
-    applicablePluginTabs,
-    isCurrentPluginApplicable,
+    pluginTabs,
+    isCurrentPluginTab,
   };
 };
+

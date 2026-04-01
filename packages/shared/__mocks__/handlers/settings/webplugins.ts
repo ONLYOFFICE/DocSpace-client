@@ -118,6 +118,20 @@ export const mockContextMenuPlugin: TAPIPlugin = {
   settings: "",
 };
 
+export const mockInfoPanelPlugin: TAPIPlugin = {
+  ...mockPlugin1,
+  name: "info-panel",
+  version: "1.0.0",
+  minDocSpaceVersion: "3.5.0",
+  description:
+    "Sample plugin demonstrating info panel integration for DocSpace",
+  pluginName: "InfoPanelSample",
+  scopes: "InfoPanel",
+  image: "docspace-icon.svg",
+  url: "/plugins/info-panel/plugin.js",
+  settings: "",
+};
+
 // Empty plugins list
 export const webPluginsEmpty = {
   response: [],
@@ -149,6 +163,20 @@ export const webPluginsWithData = {
 // Plugins list with context menu sample plugin
 export const webPluginsWithContextMenuPlugin = {
   response: [mockContextMenuPlugin],
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+// Plugins list with info panel sample plugin
+export const webPluginsWithInfoPanelPlugin = {
+  response: [mockInfoPanelPlugin],
   count: 1,
   links: [
     {
@@ -216,7 +244,12 @@ export const webPluginsDeleteResponse = {
 
 // Resolvers
 export const webPluginsResolver = (
-  type: "empty" | "withData" | "withLocale" | "withContextMenuPlugin" = "empty",
+  type:
+    | "empty"
+    | "withData"
+    | "withLocale"
+    | "withContextMenuPlugin"
+    | "withInfoPanelPlugin" = "empty",
 ) => {
   let data;
 
@@ -229,6 +262,9 @@ export const webPluginsResolver = (
       break;
     case "withContextMenuPlugin":
       data = webPluginsWithContextMenuPlugin;
+      break;
+    case "withInfoPanelPlugin":
+      data = webPluginsWithInfoPanelPlugin;
       break;
     default:
       data = webPluginsEmpty;
@@ -253,7 +289,12 @@ export const webPluginsDeleteResolver = () => {
 // Handlers
 export const webPluginsHandler = (
   port: string,
-  type: "empty" | "withData" | "withLocale" | "withContextMenuPlugin" = "empty",
+  type:
+    | "empty"
+    | "withData"
+    | "withLocale"
+    | "withContextMenuPlugin"
+    | "withInfoPanelPlugin" = "empty",
 ) => {
   return http.get(
     `${BASE_URL}:${port}/${API_PREFIX}/${PATH_WEB_PLUGINS}`,

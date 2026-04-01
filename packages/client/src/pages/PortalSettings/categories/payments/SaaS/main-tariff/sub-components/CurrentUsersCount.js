@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import classNames from "classnames";
 import { Text } from "@docspace/ui-kit/components/text";
 import React from "react";
 import { inject, observer } from "mobx-react";
@@ -44,9 +45,7 @@ const CurrentUsersCountContainer = (props) => {
         fontSize="16px"
         fontWeight={600}
         textAlign="center"
-        className={[styles.currentAdminsNumber, isDisabled ? styles.isDisabled : ""]
-          .filter(Boolean)
-          .join(" ")}
+        className={classNames(styles.currentAdminsNumber, { [styles.isDisabled]: isDisabled })}
       >
         {addedManagersCountTitle}
       </Text>
@@ -54,9 +53,7 @@ const CurrentUsersCountContainer = (props) => {
         fontSize="44px"
         fontWeight={700}
         textAlign="center"
-        className={[styles.currentAdminsNumber, isDisabled ? styles.isDisabled : ""]
-          .filter(Boolean)
-          .join(" ")}
+        className={classNames(styles.currentAdminsNumber, { [styles.isDisabled]: isDisabled })}
       >
         {maxCountManagersByQuota}
       </Text>

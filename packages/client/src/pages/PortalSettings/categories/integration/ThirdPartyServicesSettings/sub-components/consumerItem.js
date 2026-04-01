@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 import { ReactSVG } from "react-svg";
 import PropTypes from "prop-types";
 import { Text } from "@docspace/ui-kit/components/text";
@@ -55,19 +56,17 @@ const ConsumerItem = ({
     </Heading>
   ) : null;
 
-  const itemClassNames = [styles.styledItem];
-  if (!saveAvailable && !isSet) itemClassNames.push(styles.descriptionDisabled);
-
-  const boxClassNames = [styles.styledBox];
-  if (!saveAvailable && consumer.canSet) boxClassNames.push(styles.unavailable);
-  if (consumer.name === "linkedin") boxClassNames.push(styles.linkedin);
-  if (consumer.name === "weixin") boxClassNames.push(styles.weixin);
-  if (consumer.name === "telegram") boxClassNames.push(styles.telegram);
-
   return (
-    <div className={itemClassNames.join(" ")}>
+    <div className={classNames(styles.styledItem, {
+      [styles.descriptionDisabled]: !saveAvailable && !isSet,
+    })}>
       <div className={styles.itemBox}>
-        <div className={boxClassNames.join(" ")}>{header}</div>
+        <div className={classNames(styles.styledBox, {
+          [styles.unavailable]: !saveAvailable && consumer.canSet,
+          [styles.linkedin]: consumer.name === "linkedin",
+          [styles.weixin]: consumer.name === "weixin",
+          [styles.telegram]: consumer.name === "telegram",
+        })}>{header}</div>
         <div onClick={setConsumer} data-consumer={consumer.name}>
           <ConsumerToggle
             consumer={consumer}

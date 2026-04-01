@@ -25,11 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import { DataImportLoader as StyledLoader } from "../StyledDataImport";
+import styles from "../StyledDataImport.module.scss";
 
 const DataImportLoader = () => {
   return (
-    <StyledLoader>
+    <div className={styles.dataImportLoader}>
       <div className="header">
         <RectangleSkeleton className="title" height="40px" />
         <RectangleSkeleton className="subtitle" height="20px" />
@@ -40,7 +40,7 @@ const DataImportLoader = () => {
         <RectangleSkeleton className="item" width="340px" height="64px" />
         <RectangleSkeleton className="item" width="340px" height="64px" />
       </div>
-    </StyledLoader>
+    </div>
   );
 };
 

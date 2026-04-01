@@ -31,12 +31,8 @@ import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import ArrowSvg from "PUBLIC_DIR/images/arrow2.react.svg?url";
 import { ImportItemProps, ImportSectionProps } from "../types";
 import { Tooltip } from "@docspace/ui-kit/components/tooltip";
-import {
-  SectionWrapper,
-  FlexContainer,
-  ImportItemWrapper,
-  ArrowWrapper,
-} from "../StyledDataImport";
+import classNames from "classnames";
+import styles from "../StyledDataImport.module.scss";
 
 const ImportItem = ({
   sectionName,
@@ -45,7 +41,7 @@ const ImportItem = ({
   isChecked,
 }: ImportItemProps) => {
   return (
-    <ImportItemWrapper isChecked={isChecked}>
+    <div className={classNames(styles.importItemWrapper, { [styles.importItemWrapperUnchecked]: !isChecked })}>
       <Text
         className="workspace-title"
         fontSize="11px"
@@ -63,7 +59,7 @@ const ImportItem = ({
           {sectionName}
         </Text>
       </div>
-    </ImportItemWrapper>
+    </div>
   );
 };
 
@@ -80,7 +76,10 @@ const ImportSection = ({
 }: ImportSectionProps) => {
   const toggleButtonTooltipId = `toggle-button-tooltip-${sectionName}`;
   return (
-    <SectionWrapper data-testid={dataTestId} isChecked={isChecked}>
+    <div
+      data-testid={dataTestId}
+      className={classNames(styles.sectionWrapper, { [styles.sectionWrapperUnchecked]: !isChecked })}
+    >
       <ToggleButton
         isChecked={isChecked}
         onChange={onChange || (() => {})}
@@ -106,15 +105,15 @@ const ImportSection = ({
         <Text fontSize="12px" lineHeight="16px" className="section-description">
           {description}
         </Text>
-        <FlexContainer>
+        <div className={styles.flexContainer}>
           <ImportItem {...exportSection} isChecked={isChecked} />
-          <ArrowWrapper>
+          <div className={styles.arrowWrapper}>
             <ReactSVG className="arrow-icon" src={ArrowSvg} />
-          </ArrowWrapper>
+          </div>
           <ImportItem {...importSection} isChecked={isChecked} />
-        </FlexContainer>
+        </div>
       </div>
-    </SectionWrapper>
+    </div>
   );
 };
 

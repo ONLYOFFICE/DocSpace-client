@@ -26,10 +26,7 @@
 
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { MigrationButtonsProps } from "../types";
-import {
-  MigrationButtonsWrapper,
-  CancelMigrationButton,
-} from "../StyledDataImport";
+import styles from "../StyledDataImport.module.scss";
 
 export const MigrationButtons = ({
   id,
@@ -55,7 +52,7 @@ export const MigrationButtons = ({
   onMigrationCancelClick,
 }: MigrationButtonsProps) => {
   return (
-    <MigrationButtonsWrapper>
+    <div className={styles.migrationButtonsWrapper}>
       <SaveCancelButtons
         id={id}
         className={`migration-buttons ${className}`}
@@ -79,12 +76,13 @@ export const MigrationButtons = ({
         saveButtonDataTestId="next_step_button"
         cancelButtonDataTestId="previos_step_button"
       />
-      <CancelMigrationButton
+      <span
+        className={styles.cancelMigrationButton}
         data-testid="cancel_import_button"
         onClick={onMigrationCancelClick}
       >
         {migrationCancelLabel}
-      </CancelMigrationButton>
-    </MigrationButtonsWrapper>
+      </span>
+    </div>
   );
 };

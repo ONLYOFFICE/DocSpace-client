@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect, useState, useCallback } from "react";
+import classNames from "classnames";
 import { inject, observer } from "mobx-react";
 
 import { TextInput } from "@docspace/ui-kit/components/text-input";
@@ -130,7 +131,7 @@ const CSP = ({
       <div className={styles.categoryHeader}>
         {t("CSPHeader", { productName: t("Common:ProductName") })}
       </div>
-      <div className={[styles.container, styles.descriptionHolder].join(" ")}>
+      <div className={classNames(styles.container, styles.descriptionHolder)}>
         {t("CSPDescription", {
           productName: t("Common:ProductName"),
           organizationName: logoText,
@@ -165,7 +166,7 @@ const CSP = ({
           }
         />
       ) : null}
-      <div className={[styles.container, styles.inputHolder].join(" ")}>
+      <div className={classNames(styles.container, styles.inputHolder)}>
         <TextInput
           onChange={onChangeDomain}
           value={domain}

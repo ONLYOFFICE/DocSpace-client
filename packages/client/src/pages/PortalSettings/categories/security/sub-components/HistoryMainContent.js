@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useEffect, useState } from "react";
+import classNames from "classnames";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Button } from "@docspace/ui-kit/components/button";
 import { TwoFactorCampaignBanner } from "@docspace/shared/components/two-factor-campaign";
@@ -96,12 +97,9 @@ const HistoryMainContent = (props) => {
 
   return (
     <div
-      className={[
-        styles["main-container"],
-        isSettingNotPaid && styles.unavailable,
-      ]
-        .filter(Boolean)
-        .join(" ")}
+      className={classNames(styles["main-container"], {
+        [styles.unavailable]: isSettingNotPaid,
+      })}
     >
       <TwoFactorCampaignBanner
         tfaEnabled={tfaEnabled}

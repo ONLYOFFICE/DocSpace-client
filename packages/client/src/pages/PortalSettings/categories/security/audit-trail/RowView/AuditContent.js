@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/ui-kit/components/text";
@@ -42,12 +43,9 @@ const AuditContent = ({
 }) => {
   const dateStr = getCorrectDate(locale, item.date);
 
-  const className = [
-    styles["row-content"],
-    isSettingNotPaid && styles.unavailable,
-  ]
-    .filter(Boolean)
-    .join(" ");
+  const className = classNames(styles["row-content"], {
+    [styles.unavailable]: isSettingNotPaid,
+  });
 
   return (
     <RowContent

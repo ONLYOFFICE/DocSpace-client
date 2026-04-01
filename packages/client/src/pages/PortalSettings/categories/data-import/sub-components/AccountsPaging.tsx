@@ -27,9 +27,10 @@
 import { useState } from "react";
 
 import type { TOption } from "@docspace/ui-kit/components/combobox";
+import { Paging } from "@docspace/ui-kit/components/paging";
 
 import { AccountsPagingProps } from "../types";
-import { StyledPaging } from "../StyledDataImport";
+import styles from "../StyledDataImport.module.scss";
 
 const AccountsPaging = (props: AccountsPagingProps) => {
   const { t, numberOfItems, setDataPortion, pagesPerPage = 25 } = props;
@@ -110,8 +111,8 @@ const AccountsPaging = (props: AccountsPagingProps) => {
   };
 
   return (
-    <StyledPaging
-      className="accounts-paging"
+    <Paging
+      className={`${styles.styledPaging} accounts-paging`}
       pageItems={pageItems}
       countItems={countItems}
       previousLabel={t("Common:Previous")}

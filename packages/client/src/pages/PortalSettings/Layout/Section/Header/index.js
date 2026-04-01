@@ -55,11 +55,13 @@ import {
 } from "../../../utils";
 import LoaderSectionHeader from "../loaderSectionHeader";
 
+import classNames from "classnames";
+
 import styles from "./Header.module.scss";
 
 export const HeaderContainer = ({ children, className = "", ...props }) => (
   <div
-    className={[styles.headerContainer, className].filter(Boolean).join(" ")}
+    className={classNames(styles.headerContainer, className)}
     {...props}
   >
     {children}
@@ -67,7 +69,7 @@ export const HeaderContainer = ({ children, className = "", ...props }) => (
 );
 
 export const StyledContainer = ({ children, className = "" }) => (
-  <div className={[styles.styledContainer, className].filter(Boolean).join(" ")}>
+  <div className={classNames(styles.styledContainer, className)}>
     {children}
   </div>
 );
@@ -153,7 +155,7 @@ const SectionHeaderContent = (props) => {
     };
 
     let number = 1;
-    if ( window.location.href.indexOf("disk-storage")) number=2
+    if (window.location.href.includes("disk-storage")) number = 2;
     const serviceSubPageHeader = serviceSubPageHeaders[arrayOfParams[number]];
 
     if (serviceSubPageHeader) {
@@ -171,8 +173,6 @@ const SectionHeaderContent = (props) => {
     const keysCollection = key.split("-");
 
     const currKey = keysCollection.length >= 3 ? key : keysCollection[0];
-
-    // console.log(settingsTree, currKey);
 
     const header = getTKeyByKey(currKey, settingsTree);
     const isCategory = checkPropertyByLink(
@@ -282,8 +282,8 @@ const SectionHeaderContent = (props) => {
       ];
 
   const isPaymentPage =
-    window.location.href.includes("portal-settings/payments/") &&
-    !window.location.href.includes("portal-settings/payments/services/");
+    location.pathname.includes("portal-settings/payments/") &&
+    !location.pathname.includes("portal-settings/payments/services/");
 
   const translatedHeader =
     header === IMPORT_HEADER_CONST
@@ -304,8 +304,6 @@ const SectionHeaderContent = (props) => {
           productName: t("Common:ProductName"),
           aiServices: t("Common:AIServices"),
         });
-
-  // console.log(translatedHeader, header);
 
   return (
     <StyledContainer>

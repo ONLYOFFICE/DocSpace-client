@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 import { inject, observer } from "mobx-react";
 
 import { TableRow, TableCell } from "@docspace/ui-kit/components/table";
@@ -38,12 +39,9 @@ const PeopleTableRow = (props) => {
   const { email, position } = item;
   const dateStr = getCorrectDate(locale, item.date);
 
-  const className = [
-    styles["people-row"],
-    isSettingNotPaid && styles.unavailable,
-  ]
-    .filter(Boolean)
-    .join(" ");
+  const className = classNames(styles["people-row"], {
+    [styles.unavailable]: isSettingNotPaid,
+  });
 
   return (
     <TableRow key={item.id} className={className} {...contextOptionsProps}>

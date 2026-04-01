@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useRef, useEffect, useState, useMemo } from "react";
+import classNames from "classnames";
 import { Link } from "@docspace/ui-kit/components/link";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg?url";
@@ -162,19 +163,17 @@ export const EventLogBlock = ({ events, onClear, eventTypes, t }) => {
             return (
               <div key={entry.id}>
                 <div
-                  className={[
-                    styles.logEntry,
-                    expandable ? styles.expandable : "",
-                  ].join(" ")}
+                  className={classNames(styles.logEntry, {
+                    [styles.expandable]: expandable,
+                  })}
                   onClick={expandable ? () => toggle(entry.id) : undefined}
                 >
                   <span className={styles.gutter}>
                     <span
-                      className={[
-                        styles.chevron,
-                        expandable ? styles.visible : "",
-                        expanded ? styles.expanded : "",
-                      ].join(" ")}
+                      className={classNames(styles.chevron, {
+                        [styles.visible]: expandable,
+                        [styles.expanded]: expanded,
+                      })}
                     >
                       {"\u25B6"}
                     </span>

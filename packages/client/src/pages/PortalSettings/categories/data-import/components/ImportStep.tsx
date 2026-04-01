@@ -47,7 +47,7 @@ import {
   InjectedImportStepProps,
 } from "../types";
 import { MigrationButtons } from "../sub-components/MigrationButtons";
-import { ImportStepWrapper as Wrapper } from "../StyledDataImport";
+import styles from "../StyledDataImport.module.scss";
 
 const ImportStep = (props: ImportStepProps) => {
   const {
@@ -114,7 +114,7 @@ const ImportStep = (props: ImportStepProps) => {
   const hideCancelDialog = () => setCancelUploadDialogVisible(false);
 
   return (
-    <Wrapper>
+    <div className={styles.importWrapper}>
       <ImportSection
         isChecked
         sectionName={t("InfoPanel:Users")}
@@ -310,7 +310,7 @@ const ImportStep = (props: ImportStepProps) => {
           isSixthStep={false}
         />
       ) : null}
-    </Wrapper>
+    </div>
   );
 };
 

@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 
 import styles from "./StyledInputWrapper.module.scss";
 
@@ -35,13 +36,11 @@ const StyledInputWrapper = ({
   children,
   ...rest
 }: React.HTMLAttributes<HTMLDivElement> & { maxWidth?: string }) => {
-  const classNames = [styles.styledInputWrapper, className]
-    .filter(Boolean)
-    .join(" ");
+  const cn = classNames(styles.styledInputWrapper, className);
 
   return (
     <div
-      className={classNames}
+      className={cn}
       style={
         { "--input-wrapper-max-width": maxWidth ?? "520px", ...style } as React.CSSProperties
       }

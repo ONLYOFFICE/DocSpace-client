@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useEffect, useRef } from "react";
+import classNames from "classnames";
 import TrashIcon from "PUBLIC_DIR/images/icons/16/trash.react.svg";
 import PlusIcon from "PUBLIC_DIR/images/plus.react.svg";
 import { Link } from "@docspace/ui-kit/components/link";
@@ -116,12 +117,9 @@ const UserFields = (props) => {
 						return (
 							<div
 								key={`user-input-${inputs.length - index}`}
-								className={[
-									styles["input-wrapper"],
-									hideDeleteIcon && styles["hide-delete-icon"],
-								]
-									.filter(Boolean)
-									.join(" ")}
+								className={classNames(styles["input-wrapper"], {
+									[styles["hide-delete-icon"]]: hideDeleteIcon,
+								})}
 							>
 								<FieldContainer
 									className="field-container"
@@ -163,13 +161,11 @@ const UserFields = (props) => {
 				: null}
 
 			<div
-				className={[
+				className={classNames(
 					styles["add-wrapper"],
-					inputs.length > 0 && styles["has-inputs"],
+					{ [styles["has-inputs"]]: inputs.length > 0 },
 					classNameAdditional,
-				]
-					.filter(Boolean)
-					.join(" ")}
+				)}
 				onClick={onClickAdd}
 				data-testid={addButtonDataTestId}
 			>

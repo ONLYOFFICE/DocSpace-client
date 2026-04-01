@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 import { Trans } from "react-i18next";
 import { Text } from "@docspace/ui-kit/components/text";
 import { inject, observer } from "mobx-react";
@@ -43,12 +44,9 @@ const TotalTariffContainer = ({
   return (
     <div className={styles.totalTariffBody}>
       <div
-        className={[
-          styles.paymentPriceTotalPrice,
-          isDisabled ? styles.isDisabled : "",
-        ]
-          .filter(Boolean)
-          .join(" ")}
+        className={classNames(styles.paymentPriceTotalPrice, {
+          [styles.isDisabled]: isDisabled,
+        })}
       >
         {isNeedRequest ? (
           <Text

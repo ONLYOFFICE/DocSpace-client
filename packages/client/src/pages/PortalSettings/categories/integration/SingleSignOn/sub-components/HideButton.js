@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import classNames from "classnames";
 import { inject, observer } from "mobx-react";
 
 import styles from "./HideButton.module.scss";
@@ -50,7 +51,7 @@ const HideButton = (props) => {
 	};
 
 	return (
-		<div className={[styles.styledWrapper, isAdditionalParameters ? styles.additionalParameters : ""].join(" ").trim()}>
+		<div className={classNames(styles.styledWrapper, { [styles.additionalParameters]: isAdditionalParameters })}>
 			{!isAdditionalParameters ? (
 				<Text
 					as="h2"

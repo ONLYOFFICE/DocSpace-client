@@ -61,7 +61,7 @@ const ColorSchemeDialog = (props) => {
   useEffect(() => {
     window.addEventListener("keyup", onKeyPress);
     return () => window.removeEventListener("keyup", onKeyPress);
-  });
+  }, [onClose]);
 
   return (
     <ModalDialog

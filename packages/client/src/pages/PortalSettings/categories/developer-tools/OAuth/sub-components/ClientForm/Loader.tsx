@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 
 import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 import { DeviceType } from "@docspace/shared/enums";
@@ -169,7 +170,7 @@ const ClientFormLoader = ({
 				</div>
 			</div>
 			<div className={styles.styledScopesContainer}>
-				<div className={[styles.styledHeaderRow, "header"].join(" ")}>
+				<div className={classNames(styles.styledHeaderRow, "header")}>
 					<RectangleSkeleton width="111px" height="22px" />
 					<HelpButtonSkeleton />
 				</div>

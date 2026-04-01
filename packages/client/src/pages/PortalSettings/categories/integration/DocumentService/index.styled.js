@@ -24,10 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import classNames from "classnames";
+
 import styles from "./index.module.scss";
 
 export const Location = ({ className, children, ...rest }) => {
-  const cn = [styles.location, className].filter(Boolean).join(" ");
+  const cn = classNames(styles.location, className);
   return (
     <div className={cn} {...rest}>
       {children}
@@ -36,7 +38,7 @@ export const Location = ({ className, children, ...rest }) => {
 };
 
 export const LocationHeader = ({ className, children, ...rest }) => {
-  const cn = [styles.locationHeader, className].filter(Boolean).join(" ");
+  const cn = classNames(styles.locationHeader, className);
   return (
     <div className={cn} {...rest}>
       {children}
@@ -45,7 +47,7 @@ export const LocationHeader = ({ className, children, ...rest }) => {
 };
 
 export const LocationSubheader = ({ className, children, ...rest }) => {
-  const cn = [styles.locationSubheader, className].filter(Boolean).join(" ");
+  const cn = classNames(styles.locationSubheader, className);
   return (
     <div className={cn} {...rest}>
       {children}
@@ -54,7 +56,7 @@ export const LocationSubheader = ({ className, children, ...rest }) => {
 };
 
 export const LocationForm = ({ className, children, ...rest }) => {
-  const cn = [styles.locationForm, className].filter(Boolean).join(" ");
+  const cn = classNames(styles.locationForm, className);
   return (
     <form className={cn} {...rest}>
       {children}

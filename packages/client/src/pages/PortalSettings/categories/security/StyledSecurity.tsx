@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 
 import styles from "./StyledSecurity.module.scss";
 
@@ -38,13 +39,11 @@ export const MainContainer = ({
   children,
   ...props
 }: WithExternalLinkProps) => {
-  const cls = [
+  const cls = classNames(
     styles["main-container"],
-    withoutExternalLink && styles["without-external-link"],
+    { [styles["without-external-link"]]: withoutExternalLink },
     className,
-  ]
-    .filter(Boolean)
-    .join(" ");
+  );
   return (
     <div className={cls} {...props}>
       {children}
@@ -58,7 +57,7 @@ export const StyledCategoryWrapper = ({
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
-    className={[styles["category-wrapper"], className].filter(Boolean).join(" ")}
+    className={classNames(styles["category-wrapper"], className)}
     {...props}
   >
     {children}
@@ -71,7 +70,7 @@ export const StyledTooltip = ({
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
-    className={[styles.tooltip, className].filter(Boolean).join(" ")}
+    className={classNames(styles.tooltip, className)}
     {...props}
   >
     {children}
@@ -84,13 +83,11 @@ export const LearnMoreWrapper = ({
   children,
   ...props
 }: WithExternalLinkProps) => {
-  const cls = [
+  const cls = classNames(
     styles["learn-more-wrapper"],
-    withoutExternalLink && styles["without-external-link"],
+    { [styles["without-external-link"]]: withoutExternalLink },
     className,
-  ]
-    .filter(Boolean)
-    .join(" ");
+  );
   return (
     <div className={cls} {...props}>
       {children}
@@ -104,13 +101,11 @@ export const StyledBruteForceProtection = ({
   children,
   ...props
 }: WithExternalLinkProps) => {
-  const cls = [
+  const cls = classNames(
     styles["brute-force-protection"],
-    withoutExternalLink && styles["without-external-link"],
+    { [styles["without-external-link"]]: withoutExternalLink },
     className,
-  ]
-    .filter(Boolean)
-    .join(" ");
+  );
   return (
     <div className={cls} {...props}>
       {children}

@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 
 import { TextInput } from "@docspace/ui-kit/components/text-input";
 import { Label } from "@docspace/ui-kit/components/label";
@@ -49,7 +50,7 @@ export const LabledInput = ({
 	return (
 		<Label
 			text={label}
-			className={[styles.styledLabel, className].filter(Boolean).join(" ")}
+			className={classNames(styles.styledLabel, className)}
 		>
 			<TextInput
 				id={id}

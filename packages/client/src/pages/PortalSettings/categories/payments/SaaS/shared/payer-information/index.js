@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import classNames from "classnames";
 import { toAbsoluteUrl } from "../../../utils/index";
 import { Text } from "@docspace/ui-kit/components/text";
 import { useTranslation, Trans } from "react-i18next";
@@ -135,12 +136,9 @@ const PayerInformation = ({
                     fontWeight={600}
                     onClick={isDisabled ? () => {} : onRefreshData}
                     textDecoration="underline dotted"
-                    className={[
-                      styles.payerInfoRefreshData,
-                      isDisabled ? styles.isDisabled : "",
-                    ]
-                      .filter(Boolean)
-                      .join(" ")}
+                    className={classNames(styles.payerInfoRefreshData, {
+                      [styles.isDisabled]: isDisabled,
+                    })}
                     dataTestId="stripe_customer_refresh_data"
                   />
                 ),

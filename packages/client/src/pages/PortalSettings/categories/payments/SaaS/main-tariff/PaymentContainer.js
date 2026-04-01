@@ -26,6 +26,7 @@
 
 import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
 import React from "react";
+import classNames from "classnames";
 import { Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -260,9 +261,7 @@ const PaymentContainer = (props) => {
             ) : null}
 
             <div
-              className={[styles.paymentInfo, isChangeView ? styles.isChangeView : ""]
-                .filter(Boolean)
-                .join(" ")}
+              className={classNames(styles.paymentInfo, { [styles.isChangeView]: isChangeView })}
             >
               {!isNonProfit ? <PriceCalculation t={t} /> : null}
 

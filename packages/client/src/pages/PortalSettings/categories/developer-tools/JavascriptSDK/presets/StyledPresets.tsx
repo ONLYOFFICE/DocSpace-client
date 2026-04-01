@@ -25,15 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 
 import { isMobile } from "@docspace/ui-kit/utils/device";
 import { showPreviewThreshold } from "../constants";
 import styles from "./StyledPresets.module.scss";
-
-const cn =
-  (...classes: string[]) =>
-  (extra: string | undefined): string =>
-    [...classes, extra].filter(Boolean).join(" ");
 
 export const SDKContainer = ({
   className,
@@ -42,9 +38,7 @@ export const SDKContainer = ({
   ...rest
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
-    className={cn(styles.sdkContainer, isMobile() ? styles.isMobile : "")(
-      className,
-    )}
+    className={classNames(styles.sdkContainer, { [styles.isMobile]: isMobile() }, className)}
     style={{ "--show-preview-threshold": `${showPreviewThreshold}px`, ...style } as React.CSSProperties}
     {...rest}
   >
@@ -59,9 +53,7 @@ export const Controls = ({
   ...rest
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
-    className={cn(styles.controls, isMobile() ? styles.isMobile : "")(
-      className,
-    )}
+    className={classNames(styles.controls, { [styles.isMobile]: isMobile() }, className)}
     style={style}
     {...rest}
   >
@@ -76,9 +68,7 @@ export const CategoryHeader = ({
   ...rest
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
-    className={cn(styles.categoryHeader, isMobile() ? styles.isMobile : "")(
-      className,
-    )}
+    className={classNames(styles.categoryHeader, { [styles.isMobile]: isMobile() }, className)}
     style={style}
     {...rest}
   >
@@ -93,11 +83,14 @@ export const CategorySubHeader = ({
   ...rest
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
-    className={cn(
+    className={classNames(
       styles.categorySubHeader,
-      isMobile() ? styles.isMobile : "",
-      className?.includes("copy-window-code") ? styles.copyWindowCode : "",
-    )(className)}
+      {
+        [styles.isMobile]: isMobile(),
+        [styles.copyWindowCode]: className?.includes("copy-window-code"),
+      },
+      className,
+    )}
     style={style}
     {...rest}
   >
@@ -112,7 +105,7 @@ export const CategoryDescription = ({
   ...rest
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
-    className={cn(styles.categoryDescription)(className)}
+    className={classNames(styles.categoryDescription, className)}
     style={style}
     {...rest}
   >
@@ -127,9 +120,7 @@ export const ControlsGroup = ({
   ...rest
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
-    className={cn(styles.controlsGroup, isMobile() ? styles.isMobile : "")(
-      className,
-    )}
+    className={classNames(styles.controlsGroup, { [styles.isMobile]: isMobile() }, className)}
     style={style}
     {...rest}
   >
@@ -144,7 +135,7 @@ export const CheckboxGroup = ({
   ...rest
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
-    className={cn(styles.checkboxGroup)(className)}
+    className={classNames(styles.checkboxGroup, className)}
     style={style}
     {...rest}
   >
@@ -159,7 +150,7 @@ export const LabelGroup = ({
   ...rest
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
-    className={cn(styles.labelGroup)(className)}
+    className={classNames(styles.labelGroup, className)}
     style={style}
     {...rest}
   >
@@ -174,7 +165,7 @@ export const ControlsSection = ({
   ...rest
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
-    className={cn(styles.controlsSection)(className)}
+    className={classNames(styles.controlsSection, className)}
     style={style}
     {...rest}
   >
@@ -196,12 +187,15 @@ export const Frame = ({
   targetId?: string;
 }) => (
   <div
-    className={cn(
+    className={classNames(
       styles.frame,
-      isMobile() ? styles.isMobile : "",
-      !width ? styles.noWidth : "",
-      !height ? styles.noHeight : "",
-    )(className)}
+      {
+        [styles.isMobile]: isMobile(),
+        [styles.noWidth]: !width,
+        [styles.noHeight]: !height,
+      },
+      className,
+    )}
     style={{
       "--frame-width": width ?? "100%",
       "--frame-height": height ?? "100%",
@@ -220,9 +214,7 @@ export const Container = ({
   ...rest
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
-    className={cn(styles.container, isMobile() ? styles.isMobile : "")(
-      className,
-    )}
+    className={classNames(styles.container, { [styles.isMobile]: isMobile() }, className)}
     style={style}
     {...rest}
   >
@@ -238,7 +230,7 @@ export const RowContainer = ({
   ...rest
 }: React.HTMLAttributes<HTMLDivElement> & { combo?: boolean }) => (
   <div
-    className={cn(styles.rowContainer, combo ? styles.combo : "")(className)}
+    className={classNames(styles.rowContainer, { [styles.combo]: combo }, className)}
     style={style}
     {...rest}
   >
@@ -253,9 +245,7 @@ export const ColumnContainer = ({
   ...rest
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
-    className={cn(styles.columnContainer, isMobile() ? styles.isMobile : "")(
-      className,
-    )}
+    className={classNames(styles.columnContainer, { [styles.isMobile]: isMobile() }, className)}
     style={style}
     {...rest}
   >
@@ -270,7 +260,7 @@ export const Preview = ({
   ...rest
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
-    className={cn(styles.preview, isMobile() ? styles.isMobile : "")(className)}
+    className={classNames(styles.preview, { [styles.isMobile]: isMobile() }, className)}
     style={style}
     {...rest}
   >
@@ -285,7 +275,7 @@ export const GetCodeButtonWrapper = ({
   ...rest
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
-    className={cn(styles.getCodeButtonWrapper)(className)}
+    className={classNames(styles.getCodeButtonWrapper, className)}
     style={style}
     {...rest}
   >
@@ -300,7 +290,7 @@ export const FilesSelectorInputWrapper = ({
   ...rest
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
-    className={cn(styles.filesSelectorInputWrapper)(className)}
+    className={classNames(styles.filesSelectorInputWrapper, className)}
     style={style}
     {...rest}
   >
@@ -315,7 +305,7 @@ export const SelectedItemsContainer = ({
   ...rest
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
-    className={cn(styles.selectedItemsContainer)(className)}
+    className={classNames(styles.selectedItemsContainer, className)}
     style={style}
     {...rest}
   >
@@ -330,7 +320,7 @@ export const PreviewColumn = ({
   ...rest
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
-    className={cn(styles.previewColumn)(className)}
+    className={classNames(styles.previewColumn, className)}
     style={style}
     {...rest}
   >
@@ -346,7 +336,7 @@ export const CodeWrapper = ({
   ...rest
 }: React.HTMLAttributes<HTMLDivElement> & { height?: string }) => (
   <div
-    className={cn(styles.codeWrapper)(className)}
+    className={classNames(styles.codeWrapper, className)}
     style={{ "--code-wrapper-height": height ?? "400px", ...style } as React.CSSProperties}
     {...rest}
   >

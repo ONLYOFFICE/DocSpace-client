@@ -36,7 +36,6 @@ import {
 	ImportCompleteStepProps,
 	InjectedImportCompleteStepProps,
 } from "../types";
-import { ImportCompleteWrapper as Wrapper } from "../StyledDataImport";
 import styles from "../StyledDataImport.module.scss";
 
 const ImportCompleteStep = (props: ImportCompleteStepProps) => {
@@ -133,7 +132,7 @@ const ImportCompleteStep = (props: ImportCompleteStepProps) => {
 				<Text className={styles.errorText}>{t("Settings:ErrorOccuredDownloadLog")}</Text>
 			) : null}
 
-			<Wrapper>
+			<div className={styles.importCompleteWrapper}>
 				<Checkbox
 					label={t("Settings:SendInviteLetter")}
 					isChecked={isChecked}
@@ -149,7 +148,7 @@ const ImportCompleteStep = (props: ImportCompleteStepProps) => {
 					}
 					dataTestId="invite_letter_help_button"
 				/>
-			</Wrapper>
+			</div>
 
 			<SaveCancelButtons
 				className="save-cancel-buttons"

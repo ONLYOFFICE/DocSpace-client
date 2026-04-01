@@ -41,11 +41,7 @@ import { toastr } from "@docspace/ui-kit/components/toast";
 import { InputSize } from "@docspace/ui-kit/components/text-input";
 import { InjectedSelectFileStepProps, SelectFileStepProps } from "../types";
 import { TMigrationStatusResult } from "@docspace/shared/api/settings/types";
-import {
-  SelectFileWrapper as Wrapper,
-  FileUploadContainer,
-  ErrorBlock,
-} from "../StyledDataImport";
+import styles from "../StyledDataImport.module.scss";
 
 const FAIL_TRIES = 2;
 
@@ -312,8 +308,8 @@ const SelectFileStep = (props: SelectFileStepProps) => {
   }, [fileLoadingStatus, poolStatus]);
 
   return (
-    <Wrapper>
-      <FileUploadContainer>
+    <div className={styles.selectFileWrapper}>
+      <div className={styles.fileUploadContainer}>
         <Text className="choose-backup-file">
           {t("Settings:ChooseBackupFile")}
         </Text>
@@ -333,9 +329,9 @@ const SelectFileStep = (props: SelectFileStepProps) => {
           isMultiple={migratorName === "GoogleWorkspace"}
           data-test-id="upload_backup_file_input"
         />
-      </FileUploadContainer>
+      </div>
       {fileLoadingStatus === "upload" || fileLoadingStatus === "proceed" ? (
-        <FileUploadContainer>
+        <div className={styles.fileUploadContainer}>
           <ProgressBar
             percent={progress}
             isInfiniteProgress={isInfiniteProgress}
@@ -352,9 +348,9 @@ const SelectFileStep = (props: SelectFileStepProps) => {
               data-test-id="cancel_upload_backup_button"
             />
           </div>
-        </FileUploadContainer>
+        </div>
       ) : (
-        <ErrorBlock>
+        <div className={styles.errorBlock}>
           {isFileError ? (
             <div>
               <ProgressBar
@@ -429,7 +425,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
               cancelButtonDataTestId="back_to_providers_button"
             />
           )}
-        </ErrorBlock>
+        </div>
       )}
 
       {cancelUploadDialogVisible ? (
@@ -457,7 +453,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
           isTenantCustomQuotaSet={isTenantCustomQuotaSet}
         />
       ) : null}
-    </Wrapper>
+    </div>
   );
 };
 

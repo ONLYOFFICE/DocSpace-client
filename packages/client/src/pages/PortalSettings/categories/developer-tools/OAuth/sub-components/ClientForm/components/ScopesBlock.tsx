@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 
 import {
 	IClientReqDTO,
@@ -227,7 +228,7 @@ const ScopesBlock = ({
 	const isRequiredError = requiredErrorFields.includes("scopes");
 
 	return (
-		<div className={[styles.styledScopesContainer, isRequiredError ? styles.requiredError : ""].filter(Boolean).join(" ")}>
+		<div className={classNames(styles.styledScopesContainer, { [styles.requiredError]: isRequiredError })}>
 			<BlockHeader
 				className="header"
 				header={t("ScopesHeader")}

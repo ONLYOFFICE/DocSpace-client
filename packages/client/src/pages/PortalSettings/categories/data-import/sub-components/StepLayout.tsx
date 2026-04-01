@@ -26,7 +26,7 @@
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { LayoutProps } from "../types";
-import { DescriptionWrapper } from "../StyledDataImport";
+import styles from "../StyledDataImport.module.scss";
 
 const StepLayout = (props: LayoutProps) => {
   const { t, step, totalSteps, title, description, component, logoText } =
@@ -34,7 +34,7 @@ const StepLayout = (props: LayoutProps) => {
 
   return (
     <>
-      <DescriptionWrapper>
+      <div className={styles.descriptionWrapper}>
         <Text className="data-import-description" lineHeight="20px">
           {t("Settings:AboutDataImport", {
             productName: t("Common:ProductName"),
@@ -50,7 +50,7 @@ const StepLayout = (props: LayoutProps) => {
           {step}/{totalSteps}. {title}
         </Text>
         <div className="data-import-section-description">{description}</div>
-      </DescriptionWrapper>
+      </div>
       {component}
     </>
   );

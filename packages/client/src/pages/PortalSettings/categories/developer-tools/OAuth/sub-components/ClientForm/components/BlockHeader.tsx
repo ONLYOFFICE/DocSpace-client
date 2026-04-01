@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import classNames from "classnames";
+
 import { Text } from "@docspace/ui-kit/components/text";
 import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
@@ -44,7 +46,7 @@ const BlockHeader = ({
   isRequired,
 }: BlockHeaderProps) => {
   return (
-    <div className={[styles.styledHeaderRow, className].filter(Boolean).join(" ")}>
+    <div className={classNames(styles.styledHeaderRow, className)}>
       <Text
         fontSize="16px"
         fontWeight={700}

@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 import { Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -73,7 +74,7 @@ const BenefitsContainer = ({ t, features }) => {
 	};
 
 	return (
-		<div className={[styles.benefitsBody, "benefits-container"].join(" ")}>
+		<div className={classNames(styles.benefitsBody, "benefits-container")}>
 			<Text fontSize="16px" fontWeight="600" className={styles.paymentBenefitsText}>
 				{t("Benefits")}
 			</Text>

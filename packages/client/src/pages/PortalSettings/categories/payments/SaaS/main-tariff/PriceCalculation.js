@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect, useRef } from "react";
+import classNames from "classnames";
 import { Text } from "@docspace/ui-kit/components/text";
 import { inject, observer } from "mobx-react";
 import { Trans } from "react-i18next";
@@ -121,16 +122,12 @@ const PriceCalculation = ({
 
   return (
     <div
-      className={["price-calculation-container", styles.priceBody]
-        .filter(Boolean)
-        .join(" ")}
+      className={classNames("price-calculation-container", styles.priceBody)}
     >
       <Text
         fontSize="16px"
         fontWeight={600}
-        className={[styles.paymentMainTitle, isDisabled ? styles.isDisabled : ""]
-          .filter(Boolean)
-          .join(" ")}
+        className={classNames(styles.paymentMainTitle, { [styles.isDisabled]: isDisabled })}
       >
         {isGracePeriod || isNotPaidPeriod
           ? t("YourPrice")

@@ -37,19 +37,19 @@ import { EmptyScreenContainer } from "@docspace/ui-kit/components/empty-screen-c
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import {
+  TableContainer,
   TableGroupMenu,
   TableBody,
   TGroupMenuItem,
 } from "@docspace/ui-kit/components/table";
 
-import { StyledTableContainer } from "../../../../StyledDataImport";
+import styles from "../../../../StyledDataImport.module.scss";
 import UsersTableRow from "./UsersTableRow";
 import UsersTableHeader from "./UsersTableHeader";
 import {
   TypeSelectTableViewProps,
   InjectedTypeSelectTableViewProps,
 } from "../../../../types";
-import styles from "../../../../StyledDataImport.module.scss";
 
 const TABLE_VERSION = "6";
 const COLUMNS_SIZE = `nextcloudFourthColumnsSize_ver-${TABLE_VERSION}`;
@@ -101,8 +101,8 @@ const TableView = (props: TypeSelectTableViewProps) => {
   ];
 
   return (
-    <StyledTableContainer
-      className={styles.userSelectTableContainer}
+    <TableContainer
+      className={`${styles.styledTableContainer} ${styles.userSelectTableContainer}`}
       forwardedRef={tableRef as React.RefObject<HTMLDivElement>}
       useReactWindow
     >
@@ -184,7 +184,7 @@ const TableView = (props: TypeSelectTableViewProps) => {
           }
         />
       )}
-    </StyledTableContainer>
+    </TableContainer>
   );
 };
 

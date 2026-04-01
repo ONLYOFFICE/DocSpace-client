@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import classNames from "classnames";
 import debounce from "lodash.debounce";
 
 import { FilterType, RoomsType } from "@docspace/shared/enums";
@@ -260,7 +261,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
       >
         <Avatar size="min" role="user" source={avatar} />
         <div className="list-item_content">
-          <Text className={[styles.searchItemText, styles.primary].join(" ")}>{displayName}</Text>
+          <Text className={classNames(styles.searchItemText, styles.primary)}>{displayName}</Text>
           <Text className={styles.searchItemText}>{email}</Text>
         </div>
       </DropDownItem>

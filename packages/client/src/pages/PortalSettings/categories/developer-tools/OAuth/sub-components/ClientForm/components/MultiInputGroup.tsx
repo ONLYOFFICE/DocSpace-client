@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 
 import { InputBlock } from "@docspace/ui-kit/components/input-block";
 import { Text } from "@docspace/ui-kit/components/text";
@@ -165,7 +166,7 @@ const MultiInputGroup = ({
   }, [isAddVisible]);
 
   return (
-    <div className={[styles.styledInputGroup, `multi-input-group-${label}`].join(" ")}>
+    <div className={classNames(styles.styledInputGroup, `multi-input-group-${label}`)}>
       <InputGroup
         label={label}
         helpButtonText={helpButtonText}

@@ -5,5 +5,8 @@
   "ErrorViewDescriptionNetworkError": "يبدو أنه لا يوجد اتصال بالإنترنت",
   "SuggestChanges": "أقترح التغييرات",
   "TemplateInfo": "معلومات النموذج",
-  "ViewAllTemplates": "إظهار كافة القوالب"
+  "ViewAllTemplates": "إظهار كافة القوالب",
+  "ErrorViewHeader": "عارض الصور غير متاح مؤقتًا.",
+  "SelectTemplate": "اختر النموذج",
+  "UploadGallery": "تحميل في المعرض"
 }

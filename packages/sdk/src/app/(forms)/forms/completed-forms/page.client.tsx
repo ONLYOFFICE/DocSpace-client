@@ -35,6 +35,7 @@ import { useFormsListStore } from "../../_store/FormsListStore";
 import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
 import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
+import { useFormsTourStore } from "../../_store/FormsTourStore";
 import { useFormsDataContext } from "../../_context/FormsDataContext";
 import FormsGrid from "../../_components/forms-grid";
 
@@ -45,6 +46,7 @@ const CompletedPage = () => {
   const { editingFile, completedFolder, goBackToCompletedRoot } =
     useFormsNavigationStore();
   const aiStore = useFormsAiAgentStore();
+  const tourStore = useFormsTourStore();
   const { fetchSection, fetchMore, fetchSubfolder } = useFormsDataContext();
 
   const fetchSectionRef = React.useRef(fetchSection);
@@ -52,13 +54,14 @@ const CompletedPage = () => {
   const aiStoreRef = React.useRef(aiStore);
   aiStoreRef.current = aiStore;
   React.useEffect(() => {
+    if (tourStore.showMockItems) return;
     if (completedFolder) return;
     fetchSectionRef.current(FormsSection.CompletedForms);
 
     if (hasManagementAccess) {
       aiStoreRef.current.setCurrentFolder(null);
     }
-  }, [completedFolder, hasManagementAccess]);
+  }, [completedFolder, hasManagementAccess, tourStore.showMockItems]);
 
   React.useEffect(() => {
     if (!completedFolder || editingFile) return;
@@ -78,7 +81,7 @@ const CompletedPage = () => {
 
   const fetchIdRef = React.useRef(0);
   React.useEffect(() => {
-    if (!completedFolder) return;
+    if (!completedFolder || tourStore.showMockItems) return;
 
     const controller = new AbortController();
     const currentFetchId = ++fetchIdRef.current;

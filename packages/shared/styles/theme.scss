@@ -74,6 +74,7 @@
 
   --filled-button-background-color: #{$gray-dark-mid};
 }
+
 /* ========================== */
 
 .light {
@@ -91,10 +92,8 @@
 
   --files-article-body-download-app-list-text-color: #{$gray};
   --files-article-body-download-app-list-mac-hover-color: #{$dark-black};
-  --files-article-body-dev-tools-background-color: var(
-    --accent-main,
-    #{$light-blue-main}
-  );
+  --files-article-body-dev-tools-background-color: var(--accent-main,
+    #{$light-blue-main});
   --files-article-body-dev-tools-background-opacity: 0.17;
   --files-article-body-dev-tools-color: #{$gray-text};
   --article-catalog-background: #{$gray-light};
@@ -136,14 +135,10 @@
 
   --avatar-edit-container-background: #{$blue-light-mid};
   --avatar-edit-container-fill: #{$white};
-  --avatar-edit-container-fill-hover: var(
-    --accent-button,
-    #{$light-blue-main-hover}
-  );
-  --avatar-edit-container-fill-press: var(
-    --accent-button,
-    #{$light-blue-main-pressed}
-  );
+  --avatar-edit-container-fill-hover: var(--accent-button,
+    #{$light-blue-main-hover});
+  --avatar-edit-container-fill-press: var(--accent-button,
+    #{$light-blue-main-pressed});
   --avatar-image-container-background: #{$gray-strong};
   --avatar-image-container-background-image: #{$light-second-main};
   --avatar-image-container-group-background: #{$gray-light-mid};
@@ -233,10 +228,8 @@
   --filter-block-background: #{$white};
   --filter-block-item-color: #{$gray};
   --filter-block-selected-item-color: #{$white};
-  --filter-block-selected-backgroud-color: var(
-    --accent-main,
-    #{$light-blue-main}
-  );
+  --filter-block-selected-backgroud-color: var(--accent-main,
+    #{$light-blue-main});
   --filter-block-item-separator-background: #{$gray-light-mid};
   --filter-block-item-tag-border: 1px solid #{$gray-light-mid};
   --filter-block-item-tag-active-background: #{$light-blue-main-active};
@@ -363,14 +356,10 @@
 
   --avatar-edit-container-background: rgba(255, 255, 255, 0.64);
   --avatar-edit-container-fill: #{$white};
-  --avatar-edit-container-fill-hover: var(
-    --accent-button,
-    #{$light-blue-main-hover}
-  );
-  --avatar-edit-container-fill-press: var(
-    --accent-button,
-    #{$light-blue-main-pressed}
-  );
+  --avatar-edit-container-fill-hover: var(--accent-button,
+    #{$light-blue-main-hover});
+  --avatar-edit-container-fill-press: var(--accent-button,
+    #{$light-blue-main-pressed});
   --avatar-image-container-background: #{$gray-dark-strong};
   --avatar-image-container-background-image: #{$gray-dark-strong};
   --avatar-image-container-group-background: #{$gray-dark-mid};
@@ -622,14 +611,10 @@
   --navigation-background: #{$white};
   --navigation-box-shadow: 0px 8px 16px 0px #{$box-shadow-color};
   --navigation-icon-stroke: #{$light-gray-selected};
-  --navigation-guid-animation-small-border: 1px solid
-    var(--accent-main, #{$light-second-main});
-  --navigation-guid-animation-border: 2px solid
-    var(--accent-main, #{$light-second-main});
-  --navigation-guid-animation-icon-color: var(
-    --accent-main,
-    #{$light-second-main}
-  );
+  --navigation-guid-animation-small-border: 1px solid var(--accent-main, #{$light-second-main});
+  --navigation-guid-animation-border: 2px solid var(--accent-main, #{$light-second-main});
+  --navigation-guid-animation-icon-color: var(--accent-main,
+    #{$light-second-main});
   --navigation-header-icon-fill: #{$light-gray-dark};
   --navigation-lifetime-enabled-fill: #{$main-red};
   --navigation-lifetime-enabled-stroke: #{$main-red};
@@ -644,14 +629,10 @@
   --navigation-background: #{$black};
   --navigation-box-shadow: 0px 8px 16px 0px #{$box-shadow-dark-color};
   --navigation-icon-stroke: #{$gray-dark-strong};
-  --navigation-guid-animation-small-border: 1px solid
-    var(--accent-main, #{$light-second-main});
-  --navigation-guid-animation-border: 2px solid
-    var(--accent-main, #{$light-second-main});
-  --navigation-guid-animation-icon-color: var(
-    --accent-main,
-    #{$light-second-main}
-  );
+  --navigation-guid-animation-small-border: 1px solid var(--accent-main, #{$light-second-main});
+  --navigation-guid-animation-border: 2px solid var(--accent-main, #{$light-second-main});
+  --navigation-guid-animation-icon-color: var(--accent-main,
+    #{$light-second-main});
   --navigation-header-icon-fill: #{$dark-gray-dark};
   --navigation-lifetime-enabled-fill: none;
   --navigation-lifetime-enabled-stroke: #{$main-red};
@@ -1053,6 +1034,7 @@
 .light {
   --selector-border: 1px solid #{$gray-light-mid};
 }
+
 .dark {
   --selector-border: 1px solid #{$gray-dark-strong};
 }
@@ -1095,15 +1077,13 @@
 .light {
   --form-filling-tips-circle-selected-background-color: #{$white};
   --form-filling-tips-circle-background-color: #{$gray-light-mid};
-  --form-filling-tips-circle-border: 3px solid
-    var(--accent-main, #{$light-blue-main});
+  --form-filling-tips-circle-border: 3px solid var(--accent-main, #{$light-blue-main});
 }
 
 .dark {
   --form-filling-tips-circle-selected-background-color: #{$black};
   --form-filling-tips-circle-background-color: #{$gray-dark-mid};
-  --form-filling-tips-circle-border: 3px solid
-    var(--accent-main, #{$light-second-main});
+  --form-filling-tips-circle-border: 3px solid var(--accent-main, #{$light-second-main});
 }
 
 .light {
@@ -2012,6 +1992,7 @@
   --quantity-picker-rectangle-color: #{$light-gray-hover};
   --quantity-picker-warning-color: #{$light-error-status};
 }
+
 .dark {
   --quantity-picker-disable-color: #{$gray-dark};
   --quantity-picker-additional-title: #{$gray-dark};
@@ -2059,6 +2040,7 @@
 .light {
   --icon-button-color: #{$gray};
 }
+
 .dark {
   --icon-button-color: #{$gray-dark};
 }
@@ -2081,25 +2063,19 @@
   --table-header-text-color: #{$gray};
   --table-header-text-hover-color: #{$light-gray-dark};
   --table-header-border-bottom: 1px solid #{$gray-light-mid};
-  --table-header-border-image-source: linear-gradient(
-    to right,
+  --table-header-border-image-source: linear-gradient(to right,
     #{$white} 21px,
     #{$gray-light-mid} 21px,
     #{$gray-light-mid} calc(100% - 20px),
-    #{$white} calc(100% - 20px)
-  );
-  --table-header-lengthen-border-image-source: linear-gradient(
-    to right,
+    #{$white} calc(100% - 20px));
+  --table-header-lengthen-border-image-source: linear-gradient(to right,
     #{$gray-light-mid},
-    #{$gray-light-mid}
-  );
-  --table-header-border-hover-image-source: linear-gradient(
-    to right,
+    #{$gray-light-mid});
+  --table-header-border-hover-image-source: linear-gradient(to right,
     #{$white} 0px,
     #{$gray-light-mid} 0px,
     #{$gray-light-mid} 100%,
-    #{$white} 100%
-  );
+    #{$white} 100%);
 
   --table-container-border-right: 2px solid #{$gray-strong};
   --table-container-border-hover-color: #{$light-gray-dark};
@@ -2109,8 +2085,8 @@
 
   --table-group-menu-border-bottom: 1px solid transparent;
   --table-group-menu-border-right: 1px solid #{$gray-strong};
-  --table-group-menu-box-shadow:
-    0px 8px 16px #{$popup-shadow}, 0px 0px 4px #{$menu-shadow};
+  --table-group-menu-box-shadow: 0px 8px 16px #{$popup-shadow},
+  0px 0px 4px #{$menu-shadow};
 }
 
 .dark {
@@ -2119,25 +2095,19 @@
   --table-header-text-color: #{$gray-dark};
   --table-header-text-hover-color: #{$white};
   --table-header-border-bottom: 1px solid #{$gray-dark-strong};
-  --table-header-border-image-source: linear-gradient(
-    to right,
+  --table-header-border-image-source: linear-gradient(to right,
     #{$black} 21px,
     #{$gray-dark-strong} 21px,
     #{$gray-dark-strong} calc(100% - 20px),
-    #{$black} calc(100% - 20px)
-  );
-  --table-header-lengthen-border-image-source: linear-gradient(
-    to right,
+    #{$black} calc(100% - 20px));
+  --table-header-lengthen-border-image-source: linear-gradient(to right,
     #{$gray-dark-strong},
-    #{$gray-dark-strong}
-  );
-  --table-header-border-hover-image-source: linear-gradient(
-    to right,
+    #{$gray-dark-strong});
+  --table-header-border-hover-image-source: linear-gradient(to right,
     #{$black} 0px,
     #{$gray-dark-strong} 0px,
     #{$gray-dark-strong} 100%,
-    #{$black} 100%
-  );
+    #{$black} 100%);
 
   --table-container-border-right: 2px solid #{$gray-dark-strong};
   --table-container-border-hover-color: #{$gray-dark-strong};
@@ -2147,8 +2117,8 @@
 
   --table-group-menu-border-bottom: 1px solid #{$gray-dark-strong};
   --table-group-menu-border-right: 1px solid #{$gray-dark-strong};
-  --table-group-menu-box-shadow:
-    0px 8px 16px #{$badge-shadow}, 0px 0px 4px #{$menu-shadow-dark};
+  --table-group-menu-box-shadow: 0px 8px 16px #{$badge-shadow},
+  0px 0px 4px #{$menu-shadow-dark};
 }
 
 .light {
@@ -2200,9 +2170,7 @@
   --combobox-button-hover-border-color-open: #{$white};
   --combobox-button-hover-disabled-border-color: #{$gray-dark-strong};
   --combobox-button-hover-bg-modern-view: #{$gray-dark-strong};
-  --combobox-button-focus-open-border-color: var(
-    --combobox-button-hover-border-color
-  );
+  --combobox-button-focus-open-border-color: var(--combobox-button-hover-border-color);
 
   --combobox-label-selected-color: #{$white};
   --combobox-label-disabled-color: #{$gray-dark};
@@ -2334,19 +2302,15 @@
 .light {
   --modified-text-color: #{$gray};
   --modified-badge-background-color: #{$gray};
-  --modified-badge-active-background-color: var(
-    --color-scheme-main-accent,
-    #{$light-blue-main}
-  );
+  --modified-badge-active-background-color: var(--color-scheme-main-accent,
+    #{$light-blue-main});
 }
 
 .dark {
   --modified-text-color: #{$gray-dark};
   --modified-badge-background-color: #{$gray-dark};
-  --modified-badge-active-background-color: var(
-    --color-scheme-main-accent,
-    #{$light-blue-main}
-  );
+  --modified-badge-active-background-color: var(--color-scheme-main-accent,
+    #{$light-blue-main});
 }
 
 .light {
@@ -2631,6 +2595,7 @@
 .dark {
   --editors-tooltip-header-color: #{$dark-gray-dark};
 }
+
 .light {
   --room-grouping-dialog-tag-text: #{$light-gray-dark};
   --room-grouping-dialog-tag-icon: #{$light-gray-dark};
@@ -2803,4 +2768,14 @@
   --sso-error-color: #{$dark-error-status};
   --tooltip-bg: #{$dark-gray-light};
   --tooltip-text: #{$white};
+}
+
+.light {
+  --dev-tools-card-border: 1px solid #{$light-gray-selected};
+  --dev-tools-card-divider: #{$gray-light-mid};
+}
+
+.dark {
+  --dev-tools-card-border: 1px solid #{$gray-dark-strong};
+  --dev-tools-card-divider: #{$gray-dark-mid};
 }

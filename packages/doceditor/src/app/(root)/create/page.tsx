@@ -152,7 +152,7 @@ async function Page(props: { searchParams: Promise<TSearchParams> }) {
     const documentServerUrl = await getEditorUrl();
 
     logger.debug(
-      `fileTitle: ${fileTitle}, parentId: ${parentId}, templateId: ${templateId}, open: ${open}, action: ${action}, error: ${error}, Open empty editor`,
+      `fileTitle: ${fileTitle}, parentId: ${parentId}, templateId: ${templateId}, open: ${open}, action: ${action}, error: ${JSON.stringify(error)}, Open empty editor`,
     );
 
     return (

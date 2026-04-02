@@ -35,5 +35,12 @@
   "ServerUpdatedSuccess": "Serveris atjaunināts veiksmīgi",
   "ServiceIcon": "Pakalpojuma ikona",
   "SystemMCPListTitle": "Sistēma",
-  "WebSearchKeyHiddenDescription": "API atslēga tiek parādīta tikai vienreiz, saglabājot, un pēc tam tā tiek paslēpta drošības nolūkos."
+  "WebSearchKeyHiddenDescription": "API atslēga tiek parādīta tikai vienreiz, saglabājot, un pēc tam tā tiek paslēpta drošības nolūkos.",
+  "AddAIProvider": "Pievienojiet {{aiProvider}}",
+  "AddMCPServer": "Pievienojiet {{mcpServer}}",
+  "DefaultProviderSetSuccess": "Noklusējuma pakalpojumu sniedzējs veiksmīgi iestatīts",
+  "DefaultProviderTitle": "Noklusējuma nodrošinātājs",
+  "DeleteProvider": "Dzēst {{aiProvider}}",
+  "MCPUnavailableError": "{{mcpServer}} nav pieejams",
+  "Model": "Modelis"
 }

@@ -45,5 +45,6 @@
   "HotkeysUploadFile": "上传文件",
   "HotkeysUploadingObjects": "上传项目",
   "HotkeysZoomIn": "放大",
-  "HotkeysZoomOut": "缩小"
+  "HotkeysZoomOut": "缩小",
+  "OpenContextMenu": "打开上下文菜单"
 }

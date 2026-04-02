@@ -5,5 +5,8 @@
   "ErrorViewDescriptionNetworkError": "අන්තර්ජාල සම්බන්ධතාවයක් නැති බව පෙනේ.",
   "SuggestChanges": "වෙනස්කම් යෝජනා කරන්න",
   "TemplateInfo": "අච්චුවේ තොරතුරු",
-  "ViewAllTemplates": "සියලුම අච්චු පෙන්වන්න"
+  "ViewAllTemplates": "සියලුම අච්චු පෙන්වන්න",
+  "ErrorViewHeader": "ගැලරිය තාවකාලිකව ලබා ගත නොහැක",
+  "SelectTemplate": "සැකිල්ල තෝරන්න",
+  "UploadGallery": "ගැලරියට උඩුගත කරන්න"
 }

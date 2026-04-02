@@ -5,5 +5,8 @@
   "ErrorViewDescriptionNetworkError": "Wygląda na to, że nie ma połączenia z Internetem.",
   "SuggestChanges": "Zasugeruj zmiany",
   "TemplateInfo": "Dane szablonu",
-  "ViewAllTemplates": "Zobacz wszystkie szablony"
+  "ViewAllTemplates": "Zobacz wszystkie szablony",
+  "ErrorViewHeader": "Galeria jest tymczasowo niedostępna",
+  "SelectTemplate": "Wybierz szablon",
+  "UploadGallery": "Wyślij do Galerii"
 }

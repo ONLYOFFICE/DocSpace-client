@@ -95,7 +95,7 @@ import type {
   TEditorAIEvent,
 } from "@/types";
 import { onSDKInfo } from "@/utils/events";
-import externalAIFetch from "@/utils/aiProxy";
+import externalAIFetch, { abortAllRequests } from "@/utils/aiProxy";
 
 let docEditor: TDocEditor | null = null;
 
@@ -869,6 +869,13 @@ const useEditorEvents = ({
       );
     };
   }, [onOrientationChange]);
+
+  React.useEffect(() => {
+    return () => {
+      abortAllRequests();
+      docEditor = null;
+    };
+  }, []);
 
   const onSubmit = useCallback(() => {
     const origin = window.location.origin;

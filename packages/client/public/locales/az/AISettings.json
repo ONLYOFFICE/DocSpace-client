@@ -35,5 +35,12 @@
   "ServerUpdatedSuccess": "Server uğurla yeniləndi",
   "ServiceIcon": "Xidmət ikonu",
   "SystemMCPListTitle": "Sistem",
-  "WebSearchKeyHiddenDescription": "API açarı, yalnız bir dəfə, qeyd edərkən göstərilir və sonra təhlükəsizlik məqsədləri üçün gizlədir."
+  "WebSearchKeyHiddenDescription": "API açarı, yalnız bir dəfə, qeyd edərkən göstərilir və sonra təhlükəsizlik məqsədləri üçün gizlədir.",
+  "AddAIProvider": "{{aiProvider}} əlavə edin",
+  "AddMCPServer": "{{mcpServer}} əlavə edin",
+  "DefaultProviderSetSuccess": "Standart provayder uğurla təyin edildi",
+  "DefaultProviderTitle": "Standart provayder",
+  "DeleteProvider": "{{aiProvider}}-i silin",
+  "MCPUnavailableError": "{{mcpServer}} əlçatan deyil",
+  "Model": "Model"
 }

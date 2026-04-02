@@ -5,5 +5,8 @@
   "ErrorViewDescriptionNetworkError": "Izgleda da nema internet konekcije",
   "SuggestChanges": "Predloži promene",
   "TemplateInfo": "Info za šablon",
-  "ViewAllTemplates": "Pregledaj sve šablone"
+  "ViewAllTemplates": "Pregledaj sve šablone",
+  "ErrorViewHeader": "Galerija je trenutno nedostupna.",
+  "SelectTemplate": "Izaberite šablon",
+  "UploadGallery": "Pošaljite u Galeriju"
 }

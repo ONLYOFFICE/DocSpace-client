@@ -3,7 +3,7 @@
   "content": "Select file",
   "content_en_sha1_hash": "63f72dce85635b76fe31d3931ae500471aa30d71",
   "created_at": "2025-05-19T21:30:48.410Z",
-  "updated_at": "2026-03-20T09:07:45.445Z",
+  "updated_at": "2026-03-31T15:18:46.111Z",
   "comment": {
     "text": "This translation key is used to display the label for a file selection action, appearing as \"Select File\" in various UI elements such as buttons or dialogs. It is part of a set of translations related to file management and appears on the FilesSelector component.",
     "is_auto": true,
@@ -24,8 +24,8 @@
     },
     {
       "file_path": "/packages/client/src/components/PluginSelector/PluginFilesSelector/PluginFilesSelector.tsx",
-      "line_number": 163,
-      "context": "const headerProps: TSelectorHeader = selectorProps.withHeader\n ? {\n withHeader: true,\n headerProps: {\n headerLabel:\n selectorProps.headerProps?.label ?? t(\"Common:SelectFile\"),\n isCloseable: selectorProps.headerProps?.isCloseable,\n onCloseClick: onCancel,\n },\n }\n : {};",
+      "line_number": 191,
+      "context": "const headerProps: TSelectorHeader = selectorProps.withHeader\n ? {\n withHeader: true,\n headerProps: {\n headerLabel: label ?? t(\"Common:SelectFile\"),\n isCloseable: isCloseable,\n onCloseClick: onCancel,\n ...headerBackButtonProps,\n },\n }",
       "module": "/packages/client"
     },
     {

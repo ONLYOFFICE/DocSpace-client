@@ -14,5 +14,7 @@
   "PluginSDK": "Plugin SDK (SDK za dodatke)",
   "PluginSDKDescription": "Pomoću Plugin SDK-a (SDK za dodatke) možete proširiti funkcionalnost vašeg {{productName}}-a, povezati treće strane usluge ili unaprediti postojeće korisničko iskustvo. Ovde možete pronaći uzorke dodataka sa dostupnim izvornim kodom na GitHub-u.",
   "PluginSDKInstruction": "Kliknite na dugme za detaljne instrukcije kako da kreirate sopstvene dodatke.",
-  "UploadDescription": "Možete dodati dodatke da biste proširili funkcionalnost {{productName}}-a sa dodatnim mogućnostima. Kliknite na \"Postavi dodatak\" i izaberite datoteku dodatka u ZIP arhivi."
+  "UploadDescription": "Možete dodati dodatke da biste proširili funkcionalnost {{productName}}-a sa dodatnim mogućnostima. Kliknite na \"Postavi dodatak\" i izaberite datoteku dodatka u ZIP arhivi.",
+  "PluginCacheWarningDescription": "Dodaci se keširaju na osnovu njihovog broja verzije. Kako biste osigurali da se vaše promene primene, molimo povećajte broj verzije u vašoj <1>package.json</1> datoteci pre učitavanja. Sistem neće ažurirati dodatak ako broj verzije ostane isti.",
+  "PluginDeletedSuccessfully": "Dodatak je uspešno obrisan"
 }

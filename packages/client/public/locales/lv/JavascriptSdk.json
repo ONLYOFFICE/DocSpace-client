@@ -95,7 +95,6 @@
   "RoomTypeDisplay": "Telpas tipa displejs",
   "Rotate": "Pagriezt",
   "Scale": "Mērogot",
-  "SDKDescription": "Izmantojot JavaScript SDK, varat iegult telpu vai mapi no {{productName}} savā tīmekļa saskarnē kā iframe. Šeit varat atrast iestatījumus IFRAME parauga izveidei un CSP konfigurēšanai. Lai izmantotu pilnu SDK, skatiet",
   "SdkPackageVersionInfo": "Lai izveidotu savienojumu ar vienmēr jaunāko paketes versiju",
   "SearchBlock": "Meklēšanas bloks",
   "SearchByNameEmail": "Meklējiet pēc vārda vai e-pasta adreses",

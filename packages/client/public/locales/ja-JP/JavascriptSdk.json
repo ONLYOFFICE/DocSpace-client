@@ -95,7 +95,6 @@
   "RoomTypeDisplay": "ルームタイプの表示",
   "Rotate": "回転",
   "Scale": "スケール",
-  "SDKDescription": "JavaScript SDKを使用すると、{{productName}}のルームやフォルダをiframeとしてWebインターフェイスに埋め込むことができます。ここでは、サンプルのiframeを作成するための設定と、CSPを設定するための設定を見つけることができます。完全なSDKを使用するには、をご参照ください",
   "SdkPackageVersionInfo": "パッケージの接続には最新バージョンを使用する必要があります。",
   "SearchBlock": "検索ブロック",
   "SearchByNameEmail": "名前または電子メールによる検索",

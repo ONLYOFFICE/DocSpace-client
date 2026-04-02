@@ -3,5 +3,7 @@
   "DisplayFileExtension": "Näytä tiedostopääte tiedostonimen perässä ",
   "OpenSameTab": "Avaa {{organizationName}} editori samassa välilehdessä",
   "OriginalCopy": "Tallenna kopio tiedostosta myös alkuperäisessä muodossa",
-  "TrashMoveConfirmation": "Näytä ilmoitus, kun siirretään kohteita {{sectionName}}-osioon"
+  "TrashMoveConfirmation": "Näytä ilmoitus, kun siirretään kohteita {{sectionName}}-osioon",
+  "DefaultHomepage": "Oletusetusivu",
+  "GroupByRooms": "Ryhmittele huoneittain"
 }

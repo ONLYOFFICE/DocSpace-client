@@ -35,5 +35,12 @@
   "ServerUpdatedSuccess": "Palvelin päivitetty onnistuneesti",
   "ServiceIcon": "Palveluikoni",
   "SystemMCPListTitle": "Järjestelmä",
-  "WebSearchKeyHiddenDescription": "API-avain näkyy vain kerran tallennuksen yhteydessä ja sen jälkeen se piilotetaan tietoturvasyistä."
+  "WebSearchKeyHiddenDescription": "API-avain näkyy vain kerran tallennuksen yhteydessä ja sen jälkeen se piilotetaan tietoturvasyistä.",
+  "AddAIProvider": "Lisää {{aiProvider}}",
+  "AddMCPServer": "Lisää {{mcpServer}}",
+  "DefaultProviderSetSuccess": "Oletuspalveluntarjoaja asetettu onnistuneesti",
+  "DefaultProviderTitle": "Oletuspalveluntarjoaja",
+  "DeleteProvider": "Poista {{aiProvider}}",
+  "MCPUnavailableError": "{{mcpServer}} ei ole käytettävissä",
+  "Model": "Malli"
 }

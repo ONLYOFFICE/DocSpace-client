@@ -45,5 +45,6 @@
   "HotkeysUploadFile": "Carregar arquivo",
   "HotkeysUploadingObjects": "Fazer upload de itens",
   "HotkeysZoomIn": "Mais Zoom",
-  "HotkeysZoomOut": "Menos Zoom"
+  "HotkeysZoomOut": "Menos Zoom",
+  "OpenContextMenu": "Abra menu de contexto"
 }

@@ -35,5 +35,12 @@
   "ServerUpdatedSuccess": "Serwer został zaktualizowany pomyślnie",
   "ServiceIcon": "Ikona usługi",
   "SystemMCPListTitle": "System",
-  "WebSearchKeyHiddenDescription": "Klucz API jest wyświetlany tylko raz podczas zapisywania, a następnie jest ukrywany ze względów bezpieczeństwa."
+  "WebSearchKeyHiddenDescription": "Klucz API jest wyświetlany tylko raz podczas zapisywania, a następnie jest ukrywany ze względów bezpieczeństwa.",
+  "AddAIProvider": "Dodaj {{aiProvider}}",
+  "AddMCPServer": "Dodaj {{mcpServer}}",
+  "DefaultProviderSetSuccess": "Domyślny dostawca został pomyślnie ustawiony",
+  "DefaultProviderTitle": "Domyślny dostawca",
+  "DeleteProvider": "Usuń {{aiProvider}}",
+  "MCPUnavailableError": "Serwer {{mcpServer}} jest niedostępny",
+  "Model": "Model"
 }

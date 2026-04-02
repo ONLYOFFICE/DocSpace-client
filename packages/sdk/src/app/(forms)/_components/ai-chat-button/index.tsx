@@ -35,6 +35,7 @@ import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
 import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
+import { useFormsTourStore } from "../../_store/FormsTourStore";
 
 import { ReactSVG } from "react-svg";
 
@@ -52,15 +53,18 @@ const AiChatButton = () => {
     isPanelVisible,
     panelPosition,
   } = useFormsAiAgentStore();
-  const { editingFile } = useFormsNavigationStore();
+  const { editingFile, completedFolder } = useFormsNavigationStore();
   const { hasManagementAccess } = useFormsSettingsStore();
+  const { forceShowAiChat } = useFormsTourStore();
 
-  if (!aiAgentEnabled || !hasManagementAccess || isPanelVisible || editingFile)
-    return null;
+  if (!(forceShowAiChat && completedFolder)) {
+    if (!aiAgentEnabled || !hasManagementAccess || isPanelVisible || editingFile)
+      return null;
 
-  if (isPreparingAgent) return null;
+    if (isPreparingAgent) return null;
 
-  if (!currentAgentId) return null;
+    if (!currentAgentId) return null;
+  }
 
   return (
     <>
@@ -69,6 +73,7 @@ const AiChatButton = () => {
         className={styles.floatingButton}
         data-position={panelPosition}
         onClick={togglePanel}
+        data-tour="ai-chat-button"
         data-tooltip-id="ai-chat-fab-tooltip"
         data-tooltip-content={t("Common:AIChatButton")}
       >

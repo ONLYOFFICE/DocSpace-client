@@ -74,7 +74,7 @@ export default async function RootLayout({
   }
 
   if (
-    (user && !user.isAdmin) ||
+    (user && !user.isAdmin && !user.isOwner) ||
     (settings && settings.limitedAccessSpace) ||
     !portalTariff
   ) {

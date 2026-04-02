@@ -3,5 +3,7 @@
   "DisplayFileExtension": "Hiển thị phần mở rộng tập tin bên cạnh tên tập tin",
   "OpenSameTab": "Mở trình chỉnh sửa {{organizationName}} trong cùng một tab",
   "OriginalCopy": "Lưu cả bản sao của tệp ở định dạng gốc",
-  "TrashMoveConfirmation": "Hiển thị thông báo khi di chuyển các mục đến {{sectionName}}"
+  "TrashMoveConfirmation": "Hiển thị thông báo khi di chuyển các mục đến {{sectionName}}",
+  "DefaultHomepage": "Trang chủ mặc định",
+  "GroupByRooms": "Nhóm theo phòng"
 }

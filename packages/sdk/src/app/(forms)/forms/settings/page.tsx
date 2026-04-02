@@ -24,10 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+import { redirect } from "next/navigation";
+import { headers } from "next/headers";
+import { ROOM_ID_HEADER } from "@/utils/constants";
 
-import Settings from "../../_components/settings";
+export default async function SettingsRoot({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string }>;
+}) {
+  const hdrs = await headers();
+  const params = await searchParams;
+  const roomId = hdrs.get(ROOM_ID_HEADER) || params.roomId || "";
 
-export default function SettingsPage() {
-  return <Settings />;
+  redirect(`/forms/settings/billing${roomId ? `?roomId=${roomId}` : ""}`);
 }

@@ -402,7 +402,7 @@ class ContactsConextOptionsStore {
       isActive: item ? isVisitor : userSelectionRole === EmployeeType.Guest,
     };
 
-    if (isUserAdmin) {
+    if (isUserAdmin || isUserOwner) {
       if (isUserOwner) {
         options.push(adminOption);
       }
@@ -681,7 +681,7 @@ class ContactsConextOptionsStore {
           ]
         : []),
 
-      ...(isAdmin
+      ...(isAdmin || isOwner
         ? [
             {
               id: "accounts-add_manager",

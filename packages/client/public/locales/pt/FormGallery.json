@@ -5,5 +5,8 @@
   "ErrorViewDescriptionNetworkError": "Parece que não há conexão com a Internet",
   "SuggestChanges": "Sugerir alterações",
   "TemplateInfo": "Informação do modelo",
-  "ViewAllTemplates": "Ver todos os modelos"
+  "ViewAllTemplates": "Ver todos os modelos",
+  "ErrorViewHeader": "Galeria temporariamente indisponível",
+  "SelectTemplate": "Selecionar modelo",
+  "UploadGallery": "Carregar na Galeria"
 }

@@ -3,7 +3,7 @@
   "content": "Shared by",
   "content_en_sha1_hash": "a5fe3b3e382690e112e5d06a9d9588409cdd93a3",
   "created_at": "2025-11-13T07:58:01.497Z",
-  "updated_at": "2026-03-26T08:26:58.073Z",
+  "updated_at": "2026-03-31T15:18:46.274Z",
   "comment": {
     "text": "Indicates who shared a file or document. This text appears as a column header in tables and as a filter label, signifying the sharer of a file. Translators should ensure the meaning conveys the concept of file sharing and attribution.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 890,
+      "line_number": 925,
       "context": "return [\n {\n key: FilterGroups.filterSharedBy,\n group: FilterGroups.filterSharedBy,\n label: t(\"Files:SharedBy\"),\n isHeader: true,\n },\n {\n id: \"filter_author-user-button\",\n key: FilterKeys.user,",
       "module": "/packages/client"
     }

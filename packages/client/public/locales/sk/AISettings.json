@@ -35,5 +35,12 @@
   "ServerUpdatedSuccess": "Server bol úspešne aktualizovaný.",
   "ServiceIcon": "Ikona služby",
   "SystemMCPListTitle": "Systém",
-  "WebSearchKeyHiddenDescription": "Kľúč API sa zobrazí len raz pri uložení a následne je skrytý z dôvodu bezpečnosti."
+  "WebSearchKeyHiddenDescription": "Kľúč API sa zobrazí len raz pri uložení a následne je skrytý z dôvodu bezpečnosti.",
+  "AddAIProvider": "Pridajte {{aiProvider}}",
+  "AddMCPServer": "Pridaj {{mcpServer}}",
+  "DefaultProviderSetSuccess": "Predvolený poskytovateľ bol úspešne nastavený.",
+  "DefaultProviderTitle": "Predvolený poskytovateľ",
+  "DeleteProvider": "Vymaž {{aiProvider}}",
+  "MCPUnavailableError": "{{mcpServer}} je nedostupný",
+  "Model": "Model"
 }

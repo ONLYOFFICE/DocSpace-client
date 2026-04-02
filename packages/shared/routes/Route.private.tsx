@@ -267,7 +267,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
 
     if (isManagement && !isPortalManagement && !isFileManagement) {
       if (isLoaded && !isAuthenticated) return <Navigate replace to="/" />;
-      if ((user && !user?.isAdmin) || limitedAccessSpace)
+      if ((user && !user?.isAdmin && !user?.isOwner) || limitedAccessSpace)
         return <Navigate replace to="/error/403" />;
 
       if (isPaymentPageUnavailable)
@@ -302,7 +302,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     }
 
     if (isDeveloperToolsPage) {
-      if (user?.isVisitor || (limitedAccessDevToolsForUsers && !user?.isAdmin))
+      if (user?.isVisitor || (limitedAccessDevToolsForUsers && !user?.isAdmin && !user?.isOwner))
         return <Navigate replace to="/error/403" />;
     }
 

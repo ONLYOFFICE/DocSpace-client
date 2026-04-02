@@ -2507,7 +2507,7 @@ class ContextOptionsStore {
         label: t("Common:RemoveFromList"),
         icon: CircleCrossSvgUrl,
         onClick: () => this.onRemoveSharedFilesOrFolder([item]),
-        disabled: this.userStore?.user?.isAdmin || !item.external,
+        disabled: this.userStore?.user?.isAdmin || this.userStore?.user?.isOwner || !item.external,
       },
       {
         id: "option_download-as",
@@ -2697,7 +2697,7 @@ class ContextOptionsStore {
 
     let minItemsCount = 3;
     if (item.isAIAgent && item.inRoom) {
-      if (this.userStore?.user?.isAdmin) {
+      if (this.userStore?.user?.isAdmin || this.userStore?.user?.isOwner) {
         if (
           item.access === ShareAccessRights.RoomManager ||
           item.access === ShareAccessRights.None

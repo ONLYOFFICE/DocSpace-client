@@ -158,7 +158,7 @@ class AuthStore {
 
     const user = this.userStore?.user;
 
-    if (user && user.isAdmin) {
+    if (user && isAdmin(user)) {
       await this.currentTariffStatusStore?.fetchPayerInfo();
     }
 
@@ -242,7 +242,7 @@ class AuthStore {
           this.settingsStore?.standalone &&
           !this.settingsStore?.wizardToken &&
           this.isAuthenticated &&
-          user.isAdmin
+          isAdmin(user)
         ) {
           requests.push(this.settingsStore.getPortals());
         }

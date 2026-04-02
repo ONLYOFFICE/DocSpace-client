@@ -56,5 +56,6 @@
   "UploadDevicePDFFormOptionTitle": "Качете от устройство",
   "UploadFromPortalTitle": "Качете от {{productName}}",
   "UploadPDFFormOptionDescription": "Изберете готов PDF формуляр, наличен в {{productName}}, и го качете в стаята.",
-  "VirtualDataRoomEmptyTitle": "Добре дошли във Виртуалната стая за данни"
+  "VirtualDataRoomEmptyTitle": "Добре дошли във Виртуалната стая за данни",
+  "EmptyAIAgentsTitle": "Създайте вашия {{aiAgent}}"
 }

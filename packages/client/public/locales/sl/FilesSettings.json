@@ -3,5 +3,7 @@
   "DisplayFileExtension": "Prikaži pripono datoteke poleg imena datoteke",
   "OpenSameTab": "Odpri urejevalnik {{organizationName}} v istem zavihku",
   "OriginalCopy": "Kopijo datoteke shranite tudi v izvirni obliki",
-  "TrashMoveConfirmation": "Prikaži obvestilo ob premiku elementov v {{sectionName}}."
+  "TrashMoveConfirmation": "Prikaži obvestilo ob premiku elementov v {{sectionName}}.",
+  "DefaultHomepage": "Privzeto domača stran",
+  "GroupByRooms": "Združite po sobah"
 }

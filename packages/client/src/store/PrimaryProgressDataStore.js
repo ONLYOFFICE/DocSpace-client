@@ -66,15 +66,17 @@ class PrimaryProgressDataStore {
       if (progressInfo.alert) {
         this.setNeedErrorChecking(true, operation);
       }
-      if (progressInfo.percent > 0 && !progressInfo.completed) {
-        progressInfo.label = getOperationsProgressTitle(
-          operation,
-          Math.trunc(progressInfo.percent),
-        );
-      }
+      if (!operationObject.canceled) {
+        if (progressInfo.percent > 0 && !progressInfo.completed) {
+          progressInfo.label = getOperationsProgressTitle(
+            operation,
+            Math.trunc(progressInfo.percent),
+          );
+        }
 
-      if (progressInfo.completed && progressInfo.percent > 0) {
-        progressInfo.label = getOperationsProgressTitle(operation);
+        if (progressInfo.completed && progressInfo.percent > 0) {
+          progressInfo.label = getOperationsProgressTitle(operation);
+        }
       }
 
       const updatedOperation = {
@@ -138,6 +140,10 @@ class PrimaryProgressDataStore {
       this.primaryOperationsArray.length > 0 &&
       this.primaryOperationsArray.every((op) => op.completed)
     );
+  }
+
+  get primaryOperationsCanceled() {
+    return this.primaryOperationsArray.some((op) => op.canceled);
   }
 
   get primaryOperationsAlert() {

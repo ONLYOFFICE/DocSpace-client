@@ -44,6 +44,7 @@ import { FormsSection } from "@/types/forms";
 
 import { useFormsAiAgentStore } from "../_store/FormsAiAgentStore";
 import { useFormsSettingsStore } from "../_store/FormsSettingsStore";
+import { useFormsDbSettingsStore } from "../_store/FormsDbSettingsStore";
 import useFormsActions from "./useFormsActions";
 import { sectionFromPathname } from "../_utils/sectionFromPathname";
 
@@ -62,6 +63,7 @@ export default function useFormsContextMenu() {
   const activeSection = sectionFromPathname(pathname);
   const { openPanelWithAgent, askFromDBAgentId } = useFormsAiAgentStore();
   const { hasManagementAccess } = useFormsSettingsStore();
+  const { sendToDb } = useFormsDbSettingsStore();
 
   const {
     openForm,
@@ -114,7 +116,7 @@ export default function useFormsContextMenu() {
               disabled: false,
             });
 
-            if (askFromDBAgentId && hasManagementAccess) {
+            if (askFromDBAgentId && hasManagementAccess && sendToDb) {
               model.push({
                 id: "option_ask-from-db",
                 key: "ask-from-db",
@@ -252,6 +254,7 @@ export default function useFormsContextMenu() {
       openPanelWithAgent,
       askFromDBAgentId,
       hasManagementAccess,
+      sendToDb,
     ],
   );
 

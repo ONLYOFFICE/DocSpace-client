@@ -46,6 +46,7 @@ import { FormsSettingsStoreContextProvider } from "./FormsSettingsStore";
 import { FormsDbSettingsStoreContextProvider } from "./FormsDbSettingsStore";
 import { FormsAiAgentStoreContextProvider } from "./FormsAiAgentStore";
 import { FormsUserStoreContextProvider } from "./FormsUserStore";
+import { FormsTourStoreContextProvider } from "./FormsTourStore";
 
 export const FormsStoreProviders = ({
   children,
@@ -69,7 +70,9 @@ export const FormsStoreProviders = ({
                               <FormsAiAgentStoreContextProvider>
                                 <FormsNavigationStoreContextProvider>
                                     <FormsListStoreContextProvider>
-                                      {children}
+                                      <FormsTourStoreContextProvider>
+                                        {children}
+                                      </FormsTourStoreContextProvider>
                                     </FormsListStoreContextProvider>
                                 </FormsNavigationStoreContextProvider>
                               </FormsAiAgentStoreContextProvider>

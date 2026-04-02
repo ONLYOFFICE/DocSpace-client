@@ -37,5 +37,7 @@
   "TfaSubTitle": "Prati jednostavne korake da nastaviš sa radom u ovom {{productName}}:",
   "TfaTitle": "Dvofaktorska autentifikacija omogućena za siguran pristup",
   "VerifyConnection": "Proveri vezu",
-  "VerifyConnectionDescription": "Unesi 6-cifreni kod koji generiše tvoja aplikacija za autentifikaciju u polje ispod da dovršiš podešavanje."
+  "VerifyConnectionDescription": "Unesi 6-cifreni kod koji generiše tvoja aplikacija za autentifikaciju u polje ispod da dovršiš podešavanje.",
+  "InviteLinkQuotaErrorBody": "Registracija putem linka više nije dostupna jer je limit previšen.",
+  "InviteQuotaErrorCustomizedBody": "Bićete preusmereni na stranicu <1>Prijave</1> za 10 sekundi."
 }

@@ -132,6 +132,20 @@ export const mockInfoPanelPlugin: TAPIPlugin = {
   settings: "",
 };
 
+export const mockSelectorPlugin: TAPIPlugin = {
+  ...mockPlugin1,
+  name: "selector",
+  version: "1.0.0",
+  minDocSpaceVersion: "3.5.0",
+  description:
+    "Sample plugin demonstrating all DocSpace selector types",
+  pluginName: "SelectorSample",
+  scopes: "ContextMenu",
+  image: "docspace-icon.svg",
+  url: "/plugins/selector/plugin.js",
+  settings: "",
+};
+
 // Empty plugins list
 export const webPluginsEmpty = {
   response: [],
@@ -177,6 +191,20 @@ export const webPluginsWithContextMenuPlugin = {
 // Plugins list with info panel sample plugin
 export const webPluginsWithInfoPanelPlugin = {
   response: [mockInfoPanelPlugin],
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+// Plugins list with selector sample plugin
+export const webPluginsWithSelectorPlugin = {
+  response: [mockSelectorPlugin],
   count: 1,
   links: [
     {
@@ -249,7 +277,8 @@ export const webPluginsResolver = (
     | "withData"
     | "withLocale"
     | "withContextMenuPlugin"
-    | "withInfoPanelPlugin" = "empty",
+    | "withInfoPanelPlugin"
+    | "withSelectorPlugin" = "empty",
 ) => {
   let data;
 
@@ -265,6 +294,9 @@ export const webPluginsResolver = (
       break;
     case "withInfoPanelPlugin":
       data = webPluginsWithInfoPanelPlugin;
+      break;
+    case "withSelectorPlugin":
+      data = webPluginsWithSelectorPlugin;
       break;
     default:
       data = webPluginsEmpty;
@@ -294,7 +326,8 @@ export const webPluginsHandler = (
     | "withData"
     | "withLocale"
     | "withContextMenuPlugin"
-    | "withInfoPanelPlugin" = "empty",
+    | "withInfoPanelPlugin"
+    | "withSelectorPlugin" = "empty",
 ) => {
   return http.get(
     `${BASE_URL}:${port}/${API_PREFIX}/${PATH_WEB_PLUGINS}`,

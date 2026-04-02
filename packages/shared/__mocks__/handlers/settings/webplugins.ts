@@ -160,6 +160,20 @@ export const mockMainButtonPlugin: TAPIPlugin = {
   settings: "",
 };
 
+export const mockArticleButtonPlugin: TAPIPlugin = {
+  ...mockPlugin1,
+  name: "article-button",
+  version: "1.0.0",
+  minDocSpaceVersion: "3.5.0",
+  description:
+    "Sample plugin demonstrating article button sidebar integration for DocSpace",
+  pluginName: "ArticleButtonSample",
+  scopes: "ArticleButton",
+  image: "docspace-icon.svg",
+  url: "/plugins/article-button/plugin.js",
+  settings: "",
+};
+
 // Empty plugins list
 export const webPluginsEmpty = {
   response: [],
@@ -244,6 +258,20 @@ export const webPluginsWithMainButtonPlugin = {
   statusCode: 200,
 };
 
+// Plugins list with article button sample plugin
+export const webPluginsWithArticleButtonPlugin = {
+  response: [mockArticleButtonPlugin],
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
 // Plugins list with locale plugin
 export const webPluginsWithLocale = {
   response: [mockLocalePlugin],
@@ -307,7 +335,8 @@ export const webPluginsResolver = (
     | "withContextMenuPlugin"
     | "withInfoPanelPlugin"
     | "withSelectorPlugin"
-    | "withMainButtonPlugin" = "empty",
+    | "withMainButtonPlugin"
+    | "withArticleButtonPlugin" = "empty",
 ) => {
   let data;
 
@@ -329,6 +358,9 @@ export const webPluginsResolver = (
       break;
     case "withMainButtonPlugin":
       data = webPluginsWithMainButtonPlugin;
+      break;
+    case "withArticleButtonPlugin":
+      data = webPluginsWithArticleButtonPlugin;
       break;
     default:
       data = webPluginsEmpty;
@@ -360,7 +392,8 @@ export const webPluginsHandler = (
     | "withContextMenuPlugin"
     | "withInfoPanelPlugin"
     | "withSelectorPlugin"
-    | "withMainButtonPlugin" = "empty",
+    | "withMainButtonPlugin"
+    | "withArticleButtonPlugin" = "empty",
 ) => {
   return http.get(
     `${BASE_URL}:${port}/${API_PREFIX}/${PATH_WEB_PLUGINS}`,

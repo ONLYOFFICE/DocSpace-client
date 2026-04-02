@@ -174,6 +174,20 @@ export const mockArticleButtonPlugin: TAPIPlugin = {
   settings: "",
 };
 
+export const mockFileItemPlugin: TAPIPlugin = {
+  ...mockPlugin1,
+  name: "file-item",
+  version: "1.0.0",
+  minDocSpaceVersion: "3.5.0",
+  description:
+    "Sample plugin demonstrating file item click interception for DocSpace",
+  pluginName: "FileItemSample",
+  scopes: "File",
+  image: "docspace-icon.svg",
+  url: "/plugins/file-item/plugin.js",
+  settings: "",
+};
+
 // Empty plugins list
 export const webPluginsEmpty = {
   response: [],
@@ -272,6 +286,20 @@ export const webPluginsWithArticleButtonPlugin = {
   statusCode: 200,
 };
 
+// Plugins list with file item sample plugin
+export const webPluginsWithFileItemPlugin = {
+  response: [mockFileItemPlugin],
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
 // Plugins list with locale plugin
 export const webPluginsWithLocale = {
   response: [mockLocalePlugin],
@@ -336,7 +364,8 @@ export const webPluginsResolver = (
     | "withInfoPanelPlugin"
     | "withSelectorPlugin"
     | "withMainButtonPlugin"
-    | "withArticleButtonPlugin" = "empty",
+    | "withArticleButtonPlugin"
+    | "withFileItemPlugin" = "empty",
 ) => {
   let data;
 
@@ -361,6 +390,9 @@ export const webPluginsResolver = (
       break;
     case "withArticleButtonPlugin":
       data = webPluginsWithArticleButtonPlugin;
+      break;
+    case "withFileItemPlugin":
+      data = webPluginsWithFileItemPlugin;
       break;
     default:
       data = webPluginsEmpty;
@@ -393,7 +425,8 @@ export const webPluginsHandler = (
     | "withInfoPanelPlugin"
     | "withSelectorPlugin"
     | "withMainButtonPlugin"
-    | "withArticleButtonPlugin" = "empty",
+    | "withArticleButtonPlugin"
+    | "withFileItemPlugin" = "empty",
 ) => {
   return http.get(
     `${BASE_URL}:${port}/${API_PREFIX}/${PATH_WEB_PLUGINS}`,

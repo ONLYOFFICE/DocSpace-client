@@ -24,6 +24,105 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+@use "@docspace/ui-kit/styles/variables/colors" as *;
+
+.checkIcon {
+  overflow: hidden;
+  vertical-align: middle;
+  width: 16px;
+  min-width: 16px;
+  height: 16px;
+  min-height: 16px;
+
+  path {
+    fill: $light-status-positive !important;
+  }
+
+  :global(.dark) & path {
+    fill: $dark-status-positive !important;
+  }
+}
+
+.progress {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 24px;
+
+  :global(.description) {
+    line-height: 20px;
+  }
+
+  :global(.user-name) {
+    font-weight: 600;
+  }
+
+  :global(.progress-container) {
+    display: flex;
+    gap: 16px;
+  }
+
+  :global(.progress-section) {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  :global(.progress-section-text) {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 16px;
+  }
+
+  :global(.progress-status) {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  :global(.in-progress) {
+    display: flex;
+    gap: 4px;
+  }
+
+  :global(.transfer-information) {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  :global(.status) {
+    font-size: 14px;
+    line-height: 16px;
+  }
+
+  :global(.status-icon) {
+    padding: 2px;
+  }
+
+  :global(.status-pending) {
+    padding-inline-start: 24px;
+    height: 20px;
+  }
+
+  :global(.check-icon) {
+    width: 16px;
+  }
+
+  :global(.user) {
+    display: inline;
+    font-weight: 600;
+  }
+
+  :global(.in-progress-loader) {
+    height: 20px;
+  }
+
+  :global(.data-start) {
+    line-height: 20px;
+  }
+}
+
 .bodyContent {
   display: contents;
 

@@ -427,12 +427,12 @@ const GlobalEvents = ({
       if (eventListenerItemsList) {
         eventListenerItemsList.forEach((item) => {
           const eventHandler = (e) => {
-            item.eventHandler(e);
+            item.value.eventHandler(e);
           };
 
           eventHandlersList.current.push(eventHandler);
 
-          window.addEventListener(item.eventType, eventHandler);
+          window.addEventListener(item.value.eventType, eventHandler);
         });
       }
     }
@@ -458,7 +458,7 @@ const GlobalEvents = ({
         if (eventListenerItemsList) {
           eventListenerItemsList.forEach((item, index) => {
             window.removeEventListener(
-              item.eventType,
+              item.value.eventType,
               eventHandlersList.current[index],
             );
           });
@@ -477,6 +477,7 @@ const GlobalEvents = ({
     onChangeUserType,
     onCreatePluginFileDialog,
     enablePlugins,
+    eventListenerItemsList,
   ]);
 
   return [

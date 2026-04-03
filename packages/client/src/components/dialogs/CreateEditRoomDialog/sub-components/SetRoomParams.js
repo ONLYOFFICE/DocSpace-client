@@ -25,13 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState } from "react";
-import styled, { css } from "styled-components";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { RoomsType } from "@docspace/shared/enums";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { isMobile, mobile } from "@docspace/shared/utils";
+
+import styles from "../CreateEditRoomDialog.module.scss";
 
 import RoomType from "@docspace/shared/components/room-type";
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
@@ -53,63 +54,6 @@ import RoomTypeDropdown from "./RoomTypeDropdown";
 import PermanentSettings from "./PermanentSettings";
 import ThirdPartyStorage from "./ThirdPartyStorage";
 import TemplateAccess from "./TemplateAccess/TemplateAccess";
-
-const StyledSetRoomParams = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: 22px;
-  margin-top: 20px;
-
-  .icon-editor_text {
-    margin-bottom: 6px;
-  }
-
-  .icon-editor {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: start;
-    gap: 16px;
-
-    ${(props) =>
-      props.disableImageRescaling &&
-      css`
-        margin-bottom: 24px;
-      `};
-  }
-
-  .logo-name-container {
-    display: flex;
-    align-items: end;
-    gap: 16px;
-
-    @media ${mobile} {
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .room-params-icon,
-    .react-svg-icon {
-      min-width: 64px;
-      min-height: 64px;
-      @media ${mobile} {
-        min-width: 96px;
-        min-height: 96px;
-      }
-    }
-    .room-title {
-      font-size: 32px;
-      font-weight: 700;
-      line-height: 37px;
-      user-select: none;
-      @media ${mobile} {
-        font-size: 42px;
-        line-height: 56px;
-      }
-    }
-  }
-`;
 
 const SetRoomParams = ({
   t,
@@ -477,7 +421,9 @@ const SetRoomParams = ({
       : `${t("Common:Label")}:`;
 
   return (
-    <StyledSetRoomParams disableImageRescaling={disableImageRescaling}>
+    <div
+      className={`${styles.setRoomParams}${disableImageRescaling ? ` ${styles.disableImageRescaling}` : ""}`}
+    >
       {isEdit || disabledChangeRoomType || isTemplateSelected || isTemplate ? (
         <RoomType
           t={t}
@@ -626,7 +572,7 @@ const SetRoomParams = ({
           />
         ) : null}
       </div>
-    </StyledSetRoomParams>
+    </div>
   );
 };
 

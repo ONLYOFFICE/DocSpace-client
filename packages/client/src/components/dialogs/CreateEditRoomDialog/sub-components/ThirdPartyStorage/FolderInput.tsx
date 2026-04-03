@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
 import { TFunction } from "i18next";
 
 import FolderReactSvgUrl from "PUBLIC_DIR/images/folder.react.svg?url";
@@ -33,101 +32,10 @@ import FolderReactSvgUrl from "PUBLIC_DIR/images/folder.react.svg?url";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 import { TFolder } from "@docspace/shared/api/files/types";
-import { injectDefaultTheme } from "@docspace/shared/utils";
 
 import FilesSelector from "SRC_DIR/components/FilesSelector";
 
-const StyledFolderInput = styled.div.attrs(injectDefaultTheme)`
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: row;
-  gap: 0px;
-  width: 100%;
-  height: 32px;
-
-  border-radius: 3px;
-  transition: all 0.2s ease;
-  cursor: pointer;
-  user-select: none;
-
-  .folder-path-wrapper {
-    display: contents;
-  }
-
-  &,
-  .icon-wrapper {
-    border: 1px solid
-      ${(props) =>
-				props.theme.createEditRoomDialog.thirdpartyStorage.folderInput
-					.borderColor};
-  }
-
-  &:hover,
-  &:hover > .icon-wrapper {
-    border: 1px solid
-      ${(props) =>
-				props.theme.createEditRoomDialog.thirdpartyStorage.folderInput
-					.hoverBorderColor};
-  }
-
-  .root_label,
-  .path,
-  .room_title {
-    padding: 5px 0px;
-    font-weight: 400;
-    font-size: 13px;
-    line-height: 20px;
-  }
-
-  .root_label {
-    padding-inline-start: 8px;
-    /* background-color: ${(props) =>
-			props.theme.createEditRoomDialog.thirdpartyStorage.folderInput
-				.background}; */
-    color: ${(props) =>
-			props.theme.createEditRoomDialog.thirdpartyStorage.folderInput
-				.rootLabelColor};
-  }
-
-  .path {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .room_title {
-    padding-inline-end: 8px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .icon-wrapper {
-    margin-inline-start: auto;
-    background-color: ${(props) =>
-			props.theme.createEditRoomDialog.thirdpartyStorage.folderInput
-				.background};
-    height: 100%;
-    box-sizing: border-box;
-    width: 31px;
-    min-width: 31px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s ease;
-    border-top: none !important;
-    border-bottom: none !important;
-    border-inline-end: none !important;
-
-    &:hover {
-      path {
-        fill: ${(props) =>
-					props.theme.createEditRoomDialog.thirdpartyStorage.folderInput
-						.iconFill};
-      }
-    }
-  }
-`;
+import styles from "../../CreateEditRoomDialog.module.scss";
 
 type FolderInputProps = {
 	t: TFunction;
@@ -190,7 +98,7 @@ const FolderInput = ({
 
 	return (
 		<>
-			<StyledFolderInput onClick={onOpen}>
+			<div className={styles.folderInput} onClick={onOpen}>
 				<TooltipContainer
 					as="div"
 					className="folder-path-wrapper"
@@ -213,7 +121,7 @@ const FolderInput = ({
 				>
 					<IconButton size={16} iconName={FolderReactSvgUrl} isClickable />
 				</TooltipContainer>
-			</StyledFolderInput>
+			</div>
 
 			{isDialogOpen ? (
 				// @ts-expect-error need pass all props

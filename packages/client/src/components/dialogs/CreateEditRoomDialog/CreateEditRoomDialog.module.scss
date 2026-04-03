@@ -1,0 +1,594 @@
+// (c) Copyright Ascensio System SIA 2009-2026
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+@use "@docspace/ui-kit/styles/mixins";
+@use "@docspace/ui-kit/styles/variables/colors" as *;
+@use "../dialog-params-layout" as *;
+
+// 1. SetRoomParams
+.setRoomParams {
+  @include dialog-params-layout;
+}
+
+// 2. RoomTypeDropdown
+.roomTypeDropdown {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  :global(.backdrop-active) {
+    top: -64px;
+  }
+}
+
+// 3. DropdownDesktop
+.dropdownDesktop {
+  max-width: 100%;
+  position: relative;
+  display: none;
+
+  &.isOpen {
+    display: block;
+  }
+
+  :global(.dropdown-content) {
+    background: $white;
+    border: 1px solid $gray-strong;
+    margin-top: 4px;
+    overflow: visible;
+    z-index: 400;
+    top: 0;
+    inset-inline-start: 0;
+    box-sizing: border-box;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    padding: 6px 0;
+    box-shadow: 0px 12px 40px $popup-shadow;
+    border-radius: 6px;
+
+    :global(.dark) & {
+      background: $black;
+      border-color: $gray-dark-strong;
+    }
+  }
+}
+
+// 4. DropdownMobile
+.dropdownMobile {
+  position: fixed;
+  bottom: 0;
+  z-index: 500;
+  padding-top: 6px;
+  box-shadow: 0px -4px 60px $popup-shadow;
+  border-radius: 6px 6px 0px 0px;
+  background: $white;
+  visibility: hidden;
+
+  &.isOpen {
+    visibility: visible;
+  }
+
+  :global(.dark) & {
+    background: $black;
+  }
+}
+
+// 5. FileLifetime
+.fileLifetime {
+  margin-top: 12px;
+
+  :global(.virtual-data-room_file-lifetime_body) {
+    display: block;
+
+    :global(.virtual-data-room_file-lifetime_date) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 8px;
+    }
+
+    :global(.virtual-data-room_file-lifetime_input) {
+      min-width: 0;
+    }
+
+    :global(.virtual-data-room_file-lifetime_combo-box) {
+      min-width: 0;
+
+      :global(.combo-button-label) {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+
+    :global(.virtual-data-room_file-lifetime_delete-combo-box) {
+      width: 100%;
+
+      :global(.combo-button-label) {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
+}
+
+// 6. VirtualDataRoomBlock
+.virtualDataRoomBlock {
+  :global(.virtual-data-room-block) {
+    &:not(:last-child) {
+      margin-bottom: 18px;
+    }
+
+    :global(.virtual-data-room-block_header) {
+      display: flex;
+
+      :global(.virtual-data-room-block_toggle) {
+        margin-inline: auto 28px;
+      }
+    }
+
+    :global(.virtual-data-room-block_description) {
+      max-width: 420px;
+      margin-inline-end: 28px;
+      color: $gray;
+    }
+
+    :global(.virtual-data-room-block_content) {
+      margin-top: 16px;
+    }
+  }
+}
+
+// 7. SystemFolders
+.systemFoldersTitle {
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.systemFoldersDescription {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  color: $gray;
+}
+
+.systemFoldersHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2px;
+}
+
+.systemFoldersToggleButton {
+  width: 30px;
+  height: 16px;
+}
+
+// 8. PermanentSettings
+.permanentSettings {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  margin-top: -12px;
+
+  &.displayNone {
+    display: none;
+  }
+}
+
+// 9. PermanentSetting
+.permanentSetting {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 4px;
+  width: 100%;
+  max-width: 100%;
+  padding: 12px 16px;
+  background: $gray-light;
+  border-radius: 6px;
+  user-select: none;
+
+  :global(.dark) & {
+    background: $gray-dark-strong;
+  }
+
+  &.isFull {
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+  }
+
+  :global(.permanent_setting-main_info) {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    gap: 8px;
+  }
+
+  :global(.permanent_setting-main_info-icon) {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: -2px;
+
+    svg {
+      max-width: 100%;
+      max-height: 100%;
+    }
+  }
+
+  :global(.permanent_setting-main_info-title) {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  &.privacyType :global(.permanent_setting-main_info-icon) svg path {
+    fill: $light-status-positive;
+
+    :global(.dark) & {
+      fill: $dark-status-positive;
+    }
+  }
+
+  :global(.permanent_setting-help_button) {
+    margin-inline-start: auto;
+    white-space: pre-line;
+  }
+
+  :global(.permanent_setting-secondary-info) {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    color: $gray-text;
+    white-space: pre-line;
+
+    :global(.dark) & {
+      color: $gray;
+    }
+  }
+}
+
+// 10. ThirdPartyStorage - StorageLocation
+.storageLocation {
+  display: flex;
+  flex-direction: column;
+
+  :global(.thirdparty-combobox) {
+    padding: 0px;
+
+    :global(.dropdown-container) {
+      border: 1px solid $gray-strong;
+
+      :global(.dark) & {
+        border-color: $gray-dark-strong;
+      }
+    }
+
+    :global(.combo-button) {
+      padding-inline-start: 8px;
+    }
+  }
+
+  :global(.set_room_params-thirdparty) {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  :global(.storage-unavailable) {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    color: $gray;
+
+    :global(.dark) & {
+      color: $gray-dark;
+    }
+
+    :global(.drop-down-item_icon) {
+      svg {
+        path[fill] {
+          fill: $gray;
+
+          :global(.dark) & {
+            fill: $gray-dark;
+          }
+        }
+
+        path[stroke] {
+          stroke: $gray;
+
+          :global(.dark) & {
+            stroke: $gray-dark;
+          }
+        }
+
+        circle[fill] {
+          fill: $gray;
+
+          :global(.dark) & {
+            fill: $gray-dark;
+          }
+        }
+
+        rect[fill] {
+          fill: $gray;
+
+          :global(.dark) & {
+            fill: $gray-dark;
+          }
+        }
+      }
+    }
+  }
+}
+
+// 10b. ThirdPartyStorage - ComboBoxItem
+.comboBoxItem {
+  display: flex;
+
+  :global(.drop-down-item_text) {
+    color: $black;
+
+    :global(.dark) & {
+      color: $white;
+    }
+  }
+
+  &.isDisabled :global(.drop-down-item_text) {
+    color: $gray;
+
+    :global(.dark) & {
+      color: $gray-dark;
+    }
+  }
+
+  :global(.drop-down-item_icon) {
+    display: flex;
+    align-items: center;
+    margin-inline-start: auto;
+
+    div {
+      display: flex;
+    }
+
+    svg {
+      min-height: 16px;
+      min-width: 16px;
+    }
+  }
+}
+
+// 11. FolderInput
+.folderInput {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  gap: 0px;
+  width: 100%;
+  height: 32px;
+  border-radius: 3px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid $gray-strong;
+
+  :global(.dark) & {
+    border-color: $gray-dark-strong;
+  }
+
+  :global(.folder-path-wrapper) {
+    display: contents;
+  }
+
+  &:hover {
+    border-color: $gray;
+
+    :global(.dark) & {
+      border-color: $gray-dark;
+    }
+  }
+
+  &:hover > :global(.icon-wrapper) {
+    border-color: $gray;
+
+    :global(.dark) & {
+      border-color: $gray-dark;
+    }
+  }
+
+  :global(.root_label),
+  :global(.path),
+  :global(.room_title) {
+    padding: 5px 0px;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 20px;
+  }
+
+  :global(.root_label) {
+    padding-inline-start: 8px;
+    color: $light-gray-dark;
+
+    :global(.dark) & {
+      color: $dark-gray-dark;
+    }
+  }
+
+  :global(.path) {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  :global(.room_title) {
+    padding-inline-end: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  :global(.icon-wrapper) {
+    margin-inline-start: auto;
+    background-color: $gray-light;
+    height: 100%;
+    box-sizing: border-box;
+    width: 31px;
+    min-width: 31px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    border-top: none !important;
+    border-bottom: none !important;
+    border-inline-end: none !important;
+    border-inline-start: 1px solid $gray-strong;
+
+    :global(.dark) & {
+      background-color: $dark-gray-light;
+      border-inline-start-color: $gray-dark-strong;
+    }
+
+    &:hover path {
+      fill: $gray;
+
+      :global(.dark) & {
+        fill: $gray-dark;
+      }
+    }
+  }
+}
+
+// 12. Watermarks
+.watermark {
+  margin-top: 16px;
+
+  :global(.watermark-title) {
+    margin: 16px 0 8px 0;
+  }
+
+  :global(.title-without-top) {
+    margin-top: 0px;
+  }
+
+  :global(.watermark-checkbox) {
+    margin: 18px 0 0 0;
+  }
+
+  :global(.options-wrapper) {
+    display: grid;
+    grid-template-rows: 56px 56px;
+    gap: 16px;
+
+    :global(.options) {
+      color: $black;
+
+      :global(.dark) & {
+        color: $white;
+      }
+    }
+  }
+
+  :global(.image-wrapper) {
+    display: grid;
+    grid-template-columns: 216px auto;
+    gap: 16px;
+
+    :global(.image-description) {
+      display: flex;
+      gap: 8px;
+      align-items: baseline;
+
+      :global(.image-watermark_text) {
+        margin-bottom: 8px;
+      }
+    }
+
+    :global(.image-watermark_wrapper) {
+      width: 216px;
+      height: 216px;
+      border: 1px solid $gray-light-mid;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        width: 88%;
+        height: 88%;
+        transform: rotate(var(--watermark-rotate, 0deg))
+          scale(var(--watermark-scale, 1));
+        opacity: 0.4;
+        margin: auto;
+      }
+    }
+  }
+
+  :global(.watermark-tab_items) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-bottom: 20px;
+  }
+}
+
+// SecondaryInfoButton - StyledHelpButton
+.secondaryInfoButton {
+  border-radius: 50%;
+  background-color: $gray;
+
+  :global(.dark) & {
+    background-color: $gray-dark;
+  }
+
+  circle,
+  rect {
+    fill: $white;
+
+    :global(.dark) & {
+      fill: $white;
+    }
+  }
+}
+
+// ThirdPartyStorage - StyledThirdPartyStorage
+.thirdPartyStorage {
+  flex-direction: column;
+  gap: 12px;
+
+  :global(.create-new-folder_checkbox) {
+    margin-top: 1px;
+  }
+}

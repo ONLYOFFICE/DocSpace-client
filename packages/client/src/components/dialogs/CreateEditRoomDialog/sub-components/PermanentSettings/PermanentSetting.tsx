@@ -25,85 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled, { css } from "styled-components";
 import { ReactSVG } from "react-svg";
-
-import { injectDefaultTheme } from "@docspace/shared/utils";
 
 import SecondaryInfoButton from "../SecondaryInfoButton";
 
-const StyledPermanentSetting = styled.div.attrs(injectDefaultTheme)<{
-  isFull: boolean;
-  type: string;
-}>`
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: ${(props) => (props.isFull ? "column" : "row")};
-  align-items: ${(props) => (props.isFull ? "start" : "center")};
-  justify-content: ${(props) => (props.isFull ? "center" : "start")};
-  gap: 4px;
-
-  width: 100%;
-  max-width: 100%;
-  padding: 12px 16px;
-
-  background: ${(props) =>
-    props.theme.createEditRoomDialog.permanentSettings.background};
-  border-radius: 6px;
-
-  user-select: none;
-
-  .permanent_setting-main_info {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: start;
-    gap: 8px;
-
-    &-icon {
-      width: 20px;
-      height: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: -2px;
-
-      svg {
-        max-width: 100%;
-        max-height: 100%;
-
-        ${(props) =>
-          props.type === "privacy" &&
-          css`
-            path {
-              fill: ${({ theme }) =>
-                theme.createEditRoomDialog.permanentSettings.isPrivateIcon};
-            }
-          `}
-      }
-    }
-
-    &-title {
-      font-weight: 600;
-      font-size: 12px;
-      line-height: 16px;
-    }
-  }
-
-  .permanent_setting-help_button {
-    margin-inline-start: auto;
-    white-space: pre-line;
-  }
-
-  .permanent_setting-secondary-info {
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 16px;
-    color: ${(props) =>
-      props.theme.createEditRoomDialog.permanentSettings.descriptionColor};
-    white-space: pre-line;
-  }
-`;
+import styles from "../../CreateEditRoomDialog.module.scss";
 
 type PermanentSettingProps = {
   isFull: boolean;
@@ -121,10 +47,8 @@ const PermanentSetting = ({
   content,
 }: PermanentSettingProps) => {
   return (
-    <StyledPermanentSetting
-      className="permanent_setting"
-      isFull={isFull}
-      type={type}
+    <div
+      className={`${styles.permanentSetting} permanent_setting${isFull ? ` ${styles.isFull}` : ""}${type === "privacy" ? ` ${styles.privacyType}` : ""}`}
     >
       <div className="permanent_setting-main_info">
         <ReactSVG className="permanent_setting-main_info-icon" src={icon} />
@@ -138,7 +62,7 @@ const PermanentSetting = ({
           <SecondaryInfoButton content={content} />
         </div>
       )}
-    </StyledPermanentSetting>
+    </div>
   );
 };
 

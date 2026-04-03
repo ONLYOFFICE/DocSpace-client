@@ -26,27 +26,16 @@
 
 import React from "react";
 
-import styled from "styled-components";
-
 import { HelpButton } from "@docspace/ui-kit/components/help-button";
 
 import InfoReactSvgUrl from "PUBLIC_DIR/images/info.react.svg?url";
-
-const StyledHelpButton = styled(HelpButton)`
-  border-radius: 50%;
-  background-color: ${(props) =>
-    props.theme.createEditRoomDialog.helpButton.background};
-  circle,
-  rect {
-    fill: ${(props) => props.theme.createEditRoomDialog.helpButton.fill};
-  }
-`;
+import styles from "SRC_DIR/components/dialogs/CreateEditRoomDialog/CreateEditRoomDialog.module.scss";
 
 const SecondaryInfoButton = ({ content }) => {
   return (
-    <StyledHelpButton
+    <HelpButton
       displayType="auto"
-      className="set_room_params-info-title-help"
+      className={`set_room_params-info-title-help ${styles.secondaryInfoButton}`}
       iconName={InfoReactSvgUrl}
       tooltipProps={{ globalEventOff: "click" }}
       tooltipContent={content}

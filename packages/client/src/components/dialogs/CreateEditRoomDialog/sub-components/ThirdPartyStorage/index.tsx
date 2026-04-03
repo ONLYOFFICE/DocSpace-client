@@ -26,7 +26,6 @@
 
 import React, { useRef, useEffect } from "react";
 import { inject, observer } from "mobx-react";
-import styled from "styled-components";
 import { TFunction } from "i18next";
 
 import { Text } from "@docspace/ui-kit/components/text";
@@ -42,18 +41,10 @@ import { TConnectingStorage } from "@docspace/shared/api/files/types";
 
 import { StyledParam } from "SRC_DIR/components/CreateEditDialogParams/StyledParam";
 import ToggleParam from "SRC_DIR/components/CreateEditDialogParams/ToggleParam";
+import styles from "SRC_DIR/components/dialogs/CreateEditRoomDialog/CreateEditRoomDialog.module.scss";
 
 import ThirdPartyComboBox from "./ThirdPartyComboBox";
 import FolderInput from "./FolderInput";
-
-const StyledThirdPartyStorage = styled(StyledParam)`
-  flex-direction: column;
-  gap: 12px;
-
-  .create-new-folder_checkbox {
-    margin-top: 1px;
-  }
-`;
 
 type ThirdPartyStorageProps = {
 	t: TFunction;
@@ -180,7 +171,7 @@ const ThirdPartyStorage = ({
 	}, []);
 
 	return (
-		<StyledThirdPartyStorage>
+		<StyledParam className={styles.thirdPartyStorage}>
 			<ToggleParam
 				id="shared_third-party-storage-toggle"
 				title={t("Common:ThirdPartyStorage")}
@@ -229,7 +220,7 @@ const ThirdPartyStorage = ({
 					/>
 				</>
 			) : null}
-		</StyledThirdPartyStorage>
+		</StyledParam>
 	);
 };
 

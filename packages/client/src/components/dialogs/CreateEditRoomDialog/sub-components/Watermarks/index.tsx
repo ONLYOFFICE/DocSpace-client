@@ -33,8 +33,9 @@ import { TWatermark } from "@docspace/shared/api/rooms/types";
 import { TRoomParams } from "@docspace/shared/utils/rooms";
 
 import ViewerInfoWatermark from "./ViewerInfo";
-import { StyledBody } from "./StyledComponent";
 import ImageWatermark from "./ImageWatermark";
+
+import styles from "../../CreateEditRoomDialog.module.scss";
 
 const imageWatermark = "image";
 const viewerInfoWatermark = "viewerInfo";
@@ -102,7 +103,7 @@ const Watermarks = ({
   const typeOptions = options(t);
 
   return (
-    <StyledBody>
+    <div>
       <RadioButtonGroup
         name="watermarks-radiobutton"
         fontSize="13px"
@@ -130,7 +131,7 @@ const Watermarks = ({
           isImage={initialInfoRef.isImageType}
         />
       )}
-    </StyledBody>
+    </div>
   );
 };
 

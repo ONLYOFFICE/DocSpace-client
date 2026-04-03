@@ -25,24 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
 
 import RoomType from "@docspace/shared/components/room-type";
+
+import styles from "../../CreateEditRoomDialog.module.scss";
 import { isMobile } from "@docspace/shared/utils";
 import { RoomsType } from "@docspace/shared/enums";
 
 import DropdownDesktop from "./DropdownDesktop";
 import DropdownMobile from "./DropdownMobile";
-
-const StyledRoomTypeDropdown = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-
-  .backdrop-active {
-    top: -64px;
-  }
-`;
 
 type RoomTypeDropdownProps = {
   currentRoomType: RoomsType;
@@ -86,7 +77,7 @@ const RoomTypeDropdown = ({
   }, [forceHideDropdown]);
 
   return (
-    <StyledRoomTypeDropdown>
+    <div className={styles.roomTypeDropdown}>
       <RoomType
         roomType={currentRoomType}
         id="shared_select-room"
@@ -109,7 +100,7 @@ const RoomTypeDropdown = ({
           onClose={toggleDropdown}
         />
       )}
-    </StyledRoomTypeDropdown>
+    </div>
   );
 };
 

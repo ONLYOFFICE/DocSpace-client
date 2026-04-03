@@ -36,7 +36,7 @@ import { TabItem } from "@docspace/ui-kit/components/tab-item";
 import { TWatermark } from "@docspace/shared/api/rooms/types";
 import { TRoomParams } from "@docspace/shared/utils/rooms";
 
-import { StyledWatermark } from "./StyledComponent";
+import styles from "../../CreateEditRoomDialog.module.scss";
 
 const tabsOptions = (t: TFunction) => [
   {
@@ -262,7 +262,7 @@ const ViewerInfoWatermark = ({
     1;
 
   return (
-    <StyledWatermark>
+    <div className={styles.watermark}>
       <Text className="watermark-title" fontWeight={600} lineHeight="20px">
         {t("AddWatermarkElements")}
       </Text>
@@ -314,7 +314,7 @@ const ViewerInfoWatermark = ({
         scaledOptions
         dataTestId="virtual_data_room_watermark_position_combobox"
       />
-    </StyledWatermark>
+    </div>
   );
 };
 

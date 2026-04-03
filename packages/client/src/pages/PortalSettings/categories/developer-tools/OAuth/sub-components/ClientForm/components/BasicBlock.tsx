@@ -41,7 +41,7 @@ import { ONE_MEGABYTE } from "@docspace/shared/constants";
 // import { Text } from "@docspace/ui-kit/components/text";
 
 import { getOAuthValidationCodeTranslation } from "../ClientForm.utils";
-import { StyledBlock, StyledInputBlock } from "../ClientForm.styled";
+import styles from "../ClientForm.styled.module.scss";
 
 import BlockHeader from "./BlockHeader";
 import InputGroup from "./InputGroup";
@@ -136,9 +136,9 @@ const BasicBlock = ({
   const isLogoRequiredError = requiredErrorFields.includes("logo");
 
   return (
-    <StyledBlock>
+    <div className={styles.styledBlock}>
       <BlockHeader header={t("BasicInfo")} />
-      <StyledInputBlock>
+      <div className={styles.styledInputBlock}>
         <InputGroup
           label={t("OAuth:AppName")}
           name="name"
@@ -229,8 +229,8 @@ const BasicBlock = ({
             />
           </div>
         </InputGroup>
-      </StyledInputBlock>
-    </StyledBlock>
+      </div>
+    </div>
   );
 };
 

@@ -36,7 +36,7 @@ import GithubLight from "PUBLIC_DIR/images/thirdparties/github.light.react.svg";
 import GithubDark from "PUBLIC_DIR/images/thirdparties/github.dark.react.svg";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
-import { StyledContainer } from "./StyledPluginSDK";
+import styles from "./PluginSDK.module.scss";
 
 const PluginSDK = ({
   systemPluginList,
@@ -85,21 +85,21 @@ const PluginSDK = ({
     }
 
     const list = systemPluginList.map((p) => (
-      <div key={p.name} className="plugin-list__item">
-        <div className="plugin-list__item-info">
+      <div key={p.name} className={styles.pluginListItem}>
+        <div className={styles.pluginListItemInfo}>
           <img
-            className="plugin-logo"
+            className={styles.pluginLogo}
             src={`${p.iconUrl}/assets/${p.image}?hash=${p.version}`}
             alt="Plugin logo"
           />
-          <div className="plugin-info-container">
+          <div className={styles.pluginInfoContainer}>
             <Text>{p.name}</Text>
-            <Text className="description">
+            <Text className={styles.description}>
               {t("VersionHistory:Version")} {p.version}
             </Text>
           </div>
         </div>
-        <Text className="description-text" title={p.description}>
+        <Text className={styles.descriptionText} title={p.description}>
           {p.description}
         </Text>
         <Button
@@ -119,12 +119,12 @@ const PluginSDK = ({
   const list = getPluginList();
 
   return (
-    <StyledContainer>
+    <div className={styles.container}>
       <Text fontSize="16px" fontWeight={700} lineHeight="22px">
         {t("ExpandFunctionality")}
       </Text>
       <Text
-        className="description"
+        className={styles.description}
         fontSize="13px"
         fontWeight={400}
         lineHeight="20px"
@@ -132,7 +132,7 @@ const PluginSDK = ({
         {t("PluginSDKDescription", { productName: t("Common:ProductName") })}
       </Text>
       <Text
-        className="description"
+        className={styles.description}
         fontSize="13px"
         fontWeight={400}
         lineHeight="20px"
@@ -140,7 +140,7 @@ const PluginSDK = ({
         {t("PluginSDKInstruction")}
       </Text>
       <Button
-        className="read-instructions-button"
+        className={styles.readInstructionsButton}
         label={t("Common:ReadInstructions")}
         primary
         scale={isMobile}
@@ -153,10 +153,10 @@ const PluginSDK = ({
           <Text fontSize="16px" fontWeight={700} lineHeight="22px">
             {t("PluginSamples")}
           </Text>
-          <div className="plugin-list">{list}</div>
+          <div className={styles.pluginList}>{list}</div>
         </>
       ) : null}
-    </StyledContainer>
+    </div>
   );
 };
 

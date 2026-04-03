@@ -26,37 +26,12 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import styled from "styled-components";
 
 import { TableRow, TableCell } from "@docspace/ui-kit/components/table";
 import { Text } from "@docspace/ui-kit/components/text";
 import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 
-const StyledPeopleRow = styled(TableRow)`
-  .table-container_cell {
-    height: 46px;
-    max-height: 46px;
-  }
-
-  .table-container_row-checkbox-wrapper {
-    padding-inline-start: 4px;
-    min-width: 46px;
-
-    .table-container_row-checkbox {
-      margin-inline-start: -4px;
-      padding-block: 16px;
-      padding-inline: 12px 0;
-    }
-  }
-
-  .link-with-dropdown-group {
-    margin-inline-end: 12px;
-  }
-
-  .table-cell_username {
-    margin-inline-end: 12px;
-  }
-`;
+import styles from "./TableRow.module.scss";
 
 const PeopleTableRow = (props) => {
   const { item, contextOptionsProps, onEmailClick, locale } = props;
@@ -64,7 +39,7 @@ const PeopleTableRow = (props) => {
   const dateStr = getCorrectDate(locale, item.date);
 
   return (
-    <StyledPeopleRow key={item.id} {...contextOptionsProps}>
+    <TableRow key={item.id} className={styles["people-row"]} {...contextOptionsProps}>
       <TableCell>
         <Text
           type="page"
@@ -102,7 +77,7 @@ const PeopleTableRow = (props) => {
           {item.action}
         </Text>
       </TableCell>
-    </StyledPeopleRow>
+    </TableRow>
   );
 };
 

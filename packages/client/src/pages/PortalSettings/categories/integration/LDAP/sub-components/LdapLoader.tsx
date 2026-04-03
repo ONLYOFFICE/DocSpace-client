@@ -24,31 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";
-
-const StyledLoader = styled.div`
-  .description {
-    max-width: 700px;
-    margin-bottom: 20px;
-  }
-
-  .toggler {
-    max-width: 700px;
-    margin-bottom: 24px;
-  }
-`;
+import styles from "./LdapLoader.module.scss";
 
 const LdapLoader = () => {
   return (
-    <StyledLoader>
+    <div className={styles.styledLoader}>
       <RectangleSkeleton className="description" height="88px" />
       <RectangleSkeleton className="toggler" height="112px" />
       <RectangleSkeleton className="category" height="22px" width="151px" />
       <StyledSettingsSeparator />
       <RectangleSkeleton className="category" height="22px" width="151px" />
-    </StyledLoader>
+    </div>
   );
 };
 

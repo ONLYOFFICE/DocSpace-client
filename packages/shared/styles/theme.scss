@@ -1506,6 +1506,15 @@
   --border-service-color: #{$gray-light-mid};
   --services-additional-info: #{$gray};
   --services-link-color: #{$gray};
+  --payment-tariff-text: #{$gray-text};
+  --payment-benefits-background: #{$gray-light};
+  --payment-main-border: 1px solid #{$gray-light};
+  --payment-price-background-text: #{$light-gray-hover};
+  --payment-price-background: transparent;
+  --payment-price-border: 1px solid #{$gray-strong};
+  --payment-price-disable: #{$gray};
+  --payment-price-disable-price: #{$gray};
+  --payment-storage-size-title: #{$gray};
 }
 
 .dark {
@@ -1527,6 +1536,15 @@
   --modal-dialog-border-color: #{$gray-dark-strong};
   --services-additional-info: #{$gray-dark};
   --services-link-color: #{$dark-gray-dark};
+  --payment-tariff-text: #{$gray-dark-pressed};
+  --payment-benefits-background: #{$black};
+  --payment-main-border: 1px solid #{$gray-dark-strong};
+  --payment-price-background-text: #{$light-dark-gray-hover};
+  --payment-price-background: #{$dark-gray-light};
+  --payment-price-border: 1px solid #{$dark-gray-light};
+  --payment-price-disable: #{$gray-dark};
+  --payment-price-disable-price: #{$gray-dark-text};
+  --payment-storage-size-title: #{$gray};
 }
 
 .light {
@@ -1795,15 +1813,47 @@
 }
 
 .light {
+  --settings-separator-border: 1px solid #{$gray-light-mid};
+}
+
+.dark {
+  --settings-separator-border: 1px solid #{$gray-dark-strong};
+}
+
+.light {
+  --settings-integration-text-color: #{$gray};
+  --settings-integration-separator-border: 1px solid #{$gray-strong};
+  --settings-integration-link-color: #{$link};
+  --settings-integration-sso-icon-button: #{$black};
+  --settings-integration-sso-icon-button-disabled: #{$gray};
+}
+
+.dark {
+  --settings-integration-text-color: #{$gray-dark};
+  --settings-integration-separator-border: 1px solid #{$gray-dark-strong};
+  --settings-integration-link-color: #{$dark-link};
+  --settings-integration-sso-icon-button: #{$white};
+  --settings-integration-sso-icon-button-disabled: #{$black};
+}
+
+.light {
   --settings-common-company-info-border: 1px dashed #{$black};
   --settings-common-company-info-color: #{$gray};
   --settings-common-branding-description-color: #{$light-gray-dark};
+  --settings-security-description-color: #{$gray-text};
+  --settings-appearance-theme-add-bg: #{$gray-light-mid};
+  --settings-appearance-add-theme-bg: #{$gray-strong};
+  --settings-appearance-icon-fill: #{$gray};
 }
 
 .dark {
   --settings-common-company-info-border: 1px dashed #{$white};
   --settings-common-company-info-color: #{$gray-dark};
   --settings-common-branding-description-color: #{$gray-dark};
+  --settings-security-description-color: #{$gray-dark};
+  --settings-appearance-theme-add-bg: #{$gray-dark-strong};
+  --settings-appearance-add-theme-bg: #{$gray-dark-strong};
+  --settings-appearance-icon-fill: #{$gray-dark};
 }
 
 .light {
@@ -2229,12 +2279,14 @@
   --plugins-plugin-name-color: #{$gray};
   --plugins-border-color: #{$gray-light-mid};
   --plugins-error-status-color: #{$light-error-status};
+  --plugins-description-color: #{$light-gray-dark};
 }
 
 .dark {
   --plugins-plugin-name-color: #{$gray-dark};
   --plugins-border-color: #{$gray-dark-strong};
   --plugins-error-status-color: #{$dark-error-status};
+  --plugins-description-color: #{$dark-gray-dark};
 }
 
 .light {
@@ -2556,6 +2608,166 @@
   --room-grouping-dialog-tag-icon: #{$dark-gray-dark};
   --room-grouping-dialog-tag-active: #{$light-blue-main};
   --room-grouping-dialog-fade: #{$black};
+}
+
+.light {
+  --portal-unavailable-text-color: #{$gray};
+}
+
+.dark {
+  --portal-unavailable-text-color: #{$gray-dark};
+}
+
+.light {
+  --security-subheader-color: #{$light-gray-dark};
+  --security-side-color: #{$gray};
+}
+
+.dark {
+  --security-subheader-color: #{$dark-gray-dark};
+  --security-side-color: #{$gray-dark};
+}
+
+.light {
+  --settings-storage-management-description-color: #{$light-gray-dark};
+  --settings-storage-management-gray-bg-text: #{$black};
+  --settings-storage-management-divider-color: #{$gray-light-mid};
+  --settings-delete-data-border-top: 1px solid #{$gray-light-mid};
+  --settings-payment-bg-color: #{$gray-light};
+}
+
+.dark {
+  --settings-storage-management-description-color: #{$dark-gray-dark};
+  --settings-storage-management-gray-bg-text: #{$white};
+  --settings-storage-management-divider-color: #{$gray-dark-mid};
+  --settings-delete-data-border-top: 1px solid #{$gray-dark-mid};
+  --settings-payment-bg-color: #{$dark-gray-light};
+}
+
+.light {
+  --sdk-link-help-color: #{$light-gray-dark};
+  --sdk-secondary-color: #{$light-gray-dark};
+  --sdk-border-color: #{$gray-strong};
+  --sdk-preview-background-color: #{$light-gray-hover};
+  --sdk-code-background-color: #{$white};
+  --sdk-code-header-background-color: #{$gray-light};
+  --sdk-muted-text-color: #{$gray};
+  --webhooks-link-color: #{$light-blue-main};
+  --webhooks-bar-background: #{$gray-light};
+  --webhooks-color: #{$gray};
+  --webhooks-border: 1px solid #{$gray-light-mid};
+  --webhooks-background: #{$gray-light};
+  --webhooks-history-row-bg: #{$light-gray-hover};
+  --webhooks-table-cell-bg: #{$light-gray-hover};
+  --webhooks-filter-border: 1px solid #{$gray-strong};
+  --webhooks-span-bg: #{$light-blue-main};
+  --oauth-preview-border: 1px solid #{$gray-light-mid};
+  --oauth-info-desc-link-color: #{$light-gray-dark};
+  --oauth-info-block-header-color: #{$gray};
+  --oauth-info-separator-color: #{$black};
+  --oauth-list-description-color: #{$gray};
+  --oauth-form-description-color: #{$gray};
+  --oauth-form-header-border: 1px solid #{$gray-strong};
+  --oauth-form-scope-desc: #{$gray};
+  --info-panel-tag-bg: #{$gray-light-mid};
+  --migration-description-color: #{$light-gray-dark};
+  --migration-subtitle-color: #{$black};
+  --migration-workspace-bg: #{$white};
+  --migration-workspace-border: 1px solid #{$gray-strong};
+  --migration-info-block-bg: #{$gray-light};
+  --migration-info-block-text-color: #{$gray-text};
+  --migration-error-text-color: #{$light-error-status};
+  --migration-progress-bar-bg: #{$light-blue-main};
+  --migration-workspace-hover: #{$light-blue-main};
+  --migration-file-input-icon-color: #{$gray};
+  --migration-table-header-text: #{$gray};
+  --migration-table-row-hover: #{$light-gray-hover};
+  --migration-table-row-text-color: #{$gray};
+  --migration-import-section-text-color: #{$gray};
+  --migration-import-item-bg: #{$gray-light};
+  --migration-import-item-disable-bg: #{$gray-light};
+  --migration-import-item-text-color: #{$gray-text};
+  --migration-import-item-disable-text: #{$gray};
+  --migration-import-icon-color: #{$light-gray-dark};
+  --migration-link-color: #{$light-blue-main};
+  --migration-existing-text-color: #{$main-green};
+}
+
+.dark {
+  --sdk-link-help-color: #{$dark-gray-dark};
+  --sdk-secondary-color: #{$dark-gray-dark};
+  --sdk-border-color: #{$gray-dark-strong};
+  --sdk-preview-background-color: #{$light-dark-gray-hover};
+  --sdk-code-background-color: #{$light-dark-gray-hover};
+  --sdk-code-header-background-color: #{$gray-dark-mid};
+  --sdk-muted-text-color: #{$gray-dark};
+  --webhooks-link-color: #{$light-blue-main};
+  --webhooks-bar-background: #{$light-dark-gray-hover};
+  --webhooks-color: #{$gray-dark};
+  --webhooks-border: 1px solid #{$gray-dark-mid};
+  --webhooks-background: #{$dark-gray-light};
+  --webhooks-history-row-bg: #{$light-dark-gray-hover};
+  --webhooks-table-cell-bg: #{$light-gray-hover};
+  --webhooks-filter-border: 1px solid #{$gray-dark-strong};
+  --webhooks-span-bg: #{$light-blue-main};
+  --oauth-preview-border: 1px solid #{$gray-dark-mid};
+  --oauth-info-desc-link-color: #{$dark-gray-dark};
+  --oauth-info-block-header-color: #{$gray-dark};
+  --oauth-info-separator-color: #{$gray-dark-strong};
+  --oauth-list-description-color: #{$gray-dark};
+  --oauth-form-description-color: #{$gray-dark};
+  --oauth-form-header-border: 1px solid #{$gray-dark-strong};
+  --oauth-form-scope-desc: #{$gray-dark};
+  --info-panel-tag-bg: #{$gray-dark-mid};
+  --migration-description-color: #{$dark-gray-dark};
+  --migration-subtitle-color: #{$white};
+  --migration-workspace-bg: #{$black};
+  --migration-workspace-border: 1px solid #{$gray-dark-strong};
+  --migration-info-block-bg: #{$dark-gray-light};
+  --migration-info-block-text-color: #{$gray-dark};
+  --migration-error-text-color: #{$dark-error-status};
+  --migration-progress-bar-bg: #{$white};
+  --migration-workspace-hover: #{$light-blue-main};
+  --migration-file-input-icon-color: #{$gray-dark-text};
+  --migration-table-header-text: #{$gray-dark};
+  --migration-table-row-hover: #{$light-dark-gray-hover};
+  --migration-table-row-text-color: #{$gray-dark};
+  --migration-import-section-text-color: #{$gray-dark};
+  --migration-import-item-bg: #{$dark-gray-light};
+  --migration-import-item-disable-bg: #{$light-dark-gray-hover};
+  --migration-import-item-text-color: #{$dark-gray-dark};
+  --migration-import-item-disable-text: #{$gray-dark};
+  --migration-import-icon-color: #{$dark-gray-dark};
+  --migration-link-color: #{$light-blue-main};
+  --migration-existing-text-color: #{$dark-status-positive};
+}
+
+.light {
+  --ldap-cert-bg: #{$gray-light};
+  --ldap-border: 1px solid #{$gray-light-mid};
+  --ldap-error-border: 1px solid #{$light-error-status};
+  --ldap-text-color: #{$gray};
+  --ldap-error-color: #{$light-error-status};
+  --sso-toggle-content-bg: #{$gray-light};
+  --sso-border: 1px solid #{$gray-strong};
+  --sso-text-color: #{$gray};
+  --sso-error-color: #{$light-error-status};
+  --tooltip-bg: #{$gray-light};
+  --tooltip-text: #{$black};
+}
+
+.dark {
+  --ldap-cert-bg: #{$gray-dark-strong};
+  --ldap-border: 1px solid #{$gray-dark-strong};
+  --ldap-error-border: 1px solid #{$dark-error-status};
+  --ldap-text-color: #{$gray-dark};
+  --ldap-error-color: #{$dark-error-status};
+  --sso-toggle-content-bg: #{$gray-dark-strong};
+  --sso-border: 1px solid #{$gray-dark-strong};
+  --sso-text-color: #{$gray-dark};
+  --sso-error-color: #{$dark-error-status};
+  --tooltip-bg: #{$dark-gray-light};
+  --tooltip-text: #{$white};
 }
 
 .light {

@@ -27,16 +27,9 @@
 import { useEffect } from "react";
 import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { Button } from "@docspace/ui-kit/components/button";
-import styled from "styled-components";
 import { withTranslation } from "react-i18next";
 
-const StyledFooterContent = styled.div`
-  display: contents;
-
-  .button-modal {
-    width: 50%;
-  }
-`;
+import styles from "./modalDialogDelete.module.scss";
 
 const ModalDialogDelete = (props) => {
   const { visible, onClose, onClickDelete, t } = props;
@@ -56,9 +49,9 @@ const ModalDialogDelete = (props) => {
       </ModalDialog.Header>
       <ModalDialog.Body>{t("Settings:DeleteThemeNotice")}</ModalDialog.Body>
       <ModalDialog.Footer>
-        <StyledFooterContent>
+        <div className={styles.footerContent}>
           <Button
-            className="delete button-modal"
+            className={`delete ${styles.buttonModal}`}
             label={t("Common:Delete")}
             onClick={onClickDelete}
             primary
@@ -66,13 +59,13 @@ const ModalDialogDelete = (props) => {
             testId="portal_settings_modal_dialog_delete_button"
           />
           <Button
-            className="cancel-button button-modal"
+            className={`cancel-button ${styles.buttonModal}`}
             label={t("Common:CancelButton")}
             size="normal"
             onClick={onClose}
             testId="portal_settings_modal_dialog_cancel_button"
           />
-        </StyledFooterContent>
+        </div>
       </ModalDialog.Footer>
     </ModalDialog>
   );

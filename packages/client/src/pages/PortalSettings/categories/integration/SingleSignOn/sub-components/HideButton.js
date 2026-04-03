@@ -24,23 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+import classNames from "classnames";
 import { inject, observer } from "mobx-react";
+
+import styles from "./HideButton.module.scss";
 import { useTranslation } from "react-i18next";
 
 import { Link } from "@docspace/ui-kit/components/link";
 import { Text } from "@docspace/ui-kit/components/text";
 
-const StyledWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin: ${(props) => (props.isAdditionalParameters ? "0" : "24px 0")};
-
-  .hide-button {
-    margin-inline-start: 12px;
-  }
-`;
 
 const HideButton = (props) => {
 	const { t } = useTranslation("SingleSignOn");
@@ -59,7 +51,7 @@ const HideButton = (props) => {
 	};
 
 	return (
-		<StyledWrapper isAdditionalParameters={isAdditionalParameters}>
+		<div className={classNames(styles.styledWrapper, { [styles.additionalParameters]: isAdditionalParameters })}>
 			{!isAdditionalParameters ? (
 				<Text
 					as="h2"
@@ -73,7 +65,7 @@ const HideButton = (props) => {
 
 			<Link
 				id={id}
-				className="hide-button settings_unavailable"
+				className={`${styles.hideButton} settings_unavailable`}
 				isHovered
 				onClick={onClick}
 				type="action"
@@ -87,7 +79,7 @@ const HideButton = (props) => {
 						? t("ShowAdditionalParameters")
 						: t("Show")}
 			</Link>
-		</StyledWrapper>
+		</div>
 	);
 };
 

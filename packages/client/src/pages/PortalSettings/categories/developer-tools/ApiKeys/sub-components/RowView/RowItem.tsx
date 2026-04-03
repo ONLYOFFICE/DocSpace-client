@@ -24,62 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { Row, RowContent } from "@docspace/ui-kit/components/rows";
 import { Text } from "@docspace/ui-kit/components/text";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
-import { isMobile, tablet } from "@docspace/shared/utils";
+import { isMobile } from "@docspace/shared/utils";
 
 import { useContextOptions } from "../useContextOptions";
 import { RowItemType } from "../../types";
 import { ApiKeysLifetimeIcon } from "../ApiKeysLifetimeIcon";
 import { getStatusByDate } from "../../utils";
-
-const StyledRowContent = styled(RowContent)`
-  display: flex;
-  padding-bottom: 10px;
-
-  .row-main-container-wrapper {
-    @media ${tablet} {
-      width: 100%;
-    }
-  }
-
-  .rowMainContainer {
-    height: 100%;
-    width: 100%;
-  }
-
-  .mainIcons {
-    min-width: 76px;
-    display: flex;
-  }
-
-  .row-content_text {
-    color: ${(props) => props.theme.filesSection.rowView.sideColor};
-  }
-
-  .api-keys_name {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-`;
-
-const ToggleButtonWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  margin-inline-start: -52px;
-
-  .toggleButton {
-    display: flex;
-    align-items: center;
-  }
-`;
+import styles from "./RowView.module.scss";
 
 const RowItem = (props: RowItemType) => {
   const {
@@ -105,7 +60,7 @@ const RowItem = (props: RowItemType) => {
 
   return (
     <Row contextOptions={contextOptions}>
-      <StyledRowContent sectionWidth={sectionWidth}>
+      <RowContent className={styles.rowContent} sectionWidth={sectionWidth}>
         <div>
           <div className="api-keys_name">
             <Text fontWeight={600} fontSize="14px">
@@ -131,7 +86,7 @@ const RowItem = (props: RowItemType) => {
           ) : null}
         </div>
 
-        <ToggleButtonWrapper>
+        <div className={styles.toggleButtonWrapper}>
           <ToggleButton
             className="toggleButton"
             isChecked={item.isActive}
@@ -139,8 +94,8 @@ const RowItem = (props: RowItemType) => {
               onChangeApiKeyParams(item.id, { isActive: !item.isActive })
             }
           />
-        </ToggleButtonWrapper>
-      </StyledRowContent>
+        </div>
+      </RowContent>
     </Row>
   );
 };

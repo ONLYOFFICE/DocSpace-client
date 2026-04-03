@@ -27,15 +27,10 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@docspace/ui-kit/components/button";
-import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import SalesDepartmentRequestDialog from "../../../../../../../components/dialogs/SalesDepartmentRequestDialog";
 
-const StyledBody = styled.div`
-  button {
-    width: 100%;
-  }
-`;
+import styles from "../styles/MainTariff.module.scss";
 
 const RequestButtonContainer = ({ isDisabled, isLoading }) => {
   const [isVisibleDialog, setIsVisibleDialog] = useState(false);
@@ -50,7 +45,7 @@ const RequestButtonContainer = ({ isDisabled, isLoading }) => {
   };
 
   return (
-    <StyledBody>
+    <div className={styles.buttonBody}>
       {isVisibleDialog ? (
         <SalesDepartmentRequestDialog
           visible={isVisibleDialog}
@@ -67,7 +62,7 @@ const RequestButtonContainer = ({ isDisabled, isLoading }) => {
         isLoading={isLoading}
         testId="sales_request_button"
       />
-    </StyledBody>
+    </div>
   );
 };
 

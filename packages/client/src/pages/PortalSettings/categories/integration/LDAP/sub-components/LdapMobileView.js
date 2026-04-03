@@ -24,17 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { CategoryItem } from "@docspace/ui-kit/components/category-item";
-
-const StyledWrapper = styled.div`
-  margin-top: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-`;
+import styles from "./LdapMobileView.module.scss";
 
 const LdapMobileView = ({ isLdapEnabled, isLDAPAvailable }) => {
   const { t } = useTranslation(["Ldap", "Settings"]);
@@ -46,7 +39,7 @@ const LdapMobileView = ({ isLdapEnabled, isLDAPAvailable }) => {
   };
 
   return (
-    <StyledWrapper>
+    <div className={styles.styledWrapper}>
       <CategoryItem
         title={t("Ldap:LdapSettings")}
         subtitle={t("Ldap:LdapMobileSettingsDescription")}
@@ -67,7 +60,7 @@ const LdapMobileView = ({ isLdapEnabled, isLDAPAvailable }) => {
         disabled={!isLdapEnabled}
         dataTestId="sync_data"
       />
-    </StyledWrapper>
+    </div>
   );
 };
 

@@ -25,58 +25,22 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import {
-  mobile,
-  injectDefaultTheme,
-} from "@docspace/shared/utils";
 import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 
 import StatusBadge from "../../sub-components/StatusBadge";
 import { getTriggerTranslate } from "../../Webhooks.helpers";
 
-const BarWrapper = styled.div.attrs(injectDefaultTheme)`
-  width: 100%;
-  max-width: 1200px;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-
-  margin-top: 25px;
-
-  background: ${(props) => props.theme.client.settings.webhooks.barBackground};
-  border-radius: 3px;
-
-  .barItemHeader {
-    margin-bottom: 10px;
-    color: ${(props) => props.theme.client.settings.webhooks.color};
-  }
-`;
-
-const BarItem = styled.div`
-  box-sizing: border-box;
-  min-height: 76px;
-  padding: 16px;
-
-  @media ${mobile} {
-    flex-basis: 100%;
-  }
-`;
+import styles from "../WebhookEventDetails.styled.module.scss";
 
 const BarItemHeader = ({ children }) => (
   <Text as="h3" fontSize="12px" fontWeight={600} className="barItemHeader">
     {children}
   </Text>
 );
-
-const FlexWrapper = styled.div`
-  display: flex;
-  align-items: center;
-`;
 
 const DetailsBar = ({ eventDetails }) => {
   const { t, i18n } = useTranslation(["Webhooks", "People"]);
@@ -93,38 +57,38 @@ const DetailsBar = ({ eventDetails }) => {
   const trigger = getTriggerTranslate(eventDetails.trigger, t);
 
   return (
-    <BarWrapper>
-      <BarItem>
+    <div className={styles.barWrapper}>
+      <div className={styles.barItem}>
         <BarItemHeader>{t("People:UserStatus")}</BarItemHeader>
-        <FlexWrapper>
+        <div className={styles.barFlexWrapper}>
           <StatusBadge status={eventDetails.status} />
-        </FlexWrapper>
-      </BarItem>
-      <BarItem>
+        </div>
+      </div>
+      <div className={styles.barItem}>
         <BarItemHeader>{t("EventID")}</BarItemHeader>
         <Text isInline fontWeight={600}>
           {eventDetails.id}
         </Text>
-      </BarItem>
-      <BarItem>
+      </div>
+      <div className={styles.barItem}>
         <BarItemHeader>{t("EventType")}</BarItemHeader>
         <Text isInline fontWeight={600}>
           {trigger}
         </Text>
-      </BarItem>
-      <BarItem>
+      </div>
+      <div className={styles.barItem}>
         <BarItemHeader>{t("EventTime")}</BarItemHeader>
         <Text isInline fontWeight={600}>
           {formattedCreationTime}
         </Text>
-      </BarItem>
-      <BarItem>
+      </div>
+      <div className={styles.barItem}>
         <BarItemHeader>{t("DeliveryTime")}</BarItemHeader>
         <Text isInline fontWeight={600}>
           {formattedDelivery}
         </Text>
-      </BarItem>
-    </BarWrapper>
+      </div>
+    </div>
   );
 };
 

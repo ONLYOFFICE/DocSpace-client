@@ -32,15 +32,17 @@ import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 
 import Chat from "@docspace/ui-kit/ai-agent/chat";
 
 import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
+import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
 import useItemIcon from "@/app/(docspace)/_hooks/useItemIcon";
 
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
-import LoginReactSvgUrl from "PUBLIC_DIR/images/icons/16/login.react.svg?url";
+import LogoutReactSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 
 import ResizeHandle from "./ResizeHandle";
 import styles from "./AiChatPanel.module.scss";
@@ -64,6 +66,7 @@ const AiChatPanel = ({ rootRef }: AiChatPanelProps) => {
     setPanelWidth,
   } = aiAgentStore;
   const { filesSettings, hasManagementAccess } = useFormsSettingsStore();
+  const { editingFile } = useFormsNavigationStore();
 
   const panelRef = React.useRef<HTMLDivElement>(null);
 
@@ -104,32 +107,40 @@ const AiChatPanel = ({ rootRef }: AiChatPanelProps) => {
   const emptyScreenText = React.useMemo(() => {
     if (!pendingAttachmentFile?.title) return undefined;
     const name = pendingAttachmentFile.title.replace(/\.[^.]+$/, "");
-    return `Ask anything about "${name}" using the submitted data`;
-  }, [pendingAttachmentFile?.title]);
+    return t("Common:AskAboutFormData", { name });
+  }, [pendingAttachmentFile?.title, t]);
 
   const askFromDBSamples = React.useMemo(
     () =>
       pendingAttachmentFile?.title
         ? [
             {
-              title: "Total submissions",
-              prompt: `How many times has the form "${pendingAttachmentFile.title}" been submitted?`,
+              title: t("Common:TotalSubmissions"),
+              prompt: t("Common:TotalSubmissionsPrompt", {
+                formName: pendingAttachmentFile.title,
+              }),
             },
             {
-              title: "Recent responses",
-              prompt: `Show me the most recent submissions for "${pendingAttachmentFile.title}"`,
+              title: t("Common:RecentResponses"),
+              prompt: t("Common:RecentResponsesPrompt", {
+                formName: pendingAttachmentFile.title,
+              }),
             },
             {
-              title: "Who filled it out",
-              prompt: `List all people who have filled out the form "${pendingAttachmentFile.title}"`,
+              title: t("Common:WhoFilledItOut"),
+              prompt: t("Common:WhoFilledItOutPrompt", {
+                formName: pendingAttachmentFile.title,
+              }),
             },
             {
-              title: "Summary",
-              prompt: `Give me a brief summary of all collected data from "${pendingAttachmentFile.title}"`,
+              title: t("Common:Summary"),
+              prompt: t("Common:SummaryPrompt", {
+                formName: pendingAttachmentFile.title,
+              }),
             },
           ]
         : undefined,
-    [pendingAttachmentFile?.title],
+    [pendingAttachmentFile?.title, t],
   );
 
   const handleResizeEnd = React.useCallback(
@@ -143,7 +154,8 @@ const AiChatPanel = ({ rootRef }: AiChatPanelProps) => {
     setPanelPosition(panelPosition === "left" ? "right" : "left");
   }, [panelPosition, setPanelPosition]);
 
-  if (!isPanelVisible || !agentRoomId || !hasManagementAccess) return null;
+  if (!isPanelVisible || !agentRoomId || !hasManagementAccess || editingFile)
+    return null;
 
   return (
     <div
@@ -163,16 +175,25 @@ const AiChatPanel = ({ rootRef }: AiChatPanelProps) => {
           <Text fontSize="16px" fontWeight={700}>
             {t("Common:AIAgent")}
           </Text>
+          {isSyncing && (
+            <span
+              title={t("Common:SyncingKnowledgeBase")}
+              style={{ display: "flex", alignItems: "center" }}
+            >
+              <Loader type={LoaderTypes.track} size="16px" />
+            </span>
+          )}
         </div>
         <div className={styles.headerActions}>
           <IconButton
-            iconName={LoginReactSvgUrl}
+            iconName={LogoutReactSvgUrl}
             size={16}
             className={
               panelPosition === "right" ? styles.positionIconFlipped : undefined
             }
             onClick={handleTogglePosition}
-            title={
+            tooltipId="move-panel-tooltip"
+            tooltipContent={
               panelPosition === "right"
                 ? t("Common:MovePanelLeft")
                 : t("Common:MovePanelRight")
@@ -182,17 +203,11 @@ const AiChatPanel = ({ rootRef }: AiChatPanelProps) => {
             iconName={CrossReactSvgUrl}
             size={17}
             onClick={closePanel}
+            tooltipId="close-panel-tooltip"
+            tooltipContent={t("Common:CloseButton")}
           />
         </div>
       </div>
-
-      {isSyncing ? (
-        <div className={styles.syncBanner} role="status" aria-live="polite">
-          <Text fontSize="12px" className={styles.syncText}>
-            {t("Common:SyncingKnowledgeBase")}
-          </Text>
-        </div>
-      ) : null}
 
       <div className={styles.chatBody}>
         <Chat

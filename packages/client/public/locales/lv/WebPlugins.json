@@ -14,5 +14,7 @@
   "PluginSDK": "Spraudņa SDK",
   "PluginSDKDescription": "Izmantojot spraudņa SDK, varat paplašināt savu {{productName}} funkcionalitāti, savienot trešās puses pakalpojumus vai uzlabot esošo lietotāja pieredzi. Šeit jūs varat atrast spraudņu paraugus ar koda avotu, kas pieejams GitHub. ",
   "PluginSDKInstruction": "Noklikšķiniet uz pogas, lai iegūtu detalizētus norādījumus par to, kā izveidot savus spraudņus.",
-  "UploadDescription": "Varat pievienot spraudņus, lai paplašinātu {{productName}} funkcionalitāti ar papildu funkcijām. ZIP arhīvā noklikšķiniet uz Augšupielādēt spraudni vai nometiet failu."
+  "UploadDescription": "Varat pievienot spraudņus, lai paplašinātu {{productName}} funkcionalitāti ar papildu funkcijām. ZIP arhīvā noklikšķiniet uz Augšupielādēt spraudni vai nometiet failu.",
+  "PluginCacheWarningDescription": "Spraudņi tiek saglabāti kešatmiņā, pamatojoties uz to versijas numuru. Lai nodrošinātu, ka jūsu izmaiņas tiek piemērotas, lūdzu, palieliniet versijas numuru savā <1>package.json</1> failā pirms augšupielādes. Sistēma neatjauninās spraudni, ja versija paliek tāda pati.",
+  "PluginDeletedSuccessfully": "Spraudnis veiksmīgi dzēsts"
 }

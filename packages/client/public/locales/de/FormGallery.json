@@ -5,5 +5,8 @@
   "ErrorViewDescriptionNetworkError": "Anscheinend ist keine Internetverbindung verfügbar",
   "SuggestChanges": "Änderungen vorschlagen",
   "TemplateInfo": "Informationen zur Vorlage",
-  "ViewAllTemplates": "Alle Vorlagen ansehen"
+  "ViewAllTemplates": "Alle Vorlagen ansehen",
+  "ErrorViewHeader": "Die Galerie ist vorübergehend nicht verfügbar",
+  "SelectTemplate": "Vorlage auswählen",
+  "UploadGallery": "In die Galerie hochladen"
 }

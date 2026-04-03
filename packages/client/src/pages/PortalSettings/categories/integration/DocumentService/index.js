@@ -39,6 +39,7 @@ import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-butto
 import { SettingsDSConnectSkeleton } from "@docspace/shared/skeletons/settings";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import * as Styled from "./index.styled";
+import styles from "./index.module.scss";
 
 const URL_REGEX =
   /^(?:https?:\/\/(?:[^\/]+\/)?|^\/)[-a-zA-Z0-9@:%._\+~#=]{1,256}\/?$/;
@@ -236,12 +237,12 @@ const DocumentService = ({
   return (
     <Styled.Location>
       <Styled.LocationHeader>
-        <div className="main">
+        <div className={styles.main}>
           {t("Settings:DocumentServiceLocationHeaderHelp")}
         </div>
         {documentServiceSettingsUrl ? (
           <Link
-            className="third-party-link"
+            className={styles.thirdPartyLink}
             color={currentColorScheme.main?.accent}
             isHovered
             target="_blank"
@@ -254,8 +255,8 @@ const DocumentService = ({
       </Styled.LocationHeader>
 
       <Styled.LocationForm onSubmit={onSubmit}>
-        <div className="form-inputs">
-          <div className="input-wrapper">
+        <div className={styles.formInputs}>
+          <div className={styles.inputWrapper}>
             <Label
               htmlFor="docServiceAdress"
               text={t("Settings:DocumentServiceLocationUrlApi")}
@@ -274,7 +275,7 @@ const DocumentService = ({
               isDisabled={isSaveLoading || isResetLoading}
               dataTestId="editor_url_input_block"
             />
-            <Text className="subtitle">
+            <Text className={styles.subtitle}>
               {t("Common:Example", {
                 example: EDITOR_URL_PLACEHOLDER,
               })}
@@ -282,20 +283,20 @@ const DocumentService = ({
             <Checkbox
               id="isDisabledCertificat"
               label={t("Settings:DocumentServiceDisableCertificat")}
-              className="checkbox"
+              className={styles.checkbox}
               isChecked={isDisabledCertificat}
               onChange={onChangeIsDisabledCertificat}
               isDisabled={isSaveLoading || isResetLoading}
               dataTestId="disable_certificat_checkbox"
             />
           </div>
-          <div className="input-wrapper">
-            <div className="group-label">
+          <div className={styles.inputWrapper}>
+            <div className={styles.groupLabel}>
               <Label
                 htmlFor="secretKey"
                 text={t("Settings:DocumentServiceSecretKey")}
               />
-              <Text className="label-subtitle">
+              <Text className={styles.labelSubtitle}>
                 {`(${t("Settings:DocumentServiceSecretKeySubtitle")})`}
               </Text>
             </div>
@@ -309,16 +310,16 @@ const DocumentService = ({
               inputValue={secretKey}
               onChange={onChangeSecretKey}
               isDisabled={isSaveLoading || isResetLoading}
-              className="password-input"
+              className={styles.passwordInput}
               testId="secret_key_input"
             />
-            <Text className="subtitle">
+            <Text className={styles.subtitle}>
               {t("Settings:DocumentServiceSecretKeySubtitle")}
             </Text>
           </div>
         </div>
 
-        <div className="form-inputs">
+        <div className={styles.formInputs}>
           <Styled.LocationSubheader>
             {t("Settings:DocumentServiceAdvancedSettings")}
             <Link
@@ -336,7 +337,7 @@ const DocumentService = ({
 
           {isShowAdvancedSettings ? (
             <>
-              <div className="input-wrapper">
+              <div className={styles.inputWrapper}>
                 <Label
                   htmlFor="authHeader"
                   text={t("Settings:DocumentServiceAuthHeader")}
@@ -353,11 +354,11 @@ const DocumentService = ({
                   isDisabled={isSaveLoading || isResetLoading}
                   dataTestId="auth_header_input_block"
                 />
-                <Text className="subtitle">
+                <Text className={styles.subtitle}>
                   {t("Settings:DocumentServiceAuthHeaderSubtitle")}
                 </Text>
               </div>
-              <div className="input-wrapper">
+              <div className={styles.inputWrapper}>
                 <Label
                   htmlFor="internalAdress"
                   text={t("Settings:DocumentServiceLocationUrlInternal", {
@@ -378,13 +379,13 @@ const DocumentService = ({
                   isDisabled={isSaveLoading || isResetLoading}
                   dataTestId="editor_url_input_block"
                 />
-                <Text className="subtitle">
+                <Text className={styles.subtitle}>
                   {t("Common:Example", {
                     example: EDITOR_URL_PLACEHOLDER,
                   })}
                 </Text>
               </div>
-              <div className="input-wrapper">
+              <div className={styles.inputWrapper}>
                 <Label
                   htmlFor="portalAdress"
                   text={t("Settings:DocumentServiceLocationUrlPortal", {
@@ -405,7 +406,7 @@ const DocumentService = ({
                   isDisabled={isSaveLoading || isResetLoading}
                   dataTestId="dns_input_block"
                 />
-                <Text className="subtitle">
+                <Text className={styles.subtitle}>
                   {t("Common:Example", {
                     example: `${window.location.origin}`,
                   })}

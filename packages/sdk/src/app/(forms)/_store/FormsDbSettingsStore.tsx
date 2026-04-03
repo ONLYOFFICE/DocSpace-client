@@ -30,7 +30,6 @@ import React from "react";
 import { makeAutoObservable, runInAction } from "mobx";
 
 import { loadDbConfig, loadRoomFormSettings } from "../_api/dbSettings";
-import { tokenToHash } from "../_api/aiAgentSettings";
 
 export type DatabaseType = "MySQL";
 
@@ -58,17 +57,13 @@ class FormsDbSettingsStore {
   isSaving = false;
   isTesting = false;
 
-  // Per-user localStorage key suffix
-  userHash: string | undefined = undefined;
-
   constructor() {
     makeAutoObservable(this);
   }
 
-  openPanel = (roomId: string | number, requestToken?: string) => {
+  openPanel = (roomId: string | number) => {
     this.isPanelVisible = true;
     this.currentLevel = "CategoryList";
-    this.userHash = requestToken ? tokenToHash(requestToken) : undefined;
     this.fetchConfig(roomId);
   };
 
@@ -202,9 +197,7 @@ class FormsDbSettingsStore {
 }
 
 export const FormsDbSettingsStoreContext =
-  React.createContext<FormsDbSettingsStore>(
-    null as unknown as FormsDbSettingsStore,
-  );
+  React.createContext<FormsDbSettingsStore | null>(null);
 
 export const FormsDbSettingsStoreContextProvider = ({
   children,
@@ -220,5 +213,10 @@ export const FormsDbSettingsStoreContextProvider = ({
 };
 
 export const useFormsDbSettingsStore = () => {
-  return React.useContext(FormsDbSettingsStoreContext);
+  const store = React.useContext(FormsDbSettingsStoreContext);
+  if (!store)
+    throw new Error(
+      "useFormsDbSettingsStore must be used within FormsDbSettingsStoreContextProvider",
+    );
+  return store;
 };

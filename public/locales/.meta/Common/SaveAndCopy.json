@@ -3,11 +3,11 @@
   "content": "Save & copy",
   "content_en_sha1_hash": "603fdf838c5744f12c8c5ca87bdd30bbeee7233f",
   "created_at": "2026-02-18T14:56:12.395Z",
-  "updated_at": "2026-02-19T13:36:32.543Z",
+  "updated_at": "2026-03-20T09:11:04.983Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key is for a button labeled \"Save & copy\". It appears on a settings panel (likely within a modal) and is used to save changes and potentially initiate a copy action related to a link. Translators should ensure the text accurately conveys both saving and copying functionality.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T09:11:04.983Z"
   },
   "usage": [
     {

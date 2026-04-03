@@ -5,5 +5,8 @@
   "ErrorViewDescriptionNetworkError": "Zdá se, že není k dispozici připojení k internetu.",
   "SuggestChanges": "Navrhnout změny",
   "TemplateInfo": "Informace o šabloně",
-  "ViewAllTemplates": "Zobrazit všechny šablony"
+  "ViewAllTemplates": "Zobrazit všechny šablony",
+  "ErrorViewHeader": "Galerie je dočasně nedostupná.",
+  "SelectTemplate": "Vyberte šablonu",
+  "UploadGallery": "Nahrát do Galerie"
 }

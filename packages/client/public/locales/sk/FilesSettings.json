@@ -3,5 +3,7 @@
   "DisplayFileExtension": "Zobrazenie prípony súboru vedľa jeho názvu",
   "OpenSameTab": "Otvorte redaktor {{organizationName}} v tej istej záložke",
   "OriginalCopy": "Uložte kópiu súboru aj v pôvodnom formáte",
-  "TrashMoveConfirmation": "Zobraziť upozornenie pri presúvaní položiek do {{sectionName}}"
+  "TrashMoveConfirmation": "Zobraziť upozornenie pri presúvaní položiek do {{sectionName}}",
+  "DefaultHomepage": "Predvolená domovská stránka",
+  "GroupByRooms": "Zoskupiť podľa miestností"
 }

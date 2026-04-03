@@ -1,0 +1,28 @@
+{
+  "key_path": "Connected",
+  "content": "Connected",
+  "content_en_sha1_hash": "c2f9b7b4897f03f94abf92294c9ca46fea62360b",
+  "created_at": "2026-03-20T09:07:38.583Z",
+  "updated_at": "2026-03-20T09:23:51.756Z",
+  "comment": {
+    "text": "This key displays a success message indicating a connection has been established. It appears as text within a UI element (likely a button or dialog) confirming a successful external database connection. Translators should ensure the translation conveys a positive confirmation of connectivity.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T09:23:51.756Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/ThirdPartyServicesSettings/sub-components/ExternalDbModal/ExternalDbModal.tsx",
+      "line_number": 201,
+      "context": "isDisabled={!isValid || externalLoading}\n />\n {match(connected)\n .with(true, () => (\n <Text className={styles.connectedText}>\n {t(\"Common:Connected\")}\n </Text>\n ))\n .with(false, () => (\n <Text className={styles.connectionFailedText}>\n {t(\"Common:ConnectionFailed\")}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

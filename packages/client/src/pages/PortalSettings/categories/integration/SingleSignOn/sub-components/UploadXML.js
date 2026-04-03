@@ -27,7 +27,6 @@
 import UploadIcon from "PUBLIC_DIR/images/actions.upload.react.svg";
 
 import React, { useState } from "react";
-import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -36,69 +35,9 @@ import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { Text } from "@docspace/ui-kit/components/text";
 
 import { FileInput } from "@docspace/ui-kit/components/file-input";
-import { injectDefaultTheme, mobile } from "@docspace/shared/utils";
 import SsoTextInput from "./SsoTextInput";
 
-const StyledWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-
-  .upload-input {
-    width: 340px;
-    display: flex;
-    flex-direction: row;
-    gap: 9px;
-
-    @media ${mobile} {
-      width: 100%;
-
-      .upload-xml-input {
-        max-width: 100%;
-      }
-    }
-  }
-
-  .xml-upload-file {
-    width: auto;
-
-    .text-input {
-      display: none;
-    }
-
-    .icon {
-      position: static;
-    }
-
-    @media ${mobile} {
-      width: 100%;
-
-      button {
-        width: 100%;
-      }
-    }
-  }
-
-  .upload-button {
-    height: 32px;
-    width: 45px;
-    overflow: inherit;
-  }
-
-  @media ${mobile} {
-    flex-direction: column;
-    gap: 8px;
-  }
-`;
-
-const StyledUploadIcon = styled(UploadIcon).attrs(injectDefaultTheme)`
-  path {
-    stroke: ${(props) =>
-      props.disabled
-        ? props.theme.client.settings.integration.sso.iconButtonDisabled
-        : props.theme.client.settings.integration.sso.iconButton} !important;
-  }
-`;
+import styles from "./UploadXML.module.scss";
 
 const UploadXML = (props) => {
   const { t } = useTranslation(["SingleSignOn", "Common"]);
@@ -143,10 +82,10 @@ const UploadXML = (props) => {
       isVertical
       labelText={t("UploadXML")}
     >
-      <StyledWrapper>
-        <div className="upload-input">
+      <div className={styles.styledWrapper}>
+        <div className={styles.uploadInput}>
           <SsoTextInput
-            className="upload-xml-input"
+            className={styles.uploadXmlInput}
             maxWidth="297px"
             name="uploadXmlUrl"
             placeholder={t("UploadXMLPlaceholder")}
@@ -158,8 +97,16 @@ const UploadXML = (props) => {
           />
 
           <Button
-            className="upload-button"
-            icon={<StyledUploadIcon {...isDisabledProp} />}
+            className={styles.uploadButton}
+            icon={
+              <UploadIcon
+                className={
+                  isDisabledProp.disabled
+                    ? styles.uploadIconDisabled
+                    : styles.uploadIconEnabled
+                }
+              />
+            }
             isDisabled={
               !enableSso ||
               uploadXmlUrl.trim().length === 0 ||
@@ -177,14 +124,14 @@ const UploadXML = (props) => {
           idButton="select-file"
           accept={[".xml"]}
           buttonLabel={t("Common:SelectFile")}
-          className="xml-upload-file"
+          className={styles.xmlUploadFile}
           isDisabled={!enableSso || isLoadingXml}
           onInput={uploadXml}
           size="middle"
           tabIndex={3}
           data-test-id="upload_xml_file_input"
         />
-      </StyledWrapper>
+      </div>
     </FieldContainer>
   );
 };

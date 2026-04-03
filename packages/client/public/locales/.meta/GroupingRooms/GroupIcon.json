@@ -3,17 +3,17 @@
   "content": "Group icon",
   "content_en_sha1_hash": "66f3a4d02a73eb8e3fdad08e1b4716889ed1506c",
   "created_at": "2026-02-19T13:36:24.877Z",
-  "updated_at": "2026-02-19T13:36:32.423Z",
+  "updated_at": "2026-03-20T09:38:27.193Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key displays the title \"Group icon\" in the header of a dialog used to edit room groups. The dialog appears as a modal or aside depending on the device, and this text helps users understand the purpose of the displayed content.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T09:38:27.193Z"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/EditRoomGroupsDialog/sub-components/GroupIconDialog.tsx",
-      "line_number": 222,
-      "context": "autoMaxHeight\n withBodyScroll\n displayType={isMobile() ? ModalDialogType.aside : ModalDialogType.modal}\n onClose={onClose}\n >\n <ModalDialog.Header>{t(\"GroupingRooms:GroupIcon\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.name}>\n <Text\n fontWeight={600}\n fontSize=\"13px\"",
+      "line_number": 235,
+      "context": "withBodyScroll\n backdropVisible={false}\n displayType={isMobile() ? ModalDialogType.aside : ModalDialogType.modal}\n onClose={onClose}\n >\n <ModalDialog.Header>{t(\"GroupingRooms:GroupIcon\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.name}>\n <Text\n fontWeight={600}\n fontSize=\"13px\"",
       "module": "/packages/client"
     }
   ],

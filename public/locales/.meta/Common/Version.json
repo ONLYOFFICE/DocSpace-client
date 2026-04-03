@@ -3,7 +3,7 @@
   "content": "Version",
   "content_en_sha1_hash": "2da600bf9404843107a9531694f654e5662959e0",
   "created_at": "2025-05-19T21:30:49.494Z",
-  "updated_at": "2026-02-19T13:36:32.479Z",
+  "updated_at": "2026-03-20T09:07:45.511Z",
   "comment": {
     "text": "This translation key is used to display the version number of a software or application. It is typically displayed in a label format, often accompanied by a button or link that provides more information about the version. The translation will be used in various UI contexts, such as a navigation menu header and a plugin settings dialog, where it needs to be rendered with different styles and formatting.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/SettingsPluginDialog/sub-components/Info.tsx",
-      "line_number": 77,
+      "line_number": 78,
       "context": ") : null}\n \n {plugin.version ? (\n <>\n <Text fontSize=\"13px\" fontWeight={400} lineHeight=\"20px\" truncate>\n {t(\"Common:Version\")}\n </Text>\n <div\n className={classNames(styles.version, {\n [styles.incompatible]: !plugin.compatible,\n })}",
       "module": "/packages/client"
     },

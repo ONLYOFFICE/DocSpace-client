@@ -3,16 +3,16 @@
   "content": "Reactivate link",
   "content_en_sha1_hash": "f271b20a28fc605f08783c87c682440e160ccd0f",
   "created_at": "2026-02-18T14:56:09.264Z",
-  "updated_at": "2026-02-19T13:36:33.121Z",
+  "updated_at": "2026-03-20T09:14:12.271Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This text appears on a button that allows users to reactivate an expired link. It's used in a component related to expired items and likely triggers a reactivation process when clicked. The translators should consider the context of reactivating a link within a broader sharing feature.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T09:14:12.271Z"
   },
   "usage": [
     {
       "file_path": "/packages/shared/components/share/sub-components/ExpiredComboBox.tsx",
-      "line_number": 180,
+      "line_number": 182,
       "context": "fontSize=\"12px\"\n color={globalColors.lightBlueMain}\n onClick={onReactivate}\n dataTestId=\"expired_combo_box_remove_link\"\n >\n {t(\"Common:ReactivateLink\")}\n </Link>\n </Text>\n ) : (\n <Text\n className={styles.expireText}",
       "module": "/packages/shared"
     }

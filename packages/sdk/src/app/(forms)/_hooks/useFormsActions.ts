@@ -26,7 +26,7 @@
 
 "use client";
 
-import { useCallback } from "react";
+import { useCallback, useRef } from "react";
 
 import {
   deleteFile,
@@ -46,6 +46,7 @@ import type { EditorAction } from "../_store/FormsNavigationStore";
 
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
 
+import { useFormsAiAgentStore } from "../_store/FormsAiAgentStore";
 import { useFormsListStore } from "../_store/FormsListStore";
 import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
 import useFormsData from "./useFormsData";
@@ -55,6 +56,7 @@ type UseFormsActionsProps = { t: TTranslation };
 export default function useFormsActions({ t }: UseFormsActionsProps) {
   const { sdkConfig } = useSDKConfig();
   const { openEditor } = useFormsNavigationStore();
+  const { closePanel } = useFormsAiAgentStore();
   const formsListStore = useFormsListStore();
   const { fetchSection } = useFormsData();
 
@@ -68,9 +70,10 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
         return;
       }
 
+      closePanel();
       openEditor(file, action);
     },
-    [sdkConfig?.events?.onFileManagerClick, openEditor],
+    [sdkConfig?.events?.onFileManagerClick, closePanel, openEditor],
   );
 
   const downloadFile = useCallback(
@@ -87,15 +90,21 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
         await deleteFile(fileId, false, true);
         const newItems = formsListStore.items.filter((f) => f.id !== fileId);
         formsListStore.setItems(newItems, newItems.length);
-      } catch {
-        toastr.error(t("Common:Error"));
+      } catch (error) {
+        toastr.error(error as string);
       }
     },
     [formsListStore, t],
   );
 
+  const downloadAbortRef = useRef<AbortController | null>(null);
+
   const downloadFolder = useCallback(
     async (folderId: number) => {
+      downloadAbortRef.current?.abort();
+      const controller = new AbortController();
+      downloadAbortRef.current = controller;
+
       try {
         const ops = await downloadFiles([], [folderId], "");
         const opId = ops[0]?.id;
@@ -103,8 +112,10 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
 
         const poll = async (): Promise<string | null> => {
           for (let i = 0; i < 60; i++) {
+            if (controller.signal.aborted) return null;
             const progress = await getProgress(opId);
             const op = progress[0];
+            if (controller.signal.aborted) return null;
             if (op?.error) throw new Error(op.error);
             if (op?.finished && op?.url) return op.url;
             await new Promise((r) => setTimeout(r, 1000));
@@ -113,9 +124,11 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
         };
 
         const url = await poll();
-        if (url) window.open(url, "_blank");
-      } catch {
-        toastr.error(t("Common:Error"));
+        if (url && !controller.signal.aborted) window.open(url, "_blank");
+      } catch (error) {
+        if (!controller.signal.aborted) {
+          toastr.error(error as string);
+        }
       }
     },
     [t],
@@ -129,8 +142,8 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
           (f) => f.id !== folderId,
         );
         formsListStore.setFolders(newFolders);
-      } catch {
-        toastr.error(t("Common:Error"));
+      } catch (error) {
+        toastr.error(error as string);
       }
     },
     [formsListStore, t],
@@ -141,8 +154,8 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
       try {
         await manageFormFilling(file.id, FormFillingManageAction.Start);
         await fetchSection();
-      } catch {
-        toastr.error(t("Common:Error"));
+      } catch (error) {
+        toastr.error(error as string);
       }
     },
     [t, fetchSection],
@@ -153,8 +166,8 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
       try {
         await formRoleMapping({ formId: file.id, roles: [] });
         await fetchSection();
-      } catch {
-        toastr.error(t("Common:Error"));
+      } catch (error) {
+        toastr.error(error as string);
       }
     },
     [t, fetchSection],

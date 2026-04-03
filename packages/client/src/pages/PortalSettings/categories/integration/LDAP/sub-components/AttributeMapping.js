@@ -326,7 +326,7 @@ export default inject(
 
     const { user } = userStore;
     const isOwner = user?.isOwner;
-    const isAdmin = user?.isAdmin;
+    const isAdmin = user?.isAdmin || user?.isOwner;
 
     return {
       setFirstName,

@@ -29,10 +29,12 @@ import { inject, observer } from "mobx-react";
 
 import OAuthStore from "SRC_DIR/store/OAuthStore";
 
+import { RowContainer } from "@docspace/ui-kit/components/rows";
+
 import { OAuthRow } from "./Row";
 
 import { RowViewProps } from "./RowView.types";
-import { StyledRowContainer } from "./RowView.styled";
+import styles from "./RowView.styled.module.scss";
 
 const RowView = (props: RowViewProps) => {
   const {
@@ -67,7 +69,8 @@ const RowView = (props: RowViewProps) => {
   if (!items.length) return null;
 
   return (
-    <StyledRowContainer
+    <RowContainer
+      className={styles.styledRowContainer}
       itemHeight={59}
       filesLength={items.length}
       fetchMoreFiles={fetchMoreFiles}
@@ -89,7 +92,7 @@ const RowView = (props: RowViewProps) => {
           sectionWidth={sectionWidth}
         />
       ))}
-    </StyledRowContainer>
+    </RowContainer>
   );
 };
 

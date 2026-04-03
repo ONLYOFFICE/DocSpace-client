@@ -31,17 +31,29 @@ import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import articleStyles from "@docspace/ui-kit/components/article/Article.module.scss";
 import styles from "./FormsSidebar.module.scss";
 
 import FormFileReactSvgUrl from "PUBLIC_DIR/images/form.file.react.svg?url";
 import FormFillRectSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
 import FormGalleryReactSvgUrl from "PUBLIC_DIR/images/form.gallery.react.svg?url";
+import TemplateGalleryReactSvgUrl from "PUBLIC_DIR/images/template.gallery.react.svg?url";
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 
-import { FormsSection } from "@/types/forms";
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
+import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 
+import { FormsSection, DEFAULT_SETTINGS_SUBSECTION } from "@/types/forms";
+
+import {
+  sectionFromPathname,
+  sectionToPath,
+  settingsSubSectionToPath,
+} from "../../_utils/sectionFromPathname";
 import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
+import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
+import { libraryUrl } from "../../_utils/libraryUrl";
 import { useFormsUserStore } from "../../_store/FormsUserStore";
 import SidebarNavItem from "./SidebarNavItem";
 
@@ -49,14 +61,31 @@ const SHOW_SIDEBAR_TEXT_KEY = "forms_showSidebarText";
 
 const FormsSidebar = () => {
   const { t } = useTranslation(["Common"]);
-  const { activeSection, setActiveSection } = useFormsNavigationStore();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const activeSection = sectionFromPathname(pathname);
+  const {
+    editingFile,
+    completedFolder,
+    inProgressFolder,
+    closeEditor,
+    goBackToCompletedRoot,
+    goBackToInProgressRoot,
+  } = useFormsNavigationStore();
+  const formsSettingsStore = useFormsSettingsStore();
+  const { hasLibrary } = formsSettingsStore;
+  const showLibrary = hasLibrary && !!formsSettingsStore.folderSecurity?.Create;
+  // Library navigation is URL-based now
   const { user } = useFormsUserStore();
   const showSettings = user?.isOwner || user?.isAdmin;
 
-  const [showText, setShowText] = React.useState(() => {
+  const [showText, setShowText] = React.useState(true);
+
+  React.useEffect(() => {
     const saved = localStorage.getItem(SHOW_SIDEBAR_TEXT_KEY);
-    return saved !== "false";
-  });
+    if (saved === "false") setShowText(false);
+  }, []);
 
   const toggleShowText = React.useCallback(() => {
     setShowText((prev) => {
@@ -85,8 +114,18 @@ const FormsSidebar = () => {
   ];
 
   const onSettingsClick = React.useCallback(() => {
-    setActiveSection(FormsSection.Settings);
-  }, [setActiveSection]);
+    if (activeSection === FormsSection.Settings) {
+      setTimeout(() => window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION)), 0);
+      return;
+    }
+    const params = new URLSearchParams();
+    const rid = searchParams.get("roomId") ?? "";
+    const lid = searchParams.get("libraryId") ?? "";
+    if (rid) params.set("roomId", rid);
+    if (lid) params.set("libraryId", lid);
+    const qs = params.toString();
+    router.replace(`${settingsSubSectionToPath(DEFAULT_SETTINGS_SUBSECTION)}${qs ? `?${qs}` : ""}`);
+  }, [router, searchParams, activeSection]);
 
   return (
     <div
@@ -108,10 +147,65 @@ const FormsSidebar = () => {
             label={section.label}
             icon={section.icon}
             isActive={activeSection === section.key}
-            onClick={() => setActiveSection(section.key)}
+            onClick={() => {
+              if (activeSection === section.key) {
+                let handled = false;
+                if (editingFile) {
+                  closeEditor();
+                  handled = true;
+                }
+                if (section.key === FormsSection.CompletedForms && completedFolder) {
+                  goBackToCompletedRoot();
+                  handled = true;
+                }
+                if (section.key === FormsSection.InProgress && inProgressFolder) {
+                  goBackToInProgressRoot();
+                  handled = true;
+                }
+                if (!handled) {
+                  setTimeout(() => window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION)), 0);
+                }
+                return;
+              }
+              const params = new URLSearchParams();
+              const rid = searchParams.get("roomId") ?? "";
+              const lid = searchParams.get("libraryId") ?? "";
+              if (rid) params.set("roomId", rid);
+              if (lid) params.set("libraryId", lid);
+              const qs = params.toString();
+              router.replace(`${sectionToPath(section.key)}${qs ? `?${qs}` : ""}`);
+            }}
             showText={showText}
           />
         ))}
+        {showLibrary && (
+          <>
+            <div style={{ height: "12px", flexShrink: 0 }} />
+            <SidebarNavItem
+              id="forms-nav-library"
+              label={t("Common:Library")}
+              icon={TemplateGalleryReactSvgUrl}
+              isActive={activeSection === FormsSection.Library}
+              onClick={() => {
+                if (activeSection === FormsSection.Library) {
+                  // Navigate to library root (country list)
+                  const rid = searchParams.get("roomId") ?? "";
+                  const lid = searchParams.get("libraryId") ?? "";
+                  router.push(libraryUrl({ roomId: rid || undefined, libraryId: lid || undefined }));
+                  return;
+                }
+                const params = new URLSearchParams();
+                const rid = searchParams.get("roomId") ?? "";
+                const lid = searchParams.get("libraryId") ?? "";
+                if (rid) params.set("roomId", rid);
+                if (lid) params.set("libraryId", lid);
+                const qs = params.toString();
+                router.replace(`${sectionToPath(FormsSection.Library)}${qs ? `?${qs}` : ""}`);
+              }}
+              showText={showText}
+            />
+          </>
+        )}
       </Scrollbar>
       {showSettings && (
         <div className={styles.navBottom}>
@@ -136,8 +230,10 @@ const FormsSidebar = () => {
             toggleShowText();
           }
         }}
-        title={showText ? t("Common:HideArticleMenu") : t("Common:ShowArticleMenu")}
+        data-tooltip-id="sidebar-toggle-tooltip"
+        data-tooltip-content={showText ? t("Common:HideArticleMenu") : t("Common:ShowArticleMenu")}
       />
+      <Tooltip id="sidebar-toggle-tooltip" place="right" float />
     </div>
   );
 };

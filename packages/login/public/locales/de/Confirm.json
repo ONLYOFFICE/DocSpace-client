@@ -37,5 +37,7 @@
   "TfaSubTitle": "Befolgen Sie diese einfachen Schritte, um mit {{productName}} weiterzuarbeiten:",
   "TfaTitle": "Zwei-Faktor-Authentifizierung für sicheren Zugriff aktiviert",
   "VerifyConnection": "Verbindung bestätigen",
-  "VerifyConnectionDescription": "Geben Sie den von Ihrer Authentifizierungs-App generierten sechsstelligen Code in das Feld unten ein, um die Einrichtung abzuschließen."
+  "VerifyConnectionDescription": "Geben Sie den von Ihrer Authentifizierungs-App generierten sechsstelligen Code in das Feld unten ein, um die Einrichtung abzuschließen.",
+  "InviteLinkQuotaErrorBody": "Die Anmeldung über den Link ist nicht mehr möglich, da die Kapazität ausgeschöpft ist.",
+  "InviteQuotaErrorCustomizedBody": "In 10 Sekunden werden Sie zur <1>Login</1>-Seite weitergeleitet."
 }

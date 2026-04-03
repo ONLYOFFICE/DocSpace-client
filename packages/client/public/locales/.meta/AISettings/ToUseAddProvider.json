@@ -3,7 +3,7 @@
   "content": "To use {{value}}, make sure to connect at least one {{aiProvider}} first.",
   "content_en_sha1_hash": "7ac37664b2a8a6b4459dada1c0cb3184e8fd4a9b",
   "created_at": "2025-12-17T14:56:14.846Z",
-  "updated_at": "2026-02-19T13:36:32.692Z",
+  "updated_at": "2026-03-20T09:07:45.563Z",
   "comment": {
     "text": "This key displays a tooltip message prompting the user to connect an AI provider before using a specific feature. It appears as a tooltip on buttons or within a div, and the text will vary depending on the feature being used (e.g., Knowledge, Web Search AI, or MCPServer). Translators should understand this message explains a prerequisite for functionality.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/knowledge/index.tsx",
-      "line_number": 215,
+      "line_number": 255,
       "context": "<div\n className={generalStyles.search}\n data-tooltip-id={tooltipId}\n data-tooltip-content={\n !hasAIProviders\n ? t(\"AISettings:ToUseAddProvider\", {\n value: t(\"AIRoom:Knowledge\"),\n aiProvider: t(\"Common:AIProvider\"),\n })\n : undefined\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/index.tsx",
-      "line_number": 168,
+      "line_number": 204,
       "context": "<div\n className={generalStyles.search}\n data-tooltip-id={tooltipId}\n data-tooltip-content={\n !hasAIProviders\n ? t(\"AISettings:ToUseAddProvider\", {\n value: t(\"Common:WebSearchAI\"),\n aiProvider: t(\"Common:AIProvider\"),\n })\n : undefined\n }",
       "module": "/packages/client"
     },

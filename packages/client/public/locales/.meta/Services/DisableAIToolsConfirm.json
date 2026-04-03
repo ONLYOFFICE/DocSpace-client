@@ -1,0 +1,34 @@
+{
+  "key_path": "DisableAIToolsConfirm",
+  "content": "Disabling {{organizationName}} AI will make {{organizationName}}-provided models unavailable.",
+  "content_en_sha1_hash": "1baa3b9e3d6b8f9010478c4167d7c23aa99cae68",
+  "created_at": "2026-03-20T09:07:40.733Z",
+  "updated_at": "2026-03-20T10:12:07.330Z",
+  "comment": {
+    "text": "This key displays a confirmation message in a dialog or confirmation panel. It warns users that disabling AI tools will make the organization's AI models unavailable. The message includes the organization’s name, which should be localized appropriately.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T10:12:07.330Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/index.tsx",
+      "line_number": 163,
+      "context": "},\n [AI_ENUM]: {\n title: t(\"Common:Confirmation\"),\n body: isCurrentConfirmState\n ? [\n t(\"Services:DisableAIToolsConfirm\", {\n organizationName: logoText,\n }),\n <Trans\n key=\"DisableBalance\"\n i18nKey=\"Services:DisableAIToolsConfirmBalance\"",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/pages/ai-tools/AiPage.tsx",
+      "line_number": 205,
+      "context": "const confirmationDialogContent = isAiToolsServiceOn\n ? {\n title: t(\"Common:Confirmation\"),\n body: [\n t(\"Services:DisableAIToolsConfirm\", {\n organizationName: logoText,\n }),\n <Trans\n key=\"DisableBalance\"\n i18nKey=\"Services:DisableAIToolsConfirmBalance\"",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

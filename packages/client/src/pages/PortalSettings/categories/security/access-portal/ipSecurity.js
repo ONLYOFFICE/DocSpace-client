@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
 import { useNavigate, useLocation } from "react-router";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
@@ -45,35 +44,7 @@ import useSecurity from "../useSecurity";
 import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
 
 import IpSecurityLoader from "../sub-components/loaders/ip-security-loader";
-
-const MainContainer = styled.div`
-  width: 100%;
-
-  .ip-security_warning {
-    max-width: 700px;
-  }
-
-  .page-subtitle {
-    margin-bottom: 10px;
-  }
-
-  .user-fields {
-    margin-bottom: 18px;
-  }
-
-  .box {
-    margin-bottom: 11px;
-  }
-
-  .warning-text {
-    margin-bottom: 9px;
-    color: ${(props) => props.theme.client.settings.security.ip.errorColor};
-  }
-
-  .save-cancel-buttons {
-    margin-top: 24px;
-  }
-`;
+import styles from "./ipSecurity.module.scss";
 
 const IpSecurity = (props) => {
   const {
@@ -285,9 +256,9 @@ const IpSecurity = (props) => {
   }
 
   return (
-    <MainContainer>
+    <div className={styles.container}>
       <LearnMoreWrapper withoutExternalLink={!ipSettingsUrl}>
-        <Text className="page-subtitle">
+        <Text className={styles.pageSubtitle}>
           {t("IPSecuritySettingDescription")}
         </Text>
         {ipSettingsUrl ? (
@@ -305,7 +276,7 @@ const IpSecurity = (props) => {
       </LearnMoreWrapper>
 
       <RadioButtonGroup
-        className="box"
+        className={styles.box}
         fontSize="13px"
         fontWeight="400"
         name="group"
@@ -332,7 +303,7 @@ const IpSecurity = (props) => {
 
       {enable ? (
         <UserFields
-          className="user-fields"
+          className={styles.userFields}
           inputs={ips}
           buttonLabel={t("AddAllowedIP")}
           onChangeInput={onChangeInput}
@@ -352,17 +323,17 @@ const IpSecurity = (props) => {
 
       {enable ? (
         <>
-          <Text fontSize="16px" fontWeight="700" className="warning-text">
+          <Text fontSize="16px" fontWeight="700" className={styles.warningText}>
             {t("Common:Warning")}
           </Text>
-          <Text className="ip-security_warning">
+          <Text className={styles.ipSecurityWarning}>
             {t("IPSecurityWarningHelper")}
           </Text>
         </>
       ) : null}
 
       <SaveCancelButtons
-        className="save-cancel-buttons"
+        className={styles.saveCancelButtons}
         onSaveClick={onSaveClick}
         onCancelClick={onCancelClick}
         showReminder={showReminder}
@@ -377,7 +348,7 @@ const IpSecurity = (props) => {
         saveButtonDataTestId="ip_security_save_button"
         cancelButtonDataTestId="ip_security_cancel_button"
       />
-    </MainContainer>
+    </div>
   );
 };
 

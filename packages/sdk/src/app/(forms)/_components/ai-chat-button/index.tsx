@@ -28,16 +28,20 @@
 
 import React from "react";
 import { observer } from "mobx-react";
-
 import { useTranslation } from "react-i18next";
 
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 
 import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
+import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
+import { useFormsTourStore } from "../../_store/FormsTourStore";
+
+import { ReactSVG } from "react-svg";
 
 import AiAgentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
+
+import styles from "./AiChatButton.module.scss";
 
 const AiChatButton = () => {
   const { t } = useTranslation(["Common"]);
@@ -47,25 +51,36 @@ const AiChatButton = () => {
     currentAgentId,
     isPreparingAgent,
     isPanelVisible,
+    panelPosition,
   } = useFormsAiAgentStore();
+  const { editingFile, completedFolder } = useFormsNavigationStore();
   const { hasManagementAccess } = useFormsSettingsStore();
+  const { forceShowAiChat } = useFormsTourStore();
 
-  if (!aiAgentEnabled || !hasManagementAccess || isPanelVisible) return null;
+  if (!(forceShowAiChat && completedFolder)) {
+    if (!aiAgentEnabled || !hasManagementAccess || isPanelVisible || editingFile)
+      return null;
 
-  if (isPreparingAgent) {
-    return <Loader type={LoaderTypes.track} size="16px" />;
+    if (isPreparingAgent) return null;
+
+    if (!currentAgentId) return null;
   }
 
-  if (!currentAgentId) return null;
-
   return (
-    <IconButton
-      iconName={AiAgentsReactSvgUrl}
-      size={16}
-      onClick={togglePanel}
-      isFill
-      title={t("Common:AIChatButton")}
-    />
+    <>
+      <button
+        type="button"
+        className={styles.floatingButton}
+        data-position={panelPosition}
+        onClick={togglePanel}
+        data-tour="ai-chat-button"
+        data-tooltip-id="ai-chat-fab-tooltip"
+        data-tooltip-content={t("Common:AIChatButton")}
+      >
+        <ReactSVG src={AiAgentsReactSvgUrl} className={styles.icon} />
+      </button>
+      <Tooltip id="ai-chat-fab-tooltip" place="top" float />
+    </>
   );
 };
 

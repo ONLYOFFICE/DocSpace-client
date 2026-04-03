@@ -1,0 +1,21 @@
+{
+  "key_path": "DatabaseType",
+  "content": "Database type",
+  "content_en_sha1_hash": "dfbea07707e01cf3d5cd2917e0db646244e80fb4",
+  "created_at": "2026-03-20T09:07:29.209Z",
+  "updated_at": "2026-03-20T09:07:29.209Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

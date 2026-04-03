@@ -3,11 +3,11 @@
   "content": "The link will expire <1>{{date}}</1>",
   "content_en_sha1_hash": "63d96a2e07ed56dd44d5d336a0581f8168e94aad",
   "created_at": "2026-02-18T14:56:01.209Z",
-  "updated_at": "2026-02-19T13:36:32.524Z",
+  "updated_at": "2026-03-20T09:17:41.262Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key displays a message indicating when a shareable link will expire. It appears in various components like Invite Panels, Share helpers, and Expired ComboBoxes to inform users about the link's expiration date. The `<date>` variable should be replaced with the specific expiration date value.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T09:17:41.262Z"
   },
   "usage": [
     {

@@ -29,6 +29,7 @@
 import { observer } from "mobx-react";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { usePathname } from "next/navigation";
 
 import { EmptyView as EmptyViewComponent } from "@docspace/shared/components/empty-view";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
@@ -38,12 +39,16 @@ import DefaultFolderUserLight from "PUBLIC_DIR/images/emptyview/empty.default.fo
 
 import { FormsSection } from "@/types/forms";
 
-import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
+import { sectionFromPathname } from "../../_utils/sectionFromPathname";
+import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
 
 const FormsEmpty = () => {
   const { t } = useTranslation(["Common"]);
-  const { activeSection } = useFormsNavigationStore();
+  const pathname = usePathname();
+  const activeSection = sectionFromPathname(pathname);
   const { isBase } = useTheme();
+  const { folderSecurity } = useFormsSettingsStore();
+  const canCreate = !!folderSecurity?.Create;
 
   const [mounted, setMounted] = React.useState(false);
   React.useEffect(() => {
@@ -53,7 +58,11 @@ const FormsEmpty = () => {
   const getEmptyTitle = () => {
     switch (activeSection) {
       case FormsSection.MyForms:
-        return t("Common:EmptyMyForms");
+        return canCreate
+          ? t("Common:EmptyMyForms")
+          : t("Common:EmptyMyFormsNoAccess");
+      case FormsSection.Library:
+        return t("Common:EmptyLibrary");
       case FormsSection.InProgress:
         return t("Common:EmptyInProgressForms");
       case FormsSection.CompletedForms:

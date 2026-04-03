@@ -1,0 +1,21 @@
+{
+  "key_path": "FormAdminsDescription",
+  "content": "Users who have full access to manage this form and its settings.",
+  "content_en_sha1_hash": "576e27a7b4299a524fc1bffd3a1289de4f7a071c",
+  "created_at": "2026-03-20T09:07:28.341Z",
+  "updated_at": "2026-03-20T09:07:28.341Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

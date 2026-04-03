@@ -3,7 +3,7 @@
   "content": "Error",
   "content_en_sha1_hash": "7f2f6a15cf8da2b27e5a4af47b58e7ad71c0b3d9",
   "created_at": "2025-05-19T21:30:45.027Z",
-  "updated_at": "2026-02-19T13:36:32.984Z",
+  "updated_at": "2026-03-31T15:18:46.437Z",
   "comment": {
     "text": "This translation key is used to display an \"Error\" message in the app, indicating a specific type of error occurred. It appears as part of error messages in various UI elements, such as confirm routes and error containers, providing context for users when an unexpected issue arises.",
     "is_auto": true,
@@ -11,14 +11,20 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/ClientForm.utils.ts",
+      "line_number": 53,
+      "context": "return `${t(\"ErrorName\")} 3`;\n \n case \"EmptyFieldError\":\n return t(\"Common:EmptyFieldError\");\n default:\n return t(\"Common:Error\");\n }\n }",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1215,
+      "line_number": 1296,
       "context": "...transProps,\n }),\n );\n } catch (error) {\n console.error(\"Error adding rooms to group:\", error);\n toastr.error(t(\"Common:Error\"));\n }\n };\n \n onRemoveRoomsFromGroup = async (roomIds, t) => {\n const currentGroupId = this.filesStore.roomsFilter?.groupId;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1215,
+      "line_number": 1296,
       "context": "...transProps,\n }),\n );\n } catch (error) {\n console.error(\"Error adding rooms to group:\", error);\n toastr.error(t(\"Common:Error\"));\n }\n };\n \n onRemoveRoomsFromGroup = async (roomIds, t) => {\n const currentGroupId = this.filesStore.roomsFilter?.groupId;",
       "module": "/packages/client"
     },
@@ -36,31 +42,31 @@
     },
     {
       "file_path": "/packages/client/src/store/portal-settings/DefaultTemplatesStore.ts",
-      "line_number": 95,
+      "line_number": 97,
       "context": "getTemplates = async () => {\n try {\n const res = await getDefaultTemplates();\n this.formTemplatesArray(res);\n } catch (e) {\n toastr.error((e as TData) ?? i18n.t(\"Common:Error\"));\n }\n };\n \n setTemplate = async (selectedFile: number | null, fileExtension: string) => {\n try {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/portal-settings/DefaultTemplatesStore.ts",
-      "line_number": 95,
+      "line_number": 97,
       "context": "getTemplates = async () => {\n try {\n const res = await getDefaultTemplates();\n this.formTemplatesArray(res);\n } catch (e) {\n toastr.error((e as TData) ?? i18n.t(\"Common:Error\"));\n }\n };\n \n setTemplate = async (selectedFile: number | null, fileExtension: string) => {\n try {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/portal-settings/DefaultTemplatesStore.ts",
-      "line_number": 95,
+      "line_number": 97,
       "context": "getTemplates = async () => {\n try {\n const res = await getDefaultTemplates();\n this.formTemplatesArray(res);\n } catch (e) {\n toastr.error((e as TData) ?? i18n.t(\"Common:Error\"));\n }\n };\n \n setTemplate = async (selectedFile: number | null, fileExtension: string) => {\n try {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/portal-settings/DefaultTemplatesStore.ts",
-      "line_number": 95,
+      "line_number": 97,
       "context": "getTemplates = async () => {\n try {\n const res = await getDefaultTemplates();\n this.formTemplatesArray(res);\n } catch (e) {\n toastr.error((e as TData) ?? i18n.t(\"Common:Error\"));\n }\n };\n \n setTemplate = async (selectedFile: number | null, fileExtension: string) => {\n try {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/doceditor/src/components/Root.tsx",
-      "line_number": 333,
+      "line_number": 335,
       "context": "setIsShowDeepLink={setIsShowDeepLink}\n deepLinkSettings={deepLinkSettings ?? 0}\n />\n ) : error && error.message === \"restore-backup\" && !isSkipError ? (\n <ErrorContainer\n headerText={t(\"Common:Error\")}\n customizedBodyText={getErrorMessage()}\n isEditor\n />\n ) : (\n <div style={{ width: \"100%\", height: \"100%\" }}>",
       "module": "/packages/doceditor"
     },

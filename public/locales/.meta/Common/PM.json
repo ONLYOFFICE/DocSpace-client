@@ -3,11 +3,11 @@
   "content": "PM",
   "content_en_sha1_hash": "0c95dc6163ff0d09e82f44e7c50db7ad6b089bf3",
   "created_at": "2026-02-18T14:56:07.114Z",
-  "updated_at": "2026-02-19T13:36:32.543Z",
+  "updated_at": "2026-03-20T09:15:37.081Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key represents \"PM\" for use in date and time pickers, specifically to display the period of time. It appears within date picker components in various panels such as Link Settings and Edit Link panels, helping users specify a time. Translators should ensure consistency with the \"AM\" translation.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T09:15:37.081Z"
   },
   "usage": [
     {

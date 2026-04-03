@@ -1,0 +1,21 @@
+{
+  "key_path": "ExtendedThinkingNotSupported",
+  "content": "This option is not supported by the currently selected AI model for this chat.",
+  "content_en_sha1_hash": "116add2afe0f1356630a3a8ac16c8bf0d48d5295",
+  "created_at": "2026-03-26T08:26:34.723Z",
+  "updated_at": "2026-03-26T08:26:34.723Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

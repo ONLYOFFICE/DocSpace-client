@@ -35,7 +35,9 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { Button } from "@docspace/ui-kit/components/button";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 
-import { StyledStatistics, StyledSimpleFilesRow } from "../StyledComponent";
+import { Row } from "@docspace/ui-kit/components/rows";
+
+import styles from "../StyledComponent.module.scss";
 import { TABLE_AI_AGENTS_COLUMNS } from "SRC_DIR/helpers/constants";
 
 const AIAgentListComponent = (props) => {
@@ -79,7 +81,7 @@ const AIAgentListComponent = (props) => {
     if (index === 5) return;
 
     return (
-      <StyledSimpleFilesRow key={item.id}>
+      <Row key={item.id} className={styles.simpleFilesRow}>
         {iconElement(
           id,
           icon,
@@ -93,14 +95,14 @@ const AIAgentListComponent = (props) => {
         )}
         {textElement(title)}
         {quotaElement(item, "agent")}
-      </StyledSimpleFilesRow>
+      </Row>
     );
   });
 
   if (agentsListLength === 0) return null;
 
   return (
-    <StyledStatistics>
+    <div className={styles.statistics}>
       <div className="statistics-container">
         <Text fontWeight={600} className="item-statistic">
           {t("Top5AIAgents", { aiAgents: t("Common:AIAgents") })}
@@ -116,7 +118,7 @@ const AIAgentListComponent = (props) => {
           />
         ) : null}
       </div>
-    </StyledStatistics>
+    </div>
   );
 };
 

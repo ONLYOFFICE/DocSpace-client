@@ -3,17 +3,17 @@
   "content": "Default template has been restored.",
   "content_en_sha1_hash": "d887a216e14f93de098f3b3800ac56bc1a139b88",
   "created_at": "2026-02-18T14:56:26.397Z",
-  "updated_at": "2026-02-19T13:36:33.043Z",
+  "updated_at": "2026-03-20T10:28:01.739Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key displays a success message in the UI, confirming that the default template has been successfully restored. It appears as a toastr notification after resetting a default template, indicating the action was completed successfully. Translators should ensure the message conveys a positive outcome for the user.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T10:28:01.739Z"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/store/portal-settings/DefaultTemplatesStore.ts",
-      "line_number": 113,
-      "context": "resetTemplate = async (fileExtension: string) => {\n try {\n const res = await setDefaultTemplates(null, fileExtension);\n this.formTemplatesArray(res);\n toastr.success(i18n.t(\"Settings:DefaultTemplateRestored\"));\n } catch (e) {\n toastr.error((e as TData) ?? i18n.t(\"Common:Error\"));\n }\n };",
+      "line_number": 115,
+      "context": "resetTemplate = async (fileExtension: string) => {\n try {\n const res = await resetDefaultTemplates(fileExtension);\n this.formTemplatesArray(res);\n toastr.success(i18n.t(\"Settings:DefaultTemplateRestored\"));\n } catch (e) {\n toastr.error((e as TData) ?? i18n.t(\"Common:Error\"));\n }\n };",
       "module": "/packages/client"
     }
   ],

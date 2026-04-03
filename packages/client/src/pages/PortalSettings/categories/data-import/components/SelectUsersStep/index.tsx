@@ -37,7 +37,7 @@ import { searchMigrationUsers } from "SRC_DIR/pages/PortalSettings/utils/importU
 import AccountsTable from "./AccountsTable";
 import AccountsPaging from "../../sub-components/AccountsPaging";
 
-import { Wrapper } from "../../StyledDataImport";
+import styles from "../../StyledDataImport.module.scss";
 
 import {
 	SelectUsersStepProps,
@@ -133,7 +133,7 @@ const SelectUsersStep = (props: SelectUsersStepProps) => {
 	);
 
 	return (
-		<Wrapper>
+		<div className={styles.wrapper}>
 			{withoutEmailUsers.length > 0 ? (
 				<NoEmailUsersBlock
 					t={t as TFunction}
@@ -193,7 +193,7 @@ const SelectUsersStep = (props: SelectUsersStepProps) => {
 					isSixthStep={false}
 				/>
 			) : null}
-		</Wrapper>
+		</div>
 	);
 };
 

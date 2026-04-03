@@ -1,0 +1,28 @@
+{
+  "key_path": "RestoreBackupConfirmBoldText",
+  "content": "You are about to restore {{productName}} from a backup file.",
+  "content_en_sha1_hash": "6039791e5b28c520e61f9beb72dc5ff5f50b10ea",
+  "created_at": "2026-03-20T09:07:35.034Z",
+  "updated_at": "2026-03-20T09:12:43.848Z",
+  "comment": {
+    "text": "This key displays a confirmation message within a restore backup modal, informing the user that a backup restoration process for a specific product is about to begin. The text is presented in bold to emphasize the action being taken. Translators should ensure the wording clearly conveys the restoration of a product from a backup file.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T09:12:43.848Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/pages/backup/restore-backup/sub-components/restore-confirm-modal/index.tsx",
+      "line_number": 82,
+      "context": "<Text\n as=\"p\"\n fontWeight={600}\n className={styles.restoreBackupConfirmText}\n >\n {t(\"Common:RestoreBackupConfirmBoldText\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <Text as=\"p\" className={styles.restoreBackupConfirmText}>\n {t(\"Common:RestoreBackupConfirmReplaceText\")}",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

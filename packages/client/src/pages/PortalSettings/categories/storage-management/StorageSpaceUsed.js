@@ -40,10 +40,7 @@ import DisableQuotaReactSvgUrl from "PUBLIC_DIR/images/disable.quota.react.svg?u
 
 import Diagram from "./sub-components/Diagram";
 import RecalculateButton from "./sub-components/RecalculateButton";
-import {
-  StyledDiscSpaceUsedComponent,
-  StyledMainTitle,
-} from "./StyledComponent";
+import styles from "./StyledComponent.module.scss";
 
 const DiskSpaceUsedComponent = (props) => {
   const {
@@ -102,7 +99,7 @@ const DiskSpaceUsedComponent = (props) => {
   };
 
   return (
-    <StyledDiscSpaceUsedComponent>
+    <div className={styles.discSpaceUsed}>
       {standalone && isVisibleDialog ? (
         <ChangeStorageQuotaDialog
           isDisableQuota={isDisableQuota}
@@ -112,9 +109,9 @@ const DiskSpaceUsedComponent = (props) => {
           portalInfo={portalInfo}
         />
       ) : null}
-      <StyledMainTitle fontSize="16px" fontWeight={700}>
+      <Text className={styles.mainTitle} fontSize="16px" fontWeight={700}>
         {t("DiskSpaceUsed")}
-      </StyledMainTitle>
+      </Text>
       <div className="disk-space_content">
         <div className="disk-space_size-info">
           {!standalone || (standalone && isTenantCustomQuotaSet) ? (
@@ -160,7 +157,7 @@ const DiskSpaceUsedComponent = (props) => {
       </div>
       <Diagram />
       <RecalculateButton />
-    </StyledDiscSpaceUsedComponent>
+    </div>
   );
 };
 

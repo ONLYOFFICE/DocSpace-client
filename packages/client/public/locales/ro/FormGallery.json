@@ -5,5 +5,8 @@
   "ErrorViewDescriptionNetworkError": "Se pare că nu aveți conexiune la Internet.",
   "SuggestChanges": "Propuneri privind modificări",
   "TemplateInfo": "Informații despre șablon",
-  "ViewAllTemplates": "Afișează toate șabloanele"
+  "ViewAllTemplates": "Afișează toate șabloanele",
+  "ErrorViewHeader": "Galeria este temporar indisponibilă",
+  "SelectTemplate": "Selectează șablon",
+  "UploadGallery": "Încarcă în Galerie"
 }

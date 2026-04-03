@@ -1,0 +1,28 @@
+{
+  "key_path": "PaidBackupDisabled",
+  "content": "Paid backups disabled",
+  "content_en_sha1_hash": "560621a7ec4f06e37d4ef32bb8812b581e77ea8e",
+  "created_at": "2026-03-20T09:07:40.792Z",
+  "updated_at": "2026-03-26T08:26:58.234Z",
+  "comment": {
+    "text": "This key displays a message on the Backup Page within the Portal Settings, specifically when a user is on a free tariff and paid backups are disabled. It informs the user that paid backup functionality is unavailable. Translators should ensure the message clearly conveys the reason for the unavailability.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T10:05:23.167Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/pages/backup/BackupPage.tsx",
+      "line_number": 176,
+      "context": ") : null}\n <div className={styles.backupsCard}>\n <div className={styles.backupsHeader}>\n <Text fontWeight=\"700\" fontSize=\"14px\">\n {isFreeTariff && !isBackupServiceOn\n ? t(\"Services:PaidBackupDisabled\")\n : t(\"Payments:AvailableBackups\")}\n </Text>\n </div>\n \n {!isFreeTariff ? (",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

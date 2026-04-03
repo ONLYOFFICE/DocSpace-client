@@ -35,5 +35,12 @@
   "ServerUpdatedSuccess": "Server úspěšně aktualizován",
   "ServiceIcon": "Ikona služby",
   "SystemMCPListTitle": "Systém",
-  "WebSearchKeyHiddenDescription": "Klíč rozhraní API se zobrazí pouze jednou při ukládání a následně je skryt z bezpečnostních důvodů."
+  "WebSearchKeyHiddenDescription": "Klíč rozhraní API se zobrazí pouze jednou při ukládání a následně je skryt z bezpečnostních důvodů.",
+  "AddAIProvider": "Přidejte {{aiProvider}}",
+  "AddMCPServer": "Přidej {{mcpServer}}",
+  "DefaultProviderSetSuccess": "Výchozí poskytovatel byl úspěšně nastaven.",
+  "DefaultProviderTitle": "Výchozí poskytovatel",
+  "DeleteProvider": "Smazat {{aiProvider}}",
+  "MCPUnavailableError": "{{mcpServer}} je nedostupný",
+  "Model": "Model"
 }

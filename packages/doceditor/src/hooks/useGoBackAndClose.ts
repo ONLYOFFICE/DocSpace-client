@@ -80,7 +80,7 @@ const useGoBackAndClose = (
   }
 
   if (fileInfo?.rootFolderType === FolderType.DefaultTemplates) {
-    goBack.url = "/portal-settings/customization/default-templates";
+    goBack.url = `${window.location.origin}/portal-settings/customization/default-templates`;
   }
 
   let showClose =

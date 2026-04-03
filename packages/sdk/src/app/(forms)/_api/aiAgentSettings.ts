@@ -36,7 +36,6 @@ const USER_DISABLED_STORAGE_KEY = "forms_ai_user_disabled";
 const PANEL_WIDTH_STORAGE_KEY = "forms_chat_panel_width";
 const PANEL_POSITION_STORAGE_KEY = "forms_chat_panel_position";
 
-/** Simple non-crypto hash to turn a long token into a short key. */
 export const tokenToHash = (token: string): string => {
   let h = 0;
   for (let i = 0; i < token.length; i++) {
@@ -57,7 +56,6 @@ const folderAgentsKey = (roomId: string | number, userHash?: string) =>
     ? `${FOLDER_AGENTS_STORAGE_KEY}_${userHash}_${roomId}`
     : `${FOLDER_AGENTS_STORAGE_KEY}_${roomId}`;
 
-// --- Per-folder agent mappings ---
 
 export const saveFolderAgentsMap = (
   roomId: string | number,
@@ -86,7 +84,6 @@ export const clearFolderAgentsMap = (
   localStorage.removeItem(folderAgentsKey(roomId, userHash));
 };
 
-// --- AI enabled toggle persistence ---
 
 const aiEnabledKey = (roomId: string | number, userHash?: string) =>
   userHash
@@ -108,7 +105,6 @@ export const loadAiEnabled = (
   return localStorage.getItem(aiEnabledKey(roomId, userHash)) === "true";
 };
 
-// --- Ask from DB agent persistence ---
 
 const askFromDBAgentKey = (roomId: string | number, userHash?: string) =>
   userHash
@@ -132,7 +128,6 @@ export const loadAskFromDBAgentId = (
   const parsed = Number(val);
   return Number.isFinite(parsed) ? parsed : null;
 }
-// --- User explicitly disabled persistence ---
 
 const userDisabledKey = (roomId: string | number, userHash?: string) =>
   userHash
@@ -156,7 +151,6 @@ export const loadUserExplicitlyDisabled = (
   );
 };
 
-// --- Knowledge base helpers ---
 
 export const getKnowledgeFolderId = async (
   agentId: number,
@@ -186,8 +180,6 @@ const pollOperation = async (
     const ops = await getProgress(opId);
     const op = ops?.find((o: TOperation) => o.id === opId);
     if (!op) {
-      // Operation may not appear immediately; allow a few misses,
-      // then treat as error.
       misses++;
       if (misses > 3) {
         throw new Error("Copy operation not found");
@@ -218,7 +210,6 @@ export const copyFilesToAgentRoom = async (
     },
   })) as TOperation[];
 
-  // Wait for copy to finish
   if (ops?.[0]?.id && !ops[0].finished) {
     await pollOperation(ops[0].id, signal);
   }
@@ -232,13 +223,11 @@ export const vectorizeFiles = async (fileIds: number[]) => {
   });
 };
 
-// --- Chat panel layout constants ---
 
 export const PANEL_MIN_WIDTH = 300;
 export const PANEL_MAX_WIDTH = 600;
 export const MIN_SECTION_WIDTH = 400;
 
-// --- Chat panel preferences ---
 
 export type PanelPosition = "left" | "right";
 
@@ -282,7 +271,6 @@ export const loadPanelPosition = (userHash?: string): PanelPosition => {
   return val === "right" ? "right" : "left";
 };
 
-// --- Knowledge base helpers ---
 
 type KnowledgeFile = { id: number; title: string };
 

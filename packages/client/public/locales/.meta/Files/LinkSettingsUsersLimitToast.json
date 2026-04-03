@@ -3,11 +3,11 @@
   "content": "Registration via the link is no longer available since the limit has been exceeded.",
   "content_en_sha1_hash": "f23309f56f14eac0c18f5ca0a8c7af1411e7e338",
   "created_at": "2026-02-19T13:36:27.582Z",
-  "updated_at": "2026-02-19T13:36:32.528Z",
+  "updated_at": "2026-03-20T09:31:56.009Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This text appears in a tooltip on a help button to inform users that registration via a link is no longer possible due to exceeding the user limit. It's used in both the Invite Panel and the Link Settings Panel to communicate this restriction. Translators should ensure the description accurately conveys the limitation on link-based registration.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T09:31:56.009Z"
   },
   "usage": [
     {

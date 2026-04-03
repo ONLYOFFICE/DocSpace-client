@@ -3,11 +3,11 @@
   "content": "File is currently edited by:",
   "content_en_sha1_hash": "92b2cc7ef909ac1b88cb53e3754ac541b1861a48",
   "created_at": "2026-02-18T14:55:55.967Z",
-  "updated_at": "2026-02-19T13:36:32.237Z",
+  "updated_at": "2026-03-26T08:26:57.938Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This text labels a list of users currently editing a file, displayed in a tooltip. It appears as a header within the tooltip, which is used to show who is actively working on the selected file. Translators should ensure the text accurately conveys the meaning of \"who is editing this file.\"",
+    "is_auto": true,
+    "updated_at": "2026-03-20T09:19:49.572Z"
   },
   "usage": [
     {
@@ -18,8 +18,8 @@
     },
     {
       "file_path": "/packages/client/src/components/EditorsTooltip/sub-components/EditorsTooltipMobile.tsx",
-      "line_number": 61,
-      "context": "style={{ height: `${height}px` }}\n data-testid=\"editors-tooltip-mobile\"\n >\n <Scrollbar autoHide={false}>\n <div className={styles.tooltipHeader}>\n {t(\"FileCurrentlyEditedBy\")}\n </div>\n <EditorsList\n editors={editors}\n avatarSize={AvatarSize.min}\n isMobile={true}",
+      "line_number": 62,
+      "context": "data-testid=\"editors-tooltip-mobile\"\n onClick={(e) => e.stopPropagation()}\n >\n <Scrollbar autoHide={false}>\n <div className={styles.tooltipHeader}>\n {t(\"FileCurrentlyEditedBy\")}\n </div>\n <EditorsList\n editors={editors}\n avatarSize={AvatarSize.min}\n isMobile={true}",
       "module": "/packages/client"
     }
   ],

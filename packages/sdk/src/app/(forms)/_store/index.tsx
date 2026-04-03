@@ -40,11 +40,13 @@ import { DownloadDialogStoreContextProvider } from "@/app/(docspace)/_store/Down
 import { ActiveItemsStoreContextProvider } from "@/app/(docspace)/_store/ActiveItemsStore";
 
 import { FormsNavigationStoreContextProvider } from "./FormsNavigationStore";
+// LibraryNavigationStore removed — library uses URL routing
 import { FormsListStoreContextProvider } from "./FormsListStore";
 import { FormsSettingsStoreContextProvider } from "./FormsSettingsStore";
 import { FormsDbSettingsStoreContextProvider } from "./FormsDbSettingsStore";
 import { FormsAiAgentStoreContextProvider } from "./FormsAiAgentStore";
 import { FormsUserStoreContextProvider } from "./FormsUserStore";
+import { FormsTourStoreContextProvider } from "./FormsTourStore";
 
 export const FormsStoreProviders = ({
   children,
@@ -67,9 +69,11 @@ export const FormsStoreProviders = ({
                             <FormsDbSettingsStoreContextProvider>
                               <FormsAiAgentStoreContextProvider>
                                 <FormsNavigationStoreContextProvider>
-                                  <FormsListStoreContextProvider>
-                                    {children}
-                                  </FormsListStoreContextProvider>
+                                    <FormsListStoreContextProvider>
+                                      <FormsTourStoreContextProvider>
+                                        {children}
+                                      </FormsTourStoreContextProvider>
+                                    </FormsListStoreContextProvider>
                                 </FormsNavigationStoreContextProvider>
                               </FormsAiAgentStoreContextProvider>
                             </FormsDbSettingsStoreContextProvider>

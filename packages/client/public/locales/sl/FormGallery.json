@@ -5,5 +5,8 @@
   "ErrorViewDescriptionNetworkError": "Zdi se, da interneta ni na voljo",
   "SuggestChanges": "Predlagaj spremembe",
   "TemplateInfo": "Informacije o predlogi",
-  "ViewAllTemplates": "Poglej vse predloge"
+  "ViewAllTemplates": "Poglej vse predloge",
+  "ErrorViewHeader": "Galerija je trenutno nedostopna.",
+  "SelectTemplate": "Izberi predlogo",
+  "UploadGallery": "Naložite v Galerijo"
 }

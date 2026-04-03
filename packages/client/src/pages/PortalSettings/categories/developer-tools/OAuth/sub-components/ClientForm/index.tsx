@@ -46,7 +46,7 @@ import OAuthBlock from "./components/OAuthBlock";
 import ScopesBlock from "./components/ScopesBlock";
 import ButtonsBlock from "./components/ButtonsBlock";
 
-import { StyledContainer } from "./ClientForm.styled";
+import styles from "./ClientForm.styled.module.scss";
 import { ClientFormProps, ClientStore } from "./ClientForm.types";
 import { isValidUrl } from "./ClientForm.utils";
 
@@ -72,7 +72,6 @@ const ClientForm = ({
   setJwtToken,
 }: ClientFormProps) => {
   const navigate = useNavigate();
-  const location = useLocation();
 
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [isRequestRunning, setIsRequestRunning] =
@@ -101,6 +100,9 @@ const ClientForm = ({
   });
 
   const [errorFields, setErrorFields] = React.useState<string[]>([]);
+  const [serverFieldErrors, setServerFieldErrors] = React.useState<
+    Record<string, string>
+  >({});
   const [requiredErrorFields, setRequiredErrorFields] = React.useState<
     string[]
   >([]);
@@ -120,11 +122,7 @@ const ClientForm = ({
   }, [clientSecretProps, setClientSecretProps]);
 
   const onCancelClick = () => {
-    if (location.pathname.includes("portal-settings")) {
-      navigate("/portal-settings/developer-tools/oauth");
-    } else {
-      navigate("/developer-tools/oauth");
-    }
+    navigate("/developer-tools/oauth");
   };
 
   const onSaveClick = async () => {
@@ -167,7 +165,23 @@ const ClientForm = ({
 
       onCancelClick();
     } catch (e) {
-      toastr.error(e as unknown as TData);
+      const serverErrors = (
+        e as {
+          response?: { data?: { errors?: { field: string; code: string }[] } };
+        }
+      )?.response?.data?.errors;
+
+      if (serverErrors && serverErrors.length > 0) {
+        setServerFieldErrors(
+          Object.fromEntries(
+            serverErrors.map((item) => [item.field, item.code]),
+          ),
+        );
+      } else {
+        toastr.error(e as unknown as TData);
+      }
+
+      setIsRequestRunning(false);
     }
   };
 
@@ -180,6 +194,11 @@ const ClientForm = ({
     value: string | boolean,
     remove?: boolean,
   ) => {
+    setServerFieldErrors((s) => {
+      const next = { ...s };
+      delete next[name];
+      return next;
+    });
     setForm((val) => {
       if (!(name in val)) return val;
 
@@ -394,9 +413,14 @@ const ClientForm = ({
 
   const isValid = compareAndValidate();
 
+  const allErrorFields = [
+    ...errorFields,
+    ...Object.keys(serverFieldErrors).filter((f) => !errorFields.includes(f)),
+  ];
+
   return (
     <>
-      <StyledContainer>
+      <div className={styles.styledContainer}>
         {isLoading ? (
           <ClientFormLoader
             isEdit={isEdit}
@@ -414,7 +438,8 @@ const ClientForm = ({
               // isPublic={form.is_public}
               changeValue={onChangeForm}
               isEdit={isEdit}
-              errorFields={errorFields}
+              errorFields={allErrorFields}
+              serverFieldErrors={serverFieldErrors}
               requiredErrorFields={requiredErrorFields}
               onBlur={onBlur}
             />
@@ -448,7 +473,7 @@ const ClientForm = ({
               termsUrlValue={form.terms_url}
               changeValue={onChangeForm}
               isEdit={isEdit}
-              errorFields={errorFields}
+              errorFields={allErrorFields}
               requiredErrorFields={requiredErrorFields}
               onBlur={onBlur}
             />
@@ -464,7 +489,7 @@ const ClientForm = ({
             />
           </>
         )}
-      </StyledContainer>
+      </div>
       {resetDialogVisible ? <ResetDialog /> : null}
     </>
   );

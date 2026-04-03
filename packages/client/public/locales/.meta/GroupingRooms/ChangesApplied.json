@@ -3,22 +3,22 @@
   "content": "Changes have been applied",
   "content_en_sha1_hash": "f4112032e9cf9ff29acbe1d84af4f5855b2a8d4a",
   "created_at": "2026-02-19T13:36:24.871Z",
-  "updated_at": "2026-02-19T13:36:32.421Z",
+  "updated_at": "2026-03-20T09:41:01.898Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key displays a success message in a dialog (EditRoomGroupsDialog or GroupIconDialog) to confirm that changes, such as updating room groupings or group icons, have been successfully applied. It is displayed via a toastr notification to inform the user of the operation's completion. Translators should ensure the tone remains positive and informative.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T09:41:01.898Z"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/EditRoomGroupsDialog/index.tsx",
-      "line_number": 249,
+      "line_number": 244,
       "context": "if (isViewingThisGroup && fetchRooms) {\n await fetchRooms(null, roomsFilter, false, false, false);\n }\n \n toastr.success(t(\"GroupingRooms:ChangesApplied\"));\n }\n } catch (error) {\n toastr.error(error as Error);\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/EditRoomGroupsDialog/sub-components/GroupIconDialog.tsx",
-      "line_number": 146,
+      "line_number": 151,
       "context": "await updateGroupIcon(editingGroupId, iconId);\n }\n \n await getAllRoomGroups();\n \n toastr.success(t(\"GroupingRooms:ChangesApplied\"));\n onClose();\n } catch (error: unknown) {\n let message = \"\";\n \n if (axios.isAxiosError(error)) {",
       "module": "/packages/client"
     }

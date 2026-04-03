@@ -1527,3 +1527,22 @@ export async function setDefaultFolderType(folderType: FolderType) {
 
   return res.defaultFolderType as FolderType;
 }
+
+export async function getAiAccessSettings() {
+	const res = await request({
+		method: "get",
+		url: "/settings/ai-access",
+	});
+
+	return res as { enabled: boolean };
+}
+
+export async function setAiAccessSettings(enabled: boolean) {
+	const res = await request({
+		method: "post",
+		url: "/settings/ai-access",
+		data: { enabled },
+	});
+
+	return res as { enabled: boolean };
+}

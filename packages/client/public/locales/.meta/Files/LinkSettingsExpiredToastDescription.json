@@ -3,11 +3,11 @@
   "content": "Extend the validity period in the settings or create a new link to enable new user registrations.",
   "content_en_sha1_hash": "e0641774ac4feee10af8947bb0d84702378f352f",
   "created_at": "2026-02-19T13:36:27.592Z",
-  "updated_at": "2026-02-19T13:36:32.528Z",
+  "updated_at": "2026-03-20T09:33:05.623Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This text appears in a tooltip warning related to external link settings. It explains to the user how to resolve an expired link, instructing them to either extend the validity period in settings or create a new link to allow new user registrations. Translators should ensure clarity regarding the options for resolving the issue.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T09:33:05.623Z"
   },
   "usage": [
     {

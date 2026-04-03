@@ -64,6 +64,9 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
     extsImagePreviewed,
     deleteDialogVisible,
     pluginContextMenuItems,
+    pluginViewerContent,
+    pluginFileId,
+    pluginTitle,
     currentDeviceType,
     isPublicFile = false,
     autoPlay = false,
@@ -91,13 +94,15 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
 
   const [title, setTitle] = useState<string>("");
   const [fileUrl, setFileUrl] = useState<string | undefined>(() => {
+    if (!currentFileId || !playlist.length) return undefined;
     const item = playlist.find(
-      (file) => file.fileId.toString() === currentFileId.toString(),
+      (file) => file.fileId?.toString() === currentFileId?.toString(),
     );
     return item?.src;
   });
 
   const [targetFile, setTargetFile] = useState(() => {
+    if (!currentFileId) return undefined;
     return files.find((item) => item.id === currentFileId);
   });
 
@@ -384,7 +389,7 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
     };
   });
 
-  const { src, title: currentTitle, fileId } = playlist[playlistPos];
+  const { src, title: currentTitle, fileId } = playlist[playlistPos] || {};
 
   useEffect(() => {
     if (!isNullOrUndefined(fileId) && currentFileId !== fileId) {
@@ -438,6 +443,9 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
     onEmptyPlaylistError,
     fetchAndSetTiffDataURL,
     fetchAndSetHeicDataURL,
+    pluginViewerContent,
+    pluginTitle,
+    pluginFileId,
   ]);
 
   useEffect(() => {
@@ -448,27 +456,31 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
     };
   }, [onKeydown]);
 
-  if (canPlay(ext) && canImageView(ext)) {
-    canOpen = false;
-    other.onError?.();
-  }
-
-  if (canImageView(ext)) {
-    isImage = true;
+  if (pluginViewerContent) {
+    canOpen = true;
   } else {
-    isImage = false;
+    if (canPlay(ext) && canImageView(ext)) {
+      canOpen = false;
+      other.onError?.();
+    }
 
-    isVideo = mapSupplied[ext]
-      ? mapSupplied[ext]?.type === mediaTypes.video
-      : false;
+    if (canImageView(ext)) {
+      isImage = true;
+    } else {
+      isImage = false;
 
-    isAudio = mapSupplied[ext]
-      ? mapSupplied[ext]?.type === mediaTypes.audio
-      : false;
+      isVideo = mapSupplied[ext]
+        ? mapSupplied[ext]?.type === mediaTypes.video
+        : false;
 
-    isPdf = mapSupplied[ext]
-      ? mapSupplied[ext]?.type === mediaTypes.pdf
-      : false;
+      isAudio = mapSupplied[ext]
+        ? mapSupplied[ext]?.type === mediaTypes.audio
+        : false;
+
+      isPdf = mapSupplied[ext]
+        ? mapSupplied[ext]?.type === mediaTypes.pdf
+        : false;
+    }
   }
 
   return canOpen ? (
@@ -498,8 +510,10 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
       onSetSelectionFile={onSetSelectionFile}
       onDownloadClick={onDownloadMedia}
       errorTitle={t("Common:MediaError")}
+      pluginViewerContent={pluginViewerContent}
     />
   ) : undefined;
 };
 
 export default MediaViewer;
+

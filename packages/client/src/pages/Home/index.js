@@ -149,6 +149,7 @@ const PureHome = (props) => {
     clearUploadedFiles,
     mainButtonVisible,
     primaryOperationsAlert,
+    primaryOperationsCanceled,
     clearConversionData,
     isErrorChecking,
     setOperationCancelVisible,
@@ -438,6 +439,7 @@ const PureHome = (props) => {
   sectionProps.secondaryOperationsStopped = secondaryOperationsStopped;
   sectionProps.secondaryOperationsAlert = secondaryOperationsAlert;
   sectionProps.primaryOperationsAlert = primaryOperationsAlert;
+  sectionProps.primaryOperationsCanceled = primaryOperationsCanceled;
   sectionProps.needErrorChecking = isErrorChecking;
   sectionProps.mainButtonVisible = mainButtonVisible;
   sectionProps.withTabs = sectionWithTabs;
@@ -648,6 +650,7 @@ export const Component = inject(
       primaryOperationsArray,
       primaryOperationsCompleted,
       primaryOperationsAlert,
+      primaryOperationsCanceled,
       isErrorChecking,
       isPrimaryProgressVisbile,
       dropTargetPreview,
@@ -839,6 +842,7 @@ export const Component = inject(
       clearUploadedFiles,
       mainButtonVisible,
       primaryOperationsAlert,
+      primaryOperationsCanceled,
       clearConversionData,
       isErrorChecking,
       setOperationCancelVisible,

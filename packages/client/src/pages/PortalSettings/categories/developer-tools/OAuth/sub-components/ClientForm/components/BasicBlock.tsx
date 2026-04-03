@@ -40,7 +40,8 @@ import { ONE_MEGABYTE } from "@docspace/shared/constants";
 // import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 // import { Text } from "@docspace/ui-kit/components/text";
 
-import { StyledBlock, StyledInputBlock } from "../ClientForm.styled";
+import { getOAuthValidationCodeTranslation } from "../ClientForm.utils";
+import styles from "../ClientForm.styled.module.scss";
 
 import BlockHeader from "./BlockHeader";
 import InputGroup from "./InputGroup";
@@ -65,6 +66,7 @@ interface BasicBlockProps {
 
   isEdit: boolean;
   errorFields: string[];
+  serverFieldErrors?: Record<string, string>;
   requiredErrorFields: string[];
   onBlur: (name: string) => void;
 }
@@ -80,6 +82,7 @@ const BasicBlock = ({
 
   isEdit,
   errorFields,
+  serverFieldErrors,
   requiredErrorFields,
   onBlur,
 }: BasicBlockProps) => {
@@ -133,15 +136,22 @@ const BasicBlock = ({
   const isLogoRequiredError = requiredErrorFields.includes("logo");
 
   return (
-    <StyledBlock>
+    <div className={styles.styledBlock}>
       <BlockHeader header={t("BasicInfo")} />
-      <StyledInputBlock>
+      <div className={styles.styledInputBlock}>
         <InputGroup
           label={t("OAuth:AppName")}
           name="name"
           placeholder={t("Common:EnterName")}
           value={nameValue}
-          error={isNameError ? `${t("ErrorName")} 3` : t("ThisRequiredField")}
+          error={
+            isNameError
+              ? getOAuthValidationCodeTranslation(
+                  t,
+                  serverFieldErrors?.["name"] ?? "ErrorName",
+                )
+              : t("ThisRequiredField")
+          }
           onChange={onChange}
           isRequired
           isError={isNameRequiredError || isNameError}
@@ -155,7 +165,10 @@ const BasicBlock = ({
           value={websiteUrlValue}
           error={
             isWebsiteError
-              ? `${t("ErrorWrongURL")}: ${window.location.origin}`
+              ? getOAuthValidationCodeTranslation(
+                  t,
+                  serverFieldErrors?.["website_url"] ?? "ErrorWrongURL",
+                )
               : t("ThisRequiredField")
           }
           onChange={onChange}
@@ -216,8 +229,8 @@ const BasicBlock = ({
             />
           </div>
         </InputGroup>
-      </StyledInputBlock>
-    </StyledBlock>
+      </div>
+    </div>
   );
 };
 

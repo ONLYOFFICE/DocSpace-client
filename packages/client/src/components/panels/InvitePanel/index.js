@@ -1056,11 +1056,7 @@ export default inject(
     };
   },
 )(
-  withTranslation([
-    "InviteDialog",
-    "SharingPanel",
-    "Translations",
-    "Common",
-    "InfoPanel",
-  ])(observer(InvitePanel)),
+  withTranslation(["InviteDialog", "Translations", "Common", "InfoPanel"])(
+    observer(InvitePanel),
+  ),
 );

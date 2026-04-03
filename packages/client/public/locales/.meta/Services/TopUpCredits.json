@@ -1,0 +1,28 @@
+{
+  "key_path": "TopUpCredits",
+  "content": "Top up credits",
+  "content_en_sha1_hash": "d1af034cd110e9c741c358564c4c9e120bca1364",
+  "created_at": "2026-03-20T09:07:40.820Z",
+  "updated_at": "2026-03-20T10:02:59.219Z",
+  "comment": {
+    "text": "This key is for the text displayed on a button that allows users to add or replenish credits. The button, labeled \"Top up credits,\" triggers a process to increase the user's available credit balance. It appears on the AiPage within the Portal Settings.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T10:02:59.219Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/pages/ai-tools/AiPage.tsx",
+      "line_number": 338,
+      "context": "/>\n \n <Button\n size={ButtonSize.small}\n primary\n label={t(\"TopUpCredits\")}\n onClick={onOpenTopUp}\n scale\n testId=\"top_up_credits_button\"\n isDisabled={isDisabled}\n />",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

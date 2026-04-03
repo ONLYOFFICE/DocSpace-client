@@ -1,0 +1,21 @@
+{
+  "key_path": "OpenBilling",
+  "content": "Open billing",
+  "content_en_sha1_hash": "db8b94c487b16e37e8769f93ad3c0cb93c0c7fbf",
+  "created_at": "2026-03-20T09:07:38.481Z",
+  "updated_at": "2026-03-20T09:07:38.481Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

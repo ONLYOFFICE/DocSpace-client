@@ -56,5 +56,6 @@
   "UploadDevicePDFFormOptionTitle": "Վերբեռնել սարքից",
   "UploadFromPortalTitle": "Վերբեռնում {{productName}}-ից",
   "UploadPDFFormOptionDescription": "Ընտրել պատրաստ PDF ձևը, որը հասանելի է {{productName}}-ում և վերբեռնեք այն սենյակ:",
-  "VirtualDataRoomEmptyTitle": "Բարի գալուստ Վիրտուալ Տվյալների Սենյակ"
+  "VirtualDataRoomEmptyTitle": "Բարի գալուստ Վիրտուալ Տվյալների Սենյակ",
+  "EmptyAIAgentsTitle": "Ստեղծեք ձեր {{aiAgent}}-ը"
 }

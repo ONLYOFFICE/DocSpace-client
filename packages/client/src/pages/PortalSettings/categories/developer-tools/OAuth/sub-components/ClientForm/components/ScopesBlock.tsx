@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useTheme } from "styled-components";
+import classNames from "classnames";
 
 import {
 	IClientReqDTO,
@@ -41,14 +41,11 @@ import { TTranslation } from "@docspace/shared/types";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import BlockHeader from "./BlockHeader";
 
-import {
-	StyledScopesCheckbox,
-	StyledScopesContainer,
-	StyledScopesName,
-} from "../ClientForm.styled";
+import styles from "../ClientForm.styled.module.scss";
 
 interface TScopesBlockProps {
 	scopes: TScope[];
@@ -67,6 +64,7 @@ const ScopesBlock = ({
 	isEdit,
 	requiredErrorFields,
 }: TScopesBlockProps) => {
+	const { isBase } = useTheme();
 	const [checkedScopes, setCheckedScopes] = React.useState<string[]>([]);
 	const [filteredScopes, setFilteredScopes] = React.useState<TFilteredScopes>(
 		filterScopeByGroup(selectedScopes, scopes, t),
@@ -136,7 +134,7 @@ const ScopesBlock = ({
 
 			const row = (
 				<React.Fragment key={name}>
-					<StyledScopesName>
+					<div className={styles.styledScopesName}>
 						<Text
 							className="scope-name"
 							fontSize="14px"
@@ -184,8 +182,8 @@ const ScopesBlock = ({
 								— {t(`${value.write?.tKey}`)}
 							</Text>
 						) : null}
-					</StyledScopesName>
-					<StyledScopesCheckbox>
+					</div>
+					<div className={styles.styledScopesCheckbox}>
 						<Checkbox
 							className="checkbox-read"
 							isChecked={isReadChecked}
@@ -199,8 +197,8 @@ const ScopesBlock = ({
 							}
 							dataTestId={`${key}_read_checkbox`}
 						/>
-					</StyledScopesCheckbox>
-					<StyledScopesCheckbox>
+					</div>
+					<div className={styles.styledScopesCheckbox}>
 						{value.write?.name ? (
 							<Checkbox
 								isChecked={isReadDisabled}
@@ -215,7 +213,7 @@ const ScopesBlock = ({
 								dataTestId={`${key}_write_checkbox`}
 							/>
 						) : null}
-					</StyledScopesCheckbox>
+					</div>
 				</React.Fragment>
 			);
 
@@ -227,12 +225,10 @@ const ScopesBlock = ({
 
 	const list = getRenderedScopeList();
 
-	const theme = useTheme();
-
 	const isRequiredError = requiredErrorFields.includes("scopes");
 
 	return (
-		<StyledScopesContainer isRequiredError={isRequiredError}>
+		<div className={classNames(styles.styledScopesContainer, { [styles.requiredError]: isRequiredError })}>
 			<BlockHeader
 				className="header"
 				header={t("ScopesHeader")}
@@ -265,7 +261,7 @@ const ScopesBlock = ({
 						fontSize="12px"
 						lineHeight="16px"
 						color={
-							theme.isBase
+							isBase
 								? globalColors.lightErrorStatus
 								: globalColors.darkErrorStatus
 						}
@@ -277,7 +273,7 @@ const ScopesBlock = ({
 				</>
 			) : null}
 			{list.map((item) => item)}
-		</StyledScopesContainer>
+		</div>
 	);
 };
 

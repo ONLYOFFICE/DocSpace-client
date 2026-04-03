@@ -205,6 +205,12 @@ export const enum PageType {
   restore = "restore",
   integration = "integration",
   developerTools = "developerTools",
+  devToolsOverview = "devToolsOverview",
+  devToolsJavascriptSdk = "devToolsJavascriptSdk",
+  devToolsPluginSdk = "devToolsPluginSdk",
+  devToolsWebhooks = "devToolsWebhooks",
+  devToolsOAuth = "devToolsOAuth",
+  devToolsApiKeys = "devToolsApiKeys",
   portalDeletion = "portalDeletion",
   payments = "payments",
   bonus = "bonus",
@@ -644,6 +650,9 @@ export enum WebhookTriggers {
   RoomDeleted = 33554432,
   RoomRestored = 67108864,
   RoomCopied = 134217728,
+  AgentCreated = 2147483648,
+  AgentUpdated = 4294967296,
+  AgentDeleted = 8589934592,
 }
 
 export enum RoomSecurityError {

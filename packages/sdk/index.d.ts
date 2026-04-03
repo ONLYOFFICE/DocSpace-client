@@ -50,6 +50,11 @@ declare module "*.ico?url" {
   const content: string;
   export default content;
 }
+
+declare module "*.mp4?url" {
+  const content: string;
+  export default content;
+}
 declare module "resize-image" {
   type ImageFormat = "png" | "gif" | "bmp" | "jpeg" | "webp";
 

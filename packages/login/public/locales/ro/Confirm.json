@@ -37,5 +37,7 @@
   "TfaSubTitle": "Urmați aceste pașii simpli pentru a continua să lucrați în acest {{productName}}:",
   "TfaTitle": "Autentificarea cu doi factori este activată pentru accesul securizat",
   "VerifyConnection": "Verificați conexiunea",
-  "VerifyConnectionDescription": "Introduceți codul din 6 cifre generat de aplicația dvs de autentificare în câmpul de mai jos pentru a finaliza configurarea."
+  "VerifyConnectionDescription": "Introduceți codul din 6 cifre generat de aplicația dvs de autentificare în câmpul de mai jos pentru a finaliza configurarea.",
+  "InviteLinkQuotaErrorBody": "Înregistrarea prin link nu mai este disponibilă, deoarece limita a fost depășită.",
+  "InviteQuotaErrorCustomizedBody": "Veți fi redirecționat(ă) către pagina <1>Login</1> în 10 secunde."
 }

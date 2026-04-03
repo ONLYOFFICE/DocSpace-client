@@ -48,16 +48,19 @@ import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 
 import { StyledParam } from "../../../CreateEditDialogParams/StyledParam";
 import { modelCache } from "./modelCache";
+import { ProviderType } from "@docspace/shared/api/ai/enums";
 
 type ModelSettingsProps = {
   agentParams: TAgentParams;
   modelAliases?: TAIConfig["modelAliases"];
+  systemAiEnabled?: TAIConfig["systemAiEnabled"];
   setAgentParams: (value: Partial<TAgentParams>) => void;
 };
 
 const ModelSettings = ({
   agentParams,
   modelAliases,
+  systemAiEnabled,
   setAgentParams,
 }: ModelSettingsProps) => {
   const { t } = useTranslation(["AIRoom", "Common"]);
@@ -118,10 +121,17 @@ const ModelSettings = ({
           getDefaultProvider(),
         ]);
 
-        const enabledProviders = p.filter((pr) => !pr.needReset);
+        const enabledProviders = p
+          .filter((pr) => !pr.needReset)
+          .filter(
+            (pr) =>
+              pr.type !== ProviderType.PortalAi ||
+              (pr.type === ProviderType.PortalAi && systemAiEnabled),
+          );
         setProviders(enabledProviders);
         modelCache.setProviders(p);
         modelCache.setDefaultProvider(defaultProvider);
+        modelCache.setAiServiceEnable(systemAiEnabled ?? false);
 
         setIsProvidersFetched(true);
 
@@ -150,7 +160,11 @@ const ModelSettings = ({
       }
     };
 
-    if (modelCache.getProviders()) return;
+    if (
+      modelCache.getProviders() &&
+      systemAiEnabled === modelCache.isAiServiceEnable()
+    )
+      return;
 
     if (providers.length || isProvidersLoading || isProvidersFetched) return;
 
@@ -160,6 +174,7 @@ const ModelSettings = ({
     providers.length,
     isProvidersLoading,
     isProvidersFetched,
+    systemAiEnabled,
   ]);
 
   React.useEffect(() => {
@@ -409,3 +424,4 @@ const ModelSettings = ({
 };
 
 export default ModelSettings;
+

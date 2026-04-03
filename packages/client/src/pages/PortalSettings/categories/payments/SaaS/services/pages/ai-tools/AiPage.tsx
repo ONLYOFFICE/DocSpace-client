@@ -68,7 +68,7 @@ type AiPageProps = {
   onTopUpClick?: () => void;
   onPricingBillingClick?: () => void;
   language?: string;
-  fetchAiServiceBalance?: () => Promise<void>;
+  fetchAiServiceBalance?: (isRefresh?: boolean) => Promise<void>;
   fetchTransactionHistory?: (
     startDate?: string | null,
     endDate?: string | null,
@@ -150,7 +150,7 @@ const AiPage = (props: AiPageProps) => {
     const startTime = Date.now();
     try {
       await Promise.all([
-        fetchAiServiceBalance?.(),
+        fetchAiServiceBalance?.(true),
         fetchTransactionHistory?.(null, null, true, true, "", AI_TOOLS),
       ]);
     } finally {
@@ -487,3 +487,4 @@ export default inject(
     };
   },
 )(observer(AiPage));
+

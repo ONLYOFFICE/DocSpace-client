@@ -3,23 +3,17 @@
   "content": "Room grouping",
   "content_en_sha1_hash": "e82625e8fe8d243e9111a0521eeb813b868cb67b",
   "created_at": "2026-02-19T13:36:24.882Z",
-  "updated_at": "2026-02-19T13:36:32.422Z",
+  "updated_at": "2026-03-20T09:35:47.629Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This text labels a section within an \"Edit Room Groups\" dialog, specifically the title of the area displaying room grouping options. It's used to identify the functionality related to organizing rooms into groups. Translators should ensure the term accurately conveys the concept of room organization.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T09:35:47.629Z"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/EditRoomGroupsDialog/index.tsx",
-      "line_number": 431,
+      "line_number": 381,
       "context": ")}\n \n <div className={styles.settingRoomGroups}>\n <div className={styles.roomGroups}>\n <div className={styles.title}>\n {t(\"GroupingRooms:RoomGrouping\")}\n </div>\n <ToggleButton\n className={styles.roomGroupsToggle}\n isChecked={localGroupingEnabled}\n onChange={onToggleGrouping}",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/RoomGroupingDialog/index.tsx",
-      "line_number": 88,
-      "context": "visible={visible}\n onClose={onClose}\n displayType={ModalDialogType.modal}\n autoMaxHeight\n >\n <ModalDialog.Header>{t(\"GroupingRooms:RoomGrouping\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.content}>\n <div\n className={classNames(styles.searchBarContainer, styles.fadeRight, {\n [styles.searchBarContainerTablet]: !isDesktopView,",
       "module": "/packages/client"
     }
   ],

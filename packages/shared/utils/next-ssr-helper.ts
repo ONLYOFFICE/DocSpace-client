@@ -76,10 +76,6 @@ export const createRequest = async (
 
   if (authToken) {
     hdrs.set("Authorization", authToken);
-  } else {
-    // SDK forms: token arrives via URL query → proxy sets this header
-    const requestToken = hdrs.get("x-sdk-config-request-token");
-    if (requestToken) hdrs.set("Authorization", requestToken);
   }
 
   cookieStore

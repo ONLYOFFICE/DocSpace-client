@@ -1,0 +1,28 @@
+{
+  "key_path": "NoPaymentMethod",
+  "content": "No payment method linked",
+  "content_en_sha1_hash": "bd77fff3aa7020e19b54fe144836ff0e62903058",
+  "created_at": "2026-03-20T09:07:41.296Z",
+  "updated_at": "2026-03-20T09:57:11.314Z",
+  "comment": {
+    "text": "This key displays a message indicating that a payment method has not been linked to the user's account. It appears within the payment method settings section of the portal, likely displayed as a prominent message to prompt the user to add a payment method. Translators should ensure the phrasing conveys a clear instruction or explanation to the user.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T09:57:11.314Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/payment-method/index.tsx",
+      "line_number": 149,
+      "context": ");\n \n const noPaymnetMethod = (\n <div>\n <Text fontSize=\"16px\" fontWeight={700}>\n {t(\"NoPaymentMethod\")}\n </Text>\n <Text className={styles.noPaymentDescription}>\n {t(\"NoPaymentMethodDescription\")}\n </Text>\n <div className={styles.buttonWrapper}>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

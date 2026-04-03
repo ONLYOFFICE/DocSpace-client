@@ -3,7 +3,7 @@
   "content": "Room restored",
   "content_en_sha1_hash": "056dcc7d185c90e55521946e4191b567be71b70a",
   "created_at": "2025-05-19T21:30:49.823Z",
-  "updated_at": "2025-05-24T02:13:19.870Z",
+  "updated_at": "2026-03-20T09:07:45.616Z",
   "comment": {
     "text": "This translation key is used to display a message when a room has been restored after being archived or deleted. It appears as a notification in the PortalSettings categories of developer tools, typically on a button or dialog to confirm restoration. Translators should provide a concise and descriptive phrase that indicates the action has been successfully reverted.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/Webhooks.helpers.ts",
       "line_number": 84,
-      "context": "return t(\"RoomUpdated\");\n case WebhookTriggers.RoomArchived:\n return t(\"RoomArchived\");\n case WebhookTriggers.RoomDeleted:\n return t(\"RoomDeleted\");\n case WebhookTriggers.RoomRestored:\n return t(\"RoomRestored\");\n case WebhookTriggers.RoomCopied:\n return t(\"RoomCopied\");\n default:\n return \"\";",
+      "context": "return t(\"RoomUpdated\");\n case WebhookTriggers.RoomArchived:\n return t(\"RoomArchived\");\n case WebhookTriggers.RoomDeleted:\n return t(\"RoomDeleted\");\n case WebhookTriggers.RoomRestored:\n return t(\"RoomRestored\");\n case WebhookTriggers.RoomCopied:\n return t(\"RoomCopied\");\n case WebhookTriggers.FormFilledOut:\n return t(\"FormFilledOut\");",
       "module": "/packages/client"
     }
   ],

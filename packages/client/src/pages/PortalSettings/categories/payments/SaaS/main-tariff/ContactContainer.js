@@ -24,22 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link } from "@docspace/ui-kit/components/link";
 
-const StyledContactContainer = styled.div`
-  display: flex;
-  width: 100%;
-  a {
-    margin-inline-start: 4px;
-  }
-`;
+import styles from "./styles/MainTariff.module.scss";
 
 const ContactContainer = ({ t, salesEmail }) => {
 	return (
-		<StyledContactContainer>
+		<div className={styles.contactContainer}>
 			{salesEmail ? (
 				<Text as="span" fontWeight={600}>
 					{t("Common:ContactUs")}
@@ -55,14 +48,13 @@ const ContactContainer = ({ t, salesEmail }) => {
 					</Link>
 				</Text>
 			) : null}
-		</StyledContactContainer>
+		</div>
 	);
 };
 
-export default inject(({ paymentStore, settingsStore }) => {
+export default inject(({ paymentStore }) => {
 	const { salesEmail } = paymentStore;
 	return {
 		salesEmail,
-		theme: settingsStore.theme,
 	};
 })(observer(ContactContainer));

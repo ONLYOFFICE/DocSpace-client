@@ -47,18 +47,18 @@ export default function useFormEventHooks(
     ensureAgentForNewFolder: (
       folder: { id: number; title: string; parentId: number },
     ) => Promise<void>;
-  },
+  } | null,
   socketUrl: string,
 ) {
   const storeRef = useRef(aiStore);
   storeRef.current = aiStore;
 
   useEffect(() => {
-    if (!socketUrl) return;
+    if (!socketUrl || !storeRef.current) return;
 
     const handler = (opt?: TOptSocket) => {
       const store = storeRef.current;
-      if (!store.aiAgentEnabled) return;
+      if (!store?.aiAgentEnabled) return;
       if (!opt?.cmd || !opt?.type) return;
 
       if (opt.cmd === "create" && opt.type === "file" && opt.data) {

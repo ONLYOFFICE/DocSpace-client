@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
 import { useNavigate, useLocation } from "react-router";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
@@ -43,14 +42,7 @@ import type { TColorScheme } from "@docspace/ui-kit/providers/theme/themes";
 import type { TData } from "@docspace/ui-kit/components/toast";
 
 import { LearnMoreWrapper } from "../StyledSecurity";
-
-const MainContainer = styled.div`
-  width: 100%;
-
-  .box {
-    margin-bottom: 24px;
-  }
-`;
+import styles from "./devToolsAccess.module.scss";
 
 const DevToolsAccess = ({
   accessDevToolsForUsers,
@@ -197,7 +189,7 @@ const DevToolsAccess = ({
   if (!ready) return null;
 
   return (
-    <MainContainer>
+    <div className={styles.container}>
       <LearnMoreWrapper>
         <Text fontSize="13px" fontWeight="400">
           {t("DeveloperToolsAccessDescription", {
@@ -219,7 +211,7 @@ const DevToolsAccess = ({
       </LearnMoreWrapper>
 
       <RadioButtonGroup
-        className="box"
+        className={styles.box}
         fontSize="13px"
         fontWeight="400"
         name="group"
@@ -260,7 +252,7 @@ const DevToolsAccess = ({
         saveButtonDataTestId="developer_tools_access_save_button"
         cancelButtonDataTestId="developer_tools_access_cancel_button"
       />
-    </MainContainer>
+    </div>
   );
 };
 

@@ -3,7 +3,7 @@
   "content": "Room list",
   "content_en_sha1_hash": "61e05608df86be266bae6e1183981c8d88c82435",
   "created_at": "2025-05-19T21:30:48.199Z",
-  "updated_at": "2026-02-19T13:36:32.421Z",
+  "updated_at": "2026-03-20T09:07:45.500Z",
   "comment": {
     "text": "The \"RoomList\" translation key is used to display a room list label on buttons and other UI elements. It appears in contexts where users can select or view rooms, such as in contact options and selector components. Translators should replace this term with local language equivalents to make the interface accessible to diverse user bases.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/EditRoomGroupsDialog/index.tsx",
-      "line_number": 369,
-      "context": "return (\n <RoomListPanel\n visible={isOpenRoomList}\n onClose={onCloseRoomList}\n onSubmit={onSubmitRoom}\n headerLabel={t(\"Common:RoomList\")}\n withSearch\n disableSubmitUntilChanged\n />\n );\n }",
+      "line_number": 456,
+      "context": "element={\n <RoomListPanel\n visible={isOpenRoomList}\n onClose={onCloseRoomList}\n onSubmit={onSubmitRoom}\n headerLabel={t(\"Common:RoomList\")}\n withSearch\n disableSubmitUntilChanged\n withoutBackdropBackground\n />\n }",
       "module": "/packages/client"
     },
     {

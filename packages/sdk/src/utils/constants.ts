@@ -35,7 +35,7 @@ export const PATHNAME_HEADER = "x-pathname";
 export const PUBLIC_ROOM_TITLE_HEADER = "x-public-room-title";
 
 export const ROOM_ID_HEADER = "x-sdk-config-room-id";
-export const REQUEST_TOKEN_HEADER = "x-sdk-config-request-token";
+export const LIBRARY_ID_HEADER = "x-sdk-config-library-id";
 
 export const DEFAULT_CHUNK_UPLOAD_SIZE = 5 * 1024 * 1024;
 export const DEFAULT_MAX_UPLOAD_THREAD_COUNT = 3;

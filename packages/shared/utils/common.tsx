@@ -34,8 +34,9 @@ import {
 } from "@docspace/ui-kit/utils/date";
 import { isMobile } from "react-device-detect";
 import type { I18nextProviderProps } from "react-i18next";
-import sjcl from "sjcl";
 import resizeImage from "resize-image";
+import { pbkdf2 } from "@noble/hashes/pbkdf2.js";
+import { sha256 } from "@noble/hashes/sha2.js";
 
 import LoginPageSvgUrl from "PUBLIC_DIR/images/logo/loginpage.svg?url";
 import DarkLoginPageSvgUrl from "PUBLIC_DIR/images/logo/dark_loginpage.svg?url";
@@ -146,11 +147,15 @@ export function createPasswordHash(
 
   const { size, iterations, salt } = hashSettings;
 
-  let bits = sjcl.misc.pbkdf2(password, salt, iterations);
-  bits = bits.slice(0, size / 32);
-  const hash = sjcl.codec.hex.fromBits(bits);
+  const enc = new TextEncoder();
+  const derivedBytes = pbkdf2(sha256, enc.encode(password), enc.encode(salt), {
+    c: iterations,
+    dkLen: size / 8,
+  });
 
-  return hash;
+  return Array.from(derivedBytes)
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("");
 }
 
 export const isPublicRoom = () => {

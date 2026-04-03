@@ -52,7 +52,7 @@ const getStartRoomParams = (startRoomType: RoomsType, title: string) => {
     },
     withCover: false,
     previewIcon: null,
-    saveFormAsXLSX: false,
+    saveFormAsXLSX: true,
     sendFormToExternalDB: false,
   };
 

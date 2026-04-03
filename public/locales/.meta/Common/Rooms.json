@@ -3,7 +3,7 @@
   "content": "Rooms",
   "content_en_sha1_hash": "3a28d6f078fd35a505195a0f8ec6f59e9801d7c2",
   "created_at": "2025-05-19T21:30:48.236Z",
-  "updated_at": "2026-02-19T13:36:32.243Z",
+  "updated_at": "2026-03-31T15:18:45.981Z",
   "comment": {
     "text": "The \"Rooms\" translation key is used to display the content \"Rooms\" in various parts of the user interface. This includes a file selector and a dialog box where it appears as a section title, providing context for users navigating room templates or reassigning data. It appears in UI elements such as buttons, text labels, and progress indicators.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/EditRoomGroupsDialog/sub-components/GroupItem.tsx",
-      "line_number": 99,
+      "line_number": 100,
       "context": ")}\n </div>\n <div className={styles.titleContainer}>\n <div className={styles.nameGroup}>{group.name}</div>\n <div className={styles.countRooms}>\n {group.totalRooms} {t(\"Common:Rooms\")}\n </div>\n </div>\n </div>\n \n <div className={styles.editGroup}>",
       "module": "/packages/client"
     },
@@ -54,19 +54,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 840,
+      "line_number": 874,
       "context": "});\n }\n \n if (filter.location) {\n const locationLabels = {\n [FilterLocation.Rooms]: t(\"Common:Rooms\"),\n [FilterLocation.Documents]: t(\"Common:Documents\"),\n [FilterLocation.Link]: t(\"Common:AccessibleViaLink\"),\n };\n \n filterValues.push({",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 840,
+      "line_number": 874,
       "context": "});\n }\n \n if (filter.location) {\n const locationLabels = {\n [FilterLocation.Rooms]: t(\"Common:Rooms\"),\n [FilterLocation.Documents]: t(\"Common:Documents\"),\n [FilterLocation.Link]: t(\"Common:AccessibleViaLink\"),\n };\n \n filterValues.push({",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 840,
+      "line_number": 874,
       "context": "});\n }\n \n if (filter.location) {\n const locationLabels = {\n [FilterLocation.Rooms]: t(\"Common:Rooms\"),\n [FilterLocation.Documents]: t(\"Common:Documents\"),\n [FilterLocation.Link]: t(\"Common:AccessibleViaLink\"),\n };\n \n filterValues.push({",
       "module": "/packages/client"
     },
@@ -90,7 +90,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/sub-components/DefaultPageSetting.tsx",
-      "line_number": 74,
+      "line_number": 75,
       "context": "{\n label: t(\"Common:MyDocuments\"),\n key: FolderType.USER,\n },\n {\n label: t(\"Common:Rooms\"),\n key: FolderType.Rooms,\n },\n {\n label: t(\"Common:SharedWithMe\"),\n key: FolderType.SHARE,",
       "module": "/packages/client"
     },

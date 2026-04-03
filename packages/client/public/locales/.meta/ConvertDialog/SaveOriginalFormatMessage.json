@@ -3,7 +3,7 @@
   "content": "Save the file copy in the original format",
   "content_en_sha1_hash": "64de7dd97e573eef13f21dc0a7909949a67ea43a",
   "created_at": "2025-05-19T21:30:56.892Z",
-  "updated_at": "2026-02-19T13:36:32.378Z",
+  "updated_at": "2026-03-20T09:07:45.476Z",
   "comment": {
     "text": "This translation key is used to display a message that allows users to save a file copy in its original format when converting files. The text appears on a modal dialog footer.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ConvertDialog/index.js",
-      "line_number": 179,
-      "context": "<ModalDialog.Footer>\n <div className={classNames(styles.footer, \"convert_dialog_footer\")}>\n <div className={styles.convertDialogCheckboxes}>\n <Checkbox\n className=\"convert_dialog_checkbox\"\n label={t(\"SaveOriginalFormatMessage\")}\n isChecked={storeOriginalFiles}\n onChange={onChangeFormat}\n />\n {convertSingleFile && sortedFolder ? (\n <div",
+      "line_number": 180,
+      "context": "<ModalDialog.Footer>\n <div className={classNames(styles.footer, \"convert_dialog_footer\")}>\n <div className={styles.convertDialogCheckboxes}>\n <Checkbox\n className=\"convert_dialog_checkbox\"\n label={t(\"SaveOriginalFormatMessage\")}\n isChecked={storeOriginalFiles}\n onChange={onChangeFormat}\n dataTestId=\"convert_dialog_save_original_checkbox\"\n />\n {convertSingleFile && sortedFolder ? (",
       "module": "/packages/client"
     }
   ],

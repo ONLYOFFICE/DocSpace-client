@@ -52,7 +52,7 @@ export async function getFilesSettings(): Promise<TFilesSettings | undefined> {
 	try {
 		const [req] = await createRequest([`/files/settings`], [["", ""]], "GET");
 
-		const res = await fetch(req, { next: { revalidate: 300 } });
+		const res = await fetch(req, { next: { revalidate: 900 } });
 
 		if (!res.ok) {
 			logger.error(`GET /files/settings failed: ${res.status}`);
@@ -193,6 +193,33 @@ export async function getFolder(
 		return folder;
 	} catch (error) {
 		logger.error(`Error in getFolder: ${error}`);
+		throw error;
+	}
+}
+
+export async function getFolderInfo(
+	folderId: string | number,
+): Promise<TFolder> {
+	logger.debug(`Start GET /files/folder/${folderId}`);
+
+	try {
+		const [req] = await createRequest(
+			[`/files/folder/${folderId}`],
+			[["", ""]],
+			"GET",
+		);
+
+		const res = await fetch(req, { next: { revalidate: 300 } });
+
+		if (!res.ok) {
+			logger.error(`GET /files/folder/${folderId} failed: ${res.status}`);
+			throw new Error("Failed to get folder info");
+		}
+
+		const resJson = await res.json();
+		return resJson.response as TFolder;
+	} catch (error) {
+		logger.error(`Error in getFolderInfo: ${error}`);
 		throw error;
 	}
 }

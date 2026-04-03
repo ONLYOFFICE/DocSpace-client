@@ -240,7 +240,7 @@ const PricingBillingBody: React.FC<PricingBillingBodyProps> = ({
                     ) : null}
                   </div>
                   <Text className={styles.pricingRowPrice}>
-                    <Text fontWeight="600">
+                    <Text fontWeight="600" as="span">
                       <Trans
                         t={t}
                         ns="Services"

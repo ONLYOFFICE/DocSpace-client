@@ -150,6 +150,7 @@ export type TFrameConfig = {
   theme?: TFrameTheme | string;
   type?: TFrameType;
   viewAs?: TFrameViewAs;
+  libraryId?: string | number;
   viewTableColumns?: string;
   waiting?: boolean;
   width?: string;

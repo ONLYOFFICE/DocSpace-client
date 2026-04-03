@@ -3,17 +3,17 @@
   "content": "Edit room groups",
   "content_en_sha1_hash": "c26b9bcc520a61b56eb5c44b7c3f4ed012e0c91b",
   "created_at": "2026-02-19T13:36:24.873Z",
-  "updated_at": "2026-02-19T13:36:32.422Z",
+  "updated_at": "2026-03-20T09:39:12.333Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key provides the title for the \"Edit Room Groups\" dialog. It's used to label the dialog header, allowing users to understand the purpose of the dialog which is to edit room groupings. Translators should ensure the translation accurately reflects the action of modifying room group settings.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T09:39:12.333Z"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/EditRoomGroupsDialog/index.tsx",
-      "line_number": 400,
-      "context": "visible={true}\n className={styles.editRoomGroupsDialog}\n onClose={onCloseEditRoomGroupsDialog}\n >\n <ModalDialog.Header>\n {t(\"GroupingRooms:EditRoomGroups\")}\n </ModalDialog.Header>\n \n <ModalDialog.Body>\n {isTooltipVisible && (\n <PublicRoomBar",
+      "line_number": 350,
+      "context": "hideContent={isOpenGroupIcon}\n className={styles.editRoomGroupsDialog}\n onClose={onCloseEditRoomGroupsDialog}\n >\n <ModalDialog.Header>\n {t(\"GroupingRooms:EditRoomGroups\")}\n </ModalDialog.Header>\n \n <ModalDialog.Body>\n {isTooltipVisible && (\n <PublicRoomBar",
       "module": "/packages/client"
     }
   ],

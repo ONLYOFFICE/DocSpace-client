@@ -105,9 +105,6 @@ const DefaultProviderComponent = ({
   const { t } = useTranslation(["Common", "AISettings", "Services"]);
   const tooltipId = useId();
 
-  const hasSystemProvider = aiProviders?.some(
-    (p) => p.type === ProviderType.PortalAi,
-  );
   const isOnlySystemProvider =
     aiProviders?.length === 1 && aiProviders[0].type === ProviderType.PortalAi;
   const isDisabled = isOnlySystemProvider && !aiConfig?.systemAiEnabled;
@@ -320,7 +317,9 @@ const DefaultProviderComponent = ({
       const isFallback = providerId !== defaultProvider?.providerId;
 
       setSelectedProviderId(providerId);
-      setSelectedModelId(isFallback ? null : defaultProvider?.defaultModel || null);
+      setSelectedModelId(
+        isFallback ? null : defaultProvider?.defaultModel || null,
+      );
 
       if (isFallback && providerId) {
         fetchDefaultProviderModels?.(providerId);
@@ -369,6 +368,7 @@ const DefaultProviderComponent = ({
             hasError={!!defaultProviderModelsError}
             errorMessage={defaultProviderModelsError || ""}
             errorMessageWidth="100%"
+            dataTestId="default-provider-field-container"
           >
             <ComboBox
               className={classNames({
@@ -376,7 +376,7 @@ const DefaultProviderComponent = ({
               })}
               options={getProviderOptions()}
               showDisabledItems
-              scaledOptions={hasSystemProvider}
+              scaledOptions
               selectedOption={selectedProviderOption}
               displayArrow
               onSelect={onSelectProvider}
@@ -386,6 +386,7 @@ const DefaultProviderComponent = ({
               dropDownTestId="default-provider-dropdown"
               directionY="both"
               dropDownMaxHeight={300}
+              textOverflow
             />
           </FieldContainer>
           <FieldContainer
@@ -414,6 +415,7 @@ const DefaultProviderComponent = ({
                 hideMobileView={false}
                 isDefaultMode
                 dropDownClassName={styles.modelDropdown}
+                textOverflow
               />
             ) : (
               <ComboBox
@@ -428,6 +430,8 @@ const DefaultProviderComponent = ({
                 isDisabled={isDisabled || !defaultProviderModels}
                 directionY="both"
                 dropDownMaxHeight={300}
+                scaledOptions
+                textOverflow
               />
             )}
           </FieldContainer>
@@ -484,4 +488,3 @@ export const DefaultProvider = inject(
     };
   },
 )(observer(DefaultProviderComponent));
-

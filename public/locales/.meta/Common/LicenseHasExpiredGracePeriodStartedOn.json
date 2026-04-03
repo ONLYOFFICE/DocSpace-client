@@ -1,19 +1,19 @@
 {
   "key_path": "LicenseHasExpiredGracePeriodStartedOn",
-  "content": "License has expired. Grace period started on {{date}}",
-  "content_en_sha1_hash": "33259668ffe97b9b321ae743d2ddc6d84947bdb0",
-  "created_at": "2026-02-18T14:56:00.764Z",
-  "updated_at": "2026-02-19T13:36:33.181Z",
+  "content": "License has expired. Grace period started on <1>{{date}}</1>",
+  "content_en_sha1_hash": "13ace882eaeb3841946d42dbdf9f98874d6f9a49",
+  "created_at": "2026-03-20T09:07:32.083Z",
+  "updated_at": "2026-03-20T09:17:58.984Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key displays a message indicating that a license has expired and a grace period has begun. It appears within a subscription expiry notification, likely in a payments section, and includes a date representing the start of the grace period. Translators should ensure the date format aligns with the locale.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T09:17:58.984Z"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/Payments/Standalone/sub-components/TariffTitleContainer.tsx",
-      "line_number": 99,
-      "context": "<Text\n className={styles.paymentsSubscriptionExpired}\n isBold\n fontSize=\"16px\"\n >\n {t(\"LicenseHasExpiredGracePeriodStartedOn\", {\n date: paymentDate,\n })}\n </Text>\n );\n }",
+      "line_number": 100,
+      "context": "className={styles.paymentsSubscriptionExpired}\n isBold\n fontSize=\"16px\"\n >\n <Trans\n i18nKey=\"LicenseHasExpiredGracePeriodStartedOn\"\n ns=\"Common\"\n t={t}\n values={{ date: paymentDate }}\n components={{\n 1: <span data-testid=\"grace-period-start-date\" />,",
       "module": "/packages/shared"
     }
   ],

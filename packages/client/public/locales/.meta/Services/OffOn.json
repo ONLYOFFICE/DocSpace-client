@@ -1,0 +1,28 @@
+{
+  "key_path": "OffOn",
+  "content": "Off/On",
+  "content_en_sha1_hash": "80992795b814b85328bd3dd85a4a30f6c24dbf19",
+  "created_at": "2026-03-20T09:07:40.786Z",
+  "updated_at": "2026-03-20T10:06:30.234Z",
+  "comment": {
+    "text": "This key represents a toggle option, displaying \"Off/On\" to indicate a setting can be enabled or disabled. It appears as a column header in a table, likely controlling a feature's state. Translators should ensure the translated text accurately conveys the meaning of enabling or disabling a function.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T10:06:30.234Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/pages/ai-tools/sub-components/ModelSettingsTable/TableView/TableHeader.tsx",
+      "line_number": 45,
+      "context": "enable: true,\n resizable: true,\n minWidth: 120,\n },\n {\n key: \"OffOn\",\n title: t(\"OffOn\"),\n enable: true,\n resizable: true,\n minWidth: 90,\n },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

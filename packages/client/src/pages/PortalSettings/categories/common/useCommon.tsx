@@ -69,7 +69,8 @@ const useCommon = ({
         | "dns-settings"
         | "configure-deep-link"
         | "welcome-page-settings"
-        | "ad-management",
+        | "ad-management"
+        | "ai-services-management",
     ) => {
       if (isLoaded) return;
 
@@ -121,6 +122,9 @@ const useCommon = ({
 
     if (window.location.pathname.includes("ad-management"))
       actions.push(getCustomizationData("ad-management"));
+
+    if (window.location.pathname.includes("ai-services-management"))
+      actions.push(getCustomizationData("ai-services-management"));
 
     if (window.location.pathname.includes("dns-settings"))
       actions.push(getCustomizationData("dns-settings"));

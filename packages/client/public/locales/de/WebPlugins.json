@@ -14,5 +14,7 @@
   "PluginSDK": "Plugin SDK",
   "PluginSDKDescription": "Mit dem Plugin SDK können Sie die {{productName}}-Funktionalität erweitern, die Dienste von Drittanbietern einbinden oder die bestehende Benutzererfahrung verbessern. Hier finden Sie die Plugin-Beispiele mit Quellcode, die auf GitHub verfügbar sind. ",
   "PluginSDKInstruction": "Klicken Sie auf die Schaltfläche, um eine detaillierte Anleitung zur Erstellung eigener Plugins zu erhalten.",
-  "UploadDescription": " Sie können Plugins hinzufügen, um die Funktionalität von {{productName}} um zusätzliche Funktionen zu erweitern. Klicken Sie auf Plugin hochladen oder legen Sie die Datei im ZIP-Archiv ab."
+  "UploadDescription": " Sie können Plugins hinzufügen, um die Funktionalität von {{productName}} um zusätzliche Funktionen zu erweitern. Klicken Sie auf Plugin hochladen oder legen Sie die Datei im ZIP-Archiv ab.",
+  "PluginCacheWarningDescription": "Plugins werden basierend auf ihrer Versionsnummer zwischengespeichert. Um sicherzustellen, dass Ihre Änderungen angewendet werden, erhöhen Sie bitte die Versionsnummer in Ihrer <1>package.json</1>-Datei, bevor Sie sie hochladen. Das System wird ein Plugin nicht aktualisieren, wenn die Version gleich bleibt.",
+  "PluginDeletedSuccessfully": "Plugin erfolgreich gelöscht"
 }

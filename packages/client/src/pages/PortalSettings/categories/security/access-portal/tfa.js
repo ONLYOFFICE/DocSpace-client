@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState, useEffect, useRef } from "react";
-import styled from "styled-components";
 import { useNavigate, useLocation } from "react-router";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
@@ -44,14 +43,7 @@ import TfaLoader from "../sub-components/loaders/tfa-loader";
 import { LearnMoreWrapper } from "../StyledSecurity";
 import useSecurity from "../useSecurity";
 import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
-
-const MainContainer = styled.div`
-  width: 100%;
-
-  .box {
-    margin-bottom: 24px;
-  }
-`;
+import styles from "./tfa.module.scss";
 
 const TFA_HASH = "#tfa-section";
 const SCROLL_MARGIN_TOP =
@@ -240,7 +232,7 @@ const TwoFactorAuth = (props) => {
   }
 
   return (
-    <MainContainer id="tfa-section" ref={targetRef}>
+    <div id="tfa-section" ref={targetRef} className={styles.container}>
       <LearnMoreWrapper withoutExternalLink={!tfaSettingsUrl}>
         <Text fontSize="13px" fontWeight="400">
           {t("TwoFactorAuthEnableDescription", {
@@ -262,7 +254,7 @@ const TwoFactorAuth = (props) => {
       </LearnMoreWrapper>
 
       <RadioButtonGroup
-        className="box"
+        className={styles.box}
         fontSize="13px"
         fontWeight="400"
         name="group"
@@ -311,7 +303,7 @@ const TwoFactorAuth = (props) => {
         saveButtonDataTestId="tfa_save_button"
         cancelButtonDataTestId="tfa_cancel_button"
       />
-    </MainContainer>
+    </div>
   );
 };
 

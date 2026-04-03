@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -90,6 +90,7 @@ type AdditionalStoragePageProps = {
   isInitServicesData?: boolean;
   storageServiceName?: string;
   isShowStorageTariffDeactivatedModal?: boolean;
+  setStorageDeactivationVisited?: (value: boolean) => void;
 };
 
 const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
@@ -110,6 +111,7 @@ const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
   isInitServicesData,
   storageServiceName,
   isShowStorageTariffDeactivatedModal,
+  setStorageDeactivationVisited,
 }) => {
   const { t, ready } = useTranslation(["Payments", "Common", "Services"]);
   const contextMenuRef = useRef<ContextMenuRefType>(null);
@@ -119,6 +121,12 @@ const AdditionalStoragePage: React.FC<AdditionalStoragePageProps> = ({
   const [isGracePeriodModalVisible, setIsGracePeriodModalVisible] =
     useState(false);
   const shouldShowLoader = !isInitServicesData || !ready;
+
+  useEffect(() => {
+    if (previousStoragePlanSize) {
+      setStorageDeactivationVisited?.(true);
+    }
+  }, [previousStoragePlanSize]);
 
   const openUpgradeDialog = () => {
     if (isGracePeriod) {
@@ -383,6 +391,7 @@ export default inject(
       walletCodeCurrency,
       storageServiceName,
       isShowStorageTariffDeactivatedModal,
+      setStorageDeactivationVisited,
     } = paymentStore;
     const {
       currentStoragePlanSize,
@@ -414,6 +423,7 @@ export default inject(
       isInitServicesData,
       storageServiceName,
       isShowStorageTariffDeactivatedModal,
+      setStorageDeactivationVisited,
     };
   },
 )(observer(AdditionalStoragePage));

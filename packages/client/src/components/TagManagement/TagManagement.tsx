@@ -24,10 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { FC } from "react";
+import { FC, useMemo } from "react";
 import { inject, observer } from "mobx-react";
 
-import { TagManagement as TagManagementShared } from "@docspace/shared/components/tag-management";
+import { ShareAccessRights } from "@docspace/ui-kit/enums";
+
+import {
+  AccessTagManagement,
+  TagManagement as TagManagementShared,
+} from "@docspace/shared/components/tag-management";
 
 import type {
   InjectedTagManagementProps,
@@ -35,13 +40,43 @@ import type {
   TagManagementWrapperProps,
 } from "./TagManagement.types";
 
-const TagManagement: FC<TagManagementWrapperProps> = (props) => {
-  return <TagManagementShared {...props} />;
+const TagManagement: FC<TagManagementWrapperProps> = ({
+  access: roomAccess,
+  isAdmin,
+  isArchiveFolder,
+  ...props
+}) => {
+  const access = useMemo(() => {
+    const isRoomManager = roomAccess === ShareAccessRights.RoomManager;
+    const isRoomOwner =
+      roomAccess === ShareAccessRights.None ||
+      roomAccess === ShareAccessRights.FullAccess;
+
+    const canEdit = isAdmin && !isArchiveFolder;
+    const canRemove = isAdmin && !isArchiveFolder;
+
+    const canCreate =
+      (isAdmin || isRoomOwner || isRoomManager) && !isArchiveFolder;
+
+    const canBindTag = canCreate;
+    const canSearch = canCreate;
+
+    return {
+      canEdit,
+      canRemove,
+      canCreate,
+      canBindTag,
+      canSearch,
+    } satisfies AccessTagManagement;
+  }, [roomAccess, isAdmin, isArchiveFolder]);
+
+  return <TagManagementShared {...props} access={access} />;
 };
 
 export default inject<TStore, TagManagementProps, InjectedTagManagementProps>(
-  ({ filesActionsStore, authStore }) => ({
+  ({ filesActionsStore, authStore, treeFoldersStore }) => ({
     isAdmin: authStore.isAdmin,
     onSelectTag: filesActionsStore.selectTag,
+    isArchiveFolder: treeFoldersStore.isArchiveFolder,
   }),
 )(observer(TagManagement as FC<TagManagementProps>));

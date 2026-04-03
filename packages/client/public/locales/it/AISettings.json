@@ -35,5 +35,12 @@
   "ServerUpdatedSuccess": "Server aggiornato con successo",
   "ServiceIcon": "Icona del servizio",
   "SystemMCPListTitle": "Sistema",
-  "WebSearchKeyHiddenDescription": "La chiave API viene visualizzata solo una volta al momento del salvataggio e viene poi nascosta per motivi di sicurezza."
+  "WebSearchKeyHiddenDescription": "La chiave API viene visualizzata solo una volta al momento del salvataggio e viene poi nascosta per motivi di sicurezza.",
+  "AddAIProvider": "Aggiungi {{aiProvider}}",
+  "AddMCPServer": "Aggiungi {{mcpServer}}",
+  "DefaultProviderSetSuccess": "Fornitore predefinito impostato correttamente",
+  "DefaultProviderTitle": "Fornitore predefinito",
+  "DeleteProvider": "Elimina {{aiProvider}}",
+  "MCPUnavailableError": "{{mcpServer}} non è disponibile",
+  "Model": "Modello"
 }

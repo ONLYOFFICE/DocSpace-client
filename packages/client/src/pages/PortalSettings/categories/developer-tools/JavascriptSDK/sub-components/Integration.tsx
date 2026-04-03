@@ -36,10 +36,9 @@ import WordpressIcon from "PUBLIC_DIR/images/wordpress.integration.react.svg?url
 import DrupalIcon from "PUBLIC_DIR/images/drupal.integration.react.svg?url";
 import ArrowIcon from "PUBLIC_DIR/images/arrow.integration.react.svg?url";
 
-import {
-  IntegrationContainer,
-  CategoryHeader,
-} from "./StyledPortalIntegration";
+import { isMobile } from "@docspace/ui-kit/utils/device";
+import classNames from "classnames";
+import styles from "./StyledPortalIntegration.module.scss";
 
 const zoomTitle = "Zoom";
 const wordPressTitle = "WordPress";
@@ -65,14 +64,13 @@ const Integration: React.FC<{
   const { t } = useTranslation(["JavascriptSdk"]);
 
   return (
-    <IntegrationContainer
-      className={className}
-      theme={theme}
-      color={currentColorScheme?.main?.accent ?? ""}
+    <div
+      className={classNames(styles.integrationContainer, { [styles.dark]: !theme.isBase }, className)}
+      style={{ "--icon-arrow-color": currentColorScheme?.main?.accent ?? "" } as React.CSSProperties}
     >
-      <CategoryHeader className="integration-header">
+      <div className={classNames(styles.categoryHeader, { [styles.isMobile]: isMobile() }, "integration-header")}>
         {t("IntegrationExamples")}
-      </CategoryHeader>
+      </div>
       <Text lineHeight="20px" color={theme.sdkPresets.secondaryColor}>
         {t("IntegrationDescription", { productName: t("Common:ProductName") })}
       </Text>
@@ -135,7 +133,7 @@ const Integration: React.FC<{
           />
         </div>
       </div>
-    </IntegrationContainer>
+    </div>
   );
 };
 

@@ -3,11 +3,11 @@
   "content": "Renew the license",
   "content_en_sha1_hash": "075111d7857278a9999a7ef8434f55c4e01acb80",
   "created_at": "2026-02-18T14:56:10.169Z",
-  "updated_at": "2026-02-19T13:36:33.174Z",
+  "updated_at": "2026-03-20T09:13:26.232Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key displays the text \"Renew the license\" when the user doesn't have a lifetime license. It's used within the EnterpriseContainer component to prompt users to renew their license, likely as a button or link in the UI.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T09:13:26.232Z"
   },
   "usage": [
     {

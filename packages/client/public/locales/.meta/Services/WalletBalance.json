@@ -1,0 +1,28 @@
+{
+  "key_path": "WalletBalance",
+  "content": "Wallet balance",
+  "content_en_sha1_hash": "f6c5a5f1b0992e37616dc3006177189990143c8a",
+  "created_at": "2026-03-20T09:07:40.829Z",
+  "updated_at": "2026-03-20T10:01:53.747Z",
+  "comment": {
+    "text": "This key displays the label \"Wallet balance\" within a UI element, likely representing the user's current funds available. It appears as a label accompanying an icon in the Portal Settings, specifically within the payments section for AI services. Translators should ensure the translation accurately conveys the meaning of available funds.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T10:01:53.747Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/panels/ai-service/GetStartedBody.tsx",
+      "line_number": 164,
+      "context": "<div className={styles.item}>\n <div className={styles.icon}>\n <PriceBackground />\n </div>\n <Text fontWeight={600} fontSize={\"12px\"}>\n {t(\"WalletBalance\")}\n </Text>\n </div>\n \n <div className={styles.arrow}>\n <RightArrowIcon />",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

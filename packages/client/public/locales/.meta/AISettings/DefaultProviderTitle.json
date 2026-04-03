@@ -3,16 +3,16 @@
   "content": "Default provider",
   "content_en_sha1_hash": "8428a03f18470a4b05509f89c343e45d618714d5",
   "created_at": "2026-02-19T13:36:29.988Z",
-  "updated_at": "2026-02-19T13:36:32.693Z",
+  "updated_at": "2026-03-26T08:26:58.108Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key provides the title \"Default provider\" displayed in the AI settings section of the Portal Settings. It appears as a heading (level 3) to identify the default AI provider configuration, helping users understand its role in managing AI agents. Translators should ensure the translation accurately reflects the meaning of a standard or pre-selected AI provider.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T09:27:30.658Z"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/DefaultProvider.tsx",
-      "line_number": 216,
+      "line_number": 352,
       "context": "level={3}\n fontWeight={700}\n lineHeight=\"22px\"\n fontSize=\"16px\"\n >\n {t(\"AISettings:DefaultProviderTitle\")}\n </Heading>\n <Text className={styles.description} lineHeight=\"20px\">\n {t(\"AISettings:DefaultProviderDescription\", {\n aiProvider: t(\"Common:AIProvider\"),\n aiAgents: t(\"Common:AIAgents\"),",
       "module": "/packages/client"
     }

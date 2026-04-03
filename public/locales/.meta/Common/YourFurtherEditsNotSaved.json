@@ -3,11 +3,11 @@
   "content": "Your further edits may not be saved.",
   "content_en_sha1_hash": "3dbfb8cd57bf68171c29e8fb98b89ce9f2c8182b",
   "created_at": "2026-02-18T14:56:21.766Z",
-  "updated_at": "2026-02-19T13:36:33.044Z",
+  "updated_at": "2026-03-20T09:08:05.567Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This message warns users that subsequent edits might not be saved. It appears in a UI component (likely a bar or notification) related to \"room\" type content, indicating a potential limitation or warning regarding further modifications. Translators should ensure the message conveys a sense of caution regarding data loss.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T09:08:05.567Z"
   },
   "usage": [
     {

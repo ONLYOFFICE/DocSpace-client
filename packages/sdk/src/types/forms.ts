@@ -26,7 +26,17 @@
 
 export enum FormsSection {
   MyForms = "my-forms",
+  Library = "library",
   InProgress = "in-progress",
   CompletedForms = "completed-forms",
   Settings = "settings",
 }
+
+export enum SettingsSubSection {
+  Billing = "billing",
+  AiAgent = "ai-agent",
+  Access = "access",
+  CollectData = "collect-data",
+}
+
+export const DEFAULT_SETTINGS_SUBSECTION = SettingsSubSection.Billing;

@@ -31,13 +31,15 @@ import { useTranslation } from "react-i18next";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link } from "@docspace/ui-kit/components/link";
 
+import classnames from "classnames";
+
 import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";
 import { DeviceType } from "@docspace/shared/enums";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import HideButton from "./sub-components/HideButton";
 import { SPSettingsSection } from "./SPSettings";
 import { ProviderMetadataSection } from "./ProviderMetadata";
-import StyledSsoPage from "./styled-containers/StyledSsoPageContainer";
+import ssoPageStyles from "./styled-containers/StyledSsoPageContainer.module.scss";
 import ToggleSSO from "./sub-components/ToggleSSO";
 import SSOLoader from "./sub-components/ssoLoader";
 
@@ -68,10 +70,14 @@ const SingleSignOn = (props) => {
 		return <SSOLoader />;
 
 	return (
-		<StyledSsoPage
-			hideSettings={serviceProviderSettings}
-			hideMetadata={spMetadata}
-			withoutExternalLink={!singleSignOnUrl}
+		<div
+			className={classnames(ssoPageStyles.styledSsoPage, {
+				[ssoPageStyles.withoutExternalLink]: !singleSignOnUrl,
+			})}
+			style={{
+				"--service-provider-display": serviceProviderSettings ? "block" : "none",
+				"--sp-metadata-display": spMetadata ? "block" : "none",
+			}}
 		>
 			<Text className="intro-text settings_unavailable">{t("SsoIntro")}</Text>
 
@@ -124,7 +130,7 @@ const SingleSignOn = (props) => {
 					</div>
 				</>
 			)}
-		</StyledSsoPage>
+		</div>
 	);
 };
 

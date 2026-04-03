@@ -27,7 +27,6 @@
 import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import styled from "styled-components";
 
 import { TableRow, TableCell } from "@docspace/ui-kit/components/table";
 
@@ -44,67 +43,7 @@ import {
   AddEmailTableRowProps,
   InjectedAddEmailTableRowProps,
 } from "../../../../types";
-
-const EmailInputWrapper = styled.div`
-  display: flex;
-  gap: 8px;
-`;
-
-const IconButtonWrapper = styled.div`
-  width: 32px;
-  height: 32px;
-
-  border: var(--selector-item-input-button-border);
-  border-radius: 3px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  box-sizing: border-box;
-
-  div {
-    height: 16px;
-  }
-
-  &:hover {
-    div {
-      cursor: pointer;
-    }
-    cursor: pointer;
-
-    border-color: var(--selector-item-input-button-border-hover);
-
-    svg path {
-      fill: var(--selector-item-input-button-border-hover);
-    }
-  }
-`;
-
-const StyledTableRow = styled(TableRow)`
-  .table-container_cell {
-    padding-inline-end: 30px;
-    text-overflow: ellipsis;
-  }
-
-  .user-email {
-    display: flex;
-    gap: 8px;
-    overflow: hidden;
-    font-size: 12px;
-    font-weight: 600;
-    color: ${(props) =>
-      props.theme.client.settings.migration.tableRowTextColor};
-
-    path {
-      fill: ${(props) => props.theme.client.settings.migration.tableHeaderText};
-    }
-  }
-
-  .import-email-input {
-    width: 357.67px;
-  }
-`;
+import styles from "../../../../StyledDataImport.module.scss";
 
 const UsersTableRow = (props: AddEmailTableRowProps) => {
   const {
@@ -213,7 +152,7 @@ const UsersTableRow = (props: AddEmailTableRowProps) => {
   if (!ready) return;
 
   return (
-    <StyledTableRow onClick={handleAccountToggle}>
+    <TableRow className={styles.styledTableRowEmail} onClick={handleAccountToggle}>
       <TableCell className="checkboxWrapper">
         <Checkbox
           onChange={handleAccountToggle}
@@ -226,7 +165,7 @@ const UsersTableRow = (props: AddEmailTableRowProps) => {
 
       <TableCell>
         {isEmailOpen ? (
-          <EmailInputWrapper ref={emailInputRef}>
+          <div className={styles.emailInputWrapper} ref={emailInputRef}>
             <EmailInput
               placeholder={t("SMTPSettings:EnterEmail")}
               className="import-email-input"
@@ -239,24 +178,24 @@ const UsersTableRow = (props: AddEmailTableRowProps) => {
               isAutoFocussed
             />
 
-            <IconButtonWrapper onClick={handleSaveClick}>
+            <div className={styles.iconButtonWrapper} onClick={handleSaveClick}>
               <IconButton
                 className="import-check-container-button"
                 size={16}
                 iconName={CheckSvgUrl}
                 dataTestId="import_check_button"
               />
-            </IconButtonWrapper>
+            </div>
 
-            <IconButtonWrapper onClick={clearEmail}>
+            <div className={styles.iconButtonWrapper} onClick={clearEmail}>
               <IconButton
                 className="import-clear-container-button"
                 size={16}
                 iconName={CrossSvgUrl}
                 dataTestId="import_clear_button"
               />
-            </IconButtonWrapper>
-          </EmailInputWrapper>
+            </div>
+          </div>
         ) : (
           <span onClick={openEmail} className="user-email" ref={emailTextRef}>
             <EditSvg />
@@ -266,7 +205,7 @@ const UsersTableRow = (props: AddEmailTableRowProps) => {
           </span>
         )}
       </TableCell>
-    </StyledTableRow>
+    </TableRow>
   );
 };
 

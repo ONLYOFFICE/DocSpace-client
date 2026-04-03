@@ -1,0 +1,334 @@
+// (c) Copyright Ascensio System SIA 2009-2026
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+@use "@docspace/ui-kit/styles/variables/colors" as *;
+@use "@docspace/ui-kit/styles/mixins";
+
+// ─── BenefitsContainer ───────────────────────────────────────────────────────
+
+.benefitsBody {
+  border-radius: 12px;
+  border: var(--payment-main-border);
+  max-width: 320px;
+  padding: 24px;
+  box-sizing: border-box;
+  background: var(--payment-benefits-background);
+
+  p {
+    margin-bottom: 24px;
+  }
+
+  .paymentBenefitsText {
+    margin-bottom: 20px;
+  }
+
+  .paymentBenefits {
+    margin-bottom: 14px;
+    align-items: center;
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    grid-gap: 10px;
+
+    p {
+      margin-bottom: 0;
+    }
+
+    .paymentBenefitsFeature {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .iconsContainer {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
+
+// Dark theme: override SVG icon colors (replaces !theme.isBase conditional)
+:global(.dark) .iconsContainer {
+  svg {
+    path[stroke],
+    g[stroke],
+    circle[stroke],
+    rect[stroke] {
+      stroke: #{$dark-gray-dark} !important;
+    }
+
+    path[fill]:not([fill="none"]),
+    g[fill]:not([fill="none"]),
+    circle[fill]:not([fill="none"]),
+    rect[fill]:not([fill="none"]) {
+      fill: #{$dark-gray-dark} !important;
+    }
+
+    path:not([stroke]):not([fill]),
+    g:not([stroke]):not([fill]) path:not([stroke]):not([fill]) {
+      fill: #{$dark-gray-dark} !important;
+    }
+
+    mask path {
+      fill: #{$dark-gray-dark} !important;
+    }
+  }
+}
+
+// ─── ContactContainer ─────────────────────────────────────────────────────────
+
+.contactContainer {
+  display: flex;
+  width: 100%;
+
+  a {
+    margin-inline-start: 4px;
+  }
+}
+
+// ─── CurrentTariffContainer ───────────────────────────────────────────────────
+
+.currentTariffContainer {
+  display: flex;
+  min-height: 40px;
+  background: var(--payment-background-color);
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+  padding: 12px 16px;
+  box-sizing: border-box;
+  padding-bottom: 0;
+  border-radius: 6px;
+
+  @include mixins.mobile {
+    flex-direction: column;
+    margin-bottom: 27px;
+  }
+
+  div {
+    padding-bottom: 8px;
+    margin-inline-end: 24px;
+  }
+
+  p {
+    margin-bottom: 0;
+    color: var(--payment-tariff-text);
+
+    .currentTariffCount {
+      color: var(--payment-tariff-text);
+      margin-inline-start: 4px;
+    }
+  }
+}
+
+// ─── PaymentContainer ─────────────────────────────────────────────────────────
+
+.paymentBody {
+  max-width: 660px;
+
+  :global(.payment-info_suggestion),
+  :global(.payment-info_grace-period) {
+    margin-bottom: 12px;
+  }
+
+  .paymentInfoWrapper {
+    display: flex;
+    margin-top: 11px;
+
+    div {
+      margin: auto 0;
+    }
+
+    .paymentInfoManagersPrice {
+      margin-inline-end: 6px;
+    }
+  }
+}
+
+.paymentInfo {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(100px, 320px));
+  grid-gap: 20px;
+  margin-bottom: 20px;
+
+  @include mixins.mobile {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr max-content;
+
+    :global(.price-calculation-container),
+    :global(.benefits-container) {
+      max-width: 600px;
+    }
+
+    :global(.select-users-count-container) {
+      max-width: 520px;
+    }
+  }
+
+  &.isChangeView {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr max-content;
+
+    :global(.price-calculation-container),
+    :global(.benefits-container) {
+      -webkit-transition: all 0.8s ease;
+      transition: all 0.4s ease;
+      max-width: 600px;
+    }
+
+    :global(.select-users-count-container) {
+      -webkit-transition: all 0.8s ease;
+      transition: all 0.4s ease;
+      max-width: 520px;
+    }
+
+    @include mixins.desktop {
+      grid-template-columns: repeat(2, minmax(100px, 320px));
+    }
+  }
+}
+
+// ─── PriceCalculation ─────────────────────────────────────────────────────────
+
+.priceBody {
+  border-radius: 12px;
+  border: var(--payment-price-border);
+  background: var(--payment-price-background);
+  max-width: 320px;
+  padding: 23px;
+  box-sizing: border-box;
+
+  .paymentMainTitle {
+    margin-bottom: 24px;
+
+    &.isDisabled {
+      color: var(--payment-price-disable);
+    }
+  }
+
+  .paymentPriceUser {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--payment-price-background-text);
+    margin-top: 24px;
+    min-height: 38px;
+    border-radius: 6px;
+
+    p {
+      margin-bottom: 5px;
+      margin-top: 5px;
+      padding-inline: 16px;
+    }
+  }
+}
+
+.priceText {
+  color: var(--payment-tariff-text);
+}
+
+.priceTextDisabled {
+  color: var(--payment-price-disable-price);
+}
+
+// ─── Shared button wrapper (ButtonContainer, DowngradePlan, RequestButton, UpdatePlan) ──
+
+.buttonBody {
+  button {
+    width: 100%;
+  }
+}
+
+// ─── UpdatePlanButtonContainer modal ─────────────────────────────────────────
+
+.modalBody {
+  .textWarning {
+    margin-top: 16px;
+  }
+}
+
+// ─── CurrentUsersCount ────────────────────────────────────────────────────────
+
+.currentUsersContainer {
+  height: fit-content;
+
+  .currentAdminsNumber {
+    &.isDisabled {
+      color: var(--payment-price-disable);
+    }
+  }
+}
+
+// ─── SelectTotalSizeContainer ─────────────────────────────────────────────────
+
+.selectTotalSizeBody {
+  .selectTotalSizeTitle {
+    margin-bottom: 8px;
+    margin-inline: auto;
+    color: var(--payment-price-disable);
+  }
+}
+
+// ─── TotalTariffContainer ─────────────────────────────────────────────────────
+
+.totalTariffBody {
+  max-width: 272px;
+  margin: 0 auto;
+  word-break: break-word;
+  text-align: center;
+
+  @include mixins.mobile {
+    max-width: 520px;
+  }
+
+  .paymentPriceTotalPrice {
+    display: flex;
+    justify-content: center;
+    min-height: 65px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+
+    .lagerFontSize {
+      font-size: 48px;
+    }
+
+    &.isDisabled {
+      color: var(--payment-price-disable);
+    }
+
+    .totalTariffDescription {
+      margin: auto;
+    }
+
+    p {
+      margin-bottom: 0;
+    }
+  }
+
+  button {
+    width: 100%;
+  }
+}

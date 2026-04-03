@@ -6,12 +6,12 @@
   "APIKey": "API Key",
   "ConnectProductToYourDataAndTools": "Connect {{productName}} to your data and tools.",
   "CustomMCPListTitle": "Custom",
-  "DefaultProviderTitle": "Default provider",
   "DefaultProviderDescription": "Select the default {{aiProvider}} and model for all features across {{productName}} ({{aiAgents}}, document editors, etc.)",
   "DefaultProviderSetSuccess": "Default provider successfully set",
+  "DefaultProviderTitle": "Default provider",
+  "DeleteDefaultProviderDescription": "<1>This {{aiProvider}} is currently set as the default.</1>\n Deleting it will revoke access for all users, and its settings will be permanently erased.\n Another provider will be set as default automatically and can be changed later in settings.",
   "DeleteImage": "Delete image",
   "DeleteProvider": "Delete {{aiProvider}}",
-  "DeleteDefaultProviderDescription": "<1>This {{aiProvider}} is currently set as the default.</1>\n Deleting it will revoke access for all users, and its settings will be permanently erased.\n Another provider will be set as default automatically and can be changed later in settings.",
   "DeleteProviderDescription": "Deleting this provider will revoke access for all users, and its settings will be permanently erased.\n To use the provider again, you will need to set it up from scratch.",
   "DeleteServer": "Delete server",
   "DeleteServerDescription": "Deleting this server will revoke access for all users, and its settings will be permanently erased.\n To use the server again, you will need to set it up from scratch.",
@@ -35,6 +35,7 @@
   "MCPSettingsDescription": "This section lets you manage {{mcpServers}} for {{aiChats}} within rooms. You can enable system {{mcpServers}} or add custom ones to meet your company's needs. Once enabled, these servers will be accessible to other users for their tasks.",
   "MCPUnavailableError": "The {{mcpServer}} is unavailable",
   "Model": "Model",
+  "PortalAiDisabledTooltip": "To use {{productName}} AI provider, make sure to connect an AI service first.",
   "Provider": "Provider",
   "ProviderAddedSuccess": "{{aiProvider}} added successfully",
   "ProviderKey": "Key",
@@ -61,6 +62,5 @@
   "WebSearchDisabledSuccess": "{{webSearch}} successfully disabled",
   "WebSearchEnabledSuccess": "{{webSearch}} successfully enabled",
   "WebSearchKeyDescription": "Enter the API key obtained from your {{webSearch}} provider",
-  "WebSearchKeyHiddenDescription": "The API key is displayed only once upon saving and is then hidden for security purposes.",
-  "PortalAiDisabledTooltip": "To use {{productName}} AI provider, make sure to connect an AI service first."
+  "WebSearchKeyHiddenDescription": "The API key is displayed only once upon saving and is then hidden for security purposes."
 }

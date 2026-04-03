@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { useForm, Controller } from "react-hook-form";
 import React, { useCallback, useMemo, useState } from "react";
 
 import CheckIconURL from "PUBLIC_DIR/images/check.edit.react.svg?url";
@@ -45,11 +46,7 @@ import {
 import { useIsMobile } from "@docspace/ui-kit/hooks/use-is-mobile";
 
 import { useTagManagement } from "./TagManagement.provider";
-import {
-  useCreateTagMutation,
-  useUpdateTag,
-  useRemoveTagMutation,
-} from "./hooks/useTagsQuery";
+import { useUpdateTag } from "./hooks/useTagsQuery";
 import styles from "./TagManagement.module.scss";
 import {
   ROW_HEIGHT,
@@ -58,8 +55,12 @@ import {
   MARGIN_BOTTOM,
   EDIT_CANCELLED,
   DELETE_CANCELLED,
+  EDIT_TAG_FORM_NAME,
 } from "./TagManagement.constants";
-import type { TagManagementContentProps } from "./TagManagement.types";
+import type {
+  FormValues,
+  TagManagementContentProps,
+} from "./TagManagement.types";
 
 export const TagManagementContent: React.FC<TagManagementContentProps> = ({
   onSelectTag,
@@ -67,25 +68,37 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
   onDeleteTag,
   onEditTag,
 }) => {
+  const { control, handleSubmit, setValue, resetField } = useForm({
+    defaultValues: {
+      [EDIT_TAG_FORM_NAME]: "",
+    },
+    shouldUnregister: true,
+  });
+
   const isMobile = useIsMobile();
-  const { filteredTags, tags, setTags, canEdit, canRemove, canBindTag } =
-    useTagManagement();
-  const removeTag = useRemoveTagMutation();
-  const addTagToRoom = useCreateTagMutation(roomId);
+  const {
+    filteredTags,
+    tags,
+    setTags,
+    access: { canEdit, canRemove, canBindTag },
+  } = useTagManagement();
+
   const updateTag = useUpdateTag(roomId);
 
-  const [editingIndex, setEditingIndex] = useState<number | null>(null);
-  const [editValue, setEditValue] = useState("");
+  const [editingLabel, setEditingLabel] = useState<string | null>(null);
 
   const toggleChecked = useCallback(
     (label: string) => {
+      const originalTags = [...tags];
       const updatedTags = [...tags];
       const tagIndex = updatedTags.findIndex((tag) => tag.label === label);
 
       if (tagIndex === -1) return;
-      const checked = !updatedTags[tagIndex].checked;
 
-      updatedTags[tagIndex].checked = checked;
+      updatedTags[tagIndex] = {
+        ...updatedTags[tagIndex],
+        checked: !updatedTags[tagIndex].checked,
+      };
 
       updateTag.mutate(updatedTags[tagIndex], {
         onSuccess: () => {
@@ -94,50 +107,60 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
         onError: (error) => {
           toastr.error(error);
           console.error("Failed to update room tags:", error);
+          setTags(originalTags);
         },
       });
     },
-    [tags, removeTag, addTagToRoom],
+    [tags, updateTag],
   );
 
   const handleEdit = useCallback(
-    (index: number) => {
-      setEditingIndex(index);
-      setEditValue(tags[index].label);
+    (label: string) => {
+      setEditingLabel(label);
+
+      setValue(EDIT_TAG_FORM_NAME, label);
     },
-    [tags],
+    [tags, setValue],
   );
 
   const cancelEdit = useCallback(() => {
-    setEditingIndex(null);
-    setEditValue("");
-  }, []);
+    setEditingLabel(null);
+    resetField(EDIT_TAG_FORM_NAME);
+  }, [resetField]);
 
-  const confirmEdit = useCallback(async () => {
-    if (editingIndex === null) return;
+  const confirmEdit = useCallback(
+    async (submitValue: FormValues) => {
+      if (editingLabel === null) return;
 
-    const newLabel = editValue.trim();
-    const oldLabel = tags[editingIndex].label;
+      const newLabel = submitValue[EDIT_TAG_FORM_NAME].trim();
+      const oldLabel = editingLabel;
 
-    if (newLabel === oldLabel) {
-      return cancelEdit();
-    }
+      if (newLabel === oldLabel) {
+        return cancelEdit();
+      }
 
-    try {
-      await onEditTag?.(oldLabel, newLabel);
-      setTags((prev) =>
-        prev.map((tag) =>
-          tag.label === oldLabel ? { ...tag, label: newLabel } : tag,
-        ),
-      );
-      cancelEdit();
-    } catch (error) {
-      if (error === EDIT_CANCELLED) return;
+      if (newLabel.length === 0) {
+        console.error("Tag name cannot be empty");
+        return;
+      }
 
-      toastr.error(error as Error);
-      console.error("Failed to update tag name:", error);
-    }
-  }, [editingIndex, editValue, tags, cancelEdit, onEditTag]);
+      try {
+        await onEditTag?.(oldLabel, newLabel);
+        setTags((prev) =>
+          prev.map((tag) =>
+            tag.label === oldLabel ? { ...tag, label: newLabel } : tag,
+          ),
+        );
+        cancelEdit();
+      } catch (error) {
+        if (error === EDIT_CANCELLED) return;
+
+        toastr.error(error as Error);
+        console.error("Failed to update tag name:", error);
+      }
+    },
+    [editingLabel, tags, cancelEdit, onEditTag],
+  );
 
   const deleteTag = useCallback(
     async (tag: string) => {
@@ -153,14 +176,14 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
         console.error("Failed to remove room tag:", error);
       }
     },
-    [tags, removeTag, onDeleteTag],
+    [tags, onDeleteTag],
   );
 
   const editTagHandleKey = useCallback(
     (event: React.KeyboardEvent<HTMLInputElement>) => {
       switch (event.key) {
         case "Enter":
-          confirmEdit();
+          handleSubmit(confirmEdit)(event);
           break;
         case "Escape":
           cancelEdit();
@@ -170,13 +193,6 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
       }
     },
     [confirmEdit, cancelEdit],
-  );
-
-  const handleEditValueChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setEditValue(e.target.value);
-    },
-    [setEditValue],
   );
 
   const style = useMemo(() => {
@@ -193,42 +209,55 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
   return (
     <div className={styles.wrapperList} style={style}>
       <Scrollbar fixedSize className={styles.scrollbar}>
-        {filteredTags.map((tag, index) => {
+        {filteredTags.map((tag) => {
           return (
             <div key={tag.label} className={styles.row}>
               <Checkbox
-                className={styles.checkbox}
                 isChecked={tag.checked}
-                onChange={() => toggleChecked(tag.label)}
                 isDisabled={!canBindTag}
+                className={styles.checkbox}
+                onChange={() => toggleChecked(tag.label)}
                 dataTestId={`tag_checkbox_${tag.label}`}
               />
-              {editingIndex === index ? (
+              {editingLabel === tag.label ? (
                 <>
-                  <TextInput
-                    scale
-                    autoFocus
-                    value={editValue}
-                    size={InputSize.base}
-                    type={InputType.text}
-                    onKeyDown={editTagHandleKey}
-                    className={styles.editInput}
-                    onChange={handleEditValueChange}
-                    testId="edit_tag_input"
+                  <Controller
+                    name={EDIT_TAG_FORM_NAME}
+                    control={control}
+                    rules={{ required: true }}
+                    render={({
+                      field: { value, onChange, ref, disabled },
+                      fieldState,
+                    }) => (
+                      <TextInput
+                        scale
+                        autoFocus
+                        value={value}
+                        forwardedRef={ref}
+                        onChange={onChange}
+                        size={InputSize.base}
+                        type={InputType.text}
+                        isDisabled={disabled}
+                        onKeyDown={editTagHandleKey}
+                        className={styles.editInput}
+                        hasError={!!fieldState.error}
+                        testId="edit_tag_input"
+                      />
+                    )}
                   />
                   <div className={styles.checkCross}>
                     <IconButton
                       size={ICON_SIZE}
-                      className={styles.checkIcon}
                       iconName={CheckIconURL}
-                      onClick={confirmEdit}
+                      className={styles.checkIcon}
+                      onClick={handleSubmit(confirmEdit)}
                       dataTestId="confirm_edit_button"
                     />
                     <IconButton
                       size={ICON_SIZE}
+                      onClick={cancelEdit}
                       className={styles.crossIcon}
                       iconName={CrossIconReactSvgUrl}
-                      onClick={cancelEdit}
                       dataTestId="cancel_edit_button"
                     />
                   </div>
@@ -236,10 +265,10 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
               ) : (
                 <>
                   <Tag
-                    className={styles.tag}
                     label={tag.label}
                     tag={tag.label}
                     onClick={onSelectTag}
+                    className={styles.tag}
                     dataTestId={`tag_item_${tag.label}`}
                   />
                   {canEdit ? (
@@ -247,7 +276,7 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
                       size={ICON_SIZE}
                       className={styles.editIcon}
                       iconName={AccessEditReactSvgUrl}
-                      onClick={() => handleEdit(index)}
+                      onClick={() => handleEdit(tag.label)}
                       dataTestId={`edit_tag_button_${tag.label}`}
                     />
                   ) : null}

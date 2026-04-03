@@ -103,7 +103,10 @@ class FormsAiAgentStore {
   private _folderVersion = 0;
   private _roomId: string | number = "";
   private _userKey: string | undefined = undefined;
-  private _pendingCreations = new Set<number>();
+  private _pendingCreations = new Map<
+    number,
+    Promise<FolderAgentEntry | null>
+  >();
 
   constructor() {
     makeAutoObservable(this, {
@@ -112,6 +115,8 @@ class FormsAiAgentStore {
       _roomId: false,
       _userKey: false,
       _pendingCreations: false,
+      _savePanelWidthTimer: false,
+      _createAgentForFolderImpl: false,
     } as Record<string, false>);
   }
 
@@ -213,10 +218,16 @@ class FormsAiAgentStore {
     savePanelPosition(position, this._userKey);
   };
 
+  private _savePanelWidthTimer: ReturnType<typeof setTimeout> | null = null;
+
   setPanelWidth = (width: number) => {
     this.panelWidth = width;
     if (this._roomId) {
-      savePanelWidth(this._roomId, width, this._userKey);
+      if (this._savePanelWidthTimer) clearTimeout(this._savePanelWidthTimer);
+      this._savePanelWidthTimer = setTimeout(() => {
+        savePanelWidth(this._roomId, width, this._userKey);
+        this._savePanelWidthTimer = null;
+      }, 300);
     }
   };
 
@@ -278,10 +289,15 @@ class FormsAiAgentStore {
   private initAskFromDBAgent = async () => {
     const saved = loadAskFromDBAgentId(this._roomId, this._userKey);
     if (saved) {
-      runInAction(() => {
-        this.askFromDBAgentId = saved;
-      });
-      return;
+      const valid = await this.validateAgent(saved);
+      if (valid) {
+        runInAction(() => {
+          this.askFromDBAgentId = saved;
+        });
+        this.syncAgentMembers(saved).catch(() => {});
+        return;
+      }
+      // Saved agent is stale — fall through to create a new one
     }
 
     try {
@@ -300,6 +316,7 @@ class FormsAiAgentStore {
       runInAction(() => {
         this.askFromDBAgentId = agent.id;
       });
+      await this.syncAgentMembers(agent.id);
     } catch {
       // best-effort
     }
@@ -332,8 +349,16 @@ class FormsAiAgentStore {
       this.pendingAttachmentFile = null;
       const entry = this.folderAgentsMap[folderId];
       if (entry?.agentId) {
-        this.isPanelVisible = true;
-        await this.fetchAgentChatSettings(entry.agentId, version);
+        const valid = await this.validateAgent(entry.agentId);
+        if (version !== this._folderVersion) return;
+        if (valid) {
+          this.isPanelVisible = true;
+          await this.fetchAgentChatSettings(entry.agentId, version);
+        } else {
+          const { [folderId]: _, ...rest } = this.folderAgentsMap;
+          this.folderAgentsMap = rest;
+          this.persistMap();
+        }
       }
     } else {
       this.closePanel();
@@ -346,71 +371,82 @@ class FormsAiAgentStore {
     }
   };
 
-  createAgentForFolder = async (
+  createAgentForFolder = (
     folder: { id: number; title: string },
     files: { id: number; title: string }[],
   ): Promise<FolderAgentEntry | null> => {
-    if (this.folderAgentsMap[folder.id]) return this.folderAgentsMap[folder.id];
-    if (this._pendingCreations.has(folder.id)) return null;
-    this._pendingCreations.add(folder.id);
+    if (this.folderAgentsMap[folder.id]) return Promise.resolve(this.folderAgentsMap[folder.id]);
 
-    try {
-      let agent;
-      try {
-        agent = await createAIAgent({
-          title: folder.title,
-          attachDefaultTools: true,
-          ...(this.defaultProvider && {
-            chatSettings: {
-              providerId: this.defaultProvider.providerId,
-              modelId: this.defaultProvider.defaultModel,
-            },
-          }),
-        });
-      } catch {
-        return null;
-      }
+    const pending = this._pendingCreations.get(folder.id);
+    if (pending) return pending;
 
-      const kbFolderId = await getKnowledgeFolderId(agent.id).catch(() => null);
+    const promise = this._createAgentForFolderImpl(folder, files);
+    this._pendingCreations.set(folder.id, promise);
 
-      const entry: FolderAgentEntry = {
-        agentId: agent.id,
-        knowledgeFolderId: kbFolderId,
-      };
-
-      runInAction(() => {
-        this.folderAgentsMap = {
-          ...this.folderAgentsMap,
-          [folder.id]: entry,
-        };
-        this.persistMap();
-      });
-
-      // Sync room members → agent members + copy files to KB in parallel
-      const tasks: Promise<unknown>[] = [this.syncAgentMembers(agent.id)];
-
-      if (kbFolderId && files.length > 0) {
-        tasks.push(
-          copyFilesToAgentRoom(
-            kbFolderId,
-            files.map((f) => f.id),
-          )
-            .then(() => getKnowledgeFiles(kbFolderId))
-            .then((kbFiles) => {
-              if (kbFiles.length > 0) {
-                return vectorizeFiles(kbFiles.map((f) => f.id));
-              }
-            })
-            .catch(() => {}),
-        );
-      }
-
-      await Promise.allSettled(tasks);
-
-      return entry;
-    } finally {
+    promise.finally(() => {
       this._pendingCreations.delete(folder.id);
+    });
+
+    return promise;
+  };
+
+  private _createAgentForFolderImpl = async (
+    folder: { id: number; title: string },
+    files: { id: number; title: string }[],
+  ): Promise<FolderAgentEntry | null> => {
+    let agent;
+    try {
+      agent = await createAIAgent({
+        title: folder.title,
+        attachDefaultTools: true,
+        ...(this.defaultProvider && {
+          chatSettings: {
+            providerId: this.defaultProvider.providerId,
+            modelId: this.defaultProvider.defaultModel,
+          },
+        }),
+      });
+    } catch {
+      return null;
     }
+
+    const kbFolderId = await getKnowledgeFolderId(agent.id).catch(() => null);
+
+    const entry: FolderAgentEntry = {
+      agentId: agent.id,
+      knowledgeFolderId: kbFolderId,
+    };
+
+    runInAction(() => {
+      this.folderAgentsMap = {
+        ...this.folderAgentsMap,
+        [folder.id]: entry,
+      };
+      this.persistMap();
+    });
+
+    // Sync room members → agent members + copy files to KB in parallel
+    const tasks: Promise<unknown>[] = [this.syncAgentMembers(agent.id)];
+
+    if (kbFolderId && files.length > 0) {
+      tasks.push(
+        copyFilesToAgentRoom(
+          kbFolderId,
+          files.map((f) => f.id),
+        )
+          .then(() => getKnowledgeFiles(kbFolderId))
+          .then((kbFiles) => {
+            if (kbFiles.length > 0) {
+              return vectorizeFiles(kbFiles.map((f) => f.id));
+            }
+          })
+          .catch(() => {}),
+      );
+    }
+
+    await Promise.allSettled(tasks);
+
+    return entry;
   };
 
   private validateAgent = async (agentId: number): Promise<boolean> => {
@@ -555,53 +591,51 @@ class FormsAiAgentStore {
   private fetchDoneFoldersWithFiles = async () => {
     if (!this._roomId) return [];
 
-    const roomFilter = FilesFilter.getDefault();
-    roomFilter.page = 0;
-    roomFilter.pageCount = 100;
+    let doneFolderId = this.doneFolderId;
 
-    const roomRes = await api.files.getFolder(this._roomId, roomFilter);
-    const doneFolder = roomRes.folders.find(
-      (f: TFolder) => f.type === FolderType.Done,
-    );
-    if (!doneFolder) return [];
+    if (!doneFolderId) {
+      const roomFilter = FilesFilter.getDefault();
+      roomFilter.page = 0;
+      roomFilter.pageCount = 100;
 
-    runInAction(() => {
-      this.doneFolderId = doneFolder.id;
-    });
+      const roomRes = await api.files.getFolder(this._roomId, roomFilter);
+      const doneFolder = roomRes.folders.find(
+        (f: TFolder) => f.type === FolderType.Done,
+      );
+      if (!doneFolder) return [];
 
-    const doneFilter = FilesFilter.getDefault();
-    doneFilter.page = 0;
-    doneFilter.pageCount = 100;
-
-    const doneRes = await api.files.getFolder(doneFolder.id, doneFilter);
-    const subFolders: TFolder[] = doneRes.folders;
-
-    const results: {
-      folder: TFolder;
-      files: { id: number; title: string }[];
-    }[] = [];
-
-    for (const folder of subFolders) {
-      const fileFilter = FilesFilter.getDefault();
-      fileFilter.page = 0;
-      fileFilter.pageCount = 100;
-      fileFilter.filterType = FilterType.PDFForm;
-
-      try {
-        const folderRes = await api.files.getFolder(folder.id, fileFilter);
-        results.push({
-          folder,
-          files: folderRes.files.map((f: { id: number; title: string }) => ({
-            id: f.id,
-            title: f.title,
-          })),
-        });
-      } catch {
-        results.push({ folder, files: [] });
-      }
+      doneFolderId = doneFolder.id;
+      runInAction(() => {
+        this.doneFolderId = doneFolderId;
+      });
     }
 
-    return results;
+    const folderFilter = FilesFilter.getDefault();
+    folderFilter.page = 0;
+    folderFilter.pageCount = 100;
+
+    const fileFilter = FilesFilter.getDefault();
+    fileFilter.page = 0;
+    fileFilter.pageCount = 100;
+    fileFilter.filterType = FilterType.PDFForm;
+    fileFilter.withSubfolders = true;
+
+    const [folderRes, fileRes] = await Promise.all([
+      api.files.getFolder(doneFolderId, folderFilter),
+      api.files.getFolder(doneFolderId, fileFilter),
+    ]);
+
+    const filesByFolder = new Map<number, { id: number; title: string }[]>();
+    for (const f of fileRes.files) {
+      const list = filesByFolder.get(f.folderId) ?? [];
+      list.push({ id: f.id, title: f.title });
+      filesByFolder.set(f.folderId, list);
+    }
+
+    return folderRes.folders.map((folder) => ({
+      folder,
+      files: filesByFolder.get(folder.id as number) ?? [],
+    }));
   };
 
   private static MEMBER_ACCESS = new Set([
@@ -758,9 +792,8 @@ class FormsAiAgentStore {
   };
 }
 
-export const FormsAiAgentStoreContext = React.createContext<FormsAiAgentStore>(
-  new FormsAiAgentStore(),
-);
+export const FormsAiAgentStoreContext =
+  React.createContext<FormsAiAgentStore | null>(null);
 
 export const FormsAiAgentStoreContextProvider = ({
   children,
@@ -776,5 +809,10 @@ export const FormsAiAgentStoreContextProvider = ({
 };
 
 export const useFormsAiAgentStore = () => {
-  return React.useContext(FormsAiAgentStoreContext);
+  const store = React.useContext(FormsAiAgentStoreContext);
+  if (!store)
+    throw new Error(
+      "useFormsAiAgentStore must be used within FormsAiAgentStoreContextProvider",
+    );
+  return store;
 };

@@ -50,6 +50,7 @@ import {
   favoritesHandler,
   aiRoomsChatsStreamHandler,
   aiMessagesExportHandler,
+  aiRoomsChatsConfigPutHandler,
 } from "@docspace/shared/__mocks__/handlers";
 import { SearchArea } from "@docspace/shared/enums";
 
@@ -399,6 +400,40 @@ test.describe("AI chat", () => {
         "desktop",
         "ai-chat",
         "ai-chat-ai-message-web-search-error.png",
+      ]);
+    });
+
+    test("should render ai message with think block", async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      mockRequest.use(
+        aiRoomsChatsConfigHandler(TEST_PORT),
+        aiRoomsServersHandler(TEST_PORT),
+        aiRoomsChatsHandler(TEST_PORT, "empty"),
+        agentFolderChatHandler(TEST_PORT),
+        aiChatMessagesHandler(TEST_PORT, "thinkBlock"),
+        aiChatHandler(TEST_PORT),
+      );
+      await page.goto(`${baseUrl}/ai-agents/2/chat?folder=2&chat=test-chat-id`);
+
+      const containerLoader = page.getByTestId("chat-container-loading");
+
+      await expect(containerLoader).toBeVisible();
+      await containerLoader.waitFor({ state: "hidden" });
+
+      const thinkTitle = page.getByTestId("think-title");
+      await expect(thinkTitle).toBeVisible();
+      await expect(page.getByTestId("think-finished-icon")).toBeVisible();
+      await expect(page.getByTestId("think-content")).not.toBeVisible();
+
+      await thinkTitle.click();
+
+      await expectScreenshot(page, [
+        "desktop",
+        "ai-chat",
+        "ai-chat-ai-message-think-block.png",
       ]);
     });
 
@@ -954,7 +989,7 @@ test.describe("AI chat", () => {
       baseUrl,
     }) => {
       mockRequest.use(
-        aiRoomsChatsConfigHandler(TEST_PORT),
+        aiRoomsChatsConfigHandler(TEST_PORT, "webSearchEnabled"),
         aiRoomsServersHandler(TEST_PORT),
         aiRoomsChatsHandler(TEST_PORT),
         agentFolderChatHandler(TEST_PORT),
@@ -1304,6 +1339,98 @@ test.describe("AI chat", () => {
         "desktop",
         "ai-chat",
         "ai-chat-reload-page-save-state.png",
+      ]);
+    });
+
+    test("should toggle extended thinking when thinking is supported", async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      mockRequest.use(
+        aiRoomsChatsConfigHandler(TEST_PORT, "thinkingEnabled"),
+        aiRoomsServersHandler(TEST_PORT),
+        aiRoomsChatsHandler(TEST_PORT),
+        agentFolderChatHandler(TEST_PORT, "withThinking"),
+        aiChatHandler(TEST_PORT),
+        aiRoomsChatsConfigPutHandler(TEST_PORT),
+      );
+
+      await page.goto(`${baseUrl}/ai-agents/2/chat?folder=2`);
+
+      const containerLoader = page.getByTestId("chat-container-loading");
+
+      await expect(containerLoader).toBeVisible();
+      await containerLoader.waitFor({ state: "hidden" });
+
+      await page.getByTestId("chat-input-tools-button").click();
+
+      const thinkingItem = page.getByTestId("extended-thinking");
+      await expect(thinkingItem).toBeVisible();
+
+      const toggleButton = thinkingItem.getByTestId("toggle-button");
+      await expect(toggleButton).toHaveAttribute("aria-checked", "true");
+
+      const helpButton = thinkingItem.getByTestId(
+        "extended-thinking-help-button",
+      );
+      await expect(helpButton).toBeVisible();
+
+      await helpButton.click();
+      await expectScreenshot(page, [
+        "desktop",
+        "ai-chat",
+        "ai-chat-extended-thinking-help-tooltip-open.png",
+      ]);
+
+      await helpButton.click();
+      await expect(toggleButton).toHaveAttribute("aria-checked", "true");
+
+      await thinkingItem.click();
+      await expect(toggleButton).toHaveAttribute("aria-checked", "false");
+
+      await thinkingItem.click();
+      await expect(toggleButton).toHaveAttribute("aria-checked", "true");
+    });
+
+    test("should render disabled extended thinking with tooltip when thinking is not supported", async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      mockRequest.use(
+        aiRoomsChatsConfigHandler(TEST_PORT),
+        aiRoomsServersHandler(TEST_PORT),
+        aiRoomsChatsHandler(TEST_PORT),
+        agentFolderChatHandler(TEST_PORT),
+        aiChatHandler(TEST_PORT),
+      );
+
+      await page.goto(`${baseUrl}/ai-agents/2/chat?folder=2`);
+
+      const containerLoader = page.getByTestId("chat-container-loading");
+
+      await expect(containerLoader).toBeVisible();
+      await containerLoader.waitFor({ state: "hidden" });
+
+      await page.getByTestId("chat-input-tools-button").click();
+
+      const thinkingItem = page.getByTestId("extended-thinking");
+      await expect(thinkingItem).toBeVisible();
+
+      const toggleButton = thinkingItem.getByTestId("toggle-button");
+      await expect(toggleButton).toHaveAttribute("aria-checked", "false");
+
+      await expect(
+        thinkingItem.getByTestId("extended-thinking-help-button"),
+      ).not.toBeVisible();
+
+      await toggleButton.hover();
+
+      await expectScreenshot(page, [
+        "desktop",
+        "ai-chat",
+        "ai-chat-disabled-extended-thinking-tooltip.png",
       ]);
     });
   });

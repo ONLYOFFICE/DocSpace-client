@@ -28,10 +28,11 @@
 
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
+import { usePathname } from "next/navigation";
 
 import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
 import FormFillRectSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
-import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
+import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
 import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 import BackupSvgUrl from "PUBLIC_DIR/images/icons/16/backup.svg?url";
@@ -41,9 +42,11 @@ import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 
 import { FormsSection } from "@/types/forms";
 
-import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
 import { useFormsAiAgentStore } from "../_store/FormsAiAgentStore";
+import { useFormsSettingsStore } from "../_store/FormsSettingsStore";
+import { useFormsDbSettingsStore } from "../_store/FormsDbSettingsStore";
 import useFormsActions from "./useFormsActions";
+import { sectionFromPathname } from "../_utils/sectionFromPathname";
 
 export type TFormsContextMenuItem = {
   id: string;
@@ -56,8 +59,11 @@ export type TFormsContextMenuItem = {
 
 export default function useFormsContextMenu() {
   const { t } = useTranslation(["Common"]);
-  const { activeSection } = useFormsNavigationStore();
+  const pathname = usePathname();
+  const activeSection = sectionFromPathname(pathname);
   const { openPanelWithAgent, askFromDBAgentId } = useFormsAiAgentStore();
+  const { hasManagementAccess } = useFormsSettingsStore();
+  const { sendToDb } = useFormsDbSettingsStore();
 
   const {
     openForm,
@@ -110,11 +116,11 @@ export default function useFormsContextMenu() {
               disabled: false,
             });
 
-            if (askFromDBAgentId) {
+            if (askFromDBAgentId && hasManagementAccess && sendToDb) {
               model.push({
                 id: "option_ask-from-db",
                 key: "ask-from-db",
-                label: "Ask from DB",
+                label: t("Common:AskFromDB"),
                 icon: AiAgentsReactSvgUrl,
                 onClick: () => openPanelWithAgent(askFromDBAgentId, file),
                 disabled: false,
@@ -169,7 +175,7 @@ export default function useFormsContextMenu() {
               id: "option_delete",
               key: "delete",
               label: t("Common:Delete"),
-              icon: RemoveReactSvgUrl,
+              icon: TrashReactSvgUrl,
               onClick: () => deleteFromList(file.id),
               disabled: false,
             });
@@ -247,12 +253,25 @@ export default function useFormsContextMenu() {
       resetFilling,
       openPanelWithAgent,
       askFromDBAgentId,
+      hasManagementAccess,
+      sendToDb,
     ],
   );
 
   const getFolderContextMenuModel = useCallback(
-    (folder: TFolder): TFormsContextMenuItem[] => {
+    (folder: TFolder, onOpen?: () => void): TFormsContextMenuItem[] => {
       const model: TFormsContextMenuItem[] = [];
+
+      if (onOpen) {
+        model.push({
+          id: "option_open-folder",
+          key: "open-folder",
+          label: t("Common:Open"),
+          icon: EyeReactSvgUrl,
+          onClick: onOpen,
+          disabled: false,
+        });
+      }
 
       if (folder.security?.Download) {
         model.push({
@@ -270,7 +289,7 @@ export default function useFormsContextMenu() {
           id: "option_delete-folder",
           key: "delete-folder",
           label: t("Common:Delete"),
-          icon: RemoveReactSvgUrl,
+          icon: TrashReactSvgUrl,
           onClick: () => deleteFolderFromList(folder.id),
           disabled: false,
         });

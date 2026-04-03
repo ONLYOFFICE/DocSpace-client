@@ -95,7 +95,12 @@ const WalletInfo = (props: WalletInfoProps) => {
               1: isBalanceInsufficient ? (
                 <Text key="balance-text" as="span" fontWeight={600} />
               ) : (
-                <Text key="balance-text" fontWeight={600} isInline />
+                <Text
+                  key="balance-text"
+                  fontWeight={600}
+                  isInline
+                  className={styles.balanceValue}
+                />
               ),
             }}
           />
@@ -119,3 +124,4 @@ const WalletInfo = (props: WalletInfoProps) => {
 };
 
 export default WalletInfo;
+

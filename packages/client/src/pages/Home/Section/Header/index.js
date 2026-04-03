@@ -1436,7 +1436,6 @@ export default inject(
     "Common",
     "Translations",
     "InfoPanel",
-    "SharingPanel",
     "Article",
     "People",
     "PeopleTranslations",
@@ -1446,3 +1445,4 @@ export default inject(
     "GroupingRooms",
   ])(observer(SectionHeaderContent)),
 );
+

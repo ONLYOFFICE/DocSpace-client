@@ -1,0 +1,28 @@
+{
+  "key_path": "AddCreditsToEnableAI",
+  "content": "Adding credits will automatically enable {{organizationName}} AI and make models available to all users. Continue?",
+  "content_en_sha1_hash": "62cddbbb2dcb39e4d51592f64bbe20c7da91f478",
+  "created_at": "2026-03-20T09:07:40.636Z",
+  "updated_at": "2026-03-20T10:14:44.899Z",
+  "comment": {
+    "text": "This key displays a confirmation message within a dialog, prompting the user to add credits to enable AI features for their organization. The message explains that adding credits will unlock {{organizationName}} AI and make models accessible to all users. It appears as the body text in a confirmation dialog.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T10:14:44.899Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/pages/ai-tools/AiPage.tsx",
+      "line_number": 426,
+      "context": "<ConfirmationDialog\n visible={isTopUpConfirmVisible}\n onClose={onCloseTopUpConfirm}\n onConfirm={onConfirmTopUp}\n title={t(\"ServiceIsDisabled\")}\n bodyText={t(\"AddCreditsToEnableAI\", { organizationName: logoText })}\n />\n ) : null}\n </div>\n );\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

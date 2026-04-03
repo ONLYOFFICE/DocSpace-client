@@ -37,5 +37,7 @@
   "TfaSubTitle": "Postupujte podľa jednoduchých krokov, aby ste mohli pokračovať v práci v tomto {{productName}}:",
   "TfaTitle": "Dvojfaktorové overenie povolené pre bezpečný prístup",
   "VerifyConnection": "Overte spojenie",
-  "VerifyConnectionDescription": "Zadajte 6-ciferný kód vygenerovaný vašou autentifikačnou aplikáciou do poľa nižšie, aby ste dokončili nastavenie."
+  "VerifyConnectionDescription": "Zadajte 6-ciferný kód vygenerovaný vašou autentifikačnou aplikáciou do poľa nižšie, aby ste dokončili nastavenie.",
+  "InviteLinkQuotaErrorBody": "Registrácia cez odkaz už nie je dostupná, pretože bol prekročený limit.",
+  "InviteQuotaErrorCustomizedBody": "Budete presmerovaní na stránku <1>Prihlásenie</1> o 10 sekúnd."
 }

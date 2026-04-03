@@ -1,0 +1,28 @@
+{
+  "key_path": "NoPaymentMethodDescription",
+  "content": "To access paid services, please link a payment card. The person who connects the card will automatically be assigned as the Payer for this account.",
+  "content_en_sha1_hash": "a57a45e94ed53261ecc611afff0f4cc604ea39e9",
+  "created_at": "2026-03-20T09:07:41.300Z",
+  "updated_at": "2026-03-20T09:56:51.971Z",
+  "comment": {
+    "text": "This text explains why a payment method is needed to use paid services and clarifies the role of the person linking the card as the account's Payer. It appears as a descriptive message displayed when no payment method is linked in the payment settings section. This helps users understand the requirements for accessing premium features.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T09:56:51.971Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/payment-method/index.tsx",
+      "line_number": 152,
+      "context": "<div>\n <Text fontSize=\"16px\" fontWeight={700}>\n {t(\"NoPaymentMethod\")}\n </Text>\n <Text className={styles.noPaymentDescription}>\n {t(\"NoPaymentMethodDescription\")}\n </Text>\n <div className={styles.buttonWrapper}>\n <Button\n label={t(\"AddPaymentMethod\")}\n size={ButtonSize.small}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

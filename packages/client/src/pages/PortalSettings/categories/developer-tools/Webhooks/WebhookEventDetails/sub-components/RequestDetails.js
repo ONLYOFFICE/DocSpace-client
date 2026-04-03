@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled from "styled-components";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Textarea } from "@docspace/ui-kit/components/textarea";
 import { inject, observer } from "mobx-react";
@@ -34,31 +33,13 @@ import { useTranslation } from "react-i18next";
 import StatusMessage from "@docspace/ui-kit/components/status-message";
 import { isJSON } from "@docspace/shared/utils/json";
 
-const DetailsWrapper = styled.div`
-  width: 100%;
-
-  .textareaBody {
-    height: 50vh !important;
-  }
-
-  .mt-7 {
-    margin-top: 7px;
-  }
-
-  .mt-16 {
-    margin-top: 16px;
-  }
-
-  .mb-4 {
-    margin-bottom: 4px;
-  }
-`;
+import styles from "../WebhookEventDetails.styled.module.scss";
 
 const RequestDetails = ({ eventDetails }) => {
 	const { t } = useTranslation(["Webhooks"]);
 
 	return (
-		<DetailsWrapper>
+		<div className={styles.messageDetailsWrapper}>
 			{eventDetails.status === 0 ? (
 				<StatusMessage message={t("FailedToConnect")} />
 			) : null}
@@ -99,7 +80,7 @@ const RequestDetails = ({ eventDetails }) => {
 					className="textareaBody"
 				/>
 			)}
-		</DetailsWrapper>
+		</div>
 	);
 };
 

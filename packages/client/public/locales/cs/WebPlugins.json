@@ -14,5 +14,7 @@
   "PluginSDK": "Plugin SDK",
   "PluginSDKDescription": "Pomocí sady Plugin SDK můžete rozšířit funkčnost svého systému {{productName}}, připojit služby třetích stran nebo vylepšit stávající uživatelské prostředí. Zde najdete ukázky zásuvných modulů se zdrojovým kódem, které jsou k dispozici na GitHubu.",
   "PluginSDKInstruction": "Kliknutím na tlačítko získáte podrobný návod, jak vytvořit vlastní zásuvné moduly.",
-  "UploadDescription": "Můžete přidat zásuvné moduly a rozšířit tak funkčnost aplikace {{productName}} o další funkce. Klepněte na tlačítko Nahrát zásuvný modul nebo vhoďte soubor do archivu ZIP."
+  "UploadDescription": "Můžete přidat zásuvné moduly a rozšířit tak funkčnost aplikace {{productName}} o další funkce. Klepněte na tlačítko Nahrát zásuvný modul nebo vhoďte soubor do archivu ZIP.",
+  "PluginCacheWarningDescription": "Pluginy jsou ukládány do mezipaměti na základě jejich čísla verze. Aby se zajistilo, že se vaše změny použijí, prosím zvyšte číslo verze ve vašem souboru <1>package.json</1> před nahráním. Systém neaktualizuje plugin, pokud zůstane číslo verze stejné.",
+  "PluginDeletedSuccessfully": "Zásuvný modul byl úspěšně odstraněn"
 }

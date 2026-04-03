@@ -27,7 +27,9 @@
 "use client";
 
 import { observer } from "mobx-react";
+import { runInAction } from "mobx";
 import React from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
 import api from "@docspace/shared/api";
@@ -38,8 +40,11 @@ import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 
 import { FormsSection } from "@/types/forms";
 
+import { sectionToPath } from "../../_utils/sectionFromPathname";
 import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
+import { useFormsListStore } from "../../_store/FormsListStore";
+import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
 import styles from "./FormsEditor.module.scss";
 
 type FormsEditorProps = {
@@ -48,16 +53,23 @@ type FormsEditorProps = {
 
 const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
   const { t } = useTranslation(["Common"]);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const roomIdRef = React.useRef(searchParams.get("roomId") ?? "");
+  roomIdRef.current = searchParams.get("roomId") ?? "";
   const {
     editingFile,
     editorAction,
     closeEditor,
-    setActiveSection,
     openCompletedFolder,
   } = useFormsNavigationStore();
-  const { roomId, requestToken } = useFormsSettingsStore();
+  const { roomId } = useFormsSettingsStore();
+  const formsListStore = useFormsListStore();
+  const aiStore = useFormsAiAgentStore();
   const iframeRef = React.useRef<HTMLIFrameElement>(null);
   const [isIframeLoaded, setIsIframeLoaded] = React.useState(false);
+  const [isCompleting, setIsCompleting] = React.useState(false);
+  const completionStarted = React.useRef(false);
 
   const editorOrigin = React.useMemo(
     () =>
@@ -73,40 +85,84 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
     const params = new URLSearchParams();
     params.set("fileId", editingFile.id.toString());
     params.append("action", editorAction);
-    if (requestToken) params.append("share", requestToken);
+    params.append("editorGoBack", "event");
 
     return combineUrl(editorOrigin, `/doceditor?${params.toString()}`);
-  }, [editingFile, editorAction, requestToken, editorOrigin]);
+  }, [editingFile, editorAction, editorOrigin]);
 
   const handleFormCompleted = React.useCallback(async () => {
+    if (completionStarted.current) return;
+    completionStarted.current = true;
+
     const formTitle = editingFile?.title?.replace(/\.pdf$/i, "");
 
-    setActiveSection(FormsSection.CompletedForms);
+    setIsCompleting(true);
 
-    if (!roomId || !formTitle) return;
-
-    try {
-      const filter = FilesFilter.getDefault();
-      const roomRes = await api.files.getFolder(roomId, filter);
-      const doneFolder = roomRes.folders.find(
-        (f) => f.type === FolderType.Done,
+    if (!roomId || !formTitle) {
+      closeEditor();
+      router.replace(
+        sectionToPath(FormsSection.CompletedForms) +
+          (roomIdRef.current ? `?roomId=${roomIdRef.current}` : ""),
       );
-
-      if (!doneFolder) return;
-
-      const doneRes = await api.files.getFolder(doneFolder.id, filter);
-      const subfolder =
-        doneRes.folders.find(
-          (f) => f.title.replace(/\.pdf$/i, "") === formTitle,
-        ) ?? doneRes.folders[0];
-
-      if (subfolder) {
-        openCompletedFolder(subfolder);
-      }
-    } catch {
-      // Already at CompletedForms root — nothing to do
+      setIsCompleting(false);
+      return;
     }
-  }, [roomId, editingFile?.title, setActiveSection, openCompletedFolder]);
+
+    const MAX_RETRIES = 5;
+    const RETRY_DELAY = 1500;
+
+    for (let attempt = 0; attempt < MAX_RETRIES; attempt++) {
+      try {
+        const filter = FilesFilter.getDefault();
+        const roomRes = await api.files.getFolder(roomId, filter);
+        const doneFolder = roomRes.folders.find(
+          (f) => f.type === FolderType.Done,
+        );
+
+        if (!doneFolder) {
+          await new Promise((r) => setTimeout(r, RETRY_DELAY));
+          continue;
+        }
+
+        aiStore.setDoneFolderId(doneFolder.id);
+
+        const doneRes = await api.files.getFolder(doneFolder.id, filter);
+        const subfolder = doneRes.folders.find(
+          (f) => f.title.replace(/\.pdf$/i, "") === formTitle,
+        );
+
+        if (subfolder) {
+          runInAction(() => {
+            formsListStore.setItems([], 0);
+            formsListStore.setFolders([]);
+            formsListStore.setIsLoading(true);
+            openCompletedFolder(subfolder);
+          });
+          return;
+        }
+
+        await new Promise((r) => setTimeout(r, RETRY_DELAY));
+      } catch {
+        break;
+      }
+    }
+
+    // Fallback: navigate to CompletedForms root
+    closeEditor();
+    router.replace(
+      sectionToPath(FormsSection.CompletedForms) +
+        (roomIdRef.current ? `?roomId=${roomIdRef.current}` : ""),
+    );
+    setIsCompleting(false);
+  }, [
+    roomId,
+    editingFile?.title,
+    formsListStore,
+    aiStore,
+    router,
+    openCompletedFolder,
+    closeEditor,
+  ]);
 
   const checkCompletedUrl = React.useCallback(() => {
     try {
@@ -134,6 +190,7 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
 
   React.useEffect(() => {
     setIsIframeLoaded(false);
+    completionStarted.current = false;
   }, [editingFile?.id]);
 
   React.useEffect(() => {
@@ -149,17 +206,24 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
     const onMessage = (event: MessageEvent) => {
       if (event.origin !== editorOrigin) return;
 
+      let data = event.data;
+      if (typeof data === "string") {
+        try {
+          data = JSON.parse(data);
+        } catch {
+          // use raw string
+        }
+      }
+
       if (
-        event.data?.type === "onRequestClose" ||
-        event.data === "close-editor"
+        data?.type === "onRequestClose" ||
+        data === "close-editor" ||
+        data?.eventReturnData?.event === "onEditorCloseCallback"
       ) {
         closeEditor();
       }
 
-      if (
-        event.data?.type === "onFormComplete" ||
-        event.data === "completed-form"
-      ) {
+      if (data?.type === "onFormComplete" || data === "completed-form") {
         handleFormCompleted();
       }
     };
@@ -177,22 +241,24 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
 
   return (
     <div className={styles.editorWrapper}>
-      {!isIframeLoaded && (
+      {(!isIframeLoaded || isCompleting) && (
         <div className={styles.loaderOverlay}>
           <Loader type={LoaderTypes.track} size="40px" />
         </div>
       )}
-      <iframe
-        ref={iframeRef}
-        src={editorUrl}
-        onLoad={onIframeLoad}
-        className={
-          isIframeLoaded ? styles.editorIframe : styles.editorIframeHidden
-        }
-        allow="autoplay; camera; microphone; display-capture; clipboard-write"
-        referrerPolicy="no-referrer"
-        title={t("Common:FormEditor")}
-      />
+      {!isCompleting && (
+        <iframe
+          ref={iframeRef}
+          src={editorUrl}
+          onLoad={onIframeLoad}
+          className={
+            isIframeLoaded ? styles.editorIframe : styles.editorIframeHidden
+          }
+          allow="autoplay; camera; microphone; display-capture; clipboard-write"
+          referrerPolicy="no-referrer"
+          title={t("Common:FormEditor")}
+        />
+      )}
     </div>
   );
 };

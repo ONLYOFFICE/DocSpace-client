@@ -57,7 +57,7 @@ import {
   sortPermissions,
 } from "../../utils";
 
-import { StyledBodyContent } from "./StyledCreateApiKeys";
+import styles from "./StyledCreateApiKeys.module.scss";
 
 const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
   const {
@@ -364,7 +364,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
     : false;
 
   const createBody = (
-    <StyledBodyContent>
+    <div className={styles.styledBodyContent}>
       {!isEdit ? (
         <Text>{t("Settings:CreateNewSecretKeyDialogDescription")}</Text>
       ) : null}
@@ -465,11 +465,11 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
           ) : null}
         </div>
       ) : null}
-    </StyledBodyContent>
+    </div>
   );
 
   const keyBody = (
-    <StyledBodyContent>
+    <div className={styles.styledBodyContent}>
       <Text>{t("Settings:CreateNewSecretKeyDialogDescription")}</Text>
       <div className="api-key_name">
         <InputBlock
@@ -503,7 +503,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
           />
         </Text>
       ) : null}
-    </StyledBodyContent>
+    </div>
   );
 
   const createFooter = (

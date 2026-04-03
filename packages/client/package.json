@@ -1,6 +1,6 @@
 {
   "name": "@docspace/client",
-  "version": "3.6.1",
+  "version": "3.7.0",
   "private": true,
   "homepage": "",
   "scripts": {
@@ -50,7 +50,7 @@
     "heic2any": "0.0.4",
     "hex-rgb": "5.0.0",
     "i18next": "23.7.19",
-    "lodash": "4.17.23",
+    "lodash": "4.18.1",
     "lodash.debounce": "4.0.8",
     "luxon": "3.7.2",
     "mobx": "6.13.5",
@@ -78,7 +78,6 @@
     "react-window-infinite-loader": "1.0.9",
     "remark-gfm": "4.0.1",
     "resize-image": "0.1.0",
-    "sjcl": "1.0.8",
     "styled-components": "5.3.11",
     "ts-pattern": "5.5.0",
     "use-resize-observer": "9.1.0",
@@ -101,7 +100,7 @@
     "@types/react-window": "1.8.8",
     "@types/react-window-infinite-loader": "1.0.9",
     "@types/styled-components": "5.1.34",
-    "@vitejs/plugin-react": "^5.2.0",
+    "@vitejs/plugin-react": "^6.0.1",
     "cross-env": "^10.1.0",
     "msw": "^2.12.13",
     "prettier": "^3.8.1",
@@ -110,7 +109,7 @@
     "serve": "14.2.5",
     "shx": "0.4.0",
     "typescript": "5.9.3",
-    "vite": "^6.4.1",
+    "vite": "^8.0.0",
     "vite-plugin-svgr": "^4.5.0"
   },
   "title": "ONLYOFFICE",

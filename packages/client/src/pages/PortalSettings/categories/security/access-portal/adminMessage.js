@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState, useEffect } from "react";
-import styled from "styled-components";
 import { useNavigate, useLocation } from "react-router";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
@@ -42,18 +41,7 @@ import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorag
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 
 import { LearnMoreWrapper } from "../StyledSecurity";
-
-const MainContainer = styled.div`
-  width: 100%;
-
-  .page-subtitle {
-    margin-bottom: 10px;
-  }
-
-  .box {
-    margin-bottom: 24px;
-  }
-`;
+import styles from "./adminMessage.module.scss";
 
 const AdminMessage = (props) => {
   const {
@@ -162,7 +150,7 @@ const AdminMessage = (props) => {
   if (!tReady) return null;
 
   return (
-    <MainContainer>
+    <div className={styles.container}>
       <LearnMoreWrapper withoutExternalLink={!administratorMessageSettingsUrl}>
         <Text>
           {t("AdminsMessageSettingDescription", {
@@ -188,7 +176,7 @@ const AdminMessage = (props) => {
       </LearnMoreWrapper>
 
       <RadioButtonGroup
-        className="box"
+        className={styles.box}
         fontSize="13px"
         fontWeight="400"
         name="group"
@@ -228,7 +216,7 @@ const AdminMessage = (props) => {
         saveButtonDataTestId="administrator_message_save_button"
         cancelButtonDataTestId="administrator_message_cancel_button"
       />
-    </MainContainer>
+    </div>
   );
 };
 

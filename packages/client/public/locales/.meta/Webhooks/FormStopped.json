@@ -1,0 +1,21 @@
+{
+  "key_path": "FormStopped",
+  "content": "Form Stopped",
+  "content_en_sha1_hash": "3356f2588074b3a7ab38e887fd4a98509203ff1e",
+  "created_at": "2026-03-20T09:07:38.941Z",
+  "updated_at": "2026-03-20T09:07:38.941Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -37,5 +37,7 @@
   "TfaSubTitle": "请按照简单的步骤继续使用此{{productName}}：",
   "TfaTitle": "启用双重身份验证以确保安全访问",
   "VerifyConnection": "验证连接",
-  "VerifyConnectionDescription": "请在下方输入身份验证器应用生成的6位验证码以完成设置。"
+  "VerifyConnectionDescription": "请在下方输入身份验证器应用生成的6位验证码以完成设置。",
+  "InviteLinkQuotaErrorBody": "通过链接注册已不可用，因为已达到限制。",
+  "InviteQuotaErrorCustomizedBody": "您将在 10 秒后被重定向到 <1>登录</1> 页面。"
 }

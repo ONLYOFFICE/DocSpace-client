@@ -75,8 +75,8 @@ export type TDomainValidator = {
 };
 
 export type TPasswordHash = {
-  size: boolean;
-  iterations: boolean;
+  size: number;
+  iterations: number;
   salt: string;
 };
 
@@ -132,6 +132,7 @@ export type TSettings = {
   externalResources: TExternalResources;
   externalDbEnabled: boolean;
   licenseAgreementsUrl?: string;
+	aiEnabled?: boolean;
 };
 
 export type TCustomSchema = {
@@ -235,6 +236,7 @@ export type THelpCenterEntries = {
   mcpserverssettings: string;
   websearchsettings: string;
   knowledgesettings: string;
+  aiservicesmanagement: string;
   documentService: string;
 };
 
@@ -536,4 +538,8 @@ export type TTelegramCheck = {
 export type TNotificationChannel = {
   name: string;
   isEnabled: boolean;
+};
+
+export type TAiServicesSettings = {
+	enabled: boolean;
 };

@@ -3,22 +3,22 @@
   "content": "New default template has been applied.",
   "content_en_sha1_hash": "68f0b26ae64335ab196fb77e072c53ebfeaf02d2",
   "created_at": "2026-02-18T14:56:26.373Z",
-  "updated_at": "2026-02-19T13:36:33.043Z",
+  "updated_at": "2026-03-20T10:28:17.942Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key displays a success message in the UI, confirming that a new default template has been applied. It appears as a toast notification after a template is successfully set, likely within the portal settings section. Translators should ensure the tone remains positive and informative.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T10:28:17.942Z"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/store/portal-settings/DefaultTemplatesStore.ts",
-      "line_number": 103,
+      "line_number": 105,
       "context": "setTemplate = async (selectedFile: number | null, fileExtension: string) => {\n try {\n const res = await setDefaultTemplates(selectedFile, fileExtension);\n this.formTemplatesArray(res);\n toastr.success(i18n.t(\"Settings:DefaultTemplateApplied\"));\n } catch (e) {\n toastr.error((e as TData) ?? i18n.t(\"Common:Error\"));\n }\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/portal-settings/DefaultTemplatesStore.ts",
-      "line_number": 103,
+      "line_number": 105,
       "context": "setTemplate = async (selectedFile: number | null, fileExtension: string) => {\n try {\n const res = await setDefaultTemplates(selectedFile, fileExtension);\n this.formTemplatesArray(res);\n toastr.success(i18n.t(\"Settings:DefaultTemplateApplied\"));\n } catch (e) {\n toastr.error((e as TData) ?? i18n.t(\"Common:Error\"));\n }\n };",
       "module": "/packages/client"
     }

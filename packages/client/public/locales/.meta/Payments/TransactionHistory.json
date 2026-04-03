@@ -3,7 +3,7 @@
   "content": "Transaction history",
   "content_en_sha1_hash": "aa7d3d7dd9d1706c1bda7bd97c31b7c47a7d310f",
   "created_at": "2025-05-28T09:33:06.830Z",
-  "updated_at": "2026-02-19T13:36:32.891Z",
+  "updated_at": "2026-03-20T09:07:45.667Z",
   "comment": {
     "text": "The \"Transaction History\" translation key is used for the label on a payment wallet settings page to display the title of the transaction history section. It appears as a combobox size option in the Wallet payment categories.",
     "is_auto": true,
@@ -11,7 +11,7 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/TransactionHistory.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/shared/transaction-history/index.tsx",
       "line_number": 46,
       "context": "TOption,\n } from \"@docspace/ui-kit/components/combobox\";\n import { DatePicker } from \"@docspace/ui-kit/components/date-picker\";\n import { toastr } from \"@docspace/ui-kit/components/toast\";\n import {\n checkTransactionHistoryReport,\n startTransactionHistoryReport,\n } from \"@docspace/shared/api/portal\";\n import {\n DeviceType,\n EmployeeStatus,",
       "module": "/packages/client"

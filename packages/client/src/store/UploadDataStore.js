@@ -300,6 +300,16 @@ class UploadDataStore {
     this.setUploadData(newUploadData);
     this.uploadedFilesHistory = newHistory;
 
+    this.primaryProgressDataStore.setPrimaryProgressBarData({
+      operation: OPERATIONS_NAME.upload,
+      completed: true,
+      canceled: true,
+      alert: true,
+      label: i18n.t("Common:CanceledOperation", {
+        operationName: i18n.t("Files:Uploading"),
+      }),
+    });
+
     toastr.info(i18n.t("Common:CancelUpload"));
   };
 
@@ -1651,6 +1661,7 @@ class UploadDataStore {
       percent: this.percent,
       operation: OPERATIONS_NAME.upload,
       alert: false,
+      canceled: false,
       showPanel: this.setUploadPanelVisible,
     };
 

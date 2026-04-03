@@ -39,7 +39,7 @@ export async function getDefaultProvider(): Promise<
       [["", ""]],
       "GET",
     );
-    const res = await fetch(req, { next: { revalidate: 300 } });
+    const res = await fetch(req, { next: { revalidate: 900 } });
 
     if (!res.ok) {
       logger.error(`GET /ai/providers/default failed: ${res.status}`);

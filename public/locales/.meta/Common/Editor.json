@@ -3,7 +3,7 @@
   "content": "Editor",
   "content_en_sha1_hash": "c7e9fb2ea6c3b8c3ce97645eb902c348d859f36d",
   "created_at": "2025-05-19T21:30:44.767Z",
-  "updated_at": "2026-02-19T13:36:32.661Z",
+  "updated_at": "2026-03-26T08:26:58.087Z",
   "comment": {
     "text": "The translation key \"Editor\" is used to display the label for an editing feature within a user interface, likely in a settings or configuration panel. It appears as a title and is linked to navigate to an editor view or functionality. The translated term should describe this editing capability in a neutral and descriptive manner.",
     "is_auto": true,
@@ -18,13 +18,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
-      "line_number": 102,
+      "line_number": 106,
       "context": "description: t(\"JavascriptSdk:PublicRoomPresetInfo\"),\n image: theme.isBase ? PublicRoomImg : PublicRoomImgDark,\n handleOnClick: navigateToPublicRoom,\n },\n {\n title: t(\"Common:Editor\"),\n description: t(\"EditorDescription\"),\n image: theme.isBase ? EditorImg : EditorImgDark,\n handleOnClick: navigateToEditor,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 555,
+      "line_number": 562,
       "context": "{\n id: \"portal-settings_catalog-javascript-sdk_editor\",\n key: \"8-1-4\",\n icon: \"\",\n link: \"editor\",\n tKey: \"Common:Editor\",\n },\n {\n id: \"portal-settings_catalog-javascript-sdk_viewer\",\n key: \"8-1-5\",\n icon: \"\",",
       "module": "/packages/client"
     },

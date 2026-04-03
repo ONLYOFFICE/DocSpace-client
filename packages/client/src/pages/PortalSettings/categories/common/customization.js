@@ -26,65 +26,20 @@
 
 import React, { useEffect } from "react";
 import { withTranslation } from "react-i18next";
-import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";
-import { injectDefaultTheme, mobileMore } from "@docspace/shared/utils";
+import styles from "./customization.module.scss";
 import { LanguageAndTimeZoneSettings } from "./Customization/language-and-time-zone";
 import { WelcomePageSettings } from "./Customization/welcome-page-settings";
 import { PortalRenaming } from "./Customization/portal-renaming";
 import { DNSSettings } from "./Customization/dns-settings";
 import { ConfigureDeepLink } from "./Customization/configure-deep-link";
 import { AdManagement } from "./Customization/ad-management";
+import { AiServicesManagement } from "./Customization/ai-services-management";
 import CustomizationNavbar from "./customization-navbar";
 import LoaderDescriptionCustomization from "./sub-components/loaderDescriptionCustomization";
-
-const StyledComponent = styled.div.attrs(injectDefaultTheme)`
-  width: 100%;
-
-  .combo-button-label {
-    max-width: 100%;
-  }
-
-  .category-description {
-    line-height: 20px;
-    color: ${(props) => props.theme.client.settings.common.descriptionColor};
-    margin-bottom: 20px;
-    max-width: 700px;
-  }
-
-  .category-item-description {
-    color: ${(props) => props.theme.client.settings.common.descriptionColor};
-    font-size: 12px;
-    max-width: 1024px;
-  }
-
-  .category-item-heading {
-    display: flex;
-    align-items: center;
-    padding-bottom: 16px;
-  }
-
-  .category-item-title {
-    font-weight: bold;
-    font-size: 16px;
-    line-height: 22px;
-    margin-inline-end: 4px;
-  }
-
-  .settings-block {
-    margin-bottom: 24px;
-  }
-
-  @media ${mobileMore} {
-    .settings-block {
-      max-width: 350px;
-      height: auto;
-    }
-  }
-`;
 
 const Customization = (props) => {
   const {
@@ -122,7 +77,7 @@ const Customization = (props) => {
       isSettingPaid={isSettingPaid}
     />
   ) : (
-    <StyledComponent>
+    <div className={styles.customization}>
       {!isLoadedPage ? (
         <LoaderDescriptionCustomization />
       ) : (
@@ -150,7 +105,9 @@ const Customization = (props) => {
           <AdManagement />
         </>
       ) : null}
-    </StyledComponent>
+      <StyledSettingsSeparator />
+      <AiServicesManagement />
+    </div>
   );
 };
 

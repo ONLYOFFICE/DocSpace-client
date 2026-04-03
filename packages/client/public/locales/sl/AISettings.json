@@ -35,5 +35,12 @@
   "ServerUpdatedSuccess": "Server posodobljen uspešno",
   "ServiceIcon": "Ikona storitve",
   "SystemMCPListTitle": "Sistem",
-  "WebSearchKeyHiddenDescription": "Kluč API se prikaže samo enkrat ob shranjevanju in je nato skrit iz varnostnih razlogov."
+  "WebSearchKeyHiddenDescription": "Kluč API se prikaže samo enkrat ob shranjevanju in je nato skrit iz varnostnih razlogov.",
+  "AddAIProvider": "Dodaj {{aiProvider}}",
+  "AddMCPServer": "Dodaj {{mcpServer}}",
+  "DefaultProviderSetSuccess": "Privzeti ponudnik uspešno nastavljen",
+  "DefaultProviderTitle": "Privzeti ponudnik",
+  "DeleteProvider": "Izbriši {{aiProvider}}",
+  "MCPUnavailableError": "{{mcpServer}} ni na voljo",
+  "Model": "Model"
 }

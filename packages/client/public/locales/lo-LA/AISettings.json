@@ -35,5 +35,12 @@
   "ServerUpdatedSuccess": "ອັບເດດເຊີບເວີສຳເລັດແລ້ວ",
   "ServiceIcon": "ໄອຄອນການບໍລິການ",
   "SystemMCPListTitle": "ລະບົບ",
-  "WebSearchKeyHiddenDescription": "ລະຫັດ API ຈະສະແດງພຽງຄັ້ງດຽວຫຼັງຈາກບັນທຶກແລ້ວ ແລະ ຫຼັງຈາກນັ້ນຈະຖືກເຊື່ອງໄວ້ເພື່ອຈຸດປະສົງດ້ານຄວາມປອດໄພ."
+  "WebSearchKeyHiddenDescription": "ລະຫັດ API ຈະສະແດງພຽງຄັ້ງດຽວຫຼັງຈາກບັນທຶກແລ້ວ ແລະ ຫຼັງຈາກນັ້ນຈະຖືກເຊື່ອງໄວ້ເພື່ອຈຸດປະສົງດ້ານຄວາມປອດໄພ.",
+  "AddAIProvider": "ເພີ່ມ {{aiProvider}}",
+  "AddMCPServer": "ເພີ່ມ {{mcpServer}}",
+  "DefaultProviderSetSuccess": "ຕັ້ງຄ່າຜູ້ໃຫ້ບໍລິການເລີ່ມຕົ້ນສຳເລັດແລ້ວ",
+  "DefaultProviderTitle": "ຜູ້ໃຫ້ບໍລິການເລີ່ມຕົ້ນ",
+  "DeleteProvider": "ລຶບ {{aiProvider}}",
+  "MCPUnavailableError": "{{mcpServer}} ບໍ່ສາມາດໃຊ້ໄດ້",
+  "Model": "ຮຸ່ນ"
 }

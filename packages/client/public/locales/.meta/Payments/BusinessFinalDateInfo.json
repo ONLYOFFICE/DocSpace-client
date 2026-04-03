@@ -3,7 +3,7 @@
   "content": "Subscription will be automatically renewed on {{finalDate}} with updated pricing and specifications. You can cancel it or change your billing info on your Stripe customer portal.",
   "content_en_sha1_hash": "f7c32402a08d667135c600c9b76018150ae168ad",
   "created_at": "2025-05-19T21:30:53.654Z",
-  "updated_at": "2025-08-12T19:46:26.223Z",
+  "updated_at": "2026-03-20T09:07:45.641Z",
   "comment": {
     "text": "This translation key is used to display a notification about automatic renewal of a subscription, including the final date and updated pricing information. It appears in the Stripe customer portal, likely on a payment settings page or dialog. The goal is to inform users about upcoming renewal details.",
     "is_auto": true,
@@ -11,8 +11,8 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/PaymentContainer.js",
-      "line_number": 275,
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/main-tariff/PaymentContainer.js",
+      "line_number": 273,
       "context": "<Text\n fontSize=\"14px\"\n lineHeight=\"16px\"\n className=\"payment-info_managers-price\"\n >\n <Trans t={t} i18nKey=\"BusinessFinalDateInfo\" ns=\"Payments\">\n {{ finalDate: paymentDate }}\n </Trans>\n </Text>\n );\n };",
       "module": "/packages/client"
     }

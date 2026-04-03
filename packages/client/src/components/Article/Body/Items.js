@@ -398,29 +398,36 @@ const Items = ({
         (f) => f.rootFolderType === FolderType.USER,
       );
 
-      const agentsDividerIndex = 1;
-      let roomsDividerIndex = 4;
-      let recentDividerIndex = 8;
+      const hasAIAgents = elm.some(
+        (f) => f.rootFolderType === FolderType.AIAgents,
+      );
+
+      let dividerAfterAgents = hasAIAgents ? 1 : 0;
+      let dividerAfterRooms = hasAIAgents ? 4 : 2;
+      let dividerAfterRecent = hasAIAgents ? 8 : 6;
 
       if (!hasMyDocuments) {
-        roomsDividerIndex = 3;
-        recentDividerIndex = 7;
+        dividerAfterAgents = hasAIAgents ? 1 : 0;
+        dividerAfterRooms = hasAIAgents ? 3 : 1;
+        dividerAfterRecent = hasAIAgents ? 7 : 5;
+      }
+
+      if (hasAIAgents) {
+        items.splice(
+          dividerAfterAgents,
+          0,
+          <CatalogDivider key="ai-agents-divider" />,
+        );
       }
 
       items.splice(
-        agentsDividerIndex,
-        0,
-        <CatalogDivider key="ai-agents-divider" />,
-      );
-
-      items.splice(
-        roomsDividerIndex,
+        dividerAfterRooms,
         0,
         <CatalogDivider key="rooms-divider" />,
       );
 
       items.splice(
-        recentDividerIndex,
+        dividerAfterRecent,
         0,
         <CatalogDivider key="recent-divider" />,
       );

@@ -342,6 +342,9 @@ class SettingsStore {
 
   displayBanners: boolean = false;
 
+
+  aiServicesEnabled: boolean = true;
+
   apiKeys: TApiKey[] = [];
 
   permissions: string[] = [];
@@ -413,6 +416,12 @@ class SettingsStore {
 
   get helpCenterEntries() {
     return this.externalResources?.helpcenter?.entries;
+  }
+
+  get aiServicesManagementUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.aiservicesmanagement
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.aiservicesmanagement}`
+      : this.helpCenterDomain;
   }
 
   get apiDomain() {
@@ -997,6 +1006,10 @@ class SettingsStore {
     this.setSettings(settings);
 
     this.setGreetingSettings(settings.greetingSettings);
+
+    if (settings.aiEnabled !== undefined) {
+      this.aiServicesEnabled = settings.aiEnabled;
+    }
 
     return settings;
   };
@@ -1781,6 +1794,10 @@ class SettingsStore {
 
   setDisplayBanners = (displayBanners: boolean) => {
     this.displayBanners = displayBanners;
+  };
+
+  setAiServicesEnabled = (aiServicesEnabled: boolean) => {
+    this.aiServicesEnabled = aiServicesEnabled;
   };
 
   updateDefaultFolderType = async (folderType: FolderType) => {

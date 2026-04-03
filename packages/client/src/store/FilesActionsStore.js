@@ -418,6 +418,11 @@ class FilesActionStore {
     const filesList = [];
     await this.createFolderTree(tree, toFolderId, filesList);
 
+
+    if (withoutHiddenFiles.length) {
+      setPrimaryProgressBarData({ ...pbData, completed: uploaded });
+    }
+
     if (filesList.length) {
       setPrimaryProgressBarData({ ...pbData });
     }
@@ -1127,15 +1132,27 @@ class FilesActionStore {
             operationId,
           });
         })
-        .then(() =>
+        .then(() => {
           toastr.success(
             translations?.successRemoveTemplate
               ? translations.successRemoveTemplate
               : items.length > 1
                 ? translations?.successRemoveRooms
                 : translations?.successRemoveRoom,
-          ),
-        )
+          );
+
+          const currentFolderId = this.selectedFolderStore.id;
+          if (items.includes(currentFolderId)) {
+            const { rootFolderType } = this.selectedFolderStore;
+            const categoryType = getCategoryTypeByFolderType(rootFolderType, 0);
+
+            if (categoryType === CategoryType.AIAgents) {
+              this.moveToAIAgentsPage();
+            } else {
+              this.moveToRoomsPage();
+            }
+          }
+        })
         .finally(() => {
           this.setGroupMenuBlocked(false);
           setSecondaryProgressBarData({
@@ -3938,3 +3955,4 @@ class FilesActionStore {
 }
 
 export default FilesActionStore;
+

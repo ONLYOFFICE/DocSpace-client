@@ -1,4 +1,7 @@
 {
+  "AgentCreated": "AI Agent Created",
+  "AgentDeleted": "AI Agent Deleted",
+  "AgentUpdated": "AI Agent Updated",
   "Before": "Before",
   "CreateWebhook": "Create webhook",
   "DeleteHint": "The webhook will be deleted permanently.\nYou will not be able to undo this action.",
@@ -33,6 +36,9 @@
   "FolderRestored": "Folder restored",
   "FolderTrashed": "Folder trashed",
   "FolderUpdated": "Folder updated",
+  "FormFilledOut": "Form Filled Out",
+  "FormStopped": "Form Stopped",
+  "FormSubmit": "Form Submitted",
   "From": "From",
   "Generate": "Generate",
   "GroupCreated": "Group created",
@@ -89,8 +95,5 @@
   "WebhookRemoved": "Webhook removed",
   "Webhooks": "Webhooks",
   "WebhooksGuide": "Webhooks Guide",
-  "WebhooksInfo": "Use webhooks to perform custom actions on the side of any application or website you are using based on various events in {{organizationName}} {{productName}}.\nHere, you can create and manage all your webhooks, configure them, and browse history of every webhook to audit their performance.",
-  "FormSubmit": "Form Submitted",
-  "FormFilledOut": "Form Filled Out",
-  "FormStopped": "Form Stopped"
+  "WebhooksInfo": "Use webhooks to perform custom actions on the side of any application or website you are using based on various events in {{organizationName}} {{productName}}.\nHere, you can create and manage all your webhooks, configure them, and browse history of every webhook to audit their performance."
 }

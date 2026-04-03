@@ -177,7 +177,7 @@ const nextConfig = {
           emit: false,
           filename: "static/chunks/[path][name][ext]?[hash]",
         },
-        test: /\.(svg|png|jpe?g|gif|ico|woff2)$/i,
+        test: /\.(svg|png|jpe?g|gif|ico|woff2|mp4)$/i,
         resourceQuery: /url/,
       },
       // SVG handling

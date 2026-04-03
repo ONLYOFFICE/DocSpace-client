@@ -8,6 +8,10 @@
   background: var(--info-panel-bg, var(--section-background));
   overflow: visible;
   transition: width 0.2s ease-out;
+
+  &[data-position="right"] {
+    order: 1;
+  }
 }
 
 @media (max-width: 600px) {

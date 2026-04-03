@@ -80,7 +80,6 @@
   "PayerDescription": "Ta uporabnik ima dostop do podrobnosti plačila in je edini uporabnik, ki lahko prilagaja račun in izvaja plačila. Lastnik {{productName}} in sam upravitelj plačevanja lahko prerazporedita vlogo upravitelja plačevanja prek portala za stranke Stripe.",
   "PaymentMethod": "Način plačila",
   "PerBackup": "{{currency}} na 1 varnostno kopijo",
-  "PerBackupWithBracket": "({{currency}} na 1 varnostno kopijo))",
   "PerStorage": "{{currency}} na {{amount}}/mesec",
   "PerStorageWitnMinValue": "{{currency}} na {{amount}}/mesec <1>(min {{minValue}}{{storageUnit}})</1>",
   "PlanUpgrade": "Nadgradnja načrta",

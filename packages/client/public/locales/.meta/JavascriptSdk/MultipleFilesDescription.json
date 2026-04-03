@@ -1,0 +1,28 @@
+{
+  "key_path": "MultipleFilesDescription",
+  "content": "Users can upload several files in one action.",
+  "content_en_sha1_hash": "b15cac4194e117f2084e5a53e467ddf2cfd4ca32",
+  "created_at": "2026-03-20T09:07:42.380Z",
+  "updated_at": "2026-03-20T09:46:40.535Z",
+  "comment": {
+    "text": "This text explains that users can upload multiple files at once. It appears as a tooltip on a UI element (likely a button or label) within the Uploader component, providing helpful information about the file upload functionality. Translators should maintain the meaning of multiple file uploads in a single action.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T09:46:40.535Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Uploader.js",
+      "line_number": 202,
+      "context": "place=\"right\"\n tooltipContent={\n <Text fontSize=\"12px\">\n {isFolderMode\n ? t(\"MultipleFoldersDescription\")\n : t(\"MultipleFilesDescription\")}\n </Text>\n }\n dataTestId=\"multiple_help_button\"\n />\n </LabelGroup>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

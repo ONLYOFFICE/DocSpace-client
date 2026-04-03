@@ -35,5 +35,12 @@
   "ServerUpdatedSuccess": "Đã cập nhật máy chủ thành công",
   "ServiceIcon": "Biểu tượng dịch vụ",
   "SystemMCPListTitle": "Hệ thống",
-  "WebSearchKeyHiddenDescription": "API key chỉ hiển thị một lần khi lưu và sau đó sẽ bị ẩn để đảm bảo an toàn."
+  "WebSearchKeyHiddenDescription": "API key chỉ hiển thị một lần khi lưu và sau đó sẽ bị ẩn để đảm bảo an toàn.",
+  "AddAIProvider": "Thêm {{aiProvider}}",
+  "AddMCPServer": "Thêm {{mcpServer}}",
+  "DefaultProviderSetSuccess": "Đã thiết lập nhà cung cấp mặc định thành công",
+  "DefaultProviderTitle": "Nhà cung cấp mặc định",
+  "DeleteProvider": "Xóa {{aiProvider}}",
+  "MCPUnavailableError": "Máy chủ {{mcpServer}} không khả dụng",
+  "Model": "Mô hình"
 }

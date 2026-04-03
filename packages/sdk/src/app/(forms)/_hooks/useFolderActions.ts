@@ -37,9 +37,10 @@ import {
 } from "@docspace/shared/api/files";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { createChunks, runWithConcurrency } from "@docspace/ui-kit/uploader";
+import { usePathname } from "next/navigation";
 
 import { FormsSection } from "@/types/forms";
-import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
+import { sectionFromPathname } from "../_utils/sectionFromPathname";
 import { useFormsSettingsStore } from "../_store/FormsSettingsStore";
 import useFormsData from "./useFormsData";
 
@@ -49,7 +50,8 @@ const DEFAULT_UPLOAD_THREADS = 3;
 export default function useFolderActions() {
   const { t } = useTranslation(["Common"]);
   const formsSettingsStore = useFormsSettingsStore();
-  const { activeSection } = useFormsNavigationStore();
+  const pathname = usePathname();
+  const activeSection = sectionFromPathname(pathname);
   const { fetchSection } = useFormsData();
   const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -119,8 +121,7 @@ export default function useFolderActions() {
 
         await fetchSection(activeSection);
       } catch (error) {
-        toastr.error(t("Common:Error"));
-        console.error("Upload failed:", error);
+        toastr.error(error as string);
       }
     },
     [getFolderId, formsSettingsStore, fetchSection, activeSection, t],
@@ -172,8 +173,7 @@ export default function useFolderActions() {
         setIsCreateFormDialogVisible(false);
         await fetchSection(activeSection);
       } catch (error) {
-        toastr.error(t("Common:Error"));
-        console.error("Create form failed:", error);
+        toastr.error(error as string);
       } finally {
         setIsCreatingForm(false);
       }

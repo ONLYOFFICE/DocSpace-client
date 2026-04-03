@@ -5,5 +5,8 @@
   "ErrorViewDescriptionNetworkError": "Het lijkt erop dat er geen internetverbinding is.",
   "SuggestChanges": "Wijzigingen voorstellen",
   "TemplateInfo": "Sjabloon info",
-  "ViewAllTemplates": "Bekijk alle sjablonen"
+  "ViewAllTemplates": "Bekijk alle sjablonen",
+  "ErrorViewHeader": "Galerij is tijdelijk niet beschikbaar",
+  "SelectTemplate": "Selecteer sjabloon",
+  "UploadGallery": "Uploaden in de Galerij"
 }

@@ -3,11 +3,11 @@
   "content": "The rooms included in group will be displayed in the <strong>All Rooms</strong> section.",
   "content_en_sha1_hash": "3b90f01308bc168aeaa213c4f963cd2dfa36dbed",
   "created_at": "2026-02-19T13:36:24.881Z",
-  "updated_at": "2026-02-19T13:36:32.423Z",
+  "updated_at": "2026-03-20T09:36:23.823Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This text explains where the rooms belonging to a group will be shown after the group is removed. It appears within a dialog (likely a \"Delete Group Dialog\") and informs the user about the destination of those rooms. Translators should ensure clarity regarding the location of the rooms.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T09:36:23.823Z"
   },
   "usage": [
     {

@@ -1,0 +1,21 @@
+{
+  "key_path": "FormManagersDescription",
+  "content": "Users who can view and manage form submissions.",
+  "content_en_sha1_hash": "1a40783caf2dcde225f1ba59efbf074fb09e5226",
+  "created_at": "2026-03-20T09:07:28.361Z",
+  "updated_at": "2026-03-20T09:07:28.361Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "key_path": "AIPricingAdditionalTooltipWebSearch",
+  "content": "<1>Web search</1> — AI fetches real-time information from the web when needed for your request.",
+  "content_en_sha1_hash": "76d991403ee56fe7521576f64ad52140952b99cc",
+  "created_at": "2026-03-20T09:07:40.666Z",
+  "updated_at": "2026-03-20T10:21:46.410Z",
+  "comment": {
+    "text": "This key provides a tooltip explaining how AI services access real-time web information to fulfill user requests. It appears within the AI service pricing section of the Portal Settings, specifically within the Payments > SaaS > Services area. Translators should focus on conveying the \"real-time web search\" functionality.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T10:21:46.410Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/panels/ai-service/PricingBillingBody.tsx",
+      "line_number": 201,
+      "context": "/>\n <br />\n <Trans\n t={t}\n ns=\"Services\"\n i18nKey=\"AIPricingAdditionalTooltipWebSearch\"\n components={{\n 1: <strong />,\n }}\n />\n <br />",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -35,5 +35,12 @@
   "ServerUpdatedSuccess": "服务器更新成功",
   "ServiceIcon": "服务图标",
   "SystemMCPListTitle": "系统",
-  "WebSearchKeyHiddenDescription": "API 密钥仅在保存时显示一次，随后出于安全目的将被隐藏。"
+  "WebSearchKeyHiddenDescription": "API 密钥仅在保存时显示一次，随后出于安全目的将被隐藏。",
+  "AddAIProvider": "添加 {{aiProvider}}",
+  "AddMCPServer": "添加 {{mcpServer}}",
+  "DefaultProviderSetSuccess": "默认提供商已成功设置",
+  "DefaultProviderTitle": "默认提供商",
+  "DeleteProvider": "删除 {{aiProvider}}",
+  "MCPUnavailableError": "{{mcpServer}} 服务器不可用",
+  "Model": "模型"
 }

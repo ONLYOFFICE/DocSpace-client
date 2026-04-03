@@ -3,11 +3,11 @@
   "content": "Edit tag",
   "content_en_sha1_hash": "b50cf28f688294adb0cf472b645f9208a6dbb0b4",
   "created_at": "2026-02-19T13:36:19.058Z",
-  "updated_at": "2026-02-19T13:36:33.126Z",
+  "updated_at": "2026-03-20T10:29:38.082Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key provides the title for a modal dialog used to edit an existing tag. It appears as the header of the \"Edit Tag\" modal, indicating the purpose of the dialog to the user. Translators should ensure the translation accurately reflects the action of modifying a tag.",
+    "is_auto": true,
+    "updated_at": "2026-03-20T10:29:38.082Z"
   },
   "usage": [
     {

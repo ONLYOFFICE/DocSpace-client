@@ -42,7 +42,7 @@ import FilesPanels from "../../components/FilesPanels";
 import SelectionArea from "../Home/SelectionArea/FilesSelectionArea";
 import MediaViewer from "../Home/MediaViewer";
 import { usePublic, useSDK } from "../Home/Hooks";
-import { StyledToast } from "./StyledPublicRoom";
+import styles from "./PublicRoom.module.scss";
 
 const PUBLIC_SIGN_IN_TOAST = "showPublicSignInToast";
 
@@ -134,7 +134,7 @@ const PublicRoomPage = (props) => {
     );
 
     const toastText = (
-      <StyledToast>
+      <div className={styles.toast}>
         <Text fontSize="12px" fontWeight={400}>
           {content}
         </Text>
@@ -146,7 +146,7 @@ const PublicRoomPage = (props) => {
         >
           {t("Common:LoginButton")}
         </Link>
-      </StyledToast>
+      </div>
     );
 
     toastr.info(toastText);

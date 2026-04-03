@@ -3,5 +3,7 @@
   "DisplayFileExtension": "Rādīt faila paplašinājumu blakus faila nosaukumam",
   "OpenSameTab": "Atvērt {{organizationName}} redaktoru tajā pašā cilnē",
   "OriginalCopy": "Saglabājiet faila kopiju arī sākotnējā formātā",
-  "TrashMoveConfirmation": "Parādīt paziņojumu, pārvietojot vienumus uz {{sectionName}}"
+  "TrashMoveConfirmation": "Parādīt paziņojumu, pārvietojot vienumus uz {{sectionName}}",
+  "DefaultHomepage": "Sākuma lapa",
+  "GroupByRooms": "Grupēt pēc telpām"
 }

@@ -216,6 +216,20 @@ export const mockEventListenerPlugin: TAPIPlugin = {
   settings: "",
 };
 
+export const mockMediaViewerPlugin: TAPIPlugin = {
+  ...mockPlugin1,
+  name: "media-viewer",
+  version: "1.0.0",
+  minDocSpaceVersion: "3.5.0",
+  description:
+    "Sample plugin demonstrating media viewer integration for DocSpace",
+  pluginName: "MediaViewerSample",
+  scopes: "File",
+  image: "docspace-icon.svg",
+  url: "/plugins/media-viewer/plugin.js",
+  settings: "",
+};
+
 // Empty plugins list
 export const webPluginsEmpty = {
   response: [],
@@ -356,6 +370,20 @@ export const webPluginsWithEventListenerPlugin = {
   statusCode: 200,
 };
 
+// Plugins list with media viewer sample plugin
+export const webPluginsWithMediaViewerPlugin = {
+  response: [mockMediaViewerPlugin],
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
 // Plugins list with locale plugin
 export const webPluginsWithLocale = {
   response: [mockLocalePlugin],
@@ -423,7 +451,8 @@ export const webPluginsResolver = (
     | "withArticleButtonPlugin"
     | "withFileItemPlugin"
     | "withProfileMenuPlugin"
-    | "withEventListenerPlugin" = "empty",
+    | "withEventListenerPlugin"
+    | "withMediaViewerPlugin" = "empty",
 ) => {
   let data;
 
@@ -457,6 +486,9 @@ export const webPluginsResolver = (
       break;
     case "withEventListenerPlugin":
       data = webPluginsWithEventListenerPlugin;
+      break;
+    case "withMediaViewerPlugin":
+      data = webPluginsWithMediaViewerPlugin;
       break;
     default:
       data = webPluginsEmpty;
@@ -492,7 +524,8 @@ export const webPluginsHandler = (
     | "withArticleButtonPlugin"
     | "withFileItemPlugin"
     | "withProfileMenuPlugin"
-    | "withEventListenerPlugin" = "empty",
+    | "withEventListenerPlugin"
+    | "withMediaViewerPlugin" = "empty",
 ) => {
   return http.get(
     `${BASE_URL}:${port}/${API_PREFIX}/${PATH_WEB_PLUGINS}`,

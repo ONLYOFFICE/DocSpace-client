@@ -26,15 +26,14 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import styled, { css, useTheme } from "styled-components";
+import { useTheme } from "styled-components";
+import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/ui-kit/components/modal-dialog";
 import {
-  mobile,
-  tablet,
   isMobile,
   isDesktop,
   isTablet,
@@ -43,6 +42,7 @@ import {
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import RoomLogoCover from "./sub-components/RoomLogoCover";
 import { CoverDialogProps, ILogoCover } from "./RoomLogoCoverDialog.types";
+import styles from "./RoomLogoCover.module.scss";
 
 const PADDING_HEIGHT = 84;
 const HEIGHT_WITHOUT_BODY = 158;
@@ -54,64 +54,6 @@ const TABLET_HEIGHT = 854;
 const BREAKPOINT_GENERAL_SCROLL = 640;
 const HEADER = 70;
 const BUTTONS = 80;
-
-const StyledModalDialog = styled(ModalDialog)<{
-  heightProp?: string;
-  scrollBodyHeight?: null | number;
-}>`
-  #modal-dialog {
-    width: 422px;
-    height: ${(props) => props.heightProp};
-
-    @media ${tablet} {
-      width: 464px;
-    }
-
-    .modal-header {
-      height: 54px;
-      min-height: 54px;
-    }
-    .modal-body {
-      padding: 0;
-      padding-inline-start: 16px;
-
-      ${(props) =>
-        props.scrollBodyHeight &&
-        css`
-          height: ${`${props.scrollBodyHeight}px`};
-
-          .room-logo-container {
-            padding-left: 15px;
-          }
-
-          .icon-container {
-            padding-right: 1px;
-          }
-        `}
-    }
-
-    .modal-footer {
-      margin-top: 8px;
-    }
-
-    @media ${mobile} {
-      margin-bottom: 16px;
-      width: 100vw;
-
-      .modal-body {
-        padding: 0px 16px 8px;
-      }
-
-      .modal-footer {
-        margin-top: 0px;
-      }
-
-      .modal-header {
-        margin-bottom: 16px;
-      }
-    }
-  }
-`;
 
 const RoomLogoCoverDialog = ({
   setRoomLogoCoverDialogVisible,
@@ -279,14 +221,23 @@ const RoomLogoCoverDialog = ({
   }, [roomLogoCoverDialogVisible]);
 
   return (
-    <StyledModalDialog
+    <ModalDialog
       visible
       autoMaxHeight
-      heightProp={height}
+      className={classNames(styles.roomLogoCoverModal, {
+        [styles.hasScrollBody]: !!scrollBodyHeight,
+      })}
+      style={
+        {
+          "--dialog-height": height,
+          "--scroll-body-height": scrollBodyHeight
+            ? `${scrollBodyHeight}px`
+            : undefined,
+        } as React.CSSProperties
+      }
       onClose={onCloseRoomLogo}
       displayType={isMobile() ? ModalDialogType.aside : ModalDialogType.modal}
       withBodyScroll
-      scrollBodyHeight={scrollBodyHeight}
       withBodyScrollForcibly={!!scrollBodyHeight}
       isScrollLocked={openColorPicker}
       dataTestId="room_logo_cover_dialog"
@@ -332,7 +283,7 @@ const RoomLogoCoverDialog = ({
           testId="room_logo_cover_cancel_button"
         />
       </ModalDialog.Footer>
-    </StyledModalDialog>
+    </ModalDialog>
   );
 };
 

@@ -26,109 +26,9 @@
 
 import React from "react";
 
-import styled, { css } from "styled-components";
-import { tablet } from "@docspace/shared/utils";
-import { TColorScheme } from "@docspace/ui-kit/providers/theme/themes";
 import hexRgb from "hex-rgb";
 import { SelectIconProps, ILogo } from "../RoomLogoCoverDialog.types";
-
-interface WithoutIconProps {
-  isSelected?: boolean;
-}
-
-const StyledWithoutIcon = styled.div<WithoutIconProps>`
-  display: flex;
-  white-space: nowrap;
-  flex-direction: column;
-  margin: 8px 0;
-  gap: 4px;
-  width: max-content;
-  font-weight: 600;
-  line-height: 20px;
-  user-select: none;
-  padding: 3px 15px;
-  background-color: ${(props) => props.theme.logoCover.selectedBackgroundColor};
-  border: 1px solid ${(props) => props.theme.logoCover.selectedBorderColor};
-  border-radius: 16px;
-  box-sizing: border-box;
-
-  @media ${tablet} {
-    padding: 5px 21px;
-    margin: 12px auto;
-  }
-
-  &:hover {
-    cursor: pointer;
-  }
-
-  ${(props) =>
-    !props.isSelected &&
-    css`
-      background-color: ${({ theme }) => theme.logoCover.backgroundColor};
-      border: 1px solid ${({ theme }) => theme.logoCover.borderColor};
-    `}
-`;
-
-const StyledIconContainer = styled.div<{
-  $currentColorScheme?: TColorScheme;
-  isSelected: boolean;
-}>`
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  width: 30px;
-  height: 30px;
-
-  @media ${tablet} {
-    width: 40px;
-    height: 40px;
-  }
-  border-radius: 4px;
-
-  svg {
-    path {
-      fill: ${(props) => props.theme.logoCover.iconColor};
-    }
-  }
-
-  &:hover {
-    cursor: pointer;
-    svg {
-      path {
-        ${({ $currentColorScheme }) =>
-          $currentColorScheme &&
-          css`
-            fill: ${$currentColorScheme.main?.accent};
-          `}
-      }
-    }
-  }
-
-  .cover-icon {
-    overflow: visible;
-    &:hover {
-      cursor: pointer;
-    }
-  }
-  ${(props) =>
-    props.isSelected &&
-    props.$currentColorScheme &&
-    props.$currentColorScheme.main?.accent &&
-    css`
-      background-color: ${hexRgb(props.$currentColorScheme.main.accent, {
-        alpha: 0.2,
-        format: "css",
-      })};
-
-      svg {
-        path {
-          fill: ${props.$currentColorScheme.main.accent};
-        }
-      }
-    `}
-`;
+import styles from "../RoomLogoCover.module.scss";
 
 export const SelectIcon = ({
   t,
@@ -149,13 +49,13 @@ export const SelectIcon = ({
     <div>
       <div className="icon-container">
         <div className="color-name">{t("CreateEditRoomDialog:Icon")}</div>
-        <StyledWithoutIcon
+        <div
+          className={`${styles.withoutIcon}${withoutIcon ? ` ${styles.isSelected}` : ""}`}
           onClick={toggleWithoutIcon}
-          isSelected={withoutIcon}
           data-testid="room_logo_cover_without_icon"
         >
           {t("WithoutIcon")}
-        </StyledWithoutIcon>
+        </div>
       </div>
 
       <div className="cover-icon-container">
@@ -164,10 +64,21 @@ export const SelectIcon = ({
               function createMarkup() {
                 return { __html: icon.data };
               }
+              const isSelected = coverId === icon.id ? !withoutIcon : false;
+              const accent = $currentColorScheme?.main?.accent;
+              const iconStyle = accent
+                ? ({
+                    "--icon-hover-color": accent,
+                    "--icon-selected-bg": isSelected
+                      ? hexRgb(accent, { alpha: 0.2, format: "css" })
+                      : undefined,
+                  } as React.CSSProperties)
+                : undefined;
+
               return (
-                <StyledIconContainer
-                  isSelected={coverId === icon.id ? !withoutIcon : false}
-                  $currentColorScheme={$currentColorScheme}
+                <div
+                  className={`${styles.iconContainer}${isSelected ? ` ${styles.isSelected}` : ""}`}
+                  style={iconStyle}
                   onClick={
                     coverId === icon.id
                       ? toggleWithoutIcon

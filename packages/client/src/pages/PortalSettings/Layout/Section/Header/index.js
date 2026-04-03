@@ -169,9 +169,11 @@ const SectionHeaderContent = (props) => {
       const header = serviceSubPageHeader;
       const isCategoryOrHeader = false;
 
-      header !== state.header && setState((val) => ({ ...val, header }));
-      isCategoryOrHeader !== state.isCategoryOrHeader &&
-        setState((val) => ({ ...val, isCategoryOrHeader }));
+      setState((val) => {
+        if (val.header === header && val.isCategoryOrHeader === isCategoryOrHeader)
+          return val;
+        return { ...val, header, isCategoryOrHeader };
+      });
       return;
     }
 
@@ -197,21 +199,20 @@ const SectionHeaderContent = (props) => {
 
     const isNeedPaidIcon = !isAvailableSettings(header);
 
-    state.isNeedPaidIcon !== isNeedPaidIcon &&
-      setState((val) => ({ ...val, isNeedPaidIcon }));
-
-    header !== state.header && setState((val) => ({ ...val, header }));
-
-    isCategoryOrHeader !== state.isCategoryOrHeader &&
-      setState((val) => ({ ...val, isCategoryOrHeader }));
+    setState((val) => {
+      if (
+        val.header === header &&
+        val.isCategoryOrHeader === isCategoryOrHeader &&
+        val.isNeedPaidIcon === isNeedPaidIcon
+      )
+        return val;
+      return { ...val, header, isCategoryOrHeader, isNeedPaidIcon };
+    });
   }, [
     tReady,
     setIsLoadedSectionHeader,
     getArrayOfParams,
     isAvailableSettings,
-    state.isNeedPaidIcon,
-    state.header,
-    state.isCategoryOrHeader,
     location.pathname,
   ]);
 

@@ -28,7 +28,7 @@ import DeleteReactSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import ActionsHeaderTouchReactSvgUrl from "PUBLIC_DIR/images/actions.header.touch.react.svg?url";
 
-import React from "react";
+import React, { useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { useNavigate, useLocation } from "react-router";
@@ -472,3 +472,4 @@ export default inject(
     ])(observer(SectionHeaderContent)),
   ),
 );
+

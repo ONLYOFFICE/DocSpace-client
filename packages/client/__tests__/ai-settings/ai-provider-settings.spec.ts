@@ -435,12 +435,12 @@ test.describe("AI Provider", () => {
     const tilesWithErrors = page.getByTestId("ai-tile-error-icon");
     await expect(tilesWithErrors).toHaveCount(4);
 
-    const toastMessage = page
-      .getByTestId("toast")
+    const providerError = page
+      .getByTestId("default-provider-field-container")
       .getByText(
         "The specified API key is invalid or does not have access rights. Verify that the key is correct and try again",
       );
-    await expect(toastMessage).toBeVisible();
+    await expect(providerError).toBeVisible();
 
     await expectScreenshot(page,[
       "desktop",

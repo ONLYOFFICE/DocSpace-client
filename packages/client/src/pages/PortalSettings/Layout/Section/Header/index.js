@@ -60,10 +60,7 @@ import classNames from "classnames";
 import styles from "./Header.module.scss";
 
 export const HeaderContainer = ({ children, className = "", ...props }) => (
-  <div
-    className={classNames(styles.headerContainer, className)}
-    {...props}
-  >
+  <div className={classNames(styles.headerContainer, className)} {...props}>
     {children}
   </div>
 );
@@ -106,7 +103,7 @@ const SectionHeaderContent = (props) => {
     isHeaderVisible: false,
   });
 
-  const getArrayOfParams = () => {
+  const getArrayOfParams = useCallback(() => {
     const path = location.pathname;
     const arrayPath = path.split("/");
     const arrayOfParams = arrayPath.filter((param) => {
@@ -114,34 +111,44 @@ const SectionHeaderContent = (props) => {
     });
 
     return arrayOfParams;
-  };
+  }, [location.pathname]);
 
-  const isAvailableSettings = (key) => {
-    switch (key) {
-      case "PortalRenaming":
-        return isCustomizationAvailable;
-      case "DNSSettings":
-        return isCustomizationAvailable;
-      case "Common:RestoreBackup":
-        return isRestoreAndAutoBackupAvailable;
-      case "Common:BrandName":
-        return isCustomizationAvailable || standalone;
-      case "Common:WhiteLabel":
-        return isCustomizationAvailable || standalone;
-      case "CompanyInfoSettings":
-        return isCustomizationAvailable || standalone;
-      case "AdditionalResources":
-        return isCustomizationAvailable || standalone;
-      case "SingleSignOn:ServiceProviderSettings":
-      case "SingleSignOn:SpMetadata":
-        return isSSOAvailable;
-      case "Backup":
-        if (isNotPaidPeriod) return true;
-        return !isBackupPaid;
-      default:
-        return true;
-    }
-  };
+  const isAvailableSettings = useCallback(
+    (key) => {
+      switch (key) {
+        case "PortalRenaming":
+          return isCustomizationAvailable;
+        case "DNSSettings":
+          return isCustomizationAvailable;
+        case "Common:RestoreBackup":
+          return isRestoreAndAutoBackupAvailable;
+        case "Common:BrandName":
+          return isCustomizationAvailable || standalone;
+        case "Common:WhiteLabel":
+          return isCustomizationAvailable || standalone;
+        case "CompanyInfoSettings":
+          return isCustomizationAvailable || standalone;
+        case "AdditionalResources":
+          return isCustomizationAvailable || standalone;
+        case "SingleSignOn:ServiceProviderSettings":
+        case "SingleSignOn:SpMetadata":
+          return isSSOAvailable;
+        case "Backup":
+          if (isNotPaidPeriod) return true;
+          return !isBackupPaid;
+        default:
+          return true;
+      }
+    },
+    [
+      isCustomizationAvailable,
+      isRestoreAndAutoBackupAvailable,
+      isSSOAvailable,
+      standalone,
+      isNotPaidPeriod,
+      isBackupPaid,
+    ],
+  );
 
   React.useEffect(() => {
     if (tReady) setIsLoadedSectionHeader(true);
@@ -296,14 +303,14 @@ const SectionHeaderContent = (props) => {
                 organizationName: logoText,
               })
             : t("DataImport")
-      : !standalone && isPaymentPage  
-        ? t("Billing") 
+      : !standalone && isPaymentPage
+        ? t("Billing")
         : t(header, {
-          organizationName: logoText,
-          license: t("Common:EnterpriseLicense"),
-          productName: t("Common:ProductName"),
-          aiServices: t("Common:AIServices"),
-        });
+            organizationName: logoText,
+            license: t("Common:EnterpriseLicense"),
+            productName: t("Common:ProductName"),
+            aiServices: t("Common:AIServices"),
+          });
 
   return (
     <StyledContainer>

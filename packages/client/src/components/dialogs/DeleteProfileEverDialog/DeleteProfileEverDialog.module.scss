@@ -24,38 +24,37 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
+@use "@docspace/ui-kit/styles/variables/colors" as *;
 
-export const StyledBodyContent = styled.div<{
-  needReassignData: boolean;
-}>`
+.bodyContent {
   display: contents;
 
-  .user-delete {
+  :global(.user-delete) {
     line-height: 20px;
-
     padding-bottom: 16px;
   }
 
-  .text-warning {
-    color: ${(props) => props.theme.peopleDialogs.deleteUser.textColor};
+  :global(.text-warning) {
+    color: $light-error-status;
     font-size: 16px;
     font-weight: 700;
     line-height: 22px;
+
+    :global(.dark) & {
+      color: $dark-error-status;
+    }
   }
 
-  .text-delete-description {
+  :global(.text-delete-description) {
     line-height: 20px;
     padding: 8px 0;
-
-    ${(props) =>
-      !props.needReassignData &&
-      css`
-        padding-bottom: 0;
-      `}
   }
 
-  .reassign-data {
+  &.noReassign :global(.text-delete-description) {
+    padding-bottom: 0;
+  }
+
+  :global(.reassign-data) {
     line-height: 15px;
   }
-`;
+}

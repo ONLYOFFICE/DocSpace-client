@@ -417,6 +417,11 @@ class FilesActionStore {
     const filesList = [];
     await this.createFolderTree(tree, toFolderId, filesList);
 
+
+    if (withoutHiddenFiles.length) {
+      setPrimaryProgressBarData({ ...pbData, completed: uploaded });
+    }
+
     if (filesList.length) {
       setPrimaryProgressBarData({ ...pbData });
     }
@@ -3933,3 +3938,4 @@ class FilesActionStore {
 }
 
 export default FilesActionStore;
+

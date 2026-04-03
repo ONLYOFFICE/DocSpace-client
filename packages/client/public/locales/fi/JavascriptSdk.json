@@ -95,7 +95,6 @@
   "RoomTypeDisplay": "Huoneen tyypin näyttäminen",
   "Rotate": "Kierrä",
   "Scale": "Mittakaavassa",
-  "SDKDescription": "Käyttäen JavaScript SDK:ta voit upottaa huoneen tai kansion {{productName}}:sta oman käyttöliittymäsi iframe:ksi. Tästä löydät asetukset iframe:n mallin luomiseen ja CSP:n määrittämiseen. Käyttääksesi koko SDK:ta, katso",
   "SdkPackageVersionInfo": "Yhdistämiseen pakettiversiona aina uusin",
   "SearchBlock": "Etsi lohko",
   "SearchByNameEmail": "Etsi nimellä tai sähköpostilla",

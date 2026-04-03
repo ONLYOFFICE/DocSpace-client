@@ -1,0 +1,89 @@
+@use "@docspace/ui-kit/styles/mixins";
+
+
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 80px;
+
+    @include mixins.tablet {
+        margin-top: 48px;
+    }
+
+    @include mixins.mobile {
+        margin-top: 16px;
+    }
+}
+
+.header {
+    max-width: 640px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+    margin-bottom: 44px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 16px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
+    border-radius: 12px;
+    border: var(--dev-tools-card-border);
+    background-color: var(--background-color);
+}
+
+.cardIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+}
+
+.cardIconInner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg path {
+        fill: currentColor;
+    }
+}
+
+.cardContent {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.cardDivider {
+    margin: 0;
+    width: 100%;
+    height: 1px;
+    border: none;
+    background-color: var(--dev-tools-card-divider);
+    margin-top: auto;
+}
+
+.cardLink {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    svg {
+        path {
+            fill: var(--accent-main);
+        }
+    }
+}

@@ -35,5 +35,12 @@
   "ServerUpdatedSuccess": "Serverul a fost actualizat cu succes",
   "ServiceIcon": "Pictogramă Serviciu",
   "SystemMCPListTitle": "Sistem",
-  "WebSearchKeyHiddenDescription": "Cheia API se afișează o singură dată la salvare și este ascunsă ulterior din motive de securitate."
+  "WebSearchKeyHiddenDescription": "Cheia API se afișează o singură dată la salvare și este ascunsă ulterior din motive de securitate.",
+  "AddAIProvider": "Adaugă {{aiProvider}}",
+  "AddMCPServer": "Adaugă {{mcpServer}}",
+  "DefaultProviderSetSuccess": "Furnizorul implicit a fost setat cu succes.",
+  "DefaultProviderTitle": "Furnizor implicit",
+  "DeleteProvider": "Șterge {{aiProvider}}",
+  "MCPUnavailableError": "Serverul {{mcpServer}} nu este disponibil",
+  "Model": "Model"
 }

@@ -45,5 +45,6 @@
   "HotkeysUploadFile": "Otpremi datoteku",
   "HotkeysUploadingObjects": "Otpremljivanje stavki",
   "HotkeysZoomIn": "Zumiraj unutra",
-  "HotkeysZoomOut": "Zumiraj napolje"
+  "HotkeysZoomOut": "Zumiraj napolje",
+  "OpenContextMenu": "Otvor kontekstni meni"
 }

@@ -35,5 +35,12 @@
   "ServerUpdatedSuccess": "Сервер успішно оновлено",
   "ServiceIcon": "Іконка сервісу",
   "SystemMCPListTitle": "Система",
-  "WebSearchKeyHiddenDescription": "Ключ API відображається лише один раз під час збереження, після чого він прихований з міркувань безпеки."
+  "WebSearchKeyHiddenDescription": "Ключ API відображається лише один раз під час збереження, після чого він прихований з міркувань безпеки.",
+  "AddAIProvider": "Додайте {{aiProvider}}",
+  "AddMCPServer": "Додайте {{mcpServer}}",
+  "DefaultProviderSetSuccess": "Постачальника за замовчуванням успішно встановлено",
+  "DefaultProviderTitle": "Постачальник за замовчуванням",
+  "DeleteProvider": "Видалити {{aiProvider}}",
+  "MCPUnavailableError": "{{mcpServer}} недоступний",
+  "Model": "Модель"
 }

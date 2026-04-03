@@ -5,5 +5,8 @@
   "ErrorViewDescriptionNetworkError": "インターネット接続が見当たらないようです。",
   "SuggestChanges": "変更点のご提案",
   "TemplateInfo": "テンプレート情報",
-  "ViewAllTemplates": "テンプレート一覧を見る"
+  "ViewAllTemplates": "テンプレート一覧を見る",
+  "ErrorViewHeader": "ギャラリーは現在利用できません。",
+  "SelectTemplate": "テンプレートを選択",
+  "UploadGallery": "ギャラリーにアップロード"
 }

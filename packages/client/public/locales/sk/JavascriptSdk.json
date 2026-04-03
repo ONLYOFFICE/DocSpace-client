@@ -95,7 +95,6 @@
   "RoomTypeDisplay": "Zobrazenie typu miestnosti",
   "Rotate": "Otočiť",
   "Scale": "Zmeniť rozmer",
-  "SDKDescription": "Pomocou JavaScript SDK môžete vložiť miestnosť alebo priečinok z {{productName}} do svojho webového rozhrania ako iframe. Tu nájdete nastavenia na vytvorenie vzoru iframe a konfiguráciu CSP. Ak chcete používať kompletnú sadu SDK, pozrite si",
   "SdkPackageVersionInfo": "Na pripojenie ako balíka je verzia vždy najnovšia",
   "SearchBlock": "Blok na vyhľadávanie",
   "SearchByNameEmail": "Vyhľadávanie podľa mena alebo e-mailu",

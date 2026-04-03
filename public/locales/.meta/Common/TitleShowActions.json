@@ -3,7 +3,7 @@
   "content": "Show File Actions",
   "content_en_sha1_hash": "5f4d732bf49f42d2b52ab6682a11f986c01135a6",
   "created_at": "2026-02-18T14:56:21.929Z",
-  "updated_at": "2026-03-20T09:09:54.627Z",
+  "updated_at": "2026-03-31T15:18:46.262Z",
   "comment": {
     "text": "This key displays text on a button or context menu option, indicating that it will show available actions for a file or folder. The displayed text changes based on whether the item is a folder or a regular file. Translators should ensure the text accurately reflects the function of revealing further options.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/ItemTitle/ContextButton.tsx",
-      "line_number": 139,
+      "line_number": 138,
       "context": "id=\"info-options\"\n className=\"expandButton\"\n title={\n \"isFolder\" in selection && selection.isFolder\n ? t(\"Common:TitleShowFolderActions\")\n : t(\"Common:TitleShowActions\")\n }\n onClick={onContextMenu}\n getData={getData}\n directionX=\"right\"\n displayType={ContextMenuButtonDisplayType.toggle}",
       "module": "/packages/client"
     },

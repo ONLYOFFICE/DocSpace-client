@@ -201,6 +201,6 @@ export default inject(({ webhooksStore, userStore }) => {
   return {
     toggleEnabled,
     setCurrentWebhook,
-    isAdmin: userStore.user.isAdmin,
+    isAdmin: userStore.user.isAdmin || userStore.user.isOwner,
   };
 })(observer(WebhooksTableRow));

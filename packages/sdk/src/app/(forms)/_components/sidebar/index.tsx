@@ -44,9 +44,13 @@ import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.rea
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 
-import { FormsSection } from "@/types/forms";
+import { FormsSection, DEFAULT_SETTINGS_SUBSECTION } from "@/types/forms";
 
-import { sectionFromPathname, sectionToPath } from "../../_utils/sectionFromPathname";
+import {
+  sectionFromPathname,
+  sectionToPath,
+  settingsSubSectionToPath,
+} from "../../_utils/sectionFromPathname";
 import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
 import { libraryUrl } from "../../_utils/libraryUrl";
@@ -120,7 +124,7 @@ const FormsSidebar = () => {
     if (rid) params.set("roomId", rid);
     if (lid) params.set("libraryId", lid);
     const qs = params.toString();
-    router.replace(`${sectionToPath(FormsSection.Settings)}${qs ? `?${qs}` : ""}`);
+    router.replace(`${settingsSubSectionToPath(DEFAULT_SETTINGS_SUBSECTION)}${qs ? `?${qs}` : ""}`);
   }, [router, searchParams, activeSection]);
 
   return (

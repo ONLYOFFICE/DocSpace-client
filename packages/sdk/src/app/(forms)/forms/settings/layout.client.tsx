@@ -29,25 +29,48 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
 import { Tabs, type TTabItem } from "@docspace/ui-kit/components/tabs";
-
 import { getRoomMembers } from "@docspace/shared/api/rooms";
 import type { RoomMember } from "@docspace/shared/api/rooms/types";
 
+import { SettingsSubSection } from "@/types/forms";
+import {
+  settingsSubSectionFromPathname,
+  settingsSubSectionToPath,
+} from "../../_utils/sectionFromPathname";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
 import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
 
-import AIAgentForm from "./category/AIAgentForm";
-import BillingForm from "./category/BillingForm";
-import ConnectDatabaseForm from "./category/ConnectDatabaseForm";
-import ContactsForm from "./category/ContactsForm";
+type SettingsMembersContextValue = {
+  members: RoomMember[];
+  fetchMembers: () => void;
+};
 
-const Settings = () => {
+const SettingsMembersContext =
+  React.createContext<SettingsMembersContextValue | null>(null);
+
+export function useSettingsMembers(): SettingsMembersContextValue {
+  const ctx = React.useContext(SettingsMembersContext);
+  if (!ctx) throw new Error("useSettingsMembers must be used within SettingsShell");
+  return ctx;
+}
+
+type SettingsShellProps = {
+  children: React.ReactNode;
+};
+
+const SettingsShell = ({ children }: SettingsShellProps) => {
   const { t } = useTranslation(["Common"]);
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const router = useRouter();
   const { roomId } = useFormsSettingsStore();
   const aiStore = useFormsAiAgentStore();
-  const [selectedTabId, setSelectedTabId] = React.useState("payments");
+
+  const activeSubSection = settingsSubSectionFromPathname(pathname);
+
   const [members, setMembers] = React.useState<RoomMember[]>([]);
 
   const fetchMembers = React.useCallback(() => {
@@ -81,52 +104,70 @@ const Settings = () => {
     };
   }, [roomId]);
 
+  const membersCtx = React.useMemo(
+    () => ({ members, fetchMembers }),
+    [members, fetchMembers],
+  );
+
   const tabs: TTabItem[] = React.useMemo(
     () => [
       {
-        id: "payments",
+        id: SettingsSubSection.Billing,
         name: t("Common:Billing"),
-        content: <BillingForm />,
+        content: null,
       },
       {
-        id: "ai-agent",
+        id: SettingsSubSection.AiAgent,
         name: t("Common:AIAgent"),
-        content: <AIAgentForm inline />,
+        content: null,
       },
       {
-        id: "access",
+        id: SettingsSubSection.Access,
         name: t("Common:AccessSettings"),
-        content: (
-          <ContactsForm
-            inline
-            members={members}
-            onMembersChange={fetchMembers}
-          />
-        ),
+        content: null,
       },
       {
-        id: "collect-data",
+        id: SettingsSubSection.CollectData,
         name: t("Common:CollectData"),
-        content: <ConnectDatabaseForm inline />,
+        content: null,
       },
     ],
-    [t, members, fetchMembers],
+    [t],
   );
 
-  const onSelect = React.useCallback((tab: TTabItem) => {
-    setSelectedTabId(tab.id);
-  }, []);
+  const onSelect = React.useCallback(
+    (tab: TTabItem) => {
+      const sub = tab.id as SettingsSubSection;
+      if (sub === activeSubSection) return;
+
+      const params = new URLSearchParams();
+      const rid = searchParams.get("roomId") ?? "";
+      const lid = searchParams.get("libraryId") ?? "";
+      if (rid) params.set("roomId", rid);
+      if (lid) params.set("libraryId", lid);
+      const qs = params.toString();
+      router.replace(
+        `${settingsSubSectionToPath(sub)}${qs ? `?${qs}` : ""}`,
+      );
+    },
+    [activeSubSection, searchParams, router],
+  );
 
   return (
-    <div>
-      <Tabs
-        items={tabs}
-        selectedItemId={selectedTabId}
-        onSelect={onSelect}
-        withoutStickyIntend
-      />
-    </div>
+    <SettingsMembersContext.Provider value={membersCtx}>
+      <div>
+        <Tabs
+          items={tabs}
+          selectedItemId={activeSubSection}
+          onSelect={onSelect}
+          withoutStickyIntend
+        />
+        <div style={{ maxWidth: 700 }}>
+          {children}
+        </div>
+      </div>
+    </SettingsMembersContext.Provider>
   );
 };
 
-export default observer(Settings);
+export default observer(SettingsShell);

@@ -35,5 +35,12 @@
   "ServerUpdatedSuccess": "تم تحديث الخادم بنجاح",
   "ServiceIcon": "أيقونة الخدمة",
   "SystemMCPListTitle": "النظام",
-  "WebSearchKeyHiddenDescription": "يتم عرض مفتاح API مرة واحدة فقط عند الحفظ ثم يتم إخفاؤه لأغراض أمنية."
+  "WebSearchKeyHiddenDescription": "يتم عرض مفتاح API مرة واحدة فقط عند الحفظ ثم يتم إخفاؤه لأغراض أمنية.",
+  "AddAIProvider": "أضف {{aiProvider}}",
+  "AddMCPServer": "أضف {{mcpServer}}",
+  "DefaultProviderSetSuccess": "تم تعيين المزود الافتراضي بنجاح",
+  "DefaultProviderTitle": "المزود الافتراضي",
+  "DeleteProvider": "حذف {{aiProvider}}",
+  "MCPUnavailableError": "{{mcpServer}} غير متاح",
+  "Model": "نموذج"
 }

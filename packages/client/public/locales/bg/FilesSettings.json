@@ -3,5 +3,7 @@
   "DisplayFileExtension": "Покажи файловото разширение до името на файла",
   "OpenSameTab": "Отворете редактора на {{organizationName}} в същия раздел",
   "OriginalCopy": "Запази копието на файла и в оригиналния формат",
-  "TrashMoveConfirmation": "Показвай известие при преместване на елементи в {{sectionName}}"
+  "TrashMoveConfirmation": "Показвай известие при преместване на елементи в {{sectionName}}",
+  "DefaultHomepage": "Начална страница по подразбиране",
+  "GroupByRooms": "Групиране по стаи"
 }

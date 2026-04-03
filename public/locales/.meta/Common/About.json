@@ -28,25 +28,25 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2025-12-15T14:19:49.860Z"
+      "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2025-12-15T14:19:50.910Z"
+      "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2025-12-15T14:19:51.736Z"
+      "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2025-12-15T14:19:58.591Z"
+      "approved_at": null
     },
     "de": {
       "ai_translated": false,
@@ -58,7 +58,7 @@
           "suggestion": "Consider 'Über' as a possible alternative, or investigate the specific context to determine the most accurate translation.  If it refers to 'About Us' type content, 'Über uns' would be more accurate."
         }
       ],
-      "approved_at": "2025-12-15T14:19:59.062Z"
+      "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,

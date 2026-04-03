@@ -37,7 +37,7 @@ const contactsList = {
       activationStatus: 0,
       department: "",
       workFrom: "2021-03-09T12:52:55.0000000+03:00",
-      isAdmin: true,
+      isAdmin: false,
       isRoomAdmin: false,
       isLDAP: false,
       isOwner: true,

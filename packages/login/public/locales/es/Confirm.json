@@ -37,5 +37,7 @@
   "TfaSubTitle": "Siga estos sencillos pasos para seguir trabajando en este {{productName}}:",
   "TfaTitle": "Autenticación de dos factores habilitada para un acceso seguro",
   "VerifyConnection": "Verifique la conexión",
-  "VerifyConnectionDescription": "Introduzca el código de 6 dígitos generado por su aplicación de autenticación en el campo siguiente para terminar la configuración."
+  "VerifyConnectionDescription": "Introduzca el código de 6 dígitos generado por su aplicación de autenticación en el campo siguiente para terminar la configuración.",
+  "InviteLinkQuotaErrorBody": "El registro a través del enlace ya no está disponible, ya que se ha alcanzado el límite.",
+  "InviteQuotaErrorCustomizedBody": "En 10 segundos será redirigido a la página de <1>Inicio de sesión</1>."
 }

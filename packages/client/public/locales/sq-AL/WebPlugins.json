@@ -14,5 +14,7 @@
   "PluginSDK": "Shtojca SDK",
   "PluginSDKDescription": "Duke përdorur Plugin SDK, mund të zgjeroni funksionalitetin tuaj të {{productName}}, të lidhni shërbimet e palëve të treta ose të përmirësoni përvojën ekzistuese të përdoruesit. Këtu mund të gjeni mostrat e shtojcave me burim kodi të disponueshëm në GitHub.",
   "PluginSDKInstruction": "Klikoni butonin për udhëzime të hollësishme se si të krijoni shtojcat tuaja.",
-  "UploadDescription": "Mund të shtoni shtojca për të zgjeruar funksionalitetin e {{productName}} me veçori shtesë. Klikoni Ngarkoni shtojcën ose hidhni skedarin në arkivin ZIP."
+  "UploadDescription": "Mund të shtoni shtojca për të zgjeruar funksionalitetin e {{productName}} me veçori shtesë. Klikoni Ngarkoni shtojcën ose hidhni skedarin në arkivin ZIP.",
+  "PluginCacheWarningDescription": "Pluginët ruhen në memorje bazuar në numrin e versionit të tyre. Për të siguruar që ndryshimet tuaja të aplikohen, ju lutemi rrisni numrin e versionit në file-in tuaj <1>package.json</1> para ngarkimit. Sistemi nuk do të përditësojë një plugin nëse versioni mbetet i njëjtë.",
+  "PluginDeletedSuccessfully": "Wtyczka została pomyślnie usunięta"
 }

@@ -34,7 +34,7 @@ import { isMobile, mobile } from "@docspace/shared/utils";
 
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 
-import { removeEmojiCharacters } from "SRC_DIR/helpers/utils";
+import { removeEmojiCharacters } from "@docspace/shared/utils";
 import TagHandler from "SRC_DIR/helpers/TagHandler";
 
 import ItemIcon from "../../../ItemIcon";
@@ -166,6 +166,7 @@ type setAgentParamsProps = {
   isDefaultAIAgentsQuotaSet?: CurrentQuotasStore["isDefaultAIAgentsQuotaSet"];
   infoPanelSelection?: TRoom;
   modelAliases?: TAIConfig["modelAliases"];
+  systemAiEnabled?: TAIConfig["systemAiEnabled"];
 };
 
 const setAgentParams = ({
@@ -203,6 +204,7 @@ const setAgentParams = ({
   selectedServers,
   setSelectedServers,
   modelAliases,
+  systemAiEnabled,
 }: setAgentParamsProps) => {
   const { t } = useTranslation([
     "CreateEditRoomDialog",
@@ -528,6 +530,7 @@ const setAgentParams = ({
       <ModelSettings
         agentParams={agentParams}
         modelAliases={modelAliases}
+        systemAiEnabled={systemAiEnabled}
         setAgentParams={setAgentParams}
       />
       <InstructionsSettings
@@ -633,6 +636,8 @@ export default inject(
       infoPanelSelection,
 
       modelAliases: aiConfig?.modelAliases,
+      systemAiEnabled: aiConfig?.systemAiEnabled,
     };
   },
 )(observer(setAgentParams));
+

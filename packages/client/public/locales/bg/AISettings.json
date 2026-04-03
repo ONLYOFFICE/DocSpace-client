@@ -35,5 +35,12 @@
   "ServerUpdatedSuccess": "Успешно актуализиран сървър",
   "ServiceIcon": "Икона на услугата",
   "SystemMCPListTitle": "Система",
-  "WebSearchKeyHiddenDescription": "Ключът за API се показва само веднъж при запазване и след това се скрива за целите на сигурността."
+  "WebSearchKeyHiddenDescription": "Ключът за API се показва само веднъж при запазване и след това се скрива за целите на сигурността.",
+  "AddAIProvider": "Добавете {{aiProvider}}",
+  "AddMCPServer": "Добави {{mcpServer}}",
+  "DefaultProviderSetSuccess": "По подразбиране доставчикът е настроен успешно",
+  "DefaultProviderTitle": "По подразбиране доставчик",
+  "DeleteProvider": "Изтрий {{aiProvider}}",
+  "MCPUnavailableError": "{{mcpServer}} сървърът е недостъпен",
+  "Model": "Модел"
 }

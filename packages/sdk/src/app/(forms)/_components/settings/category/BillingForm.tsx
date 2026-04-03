@@ -53,9 +53,11 @@ const BillingForm = () => {
         size={ButtonSize.normal}
         label={t("Common:OpenBilling")}
         onClick={onOpenBilling}
+        scale={false}
       />
     </div>
   );
 };
 
 export default BillingForm;
+

@@ -37,5 +37,7 @@
   "TfaSubTitle": "Sekojiet vienkāršiem soļiem, lai turpinātu darbu šajā {{productName}}:",
   "TfaTitle": "Divu faktoru autentifikācija aktivizēta drošai piekļuvei",
   "VerifyConnection": "Pārbaudīt savienojumu",
-  "VerifyConnectionDescription": "Ievadiet 6 ciparu kodu, kas ģenerēts ar jūsu autentifikācijas lietotni, zemāk esošajā laukā, lai pabeigtu iestatīšanu."
+  "VerifyConnectionDescription": "Ievadiet 6 ciparu kodu, kas ģenerēts ar jūsu autentifikācijas lietotni, zemāk esošajā laukā, lai pabeigtu iestatīšanu.",
+  "InviteLinkQuotaErrorBody": "Reģistrācija, izmantojot saiti, vairs nav pieejama, jo ir pārsniegts limits.",
+  "InviteQuotaErrorCustomizedBody": "Jūs tiksiet novirzīts uz <1>Pieejšanās</1> lapu 10 sekundēs."
 }

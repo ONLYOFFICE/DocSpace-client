@@ -37,5 +37,7 @@
   "TfaSubTitle": "Bu {{productName}}'de çalışmaya devam etmek için basit adımları izleyin:",
   "TfaTitle": "İki faktörlü kimlik doğrulama, güvenli erişim için etkinleştirildi",
   "VerifyConnection": "Bağlantıyı doğrula",
-  "VerifyConnectionDescription": "Aşağıdaki alana, kimlik doğrulama uygulamanız tarafından oluşturulan 6 haneli kodu girerek kurulumu tamamlayın."
+  "VerifyConnectionDescription": "Aşağıdaki alana, kimlik doğrulama uygulamanız tarafından oluşturulan 6 haneli kodu girerek kurulumu tamamlayın.",
+  "InviteLinkQuotaErrorBody": "Bağlantı üzerinden kayıt artık sınır aşıldığı için mümkün değildir.",
+  "InviteQuotaErrorCustomizedBody": "10 saniye içinde <1>Giriş</1> sayfasına yönlendirileceksiniz."
 }

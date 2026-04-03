@@ -35,5 +35,12 @@
   "ServerUpdatedSuccess": "Sunucu başarıyla güncellendi",
   "ServiceIcon": "Hizmet simgesi",
   "SystemMCPListTitle": "Sistem",
-  "WebSearchKeyHiddenDescription": "API anahtarı yalnızca kaydetme sırasında bir kez görüntülenir ve ardından güvenlik nedeniyle gizlenir."
+  "WebSearchKeyHiddenDescription": "API anahtarı yalnızca kaydetme sırasında bir kez görüntülenir ve ardından güvenlik nedeniyle gizlenir.",
+  "AddAIProvider": "{{aiProvider}}'i ekle",
+  "AddMCPServer": "{{mcpServer}}'i ekle",
+  "DefaultProviderSetSuccess": "Varsayılan sağlayıcı başarıyla ayarlandı",
+  "DefaultProviderTitle": "Varsayılan sağlayıcı",
+  "DeleteProvider": "{{aiProvider}}'ı sil",
+  "MCPUnavailableError": "{{mcpServer}} kullanılamıyor",
+  "Model": "Model"
 }

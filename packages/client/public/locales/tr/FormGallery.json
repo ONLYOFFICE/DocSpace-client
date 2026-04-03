@@ -5,5 +5,8 @@
   "ErrorViewDescriptionNetworkError": "Görünüşe göre internet bağlantısı yok",
   "SuggestChanges": "Değişiklik öner",
   "TemplateInfo": "Şablon bilgisi",
-  "ViewAllTemplates": "Tüm şablonları görüntüle"
+  "ViewAllTemplates": "Tüm şablonları görüntüle",
+  "ErrorViewHeader": "Galeri geçici olarak kullanılamıyor",
+  "SelectTemplate": "Şablon Seçin",
+  "UploadGallery": "Galeride Yükle"
 }

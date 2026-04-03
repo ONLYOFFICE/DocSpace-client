@@ -35,5 +35,12 @@
   "ServerUpdatedSuccess": "Server succesvol bijgewerkt",
   "ServiceIcon": "Service-icoon",
   "SystemMCPListTitle": "Systeem",
-  "WebSearchKeyHiddenDescription": "De API-sleutel wordt slechts één keer weergegeven bij het opslaan en daarna verborgen om veiligheidsredenen."
+  "WebSearchKeyHiddenDescription": "De API-sleutel wordt slechts één keer weergegeven bij het opslaan en daarna verborgen om veiligheidsredenen.",
+  "AddAIProvider": "Voeg {{aiProvider}} toe",
+  "AddMCPServer": "Voeg {{mcpServer}} toe",
+  "DefaultProviderSetSuccess": "Standaard provider succesvol ingesteld",
+  "DefaultProviderTitle": "Standaard provider",
+  "DeleteProvider": "Verwijder {{aiProvider}}",
+  "MCPUnavailableError": "De {{mcpServer}} is niet beschikbaar",
+  "Model": "Model"
 }

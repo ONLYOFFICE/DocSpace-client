@@ -72,7 +72,6 @@ const ClientForm = ({
   setJwtToken,
 }: ClientFormProps) => {
   const navigate = useNavigate();
-  const location = useLocation();
 
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [isRequestRunning, setIsRequestRunning] =
@@ -123,11 +122,7 @@ const ClientForm = ({
   }, [clientSecretProps, setClientSecretProps]);
 
   const onCancelClick = () => {
-    if (location.pathname.includes("portal-settings")) {
-      navigate("/portal-settings/developer-tools/oauth");
-    } else {
-      navigate("/developer-tools/oauth");
-    }
+    navigate("/developer-tools/oauth");
   };
 
   const onSaveClick = async () => {

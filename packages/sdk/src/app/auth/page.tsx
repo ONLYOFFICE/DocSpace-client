@@ -26,26 +26,71 @@
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+
+import { getBgPattern } from "@docspace/shared/utils/common";
+import { FormWrapper } from "@docspace/ui-kit/components/form-wrapper";
+
+import { getColorTheme } from "@/api/settings";
 import AuthClient from "./AuthClient";
 
 export default async function AuthPage({
   searchParams,
 }: {
-  searchParams: Promise<{ callback?: string; redirectUrl?: string }>;
+  searchParams: Promise<Record<string, string | undefined>>;
 }) {
-  const { callback, redirectUrl = null } = await searchParams;
+  const params = await searchParams;
+  const { providerName, redirectURL, key, emplType } = params;
 
-  if (!callback) {
-    return <div>Missing callback parameter</div>;
+  if (!providerName) {
+    return <div>Missing providerName parameter</div>;
   }
 
   const cookieStore = await cookies();
   const hasAuth = !!cookieStore.get("asc_auth_key");
 
-  if (hasAuth && redirectUrl) {
-    redirect(redirectUrl);
+  if (hasAuth && redirectURL) {
+    redirect(redirectURL);
   }
 
-  return <AuthClient callback={callback} redirectUrl={redirectUrl} />;
-}
+  const colorTheme = await getColorTheme();
+  const bgPattern = getBgPattern(colorTheme?.selected);
 
+  const confirmHeader = new URLSearchParams(
+    params as Record<string, string>,
+  ).toString();
+
+  return (
+    <div style={{ width: "100%", height: "100vh" }}>
+      <div
+        style={{
+          backgroundImage: bgPattern,
+          backgroundRepeat: "no-repeat",
+          backgroundAttachment: "fixed",
+          backgroundSize: "cover",
+          position: "fixed",
+          inset: 0,
+        }}
+      />
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "100%",
+          height: "100%",
+          position: "relative",
+        }}
+      >
+        <FormWrapper id="auth-form">
+          <AuthClient
+            providerName={providerName}
+            redirectURL={redirectURL ?? null}
+            inviteKey={key ?? null}
+            emplType={emplType ?? null}
+            confirmHeader={confirmHeader}
+          />
+        </FormWrapper>
+      </div>
+    </div>
+  );
+}

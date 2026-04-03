@@ -47,13 +47,9 @@ const DetailsNavigationHeader = () => {
 
   const { t } = useTranslation(["Webhooks", "Common"]);
   const navigate = useNavigate();
-  const location = useLocation();
 
   const onBack = () => {
-    const path = location.pathname.includes("/portal-settings")
-      ? "/portal-settings"
-      : "";
-    navigate(`${path}/developer-tools/webhooks/${id}`);
+    navigate(`/developer-tools/webhooks/${id}`);
   };
 
   const handleRetryEvent = async () => {

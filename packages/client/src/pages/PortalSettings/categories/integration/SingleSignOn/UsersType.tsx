@@ -99,7 +99,7 @@ export default inject<TStore>(({ ssoStore, userStore }) => {
   const { usersType, setUsersType, enableSso, isLoadingXml } = ssoStore;
   const { user } = userStore;
   const isOwner = user?.isOwner;
-  const isAdmin = user?.isAdmin;
+  const isAdmin = user?.isAdmin || user?.isOwner;
 
   return {
     usersType,

@@ -29,6 +29,13 @@ import type { TEditorAIEvent, TEditorConnector } from "@/types";
 
 const requests: Record<string, { controller: AbortController }> = {};
 
+export function abortAllRequests() {
+  for (const id of Object.keys(requests)) {
+    requests[id]?.controller.abort();
+    delete requests[id];
+  }
+}
+
 const sendEvent = (
   connector: TEditorConnector,
   data: Record<string, unknown>,
@@ -92,7 +99,7 @@ const externalAIFetch = async (
           value = readerValue;
           done = readerDone;
         } catch {
-          // ignore
+          break;
         }
 
         if (value) {

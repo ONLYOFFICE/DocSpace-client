@@ -35,5 +35,12 @@
   "ServerUpdatedSuccess": "Serveri u përditësua me sukses.",
   "ServiceIcon": "Ikona e shërbimit",
   "SystemMCPListTitle": "Sistemi",
-  "WebSearchKeyHiddenDescription": "Çelësi API shfaqet vetëm një herë pas ruajtjes dhe më pas fshihet për qëllime sigurie."
+  "WebSearchKeyHiddenDescription": "Çelësi API shfaqet vetëm një herë pas ruajtjes dhe më pas fshihet për qëllime sigurie.",
+  "AddAIProvider": "Shtoni {{aiProvider}}",
+  "AddMCPServer": "Shtoni {{mcpServer}}",
+  "DefaultProviderSetSuccess": "Ofruesi i parazgjedhur u caktua me sukses",
+  "DefaultProviderTitle": "Ofruesi i parazgjedhur",
+  "DeleteProvider": "Fshi {{aiProvider}}",
+  "MCPUnavailableError": "{{mcpServer}} është i papashtërshëm",
+  "Model": "Model"
 }

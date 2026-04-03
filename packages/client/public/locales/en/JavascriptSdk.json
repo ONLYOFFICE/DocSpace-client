@@ -116,7 +116,7 @@
   "RoomTypeDisplay": "Room type display",
   "Rotate": "Rotate",
   "Scale": "Scale",
-  "SDKDescription": "JavaScript SDK allows you to embed the whole {{productName}} or its part into your web interface. Select ready-to-use modes with the pre-defined parameters or a custom one to configure it manually. To learn more about SDK, refer to the ",
+  "SDKDescription": "Embed SDK allows you to embed the whole {{productName}} or its part into your web interface. Select ready-to-use modes with the pre-defined parameters or a custom one to configure it manually. To learn more about SDK, refer to the ",
   "SdkPackageVersionInfo": "For connect as package version always latest",
   "SearchBlock": "Search block",
   "SearchByNameEmail": "Search by name or email",

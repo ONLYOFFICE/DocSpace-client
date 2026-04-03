@@ -3,5 +3,7 @@
   "DisplayFileExtension": "Prikaz ekstenzije fajla pored imena fajla",
   "OpenSameTab": "Otvori {{organizationName}} uređivač u istoj kartici",
   "OriginalCopy": "Sačuvaj kopiju datoteke u originalnom formatu takođe",
-  "TrashMoveConfirmation": "Prikaži obaveštenje kada se stavke premeštaju u {{sectionName}}"
+  "TrashMoveConfirmation": "Prikaži obaveštenje kada se stavke premeštaju u {{sectionName}}",
+  "DefaultHomepage": "Podrazumevana početna stranica",
+  "GroupByRooms": "Grupisanje po sobama"
 }

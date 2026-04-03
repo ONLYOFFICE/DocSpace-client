@@ -98,5 +98,7 @@
   "SubmenuHistory": "История",
   "UserFileUpdated": "Актуализиран файл.",
   "Users": "Потребители",
-  "Versions": "Версии"
+  "Versions": "Версии",
+  "LastUpdateInfo": "Последна актуализация",
+  "RoomChangeOwner": "Собственикът на стаята беше променен."
 }

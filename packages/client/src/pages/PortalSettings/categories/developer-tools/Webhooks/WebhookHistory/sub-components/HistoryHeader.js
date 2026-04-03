@@ -102,13 +102,9 @@ const HistoryHeader = (props) => {
     setRetryPendingTrue,
   } = props;
   const navigate = useNavigate();
-  const location = useLocation();
 
   const onBack = () => {
-    const path = location.pathname.includes("/portal-settings")
-      ? "/portal-settings"
-      : "";
-    navigate(`${path}/developer-tools/webhooks`);
+    navigate("/developer-tools/webhooks");
   };
   const { t } = useTranslation(["Webhooks", "Common", "InfoPanel"]);
   const { id } = useParams();

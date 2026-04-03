@@ -68,7 +68,7 @@ export const successSelf = {
   lastName: "",
   userName: "administrator",
   email: "test@gmail.com",
-  isAdmin: true,
+  isAdmin: false,
   isRoomAdmin: false,
   isOwner: true,
   isVisitor: false,

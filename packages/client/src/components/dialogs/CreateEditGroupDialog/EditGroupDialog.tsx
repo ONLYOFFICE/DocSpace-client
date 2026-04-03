@@ -42,7 +42,7 @@ import { TUser } from "@docspace/shared/api/people/types";
 
 import EditGroupStore from "SRC_DIR/store/contacts/EditGroupStore";
 
-import { StyledBodyContent } from "./CreateEditGroupDialog.styled";
+import styles from "./CreateEditGroupDialog.module.scss";
 import GroupNameParam from "./sub-components/GroupNameParam";
 import HeadOfGroup from "./sub-components/HeadOfGroupParam";
 import MembersParam from "./sub-components/MembersParam";
@@ -193,7 +193,7 @@ const EditGroupDialog = ({
         </ModalDialog.Header>
 
         <ModalDialog.Body>
-          <StyledBodyContent>
+          <div className={styles.bodyContent}>
             {showLoader ? (
               <BodyLoader />
             ) : (
@@ -226,7 +226,7 @@ const EditGroupDialog = ({
                 </>
               )
             )}
-          </StyledBodyContent>
+          </div>
         </ModalDialog.Body>
 
         <ModalDialog.Footer>

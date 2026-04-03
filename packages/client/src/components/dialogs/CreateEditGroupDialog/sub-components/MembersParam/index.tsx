@@ -30,7 +30,7 @@ import { AddButton } from "@docspace/ui-kit/components/add-button";
 import { TUser } from "@docspace/shared/api/people/types";
 import PlusSvgUrl from "PUBLIC_DIR/images/icons/16/button.plus.react.svg?url";
 
-import * as Styled from "./index.styled";
+import styles from "../../CreateEditGroupDialog.module.scss";
 import GroupMemberRow from "../GroupMemberRow";
 import { GroupMembersList } from "../GroupMembersList/GroupMembersList";
 
@@ -69,17 +69,17 @@ const MembersParam = ({
 
   return (
     <div>
-      <Styled.Header className="membersHeader">
+      <div className={styles.membersHeader}>
         {t("Common:Members")}
-      </Styled.Header>
+      </div>
 
-      <Styled.AddMembersButton onClick={onShowSelectMembersPanel}>
+      <div className={styles.addMembersButton} onClick={onShowSelectMembersPanel}>
         <AddButton
           iconName={PlusSvgUrl}
           label={t("PeopleTranslations:AddMembers")}
           testId="select_members"
         />
-      </Styled.AddMembersButton>
+      </div>
 
       {groupMembers ? (
         withInfiniteLoader ? (

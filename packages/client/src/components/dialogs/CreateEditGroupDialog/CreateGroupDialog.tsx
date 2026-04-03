@@ -37,7 +37,7 @@ import { createGroup } from "@docspace/shared/api/groups";
 import { TUser } from "@docspace/shared/api/people/types";
 import { TOnSubmit } from "@docspace/ui-kit/components/selector";
 
-import { StyledBodyContent } from "./CreateEditGroupDialog.styled";
+import styles from "./CreateEditGroupDialog.module.scss";
 import { GroupParams } from "./types";
 import GroupNameParam from "./sub-components/GroupNameParam";
 import HeadOfGroup from "./sub-components/HeadOfGroupParam";
@@ -156,7 +156,7 @@ const CreateGroupDialog = ({ visible, onClose }: CreateGroupDialogProps) => {
         <ModalDialog.Header>{t("Common:CreateGroup")}</ModalDialog.Header>
 
         <ModalDialog.Body>
-          <StyledBodyContent>
+          <div className={styles.bodyContent}>
             <GroupNameParam
               groupName={groupParams.groupName}
               onChangeGroupName={onChangeGroupName}
@@ -172,7 +172,7 @@ const CreateGroupDialog = ({ visible, onClose }: CreateGroupDialogProps) => {
               removeMember={removeMember}
               onShowSelectMembersPanel={onShowSelectMembersPanel}
             />
-          </StyledBodyContent>
+          </div>
         </ModalDialog.Body>
 
         <ModalDialog.Footer>

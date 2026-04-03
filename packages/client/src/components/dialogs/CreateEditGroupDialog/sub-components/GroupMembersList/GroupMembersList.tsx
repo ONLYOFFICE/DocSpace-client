@@ -33,21 +33,12 @@ import {
   ListRowProps,
   WindowScroller,
 } from "react-virtualized";
-import styled from "styled-components";
-
 import { TUser } from "@docspace/shared/api/people/types";
 import { RowLoader } from "@docspace/shared/skeletons/selector";
 import GroupMemberRow from "SRC_DIR/components/dialogs/CreateEditGroupDialog/sub-components/GroupMemberRow";
+import styles from "SRC_DIR/components/dialogs/CreateEditGroupDialog/CreateEditGroupDialog.module.scss";
 
 const ROW_HEIGHT = 50;
-
-export const StyledList = styled(List)`
-  width: ${({ width }) => `${width - 16}px`} !important;
-
-  .group-member-row-loader {
-    padding: 0;
-  }
-`;
 
 interface GroupMembersListProps {
   members: TUser[];
@@ -132,8 +123,9 @@ export const GroupMembersList = (props: GroupMembersListProps) => {
               scrollElement.children[0].getBoundingClientRect();
 
             return (
-              <StyledList
+              <List
                 autoHeight
+                className={styles.styledList}
                 height={height || scrollBodyRect.height}
                 onRowsRendered={onRowsRendered}
                 ref={registerChild}
@@ -145,7 +137,12 @@ export const GroupMembersList = (props: GroupMembersListProps) => {
                 overscanRowCount={3}
                 scrollTop={scrollTop}
                 // React virtualized sets "LTR" by default.
-                style={{ direction: "inherit" }}
+                style={
+                  {
+                    direction: "inherit",
+                    "--list-width": `${scrollBodyRect.width}px`,
+                  } as React.CSSProperties
+                }
               />
             );
           }}

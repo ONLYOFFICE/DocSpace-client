@@ -37,7 +37,8 @@ import { useEventListener } from "@docspace/ui-kit/hooks/useEventListener";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
-import * as Styled from "./index.styled";
+import classNames from "classnames";
+import styles from "./SubmitToFormGallery.module.scss";
 
 const SubmitToFormGallery = ({
 	t,
@@ -187,10 +188,12 @@ const SubmitToFormGallery = ({
 		);
 
 	return (
-		<Styled.ModalDialogStyled
+		<ModalDialog
 			visible={visible}
 			onClose={onClose}
-			isLarge={formItem}
+			className={classNames(styles.submitToFormGalleryModal, {
+				[styles.isLarge]: !!formItem,
+			})}
 			autoMaxHeight
 		>
 			<ModalDialog.Header>
@@ -251,7 +254,7 @@ const SubmitToFormGallery = ({
 					testId="submit_to_gallery_cancel_button"
 				/>
 			</ModalDialog.Footer>
-		</Styled.ModalDialogStyled>
+		</ModalDialog>
 	);
 };
 

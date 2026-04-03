@@ -24,64 +24,69 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { injectDefaultTheme } from "@docspace/shared/utils";
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+@use "@docspace/ui-kit/styles/variables/colors" as *;
 
-export const ModalDialogStyled = styled(ModalDialog).attrs(injectDefaultTheme)`
-  .info {
+.submitToFormGalleryModal {
+  :global(.info) {
     line-height: 20px;
     padding-bottom: 16px;
   }
 
-  ${(props) =>
-    !props.isLarge &&
-    `
-        .info:last-child {
-            padding-bottom: 0;
-        }
-        `};
+  &:not(.isLarge) {
+    :global(.info):last-child {
+      padding-bottom: 0;
+    }
+  }
 
-  .item-wrapper {
+  :global(.item-wrapper) {
     display: flex;
     align-items: center;
     justify-content: space-between;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    border: ${({ theme }) => theme.oformGallery.submitToGalleryTile.border};
+    border: 1px solid $gray-light-mid;
     border-radius: 6px;
     padding: 4px;
     width: max-content;
     user-select: none;
+
+    :global(.dark) & {
+      border-color: $gray-dark-strong;
+    }
   }
 
-  .icon {
+  :global(.icon) {
     width: 24px;
     height: 24px;
     margin-inline-end: 4px;
+
     svg {
       width: 24px;
       height: 24px;
     }
   }
 
-  .item-title {
+  :global(.item-title) {
     font-weight: 600;
     font-size: 13px;
     display: flex;
     min-width: 0;
     gap: 0;
 
-    .name {
+    :global(.name) {
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
     }
 
-    .exst {
+    :global(.exst) {
       flex-shrink: 0;
-      color: ${({ theme }) => theme.oformGallery.submitToGalleryTile.colorExt};
+      color: $gray;
+
+      :global(.dark) & {
+        color: $gray;
+      }
     }
   }
-`;
+}

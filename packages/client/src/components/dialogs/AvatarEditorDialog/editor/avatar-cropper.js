@@ -29,101 +29,14 @@ import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 import ZoomMinusReactSvgUrl from "PUBLIC_DIR/images/zoom-minus.react.svg?url";
 import ZoomPlusReactSvgUrl from "PUBLIC_DIR/images/zoom-plus.react.svg?url";
 import React, { useEffect } from "react";
-import styled from "styled-components";
 import { ReactSVG } from "react-svg";
 import throttle from "lodash/throttle";
 import AvatarEditor from "react-avatar-editor";
 
 import { Slider } from "@docspace/ui-kit/components/slider";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { injectDefaultTheme } from "@docspace/shared/utils";
 import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
-
-const StyledAvatarCropper = styled.div.attrs(injectDefaultTheme)`
-  max-width: 216px;
-
-  .icon_cropper-crop_area {
-    width: 216px;
-    height: 216px;
-    margin-bottom: 4px;
-    position: relative;
-    .icon_cropper-grid {
-      pointer-events: none;
-      position: absolute;
-      width: 216px;
-      height: 216px;
-      inset: 0;
-      svg {
-        opacity: 0.2;
-        path {
-          fill: ${(props) =>
-						props.theme.createEditRoomDialog.iconCropper.gridColor};
-        }
-      }
-    }
-  }
-
-  .icon_cropper-delete_button {
-    cursor: pointer;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    width: 100%;
-    padding: 6px 0;
-    background: ${(props) =>
-			props.theme.createEditRoomDialog.iconCropper.deleteButton.background};
-    border: 1px solid
-      ${(props) =>
-				props.theme.createEditRoomDialog.iconCropper.deleteButton.borderColor};
-    border-radius: 3px;
-    margin-bottom: 12px;
-
-    transition: all 0.2s ease;
-    &:hover {
-      background: ${(props) =>
-				props.theme.createEditRoomDialog.iconCropper.deleteButton
-					.hoverBackground};
-      border: 1px solid
-        ${(props) =>
-					props.theme.createEditRoomDialog.iconCropper.deleteButton
-						.hoverBorderColor};
-    }
-
-    &-text {
-      user-select: none;
-      font-weight: 600;
-      line-height: 20px;
-      color: ${(props) =>
-				props.theme.createEditRoomDialog.iconCropper.deleteButton.color};
-    }
-
-    svg {
-      path {
-        fill: ${(props) =>
-					props.theme.createEditRoomDialog.iconCropper.deleteButton.iconColor};
-      }
-    }
-  }
-
-  .icon_cropper-zoom-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    margin-bottom: 20px;
-
-    &-slider {
-      margin: 0;
-    }
-
-    &-button {
-      user-select: none;
-    }
-  }
-`;
+import styles from "../AvatarEditorDialog.module.scss";
 
 const AvatarCropper = ({
 	t,
@@ -168,7 +81,7 @@ const AvatarCropper = ({
 	}, [avatar]);
 
 	return (
-		<StyledAvatarCropper className="icon_cropper">
+		<div className={`${styles.avatarCropper} icon_cropper`}>
 			<div className="icon_cropper-crop_area">
 				<ReactSVG className="icon_cropper-grid" src={IconCropperGridSvgUrl} />
 				<AvatarEditor
@@ -227,7 +140,7 @@ const AvatarCropper = ({
 					isClickable={false}
 				/>
 			</div>
-		</StyledAvatarCropper>
+		</div>
 	);
 };
 

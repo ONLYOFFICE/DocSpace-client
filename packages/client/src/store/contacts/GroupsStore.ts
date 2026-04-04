@@ -353,19 +353,12 @@ class GroupsStore {
 
     added.forEach((row) => {
       if (!row) return;
-
-      const [element] = row.getElementsByClassName("group-item");
-      const value = element?.getAttribute("value");
-
-      if (!value) return;
-
-      const splitValue = value.split("_");
-      const groupId = splitValue.slice(1, -3).join("_");
-
+      const [el] = row.getElementsByClassName("group-item");
+      const val = el?.getAttribute("data-value") ?? el?.getAttribute("value");
+      if (!val) return;
+      const groupId = val.split("_").slice(1, -3).join("_");
       if (!groupId) return;
-
-      const isNotSelected =
-        this.selection.findIndex((g) => g.id === groupId) === -1;
+      const isNotSelected = this.selection.findIndex((g) => g.id === groupId) === -1;
       if (isNotSelected) {
         const group = this.groups.find((g) => g.id === groupId);
         if (group) newSelections.push(group);
@@ -374,19 +367,12 @@ class GroupsStore {
 
     removed.forEach((row) => {
       if (!row) return;
-
-      const [element] = row.getElementsByClassName("group-item");
-      const value = element?.getAttribute("value");
-
-      if (!value) return;
-
-      const splitValue = value.split("_");
-      const groupId = splitValue.slice(1, -3).join("_");
-
+      const [el] = row.getElementsByClassName("group-item");
+      const val = el?.getAttribute("data-value") ?? el?.getAttribute("value");
+      if (!val) return;
+      const groupId = val.split("_").slice(1, -3).join("_");
       if (!groupId) return;
-
-      const isSelected =
-        newSelections.findIndex((g) => g.id === groupId) !== -1;
+      const isSelected = newSelections.findIndex((g) => g.id === groupId) !== -1;
       if (isSelected) {
         newSelections = newSelections.filter((g) => g.id !== groupId);
       }

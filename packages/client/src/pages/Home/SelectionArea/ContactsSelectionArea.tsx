@@ -65,7 +65,7 @@ const SelectionArea = ({
     <SelectionAreaComponent
       containerClass="section-scroll"
       scrollClass="section-scroll"
-      itemsContainerClass="ReactVirtualized__Grid__innerScrollContainer"
+      itemsContainerClass="table-container_body"
       selectableClass="window-item"
       itemClass={isPeopleSelections ? "user-item" : "group-item"}
       onMove={onMove}

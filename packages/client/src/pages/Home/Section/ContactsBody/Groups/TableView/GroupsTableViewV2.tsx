@@ -318,6 +318,8 @@ const GroupsTableViewV2 = ({
 
       return (
         <>
+          {/* Hidden marker for SelectionArea — matches old GroupsRow value format */}
+          <div className="group-item" data-value={`folder_${item.id}_false_index_${rowIndex}`} style={{ display: "none" }} />
           {/* Name cell — matches OLD structure exactly */}
           <div className="table-container_cell table-container_group-title-cell">
             <div className={`table-container_row-checkbox-wrapper${isChecked ? " checked" : ""}`}>
@@ -351,12 +353,12 @@ const GroupsTableViewV2 = ({
             <Badges isLDAP={item.isLDAP} />
           </div>
 
-          {/* Members cell */}
-          <div
-            className="table-container_cell"
-            style={{ display: "flex", alignItems: "center" }}
-          >
-            {peopleGroupsColumnIsEnabled ? (
+          {/* Members cell — only rendered when column is visible */}
+          {peopleGroupsColumnIsEnabled ? (
+            <div
+              className="table-container_cell"
+              style={{ display: "flex", alignItems: "center" }}
+            >
               <Text
                 title={item.membersCount.toString()}
                 fontWeight="600"
@@ -365,15 +367,15 @@ const GroupsTableViewV2 = ({
               >
                 {item.membersCount}
               </Text>
-            ) : null}
-          </div>
+            </div>
+          ) : null}
 
-          {/* Manager cell */}
-          <div
-            className="table-container_cell"
-            style={{ display: "flex", alignItems: "center", overflow: "hidden" }}
-          >
-            {managerGroupsColumnIsEnabled ? (
+          {/* Manager cell — only rendered when column is visible */}
+          {managerGroupsColumnIsEnabled ? (
+            <div
+              className="table-container_cell"
+              style={{ display: "flex", alignItems: "center", overflow: "hidden" }}
+            >
               <Text
                 title={item.manager?.displayName}
                 fontWeight="600"
@@ -384,8 +386,8 @@ const GroupsTableViewV2 = ({
               >
                 {item.manager?.displayName}
               </Text>
-            ) : null}
-          </div>
+            </div>
+          ) : null}
 
           {/* Context menu button */}
           <div

@@ -154,6 +154,34 @@ const GroupsTableViewV2 = ({
     currentDeviceType: currentDeviceType!,
   });
 
+  // Sorting (controlled externally via filter)
+  const onSort = useCallback(
+    (sortBy: string) => {
+      if (!groupsFilter || !setGroupsFilter) return;
+      const newFilter = groupsFilter.clone();
+      const reverseSortOrder =
+        newFilter.sortOrder === "ascending" ? "descending" : "ascending";
+
+      if (newFilter.sortBy === sortBy && sortBy !== "AZ") {
+        newFilter.sortOrder = reverseSortOrder;
+      } else {
+        newFilter.sortBy = sortBy;
+        if (sortBy === "AZ") newFilter.sortOrder = reverseSortOrder;
+      }
+
+      setIsSectionBodyLoading?.(true);
+      setGroupsFilter(newFilter);
+      navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
+    },
+    [
+      groupsFilter,
+      setGroupsFilter,
+      setIsSectionBodyLoading,
+      navigate,
+      location.pathname,
+    ],
+  );
+
   // Column definitions
   const columns = useMemo<ColumnDef<TGroup, unknown>[]>(
     () => [
@@ -197,35 +225,7 @@ const GroupsTableViewV2 = ({
         },
       },
     ],
-    [t],
-  );
-
-  // Sorting (controlled externally via filter)
-  const onSort = useCallback(
-    (sortBy: string) => {
-      if (!groupsFilter || !setGroupsFilter) return;
-      const newFilter = groupsFilter.clone();
-      const reverseSortOrder =
-        newFilter.sortOrder === "ascending" ? "descending" : "ascending";
-
-      if (newFilter.sortBy === sortBy && sortBy !== "AZ") {
-        newFilter.sortOrder = reverseSortOrder;
-      } else {
-        newFilter.sortBy = sortBy;
-        if (sortBy === "AZ") newFilter.sortOrder = reverseSortOrder;
-      }
-
-      setIsSectionBodyLoading?.(true);
-      setGroupsFilter(newFilter);
-      navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
-    },
-    [
-      groupsFilter,
-      setGroupsFilter,
-      setIsSectionBodyLoading,
-      navigate,
-      location.pathname,
-    ],
+    [t, onSort],
   );
 
   // Column visibility from MobX store

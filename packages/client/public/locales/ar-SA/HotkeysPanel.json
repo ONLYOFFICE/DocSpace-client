@@ -45,5 +45,6 @@
   "HotkeysUploadFile": "ارفع الملف",
   "HotkeysUploadingObjects": "رفع العناصر",
   "HotkeysZoomIn": "تكبير",
-  "HotkeysZoomOut": "تصغير"
+  "HotkeysZoomOut": "تصغير",
+  "OpenContextMenu": "افتح قائمة السياق"
 }

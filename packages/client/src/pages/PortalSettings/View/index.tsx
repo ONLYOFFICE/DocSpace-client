@@ -39,7 +39,6 @@ import { Component as Backup } from "../categories/data-management";
 import RestoreBackup from "../categories/data-management/backup/restore-backup";
 import { Component as Integration } from "../categories/integration";
 import { Component as DataImport } from "../categories/data-import";
-import { Component as DeveloperTools } from "../categories/developer-tools";
 import { Component as DeleteData } from "../categories/delete-data";
 import { Component as StorageManagement } from "../categories/storage-management";
 import { Component as Payments } from "../categories/payments";
@@ -51,7 +50,6 @@ import AiPage from "../categories/payments/SaaS/services/pages/ai-tools/AiPage";
 import useSecurity from "../categories/security/useSecurity";
 import useBackup from "../categories/data-management/backup/useBackup";
 import useIntegration from "../categories/integration/useIntegration";
-import useDeveloperTools from "../categories/developer-tools/useDeveloperTools";
 import useDeleteData from "../categories/delete-data/useDeleteData";
 import useCommon from "../categories/common/useCommon";
 import useDataImport from "../categories/data-import/useDataImport";
@@ -73,7 +71,6 @@ const getViewFromPathname = (pathname: string): TView => {
   if (pathname.includes("integration")) return "integration";
   if (pathname.includes("data-import")) return "data-import";
   if (pathname.includes("management")) return "management";
-  if (pathname.includes("developer-tools")) return "developer-tools";
   if (pathname.includes("delete-data")) return "delete-data";
   if (pathname.includes("backup")) return "backup-service";
   if (pathname.includes("disk-storage")) return "disk-storage";
@@ -167,9 +164,6 @@ const View = ({
     ...defaultProps.integration,
   });
   const { getDataImportInitialValue } = useDataImport(defaultProps.dataImport);
-  const { getDeveloperToolsInitialValue } = useDeveloperTools(
-    defaultProps.developerTools,
-  );
   const { getDeleteDataInitialValue } = useDeleteData(defaultProps.deleteData);
   const { getPaymentsInitialValue } = usePayments(defaultProps.payment);
   const { getServicesInitialValue } = useServices(defaultProps.services);
@@ -293,9 +287,6 @@ const View = ({
           case "management":
             await init();
             break;
-          case "developer-tools":
-            await getDeveloperToolsInitialValue();
-            break;
           case "delete-data":
             await getDeleteDataInitialValue();
             break;
@@ -347,7 +338,6 @@ const View = ({
       {currentView === "integration" ? <Integration /> : null}
       {currentView === "data-import" ? <DataImport /> : null}
       {currentView === "management" ? <StorageManagement /> : null}
-      {currentView === "developer-tools" ? <DeveloperTools /> : null}
       {currentView === "delete-data" ? <DeleteData /> : null}
       {currentView === "payments" ? <Payments /> : null}
       {currentView === "bonus" ? <Bonus /> : null}

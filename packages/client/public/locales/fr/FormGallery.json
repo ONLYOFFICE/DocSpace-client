@@ -5,5 +5,8 @@
   "ErrorViewDescriptionNetworkError": "La connexion Internet semble être interrompue",
   "SuggestChanges": "Proposer des modifications",
   "TemplateInfo": "Informations sur le modèle",
-  "ViewAllTemplates": "Afficher tous les formulaires"
+  "ViewAllTemplates": "Afficher tous les formulaires",
+  "ErrorViewHeader": "La galerie est temporairement indisponible",
+  "SelectTemplate": "Sélectionner un modèle",
+  "UploadGallery": "Télécharger dans la Galerie"
 }

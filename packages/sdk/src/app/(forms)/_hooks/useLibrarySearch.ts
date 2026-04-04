@@ -38,14 +38,14 @@ export type SearchResult = {
   folderId: number;
 };
 
+const MAX_RESULTS = 10;
+
 export default function useLibrarySearch(langId: number | null) {
   const [results, setResults] = useState<SearchResult[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [hasMore, setHasMore] = useState(false);
   const [query, setQuery] = useState("");
   const abortRef = useRef<AbortController | null>(null);
 
-  // Abort in-flight request on unmount
   useEffect(() => {
     return () => {
       abortRef.current?.abort();
@@ -60,7 +60,6 @@ export default function useLibrarySearch(langId: number | null) {
         abortRef.current?.abort();
         setResults([]);
         setIsLoading(false);
-        setHasMore(false);
         return;
       }
 
@@ -72,28 +71,35 @@ export default function useLibrarySearch(langId: number | null) {
       const filter = FilesFilter.getDefault();
       filter.search = term.trim();
       filter.page = 0;
-      filter.pageCount = 10;
+      filter.pageCount = MAX_RESULTS;
+      filter.withSubfolders = true;
 
       api.files
         .getFolder(langId, filter, controller.signal)
         .then((res) => {
           if (controller.signal.aborted) return;
 
-          const mapped: SearchResult[] = res.files.map((f) => ({
-            id: f.id,
-            title: f.title.replace(/\.pdf$/i, "").replaceAll("_", " "),
-            type: "file" as const,
-            folderId: f.folderId,
-          }));
+          const mapped: SearchResult[] = [
+            ...res.folders.map((f) => ({
+              id: f.id,
+              title: f.title,
+              type: "folder" as const,
+              folderId: f.parentId ?? (langId as number),
+            })),
+            ...res.files.map((f) => ({
+              id: f.id,
+              title: f.title.replace(/\.pdf$/i, ""),
+              type: "file" as const,
+              folderId: f.folderId,
+            })),
+          ];
 
-          setResults(mapped);
-          setHasMore(res.total > 10);
+          setResults(mapped.slice(0, MAX_RESULTS));
           setIsLoading(false);
         })
         .catch(() => {
           if (controller.signal.aborted) return;
           setResults([]);
-          setHasMore(false);
           setIsLoading(false);
         });
     },
@@ -105,8 +111,7 @@ export default function useLibrarySearch(langId: number | null) {
     setResults([]);
     setQuery("");
     setIsLoading(false);
-    setHasMore(false);
   }, []);
 
-  return { results, isLoading, hasMore, query, search, clear };
+  return { results, isLoading, query, search, clear };
 }

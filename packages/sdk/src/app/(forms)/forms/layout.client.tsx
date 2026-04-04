@@ -273,7 +273,6 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     prevCompletedForFormCompletion.current = completedFolder;
 
     if (completedFolder && completedFolder !== prev && editingFile) {
-      closeEditor();
       const params = new URLSearchParams();
       const rid = searchParams.get("roomId") ?? "";
       const lid = searchParams.get("libraryId") ?? "";

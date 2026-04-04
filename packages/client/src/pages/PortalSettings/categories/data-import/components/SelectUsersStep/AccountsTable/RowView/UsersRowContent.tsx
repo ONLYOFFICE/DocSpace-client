@@ -25,45 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled from "styled-components";
 import { Text } from "@docspace/ui-kit/components/text";
 import { RowContent } from "@docspace/ui-kit/components/rows";
 import { UsersRowContentProps } from "../../../../types";
-
-const StyledRowContent = styled(RowContent)`
-  display: flex;
-
-  .rowMainContainer {
-    height: 100%;
-    width: 100%;
-  }
-
-  .username {
-    margin-inline-end: 5px;
-    font-size: 14px;
-    font-weight: 600;
-    color: ${(props) => props.theme.client.settings.migration.subtitleColor};
-  }
-
-  .content-data-box {
-    box-sizing: border-box;
-    display: flex;
-  }
-
-  .user-email {
-    font-size: 12px;
-    font-weight: 600;
-    color: ${(props) =>
-      props.theme.client.settings.migration.tableRowTextColor};
-  }
-
-  .user-existing {
-    font-size: 14px;
-    font-weight: 600;
-    color: ${(props) =>
-      props.theme.client.settings.migration.existingTextColor};
-  }
-`;
+import styles from "../../../../StyledDataImport.module.scss";
 
 const UsersRowContent = (props: UsersRowContentProps) => {
   const { t, data, sectionWidth, displayName, email, isDuplicate } = props;
@@ -84,9 +49,9 @@ const UsersRowContent = (props: UsersRowContentProps) => {
   ];
 
   return (
-    <StyledRowContent sectionWidth={sectionWidth}>
+    <RowContent className={styles.styledRowContent} sectionWidth={sectionWidth}>
       {contentData}
-    </StyledRowContent>
+    </RowContent>
   );
 };
 

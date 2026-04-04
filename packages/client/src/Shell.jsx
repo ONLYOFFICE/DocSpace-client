@@ -97,6 +97,7 @@ const Shell = ({ page = "home", ...rest }) => {
     standalone,
     isGuest,
     setSocialAuthWelcomeDialogVisible,
+    getAIConfig,
   } = rest;
 
   const theme = useTheme();
@@ -145,6 +146,10 @@ const Shell = ({ page = "home", ...rest }) => {
 
     SocketHelper?.emit(SocketCommands.Subscribe, {
       roomParts: "change-web-plugin",
+    });
+
+    SocketHelper?.emit(SocketCommands.Subscribe, {
+      roomParts: "change-ai-config",
     });
   }, []);
 
@@ -232,6 +237,18 @@ const Shell = ({ page = "home", ...rest }) => {
       SocketHelper?.off(SocketEvents.LogoutSession, callback);
     };
   }, [userLoginEventId, userId]);
+
+  useEffect(() => {
+    const handleAiConfigChanged = () => {
+      getAIConfig?.();
+    };
+
+    SocketHelper?.on(SocketEvents.ChangeAiConfig, handleAiConfigChanged);
+
+    return () => {
+      SocketHelper?.off(SocketEvents.ChangeAiConfig, handleAiConfigChanged);
+    };
+  }, [getAIConfig]);
 
   let snackTimer = null;
   let fbInterval = null;
@@ -572,6 +589,7 @@ const ShellWrapper = inject(
       logoText,
       setLogoText,
       standalone,
+      getAIConfig,
     } = settingsStore;
 
     const isBase = settingsStore.theme.isBase;
@@ -649,6 +667,7 @@ const ShellWrapper = inject(
       setLogoText,
       standalone,
       setSocialAuthWelcomeDialogVisible,
+      getAIConfig,
     };
   },
 )(observer(Shell));

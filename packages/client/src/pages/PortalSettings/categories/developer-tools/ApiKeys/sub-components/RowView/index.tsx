@@ -25,15 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
-import styled from "styled-components";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import { RowContainer } from "@docspace/ui-kit/components/rows";
 import { TableViewProps } from "../../types";
 import RowItem from "./RowItem";
-
-const StyledRowContainer = styled(RowContainer)`
-  margin-top: 16px;
-`;
+import styles from "./RowView.module.scss";
 
 const RowView = (props: TableViewProps) => {
   const { items, viewAs, setViewAs, sectionWidth, currentDeviceType, ...rest } =
@@ -46,7 +42,7 @@ const RowView = (props: TableViewProps) => {
   });
 
   return (
-    <StyledRowContainer useReactWindow={false}>
+    <RowContainer className={styles.rowContainer} useReactWindow={false}>
       {items.map((item) => (
         <RowItem
           key={item.id}
@@ -55,7 +51,7 @@ const RowView = (props: TableViewProps) => {
           {...rest}
         />
       ))}
-    </StyledRowContainer>
+    </RowContainer>
   );
 };
 

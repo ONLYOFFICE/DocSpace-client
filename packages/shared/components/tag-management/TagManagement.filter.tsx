@@ -43,6 +43,8 @@ import {
 } from "@docspace/ui-kit/components/text-input";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
+import { removeEmojiCharacters } from "../../utils/removeEmojiCharacters";
+
 import { useTagManagement } from "./TagManagement.provider";
 import { useCreateTagMutation } from "./hooks/useTagsQuery";
 import type { TagManagementFilterProps, TTag } from "./TagManagement.types";
@@ -76,7 +78,7 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
 
   const onChangeSearchValue = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      const value = event.target.value;
+      const value = removeEmojiCharacters(event.target.value);
       setInputValue(value);
       startTransition(() => {
         setSearchValue(value);

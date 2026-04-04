@@ -591,53 +591,51 @@ class FormsAiAgentStore {
   private fetchDoneFoldersWithFiles = async () => {
     if (!this._roomId) return [];
 
-    const roomFilter = FilesFilter.getDefault();
-    roomFilter.page = 0;
-    roomFilter.pageCount = 100;
+    let doneFolderId = this.doneFolderId;
 
-    const roomRes = await api.files.getFolder(this._roomId, roomFilter);
-    const doneFolder = roomRes.folders.find(
-      (f: TFolder) => f.type === FolderType.Done,
-    );
-    if (!doneFolder) return [];
+    if (!doneFolderId) {
+      const roomFilter = FilesFilter.getDefault();
+      roomFilter.page = 0;
+      roomFilter.pageCount = 100;
 
-    runInAction(() => {
-      this.doneFolderId = doneFolder.id;
-    });
+      const roomRes = await api.files.getFolder(this._roomId, roomFilter);
+      const doneFolder = roomRes.folders.find(
+        (f: TFolder) => f.type === FolderType.Done,
+      );
+      if (!doneFolder) return [];
 
-    const doneFilter = FilesFilter.getDefault();
-    doneFilter.page = 0;
-    doneFilter.pageCount = 100;
-
-    const doneRes = await api.files.getFolder(doneFolder.id, doneFilter);
-    const subFolders: TFolder[] = doneRes.folders;
-
-    const results: {
-      folder: TFolder;
-      files: { id: number; title: string }[];
-    }[] = [];
-
-    for (const folder of subFolders) {
-      const fileFilter = FilesFilter.getDefault();
-      fileFilter.page = 0;
-      fileFilter.pageCount = 100;
-      fileFilter.filterType = FilterType.PDFForm;
-
-      try {
-        const folderRes = await api.files.getFolder(folder.id, fileFilter);
-        results.push({
-          folder,
-          files: folderRes.files.map((f: { id: number; title: string }) => ({
-            id: f.id,
-            title: f.title,
-          })),
-        });
-      } catch {
-        results.push({ folder, files: [] });
-      }
+      doneFolderId = doneFolder.id;
+      runInAction(() => {
+        this.doneFolderId = doneFolderId;
+      });
     }
 
-    return results;
+    const folderFilter = FilesFilter.getDefault();
+    folderFilter.page = 0;
+    folderFilter.pageCount = 100;
+
+    const fileFilter = FilesFilter.getDefault();
+    fileFilter.page = 0;
+    fileFilter.pageCount = 100;
+    fileFilter.filterType = FilterType.PDFForm;
+    fileFilter.withSubfolders = true;
+
+    const [folderRes, fileRes] = await Promise.all([
+      api.files.getFolder(doneFolderId, folderFilter),
+      api.files.getFolder(doneFolderId, fileFilter),
+    ]);
+
+    const filesByFolder = new Map<number, { id: number; title: string }[]>();
+    for (const f of fileRes.files) {
+      const list = filesByFolder.get(f.folderId) ?? [];
+      list.push({ id: f.id, title: f.title });
+      filesByFolder.set(f.folderId, list);
+    }
+
+    return folderRes.folders.map((folder) => ({
+      folder,
+      files: filesByFolder.get(folder.id as number) ?? [],
+    }));
   };
 
   private static MEMBER_ACCESS = new Set([

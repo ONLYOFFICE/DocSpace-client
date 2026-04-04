@@ -95,7 +95,6 @@
   "RoomTypeDisplay": "Prikaz vrste sobe",
   "Rotate": "Rotiraj",
   "Scale": "Spremeni merilo",
-  "SDKDescription": "Z uporabo JavaScript SDK lahko vdelate sobo ali mapo iz {{productName}} v svoj spletni vmesnik kot iframe. Tukaj lahko najdete nastavitve za ustvarjanje vzorca iframe in konfiguracijo CSP. Če želite uporabiti celoten SDK, si oglejte",
   "SdkPackageVersionInfo": "Za povezavo kot paketna različica vedno najnovejša",
   "SearchBlock": "Išči blok",
   "SearchByNameEmail": "Išči po imenu ali e-pošti",

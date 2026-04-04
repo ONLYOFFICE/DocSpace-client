@@ -51,13 +51,14 @@ const ClientArticle = React.memo(
     showArticleLoader,
     isInfoPanelVisible,
     isAccountsArticle,
+    isDeveloperToolsArticle,
   }) => {
     return (
       <ArticleWrapper
         isInfoPanelVisible={isInfoPanelVisible}
         withMainButton={withMainButton}
-        showArticleLoader={showArticleLoader}
-        showBackButton={isAccountsArticle}
+        showArticleLoader={showArticleLoader && !isDeveloperToolsArticle}
+        showBackButton={isAccountsArticle || isDeveloperToolsArticle}
       >
         <Article.Header>
           <ArticleHeaderContent />
@@ -68,7 +69,10 @@ const ClientArticle = React.memo(
         </Article.MainButton>
 
         <Article.Body>
-          <ArticleBodyContent isAccountsArticle={isAccountsArticle} />
+          <ArticleBodyContent
+            isAccountsArticle={isAccountsArticle}
+            isDeveloperToolsArticle={isDeveloperToolsArticle}
+          />
         </Article.Body>
       </ArticleWrapper>
     );
@@ -157,9 +161,12 @@ const ClientContent = (props) => {
     location.pathname.includes("/accounts") ||
     (location.pathname.includes("/profile") &&
       location.state?.fromUrl?.includes("/accounts"));
-  const withMainButton = isAccountsArticle
-    ? currentDeviceType !== DeviceType.desktop
-    : true;
+  const isDeveloperToolsArticle =
+    location.pathname.includes("/developer-tools");
+  const withMainButton =
+    isAccountsArticle || isDeveloperToolsArticle
+      ? currentDeviceType !== DeviceType.desktop
+      : true;
 
   return (
     <>
@@ -174,6 +181,7 @@ const ClientContent = (props) => {
             setIsFilterLoading={setIsFilterLoading}
             showArticleLoader={showArticleLoader}
             isAccountsArticle={isAccountsArticle}
+            isDeveloperToolsArticle={isDeveloperToolsArticle}
           />
         )
       ) : (
@@ -184,6 +192,7 @@ const ClientContent = (props) => {
           setIsFilterLoading={setIsFilterLoading}
           showArticleLoader={showArticleLoader}
           isAccountsArticle={isAccountsArticle}
+          isDeveloperToolsArticle={isDeveloperToolsArticle}
         />
       )}
       <Outlet />

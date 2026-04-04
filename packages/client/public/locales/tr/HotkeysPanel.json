@@ -45,5 +45,6 @@
   "HotkeysUploadFile": "Dosya yükle",
   "HotkeysUploadingObjects": "Öğeler yükleniyor",
   "HotkeysZoomIn": "Yakınlaştır",
-  "HotkeysZoomOut": "Uzaklaştır"
+  "HotkeysZoomOut": "Uzaklaştır",
+  "OpenContextMenu": "Bağlam menüsünü aç"
 }

@@ -5,5 +5,8 @@
   "ErrorViewDescriptionNetworkError": "ເບິ່ງຄືວ່າບໍ່ມີການເຊື່ອມຕໍ່ອິນເຕີເນັດ",
   "SuggestChanges": "ແນະນຳການປ່ຽນແປງ",
   "TemplateInfo": "ຂໍ້ມູນແມ່ແບບ",
-  "ViewAllTemplates": "ເບິ່ງແມ່ແບບທັງໝົດ"
+  "ViewAllTemplates": "ເບິ່ງແມ່ແບບທັງໝົດ",
+  "ErrorViewHeader": "ຄັງຮູບພາບບໍ່ສາມາດໃຊ້ໄດ້ຊົ່ວຄາວ",
+  "SelectTemplate": "ເລືອກແມ່ແບບ",
+  "UploadGallery": "ອັບໂຫຼດໃນຄັງຮູບພາບ"
 }

@@ -14,5 +14,7 @@
   "PluginSDK": "Plugin SDK",
   "PluginSDKDescription": "Met behulp van Plugin SDK kunt u uw {{productName}} functionaliteit uitbreiden, services van derden aansluiten of de bestaande gebruikerservaring verbeteren. Hier vindt u de plug-ins met broncode die beschikbaar is op GitHub.",
   "PluginSDKInstruction": "Klik op de knop voor de gedetailleerde instructies om uw eigen plug-ins te maken.",
-  "UploadDescription": "U kunt plug-ins toevoegen om de functionaliteit van {{productName}} uit te breiden met extra functies. Klik op Plug-in uploaden of plaats een bestand in het ZIP-archief."
+  "UploadDescription": "U kunt plug-ins toevoegen om de functionaliteit van {{productName}} uit te breiden met extra functies. Klik op Plug-in uploaden of plaats een bestand in het ZIP-archief.",
+  "PluginCacheWarningDescription": "Plugins worden gecached op basis van hun versienummer. Om ervoor te zorgen dat uw wijzigingen worden toegepast, verhoogt u het versienummer in uw <1>package.json</1> bestand voordat u het uploadt. Het systeem zal een plugin niet bijwerken als het versienummer hetzelfde blijft.",
+  "PluginDeletedSuccessfully": "Plugin succesvol verwijderd"
 }

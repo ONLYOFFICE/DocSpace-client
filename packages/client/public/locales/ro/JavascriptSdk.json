@@ -95,7 +95,6 @@
   "RoomTypeDisplay": "Afișare tip sală",
   "Rotate": "Rotire",
   "Scale": "Scalare",
-  "SDKDescription": "Cu ajutorul JavaScript SDK puteți încorpora o sală sau un folder din spațiu {{productName}} în interfața site-lui dvs prin codul iframe. Aici puteti gasi setările pentru crearea unui model iframe și configurarea Furnizorului de soluții cloud. Pentru a utiliza un SDK complet, consultați",
   "SdkPackageVersionInfo": "Pentru conectare ca pachet este întotdeauna necesara versiunea cea mai recentă",
   "SearchBlock": "Bloc căutare",
   "SearchByNameEmail": "Căutare după nume sau email",

@@ -14,5 +14,7 @@
   "PluginSDK": "SDK-laajennus",
   "PluginSDKDescription": "Käyttämällä SDK-laajennusta voit laajentaa {{productName}}-n toiminnallisuutta, yhdistää kolmansien osapuolien palveluihin tai parantaa olemassaolevaa käyttäjäkokemusta. Täältä löydät GitHubissa saatavilla olevat laajennusmallit.",
   "PluginSDKInstruction": "Klikkaa painiketta saadaksesi yksityiskohtaiset ohjeet omien laajennusten luomiseen.",
-  "UploadDescription": "Voit lisätä lisäosia laajentaaksesi {{productName}}-n toiminnallisuutta lisätoiminnoilla. Klikkaa lataa lisäosa tai pudota tiedosta ZIP-arkistoon."
+  "UploadDescription": "Voit lisätä lisäosia laajentaaksesi {{productName}}-n toiminnallisuutta lisätoiminnoilla. Klikkaa lataa lisäosa tai pudota tiedosta ZIP-arkistoon.",
+  "PluginCacheWarningDescription": "Lisäosat välimuistetaan niiden versionumeron perusteella. Jotta muutoksesi tulevat voimaan, lisää versionumeroa <1>package.json</1>-tiedostossasi ennen lataamista. Järjestelmä ei päivitä lisäosaa, jos versio pysyy samana.",
+  "PluginDeletedSuccessfully": "Lisäosa poistettu onnistuneesti"
 }

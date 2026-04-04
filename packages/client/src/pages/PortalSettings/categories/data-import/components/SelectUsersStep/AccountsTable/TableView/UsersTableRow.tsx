@@ -29,53 +29,8 @@ import { TableRow, TableCell } from "@docspace/ui-kit/components/table";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import styled from "styled-components";
 import { UsersTableRowProps } from "../../../../types";
-
-const StyledTableRow = styled(TableRow)`
-  .table-container_cell {
-    padding-inline-end: 30px;
-    text-overflow: ellipsis;
-  }
-
-  .checkbox-text {
-    font-size: 13px;
-    font-weight: 600;
-    color: ${(props) => props.theme.client.settings.migration.subtitleColor};
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .user-email {
-    margin-inline-end: 5px;
-    font-size: 13px;
-    font-weight: 600;
-    color: ${(props) =>
-      props.theme.client.settings.migration.tableRowTextColor};
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .not-existing {
-    font-size: 13px;
-    font-weight: 600;
-    color: ${(props) =>
-      props.theme.client.settings.migration.tableRowTextColor};
-  }
-
-  .user-existing {
-    font-size: 13px;
-    font-weight: 600;
-    color: ${(props) =>
-      props.theme.client.settings.migration.existingTextColor};
-
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-`;
+import styles from "../../../../StyledDataImport.module.scss";
 
 const NOT_EXIST = "—";
 
@@ -91,7 +46,7 @@ const UsersTableRow = (props: UsersTableRowProps) => {
   };
 
   return (
-    <StyledTableRow onClick={handleRowClick}>
+    <TableRow className={styles.styledTableRow} onClick={handleRowClick}>
       <TableCell className="checkboxWrapper">
         <Checkbox
           isChecked={isChecked}
@@ -114,7 +69,7 @@ const UsersTableRow = (props: UsersTableRowProps) => {
           <Text className="not-existing">{NOT_EXIST}</Text>
         )}
       </TableCell>
-    </StyledTableRow>
+    </TableRow>
   );
 };
 

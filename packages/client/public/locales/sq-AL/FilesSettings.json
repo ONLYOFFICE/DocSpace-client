@@ -3,5 +3,7 @@
   "DisplayFileExtension": "Shfaqni zgjerimin e skedarit pranë emrit të skedarit\"",
   "OpenSameTab": "Hapni redaktorin e {{organizationName}} në të njëjtën skedë",
   "OriginalCopy": "Ruani kopjen e skedarit gjithashtu në formatin origjinal",
-  "TrashMoveConfirmation": "Shfaqni njoftimin kur artikujt zhvendosen te {{sectionName}}"
+  "TrashMoveConfirmation": "Shfaqni njoftimin kur artikujt zhvendosen te {{sectionName}}",
+  "DefaultHomepage": "Faqja kryesore e parazgjedhur",
+  "GroupByRooms": "Grupo sipas dhomave"
 }

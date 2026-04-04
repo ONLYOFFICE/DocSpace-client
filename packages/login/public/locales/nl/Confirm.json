@@ -37,5 +37,7 @@
   "TfaSubTitle": "Volg eenvoudige stappen om verder te werken in dit {{productName}}:",
   "TfaTitle": "Tweefactorauthenticatie ingeschakeld voor veilige toegang",
   "VerifyConnection": "Verifieer de verbinding",
-  "VerifyConnectionDescription": "Voer de 6-cijferige code die door uw authenticator-app is gegenereerd, in het veld hieronder in om de instelling te voltooien."
+  "VerifyConnectionDescription": "Voer de 6-cijferige code die door uw authenticator-app is gegenereerd, in het veld hieronder in om de instelling te voltooien.",
+  "InviteLinkQuotaErrorBody": "Registratie via de link is niet meer beschikbaar, aangezien het maximum is bereikt.",
+  "InviteQuotaErrorCustomizedBody": "U wordt omgeleid naar de <1>Login</1> pagina in 10 seconden."
 }

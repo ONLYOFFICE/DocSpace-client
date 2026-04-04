@@ -5,5 +5,8 @@
   "ErrorViewDescriptionNetworkError": "Zdá sa, že nie je k dispozícii pripojenie na internet.",
   "SuggestChanges": "Navrhnúť zmeny",
   "TemplateInfo": "Informácie o šablóne",
-  "ViewAllTemplates": "Zobraziť všetky šablóny"
+  "ViewAllTemplates": "Zobraziť všetky šablóny",
+  "ErrorViewHeader": "Galéria je dočasne nedostupná.",
+  "SelectTemplate": "Vyberte šablónu",
+  "UploadGallery": "Nahrať do Galérie"
 }

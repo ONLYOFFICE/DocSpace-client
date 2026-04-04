@@ -27,7 +27,6 @@
 import { useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
 import { Trans } from "react-i18next";
-import styled from "styled-components";
 
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { toastr } from "@docspace/ui-kit/components/toast";
@@ -42,16 +41,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import DowngradePlanButtonContainer from "./DowngradePlanButtonContainer";
 import ChangePricingPlanDialog from "../../../../../../../components/dialogs/ChangePricingPlanDialog";
 
-const StyledBody = styled.div`
-  button {
-    width: 100%;
-  }
-`;
-const StyledModalBody = styled.div`
-  .text-warning {
-    margin-top: 16px;
-  }
-`;
+import styles from "../styles/MainTariff.module.scss";
 
 const MANAGER = "manager";
 let timerId = null;
@@ -315,7 +305,7 @@ const UpdatePlanButtonContainer = ({
   };
 
   return (
-    <StyledBody>
+    <div className={styles.buttonBody}>
       {isAlreadyPaid || cardLinkedOnFreeTariff
         ? updatingCurrentTariffButton()
         : payTariffButton()}
@@ -335,7 +325,7 @@ const UpdatePlanButtonContainer = ({
         >
           <ModalDialog.Header>{t("PlanUpgrade")}</ModalDialog.Header>
           <ModalDialog.Body>
-            <StyledModalBody>
+            <div className={styles.modalBody}>
               <Text>
                 <Trans
                   i18nKey="SwitchPlan"
@@ -358,7 +348,7 @@ const UpdatePlanButtonContainer = ({
                   }}
                 />
               </Text>
-              <Text className="text-warning">
+              <Text className={styles.textWarning}>
                 <Trans
                   i18nKey="ActionCannotBeUndone"
                   ns="Payments"
@@ -368,7 +358,7 @@ const UpdatePlanButtonContainer = ({
                   }}
                 />
               </Text>
-            </StyledModalBody>
+            </div>
           </ModalDialog.Body>
           <ModalDialog.Footer>
             <Button
@@ -391,7 +381,7 @@ const UpdatePlanButtonContainer = ({
           </ModalDialog.Footer>
         </ModalDialog>
       ) : null}
-    </StyledBody>
+    </div>
   );
 };
 

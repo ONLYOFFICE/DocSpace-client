@@ -5,5 +5,8 @@
   "ErrorViewDescriptionNetworkError": "Կարծես թե ինտերնետ կապ չկա",
   "SuggestChanges": "Առաջարկեք փոփոխություններ",
   "TemplateInfo": "Ձևանմուշի տեղեկատվություն",
-  "ViewAllTemplates": "Դիտեք բոլոր ձևանմուշները"
+  "ViewAllTemplates": "Դիտեք բոլոր ձևանմուշները",
+  "ErrorViewHeader": "Պատկերասրահն այժմ ժամանակավորապես անհասանելի է",
+  "SelectTemplate": "Ընտրեք ձևանմուշ",
+  "UploadGallery": "Վերբեռնել պատկերասրահում"
 }

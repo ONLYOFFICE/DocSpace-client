@@ -35,5 +35,12 @@
   "ServerUpdatedSuccess": "Server erfolgreich aktualisiert",
   "ServiceIcon": "Service-Symbol",
   "SystemMCPListTitle": "System",
-  "WebSearchKeyHiddenDescription": "Der API-Schlüssel wird nur einmal beim Speichern angezeigt und anschließend aus Sicherheitsgründen ausgeblendet."
+  "WebSearchKeyHiddenDescription": "Der API-Schlüssel wird nur einmal beim Speichern angezeigt und anschließend aus Sicherheitsgründen ausgeblendet.",
+  "AddAIProvider": "{{aiProvider}} hinzufügen",
+  "AddMCPServer": "{{mcpServer}} hinzufügen",
+  "DefaultProviderSetSuccess": "Standardanbieter erfolgreich festgelegt",
+  "DefaultProviderTitle": "Standardanbieter",
+  "DeleteProvider": "{{aiProvider}} löschen",
+  "MCPUnavailableError": "{{mcpServer}} ist nicht verfügbar",
+  "Model": "Modell"
 }

@@ -41,7 +41,7 @@ import WorkspaceDarkSvgUrl from "PUBLIC_DIR/images/dark.workspace.onlyoffice.rea
 import { LinkType } from "@docspace/ui-kit/components/link";
 import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-import { WorkspacesContainer } from "../StyledDataImport";
+import styles from "../StyledDataImport.module.scss";
 import DataImportLoader from "../sub-components/DataImportLoader";
 import { ProvidersProps, InjectedProvidersProps } from "../types";
 
@@ -82,7 +82,7 @@ const Providers = (props: ProvidersProps) => {
   if (showPortalSettingsLoader || !ready) return <DataImportLoader />;
 
   return (
-    <WorkspacesContainer>
+    <div className={styles.workspacesContainer}>
       <Text className="data-import-description">
         {t("DataImportDescription", {
           productName: t("Common:ProductName"),
@@ -129,7 +129,7 @@ const Providers = (props: ProvidersProps) => {
           </div>
         ))}
       </div>
-    </WorkspacesContainer>
+    </div>
   );
 };
 export const Component = inject<TStore>(

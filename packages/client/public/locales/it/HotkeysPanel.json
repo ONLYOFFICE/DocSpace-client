@@ -45,5 +45,6 @@
   "HotkeysUploadFile": "Caricare file",
   "HotkeysUploadingObjects": "Caricamento elementi",
   "HotkeysZoomIn": "Ingrandire",
-  "HotkeysZoomOut": "Rimpiccolire"
+  "HotkeysZoomOut": "Rimpiccolire",
+  "OpenContextMenu": "Apri menu contestuale"
 }

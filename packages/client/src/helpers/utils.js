@@ -191,13 +191,6 @@ export const getCategoryUrl = (categoryType, folderId) => {
   }
 };
 
-export const removeEmojiCharacters = (value) => {
-  const regexpEmoji = /(\p{Extended_Pictographic}|\p{Emoji_Presentation})/gu;
-  const replaceEmojiCharacters = value.replaceAll(regexpEmoji, "");
-
-  return replaceEmojiCharacters.replace(/\u200D/g, "");
-};
-
 export const getUrlByDefaultFolderType = (folderType) => {
   const categoryType = getCategoryTypeByFolderType(folderType);
   return getCategoryUrl(categoryType);

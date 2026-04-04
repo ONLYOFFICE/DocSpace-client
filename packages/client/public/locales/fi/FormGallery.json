@@ -5,5 +5,8 @@
   "ErrorViewDescriptionNetworkError": "Näyttää siltä, ettei Internet-yhteyttä ole",
   "SuggestChanges": "Ehdota muutoksia",
   "TemplateInfo": "Mallin tiedot",
-  "ViewAllTemplates": "Näytä kaikki mallit"
+  "ViewAllTemplates": "Näytä kaikki mallit",
+  "ErrorViewHeader": "Galleria on toistaiseksi poissa käytöstä.",
+  "SelectTemplate": "Valitse malli",
+  "UploadGallery": "Lähetä Galleriaan"
 }

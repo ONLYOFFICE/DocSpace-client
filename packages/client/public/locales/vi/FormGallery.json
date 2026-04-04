@@ -5,5 +5,8 @@
   "ErrorViewDescriptionNetworkError": "Có vẻ như không có kết nối Internet",
   "SuggestChanges": "Đề xuất thay đổi",
   "TemplateInfo": "Thông tin biểu mẫu",
-  "ViewAllTemplates": "Xem tất cả các mẫu"
+  "ViewAllTemplates": "Xem tất cả các mẫu",
+  "ErrorViewHeader": "Thư viện ảnh hiện đang tạm thời không khả dụng",
+  "SelectTemplate": "Chọn Mẫu",
+  "UploadGallery": "Tải lên trong Thư viện ảnh"
 }

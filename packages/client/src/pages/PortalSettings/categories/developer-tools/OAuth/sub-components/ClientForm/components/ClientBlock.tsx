@@ -32,7 +32,7 @@ import copy from "copy-to-clipboard";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { TTranslation } from "@docspace/shared/types";
 
-import { StyledBlock, StyledInputBlock } from "../ClientForm.styled";
+import styles from "../ClientForm.styled.module.scss";
 
 import BlockHeader from "./BlockHeader";
 import InputGroup from "./InputGroup";
@@ -78,9 +78,9 @@ const ClientBlock = ({
   );
 
   return (
-    <StyledBlock>
+    <div className={styles.styledBlock}>
       <BlockHeader header={t("Client")} helpButtonText={helpButtonText} />
-      <StyledInputBlock>
+      <div className={styles.styledInputBlock}>
         <InputGroup
           label={t("ID")}
           name=""
@@ -104,8 +104,8 @@ const ClientBlock = ({
           onCopyClick={() => onCopyClick("secret")}
           dataTestId="secret_input_group"
         />
-      </StyledInputBlock>
-    </StyledBlock>
+      </div>
+    </div>
   );
 };
 

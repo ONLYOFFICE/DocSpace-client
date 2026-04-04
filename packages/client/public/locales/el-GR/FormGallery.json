@@ -5,5 +5,8 @@
   "ErrorViewDescriptionNetworkError": "Φαίνεται ότι δεν υπάρχει σύνδεση στο διαδίκτυο",
   "SuggestChanges": "Προτείνετε αλλαγές",
   "TemplateInfo": "Πληροφορίες προτύπου",
-  "ViewAllTemplates": "Προβολή όλων των προτύπων"
+  "ViewAllTemplates": "Προβολή όλων των προτύπων",
+  "ErrorViewHeader": "Η γκαλερί είναι προσωρινά μη διαθέσιμη",
+  "SelectTemplate": "Επιλέξτε Πρότυπο",
+  "UploadGallery": "Ανεβάστε στην Γκαλερί"
 }

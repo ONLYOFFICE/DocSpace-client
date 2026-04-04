@@ -5,5 +5,8 @@
   "ErrorViewDescriptionNetworkError": "当前无法连接网络",
   "SuggestChanges": "提出修改建议",
   "TemplateInfo": "模板信息",
-  "ViewAllTemplates": "查看模板大全"
+  "ViewAllTemplates": "查看模板大全",
+  "ErrorViewHeader": "图库暂时不可用",
+  "SelectTemplate": "选择模板",
+  "UploadGallery": "上传到相册"
 }

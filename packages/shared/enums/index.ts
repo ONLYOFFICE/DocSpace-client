@@ -205,6 +205,12 @@ export const enum PageType {
   restore = "restore",
   integration = "integration",
   developerTools = "developerTools",
+  devToolsOverview = "devToolsOverview",
+  devToolsJavascriptSdk = "devToolsJavascriptSdk",
+  devToolsPluginSdk = "devToolsPluginSdk",
+  devToolsWebhooks = "devToolsWebhooks",
+  devToolsOAuth = "devToolsOAuth",
+  devToolsApiKeys = "devToolsApiKeys",
   portalDeletion = "portalDeletion",
   payments = "payments",
   bonus = "bonus",
@@ -499,6 +505,14 @@ export const enum LDAPCertificateProblem {
 }
 
 export const enum ExportRoomIndexTaskStatus {
+  Created = 0,
+  Running = 1,
+  Completed = 2,
+  Canceled = 3,
+  Failed = 4,
+}
+
+export const enum FileOperationStatus {
   Created = 0,
   Running = 1,
   Completed = 2,

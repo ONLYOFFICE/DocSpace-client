@@ -34,7 +34,7 @@ import { isMobile, mobile } from "@docspace/shared/utils";
 
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 
-import { removeEmojiCharacters } from "SRC_DIR/helpers/utils";
+import { removeEmojiCharacters } from "@docspace/shared/utils";
 import TagHandler from "SRC_DIR/helpers/TagHandler";
 
 import ItemIcon from "../../../ItemIcon";

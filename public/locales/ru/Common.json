@@ -1200,5 +1200,8 @@
   "YourCurrentDomain": "Ваш текущий домен",
   "YourFurtherEditsNotSaved": "Ваши дальнейшие изменения могут не сохраниться.",
   "YourLogo": "Ваш логотип",
-  "YourTurn": "Ваша очередь"
+  "YourTurn": "Ваша очередь",
+  "AskAnyQuestion": "Задайте любой вопрос или опишите, что вам нужно.",
+  "ChooseYourCountry": "Выберите свою страну",
+  "ChooseYourCountryDescription": "Выберите язык для просмотра доступных шаблонов форм"
 }

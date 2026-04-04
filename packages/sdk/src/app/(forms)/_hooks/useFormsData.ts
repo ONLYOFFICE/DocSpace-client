@@ -43,6 +43,7 @@ import { useFormsListStore } from "../_store/FormsListStore";
 import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
 import { useFormsSettingsStore } from "../_store/FormsSettingsStore";
 import { useFormsAiAgentStore } from "../_store/FormsAiAgentStore";
+import { useFormsDbSettingsStore } from "../_store/FormsDbSettingsStore";
 import { sectionFromPathname } from "../_utils/sectionFromPathname";
 
 const FORMS_PAGE_COUNT = 25;
@@ -74,6 +75,7 @@ export default function useFormsData() {
   const formsSettingsStore = useFormsSettingsStore();
   const formsListStore = useFormsListStore();
   const aiStore = useFormsAiAgentStore();
+  const dbSettingsStore = useFormsDbSettingsStore();
   const pathname = usePathname();
   const activeSection = sectionFromPathname(pathname);
   const { completedFolder, inProgressFolder } = useFormsNavigationStore();
@@ -188,6 +190,9 @@ export default function useFormsData() {
     [formsSettingsStore, formsListStore, aiStore],
   );
 
+  const isCompletedWithXlsx =
+    activeSection === FormsSection.CompletedForms && dbSettingsStore.collectXlsx;
+
   const fetchSubfolder = useCallback(
     async (folderId: number, signal: AbortSignal) => {
       formsListStore.setIsLoading(true);
@@ -195,7 +200,9 @@ export default function useFormsData() {
         const filter = FilesFilter.getDefault();
         filter.page = 0;
         filter.pageCount = FORMS_PAGE_COUNT;
-        filter.filterType = FilterType.PDFForm;
+        if (!isCompletedWithXlsx) {
+          filter.filterType = FilterType.PDFForm;
+        }
 
         const res = await api.files.getFolder(folderId, filter, signal);
 
@@ -216,7 +223,7 @@ export default function useFormsData() {
         }
       }
     },
-    [formsListStore],
+    [formsListStore, isCompletedWithXlsx],
   );
 
   const fetchSection = useCallback(
@@ -339,7 +346,9 @@ export default function useFormsData() {
         const filter = FilesFilter.getDefault();
         filter.page = currentPage.current;
         filter.pageCount = FORMS_PAGE_COUNT;
-        filter.filterType = FilterType.PDFForm;
+        if (!isCompletedWithXlsx) {
+          filter.filterType = FilterType.PDFForm;
+        }
 
         const res = await api.files.getFolder(
           folderId,
@@ -365,7 +374,7 @@ export default function useFormsData() {
         console.error("Forms fetchMore failed:", error.message);
       }
     }
-  }, [getFolderId, formsListStore]);
+  }, [getFolderId, formsListStore, isCompletedWithXlsx]);
 
   return { fetchSection, fetchMore, fetchSubfolder };
 }

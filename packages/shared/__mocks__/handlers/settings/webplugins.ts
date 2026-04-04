@@ -244,6 +244,20 @@ export const mockApiPlugin: TAPIPlugin = {
   settings: "",
 };
 
+export const mockCreateDialogPlugin: TAPIPlugin = {
+  ...mockPlugin1,
+  name: "create-dialog-sample",
+  version: "1.0.0",
+  minDocSpaceVersion: "3.5.0",
+  description:
+    "Sample plugin demonstrating ICreateDialog usage — opens the native DocSpace create-item dialog from a main-button item",
+  pluginName: "CreateDialogPlugin",
+  scopes: "MainButton",
+  image: "docspace-icon.svg",
+  url: "/plugins/create-dialog-sample/plugin.js",
+  settings: "",
+};
+
 // Empty plugins list
 export const webPluginsEmpty = {
   response: [],
@@ -398,6 +412,20 @@ export const webPluginsWithMediaViewerPlugin = {
   statusCode: 200,
 };
 
+// Plugins list with create dialog sample plugin
+export const webPluginsWithCreateDialogPlugin = {
+  response: [mockCreateDialogPlugin],
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
 // Plugins list with API sample plugin
 export const webPluginsWithApiPlugin = {
   response: [mockApiPlugin],
@@ -481,7 +509,8 @@ export const webPluginsResolver = (
     | "withProfileMenuPlugin"
     | "withEventListenerPlugin"
     | "withMediaViewerPlugin"
-    | "withApiPlugin" = "empty",
+    | "withApiPlugin"
+    | "withCreateDialogPlugin" = "empty",
 ) => {
   let data;
 
@@ -522,6 +551,9 @@ export const webPluginsResolver = (
     case "withApiPlugin":
       data = webPluginsWithApiPlugin;
       break;
+    case "withCreateDialogPlugin":
+      data = webPluginsWithCreateDialogPlugin;
+      break;
     default:
       data = webPluginsEmpty;
       break;
@@ -558,7 +590,8 @@ export const webPluginsHandler = (
     | "withProfileMenuPlugin"
     | "withEventListenerPlugin"
     | "withMediaViewerPlugin"
-    | "withApiPlugin" = "empty",
+    | "withApiPlugin"
+    | "withCreateDialogPlugin" = "empty",
 ) => {
   return http.get(
     `${BASE_URL}:${port}/${API_PREFIX}/${PATH_WEB_PLUGINS}`,

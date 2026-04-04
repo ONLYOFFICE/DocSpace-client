@@ -258,6 +258,34 @@ export const mockCreateDialogPlugin: TAPIPlugin = {
   settings: "",
 };
 
+export const mockModalDialogPlugin: TAPIPlugin = {
+  ...mockPlugin1,
+  name: "modal-dialog-sample",
+  version: "1.0.0",
+  minDocSpaceVersion: "3.5.0",
+  description:
+    "Sample plugin demonstrating IModalDialog usage — opens a modal from a profile-menu item",
+  pluginName: "ModalDialogPlugin",
+  scopes: "ProfileMenu",
+  image: "docspace-icon.svg",
+  url: "/plugins/modal-dialog-sample/plugin.js",
+  settings: "",
+};
+
+// Plugins list with modal dialog sample plugin
+export const webPluginsWithModalDialogPlugin = {
+  response: [mockModalDialogPlugin],
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
 // Empty plugins list
 export const webPluginsEmpty = {
   response: [],
@@ -510,7 +538,8 @@ export const webPluginsResolver = (
     | "withEventListenerPlugin"
     | "withMediaViewerPlugin"
     | "withApiPlugin"
-    | "withCreateDialogPlugin" = "empty",
+    | "withCreateDialogPlugin"
+    | "withModalDialogPlugin" = "empty",
 ) => {
   let data;
 
@@ -554,6 +583,9 @@ export const webPluginsResolver = (
     case "withCreateDialogPlugin":
       data = webPluginsWithCreateDialogPlugin;
       break;
+    case "withModalDialogPlugin":
+      data = webPluginsWithModalDialogPlugin;
+      break;
     default:
       data = webPluginsEmpty;
       break;
@@ -591,7 +623,8 @@ export const webPluginsHandler = (
     | "withEventListenerPlugin"
     | "withMediaViewerPlugin"
     | "withApiPlugin"
-    | "withCreateDialogPlugin" = "empty",
+    | "withCreateDialogPlugin"
+    | "withModalDialogPlugin" = "empty",
 ) => {
   return http.get(
     `${BASE_URL}:${port}/${API_PREFIX}/${PATH_WEB_PLUGINS}`,

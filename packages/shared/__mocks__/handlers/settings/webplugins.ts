@@ -286,6 +286,34 @@ export const webPluginsWithModalDialogPlugin = {
   statusCode: 200,
 };
 
+export const mockFloatingOperationsPlugin: TAPIPlugin = {
+  ...mockPlugin1,
+  name: "floating-operations",
+  version: "1.0.0",
+  minDocSpaceVersion: "3.5.0",
+  description:
+    "Sample plugin demonstrating IFloatingOperationsButton — shows a floating progress button for long-running operations triggered from the context menu",
+  pluginName: "FloatingOperationsPlugin",
+  scopes: "ContextMenu",
+  image: "docspace-icon.svg",
+  url: "/plugins/floating-operations/plugin.js",
+  settings: "",
+};
+
+// Plugins list with floating operations plugin
+export const webPluginsWithFloatingOperationsPlugin = {
+  response: [mockFloatingOperationsPlugin],
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
 // Empty plugins list
 export const webPluginsEmpty = {
   response: [],
@@ -539,7 +567,8 @@ export const webPluginsResolver = (
     | "withMediaViewerPlugin"
     | "withApiPlugin"
     | "withCreateDialogPlugin"
-    | "withModalDialogPlugin" = "empty",
+    | "withModalDialogPlugin"
+    | "withFloatingOperationsPlugin" = "empty",
 ) => {
   let data;
 
@@ -586,6 +615,9 @@ export const webPluginsResolver = (
     case "withModalDialogPlugin":
       data = webPluginsWithModalDialogPlugin;
       break;
+    case "withFloatingOperationsPlugin":
+      data = webPluginsWithFloatingOperationsPlugin;
+      break;
     default:
       data = webPluginsEmpty;
       break;
@@ -624,7 +656,8 @@ export const webPluginsHandler = (
     | "withMediaViewerPlugin"
     | "withApiPlugin"
     | "withCreateDialogPlugin"
-    | "withModalDialogPlugin" = "empty",
+    | "withModalDialogPlugin"
+    | "withFloatingOperationsPlugin" = "empty",
 ) => {
   return http.get(
     `${BASE_URL}:${port}/${API_PREFIX}/${PATH_WEB_PLUGINS}`,

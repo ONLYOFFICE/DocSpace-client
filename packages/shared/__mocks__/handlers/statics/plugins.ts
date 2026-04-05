@@ -102,6 +102,7 @@ export const pluginAssetsHandler = () => {
       else if (ext === ".jpg" || ext === ".jpeg") contentType = "image/jpeg";
       else if (ext === ".svg") contentType = "image/svg+xml";
       else if (ext === ".gif") contentType = "image/gif";
+      else if (ext === ".html" || ext === ".htm") contentType = "text/html";
 
       return new Response(new Uint8Array(fileBuffer), {
         headers: {

@@ -314,6 +314,34 @@ export const webPluginsWithFloatingOperationsPlugin = {
   statusCode: 200,
 };
 
+export const mockPostMessagePlugin: TAPIPlugin = {
+  ...mockPlugin1,
+  name: "post-message",
+  version: "1.0.0",
+  minDocSpaceVersion: "3.5.0",
+  description:
+    "Sample plugin demonstrating IPostMessagePlugin — listens for postMessage events from an embedded iframe and triggers portal-side toast notifications",
+  pluginName: "PostMessagePlugin",
+  scopes: "ProfileMenu,PostMessage",
+  image: "docspace-icon.svg",
+  url: "/plugins/post-message/plugin.js",
+  settings: "",
+};
+
+// Plugins list with post-message plugin
+export const webPluginsWithPostMessagePlugin = {
+  response: [mockPostMessagePlugin],
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
 // Empty plugins list
 export const webPluginsEmpty = {
   response: [],
@@ -568,7 +596,8 @@ export const webPluginsResolver = (
     | "withApiPlugin"
     | "withCreateDialogPlugin"
     | "withModalDialogPlugin"
-    | "withFloatingOperationsPlugin" = "empty",
+    | "withFloatingOperationsPlugin"
+    | "withPostMessagePlugin" = "empty",
 ) => {
   let data;
 
@@ -618,6 +647,9 @@ export const webPluginsResolver = (
     case "withFloatingOperationsPlugin":
       data = webPluginsWithFloatingOperationsPlugin;
       break;
+    case "withPostMessagePlugin":
+      data = webPluginsWithPostMessagePlugin;
+      break;
     default:
       data = webPluginsEmpty;
       break;
@@ -657,7 +689,8 @@ export const webPluginsHandler = (
     | "withApiPlugin"
     | "withCreateDialogPlugin"
     | "withModalDialogPlugin"
-    | "withFloatingOperationsPlugin" = "empty",
+    | "withFloatingOperationsPlugin"
+    | "withPostMessagePlugin" = "empty",
 ) => {
   return http.get(
     `${BASE_URL}:${port}/${API_PREFIX}/${PATH_WEB_PLUGINS}`,

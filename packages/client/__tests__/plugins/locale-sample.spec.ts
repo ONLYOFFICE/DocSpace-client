@@ -144,8 +144,8 @@ test.describe("Locale Sample Plugin — plugin metadata localization", () => {
 
     await expectScreenshot(page, [
       "desktop",
-      "locale-sample",
-      "locale-sample-az.png",
+      "plugins-locale",
+      "plugins-locale-az.png",
     ]);
   });
 
@@ -205,8 +205,8 @@ test.describe("Locale Sample Plugin — plugin metadata localization", () => {
 
     await expectScreenshot(page, [
       "desktop",
-      "locale-sample",
-      "locale-sample-az-settings.png",
+      "plugins-locale",
+      "plugins-locale-az-settings.png",
     ]);
   });
 
@@ -258,8 +258,8 @@ test.describe("Locale Sample Plugin — plugin metadata localization", () => {
 
     await expectScreenshot(page, [
       "desktop",
-      "locale-sample",
-      "locale-sample-fallback-en.png",
+      "plugins-locale",
+      "plugins-locale-fallback-en.png",
     ]);
   });
 
@@ -318,8 +318,9 @@ test.describe("Locale Sample Plugin — plugin metadata localization", () => {
 
     await expectScreenshot(page, [
       "desktop",
-      "locale-sample",
-      "locale-sample-fallback-en-settings.png",
+      "plugins-locale",
+      "plugins-locale-fallback-en-settings.png",
     ]);
   });
 });
+

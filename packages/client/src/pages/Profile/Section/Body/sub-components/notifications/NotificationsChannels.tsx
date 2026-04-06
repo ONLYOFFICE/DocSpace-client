@@ -127,7 +127,7 @@ const NotificationsChannels = ({
           onConnect={() => setConnectAccountDialogVisible?.(true)}
           onDisconnect={() => setDisconnectAccountDialogVisible?.(true)}
           isConnected={isTelegramEnabled ? isConnected : false}
-          isAdmin={user?.isAdmin}
+          isAdmin={user?.isAdmin || user?.isOwner}
           isNeedConfig={!isTelegramEnabled}
         />
       </div>

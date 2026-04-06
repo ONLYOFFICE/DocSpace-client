@@ -66,7 +66,7 @@ export default inject<TStore>(
 
     const { email, displayName } = user || {};
 
-    const isAdmin = user?.isAdmin;
+    const isAdmin = user?.isAdmin || user?.isOwner;
 
     const { isPrimaryProgressVisbile } = primaryProgressDataStore;
     const { isSecondaryProgressVisbile } = secondaryProgressDataStore;

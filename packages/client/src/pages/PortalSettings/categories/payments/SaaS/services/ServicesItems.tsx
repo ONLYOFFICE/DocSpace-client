@@ -331,7 +331,7 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
             );
           }
 
-          if (item.serviceName === DISK_STORAGE) {
+          if (item.serviceName?.includes(DISK_STORAGE)) {
             const eventDisabled =
               isGracePeriod || isDisabled || hasScheduledStorageChange;
 

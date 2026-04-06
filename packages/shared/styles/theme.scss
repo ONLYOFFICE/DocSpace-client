@@ -74,6 +74,7 @@
 
   --filled-button-background-color: #{$gray-dark-mid};
 }
+
 /* ========================== */
 
 .light {
@@ -91,10 +92,8 @@
 
   --files-article-body-download-app-list-text-color: #{$gray};
   --files-article-body-download-app-list-mac-hover-color: #{$dark-black};
-  --files-article-body-dev-tools-background-color: var(
-    --accent-main,
-    #{$light-blue-main}
-  );
+  --files-article-body-dev-tools-background-color: var(--accent-main,
+    #{$light-blue-main});
   --files-article-body-dev-tools-background-opacity: 0.17;
   --files-article-body-dev-tools-color: #{$gray-text};
   --article-catalog-background: #{$gray-light};
@@ -136,14 +135,10 @@
 
   --avatar-edit-container-background: #{$blue-light-mid};
   --avatar-edit-container-fill: #{$white};
-  --avatar-edit-container-fill-hover: var(
-    --accent-button,
-    #{$light-blue-main-hover}
-  );
-  --avatar-edit-container-fill-press: var(
-    --accent-button,
-    #{$light-blue-main-pressed}
-  );
+  --avatar-edit-container-fill-hover: var(--accent-button,
+    #{$light-blue-main-hover});
+  --avatar-edit-container-fill-press: var(--accent-button,
+    #{$light-blue-main-pressed});
   --avatar-image-container-background: #{$gray-strong};
   --avatar-image-container-background-image: #{$light-second-main};
   --avatar-image-container-group-background: #{$gray-light-mid};
@@ -233,10 +228,8 @@
   --filter-block-background: #{$white};
   --filter-block-item-color: #{$gray};
   --filter-block-selected-item-color: #{$white};
-  --filter-block-selected-backgroud-color: var(
-    --accent-main,
-    #{$light-blue-main}
-  );
+  --filter-block-selected-backgroud-color: var(--accent-main,
+    #{$light-blue-main});
   --filter-block-item-separator-background: #{$gray-light-mid};
   --filter-block-item-tag-border: 1px solid #{$gray-light-mid};
   --filter-block-item-tag-active-background: #{$light-blue-main-active};
@@ -363,14 +356,10 @@
 
   --avatar-edit-container-background: rgba(255, 255, 255, 0.64);
   --avatar-edit-container-fill: #{$white};
-  --avatar-edit-container-fill-hover: var(
-    --accent-button,
-    #{$light-blue-main-hover}
-  );
-  --avatar-edit-container-fill-press: var(
-    --accent-button,
-    #{$light-blue-main-pressed}
-  );
+  --avatar-edit-container-fill-hover: var(--accent-button,
+    #{$light-blue-main-hover});
+  --avatar-edit-container-fill-press: var(--accent-button,
+    #{$light-blue-main-pressed});
   --avatar-image-container-background: #{$gray-dark-strong};
   --avatar-image-container-background-image: #{$gray-dark-strong};
   --avatar-image-container-group-background: #{$gray-dark-mid};
@@ -622,14 +611,10 @@
   --navigation-background: #{$white};
   --navigation-box-shadow: 0px 8px 16px 0px #{$box-shadow-color};
   --navigation-icon-stroke: #{$light-gray-selected};
-  --navigation-guid-animation-small-border: 1px solid
-    var(--accent-main, #{$light-second-main});
-  --navigation-guid-animation-border: 2px solid
-    var(--accent-main, #{$light-second-main});
-  --navigation-guid-animation-icon-color: var(
-    --accent-main,
-    #{$light-second-main}
-  );
+  --navigation-guid-animation-small-border: 1px solid var(--accent-main, #{$light-second-main});
+  --navigation-guid-animation-border: 2px solid var(--accent-main, #{$light-second-main});
+  --navigation-guid-animation-icon-color: var(--accent-main,
+    #{$light-second-main});
   --navigation-header-icon-fill: #{$light-gray-dark};
   --navigation-lifetime-enabled-fill: #{$main-red};
   --navigation-lifetime-enabled-stroke: #{$main-red};
@@ -644,14 +629,10 @@
   --navigation-background: #{$black};
   --navigation-box-shadow: 0px 8px 16px 0px #{$box-shadow-dark-color};
   --navigation-icon-stroke: #{$gray-dark-strong};
-  --navigation-guid-animation-small-border: 1px solid
-    var(--accent-main, #{$light-second-main});
-  --navigation-guid-animation-border: 2px solid
-    var(--accent-main, #{$light-second-main});
-  --navigation-guid-animation-icon-color: var(
-    --accent-main,
-    #{$light-second-main}
-  );
+  --navigation-guid-animation-small-border: 1px solid var(--accent-main, #{$light-second-main});
+  --navigation-guid-animation-border: 2px solid var(--accent-main, #{$light-second-main});
+  --navigation-guid-animation-icon-color: var(--accent-main,
+    #{$light-second-main});
   --navigation-header-icon-fill: #{$dark-gray-dark};
   --navigation-lifetime-enabled-fill: none;
   --navigation-lifetime-enabled-stroke: #{$main-red};
@@ -1053,6 +1034,7 @@
 .light {
   --selector-border: 1px solid #{$gray-light-mid};
 }
+
 .dark {
   --selector-border: 1px solid #{$gray-dark-strong};
 }
@@ -1095,15 +1077,13 @@
 .light {
   --form-filling-tips-circle-selected-background-color: #{$white};
   --form-filling-tips-circle-background-color: #{$gray-light-mid};
-  --form-filling-tips-circle-border: 3px solid
-    var(--accent-main, #{$light-blue-main});
+  --form-filling-tips-circle-border: 3px solid var(--accent-main, #{$light-blue-main});
 }
 
 .dark {
   --form-filling-tips-circle-selected-background-color: #{$black};
   --form-filling-tips-circle-background-color: #{$gray-dark-mid};
-  --form-filling-tips-circle-border: 3px solid
-    var(--accent-main, #{$light-second-main});
+  --form-filling-tips-circle-border: 3px solid var(--accent-main, #{$light-second-main});
 }
 
 .light {
@@ -1526,6 +1506,15 @@
   --border-service-color: #{$gray-light-mid};
   --services-additional-info: #{$gray};
   --services-link-color: #{$gray};
+  --payment-tariff-text: #{$gray-text};
+  --payment-benefits-background: #{$gray-light};
+  --payment-main-border: 1px solid #{$gray-light};
+  --payment-price-background-text: #{$light-gray-hover};
+  --payment-price-background: transparent;
+  --payment-price-border: 1px solid #{$gray-strong};
+  --payment-price-disable: #{$gray};
+  --payment-price-disable-price: #{$gray};
+  --payment-storage-size-title: #{$gray};
 }
 
 .dark {
@@ -1547,6 +1536,15 @@
   --modal-dialog-border-color: #{$gray-dark-strong};
   --services-additional-info: #{$gray-dark};
   --services-link-color: #{$dark-gray-dark};
+  --payment-tariff-text: #{$gray-dark-pressed};
+  --payment-benefits-background: #{$black};
+  --payment-main-border: 1px solid #{$gray-dark-strong};
+  --payment-price-background-text: #{$light-dark-gray-hover};
+  --payment-price-background: #{$dark-gray-light};
+  --payment-price-border: 1px solid #{$dark-gray-light};
+  --payment-price-disable: #{$gray-dark};
+  --payment-price-disable-price: #{$gray-dark-text};
+  --payment-storage-size-title: #{$gray};
 }
 
 .light {
@@ -1815,15 +1813,47 @@
 }
 
 .light {
+  --settings-separator-border: 1px solid #{$gray-light-mid};
+}
+
+.dark {
+  --settings-separator-border: 1px solid #{$gray-dark-strong};
+}
+
+.light {
+  --settings-integration-text-color: #{$gray};
+  --settings-integration-separator-border: 1px solid #{$gray-strong};
+  --settings-integration-link-color: #{$link};
+  --settings-integration-sso-icon-button: #{$black};
+  --settings-integration-sso-icon-button-disabled: #{$gray};
+}
+
+.dark {
+  --settings-integration-text-color: #{$gray-dark};
+  --settings-integration-separator-border: 1px solid #{$gray-dark-strong};
+  --settings-integration-link-color: #{$dark-link};
+  --settings-integration-sso-icon-button: #{$white};
+  --settings-integration-sso-icon-button-disabled: #{$black};
+}
+
+.light {
   --settings-common-company-info-border: 1px dashed #{$black};
   --settings-common-company-info-color: #{$gray};
   --settings-common-branding-description-color: #{$light-gray-dark};
+  --settings-security-description-color: #{$gray-text};
+  --settings-appearance-theme-add-bg: #{$gray-light-mid};
+  --settings-appearance-add-theme-bg: #{$gray-strong};
+  --settings-appearance-icon-fill: #{$gray};
 }
 
 .dark {
   --settings-common-company-info-border: 1px dashed #{$white};
   --settings-common-company-info-color: #{$gray-dark};
   --settings-common-branding-description-color: #{$gray-dark};
+  --settings-security-description-color: #{$gray-dark};
+  --settings-appearance-theme-add-bg: #{$gray-dark-strong};
+  --settings-appearance-add-theme-bg: #{$gray-dark-strong};
+  --settings-appearance-icon-fill: #{$gray-dark};
 }
 
 .light {
@@ -1962,6 +1992,7 @@
   --quantity-picker-rectangle-color: #{$light-gray-hover};
   --quantity-picker-warning-color: #{$light-error-status};
 }
+
 .dark {
   --quantity-picker-disable-color: #{$gray-dark};
   --quantity-picker-additional-title: #{$gray-dark};
@@ -2009,6 +2040,7 @@
 .light {
   --icon-button-color: #{$gray};
 }
+
 .dark {
   --icon-button-color: #{$gray-dark};
 }
@@ -2031,25 +2063,19 @@
   --table-header-text-color: #{$gray};
   --table-header-text-hover-color: #{$light-gray-dark};
   --table-header-border-bottom: 1px solid #{$gray-light-mid};
-  --table-header-border-image-source: linear-gradient(
-    to right,
+  --table-header-border-image-source: linear-gradient(to right,
     #{$white} 21px,
     #{$gray-light-mid} 21px,
     #{$gray-light-mid} calc(100% - 20px),
-    #{$white} calc(100% - 20px)
-  );
-  --table-header-lengthen-border-image-source: linear-gradient(
-    to right,
+    #{$white} calc(100% - 20px));
+  --table-header-lengthen-border-image-source: linear-gradient(to right,
     #{$gray-light-mid},
-    #{$gray-light-mid}
-  );
-  --table-header-border-hover-image-source: linear-gradient(
-    to right,
+    #{$gray-light-mid});
+  --table-header-border-hover-image-source: linear-gradient(to right,
     #{$white} 0px,
     #{$gray-light-mid} 0px,
     #{$gray-light-mid} 100%,
-    #{$white} 100%
-  );
+    #{$white} 100%);
 
   --table-container-border-right: 2px solid #{$gray-strong};
   --table-container-border-hover-color: #{$light-gray-dark};
@@ -2059,8 +2085,8 @@
 
   --table-group-menu-border-bottom: 1px solid transparent;
   --table-group-menu-border-right: 1px solid #{$gray-strong};
-  --table-group-menu-box-shadow:
-    0px 8px 16px #{$popup-shadow}, 0px 0px 4px #{$menu-shadow};
+  --table-group-menu-box-shadow: 0px 8px 16px #{$popup-shadow},
+  0px 0px 4px #{$menu-shadow};
 }
 
 .dark {
@@ -2069,25 +2095,19 @@
   --table-header-text-color: #{$gray-dark};
   --table-header-text-hover-color: #{$white};
   --table-header-border-bottom: 1px solid #{$gray-dark-strong};
-  --table-header-border-image-source: linear-gradient(
-    to right,
+  --table-header-border-image-source: linear-gradient(to right,
     #{$black} 21px,
     #{$gray-dark-strong} 21px,
     #{$gray-dark-strong} calc(100% - 20px),
-    #{$black} calc(100% - 20px)
-  );
-  --table-header-lengthen-border-image-source: linear-gradient(
-    to right,
+    #{$black} calc(100% - 20px));
+  --table-header-lengthen-border-image-source: linear-gradient(to right,
     #{$gray-dark-strong},
-    #{$gray-dark-strong}
-  );
-  --table-header-border-hover-image-source: linear-gradient(
-    to right,
+    #{$gray-dark-strong});
+  --table-header-border-hover-image-source: linear-gradient(to right,
     #{$black} 0px,
     #{$gray-dark-strong} 0px,
     #{$gray-dark-strong} 100%,
-    #{$black} 100%
-  );
+    #{$black} 100%);
 
   --table-container-border-right: 2px solid #{$gray-dark-strong};
   --table-container-border-hover-color: #{$gray-dark-strong};
@@ -2097,8 +2117,8 @@
 
   --table-group-menu-border-bottom: 1px solid #{$gray-dark-strong};
   --table-group-menu-border-right: 1px solid #{$gray-dark-strong};
-  --table-group-menu-box-shadow:
-    0px 8px 16px #{$badge-shadow}, 0px 0px 4px #{$menu-shadow-dark};
+  --table-group-menu-box-shadow: 0px 8px 16px #{$badge-shadow},
+  0px 0px 4px #{$menu-shadow-dark};
 }
 
 .light {
@@ -2150,9 +2170,7 @@
   --combobox-button-hover-border-color-open: #{$white};
   --combobox-button-hover-disabled-border-color: #{$gray-dark-strong};
   --combobox-button-hover-bg-modern-view: #{$gray-dark-strong};
-  --combobox-button-focus-open-border-color: var(
-    --combobox-button-hover-border-color
-  );
+  --combobox-button-focus-open-border-color: var(--combobox-button-hover-border-color);
 
   --combobox-label-selected-color: #{$white};
   --combobox-label-disabled-color: #{$gray-dark};
@@ -2261,12 +2279,14 @@
   --plugins-plugin-name-color: #{$gray};
   --plugins-border-color: #{$gray-light-mid};
   --plugins-error-status-color: #{$light-error-status};
+  --plugins-description-color: #{$light-gray-dark};
 }
 
 .dark {
   --plugins-plugin-name-color: #{$gray-dark};
   --plugins-border-color: #{$gray-dark-strong};
   --plugins-error-status-color: #{$dark-error-status};
+  --plugins-description-color: #{$dark-gray-dark};
 }
 
 .light {
@@ -2282,19 +2302,15 @@
 .light {
   --modified-text-color: #{$gray};
   --modified-badge-background-color: #{$gray};
-  --modified-badge-active-background-color: var(
-    --color-scheme-main-accent,
-    #{$light-blue-main}
-  );
+  --modified-badge-active-background-color: var(--color-scheme-main-accent,
+    #{$light-blue-main});
 }
 
 .dark {
   --modified-text-color: #{$gray-dark};
   --modified-badge-background-color: #{$gray-dark};
-  --modified-badge-active-background-color: var(
-    --color-scheme-main-accent,
-    #{$light-blue-main}
-  );
+  --modified-badge-active-background-color: var(--color-scheme-main-accent,
+    #{$light-blue-main});
 }
 
 .light {
@@ -2579,6 +2595,7 @@
 .dark {
   --editors-tooltip-header-color: #{$dark-gray-dark};
 }
+
 .light {
   --room-grouping-dialog-tag-text: #{$light-gray-dark};
   --room-grouping-dialog-tag-icon: #{$light-gray-dark};
@@ -2591,4 +2608,174 @@
   --room-grouping-dialog-tag-icon: #{$dark-gray-dark};
   --room-grouping-dialog-tag-active: #{$light-blue-main};
   --room-grouping-dialog-fade: #{$black};
+}
+
+.light {
+  --portal-unavailable-text-color: #{$gray};
+}
+
+.dark {
+  --portal-unavailable-text-color: #{$gray-dark};
+}
+
+.light {
+  --security-subheader-color: #{$light-gray-dark};
+  --security-side-color: #{$gray};
+}
+
+.dark {
+  --security-subheader-color: #{$dark-gray-dark};
+  --security-side-color: #{$gray-dark};
+}
+
+.light {
+  --settings-storage-management-description-color: #{$light-gray-dark};
+  --settings-storage-management-gray-bg-text: #{$black};
+  --settings-storage-management-divider-color: #{$gray-light-mid};
+  --settings-delete-data-border-top: 1px solid #{$gray-light-mid};
+  --settings-payment-bg-color: #{$gray-light};
+}
+
+.dark {
+  --settings-storage-management-description-color: #{$dark-gray-dark};
+  --settings-storage-management-gray-bg-text: #{$white};
+  --settings-storage-management-divider-color: #{$gray-dark-mid};
+  --settings-delete-data-border-top: 1px solid #{$gray-dark-mid};
+  --settings-payment-bg-color: #{$dark-gray-light};
+}
+
+.light {
+  --sdk-link-help-color: #{$light-gray-dark};
+  --sdk-secondary-color: #{$light-gray-dark};
+  --sdk-border-color: #{$gray-strong};
+  --sdk-preview-background-color: #{$light-gray-hover};
+  --sdk-code-background-color: #{$white};
+  --sdk-code-header-background-color: #{$gray-light};
+  --sdk-muted-text-color: #{$gray};
+  --webhooks-link-color: #{$light-blue-main};
+  --webhooks-bar-background: #{$gray-light};
+  --webhooks-color: #{$gray};
+  --webhooks-border: 1px solid #{$gray-light-mid};
+  --webhooks-background: #{$gray-light};
+  --webhooks-history-row-bg: #{$light-gray-hover};
+  --webhooks-table-cell-bg: #{$light-gray-hover};
+  --webhooks-filter-border: 1px solid #{$gray-strong};
+  --webhooks-span-bg: #{$light-blue-main};
+  --oauth-preview-border: 1px solid #{$gray-light-mid};
+  --oauth-info-desc-link-color: #{$light-gray-dark};
+  --oauth-info-block-header-color: #{$gray};
+  --oauth-info-separator-color: #{$black};
+  --oauth-list-description-color: #{$gray};
+  --oauth-form-description-color: #{$gray};
+  --oauth-form-header-border: 1px solid #{$gray-strong};
+  --oauth-form-scope-desc: #{$gray};
+  --info-panel-tag-bg: #{$gray-light-mid};
+  --migration-description-color: #{$light-gray-dark};
+  --migration-subtitle-color: #{$black};
+  --migration-workspace-bg: #{$white};
+  --migration-workspace-border: 1px solid #{$gray-strong};
+  --migration-info-block-bg: #{$gray-light};
+  --migration-info-block-text-color: #{$gray-text};
+  --migration-error-text-color: #{$light-error-status};
+  --migration-progress-bar-bg: #{$light-blue-main};
+  --migration-workspace-hover: #{$light-blue-main};
+  --migration-file-input-icon-color: #{$gray};
+  --migration-table-header-text: #{$gray};
+  --migration-table-row-hover: #{$light-gray-hover};
+  --migration-table-row-text-color: #{$gray};
+  --migration-import-section-text-color: #{$gray};
+  --migration-import-item-bg: #{$gray-light};
+  --migration-import-item-disable-bg: #{$gray-light};
+  --migration-import-item-text-color: #{$gray-text};
+  --migration-import-item-disable-text: #{$gray};
+  --migration-import-icon-color: #{$light-gray-dark};
+  --migration-link-color: #{$light-blue-main};
+  --migration-existing-text-color: #{$main-green};
+}
+
+.dark {
+  --sdk-link-help-color: #{$dark-gray-dark};
+  --sdk-secondary-color: #{$dark-gray-dark};
+  --sdk-border-color: #{$gray-dark-strong};
+  --sdk-preview-background-color: #{$light-dark-gray-hover};
+  --sdk-code-background-color: #{$light-dark-gray-hover};
+  --sdk-code-header-background-color: #{$gray-dark-mid};
+  --sdk-muted-text-color: #{$gray-dark};
+  --webhooks-link-color: #{$light-blue-main};
+  --webhooks-bar-background: #{$light-dark-gray-hover};
+  --webhooks-color: #{$gray-dark};
+  --webhooks-border: 1px solid #{$gray-dark-mid};
+  --webhooks-background: #{$dark-gray-light};
+  --webhooks-history-row-bg: #{$light-dark-gray-hover};
+  --webhooks-table-cell-bg: #{$light-gray-hover};
+  --webhooks-filter-border: 1px solid #{$gray-dark-strong};
+  --webhooks-span-bg: #{$light-blue-main};
+  --oauth-preview-border: 1px solid #{$gray-dark-mid};
+  --oauth-info-desc-link-color: #{$dark-gray-dark};
+  --oauth-info-block-header-color: #{$gray-dark};
+  --oauth-info-separator-color: #{$gray-dark-strong};
+  --oauth-list-description-color: #{$gray-dark};
+  --oauth-form-description-color: #{$gray-dark};
+  --oauth-form-header-border: 1px solid #{$gray-dark-strong};
+  --oauth-form-scope-desc: #{$gray-dark};
+  --info-panel-tag-bg: #{$gray-dark-mid};
+  --migration-description-color: #{$dark-gray-dark};
+  --migration-subtitle-color: #{$white};
+  --migration-workspace-bg: #{$black};
+  --migration-workspace-border: 1px solid #{$gray-dark-strong};
+  --migration-info-block-bg: #{$dark-gray-light};
+  --migration-info-block-text-color: #{$gray-dark};
+  --migration-error-text-color: #{$dark-error-status};
+  --migration-progress-bar-bg: #{$white};
+  --migration-workspace-hover: #{$light-blue-main};
+  --migration-file-input-icon-color: #{$gray-dark-text};
+  --migration-table-header-text: #{$gray-dark};
+  --migration-table-row-hover: #{$light-dark-gray-hover};
+  --migration-table-row-text-color: #{$gray-dark};
+  --migration-import-section-text-color: #{$gray-dark};
+  --migration-import-item-bg: #{$dark-gray-light};
+  --migration-import-item-disable-bg: #{$light-dark-gray-hover};
+  --migration-import-item-text-color: #{$dark-gray-dark};
+  --migration-import-item-disable-text: #{$gray-dark};
+  --migration-import-icon-color: #{$dark-gray-dark};
+  --migration-link-color: #{$light-blue-main};
+  --migration-existing-text-color: #{$dark-status-positive};
+}
+
+.light {
+  --ldap-cert-bg: #{$gray-light};
+  --ldap-border: 1px solid #{$gray-light-mid};
+  --ldap-error-border: 1px solid #{$light-error-status};
+  --ldap-text-color: #{$gray};
+  --ldap-error-color: #{$light-error-status};
+  --sso-toggle-content-bg: #{$gray-light};
+  --sso-border: 1px solid #{$gray-strong};
+  --sso-text-color: #{$gray};
+  --sso-error-color: #{$light-error-status};
+  --tooltip-bg: #{$gray-light};
+  --tooltip-text: #{$black};
+}
+
+.dark {
+  --ldap-cert-bg: #{$gray-dark-strong};
+  --ldap-border: 1px solid #{$gray-dark-strong};
+  --ldap-error-border: 1px solid #{$dark-error-status};
+  --ldap-text-color: #{$gray-dark};
+  --ldap-error-color: #{$dark-error-status};
+  --sso-toggle-content-bg: #{$gray-dark-strong};
+  --sso-border: 1px solid #{$gray-dark-strong};
+  --sso-text-color: #{$gray-dark};
+  --sso-error-color: #{$dark-error-status};
+  --tooltip-bg: #{$dark-gray-light};
+  --tooltip-text: #{$white};
+}
+
+.light {
+  --dev-tools-card-border: 1px solid #{$light-gray-selected};
+  --dev-tools-card-divider: #{$gray-light-mid};
+}
+
+.dark {
+  --dev-tools-card-border: 1px solid #{$gray-dark-strong};
+  --dev-tools-card-divider: #{$gray-dark-mid};
 }

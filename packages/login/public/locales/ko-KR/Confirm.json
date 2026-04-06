@@ -37,5 +37,7 @@
   "TfaSubTitle": "이 {{productName}}에서 계속 작업하려면 간단한 단계를 따르세요:",
   "TfaTitle": "2단계 인증이 안전한 접근을 위해 활성화되었습니다.",
   "VerifyConnection": "연결 확인",
-  "VerifyConnectionDescription": "아래 필드에 인증 앱에서 생성된 6자리 코드를 입력하여 설정을 완료하세요."
+  "VerifyConnectionDescription": "아래 필드에 인증 앱에서 생성된 6자리 코드를 입력하여 설정을 완료하세요.",
+  "InviteLinkQuotaErrorBody": "링크를 통한 등록은 제한이 초과되었으므로 더 이상 이용할 수 없습니다.",
+  "InviteQuotaErrorCustomizedBody": "10초 후에 <1>로그인</1> 페이지로 이동됩니다."
 }

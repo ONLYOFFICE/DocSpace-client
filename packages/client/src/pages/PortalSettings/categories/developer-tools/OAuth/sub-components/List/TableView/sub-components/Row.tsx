@@ -27,7 +27,7 @@
 import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 
-import { TableCell } from "@docspace/ui-kit/components/table";
+import { TableCell, TableRow } from "@docspace/ui-kit/components/table";
 import { Tags } from "@docspace/ui-kit/components/tags";
 import { Text } from "@docspace/ui-kit/components/text";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
@@ -38,7 +38,7 @@ import { toastr } from "@docspace/ui-kit/components/toast";
 import NameCell from "../columns/name";
 import CreatorCell from "../columns/creator";
 
-import { StyledRowWrapper, StyledTableRow } from "../TableView.styled";
+import styles from "../TableView.styled.module.scss";
 import { RowProps } from "../TableView.types";
 
 const Row = (props: RowProps) => {
@@ -115,8 +115,8 @@ const Row = (props: RowProps) => {
   const modifiedDate = getCorrectDate(locale || "", item.modifiedOn || "");
 
   return (
-    <StyledRowWrapper className="handle">
-      <StyledTableRow
+    <div className={styles.styledRowWrapper}>
+      <TableRow
         contextOptions={contextOptions || []}
         onClick={handleRowClick}
         fileContextClick={(isRightClick) => {
@@ -177,8 +177,8 @@ const Row = (props: RowProps) => {
             dataTestId={`${item.name}_toggle_button`}
           />
         </TableCell>
-      </StyledTableRow>
-    </StyledRowWrapper>
+      </TableRow>
+    </div>
   );
 };
 

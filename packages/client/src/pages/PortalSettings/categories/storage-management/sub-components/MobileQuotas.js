@@ -30,7 +30,7 @@ import { useNavigate } from "react-router";
 
 import { CategoryItem } from "@docspace/ui-kit/components/category-item";
 
-import { StyledBaseQuotaComponent } from "../StyledComponent";
+import styles from "../StyledComponent.module.scss";
 
 const MobileQuotasComponent = ({ isDisabled }) => {
   const { t } = useTranslation(["Settings", "Common"]);
@@ -42,7 +42,7 @@ const MobileQuotasComponent = ({ isDisabled }) => {
   };
 
   return (
-    <StyledBaseQuotaComponent>
+    <div className={styles.baseQuotaComponent}>
       <CategoryItem
         title={t("QuotaPerRoom")}
         onClickLink={onClickLink}
@@ -75,7 +75,7 @@ const MobileQuotasComponent = ({ isDisabled }) => {
         })}
         isDisabled={isDisabled}
       />
-    </StyledBaseQuotaComponent>
+    </div>
   );
 };
 

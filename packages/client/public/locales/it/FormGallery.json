@@ -5,5 +5,8 @@
   "ErrorViewDescriptionNetworkError": "Sembra che non ci sia connessione a Internet",
   "SuggestChanges": "Suggerire modifiche",
   "TemplateInfo": "Informazioni sul modello",
-  "ViewAllTemplates": "Visualizzare tutti i modelli"
+  "ViewAllTemplates": "Visualizzare tutti i modelli",
+  "ErrorViewHeader": "La galleria è temporaneamente non disponibile",
+  "SelectTemplate": "Seleziona modello",
+  "UploadGallery": "Carica nella Galleria"
 }

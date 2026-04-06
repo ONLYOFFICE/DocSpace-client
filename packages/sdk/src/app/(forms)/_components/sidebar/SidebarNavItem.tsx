@@ -46,16 +46,17 @@ const SidebarNavItem = ({
   showText = true,
 }: SidebarNavItemProps) => {
   return (
-    <ArticleItemPure
-      id={id}
-      text={label}
-      icon={icon}
-      showText={showText}
-      isActive={isActive}
-      onClick={onClick}
-      linkData={{ path: "", state: {} }}
-      withAnimation
-    />
+    <div id={id}>
+      <ArticleItemPure
+        text={label}
+        icon={icon}
+        showText={showText}
+        isActive={isActive}
+        onClick={onClick}
+        linkData={{ path: "", state: {} }}
+        withAnimation
+      />
+    </div>
   );
 };
 

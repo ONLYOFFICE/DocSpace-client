@@ -45,5 +45,6 @@
   "HotkeysUploadFile": "Încarcă fișier",
   "HotkeysUploadingObjects": "Încărcare elemente",
   "HotkeysZoomIn": "Mărire",
-  "HotkeysZoomOut": "Micșorare"
+  "HotkeysZoomOut": "Micșorare",
+  "OpenContextMenu": "Deschide meniul contextual"
 }

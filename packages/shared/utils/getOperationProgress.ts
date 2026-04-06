@@ -26,6 +26,7 @@
 
 import { getProgress } from "../api/files";
 import type { TOperation } from "../api/files/types";
+import { FileOperationStatus } from "../enums";
 
 export const getOperationProgress = async (
   id: string,
@@ -43,6 +44,11 @@ export const getOperationProgress = async (
           }
 
           const currentItem = res.find((x) => x.id === id);
+
+          if (currentItem?.status === FileOperationStatus.Canceled) {
+            resolve({ ...currentItem, finished: true, error: "" });
+            return;
+          }
 
           if (currentItem?.error) {
             reject(currentItem.error);

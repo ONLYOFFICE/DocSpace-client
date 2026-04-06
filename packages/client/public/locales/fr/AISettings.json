@@ -35,5 +35,12 @@
   "ServerUpdatedSuccess": "Serveur mis à jour avec succès",
   "ServiceIcon": "Icône du service",
   "SystemMCPListTitle": "Système",
-  "WebSearchKeyHiddenDescription": "La clé API est affichée une seule fois lors de l'enregistrement, puis masquée pour des raisons de sécurité."
+  "WebSearchKeyHiddenDescription": "La clé API est affichée une seule fois lors de l'enregistrement, puis masquée pour des raisons de sécurité.",
+  "AddAIProvider": "Ajouter {{aiProvider}}",
+  "AddMCPServer": "Ajouter {{mcpServer}}",
+  "DefaultProviderSetSuccess": "Le fournisseur par défaut a été défini avec succès",
+  "DefaultProviderTitle": "Fournisseur par défaut",
+  "DeleteProvider": "Supprimer {{aiProvider}}",
+  "MCPUnavailableError": "{{mcpServer}} est indisponible",
+  "Model": "Modèle"
 }

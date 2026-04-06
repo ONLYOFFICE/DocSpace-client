@@ -35,5 +35,12 @@
   "ServerUpdatedSuccess": "Ενημερώθηκε ο διακομιστής με επιτυχία",
   "ServiceIcon": "Εικονίδιο υπηρεσίας",
   "SystemMCPListTitle": "Σύστημα",
-  "WebSearchKeyHiddenDescription": "Το κλειδί API εμφανίζεται μόνο μία φορά κατά την αποθήκευση και στη συνέχεια κρύβεται για λόγους ασφαλείας."
+  "WebSearchKeyHiddenDescription": "Το κλειδί API εμφανίζεται μόνο μία φορά κατά την αποθήκευση και στη συνέχεια κρύβεται για λόγους ασφαλείας.",
+  "AddAIProvider": "Προσθέστε το/την {{aiProvider}}",
+  "AddMCPServer": "Προσθέστε το {{mcpServer}}",
+  "DefaultProviderSetSuccess": "Ο προεπιλεγμένος πάροχος ορίστηκε επιτυχώς",
+  "DefaultProviderTitle": "Προεπιλεγμένος πάροχος",
+  "DeleteProvider": "Διαγραφή {{aiProvider}}",
+  "MCPUnavailableError": "Το {{mcpServer}} δεν είναι διαθέσιμο",
+  "Model": "Μοντέλο"
 }

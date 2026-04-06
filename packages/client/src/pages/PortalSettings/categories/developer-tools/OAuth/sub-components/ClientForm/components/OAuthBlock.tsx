@@ -29,7 +29,7 @@ import React from "react";
 import { TTranslation } from "@docspace/shared/types";
 import { IClientReqDTO } from "@docspace/shared/utils/oauth/types";
 
-import { StyledBlock, StyledInputBlock } from "../ClientForm.styled";
+import styles from "../ClientForm.styled.module.scss";
 
 import BlockHeader from "./BlockHeader";
 import MultiInputGroup from "./MultiInputGroup";
@@ -60,9 +60,9 @@ const OAuthBlock = ({
   isEdit,
 }: OAuthBlockProps) => {
   return (
-    <StyledBlock>
+    <div className={styles.styledBlock}>
       <BlockHeader header={t("OAuthHeaderBlock")} />
-      <StyledInputBlock>
+      <div className={styles.styledInputBlock}>
         <MultiInputGroup
           t={t}
           label={t("RedirectsURLS")}
@@ -86,8 +86,8 @@ const OAuthBlock = ({
           hasError={requiredErrorFields.includes("allowed_origins")}
           dataTestId="allowed_origins"
         />
-      </StyledInputBlock>
-    </StyledBlock>
+      </div>
+    </div>
   );
 };
 

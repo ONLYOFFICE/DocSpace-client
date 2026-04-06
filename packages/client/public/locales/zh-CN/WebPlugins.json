@@ -14,5 +14,7 @@
   "PluginSDK": "插件SDK",
   "PluginSDKDescription": "使用插件 SDK，您可以扩展{{productName}}功能、连接第三方服务或增强现有用户体验。您可以在此处找到 GitHub 上提供的带有代码源的插件示例。",
   "PluginSDKInstruction": "单击该按钮了解如何创建您自己的插件。",
-  "UploadDescription": "您可以添加插件以使用额外功能扩展{{productName}}的功能。单击“上传插件”或将文件拖放到 ZIP 存档中。"
+  "UploadDescription": "您可以添加插件以使用额外功能扩展{{productName}}的功能。单击“上传插件”或将文件拖放到 ZIP 存档中。",
+  "PluginCacheWarningDescription": "插件是根据其版本号进行缓存的。为了确保您的更改生效，请在上传之前，将您的 <1>package.json</1> 文件中的版本号递增。如果版本号保持不变，系统将不会更新插件。",
+  "PluginDeletedSuccessfully": "插件删除成功"
 }

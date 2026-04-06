@@ -3,5 +3,7 @@
   "DisplayFileExtension": "Exibir extensão de arquivo ao lado do nome do arquivo",
   "OpenSameTab": "Abra o editor {{organizationName}} na mesma guia",
   "OriginalCopy": "Guardar a cópia do ficheiro também no formato original",
-  "TrashMoveConfirmation": "Mostrar notificação ao mover itens para {{sectionName}}"
+  "TrashMoveConfirmation": "Mostrar notificação ao mover itens para {{sectionName}}",
+  "DefaultHomepage": "Página inicial padrão",
+  "GroupByRooms": "Agrupar por salas"
 }

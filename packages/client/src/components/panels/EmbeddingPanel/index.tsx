@@ -292,7 +292,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
 			window.location.origin,
 			window.ClientConfig?.proxy?.url,
 			pkg.homepage,
-			"/portal-settings/developer-tools/javascript-sdk",
+			"/developer-tools/javascript-sdk",
 		);
 
 		window.open(url, "_blank");
@@ -614,7 +614,7 @@ export default inject<TStore>(
 			linkParams,
 			setLinkParams,
 			fetchExternalLinks,
-			isAdmin: user?.isAdmin,
+			isAdmin: user?.isAdmin || user?.isOwner,
 		};
 	},
 )(

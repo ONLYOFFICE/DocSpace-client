@@ -26,55 +26,12 @@
 
 import { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
-import styled from "styled-components";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
-import { injectDefaultTheme } from "@docspace/shared/utils";
 import { TableBody, TableContainer } from "@docspace/ui-kit/components/table";
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";
 import { TableViewProps } from "../../types";
-
-const TableWrapper = styled(TableContainer).attrs(injectDefaultTheme)`
-  margin-top: 16px;
-
-  .header-container-text {
-    font-size: 12px;
-  }
-
-  .table-container_header {
-    position: absolute;
-  }
-
-  .table-list-item {
-    margin-top: -1px;
-    &:hover {
-      cursor: pointer;
-      background-color: ${(props) =>
-        props.theme.filesSection.tableView.row.backgroundActive};
-
-      .table-container_cell {
-        margin-top: -1px;
-        border-top: ${(props) =>
-          `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
-
-        margin-inline-start: -24px;
-        padding-inline-start: 24px;
-      }
-
-      .table-container_row-context-menu-wrapper {
-        margin-inline-end: -20px;
-        padding-inline-end: 20px;
-      }
-    }
-
-    &:first-child:hover {
-      .table-container_cell {
-        margin-top: 0;
-        border-top: none;
-      }
-    }
-  }
-`;
+import styles from "./TableView.module.scss";
 
 const TABLE_VERSION = "1";
 const COLUMNS_SIZE = `apiKeysColumnsSize_ver-${TABLE_VERSION}`;
@@ -107,7 +64,8 @@ const TableView = (props: TableViewProps) => {
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
 
   return (
-    <TableWrapper
+    <TableContainer
+      className={styles.tableWrapper}
       forwardedRef={tableRef as React.RefObject<HTMLDivElement>}
       useReactWindow
     >
@@ -139,7 +97,7 @@ const TableView = (props: TableViewProps) => {
           />
         ))}
       </TableBody>
-    </TableWrapper>
+    </TableContainer>
   );
 };
 

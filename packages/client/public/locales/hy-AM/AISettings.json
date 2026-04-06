@@ -35,5 +35,12 @@
   "ServerUpdatedSuccess": "Սերվերը հաջողությամբ թարմացված է",
   "ServiceIcon": "Սերվերի նշան",
   "SystemMCPListTitle": "Սիստեմ",
-  "WebSearchKeyHiddenDescription": "API բանալին պահպանվելուց հետո ցուցադրվում է միայն մեկ անգամ, ապա թաքցվում է անվտանգության նկատառումներից ելնելով։"
+  "WebSearchKeyHiddenDescription": "API բանալին պահպանվելուց հետո ցուցադրվում է միայն մեկ անգամ, ապա թաքցվում է անվտանգության նկատառումներից ելնելով։",
+  "AddAIProvider": "Ավելացրեք {{aiProvider}}",
+  "AddMCPServer": "Հավելել {{mcpServer}}",
+  "DefaultProviderSetSuccess": "Լռելյայն մատակարարը հաջողությամբ սահմանվեց",
+  "DefaultProviderTitle": "Լռելյայն մատակարար",
+  "DeleteProvider": "Ջնջել {{aiProvider}}-ը",
+  "MCPUnavailableError": "{{mcpServer}}-ը անհասանելի է",
+  "Model": "Մոդել"
 }

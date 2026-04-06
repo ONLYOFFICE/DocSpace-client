@@ -51,6 +51,7 @@ import {
 import Banner from "./Banner";
 import Items from "./Items";
 import AccountsItems from "./AccountsItems";
+import DeveloperToolsItems from "./DeveloperToolsItems";
 
 const ArticleBodyContent = (props) => {
   const {
@@ -88,6 +89,7 @@ const ArticleBodyContent = (props) => {
     sharedWithMeFolderId,
     isRoomAdmin,
     isAccountsArticle,
+    isDeveloperToolsArticle,
     hasCustomSlot,
   } = props;
 
@@ -434,11 +436,14 @@ const ArticleBodyContent = (props) => {
     };
   }, [startDrag, onMouseMoveArticle]);
 
-  if (showArticleLoader) return <ArticleFolderLoader />;
+  if (showArticleLoader && !isDeveloperToolsArticle)
+    return <ArticleFolderLoader />;
 
   return (
     <>
-      {isAccountsArticle ? (
+      {isDeveloperToolsArticle ? (
+        <DeveloperToolsItems />
+      ) : isAccountsArticle ? (
         <AccountsItems
           onClick={onClick}
           getLinkData={getLinkData}
@@ -459,7 +464,8 @@ const ArticleBodyContent = (props) => {
       campaigns.length > 0 &&
       !isFrame &&
       displayBanners &&
-      !isAccountsArticle ? (
+      !isAccountsArticle &&
+      !isDeveloperToolsArticle ? (
         <Banner hasCustomSlot={hasCustomSlot} />
       ) : null}
     </>

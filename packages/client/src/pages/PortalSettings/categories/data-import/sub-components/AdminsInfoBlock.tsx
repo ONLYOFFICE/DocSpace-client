@@ -27,7 +27,8 @@ import { useTranslation } from "react-i18next";
 import { Text } from "@docspace/ui-kit/components/text";
 import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { AdminsInfoBlockProps } from "../types";
-import { StyledInfoBlock } from "../StyledDataImport";
+import classNames from "classnames";
+import styles from "../StyledDataImport.module.scss";
 
 const AdminsInfoBlock = ({
   totalUsedUsers,
@@ -40,7 +41,7 @@ const AdminsInfoBlock = ({
   const limitText = `${totalUsedUsers}/${limitAdmins}`;
 
   return (
-    <StyledInfoBlock isAdmins isLimitReached={isLimitReached}>
+    <div className={classNames(styles.styledInfoBlock, styles.isAdmins, { [styles.limitReached]: isLimitReached })}>
       {isLimitReached ? (
         <Text className="info-error-text" fontSize="12px" fontWeight={600}>
           {t("DataImportAdminLimitExceeded")}
@@ -70,7 +71,7 @@ const AdminsInfoBlock = ({
           }
         />
       </div>
-    </StyledInfoBlock>
+    </div>
   );
 };
 

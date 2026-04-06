@@ -30,9 +30,11 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/navigation";
 
+import api from "@docspace/shared/api";
+import FilesFilter from "@docspace/shared/api/files/filter";
 import { SearchInput } from "@docspace/ui-kit/components/search-input";
 import { InputSize } from "@docspace/ui-kit/components/text-input";
-import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 
 import useLibrarySearch, {
   type SearchResult,
@@ -70,7 +72,7 @@ type HeroSearchBarProps = {
 const HeroSearchBar = ({ langId, roomId, libraryId }: HeroSearchBarProps) => {
   const { t } = useTranslation("Common");
   const router = useRouter();
-  const { results, isLoading, hasMore, query, search, clear } =
+  const { results, isLoading, query, search, clear } =
     useLibrarySearch(langId);
   const [inputValue, setInputValue] = useState("");
   const [isOpen, setIsOpen] = useState(false);
@@ -115,7 +117,7 @@ const HeroSearchBar = ({ langId, roomId, libraryId }: HeroSearchBarProps) => {
   }, []);
 
   const handleSelectResult = useCallback(
-    (result: SearchResult) => {
+    async (result: SearchResult) => {
       setIsOpen(false);
       setInputValue("");
       clear();
@@ -131,15 +133,58 @@ const HeroSearchBar = ({ langId, roomId, libraryId }: HeroSearchBarProps) => {
             libraryId: libraryId || undefined,
           }),
         );
-      } else {
-        const url = libraryUrl({
+        return;
+      }
+
+      const folderId = result.folderId || result.id;
+      try {
+        const filter = FilesFilter.getDefault();
+        filter.page = 0;
+        filter.pageCount = 1;
+
+        const res = await api.files.getFolder(folderId, filter);
+        const firstFile = res.files[0];
+        const firstFolder = res.folders[0];
+
+        if (firstFile) {
+          router.push(
+            libraryUrl({
+              langId: langId ?? undefined,
+              categoryId: folderId,
+              templateId: firstFile.id,
+              templateType: "file",
+              roomId: roomId || undefined,
+              libraryId: libraryId || undefined,
+            }),
+          );
+          return;
+        }
+
+        if (firstFolder) {
+          router.push(
+            libraryUrl({
+              langId: langId ?? undefined,
+              categoryId: folderId,
+              templateId: firstFolder.id,
+              templateType: "folder",
+              roomId: roomId || undefined,
+              libraryId: libraryId || undefined,
+            }),
+          );
+          return;
+        }
+      } catch {
+        // ignore
+      }
+
+      router.push(
+        libraryUrl({
           langId: langId ?? undefined,
-          categoryId: result.folderId || result.id,
+          categoryId: folderId,
           roomId: roomId || undefined,
           libraryId: libraryId || undefined,
-        });
-        router.push(`${url}${url.includes("?") ? "&" : "?"}autoOpen=1`);
-      }
+        }),
+      );
     },
     [langId, roomId, libraryId, router, clear],
   );
@@ -160,15 +205,7 @@ const HeroSearchBar = ({ langId, roomId, libraryId }: HeroSearchBarProps) => {
         <div className={styles.searchDropdown}>
           {isLoading ? (
             <div className={styles.searchLoading}>
-              {Array.from({ length: 3 }, (_, i) => (
-                <RectangleSkeleton
-                  key={i}
-                  width="80%"
-                  height="16px"
-                  borderRadius="4px"
-                  animate
-                />
-              ))}
+              <Loader type={LoaderTypes.dualRing} size="32px" />
             </div>
           ) : results.length === 0 ? (
             <div className={styles.searchNoResults}>
@@ -190,11 +227,6 @@ const HeroSearchBar = ({ langId, roomId, libraryId }: HeroSearchBarProps) => {
                   {highlightMatch(result.title, query)}
                 </div>
               ))}
-              {hasMore && (
-                <div className={styles.searchMoreResults}>
-                  {t("Common:ShowMore")}
-                </div>
-              )}
             </>
           )}
         </div>

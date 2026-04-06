@@ -30,8 +30,7 @@ import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url
 import ChangeTypeReactSvgUrl from "PUBLIC_DIR/images/change.type.react.svg?url";
 
 import { inject, observer } from "mobx-react";
-import { tablet } from "@docspace/ui-kit/utils/device";
-import styled, { useTheme } from "styled-components";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import { EmptyScreenContainer } from "@docspace/ui-kit/components/empty-screen-container";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
@@ -42,90 +41,13 @@ import {
 } from "@docspace/ui-kit/components/table";
 import { RowContainer, Row } from "@docspace/ui-kit/components/rows";
 import { Text } from "@docspace/ui-kit/components/text";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 import UsersRow from "./UsersRow";
 import {
   InjectedTypeSelectRowViewProps,
   TypeSelectRowViewProps,
 } from "../../../../types";
-
-const StyledRowContainer = styled(RowContainer)`
-  margin: 0 0 20px;
-
-  .table-group-menu {
-    height: 61px;
-    position: sticky;
-    z-index: 201;
-    margin-inline-start: -16px;
-    width: 100%;
-
-    margin-top: -32.5px;
-    top: 53px;
-    margin-bottom: -29.5px;
-
-    .table-container_group-menu {
-      padding: 0px 16px;
-      border-image-slice: 0;
-      box-shadow: ${globalColors.menuShadow} 0px 15px 20px;
-    }
-
-    .table-container_group-menu-checkbox {
-      margin-inline-start: 8px;
-    }
-
-    .table-container_group-menu-separator {
-      margin: 0 16px;
-    }
-  }
-
-  .header-container-text {
-    font-size: 12px;
-    color: ${(props) =>
-      props.theme.client.settings.migration.tableRowTextColor};
-  }
-
-  .table-container_header {
-    position: absolute;
-  }
-
-  .clear-icon {
-    margin-inline-end: 8px;
-  }
-
-  .ec-desc {
-    max-width: 348px;
-  }
-
-  .row-main-container-wrapper {
-    @media ${tablet} {
-      margin: 0;
-    }
-  }
-
-  .buttons-box {
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-  }
-`;
-
-const StyledRow = styled(Row)`
-  box-sizing: border-box;
-  min-height: 40px;
-
-  .row-header-title {
-    color: ${(props) => props.theme.client.settings.migration.tableHeaderText};
-    font-weight: 600;
-    font-size: 12px;
-  }
-
-  @media ${tablet} {
-    .row_content {
-      height: auto;
-    }
-  }
-`;
+import styles from "../../../../StyledDataImport.module.scss";
 
 const checkedAccountType = "result";
 
@@ -168,7 +90,7 @@ const RowView = (props: TypeSelectRowViewProps) => {
   ] as TGroupMenuItem[];
 
   return (
-    <StyledRowContainer useReactWindow={false}>
+    <RowContainer className={styles.styledRowContainerType} useReactWindow={false}>
       {checkedUsers.result.length > 0 ? (
         <div className="table-group-menu">
           <TableGroupMenu
@@ -183,9 +105,9 @@ const RowView = (props: TypeSelectRowViewProps) => {
       ) : null}
       {accountsData.length > 0 ? (
         <>
-          <StyledRow key="Name">
+          <Row className={styles.styledRowType} key="Name">
             <Text className="row-header-title">{t("Common:Name")}</Text>
-          </StyledRow>
+          </Row>
 
           {accountsData.map((data) => (
             <UsersRow
@@ -227,7 +149,7 @@ const RowView = (props: TypeSelectRowViewProps) => {
           }
         />
       )}
-    </StyledRowContainer>
+    </RowContainer>
   );
 };
 

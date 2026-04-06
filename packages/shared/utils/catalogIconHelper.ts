@@ -47,6 +47,11 @@ import CatalogSettingsRestoreReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalo
 import CatalogSettingsIntegrationReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-integration.svg?url";
 import CatalogSettingsDataReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.import.react.svg?url";
 import CatalogSettingsDeveloperReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.developer.react.svg?url";
+import CatalogDevToolsJavascriptSdkReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.devtools-javascript-sdk.react.svg?url";
+import CatalogDevToolsPluginSdkReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.devtools-plugin-sdk.react.svg?url";
+import CatalogDevToolsWebhooksReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.devtools-webhooks.react.svg?url";
+import CatalogDevToolsOAuthReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.devtools-oauth.react.svg?url";
+import CatalogDevToolsApiKeysReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.devtools-api-keys.react.svg?url";
 import CatalogSettingsPaymentReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-payment.svg?url";
 import CatalogSettingsGiftReactSvgUrl from "PUBLIC_DIR/images/gift.react.svg?url";
 import CatalogSettingsStorageManagementReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-storage-management.svg?url";
@@ -73,6 +78,11 @@ import CatalogSettingsRestore20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/cata
 import CatalogSettingsIntegration20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-integration.svg?url";
 import CatalogSettingsData20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-import.svg?url";
 import CatalogSettingsDeveloper20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-developer.svg?url";
+import CatalogDevToolsJavascriptSdk20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.devtools-javascript-sdk.react.svg?url";
+import CatalogDevToolsPluginSdk20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.devtools-plugin-sdk.react.svg?url";
+import CatalogDevToolsWebhooks20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.devtools-webhooks.react.svg?url";
+import CatalogDevToolsOAuth20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.devtools-oauth.react.svg?url";
+import CatalogDevToolsApiKeys20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.devtools-api-keys.react.svg?url";
 import CatalogSettingsPayment20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-payment.svg?url";
 import CatalogSettingsGift20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-gift.svg?url";
 import CatalogSettingsStorageManagement20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-storage-management.svg?url";
@@ -118,6 +128,12 @@ const icons: Record<SizeType, Partial<Record<PageUnionType, string>>> = {
     [PageType.integration]: CatalogSettingsIntegrationReactSvgUrl,
     [PageType.dataImport]: CatalogSettingsDataReactSvgUrl,
     [PageType.developerTools]: CatalogSettingsDeveloperReactSvgUrl,
+    [PageType.devToolsOverview]: CatalogSettingsIntegrationReactSvgUrl,
+    [PageType.devToolsJavascriptSdk]: CatalogDevToolsJavascriptSdkReactSvgUrl,
+    [PageType.devToolsPluginSdk]: CatalogDevToolsPluginSdkReactSvgUrl,
+    [PageType.devToolsWebhooks]: CatalogDevToolsWebhooksReactSvgUrl,
+    [PageType.devToolsOAuth]: CatalogDevToolsOAuthReactSvgUrl,
+    [PageType.devToolsApiKeys]: CatalogDevToolsApiKeysReactSvgUrl,
     [PageType.portalDeletion]: CatalogTrashReactSvgUrl,
     [PageType.payments]: CatalogSettingsPaymentReactSvgUrl,
     [PageType.services]: CatalogSettingsServicesReactSvgUrl,
@@ -147,6 +163,12 @@ const icons: Record<SizeType, Partial<Record<PageUnionType, string>>> = {
     [PageType.integration]: CatalogSettingsIntegration20ReactSvgUrl,
     [PageType.dataImport]: CatalogSettingsData20ReactSvgUrl,
     [PageType.developerTools]: CatalogSettingsDeveloper20ReactSvgUrl,
+    [PageType.devToolsOverview]: CatalogSettingsIntegration20ReactSvgUrl,
+    [PageType.devToolsJavascriptSdk]: CatalogDevToolsJavascriptSdk20ReactSvgUrl,
+    [PageType.devToolsPluginSdk]: CatalogDevToolsPluginSdk20ReactSvgUrl,
+    [PageType.devToolsWebhooks]: CatalogDevToolsWebhooks20ReactSvgUrl,
+    [PageType.devToolsOAuth]: CatalogDevToolsOAuth20ReactSvgUrl,
+    [PageType.devToolsApiKeys]: CatalogDevToolsApiKeys20ReactSvgUrl,
     [PageType.portalDeletion]: CatalogTrash20ReactSvgUrl,
     [PageType.payments]: CatalogSettingsPayment20ReactSvgUrl,
     [PageType.services]: CatalogSettingsServices20ReactSvgUrl,

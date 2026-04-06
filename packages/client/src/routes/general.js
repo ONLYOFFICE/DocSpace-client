@@ -28,9 +28,6 @@ import { Navigate } from "react-router";
 
 import componentLoader from "@docspace/shared/utils/component-loader";
 import { ViewComponent } from "SRC_DIR/pages/Home/View";
-
-import { ViewComponent as PortalSettingsViewComponent } from "SRC_DIR/pages/PortalSettings/View";
-
 import PrivateRouteWrapper from "SRC_DIR/components/PrivateRouteWrapper";
 
 export const profileClientRoutes = [
@@ -99,23 +96,32 @@ export const generalClientRoutes = [
         index: true,
         Component: () => (
           <Navigate
-            to="javascript-sdk"
+            to="overview"
             state={window.DocSpace?.location?.state}
             replace
           />
         ),
       },
       {
-        path: "api",
-        element: <PortalSettingsViewComponent />,
+        path: "overview",
+        lazy: () =>
+          import(
+            "SRC_DIR/pages/PortalSettings/categories/developer-tools/Main"
+          ).then((m) => ({ Component: m.default })),
       },
       {
         path: "api-keys",
-        element: <PortalSettingsViewComponent />,
+        lazy: () =>
+          import(
+            "SRC_DIR/pages/PortalSettings/categories/developer-tools/ApiKeys"
+          ).then((m) => ({ Component: m.default })),
       },
       {
         path: "javascript-sdk",
-        element: <PortalSettingsViewComponent />,
+        lazy: () =>
+          import(
+            "SRC_DIR/pages/PortalSettings/categories/developer-tools/JavascriptSDK"
+          ).then((m) => ({ Component: m.default })),
       },
       {
         path: "javascript-sdk/docspace",
@@ -188,12 +194,28 @@ export const generalClientRoutes = [
           ),
       },
       {
+        path: "javascript-sdk/uploader",
+        lazy: () =>
+          componentLoader(
+            () =>
+              import(
+                "SRC_DIR/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Uploader"
+              ),
+          ),
+      },
+      {
         path: "plugin-sdk",
-        element: <PortalSettingsViewComponent />,
+        lazy: () =>
+          import(
+            "SRC_DIR/pages/PortalSettings/categories/developer-tools/PluginSDK"
+          ).then((m) => ({ Component: m.default })),
       },
       {
         path: "webhooks",
-        element: <PortalSettingsViewComponent />,
+        lazy: () =>
+          import(
+            "SRC_DIR/pages/PortalSettings/categories/developer-tools/Webhooks"
+          ).then((m) => ({ Component: m.default })),
       },
       {
         path: "webhooks/:id",
@@ -217,7 +239,10 @@ export const generalClientRoutes = [
       },
       {
         path: "oauth",
-        element: <PortalSettingsViewComponent />,
+        lazy: () =>
+          import(
+            "SRC_DIR/pages/PortalSettings/categories/developer-tools/OAuth"
+          ).then((m) => ({ Component: m.default })),
       },
       {
         path: "oauth/create",

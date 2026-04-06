@@ -56,5 +56,6 @@
   "UploadDevicePDFFormOptionTitle": "Subir desde el dispositivo",
   "UploadFromPortalTitle": "Subir desde {{productName}}",
   "UploadPDFFormOptionDescription": "Seleccione un formulario PDF listo disponible en {{productName}} y cárguelo en la sala.",
-  "VirtualDataRoomEmptyTitle": "Bienvenido/a a la Sala de datos virtuales"
+  "VirtualDataRoomEmptyTitle": "Bienvenido/a a la Sala de datos virtuales",
+  "EmptyAIAgentsTitle": "Crea tu {{aiAgent}}"
 }

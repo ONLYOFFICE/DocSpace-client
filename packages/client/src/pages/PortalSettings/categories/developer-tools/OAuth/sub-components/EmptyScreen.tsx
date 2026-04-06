@@ -25,12 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useTranslation, Trans } from "react-i18next";
-import { useTheme } from "styled-components";
 
 import { EmptyView } from "@docspace/shared/components/empty-view";
 import { Text } from "@docspace/ui-kit/components/text";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import EmptyScreenOauthLightSvg from "PUBLIC_DIR/images/emptyview/empty.oauth2.light.svg";
 import EmptyScreenOauthDarkSvg from "PUBLIC_DIR/images/emptyview/empty.oauth2.dark.svg";
@@ -45,9 +45,9 @@ const OAuthEmptyScreen = ({
   logoText: string;
 }) => {
   const { t } = useTranslation(["OAuth", "Common"]);
-  const theme = useTheme();
+  const { isBase } = useTheme();
 
-  const icon = theme.isBase ? (
+  const icon = isBase ? (
     <EmptyScreenOauthLightSvg />
   ) : (
     <EmptyScreenOauthDarkSvg />
@@ -71,7 +71,7 @@ const OAuthEmptyScreen = ({
         lineHeight="20px"
         fontSize="13px"
         fontWeight={400}
-        color={theme.isBase ? globalColors.grayText : globalColors.darkGrayDark}
+        color={isBase ? globalColors.grayText : globalColors.darkGrayDark}
         textAlign="center"
         style={{ marginBottom: "8px" }}
       >

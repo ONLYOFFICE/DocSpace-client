@@ -150,13 +150,14 @@ const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
         </div>
       );
     }
+
     return <FormsEmpty />;
   }
 
   // Library views are now handled by dedicated route pages under /forms/library/[langId]/...
   // FormsGrid only handles MyForms, InProgress, CompletedForms sections
 
-  if (((isCompletedRoot || isInProgressRoot) || !hasItems) && hasFolders) {
+  if ((isCompletedRoot || isInProgressRoot || !hasItems) && hasFolders) {
     const onOpenFolder = isCompletedRoot
       ? openCompletedFolder
       : openInProgressFolder;
@@ -180,7 +181,7 @@ const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
   if (hasItems) {
     return (
       <>
-        <div className={styles.filesGrid} ref={gridRef}>
+        <div className={styles.filesGrid} ref={gridRef} data-tour="forms-grid">
           {fileItems.map((item) => (
             <FormsTile key={`file_${item.id}`} item={item} getIcon={getIcon} />
           ))}

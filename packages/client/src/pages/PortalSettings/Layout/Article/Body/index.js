@@ -150,10 +150,6 @@ const ArticleBodyContent = (props) => {
         setSelectedKeys(["7-0"]);
       }
 
-      if (location.pathname.includes("developer")) {
-        setSelectedKeys(["8-0"]);
-      }
-
       if (location.pathname.includes("delete-data")) {
         setSelectedKeys(["9-0"]);
       }
@@ -227,8 +223,6 @@ const ArticleBodyContent = (props) => {
         return t("Common:RestoreBackup");
       case "PortalDeletion":
         return t("PortalDeletion", { productName: t("Common:ProductName") });
-      case "Common:DeveloperTools":
-        return t("Common:DeveloperTools");
       case "Common:Bonus":
         return t("Common:Bonus");
       case "Common:FreeAccessToLicensedVersion":
@@ -340,7 +334,9 @@ const ArticleBodyContent = (props) => {
   return !isLoadedArticleBody || isProfileLoading ? (
     <ArticleFolderLoader />
   ) : (
-    items
+    <>
+      {items}
+    </>
   );
 };
 

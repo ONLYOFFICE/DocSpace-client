@@ -37,5 +37,7 @@
   "TfaSubTitle": "Bu {{productName}} ilə işləməyi davam etdirmək üçün sadə addımları izləyin:",
   "TfaTitle": "İki faktorlu autentifikasiya təhlükəsiz giriş üçün aktivləşdirilib",
   "VerifyConnection": "Bağlantını yoxlayın",
-  "VerifyConnectionDescription": "Aşağıdakı sahəyə authenticator tətbiqetiniz tərəfindən yaradılmış 6 rəqəmli kodu daxil edin və təminatın hazırlanmasını tamamlayın."
+  "VerifyConnectionDescription": "Aşağıdakı sahəyə authenticator tətbiqetiniz tərəfindən yaradılmış 6 rəqəmli kodu daxil edin və təminatın hazırlanmasını tamamlayın.",
+  "InviteLinkQuotaErrorBody": "Limit aşıldığı üçün link vasitəsilə qeydiyyat artıq mümkün deyil.",
+  "InviteQuotaErrorCustomizedBody": "Siz 10 saniyə ərzində <1>Giriş</1> səhifəsinə yönləndiriləcəksiniz."
 }

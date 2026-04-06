@@ -5,5 +5,8 @@
   "ErrorViewDescriptionNetworkError": "Shkruan se nuk ka lidhje me internet.",
   "SuggestChanges": "Sugjeroni ndryshime",
   "TemplateInfo": "Info shablloni",
-  "ViewAllTemplates": "Shikoni të gjitha shabllonet"
+  "ViewAllTemplates": "Shikoni të gjitha shabllonet",
+  "ErrorViewHeader": "Galeria është përkohësisht e padisponueshme",
+  "SelectTemplate": "Zgjidhni shabllon",
+  "UploadGallery": "Ngarko në Galeri"
 }

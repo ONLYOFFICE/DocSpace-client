@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
 import { useTranslation } from "react-i18next";
+import styles from "./configure-deep-link.module.scss";
 import { useNavigate, useLocation } from "react-router";
 import { inject, observer } from "mobx-react";
 import isEqual from "lodash/isEqual";
@@ -64,22 +64,6 @@ interface Props {
   configureDeepLinkUrl: string;
   currentColorScheme: TColorScheme;
 }
-
-const StyledWrapper = styled.div`
-  max-width: 700px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-
-  .radio-button-group {
-    width: fit-content;
-    margin-top: 8px;
-  }
-
-  .save-cancel-buttons {
-    margin-top: 16px;
-  }
-`;
 
 const ConfigureDeepLinkComponent = (props: Props) => {
   const {
@@ -193,7 +177,7 @@ const ConfigureDeepLinkComponent = (props: Props) => {
   if (!isLoadedPage) return <LoaderCustomization deepLink />;
 
   return (
-    <StyledWrapper>
+    <div className={styles.wrapper}>
       {!isMobileView ? (
         <Text fontSize="16px" fontWeight={700}>
           {t("ConfigureDeepLink")}
@@ -256,7 +240,7 @@ const ConfigureDeepLinkComponent = (props: Props) => {
         saveButtonDataTestId="configure_deep_link_save_button"
         cancelButtonDataTestId="configure_deep_link_cancel_button"
       />
-    </StyledWrapper>
+    </div>
   );
 };
 

@@ -1,0 +1,62 @@
+@use "@docspace/ui-kit/styles/variables/colors";
+
+.tooltip {
+  background-color: colors.$black;
+  border-radius: 6px;
+  color: colors.$white;
+  padding: 16px;
+  max-width: 340px;
+  min-width: 240px;
+  position: relative;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.7;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.title {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 20px;
+  margin-bottom: 4px;
+  padding-right: 24px;
+}
+
+.content {
+  font-size: 13px;
+  line-height: 20px;
+  opacity: 0.9;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+.progress {
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+.buttons {
+  display: flex;
+  gap: 8px;
+}
+

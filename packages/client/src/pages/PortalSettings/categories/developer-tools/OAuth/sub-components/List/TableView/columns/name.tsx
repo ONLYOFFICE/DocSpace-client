@@ -24,38 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
-
 import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { TableCell } from "@docspace/ui-kit/components/table";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 
-const StyledContainer = styled.div`
-  .table-container_row-checkbox {
-    margin-inline-start: -8px;
-
-    width: 16px;
-
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding: 16px 16px 16px 8px;
-          `
-        : css`
-            padding: 16px 8px 16px 16px;
-          `}
-  }
-`;
-
-const StyledImage = styled.img`
-  width: 32px;
-  height: 32px;
-
-  border-radius: 3px;
-
-  object-fit: cover;
-`;
+import styles from "../TableView.styled.module.scss";
 
 interface NameCellProps {
   name: string;
@@ -93,18 +67,18 @@ const NameCell = ({
           hasAccess
           checked={isChecked}
         >
-          <StyledContainer className="table-container_element-container">
+          <div className="table-container_element-container">
             <div className="table-container_element">
-              {icon ? <StyledImage src={icon} alt="App icon" /> : null}
+              {icon ? <img className={styles.nameImage} src={icon} alt="App icon" /> : null}
             </div>
             <Checkbox
-              className="table-container_row-checkbox"
+              className={`table-container_row-checkbox ${styles.rowCheckbox}`}
               onChange={onChange}
               isChecked={isChecked}
               title={name}
               dataTestId={`${name}_checkbox`}
             />
-          </StyledContainer>
+          </div>
         </TableCell>
       )}
 

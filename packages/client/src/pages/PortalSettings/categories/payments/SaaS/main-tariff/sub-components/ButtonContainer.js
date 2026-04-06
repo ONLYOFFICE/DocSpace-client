@@ -27,16 +27,11 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { Button } from "@docspace/ui-kit/components/button";
-import styled from "styled-components";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import RequestButtonContainer from "./RequestButtonContainer";
 import UpdatePlanButtonContainer from "./UpdatePlanButtonContainer";
 
-const StyledBody = styled.div`
-  button {
-    width: 100%;
-  }
-`;
+import styles from "../styles/MainTariff.module.scss";
 
 const ButtonContainer = ({
   isNeedRequest,
@@ -54,7 +49,7 @@ const ButtonContainer = ({
   };
 
   return (
-    <StyledBody>
+    <div className={styles.buttonBody}>
       {isNotPaidPeriod || isGracePeriod ? (
         <Button
           className="pay-button"
@@ -71,7 +66,7 @@ const ButtonContainer = ({
       ) : (
         <UpdatePlanButtonContainer t={t} isDisabled={isDisabled} />
       )}
-    </StyledBody>
+    </div>
   );
 };
 

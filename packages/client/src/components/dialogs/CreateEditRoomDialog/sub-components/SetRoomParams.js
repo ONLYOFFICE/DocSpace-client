@@ -37,7 +37,7 @@ import RoomType from "@docspace/shared/components/room-type";
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 import SetRoomParamsLoader from "@docspace/shared/skeletons/create-edit-room/SetRoomParams";
 
-import { removeEmojiCharacters } from "SRC_DIR/helpers/utils";
+import { removeEmojiCharacters } from "@docspace/shared/utils";
 import ItemIcon from "../../../ItemIcon";
 import withLoader from "../../../../HOCs/withLoader";
 import AvatarEditorDialog from "../../AvatarEditorDialog";

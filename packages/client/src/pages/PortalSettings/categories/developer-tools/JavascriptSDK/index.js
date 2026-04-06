@@ -56,12 +56,9 @@ import Integration from "./sub-components/Integration";
 import PresetTile from "./sub-components/PresetTile";
 import CSPSetting from "./sub-components/csp";
 
-import {
-  SDKContainer,
-  CategoryHeader,
-  CategoryDescription,
-  PresetsContainer,
-} from "./sub-components/StyledPortalIntegration";
+import { isMobile } from "@docspace/ui-kit/utils/device";
+import classNames from "classnames";
+import styles from "./sub-components/StyledPortalIntegration.module.scss";
 
 const PortalIntegration = (props) => {
   const { t, currentColorScheme, sdkLink, theme, tReady } = props;
@@ -164,8 +161,8 @@ const PortalIntegration = (props) => {
   }, []);
 
   return (
-    <SDKContainer>
-      <CategoryDescription theme={theme}>
+    <div className={classNames(styles.sdkContainer, { [styles.isMobile]: isMobile() })}>
+      <div className={styles.categoryDescription}>
         <Text className="sdk-description">
           {t("SDKDescription", { productName: t("Common:ProductName") })}
         </Text>
@@ -180,14 +177,14 @@ const PortalIntegration = (props) => {
           {t("APILink")}.
         </Link>
         <CSPSetting t={t} theme={theme} />
-      </CategoryDescription>
-      <CategoryHeader>
+      </div>
+      <div className={classNames(styles.categoryHeader, { [styles.isMobile]: isMobile() })}>
         {t("SelectModeEmbedding", { productName: t("Common:ProductName") })}
-      </CategoryHeader>
+      </div>
       <Text lineHeight="20px" color={theme.sdkPresets.secondaryColor}>
         {t("InitializeSDK")}
       </Text>
-      <PresetsContainer className={`${isFlex ? "presets-flex" : ""}`}>
+      <div className={classNames(styles.presetsContainer, { "presets-flex": isFlex })}>
         {presetsData.map((data) => (
           <PresetTile
             t={t}
@@ -199,9 +196,9 @@ const PortalIntegration = (props) => {
             dataTestId={`sdk_preset_${data.title}_container`}
           />
         ))}
-      </PresetsContainer>
+      </div>
       <Integration />
-    </SDKContainer>
+    </div>
   );
 };
 

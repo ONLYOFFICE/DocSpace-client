@@ -37,5 +37,7 @@
   "TfaSubTitle": "Postępuj zgodnie z prostymi krokami, aby kontynuować pracę w tym {{productName}}:",
   "TfaTitle": "Uwierzytelnianie dwuskładnikowe włączone dla bezpiecznego dostępu",
   "VerifyConnection": "Zweryfikuj połączenie",
-  "VerifyConnectionDescription": "Wprowadź 6-cyfrowy kod wygenerowany przez Twoją aplikację uwierzytelniającą do pola poniżej, aby zakończyć konfigurację."
+  "VerifyConnectionDescription": "Wprowadź 6-cyfrowy kod wygenerowany przez Twoją aplikację uwierzytelniającą do pola poniżej, aby zakończyć konfigurację.",
+  "InviteLinkQuotaErrorBody": "Rejestracja za pomocą linku nie jest już dostępna, ponieważ osiągnięto limit.",
+  "InviteQuotaErrorCustomizedBody": "Zostaniesz przekierowany na stronę <1>Logowania</1> za 10 sekund."
 }

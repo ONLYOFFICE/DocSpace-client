@@ -5,5 +5,8 @@
   "ErrorViewDescriptionNetworkError": "Изглежда няма интернет връзка",
   "SuggestChanges": "Предложи промени",
   "TemplateInfo": "Информация за шаблона",
-  "ViewAllTemplates": "Прегледай всички шаблони"
+  "ViewAllTemplates": "Прегледай всички шаблони",
+  "ErrorViewHeader": "Галерията е временно недостъпна",
+  "SelectTemplate": "Изберете шаблон",
+  "UploadGallery": "Качете в Галерията"
 }

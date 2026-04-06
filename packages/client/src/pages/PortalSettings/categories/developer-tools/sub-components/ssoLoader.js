@@ -24,48 +24,28 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";
 
-const StyledLoader = styled.div`
-  .submenu {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 20px;
-    .item {
-      width: 72px;
-    }
-  }
-
-  .description {
-    max-width: 700px;
-    margin-bottom: 20px;
-  }
-
-  .category {
-    margin-top: 24px;
-    width: 238px;
-  }
-`;
+import styles from "./ssoLoader.module.scss";
 
 const SSOLoader = (props) => {
   const { isToggleSSO } = props;
   return (
-    <StyledLoader>
+    <div className={styles.styledLoader}>
       {!isToggleSSO ? (
-        <div className="submenu">
-          <RectangleSkeleton className="item" height="28px" />
-          <RectangleSkeleton className="item" height="28px" />
+        <div className={styles.submenu}>
+          <RectangleSkeleton className={styles.item} height="28px" />
+          <RectangleSkeleton className={styles.item} height="28px" />
         </div>
       ) : null}
-      <RectangleSkeleton className="description" height="60px" />
+      <RectangleSkeleton className={styles.description} height="60px" />
       <RectangleSkeleton height="64px" />
 
-      <RectangleSkeleton className="category" height="22px" />
+      <RectangleSkeleton className={styles.category} height="22px" />
       <StyledSettingsSeparator />
-      <RectangleSkeleton className="category" height="22px" />
-    </StyledLoader>
+      <RectangleSkeleton className={styles.category} height="22px" />
+    </div>
   );
 };
 

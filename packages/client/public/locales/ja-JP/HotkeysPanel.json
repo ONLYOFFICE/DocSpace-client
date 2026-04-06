@@ -45,5 +45,6 @@
   "HotkeysUploadFile": "ファイルをアップロード",
   "HotkeysUploadingObjects": "アイテムのアップロード",
   "HotkeysZoomIn": "拡大",
-  "HotkeysZoomOut": "縮小"
+  "HotkeysZoomOut": "縮小",
+  "OpenContextMenu": "コンテキストメニューを開く"
 }

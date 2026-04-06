@@ -114,18 +114,13 @@ const ConnectDatabaseForm = ({ inline }: ConnectDatabaseFormProps) => {
   const onToggleSendToDb = React.useCallback(async () => {
     const newValue = !store.sendToDb;
     store.setSendToDb(newValue);
-    try {
-      if (newValue && store.host) {
-        await Promise.all([
-          setRoomFormSettings(roomId, { sendFormToExternalDB: true }),
-          saveDbConfig(store.formData),
-        ]);
-      } else {
-        await setRoomFormSettings(roomId, { sendFormToExternalDB: newValue });
+    if (!newValue) {
+      try {
+        await setRoomFormSettings(roomId, { sendFormToExternalDB: false });
+      } catch {
+        toastr.error(t("Common:SomethingWentWrong"));
+        store.setSendToDb(true);
       }
-    } catch {
-      toastr.error(t("Common:SomethingWentWrong"));
-      store.setSendToDb(!newValue);
     }
   }, [store, roomId, t]);
 

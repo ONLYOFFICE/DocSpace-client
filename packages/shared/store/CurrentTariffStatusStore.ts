@@ -34,7 +34,7 @@ import { PaymentMethodStatus, QuotaState, TariffState } from "../enums";
 
 import { TCustomerInfo, TPortalTariff, TQuotas } from "../api/portal/types";
 import { isValidDate } from "../utils";
-import { getDaysLeft, getDaysRemaining } from "../utils/common";
+import { getDaysLeft, getDaysRemaining, isAdmin } from "../utils/common";
 import {
   parseToDateTime,
   dateDiff,
@@ -297,7 +297,7 @@ class CurrentTariffStatusStore {
         runInAction(() => {
           this.portalTariffStatus = res;
 
-          if (user?.isAdmin) {
+          if (user && isAdmin(user)) {
             const quota = res.quotas.find((q) => q.wallet === true);
 
             if (quota) {

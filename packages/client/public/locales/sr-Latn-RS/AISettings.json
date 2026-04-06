@@ -35,5 +35,12 @@
   "ServerUpdatedSuccess": "Server uspešno ažuriran",
   "ServiceIcon": "Ikona usluge",
   "SystemMCPListTitle": "Sistem",
-  "WebSearchKeyHiddenDescription": "API ključ se prikazuje samo jednom nakon čuvanja, a zatim je skriven iz bezbednosnih razloga."
+  "WebSearchKeyHiddenDescription": "API ključ se prikazuje samo jednom nakon čuvanja, a zatim je skriven iz bezbednosnih razloga.",
+  "AddAIProvider": "Dodaj {{aiProvider}}",
+  "AddMCPServer": "Dodaj {{mcpServer}}",
+  "DefaultProviderSetSuccess": "Podrazumeseni provajder uspešno postavljen",
+  "DefaultProviderTitle": "Podrazumevani provajder",
+  "DeleteProvider": "Izbriši {{aiProvider}}",
+  "MCPUnavailableError": "{{mcpServer}} je nedostupan",
+  "Model": "Model"
 }

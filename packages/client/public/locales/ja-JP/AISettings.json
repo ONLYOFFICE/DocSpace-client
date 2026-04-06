@@ -35,5 +35,12 @@
   "ServerUpdatedSuccess": "サーバーが正常に更新されました",
   "ServiceIcon": "サービスのアイコン",
   "SystemMCPListTitle": "システム",
-  "WebSearchKeyHiddenDescription": "APIキーは保存時に一度だけ表示され、その後はセキュリティ上の理由で非表示になります。"
+  "WebSearchKeyHiddenDescription": "APIキーは保存時に一度だけ表示され、その後はセキュリティ上の理由で非表示になります。",
+  "AddAIProvider": "{{aiProvider}}を追加する",
+  "AddMCPServer": "{{mcpServer}}を追加",
+  "DefaultProviderSetSuccess": "デフォルトプロバイダを正常に設定しました。",
+  "DefaultProviderTitle": "デフォルトプロバイダー",
+  "DeleteProvider": "{{aiProvider}} を削除します。",
+  "MCPUnavailableError": "{{mcpServer}} は利用できません",
+  "Model": "モデル"
 }

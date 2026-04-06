@@ -48,32 +48,6 @@ const PERSONAL_FOLDER_URL = "/rooms/personal/filter?folder=12764";
 // The ArticleMainButton renders a "Create New Room" button here (isRoomsFolder = true).
 const ROOMS_URL = "/rooms/shared/";
 
-// ─── Helpers ──────────────────────────────────────────────────────────────────
-
-/**
- * Wait until the plugin has registered its two event-listener items
- * (CREATE and ROOM_CREATE) and React has flushed GlobalEvents' useEffect
- * that adds the corresponding window event handlers.
- *
- * Two requestAnimationFrame cycles are enough: React passive effects run
- * after paint, so one rAF covers the render → paint, and a second rAF
- * confirms the post-paint effect flush.
- */
-async function waitForPluginReady(
-  page: import("@playwright/test").Page,
-): Promise<void> {
-  await page.waitForFunction(() => {
-    const iframe = document.getElementById(
-      "plugin-iframe",
-    ) as HTMLIFrameElement | null;
-
-    const items = (
-      iframe?.contentWindow as any
-    )?.Plugins?.EventListenerSample?.getEventListenerItems();
-    return items?.size >= 2;
-  });
-}
-
 // ─── Test suite ───────────────────────────────────────────────────────────────
 
 test.describe("Event Listener Sample Plugin", () => {
@@ -98,8 +72,6 @@ test.describe("Event Listener Sample Plugin", () => {
     const pluginLoaded = page.waitForResponse(PLUGIN_REQUEST_URL);
     await page.goto(`${baseUrl}${PERSONAL_FOLDER_URL}`);
     await pluginLoaded;
-
-    await waitForPluginReady(page);
 
     const mainButton = page.getByTestId("main-button");
     await expect(mainButton).toBeVisible();
@@ -131,8 +103,6 @@ test.describe("Event Listener Sample Plugin", () => {
     const pluginLoaded = page.waitForResponse(PLUGIN_REQUEST_URL);
     await page.goto(`${baseUrl}${ROOMS_URL}`);
     await pluginLoaded;
-
-    await waitForPluginReady(page);
 
     await expect(page.getByTestId("table-body")).toBeVisible();
 

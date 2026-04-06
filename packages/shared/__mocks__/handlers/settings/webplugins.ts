@@ -314,6 +314,20 @@ export const webPluginsWithFloatingOperationsPlugin = {
   statusCode: 200,
 };
 
+export const mockSettingsPlugin: TAPIPlugin = {
+  ...mockPlugin1,
+  name: "settings",
+  version: "1.0.0",
+  minDocSpaceVersion: "3.5.0",
+  description:
+    "Sample plugin demonstrating ISettingsPlugin — provides administrator-configurable settings (API endpoint and notifications toggle)",
+  pluginName: "SettingsPlugin",
+  scopes: "Settings",
+  image: "docspace-icon.svg",
+  url: "/plugins/settings/plugin.js",
+  settings: "",
+};
+
 export const mockPostMessagePlugin: TAPIPlugin = {
   ...mockPlugin1,
   name: "post-message",
@@ -326,6 +340,20 @@ export const mockPostMessagePlugin: TAPIPlugin = {
   image: "docspace-icon.svg",
   url: "/plugins/post-message/plugin.js",
   settings: "",
+};
+
+// Plugins list with settings plugin
+export const webPluginsWithSettingsPlugin = {
+  response: [mockSettingsPlugin],
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
 };
 
 // Plugins list with post-message plugin
@@ -597,7 +625,8 @@ export const webPluginsResolver = (
     | "withCreateDialogPlugin"
     | "withModalDialogPlugin"
     | "withFloatingOperationsPlugin"
-    | "withPostMessagePlugin" = "empty",
+    | "withPostMessagePlugin"
+    | "withSettingsPlugin" = "empty",
 ) => {
   let data;
 
@@ -650,6 +679,9 @@ export const webPluginsResolver = (
     case "withPostMessagePlugin":
       data = webPluginsWithPostMessagePlugin;
       break;
+    case "withSettingsPlugin":
+      data = webPluginsWithSettingsPlugin;
+      break;
     default:
       data = webPluginsEmpty;
       break;
@@ -690,7 +722,8 @@ export const webPluginsHandler = (
     | "withCreateDialogPlugin"
     | "withModalDialogPlugin"
     | "withFloatingOperationsPlugin"
-    | "withPostMessagePlugin" = "empty",
+    | "withPostMessagePlugin"
+    | "withSettingsPlugin" = "empty",
 ) => {
   return http.get(
     `${BASE_URL}:${port}/${API_PREFIX}/${PATH_WEB_PLUGINS}`,

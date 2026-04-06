@@ -47,15 +47,10 @@
   }
 
   :global(.wrapper-image-editor) {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
+    @extend %imageEditorLayout;
 
     :global(.avatar-editor) {
-      display: flex;
-      gap: 16px;
-      align-items: center;
+      @extend %avatarEditorLayout;
 
       @include mixins.mobile {
         justify-content: center;
@@ -64,19 +59,27 @@
   }
 }
 
+%imageEditorLayout {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+%avatarEditorLayout {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
 .bodyContent {
   display: contents;
 
   :global(.wrapper-image-editor) {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
+    @extend %imageEditorLayout;
 
     :global(.avatar-editor) {
-      display: flex;
-      gap: 16px;
-      align-items: center;
+      @extend %avatarEditorLayout;
     }
   }
 }

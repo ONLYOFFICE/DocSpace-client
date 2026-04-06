@@ -39,109 +39,109 @@ import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 import styles from "../AvatarEditorDialog.module.scss";
 
 const AvatarCropper = ({
-	t,
-	avatar,
-	onChangeAvatar,
-	uploadedFile,
-	setUploadedFile,
-	setPreviewAvatar,
+  t,
+  avatar,
+  onChangeAvatar,
+  uploadedFile,
+  setUploadedFile,
+  setPreviewAvatar,
 }) => {
-	let editorRef = null;
-	const setEditorRef = (editor) => (editorRef = editor);
+  let editorRef = null;
+  const setEditorRef = (editor) => (editorRef = editor);
 
-	const handlePositionChange = (position) =>
-		onChangeAvatar({ ...avatar, x: position.x, y: position.y });
+  const handlePositionChange = (position) =>
+    onChangeAvatar({ ...avatar, x: position.x, y: position.y });
 
-	const handleSliderChange = (e, newZoom = null) =>
-		onChangeAvatar({ ...avatar, zoom: newZoom || +e.target.value });
+  const handleSliderChange = (e, newZoom = null) =>
+    onChangeAvatar({ ...avatar, zoom: newZoom || +e.target.value });
 
-	const handleZoomInClick = () =>
-		handleSliderChange({}, avatar.zoom <= 4.5 ? avatar.zoom + 0.5 : 5);
+  const handleZoomInClick = () =>
+    handleSliderChange({}, avatar.zoom <= 4.5 ? avatar.zoom + 0.5 : 5);
 
-	const handleZoomOutClick = () =>
-		handleSliderChange({}, avatar.zoom >= 1.5 ? avatar.zoom - 0.5 : 1);
+  const handleZoomOutClick = () =>
+    handleSliderChange({}, avatar.zoom >= 1.5 ? avatar.zoom - 0.5 : 1);
 
-	const handleDeleteImage = () => setUploadedFile(null);
+  const handleDeleteImage = () => setUploadedFile(null);
 
-	const handleImageChange = throttle(() => {
-		try {
-			if (!editorRef) return;
-			const newPreveiwImage = editorRef.getImageScaledToCanvas()?.toDataURL();
-			setPreviewAvatar(newPreveiwImage);
-		} catch (e) {
-			console.error(e);
-		}
-	}, 300);
+  const handleImageChange = throttle(() => {
+    try {
+      if (!editorRef) return;
+      const newPreveiwImage = editorRef.getImageScaledToCanvas()?.toDataURL();
+      setPreviewAvatar(newPreveiwImage);
+    } catch (e) {
+      console.error(e);
+    }
+  }, 300);
 
-	useEffect(() => {
-		handleImageChange();
-		return () => {
-			setPreviewAvatar("");
-		};
-	}, [avatar]);
+  useEffect(() => {
+    handleImageChange();
+    return () => {
+      setPreviewAvatar("");
+    };
+  }, [avatar]);
 
-	return (
-		<div className={`${styles.avatarCropper} icon_cropper`}>
-			<div className="icon_cropper-crop_area">
-				<ReactSVG className="icon_cropper-grid" src={IconCropperGridSvgUrl} />
-				<AvatarEditor
-					ref={setEditorRef}
-					image={uploadedFile}
-					width={216}
-					height={216}
-					position={{ x: avatar.x, y: avatar.y }}
-					scale={avatar.zoom}
-					color={[6, 22, 38, 0.2]}
-					border={0}
-					rotate={0}
-					borderRadius={108}
-					onPositionChange={handlePositionChange}
-					onImageReady={handleImageChange}
-					disableHiDPIScaling
-					crossOrigin="anonymous"
-				/>
-			</div>
+  return (
+    <div className={`${styles.avatarCropper} icon_cropper`}>
+      <div className="icon_cropper-crop_area">
+        <ReactSVG className="icon_cropper-grid" src={IconCropperGridSvgUrl} />
+        <AvatarEditor
+          ref={setEditorRef}
+          image={uploadedFile}
+          width={216}
+          height={216}
+          position={{ x: avatar.x, y: avatar.y }}
+          scale={avatar.zoom}
+          color={[6, 22, 38, 0.2]}
+          border={0}
+          rotate={0}
+          borderRadius={108}
+          onPositionChange={handlePositionChange}
+          onImageReady={handleImageChange}
+          disableHiDPIScaling
+          crossOrigin="anonymous"
+        />
+      </div>
 
-			<TooltipContainer
-				as="div"
-				className="icon_cropper-delete_button"
-				onClick={handleDeleteImage}
-				title={t("Common:Delete")}
-			>
-				<ReactSVG src={TrashReactSvgUrl} />
-				<div className="icon_cropper-delete_button-text">
-					{t("Common:Delete")}
-				</div>
-			</TooltipContainer>
+      <TooltipContainer
+        as="div"
+        className="icon_cropper-delete_button"
+        onClick={handleDeleteImage}
+        title={t("Common:Delete")}
+      >
+        <ReactSVG src={TrashReactSvgUrl} />
+        <div className="icon_cropper-delete_button-text">
+          {t("Common:Delete")}
+        </div>
+      </TooltipContainer>
 
-			<div className="icon_cropper-zoom-container">
-				<IconButton
-					className="icon_cropper-zoom-container-button"
-					size="16"
-					onClick={handleZoomOutClick}
-					iconName={ZoomMinusReactSvgUrl}
-					isFill
-					isClickable={false}
-				/>
-				<Slider
-					className="icon_cropper-zoom-container-slider"
-					max={5}
-					min={1}
-					onChange={handleSliderChange}
-					step={0.01}
-					value={avatar.zoom}
-				/>
-				<IconButton
-					className="icon_cropper-zoom-container-button"
-					size="16"
-					onClick={handleZoomInClick}
-					iconName={ZoomPlusReactSvgUrl}
-					isFill
-					isClickable={false}
-				/>
-			</div>
-		</div>
-	);
+      <div className="icon_cropper-zoom-container">
+        <IconButton
+          className="icon_cropper-zoom-container-button"
+          size="16"
+          onClick={handleZoomOutClick}
+          iconName={ZoomMinusReactSvgUrl}
+          isFill
+          isClickable={false}
+        />
+        <Slider
+          className="icon_cropper-zoom-container-slider"
+          max={5}
+          min={1}
+          onChange={handleSliderChange}
+          step={0.01}
+          value={avatar.zoom}
+        />
+        <IconButton
+          className="icon_cropper-zoom-container-button"
+          size="16"
+          onClick={handleZoomInClick}
+          iconName={ZoomPlusReactSvgUrl}
+          isFill
+          isClickable={false}
+        />
+      </div>
+    </div>
+  );
 };
 
 export default AvatarCropper;

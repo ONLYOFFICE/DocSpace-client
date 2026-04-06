@@ -48,7 +48,7 @@ const PermanentSetting = ({
 }: PermanentSettingProps) => {
   return (
     <div
-      className={`${styles.permanentSetting} permanent_setting${isFull ? ` ${styles.isFull}` : ""}${type === "privacy" ? ` ${styles.privacyType}` : ""}`}
+      className={`${styles.permanentSetting}${isFull ? ` ${styles.isFull}` : ""}${type === "privacy" ? ` ${styles.privacyType}` : ""}`}
     >
       <div className="permanent_setting-main_info">
         <ReactSVG className="permanent_setting-main_info-icon" src={icon} />

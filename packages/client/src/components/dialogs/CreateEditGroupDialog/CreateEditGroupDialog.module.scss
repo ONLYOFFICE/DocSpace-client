@@ -114,12 +114,11 @@
 // MembersParam
 .membersHeader {
   width: 100%;
-  padding: 8px 0 12px;
+  padding: 20px 0 12px;
   color: $gray;
   font-size: 14px;
   font-weight: 600;
   line-height: 16px;
-  padding-top: 20px;
 }
 
 .addMembersButton {
@@ -218,6 +217,7 @@
 
 // GroupMembersList - StyledList
 .styledList {
+  // !important is needed to override react-virtualized's inline width style
   width: calc(var(--list-width) - 16px) !important;
 
   :global(.group-member-row-loader) {

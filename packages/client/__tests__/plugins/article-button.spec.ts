@@ -40,7 +40,6 @@ import { expect, test, TEST_PORT } from "../fixtures/base";
 
 const PLUGIN_REQUEST_URL = "**/plugins/article-button/plugin.js";
 
-// Personal folder — article sidebar is visible here.
 const PERSONAL_FOLDER_URL = "/rooms/personal/filter?folder=12764";
 
 // ─── Test suite ───────────────────────────────────────────────────────────────

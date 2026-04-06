@@ -86,22 +86,25 @@ export const mockPlugin3: TAPIPlugin = {
   enabled: false,
 };
 
-export const mockLocalePlugin: TAPIPlugin = {
+export const mockLocaleSamplePlugin: TAPIPlugin = {
   ...mockPlugin1,
-  version: "1.1.0",
+  name: "locale-sample",
+  version: "1.0.0",
   minDocSpaceVersion: "3.5.0",
-  name: "archives.zip",
+  description: "Sample plugin demonstrating plugin localization for DocSpace",
   nameLocale: {
-    de: "archive.zip",
-    az: "arxivlər.zip",
+    de: "Locale-Beispiel",
+    az: "Lokal nümunəsi",
   },
-  description: "Plugin for working with archives",
   descriptionLocale: {
-    de: "Plugin für die Verwendung von Archiven",
-    az: "Arxivlərlə işləmək üçün plagin",
+    de: "Beispiel-Plugin zur Demonstration der Plugin-Lokalisierung für DocSpace",
+    az: "DocSpace üçün plagin lokalizasiyasını nümayiş etdirən nümunə plagin",
   },
-  pluginName: "Testlocaleplugin",
-  url: "/plugins/test-locale-plugin/plugin.js",
+  pluginName: "LocaleSample",
+  scopes: "Settings,ContextMenu",
+  image: "docspace-icon.svg",
+  url: "/plugins/locale-sample/plugin.js",
+  settings: "",
 };
 
 export const mockContextMenuPlugin: TAPIPlugin = {
@@ -137,8 +140,7 @@ export const mockSelectorPlugin: TAPIPlugin = {
   name: "selector",
   version: "1.0.0",
   minDocSpaceVersion: "3.5.0",
-  description:
-    "Sample plugin demonstrating all DocSpace selector types",
+  description: "Sample plugin demonstrating all DocSpace selector types",
   pluginName: "SelectorSample",
   scopes: "ContextMenu",
   image: "docspace-icon.svg",
@@ -552,9 +554,9 @@ export const webPluginsWithApiPlugin = {
   statusCode: 200,
 };
 
-// Plugins list with locale plugin
-export const webPluginsWithLocale = {
-  response: [mockLocalePlugin],
+// Plugins list with locale-sample plugin
+export const webPluginsWithLocaleSample = {
+  response: [mockLocaleSamplePlugin],
   count: 1,
   links: [
     {
@@ -606,33 +608,33 @@ export const webPluginsDeleteResponse = {
   statusCode: 200,
 };
 
+type TWebPluginType =
+  | "empty"
+  | "withData"
+  | "withLocaleSample"
+  | "withContextMenuPlugin"
+  | "withInfoPanelPlugin"
+  | "withSelectorPlugin"
+  | "withMainButtonPlugin"
+  | "withArticleButtonPlugin"
+  | "withFileItemPlugin"
+  | "withProfileMenuPlugin"
+  | "withEventListenerPlugin"
+  | "withMediaViewerPlugin"
+  | "withApiPlugin"
+  | "withCreateDialogPlugin"
+  | "withModalDialogPlugin"
+  | "withFloatingOperationsPlugin"
+  | "withPostMessagePlugin"
+  | "withSettingsPlugin";
+
 // Resolvers
-export const webPluginsResolver = (
-  type:
-    | "empty"
-    | "withData"
-    | "withLocale"
-    | "withContextMenuPlugin"
-    | "withInfoPanelPlugin"
-    | "withSelectorPlugin"
-    | "withMainButtonPlugin"
-    | "withArticleButtonPlugin"
-    | "withFileItemPlugin"
-    | "withProfileMenuPlugin"
-    | "withEventListenerPlugin"
-    | "withMediaViewerPlugin"
-    | "withApiPlugin"
-    | "withCreateDialogPlugin"
-    | "withModalDialogPlugin"
-    | "withFloatingOperationsPlugin"
-    | "withPostMessagePlugin"
-    | "withSettingsPlugin" = "empty",
-) => {
+export const webPluginsResolver = (type: TWebPluginType = "empty") => {
   let data;
 
   switch (type) {
-    case "withLocale":
-      data = webPluginsWithLocale;
+    case "withLocaleSample":
+      data = webPluginsWithLocaleSample;
       break;
     case "withData":
       data = webPluginsWithData;
@@ -705,25 +707,7 @@ export const webPluginsDeleteResolver = () => {
 // Handlers
 export const webPluginsHandler = (
   port: string,
-  type:
-    | "empty"
-    | "withData"
-    | "withLocale"
-    | "withContextMenuPlugin"
-    | "withInfoPanelPlugin"
-    | "withSelectorPlugin"
-    | "withMainButtonPlugin"
-    | "withArticleButtonPlugin"
-    | "withFileItemPlugin"
-    | "withProfileMenuPlugin"
-    | "withEventListenerPlugin"
-    | "withMediaViewerPlugin"
-    | "withApiPlugin"
-    | "withCreateDialogPlugin"
-    | "withModalDialogPlugin"
-    | "withFloatingOperationsPlugin"
-    | "withPostMessagePlugin"
-    | "withSettingsPlugin" = "empty",
+  type: TWebPluginType = "empty",
 ) => {
   return http.get(
     `${BASE_URL}:${port}/${API_PREFIX}/${PATH_WEB_PLUGINS}`,
@@ -759,4 +743,3 @@ export const webPluginsDeleteHandler = (port: string) => {
     },
   );
 };
-

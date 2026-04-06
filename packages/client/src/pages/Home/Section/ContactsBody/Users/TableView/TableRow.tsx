@@ -258,6 +258,7 @@ const PeopleTableRow = ({
       className={classNames(styles.styledWrapper, "user-item", {
         "table-row-selected": isChecked || isActive,
       }, String(item.id))}
+      {...({ value } as unknown as { value?: string })}
     >
       <TableRow
         key={item.id}

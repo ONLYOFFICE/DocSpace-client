@@ -89,6 +89,8 @@ const GroupsRowComponent = ({
   const getContextModel = () => getModel!(t, item);
 
   // used for selection-area
+  const value = `group_${item.id}_false_index_${itemIndex}`;
+
   return (
     <div
       className={classNames(
@@ -97,6 +99,7 @@ const GroupsRowComponent = ({
         { [styles.expanded]: isChecked || isActive, "row-selected": isChecked || isActive },
         String(item.id),
       )}
+      {...({ value } as unknown as { value?: string })}
     >
       <div className="group-item">
         <Row

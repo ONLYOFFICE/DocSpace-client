@@ -110,12 +110,16 @@ const GroupsTableItem = ({
 
   const getContextModel: () => ContextMenuModel[] = () => getModel!(t, item);
 
+  // used for selection-area
+  const value = `folder_${item.id}_false_index_${itemIndex}`;
+
   return (
     <div
       id={String(item.id)}
       className={classNames(styles.groupsRowWrapper, "group-item", {
         "table-row-selected": isChecked || isActive,
       }, String(item.id))}
+      {...({ value } as unknown as { value?: string })}
       data-testid={`contacts_table_groups_row_${itemIndex}`}
     >
       <TableRow

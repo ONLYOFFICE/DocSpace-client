@@ -47,6 +47,7 @@ const SimpleUserRow = (props: SimpleUserRowProps) => {
     onUserContextClick,
     element,
     isActive,
+    value,
     inProgress,
     contactsTab,
     itemIndex,
@@ -71,6 +72,7 @@ const SimpleUserRow = (props: SimpleUserRowProps) => {
         { "row-selected": isChecked || isActive },
         String(item.id),
       )}
+      {...({ value } as unknown as { value?: string })}
     >
       <div className="user-item user-row-container">
         <Row

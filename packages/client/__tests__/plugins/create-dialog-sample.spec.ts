@@ -35,6 +35,8 @@ import {
   webPluginsHandler,
 } from "@docspace/shared/__mocks__/handlers";
 
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
+
 import { expect, test, TEST_PORT } from "../fixtures/base";
 
 const PLUGIN_REQUEST_URL = "**/plugins/create-dialog-sample/plugin.js";
@@ -98,6 +100,12 @@ test.describe("Create Dialog Sample Plugin — ICreateDialog via main button", (
     await expect(
       page.getByTestId("create-dialog-sample-create-folder"),
     ).toBeVisible();
+
+    await expectScreenshot(page, [
+      "desktop",
+      "plugins-create-dialog",
+      "create-dialog_more-submenu.png",
+    ]);
   });
 
   // ── 2. Clicking the item opens the create dialog ───────────────────────────
@@ -114,6 +122,12 @@ test.describe("Create Dialog Sample Plugin — ICreateDialog via main button", (
 
     const header = page.locator(".modal-header");
     await expect(header).toContainText("Create Plugin Folder");
+
+    await expectScreenshot(page, [
+      "desktop",
+      "plugins-create-dialog",
+      "create-dialog_open.png",
+    ]);
   });
 
   // ── 3. The text input is pre-filled with startValue ────────────────────────

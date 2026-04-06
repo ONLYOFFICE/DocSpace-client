@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 @use "@docspace/ui-kit/styles/mixins";
+@use "@docspace/ui-kit/styles/variables/colors";
 
 .navItemSeparator {
   border-bottom-style: solid;
@@ -107,9 +108,9 @@
 }
 
 .versionBadge {
-  background-color: #35ad17;
+  background-color: #{colors.$light-status-positive};
   border-radius: 5px;
-  color: #ffffff;
+  color: #{colors.$white};
   display: inline-block;
   font-size: 10px;
   line-height: 8px;

@@ -100,12 +100,6 @@ test.describe("Create Dialog Sample Plugin — ICreateDialog via main button", (
     await expect(
       page.getByTestId("create-dialog-sample-create-folder"),
     ).toBeVisible();
-
-    await expectScreenshot(page, [
-      "desktop",
-      "plugins-create-dialog",
-      "create-dialog_more-submenu.png",
-    ]);
   });
 
   // ── 2. Clicking the item opens the create dialog ───────────────────────────

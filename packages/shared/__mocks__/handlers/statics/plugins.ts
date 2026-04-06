@@ -49,28 +49,21 @@ const mockPluginCss = `
 `;
 
 export const pluginJsHandler = () => {
-  return http.get(
-    "*/plugins/:pluginName/plugin.js",
-    ({ params }) => {
-      const { pluginName } = params;
-      const pluginPath = path.join(
-        PLUGINS_DIR,
-        String(pluginName),
-        "plugin.js",
-      );
+  return http.get("*/plugins/:pluginName/plugin.js", ({ params }) => {
+    const { pluginName } = params;
+    const pluginPath = path.join(PLUGINS_DIR, String(pluginName), "plugin.js");
 
-      try {
-        const content = fs.readFileSync(pluginPath, "utf-8");
-        return new Response(content, {
-          headers: { "Content-Type": "application/javascript" },
-        });
-      } catch {
-        return new Response(mockPluginJs, {
-          headers: { "Content-Type": "application/javascript" },
-        });
-      }
-    },
-  );
+    try {
+      const content = fs.readFileSync(pluginPath, "utf-8");
+      return new Response(content, {
+        headers: { "Content-Type": "application/javascript" },
+      });
+    } catch {
+      return new Response(mockPluginJs, {
+        headers: { "Content-Type": "application/javascript" },
+      });
+    }
+  });
 };
 
 export const pluginCssHandler = () => {
@@ -102,7 +95,6 @@ export const pluginAssetsHandler = () => {
       else if (ext === ".jpg" || ext === ".jpeg") contentType = "image/jpeg";
       else if (ext === ".svg") contentType = "image/svg+xml";
       else if (ext === ".gif") contentType = "image/gif";
-      else if (ext === ".html" || ext === ".htm") contentType = "text/html";
 
       return new Response(new Uint8Array(fileBuffer), {
         headers: {
@@ -114,4 +106,3 @@ export const pluginAssetsHandler = () => {
     }
   });
 };
-

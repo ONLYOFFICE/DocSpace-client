@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,89 +24,78 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
+@use "@docspace/ui-kit/styles/mixins";
 
-import { injectDefaultTheme, mobile } from "@docspace/shared/utils";
-
-const StyledParam = styled.div.attrs(injectDefaultTheme)<{
-  storageLocation?: boolean;
-  folderName?: string;
-  increaseGap?: boolean;
-}>`
+// Shared base styles for all param variants
+@mixin param-base {
   box-sizing: border-box;
   display: flex;
   width: 100%;
 
-  ${(props) =>
-    props.storageLocation
-      ? css``
-      : props.folderName
-        ? css`
-            flex-direction: column;
-            gap: 4px;
-          `
-        : ""}
-
-  .set_room_params-info {
+  :global(.set_room_params-info) {
     display: flex;
     flex-direction: column;
-    gap: ${(props) => (props.increaseGap ? 12 : 4)}px;
+    gap: 4px;
+    overflow: hidden;
 
-    .set_room_params-info-title {
+    :global(.set_room_params-info-title) {
       display: flex;
       flex-direction: row;
       align-items: center;
       gap: 6px;
 
-      .set_room_params-info-title-text {
+      :global(.set_room_params-info-title-text) {
         font-weight: 600;
         font-size: 13px;
         line-height: 20px;
       }
     }
 
-    .set_room_params-info-description {
+    :global(.set_room_params-info-description) {
       font-weight: 400;
       font-size: 12px;
       line-height: 16px;
-      color: ${(props) =>
-        props.theme.createEditRoomDialog.commonParam.descriptionColor};
+      color: var(--param-description-color);
     }
   }
 
-  .set_room_params-toggle {
+  :global(.set_room_params-toggle) {
     width: 28px;
     height: 16px;
     margin: 2px 0;
   }
 
-  .ai-combobox {
+  :global(.ai-combobox) {
     padding: 0;
   }
 
-  .ai-button-group {
+  :global(.provider-combobox.has-error .combo-button) {
+    border-color: var(--input-error-border);
+  }
+
+  :global(.ai-button-group) {
     display: flex;
     flex-direction: row;
     gap: 8px;
 
-    @media ${mobile} {
+    @include mixins.mobile {
       flex-direction: column;
     }
 
-    .ai-button-icon {
+    :global(.ai-button-icon) {
       div {
         height: 16px;
       }
     }
   }
 
-  .ai-mcp-group {
+  :global(.ai-mcp-group) {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 8px;
 
-    .ai-mcp-item {
+    :global(.ai-mcp-item) {
       height: 32px;
       padding: 0 8px;
       display: flex;
@@ -115,7 +104,6 @@ const StyledParam = styled.div.attrs(injectDefaultTheme)<{
       justify-content: center;
       gap: 8px;
       border-radius: 3px;
-
       background: var(--filled-button-background-color);
 
       img {
@@ -124,6 +112,50 @@ const StyledParam = styled.div.attrs(injectDefaultTheme)<{
       }
     }
   }
-`;
+}
 
-export { StyledParam };
+// StyledParam — base wrapper used directly by AgentDialog sub-components
+.styledParam {
+  @include param-base;
+
+  &.increaseGap :global(.set_room_params-info) {
+    gap: 12px;
+  }
+}
+
+// InputParam — always column layout with label + input
+.inputParam {
+  @include param-base;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 54px;
+
+  :global(.input-label-wrapper) {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    :global(.input-label) {
+      cursor: pointer;
+    }
+  }
+}
+
+// ToggleParam — always row layout with text left, toggle right
+.toggleParam {
+  @include param-base;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 8px;
+  max-width: 100%;
+
+  :global(.set_room_params-info-description) {
+    box-sizing: border-box;
+    max-width: 100%;
+  }
+
+  :global(.set_room_params-toggle) {
+    width: 28px;
+    min-width: 28px;
+  }
+}

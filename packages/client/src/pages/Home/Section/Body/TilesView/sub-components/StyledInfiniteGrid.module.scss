@@ -24,37 +24,58 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
-import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router";
-import { Heading } from "@docspace/ui-kit/components/heading";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
+@use "@docspace/ui-kit/styles/mixins";
 
-import styles from "./AboutHeader.module.scss";
+.card {
+  display: block;
+}
 
-const AboutHeader = () => {
-	const { t, ready } = useTranslation("Common");
+.item {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(clamp(216px, 13.4vw, 360px), 1fr)
+  );
+  gap: 14px 16px;
 
-	const navigate = useNavigate();
+  @include mixins.desktop {
+    margin-inline-start: 1px;
+    padding-inline-end: 0;
+  }
 
-	const onBack = () => {
-		navigate(-1);
-	};
+  @include mixins.tablet-and-below {
+    margin-inline-start: -1px;
+    margin-inline-end: 3px;
+  }
 
-	return (
-		<div className={styles.headerContainer}>
-			<IconButton
-				iconName={ArrowPathReactSvgUrl}
-				size="17"
-				isFill
-				onClick={onBack}
-				className="arrow-button"
-			/>
-			<Heading type="content" truncate>
-				{!ready ? "" : t("AboutHeader")}
-			</Heading>
-		</div>
-	);
-};
+  &[data-is-room],
+  &[data-is-template] {
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(clamp(275px, 13.4vw, 350px), 1fr)
+    );
+  }
 
-export default AboutHeader;
+  &[data-is-room] {
+    gap: 16px;
+  }
+
+  &:not([data-is-room]) {
+    @include mixins.tablet-and-below {
+      gap: 14px;
+    }
+  }
+}
+
+.headerItem {
+  height: 20px;
+  grid-column: -1 / 1;
+}
+
+.infiniteLoader {
+  overflow: visible !important;
+
+  & > :global(div) {
+    overflow: visible !important;
+  }
+}

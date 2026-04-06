@@ -27,28 +27,13 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
-import styled from "styled-components";
 
 import { Heading } from "@docspace/ui-kit/components/heading";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 
-const StyledHeader = styled.div`
-  display: flex;
-  align-items: center;
-  max-width: calc(100vw - 32px);
-
-  .arrow-button {
-    flex-shrink: 0;
-    margin-inline-end: 12px;
-
-    svg {
-      ${({ theme }) =>
-        theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
-    }
-  }
-`;
+import styles from "./DeveloperToolsHeader.module.scss";
 
 const sdkPresetTitles: Record<string, string> = {
   docspace: "Common:ProductName",
@@ -105,7 +90,7 @@ const DeveloperToolsHeader = () => {
   };
 
   return (
-    <StyledHeader>
+    <div className={styles.styledHeader}>
       {showBackButton ? (
         <IconButton
           iconName={ArrowPathReactSvgUrl}
@@ -119,7 +104,7 @@ const DeveloperToolsHeader = () => {
       <Heading type="content" truncate>
         {title}
       </Heading>
-    </StyledHeader>
+    </div>
   );
 };
 

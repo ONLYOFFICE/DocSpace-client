@@ -24,37 +24,55 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
-import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router";
-import { Heading } from "@docspace/ui-kit/components/heading";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
+.bodyContent {
+  display: contents;
+  user-select: text;
 
-import styles from "./AboutHeader.module.scss";
+  --color-border-default: var(--dialogs-border-color);
+  --color-border-muted: hsla(210, 18%, 87%, 1);
 
-const AboutHeader = () => {
-	const { t, ready } = useTranslation("Common");
+  table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    display: block;
+    margin-top: 0;
+    margin-bottom: 16px;
+    width: max-content;
+    max-width: 100%;
+    overflow: auto;
+  }
 
-	const navigate = useNavigate();
+  a {
+    color: var(--dialogs-link-color);
+  }
 
-	const onBack = () => {
-		navigate(-1);
-	};
+  tr {
+    border-top: 1px solid var(--color-border-muted);
+  }
 
-	return (
-		<div className={styles.headerContainer}>
-			<IconButton
-				iconName={ArrowPathReactSvgUrl}
-				size="17"
-				isFill
-				onClick={onBack}
-				className="arrow-button"
-			/>
-			<Heading type="content" truncate>
-				{!ready ? "" : t("AboutHeader")}
-			</Heading>
-		</div>
-	);
-};
+  td,
+  th {
+    padding: 6px 13px;
+    border: 1px solid var(--color-border-default);
+  }
 
-export default AboutHeader;
+  th {
+    font-weight: 600;
+  }
+
+  table img {
+    background-color: transparent;
+  }
+}
+
+.footerContent {
+  display: contents;
+  user-select: text;
+
+  .markdownWrapper {
+    box-sizing: border-box;
+    overflow: auto;
+    height: 362px;
+    width: 100%;
+  }
+}

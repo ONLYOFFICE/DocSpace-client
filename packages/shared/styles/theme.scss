@@ -2779,3 +2779,42 @@
   --dev-tools-card-border: 1px solid #{$gray-dark-strong};
   --dev-tools-card-divider: #{$gray-dark-mid};
 }
+
+.light {
+  --dialogs-border-color: #{$gray-light-mid};
+  --dialogs-link-color: #{$light-blue-main};
+  --files-private-room-border-bottom: 1px solid #{$gray-light-mid};
+  --files-private-room-link-color: #{$link};
+  --files-private-room-text-color: #{$gray-text};
+}
+
+.dark {
+  --dialogs-border-color: #{$gray-dark-mid};
+  --dialogs-link-color: #{$light-blue-main};
+  --files-private-room-border-bottom: 1px solid #{$gray-dark-mid};
+  --files-private-room-link-color: #{$dark-link};
+  --files-private-room-text-color: #{$gray-dark-text};
+}
+
+.light {
+  --create-edit-room-dialog-common-param-description-color: #{$gray};
+  --accounts-badges-disabled-color: #{$light-error-status};
+  --files-version-history-list-fill: #{$gray-strong};
+  --files-version-history-list-stroke: #{$gray-strong};
+  --files-version-history-list-color: #{$gray-strong};
+  --files-version-history-disabled-fill: #{$gray-strong};
+  --files-version-history-link-color: #{$gray};
+  --files-version-history-comment-color: #{$gray};
+}
+
+.dark {
+  --create-edit-room-dialog-common-param-description-color: #{$gray};
+  --accounts-badges-disabled-color: #{$dark-error-status};
+  --files-version-history-list-fill: #{$white};
+  --files-version-history-list-stroke: #{$white};
+  --files-version-history-list-color: #{$white};
+  --files-version-history-disabled-fill: #{$gray-dark-strong};
+  --files-version-history-link-color: #{$gray-dark};
+  --files-version-history-comment-color: #{$gray-dark};
+  --files-version-history-badge-delete-text-color: #{$dark-gray-dark};
+}

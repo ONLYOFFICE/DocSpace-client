@@ -355,7 +355,7 @@ test.describe("Selector Plugin", () => {
     await openSelector(page, "selector-sample-group");
     await expect(page.getByTestId("groups_selector")).toBeVisible();
 
-    // Close via the × header button.
+    // Close via the x header button.
     await page.mouse.click(0, 0);
     await expect(page.getByTestId("aside")).not.toBeVisible();
   });

@@ -131,7 +131,7 @@ test.describe("Article Button Sample Plugin", () => {
 
   // ── 4. Collapsed article ──────────────────────────────────────────────────────
   //
-  // The hide/show sidebar toggle is CSS display:none on desktop (≥ 1024 px).
+  // The hide/show sidebar toggle is CSS display:none on desktop (>= 1024 px).
   // Strategy:
   //   1. Navigate at the default desktop viewport — article starts expanded.
   //   2. Resize inline to 900 px (tablet) so the toggle becomes CSS-visible

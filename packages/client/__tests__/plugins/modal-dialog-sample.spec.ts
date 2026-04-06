@@ -180,9 +180,9 @@ test.describe("Modal Dialog Sample Plugin — IModalDialog via profile menu", ()
     await expect(page.getByTestId("modal-dialog")).not.toBeVisible();
   });
 
-  // ── 7. × button (onClose) dismisses the dialog ───────────────────────────
+  // -- 7. x button (onClose) dismisses the dialog ---------------------------
 
-  test("Clicking the × button dismisses the modal via onClose", async ({
+  test("Clicking the x button dismisses the modal via onClose", async ({
     page,
     baseUrl,
   }) => {
@@ -194,7 +194,7 @@ test.describe("Modal Dialog Sample Plugin — IModalDialog via profile menu", ()
 
     await expect(page.getByTestId("modal-dialog")).toBeVisible();
 
-    // The × close button inside the modal header.
+    // The x close button inside the modal header.
     await page.getByTestId("aside_header_close_icon_button").click();
 
     await expect(page.getByTestId("modal-dialog")).not.toBeVisible();

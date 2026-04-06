@@ -175,7 +175,7 @@ test.describe("Floating Operations Plugin — IFloatingOperationsButton via cont
     const floatingButton = page.getByTestId("floating-button");
     await expect(floatingButton).toBeVisible();
 
-    // The cancel (×) icon is only visible on hover over the floating button.
+    // The cancel (x) icon is only visible on hover over the floating button.
     await floatingButton.hover();
 
     const cancelIcon = page.getByTestId("floating-button-close-icon");

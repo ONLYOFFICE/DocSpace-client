@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classnames from "classnames";
 import { Row } from "@docspace/ui-kit/components/rows";
 
 import styles from "./StyledVersionHistory.module.scss";
@@ -33,13 +34,16 @@ const StyledBody = ({ children }) => (
   <div className={styles.body}>{children}</div>
 );
 
-const StyledVersionList = ({ showRows, isRestoreProcess, children }) => {
-  const classes = [styles.versionList];
-  if (showRows) classes.push(styles.showRows);
-  if (isRestoreProcess) classes.push(styles.restoreProcess);
-
-  return <div className={classes.join(" ")}>{children}</div>;
-};
+const StyledVersionList = ({ showRows, isRestoreProcess, children }) => (
+  <div
+    className={classnames(styles.versionList, {
+      [styles.showRows]: showRows,
+      [styles.restoreProcess]: isRestoreProcess,
+    })}
+  >
+    {children}
+  </div>
+);
 
 const StyledVersionRow = ({
   showEditPanel,
@@ -51,21 +55,20 @@ const StyledVersionRow = ({
   isEditing,
   children,
   ...rowProps
-}) => {
-  const classes = [styles.versionRowWrapper];
-  if (showEditPanel) classes.push(styles.showEditPanel);
-  if (canEdit) classes.push(styles.canEdit);
-  if (isTabletView) classes.push(styles.isTabletView);
-  if (isSavingComment) classes.push(styles.isSavingComment);
-  if (versionDeleteProcess) classes.push(styles.versionDeleteProcess);
-  if (versionDeleteRow) classes.push(styles.versionDeleteRow);
-  if (isEditing) classes.push(styles.isEditing);
-
-  return (
-    <div className={classes.join(" ")}>
-      <Row {...rowProps}>{children}</Row>
-    </div>
-  );
-};
+}) => (
+  <div
+    className={classnames(styles.versionRowWrapper, {
+      [styles.showEditPanel]: showEditPanel,
+      [styles.canEdit]: canEdit,
+      [styles.isTabletView]: isTabletView,
+      [styles.isSavingComment]: isSavingComment,
+      [styles.versionDeleteProcess]: versionDeleteProcess,
+      [styles.versionDeleteRow]: versionDeleteRow,
+      [styles.isEditing]: isEditing,
+    })}
+  >
+    <Row {...rowProps}>{children}</Row>
+  </div>
+);
 
 export { StyledBody, StyledVersionRow, StyledVersionList };

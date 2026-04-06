@@ -24,21 +24,24 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { StyledIndexCell } from "./CellStyles";
+import { Text } from "@docspace/ui-kit/components/text";
+
+import styles from "./CellStyles.module.scss";
 
 const IndexCell = ({ item, sideColor }) => {
   const { order } = item;
 
   return (
-    <StyledIndexCell
+    <Text
       color={sideColor}
       fontSize="12px"
       fontWeight={600}
       title={order}
+      className={styles.styledIndexCell}
       style={{ marginRight: 0 }}
     >
       {order}
-    </StyledIndexCell>
+    </Text>
   );
 };
 

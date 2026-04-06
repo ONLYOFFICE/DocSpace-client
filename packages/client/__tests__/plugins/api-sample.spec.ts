@@ -82,28 +82,6 @@ const createRoomSuccessHandler = () =>
 const createRoomErrorHandler = () =>
   http.post(ROOMS_API_URL, () => new Response(null, { status: 500 }));
 
-/**
- * Wait until the plugin's onLoadCallback has finished:
- * - createAPIUrl() has populated apiURL
- * - the "Create Room" profile menu item is registered
- */
-async function waitForPluginReady(
-  page: import("@playwright/test").Page,
-): Promise<void> {
-  await page.waitForFunction(() => {
-    const iframe = document.getElementById(
-      "plugin-iframe",
-    ) as HTMLIFrameElement | null;
-
-    const p = (iframe?.contentWindow as any)?.Plugins?.Apiplugin;
-    return (
-      typeof p?.apiURL === "string" &&
-      p.apiURL.length > 0 &&
-      p.getProfileMenuItems?.()?.size >= 1
-    );
-  });
-}
-
 /** Click the profile avatar to open the profile dropdown. */
 async function openProfileMenu(
   page: import("@playwright/test").Page,
@@ -142,8 +120,6 @@ test.describe("API Sample Plugin — room creation via IApiPlugin", () => {
     await page.goto(`${baseUrl}${PERSONAL_FOLDER_URL}`);
     await pluginLoaded;
 
-    await waitForPluginReady(page);
-
     const { apiURL, origin, prefix } = await page.evaluate(() => {
       const p = (
         document.getElementById("plugin-iframe") as HTMLIFrameElement | null
@@ -173,8 +149,6 @@ test.describe("API Sample Plugin — room creation via IApiPlugin", () => {
     const pluginLoaded = page.waitForResponse(PLUGIN_REQUEST_URL);
     await page.goto(`${baseUrl}${PERSONAL_FOLDER_URL}`);
     await pluginLoaded;
-
-    await waitForPluginReady(page);
 
     // Capture the outgoing POST request.
     const postRequest = page.waitForRequest(
@@ -206,8 +180,6 @@ test.describe("API Sample Plugin — room creation via IApiPlugin", () => {
     await page.goto(`${baseUrl}${PERSONAL_FOLDER_URL}`);
     await pluginLoaded;
 
-    await waitForPluginReady(page);
-
     await openProfileMenu(page);
     await page.locator("#api-sample-create-room").click();
 
@@ -230,8 +202,6 @@ test.describe("API Sample Plugin — room creation via IApiPlugin", () => {
     const pluginLoaded = page.waitForResponse(PLUGIN_REQUEST_URL);
     await page.goto(`${baseUrl}${PERSONAL_FOLDER_URL}`);
     await pluginLoaded;
-
-    await waitForPluginReady(page);
 
     await openProfileMenu(page);
     await page.locator("#api-sample-create-room").click();

@@ -35,6 +35,8 @@ import {
   webPluginsHandler,
 } from "@docspace/shared/__mocks__/handlers";
 
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
+
 import { expect, test, TEST_PORT } from "../fixtures/base";
 
 const PLUGIN_REQUEST_URL = "**/plugins/modal-dialog-sample/plugin.js";
@@ -104,6 +106,12 @@ test.describe("Modal Dialog Sample Plugin — IModalDialog via profile menu", ()
     await clickAboutItem(page);
 
     await expect(page.getByTestId("modal-dialog")).toBeVisible();
+
+    await expectScreenshot(page, [
+      "desktop",
+      "plugins-modal-dialog",
+      "modal-dialog_open.png",
+    ]);
   });
 
   // ── 3. Modal header contains the correct title ────────────────────────────

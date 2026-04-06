@@ -24,29 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
-
-import { TableRow, TableContainer } from "@docspace/ui-kit/components/table";
-
-const marginCss = css`
-  margin-top: -1px;
-  border-top: ${(props) =>
-    `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
-`;
-
-const groupTitleCss = css`
-  margin-inline-start: -24px;
-  padding-inline-start: 24px;
-  ${marginCss}
-`;
-
-const contextCss = css`
-  margin-inline-end: -20px;
-  padding-inline-end: 20px;
-  ${marginCss}
-`;
-
-export const GroupsTableContainer = styled(TableContainer)`
+.groupsTableContainer {
   :has(
     .table-container_body
       .table-list-item:first-child:first-child
@@ -54,66 +32,98 @@ export const GroupsTableContainer = styled(TableContainer)`
   ) {
     .table-container_header {
       border-image-slice: 1;
-      border-image-source: ${(props) =>
-        props.theme.tableContainer.header.lengthenBorderImageSource};
+      border-image-source: var(--table-header-lengthen-border-image-source);
     }
   }
+
   .table-row-selected {
     .table-container_group-title-cell {
-      ${groupTitleCss}
+      margin-inline-start: -24px;
+      padding-inline-start: 24px;
+      margin-top: -1px;
+      border-top: 1px solid var(--files-section-table-view-row-border-color);
     }
+
     .table-container_row-context-menu-wrapper {
-      ${contextCss}
+      margin-inline-end: -20px;
+      padding-inline-end: 20px;
+      margin-top: -1px;
+      border-top: 1px solid var(--files-section-table-view-row-border-color);
     }
   }
+
   .table-row-selected + .table-row-selected {
     .table-row {
       .table-container_group-title-cell {
-        ${groupTitleCss}
-        border-inline: 0; //for Safari macOS
-        border-image-source: ${(props) => `linear-gradient(to right, 
-          ${props.theme.filesSection.tableView.row.borderColorTransition} 17px, ${props.theme.filesSection.tableView.row.borderColor} 31px)`};
+        margin-inline-start: -24px;
+        padding-inline-start: 24px;
+        margin-top: -1px;
+        border-top: 1px solid var(--files-section-table-view-row-border-color);
+        border-inline: 0; // for Safari macOS
+        border-image-slice: 1;
+
+        border-image-source: linear-gradient(
+          to right,
+          var(--files-section-table-view-row-border-color-transition) 17px,
+          var(--files-section-table-view-row-border-color) 31px
+        );
       }
+
       .table-container_row-context-menu-wrapper {
-        ${contextCss}
-        border-image-source: ${(props) => `linear-gradient(to left,
-          ${props.theme.filesSection.tableView.row.borderColorTransition} 17px, ${props.theme.filesSection.tableView.row.borderColor} 31px)`};
+        margin-inline-end: -20px;
+        padding-inline-end: 20px;
+        margin-top: -1px;
+        border-top: 1px solid var(--files-section-table-view-row-border-color);
+        border-image-slice: 1;
+
+        border-image-source: linear-gradient(
+          to left,
+          var(--files-section-table-view-row-border-color-transition) 17px,
+          var(--files-section-table-view-row-border-color) 31px
+        );
       }
     }
   }
+
   .group-item:not(.table-row-selected) + .table-row-selected {
     .table-row {
       .table-container_group-title-cell {
-        ${groupTitleCss}
+        margin-inline-start: -24px;
+        padding-inline-start: 24px;
+        margin-top: -1px;
+        border-top: 1px solid var(--files-section-table-view-row-border-color);
       }
+
       .table-container_row-context-menu-wrapper {
-        ${contextCss}
+        margin-inline-end: -20px;
+        padding-inline-end: 20px;
+        margin-top: -1px;
+        border-top: 1px solid var(--files-section-table-view-row-border-color);
       }
     }
   }
-`;
+}
 
-export const GroupsRowWrapper = styled.div<{ value?: string }>`
+.groupsRowWrapper {
   display: contents;
-`;
+}
 
-export const GroupsRow = styled(TableRow)<{
-  checked?: boolean;
-  isActive?: boolean;
-}>`
+.groupsRow {
   .table-container_cell:not(.table-container_row-checkbox-wrapper) {
     height: auto;
     max-height: 48px;
   }
 
   .table-container_cell {
-    border-top: ${(props) =>
-      `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
+    border-top: 1px solid var(--files-section-table-view-row-border-color);
     margin-top: -1px;
+  }
 
-    background: ${(props) =>
-      (props.checked || props.isActive) &&
-      `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
+  &.checked,
+  &.active {
+    .table-container_cell {
+      background: var(--files-section-table-view-row-background-active) !important;
+    }
   }
 
   .table-container_row-context-menu-wrapper {
@@ -125,19 +135,23 @@ export const GroupsRow = styled(TableRow)<{
   .table-container_row-checkbox-wrapper {
     min-width: 48px;
     padding-inline-end: 0;
+
     .table-container_row-checkbox {
       margin-inline-start: -4px;
       padding-block: 16px;
       padding-inline: 12px 0;
     }
+
     .table-container_row-loader {
       border-bottom: unset;
       padding-inline-start: 7px;
     }
   }
+
   .table-cell_group-title {
     margin-inline-end: 12px;
   }
+
   .table-container_row-context-menu-wrapper {
     justify-content: flex-end;
     padding-inline-end: 0;
@@ -147,19 +161,20 @@ export const GroupsRow = styled(TableRow)<{
     margin-inline-start: 12px;
   }
 
-  :hover {
+  &:hover {
     .table-container_cell {
       cursor: pointer;
-      background: ${(props) =>
-        `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
+      background: var(--files-section-table-view-row-background-active) !important;
     }
+
     .table-container_group-title-cell {
       margin-inline-start: -24px;
       padding-inline-start: 24px;
     }
+
     .table-container_row-context-menu-wrapper {
       margin-inline-end: -20px;
       padding-inline-end: 20px;
     }
   }
-`;
+}

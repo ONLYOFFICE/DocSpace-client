@@ -24,36 +24,62 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Text } from "@docspace/ui-kit/components/text";
+.styledText {
+  display: inline-block;
+  margin-inline-end: 12px;
+}
 
-import styles from "./CellStyles.module.scss";
+.styledIndexCell {
+  display: inline-block;
+  margin-inline: 0;
+  padding-inline-start: 16px;
 
-const StyledText = ({ className = "", ...props }) => (
-  <Text
-    className={[styles.styledText, className].filter(Boolean).join(" ")}
-    {...props}
-  />
-);
+  overflow: hidden;
+  direction: rtl;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 
-const StyledIndexCell = ({ className = "", ...props }) => (
-  <Text
-    className={[styles.styledIndexCell, className].filter(Boolean).join(" ")}
-    {...props}
-  />
-);
+  [dir="rtl"] & {
+    padding-inline-start: 0;
+    margin-inline-end: 16px;
+  }
+}
 
-const StyledTypeCell = ({ className = "", ...props }) => (
-  <Text
-    className={[styles.styledTypeCell, className].filter(Boolean).join(" ")}
-    {...props}
-  />
-);
+.styledTypeCell {
+  display: inline-block;
+  margin-inline-end: 12px;
 
-const StyledAuthorCell = ({ className = "", ...props }) => (
-  <div
-    className={[styles.styledAuthorCell, className].filter(Boolean).join(" ")}
-    {...props}
-  />
-);
+  [dir="rtl"] & {
+    display: flex;
+    justify-content: flex-start;
 
-export { StyledText, StyledAuthorCell, StyledTypeCell, StyledIndexCell };
+    :global(span) {
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    :global(.type) {
+      flex-shrink: 0;
+      flex-grow: 1;
+      flex-basis: 0;
+    }
+
+    :global(.extension) {
+      flex-shrink: 1;
+      flex-grow: 0;
+    }
+  }
+}
+
+.styledAuthorCell {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+
+  :global(.author-avatar-cell) {
+    width: 16px;
+    min-width: 16px;
+    height: 16px;
+    margin-inline-end: 8px;
+  }
+}

@@ -29,10 +29,12 @@ import { inject, observer } from "mobx-react";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import { TContactsViewAs } from "SRC_DIR/helpers/contacts";
 
+import { RowContainer } from "@docspace/ui-kit/components/rows";
+
 import EmptyScreen from "../../EmptyScreen";
 
 import SimpleUserRow from "./SimpleUserRow";
-import { StyledRowContainer } from "./RowView.styled";
+import styles from "./RowView.module.scss";
 import { RowViewProps, RowViewStores } from "./RowView.types";
 
 const PeopleRowContainer = ({
@@ -61,8 +63,8 @@ const PeopleRowContainer = ({
   });
 
   return !isUsersEmptyView ? (
-    <StyledRowContainer
-      className="people-row-container"
+    <RowContainer
+      className={`${styles.styledRowContainer} people-row-container`}
       useReactWindow
       fetchMoreFiles={fetchMoreUsers!}
       hasMoreFiles={hasMoreUsers!}
@@ -85,7 +87,7 @@ const PeopleRowContainer = ({
           isMe={isMe}
         />
       ))}
-    </StyledRowContainer>
+    </RowContainer>
   ) : (
     <EmptyScreen />
   );

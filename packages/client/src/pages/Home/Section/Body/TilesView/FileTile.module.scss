@@ -24,36 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Text } from "@docspace/ui-kit/components/text";
-
-import styles from "./CellStyles.module.scss";
-
-const StyledText = ({ className = "", ...props }) => (
-  <Text
-    className={[styles.styledText, className].filter(Boolean).join(" ")}
-    {...props}
-  />
-);
-
-const StyledIndexCell = ({ className = "", ...props }) => (
-  <Text
-    className={[styles.styledIndexCell, className].filter(Boolean).join(" ")}
-    {...props}
-  />
-);
-
-const StyledTypeCell = ({ className = "", ...props }) => (
-  <Text
-    className={[styles.styledTypeCell, className].filter(Boolean).join(" ")}
-    {...props}
-  />
-);
-
-const StyledAuthorCell = ({ className = "", ...props }) => (
-  <div
-    className={[styles.styledAuthorCell, className].filter(Boolean).join(" ")}
-    {...props}
-  />
-);
-
-export { StyledText, StyledAuthorCell, StyledTypeCell, StyledIndexCell };
+.dragAndDrop {
+  border-radius: 12px;
+}

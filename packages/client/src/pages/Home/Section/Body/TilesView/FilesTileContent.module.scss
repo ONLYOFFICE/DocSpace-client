@@ -24,36 +24,96 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Text } from "@docspace/ui-kit/components/text";
+@use "@docspace/ui-kit/styles/mixins";
 
-import styles from "./CellStyles.module.scss";
+.tileContent {
+  .row-main-container {
+    height: auto;
+    max-width: 100%;
+    display: flex;
+    align-items: flex-end;
+  }
 
-const StyledText = ({ className = "", ...props }) => (
-  <Text
-    className={[styles.styledText, className].filter(Boolean).join(" ")}
-    {...props}
-  />
-);
+  .main-icons {
+    align-self: flex-end;
+  }
 
-const StyledIndexCell = ({ className = "", ...props }) => (
-  <Text
-    className={[styles.styledIndexCell, className].filter(Boolean).join(" ")}
-    {...props}
-  />
-);
+  .badge {
+    margin-inline-end: 8px;
+    cursor: pointer;
+    height: 16px;
+    width: 16px;
+  }
 
-const StyledTypeCell = ({ className = "", ...props }) => (
-  <Text
-    className={[styles.styledTypeCell, className].filter(Boolean).join(" ")}
-    {...props}
-  />
-);
+  .new-items {
+    position: absolute;
+    inset-inline-end: 29px;
+    top: 19px;
+  }
 
-const StyledAuthorCell = ({ className = "", ...props }) => (
-  <div
-    className={[styles.styledAuthorCell, className].filter(Boolean).join(" ")}
-    {...props}
-  />
-);
+  .badges {
+    display: flex;
+    align-items: center;
+  }
 
-export { StyledText, StyledAuthorCell, StyledTypeCell, StyledIndexCell };
+  .share-icon {
+    margin-top: -4px;
+    padding-inline-end: 8px;
+  }
+
+  .favorite,
+  .can-convert,
+  .edit {
+    svg:not(:root) {
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  .item-file-name {
+    max-height: 100%;
+    line-height: var(--tile-content-line-height, 20px);
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    text-align: start;
+
+    font-size: var(--tile-content-font-size, 13px);
+  }
+
+  .item-file-exst {
+    color: var(--files-section-table-view-exst-color);
+  }
+
+  &.isTemplate {
+    overflow: hidden;
+
+    .row-main-container {
+      flex-direction: column;
+      align-items: start;
+    }
+
+    .item-file-name {
+      font-size: 16px;
+    }
+  }
+
+  &.isRooms {
+    .item-file-name {
+      line-height: 22px;
+      font-size: 16px;
+    }
+  }
+
+  @include mixins.tablet-and-below {
+    display: inline-flex;
+    height: auto;
+
+    & > div {
+      margin-top: 0;
+    }
+  }
+}

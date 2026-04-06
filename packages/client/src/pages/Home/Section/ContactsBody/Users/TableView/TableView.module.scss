@@ -23,22 +23,8 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import styled, { css } from "styled-components";
 
-import { TableContainer, TableRow } from "@docspace/ui-kit/components/table";
-import { ComboBox } from "@docspace/ui-kit/components/combobox";
-
-const userNameCss = css`
-  margin-inline-start: -24px;
-  padding-inline-start: 24px;
-`;
-
-const contextCss = css`
-  margin-inline-end: -20px;
-  padding-inline-end: 20px;
-`;
-
-export const StyledTableContainer = styled(TableContainer)`
+.styledTableContainer {
   :has(
     .table-container_body
       .table-list-item:first-child:first-child
@@ -46,18 +32,19 @@ export const StyledTableContainer = styled(TableContainer)`
   ) {
     .table-container_header {
       border-image-slice: 1;
-      border-image-source: ${(props) =>
-        props.theme.tableContainer.header.lengthenBorderImageSource};
+      border-image-source: var(--table-header-lengthen-border-image-source);
     }
   }
 
   .table-row-selected {
     .table-container_user-name-cell {
-      ${userNameCss}
+      margin-inline-start: -24px;
+      padding-inline-start: 24px;
     }
 
     .table-container_row-context-menu-wrapper {
-      ${contextCss}
+      margin-inline-end: -20px;
+      padding-inline-end: 20px;
     }
   }
 
@@ -67,18 +54,28 @@ export const StyledTableContainer = styled(TableContainer)`
       .table-container_row-context-menu-wrapper {
         border-image-slice: 1;
       }
+
       .table-container_user-name-cell {
-        ${userNameCss}
-        border-inline: 0; //for Safari macOS
+        margin-inline-start: -24px;
+        padding-inline-start: 24px;
+        border-inline: 0; // for Safari macOS
 
-        border-image-source: ${(props) => `linear-gradient(to right, 
-          ${props.theme.filesSection.tableView.row.borderColorTransition} 17px, ${props.theme.filesSection.tableView.row.borderColor} 31px)`};
+        border-image-source: linear-gradient(
+          to right,
+          var(--files-section-table-view-row-border-color-transition) 17px,
+          var(--files-section-table-view-row-border-color) 31px
+        );
       }
-      .table-container_row-context-menu-wrapper {
-        ${contextCss}
 
-        border-image-source: ${(props) => `linear-gradient(to left,
-          ${props.theme.filesSection.tableView.row.borderColorTransition} 17px, ${props.theme.filesSection.tableView.row.borderColor} 31px)`};
+      .table-container_row-context-menu-wrapper {
+        margin-inline-end: -20px;
+        padding-inline-end: 20px;
+
+        border-image-source: linear-gradient(
+          to left,
+          var(--files-section-table-view-row-border-color-transition) 17px,
+          var(--files-section-table-view-row-border-color) 31px
+        );
       }
     }
   }
@@ -86,11 +83,13 @@ export const StyledTableContainer = styled(TableContainer)`
   .user-item:not(.table-row-selected) + .table-row-selected {
     .table-row {
       .table-container_user-name-cell {
-        ${userNameCss}
+        margin-inline-start: -24px;
+        padding-inline-start: 24px;
       }
 
       .table-container_row-context-menu-wrapper {
-        ${contextCss}
+        margin-inline-end: -20px;
+        padding-inline-end: 20px;
       }
     }
   }
@@ -100,34 +99,29 @@ export const StyledTableContainer = styled(TableContainer)`
       margin-inline-end: 12px;
     }
   }
-`;
+}
 
-export const StyledWrapper = styled.div<{ value?: string }>`
+.styledWrapper {
   display: contents;
-`;
+}
 
-export const StyledPeopleRow = styled(TableRow)<{
-  checked: boolean;
-  isActive: boolean;
-  hideColumns: boolean;
-}>`
+.styledPeopleRow {
   .table-container_cell {
-    border-top: ${(props) =>
-      `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
+    border-top: 1px solid var(--files-section-table-view-row-border-color);
     margin-top: -1px;
   }
 
-  :hover {
+  &:hover {
     .table-container_cell {
       cursor: pointer;
-      background: ${(props) =>
-        `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
+      background: var(--files-section-table-view-row-background-active) !important;
     }
 
     .table-container_user-name-cell {
       margin-inline-start: -24px;
       padding-inline-start: 24px;
     }
+
     .table-container_row-context-menu-wrapper {
       margin-inline-end: -20px;
       padding-inline-end: 20px;
@@ -145,10 +139,11 @@ export const StyledPeopleRow = styled(TableRow)<{
     max-height: 48px;
   }
 
-  .table-container_cell {
-    background: ${(props) =>
-      (props.checked || props.isActive) &&
-      `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
+  &.checked,
+  &.active {
+    .table-container_cell {
+      background: var(--files-section-table-view-row-background-active) !important;
+    }
   }
 
   .table-container_row-checkbox-wrapper {
@@ -160,6 +155,7 @@ export const StyledPeopleRow = styled(TableRow)<{
       padding-block: 16px;
       padding-inline: 12px 0;
     }
+
     .table-container_row-loader {
       border-bottom: unset;
       padding-inline-start: 7px;
@@ -193,11 +189,16 @@ export const StyledPeopleRow = styled(TableRow)<{
     }
   }
 
+  &.hideColumns {
+    .groups-combobox,
+    .type-combobox {
+      visibility: hidden;
+      opacity: 0;
+    }
+  }
+
   .groups-combobox,
   .type-combobox {
-    visibility: ${(props) => (props.hideColumns ? "hidden" : "visible")};
-    opacity: ${(props) => (props.hideColumns ? 0 : 1)};
-
     & > div {
       width: auto;
       max-width: fit-content;
@@ -209,11 +210,7 @@ export const StyledPeopleRow = styled(TableRow)<{
   .room-combobox {
     padding-inline-start: 8px;
     overflow: hidden;
-  }
 
-  .type-combobox,
-  .groups-combobox,
-  .room-combobox {
     .combo-button {
       padding-inline-start: 8px;
       margin-inline-start: -8px;
@@ -244,22 +241,21 @@ export const StyledPeopleRow = styled(TableRow)<{
 
   .me-label {
     padding-inline-start: 4px;
-    color: ${(props) => props.theme.infoPanel.members.meLabelColor};
+    color: var(--info-panel-me-label-color);
   }
-`;
+}
 
-export const StyledGroupsComboBox = styled(ComboBox)`
+.styledGroupsComboBox {
   .combo-button {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 4px;
     padding: 4px 8px;
-
     border-radius: 3px;
   }
 
   .dropdown {
     z-index: 105;
   }
-`;
+}

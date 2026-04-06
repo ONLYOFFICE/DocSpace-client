@@ -25,124 +25,19 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 import { ReactSVG } from "react-svg";
 import PropTypes from "prop-types";
-import styled, { css } from "styled-components";
 
 import { Badge } from "@docspace/ui-kit/components/badge";
 import { Link } from "@docspace/ui-kit/components/link";
 import { Text } from "@docspace/ui-kit/components/text";
-import {
-  commonIconsStyles,
-  injectDefaultTheme,
-  tablet,
-} from "@docspace/shared/utils";
 
 import MenuIcon from "PUBLIC_DIR/images/menu.react.svg";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
-const NavItemSeparator = styled.div.attrs(injectDefaultTheme)`
-  border-bottom: 1px ${(props) => (props.dashed ? "dashed" : "solid")}
-    ${(props) => props.theme.navItem.separatorColor};
-  margin: 0 16px;
-`;
-
-const NavItemWrapper = styled(Link).attrs(injectDefaultTheme)`
-  display: flex;
-  min-width: 48px;
-  min-height: 50px;
-  align-items: center;
-  padding-block: 0;
-  padding-inline: 20px 16px;
-  cursor: pointer;
-  position: relative;
-  box-sizing: border-box;
-
-  ${(props) =>
-    !props.noHover &&
-    css`
-      &:hover {
-        background: ${({ theme }) => theme.navItem.wrapper.hoverBackground};
-        text-decoration: none;
-      }
-    `}
-
-  .injected-svg {
-    margin-top: 3px;
-    path {
-      fill: ${(props) =>
-        props.active
-          ? props.theme.navItem.activeColor
-          : props.theme.navItem.baseColor};
-    }
-  }
-
-  ${(props) =>
-    props.iconUrl &&
-    css`
-      svg {
-        path {
-          fill: ${({ theme, active }) =>
-            active ? theme.navItem.activeColor : theme.navItem.baseColor};
-        }
-      }
-    `}
-
-  @media ${tablet} {
-    padding-block: 0;
-    padding-inline: 16px;
-  }
-`;
-
-const NavItemLabel = styled(Text).attrs(injectDefaultTheme)`
-  margin-block: 0;
-  margin-inline: 16px auto;
-
-  display: ${(props) => (props.opened ? "block" : "none")};
-  color: ${(props) =>
-    props.active
-      ? props.theme.navItem.activeColor
-      : props.theme.navItem.baseColor};
-`;
-
-const badgeCss = css`
-  position: absolute;
-  top: 2px;
-
-  inset-inline-end: 4px;
-
-  overflow: inherit;
-`;
-
-const NavItemBadge = styled(Badge)`
-  ${(props) => (props.opened ? "" : badgeCss)}
-`;
-
-const VersionBadge = styled.div`
-  background-color: ${globalColors.lightStatusPositive};
-  border-radius: 5px;
-  color: ${globalColors.white};
-  display: inline-block;
-  font-size: 10px;
-  line-height: 8px;
-  padding: 3px 6px;
-  position: absolute;
-  top: -5px;
-  inset-inline-start: 10px;
-`;
-
-const StyledMenuIcon = styled(MenuIcon).attrs(injectDefaultTheme)`
-  ${commonIconsStyles}
-  path {
-    fill: ${(props) =>
-      props.active
-        ? props.theme.navItem.activeColor
-        : props.theme.navItem.baseColor};
-  }
-`;
+import styles from "./nav-item.module.scss";
 
 const NavItem = React.memo((props) => {
-  // console.log("NavItem render");
   const {
     separator,
     opened,
@@ -155,45 +50,57 @@ const NavItem = React.memo((props) => {
     onBadgeClick,
     url,
     noHover,
+    dashed,
     ...rest
   } = props;
 
   return separator ? (
-    <NavItemSeparator {...rest} />
+    <div
+      className={classNames(styles.navItemSeparator, { [styles.dashed]: dashed })}
+      {...rest}
+    />
   ) : (
-    <NavItemWrapper
-      noHover={noHover}
-      iconUrl={iconUrl}
+    <Link
+      className={classNames(styles.navItemWrapper, {
+        [styles.active]: active,
+        [styles.noHover]: noHover,
+      })}
+      data-icon-url={iconUrl || undefined}
       href={url}
       onClick={onClick}
-      active={active}
       {...rest}
     >
       {iconUrl ? (
         <ReactSVG src={iconUrl} beforeInjection={() => {}} />
       ) : (
         <>
-          {iconName === "MenuIcon" ? <VersionBadge>BETA</VersionBadge> : null}
-          <StyledMenuIcon active={active} size="big" />
+          {iconName === "MenuIcon" ? (
+            <div className={styles.versionBadge}>BETA</div>
+          ) : null}
+          <MenuIcon
+            className={classNames(styles.menuIcon, { [styles.active]: active })}
+          />
         </>
       )}
       {children ? (
-        <NavItemLabel
-          opened={opened}
-          active={active}
+        <Text
+          className={classNames(styles.navItemLabel, {
+            [styles.opened]: opened,
+            [styles.active]: active,
+          })}
           fontSize="16px"
           fontWeight="bold"
           truncate
         >
           {children}
-        </NavItemLabel>
+        </Text>
       ) : null}
-      <NavItemBadge
-        opened={opened}
+      <Badge
+        className={classNames(styles.navItemBadge, { [styles.opened]: opened })}
         label={badgeNumber}
         onClick={onBadgeClick}
       />
-    </NavItemWrapper>
+    </Link>
   );
 });
 

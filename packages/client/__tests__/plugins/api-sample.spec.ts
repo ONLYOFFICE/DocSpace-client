@@ -157,7 +157,7 @@ test.describe("API Sample Plugin — room creation via IApiPlugin", () => {
     );
 
     await openProfileMenu(page);
-    await page.locator("#api-sample-create-room").click();
+    await page.getByTestId("api-sample-create-room").click();
 
     const req = await postRequest;
 
@@ -181,7 +181,7 @@ test.describe("API Sample Plugin — room creation via IApiPlugin", () => {
     await pluginLoaded;
 
     await openProfileMenu(page);
-    await page.locator("#api-sample-create-room").click();
+    await page.getByTestId("api-sample-create-room").click();
 
     const toast = page.getByTestId("toast-content");
     await expect(toast).toBeVisible();
@@ -204,7 +204,7 @@ test.describe("API Sample Plugin — room creation via IApiPlugin", () => {
     await pluginLoaded;
 
     await openProfileMenu(page);
-    await page.locator("#api-sample-create-room").click();
+    await page.getByTestId("api-sample-create-room").click();
 
     const toast = page.getByTestId("toast-content");
     await expect(toast).toBeVisible();

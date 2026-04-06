@@ -25,55 +25,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled from "styled-components";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { RowContent } from "@docspace/ui-kit/components/rows";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 
-import { isMobile, tablet } from "@docspace/shared/utils";
+import { isMobile } from "@docspace/shared/utils";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import StatusBadge from "../../StatusBadge";
 
-const StyledRowContent = styled(RowContent)`
-  display: flex;
-  padding-bottom: 10px;
-
-  .row-main-container-wrapper {
-    @media ${tablet} {
-      width: 100%;
-    }
-  }
-
-  .rowMainContainer {
-    height: 100%;
-    width: 100%;
-  }
-
-  .mainIcons {
-    min-width: 76px;
-    display: flex;
-  }
-`;
-
-const ContentWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-items: center;
-`;
-
-const ToggleButtonWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  margin-inline-start: -52px;
-`;
-
-const FlexWrapper = styled.div`
-  display: flex;
-`;
+import styles from "../WebhooksTable.styled.module.scss";
 
 export const WebhookRowContent = ({
   sectionWidth,
@@ -83,27 +44,27 @@ export const WebhookRowContent = ({
   handleToggleEnabled,
 }) => {
   return (
-    <StyledRowContent sectionWidth={sectionWidth}>
-      <ContentWrapper>
-        <FlexWrapper>
+    <RowContent className={styles.styledRowContent} sectionWidth={sectionWidth}>
+      <div className={styles.contentWrapper}>
+        <div className={styles.flexWrapper}>
           <Text
             fontWeight={600}
             fontSize="14px"
-            style={{ marginInlineEnd: "8px" }}
+            className={styles.webhookName}
           >
             {webhook.name}
           </Text>
           <StatusBadge status={webhook.status} />
-        </FlexWrapper>
+        </div>
 
         {!isMobile() ? (
           <Text fontWeight={600} fontSize="12px" color={globalColors.gray}>
             {webhook.uri}
           </Text>
         ) : null}
-      </ContentWrapper>
+      </div>
 
-      <ToggleButtonWrapper>
+      <div className={styles.toggleButtonWrapper}>
         <ToggleButton
           dataTestId={`toggle_button_${webhook.name}`}
           className="toggle toggleButton"
@@ -112,7 +73,7 @@ export const WebhookRowContent = ({
           isDisabled={isDisabled}
           onChange={handleToggleEnabled}
         />
-      </ToggleButtonWrapper>
-    </StyledRowContent>
+      </div>
+    </RowContent>
   );
 };

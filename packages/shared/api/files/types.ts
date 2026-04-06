@@ -33,6 +33,7 @@ import type {
   EmployeeActivationStatus,
   EmployeeStatus,
   FileFillingFormStatus,
+  FileOperationStatus,
   FileStatus,
   FileType,
   FillingFormStatusHistory,
@@ -296,6 +297,7 @@ export type TOperation = {
   id: string;
   processed: string;
   progress: number;
+  status?: FileOperationStatus;
   url?: string;
   files?: TFile[];
 };

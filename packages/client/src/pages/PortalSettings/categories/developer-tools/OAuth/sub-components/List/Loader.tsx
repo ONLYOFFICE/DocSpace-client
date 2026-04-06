@@ -33,8 +33,8 @@ import { RowsSkeleton } from "@docspace/ui-kit/components/rows";
 
 import { ViewAsType } from "SRC_DIR/store/OAuthStore";
 
-import { OAuthContainer } from "../../OAuth.styled";
-import { StyledContainer } from "./List.styled";
+import oAuthStyles from "../../OAuth.styled.module.scss";
+import listStyles from "./List.styled.module.scss";
 
 const OAuthLoader = ({
 	viewAs,
@@ -46,8 +46,8 @@ const OAuthLoader = ({
 	// const buttonHeight = currentDeviceType !== "desktop" ? "40px" : "32px";
 
 	return (
-		<OAuthContainer>
-			<StyledContainer>
+		<div className={oAuthStyles.oAuthContainer}>
+			<div className={listStyles.styledContainer}>
 				{/* <RectangleSkeleton className="description" width="100%" height="16px" />
         <RectangleSkeleton
           className="add-button"
@@ -59,8 +59,8 @@ const OAuthLoader = ({
 				) : (
 					<RowsSkeleton style={{}} />
 				)}
-			</StyledContainer>
-		</OAuthContainer>
+			</div>
+		</div>
 	);
 };
 

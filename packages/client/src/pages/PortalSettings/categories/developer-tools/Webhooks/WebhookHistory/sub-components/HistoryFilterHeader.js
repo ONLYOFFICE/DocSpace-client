@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useEffect, useTransition, Suspense } from "react";
-import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useParams } from "react-router";
 
@@ -33,80 +32,12 @@ import FilterReactSvrUrl from "PUBLIC_DIR/images/filter.react.svg?url";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Text } from "@docspace/ui-kit/components/text";
 
-import { tablet, mobile, injectDefaultTheme } from "@docspace/shared/utils";
 import FilterDialog from "./FilterDialog";
 import StatusBar from "./StatusBar";
 
 import { HistoryHeaderLoader } from "../../sub-components/Loaders/HistoryHeaderLoader";
 
-const ListHeader = styled.header`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  @media ${tablet} {
-    margin-top: -5px;
-  }
-  @media ${mobile} {
-    margin-top: 8px;
-  }
-`;
-
-const ListHeading = styled(Text)`
-  line-height: 22px;
-  font-weight: 700;
-  margin: 0;
-
-  overflow: hidden;
-  text-overflow: ellipsis;
-`;
-
-const FilterButton = styled.div.attrs(injectDefaultTheme)`
-  position: relative;
-  display: flex;
-  box-sizing: border-box;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-
-  box-sizing: border-box;
-
-  flex-shrink: 0;
-
-  width: 32px;
-  height: 32px;
-
-  z-index: ${(props) => (props.isGroupMenuVisible ? 199 : 201)};
-
-  border: ${(props) => props.theme.client.settings.webhooks.filterBorder};
-  border-radius: 3px;
-  cursor: pointer;
-
-  svg {
-    cursor: pointer;
-  }
-
-  :hover {
-    border-color: ${(props) => props.theme.client.settings.webhooks.color};
-    svg {
-      path {
-        fill: ${(props) => props.theme.iconButton.hoverColor};
-      }
-    }
-  }
-
-  span {
-    z-index: 203;
-    width: 8px;
-    height: 8px;
-    background-color: ${(props) =>
-			props.theme.client.settings.webhooks.spanBackground};
-    border-radius: 50%;
-    position: absolute;
-    bottom: -2px;
-    inset-inline-end: -2px;
-  }
-`;
+import styles from "../WebhookHistory.styled.module.scss";
 
 const HistoryFilterHeader = (props) => {
 	const {
@@ -144,21 +75,26 @@ const HistoryFilterHeader = (props) => {
 	return (
 		<div>
 			<Suspense fallback={<HistoryHeaderLoader />}>
-				<ListHeader>
-					<ListHeading title={configName} fontWeight={700} fontSize="16px">
+				<header className={styles.listHeader}>
+					<Text
+						className={styles.listHeading}
+						title={configName}
+						fontWeight={700}
+						fontSize="16px"
+					>
 						{configName}
-					</ListHeading>
+					</Text>
 
-					<FilterButton
+					<div
 						id="filter-button"
+						className={`${styles.filterButton}${isGroupMenuVisible ? ` ${styles.groupMenuVisible}` : ""}`}
 						onClick={openFiltersModal}
-						isGroupMenuVisible={isGroupMenuVisible}
 						data-testid="webhook_filter_button"
 					>
 						<IconButton iconName={FilterReactSvrUrl} size={16} />
 						<span hidden={historyFilters === null} />
-					</FilterButton>
-				</ListHeader>
+					</div>
+				</header>
 			</Suspense>
 			{historyFilters !== null ? (
 				<StatusBar applyFilters={applyFilters} />

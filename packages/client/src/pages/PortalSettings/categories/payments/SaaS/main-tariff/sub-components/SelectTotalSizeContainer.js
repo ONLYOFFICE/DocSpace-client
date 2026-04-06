@@ -25,28 +25,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { Text } from "@docspace/ui-kit/components/text";
 import { inject, observer } from "mobx-react";
 import { getConvertedSize } from "@docspace/shared/utils/common";
 
-const StyledBody = styled.div`
-  .select-total-size_title {
-    margin-bottom: 8px;
-    margin-inline: auto;
-
-    color: ${(props) =>
-      props.isDisabled
-        ? props.theme.client.settings.payment.priceContainer.disableColor
-        : props.theme.client.settings.payment.priceContainer.featureTextColor};
-  }
-`;
+import styles from "../styles/MainTariff.module.scss";
 
 const SelectTotalSizeContainer = ({
   allowedStorageSizeByQuota,
   usedTotalStorageSizeTitle,
-  theme,
   isNeedPlusSign,
 }) => {
   const { t } = useTranslation(["Payments", "Common"]);
@@ -54,27 +42,25 @@ const SelectTotalSizeContainer = ({
   const convertedSize = getConvertedSize(t, allowedStorageSizeByQuota);
 
   return (
-    <StyledBody theme={theme}>
+    <div className={styles.selectTotalSizeBody}>
       <Text
         textAlign="center"
         fontWeight={600}
         fontSize="11px"
-        className="select-total-size_title"
-        color={theme.client.settings.payment.storageSizeTitle}
+        className={styles.selectTotalSizeTitle}
+        style={{ color: "var(--payment-storage-size-title)" }}
       >
         {usedTotalStorageSizeTitle}: {convertedSize} {isNeedPlusSign ? "+" : ""}
       </Text>
-    </StyledBody>
+    </div>
   );
 };
 
-export default inject(({ settingsStore, paymentQuotasStore, paymentStore }) => {
+export default inject(({ paymentQuotasStore, paymentStore }) => {
   const { usedTotalStorageSizeTitle } = paymentQuotasStore;
-  const { theme } = settingsStore;
   const { allowedStorageSizeByQuota } = paymentStore;
 
   return {
-    theme,
     usedTotalStorageSizeTitle,
     allowedStorageSizeByQuota,
   };

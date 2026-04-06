@@ -36,7 +36,7 @@ import { sendSuspendPortalEmail } from "@docspace/shared/api/portal";
 import { isDesktop } from "@docspace/shared/utils";
 import { EmployeeActivationStatus } from "@docspace/shared/enums";
 import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";
-import { MainContainer, ButtonWrapper } from "./StyledDeleteData";
+import styles from "./StyledDeleteData.module.scss";
 
 const PortalDeactivation = (props) => {
   const { t, tReady, owner, currentColorScheme, sendActivationLink } = props;
@@ -75,18 +75,18 @@ const PortalDeactivation = (props) => {
     owner?.activationStatus === EmployeeActivationStatus.NotActivated;
 
   return (
-    <MainContainer>
-      <Text fontSize="13px" className="description">
+    <div className={styles.mainContainer}>
+      <Text fontSize="13px" className={styles.description}>
         {t("PortalDeactivationDescription")}
       </Text>
-      <Text className="helper">
+      <Text className={styles.helper}>
         {t("PortalDeactivationHelper", {
           productName: t("Common:ProductName"),
         })}
       </Text>
-      <ButtonWrapper>
+      <div className={styles.buttonWrapper}>
         <Button
-          className="deactivate-button button"
+          className={`deactivate-button ${styles.button}`}
           label={t("Common:Deactivate")}
           primary
           size={isDesktopView ? "small" : "normal"}
@@ -101,7 +101,7 @@ const PortalDeactivation = (props) => {
               productName: t("Common:ProductName"),
             })}
             <Link
-              className="request-again-link"
+              className={styles.requestAgainLink}
               color={currentColorScheme?.main?.accent}
               fontSize="12px"
               fontWeight="400"
@@ -112,8 +112,8 @@ const PortalDeactivation = (props) => {
             </Link>
           </Text>
         ) : null}
-      </ButtonWrapper>
-    </MainContainer>
+      </div>
+    </div>
   );
 };
 

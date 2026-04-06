@@ -26,46 +26,19 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import styled from "styled-components";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { RowContent } from "@docspace/ui-kit/components/rows";
 import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 
-import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";
-
-const StyledRowContent = styled(RowContent)`
-  padding-bottom: 10px;
-  .user-container-wrapper {
-    p {
-      color: ${(props) =>
-        props.theme.client.settings.security.loginHistory.nameColor};
-    }
-  }
-  .mainIcons {
-    p {
-      color: ${(props) =>
-        props.theme.client.settings.security.loginHistory.sideColor};
-    }
-  }
-  .row-main-container-wrapper {
-    display: flex;
-    justify-content: flex-start;
-  }
-
-  .date-text {
-    color: ${(props) =>
-      props.theme.client.settings.security.loginHistory.textColor};
-  }
-
-  ${(props) => props.isSettingNotPaid && UnavailableStyles}
-`;
+import styles from "./HistoryContent.module.scss";
 
 const HistoryContent = ({ sectionWidth, item, locale, theme }) => {
   const dateStr = getCorrectDate(locale, item.date);
 
   return (
-    <StyledRowContent
+    <RowContent
+      className={styles["row-content"]}
       sideColor={theme.client.settings.security.loginHistory.sideColor}
       nameColor={theme.client.settings.security.loginHistory.nameColor}
       sectionWidth={sectionWidth}
@@ -93,7 +66,7 @@ const HistoryContent = ({ sectionWidth, item, locale, theme }) => {
       >
         {item.action}
       </Text>
-    </StyledRowContent>
+    </RowContent>
   );
 };
 

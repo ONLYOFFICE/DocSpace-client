@@ -34,7 +34,7 @@ import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import OAuthStore from "SRC_DIR/store/OAuthStore";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
-import { OAuthContainer } from "./OAuth.styled";
+import styles from "./OAuth.styled.module.scss";
 import { OAuthProps } from "./OAuth.types";
 
 import InfoDialog from "./sub-components/InfoDialog";
@@ -77,7 +77,7 @@ const OAuth = ({
   }, [t]);
 
   return (
-    <OAuthContainer>
+    <div className={styles.oAuthContainer}>
       {/* {false ? (
         <OAuthLoader viewAs={viewAs} currentDeviceType={currentDeviceType} />
       ) : isEmptyClientList ? (
@@ -103,7 +103,7 @@ const OAuth = ({
       {revokeDeveloperTokenDialogVisible ? (
         <RevokeDeveloperTokenDialog />
       ) : null}
-    </OAuthContainer>
+    </div>
   );
 };
 

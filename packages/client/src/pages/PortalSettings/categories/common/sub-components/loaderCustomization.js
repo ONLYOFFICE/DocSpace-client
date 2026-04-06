@@ -25,152 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState, useEffect } from "react";
-import styled, { css } from "styled-components";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import { desktop, mobileMore } from "@docspace/shared/utils";
 
-const tabletStyles = css`
-  .header {
-    display: ${(props) => !props.dnsSettings && "block"};
-    width: ${(props) =>
-      props.lngTZSettings
-        ? "283px"
-        : props.welcomePage
-          ? "201px"
-          : props.portalRenaming
-            ? "150px"
-            : props.deepLink || props.adManagement || props.aiServicesManagement
-              ? "250px"
-              : 0};
-    padding-bottom: 16px;
-  }
-
-  .description {
-    display: none;
-  }
-
-  .title {
-    display: block;
-    width: ${(props) =>
-      props.lngTZSettings
-        ? "61px"
-        : props.welcomePage
-          ? "28px"
-          : props.portalRenaming
-            ? "109px"
-            : 0};
-    padding-bottom: 4px;
-  }
-
-  .combo-box {
-    display: block;
-    width: 350px;
-  }
-
-  .field-container {
-    display: block;
-    width: 350px;
-  }
-
-  .save-cancel-buttons {
-    display: block;
-    position: static;
-    width: ${(props) => (props.welcomePage ? "274px" : "197px")};
-    padding: 8px 0 0;
-  }
-
-  .dns-description {
-    width: 122px;
-    padding-bottom: 12px;
-  }
-
-  .deep-link-description {
-    width: 400px;
-    padding-bottom: 12px;
-  }
-
-  .dns-field {
-    width: 350px;
-    padding-bottom: 12px;
-  }
-`;
-
-const StyledLoader = styled.div`
-  .header {
-    display: none;
-  }
-
-  .description {
-    width: 100%;
-    padding-bottom: 12px;
-  }
-
-  .title {
-    width: ${(props) => (props.portalRenaming ? "109px" : "61px")};
-  }
-
-  .title-long {
-    display: block;
-    width: 64px;
-    padding-bottom: 4px;
-  }
-
-  .combo-box {
-    display: block;
-    width: 100%;
-    padding-bottom: 16px;
-  }
-
-  .field-container {
-    width: 100%;
-    padding-bottom: 12px;
-  }
-
-  .save-cancel-buttons {
-    display: block;
-    position: absolute;
-    bottom: 0;
-    width: calc(100% - 32px);
-    inset-inline-start: 0;
-    padding-block: 0 16px;
-    padding-inline: 16px 0;
-  }
-
-  .flex {
-    display: flex;
-    align-items: center;
-    padding-bottom: 8px;
-  }
-
-  .description {
-    padding-bottom: 8px;
-  }
-
-  .padding-right {
-    padding-inline-end: 8px;
-  }
-
-  .dns-field {
-    height: 32px;
-  }
-
-  .checkboxs {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    width: 50px;
-  }
-
-  @media ${mobileMore} {
-    ${tabletStyles}
-  }
-
-  @media ${desktop} {
-    .save-cancel-buttons {
-      width: ${(props) => (props.welcomePage ? "264px" : "192px")};
-    }
-  }
-`;
+import styles from "./loaderCustomization.module.scss";
 
 const LoaderCustomization = (props) => {
   const {
@@ -209,50 +66,67 @@ const LoaderCustomization = (props) => {
   const heightSaveCancelButtons = isDesktopView ? "40px" : "32px";
   const heightDnsDescription = isMobileView ? "40px" : "22px";
 
+  const loaderStyle = {
+    "--loader-header-display": dnsSettings ? "none" : "block",
+    "--loader-header-width": lngTZSettings
+      ? "283px"
+      : welcomePage
+        ? "201px"
+        : portalRenaming
+          ? "150px"
+          : deepLink || adManagement || aiServicesManagement
+            ? "250px"
+            : "0",
+    "--loader-title-width-mobile": portalRenaming ? "109px" : "61px",
+    "--loader-title-width-tablet": lngTZSettings
+      ? "61px"
+      : welcomePage
+        ? "28px"
+        : portalRenaming
+          ? "109px"
+          : "0",
+    "--loader-save-cancel-width-tablet": welcomePage ? "274px" : "197px",
+    "--loader-save-cancel-width-desktop": welcomePage ? "264px" : "192px",
+  };
+
   return (
-    <StyledLoader
-      lngTZSettings={lngTZSettings}
-      portalRenaming={portalRenaming}
-      welcomePage={welcomePage}
-      dnsSettings={dnsSettings}
-      deepLink={deepLink}
-      adManagement={adManagement}
-      aiServicesManagement={aiServicesManagement}
-      className="category-item-wrapper"
+    <div
+      className={`${styles.loader} category-item-wrapper`}
+      style={loaderStyle}
     >
-      <RectangleSkeleton height="22px" className="header" />
+      <RectangleSkeleton height="22px" className={styles.header} />
 
       {portalRenaming ? (
-        <RectangleSkeleton height="80px" className="description" />
+        <RectangleSkeleton height="80px" className={styles.description} />
       ) : null}
 
       {dnsSettings ? (
         <>
           <RectangleSkeleton
-            className="dns-description"
+            className={styles.dnsDescription}
             height={heightDnsDescription}
           />
-          <div className="flex">
+          <div className={styles.flex}>
             <RectangleSkeleton
               height="16px"
               width="16px"
-              className="padding-right"
+              className={styles.paddingRight}
             />
             <RectangleSkeleton height="20px" width="135px" />
           </div>
-          <RectangleSkeleton className="dns-field" />
+          <RectangleSkeleton className={styles.dnsField} />
         </>
       ) : !deepLink && !adManagement && !aiServicesManagement ? (
         <>
-          <RectangleSkeleton height="20px" className="title" />
-          <RectangleSkeleton height="32px" className="combo-box" />
+          <RectangleSkeleton height="20px" className={styles.title} />
+          <RectangleSkeleton height="32px" className={styles.comboBox} />
         </>
       ) : null}
 
       {deepLink || adManagement || aiServicesManagement ? (
         <>
-          <RectangleSkeleton className="description" />
-          <div className="checkboxs">
+          <RectangleSkeleton className={styles.description} />
+          <div className={styles.checkboxs}>
             <RectangleSkeleton height="20px" />
             <RectangleSkeleton height="20px" />
           </div>
@@ -261,16 +135,16 @@ const LoaderCustomization = (props) => {
 
       {lngTZSettings ? (
         <>
-          <RectangleSkeleton height="20px" className="title-long" />
-          <RectangleSkeleton height="32px" className="combo-box" />
+          <RectangleSkeleton height="20px" className={styles.titleLong} />
+          <RectangleSkeleton height="32px" className={styles.comboBox} />
         </>
       ) : null}
 
       <RectangleSkeleton
         height={heightSaveCancelButtons}
-        className="save-cancel-buttons"
+        className={styles.saveCancelButtons}
       />
-    </StyledLoader>
+    </div>
   );
 };
 

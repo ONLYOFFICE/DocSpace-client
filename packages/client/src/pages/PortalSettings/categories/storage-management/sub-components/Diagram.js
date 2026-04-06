@@ -31,11 +31,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 
 import { getConvertedSize } from "@docspace/shared/utils/common";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
-import {
-  StyledDiagramComponent,
-  StyledFolderTagColor,
-  StyledFolderTagSection,
-} from "../StyledComponent";
+import styles from "../StyledComponent.module.scss";
 
 const calculateSize = (size, common) => {
   if (common === -1) return 0;
@@ -111,14 +107,24 @@ const Diagram = (props) => {
   const hidingSlider = standalone && tenantCustomQuota === -1;
 
   return (
-    <StyledDiagramComponent maxWidth={maxWidth}>
+    <div
+      className={styles.diagramComponent}
+      style={{ "--diagram-slider-max-width": `${maxWidth}px` }}
+    >
       {!hidingSlider ? (
         <div className="diagram_slider">
           {elementsTags.map((tag) => (
-            <StyledFolderTagSection
-              width={tag.percentageSize}
+            <div
               key={tag.name}
-              color={tag.color}
+              className={styles.folderTagSection}
+              style={{
+                background: tag.color,
+                width: `${tag.percentageSize}%`,
+                borderInlineEnd:
+                  tag.percentageSize !== 0
+                    ? "1px solid var(--settings-payment-bg-color)"
+                    : undefined,
+              }}
             />
           ))}
         </div>
@@ -126,13 +132,16 @@ const Diagram = (props) => {
       <div className="diagram_description">
         {elementsTags.map((tag) => (
           <div className="diagram_folder-tag" key={tag.name}>
-            <StyledFolderTagColor color={tag.color} />
+            <div
+              className={styles.folderTagColor}
+              style={{ background: tag.color }}
+            />
             <Text fontWeight={600}>{tag.name}</Text>:
             <Text className="tag_text">{tag.size}</Text>
           </div>
         ))}
       </div>
-    </StyledDiagramComponent>
+    </div>
   );
 };
 

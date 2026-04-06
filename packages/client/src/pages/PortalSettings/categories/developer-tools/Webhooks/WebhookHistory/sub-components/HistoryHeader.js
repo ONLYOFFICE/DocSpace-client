@@ -26,7 +26,6 @@
 
 import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import styled from "styled-components";
 import { useNavigate, useParams, useLocation } from "react-router";
 import { inject, observer } from "mobx-react";
 
@@ -35,14 +34,8 @@ import RetryIcon from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 
 import { Heading } from "@docspace/ui-kit/components/heading";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
-// import { Hint } from "../../styled-components";
 
-import {
-  tablet,
-  mobile,
-  isMobile,
-  injectDefaultTheme,
-} from "@docspace/shared/utils";
+import { isMobile } from "@docspace/shared/utils";
 
 import { TableGroupMenu } from "@docspace/ui-kit/components/table";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
@@ -57,90 +50,7 @@ import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { retryWebhooks } from "@docspace/shared/api/settings";
 import { formatFilters } from "SRC_DIR/helpers/webhooks";
 
-const HeaderContainer = styled.div.attrs(injectDefaultTheme)`
-  position: sticky;
-  top: 0;
-  background-color: ${(props) => props.theme.backgroundColor};
-  z-index: 201;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  min-height: 53px;
-  flex-wrap: wrap;
-
-  @media ${mobile} {
-    margin-inline: -14px;
-    padding-inline: 14px;
-  }
-
-  .arrow-button {
-    margin-inline-end: 17px;
-
-    @media ${tablet} {
-      padding-block: 8px;
-      padding-inline: 8px 0;
-      margin-inline-start: -8px;
-    }
-
-    @media ${mobile} {
-      margin-inline-end: 13px;
-    }
-
-    svg {
-      ${({ theme }) =>
-        theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
-    }
-  }
-
-  .headline {
-    font-size: 18px;
-    margin-inline-end: 16px;
-
-    @media ${tablet} {
-      font-size: 21px;
-    }
-    @media ${mobile} {
-      font-size: 18px;
-    }
-  }
-
-  .table-container_group-menu {
-    margin-block: 0;
-    margin-inline: -20px 0;
-
-    -webkit-tap-highlight-color: ${globalColors.tapHighlight};
-
-    flex: 0 0 auto;
-
-    width: calc(100% + 40px);
-    height: 69px;
-
-    .combo-button_selected-icon {
-      svg {
-        path {
-          fill: ${(props) =>
-            props.isDisabled ? globalColors.grayStrong : props.theme.color};
-        }
-      }
-    }
-
-    @media ${tablet} {
-      height: 60px;
-      margin-block: 0;
-      margin-inline: -16px 0;
-      width: calc(100% + 32px);
-      top: 5px;
-    }
-    @media ${mobile} {
-      position: absolute;
-      height: 48px;
-      margin-block: -9px 0;
-      margin-inline: -15px 0;
-      width: calc(100% + 2px);
-      top: 10px;
-    }
-  }
-`;
+import styles from "../WebhookHistory.styled.module.scss";
 
 const NavigationHeader = ({ t, onBack }) => (
   <>
@@ -274,7 +184,10 @@ const HistoryHeader = (props) => {
   }, []);
 
   return (
-    <HeaderContainer isDisabled={isRetryPending}>
+    <div
+      className={styles.headerContainer}
+      data-disabled={isRetryPending || undefined}
+    >
       {isMobile() ? (
         <>
           {isGroupMenuVisible ? (
@@ -305,11 +218,11 @@ const HistoryHeader = (props) => {
       {isPendingVisible
         ? createPortal(<FloatingButton icon="refresh" />, document.body)
         : null}
-    </HeaderContainer>
+    </div>
   );
 };
 
-export default inject(({ webhooksStore, settingsStore }) => {
+export default inject(({ webhooksStore }) => {
   const {
     isGroupMenuVisible,
     checkAllIds,
@@ -324,8 +237,6 @@ export default inject(({ webhooksStore, settingsStore }) => {
     setRetryPendingTrue,
   } = webhooksStore;
 
-  const { theme } = settingsStore;
-
   return {
     isGroupMenuVisible,
     checkAllIds,
@@ -334,7 +245,6 @@ export default inject(({ webhooksStore, settingsStore }) => {
     isIndeterminate,
     areAllIdsChecked,
     fetchHistoryItems,
-    theme,
     historyFilters,
     isRetryPending,
     setRetryPendingFalse,

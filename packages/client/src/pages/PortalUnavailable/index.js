@@ -27,7 +27,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Text } from "@docspace/ui-kit/components/text";
-import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 
 import { Button } from "@docspace/ui-kit/components/button";
@@ -35,30 +34,7 @@ import RecoverAccessModalDialog from "@docspace/shared/dialogs/recover-access-mo
 import ErrorContainer from "@docspace/ui-kit/components/error-container/ErrorContainer";
 import { Link } from "@docspace/ui-kit/components/link";
 
-const StyledBodyContent = styled.div`
-  max-width: 480px;
-  text-align: center;
-  button {
-    margin-top: 24px;
-    max-width: 320px;
-  }
-`;
-const StyledBody = styled.div`
-  width: 100%;
-
-  .portal-unavailable_container {
-    .portal-unavailable_contact-text {
-      display: block;
-      text-decoration: underline;
-      cursor: pointer;
-      margin-top: 26px;
-    }
-  }
-
-  .portal-unavailable_text {
-    color: ${(props) => props.theme.portalUnavailable.textDescription};
-  }
-`;
+import styles from "./PortalUnavailable.module.scss";
 
 const PortalUnavailable = ({ onLogoutClick }) => {
   const { t } = useTranslation(["Errors", "PortalUnavailable", "Common"]);
@@ -74,7 +50,7 @@ const PortalUnavailable = ({ onLogoutClick }) => {
     setIsVisible(false);
   };
   return (
-    <StyledBody>
+    <div className={styles.body}>
       <RecoverAccessModalDialog
         visible={isVisible}
         t={t}
@@ -90,7 +66,7 @@ const PortalUnavailable = ({ onLogoutClick }) => {
           productName: t("Common:ProductName"),
         })}
       >
-        <StyledBodyContent>
+        <div className={styles.bodyContent}>
           <Text textAlign="center" className="portal-unavailable_text">
             {t("PortalUnavailable:AccessingProblem", {
               productName: t("Common:ProductName"),
@@ -116,9 +92,9 @@ const PortalUnavailable = ({ onLogoutClick }) => {
               productName: t("Common:ProductName"),
             })}
           </Link>
-        </StyledBodyContent>
+        </div>
       </ErrorContainer>
-    </StyledBody>
+    </div>
   );
 };
 

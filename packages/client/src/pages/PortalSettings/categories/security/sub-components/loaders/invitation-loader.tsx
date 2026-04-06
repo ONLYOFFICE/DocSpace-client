@@ -24,68 +24,35 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
-const StyledLoader = styled.div`
-  .description {
-    margin-bottom: 12px;
-  }
-
-  .setting {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-direction: row;
-
-    margin-bottom: 4px;
-  }
-
-  .checkbox {
-    margin-top: 2px;
-  }
-
-  .description-setting {
-    margin-left: 24px;
-    width: calc(100% - 24px);
-  }
-
-  .setting-container {
-    margin-bottom: 12px;
-  }
-
-  .buttons {
-    width: calc(100% - 16px);
-    position: absolute;
-    bottom: 16px;
-  }
-`;
+import styles from "./invitation-loader.module.scss";
 
 const InvitationLoader = () => {
   return (
-    <StyledLoader>
-      <RectangleSkeleton className="description" height="80px" />
+    <div className={styles.loader}>
+      <RectangleSkeleton className={styles.description} height="80px" />
 
-      <div className="setting-container">
-        <div className="setting">
-          <RectangleSkeleton className="checkbox" width="16px" height="16px" />
+      <div className={styles["setting-container"]}>
+        <div className={styles.setting}>
+          <RectangleSkeleton className={styles.checkbox} width="16px" height="16px" />
           <RectangleSkeleton width="243px" height="20px" />
         </div>
 
-        <RectangleSkeleton className="description-setting" height="64px" />
+        <RectangleSkeleton className={styles["description-setting"]} height="64px" />
       </div>
 
       <div>
-        <div className="setting">
-          <RectangleSkeleton className="checkbox" width="16px" height="16px" />
+        <div className={styles.setting}>
+          <RectangleSkeleton className={styles.checkbox} width="16px" height="16px" />
           <RectangleSkeleton width="129px" height="20px" />
         </div>
 
-        <RectangleSkeleton className="description-setting" height="32px" />
+        <RectangleSkeleton className={styles["description-setting"]} height="32px" />
       </div>
 
-      <RectangleSkeleton className="buttons" height="40px" />
-    </StyledLoader>
+      <RectangleSkeleton className={styles.buttons} height="40px" />
+    </div>
   );
 };
 

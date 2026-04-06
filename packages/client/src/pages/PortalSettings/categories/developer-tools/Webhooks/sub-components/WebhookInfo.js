@@ -25,23 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled from "styled-components";
 import { inject, observer } from "mobx-react";
-
-import { injectDefaultTheme } from "@docspace/shared/utils";
 
 import { Text } from "@docspace/ui-kit/components/text";
 
 import { useTranslation } from "react-i18next";
 import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
 
-const InfoText = styled(Text).attrs(injectDefaultTheme)`
-  max-width: 660px;
-  white-space: break-spaces;
-  margin: 0 0 8px;
-  line-height: 20px;
-  color: ${(props) => props.theme.client.settings.common.descriptionColor};
-`;
+import styles from "../Webhooks.styled.module.scss";
 
 const WebhookInfo = (props) => {
 	const { t } = useTranslation(["Webhooks"]);
@@ -49,12 +40,12 @@ const WebhookInfo = (props) => {
 
 	return (
 		<div>
-			<InfoText as="p">
+			<Text as="p" className={styles.infoText}>
 				{t("WebhooksInfo", {
 					productName: t("Common:ProductName"),
 					organizationName: logoText,
 				})}
-			</InfoText>
+			</Text>
 			{webhooksGuideUrl ? (
 				<Link
 					id="webhooks-info-link"

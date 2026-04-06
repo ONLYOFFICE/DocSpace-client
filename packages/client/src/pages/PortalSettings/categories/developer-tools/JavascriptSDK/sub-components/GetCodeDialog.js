@@ -30,15 +30,8 @@ import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { Textarea } from "@docspace/ui-kit/components/textarea";
 import { Button } from "@docspace/ui-kit/components/button";
 import { toastr } from "@docspace/ui-kit/components/toast";
-import styled from "styled-components";
 
-const StyledTextarea = styled(Textarea).attrs(({ theme }) => ({
-	color: theme.textInput.placeholderColor,
-}))`
-  .Toastify {
-    display: none;
-  }
-`;
+import styles from "./GetCodeDialog.module.scss";
 
 const GetCodeDialog = (props) => {
 	const { t, codeBlock, visible, onClose } = props;
@@ -53,7 +46,12 @@ const GetCodeDialog = (props) => {
 		<ModalDialog visible={visible} isLarge onClose={onClose}>
 			<ModalDialog.Header>{t("CopyWindowCode")}</ModalDialog.Header>
 			<ModalDialog.Body>
-				<StyledTextarea isReadOnly heightTextArea="180px" value={codeBlock} />
+				<Textarea
+					className={styles.textarea}
+					isReadOnly
+					heightTextArea="180px"
+					value={codeBlock}
+				/>
 			</ModalDialog.Body>
 			<ModalDialog.Footer>
 				<Button

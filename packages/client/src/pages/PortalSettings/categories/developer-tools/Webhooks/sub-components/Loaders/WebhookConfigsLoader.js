@@ -24,58 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
-const LoaderWrapper = styled.div`
-  width: 100%;
-
-  .webhookTextLoader {
-    display: block;
-    margin-bottom: 24px;
-  }
-  .webhookButtonLoader {
-    display: block;
-    margin-bottom: 16px;
-  }
-
-  .labelsLoader {
-    width: 435px;
-    display: flex;
-    justify-content: space-between;
-  }
-  .iconsLoader {
-    width: 131px;
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .roundedStatusLoader {
-    border-radius: 10px;
-  }
-`;
-
-const NavContainerLoader = styled.nav`
-  width: 184px;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-`;
-
-const TableHeaderLoader = styled.header`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 33px;
-`;
-
-const TableRowLoader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 27px;
-`;
+import styles from "./Loaders.styled.module.scss";
 
 const RowLoader = () => (
-  <TableRowLoader>
+  <div className={styles.tableRowLoader}>
     <RectangleSkeleton width="888px" height="20px" />
     <div className="iconsLoader">
       <RectangleSkeleton
@@ -85,16 +39,16 @@ const RowLoader = () => (
       />
       <RectangleSkeleton width="16px" height="16px" />
     </div>
-  </TableRowLoader>
+  </div>
 );
 
 export const WebhookConfigsLoader = () => {
   return (
-    <LoaderWrapper>
-      <NavContainerLoader>
+    <div className={styles.configsLoaderWrapper}>
+      <nav className={styles.navContainerLoader}>
         <RectangleSkeleton width="82px" height="32px" />
         <RectangleSkeleton width="82px" height="32px" />
-      </NavContainerLoader>
+      </nav>
 
       <RectangleSkeleton
         width="700px"
@@ -108,7 +62,7 @@ export const WebhookConfigsLoader = () => {
         className="webhookButtonLoader"
       />
 
-      <TableHeaderLoader>
+      <header className={styles.tableHeaderLoader}>
         <div className="labelsLoader">
           <RectangleSkeleton width="51px" height="16px" />
           <RectangleSkeleton width="60px" height="16px" />
@@ -117,13 +71,13 @@ export const WebhookConfigsLoader = () => {
           <RectangleSkeleton width="62px" height="16px" />
           <RectangleSkeleton width="16px" height="16px" />
         </div>
-      </TableHeaderLoader>
+      </header>
 
       <RowLoader />
       <RowLoader />
       <RowLoader />
       <RowLoader />
       <RowLoader />
-    </LoaderWrapper>
+    </div>
   );
 };

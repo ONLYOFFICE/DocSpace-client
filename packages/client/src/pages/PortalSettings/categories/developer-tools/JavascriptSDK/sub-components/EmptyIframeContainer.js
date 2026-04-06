@@ -25,40 +25,17 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled from "styled-components";
 
-import { injectDefaultTheme } from "@docspace/shared/utils";
-
-const StyledContainer = styled.div.attrs(injectDefaultTheme)`
-  width: ${(props) => props.width};
-  height: ${(props) => props.height};
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  border: 1px solid ${(props) => props.theme.plugins.borderColor};
-  border-radius: 6px;
-
-  overflow: hidden;
-
-  background-color: ${(props) => props.theme.sdkPresets.previewBackgroundColor};
-
-  .emptyIframeText {
-    font-size: 44px;
-    font-weight: 700;
-    line-height: 59.92px;
-    color: ${(props) => props.theme.text.emailColor};
-
-    text-align: center;
-  }
-`;
+import styles from "./EmptyIframeContainer.module.scss";
 
 const EmptyIframeContainer = ({ text, width, height }) => {
   return (
-    <StyledContainer width={width} height={height}>
-      <span className="emptyIframeText">{text}</span>
-    </StyledContainer>
+    <div
+      className={styles.container}
+      style={{ "--iframe-width": width, "--iframe-height": height }}
+    >
+      <span className={styles.emptyIframeText}>{text}</span>
+    </div>
   );
 };
 

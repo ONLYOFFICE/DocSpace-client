@@ -25,29 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled from "styled-components";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Button } from "@docspace/ui-kit/components/button";
 import { useTranslation } from "react-i18next";
 
-const RoundedButton = styled(Button)`
-  box-sizing: border-box;
-  font-size: 13px;
-  font-weight: 400;
-  padding: 13.5px 15px;
-
-  border-radius: 16px;
-  margin-inline-end: 7px;
-
-  line-height: 20px;
-`;
-
-const Selectors = styled.div`
-  position: relative;
-  margin-top: 8px;
-  margin-bottom: 16px;
-`;
+import styles from "../../WebhookHistory.styled.module.scss";
 
 const StatusBadgeSelector = ({
   label,
@@ -58,7 +41,8 @@ const StatusBadgeSelector = ({
 }) => {
   const handleOnClick = () => handleStatusClick(statusCode);
   return (
-    <RoundedButton
+    <Button
+      className={styles.roundedButton}
       id={id}
       testId={`status_badge_${id}_button`}
       label={label}
@@ -113,7 +97,7 @@ const StatusPicker = ({ filters, setFilters }) => {
       <Text fontWeight={600} fontSize="15px">
         {t("People:UserStatus")}
       </Text>
-      <Selectors>{StatusBadgeElements}</Selectors>
+      <div className={styles.statusSelectors}>{StatusBadgeElements}</div>
     </>
   );
 };

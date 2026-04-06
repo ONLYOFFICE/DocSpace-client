@@ -34,7 +34,7 @@ import { InputSize, InputType } from "@docspace/ui-kit/components/text-input";
 
 import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 
-import { StyledInputGroup } from "../ClientForm.styled";
+import styles from "../ClientForm.styled.module.scss";
 
 interface InputGroupProps {
 	label: string;
@@ -104,7 +104,7 @@ const InputGroup = ({
 	};
 
 	return (
-		<StyledInputGroup>
+		<div className={styles.styledInputGroup}>
 			<FieldContainer
 				className={buttonLabel ? "input-block-with-button" : ""}
 				isVertical
@@ -158,7 +158,7 @@ const InputGroup = ({
 					</>
 				)}
 			</FieldContainer>
-		</StyledInputGroup>
+		</div>
 	);
 };
 

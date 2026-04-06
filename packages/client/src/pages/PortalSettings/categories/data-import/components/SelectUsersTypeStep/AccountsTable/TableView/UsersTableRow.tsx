@@ -26,7 +26,6 @@
 
 import { useRef } from "react";
 import { inject, observer } from "mobx-react";
-import styled from "styled-components";
 
 import { TableRow, TableCell } from "@docspace/ui-kit/components/table";
 
@@ -41,60 +40,7 @@ import {
   InjectedTypeSelectTableRowProps,
   TypeSelectTableRowProps,
 } from "../../../../types";
-
-const StyledTableRow = styled(TableRow)`
-  .table-container_cell {
-    padding-inline-end: 30px;
-    text-overflow: ellipsis;
-  }
-
-  .checkbox-text {
-    font-size: 13px;
-    font-weight: 600;
-    color: ${(props) => props.theme.client.settings.migration.subtitleColor};
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .user-email {
-    margin-inline-end: 5px;
-    font-size: 13px;
-    font-weight: 600;
-    color: ${(props) =>
-      props.theme.client.settings.migration.tableRowTextColor};
-
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .user-type {
-    .combo-button {
-      border: none;
-      padding: 4px 8px;
-      justify-content: flex-start;
-      background-color: transparent;
-    }
-
-    .combo-button-label {
-      color: ${(props) =>
-        props.theme.client.settings.migration.comboBoxLabelColor};
-    }
-
-    .combo-buttons_arrow-icon {
-      flex: initial;
-      margin-inline-end: 0px;
-    }
-
-    svg {
-      path {
-        fill: ${(props) =>
-          props.theme.client.settings.migration.comboBoxLabelColor};
-      }
-    }
-  }
-`;
+import styles from "../../../../StyledDataImport.module.scss";
 
 const UsersTableRow = (props: TypeSelectTableRowProps) => {
   const {
@@ -150,7 +96,7 @@ const UsersTableRow = (props: TypeSelectTableRowProps) => {
   };
 
   return (
-    <StyledTableRow onClick={onRowClick}>
+    <TableRow className={styles.styledTableRowType} onClick={onRowClick}>
       <TableCell className="checkboxWrapper">
         <Checkbox
           onChange={() => toggleAccount()}
@@ -182,7 +128,7 @@ const UsersTableRow = (props: TypeSelectTableRowProps) => {
       <TableCell>
         <Text className="user-email">{email}</Text>
       </TableCell>
-    </StyledTableRow>
+    </TableRow>
   );
 };
 

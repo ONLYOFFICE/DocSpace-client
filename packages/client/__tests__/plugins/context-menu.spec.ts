@@ -71,19 +71,6 @@ test.describe("Context Menu Sample Plugin", () => {
     );
   });
 
-  // test.beforeEach(async ({ page }) => {
-  //   await page.route(/\/plugins\/context-menu-sample\/assets\//, (route) => {
-  //     route.fulfill({
-  //       contentType: "image/svg+xml",
-  //       body: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><rect width="16" height="16" rx="2" fill="#657077"/></svg>',
-  //     });
-  //   });
-
-  //   await page.route(PLUGIN_REQUEST_URL, (route) => {
-  //     route.fulfill({ contentType: "text/javascript", body: PLUGIN_JS });
-  //   });
-  // });
-
   test("visible in DOCX document context menu", async ({ page, baseUrl }) => {
     const pluginLoaded = page.waitForResponse(PLUGIN_REQUEST_URL);
 
@@ -272,4 +259,3 @@ test.describe("Context Menu Sample Plugin", () => {
     await expect(toast).toHaveAttribute("data-type", "success");
   });
 });
-

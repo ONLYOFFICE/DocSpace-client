@@ -60,18 +60,18 @@
   }
 
   &:not(.isDragging):not(.isIndexUpdated):not(.isIndexEditingMode):hover {
-    .table-container_cell {
+    :global(.table-container_cell) {
       cursor: pointer;
       background: var(--files-section-table-view-row-background-active) !important;
     }
 
-    .table-container_file-name-cell,
-    .table-container_index-cell {
+    :global(.table-container_file-name-cell),
+    :global(.table-container_index-cell) {
       margin-inline-start: -24px;
       padding-inline-start: 24px;
     }
 
-    .table-container_row-context-menu-wrapper {
+    :global(.table-container_row-context-menu-wrapper) {
       margin-inline-end: -20px;
       padding-inline-end: 20px;
     }
@@ -91,25 +91,11 @@
     .table-container_index-cell {
       margin-inline-start: -24px;
       padding-inline-start: 24px;
-
-      [dir="rtl"] & {
-        margin-inline-start: unset;
-        padding-inline-start: unset;
-        margin-right: -24px;
-        padding-right: 24px;
-      }
     }
 
     .table-container_row-context-menu-wrapper {
       margin-inline-end: -20px;
       padding-inline-end: 20px !important;
-
-      [dir="rtl"] & {
-        margin-inline-end: unset;
-        padding-inline-end: unset;
-        margin-left: -20px;
-        padding-left: 20px !important;
-      }
     }
 
     .index-buttons {
@@ -130,10 +116,8 @@
     }
   }
 
-  .table-container_cell {
-    &.blockingOperation {
-      pointer-events: none;
-    }
+  &.isBlockingOperation .table-container_cell {
+    pointer-events: none;
   }
 
   &.checked:not(.isIndexUpdated):not(.isIndexEditingMode),
@@ -171,26 +155,19 @@
     }
   }
 
-  .context-menu-container.inProgress {
+  &.inProgress .context-menu-container {
     pointer-events: none;
   }
 
-  .table-container_element-wrapper,
-  .table-container_row-loader {
+  :global(.table-container_element-wrapper),
+  :global(.table-container_row-loader) {
     min-width: 40px;
     border-bottom: unset;
     margin-inline-start: -20px;
     padding-inline-start: 20px;
   }
 
-  &.isIndexing {
-    .table-container_element-wrapper,
-    .table-container_row-loader {
-      min-width: 36px;
-    }
-  }
-
-  .table-container_element-container {
+  :global(.table-container_element-container) {
     width: 32px;
     height: 32px;
     display: flex;
@@ -198,23 +175,14 @@
     align-items: center;
   }
 
-  &.isIndexing .table-container_element-container {
-    width: 28px;
-    justify-content: flex-start;
-  }
-
-  .table-container_row-loader {
+  :global(.table-container_row-loader) {
     svg {
       margin-inline-start: 8px;
     }
   }
 
-  .table-container_row-checkbox {
+  :global(.table-container_row-checkbox) {
     width: 12px;
-  }
-
-  &.isIndexing .table-container_row-checkbox {
-    padding-inline-start: 8px;
   }
 
   .table-container_file-name-cell,
@@ -248,34 +216,48 @@
   }
 
   &.isIndexing {
-    .table-container_element-wrapper {
+    :global(.table-container_element-wrapper),
+    :global(.table-container_row-loader) {
+      min-width: 36px;
+    }
+
+    :global(.table-container_element-wrapper) {
       margin-inline-start: 0;
       padding-inline-start: 0;
     }
 
-    .table-container_file-name-cell {
+    :global(.table-container_element-container) {
+      width: 28px;
+      justify-content: flex-start;
+    }
+
+    :global(.table-container_row-checkbox) {
+      padding-inline-start: 8px;
+    }
+
+    :global(.table-container_file-name-cell) {
       margin-inline-start: 0 !important;
       padding-inline-start: 0 !important;
     }
 
     &:hover {
-      .table-container_file-name-cell {
+      :global(.table-container_file-name-cell) {
         margin-inline-start: 0 !important;
         padding-inline-start: 0 !important;
       }
 
-      .index-buttons {
+      :global(.index-buttons) {
         padding-inline-end: 20px;
       }
 
-      .index-buttons-name {
+      :global(.index-buttons-name) {
         padding-inline-end: 20px;
 
         [dir="rtl"] & {
           width: calc(100% + 44px) !important;
           padding-inline-end: unset;
 
-          .index-arrows-container {
+          :global(.index-arrows-container) {
             padding-inline-end: 20px;
           }
         }

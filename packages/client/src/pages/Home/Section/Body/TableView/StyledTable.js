@@ -62,6 +62,8 @@ const StyledTableRow = ({
         [styles.isIndexing]: isIndexing,
         [styles.showHotkeyBorder]: showHotkeyBorder,
         [styles.canDrag]: !isThirdPartyFolder && canDrag,
+        [styles.isBlockingOperation]: isBlockingOperation,
+        [styles.inProgress]: inProgress,
       },
       className,
     )}

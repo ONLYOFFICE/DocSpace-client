@@ -102,6 +102,17 @@
 }
 
 .styledSimpleUserRow {
+  height: 59px;
+
+  border-top: 1px solid var(--files-section-table-view-row-border-color);
+  border-bottom: 1px solid var(--files-section-table-view-row-border-color);
+
+  box-sizing: border-box;
+  margin-top: -1px;
+
+  position: unset;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
   &.checked,
   &.active {
     background: var(--files-section-row-view-checked-background);
@@ -130,17 +141,6 @@
   .row_content {
     height: 58px;
   }
-
-  height: 59px;
-
-  border-top: 1px solid var(--files-section-table-view-row-border-color);
-  border-bottom: 1px solid var(--files-section-table-view-row-border-color);
-
-  box-sizing: border-box;
-  margin-top: -1px;
-
-  position: unset;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
   .styled-element {
     height: 32px;

@@ -64,6 +64,8 @@
 .styledFileRow {
   width: 100%;
   box-sizing: border-box;
+  height: 100%;
+  padding-inline-end: 16px;
 
   .row_context-menu-wrapper {
     width: auto;
@@ -73,9 +75,6 @@
   @media (hover: hover) and (pointer: fine) {
     min-height: 48px;
   }
-
-  height: 100%;
-  padding-inline-end: 16px;
 
   &[data-show-password] {
     .styled-element,

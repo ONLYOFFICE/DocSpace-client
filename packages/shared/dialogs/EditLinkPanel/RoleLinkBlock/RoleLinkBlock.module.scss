@@ -24,45 +24,44 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { FC, ChangeEvent } from "react";
+@use "@docspace/ui-kit/styles/variables/colors" as *;
 
-import { Text } from "@docspace/ui-kit/components/text";
-import {
-	InputSize,
-	InputType,
-	TextInput,
-} from "@docspace/ui-kit/components/text-input";
+.roleLinkBlockWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 16px 20px 16px;
 
-import type { LinkBlockProps } from "./EditLinkPanel.types";
-import styles from "./EditLinkPanel.module.scss";
+  :global(.dropdown-container) {
+    margin-top: 4px;
+  }
 
-const LinkBlock: FC<LinkBlockProps> = (props) => {
-	const { t, isLoading, linkNameValue, setLinkNameValue } = props;
+  :global(.combo-button_selected-icon-container) {
+    svg path {
+      fill: $black;
 
-	const onChangeLinkName = (e: ChangeEvent<HTMLInputElement>) => {
-		setLinkNameValue(e.target.value);
-	};
+      :global(.dark) & {
+        fill: $white;
+      }
+    }
+  }
 
-	return (
-		<div className={styles.linkBlock}>
-			<Text className={styles.linkText} fontSize="16px" fontWeight={600}>
-				{t("Common:LinkName")}
-			</Text>
-			<TextInput
-				scale
-				withBorder
-				isAutoFocussed
-				size={InputSize.base}
-				type={InputType.text}
-				value={linkNameValue}
-				isDisabled={isLoading}
-				onChange={onChangeLinkName}
-				placeholder={t("Common:LinkName")}
-				className="edit-link_name-input"
-				testId="edit_link_panel_name_input"
-			/>
-		</div>
-	);
-};
+  :global(.combo-button_selected-icon) svg {
+    width: 16px;
+    height: 16px;
+  }
 
-export default LinkBlock;
+  :global(.combo-buttons_arrow-icon),
+  :global(.combo-buttons_expander-icon) > div {
+    width: 16px;
+    height: 16px;
+
+    svg path {
+      fill: $gray;
+    }
+  }
+
+  :global(.combo-buttons_expander-icon) {
+    rotate: 90deg;
+  }
+}

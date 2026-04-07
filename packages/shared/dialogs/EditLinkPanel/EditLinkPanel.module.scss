@@ -24,144 +24,128 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+@use "@docspace/ui-kit/styles/variables/colors" as *;
 
-import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
-
-const StyledEditLinkBodyContent = styled.div`
-  padding: 20px 0px 0px;
-
+.editLinkBodyContent {
+  padding: 20px 0 0;
   margin-inline-end: -16px;
   width: calc(100% + 16px);
 
-  .edit-link_link-block {
-    padding: 0px 16px 20px;
+  .linkBlock {
+    padding: 0 16px 20px;
 
-    .edit-link-text {
+    .linkText {
       display: inline-flex;
       margin-bottom: 8px;
     }
 
-    .edit-link_link-input {
+    .linkInput {
       margin-bottom: 8px;
       margin-top: 16px;
+      -webkit-text-fill-color: $gray-text !important;
+      color: $gray-text;
 
-      -webkit-text-fill-color: ${({ theme }) =>
-        theme.editLink.editInputColor} !important;
-      color: ${({ theme }) => theme.editLink.editInputColor};
+      :global(.dark) & {
+        -webkit-text-fill-color: $gray-dark !important;
+        color: $gray-dark;
+      }
     }
   }
 
-  .edit-link-toggle-block {
+  .toggleBlock {
     padding: 0 16px 20px;
-    border-top: ${(props) => props.theme.filesPanels.sharing.borderBottom};
+    border-top: 1px solid $gray-light-mid;
 
-    .edit-link-toggle-header {
+    :global(.dark) & {
+      border-top: 1px solid $gray-dark-strong;
+    }
+
+    .toggleHeader {
       display: flex;
       padding-top: 20px;
       padding-bottom: 8px;
       gap: 8px;
-
       align-items: center;
 
-      .edit-link-toggle--wrapper {
+      .toggleWrapper {
         margin-inline-start: auto;
         align-self: center;
-
         display: flex;
         align-items: center;
 
-        .edit-link-toggle {
+        .toggle {
           position: static;
-          gap: 0px;
+          gap: 0;
         }
       }
     }
-    .edit-link_password-block {
+
+    .passwordBlock {
       margin-top: 8px;
     }
 
-    .password-field-wrapper {
+    :global(.password-field-wrapper) {
       width: 100%;
     }
   }
 
-  .edit-link-toggle-description {
-    color: ${({ theme }) => theme.editLink.text.color};
+  .toggleDescription {
+    color: $gray;
   }
 
-  .edit-link-toggle-description_expired {
-    color: ${({ theme }) => theme.editLink.text.errorColor};
+  .toggleDescriptionExpired {
+    color: $light-error-status;
+
+    :global(.dark) & {
+      color: $dark-error-status;
+    }
   }
 
-  .edit-link_password-block {
+  .passwordBlock {
     width: 100%;
     display: flex;
 
-    .edit-link_password-input {
+    .passwordInput {
       width: 100%;
     }
 
-    .edit-link_generate-icon {
+    .generateIcon {
       margin-block: 16px 0;
       margin-inline: 8px 0;
     }
   }
 
-  .edit-link-panel {
-    .scroll-body {
+  :global(.edit-link-panel) {
+    :global(.scroll-body) {
       padding-inline-end: 0 !important;
     }
   }
 
-  .field-label-icon {
+  :global(.field-label-icon) {
     display: none;
   }
 
-  .edit-link_password-links {
+  .passwordLinks {
     display: flex;
     gap: 12px;
     margin-top: -8px;
   }
 
-  .edit-link_header {
+  .header {
     padding: 0 16px;
-    border-bottom: ${(props) => props.theme.filesPanels.sharing.borderBottom};
+    border-bottom: 1px solid $gray-light-mid;
 
-    .edit-link_heading {
+    :global(.dark) & {
+      border-bottom: 1px solid $gray-dark-strong;
+    }
+
+    .heading {
       font-weight: 700;
       font-size: 18px;
     }
   }
 
-  .public-room_date-picker {
+  .datePicker {
     padding-top: 8px;
   }
-`;
-
-const StyledScrollbar = styled(Scrollbar)`
-  position: relative;
-  padding: 16px 0;
-  height: calc(100% - 150px) !important;
-`;
-
-const StyledButtons = styled.div`
-  box-sizing: border-box;
-  padding: 16px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-  position: absolute;
-  bottom: 0px;
-  width: 100%;
-  background: ${(props) => props.theme.filesPanels.sharing.backgroundButtons};
-  border-top: ${(props) => props.theme.filesPanels.sharing.borderTop};
-`;
-
-export {
-  // StyledEditLinkPanel,
-  StyledScrollbar,
-  StyledButtons,
-  StyledEditLinkBodyContent,
-};
+}

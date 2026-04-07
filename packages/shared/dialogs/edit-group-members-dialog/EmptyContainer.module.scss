@@ -24,18 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-
-import { Text } from "@docspace/ui-kit/components/text";
-
-export const StyledHeaderText = styled(Text)`
-  margin-inline-end: 16px;
-`;
-
-export const StyledBodyContent = styled.div`
-  height: 100%;
-
-  .search-input {
-    margin: 16px 16px 12px;
-  }
-`;
+.emptyScreen {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 45px 3px 0;
+}

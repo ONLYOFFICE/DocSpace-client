@@ -24,45 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { FC, ChangeEvent } from "react";
+.headerText {
+  margin-inline-end: 16px;
+}
 
-import { Text } from "@docspace/ui-kit/components/text";
-import {
-	InputSize,
-	InputType,
-	TextInput,
-} from "@docspace/ui-kit/components/text-input";
+.bodyContent {
+  height: 100%;
 
-import type { LinkBlockProps } from "./EditLinkPanel.types";
-import styles from "./EditLinkPanel.module.scss";
-
-const LinkBlock: FC<LinkBlockProps> = (props) => {
-	const { t, isLoading, linkNameValue, setLinkNameValue } = props;
-
-	const onChangeLinkName = (e: ChangeEvent<HTMLInputElement>) => {
-		setLinkNameValue(e.target.value);
-	};
-
-	return (
-		<div className={styles.linkBlock}>
-			<Text className={styles.linkText} fontSize="16px" fontWeight={600}>
-				{t("Common:LinkName")}
-			</Text>
-			<TextInput
-				scale
-				withBorder
-				isAutoFocussed
-				size={InputSize.base}
-				type={InputType.text}
-				value={linkNameValue}
-				isDisabled={isLoading}
-				onChange={onChangeLinkName}
-				placeholder={t("Common:LinkName")}
-				className="edit-link_name-input"
-				testId="edit_link_panel_name_input"
-			/>
-		</div>
-	);
-};
-
-export default LinkBlock;
+  :global(.search-input) {
+    margin: 16px 16px 12px;
+  }
+}

@@ -27,6 +27,7 @@
 import { useEffect, useState, useDeferredValue } from "react";
 import { useTranslation } from "react-i18next";
 
+import { Text } from "@docspace/ui-kit/components/text";
 import { InputSize } from "@docspace/ui-kit/components/text-input";
 import {
 	getGroupMembersInRoom,
@@ -40,10 +41,7 @@ import { isFile } from "../../utils/typeGuards";
 import type { TGroupMemberInvitedInRoom } from "../../api/groups/types";
 
 import EmptyContainer from "./EmptyContainer";
-import {
-	StyledBodyContent,
-	StyledHeaderText,
-} from "./EditGroupMembersDialog.styled";
+import styles from "./EditGroupMembersDialog.module.scss";
 
 import GroupMembersList from "./sub-components/GroupMembersList/GroupMembersList";
 import { ModalBodyLoader } from "./sub-components/ModalBodyLoader/ModalBodyLoader";
@@ -143,13 +141,19 @@ export const EditGroupMembers = ({
 			withoutPadding
 		>
 			<ModalDialog.Header>
-				<StyledHeaderText fontSize="21px" fontWeight={700} dir="auto" truncate>
+				<Text
+					className={styles.headerText}
+					fontSize="21px"
+					fontWeight={700}
+					dir="auto"
+					truncate
+				>
 					{group.name}
-				</StyledHeaderText>
+				</Text>
 			</ModalDialog.Header>
 
 			<ModalDialog.Body>
-				<StyledBodyContent>
+				<div className={styles.bodyContent}>
 					{!groupMembers ? (
 						<ModalBodyLoader withSearch />
 					) : (
@@ -181,7 +185,7 @@ export const EditGroupMembers = ({
 							)}
 						</EditGroupMembersDialogProvider>
 					)}
-				</StyledBodyContent>
+				</div>
 			</ModalDialog.Body>
 		</ModalDialog>
 	);

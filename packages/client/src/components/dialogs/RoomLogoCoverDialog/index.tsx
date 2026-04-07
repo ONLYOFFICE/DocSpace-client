@@ -26,7 +26,7 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import { useTheme } from "styled-components";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 import {
@@ -75,7 +75,7 @@ const RoomLogoCoverDialog = ({
   isAIAgentsFolderRoot,
 }: CoverDialogProps) => {
   const { t } = useTranslation(["Common", "RoomLogoCover"]);
-  const theme = useTheme();
+  const { currentColorScheme } = useTheme();
 
   const defaultHeight = isDesktop() ? DESKTOP_HEIGHT : TABLET_HEIGHT;
 
@@ -258,7 +258,7 @@ const RoomLogoCoverDialog = ({
           isScrollLocked={openColorPicker}
           setCover={setCover}
           cover={roomCoverDialogProps.icon as unknown as ILogoCover}
-          currentColorScheme={theme.currentColorScheme!}
+          currentColorScheme={currentColorScheme!}
           setRoomCoverDialogProps={setRoomCoverDialogProps}
           roomCoverDialogProps={roomCoverDialogProps}
         />

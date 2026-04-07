@@ -39,6 +39,7 @@ import type { PasswordInputHandle } from "@docspace/ui-kit/components/password-i
 
 import ToggleBlock from "./ToggleBlock";
 import type { PasswordAccessBlockProps } from "./EditLinkPanel.types";
+import styles from "./EditLinkPanel.module.scss";
 
 const PasswordAccessBlock: FC<PasswordAccessBlockProps> = ({
   t,
@@ -121,16 +122,16 @@ const PasswordAccessBlock: FC<PasswordAccessBlockProps> = ({
     >
       {isChecked ? (
         <div>
-          <div className="edit-link_password-block">
+          <div className={styles.passwordBlock}>
             <FieldContainer
               isVertical
               hasError={hasError}
               errorMessage={errorMessage}
-              className="edit-link_password-block"
+              className={styles.passwordBlock}
             >
               <PasswordInput
                 id="conversion-password"
-                className="edit-link_password-input"
+                className={styles.passwordInput}
                 ref={passwordInputRef}
                 isDisabled={isLoading}
                 inputValue={passwordValue}
@@ -155,11 +156,11 @@ const PasswordAccessBlock: FC<PasswordAccessBlockProps> = ({
               isDisabled={isLoading}
               iconName={RefreshReactSvgUrl}
               onClick={onGeneratePasswordClick}
-              className="edit-link_generate-icon"
+              className={styles.generateIcon}
               dataTestId="edit_link_panel_generate_password_button"
             />
           </div>
-          <div className="edit-link_password-links">
+          <div className={styles.passwordLinks}>
             <Link
               isHovered
               fontSize="13px"

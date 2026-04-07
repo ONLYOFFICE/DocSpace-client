@@ -28,26 +28,23 @@ import EmptyScreenPersonSvgUrl from "PUBLIC_DIR/images/emptyFilter/empty.filter.
 import EmptyScreenPersonSvgDarkUrl from "PUBLIC_DIR/images/emptyFilter/empty.filter.people.dark.svg?url";
 
 import { useTranslation } from "react-i18next";
-import styled, { useTheme } from "styled-components";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import { EmptyScreenContainer } from "@docspace/ui-kit/components/empty-screen-container";
 
-const StyledEmptyScreen = styled(EmptyScreenContainer)`
-  box-sizing: border-box;
-  width: 100%;
-  padding: 45px 3px 0;
-`;
+import styles from "./EmptyContainer.module.scss";
 
 const EmptyContainer = () => {
   const { t } = useTranslation("Common");
-  const theme = useTheme();
+  const { isBase } = useTheme();
 
-  const imageSrc = theme.isBase
+  const imageSrc = isBase
     ? EmptyScreenPersonSvgUrl
     : EmptyScreenPersonSvgDarkUrl;
 
   return (
-    <StyledEmptyScreen
+    <EmptyScreenContainer
+      className={styles.emptyScreen}
       imageSrc={imageSrc}
       imageAlt="Empty screen image"
       headerText={t("NotFoundMembers")}

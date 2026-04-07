@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router";
-import { useTheme } from "styled-components";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { withTranslation, WithTranslation, Trans } from "react-i18next";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import {
@@ -41,7 +41,7 @@ const SocialAuthWelcomeDialogComponent = ({
   currentDeviceType,
 }: SocialAuthWelcomeDialogProps) => {
   const navigate = useNavigate();
-  const theme = useTheme();
+  const { isBase } = useTheme();
   const [showDialog, setShowDialog] = useState(false);
   const [isLoaded, setIsLoaded] = React.useState(false);
 
@@ -56,7 +56,7 @@ const SocialAuthWelcomeDialogComponent = ({
     }
   };
 
-  const welcomeAuthSocialImage = theme.isBase
+  const welcomeAuthSocialImage = isBase
     ? WelcomeAuthSocial
     : WelcomeAuthSocialDark;
 
@@ -139,7 +139,7 @@ const SocialAuthWelcomeDialogComponent = ({
                 className="paid-badge"
                 fontWeight="700"
                 backgroundColor={
-                  theme.isBase
+                  isBase
                     ? globalColors.favoritesStatus
                     : globalColors.favoriteStatusDark
                 }

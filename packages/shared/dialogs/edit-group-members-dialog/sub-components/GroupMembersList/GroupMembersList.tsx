@@ -24,8 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useTheme } from "styled-components";
 import React, { memo, useCallback } from "react";
+import { useInterfaceDirection } from "@docspace/ui-kit/context/InterfaceDirectionContext";
 import AutoSizer from "react-virtualized-auto-sizer";
 import InfiniteLoader from "react-window-infinite-loader";
 import { areEqual, FixedSizeList as List } from "react-window";
@@ -89,7 +89,7 @@ const GroupMembersList = ({
   total,
   isNextPageLoading,
 }: GroupMembersListProps) => {
-  const { interfaceDirection } = useTheme();
+  const { interfaceDirection } = useInterfaceDirection();
 
   const itemCount = hasNextPage ? members.length + 1 : members.length;
 

@@ -125,10 +125,11 @@
 
 // InputParam — always column layout with label + input
 .inputParam {
-  @include param-base;
   flex-direction: column;
   gap: 4px;
   max-height: 54px;
+
+  @include param-base;
 
   :global(.input-label-wrapper) {
     display: flex;
@@ -143,11 +144,12 @@
 
 // ToggleParam — always row layout with text left, toggle right
 .toggleParam {
-  @include param-base;
   flex-direction: row;
   justify-content: space-between;
   gap: 8px;
   max-width: 100%;
+
+  @include param-base;
 
   :global(.set_room_params-info-description) {
     box-sizing: border-box;

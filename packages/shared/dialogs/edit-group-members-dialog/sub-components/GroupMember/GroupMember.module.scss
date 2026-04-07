@@ -24,43 +24,109 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+@use "@docspace/ui-kit/styles/variables/colors" as *;
 
-import { globalColors } from "@docspace/ui-kit/providers/theme";
-
-export const RoleLinkBlockWrapper = styled.div`
+.groupMember {
   display: flex;
-  flex-direction: column;
+  align-items: center;
   gap: 8px;
+  padding: 8px 16px;
 
-  padding: 0px 16px 20px 16px;
-
-  .dropdown-container {
-    margin-top: 4px;
+  .avatar {
+    min-width: 32px;
+    min-height: 32px;
   }
 
-  .combo-button_selected-icon-container {
-    svg path {
-      fill: ${({ theme }) => theme.color};
+  .userBodyWrapper {
+    overflow: auto;
+  }
+
+  .info,
+  .roleEmail {
+    display: flex;
+  }
+
+  .info {
+    flex-direction: column;
+
+    .infoBox {
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
   }
 
-  .combo-button_selected-icon svg {
-    width: 16px;
-    height: 16px;
+  .name {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
-  .combo-buttons_arrow-icon,
-  .combo-buttons_expander-icon > div {
-    width: 16px;
-    height: 16px;
+  .email {
+    color: $gray;
+    font-size: 12px;
+    line-height: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 
-    svg path {
-      fill: ${globalColors.gray};
+    :global(.dark) & {
+      color: $gray-dark;
     }
   }
 
-  .combo-buttons_expander-icon {
-    rotate: 90deg;
+  .meLabel {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
+    color: $gray;
+    padding-inline-start: 8px;
+    margin-inline-start: -8px;
   }
-`;
+
+  .individualRightsTooltip {
+    margin-inline-start: auto;
+  }
+
+  .roleWrapper {
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 20px;
+    white-space: nowrap;
+
+    .disabledRoleCombobox {
+      color: $gray;
+      margin-inline-end: 16px;
+    }
+
+    :global(.combo-button) {
+      padding: 0 8px;
+    }
+  }
+}
+
+.groupMemberExpect {
+  .name {
+    color: $gray;
+  }
+}
+
+.sendClockIcon {
+  min-width: 12px;
+  overflow: hidden;
+  vertical-align: middle;
+
+  path {
+    fill: $gray;
+  }
+
+  :global(.dark) & {
+    path {
+      fill: $gray-dark;
+    }
+  }
+}

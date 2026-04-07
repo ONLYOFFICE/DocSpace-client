@@ -25,75 +25,121 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 .tableContainer {
-  .table-row-selected {
-    .table-container_file-name-cell,
-    .table-container_index-cell {
-      margin-inline-start: -24px;
-      padding-inline-start: 24px;
-    }
-
-    .table-container_row-context-menu-wrapper {
-      margin-inline-end: -20px;
-      padding-inline-end: 20px;
-    }
+  :global(.table-row-selected .table-container_file-name-cell),
+  :global(.table-row-selected .table-container_index-cell) {
+    margin-inline-start: -24px;
+    padding-inline-start: 24px;
   }
 
-  .table-container_index-cell {
+  :global(.table-row-selected .table-container_row-context-menu-wrapper) {
+    margin-inline-end: -20px;
+    padding-inline-end: 20px;
+  }
+
+  :global(.table-container_index-cell) {
     margin-inline-end: 0;
     padding-inline-end: 0;
   }
 
-  .table-row-selected + .table-row-selected {
-    .table-row {
-      .table-container_file-name-cell,
-      .table-container_index-cell,
-      .table-container_row-context-menu-wrapper {
-        border-image-slice: 1;
-      }
-
-      .table-container_file-name-cell,
-      .table-container_index-cell {
-        margin-inline-start: -24px;
-        padding-inline-start: 24px;
-        border-inline: 0; // for Safari macOS
-
-        border-image-source: linear-gradient(
-          to right,
-          var(--files-section-table-view-row-border-color-transition) 17px,
-          var(--files-section-table-view-row-border-color) 31px
-        );
-      }
-
-      .table-container_row-context-menu-wrapper {
-        margin-inline-end: -20px;
-        padding-inline-end: 20px;
-
-        border-image-source: linear-gradient(
-          to left,
-          var(--files-section-table-view-row-border-color-transition) 17px,
-          var(--files-section-table-view-row-border-color) 31px
-        );
-      }
-    }
+  :global(
+    .table-row-selected
+      + .table-row-selected
+      .table-row
+      .table-container_file-name-cell
+  ),
+  :global(
+    .table-row-selected
+      + .table-row-selected
+      .table-row
+      .table-container_index-cell
+  ),
+  :global(
+    .table-row-selected
+      + .table-row-selected
+      .table-row
+      .table-container_row-context-menu-wrapper
+  ) {
+    border-image-slice: 1;
   }
 
-  .files-item:not(.table-row-selected) + .table-row-selected {
-    .table-row {
-      .table-container_file-name-cell,
-      .table-container_index-cell {
-        margin-inline-start: -24px;
-        padding-inline-start: 24px;
-      }
+  :global(
+    .table-row-selected
+      + .table-row-selected
+      .table-row
+      .table-container_file-name-cell
+  ),
+  :global(
+    .table-row-selected
+      + .table-row-selected
+      .table-row
+      .table-container_index-cell
+  ) {
+    margin-inline-start: -24px;
+    padding-inline-start: 24px;
+    border-inline: 0; // for Safari macOS
 
-      .table-container_row-context-menu-wrapper {
-        margin-inline-end: -20px;
-        padding-inline-end: 20px;
-      }
-    }
+    border-image-source: linear-gradient(
+      to right,
+      var(--files-section-table-view-row-border-color-transition) 17px,
+      var(--files-section-table-view-row-border-color) 31px
+    );
+  }
+
+  :global(
+    .table-row-selected
+      + .table-row-selected
+      .table-row
+      .table-container_row-context-menu-wrapper
+  ) {
+    margin-inline-end: -20px;
+    padding-inline-end: 20px;
+
+    border-image-source: linear-gradient(
+      to left,
+      var(--files-section-table-view-row-border-color-transition) 17px,
+      var(--files-section-table-view-row-border-color) 31px
+    );
+  }
+
+  :global(
+    .files-item:not(.table-row-selected)
+      + .table-row-selected
+      .table-row
+      .table-container_file-name-cell
+  ),
+  :global(
+    .files-item:not(.table-row-selected)
+      + .table-row-selected
+      .table-row
+      .table-container_index-cell
+  ) {
+    margin-inline-start: -24px;
+    padding-inline-start: 24px;
+  }
+
+  :global(
+    .files-item:not(.table-row-selected)
+      + .table-row-selected
+      .table-row
+      .table-container_row-context-menu-wrapper
+  ) {
+    margin-inline-end: -20px;
+    padding-inline-end: 20px;
+  }
+
+  :global(.table-container_file-name-cell.droppable-hover),
+  :global(.table-container_index-cell.droppable-hover) {
+    margin-inline-start: -24px;
+    padding-inline-start: 24px;
+  }
+
+  :global(.table-container_row-context-menu-wrapper.droppable-hover) {
+    margin-inline-end: -20px;
+    padding-inline-end: 20px;
   }
 
   &.isIndexEditingMode {
-    .resize-handle {
+    :global(.resize-handle) {
       cursor: default;
 
       &:hover {
@@ -102,3 +148,4 @@
     }
   }
 }
+

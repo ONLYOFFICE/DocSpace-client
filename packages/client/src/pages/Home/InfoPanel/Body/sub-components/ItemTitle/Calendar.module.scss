@@ -24,32 +24,30 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
+.calendarComponent {
+  position: relative;
 
-import styles from "./HistoryText.module.scss";
+  :global(.icon-calendar) {
+    height: 16px;
+    padding-right: 2px;
+  }
+}
 
-const HistoryText = ({ title }: { title: string }) => (
-  <TooltipContainer
-    as="span"
-    title={title}
-    className={styles.historyTextWrapper}
-  >
-    <Text fontWeight={600} as="span" fontSize="14px" className="history-text">
-      "
-    </Text>
-    <Text
-      fontWeight={600}
-      as="span"
-      fontSize="14px"
-      style={{ textWrap: "wrap" }}
-    >
-      {title}
-    </Text>
-    <Text fontWeight={600} as="span" fontSize="14px" className="history-text">
-      "
-    </Text>
-  </TooltipContainer>
-);
+.calendar {
+  position: absolute;
+  top: 20px;
+  right: -30px;
 
-export { HistoryText };
+  :global(.track-vertical) {
+    height: 100% !important;
+  }
+
+  &.mobile {
+    position: fixed;
+    bottom: 0;
+    top: auto;
+    right: auto;
+    left: 0;
+    height: 420px;
+  }
+}

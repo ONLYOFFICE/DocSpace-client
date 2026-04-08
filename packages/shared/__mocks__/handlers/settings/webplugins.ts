@@ -330,6 +330,20 @@ export const mockSettingsPlugin: TAPIPlugin = {
   settings: "",
 };
 
+export const mockNavigationPlugin: TAPIPlugin = {
+  ...mockPlugin1,
+  name: "navigation-sample",
+  version: "1.0.0",
+  minDocSpaceVersion: "3.5.0",
+  description:
+    "Sample plugin demonstrating Actions.navigate and Actions.openInfoPanel for DocSpace",
+  pluginName: "NavigationSample",
+  scopes: "ContextMenu",
+  image: "docspace-icon.svg",
+  url: "/plugins/navigation-sample/plugin.js",
+  settings: "",
+};
+
 export const mockPostMessagePlugin: TAPIPlugin = {
   ...mockPlugin1,
   name: "post-message",
@@ -347,6 +361,20 @@ export const mockPostMessagePlugin: TAPIPlugin = {
 // Plugins list with settings plugin
 export const webPluginsWithSettingsPlugin = {
   response: [mockSettingsPlugin],
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+// Plugins list with navigation sample plugin
+export const webPluginsWithNavigationPlugin = {
+  response: [mockNavigationPlugin],
   count: 1,
   links: [
     {
@@ -626,7 +654,8 @@ type TWebPluginType =
   | "withModalDialogPlugin"
   | "withFloatingOperationsPlugin"
   | "withPostMessagePlugin"
-  | "withSettingsPlugin";
+  | "withSettingsPlugin"
+  | "withNavigationPlugin";
 
 // Resolvers
 export const webPluginsResolver = (type: TWebPluginType = "empty") => {
@@ -683,6 +712,9 @@ export const webPluginsResolver = (type: TWebPluginType = "empty") => {
       break;
     case "withSettingsPlugin":
       data = webPluginsWithSettingsPlugin;
+      break;
+    case "withNavigationPlugin":
+      data = webPluginsWithNavigationPlugin;
       break;
     default:
       data = webPluginsEmpty;

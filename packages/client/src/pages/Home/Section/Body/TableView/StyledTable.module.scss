@@ -33,7 +33,7 @@
     border-top: 1px solid var(--files-section-table-view-row-border-color);
     margin-top: -1px;
     border-inline: 0; // for Safari
-    height: auto;
+    height: auto !important;
     max-height: 48px;
   }
 
@@ -202,9 +202,9 @@
     width: 12px;
   }
 
-  :global(.table-container_file-name-cell),
-  :global(.table-container_index-cell) {
-    &:global(.dragging) {
+  &.isDragging {
+    :global(.table-container_file-name-cell),
+    :global(.table-container_index-cell) {
       margin-inline-start: -20px;
       padding-inline-start: 20px;
 
@@ -215,6 +215,11 @@
         var(--files-section-table-view-row-border-color-transition) 17px,
         var(--files-section-table-view-row-border-color) 31px
       );
+    }
+
+    :global(.table-container_row-context-menu-wrapper) {
+      margin-inline-end: -20px;
+      padding-inline-end: 20px;
     }
   }
 

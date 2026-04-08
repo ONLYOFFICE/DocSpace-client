@@ -182,13 +182,13 @@
     align-items: center;
 
     .upload-panel_percent-text {
-      margin-left: 16px;
+      margin-inline-start: 16px;
       color: var(--files-panels-upload-progress-color);
     }
 
     .upload-panel_close-button,
     .upload-panel_check-button {
-      margin-left: 16px;
+      margin-inline-start: 16px;
     }
 
     .upload-panel_check-button {

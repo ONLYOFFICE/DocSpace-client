@@ -26,6 +26,8 @@
 
 import React from "react";
 
+import classNames from "classnames";
+
 import styles from "./StyledParam.module.scss";
 
 type StyledParamProps = {
@@ -45,16 +47,21 @@ const StyledParam = ({
   style,
   children,
 }: StyledParamProps) => {
-  const classNames = [styles.styledParam];
-  if (!storageLocation && folderName) classNames.push(styles.withFolderName);
-  if (className) classNames.push(className);
-
   const composedStyle = increaseGap
     ? ({ "--param-info-gap": "12px", ...style } as React.CSSProperties)
     : style;
 
   return (
-    <div className={classNames.join(" ")} style={composedStyle}>
+    <div
+      className={classNames(
+        styles.styledParam,
+        {
+          [styles.withFolderName]: !storageLocation && !!folderName,
+        },
+        className,
+      )}
+      style={composedStyle}
+    >
       {children}
     </div>
   );

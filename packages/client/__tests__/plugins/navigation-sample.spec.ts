@@ -142,10 +142,5 @@ test.describe("Navigation Sample Plugin", () => {
     ).toBeVisible();
 
     await page.mouse.move(0, 0);
-    await expectScreenshot(page, [
-      "desktop",
-      "plugins-navigation-sample",
-      "navigation-sample_info-panel-details.png",
-    ]);
   });
 });

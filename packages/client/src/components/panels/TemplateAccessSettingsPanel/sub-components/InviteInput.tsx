@@ -36,7 +36,10 @@ import {
 import { InputType, TextInput } from "@docspace/ui-kit/components/text-input";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { toastr } from "@docspace/ui-kit/components/toast";
-import { LinkType } from "@docspace/ui-kit/components/link";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Heading } from "@docspace/ui-kit/components/heading";
+import { DropDown } from "@docspace/ui-kit/components/drop-down";
 import { TSelectorItem } from "@docspace/ui-kit/components/selector";
 import Filter from "@docspace/shared/api/people/filter";
 import { getMembersList } from "@docspace/shared/api/people";
@@ -44,17 +47,9 @@ import { AccountsSearchArea, EmployeeType } from "@docspace/shared/enums";
 import { TTranslation } from "@docspace/shared/types";
 import { TUser } from "@docspace/shared/api/people/types";
 import { TGroup } from "@docspace/shared/api/groups/types";
+import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 
-import {
-	StyledSubHeader,
-	StyledLink,
-	StyledInviteInput,
-	StyledInviteInputContainer,
-	StyledDropDown,
-	SearchItemText,
-	StyledDescription,
-	StyledCrossIcon,
-} from "../StyledInvitePanel";
+import styles from "../TemplateAccessSettingsPanel.module.scss";
 
 const MIN_SEARCH_VALUE = 2;
 const ITEM_HEIGHT = 48;
@@ -194,14 +189,24 @@ const InviteInput = ({
 
 					<div className="list-item_content">
 						<div className="list-item_content-box">
-							<SearchItemText $primary disabled={shared}>
+							<Text
+								className={
+									shared
+										? styles.searchItemTextPrimaryDisabled
+										: styles.searchItemTextPrimary
+								}
+							>
 								{"displayName" in item ? item.displayName : item.name}
-							</SearchItemText>
+							</Text>
 						</div>
-						<SearchItemText>{(item as TUser).email}</SearchItemText>
+						<Text className={styles.searchItemTextSecondary}>
+							{(item as TUser).email}
+						</Text>
 					</div>
 					{shared ? (
-						<SearchItemText $info>{t("Common:Invited")}</SearchItemText>
+						<Text className={styles.searchItemTextInfo}>
+							{t("Common:Invited")}
+						</Text>
 					) : null}
 				</DropDownItem>
 			);
@@ -239,11 +244,11 @@ const InviteInput = ({
 
 	return (
 		<>
-			<StyledSubHeader className="invite-input-text">
+			<Heading className={`${styles.subHeader} invite-input-text`}>
 				{t("Files:AddUsersOrGroups")}
 
-				<StyledLink
-					className="link-list invite-input-text"
+				<Link
+					className={`link-list invite-input-text ${styles.link}`}
 					fontWeight="600"
 					type={LinkType.action}
 					isHovered
@@ -251,14 +256,17 @@ const InviteInput = ({
 					dataTestId="template_access_settings_choose_from_list_link"
 				>
 					{t("Translations:ChooseFromList")}
-				</StyledLink>
-			</StyledSubHeader>
-			<StyledDescription>
+				</Link>
+			</Heading>
+			<Text className={styles.description}>
 				{t("Files:AddUsersOrGroupsDescription")}
-			</StyledDescription>
+			</Text>
 
-			<StyledInviteInputContainer>
-				<StyledInviteInput ref={searchRef} isShowCross={!!inputValue}>
+			<div className={styles.inviteInputContainer}>
+				<div
+					ref={searchRef}
+					className={`${styles.inviteInput} ${inputValue ? styles.showCross : ""}`}
+				>
 					<TextInput
 						className="invite-input"
 						scale
@@ -273,27 +281,26 @@ const InviteInput = ({
 					/>
 
 					<div className="append" onClick={onClearInput}>
-						<StyledCrossIcon />
+						<CrossIcon className={styles.crossIcon} />
 					</div>
-				</StyledInviteInput>
+				</div>
 
 				{!isAddEmailPanelBlocked ? (
-					<StyledDropDown
-						width={dropDownWidth}
+					<DropDown
+						style={dropDownWidth ? { width: `${dropDownWidth}px` } : undefined}
 						isDefaultMode={false}
 						open
 						showDisabledItems
 						eventTypes="click"
 						withBackdrop={false}
 						zIndex={399}
-						className="add-manually-dropdown"
+						className={`add-manually-dropdown ${styles.addManuallyDropdown} ${searchRequestRunning ? styles.addManuallyDropdownLoading : ""}`}
 						{...dropDownMaxHeight}
-						isRequestRunning={searchRequestRunning}
 					>
 						{dropDownContent}
-					</StyledDropDown>
+					</DropDown>
 				) : null}
-			</StyledInviteInputContainer>
+			</div>
 		</>
 	);
 };

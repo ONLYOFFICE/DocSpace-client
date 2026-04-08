@@ -33,7 +33,7 @@ import { TTranslation } from "@docspace/shared/types";
 import { TSelectorItem } from "@docspace/ui-kit/components/selector";
 import { ShareAccessRights } from "@docspace/shared/enums";
 import Item from "./Item";
-import { StyledRow, ScrollList } from "../StyledInvitePanel";
+import styles from "../TemplateAccessSettingsPanel.module.scss";
 
 const USER_ITEM_HEIGHT = 48;
 
@@ -67,10 +67,10 @@ const Row = memo(({ data, index, style }: RowProps) => {
 	const item = listItems[index];
 
 	return (
-		<StyledRow
+		<div
 			key={item.id}
 			style={style}
-			className="row-item"
+			className={`${styles.row} row-item`}
 			data-testid={`template_access_settings_row_${index}`}
 		>
 			<Item
@@ -81,7 +81,7 @@ const Row = memo(({ data, index, style }: RowProps) => {
 				isDisabled={isDisabled}
 				index={index}
 			/>
-		</StyledRow>
+		</div>
 	);
 });
 
@@ -140,11 +140,17 @@ const ItemsList = ({
 	const overflowStyle = scrollAllPanelContent ? "hidden" : "unset";
 
 	return (
-		<ScrollList
-			offsetTop={offsetTop}
+		<div
 			ref={bodyRef}
-			scrollAllPanelContent={scrollAllPanelContent}
-			isTotalListHeight={isTotalListHeight}
+			className={styles.scrollList}
+			style={{
+				height:
+					scrollAllPanelContent && isTotalListHeight
+						? "auto"
+						: offsetTop
+							? `calc(100% - ${offsetTop}px)`
+							: undefined,
+			}}
 			data-testid="template_access_settings_scroll_list"
 		>
 			<List
@@ -166,7 +172,7 @@ const ItemsList = ({
 			>
 				{Row}
 			</List>
-		</ScrollList>
+		</div>
 	);
 };
 

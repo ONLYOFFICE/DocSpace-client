@@ -38,7 +38,7 @@ import { TTranslation } from "@docspace/shared/types";
 import { TSelectorItem } from "@docspace/ui-kit/components/selector";
 import { ShareAccessRights } from "@docspace/shared/enums";
 import { Encoder } from "@docspace/ui-kit/utils/encoder";
-import { StyledInviteUserBody } from "../StyledInvitePanel";
+import styles from "../TemplateAccessSettingsPanel.module.scss";
 
 type ItemProps = {
 	t: TTranslation;
@@ -97,7 +97,7 @@ const Item = ({
 				className="invite-input-avatar"
 				data-testid={`template_access_settings_avatar_${index ?? id}`}
 			/>
-			<StyledInviteUserBody>
+			<div className={styles.inviteUserBody}>
 				<div className="invite-input-item">
 					<Text truncate className="invite-input-text">
 						{Encoder.htmlDecode(name ?? "")}
@@ -106,7 +106,7 @@ const Item = ({
 						{item.isOwner ? `(${t("Common:MeLabel")})` : null}
 					</Text>
 				</div>
-			</StyledInviteUserBody>
+			</div>
 			{canDelete ? (
 				<ReactSVG
 					className="remove-icon"

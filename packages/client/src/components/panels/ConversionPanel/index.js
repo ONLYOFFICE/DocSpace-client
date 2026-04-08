@@ -38,7 +38,7 @@ import {
   DialogAsideSkeleton
 } from "@docspace/ui-kit/components/modal-dialog";
 
-import styles from "./ConversionPanel.module.scss";
+import styles from "../UploadPanel/UploadPanel.module.scss";
 import FileList from "./FileList";
 import withLoader from "../../../HOCs/withLoader";
 

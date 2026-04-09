@@ -42,7 +42,7 @@ const HistoryText = ({ title }: { title: string }) => (
       fontWeight={600}
       as="span"
       fontSize="14px"
-      style={{ textWrap: "wrap" }}
+      className={styles.historyTitle}
     >
       {title}
     </Text>

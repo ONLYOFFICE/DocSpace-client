@@ -45,7 +45,7 @@
     "react-toastify": "10.0.6",
     "resize-image": "0.1.0",
     "sass": "1.79.6",
-    "ts-pattern": "5.5.0",
+    "ts-pattern": "5.9.0",
     "winston": "3.17.0",
     "winston-cloudwatch": "6.3.0",
     "winston-daily-rotate-file": "5.0.0"

@@ -62,7 +62,7 @@
     "react-window-infinite-loader": "1.0.9",
     "resize-image": "0.1.0",
     "styled-components": "5.3.11",
-    "ts-pattern": "5.5.0",
+    "ts-pattern": "5.9.0",
     "utif": "3.1.0",
     "vite-plugin-svgr": "^4.5.0",
     "windows-iana": "5.1.0",

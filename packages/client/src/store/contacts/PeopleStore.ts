@@ -59,17 +59,17 @@ class PeopleStore {
 
   enabledHotkeys = true;
 
-  contactsHotkeysStore: Nullable<ContactsHotkeysStore> = null;
+  contactsHotkeysStore: ContactsHotkeysStore;
 
-  groupsStore: Nullable<GroupsStore> = null;
+  groupsStore: GroupsStore;
 
-  targetUserStore: Nullable<TargetUserStore> = null;
+  targetUserStore: TargetUserStore;
 
-  headerMenuStore: Nullable<HeaderMenuStore> = null;
+  headerMenuStore: HeaderMenuStore;
 
-  inviteLinksStore: Nullable<InviteLinksStore> = null;
+  inviteLinksStore: InviteLinksStore;
 
-  dialogStore: Nullable<DialogStore> = null;
+  dialogStore: DialogStore;
 
   contextOptionsStore!: ContactsConextOptionsStore;
 

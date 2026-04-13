@@ -35,6 +35,7 @@ import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelpe
 import withLoading from "SRC_DIR/HOCs/withLoading";
 
 import { Section } from "SRC_DIR/helpers/plugins/enums";
+import { PLUGIN_SECTION_URL_PART } from "SRC_DIR/helpers/plugins/constants";
 import ArticleNavPluginItems from "SRC_DIR/components/ArticlePlugin/ArticleNavPluginItems/ArticleNavPluginItems";
 
 import { ArticleItem } from "@docspace/ui-kit/components/article/item";
@@ -165,7 +166,7 @@ const ArticleBodyContent = (props) => {
         setSelectedKeys(["11-0"]);
       }
 
-      if (location.pathname.includes("plugin-section")) {
+      if (location.pathname.includes(PLUGIN_SECTION_URL_PART)) {
         setSelectedKeys([""]);
       }
     }

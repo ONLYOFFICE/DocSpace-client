@@ -405,8 +405,9 @@ const ArticleBodyContent = (props) => {
       return;
     }
 
-    if (location.pathname.includes(PLUGIN_SECTION_URL_PART) && activeItemId) {
-      return setActiveItemId(null);
+    if (location.pathname.includes(PLUGIN_SECTION_URL_PART)) {
+      if (activeItemId !== null) setActiveItemId(null);
+      return;
     }
   }, [
     location.pathname,
@@ -415,6 +416,7 @@ const ArticleBodyContent = (props) => {
     archiveFolderId,
     myFolderId,
     favoritesFolderId,
+    sharedWithMeFolderId,
     recycleBinFolderId,
     isVisitor,
     rootFolderId,

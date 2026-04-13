@@ -32,6 +32,7 @@ import Section from "@docspace/ui-kit/components/section";
 import { DeviceType } from "@docspace/shared/enums";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
+import { isPluginPage } from "SRC_DIR/helpers/plugins/utils";
 import ArticleWrapper from "SRC_DIR/components/ArticleWrapper";
 
 import SectionWrapper from "SRC_DIR/components/Section";
@@ -39,7 +40,6 @@ import SectionWrapper from "SRC_DIR/components/Section";
 import SectionHeaderContent from "./Section/Header";
 import { ArticleHeaderContent, ArticleBodyContent } from "./Article";
 import Warning from "./WarningComponent";
-
 
 const ArticleSettings = React.memo(
   ({ showArticleLoader, needPageReload, isNotPaidPeriod }) => {
@@ -108,9 +108,11 @@ const Layout = ({
       />
       {!isGeneralPage ? (
         <SectionWrapper viewAs="settings" withBodyScroll settingsStudio>
-          <Section.SectionHeader>
-            <SectionHeaderContent />
-          </Section.SectionHeader>
+          {!isPluginPage() ? (
+            <Section.SectionHeader>
+              <SectionHeaderContent />
+            </Section.SectionHeader>
+          ) : null}
 
           {currentDeviceType !== DeviceType.desktop ? (
             <Section.SectionWarning>

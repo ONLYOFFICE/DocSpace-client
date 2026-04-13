@@ -43,6 +43,7 @@ import { toastr } from "@docspace/ui-kit/components/toast";
 import SectionWrapper from "SRC_DIR/components/Section";
 import DragTooltip from "SRC_DIR/components/DragTooltip";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
+import { isPluginPage } from "SRC_DIR/helpers/plugins/utils";
 
 import {
   SectionFilterContent,
@@ -195,6 +196,7 @@ const PureHome = (props) => {
   const isSettingsPage =
     location.pathname.includes("settings") &&
     !location.pathname.includes("settings/plugins");
+
 
   const view = getContactsView(location);
   if (allowInvitingGuests === false && view === "guests") checkGuests();
@@ -481,7 +483,8 @@ const PureHome = (props) => {
 
   return (
     <>
-      {isSettingsPage ? null : isContactsPage || isProfile ? (
+      {isSettingsPage || isPluginPage() ? null : isContactsPage ||
+        isProfile ? (
         <>
           <AccountsDialogs />
           {isProfile ? null : <ContactsSelectionArea />}
@@ -492,13 +495,14 @@ const PureHome = (props) => {
           <FilesSelectionArea />
         </>
       )}
-      <MediaViewer />
+      {isPluginPage() ? null : <MediaViewer />}
       <SectionWrapper {...sectionProps} withoutFooter={isChat}>
-        {!isErrorAvailable ||
-        isContactsPage ||
-        isProfile ||
-        isSettingsPage ||
-        showHeaderLoader ? (
+        {!isPluginPage() &&
+        (!isErrorAvailable ||
+          isContactsPage ||
+          isProfile ||
+          isSettingsPage ||
+          showHeaderLoader) ? (
           <Section.SectionHeader>
             <SectionHeaderContent />
           </Section.SectionHeader>
@@ -512,7 +516,8 @@ const PureHome = (props) => {
           <SectionWarningContent />
         </Section.SectionWarning>
 
-        {!isChat &&
+        {!isPluginPage() &&
+        !isChat &&
         !isErrorAvailable &&
         !isDisabledKnowledge &&
         shouldShowFilter &&
@@ -874,4 +879,3 @@ export const Component = inject(
     };
   },
 )(observer(Home));
-

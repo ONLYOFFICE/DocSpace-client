@@ -34,6 +34,9 @@ import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelpe
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
 
+import { Section } from "SRC_DIR/helpers/plugins/enums";
+import ArticleNavPluginItems from "SRC_DIR/components/ArticlePlugin/ArticleNavPluginItems/ArticleNavPluginItems";
+
 import { ArticleItem } from "@docspace/ui-kit/components/article/item";
 import { ArticleFolderLoader } from "@docspace/shared/skeletons/article";
 import {
@@ -160,6 +163,10 @@ const ArticleBodyContent = (props) => {
 
       if (location.pathname.includes("bonus")) {
         setSelectedKeys(["11-0"]);
+      }
+
+      if (location.pathname.includes("plugin-section")) {
+        setSelectedKeys([""]);
       }
     }
   }, [
@@ -336,6 +343,7 @@ const ArticleBodyContent = (props) => {
   ) : (
     <>
       {items}
+      <ArticleNavPluginItems section={Section.Settings} />
     </>
   );
 };
@@ -394,4 +402,3 @@ export default inject(
     ),
   ),
 );
-

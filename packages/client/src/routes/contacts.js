@@ -26,6 +26,7 @@
 
 import { Navigate } from "react-router";
 
+import componentLoader from "@docspace/shared/utils/component-loader";
 import {
   GUESTS_ROUTE,
   GUESTS_ROUTE_WITH_FILTER,
@@ -37,6 +38,8 @@ import {
   PEOPLE_ROUTE_WITH_FILTER,
   CONTACTS_ROUTE,
 } from "SRC_DIR/helpers/contacts";
+
+import { PLUGIN_SECTION_ROUTE } from "SRC_DIR/helpers/plugins/constants";
 
 import { ViewComponent } from "SRC_DIR/pages/Home/View";
 
@@ -135,4 +138,21 @@ export const contactsRoutes = [
       </PrivateRoute>
     ),
   },
+  {
+    path: `/accounts/${PLUGIN_SECTION_ROUTE}`,
+    async lazy() {
+      const { Component } = await componentLoader(
+        () => import("SRC_DIR/components/ArticlePlugin/PluginSection"),
+      );
+
+      const WrappedComponent = () => (
+        <PrivateRoute restricted withManager>
+          <Component />
+        </PrivateRoute>
+      );
+
+      return { Component: WrappedComponent };
+    },
+  },
 ];
+

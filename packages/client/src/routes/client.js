@@ -33,6 +33,7 @@ import { SHARED_WITH_ME_PATH } from "@docspace/shared/constants";
 import { ViewComponent } from "SRC_DIR/pages/Home/View";
 import { publicPreviewLoader } from "SRC_DIR/pages/PublicPreview/PublicPreview.helpers";
 import { DefaultPageRedirect } from "SRC_DIR/pages/Home/DefaultPageRedirect";
+import { PLUGIN_SECTION_ROUTE } from "SRC_DIR/helpers/plugins/constants";
 
 import PrivateRoute from "../components/PrivateRouteWrapper";
 import PublicRoute from "../components/PublicRouteWrapper";
@@ -328,6 +329,22 @@ const ClientRoutes = [
                 <ViewComponent />
               </PrivateRoute>
             ),
+          },
+          {
+            path: PLUGIN_SECTION_ROUTE,
+            async lazy() {
+              const { Component } = await componentLoader(
+                () => import("SRC_DIR/components/ArticlePlugin/PluginSection"),
+              );
+
+              const WrappedComponent = () => (
+                <PrivateRoute>
+                  <Component />
+                </PrivateRoute>
+              );
+
+              return { Component: WrappedComponent };
+            },
           },
           ...contactsRoutes,
           ...profileClientRoutes,
@@ -646,3 +663,4 @@ const ClientRoutes = [
 ];
 
 export default ClientRoutes;
+

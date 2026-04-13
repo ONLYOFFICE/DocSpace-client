@@ -31,7 +31,7 @@ import Article from "@docspace/ui-kit/components/article";
 import { ArticleProps } from "@docspace/ui-kit/components/article/Article.types";
 import { getUserType } from "@docspace/shared/utils/common";
 
-import ArticlePluginItems from "./ArticlePluginItems/ArticlePluginItems";
+import ArticlePluginItems from "SRC_DIR/components/ArticlePlugin/ArticlePluginItems/ArticlePluginItems";
 
 const ArticleWrapper = (props: ArticleProps) => {
   const navigate = useNavigate();

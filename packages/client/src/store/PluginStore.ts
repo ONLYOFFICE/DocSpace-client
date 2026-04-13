@@ -43,7 +43,10 @@ import type { ModalDialogProps } from "@docspace/ui-kit/components/modal-dialog/
 import type { TTranslation } from "@docspace/shared/types";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { getCookie } from "@docspace/ui-kit/utils/cookie";
-import SocketHelper, { SocketEvents, TChangeWebPluginData } from "@docspace/ui-kit/utils/socket";
+import SocketHelper, {
+  SocketEvents,
+  TChangeWebPluginData,
+} from "@docspace/ui-kit/utils/socket";
 
 import defaultConfig from "PUBLIC_DIR/scripts/config.json";
 
@@ -65,6 +68,8 @@ import type {
   IProfileMenuItemClient,
   IArticleButtonItem,
   IArticleButtonItemClient,
+  IArticleNavigationItem,
+  IArticleNavigationItemClient,
   IframeWindow,
   TPlugin,
   IPostMessageCallbackMessage,
@@ -124,6 +129,8 @@ class PluginStore {
 
   articleButtonItems: Map<string, IArticleButtonItemClient> = new Map();
 
+  articleNavigationItems: Map<string, IArticleNavigationItemClient> = new Map();
+
   pluginFrame: HTMLIFrameElement | null = null;
 
   isInit = false;
@@ -173,7 +180,7 @@ class PluginStore {
   }
 
   wsChangeWebPlugin = () => {
-     SocketHelper?.emit(SocketCommands.Subscribe, {
+    SocketHelper?.emit(SocketCommands.Subscribe, {
       roomParts: "change-web-plugin",
     });
 
@@ -351,6 +358,14 @@ class PluginStore {
           this.plugins[pluginIdx].scopes.includes(PluginScopes.ArticleButton)
         ) {
           this.updateArticleButtonItems(name);
+        }
+
+        if (
+          this.plugins[pluginIdx].scopes.includes(
+            PluginScopes.ArticleNavigation,
+          )
+        ) {
+          this.updateArticleNavigationItems(name);
         }
       }
     }
@@ -656,6 +671,10 @@ class PluginStore {
     if (plugin.scopes.includes(PluginScopes.ArticleButton)) {
       this.updateArticleButtonItems(name);
     }
+
+    if (plugin.scopes.includes(PluginScopes.ArticleNavigation)) {
+      this.updateArticleNavigationItems(name);
+    }
   };
 
   updatePlugin = async (
@@ -748,6 +767,10 @@ class PluginStore {
 
     if (plugin.scopes.includes(PluginScopes.ArticleButton)) {
       this.deactivateArticleButtonItems(plugin);
+    }
+
+    if (plugin.scopes.includes(PluginScopes.ArticleNavigation)) {
+      this.deactivateArticleNavigationItems(plugin);
     }
   };
 
@@ -1081,7 +1104,7 @@ class PluginStore {
 
     const userRole = this.getUserRole();
     const device = this.getCurrentDevice();
-  
+
     Array.from(items).forEach(([key, value]) => {
       const correctUserType = value.usersType
         ? value.usersType.includes(userRole)
@@ -1137,10 +1160,7 @@ class PluginStore {
         });
       }
 
-      const onClick = createMainButtonClickHandler(
-        value,
-        plugin.name,
-      );
+      const onClick = createMainButtonClickHandler(value, plugin.name);
 
       this.mainButtonItems.set(key, {
         ...value,
@@ -1386,6 +1406,53 @@ class PluginStore {
     }
   };
 
+  updateArticleNavigationItems = async (name: string) => {
+    const plugin = this.plugins.find((p) => p.name === name);
+
+    if (!plugin || !plugin.enabled) return;
+
+    const items: Map<string, IArticleNavigationItem> | undefined =
+      plugin.getArticleNavigationItems && plugin.getArticleNavigationItems();
+
+    if (!items) return;
+
+    const userRole = this.getUserRole();
+    const device = this.getCurrentDevice();
+
+    for (const [key, value] of Array.from(items)) {
+      const correctUserType = value.usersTypes
+        ? value.usersTypes.includes(userRole)
+        : true;
+
+      const correctDevice = value.devices
+        ? value.devices.includes(device)
+        : true;
+
+      if (!correctUserType || !correctDevice) continue;
+
+      const icon = `${plugin.iconUrl}/assets/${value.icon}?hash=${plugin.version}`;
+
+      this.articleNavigationItems.set(key, {
+        ...value,
+        icon,
+        pluginName: plugin.name,
+      });
+    }
+  };
+
+  deactivateArticleNavigationItems = (plugin: TPlugin) => {
+    if (!plugin) return;
+
+    const items: Map<string, IArticleNavigationItem> | undefined =
+      plugin.getArticleNavigationItems && plugin.getArticleNavigationItems();
+
+    if (!items) return;
+
+    Array.from(items).forEach(([key]) => {
+      this.articleNavigationItems.delete(key);
+    });
+  };
+
   deactivateArticleButtonItems = (plugin: TPlugin) => {
     if (!plugin) return;
 
@@ -1510,6 +1577,23 @@ class PluginStore {
 
   get articleButtonItemsList() {
     const items = Array.from(this.articleButtonItems, ([key, value]) => {
+      return {
+        key,
+        value: {
+          ...value,
+        },
+      };
+    });
+
+    if (items.length > 0) {
+      return items;
+    }
+
+    return null;
+  }
+
+  get articleNavigationItemsList() {
+    const items = Array.from(this.articleNavigationItems, ([key, value]) => {
       return {
         key,
         value: {

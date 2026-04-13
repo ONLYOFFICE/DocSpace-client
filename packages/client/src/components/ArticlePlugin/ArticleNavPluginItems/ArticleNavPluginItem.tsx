@@ -58,7 +58,7 @@ const ArticleNavPluginItem: React.FC<ArticleNavPluginItemProps> = ({
   const location = useLocation();
 
   const getLocationPath = () => {
-    let path = `${PLUGIN_SECTION_URL_PART}${pluginName}/${key}`;
+    const path = `${PLUGIN_SECTION_URL_PART}${pluginName}/${key}`;
 
     switch (section) {
       case Section.Settings:

@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import { Link, useLocation } from "react-router";
 import { inject, observer } from "mobx-react";
 
@@ -57,20 +57,17 @@ const ArticleNavPluginItem: React.FC<ArticleNavPluginItemProps> = ({
   const { key, label, icon, pluginName, onClick } = item;
   const location = useLocation();
 
-  const getLocationPath = () => {
-    const path = `${PLUGIN_SECTION_URL_PART}${pluginName}/${key}`;
-
+  const path = useMemo(() => {
+    const base = `${PLUGIN_SECTION_URL_PART}${pluginName}/${key}`;
     switch (section) {
       case Section.Settings:
-        return "/portal-settings".concat(path);
+        return "/portal-settings".concat(base);
       case Section.Accounts:
-        return `/accounts`.concat(path);
+        return `/accounts`.concat(base);
       default:
-        return path;
+        return base;
     }
-  };
-
-  const path = getLocationPath();
+  }, [section, pluginName, key]);
 
   const isActive =
     location.pathname === path || location.pathname.startsWith(`${path}/`);

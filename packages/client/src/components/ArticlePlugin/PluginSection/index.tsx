@@ -109,9 +109,6 @@ interface PluginSectionProps {
   articleNavigationItems?: PluginStore["articleNavigationItems"];
   enablePlugins: SettingsStore["enablePlugins"];
   isPluginsLoading: boolean;
-  isArticleLoading: boolean;
-  showPortalSettingsLoader: boolean;
-  showArticleLoader: boolean;
 }
 
 const PluginSectionWrapper = ({

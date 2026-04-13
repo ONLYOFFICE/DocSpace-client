@@ -398,8 +398,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
           }
 
           case PluginComponents.comboBox: {
-            const onSelectAction = (option) => {
-              const message = elementProps.onSelect(option);
+            const onSelectAction = async (option) => {
+              const message = await elementProps.onSelect(option);
 
               messageActions({
                 message,

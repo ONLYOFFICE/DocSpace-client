@@ -42,6 +42,7 @@ import {
   setFileView,
   setRoomsView,
 } from "../info-panel";
+import { PLUGIN_SECTION_URL_PART } from "./constants";
 
 export const messageActions = ({
   message,
@@ -326,6 +327,10 @@ export const messageActions = ({
         break;
     }
   });
+};
+
+export const isPluginPage = () => {
+  return window.location.pathname.includes(PLUGIN_SECTION_URL_PART);
 };
 
 export const getPluginUrl = (url, file) => {

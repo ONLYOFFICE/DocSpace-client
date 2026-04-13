@@ -33,6 +33,7 @@ import {
   Components,
   UsersType,
   Devices,
+  Section,
 } from "@onlyoffice/docspace-plugin-sdk";
 
 enum PluginScopes {
@@ -46,10 +47,12 @@ enum PluginScopes {
   File = "File",
   PostMessage = "PostMessage",
   ArticleButton = "ArticleButton",
+  ArticleNavigation = "ArticleNavigation",
 }
 
 export {
   PluginScopes,
+  Section,
   Actions as PluginActions,
   FilesType as PluginFileType,
   Events as PluginEvents,
@@ -59,3 +62,4 @@ export {
   UsersType as PluginUsersType,
   Devices as PluginDevices,
 };
+

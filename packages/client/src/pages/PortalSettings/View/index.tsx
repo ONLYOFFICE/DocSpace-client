@@ -44,6 +44,7 @@ import { Component as StorageManagement } from "../categories/storage-management
 import { Component as Payments } from "../categories/payments";
 import { Component as Bonus } from "../../Bonus";
 import { Component as AISettings } from "../categories/ai-settings";
+import NewAISettings from "../categories/new-ai-settings";
 
 import useSecurity from "../categories/security/useSecurity";
 import useBackup from "../categories/data-management/backup/useBackup";
@@ -76,6 +77,7 @@ const getViewFromPathname = (pathname: string): TView => {
 
   if (pathname.includes("bonus")) return "bonus";
 
+  if (pathname.includes("new-ai-settings")) return "new-ai-settings";
   if (pathname.includes("ai-settings")) return "ai-settings";
 
   return "";
@@ -294,6 +296,9 @@ const View = ({
           case "ai-settings":
             await getAiSettingsInitialValue();
             break;
+
+          case "new-ai-settings":
+            break;
         }
 
         if (requestId === activeRequestIdRef.current) {
@@ -330,6 +335,7 @@ const View = ({
       {currentView === "payments" ? <Payments /> : null}
       {currentView === "bonus" ? <Bonus /> : null}
       {currentView === "ai-settings" ? <AISettings /> : null}
+      {currentView === "new-ai-settings" ? <NewAISettings /> : null}
       {currentView === "ai-services" ||
       currentView === "backup-service" ||
       currentView === "disk-storage" ? (

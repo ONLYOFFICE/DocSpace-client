@@ -362,6 +362,30 @@ const PortalSettingsRoutes = {
       },
     },
     {
+      path: "new-ai-settings",
+      element: <Navigate to="/portal-settings/new-ai-settings/ai-models" replace />,
+    },
+    {
+      path: "new-ai-settings/ai-models",
+      element: <ViewComponent />,
+    },
+    {
+      path: "new-ai-settings/model-assignment",
+      element: <ViewComponent />,
+    },
+    {
+      path: "new-ai-settings/mcp-servers",
+      element: <ViewComponent />,
+    },
+    {
+      path: "new-ai-settings/web-search",
+      element: <ViewComponent />,
+    },
+    {
+      path: "new-ai-settings/knowledge",
+      element: <ViewComponent />,
+    },
+    {
       path: "ai-settings",
       element: (
         <ProtectedAISettingsRoute>

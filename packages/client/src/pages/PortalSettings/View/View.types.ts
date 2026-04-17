@@ -37,6 +37,7 @@ export type TView =
   | "bonus"
   | "services"
   | "ai-settings"
+  | "new-ai-settings"
   | "ai-services"
   | "backup-service"
   | "disk-storage"

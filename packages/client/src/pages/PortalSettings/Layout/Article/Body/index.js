@@ -146,7 +146,9 @@ const ArticleBodyContent = (props) => {
         setSelectedKeys(["6-0"]);
       }
 
-      if (location.pathname.includes("ai-settings")) {
+      if (location.pathname.includes("new-ai-settings")) {
+        setSelectedKeys(["8-0"]);
+      } else if (location.pathname.includes("ai-settings")) {
         setSelectedKeys(["7-0"]);
       }
 
@@ -235,6 +237,8 @@ const ArticleBodyContent = (props) => {
         return t("Services");
       case "AISettings":
         return t("Settings:AISettings");
+      case "NewAISettings":
+        return "New AI Settings";
       default:
         throw new Error("Unexpected translation key");
     }

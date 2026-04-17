@@ -41,6 +41,7 @@ import { Portal } from "@docspace/ui-kit/components/portal";
 import { SnackBar } from "@docspace/ui-kit/components/snackbar";
 import { Toast, toastr, ToastType } from "@docspace/ui-kit/components/toast";
 import { RootTooltip } from "@docspace/ui-kit/components/tooltip";
+import AiAgentProviders from "@docspace/ui-kit/ai-agent/providers";
 import { updateTempContent } from "@docspace/shared/utils/common";
 import { DeviceType, IndexedDBStores } from "@docspace/shared/enums";
 import indexedDbHelper from "@docspace/shared/utils/indexedDBHelper";
@@ -529,27 +530,32 @@ const Shell = ({ page = "home", ...rest }) => {
 
   return (
     <SectionNavigationProvider>
-      <Layout>
-        {toast}
-        <RootTooltip />
-        {isMobileOnly && !isFrame ? (
-          <ReactSmartBanner t={t} ready={ready} />
-        ) : null}
-        {withoutNavMenu ? null : <NavMenu />}
-        <IndicatorLoader />
-        <ScrollToTop />
-        <DialogsWrapper t={t} />
-
-        <Main isDesktop={isDesktop}>
-          {!isMobileOnly && !isFrame ? (
+      <AiAgentProviders
+        locale={language}
+        theme={isBase ? "theme-portal-base" : "theme-portal-dark"}
+      >
+        <Layout>
+          {toast}
+          <RootTooltip />
+          {isMobileOnly && !isFrame ? (
             <ReactSmartBanner t={t} ready={ready} />
           ) : null}
-          {barTypeInFrame !== "none" ? <MainBar /> : null}
-          <div className="main-container">
-            <Outlet />
-          </div>
-        </Main>
-      </Layout>
+          {withoutNavMenu ? null : <NavMenu />}
+          <IndicatorLoader />
+          <ScrollToTop />
+          <DialogsWrapper t={t} />
+
+          <Main isDesktop={isDesktop}>
+            {!isMobileOnly && !isFrame ? (
+              <ReactSmartBanner t={t} ready={ready} />
+            ) : null}
+            {barTypeInFrame !== "none" ? <MainBar /> : null}
+            <div className="main-container">
+              <Outlet />
+            </div>
+          </Main>
+        </Layout>
+      </AiAgentProviders>
     </SectionNavigationProvider>
   );
 };

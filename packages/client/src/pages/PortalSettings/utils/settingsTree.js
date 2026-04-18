@@ -83,7 +83,7 @@ export const settingsTree = [
             key: "0-0-4",
             icon: "",
             link: "configure-deep-link",
-            tKey: "ConfigureDeepLink",
+            tKey: "ConfigureFileOpening",
           },
           {
             id: "portal-settings_catalog-ad-management",

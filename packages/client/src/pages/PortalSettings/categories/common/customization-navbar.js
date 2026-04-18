@@ -97,8 +97,8 @@ const CustomizationNavbar = ({
         />
       ) : null}
       <CategoryItem
-        title={t("ConfigureDeepLink")}
-        subtitle={t("ConfigureDeepLinkDescription")}
+        title={t("Common:ConfigureFileOpening")}
+        subtitle={t("Common:ConfigureFileOpeningDescription")}
         url="/portal-settings/customization/general/configure-deep-link"
         onClickLink={onClickLink}
       />
@@ -140,3 +140,4 @@ export default inject(({ common, settingsStore, currentTariffStatusStore }) => {
     isEnterprise,
   };
 })(observer(withTranslation(["Settings", "Common"])(CustomizationNavbar)));
+

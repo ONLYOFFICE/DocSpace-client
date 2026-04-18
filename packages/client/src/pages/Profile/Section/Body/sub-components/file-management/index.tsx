@@ -31,6 +31,7 @@ import classNames from "classnames";
 
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { Text } from "@docspace/ui-kit/components/text";
+import { DeepLinkType } from "@docspace/shared/enums";
 
 import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 
@@ -61,6 +62,8 @@ type FileManagementProps = {
 
   organizeRoomsGrouping?: boolean;
   setOrganizeRoomsGrouping?: FilesSettingsStore["setOrganizeRoomsGrouping"];
+
+  deepLinkType?: DeepLinkType;
 };
 
 const FileManagement = ({
@@ -86,6 +89,8 @@ const FileManagement = ({
 
   organizeRoomsGrouping,
   setOrganizeRoomsGrouping,
+
+  deepLinkType,
 }: FileManagementProps) => {
   const { t } = useTranslation(["FilesSettings", "Common"]);
 
@@ -201,17 +206,13 @@ const FileManagement = ({
           <Text>{t("GroupByRooms")}</Text>
         </div>
       </div>
-      <ConfigureDeepLink />
+      {deepLinkType === DeepLinkType.Choice ? <ConfigureDeepLink /> : null}
     </div>
   );
 };
 
 export default inject(
-  ({
-    filesSettingsStore,
-    treeFoldersStore,
-    settingsStore,
-  }: TStore) => {
+  ({ filesSettingsStore, treeFoldersStore, settingsStore }: TStore) => {
     const {
       storeOriginalFiles,
       confirmDelete,
@@ -236,7 +237,7 @@ export default inject(
       organizeRoomsGrouping,
       setOrganizeRoomsGrouping,
     } = filesSettingsStore;
-    const { logoText } = settingsStore;
+    const { logoText, deepLinkType } = settingsStore;
 
     const { myFolderId, commonFolderId } = treeFoldersStore;
 
@@ -263,6 +264,7 @@ export default inject(
       displayFileExtension,
       setDisplayFileExtension,
       logoText,
+      deepLinkType,
       hideConfirmCancelOperation,
       setHideConfirmCancelOperation,
       organizeRoomsGrouping,
@@ -270,3 +272,4 @@ export default inject(
     };
   },
 )(observer(FileManagement));
+

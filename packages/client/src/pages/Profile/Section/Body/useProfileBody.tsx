@@ -31,14 +31,16 @@ import {
   getAuthProviders,
   getTfaBackupCodes,
   getNotificationsSettings,
+  getDeepLinkSettings,
 } from "@docspace/shared/api/settings";
 import {
   TThirdPartyProvider,
   TNotificationChannel,
 } from "@docspace/shared/api/settings/types";
 import { toastr } from "@docspace/ui-kit/components/toast";
-import { NotificationsType } from "@docspace/shared/enums";
+import { DeepLinkType, NotificationsType } from "@docspace/shared/enums";
 import { AuthStore } from "@docspace/shared/store/AuthStore";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { TfaStore } from "@docspace/shared/store/TfaStore";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
@@ -67,6 +69,7 @@ export type UseProfileBodyProps = {
   setIsProfileLoaded: ClientLoadingStore["setIsProfileLoaded"];
   setIsSectionHeaderLoading: ClientLoadingStore["setIsSectionHeaderLoading"];
   checkTg: TelegramStore["checkTg"];
+  setDeepLinkType: SettingsStore["setDeepLinkType"];
   setIsArticleLoading?: ClientLoadingStore["setIsArticleLoading"];
   setIsSectionBodyLoading?: ClientLoadingStore["setIsSectionBodyLoading"];
 };
@@ -89,6 +92,7 @@ const useProfileBody = ({
   setIsSectionBodyLoading,
   getTfaType,
   checkTg,
+  setDeepLinkType,
 }: UseProfileBodyProps) => {
   const tfaOn = tfaSettings && tfaSettings !== "none";
 
@@ -134,7 +138,14 @@ const useProfileBody = ({
       window.DocSpace.location.pathname.includes("portal-settings");
 
     if (prefix) await getFilesSettings?.();
-  }, [getFilesSettings]);
+
+    try {
+      const res = (await getDeepLinkSettings()) as { handlingMode: DeepLinkType };
+      setDeepLinkType(res?.handlingMode);
+    } catch (e) {
+      toastr.error(e as string);
+    }
+  }, [getFilesSettings, setDeepLinkType]);
 
   const getConsentList = React.useCallback(async () => {
     try {
@@ -246,3 +257,4 @@ const useProfileBody = ({
 };
 
 export default useProfileBody;
+

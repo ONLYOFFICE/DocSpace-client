@@ -386,6 +386,10 @@ class SettingsStore {
     }
   };
 
+  setDeepLinkType = (deepLinkType: DeepLinkType) => {
+    this.deepLinkType = deepLinkType;
+  };
+
   setLogoText = (logoText: string) => {
     this.logoText = logoText;
   };

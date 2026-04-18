@@ -38,6 +38,7 @@ import { toastr } from "@docspace/ui-kit/components/toast";
 import { SECTION_HEADER_HEIGHT } from "@docspace/ui-kit/components/section/Section.constants";
 import { TfaStore } from "@docspace/shared/store/TfaStore";
 import { AuthStore } from "@docspace/shared/store/AuthStore";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 import TargetUserStore from "SRC_DIR/store/contacts/TargetUserStore";
@@ -80,6 +81,7 @@ type SectionBodyContentProps = {
   resetSelections?: FilesStore["resetSelections"];
   setNotificationChannels?: TargetUserStore["setNotificationChannels"];
   checkTg?: TelegramStore["checkTg"];
+  setDeepLinkType?: SettingsStore["setDeepLinkType"];
 };
 
 const SectionBodyContent = (props: SectionBodyContentProps) => {
@@ -106,6 +108,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     resetSelections,
     setNotificationChannels,
     checkTg,
+    setDeepLinkType,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
@@ -151,6 +154,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     setIsArticleLoading: setIsArticleLoading!,
     getTfaType: getTfaType!,
     checkTg: checkTg!,
+    setDeepLinkType: setDeepLinkType!,
     setIsSectionBodyLoading: setIsSectionBodyLoading!,
   });
 
@@ -305,6 +309,7 @@ export default inject(
       resetSelections,
       setNotificationChannels,
       checkTg,
+      setDeepLinkType: settingsStore.setDeepLinkType,
     };
   },
 )(

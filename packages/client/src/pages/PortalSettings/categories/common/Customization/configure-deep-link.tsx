@@ -95,7 +95,7 @@ const ConfigureDeepLinkComponent = (props: Props) => {
     currentColorScheme,
   } = props;
 
-  const { t, ready } = useTranslation(["Settings", "Common"]);
+  const { t, ready } = useTranslation("Common");
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -196,10 +196,10 @@ const ConfigureDeepLinkComponent = (props: Props) => {
     <StyledWrapper>
       {!isMobileView ? (
         <Text fontSize="16px" fontWeight={700}>
-          {t("ConfigureDeepLink")}
+          {t("Common:ConfigureFileOpening")}
         </Text>
       ) : null}
-      <Text>{t("ConfigureDeepLinkDescription")}</Text>
+      <Text>{t("Common:ConfigureFileOpeningDescription")}</Text>
       {configureDeepLinkUrl ? (
         <Link
           className="link-learn-more"
@@ -222,19 +222,21 @@ const ConfigureDeepLinkComponent = (props: Props) => {
         options={[
           {
             id: "provide-a-choice",
-            label: t("ProvideChoice"),
+            label: t("Common:AlwaysAsk"),
             value: 0,
             dataTestId: "deep_link_provide-a-choice",
           },
           {
             id: "by-web",
-            label: t("OpenInWebOnly"),
+            label: t("Common:InBrowser", {
+              productName: t("Common:ProductName"),
+            }),
             value: 1,
             dataTestId: "deep_link_by-web",
           },
           {
             id: "by-app",
-            label: t("OpenInAppOnly"),
+            label: t("Common:InMobileApp"),
             value: 2,
             dataTestId: "deep_link_by-app",
           },
@@ -282,3 +284,4 @@ export const ConfigureDeepLink = inject<TStore>(({ settingsStore, common }) => {
     setIsLoadedConfigureDeepLink,
   };
 })(withLoading(observer(ConfigureDeepLinkComponent)));
+

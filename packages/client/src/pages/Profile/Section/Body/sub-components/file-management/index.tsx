@@ -35,6 +35,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 
 import { DefaultPageSetting } from "./sub-components/DefaultPageSetting";
+import { ConfigureDeepLink } from "./sub-components/ConfigureDeepLink";
 import styles from "./FileManagement.module.scss";
 
 type FileManagementProps = {
@@ -200,6 +201,7 @@ const FileManagement = ({
           <Text>{t("GroupByRooms")}</Text>
         </div>
       </div>
+      <ConfigureDeepLink />
     </div>
   );
 };

@@ -1574,5 +1574,10 @@
   "PlanStorageLimit": "New tariff's limitation is <1>{{storageValue}}</1> of storage, and your current used storage is <1>{{currentStorageValue}}</1>.",
   "ChangePricingPlan": "Change pricing plan",
   "CannotChangePlan": "You cannot change your plan because the used storage volume or the number of admins exceeds the limitations of the selected plan:",
-  "SaveOrChange": "Please eliminate the mismatch in the conflicting parameter to proceed or keep your active pricing plan."
+  "SaveOrChange": "Please eliminate the mismatch in the conflicting parameter to proceed or keep your active pricing plan.",
+  "ConfigureFileOpening": "Configure file opening",
+  "ConfigureFileOpeningDescription": "When handling office files in a mobile browser, users can choose (or be defaulted) how they prefer to open files.",
+  "AlwaysAsk": "Always ask (select each time)",
+  "InBrowser": "In {{productName}} (stay in browser)",
+  "InMobileApp": "In the mobile app"
 }

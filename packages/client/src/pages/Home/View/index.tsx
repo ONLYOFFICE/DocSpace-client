@@ -164,6 +164,7 @@ const View = ({
 
   setNotificationChannels,
   checkTg,
+  setDeepLinkType,
 
   aiAgentSelectorDialogProps,
   setAiAgentSelectorDialogProps,
@@ -267,6 +268,7 @@ const View = ({
     setIsSectionHeaderLoading: setIsSectionHeaderLoading!,
     getTfaType: getTfaType!,
     checkTg: checkTg!,
+    setDeepLinkType: setDeepLinkType!,
   });
 
   const [roomId, setRoomId] = React.useState(() => {
@@ -732,6 +734,7 @@ export const ViewComponent = inject(
     const { getSessions } = setup;
 
     const { checkTg } = telegramStore;
+    const { setDeepLinkType } = settingsStore;
 
     const { aiAgentSelectorDialogProps, setAiAgentSelectorDialogProps } =
       dialogsStore;
@@ -797,6 +800,7 @@ export const ViewComponent = inject(
       setIsProfileLoaded,
       setNotificationChannels,
       checkTg,
+      setDeepLinkType,
 
       aiAgentSelectorDialogProps,
       setAiAgentSelectorDialogProps,

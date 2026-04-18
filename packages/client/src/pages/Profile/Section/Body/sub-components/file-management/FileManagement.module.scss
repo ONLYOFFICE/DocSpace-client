@@ -60,16 +60,16 @@
   .configureDeepLink {
     display: flex;
     flex-direction: column;
-    gap: 8px;
   }
 
   .configureDeepLinkDescription {
+    margin-top: 2px;
     color: var(--text-disable-color);
   }
 
   .configureDeepLinkRadio {
     width: fit-content;
-    margin-top: 4px;
+    margin-top: 12px;
   }
 
   :global {

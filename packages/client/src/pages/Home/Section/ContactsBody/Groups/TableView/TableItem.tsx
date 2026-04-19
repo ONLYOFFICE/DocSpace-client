@@ -23,45 +23,33 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import classNames from "classnames";
+import { useTheme } from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "styled-components";
 
-import { TableCell } from "@docspace/ui-kit/components/table";
 import { Link } from "@docspace/ui-kit/components/link";
-import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { Text } from "@docspace/ui-kit/components/text";
+import { TableCell } from "@docspace/ui-kit/components/table";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import {
   Avatar,
   AvatarRole,
   AvatarSize,
 } from "@docspace/ui-kit/components/avatar";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
-import { TGroup } from "@docspace/shared/api/groups/types";
-
-import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
-import ContactsHotkeysStore from "SRC_DIR/store/contacts/ContactsHotkeysStore";
 
 import Badges from "../../Badges";
 
-import { GroupsRowWrapper, GroupsRow } from "./TableView.styled";
+import styles from "./TableView.module.scss";
+import { GroupsRow } from "./TableView.styled";
 
-type GroupsTableItemProps = {
-  item: TGroup;
-  itemIndex: number;
-  isChecked: boolean;
-  peopleGroupsColumnIsEnabled: boolean;
-  managerGroupsColumnIsEnabled: boolean;
-
-  bufferSelection?: GroupsStore["bufferSelection"];
-  getGroupContextOptions?: GroupsStore["getGroupContextOptions"];
-  getModel?: GroupsStore["getModel"];
-  openGroupAction?: GroupsStore["openGroupAction"];
-  selectRow?: GroupsStore["selectRow"];
-  changeGroupSelection?: GroupsStore["changeGroupSelection"];
-  changeGroupContextSelection?: GroupsStore["changeGroupContextSelection"];
-  withContentSelection?: ContactsHotkeysStore["withContentSelection"];
-};
+import type {
+  ExternalGroupsTableItemProps,
+  GroupsTableItemProps,
+  InjectedGroupsTableItemProps,
+} from "./TableView.types";
 
 const GroupsTableItem = ({
   item,
@@ -115,12 +103,12 @@ const GroupsTableItem = ({
   const value = `folder_${item.id}_false_index_${itemIndex}`;
 
   return (
-    <GroupsRowWrapper
+    <div
       id={item.id}
-      className={`group-item ${
-        (isChecked || isActive) && "table-row-selected"
-      } ${item.id}`}
-      value={value}
+      className={classNames(styles.groupsRowWrapper, `group-item`, item.id, {
+        ["table-row-selected"]: isChecked || isActive,
+      })}
+      data-value={value}
       data-testid={`contacts_table_groups_row_${itemIndex}`}
     >
       <GroupsRow
@@ -131,7 +119,7 @@ const GroupsTableItem = ({
         onClick={onRowClick}
         fileContextClick={onRowContextClick}
         contextOptions={
-          getGroupContextOptions!(t, item) as unknown as ContextMenuModel[]
+          getGroupContextOptions(t, item) as unknown as ContextMenuModel[]
         }
         getContextModel={getContextModel!}
         badgeUrl=""
@@ -222,18 +210,22 @@ const GroupsTableItem = ({
           <div />
         )}
       </GroupsRow>
-    </GroupsRowWrapper>
+    </div>
   );
 };
 
-export default inject(({ peopleStore }: TStore) => ({
-  bufferSelection: peopleStore.groupsStore!.bufferSelection,
-  getGroupContextOptions: peopleStore.groupsStore!.getGroupContextOptions,
-  getModel: peopleStore.groupsStore!.getModel,
-  openGroupAction: peopleStore.groupsStore!.openGroupAction,
-  changeGroupSelection: peopleStore.groupsStore!.changeGroupSelection,
+export default inject<
+  TStore,
+  ExternalGroupsTableItemProps,
+  InjectedGroupsTableItemProps
+>(({ peopleStore }) => ({
+  bufferSelection: peopleStore.groupsStore.bufferSelection,
+  getGroupContextOptions: peopleStore.groupsStore.getGroupContextOptions,
+  getModel: peopleStore.groupsStore.getModel,
+  openGroupAction: peopleStore.groupsStore.openGroupAction,
+  changeGroupSelection: peopleStore.groupsStore.changeGroupSelection,
   changeGroupContextSelection:
-    peopleStore.groupsStore!.changeGroupContextSelection,
-  selectRow: peopleStore.groupsStore!.selectRow,
-  withContentSelection: peopleStore.contactsHotkeysStore!.withContentSelection,
-}))(observer(GroupsTableItem));
+    peopleStore.groupsStore.changeGroupContextSelection,
+  selectRow: peopleStore.groupsStore.selectRow,
+  withContentSelection: peopleStore.contactsHotkeysStore.withContentSelection,
+}))(observer(GroupsTableItem as React.FC<ExternalGroupsTableItemProps>));

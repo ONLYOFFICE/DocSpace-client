@@ -24,182 +24,246 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useRef } from "react";
+import { useCallback, useMemo } from "react";
 import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router";
 
-import { TableBody } from "@docspace/ui-kit/components/table";
-import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import { TTableColumn } from "@docspace/ui-kit/components/table";
+import { Events } from "@docspace/shared/enums";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
-import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
-import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
-import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
-import TableStore from "SRC_DIR/store/TableStore";
-import ContactsHotkeysStore from "SRC_DIR/store/contacts/ContactsHotkeysStore";
-import { TContactsViewAs } from "SRC_DIR/helpers/contacts";
-
 import EmptyScreenGroups from "../../EmptyScreenGroups";
 
-import { GroupsTableContainer } from "./TableView.styled";
-
 import GroupsTableItem from "./TableItem";
-import GroupsTableHeader from "./TableHeader";
+import { GroupsStyledTable } from "./TableView.styled";
 
-type GroupsTableViewProps = {
-  groups?: GroupsStore["groups"];
-  selection?: GroupsStore["selection"];
-  fetchMoreGroups?: GroupsStore["fetchMoreGroups"];
-  hasMoreGroups?: GroupsStore["hasMoreGroups"];
-  groupsFilterTotal?: GroupsStore["groupsFilterTotal"];
-
-  sectionWidth?: number;
-
-  viewAs?: PeopleStore["viewAs"];
-  setViewAs?: PeopleStore["setViewAs"];
-
-  infoPanelVisible?: InfoPanelStore["isVisible"];
-
-  currentDeviceType?: SettingsStore["currentDeviceType"];
-
-  peopleGroupsColumnIsEnabled?: TableStore["peopleGroupsColumnIsEnabled"];
-  managerGroupsColumnIsEnabled?: TableStore["managerGroupsColumnIsEnabled"];
-
-  columnStorageName?: TableStore["columnStorageName"];
-  columnInfoPanelStorageName?: TableStore["columnInfoPanelStorageName"];
-  withContentSelection?: ContactsHotkeysStore["withContentSelection"];
-};
+import type {
+  ExternalGroupsTableViewProps,
+  GroupsTableViewProps,
+  InjectedGroupsTableViewProps,
+} from "./TableView.types";
 
 const GroupsTableView = ({
   groups,
   selection,
-
   sectionWidth,
-
   viewAs,
   setViewAs,
-
   infoPanelVisible,
-
   currentDeviceType,
-
   fetchMoreGroups,
   hasMoreGroups,
   groupsFilterTotal,
-
+  filter,
+  setFilter,
+  setIsLoading,
   peopleGroupsColumnIsEnabled,
   managerGroupsColumnIsEnabled,
-
+  setColumnEnable,
+  tableStorageName,
   columnStorageName,
   columnInfoPanelStorageName,
   withContentSelection,
 }: GroupsTableViewProps) => {
-  const ref = useRef<HTMLDivElement>(null);
-
   const navigate = useNavigate();
   const location = useLocation();
+  const { t } = useTranslation(["People", "Common", "PeopleTranslations"]);
 
   useViewEffect({
-    view: viewAs!,
-    setView: (view: string) => {
-      setViewAs!(view as TContactsViewAs);
-    },
+    view: viewAs,
+    setView: setViewAs,
     currentDeviceType: currentDeviceType!,
   });
+
+  const onFilter = useCallback(
+    (sortBy: string) => {
+      const newFilter = filter!.clone();
+      const reverseSortOrder =
+        newFilter.sortOrder === "ascending" ? "descending" : "ascending";
+
+      if (newFilter.sortBy === sortBy && sortBy !== "AZ")
+        newFilter.sortOrder = reverseSortOrder;
+      else {
+        newFilter.sortBy = sortBy;
+        if (sortBy === "AZ") newFilter.sortOrder = reverseSortOrder;
+      }
+
+      setIsLoading!(true);
+      setFilter!(newFilter);
+      navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
+    },
+    [filter, setFilter, setIsLoading, navigate, location.pathname],
+  );
+
+  const onColumnChange = useCallback(
+    (key: string) => {
+      setColumnEnable!(key);
+
+      const nextPeople =
+        key === "People"
+          ? !peopleGroupsColumnIsEnabled
+          : (peopleGroupsColumnIsEnabled ?? false);
+      const nextManager =
+        key === "Head of Group"
+          ? !managerGroupsColumnIsEnabled
+          : (managerGroupsColumnIsEnabled ?? false);
+
+      const tableColumns = [
+        "Name",
+        nextPeople && "People",
+        nextManager && "Head of Group",
+      ];
+      localStorage.setItem(tableStorageName, tableColumns.toString());
+
+      const event = new Event(Events.CHANGE_COLUMN);
+      window.dispatchEvent(event);
+    },
+    [
+      setColumnEnable,
+      tableStorageName,
+      peopleGroupsColumnIsEnabled,
+      managerGroupsColumnIsEnabled,
+    ],
+  );
+
+  const columns: TTableColumn[] = useMemo(
+    () => [
+      {
+        key: "Name",
+        title: t("Common:Title"),
+        resizable: true,
+        enable: true,
+        default: true,
+        sortBy: "title",
+        minWidth: 210,
+        onClick: onFilter,
+      },
+      {
+        key: "People",
+        title: t("Common:Members"),
+        enable: peopleGroupsColumnIsEnabled,
+        sortBy: "membersCount",
+        onClick: onFilter,
+        resizable: true,
+        onChange: onColumnChange,
+      },
+      {
+        key: "Head of Group",
+        title: t("Common:HeadOfGroup"),
+        enable: managerGroupsColumnIsEnabled,
+        sortBy: "manager",
+        onClick: onFilter,
+        resizable: true,
+        onChange: onColumnChange,
+      },
+    ],
+    [
+      t,
+      peopleGroupsColumnIsEnabled,
+      managerGroupsColumnIsEnabled,
+      onFilter,
+      onColumnChange,
+    ],
+  );
+
+  const sortBy = filter.sortBy === "displayname" ? "AZ" : filter.sortBy;
+  const sorted = filter.sortOrder === "descending";
 
   if (!groups?.length) return <EmptyScreenGroups />;
 
   return (
-    <GroupsTableContainer
-      noSelect={!withContentSelection}
+    <GroupsStyledTable
+      showSettings
       useReactWindow
-      forwardedRef={ref as React.RefObject<HTMLDivElement>}
+      itemHeight={48}
+      sortBy={sortBy}
+      sorted={sorted}
+      columns={columns}
+      filesLength={groups.length}
+      sectionWidth={sectionWidth!}
+      hasMoreFiles={hasMoreGroups}
+      itemCount={groupsFilterTotal}
+      noSelect={!withContentSelection}
+      fetchMoreFiles={fetchMoreGroups}
+      infoPanelVisible={infoPanelVisible}
+      columnStorageName={columnStorageName}
+      columnInfoPanelStorageName={columnInfoPanelStorageName}
     >
-      <GroupsTableHeader
-        columnStorageName={columnStorageName}
-        columnInfoPanelStorageName={columnInfoPanelStorageName}
-        sectionWidth={sectionWidth!}
-        containerRef={ref}
-        navigate={navigate}
-        location={location}
-      />
-      <TableBody
-        columnStorageName={columnStorageName!}
-        columnInfoPanelStorageName={columnInfoPanelStorageName}
-        infoPanelVisible={infoPanelVisible}
-        fetchMoreFiles={fetchMoreGroups!}
-        hasMoreFiles={hasMoreGroups!}
-        itemCount={groupsFilterTotal!}
-        filesLength={groups.length}
-        itemHeight={48}
-        useReactWindow
-        isIndexEditingMode={false}
-      >
-        {groups.map((item, index) => (
-          <GroupsTableItem
-            key={item.id}
-            item={item}
-            isChecked={selection?.includes(item) ?? false}
-            itemIndex={index}
-            managerGroupsColumnIsEnabled={managerGroupsColumnIsEnabled ?? false}
-            peopleGroupsColumnIsEnabled={peopleGroupsColumnIsEnabled ?? false}
-          />
-        ))}
-      </TableBody>
-    </GroupsTableContainer>
+      {groups.map((item, index) => (
+        <GroupsTableItem
+          key={item.id}
+          item={item}
+          isChecked={selection?.includes(item) ?? false}
+          itemIndex={index}
+          managerGroupsColumnIsEnabled={managerGroupsColumnIsEnabled ?? false}
+          peopleGroupsColumnIsEnabled={peopleGroupsColumnIsEnabled ?? false}
+        />
+      ))}
+    </GroupsStyledTable>
   );
 };
 
-export default inject(
-  ({ peopleStore, settingsStore, infoPanelStore, tableStore }: TStore) => {
+export default inject<
+  TStore,
+  ExternalGroupsTableViewProps,
+  InjectedGroupsTableViewProps
+>(
+  ({
+    peopleStore,
+    settingsStore,
+    infoPanelStore,
+    tableStore,
+    clientLoadingStore,
+  }) => {
     const { groupsStore, contactsHotkeysStore, viewAs, setViewAs } =
       peopleStore;
 
     const {
       groups,
       selection,
-
       fetchMoreGroups,
       hasMoreGroups,
-
       groupsFilterTotal,
-    } = groupsStore!;
+      groupsFilter: filter,
+      setGroupsFilter: setFilter,
+    } = groupsStore;
 
     const { currentDeviceType } = settingsStore;
-
     const { isVisible: infoPanelVisible } = infoPanelStore;
 
     const {
       managerGroupsColumnIsEnabled,
       peopleGroupsColumnIsEnabled,
-
+      setColumnEnable,
+      tableStorageName,
       columnStorageName,
       columnInfoPanelStorageName,
     } = tableStore;
 
-    const { withContentSelection } = contactsHotkeysStore!;
+    const { withContentSelection } = contactsHotkeysStore;
 
     return {
+      filter,
+      setFilter,
       groups,
-      selection,
-
       viewAs,
       setViewAs,
-
-      infoPanelVisible,
-
-      currentDeviceType,
-
-      fetchMoreGroups,
+      selection,
       hasMoreGroups,
+      setColumnEnable,
+      infoPanelVisible,
+      currentDeviceType,
+      fetchMoreGroups,
       groupsFilterTotal,
-
-      peopleGroupsColumnIsEnabled,
-      managerGroupsColumnIsEnabled,
-
+      tableStorageName,
       columnStorageName,
+      managerGroupsColumnIsEnabled,
+      peopleGroupsColumnIsEnabled,
       columnInfoPanelStorageName,
       withContentSelection,
+      setIsLoading: clientLoadingStore.setIsSectionBodyLoading,
     };
   },
-)(observer(GroupsTableView));
+)(observer(GroupsTableView as React.FC<ExternalGroupsTableViewProps>));
+

@@ -26,7 +26,7 @@
 
 import styled, { css } from "styled-components";
 
-import { TableRow, TableContainer } from "@docspace/ui-kit/components/table";
+import { TableRow, Table } from "@docspace/ui-kit/components/table";
 
 const marginCss = css`
   margin-top: -1px;
@@ -46,7 +46,7 @@ const contextCss = css`
   ${marginCss}
 `;
 
-export const GroupsTableContainer = styled(TableContainer)`
+export const GroupsStyledTable = styled(Table)`
   :has(
     .table-container_body
       .table-list-item:first-child:first-child

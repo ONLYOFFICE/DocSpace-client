@@ -45,16 +45,6 @@ import { GroupsTableContainer } from "./TableView.styled";
 
 import GroupsTableItem from "./TableItem";
 import GroupsTableHeader from "./TableHeader";
-import GroupsTableViewV2 from "./GroupsTableViewV2";
-
-// Feature flags:
-// "true" = TanStack only, "compare" = both side-by-side, anything else = old only
-const TANSTACK_FLAG =
-  typeof window !== "undefined"
-    ? localStorage.getItem("USE_TANSTACK_TABLE")
-    : null;
-const USE_TANSTACK_TABLE = TANSTACK_FLAG === "true" || TANSTACK_FLAG === "compare";
-const COMPARE_MODE = TANSTACK_FLAG === "compare";
 
 type GroupsTableViewProps = {
   groups?: GroupsStore["groups"];
@@ -117,11 +107,9 @@ const GroupsTableView = ({
     currentDeviceType: currentDeviceType!,
   });
 
-  if (USE_TANSTACK_TABLE && !COMPARE_MODE) {
-    return <GroupsTableViewV2 sectionWidth={sectionWidth} />;
-  }
+  if (!groups?.length) return <EmptyScreenGroups />;
 
-  const oldTable = groups?.length ? (
+  return (
     <GroupsTableContainer
       noSelect={!withContentSelection}
       useReactWindow
@@ -159,24 +147,7 @@ const GroupsTableView = ({
         ))}
       </TableBody>
     </GroupsTableContainer>
-  ) : (
-    <EmptyScreenGroups />
   );
-
-  if (COMPARE_MODE) {
-    return (
-      <div>
-        <div style={{ padding: "4px 0", fontWeight: "bold", fontSize: "11px", color: "red" }}>OLD (legacy)</div>
-        <div style={{ border: "1px solid red", marginBottom: "16px" }}>{oldTable}</div>
-        <div style={{ padding: "4px 0", fontWeight: "bold", fontSize: "11px", color: "green" }}>NEW (TanStack)</div>
-        <div style={{ border: "1px solid green" }}>
-          <GroupsTableViewV2 sectionWidth={sectionWidth} />
-        </div>
-      </div>
-    );
-  }
-
-  return oldTable;
 };
 
 export default inject(

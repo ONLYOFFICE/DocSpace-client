@@ -26,10 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-$gray-light-mid: #eceef1;
-$light-gray-hover: #f3f4f4;
-$gray-dark-strong: #474747;
-$light-dark-gray-hover: #3d3d3d;
+@use "@docspace/ui-kit/styles/variables/colors" as *;
 
 // ===== GroupsTableContainer =====
 .groupsTableContainer {

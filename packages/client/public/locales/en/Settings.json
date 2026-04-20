@@ -22,6 +22,7 @@
   "AiServicesManagement": "{{aiServices}} Management",
   "AiServicesManagementDescription": "Control the activation of AI features across {{productName}} and {{organizationName}} editors. When disabled, the {{aiSettings}} section will be hidden, {{aiAgents}} will be unavailable to all users (with history preserved), and the paid {{organizationName}} {{aiServices}} will no longer be accessible. However, all interaction history with the AI will be securely saved and fully restored upon re-enabling {{aiServices}}.",
   "AISettings": "AI settings",
+  "NewAISettings": "New AI settings",
   "AllDomains": "Any domains",
   "APIGuide": "API Guide",
   "ApiKeyCopied": "API key copied",

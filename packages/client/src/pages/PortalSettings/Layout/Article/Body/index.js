@@ -238,7 +238,7 @@ const ArticleBodyContent = (props) => {
       case "AISettings":
         return t("Settings:AISettings");
       case "NewAISettings":
-        return "New AI Settings";
+        return t("Settings:NewAISettings");
       default:
         throw new Error("Unexpected translation key");
     }

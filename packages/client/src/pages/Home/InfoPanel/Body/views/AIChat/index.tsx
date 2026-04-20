@@ -24,15 +24,23 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export type InfoPanelViewLoaderProps = {
-  view:
-    | "members"
-    | "history"
-    | "details"
-    | "gallery"
-    | "noItem"
-    | "severalItems"
-    | "groups"
-    | "users"
-    | "aiChat";
+import NewChat from "@docspace/ui-kit/ai-agent/new-chat";
+
+const AIChat = () => {
+  return (
+    <div
+      data-testid="info_panel_ai_chat"
+      style={{
+        flex: 1,
+        minHeight: 0,
+        display: "flex",
+        flexDirection: "column",
+        marginInlineStart: "-16px",
+      }}
+    >
+      <NewChat />
+    </div>
+  );
 };
+
+export default AIChat;

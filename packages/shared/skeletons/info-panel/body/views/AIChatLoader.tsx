@@ -24,15 +24,35 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export type InfoPanelViewLoaderProps = {
-  view:
-    | "members"
-    | "history"
-    | "details"
-    | "gallery"
-    | "noItem"
-    | "severalItems"
-    | "groups"
-    | "users"
-    | "aiChat";
+import React from "react";
+
+import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
+import styles from "../Body.module.scss";
+
+const AIChatLoader = () => {
+	return (
+		<div className={styles.aiChatLoader} data-testid="ai-chat-loader">
+			{[...Array(4).keys()].map((i) => (
+				<div className={styles.aiChatMessageLoader} key={i}>
+					<RectangleSkeleton
+						className="avatar"
+						width="32px"
+						height="32px"
+						borderRadius="50%"
+					/>
+					<div className="message">
+						<RectangleSkeleton width="120px" height="14px" borderRadius="3px" />
+						<RectangleSkeleton width="220px" height="14px" borderRadius="3px" />
+						<RectangleSkeleton width="180px" height="14px" borderRadius="3px" />
+					</div>
+				</div>
+			))}
+
+			<div className={styles.aiChatInputLoader}>
+				<RectangleSkeleton width="100%" height="40px" borderRadius="8px" />
+			</div>
+		</div>
+	);
 };
+
+export default AIChatLoader;

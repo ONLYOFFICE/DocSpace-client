@@ -33,6 +33,7 @@ import GalleryLoader from "./views/GalleryLoader";
 import NoItemLoader from "./views/NoItemLoader";
 import SeveralItemsLoader from "./views/SeveralItemsLoader";
 import GroupsLoader from "./views/GroupsLoader";
+import AIChatLoader from "./views/AIChatLoader";
 
 import type { InfoPanelViewLoaderProps } from "./body.types";
 
@@ -54,6 +55,8 @@ const InfoPanelViewLoader = ({ view }: InfoPanelViewLoaderProps) => {
       return <NoItemLoader />;
     case "severalItems":
       return <SeveralItemsLoader />;
+    case "aiChat":
+      return <AIChatLoader />;
     default:
       return <DetailsLoader />;
   }

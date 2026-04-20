@@ -189,7 +189,9 @@ const InfoPanelBodyGeneral = ({
                 ? "members"
                 : currentView === InfoPanelView.infoHistory
                   ? "history"
-                  : "details"
+                  : currentView === InfoPanelView.infoAIChat
+                    ? "aiChat"
+                    : "details"
             }
           />
         }
@@ -203,8 +205,12 @@ const InfoPanelBodyGeneral = ({
     );
   };
 
+  const isAIChat = currentView === InfoPanelView.infoAIChat;
+
   return (
-    <div className={commonStyles.infoPanelBody}>
+    <div
+      className={`${commonStyles.infoPanelBody}${isAIChat ? ` ${commonStyles.aiChat}` : ""}`}
+    >
       {!isNoItem &&
       !Array.isArray(selection) &&
       (isUsers || isGuests || isGroups) ? (

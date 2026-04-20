@@ -89,8 +89,8 @@ importers:
         specifier: 1.6.13
         version: 1.6.13
       '@onlyoffice/ai-chat':
-        specifier: file:onlyoffice-ai-chat-0.1.16.tgz
-        version: file:libs/ui-kit/onlyoffice-ai-chat-0.1.16.tgz(@assistant-ui/tap@0.3.6(@types/react@19.2.10)(react@19.2.4))(@emotion/is-prop-valid@1.4.0)(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(ai@6.0.168(zod@4.3.6))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3)(use-sync-external-store@1.6.0(react@19.2.4))(ws@8.20.0)(zod@4.3.6)
+        specifier: file:onlyoffice-ai-chat-0.1.21.tgz
+        version: file:libs/ui-kit/onlyoffice-ai-chat-0.1.21.tgz(@assistant-ui/tap@0.3.6(@types/react@19.2.10)(react@19.2.4))(@emotion/is-prop-valid@1.4.0)(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(ai@6.0.168(zod@4.3.6))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3)(use-sync-external-store@1.6.0(react@19.2.4))(ws@8.20.0)(zod@4.3.6)
       '@onlyoffice/docspace-api-sdk':
         specifier: file:onlyoffice-docspace-api-sdk-3.6.0.tgz
         version: file:libs/ui-kit/onlyoffice-docspace-api-sdk-3.6.0.tgz
@@ -3273,9 +3273,9 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@onlyoffice/ai-chat@file:libs/ui-kit/onlyoffice-ai-chat-0.1.16.tgz':
-    resolution: {integrity: sha512-offcPoX5TfkW2/6Tm6C4K/LNFMNtWIxNlxpnCqZufpHPBjpGg0dDzO9rlPDv1/A/0CxYgF1V6gmemQ2ZupOQhA==, tarball: file:libs/ui-kit/onlyoffice-ai-chat-0.1.16.tgz}
-    version: 0.1.16
+  '@onlyoffice/ai-chat@file:libs/ui-kit/onlyoffice-ai-chat-0.1.21.tgz':
+    resolution: {integrity: sha512-K84/aaXE7F4jGS/qVwlK2+5OuM+FasAVtUAmEFGenotsbKOT0/HF6DI2/95HTr1X9N92LD4cM6nZ29Q663i0KQ==, tarball: file:libs/ui-kit/onlyoffice-ai-chat-0.1.21.tgz}
+    version: 0.1.21
     peerDependencies:
       react: ^18.0.0 || ^19.0.0
       react-dom: ^18.0.0 || ^19.0.0
@@ -11958,7 +11958,7 @@ snapshots:
   '@nx/nx-win32-x64-msvc@22.4.5':
     optional: true
 
-  '@onlyoffice/ai-chat@file:libs/ui-kit/onlyoffice-ai-chat-0.1.16.tgz(@assistant-ui/tap@0.3.6(@types/react@19.2.10)(react@19.2.4))(@emotion/is-prop-valid@1.4.0)(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(ai@6.0.168(zod@4.3.6))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3)(use-sync-external-store@1.6.0(react@19.2.4))(ws@8.20.0)(zod@4.3.6)':
+  '@onlyoffice/ai-chat@file:libs/ui-kit/onlyoffice-ai-chat-0.1.21.tgz(@assistant-ui/tap@0.3.6(@types/react@19.2.10)(react@19.2.4))(@emotion/is-prop-valid@1.4.0)(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(ai@6.0.168(zod@4.3.6))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3)(use-sync-external-store@1.6.0(react@19.2.4))(ws@8.20.0)(zod@4.3.6)':
     dependencies:
       '@anthropic-ai/sdk': 0.60.0
       '@assistant-ui/react': 0.11.58(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(use-sync-external-store@1.6.0(react@19.2.4))

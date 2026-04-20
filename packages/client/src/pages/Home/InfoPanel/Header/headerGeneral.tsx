@@ -94,6 +94,7 @@ const InfoPanelHeaderGeneral = ({
   const setHistory = () => setView(InfoPanelView.infoHistory);
   const setDetails = () => setView(InfoPanelView.infoDetails);
   const setShare = () => setView(InfoPanelView.infoShare);
+  const setAIChat = () => setView(InfoPanelView.infoAIChat);
 
   const memberTab = {
     id: "info_members",
@@ -109,7 +110,18 @@ const InfoPanelHeaderGeneral = ({
     content: null,
   };
 
-  const templateSubmenu = [memberTab, detailsTab];
+  const aiChatTab = {
+    id: "info_ai_chat",
+    name: t("InfoPanel:SubmenuAIChat"),
+    onClick: setAIChat,
+    content: null,
+  };
+
+  const showAIChatTab = !isAIAgents();
+
+  const templateSubmenu = showAIChatTab
+    ? [memberTab, detailsTab, aiChatTab]
+    : [memberTab, detailsTab];
 
   const tabsData = [
     {
@@ -120,6 +132,8 @@ const InfoPanelHeaderGeneral = ({
     },
     detailsTab,
   ];
+
+  if (showAIChatTab) tabsData.push(aiChatTab);
 
   const isRoomsType =
     (!isRecentFolder &&

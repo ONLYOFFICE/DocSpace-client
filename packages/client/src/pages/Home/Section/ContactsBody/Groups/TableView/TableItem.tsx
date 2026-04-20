@@ -31,7 +31,7 @@ import { useTranslation } from "react-i18next";
 
 import { Link } from "@docspace/ui-kit/components/link";
 import { Text } from "@docspace/ui-kit/components/text";
-import { TableCell } from "@docspace/ui-kit/components/table";
+import { TableCell, TableRow } from "@docspace/ui-kit/components/table";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import {
   Avatar,
@@ -43,7 +43,6 @@ import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import Badges from "../../Badges";
 
 import styles from "./TableView.module.scss";
-import { GroupsRow } from "./TableView.styled";
 
 import type {
   ExternalGroupsTableItemProps,
@@ -111,11 +110,12 @@ const GroupsTableItem = ({
       data-value={value}
       data-testid={`contacts_table_groups_row_${itemIndex}`}
     >
-      <GroupsRow
+      <TableRow
         key={item.id}
-        className="table-row"
-        checked={isChecked}
-        isActive={isActive}
+        className={classNames("table-row", styles.groupsRow, {
+          [styles.checked]: isChecked,
+          [styles.isActive]: isActive,
+        })}
         onClick={onRowClick}
         fileContextClick={onRowContextClick}
         contextOptions={
@@ -209,7 +209,7 @@ const GroupsTableItem = ({
         ) : (
           <div />
         )}
-      </GroupsRow>
+      </TableRow>
     </div>
   );
 };

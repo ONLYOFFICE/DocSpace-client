@@ -29,14 +29,14 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router";
 
-import { TTableColumn } from "@docspace/ui-kit/components/table";
+import { Table, TTableColumn } from "@docspace/ui-kit/components/table";
 import { Events } from "@docspace/shared/enums";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import EmptyScreenGroups from "../../EmptyScreenGroups";
 
 import GroupsTableItem from "./TableItem";
-import { GroupsStyledTable } from "./TableView.styled";
+import styles from "./TableView.module.scss";
 
 import type {
   ExternalGroupsTableViewProps,
@@ -173,7 +173,8 @@ const GroupsTableView = ({
   if (!groups?.length) return <EmptyScreenGroups />;
 
   return (
-    <GroupsStyledTable
+    <Table
+      className={styles.groupsTableContainer}
       showSettings
       useReactWindow
       itemHeight={48}
@@ -200,7 +201,7 @@ const GroupsTableView = ({
           peopleGroupsColumnIsEnabled={peopleGroupsColumnIsEnabled ?? false}
         />
       ))}
-    </GroupsStyledTable>
+    </Table>
   );
 };
 
@@ -266,4 +267,3 @@ export default inject<
     };
   },
 )(observer(GroupsTableView as React.FC<ExternalGroupsTableViewProps>));
-

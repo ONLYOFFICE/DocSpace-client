@@ -26,37 +26,36 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-@use "@docspace/ui-kit/styles/variables/colors" as *;
-
+@use "@docspace/ui-kit/styles/variables/colors";
 // ===== GroupsTableContainer =====
 .groupsTableContainer {
   :global(.light) & {
-    --groups-row-border-color: #{$gray-light-mid};
-    --groups-row-border-color-transition: #{$light-gray-hover};
-    --groups-row-background-active: #{$light-gray-hover};
+    --groups-row-border-color: #{colors.$gray-light-mid};
+    --groups-row-border-color-transition: #{colors.$light-gray-hover};
+    --groups-row-background-active: #{colors.$light-gray-hover};
     --groups-header-lengthen-border-image-source: linear-gradient(
       to right,
-      #{$gray-light-mid},
-      #{$gray-light-mid}
+      #{colors.$gray-light-mid},
+      #{colors.$gray-light-mid}
     );
   }
 
   :global(.dark) & {
-    --groups-row-border-color: #{$gray-dark-strong};
-    --groups-row-border-color-transition: #{$gray-dark-strong};
-    --groups-row-background-active: #{$light-dark-gray-hover};
+    --groups-row-border-color: #{colors.$gray-dark-strong};
+    --groups-row-border-color-transition: #{colors.$gray-dark-strong};
+    --groups-row-background-active: #{colors.$light-dark-gray-hover};
     --groups-header-lengthen-border-image-source: linear-gradient(
       to right,
-      #{$gray-dark-strong},
-      #{$gray-dark-strong}
+      #{colors.$gray-dark-strong},
+      #{colors.$gray-dark-strong}
     );
   }
 
   &:has(
-      :global(.table-container_body)
-        :global(.table-list-item:first-child:first-child)
-        > :global(.table-row-selected)
-    ) {
+    :global(.table-container_body)
+      :global(.table-list-item:first-child:first-child)
+      > :global(.table-row-selected)
+  ) {
     :global(.table-container_header) {
       border-image-slice: 1;
       border-image-source: var(--groups-header-lengthen-border-image-source);
@@ -136,8 +135,8 @@
 // ===== GroupsRow =====
 .groupsRow {
   :global(.table-container_cell):not(
-      :global(.table-container_row-checkbox-wrapper)
-    ) {
+    :global(.table-container_row-checkbox-wrapper)
+  ) {
     height: auto;
     max-height: 48px;
   }

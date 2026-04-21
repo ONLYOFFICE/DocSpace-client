@@ -101,65 +101,59 @@ class GroupsStore {
 
     makeAutoObservable(this);
 
-    SocketHelper?.on(
-      SocketEvents.AddGroup,
-      async (value) => {
-        const { contactsTab } = this.peopleStore.usersStore;
+    SocketHelper?.on(SocketEvents.AddGroup, async (value) => {
+      const { contactsTab } = this.peopleStore.usersStore;
 
-        if (contactsTab !== "groups") return;
+      if (contactsTab !== "groups") return;
 
-        const { id, data } = value;
+      const { id, data } = value;
 
-        if (!data || !id) return;
+      if (!data || !id) return;
 
-        const group = await api.groups.getGroupById(id, true);
+      const group = await api.groups.getGroupById(id, true);
 
-        runInAction(() => {
-          const idx = this.groups.findIndex((x) => x.id === group.id);
+      runInAction(() => {
+        const idx = this.groups.findIndex((x) => x.id === group.id);
 
-          if (idx !== -1) {
-            runInAction(() => {
-              this.groups[idx] = group;
-              this.updateSelection();
-            });
-            return;
-          }
-
-          this.groups = [group, ...this.groups];
-          this.groupsFilter.total += 1;
-        });
-      },
-    );
-
-    SocketHelper?.on(
-      SocketEvents.UpdateGroup,
-      async (value) => {
-        const { contactsTab } = this.peopleStore.usersStore;
-
-        const { id, data } = value;
-
-        if (!data || !id) return;
-
-        const idx = this.groups.findIndex((x) => x.id === id);
-
-        if (idx === -1) return;
-
-        const group = await api.groups.getGroupById(id, true);
-
-        if (contactsTab !== "groups") {
-          if (this.currentGroup?.id !== group.id) return;
-
-          this.currentGroup = group;
+        if (idx !== -1) {
+          runInAction(() => {
+            this.groups[idx] = group;
+            this.updateSelection();
+          });
           return;
         }
 
-        runInAction(() => {
-          this.groups[idx] = group;
+        this.groups = [group, ...this.groups];
+        this.groupsFilter.total += 1;
+      });
+    });
 
-          this.updateSelection();
-        });
-      },
-    );
+    SocketHelper?.on(SocketEvents.UpdateGroup, async (value) => {
+      const { contactsTab } = this.peopleStore.usersStore;
+
+      const { id, data } = value;
+
+      if (!data || !id) return;
+
+      const idx = this.groups.findIndex((x) => x.id === id);
+
+      if (idx === -1) return;
+
+      const group = await api.groups.getGroupById(id, true);
+
+      if (contactsTab !== "groups") {
+        if (this.currentGroup?.id !== group.id) return;
+
+        this.currentGroup = group;
+        return;
+      }
+
+      runInAction(() => {
+        this.groups[idx] = group;
+
+        this.updateSelection();
+      });
+    });
 
     SocketHelper?.on(SocketEvents.DeleteGroup, (id: string) => {
       const { contactsTab } = this.peopleStore.usersStore;
@@ -354,11 +348,10 @@ class GroupsStore {
     added.forEach((row) => {
       if (!row) return;
       const [el] = row.getElementsByClassName("group-item");
-      const val = el?.getAttribute("data-value") ?? el?.getAttribute("value");
-      if (!val) return;
-      const groupId = val.split("_").slice(1, -3).join("_");
+      const groupId = el?.getAttribute("data-group-id");
       if (!groupId) return;
-      const isNotSelected = this.selection.findIndex((g) => g.id === groupId) === -1;
+      const isNotSelected =
+        this.selection.findIndex((g) => g.id === groupId) === -1;
       if (isNotSelected) {
         const group = this.groups.find((g) => g.id === groupId);
         if (group) newSelections.push(group);
@@ -368,11 +361,10 @@ class GroupsStore {
     removed.forEach((row) => {
       if (!row) return;
       const [el] = row.getElementsByClassName("group-item");
-      const val = el?.getAttribute("data-value") ?? el?.getAttribute("value");
-      if (!val) return;
-      const groupId = val.split("_").slice(1, -3).join("_");
+      const groupId = el?.getAttribute("data-group-id");
       if (!groupId) return;
-      const isSelected = newSelections.findIndex((g) => g.id === groupId) !== -1;
+      const isSelected =
+        newSelections.findIndex((g) => g.id === groupId) !== -1;
       if (isSelected) {
         newSelections = newSelections.filter((g) => g.id !== groupId);
       }
@@ -434,23 +426,18 @@ class GroupsStore {
     }
   };
 
-  onDeleteAllGroups = (t: TFunction) => {
+  onDeleteAllGroups = async (t: TFunction) => {
     this.setIsLoading(true);
 
     try {
-      Promise.all(
-        this.selection.map(async (group) => groupsApi.deleteGroup(group.id)),
-      ).then(() => {
-        toastr.success(
-          t(
-            "PeopleTranslations:SuccessDeleteGroups",
-          ) as unknown as React.ReactNode,
-        );
-        this.setSelection([]);
-        this.getGroups(this.groupsFilter, true);
-        this.setIsLoading(false);
-        this.dialogStore.setDeleteGroupDialogVisible(false);
-      });
+      await Promise.all(
+        this.selection.map((group) => groupsApi.deleteGroup(group.id)),
+      );
+      toastr.success(t("PeopleTranslations:SuccessDeleteGroups"));
+      this.setSelection([]);
+      this.getGroups(this.groupsFilter, true);
+      this.setIsLoading(false);
+      this.dialogStore.setDeleteGroupDialogVisible(false);
     } catch (err) {
       toastr.error((err as unknown as { message: string }).message);
       this.setIsLoading(false);

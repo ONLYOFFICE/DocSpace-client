@@ -167,10 +167,10 @@ const GroupsTableView = ({
     ],
   );
 
+  if (!groups?.length) return <EmptyScreenGroups />;
+
   const sortBy = filter.sortBy === "displayname" ? "AZ" : filter.sortBy;
   const sorted = filter.sortOrder === "descending";
-
-  if (!groups?.length) return <EmptyScreenGroups />;
 
   return (
     <Table

@@ -108,6 +108,7 @@ const GroupsTableItem = ({
         ["table-row-selected"]: isChecked || isActive,
       })}
       data-value={value}
+      data-group-id={item.id}
       data-testid={`contacts_table_groups_row_${itemIndex}`}
     >
       <TableRow

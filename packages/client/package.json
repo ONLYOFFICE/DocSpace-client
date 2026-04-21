@@ -33,7 +33,6 @@
     "@onlyoffice/docspace-sdk-js": "file:onlyoffice-docspace-sdk-js-2.2.0.tgz",
     "@react-spring/web": "9.7.5",
     "@tanstack/react-query": "^5.90.21",
-    "@tanstack/react-table": "^8.21.3",
     "@uiw/codemirror-theme-github": "4.23.5",
     "@uiw/react-codemirror": "4.23.5",
     "@use-gesture/react": "10.3.1",

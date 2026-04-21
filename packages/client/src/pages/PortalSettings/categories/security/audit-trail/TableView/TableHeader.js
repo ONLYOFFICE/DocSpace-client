@@ -104,8 +104,11 @@ class AuditTableHeader extends React.Component {
 
     if (columnIndex === -1) return;
 
-    columns[columnIndex].enable = !columns[columnIndex].enable;
-    this.setState({ columns });
+    const newColumns = columns.slice();
+
+    newColumns[columnIndex].enable = !newColumns[columnIndex].enable;
+
+    this.setState({ columns: newColumns });
 
     const tableColumns = columns.map((c) => c.enable && c.key);
     localStorage.setItem(`${TABLE_COLUMNS}=${userId}`, tableColumns);

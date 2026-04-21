@@ -941,8 +941,11 @@ class FilesTableHeader extends React.Component {
 
     setColumnEnable(key);
 
-    columns[columnIndex].enable = !columns[columnIndex].enable;
-    this.setState({ columns });
+    const newColumns = columns.slice();
+
+    newColumns[columnIndex].enable = !newColumns[columnIndex].enable;
+
+    this.setState({ columns: newColumns });
 
     const tableColumns = columns.map((c) => c.enable && c.key);
     this.setTableColumns(tableColumns);

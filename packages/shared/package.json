@@ -145,7 +145,7 @@
     "@vitest/ui": "4.0.5",
     "copy-webpack-plugin": "9.1.0",
     "css-loader": "6.11.0",
-    "i18next-http-backend": "2.6.2",
+    "i18next-http-backend": "3.0.5",
     "identity-obj-proxy": "3.0.0",
     "msw": "^2.11.1",
     "msw-storybook-addon": "^2.0.4",

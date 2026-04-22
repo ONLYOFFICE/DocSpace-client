@@ -302,6 +302,25 @@ const useEditorEvents = ({
             }
           }
 
+          const sendTools = (data?: unknown) => {
+            console.log("send");
+            window.parent?.postMessage({ type: "initedAiPlugin", data }, "*");
+          };
+
+          connector.executeMethod("AI", [{ type: "Tools" }], (data) => {
+            console.log("AI Tools data:", data);
+            if (
+              data &&
+              typeof data === "object" &&
+              "error" in data &&
+              data.error
+            ) {
+              connector.attachEvent("ai_onInit", sendTools);
+            } else {
+              window.parent?.postMessage({ type: "initedAiPlugin", data }, "*");
+            }
+          });
+
           if (provider) {
             const providerTitle = provider.title;
             const modelName = `${providerTitle} [${model}]`;
@@ -357,6 +376,39 @@ const useEditorEvents = ({
             connector.attachEvent("ai_onExternalFetch", (e: unknown) =>
               externalAIFetch(connector, e as TEditorAIEvent, providerId),
             );
+
+            // Bridges tool calls from the parent chat window into the editor's
+            // AI plugin. The chat posts `{ type: "callEditorTool", callId,
+            // name, arguments }` and we forward the call via the connector,
+            // then post an ack back so the host-side handler can resolve.
+            const onParentMessage = (event: MessageEvent) => {
+              if (event.source !== window.parent) return;
+              const payload = event.data;
+              if (
+                !payload ||
+                typeof payload !== "object" ||
+                (payload as { type?: unknown }).type !== "callEditorTool"
+              )
+                return;
+
+              const { callId, name, arguments: args } = payload as {
+                callId?: string;
+                name?: string;
+                arguments?: Record<string, unknown>;
+              };
+              if (typeof name !== "string") return;
+
+              connector.sendEvent("ai_onCallTool", {
+                name,
+                arguments: args ?? {},
+              });
+
+              window.parent?.postMessage(
+                { type: "editorToolResult", callId, result: "" },
+                "*",
+              );
+            };
+            window.addEventListener("message", onParentMessage);
           }
         }
       } catch (error) {
@@ -1024,3 +1076,4 @@ const useEditorEvents = ({
 };
 
 export default useEditorEvents;
+
